@@ -2,53 +2,45 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3172410503
-	for <lists+nouveau@lfdr.de>; Wed,  1 May 2019 06:49:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 089CFE595
+	for <lists+nouveau@lfdr.de>; Mon, 29 Apr 2019 16:58:04 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 05C23891CB;
-	Wed,  1 May 2019 04:49:38 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C02AD89307;
+	Mon, 29 Apr 2019 14:58:01 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from condef-05.nifty.com (condef-05.nifty.com [202.248.20.70])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 72A66892B5;
- Fri, 26 Apr 2019 01:46:35 +0000 (UTC)
-Received: from conssluserg-04.nifty.com ([10.126.8.83])by condef-05.nifty.com
- with ESMTP id x3Q1brLg007635; Fri, 26 Apr 2019 10:37:53 +0900
-Received: from mail-vk1-f173.google.com (mail-vk1-f173.google.com
- [209.85.221.173]) (authenticated)
- by conssluserg-04.nifty.com with ESMTP id x3Q1ba4f015481;
- Fri, 26 Apr 2019 10:37:37 +0900
-DKIM-Filter: OpenDKIM Filter v2.10.3 conssluserg-04.nifty.com x3Q1ba4f015481
-X-Nifty-SrcIP: [209.85.221.173]
-Received: by mail-vk1-f173.google.com with SMTP id 195so413654vkx.9;
- Thu, 25 Apr 2019 18:37:36 -0700 (PDT)
-X-Gm-Message-State: APjAAAVpkyyF7m5gPNQJrhZf3WnpwfMOO8yjDk8rFnepq0gFkJqiJsbr
- f3+J1tIh0SP6FpyEAcbsOpYdlcMClHC4I0CNnjQ=
-X-Google-Smtp-Source: APXvYqzDEXMgtrlycT2Fi+pJzCVBZyg7pUCRh57e2jYq3aJETCucZ3BLMlFLrR9UryHRz/URhUy9KXlpnJiFh74sy8Y=
-X-Received: by 2002:a1f:c288:: with SMTP id s130mr22999671vkf.0.1556242655887; 
- Thu, 25 Apr 2019 18:37:35 -0700 (PDT)
+Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
+ [131.252.210.165])
+ by gabe.freedesktop.org (Postfix) with ESMTP id C9CDA89309
+ for <nouveau@lists.freedesktop.org>; Mon, 29 Apr 2019 14:58:00 +0000 (UTC)
+Received: by culpepper.freedesktop.org (Postfix, from userid 33)
+ id C6A1E72155; Mon, 29 Apr 2019 14:58:00 +0000 (UTC)
+From: bugzilla-daemon@freedesktop.org
+To: nouveau@lists.freedesktop.org
+Date: Mon, 29 Apr 2019 14:58:00 +0000
+X-Bugzilla-Reason: AssignedTo
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: None
+X-Bugzilla-Product: xorg
+X-Bugzilla-Component: Driver/nouveau
+X-Bugzilla-Version: unspecified
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: normal
+X-Bugzilla-Who: pcdavid@gmail.com
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: medium
+X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: 
+Message-ID: <bug-100423-8800-1mI6XpgCev@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-100423-8800@http.bugs.freedesktop.org/>
+References: <bug-100423-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-References: <1553859161-2628-1-git-send-email-yamada.masahiro@socionext.com>
-In-Reply-To: <1553859161-2628-1-git-send-email-yamada.masahiro@socionext.com>
-From: Masahiro Yamada <yamada.masahiro@socionext.com>
-Date: Fri, 26 Apr 2019 10:36:59 +0900
-X-Gmail-Original-Message-ID: <CAK7LNAR6bT93kmyPCzJg2ZFvk239nz0nyVX5z23G+8Y0Wiba1Q@mail.gmail.com>
-Message-ID: <CAK7LNAR6bT93kmyPCzJg2ZFvk239nz0nyVX5z23G+8Y0Wiba1Q@mail.gmail.com>
-To: David Airlie <airlied@linux.ie>, Daniel Vetter <daniel@ffwll.ch>,
- dri-devel <dri-devel@lists.freedesktop.org>
-X-Mailman-Approved-At: Wed, 01 May 2019 04:49:37 +0000
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=nifty.com; s=dec2015msa; t=1556242657;
- bh=O0qtrKYIpIe7gV+LLpOkDIfO+YUShwi3bTDlZP6f+Mk=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=ZaYePW6FXtZ2WAyQbaT4hqT/yeNXTdKaTfTOiT0O8Hx9L9Cx4GGRl4xE+sVbbFvFa
- ZrqAbuZ8gc4v3pW39wvWUEcBEizn8638aA8bO+iz+7IQdZhhyLUhFzS00Az2P+PJsZ
- BIc31sLYyXVjjsbbFNGmHlO2BqShoUhNoCxRoE0r4Dr0qNwevH/baBIWM7rYjDN8NS
- bCRV+pfAyvYj1nqiVIJOqdx82/oDZo1PmqceWbNjdpT7hdwWZX9O+V098yVsO4jCNI
- AvMGrlFP7F/fWVhYMWi2qTM623Fdoj9mOUmES5cqvleOfyobrjmRBuw2TZfJ1M603M
- 8UaYqiwJWiXHg==
-Subject: Re: [Nouveau] [PATCH v2] drm: prefix header search paths with
- $(srctree)/
+Subject: [Nouveau] [Bug 100423] MMIO read of 00000000 FAULT at 022554 [ IBUS
+ ]
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -60,111 +52,335 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- Liviu Dudau <liviu.dudau@arm.com>, Sam Ravnborg <sam@ravnborg.org>,
- "David \(ChunMing\) Zhou" <David1.Zhou@amd.com>, Sean Paul <sean@poorly.run>,
- amd-gfx@lists.freedesktop.org, "James \(Qian\) Wang" <james.qian.wang@arm.com>,
- Ben Skeggs <bskeggs@redhat.com>, Zhi Wang <zhi.a.wang@intel.com>,
- linux-arm-msm <linux-arm-msm@vger.kernel.org>, intel-gfx@lists.freedesktop.org,
- Jani Nikula <jani.nikula@linux.intel.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>, intel-gvt-dev@lists.freedesktop.org,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
- Rob Clark <robdclark@gmail.com>, Alex Deucher <alexander.deucher@amd.com>,
- freedreno@lists.freedesktop.org, Brian Starkey <brian.starkey@arm.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1652490644=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-SGkuCgoKT24gRnJpLCBNYXIgMjksIDIwMTkgYXQgODozNyBQTSBNYXNhaGlybyBZYW1hZGEKPHlh
-bWFkYS5tYXNhaGlyb0Bzb2Npb25leHQuY29tPiB3cm90ZToKPgo+IEN1cnJlbnRseSwgdGhlIEti
-dWlsZCBjb3JlIG1hbmlwdWxhdGVzIGhlYWRlciBzZWFyY2ggcGF0aHMgaW4gYSBjcmF6eQo+IHdh
-eSBbMV0uCj4KPiBUbyBmaXggdGhpcyBtZXNzLCBJIHdhbnQgYWxsIE1ha2VmaWxlcyB0byBhZGQg
-ZXhwbGljaXQgJChzcmN0cmVlKS8gdG8KPiB0aGUgc2VhcmNoIHBhdGhzIGluIHRoZSBzcmN0cmVl
-LiBTb21lIE1ha2VmaWxlcyBhcmUgYWxyZWFkeSB3cml0dGVuIGluCj4gdGhhdCB3YXksIGJ1dCBu
-b3QgYWxsLiBUaGUgZ29hbCBvZiB0aGlzIHdvcmsgaXMgdG8gbWFrZSB0aGUgbm90YXRpb24KPiBj
-b25zaXN0ZW50LCBhbmQgZmluYWxseSBnZXQgcmlkIG9mIHRoZSBncm9zcyBoYWNrcy4KPgo+IEhh
-dmluZyB3aGl0ZXNwYWNlcyBhZnRlciAtSSBkb2VzIG5vdCBtYXR0ZXIgc2luY2UgY29tbWl0IDQ4
-ZjZlM2NmNWJjNgo+ICgia2J1aWxkOiBkbyBub3QgZHJvcCAtSSB3aXRob3V0IHBhcmFtZXRlciIp
-Lgo+Cj4gWzFdOiBodHRwczovL3BhdGNod29yay5rZXJuZWwub3JnL3BhdGNoLzk2MzIzNDcvCj4K
-PiBTaWduZWQtb2ZmLWJ5OiBNYXNhaGlybyBZYW1hZGEgPHlhbWFkYS5tYXNhaGlyb0Bzb2Npb25l
-eHQuY29tPgo+IFJldmlld2VkLWJ5OiBTYW0gUmF2bmJvcmcgPHNhbUByYXZuYm9yZy5vcmc+Cj4g
-LS0tCj4KPiBJIHB1dCBhbGwgZ3B1L2RybSBjaGFuZ2VzIGludG8gYSBzaW5nbGUgcGF0Y2ggYmVj
-YXVzZQo+IHRoZXkgYXJlIHRyaXZpYWwgY29udmVyc2lvbi4KPgo+IElmIHlvdSBhcmUgaW50ZXJl
-c3RlZCBpbiB0aGUgYmlnIHBpY3R1cmUgb2YgdGhpcyB3b3JrLAo+IHRoZSBmdWxsIHBhdGNoIHNl
-dCBpcyBhdmFpbGFibGUgYXQgdGhlIGZvbGxvd2luZyBVUkwuCj4KPiBnaXQ6Ly9naXQua2VybmVs
-Lm9yZy9wdWIvc2NtL2xpbnV4L2tlcm5lbC9naXQvbWFzYWhpcm95L2xpbnV4LWtidWlsZC5naXQg
-YnVpbGQtdGVzdAoKCklzIHNvbWVib2R5IHRha2luZyBjYXJlIG9mIHRoaXM/CgoKCj4KPiBDaGFu
-Z2VzIGluIHYyOgo+ICAgLSBmaXggdXAgdGhlIG5ldyBkcml2ZXIga29tZWRhCj4gICAtIEFkZCBT
-YW0ncyBSZXZpZXdlZC1ieQo+Cj4gIGRyaXZlcnMvZ3B1L2RybS9hbWQvYW1kZ3B1L01ha2VmaWxl
-ICAgICAgICAgfCAyICstCj4gIGRyaXZlcnMvZ3B1L2RybS9hbWQvbGliL01ha2VmaWxlICAgICAg
-ICAgICAgfCAyICstCj4gIGRyaXZlcnMvZ3B1L2RybS9hcm0vZGlzcGxheS9rb21lZGEvTWFrZWZp
-bGUgfCA0ICsrLS0KPiAgZHJpdmVycy9ncHUvZHJtL2k5MTUvZ3Z0L01ha2VmaWxlICAgICAgICAg
-ICB8IDIgKy0KPiAgZHJpdmVycy9ncHUvZHJtL21zbS9NYWtlZmlsZSAgICAgICAgICAgICAgICB8
-IDYgKysrLS0tCj4gIGRyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L0tidWlsZCAgICAgICAgICAgICAg
-fCA4ICsrKystLS0tCj4gIDYgZmlsZXMgY2hhbmdlZCwgMTIgaW5zZXJ0aW9ucygrKSwgMTIgZGVs
-ZXRpb25zKC0pCj4KPiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL2FtZC9hbWRncHUvTWFr
-ZWZpbGUgYi9kcml2ZXJzL2dwdS9kcm0vYW1kL2FtZGdwdS9NYWtlZmlsZQo+IGluZGV4IDQ2NmRh
-NTkuLjYyYmY5ZGEgMTAwNjQ0Cj4gLS0tIGEvZHJpdmVycy9ncHUvZHJtL2FtZC9hbWRncHUvTWFr
-ZWZpbGUKPiArKysgYi9kcml2ZXJzL2dwdS9kcm0vYW1kL2FtZGdwdS9NYWtlZmlsZQo+IEBAIC0y
-Myw3ICsyMyw3IEBACj4gICMgTWFrZWZpbGUgZm9yIHRoZSBkcm0gZGV2aWNlIGRyaXZlci4gIFRo
-aXMgZHJpdmVyIHByb3ZpZGVzIHN1cHBvcnQgZm9yIHRoZQo+ICAjIERpcmVjdCBSZW5kZXJpbmcg
-SW5mcmFzdHJ1Y3R1cmUgKERSSSkgaW4gWEZyZWU4NiA0LjEuMCBhbmQgaGlnaGVyLgo+Cj4gLUZV
-TExfQU1EX1BBVEg9JChzcmMpLy4uCj4gK0ZVTExfQU1EX1BBVEg9JChzcmN0cmVlKS8kKHNyYykv
-Li4KPiAgRElTUExBWV9GT0xERVJfTkFNRT1kaXNwbGF5Cj4gIEZVTExfQU1EX0RJU1BMQVlfUEFU
-SCA9ICQoRlVMTF9BTURfUEFUSCkvJChESVNQTEFZX0ZPTERFUl9OQU1FKQo+Cj4gZGlmZiAtLWdp
-dCBhL2RyaXZlcnMvZ3B1L2RybS9hbWQvbGliL01ha2VmaWxlIGIvZHJpdmVycy9ncHUvZHJtL2Ft
-ZC9saWIvTWFrZWZpbGUKPiBpbmRleCA2OTAyNDMwLi5kNTM0OTkyIDEwMDY0NAo+IC0tLSBhL2Ry
-aXZlcnMvZ3B1L2RybS9hbWQvbGliL01ha2VmaWxlCj4gKysrIGIvZHJpdmVycy9ncHUvZHJtL2Ft
-ZC9saWIvTWFrZWZpbGUKPiBAQCAtMjcsNiArMjcsNiBAQAo+ICAjIGRyaXZlciBjb21wb25lbnRz
-IG9yIGxhdGVyIG1vdmVkIHRvIGtlcm5lbC9saWIgZm9yIHNoYXJpbmcgd2l0aAo+ICAjIG90aGVy
-IGRyaXZlcnMuCj4KPiAtY2NmbGFncy15IDo9IC1JJChzcmMpLy4uL2luY2x1ZGUKPiArY2NmbGFn
-cy15IDo9IC1JICQoc3JjdHJlZSkvJChzcmMpLy4uL2luY2x1ZGUKPgo+ICBvYmotJChDT05GSUdf
-Q0hBU0gpICs9IGNoYXNoLm8KPiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL2FybS9kaXNw
-bGF5L2tvbWVkYS9NYWtlZmlsZSBiL2RyaXZlcnMvZ3B1L2RybS9hcm0vZGlzcGxheS9rb21lZGEv
-TWFrZWZpbGUKPiBpbmRleCAxYjg3NWU1Li5hNzJlMzBjIDEwMDY0NAo+IC0tLSBhL2RyaXZlcnMv
-Z3B1L2RybS9hcm0vZGlzcGxheS9rb21lZGEvTWFrZWZpbGUKPiArKysgYi9kcml2ZXJzL2dwdS9k
-cm0vYXJtL2Rpc3BsYXkva29tZWRhL01ha2VmaWxlCj4gQEAgLTEsOCArMSw4IEBACj4gICMgU1BE
-WC1MaWNlbnNlLUlkZW50aWZpZXI6IEdQTC0yLjAKPgo+ICBjY2ZsYWdzLXkgOj0gXAo+IC0gICAg
-ICAgLUkkKHNyYykvLi4vaW5jbHVkZSBcCj4gLSAgICAgICAtSSQoc3JjKQo+ICsgICAgICAgLUkg
-JChzcmN0cmVlKS8kKHNyYykvLi4vaW5jbHVkZSBcCj4gKyAgICAgICAtSSAkKHNyY3RyZWUpLyQo
-c3JjKQo+Cj4gIGtvbWVkYS15IDo9IFwKPiAgICAgICAgIGtvbWVkYV9kcnYubyBcCj4gZGlmZiAt
-LWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9pOTE1L2d2dC9NYWtlZmlsZSBiL2RyaXZlcnMvZ3B1L2Ry
-bS9pOTE1L2d2dC9NYWtlZmlsZQo+IGluZGV4IDI3MWZiNDYuLmVhODMyNGEgMTAwNjQ0Cj4gLS0t
-IGEvZHJpdmVycy9ncHUvZHJtL2k5MTUvZ3Z0L01ha2VmaWxlCj4gKysrIGIvZHJpdmVycy9ncHUv
-ZHJtL2k5MTUvZ3Z0L01ha2VmaWxlCj4gQEAgLTUsNSArNSw1IEBAIEdWVF9TT1VSQ0UgOj0gZ3Z0
-Lm8gYXBlcnR1cmVfZ20ubyBoYW5kbGVycy5vIHZncHUubyB0cmFjZV9wb2ludHMubyBmaXJtd2Fy
-ZS5vIFwKPiAgICAgICAgIGV4ZWNsaXN0Lm8gc2NoZWR1bGVyLm8gc2NoZWRfcG9saWN5Lm8gbW1p
-b19jb250ZXh0Lm8gY21kX3BhcnNlci5vIGRlYnVnZnMubyBcCj4gICAgICAgICBmYl9kZWNvZGVy
-Lm8gZG1hYnVmLm8gcGFnZV90cmFjay5vCj4KPiAtY2NmbGFncy15ICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgKz0gLUkkKHNyYykgLUkkKHNyYykvJChHVlRfRElSKQo+ICtjY2ZsYWdzLXkg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICArPSAtSSAkKHNyY3RyZWUpLyQoc3JjKSAtSSAk
-KHNyY3RyZWUpLyQoc3JjKS8kKEdWVF9ESVIpLwo+ICBpOTE1LXkgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICArPSAkKGFkZHByZWZpeCAkKEdWVF9ESVIpLywgJChHVlRfU09VUkNFKSkK
-PiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL21zbS9NYWtlZmlsZSBiL2RyaXZlcnMvZ3B1
-L2RybS9tc20vTWFrZWZpbGUKPiBpbmRleCA1NmE3MGM3Li5iN2IxZWJkIDEwMDY0NAo+IC0tLSBh
-L2RyaXZlcnMvZ3B1L2RybS9tc20vTWFrZWZpbGUKPiArKysgYi9kcml2ZXJzL2dwdS9kcm0vbXNt
-L01ha2VmaWxlCj4gQEAgLTEsNyArMSw3IEBACj4gICMgU1BEWC1MaWNlbnNlLUlkZW50aWZpZXI6
-IEdQTC0yLjAKPiAtY2NmbGFncy15IDo9IC1JZHJpdmVycy9ncHUvZHJtL21zbQo+IC1jY2ZsYWdz
-LXkgKz0gLUlkcml2ZXJzL2dwdS9kcm0vbXNtL2Rpc3AvZHB1MQo+IC1jY2ZsYWdzLSQoQ09ORklH
-X0RSTV9NU01fRFNJKSArPSAtSWRyaXZlcnMvZ3B1L2RybS9tc20vZHNpCj4gK2NjZmxhZ3MteSA6
-PSAtSSAkKHNyY3RyZWUpLyQoc3JjKQo+ICtjY2ZsYWdzLXkgKz0gLUkgJChzcmN0cmVlKS8kKHNy
-YykvZGlzcC9kcHUxCj4gK2NjZmxhZ3MtJChDT05GSUdfRFJNX01TTV9EU0kpICs9IC1JICQoc3Jj
-dHJlZSkvJChzcmMpL2RzaQo+Cj4gIG1zbS15IDo9IFwKPiAgICAgICAgIGFkcmVuby9hZHJlbm9f
-ZGV2aWNlLm8gXAo+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9LYnVpbGQg
-Yi9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9LYnVpbGQKPiBpbmRleCBlYTMwMzVlLi40ZmFlNzI4
-IDEwMDY0NAo+IC0tLSBhL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L0tidWlsZAo+ICsrKyBiL2Ry
-aXZlcnMvZ3B1L2RybS9ub3V2ZWF1L0tidWlsZAo+IEBAIC0xLDcgKzEsNyBAQAo+IC1jY2ZsYWdz
-LXkgKz0gLUkkKHNyYykvaW5jbHVkZQo+IC1jY2ZsYWdzLXkgKz0gLUkkKHNyYykvaW5jbHVkZS9u
-dmttCj4gLWNjZmxhZ3MteSArPSAtSSQoc3JjKS9udmttCj4gLWNjZmxhZ3MteSArPSAtSSQoc3Jj
-KQo+ICtjY2ZsYWdzLXkgKz0gLUkgJChzcmN0cmVlKS8kKHNyYykvaW5jbHVkZQo+ICtjY2ZsYWdz
-LXkgKz0gLUkgJChzcmN0cmVlKS8kKHNyYykvaW5jbHVkZS9udmttCj4gK2NjZmxhZ3MteSArPSAt
-SSAkKHNyY3RyZWUpLyQoc3JjKS9udmttCj4gK2NjZmxhZ3MteSArPSAtSSAkKHNyY3RyZWUpLyQo
-c3JjKQo+Cj4gICMgTlZLTSAtIEhXIHJlc291cmNlIG1hbmFnZXIKPiAgIy0gY29kZSBhbHNvIHVz
-ZWQgYnkgdmFyaW91cyB1c2Vyc3BhY2UgdG9vbHMvdGVzdHMKPiAtLQo+IDIuNy40Cj4KCgotLSAK
-QmVzdCBSZWdhcmRzCk1hc2FoaXJvIFlhbWFkYQpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fXwpOb3V2ZWF1IG1haWxpbmcgbGlzdApOb3V2ZWF1QGxpc3RzLmZy
-ZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3Rp
-bmZvL25vdXZlYXU=
+
+--===============1652490644==
+Content-Type: multipart/alternative; boundary="15565498802.66E4E.24028"
+Content-Transfer-Encoding: 7bit
+
+
+--15565498802.66E4E.24028
+Date: Mon, 29 Apr 2019 14:58:00 +0000
+MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+https://bugs.freedesktop.org/show_bug.cgi?id=3D100423
+
+--- Comment #29 from Pierre-Charles David <pcdavid@gmail.com> ---
+FWIW, I also get this one (022554), along with two others (10ac08 and 6013d=
+4).
+
+The machine is an ASUS UX501V with an Intel HD Graphics 530 + NVIDIA GTX 96=
+0M
+(more details below). I'm running an up to date Debian 9.9 with a
+4.19.28-2~bpo9+1 kernel (from stretch-backports). It is usually plugged to =
+an
+external screen though HDMI (32" AOC Q3277PQU at 2560=C3=971440).
+
+% cat /proc/version
+Linux version 4.19.0-0.bpo.4-amd64 (debian-kernel@lists.debian.org) (gcc
+version 6.3.0 20170516 (Debian 6.3.0-18+deb9u1)) #1 SMP Debian 4.19.28-2~bp=
+o9+1
+(2019-03-27)
+
+% lspci
+00:00.0 Host bridge: Intel Corporation Skylake Host Bridge/DRAM Registers (=
+rev
+07)
+00:01.0 PCI bridge: Intel Corporation Skylake PCIe Controller (x16) (rev 07)
+00:02.0 VGA compatible controller: Intel Corporation HD Graphics 530 (rev 0=
+6)
+00:04.0 Signal processing controller: Intel Corporation Skylake Processor
+Thermal Subsystem (rev 07)
+00:14.0 USB controller: Intel Corporation Sunrise Point-H USB 3.0 xHCI
+Controller (rev 31)
+00:14.2 Signal processing controller: Intel Corporation Sunrise Point-H The=
+rmal
+subsystem (rev 31)
+00:15.0 Signal processing controller: Intel Corporation Sunrise Point-H Ser=
+ial
+IO I2C Controller #0 (rev 31)
+00:15.1 Signal processing controller: Intel Corporation Sunrise Point-H Ser=
+ial
+IO I2C Controller #1 (rev 31)
+00:16.0 Communication controller: Intel Corporation Sunrise Point-H CSME HE=
+CI
+#1 (rev 31)
+00:17.0 SATA controller: Intel Corporation Sunrise Point-H SATA Controller
+[AHCI mode] (rev 31)
+00:1c.0 PCI bridge: Intel Corporation Sunrise Point-H PCI Express Root Port=
+ #2
+(rev f1)
+00:1c.2 PCI bridge: Intel Corporation Sunrise Point-H PCI Express Root Port=
+ #3
+(rev f1)
+00:1c.4 PCI bridge: Intel Corporation Sunrise Point-H PCI Express Root Port=
+ #5
+(rev f1)
+00:1f.0 ISA bridge: Intel Corporation Sunrise Point-H LPC Controller (rev 3=
+1)
+00:1f.2 Memory controller: Intel Corporation Sunrise Point-H PMC (rev 31)
+00:1f.3 Audio device: Intel Corporation Sunrise Point-H HD Audio (rev 31)
+00:1f.4 SMBus: Intel Corporation Sunrise Point-H SMBus (rev 31)
+01:00.0 3D controller: NVIDIA Corporation GM107M [GeForce GTX 960M] (rev a2)
+02:00.0 Unassigned class [ff00]: Alcor Micro Device 6621
+03:00.0 Network controller: Intel Corporation Wireless 7265 (rev 59)
+
+Details on the NVIDIA card:
+
+01:00.0 3D controller: NVIDIA Corporation GM107M [GeForce GTX 960M] (rev a2)
+        Subsystem: ASUSTeK Computer Inc. GM107M [GeForce GTX 960M]
+        Control: I/O+ Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr-
+Stepping- SERR- FastB2B- DisINTx+
+        Status: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=3Dfast >TAbort- <T=
+Abort-
+<MAbort- >SERR- <PERR- INTx-
+        Latency: 0
+        Interrupt: pin A routed to IRQ 127
+        Region 0: Memory at dc000000 (32-bit, non-prefetchable) [size=3D16M]
+        Region 1: Memory at b0000000 (64-bit, prefetchable) [size=3D256M]
+        Region 3: Memory at c0000000 (64-bit, prefetchable) [size=3D32M]
+        Region 5: I/O ports at e000 [size=3D128]
+        Expansion ROM at dd000000 [disabled] [size=3D512K]
+        Capabilities: <access denied>
+        Kernel driver in use: nouveau
+        Kernel modules: nouveau, nvidia_current_drm, nvidia_current
+
+
+% journalctl -b --no-hostname -o short-monotonic | grep nouveau
+[   25.822549] kernel: nouveau: detected PR support, will not use DSM
+[   25.822749] kernel: nouveau 0000:01:00.0: NVIDIA GM107 (1171b0a2)
+[   25.889243] kernel: nouveau 0000:01:00.0: bios: version 82.07.94.00.1a
+[   26.462330] kernel: nouveau 0000:01:00.0: fb: 2048 MiB GDDR5
+[   26.462343] kernel: nouveau 0000:01:00.0: bus: MMIO read of 00000000 FAU=
+LT
+at 022554 [ IBUS ]
+[   26.474851] kernel: nouveau 0000:01:00.0: bus: MMIO read of 00000000 FAU=
+LT
+at 10ac08 [ IBUS ]
+[   27.774265] kernel: nouveau 0000:01:00.0: DRM: VRAM: 2048 MiB
+[   27.774266] kernel: nouveau 0000:01:00.0: DRM: GART: 1048576 MiB
+[   27.774269] kernel: nouveau 0000:01:00.0: DRM: Pointer to TMDS table inv=
+alid
+[   27.774271] kernel: nouveau 0000:01:00.0: DRM: DCB version 4.0
+[   27.774883] kernel: nouveau 0000:01:00.0: DRM: MM: using COPY for buffer
+copies
+[   27.774892] kernel: [drm] Initialized nouveau 1.3.1 20120801 for
+0000:01:00.0 on minor 1
+                       NVRM: nouveau, rivafb, nvidiafb or rivatv=20
+                       NVRM: nouveau, rivafb, nvidiafb or rivatv=20
+[   76.402068] kernel: nouveau 0000:01:00.0: bus: MMIO read of 00000000 FAU=
+LT
+at 6013d4 [ IBUS ]
+[   76.984544] /usr/lib/gdm3/gdm-x-session[1519]: (II) modeset(G0): [DRI2]=
+=20=20
+DRI driver: nouveau
+[   76.984544] /usr/lib/gdm3/gdm-x-session[1519]: (II) modeset(G0): [DRI2]=
+=20=20
+VDPAU driver: nouveau
+[   83.346751] kernel: nouveau 0000:01:00.0: bus: MMIO read of 00000000 FAU=
+LT
+at 6013d4 [ IBUS ]
+
+The last line is repeated hundreds of times.
+
+It may be related, but am not sure: right after a boot, the graphics (e.g.
+GNOME Shell animations) are fast and smooth, but after a while (I think it's
+related to the machine going to sleep, and/or the screen being locked), it
+seems to go to a fallback non-accelerated mode. It's still usable, but even
+moving a simple terminal window is slow. Strangely, even in this degraded m=
+ode,
+scrolling full-screen pages is still smooth in Firefox, as is e.g. watching
+videos.
+
+--=20
+You are receiving this mail because:
+You are the assignee for the bug.=
+
+--15565498802.66E4E.24028
+Date: Mon, 29 Apr 2019 14:58:00 +0000
+MIME-Version: 1.0
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+<html>
+    <head>
+      <base href=3D"https://bugs.freedesktop.org/">
+    </head>
+    <body>
+      <p>
+        <div>
+            <b><a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - MMIO read of 00000000 FAULT at 022554 [ IBUS ]"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D100423#c29">Comme=
+nt # 29</a>
+              on <a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - MMIO read of 00000000 FAULT at 022554 [ IBUS ]"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D100423">bug 10042=
+3</a>
+              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
+pcdavid&#64;gmail.com" title=3D"Pierre-Charles David &lt;pcdavid&#64;gmail.=
+com&gt;"> <span class=3D"fn">Pierre-Charles David</span></a>
+</span></b>
+        <pre>FWIW, I also get this one (022554), along with two others (10a=
+c08 and 6013d4).
+
+The machine is an ASUS UX501V with an Intel HD Graphics 530 + NVIDIA GTX 96=
+0M
+(more details below). I'm running an up to date Debian 9.9 with a
+4.19.28-2~bpo9+1 kernel (from stretch-backports). It is usually plugged to =
+an
+external screen though HDMI (32&quot; AOC Q3277PQU at 2560=C3=971440).
+
+% cat /proc/version
+Linux version 4.19.0-0.bpo.4-amd64 (<a href=3D"mailto:debian-kernel&#64;lis=
+ts.debian.org">debian-kernel&#64;lists.debian.org</a>) (gcc
+version 6.3.0 20170516 (Debian 6.3.0-18+deb9u1)) #1 SMP Debian 4.19.28-2~bp=
+o9+1
+(2019-03-27)
+
+% lspci
+00:00.0 Host bridge: Intel Corporation Skylake Host Bridge/DRAM Registers (=
+rev
+07)
+00:01.0 PCI bridge: Intel Corporation Skylake PCIe Controller (x16) (rev 07)
+00:02.0 VGA compatible controller: Intel Corporation HD Graphics 530 (rev 0=
+6)
+00:04.0 Signal processing controller: Intel Corporation Skylake Processor
+Thermal Subsystem (rev 07)
+00:14.0 USB controller: Intel Corporation Sunrise Point-H USB 3.0 xHCI
+Controller (rev 31)
+00:14.2 Signal processing controller: Intel Corporation Sunrise Point-H The=
+rmal
+subsystem (rev 31)
+00:15.0 Signal processing controller: Intel Corporation Sunrise Point-H Ser=
+ial
+IO I2C Controller #0 (rev 31)
+00:15.1 Signal processing controller: Intel Corporation Sunrise Point-H Ser=
+ial
+IO I2C Controller #1 (rev 31)
+00:16.0 Communication controller: Intel Corporation Sunrise Point-H CSME HE=
+CI
+#1 (rev 31)
+00:17.0 SATA controller: Intel Corporation Sunrise Point-H SATA Controller
+[AHCI mode] (rev 31)
+00:1c.0 PCI bridge: Intel Corporation Sunrise Point-H PCI Express Root Port=
+ #2
+(rev f1)
+00:1c.2 PCI bridge: Intel Corporation Sunrise Point-H PCI Express Root Port=
+ #3
+(rev f1)
+00:1c.4 PCI bridge: Intel Corporation Sunrise Point-H PCI Express Root Port=
+ #5
+(rev f1)
+00:1f.0 ISA bridge: Intel Corporation Sunrise Point-H LPC Controller (rev 3=
+1)
+00:1f.2 Memory controller: Intel Corporation Sunrise Point-H PMC (rev 31)
+00:1f.3 Audio device: Intel Corporation Sunrise Point-H HD Audio (rev 31)
+00:1f.4 SMBus: Intel Corporation Sunrise Point-H SMBus (rev 31)
+01:00.0 3D controller: NVIDIA Corporation GM107M [GeForce GTX 960M] (rev a2)
+02:00.0 Unassigned class [ff00]: Alcor Micro Device 6621
+03:00.0 Network controller: Intel Corporation Wireless 7265 (rev 59)
+
+Details on the NVIDIA card:
+
+01:00.0 3D controller: NVIDIA Corporation GM107M [GeForce GTX 960M] (rev a2)
+        Subsystem: ASUSTeK Computer Inc. GM107M [GeForce GTX 960M]
+        Control: I/O+ Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr-
+Stepping- SERR- FastB2B- DisINTx+
+        Status: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=3Dfast &gt;TAbort-=
+ &lt;TAbort-
+&lt;MAbort- &gt;SERR- &lt;PERR- INTx-
+        Latency: 0
+        Interrupt: pin A routed to IRQ 127
+        Region 0: Memory at dc000000 (32-bit, non-prefetchable) [size=3D16M]
+        Region 1: Memory at b0000000 (64-bit, prefetchable) [size=3D256M]
+        Region 3: Memory at c0000000 (64-bit, prefetchable) [size=3D32M]
+        Region 5: I/O ports at e000 [size=3D128]
+        Expansion ROM at dd000000 [disabled] [size=3D512K]
+        Capabilities: &lt;access denied&gt;
+        Kernel driver in use: nouveau
+        Kernel modules: nouveau, nvidia_current_drm, nvidia_current
+
+
+% journalctl -b --no-hostname -o short-monotonic | grep nouveau
+[   25.822549] kernel: nouveau: detected PR support, will not use DSM
+[   25.822749] kernel: nouveau 0000:01:00.0: NVIDIA GM107 (1171b0a2)
+[   25.889243] kernel: nouveau 0000:01:00.0: bios: version 82.07.94.00.1a
+[   26.462330] kernel: nouveau 0000:01:00.0: fb: 2048 MiB GDDR5
+[   26.462343] kernel: nouveau 0000:01:00.0: bus: MMIO read of 00000000 FAU=
+LT
+at 022554 [ IBUS ]
+[   26.474851] kernel: nouveau 0000:01:00.0: bus: MMIO read of 00000000 FAU=
+LT
+at 10ac08 [ IBUS ]
+[   27.774265] kernel: nouveau 0000:01:00.0: DRM: VRAM: 2048 MiB
+[   27.774266] kernel: nouveau 0000:01:00.0: DRM: GART: 1048576 MiB
+[   27.774269] kernel: nouveau 0000:01:00.0: DRM: Pointer to TMDS table inv=
+alid
+[   27.774271] kernel: nouveau 0000:01:00.0: DRM: DCB version 4.0
+[   27.774883] kernel: nouveau 0000:01:00.0: DRM: MM: using COPY for buffer
+copies
+[   27.774892] kernel: [drm] Initialized nouveau 1.3.1 20120801 for
+0000:01:00.0 on minor 1
+                       NVRM: nouveau, rivafb, nvidiafb or rivatv=20
+                       NVRM: nouveau, rivafb, nvidiafb or rivatv=20
+[   76.402068] kernel: nouveau 0000:01:00.0: bus: MMIO read of 00000000 FAU=
+LT
+at 6013d4 [ IBUS ]
+[   76.984544] /usr/lib/gdm3/gdm-x-session[1519]: (II) modeset(G0): [DRI2]=
+=20=20
+DRI driver: nouveau
+[   76.984544] /usr/lib/gdm3/gdm-x-session[1519]: (II) modeset(G0): [DRI2]=
+=20=20
+VDPAU driver: nouveau
+[   83.346751] kernel: nouveau 0000:01:00.0: bus: MMIO read of 00000000 FAU=
+LT
+at 6013d4 [ IBUS ]
+
+The last line is repeated hundreds of times.
+
+It may be related, but am not sure: right after a boot, the graphics (e.g.
+GNOME Shell animations) are fast and smooth, but after a while (I think it's
+related to the machine going to sleep, and/or the screen being locked), it
+seems to go to a fallback non-accelerated mode. It's still usable, but even
+moving a simple terminal window is slow. Strangely, even in this degraded m=
+ode,
+scrolling full-screen pages is still smooth in Firefox, as is e.g. watching
+videos.</pre>
+        </div>
+      </p>
+
+
+      <hr>
+      <span>You are receiving this mail because:</span>
+
+      <ul>
+          <li>You are the assignee for the bug.</li>
+      </ul>
+    </body>
+</html>=
+
+--15565498802.66E4E.24028--
+
+--===============1652490644==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
+YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
+cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============1652490644==--
