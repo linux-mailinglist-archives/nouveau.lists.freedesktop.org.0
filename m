@@ -1,46 +1,47 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 089CFE595
-	for <lists+nouveau@lfdr.de>; Mon, 29 Apr 2019 16:58:04 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 47740105F1
+	for <lists+nouveau@lfdr.de>; Wed,  1 May 2019 09:52:26 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C02AD89307;
-	Mon, 29 Apr 2019 14:58:01 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6D97F890FF;
+	Wed,  1 May 2019 07:52:24 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [131.252.210.165])
- by gabe.freedesktop.org (Postfix) with ESMTP id C9CDA89309
- for <nouveau@lists.freedesktop.org>; Mon, 29 Apr 2019 14:58:00 +0000 (UTC)
+ [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 7AC2D890FF
+ for <nouveau@lists.freedesktop.org>; Wed,  1 May 2019 07:52:23 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id C6A1E72155; Mon, 29 Apr 2019 14:58:00 +0000 (UTC)
+ id 7200C7215A; Wed,  1 May 2019 07:52:23 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Mon, 29 Apr 2019 14:58:00 +0000
-X-Bugzilla-Reason: AssignedTo
-X-Bugzilla-Type: changed
+Date: Wed, 01 May 2019 07:52:23 +0000
+X-Bugzilla-Reason: QAcontact AssignedTo
+X-Bugzilla-Type: new
 X-Bugzilla-Watch-Reason: None
-X-Bugzilla-Product: xorg
-X-Bugzilla-Component: Driver/nouveau
-X-Bugzilla-Version: unspecified
+X-Bugzilla-Product: Mesa
+X-Bugzilla-Component: Drivers/DRI/nouveau
+X-Bugzilla-Version: 19.0
 X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: normal
-X-Bugzilla-Who: pcdavid@gmail.com
+X-Bugzilla-Severity: major
+X-Bugzilla-Who: Linuxfreak@gmx.at
 X-Bugzilla-Status: NEW
 X-Bugzilla-Resolution: 
 X-Bugzilla-Priority: medium
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-100423-8800-1mI6XpgCev@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-100423-8800@http.bugs.freedesktop.org/>
-References: <bug-100423-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-Changed-Fields: bug_id short_desc product version rep_platform
+ op_sys bug_status bug_severity priority component assigned_to reporter
+ qa_contact
+Message-ID: <bug-110572-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 100423] MMIO read of 00000000 FAULT at 022554 [ IBUS
- ]
+Subject: [Nouveau] [Bug 110572] New: System Crash: nouveau 0000:08:00.0: gr:
+ PGRAPH TLB flush idle timeout fail and nouveau 0000:08:00.0: mmu: ce0 mmu
+ invalidate timeout
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -52,159 +53,211 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1652490644=="
+Content-Type: multipart/mixed; boundary="===============1589930099=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============1652490644==
-Content-Type: multipart/alternative; boundary="15565498802.66E4E.24028"
+--===============1589930099==
+Content-Type: multipart/alternative; boundary="15566971430.Dab5.4861"
 Content-Transfer-Encoding: 7bit
 
 
---15565498802.66E4E.24028
-Date: Mon, 29 Apr 2019 14:58:00 +0000
+--15566971430.Dab5.4861
+Date: Wed, 1 May 2019 07:52:23 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 
-https://bugs.freedesktop.org/show_bug.cgi?id=3D100423
+https://bugs.freedesktop.org/show_bug.cgi?id=3D110572
 
---- Comment #29 from Pierre-Charles David <pcdavid@gmail.com> ---
-FWIW, I also get this one (022554), along with two others (10ac08 and 6013d=
-4).
+            Bug ID: 110572
+           Summary: System Crash: nouveau 0000:08:00.0: gr: PGRAPH TLB
+                    flush idle timeout fail and nouveau 0000:08:00.0: mmu:
+                    ce0 mmu invalidate timeout
+           Product: Mesa
+           Version: 19.0
+          Hardware: x86-64 (AMD64)
+                OS: Linux (All)
+            Status: NEW
+          Severity: major
+          Priority: medium
+         Component: Drivers/DRI/nouveau
+          Assignee: nouveau@lists.freedesktop.org
+          Reporter: Linuxfreak@gmx.at
+        QA Contact: nouveau@lists.freedesktop.org
 
-The machine is an ASUS UX501V with an Intel HD Graphics 530 + NVIDIA GTX 96=
-0M
-(more details below). I'm running an up to date Debian 9.9 with a
-4.19.28-2~bpo9+1 kernel (from stretch-backports). It is usually plugged to =
-an
-external screen though HDMI (32" AOC Q3277PQU at 2560=C3=971440).
+Hi,
 
-% cat /proc/version
-Linux version 4.19.0-0.bpo.4-amd64 (debian-kernel@lists.debian.org) (gcc
-version 6.3.0 20170516 (Debian 6.3.0-18+deb9u1)) #1 SMP Debian 4.19.28-2~bp=
-o9+1
-(2019-03-27)
+The system is freezing regulary. This was introduced with kernel 5.0.9 and
+nouveau.
 
-% lspci
-00:00.0 Host bridge: Intel Corporation Skylake Host Bridge/DRAM Registers (=
-rev
-07)
-00:01.0 PCI bridge: Intel Corporation Skylake PCIe Controller (x16) (rev 07)
-00:02.0 VGA compatible controller: Intel Corporation HD Graphics 530 (rev 0=
-6)
-00:04.0 Signal processing controller: Intel Corporation Skylake Processor
-Thermal Subsystem (rev 07)
-00:14.0 USB controller: Intel Corporation Sunrise Point-H USB 3.0 xHCI
-Controller (rev 31)
-00:14.2 Signal processing controller: Intel Corporation Sunrise Point-H The=
-rmal
-subsystem (rev 31)
-00:15.0 Signal processing controller: Intel Corporation Sunrise Point-H Ser=
-ial
-IO I2C Controller #0 (rev 31)
-00:15.1 Signal processing controller: Intel Corporation Sunrise Point-H Ser=
-ial
-IO I2C Controller #1 (rev 31)
-00:16.0 Communication controller: Intel Corporation Sunrise Point-H CSME HE=
-CI
-#1 (rev 31)
-00:17.0 SATA controller: Intel Corporation Sunrise Point-H SATA Controller
-[AHCI mode] (rev 31)
-00:1c.0 PCI bridge: Intel Corporation Sunrise Point-H PCI Express Root Port=
- #2
-(rev f1)
-00:1c.2 PCI bridge: Intel Corporation Sunrise Point-H PCI Express Root Port=
- #3
-(rev f1)
-00:1c.4 PCI bridge: Intel Corporation Sunrise Point-H PCI Express Root Port=
- #5
-(rev f1)
-00:1f.0 ISA bridge: Intel Corporation Sunrise Point-H LPC Controller (rev 3=
-1)
-00:1f.2 Memory controller: Intel Corporation Sunrise Point-H PMC (rev 31)
-00:1f.3 Audio device: Intel Corporation Sunrise Point-H HD Audio (rev 31)
-00:1f.4 SMBus: Intel Corporation Sunrise Point-H SMBus (rev 31)
-01:00.0 3D controller: NVIDIA Corporation GM107M [GeForce GTX 960M] (rev a2)
-02:00.0 Unassigned class [ff00]: Alcor Micro Device 6621
-03:00.0 Network controller: Intel Corporation Wireless 7265 (rev 59)
+regards LF
 
-Details on the NVIDIA card:
-
-01:00.0 3D controller: NVIDIA Corporation GM107M [GeForce GTX 960M] (rev a2)
-        Subsystem: ASUSTeK Computer Inc. GM107M [GeForce GTX 960M]
-        Control: I/O+ Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr-
-Stepping- SERR- FastB2B- DisINTx+
-        Status: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=3Dfast >TAbort- <T=
-Abort-
-<MAbort- >SERR- <PERR- INTx-
-        Latency: 0
-        Interrupt: pin A routed to IRQ 127
-        Region 0: Memory at dc000000 (32-bit, non-prefetchable) [size=3D16M]
-        Region 1: Memory at b0000000 (64-bit, prefetchable) [size=3D256M]
-        Region 3: Memory at c0000000 (64-bit, prefetchable) [size=3D32M]
-        Region 5: I/O ports at e000 [size=3D128]
-        Expansion ROM at dd000000 [disabled] [size=3D512K]
-        Capabilities: <access denied>
-        Kernel driver in use: nouveau
-        Kernel modules: nouveau, nvidia_current_drm, nvidia_current
+Graphics:
+Device-1: NVIDIA GT215 [GeForce GT 240] driver: nouveau v: kernel bus ID:
+08:00.0 Display: x11 server: X.Org 1.20.4 driver: nouveau unloaded: modeset=
+ting
+resolution: 1920x1080~60Hz OpenGL: renderer: NVA3 v: 3.3 Mesa 19.0.3 direct
+render: Yes=20
 
 
-% journalctl -b --no-hostname -o short-monotonic | grep nouveau
-[   25.822549] kernel: nouveau: detected PR support, will not use DSM
-[   25.822749] kernel: nouveau 0000:01:00.0: NVIDIA GM107 (1171b0a2)
-[   25.889243] kernel: nouveau 0000:01:00.0: bios: version 82.07.94.00.1a
-[   26.462330] kernel: nouveau 0000:01:00.0: fb: 2048 MiB GDDR5
-[   26.462343] kernel: nouveau 0000:01:00.0: bus: MMIO read of 00000000 FAU=
-LT
-at 022554 [ IBUS ]
-[   26.474851] kernel: nouveau 0000:01:00.0: bus: MMIO read of 00000000 FAU=
-LT
-at 10ac08 [ IBUS ]
-[   27.774265] kernel: nouveau 0000:01:00.0: DRM: VRAM: 2048 MiB
-[   27.774266] kernel: nouveau 0000:01:00.0: DRM: GART: 1048576 MiB
-[   27.774269] kernel: nouveau 0000:01:00.0: DRM: Pointer to TMDS table inv=
-alid
-[   27.774271] kernel: nouveau 0000:01:00.0: DRM: DCB version 4.0
-[   27.774883] kernel: nouveau 0000:01:00.0: DRM: MM: using COPY for buffer
-copies
-[   27.774892] kernel: [drm] Initialized nouveau 1.3.1 20120801 for
-0000:01:00.0 on minor 1
-                       NVRM: nouveau, rivafb, nvidiafb or rivatv=20
-                       NVRM: nouveau, rivafb, nvidiafb or rivatv=20
-[   76.402068] kernel: nouveau 0000:01:00.0: bus: MMIO read of 00000000 FAU=
-LT
-at 6013d4 [ IBUS ]
-[   76.984544] /usr/lib/gdm3/gdm-x-session[1519]: (II) modeset(G0): [DRI2]=
-=20=20
-DRI driver: nouveau
-[   76.984544] /usr/lib/gdm3/gdm-x-session[1519]: (II) modeset(G0): [DRI2]=
-=20=20
-VDPAU driver: nouveau
-[   83.346751] kernel: nouveau 0000:01:00.0: bus: MMIO read of 00000000 FAU=
-LT
-at 6013d4 [ IBUS ]
+System:
+Host:  Kernel: 5.0.9-2-MANJARO x86_64 bits: 64 compiler: gcc v: 8.3.0 Deskt=
+op:
+Xfce 4.13.3git-UNKNOWN Distro: Manjaro Linux=20
 
-The last line is repeated hundreds of times.
 
-It may be related, but am not sure: right after a boot, the graphics (e.g.
-GNOME Shell animations) are fast and smooth, but after a while (I think it's
-related to the machine going to sleep, and/or the screen being locked), it
-seems to go to a fallback non-accelerated mode. It's still usable, but even
-moving a simple terminal window is slow. Strangely, even in this degraded m=
-ode,
-scrolling full-screen pages is still smooth in Firefox, as is e.g. watching
-videos.
+glxinfo | grep OpenGL:
+OpenGL vendor string: nouveau
+OpenGL renderer string: NVA3
+OpenGL core profile version string: 3.3 (Core Profile) Mesa 19.0.3
+OpenGL core profile shading language version string: 3.30
+OpenGL core profile context flags: (none)
+OpenGL core profile profile mask: core profile
+OpenGL core profile extensions:
+OpenGL version string: 3.3 (Compatibility Profile) Mesa 19.0.3
+OpenGL shading language version string: 3.30
+OpenGL context flags: (none)
+OpenGL profile mask: compatibility profile
+OpenGL extensions:
+OpenGL ES profile version string: OpenGL ES 3.0 Mesa 19.0.3
+OpenGL ES profile shading language version string: OpenGL ES GLSL ES 3.00
+OpenGL ES profile extensions:
+
+ mhwd -l
+> 0000:08:00.0 (0300:10de:0ca3) Display controller nVidia Corporation:
+---------------------------------------------------------------------------=
+-----
+                  NAME               VERSION          FREEDRIVER           =
+TYPE
+---------------------------------------------------------------------------=
+-----
+    video-nvidia-340xx            2018.08.09               false           =
+ PCI
+           video-linux            2018.05.04                true           =
+ PCI
+            video-vesa            2017.03.12                true           =
+ PCI
+
+
+mhwd -l -d
+---------------------------------------------------------------------------=
+-----
+> PCI Device: /devices/pci0000:00/0000:00:01.0/0000:08:00.0 (0300:10de:0ca3)
+  Display controller nVidia Corporation GT215 [GeForce GT 240]
+---------------------------------------------------------------------------=
+-----
+  > INSTALLED:
+
+   NAME:        video-linux
+   ATTACHED:    PCI
+   VERSION:     2018.05.04
+   INFO:        Standard open source drivers.
+   PRIORITY:    2
+   FREEDRIVER:  true
+   DEPENDS:     -
+   CONFLICTS:   -
+   CLASSIDS:    0300 0380 0302=20
+   VENDORIDS:   1002 8086 10de=20
+
+
+more testing info see:
+https://forum.manjaro.org/t/system-crash-nouveau-000000-0-gr-pgraph-tlb-flu=
+sh-idle-timeout-fail-and-nouveau-000000-0-mmu-ce0-mmu-invalidate-timeout/85=
+154
+
+
+
+journalctl -p 3
+
+Mai 01 08:24:46  kernel: nouveau 0000:08:00.0: bios: OOB 1 d7500086 d7500086
+Mai 01 08:25:31  colord-sane[478]: io/hpmud/pp.c 627: unable to read device=
+-id
+ret=3D-1
+Mai 01 08:47:35  kernel: nouveau 0000:08:00.0: gr: PGRAPH TLB flush idle
+timeout fail
+Mai 01 08:47:35  kernel: nouveau 0000:08:00.0: gr: PGRAPH_STATUS 00b00001 [=
+BUSY
+TPC_PROP TPC_TEX TPC_MP]
+Mai 01 08:47:35  kernel: nouveau 0000:08:00.0: gr: PGRAPH_VSTATUS0: 0000000=
+0 []
+Mai 01 08:47:35  kernel: nouveau 0000:08:00.0: gr: PGRAPH_VSTATUS1: 00005068
+[TPC_TEX]
+Mai 01 08:47:35  kernel: nouveau 0000:08:00.0: gr: PGRAPH_VSTATUS2: 0000000=
+0 []
+Mai 01 08:47:41  kernel: nouveau 0000:08:00.0: mmu: ce0 mmu invalidate time=
+out
+Mai 01 08:47:41  kernel: nouveau 0000:08:00.0: gr: PGRAPH TLB flush idle
+timeout fail
+Mai 01 08:47:41  kernel: nouveau 0000:08:00.0: gr: PGRAPH_STATUS 00b00001 [=
+BUSY
+TPC_PROP TPC_TEX TPC_MP]
+Mai 01 08:47:41  kernel: nouveau 0000:08:00.0: gr: PGRAPH_VSTATUS0: 0000000=
+0 []
+Mai 01 08:47:41  kernel: nouveau 0000:08:00.0: gr: PGRAPH_VSTATUS1: 00005068
+[TPC_TEX]
+Mai 01 08:47:41  kernel: nouveau 0000:08:00.0: gr: PGRAPH_VSTATUS2: 0000000=
+0 []
+Mai 01 08:47:47  kernel: nouveau 0000:08:00.0: mmu: ce0 mmu invalidate time=
+out
+Mai 01 08:47:47  kernel: nouveau 0000:08:00.0: gr: PGRAPH TLB flush idle
+timeout fail
+Mai 01 08:47:47  kernel: nouveau 0000:08:00.0: gr: PGRAPH_STATUS 00b00001 [=
+BUSY
+TPC_PROP TPC_TEX TPC_MP]
+Mai 01 08:47:47  kernel: nouveau 0000:08:00.0: gr: PGRAPH_VSTATUS0: 0000000=
+0 []
+Mai 01 08:47:47  kernel: nouveau 0000:08:00.0: gr: PGRAPH_VSTATUS1: 00005068
+[TPC_TEX]
+Mai 01 08:47:47  kernel: nouveau 0000:08:00.0: gr: PGRAPH_VSTATUS2: 0000000=
+0 []
+Mai 01 08:47:53  kernel: nouveau 0000:08:00.0: mmu: ce0 mmu invalidate time=
+out
+Mai 01 08:47:53  kernel: nouveau 0000:08:00.0: gr: PGRAPH TLB flush idle
+timeout fail
+Mai 01 08:47:53  kernel: nouveau 0000:08:00.0: gr: PGRAPH_STATUS 00b00001 [=
+BUSY
+TPC_PROP TPC_TEX TPC_MP]
+Mai 01 08:47:53  kernel: nouveau 0000:08:00.0: gr: PGRAPH_VSTATUS0: 0000000=
+0 []
+Mai 01 08:47:53  kernel: nouveau 0000:08:00.0: gr: PGRAPH_VSTATUS1: 00005068
+[TPC_TEX]
+Mai 01 08:47:53  kernel: nouveau 0000:08:00.0: gr: PGRAPH_VSTATUS2: 0000000=
+0 []
+Mai 01 08:47:57  kernel: nouveau 0000:08:00.0: gr: PGRAPH TLB flush idle
+timeout fail
+Mai 01 08:47:57  kernel: nouveau 0000:08:00.0: gr: PGRAPH_STATUS 00b00001 [=
+BUSY
+TPC_PROP TPC_TEX TPC_MP]
+Mai 01 08:47:57  kernel: nouveau 0000:08:00.0: gr: PGRAPH_VSTATUS0: 0000000=
+0 []
+Mai 01 08:47:57  kernel: nouveau 0000:08:00.0: gr: PGRAPH_VSTATUS1: 00005068
+[TPC_TEX]
+Mai 01 08:47:57  kernel: nouveau 0000:08:00.0: gr: PGRAPH_VSTATUS2: 0000000=
+0 []
+Mai 01 08:48:00  kernel: nouveau 0000:08:00.0: gr: PGRAPH TLB flush idle
+timeout fail
+Mai 01 08:48:00  kernel: nouveau 0000:08:00.0: gr: PGRAPH_STATUS ffffffff [=
+BUSY
+DISPATCH UNK2 UNK3 UNK4 UNK5 M2MF UNK7 CTXPROG VFETCH CCACHE_PREGEOM
+STRMOUT_VATTR_POSTGEOM VCLIP RATTR>
+Mai 01 08:48:00  kernel: nouveau 0000:08:00.0: gr: PGRAPH_VSTATUS0: fffffff=
+f []
+Mai 01 08:48:00  kernel: nouveau 0000:08:00.0: gr: PGRAPH_VSTATUS1: fffffff=
+f []
+Mai 01 08:48:00  kernel: nouveau 0000:08:00.0: gr: PGRAPH_VSTATUS2: 0000000=
+0 []
 
 --=20
 You are receiving this mail because:
+You are the QA Contact for the bug.
 You are the assignee for the bug.=
 
---15565498802.66E4E.24028
-Date: Mon, 29 Apr 2019 14:58:00 +0000
+--15566971430.Dab5.4861
+Date: Wed, 1 May 2019 07:52:23 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -215,149 +268,256 @@ Auto-Submitted: auto-generated
     <head>
       <base href=3D"https://bugs.freedesktop.org/">
     </head>
-    <body>
+    <body><table border=3D"1" cellspacing=3D"0" cellpadding=3D"8">
+        <tr>
+          <th>Bug ID</th>
+          <td><a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - System Crash: nouveau 0000:08:00.0: gr: PGRAPH TLB flush =
+idle timeout fail and nouveau 0000:08:00.0: mmu: ce0 mmu invalidate timeout"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110572">110572</a>
+          </td>
+        </tr>
+
+        <tr>
+          <th>Summary</th>
+          <td>System Crash: nouveau 0000:08:00.0: gr: PGRAPH TLB flush idle=
+ timeout fail and nouveau 0000:08:00.0: mmu: ce0 mmu invalidate timeout
+          </td>
+        </tr>
+
+        <tr>
+          <th>Product</th>
+          <td>Mesa
+          </td>
+        </tr>
+
+        <tr>
+          <th>Version</th>
+          <td>19.0
+          </td>
+        </tr>
+
+        <tr>
+          <th>Hardware</th>
+          <td>x86-64 (AMD64)
+          </td>
+        </tr>
+
+        <tr>
+          <th>OS</th>
+          <td>Linux (All)
+          </td>
+        </tr>
+
+        <tr>
+          <th>Status</th>
+          <td>NEW
+          </td>
+        </tr>
+
+        <tr>
+          <th>Severity</th>
+          <td>major
+          </td>
+        </tr>
+
+        <tr>
+          <th>Priority</th>
+          <td>medium
+          </td>
+        </tr>
+
+        <tr>
+          <th>Component</th>
+          <td>Drivers/DRI/nouveau
+          </td>
+        </tr>
+
+        <tr>
+          <th>Assignee</th>
+          <td>nouveau&#64;lists.freedesktop.org
+          </td>
+        </tr>
+
+        <tr>
+          <th>Reporter</th>
+          <td>Linuxfreak&#64;gmx.at
+          </td>
+        </tr>
+
+        <tr>
+          <th>QA Contact</th>
+          <td>nouveau&#64;lists.freedesktop.org
+          </td>
+        </tr></table>
       <p>
         <div>
-            <b><a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - MMIO read of 00000000 FAULT at 022554 [ IBUS ]"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D100423#c29">Comme=
-nt # 29</a>
-              on <a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - MMIO read of 00000000 FAULT at 022554 [ IBUS ]"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D100423">bug 10042=
-3</a>
-              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
-pcdavid&#64;gmail.com" title=3D"Pierre-Charles David &lt;pcdavid&#64;gmail.=
-com&gt;"> <span class=3D"fn">Pierre-Charles David</span></a>
-</span></b>
-        <pre>FWIW, I also get this one (022554), along with two others (10a=
-c08 and 6013d4).
+        <pre>Hi,
 
-The machine is an ASUS UX501V with an Intel HD Graphics 530 + NVIDIA GTX 96=
-0M
-(more details below). I'm running an up to date Debian 9.9 with a
-4.19.28-2~bpo9+1 kernel (from stretch-backports). It is usually plugged to =
-an
-external screen though HDMI (32&quot; AOC Q3277PQU at 2560=C3=971440).
+The system is freezing regulary. This was introduced with kernel 5.0.9 and
+nouveau.
 
-% cat /proc/version
-Linux version 4.19.0-0.bpo.4-amd64 (<a href=3D"mailto:debian-kernel&#64;lis=
-ts.debian.org">debian-kernel&#64;lists.debian.org</a>) (gcc
-version 6.3.0 20170516 (Debian 6.3.0-18+deb9u1)) #1 SMP Debian 4.19.28-2~bp=
-o9+1
-(2019-03-27)
+regards LF
 
-% lspci
-00:00.0 Host bridge: Intel Corporation Skylake Host Bridge/DRAM Registers (=
-rev
-07)
-00:01.0 PCI bridge: Intel Corporation Skylake PCIe Controller (x16) (rev 07)
-00:02.0 VGA compatible controller: Intel Corporation HD Graphics 530 (rev 0=
-6)
-00:04.0 Signal processing controller: Intel Corporation Skylake Processor
-Thermal Subsystem (rev 07)
-00:14.0 USB controller: Intel Corporation Sunrise Point-H USB 3.0 xHCI
-Controller (rev 31)
-00:14.2 Signal processing controller: Intel Corporation Sunrise Point-H The=
-rmal
-subsystem (rev 31)
-00:15.0 Signal processing controller: Intel Corporation Sunrise Point-H Ser=
-ial
-IO I2C Controller #0 (rev 31)
-00:15.1 Signal processing controller: Intel Corporation Sunrise Point-H Ser=
-ial
-IO I2C Controller #1 (rev 31)
-00:16.0 Communication controller: Intel Corporation Sunrise Point-H CSME HE=
-CI
-#1 (rev 31)
-00:17.0 SATA controller: Intel Corporation Sunrise Point-H SATA Controller
-[AHCI mode] (rev 31)
-00:1c.0 PCI bridge: Intel Corporation Sunrise Point-H PCI Express Root Port=
- #2
-(rev f1)
-00:1c.2 PCI bridge: Intel Corporation Sunrise Point-H PCI Express Root Port=
- #3
-(rev f1)
-00:1c.4 PCI bridge: Intel Corporation Sunrise Point-H PCI Express Root Port=
- #5
-(rev f1)
-00:1f.0 ISA bridge: Intel Corporation Sunrise Point-H LPC Controller (rev 3=
-1)
-00:1f.2 Memory controller: Intel Corporation Sunrise Point-H PMC (rev 31)
-00:1f.3 Audio device: Intel Corporation Sunrise Point-H HD Audio (rev 31)
-00:1f.4 SMBus: Intel Corporation Sunrise Point-H SMBus (rev 31)
-01:00.0 3D controller: NVIDIA Corporation GM107M [GeForce GTX 960M] (rev a2)
-02:00.0 Unassigned class [ff00]: Alcor Micro Device 6621
-03:00.0 Network controller: Intel Corporation Wireless 7265 (rev 59)
-
-Details on the NVIDIA card:
-
-01:00.0 3D controller: NVIDIA Corporation GM107M [GeForce GTX 960M] (rev a2)
-        Subsystem: ASUSTeK Computer Inc. GM107M [GeForce GTX 960M]
-        Control: I/O+ Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr-
-Stepping- SERR- FastB2B- DisINTx+
-        Status: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=3Dfast &gt;TAbort-=
- &lt;TAbort-
-&lt;MAbort- &gt;SERR- &lt;PERR- INTx-
-        Latency: 0
-        Interrupt: pin A routed to IRQ 127
-        Region 0: Memory at dc000000 (32-bit, non-prefetchable) [size=3D16M]
-        Region 1: Memory at b0000000 (64-bit, prefetchable) [size=3D256M]
-        Region 3: Memory at c0000000 (64-bit, prefetchable) [size=3D32M]
-        Region 5: I/O ports at e000 [size=3D128]
-        Expansion ROM at dd000000 [disabled] [size=3D512K]
-        Capabilities: &lt;access denied&gt;
-        Kernel driver in use: nouveau
-        Kernel modules: nouveau, nvidia_current_drm, nvidia_current
+Graphics:
+Device-1: NVIDIA GT215 [GeForce GT 240] driver: nouveau v: kernel bus ID:
+08:00.0 Display: x11 server: X.Org 1.20.4 driver: nouveau unloaded: modeset=
+ting
+resolution: 1920x1080~60Hz OpenGL: renderer: NVA3 v: 3.3 Mesa 19.0.3 direct
+render: Yes=20
 
 
-% journalctl -b --no-hostname -o short-monotonic | grep nouveau
-[   25.822549] kernel: nouveau: detected PR support, will not use DSM
-[   25.822749] kernel: nouveau 0000:01:00.0: NVIDIA GM107 (1171b0a2)
-[   25.889243] kernel: nouveau 0000:01:00.0: bios: version 82.07.94.00.1a
-[   26.462330] kernel: nouveau 0000:01:00.0: fb: 2048 MiB GDDR5
-[   26.462343] kernel: nouveau 0000:01:00.0: bus: MMIO read of 00000000 FAU=
-LT
-at 022554 [ IBUS ]
-[   26.474851] kernel: nouveau 0000:01:00.0: bus: MMIO read of 00000000 FAU=
-LT
-at 10ac08 [ IBUS ]
-[   27.774265] kernel: nouveau 0000:01:00.0: DRM: VRAM: 2048 MiB
-[   27.774266] kernel: nouveau 0000:01:00.0: DRM: GART: 1048576 MiB
-[   27.774269] kernel: nouveau 0000:01:00.0: DRM: Pointer to TMDS table inv=
-alid
-[   27.774271] kernel: nouveau 0000:01:00.0: DRM: DCB version 4.0
-[   27.774883] kernel: nouveau 0000:01:00.0: DRM: MM: using COPY for buffer
-copies
-[   27.774892] kernel: [drm] Initialized nouveau 1.3.1 20120801 for
-0000:01:00.0 on minor 1
-                       NVRM: nouveau, rivafb, nvidiafb or rivatv=20
-                       NVRM: nouveau, rivafb, nvidiafb or rivatv=20
-[   76.402068] kernel: nouveau 0000:01:00.0: bus: MMIO read of 00000000 FAU=
-LT
-at 6013d4 [ IBUS ]
-[   76.984544] /usr/lib/gdm3/gdm-x-session[1519]: (II) modeset(G0): [DRI2]=
-=20=20
-DRI driver: nouveau
-[   76.984544] /usr/lib/gdm3/gdm-x-session[1519]: (II) modeset(G0): [DRI2]=
-=20=20
-VDPAU driver: nouveau
-[   83.346751] kernel: nouveau 0000:01:00.0: bus: MMIO read of 00000000 FAU=
-LT
-at 6013d4 [ IBUS ]
+System:
+Host:  Kernel: 5.0.9-2-MANJARO x86_64 bits: 64 compiler: gcc v: 8.3.0 Deskt=
+op:
+Xfce 4.13.3git-UNKNOWN Distro: Manjaro Linux=20
 
-The last line is repeated hundreds of times.
 
-It may be related, but am not sure: right after a boot, the graphics (e.g.
-GNOME Shell animations) are fast and smooth, but after a while (I think it's
-related to the machine going to sleep, and/or the screen being locked), it
-seems to go to a fallback non-accelerated mode. It's still usable, but even
-moving a simple terminal window is slow. Strangely, even in this degraded m=
-ode,
-scrolling full-screen pages is still smooth in Firefox, as is e.g. watching
-videos.</pre>
+glxinfo | grep OpenGL:
+OpenGL vendor string: nouveau
+OpenGL renderer string: NVA3
+OpenGL core profile version string: 3.3 (Core Profile) Mesa 19.0.3
+OpenGL core profile shading language version string: 3.30
+OpenGL core profile context flags: (none)
+OpenGL core profile profile mask: core profile
+OpenGL core profile extensions:
+OpenGL version string: 3.3 (Compatibility Profile) Mesa 19.0.3
+OpenGL shading language version string: 3.30
+OpenGL context flags: (none)
+OpenGL profile mask: compatibility profile
+OpenGL extensions:
+OpenGL ES profile version string: OpenGL ES 3.0 Mesa 19.0.3
+OpenGL ES profile shading language version string: OpenGL ES GLSL ES 3.00
+OpenGL ES profile extensions:
+
+ mhwd -l
+<span class=3D"quote">&gt; 0000:08:00.0 (0300:10de:0ca3) Display controller=
+ nVidia Corporation:</span >
+---------------------------------------------------------------------------=
+-----
+                  NAME               VERSION          FREEDRIVER           =
+TYPE
+---------------------------------------------------------------------------=
+-----
+    video-nvidia-340xx            2018.08.09               false           =
+ PCI
+           video-linux            2018.05.04                true           =
+ PCI
+            video-vesa            2017.03.12                true           =
+ PCI
+
+
+mhwd -l -d
+---------------------------------------------------------------------------=
+-----
+<span class=3D"quote">&gt; PCI Device: /devices/pci0000:00/0000:00:01.0/000=
+0:08:00.0 (0300:10de:0ca3)</span >
+  Display controller nVidia Corporation GT215 [GeForce GT 240]
+---------------------------------------------------------------------------=
+-----
+  &gt; INSTALLED:
+
+   NAME:        video-linux
+   ATTACHED:    PCI
+   VERSION:     2018.05.04
+   INFO:        Standard open source drivers.
+   PRIORITY:    2
+   FREEDRIVER:  true
+   DEPENDS:     -
+   CONFLICTS:   -
+   CLASSIDS:    0300 0380 0302=20
+   VENDORIDS:   1002 8086 10de=20
+
+
+more testing info see:
+<a href=3D"https://forum.manjaro.org/t/system-crash-nouveau-000000-0-gr-pgr=
+aph-tlb-flush-idle-timeout-fail-and-nouveau-000000-0-mmu-ce0-mmu-invalidate=
+-timeout/85154">https://forum.manjaro.org/t/system-crash-nouveau-000000-0-g=
+r-pgraph-tlb-flush-idle-timeout-fail-and-nouveau-000000-0-mmu-ce0-mmu-inval=
+idate-timeout/85154</a>
+
+
+
+journalctl -p 3
+
+Mai 01 08:24:46  kernel: nouveau 0000:08:00.0: bios: OOB 1 d7500086 d7500086
+Mai 01 08:25:31  colord-sane[478]: io/hpmud/pp.c 627: unable to read device=
+-id
+ret=3D-1
+Mai 01 08:47:35  kernel: nouveau 0000:08:00.0: gr: PGRAPH TLB flush idle
+timeout fail
+Mai 01 08:47:35  kernel: nouveau 0000:08:00.0: gr: PGRAPH_STATUS 00b00001 [=
+BUSY
+TPC_PROP TPC_TEX TPC_MP]
+Mai 01 08:47:35  kernel: nouveau 0000:08:00.0: gr: PGRAPH_VSTATUS0: 0000000=
+0 []
+Mai 01 08:47:35  kernel: nouveau 0000:08:00.0: gr: PGRAPH_VSTATUS1: 00005068
+[TPC_TEX]
+Mai 01 08:47:35  kernel: nouveau 0000:08:00.0: gr: PGRAPH_VSTATUS2: 0000000=
+0 []
+Mai 01 08:47:41  kernel: nouveau 0000:08:00.0: mmu: ce0 mmu invalidate time=
+out
+Mai 01 08:47:41  kernel: nouveau 0000:08:00.0: gr: PGRAPH TLB flush idle
+timeout fail
+Mai 01 08:47:41  kernel: nouveau 0000:08:00.0: gr: PGRAPH_STATUS 00b00001 [=
+BUSY
+TPC_PROP TPC_TEX TPC_MP]
+Mai 01 08:47:41  kernel: nouveau 0000:08:00.0: gr: PGRAPH_VSTATUS0: 0000000=
+0 []
+Mai 01 08:47:41  kernel: nouveau 0000:08:00.0: gr: PGRAPH_VSTATUS1: 00005068
+[TPC_TEX]
+Mai 01 08:47:41  kernel: nouveau 0000:08:00.0: gr: PGRAPH_VSTATUS2: 0000000=
+0 []
+Mai 01 08:47:47  kernel: nouveau 0000:08:00.0: mmu: ce0 mmu invalidate time=
+out
+Mai 01 08:47:47  kernel: nouveau 0000:08:00.0: gr: PGRAPH TLB flush idle
+timeout fail
+Mai 01 08:47:47  kernel: nouveau 0000:08:00.0: gr: PGRAPH_STATUS 00b00001 [=
+BUSY
+TPC_PROP TPC_TEX TPC_MP]
+Mai 01 08:47:47  kernel: nouveau 0000:08:00.0: gr: PGRAPH_VSTATUS0: 0000000=
+0 []
+Mai 01 08:47:47  kernel: nouveau 0000:08:00.0: gr: PGRAPH_VSTATUS1: 00005068
+[TPC_TEX]
+Mai 01 08:47:47  kernel: nouveau 0000:08:00.0: gr: PGRAPH_VSTATUS2: 0000000=
+0 []
+Mai 01 08:47:53  kernel: nouveau 0000:08:00.0: mmu: ce0 mmu invalidate time=
+out
+Mai 01 08:47:53  kernel: nouveau 0000:08:00.0: gr: PGRAPH TLB flush idle
+timeout fail
+Mai 01 08:47:53  kernel: nouveau 0000:08:00.0: gr: PGRAPH_STATUS 00b00001 [=
+BUSY
+TPC_PROP TPC_TEX TPC_MP]
+Mai 01 08:47:53  kernel: nouveau 0000:08:00.0: gr: PGRAPH_VSTATUS0: 0000000=
+0 []
+Mai 01 08:47:53  kernel: nouveau 0000:08:00.0: gr: PGRAPH_VSTATUS1: 00005068
+[TPC_TEX]
+Mai 01 08:47:53  kernel: nouveau 0000:08:00.0: gr: PGRAPH_VSTATUS2: 0000000=
+0 []
+Mai 01 08:47:57  kernel: nouveau 0000:08:00.0: gr: PGRAPH TLB flush idle
+timeout fail
+Mai 01 08:47:57  kernel: nouveau 0000:08:00.0: gr: PGRAPH_STATUS 00b00001 [=
+BUSY
+TPC_PROP TPC_TEX TPC_MP]
+Mai 01 08:47:57  kernel: nouveau 0000:08:00.0: gr: PGRAPH_VSTATUS0: 0000000=
+0 []
+Mai 01 08:47:57  kernel: nouveau 0000:08:00.0: gr: PGRAPH_VSTATUS1: 00005068
+[TPC_TEX]
+Mai 01 08:47:57  kernel: nouveau 0000:08:00.0: gr: PGRAPH_VSTATUS2: 0000000=
+0 []
+Mai 01 08:48:00  kernel: nouveau 0000:08:00.0: gr: PGRAPH TLB flush idle
+timeout fail
+Mai 01 08:48:00  kernel: nouveau 0000:08:00.0: gr: PGRAPH_STATUS ffffffff [=
+BUSY
+DISPATCH UNK2 UNK3 UNK4 UNK5 M2MF UNK7 CTXPROG VFETCH CCACHE_PREGEOM
+STRMOUT_VATTR_POSTGEOM VCLIP RATTR&gt;
+Mai 01 08:48:00  kernel: nouveau 0000:08:00.0: gr: PGRAPH_VSTATUS0: fffffff=
+f []
+Mai 01 08:48:00  kernel: nouveau 0000:08:00.0: gr: PGRAPH_VSTATUS1: fffffff=
+f []
+Mai 01 08:48:00  kernel: nouveau 0000:08:00.0: gr: PGRAPH_VSTATUS2: 0000000=
+0 []</pre>
         </div>
       </p>
 
@@ -366,14 +526,15 @@ videos.</pre>
       <span>You are receiving this mail because:</span>
 
       <ul>
+          <li>You are the QA Contact for the bug.</li>
           <li>You are the assignee for the bug.</li>
       </ul>
     </body>
 </html>=
 
---15565498802.66E4E.24028--
+--15566971430.Dab5.4861--
 
---===============1652490644==
+--===============1589930099==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -383,4 +544,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============1652490644==--
+--===============1589930099==--
