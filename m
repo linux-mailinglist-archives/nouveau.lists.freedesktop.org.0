@@ -2,45 +2,67 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B1390141D2
-	for <lists+nouveau@lfdr.de>; Sun,  5 May 2019 20:24:43 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6A3B414C97
+	for <lists+nouveau@lfdr.de>; Mon,  6 May 2019 16:43:42 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 573158925D;
-	Sun,  5 May 2019 18:24:40 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8991F8992E;
+	Mon,  6 May 2019 14:43:40 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [131.252.210.165])
- by gabe.freedesktop.org (Postfix) with ESMTP id D408789330
- for <nouveau@lists.freedesktop.org>; Sun,  5 May 2019 18:24:39 +0000 (UTC)
-Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id D03527215A; Sun,  5 May 2019 18:24:39 +0000 (UTC)
-From: bugzilla-daemon@freedesktop.org
-To: nouveau@lists.freedesktop.org
-Date: Sun, 05 May 2019 18:24:39 +0000
-X-Bugzilla-Reason: AssignedTo
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: None
-X-Bugzilla-Product: xorg
-X-Bugzilla-Component: Driver/nouveau
-X-Bugzilla-Version: unspecified
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: critical
-X-Bugzilla-Who: nouveau@spliet.org
-X-Bugzilla-Status: NEW
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: high
-X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-100567-8800-leSaENeknd@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-100567-8800@http.bugs.freedesktop.org/>
-References: <bug-100567-8800@http.bugs.freedesktop.org/>
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
+Received: from mail-ed1-x541.google.com (mail-ed1-x541.google.com
+ [IPv6:2a00:1450:4864:20::541])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D6140898B7
+ for <nouveau@lists.freedesktop.org>; Mon,  6 May 2019 14:43:38 +0000 (UTC)
+Received: by mail-ed1-x541.google.com with SMTP id n17so15614329edb.0
+ for <nouveau@lists.freedesktop.org>; Mon, 06 May 2019 07:43:38 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:sender:date:from:to:cc:subject:message-id
+ :mail-followup-to:references:mime-version:content-disposition
+ :in-reply-to:user-agent;
+ bh=vaAPp8PyjYHsdP1CZGhOGZcNrdzUmU4mz1az3gjIEag=;
+ b=ioElAhPhVuDUTPOE9YWJ6R9UYET6zD0v2S3h4tSt3XVg1FTKxgO+Kc47aez2TytfNf
+ lhKcW8MIKETx3FpLcuiEvCUy0Cz7Y31Bi0CMK/U/Dc36uIHMb+p6fl0spCl5dJak6puv
+ u4IU1uzpwMEKG6jrdTGpUX2iKZdRmeaX0ege0+I2IIUfO0Eeepsh9c+TwP8YIeL1itd2
+ 4SAODLrufMZdJcIpre0v9fn7vj4O4QLjpCPYh+sET9m5RrLjuAucUCoR0goKOOSO7ExR
+ 4JeytGpZdOsel+LmOYwUx17NmA0+eHBr8630ekOqYjARq2JPY9w0SWlpwiS+zSN/WEyv
+ yozw==
+X-Gm-Message-State: APjAAAX/iOMhqYRTv2wwLvQTfqVgfHk9sn5ZnBntK2sALOc/F8LNXzc0
+ 5oJSuyUtwHviC35wMANizQuW8w==
+X-Google-Smtp-Source: APXvYqwtl5T/MpDTj7LbNirYR1SvYe+WhzHms3LVnX/pzSNP1kZnlocJBCYDhRieEoZXTXVwEMT6xg==
+X-Received: by 2002:a50:be42:: with SMTP id b2mr27581867edi.228.1557153817556; 
+ Mon, 06 May 2019 07:43:37 -0700 (PDT)
+Received: from phenom.ffwll.local ([2a02:168:569e:0:3106:d637:d723:e855])
+ by smtp.gmail.com with ESMTPSA id q18sm1602623ejp.56.2019.05.06.07.43.35
+ (version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+ Mon, 06 May 2019 07:43:36 -0700 (PDT)
+Date: Mon, 6 May 2019 16:43:34 +0200
+From: Daniel Vetter <daniel@ffwll.ch>
+To: jagdsh.linux@gmail.com
+Message-ID: <20190506144334.GH17751@phenom.ffwll.local>
+Mail-Followup-To: jagdsh.linux@gmail.com, robdclark@gmail.com,
+ sean@poorly.run, airlied@linux.ie, bskeggs@redhat.com,
+ hierry.reding@gmail.com, jcrouse@codeaurora.org,
+ jsanka@codeaurora.org, skolluku@codeaurora.org,
+ paul.burton@mips.com, jrdr.linux@gmail.com,
+ linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ nouveau@lists.freedesktop.org
+References: <1556906293-128921-1-git-send-email-jagdsh.linux@gmail.com>
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 100567] Nouveau system freeze fifo: SCHED_ERROR 0a
- [CTXSW_TIMEOUT]
+Content-Disposition: inline
+In-Reply-To: <1556906293-128921-1-git-send-email-jagdsh.linux@gmail.com>
+X-Operating-System: Linux phenom 4.14.0-3-amd64 
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ffwll.ch; s=google;
+ h=sender:date:from:to:cc:subject:message-id:mail-followup-to
+ :references:mime-version:content-disposition:in-reply-to:user-agent;
+ bh=vaAPp8PyjYHsdP1CZGhOGZcNrdzUmU4mz1az3gjIEag=;
+ b=TeJLtrEe4JxAY6kU+FgDMqxxH774q5OmDnPgF4z1LCxJ0gA2hydu8AIgwxknkumsP+
+ w+p3KFDudzEwfTQwrebwzQ8H7AFC6XnqlApAqm6znxrbNtpsSorAwrpuQTF7daJEPSte
+ JtoM1vJiuvvMaYngrNIWUOuj8SndGJQPvePfs=
+Subject: Re: [Nouveau] [PATCH] gpu/drm: Remove duplicate headers
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -52,141 +74,55 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0954155295=="
+Cc: freedreno@lists.freedesktop.org, airlied@linux.ie,
+ linux-arm-msm@vger.kernel.org, jcrouse@codeaurora.org,
+ dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ robdclark@gmail.com, paul.burton@mips.com, bskeggs@redhat.com, daniel@ffwll.ch,
+ nouveau@lists.freedesktop.org, hierry.reding@gmail.com, jsanka@codeaurora.org,
+ sean@poorly.run, skolluku@codeaurora.org, jrdr.linux@gmail.com
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-
---===============0954155295==
-Content-Type: multipart/alternative; boundary="155708067912.EfaFdb.17567"
-Content-Transfer-Encoding: 7bit
-
-
---155708067912.EfaFdb.17567
-Date: Sun, 5 May 2019 18:24:39 +0000
-MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-https://bugs.freedesktop.org/show_bug.cgi?id=3D100567
-
---- Comment #28 from Roy <nouveau@spliet.org> ---
-Somewhat surprised that this particular report hasn't received any attention
-from a core dev. Sadly, I'm afraid my response will not be hugely satisfying
-eiter.
-
-The message "fifo: SCHED_ERROR 0a [CTXSW_TIMEOUT]" is not the result of *a =
-bug*
-and does not point in the direction of one. Rather it is a symptom of a wide
-variety of potential problems with nouveau, (all of) which result in a hang=
- of
-the rendering part of the GPU. On itself it doesn't give meaningful informa=
-tion
-to any developer as to what may be the culprit. It's like measuring a fever=
-, it
-could be the result of many conditions.
-
-Developers would be helped if there was a reliably reproducible situation in
-which this event can be triggered. If there is a list of steps that can be
-followed that would result in this message and a hang, that somehow doesn't
-involve words like "random" or "wait for possibly a few hours", and that ca=
-n be
-traced with tools such as APITrace, we could get a step further in analysing
-what goes wrong. However, it seems unlikely this is the case, especially si=
-nce
-we are also aware of multithreading-related issues that make isolating such
-problems extremely difficult. Unfortunately, post-mortem syslogs and dmesgs=
- are
-unlikely to add any useful information to this or similar bug reports.
-
---=20
-You are receiving this mail because:
-You are the assignee for the bug.=
-
---155708067912.EfaFdb.17567
-Date: Sun, 5 May 2019 18:24:39 +0000
-MIME-Version: 1.0
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-<html>
-    <head>
-      <base href=3D"https://bugs.freedesktop.org/">
-    </head>
-    <body>
-      <p>
-        <div>
-            <b><a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - Nouveau system freeze fifo: SCHED_ERROR 0a [CTXSW_TIMEOUT=
-]"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D100567#c28">Comme=
-nt # 28</a>
-              on <a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - Nouveau system freeze fifo: SCHED_ERROR 0a [CTXSW_TIMEOUT=
-]"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D100567">bug 10056=
-7</a>
-              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
-nouveau&#64;spliet.org" title=3D"Roy &lt;nouveau&#64;spliet.org&gt;"> <span=
- class=3D"fn">Roy</span></a>
-</span></b>
-        <pre>Somewhat surprised that this particular report hasn't received=
- any attention
-from a core dev. Sadly, I'm afraid my response will not be hugely satisfying
-eiter.
-
-The message &quot;fifo: SCHED_ERROR 0a [CTXSW_TIMEOUT]&quot; is not the res=
-ult of *a bug*
-and does not point in the direction of one. Rather it is a symptom of a wide
-variety of potential problems with nouveau, (all of) which result in a hang=
- of
-the rendering part of the GPU. On itself it doesn't give meaningful informa=
-tion
-to any developer as to what may be the culprit. It's like measuring a fever=
-, it
-could be the result of many conditions.
-
-Developers would be helped if there was a reliably reproducible situation in
-which this event can be triggered. If there is a list of steps that can be
-followed that would result in this message and a hang, that somehow doesn't
-involve words like &quot;random&quot; or &quot;wait for possibly a few hour=
-s&quot;, and that can be
-traced with tools such as APITrace, we could get a step further in analysing
-what goes wrong. However, it seems unlikely this is the case, especially si=
-nce
-we are also aware of multithreading-related issues that make isolating such
-problems extremely difficult. Unfortunately, post-mortem syslogs and dmesgs=
- are
-unlikely to add any useful information to this or similar bug reports.</pre>
-        </div>
-      </p>
-
-
-      <hr>
-      <span>You are receiving this mail because:</span>
-
-      <ul>
-          <li>You are the assignee for the bug.</li>
-      </ul>
-    </body>
-</html>=
-
---155708067912.EfaFdb.17567--
-
---===============0954155295==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
-YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
-cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
-
---===============0954155295==--
+T24gRnJpLCBNYXkgMDMsIDIwMTkgYXQgMTE6Mjg6MTNQTSArMDUzMCwgamFnZHNoLmxpbnV4QGdt
+YWlsLmNvbSB3cm90ZToKPiBGcm9tOiBKYWdhZGVlc2ggUGFnYWRhbGEgPGphZ2RzaC5saW51eEBn
+bWFpbC5jb20+Cj4gCj4gUmVtb3ZlIGR1cGxpY2F0ZSBoZWFkZXJzIHdoaWNoIGFyZSBpbmNsdWRl
+ZCB0d2ljZS4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBKYWdhZGVlc2ggUGFnYWRhbGEgPGphZ2RzaC5s
+aW51eEBnbWFpbC5jb20+CgpJIGNvbGxlY3RlZCBzb21lIGFja3MgZm9yIHRoZSBtc20gYW5kIG5v
+dXZlYXUgcGFydHMgYW5kIHB1c2hlZCB0aGlzLiBGb3IKbmV4dCB0aW1lIGFyb3VuZCB3b3VsZCBi
+ZSBncmVhdCBpZiB5b3Ugc3BsaXQgdGhlc2UgdXAgYWxvbmcgZHJpdmVyL21vZHVsZQpib3VuZGFy
+aWVzLCBzbyB0aGF0IGVhY2ggbWFpbnRhaW5lciBjYW4gcGljayB0aGlzIHVwIGRpcmVjdGx5LgoK
+VGhhbmtzIGZvciB5b3VyIHBhdGNoLgotRGFuaWVsCgo+IC0tLQo+ICBkcml2ZXJzL2dwdS9kcm0v
+bXNtL2Rpc3AvZHB1MS9kcHVfaHdfbG0uYyAgICAgICAgICAgICB8IDEgLQo+ICBkcml2ZXJzL2dw
+dS9kcm0vbm91dmVhdS9udmttL3N1YmRldi9idXMvbnYwNC5jICAgICAgICB8IDIgLS0KPiAgZHJp
+dmVycy9ncHUvZHJtL3BhbmVsL3BhbmVsLXJhc3BiZXJyeXBpLXRvdWNoc2NyZWVuLmMgfCAxIC0K
+PiAgMyBmaWxlcyBjaGFuZ2VkLCA0IGRlbGV0aW9ucygtKQo+IAo+IGRpZmYgLS1naXQgYS9kcml2
+ZXJzL2dwdS9kcm0vbXNtL2Rpc3AvZHB1MS9kcHVfaHdfbG0uYyBiL2RyaXZlcnMvZ3B1L2RybS9t
+c20vZGlzcC9kcHUxL2RwdV9od19sbS5jCj4gaW5kZXggMDE4ZGYyYy4uNDVhNWJjNiAxMDA2NDQK
+PiAtLS0gYS9kcml2ZXJzL2dwdS9kcm0vbXNtL2Rpc3AvZHB1MS9kcHVfaHdfbG0uYwo+ICsrKyBi
+L2RyaXZlcnMvZ3B1L2RybS9tc20vZGlzcC9kcHUxL2RwdV9od19sbS5jCj4gQEAgLTE1LDcgKzE1
+LDYgQEAKPiAgI2luY2x1ZGUgImRwdV9od2lvLmgiCj4gICNpbmNsdWRlICJkcHVfaHdfbG0uaCIK
+PiAgI2luY2x1ZGUgImRwdV9od19tZHNzLmgiCj4gLSNpbmNsdWRlICJkcHVfa21zLmgiCj4gIAo+
+ICAjZGVmaW5lIExNX09QX01PREUgICAgICAgICAgICAgICAgICAgICAgICAweDAwCj4gICNkZWZp
+bmUgTE1fT1VUX1NJWkUgICAgICAgICAgICAgICAgICAgICAgIDB4MDQKPiBkaWZmIC0tZ2l0IGEv
+ZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbnZrbS9zdWJkZXYvYnVzL252MDQuYyBiL2RyaXZlcnMv
+Z3B1L2RybS9ub3V2ZWF1L252a20vc3ViZGV2L2J1cy9udjA0LmMKPiBpbmRleCBjODBiOTY3Li4y
+YjQ0YmE1IDEwMDY0NAo+IC0tLSBhL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L252a20vc3ViZGV2
+L2J1cy9udjA0LmMKPiArKysgYi9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9udmttL3N1YmRldi9i
+dXMvbnYwNC5jCj4gQEAgLTI2LDggKzI2LDYgQEAKPiAgCj4gICNpbmNsdWRlIDxzdWJkZXYvZ3Bp
+by5oPgo+ICAKPiAtI2luY2x1ZGUgPHN1YmRldi9ncGlvLmg+Cj4gLQo+ICBzdGF0aWMgdm9pZAo+
+ICBudjA0X2J1c19pbnRyKHN0cnVjdCBudmttX2J1cyAqYnVzKQo+ICB7Cj4gZGlmZiAtLWdpdCBh
+L2RyaXZlcnMvZ3B1L2RybS9wYW5lbC9wYW5lbC1yYXNwYmVycnlwaS10b3VjaHNjcmVlbi5jIGIv
+ZHJpdmVycy9ncHUvZHJtL3BhbmVsL3BhbmVsLXJhc3BiZXJyeXBpLXRvdWNoc2NyZWVuLmMKPiBp
+bmRleCAyYzljOTcyLi5jYWNmMmUwIDEwMDY0NAo+IC0tLSBhL2RyaXZlcnMvZ3B1L2RybS9wYW5l
+bC9wYW5lbC1yYXNwYmVycnlwaS10b3VjaHNjcmVlbi5jCj4gKysrIGIvZHJpdmVycy9ncHUvZHJt
+L3BhbmVsL3BhbmVsLXJhc3BiZXJyeXBpLXRvdWNoc2NyZWVuLmMKPiBAQCAtNTMsNyArNTMsNiBA
+QAo+ICAjaW5jbHVkZSA8bGludXgvb2ZfZ3JhcGguaD4KPiAgI2luY2x1ZGUgPGxpbnV4L3BtLmg+
+Cj4gIAo+IC0jaW5jbHVkZSA8ZHJtL2RybV9wYW5lbC5oPgo+ICAjaW5jbHVkZSA8ZHJtL2RybVAu
+aD4KPiAgI2luY2x1ZGUgPGRybS9kcm1fY3J0Yy5oPgo+ICAjaW5jbHVkZSA8ZHJtL2RybV9taXBp
+X2RzaS5oPgo+IC0tIAo+IDEuOC4zLjEKPiAKCi0tIApEYW5pZWwgVmV0dGVyClNvZnR3YXJlIEVu
+Z2luZWVyLCBJbnRlbCBDb3Jwb3JhdGlvbgpodHRwOi8vYmxvZy5mZndsbC5jaApfX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpOb3V2ZWF1IG1haWxpbmcgbGlz
+dApOb3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9w
+Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL25vdXZlYXU=
