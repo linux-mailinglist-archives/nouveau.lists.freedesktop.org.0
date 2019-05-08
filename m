@@ -2,53 +2,46 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id EFDB21803F
-	for <lists+nouveau@lfdr.de>; Wed,  8 May 2019 21:10:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C2FB3181ED
+	for <lists+nouveau@lfdr.de>; Thu,  9 May 2019 00:12:13 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id EB0E5892C1;
-	Wed,  8 May 2019 19:10:43 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D5CB2897E4;
+	Wed,  8 May 2019 22:12:10 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-qk1-f196.google.com (mail-qk1-f196.google.com
- [209.85.222.196])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B4C4E892C1
- for <nouveau@lists.freedesktop.org>; Wed,  8 May 2019 19:10:42 +0000 (UTC)
-Received: by mail-qk1-f196.google.com with SMTP id d4so1307778qkc.9
- for <nouveau@lists.freedesktop.org>; Wed, 08 May 2019 12:10:42 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
- :references:organization:user-agent:mime-version
- :content-transfer-encoding;
- bh=vV003PLEaBn/KG12s5VcOX/aojC+TH41Cbg8YZMkcAk=;
- b=GqJuQ5TmAHtLvqSgp4V3JZtb9jnxc2vOVXs2Rq/0DMYP7yyWNOEQKcsZVZ0SBFSsGN
- Ji8ARFVyfvvquypyjEwUyHWL6O0qk5eyeJgtG0jib88J/gjbEbH2emHmEOo952TrOeh4
- 5O4RsiF8JQPcFOXUsuIfCB99uFMYP1l0qMEK4NcZmiJ1ToP7lkkv49CsQz3rGiH8l0tz
- 7svczX6dCBLLnvwoD+Yvjaznq/raMmCJ9mURnqdcBmYWh6tLikIFROKoBX0d7LKGxgZw
- 0744g4uFsgBomIOZduvePhzKCjoL5aPDIfQkcDzBhjRiWfLHZoH0f1WvxMb0e7F+ziF+
- HFpw==
-X-Gm-Message-State: APjAAAWfUOoB3XQsYuRzUDPEIsxLpNiBhQoVTUwMZLXV+as6CbgNH10Z
- mPftcAJYtoLvf8g6fW6IkB/snQ==
-X-Google-Smtp-Source: APXvYqy14RkpbSqH0QpporGNEQqNp01BEXkPh0TIm1hUbOOlmY939xb27+DObgfY6FHEEA1VBD+67w==
-X-Received: by 2002:a05:620a:15fb:: with SMTP id
- p27mr30212701qkm.286.1557342641870; 
- Wed, 08 May 2019 12:10:41 -0700 (PDT)
-Received: from dhcp-10-20-1-11.bss.redhat.com ([144.121.20.162])
- by smtp.gmail.com with ESMTPSA id t55sm12018762qth.59.2019.05.08.12.10.40
- (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
- Wed, 08 May 2019 12:10:41 -0700 (PDT)
-Message-ID: <70bd607ac14d19b023834853a44af40d9dee1942.camel@redhat.com>
-From: Lyude Paul <lyude@redhat.com>
-To: Karol Herbst <kherbst@redhat.com>, nouveau@lists.freedesktop.org
-Date: Wed, 08 May 2019 15:10:40 -0400
-In-Reply-To: <20190507201245.9295-2-kherbst@redhat.com>
-References: <20190507201245.9295-1-kherbst@redhat.com>
- <20190507201245.9295-2-kherbst@redhat.com>
-Organization: Red Hat
-User-Agent: Evolution 3.30.5 (3.30.5-1.fc29) 
+Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
+ [131.252.210.165])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 3A119897E4
+ for <nouveau@lists.freedesktop.org>; Wed,  8 May 2019 22:12:09 +0000 (UTC)
+Received: by culpepper.freedesktop.org (Postfix, from userid 33)
+ id 26E1C7215A; Wed,  8 May 2019 22:12:09 +0000 (UTC)
+From: bugzilla-daemon@freedesktop.org
+To: nouveau@lists.freedesktop.org
+Date: Wed, 08 May 2019 22:12:09 +0000
+X-Bugzilla-Reason: QAcontact AssignedTo
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: None
+X-Bugzilla-Product: Mesa
+X-Bugzilla-Component: Drivers/DRI/nouveau
+X-Bugzilla-Version: 19.0
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: critical
+X-Bugzilla-Who: Linuxfreak@gmx.at
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: medium
+X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: bug_severity
+Message-ID: <bug-110572-8800-klTPUanwl3@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-110572-8800@http.bugs.freedesktop.org/>
+References: <bug-110572-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-Subject: Re: [Nouveau] [PATCH v2 1/4] drm: don't set the pci power state if
- the pci subsystem handles the ACPI bits
+Subject: [Nouveau] [Bug 110572] System Crash: nouveau 0000:08:00.0: gr:
+ PGRAPH TLB flush idle timeout fail and nouveau 0000:08:00.0: mmu: ce0 mmu
+ invalidate timeout
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -60,96 +53,98 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: linux-pci@vger.kernel.org, Bjorn Helgaas <helgaas@kernel.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1708793271=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-UmV2aWV3ZWQtYnk6IEx5dWRlIFBhdWwgPGx5dWRlQHJlZGhhdC5jb20+CgpPbiBUdWUsIDIwMTkt
-MDUtMDcgYXQgMjI6MTIgKzAyMDAsIEthcm9sIEhlcmJzdCB3cm90ZToKPiB2MjogcmV3b3JrIGRl
-dGVjdGlvbiBvZiBpZiBOb3V2ZWF1IGNhbGxpbmcgYSBEU00gbWV0aG9kIG9yIG5vdAo+IAo+IFNp
-Z25lZC1vZmYtYnk6IEthcm9sIEhlcmJzdCA8a2hlcmJzdEByZWRoYXQuY29tPgo+IC0tLQo+ICBk
-cm0vbm91dmVhdS9ub3V2ZWF1X2FjcGkuYyB8ICA3ICsrKysrKy0KPiAgZHJtL25vdXZlYXUvbm91
-dmVhdV9hY3BpLmggfCAgMiArKwo+ICBkcm0vbm91dmVhdS9ub3V2ZWF1X2RybS5jICB8IDE0ICsr
-KysrKysrKysrLS0tCj4gIGRybS9ub3V2ZWF1L25vdXZlYXVfZHJ2LmggIHwgIDIgKysKPiAgNCBm
-aWxlcyBjaGFuZ2VkLCAyMSBpbnNlcnRpb25zKCspLCA0IGRlbGV0aW9ucygtKQo+IAo+IGRpZmYg
-LS1naXQgYS9kcm0vbm91dmVhdS9ub3V2ZWF1X2FjcGkuYyBiL2RybS9ub3V2ZWF1L25vdXZlYXVf
-YWNwaS5jCj4gaW5kZXggZmZiMTk1ODUuLjkyZGZjOTAwIDEwMDY0NAo+IC0tLSBhL2RybS9ub3V2
-ZWF1L25vdXZlYXVfYWNwaS5jCj4gKysrIGIvZHJtL25vdXZlYXUvbm91dmVhdV9hY3BpLmMKPiBA
-QCAtMzU4LDYgKzM1OCwxMiBAQCB2b2lkIG5vdXZlYXVfcmVnaXN0ZXJfZHNtX2hhbmRsZXIodm9p
-ZCkKPiAgCXZnYV9zd2l0Y2hlcm9vX3JlZ2lzdGVyX2hhbmRsZXIoJm5vdXZlYXVfZHNtX2hhbmRs
-ZXIsIDApOwo+ICB9Cj4gIAo+ICtib29sIG5vdXZlYXVfcnVucG1fY2FsbHNfZHNtKHZvaWQpCj4g
-K3sKPiArCXJldHVybiBub3V2ZWF1X2RzbV9wcml2Lm9wdGltdXNfZGV0ZWN0ZWQgJiYKPiArCQkh
-bm91dmVhdV9kc21fcHJpdi5vcHRpbXVzX3NraXBfZHNtOwo+ICt9Cj4gKwo+ICAvKiBNdXN0IGJl
-IGNhbGxlZCBmb3IgT3B0aW11cyBtb2RlbHMgYmVmb3JlIHRoZSBjYXJkIGNhbiBiZSB0dXJuZWQg
-b2ZmICovCj4gIHZvaWQgbm91dmVhdV9zd2l0Y2hlcm9vX29wdGltdXNfZHNtKHZvaWQpCj4gIHsK
-PiBAQCAtMzcxLDcgKzM3Nyw2IEBAIHZvaWQgbm91dmVhdV9zd2l0Y2hlcm9vX29wdGltdXNfZHNt
-KHZvaWQpCj4gIAo+ICAJbm91dmVhdV9vcHRpbXVzX2RzbShub3V2ZWF1X2RzbV9wcml2LmRoYW5k
-bGUsCj4gTk9VVkVBVV9EU01fT1BUSU1VU19DQVBTLAo+ICAJCU5PVVZFQVVfRFNNX09QVElNVVNf
-U0VUX1BPV0VSRE9XTiwgJnJlc3VsdCk7Cj4gLQo+ICB9Cj4gIAo+ICB2b2lkIG5vdXZlYXVfdW5y
-ZWdpc3Rlcl9kc21faGFuZGxlcih2b2lkKQo+IGRpZmYgLS1naXQgYS9kcm0vbm91dmVhdS9ub3V2
-ZWF1X2FjcGkuaCBiL2RybS9ub3V2ZWF1L25vdXZlYXVfYWNwaS5oCj4gaW5kZXggYjg2Mjk0ZmMu
-LjBmNWQ3YWEwIDEwMDY0NAo+IC0tLSBhL2RybS9ub3V2ZWF1L25vdXZlYXVfYWNwaS5oCj4gKysr
-IGIvZHJtL25vdXZlYXUvbm91dmVhdV9hY3BpLmgKPiBAQCAtMTMsNiArMTMsNyBAQCB2b2lkIG5v
-dXZlYXVfc3dpdGNoZXJvb19vcHRpbXVzX2RzbSh2b2lkKTsKPiAgaW50IG5vdXZlYXVfYWNwaV9n
-ZXRfYmlvc19jaHVuayh1aW50OF90ICpiaW9zLCBpbnQgb2Zmc2V0LCBpbnQgbGVuKTsKPiAgYm9v
-bCBub3V2ZWF1X2FjcGlfcm9tX3N1cHBvcnRlZChzdHJ1Y3QgZGV2aWNlICopOwo+ICB2b2lkICpu
-b3V2ZWF1X2FjcGlfZWRpZChzdHJ1Y3QgZHJtX2RldmljZSAqLCBzdHJ1Y3QgZHJtX2Nvbm5lY3Rv
-ciAqKTsKPiArYm9vbCBub3V2ZWF1X3J1bnBtX2NhbGxzX2RzbSh2b2lkKTsKPiAgI2Vsc2UKPiAg
-c3RhdGljIGlubGluZSBib29sIG5vdXZlYXVfaXNfb3B0aW11cyh2b2lkKSB7IHJldHVybiBmYWxz
-ZTsgfTsKPiAgc3RhdGljIGlubGluZSBib29sIG5vdXZlYXVfaXNfdjFfZHNtKHZvaWQpIHsgcmV0
-dXJuIGZhbHNlOyB9Owo+IEBAIC0yMiw2ICsyMyw3IEBAIHN0YXRpYyBpbmxpbmUgdm9pZCBub3V2
-ZWF1X3N3aXRjaGVyb29fb3B0aW11c19kc20odm9pZCkge30KPiAgc3RhdGljIGlubGluZSBib29s
-IG5vdXZlYXVfYWNwaV9yb21fc3VwcG9ydGVkKHN0cnVjdCBkZXZpY2UgKmRldikgeyByZXR1cm4K
-PiBmYWxzZTsgfQo+ICBzdGF0aWMgaW5saW5lIGludCBub3V2ZWF1X2FjcGlfZ2V0X2Jpb3NfY2h1
-bmsodWludDhfdCAqYmlvcywgaW50IG9mZnNldCwKPiBpbnQgbGVuKSB7IHJldHVybiAtRUlOVkFM
-OyB9Cj4gIHN0YXRpYyBpbmxpbmUgdm9pZCAqbm91dmVhdV9hY3BpX2VkaWQoc3RydWN0IGRybV9k
-ZXZpY2UgKmRldiwgc3RydWN0Cj4gZHJtX2Nvbm5lY3RvciAqY29ubmVjdG9yKSB7IHJldHVybiBO
-VUxMOyB9Cj4gK3N0YXRpYyBpbmxpbmUgYm9vbCBub3V2ZWF1X3J1bnBtX2NhbGxzX2RzbSh2b2lk
-KSB7IHJldHVybiBmYWxzZTsgfQo+ICAjZW5kaWYKPiAgCj4gICNlbmRpZgo+IGRpZmYgLS1naXQg
-YS9kcm0vbm91dmVhdS9ub3V2ZWF1X2RybS5jIGIvZHJtL25vdXZlYXUvbm91dmVhdV9kcm0uYwo+
-IGluZGV4IDUwMjAyNjViLi4wOWU2OGU2MSAxMDA2NDQKPiAtLS0gYS9kcm0vbm91dmVhdS9ub3V2
-ZWF1X2RybS5jCj4gKysrIGIvZHJtL25vdXZlYXUvbm91dmVhdV9kcm0uYwo+IEBAIC01NTYsNiAr
-NTU2LDcgQEAgbm91dmVhdV9kcm1fZGV2aWNlX2luaXQoc3RydWN0IGRybV9kZXZpY2UgKmRldikK
-PiAgCW5vdXZlYXVfZmJjb25faW5pdChkZXYpOwo+ICAJbm91dmVhdV9sZWRfaW5pdChkZXYpOwo+
-ICAKPiArCWRybS0+cnVucG1fZHNtID0gbm91dmVhdV9ydW5wbV9jYWxsc19kc20oKTsKPiAgCWlm
-IChub3V2ZWF1X3Btb3BzX3J1bnRpbWUoKSkgewo+ICAJCXBtX3J1bnRpbWVfdXNlX2F1dG9zdXNw
-ZW5kKGRldi0+ZGV2KTsKPiAgCQlwbV9ydW50aW1lX3NldF9hdXRvc3VzcGVuZF9kZWxheShkZXYt
-PmRldiwgNTAwMCk7Cj4gQEAgLTkwMyw2ICs5MDQsNyBAQCBub3V2ZWF1X3Btb3BzX3J1bnRpbWVf
-c3VzcGVuZChzdHJ1Y3QgZGV2aWNlICpkZXYpCj4gIHsKPiAgCXN0cnVjdCBwY2lfZGV2ICpwZGV2
-ID0gdG9fcGNpX2RldihkZXYpOwo+ICAJc3RydWN0IGRybV9kZXZpY2UgKmRybV9kZXYgPSBwY2lf
-Z2V0X2RydmRhdGEocGRldik7Cj4gKwlzdHJ1Y3Qgbm91dmVhdV9kcm0gKmRybSA9IG5vdXZlYXVf
-ZHJtKGRybV9kZXYpOwo+ICAJaW50IHJldDsKPiAgCj4gIAlpZiAoIW5vdXZlYXVfcG1vcHNfcnVu
-dGltZSgpKSB7Cj4gQEAgLTkxMCwxMiArOTEyLDE1IEBAIG5vdXZlYXVfcG1vcHNfcnVudGltZV9z
-dXNwZW5kKHN0cnVjdCBkZXZpY2UgKmRldikKPiAgCQlyZXR1cm4gLUVCVVNZOwo+ICAJfQo+ICAK
-PiArCWRybV9kZXYtPnN3aXRjaF9wb3dlcl9zdGF0ZSA9IERSTV9TV0lUQ0hfUE9XRVJfQ0hBTkdJ
-Tkc7Cj4gIAlub3V2ZWF1X3N3aXRjaGVyb29fb3B0aW11c19kc20oKTsKPiAgCXJldCA9IG5vdXZl
-YXVfZG9fc3VzcGVuZChkcm1fZGV2LCB0cnVlKTsKPiAgCXBjaV9zYXZlX3N0YXRlKHBkZXYpOwo+
-ICAJcGNpX2Rpc2FibGVfZGV2aWNlKHBkZXYpOwo+ICAJcGNpX2lnbm9yZV9ob3RwbHVnKHBkZXYp
-Owo+IC0JcGNpX3NldF9wb3dlcl9zdGF0ZShwZGV2LCBQQ0lfRDNjb2xkKTsKPiArCWlmIChkcm0t
-PnJ1bnBtX2RzbSkKPiArCQlwY2lfc2V0X3Bvd2VyX3N0YXRlKHBkZXYsIFBDSV9EM2NvbGQpOwo+
-ICsKPiAgCWRybV9kZXYtPnN3aXRjaF9wb3dlcl9zdGF0ZSA9IERSTV9TV0lUQ0hfUE9XRVJfRFlO
-QU1JQ19PRkY7Cj4gIAlyZXR1cm4gcmV0Owo+ICB9Cj4gQEAgLTkyNSw3ICs5MzAsOCBAQCBub3V2
-ZWF1X3Btb3BzX3J1bnRpbWVfcmVzdW1lKHN0cnVjdCBkZXZpY2UgKmRldikKPiAgewo+ICAJc3Ry
-dWN0IHBjaV9kZXYgKnBkZXYgPSB0b19wY2lfZGV2KGRldik7Cj4gIAlzdHJ1Y3QgZHJtX2Rldmlj
-ZSAqZHJtX2RldiA9IHBjaV9nZXRfZHJ2ZGF0YShwZGV2KTsKPiAtCXN0cnVjdCBudmlmX2Rldmlj
-ZSAqZGV2aWNlID0gJm5vdXZlYXVfZHJtKGRybV9kZXYpLT5jbGllbnQuZGV2aWNlOwo+ICsJc3Ry
-dWN0IG5vdXZlYXVfZHJtICpkcm0gPSBub3V2ZWF1X2RybShkcm1fZGV2KTsKPiArCXN0cnVjdCBu
-dmlmX2RldmljZSAqZGV2aWNlID0gJmRybS0+Y2xpZW50LmRldmljZTsKPiAgCWludCByZXQ7Cj4g
-IAo+ICAJaWYgKCFub3V2ZWF1X3Btb3BzX3J1bnRpbWUoKSkgewo+IEBAIC05MzMsNyArOTM5LDkg
-QEAgbm91dmVhdV9wbW9wc19ydW50aW1lX3Jlc3VtZShzdHJ1Y3QgZGV2aWNlICpkZXYpCj4gIAkJ
-cmV0dXJuIC1FQlVTWTsKPiAgCX0KPiAgCj4gLQlwY2lfc2V0X3Bvd2VyX3N0YXRlKHBkZXYsIFBD
-SV9EMCk7Cj4gKwlkcm1fZGV2LT5zd2l0Y2hfcG93ZXJfc3RhdGUgPSBEUk1fU1dJVENIX1BPV0VS
-X0NIQU5HSU5HOwo+ICsJaWYgKGRybS0+cnVucG1fZHNtKQo+ICsJCXBjaV9zZXRfcG93ZXJfc3Rh
-dGUocGRldiwgUENJX0QwKTsKPiAgCXBjaV9yZXN0b3JlX3N0YXRlKHBkZXYpOwo+ICAJcmV0ID0g
-cGNpX2VuYWJsZV9kZXZpY2UocGRldik7Cj4gIAlpZiAocmV0KQo+IGRpZmYgLS1naXQgYS9kcm0v
-bm91dmVhdS9ub3V2ZWF1X2Rydi5oIGIvZHJtL25vdXZlYXUvbm91dmVhdV9kcnYuaAo+IGluZGV4
-IGRhODQ3MjQ0Li45NDE2MDBlOSAxMDA2NDQKPiAtLS0gYS9kcm0vbm91dmVhdS9ub3V2ZWF1X2Ry
-di5oCj4gKysrIGIvZHJtL25vdXZlYXUvbm91dmVhdV9kcnYuaAo+IEBAIC0yMTQsNiArMjE0LDgg
-QEAgc3RydWN0IG5vdXZlYXVfZHJtIHsKPiAgCXN0cnVjdCBub3V2ZWF1X3N2bSAqc3ZtOwo+ICAK
-PiAgCXN0cnVjdCBub3V2ZWF1X2RtZW0gKmRtZW07Cj4gKwo+ICsJYm9vbCBydW5wbV9kc207Cj4g
-IH07Cj4gIAo+ICBzdGF0aWMgaW5saW5lIHN0cnVjdCBub3V2ZWF1X2RybSAqCi0tIApDaGVlcnMs
-CglMeXVkZSBQYXVsCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fXwpOb3V2ZWF1IG1haWxpbmcgbGlzdApOb3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpo
-dHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL25vdXZlYXU=
+
+--===============1708793271==
+Content-Type: multipart/alternative; boundary="15573535290.8d4a.14411"
+Content-Transfer-Encoding: 7bit
+
+
+--15573535290.8d4a.14411
+Date: Wed, 8 May 2019 22:12:09 +0000
+MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+https://bugs.freedesktop.org/show_bug.cgi?id=3D110572
+
+Linux Freak <Linuxfreak@gmx.at> changed:
+
+           What    |Removed                     |Added
+----------------------------------------------------------------------------
+           Severity|major                       |critical
+
+--=20
+You are receiving this mail because:
+You are the QA Contact for the bug.
+You are the assignee for the bug.=
+
+--15573535290.8d4a.14411
+Date: Wed, 8 May 2019 22:12:09 +0000
+MIME-Version: 1.0
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+<html>
+    <head>
+      <base href=3D"https://bugs.freedesktop.org/">
+    </head>
+    <body><span class=3D"vcard"><a class=3D"email" href=3D"mailto:Linuxfrea=
+k&#64;gmx.at" title=3D"Linux Freak &lt;Linuxfreak&#64;gmx.at&gt;"> <span cl=
+ass=3D"fn">Linux Freak</span></a>
+</span> changed
+          <a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - System Crash: nouveau 0000:08:00.0: gr: PGRAPH TLB flush =
+idle timeout fail and nouveau 0000:08:00.0: mmu: ce0 mmu invalidate timeout"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110572">bug 11057=
+2</a>
+          <br>
+             <table border=3D"1" cellspacing=3D"0" cellpadding=3D"8">
+          <tr>
+            <th>What</th>
+            <th>Removed</th>
+            <th>Added</th>
+          </tr>
+
+         <tr>
+           <td style=3D"text-align:right;">Severity</td>
+           <td>major
+           </td>
+           <td>critical
+           </td>
+         </tr></table>
+      <p>
+      </p>
+
+
+      <hr>
+      <span>You are receiving this mail because:</span>
+
+      <ul>
+          <li>You are the QA Contact for the bug.</li>
+          <li>You are the assignee for the bug.</li>
+      </ul>
+    </body>
+</html>=
+
+--15573535290.8d4a.14411--
+
+--===============1708793271==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
+YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
+cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============1708793271==--
