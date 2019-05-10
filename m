@@ -1,24 +1,24 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 29B411A163
-	for <lists+nouveau@lfdr.de>; Fri, 10 May 2019 18:25:09 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id C3C591A165
+	for <lists+nouveau@lfdr.de>; Fri, 10 May 2019 18:25:24 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id AE40A89E9E;
-	Fri, 10 May 2019 16:25:06 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 540A389F41;
+	Fri, 10 May 2019 16:25:23 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [131.252.210.165])
- by gabe.freedesktop.org (Postfix) with ESMTP id 647A089E9E
- for <nouveau@lists.freedesktop.org>; Fri, 10 May 2019 16:25:05 +0000 (UTC)
+ [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
+ by gabe.freedesktop.org (Postfix) with ESMTP id BC38489FA7
+ for <nouveau@lists.freedesktop.org>; Fri, 10 May 2019 16:25:22 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 5BAEA7215A; Fri, 10 May 2019 16:25:05 +0000 (UTC)
+ id B875B7215A; Fri, 10 May 2019 16:25:22 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Fri, 10 May 2019 16:25:05 +0000
-X-Bugzilla-Reason: QAcontact AssignedTo
+Date: Fri, 10 May 2019 16:25:22 +0000
+X-Bugzilla-Reason: AssignedTo QAcontact
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
 X-Bugzilla-Product: Mesa
@@ -26,14 +26,14 @@ X-Bugzilla-Component: Drivers/DRI/nouveau
 X-Bugzilla-Version: unspecified
 X-Bugzilla-Keywords: 
 X-Bugzilla-Severity: normal
-X-Bugzilla-Who: ak@axet.ru
+X-Bugzilla-Who: imirkin@alum.mit.edu
 X-Bugzilla-Status: NEW
 X-Bugzilla-Resolution: 
 X-Bugzilla-Priority: medium
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
 X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-110660-8800-1le4c3hL2C@http.bugs.freedesktop.org/>
+Message-ID: <bug-110660-8800-XtU7sJO1WM@http.bugs.freedesktop.org/>
 In-Reply-To: <bug-110660-8800@http.bugs.freedesktop.org/>
 References: <bug-110660-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
@@ -51,18 +51,18 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1794668320=="
+Content-Type: multipart/mixed; boundary="===============1969472218=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============1794668320==
-Content-Type: multipart/alternative; boundary="15575055050.D97ae9CAB.15068"
+--===============1969472218==
+Content-Type: multipart/alternative; boundary="15575055221.B8b137EA.15129"
 Content-Transfer-Encoding: 7bit
 
 
---15575055050.D97ae9CAB.15068
-Date: Fri, 10 May 2019 16:25:05 +0000
+--15575055221.B8b137EA.15129
+Date: Fri, 10 May 2019 16:25:22 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -71,18 +71,27 @@ Auto-Submitted: auto-generated
 
 https://bugs.freedesktop.org/show_bug.cgi?id=3D110660
 
---- Comment #11 from Alexey Kuznetsov <ak@axet.ru> ---
-some modes create GW like screen, some open arena screen. Non are working b=
-ut
-2880x1800
+--- Comment #12 from Ilia Mirkin <imirkin@alum.mit.edu> ---
+Can you try like one or two other ones just to confirm? You can do like "xr=
+andr
+-s xxxxx; sleep 5; xrandr -s 2880x1800" which will restore the old resoluti=
+on.
+
+You can tell nouveau to do the scaling itself by setting the scaling mode
+xrandr property to full. Something like
+
+xrandr --prop "Scaling Mode" "Full"
+
+I'm going on memory, so run "xrandr --props" to get the actual name of the
+property.
 
 --=20
 You are receiving this mail because:
-You are the QA Contact for the bug.
-You are the assignee for the bug.=
+You are the assignee for the bug.
+You are the QA Contact for the bug.=
 
---15575055050.D97ae9CAB.15068
-Date: Fri, 10 May 2019 16:25:05 +0000
+--15575055221.B8b137EA.15129
+Date: Fri, 10 May 2019 16:25:22 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -99,20 +108,30 @@ Auto-Submitted: auto-generated
             <b><a class=3D"bz_bug_link=20
           bz_status_NEW "
    title=3D"NEW - GeForce GT 750M Mac Edition fullscreen issues"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110660#c11">Comme=
-nt # 11</a>
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110660#c12">Comme=
+nt # 12</a>
               on <a class=3D"bz_bug_link=20
           bz_status_NEW "
    title=3D"NEW - GeForce GT 750M Mac Edition fullscreen issues"
    href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110660">bug 11066=
 0</a>
               from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
-ak&#64;axet.ru" title=3D"Alexey Kuznetsov &lt;ak&#64;axet.ru&gt;"> <span cl=
-ass=3D"fn">Alexey Kuznetsov</span></a>
+imirkin&#64;alum.mit.edu" title=3D"Ilia Mirkin &lt;imirkin&#64;alum.mit.edu=
+&gt;"> <span class=3D"fn">Ilia Mirkin</span></a>
 </span></b>
-        <pre>some modes create GW like screen, some open arena screen. Non =
-are working but
-2880x1800</pre>
+        <pre>Can you try like one or two other ones just to confirm? You ca=
+n do like &quot;xrandr
+-s xxxxx; sleep 5; xrandr -s 2880x1800&quot; which will restore the old res=
+olution.
+
+You can tell nouveau to do the scaling itself by setting the scaling mode
+xrandr property to full. Something like
+
+xrandr --prop &quot;Scaling Mode&quot; &quot;Full&quot;
+
+I'm going on memory, so run &quot;xrandr --props&quot; to get the actual na=
+me of the
+property.</pre>
         </div>
       </p>
 
@@ -121,15 +140,15 @@ are working but
       <span>You are receiving this mail because:</span>
 
       <ul>
-          <li>You are the QA Contact for the bug.</li>
           <li>You are the assignee for the bug.</li>
+          <li>You are the QA Contact for the bug.</li>
       </ul>
     </body>
 </html>=
 
---15575055050.D97ae9CAB.15068--
+--15575055221.B8b137EA.15129--
 
---===============1794668320==
+--===============1969472218==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -139,4 +158,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============1794668320==--
+--===============1969472218==--
