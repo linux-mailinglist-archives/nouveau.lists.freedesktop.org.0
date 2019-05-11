@@ -2,57 +2,46 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B1A7B1ADAD
-	for <lists+nouveau@lfdr.de>; Sun, 12 May 2019 19:57:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6041A1A906
+	for <lists+nouveau@lfdr.de>; Sat, 11 May 2019 20:21:35 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E43B2896C7;
-	Sun, 12 May 2019 17:57:45 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 61822893CB;
+	Sat, 11 May 2019 18:21:33 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-lj1-x241.google.com (mail-lj1-x241.google.com
- [IPv6:2a00:1450:4864:20::241])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A702389AB7;
- Sat, 11 May 2019 17:09:57 +0000 (UTC)
-Received: by mail-lj1-x241.google.com with SMTP id j24so6806606ljg.1;
- Sat, 11 May 2019 10:09:57 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id;
- bh=jc2sq67GHfkt8a6DfX5BD5jFiy9VUsyYysgcb+GSqdY=;
- b=glMBKa1JTVDPzxUdfRLjLwLcEzPa2Os+VzgMnRhHMBcc6FBNriYbXslpdmFDxaRgYF
- 12D2aZqCQQWpTqQGw+F8gbuxtPfRaDizqMn+7wVUYIMeduIMxuqM+GA4ABY1yzZ6Uykf
- 7m2FYakNu7aYf9y1VxA6wcLWxLEf349+VtQw4539qNjngrSsKgEeNuy7yxl8rlCD4Y1f
- S0DBMcUn5G+3mgPVq2FIgQnyoUyCkGxw/IBlJb3EoliHzcQ4pkk0HIPtQ7i7OPYml0mn
- C2aYPR9JBn9aFabK5/kpdxhAnxvVMvZWku2fyfYCRbnBbxMIp183VvZslE0niK9QY7M3
- 6g1w==
-X-Gm-Message-State: APjAAAUyxmgcOPFzc1+sa848MBNKGHy5ArzRGmmUmLZXsMRcr6lqqm2y
- rPQk0/cWGSwUM44+bNXBmds=
-X-Google-Smtp-Source: APXvYqwnjpEzzRU3HvIsOvN231lauKyHOahUPEE74FihBBsOYI5tc2MO4D7+9JeAvRMKphEFsn9qaA==
-X-Received: by 2002:a2e:a0c9:: with SMTP id f9mr9127842ljm.62.1557594596093;
- Sat, 11 May 2019 10:09:56 -0700 (PDT)
-Received: from localhost.localdomain
- (c-e295e355.03-206-616c6b1.bbcust.telenor.se. [85.227.149.226])
- by smtp.googlemail.com with ESMTPSA id n12sm2469661lfk.95.2019.05.11.10.09.54
- (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
- Sat, 11 May 2019 10:09:55 -0700 (PDT)
-From: Peteris Rudzusiks <peteris.rudzusiks@gmail.com>
-To: Ben Skeggs <bskeggs@redhat.com>
-Date: Sat, 11 May 2019 19:08:31 +0200
-Message-Id: <20190511170831.25645-1-peteris.rudzusiks@gmail.com>
-X-Mailer: git-send-email 2.17.1
-X-Mailman-Approved-At: Sun, 12 May 2019 17:57:45 +0000
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id;
- bh=jc2sq67GHfkt8a6DfX5BD5jFiy9VUsyYysgcb+GSqdY=;
- b=PGAhBB2Ddzhp7Fbraaf0OTvMIAxsRPyrmCr1aDic2pAh4DeV3BdwYJyBz5nzZf1jtm
- FfWzqIzCl253cSd6+Wsltx3JFrdqUeG7iKLROkC7eIjn/JfGqLfwQM5Ds+ep37GWzGLU
- brSCeNShKprP0+3OPOL29Vkbv/u8XJVA0CXDprmjpFbm8dbMsVRUKAT2P/ug/ZTRoZUO
- VIz9qGuX19kgep6iNrQuoVV3WeJC/tdgZir0e2/fJ3FHYEHK8Ae5GQrR5ywfXAOFSCO3
- b18MPxdqTcvpvwMJLfG0bJWsww/+ykZgNE8cckjvg9xTza//lRk3SrmTvdY+9qnK57qA
- zMVA==
-Subject: [Nouveau] [PATCH] drm/nouveau: fix duplication of nv50_head_atom
- struct
+Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
+ [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 941B6893CB
+ for <nouveau@lists.freedesktop.org>; Sat, 11 May 2019 18:21:32 +0000 (UTC)
+Received: by culpepper.freedesktop.org (Postfix, from userid 33)
+ id 88A8A721CD; Sat, 11 May 2019 18:21:32 +0000 (UTC)
+From: bugzilla-daemon@freedesktop.org
+To: nouveau@lists.freedesktop.org
+Date: Sat, 11 May 2019 18:21:32 +0000
+X-Bugzilla-Reason: QAcontact AssignedTo
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: None
+X-Bugzilla-Product: Mesa
+X-Bugzilla-Component: Drivers/DRI/nouveau
+X-Bugzilla-Version: 19.0
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: critical
+X-Bugzilla-Who: Linuxfreak@gmx.at
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: high
+X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: attachments.created
+Message-ID: <bug-110572-8800-7Lab7356IA@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-110572-8800@http.bugs.freedesktop.org/>
+References: <bug-110572-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+MIME-Version: 1.0
+Subject: [Nouveau] [Bug 110572] Regularly System Crash: (ca. 1 hour) nouveau
+ 0000:08:00.0: gr: PGRAPH TLB flush idle timeout fail and nouveau
+ 0000:08:00.0: mmu: ce0 mmu invalidate timeout
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -64,44 +53,182 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org,
- Peteris Rudzusiks <peteris.rudzusiks@gmail.com>,
- dri-devel@lists.freedesktop.org
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1936096574=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-bnY1MF9oZWFkX2F0b21pY19kdXBsaWNhdGVfc3RhdGUoKSBtYWtlcyBhIGNvcHkgb2YgbnY1MF9o
-ZWFkX2F0b20Kc3RydWN0LiBUaGlzIHBhdGNoIGFkZHMgY29weWluZyBvZiBzdHJ1Y3QgbWVtYmVy
-IG5hbWVkICJvciIsIHdoaWNoCnByZXZpb3VzbHkgd2FzIGxlZnQgdW5pbml0aWFsaXplZCBpbiB0
-aGUgZHVwbGljYXRlZCBzdHJ1Y3R1cmUuCgpEdWUgdG8gdGhpcyBidWcsIGluY29ycmVjdCBuaHN5
-bmMgYW5kIG52c3luYyB2YWx1ZXMgd2VyZSBzb21ldGltZXMgdXNlZC4KSW4gbXkgcGFydGljdWxh
-ciBjYXNlLCB0aGF0IGxlYWQgdG8gYSBtaXNtYXRjaCBiZXR3ZWVuIHRoZSBvdXRwdXQKcmVzb2x1
-dGlvbiBvZiB0aGUgZ3JhcGhpY3MgZGV2aWNlIChHZUZvcmNlIEdUIDYzMCBPRU0pIGFuZCB0aGUg
-cmVwb3J0ZWQKaW5wdXQgc2lnbmFsIHJlc29sdXRpb24gb24gdGhlIGRpc3BsYXkuIHhyYW5kciBy
-ZXBvcnRlZCAxNjgweDEwNTAsIGJ1dAp0aGUgZGlzcGxheSByZXBvcnRlZCAxMjgweDEwMjQuIEFz
-IGEgcmVzdWx0IG9mIHRoaXMgbWlzbWF0Y2gsIHRoZSBvdXRwdXQKb24gdGhlIGRpc3BsYXkgbG9v
-a2VkIGxpa2UgaXQgd2FzIGNyb3BwZWQgKG9ubHkgcGFydCBvZiB0aGUgb3V0cHV0IHdhcwphY3R1
-YWxseSB2aXNpYmxlIG9uIHRoZSBkaXNwbGF5KS4KCmdpdCBiaXNlY3QgcG9pbnRlZCB0byBjb21t
-aXQgMmNhN2ZiNWMxY2M2ICgiZHJtL25vdXZlYXUva21zL252NTA6IGhhbmRsZQpTZXRDb250cm9s
-T3V0cHV0UmVzb3VyY2UgZnJvbSBoZWFkIiksIHdoaWNoIGFkZGVkIHRoZSBtZW1iZXIgIm9yIiB0
-bwpudjUwX2hlYWRfYXRvbSBzdHJ1Y3R1cmUsIGJ1dCBmb3Jnb3QgdG8gY29weSBpdCBpbgpudjUw
-X2hlYWRfYXRvbWljX2R1cGxpY2F0ZV9zdGF0ZSgpLgoKRml4ZXM6IDJjYTdmYjVjMWNjNiAoImRy
-bS9ub3V2ZWF1L2ttcy9udjUwOiBoYW5kbGUgU2V0Q29udHJvbE91dHB1dFJlc291cmNlIGZyb20g
-aGVhZCIpClNpZ25lZC1vZmYtYnk6IFBldGVyaXMgUnVkenVzaWtzIDxwZXRlcmlzLnJ1ZHp1c2lr
-c0BnbWFpbC5jb20+Ci0tLQogZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvZGlzcG52NTAvaGVhZC5j
-IHwgMSArCiAxIGZpbGUgY2hhbmdlZCwgMSBpbnNlcnRpb24oKykKCmRpZmYgLS1naXQgYS9kcml2
-ZXJzL2dwdS9kcm0vbm91dmVhdS9kaXNwbnY1MC9oZWFkLmMgYi9kcml2ZXJzL2dwdS9kcm0vbm91
-dmVhdS9kaXNwbnY1MC9oZWFkLmMKaW5kZXggMmU3YTBjMzQ3ZGRiLi5hZGNlNjJmNGUxOGYgMTAw
-NjQ0Ci0tLSBhL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L2Rpc3BudjUwL2hlYWQuYworKysgYi9k
-cml2ZXJzL2dwdS9kcm0vbm91dmVhdS9kaXNwbnY1MC9oZWFkLmMKQEAgLTQxMyw2ICs0MTMsNyBA
-QCBudjUwX2hlYWRfYXRvbWljX2R1cGxpY2F0ZV9zdGF0ZShzdHJ1Y3QgZHJtX2NydGMgKmNydGMp
-CiAJYXN5aC0+b3ZseSA9IGFybWgtPm92bHk7CiAJYXN5aC0+ZGl0aGVyID0gYXJtaC0+ZGl0aGVy
-OwogCWFzeWgtPnByb2NhbXAgPSBhcm1oLT5wcm9jYW1wOworCWFzeWgtPm9yID0gYXJtaC0+b3I7
-CiAJYXN5aC0+ZHAgPSBhcm1oLT5kcDsKIAlhc3loLT5jbHIubWFzayA9IDA7CiAJYXN5aC0+c2V0
-Lm1hc2sgPSAwOwotLSAKMi4xNy4xCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fXwpOb3V2ZWF1IG1haWxpbmcgbGlzdApOb3V2ZWF1QGxpc3RzLmZyZWVkZXNr
-dG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL25v
-dXZlYXU=
+
+--===============1936096574==
+Content-Type: multipart/alternative; boundary="15575988920.307480E.19117"
+Content-Transfer-Encoding: 7bit
+
+
+--15575988920.307480E.19117
+Date: Sat, 11 May 2019 18:21:32 +0000
+MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+https://bugs.freedesktop.org/show_bug.cgi?id=3D110572
+
+--- Comment #3 from Linux Freak <Linuxfreak@gmx.at> ---
+Created attachment 144236
+  --> https://bugs.freedesktop.org/attachment.cgi?id=3D144236&action=3Dedit
+a huge:    journalctl -p 4 -b -1   of the last crash
+
+A lot of hang up messages...
+
+e.g.
+Call Trace:
+Mai 11 19:58:16  kernel:  ? nvkm_ioctl_new+0x1a0/0x200 [nouveau]
+Call Trace:
+Mai 11 19:58:18  kernel:  nvkm_vmm_ptes_get_map+0x246/0x3f0 [nouveau]
+Call Trace:
+Mai 11 19:58:22  kernel:  nv50_vmm_flush+0x1f2/0x220 [nouveau]
+Call Trace:
+Mai 11 19:58:24  kernel:  nvkm_vmm_ptes_get_map+0x246/0x3f0 [nouveau]
+Call Trace:
+Mai 11 19:58:28  kernel:  nv50_vmm_flush+0x1f2/0x220 [nouveau]
+
+
+INFO: task kworker/u8:2:1002 blocked for more than 122 seconds.
+Mai 11 20:01:38  kernel:       Tainted: G        W         5.1.0-1-MANJARO =
+#1
+Mai 11 20:01:38  kernel: "echo 0 > /proc/sys/kernel/hung_task_timeout_secs"
+disables this message.
+Mai 11 20:01:38  kernel: Call Trace:
+Mai 11 20:01:38  kernel:  ? __schedule+0x30b/0x8b0
+Mai 11 20:01:38  kernel:  ? g84_fifo_uevent_init+0x1a/0x40 [nouveau]
+Mai 11 20:01:38  kernel:  schedule+0x32/0x80
+Mai 11 20:01:38  kernel:  schedule_timeout+0x311/0x4a0
+Mai 11 20:01:38  kernel:  ? nouveau_fence_is_signaled+0x39/0x40 [nouveau]
+Mai 11 20:01:38  kernel:  dma_fence_default_wait+0x204/0x280
+Mai 11 20:01:38  kernel:  ? dma_fence_wait_timeout+0x120/0x120
+Mai 11 20:01:38  kernel:  dma_fence_wait_timeout+0x105/0x120
+Mai 11 20:01:38  kernel:  drm_atomic_helper_wait_for_fences+0x38/0xc0
+[drm_kms_helper]
+Mai 11 20:01:38  kernel:  nv50_disp_atomic_commit_tail+0x72/0x690 [nouveau]
+Mai 11 20:01:38  kernel:  ? finish_task_switch+0x84/0x2d0
+Mai 11 20:01:38  kernel:  ? __switch_to_asm+0x40/0x70
+Mai 11 20:01:38  kernel:  process_one_work+0x1eb/0x410
+Mai 11 20:01:38  kernel:  worker_thread+0x2d/0x3d0
+Mai 11 20:01:38  kernel:  ? process_one_work+0x410/0x410
+Mai 11 20:01:38  kernel:  kthread+0x112/0x130
+Mai 11 20:01:38  kernel:  ? kthread_park+0x80/0x80
+Mai 11 20:01:38  kernel:  ret_from_fork+0x35/0x40
+
+--=20
+You are receiving this mail because:
+You are the QA Contact for the bug.
+You are the assignee for the bug.=
+
+--15575988920.307480E.19117
+Date: Sat, 11 May 2019 18:21:32 +0000
+MIME-Version: 1.0
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+<html>
+    <head>
+      <base href=3D"https://bugs.freedesktop.org/">
+    </head>
+    <body>
+      <p>
+        <div>
+            <b><a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - Regularly System Crash: (ca. 1 hour) nouveau 0000:08:00.0=
+: gr: PGRAPH TLB flush idle timeout fail and nouveau 0000:08:00.0: mmu: ce0=
+ mmu invalidate timeout"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110572#c3">Commen=
+t # 3</a>
+              on <a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - Regularly System Crash: (ca. 1 hour) nouveau 0000:08:00.0=
+: gr: PGRAPH TLB flush idle timeout fail and nouveau 0000:08:00.0: mmu: ce0=
+ mmu invalidate timeout"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110572">bug 11057=
+2</a>
+              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
+Linuxfreak&#64;gmx.at" title=3D"Linux Freak &lt;Linuxfreak&#64;gmx.at&gt;">=
+ <span class=3D"fn">Linux Freak</span></a>
+</span></b>
+        <pre>Created <span class=3D""><a href=3D"attachment.cgi?id=3D144236=
+" name=3D"attach_144236" title=3D"a huge:    journalctl -p 4 -b -1   of the=
+ last crash">attachment 144236</a> <a href=3D"attachment.cgi?id=3D144236&am=
+p;action=3Dedit" title=3D"a huge:    journalctl -p 4 -b -1   of the last cr=
+ash">[details]</a></span>
+a huge:    journalctl -p 4 -b -1   of the last crash
+
+A lot of hang up messages...
+
+e.g.
+Call Trace:
+Mai 11 19:58:16  kernel:  ? nvkm_ioctl_new+0x1a0/0x200 [nouveau]
+Call Trace:
+Mai 11 19:58:18  kernel:  nvkm_vmm_ptes_get_map+0x246/0x3f0 [nouveau]
+Call Trace:
+Mai 11 19:58:22  kernel:  nv50_vmm_flush+0x1f2/0x220 [nouveau]
+Call Trace:
+Mai 11 19:58:24  kernel:  nvkm_vmm_ptes_get_map+0x246/0x3f0 [nouveau]
+Call Trace:
+Mai 11 19:58:28  kernel:  nv50_vmm_flush+0x1f2/0x220 [nouveau]
+
+
+INFO: task kworker/u8:2:1002 blocked for more than 122 seconds.
+Mai 11 20:01:38  kernel:       Tainted: G        W         5.1.0-1-MANJARO =
+#1
+Mai 11 20:01:38  kernel: &quot;echo 0 &gt; /proc/sys/kernel/hung_task_timeo=
+ut_secs&quot;
+disables this message.
+Mai 11 20:01:38  kernel: Call Trace:
+Mai 11 20:01:38  kernel:  ? __schedule+0x30b/0x8b0
+Mai 11 20:01:38  kernel:  ? g84_fifo_uevent_init+0x1a/0x40 [nouveau]
+Mai 11 20:01:38  kernel:  schedule+0x32/0x80
+Mai 11 20:01:38  kernel:  schedule_timeout+0x311/0x4a0
+Mai 11 20:01:38  kernel:  ? nouveau_fence_is_signaled+0x39/0x40 [nouveau]
+Mai 11 20:01:38  kernel:  dma_fence_default_wait+0x204/0x280
+Mai 11 20:01:38  kernel:  ? dma_fence_wait_timeout+0x120/0x120
+Mai 11 20:01:38  kernel:  dma_fence_wait_timeout+0x105/0x120
+Mai 11 20:01:38  kernel:  drm_atomic_helper_wait_for_fences+0x38/0xc0
+[drm_kms_helper]
+Mai 11 20:01:38  kernel:  nv50_disp_atomic_commit_tail+0x72/0x690 [nouveau]
+Mai 11 20:01:38  kernel:  ? finish_task_switch+0x84/0x2d0
+Mai 11 20:01:38  kernel:  ? __switch_to_asm+0x40/0x70
+Mai 11 20:01:38  kernel:  process_one_work+0x1eb/0x410
+Mai 11 20:01:38  kernel:  worker_thread+0x2d/0x3d0
+Mai 11 20:01:38  kernel:  ? process_one_work+0x410/0x410
+Mai 11 20:01:38  kernel:  kthread+0x112/0x130
+Mai 11 20:01:38  kernel:  ? kthread_park+0x80/0x80
+Mai 11 20:01:38  kernel:  ret_from_fork+0x35/0x40</pre>
+        </div>
+      </p>
+
+
+      <hr>
+      <span>You are receiving this mail because:</span>
+
+      <ul>
+          <li>You are the QA Contact for the bug.</li>
+          <li>You are the assignee for the bug.</li>
+      </ul>
+    </body>
+</html>=
+
+--15575988920.307480E.19117--
+
+--===============1936096574==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
+YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
+cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============1936096574==--
