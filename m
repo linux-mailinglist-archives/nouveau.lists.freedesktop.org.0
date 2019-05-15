@@ -1,47 +1,66 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 510601EA65
-	for <lists+nouveau@lfdr.de>; Wed, 15 May 2019 10:46:45 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0C1C41F452
+	for <lists+nouveau@lfdr.de>; Wed, 15 May 2019 14:26:50 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D603E8935B;
-	Wed, 15 May 2019 08:46:43 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 892DB892FD;
+	Wed, 15 May 2019 12:26:48 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
- by gabe.freedesktop.org (Postfix) with ESMTP id 2B6B28935B
- for <nouveau@lists.freedesktop.org>; Wed, 15 May 2019 08:46:42 +0000 (UTC)
-Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 21DCE721CD; Wed, 15 May 2019 08:46:42 +0000 (UTC)
-From: bugzilla-daemon@freedesktop.org
-To: nouveau@lists.freedesktop.org
-Date: Wed, 15 May 2019 08:46:42 +0000
-X-Bugzilla-Reason: QAcontact AssignedTo
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: None
-X-Bugzilla-Product: Mesa
-X-Bugzilla-Component: Drivers/DRI/nouveau
-X-Bugzilla-Version: 19.0
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: critical
-X-Bugzilla-Who: Linuxfreak@gmx.at
-X-Bugzilla-Status: NEW
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: high
-X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: attachments.created
-Message-ID: <bug-110572-8800-JkwRfMypet@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-110572-8800@http.bugs.freedesktop.org/>
-References: <bug-110572-8800@http.bugs.freedesktop.org/>
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
+Received: from smtp.codeaurora.org (smtp.codeaurora.org [198.145.29.96])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id DA1C6892FD;
+ Wed, 15 May 2019 12:26:46 +0000 (UTC)
+Received: by smtp.codeaurora.org (Postfix, from userid 1000)
+ id AF6156086B; Wed, 15 May 2019 12:26:46 +0000 (UTC)
+X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
+ pdx-caf-mail.web.codeaurora.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.7 required=2.0 tests=ALL_TRUSTED,BAYES_00,
+ DKIM_INVALID,DKIM_SIGNED autolearn=no autolearn_force=no version=3.4.0
+Received: from [10.204.79.15]
+ (blr-c-bdr-fw-01_globalnat_allzones-outside.qualcomm.com [103.229.19.19])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (No client certificate requested)
+ (Authenticated sender: mojha@smtp.codeaurora.org)
+ by smtp.codeaurora.org (Postfix) with ESMTPSA id 4DF336072E;
+ Wed, 15 May 2019 12:26:41 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 smtp.codeaurora.org 4DF336072E
+To: Colin King <colin.king@canonical.com>, Ben Skeggs <bskeggs@redhat.com>,
+ David Airlie <airlied@linux.ie>, Daniel Vetter <daniel@ffwll.ch>,
+ dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org
+References: <20190514205701.5750-1-colin.king@canonical.com>
+From: Mukesh Ojha <mojha@codeaurora.org>
+Message-ID: <c214275e-912b-9cec-d0c1-4eadd07a100e@codeaurora.org>
+Date: Wed, 15 May 2019 17:56:40 +0530
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:60.0) Gecko/20100101
+ Thunderbird/60.6.1
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 110572] Regularly System Crash: (ca. 1 hour) nouveau
- 0000:08:00.0: gr: PGRAPH TLB flush idle timeout fail and nouveau
- 0000:08:00.0: mmu: ce0 mmu invalidate timeout
+In-Reply-To: <20190514205701.5750-1-colin.king@canonical.com>
+Content-Language: en-US
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=codeaurora.org; s=default; t=1557923206;
+ bh=Jq8r59j8L9cuyE+iEkCCfN3oZ7FkZj2PtazceDgQIjs=;
+ h=Subject:To:Cc:References:From:Date:In-Reply-To:From;
+ b=MoPgbp/Xauv8laEhwNTlkhgZ2bVtQ1U1SDf8IfsQqY4VSnd2bSnTWIriAbPiMcu76
+ Ycm+5nIoOdpmSiqxx4RE6/feZYh8xgI++0BVVMCFl5oLbuHKYkyMwCFXbNkPxVokLa
+ pYJpINMcVfPd1N/SbBZv3QTsV0W3Efs1ckc6aIQ0=
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=codeaurora.org; s=default; t=1557923206;
+ bh=Jq8r59j8L9cuyE+iEkCCfN3oZ7FkZj2PtazceDgQIjs=;
+ h=Subject:To:Cc:References:From:Date:In-Reply-To:From;
+ b=MoPgbp/Xauv8laEhwNTlkhgZ2bVtQ1U1SDf8IfsQqY4VSnd2bSnTWIriAbPiMcu76
+ Ycm+5nIoOdpmSiqxx4RE6/feZYh8xgI++0BVVMCFl5oLbuHKYkyMwCFXbNkPxVokLa
+ pYJpINMcVfPd1N/SbBZv3QTsV0W3Efs1ckc6aIQ0=
+X-Mailman-Original-Authentication-Results: pdx-caf-mail.web.codeaurora.org;
+ dmarc=none (p=none dis=none)
+ header.from=codeaurora.org
+X-Mailman-Original-Authentication-Results: pdx-caf-mail.web.codeaurora.org;
+ spf=none
+ smtp.mailfrom=mojha@codeaurora.org
+Subject: Re: [Nouveau] [PATCH] drm/nouveau/bios/init: fix spelling mistake
+ "CONDITON" -> "CONDITION"
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -53,107 +72,29 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0498513805=="
+Cc: kernel-janitors@vger.kernel.org, linux-kernel@vger.kernel.org
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-
---===============0498513805==
-Content-Type: multipart/alternative; boundary="15579100020.F00dacAb.30297"
-Content-Transfer-Encoding: 7bit
-
-
---15579100020.F00dacAb.30297
-Date: Wed, 15 May 2019 08:46:42 +0000
-MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-https://bugs.freedesktop.org/show_bug.cgi?id=3D110572
-
---- Comment #13 from Linux Freak <Linuxfreak@gmx.at> ---
-Created attachment 144279
-  --> https://bugs.freedesktop.org/attachment.cgi?id=3D144279&action=3Dedit
-crash 7, VLC Media Player running continuously playing music
-
-crash 7, VLC Media Player was set to continuously playing music, after cras=
-h,
-until pressing HW reset button.
-
---=20
-You are receiving this mail because:
-You are the QA Contact for the bug.
-You are the assignee for the bug.=
-
---15579100020.F00dacAb.30297
-Date: Wed, 15 May 2019 08:46:42 +0000
-MIME-Version: 1.0
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-<html>
-    <head>
-      <base href=3D"https://bugs.freedesktop.org/">
-    </head>
-    <body>
-      <p>
-        <div>
-            <b><a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - Regularly System Crash: (ca. 1 hour) nouveau 0000:08:00.0=
-: gr: PGRAPH TLB flush idle timeout fail and nouveau 0000:08:00.0: mmu: ce0=
- mmu invalidate timeout"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110572#c13">Comme=
-nt # 13</a>
-              on <a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - Regularly System Crash: (ca. 1 hour) nouveau 0000:08:00.0=
-: gr: PGRAPH TLB flush idle timeout fail and nouveau 0000:08:00.0: mmu: ce0=
- mmu invalidate timeout"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110572">bug 11057=
-2</a>
-              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
-Linuxfreak&#64;gmx.at" title=3D"Linux Freak &lt;Linuxfreak&#64;gmx.at&gt;">=
- <span class=3D"fn">Linux Freak</span></a>
-</span></b>
-        <pre>Created <span class=3D""><a href=3D"attachment.cgi?id=3D144279=
-" name=3D"attach_144279" title=3D"crash 7, VLC Media Player running continu=
-ously playing music">attachment 144279</a> <a href=3D"attachment.cgi?id=3D1=
-44279&amp;action=3Dedit" title=3D"crash 7, VLC Media Player running continu=
-ously playing music">[details]</a></span>
-crash 7, VLC Media Player running continuously playing music
-
-crash 7, VLC Media Player was set to continuously playing music, after cras=
-h,
-until pressing HW reset button.</pre>
-        </div>
-      </p>
-
-
-      <hr>
-      <span>You are receiving this mail because:</span>
-
-      <ul>
-          <li>You are the QA Contact for the bug.</li>
-          <li>You are the assignee for the bug.</li>
-      </ul>
-    </body>
-</html>=
-
---15579100020.F00dacAb.30297--
-
---===============0498513805==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
-YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
-cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
-
---===============0498513805==--
+Ck9uIDUvMTUvMjAxOSAyOjI3IEFNLCBDb2xpbiBLaW5nIHdyb3RlOgo+IEZyb206IENvbGluIElh
+biBLaW5nIDxjb2xpbi5raW5nQGNhbm9uaWNhbC5jb20+Cj4KPiBUaGVyZSBpcyBhIHNwZWxsaW5n
+IG1pc3Rha2UgaW4gYSB3YXJuaW5nIG1lc3NhZ2UuIEZpeCBpdC4KPgo+IFNpZ25lZC1vZmYtYnk6
+IENvbGluIElhbiBLaW5nIDxjb2xpbi5raW5nQGNhbm9uaWNhbC5jb20+ClJldmlld2VkLWJ5OiBN
+dWtlc2ggT2poYSA8bW9qaGFAY29kZWF1cm9yYS5vcmc+CgpDaGVlcnMsCi1NdWtlc2gKCj4gLS0t
+Cj4gICBkcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9udmttL3N1YmRldi9iaW9zL2luaXQuYyB8IDIg
+Ky0KPiAgIDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlvbigrKSwgMSBkZWxldGlvbigtKQo+Cj4g
+ZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L252a20vc3ViZGV2L2Jpb3MvaW5p
+dC5jIGIvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbnZrbS9zdWJkZXYvYmlvcy9pbml0LmMKPiBp
+bmRleCBlYzBlOWY3MjI0YjUuLjNmNGYyN2QxOTFhZSAxMDA2NDQKPiAtLS0gYS9kcml2ZXJzL2dw
+dS9kcm0vbm91dmVhdS9udmttL3N1YmRldi9iaW9zL2luaXQuYwo+ICsrKyBiL2RyaXZlcnMvZ3B1
+L2RybS9ub3V2ZWF1L252a20vc3ViZGV2L2Jpb3MvaW5pdC5jCj4gQEAgLTgzNCw3ICs4MzQsNyBA
+QCBpbml0X2dlbmVyaWNfY29uZGl0aW9uKHN0cnVjdCBudmJpb3NfaW5pdCAqaW5pdCkKPiAgIAkJ
+aW5pdF9leGVjX3NldChpbml0LCBmYWxzZSk7Cj4gICAJCWJyZWFrOwo+ICAgCWRlZmF1bHQ6Cj4g
+LQkJd2FybigiSU5JVF9HRU5FUklDX0NPTkRJVE9OOiB1bmtub3duIDB4JTAyeFxuIiwgY29uZCk7
+Cj4gKwkJd2FybigiSU5JVF9HRU5FUklDX0NPTkRJVElPTjogdW5rbm93biAweCUwMnhcbiIsIGNv
+bmQpOwo+ICAgCQlpbml0LT5vZmZzZXQgKz0gc2l6ZTsKPiAgIAkJYnJlYWs7Cj4gICAJfQpfX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpOb3V2ZWF1IG1haWxp
+bmcgbGlzdApOb3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVk
+ZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL25vdXZlYXU=
