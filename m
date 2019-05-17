@@ -1,46 +1,28 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id D4C2221A72
-	for <lists+nouveau@lfdr.de>; Fri, 17 May 2019 17:19:52 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3DFC822910
+	for <lists+nouveau@lfdr.de>; Sun, 19 May 2019 23:16:49 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D37D1898EA;
-	Fri, 17 May 2019 15:19:50 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id AD43C891AB;
+	Sun, 19 May 2019 21:16:47 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [131.252.210.165])
- by gabe.freedesktop.org (Postfix) with ESMTP id 59265898EA
- for <nouveau@lists.freedesktop.org>; Fri, 17 May 2019 15:19:50 +0000 (UTC)
-Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 4FE3872167; Fri, 17 May 2019 15:19:50 +0000 (UTC)
-From: bugzilla-daemon@freedesktop.org
+Received: from bhuna.collabora.co.uk (bhuna.collabora.co.uk [46.235.227.227])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 34BA089958
+ for <nouveau@lists.freedesktop.org>; Fri, 17 May 2019 17:38:27 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+ (Authenticated sender: mfilion) with ESMTPSA id E12F1281CB5
+Message-ID: <3cb930df216ed8b9666b1b8f5b939896f0d56f51.camel@collabora.com>
+From: Mark Filion <mark.filion@collabora.com>
 To: nouveau@lists.freedesktop.org
-Date: Fri, 17 May 2019 15:19:50 +0000
-X-Bugzilla-Reason: QAcontact AssignedTo
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: None
-X-Bugzilla-Product: Mesa
-X-Bugzilla-Component: Drivers/DRI/nouveau
-X-Bugzilla-Version: 18.2
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: critical
-X-Bugzilla-Who: timo.wiren@gmail.com
-X-Bugzilla-Status: NEW
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: medium
-X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-108500-8800-Abpzj7UxBC@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-108500-8800@http.bugs.freedesktop.org/>
-References: <bug-108500-8800@http.bugs.freedesktop.org/>
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
+Date: Fri, 17 May 2019 13:38:17 -0400
+Organization: Collabora Ltd.
+User-Agent: Evolution 3.32.1 (3.32.1-1.fc30) 
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 108500] Crash when creating a depth buffer on
- GeForce 320M
+X-Mailman-Approved-At: Sun, 19 May 2019 21:16:47 +0000
+Subject: [Nouveau] XDC 2019: Registration & Call for Proposals now open!
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -52,106 +34,47 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0449964652=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-
---===============0449964652==
-Content-Type: multipart/alternative; boundary="15581063900.ab1D43b.11786"
-Content-Transfer-Encoding: 7bit
-
-
---15581063900.ab1D43b.11786
-Date: Fri, 17 May 2019 15:19:50 +0000
-MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-https://bugs.freedesktop.org/show_bug.cgi?id=3D108500
-
---- Comment #12 from Timo Wiren <timo.wiren@gmail.com> ---
-(In reply to Ilia Mirkin from comment #11)
-
-> Timo - are you up to sending a change to fix the above in the kernel? If
-> not, I can do it.
-
-Well, I have never submitted a patch to the kernel before, but this is a go=
-od
-opportunity to learn the process :-). I'll try to make it happen in a few d=
-ays.
-
---=20
-You are receiving this mail because:
-You are the QA Contact for the bug.
-You are the assignee for the bug.=
-
---15581063900.ab1D43b.11786
-Date: Fri, 17 May 2019 15:19:50 +0000
-MIME-Version: 1.0
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-<html>
-    <head>
-      <base href=3D"https://bugs.freedesktop.org/">
-    </head>
-    <body>
-      <p>
-        <div>
-            <b><a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - Crash when creating a depth buffer on GeForce 320M"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D108500#c12">Comme=
-nt # 12</a>
-              on <a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - Crash when creating a depth buffer on GeForce 320M"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D108500">bug 10850=
-0</a>
-              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
-timo.wiren&#64;gmail.com" title=3D"Timo Wiren &lt;timo.wiren&#64;gmail.com&=
-gt;"> <span class=3D"fn">Timo Wiren</span></a>
-</span></b>
-        <pre>(In reply to Ilia Mirkin from <a href=3D"show_bug.cgi?id=3D108=
-500#c11">comment #11</a>)
-
-<span class=3D"quote">&gt; Timo - are you up to sending a change to fix the=
- above in the kernel? If
-&gt; not, I can do it.</span >
-
-Well, I have never submitted a patch to the kernel before, but this is a go=
-od
-opportunity to learn the process :-). I'll try to make it happen in a few d=
-ays.</pre>
-        </div>
-      </p>
-
-
-      <hr>
-      <span>You are receiving this mail because:</span>
-
-      <ul>
-          <li>You are the QA Contact for the bug.</li>
-          <li>You are the assignee for the bug.</li>
-      </ul>
-    </body>
-</html>=
-
---15581063900.ab1D43b.11786--
-
---===============0449964652==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
-YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
-cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
-
---===============0449964652==--
+SGVsbG8hCgpSZWdpc3RyYXRpb24gJiBDYWxsIGZvciBQcm9wb3NhbHMgYXJlIG5vdyBvcGVuIGZv
+ciBYREMgMjAxOSwgd2hpY2ggd2lsbAp0YWtlIHBsYWNlIGF0IHRoZSBDb25jb3JkaWEgVW5pdmVy
+c2l0eSBDb25mZXJlbmNlIENlbnRyZSBpbiBNb250csOpYWwsCkNhbmFkYSBvbiBPY3RvYmVyIDIt
+NCwgMjAxOS4KClRoYW5rcyB0byBMV04ubmV0LCB0aGlzIHllYXIgd2UgaGF2ZSBhIGJyYW5kIG5l
+dyB3ZWJzaXRlIHVzaW5nIHRoZQpJbmRpY28gcGxhdGZvcm0sIGEgZnVsbHkgb3BlbiBzb3VyY2Ug
+ZXZlbnQgbWFuYWdlbWVudCB0b29sIQoKICAgIGh0dHBzOi8veGRjMjAxOS54Lm9yZwogICAgCklm
+IHlvdSBwbGFuIG9uIGF0dGVuZGluZywgcGxlYXNlIG1ha2Ugc3VyZSB0byByZWdpc3RlciBhcyBl
+YXJseSBhcwpwb3NzaWJsZSBhcyBzcGFjZSBpcyBsaW1pdGVkISBBcyB1c3VhbCwgdGhlIGNvbmZl
+cmVuY2UgaXMgZnJlZSBvZgpjaGFyZ2UgYW5kIG9wZW4gdG8gdGhlIGdlbmVyYWwgcHVibGljLgoK
+UGxlYXNlIG5vdGUsIGFzIHdlIGFyZSBub3cgYmFzZWQgb24gSW5kaWNvLCB3ZSB3aWxsIG5vIGxv
+bmdlciB1c2UgdGhlCndpa2kgZm9yIHJlZ2lzdHJhdGlvbi4gWW91IHdpbGwgdGhlcmVmb3JlIG5l
+ZWQgdG8gcmVnaXN0ZXIgdmlhIHRoZSBYREMKd2Vic2l0ZS4gSG93ZXZlciwgYXMgWERDIGlzIHNo
+YXJpbmcgdGhlIHNhbWUgSW5kaWNvIGluZnJhc3RydWN0dXJlIGFzCkxQQywgaWYgeW91IHByZXZp
+b3VzbHkgcmVnaXN0ZXJlZCBvbiB0aGUgTFBDIHdlYnNpdGUKKGxpbnV4cGx1bWJlcnNjb25mZXJl
+bmNlLm9yZyksIHRoZW4geW91IGFscmVhZHkgaGF2ZSBhbiBhY3RpdmUgYWNjb3VudAphbmQgY2Fu
+IHVzZSB0aGUgc2FtZSB1c2VybmFtZSAmIHBhc3N3b3JkIHRvIGxvZ2luIQoKICAgIGh0dHBzOi8v
+eGRjMjAxOS54Lm9yZy9ldmVudC81L3JlZ2lzdHJhdGlvbnMvMi8KCkluIGFkZGl0aW9uIHRvIHJl
+Z2lzdHJhdGlvbiwgdGhlIENmUCBpcyBub3cgb3BlbiBmb3IgdGFsa3MsIHdvcmtzaG9wcwphbmQg
+ZGVtb3MgYXQgWERDIDIwMTkuIFdoaWxlIGFueSBzZXJpb3VzIHByb3Bvc2FsIHdpbGwgYmUgZ3Jh
+dGVmdWxseQpjb25zaWRlcmVkLCB0b3BpY3Mgb2YgaW50ZXJlc3QgdG8gWC5PcmcgYW5kIGZyZWVk
+ZXNrdG9wLm9yZyBkZXZlbG9wZXJzCmFyZSBlbmNvdXJhZ2VkLiBUaGUgcHJvZ3JhbSBmb2N1cyBp
+cyBvbiBuZXcgZGV2ZWxvcG1lbnQsIG9uZ29pbmcKY2hhbGxlbmdlcyBhbmQgYW55dGhpbmcgZWxz
+ZSB0aGF0IHdpbGwgc3BhcmsgZGlzY3Vzc2lvbnMgYW1vbmcKYXR0ZW5kZWVzIGluIHRoZSBoYWxs
+d2F5IHRyYWNrLgoKV2UgYXJlIG9wZW4gdG8gdGFsa3MgYWNyb3NzIGFsbCBsYXllcnMgb2YgdGhl
+IGdyYXBoaWNzIHN0YWNrLCBmcm9tIHRoZQprZXJuZWwgdG8gZGVza3RvcCBlbnZpcm9ubWVudHMg
+LyBncmFwaGljYWwgYXBwbGljYXRpb25zIGFuZCBhYm91dCBob3cKdG8gbWFrZSB0aGluZ3MgYmV0
+dGVyIGZvciB0aGUgZGV2ZWxvcGVycyB3aG8gYnVpbGQgdGhlbS4gSGVhZCB0byB0aGUKQ2ZQIHBh
+Z2UgdG8gbGVhcm4gbW9yZTogCgogICAgaHR0cHM6Ly94ZGMyMDE5Lngub3JnL2V2ZW50LzUvYWJz
+dHJhY3RzLwoKVGhlIGRlYWRsaW5lIGZvciBzdWJtaXNzaW9ucyBTdW5kYXksIDcgSnVseSAyMDE5
+LgoKV2UgYXJlIGxvb2tpbmcgZm9yd2FyZCB0byBzZWVpbmcgeW91IChhbmQgc2hhcmluZyBhIHBv
+dXRpbmUhKSBpbgpiZWF1dGlmdWwgTW9udHLDqWFsISBJZiB5b3UgaGF2ZSBhbnkgcXVlc3Rpb25z
+LCBwbGVhc2Ugc2VuZCBtZSBhbiBlbWFpbAp0byBtYXJrLmZpbGlvbkBjb2xsYWJvcmEuY29tLCBh
+ZGRpbmcgb24gQ0MgdGhlIFgub3JnIGJvYXJkIChib2FyZCBhdApmb3VuZGF0aW9uLngub3JnKS4K
+CkFuZCBkb24ndCBmb3JnZXQsIHlvdSBjYW4gZm9sbG93IHVzIG9uIFR3aXR0ZXIgZm9yIGFsbCB0
+aGUgbGF0ZXN0CnVwZGF0ZXMgYW5kIHRvIHN0YXkgY29ubmVjdGVkOgoKICAgIGh0dHBzOi8vdHdp
+dHRlci5jb20veGRjMjAxOQoKQmVzdCwKCk1hcmsKCl9fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fCk5vdXZlYXUgbWFpbGluZyBsaXN0Ck5vdXZlYXVAbGlzdHMu
+ZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlz
+dGluZm8vbm91dmVhdQ==
