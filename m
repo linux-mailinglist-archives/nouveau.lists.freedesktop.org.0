@@ -2,62 +2,45 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8E4B321476
-	for <lists+nouveau@lfdr.de>; Fri, 17 May 2019 09:35:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D4C2221A72
+	for <lists+nouveau@lfdr.de>; Fri, 17 May 2019 17:19:52 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7B0DD898A7;
-	Fri, 17 May 2019 07:35:10 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D37D1898EA;
+	Fri, 17 May 2019 15:19:50 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pf1-x434.google.com (mail-pf1-x434.google.com
- [IPv6:2607:f8b0:4864:20::434])
- by gabe.freedesktop.org (Postfix) with ESMTPS id BFE6D898A7;
- Fri, 17 May 2019 07:35:09 +0000 (UTC)
-Received: by mail-pf1-x434.google.com with SMTP id z28so3279083pfk.0;
- Fri, 17 May 2019 00:35:09 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to:user-agent;
- bh=UcaBfi1RcfCM+fQaIDSrzEfG2lN6ZvmfEpq0ih52Kx8=;
- b=iMPFHopYfvb6Hpg0UYB9y95cDPtlemSb5ZCOBRBxwEZn2h8tvsZqvY63V/Xj8GX1HQ
- M5svca1F/IBijYUbKNcQ4JCH7crmTzNY++h/csG2kaTsiKvzOBc/E0Zm+/uAgo51Bggx
- zMMwmcD6tyXdBuOjG8aeHr4NDofKYm3HHQinrmyDlPQRSLxKE+xYnEpmnHgoqigHXFG1
- 4cMm2FbFPHOaNLHZPerPyIHSYsEF7MVt6QsmGh2Rog3Rn4jtCRVvbMsNGCkFT/RhR4fr
- qIaGe0hrbwGqg5FrzV7OcCEdZ+lNG30I/eqjtGPGIlwtWMnxK93b5PF2fM2p5t/iynqG
- 7QMA==
-X-Gm-Message-State: APjAAAUIA1XJNhuPMCLM/MzISTdOdRRnqhuZ/k848OkWW03QB3fLDMpE
- RjoSdbxDAXQsLftIlESqlbc=
-X-Google-Smtp-Source: APXvYqw3w87YR06oknkwpYs/AFOdVPDmALqqgvTH+nL6zMlckTE6u+9pJmZN3GBud0TKYhfAlb+tJQ==
-X-Received: by 2002:a65:6494:: with SMTP id e20mr46551747pgv.117.1558078509402; 
- Fri, 17 May 2019 00:35:09 -0700 (PDT)
-Received: from localhost ([175.223.38.122])
- by smtp.gmail.com with ESMTPSA id c16sm5127082pfd.99.2019.05.17.00.35.07
- (version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
- Fri, 17 May 2019 00:35:08 -0700 (PDT)
-Date: Fri, 17 May 2019 16:35:05 +0900
-From: Sergey Senozhatsky <sergey.senozhatsky.work@gmail.com>
-To: Sergey Senozhatsky <sergey.senozhatsky.work@gmail.com>
-Message-ID: <20190517073505.GA7102@jagdpanzerIV>
-References: <20190517061340.GA709@jagdpanzerIV>
- <20190517072737.GA651@jagdpanzerIV>
+Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
+ [131.252.210.165])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 59265898EA
+ for <nouveau@lists.freedesktop.org>; Fri, 17 May 2019 15:19:50 +0000 (UTC)
+Received: by culpepper.freedesktop.org (Postfix, from userid 33)
+ id 4FE3872167; Fri, 17 May 2019 15:19:50 +0000 (UTC)
+From: bugzilla-daemon@freedesktop.org
+To: nouveau@lists.freedesktop.org
+Date: Fri, 17 May 2019 15:19:50 +0000
+X-Bugzilla-Reason: QAcontact AssignedTo
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: None
+X-Bugzilla-Product: Mesa
+X-Bugzilla-Component: Drivers/DRI/nouveau
+X-Bugzilla-Version: 18.2
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: critical
+X-Bugzilla-Who: timo.wiren@gmail.com
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: medium
+X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: 
+Message-ID: <bug-108500-8800-Abpzj7UxBC@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-108500-8800@http.bugs.freedesktop.org/>
+References: <bug-108500-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20190517072737.GA651@jagdpanzerIV>
-User-Agent: Mutt/1.11.4 (2019-03-13)
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20161025;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to:user-agent;
- bh=UcaBfi1RcfCM+fQaIDSrzEfG2lN6ZvmfEpq0ih52Kx8=;
- b=rh6FqwC9IwW9Lgd8HQTloFfd3HmbQbBGciIE04NoXYiVugCCptB70BTvcOGlA3cmfc
- 5wkKrkKClNBvUTrEbzeAWTbtFzjnwNupx8zpfPOWeyztwONH7C38ga66KbzVVIYDeoBw
- ceMOnRb47ShNXLggf/EIRYQR1a9G1DeXp1YHuI2KZikwEbKntzR8cLDRBZoTtm2k81dA
- zVDRBxMcKILb9wkCeAo+6X4QRpp6VtXu8zNtODSOgSHdVz0cgC/zH6cRHL6sV1HFxQ9B
- NyelfHsgQN8lKXOUOfxPNCfqPx2PX0LFM+oR/4re3iL2sKtyZlCuiWIj8eM5dAs0OB65
- f0Vw==
-Subject: Re: [Nouveau] drm/nouveau/core/memory: kmemleak 684 new suspected
- memory leaks
+Subject: [Nouveau] [Bug 108500] Crash when creating a depth buffer on
+ GeForce 320M
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -69,38 +52,106 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- Sergey Senozhatsky <sergey.senozhatsky@gmail.com>,
- Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============0449964652=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-T24gKDA1LzE3LzE5IDE2OjI3KSwgU2VyZ2V5IFNlbm96aGF0c2t5IHdyb3RlOgo+ID4gLi4uIGJ1
-dCBtb3N0IGxpa2VseSBpdCdzIHV0dGVybHkgd3JvbmcuCj4gPiAKPiAKPiBKRkksIEkgcmVtb3Zl
-ZCBrbWVtbGVhayBhbm5vdGF0aW9uCgptZWVlaGhoLi4uLgoKa21lbWxlYWs6IDIwNDYgbmV3IHN1
-c3BlY3RlZCBtZW1vcnkgbGVha3MgKHNlZSAvc3lzL2tlcm5lbC9kZWJ1Zy9rbWVtbGVhaykKCnVu
-cmVmZXJlbmNlZCBvYmplY3QgMHhmZmZmOTVjYmVhNGU2MDYwIChzaXplIDE2KToKICBjb21tICJX
-ZWIgQ29udGVudCIsIHBpZCAxMTkxLCBqaWZmaWVzIDQyOTQ3OTU2NjkgKGFnZSA3MzUuOTUwcykK
-ICBoZXggZHVtcCAoZmlyc3QgMTYgYnl0ZXMpOgogICAgMDAgMDAgMDAgMDAgMDAgMDAgMDAgMDAg
-MDAgMDAgMDAgMDAgMDAgMDAgMDAgMDAgIC4uLi4uLi4uLi4uLi4uLi4KICBiYWNrdHJhY2U6CiAg
-ICBbPDAwMDAwMDAwZDA3ODFlYTQ+XSBudmttX21lbW9yeV90YWdzX2dldCsweDhlLzB4MTMwCiAg
-ICBbPDAwMDAwMDAwMDYxZjNjODk+XSBnZjEwMF92bW1fdmFsaWQrMHgxOTYvMHgyZjAKICAgIFs8
-MDAwMDAwMDBkNzkwODRiNz5dIG52a21fdm1tX21hcCsweGE4LzB4MzYwCiAgICBbPDAwMDAwMDAw
-ZTMxNzRlMzM+XSBudmttX3ZyYW1fbWFwKzB4NDgvMHg1MAogICAgWzwwMDAwMDAwMDAwNmFkZGRi
-Pl0gbnZrbV91dm1tX210aGQrMHg2NTgvMHg3NzAKICAgIFs8MDAwMDAwMDBiMzZmM2E4Yj5dIG52
-a21faW9jdGwrMHhkZi8weDE3NwogICAgWzwwMDAwMDAwMDAzYWNlYTJjPl0gbnZpZl9vYmplY3Rf
-bXRoZCsweGQ0LzB4MTAwCiAgICBbPDAwMDAwMDAwMzM4MjQyOTI+XSBudmlmX3ZtbV9tYXArMHhl
-Yi8weDEwMAogICAgWzwwMDAwMDAwMDUzN2Y4NjI5Pl0gbm91dmVhdV9tZW1fbWFwKzB4NzkvMHhk
-MAogICAgWzwwMDAwMDAwMGMzYjIwYjczPl0gbm91dmVhdV92bWFfbmV3KzB4MTlkLzB4MWMwCiAg
-ICBbPDAwMDAwMDAwZGM5MTM4M2Y+XSBub3V2ZWF1X2dlbV9vYmplY3Rfb3BlbisweGQ0LzB4MTQw
-CiAgICBbPDAwMDAwMDAwNWE1MzEyM2I+XSBkcm1fZ2VtX2hhbmRsZV9jcmVhdGVfdGFpbCsweGUz
-LzB4MTYwCiAgICBbPDAwMDAwMDAwZTczM2Y1YTg+XSBub3V2ZWF1X2dlbV9pb2N0bF9uZXcrMHg2
-ZS8weGQwCiAgICBbPDAwMDAwMDAwYjViZWJlZjU+XSBkcm1faW9jdGxfa2VybmVsKzB4OGMvMHhk
-MAogICAgWzwwMDAwMDAwMDRmMjhkOGE2Pl0gZHJtX2lvY3RsKzB4MWM0LzB4MzYwCiAgICBbPDAw
-MDAwMDAwYjA4YjU3MjM+XSBub3V2ZWF1X2RybV9pb2N0bCsweDYzLzB4YjAKCgktc3MKX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBtYWlsaW5n
-IGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVz
-a3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============0449964652==
+Content-Type: multipart/alternative; boundary="15581063900.ab1D43b.11786"
+Content-Transfer-Encoding: 7bit
+
+
+--15581063900.ab1D43b.11786
+Date: Fri, 17 May 2019 15:19:50 +0000
+MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+https://bugs.freedesktop.org/show_bug.cgi?id=3D108500
+
+--- Comment #12 from Timo Wiren <timo.wiren@gmail.com> ---
+(In reply to Ilia Mirkin from comment #11)
+
+> Timo - are you up to sending a change to fix the above in the kernel? If
+> not, I can do it.
+
+Well, I have never submitted a patch to the kernel before, but this is a go=
+od
+opportunity to learn the process :-). I'll try to make it happen in a few d=
+ays.
+
+--=20
+You are receiving this mail because:
+You are the QA Contact for the bug.
+You are the assignee for the bug.=
+
+--15581063900.ab1D43b.11786
+Date: Fri, 17 May 2019 15:19:50 +0000
+MIME-Version: 1.0
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+<html>
+    <head>
+      <base href=3D"https://bugs.freedesktop.org/">
+    </head>
+    <body>
+      <p>
+        <div>
+            <b><a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - Crash when creating a depth buffer on GeForce 320M"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D108500#c12">Comme=
+nt # 12</a>
+              on <a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - Crash when creating a depth buffer on GeForce 320M"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D108500">bug 10850=
+0</a>
+              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
+timo.wiren&#64;gmail.com" title=3D"Timo Wiren &lt;timo.wiren&#64;gmail.com&=
+gt;"> <span class=3D"fn">Timo Wiren</span></a>
+</span></b>
+        <pre>(In reply to Ilia Mirkin from <a href=3D"show_bug.cgi?id=3D108=
+500#c11">comment #11</a>)
+
+<span class=3D"quote">&gt; Timo - are you up to sending a change to fix the=
+ above in the kernel? If
+&gt; not, I can do it.</span >
+
+Well, I have never submitted a patch to the kernel before, but this is a go=
+od
+opportunity to learn the process :-). I'll try to make it happen in a few d=
+ays.</pre>
+        </div>
+      </p>
+
+
+      <hr>
+      <span>You are receiving this mail because:</span>
+
+      <ul>
+          <li>You are the QA Contact for the bug.</li>
+          <li>You are the assignee for the bug.</li>
+      </ul>
+    </body>
+</html>=
+
+--15581063900.ab1D43b.11786--
+
+--===============0449964652==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
+YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
+cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============0449964652==--
