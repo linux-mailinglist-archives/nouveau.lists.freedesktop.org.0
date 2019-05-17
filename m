@@ -1,46 +1,61 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D9D6320F4B
-	for <lists+nouveau@lfdr.de>; Thu, 16 May 2019 21:42:50 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 93516213A1
+	for <lists+nouveau@lfdr.de>; Fri, 17 May 2019 08:13:48 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E6DE889722;
-	Thu, 16 May 2019 19:42:48 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7E99D8982F;
+	Fri, 17 May 2019 06:13:46 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
- by gabe.freedesktop.org (Postfix) with ESMTP id AD7B589791
- for <nouveau@lists.freedesktop.org>; Thu, 16 May 2019 19:42:47 +0000 (UTC)
-Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id A2F9872167; Thu, 16 May 2019 19:42:47 +0000 (UTC)
-From: bugzilla-daemon@freedesktop.org
-To: nouveau@lists.freedesktop.org
-Date: Thu, 16 May 2019 19:42:47 +0000
-X-Bugzilla-Reason: AssignedTo QAcontact
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: None
-X-Bugzilla-Product: Mesa
-X-Bugzilla-Component: Drivers/DRI/nouveau
-X-Bugzilla-Version: 18.2
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: critical
-X-Bugzilla-Who: imirkin@alum.mit.edu
-X-Bugzilla-Status: NEW
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: medium
-X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-108500-8800-EVI8zmmso0@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-108500-8800@http.bugs.freedesktop.org/>
-References: <bug-108500-8800@http.bugs.freedesktop.org/>
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
+Received: from mail-pg1-x544.google.com (mail-pg1-x544.google.com
+ [IPv6:2607:f8b0:4864:20::544])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 62F768982F;
+ Fri, 17 May 2019 06:13:45 +0000 (UTC)
+Received: by mail-pg1-x544.google.com with SMTP id t1so1362127pgc.2;
+ Thu, 16 May 2019 23:13:45 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:mime-version
+ :content-disposition:user-agent;
+ bh=kUjckoiL4hcazmpiRVYWRXZ1+byR8V6/hc2uWj9Ysig=;
+ b=bs5/NKxu/mbYSvqgqprnJTh/23/Gix2oZpk4M7t4XE75pyvz6gbDhASt3A+VrRSOcT
+ lYI6kZpsLpo/33ddPNTE9kzwAAKiUSHw8wuZTcmkeIh376Zjh3vGJbFcjtRVhkIqngF3
+ sx4DFt8igkV5fnRpBRjXJyx4CCXUbAgDOY4JyeDAJ0gzSxYrJDfVNsVd2Y+eqI52PIo1
+ eBi3DcvWQIJq2+Z6KKn0k8RPvSvH8tqheXMkz0QmLSAqMV3qhBdeKhD8/neqR0sT2c4t
+ c/LfexaRXmsh4/jTUY6NskSQ7Wm/PstDpZeMvhEHWeVm+0AFOdPPqaqv59yprORsT5XX
+ 47qw==
+X-Gm-Message-State: APjAAAXlkVi1TPF/Bu/qS8WD3/JP+PXsq+q0iYysIHrJlr0q2c3zlNET
+ 79UBY4a0HW2hb4sdrFGKJvg=
+X-Google-Smtp-Source: APXvYqxnnFmrplpftkM7cxoI/lh030At8OG7CfCN9dr3kjxbHY3VuCVSsn2e2V4tGmNN0DpfBDcmSA==
+X-Received: by 2002:a62:640e:: with SMTP id y14mr39509744pfb.109.1558073624914; 
+ Thu, 16 May 2019 23:13:44 -0700 (PDT)
+Received: from localhost ([175.223.38.122])
+ by smtp.gmail.com with ESMTPSA id s24sm9246940pfe.57.2019.05.16.23.13.42
+ (version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+ Thu, 16 May 2019 23:13:44 -0700 (PDT)
+Date: Fri, 17 May 2019 15:13:40 +0900
+From: Sergey Senozhatsky <sergey.senozhatsky.work@gmail.com>
+To: Ben Skeggs <bskeggs@redhat.com>, David Airlie <airlied@linux.ie>,
+ Daniel Vetter <daniel@ffwll.ch>
+Message-ID: <20190517061340.GA709@jagdpanzerIV>
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 108500] Crash when creating a depth buffer on
- GeForce 320M
+Content-Disposition: inline
+User-Agent: Mutt/1.11.4 (2019-03-13)
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20161025;
+ h=date:from:to:cc:subject:message-id:mime-version:content-disposition
+ :user-agent;
+ bh=kUjckoiL4hcazmpiRVYWRXZ1+byR8V6/hc2uWj9Ysig=;
+ b=t/Ag4ohx5G5C8vnn5fyJXM4y0k89Op7ZWxUgsxV1Xd145aByUYxDEcZte/PTwB+pun
+ ggfpKQTMWuvkQT+SdpuaDMqVOrX7JHIqa2JN+4SF21hFgFsa0yEsNpbj6g3lb9AevSVv
+ jxOfHa1kwBVZv+IHcrbdJ3QtKzAKVUVgHqtoZdIWXlvfFuMoS4rEICsLqzX57xvmDTcG
+ L5V+7EEKbEfXpxT+yzZMFHOcS4dbYlwuoxgH185T92qnWXRBdPDs/XWxXXBXXYpTfWSV
+ iaBPKXUlVcSqPdsAl8E/dgUMRpZRV1oEqdlhY/IWloYEBRJ7z3aScnzW5ALwCiWpHRyK
+ b3ag==
+Subject: [Nouveau] drm/nouveau/core/memory: kmemleak 684 new suspected
+ memory leaks
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -52,117 +67,54 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0624337532=="
+Cc: nouveau@lists.freedesktop.org,
+ Sergey Senozhatsky <sergey.senozhatsky@gmail.com>,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ Sergey Senozhatsky <sergey.senozhatsky.work@gmail.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-
---===============0624337532==
-Content-Type: multipart/alternative; boundary="15580357671.1Ad4A.12809"
-Content-Transfer-Encoding: 7bit
-
-
---15580357671.1Ad4A.12809
-Date: Thu, 16 May 2019 19:42:47 +0000
-MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-https://bugs.freedesktop.org/show_bug.cgi?id=3D108500
-
---- Comment #11 from Ilia Mirkin <imirkin@alum.mit.edu> ---
-Given the amount of time that this has gone on unfixed, I think we should j=
-ust
-make mcp89 point at mcp77_mmu_new instead of g84_mmu_new (in
-nvkm/engine/device/base.c).
-
-Literally the only difference between those two is the ability to use
-compression. The quick test in comment #9 didn't yield positive results.
-
-Let's not make things extra-broken for people -- even if compression is som=
-ehow
-enableable on those chips, it's never worked on nouveau, I think.
-
-Timo - are you up to sending a change to fix the above in the kernel? If no=
-t, I
-can do it.
-
---=20
-You are receiving this mail because:
-You are the assignee for the bug.
-You are the QA Contact for the bug.=
-
---15580357671.1Ad4A.12809
-Date: Thu, 16 May 2019 19:42:47 +0000
-MIME-Version: 1.0
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-<html>
-    <head>
-      <base href=3D"https://bugs.freedesktop.org/">
-    </head>
-    <body>
-      <p>
-        <div>
-            <b><a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - Crash when creating a depth buffer on GeForce 320M"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D108500#c11">Comme=
-nt # 11</a>
-              on <a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - Crash when creating a depth buffer on GeForce 320M"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D108500">bug 10850=
-0</a>
-              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
-imirkin&#64;alum.mit.edu" title=3D"Ilia Mirkin &lt;imirkin&#64;alum.mit.edu=
-&gt;"> <span class=3D"fn">Ilia Mirkin</span></a>
-</span></b>
-        <pre>Given the amount of time that this has gone on unfixed, I thin=
-k we should just
-make mcp89 point at mcp77_mmu_new instead of g84_mmu_new (in
-nvkm/engine/device/base.c).
-
-Literally the only difference between those two is the ability to use
-compression. The quick test in <a href=3D"show_bug.cgi?id=3D108500#c9">comm=
-ent #9</a> didn't yield positive results.
-
-Let's not make things extra-broken for people -- even if compression is som=
-ehow
-enableable on those chips, it's never worked on nouveau, I think.
-
-Timo - are you up to sending a change to fix the above in the kernel? If no=
-t, I
-can do it.</pre>
-        </div>
-      </p>
-
-
-      <hr>
-      <span>You are receiving this mail because:</span>
-
-      <ul>
-          <li>You are the assignee for the bug.</li>
-          <li>You are the QA Contact for the bug.</li>
-      </ul>
-    </body>
-</html>=
-
---15580357671.1Ad4A.12809--
-
---===============0624337532==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
-YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
-cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
-
---===============0624337532==--
+SGVsbG8sCgo1LjEuMC1uZXh0LTIwMTkwNTE3CgpJJ20gbG9va2luZyBhdCBxdWl0ZSBhIGxvdCBv
+ZiBrbWVtbGVhayByZXBvcnRzIGNvbWluZyBmcm9tCmRybS9ub3V2ZWF1L2NvcmUvbWVtb3J5LCBh
+bGwgb2Ygd2hpY2ggYXJlOgoKICAgIHVucmVmZXJlbmNlZCBvYmplY3QgMHhmZmZmOGRlZWMyN2M0
+YWMwIChzaXplIDE2KToKICAgICAgY29tbSAiV2ViIENvbnRlbnQiLCBwaWQgNTMwOSwgamlmZmll
+cyA0MzA5Njc1MDExIChhZ2UgNjguMDc2cykKICAgICAgaGV4IGR1bXAgKGZpcnN0IDE2IGJ5dGVz
+KToKICAgICAgICAwMCAwMCAwMCAwMCAwMCAwMCAwMCAwMCAwMCAwMCAwMCAwMCAwMCAwMCAwMCAw
+MCAgLi4uLi4uLi4uLi4uLi4uLgogICAgICBiYWNrdHJhY2U6CiAgICAgICAgWzwwMDAwMDAwMDgx
+ZjI4OTRmPl0gbnZrbV9tZW1vcnlfdGFnc19nZXQrMHg4ZS8weDEzMAogICAgICAgIFs8MDAwMDAw
+MDA3Y2Q3YzBiYz5dIGdmMTAwX3ZtbV92YWxpZCsweDE5Ni8weDJmMAogICAgICAgIFs8MDAwMDAw
+MDA3MGNjNmQ2Nz5dIG52a21fdm1tX21hcCsweGE4LzB4MzYwCiAgICAgICAgWzwwMDAwMDAwMGFi
+Njc4NjQ0Pl0gbnZrbV92cmFtX21hcCsweDQ4LzB4NTAKICAgICAgICBbPDAwMDAwMDAwZDgxNzYz
+Nzg+XSBudmttX3V2bW1fbXRoZCsweDY1OC8weDc3MAogICAgICAgIFs8MDAwMDAwMDA0NjNmY2E1
+YT5dIG52a21faW9jdGwrMHhkZi8weDE3NwogICAgICAgIFs8MDAwMDAwMDAwYWZjNDk5Nj5dIG52
+aWZfb2JqZWN0X210aGQrMHhkNC8weDEwMAogICAgICAgIFs8MDAwMDAwMDAyZjdhNzM4NT5dIG52
+aWZfdm1tX21hcCsweGViLzB4MTAwCiAgICAgICAgWzwwMDAwMDAwMGVmMjUzN2VkPl0gbm91dmVh
+dV9tZW1fbWFwKzB4NzkvMHhkMAogICAgICAgIFs8MDAwMDAwMDAxNGRkYzBjZj5dIG5vdXZlYXVf
+dm1hX25ldysweDE5ZC8weDFjMAogICAgICAgIFs8MDAwMDAwMDBmOTk4ODhhMT5dIG5vdXZlYXVf
+Z2VtX29iamVjdF9vcGVuKzB4ZDQvMHgxNDAKICAgICAgICBbPDAwMDAwMDAwOWNkMjU4NjE+XSBk
+cm1fZ2VtX2hhbmRsZV9jcmVhdGVfdGFpbCsweGUzLzB4MTYwCiAgICAgICAgWzwwMDAwMDAwMDE5
+MTc4NGQ5Pl0gbm91dmVhdV9nZW1faW9jdGxfbmV3KzB4NmUvMHhkMAogICAgICAgIFs8MDAwMDAw
+MDAxNTk2NzhkZj5dIGRybV9pb2N0bF9rZXJuZWwrMHg4Yy8weGQwCiAgICAgICAgWzwwMDAwMDAw
+MGZiYWE2MTU0Pl0gZHJtX2lvY3RsKzB4MWM0LzB4MzYwCiAgICAgICAgWzwwMDAwMDAwMDY4MzNm
+ZTE1Pl0gbm91dmVhdV9kcm1faW9jdGwrMHg2My8weGIwCgpXb25kZXJpbmcgaWYgdGhvc2UgYXJl
+IHJlYWwgbGVha3Mgb3IganVzdCBmYWxzZSBwb3NpdGl2ZXMuCgpGb3Igbm93IEkgbWFya2VkIGB0
+YWdzJyBhcyBrbWVtbGVha19ub3RfbGVhaygpOyBidXQgbW9zdApsaWtlbHkgaXQncyB1dHRlcmx5
+IHdyb25nLgoKQW55IHRob3VnaHRzPwoKLS0tCiBkcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9udmtt
+L2NvcmUvbWVtb3J5LmMgfCAyICsrCiAxIGZpbGUgY2hhbmdlZCwgMiBpbnNlcnRpb25zKCspCgpk
+aWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbnZrbS9jb3JlL21lbW9yeS5jIGIv
+ZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbnZrbS9jb3JlL21lbW9yeS5jCmluZGV4IGU4NWEwOGVj
+ZDlkYS4uY2Q0NmY1NGM1YzMyIDEwMDY0NAotLS0gYS9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9u
+dmttL2NvcmUvbWVtb3J5LmMKKysrIGIvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbnZrbS9jb3Jl
+L21lbW9yeS5jCkBAIC0yNSw2ICsyNSw3IEBACiAjaW5jbHVkZSA8Y29yZS9tbS5oPgogI2luY2x1
+ZGUgPHN1YmRldi9mYi5oPgogI2luY2x1ZGUgPHN1YmRldi9pbnN0bWVtLmg+CisjaW5jbHVkZSA8
+bGludXgva21lbWxlYWsuaD4KIAogdm9pZAogbnZrbV9tZW1vcnlfdGFnc19wdXQoc3RydWN0IG52
+a21fbWVtb3J5ICptZW1vcnksIHN0cnVjdCBudmttX2RldmljZSAqZGV2aWNlLApAQCAtOTIsNiAr
+OTMsNyBAQCBudmttX21lbW9yeV90YWdzX2dldChzdHJ1Y3QgbnZrbV9tZW1vcnkgKm1lbW9yeSwg
+c3RydWN0IG52a21fZGV2aWNlICpkZXZpY2UsCiAKIAlyZWZjb3VudF9zZXQoJnRhZ3MtPnJlZmNv
+dW50LCAxKTsKIAltdXRleF91bmxvY2soJmZiLT5zdWJkZXYubXV0ZXgpOworCWttZW1sZWFrX25v
+dF9sZWFrKHRhZ3MpOwogCSpwdGFncyA9IHRhZ3M7CiAJcmV0dXJuIDA7CiB9Ci0tIAoyLjIxLjAK
+Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCk5vdXZlYXUg
+bWFpbGluZyBsaXN0Ck5vdXZlYXVAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMu
+ZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vbm91dmVhdQ==
