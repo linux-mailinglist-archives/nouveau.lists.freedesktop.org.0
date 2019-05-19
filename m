@@ -2,27 +2,46 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3DFC822910
-	for <lists+nouveau@lfdr.de>; Sun, 19 May 2019 23:16:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BD57D226D2
+	for <lists+nouveau@lfdr.de>; Sun, 19 May 2019 14:31:17 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id AD43C891AB;
-	Sun, 19 May 2019 21:16:47 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B939D891A1;
+	Sun, 19 May 2019 12:31:15 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from bhuna.collabora.co.uk (bhuna.collabora.co.uk [46.235.227.227])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 34BA089958
- for <nouveau@lists.freedesktop.org>; Fri, 17 May 2019 17:38:27 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
- (Authenticated sender: mfilion) with ESMTPSA id E12F1281CB5
-Message-ID: <3cb930df216ed8b9666b1b8f5b939896f0d56f51.camel@collabora.com>
-From: Mark Filion <mark.filion@collabora.com>
+Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
+ [131.252.210.165])
+ by gabe.freedesktop.org (Postfix) with ESMTP id B3D89891A1
+ for <nouveau@lists.freedesktop.org>; Sun, 19 May 2019 12:31:13 +0000 (UTC)
+Received: by culpepper.freedesktop.org (Postfix, from userid 33)
+ id A6A5F72167; Sun, 19 May 2019 12:31:13 +0000 (UTC)
+From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Fri, 17 May 2019 13:38:17 -0400
-Organization: Collabora Ltd.
-User-Agent: Evolution 3.32.1 (3.32.1-1.fc30) 
+Date: Sun, 19 May 2019 12:31:13 +0000
+X-Bugzilla-Reason: AssignedTo QAcontact
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: None
+X-Bugzilla-Product: Mesa
+X-Bugzilla-Component: Drivers/DRI/nouveau
+X-Bugzilla-Version: 19.0
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: critical
+X-Bugzilla-Who: Linuxfreak@gmx.at
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: high
+X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: attachments.created
+Message-ID: <bug-110572-8800-lC7pPcnwHv@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-110572-8800@http.bugs.freedesktop.org/>
+References: <bug-110572-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-X-Mailman-Approved-At: Sun, 19 May 2019 21:16:47 +0000
-Subject: [Nouveau] XDC 2019: Registration & Call for Proposals now open!
+Subject: [Nouveau] [Bug 110572] Regularly System Crash: (ca. 1 hour) nouveau
+ 0000:08:00.0: gr: PGRAPH TLB flush idle timeout fail and nouveau
+ 0000:08:00.0: mmu: ce0 mmu invalidate timeout
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -34,47 +53,110 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============0231800894=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-SGVsbG8hCgpSZWdpc3RyYXRpb24gJiBDYWxsIGZvciBQcm9wb3NhbHMgYXJlIG5vdyBvcGVuIGZv
-ciBYREMgMjAxOSwgd2hpY2ggd2lsbAp0YWtlIHBsYWNlIGF0IHRoZSBDb25jb3JkaWEgVW5pdmVy
-c2l0eSBDb25mZXJlbmNlIENlbnRyZSBpbiBNb250csOpYWwsCkNhbmFkYSBvbiBPY3RvYmVyIDIt
-NCwgMjAxOS4KClRoYW5rcyB0byBMV04ubmV0LCB0aGlzIHllYXIgd2UgaGF2ZSBhIGJyYW5kIG5l
-dyB3ZWJzaXRlIHVzaW5nIHRoZQpJbmRpY28gcGxhdGZvcm0sIGEgZnVsbHkgb3BlbiBzb3VyY2Ug
-ZXZlbnQgbWFuYWdlbWVudCB0b29sIQoKICAgIGh0dHBzOi8veGRjMjAxOS54Lm9yZwogICAgCklm
-IHlvdSBwbGFuIG9uIGF0dGVuZGluZywgcGxlYXNlIG1ha2Ugc3VyZSB0byByZWdpc3RlciBhcyBl
-YXJseSBhcwpwb3NzaWJsZSBhcyBzcGFjZSBpcyBsaW1pdGVkISBBcyB1c3VhbCwgdGhlIGNvbmZl
-cmVuY2UgaXMgZnJlZSBvZgpjaGFyZ2UgYW5kIG9wZW4gdG8gdGhlIGdlbmVyYWwgcHVibGljLgoK
-UGxlYXNlIG5vdGUsIGFzIHdlIGFyZSBub3cgYmFzZWQgb24gSW5kaWNvLCB3ZSB3aWxsIG5vIGxv
-bmdlciB1c2UgdGhlCndpa2kgZm9yIHJlZ2lzdHJhdGlvbi4gWW91IHdpbGwgdGhlcmVmb3JlIG5l
-ZWQgdG8gcmVnaXN0ZXIgdmlhIHRoZSBYREMKd2Vic2l0ZS4gSG93ZXZlciwgYXMgWERDIGlzIHNo
-YXJpbmcgdGhlIHNhbWUgSW5kaWNvIGluZnJhc3RydWN0dXJlIGFzCkxQQywgaWYgeW91IHByZXZp
-b3VzbHkgcmVnaXN0ZXJlZCBvbiB0aGUgTFBDIHdlYnNpdGUKKGxpbnV4cGx1bWJlcnNjb25mZXJl
-bmNlLm9yZyksIHRoZW4geW91IGFscmVhZHkgaGF2ZSBhbiBhY3RpdmUgYWNjb3VudAphbmQgY2Fu
-IHVzZSB0aGUgc2FtZSB1c2VybmFtZSAmIHBhc3N3b3JkIHRvIGxvZ2luIQoKICAgIGh0dHBzOi8v
-eGRjMjAxOS54Lm9yZy9ldmVudC81L3JlZ2lzdHJhdGlvbnMvMi8KCkluIGFkZGl0aW9uIHRvIHJl
-Z2lzdHJhdGlvbiwgdGhlIENmUCBpcyBub3cgb3BlbiBmb3IgdGFsa3MsIHdvcmtzaG9wcwphbmQg
-ZGVtb3MgYXQgWERDIDIwMTkuIFdoaWxlIGFueSBzZXJpb3VzIHByb3Bvc2FsIHdpbGwgYmUgZ3Jh
-dGVmdWxseQpjb25zaWRlcmVkLCB0b3BpY3Mgb2YgaW50ZXJlc3QgdG8gWC5PcmcgYW5kIGZyZWVk
-ZXNrdG9wLm9yZyBkZXZlbG9wZXJzCmFyZSBlbmNvdXJhZ2VkLiBUaGUgcHJvZ3JhbSBmb2N1cyBp
-cyBvbiBuZXcgZGV2ZWxvcG1lbnQsIG9uZ29pbmcKY2hhbGxlbmdlcyBhbmQgYW55dGhpbmcgZWxz
-ZSB0aGF0IHdpbGwgc3BhcmsgZGlzY3Vzc2lvbnMgYW1vbmcKYXR0ZW5kZWVzIGluIHRoZSBoYWxs
-d2F5IHRyYWNrLgoKV2UgYXJlIG9wZW4gdG8gdGFsa3MgYWNyb3NzIGFsbCBsYXllcnMgb2YgdGhl
-IGdyYXBoaWNzIHN0YWNrLCBmcm9tIHRoZQprZXJuZWwgdG8gZGVza3RvcCBlbnZpcm9ubWVudHMg
-LyBncmFwaGljYWwgYXBwbGljYXRpb25zIGFuZCBhYm91dCBob3cKdG8gbWFrZSB0aGluZ3MgYmV0
-dGVyIGZvciB0aGUgZGV2ZWxvcGVycyB3aG8gYnVpbGQgdGhlbS4gSGVhZCB0byB0aGUKQ2ZQIHBh
-Z2UgdG8gbGVhcm4gbW9yZTogCgogICAgaHR0cHM6Ly94ZGMyMDE5Lngub3JnL2V2ZW50LzUvYWJz
-dHJhY3RzLwoKVGhlIGRlYWRsaW5lIGZvciBzdWJtaXNzaW9ucyBTdW5kYXksIDcgSnVseSAyMDE5
-LgoKV2UgYXJlIGxvb2tpbmcgZm9yd2FyZCB0byBzZWVpbmcgeW91IChhbmQgc2hhcmluZyBhIHBv
-dXRpbmUhKSBpbgpiZWF1dGlmdWwgTW9udHLDqWFsISBJZiB5b3UgaGF2ZSBhbnkgcXVlc3Rpb25z
-LCBwbGVhc2Ugc2VuZCBtZSBhbiBlbWFpbAp0byBtYXJrLmZpbGlvbkBjb2xsYWJvcmEuY29tLCBh
-ZGRpbmcgb24gQ0MgdGhlIFgub3JnIGJvYXJkIChib2FyZCBhdApmb3VuZGF0aW9uLngub3JnKS4K
-CkFuZCBkb24ndCBmb3JnZXQsIHlvdSBjYW4gZm9sbG93IHVzIG9uIFR3aXR0ZXIgZm9yIGFsbCB0
-aGUgbGF0ZXN0CnVwZGF0ZXMgYW5kIHRvIHN0YXkgY29ubmVjdGVkOgoKICAgIGh0dHBzOi8vdHdp
-dHRlci5jb20veGRjMjAxOQoKQmVzdCwKCk1hcmsKCl9fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fCk5vdXZlYXUgbWFpbGluZyBsaXN0Ck5vdXZlYXVAbGlzdHMu
-ZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlz
-dGluZm8vbm91dmVhdQ==
+
+--===============0231800894==
+Content-Type: multipart/alternative; boundary="15582690730.a98C2CA4.24133"
+Content-Transfer-Encoding: 7bit
+
+
+--15582690730.a98C2CA4.24133
+Date: Sun, 19 May 2019 12:31:13 +0000
+MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+https://bugs.freedesktop.org/show_bug.cgi?id=3D110572
+
+--- Comment #15 from Linux Freak <Linuxfreak@gmx.at> ---
+Created attachment 144299
+  --> https://bugs.freedesktop.org/attachment.cgi?id=3D144299&action=3Dedit
+crash 9
+
+nouveau 0000:08:00.0: timeout
+RIP: 0010:g84_gr_tlb_flush+0x2ec/0x300 [nouveau]
+Call Trace:
+Mai 17 08:07:29  kernel:  ? _raw_spin_lock+0x13/0x30
+Mai 17 08:07:29  kernel:  ? gv100_fb_new+0x20/0x20 [nouveau]
+
+--=20
+You are receiving this mail because:
+You are the assignee for the bug.
+You are the QA Contact for the bug.=
+
+--15582690730.a98C2CA4.24133
+Date: Sun, 19 May 2019 12:31:13 +0000
+MIME-Version: 1.0
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+<html>
+    <head>
+      <base href=3D"https://bugs.freedesktop.org/">
+    </head>
+    <body>
+      <p>
+        <div>
+            <b><a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - Regularly System Crash: (ca. 1 hour) nouveau 0000:08:00.0=
+: gr: PGRAPH TLB flush idle timeout fail and nouveau 0000:08:00.0: mmu: ce0=
+ mmu invalidate timeout"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110572#c15">Comme=
+nt # 15</a>
+              on <a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - Regularly System Crash: (ca. 1 hour) nouveau 0000:08:00.0=
+: gr: PGRAPH TLB flush idle timeout fail and nouveau 0000:08:00.0: mmu: ce0=
+ mmu invalidate timeout"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110572">bug 11057=
+2</a>
+              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
+Linuxfreak&#64;gmx.at" title=3D"Linux Freak &lt;Linuxfreak&#64;gmx.at&gt;">=
+ <span class=3D"fn">Linux Freak</span></a>
+</span></b>
+        <pre>Created <span class=3D""><a href=3D"attachment.cgi?id=3D144299=
+" name=3D"attach_144299" title=3D"crash 9">attachment 144299</a> <a href=3D=
+"attachment.cgi?id=3D144299&amp;action=3Dedit" title=3D"crash 9">[details]<=
+/a></span>
+crash 9
+
+nouveau 0000:08:00.0: timeout
+RIP: 0010:g84_gr_tlb_flush+0x2ec/0x300 [nouveau]
+Call Trace:
+Mai 17 08:07:29  kernel:  ? _raw_spin_lock+0x13/0x30
+Mai 17 08:07:29  kernel:  ? gv100_fb_new+0x20/0x20 [nouveau]</pre>
+        </div>
+      </p>
+
+
+      <hr>
+      <span>You are receiving this mail because:</span>
+
+      <ul>
+          <li>You are the assignee for the bug.</li>
+          <li>You are the QA Contact for the bug.</li>
+      </ul>
+    </body>
+</html>=
+
+--15582690730.a98C2CA4.24133--
+
+--===============0231800894==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
+YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
+cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============0231800894==--
