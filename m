@@ -2,46 +2,59 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id BD57D226D2
-	for <lists+nouveau@lfdr.de>; Sun, 19 May 2019 14:31:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7C88A226E9
+	for <lists+nouveau@lfdr.de>; Sun, 19 May 2019 16:01:00 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B939D891A1;
-	Sun, 19 May 2019 12:31:15 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D07EC8920D;
+	Sun, 19 May 2019 14:00:58 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [131.252.210.165])
- by gabe.freedesktop.org (Postfix) with ESMTP id B3D89891A1
- for <nouveau@lists.freedesktop.org>; Sun, 19 May 2019 12:31:13 +0000 (UTC)
-Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id A6A5F72167; Sun, 19 May 2019 12:31:13 +0000 (UTC)
-From: bugzilla-daemon@freedesktop.org
-To: nouveau@lists.freedesktop.org
-Date: Sun, 19 May 2019 12:31:13 +0000
-X-Bugzilla-Reason: AssignedTo QAcontact
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: None
-X-Bugzilla-Product: Mesa
-X-Bugzilla-Component: Drivers/DRI/nouveau
-X-Bugzilla-Version: 19.0
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: critical
-X-Bugzilla-Who: Linuxfreak@gmx.at
-X-Bugzilla-Status: NEW
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: high
-X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: attachments.created
-Message-ID: <bug-110572-8800-lC7pPcnwHv@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-110572-8800@http.bugs.freedesktop.org/>
-References: <bug-110572-8800@http.bugs.freedesktop.org/>
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
+Received: from mail-lf1-x143.google.com (mail-lf1-x143.google.com
+ [IPv6:2a00:1450:4864:20::143])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 031278920D;
+ Sun, 19 May 2019 14:00:58 +0000 (UTC)
+Received: by mail-lf1-x143.google.com with SMTP id y10so8431849lfl.3;
+ Sun, 19 May 2019 07:00:57 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
+ :mime-version:content-transfer-encoding;
+ bh=z4zY19Jxb/avqjwVLOTjkhWbgu5rwbeaNrgDzY624B0=;
+ b=ZKLIyLK305pRX93nyNPDbtSF82+1nV9pZ6wyRuvZastsl6NYWwNbGOb0UjOfHgAjjC
+ xqsUHrZ/Xljy6jvoIry3i2hck5BBKO0xt1ezsy3Vq2oAaeCQe2InR6qpBU8JWEslatyC
+ 0PuVuPweO84hpl49hl/xmp604suv+BK7cZ0juMS35C1MCGyU9tpwse12JDJAp5oxWqcs
+ 4wLhoNKYeaKXHuyuVzsL8I5bMvhHYq3bIKaoJHugx+HHszwy2GfJS4aqailO35DeM2FG
+ bO7JPbnk/WGQn06TfpZCVfgM5QIqTXsJxRSEho/y1gZdeYOF0REFyoQCj6k1IYVeZ6aI
+ ZnhQ==
+X-Gm-Message-State: APjAAAVTkm6wSfIOM+bZAM4gBtXCzPVBIJUd+rG8a8a47ffrgScUEo5m
+ oCJmYpRcVl0cg0+vdKW7zSw=
+X-Google-Smtp-Source: APXvYqy4XfAgbKmBvY2T5/xzj9vWO1nAK8jnTFAvgDr4anyic31UN70HZ/QFTvAj/iyodxogjxErBg==
+X-Received: by 2002:a19:a8c8:: with SMTP id r191mr33228852lfe.85.1558274456420; 
+ Sun, 19 May 2019 07:00:56 -0700 (PDT)
+Received: from saturn.lan (18.158-248-194.customer.lyse.net. [158.248.194.18])
+ by smtp.gmail.com with ESMTPSA id
+ k18sm3153572ljk.70.2019.05.19.07.00.53
+ (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+ Sun, 19 May 2019 07:00:55 -0700 (PDT)
+From: Sam Ravnborg <sam@ravnborg.org>
+To: Ben Skeggs <bskeggs@redhat.com>,
+	dri-devel@lists.freedesktop.org
+Date: Sun, 19 May 2019 16:00:40 +0200
+Message-Id: <20190519140044.22142-1-sam@ravnborg.org>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 110572] Regularly System Crash: (ca. 1 hour) nouveau
- 0000:08:00.0: gr: PGRAPH TLB flush idle timeout fail and nouveau
- 0000:08:00.0: mmu: ce0 mmu invalidate timeout
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20161025;
+ h=sender:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=z4zY19Jxb/avqjwVLOTjkhWbgu5rwbeaNrgDzY624B0=;
+ b=bp0PXl1rw+CewZAmrdmKHQ8lR2KTx/U1kIS0VpTthZMyBMMSOE/8ysSLQJAOx9OpRT
+ /yW/CnnaXd5VUEBT6chycSkUePZuO4u2qd/n/+Tooj/Gs+R1UX+v/mOZRlawC+dbJUWf
+ J0mTyX1soEK/6uHEg65Tztu1uuv48h9xoSaP1ZCNdlLXVBiibetiSpSJpsuKWDX8eST8
+ znfsagm3tcersV553kTQc5K/LNnmIQk1/+oib0YuVyDzF2aBGF2ecqZQYDHkszquvjb3
+ lJhwBOw0td60RPIQPWB/lmAAMVMys1J6j29vTtjgjDzkyrm07fq502JUaGJHM6wgw8ZK
+ l+EQ==
+Subject: [Nouveau] [PATCH v1 0/4] drm/nouveau: drop use of drmP.h
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -53,110 +66,58 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0231800894=="
+Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
+ Daniel Vetter <daniel@ffwll.ch>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-
---===============0231800894==
-Content-Type: multipart/alternative; boundary="15582690730.a98C2CA4.24133"
-Content-Transfer-Encoding: 7bit
-
-
---15582690730.a98C2CA4.24133
-Date: Sun, 19 May 2019 12:31:13 +0000
-MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-https://bugs.freedesktop.org/show_bug.cgi?id=3D110572
-
---- Comment #15 from Linux Freak <Linuxfreak@gmx.at> ---
-Created attachment 144299
-  --> https://bugs.freedesktop.org/attachment.cgi?id=3D144299&action=3Dedit
-crash 9
-
-nouveau 0000:08:00.0: timeout
-RIP: 0010:g84_gr_tlb_flush+0x2ec/0x300 [nouveau]
-Call Trace:
-Mai 17 08:07:29  kernel:  ? _raw_spin_lock+0x13/0x30
-Mai 17 08:07:29  kernel:  ? gv100_fb_new+0x20/0x20 [nouveau]
-
---=20
-You are receiving this mail because:
-You are the assignee for the bug.
-You are the QA Contact for the bug.=
-
---15582690730.a98C2CA4.24133
-Date: Sun, 19 May 2019 12:31:13 +0000
-MIME-Version: 1.0
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-<html>
-    <head>
-      <base href=3D"https://bugs.freedesktop.org/">
-    </head>
-    <body>
-      <p>
-        <div>
-            <b><a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - Regularly System Crash: (ca. 1 hour) nouveau 0000:08:00.0=
-: gr: PGRAPH TLB flush idle timeout fail and nouveau 0000:08:00.0: mmu: ce0=
- mmu invalidate timeout"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110572#c15">Comme=
-nt # 15</a>
-              on <a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - Regularly System Crash: (ca. 1 hour) nouveau 0000:08:00.0=
-: gr: PGRAPH TLB flush idle timeout fail and nouveau 0000:08:00.0: mmu: ce0=
- mmu invalidate timeout"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110572">bug 11057=
-2</a>
-              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
-Linuxfreak&#64;gmx.at" title=3D"Linux Freak &lt;Linuxfreak&#64;gmx.at&gt;">=
- <span class=3D"fn">Linux Freak</span></a>
-</span></b>
-        <pre>Created <span class=3D""><a href=3D"attachment.cgi?id=3D144299=
-" name=3D"attach_144299" title=3D"crash 9">attachment 144299</a> <a href=3D=
-"attachment.cgi?id=3D144299&amp;action=3Dedit" title=3D"crash 9">[details]<=
-/a></span>
-crash 9
-
-nouveau 0000:08:00.0: timeout
-RIP: 0010:g84_gr_tlb_flush+0x2ec/0x300 [nouveau]
-Call Trace:
-Mai 17 08:07:29  kernel:  ? _raw_spin_lock+0x13/0x30
-Mai 17 08:07:29  kernel:  ? gv100_fb_new+0x20/0x20 [nouveau]</pre>
-        </div>
-      </p>
-
-
-      <hr>
-      <span>You are receiving this mail because:</span>
-
-      <ul>
-          <li>You are the assignee for the bug.</li>
-          <li>You are the QA Contact for the bug.</li>
-      </ul>
-    </body>
-</html>=
-
---15582690730.a98C2CA4.24133--
-
---===============0231800894==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
-YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
-cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
-
---===============0231800894==--
+VGhlIGZvbGxvd2luZyBwYXRjaHNldCByZW1vdmUgdXNlIG9mIHRoZSBkZXByZWNhdGVkIGRybVAu
+aApoZWFkZXIgZmlsZSBpbiB0aGUgbm91dmVhdSBkcml2ZXIocykuCkFzIHByZXBhcmF0aW9uIGEg
+ZGVwZW5kZW5jeSBvbiBkcm1fb3NfbGludXguaCBpcyBkcm9wcGVkLgpUaGUgbGlzdCBvZiBpbmNs
+dWRlIGZpbGVzIGFyZSBzb3J0ZWQgYW5kIGFyZSBpbiBzb21lIGNhc2VzCmRpdmlkZWQgdXAgaW4g
+YmxvY2tzIG9mIGxpbnV4LyogZHJtLyogZXRjLgoKVGhlIHJlbW92YWwgaXMgZGl2aWRlZCB1cCBp
+biBhIGZldyBwYXRjaGVzIHRoYXQgd2FzIHRoZSBsb2dpY2FsCnN0ZXBzIHRvIHJlbW92ZSB0aGUg
+dXNlIG9mIGRybVAuaC4KCkJ1aWxkIHRlc3RlZCB3aXRoIGFsbG1vZGNvbmZpZyBhbmQgYWxseWVz
+Y29uZmlnIGZvciB4ODYsIGFybSwgYWxwaGEgYW5kIG1vcmUuCgpQYXRjaHNldCBtYWRlIG9uIHRv
+cCBvZiBkcm0tbWlzYy1uZXh0LgoKICAgICAgICBTYW0KClNhbSBSYXZuYm9yZyAoNCk6CiAgICAg
+IGRybS9ub3V2ZWF1OiBkcm9wIHVzZSBvZiBEUk1fVURFTEFZCiAgICAgIGRybS9ub3V2ZWF1OiBk
+cm9wIGRybVAuaCBmcm9tIG5vdXZlYXVfZHJ2LmgKICAgICAgZHJtL25vdXZlYXU6IGRyb3AgZHJt
+UC5oIGZyb20gYWxsIGhlYWRlciBmaWxlcwogICAgICBkcm0vbm91dmVhdTogZHJvcCB1c2Ugb2Yg
+ZHJtcC5oCgogZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvZGlzcG52MDQvYXJiLmMgICAgICAgICB8
+IDIgLS0KIGRyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L2Rpc3BudjA0L2NydGMuYyAgICAgICAgfCAz
+ICsrLQogZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvZGlzcG52MDQvY3Vyc29yLmMgICAgICB8IDEg
+LQogZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvZGlzcG52MDQvZGFjLmMgICAgICAgICB8IDEgLQog
+ZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvZGlzcG52MDQvZGZwLmMgICAgICAgICB8IDIgKy0KIGRy
+aXZlcnMvZ3B1L2RybS9ub3V2ZWF1L2Rpc3BudjA0L2Rpc3AuYyAgICAgICAgfCAxIC0KIGRyaXZl
+cnMvZ3B1L2RybS9ub3V2ZWF1L2Rpc3BudjA0L2h3LmMgICAgICAgICAgfCAxIC0KIGRyaXZlcnMv
+Z3B1L2RybS9ub3V2ZWF1L2Rpc3BudjA0L2h3LmggICAgICAgICAgfCAxIC0KIGRyaXZlcnMvZ3B1
+L2RybS9ub3V2ZWF1L2Rpc3BudjA0L292ZXJsYXkuYyAgICAgfCAxIC0KIGRyaXZlcnMvZ3B1L2Ry
+bS9ub3V2ZWF1L2Rpc3BudjA0L3R2bW9kZXNudjE3LmMgfCAxIC0KIGRyaXZlcnMvZ3B1L2RybS9u
+b3V2ZWF1L2Rpc3BudjA0L3R2bnYwNC5jICAgICAgfCAxIC0KIGRyaXZlcnMvZ3B1L2RybS9ub3V2
+ZWF1L2Rpc3BudjA0L3R2bnYxNy5jICAgICAgfCAxIC0KIGRyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1
+L2Rpc3BudjUwL2Jhc2U1MDdjLmMgICAgfCAyICsrCiBkcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9k
+aXNwbnY1MC9kaXNwLmMgICAgICAgIHwgNCArKy0tCiBkcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9k
+aXNwbnY1MC9vdmx5NTA3ZS5jICAgIHwgMSArCiBkcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9kaXNw
+bnY1MC93bmR3LmMgICAgICAgIHwgMiArKwogZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVh
+dV9iaW9zLmMgICAgICAgICB8IDIgLS0KIGRyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVf
+Y29ubmVjdG9yLmMgICAgfCAxIC0KIGRyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfY3J0
+Yy5oICAgICAgICAgfCAyICsrCiBkcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2RlYnVn
+ZnMuaCAgICAgIHwgMiArLQogZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9kaXNwbGF5
+LmMgICAgICB8IDQgKysrLQogZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9kaXNwbGF5
+LmggICAgICB8IDQgKysrKwogZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9kbWEuYyAg
+ICAgICAgICB8IDIgKy0KIGRyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfZHAuYyAgICAg
+ICAgICAgfCAxIC0KIGRyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfZHJtLmMgICAgICAg
+ICAgfCAzICsrLQogZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9kcnYuaCAgICAgICAg
+ICB8IDUgKysrKy0KIGRyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfZmJjb24uYyAgICAg
+ICAgfCAyICstCiBkcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2ZlbmNlLmMgICAgICAg
+IHwgMyArLS0KIGRyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfZ2VtLmggICAgICAgICAg
+fCAyIC0tCiBkcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2h3bW9uLmMgICAgICAgIHwg
+MiAtLQogZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9pb2MzMi5jICAgICAgICB8IDMg
+KystCiBkcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X3ByaW1lLmMgICAgICAgIHwgMSAt
+CiBkcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X3ZnYS5jICAgICAgICAgIHwgMSAtCiAz
+MyBmaWxlcyBjaGFuZ2VkLCAzMSBpbnNlcnRpb25zKCspLCAzNCBkZWxldGlvbnMoLSkKCl9fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCk5vdXZlYXUgbWFpbGlu
+ZyBsaXN0Ck5vdXZlYXVAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRl
+c2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vbm91dmVhdQ==
