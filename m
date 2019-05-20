@@ -1,45 +1,57 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6C0112401C
-	for <lists+nouveau@lfdr.de>; Mon, 20 May 2019 20:15:40 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id BA86E2D470
+	for <lists+nouveau@lfdr.de>; Wed, 29 May 2019 06:10:54 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 78295891E2;
-	Mon, 20 May 2019 18:15:38 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id EEA3C6E06F;
+	Wed, 29 May 2019 04:10:50 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
- by gabe.freedesktop.org (Postfix) with ESMTP id 908578924C
- for <nouveau@lists.freedesktop.org>; Mon, 20 May 2019 18:15:37 +0000 (UTC)
-Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 8CD4372167; Mon, 20 May 2019 18:15:37 +0000 (UTC)
-From: bugzilla-daemon@freedesktop.org
-To: nouveau@lists.freedesktop.org
-Date: Mon, 20 May 2019 18:15:37 +0000
-X-Bugzilla-Reason: AssignedTo
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: None
-X-Bugzilla-Product: xorg
-X-Bugzilla-Component: Driver/nouveau
-X-Bugzilla-Version: unspecified
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: critical
-X-Bugzilla-Who: karolherbst@gmail.com
-X-Bugzilla-Status: RESOLVED
-X-Bugzilla-Resolution: NOTOURBUG
-X-Bugzilla-Priority: medium
-X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-110714-8800-TAwHVXSqxA@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-110714-8800@http.bugs.freedesktop.org/>
-References: <bug-110714-8800@http.bugs.freedesktop.org/>
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-MIME-Version: 1.0
-Subject: [Nouveau] [Bug 110714] Xorg crashes randomly because of memory leak
+Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
+ [IPv6:2607:f8b0:4864:20::62d])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 928EC89193;
+ Mon, 20 May 2019 18:57:17 +0000 (UTC)
+Received: by mail-pl1-x62d.google.com with SMTP id r18so7109932pls.13;
+ Mon, 20 May 2019 11:57:17 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id;
+ bh=8Lt7rSnSkayzVvx67ZsDNX8yUH1XBDbeQw+L9abvZe8=;
+ b=C+9WLhW0V3zVwjbWut4yTbOjgXsp81OYlfN89kfQv/2yaZVLI5BYYLAHcegAIMgNhQ
+ EMErSDPL6DTREjipKLHkuvZjC+N0ZxexSqtqTBXQV8O0E4LQvFtGav+updtMX+B0zzkB
+ oOSWdSU9TC0DPlmBuV6d3p48iPFqx9CDgWcBDlRTpwtr68vcPtLGX0SAjzTf6xACWamJ
+ hgd/G8gk4qW8j3xqXEN8CIoaMXWAGmLjD+KBgdB6z2ieHTc2+3zmn6JKzMdk/YMPsanX
+ 9FG1+4eYSqro08WhH9TVMU4+ZG+RBjLdB/EOkEsjro4F+XmUROhXj1i7oCetAMBrkhMk
+ sE2g==
+X-Gm-Message-State: APjAAAVl6e+pA8iTkflGIYd9gRoTEwrYDt2lWIG6Kt3Im4izvE6Ivj1J
+ T5cXc3ZpVkNeBhe18UC+ShE=
+X-Google-Smtp-Source: APXvYqxVlxI+C53z9BfpApHBqX5Bh4zPMCrVSRk4CROsV3Nz+iH6IjFXfgCxjIhzf4CaBiwwWe3nUw==
+X-Received: by 2002:a17:902:d896:: with SMTP id
+ b22mr64516718plz.40.1558378637077; 
+ Mon, 20 May 2019 11:57:17 -0700 (PDT)
+Received: from jordon-HP-15-Notebook-PC.domain.name ([106.51.23.153])
+ by smtp.gmail.com with ESMTPSA id k30sm13607075pgl.89.2019.05.20.11.57.13
+ (version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+ Mon, 20 May 2019 11:57:15 -0700 (PDT)
+From: Souptick Joarder <jrdr.linux@gmail.com>
+To: bskeggs@redhat.com, airlied@linux.ie, daniel@ffwll.ch, jglisse@redhat.com
+Date: Tue, 21 May 2019 00:31:58 +0530
+Message-Id: <1558378918-25279-1-git-send-email-jrdr.linux@gmail.com>
+X-Mailer: git-send-email 1.9.1
+X-Mailman-Approved-At: Wed, 29 May 2019 04:10:47 +0000
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20161025;
+ h=from:to:cc:subject:date:message-id;
+ bh=8Lt7rSnSkayzVvx67ZsDNX8yUH1XBDbeQw+L9abvZe8=;
+ b=MmIoi8oqygXCLZy6E+9vNzH0H+XcQpdYN8P2HUH/MXWiF0urxOgo5E08QftQCPg6bx
+ 1YJ4p50CDP1Nph8zBNIQc7mL2PqtMChBUcWCTbJHNH43+tC3C1Hcm/mFCySjP+ImYnbV
+ qqKhTuMgWXz3s3Shx9KcZqWOf4mvchFNq3FD48g3ALRHMHPOOOnUM++tgvnQ62pEGzsm
+ h3USo901W3k+/b5bFvdhmwdDI9eZ3nfLz9t+1+L9qbtHHC6PUXRSkdgEu7bEGDiDbHjt
+ /BMp2HqmwC7azDnhJNtLO3dnHe9f4mzljiAuXqMIROzSpk+Td5PadV9Kb9DQSDTZzkeS
+ 0msQ==
+Subject: [Nouveau] [PATCH] drm/nouveau/svm: Convert to use hmm_range_fault()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -51,92 +63,27 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0108268013=="
+Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, Souptick Joarder <jrdr.linux@gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-
---===============0108268013==
-Content-Type: multipart/alternative; boundary="15583761373.1eD21a.21500"
-Content-Transfer-Encoding: 7bit
-
-
---15583761373.1eD21a.21500
-Date: Mon, 20 May 2019 18:15:37 +0000
-MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-https://bugs.freedesktop.org/show_bug.cgi?id=3D110714
-
---- Comment #3 from Karol Herbst <karolherbst@gmail.com> ---
-fyi: the patch was merged into the 1.20 xorg-server branch and should be in=
- for
-1.20.5
-
---=20
-You are receiving this mail because:
-You are the assignee for the bug.=
-
---15583761373.1eD21a.21500
-Date: Mon, 20 May 2019 18:15:37 +0000
-MIME-Version: 1.0
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-<html>
-    <head>
-      <base href=3D"https://bugs.freedesktop.org/">
-    </head>
-    <body>
-      <p>
-        <div>
-            <b><a class=3D"bz_bug_link=20
-          bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED NOTOURBUG - Xorg crashes randomly because of memory le=
-ak"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110714#c3">Commen=
-t # 3</a>
-              on <a class=3D"bz_bug_link=20
-          bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED NOTOURBUG - Xorg crashes randomly because of memory le=
-ak"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110714">bug 11071=
-4</a>
-              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
-karolherbst&#64;gmail.com" title=3D"Karol Herbst &lt;karolherbst&#64;gmail.=
-com&gt;"> <span class=3D"fn">Karol Herbst</span></a>
-</span></b>
-        <pre>fyi: the patch was merged into the 1.20 xorg-server branch and=
- should be in for
-1.20.5</pre>
-        </div>
-      </p>
-
-
-      <hr>
-      <span>You are receiving this mail because:</span>
-
-      <ul>
-          <li>You are the assignee for the bug.</li>
-      </ul>
-    </body>
-</html>=
-
---15583761373.1eD21a.21500--
-
---===============0108268013==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
-YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
-cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
-
---===============0108268013==--
+Q29udmVydCB0byB1c2UgaG1tX3JhbmdlX2ZhdWx0KCkuCgpTaWduZWQtb2ZmLWJ5OiBTb3VwdGlj
+ayBKb2FyZGVyIDxqcmRyLmxpbnV4QGdtYWlsLmNvbT4KLS0tCiBkcml2ZXJzL2dwdS9kcm0vbm91
+dmVhdS9ub3V2ZWF1X3N2bS5jIHwgMiArLQogMSBmaWxlIGNoYW5nZWQsIDEgaW5zZXJ0aW9uKCsp
+LCAxIGRlbGV0aW9uKC0pCgpkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91
+dmVhdV9zdm0uYyBiL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfc3ZtLmMKaW5kZXgg
+OTNlZDQzYy4uOGQ1NmJkNiAxMDA2NDQKLS0tIGEvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91
+dmVhdV9zdm0uYworKysgYi9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X3N2bS5jCkBA
+IC02NDksNyArNjQ5LDcgQEAgc3RydWN0IG5vdXZlYXVfc3ZtbSB7CiAJCXJhbmdlLnZhbHVlcyA9
+IG5vdXZlYXVfc3ZtX3Bmbl92YWx1ZXM7CiAJCXJhbmdlLnBmbl9zaGlmdCA9IE5WSUZfVk1NX1BG
+Tk1BUF9WMF9BRERSX1NISUZUOwogYWdhaW46Ci0JCXJldCA9IGhtbV92bWFfZmF1bHQoJnJhbmdl
+LCB0cnVlKTsKKwkJcmV0ID0gaG1tX3JhbmdlX2ZhdWx0KCZyYW5nZSwgdHJ1ZSk7CiAJCWlmIChy
+ZXQgPT0gMCkgewogCQkJbXV0ZXhfbG9jaygmc3ZtbS0+bXV0ZXgpOwogCQkJaWYgKCFobW1fdm1h
+X3JhbmdlX2RvbmUoJnJhbmdlKSkgewotLSAKMS45LjEKCl9fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fCk5vdXZlYXUgbWFpbGluZyBsaXN0Ck5vdXZlYXVAbGlz
+dHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4v
+bGlzdGluZm8vbm91dmVhdQ==
