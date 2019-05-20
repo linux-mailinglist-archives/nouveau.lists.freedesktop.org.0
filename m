@@ -2,54 +2,45 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9367B22D2C
-	for <lists+nouveau@lfdr.de>; Mon, 20 May 2019 09:34:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D170122F18
+	for <lists+nouveau@lfdr.de>; Mon, 20 May 2019 10:38:27 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 28BFF891CC;
-	Mon, 20 May 2019 07:34:31 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 61CEE89336;
+	Mon, 20 May 2019 08:38:26 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ua1-x943.google.com (mail-ua1-x943.google.com
- [IPv6:2607:f8b0:4864:20::943])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E5E71891CC;
- Mon, 20 May 2019 07:34:29 +0000 (UTC)
-Received: by mail-ua1-x943.google.com with SMTP id 7so4916954uah.1;
- Mon, 20 May 2019 00:34:29 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=eTA7TiPYUBCN90q0Ahd3C4Um2vwnIeelsOkUFfr83lI=;
- b=VnNZoOB6AN6yUVcoMerHzYKE7vEZz49HAY/TorWK0WDZwF7yipPnQUc3ezFNPFVflW
- SqkxX4hbmbFt2U++aIRcKgWY9loJ6UbrxM64sNkoq+CkGsguwRvlQjRJfp9MMzByTR4H
- aUwUdtk9jSHM1ptWSsjJQ326BAZluW3dVoKF0yO2TuJMGQi2sJfd6xkgCwigivnhUSns
- f5sRAg/r6bFLrkKlWy6Qqi12FXRw49dDm/XjRmkStywYmlI1zHZWfUxwuFAPlhJHC3M0
- GpMk7KhQb5l9Md6ftTCPonwWg0CBm/VU2TCiQzJ8GglE9VkbzBWWRj1Zogd+z8K2TGPJ
- idNg==
-X-Gm-Message-State: APjAAAXTYH/LVXC5qntTFU/61IW9+R6D3X4Jp/eA/V0M7GIqu08l/43X
- jZNx0ayumfrQ7NaZxe0rRuwx7jFoCux2MRqK90Q=
-X-Google-Smtp-Source: APXvYqx6RkN2E89W6tpsrQaVDffZ1nIZ3GG1xPQKkDMABo4qYGlfw/JY7kH4V1AMFTsG/GW/Fa5HfLAIsZ7EX2Rg6Eo=
-X-Received: by 2002:ab0:6552:: with SMTP id x18mr10127133uap.11.1558337668952; 
- Mon, 20 May 2019 00:34:28 -0700 (PDT)
+Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
+ [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 770A089336
+ for <nouveau@lists.freedesktop.org>; Mon, 20 May 2019 08:38:25 +0000 (UTC)
+Received: by culpepper.freedesktop.org (Postfix, from userid 33)
+ id 73A1B72167; Mon, 20 May 2019 08:38:25 +0000 (UTC)
+From: bugzilla-daemon@freedesktop.org
+To: nouveau@lists.freedesktop.org
+Date: Mon, 20 May 2019 08:38:25 +0000
+X-Bugzilla-Reason: AssignedTo
+X-Bugzilla-Type: new
+X-Bugzilla-Watch-Reason: None
+X-Bugzilla-Product: xorg
+X-Bugzilla-Component: Driver/nouveau
+X-Bugzilla-Version: unspecified
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: critical
+X-Bugzilla-Who: pdraganov@taxback.com
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: medium
+X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: bug_id short_desc product version rep_platform
+ op_sys bug_status bug_severity priority component assigned_to reporter
+ qa_contact attachments.created
+Message-ID: <bug-110714-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-References: <20190519140044.22142-1-sam@ravnborg.org>
-In-Reply-To: <20190519140044.22142-1-sam@ravnborg.org>
-From: Ben Skeggs <skeggsb@gmail.com>
-Date: Mon, 20 May 2019 17:34:17 +1000
-Message-ID: <CACAvsv66PooWUHMRDT+Ug4tqmhd4Qgs+Ads2_Y__VAoQWG520A@mail.gmail.com>
-To: Sam Ravnborg <sam@ravnborg.org>
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc;
- bh=eTA7TiPYUBCN90q0Ahd3C4Um2vwnIeelsOkUFfr83lI=;
- b=MlUp+rK+J0fqfGtrrA9kpMc2N+YeWe01taIBe/k+kEqi2YJBqyB22TiVsJDCzMrCzM
- NCDcJZ7EwhspsiKS57U0h/cgXl4xGw/ZnqJxv/yvybgOeuZFmGK9qvPZQe2PQhdmk1P6
- 6qOKVfTTg7MD+yRZDZuXmpwz3f7y8yasz+zzA5QnyoXtvKBazf5stzMm/1j4cb/pcVim
- /GNorkbhflbC/sYag7ytD07O/HMXivL4PUnjDlwqO7ndM6Cvv822KfSkUrXFkaUozbZR
- YyCSimn7EIi5MQKy80v4lBnIcUdiNjm1GBYSRkymlWgLioRpWW3+g+0N3V5KkQB7PQdL
- CVzA==
-Subject: Re: [Nouveau] [PATCH v1 0/4] drm/nouveau: drop use of drmP.h
+Subject: [Nouveau] [Bug 110714] New: Xorg crashes randomly because of memory
+ leak
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -61,66 +52,256 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
- Daniel Vetter <daniel@ffwll.ch>, Ben Skeggs <bskeggs@redhat.com>,
- dri-devel@lists.freedesktop.org
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1351051058=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-T24gTW9uLCAyMCBNYXkgMjAxOSBhdCAwMDowMCwgU2FtIFJhdm5ib3JnIDxzYW1AcmF2bmJvcmcu
-b3JnPiB3cm90ZToKPgo+IFRoZSBmb2xsb3dpbmcgcGF0Y2hzZXQgcmVtb3ZlIHVzZSBvZiB0aGUg
-ZGVwcmVjYXRlZCBkcm1QLmgKPiBoZWFkZXIgZmlsZSBpbiB0aGUgbm91dmVhdSBkcml2ZXIocyku
-Cj4gQXMgcHJlcGFyYXRpb24gYSBkZXBlbmRlbmN5IG9uIGRybV9vc19saW51eC5oIGlzIGRyb3Bw
-ZWQuCj4gVGhlIGxpc3Qgb2YgaW5jbHVkZSBmaWxlcyBhcmUgc29ydGVkIGFuZCBhcmUgaW4gc29t
-ZSBjYXNlcwo+IGRpdmlkZWQgdXAgaW4gYmxvY2tzIG9mIGxpbnV4LyogZHJtLyogZXRjLgo+Cj4g
-VGhlIHJlbW92YWwgaXMgZGl2aWRlZCB1cCBpbiBhIGZldyBwYXRjaGVzIHRoYXQgd2FzIHRoZSBs
-b2dpY2FsCj4gc3RlcHMgdG8gcmVtb3ZlIHRoZSB1c2Ugb2YgZHJtUC5oLgo+Cj4gQnVpbGQgdGVz
-dGVkIHdpdGggYWxsbW9kY29uZmlnIGFuZCBhbGx5ZXNjb25maWcgZm9yIHg4NiwgYXJtLCBhbHBo
-YSBhbmQgbW9yZS4KPgo+IFBhdGNoc2V0IG1hZGUgb24gdG9wIG9mIGRybS1taXNjLW5leHQuClRo
-YW5rIHlvdSwgSSd2ZSBtZXJnZWQgYWxsIG9mIHRoZXNlIGluIG15IHRyZWUuCgpCZW4uCgo+Cj4g
-ICAgICAgICBTYW0KPgo+IFNhbSBSYXZuYm9yZyAoNCk6Cj4gICAgICAgZHJtL25vdXZlYXU6IGRy
-b3AgdXNlIG9mIERSTV9VREVMQVkKPiAgICAgICBkcm0vbm91dmVhdTogZHJvcCBkcm1QLmggZnJv
-bSBub3V2ZWF1X2Rydi5oCj4gICAgICAgZHJtL25vdXZlYXU6IGRyb3AgZHJtUC5oIGZyb20gYWxs
-IGhlYWRlciBmaWxlcwo+ICAgICAgIGRybS9ub3V2ZWF1OiBkcm9wIHVzZSBvZiBkcm1wLmgKPgo+
-ICBkcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9kaXNwbnYwNC9hcmIuYyAgICAgICAgIHwgMiAtLQo+
-ICBkcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9kaXNwbnYwNC9jcnRjLmMgICAgICAgIHwgMyArKy0K
-PiAgZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvZGlzcG52MDQvY3Vyc29yLmMgICAgICB8IDEgLQo+
-ICBkcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9kaXNwbnYwNC9kYWMuYyAgICAgICAgIHwgMSAtCj4g
-IGRyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L2Rpc3BudjA0L2RmcC5jICAgICAgICAgfCAyICstCj4g
-IGRyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L2Rpc3BudjA0L2Rpc3AuYyAgICAgICAgfCAxIC0KPiAg
-ZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvZGlzcG52MDQvaHcuYyAgICAgICAgICB8IDEgLQo+ICBk
-cml2ZXJzL2dwdS9kcm0vbm91dmVhdS9kaXNwbnYwNC9ody5oICAgICAgICAgIHwgMSAtCj4gIGRy
-aXZlcnMvZ3B1L2RybS9ub3V2ZWF1L2Rpc3BudjA0L292ZXJsYXkuYyAgICAgfCAxIC0KPiAgZHJp
-dmVycy9ncHUvZHJtL25vdXZlYXUvZGlzcG52MDQvdHZtb2Rlc252MTcuYyB8IDEgLQo+ICBkcml2
-ZXJzL2dwdS9kcm0vbm91dmVhdS9kaXNwbnYwNC90dm52MDQuYyAgICAgIHwgMSAtCj4gIGRyaXZl
-cnMvZ3B1L2RybS9ub3V2ZWF1L2Rpc3BudjA0L3R2bnYxNy5jICAgICAgfCAxIC0KPiAgZHJpdmVy
-cy9ncHUvZHJtL25vdXZlYXUvZGlzcG52NTAvYmFzZTUwN2MuYyAgICB8IDIgKysKPiAgZHJpdmVy
-cy9ncHUvZHJtL25vdXZlYXUvZGlzcG52NTAvZGlzcC5jICAgICAgICB8IDQgKystLQo+ICBkcml2
-ZXJzL2dwdS9kcm0vbm91dmVhdS9kaXNwbnY1MC9vdmx5NTA3ZS5jICAgIHwgMSArCj4gIGRyaXZl
-cnMvZ3B1L2RybS9ub3V2ZWF1L2Rpc3BudjUwL3duZHcuYyAgICAgICAgfCAyICsrCj4gIGRyaXZl
-cnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfYmlvcy5jICAgICAgICAgfCAyIC0tCj4gIGRyaXZl
-cnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfY29ubmVjdG9yLmMgICAgfCAxIC0KPiAgZHJpdmVy
-cy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9jcnRjLmggICAgICAgICB8IDIgKysKPiAgZHJpdmVy
-cy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9kZWJ1Z2ZzLmggICAgICB8IDIgKy0KPiAgZHJpdmVy
-cy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9kaXNwbGF5LmMgICAgICB8IDQgKysrLQo+ICBkcml2
-ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2Rpc3BsYXkuaCAgICAgIHwgNCArKysrCj4gIGRy
-aXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfZG1hLmMgICAgICAgICAgfCAyICstCj4gIGRy
-aXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfZHAuYyAgICAgICAgICAgfCAxIC0KPiAgZHJp
-dmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9kcm0uYyAgICAgICAgICB8IDMgKystCj4gIGRy
-aXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfZHJ2LmggICAgICAgICAgfCA1ICsrKystCj4g
-IGRyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfZmJjb24uYyAgICAgICAgfCAyICstCj4g
-IGRyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfZmVuY2UuYyAgICAgICAgfCAzICstLQo+
-ICBkcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2dlbS5oICAgICAgICAgIHwgMiAtLQo+
-ICBkcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2h3bW9uLmMgICAgICAgIHwgMiAtLQo+
-ICBkcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2lvYzMyLmMgICAgICAgIHwgMyArKy0K
-PiAgZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9wcmltZS5jICAgICAgICB8IDEgLQo+
-ICBkcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X3ZnYS5jICAgICAgICAgIHwgMSAtCj4g
-IDMzIGZpbGVzIGNoYW5nZWQsIDMxIGluc2VydGlvbnMoKyksIDM0IGRlbGV0aW9ucygtKQo+Cj4g
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KPiBOb3V2ZWF1
-IG1haWxpbmcgbGlzdAo+IE5vdXZlYXVAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCj4gaHR0cHM6Ly9s
-aXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1Cl9fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCk5vdXZlYXUgbWFpbGluZyBsaXN0
-Ck5vdXZlYXVAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Au
-b3JnL21haWxtYW4vbGlzdGluZm8vbm91dmVhdQ==
+
+--===============1351051058==
+Content-Type: multipart/alternative; boundary="15583415051.aAFBD76.19109"
+Content-Transfer-Encoding: 7bit
+
+
+--15583415051.aAFBD76.19109
+Date: Mon, 20 May 2019 08:38:25 +0000
+MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+https://bugs.freedesktop.org/show_bug.cgi?id=3D110714
+
+            Bug ID: 110714
+           Summary: Xorg crashes randomly because of memory leak
+           Product: xorg
+           Version: unspecified
+          Hardware: x86-64 (AMD64)
+                OS: Linux (All)
+            Status: NEW
+          Severity: critical
+          Priority: medium
+         Component: Driver/nouveau
+          Assignee: nouveau@lists.freedesktop.org
+          Reporter: pdraganov@taxback.com
+        QA Contact: xorg-team@lists.x.org
+
+Created attachment 144304
+  --> https://bugs.freedesktop.org/attachment.cgi?id=3D144304&action=3Dedit
+Xorg.log and gdb of coredump
+
+Xorg (xorg-x11-server-Xorg-1.20.4-3.fc30.x86_64,
+xorg-x11-drv-nouveau-1.0.15-7.fc30.x86_64) crashes randomly on NVIDIA
+Corporation GT216 [GeForce GT 220] (rev a2) with glamor out of memory
+segmentation fault:
+
+[ 32704.411] (EE) glamor0: GL error: GL_OUT_OF_MEMORY in glTexSubImage
+[ 32704.907] (WW) glamor: Failed to allocate 40x4 FBO due to GL_OUT_OF_MEMO=
+RY.
+[ 32704.908] (WW) glamor: Expect reduced performance.
+[ 32704.908] (EE)=20
+[ 32704.908] (EE) Backtrace:
+[ 32704.954] (EE) 0: /usr/libexec/Xorg (OsLookupColor+0x13c) [0x55f8f11f175=
+c]
+[ 32704.978] (EE) 1: /lib64/libpthread.so.0 (funlockfile+0x50) [0x7ff9bb6ec=
+ebf]
+[ 32704.980] (EE) 2: /usr/lib64/xorg/modules/libglamoregl.so
+(glamor_get_pixmap_texture+0x81) [0x7ff9bad74101]
+[ 32704.981] (EE) 3: /usr/lib64/xorg/modules/libglamoregl.so
+(glamor_create_gc+0x7c81) [0x7ff9bad86991]
+[ 32704.982] (EE) 4: /usr/lib64/xorg/modules/libglamoregl.so
+(glamor_create_gc+0x8054) [0x7ff9bad870e4]
+[ 32704.983] (EE) 5: /usr/lib64/xorg/modules/libglamoregl.so
+(glamor_create_gc+0x86af) [0x7ff9bad878bf]
+[ 32704.985] (EE) 6: /usr/lib64/xorg/modules/libglamoregl.so
+(glamor_create_gc+0xa66c) [0x7ff9bad8b4ac]
+[ 32704.985] (EE) 7: /usr/libexec/Xorg (DamageRegionAppend+0x6c0)
+[0x55f8f11734a0]
+[ 32704.986] (EE) 8: /usr/lib64/xorg/modules/libglamoregl.so
+(glamor_create_gc+0x11610) [0x7ff9bad99ac0]
+[ 32704.987] (EE) 9: /usr/libexec/Xorg (AddTraps+0x4228) [0x55f8f116bca8]
+[ 32704.987] (EE) 10: /usr/libexec/Xorg (SendErrorToClient+0x35e)
+[0x55f8f1092c6e]
+[ 32704.988] (EE) 11: /usr/libexec/Xorg (InitFonts+0x3b4) [0x55f8f1096ce4]
+[ 32704.989] (EE) 12: /lib/libc.so.6 (__libc_start_main+0xf3) [0x7ff9bb537f=
+33]
+[ 32704.989] (EE) 13: /usr/libexec/Xorg (_start+0x2e) [0x55f8f108081e]
+[ 32704.989] (EE)=20
+[ 32704.989] (EE) Segmentation fault at address 0x0
+[ 32704.989] (EE)=20
+Fatal server error:
+[ 32704.990] (EE) Caught signal 11 (Segmentation fault). Server aborting
+
+--=20
+You are receiving this mail because:
+You are the assignee for the bug.=
+
+--15583415051.aAFBD76.19109
+Date: Mon, 20 May 2019 08:38:25 +0000
+MIME-Version: 1.0
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+<html>
+    <head>
+      <base href=3D"https://bugs.freedesktop.org/">
+    </head>
+    <body><table border=3D"1" cellspacing=3D"0" cellpadding=3D"8">
+        <tr>
+          <th>Bug ID</th>
+          <td><a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - Xorg crashes randomly because of memory leak"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110714">110714</a>
+          </td>
+        </tr>
+
+        <tr>
+          <th>Summary</th>
+          <td>Xorg crashes randomly because of memory leak
+          </td>
+        </tr>
+
+        <tr>
+          <th>Product</th>
+          <td>xorg
+          </td>
+        </tr>
+
+        <tr>
+          <th>Version</th>
+          <td>unspecified
+          </td>
+        </tr>
+
+        <tr>
+          <th>Hardware</th>
+          <td>x86-64 (AMD64)
+          </td>
+        </tr>
+
+        <tr>
+          <th>OS</th>
+          <td>Linux (All)
+          </td>
+        </tr>
+
+        <tr>
+          <th>Status</th>
+          <td>NEW
+          </td>
+        </tr>
+
+        <tr>
+          <th>Severity</th>
+          <td>critical
+          </td>
+        </tr>
+
+        <tr>
+          <th>Priority</th>
+          <td>medium
+          </td>
+        </tr>
+
+        <tr>
+          <th>Component</th>
+          <td>Driver/nouveau
+          </td>
+        </tr>
+
+        <tr>
+          <th>Assignee</th>
+          <td>nouveau&#64;lists.freedesktop.org
+          </td>
+        </tr>
+
+        <tr>
+          <th>Reporter</th>
+          <td>pdraganov&#64;taxback.com
+          </td>
+        </tr>
+
+        <tr>
+          <th>QA Contact</th>
+          <td>xorg-team&#64;lists.x.org
+          </td>
+        </tr></table>
+      <p>
+        <div>
+        <pre>Created <span class=3D""><a href=3D"attachment.cgi?id=3D144304=
+" name=3D"attach_144304" title=3D"Xorg.log and gdb of coredump">attachment =
+144304</a> <a href=3D"attachment.cgi?id=3D144304&amp;action=3Dedit" title=
+=3D"Xorg.log and gdb of coredump">[details]</a></span>
+Xorg.log and gdb of coredump
+
+Xorg (xorg-x11-server-Xorg-1.20.4-3.fc30.x86_64,
+xorg-x11-drv-nouveau-1.0.15-7.fc30.x86_64) crashes randomly on NVIDIA
+Corporation GT216 [GeForce GT 220] (rev a2) with glamor out of memory
+segmentation fault:
+
+[ 32704.411] (EE) glamor0: GL error: GL_OUT_OF_MEMORY in glTexSubImage
+[ 32704.907] (WW) glamor: Failed to allocate 40x4 FBO due to GL_OUT_OF_MEMO=
+RY.
+[ 32704.908] (WW) glamor: Expect reduced performance.
+[ 32704.908] (EE)=20
+[ 32704.908] (EE) Backtrace:
+[ 32704.954] (EE) 0: /usr/libexec/Xorg (OsLookupColor+0x13c) [0x55f8f11f175=
+c]
+[ 32704.978] (EE) 1: /lib64/libpthread.so.0 (funlockfile+0x50) [0x7ff9bb6ec=
+ebf]
+[ 32704.980] (EE) 2: /usr/lib64/xorg/modules/libglamoregl.so
+(glamor_get_pixmap_texture+0x81) [0x7ff9bad74101]
+[ 32704.981] (EE) 3: /usr/lib64/xorg/modules/libglamoregl.so
+(glamor_create_gc+0x7c81) [0x7ff9bad86991]
+[ 32704.982] (EE) 4: /usr/lib64/xorg/modules/libglamoregl.so
+(glamor_create_gc+0x8054) [0x7ff9bad870e4]
+[ 32704.983] (EE) 5: /usr/lib64/xorg/modules/libglamoregl.so
+(glamor_create_gc+0x86af) [0x7ff9bad878bf]
+[ 32704.985] (EE) 6: /usr/lib64/xorg/modules/libglamoregl.so
+(glamor_create_gc+0xa66c) [0x7ff9bad8b4ac]
+[ 32704.985] (EE) 7: /usr/libexec/Xorg (DamageRegionAppend+0x6c0)
+[0x55f8f11734a0]
+[ 32704.986] (EE) 8: /usr/lib64/xorg/modules/libglamoregl.so
+(glamor_create_gc+0x11610) [0x7ff9bad99ac0]
+[ 32704.987] (EE) 9: /usr/libexec/Xorg (AddTraps+0x4228) [0x55f8f116bca8]
+[ 32704.987] (EE) 10: /usr/libexec/Xorg (SendErrorToClient+0x35e)
+[0x55f8f1092c6e]
+[ 32704.988] (EE) 11: /usr/libexec/Xorg (InitFonts+0x3b4) [0x55f8f1096ce4]
+[ 32704.989] (EE) 12: /lib/libc.so.6 (__libc_start_main+0xf3) [0x7ff9bb537f=
+33]
+[ 32704.989] (EE) 13: /usr/libexec/Xorg (_start+0x2e) [0x55f8f108081e]
+[ 32704.989] (EE)=20
+[ 32704.989] (EE) Segmentation fault at address 0x0
+[ 32704.989] (EE)=20
+Fatal server error:
+[ 32704.990] (EE) Caught signal 11 (Segmentation fault). Server aborting</p=
+re>
+        </div>
+      </p>
+
+
+      <hr>
+      <span>You are receiving this mail because:</span>
+
+      <ul>
+          <li>You are the assignee for the bug.</li>
+      </ul>
+    </body>
+</html>=
+
+--15583415051.aAFBD76.19109--
+
+--===============1351051058==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
+YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
+cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============1351051058==--
