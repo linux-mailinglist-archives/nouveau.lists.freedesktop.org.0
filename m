@@ -2,44 +2,44 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 81DBC231F8
-	for <lists+nouveau@lfdr.de>; Mon, 20 May 2019 13:08:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E8FFB237F3
+	for <lists+nouveau@lfdr.de>; Mon, 20 May 2019 15:23:32 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6C1C489286;
-	Mon, 20 May 2019 11:08:54 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id BB2158926A;
+	Mon, 20 May 2019 13:23:30 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
- by gabe.freedesktop.org (Postfix) with ESMTP id 7375889247
- for <nouveau@lists.freedesktop.org>; Mon, 20 May 2019 11:08:53 +0000 (UTC)
-Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 7015372167; Mon, 20 May 2019 11:08:53 +0000 (UTC)
-From: bugzilla-daemon@freedesktop.org
-To: nouveau@lists.freedesktop.org
-Date: Mon, 20 May 2019 11:08:53 +0000
-X-Bugzilla-Reason: AssignedTo
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: None
-X-Bugzilla-Product: xorg
-X-Bugzilla-Component: Driver/nouveau
-X-Bugzilla-Version: unspecified
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: critical
-X-Bugzilla-Who: imirkin@alum.mit.edu
-X-Bugzilla-Status: RESOLVED
-X-Bugzilla-Resolution: NOTOURBUG
-X-Bugzilla-Priority: medium
-X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-110714-8800-l6Ywg1qZ9Z@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-110714-8800@http.bugs.freedesktop.org/>
-References: <bug-110714-8800@http.bugs.freedesktop.org/>
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
+Received: from mail-io1-f67.google.com (mail-io1-f67.google.com
+ [209.85.166.67])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D1B4C8926A
+ for <nouveau@lists.freedesktop.org>; Mon, 20 May 2019 13:23:29 +0000 (UTC)
+Received: by mail-io1-f67.google.com with SMTP id p2so11015111iol.2
+ for <nouveau@lists.freedesktop.org>; Mon, 20 May 2019 06:23:29 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=UBrVfji9g8YN1QxOchrV6NTuPqjMFHnp9eL00F6ULiM=;
+ b=K5px0QvoaVSqVVUJDvBgezh2IjAFLOcoeeTZM4dtIBUAPKclk2S8GrwCvPzFreK6zr
+ trtfoQ4Gs7aXyGWkcTg9eLG+ZVSxlT1wzPkjPbmz0KjWQORfKi9+1XBHK/0Dk64K3+JT
+ 7GvWSnC3oHNe5uuNUEIcM6MJgqjFhR7S4SWw5Iezx2QHXE8sarbaPyxu8oowiKKMU7b1
+ TlTzw1YWJSEEPDl6JQtGH7LRrl5Vep9dRqc37j/0BhTdQ7b4sJ1q7kIKm/OtMMBXI/1g
+ VOfm6WS10xVdo/Htokko0zikuKwRdQqwy0TFqzwt0DhfKIquvEEj/ecYTv9f0Q7NBMEf
+ vPUw==
+X-Gm-Message-State: APjAAAW78Qz+s6w/f50QwusDXS5f7QTxNepIox6+Ooyi3QyTGhjkXYGZ
+ Fkt2efo/+hxXRO4V2/7VlNYbLMykOyn4vUBQPbp+08xg
+X-Google-Smtp-Source: APXvYqxgDIcPYHned1Xf/yYTEvrJIkIzs5wwpGhhFrfdvsPzxJrN7oiVZo0mO0/H8oor3x/E5Q58SxszabJc2I1Kqfw=
+X-Received: by 2002:a5e:a919:: with SMTP id c25mr17203847iod.166.1558358608788; 
+ Mon, 20 May 2019 06:23:28 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 110714] Xorg crashes randomly because of memory leak
+References: <20190507201245.9295-1-kherbst@redhat.com>
+In-Reply-To: <20190507201245.9295-1-kherbst@redhat.com>
+From: Karol Herbst <kherbst@redhat.com>
+Date: Mon, 20 May 2019 15:23:17 +0200
+Message-ID: <CACO55tvv6uoMkJq1J2eW-o9Lj-+DNZVB5emChMVW5jqSON4zpQ@mail.gmail.com>
+To: nouveau <nouveau@lists.freedesktop.org>
+Subject: Re: [Nouveau] [PATCH v2 0/4] Potential fix for runpm issues on
+ various laptops
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -51,92 +51,65 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============2039230498=="
+Cc: linux-pci@vger.kernel.org, Bjorn Helgaas <helgaas@kernel.org>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-
---===============2039230498==
-Content-Type: multipart/alternative; boundary="15583505332.696bd6ED.17439"
-Content-Transfer-Encoding: 7bit
-
-
---15583505332.696bd6ED.17439
-Date: Mon, 20 May 2019 11:08:53 +0000
-MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-https://bugs.freedesktop.org/show_bug.cgi?id=3D110714
-
---- Comment #2 from Ilia Mirkin <imirkin@alum.mit.edu> ---
-Additionally you're not using xf86-video-nouveau. (If you were, you wouldn'=
-t be
-using glamor.)
-
---=20
-You are receiving this mail because:
-You are the assignee for the bug.=
-
---15583505332.696bd6ED.17439
-Date: Mon, 20 May 2019 11:08:53 +0000
-MIME-Version: 1.0
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-<html>
-    <head>
-      <base href=3D"https://bugs.freedesktop.org/">
-    </head>
-    <body>
-      <p>
-        <div>
-            <b><a class=3D"bz_bug_link=20
-          bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED NOTOURBUG - Xorg crashes randomly because of memory le=
-ak"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110714#c2">Commen=
-t # 2</a>
-              on <a class=3D"bz_bug_link=20
-          bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED NOTOURBUG - Xorg crashes randomly because of memory le=
-ak"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110714">bug 11071=
-4</a>
-              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
-imirkin&#64;alum.mit.edu" title=3D"Ilia Mirkin &lt;imirkin&#64;alum.mit.edu=
-&gt;"> <span class=3D"fn">Ilia Mirkin</span></a>
-</span></b>
-        <pre>Additionally you're not using xf86-video-nouveau. (If you were=
-, you wouldn't be
-using glamor.)</pre>
-        </div>
-      </p>
-
-
-      <hr>
-      <span>You are receiving this mail because:</span>
-
-      <ul>
-          <li>You are the assignee for the bug.</li>
-      </ul>
-    </body>
-</html>=
-
---15583505332.696bd6ED.17439--
-
---===============2039230498==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
-YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
-cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
-
---===============2039230498==--
+cGluZyB0byB0aGUgcGNpIGZvbGtzPyBJIHJlYWxseSB3b3VsZCBsaWtlIHRvIGtub3cgd2hhdCB5
+b3UgbWFrZSBvdXQgb2YgaXQuCgpJbiBmYWN0LCB0aGlzIGtpbmQgb2YgbG9va3MgbGlrZSBhIHBj
+aWUgaXNzdWUsIGJ1dCBJIGp1c3QgZG9uJ3Qga25vdwplbm91Z2ggdG8gcmVhbGx5IGJlIGFibGUg
+dG8gdGVsbC4gSSBhbSBtYWlubHkgd29uZGVyaW5nIHdoeSBwdXR0aW5nCnRoZSBkZXZpY2Ugd2l0
+aCBhIDIuNSB2cyBhIDguMCBsaW5rIGludG8gZDNjb2xkIG1ha2VzIHRoZSByZXN1bWUgcGF0aApi
+cmVhaz8gQW55IGlkZWFzPyBicm9rZW4gcGNpZSBjb250cm9sbGVyPyBicm9rZW4gaW1wbGVtZW50
+YXRpb24gb24gdGhlCmdwdT8KCk9uIFR1ZSwgTWF5IDcsIDIwMTkgYXQgMTA6MTIgUE0gS2Fyb2wg
+SGVyYnN0IDxraGVyYnN0QHJlZGhhdC5jb20+IHdyb3RlOgo+Cj4gQ0NpbmcgbGludXgtcGNpIGFu
+ZCBCam9ybiBIZWxnYWFzLiBNYXliZSB3ZSBjb3VsZCBnZXQgYmV0dGVyIGluc2lnaHRzIG9uCj4g
+aG93IGEgcmVhc29uYWJsZSBmaXggd291bGQgbG9vayBsaWtlLgo+Cj4gQW55d2F5LCB0byBtZSB0
+aGlzIGVudGlyZSBpc3N1ZSBsb29rcyBsaWtlIHNvbWV0aGluZyB3aGljaCBoYXMgdG8gYmUgZml4
+ZWQKPiBvbiBhIFBDSSBsZXZlbCBpbnN0ZWFkIG9mIGluc2lkZSBhIGRyaXZlciwgc28gaXQgbWFr
+ZXMgc2Vuc2UgdG8gYXNrIHRoZQo+IHBjaSBmb2xrcyBpZiB0aGV5IGhhdmUgYW55IGJldHRlciBz
+dWdnZXN0aW9ucy4KPgo+IE9yaWdpbmFsIGNvdmVyIGxldHRlcjoKPiBXaGlsZSBpbnZlc3RpZ2F0
+aW5nIHRoZSBydW5wbSBpc3N1ZXMgb24gbXkgR1AxMDcgSSBub3RpY2VkIHRoYXQgc29tZXRoaW5n
+Cj4gaW5zaWRlIGRldmluaXQgbWFrZXMgcnVucG0gYnJlYWsuIElmIE5vdXZlYXUgbG9hZHMgdXAg
+dG8gdGhlIHBvaW50IHJpZ2h0Cj4gYmVmb3JlIGRvaW5nIGRldmluaXQsIHJ1bnBtIHdvcmtzIHdp
+dGhvdXQgYW55IGlzc3VlcywgaWYgZGV2aW5pdCBpcyByYW4sCj4gbm90IGFueW1vcmUuCj4KPiBP
+dXQgb2YgY3VyaW91c2l0eSBJIGV2ZW4gdHJpZWQgdG8gImJpc2VjdCIgZGV2aW5pdCBieSBub3Qg
+cnVubmluZyBpdCBvbgo+IHZiaW9zIHByb3ZpZGVkIHNpZ25lZCBQTVUgaW1hZ2UsIGJ1dCBvbiB0
+aGUgZGV2aW5pdCBwYXJzZXIgd2UgaGF2ZSBpbnNpZGUKPiBOb3V2ZWF1Lgo+IEFsbHRob3VnaCB0
+aGlzIG9uZSBpc24ndCBhcyBmZWF0dXJlIGNvbXBsZXRlIGFzIHRoZSB2YmlvcyBvbmUsIEkgd2Fz
+IGFibGUKPiB0byByZXByb2R1Y2UgdGhlIHJ1bnBtIGlzc3VlcyBhcyB3ZWxsLiBGcm9tIHRoYXQg
+cG9pbnQgSSB3YXMgYWJsZSB0byBvbmx5Cj4gcnVuIGEgY2VydGFpbiBhbW91bnQgb2YgY29tbWFu
+ZHMgdW50aWwgSSBnb3QgdG8gc29tZSBQQ0llIGluaXRpYWxpemF0aW9uCj4gY29kZSBpbnNpZGUg
+ZGV2aW5pdCB3aGljaCB0cmlnZ2VyIHRob3NlIHJ1bnBtIGlzc3Vlcy4KPgo+IERldmluaXQgb24g
+bXkgR1BVIHdhcyBjaGFuZ2luZyB0aGUgUENJZSBsaW5rIGZyb20gOC4wIHRvIDIuNSwgcmV2ZXJz
+aW5nCj4gdGhhdCBvbiB0aGUgZmluaSBwYXRoIG1ha2VzIHJ1bnBtIHdvcmsgYWdhaW4uCj4KPiBU
+aGVyZSBhcmUgYSBmZXcgb3RoZXIgdGhpbmdzIGdvaW5nIG9uLCBidXQgd2l0aCBteSBsaW1pdGVk
+IGtub3dsZWRnZSBhYm91dAo+IFBDSWUgaW4gZ2VuZXJhbCwgdGhlIGNoYW5nZSBpbiB0aGUgbGlu
+ayBzcGVlZCBzb3VuZGVkIGxpa2UgaXQgY291bGQgY2F1c2UKPiBpc3N1ZXMgb24gcmVzdW1lIGlm
+IHRoZSBjb250cm9sbGVyIGFuZCB0aGUgZGV2aWNlIGRpc2FncmVlIG9uIHRoZSBhY3R1YWwKPiBs
+aW5rLgo+Cj4gTWF5YmUgdGhpcyBpcyBqdXN0IGEgYnVnIHdpdGhpbiB0aGUgUENJIHN1YnN5c3Rl
+bSBpbnNpZGUgbGludXggaW5zdGVhZCBhbmQKPiB0aGUgY29udHJvbGxlciBoYXMgdG8gYmUgZm9y
+Y2VkIHRvIGRvIF9zb21ldGhpbmdfPwo+Cj4gQW55d2F5LCB3aXRoIHRoaXMgcnVucG0gc2VlbXMg
+dG8gd29yayBuaWNlbHkgb24gbXkgbWFjaGluZS4gU2VjdXJlIGJvb3RpbmcKPiB0aGUgZ3IgKGV2
+ZW4gd2l0aCBteSB3b3JrYXJvdW5kIGFwcGxpZWQgSSBuZWVkIGFueXdheSkgbWlnaHQgZmFpbCBh
+ZnRlcgo+IHRoZSBHUFUgZ290IHJ1bnRpbWUgcmVzdW1lZCB0aG91Z2guLi4KPgo+IEthcm9sIEhl
+cmJzdCAoNCk6Cj4gICBkcm06IGRvbid0IHNldCB0aGUgcGNpIHBvd2VyIHN0YXRlIGlmIHRoZSBw
+Y2kgc3Vic3lzdGVtIGhhbmRsZXMgdGhlCj4gICAgIEFDUEkgYml0cwo+ICAgcGNpOiBlbmFibGUg
+cGNpZSBsaW5rIGNoYW5nZXMgZm9yIHBhc2NhbAo+ICAgcGNpOiBhZGQgbnZrbV9wY2llX2dldF9z
+cGVlZAo+ICAgcGNpOiBzYXZlIHRoZSBib290IHBjaWUgbGluayBzcGVlZCBhbmQgcmVzdG9yZSBp
+dCBvbiBmaW5pCj4KPiAgZHJtL25vdXZlYXUvaW5jbHVkZS9udmttL3N1YmRldi9wY2kuaCB8ICA2
+ICsrKy0tCj4gIGRybS9ub3V2ZWF1L25vdXZlYXVfYWNwaS5jICAgICAgICAgICAgfCAgNyArKysr
+Ky0KPiAgZHJtL25vdXZlYXUvbm91dmVhdV9hY3BpLmggICAgICAgICAgICB8ICAyICsrCj4gIGRy
+bS9ub3V2ZWF1L25vdXZlYXVfZHJtLmMgICAgICAgICAgICAgfCAxNCArKysrKysrKystLS0KPiAg
+ZHJtL25vdXZlYXUvbm91dmVhdV9kcnYuaCAgICAgICAgICAgICB8ICAyICsrCj4gIGRybS9ub3V2
+ZWF1L252a20vc3ViZGV2L3BjaS9iYXNlLmMgICAgfCAgOSArKysrKystLQo+ICBkcm0vbm91dmVh
+dS9udmttL3N1YmRldi9wY2kvZ2sxMDQuYyAgIHwgIDggKysrLS0tLQo+ICBkcm0vbm91dmVhdS9u
+dmttL3N1YmRldi9wY2kvZ3AxMDAuYyAgIHwgMTAgKysrKysrKysrCj4gIGRybS9ub3V2ZWF1L252
+a20vc3ViZGV2L3BjaS9wY2llLmMgICAgfCAzMiArKysrKysrKysrKysrKysrKysrKysrKy0tLS0K
+PiAgZHJtL25vdXZlYXUvbnZrbS9zdWJkZXYvcGNpL3ByaXYuaCAgICB8ICA3ICsrKysrKwo+ICAx
+MCBmaWxlcyBjaGFuZ2VkLCA4MSBpbnNlcnRpb25zKCspLCAxNiBkZWxldGlvbnMoLSkKPgo+IC0t
+Cj4gMi4yMS4wCj4KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X18KTm91dmVhdSBtYWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0
+cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
