@@ -1,65 +1,46 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7F90128439
-	for <lists+nouveau@lfdr.de>; Thu, 23 May 2019 18:51:54 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 24D6D2848F
+	for <lists+nouveau@lfdr.de>; Thu, 23 May 2019 19:10:15 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 958966E032;
-	Thu, 23 May 2019 16:51:52 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id EF4196E03F;
+	Thu, 23 May 2019 17:10:12 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-lj1-x242.google.com (mail-lj1-x242.google.com
- [IPv6:2a00:1450:4864:20::242])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 57C9F6E032
- for <nouveau@lists.freedesktop.org>; Thu, 23 May 2019 16:51:50 +0000 (UTC)
-Received: by mail-lj1-x242.google.com with SMTP id m15so6093603ljg.13
- for <nouveau@lists.freedesktop.org>; Thu, 23 May 2019 09:51:50 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=ks/LH2oyTEaijoOzEMOK4qT05od1mgbLgD6IvZvC3ac=;
- b=HhTMZRyOvwwqCBKrFg+EF5OJ1QCkSbyu6Z7UXcvM8LA0vGp8OwxZ/gGiXZbn9daNys
- yzt/o1lXJFza/8QdlX/Kh3fu44XbCcHO1IRoWqpqbN7yI+5/g1OYp8xNVBA+iNrR7Zli
- fxoeuO+1J6yJW642NK8LXCnY8vVC1N0qHvfc2wrumVIRoyST0UStTMKPtVJdXjoK8GMo
- iOsZbc0dnjQ15WuPSmBNnLYCYZOomrtfAtSPqSFf5k42hAs5O+3vGuwRdqkMA31LVq/H
- +35jFp2R+x7cgKQm8EmLq3RiMyP1CXsp05RHF2w1PT5s6EfUp6g9owLS0jOy6h/66u8i
- 62Rg==
-X-Gm-Message-State: APjAAAVldVxmZ1Hf4uqplWpc1vkPkDwj1QY96jqg6UhI3DHzdEniZ0S4
- uxYgb0voeri6dryaEC1t7cQnN1HlY/Y=
-X-Google-Smtp-Source: APXvYqxbKbtzG7QhxitGdb+X4XuPzd9rSPJVbln/IXP0VeKvIQcCcov2Lxoe32UqZ0ZggahZAszvWA==
-X-Received: by 2002:a2e:b051:: with SMTP id d17mr39485251ljl.173.1558630307896; 
- Thu, 23 May 2019 09:51:47 -0700 (PDT)
-Received: from mail-lf1-f44.google.com (mail-lf1-f44.google.com.
- [209.85.167.44])
- by smtp.gmail.com with ESMTPSA id c19sm8241lfi.69.2019.05.23.09.51.46
- for <nouveau@lists.freedesktop.org>
- (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
- Thu, 23 May 2019 09:51:46 -0700 (PDT)
-Received: by mail-lf1-f44.google.com with SMTP id m15so4300363lfh.4
- for <nouveau@lists.freedesktop.org>; Thu, 23 May 2019 09:51:46 -0700 (PDT)
-X-Received: by 2002:a19:7d42:: with SMTP id y63mr41221787lfc.54.1558630305849; 
- Thu, 23 May 2019 09:51:45 -0700 (PDT)
+Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
+ [131.252.210.165])
+ by gabe.freedesktop.org (Postfix) with ESMTP id C750E89F08
+ for <nouveau@lists.freedesktop.org>; Thu, 23 May 2019 17:10:11 +0000 (UTC)
+Received: by culpepper.freedesktop.org (Postfix, from userid 33)
+ id C3ECB72167; Thu, 23 May 2019 17:10:11 +0000 (UTC)
+From: bugzilla-daemon@freedesktop.org
+To: nouveau@lists.freedesktop.org
+Date: Thu, 23 May 2019 17:10:11 +0000
+X-Bugzilla-Reason: AssignedTo
+X-Bugzilla-Type: new
+X-Bugzilla-Watch-Reason: None
+X-Bugzilla-Product: xorg
+X-Bugzilla-Component: Driver/nouveau
+X-Bugzilla-Version: unspecified
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: normal
+X-Bugzilla-Who: dominik@greysector.net
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: medium
+X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: bug_id short_desc product version rep_platform
+ op_sys bug_status bug_severity priority component assigned_to reporter
+ qa_contact
+Message-ID: <bug-110748-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-References: <20190523100013.52a8d2a6@gandalf.local.home>
- <CAHk-=wg5HqJ2Kfgpub+tCWQ2_FiFwEW9H1Rm+an-BLGaGvDDXw@mail.gmail.com>
- <20190523112740.7167aba4@gandalf.local.home>
-In-Reply-To: <20190523112740.7167aba4@gandalf.local.home>
-From: Linus Torvalds <torvalds@linux-foundation.org>
-Date: Thu, 23 May 2019 09:51:29 -0700
-X-Gmail-Original-Message-ID: <CAHk-=whFJqTOk0mSxJGeh38ZxDksgRaMrNV8hqTngiuokyJzew@mail.gmail.com>
-Message-ID: <CAHk-=whFJqTOk0mSxJGeh38ZxDksgRaMrNV8hqTngiuokyJzew@mail.gmail.com>
-To: Steven Rostedt <rostedt@goodmis.org>
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linux-foundation.org; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc;
- bh=ks/LH2oyTEaijoOzEMOK4qT05od1mgbLgD6IvZvC3ac=;
- b=UrcFcbzEFPGggz1NPXakVDUiIg5mDqTO4045eBb7udfHenM+Veb+rBZ0tlbryVNdJc
- qa5A4P3tgF5XCLb7D69n65wDt2yEO3fr0UKE7SehnvIvMriAPEG9xpGYM5u8gpQLeOdX
- 1vpQBx74HKkfDoRasFV6IFoGOt3sYNk7jzZac=
-Subject: Re: [Nouveau] [RFC][PATCH] kernel.h: Add generic roundup_64() macro
+Subject: [Nouveau] [Bug 110748] New: [NVC1] [optimus] fifo: read fault at
+ 0000000000 engine 00 [PGRAPH] client 00 [] reason 02 [PAGE_NOT_PRESENT]
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -71,61 +52,555 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Leon Romanovsky <leon@kernel.org>,
- "Darrick J. Wong" <darrick.wong@oracle.com>, David Airlie <airlied@linux.ie>,
- nouveau@lists.freedesktop.org, LKML <linux-kernel@vger.kernel.org>,
- dri-devel <dri-devel@lists.freedesktop.org>, linux-xfs@vger.kernel.org,
- Jason Gunthorpe <jgg@ziepe.ca>, Doug Ledford <dledford@redhat.com>,
- Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>,
- Andrew Morton <akpm@linux-foundation.org>,
- linux-rdma <linux-rdma@vger.kernel.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============0768321203=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-T24gVGh1LCBNYXkgMjMsIDIwMTkgYXQgODoyNyBBTSBTdGV2ZW4gUm9zdGVkdCA8cm9zdGVkdEBn
-b29kbWlzLm9yZz4gd3JvdGU6Cj4KPiBJIGhhdmVuJ3QgeWV0IHRlc3RlZCB0aGlzLCBidXQgd2hh
-dCBhYm91dCBzb21ldGhpbmcgbGlrZSB0aGUgZm9sbG93aW5nOgoKU28gdGhhdCBhdCBsZWFzdCBo
-YW5kbGVzIHRoZSBjb25zdGFudCBjYXNlIHRoYXQgdGhlIG5vcm1hbCAicm91bmR1cCgpIgpjYXNl
-IGFsc28gaGFuZGxlcy4KCkF0IHRoZSBzYW1lIHRpbWUsIGluIHRoZSBjYXNlIHlvdSBhcmUgdGFs
-a2luZyBhYm91dCwgSSByZWFsbHkgZG8Kc3VzcGVjdCB0aGF0IHdlIGhhdmUgYSAobm9uLWNvbnN0
-YW50KSBwb3dlciBvZiB0d28sIGFuZCB0aGF0IHlvdQpzaG91bGQgaGF2ZSBqdXN0IHVzZWQgInJv
-dW5kX3VwKCkiIHdoaWNoIHdvcmtzIGZpbmUgcmVnYXJkbGVzcyBvZgpzaXplLCBhbmQgaXMgYWx3
-YXlzIGVmZmljaWVudC4KCk9uIGEgc2xpZ2h0IHRhbmdlbnQuLiBNYXliZSB3ZSBzaG91bGQgaGF2
-ZSBzb21ldGhpbmcgbGlrZSB0aGlzOgoKI2RlZmluZSBzaXplX2ZuKHgsIHByZWZpeCwgLi4uKSAo
-eyAgICAgICAgICAgICAgICAgICAgICBcCiAgICAgICAgdHlwZW9mKHgpIF9fcmV0OyAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgXAogICAgICAgIHN3aXRjaCAoc2l6ZW9mKHgpKSB7ICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgIFwKICAgICAgICBjYXNlIDE6IF9fcmV0ID0gcHJlZml4
-IyM4KF9fVkFfQVJHU19fKTsgYnJlYWs7ICBcCiAgICAgICAgY2FzZSAyOiBfX3JldCA9IHByZWZp
-eCMjMTYoX19WQV9BUkdTX18pOyBicmVhazsgXAogICAgICAgIGNhc2UgNDogX19yZXQgPSBwcmVm
-aXgjIzMyKF9fVkFfQVJHU19fKTsgYnJlYWs7IFwKICAgICAgICBjYXNlIDg6IF9fcmV0ID0gcHJl
-Zml4IyM2NChfX1ZBX0FSR1NfXyk7IGJyZWFrOyBcCiAgICAgICAgZGVmYXVsdDogX19yZXQgPSBw
-cmVmaXgjI2JhZChfX1ZBX0FSR1NfXyk7ICAgICAgXAogICAgICAgIH0gX19yZXQ7IH0pCgojZGVm
-aW5lIHR5cGVfZm4oeCwgcHJlZml4LCAuLi4pICh7ICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgXAogICAgICAgIHR5cGVvZih4KSBfX3JldDsgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgXAogICAgICAgIGlmICgodHlwZW9mKHgpKS0xID4gMSkgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgXAogICAgICAgICAgICAgICAgX19yZXQgPSBzaXplX2ZuKHgs
-IHByZWZpeCMjX3UsIF9fVkFfQVJHU19fKTsgICAgXAogICAgICAgIGVsc2UgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXAogICAgICAgICAgICAgICAg
-X19yZXQgPSBzaXplX2ZuKHgsIHByZWZpeCMjX3MsIF9fVkFfQVJHU19fKTsgICAgXAogICAgICAg
-IF9fcmV0OyB9KQoKd2hpY2ggd291bGQgYWxsb3cgdHlwZWQgaW50ZWdlciBmdW5jdGlvbnMgbGlr
-ZSB0aGlzLiBTbyB5b3UgY291bGQgZG8Kc29tZXRoaW5nIGxpa2UKCiAgICAgI2RlZmluZSByb3Vu
-ZF91cCh4LCB5KSBzaXplX2ZuKHgsIHJvdW5kX3VwX3NpemUsIHgsIHkpCgphbmQgdGhlbiB5b3Ug
-ZGVmaW5lIGZ1bmN0aW9ucyBmb3Igcm91bmRfdXBfc2l6ZTgvMTYvMzIvNjQgKGFuZCB5b3UKaGF2
-ZSB0b2kgZGVjbGFyZSAtIGJ1dCBub3QgZGVmaW5lIC0gcm91bmRfdXBfc2l6ZWJhZCgpKS4KCk9m
-IGNvdXJzZSwgeW91IHByb2JhYmx5IHdhbnQgdGhlIHVzdWFsICJhdCBsZWFzdCB1c2UgJ2ludCci
-IHNlbWFudGljcywKaW4gd2hpY2ggY2FzZSB0aGUgInR5cGUiIHNob3VsZCBiZSAiKHgpKzAiOgoK
-ICAgICAjZGVmaW5lIHJvdW5kX3VwKHgsIHkpIHNpemVfZm4oKHgpKzAsIHJvdW5kX3VwX3NpemUs
-IHgsIHkpCgogYW5kIHRoZSA4LWJpdCBhbmQgMTYtYml0IGNhc2VzIHdpbGwgbmV2ZXIgYmUgdXNl
-ZC4KCldlIGhhdmUgYSBsb3Qgb2YgY2FzZXMgd2hlcmUgd2UgZW5kIHVwIHVzaW5nICJ0eXBlIG92
-ZXJsb2FkaW5nIiBieQpzaXplLiBUaGUgbW9zdCBleHBsaWNpdCBjYXNlIGlzIHBlcmhhcHMgImdl
-dF91c2VyKCkiIGFuZCAicHV0X3VzZXIoKSIsCmJ1dCB0aGlzIHdob2xlIHJvdW5kX3VwIHRoaW5n
-IGlzIGFub3RoZXIgZXhhbXBsZS4KCk1heWJlIHdlIG5ldmVyIHJlYWxseSBjYXJlIGFib3V0ICJj
-aGFyIiBhbmQgInNob3J0IiwgYW5kIGFsd2F5cyB3YW50Cmp1c3QgdGhlICJpbnQtdnMtbG9uZy12
-cy1sb25nbG9uZyI/IFRoYXQgd291bGQgbWFrZSB0aGUgY2FzZXMgc2ltcGxlcgooMzIgYW5kIDY0
-KS4gQW5kIG1heWJlIHdlIG5ldmVyIGNhcmUgYWJvdXQgc2lnbi4gQnV0IHdlIGNvdWxkIHRyeSB0
-bwpoYXZlIHNvbWUgdW5pZmllZCBoZWxwZXIgbW9kZWwgbGlrZSB0aGUgYWJvdmUuLgoKICAgICAg
-ICAgICAgICAgICAgTGludXMKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX18KTm91dmVhdSBtYWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5v
-cmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============0768321203==
+Content-Type: multipart/alternative; boundary="15586314110.bbc6d95.19034"
+Content-Transfer-Encoding: 7bit
+
+
+--15586314110.bbc6d95.19034
+Date: Thu, 23 May 2019 17:10:11 +0000
+MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+https://bugs.freedesktop.org/show_bug.cgi?id=3D110748
+
+            Bug ID: 110748
+           Summary: [NVC1] [optimus] fifo: read fault at 0000000000 engine
+                    00 [PGRAPH] client 00 [] reason 02 [PAGE_NOT_PRESENT]
+           Product: xorg
+           Version: unspecified
+          Hardware: Other
+                OS: All
+            Status: NEW
+          Severity: normal
+          Priority: medium
+         Component: Driver/nouveau
+          Assignee: nouveau@lists.freedesktop.org
+          Reporter: dominik@greysector.net
+        QA Contact: xorg-team@lists.x.org
+
+When trying to play a video using mpv with VDPAU hardware acceleration on a
+GF108M/GeForce GT 525M (second GPU in Optimus configuration on this machine=
+):
+
+DRI_PRIME=3D1 mpv -vo=3Dgpu --hwdec=3Dvdpau any_h264_video.mp4
+
+Xorg starts using 100% of one core and the following can be seen in the log=
+s:
+
+May 21 14:41:21 kernel: nouveau 0000:01:00.0: fifo: read fault at 0000000000
+engine 00 [PGRAPH] client 00 [] reason 02 [PAGE_NOT_PRESENT] on channel 2
+[003fc12000 Xorg[2935]]
+May 21 14:41:21 kernel: nouveau 0000:01:00.0: fifo: gr engine fault on chan=
+nel
+2, recovering...
+May 21 14:41:21 kernel: nouveau 0000:01:00.0: fifo: INTR 00800000
+May 21 14:41:21 kernel: nouveau 0000:01:00.0: fifo: INTR 00010000: 00000002
+May 21 14:41:21 kernel: nouveau 0000:01:00.0: fifo: INTR 00010000: 00000002
+[...]
+May 21 14:41:25 kernel: nouveau 0000:01:00.0: fifo: INTR 00010000: 00000002
+May 21 14:41:25 kernel: ------------[ cut here ]------------
+May 21 14:41:25 kernel: nouveau 0000:01:00.0: timeout
+May 21 14:41:25 kernel: WARNING: CPU: 0 PID: 5655 at
+drivers/gpu/drm/nouveau/nvkm/engine/fifo/gpfifogf100.c:82
+gf100_fifo_gpfifo_engine_fini+0x160/0x1c0 [nouveau]
+May 21 14:41:25 kernel: Modules linked in: nouveau mxm_wmi ttm sunrpc fuse
+snd_hda_codec_hdmi uvcvideo videobuf2_vmalloc videobuf2_memops
+snd_hda_codec_realtek arc4 videobuf2_v4l2 snd_hda_codec_generic intel_rapl
+videobuf2_common snd_hd>
+May 21 14:41:25 kernel: CPU: 0 PID: 5655 Comm: mpv Not tainted
+5.0.16-300.fc30.x86_64 #1
+May 21 14:41:25 kernel: Hardware name: Dell Inc.          Dell System XPS
+L502X/0YR8NN, BIOS A06 07/20/2011
+May 21 14:41:25 kernel: RIP: 0010:gf100_fifo_gpfifo_engine_fini+0x160/0x1c0
+[nouveau]
+May 21 14:41:25 kernel: Code: 40 10 48 8b 78 10 48 8b 6f 50 48 85 ed 75 04 =
+48
+8b 6f 10 e8 62 b7 71 e0 48 89 ea 48 c7 c7 62 19 04 c1 48 89 c6 e8 1f 9a 1c =
+e0
+<0f> 0b 41 8b 45 48 85 c0 75 1e 4c 89 ff 41 bd 92 ff ff ff e8 f8 ce
+May 21 14:41:25 kernel: RSP: 0018:ffffbad7025dfc78 EFLAGS: 00010286
+May 21 14:41:25 kernel: RAX: 0000000000000000 RBX: ffffa034f1a0e000 RCX:
+0000000000000006
+May 21 14:41:25 kernel: RDX: 0000000000000007 RSI: 0000000000000092 RDI:
+ffffa035ba2168c0
+May 21 14:41:25 kernel: RBP: ffffa035b8f8df10 R08: 0000000000000001 R09:
+00000000000012e7
+May 21 14:41:25 kernel: R10: 000000000003bc20 R11: 0000000000000003 R12:
+0000000000000250
+May 21 14:41:25 kernel: R13: ffffa035a3bebc00 R14: ffffa0351beac600 R15:
+ffffa035a3bebc28
+May 21 14:41:25 kernel: FS:  00007f4949f3af00(0000) GS:ffffa035ba200000(000=
+0)
+knlGS:0000000000000000
+May 21 14:41:25 kernel: CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+May 21 14:41:25 kernel: CR2: 00007fd899fcf700 CR3: 0000000072bc2001 CR4:
+00000000000606f0
+May 21 14:41:25 kernel: Call Trace:
+May 21 14:41:25 kernel:  nvkm_fifo_chan_child_fini+0x62/0xe0 [nouveau]
+May 21 14:41:25 kernel:  nvkm_oproxy_fini+0x2c/0x90 [nouveau]
+May 21 14:41:25 kernel:  nvkm_object_fini+0xbc/0x150 [nouveau]
+May 21 14:41:25 kernel:  nvkm_ioctl_del+0x2f/0x50 [nouveau]
+May 21 14:41:25 kernel:  nvkm_ioctl+0xde/0x180 [nouveau]
+May 21 14:41:25 kernel:  ? nvkm_ioctl+0x71/0x180 [nouveau]
+May 21 14:41:25 kernel:  usif_ioctl+0x33d/0x700 [nouveau]
+May 21 14:41:25 kernel:  nouveau_drm_ioctl+0xa8/0xb0 [nouveau]
+May 21 14:41:25 kernel:  do_vfs_ioctl+0x405/0x660
+May 21 14:41:25 kernel:  ksys_ioctl+0x5e/0x90
+May 21 14:41:25 kernel:  __x64_sys_ioctl+0x16/0x20
+May 21 14:41:25 kernel:  do_syscall_64+0x5b/0x170
+May 21 14:41:25 kernel:  entry_SYSCALL_64_after_hwframe+0x44/0xa9
+May 21 14:41:25 kernel: RIP: 0033:0x7f494f39f03b
+May 21 14:41:25 kernel: Code: 0f 1e fa 48 8b 05 4d de 0c 00 64 c7 00 26 00 =
+00
+00 48 c7 c0 ff ff ff ff c3 66 0f 1f 44 00 00 f3 0f 1e fa b8 10 00 00 00 0f =
+05
+<48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 1d de 0c 00 f7 d8 64 89 01 48
+May 21 14:41:25 kernel: RSP: 002b:00007ffeba992ae8 EFLAGS: 00000246 ORIG_RA=
+X:
+0000000000000010
+May 21 14:41:25 kernel: RAX: ffffffffffffffda RBX: 00007ffeba992b30 RCX:
+00007f494f39f03b
+May 21 14:41:25 kernel: RDX: 00007ffeba992b30 RSI: 00000000c0186447 RDI:
+0000000000000010
+May 21 14:41:25 kernel: RBP: 00000000c0186447 R08: 0000000000000000 R09:
+0000000000000007
+May 21 14:41:25 kernel: R10: 000055983dd90bb0 R11: 0000000000000246 R12:
+0000000000000003
+May 21 14:41:25 kernel: R13: 0000000000000010 R14: 000055983db62db8 R15:
+000055983db62db8
+May 21 14:41:25 kernel: ---[ end trace c64308a1ea709e8f ]---
+May 21 14:41:25 kernel: nouveau 0000:01:00.0: fifo: channel 4 [mpv/vo[5662]]
+kick timeout
+May 21 14:41:25 kernel: nouveau 0000:01:00.0: fifo: INTR 00010000: 00000002
+May 21 14:41:25 kernel: nouveau 0000:01:00.0: fifo: INTR 00010000: 00000002
+May 21 14:41:25 kernel: nouveau 0000:01:00.0: fifo: INTR 00010000: 00000002
+May 21 14:41:25 kernel: nouveau: mpv/vo[5662]:00000000:0000906f: detach msp=
+dec
+failed, -110
+May 21 14:41:25 kernel: nouveau 0000:01:00.0: fifo: INTR 00010000: 00000002
+May 21 14:41:25 kernel: nouveau 0000:01:00.0: fifo: INTR 00010000: 00000002
+May 21 14:41:25 kernel: nouveau 0000:01:00.0: fifo: INTR 00010000: 00000002
+May 21 14:41:25 kernel: nouveau 0000:01:00.0: fifo: INTR 00010000: 00000002
+May 21 14:41:25 kernel: nouveau 0000:01:00.0: fifo: INTR 00010000: 00000002
+May 21 14:41:25 kernel: nouveau 0000:01:00.0: fifo: INTR 00010000: 00000002
+May 21 14:41:25 kernel: nouveau 0000:01:00.0: fifo: SCHED_ERROR 0d []
+May 21 14:41:25 kernel: nouveau 0000:01:00.0: fifo: INTR 00010000: 00000002
+[...]
+May 21 14:41:27 kernel: nouveau 0000:01:00.0: fifo: INTR 00010000: 00000002
+May 21 14:41:27 kernel: ------------[ cut here ]------------
+May 21 14:41:27 kernel: nouveau 0000:01:00.0: timeout
+May 21 14:41:27 kernel: WARNING: CPU: 2 PID: 5655 at
+drivers/gpu/drm/nouveau/nvkm/engine/fifo/gpfifogf100.c:82
+gf100_fifo_gpfifo_engine_fini+0x160/0x1c0 [nouveau]
+May 21 14:41:27 kernel: Modules linked in: nouveau mxm_wmi ttm sunrpc fuse
+snd_hda_codec_hdmi uvcvideo videobuf2_vmalloc videobuf2_memops
+snd_hda_codec_realtek arc4 videobuf2_v4l2 snd_hda_codec_generic intel_rapl
+videobuf2_common snd_hd>
+May 21 14:41:27 kernel: CPU: 2 PID: 5655 Comm: mpv Tainted: G        W=20=
+=20=20=20=20=20=20=20
+5.0.16-300.fc30.x86_64 #1
+May 21 14:41:27 kernel: Hardware name: Dell Inc.          Dell System XPS
+L502X/0YR8NN, BIOS A06 07/20/2011
+May 21 14:41:27 kernel: RIP: 0010:gf100_fifo_gpfifo_engine_fini+0x160/0x1c0
+[nouveau]
+May 21 14:41:27 kernel: Code: 40 10 48 8b 78 10 48 8b 6f 50 48 85 ed 75 04 =
+48
+8b 6f 10 e8 62 b7 71 e0 48 89 ea 48 c7 c7 62 19 04 c1 48 89 c6 e8 1f 9a 1c =
+e0
+<0f> 0b 41 8b 45 48 85 c0 75 1e 4c 89 ff 41 bd 92 ff ff ff e8 f8 ce
+May 21 14:41:27 kernel: RSP: 0018:ffffbad7025dfc78 EFLAGS: 00010286
+May 21 14:41:27 kernel: RAX: 0000000000000000 RBX: ffffa034f1a0e000 RCX:
+0000000000000006
+May 21 14:41:27 kernel: RDX: 0000000000000007 RSI: 0000000000000092 RDI:
+ffffa035ba2968c0
+May 21 14:41:27 kernel: RBP: ffffa035b8f8df10 R08: 0000000000000001 R09:
+000000000000192d
+May 21 14:41:27 kernel: R10: 0000000000026020 R11: 0000000000000003 R12:
+0000000000000260
+May 21 14:41:27 kernel: R13: ffffa035a3bebc00 R14: ffffa0351beac600 R15:
+ffffa035a3bebc28
+May 21 14:41:27 kernel: FS:  00007f4949f3af00(0000) GS:ffffa035ba280000(000=
+0)
+knlGS:0000000000000000
+May 21 14:41:27 kernel: CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+May 21 14:41:27 kernel: CR2: 00007fd89c139000 CR3: 0000000072bc2002 CR4:
+00000000000606e0
+May 21 14:41:27 kernel: Call Trace:
+May 21 14:41:27 kernel:  nvkm_fifo_chan_child_fini+0x62/0xe0 [nouveau]
+May 21 14:41:27 kernel:  nvkm_oproxy_fini+0x2c/0x90 [nouveau]
+May 21 14:41:27 kernel:  nvkm_object_fini+0xbc/0x150 [nouveau]
+May 21 14:41:27 kernel:  nvkm_ioctl_del+0x2f/0x50 [nouveau]
+May 21 14:41:27 kernel:  nvkm_ioctl+0xde/0x180 [nouveau]
+May 21 14:41:27 kernel:  ? nvkm_ioctl+0x71/0x180 [nouveau]
+May 21 14:41:27 kernel:  usif_ioctl+0x33d/0x700 [nouveau]
+May 21 14:41:27 kernel:  nouveau_drm_ioctl+0xa8/0xb0 [nouveau]
+May 21 14:41:27 kernel:  do_vfs_ioctl+0x405/0x660
+May 21 14:41:27 kernel:  ksys_ioctl+0x5e/0x90
+May 21 14:41:27 kernel:  __x64_sys_ioctl+0x16/0x20
+May 21 14:41:27 kernel:  do_syscall_64+0x5b/0x170
+May 21 14:41:27 kernel:  entry_SYSCALL_64_after_hwframe+0x44/0xa9
+May 21 14:41:27 kernel: RIP: 0033:0x7f494f39f03b
+May 21 14:41:27 kernel: Code: 0f 1e fa 48 8b 05 4d de 0c 00 64 c7 00 26 00 =
+00
+00 48 c7 c0 ff ff ff ff c3 66 0f 1f 44 00 00 f3 0f 1e fa b8 10 00 00 00 0f =
+05
+<48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d 1d de 0c 00 f7 d8 64 89 01 48
+May 21 14:41:27 kernel: RSP: 002b:00007ffeba992ae8 EFLAGS: 00000246 ORIG_RA=
+X:
+0000000000000010
+May 21 14:41:27 kernel: RAX: ffffffffffffffda RBX: 00007ffeba992b30 RCX:
+00007f494f39f03b
+May 21 14:41:27 kernel: RDX: 00007ffeba992b30 RSI: 00000000c0186447 RDI:
+0000000000000010
+May 21 14:41:27 kernel: RBP: 00000000c0186447 R08: 0000000000000000 R09:
+0000000000000007
+May 21 14:41:27 kernel: R10: 000055983dd90bb0 R11: 0000000000000246 R12:
+0000000000000003
+May 21 14:41:27 kernel: R13: 0000000000000010 R14: 000055983db62db8 R15:
+000055983db62db8
+May 21 14:41:27 kernel: ---[ end trace c64308a1ea709e90 ]---
+May 21 14:41:27 kernel: nouveau 0000:01:00.0: fifo: channel 4 [mpv/vo[5662]]
+kick timeout
+May 21 14:41:27 kernel: nouveau 0000:01:00.0: fifo: INTR 00010000: 00000002
+May 21 14:41:27 kernel: nouveau: mpv/vo[5662]:00000000:0000906f: detach msp=
+pp
+failed, -110
+May 21 14:41:27 kernel: nouveau 0000:01:00.0: fifo: INTR 00010000: 00000002
+[...]
+and so on.
+
+Machine can be gracefully shut down, though it takes a while. Other than th=
+at
+it becomes almost unusable due to high CPU usage by Xorg.
+
+--=20
+You are receiving this mail because:
+You are the assignee for the bug.=
+
+--15586314110.bbc6d95.19034
+Date: Thu, 23 May 2019 17:10:11 +0000
+MIME-Version: 1.0
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+<html>
+    <head>
+      <base href=3D"https://bugs.freedesktop.org/">
+    </head>
+    <body><table border=3D"1" cellspacing=3D"0" cellpadding=3D"8">
+        <tr>
+          <th>Bug ID</th>
+          <td><a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - [NVC1] [optimus] fifo: read fault at 0000000000 engine 00=
+ [PGRAPH] client 00 [] reason 02 [PAGE_NOT_PRESENT]"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110748">110748</a>
+          </td>
+        </tr>
+
+        <tr>
+          <th>Summary</th>
+          <td>[NVC1] [optimus] fifo: read fault at 0000000000 engine 00 [PG=
+RAPH] client 00 [] reason 02 [PAGE_NOT_PRESENT]
+          </td>
+        </tr>
+
+        <tr>
+          <th>Product</th>
+          <td>xorg
+          </td>
+        </tr>
+
+        <tr>
+          <th>Version</th>
+          <td>unspecified
+          </td>
+        </tr>
+
+        <tr>
+          <th>Hardware</th>
+          <td>Other
+          </td>
+        </tr>
+
+        <tr>
+          <th>OS</th>
+          <td>All
+          </td>
+        </tr>
+
+        <tr>
+          <th>Status</th>
+          <td>NEW
+          </td>
+        </tr>
+
+        <tr>
+          <th>Severity</th>
+          <td>normal
+          </td>
+        </tr>
+
+        <tr>
+          <th>Priority</th>
+          <td>medium
+          </td>
+        </tr>
+
+        <tr>
+          <th>Component</th>
+          <td>Driver/nouveau
+          </td>
+        </tr>
+
+        <tr>
+          <th>Assignee</th>
+          <td>nouveau&#64;lists.freedesktop.org
+          </td>
+        </tr>
+
+        <tr>
+          <th>Reporter</th>
+          <td>dominik&#64;greysector.net
+          </td>
+        </tr>
+
+        <tr>
+          <th>QA Contact</th>
+          <td>xorg-team&#64;lists.x.org
+          </td>
+        </tr></table>
+      <p>
+        <div>
+        <pre>When trying to play a video using mpv with VDPAU hardware acce=
+leration on a
+GF108M/GeForce GT 525M (second GPU in Optimus configuration on this machine=
+):
+
+DRI_PRIME=3D1 mpv -vo=3Dgpu --hwdec=3Dvdpau any_h264_video.mp4
+
+Xorg starts using 100% of one core and the following can be seen in the log=
+s:
+
+May 21 14:41:21 kernel: nouveau 0000:01:00.0: fifo: read fault at 0000000000
+engine 00 [PGRAPH] client 00 [] reason 02 [PAGE_NOT_PRESENT] on channel 2
+[003fc12000 Xorg[2935]]
+May 21 14:41:21 kernel: nouveau 0000:01:00.0: fifo: gr engine fault on chan=
+nel
+2, recovering...
+May 21 14:41:21 kernel: nouveau 0000:01:00.0: fifo: INTR 00800000
+May 21 14:41:21 kernel: nouveau 0000:01:00.0: fifo: INTR 00010000: 00000002
+May 21 14:41:21 kernel: nouveau 0000:01:00.0: fifo: INTR 00010000: 00000002
+[...]
+May 21 14:41:25 kernel: nouveau 0000:01:00.0: fifo: INTR 00010000: 00000002
+May 21 14:41:25 kernel: ------------[ cut here ]------------
+May 21 14:41:25 kernel: nouveau 0000:01:00.0: timeout
+May 21 14:41:25 kernel: WARNING: CPU: 0 PID: 5655 at
+drivers/gpu/drm/nouveau/nvkm/engine/fifo/gpfifogf100.c:82
+gf100_fifo_gpfifo_engine_fini+0x160/0x1c0 [nouveau]
+May 21 14:41:25 kernel: Modules linked in: nouveau mxm_wmi ttm sunrpc fuse
+snd_hda_codec_hdmi uvcvideo videobuf2_vmalloc videobuf2_memops
+snd_hda_codec_realtek arc4 videobuf2_v4l2 snd_hda_codec_generic intel_rapl
+videobuf2_common snd_hd&gt;
+May 21 14:41:25 kernel: CPU: 0 PID: 5655 Comm: mpv Not tainted
+5.0.16-300.fc30.x86_64 #1
+May 21 14:41:25 kernel: Hardware name: Dell Inc.          Dell System XPS
+L502X/0YR8NN, BIOS A06 07/20/2011
+May 21 14:41:25 kernel: RIP: 0010:gf100_fifo_gpfifo_engine_fini+0x160/0x1c0
+[nouveau]
+May 21 14:41:25 kernel: Code: 40 10 48 8b 78 10 48 8b 6f 50 48 85 ed 75 04 =
+48
+8b 6f 10 e8 62 b7 71 e0 48 89 ea 48 c7 c7 62 19 04 c1 48 89 c6 e8 1f 9a 1c =
+e0
+&lt;0f&gt; 0b 41 8b 45 48 85 c0 75 1e 4c 89 ff 41 bd 92 ff ff ff e8 f8 ce
+May 21 14:41:25 kernel: RSP: 0018:ffffbad7025dfc78 EFLAGS: 00010286
+May 21 14:41:25 kernel: RAX: 0000000000000000 RBX: ffffa034f1a0e000 RCX:
+0000000000000006
+May 21 14:41:25 kernel: RDX: 0000000000000007 RSI: 0000000000000092 RDI:
+ffffa035ba2168c0
+May 21 14:41:25 kernel: RBP: ffffa035b8f8df10 R08: 0000000000000001 R09:
+00000000000012e7
+May 21 14:41:25 kernel: R10: 000000000003bc20 R11: 0000000000000003 R12:
+0000000000000250
+May 21 14:41:25 kernel: R13: ffffa035a3bebc00 R14: ffffa0351beac600 R15:
+ffffa035a3bebc28
+May 21 14:41:25 kernel: FS:  00007f4949f3af00(0000) GS:ffffa035ba200000(000=
+0)
+knlGS:0000000000000000
+May 21 14:41:25 kernel: CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+May 21 14:41:25 kernel: CR2: 00007fd899fcf700 CR3: 0000000072bc2001 CR4:
+00000000000606f0
+May 21 14:41:25 kernel: Call Trace:
+May 21 14:41:25 kernel:  nvkm_fifo_chan_child_fini+0x62/0xe0 [nouveau]
+May 21 14:41:25 kernel:  nvkm_oproxy_fini+0x2c/0x90 [nouveau]
+May 21 14:41:25 kernel:  nvkm_object_fini+0xbc/0x150 [nouveau]
+May 21 14:41:25 kernel:  nvkm_ioctl_del+0x2f/0x50 [nouveau]
+May 21 14:41:25 kernel:  nvkm_ioctl+0xde/0x180 [nouveau]
+May 21 14:41:25 kernel:  ? nvkm_ioctl+0x71/0x180 [nouveau]
+May 21 14:41:25 kernel:  usif_ioctl+0x33d/0x700 [nouveau]
+May 21 14:41:25 kernel:  nouveau_drm_ioctl+0xa8/0xb0 [nouveau]
+May 21 14:41:25 kernel:  do_vfs_ioctl+0x405/0x660
+May 21 14:41:25 kernel:  ksys_ioctl+0x5e/0x90
+May 21 14:41:25 kernel:  __x64_sys_ioctl+0x16/0x20
+May 21 14:41:25 kernel:  do_syscall_64+0x5b/0x170
+May 21 14:41:25 kernel:  entry_SYSCALL_64_after_hwframe+0x44/0xa9
+May 21 14:41:25 kernel: RIP: 0033:0x7f494f39f03b
+May 21 14:41:25 kernel: Code: 0f 1e fa 48 8b 05 4d de 0c 00 64 c7 00 26 00 =
+00
+00 48 c7 c0 ff ff ff ff c3 66 0f 1f 44 00 00 f3 0f 1e fa b8 10 00 00 00 0f =
+05
+&lt;48&gt; 3d 01 f0 ff ff 73 01 c3 48 8b 0d 1d de 0c 00 f7 d8 64 89 01 48
+May 21 14:41:25 kernel: RSP: 002b:00007ffeba992ae8 EFLAGS: 00000246 ORIG_RA=
+X:
+0000000000000010
+May 21 14:41:25 kernel: RAX: ffffffffffffffda RBX: 00007ffeba992b30 RCX:
+00007f494f39f03b
+May 21 14:41:25 kernel: RDX: 00007ffeba992b30 RSI: 00000000c0186447 RDI:
+0000000000000010
+May 21 14:41:25 kernel: RBP: 00000000c0186447 R08: 0000000000000000 R09:
+0000000000000007
+May 21 14:41:25 kernel: R10: 000055983dd90bb0 R11: 0000000000000246 R12:
+0000000000000003
+May 21 14:41:25 kernel: R13: 0000000000000010 R14: 000055983db62db8 R15:
+000055983db62db8
+May 21 14:41:25 kernel: ---[ end trace c64308a1ea709e8f ]---
+May 21 14:41:25 kernel: nouveau 0000:01:00.0: fifo: channel 4 [mpv/vo[5662]]
+kick timeout
+May 21 14:41:25 kernel: nouveau 0000:01:00.0: fifo: INTR 00010000: 00000002
+May 21 14:41:25 kernel: nouveau 0000:01:00.0: fifo: INTR 00010000: 00000002
+May 21 14:41:25 kernel: nouveau 0000:01:00.0: fifo: INTR 00010000: 00000002
+May 21 14:41:25 kernel: nouveau: mpv/vo[5662]:00000000:0000906f: detach msp=
+dec
+failed, -110
+May 21 14:41:25 kernel: nouveau 0000:01:00.0: fifo: INTR 00010000: 00000002
+May 21 14:41:25 kernel: nouveau 0000:01:00.0: fifo: INTR 00010000: 00000002
+May 21 14:41:25 kernel: nouveau 0000:01:00.0: fifo: INTR 00010000: 00000002
+May 21 14:41:25 kernel: nouveau 0000:01:00.0: fifo: INTR 00010000: 00000002
+May 21 14:41:25 kernel: nouveau 0000:01:00.0: fifo: INTR 00010000: 00000002
+May 21 14:41:25 kernel: nouveau 0000:01:00.0: fifo: INTR 00010000: 00000002
+May 21 14:41:25 kernel: nouveau 0000:01:00.0: fifo: SCHED_ERROR 0d []
+May 21 14:41:25 kernel: nouveau 0000:01:00.0: fifo: INTR 00010000: 00000002
+[...]
+May 21 14:41:27 kernel: nouveau 0000:01:00.0: fifo: INTR 00010000: 00000002
+May 21 14:41:27 kernel: ------------[ cut here ]------------
+May 21 14:41:27 kernel: nouveau 0000:01:00.0: timeout
+May 21 14:41:27 kernel: WARNING: CPU: 2 PID: 5655 at
+drivers/gpu/drm/nouveau/nvkm/engine/fifo/gpfifogf100.c:82
+gf100_fifo_gpfifo_engine_fini+0x160/0x1c0 [nouveau]
+May 21 14:41:27 kernel: Modules linked in: nouveau mxm_wmi ttm sunrpc fuse
+snd_hda_codec_hdmi uvcvideo videobuf2_vmalloc videobuf2_memops
+snd_hda_codec_realtek arc4 videobuf2_v4l2 snd_hda_codec_generic intel_rapl
+videobuf2_common snd_hd&gt;
+May 21 14:41:27 kernel: CPU: 2 PID: 5655 Comm: mpv Tainted: G        W=20=
+=20=20=20=20=20=20=20
+5.0.16-300.fc30.x86_64 #1
+May 21 14:41:27 kernel: Hardware name: Dell Inc.          Dell System XPS
+L502X/0YR8NN, BIOS A06 07/20/2011
+May 21 14:41:27 kernel: RIP: 0010:gf100_fifo_gpfifo_engine_fini+0x160/0x1c0
+[nouveau]
+May 21 14:41:27 kernel: Code: 40 10 48 8b 78 10 48 8b 6f 50 48 85 ed 75 04 =
+48
+8b 6f 10 e8 62 b7 71 e0 48 89 ea 48 c7 c7 62 19 04 c1 48 89 c6 e8 1f 9a 1c =
+e0
+&lt;0f&gt; 0b 41 8b 45 48 85 c0 75 1e 4c 89 ff 41 bd 92 ff ff ff e8 f8 ce
+May 21 14:41:27 kernel: RSP: 0018:ffffbad7025dfc78 EFLAGS: 00010286
+May 21 14:41:27 kernel: RAX: 0000000000000000 RBX: ffffa034f1a0e000 RCX:
+0000000000000006
+May 21 14:41:27 kernel: RDX: 0000000000000007 RSI: 0000000000000092 RDI:
+ffffa035ba2968c0
+May 21 14:41:27 kernel: RBP: ffffa035b8f8df10 R08: 0000000000000001 R09:
+000000000000192d
+May 21 14:41:27 kernel: R10: 0000000000026020 R11: 0000000000000003 R12:
+0000000000000260
+May 21 14:41:27 kernel: R13: ffffa035a3bebc00 R14: ffffa0351beac600 R15:
+ffffa035a3bebc28
+May 21 14:41:27 kernel: FS:  00007f4949f3af00(0000) GS:ffffa035ba280000(000=
+0)
+knlGS:0000000000000000
+May 21 14:41:27 kernel: CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+May 21 14:41:27 kernel: CR2: 00007fd89c139000 CR3: 0000000072bc2002 CR4:
+00000000000606e0
+May 21 14:41:27 kernel: Call Trace:
+May 21 14:41:27 kernel:  nvkm_fifo_chan_child_fini+0x62/0xe0 [nouveau]
+May 21 14:41:27 kernel:  nvkm_oproxy_fini+0x2c/0x90 [nouveau]
+May 21 14:41:27 kernel:  nvkm_object_fini+0xbc/0x150 [nouveau]
+May 21 14:41:27 kernel:  nvkm_ioctl_del+0x2f/0x50 [nouveau]
+May 21 14:41:27 kernel:  nvkm_ioctl+0xde/0x180 [nouveau]
+May 21 14:41:27 kernel:  ? nvkm_ioctl+0x71/0x180 [nouveau]
+May 21 14:41:27 kernel:  usif_ioctl+0x33d/0x700 [nouveau]
+May 21 14:41:27 kernel:  nouveau_drm_ioctl+0xa8/0xb0 [nouveau]
+May 21 14:41:27 kernel:  do_vfs_ioctl+0x405/0x660
+May 21 14:41:27 kernel:  ksys_ioctl+0x5e/0x90
+May 21 14:41:27 kernel:  __x64_sys_ioctl+0x16/0x20
+May 21 14:41:27 kernel:  do_syscall_64+0x5b/0x170
+May 21 14:41:27 kernel:  entry_SYSCALL_64_after_hwframe+0x44/0xa9
+May 21 14:41:27 kernel: RIP: 0033:0x7f494f39f03b
+May 21 14:41:27 kernel: Code: 0f 1e fa 48 8b 05 4d de 0c 00 64 c7 00 26 00 =
+00
+00 48 c7 c0 ff ff ff ff c3 66 0f 1f 44 00 00 f3 0f 1e fa b8 10 00 00 00 0f =
+05
+&lt;48&gt; 3d 01 f0 ff ff 73 01 c3 48 8b 0d 1d de 0c 00 f7 d8 64 89 01 48
+May 21 14:41:27 kernel: RSP: 002b:00007ffeba992ae8 EFLAGS: 00000246 ORIG_RA=
+X:
+0000000000000010
+May 21 14:41:27 kernel: RAX: ffffffffffffffda RBX: 00007ffeba992b30 RCX:
+00007f494f39f03b
+May 21 14:41:27 kernel: RDX: 00007ffeba992b30 RSI: 00000000c0186447 RDI:
+0000000000000010
+May 21 14:41:27 kernel: RBP: 00000000c0186447 R08: 0000000000000000 R09:
+0000000000000007
+May 21 14:41:27 kernel: R10: 000055983dd90bb0 R11: 0000000000000246 R12:
+0000000000000003
+May 21 14:41:27 kernel: R13: 0000000000000010 R14: 000055983db62db8 R15:
+000055983db62db8
+May 21 14:41:27 kernel: ---[ end trace c64308a1ea709e90 ]---
+May 21 14:41:27 kernel: nouveau 0000:01:00.0: fifo: channel 4 [mpv/vo[5662]]
+kick timeout
+May 21 14:41:27 kernel: nouveau 0000:01:00.0: fifo: INTR 00010000: 00000002
+May 21 14:41:27 kernel: nouveau: mpv/vo[5662]:00000000:0000906f: detach msp=
+pp
+failed, -110
+May 21 14:41:27 kernel: nouveau 0000:01:00.0: fifo: INTR 00010000: 00000002
+[...]
+and so on.
+
+Machine can be gracefully shut down, though it takes a while. Other than th=
+at
+it becomes almost unusable due to high CPU usage by Xorg.</pre>
+        </div>
+      </p>
+
+
+      <hr>
+      <span>You are receiving this mail because:</span>
+
+      <ul>
+          <li>You are the assignee for the bug.</li>
+      </ul>
+    </body>
+</html>=
+
+--15586314110.bbc6d95.19034--
+
+--===============0768321203==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
+YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
+cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============0768321203==--
