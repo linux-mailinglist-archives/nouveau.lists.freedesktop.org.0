@@ -1,51 +1,64 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 678212D46C
-	for <lists+nouveau@lfdr.de>; Wed, 29 May 2019 06:10:50 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5BE8029ABD
+	for <lists+nouveau@lfdr.de>; Fri, 24 May 2019 17:15:33 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 291476E06D;
-	Wed, 29 May 2019 04:10:48 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E43D788FA6;
+	Fri, 24 May 2019 15:15:30 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 534 seconds by postgrey-1.36 at gabe;
- Fri, 24 May 2019 15:20:10 UTC
-Received: from c.mx.filmlight.ltd.uk (c.mx.filmlight.ltd.uk
- [IPv6:2a05:d018:e66:3130::21])
- by gabe.freedesktop.org (Postfix) with ESMTP id D94186E112;
- Fri, 24 May 2019 15:20:10 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by omni.filmlight.ltd.uk (Postfix) with ESMTP id E84FD40000D9;
- Fri, 24 May 2019 16:11:14 +0100 (BST)
-DKIM-Filter: OpenDKIM Filter v2.11.0 omni.filmlight.ltd.uk E84FD40000D9
-Received: from montana.filmlight.ltd.uk (envoy [62.7.83.226])
- (Authenticated sender: roger)
- by omni.filmlight.ltd.uk (Postfix) with ESMTPSA id AB169887FAA;
- Fri, 24 May 2019 16:11:14 +0100 (BST)
-To: Steven Rostedt <rostedt@goodmis.org>,
- Linus Torvalds <torvalds@linux-foundation.org>
-References: <20190523100013.52a8d2a6@gandalf.local.home>
- <CAHk-=wg5HqJ2Kfgpub+tCWQ2_FiFwEW9H1Rm+an-BLGaGvDDXw@mail.gmail.com>
- <20190523112740.7167aba4@gandalf.local.home>
-From: Roger Willcocks <roger@filmlight.ltd.uk>
-Message-ID: <e4e875f0-2aa5-89f4-f462-78bedb9c5cde@filmlight.ltd.uk>
-Date: Fri, 24 May 2019 16:11:14 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.6.1
+Received: from mail-wm1-x344.google.com (mail-wm1-x344.google.com
+ [IPv6:2a00:1450:4864:20::344])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id BF7D96E113;
+ Fri, 24 May 2019 15:15:29 +0000 (UTC)
+Received: by mail-wm1-x344.google.com with SMTP id v22so2354970wml.1;
+ Fri, 24 May 2019 08:15:29 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to:user-agent;
+ bh=6RLj6uBqxlDEHcftopoYqSPMe+HfQgru4Z5e6MMtVTs=;
+ b=uS8my1JINolHROmIn5p4HK25RUXeIW444yRDQ4KY2KyoXZ/kNRfaKgiWT3dpZaLQ6n
+ efL4BAKR8BXV8Em4uZ2yllkZSCMzfpBGNqYR88XfuthwfWoKca+XQ4Os0FMZHOSl2dSN
+ 726eSo8Qs/qGVkIHKnPRD3ygYmDksyVwTux1fLtS3vTiSqpXljuqhNOC/2OjO4Xn5Tcn
+ T6xMNbqH4B5ybwJNGKmGrz29Cdv5UuXo1ZJzonygcGNnmFlUinjDNgDs+ido9fto9BoJ
+ yIcIS0v/L515b85MYeSWRgH+hQbl44etp/LVW8H3KjtwDvCRWJzwS+E52u3DDX4Qe9d0
+ Zq/g==
+X-Gm-Message-State: APjAAAW+AovkSGmkpZc5aEy8zx2n3Iyt/o7pU9Mb2q4c3BpsQXccO1bO
+ O8b5P8B5FH6Qk07wKHaxsf0=
+X-Google-Smtp-Source: APXvYqymxeKkirJyIFc2I2IlVno8n9Fn8LzrVjLEwMPqU0z3tf/J04w54AenV7w05+fq7u3H4gN4yA==
+X-Received: by 2002:a7b:c317:: with SMTP id k23mr262914wmj.124.1558710928487; 
+ Fri, 24 May 2019 08:15:28 -0700 (PDT)
+Received: from arch-x1c3 ([2a00:5f00:102:0:9665:9cff:feee:aa4d])
+ by smtp.gmail.com with ESMTPSA id h6sm2511261wrm.47.2019.05.24.08.15.27
+ (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+ Fri, 24 May 2019 08:15:27 -0700 (PDT)
+Date: Fri, 24 May 2019 16:14:07 +0100
+From: Emil Velikov <emil.l.velikov@gmail.com>
+To: Ben Skeggs <skeggsb@gmail.com>
+Message-ID: <20190524151407.GA8938@arch-x1c3>
+References: <20190522150219.13913-1-emil.l.velikov@gmail.com>
+ <20190522150219.13913-2-emil.l.velikov@gmail.com>
+ <CACAvsv5Z7CZOirZrRB=88rCeZt0SvBvdDjbhSpOcfE9JA20hCg@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <20190523112740.7167aba4@gandalf.local.home>
-Content-Language: en-US
-X-Mailman-Approved-At: Wed, 29 May 2019 04:10:47 +0000
+Content-Disposition: inline
+In-Reply-To: <CACAvsv5Z7CZOirZrRB=88rCeZt0SvBvdDjbhSpOcfE9JA20hCg@mail.gmail.com>
+User-Agent: Mutt/1.11.4 (2019-03-13)
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=filmlight.ltd.uk; 
- s=default; t=1558710674;
- bh=0Ug3SmMBjFHqgISSjAkOrPxbVWMmS3DdLx7SQNNyROg=;
- h=Cc:Subject:To:References:From:Date:In-Reply-To:From;
- b=wpXaBT074VJO3lUY2B3AqfKB/W8kA/0eApqSZ41aOSGqNLFXeF+yci3TFm4WhVp4H
- kV37VGx9Na/NLT5TmdU7mOXvKRov8tvnBDw7t4Am86QVyAKBCTZ3DDWsVdZoEArlfE
- 1m3WIQhTP2Qa/l+lxluF+WXJkuQNf4b1SOeoeu50=
-Subject: Re: [Nouveau] [RFC][PATCH] kernel.h: Add generic roundup_64() macro
+ d=gmail.com; s=20161025;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to:user-agent;
+ bh=6RLj6uBqxlDEHcftopoYqSPMe+HfQgru4Z5e6MMtVTs=;
+ b=qIroWhmos+5lK0hIK9RSkOyTFt5hE3Sl22U3NwABg5WModDXhKvR4QcynagMyNk+Co
+ XLlHJ9FozUI9ZxMs+EMpja5qrYaj7kbTYnRpO0TYpGoxTtEimqAEnwyhxxeJ4aQ9sOUf
+ NeQ54w7sM0bhCSQaXn2B/mgRCIFUUfmA4uCtnyjSmBaBL0p9Hs+WLG2uyB4Qr065/vpE
+ jO5T5oC9Y9guaTk3mWYW4qgXgXiLS6enX5daSZQEbotMNKzydZSVQk6ucUvjzajGql5U
+ XFUKF3SdbmzN7PW1H9PuL2p8nb5egmKcGv/DWdB97zYjqBjauS0SC2+kYHZMlGUWMkxZ
+ 3OGA==
+Subject: Re: [Nouveau] [PATCH 2/2] drm/nouveau: remove open-coded
+ drm_invalid_op()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -57,26 +70,22 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Leon Romanovsky <leon@kernel.org>,
- "Darrick J. Wong" <darrick.wong@oracle.com>, David Airlie <airlied@linux.ie>,
- nouveau@lists.freedesktop.org, LKML <linux-kernel@vger.kernel.org>,
- dri-devel <dri-devel@lists.freedesktop.org>, linux-xfs@vger.kernel.org,
- Jason Gunthorpe <jgg@ziepe.ca>, Doug Ledford <dledford@redhat.com>,
- Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>,
- Andrew Morton <akpm@linux-foundation.org>, roger@filmlight.ltd.uk,
- linux-rdma <linux-rdma@vger.kernel.org>
+Cc: nouveau@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>,
+ dri-devel@lists.freedesktop.org
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Ck9uIDIzLzA1LzIwMTkgMTY6MjcsIFN0ZXZlbiBSb3N0ZWR0IHdyb3RlOgo+Cj4gSSBoYXZlbid0
-IHlldCB0ZXN0ZWQgdGhpcywgYnV0IHdoYXQgYWJvdXQgc29tZXRoaW5nIGxpa2UgdGhlIGZvbGxv
-d2luZzoKPgo+IC4uLnBlcmhhcHMgZm9yZ2V0IGFib3V0IHRoZSBjb25zdGFudCBjaGVjaywgYW5k
-IGp1c3QgZm9yY2UKPiB0aGUgcG93ZXIgb2YgdHdvIGNoZWNrOgo+Cj4gCQkJCQkJCVwKPiAJaWYg
-KCEoX195ICYgKF9feSA+PiAxKSkpIHsJCQlcCj4gCQlfX3ggPSByb3VuZF91cCh4LCB5KTsJCQlc
-Cj4gCX0gZWxzZSB7CQkJCQlcCgpZb3UgcHJvYmFibHkgd2FudAoKIMKgwqDCoMKgwqDCoMKgwqDC
-oMKgIGlmICghKF9feSAmIChfX3kgLSAxKSkKCi0tCgpSb2dlcgoKCl9fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCk5vdXZlYXUgbWFpbGluZyBsaXN0Ck5vdXZl
-YXVAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21h
-aWxtYW4vbGlzdGluZm8vbm91dmVhdQ==
+T24gMjAxOS8wNS8yMywgQmVuIFNrZWdncyB3cm90ZToKPiBPbiBUaHUsIDIzIE1heSAyMDE5IGF0
+IDAxOjAzLCBFbWlsIFZlbGlrb3YgPGVtaWwubC52ZWxpa292QGdtYWlsLmNvbT4gd3JvdGU6Cj4g
+Pgo+ID4gRnJvbTogRW1pbCBWZWxpa292IDxlbWlsLnZlbGlrb3ZAY29sbGFib3JhLmNvbT4KPiA+
+Cj4gPiBDYzogQmVuIFNrZWdncyA8YnNrZWdnc0ByZWRoYXQuY29tPgo+ID4gQ2M6IG5vdXZlYXVA
+bGlzdHMuZnJlZWRlc2t0b3Aub3JnCj4gPiBTaWduZWQtb2ZmLWJ5OiBFbWlsIFZlbGlrb3YgPGVt
+aWwudmVsaWtvdkBjb2xsYWJvcmEuY29tPgo+IFRoYW5rcyEKPiAKRm9yZ290IHRvIG1lbnRpb24s
+IGFueSBvYmplY3Rpb25zIGlmIEkgdGFrZSB0aGlzIHRocm91Z2ggZHJtLW1pc2M/CkknbSBhYm91
+dCB0byBzZW5kIGEgbGVuZ3RoeSBzZXJpZXMgd2hpY2ggd2lsbCBjb25mbGljdCB3aXRoIHRoaXMg
+cGF0Y2gsCmFsYmVpdCB0cml2aWFsbHkuCgpUaGFua3MKRW1pbApfX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fXwpOb3V2ZWF1IG1haWxpbmcgbGlzdApOb3V2ZWF1
+QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWls
+bWFuL2xpc3RpbmZvL25vdXZlYXU=
