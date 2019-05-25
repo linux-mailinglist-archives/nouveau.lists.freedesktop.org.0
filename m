@@ -1,57 +1,45 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1AEE029D1E
-	for <lists+nouveau@lfdr.de>; Fri, 24 May 2019 19:36:00 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1E6482A68A
+	for <lists+nouveau@lfdr.de>; Sat, 25 May 2019 20:35:48 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 797AB89FBC;
-	Fri, 24 May 2019 17:35:58 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 028668984E;
+	Sat, 25 May 2019 18:35:46 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 1219 seconds by postgrey-1.36 at gabe;
- Fri, 24 May 2019 17:35:57 UTC
-Received: from gateway30.websitewelcome.com (gateway30.websitewelcome.com
- [192.185.193.11])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 19B7C89E32
- for <nouveau@lists.freedesktop.org>; Fri, 24 May 2019 17:35:57 +0000 (UTC)
-Received: from cm16.websitewelcome.com (cm16.websitewelcome.com [100.42.49.19])
- by gateway30.websitewelcome.com (Postfix) with ESMTP id CED48ADFD
- for <nouveau@lists.freedesktop.org>; Fri, 24 May 2019 12:15:37 -0500 (CDT)
-Received: from gator4166.hostgator.com ([108.167.133.22]) by cmsmtp with SMTP
- id UDn7hHGzK4FKpUDn7hdRz8; Fri, 24 May 2019 12:15:37 -0500
-X-Authority-Reason: nr=8
-Received: from [189.250.47.159] (port=51588 helo=embeddedor)
- by gator4166.hostgator.com with esmtpa (Exim 4.91)
- (envelope-from <gustavo@embeddedor.com>)
- id 1hUDn6-002Ami-S9; Fri, 24 May 2019 12:15:36 -0500
-Date: Fri, 24 May 2019 12:15:36 -0500
-From: "Gustavo A. R. Silva" <gustavo@embeddedor.com>
-To: Ben Skeggs <bskeggs@redhat.com>, David Airlie <airlied@linux.ie>,
- Daniel Vetter <daniel@ffwll.ch>
-Message-ID: <20190524171536.GA20883@embeddedor>
+Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
+ [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 627AA89852
+ for <nouveau@lists.freedesktop.org>; Sat, 25 May 2019 18:35:44 +0000 (UTC)
+Received: by culpepper.freedesktop.org (Postfix, from userid 33)
+ id 5F3FB72167; Sat, 25 May 2019 18:35:44 +0000 (UTC)
+From: bugzilla-daemon@freedesktop.org
+To: nouveau@lists.freedesktop.org
+Date: Sat, 25 May 2019 18:35:44 +0000
+X-Bugzilla-Reason: QAcontact AssignedTo
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: None
+X-Bugzilla-Product: xorg
+X-Bugzilla-Component: Driver/nouveau
+X-Bugzilla-Version: unspecified
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: normal
+X-Bugzilla-Who: imirkin@alum.mit.edu
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: medium
+X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: product component qa_contact
+Message-ID: <bug-110660-8800-NuhEhvPuze@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-110660-8800@http.bugs.freedesktop.org/>
+References: <bug-110660-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-Content-Disposition: inline
-User-Agent: Mutt/1.9.4 (2018-02-28)
-X-AntiAbuse: This header was added to track abuse,
- please include it with any abuse report
-X-AntiAbuse: Primary Hostname - gator4166.hostgator.com
-X-AntiAbuse: Original Domain - lists.freedesktop.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - embeddedor.com
-X-BWhitelist: no
-X-Source-IP: 189.250.47.159
-X-Source-L: No
-X-Exim-ID: 1hUDn6-002Ami-S9
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-Source-Sender: (embeddedor) [189.250.47.159]:51588
-X-Source-Auth: gustavo@embeddedor.com
-X-Email-Count: 16
-X-Source-Cap: Z3V6aWRpbmU7Z3V6aWRpbmU7Z2F0b3I0MTY2Lmhvc3RnYXRvci5jb20=
-X-Local-Domain: yes
-Subject: [Nouveau] [PATCH] drm/nouveau/mmu: use struct_size() helper
+Subject: [Nouveau] [Bug 110660] GeForce GT 750M Mac Edition fullscreen issues
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -63,33 +51,116 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org,
- "Gustavo A. R. Silva" <gustavo@embeddedor.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1679092428=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-TWFrZSB1c2Ugb2YgdGhlIHN0cnVjdF9zaXplKCkgaGVscGVyIGluc3RlYWQgb2YgYW4gb3Blbi1j
-b2RlZCB2ZXJzaW9uCmluIG9yZGVyIHRvIGF2b2lkIGFueSBwb3RlbnRpYWwgdHlwZSBtaXN0YWtl
-cywgaW4gcGFydGljdWxhciBpbiB0aGUKY29udGV4dCBpbiB3aGljaCB0aGlzIGNvZGUgaXMgYmVp
-bmcgdXNlZC4KClNvLCByZXBsYWNlIHRoZSBmb2xsb3dpbmcgZm9ybToKCnNpemVvZigqa2luZCkg
-KyBzaXplb2YoKmtpbmQtPmRhdGEpICogbW11LT5raW5kX25yOwoKd2l0aDoKCnN0cnVjdF9zaXpl
-KGtpbmQsIGRhdGEsIG1tdS0+a2luZF9ucikKClRoaXMgY29kZSB3YXMgZGV0ZWN0ZWQgd2l0aCB0
-aGUgaGVscCBvZiBDb2NjaW5lbGxlLgoKU2lnbmVkLW9mZi1ieTogR3VzdGF2byBBLiBSLiBTaWx2
-YSA8Z3VzdGF2b0BlbWJlZGRlZG9yLmNvbT4KLS0tCiBkcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9u
-dmlmL21tdS5jIHwgMiArLQogMSBmaWxlIGNoYW5nZWQsIDEgaW5zZXJ0aW9uKCspLCAxIGRlbGV0
-aW9uKC0pCgpkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbnZpZi9tbXUuYyBi
-L2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L252aWYvbW11LmMKaW5kZXggYWUwOGExY2E4MDQ0Li41
-NjQxYmRhMjA0NmQgMTAwNjQ0Ci0tLSBhL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L252aWYvbW11
-LmMKKysrIGIvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbnZpZi9tbXUuYwpAQCAtMTEwLDcgKzEx
-MCw3IEBAIG52aWZfbW11X2luaXQoc3RydWN0IG52aWZfb2JqZWN0ICpwYXJlbnQsIHMzMiBvY2xh
-c3MsIHN0cnVjdCBudmlmX21tdSAqbW11KQogCiAJaWYgKG1tdS0+a2luZF9ucikgewogCQlzdHJ1
-Y3QgbnZpZl9tbXVfa2luZF92MCAqa2luZDsKLQkJdTMyIGFyZ2MgPSBzaXplb2YoKmtpbmQpICsg
-c2l6ZW9mKCpraW5kLT5kYXRhKSAqIG1tdS0+a2luZF9ucjsKKwkJc2l6ZV90IGFyZ2MgPSBzdHJ1
-Y3Rfc2l6ZShraW5kLCBkYXRhLCBtbXUtPmtpbmRfbnIpOwogCiAJCWlmIChyZXQgPSAtRU5PTUVN
-LCAhKGtpbmQgPSBrbWFsbG9jKGFyZ2MsIEdGUF9LRVJORUwpKSkKIAkJCWdvdG8gZG9uZTsKLS0g
-CjIuMjEuMAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18K
-Tm91dmVhdSBtYWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6
-Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============1679092428==
+Content-Type: multipart/alternative; boundary="15588093442.88ea9.18396"
+Content-Transfer-Encoding: 7bit
+
+
+--15588093442.88ea9.18396
+Date: Sat, 25 May 2019 18:35:44 +0000
+MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+https://bugs.freedesktop.org/show_bug.cgi?id=3D110660
+
+Ilia Mirkin <imirkin@alum.mit.edu> changed:
+
+           What    |Removed                     |Added
+----------------------------------------------------------------------------
+            Product|Mesa                        |xorg
+          Component|Drivers/DRI/nouveau         |Driver/nouveau
+         QA Contact|nouveau@lists.freedesktop.o |xorg-team@lists.x.org
+                   |rg                          |
+
+--=20
+You are receiving this mail because:
+You are the QA Contact for the bug.
+You are the assignee for the bug.=
+
+--15588093442.88ea9.18396
+Date: Sat, 25 May 2019 18:35:44 +0000
+MIME-Version: 1.0
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+<html>
+    <head>
+      <base href=3D"https://bugs.freedesktop.org/">
+    </head>
+    <body><span class=3D"vcard"><a class=3D"email" href=3D"mailto:imirkin&#=
+64;alum.mit.edu" title=3D"Ilia Mirkin &lt;imirkin&#64;alum.mit.edu&gt;"> <s=
+pan class=3D"fn">Ilia Mirkin</span></a>
+</span> changed
+          <a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - GeForce GT 750M Mac Edition fullscreen issues"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110660">bug 11066=
+0</a>
+          <br>
+             <table border=3D"1" cellspacing=3D"0" cellpadding=3D"8">
+          <tr>
+            <th>What</th>
+            <th>Removed</th>
+            <th>Added</th>
+          </tr>
+
+         <tr>
+           <td style=3D"text-align:right;">Product</td>
+           <td>Mesa
+           </td>
+           <td>xorg
+           </td>
+         </tr>
+
+         <tr>
+           <td style=3D"text-align:right;">Component</td>
+           <td>Drivers/DRI/nouveau
+           </td>
+           <td>Driver/nouveau
+           </td>
+         </tr>
+
+         <tr>
+           <td style=3D"text-align:right;">QA Contact</td>
+           <td>nouveau&#64;lists.freedesktop.org
+           </td>
+           <td>xorg-team&#64;lists.x.org
+           </td>
+         </tr></table>
+      <p>
+      </p>
+
+
+      <hr>
+      <span>You are receiving this mail because:</span>
+
+      <ul>
+          <li>You are the QA Contact for the bug.</li>
+          <li>You are the assignee for the bug.</li>
+      </ul>
+    </body>
+</html>=
+
+--15588093442.88ea9.18396--
+
+--===============1679092428==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
+YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
+cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============1679092428==--
