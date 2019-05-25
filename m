@@ -2,44 +2,59 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 18B222A739
-	for <lists+nouveau@lfdr.de>; Sun, 26 May 2019 00:37:07 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 17BC12A73F
+	for <lists+nouveau@lfdr.de>; Sun, 26 May 2019 00:41:56 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2C5F16E191;
-	Sat, 25 May 2019 22:37:05 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6E26F6E180;
+	Sat, 25 May 2019 22:41:54 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [131.252.210.165])
- by gabe.freedesktop.org (Postfix) with ESMTP id 0F0236E180
- for <nouveau@lists.freedesktop.org>; Sat, 25 May 2019 22:37:04 +0000 (UTC)
-Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 0C40072167; Sat, 25 May 2019 22:37:04 +0000 (UTC)
-From: bugzilla-daemon@freedesktop.org
-To: nouveau@lists.freedesktop.org
-Date: Sat, 25 May 2019 22:37:04 +0000
-X-Bugzilla-Reason: AssignedTo
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: None
-X-Bugzilla-Product: xorg
-X-Bugzilla-Component: Driver/nouveau
-X-Bugzilla-Version: unspecified
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: normal
-X-Bugzilla-Who: imirkin@alum.mit.edu
-X-Bugzilla-Status: NEW
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: medium
-X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: attachments.created
-Message-ID: <bug-110660-8800-FDZwuI5VKv@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-110660-8800@http.bugs.freedesktop.org/>
-References: <bug-110660-8800@http.bugs.freedesktop.org/>
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
+Received: from mail-qk1-x742.google.com (mail-qk1-x742.google.com
+ [IPv6:2607:f8b0:4864:20::742])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1365F6E180;
+ Sat, 25 May 2019 22:41:54 +0000 (UTC)
+Received: by mail-qk1-x742.google.com with SMTP id o2so12512749qkb.3;
+ Sat, 25 May 2019 15:41:54 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
+ :mime-version:content-transfer-encoding;
+ bh=+yKyBBW3VlIp68lvhpwOuf/tvlXYJWdEHBcOUHyH3L8=;
+ b=rUlCnFAGfLN7FIzrMZh8mpurk748zCLQaa1V43tVlgBmTGcd4O6XPSlWDrQ7s4JJuJ
+ nptCij3lBBS2uMoHrhZrKJGk7FNMXLcZH1Odw/OaNXrRMFgSSoH8oBT8C39fhnfE1QzL
+ vuOe7NbXQw78b2PSke02OCQY2BMqOmQgyahUKAkgKFGNX3nRX+afl4kF/1d4RCma1PWV
+ W8pzaJ6emPg4TAqeZRisVq3eo45h0I0uAgfLLGNHZvvHlEWJTmXVfBSbeXscHrrmN+WB
+ YwPzsA0qP3BeMW2LUicGGxFxNU0FW7PcWxG++SQLkKKcL0S/vmlHmTmnBJL5LRwlBcl6
+ ybhQ==
+X-Gm-Message-State: APjAAAVQQZjOKBLyhS4N5wURVoolUQ/1y9TopbYoX/stPEpBBNYXitO7
+ CejYDqoAMN0Sks8Dw+kI9lw=
+X-Google-Smtp-Source: APXvYqyR2hJBL8RrfPHWNAlmBTd4V3743jcZhSsXO0CI3/1EpoVynqfPX/fV99SqKSTPL9dmAW8jrw==
+X-Received: by 2002:a05:620a:624:: with SMTP id 4mr5068222qkv.15.1558824113184; 
+ Sat, 25 May 2019 15:41:53 -0700 (PDT)
+Received: from athos.fios-router.home
+ (pool-173-68-20-215.nycmny.fios.verizon.net. [173.68.20.215])
+ by smtp.gmail.com with ESMTPSA id 102sm1576876qte.52.2019.05.25.15.41.52
+ (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+ Sat, 25 May 2019 15:41:52 -0700 (PDT)
+From: Ilia Mirkin <imirkin@alum.mit.edu>
+To: bskeggs@redhat.com
+Date: Sat, 25 May 2019 18:41:48 -0400
+Message-Id: <20190525224149.4652-1-imirkin@alum.mit.edu>
+X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 110660] GeForce GT 750M Mac Edition fullscreen issues
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20161025;
+ h=sender:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=+yKyBBW3VlIp68lvhpwOuf/tvlXYJWdEHBcOUHyH3L8=;
+ b=Ug8Rqv0ud7UW/ILBmlrQnFX1docQ0cd0d+jL2kC7mi485joZSK9GPXL0iOUiPXstmj
+ iVU4B8km4KyCH9eYA+hoXK6q1km7wsUe1CNKNsTr7dpJcdY0b8Ks8WukLXkb7or1Hn85
+ igcCWyxUlFGsy7iYpJYX/ezG0SSdJvAF35cJ/3OqprhCdlosmktgnCrGLGkI84NEQIhw
+ wD30SaeNOTfLdDkkSs08M3b7o8oVie4JVOaG2eKb9olnMqAwZrT7xc9KJ94wCWo5HXuY
+ ViKoAXvER04DghJTEnbtgkFA2ZRDY03ES1zIVL92C4aivF9dkAbMGz07+5Yv2lsptNmV
+ ntDw==
+Subject: [Nouveau] [PATCH 1/2] drm/nouveau/disp/nv50-: force scaler for any
+ non-default LVDS/eDP modes
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -51,99 +66,39 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0151090925=="
+Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-
---===============0151090925==
-Content-Type: multipart/alternative; boundary="15588238240.E987BE.19282"
-Content-Transfer-Encoding: 7bit
-
-
---15588238240.E987BE.19282
-Date: Sat, 25 May 2019 22:37:04 +0000
-MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-https://bugs.freedesktop.org/show_bug.cgi?id=3D110660
-
---- Comment #31 from Ilia Mirkin <imirkin@alum.mit.edu> ---
-Created attachment 144346
-  --> https://bugs.freedesktop.org/attachment.cgi?id=3D144346&action=3Dedit
-fix center and aspect scaling
-
-This patch should fix the aspect scaling mode (and also makes adjustments to
-the center one - it wasn't obviously correct before).
-
---=20
-You are receiving this mail because:
-You are the assignee for the bug.=
-
---15588238240.E987BE.19282
-Date: Sat, 25 May 2019 22:37:04 +0000
-MIME-Version: 1.0
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-<html>
-    <head>
-      <base href=3D"https://bugs.freedesktop.org/">
-    </head>
-    <body>
-      <p>
-        <div>
-            <b><a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - GeForce GT 750M Mac Edition fullscreen issues"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110660#c31">Comme=
-nt # 31</a>
-              on <a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - GeForce GT 750M Mac Edition fullscreen issues"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110660">bug 11066=
-0</a>
-              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
-imirkin&#64;alum.mit.edu" title=3D"Ilia Mirkin &lt;imirkin&#64;alum.mit.edu=
-&gt;"> <span class=3D"fn">Ilia Mirkin</span></a>
-</span></b>
-        <pre>Created <span class=3D""><a href=3D"attachment.cgi?id=3D144346=
-" name=3D"attach_144346" title=3D"fix center and aspect scaling">attachment=
- 144346</a> <a href=3D"attachment.cgi?id=3D144346&amp;action=3Dedit" title=
-=3D"fix center and aspect scaling">[details]</a></span> <a href=3D'page.cgi=
-?id=3Dsplinter.html&amp;bug=3D110660&amp;attachment=3D144346'>[review]</a>
-fix center and aspect scaling
-
-This patch should fix the aspect scaling mode (and also makes adjustments to
-the center one - it wasn't obviously correct before).</pre>
-        </div>
-      </p>
-
-
-      <hr>
-      <span>You are receiving this mail because:</span>
-
-      <ul>
-          <li>You are the assignee for the bug.</li>
-      </ul>
-    </body>
-</html>=
-
---15588238240.E987BE.19282--
-
---===============0151090925==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
-YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
-cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
-
---===============0151090925==--
+SGlnaGVyIGxheWVycyB0ZW5kIHRvIGFkZCBhIGxvdCBvZiBtb2RlcyBub3QgYWN0dWFsbHkgaW4g
+dGhlIEVESUQsIHN1Y2gKYXMgdGhlIHN0YW5kYXJkIERNVCBtb2Rlcy4gQ2hhbmdpbmcgdGhpcyB3
+b3VsZCBiZSBleHRyZW1lbHkgaW50cnVzaXZlIHRvCmV2ZXJ5b25lLCBzbyBqdXN0IGZvcmNlIHRo
+ZSBzY2FsZXIgbW9yZSBvZnRlbi4gVGhlcmUgYXJlIG5vIHByYWN0aWNhbApjYXNlcyB3ZSdyZSBh
+d2FyZSBvZiB3aGVyZSBhIExWRFMvZURQIHBhbmVsIGhhcyBtdWx0aXBsZSByZXNvbHV0aW9ucwpl
+eHBvc2VkLCBhbmQgaTkxNSBhbHJlYWR5IGRvZXMgaXQgdGhpcyB3YXkuCgpCdWd6aWxsYTogaHR0
+cHM6Ly9idWdzLmZyZWVkZXNrdG9wLm9yZy9zaG93X2J1Zy5jZ2k/aWQ9MTEwNjYwClNpZ25lZC1v
+ZmYtYnk6IElsaWEgTWlya2luIDxpbWlya2luQGFsdW0ubWl0LmVkdT4KLS0tCgpVbnRlc3RlZCBm
+b3Igbm93LCBob3BpbmcgdGhhdCB0aGUgYnVnemlsbGEgZmlsZXIgd2lsbCB0ZXN0IGl0IG91dC4g
+U2VlbXMKb2J2aW91cyB0aG91Z2guCgogZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvZGlzcG52NTAv
+ZGlzcC5jIHwgOSArKysrKysrLS0KIDEgZmlsZSBjaGFuZ2VkLCA3IGluc2VydGlvbnMoKyksIDIg
+ZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvZGlzcG52
+NTAvZGlzcC5jIGIvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvZGlzcG52NTAvZGlzcC5jCmluZGV4
+IDEzNDcwMWE4MzdjOC4uZWY4ZDdhNzE1NjRhIDEwMDY0NAotLS0gYS9kcml2ZXJzL2dwdS9kcm0v
+bm91dmVhdS9kaXNwbnY1MC9kaXNwLmMKKysrIGIvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvZGlz
+cG52NTAvZGlzcC5jCkBAIC0zMjIsOCArMzIyLDEzIEBAIG52NTBfb3V0cF9hdG9taWNfY2hlY2tf
+dmlldyhzdHJ1Y3QgZHJtX2VuY29kZXIgKmVuY29kZXIsCiAJCXN3aXRjaCAoY29ubmVjdG9yLT5j
+b25uZWN0b3JfdHlwZSkgewogCQljYXNlIERSTV9NT0RFX0NPTk5FQ1RPUl9MVkRTOgogCQljYXNl
+IERSTV9NT0RFX0NPTk5FQ1RPUl9lRFA6Ci0JCQkvKiBGb3JjZSB1c2Ugb2Ygc2NhbGVyIGZvciBu
+b24tRURJRCBtb2Rlcy4gKi8KLQkJCWlmIChhZGp1c3RlZF9tb2RlLT50eXBlICYgRFJNX01PREVf
+VFlQRV9EUklWRVIpCisJCQkvKiBEb24ndCBmb3JjZSBzY2FsZXIgZm9yIEVESUQgbW9kZXMgd2l0
+aAorCQkJICogc2FtZSBzaXplIGFzIHRoZSBuYXRpdmUgb25lIChlLmcuIGRpZmZlcmVudAorCQkJ
+ICogcmVmcmVzaCByYXRlKQorCQkJICovCisJCQlpZiAoYWRqdXN0ZWRfbW9kZS0+aGRpc3BsYXkg
+PT0gbmF0aXZlX21vZGUtPmhkaXNwbGF5ICYmCisJCQkgICAgYWRqdXN0ZWRfbW9kZS0+dmRpc3Bs
+YXkgPT0gbmF0aXZlX21vZGUtPnZkaXNwbGF5ICYmCisJCQkgICAgYWRqdXN0ZWRfbW9kZS0+dHlw
+ZSAmIERSTV9NT0RFX1RZUEVfRFJJVkVSKQogCQkJCWJyZWFrOwogCQkJbW9kZSA9IG5hdGl2ZV9t
+b2RlOwogCQkJYXN5Yy0+c2NhbGVyLmZ1bGwgPSB0cnVlOwotLSAKMi4yMS4wCgpfX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpOb3V2ZWF1IG1haWxpbmcgbGlz
+dApOb3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9w
+Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL25vdXZlYXU=
