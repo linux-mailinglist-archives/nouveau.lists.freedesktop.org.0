@@ -2,63 +2,44 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 789562D471
-	for <lists+nouveau@lfdr.de>; Wed, 29 May 2019 06:10:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6AB2F2ABC9
+	for <lists+nouveau@lfdr.de>; Sun, 26 May 2019 21:11:55 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7F9296E077;
-	Wed, 29 May 2019 04:10:51 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B594E88DF5;
+	Sun, 26 May 2019 19:11:53 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pl1-x643.google.com (mail-pl1-x643.google.com
- [IPv6:2607:f8b0:4864:20::643])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D6FD189D00;
- Sun, 26 May 2019 11:06:30 +0000 (UTC)
-Received: by mail-pl1-x643.google.com with SMTP id a5so5904431pls.12;
- Sun, 26 May 2019 04:06:30 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:subject:message-id:mime-version
- :content-disposition:user-agent;
- bh=vt37nqdxlvUB79ggM15T2/FTTWBxfQWNhWkq11PROKQ=;
- b=l0xvVsLj3+u3SdGnkGb6WiJw1RE3qU9l0ffmf/GfSOVre8Ro58saus+4HzOA5h7hEB
- Gp7+i9ShneDJEpeaj1nbbNygC9+XWbRnxdP1iGomThV5Nx27oCp2nh9TX7FkjfYqBA9/
- 1tYrzEH5aZ5G0Wt7il/bfUZ1IIGVBMxfjDT/FshSonjWl3kvZscMLSuV28uOMpMWhPNl
- ZUSHT184ZkO7WfuWaOptFhJZGiLwTAMY0tKD/JeeymAVn2Qpvy+6usrrpcvdFL6+8RTI
- 11DG9vsehdxzlcu7tYNDbPIxCO1MG76PcnqzrDiY78QLHeu+R4XcWBLTBuwTogZ0qpEV
- C+Sw==
-X-Gm-Message-State: APjAAAX+2aMuiW5Zx5mNHbcVGtjdZGEa9l8Qlr53S4zCQ5MJMlCKaZvP
- sUQPKMVsTw72jEveK4xJphU=
-X-Google-Smtp-Source: APXvYqy4cPE5PR9Hq/DSIi+6zKOL0c30nNvj1cvkRhBjHOi+pePjkOCD21SRo6BUuxGBnPb8jTlJgQ==
-X-Received: by 2002:a17:902:e30b:: with SMTP id
- cg11mr120042307plb.3.1558868790574; 
- Sun, 26 May 2019 04:06:30 -0700 (PDT)
-Received: from hari-Inspiron-1545 ([183.83.92.73])
- by smtp.gmail.com with ESMTPSA id z7sm9343311pfr.23.2019.05.26.04.06.28
- (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
- Sun, 26 May 2019 04:06:30 -0700 (PDT)
-Date: Sun, 26 May 2019 16:36:25 +0530
-From: Hariprasad Kelam <hariprasad.kelam@gmail.com>
-To: Ben Skeggs <bskeggs@redhat.com>, David Airlie <airlied@linux.ie>,
- Daniel Vetter <daniel@ffwll.ch>, dri-devel@lists.freedesktop.org,
- nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org
-Message-ID: <20190526110625.GA3143@hari-Inspiron-1545>
+Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
+ [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 51BF388DF5
+ for <nouveau@lists.freedesktop.org>; Sun, 26 May 2019 19:11:52 +0000 (UTC)
+Received: by culpepper.freedesktop.org (Postfix, from userid 33)
+ id 4DC7F72167; Sun, 26 May 2019 19:11:52 +0000 (UTC)
+From: bugzilla-daemon@freedesktop.org
+To: nouveau@lists.freedesktop.org
+Date: Sun, 26 May 2019 19:11:52 +0000
+X-Bugzilla-Reason: AssignedTo
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: None
+X-Bugzilla-Product: xorg
+X-Bugzilla-Component: Driver/nouveau
+X-Bugzilla-Version: unspecified
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: normal
+X-Bugzilla-Who: imirkin@alum.mit.edu
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: medium
+X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: 
+Message-ID: <bug-110660-8800-04qSSW74vp@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-110660-8800@http.bugs.freedesktop.org/>
+References: <bug-110660-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-Content-Disposition: inline
-User-Agent: Mutt/1.5.24 (2015-08-30)
-X-Mailman-Approved-At: Wed, 29 May 2019 04:10:47 +0000
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20161025;
- h=date:from:to:subject:message-id:mime-version:content-disposition
- :user-agent;
- bh=vt37nqdxlvUB79ggM15T2/FTTWBxfQWNhWkq11PROKQ=;
- b=oZY5h4tGiVYinWyRxT4+1A4A+uF6w2KMaCBv+yFqFaeRS84d+1dj/uLlcm5HJK2QEh
- F62VzSUcL6oZJzCV2Y2W6uU7mRSwWEP0tS4q+1FJxeETehd3qC3uzciM4atAmRGBTjay
- aRO6oeswN8RJxrGce2AOsB6C3EBsYfOMFCQuYG3R9scC7sRrRy3xa9+DbS/vazfBRfkC
- bTA7yaeIHkO17h8P/INMiYBXWkXoxWr0ijlXBRvMNtzO0VqJTnqhH3ZbmgaACeD6iTc4
- PuNwrQJ0qmIUB6Q9MwO9fHDdc/PWbyyGrMqtOloXnoeDJ5Xq0+Bp8vgVFOyAvRuYm7Cn
- FG2g==
-Subject: [Nouveau] [PATCH] drm/nouveau: fix nvif/device.h is included more
- than once
+Subject: [Nouveau] [Bug 110660] GeForce GT 750M Mac Edition fullscreen issues
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -70,22 +51,89 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1509441833=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-cmVtb3ZlIGR1cGxpY2F0ZSBpbmNsdXNpb24gb2YgbnZpZi9kZXZpY2UuaAoKSXNzdWUgaWRlbnRp
-ZmllZCBieSBpbmNsdWRlY2hlY2sKClNpZ25lZC1vZmYtYnk6IEhhcmlwcmFzYWQgS2VsYW0gPGhh
-cmlwcmFzYWQua2VsYW1AZ21haWwuY29tPgotLS0KIGRyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25v
-dXZlYXVfZHJ2LmggfCAxIC0KIDEgZmlsZSBjaGFuZ2VkLCAxIGRlbGV0aW9uKC0pCgpkaWZmIC0t
-Z2l0IGEvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9kcnYuaCBiL2RyaXZlcnMvZ3B1
-L2RybS9ub3V2ZWF1L25vdXZlYXVfZHJ2LmgKaW5kZXggMzVmZjBjYS4uY2ZlYmIxNCAxMDA2NDQK
-LS0tIGEvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9kcnYuaAorKysgYi9kcml2ZXJz
-L2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2Rydi5oCkBAIC0xMjcsNyArMTI3LDYgQEAgbm91dmVh
-dV9jbGkoc3RydWN0IGRybV9maWxlICpmcHJpdikKIH0KIAogI2luY2x1ZGUgPG52aWYvb2JqZWN0
-Lmg+Ci0jaW5jbHVkZSA8bnZpZi9kZXZpY2UuaD4KIAogc3RydWN0IG5vdXZlYXVfZHJtIHsKIAlz
-dHJ1Y3Qgbm91dmVhdV9jbGkgbWFzdGVyOwotLSAKMi43LjQKCl9fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fCk5vdXZlYXUgbWFpbGluZyBsaXN0Ck5vdXZlYXVA
-bGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxt
-YW4vbGlzdGluZm8vbm91dmVhdQ==
+
+--===============1509441833==
+Content-Type: multipart/alternative; boundary="15588979120.43AB8Bcc.4076"
+Content-Transfer-Encoding: 7bit
+
+
+--15588979120.43AB8Bcc.4076
+Date: Sun, 26 May 2019 19:11:52 +0000
+MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+https://bugs.freedesktop.org/show_bug.cgi?id=3D110660
+
+--- Comment #32 from Ilia Mirkin <imirkin@alum.mit.edu> ---
+Alexei - if you get a chance, try applying the two patches I provide. They
+should make things work for you out of the box.
+
+--=20
+You are receiving this mail because:
+You are the assignee for the bug.=
+
+--15588979120.43AB8Bcc.4076
+Date: Sun, 26 May 2019 19:11:52 +0000
+MIME-Version: 1.0
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+<html>
+    <head>
+      <base href=3D"https://bugs.freedesktop.org/">
+    </head>
+    <body>
+      <p>
+        <div>
+            <b><a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - GeForce GT 750M Mac Edition fullscreen issues"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110660#c32">Comme=
+nt # 32</a>
+              on <a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - GeForce GT 750M Mac Edition fullscreen issues"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110660">bug 11066=
+0</a>
+              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
+imirkin&#64;alum.mit.edu" title=3D"Ilia Mirkin &lt;imirkin&#64;alum.mit.edu=
+&gt;"> <span class=3D"fn">Ilia Mirkin</span></a>
+</span></b>
+        <pre>Alexei - if you get a chance, try applying the two patches I p=
+rovide. They
+should make things work for you out of the box.</pre>
+        </div>
+      </p>
+
+
+      <hr>
+      <span>You are receiving this mail because:</span>
+
+      <ul>
+          <li>You are the assignee for the bug.</li>
+      </ul>
+    </body>
+</html>=
+
+--15588979120.43AB8Bcc.4076--
+
+--===============1509441833==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
+YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
+cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============1509441833==--
