@@ -2,22 +2,22 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 58C1A2BB8A
-	for <lists+nouveau@lfdr.de>; Mon, 27 May 2019 22:54:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0C4CD2BB8C
+	for <lists+nouveau@lfdr.de>; Mon, 27 May 2019 22:55:48 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5F07589B4D;
-	Mon, 27 May 2019 20:54:55 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 673C989565;
+	Mon, 27 May 2019 20:55:46 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
  [131.252.210.165])
- by gabe.freedesktop.org (Postfix) with ESMTP id 5DF5789971
- for <nouveau@lists.freedesktop.org>; Mon, 27 May 2019 20:54:54 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTP id 090BB89829
+ for <nouveau@lists.freedesktop.org>; Mon, 27 May 2019 20:55:45 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 5A1EC72167; Mon, 27 May 2019 20:54:54 +0000 (UTC)
+ id 05F0072167; Mon, 27 May 2019 20:55:45 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Mon, 27 May 2019 20:54:54 +0000
+Date: Mon, 27 May 2019 20:55:44 +0000
 X-Bugzilla-Reason: AssignedTo
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
@@ -33,7 +33,7 @@ X-Bugzilla-Priority: medium
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
 X-Bugzilla-Changed-Fields: attachments.created
-Message-ID: <bug-100228-8800-XZy9cRNS3S@http.bugs.freedesktop.org/>
+Message-ID: <bug-100228-8800-DAfln476wS@http.bugs.freedesktop.org/>
 In-Reply-To: <bug-100228-8800@http.bugs.freedesktop.org/>
 References: <bug-100228-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
@@ -52,18 +52,18 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1687105957=="
+Content-Type: multipart/mixed; boundary="===============1809097844=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============1687105957==
-Content-Type: multipart/alternative; boundary="15589904943.D90fe.32013"
+--===============1809097844==
+Content-Type: multipart/alternative; boundary="155899054415.6dea.32100"
 Content-Transfer-Encoding: 7bit
 
 
---15589904943.D90fe.32013
-Date: Mon, 27 May 2019 20:54:54 +0000
+--155899054415.6dea.32100
+Date: Mon, 27 May 2019 20:55:44 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -72,17 +72,17 @@ Auto-Submitted: auto-generated
 
 https://bugs.freedesktop.org/show_bug.cgi?id=3D100228
 
---- Comment #35 from Markus Wanner <markus@bluegap.ch> ---
-Created attachment 144355
-  --> https://bugs.freedesktop.org/attachment.cgi?id=3D144355&action=3Dedit
-GP107GLM - kernel log
+--- Comment #36 from Markus Wanner <markus@bluegap.ch> ---
+Created attachment 144356
+  --> https://bugs.freedesktop.org/attachment.cgi?id=3D144356&action=3Dedit
+GP107GLM (ThinkPad P1) - lspci
 
 --=20
 You are receiving this mail because:
 You are the assignee for the bug.=
 
---15589904943.D90fe.32013
-Date: Mon, 27 May 2019 20:54:54 +0000
+--155899054415.6dea.32100
+Date: Mon, 27 May 2019 20:55:44 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -100,8 +100,8 @@ Auto-Submitted: auto-generated
           bz_status_NEW "
    title=3D"NEW - [NV137] bus: MMIO read of 00000000 FAULT at 409800 [ TIME=
 OUT ]"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D100228#c35">Comme=
-nt # 35</a>
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D100228#c36">Comme=
+nt # 36</a>
               on <a class=3D"bz_bug_link=20
           bz_status_NEW "
    title=3D"NEW - [NV137] bus: MMIO read of 00000000 FAULT at 409800 [ TIME=
@@ -112,11 +112,11 @@ OUT ]"
 markus&#64;bluegap.ch" title=3D"Markus Wanner &lt;markus&#64;bluegap.ch&gt;=
 "> <span class=3D"fn">Markus Wanner</span></a>
 </span></b>
-        <pre>Created <span class=3D""><a href=3D"attachment.cgi?id=3D144355=
-" name=3D"attach_144355" title=3D"GP107GLM - kernel log">attachment 144355<=
-/a> <a href=3D"attachment.cgi?id=3D144355&amp;action=3Dedit" title=3D"GP107=
-GLM - kernel log">[details]</a></span>
-GP107GLM - kernel log</pre>
+        <pre>Created <span class=3D""><a href=3D"attachment.cgi?id=3D144356=
+" name=3D"attach_144356" title=3D"GP107GLM (ThinkPad P1) - lspci">attachmen=
+t 144356</a> <a href=3D"attachment.cgi?id=3D144356&amp;action=3Dedit" title=
+=3D"GP107GLM (ThinkPad P1) - lspci">[details]</a></span>
+GP107GLM (ThinkPad P1) - lspci</pre>
         </div>
       </p>
 
@@ -130,9 +130,9 @@ GP107GLM - kernel log</pre>
     </body>
 </html>=
 
---15589904943.D90fe.32013--
+--155899054415.6dea.32100--
 
---===============1687105957==
+--===============1809097844==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -142,4 +142,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============1687105957==--
+--===============1809097844==--
