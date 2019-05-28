@@ -2,22 +2,22 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id CAA3C2D043
-	for <lists+nouveau@lfdr.de>; Tue, 28 May 2019 22:28:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 81B482D05F
+	for <lists+nouveau@lfdr.de>; Tue, 28 May 2019 22:31:33 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7477B89C88;
-	Tue, 28 May 2019 20:28:33 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 79ABF6E296;
+	Tue, 28 May 2019 20:31:31 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
  [131.252.210.165])
- by gabe.freedesktop.org (Postfix) with ESMTP id 8FBD489C88
- for <nouveau@lists.freedesktop.org>; Tue, 28 May 2019 20:28:32 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTP id 008ED89FCA
+ for <nouveau@lists.freedesktop.org>; Tue, 28 May 2019 20:31:29 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 89ABC72167; Tue, 28 May 2019 20:28:32 +0000 (UTC)
+ id F0F5D72167; Tue, 28 May 2019 20:31:29 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Tue, 28 May 2019 20:28:32 +0000
+Date: Tue, 28 May 2019 20:31:30 +0000
 X-Bugzilla-Reason: AssignedTo
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
@@ -26,14 +26,14 @@ X-Bugzilla-Component: Driver/nouveau
 X-Bugzilla-Version: unspecified
 X-Bugzilla-Keywords: 
 X-Bugzilla-Severity: normal
-X-Bugzilla-Who: ak@axet.ru
+X-Bugzilla-Who: imirkin@alum.mit.edu
 X-Bugzilla-Status: NEW
 X-Bugzilla-Resolution: 
 X-Bugzilla-Priority: medium
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
 X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-110660-8800-ovE98qpCqE@http.bugs.freedesktop.org/>
+Message-ID: <bug-110660-8800-xd5pixvhoV@http.bugs.freedesktop.org/>
 In-Reply-To: <bug-110660-8800@http.bugs.freedesktop.org/>
 References: <bug-110660-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
@@ -51,18 +51,18 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0244400941=="
+Content-Type: multipart/mixed; boundary="===============0284823003=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============0244400941==
-Content-Type: multipart/alternative; boundary="15590753122.2aD8D537.10985"
+--===============0284823003==
+Content-Type: multipart/alternative; boundary="15590754893.fa9aD.12998"
 Content-Transfer-Encoding: 7bit
 
 
---15590753122.2aD8D537.10985
-Date: Tue, 28 May 2019 20:28:32 +0000
+--15590754893.fa9aD.12998
+Date: Tue, 28 May 2019 20:31:29 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -71,19 +71,28 @@ Auto-Submitted: auto-generated
 
 https://bugs.freedesktop.org/show_bug.cgi?id=3D110660
 
---- Comment #35 from Alexey Kuznetsov <ak@axet.ru> ---
-Yep, bingo. Now it is scaling display and has no broken displays after rebo=
-ot
-no need to call additional xrandr commands. But, feels like default "scaling
-mode" should be "Full aspect" instead "Full". Anyway, thanks for support!
-Nvidia should be ashamed for lack of linux support.
+--- Comment #36 from Ilia Mirkin <imirkin@alum.mit.edu> ---
+(In reply to Alexey Kuznetsov from comment #35)
+> Yep, bingo. Now it is scaling display and has no broken displays after
+> reboot no need to call additional xrandr commands. But, feels like default
+> "scaling mode" should be "Full aspect" instead "Full". Anyway, thanks for
+> support! Nvidia should be ashamed for lack of linux support.
+
+Well, on a regular monitor, using a smaller modeline generally scales it to=
+ the
+full size of that screen. This emulates that behavior by default. If you wa=
+nt
+something else, you have to fiddle with settings.
+
+I'm going to confer with people who actually understand all this
+mode/adjusted_mode bs to try to fix my earlier blunder.
 
 --=20
 You are receiving this mail because:
 You are the assignee for the bug.=
 
---15590753122.2aD8D537.10985
-Date: Tue, 28 May 2019 20:28:32 +0000
+--15590754893.fa9aD.12998
+Date: Tue, 28 May 2019 20:31:29 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -100,24 +109,35 @@ Auto-Submitted: auto-generated
             <b><a class=3D"bz_bug_link=20
           bz_status_NEW "
    title=3D"NEW - GeForce GT 750M Mac Edition fullscreen issues"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110660#c35">Comme=
-nt # 35</a>
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110660#c36">Comme=
+nt # 36</a>
               on <a class=3D"bz_bug_link=20
           bz_status_NEW "
    title=3D"NEW - GeForce GT 750M Mac Edition fullscreen issues"
    href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110660">bug 11066=
 0</a>
               from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
-ak&#64;axet.ru" title=3D"Alexey Kuznetsov &lt;ak&#64;axet.ru&gt;"> <span cl=
-ass=3D"fn">Alexey Kuznetsov</span></a>
+imirkin&#64;alum.mit.edu" title=3D"Ilia Mirkin &lt;imirkin&#64;alum.mit.edu=
+&gt;"> <span class=3D"fn">Ilia Mirkin</span></a>
 </span></b>
-        <pre>Yep, bingo. Now it is scaling display and has no broken displa=
-ys after reboot
-no need to call additional xrandr commands. But, feels like default &quot;s=
-caling
-mode&quot; should be &quot;Full aspect&quot; instead &quot;Full&quot;. Anyw=
-ay, thanks for support!
-Nvidia should be ashamed for lack of linux support.</pre>
+        <pre>(In reply to Alexey Kuznetsov from <a href=3D"show_bug.cgi?id=
+=3D110660#c35">comment #35</a>)
+<span class=3D"quote">&gt; Yep, bingo. Now it is scaling display and has no=
+ broken displays after
+&gt; reboot no need to call additional xrandr commands. But, feels like def=
+ault
+&gt; &quot;scaling mode&quot; should be &quot;Full aspect&quot; instead &qu=
+ot;Full&quot;. Anyway, thanks for
+&gt; support! Nvidia should be ashamed for lack of linux support.</span >
+
+Well, on a regular monitor, using a smaller modeline generally scales it to=
+ the
+full size of that screen. This emulates that behavior by default. If you wa=
+nt
+something else, you have to fiddle with settings.
+
+I'm going to confer with people who actually understand all this
+mode/adjusted_mode bs to try to fix my earlier blunder.</pre>
         </div>
       </p>
 
@@ -131,9 +151,9 @@ Nvidia should be ashamed for lack of linux support.</pre>
     </body>
 </html>=
 
---15590753122.2aD8D537.10985--
+--15590754893.fa9aD.12998--
 
---===============0244400941==
+--===============0284823003==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -143,4 +163,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============0244400941==--
+--===============0284823003==--
