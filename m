@@ -1,23 +1,23 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4B5332CCC7
-	for <lists+nouveau@lfdr.de>; Tue, 28 May 2019 18:58:17 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 83C8A2CD7B
+	for <lists+nouveau@lfdr.de>; Tue, 28 May 2019 19:19:28 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 38DF66E270;
-	Tue, 28 May 2019 16:58:15 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0AE306E28F;
+	Tue, 28 May 2019 17:19:27 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
  [131.252.210.165])
- by gabe.freedesktop.org (Postfix) with ESMTP id 3BD916E26C
- for <nouveau@lists.freedesktop.org>; Tue, 28 May 2019 16:58:14 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTP id C1E606E290
+ for <nouveau@lists.freedesktop.org>; Tue, 28 May 2019 17:19:25 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 38D2872167; Tue, 28 May 2019 16:58:14 +0000 (UTC)
+ id BE76972167; Tue, 28 May 2019 17:19:25 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Tue, 28 May 2019 16:58:14 +0000
+Date: Tue, 28 May 2019 17:19:25 +0000
 X-Bugzilla-Reason: AssignedTo
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
@@ -26,14 +26,14 @@ X-Bugzilla-Component: Driver/nouveau
 X-Bugzilla-Version: unspecified
 X-Bugzilla-Keywords: 
 X-Bugzilla-Severity: normal
-X-Bugzilla-Who: ak@axet.ru
+X-Bugzilla-Who: imirkin@alum.mit.edu
 X-Bugzilla-Status: NEW
 X-Bugzilla-Resolution: 
 X-Bugzilla-Priority: medium
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
 X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-110660-8800-HQctwUw2Ia@http.bugs.freedesktop.org/>
+Message-ID: <bug-110660-8800-FQ9iTN5VfD@http.bugs.freedesktop.org/>
 In-Reply-To: <bug-110660-8800@http.bugs.freedesktop.org/>
 References: <bug-110660-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
@@ -51,18 +51,18 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1478351466=="
+Content-Type: multipart/mixed; boundary="===============0047051158=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============1478351466==
-Content-Type: multipart/alternative; boundary="15590626942.bE07.5229"
+--===============0047051158==
+Content-Type: multipart/alternative; boundary="15590639653.a4BA9F.10656"
 Content-Transfer-Encoding: 7bit
 
 
---15590626942.bE07.5229
-Date: Tue, 28 May 2019 16:58:14 +0000
+--15590639653.a4BA9F.10656
+Date: Tue, 28 May 2019 17:19:25 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -71,24 +71,37 @@ Auto-Submitted: auto-generated
 
 https://bugs.freedesktop.org/show_bug.cgi?id=3D110660
 
---- Comment #33 from Alexey Kuznetsov <ak@axet.ru> ---
-Thanks! In Ubuntu kernel has no drivers/gpu/drm/nouveau/dispnv50/disp.c and
-drivers/gpu/drm/nouveau/dispnv50/head.c but instead those files merged into=
- one
-drivers/gpu/drm/nouveau/nv50_display.c for some heck reason.
+--- Comment #34 from Ilia Mirkin <imirkin@alum.mit.edu> ---
+(In reply to Alexey Kuznetsov from comment #33)
+> Thanks! In Ubuntu kernel has no drivers/gpu/drm/nouveau/dispnv50/disp.c a=
+nd
+> drivers/gpu/drm/nouveau/dispnv50/head.c but instead those files merged in=
+to
+> one drivers/gpu/drm/nouveau/nv50_display.c for some heck reason.
 
-Patching this file makes one problem disappear, only "fix center and aspect
-scaling" work properly (which confirms I build a kernel properly) but scali=
-ng
-modes without calling 'xrandr --output eDP-1 --set "scaling mode" "Full
-aspect"' still produces broken 8 displays.
+The code was refactored. The ubuntu kernel is older.
+
+>=20
+> Patching this file makes one problem disappear, only "fix center and aspe=
+ct
+> scaling" work properly (which confirms I build a kernel properly) but
+
+Yay!
+
+> scaling modes without calling 'xrandr --output eDP-1 --set "scaling mode"
+> "Full aspect"' still produces broken 8 displays.
+
+Hmmmm... adjusted_mode is the wrong thing to look at maybe? What if you swi=
+tch
+adjusted_mode -> mode in that conditional? I always get so confused with
+that...
 
 --=20
 You are receiving this mail because:
 You are the assignee for the bug.=
 
---15590626942.bE07.5229
-Date: Tue, 28 May 2019 16:58:14 +0000
+--15590639653.a4BA9F.10656
+Date: Tue, 28 May 2019 17:19:25 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -105,30 +118,44 @@ Auto-Submitted: auto-generated
             <b><a class=3D"bz_bug_link=20
           bz_status_NEW "
    title=3D"NEW - GeForce GT 750M Mac Edition fullscreen issues"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110660#c33">Comme=
-nt # 33</a>
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110660#c34">Comme=
+nt # 34</a>
               on <a class=3D"bz_bug_link=20
           bz_status_NEW "
    title=3D"NEW - GeForce GT 750M Mac Edition fullscreen issues"
    href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110660">bug 11066=
 0</a>
               from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
-ak&#64;axet.ru" title=3D"Alexey Kuznetsov &lt;ak&#64;axet.ru&gt;"> <span cl=
-ass=3D"fn">Alexey Kuznetsov</span></a>
+imirkin&#64;alum.mit.edu" title=3D"Ilia Mirkin &lt;imirkin&#64;alum.mit.edu=
+&gt;"> <span class=3D"fn">Ilia Mirkin</span></a>
 </span></b>
-        <pre>Thanks! In Ubuntu kernel has no drivers/gpu/drm/nouveau/dispnv=
-50/disp.c and
-drivers/gpu/drm/nouveau/dispnv50/head.c but instead those files merged into=
- one
-drivers/gpu/drm/nouveau/nv50_display.c for some heck reason.
+        <pre>(In reply to Alexey Kuznetsov from <a href=3D"show_bug.cgi?id=
+=3D110660#c33">comment #33</a>)
+<span class=3D"quote">&gt; Thanks! In Ubuntu kernel has no drivers/gpu/drm/=
+nouveau/dispnv50/disp.c and
+&gt; drivers/gpu/drm/nouveau/dispnv50/head.c but instead those files merged=
+ into
+&gt; one drivers/gpu/drm/nouveau/nv50_display.c for some heck reason.</span=
+ >
 
-Patching this file makes one problem disappear, only &quot;fix center and a=
-spect
-scaling&quot; work properly (which confirms I build a kernel properly) but =
-scaling
-modes without calling 'xrandr --output eDP-1 --set &quot;scaling mode&quot;=
- &quot;Full
-aspect&quot;' still produces broken 8 displays.</pre>
+The code was refactored. The ubuntu kernel is older.
+
+<span class=3D"quote">&gt;=20
+&gt; Patching this file makes one problem disappear, only &quot;fix center =
+and aspect
+&gt; scaling&quot; work properly (which confirms I build a kernel properly)=
+ but</span >
+
+Yay!
+
+<span class=3D"quote">&gt; scaling modes without calling 'xrandr --output e=
+DP-1 --set &quot;scaling mode&quot;
+&gt; &quot;Full aspect&quot;' still produces broken 8 displays.</span >
+
+Hmmmm... adjusted_mode is the wrong thing to look at maybe? What if you swi=
+tch
+adjusted_mode -&gt; mode in that conditional? I always get so confused with
+that...</pre>
         </div>
       </p>
 
@@ -142,9 +169,9 @@ aspect&quot;' still produces broken 8 displays.</pre>
     </body>
 </html>=
 
---15590626942.bE07.5229--
+--15590639653.a4BA9F.10656--
 
---===============1478351466==
+--===============0047051158==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -154,4 +181,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============1478351466==--
+--===============0047051158==--
