@@ -2,22 +2,22 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6ABF22D736
-	for <lists+nouveau@lfdr.de>; Wed, 29 May 2019 10:03:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8585D2DBF6
+	for <lists+nouveau@lfdr.de>; Wed, 29 May 2019 13:34:50 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 689606E2A3;
-	Wed, 29 May 2019 08:03:57 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A7B126E2E2;
+	Wed, 29 May 2019 11:34:48 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [131.252.210.165])
- by gabe.freedesktop.org (Postfix) with ESMTP id 8CA696E29F
- for <nouveau@lists.freedesktop.org>; Wed, 29 May 2019 08:03:55 +0000 (UTC)
+ [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 382066E0FC
+ for <nouveau@lists.freedesktop.org>; Wed, 29 May 2019 11:34:47 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 893D772167; Wed, 29 May 2019 08:03:55 +0000 (UTC)
+ id 348F272167; Wed, 29 May 2019 11:34:47 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Wed, 29 May 2019 08:03:55 +0000
+Date: Wed, 29 May 2019 11:34:47 +0000
 X-Bugzilla-Reason: AssignedTo
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
@@ -32,8 +32,8 @@ X-Bugzilla-Resolution:
 X-Bugzilla-Priority: medium
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: attachments.isobsolete attachments.created
-Message-ID: <bug-110660-8800-4SFCyApk8w@http.bugs.freedesktop.org/>
+X-Bugzilla-Changed-Fields: attachments.created
+Message-ID: <bug-110660-8800-VeSr63nBtt@http.bugs.freedesktop.org/>
 In-Reply-To: <bug-110660-8800@http.bugs.freedesktop.org/>
 References: <bug-110660-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
@@ -51,18 +51,18 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0825871762=="
+Content-Type: multipart/mixed; boundary="===============0268954693=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============0825871762==
-Content-Type: multipart/alternative; boundary="15591170351.C328.20989"
+--===============0268954693==
+Content-Type: multipart/alternative; boundary="15591296870.7FaEAA.32184"
 Content-Transfer-Encoding: 7bit
 
 
---15591170351.C328.20989
-Date: Wed, 29 May 2019 08:03:55 +0000
+--15591296870.7FaEAA.32184
+Date: Wed, 29 May 2019 11:34:47 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -71,26 +71,17 @@ Auto-Submitted: auto-generated
 
 https://bugs.freedesktop.org/show_bug.cgi?id=3D110660
 
-Alexey Kuznetsov <ak@axet.ru> changed:
-
-           What    |Removed                     |Added
-----------------------------------------------------------------------------
- Attachment #144371|0                           |1
-        is obsolete|                            |
-
---- Comment #40 from Alexey Kuznetsov <ak@axet.ru> ---
-Created attachment 144372
-  --> https://bugs.freedesktop.org/attachment.cgi?id=3D144372&action=3Dedit
-drm.debug dmesg-mode.log
-
-clean reboot
+--- Comment #41 from Alexey Kuznetsov <ak@axet.ru> ---
+Created attachment 144373
+  --> https://bugs.freedesktop.org/attachment.cgi?id=3D144373&action=3Dedit
+drm.debug dmesg-adv.log
 
 --=20
 You are receiving this mail because:
 You are the assignee for the bug.=
 
---15591170351.C328.20989
-Date: Wed, 29 May 2019 08:03:55 +0000
+--15591296870.7FaEAA.32184
+Date: Wed, 29 May 2019 11:34:47 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -101,39 +92,14 @@ Auto-Submitted: auto-generated
     <head>
       <base href=3D"https://bugs.freedesktop.org/">
     </head>
-    <body><span class=3D"vcard"><a class=3D"email" href=3D"mailto:ak&#64;ax=
-et.ru" title=3D"Alexey Kuznetsov &lt;ak&#64;axet.ru&gt;"> <span class=3D"fn=
-">Alexey Kuznetsov</span></a>
-</span> changed
-          <a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - GeForce GT 750M Mac Edition fullscreen issues"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110660">bug 11066=
-0</a>
-          <br>
-             <table border=3D"1" cellspacing=3D"0" cellpadding=3D"8">
-          <tr>
-            <th>What</th>
-            <th>Removed</th>
-            <th>Added</th>
-          </tr>
-
-         <tr>
-           <td style=3D"text-align:right;">Attachment #144371 is obsolete</=
-td>
-           <td>
-               &nbsp;
-           </td>
-           <td>1
-           </td>
-         </tr></table>
+    <body>
       <p>
         <div>
             <b><a class=3D"bz_bug_link=20
           bz_status_NEW "
    title=3D"NEW - GeForce GT 750M Mac Edition fullscreen issues"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110660#c40">Comme=
-nt # 40</a>
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110660#c41">Comme=
+nt # 41</a>
               on <a class=3D"bz_bug_link=20
           bz_status_NEW "
    title=3D"NEW - GeForce GT 750M Mac Edition fullscreen issues"
@@ -143,13 +109,11 @@ nt # 40</a>
 ak&#64;axet.ru" title=3D"Alexey Kuznetsov &lt;ak&#64;axet.ru&gt;"> <span cl=
 ass=3D"fn">Alexey Kuznetsov</span></a>
 </span></b>
-        <pre>Created <span class=3D""><a href=3D"attachment.cgi?id=3D144372=
-" name=3D"attach_144372" title=3D"drm.debug dmesg-mode.log">attachment 1443=
-72</a> <a href=3D"attachment.cgi?id=3D144372&amp;action=3Dedit" title=3D"dr=
-m.debug dmesg-mode.log">[details]</a></span>
-drm.debug dmesg-mode.log
-
-clean reboot</pre>
+        <pre>Created <span class=3D""><a href=3D"attachment.cgi?id=3D144373=
+" name=3D"attach_144373" title=3D"drm.debug dmesg-adv.log">attachment 14437=
+3</a> <a href=3D"attachment.cgi?id=3D144373&amp;action=3Dedit" title=3D"drm=
+.debug dmesg-adv.log">[details]</a></span>
+drm.debug dmesg-adv.log</pre>
         </div>
       </p>
 
@@ -163,9 +127,9 @@ clean reboot</pre>
     </body>
 </html>=
 
---15591170351.C328.20989--
+--15591296870.7FaEAA.32184--
 
---===============0825871762==
+--===============0268954693==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -175,4 +139,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============0825871762==--
+--===============0268954693==--
