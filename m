@@ -2,46 +2,44 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 50D1B2D080
-	for <lists+nouveau@lfdr.de>; Tue, 28 May 2019 22:37:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3DBB72D35B
+	for <lists+nouveau@lfdr.de>; Wed, 29 May 2019 03:33:41 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1D35C6E290;
-	Tue, 28 May 2019 20:37:12 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0F2D46E06E;
+	Wed, 29 May 2019 01:33:39 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-vs1-f67.google.com (mail-vs1-f67.google.com
- [209.85.217.67])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5BB626E062;
- Tue, 28 May 2019 20:37:10 +0000 (UTC)
-Received: by mail-vs1-f67.google.com with SMTP id l125so161061vsl.13;
- Tue, 28 May 2019 13:37:10 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=khgsL4zHXmHP6F1MadyNgdoEidU9Imdd1H0ZZf7hEJQ=;
- b=akuU5yFcDNAP21ktbhxvEOKmk6W6S+OKpHkqAtA3D3tGgC4QeJ1jNmre6DqD31VWhP
- qQpKrSK0Ej9TF8W3oR1hheO1WigKdVSwXfk3U238A6BM4EZ/QrltmrslUAHbwbtvGWJQ
- dBatLwRvZ76es4jjdpiWQzHlXGt0QRLVUCXbb9i7X7NyqnurVnoJg/XfWLiUcWycEUUn
- TQ08jx/CqobBrD2Y5uUS3Wl0EOYsrEkKTP0Xy5nHdeapM8XW6mxuGmMwDIA/k9Mqrd99
- 5uZdOVQ6dOObWmV1OLnBGmU/+d/I+nIUkt6xRyyDVox61aKlM2sdqRwCRa3xIpA9lB3U
- vlxw==
-X-Gm-Message-State: APjAAAW4n55wc3uVXbes3Vq7ET9qaDaMKp1o8RLHxPxJCjQ66t5FrxOS
- IqXuvImd8cMMQSsx8lwmZGZjXS7TNy2XW/r/LL8=
-X-Google-Smtp-Source: APXvYqwPX168pHe0OC5u8BsdXGf5IL0NbkTTJv2r0tf1ggp1+R26lH+bE3N5RrkSw/VAjvi8uhgx1YedY1rZ9CDKdUA=
-X-Received: by 2002:a05:6102:3ce:: with SMTP id
- n14mr2934947vsq.210.1559075829495; 
- Tue, 28 May 2019 13:37:09 -0700 (PDT)
+Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
+ [131.252.210.165])
+ by gabe.freedesktop.org (Postfix) with ESMTP id A32786E063
+ for <nouveau@lists.freedesktop.org>; Wed, 29 May 2019 01:33:37 +0000 (UTC)
+Received: by culpepper.freedesktop.org (Postfix, from userid 33)
+ id 9FB6F72167; Wed, 29 May 2019 01:33:37 +0000 (UTC)
+From: bugzilla-daemon@freedesktop.org
+To: nouveau@lists.freedesktop.org
+Date: Wed, 29 May 2019 01:33:37 +0000
+X-Bugzilla-Reason: AssignedTo
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: None
+X-Bugzilla-Product: xorg
+X-Bugzilla-Component: Driver/nouveau
+X-Bugzilla-Version: unspecified
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: normal
+X-Bugzilla-Who: skeggsb@gmail.com
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: medium
+X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: 
+Message-ID: <bug-110660-8800-YdP4SOuyy6@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-110660-8800@http.bugs.freedesktop.org/>
+References: <bug-110660-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-References: <20190525224149.4652-1-imirkin@alum.mit.edu>
- <CACAvsv76NmgiMtx+NrtbMrLo2EDU8nazgSvTmK19_Wz-XDVn8Q@mail.gmail.com>
-In-Reply-To: <CACAvsv76NmgiMtx+NrtbMrLo2EDU8nazgSvTmK19_Wz-XDVn8Q@mail.gmail.com>
-From: Ilia Mirkin <imirkin@alum.mit.edu>
-Date: Tue, 28 May 2019 16:36:58 -0400
-Message-ID: <CAKb7UvgeyhTf3UfZ1rL4SsVn8PASvcM5TVipU_Sg8nRRB1K=rQ@mail.gmail.com>
-To: Ben Skeggs <skeggsb@gmail.com>
-Subject: Re: [Nouveau] [PATCH 1/2] drm/nouveau/disp/nv50-: force scaler for
- any non-default LVDS/eDP modes
+Subject: [Nouveau] [Bug 110660] GeForce GT 750M Mac Edition fullscreen issues
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -53,62 +51,112 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau <nouveau@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>,
- dri-devel <dri-devel@lists.freedesktop.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1945249942=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-U2lnaCAuLi4gbG9va3MgbGlrZSB0aGlzIGRvZXNuJ3QgYWN0dWFsbHkgZG8gd2hhdCB3ZSB3YW50
-LiBTZWUgdGhlCmxhc3QgY291cGxlIGNvbW1lbnRzIGluOgoKaHR0cHM6Ly9idWdzLmZyZWVkZXNr
-dG9wLm9yZy9zaG93X2J1Zy5jZ2k/aWQ9MTEwNjYwCgpJdCBzZWVtcyB0byB3b3JrIGFzIGV4cGVj
-dGVkIHdpdGggIm1vZGUiIGluc3RlYWQgb2YgImFkanVzdGVkX21vZGUiLgpEb2VzIHRoYXQgbWFr
-ZSBzZW5zZT8gSXQga2luZGEgZG9lcyBiYXNlZCBvbiB0aGUgbGF0ZXIgY29kZSwgd2hpY2gKY29w
-aWVzIG1vZGUgaW50byBhZGp1c3RlZF9tb2RlLi4uCgpBc3N1bWluZyBpdCBtYWtlcyBzZW5zZSB0
-byB1c2UgIm1vZGUiLCBCZW4sIHdhbnQgdG8ganVzdCBkbyBhIGZpeHVwCmxvY2FsbHksIG9yIHdh
-bnQgbWUgdG8gc2VuZCBhIHJldmVydCArIG5ldyBwYXRjaD8KCiAgLWlsaWEKCk9uIE1vbiwgTWF5
-IDI3LCAyMDE5IGF0IDI6MjQgQU0gQmVuIFNrZWdncyA8c2tlZ2dzYkBnbWFpbC5jb20+IHdyb3Rl
-Ogo+Cj4gT24gU3VuLCAyNiBNYXkgMjAxOSBhdCAwODo0MSwgSWxpYSBNaXJraW4gPGltaXJraW5A
-YWx1bS5taXQuZWR1PiB3cm90ZToKPiA+Cj4gPiBIaWdoZXIgbGF5ZXJzIHRlbmQgdG8gYWRkIGEg
-bG90IG9mIG1vZGVzIG5vdCBhY3R1YWxseSBpbiB0aGUgRURJRCwgc3VjaAo+ID4gYXMgdGhlIHN0
-YW5kYXJkIERNVCBtb2Rlcy4gQ2hhbmdpbmcgdGhpcyB3b3VsZCBiZSBleHRyZW1lbHkgaW50cnVz
-aXZlIHRvCj4gPiBldmVyeW9uZSwgc28ganVzdCBmb3JjZSB0aGUgc2NhbGVyIG1vcmUgb2Z0ZW4u
-IFRoZXJlIGFyZSBubyBwcmFjdGljYWwKPiA+IGNhc2VzIHdlJ3JlIGF3YXJlIG9mIHdoZXJlIGEg
-TFZEUy9lRFAgcGFuZWwgaGFzIG11bHRpcGxlIHJlc29sdXRpb25zCj4gPiBleHBvc2VkLCBhbmQg
-aTkxNSBhbHJlYWR5IGRvZXMgaXQgdGhpcyB3YXkuCj4gPgo+ID4gQnVnemlsbGE6IGh0dHBzOi8v
-YnVncy5mcmVlZGVza3RvcC5vcmcvc2hvd19idWcuY2dpP2lkPTExMDY2MAo+ID4gU2lnbmVkLW9m
-Zi1ieTogSWxpYSBNaXJraW4gPGltaXJraW5AYWx1bS5taXQuZWR1Pgo+IFRoYW5rcyBJbGlhLCBn
-cmFiYmVkIGJvdGggcGF0Y2hlcy4KPgo+ID4gLS0tCj4gPgo+ID4gVW50ZXN0ZWQgZm9yIG5vdywg
-aG9waW5nIHRoYXQgdGhlIGJ1Z3ppbGxhIGZpbGVyIHdpbGwgdGVzdCBpdCBvdXQuIFNlZW1zCj4g
-PiBvYnZpb3VzIHRob3VnaC4KPiA+Cj4gPiAgZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvZGlzcG52
-NTAvZGlzcC5jIHwgOSArKysrKysrLS0KPiA+ICAxIGZpbGUgY2hhbmdlZCwgNyBpbnNlcnRpb25z
-KCspLCAyIGRlbGV0aW9ucygtKQo+ID4KPiA+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0v
-bm91dmVhdS9kaXNwbnY1MC9kaXNwLmMgYi9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9kaXNwbnY1
-MC9kaXNwLmMKPiA+IGluZGV4IDEzNDcwMWE4MzdjOC4uZWY4ZDdhNzE1NjRhIDEwMDY0NAo+ID4g
-LS0tIGEvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvZGlzcG52NTAvZGlzcC5jCj4gPiArKysgYi9k
-cml2ZXJzL2dwdS9kcm0vbm91dmVhdS9kaXNwbnY1MC9kaXNwLmMKPiA+IEBAIC0zMjIsOCArMzIy
-LDEzIEBAIG52NTBfb3V0cF9hdG9taWNfY2hlY2tfdmlldyhzdHJ1Y3QgZHJtX2VuY29kZXIgKmVu
-Y29kZXIsCj4gPiAgICAgICAgICAgICAgICAgc3dpdGNoIChjb25uZWN0b3ItPmNvbm5lY3Rvcl90
-eXBlKSB7Cj4gPiAgICAgICAgICAgICAgICAgY2FzZSBEUk1fTU9ERV9DT05ORUNUT1JfTFZEUzoK
-PiA+ICAgICAgICAgICAgICAgICBjYXNlIERSTV9NT0RFX0NPTk5FQ1RPUl9lRFA6Cj4gPiAtICAg
-ICAgICAgICAgICAgICAgICAgICAvKiBGb3JjZSB1c2Ugb2Ygc2NhbGVyIGZvciBub24tRURJRCBt
-b2Rlcy4gKi8KPiA+IC0gICAgICAgICAgICAgICAgICAgICAgIGlmIChhZGp1c3RlZF9tb2RlLT50
-eXBlICYgRFJNX01PREVfVFlQRV9EUklWRVIpCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAv
-KiBEb24ndCBmb3JjZSBzY2FsZXIgZm9yIEVESUQgbW9kZXMgd2l0aAo+ID4gKyAgICAgICAgICAg
-ICAgICAgICAgICAgICogc2FtZSBzaXplIGFzIHRoZSBuYXRpdmUgb25lIChlLmcuIGRpZmZlcmVu
-dAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICogcmVmcmVzaCByYXRlKQo+ID4gKyAgICAg
-ICAgICAgICAgICAgICAgICAgICovCj4gPiArICAgICAgICAgICAgICAgICAgICAgICBpZiAoYWRq
-dXN0ZWRfbW9kZS0+aGRpc3BsYXkgPT0gbmF0aXZlX21vZGUtPmhkaXNwbGF5ICYmCj4gPiArICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgYWRqdXN0ZWRfbW9kZS0+dmRpc3BsYXkgPT0gbmF0aXZl
-X21vZGUtPnZkaXNwbGF5ICYmCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgYWRqdXN0
-ZWRfbW9kZS0+dHlwZSAmIERSTV9NT0RFX1RZUEVfRFJJVkVSKQo+ID4gICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICBicmVhazsKPiA+ICAgICAgICAgICAgICAgICAgICAgICAgIG1vZGUg
-PSBuYXRpdmVfbW9kZTsKPiA+ICAgICAgICAgICAgICAgICAgICAgICAgIGFzeWMtPnNjYWxlci5m
-dWxsID0gdHJ1ZTsKPiA+IC0tCj4gPiAyLjIxLjAKPiA+Cj4gPiBfX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fXwo+ID4gTm91dmVhdSBtYWlsaW5nIGxpc3QKPiA+
-IE5vdXZlYXVAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCj4gPiBodHRwczovL2xpc3RzLmZyZWVkZXNr
-dG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL25vdXZlYXUKX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBtYWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0
-cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9s
-aXN0aW5mby9ub3V2ZWF1
+
+--===============1945249942==
+Content-Type: multipart/alternative; boundary="15590936171.D274BfB.21085"
+Content-Transfer-Encoding: 7bit
+
+
+--15590936171.D274BfB.21085
+Date: Wed, 29 May 2019 01:33:37 +0000
+MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+https://bugs.freedesktop.org/show_bug.cgi?id=3D110660
+
+--- Comment #37 from Ben Skeggs <skeggsb@gmail.com> ---
+(In reply to Alexey Kuznetsov from comment #35)
+> Yep, bingo. Now it is scaling display and has no broken displays after
+> reboot no need to call additional xrandr commands. But, feels like default
+> "scaling mode" should be "Full aspect" instead "Full". Anyway, thanks for
+> support! Nvidia should be ashamed for lack of linux support.
+
+Are you able to post a log file of "drm.debug=3D0x14", with Ilia's initial =
+patch
+using adjusted_mode instead of mode?  Both should be identical at this poin=
+t in
+time, and I'd like to understand why one works and the other doesn't, before
+upstreaming this patch.
+
+--=20
+You are receiving this mail because:
+You are the assignee for the bug.=
+
+--15590936171.D274BfB.21085
+Date: Wed, 29 May 2019 01:33:37 +0000
+MIME-Version: 1.0
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+<html>
+    <head>
+      <base href=3D"https://bugs.freedesktop.org/">
+    </head>
+    <body>
+      <p>
+        <div>
+            <b><a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - GeForce GT 750M Mac Edition fullscreen issues"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110660#c37">Comme=
+nt # 37</a>
+              on <a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - GeForce GT 750M Mac Edition fullscreen issues"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110660">bug 11066=
+0</a>
+              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
+skeggsb&#64;gmail.com" title=3D"Ben Skeggs &lt;skeggsb&#64;gmail.com&gt;"> =
+<span class=3D"fn">Ben Skeggs</span></a>
+</span></b>
+        <pre>(In reply to Alexey Kuznetsov from <a href=3D"show_bug.cgi?id=
+=3D110660#c35">comment #35</a>)
+<span class=3D"quote">&gt; Yep, bingo. Now it is scaling display and has no=
+ broken displays after
+&gt; reboot no need to call additional xrandr commands. But, feels like def=
+ault
+&gt; &quot;scaling mode&quot; should be &quot;Full aspect&quot; instead &qu=
+ot;Full&quot;. Anyway, thanks for
+&gt; support! Nvidia should be ashamed for lack of linux support.</span >
+
+Are you able to post a log file of &quot;drm.debug=3D0x14&quot;, with Ilia'=
+s initial patch
+using adjusted_mode instead of mode?  Both should be identical at this poin=
+t in
+time, and I'd like to understand why one works and the other doesn't, before
+upstreaming this patch.</pre>
+        </div>
+      </p>
+
+
+      <hr>
+      <span>You are receiving this mail because:</span>
+
+      <ul>
+          <li>You are the assignee for the bug.</li>
+      </ul>
+    </body>
+</html>=
+
+--15590936171.D274BfB.21085--
+
+--===============1945249942==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
+YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
+cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============1945249942==--
