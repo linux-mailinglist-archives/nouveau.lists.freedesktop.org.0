@@ -1,45 +1,45 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8585D2DBF6
-	for <lists+nouveau@lfdr.de>; Wed, 29 May 2019 13:34:50 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3F7482DF20
+	for <lists+nouveau@lfdr.de>; Wed, 29 May 2019 16:04:28 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A7B126E2E2;
-	Wed, 29 May 2019 11:34:48 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 271A56E0DE;
+	Wed, 29 May 2019 14:04:26 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
- by gabe.freedesktop.org (Postfix) with ESMTP id 382066E0FC
- for <nouveau@lists.freedesktop.org>; Wed, 29 May 2019 11:34:47 +0000 (UTC)
-Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 348F272167; Wed, 29 May 2019 11:34:47 +0000 (UTC)
-From: bugzilla-daemon@freedesktop.org
-To: nouveau@lists.freedesktop.org
-Date: Wed, 29 May 2019 11:34:47 +0000
-X-Bugzilla-Reason: AssignedTo
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: None
-X-Bugzilla-Product: xorg
-X-Bugzilla-Component: Driver/nouveau
-X-Bugzilla-Version: unspecified
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: normal
-X-Bugzilla-Who: ak@axet.ru
-X-Bugzilla-Status: NEW
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: medium
-X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: attachments.created
-Message-ID: <bug-110660-8800-VeSr63nBtt@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-110660-8800@http.bugs.freedesktop.org/>
-References: <bug-110660-8800@http.bugs.freedesktop.org/>
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
+Received: from mail-io1-f54.google.com (mail-io1-f54.google.com
+ [209.85.166.54])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B2C856E0DE
+ for <nouveau@lists.freedesktop.org>; Wed, 29 May 2019 14:04:24 +0000 (UTC)
+Received: by mail-io1-f54.google.com with SMTP id n5so1906093ioc.7
+ for <nouveau@lists.freedesktop.org>; Wed, 29 May 2019 07:04:24 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=CdTFtJBR9jKpCGHNG8KFYl+Q+TPFWWgyDCIBjFtz6Ow=;
+ b=tICkE67eK1RyiSbwGIFJGYe0XolYyj0XltH1hoAO7XyVYbtfHiVjxue0wTHTdJOs+I
+ qXQUN5cMY1Ielr9dMlJPOS3oTIhdypUBGml3n+MESM5pAmNASZLJRfIT196J83+cu7jk
+ xO3VKsQ+NFo3rDS2ZGfe5RRlFDuqVrHWagxc6Q9XSs7RJbHq2cGH0EHZMrZEPXMQeaWB
+ qOoOGU56XqyCfmhbi05ByNPscQSuOZsQFay1WV98mq8uANbdwgicEO1vQgHY0Kk30Fu5
+ XLWrDFysMBm4F8y056dO1YwgLzRvaRvneZuk1aSygRg7ynvnTs4Fug5TmK1Jjq37Rq3D
+ LdoQ==
+X-Gm-Message-State: APjAAAVamaLCguXIJwa8z0ziyMACMlA14B4Rk4njDbr83ZjQyoFKAWmW
+ fE9lTlHGUiBBB+qwP2FUSmowBnoO0FhqE1QQrxzehQ==
+X-Google-Smtp-Source: APXvYqw2aAesuEtouGr8qtUi9ZrEMBJCTu/nAu+RGBGNGfdORIqtLxJIOWkwKfu2PYgzQs1IgU2Q/B2W6HUDgIlHQiU=
+X-Received: by 2002:a6b:c886:: with SMTP id
+ y128mr10155810iof.100.1559138663988; 
+ Wed, 29 May 2019 07:04:23 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 110660] GeForce GT 750M Mac Edition fullscreen issues
+References: <2b626681-3504-c7e9-10d2-0f906dcb176d@bluegap.ch>
+In-Reply-To: <2b626681-3504-c7e9-10d2-0f906dcb176d@bluegap.ch>
+From: Karol Herbst <kherbst@redhat.com>
+Date: Wed, 29 May 2019 16:04:12 +0200
+Message-ID: <CACO55tsFLc1M0pPe0_2=Dn7j8KctApganDoe=hNBsLCfNLXULw@mail.gmail.com>
+To: Markus Wanner <markus@bluegap.ch>
+Subject: Re: [Nouveau] Support for GP107(GL)M with Optimus
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -51,92 +51,22 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0268954693=="
+Cc: nouveau <nouveau@lists.freedesktop.org>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-
---===============0268954693==
-Content-Type: multipart/alternative; boundary="15591296870.7FaEAA.32184"
-Content-Transfer-Encoding: 7bit
-
-
---15591296870.7FaEAA.32184
-Date: Wed, 29 May 2019 11:34:47 +0000
-MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-https://bugs.freedesktop.org/show_bug.cgi?id=3D110660
-
---- Comment #41 from Alexey Kuznetsov <ak@axet.ru> ---
-Created attachment 144373
-  --> https://bugs.freedesktop.org/attachment.cgi?id=3D144373&action=3Dedit
-drm.debug dmesg-adv.log
-
---=20
-You are receiving this mail because:
-You are the assignee for the bug.=
-
---15591296870.7FaEAA.32184
-Date: Wed, 29 May 2019 11:34:47 +0000
-MIME-Version: 1.0
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-<html>
-    <head>
-      <base href=3D"https://bugs.freedesktop.org/">
-    </head>
-    <body>
-      <p>
-        <div>
-            <b><a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - GeForce GT 750M Mac Edition fullscreen issues"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110660#c41">Comme=
-nt # 41</a>
-              on <a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - GeForce GT 750M Mac Edition fullscreen issues"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110660">bug 11066=
-0</a>
-              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
-ak&#64;axet.ru" title=3D"Alexey Kuznetsov &lt;ak&#64;axet.ru&gt;"> <span cl=
-ass=3D"fn">Alexey Kuznetsov</span></a>
-</span></b>
-        <pre>Created <span class=3D""><a href=3D"attachment.cgi?id=3D144373=
-" name=3D"attach_144373" title=3D"drm.debug dmesg-adv.log">attachment 14437=
-3</a> <a href=3D"attachment.cgi?id=3D144373&amp;action=3Dedit" title=3D"drm=
-.debug dmesg-adv.log">[details]</a></span>
-drm.debug dmesg-adv.log</pre>
-        </div>
-      </p>
-
-
-      <hr>
-      <span>You are receiving this mail because:</span>
-
-      <ul>
-          <li>You are the assignee for the bug.</li>
-      </ul>
-    </body>
-</html>=
-
---15591296870.7FaEAA.32184--
-
---===============0268954693==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
-YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
-cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
-
---===============0268954693==--
+dGhhbmtzIGZvciB5b3VyIG1haW4uCgpJZiB5b3Ugd2FudCB5b3UgY291bGQgdHJ5IG91dCB0aG9z
+ZSBwYXRjaGVzIG9uIGEga2VybmVsIGFuZCBzZWUgaWYKdGhvc2UgbWFrZSBhbnkgZGlmZmVyZW5j
+ZSBvbiB5b3VyIG1hY2hpbmU6CgpodHRwczovL2dpdGh1Yi5jb20va2Fyb2xoZXJic3QvbGludXgv
+Y29tbWl0cy9ydW5wbV9maXhlcwoKbWFrZSBzdXJlIHlvdSB1c2UgdGhlICJydW5wbV9maXhlcyIg
+YnJhbmNoLiBXZSBhcmUga2luZCBvZiBhd2FyZSBvZgp0aGUgaXNzdWVzIG9uIG1vZGVybiBsYXB0
+b3BzIGFuZCBhbHJlYWR5IHRyeSB0byBmaW5kIGEgcHJvcGVyCnNvbHV0aW9uLCBpdCBtb3N0bHkg
+Ym9pbHMgZG93biB0byB0ZXN0aW5nIGFuZCBjaGVja2luZyBpZiB0aGVyZSBhcmUKb3RoZXIgaXNz
+dWVzIGxlZnQgd2UgZGlkbid0IGFkZHJlc3MgeWV0LiBBbHNvIHdpdGhvdXQga25vd2luZyB3aGF0
+CmVycm9yIG1lc3NhZ2UgeW91IGFyZSBnZXR0aW5nIHByZWNpc2VseSBJIGNhbiBvbmx5IG1ha2Ug
+YW4gZWR1Y2F0ZWQKZ3Vlc3Mgb24gd2hhdCB5b3VyIGlzc3VlIG1pZ2h0IGJlLgpfX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpOb3V2ZWF1IG1haWxpbmcgbGlz
+dApOb3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9w
+Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL25vdXZlYXU=
