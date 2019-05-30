@@ -2,45 +2,45 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 874E32FDBF
-	for <lists+nouveau@lfdr.de>; Thu, 30 May 2019 16:28:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B3E1A2FDE0
+	for <lists+nouveau@lfdr.de>; Thu, 30 May 2019 16:32:51 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7B6986E372;
-	Thu, 30 May 2019 14:28:57 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8F98A6E15C;
+	Thu, 30 May 2019 14:32:49 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-vk1-f194.google.com (mail-vk1-f194.google.com
- [209.85.221.194])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 450ED6E372
- for <nouveau@lists.freedesktop.org>; Thu, 30 May 2019 14:28:56 +0000 (UTC)
-Received: by mail-vk1-f194.google.com with SMTP id k1so796213vkb.2
- for <nouveau@lists.freedesktop.org>; Thu, 30 May 2019 07:28:56 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=K3hCxL7wgb0HgkP20Sk3DjWmlfftL7ZLllhxYM23D7Q=;
- b=uklWb87f3kYzC95e8p+cICumoalxK7TeqRR0+nfLNKrU4/7PIvwoZezykR5i4V0EOi
- 89HPkEqOXODikW4ZA9W4TFz1RKBQbtVc93UGY8SLjv28wM8sAiUaZbh5MMHpNe8uf9Wv
- 45+uqFotoOzMjEVcMO7OfL2hIxjzTqWVg7S9UJ1OUoyEfy2eTvZAu1/VcT0NzBvVNPis
- k+POlqe/hnpBTYv2dmugIlDMhHkU7QbyhJw61S4AC82M+qfJCihEgR40ozMK6kwj28bh
- NhrUMF2187J/xmuht8WWwXBRC+ihefdb6rTI2sQ6LbeoOBRFlRJ/DZjULAHZmyFXHYXA
- b+lg==
-X-Gm-Message-State: APjAAAUfNCFX4zAWW+39Z+RUuFRFxLblYL8MoSEcLa3lrn13mJcNzOU0
- YfnTaEj7ITJfV7/a4ErvFCZM1OmA20uopOH+hfM=
-X-Google-Smtp-Source: APXvYqz7bx8bp59TDquuw2F0GJfKkZ8oEPXmQpOMEttPb+IqFWfqg1jDaKYJGIVWHX/h0RSC27/5MU2bqSeHBw05O3g=
-X-Received: by 2002:a1f:de84:: with SMTP id v126mr1645129vkg.14.1559226535369; 
- Thu, 30 May 2019 07:28:55 -0700 (PDT)
+Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
+ [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 8915D6E15C
+ for <nouveau@lists.freedesktop.org>; Thu, 30 May 2019 14:32:48 +0000 (UTC)
+Received: by culpepper.freedesktop.org (Postfix, from userid 33)
+ id 7F15272167; Thu, 30 May 2019 14:32:48 +0000 (UTC)
+From: bugzilla-daemon@freedesktop.org
+To: nouveau@lists.freedesktop.org
+Date: Thu, 30 May 2019 14:32:48 +0000
+X-Bugzilla-Reason: AssignedTo
+X-Bugzilla-Type: new
+X-Bugzilla-Watch-Reason: None
+X-Bugzilla-Product: xorg
+X-Bugzilla-Component: Driver/nouveau
+X-Bugzilla-Version: unspecified
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: normal
+X-Bugzilla-Who: newbytee@protonmail.com
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: medium
+X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: bug_id short_desc product version rep_platform
+ op_sys bug_status bug_severity priority component assigned_to reporter
+ qa_contact
+Message-ID: <bug-110797-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-References: <2b626681-3504-c7e9-10d2-0f906dcb176d@bluegap.ch>
- <CACO55tsFLc1M0pPe0_2=Dn7j8KctApganDoe=hNBsLCfNLXULw@mail.gmail.com>
- <169b8cf4-df8a-558b-5d68-e1400c73f6a5@bluegap.ch>
-In-Reply-To: <169b8cf4-df8a-558b-5d68-e1400c73f6a5@bluegap.ch>
-From: Ilia Mirkin <imirkin@alum.mit.edu>
-Date: Thu, 30 May 2019 10:28:44 -0400
-Message-ID: <CAKb7UviuvWpGAiX-9zdGaA98ZKY+4mKsS5HvGpo7Etjr=JsMHA@mail.gmail.com>
-To: Markus Wanner <markus@bluegap.ch>
-Subject: Re: [Nouveau] Support for GP107(GL)M with Optimus
+Subject: [Nouveau] [Bug 110797] New: No video if nomodeset is not set with
+ GTX 460
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -52,68 +52,200 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau <nouveau@lists.freedesktop.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============0542355916=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-T24gVGh1LCBNYXkgMzAsIDIwMTkgYXQgNDoyMyBBTSBNYXJrdXMgV2FubmVyIDxtYXJrdXNAYmx1
-ZWdhcC5jaD4gd3JvdGU6Cj4KPiBIZWxsbyBLYXJvbCwKPgo+IE9uIDUvMjkvMTkgNDowNCBQTSwg
-S2Fyb2wgSGVyYnN0IHdyb3RlOgo+ID4gSWYgeW91IHdhbnQgeW91IGNvdWxkIHRyeSBvdXQgdGhv
-c2UgcGF0Y2hlcyBvbiBhIGtlcm5lbCBhbmQgc2VlIGlmCj4gPiB0aG9zZSBtYWtlIGFueSBkaWZm
-ZXJlbmNlIG9uIHlvdXIgbWFjaGluZToKPiA+Cj4gPiBodHRwczovL2dpdGh1Yi5jb20va2Fyb2xo
-ZXJic3QvbGludXgvY29tbWl0cy9ydW5wbV9maXhlcwo+Cj4gdGhhbmtzLCBJIHRyaWVkLCBzZWUg
-YmVsb3cuICBUaGlzIHJhaXNlcyBhbm90aGVyIHF1ZXN0aW9uOiB3aGVyZSBkb2VzCj4gbm91dmVh
-dSBkZXZlbG9wbWVudCB0YWtlIHBsYWNlPyAgSW4gYSB0cmVlIGJhc2VkIG9uIHRoZSBsaW51eCBr
-ZXJuZWwKPiAoc3VjaCBhcyB0aGUgYWJvdmUgcmVwbykgb3IgaW4gc29tZSBkZWRpY2F0ZWQgbW9k
-dWxlLW9ubHkgcmVwbyBsaWtlCj4gc2tlZ2dzYi9ub3V2ZWF1Pwo+Cj4gSSBtYW51YWxseSAicmVi
-YXNlZCIgdGhlIGxhc3QgZml2ZSBjb21taXRzIGZyb20gdGhlICJydW5wbV9maXhlcyIgYnJhbmNo
-Cj4gb2YgdGhlIHJlcG8gYWJvdmUgb250byBza2VnZ3NiL25vdXZlYXUsIHdoaWNoIGFwcGxpZWQg
-dy9vIGNvbmZsaWN0cy4KPiBSZXN1bHRzIGJlbG93IGFyZSBmb3IgYSBub3V2ZWF1IG1vZHVsZSBi
-dWlsdCB0aGF0IHdheS4KCk5vdXZlYXUgZGV2ZWxvcG1lbnQgdGFrZXMgcGxhY2Ugb24gZGV2ZWxv
-cGVycycgY29tcHV0ZXJzIDopIFdlIHRoZW4Kc3VibWl0IHBhdGNoZXMgdG8gQmVuIChub3V2ZWF1
-IG1haW50YWluZXIpIHdobyBpbiB0dXJuIHN1Ym1pdHMgcHVsbApyZXF1ZXN0cyB0byBEYXZlIChk
-cm0gbWFpbnRhaW5lcikuIFRoZSB0cmVlIHRoYXQgdGhlc2UgcHVsbCByZXF1ZXN0cwpjb21lIGZy
-b20gaXMKCmh0dHBzOi8vZ2l0aHViLmNvbS9za2VnZ3NiL2xpbnV4CgpCZW4gZG9lcyBoaXMgb3du
-IGRldmVsb3BtZW50IG9uIHRoYXQgIm5vdXZlYXUiIHJlcG9zaXRvcnksIGFzIGl0CmVuYWJsZXMg
-aGltIHRvIGRvIHZhcmlvdXMgY2xldmVyIHRoaW5ncy4gSG93ZXZlciB0aGVyZSdzIGEgdHJhZGUt
-b2ZmLAphbmQgaXQncyBub3QgYWx3YXlzIGNvbnZlbmllbnQgdG8gdXNlLiBJIGV4Y2x1c2l2ZWx5
-IGRldmVsb3AgYWdhaW5zdAp0aGUgbGludXggdHJlZSBhbmQgc2VuZCBwYXRjaGVzIGJhc2VkIG9m
-ZiB0aGF0LiBJdCdzIHByZXR0eSB0cml2aWFsIHRvCm1hcCBwYXRjaGVzIGJhY2sgYW5kIGZvcnRo
-IHdpdGggc2VkLCBzbyBpdCdzIG5vdCBhIGh1Z2UgZGVhbC4gSXQgZG9lcwpjYXVzZSBzb21lIGZy
-ZXF1ZW50IGNvbmZ1c2lvbiwgc28gcHJvYmFibHkgd29ydGggZG9jdW1lbnRpbmcgaW4gdGhlCndp
-a2kgb3Igc29tZXRoaW5nLiBbQW5kIEkgc3VzcGVjdCBpZiBJIGhhZCB0byBkbyB0aGUgdGhpbmdz
-IEJlbiBoYXMgdG8KZG8sIEknZCBmaW5kIHRoZSB0cmFkZS1vZmYgdG8gZ28gaW4gdGhlIG90aGVy
-IHdheSBhbmQgcHJlZmVyIGhpcwphcHByb2FjaC4gQnV0IEkgZG9uJ3QsIHNvIGhlcmUgd2UgYXJl
-IDopIF0KCkl0J3MgYSBiaXQgdW5mb3J0dW5hdGUgdGhhdCB0aGlzIGZsb3cgZG9lcyBub3QgcHV0
-IG5vdXZlYXUgZGV2ZWxvcG1lbnQKaW50byBsaW51eC1uZXh0IHByaW9yIHRvIERhdmUgcHVsbGlu
-ZyB0aGUgdHJlZSBpbi4gSSdkIGVuY291cmFnZSBCZW4KdG8gZG8gbW9yZSBmcmVxdWVudCBzeW5j
-J3MgdG8gdGhlIGxpbnV4IHRyZWUgYW5kIGhhdmUgYSBwZXJtYW5lbnQsCnJlYmFzaW5nLCAibmV4
-dCIgYnJhbmNoLCBidXQgLi4uIG5vdCBteSBjYWxsLiBQZXJoYXBzIGxpbnV4LW5leHQKZnJvd25z
-IG9uIHRoYXQgc29ydCBvZiB0aGluZy4KCj4gU28sIGN1cnJlbnQgc3RhdHVzIG9uIHNrZWdnc2Iv
-bm91dmVhdSBmYWlscyB0aGF0IHdheSBmb3IgbWUsIGluZGVwZW5kZW50Cj4gb2YgdGhlIHJ1bnBt
-IHNldHRpbmcuICBIb3dldmVyLCB3aXRoIHRoZSBmaXZlIHBhdGNoZXMgZnJvbSB5b3VyCj4gcnVu
-cG1fZml4ZXMgYnJhbmNoIGFkZGVkLCBJIHNlZSBkaWZmZXJlbnQgcmVzdWx0czoKPgo+ICogbm8g
-c3VjaCB0aW1lb3V0cyBhbnkgbW9yZSBpbiBrZXJuZWwgbG9ncyAoeWF5ISkKPiAqIFgxMSByZWNv
-Z25pemVzIHRoZSBEZWxsIGRpc3BsYXkgY29ubmVjdGVkIG9uIEhETUktMSAoaW5kZXBlbmRlbnQK
-PiAgIG9mIGtlcm5lbCBtb2R1bGUgcGFyYW1ldGVycyBvciBYMTEgY29uZmlnKQo+ICogc3RhcnRp
-bmcgWDExIHdpdGggb25seSB0aGUgbm91dmVhdSBkcml2ZXIsIGEgdGVybWluYWwgYXBwZWFycwo+
-ICAgb24gdGhlIGRpc3BsYXkgKHlheSEpCgpTb3VuZHMgbGlrZSBub3V2ZWF1IGlzIHdvcmtpbmcg
-ZmluZSB0aGVuLgoKPiAqIGxvYWRpbmcgbm91dmVhdSB3aXRoIGBkZWJ1Zz1kZWJ1Z2AgYW5kIHN0
-YXJ0aW5nIFgxMSwgdGhlIGRpc3BsYXkKPiAgIHJlbWFpbnMgZGFyawoKVGhhdCdzIHdlaXJkLiBX
-aGF0J3MgaW4gdGhlIGxvZ3M/IEkgZG9uJ3QgdGhpbmsgd2Ugc3BhbSBkZWJ1ZyBsb2dzClRIQVQg
-bXVjaCBieSBkZWZhdWx0Li4uCgo+ICogbG9hZGluZyBub3V2ZWF1IGFuZCBpbnRlbCAoZm9yIHRo
-ZSBpbnRlcm5hbCBkaXNwbGF5KSwgdGhlIGV4dGVybmFsCj4gICBkaXNwbGF5IHJlbWFpbnMgZGFy
-ayBhcyB3ZWxsLCB4cmFuZHIgZG9lcyBub3Qgc2hvdyBpdCwgYnV0Cj4gICBgeHJhbmRyIC0tbGlz
-dHByb3ZpZGVyc2AgYXQgbGVhc3QgbGlzdHMgdHdvIHByb3ZpZGVycyAoSSdtIG5vdCBzdXJlCj4g
-ICB3aGV0aGVyIEkgY2FuIHNvbWVob3cgZW5hYmxlIHRoZSBleHRlcm5hbCBkaXNwbGF5IGluIHRo
-aXMgY2FzZSkuCgpZb3UgaGF2ZSB0byBsaW5rIHRoZSB0d28gcHJvdmlkZXJzIHRvZ2V0aGVyLiBT
-ZWUKaHR0cHM6Ly9ub3V2ZWF1LmZyZWVkZXNrdG9wLm9yZy93aWtpL09wdGltdXMvICJVc2luZyBv
-dXRwdXRzIG9uCmRpc2NyZXRlIEdQVSIuIExvbmcgc3Rvcnkgc2hvcnQsIGp1c3QgcnVuCgp4cmFu
-ZHIgLS1zZXRwcm92aWRlcm91dHB1dHNvdXJjZSAxIDAKCmFuZCB0aGUgc2Vjb25kYXJ5IEdQVSdz
-IG91dHB1dHMgc2hvdWxkIG1hZ2ljYWxseSBhcHBlYXIgaW4gdGhlIFJhbmRSCm91dHB1dCBsaXN0
-LgoKQ2hlZXJzLAoKICAtaWxpYQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fXwpOb3V2ZWF1IG1haWxpbmcgbGlzdApOb3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9w
-Lm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL25vdXZl
-YXU=
+
+--===============0542355916==
+Content-Type: multipart/alternative; boundary="15592267680.aADF2bfC6.20372"
+Content-Transfer-Encoding: 7bit
+
+
+--15592267680.aADF2bfC6.20372
+Date: Thu, 30 May 2019 14:32:48 +0000
+MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+https://bugs.freedesktop.org/show_bug.cgi?id=3D110797
+
+            Bug ID: 110797
+           Summary: No video if nomodeset is not set with GTX 460
+           Product: xorg
+           Version: unspecified
+          Hardware: x86-64 (AMD64)
+                OS: Linux (All)
+            Status: NEW
+          Severity: normal
+          Priority: medium
+         Component: Driver/nouveau
+          Assignee: nouveau@lists.freedesktop.org
+          Reporter: newbytee@protonmail.com
+        QA Contact: xorg-team@lists.x.org
+
+Greetings!
+
+I have a PC (Dell XPS 8100) with an i7 870 and a GTX 460. No parts have been
+changed from its factory state aside from CMOS battery. I attempted to inst=
+all
+Fedora 30 on it very recently, and what I soon noticed was that unless I ad=
+ded
+the nomodeset kernel parameter the monitor would say "No signal" soon after
+boot. With nomodeset enabled it boots as normal and everything works, except
+the things that usually do not work when nomodeset is set.
+
+Note that this occurs both with nouveau and NVIDIA's proprietary driver,
+however the GPU works in Windows 10 so I do not believe that this is a hard=
+ware
+fault. I have also made sure to verify that I am using the latest BIOS
+available for the motherboard.
+
+Regards, Newbyte.
+
+--=20
+You are receiving this mail because:
+You are the assignee for the bug.=
+
+--15592267680.aADF2bfC6.20372
+Date: Thu, 30 May 2019 14:32:48 +0000
+MIME-Version: 1.0
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+<html>
+    <head>
+      <base href=3D"https://bugs.freedesktop.org/">
+    </head>
+    <body><table border=3D"1" cellspacing=3D"0" cellpadding=3D"8">
+        <tr>
+          <th>Bug ID</th>
+          <td><a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - No video if nomodeset is not set with GTX 460"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110797">110797</a>
+          </td>
+        </tr>
+
+        <tr>
+          <th>Summary</th>
+          <td>No video if nomodeset is not set with GTX 460
+          </td>
+        </tr>
+
+        <tr>
+          <th>Product</th>
+          <td>xorg
+          </td>
+        </tr>
+
+        <tr>
+          <th>Version</th>
+          <td>unspecified
+          </td>
+        </tr>
+
+        <tr>
+          <th>Hardware</th>
+          <td>x86-64 (AMD64)
+          </td>
+        </tr>
+
+        <tr>
+          <th>OS</th>
+          <td>Linux (All)
+          </td>
+        </tr>
+
+        <tr>
+          <th>Status</th>
+          <td>NEW
+          </td>
+        </tr>
+
+        <tr>
+          <th>Severity</th>
+          <td>normal
+          </td>
+        </tr>
+
+        <tr>
+          <th>Priority</th>
+          <td>medium
+          </td>
+        </tr>
+
+        <tr>
+          <th>Component</th>
+          <td>Driver/nouveau
+          </td>
+        </tr>
+
+        <tr>
+          <th>Assignee</th>
+          <td>nouveau&#64;lists.freedesktop.org
+          </td>
+        </tr>
+
+        <tr>
+          <th>Reporter</th>
+          <td>newbytee&#64;protonmail.com
+          </td>
+        </tr>
+
+        <tr>
+          <th>QA Contact</th>
+          <td>xorg-team&#64;lists.x.org
+          </td>
+        </tr></table>
+      <p>
+        <div>
+        <pre>Greetings!
+
+I have a PC (Dell XPS 8100) with an i7 870 and a GTX 460. No parts have been
+changed from its factory state aside from CMOS battery. I attempted to inst=
+all
+Fedora 30 on it very recently, and what I soon noticed was that unless I ad=
+ded
+the nomodeset kernel parameter the monitor would say &quot;No signal&quot; =
+soon after
+boot. With nomodeset enabled it boots as normal and everything works, except
+the things that usually do not work when nomodeset is set.
+
+Note that this occurs both with nouveau and NVIDIA's proprietary driver,
+however the GPU works in Windows 10 so I do not believe that this is a hard=
+ware
+fault. I have also made sure to verify that I am using the latest BIOS
+available for the motherboard.
+
+Regards, Newbyte.</pre>
+        </div>
+      </p>
+
+
+      <hr>
+      <span>You are receiving this mail because:</span>
+
+      <ul>
+          <li>You are the assignee for the bug.</li>
+      </ul>
+    </body>
+</html>=
+
+--15592267680.aADF2bfC6.20372--
+
+--===============0542355916==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
+YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
+cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============0542355916==--
