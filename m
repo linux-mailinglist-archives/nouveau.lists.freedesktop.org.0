@@ -1,23 +1,23 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 00F083005C
-	for <lists+nouveau@lfdr.de>; Thu, 30 May 2019 18:50:42 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1A16C3005D
+	for <lists+nouveau@lfdr.de>; Thu, 30 May 2019 18:51:32 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id ECE126E3C1;
-	Thu, 30 May 2019 16:50:39 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7A8CE6E3C7;
+	Thu, 30 May 2019 16:51:30 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
  [131.252.210.165])
- by gabe.freedesktop.org (Postfix) with ESMTP id 9AAC26E3C1
- for <nouveau@lists.freedesktop.org>; Thu, 30 May 2019 16:50:39 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTP id 5AEDC6E3C9
+ for <nouveau@lists.freedesktop.org>; Thu, 30 May 2019 16:51:29 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 97F8A72167; Thu, 30 May 2019 16:50:39 +0000 (UTC)
+ id 57FD772167; Thu, 30 May 2019 16:51:29 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Thu, 30 May 2019 16:50:39 +0000
+Date: Thu, 30 May 2019 16:51:29 +0000
 X-Bugzilla-Reason: AssignedTo
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
@@ -33,7 +33,7 @@ X-Bugzilla-Priority: medium
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
 X-Bugzilla-Changed-Fields: attachments.created
-Message-ID: <bug-110797-8800-laDsZa7OxA@http.bugs.freedesktop.org/>
+Message-ID: <bug-110797-8800-nsYgm4D1NX@http.bugs.freedesktop.org/>
 In-Reply-To: <bug-110797-8800@http.bugs.freedesktop.org/>
 References: <bug-110797-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
@@ -51,18 +51,18 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0856674934=="
+Content-Type: multipart/mixed; boundary="===============0893456312=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============0856674934==
-Content-Type: multipart/alternative; boundary="15592350392.dFDDE.25982"
+--===============0893456312==
+Content-Type: multipart/alternative; boundary="15592350892.2535.26718"
 Content-Transfer-Encoding: 7bit
 
 
---15592350392.dFDDE.25982
-Date: Thu, 30 May 2019 16:50:39 +0000
+--15592350892.2535.26718
+Date: Thu, 30 May 2019 16:51:29 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -71,21 +71,19 @@ Auto-Submitted: auto-generated
 
 https://bugs.freedesktop.org/show_bug.cgi?id=3D110797
 
---- Comment #5 from Newbyte <newbytee@protonmail.com> ---
-Created attachment 144381
-  --> https://bugs.freedesktop.org/attachment.cgi?id=3D144381&action=3Dedit
-Kernel log from boot with nouveau
+--- Comment #6 from Newbyte <newbytee@protonmail.com> ---
+Created attachment 144382
+  --> https://bugs.freedesktop.org/attachment.cgi?id=3D144382&action=3Dedit
+Kernel log from boot with akmod-nvidia
 
-Alright, here is the kernel log (dmesg) from a boot after removing akmod-nv=
-idia
-from the system, taken via ssh.
+For reference, here is one with akmod-nvidia installed.
 
 --=20
 You are receiving this mail because:
 You are the assignee for the bug.=
 
---15592350392.dFDDE.25982
-Date: Thu, 30 May 2019 16:50:39 +0000
+--15592350892.2535.26718
+Date: Thu, 30 May 2019 16:51:29 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -102,8 +100,8 @@ Auto-Submitted: auto-generated
             <b><a class=3D"bz_bug_link=20
           bz_status_NEW "
    title=3D"NEW - No video if nomodeset is not set with GTX 460"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110797#c5">Commen=
-t # 5</a>
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110797#c6">Commen=
+t # 6</a>
               on <a class=3D"bz_bug_link=20
           bz_status_NEW "
    title=3D"NEW - No video if nomodeset is not set with GTX 460"
@@ -113,15 +111,13 @@ t # 5</a>
 newbytee&#64;protonmail.com" title=3D"Newbyte &lt;newbytee&#64;protonmail.c=
 om&gt;"> <span class=3D"fn">Newbyte</span></a>
 </span></b>
-        <pre>Created <span class=3D""><a href=3D"attachment.cgi?id=3D144381=
-" name=3D"attach_144381" title=3D"Kernel log from boot with nouveau">attach=
-ment 144381</a> <a href=3D"attachment.cgi?id=3D144381&amp;action=3Dedit" ti=
-tle=3D"Kernel log from boot with nouveau">[details]</a></span>
-Kernel log from boot with nouveau
+        <pre>Created <span class=3D""><a href=3D"attachment.cgi?id=3D144382=
+" name=3D"attach_144382" title=3D"Kernel log from boot with akmod-nvidia">a=
+ttachment 144382</a> <a href=3D"attachment.cgi?id=3D144382&amp;action=3Dedi=
+t" title=3D"Kernel log from boot with akmod-nvidia">[details]</a></span>
+Kernel log from boot with akmod-nvidia
 
-Alright, here is the kernel log (dmesg) from a boot after removing akmod-nv=
-idia
-from the system, taken via ssh.</pre>
+For reference, here is one with akmod-nvidia installed.</pre>
         </div>
       </p>
 
@@ -135,9 +131,9 @@ from the system, taken via ssh.</pre>
     </body>
 </html>=
 
---15592350392.dFDDE.25982--
+--15592350892.2535.26718--
 
---===============0856674934==
+--===============0893456312==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -147,4 +143,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============0856674934==--
+--===============0893456312==--
