@@ -2,26 +2,27 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8DF512F875
-	for <lists+nouveau@lfdr.de>; Thu, 30 May 2019 10:23:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 905732F879
+	for <lists+nouveau@lfdr.de>; Thu, 30 May 2019 10:26:53 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 81FA26E131;
-	Thu, 30 May 2019 08:23:32 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 219C56E133;
+	Thu, 30 May 2019 08:26:52 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from milared.bluegap.ch (milared.bluegap.ch
  [IPv6:2a01:4f8:c17:2c0c::2])
- by gabe.freedesktop.org (Postfix) with ESMTPS id EC2E66E131
- for <nouveau@lists.freedesktop.org>; Thu, 30 May 2019 08:23:30 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 68A5E6E133
+ for <nouveau@lists.freedesktop.org>; Thu, 30 May 2019 08:26:50 +0000 (UTC)
 Received: from [10.80.16.225] (pool1-122.cgn.as8758.net [::ffff:212.25.6.122])
  (AUTH: PLAIN markus@bluegap.ch, SSL: TLS1.2, 128bits,
  ECDHE_RSA_AES_128_GCM_SHA256)
- by milared.bluegap.ch with ESMTPSA; Thu, 30 May 2019 08:23:27 +0000
- id 0000000000355899.000000005CEF9300.0000049B
+ by milared.bluegap.ch with ESMTPSA; Thu, 30 May 2019 08:26:48 +0000
+ id 00000000003558A3.000000005CEF93C8.000007F3
+From: Markus Wanner <markus@bluegap.ch>
 To: Karol Herbst <kherbst@redhat.com>
 References: <2b626681-3504-c7e9-10d2-0f906dcb176d@bluegap.ch>
  <CACO55tsFLc1M0pPe0_2=Dn7j8KctApganDoe=hNBsLCfNLXULw@mail.gmail.com>
-From: Markus Wanner <markus@bluegap.ch>
+ <169b8cf4-df8a-558b-5d68-e1400c73f6a5@bluegap.ch>
 Openpgp: preference=signencrypt
 Autocrypt: addr=markus@bluegap.ch; prefer-encrypt=mutual; keydata=
  mQQNBEyA6xoBIAD2b/0sj830m1pqjX0LXY6ICB/oE4/UMxij07neWCHdGwCNGdXroz9BRucA
@@ -333,12 +334,12 @@ Autocrypt: addr=markus@bluegap.ch; prefer-encrypt=mutual; keydata=
  LHbMdGds8BFOkxLBYRZ3yHI2FXcoetjeJSTa9jclnt5d5QljU9/uPyUmL9ewwSdgIML4cXBK
  J656oq5mNzdSZRY1pUpdFmhMYvAGmwjuG9M35yN9BBliljnDv5MQ/h3I69CR0LdF5TgFqCP9
  gfrW+91n4zX/dfSz3fTe6DXY4p5Nb09mDU/+EES6xrQ+z31aPGn5xeDsnQY=
-Message-ID: <169b8cf4-df8a-558b-5d68-e1400c73f6a5@bluegap.ch>
-Date: Thu, 30 May 2019 10:23:07 +0200
+Message-ID: <986bfe1b-e341-27a5-6f77-882e0b996ee3@bluegap.ch>
+Date: Thu, 30 May 2019 10:26:28 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
  Thunderbird/60.6.1
 MIME-Version: 1.0
-In-Reply-To: <CACO55tsFLc1M0pPe0_2=Dn7j8KctApganDoe=hNBsLCfNLXULw@mail.gmail.com>
+In-Reply-To: <169b8cf4-df8a-558b-5d68-e1400c73f6a5@bluegap.ch>
 Content-Language: en-GB
 Subject: Re: [Nouveau] Support for GP107(GL)M with Optimus
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -358,49 +359,11 @@ Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-SGVsbG8gS2Fyb2wsCgpPbiA1LzI5LzE5IDQ6MDQgUE0sIEthcm9sIEhlcmJzdCB3cm90ZToKPiBJ
-ZiB5b3Ugd2FudCB5b3UgY291bGQgdHJ5IG91dCB0aG9zZSBwYXRjaGVzIG9uIGEga2VybmVsIGFu
-ZCBzZWUgaWYKPiB0aG9zZSBtYWtlIGFueSBkaWZmZXJlbmNlIG9uIHlvdXIgbWFjaGluZToKPiAK
-PiBodHRwczovL2dpdGh1Yi5jb20va2Fyb2xoZXJic3QvbGludXgvY29tbWl0cy9ydW5wbV9maXhl
-cwoKdGhhbmtzLCBJIHRyaWVkLCBzZWUgYmVsb3cuICBUaGlzIHJhaXNlcyBhbm90aGVyIHF1ZXN0
-aW9uOiB3aGVyZSBkb2VzCm5vdXZlYXUgZGV2ZWxvcG1lbnQgdGFrZSBwbGFjZT8gIEluIGEgdHJl
-ZSBiYXNlZCBvbiB0aGUgbGludXgga2VybmVsCihzdWNoIGFzIHRoZSBhYm92ZSByZXBvKSBvciBp
-biBzb21lIGRlZGljYXRlZCBtb2R1bGUtb25seSByZXBvIGxpa2UKc2tlZ2dzYi9ub3V2ZWF1PwoK
-SSBtYW51YWxseSAicmViYXNlZCIgdGhlIGxhc3QgZml2ZSBjb21taXRzIGZyb20gdGhlICJydW5w
-bV9maXhlcyIgYnJhbmNoCm9mIHRoZSByZXBvIGFib3ZlIG9udG8gc2tlZ2dzYi9ub3V2ZWF1LCB3
-aGljaCBhcHBsaWVkIHcvbyBjb25mbGljdHMuClJlc3VsdHMgYmVsb3cgYXJlIGZvciBhIG5vdXZl
-YXUgbW9kdWxlIGJ1aWx0IHRoYXQgd2F5LgoKPiBtYWtlIHN1cmUgeW91IHVzZSB0aGUgInJ1bnBt
-X2ZpeGVzIiBicmFuY2guIFdlIGFyZSBraW5kIG9mIGF3YXJlIG9mCj4gdGhlIGlzc3VlcyBvbiBt
-b2Rlcm4gbGFwdG9wcyBhbmQgYWxyZWFkeSB0cnkgdG8gZmluZCBhIHByb3Blcgo+IHNvbHV0aW9u
-LCBpdCBtb3N0bHkgYm9pbHMgZG93biB0byB0ZXN0aW5nIGFuZCBjaGVja2luZyBpZiB0aGVyZSBh
-cmUKPiBvdGhlciBpc3N1ZXMgbGVmdCB3ZSBkaWRuJ3QgYWRkcmVzcyB5ZXQuCgpVbmRlcnN0b29k
-LiAgVGhhdCdzIHBhcnQgb2Ygd2h5IEkgc2V0dXAgdGhhdCBpbmZyYXN0cnVjdHVyZS4KCj4gQWxz
-byB3aXRob3V0IGtub3dpbmcgd2hhdAo+IGVycm9yIG1lc3NhZ2UgeW91IGFyZSBnZXR0aW5nIHBy
-ZWNpc2VseQoKU29ycnksIEkgdGhvdWdodCB0aGUgcmVmZXJlbmNlIHRvIGlzc3VlICMxMDAyMjgg
-d2FzIGVub3VnaC4gIEkgY2VydGFpbmx5CmdvdCB0aGUgZXhhY3Qgc2FtZSAiYnVzOiBNTUlPIHJl
-YWQgb2YgMDAwMDAwMDAgRkFVTFQgYXQgNDA5ODAwIiB0aW1lb3V0CmFuZCBmaWd1cmVkIEkgYmV0
-dGVyIG5vdCBmaWxlIGEgZHVwbGljYXRlLgoKSSByZWFsaXplIG1lc3NlZCB1cCB0aGUgdXBsb2Fk
-IG9mIHRoZSBrZXJuZWwgbG9nIHRvIHRoYXQgaXNzdWUuICBJIGp1c3QKY29ycmVjdGVkIHRoYXQu
-CgpTbywgY3VycmVudCBzdGF0dXMgb24gc2tlZ2dzYi9ub3V2ZWF1IGZhaWxzIHRoYXQgd2F5IGZv
-ciBtZSwgaW5kZXBlbmRlbnQKb2YgdGhlIHJ1bnBtIHNldHRpbmcuICBIb3dldmVyLCB3aXRoIHRo
-ZSBmaXZlIHBhdGNoZXMgZnJvbSB5b3VyCnJ1bnBtX2ZpeGVzIGJyYW5jaCBhZGRlZCwgSSBzZWUg
-ZGlmZmVyZW50IHJlc3VsdHM6CgoqIG5vIHN1Y2ggdGltZW91dHMgYW55IG1vcmUgaW4ga2VybmVs
-IGxvZ3MgKHlheSEpCiogWDExIHJlY29nbml6ZXMgdGhlIERlbGwgZGlzcGxheSBjb25uZWN0ZWQg
-b24gSERNSS0xIChpbmRlcGVuZGVudAogIG9mIGtlcm5lbCBtb2R1bGUgcGFyYW1ldGVycyBvciBY
-MTEgY29uZmlnKQoqIHN0YXJ0aW5nIFgxMSB3aXRoIG9ubHkgdGhlIG5vdXZlYXUgZHJpdmVyLCBh
-IHRlcm1pbmFsIGFwcGVhcnMKICBvbiB0aGUgZGlzcGxheSAoeWF5ISkKKiBsb2FkaW5nIG5vdXZl
-YXUgd2l0aCBgZGVidWc9ZGVidWdgIGFuZCBzdGFydGluZyBYMTEsIHRoZSBkaXNwbGF5CiAgcmVt
-YWlucyBkYXJrCiogbG9hZGluZyBub3V2ZWF1IGFuZCBpbnRlbCAoZm9yIHRoZSBpbnRlcm5hbCBk
-aXNwbGF5KSwgdGhlIGV4dGVybmFsCiAgZGlzcGxheSByZW1haW5zIGRhcmsgYXMgd2VsbCwgeHJh
-bmRyIGRvZXMgbm90IHNob3cgaXQsIGJ1dAogIGB4cmFuZHIgLS1saXN0cHJvdmlkZXJzYCBhdCBs
-ZWFzdCBsaXN0cyB0d28gcHJvdmlkZXJzIChJJ20gbm90IHN1cmUKICB3aGV0aGVyIEkgY2FuIHNv
-bWVob3cgZW5hYmxlIHRoZSBleHRlcm5hbCBkaXNwbGF5IGluIHRoaXMgY2FzZSkuCgoKVGhhdCdz
-IGFsbCB0ZXN0ZWQgb246CgoqIGEgTGVub3ZvIFRoaW5rUGFkIFAxLCB3aXRoIGEgIEdQMTA3R0xN
-LCBBS0EgUXVhZHJvIFAyMDAwCiogRGViaWFuIHRlc3RpbmcKKiBsaW51eCA1LjItcmMxCiogWDEx
-IHN0YXJ0ZWQgdXNpbmcgeGluaXQsIGxvYWRpbmcgbm90aGluZyBidXQgYW4geHRlcm0KCgpJJ20g
-aGFwcHkgdG8gcHJvdmlkZSBsb2dzIGZyb20gdGhlc2UgcnVucyBvciBjb25kdWN0IGZ1cnRoZXIK
-ZXhwZXJpbWVudHMsIGJ1dCB3b3VsZCBhcHByZWNpYXRlIHNvbWUgZ3VpZGFuY2Ugb24gd2hhdCdz
-IHVzZWZ1bC4gIFRoYW5rCnlvdS4KCktpbmQgUmVnYXJkcwoKTWFya3VzCl9fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCk5vdXZlYXUgbWFpbGluZyBsaXN0Ck5v
-dXZlYXVAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3Jn
-L21haWxtYW4vbGlzdGluZm8vbm91dmVhdQ==
+T24gNS8zMC8xOSAxMDoyMyBBTSwgTWFya3VzIFdhbm5lciB3cm90ZToKPiBJIHJlYWxpemUgbWVz
+c2VkIHVwIHRoZSB1cGxvYWQgb2YgdGhlIGtlcm5lbCBsb2cgdG8gdGhhdCBpc3N1ZS4gIEkganVz
+dAo+IGNvcnJlY3RlZCB0aGF0LgoKT2gsIEkgYXR0ZW1wdGVkIHRvLCBidXQgZ290IGFuIGludGVy
+bmFsIHNlcnZlciBlcnJvciB1cGxvYWRpbmcgdGhlIGxvZ3MKdG8gYnVnemlsbGEuICAiUGxlYXNl
+IGNvbnRhY3QgdGhlIHNlcnZlciBhZG1pbmlzdHJhdG9yIGF0IFtubyBhZGRyZXNzCmdpdmVuXSIs
+IGhtLi4uCgpNYXJrdXMKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX18KTm91dmVhdSBtYWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcK
+aHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
