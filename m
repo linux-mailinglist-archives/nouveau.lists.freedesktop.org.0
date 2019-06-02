@@ -1,46 +1,64 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4305831FA6
-	for <lists+nouveau@lfdr.de>; Sat,  1 Jun 2019 16:13:14 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id AF64F32335
+	for <lists+nouveau@lfdr.de>; Sun,  2 Jun 2019 14:07:46 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 32B09898EA;
-	Sat,  1 Jun 2019 14:13:12 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9EF04893D5;
+	Sun,  2 Jun 2019 12:07:44 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
- by gabe.freedesktop.org (Postfix) with ESMTP id 76DC689904
- for <nouveau@lists.freedesktop.org>; Sat,  1 Jun 2019 14:13:10 +0000 (UTC)
-Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 73DA972167; Sat,  1 Jun 2019 14:13:10 +0000 (UTC)
-From: bugzilla-daemon@freedesktop.org
-To: nouveau@lists.freedesktop.org
-Date: Sat, 01 Jun 2019 14:13:10 +0000
-X-Bugzilla-Reason: AssignedTo
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: None
-X-Bugzilla-Product: xorg
-X-Bugzilla-Component: Driver/nouveau
-X-Bugzilla-Version: unspecified
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: normal
-X-Bugzilla-Who: pachoramos1@gmail.com
-X-Bugzilla-Status: NEW
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: medium
-X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-100228-8800-oKLbzLKEOz@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-100228-8800@http.bugs.freedesktop.org/>
-References: <bug-100228-8800@http.bugs.freedesktop.org/>
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
+Received: from mail-pg1-x544.google.com (mail-pg1-x544.google.com
+ [IPv6:2607:f8b0:4864:20::544])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5DAD0893D5;
+ Sun,  2 Jun 2019 12:07:43 +0000 (UTC)
+Received: by mail-pg1-x544.google.com with SMTP id z3so6633395pgp.8;
+ Sun, 02 Jun 2019 05:07:43 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=qX3ghjlw/x61cEZZaOOANDltXvTi7Um5dbpJ/suOwPo=;
+ b=WD6bTpH5bzNgjIWK8I9w0C2dvS04XFMsKcwqc/JYXJGG6wpn55lGUh1Zjejlvt9YcK
+ Bh/tFeNWZMTbMffiU9IkH13gIS9p9MSMojKj7epG9WhdFGhAlzt5UbXIIQOJiYawzDy2
+ hr8A3U6YlMDMHo6ACbm3Cw3JLKxGvXa22NLGCYps/O51JOTjfWUlsbR4vCfFcS1SpB3Z
+ UQLA1EF7h90ymOSLZnqEQ7UodWb+T37BSFng8LUgETxxnUiY8ubyRDGy2K1HuW3YCCwk
+ 8sVH+ESW3/KN8MJEmtVUcZSS81Zs/DdFYjsVb9xQHkYORjij3+0ReZ9/OJcaVfHaILiq
+ Sd8w==
+X-Gm-Message-State: APjAAAUZ1ZGKEFBudhGAWAI6IFn4+HT2AFgz0aOuc/AfkUoFFuBPLUi2
+ TBGqiQD2HWfdUINDdY750E8=
+X-Google-Smtp-Source: APXvYqzm2wJW1+YOTI30uFW4t5o4z2n5SL6LKrDTNG9aLkdwk+rTGDGuQD+/ySgk9af0E2r2tIFxaQ==
+X-Received: by 2002:a65:5684:: with SMTP id v4mr21788486pgs.160.1559477262974; 
+ Sun, 02 Jun 2019 05:07:42 -0700 (PDT)
+Received: from localhost.localdomain
+ (119-18-21-111.771215.syd.nbn.aussiebb.net. [119.18.21.111])
+ by smtp.gmail.com with ESMTPSA id x28sm13668510pfo.78.2019.06.02.05.07.37
+ (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+ Sun, 02 Jun 2019 05:07:42 -0700 (PDT)
+From: Rhys Kidd <rhyskidd@gmail.com>
+To: Ben Skeggs <bskeggs@redhat.com>, David Airlie <airlied@linux.ie>,
+ Daniel Vetter <daniel@ffwll.ch>, dri-devel@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>,
+ Ilia Mirkin <imirkin@alum.mit.edu>
+Date: Sun,  2 Jun 2019 22:07:27 +1000
+Message-Id: <20190602120727.4001-1-rhyskidd@gmail.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 100228] [NV137] bus: MMIO read of 00000000 FAULT at
- 409800 [ TIMEOUT ]
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20161025;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=qX3ghjlw/x61cEZZaOOANDltXvTi7Um5dbpJ/suOwPo=;
+ b=bNugs5VlHZPS4tZ2VPhAX09sWOYYGdVuKnoOLgjmuOdLsm6J2zmLxYDwlanH7ezVMX
+ d2ATyFvXAdfIBBL6pukfNrxawsTimGZkOnAmr5ngT8EYiWM5dxN7k8zNSXF0Dy36kR7L
+ wix5aoCXP8t/SU7WdSrKg+rh3m1faTCtS8lKiNImTIVDdYjx2H2H+zanoOTMeYX2PqTg
+ anwfOhV9UyQXvaQgrAb/Tn2OvnA+h3n4TVnIeiA+KpLEp6YRiSS0Eu5EU5RAmZwG9/Zx
+ DFR2lpvve+CAN+uS+nylIbCd027VJipl/LxoU9XaYMscmqttlwS/bqWpj6xTykrljg/g
+ eVdg==
+Subject: [Nouveau] [PATCH] drm/nouveau/bios: downgrade absence of tmds table
+ to info from an error
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -52,90 +70,29 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============2114229068=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-
---===============2114229068==
-Content-Type: multipart/alternative; boundary="15593983903.fc8e9.8980"
-Content-Transfer-Encoding: 7bit
-
-
---15593983903.fc8e9.8980
-Date: Sat, 1 Jun 2019 14:13:10 +0000
-MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-https://bugs.freedesktop.org/show_bug.cgi?id=3D100228
-
---- Comment #38 from Pacho Ramos <pachoramos1@gmail.com> ---
-"nouveau.modeset=3D0 i915.modeset=3D1" solves the problem for me, thanks a =
-lot! :D
-
---=20
-You are receiving this mail because:
-You are the assignee for the bug.=
-
---15593983903.fc8e9.8980
-Date: Sat, 1 Jun 2019 14:13:10 +0000
-MIME-Version: 1.0
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-<html>
-    <head>
-      <base href=3D"https://bugs.freedesktop.org/">
-    </head>
-    <body>
-      <p>
-        <div>
-            <b><a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - [NV137] bus: MMIO read of 00000000 FAULT at 409800 [ TIME=
-OUT ]"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D100228#c38">Comme=
-nt # 38</a>
-              on <a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - [NV137] bus: MMIO read of 00000000 FAULT at 409800 [ TIME=
-OUT ]"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D100228">bug 10022=
-8</a>
-              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
-pachoramos1&#64;gmail.com" title=3D"Pacho Ramos &lt;pachoramos1&#64;gmail.c=
-om&gt;"> <span class=3D"fn">Pacho Ramos</span></a>
-</span></b>
-        <pre>&quot;nouveau.modeset=3D0 i915.modeset=3D1&quot; solves the pr=
-oblem for me, thanks a lot! :D</pre>
-        </div>
-      </p>
-
-
-      <hr>
-      <span>You are receiving this mail because:</span>
-
-      <ul>
-          <li>You are the assignee for the bug.</li>
-      </ul>
-    </body>
-</html>=
-
---15593983903.fc8e9.8980--
-
---===============2114229068==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
-YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
-cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
-
---===============2114229068==--
+QWJzZW5jZSBvZiBhIFRNRFMgSW5mbyBUYWJsZSBpcyBjb21tb24gb24gT3B0aW11cyBzZXR1cHMg
+d2hlcmUgdGhlIE5WSURJQQpncHUgaXMgbm90IGNvbm5lY3RlZCBkaXJlY3RseSB0byBhbnkgb3V0
+cHV0cy4KClJlcG9ydGluZyBhbiBlcnJvciBpbiB0aGlzIHNjZW5hcmlvIGlzIHRvbyBoYXJzaC4g
+QWNjb3JkaW5nbHksIGNoYW5nZSB0aGUKZXJyb3IgbWVzc2FnZSB0byBhbiBpbmZvIG1lc3NhZ2Uu
+CgpCeSBkZWZhdWx0IHRoZSBlcnJvciBtZXNzYWdlIGFsc28gY2F1c2VzIGEgYm9vdCBmbGlja2Vy
+IGZvciB0aGVzZSBzeXRlbXMuCgpTaWduZWQtb2ZmLWJ5OiBSaHlzIEtpZGQgPHJoeXNraWRkQGdt
+YWlsLmNvbT4KLS0tCiBkcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2Jpb3MuYyB8IDIg
+Ky0KIDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlvbigrKSwgMSBkZWxldGlvbigtKQoKZGlmZiAt
+LWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfYmlvcy5jIGIvZHJpdmVycy9n
+cHUvZHJtL25vdXZlYXUvbm91dmVhdV9iaW9zLmMKaW5kZXggNjZiZjJhZmY0YTNlLi5iZGZhZGM2
+MzIwNGEgMTAwNjQ0Ci0tLSBhL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfYmlvcy5j
+CisrKyBiL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfYmlvcy5jCkBAIC05MzUsNyAr
+OTM1LDcgQEAgc3RhdGljIGludCBwYXJzZV9iaXRfdG1kc190YmxfZW50cnkoc3RydWN0IGRybV9k
+ZXZpY2UgKmRldiwgc3RydWN0IG52YmlvcyAqYmlvcywKIAogCXRtZHN0YWJsZXB0ciA9IFJPTTE2
+KGJpb3MtPmRhdGFbYml0ZW50cnktPm9mZnNldF0pOwogCWlmICghdG1kc3RhYmxlcHRyKSB7Ci0J
+CU5WX0VSUk9SKGRybSwgIlBvaW50ZXIgdG8gVE1EUyB0YWJsZSBpbnZhbGlkXG4iKTsKKwkJTlZf
+SU5GTyhkcm0sICJQb2ludGVyIHRvIFRNRFMgdGFibGUgbm90IGZvdW5kXG4iKTsKIAkJcmV0dXJu
+IC1FSU5WQUw7CiAJfQogCi0tIAoyLjIwLjEKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fCk5vdXZlYXUgbWFpbGluZyBsaXN0Ck5vdXZlYXVAbGlzdHMuZnJl
+ZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGlu
+Zm8vbm91dmVhdQ==
