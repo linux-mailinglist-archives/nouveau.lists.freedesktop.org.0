@@ -2,46 +2,45 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id D1D1E358D5
-	for <lists+nouveau@lfdr.de>; Wed,  5 Jun 2019 10:42:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A22CD35F96
+	for <lists+nouveau@lfdr.de>; Wed,  5 Jun 2019 16:49:46 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6307B89622;
-	Wed,  5 Jun 2019 08:42:41 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 2FE4989C49;
+	Wed,  5 Jun 2019 14:49:45 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
  [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
- by gabe.freedesktop.org (Postfix) with ESMTP id 190FA89622
- for <nouveau@lists.freedesktop.org>; Wed,  5 Jun 2019 08:42:40 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTP id E78CA89C49
+ for <nouveau@lists.freedesktop.org>; Wed,  5 Jun 2019 14:49:43 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 162FE72167; Wed,  5 Jun 2019 08:42:40 +0000 (UTC)
+ id DFC0872167; Wed,  5 Jun 2019 14:49:43 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Wed, 05 Jun 2019 08:42:40 +0000
+Date: Wed, 05 Jun 2019 14:49:44 +0000
 X-Bugzilla-Reason: QAcontact AssignedTo
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
 X-Bugzilla-Product: Mesa
 X-Bugzilla-Component: Drivers/DRI/nouveau
-X-Bugzilla-Version: 19.0
+X-Bugzilla-Version: git
 X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: critical
-X-Bugzilla-Who: Linuxfreak@gmx.at
+X-Bugzilla-Severity: normal
+X-Bugzilla-Who: randrik@mail.ru
 X-Bugzilla-Status: NEW
 X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: high
+X-Bugzilla-Priority: medium
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
 X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-110572-8800-PCjRqbGFTn@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-110572-8800@http.bugs.freedesktop.org/>
-References: <bug-110572-8800@http.bugs.freedesktop.org/>
+Message-ID: <bug-110679-8800-1wMGoqgGyc@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-110679-8800@http.bugs.freedesktop.org/>
+References: <bug-110679-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 110572] Regularly System Crash: (ca. 1 hour) nouveau
- 0000:08:00.0: gr: PGRAPH TLB flush idle timeout fail and nouveau
- 0000:08:00.0: mmu: ce0 mmu invalidate timeout
+Subject: [Nouveau] [Bug 110679] va-api scaling with nv50-class cards
+ incomplete?
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -53,39 +52,40 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0971161727=="
+Content-Type: multipart/mixed; boundary="===============0700452241=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============0971161727==
-Content-Type: multipart/alternative; boundary="15597241600.ea8E4D.2512"
+--===============0700452241==
+Content-Type: multipart/alternative; boundary="15597461830.285ce.29015"
 Content-Transfer-Encoding: 7bit
 
 
---15597241600.ea8E4D.2512
-Date: Wed, 5 Jun 2019 08:42:40 +0000
+--15597461830.285ce.29015
+Date: Wed, 5 Jun 2019 14:49:43 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 
-https://bugs.freedesktop.org/show_bug.cgi?id=3D110572
+https://bugs.freedesktop.org/show_bug.cgi?id=3D110679
 
---- Comment #19 from Linux Freak <Linuxfreak@gmx.at> ---
-journalctl -p 7 -b -1 | grep fbcon
-Jun 05 09:59:17  kernel: fbcon: Deferring console take-over
-Jun 05 09:59:17  kernel: fbcon: Taking over console
-Jun 05 09:59:25  kernel: fbcon: nouveaufb (fb0) is primary device
+--- Comment #1 from Andrew Randrianasulu <randrik@mail.ru> ---
+After adding XVMC_VL=3D1 variable ffmpeg command above started to work ?!
+Apparently, 'normal' nouveau video allocator dislikes two differently-sized
+buffers (command also worked when I set "scale_vaapi=3Dw=3D1280:h=3D720" , =
+in other
+words to strictly same dimensions as input ....)
 
 --=20
 You are receiving this mail because:
 You are the QA Contact for the bug.
 You are the assignee for the bug.=
 
---15597241600.ea8E4D.2512
-Date: Wed, 5 Jun 2019 08:42:40 +0000
+--15597461830.285ce.29015
+Date: Wed, 5 Jun 2019 14:49:43 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -101,26 +101,24 @@ Auto-Submitted: auto-generated
         <div>
             <b><a class=3D"bz_bug_link=20
           bz_status_NEW "
-   title=3D"NEW - Regularly System Crash: (ca. 1 hour) nouveau 0000:08:00.0=
-: gr: PGRAPH TLB flush idle timeout fail and nouveau 0000:08:00.0: mmu: ce0=
- mmu invalidate timeout"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110572#c19">Comme=
-nt # 19</a>
+   title=3D"NEW - va-api scaling with nv50-class cards incomplete?"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110679#c1">Commen=
+t # 1</a>
               on <a class=3D"bz_bug_link=20
           bz_status_NEW "
-   title=3D"NEW - Regularly System Crash: (ca. 1 hour) nouveau 0000:08:00.0=
-: gr: PGRAPH TLB flush idle timeout fail and nouveau 0000:08:00.0: mmu: ce0=
- mmu invalidate timeout"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110572">bug 11057=
-2</a>
+   title=3D"NEW - va-api scaling with nv50-class cards incomplete?"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110679">bug 11067=
+9</a>
               from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
-Linuxfreak&#64;gmx.at" title=3D"Linux Freak &lt;Linuxfreak&#64;gmx.at&gt;">=
- <span class=3D"fn">Linux Freak</span></a>
+randrik&#64;mail.ru" title=3D"Andrew Randrianasulu &lt;randrik&#64;mail.ru&=
+gt;"> <span class=3D"fn">Andrew Randrianasulu</span></a>
 </span></b>
-        <pre>journalctl -p 7 -b -1 | grep fbcon
-Jun 05 09:59:17  kernel: fbcon: Deferring console take-over
-Jun 05 09:59:17  kernel: fbcon: Taking over console
-Jun 05 09:59:25  kernel: fbcon: nouveaufb (fb0) is primary device</pre>
+        <pre>After adding XVMC_VL=3D1 variable ffmpeg command above started=
+ to work ?!
+Apparently, 'normal' nouveau video allocator dislikes two differently-sized
+buffers (command also worked when I set &quot;scale_vaapi=3Dw=3D1280:h=3D72=
+0&quot; , in other
+words to strictly same dimensions as input ....)</pre>
         </div>
       </p>
 
@@ -135,9 +133,9 @@ Jun 05 09:59:25  kernel: fbcon: nouveaufb (fb0) is primary device</pre>
     </body>
 </html>=
 
---15597241600.ea8E4D.2512--
+--15597461830.285ce.29015--
 
---===============0971161727==
+--===============0700452241==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -147,4 +145,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============0971161727==--
+--===============0700452241==--
