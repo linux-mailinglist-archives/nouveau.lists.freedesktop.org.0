@@ -2,45 +2,56 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9582538B8C
-	for <lists+nouveau@lfdr.de>; Fri,  7 Jun 2019 15:21:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A907B3947A
+	for <lists+nouveau@lfdr.de>; Fri,  7 Jun 2019 20:39:50 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 049FC89C69;
-	Fri,  7 Jun 2019 13:21:24 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B086A89E39;
+	Fri,  7 Jun 2019 18:39:48 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [131.252.210.165])
- by gabe.freedesktop.org (Postfix) with ESMTP id 8CE9D89AEA
- for <nouveau@lists.freedesktop.org>; Fri,  7 Jun 2019 13:21:23 +0000 (UTC)
-Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 8411072167; Fri,  7 Jun 2019 13:21:23 +0000 (UTC)
-From: bugzilla-daemon@freedesktop.org
-To: nouveau@lists.freedesktop.org
-Date: Fri, 07 Jun 2019 13:21:23 +0000
-X-Bugzilla-Reason: AssignedTo
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: None
-X-Bugzilla-Product: xorg
-X-Bugzilla-Component: Driver/nouveau
-X-Bugzilla-Version: 7.7 (2012.06)
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: normal
-X-Bugzilla-Who: imirkin@alum.mit.edu
-X-Bugzilla-Status: NEW
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: medium
-X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-110830-8800-g7a1EYDlCD@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-110830-8800@http.bugs.freedesktop.org/>
-References: <bug-110830-8800@http.bugs.freedesktop.org/>
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
+Received: from mail-lf1-x144.google.com (mail-lf1-x144.google.com
+ [IPv6:2a00:1450:4864:20::144])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E486289E39;
+ Fri,  7 Jun 2019 18:39:47 +0000 (UTC)
+Received: by mail-lf1-x144.google.com with SMTP id p24so2359110lfo.6;
+ Fri, 07 Jun 2019 11:39:47 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=gBZaGIwgweQnWOXVd6rMqfse78NHRo0T4EcStz9iVIQ=;
+ b=L/VQdoOLenumzPdEe2TDri7lZoE76SCx1KVa7qLAFoXV/Co11LH8KQPceM5GaDg5DG
+ HGWM30KGdAIWjrIsi1dXfaFpMPLDmMqeBlSnPkyJKe9EhrCRCWds26jEm6NYdbaWJW6j
+ vYTi17AqmMKYGf40hgH6N3nGJ9Np/CsfcdWz+EnA/P0PW2nDBzO06xUOMPaaz0WXeQd9
+ P2aUtCb7uQqC2zkBpOEKQMhZ35QzJPa2gduD1As7gFaJZc7gN2JgooUdxNs8iTbnb5eS
+ t/iXG7c59AnbNLzUXyxp8NvFLePK0D1Nan9IQ2oBz0Uai8N7CQgIvqp42EyIiEgdQZST
+ L8mA==
+X-Gm-Message-State: APjAAAX2OCarN6qd/rdAFd4WofX0oMTrQ16HV5HfC/DHikQT5TgTNY0a
+ UQmCW+41hHV45WtQiC6UNcY5fr1zAo9yPkRCSY7B9A==
+X-Google-Smtp-Source: APXvYqzpYru1mSiIJAYAAln379ADncNx7MWnLg9IN9S/saFxt4Q/t15ioOsTVLZoxtjNBsXdLo/cW12pg/MP2MV24cM=
+X-Received: by 2002:ac2:5189:: with SMTP id u9mr26487227lfi.189.1559932786305; 
+ Fri, 07 Jun 2019 11:39:46 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 110830] [nouveau] GeForce GTX 1660 Ti (mobile) not
- supported (NV168/TU116)
+References: <1558378918-25279-1-git-send-email-jrdr.linux@gmail.com>
+In-Reply-To: <1558378918-25279-1-git-send-email-jrdr.linux@gmail.com>
+From: Souptick Joarder <jrdr.linux@gmail.com>
+Date: Sat, 8 Jun 2019 00:14:50 +0530
+Message-ID: <CAFqt6zYmL2P9w0Z4yfPtB=ftiy-H6-_beYsXJq-nD9T5OAw6Dg@mail.gmail.com>
+To: bskeggs@redhat.com, airlied@linux.ie, Daniel Vetter <daniel@ffwll.ch>, 
+ =?UTF-8?B?SsOpcsO0bWUgR2xpc3Nl?= <jglisse@redhat.com>, jasojgg@ziepe.ca
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc;
+ bh=gBZaGIwgweQnWOXVd6rMqfse78NHRo0T4EcStz9iVIQ=;
+ b=ddD/HTEp9Q9UDuxE2OsndGwM27L5u0P3bcjGx9VditCdq16qF4fOWLiTkia5NCHEC/
+ 1v5Ost4CHsFNdQpW1cFlTs06z2zn4hlRi3dOhy0Uu7+Cxf2W9uhXNrH7aiYYWruJqyrO
+ c5ApyyrOQkorfM3Yc7/u5WB/XIvCt0VDQo2wSmDP+4yRe/LxcSYNCqPkQFsIJSNX4La3
+ 4W8LU8QK/BQczStVvqxD8XJF5uDRZ1lOn5p6x7JfqdxKrel1Q+hFosS6JIDFT0nZIc/8
+ N7iLBzKoc2lJGV8v/gHsjhktl8xmPYIastjNXFb/fJnBdnTgux/CvqhXOzNg1+7f+TIv
+ 14Sw==
+Subject: Re: [Nouveau] [PATCH] drm/nouveau/svm: Convert to use
+ hmm_range_fault()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -52,160 +63,31 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0803200780=="
+Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-
---===============0803200780==
-Content-Type: multipart/alternative; boundary="15599136830.10E65.25825"
-Content-Transfer-Encoding: 7bit
-
-
---15599136830.10E65.25825
-Date: Fri, 7 Jun 2019 13:21:23 +0000
-MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-https://bugs.freedesktop.org/show_bug.cgi?id=3D110830
-
---- Comment #6 from Ilia Mirkin <imirkin@alum.mit.edu> ---
-(In reply to Marcin Zajaczkowski from comment #4)
-> Of course it didn't make sense to turn it on, as it was already turned on
-> (DynPwr) in my case :) ). I can switch it off with vgaswitcheroo (or at
-> least to be reported as DynOff - I will check it later with powertop) when
-> no external output is connected. And what I missed in my previous comment=
- -
-> the external monitor works out-of-box, which is nice progress.
-
-vgaswitcheroo explicit control is for hard muxes. These were popular 2005 to
-2010 or so. You just have 2 GPUs. vgaswitcheroo reports whether they're on =
-or
-off, but that control is performed dynamically by the driver based on usage.
-
->=20
-> Later on I will try to play with DRI_PRIME to enable also rendering with =
-the
-> NVidia card.
->=20
-> What could be the side effects of:
-> > kernel: nouveau 0000:01:00.0: DRM: failed to create kernel channel, -22
-> ?
-
-No acceleration. This means that DRI_PRIME will not do anything.
-
-> There are also no reported providers in xrandr:
-> > $ xrandr --listproviders
-> > Providers: number: 0
-
-This is incredibly odd -- there must always be at least 1! Are you running
-Xwayland or something? If so, the displays would be controlled through your
-wayland compositor. You can check that kms is working:
-
-grep . /sys/class/drm/card*-*/status
-
-You should see some card0-* and card1-* entries.
-
---=20
-You are receiving this mail because:
-You are the assignee for the bug.=
-
---15599136830.10E65.25825
-Date: Fri, 7 Jun 2019 13:21:23 +0000
-MIME-Version: 1.0
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-<html>
-    <head>
-      <base href=3D"https://bugs.freedesktop.org/">
-    </head>
-    <body>
-      <p>
-        <div>
-            <b><a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - [nouveau] GeForce GTX 1660 Ti (mobile) not supported (NV1=
-68/TU116)"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110830#c6">Commen=
-t # 6</a>
-              on <a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - [nouveau] GeForce GTX 1660 Ti (mobile) not supported (NV1=
-68/TU116)"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110830">bug 11083=
-0</a>
-              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
-imirkin&#64;alum.mit.edu" title=3D"Ilia Mirkin &lt;imirkin&#64;alum.mit.edu=
-&gt;"> <span class=3D"fn">Ilia Mirkin</span></a>
-</span></b>
-        <pre>(In reply to Marcin Zajaczkowski from <a href=3D"show_bug.cgi?=
-id=3D110830#c4">comment #4</a>)
-<span class=3D"quote">&gt; Of course it didn't make sense to turn it on, as=
- it was already turned on
-&gt; (DynPwr) in my case :) ). I can switch it off with vgaswitcheroo (or at
-&gt; least to be reported as DynOff - I will check it later with powertop) =
-when
-&gt; no external output is connected. And what I missed in my previous comm=
-ent -
-&gt; the external monitor works out-of-box, which is nice progress.</span >
-
-vgaswitcheroo explicit control is for hard muxes. These were popular 2005 to
-2010 or so. You just have 2 GPUs. vgaswitcheroo reports whether they're on =
-or
-off, but that control is performed dynamically by the driver based on usage.
-
-<span class=3D"quote">&gt;=20
-&gt; Later on I will try to play with DRI_PRIME to enable also rendering wi=
-th the
-&gt; NVidia card.
-&gt;=20
-&gt; What could be the side effects of:
-&gt; &gt; kernel: nouveau 0000:01:00.0: DRM: failed to create kernel channe=
-l, -22
-&gt; ?</span >
-
-No acceleration. This means that DRI_PRIME will not do anything.
-
-<span class=3D"quote">&gt; There are also no reported providers in xrandr:
-&gt; &gt; $ xrandr --listproviders
-&gt; &gt; Providers: number: 0</span >
-
-This is incredibly odd -- there must always be at least 1! Are you running
-Xwayland or something? If so, the displays would be controlled through your
-wayland compositor. You can check that kms is working:
-
-grep . /sys/class/drm/card*-*/status
-
-You should see some card0-* and card1-* entries.</pre>
-        </div>
-      </p>
-
-
-      <hr>
-      <span>You are receiving this mail because:</span>
-
-      <ul>
-          <li>You are the assignee for the bug.</li>
-      </ul>
-    </body>
-</html>=
-
---15599136830.10E65.25825--
-
---===============0803200780==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
-YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
-cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
-
---===============0803200780==--
+SGkgSmFzb24sCgpPbiBUdWUsIE1heSAyMSwgMjAxOSBhdCAxMjoyNyBBTSBTb3VwdGljayBKb2Fy
+ZGVyIDxqcmRyLmxpbnV4QGdtYWlsLmNvbT4gd3JvdGU6Cj4KPiBDb252ZXJ0IHRvIHVzZSBobW1f
+cmFuZ2VfZmF1bHQoKS4KPgo+IFNpZ25lZC1vZmYtYnk6IFNvdXB0aWNrIEpvYXJkZXIgPGpyZHIu
+bGludXhAZ21haWwuY29tPgoKV291bGQgeW91IGxpa2UgdG8gdGFrZSBpdCB0aHJvdWdoIHlvdXIg
+bmV3IGhtbSB0cmVlIG9yIGRvIEkKbmVlZCB0byByZXNlbmQgaXQgPwoKPiAtLS0KPiAgZHJpdmVy
+cy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9zdm0uYyB8IDIgKy0KPiAgMSBmaWxlIGNoYW5nZWQs
+IDEgaW5zZXJ0aW9uKCspLCAxIGRlbGV0aW9uKC0pCj4KPiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9n
+cHUvZHJtL25vdXZlYXUvbm91dmVhdV9zdm0uYyBiL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25v
+dXZlYXVfc3ZtLmMKPiBpbmRleCA5M2VkNDNjLi44ZDU2YmQ2IDEwMDY0NAo+IC0tLSBhL2RyaXZl
+cnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfc3ZtLmMKPiArKysgYi9kcml2ZXJzL2dwdS9kcm0v
+bm91dmVhdS9ub3V2ZWF1X3N2bS5jCj4gQEAgLTY0OSw3ICs2NDksNyBAQCBzdHJ1Y3Qgbm91dmVh
+dV9zdm1tIHsKPiAgICAgICAgICAgICAgICAgcmFuZ2UudmFsdWVzID0gbm91dmVhdV9zdm1fcGZu
+X3ZhbHVlczsKPiAgICAgICAgICAgICAgICAgcmFuZ2UucGZuX3NoaWZ0ID0gTlZJRl9WTU1fUEZO
+TUFQX1YwX0FERFJfU0hJRlQ7Cj4gIGFnYWluOgo+IC0gICAgICAgICAgICAgICByZXQgPSBobW1f
+dm1hX2ZhdWx0KCZyYW5nZSwgdHJ1ZSk7Cj4gKyAgICAgICAgICAgICAgIHJldCA9IGhtbV9yYW5n
+ZV9mYXVsdCgmcmFuZ2UsIHRydWUpOwo+ICAgICAgICAgICAgICAgICBpZiAocmV0ID09IDApIHsK
+PiAgICAgICAgICAgICAgICAgICAgICAgICBtdXRleF9sb2NrKCZzdm1tLT5tdXRleCk7Cj4gICAg
+ICAgICAgICAgICAgICAgICAgICAgaWYgKCFobW1fdm1hX3JhbmdlX2RvbmUoJnJhbmdlKSkgewo+
+IC0tCj4gMS45LjEKPgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fXwpOb3V2ZWF1IG1haWxpbmcgbGlzdApOb3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpo
+dHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL25vdXZlYXU=
