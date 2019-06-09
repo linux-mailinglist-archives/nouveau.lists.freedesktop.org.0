@@ -2,50 +2,43 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 736633A6BB
-	for <lists+nouveau@lfdr.de>; Sun,  9 Jun 2019 18:10:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6D6D33A6CF
+	for <lists+nouveau@lfdr.de>; Sun,  9 Jun 2019 18:34:46 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 55DF0891A8;
-	Sun,  9 Jun 2019 16:10:38 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6998889561;
+	Sun,  9 Jun 2019 16:34:44 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ua1-x932.google.com (mail-ua1-x932.google.com
- [IPv6:2607:f8b0:4864:20::932])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 433DF891A8
- for <nouveau@lists.freedesktop.org>; Sun,  9 Jun 2019 16:10:37 +0000 (UTC)
-Received: by mail-ua1-x932.google.com with SMTP id j2so2231800uaq.5
- for <nouveau@lists.freedesktop.org>; Sun, 09 Jun 2019 09:10:37 -0700 (PDT)
+Received: from mail-ua1-f54.google.com (mail-ua1-f54.google.com
+ [209.85.222.54])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id DB3DA89561
+ for <nouveau@lists.freedesktop.org>; Sun,  9 Jun 2019 16:34:42 +0000 (UTC)
+Received: by mail-ua1-f54.google.com with SMTP id 7so2243140uah.1
+ for <nouveau@lists.freedesktop.org>; Sun, 09 Jun 2019 09:34:42 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=1tGwKEVeN8V5SG//Omz/8eFmvPwHCmmDKCqiROkdq54=;
- b=eF/J7xveo2W3BuRH3oSsI23Vt9Nmo41+3ipdEqwnXFmjj9shmlOzVEkM83g1jvfhXB
- oENbI+vuNnvdSAsnXtWWQD3VoCMlgCNolEC1ZECz3vObNZi9SokJVHY2rJPFn0U3k+hc
- eWBUlS4fm/ZeLCC69WCF6t3/AIwDh4DD82MDo3MMvsn0i6976f+CowLR2wezqdHdKJ/v
- FStZbw9bAKfPj8jGPBClqaBwuX0es3FR3KYWu1Ael6lwmGPhb5Gk+hw5DIKKjF1tsYtb
- a1fK0wfTazl98l7a8ZMABG7fO7+djxxY7etWl1X2rrelgJXq7uYvxY9IwglmvppwThlw
- q0iw==
-X-Gm-Message-State: APjAAAVrejpjjvVYQv+6Bj8Wz2NXL7MQPJT+Wgo4jPSqYeK0A2Kfm9Fn
- LKUI/A2zqa3962fVqIYRBsfYCchi9NGQzbCIeolxwxciSGw=
-X-Google-Smtp-Source: APXvYqxAlHLo9dXuZyFBEdVEIwQ/eIcn6Mvg9TsHjkz/JqkTucwgDQ6i+OdC1WaUWe2bCDaQc+c/8Flo4BS/16SAc9I=
-X-Received: by 2002:ab0:208f:: with SMTP id r15mr16558918uak.38.1560096636237; 
- Sun, 09 Jun 2019 09:10:36 -0700 (PDT)
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=90a6BeZaI7/Yc/jDPmqZId8bTjRyr+mq1Df7ygbU9q4=;
+ b=C6z305bzrqb8wEZ5+8slllCE9UDL+7zGsNvkk53Yjj+JW95GmvMRm9mbWZcq9PJ3+0
+ qN4uS5iofXn7BSpOZ7Dyl/iPg9dsxVZywobowoCTCreaTmcZYi1KOtg5mmSiPUS/pNjC
+ cc8k1MJEPMjV4XknlpVDe95aSaTA7g1lLTFZC09ZoA9KBqHIJdLTjOnXk6pGafykxyga
+ tOTAGVO4VbVlc0sA420qAvKCU2+RnFc9RFyjG28seFYhAFUC2YZEMgVO5Gt7wCROFy7A
+ BQJTSA+NjHF7av+LcUq2fG2XVxdkPHEI5NAWLHyZt6RAl6T68T7ST/Z8WOvGuzb91ARN
+ Ub0Q==
+X-Gm-Message-State: APjAAAV/iYz2erCtKGkZT1nUGsP5KrWpCELaiVQmVVB+lf2gVxkXrebv
+ JolUeMgJ3H7/034Tl3J+kIcGVCAwXuk39Phigxo=
+X-Google-Smtp-Source: APXvYqydCGk0IEm7t6xsrKFfjLBX2EHv3r48sSzguEQUl+bjvibPlfBmHW7CUBTSGvK+TbVxIxpuoitJ1Ym4TrS5p1k=
+X-Received: by 2002:ab0:2b0a:: with SMTP id e10mr5020144uar.109.1560098081926; 
+ Sun, 09 Jun 2019 09:34:41 -0700 (PDT)
 MIME-Version: 1.0
-From: Fernando Sahmkow <fsahmkow27@gmail.com>
-Date: Sun, 9 Jun 2019 12:10:25 -0400
-Message-ID: <CA+MSTo_dCwtDxwT+2z__8gKayXmMmpGox_rVTMT-9QYoJkZa7A@mail.gmail.com>
-To: nouveau@lists.freedesktop.org
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20161025;
- h=mime-version:from:date:message-id:subject:to;
- bh=1tGwKEVeN8V5SG//Omz/8eFmvPwHCmmDKCqiROkdq54=;
- b=KkIPye/W45G1kBTytIl147ZAgydoXDXyCItW0m2n9Iw4e9zoC2Jc/1QSf+MFOW5u1x
- /reBdIfhbYlUXExnr+zVc8shG6YQQeVHZdFB3JogSmcpiAQe3fEU08tGnv1s1yv9KJHs
- OoGXjIkPlGwZlmJJf1zWnYfwhh0GovyuyKx/73M6tuzRhVesmquPkhYeZ7ivyjqOLn3I
- G+UrlkUX1gAd6fxL+eOKBSjOsM3qp1mYJo84YCNT1uywYe0gvdiu+umyOuGr4YNtwWBm
- 3H91AO8BNM/vKrDXkv4iXoFNZXYaY1I7+i6or+Gv3mPM1zhXqJK+qo0A3/OUug2mI7R9
- KN1Q==
-Subject: [Nouveau] Questions on syncing mechanisms
+References: <CA+MSTo_dCwtDxwT+2z__8gKayXmMmpGox_rVTMT-9QYoJkZa7A@mail.gmail.com>
+In-Reply-To: <CA+MSTo_dCwtDxwT+2z__8gKayXmMmpGox_rVTMT-9QYoJkZa7A@mail.gmail.com>
+From: Ilia Mirkin <imirkin@alum.mit.edu>
+Date: Sun, 9 Jun 2019 12:34:30 -0400
+Message-ID: <CAKb7UvhU-fr+XBEnE_n7+vWvi_hX1NGTj64jKi_d-eE4sEE+bA@mail.gmail.com>
+To: Fernando Sahmkow <fsahmkow27@gmail.com>
+Subject: Re: [Nouveau] Questions on syncing mechanisms
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -57,65 +50,62 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0182240893=="
+Cc: nouveau <nouveau@lists.freedesktop.org>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
---===============0182240893==
-Content-Type: multipart/alternative; boundary="000000000000d18184058ae64d83"
-
---000000000000d18184058ae64d83
-Content-Type: text/plain; charset="UTF-8"
-
-So I have been implementing syncing mechanisms to yuzu's switch emulator,
-aka Tegra X1 emulation and I already have: Semaphores, Syncpoints and
-Queries to some extent. I'm missing the barriers (GPU waits for CPU):
-I got this from RE:
-Barrier mode has priority (from highest to lowest): 1) 0x08 sets needsWfi=0
--> highest priority, does puller refcnt + split(0,0) + 0x100 NoOperation +
-rest of cmds + split(1,1) 2) 0x01 sets needsWfi=0 -> uses 0x0110
-Serialize/"WaitForIdle" 3) 0x02 sets needsWfi=1 -> uses 0xDE0 (??) 4) 0x04
-sets needsWfi=1 -> uses 0xF7C (??) <-- tile related? Used by
-nvnQueue_ctrlTiledDownsample 5) nothing; sets needsWfi=0
- Do you guys know any info on this and how the GPU must behave in each
-situation. For instance, on Serialize, what should the GPU be waiting for?
-I do know you guys use that one not sure on the rest.
-
---000000000000d18184058ae64d83
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">So I have been implementing syncing mechanisms to yuzu&#39=
-;s switch emulator, aka Tegra X1 emulation and I already have: Semaphores, =
-Syncpoints and Queries to some extent. I&#39;m missing the barriers (GPU wa=
-its for CPU):<div dir=3D"ltr" class=3D"gmail_signature" data-smartmail=3D"g=
-mail_signature"></div><div>I got this from RE:</div><div><span style=3D"col=
-or:rgb(131,148,150);font-family:Consolas,&quot;Liberation Mono&quot;,Menlo,=
-Courier,monospace;font-size:14px;white-space:pre-wrap;background-color:rgb(=
-47,49,54)">Barrier mode has priority (from highest to lowest):
-
- 1) 0x08 sets needsWfi=3D0 -&gt; highest priority, does puller refcnt + spl=
-it(0,0) + 0x100 NoOperation + rest of cmds + split(1,1)
- 2) 0x01 sets needsWfi=3D0 -&gt; uses 0x0110 Serialize/&quot;WaitForIdle&qu=
-ot;
- 3) 0x02 sets needsWfi=3D1 -&gt; uses 0xDE0 (??)
- 4) 0x04 sets needsWfi=3D1 -&gt; uses 0xF7C (??) &lt;-- tile related? Used =
-by nvnQueue_ctrlTiledDownsample
- 5) nothing; sets needsWfi=3D0</span>=C2=A0</div><div>=C2=A0Do you guys kno=
-w any info on this and how the GPU must behave in each situation. For insta=
-nce, on Serialize, what should the GPU be waiting for? I do know you guys u=
-se that one not sure on the rest.<br></div></div>
-
---000000000000d18184058ae64d83--
-
---===============0182240893==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
-YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
-cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
-
---===============0182240893==--
+SGVyZSdzIHdoYXQgSSBrbm93LCB3aGljaCBtYXkgb3IgbWF5IG5vdCBiZSBhY2N1cmF0ZSwgYW5k
+IG1heSBvciBtYXkKbm90IGJlIGNvbXBsZXRlLiBZb3UndmUgYmVlbiB3YXJuZWQuCgpHUkFQSC5T
+RVJJQUxJWkUgKDB4MDExMCkKClRoaXMgaXMgYSBtZXRob2QgYXZhaWxhYmxlIG9uIGFsbCBHUkFQ
+SC1lbmdpbmUgY2xhc3NlcyAoYXQgbGVhc3QgM2QKYW5kIDJkKS4gV2hhdCB0aGlzIGRvZXMgaXMg
+dGhhdCBpdCB0ZWxscyB0aGUgR1JBUEggZW5naW5lIChub3QgRklGTyEpCnRvIHdhaXQgdW50aWwg
+YWxsIHByZXZpb3VzIGRyYXdzIGFyZSBkb25lIGJlZm9yZSB0YWtpbmcgYWN0aW9uIG9uCmNvbW1h
+bmRzIHRoYXQgZ28gYWZ0ZXIgdGhlIFNFUklBTElaRS4gVGhpcyBtYXkgYmUgZG9uZSBpZiB5b3Ug
+d2FudCB0bwplLmcuIHF1ZXJ5IHNvbWV0aGluZyBhYm91dCBhIGRyYXcsIGFuZCB5b3Ugd2FudCB0
+byBtYWtlIHN1cmUgdGhhdCBkcmF3CmNvbXBsZXRlcyBmaXJzdC4gSG93ZXZlciBub3RlIHRoYXQg
+dGhpcyBkb2VzIG5vdCBzdG9wIHByb2Nlc3NpbmcgYXQKdGhlIEZJRk8gbGV2ZWwgLSBpdCBrZWVw
+cyByZWFkaW5nIGFuZCBmaWxsaW5nIHRoZSBHUkFQSCBxdWV1ZS4KCldlIGFsc28gZG8gdGhpcyBp
+ZiB3ZSdyZSBhYm91dCB0byByZW5kZXIgdG8gYSB0ZXh0dXJlIHRoYXQgYSBwcmV2aW91cwpkcmF3
+IGlzIHJlYWRpbmcgZnJvbS4gV2UgY291bGQgd2FpdCBmb3IgZXZlcnl0aGluZyB0byBjbGVhciBv
+dXQgZmlyc3QsCmJ1dCBqdXN0IHN0aWNraW5nIGluIGEgU0VSSUFMSVpFIG1lYW5zIGxlc3MgR1BV
+IDwtPiBDUFUKc3luY2hyb25pemF0aW9uLgoKRklGTy5ZSUVMRCAoMHgwMDgwKQoKVGhpcyBpcyBp
+cyBhIEZJRk8gY29tbWFuZCAoYXZhaWxhYmxlIG9uIGFueSBzdWJjaGFuKSB0byBpbmRpY2F0ZSB0
+aGF0CnRoZSBGSUZPIHNob3VsZCBzd2l0Y2ggdG8gYW5vdGhlciBjaGFubmVsIHdpdGhvdXQgd2Fp
+dGluZyBmb3IgaXRzCnRpbWVzbGljZSB0byBiZSBvdmVyLgoKRklGTy5TRU1BUEhPUkVfVFJJR0dF
+UiAoMHgwMDFjKQoKVGhpcyB0ZWxscyB0aGUgRklGTyB0byB3YWl0IGJlZm9yZSBwcm9jZXNzaW5n
+IGFueSBhZGRpdGlvbmFsIGNvbW1hbmRzCnVudGlsIHRoZSBjb25kaXRpb24gaW4gdGhlIEFDVElP
+TiBmaWVsZCBpcyBtZXQuIFVzdWFsbHkgZG9uZSB0byBlbnN1cmUKdGhhdCBzb21lIGluY3JlbWVu
+dGluZyBzZXF1ZW5jZSBudW1iZXIgaXMgaGl0IGF0IHNvbWUgbWVtb3J5IGFkZHJlc3MuCihUaGlz
+IGluY3JlbWVudGluZyBzZXF1ZW5jZSBudW1iZXIgaXMgdXN1YWxseSBrbm93biBhcyBhICJmZW5j
+ZSIuKQpUaGlzIGlzIGRvbmUgZm9yIGludGVyLWVuZ2luZSBzeW5jLCB3aGVyZSB5b3UgY2FuJ3Qg
+anVzdCByZWx5IG9uIEdSQVBICnRvIHByb2Nlc3MgY29tbWFuZHMgc2VxdWVudGlhbGx5LiBGb3Ig
+ZXhhbXBsZSBsZXQncyBzYXkgeW91IHdhbnQgdG8KY29weSBmcm9tIGEgcmVuZGVyZWQgc3VyZmFj
+ZSBzb21ld2hlcmUgdXNpbmcgdGhlIEZJRk8tYmFzZWQgY29weQplbmdpbmUsIHlvdSBoYXZlIHRv
+IHdhaXQgZm9yIHRoYXQgZHJhdyB0byBmaW5pc2ggZmlyc3QsIGFuZCB5b3UgbWlnaHQKdXNlIFNF
+TUFQSE9SRV9UUklHR0VSIHRvIGRvIHRoYXQuCgpUaGVyZSdzIG1vcmUgb24gc29tZSBvZiB0aGlz
+IGhlcmU6CgpodHRwczovL2Vudnl0b29scy5yZWFkdGhlZG9jcy5pby9lbi9sYXRlc3QvaHcvZmlm
+by9wdWxsZXIuaHRtbCNwdWxsZXItYnVpbHRpbi1tZXRob2RzCgpPbiBTdW4sIEp1biA5LCAyMDE5
+IGF0IDEyOjExIFBNIEZlcm5hbmRvIFNhaG1rb3cgPGZzYWhta293MjdAZ21haWwuY29tPiB3cm90
+ZToKPgo+IFNvIEkgaGF2ZSBiZWVuIGltcGxlbWVudGluZyBzeW5jaW5nIG1lY2hhbmlzbXMgdG8g
+eXV6dSdzIHN3aXRjaCBlbXVsYXRvciwgYWthIFRlZ3JhIFgxIGVtdWxhdGlvbiBhbmQgSSBhbHJl
+YWR5IGhhdmU6IFNlbWFwaG9yZXMsIFN5bmNwb2ludHMgYW5kIFF1ZXJpZXMgdG8gc29tZSBleHRl
+bnQuIEknbSBtaXNzaW5nIHRoZSBiYXJyaWVycyAoR1BVIHdhaXRzIGZvciBDUFUpOgo+IEkgZ290
+IHRoaXMgZnJvbSBSRToKPiBCYXJyaWVyIG1vZGUgaGFzIHByaW9yaXR5IChmcm9tIGhpZ2hlc3Qg
+dG8gbG93ZXN0KTogMSkgMHgwOCBzZXRzIG5lZWRzV2ZpPTAgLT4gaGlnaGVzdCBwcmlvcml0eSwg
+ZG9lcyBwdWxsZXIgcmVmY250ICsgc3BsaXQoMCwwKSArIDB4MTAwIE5vT3BlcmF0aW9uICsgcmVz
+dCBvZiBjbWRzICsgc3BsaXQoMSwxKSAyKSAweDAxIHNldHMgbmVlZHNXZmk9MCAtPiB1c2VzIDB4
+MDExMCBTZXJpYWxpemUvIldhaXRGb3JJZGxlIiAzKSAweDAyIHNldHMgbmVlZHNXZmk9MSAtPiB1
+c2VzIDB4REUwICg/PykgNCkgMHgwNCBzZXRzIG5lZWRzV2ZpPTEgLT4gdXNlcyAweEY3QyAoPz8p
+IDwtLSB0aWxlIHJlbGF0ZWQ/IFVzZWQgYnkgbnZuUXVldWVfY3RybFRpbGVkRG93bnNhbXBsZSA1
+KSBub3RoaW5nOyBzZXRzIG5lZWRzV2ZpPTAKPiAgRG8geW91IGd1eXMga25vdyBhbnkgaW5mbyBv
+biB0aGlzIGFuZCBob3cgdGhlIEdQVSBtdXN0IGJlaGF2ZSBpbiBlYWNoIHNpdHVhdGlvbi4gRm9y
+IGluc3RhbmNlLCBvbiBTZXJpYWxpemUsIHdoYXQgc2hvdWxkIHRoZSBHUFUgYmUgd2FpdGluZyBm
+b3I/IEkgZG8ga25vdyB5b3UgZ3V5cyB1c2UgdGhhdCBvbmUgbm90IHN1cmUgb24gdGhlIHJlc3Qu
+Cj4gX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KPiBOb3V2
+ZWF1IG1haWxpbmcgbGlzdAo+IE5vdXZlYXVAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCj4gaHR0cHM6
+Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1Cl9fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCk5vdXZlYXUgbWFpbGluZyBs
+aXN0Ck5vdXZlYXVAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0
+b3Aub3JnL21haWxtYW4vbGlzdGluZm8vbm91dmVhdQ==
