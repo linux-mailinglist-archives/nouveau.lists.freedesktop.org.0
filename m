@@ -2,69 +2,69 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6153044C30
-	for <lists+nouveau@lfdr.de>; Thu, 13 Jun 2019 21:34:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1CD2544C40
+	for <lists+nouveau@lfdr.de>; Thu, 13 Jun 2019 21:37:34 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id DE5FD89933;
-	Thu, 13 Jun 2019 19:34:35 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A69FB89944;
+	Thu, 13 Jun 2019 19:37:32 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from EUR03-VE1-obe.outbound.protection.outlook.com
- (mail-ve1eur03on061d.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:fe09::61d])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A61EF896E7;
- Thu, 13 Jun 2019 19:34:34 +0000 (UTC)
+Received: from EUR03-DB5-obe.outbound.protection.outlook.com
+ (mail-db5eur03on0607.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:fe0a::607])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 888CB89944;
+ Thu, 13 Jun 2019 19:37:30 +0000 (UTC)
 Received: from VI1PR05MB4141.eurprd05.prod.outlook.com (10.171.182.144) by
  VI1PR05MB4703.eurprd05.prod.outlook.com (20.176.4.12) with Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.1987.10; Thu, 13 Jun 2019 19:34:31 +0000
+ 15.20.1987.10; Thu, 13 Jun 2019 19:37:28 +0000
 Received: from VI1PR05MB4141.eurprd05.prod.outlook.com
  ([fe80::c16d:129:4a40:9ba1]) by VI1PR05MB4141.eurprd05.prod.outlook.com
  ([fe80::c16d:129:4a40:9ba1%6]) with mapi id 15.20.1987.012; Thu, 13 Jun 2019
- 19:34:31 +0000
+ 19:37:28 +0000
 From: Jason Gunthorpe <jgg@mellanox.com>
 To: Christoph Hellwig <hch@lst.de>
-Thread-Topic: [PATCH 09/22] memremap: lift the devmap_enable manipulation into
- devm_memremap_pages
-Thread-Index: AQHVIcyGh+LZVhNi2EuUux9FsS41VqaZ+m2A
-Date: Thu, 13 Jun 2019 19:34:31 +0000
-Message-ID: <20190613193427.GU22062@mellanox.com>
+Thread-Topic: [PATCH 11/22] memremap: remove the data field in struct
+ dev_pagemap
+Thread-Index: AQHVIcyJQUnvCVRSIE2bb/Jw4XNupaaZ+z0A
+Date: Thu, 13 Jun 2019 19:37:27 +0000
+Message-ID: <20190613193722.GV22062@mellanox.com>
 References: <20190613094326.24093-1-hch@lst.de>
- <20190613094326.24093-10-hch@lst.de>
-In-Reply-To: <20190613094326.24093-10-hch@lst.de>
+ <20190613094326.24093-12-hch@lst.de>
+In-Reply-To: <20190613094326.24093-12-hch@lst.de>
 Accept-Language: en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
-x-clientproxiedby: BL0PR02CA0046.namprd02.prod.outlook.com
- (2603:10b6:207:3d::23) To VI1PR05MB4141.eurprd05.prod.outlook.com
+x-clientproxiedby: BL0PR0102CA0026.prod.exchangelabs.com
+ (2603:10b6:207:18::39) To VI1PR05MB4141.eurprd05.prod.outlook.com
  (2603:10a6:803:4d::16)
 x-ms-exchange-messagesentrepresentingtype: 1
 x-originating-ip: [156.34.55.100]
 x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 2344bec2-d78c-4486-b0bc-08d6f0362814
+x-ms-office365-filtering-correlation-id: 907cdff8-e256-466c-f3e4-08d6f036912d
 x-ms-office365-filtering-ht: Tenant
 x-microsoft-antispam: BCL:0; PCL:0;
  RULEID:(2390118)(7020095)(4652040)(8989299)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(5600148)(711020)(4605104)(1401327)(4618075)(2017052603328)(7193020);
  SRVR:VI1PR05MB4703; 
 x-ms-traffictypediagnostic: VI1PR05MB4703:
-x-microsoft-antispam-prvs: <VI1PR05MB4703615FBFE57552FC7A5F3ECFEF0@VI1PR05MB4703.eurprd05.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:5236;
+x-microsoft-antispam-prvs: <VI1PR05MB4703809C46130FB7F4861F17CFEF0@VI1PR05MB4703.eurprd05.prod.outlook.com>
+x-ms-oob-tlc-oobclassifiers: OLM:281;
 x-forefront-prvs: 0067A8BA2A
 x-forefront-antispam-report: SFV:NSPM;
- SFS:(10009020)(979002)(136003)(366004)(376002)(346002)(39860400002)(396003)(189003)(199004)(43544003)(25786009)(71190400001)(2616005)(316002)(256004)(446003)(71200400001)(68736007)(476003)(11346002)(26005)(99286004)(76176011)(386003)(229853002)(52116002)(66066001)(6116002)(53936002)(3846002)(66946007)(2906002)(6916009)(6506007)(102836004)(6246003)(6436002)(54906003)(66446008)(66556008)(486006)(64756008)(66476007)(14454004)(6486002)(478600001)(73956011)(86362001)(81166006)(305945005)(81156014)(7736002)(8936002)(186003)(5660300002)(7416002)(1076003)(36756003)(4326008)(4744005)(6512007)(8676002)(33656002)(969003)(989001)(999001)(1009001)(1019001);
+ SFS:(10009020)(396003)(39860400002)(346002)(376002)(366004)(136003)(199004)(189003)(7736002)(81156014)(305945005)(8936002)(81166006)(478600001)(73956011)(6486002)(14454004)(86362001)(4744005)(4326008)(36756003)(6512007)(8676002)(33656002)(186003)(7416002)(5660300002)(1076003)(229853002)(99286004)(52116002)(386003)(76176011)(316002)(256004)(25786009)(2616005)(71190400001)(11346002)(476003)(26005)(446003)(68736007)(71200400001)(6436002)(66446008)(54906003)(66476007)(64756008)(486006)(66556008)(3846002)(53936002)(6116002)(66946007)(66066001)(6246003)(102836004)(6916009)(2906002)(6506007);
  DIR:OUT; SFP:1101; SCL:1; SRVR:VI1PR05MB4703;
  H:VI1PR05MB4141.eurprd05.prod.outlook.com; FPR:; SPF:None; LANG:en;
- PTR:InfoNoRecords; MX:1; A:1; 
+ PTR:InfoNoRecords; A:1; MX:1; 
 received-spf: None (protection.outlook.com: mellanox.com does not designate
  permitted sender hosts)
 x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam-message-info: 2nSk9n4j3C4hJek/u+dZ6x7dV3tjTsGkUY3UXBXRkHKaWJqXhdg8ZS34cQZL7GwgyF5/MSzAJhv2aUAjjtk8CRvLzUVGNduiTuQkZy3Kv+MZPwfJIT90IFGBZ/ZsH3qZoh/CPWzTLkRl4wuE3WtmH20XC331wtkLzLWek4XEe0R+LNOkx+Hp/SCi2uxUbb7ts65BsfUxQNVpaOPGaYiTXZ2cklEw1b8NCzBt7dR1vWFs9sxDlNJ47eMYM+Bo+bdfGOd5g+9egoEaH5hhoSSUEnB25YzaoPWpks/1OJjOwTG1qouPEkgHuHQomu5+xxWhDy/fHuXrTHWkWiYva0Hxy3ILfkB1RQoRgbijiJvrA35MkyYBW3WSRajPXlSEBpJNXi4TzI+dMNkmRB5ftUjxHXdrJM09OJwhUKDw/JKjuRo=
-Content-ID: <2494E1C39D43164DA0596E93A4038E37@eurprd05.prod.outlook.com>
+x-microsoft-antispam-message-info: Z4vP3UlC5xby6GoAzbIvFJnRyDvBvzto7/5u8I8QrQHRW7bdV+01Dd935kVu3GmRGelDhVwrMBg70UAGFS/gR5pOQFYjBuVg9zORQBnONNsY5Ed64myCE/K4zNNawxbPXaoR83hcA/qd5GfI/ddoc2pF66qJuOjG51b4kBZFlZxgM5Odjo6ThEfmyeJ3+cmXbeinYqi9sdVyHzfCSx2aESLdIhexmxRamCfh7QcCxb+5B99JEQ3uCfpuTFKJrX198C1qPTGkNdE41GmkK64PzqyRkbEDkQWbkEgIOdsT+EjY2wBdKBmM5u0MpztvNnpX0Ge2f1QdgEihksR3fcM2GkiTWOXSACyconHTTioeGVBx2vbReMo+Tarxm8YqRkbspisO33CqZRHJ9DW2ZYDScE4OFCrtlfnbbqtKm7AAg9M=
+Content-ID: <9EE56540715B244EBE0C89B76768CFAF@eurprd05.prod.outlook.com>
 MIME-Version: 1.0
 X-OriginatorOrg: Mellanox.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2344bec2-d78c-4486-b0bc-08d6f0362814
-X-MS-Exchange-CrossTenant-originalarrivaltime: 13 Jun 2019 19:34:31.3397 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 907cdff8-e256-466c-f3e4-08d6f036912d
+X-MS-Exchange-CrossTenant-originalarrivaltime: 13 Jun 2019 19:37:27.9159 (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: a652971c-7d2e-4d9b-a6a4-d149256f461b
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
@@ -73,12 +73,12 @@ X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR05MB4703
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=Mellanox.com; s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=EHKRMNw9g2ihF+kxFu2QxbCGLLD+Dv1zpejuy8kLLZA=;
- b=iUpnm6J9uAc2yjehlZggxWFZYnKjETahRTv9czZSJmRWPzW0c51V9hOVdRyMTHee9htECLtgsjxbSbXXTMK9Qo8zztfp4DzvDNdvYkG9j5XEA3xndXD0rPc3xF4w+ErYDv17IJNFO1S+2JDvJIZa+4wCOKDxz2p2P1kLyObkgUk=
+ bh=KqVMVbmuBMLCfrrJsLkvyOSYFtdu1jpJ2fCQlvBuFnA=;
+ b=Qt3C9kNsuyNWRihe9lrn0qa7iUaXO6uzsV2nd+cx8JBB3gZ8ywF0zBRH3FE4lXFypy0IjTL9mpTH1w68WFIFh+xz9C38mH757ZYFqq2/8D+NmDYALJr1cUVuFcAuMw385iVa4sGMFGLCpmliyoBT1GqpGsQQLsApOFG576vtKZc=
 X-Mailman-Original-Authentication-Results: spf=none (sender IP is )
  smtp.mailfrom=jgg@mellanox.com; 
-Subject: Re: [Nouveau] [PATCH 09/22] memremap: lift the devmap_enable
- manipulation into devm_memremap_pages
+Subject: Re: [Nouveau] [PATCH 11/22] memremap: remove the data field in
+ struct dev_pagemap
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -102,22 +102,15 @@ Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-T24gVGh1LCBKdW4gMTMsIDIwMTkgYXQgMTE6NDM6MTJBTSArMDIwMCwgQ2hyaXN0b3BoIEhlbGx3
-aWcgd3JvdGU6Cj4gSnVzdCBjaGVjayBpZiB0aGVyZSBpcyBhIC0+cGFnZV9mcmVlIG9wZXJhdGlv
-biBzZXQgYW5kIHRha2UgY2FyZSBvZiB0aGUKPiBzdGF0aWMga2V5IGVuYWJsZSwgYXMgd2VsbCBh
-cyB0aGUgcHV0IHVzaW5nIGRldmljZSBtYW5hZ2VkIHJlc291cmNlcy4KPiBkaWZmIC0tZ2l0IGEv
-bW0vaG1tLmMgYi9tbS9obW0uYwo+IGluZGV4IGM3NmExYjVkZWZkYS4uNmRjNzY5ZmViMmUxIDEw
-MDY0NAo+ICsrKyBiL21tL2htbS5jCj4gQEAgLTEzNzgsOCArMTM3OCw2IEBAIHN0cnVjdCBobW1f
-ZGV2bWVtICpobW1fZGV2bWVtX2FkZChjb25zdCBzdHJ1Y3QgaG1tX2Rldm1lbV9vcHMgKm9wcywK
-PiAgCXZvaWQgKnJlc3VsdDsKPiAgCWludCByZXQ7Cj4gIAo+IC0JZGV2X3BhZ2VtYXBfZ2V0X29w
-cygpOwo+IC0KCldoZXJlIHdhcyB0aGUgbWF0Y2hpbmcgZGV2X3BhZ2VtYXBfcHV0X29wcygpIGZv
-ciB0aGlzIGhtbSBjYXNlPyBUaGlzCmlzIGEgYnVnIGZpeCB0b28/CgpUaGUgbm91dmVhdSBkcml2
-ZXIgaXMgdGhlIG9ubHkgb25lIHRvIGFjdHVhbGx5IGNhbGwgdGhpcyBobW0gZnVuY3Rpb24KYW5k
-IGl0IGRvZXMgaXQgYXMgcGFydCBvZiBhIHByb2JlIGZ1bmN0aW9uLiAKClNlZW1zIHJlYXNvbmFi
-bGUsIGhvd2V2ZXIsIGluIHRoZSB1bmxpa2VseSBldmVudCB0aGF0IGl0IGZhaWxzIHRvIGluaXQK
-J2RtZW0nIHRoZSBkcml2ZXIgd2lsbCByZXRhaW4gYSBkZXZfcGFnZW1hcF9nZXRfb3BzIHVudGls
-IGl0IHVubG9hZHMuClRoaXMgaW1iYWxhbmNlIGRvZXNuJ3Qgc2VlbSB3b3J0aCB3b3JyeWluZyBh
-Ym91dC4KClJldmlld2VkLWJ5OiBDaHJpc3RvcGggSGVsbHdpZyA8aGNoQGxzdC5kZT4KCkphc29u
-Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCk5vdXZlYXUg
-bWFpbGluZyBsaXN0Ck5vdXZlYXVAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMu
-ZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vbm91dmVhdQ==
+T24gVGh1LCBKdW4gMTMsIDIwMTkgYXQgMTE6NDM6MTRBTSArMDIwMCwgQ2hyaXN0b3BoIEhlbGx3
+aWcgd3JvdGU6Cj4gc3RydWN0IGRldl9wYWdlbWFwIGlzIGFsd2F5cyBlbWJlZGRlZCBpbnRvIGEg
+Y29udGFpbmluZyBzdHJ1Y3R1cmUsIHNvCj4gdGhlcmUgaXMgbm8gbmVlZCB0byBhbiBhZGRpdGlv
+bmFsIHByaXZhdGUgZGF0YSBmaWVsZC4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBDaHJpc3RvcGggSGVs
+bHdpZyA8aGNoQGxzdC5kZT4KPiAtLS0KPiAgZHJpdmVycy9udmRpbW0vcG1lbS5jICAgIHwgMiAr
+LQo+ICBpbmNsdWRlL2xpbnV4L21lbXJlbWFwLmggfCAzICstLQo+ICBrZXJuZWwvbWVtcmVtYXAu
+YyAgICAgICAgfCAyICstCj4gIG1tL2htbS5jICAgICAgICAgICAgICAgICB8IDkgKysrKystLS0t
+Cj4gIDQgZmlsZXMgY2hhbmdlZCwgOCBpbnNlcnRpb25zKCspLCA4IGRlbGV0aW9ucygtKQoKUmV2
+aWV3ZWQtYnk6IEphc29uIEd1bnRob3JwZSA8amdnQG1lbGxhbm94LmNvbT4KCkphc29uCl9fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCk5vdXZlYXUgbWFpbGlu
+ZyBsaXN0Ck5vdXZlYXVAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRl
+c2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vbm91dmVhdQ==
