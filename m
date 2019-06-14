@@ -1,58 +1,46 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 79EFC46AF4
-	for <lists+nouveau@lfdr.de>; Fri, 14 Jun 2019 22:39:37 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id A812246BC5
+	for <lists+nouveau@lfdr.de>; Fri, 14 Jun 2019 23:19:44 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 15C89898D9;
-	Fri, 14 Jun 2019 20:37:44 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7157289939;
+	Fri, 14 Jun 2019 21:19:42 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ed1-x543.google.com (mail-ed1-x543.google.com
- [IPv6:2a00:1450:4864:20::543])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 063088982E
- for <nouveau@lists.freedesktop.org>; Fri, 14 Jun 2019 20:37:24 +0000 (UTC)
-Received: by mail-ed1-x543.google.com with SMTP id a14so5201767edv.12
- for <nouveau@lists.freedesktop.org>; Fri, 14 Jun 2019 13:37:23 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=vWZfr7ISqOyco6qNaCIPedeBWFUOnZ0cxqOqxgRLM1c=;
- b=gtQJ6D/N6QW1pdR+WqyY9c43kcD4N5Ohrv/mcgopXzlwFFMIgREB0jvOdUFQ04TS24
- AqRxmDO/JTj3TXp5E+S1lG804H3HQ9wclDnRF8SQhpdhgQB+6bzpJA+cHnPOCR4TkF7a
- ta4Ge7hiKrhL5pVcm+3i+HancC4ZLoa06ACJN8PseJl7K+mFj+uNyw6xfgQwszrcIp4u
- YTLD2N/8r+sbirGWXblkOcGS3P7ptkUFVJre4tAtOv+U7b5hbzvQW1wJClHCyzIsIsue
- e7wpSSKqztyZzaODbyxq09OshSOXHf1rQDeprwOsYoHby2lr1vhk8st1JCUSylE6vLJM
- MRhw==
-X-Gm-Message-State: APjAAAUNSJrnd2FgkId6oUUNQXEmDF9F3lcQPjCiZnN2kAf5x20MSCqU
- xJunKQtc1JljbRLb0cO6LB8cTbx03is=
-X-Google-Smtp-Source: APXvYqxXisqjXAGwJYNYQFGPAnSwdHNq8sqM4urZEAZvheKiO7AhJJMJfR+SMYwbKK1SNED/AkO0FA==
-X-Received: by 2002:a05:6402:78c:: with SMTP id
- d12mr43020119edy.160.1560544641469; 
- Fri, 14 Jun 2019 13:37:21 -0700 (PDT)
-Received: from phenom.ffwll.local ([2a02:168:569e:0:3106:d637:d723:e855])
- by smtp.gmail.com with ESMTPSA id n15sm1166672edd.49.2019.06.14.13.37.20
- (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
- Fri, 14 Jun 2019 13:37:20 -0700 (PDT)
-From: Daniel Vetter <daniel.vetter@ffwll.ch>
-To: DRI Development <dri-devel@lists.freedesktop.org>
-Date: Fri, 14 Jun 2019 22:36:08 +0200
-Message-Id: <20190614203615.12639-53-daniel.vetter@ffwll.ch>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20190614203615.12639-1-daniel.vetter@ffwll.ch>
-References: <20190614203615.12639-1-daniel.vetter@ffwll.ch>
+Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
+ [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 7E1948995F
+ for <nouveau@lists.freedesktop.org>; Fri, 14 Jun 2019 21:19:41 +0000 (UTC)
+Received: by culpepper.freedesktop.org (Postfix, from userid 33)
+ id 78CDE72167; Fri, 14 Jun 2019 21:19:41 +0000 (UTC)
+From: bugzilla-daemon@freedesktop.org
+To: nouveau@lists.freedesktop.org
+Date: Fri, 14 Jun 2019 21:19:41 +0000
+X-Bugzilla-Reason: AssignedTo
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: None
+X-Bugzilla-Product: xorg
+X-Bugzilla-Component: Driver/nouveau
+X-Bugzilla-Version: 7.7 (2012.06)
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: normal
+X-Bugzilla-Who: mszpak@wp.pl
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: medium
+X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: 
+Message-ID: <bug-110830-8800-KKYpamPkN3@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-110830-8800@http.bugs.freedesktop.org/>
+References: <bug-110830-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ffwll.ch; s=google;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=vWZfr7ISqOyco6qNaCIPedeBWFUOnZ0cxqOqxgRLM1c=;
- b=Qrb+VSRzlRZ2oXsBsEE1LUi96MXc8Vn65XYVQ8Klpnx8wthebGTwxUhN0oQPU7LiK5
- /ncXlylhp5U4662Eje2eGtBiaBiExCA792Vlvi3EmJoyDoeoCS8OLz5j/WXnqteLZICY
- wedESWhOjg3HKaUCT9THJF4TUAMmeVnDrR2Ss=
-Subject: [Nouveau] [PATCH 52/59] drm/nouveau: Fill out gem_object->resv
+Subject: [Nouveau] [Bug 110830] [nouveau] GeForce GTX 1660 Ti (mobile) not
+ supported (NV168/TU116)
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -64,73 +52,127 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org,
- Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
- Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel.vetter@intel.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============0650763090=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-VGhhdCB3YXkgd2UgY2FuIGRpdGNoIG91ciBnZW1fcHJpbWVfcmVzX29iaiBpbXBsZW1lbnRhdGlv
-bi4gU2luY2UgdHRtCmFic29sdXRlbHkgbmVlZHMgdGhlIHJpZ2h0IHJlc2VydmF0aW9uIG9iamVj
-dCBhbGwgdGhlIGJvaWxlcnBsYXRlIGlzCmFscmVhZHkgdGhlcmUgYW5kIHdlIGp1c3QgaGF2ZSB0
-byB3aXJlIGl0IHVwIGNvcnJlY3RseS4KCk5vdGUgdGhhdCBnZW0vcHJpbWUgZG9lc24ndCBjYXJl
-IHdoZW4gd2UgZG8gdGhpcywgYXMgbG9uZyBhcyB3ZSBkbyBpdApiZWZvcmUgdGhlIGJvIGlzIHJl
-Z2lzdGVyZWQgYW5kIHNvbWVvbmUgY2FuIGNhbGwgdGhlIGhhbmRsZTJmZCBpb2N0bApvbiBpdC4K
-CkFzaWRlOiB0dG1fYnVmZmVyX29iamVjdC50dG1fcmVzdiBjb3VsZCBwcm9iYWJseSBiZSBkaXRj
-aGVkIGluIGZhdm91cgpvZiBhbHdheXMgcGFzc2luZyBhIG5vbi1OVUxMIHJlc3YgdG8gdHRtX2Jv
-X2luaXQoKS4gQXQgbGVhc3QgZm9yIGdlbQpkcml2ZXJzIHRoYXQgd291bGQgYXZvaWQgaGF2aW5n
-IHR3byBvZiB0aGVzZSwgb24gaW4gdHRtX2J1ZmZlcl9vYmplY3QKYW5kIHRoZSBvdGhlciBpbiBk
-cm1fZ2VtX29iamVjdCwgb25lIGp1c3QgdGhlcmUgZm9yIGNvbmZ1c2lvbi4KClNpZ25lZC1vZmYt
-Ynk6IERhbmllbCBWZXR0ZXIgPGRhbmllbC52ZXR0ZXJAaW50ZWwuY29tPgpDYzogQmVuIFNrZWdn
-cyA8YnNrZWdnc0ByZWRoYXQuY29tPgpDYzogbm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcK
-LS0tCiBkcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2JvLmMgICAgfCAyICsrCiBkcml2
-ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2RybS5jICAgfCAxIC0KIGRyaXZlcnMvZ3B1L2Ry
-bS9ub3V2ZWF1L25vdXZlYXVfZ2VtLmggICB8IDEgLQogZHJpdmVycy9ncHUvZHJtL25vdXZlYXUv
-bm91dmVhdV9wcmltZS5jIHwgNyAtLS0tLS0tCiA0IGZpbGVzIGNoYW5nZWQsIDIgaW5zZXJ0aW9u
-cygrKSwgOSBkZWxldGlvbnMoLSkKCmRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0vbm91dmVh
-dS9ub3V2ZWF1X2JvLmMgYi9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2JvLmMKaW5k
-ZXggMzRhOTk4MDEyYmY2Li42ZjEyMTdiM2U2YjkgMTAwNjQ0Ci0tLSBhL2RyaXZlcnMvZ3B1L2Ry
-bS9ub3V2ZWF1L25vdXZlYXVfYm8uYworKysgYi9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2
-ZWF1X2JvLmMKQEAgLTI5OSw2ICsyOTksOCBAQCBub3V2ZWF1X2JvX25ldyhzdHJ1Y3Qgbm91dmVh
-dV9jbGkgKmNsaSwgdTY0IHNpemUsIGludCBhbGlnbiwKIAkJCSAgdHlwZSwgJm52Ym8tPnBsYWNl
-bWVudCwKIAkJCSAgYWxpZ24gPj4gUEFHRV9TSElGVCwgZmFsc2UsIGFjY19zaXplLCBzZywKIAkJ
-CSAgcm9iaiwgbm91dmVhdV9ib19kZWxfdHRtKTsKKwludmJvLT5nZW0ucmVzdiA9IG52Ym8tPmJv
-LnJlc3Y7CisKIAlpZiAocmV0KSB7CiAJCS8qIHR0bSB3aWxsIGNhbGwgbm91dmVhdV9ib19kZWxf
-dHRtIGlmIGl0IGZhaWxzLi4gKi8KIAkJcmV0dXJuIHJldDsKZGlmZiAtLWdpdCBhL2RyaXZlcnMv
-Z3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfZHJtLmMgYi9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9u
-b3V2ZWF1X2RybS5jCmluZGV4IDQzNzdiODM2MjY1Zi4uMmMzNjMxOWMxNThmIDEwMDY0NAotLS0g
-YS9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2RybS5jCisrKyBiL2RyaXZlcnMvZ3B1
-L2RybS9ub3V2ZWF1L25vdXZlYXVfZHJtLmMKQEAgLTExMzEsNyArMTEzMSw2IEBAIGRyaXZlcl9z
-dHViID0gewogCS5wcmltZV9oYW5kbGVfdG9fZmQgPSBkcm1fZ2VtX3ByaW1lX2hhbmRsZV90b19m
-ZCwKIAkucHJpbWVfZmRfdG9faGFuZGxlID0gZHJtX2dlbV9wcmltZV9mZF90b19oYW5kbGUsCiAJ
-LmdlbV9wcmltZV9waW4gPSBub3V2ZWF1X2dlbV9wcmltZV9waW4sCi0JLmdlbV9wcmltZV9yZXNf
-b2JqID0gbm91dmVhdV9nZW1fcHJpbWVfcmVzX29iaiwKIAkuZ2VtX3ByaW1lX3VucGluID0gbm91
-dmVhdV9nZW1fcHJpbWVfdW5waW4sCiAJLmdlbV9wcmltZV9nZXRfc2dfdGFibGUgPSBub3V2ZWF1
-X2dlbV9wcmltZV9nZXRfc2dfdGFibGUsCiAJLmdlbV9wcmltZV9pbXBvcnRfc2dfdGFibGUgPSBu
-b3V2ZWF1X2dlbV9wcmltZV9pbXBvcnRfc2dfdGFibGUsCmRpZmYgLS1naXQgYS9kcml2ZXJzL2dw
-dS9kcm0vbm91dmVhdS9ub3V2ZWF1X2dlbS5oIGIvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91
-dmVhdV9nZW0uaAppbmRleCBmZTM5OTk4ZjY1Y2MuLjlkZWEwMTUzODdmZCAxMDA2NDQKLS0tIGEv
-ZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9nZW0uaAorKysgYi9kcml2ZXJzL2dwdS9k
-cm0vbm91dmVhdS9ub3V2ZWF1X2dlbS5oCkBAIC0zMyw3ICszMyw2IEBAIGV4dGVybiBpbnQgbm91
-dmVhdV9nZW1faW9jdGxfaW5mbyhzdHJ1Y3QgZHJtX2RldmljZSAqLCB2b2lkICosCiAJCQkJICBz
-dHJ1Y3QgZHJtX2ZpbGUgKik7CiAKIGV4dGVybiBpbnQgbm91dmVhdV9nZW1fcHJpbWVfcGluKHN0
-cnVjdCBkcm1fZ2VtX29iamVjdCAqKTsKLXN0cnVjdCByZXNlcnZhdGlvbl9vYmplY3QgKm5vdXZl
-YXVfZ2VtX3ByaW1lX3Jlc19vYmooc3RydWN0IGRybV9nZW1fb2JqZWN0ICopOwogZXh0ZXJuIHZv
-aWQgbm91dmVhdV9nZW1fcHJpbWVfdW5waW4oc3RydWN0IGRybV9nZW1fb2JqZWN0ICopOwogZXh0
-ZXJuIHN0cnVjdCBzZ190YWJsZSAqbm91dmVhdV9nZW1fcHJpbWVfZ2V0X3NnX3RhYmxlKHN0cnVj
-dCBkcm1fZ2VtX29iamVjdCAqKTsKIGV4dGVybiBzdHJ1Y3QgZHJtX2dlbV9vYmplY3QgKm5vdXZl
-YXVfZ2VtX3ByaW1lX2ltcG9ydF9zZ190YWJsZSgKZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2Ry
-bS9ub3V2ZWF1L25vdXZlYXVfcHJpbWUuYyBiL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZl
-YXVfcHJpbWUuYwppbmRleCAxZmVmYzkzYWYxZDcuLmVjNTAwMTc2OTJkNCAxMDA2NDQKLS0tIGEv
-ZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9wcmltZS5jCisrKyBiL2RyaXZlcnMvZ3B1
-L2RybS9ub3V2ZWF1L25vdXZlYXVfcHJpbWUuYwpAQCAtMTA3LDEwICsxMDcsMyBAQCB2b2lkIG5v
-dXZlYXVfZ2VtX3ByaW1lX3VucGluKHN0cnVjdCBkcm1fZ2VtX29iamVjdCAqb2JqKQogCiAJbm91
-dmVhdV9ib191bnBpbihudmJvKTsKIH0KLQotc3RydWN0IHJlc2VydmF0aW9uX29iamVjdCAqbm91
-dmVhdV9nZW1fcHJpbWVfcmVzX29iaihzdHJ1Y3QgZHJtX2dlbV9vYmplY3QgKm9iaikKLXsKLQlz
-dHJ1Y3Qgbm91dmVhdV9ibyAqbnZibyA9IG5vdXZlYXVfZ2VtX29iamVjdChvYmopOwotCi0JcmV0
-dXJuIG52Ym8tPmJvLnJlc3Y7Ci19Ci0tIAoyLjIwLjEKCl9fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fCk5vdXZlYXUgbWFpbGluZyBsaXN0Ck5vdXZlYXVAbGlz
-dHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4v
-bGlzdGluZm8vbm91dmVhdQ==
+
+--===============0650763090==
+Content-Type: multipart/alternative; boundary="15605471813.3B6A.6557"
+Content-Transfer-Encoding: 7bit
+
+
+--15605471813.3B6A.6557
+Date: Fri, 14 Jun 2019 21:19:41 +0000
+MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+https://bugs.freedesktop.org/show_bug.cgi?id=3D110830
+
+--- Comment #12 from Marcin Zajaczkowski <mszpak@wp.pl> ---
+Thanks for your explanations.
+
+In the meantime, I've tried (recommended) KWin with LXQT (both XRender nad
+OpenGL), but with no effects. I will try to explore it at the Xorg/Window
+Manager side (or stick to Wayland for awhile)...
+
+However, I have one more question about the nouveau driver itself. I tried =
+to
+switch from the "modesetting" driver to intel/nouveau in the xorg
+configuration. However, trying to define 'Driver "nouveau"' I end up with t=
+he
+error that device 167 is not known. I've seen you commit from January [1]. =
+Is
+it just needed to add a new entry for my GTX 1660 in nv_driver.c? Anyway, do
+you think using nouveau_drv.so instead of "modesetting" can change anything?
+
+[1] -
+https://cgit.freedesktop.org/nouveau/xf86-video-nouveau/commit/?id=3D2376d1=
+ebf2d9a96bc2ebf21d53a9f9841ce5c15b
+
+--=20
+You are receiving this mail because:
+You are the assignee for the bug.=
+
+--15605471813.3B6A.6557
+Date: Fri, 14 Jun 2019 21:19:41 +0000
+MIME-Version: 1.0
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+<html>
+    <head>
+      <base href=3D"https://bugs.freedesktop.org/">
+    </head>
+    <body>
+      <p>
+        <div>
+            <b><a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - [nouveau] GeForce GTX 1660 Ti (mobile) not supported (NV1=
+68/TU116)"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110830#c12">Comme=
+nt # 12</a>
+              on <a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - [nouveau] GeForce GTX 1660 Ti (mobile) not supported (NV1=
+68/TU116)"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110830">bug 11083=
+0</a>
+              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
+mszpak&#64;wp.pl" title=3D"Marcin Zajaczkowski &lt;mszpak&#64;wp.pl&gt;"> <=
+span class=3D"fn">Marcin Zajaczkowski</span></a>
+</span></b>
+        <pre>Thanks for your explanations.
+
+In the meantime, I've tried (recommended) KWin with LXQT (both XRender nad
+OpenGL), but with no effects. I will try to explore it at the Xorg/Window
+Manager side (or stick to Wayland for awhile)...
+
+However, I have one more question about the nouveau driver itself. I tried =
+to
+switch from the &quot;modesetting&quot; driver to intel/nouveau in the xorg
+configuration. However, trying to define 'Driver &quot;nouveau&quot;' I end=
+ up with the
+error that device 167 is not known. I've seen you commit from January [1]. =
+Is
+it just needed to add a new entry for my GTX 1660 in nv_driver.c? Anyway, do
+you think using nouveau_drv.so instead of &quot;modesetting&quot; can chang=
+e anything?
+
+[1] -
+<a href=3D"https://cgit.freedesktop.org/nouveau/xf86-video-nouveau/commit/?=
+id=3D2376d1ebf2d9a96bc2ebf21d53a9f9841ce5c15b">https://cgit.freedesktop.org=
+/nouveau/xf86-video-nouveau/commit/?id=3D2376d1ebf2d9a96bc2ebf21d53a9f9841c=
+e5c15b</a></pre>
+        </div>
+      </p>
+
+
+      <hr>
+      <span>You are receiving this mail because:</span>
+
+      <ul>
+          <li>You are the assignee for the bug.</li>
+      </ul>
+    </body>
+</html>=
+
+--15605471813.3B6A.6557--
+
+--===============0650763090==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
+YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
+cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============0650763090==--
