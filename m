@@ -1,46 +1,61 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id CE23246376
-	for <lists+nouveau@lfdr.de>; Fri, 14 Jun 2019 17:56:38 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3474B50255
+	for <lists+nouveau@lfdr.de>; Mon, 24 Jun 2019 08:33:39 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4150389A8C;
-	Fri, 14 Jun 2019 15:56:37 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3CCAF8997A;
+	Mon, 24 Jun 2019 06:33:31 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [131.252.210.165])
- by gabe.freedesktop.org (Postfix) with ESMTP id 2C99689A74
- for <nouveau@lists.freedesktop.org>; Fri, 14 Jun 2019 15:56:36 +0000 (UTC)
-Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 292D772167; Fri, 14 Jun 2019 15:56:36 +0000 (UTC)
-From: bugzilla-daemon@freedesktop.org
-To: nouveau@lists.freedesktop.org
-Date: Fri, 14 Jun 2019 15:56:36 +0000
-X-Bugzilla-Reason: AssignedTo
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: None
-X-Bugzilla-Product: xorg
-X-Bugzilla-Component: Driver/nouveau
-X-Bugzilla-Version: 7.7 (2012.06)
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: normal
-X-Bugzilla-Who: imirkin@alum.mit.edu
-X-Bugzilla-Status: NEW
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: medium
-X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-110830-8800-u4wFnFIFJD@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-110830-8800@http.bugs.freedesktop.org/>
-References: <bug-110830-8800@http.bugs.freedesktop.org/>
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
+Received: from hqemgate16.nvidia.com (hqemgate16.nvidia.com [216.228.121.65])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0772D89AAD;
+ Fri, 14 Jun 2019 17:39:42 +0000 (UTC)
+Received: from hqpgpgate101.nvidia.com (Not Verified[216.228.121.13]) by
+ hqemgate16.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
+ id <B5d03dbdd0000>; Fri, 14 Jun 2019 10:39:41 -0700
+Received: from hqmail.nvidia.com ([172.20.161.6])
+ by hqpgpgate101.nvidia.com (PGP Universal service);
+ Fri, 14 Jun 2019 10:39:41 -0700
+X-PGP-Universal: processed;
+ by hqpgpgate101.nvidia.com on Fri, 14 Jun 2019 10:39:41 -0700
+Received: from rcampbell-dev.nvidia.com (172.20.13.39) by HQMAIL107.nvidia.com
+ (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3;
+ Fri, 14 Jun 2019 17:39:39 +0000
+To: John Hubbard <jhubbard@nvidia.com>, Jerome Glisse <jglisse@redhat.com>,
+ David Airlie <airlied@linux.ie>, Ben Skeggs <bskeggs@redhat.com>, "Jason
+ Gunthorpe" <jgg@mellanox.com>
+References: <20190614001121.23950-1-rcampbell@nvidia.com>
+ <1fc63655-985a-0d60-523f-00a51648dc38@nvidia.com>
+From: Ralph Campbell <rcampbell@nvidia.com>
+X-Nvconfidentiality: public
+Message-ID: <f67784db-dada-c827-f231-35549fc046dc@nvidia.com>
+Date: Fri, 14 Jun 2019 10:39:38 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.6.0
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 110830] [nouveau] GeForce GTX 1660 Ti (mobile) not
- supported (NV168/TU116)
+In-Reply-To: <1fc63655-985a-0d60-523f-00a51648dc38@nvidia.com>
+X-Originating-IP: [172.20.13.39]
+X-ClientProxiedBy: HQMAIL103.nvidia.com (172.20.187.11) To
+ HQMAIL107.nvidia.com (172.20.187.13)
+Content-Language: en-US
+X-Mailman-Approved-At: Mon, 24 Jun 2019 06:33:28 +0000
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=nvidia.com; s=n1; 
+ t=1560533981; bh=XMvZxwzjKPuaGK65ch/GjywCYthR9m/ns7t8VqxrQi0=;
+ h=X-PGP-Universal:Subject:To:CC:References:From:X-Nvconfidentiality:
+ Message-ID:Date:User-Agent:MIME-Version:In-Reply-To:
+ X-Originating-IP:X-ClientProxiedBy:Content-Type:Content-Language:
+ Content-Transfer-Encoding;
+ b=RD3cwm1QmItBD46Y4rN/RW1m17w+jMbzQkWzbdwwgjKmJyp8UbNbGoYqsSuuG3QBe
+ kIGfjNRxQ1In0vMdOLz/F0lBq3nvWRa9i4aZQnzz2n70MA3qthRMf4v2+9tuH7gNWd
+ wWmiZxVbDFAVzUvDcY68A3WkS5S8FU09One6QYe2D9gOLT2hNdj/rGPB+iguuagtnN
+ vM/DXV4dpcnnSF681VTR1Se8jWllQl5nPVxZRp7eyEhqibk5ldNf0LxhR1P0rtokqC
+ wU5q0wHRU48eq6I/wEPneUPYuabosEy/XNunE3fjwUAj8mSa5UxsJgQJEVoExs3paY
+ eb9RYPl0wBqPA==
+Subject: Re: [Nouveau] [PATCH] drm/nouveau/dmem: missing mutex_lock in error
+ path
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -52,198 +67,123 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1741935115=="
+Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, linux-mm@kvack.org
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-
---===============1741935115==
-Content-Type: multipart/alternative; boundary="15605277962.493cd90eb.17019"
-Content-Transfer-Encoding: 7bit
-
-
---15605277962.493cd90eb.17019
-Date: Fri, 14 Jun 2019 15:56:36 +0000
-MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-https://bugs.freedesktop.org/show_bug.cgi?id=3D110830
-
---- Comment #11 from Ilia Mirkin <imirkin@alum.mit.edu> ---
-(In reply to Marcin Zajaczkowski from comment #10)
-> (In reply to Ilia Mirkin from comment #9)
-> > xrandr --setprovideroutputsource 1 0
-> >=20
-> > which should allow you to drive on your NVIDIA GPU's outputs by configu=
-ring
-> > them in xrandr.
->=20
-> In lxqt (with Openbox) after that command and "xrandr --output HDMI-1-2
-> --auto --right-of eDP-1" the external monitor is turned on and I see a mo=
-use
-> cursor there, but no window is rendered.
->=20
-> In Gnome 3 (with xorg) the external monitor is detected automatically, but
-> the effect is the same - black screen with a mouse cursor.
-
-I've seen a bunch of reports of this recently. It's not any issue with nouv=
-eau
-kernel component itself, I think it's an Xorg issue. Try using a redirecting
-compositor. Or not using one. Or using modesetting ddx. Or using nouveau dd=
-x.
-
-The lack of acceleration on TU* might also be playing into this. Not sure.
-
->=20
-> Can it be related to the fact that NVidia providers reports only "Sink
-> Output", but not offloading?
->=20
-> > This should also be possible with a Wayland compositor, however the
-> > specifics will vary by compositor. Xwayland has no ability to control s=
-creen
-> > setup.
->=20
-> In Wayland the external monitor works out-of-box in Gnome 3. However, I h=
-ave
-> problem with bringing it to live with Xorg server (some tools I use don't
-> like Wayland). Is it possible to force LXQT or Gnome 3 (on xorg) to render
-> also on the external screen?
->=20
-> I've read about some issues with Windows Manager and "offloading", but
-> though it only applies to OpenGL-based output with PRIME=3D1.
-
-Offloading is usually meant as "perform rendering on secondary GPU, display=
- on
-primary GPU". This is what something like DRI_PRIME controls (i.e. which GPU
-performs rendering for a particular application).
-
-You want the inverse -- you want your primary GPU to generate images to be
-displayed on a secondary GPUs outputs. In Xorg this is referred to as "reve=
-rse
-PRIME".
-
---=20
-You are receiving this mail because:
-You are the assignee for the bug.=
-
---15605277962.493cd90eb.17019
-Date: Fri, 14 Jun 2019 15:56:36 +0000
-MIME-Version: 1.0
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-<html>
-    <head>
-      <base href=3D"https://bugs.freedesktop.org/">
-    </head>
-    <body>
-      <p>
-        <div>
-            <b><a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - [nouveau] GeForce GTX 1660 Ti (mobile) not supported (NV1=
-68/TU116)"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110830#c11">Comme=
-nt # 11</a>
-              on <a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - [nouveau] GeForce GTX 1660 Ti (mobile) not supported (NV1=
-68/TU116)"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110830">bug 11083=
-0</a>
-              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
-imirkin&#64;alum.mit.edu" title=3D"Ilia Mirkin &lt;imirkin&#64;alum.mit.edu=
-&gt;"> <span class=3D"fn">Ilia Mirkin</span></a>
-</span></b>
-        <pre>(In reply to Marcin Zajaczkowski from <a href=3D"show_bug.cgi?=
-id=3D110830#c10">comment #10</a>)
-<span class=3D"quote">&gt; (In reply to Ilia Mirkin from <a href=3D"show_bu=
-g.cgi?id=3D110830#c9">comment #9</a>)
-&gt; &gt; xrandr --setprovideroutputsource 1 0
-&gt; &gt;=20
-&gt; &gt; which should allow you to drive on your NVIDIA GPU's outputs by c=
-onfiguring
-&gt; &gt; them in xrandr.
-&gt;=20
-&gt; In lxqt (with Openbox) after that command and &quot;xrandr --output HD=
-MI-1-2
-&gt; --auto --right-of eDP-1&quot; the external monitor is turned on and I =
-see a mouse
-&gt; cursor there, but no window is rendered.
-&gt;=20
-&gt; In Gnome 3 (with xorg) the external monitor is detected automatically,=
- but
-&gt; the effect is the same - black screen with a mouse cursor.</span >
-
-I've seen a bunch of reports of this recently. It's not any issue with nouv=
-eau
-kernel component itself, I think it's an Xorg issue. Try using a redirecting
-compositor. Or not using one. Or using modesetting ddx. Or using nouveau dd=
-x.
-
-The lack of acceleration on TU* might also be playing into this. Not sure.
-
-<span class=3D"quote">&gt;=20
-&gt; Can it be related to the fact that NVidia providers reports only &quot=
-;Sink
-&gt; Output&quot;, but not offloading?
-&gt;=20
-&gt; &gt; This should also be possible with a Wayland compositor, however t=
-he
-&gt; &gt; specifics will vary by compositor. Xwayland has no ability to con=
-trol screen
-&gt; &gt; setup.
-&gt;=20
-&gt; In Wayland the external monitor works out-of-box in Gnome 3. However, =
-I have
-&gt; problem with bringing it to live with Xorg server (some tools I use do=
-n't
-&gt; like Wayland). Is it possible to force LXQT or Gnome 3 (on xorg) to re=
-nder
-&gt; also on the external screen?
-&gt;=20
-&gt; I've read about some issues with Windows Manager and &quot;offloading&=
-quot;, but
-&gt; though it only applies to OpenGL-based output with PRIME=3D1.</span >
-
-Offloading is usually meant as &quot;perform rendering on secondary GPU, di=
-splay on
-primary GPU&quot;. This is what something like DRI_PRIME controls (i.e. whi=
-ch GPU
-performs rendering for a particular application).
-
-You want the inverse -- you want your primary GPU to generate images to be
-displayed on a secondary GPUs outputs. In Xorg this is referred to as &quot=
-;reverse
-PRIME&quot;.</pre>
-        </div>
-      </p>
-
-
-      <hr>
-      <span>You are receiving this mail because:</span>
-
-      <ul>
-          <li>You are the assignee for the bug.</li>
-      </ul>
-    </body>
-</html>=
-
---15605277962.493cd90eb.17019--
-
---===============1741935115==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
-YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
-cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
-
---===============1741935115==--
+Ck9uIDYvMTMvMTkgNTo0OSBQTSwgSm9obiBIdWJiYXJkIHdyb3RlOgo+IE9uIDYvMTMvMTkgNTox
+MSBQTSwgUmFscGggQ2FtcGJlbGwgd3JvdGU6Cj4+IEluIG5vdXZlYXVfZG1lbV9wYWdlc19hbGxv
+YygpLCB0aGUgZHJtLT5kbWVtLT5tdXRleCBpcyB1bmxvY2tlZCBiZWZvcmUKPj4gY2FsbGluZyBu
+b3V2ZWF1X2RtZW1fY2h1bmtfYWxsb2MoKS4KPj4gUmVhY3F1aXJlIHRoZSBsb2NrIGJlZm9yZSBj
+b250aW51aW5nIHRvIHRoZSBuZXh0IHBhZ2UuCj4+Cj4+IFNpZ25lZC1vZmYtYnk6IFJhbHBoIENh
+bXBiZWxsIDxyY2FtcGJlbGxAbnZpZGlhLmNvbT4KPj4gLS0tCj4+Cj4+IEkgZm91bmQgdGhpcyB3
+aGlsZSB0ZXN0aW5nIEphc29uIEd1bnRob3JwZSdzIGhtbSB0cmVlIGJ1dCB0aGlzIGlzCj4+IGlu
+ZGVwZW5kZW50IG9mIHRob3NlIGNoYW5nZXMuIEkgZ3Vlc3MgaXQgY291bGQgZ28gdGhyb3VnaAo+
+PiBEYXZpZCBBaXJsaWUncyB0cmVlIGZvciBub3V2ZWF1IG9yIEphc29uJ3MgdHJlZS4KPj4KPiAK
+PiBIaSBSYWxwaCwKPiAKPiBidHcsIHdhcyB0aGlzIHRoZSBmaXggZm9yIHRoZSBjcmFzaCB5b3Ug
+d2VyZSBzZWVpbmc/IEl0IG1pZ2h0IGJlIG5pY2UgdG8KPiBtZW50aW9uIGluIHRoZSBjb21taXQg
+ZGVzY3JpcHRpb24sIGlmIHlvdSBhcmUgc2VlaW5nIHJlYWwgc3ltcHRvbXMuCj4gCj4gCj4+ICAg
+ZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9kbWVtLmMgfCAzICsrLQo+PiAgIDEgZmls
+ZSBjaGFuZ2VkLCAyIGluc2VydGlvbnMoKyksIDEgZGVsZXRpb24oLSkKPj4KPj4gZGlmZiAtLWdp
+dCBhL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfZG1lbS5jIGIvZHJpdmVycy9ncHUv
+ZHJtL25vdXZlYXUvbm91dmVhdV9kbWVtLmMKPj4gaW5kZXggMjdhYTRlNzJhYmU5Li4wMGY3MjM2
+YWYxYjkgMTAwNjQ0Cj4+IC0tLSBhL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfZG1l
+bS5jCj4+ICsrKyBiL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfZG1lbS5jCj4+IEBA
+IC0zNzksOSArMzc5LDEwIEBAIG5vdXZlYXVfZG1lbV9wYWdlc19hbGxvYyhzdHJ1Y3Qgbm91dmVh
+dV9kcm0gKmRybSwKPj4gICAJCQlyZXQgPSBub3V2ZWF1X2RtZW1fY2h1bmtfYWxsb2MoZHJtKTsK
+Pj4gICAJCQlpZiAocmV0KSB7Cj4+ICAgCQkJCWlmIChjKQo+PiAtCQkJCQlicmVhazsKPiAKPiBB
+Y3R1YWxseSwgdGhlIHByZS1leGlzdGluZyBjb2RlIGlzIGEgbGl0dGxlIGNvbmNlcm5pbmcuIFlv
+dXIgY2hhbmdlIHByZXNlcnZlcwo+IHRoZSBiZWhhdmlvciwgYnV0IGl0IHNlZW1zIHF1ZXN0aW9u
+YWJsZSB0byBiZSBkb2luZyBhICJyZXR1cm4gMCIgKHdoZXRoZXIKPiB2aWEgdGhlIGFib3ZlIGJy
+ZWFrLCBvciB5b3VyIGNoYW5nZSkgd2hlbiBpdCdzIGluIHRoaXMgcGFydGlhbGx5IGFsbG9jYXRl
+ZAo+IHN0YXRlLiBJdCdzIHJlcG9ydGluZyBzdWNjZXNzIHdoZW4gaXQgb25seSBhbGxvY2F0ZXMg
+cGFydCBvZiB3aGF0IHdhcyByZXF1ZXN0ZWQsCj4gYW5kIGl0IGRvZXNuJ3QgZmlsbCBpbiB0aGUg
+cGFnZXMgYXJyYXkgZWl0aGVyLgo+IAo+IAo+IAo+PiArCQkJCQlyZXR1cm4gMDsKPj4gICAJCQkJ
+cmV0dXJuIHJldDsKPj4gICAJCQl9Cj4+ICsJCQltdXRleF9sb2NrKCZkcm0tPmRtZW0tPm11dGV4
+KTsKPj4gICAJCQljb250aW51ZTsKPj4gICAJCX0KPj4gICAKPj4KPiAKPiBUaGUgYWJvdmUgY29t
+bWVudCBpcyBhYm91dCBwcmUtZXhpc3RpbmcgcG90ZW50aWFsIHByb2JsZW1zLCBidXQgeW91ciBw
+YXRjaCBpdHNlbGYKPiBsb29rcyBjb3JyZWN0LCBzbzoKPiAKPiBSZXZpZXdlZC1ieTogSm9obiBI
+dWJiYXJkIDxqaHViYmFyZEBudmlkaWEuY29tPgo+IAo+IAo+IHRoYW5rcywKPiAKVGhlIGNyYXNo
+IHdhcyB0aGUgTlVMTCBwb2ludGVyIGJ1ZyBpbiBDaHJpc3RvcGgncyBwYXRjaCAjMTAuCkkgc2Vu
+dCBhIHNlcGFyYXRlIHJlcGx5IGZvciB0aGF0LgoKQmVsb3cgaXMgdGhlIGNvbnNvbGUgb3V0cHV0
+IEkgZ290LCB0aGVuIEkgbWFkZSB0aGUgY2hhbmdlcyBqdXN0IGJhc2VkIG9uCmNvZGUgaW5zcGVj
+dGlvbi4gRG8geW91IHRoaW5rIEkgc2hvdWxkIGluY2x1ZGUgaXQgaW4gdGhlIGNoYW5nZSBsb2c/
+CgpBcyBmb3IgdGhlICJyZXR1cm4gMCIsIElmIHlvdSBmb2xsb3cgdGhlIGNhbGwgY2hhaW4sCm5v
+dXZlYXVfZG1lbV9wYWdlc19hbGxvYygpIGlzIG9ubHkgZXZlciBjYWxsZWQgZm9yIG9uZSBwYWdl
+IHNvIHRoaXMKY3VycmVudGx5ICJ3b3JrcyIgYnV0IEkgYWdyZWUgaXQgaXMgYSBiaXQgb2YgYSB0
+aW1lIGJvbWIuIFRoZXJlIGFyZSBhCm51bWJlciBvZiBvdGhlciBidWdzIHRoYXQgSSBjYW4gc2Vl
+IHRoYXQgbmVlZCBmaXhpbmcgYnV0IEkgdGhpbmsgdGhvc2UKc2hvdWxkIGJlIHNlcGFyYXRlIHBh
+dGNoZXMuCgpbIDEyOTQuODcxOTMzXSA9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
+PT09ClsgMTI5NC44NzY2NTZdIFdBUk5JTkc6IGJhZCB1bmxvY2sgYmFsYW5jZSBkZXRlY3RlZCEK
+WyAxMjk0Ljg4MTM3NV0gNS4yLjAtcmMzKyAjNSBOb3QgdGFpbnRlZApbIDEyOTQuODg1MDQ4XSAt
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tClsgMTI5NC44ODk3NzNdIHRlc3Qt
+bWFsbG9jLXZyYS82Mjk5IGlzIHRyeWluZyB0byByZWxlYXNlIGxvY2sgCigmZHJtLT5kbWVtLT5t
+dXRleCkgYXQ6ClsgMTI5NC44OTc0ODJdIFs8ZmZmZmZmZmZhMDFhMjIwZj5dIApub3V2ZWF1X2Rt
+ZW1fbWlncmF0ZV9hbGxvY19hbmRfY29weSsweDc5Zi8weGJmMCBbbm91dmVhdV0KWyAxMjk0Ljkw
+NTc4Ml0gYnV0IHRoZXJlIGFyZSBubyBtb3JlIGxvY2tzIHRvIHJlbGVhc2UhClsgMTI5NC45MTA2
+OTBdClsgMTI5NC45MTA2OTBdIG90aGVyIGluZm8gdGhhdCBtaWdodCBoZWxwIHVzIGRlYnVnIHRo
+aXM6ClsgMTI5NC45MTcyNDldIDEgbG9jayBoZWxkIGJ5IHRlc3QtbWFsbG9jLXZyYS82Mjk5Ogpb
+IDEyOTQuOTIxODgxXSAgIzA6IDAwMDAwMDAwMTZlMTA0NTQgKCZtbS0+bW1hcF9zZW0jMil7Kysr
+K30sIGF0OiAKbm91dmVhdV9zdm1tX2JpbmQrMHgxNDIvMHgyMTAgW25vdXZlYXVdClsgMTI5NC45
+MzEzMTNdClsgMTI5NC45MzEzMTNdIHN0YWNrIGJhY2t0cmFjZToKWyAxMjk0LjkzNTcwMl0gQ1BV
+OiA0IFBJRDogNjI5OSBDb21tOiB0ZXN0LW1hbGxvYy12cmEgTm90IHRhaW50ZWQgCjUuMi4wLXJj
+MysgIzUKWyAxMjk0Ljk0Mjc4Nl0gSGFyZHdhcmUgbmFtZTogQVNVUyBYMjk5LUEvUFJJTUUgWDI5
+OS1BLCBCSU9TIDE0MDEgMDUvMjEvMjAxOApbIDEyOTQuOTQ5NTkwXSBDYWxsIFRyYWNlOgpbIDEy
+OTQuOTUyMDU5XSAgZHVtcF9zdGFjaysweDdjLzB4YzAKWyAxMjk0Ljk1NTQ2OV0gID8gbm91dmVh
+dV9kbWVtX21pZ3JhdGVfYWxsb2NfYW5kX2NvcHkrMHg3OWYvMHhiZjAgW25vdXZlYXVdClsgMTI5
+NC45NjIyMTNdICBwcmludF91bmxvY2tfaW1iYWxhbmNlX2J1Zy5jb2xkLjUyKzB4Y2EvMHhjZgpb
+IDEyOTQuOTY3NjQxXSAgbG9ja19yZWxlYXNlKzB4MzA2LzB4MzgwClsgMTI5NC45NzEzODNdICA/
+IG5vdXZlYXVfZG1lbV9taWdyYXRlX2FsbG9jX2FuZF9jb3B5KzB4NzlmLzB4YmYwIFtub3V2ZWF1
+XQpbIDEyOTQuOTc4MDg5XSAgPyBsb2NrX2Rvd25ncmFkZSsweDJkMC8weDJkMApbIDEyOTQuOTgy
+MTIxXSAgPyBmaW5kX2hlbGRfbG9jaysweGFjLzB4ZDAKWyAxMjk0Ljk4NTk3OV0gIF9fbXV0ZXhf
+dW5sb2NrX3Nsb3dwYXRoKzB4OGYvMHgzZjAKWyAxMjk0Ljk5MDU0MF0gID8gd2FpdF9mb3JfY29t
+cGxldGlvbisweDIzMC8weDIzMApbIDEyOTQuOTk1MDAyXSAgPyByd2xvY2tfYnVnLnBhcnQuMisw
+eDYwLzB4NjAKWyAxMjk0Ljk5OTE5N10gIG5vdXZlYXVfZG1lbV9taWdyYXRlX2FsbG9jX2FuZF9j
+b3B5KzB4NzlmLzB4YmYwIFtub3V2ZWF1XQpbIDEyOTUuMDA1NzUxXSAgPyBwYWdlX21hcHBpbmcr
+MHg5OC8weDExMApbIDEyOTUuMDA5NTExXSAgbWlncmF0ZV92bWErMHhhNzQvMHgxMDkwClsgMTI5
+NS4wMTMxODZdICA/IG1vdmVfdG9fbmV3X3BhZ2UrMHg0ODAvMHg0ODAKWyAxMjk1LjAxNzQwMF0g
+ID8gX19rbWFsbG9jKzB4MTUzLzB4MzAwClsgMTI5NS4wMjEwNTJdICA/IG5vdXZlYXVfZG1lbV9t
+aWdyYXRlX3ZtYSsweGQ4LzB4MWUwIFtub3V2ZWF1XQpbIDEyOTUuMDI2Nzk2XSAgbm91dmVhdV9k
+bWVtX21pZ3JhdGVfdm1hKzB4MTU3LzB4MWUwIFtub3V2ZWF1XQpbIDEyOTUuMDMyNDY2XSAgPyBu
+b3V2ZWF1X2RtZW1faW5pdCsweDQ5MC8weDQ5MCBbbm91dmVhdV0KWyAxMjk1LjAzNzYxMl0gID8g
+dm1hY2FjaGVfZmluZCsweGMyLzB4MTEwClsgMTI5NS4wNDE1MzddICBub3V2ZWF1X3N2bW1fYmlu
+ZCsweDFiNC8weDIxMCBbbm91dmVhdV0KWyAxMjk1LjA0NjU4M10gID8gbm91dmVhdV9zdm1fZmF1
+bHQrMHgxM2UwLzB4MTNlMCBbbm91dmVhdV0KWyAxMjk1LjA1MTkxMl0gIGRybV9pb2N0bF9rZXJu
+ZWwrMHgxNGQvMHgxYTAKWyAxMjk1LjA1NTkzMF0gID8gZHJtX3NldHZlcnNpb24rMHgzMzAvMHgz
+MzAKWyAxMjk1LjA1OTk3MV0gIGRybV9pb2N0bCsweDMwOC8weDUzMApbIDEyOTUuMDYzMzg0XSAg
+PyBkcm1fdmVyc2lvbisweDE1MC8weDE1MApbIDEyOTUuMDY3MTUzXSAgPyBmaW5kX2hlbGRfbG9j
+aysweGFjLzB4ZDAKWyAxMjk1LjA3MDk5Nl0gID8gX19wbV9ydW50aW1lX3Jlc3VtZSsweDNmLzB4
+YTAKWyAxMjk1LjA3NTI4NV0gID8gbWFya19oZWxkX2xvY2tzKzB4MjkvMHhhMApbIDEyOTUuMDc5
+MjMwXSAgPyBfcmF3X3NwaW5fdW5sb2NrX2lycXJlc3RvcmUrMHgzYy8weDUwClsgMTI5NS4wODQy
+MzJdICA/IGxvY2tkZXBfaGFyZGlycXNfb24rMHgxN2QvMHgyNTAKWyAxMjk1LjA4ODc2OF0gIG5v
+dXZlYXVfZHJtX2lvY3RsKzB4OWEvMHgxMDAgW25vdXZlYXVdClsgMTI5NS4wOTM2NjFdICBkb192
+ZnNfaW9jdGwrMHgxMzcvMHg5YTAKWyAxMjk1LjA5NzM0MV0gID8gaW9jdGxfcHJlYWxsb2NhdGUr
+MHgxNDAvMHgxNDAKWyAxMjk1LjEwMTYyM10gID8gbWF0Y2hfaGVsZF9sb2NrKzB4MWIvMHgyMzAK
+WyAxMjk1LjEwNTY0Nl0gID8gbWF0Y2hfaGVsZF9sb2NrKzB4MWIvMHgyMzAKWyAxMjk1LjEwOTY2
+MF0gID8gZmluZF9oZWxkX2xvY2srMHhhYy8weGQwClsgMTI5NS4xMTM1MTJdICA/IF9fZG9fcGFn
+ZV9mYXVsdCsweDMyNC8weDYzMApbIDEyOTUuMTE3NjE3XSAgPyBsb2NrX2Rvd25ncmFkZSsweDJk
+MC8weDJkMApbIDEyOTUuMTIxNjQ4XSAgPyBtYXJrX2hlbGRfbG9ja3MrMHg3OS8weGEwClsgMTI5
+NS4xMjU1ODNdICA/IGhhbmRsZV9tbV9mYXVsdCsweDM1Mi8weDQzMApbIDEyOTUuMTI5Njg3XSAg
+a3N5c19pb2N0bCsweDYwLzB4OTAKWyAxMjk1LjEzMzAyMF0gID8gbWFya19oZWxkX2xvY2tzKzB4
+MjkvMHhhMApbIDEyOTUuMTM2OTY0XSAgX194NjRfc3lzX2lvY3RsKzB4M2QvMHg1MApbIDEyOTUu
+MTQwNzI2XSAgZG9fc3lzY2FsbF82NCsweDY4LzB4MjUwClsgMTI5NS4xNDQ0MDBdICBlbnRyeV9T
+WVNDQUxMXzY0X2FmdGVyX2h3ZnJhbWUrMHg0OS8weGJlClsgMTI5NS4xNDk0NjVdIFJJUDogMDAz
+MzoweDdmMWEzNDk1ODA5YgpbIDEyOTUuMTUzMDUzXSBDb2RlOiAwZiAxZSBmYSA0OCA4YiAwNSBl
+ZCBiZCAwYyAwMCA2NCBjNyAwMCAyNiAwMCAwMCAwMCAKNDggYzcgYzAgZmYgZmYgZmYgZmYgYzMg
+NjYgMGYgMWYgNDQgMDAgMDAgZjMgMGYgMWUgZmEgYjggMTAgMDAgMDAgMDAgMGYgCjA1IDw0OD4g
+M2QgMDEgZjAgZmYgZmYgNzMgMDEgYzMgNDggOGIgMGQgYmQgYmQgMGMgMDAgZjcgZDggNjQgODkg
+MDEgNDgKWyAxMjk1LjE3MTg1MF0gUlNQOiAwMDJiOjAwMDA3ZmZlZjdlZDEzNTggRUZMQUdTOiAw
+MDAwMDI0NiBPUklHX1JBWDogCjAwMDAwMDAwMDAwMDAwMTAKWyAxMjk1LjE3OTQ1MV0gUkFYOiBm
+ZmZmZmZmZmZmZmZmZmRhIFJCWDogMDAwMDdmZmVmN2VkMTYyOCBSQ1g6IAowMDAwN2YxYTM0OTU4
+MDliClsgMTI5NS4xODY2MDFdIFJEWDogMDAwMDdmZmVmN2VkMTNiMCBSU0k6IDAwMDAwMDAwNDA0
+MDY0NDkgUkRJOiAKMDAwMDAwMDAwMDAwMDAwNApbIDEyOTUuMTkzNzU5XSBSQlA6IDAwMDA3ZmZl
+ZjdlZDEzYjAgUjA4OiAwMDAwMDAwMDAwMDAwMDAwIFIwOTogCjAwMDAwMDAwMDE1N2U3NzAKWyAx
+Mjk1LjIwMDkxN10gUjEwOiAwMDAwMDAwMDAxNTFjMDEwIFIxMTogMDAwMDAwMDAwMDAwMDI0NiBS
+MTI6IAowMDAwMDAwMDQwNDA2NDQ5ClsgMTI5NS4yMDgwODNdIFIxMzogMDAwMDAwMDAwMDAwMDAw
+NCBSMTQ6IDAwMDAwMDAwMDAwMDAwMDAgUjE1OiAKMDAwMDAwMDAwMDAwMDAwMApfX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpOb3V2ZWF1IG1haWxpbmcgbGlz
+dApOb3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9w
+Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL25vdXZlYXU=
