@@ -2,52 +2,58 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 85B9847138
-	for <lists+nouveau@lfdr.de>; Sat, 15 Jun 2019 18:17:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 35DE447181
+	for <lists+nouveau@lfdr.de>; Sat, 15 Jun 2019 20:09:24 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 51AE4892BE;
-	Sat, 15 Jun 2019 16:17:21 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id CC4718929A;
+	Sat, 15 Jun 2019 18:09:21 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from sonic308-9.consmr.mail.ne1.yahoo.com
- (sonic308-9.consmr.mail.ne1.yahoo.com [66.163.187.32])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0B940892BE
- for <nouveau@lists.freedesktop.org>; Sat, 15 Jun 2019 16:17:19 +0000 (UTC)
-X-YMail-OSG: HfwD2zQVM1l3.bOv4IV6nXcCfqlDddO5DnR4RGEJOJvHjqAtWkr_h1whOgjsl3v
- f.vI.DAcMBE4GZzXBVlmsntRwyxPu6cAsfLlwW1ZyQC19isI9j..Q4xTZs65g2KGWZ78NuPZklBU
- mP3VY_RE7sjmuIwMzFZIxBwJSY.zB_82GrBYaoxIpnyqePKvJ.Y2DBxbpaaGHJLQcl6sZSfVrCyi
- zVw3KCb.fo9ljUhvU.HRkAE8H9nsEAL5svqD3atbNFnnDb.1UAgL6b_q2RRofB4FKTetoKXIlgxH
- cUg47tlwBZIjv581.DZcAr5CubzNSSbVQcVPS3bXn1TdFUc1IR6bgQeRRLWRl4uWyR_pqzOE5.Pq
- MvEjcoV_9u4Whg4nkIflpqEkYuwkp0jrwwDCsTE.6Tv3apoOJ_zGhA4mLIar2fpDlD49DjGZ4VHm
- luuoLSsRJOnh_K_kbc8sP2a10Y1Ga4FDWSROUEGOb0xW.4UIGwIKftpKXdWnSKo3u2XjDMmuTtHk
- LLb7B.ZRMhzDYBA6EZD3AfacLz4zszsXj71WgFxl1KyEIF0RMCDjEqtzcHcAbvagCIotrI8utTHW
- _5WPHMvM7CsoWJ8IYoLuq9zRfODxY.Kx4ZfRM1TviBgcD2Z7OnkKgjFC0rTjKxqwLr6qNfS8WTW8
- mRZK7DGj1HyPfIIa7d9TCKQb.BUd3cIW.Po8O7MujzRxfeRDtdvq02dvFf6VwMIUMCVyiBq.PewY
- RNLH9f5jKrvHPx5AWzWk8KEOOnh2JUomSR8AhqlVYZjTDVe4hli2LStE6HkF_Jf9VntPHBssmdOk
- runyrZXJq7KmxWDGoSWGN_3AkXbZUpvQrc6JNzw.uqlCw0pWW.eQ.gGOeyDLr9CvMCl3s0PgEPtn
- OBtoIlstgaLJRU_FDhc2KWKtP4n1jwbrCImM_wJVSR7QSNf8IoyKI4Y1cUjxDp_kjwo5dH75.48_
- dpTLR1apPorgVI4uGLaV2s2XlZbQPQR7CSxKhfaQdfOxGPqcB86SI4rrcYv_qLL7w0N_gaippsOK
- 0XbTT7F1wYoEoFTUDJ8iMmOGrzFRa0FBz0FVY.TnAJbnjyuz3zk11LcObvWDxMnFPkUaWsN9nV9b
- D2ljebgd6Bcz55rInAmmpzrsCLlTRJhKRan5tY1HSvUmuwvoy90pY.YeGAYd9ikGoL.pTl0QVp3g
- 4KtJaQAKmarUz.4Emov1ig7Yp2RdBHxjI6eUeLAFE
-Received: from sonic.gate.mail.ne1.yahoo.com by
- sonic308.consmr.mail.ne1.yahoo.com with HTTP; Sat, 15 Jun 2019 16:17:18 +0000
-Date: Sat, 15 Jun 2019 16:17:16 +0000 (UTC)
-From: Mar Mel <marmel6942@yahoo.com>
-To: nouveau@lists.freedesktop.org
-Message-ID: <495587496.1966749.1560615436420@mail.yahoo.com>
-In-Reply-To: <1119631907.971876.1560439165339@mail.yahoo.com>
-References: <1119631907.971876.1560439165339.ref@mail.yahoo.com>
- <1119631907.971876.1560439165339@mail.yahoo.com>
+Received: from mail-ot1-x341.google.com (mail-ot1-x341.google.com
+ [IPv6:2607:f8b0:4864:20::341])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 599DF8929C
+ for <nouveau@lists.freedesktop.org>; Sat, 15 Jun 2019 18:09:21 +0000 (UTC)
+Received: by mail-ot1-x341.google.com with SMTP id p4so893849oti.0
+ for <nouveau@lists.freedesktop.org>; Sat, 15 Jun 2019 11:09:21 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=Cb0Hmo2zAZrYDyoCgAidl3UeL9kc8+XrLoGdt6CrXZE=;
+ b=GXlvk2qKVrk8mM0iFo+abpNgKHzdYBfyjE+6ga/emOf/hXczGXPk61B72MJt9VDfEt
+ aiL3s9BKZUpIVPxaxxZixv+ZBE5WlAkXRLKKCeR3vjQI8zQmuZuxi+0MkM+bzfJkms6S
+ XivRG0bNYKJmeN+9IkO6LRdJoL9BE43qk0CwOg+BlGB//RNDWpBwcXdpNBJhEy8Gshe/
+ QPq2FUPXhxBRIG05l2e7fAMtFKYyP6NMv0KyYyNPEmlkj5q49Lflt6VOMcyka2TZjKwb
+ qxhodnj0NB5JdUd3TOUP7o3Btn56ssN/sY6j8Jm6JL3XL0ebH7LyCTHfiDzIgKGPMoPN
+ YECg==
+X-Gm-Message-State: APjAAAVOL3OG8gRjiSNfPxSfa0HqtP46Oj58WnNH8quwFTW/mcnU39Ag
+ C+NKzFS+PZSnGMSGk/oAbpRd3qTNLZL37eBgEzKWmg==
+X-Google-Smtp-Source: APXvYqxK2ja20GipaVbp7qq4Oaf290msf2s3XleRazQ4mdHqmcalk7o8VyutGF6B5iu+bOwCwwdJPEhdvYDhbnFupMs=
+X-Received: by 2002:a9d:7a9a:: with SMTP id l26mr44930666otn.71.1560622160642; 
+ Sat, 15 Jun 2019 11:09:20 -0700 (PDT)
 MIME-Version: 1.0
-X-Mailer: WebService/1.1.13837 YMailNorrin Mozilla/5.0 (X11; Linux x86_64;
- rv:67.0) Gecko/20100101 Firefox/67.0
+References: <20190613094326.24093-1-hch@lst.de>
+ <CAPcyv4jBdwYaiVwkhy6kP78OBAs+vJme1UTm47dX4Eq_5=JgSg@mail.gmail.com>
+ <20190614061333.GC7246@lst.de>
+ <CAPcyv4jmk6OBpXkuwjMn0Ovtv__2LBNMyEOWx9j5LWvWnr8f_A@mail.gmail.com>
+ <20190615083356.GB23406@lst.de>
+In-Reply-To: <20190615083356.GB23406@lst.de>
+From: Dan Williams <dan.j.williams@intel.com>
+Date: Sat, 15 Jun 2019 11:09:09 -0700
+Message-ID: <CAPcyv4jkDC3hRt_pj1e8j_OmzJ-wdumy-o1bN0ab=JVE_gfKdg@mail.gmail.com>
+To: Christoph Hellwig <hch@lst.de>
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=yahoo.com; s=s2048; t=1560615438;
- bh=9+0eDv80y+GtLsAEgsS56l3NPoze8WcjHUVeKzgy/k8=;
- h=Date:From:To:In-Reply-To:References:Subject:From:Subject;
- b=ha8dlszAhr5q/bPzsaEfyp1XwlA37WciN6FnLM5SDgP/0W20EU3QhpTFrMIaZb1pEZNoi8/to2qWOWUPPyoDzDqKm/MRk64lHIUCYsBYhJuCUIOu950dojhGsvfIg1rMmKdPMPIpkr66Vfo1tOKHNhe+gMMkTIcveMXhhn2rqxFUnIRDgrR51SWH7po8B5YMj0Lj/l4THMGplpBZDGULZz7/i+THAkSOeuyNNy4YZHsS1V2BmPP5k1B0rDGXKqxP0Z2YT/j470A+pi7nbQlvdkotdhLPyljqobBbzWFvhwGzzOX0AjErM0+uXmhCZaYK3Vami9KGftgoALj8PeZC/A==
-Subject: Re: [Nouveau] NOUVEAU_LEGACY_CTX_SUPPORT Fan Speed
+ d=intel-com.20150623.gappssmtp.com; s=20150623;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc;
+ bh=Cb0Hmo2zAZrYDyoCgAidl3UeL9kc8+XrLoGdt6CrXZE=;
+ b=EY/IUPVbu+1KTXp5GI53vNwR2z9Nvu64XsQUizbEMMU+aGYsXWtd2lTzv6Rx3V/2OG
+ ZCHaTlatz8Y6DgkD78CATBQ1yUSjk/05HpPEqetVEj/+F5+Kom/9e7XbdGpDgyQQCBnL
+ yj7evXXPdyreGRqDjU90YAS5Z/xg/+W8t5onIf68LdBa/3dqW/rLtaWBvtaURMP28S5L
+ ACzapU9ov4J0F0u3SlQrs+vm8YDjsJurYg/jGuJheOXTmxVlf3qQXGWQIp1J0v1wmtf3
+ 4CKVxNLpNlkzY6vy0HsyUqk2Hkklo6bAEUB4ced5+znlBd2UCAgiXhA0LcanxooGfjdt
+ jtDg==
+Subject: Re: [Nouveau] dev_pagemap related cleanups
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -59,139 +65,40 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1659026647=="
+Cc: linux-nvdimm <linux-nvdimm@lists.01.org>, nouveau@lists.freedesktop.org,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ Maling list - DRI developers <dri-devel@lists.freedesktop.org>,
+ Linux MM <linux-mm@kvack.org>, Jason Gunthorpe <jgg@mellanox.com>,
+ Ben Skeggs <bskeggs@redhat.com>, linux-pci@vger.kernel.org,
+ Andrew Morton <akpm@linux-foundation.org>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
---===============1659026647==
-Content-Type: multipart/alternative; 
-	boundary="----=_Part_1966748_1458472801.1560615436418"
-
-------=_Part_1966748_1458472801.1560615436418
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-
- Unfortunately, even with this change now reverted in kernel 5.1.10, the fa=
-n speed issue persists.
-If someone could point me in the direction of a relevant commit(s) I'll hap=
-pily file a bug report.
-    On Thursday, June 13, 2019, 11:19:25 AM EDT, Mar Mel <marmel6942@yahoo.=
-com> wrote: =20
-=20
- As of kernel 5.1.9, on resume from suspend, my NV50 fan runs at full speed=
-.=20
-
-Not sure if it has to do with this new config option (NOUVEAU_LEGACY_CTX_SU=
-PPORT)?
-
-This issue is not present using kernel 5.0.21.
-Years ago I filed a similar issue:
-
-60704 =E2=80=93 [nouveau, git regression] - I2C PWM fan control broken on n=
-v50 adt7475 on kernels 3.3.x+
-Thanks.
-
-
-
-|=20
-|=20
-|  |=20
-60704 =E2=80=93 [nouveau, git regression] - I2C PWM fan control broken on n=
-v50 a...
-
-
- |
-
- |
-
- |
-
-
-
- =20
-------=_Part_1966748_1458472801.1560615436418
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-
-<html xmlns=3D"http://www.w3.org/1999/xhtml" xmlns:v=3D"urn:schemas-microso=
-ft-com:vml" xmlns:o=3D"urn:schemas-microsoft-com:office:office"><head><!--[=
-if gte mso 9]><xml><o:OfficeDocumentSettings><o:AllowPNG/><o:PixelsPerInch>=
-96</o:PixelsPerInch></o:OfficeDocumentSettings></xml><![endif]--></head><bo=
-dy><div class=3D"ydpb69c7536yahoo-style-wrap" style=3D"font-family: Helveti=
-ca Neue, Helvetica, Arial, sans-serif; font-size: 13px;"><div></div>
-        <div>Unfortunately, even with this change now reverted in kernel 5.=
-1.10, the fan speed issue persists.</div><div><br></div><div>If someone cou=
-ld point me in the direction of a relevant commit(s) I'll happily file a bu=
-g report.</div><div><br></div>
-       =20
-        </div><div id=3D"yahoo_quoted_0639155532" class=3D"yahoo_quoted">
-            <div style=3D"font-family:'Helvetica Neue', Helvetica, Arial, s=
-ans-serif;font-size:13px;color:#26282a;">
-               =20
-                <div>
-                    On Thursday, June 13, 2019, 11:19:25 AM EDT, Mar Mel &l=
-t;marmel6942@yahoo.com&gt; wrote:
-                </div>
-                <div><br></div>
-                <div><br></div>
-                <div><div id=3D"yiv3381411794"><!--[if gte mso 9]><xml><o:O=
-fficeDocumentSettings><o:AllowPNG/><o:PixelsPerInch>96</o:PixelsPerInch></o=
-:OfficeDocumentSettings></xml><![endif]--><div><div class=3D"yiv3381411794y=
-ahoo-style-wrap" style=3D"font-family:Helvetica Neue, Helvetica, Arial, san=
-s-serif;font-size:13px;"><div>As of kernel 5.1.9, on resume from suspend, m=
-y NV50 fan runs at full speed. <br></div><div><br></div><div>Not sure if it=
- has to do with this new config option (<span>NOUVEAU_LEGACY_CTX_SUPPORT)?<=
-/span><br></div><div><br></div><div>This issue is not present using kernel =
-5.0.21.</div><div><br></div><div>Years ago I filed a similar issue:<br></di=
-v><div><br></div><div><a rel=3D"nofollow" target=3D"_blank" href=3D"https:/=
-/bugs.freedesktop.org/show_bug.cgi?id=3D60704" class=3D"yiv3381411794enhanc=
-r_card_0655079240">60704 =E2=80=93 [nouveau, git regression] - I2C PWM fan =
-control broken on nv50 adt7475 on kernels 3.3.x+</a></div><div><br></div><d=
-iv>Thanks.<br></div><div><br></div><div><br></div><div id=3D"yiv3381411794y=
-dp73b97a3aenhancr_card_0655079240" class=3D"yiv3381411794ydp73b97a3ayahoo-l=
-ink-enhancr-card yiv3381411794ydp73b97a3ayahoo-link-enhancr-not-allow-cover=
- yiv3381411794ydp73b97a3aymail-preserve-class yiv3381411794ydp73b97a3aymail=
--preserve-style" style=3D"max-width:400px;font-family:Helvetica, Arial, san=
-s-serif;" data-url=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D60704"=
- data-type=3D"YENHANCER" data-size=3D"MEDIUM"><a rel=3D"nofollow" target=3D=
-"_blank" href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D60704" styl=
-e=3D"text-decoration:none !important;color:#000 !important;" class=3D"yiv33=
-81411794ydp73b97a3ayahoo-enhancr-cardlink"><table class=3D"yiv3381411794ydp=
-73b97a3acard-wrapper yiv3381411794ydp73b97a3ayahoo-ignore-table" style=3D"m=
-ax-width:400px;" cellspacing=3D"0" cellpadding=3D"0" border=3D"0"><tbody><t=
-r><td width=3D"400"><table class=3D"yiv3381411794ydp73b97a3acard yiv3381411=
-794ydp73b97a3ayahoo-ignore-table" style=3D"max-width:400px;border-width:1px=
-;border-style:solid;border-color:rgb(224, 228, 233);border-radius:2px;" wid=
-th=3D"100%" cellspacing=3D"0" cellpadding=3D"0" border=3D"0"><tbody><tr><td=
-><table class=3D"yiv3381411794ydp73b97a3acard-info yiv3381411794ydp73b97a3a=
-yahoo-ignore-table" style=3D"background-color:rgb(255, 255, 255);background=
--repeat:repeat;background-attachment:scroll;background-image:none;backgroun=
-d-size:auto;position:relative;z-index:2;width:100%;max-width:400px;border-r=
-adius:0px 0px 2px 2px;border-top:1px solid rgb(224, 228, 233);" cellspacing=
-=3D"0" cellpadding=3D"0" border=3D"0"><tbody><tr><td style=3D"background-co=
-lor:#ffffff;padding:16px 0 16px 12px;vertical-align:top;border-radius:0 0 0=
- 2px;"></td><td style=3D"vertical-align:middle;padding:12px 24px 16px 12px;=
-width:99%;font-family:Helvetica, Arial, sans-serif;border-radius:0 0 2px 0;=
-"><h2 class=3D"yiv3381411794ydp73b97a3acard-title" style=3D"font-size:14px;=
-line-height:19px;margin:0px 0px 6px;font-family:Helvetica, Arial, sans-seri=
-f;color:rgb(38, 40, 42);">60704 =E2=80=93 [nouveau, git regression] - I2C P=
-WM fan control broken on nv50 a...</h2><p class=3D"yiv3381411794ydp73b97a3a=
-card-description" style=3D"font-size:12px;line-height:16px;margin:0px;color=
-:rgb(151, 155, 167);"></p></td></tr></tbody></table></td></tr></tbody></tab=
-le></td></tr></tbody></table></a></div><div><br></div><div><br></div></div>=
-</div></div></div>
-            </div>
-        </div></body></html>
-------=_Part_1966748_1458472801.1560615436418--
-
---===============1659026647==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
-YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
-cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
-
---===============1659026647==--
+T24gU2F0LCBKdW4gMTUsIDIwMTkgYXQgMTozNCBBTSBDaHJpc3RvcGggSGVsbHdpZyA8aGNoQGxz
+dC5kZT4gd3JvdGU6Cj4KPiBPbiBGcmksIEp1biAxNCwgMjAxOSBhdCAwNjoxNDo0NVBNIC0wNzAw
+LCBEYW4gV2lsbGlhbXMgd3JvdGU6Cj4gPiBPbiBUaHUsIEp1biAxMywgMjAxOSBhdCAxMToxNCBQ
+TSBDaHJpc3RvcGggSGVsbHdpZyA8aGNoQGxzdC5kZT4gd3JvdGU6Cj4gPiA+Cj4gPiA+IE9uIFRo
+dSwgSnVuIDEzLCAyMDE5IGF0IDExOjI3OjM5QU0gLTA3MDAsIERhbiBXaWxsaWFtcyB3cm90ZToK
+PiA+ID4gPiBJdCBhbHNvIHR1cm5zIG91dCB0aGUgbnZkaW1tIHVuaXQgdGVzdHMgY3Jhc2ggd2l0
+aCB0aGlzIHNpZ25hdHVyZSBvbgo+ID4gPiA+IHRoYXQgYnJhbmNoIHdoZXJlIGJhc2UgdjUuMi1y
+YzMgcGFzc2VzOgo+ID4gPgo+ID4gPiBIb3cgZG8geW91IHJ1biB0aGF0IHRlc3Q/Cj4gPgo+ID4g
+VGhpcyBpcyB0aGUgdW5pdCB0ZXN0IHN1aXRlIHRoYXQgZ2V0cyBraWNrZWQgb2ZmIGJ5IHJ1bm5p
+bmcgIm1ha2UKPiA+IGNoZWNrIiBmcm9tIHRoZSBuZGN0bCBzb3VyY2UgcmVwb3NpdG9yeS4gSW4g
+dGhpcyBjYXNlIGl0IHJlcXVpcmVzIHRoZQo+ID4gbmZpdF90ZXN0IHNldCBvZiBtb2R1bGVzIHRv
+IGNyZWF0ZSBhIGZha2UgbnZkaW1tIGVudmlyb25tZW50Lgo+ID4KPiA+IFRoZSBzZXR1cCBpbnN0
+cnVjdGlvbnMgYXJlIGluIHRoZSBSRUFETUUsIGJ1dCBmZWVsIGZyZWUgdG8gc2VuZCBtZQo+ID4g
+YnJhbmNoZXMgYW5kIEkgY2FuIGtpY2sgb2ZmIGEgdGVzdC4gT25lIG9mIHRoZXNlIHdlJ2xsIGdl
+dCBhcm91bmQgdG8KPiA+IG1ha2luZyBpdCBhdXRvbWF0ZWQgZm9yIHBhdGNoIHN1Ym1pc3Npb25z
+IHRvIHRoZSBsaW51eC1udmRpbW0gbWFpbGluZwo+ID4gbGlzdC4KPgo+IE9oLCBub3cgSSByZW1l
+bWJlciwgYW5kIHRoYXQgd2FzIHRoZSBidW1tZXIgYXMgYW55dGhpbmcgcmVxdWlyaW5nIG1vZHVs
+ZXMKPiBqdXN0IGRvZXMgbm90IGZpdCBhdCBhbGwgaW50byBteSBub3JtYWwgdGVzdCBmbG93cyB0
+aGF0IGp1c3QgaW5qZWN0Cj4ga2VybmVsIGltYWdlcyBhbmQgdXNlIG90aGVyd2lzZSBzdGF0aWMg
+aW1hZ2VzLgoKWWVhaC4uLiBhbHRob3VnaCB3ZSBkbyBoYXZlIHNvbWUgY2hhbmdlcyBiZWluZyBw
+cm9wb3NlZCBmcm9tIG5vbi14ODYKZGV2cyB0byBhbGxvdyBhIHN1YnNldCBvZiB0aGUgdGVzdHMg
+dG8gcnVuIHdpdGhvdXQgdGhlIG5maXRfdGVzdAptb2R1bGVzOiBodHRwczovL3BhdGNod29yay5r
+ZXJuZWwub3JnL3BhdGNoLzEwOTgwNzc5LwoKLi4uc28gdGhpcyBwcm9tcHRzIG1lIHRvIGdvIHJl
+dmlldyB0aGF0IHBhdGNoLgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fXwpOb3V2ZWF1IG1haWxpbmcgbGlzdApOb3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9y
+ZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL25vdXZlYXU=
