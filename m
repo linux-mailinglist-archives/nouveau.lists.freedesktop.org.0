@@ -2,46 +2,29 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8498C5025B
-	for <lists+nouveau@lfdr.de>; Mon, 24 Jun 2019 08:33:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 22712490F7
+	for <lists+nouveau@lfdr.de>; Mon, 17 Jun 2019 22:10:31 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A28A4899BE;
-	Mon, 24 Jun 2019 06:33:36 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8954588BBA;
+	Mon, 17 Jun 2019 20:10:29 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from ale.deltatee.com (ale.deltatee.com [207.54.116.67])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 18ECF6E090;
- Mon, 17 Jun 2019 20:08:19 +0000 (UTC)
-Received: from guinness.priv.deltatee.com ([172.16.1.162])
- by ale.deltatee.com with esmtp (Exim 4.89)
- (envelope-from <logang@deltatee.com>)
- id 1hcxvM-0004o2-QE; Mon, 17 Jun 2019 14:08:17 -0600
-To: Christoph Hellwig <hch@lst.de>, Dan Williams <dan.j.williams@intel.com>,
- =?UTF-8?B?SsOpcsO0bWUgR2xpc3Nl?= <jglisse@redhat.com>,
- Jason Gunthorpe <jgg@mellanox.com>, Ben Skeggs <bskeggs@redhat.com>
+Received: from newverein.lst.de (verein.lst.de [213.95.11.211])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6923C6E090;
+ Mon, 17 Jun 2019 20:10:28 +0000 (UTC)
+Received: by newverein.lst.de (Postfix, from userid 2407)
+ id 0673468B02; Mon, 17 Jun 2019 22:09:58 +0200 (CEST)
+Date: Mon, 17 Jun 2019 22:09:57 +0200
+From: Christoph Hellwig <hch@lst.de>
+To: Logan Gunthorpe <logang@deltatee.com>
+Message-ID: <20190617200957.GA20645@lst.de>
 References: <20190617122733.22432-1-hch@lst.de>
  <20190617122733.22432-9-hch@lst.de>
-From: Logan Gunthorpe <logang@deltatee.com>
-Message-ID: <d68c5e4c-b2de-95c3-0b75-1f2391b25a34@deltatee.com>
-Date: Mon, 17 Jun 2019 14:08:14 -0600
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.7.1
+ <d68c5e4c-b2de-95c3-0b75-1f2391b25a34@deltatee.com>
 MIME-Version: 1.0
-In-Reply-To: <20190617122733.22432-9-hch@lst.de>
-Content-Language: en-CA
-X-SA-Exim-Connect-IP: 172.16.1.162
-X-SA-Exim-Rcpt-To: linux-kernel@vger.kernel.org, linux-pci@vger.kernel.org,
- linux-nvdimm@lists.01.org, dri-devel@lists.freedesktop.org,
- nouveau@lists.freedesktop.org, linux-mm@kvack.org, bskeggs@redhat.com,
- jgg@mellanox.com, jglisse@redhat.com, dan.j.williams@intel.com, hch@lst.de
-X-SA-Exim-Mail-From: logang@deltatee.com
-X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on ale.deltatee.com
-X-Spam-Level: 
-X-Spam-Status: No, score=-8.9 required=5.0 tests=ALL_TRUSTED,BAYES_00,
- GREYLIST_ISWHITE autolearn=ham autolearn_force=no version=3.4.2
-X-SA-Exim-Version: 4.2.1 (built Tue, 02 Aug 2016 21:08:31 +0000)
-X-SA-Exim-Scanned: Yes (on ale.deltatee.com)
-X-Mailman-Approved-At: Mon, 24 Jun 2019 06:33:28 +0000
+Content-Disposition: inline
+In-Reply-To: <d68c5e4c-b2de-95c3-0b75-1f2391b25a34@deltatee.com>
+User-Agent: Mutt/1.5.17 (2007-11-01)
 Subject: Re: [Nouveau] [PATCH 08/25] memremap: move dev_pagemap callbacks
  into a separate structure
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -55,41 +38,26 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: linux-nvdimm@lists.01.org, linux-pci@vger.kernel.org,
+Cc: linux-nvdimm@lists.01.org, nouveau@lists.freedesktop.org,
  linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- linux-mm@kvack.org, nouveau@lists.freedesktop.org
+ linux-mm@kvack.org, Jason Gunthorpe <jgg@mellanox.com>,
+ Ben Skeggs <bskeggs@redhat.com>, linux-pci@vger.kernel.org,
+ Dan Williams <dan.j.williams@intel.com>, Christoph Hellwig <hch@lst.de>
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-CgpPbiAyMDE5LTA2LTE3IDY6MjcgYS5tLiwgQ2hyaXN0b3BoIEhlbGx3aWcgd3JvdGU6Cj4gZGlm
-ZiAtLWdpdCBhL2RyaXZlcnMvcGNpL3AycGRtYS5jIGIvZHJpdmVycy9wY2kvcDJwZG1hLmMKPiBp
-bmRleCBhOTgxMjZhZDljM2EuLmUwODM1NjdkMjZlZiAxMDA2NDQKPiAtLS0gYS9kcml2ZXJzL3Bj
-aS9wMnBkbWEuYwo+ICsrKyBiL2RyaXZlcnMvcGNpL3AycGRtYS5jCj4gQEAgLTEwMCw3ICsxMDAs
-NyBAQCBzdGF0aWMgdm9pZCBwY2lfcDJwZG1hX3BlcmNwdV9jbGVhbnVwKHN0cnVjdCBwZXJjcHVf
-cmVmICpyZWYpCj4gIAlzdHJ1Y3QgcDJwZG1hX3BhZ2VtYXAgKnAycF9wZ21hcCA9IHRvX3AycF9w
-Z21hcChyZWYpOwo+ICAKPiAgCXdhaXRfZm9yX2NvbXBsZXRpb24oJnAycF9wZ21hcC0+cmVmX2Rv
-bmUpOwo+IC0JcGVyY3B1X3JlZl9leGl0KCZwMnBfcGdtYXAtPnJlZik7Cj4gKwlwZXJjcHVfcmVm
-X2V4aXQocmVmKTsKPiAgfQo+ICAKPiAgc3RhdGljIHZvaWQgcGNpX3AycGRtYV9yZWxlYXNlKHZv
-aWQgKmRhdGEpCj4gQEAgLTE1Miw2ICsxNTIsMTEgQEAgc3RhdGljIGludCBwY2lfcDJwZG1hX3Nl
-dHVwKHN0cnVjdCBwY2lfZGV2ICpwZGV2KQo+ICAJcmV0dXJuIGVycm9yOwo+ICB9Cj4gIAo+ICtz
-dGF0aWMgY29uc3Qgc3RydWN0IGRldl9wYWdlbWFwX29wcyBwY2lfcDJwZG1hX3BhZ2VtYXBfb3Bz
-ID0gewo+ICsJLmtpbGwJCT0gcGNpX3AycGRtYV9wZXJjcHVfa2lsbCwKPiArCS5jbGVhbnVwCT0g
-cGNpX3AycGRtYV9wZXJjcHVfY2xlYW51cCwKPiArfTsKPiArCj4gIC8qKgo+ICAgKiBwY2lfcDJw
-ZG1hX2FkZF9yZXNvdXJjZSAtIGFkZCBtZW1vcnkgZm9yIHVzZSBhcyBwMnAgbWVtb3J5Cj4gICAq
-IEBwZGV2OiB0aGUgZGV2aWNlIHRvIGFkZCB0aGUgbWVtb3J5IHRvCj4gQEAgLTIwNyw4ICsyMTIs
-NiBAQCBpbnQgcGNpX3AycGRtYV9hZGRfcmVzb3VyY2Uoc3RydWN0IHBjaV9kZXYgKnBkZXYsIGlu
-dCBiYXIsIHNpemVfdCBzaXplLAo+ICAJcGdtYXAtPnR5cGUgPSBNRU1PUllfREVWSUNFX1BDSV9Q
-MlBETUE7Cj4gIAlwZ21hcC0+cGNpX3AycGRtYV9idXNfb2Zmc2V0ID0gcGNpX2J1c19hZGRyZXNz
-KHBkZXYsIGJhcikgLQo+ICAJCXBjaV9yZXNvdXJjZV9zdGFydChwZGV2LCBiYXIpOwo+IC0JcGdt
-YXAtPmtpbGwgPSBwY2lfcDJwZG1hX3BlcmNwdV9raWxsOwo+IC0JcGdtYXAtPmNsZWFudXAgPSBw
-Y2lfcDJwZG1hX3BlcmNwdV9jbGVhbnVwOwoKSSBqdXN0IG5vdGljZWQgdGhpcyBpcyBtaXNzaW5n
-IGEgbGluZSB0byBzZXQgcGdtYXAtPm9wcyB0bwpwY2lfcDJwZG1hX3BhZ2VtYXBfb3BzLiBJIG11
-c3QgaGF2ZSBnb3R0ZW4gY29uZnVzZWQgYnkgdGhlIG90aGVyIHVzZXJzCmluIG15IG9yaWdpbmFs
-IHJldmlldy4gVGhvdWdoIEknbSBub3Qgc3VyZSBob3cgdGhpcyBjb21waWxlcyBhcyB0aGUgbmV3
-CnN0cnVjdCBpcyBzdGF0aWMgYW5kIHVudXNlZC4gSG93ZXZlciwgaXQgaXMgcmVuZGVyZWQgbW9v
-dCBpbiBQYXRjaCAxNgp3aGVuIHRoaXMgaXMgYWxsIHJlbW92ZWQuCgpMb2dhbgpfX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpOb3V2ZWF1IG1haWxpbmcgbGlz
-dApOb3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9w
-Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL25vdXZlYXU=
+T24gTW9uLCBKdW4gMTcsIDIwMTkgYXQgMDI6MDg6MTRQTSAtMDYwMCwgTG9nYW4gR3VudGhvcnBl
+IHdyb3RlOgo+IEkganVzdCBub3RpY2VkIHRoaXMgaXMgbWlzc2luZyBhIGxpbmUgdG8gc2V0IHBn
+bWFwLT5vcHMgdG8KPiBwY2lfcDJwZG1hX3BhZ2VtYXBfb3BzLiBJIG11c3QgaGF2ZSBnb3R0ZW4g
+Y29uZnVzZWQgYnkgdGhlIG90aGVyIHVzZXJzCj4gaW4gbXkgb3JpZ2luYWwgcmV2aWV3LiBUaG91
+Z2ggSSdtIG5vdCBzdXJlIGhvdyB0aGlzIGNvbXBpbGVzIGFzIHRoZSBuZXcKPiBzdHJ1Y3QgaXMg
+c3RhdGljIGFuZCB1bnVzZWQuIEhvd2V2ZXIsIGl0IGlzIHJlbmRlcmVkIG1vb3QgaW4gUGF0Y2gg
+MTYKPiB3aGVuIHRoaXMgaXMgYWxsIHJlbW92ZWQuCgpJdCBwcm9iYWJseSB3YXMgdGhlcmUgaW4g
+dGhlIG9yaWdpbmFsIGFuZCBnb3QgbG9zdCBpbiB0aGUgbWVyZ2UgY29uZmxpY3RzCmZyb20gdGhl
+IHJlYmFzZS4gIEkgc2hvdWxkIGhhdmUgZHJvcHBlZCBhbGwgdGhlIHJldmlld2VkLWJ5cyBmb3Ig
+cGF0Y2hlcwp3aXRoIG5vbi10cml2aWFsIG1lcmdlIHJlc29sdXRpb24sIHNvcnJ5LgpfX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpOb3V2ZWF1IG1haWxpbmcg
+bGlzdApOb3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNr
+dG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL25vdXZlYXU=
