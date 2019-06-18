@@ -2,22 +2,22 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6537B49661
-	for <lists+nouveau@lfdr.de>; Tue, 18 Jun 2019 02:43:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 223DD49663
+	for <lists+nouveau@lfdr.de>; Tue, 18 Jun 2019 02:44:21 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D6F636E0BC;
-	Tue, 18 Jun 2019 00:43:46 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7F4186E0C0;
+	Tue, 18 Jun 2019 00:44:19 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
  [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
- by gabe.freedesktop.org (Postfix) with ESMTP id 6D3286E0BC
- for <nouveau@lists.freedesktop.org>; Tue, 18 Jun 2019 00:43:45 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTP id 0AEB56E0B7
+ for <nouveau@lists.freedesktop.org>; Tue, 18 Jun 2019 00:44:18 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 6A46272167; Tue, 18 Jun 2019 00:43:45 +0000 (UTC)
+ id 0505172167; Tue, 18 Jun 2019 00:44:18 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Tue, 18 Jun 2019 00:43:45 +0000
+Date: Tue, 18 Jun 2019 00:44:18 +0000
 X-Bugzilla-Reason: AssignedTo
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
@@ -33,7 +33,7 @@ X-Bugzilla-Priority: medium
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
 X-Bugzilla-Changed-Fields: attachments.created
-Message-ID: <bug-110931-8800-E6SeS8Spzf@http.bugs.freedesktop.org/>
+Message-ID: <bug-110931-8800-NwEmz5EHxL@http.bugs.freedesktop.org/>
 In-Reply-To: <bug-110931-8800@http.bugs.freedesktop.org/>
 References: <bug-110931-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
@@ -51,18 +51,18 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1649167100=="
+Content-Type: multipart/mixed; boundary="===============0788941945=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============1649167100==
-Content-Type: multipart/alternative; boundary="15608186252.FC5CfEE.19293"
+--===============0788941945==
+Content-Type: multipart/alternative; boundary="15608186570.A9D6aC.20294"
 Content-Transfer-Encoding: 7bit
 
 
---15608186252.FC5CfEE.19293
-Date: Tue, 18 Jun 2019 00:43:45 +0000
+--15608186570.A9D6aC.20294
+Date: Tue, 18 Jun 2019 00:44:17 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -71,17 +71,17 @@ Auto-Submitted: auto-generated
 
 https://bugs.freedesktop.org/show_bug.cgi?id=3D110931
 
---- Comment #2 from Andrey Taranov <taranov.andrey@gmail.com> ---
-Created attachment 144581
-  --> https://bugs.freedesktop.org/attachment.cgi?id=3D144581&action=3Dedit
-Failing Xorg log
+--- Comment #3 from Andrey Taranov <taranov.andrey@gmail.com> ---
+Created attachment 144582
+  --> https://bugs.freedesktop.org/attachment.cgi?id=3D144582&action=3Dedit
+Successful kernel log
 
 --=20
 You are receiving this mail because:
 You are the assignee for the bug.=
 
---15608186252.FC5CfEE.19293
-Date: Tue, 18 Jun 2019 00:43:45 +0000
+--15608186570.A9D6aC.20294
+Date: Tue, 18 Jun 2019 00:44:17 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -98,8 +98,8 @@ Auto-Submitted: auto-generated
             <b><a class=3D"bz_bug_link=20
           bz_status_NEW "
    title=3D"NEW - Timeout initializing Falcon after cold boot"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110931#c2">Commen=
-t # 2</a>
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110931#c3">Commen=
+t # 3</a>
               on <a class=3D"bz_bug_link=20
           bz_status_NEW "
    title=3D"NEW - Timeout initializing Falcon after cold boot"
@@ -109,11 +109,11 @@ t # 2</a>
 taranov.andrey&#64;gmail.com" title=3D"Andrey Taranov &lt;taranov.andrey&#6=
 4;gmail.com&gt;"> <span class=3D"fn">Andrey Taranov</span></a>
 </span></b>
-        <pre>Created <span class=3D""><a href=3D"attachment.cgi?id=3D144581=
-" name=3D"attach_144581" title=3D"Failing Xorg log">attachment 144581</a> <=
-a href=3D"attachment.cgi?id=3D144581&amp;action=3Dedit" title=3D"Failing Xo=
-rg log">[details]</a></span>
-Failing Xorg log</pre>
+        <pre>Created <span class=3D""><a href=3D"attachment.cgi?id=3D144582=
+" name=3D"attach_144582" title=3D"Successful kernel log">attachment 144582<=
+/a> <a href=3D"attachment.cgi?id=3D144582&amp;action=3Dedit" title=3D"Succe=
+ssful kernel log">[details]</a></span>
+Successful kernel log</pre>
         </div>
       </p>
 
@@ -127,9 +127,9 @@ Failing Xorg log</pre>
     </body>
 </html>=
 
---15608186252.FC5CfEE.19293--
+--15608186570.A9D6aC.20294--
 
---===============1649167100==
+--===============0788941945==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -139,4 +139,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============1649167100==--
+--===============0788941945==--
