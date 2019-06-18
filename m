@@ -1,53 +1,44 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B56F44AB03
-	for <lists+nouveau@lfdr.de>; Tue, 18 Jun 2019 21:28:37 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id AECEC4AB10
+	for <lists+nouveau@lfdr.de>; Tue, 18 Jun 2019 21:36:35 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 689776E22B;
-	Tue, 18 Jun 2019 19:28:35 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 404736E1E8;
+	Tue, 18 Jun 2019 19:36:34 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A26B76E22B
- for <nouveau@lists.freedesktop.org>; Tue, 18 Jun 2019 19:28:33 +0000 (UTC)
-X-UI-Sender-Class: 01bb95c1-4bf8-414a-932a-4f6e2808ef9c
-Received: from [92.201.122.123] ([92.201.122.123]) by web-mail.gmx.net
- (3c-app-gmx-bs22.server.lan [172.19.170.74]) (via HTTP); Tue, 18 Jun 2019
- 21:28:30 +0200
+Received: from mail-ua1-f65.google.com (mail-ua1-f65.google.com
+ [209.85.222.65])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9F4126E1E8
+ for <nouveau@lists.freedesktop.org>; Tue, 18 Jun 2019 19:36:32 +0000 (UTC)
+Received: by mail-ua1-f65.google.com with SMTP id 34so7253507uar.8
+ for <nouveau@lists.freedesktop.org>; Tue, 18 Jun 2019 12:36:32 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=+abyxz+5hBr0wvm/+lLNAT/M8CMhQDFmlbu3Pl08suc=;
+ b=tFllPfjDIba5wRWE+7mbxguoervDtpjhbkyoPZqiMyrxdOyiDgOJMpQoR16Q9HitEi
+ UbYj+nCHyOZumrrXpZ6AFJZObsLwdpr3FEe/6KAfX5adEdCWPK49OBfJ66gJSL1tIwyM
+ bktsWnqbq1Wjs4IzTdJTQ0a96uj/l7AoCtBk2vy688bi4L/kFicchrNM+5PGGsk/cEtg
+ 1g7pYA6EvyMizZ78dXD4JXcJSucFBZfjHZWxZ3jge4xM4TlV2ZnNkYi5teKN/Odr0xVL
+ bm6hq0O+wxFrDTNESjkiuvBkrnv6HvK3Q+B0UobMEfAgT4yxw8cjji9uq1gOHN0tg78t
+ ZzmA==
+X-Gm-Message-State: APjAAAW1jqyCUX2VYKMYlO6WAEPkM0EFqUXpC3E4bwMNYctFz5Lk2hi3
+ NRzy/hXqhiYx0wZap/luuh/1CkpWyR/uCOCBNr12BQ==
+X-Google-Smtp-Source: APXvYqyTWZK5xEFRGXnhC17H7xP2+fBeJ7tbFHJglB/y6glP50GdB8W3314teNAuFZqurVCP5GJvO7hW3c0oCjE6p6I=
+X-Received: by 2002:a9f:31a2:: with SMTP id v31mr11807328uad.15.1560886591784; 
+ Tue, 18 Jun 2019 12:36:31 -0700 (PDT)
 MIME-Version: 1.0
-Message-ID: <trinity-60f06d18-ea3c-49a9-8a25-d6aa7f233436-1560886110718@3c-app-gmx-bs22>
-From: "Harald Harders" <harald.harders@gmx.de>
-To: nouveau@lists.freedesktop.org
-Date: Tue, 18 Jun 2019 21:28:30 +0200
-Importance: normal
-Sensitivity: Normal
-X-Priority: 3
-X-Provags-ID: V03:K1:KP7j2e30j73zzhnrmOXiUyP2C2vf6nzDgZS+J08sGHTWlkHLzcB59FF5RVpSf4Cyil5Dk
- dfq05kwYMD8WigYgwMMUZQE4VQbPrtDncAEztUP1LAFhVULOpHE6j+kRCZd74eOf3MqRH9+YpymH
- 8rqKTBN2duqDMMNsUbiT8qNwT5GLMToIbNAjO0ro2gvNmvkRZcvMtBuA0a7vIIXQbxJy4j3sQWZN
- MdFgIxwDKGP1UFhM/ZMOsOdW3PyyydigA2gtzBzE9eZL+LSqu+UlaozA7K0XUv/6cw1pwMoWlgCN
- hw=
-X-Spam-Flag: NO
-X-UI-Out-Filterresults: notjunk:1;V03:K0:1QUGh8K9xv0=:mpaKzVPYWqxIrfKUGhKDS2
- Ifealc4AQ9arF5lABJLz4MXkzfRIsG7ArwopIKfCzwvIc6dr1ROqdj1eZLsfWkNIB/RwjhS3w
- hzuqrQq+cNAL/BMr4y9G9HOfpCPohE6qpjBnYsSkBW5eR7iAJtdNdzcoZM3S1LltQN/k3C4jW
- uYrkVnupzE/thx3AM3HjxR51ezkHTkdnSEQm9OlxNzlhEH/yvXzL9t/DgRiQQHBoCOe3gGdKy
- jxVnkxtB+uPQCr6P8F0BNZeLCMgvHI7O2MHe7/M+/JK/edArprQE7nkzMQpz0HHLaPJhe/kow
- TyccixhKP55yRY6nisZnjBxUmFplwPLPgxMtrkk9AMxA8dmF33eBhcYJ7XAT97evKWUuH9ACZ
- 1ATfietqydv9RsU2AJYmQAy2zdwvWAGLKRdDmMxFsLiSBqJYk44CpfdPQwvkyGEPp93G6uqz/
- wTHNNTYKK/5YdVuML4kDhe6XOS+RDjlJKxFp3BcYWrzIXCZqrgeFd66VM7JgHHJ0Lbqadkl2S
- 7LnzZUgza9kSxwSJfGCEiuJng76sfrM339lB5ZeH2p4D+lIh+qouym/QVk5zFVNUrOV0bemlW
- OuAumzFQSPpQ7xRa4dpeguJMkqHJtekcWSv7QKEcIFBRUi2B7Uq08NRg==
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=gmx.net; s=badeba3b8450; t=1560886110;
- bh=UatIpL85/jFpAOuncuA0Ujy9dUbxz9kP51n60Sb/iC4=;
- h=X-UI-Sender-Class:From:To:Subject:Date;
- b=fom1hdLttSt8wdBQt0Y0gvzntM1cMw/yV0d5OdnpkXvlxIIGWJjSCSAfTiyDEQYAZ
- Cf8k9E5OJHpFjaUlbW3OVKT27u0i2ZYZ5mCs7IYaMmqskwwCULp/e0FtrqWY4DQDxE
- oDyZX3/u3LXTAu945czNHl/kyg37MB+5WevnWVls=
-Subject: [Nouveau] Instable graphics with GeForce GT 730M,
+References: <trinity-60f06d18-ea3c-49a9-8a25-d6aa7f233436-1560886110718@3c-app-gmx-bs22>
+In-Reply-To: <trinity-60f06d18-ea3c-49a9-8a25-d6aa7f233436-1560886110718@3c-app-gmx-bs22>
+From: Ilia Mirkin <imirkin@alum.mit.edu>
+Date: Tue, 18 Jun 2019 15:36:20 -0400
+Message-ID: <CAKb7UvifuLNe_Nq+7oGHTzgmo4a3mQ1kg0QX-kKfdABB8Ok_Hg@mail.gmail.com>
+To: Harald Harders <harald.harders@gmx.de>
+Subject: Re: [Nouveau] Instable graphics with GeForce GT 730M,
  especially on external monitor
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
@@ -60,79 +51,55 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0101000947=="
+Cc: nouveau <nouveau@lists.freedesktop.org>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
---===============0101000947==
-Content-Type: text/html; charset=UTF-8
-
-<html><head></head><body><div style="font-family: Verdana;font-size: 12.0px;"><div>Dear all,</div>
-
-<div>&nbsp;</div>
-
-<div class="signature">I have recently updated my Lenovo T440p with a dual graphics card (Intel Core + GeForce GT 730M) to OpenSUSE Leap 15.1. Since then, the external screen (connected either via VGA, DVI, HDMI, or DisplayPort) has a vertically stretched output which jumps horizontally in high frequency. Whenever touching any settings for the built in display (e.g. by gnome-control-center), also this screen starts incorrect display. Sometimes, however, also the external screen works as expected.</div>
-
-<div class="signature">&nbsp;</div>
-
-<div class="signature">Installed driver version is (only 2D installed):</div>
-
-<div class="signature">xf86-video-nouveau: 1.0.15-lp151.4.1</div>
-
-<div class="signature">libvdpau_nouveau: 18.3.2-lp151.22.4</div>
-
-<div class="signature">libdrm_nouveau2: 2.4.97-lp151.1.1</div>
-
-<div class="signature">&nbsp;</div>
-
-<div class="signature">I have followed your instructions on the TroubleShooting page, No signs for NVIDIA drivers running, everything appears to be okay. Minimal xorg.conf did not work, screenshots are okay.Unfortunately, I failed in installing the most recent nouveau version (neither /lib/modules/4.12.14-lp151.28.4-default/source nor /lib/modules/4.12.14-lp151.28.4-default/build are present on my computer even though I have installed the Kernel sources). The installed version is still quite new, isn&#39;t it?</div>
-
-<div class="signature">&nbsp;</div>
-
-<div class="signature">I suspect that I might have the issue you describe under &quot;Blank monitor, flicker, snow, or other random live image corruption&quot;. I would like to make sure, however. And since you warn with regards to potential permanent damage, I would like to make sure, first.</div>
-
-<div class="signature">Can you confirm that it should be this issue? Or are there any other things I should try first?</div>
-
-<div class="signature">&nbsp;</div>
-
-<div class="signature">Best regards</div>
-
-<div class="signature">Harald</div>
-
-<div class="signature">&nbsp;</div>
-
-<div class="signature">&nbsp;</div>
-
-<div class="signature">&nbsp;</div>
-
-<div class="signature">&nbsp;</div>
-
-<div class="signature">&nbsp;</div>
-
-<div class="signature">&nbsp;</div>
-
-<div class="signature">&nbsp;</div>
-
-<div class="signature">&nbsp;</div>
-
-<div>&nbsp;
-<div class="signature">
-<div>lose:/home/harders/download/nouveau/drm # lspci &#124; grep -i vga<br/>
-00:02.0 VGA compatible controller: Intel Corporation 4th Gen Core Processor Integrated Graphics Controller (rev 06)<br/>
-02:00.0 VGA compatible controller: NVIDIA Corporation GK208M [GeForce GT 730M] (rev a1)</div>
-
-<div>&nbsp;</div>
-</div>
-</div></div></body></html>
-
---===============0101000947==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
-YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
-cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
-
---===============0101000947==--
+V2hpY2gga2VybmVsIGRpZCB5b3UgdXBkYXRlIGZyb20gYW5kIHRvPyBBbHNvLCA0LjEyIGlzIGZh
+aXJseSBvbGQgLQpjYW4geW91IHRyeSBsaWtlIGEgbGl2ZSB1c2IgaW1hZ2Ugb2Ygc29tZSBkaXN0
+cm8gd2l0aCBlLmcuIGEgNS4wCmtlcm5lbCBvciBzb21ldGhpbmc/CgpIb3cgZG8geW91IGNvbm5l
+Y3QgdGhlIGV4dGVybmFsIHNjcmVlbj8gSXMgaXQgbGlrZSBhIERQIHBvcnQgd2l0aCBhbgpvcHRp
+b25hbCBkb2NrIHdpdGggYSB2YXJpZXR5IG9mIGFjdGl2ZSBEUCBhZGFwdGVycz8gT3IgaXMgdGhl
+cmUgYSBEUCsrCnBvcnQgdGhhdCB5b3UncmUgcGx1Z2dpbmcgYSBEUCA8LT4gSERNSSBwYXNzaXZl
+IGFkYXB0ZXIgaW50bz8KCk9uIFR1ZSwgSnVuIDE4LCAyMDE5IGF0IDM6MjggUE0gSGFyYWxkIEhh
+cmRlcnMgPGhhcmFsZC5oYXJkZXJzQGdteC5kZT4gd3JvdGU6Cj4KPiBEZWFyIGFsbCwKPgo+IEkg
+aGF2ZSByZWNlbnRseSB1cGRhdGVkIG15IExlbm92byBUNDQwcCB3aXRoIGEgZHVhbCBncmFwaGlj
+cyBjYXJkIChJbnRlbCBDb3JlICsgR2VGb3JjZSBHVCA3MzBNKSB0byBPcGVuU1VTRSBMZWFwIDE1
+LjEuIFNpbmNlIHRoZW4sIHRoZSBleHRlcm5hbCBzY3JlZW4gKGNvbm5lY3RlZCBlaXRoZXIgdmlh
+IFZHQSwgRFZJLCBIRE1JLCBvciBEaXNwbGF5UG9ydCkgaGFzIGEgdmVydGljYWxseSBzdHJldGNo
+ZWQgb3V0cHV0IHdoaWNoIGp1bXBzIGhvcml6b250YWxseSBpbiBoaWdoIGZyZXF1ZW5jeS4gV2hl
+bmV2ZXIgdG91Y2hpbmcgYW55IHNldHRpbmdzIGZvciB0aGUgYnVpbHQgaW4gZGlzcGxheSAoZS5n
+LiBieSBnbm9tZS1jb250cm9sLWNlbnRlciksIGFsc28gdGhpcyBzY3JlZW4gc3RhcnRzIGluY29y
+cmVjdCBkaXNwbGF5LiBTb21ldGltZXMsIGhvd2V2ZXIsIGFsc28gdGhlIGV4dGVybmFsIHNjcmVl
+biB3b3JrcyBhcyBleHBlY3RlZC4KPgo+IEluc3RhbGxlZCBkcml2ZXIgdmVyc2lvbiBpcyAob25s
+eSAyRCBpbnN0YWxsZWQpOgo+IHhmODYtdmlkZW8tbm91dmVhdTogMS4wLjE1LWxwMTUxLjQuMQo+
+IGxpYnZkcGF1X25vdXZlYXU6IDE4LjMuMi1scDE1MS4yMi40Cj4gbGliZHJtX25vdXZlYXUyOiAy
+LjQuOTctbHAxNTEuMS4xCj4KPiBJIGhhdmUgZm9sbG93ZWQgeW91ciBpbnN0cnVjdGlvbnMgb24g
+dGhlIFRyb3VibGVTaG9vdGluZyBwYWdlLCBObyBzaWducyBmb3IgTlZJRElBIGRyaXZlcnMgcnVu
+bmluZywgZXZlcnl0aGluZyBhcHBlYXJzIHRvIGJlIG9rYXkuIE1pbmltYWwgeG9yZy5jb25mIGRp
+ZCBub3Qgd29yaywgc2NyZWVuc2hvdHMgYXJlIG9rYXkuVW5mb3J0dW5hdGVseSwgSSBmYWlsZWQg
+aW4gaW5zdGFsbGluZyB0aGUgbW9zdCByZWNlbnQgbm91dmVhdSB2ZXJzaW9uIChuZWl0aGVyIC9s
+aWIvbW9kdWxlcy80LjEyLjE0LWxwMTUxLjI4LjQtZGVmYXVsdC9zb3VyY2Ugbm9yIC9saWIvbW9k
+dWxlcy80LjEyLjE0LWxwMTUxLjI4LjQtZGVmYXVsdC9idWlsZCBhcmUgcHJlc2VudCBvbiBteSBj
+b21wdXRlciBldmVuIHRob3VnaCBJIGhhdmUgaW5zdGFsbGVkIHRoZSBLZXJuZWwgc291cmNlcyku
+IFRoZSBpbnN0YWxsZWQgdmVyc2lvbiBpcyBzdGlsbCBxdWl0ZSBuZXcsIGlzbid0IGl0Pwo+Cj4g
+SSBzdXNwZWN0IHRoYXQgSSBtaWdodCBoYXZlIHRoZSBpc3N1ZSB5b3UgZGVzY3JpYmUgdW5kZXIg
+IkJsYW5rIG1vbml0b3IsIGZsaWNrZXIsIHNub3csIG9yIG90aGVyIHJhbmRvbSBsaXZlIGltYWdl
+IGNvcnJ1cHRpb24iLiBJIHdvdWxkIGxpa2UgdG8gbWFrZSBzdXJlLCBob3dldmVyLiBBbmQgc2lu
+Y2UgeW91IHdhcm4gd2l0aCByZWdhcmRzIHRvIHBvdGVudGlhbCBwZXJtYW5lbnQgZGFtYWdlLCBJ
+IHdvdWxkIGxpa2UgdG8gbWFrZSBzdXJlLCBmaXJzdC4KPiBDYW4geW91IGNvbmZpcm0gdGhhdCBp
+dCBzaG91bGQgYmUgdGhpcyBpc3N1ZT8gT3IgYXJlIHRoZXJlIGFueSBvdGhlciB0aGluZ3MgSSBz
+aG91bGQgdHJ5IGZpcnN0Pwo+Cj4gQmVzdCByZWdhcmRzCj4gSGFyYWxkCj4KPgo+Cj4KPgo+Cj4K
+Pgo+Cj4gbG9zZTovaG9tZS9oYXJkZXJzL2Rvd25sb2FkL25vdXZlYXUvZHJtICMgbHNwY2kgfCBn
+cmVwIC1pIHZnYQo+IDAwOjAyLjAgVkdBIGNvbXBhdGlibGUgY29udHJvbGxlcjogSW50ZWwgQ29y
+cG9yYXRpb24gNHRoIEdlbiBDb3JlIFByb2Nlc3NvciBJbnRlZ3JhdGVkIEdyYXBoaWNzIENvbnRy
+b2xsZXIgKHJldiAwNikKPiAwMjowMC4wIFZHQSBjb21wYXRpYmxlIGNvbnRyb2xsZXI6IE5WSURJ
+QSBDb3Jwb3JhdGlvbiBHSzIwOE0gW0dlRm9yY2UgR1QgNzMwTV0gKHJldiBhMSkKPgo+IF9fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCj4gTm91dmVhdSBtYWls
+aW5nIGxpc3QKPiBOb3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwo+IGh0dHBzOi8vbGlzdHMu
+ZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vbm91dmVhdQpfX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpOb3V2ZWF1IG1haWxpbmcgbGlzdApOb3V2
+ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9t
+YWlsbWFuL2xpc3RpbmZvL25vdXZlYXU=
