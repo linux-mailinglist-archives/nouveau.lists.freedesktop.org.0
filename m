@@ -1,45 +1,48 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id D30114966B
-	for <lists+nouveau@lfdr.de>; Tue, 18 Jun 2019 02:48:46 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 96C4349E24
+	for <lists+nouveau@lfdr.de>; Tue, 18 Jun 2019 12:20:49 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5F0316E0BF;
-	Tue, 18 Jun 2019 00:48:45 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B83686E12D;
+	Tue, 18 Jun 2019 10:20:47 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [131.252.210.165])
- by gabe.freedesktop.org (Postfix) with ESMTP id C318D6E0C1
- for <nouveau@lists.freedesktop.org>; Tue, 18 Jun 2019 00:48:44 +0000 (UTC)
-Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id C00C372167; Tue, 18 Jun 2019 00:48:44 +0000 (UTC)
-From: bugzilla-daemon@freedesktop.org
+Received: from mail-wm1-f65.google.com (mail-wm1-f65.google.com
+ [209.85.128.65])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 975CB6E12D
+ for <nouveau@lists.freedesktop.org>; Tue, 18 Jun 2019 10:20:45 +0000 (UTC)
+Received: by mail-wm1-f65.google.com with SMTP id f17so2613521wme.2
+ for <nouveau@lists.freedesktop.org>; Tue, 18 Jun 2019 03:20:45 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=5dmZstTyRYEPltZ9TwauG9kf8+uA2v2v5txDCdK0PGY=;
+ b=uhPGuk7RWQSYHFOmFcLIBJ/mhul4WW7ApW5JMtzD9ffIEdS3TzDkZQfN0JEFAw2Nkq
+ N2F2OuopGZklMdqvNV06rlI7VeM+TrjlQmh/dHqbAwEb7FocHmQ48O4rCHb09uHaLwAR
+ 7VA7ZrJjEK+SYfxq2WOzWg6kDZIxE349MxbLTDYRx00xSG1g+KPA4HBjOeGaQQ20tddJ
+ ZvkUsijViSYLQAzt/TNxD5BjN9A5SqqPo2P5MyvxJtuP34Rxe+hExCvrtnwzf026m3h1
+ oVrgxN0u2EujPh2i8hNjaUd3PjezMM7bSrY8IuaJdIDUMe7O5nwchWX0kSe/fBwBqXtr
+ X7nw==
+X-Gm-Message-State: APjAAAUxWl9/rdndaDMWSMXDOjDNp7vngsMZetG2a4yW5Vxk9rsTGrMx
+ EQD1GlTSaC9qK6ACR0EBMrfRry2goEA=
+X-Google-Smtp-Source: APXvYqyMPNtGlztbRhPqvieiAGuumx1W8IrB32vHATfE1a5vwDHZQcKeSFDmKw057+qe/xSaRBVXNA==
+X-Received: by 2002:a7b:cd8e:: with SMTP id y14mr2846813wmj.155.1560853243967; 
+ Tue, 18 Jun 2019 03:20:43 -0700 (PDT)
+Received: from kherbst.pingu.com ([2a02:8308:b0be:6900:a436:9628:593f:d774])
+ by smtp.gmail.com with ESMTPSA id 5sm1918684wmg.42.2019.06.18.03.20.42
+ (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+ Tue, 18 Jun 2019 03:20:43 -0700 (PDT)
+From: Karol Herbst <kherbst@redhat.com>
 To: nouveau@lists.freedesktop.org
-Date: Tue, 18 Jun 2019 00:48:44 +0000
-X-Bugzilla-Reason: AssignedTo
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: None
-X-Bugzilla-Product: xorg
-X-Bugzilla-Component: Driver/nouveau
-X-Bugzilla-Version: unspecified
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: normal
-X-Bugzilla-Who: taranov.andrey@gmail.com
-X-Bugzilla-Status: NEW
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: medium
-X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: attachments.created
-Message-ID: <bug-110931-8800-Hb2kMsr00N@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-110931-8800@http.bugs.freedesktop.org/>
-References: <bug-110931-8800@http.bugs.freedesktop.org/>
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
+Date: Tue, 18 Jun 2019 12:20:40 +0200
+Message-Id: <20190618102040.4523-1-kherbst@redhat.com>
+X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 110931] Timeout initializing Falcon after cold boot
+Subject: [Nouveau] [PATCH v3] drm: don't set the pci power state if the pci
+ subsystem handles the ACPI bits
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -51,107 +54,92 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0594021460=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-
---===============0594021460==
-Content-Type: multipart/alternative; boundary="15608189242.dD400Ec1d.20806"
-Content-Transfer-Encoding: 7bit
-
-
---15608189242.dD400Ec1d.20806
-Date: Tue, 18 Jun 2019 00:48:44 +0000
-MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-https://bugs.freedesktop.org/show_bug.cgi?id=3D110931
-
---- Comment #5 from Andrey Taranov <taranov.andrey@gmail.com> ---
-Created attachment 144584
-  --> https://bugs.freedesktop.org/attachment.cgi?id=3D144584&action=3Dedit
-VBIOS
-
-Produced with
-# cp /sys/kernel/debug/dri/1/vbios.rom .
-
-In my case, it is dri/1:
-# cat /sys/kernel/debug/dri/1/name
-nouveau dev=3D0000:01:00.0 master=3Dpci:0000:01:00.0 unique=3D0000:01:00.0
-
---=20
-You are receiving this mail because:
-You are the assignee for the bug.=
-
---15608189242.dD400Ec1d.20806
-Date: Tue, 18 Jun 2019 00:48:44 +0000
-MIME-Version: 1.0
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-<html>
-    <head>
-      <base href=3D"https://bugs.freedesktop.org/">
-    </head>
-    <body>
-      <p>
-        <div>
-            <b><a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - Timeout initializing Falcon after cold boot"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110931#c5">Commen=
-t # 5</a>
-              on <a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - Timeout initializing Falcon after cold boot"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110931">bug 11093=
-1</a>
-              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
-taranov.andrey&#64;gmail.com" title=3D"Andrey Taranov &lt;taranov.andrey&#6=
-4;gmail.com&gt;"> <span class=3D"fn">Andrey Taranov</span></a>
-</span></b>
-        <pre>Created <span class=3D""><a href=3D"attachment.cgi?id=3D144584=
-" name=3D"attach_144584" title=3D"VBIOS">attachment 144584</a> <a href=3D"a=
-ttachment.cgi?id=3D144584&amp;action=3Dedit" title=3D"VBIOS">[details]</a><=
-/span>
-VBIOS
-
-Produced with
-# cp /sys/kernel/debug/dri/1/vbios.rom .
-
-In my case, it is dri/1:
-# cat /sys/kernel/debug/dri/1/name
-nouveau dev=3D0000:01:00.0 master=3Dpci:0000:01:00.0 unique=3D0000:01:00.0<=
-/pre>
-        </div>
-      </p>
-
-
-      <hr>
-      <span>You are receiving this mail because:</span>
-
-      <ul>
-          <li>You are the assignee for the bug.</li>
-      </ul>
-    </body>
-</html>=
-
---15608189242.dD400Ec1d.20806--
-
---===============0594021460==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
-YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
-cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
-
---===============0594021460==--
+V2hlbiBsb29raW5nIGludG8gdGhlIHJ1bnBtIGlzc3VlcywgdGhlIGZpcnN0IHdvcmthcm91bmQg
+SSBjYW1lIHVwIHdpdGgKd2FzIHNldHRpbmcgdGhlIFBDSWUgbGluayBzcGVlZCB0byB3aGF0ZXZl
+ciBpdCB3YXMgYmVmb3JlIHJ1bm5pbmcgZGV2aW5pdApvbiB0aGUgR1BVLgoKQXMgSSB3YXMgcGxh
+eWluZyBhcm91bmQgd2l0aCBteSBwYXRjaGVzIHRvZGF5LCBpdCBzZWVtcyBsaWtlIHRoYXQganVz
+dApyZXdvcmtpbmcgdGhlIHJ1bnBtIGJpdHMgaXRzZWxmIGZpeGVkIGl0IG9uIG15IG1hY2hpbmUg
+YXMgd2VsbC4gSG9wZWZ1bGx5CnRoaXMgd2lsbCBiZSBlbm91Z2ggZm9yIG90aGVyIGxhcHRvcHMg
+YXMgd2VsbC4KCkFueWhvdywgaXQncyBhIG5pY2UgcmV3b3JrIGFuZCBpZiBpdCdzIG5vdCBlbm91
+Z2gsIHdlIGNhbiBhbHdheXMgdGhpbmsKb2YgYWRkaW5nIHRoZSBQQ0llIHdvcmthcm91bmQgbGF0
+ZXIuCgp2MjogcmV3b3JrIGRldGVjdGlvbiBvZiBpZiBOb3V2ZWF1IGNhbGxpbmcgYSBEU00gbWV0
+aG9kIG9yIG5vdAp2MzogZGV0ZWN0IG9sZCBzdHlsZSBEU00gYXMgd2VsbAoKU2lnbmVkLW9mZi1i
+eTogS2Fyb2wgSGVyYnN0IDxraGVyYnN0QHJlZGhhdC5jb20+ClJldmlld2VkLWJ5OiBMeXVkZSBQ
+YXVsIDxseXVkZUByZWRoYXQuY29tPiAodjIpCi0tLQogZHJtL25vdXZlYXUvbm91dmVhdV9hY3Bp
+LmMgfCAgNyArKysrKystCiBkcm0vbm91dmVhdS9ub3V2ZWF1X2FjcGkuaCB8ICAyICsrCiBkcm0v
+bm91dmVhdS9ub3V2ZWF1X2RybS5jICB8IDExICsrKysrKysrKy0tCiBkcm0vbm91dmVhdS9ub3V2
+ZWF1X2Rydi5oICB8ICAyICsrCiA0IGZpbGVzIGNoYW5nZWQsIDE5IGluc2VydGlvbnMoKyksIDMg
+ZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEvZHJtL25vdXZlYXUvbm91dmVhdV9hY3BpLmMgYi9k
+cm0vbm91dmVhdS9ub3V2ZWF1X2FjcGkuYwppbmRleCBmZmIxOTU4NTAuLmM0ODNiOGIyMSAxMDA2
+NDQKLS0tIGEvZHJtL25vdXZlYXUvbm91dmVhdV9hY3BpLmMKKysrIGIvZHJtL25vdXZlYXUvbm91
+dmVhdV9hY3BpLmMKQEAgLTM1OCw2ICszNTgsMTIgQEAgdm9pZCBub3V2ZWF1X3JlZ2lzdGVyX2Rz
+bV9oYW5kbGVyKHZvaWQpCiAJdmdhX3N3aXRjaGVyb29fcmVnaXN0ZXJfaGFuZGxlcigmbm91dmVh
+dV9kc21faGFuZGxlciwgMCk7CiB9CiAKK2Jvb2wgbm91dmVhdV9ydW5wbV9jYWxsc19kc20odm9p
+ZCkKK3sKKwlyZXR1cm4gKG5vdXZlYXVfZHNtX3ByaXYub3B0aW11c19kZXRlY3RlZCB8fCBub3V2
+ZWF1X2RzbV9wcml2LmRzbV9kZXRlY3RlZCkKKwkJJiYgIW5vdXZlYXVfZHNtX3ByaXYub3B0aW11
+c19za2lwX2RzbTsKK30KKwogLyogTXVzdCBiZSBjYWxsZWQgZm9yIE9wdGltdXMgbW9kZWxzIGJl
+Zm9yZSB0aGUgY2FyZCBjYW4gYmUgdHVybmVkIG9mZiAqLwogdm9pZCBub3V2ZWF1X3N3aXRjaGVy
+b29fb3B0aW11c19kc20odm9pZCkKIHsKQEAgLTM3MSw3ICszNzcsNiBAQCB2b2lkIG5vdXZlYXVf
+c3dpdGNoZXJvb19vcHRpbXVzX2RzbSh2b2lkKQogCiAJbm91dmVhdV9vcHRpbXVzX2RzbShub3V2
+ZWF1X2RzbV9wcml2LmRoYW5kbGUsIE5PVVZFQVVfRFNNX09QVElNVVNfQ0FQUywKIAkJTk9VVkVB
+VV9EU01fT1BUSU1VU19TRVRfUE9XRVJET1dOLCAmcmVzdWx0KTsKLQogfQogCiB2b2lkIG5vdXZl
+YXVfdW5yZWdpc3Rlcl9kc21faGFuZGxlcih2b2lkKQpkaWZmIC0tZ2l0IGEvZHJtL25vdXZlYXUv
+bm91dmVhdV9hY3BpLmggYi9kcm0vbm91dmVhdS9ub3V2ZWF1X2FjcGkuaAppbmRleCBiODYyOTRm
+YzkuLjBmNWQ3YWEwMyAxMDA2NDQKLS0tIGEvZHJtL25vdXZlYXUvbm91dmVhdV9hY3BpLmgKKysr
+IGIvZHJtL25vdXZlYXUvbm91dmVhdV9hY3BpLmgKQEAgLTEzLDYgKzEzLDcgQEAgdm9pZCBub3V2
+ZWF1X3N3aXRjaGVyb29fb3B0aW11c19kc20odm9pZCk7CiBpbnQgbm91dmVhdV9hY3BpX2dldF9i
+aW9zX2NodW5rKHVpbnQ4X3QgKmJpb3MsIGludCBvZmZzZXQsIGludCBsZW4pOwogYm9vbCBub3V2
+ZWF1X2FjcGlfcm9tX3N1cHBvcnRlZChzdHJ1Y3QgZGV2aWNlICopOwogdm9pZCAqbm91dmVhdV9h
+Y3BpX2VkaWQoc3RydWN0IGRybV9kZXZpY2UgKiwgc3RydWN0IGRybV9jb25uZWN0b3IgKik7Citi
+b29sIG5vdXZlYXVfcnVucG1fY2FsbHNfZHNtKHZvaWQpOwogI2Vsc2UKIHN0YXRpYyBpbmxpbmUg
+Ym9vbCBub3V2ZWF1X2lzX29wdGltdXModm9pZCkgeyByZXR1cm4gZmFsc2U7IH07CiBzdGF0aWMg
+aW5saW5lIGJvb2wgbm91dmVhdV9pc192MV9kc20odm9pZCkgeyByZXR1cm4gZmFsc2U7IH07CkBA
+IC0yMiw2ICsyMyw3IEBAIHN0YXRpYyBpbmxpbmUgdm9pZCBub3V2ZWF1X3N3aXRjaGVyb29fb3B0
+aW11c19kc20odm9pZCkge30KIHN0YXRpYyBpbmxpbmUgYm9vbCBub3V2ZWF1X2FjcGlfcm9tX3N1
+cHBvcnRlZChzdHJ1Y3QgZGV2aWNlICpkZXYpIHsgcmV0dXJuIGZhbHNlOyB9CiBzdGF0aWMgaW5s
+aW5lIGludCBub3V2ZWF1X2FjcGlfZ2V0X2Jpb3NfY2h1bmsodWludDhfdCAqYmlvcywgaW50IG9m
+ZnNldCwgaW50IGxlbikgeyByZXR1cm4gLUVJTlZBTDsgfQogc3RhdGljIGlubGluZSB2b2lkICpu
+b3V2ZWF1X2FjcGlfZWRpZChzdHJ1Y3QgZHJtX2RldmljZSAqZGV2LCBzdHJ1Y3QgZHJtX2Nvbm5l
+Y3RvciAqY29ubmVjdG9yKSB7IHJldHVybiBOVUxMOyB9CitzdGF0aWMgaW5saW5lIGJvb2wgbm91
+dmVhdV9ydW5wbV9jYWxsc19kc20odm9pZCkgeyByZXR1cm4gZmFsc2U7IH0KICNlbmRpZgogCiAj
+ZW5kaWYKZGlmZiAtLWdpdCBhL2RybS9ub3V2ZWF1L25vdXZlYXVfZHJtLmMgYi9kcm0vbm91dmVh
+dS9ub3V2ZWF1X2RybS5jCmluZGV4IGY3NDU1N2FmOS4uNTM3YWY1MGU4IDEwMDY0NAotLS0gYS9k
+cm0vbm91dmVhdS9ub3V2ZWF1X2RybS5jCisrKyBiL2RybS9ub3V2ZWF1L25vdXZlYXVfZHJtLmMK
+QEAgLTU1Nyw2ICs1NTcsNyBAQCBub3V2ZWF1X2RybV9kZXZpY2VfaW5pdChzdHJ1Y3QgZHJtX2Rl
+dmljZSAqZGV2KQogCW5vdXZlYXVfZmJjb25faW5pdChkZXYpOwogCW5vdXZlYXVfbGVkX2luaXQo
+ZGV2KTsKIAorCWRybS0+cnVucG1fZHNtID0gbm91dmVhdV9ydW5wbV9jYWxsc19kc20oKTsKIAlp
+ZiAobm91dmVhdV9wbW9wc19ydW50aW1lKCkpIHsKIAkJcG1fcnVudGltZV91c2VfYXV0b3N1c3Bl
+bmQoZGV2LT5kZXYpOwogCQlwbV9ydW50aW1lX3NldF9hdXRvc3VzcGVuZF9kZWxheShkZXYtPmRl
+diwgNTAwMCk7CkBAIC05MTAsNiArOTExLDcgQEAgbm91dmVhdV9wbW9wc19ydW50aW1lX3N1c3Bl
+bmQoc3RydWN0IGRldmljZSAqZGV2KQogewogCXN0cnVjdCBwY2lfZGV2ICpwZGV2ID0gdG9fcGNp
+X2RldihkZXYpOwogCXN0cnVjdCBkcm1fZGV2aWNlICpkcm1fZGV2ID0gcGNpX2dldF9kcnZkYXRh
+KHBkZXYpOworCXN0cnVjdCBub3V2ZWF1X2RybSAqZHJtID0gbm91dmVhdV9kcm0oZHJtX2Rldik7
+CiAJaW50IHJldDsKIAogCWlmICghbm91dmVhdV9wbW9wc19ydW50aW1lKCkpIHsKQEAgLTkxNywx
+MiArOTE5LDE1IEBAIG5vdXZlYXVfcG1vcHNfcnVudGltZV9zdXNwZW5kKHN0cnVjdCBkZXZpY2Ug
+KmRldikKIAkJcmV0dXJuIC1FQlVTWTsKIAl9CiAKKwlkcm1fZGV2LT5zd2l0Y2hfcG93ZXJfc3Rh
+dGUgPSBEUk1fU1dJVENIX1BPV0VSX0NIQU5HSU5HOwogCW5vdXZlYXVfc3dpdGNoZXJvb19vcHRp
+bXVzX2RzbSgpOwogCXJldCA9IG5vdXZlYXVfZG9fc3VzcGVuZChkcm1fZGV2LCB0cnVlKTsKIAlw
+Y2lfc2F2ZV9zdGF0ZShwZGV2KTsKIAlwY2lfZGlzYWJsZV9kZXZpY2UocGRldik7CiAJcGNpX2ln
+bm9yZV9ob3RwbHVnKHBkZXYpOwotCXBjaV9zZXRfcG93ZXJfc3RhdGUocGRldiwgUENJX0QzY29s
+ZCk7CisJaWYgKGRybS0+cnVucG1fZHNtKQorCQlwY2lfc2V0X3Bvd2VyX3N0YXRlKHBkZXYsIFBD
+SV9EM2NvbGQpOworCiAJZHJtX2Rldi0+c3dpdGNoX3Bvd2VyX3N0YXRlID0gRFJNX1NXSVRDSF9Q
+T1dFUl9EWU5BTUlDX09GRjsKIAlyZXR1cm4gcmV0OwogfQpAQCAtOTQxLDcgKzk0Niw5IEBAIG5v
+dXZlYXVfcG1vcHNfcnVudGltZV9yZXN1bWUoc3RydWN0IGRldmljZSAqZGV2KQogCQlyZXR1cm4g
+LUVCVVNZOwogCX0KIAotCXBjaV9zZXRfcG93ZXJfc3RhdGUocGRldiwgUENJX0QwKTsKKwlkcm1f
+ZGV2LT5zd2l0Y2hfcG93ZXJfc3RhdGUgPSBEUk1fU1dJVENIX1BPV0VSX0NIQU5HSU5HOworCWlm
+IChkcm0tPnJ1bnBtX2RzbSkKKwkJcGNpX3NldF9wb3dlcl9zdGF0ZShwZGV2LCBQQ0lfRDApOwog
+CXBjaV9yZXN0b3JlX3N0YXRlKHBkZXYpOwogCXJldCA9IHBjaV9lbmFibGVfZGV2aWNlKHBkZXYp
+OwogCWlmIChyZXQpCmRpZmYgLS1naXQgYS9kcm0vbm91dmVhdS9ub3V2ZWF1X2Rydi5oIGIvZHJt
+L25vdXZlYXUvbm91dmVhdV9kcnYuaAppbmRleCBlNjY2NTM1NGUuLjFlNDM3NjEyOCAxMDA2NDQK
+LS0tIGEvZHJtL25vdXZlYXUvbm91dmVhdV9kcnYuaAorKysgYi9kcm0vbm91dmVhdS9ub3V2ZWF1
+X2Rydi5oCkBAIC0yMTYsNiArMjE2LDggQEAgc3RydWN0IG5vdXZlYXVfZHJtIHsKIAlzdHJ1Y3Qg
+bm91dmVhdV9zdm0gKnN2bTsKIAogCXN0cnVjdCBub3V2ZWF1X2RtZW0gKmRtZW07CisKKwlib29s
+IHJ1bnBtX2RzbTsKIH07CiAKIHN0YXRpYyBpbmxpbmUgc3RydWN0IG5vdXZlYXVfZHJtICoKLS0g
+CjIuMjEuMAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18K
+Tm91dmVhdSBtYWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6
+Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
