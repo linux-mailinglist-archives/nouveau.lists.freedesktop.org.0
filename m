@@ -1,46 +1,30 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 742574C934
-	for <lists+nouveau@lfdr.de>; Thu, 20 Jun 2019 10:16:44 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 833A35025A
+	for <lists+nouveau@lfdr.de>; Mon, 24 Jun 2019 08:33:44 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id EBFAC6E560;
-	Thu, 20 Jun 2019 08:16:42 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id BFD09899B5;
+	Mon, 24 Jun 2019 06:33:35 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
- by gabe.freedesktop.org (Postfix) with ESMTP id A85606E55A
- for <nouveau@lists.freedesktop.org>; Thu, 20 Jun 2019 08:16:41 +0000 (UTC)
-Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id A54D072167; Thu, 20 Jun 2019 08:16:41 +0000 (UTC)
-From: bugzilla-daemon@freedesktop.org
-To: nouveau@lists.freedesktop.org
-Date: Thu, 20 Jun 2019 08:16:41 +0000
-X-Bugzilla-Reason: AssignedTo
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: None
-X-Bugzilla-Product: xorg
-X-Bugzilla-Component: Driver/nouveau
-X-Bugzilla-Version: unspecified
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: normal
-X-Bugzilla-Who: lukas@wunner.de
-X-Bugzilla-Status: NEW
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: medium
-X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-75985-8800-Ga3e5NYPYw@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-75985-8800@http.bugs.freedesktop.org/>
-References: <bug-75985-8800@http.bugs.freedesktop.org/>
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
+Received: from bhuna.collabora.co.uk (bhuna.collabora.co.uk
+ [IPv6:2a00:1098:0:82:1000:25:2eeb:e3e3])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 847006E5AB;
+ Thu, 20 Jun 2019 15:55:50 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+ (Authenticated sender: mfilion) with ESMTPSA id 10224266AD9
+Message-ID: <abeeef499b369e84d83d5ac846d66aa5f55d9ac8.camel@collabora.com>
+From: Mark Filion <mark.filion@collabora.com>
+To: events@lists.x.org
+Date: Thu, 20 Jun 2019 11:55:39 -0400
+Organization: Collabora Ltd.
+User-Agent: Evolution 3.32.2 (3.32.2-1.fc30) 
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 75985] [NVC1] HDMI audio device only visible after
- rescan
+X-Mailman-Approved-At: Mon, 24 Jun 2019 06:33:28 +0000
+Subject: [Nouveau] XDC 2019: Less than three weeks to go to submit your
+ talks, workshops or demos!
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -52,147 +36,30 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1480666761=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-
---===============1480666761==
-Content-Type: multipart/alternative; boundary="15610186015.c7D5e3.25955"
-Content-Transfer-Encoding: 7bit
-
-
---15610186015.c7D5e3.25955
-Date: Thu, 20 Jun 2019 08:16:41 +0000
-MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-https://bugs.freedesktop.org/show_bug.cgi?id=3D75985
-
---- Comment #78 from Lukas Wunner <lukas@wunner.de> ---
-(In reply to Daniel Drake from comment #77)
-> MLTF presumably means multifunction and it's exactly the bit we've been
-> working with. But I haven't yet managed to get _PS0 to run this code. I g=
-et
-> to the GGIV(0x01080001) call, but it returns 0, so the bit doesn't get se=
-t.
->=20
-> I tried understanding what GGIV() does but nothing is clear there. It ends
-> up reading bit 1 from physical memory address 0xfdac0408 which is under:
-> pci_bus 0000:00: resource 21 [mem 0xfd000000-0xfe7fffff window]
-> and I can't immediately spot any ACPI code that writes to that address.
-
-GGIV is a method name used by many vendors to read a GPIO pin. "Get GPIO In=
-put
-Value" or something like that.
-
-Quite likely the GPIO pin in question is attached to HPD of an HDMI or DP p=
-ort.
-So if an external display is attached, GGIV(0x01080001) should return 1 and=
- the
-HDA is exposed, else it's hidden.
-
-If the GPIO pin in question is on the PCH then you can download the spec for
-the PCH from Intel's website to verify that the MMIO space at 0x01080001 is=
- a
-GPIO block. The GPIO pin could also be on the Nvidia card itself, in that c=
-ase
-physical address 0x01080001 would belong to a resource of the GPU's PCI dev=
-ice.
-
---=20
-You are receiving this mail because:
-You are the assignee for the bug.=
-
---15610186015.c7D5e3.25955
-Date: Thu, 20 Jun 2019 08:16:41 +0000
-MIME-Version: 1.0
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-<html>
-    <head>
-      <base href=3D"https://bugs.freedesktop.org/">
-    </head>
-    <body>
-      <p>
-        <div>
-            <b><a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - [NVC1] HDMI audio device only visible after rescan"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D75985#c78">Commen=
-t # 78</a>
-              on <a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - [NVC1] HDMI audio device only visible after rescan"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D75985">bug 75985<=
-/a>
-              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
-lukas&#64;wunner.de" title=3D"Lukas Wunner &lt;lukas&#64;wunner.de&gt;"> <s=
-pan class=3D"fn">Lukas Wunner</span></a>
-</span></b>
-        <pre>(In reply to Daniel Drake from <a href=3D"show_bug.cgi?id=3D75=
-985#c77">comment #77</a>)
-<span class=3D"quote">&gt; MLTF presumably means multifunction and it's exa=
-ctly the bit we've been
-&gt; working with. But I haven't yet managed to get _PS0 to run this code. =
-I get
-&gt; to the GGIV(0x01080001) call, but it returns 0, so the bit doesn't get=
- set.
-&gt;=20
-&gt; I tried understanding what GGIV() does but nothing is clear there. It =
-ends
-&gt; up reading bit 1 from physical memory address 0xfdac0408 which is unde=
-r:
-&gt; pci_bus 0000:00: resource 21 [mem 0xfd000000-0xfe7fffff window]
-&gt; and I can't immediately spot any ACPI code that writes to that address=
-.</span >
-
-GGIV is a method name used by many vendors to read a GPIO pin. &quot;Get GP=
-IO Input
-Value&quot; or something like that.
-
-Quite likely the GPIO pin in question is attached to HPD of an HDMI or DP p=
-ort.
-So if an external display is attached, GGIV(0x01080001) should return 1 and=
- the
-HDA is exposed, else it's hidden.
-
-If the GPIO pin in question is on the PCH then you can download the spec for
-the PCH from Intel's website to verify that the MMIO space at 0x01080001 is=
- a
-GPIO block. The GPIO pin could also be on the Nvidia card itself, in that c=
-ase
-physical address 0x01080001 would belong to a resource of the GPU's PCI dev=
-ice.</pre>
-        </div>
-      </p>
-
-
-      <hr>
-      <span>You are receiving this mail because:</span>
-
-      <ul>
-          <li>You are the assignee for the bug.</li>
-      </ul>
-    </body>
-</html>=
-
---15610186015.c7D5e3.25955--
-
---===============1480666761==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
-YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
-cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
-
---===============1480666761==--
+SGVsbG8hCgpMZXNzIHRoYW4gdGhyZWUgd2Vla3MgdG8gZ28gdG8gc3VibWl0IHlvdXIgdGFsa3Ms
+IHdvcmtzaG9wcyBvciBkZW1vcwpmb3IgdGhpcyB5ZWFyJ3MgWC5PcmcgRGV2ZWxvcGVyIENvbmZl
+cmVuY2UsIHdoaWNoIHdpbGwgYmUgdGFraW5nIHBsYWNlCmluIE1vbnRyw6lhbCwgQ2FuYWRhIG9u
+IE9jdG9iZXIgMi00LCAyMDE5IQoKVGhlIDIwMTkgWC5PcmcgRGV2ZWxvcGVycyBDb25mZXJlbmNl
+IGlzIHRoZSBhbm51YWwgdGVjaG5pY2FsIG1lZXRpbmcKZm9yIFggV2luZG93IFN5c3RlbSBhbmQg
+RnJlZSBEZXNrdG9wIGRldmVsb3BlcnMuIEF0dGVuZGVlcyB3aWxsIGdhdGhlcgp0byBkaXNjdXNz
+IG91dHN0YW5kaW5nIHRlY2huaWNhbCBpc3N1ZXMgcmVsYXRlZCB0byB0aGUgT3BlbiBTb3VyY2UK
+R3JhcGhpY3Mgc3RhY2sgKExpbnV4IGtlcm5lbCwgTWVzYSwgRFJNLCBXYXlsYW5kLCBYMTEsIGV0
+Yy4pIGFuZCBpdHMKc29mdHdhcmUgZWNvc3lzdGVtLgoKV2hpbGUgYW55IHNlcmlvdXMgcHJvcG9z
+YWwgd2lsbCBiZSBncmF0ZWZ1bGx5IGNvbnNpZGVyZWQsIHRvcGljcyBvZgppbnRlcmVzdAp0byBY
+Lk9yZyBhbmQgZnJlZWRlc2t0b3Aub3JnIGRldmVsb3BlcnMgYXJlIGVuY291cmFnZWQuIFRoZSBw
+cm9ncmFtCmZvY3VzIGlzIG9uIG5ldyBkZXZlbG9wbWVudCwgb25nb2luZyBjaGFsbGVuZ2VzIGFu
+ZCBhbnl0aGluZyBlbHNlIHRoYXQKd2lsbCBzcGFyayBkaXNjdXNzaW9ucyBhbW9uZyBhdHRlbmRl
+ZXMgaW4gdGhlIGhhbGx3YXkgdHJhY2suCgpXZSBhcmUgb3BlbiB0byB0YWxrcyBhY3Jvc3MgYWxs
+IGxheWVycyBvZiB0aGUgZ3JhcGhpY3Mgc3RhY2ssIGZyb20gdGhlCmtlcm5lbAp0byBkZXNrdG9w
+IGVudmlyb25tZW50cyAvIGdyYXBoaWNhbCBhcHBsaWNhdGlvbnMgYW5kIGFib3V0IGhvdyB0byBt
+YWtlCnRoaW5ncyBiZXR0ZXIgZm9yIHRoZSBkZXZlbG9wZXJzIHdobyBidWlsZCB0aGVtLiAKCkhl
+YWQgdG8gdGhlIFhEQyB3ZWJzaXRlIHRvIGxlYXJuIG1vcmU6IAoKICAgIGh0dHBzOi8veGRjMjAx
+OS54Lm9yZy8KClRoZSBkZWFkbGluZSBmb3Igc3VibWlzc2lvbnMgU3VuZGF5LCA3IEp1bHkgMjAx
+OS4KCkJlc3QsCgpNYXJrCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fXwpOb3V2ZWF1IG1haWxpbmcgbGlzdApOb3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9y
+ZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL25vdXZlYXU=
