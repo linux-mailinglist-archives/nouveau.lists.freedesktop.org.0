@@ -2,45 +2,60 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 100A04EE0A
-	for <lists+nouveau@lfdr.de>; Fri, 21 Jun 2019 19:42:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 71AFF4EE72
+	for <lists+nouveau@lfdr.de>; Fri, 21 Jun 2019 20:12:39 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8DC776E909;
-	Fri, 21 Jun 2019 17:42:31 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id DA4B36E90E;
+	Fri, 21 Jun 2019 18:12:37 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
- by gabe.freedesktop.org (Postfix) with ESMTP id 32A546E909
- for <nouveau@lists.freedesktop.org>; Fri, 21 Jun 2019 17:42:30 +0000 (UTC)
-Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 2D0C672167; Fri, 21 Jun 2019 17:42:30 +0000 (UTC)
-From: bugzilla-daemon@freedesktop.org
-To: nouveau@lists.freedesktop.org
-Date: Fri, 21 Jun 2019 17:42:30 +0000
-X-Bugzilla-Reason: AssignedTo QAcontact
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: None
-X-Bugzilla-Product: Mesa
-X-Bugzilla-Component: Drivers/DRI/nouveau
-X-Bugzilla-Version: 18.2
-X-Bugzilla-Keywords: have-backtrace
-X-Bugzilla-Severity: minor
-X-Bugzilla-Who: emil.l.velikov@gmail.com
-X-Bugzilla-Status: NEW
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: medium
-X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-110955-8800-QamslXuh4c@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-110955-8800@http.bugs.freedesktop.org/>
-References: <bug-110955-8800@http.bugs.freedesktop.org/>
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
+Received: from mail-wr1-x443.google.com (mail-wr1-x443.google.com
+ [IPv6:2a00:1450:4864:20::443])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id DE6546E90E;
+ Fri, 21 Jun 2019 18:12:36 +0000 (UTC)
+Received: by mail-wr1-x443.google.com with SMTP id x4so7443828wrt.6;
+ Fri, 21 Jun 2019 11:12:36 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to:user-agent;
+ bh=nllmu6gOWtwwcwoqjgWDFDPgYF6ZJnhDbkkuvCS+YSo=;
+ b=g/HIRYhSoBzZkh3KVGW9bydzM/3Y/kb4dFi6USOkOYiwfcahQ5PWOywCvZ0+VHXf8Y
+ JsZo2T4yXnajc1qZ6nOULgABjwrNBKxCKtZpKxu0kRTOnvbPCsFbEhUdH3AT+TEFSvtY
+ LEhOKirkoRvu0iQdl36ZQfvoomxyVucvw9ZXVNOPXcUKAOI/oC96TeSe6gPzxkSN1NTj
+ OyaAh5q+jvzZEfhJ2o6RyISgLwZObofqZlT1H/lbWrnJovp/rTmzwLT6GsA0h09sWTWN
+ otEL0J9L5Meupq08Z62weNnHbxwfwOuSdZ9a4P5L3wgYthmIFY4izQVRTD60CygowEq7
+ ujlw==
+X-Gm-Message-State: APjAAAVEWHY0+SOBgLJvX42bs+523w2Sc8VM44/7Mog314XLFKO7CvRf
+ K4TPci5DgpXrsqUMWkrR2nwZhVhk
+X-Google-Smtp-Source: APXvYqyNfWUf+GkgCh4ENW0xosMUYbxInA4KKgnTvibeHQL2Bq4S/t48D2nGg9zCr+ECG80ds15UyQ==
+X-Received: by 2002:adf:f1d1:: with SMTP id z17mr42179778wro.190.1561140755600; 
+ Fri, 21 Jun 2019 11:12:35 -0700 (PDT)
+Received: from arch-x1c3 ([2a00:5f00:102:0:9665:9cff:feee:aa4d])
+ by smtp.gmail.com with ESMTPSA id u25sm3073216wmc.3.2019.06.21.11.12.34
+ (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+ Fri, 21 Jun 2019 11:12:34 -0700 (PDT)
+Date: Fri, 21 Jun 2019 19:10:26 +0100
+From: Emil Velikov <emil.l.velikov@gmail.com>
+To: Ilia Mirkin <imirkin@alum.mit.edu>
+Message-ID: <20190621181026.GG21486@arch-x1c3>
+References: <20190620001343.11046-1-imirkin@alum.mit.edu>
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 110955] Mesa 18.2.8 implementation error: Invalid
- GLSL version in shading_language_version()
+Content-Disposition: inline
+In-Reply-To: <20190620001343.11046-1-imirkin@alum.mit.edu>
+User-Agent: Mutt/1.11.4 (2019-03-13)
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20161025;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to:user-agent;
+ bh=nllmu6gOWtwwcwoqjgWDFDPgYF6ZJnhDbkkuvCS+YSo=;
+ b=VyZC/Vx7vu2LOOKJMi+VQm84aK0czB0xc7sDlTr9BcApWR8VmtSnfvCG2EGC+UhfYo
+ UAHznRPN5vA5aSLnajeTfgbXXh0Hn0chSh/NLXvzaUdjETpd0U2jp/FYaj6cBN4fgzGE
+ yW1xNtGRs8rGUjvPpgS4KrA2mvdxczoKRHHkwmoKe0TBsHcYR2AYJycdGTYpuBdTH+nt
+ 6fXVZ9E2CIcIJLzBYHqMfI1zwcxUC2+NbEii3imNFcvf3F1/4kyQCB5Wi43/W7S0z3NG
+ tcIwPuLrjBr7X9PbsUabbQ02Np5HNwTwIYwP2Hw9ICprG/tmZ/bri4GjgPAXa28laLOF
+ wTHw==
+Subject: Re: [Nouveau] [PATCH] drm/nouveau: fix bogus GPL-2 license header
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -52,90 +67,29 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1105118541=="
+Cc: nouveau@lists.freedesktop.org, bskeggs@redhat.com,
+ dri-devel@lists.freedesktop.org
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-
---===============1105118541==
-Content-Type: multipart/alternative; boundary="15611389501.eed6.11751"
-Content-Transfer-Encoding: 7bit
-
-
---15611389501.eed6.11751
-Date: Fri, 21 Jun 2019 17:42:30 +0000
-MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-https://bugs.freedesktop.org/show_bug.cgi?id=3D110955
-
---- Comment #2 from Emil Velikov <emil.l.velikov@gmail.com> ---
-s/wine/wine or application/
-
---=20
-You are receiving this mail because:
-You are the assignee for the bug.
-You are the QA Contact for the bug.=
-
---15611389501.eed6.11751
-Date: Fri, 21 Jun 2019 17:42:30 +0000
-MIME-Version: 1.0
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-<html>
-    <head>
-      <base href=3D"https://bugs.freedesktop.org/">
-    </head>
-    <body>
-      <p>
-        <div>
-            <b><a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - Mesa 18.2.8 implementation error: Invalid GLSL version in=
- shading_language_version()"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110955#c2">Commen=
-t # 2</a>
-              on <a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - Mesa 18.2.8 implementation error: Invalid GLSL version in=
- shading_language_version()"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110955">bug 11095=
-5</a>
-              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
-emil.l.velikov&#64;gmail.com" title=3D"Emil Velikov &lt;emil.l.velikov&#64;=
-gmail.com&gt;"> <span class=3D"fn">Emil Velikov</span></a>
-</span></b>
-        <pre>s/wine/wine or application/</pre>
-        </div>
-      </p>
-
-
-      <hr>
-      <span>You are receiving this mail because:</span>
-
-      <ul>
-          <li>You are the assignee for the bug.</li>
-          <li>You are the QA Contact for the bug.</li>
-      </ul>
-    </body>
-</html>=
-
---15611389501.eed6.11751--
-
---===============1105118541==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
-YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
-cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
-
---===============1105118541==--
+T24gMjAxOS8wNi8xOSwgSWxpYSBNaXJraW4gd3JvdGU6Cj4gVGhlIGJ1bGsgU1BEWCBhZGRpdGlv
+biBtYWRlIGFsbCB0aGVzZSBmaWxlcyBpbnRvIEdQTC0yLjAgbGljZW5zZWQgZmlsZXMuCj4gSG93
+ZXZlciB0aGUgcmVtYWluZGVyIG9mIHRoZSBwcm9qZWN0IGlzIE1JVC1saWNlbnNlZCwgdGhlc2Ug
+ZmlsZXMKPiAocHJpbWFyaWx5IGhlYWRlciBmaWxlcykgd2VyZSBzaW1wbHkgbWlzc2luZyB0aGUg
+Ym9pbGVyIHBsYXRlIGFuZCBnb3QKPiBjYXVnaHQgdXAgaW4gdGhlIGdsb2JhbCB1cGRhdGUuCj4g
+Cj4gRml4ZXM6IGIyNDQxMzE4MGY1IChMaWNlbnNlIGNsZWFudXA6IGFkZCBTUERYIEdQTC0yLjAg
+bGljZW5zZSBpZGVudGlmaWVyIHRvIGZpbGVzIHdpdGggbm8gbGljZW5zZSkKPiBTaWduZWQtb2Zm
+LWJ5OiBJbGlhIE1pcmtpbiA8aW1pcmtpbkBhbHVtLm1pdC5lZHU+Cj4gLS0tCj4gCj4gQmVuLCB5
+b3UgZGlkIGxpa2UgOTkuNyUgb2YgdGhpcyB3b3JrLCBzbyB1bHRpbWF0ZWx5IHlvdXIgY2FsbC4g
+UHJldHR5Cj4gbXVjaCBhbGwgb2YgdGhlc2Ugd2VyZSBzcGxpdCBvdXQgZnJvbSBvdGhlciBNSVQt
+bGljZW5zZWQgZmlsZXMsIGFuZCBtb3N0Cj4gYXJlIGhlYWRlciBmaWxlcyBhbnl3YXlzLgo+IApB
+bGwgb2YgbXkgZ2xvcmlvdXMgMjMgcGF0Y2hlcyB0byBub3V2ZWF1IGFyZSBtZWFudCB0byBiZSB1
+bmRlciBNSVQuCkFja2VkLWJ5OiBFbWlsIFZlbGlrb3YgPGVtaWwubC52ZWxpa292QGdtYWlsLmNv
+bT4KCj4gQW5vdGhlciBjaGFuZ2UgbWlnaHQgYmUgdG8gYWRkIHRoZSBTUERYIGlkZW50aWZpZXIg
+dG8gZmlsZXMgKndpdGgqCj4gdGhlIE1JVCBib2lsZXJwbGF0ZSwgYnV0IEkgZGlkbid0IHdhbnQg
+dG8gZG8gdG9vIG11Y2ggaGVyZS4KPiAKTm8gb2JqZWN0aW9ucyBvbiBteSBlbmQgOi0pCgotRW1p
+bAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVh
+dSBtYWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0
+cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
