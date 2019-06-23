@@ -2,22 +2,22 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5022F4FE10
-	for <lists+nouveau@lfdr.de>; Sun, 23 Jun 2019 22:51:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 872B24FE11
+	for <lists+nouveau@lfdr.de>; Sun, 23 Jun 2019 22:52:12 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C80B4898EA;
-	Sun, 23 Jun 2019 20:51:43 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 03F1F898F1;
+	Sun, 23 Jun 2019 20:52:11 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
  [131.252.210.165])
- by gabe.freedesktop.org (Postfix) with ESMTP id 44811898EA
- for <nouveau@lists.freedesktop.org>; Sun, 23 Jun 2019 20:51:43 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTP id 2E0EB898F1
+ for <nouveau@lists.freedesktop.org>; Sun, 23 Jun 2019 20:52:09 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 4133F72167; Sun, 23 Jun 2019 20:51:43 +0000 (UTC)
+ id 2B54B72167; Sun, 23 Jun 2019 20:52:09 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Sun, 23 Jun 2019 20:51:43 +0000
+Date: Sun, 23 Jun 2019 20:52:09 +0000
 X-Bugzilla-Reason: AssignedTo QAcontact
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
@@ -33,7 +33,7 @@ X-Bugzilla-Priority: medium
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
 X-Bugzilla-Changed-Fields: attachments.created
-Message-ID: <bug-110973-8800-W4OEyxI3eU@http.bugs.freedesktop.org/>
+Message-ID: <bug-110973-8800-D19IsN8GPf@http.bugs.freedesktop.org/>
 In-Reply-To: <bug-110973-8800@http.bugs.freedesktop.org/>
 References: <bug-110973-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
@@ -51,18 +51,18 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1890993160=="
+Content-Type: multipart/mixed; boundary="===============0933350561=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============1890993160==
-Content-Type: multipart/alternative; boundary="15613231030.6EC2.24291"
+--===============0933350561==
+Content-Type: multipart/alternative; boundary="15613231290.57D3.24730"
 Content-Transfer-Encoding: 7bit
 
 
---15613231030.6EC2.24291
-Date: Sun, 23 Jun 2019 20:51:43 +0000
+--15613231290.57D3.24730
+Date: Sun, 23 Jun 2019 20:52:09 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -71,18 +71,18 @@ Auto-Submitted: auto-generated
 
 https://bugs.freedesktop.org/show_bug.cgi?id=3D110973
 
---- Comment #2 from Alexey Kuznetsov <ak@axet.ru> ---
-Created attachment 144618
-  --> https://bugs.freedesktop.org/attachment.cgi?id=3D144618&action=3Dedit
-sudo fwts method > fwts_method
+--- Comment #3 from Alexey Kuznetsov <ak@axet.ru> ---
+Created attachment 144619
+  --> https://bugs.freedesktop.org/attachment.cgi?id=3D144619&action=3Dedit
+sudo dmidecode > dmidecode.log
 
 --=20
 You are receiving this mail because:
 You are the assignee for the bug.
 You are the QA Contact for the bug.=
 
---15613231030.6EC2.24291
-Date: Sun, 23 Jun 2019 20:51:43 +0000
+--15613231290.57D3.24730
+Date: Sun, 23 Jun 2019 20:52:09 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -99,8 +99,8 @@ Auto-Submitted: auto-generated
             <b><a class=3D"bz_bug_link=20
           bz_status_NEW "
    title=3D"NEW - GeForce GT 750M Mac Edition backlight"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110973#c2">Commen=
-t # 2</a>
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110973#c3">Commen=
+t # 3</a>
               on <a class=3D"bz_bug_link=20
           bz_status_NEW "
    title=3D"NEW - GeForce GT 750M Mac Edition backlight"
@@ -110,11 +110,11 @@ t # 2</a>
 ak&#64;axet.ru" title=3D"Alexey Kuznetsov &lt;ak&#64;axet.ru&gt;"> <span cl=
 ass=3D"fn">Alexey Kuznetsov</span></a>
 </span></b>
-        <pre>Created <span class=3D""><a href=3D"attachment.cgi?id=3D144618=
-" name=3D"attach_144618" title=3D"sudo fwts method &gt; fwts_method">attach=
-ment 144618</a> <a href=3D"attachment.cgi?id=3D144618&amp;action=3Dedit" ti=
-tle=3D"sudo fwts method &gt; fwts_method">[details]</a></span>
-sudo fwts method &gt; fwts_method</pre>
+        <pre>Created <span class=3D""><a href=3D"attachment.cgi?id=3D144619=
+" name=3D"attach_144619" title=3D"sudo dmidecode &gt; dmidecode.log">attach=
+ment 144619</a> <a href=3D"attachment.cgi?id=3D144619&amp;action=3Dedit" ti=
+tle=3D"sudo dmidecode &gt; dmidecode.log">[details]</a></span>
+sudo dmidecode &gt; dmidecode.log</pre>
         </div>
       </p>
 
@@ -129,9 +129,9 @@ sudo fwts method &gt; fwts_method</pre>
     </body>
 </html>=
 
---15613231030.6EC2.24291--
+--15613231290.57D3.24730--
 
---===============1890993160==
+--===============0933350561==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -141,4 +141,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============1890993160==--
+--===============0933350561==--
