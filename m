@@ -2,45 +2,58 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8EC0955411
-	for <lists+nouveau@lfdr.de>; Tue, 25 Jun 2019 18:10:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1F00855425
+	for <lists+nouveau@lfdr.de>; Tue, 25 Jun 2019 18:12:16 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0FAEA6E15F;
-	Tue, 25 Jun 2019 16:10:54 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7A0516E17B;
+	Tue, 25 Jun 2019 16:12:14 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [131.252.210.165])
- by gabe.freedesktop.org (Postfix) with ESMTP id CBB036E15F
- for <nouveau@lists.freedesktop.org>; Tue, 25 Jun 2019 16:10:53 +0000 (UTC)
-Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id C8A8B72167; Tue, 25 Jun 2019 16:10:53 +0000 (UTC)
-From: bugzilla-daemon@freedesktop.org
-To: nouveau@lists.freedesktop.org
-Date: Tue, 25 Jun 2019 16:10:53 +0000
-X-Bugzilla-Reason: AssignedTo
-X-Bugzilla-Type: new
-X-Bugzilla-Watch-Reason: None
-X-Bugzilla-Product: xorg
-X-Bugzilla-Component: Driver/nouveau
-X-Bugzilla-Version: unspecified
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: normal
-X-Bugzilla-Who: m.meledandri@gmail.com
-X-Bugzilla-Status: NEW
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: medium
-X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: bug_id short_desc product version rep_platform
- op_sys bug_status bug_severity priority component assigned_to reporter
- qa_contact attachments.created
-Message-ID: <bug-110997-8800@http.bugs.freedesktop.org/>
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
+Received: from sonic301-32.consmr.mail.ne1.yahoo.com
+ (sonic301-32.consmr.mail.ne1.yahoo.com [66.163.184.201])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5539E6E17D
+ for <nouveau@lists.freedesktop.org>; Tue, 25 Jun 2019 16:12:13 +0000 (UTC)
+X-YMail-OSG: S8yd42QVM1kSF.NlfmiPuxTaqP5LWxGyr7Lkudms0NeZO2DZims6lcrPmBeWOWS
+ AJyCJXHu4fpQkAvttP20pqFVFNz1wWqgKb1mGFla6JEUUBedaUzcsOPjOTcgP3UkBq01ZaL0CQ.1
+ vZY5bODq1zrLXGvn2BzvPFjVTmptZeGyITflmtXhjbj6jzg8Wv4S5urwdD9DTSWyrBVP3_d24BFd
+ ZINpXQgN7yjDao8cWrXXi_ckRZDUJvdecLV_4KKaS.bFwwns3YKugzLMED7T8ACypKbse8YUT9is
+ lMWtbH14MWOM_sfDglInCi5ELggmXjBKXTRP_5DjzfsQZDbeCRQDreZ56uUMsoE1NQtxvGFYeVmI
+ N2ei7ekSGMjveDXYrj1H0.Zgymz0GUJ32mHA.TSSvxvP7b6_vvyNeNkfM2.S0iYQGckHa1y2eEJT
+ M5BJ7fSxgPFkMY2wBS0Q3qvNmNycFsjAq3IYqJv4b8r47AjeCtRrlBWUcHKhY11Pg7t2XmUpvZoj
+ iqxMbYRxTAm25a70WE2oh01EcaOzTce9i6t0vzbvFJ_3A1EkWSX3Rfp8xtdcosC9XddDZ5niaz0o
+ 7svWkMcia_hBLREFNXZk26jX7LmN6hrWAOltjVChGNZEUYVrZexmKD6IieIdxA5PcJDLNEQ3q7mO
+ CSkKSIKkUoZsoRzxpBxDh8XAwfFYwLzIFYJnRF6bMM8D2FscoG8NbWbXVvUFxToIu8lvrYdiGSPf
+ 50e6eorx9eqKcsenje1RGTqm1McgMBpAfWfJj2mLq9t8ZuaJrY7DaMaGINKgQ.6h2En9FKtAtoZ2
+ zSF36tXAnaGtOuZhMCiPqELOogJKlPGed0MVTMtSfLhWDbE3dWSEIHEab1DqlS0WidPtifkM_nKl
+ ffTDKV8ESbpyJ.iv7Cb.tXlcxAMkEM1V1AEIqP2CJzibt.NEZTuc40TgUQrfruFNPFWZM.RBsdnM
+ iJ3svDHiSdjNnWO_SygOpAnYhZ.cG1hXGG3B.xKLvvt2n29XSjBSeg.W11KLbJc92VZIxFng9lx9
+ 4Rpz0lMPr3ORX3LJLnvwOfc3NKGV5M9.HFaIuleWvNy.aU1pvbsDUu8Nykd9Z.BI.QVuYxAtl.yK
+ ihAH9uR6vQXyllRZgL1mCm9QkIJksflsXEGizksJNNLkOLNySuERbusiKiTjOtzmonn9GomTuGCt
+ .oA0umy3QFVhz8nH25g66ZiJ4cZMD8gQFDRB1kzr9y0RzuorOk.qjirJ7zQ--
+Received: from sonic.gate.mail.ne1.yahoo.com by
+ sonic301.consmr.mail.ne1.yahoo.com with HTTP; Tue, 25 Jun 2019 16:12:12 +0000
+Date: Tue, 25 Jun 2019 16:12:11 +0000 (UTC)
+From: Mar Mel <marmel6942@yahoo.com>
+To: Ilia Mirkin <imirkin@alum.mit.edu>
+Message-ID: <933166946.1726380.1561479131670@mail.yahoo.com>
+In-Reply-To: <CAKb7UvjrFu1h4rHx7X3WfA2Rr3-89xfbsZQ8BvsNbHmUy=1pFw@mail.gmail.com>
+References: <1119631907.971876.1560439165339.ref@mail.yahoo.com>
+ <1119631907.971876.1560439165339@mail.yahoo.com>
+ <495587496.1966749.1560615436420@mail.yahoo.com>
+ <CAKb7UvhZYDRteWUmy0QUT1p5Tk+i_Ky0bFJU23pJSG7LHKLQYg@mail.gmail.com>
+ <ce271f475953d1580c2fa8ffb561eca1b0426993.camel@redhat.com>
+ <CAKb7UvhhSvF-RmvhVzrBeuf6S4m+pxzf_FPkRyocuXrNhLTuiw@mail.gmail.com>
+ <2050407925.625695.1561264488082@mail.yahoo.com>
+ <CAKb7UvjrFu1h4rHx7X3WfA2Rr3-89xfbsZQ8BvsNbHmUy=1pFw@mail.gmail.com>
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 110997] New: NV50 fan runs at full speed after
- resume from suspend on kernels 5.1.8, 4.19.49
+X-Mailer: WebService/1.1.13837 YMailNorrin Mozilla/5.0 (X11; Linux x86_64;
+ rv:67.0) Gecko/20100101 Firefox/67.0
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=yahoo.com; s=s2048; t=1561479132;
+ bh=7j7kv0SSjYbeu370re+tinbwAckFwMHwTrO2hkMTYcc=;
+ h=Date:From:To:Cc:In-Reply-To:References:Subject:From:Subject;
+ b=Zgg/6QsP3a4+yds+oIfdAGOKXVShgHq2hXaZXFr/gPje0eZMQvRGncNKqG3u8sCzuj/GI3a9/Aqnd8DpfeBFE7KkKxF7guZR0KYmODl5K9/nOGF0XCHCfNRp0eB83LnX243BGPXbtgY/Prytof9MVT//nwpLxOZmsSL4t2/GA94RXMc97E8ONAiszMJZJ1Oovn+PbyjjFCTKnw3lQCoJQAgpWXhWa6seF6NENg+4JAjipcs4hRMt4zYrR4VOZtTi5djSiY6zwUlbDIwsk4SORV/TS9Lo+KDfOFmuCB9xrZQ2pGcH3zaPIq56YtTH4EDnv3yqBZ3+Ls5oVfN4Vzo1Eg==
+Subject: Re: [Nouveau] NOUVEAU_LEGACY_CTX_SUPPORT Fan Speed
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -52,217 +65,64 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1968203415=="
+Cc: nouveau <nouveau@lists.freedesktop.org>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-
---===============1968203415==
-Content-Type: multipart/alternative; boundary="15614790531.841eE92.14905"
-Content-Transfer-Encoding: 7bit
-
-
---15614790531.841eE92.14905
-Date: Tue, 25 Jun 2019 16:10:53 +0000
-MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-https://bugs.freedesktop.org/show_bug.cgi?id=3D110997
-
-            Bug ID: 110997
-           Summary: NV50 fan runs at full speed after resume from suspend
-                    on kernels 5.1.8, 4.19.49
-           Product: xorg
-           Version: unspecified
-          Hardware: x86-64 (AMD64)
-                OS: Linux (All)
-            Status: NEW
-          Severity: normal
-          Priority: medium
-         Component: Driver/nouveau
-          Assignee: nouveau@lists.freedesktop.org
-          Reporter: m.meledandri@gmail.com
-        QA Contact: xorg-team@lists.x.org
-
-Created attachment 144635
-  --> https://bugs.freedesktop.org/attachment.cgi?id=3D144635&action=3Dedit
-vbios.rom
-
-As of stable kernels 5.1.8 and 4.19.49, the GTX 260 fan runs at full speed
-after resuming from suspend.
-
-This behavior regressed as of commit 342406e4fbba9a174125fbfe6aeac3d64ef90f=
-76
-drm/nouveau/i2c: Disable i2c bus access after ->fini()
-https://lkml.org/lkml/2019/6/7/673
-
-Reverting this single commit when building the respective stable kernels fi=
-xes
-the fan speed issue.
-
-$ lspci -nn -d 10de:
-01:00.0 VGA compatible controller [0300]: NVIDIA Corporation GT200 [GeForce=
- GTX
-260] [10de:05e2] (rev a1)
-
-Discussion on Nouveau mailing list:
-https://lists.freedesktop.org/archives/nouveau/2019-June/032620.html
-
---=20
-You are receiving this mail because:
-You are the assignee for the bug.=
-
---15614790531.841eE92.14905
-Date: Tue, 25 Jun 2019 16:10:53 +0000
-MIME-Version: 1.0
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-<html>
-    <head>
-      <base href=3D"https://bugs.freedesktop.org/">
-    </head>
-    <body><table border=3D"1" cellspacing=3D"0" cellpadding=3D"8">
-        <tr>
-          <th>Bug ID</th>
-          <td><a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - NV50 fan runs at full speed after resume from suspend on =
-kernels 5.1.8, 4.19.49"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110997">110997</a>
-          </td>
-        </tr>
-
-        <tr>
-          <th>Summary</th>
-          <td>NV50 fan runs at full speed after resume from suspend on kern=
-els 5.1.8, 4.19.49
-          </td>
-        </tr>
-
-        <tr>
-          <th>Product</th>
-          <td>xorg
-          </td>
-        </tr>
-
-        <tr>
-          <th>Version</th>
-          <td>unspecified
-          </td>
-        </tr>
-
-        <tr>
-          <th>Hardware</th>
-          <td>x86-64 (AMD64)
-          </td>
-        </tr>
-
-        <tr>
-          <th>OS</th>
-          <td>Linux (All)
-          </td>
-        </tr>
-
-        <tr>
-          <th>Status</th>
-          <td>NEW
-          </td>
-        </tr>
-
-        <tr>
-          <th>Severity</th>
-          <td>normal
-          </td>
-        </tr>
-
-        <tr>
-          <th>Priority</th>
-          <td>medium
-          </td>
-        </tr>
-
-        <tr>
-          <th>Component</th>
-          <td>Driver/nouveau
-          </td>
-        </tr>
-
-        <tr>
-          <th>Assignee</th>
-          <td>nouveau&#64;lists.freedesktop.org
-          </td>
-        </tr>
-
-        <tr>
-          <th>Reporter</th>
-          <td>m.meledandri&#64;gmail.com
-          </td>
-        </tr>
-
-        <tr>
-          <th>QA Contact</th>
-          <td>xorg-team&#64;lists.x.org
-          </td>
-        </tr></table>
-      <p>
-        <div>
-        <pre>Created <span class=3D""><a href=3D"attachment.cgi?id=3D144635=
-" name=3D"attach_144635" title=3D"vbios.rom">attachment 144635</a> <a href=
-=3D"attachment.cgi?id=3D144635&amp;action=3Dedit" title=3D"vbios.rom">[deta=
-ils]</a></span>
-vbios.rom
-
-As of stable kernels 5.1.8 and 4.19.49, the GTX 260 fan runs at full speed
-after resuming from suspend.
-
-This behavior regressed as of commit 342406e4fbba9a174125fbfe6aeac3d64ef90f=
-76
-drm/nouveau/i2c: Disable i2c bus access after -&gt;fini()
-<a href=3D"https://lkml.org/lkml/2019/6/7/673">https://lkml.org/lkml/2019/6=
-/7/673</a>
-
-Reverting this single commit when building the respective stable kernels fi=
-xes
-the fan speed issue.
-
-$ lspci -nn -d 10de:
-01:00.0 VGA compatible controller [0300]: NVIDIA Corporation GT200 [GeForce=
- GTX
-260] [10de:05e2] (rev a1)
-
-Discussion on Nouveau mailing list:
-<a href=3D"https://lists.freedesktop.org/archives/nouveau/2019-June/032620.=
-html">https://lists.freedesktop.org/archives/nouveau/2019-June/032620.html<=
-/a></pre>
-        </div>
-      </p>
-
-
-      <hr>
-      <span>You are receiving this mail because:</span>
-
-      <ul>
-          <li>You are the assignee for the bug.</li>
-      </ul>
-    </body>
-</html>=
-
---15614790531.841eE92.14905--
-
---===============1968203415==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
-YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
-cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
-
---===============1968203415==--
+RG9uZS4gVGhhbmtzIQoKQnVnwqAxMTA5OTcgLSBOVjUwIGZhbiBydW5zIGF0IGZ1bGwgc3BlZWQg
+YWZ0ZXIgcmVzdW1lIGZyb20gc3VzcGVuZCBvbiBrZXJuZWxzIDUuMS44LCA0LjE5LjQ5Cmh0dHBz
+Oi8vYnVncy5mcmVlZGVza3RvcC5vcmcvc2hvd19idWcuY2dpP2lkPTExMDk5NwoKCk9uIFR1ZXNk
+YXksIEp1bmUgMjUsIDIwMTksIDExOjIxOjI0IEFNIEVEVCwgSWxpYSBNaXJraW4gPGltaXJraW5A
+YWx1bS5taXQuZWR1PiB3cm90ZTogCgoKCgoKSGkgTWFyLAoKQ291bGQgeW91IGZpbGUgYSBidWcg
+KGJ1Z3MuZnJlZWRlc2t0b3Aub3JnIHVuZGVyIHhvcmcgLT4gRHJpdmVyL25vdXZlYXUpIHdpdGgg
+YSBzdW1tYXJ5IG9mIHRoaXMgaW5mbyAoaS5lLiBhIHByb2JsZW0gc3RhdGVtZW50LCB0aGF0IHJl
+dmVydGluZyB0aGUgY29tbWl0IGluIHF1ZXN0aW9uIGZpeGVzIGl0LCB0aGUgbHNwY2kgb3V0cHV0
+KSBhbmQgYWRkaXRpb25hbGx5LCB5b3VyIFZCSU9TLiBZb3UgY2FuIG9idGFpbiB0aGlzIHdpdGgg
+bm91dmVhdSBsb2FkZWQgYnkgZG9pbmcKCmNwIC9zeXMva2VybmVsL2RlYnVnL2RyaS8wL3ZiaW9z
+LnJvbSAvdG1wCgpUaGlzIHdpbGwgaGVscCBjZW50cmFsaXplIGFsbCB0aGUgaW5mby4KClRoYW5r
+cywKCsKgIC1pbGlhCgpPbiBTdW4sIEp1biAyMywgMjAxOSBhdCAxMjozNCBBTSBNYXIgTWVsIDxt
+YXJtZWw2OTQyQHlhaG9vLmNvbT4gd3JvdGU6Cj4gCj4gCj4gU3VyZToKPiAKPiAkIGxzcGNpIC1u
+biAtZCAxMGRlOgo+IDAxOjAwLjAgVkdBIGNvbXBhdGlibGUgY29udHJvbGxlciBbMDMwMF06IE5W
+SURJQSBDb3Jwb3JhdGlvbiBHVDIwMCBbR2VGb3JjZSBHVFggMjYwXSBbMTBkZTowNWUyXSAocmV2
+IGExKQo+IAo+IAo+IAo+wqDCoAo+wqDCoAo+wqDCoE9uIFNhdHVyZGF5LCBKdW5lIDIyLCAyMDE5
+LCAyOjE5OjMxIFBNIEVEVCwgSWxpYSBNaXJraW4gPGltaXJraW5AYWx1bS5taXQuZWR1PiB3cm90
+ZTogCj4gCj4gCj4gCj4gCj4gCj4gTWFyIC0gY2FuIHlvdSBwcm92aWRlIHRoZSBvdXRwdXQgb2YK
+PiAKPiBsc3BjaSAtbm4gLWQgMTBkZToKPiAKPiBPbiBTYXQsIEp1biAyMiwgMjAxOSBhdCAyOjE3
+IFBNIEx5dWRlIFBhdWwgPGx5dWRlQHJlZGhhdC5jb20+IHdyb3RlOgo+PiBIaSwgaXMgdGhpcyBh
+Y3R1YWxseSBhbiBudjUwIEdQVSwgb3Igc29tZSBvdGhlciBtb2RlbD8gSSBjYW4gdHJ5IHRvIHRh
+a2UgYSBjbG9zZXIgbG9vayBhdCB0aGlzCj4+IAo+PiBPbiBTdW4sIDIwMTktMDYtMTYgYXQgMTA6
+MjggLTA0MDAsIElsaWEgTWlya2luIHdyb3RlOgo+Pj4gSSBkb24ndCByZWFsbHkgc2VlIGFueXRo
+aW5nIGJldHdlZW4gdjUuMC4udjUuMSB3aGljaCB3b3VsZCBhY2NvdW50IGZvciB0aGlzLiBDb3Vs
+ZCBoYXZlIGJlZW4gYSBzdWJ0bGUgY2hhbmdlIHRvIHRoZSBpMmMgbG9naWMgc29tZXdoZXJlLiBU
+aGUgZmFzdGVzdCB3YXkgdG8gaWRlbnRpZnkgdGhlIHByb2JsZW0gd291bGQgYmUgdG8gZG8gYSBi
+aXNlY3Qgb24gdGhlIGtlcm5lbCB0byBpZGVudGlmeSB0aGUgY29tbWl0IHRoYXQgY2F1c2VkIHRo
+aXMuIFRoZXJlIGFyZSBtYW55IGd1aWRlcyBmb3IgdGhpcyBvbmxpbmUuCj4+PiAKPj4+IE9uIFNh
+dCwgSnVuIDE1LCAyMDE5IGF0IDEyOjE3IFBNIE1hciBNZWwgPG1hcm1lbDY5NDJAeWFob28uY29t
+PiB3cm90ZToKPj4+PiAKPj4+PiAKPj4+PiBVbmZvcnR1bmF0ZWx5LCBldmVuIHdpdGggdGhpcyBj
+aGFuZ2Ugbm93IHJldmVydGVkIGluIGtlcm5lbCA1LjEuMTAsIHRoZSBmYW4gc3BlZWQgaXNzdWUg
+cGVyc2lzdHMuCj4+Pj4gCj4+Pj4gSWYgc29tZW9uZSBjb3VsZCBwb2ludCBtZSBpbiB0aGUgZGly
+ZWN0aW9uIG9mIGEgcmVsZXZhbnQgY29tbWl0KHMpIEknbGwgaGFwcGlseSBmaWxlIGEgYnVnIHJl
+cG9ydC4KPj4+PiAKPj4+PiAKPj4+PsKgwqAKPj4+PsKgwqAKPj4+PsKgwqBPbiBUaHVyc2RheSwg
+SnVuZSAxMywgMjAxOSwgMTE6MTk6MjUgQU0gRURULCBNYXIgTWVsIDxtYXJtZWw2OTQyQHlhaG9v
+LmNvbT4gd3JvdGU6IAo+Pj4+IAo+Pj4+IAo+Pj4+IAo+Pj4+IAo+Pj4+IAo+Pj4+IEFzIG9mIGtl
+cm5lbCA1LjEuOSwgb24gcmVzdW1lIGZyb20gc3VzcGVuZCwgbXkgTlY1MCBmYW4gcnVucyBhdCBm
+dWxsIHNwZWVkLiAKPj4+PiAKPj4+PiBOb3Qgc3VyZSBpZiBpdCBoYXMgdG8gZG8gd2l0aCB0aGlz
+IG5ldyBjb25maWcgb3B0aW9uIChOT1VWRUFVX0xFR0FDWV9DVFhfU1VQUE9SVCk/Cj4+Pj4gCj4+
+Pj4gVGhpcyBpc3N1ZSBpcyBub3QgcHJlc2VudCB1c2luZyBrZXJuZWwgNS4wLjIxLgo+Pj4+IAo+
+Pj4+IFllYXJzIGFnbyBJIGZpbGVkIGEgc2ltaWxhciBpc3N1ZToKPj4+PiAKPj4+PiA2MDcwNCDi
+gJMgW25vdXZlYXUsIGdpdCByZWdyZXNzaW9uXSAtIEkyQyBQV00gZmFuIGNvbnRyb2wgYnJva2Vu
+IG9uIG52NTAgYWR0NzQ3NSBvbiBrZXJuZWxzIDMuMy54Kwo+Pj4+IAo+Pj4+IFRoYW5rcy4KPj4+
+PiAKPj4+PiAKPj4+PiA2MDcwNCDigJMgW25vdXZlYXUsIGdpdCByZWdyZXNzaW9uXSAtIEkyQyBQ
+V00gZmFuIGNvbnRyb2wgYnJva2VuIG9uIG52NTAgYS4uLgo+Pj4+wqDCoMKgwqAgCj4+Pj4gCj4+
+Pj4gCj4+Pj4gCj4+Pj4gCj4+Pj4gX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX18KPj4+PiBOb3V2ZWF1IG1haWxpbmcgbGlzdAo+Pj4+IE5vdXZlYXVAbGlzdHMu
+ZnJlZWRlc2t0b3Aub3JnCj4+Pj4gaHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1h
+bi9saXN0aW5mby9ub3V2ZWF1Cj4+PiBfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX05vdXZlYXUgbWFpbGluZyBsaXN0Tm91dmVhdUBsaXN0cy5mcmVlZGVza3Rv
+cC5vcmdodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL25vdXZl
+YXUKPj4gLS0gQ2hlZXJzLAo+PsKgwqBMeXVkZSBQYXVsCj4+IAo+IAo+IApfX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpOb3V2ZWF1IG1haWxpbmcgbGlzdApO
+b3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9y
+Zy9tYWlsbWFuL2xpc3RpbmZvL25vdXZlYXU=
