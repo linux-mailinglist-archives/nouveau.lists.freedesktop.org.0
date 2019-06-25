@@ -2,31 +2,31 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8087452698
-	for <lists+nouveau@lfdr.de>; Tue, 25 Jun 2019 10:28:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 103FB54CB5
+	for <lists+nouveau@lfdr.de>; Tue, 25 Jun 2019 12:51:15 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0994D6E098;
-	Tue, 25 Jun 2019 08:28:19 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 948B26E0D0;
+	Tue, 25 Jun 2019 10:51:13 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
  [131.252.210.165])
- by gabe.freedesktop.org (Postfix) with ESMTP id D471F6E098
- for <nouveau@lists.freedesktop.org>; Tue, 25 Jun 2019 08:28:17 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTP id 7E6476E0D3
+ for <nouveau@lists.freedesktop.org>; Tue, 25 Jun 2019 10:51:11 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id CBFE872167; Tue, 25 Jun 2019 08:28:17 +0000 (UTC)
+ id 7BA2772167; Tue, 25 Jun 2019 10:51:11 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Tue, 25 Jun 2019 08:28:17 +0000
-X-Bugzilla-Reason: QAcontact AssignedTo
+Date: Tue, 25 Jun 2019 10:51:11 +0000
+X-Bugzilla-Reason: AssignedTo
 X-Bugzilla-Type: new
 X-Bugzilla-Watch-Reason: None
-X-Bugzilla-Product: Mesa
-X-Bugzilla-Component: Drivers/DRI/nouveau
-X-Bugzilla-Version: unspecified
+X-Bugzilla-Product: xorg
+X-Bugzilla-Component: Driver/nouveau
+X-Bugzilla-Version: git
 X-Bugzilla-Keywords: 
 X-Bugzilla-Severity: normal
-X-Bugzilla-Who: praiogriff@gmail.com
+X-Bugzilla-Who: markus@bluegap.ch
 X-Bugzilla-Status: NEW
 X-Bugzilla-Resolution: 
 X-Bugzilla-Priority: medium
@@ -35,12 +35,12 @@ X-Bugzilla-Flags:
 X-Bugzilla-Changed-Fields: bug_id short_desc product version rep_platform
  op_sys bug_status bug_severity priority component assigned_to reporter
  qa_contact
-Message-ID: <bug-110988-8800@http.bugs.freedesktop.org/>
+Message-ID: <bug-110993-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 110988] New: [NV49] Graphical issues on KDE desktop
- with GeForce 7950 GX2
+Subject: [Nouveau] [Bug 110993] New: GP107GLM [Quadro P1000 Mobile]:
+ frequent failure to initialize displays on Thunderbolt dock
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -52,102 +52,84 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0434138849=="
+Content-Type: multipart/mixed; boundary="===============1022817006=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============0434138849==
-Content-Type: multipart/alternative; boundary="15614512970.4d4D4f.30311"
+--===============1022817006==
+Content-Type: multipart/alternative; boundary="15614598711.A666b24F.21670"
 Content-Transfer-Encoding: 7bit
 
 
---15614512970.4d4D4f.30311
-Date: Tue, 25 Jun 2019 08:28:17 +0000
+--15614598711.A666b24F.21670
+Date: Tue, 25 Jun 2019 10:51:11 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 
-https://bugs.freedesktop.org/show_bug.cgi?id=3D110988
+https://bugs.freedesktop.org/show_bug.cgi?id=3D110993
 
-            Bug ID: 110988
-           Summary: [NV49] Graphical issues on KDE desktop with GeForce
-                    7950 GX2
-           Product: Mesa
-           Version: unspecified
-          Hardware: Other
-                OS: All
+            Bug ID: 110993
+           Summary: GP107GLM [Quadro P1000 Mobile]: frequent failure to
+                    initialize displays on Thunderbolt dock
+           Product: xorg
+           Version: git
+          Hardware: x86-64 (AMD64)
+                OS: Linux (All)
             Status: NEW
           Severity: normal
           Priority: medium
-         Component: Drivers/DRI/nouveau
+         Component: Driver/nouveau
           Assignee: nouveau@lists.freedesktop.org
-          Reporter: praiogriff@gmail.com
-        QA Contact: nouveau@lists.freedesktop.org
+          Reporter: markus@bluegap.ch
+        QA Contact: xorg-team@lists.x.org
 
-SUMMARY
-Since I did a new installation of openSUSE tumbleweed on 29th March 2019, I
-have severe graphical issues on my desktop:
-https://abload.de/image.php?img=3Ddesktop3w4ks2.png
-https://abload.de/image.php?img=3Ddesktop4myjjn.png
-https://abload.de/image.php?img=3Ddesktop5xwk6d.png
-https://abload.de/image.php?img=3Ddesktop6k8jb2.png
+When connecting to the Thunderbolt 3 Dock, the monitors attached to it more
+often remain black rather than showing a proper image.  Sometimes the Laptop
+freezes entirely, other times just one of the two comes up, most of the tim=
+e,
+they remain black and eventually enter standby.
 
-Before this new installation, everything was fine. Unfortunately, I don't k=
-now
-which version the old driver had. I didn't expect such a problem so I didn't
-pay attention for it. The old system was installed round about one year ago.
-There the driver was locked and never updated.
+I'm using a Lenovo P1 featuring a Quadro P1000 Mobile GPU.  An integrated G=
+PU
+is wired to the internal display as eDP-1.  The Nvidia card exposes an HDMI
+port on the laptop.  Plugging a monitor there directly usually works.  Vie =
+the
+docking station, I get another 3 ports controlled by the Nvidia GPU.  These=
+ are
+either HDMI or DisplayPort.  I have two monitors for experimentation, a Dell
+one and a Lenovo one.
 
-Problems now appear as soon as the desktop is fully loaded.
-Games like 0 A.D. or Supertux seem not to be affected or only at a lesser
-extent.
+I'm running a Linux 5.2-rc5 kernel and the nouveau driver compiled from a
+current checkout of the git repo of Ben Skeggs
+(https://github.com/skeggsb/nouveau/tree/f91e915b6a12c281aed4401a869881f293=
+b72d4e).
+ Most of the time, I'm running with the runpm_fixes of Karol Herbst (that is
+the last five revisions from
+https://github.com/karolherbst/nouveau/tree/runpm_fixes).
 
-STEPS TO REPRODUCE
-1. installation
-2. booting system
+The output of `grep . /sys/class/drm/card*-*/status` after a start w/o the =
+dock
+or any display attached is:
 
-OBSERVED RESULT
-- KDE-Menu is semi-transparent (see second picture:
-https://abload.de/image.php?img=3Ddesktop4myjjn.png )
-- Icon titles are overlapped with colored blocks (see third picture in the
-upper line: https://abload.de/image.php?img=3Ddesktop5xwk6d.png )
-- Program windows are overlapped with colored fields (see fourth picture:
-https://abload.de/image.php?img=3Ddesktop6k8jb2.png )
+/sys/class/drm/card0-eDP-1/status:connected
+/sys/class/drm/card1-DP-1/status:disconnected
+/sys/class/drm/card1-DP-2/status:disconnected
+/sys/class/drm/card1-HDMI-A-1/status:connected
+/sys/class/drm/card1-eDP-2/status:disconnected
 
-EXPECTED RESULT
-- Clear desktop presentation
-
-SOFTWARE/OS VERSIONS
-Linux/KDE Plasma: Kernel 5.1.7-1, openSUSE tumbleweed 64-bit (current versi=
-on)
-(available in About System)
-KDE Plasma Version: 5.16.0
-KDE Frameworks Version: 5.58.0
-Qt Version: 5.12.3
-
-MY HARDWARE/DRIVER:
-Motherboard: Asus P5N32-E SLI Plus
-CPU: Intel Core2 Duo E8200 @ 2,66GHz
-RAM: 4 GiB
-Graphics card: [NV49] Gigabyte Nvidia GeForce 7950 GX2 with 2x 512 GDDR3
-Graphics Driver: nouveau=20
-Graphics Renderer: NV49
-OpenGL Version: 2.1 Mesa 19.0.5
-
-ADDITIONAL INFORMATION
-There are no problems when booting Windows XP. So I exclude defective hardw=
-are.
+I'll provide further details of what I did together with the corresponding
+kernel logs with tracing enabled in follow-up comments and attachments.
 
 --=20
 You are receiving this mail because:
-You are the QA Contact for the bug.
 You are the assignee for the bug.=
 
---15614512970.4d4D4f.30311
-Date: Tue, 25 Jun 2019 08:28:17 +0000
+--15614598711.A666b24F.21670
+Date: Tue, 25 Jun 2019 10:51:11 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -163,39 +145,40 @@ Auto-Submitted: auto-generated
           <th>Bug ID</th>
           <td><a class=3D"bz_bug_link=20
           bz_status_NEW "
-   title=3D"NEW - [NV49] Graphical issues on KDE desktop with GeForce 7950 =
-GX2"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110988">110988</a>
+   title=3D"NEW - GP107GLM [Quadro P1000 Mobile]: frequent failure to initi=
+alize displays on Thunderbolt dock"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110993">110993</a>
           </td>
         </tr>
 
         <tr>
           <th>Summary</th>
-          <td>[NV49] Graphical issues on KDE desktop with GeForce 7950 GX2
+          <td>GP107GLM [Quadro P1000 Mobile]: frequent failure to initializ=
+e displays on Thunderbolt dock
           </td>
         </tr>
 
         <tr>
           <th>Product</th>
-          <td>Mesa
+          <td>xorg
           </td>
         </tr>
 
         <tr>
           <th>Version</th>
-          <td>unspecified
+          <td>git
           </td>
         </tr>
 
         <tr>
           <th>Hardware</th>
-          <td>Other
+          <td>x86-64 (AMD64)
           </td>
         </tr>
 
         <tr>
           <th>OS</th>
-          <td>All
+          <td>Linux (All)
           </td>
         </tr>
 
@@ -219,7 +202,7 @@ GX2"
 
         <tr>
           <th>Component</th>
-          <td>Drivers/DRI/nouveau
+          <td>Driver/nouveau
           </td>
         </tr>
 
@@ -231,77 +214,57 @@ GX2"
 
         <tr>
           <th>Reporter</th>
-          <td>praiogriff&#64;gmail.com
+          <td>markus&#64;bluegap.ch
           </td>
         </tr>
 
         <tr>
           <th>QA Contact</th>
-          <td>nouveau&#64;lists.freedesktop.org
+          <td>xorg-team&#64;lists.x.org
           </td>
         </tr></table>
       <p>
         <div>
-        <pre>SUMMARY
-Since I did a new installation of openSUSE tumbleweed on 29th March 2019, I
-have severe graphical issues on my desktop:
-<a href=3D"https://abload.de/image.php?img=3Ddesktop3w4ks2.png">https://abl=
-oad.de/image.php?img=3Ddesktop3w4ks2.png</a>
-<a href=3D"https://abload.de/image.php?img=3Ddesktop4myjjn.png">https://abl=
-oad.de/image.php?img=3Ddesktop4myjjn.png</a>
-<a href=3D"https://abload.de/image.php?img=3Ddesktop5xwk6d.png">https://abl=
-oad.de/image.php?img=3Ddesktop5xwk6d.png</a>
-<a href=3D"https://abload.de/image.php?img=3Ddesktop6k8jb2.png">https://abl=
-oad.de/image.php?img=3Ddesktop6k8jb2.png</a>
+        <pre>When connecting to the Thunderbolt 3 Dock, the monitors attach=
+ed to it more
+often remain black rather than showing a proper image.  Sometimes the Laptop
+freezes entirely, other times just one of the two comes up, most of the tim=
+e,
+they remain black and eventually enter standby.
 
-Before this new installation, everything was fine. Unfortunately, I don't k=
-now
-which version the old driver had. I didn't expect such a problem so I didn't
-pay attention for it. The old system was installed round about one year ago.
-There the driver was locked and never updated.
+I'm using a Lenovo P1 featuring a Quadro P1000 Mobile GPU.  An integrated G=
+PU
+is wired to the internal display as eDP-1.  The Nvidia card exposes an HDMI
+port on the laptop.  Plugging a monitor there directly usually works.  Vie =
+the
+docking station, I get another 3 ports controlled by the Nvidia GPU.  These=
+ are
+either HDMI or DisplayPort.  I have two monitors for experimentation, a Dell
+one and a Lenovo one.
 
-Problems now appear as soon as the desktop is fully loaded.
-Games like 0 A.D. or Supertux seem not to be affected or only at a lesser
-extent.
+I'm running a Linux 5.2-rc5 kernel and the nouveau driver compiled from a
+current checkout of the git repo of Ben Skeggs
+(<a href=3D"https://github.com/skeggsb/nouveau/tree/f91e915b6a12c281aed4401=
+a869881f293b72d4e">https://github.com/skeggsb/nouveau/tree/f91e915b6a12c281=
+aed4401a869881f293b72d4e</a>).
+ Most of the time, I'm running with the runpm_fixes of Karol Herbst (that is
+the last five revisions from
+<a href=3D"https://github.com/karolherbst/nouveau/tree/runpm_fixes">https:/=
+/github.com/karolherbst/nouveau/tree/runpm_fixes</a>).
 
-STEPS TO REPRODUCE
-1. installation
-2. booting system
+The output of `grep . /sys/class/drm/card*-*/status` after a start w/o the =
+dock
+or any display attached is:
 
-OBSERVED RESULT
-- KDE-Menu is semi-transparent (see second picture:
-<a href=3D"https://abload.de/image.php?img=3Ddesktop4myjjn.png">https://abl=
-oad.de/image.php?img=3Ddesktop4myjjn.png</a> )
-- Icon titles are overlapped with colored blocks (see third picture in the
-upper line: <a href=3D"https://abload.de/image.php?img=3Ddesktop5xwk6d.png"=
->https://abload.de/image.php?img=3Ddesktop5xwk6d.png</a> )
-- Program windows are overlapped with colored fields (see fourth picture:
-<a href=3D"https://abload.de/image.php?img=3Ddesktop6k8jb2.png">https://abl=
-oad.de/image.php?img=3Ddesktop6k8jb2.png</a> )
+/sys/class/drm/card0-eDP-1/status:connected
+/sys/class/drm/card1-DP-1/status:disconnected
+/sys/class/drm/card1-DP-2/status:disconnected
+/sys/class/drm/card1-HDMI-A-1/status:connected
+/sys/class/drm/card1-eDP-2/status:disconnected
 
-EXPECTED RESULT
-- Clear desktop presentation
-
-SOFTWARE/OS VERSIONS
-Linux/KDE Plasma: Kernel 5.1.7-1, openSUSE tumbleweed 64-bit (current versi=
-on)
-(available in About System)
-KDE Plasma Version: 5.16.0
-KDE Frameworks Version: 5.58.0
-Qt Version: 5.12.3
-
-MY HARDWARE/DRIVER:
-Motherboard: Asus P5N32-E SLI Plus
-CPU: Intel Core2 Duo E8200 &#64; 2,66GHz
-RAM: 4 GiB
-Graphics card: [NV49] Gigabyte Nvidia GeForce 7950 GX2 with 2x 512 GDDR3
-Graphics Driver: nouveau=20
-Graphics Renderer: NV49
-OpenGL Version: 2.1 Mesa 19.0.5
-
-ADDITIONAL INFORMATION
-There are no problems when booting Windows XP. So I exclude defective hardw=
-are.</pre>
+I'll provide further details of what I did together with the corresponding
+kernel logs with tracing enabled in follow-up comments and attachments.</pr=
+e>
         </div>
       </p>
 
@@ -310,15 +273,14 @@ are.</pre>
       <span>You are receiving this mail because:</span>
 
       <ul>
-          <li>You are the QA Contact for the bug.</li>
           <li>You are the assignee for the bug.</li>
       </ul>
     </body>
 </html>=
 
---15614512970.4d4D4f.30311--
+--15614598711.A666b24F.21670--
 
---===============0434138849==
+--===============1022817006==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -328,4 +290,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============0434138849==--
+--===============1022817006==--
