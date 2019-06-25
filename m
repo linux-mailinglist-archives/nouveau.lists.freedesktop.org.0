@@ -2,57 +2,45 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id D80F655938
-	for <lists+nouveau@lfdr.de>; Tue, 25 Jun 2019 22:42:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 840AF55976
+	for <lists+nouveau@lfdr.de>; Tue, 25 Jun 2019 22:56:42 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E73F76E22D;
-	Tue, 25 Jun 2019 20:42:22 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7ED316E249;
+	Tue, 25 Jun 2019 20:56:40 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ed1-x544.google.com (mail-ed1-x544.google.com
- [IPv6:2a00:1450:4864:20::544])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5A7046E22D
- for <nouveau@lists.freedesktop.org>; Tue, 25 Jun 2019 20:42:21 +0000 (UTC)
-Received: by mail-ed1-x544.google.com with SMTP id k8so29116860eds.7
- for <nouveau@lists.freedesktop.org>; Tue, 25 Jun 2019 13:42:21 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=/vSfB6TVezUN7KRb6RLJlk0Q61F58p552cd2MRDpceo=;
- b=ilhFz4Q2trqTHp8rzai+jUogyKrxnFPOsW/AQgqOaCBkI7TYb8K22xjEOWsghP3YGY
- NJ/SZGxSmwKvF48C83gZZ4Kwop3DF5eDu1pXPjJyFs5S5Jq61ndm9Zl4B9xWaeNeS7lt
- GEj6c+1ZyXfggovbTdeLzYfD5vcjT71bd8bnddn69pZDGNaXgse4oxh7z5NmaV9fj2Md
- D/ucSvQ3guY6UMJPTOMe847XdQiQTCsIiP44eXdjtkXvLta7aC/RUE3wnBctPDmKJJl8
- u9qUFojjBl9+9m1rjwja4RxHMspa7OGtGWGervevo5SuQ/e9TTmR0FKp7fvjiL3ieG+e
- tvZg==
-X-Gm-Message-State: APjAAAXHopSMz3AvTNXzetGcoYspz7Xc+zyrnZYTB3RK6B3/1daj9E5I
- I3y6eyj/uzDlI/kISYr5b0Eneg==
-X-Google-Smtp-Source: APXvYqyBgUQDU/Ll/BynwQXDBJjxug1R552eBogoPbSX9lHs6SFNb6ZqIH46Z+1fHy/X8cgaelei8A==
-X-Received: by 2002:a17:906:5586:: with SMTP id
- y6mr492301ejp.120.1561495339920; 
- Tue, 25 Jun 2019 13:42:19 -0700 (PDT)
-Received: from phenom.ffwll.local ([2a02:168:569e:0:3106:d637:d723:e855])
- by smtp.gmail.com with ESMTPSA id u9sm5187262edm.71.2019.06.25.13.42.18
- (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
- Tue, 25 Jun 2019 13:42:19 -0700 (PDT)
-From: Daniel Vetter <daniel.vetter@ffwll.ch>
-To: DRI Development <dri-devel@lists.freedesktop.org>
-Date: Tue, 25 Jun 2019 22:42:06 +0200
-Message-Id: <20190625204208.5614-6-daniel.vetter@ffwll.ch>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20190625204208.5614-1-daniel.vetter@ffwll.ch>
-References: <20190625204208.5614-1-daniel.vetter@ffwll.ch>
+Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
+ [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
+ by gabe.freedesktop.org (Postfix) with ESMTP id BD9EC6E247
+ for <nouveau@lists.freedesktop.org>; Tue, 25 Jun 2019 20:56:39 +0000 (UTC)
+Received: by culpepper.freedesktop.org (Postfix, from userid 33)
+ id BA09E72167; Tue, 25 Jun 2019 20:56:39 +0000 (UTC)
+From: bugzilla-daemon@freedesktop.org
+To: nouveau@lists.freedesktop.org
+Date: Tue, 25 Jun 2019 20:56:39 +0000
+X-Bugzilla-Reason: AssignedTo
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: None
+X-Bugzilla-Product: xorg
+X-Bugzilla-Component: Driver/nouveau
+X-Bugzilla-Version: unspecified
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: normal
+X-Bugzilla-Who: lyude@redhat.com
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: medium
+X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: attachments.created
+Message-ID: <bug-110997-8800-ISRNuPJwt7@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-110997-8800@http.bugs.freedesktop.org/>
+References: <bug-110997-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ffwll.ch; s=google;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=/vSfB6TVezUN7KRb6RLJlk0Q61F58p552cd2MRDpceo=;
- b=hcLGWg6f8hfzN+YcdvF8QlNf8QMKncsCSo8viWlSvBPxdB8DdT6Q9gxkegH8y3onrr
- QUEpOleuF6WlSM3Tr90lgfW4oJmYZ5oE2tCw+hs+rzkLdtUmZ7NtWYB3LFp/xqgUxbHd
- AHb9FNrdET2ex/RbzOxn6rpgj8sr6YgOrBtME=
-Subject: [Nouveau] [PATCH 5/7] drm/nouveau: Fill out gem_object->resv
+Subject: [Nouveau] [Bug 110997] NV50 fan runs at full speed after resume
+ from suspend on kernels 5.1.8, 4.19.49
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -64,73 +52,109 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Daniel Vetter <daniel.vetter@intel.com>, nouveau@lists.freedesktop.org,
- Ben Skeggs <bskeggs@redhat.com>, Emil Velikov <emil.velikov@collabora.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1012664950=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-VGhhdCB3YXkgd2UgY2FuIGRpdGNoIG91ciBnZW1fcHJpbWVfcmVzX29iaiBpbXBsZW1lbnRhdGlv
-bi4gU2luY2UgdHRtCmFic29sdXRlbHkgbmVlZHMgdGhlIHJpZ2h0IHJlc2VydmF0aW9uIG9iamVj
-dCBhbGwgdGhlIGJvaWxlcnBsYXRlIGlzCmFscmVhZHkgdGhlcmUgYW5kIHdlIGp1c3QgaGF2ZSB0
-byB3aXJlIGl0IHVwIGNvcnJlY3RseS4KCk5vdGUgdGhhdCBnZW0vcHJpbWUgZG9lc24ndCBjYXJl
-IHdoZW4gd2UgZG8gdGhpcywgYXMgbG9uZyBhcyB3ZSBkbyBpdApiZWZvcmUgdGhlIGJvIGlzIHJl
-Z2lzdGVyZWQgYW5kIHNvbWVvbmUgY2FuIGNhbGwgdGhlIGhhbmRsZTJmZCBpb2N0bApvbiBpdC4K
-CkFzaWRlOiB0dG1fYnVmZmVyX29iamVjdC50dG1fcmVzdiBjb3VsZCBwcm9iYWJseSBiZSBkaXRj
-aGVkIGluIGZhdm91cgpvZiBhbHdheXMgcGFzc2luZyBhIG5vbi1OVUxMIHJlc3YgdG8gdHRtX2Jv
-X2luaXQoKS4gQXQgbGVhc3QgZm9yIGdlbQpkcml2ZXJzIHRoYXQgd291bGQgYXZvaWQgaGF2aW5n
-IHR3byBvZiB0aGVzZSwgb24gaW4gdHRtX2J1ZmZlcl9vYmplY3QKYW5kIHRoZSBvdGhlciBpbiBk
-cm1fZ2VtX29iamVjdCwgb25lIGp1c3QgdGhlcmUgZm9yIGNvbmZ1c2lvbi4KClJldmlld2VkLWJ5
-OiBFbWlsIFZlbGlrb3YgPGVtaWwudmVsaWtvdkBjb2xsYWJvcmEuY29tPgpTaWduZWQtb2ZmLWJ5
-OiBEYW5pZWwgVmV0dGVyIDxkYW5pZWwudmV0dGVyQGludGVsLmNvbT4KQ2M6IEJlbiBTa2VnZ3Mg
-PGJza2VnZ3NAcmVkaGF0LmNvbT4KQ2M6IG5vdXZlYXVAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCi0t
-LQogZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9iby5jICAgIHwgMiArKwogZHJpdmVy
-cy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9kcm0uYyAgIHwgMSAtCiBkcml2ZXJzL2dwdS9kcm0v
-bm91dmVhdS9ub3V2ZWF1X2dlbS5oICAgfCAxIC0KIGRyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25v
-dXZlYXVfcHJpbWUuYyB8IDcgLS0tLS0tLQogNCBmaWxlcyBjaGFuZ2VkLCAyIGluc2VydGlvbnMo
-KyksIDkgZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUv
-bm91dmVhdV9iby5jIGIvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9iby5jCmluZGV4
-IDM0YTk5ODAxMmJmNi4uNmYxMjE3YjNlNmI5IDEwMDY0NAotLS0gYS9kcml2ZXJzL2dwdS9kcm0v
-bm91dmVhdS9ub3V2ZWF1X2JvLmMKKysrIGIvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVh
-dV9iby5jCkBAIC0yOTksNiArMjk5LDggQEAgbm91dmVhdV9ib19uZXcoc3RydWN0IG5vdXZlYXVf
-Y2xpICpjbGksIHU2NCBzaXplLCBpbnQgYWxpZ24sCiAJCQkgIHR5cGUsICZudmJvLT5wbGFjZW1l
-bnQsCiAJCQkgIGFsaWduID4+IFBBR0VfU0hJRlQsIGZhbHNlLCBhY2Nfc2l6ZSwgc2csCiAJCQkg
-IHJvYmosIG5vdXZlYXVfYm9fZGVsX3R0bSk7CisJbnZiby0+Z2VtLnJlc3YgPSBudmJvLT5iby5y
-ZXN2OworCiAJaWYgKHJldCkgewogCQkvKiB0dG0gd2lsbCBjYWxsIG5vdXZlYXVfYm9fZGVsX3R0
-bSBpZiBpdCBmYWlscy4uICovCiAJCXJldHVybiByZXQ7CmRpZmYgLS1naXQgYS9kcml2ZXJzL2dw
-dS9kcm0vbm91dmVhdS9ub3V2ZWF1X2RybS5jIGIvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91
-dmVhdV9kcm0uYwppbmRleCA0Mzc3YjgzNjI2NWYuLjJjMzYzMTljMTU4ZiAxMDA2NDQKLS0tIGEv
-ZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9kcm0uYworKysgYi9kcml2ZXJzL2dwdS9k
-cm0vbm91dmVhdS9ub3V2ZWF1X2RybS5jCkBAIC0xMTMxLDcgKzExMzEsNiBAQCBkcml2ZXJfc3R1
-YiA9IHsKIAkucHJpbWVfaGFuZGxlX3RvX2ZkID0gZHJtX2dlbV9wcmltZV9oYW5kbGVfdG9fZmQs
-CiAJLnByaW1lX2ZkX3RvX2hhbmRsZSA9IGRybV9nZW1fcHJpbWVfZmRfdG9faGFuZGxlLAogCS5n
-ZW1fcHJpbWVfcGluID0gbm91dmVhdV9nZW1fcHJpbWVfcGluLAotCS5nZW1fcHJpbWVfcmVzX29i
-aiA9IG5vdXZlYXVfZ2VtX3ByaW1lX3Jlc19vYmosCiAJLmdlbV9wcmltZV91bnBpbiA9IG5vdXZl
-YXVfZ2VtX3ByaW1lX3VucGluLAogCS5nZW1fcHJpbWVfZ2V0X3NnX3RhYmxlID0gbm91dmVhdV9n
-ZW1fcHJpbWVfZ2V0X3NnX3RhYmxlLAogCS5nZW1fcHJpbWVfaW1wb3J0X3NnX3RhYmxlID0gbm91
-dmVhdV9nZW1fcHJpbWVfaW1wb3J0X3NnX3RhYmxlLApkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUv
-ZHJtL25vdXZlYXUvbm91dmVhdV9nZW0uaCBiL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZl
-YXVfZ2VtLmgKaW5kZXggZmUzOTk5OGY2NWNjLi45ZGVhMDE1Mzg3ZmQgMTAwNjQ0Ci0tLSBhL2Ry
-aXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfZ2VtLmgKKysrIGIvZHJpdmVycy9ncHUvZHJt
-L25vdXZlYXUvbm91dmVhdV9nZW0uaApAQCAtMzMsNyArMzMsNiBAQCBleHRlcm4gaW50IG5vdXZl
-YXVfZ2VtX2lvY3RsX2luZm8oc3RydWN0IGRybV9kZXZpY2UgKiwgdm9pZCAqLAogCQkJCSAgc3Ry
-dWN0IGRybV9maWxlICopOwogCiBleHRlcm4gaW50IG5vdXZlYXVfZ2VtX3ByaW1lX3BpbihzdHJ1
-Y3QgZHJtX2dlbV9vYmplY3QgKik7Ci1zdHJ1Y3QgcmVzZXJ2YXRpb25fb2JqZWN0ICpub3V2ZWF1
-X2dlbV9wcmltZV9yZXNfb2JqKHN0cnVjdCBkcm1fZ2VtX29iamVjdCAqKTsKIGV4dGVybiB2b2lk
-IG5vdXZlYXVfZ2VtX3ByaW1lX3VucGluKHN0cnVjdCBkcm1fZ2VtX29iamVjdCAqKTsKIGV4dGVy
-biBzdHJ1Y3Qgc2dfdGFibGUgKm5vdXZlYXVfZ2VtX3ByaW1lX2dldF9zZ190YWJsZShzdHJ1Y3Qg
-ZHJtX2dlbV9vYmplY3QgKik7CiBleHRlcm4gc3RydWN0IGRybV9nZW1fb2JqZWN0ICpub3V2ZWF1
-X2dlbV9wcmltZV9pbXBvcnRfc2dfdGFibGUoCmRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0v
-bm91dmVhdS9ub3V2ZWF1X3ByaW1lLmMgYi9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1
-X3ByaW1lLmMKaW5kZXggMWZlZmM5M2FmMWQ3Li5lYzUwMDE3NjkyZDQgMTAwNjQ0Ci0tLSBhL2Ry
-aXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfcHJpbWUuYworKysgYi9kcml2ZXJzL2dwdS9k
-cm0vbm91dmVhdS9ub3V2ZWF1X3ByaW1lLmMKQEAgLTEwNywxMCArMTA3LDMgQEAgdm9pZCBub3V2
-ZWF1X2dlbV9wcmltZV91bnBpbihzdHJ1Y3QgZHJtX2dlbV9vYmplY3QgKm9iaikKIAogCW5vdXZl
-YXVfYm9fdW5waW4obnZibyk7CiB9Ci0KLXN0cnVjdCByZXNlcnZhdGlvbl9vYmplY3QgKm5vdXZl
-YXVfZ2VtX3ByaW1lX3Jlc19vYmooc3RydWN0IGRybV9nZW1fb2JqZWN0ICpvYmopCi17Ci0Jc3Ry
-dWN0IG5vdXZlYXVfYm8gKm52Ym8gPSBub3V2ZWF1X2dlbV9vYmplY3Qob2JqKTsKLQotCXJldHVy
-biBudmJvLT5iby5yZXN2OwotfQotLSAKMi4yMC4xCgpfX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fXwpOb3V2ZWF1IG1haWxpbmcgbGlzdApOb3V2ZWF1QGxpc3Rz
-LmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xp
-c3RpbmZvL25vdXZlYXU=
+
+--===============1012664950==
+Content-Type: multipart/alternative; boundary="15614961992.Cd06ABc.438"
+Content-Transfer-Encoding: 7bit
+
+
+--15614961992.Cd06ABc.438
+Date: Tue, 25 Jun 2019 20:56:39 +0000
+MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+https://bugs.freedesktop.org/show_bug.cgi?id=3D110997
+
+--- Comment #1 from Lyude Paul <lyude@redhat.com> ---
+Created attachment 144637
+  --> https://bugs.freedesktop.org/attachment.cgi?id=3D144637&action=3Dedit
+Fix for Tesla i2c regression
+
+Hi! Turns out I actually have one of these GPUs in my drawer, so I was able=
+ to
+reproduce this issue with no problems. Could you verify that the following
+patch fixes your issue? If so, I'll add your Tested-by and send it out onto=
+ the
+nouveau ML
+
+--=20
+You are receiving this mail because:
+You are the assignee for the bug.=
+
+--15614961992.Cd06ABc.438
+Date: Tue, 25 Jun 2019 20:56:39 +0000
+MIME-Version: 1.0
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+<html>
+    <head>
+      <base href=3D"https://bugs.freedesktop.org/">
+    </head>
+    <body>
+      <p>
+        <div>
+            <b><a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - NV50 fan runs at full speed after resume from suspend on =
+kernels 5.1.8, 4.19.49"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110997#c1">Commen=
+t # 1</a>
+              on <a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - NV50 fan runs at full speed after resume from suspend on =
+kernels 5.1.8, 4.19.49"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110997">bug 11099=
+7</a>
+              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
+lyude&#64;redhat.com" title=3D"Lyude Paul &lt;lyude&#64;redhat.com&gt;"> <s=
+pan class=3D"fn">Lyude Paul</span></a>
+</span></b>
+        <pre>Created <span class=3D""><a href=3D"attachment.cgi?id=3D144637=
+" name=3D"attach_144637" title=3D"Fix for Tesla i2c regression">attachment =
+144637</a> <a href=3D"attachment.cgi?id=3D144637&amp;action=3Dedit" title=
+=3D"Fix for Tesla i2c regression">[details]</a></span> <a href=3D'page.cgi?=
+id=3Dsplinter.html&amp;bug=3D110997&amp;attachment=3D144637'>[review]</a>
+Fix for Tesla i2c regression
+
+Hi! Turns out I actually have one of these GPUs in my drawer, so I was able=
+ to
+reproduce this issue with no problems. Could you verify that the following
+patch fixes your issue? If so, I'll add your Tested-by and send it out onto=
+ the
+nouveau ML</pre>
+        </div>
+      </p>
+
+
+      <hr>
+      <span>You are receiving this mail because:</span>
+
+      <ul>
+          <li>You are the assignee for the bug.</li>
+      </ul>
+    </body>
+</html>=
+
+--15614961992.Cd06ABc.438--
+
+--===============1012664950==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
+YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
+cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============1012664950==--
