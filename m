@@ -2,47 +2,31 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0051756912
-	for <lists+nouveau@lfdr.de>; Wed, 26 Jun 2019 14:28:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2DDE356951
+	for <lists+nouveau@lfdr.de>; Wed, 26 Jun 2019 14:36:29 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4F1996E409;
-	Wed, 26 Jun 2019 12:28:38 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id AAFEF6E3D8;
+	Wed, 26 Jun 2019 12:36:27 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from bombadil.infradead.org (bombadil.infradead.org
- [IPv6:2607:7c80:54:e::133])
- by gabe.freedesktop.org (Postfix) with ESMTPS id CF5916E40E;
- Wed, 26 Jun 2019 12:28:36 +0000 (UTC)
-Received: from clnet-p19-102.ikbnet.co.at ([83.175.77.102] helo=localhost)
- by bombadil.infradead.org with esmtpsa (Exim 4.92 #3 (Red Hat Linux))
- id 1hg72P-0001gm-Ia; Wed, 26 Jun 2019 12:28:33 +0000
-From: Christoph Hellwig <hch@lst.de>
-To: Dan Williams <dan.j.williams@intel.com>,
- =?UTF-8?q?J=C3=A9r=C3=B4me=20Glisse?= <jglisse@redhat.com>,
- Jason Gunthorpe <jgg@mellanox.com>, Ben Skeggs <bskeggs@redhat.com>
-Date: Wed, 26 Jun 2019 14:27:24 +0200
-Message-Id: <20190626122724.13313-26-hch@lst.de>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20190626122724.13313-1-hch@lst.de>
+Received: from mx1.suse.de (mx2.suse.de [195.135.220.15])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4F91C6E3D8;
+ Wed, 26 Jun 2019 12:36:26 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+ by mx1.suse.de (Postfix) with ESMTP id A640BAD78;
+ Wed, 26 Jun 2019 12:36:24 +0000 (UTC)
+Date: Wed, 26 Jun 2019 14:36:23 +0200
+From: Michal Hocko <mhocko@kernel.org>
+To: Christoph Hellwig <hch@lst.de>
+Message-ID: <20190626123623.GU17798@dhcp22.suse.cz>
 References: <20190626122724.13313-1-hch@lst.de>
+ <20190626122724.13313-7-hch@lst.de>
 MIME-Version: 1.0
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
- bombadil.infradead.org. See http://www.infradead.org/rpr.html
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt;
- c=relaxed/relaxed; 
- d=infradead.org; s=bombadil.20170209; h=Content-Transfer-Encoding:
- MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
- :Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:Resent-From
- :Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
- List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ZjBYUWyGZeQFbLdeL3I3vLQlcbJ5I4BbNFzVpFyfAyY=; b=KN1fXz1VRCySW0ycRrfAX1GqWC
- nBzrlUj6EH8tEn5EKRnrhZ/clBQwfvfHZco8c9jjozD1fh/my91ln6undw3f0URs/bl+BIWm9b6hu
- GRC9l8p7WXmZ8Xxi9iA+E0W9Gm1MASDaRp1hsctZvyH++evwZDdjgMK5FluTFNT1RwdwEeDzbsvSM
- 2Vaw9si/vPSSHdp8MpGf4yt7KV6VBBfa72BTk2t+4oMw4Ihq6663f/SIsQz3QotN454E3JNgKTXLf
- k83PbIqllqoxK5hwQg9uLoykDjdc5EnRrvh/P54vz5TNn3UfdvW/VR54c5mGcZIc55bXkoE7hGw3x
- iOkrcrng==;
-Subject: [Nouveau] [PATCH 25/25] mm: don't select MIGRATE_VMA_HELPER from
- HMM_MIRROR
+Content-Disposition: inline
+In-Reply-To: <20190626122724.13313-7-hch@lst.de>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Subject: Re: [Nouveau] [PATCH 06/25] mm: export alloc_pages_vma
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -54,36 +38,30 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: linux-nvdimm@lists.01.org, linux-pci@vger.kernel.org,
+Cc: linux-nvdimm@lists.01.org, nouveau@lists.freedesktop.org,
  linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- linux-mm@kvack.org, nouveau@lists.freedesktop.org
+ linux-mm@kvack.org, Jason Gunthorpe <jgg@mellanox.com>,
+ Ben Skeggs <bskeggs@redhat.com>, linux-pci@vger.kernel.org,
+ Dan Williams <dan.j.williams@intel.com>
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-VGhlIG1pZ3JhdGVfdm1hIGhlbHBlciBpcyBvbmx5IHVzZWQgYnkgbm92ZWF1IHRvIG1pZ3JhdGUg
-ZGV2aWNlIHByaXZhdGUKcGFnZXMgYXJvdW5kLiAgT3RoZXIgSE1NX01JUlJPUiB1c2VycyBsaWtl
-IGFtZGdwdSBvciBpbmZpbmliYW5kIGRvbid0Cm5lZWQgaXQuCgpTaWduZWQtb2ZmLWJ5OiBDaHJp
-c3RvcGggSGVsbHdpZyA8aGNoQGxzdC5kZT4KUmV2aWV3ZWQtYnk6IEphc29uIEd1bnRob3JwZSA8
-amdnQG1lbGxhbm94LmNvbT4KLS0tCiBkcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9LY29uZmlnIHwg
-MSArCiBtbS9LY29uZmlnICAgICAgICAgICAgICAgICAgICAgIHwgMSAtCiAyIGZpbGVzIGNoYW5n
-ZWQsIDEgaW5zZXJ0aW9uKCspLCAxIGRlbGV0aW9uKC0pCgpkaWZmIC0tZ2l0IGEvZHJpdmVycy9n
-cHUvZHJtL25vdXZlYXUvS2NvbmZpZyBiL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L0tjb25maWcK
-aW5kZXggNjZjODM5ZDhlOWQxLi45NmI5ODE0ZTZkMDYgMTAwNjQ0Ci0tLSBhL2RyaXZlcnMvZ3B1
-L2RybS9ub3V2ZWF1L0tjb25maWcKKysrIGIvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvS2NvbmZp
-ZwpAQCAtODgsNiArODgsNyBAQCBjb25maWcgRFJNX05PVVZFQVVfU1ZNCiAJZGVwZW5kcyBvbiBE
-Uk1fTk9VVkVBVQogCWRlcGVuZHMgb24gSE1NX01JUlJPUgogCWRlcGVuZHMgb24gU1RBR0lORwor
-CXNlbGVjdCBNSUdSQVRFX1ZNQV9IRUxQRVIKIAlkZWZhdWx0IG4KIAloZWxwCiAJICBTYXkgWSBo
-ZXJlIGlmIHlvdSB3YW50IHRvIGVuYWJsZSBleHBlcmltZW50YWwgc3VwcG9ydCBmb3IKZGlmZiAt
-LWdpdCBhL21tL0tjb25maWcgYi9tbS9LY29uZmlnCmluZGV4IDFlNDI2YzI2YjFkNi4uNDBjZjA1
-NjI0MTJkIDEwMDY0NAotLS0gYS9tbS9LY29uZmlnCisrKyBiL21tL0tjb25maWcKQEAgLTY4MCw3
-ICs2ODAsNiBAQCBjb25maWcgSE1NX01JUlJPUgogCWRlcGVuZHMgb24gKFg4Nl82NCB8fCBQUEM2
-NCkKIAlkZXBlbmRzIG9uIE1NVSAmJiA2NEJJVAogCXNlbGVjdCBNTVVfTk9USUZJRVIKLQlzZWxl
-Y3QgTUlHUkFURV9WTUFfSEVMUEVSCiAJaGVscAogCSAgU2VsZWN0IEhNTV9NSVJST1IgaWYgeW91
-IHdhbnQgdG8gbWlycm9yIHJhbmdlIG9mIHRoZSBDUFUgcGFnZSB0YWJsZSBvZiBhCiAJICBwcm9j
-ZXNzIGludG8gYSBkZXZpY2UgcGFnZSB0YWJsZS4gSGVyZSwgbWlycm9yIG1lYW5zICJrZWVwIHN5
-bmNocm9uaXplZCIuCi0tIAoyLjIwLjEKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fCk5vdXZlYXUgbWFpbGluZyBsaXN0Ck5vdXZlYXVAbGlzdHMuZnJlZWRl
-c2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8v
-bm91dmVhdQ==
+T24gV2VkIDI2LTA2LTE5IDE0OjI3OjA1LCBDaHJpc3RvcGggSGVsbHdpZyB3cm90ZToKPiBub3V2
+ZWF1IGlzIGN1cnJlbnRseSB1c2luZyB0aGlzIHRocm91Z2ggYW4gb2RkIGhtbSB3cmFwcGVyLCBh
+bmQgSSBwbGFuCj4gdG8gc3dpdGNoIGl0IHRvIHRoZSByZWFsIHRoaW5nIGxhdGVyIGluIHRoaXMg
+c2VyaWVzLgo+IAo+IFNpZ25lZC1vZmYtYnk6IENocmlzdG9waCBIZWxsd2lnIDxoY2hAbHN0LmRl
+Pgo+IFJldmlld2VkLWJ5OiBKb2huIEh1YmJhcmQgPGpodWJiYXJkQG52aWRpYS5jb20+CgpBY2tl
+ZC1ieTogTWljaGFsIEhvY2tvIDxtaG9ja29Ac3VzZS5jb20+CgpUaGFua3MhCgo+IC0tLQo+ICBt
+bS9tZW1wb2xpY3kuYyB8IDEgKwo+ICAxIGZpbGUgY2hhbmdlZCwgMSBpbnNlcnRpb24oKykKPiAK
+PiBkaWZmIC0tZ2l0IGEvbW0vbWVtcG9saWN5LmMgYi9tbS9tZW1wb2xpY3kuYwo+IGluZGV4IDAx
+NjAwZDgwYWUwMS4uZjQ4NTY5YWExODYzIDEwMDY0NAo+IC0tLSBhL21tL21lbXBvbGljeS5jCj4g
+KysrIGIvbW0vbWVtcG9saWN5LmMKPiBAQCAtMjA5OCw2ICsyMDk4LDcgQEAgYWxsb2NfcGFnZXNf
+dm1hKGdmcF90IGdmcCwgaW50IG9yZGVyLCBzdHJ1Y3Qgdm1fYXJlYV9zdHJ1Y3QgKnZtYSwKPiAg
+b3V0Ogo+ICAJcmV0dXJuIHBhZ2U7Cj4gIH0KPiArRVhQT1JUX1NZTUJPTChhbGxvY19wYWdlc192
+bWEpOwo+ICAKPiAgLyoqCj4gICAqIAlhbGxvY19wYWdlc19jdXJyZW50IC0gQWxsb2NhdGUgcGFn
+ZXMuCj4gLS0gCj4gMi4yMC4xCgotLSAKTWljaGFsIEhvY2tvClNVU0UgTGFicwpfX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpOb3V2ZWF1IG1haWxpbmcgbGlz
+dApOb3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9w
+Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL25vdXZlYXU=
