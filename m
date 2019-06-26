@@ -2,38 +2,45 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id A127457147
-	for <lists+nouveau@lfdr.de>; Wed, 26 Jun 2019 21:04:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8FE825714A
+	for <lists+nouveau@lfdr.de>; Wed, 26 Jun 2019 21:05:07 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 49C3A6E4E6;
-	Wed, 26 Jun 2019 19:04:48 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B4D5A6E4FB;
+	Wed, 26 Jun 2019 19:05:05 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mga18.intel.com (mga18.intel.com [134.134.136.126])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 558436E4CE;
- Wed, 26 Jun 2019 19:04:47 +0000 (UTC)
-X-Amp-Result: UNKNOWN
-X-Amp-Original-Verdict: FILE UNKNOWN
-X-Amp-File-Uploaded: False
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
- by orsmga106.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
- 26 Jun 2019 12:04:46 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.63,420,1557212400"; d="scan'208";a="245528232"
-Received: from iweiny-desk2.sc.intel.com ([10.3.52.157])
- by orsmga001.jf.intel.com with ESMTP; 26 Jun 2019 12:04:44 -0700
-Date: Wed, 26 Jun 2019 12:04:46 -0700
-From: Ira Weiny <ira.weiny@intel.com>
-To: Christoph Hellwig <hch@lst.de>
-Message-ID: <20190626190445.GE4605@iweiny-DESK2.sc.intel.com>
-References: <20190626122724.13313-1-hch@lst.de>
- <20190626122724.13313-12-hch@lst.de>
+Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
+ [131.252.210.165])
+ by gabe.freedesktop.org (Postfix) with ESMTP id EF4416E4F0
+ for <nouveau@lists.freedesktop.org>; Wed, 26 Jun 2019 19:05:04 +0000 (UTC)
+Received: by culpepper.freedesktop.org (Postfix, from userid 33)
+ id EB7A572167; Wed, 26 Jun 2019 19:05:04 +0000 (UTC)
+From: bugzilla-daemon@freedesktop.org
+To: nouveau@lists.freedesktop.org
+Date: Wed, 26 Jun 2019 19:05:04 +0000
+X-Bugzilla-Reason: AssignedTo
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: None
+X-Bugzilla-Product: xorg
+X-Bugzilla-Component: Driver/nouveau
+X-Bugzilla-Version: unspecified
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: critical
+X-Bugzilla-Who: hgcoin@gmail.com
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: high
+X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: 
+Message-ID: <bug-100567-8800-AFzPIZkKBT@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-100567-8800@http.bugs.freedesktop.org/>
+References: <bug-100567-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20190626122724.13313-12-hch@lst.de>
-User-Agent: Mutt/1.11.1 (2018-12-01)
-Subject: Re: [Nouveau] [PATCH 11/25] memremap: lift the devmap_enable
- manipulation into devm_memremap_pages
+Subject: [Nouveau] [Bug 100567] Nouveau system freeze fifo: SCHED_ERROR 0a
+ [CTXSW_TIMEOUT]
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -45,150 +52,1277 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: linux-nvdimm@lists.01.org, linux-pci@vger.kernel.org,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- linux-mm@kvack.org, Jason Gunthorpe <jgg@mellanox.com>,
- Ben Skeggs <bskeggs@redhat.com>, nouveau@lists.freedesktop.org,
- Dan Williams <dan.j.williams@intel.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============0924778281=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-T24gV2VkLCBKdW4gMjYsIDIwMTkgYXQgMDI6Mjc6MTBQTSArMDIwMCwgQ2hyaXN0b3BoIEhlbGx3
-aWcgd3JvdGU6Cj4gSnVzdCBjaGVjayBpZiB0aGVyZSBpcyBhIC0+cGFnZV9mcmVlIG9wZXJhdGlv
-biBzZXQgYW5kIHRha2UgY2FyZSBvZiB0aGUKPiBzdGF0aWMga2V5IGVuYWJsZSwgYXMgd2VsbCBh
-cyB0aGUgcHV0IHVzaW5nIGRldmljZSBtYW5hZ2VkIHJlc291cmNlcy4KPiBBbHNvIGNoZWNrIHRo
-YXQgYSAtPnBhZ2VfZnJlZSBpcyBwcm92aWRlZCBmb3IgdGhlIHBnbWFwcyB0eXBlcyB0aGF0Cj4g
-cmVxdWlyZSBpdCwgYW5kIGNoZWNrIGZvciBhIHZhbGlkIHR5cGUgYXMgd2VsbCB3aGlsZSB3ZSBh
-cmUgYXQgaXQuCj4gCj4gTm90ZSB0aGF0IHRoaXMgYWxzbyBmaXhlcyB0aGUgZmFjdCB0aGF0IGht
-bSBuZXZlciBjYWxsZWQKPiBkZXZfcGFnZW1hcF9wdXRfb3BzIGFuZCB0aHVzIHdvdWxkIGxlYXZl
-IHRoZSBzbG93IHBhdGggZW5hYmxlZCBmb3JldmVyLAo+IGV2ZW4gYWZ0ZXIgYSBkZXZpY2UgZHJp
-dmVyIHVubG9hZCBvciBkaXNhYmxlLgo+IAo+IFNpZ25lZC1vZmYtYnk6IENocmlzdG9waCBIZWxs
-d2lnIDxoY2hAbHN0LmRlPgo+IC0tLQo+ICBkcml2ZXJzL252ZGltbS9wbWVtLmMgfCAyMyArKyst
-LS0tLS0tLS0tLS0tLQo+ICBpbmNsdWRlL2xpbnV4L21tLmggICAgfCAxMCAtLS0tLS0tLQo+ICBr
-ZXJuZWwvbWVtcmVtYXAuYyAgICAgfCA1OSArKysrKysrKysrKysrKysrKysrKysrKysrKystLS0t
-LS0tLS0tLS0tLS0tCj4gIG1tL2htbS5jICAgICAgICAgICAgICB8ICAyIC0tCj4gIDQgZmlsZXMg
-Y2hhbmdlZCwgNDEgaW5zZXJ0aW9ucygrKSwgNTMgZGVsZXRpb25zKC0pCj4gCj4gZGlmZiAtLWdp
-dCBhL2RyaXZlcnMvbnZkaW1tL3BtZW0uYyBiL2RyaXZlcnMvbnZkaW1tL3BtZW0uYwo+IGluZGV4
-IDlkYWM0ODM1OTM1My4uNDg3NjcxNzFhNGRmIDEwMDY0NAo+IC0tLSBhL2RyaXZlcnMvbnZkaW1t
-L3BtZW0uYwo+ICsrKyBiL2RyaXZlcnMvbnZkaW1tL3BtZW0uYwo+IEBAIC0zMzQsMTEgKzMzNCw2
-IEBAIHN0YXRpYyB2b2lkIHBtZW1fcmVsZWFzZV9kaXNrKHZvaWQgKl9fcG1lbSkKPiAgCXB1dF9k
-aXNrKHBtZW0tPmRpc2spOwo+ICB9Cj4gIAo+IC1zdGF0aWMgdm9pZCBwbWVtX3JlbGVhc2VfcGdt
-YXBfb3BzKHZvaWQgKl9fcGdtYXApCj4gLXsKPiAtCWRldl9wYWdlbWFwX3B1dF9vcHMoKTsKPiAt
-fQo+IC0KPiAgc3RhdGljIHZvaWQgcG1lbV9wYWdlbWFwX3BhZ2VfZnJlZShzdHJ1Y3QgcGFnZSAq
-cGFnZSwgdm9pZCAqZGF0YSkKPiAgewo+ICAJd2FrZV91cF92YXIoJnBhZ2UtPl9yZWZjb3VudCk7
-Cj4gQEAgLTM1MCwxNiArMzQ1LDYgQEAgc3RhdGljIGNvbnN0IHN0cnVjdCBkZXZfcGFnZW1hcF9v
-cHMgZnNkYXhfcGFnZW1hcF9vcHMgPSB7Cj4gIAkuY2xlYW51cAkJPSBwbWVtX3BhZ2VtYXBfY2xl
-YW51cCwKPiAgfTsKPiAgCj4gLXN0YXRpYyBpbnQgc2V0dXBfcGFnZW1hcF9mc2RheChzdHJ1Y3Qg
-ZGV2aWNlICpkZXYsIHN0cnVjdCBkZXZfcGFnZW1hcCAqcGdtYXApCj4gLXsKPiAtCWRldl9wYWdl
-bWFwX2dldF9vcHMoKTsKPiAtCWlmIChkZXZtX2FkZF9hY3Rpb25fb3JfcmVzZXQoZGV2LCBwbWVt
-X3JlbGVhc2VfcGdtYXBfb3BzLCBwZ21hcCkpCj4gLQkJcmV0dXJuIC1FTk9NRU07Cj4gLQlwZ21h
-cC0+dHlwZSA9IE1FTU9SWV9ERVZJQ0VfRlNfREFYOwo+IC0JcGdtYXAtPm9wcyA9ICZmc2RheF9w
-YWdlbWFwX29wczsKPiAtCXJldHVybiAwOwo+IC19Cj4gLQo+ICBzdGF0aWMgaW50IHBtZW1fYXR0
-YWNoX2Rpc2soc3RydWN0IGRldmljZSAqZGV2LAo+ICAJCXN0cnVjdCBuZF9uYW1lc3BhY2VfY29t
-bW9uICpuZG5zKQo+ICB7Cj4gQEAgLTQxNSw4ICs0MDAsOCBAQCBzdGF0aWMgaW50IHBtZW1fYXR0
-YWNoX2Rpc2soc3RydWN0IGRldmljZSAqZGV2LAo+ICAJcG1lbS0+cGZuX2ZsYWdzID0gUEZOX0RF
-VjsKPiAgCXBtZW0tPnBnbWFwLnJlZiA9ICZxLT5xX3VzYWdlX2NvdW50ZXI7Cj4gIAlpZiAoaXNf
-bmRfcGZuKGRldikpIHsKPiAtCQlpZiAoc2V0dXBfcGFnZW1hcF9mc2RheChkZXYsICZwbWVtLT5w
-Z21hcCkpCj4gLQkJCXJldHVybiAtRU5PTUVNOwo+ICsJCXBtZW0tPnBnbWFwLnR5cGUgPSBNRU1P
-UllfREVWSUNFX0ZTX0RBWDsKPiArCQlwbWVtLT5wZ21hcC5vcHMgPSAmZnNkYXhfcGFnZW1hcF9v
-cHM7Cj4gIAkJYWRkciA9IGRldm1fbWVtcmVtYXBfcGFnZXMoZGV2LCAmcG1lbS0+cGdtYXApOwo+
-ICAJCXBmbl9zYiA9IG5kX3Bmbi0+cGZuX3NiOwo+ICAJCXBtZW0tPmRhdGFfb2Zmc2V0ID0gbGU2
-NF90b19jcHUocGZuX3NiLT5kYXRhb2ZmKTsKPiBAQCAtNDI4LDggKzQxMyw4IEBAIHN0YXRpYyBp
-bnQgcG1lbV9hdHRhY2hfZGlzayhzdHJ1Y3QgZGV2aWNlICpkZXYsCj4gIAl9IGVsc2UgaWYgKHBt
-ZW1fc2hvdWxkX21hcF9wYWdlcyhkZXYpKSB7Cj4gIAkJbWVtY3B5KCZwbWVtLT5wZ21hcC5yZXMs
-ICZuc2lvLT5yZXMsIHNpemVvZihwbWVtLT5wZ21hcC5yZXMpKTsKPiAgCQlwbWVtLT5wZ21hcC5h
-bHRtYXBfdmFsaWQgPSBmYWxzZTsKPiAtCQlpZiAoc2V0dXBfcGFnZW1hcF9mc2RheChkZXYsICZw
-bWVtLT5wZ21hcCkpCj4gLQkJCXJldHVybiAtRU5PTUVNOwo+ICsJCXBtZW0tPnBnbWFwLnR5cGUg
-PSBNRU1PUllfREVWSUNFX0ZTX0RBWDsKPiArCQlwbWVtLT5wZ21hcC5vcHMgPSAmZnNkYXhfcGFn
-ZW1hcF9vcHM7Cj4gIAkJYWRkciA9IGRldm1fbWVtcmVtYXBfcGFnZXMoZGV2LCAmcG1lbS0+cGdt
-YXApOwo+ICAJCXBtZW0tPnBmbl9mbGFncyB8PSBQRk5fTUFQOwo+ICAJCW1lbWNweSgmYmJfcmVz
-LCAmcG1lbS0+cGdtYXAucmVzLCBzaXplb2YoYmJfcmVzKSk7Cj4gZGlmZiAtLWdpdCBhL2luY2x1
-ZGUvbGludXgvbW0uaCBiL2luY2x1ZGUvbGludXgvbW0uaAo+IGluZGV4IDZlNGI5YmUwOGIxMy4u
-YWEzOTcwMjkxY2RmIDEwMDY0NAo+IC0tLSBhL2luY2x1ZGUvbGludXgvbW0uaAo+ICsrKyBiL2lu
-Y2x1ZGUvbGludXgvbW0uaAo+IEBAIC05MzIsOCArOTMyLDYgQEAgc3RhdGljIGlubGluZSBib29s
-IGlzX3pvbmVfZGV2aWNlX3BhZ2UoY29uc3Qgc3RydWN0IHBhZ2UgKnBhZ2UpCj4gICNlbmRpZgo+
-ICAKPiAgI2lmZGVmIENPTkZJR19ERVZfUEFHRU1BUF9PUFMKPiAtdm9pZCBkZXZfcGFnZW1hcF9n
-ZXRfb3BzKHZvaWQpOwo+IC12b2lkIGRldl9wYWdlbWFwX3B1dF9vcHModm9pZCk7Cj4gIHZvaWQg
-X19wdXRfZGV2bWFwX21hbmFnZWRfcGFnZShzdHJ1Y3QgcGFnZSAqcGFnZSk7Cj4gIERFQ0xBUkVf
-U1RBVElDX0tFWV9GQUxTRShkZXZtYXBfbWFuYWdlZF9rZXkpOwo+ICBzdGF0aWMgaW5saW5lIGJv
-b2wgcHV0X2Rldm1hcF9tYW5hZ2VkX3BhZ2Uoc3RydWN0IHBhZ2UgKnBhZ2UpCj4gQEAgLTk3Mywx
-NCArOTcxLDYgQEAgc3RhdGljIGlubGluZSBib29sIGlzX3BjaV9wMnBkbWFfcGFnZShjb25zdCBz
-dHJ1Y3QgcGFnZSAqcGFnZSkKPiAgI2VuZGlmIC8qIENPTkZJR19QQ0lfUDJQRE1BICovCj4gIAo+
-ICAjZWxzZSAvKiBDT05GSUdfREVWX1BBR0VNQVBfT1BTICovCj4gLXN0YXRpYyBpbmxpbmUgdm9p
-ZCBkZXZfcGFnZW1hcF9nZXRfb3BzKHZvaWQpCj4gLXsKPiAtfQo+IC0KPiAtc3RhdGljIGlubGlu
-ZSB2b2lkIGRldl9wYWdlbWFwX3B1dF9vcHModm9pZCkKPiAtewo+IC19Cj4gLQo+ICBzdGF0aWMg
-aW5saW5lIGJvb2wgcHV0X2Rldm1hcF9tYW5hZ2VkX3BhZ2Uoc3RydWN0IHBhZ2UgKnBhZ2UpCj4g
-IHsKPiAgCXJldHVybiBmYWxzZTsKPiBkaWZmIC0tZ2l0IGEva2VybmVsL21lbXJlbWFwLmMgYi9r
-ZXJuZWwvbWVtcmVtYXAuYwo+IGluZGV4IDAwYzFjZWI2MGMxOS4uMzIxOWE0YzkxZDA3IDEwMDY0
-NAo+IC0tLSBhL2tlcm5lbC9tZW1yZW1hcC5jCj4gKysrIGIva2VybmVsL21lbXJlbWFwLmMKPiBA
-QCAtMTcsNiArMTcsMzUgQEAgc3RhdGljIERFRklORV9YQVJSQVkocGdtYXBfYXJyYXkpOwo+ICAj
-ZGVmaW5lIFNFQ1RJT05fTUFTSyB+KCgxVUwgPDwgUEFfU0VDVElPTl9TSElGVCkgLSAxKQo+ICAj
-ZGVmaW5lIFNFQ1RJT05fU0laRSAoMVVMIDw8IFBBX1NFQ1RJT05fU0hJRlQpCj4gIAo+ICsjaWZk
-ZWYgQ09ORklHX0RFVl9QQUdFTUFQX09QUwo+ICtERUZJTkVfU1RBVElDX0tFWV9GQUxTRShkZXZt
-YXBfbWFuYWdlZF9rZXkpOwo+ICtFWFBPUlRfU1lNQk9MKGRldm1hcF9tYW5hZ2VkX2tleSk7Cj4g
-K3N0YXRpYyBhdG9taWNfdCBkZXZtYXBfbWFuYWdlZF9lbmFibGU7Cj4gKwo+ICtzdGF0aWMgdm9p
-ZCBkZXZtYXBfbWFuYWdlZF9lbmFibGVfcHV0KHZvaWQgKmRhdGEpCj4gK3sKPiArCWlmIChhdG9t
-aWNfZGVjX2FuZF90ZXN0KCZkZXZtYXBfbWFuYWdlZF9lbmFibGUpKQo+ICsJCXN0YXRpY19icmFu
-Y2hfZGlzYWJsZSgmZGV2bWFwX21hbmFnZWRfa2V5KTsKPiArfQo+ICsKPiArc3RhdGljIGludCBk
-ZXZtYXBfbWFuYWdlZF9lbmFibGVfZ2V0KHN0cnVjdCBkZXZpY2UgKmRldiwgc3RydWN0IGRldl9w
-YWdlbWFwICpwZ21hcCkKPiArewo+ICsJaWYgKCFwZ21hcC0+b3BzLT5wYWdlX2ZyZWUpIHsKCk5J
-VDogbGF0ZXIgb24geW91IGFkZCB0aGUgY2hlY2sgZm9yIHBnbWFwLT5vcHMuLi4gIGl0IHNob3Vs
-ZCBwcm9iYWJseSBiZSBoZXJlLgoKQnV0IG5vdCBzdXJlIHRoYXQgYmlzZWN0aW9uIHdpbGwgYmUg
-YW4gaXNzdWUgaGVyZS4KClJldmlld2VkLWJ5OiBJcmEgV2VpbnkgPGlyYS53ZWlueUBpbnRlbC5j
-b20+Cgo+ICsJCVdBUk4oMSwgIk1pc3NpbmcgcGFnZV9mcmVlIG1ldGhvZFxuIik7Cj4gKwkJcmV0
-dXJuIC1FSU5WQUw7Cj4gKwl9Cj4gKwo+ICsJaWYgKGF0b21pY19pbmNfcmV0dXJuKCZkZXZtYXBf
-bWFuYWdlZF9lbmFibGUpID09IDEpCj4gKwkJc3RhdGljX2JyYW5jaF9lbmFibGUoJmRldm1hcF9t
-YW5hZ2VkX2tleSk7Cj4gKwlyZXR1cm4gZGV2bV9hZGRfYWN0aW9uX29yX3Jlc2V0KGRldiwgZGV2
-bWFwX21hbmFnZWRfZW5hYmxlX3B1dCwgTlVMTCk7Cj4gK30KPiArI2Vsc2UKPiArc3RhdGljIGlu
-dCBkZXZtYXBfbWFuYWdlZF9lbmFibGVfZ2V0KHN0cnVjdCBkZXZpY2UgKmRldiwgc3RydWN0IGRl
-dl9wYWdlbWFwICpwZ21hcCkKPiArewo+ICsJcmV0dXJuIC1FSU5WQUw7Cj4gK30KPiArI2VuZGlm
-IC8qIENPTkZJR19ERVZfUEFHRU1BUF9PUFMgKi8KPiArCj4gICNpZiBJU19FTkFCTEVEKENPTkZJ
-R19ERVZJQ0VfUFJJVkFURSkKPiAgdm1fZmF1bHRfdCBkZXZpY2VfcHJpdmF0ZV9lbnRyeV9mYXVs
-dChzdHJ1Y3Qgdm1fYXJlYV9zdHJ1Y3QgKnZtYSwKPiAgCQkgICAgICAgdW5zaWduZWQgbG9uZyBh
-ZGRyLAo+IEBAIC0xNTYsNiArMTg1LDcgQEAgdm9pZCAqZGV2bV9tZW1yZW1hcF9wYWdlcyhzdHJ1
-Y3QgZGV2aWNlICpkZXYsIHN0cnVjdCBkZXZfcGFnZW1hcCAqcGdtYXApCj4gIAl9Owo+ICAJcGdw
-cm90X3QgcGdwcm90ID0gUEFHRV9LRVJORUw7Cj4gIAlpbnQgZXJyb3IsIG5pZCwgaXNfcmFtOwo+
-ICsJYm9vbCBuZWVkX2Rldm1hcF9tYW5hZ2VkID0gdHJ1ZTsKPiAgCj4gIAlzd2l0Y2ggKHBnbWFw
-LT50eXBlKSB7Cj4gIAljYXNlIE1FTU9SWV9ERVZJQ0VfUFJJVkFURToKPiBAQCAtMTczLDYgKzIw
-Myw3IEBAIHZvaWQgKmRldm1fbWVtcmVtYXBfcGFnZXMoc3RydWN0IGRldmljZSAqZGV2LCBzdHJ1
-Y3QgZGV2X3BhZ2VtYXAgKnBnbWFwKQo+ICAJCWJyZWFrOwo+ICAJY2FzZSBNRU1PUllfREVWSUNF
-X0RFVkRBWDoKPiAgCWNhc2UgTUVNT1JZX0RFVklDRV9QQ0lfUDJQRE1BOgo+ICsJCW5lZWRfZGV2
-bWFwX21hbmFnZWQgPSBmYWxzZTsKPiAgCQlicmVhazsKPiAgCWRlZmF1bHQ6Cj4gIAkJV0FSTigx
-LCAiSW52YWxpZCBwZ21hcCB0eXBlICVkXG4iLCBwZ21hcC0+dHlwZSk7Cj4gQEAgLTE4NSw2ICsy
-MTYsMTIgQEAgdm9pZCAqZGV2bV9tZW1yZW1hcF9wYWdlcyhzdHJ1Y3QgZGV2aWNlICpkZXYsIHN0
-cnVjdCBkZXZfcGFnZW1hcCAqcGdtYXApCj4gIAkJcmV0dXJuIEVSUl9QVFIoLUVJTlZBTCk7Cj4g
-IAl9Cj4gIAo+ICsJaWYgKG5lZWRfZGV2bWFwX21hbmFnZWQpIHsKPiArCQllcnJvciA9IGRldm1h
-cF9tYW5hZ2VkX2VuYWJsZV9nZXQoZGV2LCBwZ21hcCk7Cj4gKwkJaWYgKGVycm9yKQo+ICsJCQly
-ZXR1cm4gRVJSX1BUUihlcnJvcik7Cj4gKwl9Cj4gKwo+ICAJYWxpZ25fc3RhcnQgPSByZXMtPnN0
-YXJ0ICYgfihTRUNUSU9OX1NJWkUgLSAxKTsKPiAgCWFsaWduX3NpemUgPSBBTElHTihyZXMtPnN0
-YXJ0ICsgcmVzb3VyY2Vfc2l6ZShyZXMpLCBTRUNUSU9OX1NJWkUpCj4gIAkJLSBhbGlnbl9zdGFy
-dDsKPiBAQCAtMzUxLDI4ICszODgsNiBAQCBzdHJ1Y3QgZGV2X3BhZ2VtYXAgKmdldF9kZXZfcGFn
-ZW1hcCh1bnNpZ25lZCBsb25nIHBmbiwKPiAgRVhQT1JUX1NZTUJPTF9HUEwoZ2V0X2Rldl9wYWdl
-bWFwKTsKPiAgCj4gICNpZmRlZiBDT05GSUdfREVWX1BBR0VNQVBfT1BTCj4gLURFRklORV9TVEFU
-SUNfS0VZX0ZBTFNFKGRldm1hcF9tYW5hZ2VkX2tleSk7Cj4gLUVYUE9SVF9TWU1CT0woZGV2bWFw
-X21hbmFnZWRfa2V5KTsKPiAtc3RhdGljIGF0b21pY190IGRldm1hcF9lbmFibGU7Cj4gLQo+IC0v
-Kgo+IC0gKiBUb2dnbGUgdGhlIHN0YXRpYyBrZXkgZm9yIC0+cGFnZV9mcmVlKCkgY2FsbGJhY2tz
-IHdoZW4gZGV2X3BhZ2VtYXAKPiAtICogcGFnZXMgZ28gaWRsZS4KPiAtICovCj4gLXZvaWQgZGV2
-X3BhZ2VtYXBfZ2V0X29wcyh2b2lkKQo+IC17Cj4gLQlpZiAoYXRvbWljX2luY19yZXR1cm4oJmRl
-dm1hcF9lbmFibGUpID09IDEpCj4gLQkJc3RhdGljX2JyYW5jaF9lbmFibGUoJmRldm1hcF9tYW5h
-Z2VkX2tleSk7Cj4gLX0KPiAtRVhQT1JUX1NZTUJPTF9HUEwoZGV2X3BhZ2VtYXBfZ2V0X29wcyk7
-Cj4gLQo+IC12b2lkIGRldl9wYWdlbWFwX3B1dF9vcHModm9pZCkKPiAtewo+IC0JaWYgKGF0b21p
-Y19kZWNfYW5kX3Rlc3QoJmRldm1hcF9lbmFibGUpKQo+IC0JCXN0YXRpY19icmFuY2hfZGlzYWJs
-ZSgmZGV2bWFwX21hbmFnZWRfa2V5KTsKPiAtfQo+IC1FWFBPUlRfU1lNQk9MX0dQTChkZXZfcGFn
-ZW1hcF9wdXRfb3BzKTsKPiAtCj4gIHZvaWQgX19wdXRfZGV2bWFwX21hbmFnZWRfcGFnZShzdHJ1
-Y3QgcGFnZSAqcGFnZSkKPiAgewo+ICAJaW50IGNvdW50ID0gcGFnZV9yZWZfZGVjX3JldHVybihw
-YWdlKTsKPiBkaWZmIC0tZ2l0IGEvbW0vaG1tLmMgYi9tbS9obW0uYwo+IGluZGV4IDk4Nzc5M2Zi
-YTkyMy4uNWIwYmQ1ZjZhNzRmIDEwMDY0NAo+IC0tLSBhL21tL2htbS5jCj4gKysrIGIvbW0vaG1t
-LmMKPiBAQCAtMTQxNSw4ICsxNDE1LDYgQEAgc3RydWN0IGhtbV9kZXZtZW0gKmhtbV9kZXZtZW1f
-YWRkKGNvbnN0IHN0cnVjdCBobW1fZGV2bWVtX29wcyAqb3BzLAo+ICAJdm9pZCAqcmVzdWx0Owo+
-ICAJaW50IHJldDsKPiAgCj4gLQlkZXZfcGFnZW1hcF9nZXRfb3BzKCk7Cj4gLQo+ICAJZGV2bWVt
-ID0gZGV2bV9remFsbG9jKGRldmljZSwgc2l6ZW9mKCpkZXZtZW0pLCBHRlBfS0VSTkVMKTsKPiAg
-CWlmICghZGV2bWVtKQo+ICAJCXJldHVybiBFUlJfUFRSKC1FTk9NRU0pOwo+IC0tIAo+IDIuMjAu
-MQo+IAo+IF9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCj4g
-TGludXgtbnZkaW1tIG1haWxpbmcgbGlzdAo+IExpbnV4LW52ZGltbUBsaXN0cy4wMS5vcmcKPiBo
-dHRwczovL2xpc3RzLjAxLm9yZy9tYWlsbWFuL2xpc3RpbmZvL2xpbnV4LW52ZGltbQpfX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpOb3V2ZWF1IG1haWxpbmcg
-bGlzdApOb3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNr
-dG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL25vdXZlYXU=
+
+--===============0924778281==
+Content-Type: multipart/alternative; boundary="15615759044.2C8CcFf6.9242"
+Content-Transfer-Encoding: 7bit
+
+
+--15615759044.2C8CcFf6.9242
+Date: Wed, 26 Jun 2019 19:05:04 +0000
+MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+https://bugs.freedesktop.org/show_bug.cgi?id=3D100567
+
+--- Comment #35 from Harry Coin <hgcoin@gmail.com> ---
+On 'disco' aka:
+uname -a
+Linux ceo1homenx 5.0.0-19-generic #20-Ubuntu SMP Wed Jun 19 17:04:04 UTC 20=
+19
+x86_64 x86_64 x86_64 GNU/Linux
+
+The following trace shows a nouveau problem, then two mintues later a kernel
+lock that requires a power cycle to recover from.   This is a system that h=
+as
+two graphics cards with all the available monitor ports (3) used.   These h=
+ard
+lockups happen two to four times per day.  This latest one was under a no l=
+oad
+condition.  I walked away from a system with an email and firefox ap up.  An
+hour or so later I return to a locked system. It's becoming unusable.  Deta=
+il:
+---
+
+        #6
+
+This is against disco, crashed not an hour ago. Detail:
+
+Jun 26 12:17:03 ceo1homenx btrbk: finished success - - - -
+Jun 26 12:18:21 ceo1homenx systemd[1]: Starting Cleanup of Temporary
+Directories...
+Jun 26 12:18:21 ceo1homenx systemd-tmpfiles[11589]:
+[/usr/lib/tmpfiles.d/spice-vdagentd.conf:2] Line references path below lega=
+cy
+directory /var/run/, updating /var/run/spice-vdagentd =E2=86=92 /run/spice-=
+vdagentd;
+please update the tmpfiles.d/
+ drop-in file accordingly.
+Jun 26 12:18:21 ceo1homenx systemd[1]: systemd-tmpfiles-clean.service:
+Succeeded.
+Jun 26 12:18:21 ceo1homenx systemd[1]: Started Cleanup of Temporary
+Directories.
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066176] INFO: task kworker/u16:9:=
+7088
+blocked for more than 120 seconds.
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066178] Tainted: G W 5.0.0-19-gen=
+eric
+#20-Ubuntu
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066179] "echo 0 >
+/proc/sys/kernel/hung_task_timeout_secs" disables this message.
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066180] kworker/u16:9 D 0 7088 2
+0x80000000
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066211] Workqueue: events_unbound
+nv50_disp_atomic_commit_work [nouveau]
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066211] Call Trace:
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066216] __schedule+0x2d0/0x840
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066238] ?
+nouveau_display_scanoutpos+0xe9/0x180 [nouveau]
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066239] schedule+0x2c/0x70
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066240] schedule_timeout+0x258/0x=
+360
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066252] ?
+__drm_crtc_commit_free+0x12/0x20 [drm]
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066272] ?
+nv50_wndw_atomic_destroy_state+0x1d/0x20 [nouveau]
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066274]
+dma_fence_default_wait+0x20a/0x280
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066275] ? dma_fence_release+0xa0/=
+0xa0
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066276]
+dma_fence_wait_timeout+0xe7/0x110
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066281]
+drm_atomic_helper_wait_for_fences+0x3f/0xc0 [drm_kms_helper]
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066301]
+nv50_disp_atomic_commit_tail+0x78/0x870 [nouveau]
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066303] ? __switch_to+0x96/0x4e0
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066303] ? __switch_to_asm+0x34/0x=
+70
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066322]
+nv50_disp_atomic_commit_work+0x12/0x20 [nouveau]
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066324] process_one_work+0x20f/0x=
+410
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066325] worker_thread+0x34/0x400
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066327] kthread+0x120/0x140
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066327] ?
+process_one_work+0x410/0x410
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066329] ? __kthread_parkme+0x70/0=
+x70
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066329] ret_from_fork+0x35/0x40
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066338] INFO: task kworker/u16:8:=
+9307
+blocked for more than 120 seconds.
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066339] Tainted: G W 5.0.0-19-gen=
+eric
+#20-Ubuntu
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066340] "echo 0 >
+/proc/sys/kernel/hung_task_timeout_secs" disables this message.
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066340] kworker/u16:8 D 0 9307 2
+0x80000000
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066360] Workqueue: events_unbound
+nv50_disp_atomic_commit_work [nouveau]
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066361] Call Trace:
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066362] __schedule+0x2d0/0x840
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066381] ?
+nouveau_display_scanoutpos+0xe9/0x180 [nouveau]
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066383] schedule+0x2c/0x70
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066384] schedule_timeout+0x258/0x=
+360
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066385] ? __slab_free+0x225/0x340
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066387]
+dma_fence_default_wait+0x20a/0x280
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066387] ? dma_fence_release+0xa0/=
+0xa0
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066388]
+dma_fence_wait_timeout+0xe7/0x110
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066392]
+drm_atomic_helper_wait_for_fences+0x3f/0xc0 [drm_kms_helper]
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066411]
+nv50_disp_atomic_commit_tail+0x78/0x870 [nouveau]
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066412] ? __switch_to+0x96/0x4e0
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066412] ? __switch_to_asm+0x34/0x=
+70
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066431]
+nv50_disp_atomic_commit_work+0x12/0x20 [nouveau]
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066431] process_one_work+0x20f/0x=
+410
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066432] worker_thread+0x34/0x400
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066434] kthread+0x120/0x140
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066434] ?
+process_one_work+0x410/0x410
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066436] ? __kthread_parkme+0x70/0=
+x70
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066436] ret_from_fork+0x35/0x40
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066439] Tainted: G W 5.0.0-19-gen=
+eric
+#20-Ubuntu
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066439] "echo 0 >
+/proc/sys/kernel/hung_task_timeout_secs" disables this message.
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066440] kworker/u16:7 D 0 10297 2
+0x80000000
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066458] Workqueue: events_unbound
+nv50_disp_atomic_commit_work [nouveau]
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066459] Call Trace:
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066460] __schedule+0x2d0/0x840
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066479] ?
+nouveau_display_scanoutpos+0xe9/0x180 [nouveau]
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066480] schedule+0x2c/0x70
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066481] schedule_timeout+0x258/0x=
+360
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066482] ? __slab_free+0x225/0x340
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066483]
+dma_fence_default_wait+0x20a/0x280
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066484] ? dma_fence_release+0xa0/=
+0xa0
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066485]
+dma_fence_wait_timeout+0xe7/0x110
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066489]
+drm_atomic_helper_wait_for_fences+0x3f/0xc0 [drm_kms_helper]
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066507]
+nv50_disp_atomic_commit_tail+0x78/0x870 [nouveau]
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066508] ? __switch_to+0x96/0x4e0
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066509] ? __switch_to_asm+0x34/0x=
+70
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066527]
+nv50_disp_atomic_commit_work+0x12/0x20 [nouveau]
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066528] process_one_work+0x20f/0x=
+410
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066529] worker_thread+0x34/0x400
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066530] kthread+0x120/0x140
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066531] ?
+process_one_work+0x410/0x410
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066532] ? __kthread_parkme+0x70/0=
+x70
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066533] ret_from_fork+0x35/0x40
+Jun 26 12:25:01 ceo1homenx CRON[11952]: (root) CMD (command -v debian-sa1 >
+/dev/null && debian-sa1 1 1)
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895077] INFO: task kworker/u16:9:=
+7088
+blocked for more than 120 seconds.
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895079] Tainted: G W 5.0.0-19-gen=
+eric
+#20-Ubuntu
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895079] "echo 0 >
+/proc/sys/kernel/hung_task_timeout_secs" disables this message.
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895080] kworker/u16:9 D 0 7088 2
+0x80000000
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895111] Workqueue: events_unbound
+nv50_disp_atomic_commit_work [nouveau]
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895112] Call Trace:
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895115] __schedule+0x2d0/0x840
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895138] ?
+nouveau_display_scanoutpos+0xe9/0x180 [nouveau]
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895139] schedule+0x2c/0x70
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895141] schedule_timeout+0x258/0x=
+360
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895152] ?
+__drm_crtc_commit_free+0x12/0x20 [drm]
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895173] ?
+nv50_wndw_atomic_destroy_state+0x1d/0x20 [nouveau]
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895174]
+dma_fence_default_wait+0x20a/0x280
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895175] ? dma_fence_release+0xa0/=
+0xa0
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895176]
+dma_fence_wait_timeout+0xe7/0x110
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895182]
+drm_atomic_helper_wait_for_fences+0x3f/0xc0 [drm_kms_helper]
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895201]
+nv50_disp_atomic_commit_tail+0x78/0x870 [nouveau]
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895203] ? __switch_to+0x96/0x4e0
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895204] ? __switch_to_asm+0x34/0x=
+70
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895223]
+nv50_disp_atomic_commit_work+0x12/0x20 [nouveau]
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895225] process_one_work+0x20f/0x=
+410
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895226] worker_thread+0x34/0x400
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895227] kthread+0x120/0x140
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895228] ?
+process_one_work+0x410/0x410
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895229] ? __kthread_parkme+0x70/0=
+x70
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895230] ret_from_fork+0x35/0x40
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895239] INFO: task kworker/u16:8:=
+9307
+blocked for more than 120 seconds.
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895240] Tainted: G W 5.0.0-19-gen=
+eric
+#20-Ubuntu
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895241] "echo 0 >
+/proc/sys/kernel/hung_task_timeout_secs" disables this message.
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895241] kworker/u16:8 D 0 9307 2
+0x80000000
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895261] Workqueue: events_unbound
+nv50_disp_atomic_commit_work [nouveau]
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895262] Call Trace:
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895263] __schedule+0x2d0/0x840
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895283] ?
+nouveau_display_scanoutpos+0xe9/0x180 [nouveau]
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895284] schedule+0x2c/0x70
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895285] schedule_timeout+0x258/0x=
+360
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895287] ? __slab_free+0x225/0x340
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895288]
+dma_fence_default_wait+0x20a/0x280
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895289] ? dma_fence_release+0xa0/=
+0xa0
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895290]
+dma_fence_wait_timeout+0xe7/0x110
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895294]
+drm_atomic_helper_wait_for_fences+0x3f/0xc0 [drm_kms_helper]
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895312]
+nv50_disp_atomic_commit_tail+0x78/0x870 [nouveau]
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895313] ? __switch_to+0x96/0x4e0
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895314] ? __switch_to_asm+0x34/0x=
+70
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895333]
+nv50_disp_atomic_commit_work+0x12/0x20 [nouveau]
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895334] process_one_work+0x20f/0x=
+410
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895335] worker_thread+0x34/0x400
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895336] kthread+0x120/0x140
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895337] ?
+process_one_work+0x410/0x410
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895338] ? __kthread_parkme+0x70/0=
+x70
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895338] ret_from_fork+0x35/0x40
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895340] INFO: task
+kworker/u16:7:10297 blocked for more than 120 seconds.
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895341] Tainted: G W 5.0.0-19-gen=
+eric
+#20-Ubuntu
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895341] "echo 0 >
+/proc/sys/kernel/hung_task_timeout_secs" disables this message.
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895342] kworker/u16:7 D 0 10297 2
+0x80000000
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895361] Workqueue: events_unbound
+nv50_disp_atomic_commit_work [nouveau]
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895361] Call Trace:
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895363] __schedule+0x2d0/0x840
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895381] ?
+nouveau_display_scanoutpos+0xe9/0x180 [nouveau]
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895382] schedule+0x2c/0x70
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895383] schedule_timeout+0x258/0x=
+360
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895385] ? __slab_free+0x225/0x340
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895386]
+dma_fence_default_wait+0x20a/0x280
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895387] ? dma_fence_release+0xa0/=
+0xa0
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895388]
+dma_fence_wait_timeout+0xe7/0x110
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895391]
+drm_atomic_helper_wait_for_fences+0x3f/0xc0 [drm_kms_helper]
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895410]
+nv50_disp_atomic_commit_tail+0x78/0x870 [nouveau]
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895411] ? __switch_to+0x96/0x4e0
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895411] ? __switch_to_asm+0x34/0x=
+70
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895430]
+nv50_disp_atomic_commit_work+0x12/0x20 [nouveau]
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895431] process_one_work+0x20f/0x=
+410
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895431] worker_thread+0x34/0x400
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895433] kthread+0x120/0x140
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895433] ?
+process_one_work+0x410/0x410
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895435] ? __kthread_parkme+0x70/0=
+x70
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895435] ret_from_fork+0x35/0x40
+Jun 26 12:27:17 ceo1homenx kernel: [87844.724604] INFO: task kworker/u16:9:=
+7088
+blocked for more than 120 seconds.
+Jun 26 12:27:17 ceo1homenx kernel: [87844.724611] Tainted: G W 5.0.0-19-gen=
+eric
+#20-Ubuntu
+Jun 26 12:27:17 ceo1homenx kernel: [87844.724614] "echo 0 >
+/proc/sys/kernel/hung_task_timeout_secs" disables this message.
+Jun 26 12:27:17 ceo1homenx kernel: [87844.724617] kworker/u16:9 D 0 7088 2
+0x80000000
+Jun 26 12:27:17 ceo1homenx kernel: [87844.724736] Workqueue: events_unbound
+nv50_disp_atomic_commit_work [nouveau]
+Jun 26 12:27:17 ceo1homenx kernel: [87844.724739] Call Trace:
+Jun 26 12:27:17 ceo1homenx kernel: [87844.724752] __schedule+0x2d0/0x840
+Jun 26 12:27:17 ceo1homenx kernel: [87844.724856] ?
+nouveau_display_scanoutpos+0xe9/0x180 [nouveau]
+Jun 26 12:27:17 ceo1homenx kernel: [87844.724862] schedule+0x2c/0x70
+Jun 26 12:27:17 ceo1homenx kernel: [87844.724868] schedule_timeout+0x258/0x=
+360
+Jun 26 12:27:17 ceo1homenx kernel: [87844.724907] ?
+__drm_crtc_commit_free+0x12/0x20 [drm]
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725005] ?
+nv50_wndw_atomic_destroy_state+0x1d/0x20 [nouveau]
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725012]
+dma_fence_default_wait+0x20a/0x280
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725017] ? dma_fence_release+0xa0/=
+0xa0
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725022]
+dma_fence_wait_timeout+0xe7/0x110
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725041]
+drm_atomic_helper_wait_for_fences+0x3f/0xc0 [drm_kms_helper]
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725136]
+nv50_disp_atomic_commit_tail+0x78/0x870 [nouveau]
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725141] ? __switch_to+0x96/0x4e0
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725145] ? __switch_to_asm+0x34/0x=
+70
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725237]
+nv50_disp_atomic_commit_work+0x12/0x20 [nouveau]
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725243] process_one_work+0x20f/0x=
+410
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725247] worker_thread+0x34/0x400
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725254] kthread+0x120/0x140
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725258] ?
+process_one_work+0x410/0x410
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725263] ? __kthread_parkme+0x70/0=
+x70
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725267] ret_from_fork+0x35/0x40
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725291] INFO: task kworker/u16:8:=
+9307
+blocked for more than 120 seconds.
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725296] Tainted: G W 5.0.0-19-gen=
+eric
+#20-Ubuntu
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725298] "echo 0 >
+/proc/sys/kernel/hung_task_timeout_secs" disables this message.
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725301] kworker/u16:8 D 0 9307 2
+0x80000000
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725396] Workqueue: events_unbound
+nv50_disp_atomic_commit_work [nouveau]
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725398] Call Trace:
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725405] __schedule+0x2d0/0x840
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725495] ?
+nouveau_display_scanoutpos+0xe9/0x180 [nouveau]
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725502] schedule+0x2c/0x70
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725507] schedule_timeout+0x258/0x=
+360
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725514] ? __slab_free+0x225/0x340
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725519]
+dma_fence_default_wait+0x20a/0x280
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725523] ? dma_fence_release+0xa0/=
+0xa0
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725528]
+dma_fence_wait_timeout+0xe7/0x110
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725546]
+drm_atomic_helper_wait_for_fences+0x3f/0xc0 [drm_kms_helper]
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725635]
+nv50_disp_atomic_commit_tail+0x78/0x870 [nouveau]
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725639] ? __switch_to+0x96/0x4e0
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725643] ? __switch_to_asm+0x34/0x=
+70
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725732]
+nv50_disp_atomic_commit_work+0x12/0x20 [nouveau]
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725736] process_one_work+0x20f/0x=
+410
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725741] worker_thread+0x34/0x400
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725746] kthread+0x120/0x140
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725750] ?
+process_one_work+0x410/0x410
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725755] ? __kthread_parkme+0x70/0=
+x70
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725759] ret_from_fork+0x35/0x40
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725765] INFO: task
+kworker/u16:7:10297 blocked for more than 120 seconds.
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725769] Tainted: G W 5.0.0-19-gen=
+eric
+#20-Ubuntu
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725771] "echo 0 >
+/proc/sys/kernel/hung_task_timeout_secs" disables this message.
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725774] kworker/u16:7 D 0 10297 2
+0x80000000
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725885] Workqueue: events_unbound
+nv50_disp_atomic_commit_work [nouveau]
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725890] Call Trace:
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725902] __schedule+0x2d0/0x840
+Jun 26 12:27:17 ceo1homenx kernel: [87844.726014] ?
+nouveau_display_scanoutpos+0xe9/0x180 [nouveau]
+Jun 26 12:27:17 ceo1homenx kernel: [87844.726022] schedule+0x2c/0x70
+Jun 26 12:27:17 ceo1homenx kernel: [87844.726029] schedule_timeout+0x258/0x=
+360
+Jun 26 12:27:17 ceo1homenx kernel: [87844.726038] ? __slab_free+0x225/0x340
+Jun 26 12:27:17 ceo1homenx kernel: [87844.726044]
+dma_fence_default_wait+0x20a/0x280
+Jun 26 12:27:17 ceo1homenx kernel: [87844.726050] ? dma_fence_release+0xa0/=
+0xa0
+Jun 26 12:27:17 ceo1homenx kernel: [87844.726056]
+dma_fence_wait_timeout+0xe7/0x110
+Jun 26 12:27:17 ceo1homenx kernel: [87844.726075]
+drm_atomic_helper_wait_for_fences+0x3f/0xc0 [drm_kms_helper]
+Jun 26 12:27:17 ceo1homenx kernel: [87844.726165]
+nv50_disp_atomic_commit_tail+0x78/0x870 [nouveau]
+Jun 26 12:27:17 ceo1homenx kernel: [87844.726169] ? __switch_to+0x96/0x4e0
+Jun 26 12:27:17 ceo1homenx kernel: [87844.726172] ? __switch_to_asm+0x34/0x=
+70
+Jun 26 12:27:17 ceo1homenx kernel: [87844.726260]
+nv50_disp_atomic_commit_work+0x12/0x20 [nouveau]
+Jun 26 12:27:17 ceo1homenx kernel: [87844.726265] process_one_work+0x20f/0x=
+410
+Jun 26 12:27:17 ceo1homenx kernel: [87844.726269] worker_thread+0x34/0x400
+Jun 26 12:27:17 ceo1homenx kernel: [87844.726276] kthread+0x120/0x140
+Jun 26 12:27:17 ceo1homenx kernel: [87844.726279] ?
+process_one_work+0x410/0x410
+Jun 26 12:27:17 ceo1homenx kernel: [87844.726285] ? __kthread_parkme+0x70/0=
+x70
+Jun 26 12:27:17 ceo1homenx kernel: [87844.726288] ret_from_fork+0x35/0x40
+Jun 26 12:29:18 ceo1homenx kernel: [87965.557909] INFO: task kworker/u16:9:=
+7088
+blocked for more than 120 seconds.
+Jun 26 12:29:18 ceo1homenx kernel: [87965.557916] Tainted: G W 5.0.0-19-gen=
+eric
+#20-Ubuntu
+Jun 26 12:29:18 ceo1homenx kernel: [87965.557919] "echo 0 >
+/proc/sys/kernel/hung_task_timeout_secs" disables this message.
+Jun 26 12:29:18 ceo1homenx kernel: [87965.557922] kworker/u16:9 D 0 7088 2
+0x80000000
+Jun 26 12:29:18 ceo1homenx kernel: [87965.558041] Workqueue: events_unbound
+nv50_disp_atomic_commit_work [nouveau]
+Jun 26 12:29:18 ceo1homenx kernel: [87965.558044] Call Trace:
+Jun 26 12:29:18 ceo1homenx kernel: [87965.558056] __schedule+0x2d0/0x840
+Jun 26 12:29:18 ceo1homenx kernel: [87965.558160] ?
+nouveau_display_scanoutpos+0xe9/0x180 [nouveau]
+Jun 26 12:29:18 ceo1homenx kernel: [87965.558167] schedule+0x2c/0x70
+Jun 26 12:29:18 ceo1homenx kernel: [87965.558172] schedule_timeout+0x258/0x=
+360
+Jun 26 12:29:18 ceo1homenx kernel: [87965.558213] ?
+__drm_crtc_commit_free+0x12/0x20 [drm]
+Jun 26 12:29:18 ceo1homenx kernel: [87965.558309] ?
+nv50_wndw_atomic_destroy_state+0x1d/0x20 [nouveau]
+Jun 26 12:29:18 ceo1homenx kernel: [87965.558316]
+dma_fence_default_wait+0x20a/0x280
+Jun 26 12:29:18 ceo1homenx kernel: [87965.558320] ? dma_fence_release+0xa0/=
+0xa0
+Jun 26 12:29:18 ceo1homenx kernel: [87965.558325]
+dma_fence_wait_timeout+0xe7/0x110
+Jun 26 12:29:18 ceo1homenx kernel: [87965.558344]
+drm_atomic_helper_wait_for_fences+0x3f/0xc0 [drm_kms_helper]
+Jun 26 12:29:18 ceo1homenx kernel: [87965.558437]
+nv50_disp_atomic_commit_tail+0x78/0x870 [nouveau]
+Jun 26 12:29:18 ceo1homenx kernel: [87965.558443] ? __switch_to+0x96/0x4e0
+Jun 26 12:29:18 ceo1homenx kernel: [87965.558446] ? __switch_to_asm+0x34/0x=
+70
+Jun 26 12:29:18 ceo1homenx kernel: [87965.558536]
+nv50_disp_atomic_commit_work+0x12/0x20 [nouveau]
+Jun 26 12:29:18 ceo1homenx kernel: [87965.558542] process_one_work+0x20f/0x=
+410
+Jun 26 12:29:18 ceo1homenx kernel: [87965.558547] worker_thread+0x34/0x400
+Jun 26 12:29:18 ceo1homenx kernel: [87965.558553] kthread+0x120/0x140
+Jun 26 12:29:18 ceo1homenx kernel: [87965.558557] ?
+process_one_work+0x410/0x410
+Jun 26 12:29:18 ceo1homenx kernel: [87965.558563] ? __kthread_parkme+0x70/0=
+x70
+Jun 26 12:29:18 ceo1homenx kernel: [87965.558567] ret_from_fork+0x35/0x40
+Jun 26 12:30:01 ceo1homenx CRON[12207]: (root) CMD ([ -x /etc/init.d/anacro=
+n ]
+&& if [ ! -d /run/systemd/system ]; then /usr/sbin/invoke-rc.d anacron start
+>/dev/null; fi)
+Jun 26 12:33:21 ceo1homenx systemd[1]: Started Run anacron jobs.
+Jun 26 12:33:21 ceo1homenx anacron[12372]: Anacron 2.3 started on 2019-06-26
+Jun 26 12:33:21 ceo1homenx anacron[12372]: Normal exit (0 jobs run)
+Jun 26 12:33:21 ceo1homenx systemd[1]: anacron.service: Succeeded.
+Jun 26 12:35:02 ceo1homenx CRON[12477]: (root) CMD (command -v debian-sa1 >
+/dev/null && debian-sa1 1 1)
+Jun 26 12:39:01 ceo1homenx systemd[1]: Starting Clean php session files...
+Jun 26 12:39:01 ceo1homenx CRON[12710]: (root) CMD ( [ -x
+/usr/lib/php/sessionclean ] && if [ ! -d /run/systemd/system ]; then
+/usr/lib/php/sessionclean; fi)
+Jun 26 12:39:01 ceo1homenx systemd[1]: phpsessionclean.service: Succeeded.
+Jun 26 12:39:01 ceo1homenx systemd[1]: Started Clean php session files.
+Jun 26 12:45:02 ceo1homenx CRON[13049]: (root) CMD (command -v debian-sa1 >
+/dev/null && debian-sa1 1 1)
+Jun 26 12:55:02 ceo1homenx CRON[13571]: (root) CMD (command -v debian-sa1 >
+/dev/null && debian-sa1 1 1)
+Jun 26 12:56:20 ceo1homenx kernel: [89587.485877] nouveau 0000:01:00.0: fif=
+o:
+PBDMA0: 04000000 [ACQUIRE] ch 2 [007fa99000 Xorg[3086]] subc 0 mthd 001c da=
+ta
+00001004
+Jun 26 12:56:24 ceo1homenx kernel: [89591.781878] nouveau 0000:01:00.0: fif=
+o:
+SCHED_ERROR 0a [CTXSW_TIMEOUT]
+Jun 26 12:56:24 ceo1homenx kernel: [89591.781897] nouveau 0000:01:00.0: fif=
+o:
+runlist 0: scheduled for recovery
+Jun 26 12:56:24 ceo1homenx kernel: [89591.781918] nouveau 0000:01:00.0: fif=
+o:
+channel 5: killed
+Jun 26 12:56:24 ceo1homenx kernel: [89591.781926] nouveau 0000:01:00.0: fif=
+o:
+engine 0: scheduled for recovery
+Jun 26 12:56:24 ceo1homenx kernel: [89591.782531] nouveau 0000:01:00.0:
+Xorg[3086]: channel 5 killed!
+Jun 26 12:56:24 ceo1homenx kernel: [89591.784954] nouveau 0000:01:00.0: fif=
+o:
+PBDMA0: 04000000 [ACQUIRE] ch 2 [007fa99000 Xorg[3086]] subc 0 mthd 001c da=
+ta
+00001004
+Jun 26 12:56:24 ceo1homenx kernel: [89591.787346] nouveau 0000:01:00.0: fif=
+o:
+PBDMA0: 04000000 [ACQUIRE] ch 2 [007fa99000 Xorg[3086]] subc 0 mthd 001c da=
+ta
+00001004
+Jun 26 12:56:24 ceo1homenx kernel: [89591.791222] nouveau 0000:01:00.0: fif=
+o:
+PBDMA0: 04000000 [ACQUIRE] ch 2 [007fa99000 Xorg[3086]] subc 0 mthd 001c da=
+ta
+00001004
+Jun 26 12:56:24 ceo1homenx kernel: [89591.799169] nouveau 0000:01:00.0: fif=
+o:
+PBDMA0: 04000000 [ACQUIRE] ch 2 [007fa99000 Xorg[3086]] subc 0 mthd 001c da=
+ta
+00001004
+Jun 26 12:56:24 ceo1homenx kernel: [89591.799874] nouveau 0000:01:00.0: fif=
+o:
+PBDMA0: 04000000 [ACQUIRE] ch 2 [007fa99000 Xorg[3086]] subc 0 mthd 001c da=
+ta
+00001004
+Jun 26 12:56:24 ceo1homenx dbus-daemon[1027]: [system] Activating via syste=
+md:
+service name=3D'org.freedesktop.PackageKit' unit=3D'packagekit.service' req=
+uested
+by ':1.270' (uid=3D1000 pid=3D3346 comm=3D"/usr/bin/plasmashell " label=3D"=
+unconfined")
+Jun 26 12:56:24 ceo1homenx systemd[1]: Starting PackageKit Daemon...
+Jun 26 12:56:24 ceo1homenx PackageKit: daemon start
+Jun 26 12:56:24 ceo1homenx dbus-daemon[1027]: [system] Successfully activat=
+ed
+service 'org.freedesktop.PackageKit'
+Jun 26 12:56:24 ceo1homenx systemd[1]: Started PackageKit Daemon.
+Jun 26 13:01:30 ceo1homenx PackageKit: daemon quit
+Jun 26 13:01:30 ceo1homenx systemd[1]: packagekit.service: Main process exi=
+ted,
+code=3Dkilled, status=3D15/TERM
+Jun 26 13:01:30 ceo1homenx systemd[1]: packagekit.service: Succeeded.
+Jun 26 13:05:01 ceo1homenx CRON[14159]: (root) CMD (command -v debian-sa1 >
+/dev/null && debian-sa1 1 1)
+Jun 26 13:09:02 ceo1homenx systemd[1]: Starting Clean php session files...
+Jun 26 13:09:02 ceo1homenx CRON[14381]: (root) CMD ( [ -x
+/usr/lib/php/sessionclean ] && if [ ! -d /run/systemd/system ]; then
+/usr/lib/php/sessionclean; fi)
+Jun 26 13:09:02 ceo1homenx systemd[1]: phpsessionclean.service: Succeeded.
+Jun 26 13:09:02 ceo1homenx systemd[1]: Started Clean php session files.
+Jun 26 13:15:02 ceo1homenx CRON[14748]: (root) CMD (command -v debian-sa1 >
+/dev/null && debian-sa1 1 1)
+Jun 26 13:17:01 ceo1homenx CRON[14851]: (root) CMD ( cd / && run-parts --re=
+port
+/etc/cron.hourly)
+Jun 26 13:17:01 ceo1homenx btrbk: startup v0.27.1 - - - # btrbk command line
+client, version 0.27.1
+Jun 26 13:17:01 ceo1homenx btrbk: snapshot starting
+/snapshots/home_snapshots/@home.20190626T1317 /snapshots/@home - -
+Jun 26 13:17:03 ceo1homenx btrbk: snapshot success
+/snapshots/home_snapshots/@home.20190626T1317 /snapshots/@home - -
+Jun 26 13:17:03 ceo1homenx btrbk: delete_snapshot starting
+/snapshots/home_snapshots/@home.20190622T1217 - - -
+Jun 26 13:17:03 ceo1homenx btrbk: delete_snapshot success
+/snapshots/home_snapshots/@home.20190622T1217 - - -
+Jun 26 13:17:03 ceo1homenx btrbk: finished success - - - -
+
+-- Hard Lock-- power cycle reboot the only possible fix.
+
+--=20
+You are receiving this mail because:
+You are the assignee for the bug.=
+
+--15615759044.2C8CcFf6.9242
+Date: Wed, 26 Jun 2019 19:05:04 +0000
+MIME-Version: 1.0
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+<html>
+    <head>
+      <base href=3D"https://bugs.freedesktop.org/">
+    </head>
+    <body>
+      <p>
+        <div>
+            <b><a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - Nouveau system freeze fifo: SCHED_ERROR 0a [CTXSW_TIMEOUT=
+]"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D100567#c35">Comme=
+nt # 35</a>
+              on <a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - Nouveau system freeze fifo: SCHED_ERROR 0a [CTXSW_TIMEOUT=
+]"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D100567">bug 10056=
+7</a>
+              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
+hgcoin&#64;gmail.com" title=3D"Harry Coin &lt;hgcoin&#64;gmail.com&gt;"> <s=
+pan class=3D"fn">Harry Coin</span></a>
+</span></b>
+        <pre>On 'disco' aka:
+uname -a
+Linux ceo1homenx 5.0.0-19-generic #20-Ubuntu SMP Wed Jun 19 17:04:04 UTC 20=
+19
+x86_64 x86_64 x86_64 GNU/Linux
+
+The following trace shows a nouveau problem, then two mintues later a kernel
+lock that requires a power cycle to recover from.   This is a system that h=
+as
+two graphics cards with all the available monitor ports (3) used.   These h=
+ard
+lockups happen two to four times per day.  This latest one was under a no l=
+oad
+condition.  I walked away from a system with an email and firefox ap up.  An
+hour or so later I return to a locked system. It's becoming unusable.  Deta=
+il:
+---
+
+        #6
+
+This is against disco, crashed not an hour ago. Detail:
+
+Jun 26 12:17:03 ceo1homenx btrbk: finished success - - - -
+Jun 26 12:18:21 ceo1homenx systemd[1]: Starting Cleanup of Temporary
+Directories...
+Jun 26 12:18:21 ceo1homenx systemd-tmpfiles[11589]:
+[/usr/lib/tmpfiles.d/spice-vdagentd.conf:2] Line references path below lega=
+cy
+directory /var/run/, updating /var/run/spice-vdagentd =E2=86=92 /run/spice-=
+vdagentd;
+please update the tmpfiles.d/
+ drop-in file accordingly.
+Jun 26 12:18:21 ceo1homenx systemd[1]: systemd-tmpfiles-clean.service:
+Succeeded.
+Jun 26 12:18:21 ceo1homenx systemd[1]: Started Cleanup of Temporary
+Directories.
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066176] INFO: task kworker/u16:9:=
+7088
+blocked for more than 120 seconds.
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066178] Tainted: G W 5.0.0-19-gen=
+eric
+#20-Ubuntu
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066179] &quot;echo 0 &gt;
+/proc/sys/kernel/hung_task_timeout_secs&quot; disables this message.
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066180] kworker/u16:9 D 0 7088 2
+0x80000000
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066211] Workqueue: events_unbound
+nv50_disp_atomic_commit_work [nouveau]
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066211] Call Trace:
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066216] __schedule+0x2d0/0x840
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066238] ?
+nouveau_display_scanoutpos+0xe9/0x180 [nouveau]
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066239] schedule+0x2c/0x70
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066240] schedule_timeout+0x258/0x=
+360
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066252] ?
+__drm_crtc_commit_free+0x12/0x20 [drm]
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066272] ?
+nv50_wndw_atomic_destroy_state+0x1d/0x20 [nouveau]
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066274]
+dma_fence_default_wait+0x20a/0x280
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066275] ? dma_fence_release+0xa0/=
+0xa0
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066276]
+dma_fence_wait_timeout+0xe7/0x110
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066281]
+drm_atomic_helper_wait_for_fences+0x3f/0xc0 [drm_kms_helper]
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066301]
+nv50_disp_atomic_commit_tail+0x78/0x870 [nouveau]
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066303] ? __switch_to+0x96/0x4e0
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066303] ? __switch_to_asm+0x34/0x=
+70
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066322]
+nv50_disp_atomic_commit_work+0x12/0x20 [nouveau]
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066324] process_one_work+0x20f/0x=
+410
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066325] worker_thread+0x34/0x400
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066327] kthread+0x120/0x140
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066327] ?
+process_one_work+0x410/0x410
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066329] ? __kthread_parkme+0x70/0=
+x70
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066329] ret_from_fork+0x35/0x40
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066338] INFO: task kworker/u16:8:=
+9307
+blocked for more than 120 seconds.
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066339] Tainted: G W 5.0.0-19-gen=
+eric
+#20-Ubuntu
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066340] &quot;echo 0 &gt;
+/proc/sys/kernel/hung_task_timeout_secs&quot; disables this message.
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066340] kworker/u16:8 D 0 9307 2
+0x80000000
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066360] Workqueue: events_unbound
+nv50_disp_atomic_commit_work [nouveau]
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066361] Call Trace:
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066362] __schedule+0x2d0/0x840
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066381] ?
+nouveau_display_scanoutpos+0xe9/0x180 [nouveau]
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066383] schedule+0x2c/0x70
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066384] schedule_timeout+0x258/0x=
+360
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066385] ? __slab_free+0x225/0x340
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066387]
+dma_fence_default_wait+0x20a/0x280
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066387] ? dma_fence_release+0xa0/=
+0xa0
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066388]
+dma_fence_wait_timeout+0xe7/0x110
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066392]
+drm_atomic_helper_wait_for_fences+0x3f/0xc0 [drm_kms_helper]
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066411]
+nv50_disp_atomic_commit_tail+0x78/0x870 [nouveau]
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066412] ? __switch_to+0x96/0x4e0
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066412] ? __switch_to_asm+0x34/0x=
+70
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066431]
+nv50_disp_atomic_commit_work+0x12/0x20 [nouveau]
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066431] process_one_work+0x20f/0x=
+410
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066432] worker_thread+0x34/0x400
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066434] kthread+0x120/0x140
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066434] ?
+process_one_work+0x410/0x410
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066436] ? __kthread_parkme+0x70/0=
+x70
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066436] ret_from_fork+0x35/0x40
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066439] Tainted: G W 5.0.0-19-gen=
+eric
+#20-Ubuntu
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066439] &quot;echo 0 &gt;
+/proc/sys/kernel/hung_task_timeout_secs&quot; disables this message.
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066440] kworker/u16:7 D 0 10297 2
+0x80000000
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066458] Workqueue: events_unbound
+nv50_disp_atomic_commit_work [nouveau]
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066459] Call Trace:
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066460] __schedule+0x2d0/0x840
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066479] ?
+nouveau_display_scanoutpos+0xe9/0x180 [nouveau]
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066480] schedule+0x2c/0x70
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066481] schedule_timeout+0x258/0x=
+360
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066482] ? __slab_free+0x225/0x340
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066483]
+dma_fence_default_wait+0x20a/0x280
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066484] ? dma_fence_release+0xa0/=
+0xa0
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066485]
+dma_fence_wait_timeout+0xe7/0x110
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066489]
+drm_atomic_helper_wait_for_fences+0x3f/0xc0 [drm_kms_helper]
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066507]
+nv50_disp_atomic_commit_tail+0x78/0x870 [nouveau]
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066508] ? __switch_to+0x96/0x4e0
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066509] ? __switch_to_asm+0x34/0x=
+70
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066527]
+nv50_disp_atomic_commit_work+0x12/0x20 [nouveau]
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066528] process_one_work+0x20f/0x=
+410
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066529] worker_thread+0x34/0x400
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066530] kthread+0x120/0x140
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066531] ?
+process_one_work+0x410/0x410
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066532] ? __kthread_parkme+0x70/0=
+x70
+Jun 26 12:23:15 ceo1homenx kernel: [87603.066533] ret_from_fork+0x35/0x40
+Jun 26 12:25:01 ceo1homenx CRON[11952]: (root) CMD (command -v debian-sa1 &=
+gt;
+/dev/null &amp;&amp; debian-sa1 1 1)
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895077] INFO: task kworker/u16:9:=
+7088
+blocked for more than 120 seconds.
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895079] Tainted: G W 5.0.0-19-gen=
+eric
+#20-Ubuntu
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895079] &quot;echo 0 &gt;
+/proc/sys/kernel/hung_task_timeout_secs&quot; disables this message.
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895080] kworker/u16:9 D 0 7088 2
+0x80000000
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895111] Workqueue: events_unbound
+nv50_disp_atomic_commit_work [nouveau]
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895112] Call Trace:
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895115] __schedule+0x2d0/0x840
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895138] ?
+nouveau_display_scanoutpos+0xe9/0x180 [nouveau]
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895139] schedule+0x2c/0x70
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895141] schedule_timeout+0x258/0x=
+360
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895152] ?
+__drm_crtc_commit_free+0x12/0x20 [drm]
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895173] ?
+nv50_wndw_atomic_destroy_state+0x1d/0x20 [nouveau]
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895174]
+dma_fence_default_wait+0x20a/0x280
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895175] ? dma_fence_release+0xa0/=
+0xa0
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895176]
+dma_fence_wait_timeout+0xe7/0x110
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895182]
+drm_atomic_helper_wait_for_fences+0x3f/0xc0 [drm_kms_helper]
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895201]
+nv50_disp_atomic_commit_tail+0x78/0x870 [nouveau]
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895203] ? __switch_to+0x96/0x4e0
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895204] ? __switch_to_asm+0x34/0x=
+70
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895223]
+nv50_disp_atomic_commit_work+0x12/0x20 [nouveau]
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895225] process_one_work+0x20f/0x=
+410
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895226] worker_thread+0x34/0x400
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895227] kthread+0x120/0x140
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895228] ?
+process_one_work+0x410/0x410
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895229] ? __kthread_parkme+0x70/0=
+x70
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895230] ret_from_fork+0x35/0x40
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895239] INFO: task kworker/u16:8:=
+9307
+blocked for more than 120 seconds.
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895240] Tainted: G W 5.0.0-19-gen=
+eric
+#20-Ubuntu
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895241] &quot;echo 0 &gt;
+/proc/sys/kernel/hung_task_timeout_secs&quot; disables this message.
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895241] kworker/u16:8 D 0 9307 2
+0x80000000
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895261] Workqueue: events_unbound
+nv50_disp_atomic_commit_work [nouveau]
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895262] Call Trace:
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895263] __schedule+0x2d0/0x840
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895283] ?
+nouveau_display_scanoutpos+0xe9/0x180 [nouveau]
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895284] schedule+0x2c/0x70
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895285] schedule_timeout+0x258/0x=
+360
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895287] ? __slab_free+0x225/0x340
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895288]
+dma_fence_default_wait+0x20a/0x280
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895289] ? dma_fence_release+0xa0/=
+0xa0
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895290]
+dma_fence_wait_timeout+0xe7/0x110
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895294]
+drm_atomic_helper_wait_for_fences+0x3f/0xc0 [drm_kms_helper]
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895312]
+nv50_disp_atomic_commit_tail+0x78/0x870 [nouveau]
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895313] ? __switch_to+0x96/0x4e0
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895314] ? __switch_to_asm+0x34/0x=
+70
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895333]
+nv50_disp_atomic_commit_work+0x12/0x20 [nouveau]
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895334] process_one_work+0x20f/0x=
+410
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895335] worker_thread+0x34/0x400
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895336] kthread+0x120/0x140
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895337] ?
+process_one_work+0x410/0x410
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895338] ? __kthread_parkme+0x70/0=
+x70
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895338] ret_from_fork+0x35/0x40
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895340] INFO: task
+kworker/u16:7:10297 blocked for more than 120 seconds.
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895341] Tainted: G W 5.0.0-19-gen=
+eric
+#20-Ubuntu
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895341] &quot;echo 0 &gt;
+/proc/sys/kernel/hung_task_timeout_secs&quot; disables this message.
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895342] kworker/u16:7 D 0 10297 2
+0x80000000
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895361] Workqueue: events_unbound
+nv50_disp_atomic_commit_work [nouveau]
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895361] Call Trace:
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895363] __schedule+0x2d0/0x840
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895381] ?
+nouveau_display_scanoutpos+0xe9/0x180 [nouveau]
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895382] schedule+0x2c/0x70
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895383] schedule_timeout+0x258/0x=
+360
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895385] ? __slab_free+0x225/0x340
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895386]
+dma_fence_default_wait+0x20a/0x280
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895387] ? dma_fence_release+0xa0/=
+0xa0
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895388]
+dma_fence_wait_timeout+0xe7/0x110
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895391]
+drm_atomic_helper_wait_for_fences+0x3f/0xc0 [drm_kms_helper]
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895410]
+nv50_disp_atomic_commit_tail+0x78/0x870 [nouveau]
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895411] ? __switch_to+0x96/0x4e0
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895411] ? __switch_to_asm+0x34/0x=
+70
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895430]
+nv50_disp_atomic_commit_work+0x12/0x20 [nouveau]
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895431] process_one_work+0x20f/0x=
+410
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895431] worker_thread+0x34/0x400
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895433] kthread+0x120/0x140
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895433] ?
+process_one_work+0x410/0x410
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895435] ? __kthread_parkme+0x70/0=
+x70
+Jun 26 12:25:16 ceo1homenx kernel: [87723.895435] ret_from_fork+0x35/0x40
+Jun 26 12:27:17 ceo1homenx kernel: [87844.724604] INFO: task kworker/u16:9:=
+7088
+blocked for more than 120 seconds.
+Jun 26 12:27:17 ceo1homenx kernel: [87844.724611] Tainted: G W 5.0.0-19-gen=
+eric
+#20-Ubuntu
+Jun 26 12:27:17 ceo1homenx kernel: [87844.724614] &quot;echo 0 &gt;
+/proc/sys/kernel/hung_task_timeout_secs&quot; disables this message.
+Jun 26 12:27:17 ceo1homenx kernel: [87844.724617] kworker/u16:9 D 0 7088 2
+0x80000000
+Jun 26 12:27:17 ceo1homenx kernel: [87844.724736] Workqueue: events_unbound
+nv50_disp_atomic_commit_work [nouveau]
+Jun 26 12:27:17 ceo1homenx kernel: [87844.724739] Call Trace:
+Jun 26 12:27:17 ceo1homenx kernel: [87844.724752] __schedule+0x2d0/0x840
+Jun 26 12:27:17 ceo1homenx kernel: [87844.724856] ?
+nouveau_display_scanoutpos+0xe9/0x180 [nouveau]
+Jun 26 12:27:17 ceo1homenx kernel: [87844.724862] schedule+0x2c/0x70
+Jun 26 12:27:17 ceo1homenx kernel: [87844.724868] schedule_timeout+0x258/0x=
+360
+Jun 26 12:27:17 ceo1homenx kernel: [87844.724907] ?
+__drm_crtc_commit_free+0x12/0x20 [drm]
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725005] ?
+nv50_wndw_atomic_destroy_state+0x1d/0x20 [nouveau]
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725012]
+dma_fence_default_wait+0x20a/0x280
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725017] ? dma_fence_release+0xa0/=
+0xa0
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725022]
+dma_fence_wait_timeout+0xe7/0x110
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725041]
+drm_atomic_helper_wait_for_fences+0x3f/0xc0 [drm_kms_helper]
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725136]
+nv50_disp_atomic_commit_tail+0x78/0x870 [nouveau]
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725141] ? __switch_to+0x96/0x4e0
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725145] ? __switch_to_asm+0x34/0x=
+70
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725237]
+nv50_disp_atomic_commit_work+0x12/0x20 [nouveau]
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725243] process_one_work+0x20f/0x=
+410
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725247] worker_thread+0x34/0x400
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725254] kthread+0x120/0x140
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725258] ?
+process_one_work+0x410/0x410
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725263] ? __kthread_parkme+0x70/0=
+x70
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725267] ret_from_fork+0x35/0x40
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725291] INFO: task kworker/u16:8:=
+9307
+blocked for more than 120 seconds.
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725296] Tainted: G W 5.0.0-19-gen=
+eric
+#20-Ubuntu
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725298] &quot;echo 0 &gt;
+/proc/sys/kernel/hung_task_timeout_secs&quot; disables this message.
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725301] kworker/u16:8 D 0 9307 2
+0x80000000
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725396] Workqueue: events_unbound
+nv50_disp_atomic_commit_work [nouveau]
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725398] Call Trace:
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725405] __schedule+0x2d0/0x840
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725495] ?
+nouveau_display_scanoutpos+0xe9/0x180 [nouveau]
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725502] schedule+0x2c/0x70
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725507] schedule_timeout+0x258/0x=
+360
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725514] ? __slab_free+0x225/0x340
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725519]
+dma_fence_default_wait+0x20a/0x280
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725523] ? dma_fence_release+0xa0/=
+0xa0
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725528]
+dma_fence_wait_timeout+0xe7/0x110
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725546]
+drm_atomic_helper_wait_for_fences+0x3f/0xc0 [drm_kms_helper]
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725635]
+nv50_disp_atomic_commit_tail+0x78/0x870 [nouveau]
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725639] ? __switch_to+0x96/0x4e0
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725643] ? __switch_to_asm+0x34/0x=
+70
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725732]
+nv50_disp_atomic_commit_work+0x12/0x20 [nouveau]
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725736] process_one_work+0x20f/0x=
+410
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725741] worker_thread+0x34/0x400
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725746] kthread+0x120/0x140
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725750] ?
+process_one_work+0x410/0x410
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725755] ? __kthread_parkme+0x70/0=
+x70
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725759] ret_from_fork+0x35/0x40
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725765] INFO: task
+kworker/u16:7:10297 blocked for more than 120 seconds.
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725769] Tainted: G W 5.0.0-19-gen=
+eric
+#20-Ubuntu
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725771] &quot;echo 0 &gt;
+/proc/sys/kernel/hung_task_timeout_secs&quot; disables this message.
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725774] kworker/u16:7 D 0 10297 2
+0x80000000
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725885] Workqueue: events_unbound
+nv50_disp_atomic_commit_work [nouveau]
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725890] Call Trace:
+Jun 26 12:27:17 ceo1homenx kernel: [87844.725902] __schedule+0x2d0/0x840
+Jun 26 12:27:17 ceo1homenx kernel: [87844.726014] ?
+nouveau_display_scanoutpos+0xe9/0x180 [nouveau]
+Jun 26 12:27:17 ceo1homenx kernel: [87844.726022] schedule+0x2c/0x70
+Jun 26 12:27:17 ceo1homenx kernel: [87844.726029] schedule_timeout+0x258/0x=
+360
+Jun 26 12:27:17 ceo1homenx kernel: [87844.726038] ? __slab_free+0x225/0x340
+Jun 26 12:27:17 ceo1homenx kernel: [87844.726044]
+dma_fence_default_wait+0x20a/0x280
+Jun 26 12:27:17 ceo1homenx kernel: [87844.726050] ? dma_fence_release+0xa0/=
+0xa0
+Jun 26 12:27:17 ceo1homenx kernel: [87844.726056]
+dma_fence_wait_timeout+0xe7/0x110
+Jun 26 12:27:17 ceo1homenx kernel: [87844.726075]
+drm_atomic_helper_wait_for_fences+0x3f/0xc0 [drm_kms_helper]
+Jun 26 12:27:17 ceo1homenx kernel: [87844.726165]
+nv50_disp_atomic_commit_tail+0x78/0x870 [nouveau]
+Jun 26 12:27:17 ceo1homenx kernel: [87844.726169] ? __switch_to+0x96/0x4e0
+Jun 26 12:27:17 ceo1homenx kernel: [87844.726172] ? __switch_to_asm+0x34/0x=
+70
+Jun 26 12:27:17 ceo1homenx kernel: [87844.726260]
+nv50_disp_atomic_commit_work+0x12/0x20 [nouveau]
+Jun 26 12:27:17 ceo1homenx kernel: [87844.726265] process_one_work+0x20f/0x=
+410
+Jun 26 12:27:17 ceo1homenx kernel: [87844.726269] worker_thread+0x34/0x400
+Jun 26 12:27:17 ceo1homenx kernel: [87844.726276] kthread+0x120/0x140
+Jun 26 12:27:17 ceo1homenx kernel: [87844.726279] ?
+process_one_work+0x410/0x410
+Jun 26 12:27:17 ceo1homenx kernel: [87844.726285] ? __kthread_parkme+0x70/0=
+x70
+Jun 26 12:27:17 ceo1homenx kernel: [87844.726288] ret_from_fork+0x35/0x40
+Jun 26 12:29:18 ceo1homenx kernel: [87965.557909] INFO: task kworker/u16:9:=
+7088
+blocked for more than 120 seconds.
+Jun 26 12:29:18 ceo1homenx kernel: [87965.557916] Tainted: G W 5.0.0-19-gen=
+eric
+#20-Ubuntu
+Jun 26 12:29:18 ceo1homenx kernel: [87965.557919] &quot;echo 0 &gt;
+/proc/sys/kernel/hung_task_timeout_secs&quot; disables this message.
+Jun 26 12:29:18 ceo1homenx kernel: [87965.557922] kworker/u16:9 D 0 7088 2
+0x80000000
+Jun 26 12:29:18 ceo1homenx kernel: [87965.558041] Workqueue: events_unbound
+nv50_disp_atomic_commit_work [nouveau]
+Jun 26 12:29:18 ceo1homenx kernel: [87965.558044] Call Trace:
+Jun 26 12:29:18 ceo1homenx kernel: [87965.558056] __schedule+0x2d0/0x840
+Jun 26 12:29:18 ceo1homenx kernel: [87965.558160] ?
+nouveau_display_scanoutpos+0xe9/0x180 [nouveau]
+Jun 26 12:29:18 ceo1homenx kernel: [87965.558167] schedule+0x2c/0x70
+Jun 26 12:29:18 ceo1homenx kernel: [87965.558172] schedule_timeout+0x258/0x=
+360
+Jun 26 12:29:18 ceo1homenx kernel: [87965.558213] ?
+__drm_crtc_commit_free+0x12/0x20 [drm]
+Jun 26 12:29:18 ceo1homenx kernel: [87965.558309] ?
+nv50_wndw_atomic_destroy_state+0x1d/0x20 [nouveau]
+Jun 26 12:29:18 ceo1homenx kernel: [87965.558316]
+dma_fence_default_wait+0x20a/0x280
+Jun 26 12:29:18 ceo1homenx kernel: [87965.558320] ? dma_fence_release+0xa0/=
+0xa0
+Jun 26 12:29:18 ceo1homenx kernel: [87965.558325]
+dma_fence_wait_timeout+0xe7/0x110
+Jun 26 12:29:18 ceo1homenx kernel: [87965.558344]
+drm_atomic_helper_wait_for_fences+0x3f/0xc0 [drm_kms_helper]
+Jun 26 12:29:18 ceo1homenx kernel: [87965.558437]
+nv50_disp_atomic_commit_tail+0x78/0x870 [nouveau]
+Jun 26 12:29:18 ceo1homenx kernel: [87965.558443] ? __switch_to+0x96/0x4e0
+Jun 26 12:29:18 ceo1homenx kernel: [87965.558446] ? __switch_to_asm+0x34/0x=
+70
+Jun 26 12:29:18 ceo1homenx kernel: [87965.558536]
+nv50_disp_atomic_commit_work+0x12/0x20 [nouveau]
+Jun 26 12:29:18 ceo1homenx kernel: [87965.558542] process_one_work+0x20f/0x=
+410
+Jun 26 12:29:18 ceo1homenx kernel: [87965.558547] worker_thread+0x34/0x400
+Jun 26 12:29:18 ceo1homenx kernel: [87965.558553] kthread+0x120/0x140
+Jun 26 12:29:18 ceo1homenx kernel: [87965.558557] ?
+process_one_work+0x410/0x410
+Jun 26 12:29:18 ceo1homenx kernel: [87965.558563] ? __kthread_parkme+0x70/0=
+x70
+Jun 26 12:29:18 ceo1homenx kernel: [87965.558567] ret_from_fork+0x35/0x40
+Jun 26 12:30:01 ceo1homenx CRON[12207]: (root) CMD ([ -x /etc/init.d/anacro=
+n ]
+&amp;&amp; if [ ! -d /run/systemd/system ]; then /usr/sbin/invoke-rc.d anac=
+ron start
+<span class=3D"quote">&gt;/dev/null; fi)</span >
+Jun 26 12:33:21 ceo1homenx systemd[1]: Started Run anacron jobs.
+Jun 26 12:33:21 ceo1homenx anacron[12372]: Anacron 2.3 started on 2019-06-26
+Jun 26 12:33:21 ceo1homenx anacron[12372]: Normal exit (0 jobs run)
+Jun 26 12:33:21 ceo1homenx systemd[1]: anacron.service: Succeeded.
+Jun 26 12:35:02 ceo1homenx CRON[12477]: (root) CMD (command -v debian-sa1 &=
+gt;
+/dev/null &amp;&amp; debian-sa1 1 1)
+Jun 26 12:39:01 ceo1homenx systemd[1]: Starting Clean php session files...
+Jun 26 12:39:01 ceo1homenx CRON[12710]: (root) CMD ( [ -x
+/usr/lib/php/sessionclean ] &amp;&amp; if [ ! -d /run/systemd/system ]; then
+/usr/lib/php/sessionclean; fi)
+Jun 26 12:39:01 ceo1homenx systemd[1]: phpsessionclean.service: Succeeded.
+Jun 26 12:39:01 ceo1homenx systemd[1]: Started Clean php session files.
+Jun 26 12:45:02 ceo1homenx CRON[13049]: (root) CMD (command -v debian-sa1 &=
+gt;
+/dev/null &amp;&amp; debian-sa1 1 1)
+Jun 26 12:55:02 ceo1homenx CRON[13571]: (root) CMD (command -v debian-sa1 &=
+gt;
+/dev/null &amp;&amp; debian-sa1 1 1)
+Jun 26 12:56:20 ceo1homenx kernel: [89587.485877] nouveau 0000:01:00.0: fif=
+o:
+PBDMA0: 04000000 [ACQUIRE] ch 2 [007fa99000 Xorg[3086]] subc 0 mthd 001c da=
+ta
+00001004
+Jun 26 12:56:24 ceo1homenx kernel: [89591.781878] nouveau 0000:01:00.0: fif=
+o:
+SCHED_ERROR 0a [CTXSW_TIMEOUT]
+Jun 26 12:56:24 ceo1homenx kernel: [89591.781897] nouveau 0000:01:00.0: fif=
+o:
+runlist 0: scheduled for recovery
+Jun 26 12:56:24 ceo1homenx kernel: [89591.781918] nouveau 0000:01:00.0: fif=
+o:
+channel 5: killed
+Jun 26 12:56:24 ceo1homenx kernel: [89591.781926] nouveau 0000:01:00.0: fif=
+o:
+engine 0: scheduled for recovery
+Jun 26 12:56:24 ceo1homenx kernel: [89591.782531] nouveau 0000:01:00.0:
+Xorg[3086]: channel 5 killed!
+Jun 26 12:56:24 ceo1homenx kernel: [89591.784954] nouveau 0000:01:00.0: fif=
+o:
+PBDMA0: 04000000 [ACQUIRE] ch 2 [007fa99000 Xorg[3086]] subc 0 mthd 001c da=
+ta
+00001004
+Jun 26 12:56:24 ceo1homenx kernel: [89591.787346] nouveau 0000:01:00.0: fif=
+o:
+PBDMA0: 04000000 [ACQUIRE] ch 2 [007fa99000 Xorg[3086]] subc 0 mthd 001c da=
+ta
+00001004
+Jun 26 12:56:24 ceo1homenx kernel: [89591.791222] nouveau 0000:01:00.0: fif=
+o:
+PBDMA0: 04000000 [ACQUIRE] ch 2 [007fa99000 Xorg[3086]] subc 0 mthd 001c da=
+ta
+00001004
+Jun 26 12:56:24 ceo1homenx kernel: [89591.799169] nouveau 0000:01:00.0: fif=
+o:
+PBDMA0: 04000000 [ACQUIRE] ch 2 [007fa99000 Xorg[3086]] subc 0 mthd 001c da=
+ta
+00001004
+Jun 26 12:56:24 ceo1homenx kernel: [89591.799874] nouveau 0000:01:00.0: fif=
+o:
+PBDMA0: 04000000 [ACQUIRE] ch 2 [007fa99000 Xorg[3086]] subc 0 mthd 001c da=
+ta
+00001004
+Jun 26 12:56:24 ceo1homenx dbus-daemon[1027]: [system] Activating via syste=
+md:
+service name=3D'org.freedesktop.PackageKit' unit=3D'packagekit.service' req=
+uested
+by ':1.270' (uid=3D1000 pid=3D3346 comm=3D&quot;/usr/bin/plasmashell &quot;=
+ label=3D&quot;unconfined&quot;)
+Jun 26 12:56:24 ceo1homenx systemd[1]: Starting PackageKit Daemon...
+Jun 26 12:56:24 ceo1homenx PackageKit: daemon start
+Jun 26 12:56:24 ceo1homenx dbus-daemon[1027]: [system] Successfully activat=
+ed
+service 'org.freedesktop.PackageKit'
+Jun 26 12:56:24 ceo1homenx systemd[1]: Started PackageKit Daemon.
+Jun 26 13:01:30 ceo1homenx PackageKit: daemon quit
+Jun 26 13:01:30 ceo1homenx systemd[1]: packagekit.service: Main process exi=
+ted,
+code=3Dkilled, status=3D15/TERM
+Jun 26 13:01:30 ceo1homenx systemd[1]: packagekit.service: Succeeded.
+Jun 26 13:05:01 ceo1homenx CRON[14159]: (root) CMD (command -v debian-sa1 &=
+gt;
+/dev/null &amp;&amp; debian-sa1 1 1)
+Jun 26 13:09:02 ceo1homenx systemd[1]: Starting Clean php session files...
+Jun 26 13:09:02 ceo1homenx CRON[14381]: (root) CMD ( [ -x
+/usr/lib/php/sessionclean ] &amp;&amp; if [ ! -d /run/systemd/system ]; then
+/usr/lib/php/sessionclean; fi)
+Jun 26 13:09:02 ceo1homenx systemd[1]: phpsessionclean.service: Succeeded.
+Jun 26 13:09:02 ceo1homenx systemd[1]: Started Clean php session files.
+Jun 26 13:15:02 ceo1homenx CRON[14748]: (root) CMD (command -v debian-sa1 &=
+gt;
+/dev/null &amp;&amp; debian-sa1 1 1)
+Jun 26 13:17:01 ceo1homenx CRON[14851]: (root) CMD ( cd / &amp;&amp; run-pa=
+rts --report
+/etc/cron.hourly)
+Jun 26 13:17:01 ceo1homenx btrbk: startup v0.27.1 - - - # btrbk command line
+client, version 0.27.1
+Jun 26 13:17:01 ceo1homenx btrbk: snapshot starting
+/snapshots/home_snapshots/&#64;home.20190626T1317 /snapshots/&#64;home - -
+Jun 26 13:17:03 ceo1homenx btrbk: snapshot success
+/snapshots/home_snapshots/&#64;home.20190626T1317 /snapshots/&#64;home - -
+Jun 26 13:17:03 ceo1homenx btrbk: delete_snapshot starting
+/snapshots/home_snapshots/&#64;home.20190622T1217 - - -
+Jun 26 13:17:03 ceo1homenx btrbk: delete_snapshot success
+/snapshots/home_snapshots/&#64;home.20190622T1217 - - -
+Jun 26 13:17:03 ceo1homenx btrbk: finished success - - - -
+
+-- Hard Lock-- power cycle reboot the only possible fix.</pre>
+        </div>
+      </p>
+
+
+      <hr>
+      <span>You are receiving this mail because:</span>
+
+      <ul>
+          <li>You are the assignee for the bug.</li>
+      </ul>
+    </body>
+</html>=
+
+--15615759044.2C8CcFf6.9242--
+
+--===============0924778281==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
+YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
+cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============0924778281==--
