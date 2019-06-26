@@ -1,61 +1,38 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 77D9055F6F
-	for <lists+nouveau@lfdr.de>; Wed, 26 Jun 2019 05:15:35 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1EAE1561D1
+	for <lists+nouveau@lfdr.de>; Wed, 26 Jun 2019 07:46:02 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D2E256E255;
-	Wed, 26 Jun 2019 03:15:33 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1BC936E27F;
+	Wed, 26 Jun 2019 05:45:59 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from hqemgate16.nvidia.com (hqemgate16.nvidia.com [216.228.121.65])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C69896E255;
- Wed, 26 Jun 2019 03:15:31 +0000 (UTC)
-Received: from hqpgpgate101.nvidia.com (Not Verified[216.228.121.13]) by
- hqemgate16.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
- id <B5d12e3520000>; Tue, 25 Jun 2019 20:15:30 -0700
-Received: from hqmail.nvidia.com ([172.20.161.6])
- by hqpgpgate101.nvidia.com (PGP Universal service);
- Tue, 25 Jun 2019 20:15:31 -0700
-X-PGP-Universal: processed;
- by hqpgpgate101.nvidia.com on Tue, 25 Jun 2019 20:15:31 -0700
-Received: from [10.110.48.28] (10.124.1.5) by HQMAIL107.nvidia.com
- (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Wed, 26 Jun
- 2019 03:15:29 +0000
-To: Jason Gunthorpe <jgg@mellanox.com>
+Received: from mx1.suse.de (mx2.suse.de [195.135.220.15])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5C62A6E141;
+ Wed, 26 Jun 2019 05:45:57 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+ by mx1.suse.de (Postfix) with ESMTP id A851EAF25;
+ Wed, 26 Jun 2019 05:45:55 +0000 (UTC)
+Date: Wed, 26 Jun 2019 07:45:54 +0200
+From: Michal Hocko <mhocko@kernel.org>
+To: John Hubbard <jhubbard@nvidia.com>
+Message-ID: <20190626054554.GA17798@dhcp22.suse.cz>
 References: <20190613094326.24093-1-hch@lst.de>
- <20190613094326.24093-19-hch@lst.de> <20190613194430.GY22062@mellanox.com>
+ <20190613094326.24093-19-hch@lst.de>
+ <20190613194430.GY22062@mellanox.com>
  <a27251ad-a152-f84d-139d-e1a3bf01c153@nvidia.com>
  <20190613195819.GA22062@mellanox.com>
  <20190614004314.GD783@iweiny-DESK2.sc.intel.com>
  <d2b77ea1-7b27-e37d-c248-267a57441374@nvidia.com>
  <20190619192719.GO9374@mellanox.com>
-X-Nvconfidentiality: public
-From: John Hubbard <jhubbard@nvidia.com>
-Message-ID: <29f43c79-b454-0477-a799-7850e6571bd3@nvidia.com>
-Date: Tue, 25 Jun 2019 20:15:28 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.7.1
+ <29f43c79-b454-0477-a799-7850e6571bd3@nvidia.com>
 MIME-Version: 1.0
-In-Reply-To: <20190619192719.GO9374@mellanox.com>
-X-Originating-IP: [10.124.1.5]
-X-ClientProxiedBy: HQMAIL104.nvidia.com (172.18.146.11) To
- HQMAIL107.nvidia.com (172.20.187.13)
-Content-Language: en-US
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=nvidia.com; s=n1; 
- t=1561518930; bh=mFKCj/TnJw3viqoDN0No22dYQzshEvjZPsHuzsScphE=;
- h=X-PGP-Universal:Subject:To:CC:References:X-Nvconfidentiality:From:
- Message-ID:Date:User-Agent:MIME-Version:In-Reply-To:
- X-Originating-IP:X-ClientProxiedBy:Content-Type:Content-Language:
- Content-Transfer-Encoding;
- b=JWS56c7LDNZO2C+L8KR37PAJV/JNwy2VsATo0Y9o97x2OREZOXY1kW16CqdsdCF3p
- h75heFhKUb3QKsr9tb1bJDlBPd+kZrKl1GNfPhJxKLLAVmTvovjBcLyjGppIJCVNJz
- e/bL0Uz9WCABzn+s82NDbBpQtU8Quft0swt7Nfb9yv1tVnj/v8mVsJUeumTOsJqbpo
- ejbFTmycRLy12cjephJ1Av4haOtY2fOQCECnDpWB4huqII/lRxMlc4SxDkKG4nThLq
- s7yoeCAPZH4BEFoJuCbXa874ODwp/FlzUTE8v3eEQjQt1UYj/uSTcnPhWHZ0P2eSt5
- drw5jV+XaTi+A==
+Content-Disposition: inline
+In-Reply-To: <29f43c79-b454-0477-a799-7850e6571bd3@nvidia.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 Subject: Re: [Nouveau] [PATCH 18/22] mm: mark DEVICE_PUBLIC as broken
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
@@ -73,7 +50,8 @@ Cc: Ralph Campbell <rcampbell@nvidia.com>,
  "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
  "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
  "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
- "linux-mm@kvack.org" <linux-mm@kvack.org>, Ben Skeggs <bskeggs@redhat.com>,
+ "linux-mm@kvack.org" <linux-mm@kvack.org>, Jason Gunthorpe <jgg@mellanox.com>,
+ Ben Skeggs <bskeggs@redhat.com>,
  "linux-pci@vger.kernel.org" <linux-pci@vger.kernel.org>,
  Ira Weiny <ira.weiny@intel.com>, Christoph Hellwig <hch@lst.de>
 Content-Type: text/plain; charset="utf-8"
@@ -81,38 +59,50 @@ Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-T24gNi8xOS8xOSAxMjoyNyBQTSwgSmFzb24gR3VudGhvcnBlIHdyb3RlOgo+IE9uIFRodSwgSnVu
-IDEzLCAyMDE5IGF0IDA2OjIzOjA0UE0gLTA3MDAsIEpvaG4gSHViYmFyZCB3cm90ZToKPj4gT24g
-Ni8xMy8xOSA1OjQzIFBNLCBJcmEgV2Vpbnkgd3JvdGU6Cj4+PiBPbiBUaHUsIEp1biAxMywgMjAx
-OSBhdCAwNzo1ODoyOVBNICswMDAwLCBKYXNvbiBHdW50aG9ycGUgd3JvdGU6Cj4+Pj4gT24gVGh1
-LCBKdW4gMTMsIDIwMTkgYXQgMTI6NTM6MDJQTSAtMDcwMCwgUmFscGggQ2FtcGJlbGwgd3JvdGU6
-Cj4+Pj4+Cj4+IC4uLgo+Pj4gU28gSSB0aGluayBpdCBpcyBvay4gIEZyYW5rbHkgSSB3YXMgd29u
-ZGVyaW5nIGlmIHdlIHNob3VsZCByZW1vdmUgdGhlIHB1YmxpYwo+Pj4gdHlwZSBhbHRvZ2V0aGVy
-IGJ1dCBjb25jZXB0dWFsbHkgaXQgc2VlbXMgb2suICBCdXQgSSBkb24ndCBzZWUgYW55IHVzZXJz
-IG9mIGl0Cj4+PiBzby4uLiAgc2hvdWxkIHdlIGdldCByaWQgb2YgaXQgaW4gdGhlIGNvZGUgcmF0
-aGVyIHRoYW4gdHVybmluZyB0aGUgY29uZmlnIG9mZj8KPj4+Cj4+PiBJcmEKPj4KPj4gVGhhdCBz
-ZWVtcyByZWFzb25hYmxlLiBJIHJlY2FsbCB0aGF0IHRoZSBob3BlIHdhcyBmb3IgdGhvc2UgSUJN
-IFBvd2VyIDkKPj4gc3lzdGVtcyB0byB1c2UgX1BVQkxJQywgYXMgdGhleSBoYXZlIGhhcmR3YXJl
-LWJhc2VkIGNvaGVyZW50IGRldmljZSAoR1BVKQo+PiBtZW1vcnksIGFuZCBzbyB0aGUgbWVtb3J5
-IHJlYWxseSBpcyB2aXNpYmxlIHRvIHRoZSBDUFUuIEFuZCB0aGUgSUJNIHRlYW0KPj4gd2FzIHRo
-aW5raW5nIG9mIHRha2luZyBhZHZhbnRhZ2Ugb2YgaXQuIEJ1dCBJIGhhdmVuJ3Qgc2VlbiBhbnl0
-aGluZyBvbgo+PiB0aGF0IGZyb250IGZvciBhIHdoaWxlLgo+IAo+IERvZXMgYW55b25lIGtub3cg
-d2hvIHRob3NlIHBlb3BsZSBhcmUgYW5kIGNhbiB3ZSBlbmNvdXJhZ2UgdGhlbSB0bwo+IHNlbmQg
-c29tZSBwYXRjaGVzPyA6KQo+IAoKSSBhc2tlZCBhYm91dCB0aGlzLCBhbmQgaXQgc2VlbXMgdGhh
-dCB0aGUgaWRlYSB3YXM6IERFVklDRV9QVUJMSUMgd2FzIHRoZXJlCmluIG9yZGVyIHRvIHByb3Zp
-ZGUgYW4gYWx0ZXJuYXRpdmUgd2F5IHRvIGRvIHRoaW5ncyAoc3VjaCBhcyBtaWdyYXRlIG1lbW9y
-eQp0byBhbmQgZnJvbSBhIGRldmljZSksIGluIGNhc2UgdGhlIGNvbWJpbmF0aW9uIG9mIGV4aXN0
-aW5nIGFuZCBuZWFyLWZ1dHVyZQpOVU1BIEFQSXMgd2FzIGluc3VmZmljaWVudC4gVGhpcyBwcm9i
-YWJseSBjYW1lIGFzIGEgZm9sbG93LXVwIHRvIHRoZSBlYXJseQoyMDE3LWlzaCBjb252ZXJzYXRp
-b25zIGFib3V0IE5VTUEsIGluIHdoaWNoIHRoZSBsaW51eC1tbSByZWNvbW1lbmRhdGlvbiB3YXMK
-InRyeSB1c2luZyBITU0gbWVjaGFuaXNtcywgYW5kIGlmIHRob3NlIGFyZSBpbmFkZXF1YXRlLCB0
-aGVuIG1heWJlIHdlIGNhbgpsb29rIGF0IGVuaGFuY2luZyBOVU1BIHNvIHRoYXQgaXQgaGFzIGJl
-dHRlciBoYW5kbGluZyBvZiBhZHZhbmNlZCAoR1BVLWxpa2UpCmRldmljZXMiLgoKSW4gdGhlIGVu
-ZCwgaG93ZXZlciwgX1BVQkxJQyB3YXMgbmV2ZXIgdXNlZCwgbm9yIGRvZXMgYW55b25lIGluIHRo
-ZSBsb2NhbAooTlZJRElBICsgSUJNKSBrZXJuZWwgdmljaW5pdHkgc2VlbSB0byBoYXZlIHBsYW5z
-IHRvIHVzZSBpdC4gIFNvIGl0IHJlYWxseQpkb2VzIHNlZW0gc2FmZSB0byByZW1vdmUsIGFsdGhv
-dWdoIG9mIGNvdXJzZSBpdCdzIGdvb2QgdG8gc3RhcnQgd2l0aCAKQlJPS0VOIGFuZCBzZWUgaWYg
-YW55b25lIHBvcHMgdXAgYW5kIGNvbXBsYWlucy4KCnRoYW5rcywKLS0gCkpvaG4gSHViYmFyZApO
-VklESUEKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91
-dmVhdSBtYWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9s
-aXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+T24gVHVlIDI1LTA2LTE5IDIwOjE1OjI4LCBKb2huIEh1YmJhcmQgd3JvdGU6Cj4gT24gNi8xOS8x
+OSAxMjoyNyBQTSwgSmFzb24gR3VudGhvcnBlIHdyb3RlOgo+ID4gT24gVGh1LCBKdW4gMTMsIDIw
+MTkgYXQgMDY6MjM6MDRQTSAtMDcwMCwgSm9obiBIdWJiYXJkIHdyb3RlOgo+ID4+IE9uIDYvMTMv
+MTkgNTo0MyBQTSwgSXJhIFdlaW55IHdyb3RlOgo+ID4+PiBPbiBUaHUsIEp1biAxMywgMjAxOSBh
+dCAwNzo1ODoyOVBNICswMDAwLCBKYXNvbiBHdW50aG9ycGUgd3JvdGU6Cj4gPj4+PiBPbiBUaHUs
+IEp1biAxMywgMjAxOSBhdCAxMjo1MzowMlBNIC0wNzAwLCBSYWxwaCBDYW1wYmVsbCB3cm90ZToK
+PiA+Pj4+Pgo+ID4+IC4uLgo+ID4+PiBTbyBJIHRoaW5rIGl0IGlzIG9rLiAgRnJhbmtseSBJIHdh
+cyB3b25kZXJpbmcgaWYgd2Ugc2hvdWxkIHJlbW92ZSB0aGUgcHVibGljCj4gPj4+IHR5cGUgYWx0
+b2dldGhlciBidXQgY29uY2VwdHVhbGx5IGl0IHNlZW1zIG9rLiAgQnV0IEkgZG9uJ3Qgc2VlIGFu
+eSB1c2VycyBvZiBpdAo+ID4+PiBzby4uLiAgc2hvdWxkIHdlIGdldCByaWQgb2YgaXQgaW4gdGhl
+IGNvZGUgcmF0aGVyIHRoYW4gdHVybmluZyB0aGUgY29uZmlnIG9mZj8KPiA+Pj4KPiA+Pj4gSXJh
+Cj4gPj4KPiA+PiBUaGF0IHNlZW1zIHJlYXNvbmFibGUuIEkgcmVjYWxsIHRoYXQgdGhlIGhvcGUg
+d2FzIGZvciB0aG9zZSBJQk0gUG93ZXIgOQo+ID4+IHN5c3RlbXMgdG8gdXNlIF9QVUJMSUMsIGFz
+IHRoZXkgaGF2ZSBoYXJkd2FyZS1iYXNlZCBjb2hlcmVudCBkZXZpY2UgKEdQVSkKPiA+PiBtZW1v
+cnksIGFuZCBzbyB0aGUgbWVtb3J5IHJlYWxseSBpcyB2aXNpYmxlIHRvIHRoZSBDUFUuIEFuZCB0
+aGUgSUJNIHRlYW0KPiA+PiB3YXMgdGhpbmtpbmcgb2YgdGFraW5nIGFkdmFudGFnZSBvZiBpdC4g
+QnV0IEkgaGF2ZW4ndCBzZWVuIGFueXRoaW5nIG9uCj4gPj4gdGhhdCBmcm9udCBmb3IgYSB3aGls
+ZS4KPiA+IAo+ID4gRG9lcyBhbnlvbmUga25vdyB3aG8gdGhvc2UgcGVvcGxlIGFyZSBhbmQgY2Fu
+IHdlIGVuY291cmFnZSB0aGVtIHRvCj4gPiBzZW5kIHNvbWUgcGF0Y2hlcz8gOikKPiA+IAo+IAo+
+IEkgYXNrZWQgYWJvdXQgdGhpcywgYW5kIGl0IHNlZW1zIHRoYXQgdGhlIGlkZWEgd2FzOiBERVZJ
+Q0VfUFVCTElDIHdhcyB0aGVyZQo+IGluIG9yZGVyIHRvIHByb3ZpZGUgYW4gYWx0ZXJuYXRpdmUg
+d2F5IHRvIGRvIHRoaW5ncyAoc3VjaCBhcyBtaWdyYXRlIG1lbW9yeQo+IHRvIGFuZCBmcm9tIGEg
+ZGV2aWNlKSwgaW4gY2FzZSB0aGUgY29tYmluYXRpb24gb2YgZXhpc3RpbmcgYW5kIG5lYXItZnV0
+dXJlCj4gTlVNQSBBUElzIHdhcyBpbnN1ZmZpY2llbnQuIFRoaXMgcHJvYmFibHkgY2FtZSBhcyBh
+IGZvbGxvdy11cCB0byB0aGUgZWFybHkKPiAyMDE3LWlzaCBjb252ZXJzYXRpb25zIGFib3V0IE5V
+TUEsIGluIHdoaWNoIHRoZSBsaW51eC1tbSByZWNvbW1lbmRhdGlvbiB3YXMKPiAidHJ5IHVzaW5n
+IEhNTSBtZWNoYW5pc21zLCBhbmQgaWYgdGhvc2UgYXJlIGluYWRlcXVhdGUsIHRoZW4gbWF5YmUg
+d2UgY2FuCj4gbG9vayBhdCBlbmhhbmNpbmcgTlVNQSBzbyB0aGF0IGl0IGhhcyBiZXR0ZXIgaGFu
+ZGxpbmcgb2YgYWR2YW5jZWQgKEdQVS1saWtlKQo+IGRldmljZXMiLgoKWWVzIHRoYXQgd2FzIHRo
+ZSBvcmlnaW5hbCBpZGVhLiBJdCBzb3VuZHMgc28gbXVjaCBiZXR0ZXIgdG8gdXNlIGEgY29tbW9u
+CmZyYW1ld29yayByYXRoZXIgdGhhbiBhd2t3YXJkIHNwZWNpYWwgY2FzZWQgY3B1bGVzcyBOVU1B
+IG5vZGVzIHdpdGgKYSB3ZWlyZCBzZW1hbnRpYy4gVXNlciBvZiB0aGUgbmVpdGhlciBvZiB0aGUg
+dHdvIGhhcyBzaG93biB1cCBzbyBJIGd1ZXNzCnRoYXQgdGhlIGVudmlzaW9uZWQgSFcganVzdCBk
+aWRuJ3QgbWF0ZXJpYWxpemVkLiBPciBoYXMgdGhlcmUgYmVlbiBhCmNvbXBsZXRlbHkgZGlmZmVy
+ZW50IGFwcHJvYWNoIGNob3Nlbj8KCj4gSW4gdGhlIGVuZCwgaG93ZXZlciwgX1BVQkxJQyB3YXMg
+bmV2ZXIgdXNlZCwgbm9yIGRvZXMgYW55b25lIGluIHRoZSBsb2NhbAo+IChOVklESUEgKyBJQk0p
+IGtlcm5lbCB2aWNpbml0eSBzZWVtIHRvIGhhdmUgcGxhbnMgdG8gdXNlIGl0LiAgU28gaXQgcmVh
+bGx5Cj4gZG9lcyBzZWVtIHNhZmUgdG8gcmVtb3ZlLCBhbHRob3VnaCBvZiBjb3Vyc2UgaXQncyBn
+b29kIHRvIHN0YXJ0IHdpdGggCj4gQlJPS0VOIGFuZCBzZWUgaWYgYW55b25lIHBvcHMgdXAgYW5k
+IGNvbXBsYWlucy4KCldlbGwsIEkgZG8gbm90IHJlYWxseSBzZWUgbXVjaCBvZiBhIGRpZmZlcmVu
+Y2UuIFByZXNlcnZpbmcgYW4gdW51c2VkCmNvZGUgd2hpY2ggZG9lc24ndCBoYXZlIGFueSB1c2Vy
+IGluIHNpZ2h0IGp1c3QgYWRkcyBhIG1haW50ZW5hbmNlIGJ1cmRlbgp3aGV0aGVyIHRoZSBjb2Rl
+IGRlcGVuZHMgb24gQlJPS0VOIG9yIG5vdC4gV2UgY2FuIGFsd2F5cyByZXZlcnQgcGF0Y2hlcwp3
+aGljaCByZW1vdmUgdGhlIGNvZGUgb25jZSBhIHJlYWwgdXNlciBzaG93cyB1cC4KLS0gCk1pY2hh
+bCBIb2NrbwpTVVNFIExhYnMKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX18KTm91dmVhdSBtYWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5v
+cmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
