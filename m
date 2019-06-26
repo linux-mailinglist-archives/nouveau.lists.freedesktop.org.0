@@ -1,23 +1,23 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id C9AF0573CA
-	for <lists+nouveau@lfdr.de>; Wed, 26 Jun 2019 23:39:35 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id CD3BE573CF
+	for <lists+nouveau@lfdr.de>; Wed, 26 Jun 2019 23:43:13 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 536656E429;
-	Wed, 26 Jun 2019 21:39:34 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1E0A26E524;
+	Wed, 26 Jun 2019 21:43:12 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [131.252.210.165])
- by gabe.freedesktop.org (Postfix) with ESMTP id DBDA96E429
- for <nouveau@lists.freedesktop.org>; Wed, 26 Jun 2019 21:39:32 +0000 (UTC)
+ [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
+ by gabe.freedesktop.org (Postfix) with ESMTP id E303C6E524
+ for <nouveau@lists.freedesktop.org>; Wed, 26 Jun 2019 21:43:10 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id D369D72167; Wed, 26 Jun 2019 21:39:32 +0000 (UTC)
+ id DF3C972167; Wed, 26 Jun 2019 21:43:10 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Wed, 26 Jun 2019 21:39:32 +0000
+Date: Wed, 26 Jun 2019 21:43:11 +0000
 X-Bugzilla-Reason: QAcontact AssignedTo
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
@@ -32,8 +32,8 @@ X-Bugzilla-Resolution:
 X-Bugzilla-Priority: medium
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: attachments.created
-Message-ID: <bug-111007-8800-gLcq0Bbjda@http.bugs.freedesktop.org/>
+X-Bugzilla-Changed-Fields: 
+Message-ID: <bug-111007-8800-dAacBH9Jt2@http.bugs.freedesktop.org/>
 In-Reply-To: <bug-111007-8800@http.bugs.freedesktop.org/>
 References: <bug-111007-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
@@ -52,18 +52,18 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1910704859=="
+Content-Type: multipart/mixed; boundary="===============0295142741=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============1910704859==
-Content-Type: multipart/alternative; boundary="15615851720.f29Cccf4E.3915"
+--===============0295142741==
+Content-Type: multipart/alternative; boundary="15615853900.1CFb2B2b3.4677"
 Content-Transfer-Encoding: 7bit
 
 
---15615851720.f29Cccf4E.3915
-Date: Wed, 26 Jun 2019 21:39:32 +0000
+--15615853900.1CFb2B2b3.4677
+Date: Wed, 26 Jun 2019 21:43:10 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -72,18 +72,17 @@ Auto-Submitted: auto-generated
 
 https://bugs.freedesktop.org/show_bug.cgi?id=3D111007
 
---- Comment #4 from joinlaw <joinlaw@cock.li> ---
-Created attachment 144649
-  --> https://bugs.freedesktop.org/attachment.cgi?id=3D144649&action=3Dedit
-Photo tutorial to reproduce the bug
+--- Comment #5 from joinlaw <joinlaw@cock.li> ---
+I put photo tutorial to reproduce the bug in the attachment
+steps and arrange by their number from 1 to 8
 
 --=20
 You are receiving this mail because:
 You are the QA Contact for the bug.
 You are the assignee for the bug.=
 
---15615851720.f29Cccf4E.3915
-Date: Wed, 26 Jun 2019 21:39:32 +0000
+--15615853900.1CFb2B2b3.4677
+Date: Wed, 26 Jun 2019 21:43:10 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -101,8 +100,8 @@ Auto-Submitted: auto-generated
           bz_status_NEW "
    title=3D"NEW - Blender crash when opening material tab GTX 750Ti -- NV11=
 7 (GM107)"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111007#c4">Commen=
-t # 4</a>
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111007#c5">Commen=
+t # 5</a>
               on <a class=3D"bz_bug_link=20
           bz_status_NEW "
    title=3D"NEW - Blender crash when opening material tab GTX 750Ti -- NV11=
@@ -113,11 +112,8 @@ t # 4</a>
 joinlaw&#64;cock.li" title=3D"joinlaw &lt;joinlaw&#64;cock.li&gt;"> <span c=
 lass=3D"fn">joinlaw</span></a>
 </span></b>
-        <pre>Created <span class=3D""><a href=3D"attachment.cgi?id=3D144649=
-" name=3D"attach_144649" title=3D"Photo tutorial to reproduce the bug">atta=
-chment 144649</a> <a href=3D"attachment.cgi?id=3D144649&amp;action=3Dedit" =
-title=3D"Photo tutorial to reproduce the bug">[details]</a></span>
-Photo tutorial to reproduce the bug</pre>
+        <pre>I put photo tutorial to reproduce the bug in the attachment
+steps and arrange by their number from 1 to 8</pre>
         </div>
       </p>
 
@@ -132,9 +128,9 @@ Photo tutorial to reproduce the bug</pre>
     </body>
 </html>=
 
---15615851720.f29Cccf4E.3915--
+--15615853900.1CFb2B2b3.4677--
 
---===============1910704859==
+--===============0295142741==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -144,4 +140,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============1910704859==--
+--===============0295142741==--
