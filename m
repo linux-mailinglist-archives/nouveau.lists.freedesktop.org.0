@@ -1,38 +1,46 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id C7376573C3
-	for <lists+nouveau@lfdr.de>; Wed, 26 Jun 2019 23:38:26 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id C9AF0573CA
+	for <lists+nouveau@lfdr.de>; Wed, 26 Jun 2019 23:39:35 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C6B766E51C;
-	Wed, 26 Jun 2019 21:38:24 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 536656E429;
+	Wed, 26 Jun 2019 21:39:34 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
- by gabe.freedesktop.org (Postfix) with ESMTPS id DA94B6E51A;
- Wed, 26 Jun 2019 21:38:23 +0000 (UTC)
-X-Amp-Result: UNKNOWN
-X-Amp-Original-Verdict: FILE UNKNOWN
-X-Amp-File-Uploaded: False
-Received: from fmsmga005.fm.intel.com ([10.253.24.32])
- by fmsmga103.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
- 26 Jun 2019 14:38:23 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.63,421,1557212400"; d="scan'208";a="360456463"
-Received: from iweiny-desk2.sc.intel.com ([10.3.52.157])
- by fmsmga005.fm.intel.com with ESMTP; 26 Jun 2019 14:38:23 -0700
-Date: Wed, 26 Jun 2019 14:38:23 -0700
-From: Ira Weiny <ira.weiny@intel.com>
-To: Christoph Hellwig <hch@lst.de>
-Message-ID: <20190626213822.GB8399@iweiny-DESK2.sc.intel.com>
-References: <20190626122724.13313-1-hch@lst.de>
- <20190626122724.13313-25-hch@lst.de>
+Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
+ [131.252.210.165])
+ by gabe.freedesktop.org (Postfix) with ESMTP id DBDA96E429
+ for <nouveau@lists.freedesktop.org>; Wed, 26 Jun 2019 21:39:32 +0000 (UTC)
+Received: by culpepper.freedesktop.org (Postfix, from userid 33)
+ id D369D72167; Wed, 26 Jun 2019 21:39:32 +0000 (UTC)
+From: bugzilla-daemon@freedesktop.org
+To: nouveau@lists.freedesktop.org
+Date: Wed, 26 Jun 2019 21:39:32 +0000
+X-Bugzilla-Reason: QAcontact AssignedTo
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: None
+X-Bugzilla-Product: Mesa
+X-Bugzilla-Component: Drivers/DRI/nouveau
+X-Bugzilla-Version: 19.1
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: normal
+X-Bugzilla-Who: joinlaw@cock.li
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: medium
+X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: attachments.created
+Message-ID: <bug-111007-8800-gLcq0Bbjda@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-111007-8800@http.bugs.freedesktop.org/>
+References: <bug-111007-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20190626122724.13313-25-hch@lst.de>
-User-Agent: Mutt/1.11.1 (2018-12-01)
-Subject: Re: [Nouveau] [PATCH 24/25] mm: remove the HMM config option
+Subject: [Nouveau] [Bug 111007] Blender crash when opening material tab GTX
+ 750Ti -- NV117 (GM107)
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -44,99 +52,96 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: linux-nvdimm@lists.01.org, linux-pci@vger.kernel.org,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- linux-mm@kvack.org, Jason Gunthorpe <jgg@mellanox.com>,
- Ben Skeggs <bskeggs@redhat.com>, nouveau@lists.freedesktop.org,
- Dan Williams <dan.j.williams@intel.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1910704859=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-T24gV2VkLCBKdW4gMjYsIDIwMTkgYXQgMDI6Mjc6MjNQTSArMDIwMCwgQ2hyaXN0b3BoIEhlbGx3
-aWcgd3JvdGU6Cj4gQWxsIHRoZSBtbS9obW0uYyBjb2RlIGlzIGJldHRlciBrZXllZCBvZmYgSE1N
-X01JUlJPUi4gIEFsc28gbGV0IG5vdXZlYXUKPiBkZXBlbmQgb24gaXQgaW5zdGVhZCBvZiB0aGUg
-bWl4IG9mIGEgZHVtbXkgZGVwZW5kZW5jeSBzeW1ib2wgcGx1cyB0aGUKPiBhY3R1YWxseSBzZWxl
-Y3RlZCBvbmUuICBEcm9wIHZhcmlvdXMgb2RkIGRlcGVuZGVuY2llcywgYXMgdGhlIGNvZGUgaXMK
-PiBwcmV0dHkgcG9ydGFibGUuCj4gCj4gU2lnbmVkLW9mZi1ieTogQ2hyaXN0b3BoIEhlbGx3aWcg
-PGhjaEBsc3QuZGU+CgpTZWVtcyByZWFzb25hYmxlIHRvIG1lLgoKUmV2aWV3ZWQtYnk6IElyYSBX
-ZWlueSA8aXJhLndlaW55QGludGVsLmNvbT4KCj4gLS0tCj4gIGRyaXZlcnMvZ3B1L2RybS9ub3V2
-ZWF1L0tjb25maWcgfCAgMyArLS0KPiAgaW5jbHVkZS9saW51eC9obW0uaCAgICAgICAgICAgICB8
-ICA1ICstLS0tCj4gIGluY2x1ZGUvbGludXgvbW1fdHlwZXMuaCAgICAgICAgfCAgMiArLQo+ICBt
-bS9LY29uZmlnICAgICAgICAgICAgICAgICAgICAgIHwgMjcgKysrKy0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tCj4gIG1tL01ha2VmaWxlICAgICAgICAgICAgICAgICAgICAgfCAgMiArLQo+ICBtbS9o
-bW0uYyAgICAgICAgICAgICAgICAgICAgICAgIHwgIDIgLS0KPiAgNiBmaWxlcyBjaGFuZ2VkLCA4
-IGluc2VydGlvbnMoKyksIDMzIGRlbGV0aW9ucygtKQo+IAo+IGRpZmYgLS1naXQgYS9kcml2ZXJz
-L2dwdS9kcm0vbm91dmVhdS9LY29uZmlnIGIvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvS2NvbmZp
-Zwo+IGluZGV4IDYzMDNkMjAzYWIxZC4uNjZjODM5ZDhlOWQxIDEwMDY0NAo+IC0tLSBhL2RyaXZl
-cnMvZ3B1L2RybS9ub3V2ZWF1L0tjb25maWcKPiArKysgYi9kcml2ZXJzL2dwdS9kcm0vbm91dmVh
-dS9LY29uZmlnCj4gQEAgLTg0LDExICs4NCwxMCBAQCBjb25maWcgRFJNX05PVVZFQVVfQkFDS0xJ
-R0hUCj4gIAo+ICBjb25maWcgRFJNX05PVVZFQVVfU1ZNCj4gIAlib29sICIoRVhQRVJJTUVOVEFM
-KSBFbmFibGUgU1ZNIChTaGFyZWQgVmlydHVhbCBNZW1vcnkpIHN1cHBvcnQiCj4gLQlkZXBlbmRz
-IG9uIEFSQ0hfSEFTX0hNTQo+ICAJZGVwZW5kcyBvbiBERVZJQ0VfUFJJVkFURQo+ICAJZGVwZW5k
-cyBvbiBEUk1fTk9VVkVBVQo+ICsJZGVwZW5kcyBvbiBITU1fTUlSUk9SCj4gIAlkZXBlbmRzIG9u
-IFNUQUdJTkcKPiAtCXNlbGVjdCBITU1fTUlSUk9SCj4gIAlkZWZhdWx0IG4KPiAgCWhlbHAKPiAg
-CSAgU2F5IFkgaGVyZSBpZiB5b3Ugd2FudCB0byBlbmFibGUgZXhwZXJpbWVudGFsIHN1cHBvcnQg
-Zm9yCj4gZGlmZiAtLWdpdCBhL2luY2x1ZGUvbGludXgvaG1tLmggYi9pbmNsdWRlL2xpbnV4L2ht
-bS5oCj4gaW5kZXggM2QwMGU5NTUwZTc3Li5iNjk3NDk2ZTg1YmEgMTAwNjQ0Cj4gLS0tIGEvaW5j
-bHVkZS9saW51eC9obW0uaAo+ICsrKyBiL2luY2x1ZGUvbGludXgvaG1tLmgKPiBAQCAtNjIsNyAr
-NjIsNyBAQAo+ICAjaW5jbHVkZSA8bGludXgva2NvbmZpZy5oPgo+ICAjaW5jbHVkZSA8YXNtL3Bn
-dGFibGUuaD4KPiAgCj4gLSNpZiBJU19FTkFCTEVEKENPTkZJR19ITU0pCj4gKyNpZmRlZiBDT05G
-SUdfSE1NX01JUlJPUgo+ICAKPiAgI2luY2x1ZGUgPGxpbnV4L2RldmljZS5oPgo+ICAjaW5jbHVk
-ZSA8bGludXgvbWlncmF0ZS5oPgo+IEBAIC0zMzIsOSArMzMyLDYgQEAgc3RhdGljIGlubGluZSB1
-aW50NjRfdCBobW1fcGZuX2Zyb21fcGZuKGNvbnN0IHN0cnVjdCBobW1fcmFuZ2UgKnJhbmdlLAo+
-ICAJcmV0dXJuIGhtbV9kZXZpY2VfZW50cnlfZnJvbV9wZm4ocmFuZ2UsIHBmbik7Cj4gIH0KPiAg
-Cj4gLQo+IC0KPiAtI2lmIElTX0VOQUJMRUQoQ09ORklHX0hNTV9NSVJST1IpCj4gIC8qCj4gICAq
-IE1pcnJvcmluZzogaG93IHRvIHN5bmNocm9uaXplIGRldmljZSBwYWdlIHRhYmxlIHdpdGggQ1BV
-IHBhZ2UgdGFibGUuCj4gICAqCj4gZGlmZiAtLWdpdCBhL2luY2x1ZGUvbGludXgvbW1fdHlwZXMu
-aCBiL2luY2x1ZGUvbGludXgvbW1fdHlwZXMuaAo+IGluZGV4IGYzM2ExMjg5YzEwMS4uOGQzNzE4
-MmY4ZGJlIDEwMDY0NAo+IC0tLSBhL2luY2x1ZGUvbGludXgvbW1fdHlwZXMuaAo+ICsrKyBiL2lu
-Y2x1ZGUvbGludXgvbW1fdHlwZXMuaAo+IEBAIC01MDEsNyArNTAxLDcgQEAgc3RydWN0IG1tX3N0
-cnVjdCB7Cj4gICNlbmRpZgo+ICAJCXN0cnVjdCB3b3JrX3N0cnVjdCBhc3luY19wdXRfd29yazsK
-PiAgCj4gLSNpZiBJU19FTkFCTEVEKENPTkZJR19ITU0pCj4gKyNpZmRlZiBDT05GSUdfSE1NX01J
-UlJPUgo+ICAJCS8qIEhNTSBuZWVkcyB0byB0cmFjayBhIGZldyB0aGluZ3MgcGVyIG1tICovCj4g
-IAkJc3RydWN0IGhtbSAqaG1tOwo+ICAjZW5kaWYKPiBkaWZmIC0tZ2l0IGEvbW0vS2NvbmZpZyBi
-L21tL0tjb25maWcKPiBpbmRleCBlZWNmMDM3YTU0YjMuLjFlNDI2YzI2YjFkNiAxMDA2NDQKPiAt
-LS0gYS9tbS9LY29uZmlnCj4gKysrIGIvbW0vS2NvbmZpZwo+IEBAIC02NjksMzcgKzY2OSwxOCBA
-QCBjb25maWcgWk9ORV9ERVZJQ0UKPiAgCj4gIAkgIElmIEZTX0RBWCBpcyBlbmFibGVkLCB0aGVu
-IHNheSBZLgo+ICAKPiAtY29uZmlnIEFSQ0hfSEFTX0hNTV9NSVJST1IKPiAtCWJvb2wKPiAtCWRl
-ZmF1bHQgeQo+IC0JZGVwZW5kcyBvbiAoWDg2XzY0IHx8IFBQQzY0KQo+IC0JZGVwZW5kcyBvbiBN
-TVUgJiYgNjRCSVQKPiAtCj4gLWNvbmZpZyBBUkNIX0hBU19ITU0KPiAtCWJvb2wKPiAtCWRlcGVu
-ZHMgb24gKFg4Nl82NCB8fCBQUEM2NCkKPiAtCWRlcGVuZHMgb24gWk9ORV9ERVZJQ0UKPiAtCWRl
-cGVuZHMgb24gTU1VICYmIDY0QklUCj4gLQlkZXBlbmRzIG9uIE1FTU9SWV9IT1RQTFVHCj4gLQlk
-ZXBlbmRzIG9uIE1FTU9SWV9IT1RSRU1PVkUKPiAtCWRlcGVuZHMgb24gU1BBUlNFTUVNX1ZNRU1N
-QVAKPiAtCWRlZmF1bHQgeQo+IC0KPiAgY29uZmlnIE1JR1JBVEVfVk1BX0hFTFBFUgo+ICAJYm9v
-bAo+ICAKPiAgY29uZmlnIERFVl9QQUdFTUFQX09QUwo+ICAJYm9vbAo+ICAKPiAtY29uZmlnIEhN
-TQo+IC0JYm9vbAo+IC0Jc2VsZWN0IE1NVV9OT1RJRklFUgo+IC0Jc2VsZWN0IE1JR1JBVEVfVk1B
-X0hFTFBFUgo+IC0KPiAgY29uZmlnIEhNTV9NSVJST1IKPiAgCWJvb2wgIkhNTSBtaXJyb3IgQ1BV
-IHBhZ2UgdGFibGUgaW50byBhIGRldmljZSBwYWdlIHRhYmxlIgo+IC0JZGVwZW5kcyBvbiBBUkNI
-X0hBU19ITU0KPiAtCXNlbGVjdCBITU0KPiArCWRlcGVuZHMgb24gKFg4Nl82NCB8fCBQUEM2NCkK
-PiArCWRlcGVuZHMgb24gTU1VICYmIDY0QklUCj4gKwlzZWxlY3QgTU1VX05PVElGSUVSCj4gKwlz
-ZWxlY3QgTUlHUkFURV9WTUFfSEVMUEVSCj4gIAloZWxwCj4gIAkgIFNlbGVjdCBITU1fTUlSUk9S
-IGlmIHlvdSB3YW50IHRvIG1pcnJvciByYW5nZSBvZiB0aGUgQ1BVIHBhZ2UgdGFibGUgb2YgYQo+
-ICAJICBwcm9jZXNzIGludG8gYSBkZXZpY2UgcGFnZSB0YWJsZS4gSGVyZSwgbWlycm9yIG1lYW5z
-ICJrZWVwIHN5bmNocm9uaXplZCIuCj4gZGlmZiAtLWdpdCBhL21tL01ha2VmaWxlIGIvbW0vTWFr
-ZWZpbGUKPiBpbmRleCBhYzVlNWJhNzg4NzQuLjkxYzk5MDQwMDY1YyAxMDA2NDQKPiAtLS0gYS9t
-bS9NYWtlZmlsZQo+ICsrKyBiL21tL01ha2VmaWxlCj4gQEAgLTEwMiw1ICsxMDIsNSBAQCBvYmot
-JChDT05GSUdfRlJBTUVfVkVDVE9SKSArPSBmcmFtZV92ZWN0b3Iubwo+ICBvYmotJChDT05GSUdf
-REVCVUdfUEFHRV9SRUYpICs9IGRlYnVnX3BhZ2VfcmVmLm8KPiAgb2JqLSQoQ09ORklHX0hBUkRF
-TkVEX1VTRVJDT1BZKSArPSB1c2VyY29weS5vCj4gIG9iai0kKENPTkZJR19QRVJDUFVfU1RBVFMp
-ICs9IHBlcmNwdS1zdGF0cy5vCj4gLW9iai0kKENPTkZJR19ITU0pICs9IGhtbS5vCj4gK29iai0k
-KENPTkZJR19ITU1fTUlSUk9SKSArPSBobW0ubwo+ICBvYmotJChDT05GSUdfTUVNRkRfQ1JFQVRF
-KSArPSBtZW1mZC5vCj4gZGlmZiAtLWdpdCBhL21tL2htbS5jIGIvbW0vaG1tLmMKPiBpbmRleCA5
-MGNhMGNkYWI5ZGIuLmQ2MmNlNjRkNmJjYSAxMDA2NDQKPiAtLS0gYS9tbS9obW0uYwo+ICsrKyBi
-L21tL2htbS5jCj4gQEAgLTI1LDcgKzI1LDYgQEAKPiAgI2luY2x1ZGUgPGxpbnV4L21tdV9ub3Rp
-Zmllci5oPgo+ICAjaW5jbHVkZSA8bGludXgvbWVtb3J5X2hvdHBsdWcuaD4KPiAgCj4gLSNpZiBJ
-U19FTkFCTEVEKENPTkZJR19ITU1fTUlSUk9SKQo+ICBzdGF0aWMgY29uc3Qgc3RydWN0IG1tdV9u
-b3RpZmllcl9vcHMgaG1tX21tdV9ub3RpZmllcl9vcHM7Cj4gIAo+ICBzdGF0aWMgaW5saW5lIHN0
-cnVjdCBobW0gKm1tX2dldF9obW0oc3RydWN0IG1tX3N0cnVjdCAqbW0pCj4gQEAgLTEzMjYsNCAr
-MTMyNSwzIEBAIGxvbmcgaG1tX3JhbmdlX2RtYV91bm1hcChzdHJ1Y3QgaG1tX3JhbmdlICpyYW5n
-ZSwKPiAgCXJldHVybiBjcGFnZXM7Cj4gIH0KPiAgRVhQT1JUX1NZTUJPTChobW1fcmFuZ2VfZG1h
-X3VubWFwKTsKPiAtI2VuZGlmIC8qIElTX0VOQUJMRUQoQ09ORklHX0hNTV9NSVJST1IpICovCj4g
-LS0gCj4gMi4yMC4xCj4gCj4gX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX18KPiBMaW51eC1udmRpbW0gbWFpbGluZyBsaXN0Cj4gTGludXgtbnZkaW1tQGxpc3Rz
-LjAxLm9yZwo+IGh0dHBzOi8vbGlzdHMuMDEub3JnL21haWxtYW4vbGlzdGluZm8vbGludXgtbnZk
-aW1tCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCk5vdXZl
-YXUgbWFpbGluZyBsaXN0Ck5vdXZlYXVAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlz
-dHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vbm91dmVhdQ==
+
+--===============1910704859==
+Content-Type: multipart/alternative; boundary="15615851720.f29Cccf4E.3915"
+Content-Transfer-Encoding: 7bit
+
+
+--15615851720.f29Cccf4E.3915
+Date: Wed, 26 Jun 2019 21:39:32 +0000
+MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+https://bugs.freedesktop.org/show_bug.cgi?id=3D111007
+
+--- Comment #4 from joinlaw <joinlaw@cock.li> ---
+Created attachment 144649
+  --> https://bugs.freedesktop.org/attachment.cgi?id=3D144649&action=3Dedit
+Photo tutorial to reproduce the bug
+
+--=20
+You are receiving this mail because:
+You are the QA Contact for the bug.
+You are the assignee for the bug.=
+
+--15615851720.f29Cccf4E.3915
+Date: Wed, 26 Jun 2019 21:39:32 +0000
+MIME-Version: 1.0
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+<html>
+    <head>
+      <base href=3D"https://bugs.freedesktop.org/">
+    </head>
+    <body>
+      <p>
+        <div>
+            <b><a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - Blender crash when opening material tab GTX 750Ti -- NV11=
+7 (GM107)"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111007#c4">Commen=
+t # 4</a>
+              on <a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - Blender crash when opening material tab GTX 750Ti -- NV11=
+7 (GM107)"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111007">bug 11100=
+7</a>
+              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
+joinlaw&#64;cock.li" title=3D"joinlaw &lt;joinlaw&#64;cock.li&gt;"> <span c=
+lass=3D"fn">joinlaw</span></a>
+</span></b>
+        <pre>Created <span class=3D""><a href=3D"attachment.cgi?id=3D144649=
+" name=3D"attach_144649" title=3D"Photo tutorial to reproduce the bug">atta=
+chment 144649</a> <a href=3D"attachment.cgi?id=3D144649&amp;action=3Dedit" =
+title=3D"Photo tutorial to reproduce the bug">[details]</a></span>
+Photo tutorial to reproduce the bug</pre>
+        </div>
+      </p>
+
+
+      <hr>
+      <span>You are receiving this mail because:</span>
+
+      <ul>
+          <li>You are the QA Contact for the bug.</li>
+          <li>You are the assignee for the bug.</li>
+      </ul>
+    </body>
+</html>=
+
+--15615851720.f29Cccf4E.3915--
+
+--===============1910704859==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
+YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
+cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============1910704859==--
