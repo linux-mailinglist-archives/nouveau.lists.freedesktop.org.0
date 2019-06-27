@@ -1,24 +1,24 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id C47AD588F5
-	for <lists+nouveau@lfdr.de>; Thu, 27 Jun 2019 19:43:36 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id A325B58952
+	for <lists+nouveau@lfdr.de>; Thu, 27 Jun 2019 19:54:32 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id AEAF36E35D;
-	Thu, 27 Jun 2019 17:43:34 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E836A6E320;
+	Thu, 27 Jun 2019 17:54:30 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
  [131.252.210.165])
- by gabe.freedesktop.org (Postfix) with ESMTP id A2B5D6E35D
- for <nouveau@lists.freedesktop.org>; Thu, 27 Jun 2019 17:43:33 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTP id 097446E320
+ for <nouveau@lists.freedesktop.org>; Thu, 27 Jun 2019 17:54:30 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 9F73472167; Thu, 27 Jun 2019 17:43:33 +0000 (UTC)
+ id EC92D72162; Thu, 27 Jun 2019 17:54:29 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Thu, 27 Jun 2019 17:43:33 +0000
-X-Bugzilla-Reason: QAcontact AssignedTo
+Date: Thu, 27 Jun 2019 17:54:29 +0000
+X-Bugzilla-Reason: QAcontact
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
 X-Bugzilla-Product: Mesa
@@ -32,8 +32,8 @@ X-Bugzilla-Resolution:
 X-Bugzilla-Priority: medium
 X-Bugzilla-Assigned-To: karolherbst@gmail.com
 X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: bug_status assigned_to
-Message-ID: <bug-111006-8800-8fnPDHCHBB@http.bugs.freedesktop.org/>
+X-Bugzilla-Changed-Fields: bug_file_loc
+Message-ID: <bug-111006-8800-e5oRfgPSFg@http.bugs.freedesktop.org/>
 In-Reply-To: <bug-111006-8800@http.bugs.freedesktop.org/>
 References: <bug-111006-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
@@ -52,18 +52,18 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0032800101=="
+Content-Type: multipart/mixed; boundary="===============0732987269=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============0032800101==
-Content-Type: multipart/alternative; boundary="15616574131.f1AE39c9A.19052"
+--===============0732987269==
+Content-Type: multipart/alternative; boundary="15616580691.02eA29C.20620"
 Content-Transfer-Encoding: 7bit
 
 
---15616574131.f1AE39c9A.19052
-Date: Thu, 27 Jun 2019 17:43:33 +0000
+--15616580691.02eA29C.20620
+Date: Thu, 27 Jun 2019 17:54:29 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -76,17 +76,17 @@ Karol Herbst <karolherbst@gmail.com> changed:
 
            What    |Removed                     |Added
 ----------------------------------------------------------------------------
-             Status|NEW                         |ASSIGNED
-           Assignee|nouveau@lists.freedesktop.o |karolherbst@gmail.com
-                   |rg                          |
+                URL|                            |https://trello.com/c/ESKBoR
+                   |                            |GN/215-codegen-use-off-chip
+                   |                            |-return-call-stack-where-th
+                   |                            |e-on-chip-one-isnt-enough
 
 --=20
 You are receiving this mail because:
-You are the QA Contact for the bug.
-You are the assignee for the bug.=
+You are the QA Contact for the bug.=
 
---15616574131.f1AE39c9A.19052
-Date: Thu, 27 Jun 2019 17:43:33 +0000
+--15616580691.02eA29C.20620
+Date: Thu, 27 Jun 2019 17:54:29 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -116,18 +116,12 @@ nders a different image"
           </tr>
 
          <tr>
-           <td style=3D"text-align:right;">Status</td>
-           <td>NEW
+           <td style=3D"text-align:right;">URL</td>
+           <td>
+               &nbsp;
            </td>
-           <td>ASSIGNED
-           </td>
-         </tr>
-
-         <tr>
-           <td style=3D"text-align:right;">Assignee</td>
-           <td>nouveau&#64;lists.freedesktop.org
-           </td>
-           <td>karolherbst&#64;gmail.com
+           <td>https://trello.com/c/ESKBoRGN/215-codegen-use-off-chip-retur=
+n-call-stack-where-the-on-chip-one-isnt-enough
            </td>
          </tr></table>
       <p>
@@ -139,14 +133,13 @@ nders a different image"
 
       <ul>
           <li>You are the QA Contact for the bug.</li>
-          <li>You are the assignee for the bug.</li>
       </ul>
     </body>
 </html>=
 
---15616574131.f1AE39c9A.19052--
+--15616580691.02eA29C.20620--
 
---===============0032800101==
+--===============0732987269==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -156,4 +149,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============0032800101==--
+--===============0732987269==--
