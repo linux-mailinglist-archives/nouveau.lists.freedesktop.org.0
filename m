@@ -1,41 +1,46 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 203FA596BA
-	for <lists+nouveau@lfdr.de>; Fri, 28 Jun 2019 11:03:23 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9261159E50
+	for <lists+nouveau@lfdr.de>; Fri, 28 Jun 2019 17:01:10 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id DE44D6E8A6;
-	Fri, 28 Jun 2019 09:03:15 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id AE8196E93F;
+	Fri, 28 Jun 2019 15:01:08 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 09D506E89B;
- Fri, 28 Jun 2019 09:03:14 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
- [10.5.11.23])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id 8E0DD3083392;
- Fri, 28 Jun 2019 09:03:13 +0000 (UTC)
-Received: from sirius.home.kraxel.org (ovpn-116-96.ams2.redhat.com
- [10.36.116.96])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 07C061A92A;
- Fri, 28 Jun 2019 09:03:13 +0000 (UTC)
-Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id 4DCF19D77; Fri, 28 Jun 2019 11:03:09 +0200 (CEST)
-From: Gerd Hoffmann <kraxel@redhat.com>
-To: dri-devel@lists.freedesktop.org
-Date: Fri, 28 Jun 2019 11:03:00 +0200
-Message-Id: <20190628090303.29467-16-kraxel@redhat.com>
-In-Reply-To: <20190628090303.29467-1-kraxel@redhat.com>
-References: <20190628090303.29467-1-kraxel@redhat.com>
+Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
+ [131.252.210.165])
+ by gabe.freedesktop.org (Postfix) with ESMTP id D12A56E93F
+ for <nouveau@lists.freedesktop.org>; Fri, 28 Jun 2019 15:01:07 +0000 (UTC)
+Received: by culpepper.freedesktop.org (Postfix, from userid 33)
+ id C864472167; Fri, 28 Jun 2019 15:01:07 +0000 (UTC)
+From: bugzilla-daemon@freedesktop.org
+To: nouveau@lists.freedesktop.org
+Date: Fri, 28 Jun 2019 15:01:07 +0000
+X-Bugzilla-Reason: QAcontact AssignedTo
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: None
+X-Bugzilla-Product: Mesa
+X-Bugzilla-Component: Drivers/DRI/nouveau
+X-Bugzilla-Version: 18.2
+X-Bugzilla-Keywords: have-backtrace
+X-Bugzilla-Severity: minor
+X-Bugzilla-Who: emil.l.velikov@gmail.com
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: medium
+X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: cc attachments.created
+Message-ID: <bug-110955-8800-LsJGPSHHvH@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-110955-8800@http.bugs.freedesktop.org/>
+References: <bug-110955-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.44]); Fri, 28 Jun 2019 09:03:13 +0000 (UTC)
-Subject: [Nouveau] [PATCH v3 15/18] drm/nouveau: switch driver from bo->resv
- to bo->base.resv
+Subject: [Nouveau] [Bug 110955] Mesa 18.2.8 implementation error: Invalid
+ GLSL version in shading_language_version()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -47,76 +52,138 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: thomas@shipmail.org, tzimmermann@suse.de, David Airlie <airlied@linux.ie>,
- ckoenig.leichtzumerken@gmail.com, open list <linux-kernel@vger.kernel.org>,
- Gerd Hoffmann <kraxel@redhat.com>, daniel@ffwll.ch,
- "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
- <nouveau@lists.freedesktop.org>, bskeggs@redhat.com
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1189255090=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-U2lnbmVkLW9mZi1ieTogR2VyZCBIb2ZmbWFubiA8a3JheGVsQHJlZGhhdC5jb20+ClJldmlld2Vk
-LWJ5OiBDaHJpc3RpYW4gS8O2bmlnIDxjaHJpc3RpYW4ua29lbmlnQGFtZC5jb20+Ci0tLQogZHJp
-dmVycy9ncHUvZHJtL25vdXZlYXUvZGlzcG52NTAvd25kdy5jIHwgMiArLQogZHJpdmVycy9ncHUv
-ZHJtL25vdXZlYXUvbm91dmVhdV9iby5jICAgIHwgNSArKy0tLQogZHJpdmVycy9ncHUvZHJtL25v
-dXZlYXUvbm91dmVhdV9mZW5jZS5jIHwgMiArLQogZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91
-dmVhdV9nZW0uYyAgIHwgMiArLQogNCBmaWxlcyBjaGFuZ2VkLCA1IGluc2VydGlvbnMoKyksIDYg
-ZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvZGlzcG52
-NTAvd25kdy5jIGIvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvZGlzcG52NTAvd25kdy5jCmluZGV4
-IDI4M2ZmNjkwMzUwZS4uODlmOGU3NmEyZDdkIDEwMDY0NAotLS0gYS9kcml2ZXJzL2dwdS9kcm0v
-bm91dmVhdS9kaXNwbnY1MC93bmR3LmMKKysrIGIvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvZGlz
-cG52NTAvd25kdy5jCkBAIC00NTcsNyArNDU3LDcgQEAgbnY1MF93bmR3X3ByZXBhcmVfZmIoc3Ry
-dWN0IGRybV9wbGFuZSAqcGxhbmUsIHN0cnVjdCBkcm1fcGxhbmVfc3RhdGUgKnN0YXRlKQogCQlh
-c3l3LT5pbWFnZS5oYW5kbGVbMF0gPSBjdHhkbWEtPm9iamVjdC5oYW5kbGU7CiAJfQogCi0JYXN5
-dy0+c3RhdGUuZmVuY2UgPSByZXNlcnZhdGlvbl9vYmplY3RfZ2V0X2V4Y2xfcmN1KGZiLT5udmJv
-LT5iby5yZXN2KTsKKwlhc3l3LT5zdGF0ZS5mZW5jZSA9IHJlc2VydmF0aW9uX29iamVjdF9nZXRf
-ZXhjbF9yY3UoZmItPm52Ym8tPmJvLmJhc2UucmVzdik7CiAJYXN5dy0+aW1hZ2Uub2Zmc2V0WzBd
-ID0gZmItPm52Ym8tPmJvLm9mZnNldDsKIAogCWlmICh3bmR3LT5mdW5jLT5wcmVwYXJlKSB7CmRp
-ZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2JvLmMgYi9kcml2ZXJz
-L2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2JvLmMKaW5kZXggYWJiYmFiZDEyMjQxLi45OWUzOTFi
-ZTkzNzAgMTAwNjQ0Ci0tLSBhL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfYm8uYwor
-KysgYi9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2JvLmMKQEAgLTI5OSw3ICsyOTks
-NiBAQCBub3V2ZWF1X2JvX25ldyhzdHJ1Y3Qgbm91dmVhdV9jbGkgKmNsaSwgdTY0IHNpemUsIGlu
-dCBhbGlnbiwKIAkJCSAgdHlwZSwgJm52Ym8tPnBsYWNlbWVudCwKIAkJCSAgYWxpZ24gPj4gUEFH
-RV9TSElGVCwgZmFsc2UsIGFjY19zaXplLCBzZywKIAkJCSAgcm9iaiwgbm91dmVhdV9ib19kZWxf
-dHRtKTsKLQludmJvLT5iby5iYXNlLnJlc3YgPSBudmJvLT5iby5yZXN2OwogCiAJaWYgKHJldCkg
-ewogCQkvKiB0dG0gd2lsbCBjYWxsIG5vdXZlYXVfYm9fZGVsX3R0bSBpZiBpdCBmYWlscy4uICov
-CkBAIC0xMzI1LDcgKzEzMjQsNyBAQCBub3V2ZWF1X2JvX3ZtX2NsZWFudXAoc3RydWN0IHR0bV9i
-dWZmZXJfb2JqZWN0ICpibywKIHsKIAlzdHJ1Y3Qgbm91dmVhdV9kcm0gKmRybSA9IG5vdXZlYXVf
-YmRldihiby0+YmRldik7CiAJc3RydWN0IGRybV9kZXZpY2UgKmRldiA9IGRybS0+ZGV2OwotCXN0
-cnVjdCBkbWFfZmVuY2UgKmZlbmNlID0gcmVzZXJ2YXRpb25fb2JqZWN0X2dldF9leGNsKGJvLT5y
-ZXN2KTsKKwlzdHJ1Y3QgZG1hX2ZlbmNlICpmZW5jZSA9IHJlc2VydmF0aW9uX29iamVjdF9nZXRf
-ZXhjbChiby0+YmFzZS5yZXN2KTsKIAogCW52MTBfYm9fcHV0X3RpbGVfcmVnaW9uKGRldiwgKm9s
-ZF90aWxlLCBmZW5jZSk7CiAJKm9sZF90aWxlID0gbmV3X3RpbGU7CkBAIC0xNjU2LDcgKzE2NTUs
-NyBAQCBub3V2ZWF1X3R0bV90dF91bnBvcHVsYXRlKHN0cnVjdCB0dG1fdHQgKnR0bSkKIHZvaWQK
-IG5vdXZlYXVfYm9fZmVuY2Uoc3RydWN0IG5vdXZlYXVfYm8gKm52Ym8sIHN0cnVjdCBub3V2ZWF1
-X2ZlbmNlICpmZW5jZSwgYm9vbCBleGNsdXNpdmUpCiB7Ci0Jc3RydWN0IHJlc2VydmF0aW9uX29i
-amVjdCAqcmVzdiA9IG52Ym8tPmJvLnJlc3Y7CisJc3RydWN0IHJlc2VydmF0aW9uX29iamVjdCAq
-cmVzdiA9IG52Ym8tPmJvLmJhc2UucmVzdjsKIAogCWlmIChleGNsdXNpdmUpCiAJCXJlc2VydmF0
-aW9uX29iamVjdF9hZGRfZXhjbF9mZW5jZShyZXN2LCAmZmVuY2UtPmJhc2UpOwpkaWZmIC0tZ2l0
-IGEvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9mZW5jZS5jIGIvZHJpdmVycy9ncHUv
-ZHJtL25vdXZlYXUvbm91dmVhdV9mZW5jZS5jCmluZGV4IGQ0OTY0ZjMzOTdhMS4uZTVmMjQ5YWIy
-MTZhIDEwMDY0NAotLS0gYS9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2ZlbmNlLmMK
-KysrIGIvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9mZW5jZS5jCkBAIC0zMzUsNyAr
-MzM1LDcgQEAgbm91dmVhdV9mZW5jZV9zeW5jKHN0cnVjdCBub3V2ZWF1X2JvICpudmJvLCBzdHJ1
-Y3Qgbm91dmVhdV9jaGFubmVsICpjaGFuLCBib29sIGUKIHsKIAlzdHJ1Y3Qgbm91dmVhdV9mZW5j
-ZV9jaGFuICpmY3R4ID0gY2hhbi0+ZmVuY2U7CiAJc3RydWN0IGRtYV9mZW5jZSAqZmVuY2U7Ci0J
-c3RydWN0IHJlc2VydmF0aW9uX29iamVjdCAqcmVzdiA9IG52Ym8tPmJvLnJlc3Y7CisJc3RydWN0
-IHJlc2VydmF0aW9uX29iamVjdCAqcmVzdiA9IG52Ym8tPmJvLmJhc2UucmVzdjsKIAlzdHJ1Y3Qg
-cmVzZXJ2YXRpb25fb2JqZWN0X2xpc3QgKmZvYmo7CiAJc3RydWN0IG5vdXZlYXVfZmVuY2UgKmY7
-CiAJaW50IHJldCA9IDAsIGk7CmRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9u
-b3V2ZWF1X2dlbS5jIGIvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9nZW0uYwppbmRl
-eCBiMWU0ODUyODEwZWQuLmM3MzY4YWEwYmRlYyAxMDA2NDQKLS0tIGEvZHJpdmVycy9ncHUvZHJt
-L25vdXZlYXUvbm91dmVhdV9nZW0uYworKysgYi9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2
-ZWF1X2dlbS5jCkBAIC04ODcsNyArODg3LDcgQEAgbm91dmVhdV9nZW1faW9jdGxfY3B1X3ByZXAo
-c3RydWN0IGRybV9kZXZpY2UgKmRldiwgdm9pZCAqZGF0YSwKIAkJcmV0dXJuIC1FTk9FTlQ7CiAJ
-bnZibyA9IG5vdXZlYXVfZ2VtX29iamVjdChnZW0pOwogCi0JbHJldCA9IHJlc2VydmF0aW9uX29i
-amVjdF93YWl0X3RpbWVvdXRfcmN1KG52Ym8tPmJvLnJlc3YsIHdyaXRlLCB0cnVlLAorCWxyZXQg
-PSByZXNlcnZhdGlvbl9vYmplY3Rfd2FpdF90aW1lb3V0X3JjdShudmJvLT5iby5iYXNlLnJlc3Ys
-IHdyaXRlLCB0cnVlLAogCQkJCQkJICAgbm9fd2FpdCA/IDAgOiAzMCAqIEhaKTsKIAlpZiAoIWxy
-ZXQpCiAJCXJldCA9IC1FQlVTWTsKLS0gCjIuMTguMQoKX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBtYWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0
-cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9s
-aXN0aW5mby9ub3V2ZWF1
+
+--===============1189255090==
+Content-Type: multipart/alternative; boundary="15617340670.91fFe2.3711"
+Content-Transfer-Encoding: 7bit
+
+
+--15617340670.91fFe2.3711
+Date: Fri, 28 Jun 2019 15:01:07 +0000
+MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+https://bugs.freedesktop.org/show_bug.cgi?id=3D110955
+
+Emil Velikov <emil.l.velikov@gmail.com> changed:
+
+           What    |Removed                     |Added
+----------------------------------------------------------------------------
+                 CC|                            |emil.l.velikov@gmail.com
+
+--- Comment #3 from Emil Velikov <emil.l.velikov@gmail.com> ---
+Created attachment 144675
+  --> https://bugs.freedesktop.org/attachment.cgi?id=3D144675&action=3Dedit
+Print GL profile and unknown GLSL version.
+
+Forgot the more constructive parts:
+ - please attach (plain-text) the output of glxinfo
+ - if you can build mesa - what's the output of wine with the attached patch
+
+--=20
+You are receiving this mail because:
+You are the QA Contact for the bug.
+You are the assignee for the bug.=
+
+--15617340670.91fFe2.3711
+Date: Fri, 28 Jun 2019 15:01:07 +0000
+MIME-Version: 1.0
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+<html>
+    <head>
+      <base href=3D"https://bugs.freedesktop.org/">
+    </head>
+    <body><span class=3D"vcard"><a class=3D"email" href=3D"mailto:emil.l.ve=
+likov&#64;gmail.com" title=3D"Emil Velikov &lt;emil.l.velikov&#64;gmail.com=
+&gt;"> <span class=3D"fn">Emil Velikov</span></a>
+</span> changed
+          <a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - Mesa 18.2.8 implementation error: Invalid GLSL version in=
+ shading_language_version()"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110955">bug 11095=
+5</a>
+          <br>
+             <table border=3D"1" cellspacing=3D"0" cellpadding=3D"8">
+          <tr>
+            <th>What</th>
+            <th>Removed</th>
+            <th>Added</th>
+          </tr>
+
+         <tr>
+           <td style=3D"text-align:right;">CC</td>
+           <td>
+               &nbsp;
+           </td>
+           <td>emil.l.velikov&#64;gmail.com
+           </td>
+         </tr></table>
+      <p>
+        <div>
+            <b><a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - Mesa 18.2.8 implementation error: Invalid GLSL version in=
+ shading_language_version()"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110955#c3">Commen=
+t # 3</a>
+              on <a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - Mesa 18.2.8 implementation error: Invalid GLSL version in=
+ shading_language_version()"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110955">bug 11095=
+5</a>
+              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
+emil.l.velikov&#64;gmail.com" title=3D"Emil Velikov &lt;emil.l.velikov&#64;=
+gmail.com&gt;"> <span class=3D"fn">Emil Velikov</span></a>
+</span></b>
+        <pre>Created <span class=3D""><a href=3D"attachment.cgi?id=3D144675=
+" name=3D"attach_144675" title=3D"Print GL profile and unknown GLSL version=
+.">attachment 144675</a> <a href=3D"attachment.cgi?id=3D144675&amp;action=
+=3Dedit" title=3D"Print GL profile and unknown GLSL version.">[details]</a>=
+</span> <a href=3D'page.cgi?id=3Dsplinter.html&amp;bug=3D110955&amp;attachm=
+ent=3D144675'>[review]</a>
+Print GL profile and unknown GLSL version.
+
+Forgot the more constructive parts:
+ - please attach (plain-text) the output of glxinfo
+ - if you can build mesa - what's the output of wine with the attached patc=
+h</pre>
+        </div>
+      </p>
+
+
+      <hr>
+      <span>You are receiving this mail because:</span>
+
+      <ul>
+          <li>You are the QA Contact for the bug.</li>
+          <li>You are the assignee for the bug.</li>
+      </ul>
+    </body>
+</html>=
+
+--15617340670.91fFe2.3711--
+
+--===============1189255090==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
+YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
+cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============1189255090==--
