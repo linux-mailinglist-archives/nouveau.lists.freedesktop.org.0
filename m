@@ -2,45 +2,90 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9261159E50
-	for <lists+nouveau@lfdr.de>; Fri, 28 Jun 2019 17:01:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5C4D759F0C
+	for <lists+nouveau@lfdr.de>; Fri, 28 Jun 2019 17:38:41 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id AE8196E93F;
-	Fri, 28 Jun 2019 15:01:08 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 496716E950;
+	Fri, 28 Jun 2019 15:38:39 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [131.252.210.165])
- by gabe.freedesktop.org (Postfix) with ESMTP id D12A56E93F
- for <nouveau@lists.freedesktop.org>; Fri, 28 Jun 2019 15:01:07 +0000 (UTC)
-Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id C864472167; Fri, 28 Jun 2019 15:01:07 +0000 (UTC)
-From: bugzilla-daemon@freedesktop.org
-To: nouveau@lists.freedesktop.org
-Date: Fri, 28 Jun 2019 15:01:07 +0000
-X-Bugzilla-Reason: QAcontact AssignedTo
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: None
-X-Bugzilla-Product: Mesa
-X-Bugzilla-Component: Drivers/DRI/nouveau
-X-Bugzilla-Version: 18.2
-X-Bugzilla-Keywords: have-backtrace
-X-Bugzilla-Severity: minor
-X-Bugzilla-Who: emil.l.velikov@gmail.com
-X-Bugzilla-Status: NEW
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: medium
-X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: cc attachments.created
-Message-ID: <bug-110955-8800-LsJGPSHHvH@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-110955-8800@http.bugs.freedesktop.org/>
-References: <bug-110955-8800@http.bugs.freedesktop.org/>
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
+Received: from EUR04-HE1-obe.outbound.protection.outlook.com
+ (mail-eopbgr70058.outbound.protection.outlook.com [40.107.7.58])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7C2006E950;
+ Fri, 28 Jun 2019 15:38:37 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=testarcselector01; d=microsoft.com; cv=none;
+ b=YWrf81ldmjTWhNIf2o5s+PxDhoRgg/hguBJQA7mOcQPdLgoNe0m90BeaGC0LPXBfH4B7RtXeCieoC4HL2XNsHsIAwynBC4REa5SthMaY38EJiXds+PiaaTVIFFsi8kEkOCPWhec98uI6+U5+RD3h3X/23SyfikLOuNe2a4/paSg=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=testarcselector01;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=bLku6ir24rZW4tVJUVeMvnBtyIoSP0XnsnDssJoRSYk=;
+ b=wG6ObGU35Hyfhhn/CuTGFTNWTFIuXqRepQniXecRutpjrqQJblAoQn+dwMZkCd6UqanEfIbTNeCGpQQO9uWM6Uf41UYN6z7aUUQhoV3Fa4Xa79Zu+ZBNak+pCg+kBaIQjxVYaLtIi3OebOVA0J9vAR/3HbWpPLKIiyyEdpqwJ5w=
+ARC-Authentication-Results: i=1; test.office365.com
+ 1;spf=none;dmarc=none;dkim=none;arc=none
+Received: from VI1PR05MB4141.eurprd05.prod.outlook.com (10.171.182.144) by
+ VI1PR05MB5936.eurprd05.prod.outlook.com (20.178.126.89) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.2008.16; Fri, 28 Jun 2019 15:38:34 +0000
+Received: from VI1PR05MB4141.eurprd05.prod.outlook.com
+ ([fe80::f5d8:df9:731:682e]) by VI1PR05MB4141.eurprd05.prod.outlook.com
+ ([fe80::f5d8:df9:731:682e%5]) with mapi id 15.20.2008.014; Fri, 28 Jun 2019
+ 15:38:34 +0000
+From: Jason Gunthorpe <jgg@mellanox.com>
+To: Christoph Hellwig <hch@lst.de>
+Thread-Topic: [PATCH 16/25] device-dax: use the dev_pagemap internal refcount
+Thread-Index: AQHVLBqgvimki3zmIk2l4xtSxGbkyKaxNtmA
+Date: Fri, 28 Jun 2019 15:38:33 +0000
+Message-ID: <20190628153827.GA5373@mellanox.com>
+References: <20190626122724.13313-1-hch@lst.de>
+ <20190626122724.13313-17-hch@lst.de>
+In-Reply-To: <20190626122724.13313-17-hch@lst.de>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-clientproxiedby: BYAPR07CA0020.namprd07.prod.outlook.com
+ (2603:10b6:a02:bc::33) To VI1PR05MB4141.eurprd05.prod.outlook.com
+ (2603:10a6:803:4d::16)
+x-ms-exchange-messagesentrepresentingtype: 1
+x-originating-ip: [38.88.19.130]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: 05d4fcbc-8ab9-4069-84fc-08d6fbdeadd0
+x-ms-office365-filtering-ht: Tenant
+x-microsoft-antispam: BCL:0; PCL:0;
+ RULEID:(2390118)(7020095)(4652040)(8989299)(4534185)(7168020)(4627221)(201703031133081)(201702281549075)(8990200)(5600148)(711020)(4605104)(1401327)(4618075)(2017052603328)(7193020);
+ SRVR:VI1PR05MB5936; 
+x-ms-traffictypediagnostic: VI1PR05MB5936:
+x-microsoft-antispam-prvs: <VI1PR05MB59360B8AC12BA66BC72FEE4ECFFC0@VI1PR05MB5936.eurprd05.prod.outlook.com>
+x-ms-oob-tlc-oobclassifiers: OLM:6430;
+x-forefront-prvs: 00826B6158
+x-forefront-antispam-report: SFV:NSPM;
+ SFS:(10009020)(4636009)(366004)(136003)(346002)(39860400002)(376002)(396003)(199004)(189003)(68736007)(99286004)(476003)(81166006)(8936002)(86362001)(64756008)(71190400001)(6246003)(478600001)(81156014)(66946007)(6512007)(8676002)(6436002)(3846002)(6506007)(53936002)(73956011)(4744005)(33656002)(102836004)(4326008)(36756003)(6486002)(5660300002)(6116002)(2616005)(71200400001)(316002)(1076003)(26005)(386003)(66476007)(25786009)(7416002)(66556008)(76176011)(66446008)(229853002)(186003)(54906003)(2906002)(305945005)(6916009)(256004)(7736002)(14454004)(446003)(66066001)(52116002)(486006)(11346002)(55236004);
+ DIR:OUT; SFP:1101; SCL:1; SRVR:VI1PR05MB5936;
+ H:VI1PR05MB4141.eurprd05.prod.outlook.com; FPR:; SPF:None; LANG:en;
+ PTR:InfoNoRecords; A:1; MX:1; 
+received-spf: None (protection.outlook.com: mellanox.com does not designate
+ permitted sender hosts)
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam-message-info: aVxtYRA0vip7hM1WU5QuKAiStkC5K6vc2eNm/k3hRyZi/nbuMukNzRui1mmIH3vhTFVAfGYY0ZFdAfKTTKKkjqkUP8qEexEP+issJMtLRASJmVe4Jn2H12ReEsuZOtzOKpwlhytDORudx7Mc0br9a0Hqthy1N8osOox2QNGAxUXDgDMplUJ8yXBjSUPb7ydz88in5Spy5QtdUsqvrDrx+FJF80EurzTDrI4CewXKNGneNRXyyYhZ5Z45TM4dsptN0726IU53ImZ3FqF0W0/viCwF6USMFz4KJICqPuoajx55kM5BFFHNZ9PgqyrUlQ94vuZMoXYBfFdGOHd3k8WFG+Wwwi2BW4MXFsIE5x/XGfK8DkPBCIoEsZbdhWrBgCdzpIhvKvD9JfCOPWTh55sqVbuyKk1ymPHwjjZXYTVCt90=
+Content-ID: <8C444E0EC453B1428BA516BB657C6928@eurprd05.prod.outlook.com>
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 110955] Mesa 18.2.8 implementation error: Invalid
- GLSL version in shading_language_version()
+X-OriginatorOrg: Mellanox.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 05d4fcbc-8ab9-4069-84fc-08d6fbdeadd0
+X-MS-Exchange-CrossTenant-originalarrivaltime: 28 Jun 2019 15:38:33.9637 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: a652971c-7d2e-4d9b-a6a4-d149256f461b
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: jgg@mellanox.com
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR05MB5936
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=Mellanox.com; s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=bLku6ir24rZW4tVJUVeMvnBtyIoSP0XnsnDssJoRSYk=;
+ b=DnAA2swC4elRI3KiIRukzdPV/k9Q24g7eikbNVlDNZk9dlUMIOgAgecRYBldwUguw+YTQzuDDJPEVGkvHSB3w4hI1PY3/ii4XS4u/0znjRgxr0EC26T+yiLfR1csWMf4O4AtXg7yshHI4AtF/yX9u7UbKtPorGjbfRVZjFIU+kI=
+X-Mailman-Original-Authentication-Results: spf=none (sender IP is )
+ smtp.mailfrom=jgg@mellanox.com; 
+Subject: Re: [Nouveau] [PATCH 16/25] device-dax: use the dev_pagemap
+ internal refcount
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -52,138 +97,28 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1189255090=="
+Cc: "linux-nvdimm@lists.01.org" <linux-nvdimm@lists.01.org>,
+ "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
+ "linux-mm@kvack.org" <linux-mm@kvack.org>, Ben Skeggs <bskeggs@redhat.com>,
+ "linux-pci@vger.kernel.org" <linux-pci@vger.kernel.org>,
+ Dan Williams <dan.j.williams@intel.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-
---===============1189255090==
-Content-Type: multipart/alternative; boundary="15617340670.91fFe2.3711"
-Content-Transfer-Encoding: 7bit
-
-
---15617340670.91fFe2.3711
-Date: Fri, 28 Jun 2019 15:01:07 +0000
-MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-https://bugs.freedesktop.org/show_bug.cgi?id=3D110955
-
-Emil Velikov <emil.l.velikov@gmail.com> changed:
-
-           What    |Removed                     |Added
-----------------------------------------------------------------------------
-                 CC|                            |emil.l.velikov@gmail.com
-
---- Comment #3 from Emil Velikov <emil.l.velikov@gmail.com> ---
-Created attachment 144675
-  --> https://bugs.freedesktop.org/attachment.cgi?id=3D144675&action=3Dedit
-Print GL profile and unknown GLSL version.
-
-Forgot the more constructive parts:
- - please attach (plain-text) the output of glxinfo
- - if you can build mesa - what's the output of wine with the attached patch
-
---=20
-You are receiving this mail because:
-You are the QA Contact for the bug.
-You are the assignee for the bug.=
-
---15617340670.91fFe2.3711
-Date: Fri, 28 Jun 2019 15:01:07 +0000
-MIME-Version: 1.0
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-<html>
-    <head>
-      <base href=3D"https://bugs.freedesktop.org/">
-    </head>
-    <body><span class=3D"vcard"><a class=3D"email" href=3D"mailto:emil.l.ve=
-likov&#64;gmail.com" title=3D"Emil Velikov &lt;emil.l.velikov&#64;gmail.com=
-&gt;"> <span class=3D"fn">Emil Velikov</span></a>
-</span> changed
-          <a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - Mesa 18.2.8 implementation error: Invalid GLSL version in=
- shading_language_version()"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110955">bug 11095=
-5</a>
-          <br>
-             <table border=3D"1" cellspacing=3D"0" cellpadding=3D"8">
-          <tr>
-            <th>What</th>
-            <th>Removed</th>
-            <th>Added</th>
-          </tr>
-
-         <tr>
-           <td style=3D"text-align:right;">CC</td>
-           <td>
-               &nbsp;
-           </td>
-           <td>emil.l.velikov&#64;gmail.com
-           </td>
-         </tr></table>
-      <p>
-        <div>
-            <b><a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - Mesa 18.2.8 implementation error: Invalid GLSL version in=
- shading_language_version()"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110955#c3">Commen=
-t # 3</a>
-              on <a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - Mesa 18.2.8 implementation error: Invalid GLSL version in=
- shading_language_version()"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110955">bug 11095=
-5</a>
-              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
-emil.l.velikov&#64;gmail.com" title=3D"Emil Velikov &lt;emil.l.velikov&#64;=
-gmail.com&gt;"> <span class=3D"fn">Emil Velikov</span></a>
-</span></b>
-        <pre>Created <span class=3D""><a href=3D"attachment.cgi?id=3D144675=
-" name=3D"attach_144675" title=3D"Print GL profile and unknown GLSL version=
-.">attachment 144675</a> <a href=3D"attachment.cgi?id=3D144675&amp;action=
-=3Dedit" title=3D"Print GL profile and unknown GLSL version.">[details]</a>=
-</span> <a href=3D'page.cgi?id=3Dsplinter.html&amp;bug=3D110955&amp;attachm=
-ent=3D144675'>[review]</a>
-Print GL profile and unknown GLSL version.
-
-Forgot the more constructive parts:
- - please attach (plain-text) the output of glxinfo
- - if you can build mesa - what's the output of wine with the attached patc=
-h</pre>
-        </div>
-      </p>
-
-
-      <hr>
-      <span>You are receiving this mail because:</span>
-
-      <ul>
-          <li>You are the QA Contact for the bug.</li>
-          <li>You are the assignee for the bug.</li>
-      </ul>
-    </body>
-</html>=
-
---15617340670.91fFe2.3711--
-
---===============1189255090==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
-YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
-cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
-
---===============1189255090==--
+T24gV2VkLCBKdW4gMjYsIDIwMTkgYXQgMDI6Mjc6MTVQTSArMDIwMCwgQ2hyaXN0b3BoIEhlbGx3
+aWcgd3JvdGU6Cj4gVGhlIGZ1bmN0aW9uYWxpdHkgaXMgaWRlbnRpY2FsIHRvIHRoZSBvbmUgY3Vy
+cmVudGx5IG9wZW4gY29kZWQgaW4KPiBkZXZpY2UtZGF4Lgo+IAo+IFNpZ25lZC1vZmYtYnk6IENo
+cmlzdG9waCBIZWxsd2lnIDxoY2hAbHN0LmRlPgo+IFJldmlld2VkLWJ5OiBJcmEgV2VpbnkgPGly
+YS53ZWlueUBpbnRlbC5jb20+Cj4gLS0tCj4gIGRyaXZlcnMvZGF4L2RheC1wcml2YXRlLmggfCAg
+NCAtLS0tCj4gIGRyaXZlcnMvZGF4L2RldmljZS5jICAgICAgfCA0MyAtLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KPiAgMiBmaWxlcyBjaGFuZ2VkLCA0NyBkZWxldGlvbnMo
+LSkKCkRhblc6IEkgdGhpbmsgdGhpcyBzZXJpZXMgaGFzIHJlYWNoZWQgZW5vdWdoIHJldmlldywg
+ZGlkIHlvdSB3YW50CnRvIGFjay90ZXN0IGFueSBmdXJ0aGVyPwoKVGhpcyBuZWVkcyB0byBsYW5k
+IGluIGhtbS5naXQgc29vbiB0byBtYWtlIHRoZSBtZXJnZSB3aW5kb3cuCgpUaGFua3MsCkphc29u
+Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCk5vdXZlYXUg
+bWFpbGluZyBsaXN0Ck5vdXZlYXVAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMu
+ZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vbm91dmVhdQ==
