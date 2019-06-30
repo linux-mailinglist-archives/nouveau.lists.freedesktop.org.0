@@ -1,66 +1,51 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 270D75A4F9
-	for <lists+nouveau@lfdr.de>; Fri, 28 Jun 2019 21:14:58 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 665B75B244
+	for <lists+nouveau@lfdr.de>; Mon,  1 Jul 2019 00:55:11 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6EFE06E986;
-	Fri, 28 Jun 2019 19:14:56 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 96DA889C85;
+	Sun, 30 Jun 2019 22:55:09 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ot1-x341.google.com (mail-ot1-x341.google.com
- [IPv6:2607:f8b0:4864:20::341])
- by gabe.freedesktop.org (Postfix) with ESMTPS id AB5086E986
- for <nouveau@lists.freedesktop.org>; Fri, 28 Jun 2019 19:14:55 +0000 (UTC)
-Received: by mail-ot1-x341.google.com with SMTP id q20so7061722otl.0
- for <nouveau@lists.freedesktop.org>; Fri, 28 Jun 2019 12:14:55 -0700 (PDT)
+Received: from mail-ua1-x92c.google.com (mail-ua1-x92c.google.com
+ [IPv6:2607:f8b0:4864:20::92c])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 986B289C85
+ for <nouveau@lists.freedesktop.org>; Sun, 30 Jun 2019 22:55:08 +0000 (UTC)
+Received: by mail-ua1-x92c.google.com with SMTP id j8so4296905uan.6
+ for <nouveau@lists.freedesktop.org>; Sun, 30 Jun 2019 15:55:08 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=3EPvpztsPK7520nxsbDhjXQoNlIusJTLU8rYF+ocke4=;
- b=FiUBzqh4JAL7F+GYhbTLRiQZhBK32vwRE9NMs9GCcsPVxMBAL81STAofI1b90khvsb
- yt4ubsw6hUTXl8MMCk0BXiOLsA9x+90V+JbtkfQPA06XYqBbWGMJ0n0q3tFeeqpfiyFo
- CP09jzJuafX514ObJERDy6P46T5j7GeGxj9qbPDiz4eXmfyhjjnGRmpttP7Z+vDpBTJc
- huwx8cPn2t5RqGOmsTW/jB7Gml50jRhoifn7YdyKRHoJppNb7t9KPU907tYTClcWylYB
- I3VYYKhJSvguEf+DUnKgzV+cuvOz2/hDGmheg0M23Agw6DpA+Bdmvjsi0McnEPlnxFcO
- S9oA==
-X-Gm-Message-State: APjAAAUF4wnkqDY4ZtA/gIiBzYOXY0Dt7a5q3ea4RCbaddv6NHnDZCM2
- Q5XCa0gs1J1i1S2P+QU1Cd3xUkFbDq5nkzGl8tjmKA==
-X-Google-Smtp-Source: APXvYqwk0yjTvQhVqTpz4jl7ioGiwvBTeiygz26S4gTf6ee6guEN0yjq3zRwNg6EKq8iXaiv+Kpq8rgpgiSlzbcUkgY=
-X-Received: by 2002:a9d:7a9a:: with SMTP id l26mr8541745otn.71.1561749295055; 
- Fri, 28 Jun 2019 12:14:55 -0700 (PDT)
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=28s+c37m3VXpaJ520kJKvJesRC8LkNMO+StUJLwU1rQ=;
+ b=avGAKRxmlhh2Cmbisp7KgCVUlz4p7bG4NGTscGu4hjk0pOtlcrX05SNBMEYli6R4Ll
+ Ch5UbVy3AYjkZII/cEhvZPKFDRd1j6grRFbspPWG8eSzc5DHBLGTmkd2fSc3z0Ag4QDp
+ hADEUKE2KAnzjQXnYbQ3ymyZhOOZBPCrZeeyz1V5qCpfWw2xwgBLspmzKzGvpocADZ5y
+ ODK16b/iSIxF1cLU7Vrz2sXryFqhSDT3DJfV6up1hhP46eq735C1gNQfarkGD3D+931J
+ 40IoBWYPrRARnmnJdWEBtVJSROU4Xd1Ws/xizW4JkOLBffEmkESLCu4kO54d+NEcthDW
+ fIIw==
+X-Gm-Message-State: APjAAAXxLJQCEU+ecRGl71p1DfwnhmMVbxM2Ro2F/lhlN59JFHwuGz1e
+ LRulg+IHaFak9hnksdNCoN0MsY2JbGxbl9LzfJRudvKOaFg=
+X-Google-Smtp-Source: APXvYqydvZo+wYsD7iK2fgHvvHa1YYxgvcjdzk9138gRQAxxer5Smhw2zIU/3doPzQsgvVM17pA9p35PTq2MkQo29h8=
+X-Received: by 2002:ab0:208f:: with SMTP id r15mr11869783uak.38.1561935307606; 
+ Sun, 30 Jun 2019 15:55:07 -0700 (PDT)
 MIME-Version: 1.0
-References: <20190626122724.13313-17-hch@lst.de>
- <20190628153827.GA5373@mellanox.com>
- <CAPcyv4joSiFMeYq=D08C-QZSkHz0kRpvRfseNQWrN34Rrm+S7g@mail.gmail.com>
- <20190628170219.GA3608@mellanox.com>
- <CAPcyv4ja9DVL2zuxuSup8x3VOT_dKAOS8uBQweE9R81vnYRNWg@mail.gmail.com>
- <CAPcyv4iWTe=vOXUqkr_CguFrFRqgA7hJSt4J0B3RpuP-Okz0Vw@mail.gmail.com>
- <20190628182922.GA15242@mellanox.com>
- <CAPcyv4g+zk9pnLcj6Xvwh-svKM+w4hxfYGikcmuoBAFGCr-HAw@mail.gmail.com>
- <20190628185152.GA9117@lst.de>
- <CAPcyv4i+b6bKhSF2+z7Wcw4OUAvb1=m289u9QF8zPwLk402JVg@mail.gmail.com>
- <20190628190207.GA9317@lst.de>
-In-Reply-To: <20190628190207.GA9317@lst.de>
-From: Dan Williams <dan.j.williams@intel.com>
-Date: Fri, 28 Jun 2019 12:14:44 -0700
-Message-ID: <CAPcyv4h90DAVHbZ4bgvJwpfB8wr2K28oEes6HcdQOpf02+NL=g@mail.gmail.com>
-To: Christoph Hellwig <hch@lst.de>
+From: Fernando Sahmkow <fsahmkow27@gmail.com>
+Date: Sun, 30 Jun 2019 18:54:57 -0400
+Message-ID: <CA+MSTo_HoKD2vxF68oJm6OpVf76Uy9shmB2itBucYv4CJj8VEg@mail.gmail.com>
+To: nouveau@lists.freedesktop.org
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=intel-com.20150623.gappssmtp.com; s=20150623;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc;
- bh=3EPvpztsPK7520nxsbDhjXQoNlIusJTLU8rYF+ocke4=;
- b=jX7l/aScOnNag6NN8PLCh3f8Z8jWQa8rXqdmRFTm19zC5cGsMg4bGsXFEunae/2WjS
- ovvvaTeYJH2utyMhChKwGiGq8ZBoeIIKayiImspczzJ8SDCf8XDDL3viRbXyjtD1lYaK
- kzh/gY0uzN3viGFbDD3U65We27uV73cZy9DpexfMTRSqDZy8x6zljmPhhW1gZcx2hqFe
- GQ/mPFT2QGn+yrEJgjwPpeYXNTM2MxsKsrWYit2Wtxn/cph7hWSIQxFHWHLu8ToPNVuS
- 0Ys9z5mBN7oGuoBHQrTDBIA0uIvuwg0tIL5G5RHXTDvUcDFV767ifaCgmnx0wSkTm7cV
- iWpw==
-Subject: Re: [Nouveau] [PATCH 16/25] device-dax: use the dev_pagemap
- internal refcount
+ d=gmail.com; s=20161025;
+ h=mime-version:from:date:message-id:subject:to;
+ bh=28s+c37m3VXpaJ520kJKvJesRC8LkNMO+StUJLwU1rQ=;
+ b=rOm/ktS6g7YJHd0PypKR3HejR5XDh5UsDMJsoK4YeI7xACSJN/sURP5O0DEVyUGojL
+ I14hF47UmCzZKtXcnkmOwuKAsC7u6r/X/Hfoq/8VA3lwXdCu2XwpnKkqHU1EGeBqBJ24
+ ZYrGJQ7IxPEeqRH602S9I6oQz967PcT27JbC8tfF4k5eRj3mlhlH3LmmxTRSsiAeLFQI
+ hQ2BMo0sOYlVU9OokwqrluAx4TMicWchlBh/a6NEkmZl8UWWTzw1QowQqlPrGdikxfii
+ Kg21NDBXqjqPG9+PgZ8wv5Y6aGmz8FI93DAHAq17kF0Z9gZRgvBJar27fG934yta9WNq
+ JbaQ==
+Subject: [Nouveau] Question on Conditional Rendering Maxwell/Pascal
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -72,41 +57,61 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: "linux-nvdimm@lists.01.org" <linux-nvdimm@lists.01.org>,
- "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
- "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
- "linux-mm@kvack.org" <linux-mm@kvack.org>, Jason Gunthorpe <jgg@mellanox.com>,
- Ben Skeggs <bskeggs@redhat.com>,
- "linux-pci@vger.kernel.org" <linux-pci@vger.kernel.org>,
- Andrew Morton <akpm@linux-foundation.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1755129873=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-T24gRnJpLCBKdW4gMjgsIDIwMTkgYXQgMTI6MDIgUE0gQ2hyaXN0b3BoIEhlbGx3aWcgPGhjaEBs
-c3QuZGU+IHdyb3RlOgo+Cj4gT24gRnJpLCBKdW4gMjgsIDIwMTkgYXQgMTE6NTk6MTlBTSAtMDcw
-MCwgRGFuIFdpbGxpYW1zIHdyb3RlOgo+ID4gSXQncyBhIGJ1ZyB0aGF0IHRoZSBjYWxsIHRvIHB1
-dF9kZXZtYXBfbWFuYWdlZF9wYWdlKCkgd2FzIGdhdGVkIGJ5Cj4gPiBNRU1PUllfREVWSUNFX1BV
-QkxJQyBpbiByZWxlYXNlX3BhZ2VzKCkuIFRoYXQgcGF0aCBpcyBhbHNvIGFwcGxpY2FibGUKPiA+
-IHRvIE1FTU9SWV9ERVZJQ0VfRlNEQVggYmVjYXVzZSBpdCBuZWVkcyB0byB0cmlnZ2VyIHRoZSAt
-PnBhZ2VfZnJlZSgpCj4gPiBjYWxsYmFjayB0byB3YWtlIHVwIHdhaXRfb25fdmFyKCkgdmlhIGZz
-ZGF4X3BhZ2VmcmVlKCkuCj4gPgo+ID4gU28gSSBndWVzcyB5b3UgY291bGQgYXJndWUgdGhhdCB0
-aGUgTUVNT1JZX0RFVklDRV9QVUJMSUMgcmVtb3ZhbCBwYXRjaAo+ID4gbGVmdCB0aGUgb3JpZ2lu
-YWwgYnVnIGluIHBsYWNlLiBJbiB0aGF0IHNlbnNlIHdlJ3JlIG5vIHdvcnNlIG9mZiwgYnV0Cj4g
-PiBzaW5jZSB3ZSBrbm93IGFib3V0IHRoZSBidWcsIHRoZSBmaXggYW5kIHRoZSBwYXRjaGVzIGhh
-dmUgbm90IGJlZW4KPiA+IGFwcGxpZWQgeWV0LCB3aHkgbm90IGZpeCBpdCBub3c/Cj4KPiBUaGUg
-Zml4IGl0IG5vdyB3b3VsZCBzaW1wbHkgYmUgdG8gYXBwbHkgSXJhIG9yaWdpbmFsIHBhdGNoIG5v
-dywgYnV0Cj4gZ2l2ZW4gdGhhdCB3ZSBhcmUgYXQgLXJjNiBpcyB0aGlzIHJlYWxseSBhIGdvb2Qg
-dGltZT8gIEFuZCBpZiB3ZSBkb24ndAo+IGFwcGx5IGl0IG5vdyBiYXNlZCBvbiB0aGUgcXVpbHQg
-YmFzZWQgLW1tIHdvcmZsb3cgaXQganVzdCBzZWVtcyBhIGxvdAo+IGVhc2llciB0byBhcHBseSBp
-dCBhZnRlciBteSBzZXJpZXMuICBVbmxlc3Mgd2Ugd2FudCB0byBpbmNsdWRlIGl0IGluCj4gdGhl
-IHNlcmllcywgaW4gd2hpY2ggY2FzZSBJIGNhbiBkbyBhIHF1aWNrIHJlYmFzZSwgd2UnZCBqdXN0
-IG5lZWQgdG8KPiBtYWtlIHN1cmUgQW5kcmV3IHB1bGxzIGl0IGZyb20gLW1tLgoKSSBiZWxpZXZl
-IC1tbSBhdXRvIGRyb3BzIHBhdGNoZXMgd2hlbiB0aGV5IGFwcGVhciBpbiB0aGUgLW5leHQKYmFz
-ZWxpbmUuIFNvIGl0IHNob3VsZCAianVzdCB3b3JrIiB0byBwdWxsIGl0IGludG8gdGhlIHNlcmll
-cyBhbmQgc2VuZAppdCBhbG9uZyBmb3IgLW5leHQgaW5jbHVzaW9uLgpfX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpOb3V2ZWF1IG1haWxpbmcgbGlzdApOb3V2
-ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9t
-YWlsbWFuL2xpc3RpbmZvL25vdXZlYXU=
+--===============1755129873==
+Content-Type: multipart/alternative; boundary="0000000000002c0ed5058c9267db"
+
+--0000000000002c0ed5058c9267db
+Content-Type: text/plain; charset="UTF-8"
+
+So we are currently doing tests and complying with them in our Emulator.
+Currently the conditional rendering test does not pass (no wonder we not
+even implement it). I've been looking at the current documentation
+https://github.com/envytools/envytools/blob/master/rnndb/graph/gf100_3d.xml#L796
+So
+far I don't understand how the cond address is used and to what it's
+compared.
+https://github.com/envytools/envytools/blob/0d91b8bcef3ceb47ff0b114025d301edb790d472/rnndb/g80_defs.xml#L61
+
+It says it uses 2 queries, how do I know which query it's talking off and
+what it's the comparison that should be done.
+
+Also, does failing conditional rendering makes registers not write into the
+engine or just drawcalls/claers are ignored?
+
+--0000000000002c0ed5058c9267db
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">So we are currently doing tests and complying with them in=
+ our Emulator. Currently the conditional rendering test does not pass (no w=
+onder we not even implement it). I&#39;ve been looking at the current docum=
+entation=C2=A0<a href=3D"https://github.com/envytools/envytools/blob/master=
+/rnndb/graph/gf100_3d.xml#L796">https://github.com/envytools/envytools/blob=
+/master/rnndb/graph/gf100_3d.xml#L796</a>=C2=A0So far I don&#39;t understan=
+d how the cond address is used and to what it&#39;s compared.=C2=A0<a href=
+=3D"https://github.com/envytools/envytools/blob/0d91b8bcef3ceb47ff0b114025d=
+301edb790d472/rnndb/g80_defs.xml#L61">https://github.com/envytools/envytool=
+s/blob/0d91b8bcef3ceb47ff0b114025d301edb790d472/rnndb/g80_defs.xml#L61</a><=
+div><br></div><div>It says it uses 2 queries, how do I know which query it&=
+#39;s talking off and what it&#39;s the comparison that should be done.</di=
+v><div><br></div><div>Also, does failing conditional rendering makes regist=
+ers not write into the engine or just drawcalls/claers are ignored?</div></=
+div>
+
+--0000000000002c0ed5058c9267db--
+
+--===============1755129873==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
+YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
+cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============1755129873==--
