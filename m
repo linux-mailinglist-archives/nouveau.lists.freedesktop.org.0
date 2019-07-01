@@ -1,65 +1,45 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0E6AF5B2EC
-	for <lists+nouveau@lfdr.de>; Mon,  1 Jul 2019 04:33:20 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id A1A785B49B
+	for <lists+nouveau@lfdr.de>; Mon,  1 Jul 2019 08:20:36 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8959E89C7F;
-	Mon,  1 Jul 2019 02:33:18 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6A68689E86;
+	Mon,  1 Jul 2019 06:20:30 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pf1-x433.google.com (mail-pf1-x433.google.com
- [IPv6:2607:f8b0:4864:20::433])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B238489C7F;
- Mon,  1 Jul 2019 02:33:17 +0000 (UTC)
-Received: by mail-pf1-x433.google.com with SMTP id t16so5745746pfe.11;
- Sun, 30 Jun 2019 19:33:17 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to:user-agent;
- bh=voTuoUFQ5KaHA9/02GEyUejKIGxwvgLp1Lvj8n/za7U=;
- b=U/q6lTgzkbsa6dwDjunGRqEyD85l9lUzi45847aEj36x/w6YDEnKIajZHKDj5D6VVk
- Ut/74Rd4JO6f32qg8WzOaztiXv7SHu4Ro4OiRLcOwa6Oh9IR6KpSu3O4SsNBj761pqsT
- LusD6Wxa17kurJty48/j85rIw7LIBGA4QEoKfvkeyQzpYWS/uefn7U7XKumYw8YbGK5W
- M8DOD+b+av1mJqiw7Eul7rK5D58YEYvgjdUvmVeaSZALiOr8r4nbEOMl1H8w3vdBF678
- Yf8cQyvizw5wB5qLK3rRl1G80S3L5Ho6oCv7XpNsIJT1Pmny3XJcVsACUcHElKon9ZlI
- udvg==
-X-Gm-Message-State: APjAAAUHl4abat0F72QIWHqQWHCQeDpOJaWyWDBMB4gE9qbUxfGj7gzZ
- sKQa2SbnFRSXRLbhLvn8NPI=
-X-Google-Smtp-Source: APXvYqz45LyiB74SXRb5IlkMYJhK6XQUsj4xhlQr19rhEqeZR/UpZjRFD1SD7oHU3Y5qMaVgBdmCgw==
-X-Received: by 2002:a63:c34c:: with SMTP id e12mr21430883pgd.195.1561948397231; 
- Sun, 30 Jun 2019 19:33:17 -0700 (PDT)
-Received: from localhost ([110.70.47.183])
- by smtp.gmail.com with ESMTPSA id h2sm7601838pgs.17.2019.06.30.19.33.15
- (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
- Sun, 30 Jun 2019 19:33:15 -0700 (PDT)
-Date: Mon, 1 Jul 2019 11:33:12 +0900
-From: Sergey Senozhatsky <sergey.senozhatsky.work@gmail.com>
-To: Ilia Mirkin <imirkin@alum.mit.edu>
-Message-ID: <20190701023312.GA4236@jagdpanzerIV>
-References: <20190614024957.GA9645@jagdpanzerIV>
- <20190619050811.GA15221@jagdpanzerIV>
- <CAKb7UvhdN=RUdfrnWswT4ANK5UwPcM-upDP85=84zsCF+a5-bg@mail.gmail.com>
- <20190619054826.GA2059@jagdpanzerIV>
- <CAKb7UvgkEXtmJV67EXeBctgaOxM1D91fBbKw9oFMUaB1ZViZQg@mail.gmail.com>
+Received: from bombadil.infradead.org (bombadil.infradead.org
+ [IPv6:2607:7c80:54:e::133])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2CD2589E65;
+ Mon,  1 Jul 2019 06:20:29 +0000 (UTC)
+Received: from [46.140.178.35] (helo=localhost)
+ by bombadil.infradead.org with esmtpsa (Exim 4.92 #3 (Red Hat Linux))
+ id 1hhpfq-0002sH-DB; Mon, 01 Jul 2019 06:20:22 +0000
+From: Christoph Hellwig <hch@lst.de>
+To: Dan Williams <dan.j.williams@intel.com>,
+ =?UTF-8?q?J=C3=A9r=C3=B4me=20Glisse?= <jglisse@redhat.com>,
+ Jason Gunthorpe <jgg@mellanox.com>, Ben Skeggs <bskeggs@redhat.com>
+Date: Mon,  1 Jul 2019 08:19:58 +0200
+Message-Id: <20190701062020.19239-1-hch@lst.de>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <CAKb7UvgkEXtmJV67EXeBctgaOxM1D91fBbKw9oFMUaB1ZViZQg@mail.gmail.com>
-User-Agent: Mutt/1.12.1 (2019-06-15)
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20161025;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to:user-agent;
- bh=voTuoUFQ5KaHA9/02GEyUejKIGxwvgLp1Lvj8n/za7U=;
- b=d2R/ldYm8Mj0uWNNTMxDFBqHDXXIy/363bp2oqf+P1kkrrgy3/gr808nrwy/TOOwjv
- sIyUHzLcZAPXUVe1TrXscMDs3Ox+yXAhZvzNa/JhAlT5PfSkqtG0ZLSDqL8SvDDPX9Tz
- BSGHi0+RU6f6rJS4qN5ioSuutGmsfLCUYV7TqzMJpxfOxn7D861whFL9PkGJRoPKferC
- IbL9GRimxAf9Qr6HBMq8qrf1RzZUszZrka6xIk3YodtrPg2XyEZHvSGE0Jyt1UKyfTsH
- bRHGlxwskmZV4fKYG6q1RHOz4qMWkrv2R2rbiJ5hdaNHnb9+lwQQN0CL1nrvOhilPkiI
- 1ZyA==
-Subject: Re: [Nouveau] nouveau: DRM: GPU lockup - switching to software fbcon
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
+ bombadil.infradead.org. See http://www.infradead.org/rpr.html
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt;
+ c=relaxed/relaxed; 
+ d=infradead.org; s=bombadil.20170209; h=Content-Transfer-Encoding:
+ Content-Type:MIME-Version:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=6xqIf0xVqrmwyuBYUV8qbkcY4fEJxDo5YYvPGQNv0Dg=; b=GnFpJ4/Oc/100n/wlMN0yyuTT
+ qBVa3bbru2+kI55sKA82ZcwWbugtiuZLwkxnhpe5470h26XmfvTn4dShhCGDC99YkHXONgWcU6z0S
+ 5t/erBmlFFzhqv1WZ+ZnfPaiEb7cET33XrkX7TjbDP0GDKX4lTAs35mFDMwJwFFJXsTbjCCnz9Qsb
+ T3LnzxrWgwM+9wArnuvCnRPC5yeDP07v4E+ncJnB+zriXMvtCe7R2MCuImkRo0lDXVWrImhTs8/Hp
+ vF2SD1TvWGF7X/3d5CVihaeKKlUv9boEcAw2xU/YcQWyjar7krBJ5gs3T6qNDPoM5TghNpS8HWW4h
+ KPFEdN94g==;
+Subject: [Nouveau] dev_pagemap related cleanups v4
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -71,21 +51,40 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Sergey Senozhatsky <sergey.senozhatsky.work@gmail.com>,
- David Airlie <airlied@linux.ie>, nouveau <nouveau@lists.freedesktop.org>,
- LKML <linux-kernel@vger.kernel.org>,
- dri-devel <dri-devel@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>,
- Daniel Vetter <daniel@ffwll.ch>
+Cc: linux-nvdimm@lists.01.org, linux-pci@vger.kernel.org,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ linux-mm@kvack.org, nouveau@lists.freedesktop.org,
+ Ira Weiny <ira.weiny@intel.com>
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-T24gKDA2LzE5LzE5IDAyOjA3KSwgSWxpYSBNaXJraW4gd3JvdGU6Cj4gSWYgYWxsIGVsc2UgZmFp
-bHMsIGp1c3QgcmVtb3ZlIG5vdXZlYXVfZHJpLnNvIGFuZC9vciBib290IHdpdGgKPiBub3V2ZWF1
-Lm5vYWNjZWw9MSAtLSBzaG91bGQgYmUgcGVyZmVjdC4KCm5vdXZlYXUubm9hY2NlbD0xIGRpZCB0
-aGUgdHJpY2suIElzIHRoZXJlIGFueSBvdGhlciwgbGV0J3Mgc2F5Cmxlc3MgQ1BVLWludGVuc2l2
-ZSwgd2F5IHRvIGZpeCBub3V2ZWF1PwoKCS1zcwpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fXwpOb3V2ZWF1IG1haWxpbmcgbGlzdApOb3V2ZWF1QGxpc3RzLmZy
-ZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3Rp
-bmZvL25vdXZlYXU=
+SGkgRGFuLCBKw6lyw7RtZSBhbmQgSmFzb24sCgpiZWxvdyBpcyBhIHNlcmllcyB0aGF0IGNsZWFu
+cyB1cCB0aGUgZGV2X3BhZ2VtYXAgaW50ZXJmYWNlIHNvIHRoYXQKaXQgaXMgbW9yZSBlYXNpbHkg
+dXNhYmxlLCB3aGljaCByZW1vdmVzIHRoZSBuZWVkIHRvIHdyYXAgaXQgaW4gaG1tCmFuZCB0aHVz
+IGFsbG93aW5nIHRvIGtpbGwgYSBsb3Qgb2YgY29kZQoKTm90ZTogdGhpcyBzZXJpZXMgaXMgb24g
+dG9wIG9mIExpbnV4IDUuMi1yYzYgYW5kIGhhcyBzb21lIG1pbm9yCmNvbmZsaWN0cyB3aXRoIHRo
+ZSBobW0gdHJlZSB0aGF0IGFyZSBlYXN5IHRvIHJlc29sdmUuCgpEaWZmc3RhdCBzdW1tYXJ5OgoK
+IDM0IGZpbGVzIGNoYW5nZWQsIDM3OSBpbnNlcnRpb25zKCspLCAxMDE2IGRlbGV0aW9ucygtKQoK
+R2l0IHRyZWU6CgogICAgZ2l0Oi8vZ2l0LmluZnJhZGVhZC5vcmcvdXNlcnMvaGNoL21pc2MuZ2l0
+IGhtbS1kZXZtZW0tY2xlYW51cC40CgpHaXR3ZWI6CgogICAgaHR0cDovL2dpdC5pbmZyYWRlYWQu
+b3JnL3VzZXJzL2hjaC9taXNjLmdpdC9zaG9ydGxvZy9yZWZzL2hlYWRzL2htbS1kZXZtZW0tY2xl
+YW51cC40CgoKQ2hhbmdlcyBzaW5jZSB2MzoKIC0gcHVsbCBpbiAibW0vc3dhcDogRml4IHJlbGVh
+c2VfcGFnZXMoKSB3aGVuIHJlbGVhc2luZyBkZXZtYXAgcGFnZXMiIGFuZAogICByZWJhc2UgdGhl
+IG90aGVyIHBhdGNoZXMgb24gdG9wIG9mIHRoYXQKIC0gZm9sZCB0aGUgaG1tX2Rldm1lbV9hZGRf
+cmVzb3VyY2UgaW50byB0aGUgREVWSUNFX1BVQkxJQyBtZW1vcnkgcmVtb3ZhbAogICBwYXRjaAog
+LSByZW1vdmUgX3ZtX25vcm1hbF9wYWdlIGFzIGl0IGlzbid0IG5lZWRlZCB3aXRob3V0IERFVklD
+RV9QVUJMSUMgbWVtb3J5CiAtIHBpY2sgdXAgdmFyaW91cyBBQ0tzCgpDaGFuZ2VzIHNpbmNlIHYy
+OgogLSBmaXggbnZkaW1tIGt1bml0IGJ1aWxkCiAtIGFkZCBhIG5ldyBtZW1vcnkgdHlwZSBmb3Ig
+ZGV2aWNlIGRheAogLSBmaXggYSBmZXcgaXNzdWVzIGluIGludGVybWVkaWF0ZSBwYXRjaGVzIHRo
+YXQgZGlkbid0IHNob3cgdXAgaW4gdGhlIGVuZAogICByZXN1bHQKIC0gaW5jb3Jwb3JhdGUgZmVl
+ZGJhY2sgZnJvbSBNaWNoYWwgSG9ja28sIGluY2x1ZGluZyBraWxsaW5nIG9mCiAgIHRoZSBERVZJ
+Q0VfUFVCTElDIG1lbW9yeSB0eXBlIGVudGlyZWx5CgpDaGFuZ2VzIHNpbmNlIHYxOgogLSByZWJh
+c2UKIC0gYWxzbyBzd2l0Y2ggcDJwZG1hIHRvIHRoZSBpbnRlcm5hbCByZWZjb3VudAogLSBhZGQg
+dHlwZSBjaGVja2luZyBmb3IgcGdtYXAtPnR5cGUKIC0gcmVuYW1lIHRoZSBtaWdyYXRlIG1ldGhv
+ZCB0byBtaWdyYXRlX3RvX3JhbQogLSBjbGVhbnVwIHRoZSBhbHRtYXBfdmFsaWQgZmxhZwogLSB2
+YXJpb3VzIHRpZGJpdHMgZnJvbSB0aGUgcmV2aWV3cwpfX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fXwpOb3V2ZWF1IG1haWxpbmcgbGlzdApOb3V2ZWF1QGxpc3Rz
+LmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xp
+c3RpbmZvL25vdXZlYXU=
