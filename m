@@ -2,73 +2,80 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6D9DE5BE3A
-	for <lists+nouveau@lfdr.de>; Mon,  1 Jul 2019 16:27:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BA3205D65F
+	for <lists+nouveau@lfdr.de>; Tue,  2 Jul 2019 20:42:13 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id DFEE389B33;
-	Mon,  1 Jul 2019 14:27:01 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1A32E6E02F;
+	Tue,  2 Jul 2019 18:42:12 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from APC01-PU1-obe.outbound.protection.outlook.com
- (mail-eopbgr1320088.outbound.protection.outlook.com [40.107.132.88])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C841089B33
- for <nouveau@lists.freedesktop.org>; Mon,  1 Jul 2019 14:27:00 +0000 (UTC)
-Received: from SG2PR01MB2141.apcprd01.prod.exchangelabs.com (10.170.143.19) by
- SG2PR01MB1904.apcprd01.prod.exchangelabs.com (52.133.137.145) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.2032.20; Mon, 1 Jul 2019 14:26:58 +0000
-Received: from SG2PR01MB2141.apcprd01.prod.exchangelabs.com
- ([fe80::d503:3d71:ce06:19d2]) by SG2PR01MB2141.apcprd01.prod.exchangelabs.com
- ([fe80::d503:3d71:ce06:19d2%6]) with mapi id 15.20.2032.019; Mon, 1 Jul 2019
- 14:26:58 +0000
-From: Turritopsis Dohrnii Teo En Ming <ceo@teo-en-ming-corp.com>
-To: "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>
-Thread-Topic: How do I install nouveau?
-Thread-Index: AdUwGNGHqsI0Khx0R0Wl1iSM4PdBaw==
-Date: Mon, 1 Jul 2019 14:26:58 +0000
-Message-ID: <SG2PR01MB2141479AEFC16069CE5F106E87F90@SG2PR01MB2141.apcprd01.prod.exchangelabs.com>
+Received: from EUR02-VE1-obe.outbound.protection.outlook.com
+ (mail-eopbgr20082.outbound.protection.outlook.com [40.107.2.82])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4D97F6E02F;
+ Tue,  2 Jul 2019 18:42:10 +0000 (UTC)
+Received: from VI1PR05MB4141.eurprd05.prod.outlook.com (10.171.182.144) by
+ VI1PR05MB5855.eurprd05.prod.outlook.com (20.178.125.84) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.2032.20; Tue, 2 Jul 2019 18:42:07 +0000
+Received: from VI1PR05MB4141.eurprd05.prod.outlook.com
+ ([fe80::f5d8:df9:731:682e]) by VI1PR05MB4141.eurprd05.prod.outlook.com
+ ([fe80::f5d8:df9:731:682e%5]) with mapi id 15.20.2032.019; Tue, 2 Jul 2019
+ 18:42:07 +0000
+From: Jason Gunthorpe <jgg@mellanox.com>
+To: Christoph Hellwig <hch@lst.de>
+Thread-Topic: dev_pagemap related cleanups v4
+Thread-Index: AQHVL9UU5cGGdRKLlkyPcV6XfRMxZaa1bVyAgAI+pYA=
+Date: Tue, 2 Jul 2019 18:42:07 +0000
+Message-ID: <20190702184201.GO31718@mellanox.com>
+References: <20190701062020.19239-1-hch@lst.de> <20190701082517.GA22461@lst.de>
+In-Reply-To: <20190701082517.GA22461@lst.de>
 Accept-Language: en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
-x-originating-ip: [118.189.211.120]
+x-clientproxiedby: QB1PR01CA0020.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:c00:2d::33) To VI1PR05MB4141.eurprd05.prod.outlook.com
+ (2603:10a6:803:4d::16)
+x-ms-exchange-messagesentrepresentingtype: 1
+x-originating-ip: [156.34.55.100]
 x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 1914564c-227a-492a-2de2-08d6fe302cbc
+x-ms-office365-filtering-correlation-id: f3e918f6-e7b1-45d3-220d-08d6ff1cfc06
+x-ms-office365-filtering-ht: Tenant
 x-microsoft-antispam: BCL:0; PCL:0;
- RULEID:(2390118)(7020095)(4652040)(7021145)(8989299)(4534185)(7022145)(4603075)(4627221)(201702281549075)(8990200)(7048125)(7024125)(7027125)(7023125)(5600148)(711020)(4605104)(1401327)(2017052603328)(7193020);
- SRVR:SG2PR01MB1904; 
-x-ms-traffictypediagnostic: SG2PR01MB1904:
-x-ms-exchange-purlcount: 4
-x-microsoft-antispam-prvs: <SG2PR01MB190412287C823B7B148B555C87F90@SG2PR01MB1904.apcprd01.prod.exchangelabs.com>
-x-ms-oob-tlc-oobclassifiers: OLM:7691;
-x-forefront-prvs: 00851CA28B
+ RULEID:(2390118)(7020095)(4652040)(8989299)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(5600148)(711020)(4605104)(1401327)(4618075)(2017052603328)(7193020);
+ SRVR:VI1PR05MB5855; 
+x-ms-traffictypediagnostic: VI1PR05MB5855:
+x-ms-exchange-purlcount: 1
+x-microsoft-antispam-prvs: <VI1PR05MB5855D9FC2C87AE8EDF4F3360CFF80@VI1PR05MB5855.eurprd05.prod.outlook.com>
+x-ms-oob-tlc-oobclassifiers: OLM:8273;
+x-forefront-prvs: 008663486A
 x-forefront-antispam-report: SFV:NSPM;
- SFS:(10009020)(346002)(136003)(396003)(366004)(376002)(39830400003)(199004)(189003)(53936002)(2351001)(21615005)(476003)(606006)(86362001)(52536014)(966005)(486006)(107886003)(25786009)(790700001)(3846002)(99286004)(102836004)(26005)(5640700003)(66066001)(68736007)(6916009)(7696005)(71190400001)(4744005)(71200400001)(6116002)(186003)(55016002)(9686003)(54896002)(6306002)(6436002)(4326008)(508600001)(236005)(5660300002)(81166006)(8676002)(81156014)(8936002)(256004)(2501003)(66446008)(66556008)(316002)(14454004)(66946007)(73956011)(1730700003)(7736002)(64756008)(66476007)(74316002)(6506007)(76116006)(33656002)(2906002);
- DIR:OUT; SFP:1101; SCL:1; SRVR:SG2PR01MB1904;
- H:SG2PR01MB2141.apcprd01.prod.exchangelabs.com; FPR:; SPF:None; LANG:en;
- PTR:InfoNoRecords; A:1; MX:1; 
-received-spf: None (protection.outlook.com: teo-en-ming-corp.com does not
- designate permitted sender hosts)
+ SFS:(10009020)(4636009)(366004)(396003)(346002)(136003)(39860400002)(376002)(189003)(199004)(36756003)(305945005)(7736002)(6246003)(2906002)(54906003)(64756008)(81156014)(8676002)(8936002)(86362001)(81166006)(53936002)(316002)(6916009)(68736007)(478600001)(7416002)(3846002)(229853002)(5660300002)(6486002)(66066001)(102836004)(6506007)(66446008)(6512007)(14444005)(26005)(4326008)(25786009)(99286004)(186003)(33656002)(14454004)(486006)(446003)(476003)(6116002)(256004)(6306002)(11346002)(1076003)(6436002)(66476007)(76176011)(73956011)(966005)(52116002)(71200400001)(66946007)(386003)(66556008)(71190400001)(2616005);
+ DIR:OUT; SFP:1101; SCL:1; SRVR:VI1PR05MB5855;
+ H:VI1PR05MB4141.eurprd05.prod.outlook.com; FPR:; SPF:None; LANG:en;
+ PTR:InfoNoRecords; MX:1; A:1; 
+received-spf: None (protection.outlook.com: mellanox.com does not designate
+ permitted sender hosts)
 x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam-message-info: Yg18tr6U6l44PyLnQavkLrdrDJmN7hTA6ciL5jHbArVA/8F84WLv8g4gROSByrhJD5DunO47CcnK4P5PkDIgYxhst7L/n9Aj4ENg/m3WBODfEvXGFFxmgpdBMsuK83gzFqkRY+e37/YsSPiX3fl9BKly7pkuDvau1Whh/WEsrDzC8Hzn8lSN3reTF0ivqPn80dJUa8+BROakfhSk7zxSE+F3z45j3uzFq+qi1uzgAlBI3hxemSM/7sxZccMoCF2KhvsP+bQ/NgOZWwVQ3zgo30TEDji4rpX7dVZKUrCv/iRVLq1qNPuPHNqIEqagqtxtqoBXKkE0gFYReMN22SE5jB1PC0Mi2pWW14xQ+K+U2mRkKw3etqPrb3WO/vDAG8rj6/2hKamndXpjrljvWhvoEXyIAFZatywDGLIyxLBZLUM=
+x-microsoft-antispam-message-info: uxvz6FxwQNsbgdBscCEIRaUYaJ9Hx5UYarazHW+5NehM9eLqQYvVoI1KKwDxw/TefzXSdN5/4xxaq2D7Tani/hQ3Ba46KvDWFZX1MzCawz6jHovyW1WbVATRJPe/6oCfFCi3u7vgRuAnaIKDN7CqC0ljSMhNokZQnmPfYTlZjMpHjSkEb/fv3JDQ1CElySfqAL/l4SpYJpExh8oDwUQRFHHntindvjHxrlA3vnEVyvFJ3u9/MyorpuyISuMH3O9fpPEFzvbkZ+C/6mcbz2FnOogmpZQUZXV8McdcqbNVN5fOXX29ykI848fp6PhT8GI+2FA8t3lq6/klVApz+1NqJaUYSLnxp43VAin0GArLmHF+KBQlgy2AbPkodq7v9nnCYT3QUUxkXF0uDyCQgO7rpgim7bFHYuOpyFu69U5lnyA=
+Content-ID: <ADE83ECAC2BC474EA837455494A5DDBE@eurprd05.prod.outlook.com>
 MIME-Version: 1.0
-X-OriginatorOrg: teo-en-ming-corp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1914564c-227a-492a-2de2-08d6fe302cbc
-X-MS-Exchange-CrossTenant-originalarrivaltime: 01 Jul 2019 14:26:58.0779 (UTC)
+X-OriginatorOrg: Mellanox.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: f3e918f6-e7b1-45d3-220d-08d6ff1cfc06
+X-MS-Exchange-CrossTenant-originalarrivaltime: 02 Jul 2019 18:42:07.4459 (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 23b3f6ae-c453-4b93-aec9-f17508e5885c
+X-MS-Exchange-CrossTenant-id: a652971c-7d2e-4d9b-a6a4-d149256f461b
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: ceo@teo-en-ming-corp.com
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SG2PR01MB1904
+X-MS-Exchange-CrossTenant-userprincipalname: jgg@mellanox.com
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR05MB5855
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=teoenmingcorp.onmicrosoft.com; s=selector1-teoenmingcorp-onmicrosoft-com;
+ d=Mellanox.com; s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=GECFKJHqZ/6SK1rl6sjjuWtrMi18btFeqMdUC8x22lA=;
- b=g+kL3UMYKgkhcpW+FEjGNnQkfXYdvKjLu5HtMwTN0AMw/6mpm80mknsziOj+mqOLJ6MMl9QN0/g9Kkx7ea0/+RQ7SXAs2RG6uHMuVRuQicJ/Ud8xSF8Ef2Y4tZQmWkAb5BVFM/Ik0V2XGGWDdYpytjhvJmgGMMtomDOgkj1bKXA=
+ bh=t+FoI6vpCgiLSBqPMjFHBUD4fTkpXFG2F39LPBhxl74=;
+ b=I9ohJ6GNRLW+Zm+ooghClKVijPw+7yhdPymyZ9UYfnb4h8l6cgxmEgeOCdNbseE8x/L9Ge3wh5JFWVDJkBobwtg4AMDNxisbgOSckJW6DEFsDhCpj4Vvnc0r7ERyJeLyh4zmpM5zcIi36u7IFgX/RRdLh9hX6jYVNuPMYsv81uA=
 X-Mailman-Original-Authentication-Results: spf=none (sender IP is )
- smtp.mailfrom=ceo@teo-en-ming-corp.com; 
-Subject: [Nouveau] How do I install nouveau?
+ smtp.mailfrom=jgg@mellanox.com; 
+Subject: Re: [Nouveau] dev_pagemap related cleanups v4
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -80,194 +87,50 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0580352210=="
+Cc: "linux-nvdimm@lists.01.org" <linux-nvdimm@lists.01.org>,
+ "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
+ "linux-mm@kvack.org" <linux-mm@kvack.org>, Ben Skeggs <bskeggs@redhat.com>,
+ "linux-pci@vger.kernel.org" <linux-pci@vger.kernel.org>,
+ Dan Williams <dan.j.williams@intel.com>, Ira Weiny <ira.weiny@intel.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
---===============0580352210==
-Content-Language: en-US
-Content-Type: multipart/alternative;
-	boundary="_000_SG2PR01MB2141479AEFC16069CE5F106E87F90SG2PR01MB2141apcp_"
-
---_000_SG2PR01MB2141479AEFC16069CE5F106E87F90SG2PR01MB2141apcp_
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
-
-Good evening from Singapore,
-
-How do I install nouveau, the open source graphics device driver for Nvidia=
- video cards on Linux?
-
-Thank you.
-
------BEGIN EMAIL SIGNATURE-----
-
-The Gospel for all Targeted Individuals (TIs):
-
-[The New York Times] Microwave Weapons Are Prime Suspect in Ills of
-U.S. Embassy Workers
-
-Link: https://www.nytimes.com/2018/09/01/science/sonic-attack-cuba-microwav=
-e.html
-
-***************************************************************************=
-*****************
-
-Singaporean Mr. Turritopsis Dohrnii Teo En Ming's Academic
-Qualifications as at 14 Feb 2019
-
-[1] https://tdtemcerts.wordpress.com/
-
-[2] https://tdtemcerts.blogspot.sg/
-
-[3] https://www.scribd.com/user/270125049/Teo-En-Ming
-
------END EMAIL SIGNATURE-----
-
-
---_000_SG2PR01MB2141479AEFC16069CE5F106E87F90SG2PR01MB2141apcp_
-Content-Type: text/html; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
-
-<html xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-micr=
-osoft-com:office:office" xmlns:w=3D"urn:schemas-microsoft-com:office:word" =
-xmlns:m=3D"http://schemas.microsoft.com/office/2004/12/omml" xmlns=3D"http:=
-//www.w3.org/TR/REC-html40">
-<head>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii"=
->
-<meta name=3D"Generator" content=3D"Microsoft Word 15 (filtered medium)">
-<style><!--
-/* Font Definitions */
-@font-face
-	{font-family:"Cambria Math";
-	panose-1:2 4 5 3 5 4 6 3 2 4;}
-@font-face
-	{font-family:DengXian;
-	panose-1:2 1 6 0 3 1 1 1 1 1;}
-@font-face
-	{font-family:Calibri;
-	panose-1:2 15 5 2 2 2 4 3 2 4;}
-@font-face
-	{font-family:"\@DengXian";
-	panose-1:2 1 6 0 3 1 1 1 1 1;}
-/* Style Definitions */
-p.MsoNormal, li.MsoNormal, div.MsoNormal
-	{margin:0cm;
-	margin-bottom:.0001pt;
-	font-size:11.0pt;
-	font-family:"Calibri",sans-serif;}
-a:link, span.MsoHyperlink
-	{mso-style-priority:99;
-	color:#0563C1;
-	text-decoration:underline;}
-a:visited, span.MsoHyperlinkFollowed
-	{mso-style-priority:99;
-	color:#954F72;
-	text-decoration:underline;}
-span.EmailStyle17
-	{mso-style-type:personal-compose;
-	font-family:"Calibri",sans-serif;
-	color:windowtext;}
-.MsoChpDefault
-	{mso-style-type:export-only;
-	font-family:"Calibri",sans-serif;}
-@page WordSection1
-	{size:612.0pt 792.0pt;
-	margin:72.0pt 72.0pt 72.0pt 72.0pt;}
-div.WordSection1
-	{page:WordSection1;}
---></style><!--[if gte mso 9]><xml>
-<o:shapedefaults v:ext=3D"edit" spidmax=3D"1026" />
-</xml><![endif]--><!--[if gte mso 9]><xml>
-<o:shapelayout v:ext=3D"edit">
-<o:idmap v:ext=3D"edit" data=3D"1" />
-</o:shapelayout></xml><![endif]-->
-</head>
-<body lang=3D"EN-SG" link=3D"#0563C1" vlink=3D"#954F72">
-<div class=3D"WordSection1">
-<p class=3D"MsoNormal">Good evening from Singapore,<o:p></o:p></p>
-<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
-<p class=3D"MsoNormal">How do I install nouveau, the open source graphics d=
-evice driver for Nvidia video cards on Linux?<o:p></o:p></p>
-<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
-<p class=3D"MsoNormal">Thank you.<o:p></o:p></p>
-<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
-<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;font-family:&quot;Co=
-urier New&quot;;color:black">-----BEGIN EMAIL SIGNATURE-----<o:p></o:p></sp=
-an></p>
-<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;font-family:&quot;Co=
-urier New&quot;;color:black"><o:p>&nbsp;</o:p></span></p>
-<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;font-family:&quot;Co=
-urier New&quot;;color:black">The Gospel for all Targeted Individuals (TIs):=
-<o:p></o:p></span></p>
-<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;font-family:&quot;Co=
-urier New&quot;;color:black"><o:p>&nbsp;</o:p></span></p>
-<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;font-family:&quot;Co=
-urier New&quot;;color:black">[The New York Times] Microwave Weapons Are Pri=
-me Suspect in Ills of<o:p></o:p></span></p>
-<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;font-family:&quot;Co=
-urier New&quot;;color:black">U.S. Embassy Workers<o:p></o:p></span></p>
-<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;font-family:&quot;Co=
-urier New&quot;;color:black"><o:p>&nbsp;</o:p></span></p>
-<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;font-family:&quot;Co=
-urier New&quot;;color:black">Link:
-<a href=3D"https://www.nytimes.com/2018/09/01/science/sonic-attack-cuba-mic=
-rowave.html">
-<span style=3D"color:blue">https://www.nytimes.com/2018/09/01/science/sonic=
--attack-cuba-microwave.html</span></a><o:p></o:p></span></p>
-<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;font-family:&quot;Co=
-urier New&quot;;color:black"><o:p>&nbsp;</o:p></span></p>
-<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;font-family:&quot;Co=
-urier New&quot;;color:black">**********************************************=
-**********************************************<o:p></o:p></span></p>
-<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;font-family:&quot;Co=
-urier New&quot;;color:black"><o:p>&nbsp;</o:p></span></p>
-<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;font-family:&quot;Co=
-urier New&quot;;color:black">Singaporean Mr. Turritopsis Dohrnii Teo En Min=
-g's Academic<o:p></o:p></span></p>
-<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;font-family:&quot;Co=
-urier New&quot;;color:black">Qualifications as at 14 Feb 2019<o:p></o:p></s=
-pan></p>
-<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;font-family:&quot;Co=
-urier New&quot;;color:black"><o:p>&nbsp;</o:p></span></p>
-<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;font-family:&quot;Co=
-urier New&quot;;color:black">[1]
-<a href=3D"https://tdtemcerts.wordpress.com/"><span style=3D"color:blue">ht=
-tps://tdtemcerts.wordpress.com/</span></a><o:p></o:p></span></p>
-<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;font-family:&quot;Co=
-urier New&quot;;color:black"><o:p>&nbsp;</o:p></span></p>
-<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;font-family:&quot;Co=
-urier New&quot;;color:black">[2]
-<a href=3D"https://tdtemcerts.blogspot.sg/"><span style=3D"color:blue">http=
-s://tdtemcerts.blogspot.sg/</span></a><o:p></o:p></span></p>
-<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;font-family:&quot;Co=
-urier New&quot;;color:black"><o:p>&nbsp;</o:p></span></p>
-<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;font-family:&quot;Co=
-urier New&quot;;color:black">[3]
-<a href=3D"https://www.scribd.com/user/270125049/Teo-En-Ming"><span style=
-=3D"color:blue">https://www.scribd.com/user/270125049/Teo-En-Ming</span></a=
-><o:p></o:p></span></p>
-<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;font-family:&quot;Co=
-urier New&quot;;color:black"><o:p>&nbsp;</o:p></span></p>
-<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;font-family:&quot;Co=
-urier New&quot;;color:black">-----END EMAIL SIGNATURE-----</span><o:p></o:p=
-></p>
-<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
-</div>
-</body>
-</html>
-
---_000_SG2PR01MB2141479AEFC16069CE5F106E87F90SG2PR01MB2141apcp_--
-
---===============0580352210==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
-YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
-cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
-
---===============0580352210==--
+T24gTW9uLCBKdWwgMDEsIDIwMTkgYXQgMTA6MjU6MTdBTSArMDIwMCwgQ2hyaXN0b3BoIEhlbGx3
+aWcgd3JvdGU6Cj4gQW5kIEkndmUgZGVtb25zdHJhdGVkIHRoYXQgSSBjYW4ndCBzZW5kIHBhdGNo
+IHNlcmllcy4uICBXaGlsZSB0aGlzCj4gaGFzIGFsbCB0aGUgcmlnaHQgcGF0Y2hlcywgaXQgYWxz
+byBoYXMgdGhlIGV4dHJhIHBhdGNoZXMgYWxyZWFkeQo+IGluIHRoZSBobW0gdHJlZSwgYW5kIGZv
+dXIgZXh0cmEgcGF0Y2hlcyBJIHdhbnRlZCB0byBzZW5kIG9uY2UKPiB0aGlzIHNlcmllcyBpcyBt
+ZXJnZWQuICBJJ2xsIGdpdmUgdXAgZm9yIG5vdywgcGxlYXNlIHVzZSB0aGUgZ2l0Cj4gdXJsIGZv
+ciBhbnl0aGluZyBzZXJpb3VzLCBhcyBpdCBjb250YWlucyB0aGUgcmlnaHQgdGhpbmcuCgpPa2F5
+LCBJIHNvcnRlZCBpdCBhbGwgb3V0IGFuZCB0ZW1wb3JhcmlseSBwdXQgaXQgaGVyZToKCmh0dHBz
+Oi8vZ2l0aHViLmNvbS9qZ3VudGhvcnBlL2xpbnV4L2NvbW1pdHMvaG1tCgpCaXQgaW52b2x2ZWQg
+am9iOgotIFRvb2sgSXJhJ3MgdjQgcGF0Y2ggaW50byBobW0uZ2l0IGFuZCBjb25maXJtZWQgaXQg
+bWF0Y2hlcyB3aGF0CiAgQW5kcmV3IGhhcyBpbiBsaW51eC1uZXh0IGFmdGVyIGFsbCB0aGUgZml4
+dXBzCi0gQ2hlY2tlZCB5b3VyIGdpdGh1YiB2NCBhbmQgdGhlIHYzIHRoYXQgaGl0IHRoZSBtYWls
+aW5nIGxpc3Qgd2VyZQogIHN1YnN0YW50aWFsbHkgc2ltaWxhciAoSSBuZXZlciBkaWQgZ2V0IGEg
+Y2xlYW4gdjQpIGFuZCBsYXJnZWx5CiAgd2VudCB3aXRoIHRoZSBnaXRodWIgdmVyc2lvbgotIEJh
+c2VkIENIJ3MgdjQgc2VyaWVzIG9uIC1yYzcgYW5kIHB1dCBiYWNrIHRoZSByZW1vdmFsIGh1bmsg
+aW4gc3dhcC5jCiAgc28gaXQgY29tcGlsZXMKLSBNZXJnZSdkIENIJ3Mgc2VyaWVzIHRvIGhtbS5n
+aXQgYW5kIGZpeGVkIGFsbCB0aGUgY29uZmxpY3RzIHdpdGggSXJhCiAgYW5kIFJhbHBoJ3MgcGF0
+Y2hlcyAoc3VjaCB0aGF0IHN3YXAuYyByZW1haW5zIHVuY2hhbmdlZCkKLSBBZGRlZCBEYW4ncyBh
+Y2sncyBhbmQgdGVzdGVkLWJ5J3MKCkkgdGhpbmsgdGhpcyBmYWlybHkgY2xvc2VseSBmb2xsb3dz
+IHdoYXQgd2FzIHBvc3RlZCB0byB0aGUgbWFpbGluZwpsaXN0LgoKQXMgaXQgd2FzIG1vcmUgdGhh
+biBhIHNpbXBsZSAnZ2l0IGFtJywgSSdsbCBsZXQgaXQgc2l0IG9uIGdpdGh1YiB1bnRpbApJIGhl
+YXIgT0sncyB0aGVuIEknbGwgbW92ZSBpdCB0byBrZXJuZWwub3JnJ3MgaG1tLmdpdCBhbmQgaXQg
+d2lsbCBoaXQKbGludXgtbmV4dC4gMC1kYXkgc2hvdWxkIGFsc28gcnVuIG9uIHRoaXMgd2hvbGUg
+dGhpbmcgZnJvbSBteSBnaXRodWIuCgpXaGF0IEkga25vdyBpcyBvdXRzdGFuZGluZzoKIC0gVGhl
+IGNvbmZsaWN0aW5nIEFSTSBwYXRjaGVzLCBJIHVuZGVyc3RhbmQgQW5kcmV3IHdpbGwgaGFuZGxl
+IHRoZXNlCiAgIHBvc3QtbGludXgtbmV4dAogLSBUaGUgY29uZmxpY3Qgd2l0aCBBTUQgR1BVIGlu
+IC1uZXh0LCBJIGFtIHdhaXRpbmcgdG8gaGVhciBmcm9tIEFNRAoKT3RoZXJ3aXNlIEkgdGhpbmsg
+d2UgYXJlIGRvbmUgd2l0aCBobW0uZ2l0IGZvciB0aGlzCmN5Y2xlLgoKVW5mb3J0dW5hdGVseSB0
+aGlzIGlzIHN0aWxsIG5vdCBlbm91Z2ggdG8gcHJvZ3Jlc3MgcmRtYSdzIE9EUCwgc28gd2UKd2ls
+bCBuZWVkIHRvIGRvIHRoaXMgYWdhaW4gbmV4dCBjeWNsZSA6KCBJJ2xsIGJlIHdvcmtpbmcgb24g
+cGF0Y2hlcwpvbmNlIEkgZ2V0IGFsbCB0aGUgbWVyZ2Ugd2luZG93IHByZXAgSSBoYXZlIHRvIGRv
+IGRvbmUuCgpSZWdhcmRzLApKYXNvbgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fXwpOb3V2ZWF1IG1haWxpbmcgbGlzdApOb3V2ZWF1QGxpc3RzLmZyZWVkZXNr
+dG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL25v
+dXZlYXU=
