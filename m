@@ -2,45 +2,58 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 47DAE5ECCD
-	for <lists+nouveau@lfdr.de>; Wed,  3 Jul 2019 21:35:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 303595ED75
+	for <lists+nouveau@lfdr.de>; Wed,  3 Jul 2019 22:26:42 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 64AD76E1C0;
-	Wed,  3 Jul 2019 19:35:36 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id AACF86E1C4;
+	Wed,  3 Jul 2019 20:26:40 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [131.252.210.165])
- by gabe.freedesktop.org (Postfix) with ESMTP id A66E76E1C0
- for <nouveau@lists.freedesktop.org>; Wed,  3 Jul 2019 19:35:35 +0000 (UTC)
-Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id A381C72167; Wed,  3 Jul 2019 19:35:35 +0000 (UTC)
-From: bugzilla-daemon@freedesktop.org
-To: nouveau@lists.freedesktop.org
-Date: Wed, 03 Jul 2019 19:35:35 +0000
-X-Bugzilla-Reason: AssignedTo
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: None
-X-Bugzilla-Product: xorg
-X-Bugzilla-Component: Driver/intel
-X-Bugzilla-Version: git
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: normal
-X-Bugzilla-Who: jhnmlkvch9@gmail.com
-X-Bugzilla-Status: NEW
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: medium
-X-Bugzilla-Assigned-To: chris@chris-wilson.co.uk
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: assigned_to qa_contact component
-Message-ID: <bug-111044-8800-U6zpwm63DU@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-111044-8800@http.bugs.freedesktop.org/>
-References: <bug-111044-8800@http.bugs.freedesktop.org/>
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
+Received: from hqemgate16.nvidia.com (hqemgate16.nvidia.com [216.228.121.65])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 64B8B6E1C4;
+ Wed,  3 Jul 2019 20:26:39 +0000 (UTC)
+Received: from hqpgpgate101.nvidia.com (Not Verified[216.228.121.13]) by
+ hqemgate16.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
+ id <B5d1d0f7d0000>; Wed, 03 Jul 2019 13:26:37 -0700
+Received: from hqmail.nvidia.com ([172.20.161.6])
+ by hqpgpgate101.nvidia.com (PGP Universal service);
+ Wed, 03 Jul 2019 13:26:38 -0700
+X-PGP-Universal: processed;
+ by hqpgpgate101.nvidia.com on Wed, 03 Jul 2019 13:26:38 -0700
+Received: from rcampbell-dev.nvidia.com (10.124.1.5) by HQMAIL107.nvidia.com
+ (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Wed, 3 Jul
+ 2019 20:26:34 +0000
+To: Christoph Hellwig <hch@lst.de>, =?UTF-8?B?SsOpcsO0bWUgR2xpc3Nl?=
+ <jglisse@redhat.com>, Jason Gunthorpe <jgg@mellanox.com>, Ben Skeggs
+ <bskeggs@redhat.com>
+References: <20190703184502.16234-1-hch@lst.de>
+ <20190703184502.16234-6-hch@lst.de>
+X-Nvconfidentiality: public
+From: Ralph Campbell <rcampbell@nvidia.com>
+Message-ID: <d234738d-92ee-a841-5d9b-22881f2ac545@nvidia.com>
+Date: Wed, 3 Jul 2019 13:26:34 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.7.0
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 111044] Resume up from suspend sometimes freezes
- system (Optimus/Nouveau)
+In-Reply-To: <20190703184502.16234-6-hch@lst.de>
+X-Originating-IP: [10.124.1.5]
+X-ClientProxiedBy: HQMAIL105.nvidia.com (172.20.187.12) To
+ HQMAIL107.nvidia.com (172.20.187.13)
+Content-Language: en-US
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=nvidia.com; s=n1; 
+ t=1562185597; bh=rm6vHnMn1NjJ83H8wZDmyjFoYuZQHy+fENvMn/j452Q=;
+ h=X-PGP-Universal:Subject:To:CC:References:X-Nvconfidentiality:From:
+ Message-ID:Date:User-Agent:MIME-Version:In-Reply-To:
+ X-Originating-IP:X-ClientProxiedBy:Content-Type:Content-Language:
+ Content-Transfer-Encoding;
+ b=YGnNDsOJPDkrHnZlPSB55fjBHjofdZ1pqmg5mfa3pGUujmhe6o4wkL5zQFrut+fQL
+ EmRJT13nJsodHkdgKjpZR4k/NVQ+p2haLqoN51ApjjBfdxsQu37mRCZGfnn6ihTByE
+ RqPRggRXqjKi+TPrFy0qX8AWs4E/HIO1hxx+f7X5zz0G3WndR2YJOusT3+PpWP3WqJ
+ GC1OQ7RZna/YgqfIZhbnEszK6cBofosZXX+Adtv7Nj+x4Kwh931vt2y8xYJ1ObEqrj
+ DN+gXSpIZpsebWAzOqem2frFsJh0Yzu9UH1ZaH7KUfDvQlih8aYWqZh7VPKCTVXycB
+ sw34ttIzrFWiQ==
+Subject: Re: [Nouveau] [PATCH 5/5] mm: remove the legacy hmm_pfn_* APIs
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -52,142 +65,54 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1939577797=="
+Cc: linux-mm@kvack.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-
---===============1939577797==
-Content-Type: multipart/alternative; boundary="15621825353.75cbE.9278"
-Content-Transfer-Encoding: 7bit
-
-
---15621825353.75cbE.9278
-Date: Wed, 3 Jul 2019 19:35:35 +0000
-MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-https://bugs.freedesktop.org/show_bug.cgi?id=3D111044
-
-JM9 <jhnmlkvch9@gmail.com> changed:
-
-           What    |Removed                     |Added
-----------------------------------------------------------------------------
-           Assignee|nouveau@lists.freedesktop.o |chris@chris-wilson.co.uk
-                   |rg                          |
-         QA Contact|xorg-team@lists.x.org       |intel-gfx-bugs@lists.freede
-                   |                            |sktop.org
-          Component|Driver/nouveau              |Driver/intel
-
---- Comment #10 from JM9 <jhnmlkvch9@gmail.com> ---
-ok, changing component to Driver/intel.
-
-I'm using xf86-video-intel-git 1:2.99.917+863+g6afed33b-2
-
---=20
-You are receiving this mail because:
-You are the assignee for the bug.=
-
---15621825353.75cbE.9278
-Date: Wed, 3 Jul 2019 19:35:35 +0000
-MIME-Version: 1.0
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-<html>
-    <head>
-      <base href=3D"https://bugs.freedesktop.org/">
-    </head>
-    <body><span class=3D"vcard"><a class=3D"email" href=3D"mailto:jhnmlkvch=
-9&#64;gmail.com" title=3D"JM9 &lt;jhnmlkvch9&#64;gmail.com&gt;"> <span clas=
-s=3D"fn">JM9</span></a>
-</span> changed
-          <a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - Resume up from suspend sometimes freezes system (Optimus/=
-Nouveau)"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111044">bug 11104=
-4</a>
-          <br>
-             <table border=3D"1" cellspacing=3D"0" cellpadding=3D"8">
-          <tr>
-            <th>What</th>
-            <th>Removed</th>
-            <th>Added</th>
-          </tr>
-
-         <tr>
-           <td style=3D"text-align:right;">Assignee</td>
-           <td>nouveau&#64;lists.freedesktop.org
-           </td>
-           <td>chris&#64;chris-wilson.co.uk
-           </td>
-         </tr>
-
-         <tr>
-           <td style=3D"text-align:right;">QA Contact</td>
-           <td>xorg-team&#64;lists.x.org
-           </td>
-           <td>intel-gfx-bugs&#64;lists.freedesktop.org
-           </td>
-         </tr>
-
-         <tr>
-           <td style=3D"text-align:right;">Component</td>
-           <td>Driver/nouveau
-           </td>
-           <td>Driver/intel
-           </td>
-         </tr></table>
-      <p>
-        <div>
-            <b><a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - Resume up from suspend sometimes freezes system (Optimus/=
-Nouveau)"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111044#c10">Comme=
-nt # 10</a>
-              on <a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - Resume up from suspend sometimes freezes system (Optimus/=
-Nouveau)"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111044">bug 11104=
-4</a>
-              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
-jhnmlkvch9&#64;gmail.com" title=3D"JM9 &lt;jhnmlkvch9&#64;gmail.com&gt;"> <=
-span class=3D"fn">JM9</span></a>
-</span></b>
-        <pre>ok, changing component to Driver/intel.
-
-I'm using xf86-video-intel-git 1:2.99.917+863+g6afed33b-2</pre>
-        </div>
-      </p>
-
-
-      <hr>
-      <span>You are receiving this mail because:</span>
-
-      <ul>
-          <li>You are the assignee for the bug.</li>
-      </ul>
-    </body>
-</html>=
-
---15621825353.75cbE.9278--
-
---===============1939577797==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
-YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
-cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
-
---===============1939577797==--
+Ck9uIDcvMy8xOSAxMTo0NSBBTSwgQ2hyaXN0b3BoIEhlbGx3aWcgd3JvdGU6Cj4gU3dpdGNoIHRo
+ZSBvbmUgcmVtYWluaW5nIHVzZXIgaW4gbm91dmVhdSBvdmVyIHRvIGl0cyByZXBsYWNlbWVudCwK
+PiBhbmQgcmVtb3ZlIGFsbCB0aGUgd3JhcHBlcnMuCj4gCj4gU2lnbmVkLW9mZi1ieTogQ2hyaXN0
+b3BoIEhlbGx3aWcgPGhjaEBsc3QuZGU+Cj4gUmV2aWV3ZWQtYnk6IEphc29uIEd1bnRob3JwZSA8
+amdnQG1lbGxhbm94LmNvbT4KClJldmlld2VkLWJ5OiBSYWxwaCBDYW1wYmVsbCA8cmNhbXBiZWxs
+QG52aWRpYS5jb20+Cgo+IC0tLQo+ICAgZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9k
+bWVtLmMgfCAgMiArLQo+ICAgaW5jbHVkZS9saW51eC9obW0uaCAgICAgICAgICAgICAgICAgICAg
+fCAzNCAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQo+ICAgMiBmaWxlcyBjaGFuZ2VkLCAxIGlu
+c2VydGlvbigrKSwgMzUgZGVsZXRpb25zKC0pCj4gCj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1
+L2RybS9ub3V2ZWF1L25vdXZlYXVfZG1lbS5jIGIvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91
+dmVhdV9kbWVtLmMKPiBpbmRleCA0MmMwMjYwMTA5MzguLmI5Y2VkMmU2MTY2NyAxMDA2NDQKPiAt
+LS0gYS9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2RtZW0uYwo+ICsrKyBiL2RyaXZl
+cnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfZG1lbS5jCj4gQEAgLTg0NCw3ICs4NDQsNyBAQCBu
+b3V2ZWF1X2RtZW1fY29udmVydF9wZm4oc3RydWN0IG5vdXZlYXVfZHJtICpkcm0sCj4gICAJCXN0
+cnVjdCBwYWdlICpwYWdlOwo+ICAgCQl1aW50NjRfdCBhZGRyOwo+ICAgCj4gLQkJcGFnZSA9IGht
+bV9wZm5fdG9fcGFnZShyYW5nZSwgcmFuZ2UtPnBmbnNbaV0pOwo+ICsJCXBhZ2UgPSBobW1fZGV2
+aWNlX2VudHJ5X3RvX3BhZ2UocmFuZ2UsIHJhbmdlLT5wZm5zW2ldKTsKPiAgIAkJaWYgKHBhZ2Ug
+PT0gTlVMTCkKPiAgIAkJCWNvbnRpbnVlOwo+ICAgCj4gZGlmZiAtLWdpdCBhL2luY2x1ZGUvbGlu
+dXgvaG1tLmggYi9pbmNsdWRlL2xpbnV4L2htbS5oCj4gaW5kZXggNjU3NjA2ZjQ4Nzk2Li5jZGNk
+Nzg2MjczOTMgMTAwNjQ0Cj4gLS0tIGEvaW5jbHVkZS9saW51eC9obW0uaAo+ICsrKyBiL2luY2x1
+ZGUvbGludXgvaG1tLmgKPiBAQCAtMjkwLDQwICsyOTAsNiBAQCBzdGF0aWMgaW5saW5lIHVpbnQ2
+NF90IGhtbV9kZXZpY2VfZW50cnlfZnJvbV9wZm4oY29uc3Qgc3RydWN0IGhtbV9yYW5nZSAqcmFu
+Z2UsCj4gICAJCXJhbmdlLT5mbGFnc1tITU1fUEZOX1ZBTElEXTsKPiAgIH0KPiAgIAo+IC0vKgo+
+IC0gKiBPbGQgQVBJOgo+IC0gKiBobW1fcGZuX3RvX3BhZ2UoKQo+IC0gKiBobW1fcGZuX3RvX3Bm
+bigpCj4gLSAqIGhtbV9wZm5fZnJvbV9wYWdlKCkKPiAtICogaG1tX3Bmbl9mcm9tX3BmbigpCj4g
+LSAqCj4gLSAqIFRoaXMgYXJlIHRoZSBPTEQgQVBJIHBsZWFzZSB1c2UgbmV3IEFQSSwgaXQgaXMg
+aGVyZSB0byBhdm9pZCBjcm9zcy10cmVlCj4gLSAqIG1lcmdlIHBhaW5mdWxsbmVzcyBpZSB3ZSBj
+b252ZXJ0IHRoaW5ncyB0byBuZXcgQVBJIGluIHN0YWdlcy4KPiAtICovCj4gLXN0YXRpYyBpbmxp
+bmUgc3RydWN0IHBhZ2UgKmhtbV9wZm5fdG9fcGFnZShjb25zdCBzdHJ1Y3QgaG1tX3JhbmdlICpy
+YW5nZSwKPiAtCQkJCQkgICB1aW50NjRfdCBwZm4pCj4gLXsKPiAtCXJldHVybiBobW1fZGV2aWNl
+X2VudHJ5X3RvX3BhZ2UocmFuZ2UsIHBmbik7Cj4gLX0KPiAtCj4gLXN0YXRpYyBpbmxpbmUgdW5z
+aWduZWQgbG9uZyBobW1fcGZuX3RvX3Bmbihjb25zdCBzdHJ1Y3QgaG1tX3JhbmdlICpyYW5nZSwK
+PiAtCQkJCQkgICB1aW50NjRfdCBwZm4pCj4gLXsKPiAtCXJldHVybiBobW1fZGV2aWNlX2VudHJ5
+X3RvX3BmbihyYW5nZSwgcGZuKTsKPiAtfQo+IC0KPiAtc3RhdGljIGlubGluZSB1aW50NjRfdCBo
+bW1fcGZuX2Zyb21fcGFnZShjb25zdCBzdHJ1Y3QgaG1tX3JhbmdlICpyYW5nZSwKPiAtCQkJCQkg
+c3RydWN0IHBhZ2UgKnBhZ2UpCj4gLXsKPiAtCXJldHVybiBobW1fZGV2aWNlX2VudHJ5X2Zyb21f
+cGFnZShyYW5nZSwgcGFnZSk7Cj4gLX0KPiAtCj4gLXN0YXRpYyBpbmxpbmUgdWludDY0X3QgaG1t
+X3Bmbl9mcm9tX3Bmbihjb25zdCBzdHJ1Y3QgaG1tX3JhbmdlICpyYW5nZSwKPiAtCQkJCQl1bnNp
+Z25lZCBsb25nIHBmbikKPiAtewo+IC0JcmV0dXJuIGhtbV9kZXZpY2VfZW50cnlfZnJvbV9wZm4o
+cmFuZ2UsIHBmbik7Cj4gLX0KPiAtCj4gICAvKgo+ICAgICogTWlycm9yaW5nOiBob3cgdG8gc3lu
+Y2hyb25pemUgZGV2aWNlIHBhZ2UgdGFibGUgd2l0aCBDUFUgcGFnZSB0YWJsZS4KPiAgICAqCj4g
+Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCk5vdXZlYXUg
+bWFpbGluZyBsaXN0Ck5vdXZlYXVAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMu
+ZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vbm91dmVhdQ==
