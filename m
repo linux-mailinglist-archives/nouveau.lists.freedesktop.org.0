@@ -1,83 +1,45 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5A8FD5DA53
-	for <lists+nouveau@lfdr.de>; Wed,  3 Jul 2019 03:08:34 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 13D275DE23
+	for <lists+nouveau@lfdr.de>; Wed,  3 Jul 2019 08:37:58 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3A79C6E038;
-	Wed,  3 Jul 2019 01:08:32 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7EC676E0AA;
+	Wed,  3 Jul 2019 06:37:56 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from EUR02-AM5-obe.outbound.protection.outlook.com
- (mail-eopbgr00049.outbound.protection.outlook.com [40.107.0.49])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 874496E038;
- Wed,  3 Jul 2019 01:08:30 +0000 (UTC)
-Received: from VI1PR05MB4141.eurprd05.prod.outlook.com (10.171.182.144) by
- VI1PR05MB6190.eurprd05.prod.outlook.com (20.178.123.161) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.2032.20; Wed, 3 Jul 2019 01:08:27 +0000
-Received: from VI1PR05MB4141.eurprd05.prod.outlook.com
- ([fe80::f5d8:df9:731:682e]) by VI1PR05MB4141.eurprd05.prod.outlook.com
- ([fe80::f5d8:df9:731:682e%5]) with mapi id 15.20.2032.019; Wed, 3 Jul 2019
- 01:08:27 +0000
-From: Jason Gunthorpe <jgg@mellanox.com>
-To: Dan Williams <dan.j.williams@intel.com>
-Thread-Topic: dev_pagemap related cleanups v4
-Thread-Index: AQHVL9UU5cGGdRKLlkyPcV6XfRMxZaa1bVyAgAI+pYCAAE0OAIAAHuWA
-Date: Wed, 3 Jul 2019 01:08:27 +0000
-Message-ID: <20190703010823.GB11833@mellanox.com>
-References: <20190701062020.19239-1-hch@lst.de>
- <20190701082517.GA22461@lst.de> <20190702184201.GO31718@mellanox.com>
- <CAPcyv4iWXJ-c7LahPD=Qt4RuDNTU7w_8HjsitDuj3cxngzb56g@mail.gmail.com>
-In-Reply-To: <CAPcyv4iWXJ-c7LahPD=Qt4RuDNTU7w_8HjsitDuj3cxngzb56g@mail.gmail.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-clientproxiedby: BL0PR0102CA0058.prod.exchangelabs.com
- (2603:10b6:208:25::35) To VI1PR05MB4141.eurprd05.prod.outlook.com
- (2603:10a6:803:4d::16)
-x-ms-exchange-messagesentrepresentingtype: 1
-x-originating-ip: [156.34.55.100]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 666e2153-d0c6-48b5-99ee-08d6ff52f414
-x-ms-office365-filtering-ht: Tenant
-x-microsoft-antispam: BCL:0; PCL:0;
- RULEID:(2390118)(7020095)(4652040)(8989299)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(5600148)(711020)(4605104)(1401327)(4618075)(2017052603328)(7193020);
- SRVR:VI1PR05MB6190; 
-x-ms-traffictypediagnostic: VI1PR05MB6190:
-x-ms-exchange-purlcount: 1
-x-microsoft-antispam-prvs: <VI1PR05MB61903AF6C1A65E8369742AA3CFFB0@VI1PR05MB6190.eurprd05.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:7219;
-x-forefront-prvs: 00872B689F
-x-forefront-antispam-report: SFV:NSPM;
- SFS:(10009020)(4636009)(396003)(346002)(39860400002)(376002)(366004)(136003)(199004)(189003)(36756003)(4326008)(33656002)(26005)(2616005)(81156014)(305945005)(86362001)(6506007)(966005)(53936002)(486006)(186003)(102836004)(446003)(14454004)(386003)(6916009)(6486002)(316002)(476003)(478600001)(81166006)(53546011)(11346002)(8676002)(68736007)(25786009)(8936002)(7416002)(5660300002)(66476007)(6246003)(6306002)(71200400001)(2906002)(64756008)(6512007)(66946007)(66556008)(66446008)(1076003)(73956011)(52116002)(6436002)(3846002)(229853002)(66066001)(76176011)(7736002)(99286004)(54906003)(14444005)(256004)(6116002)(71190400001);
- DIR:OUT; SFP:1101; SCL:1; SRVR:VI1PR05MB6190;
- H:VI1PR05MB4141.eurprd05.prod.outlook.com; FPR:; SPF:None; LANG:en;
- PTR:InfoNoRecords; A:1; MX:1; 
-received-spf: None (protection.outlook.com: mellanox.com does not designate
- permitted sender hosts)
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam-message-info: tDKuuIfgR9oX45s9hP9f7523FVZuj/Cp4IDBxNigMSr5WEC2agQIzrEXUBuNboGMSlvz67S1Uv6KuO5ZVoYd5GYuM2F54yxs2sTTMi7FCmrslBqo7dj9at7q74+TdPen4Ou5eFR3mxXkZfyOMYDWnkaLgqzNL/2If2wmF9amG3XbUzJrrF2i9Y4zdvEfxHk9R6qJRkf1ORCx28U/T4g+NZc4f1kuljqQ7WijxNpAVCogMYiR2X1Bk/db8lPDR/VAJvnU79i6YYQsywnUHwhH1zw+GXfs5OX1quMtO1UbEOoC10CfEL+pXw4pjtS9lPIj4b+ktBwFtMnKhYrF4qAXJUgVjOMvu9C0TEJuKee9QFswmucNkvOOYZpnw8ASNXTTpgYjkkaU87VUc1nZzBDTTlMhEbysA2yhWNye1T9POjE=
-Content-ID: <9433B9982DD5FE40BE697C702241BE2B@eurprd05.prod.outlook.com>
+Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
+ [131.252.210.165])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 3CE4B6E0A0
+ for <nouveau@lists.freedesktop.org>; Wed,  3 Jul 2019 06:37:55 +0000 (UTC)
+Received: by culpepper.freedesktop.org (Postfix, from userid 33)
+ id 3A1DB72167; Wed,  3 Jul 2019 06:37:55 +0000 (UTC)
+From: bugzilla-daemon@freedesktop.org
+To: nouveau@lists.freedesktop.org
+Date: Wed, 03 Jul 2019 06:37:55 +0000
+X-Bugzilla-Reason: AssignedTo
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: None
+X-Bugzilla-Product: xorg
+X-Bugzilla-Component: Driver/nouveau
+X-Bugzilla-Version: unspecified
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: critical
+X-Bugzilla-Who: pdraganov@taxback.com
+X-Bugzilla-Status: REOPENED
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: medium
+X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: bug_status resolution
+Message-ID: <bug-110714-8800-sqnmsBLWap@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-110714-8800@http.bugs.freedesktop.org/>
+References: <bug-110714-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-X-OriginatorOrg: Mellanox.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 666e2153-d0c6-48b5-99ee-08d6ff52f414
-X-MS-Exchange-CrossTenant-originalarrivaltime: 03 Jul 2019 01:08:27.1163 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: a652971c-7d2e-4d9b-a6a4-d149256f461b
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: jgg@mellanox.com
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR05MB6190
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=Mellanox.com; s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=GYH8NoUBbuO2DOp2zCSNKmlTWAV3O/N7vZgO68ZXz/0=;
- b=XPpTI/dvpyr+KQdeVAbwUKBph62vq391kwQ9z8vUhHMjQELdyP2iVsuCI8V3ojKcwRycOSwBRa0cazWesE+wGLDs5A719Gw5wn0NidA7BnveoZaIU1uT97hcXtNLBJZmkCZhUoBuJVr2zyHN7bKMDy4j0+0ME2BA8zmaHzz82NM=
-X-Mailman-Original-Authentication-Results: spf=none (sender IP is )
- smtp.mailfrom=jgg@mellanox.com; 
-Subject: Re: [Nouveau] dev_pagemap related cleanups v4
+Subject: [Nouveau] [Bug 110714] Xorg crashes randomly because of memory leak
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -89,57 +51,200 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: "linux-nvdimm@lists.01.org" <linux-nvdimm@lists.01.org>,
- "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
- "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
- "linux-mm@kvack.org" <linux-mm@kvack.org>, Ben Skeggs <bskeggs@redhat.com>,
- "linux-pci@vger.kernel.org" <linux-pci@vger.kernel.org>,
- Ira Weiny <ira.weiny@intel.com>, Christoph Hellwig <hch@lst.de>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============0040434769=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-T24gVHVlLCBKdWwgMDIsIDIwMTkgYXQgMDQ6MTc6NDhQTSAtMDcwMCwgRGFuIFdpbGxpYW1zIHdy
-b3RlOgo+IE9uIFR1ZSwgSnVsIDIsIDIwMTkgYXQgMTE6NDIgQU0gSmFzb24gR3VudGhvcnBlIDxq
-Z2dAbWVsbGFub3guY29tPiB3cm90ZToKPiA+Cj4gPiBPbiBNb24sIEp1bCAwMSwgMjAxOSBhdCAx
-MDoyNToxN0FNICswMjAwLCBDaHJpc3RvcGggSGVsbHdpZyB3cm90ZToKPiA+ID4gQW5kIEkndmUg
-ZGVtb25zdHJhdGVkIHRoYXQgSSBjYW4ndCBzZW5kIHBhdGNoIHNlcmllcy4uICBXaGlsZSB0aGlz
-Cj4gPiA+IGhhcyBhbGwgdGhlIHJpZ2h0IHBhdGNoZXMsIGl0IGFsc28gaGFzIHRoZSBleHRyYSBw
-YXRjaGVzIGFscmVhZHkKPiA+ID4gaW4gdGhlIGhtbSB0cmVlLCBhbmQgZm91ciBleHRyYSBwYXRj
-aGVzIEkgd2FudGVkIHRvIHNlbmQgb25jZQo+ID4gPiB0aGlzIHNlcmllcyBpcyBtZXJnZWQuICBJ
-J2xsIGdpdmUgdXAgZm9yIG5vdywgcGxlYXNlIHVzZSB0aGUgZ2l0Cj4gPiA+IHVybCBmb3IgYW55
-dGhpbmcgc2VyaW91cywgYXMgaXQgY29udGFpbnMgdGhlIHJpZ2h0IHRoaW5nLgo+ID4KPiA+IE9r
-YXksIEkgc29ydGVkIGl0IGFsbCBvdXQgYW5kIHRlbXBvcmFyaWx5IHB1dCBpdCBoZXJlOgo+ID4K
-PiA+IGh0dHBzOi8vZ2l0aHViLmNvbS9qZ3VudGhvcnBlL2xpbnV4L2NvbW1pdHMvaG1tCj4gPgo+
-ID4gQml0IGludm9sdmVkIGpvYjoKPiA+IC0gVG9vayBJcmEncyB2NCBwYXRjaCBpbnRvIGhtbS5n
-aXQgYW5kIGNvbmZpcm1lZCBpdCBtYXRjaGVzIHdoYXQKPiA+ICAgQW5kcmV3IGhhcyBpbiBsaW51
-eC1uZXh0IGFmdGVyIGFsbCB0aGUgZml4dXBzCj4gPiAtIENoZWNrZWQgeW91ciBnaXRodWIgdjQg
-YW5kIHRoZSB2MyB0aGF0IGhpdCB0aGUgbWFpbGluZyBsaXN0IHdlcmUKPiA+ICAgc3Vic3RhbnRp
-YWxseSBzaW1pbGFyIChJIG5ldmVyIGRpZCBnZXQgYSBjbGVhbiB2NCkgYW5kIGxhcmdlbHkKPiA+
-ICAgd2VudCB3aXRoIHRoZSBnaXRodWIgdmVyc2lvbgo+ID4gLSBCYXNlZCBDSCdzIHY0IHNlcmll
-cyBvbiAtcmM3IGFuZCBwdXQgYmFjayB0aGUgcmVtb3ZhbCBodW5rIGluIHN3YXAuYwo+ID4gICBz
-byBpdCBjb21waWxlcwo+ID4gLSBNZXJnZSdkIENIJ3Mgc2VyaWVzIHRvIGhtbS5naXQgYW5kIGZp
-eGVkIGFsbCB0aGUgY29uZmxpY3RzIHdpdGggSXJhCj4gPiAgIGFuZCBSYWxwaCdzIHBhdGNoZXMg
-KHN1Y2ggdGhhdCBzd2FwLmMgcmVtYWlucyB1bmNoYW5nZWQpCj4gPiAtIEFkZGVkIERhbidzIGFj
-aydzIGFuZCB0ZXN0ZWQtYnkncwo+IAo+IExvb2tzIGdvb2QuIFRlc3QgbWVyZ2UgKHdpdGggc29t
-ZSBjb2xsaXNpb25zLCBzZWUgYmVsb3cpIGFsc28gcGFzc2VzCj4gbXkgdGVzdCBzdWl0ZS4KCk9r
-YXksIHB1Ymxpc2hlZCB0b3dhcmQgbGludXgtbmV4dCBub3cKCj4gPgo+ID4gSSB0aGluayB0aGlz
-IGZhaXJseSBjbG9zZWx5IGZvbGxvd3Mgd2hhdCB3YXMgcG9zdGVkIHRvIHRoZSBtYWlsaW5nCj4g
-PiBsaXN0Lgo+ID4KPiA+IEFzIGl0IHdhcyBtb3JlIHRoYW4gYSBzaW1wbGUgJ2dpdCBhbScsIEkn
-bGwgbGV0IGl0IHNpdCBvbiBnaXRodWIgdW50aWwKPiA+IEkgaGVhciBPSydzIHRoZW4gSSdsbCBt
-b3ZlIGl0IHRvIGtlcm5lbC5vcmcncyBobW0uZ2l0IGFuZCBpdCB3aWxsIGhpdAo+ID4gbGludXgt
-bmV4dC4gMC1kYXkgc2hvdWxkIGFsc28gcnVuIG9uIHRoaXMgd2hvbGUgdGhpbmcgZnJvbSBteSBn
-aXRodWIuCj4gPgo+ID4gV2hhdCBJIGtub3cgaXMgb3V0c3RhbmRpbmc6Cj4gPiAgLSBUaGUgY29u
-ZmxpY3RpbmcgQVJNIHBhdGNoZXMsIEkgdW5kZXJzdGFuZCBBbmRyZXcgd2lsbCBoYW5kbGUgdGhl
-c2UKPiA+ICAgIHBvc3QtbGludXgtbmV4dAo+ID4gIC0gVGhlIGNvbmZsaWN0IHdpdGggQU1EIEdQ
-VSBpbiAtbmV4dCwgSSBhbSB3YWl0aW5nIHRvIGhlYXIgZnJvbSBBTUQKPiAKPiBKdXN0IGEgaGVh
-ZHMgdXAgdGhhdCB0aGlzIGFsc28gY29sbGlkZXMgd2l0aCB0aGUgInN1Yi1zZWN0aW9uIiBwYXRj
-aGVzCj4gaW4gQW5kcmV3J3MgdHJlZS4gVGhlIHJlc29sdXRpb24gaXMgc3RyYWlnaHRmb3J3YXJk
-LCBtb3N0bHkganVzdAo+IGNvbGxpZGluZyB1cGRhdGVzIHRvIGFyY2hfe2FkZCxyZW1vdmV9X21l
-bW9yeSgpIGNhbGwgc2l0ZXMgaW4KPiBrZXJuZWwvbWVtcmVtYXAuYyBhbmQgY29sbGlzaW9ucyB3
-aXRoIHBnbWFwX2FsdG1hcCgpIHVzYWdlLgoKT2theSwgdGhhbmtzCgpKYXNvbgpfX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpOb3V2ZWF1IG1haWxpbmcgbGlz
-dApOb3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9w
-Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL25vdXZlYXU=
+
+--===============0040434769==
+Content-Type: multipart/alternative; boundary="15621358751.2E4c23A.17259"
+Content-Transfer-Encoding: 7bit
+
+
+--15621358751.2E4c23A.17259
+Date: Wed, 3 Jul 2019 06:37:55 +0000
+MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+https://bugs.freedesktop.org/show_bug.cgi?id=3D110714
+
+Peter Draganov <pdraganov@taxback.com> changed:
+
+           What    |Removed                     |Added
+----------------------------------------------------------------------------
+             Status|RESOLVED                    |REOPENED
+         Resolution|NOTOURBUG                   |---
+
+--- Comment #4 from Peter Draganov <pdraganov@taxback.com> ---
+The problem persists in xorg-x11-server-Xorg-1.20.5-3.fc30.x86_64:
+
+[113930.196] (EE) glamor0: GL error: GL_OUT_OF_MEMORY in glTexSubImage
+[113930.198] (WW) glamor: Failed to allocate 5x1 FBO due to GL_OUT_OF_MEMOR=
+Y.
+[113930.198] (WW) glamor: Expect reduced performance.
+[113930.198] (EE)=20
+[113930.198] (EE) Backtrace:
+[113930.235] (EE) 0: /usr/libexec/Xorg (OsLookupColor+0x13c) [0x5637893b8ad=
+c]
+[113930.238] (EE) unw_get_proc_name failed: no unwind info found [-10]
+[113930.238] (EE) 1: /lib64/libpthread.so.0 (?+0x0) [0x7f264909ee7f]
+[113930.239] (EE) 2: /usr/lib64/xorg/modules/libglamoregl.so
+(glamor_get_pixmap_texture+0xa1) [0x7f2648726181]
+[113930.240] (EE) 3: /usr/lib64/xorg/modules/libglamoregl.so
+(glamor_create_gc+0x7b84) [0x7f2648738814]
+[113930.241] (EE) 4: /usr/lib64/xorg/modules/libglamoregl.so
+(glamor_create_gc+0x7f64) [0x7f2648738f84]
+[113930.241] (EE) 5: /usr/lib64/xorg/modules/libglamoregl.so
+(glamor_create_gc+0x85bf) [0x7f264873975f]
+[113930.242] (EE) 6: /usr/lib64/xorg/modules/libglamoregl.so
+(glamor_create_gc+0xa57a) [0x7f264873d34a]
+[113930.242] (EE) 7: /usr/libexec/Xorg (DamageRegionAppend+0x6c0)
+[0x56378933a670]
+[113930.243] (EE) 8: /usr/lib64/xorg/modules/libglamoregl.so
+(glamor_create_gc+0x1150a) [0x7f264874b92a]
+[113930.243] (EE) 9: /usr/libexec/Xorg (AddTraps+0x4238) [0x563789332eb8]
+[113930.243] (EE) 10: /usr/libexec/Xorg (SendErrorToClient+0x354)
+[0x563789259d54]
+[113930.243] (EE) 11: /usr/libexec/Xorg (InitFonts+0x3b4) [0x56378925de14]
+[113930.244] (EE) unw_get_proc_name failed: no unwind info found [-10]
+[113930.244] (EE) 12: /lib/libc.so.6 (?+0x0) [0x7f2648ee9e40]
+[113930.244] (EE) 13: /usr/libexec/Xorg (_start+0x2e) [0x56378924786e]
+[113930.244] (EE)=20
+[113930.244] (EE) Segmentation fault at address 0x0
+[113930.244] (EE)=20
+Fatal server error:
+[113930.244] (EE) Caught signal 11 (Segmentation fault). Server aborting
+
+--=20
+You are receiving this mail because:
+You are the assignee for the bug.=
+
+--15621358751.2E4c23A.17259
+Date: Wed, 3 Jul 2019 06:37:55 +0000
+MIME-Version: 1.0
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+<html>
+    <head>
+      <base href=3D"https://bugs.freedesktop.org/">
+    </head>
+    <body><span class=3D"vcard"><a class=3D"email" href=3D"mailto:pdraganov=
+&#64;taxback.com" title=3D"Peter Draganov &lt;pdraganov&#64;taxback.com&gt;=
+"> <span class=3D"fn">Peter Draganov</span></a>
+</span> changed
+          <a class=3D"bz_bug_link=20
+          bz_status_REOPENED "
+   title=3D"REOPENED - Xorg crashes randomly because of memory leak"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110714">bug 11071=
+4</a>
+          <br>
+             <table border=3D"1" cellspacing=3D"0" cellpadding=3D"8">
+          <tr>
+            <th>What</th>
+            <th>Removed</th>
+            <th>Added</th>
+          </tr>
+
+         <tr>
+           <td style=3D"text-align:right;">Status</td>
+           <td>RESOLVED
+           </td>
+           <td>REOPENED
+           </td>
+         </tr>
+
+         <tr>
+           <td style=3D"text-align:right;">Resolution</td>
+           <td>NOTOURBUG
+           </td>
+           <td>---
+           </td>
+         </tr></table>
+      <p>
+        <div>
+            <b><a class=3D"bz_bug_link=20
+          bz_status_REOPENED "
+   title=3D"REOPENED - Xorg crashes randomly because of memory leak"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110714#c4">Commen=
+t # 4</a>
+              on <a class=3D"bz_bug_link=20
+          bz_status_REOPENED "
+   title=3D"REOPENED - Xorg crashes randomly because of memory leak"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110714">bug 11071=
+4</a>
+              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
+pdraganov&#64;taxback.com" title=3D"Peter Draganov &lt;pdraganov&#64;taxbac=
+k.com&gt;"> <span class=3D"fn">Peter Draganov</span></a>
+</span></b>
+        <pre>The problem persists in xorg-x11-server-Xorg-1.20.5-3.fc30.x86=
+_64:
+
+[113930.196] (EE) glamor0: GL error: GL_OUT_OF_MEMORY in glTexSubImage
+[113930.198] (WW) glamor: Failed to allocate 5x1 FBO due to GL_OUT_OF_MEMOR=
+Y.
+[113930.198] (WW) glamor: Expect reduced performance.
+[113930.198] (EE)=20
+[113930.198] (EE) Backtrace:
+[113930.235] (EE) 0: /usr/libexec/Xorg (OsLookupColor+0x13c) [0x5637893b8ad=
+c]
+[113930.238] (EE) unw_get_proc_name failed: no unwind info found [-10]
+[113930.238] (EE) 1: /lib64/libpthread.so.0 (?+0x0) [0x7f264909ee7f]
+[113930.239] (EE) 2: /usr/lib64/xorg/modules/libglamoregl.so
+(glamor_get_pixmap_texture+0xa1) [0x7f2648726181]
+[113930.240] (EE) 3: /usr/lib64/xorg/modules/libglamoregl.so
+(glamor_create_gc+0x7b84) [0x7f2648738814]
+[113930.241] (EE) 4: /usr/lib64/xorg/modules/libglamoregl.so
+(glamor_create_gc+0x7f64) [0x7f2648738f84]
+[113930.241] (EE) 5: /usr/lib64/xorg/modules/libglamoregl.so
+(glamor_create_gc+0x85bf) [0x7f264873975f]
+[113930.242] (EE) 6: /usr/lib64/xorg/modules/libglamoregl.so
+(glamor_create_gc+0xa57a) [0x7f264873d34a]
+[113930.242] (EE) 7: /usr/libexec/Xorg (DamageRegionAppend+0x6c0)
+[0x56378933a670]
+[113930.243] (EE) 8: /usr/lib64/xorg/modules/libglamoregl.so
+(glamor_create_gc+0x1150a) [0x7f264874b92a]
+[113930.243] (EE) 9: /usr/libexec/Xorg (AddTraps+0x4238) [0x563789332eb8]
+[113930.243] (EE) 10: /usr/libexec/Xorg (SendErrorToClient+0x354)
+[0x563789259d54]
+[113930.243] (EE) 11: /usr/libexec/Xorg (InitFonts+0x3b4) [0x56378925de14]
+[113930.244] (EE) unw_get_proc_name failed: no unwind info found [-10]
+[113930.244] (EE) 12: /lib/libc.so.6 (?+0x0) [0x7f2648ee9e40]
+[113930.244] (EE) 13: /usr/libexec/Xorg (_start+0x2e) [0x56378924786e]
+[113930.244] (EE)=20
+[113930.244] (EE) Segmentation fault at address 0x0
+[113930.244] (EE)=20
+Fatal server error:
+[113930.244] (EE) Caught signal 11 (Segmentation fault). Server aborting</p=
+re>
+        </div>
+      </p>
+
+
+      <hr>
+      <span>You are receiving this mail because:</span>
+
+      <ul>
+          <li>You are the assignee for the bug.</li>
+      </ul>
+    </body>
+</html>=
+
+--15621358751.2E4c23A.17259--
+
+--===============0040434769==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
+YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
+cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============0040434769==--
