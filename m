@@ -1,56 +1,46 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 675EF5D85F
-	for <lists+nouveau@lfdr.de>; Wed,  3 Jul 2019 01:18:06 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2BF945D885
+	for <lists+nouveau@lfdr.de>; Wed,  3 Jul 2019 02:00:44 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E8D546E0A5;
-	Tue,  2 Jul 2019 23:18:01 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 35BF36E0AE;
+	Wed,  3 Jul 2019 00:00:42 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-oi1-x242.google.com (mail-oi1-x242.google.com
- [IPv6:2607:f8b0:4864:20::242])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 2E6EC6E09E
- for <nouveau@lists.freedesktop.org>; Tue,  2 Jul 2019 23:18:00 +0000 (UTC)
-Received: by mail-oi1-x242.google.com with SMTP id m202so435682oig.6
- for <nouveau@lists.freedesktop.org>; Tue, 02 Jul 2019 16:18:00 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=u5UwRiHjXkEAlhFHmvxN8ePNlS4fXC/47jr2WEGpIzo=;
- b=k17UMpIw4GaXCehBHusjqBMIT79y1PdSNPHlTeu01Y/0Ej0mGey9p9eGU9cQsuNsKp
- x3N/PJ8/EP5z1u0K9dw4SI36SI9JRizS6JLVEgTG41aZBl7qw/hdkiSMH1UQlTXPjSQY
- WH39EWSFnm1TAfriFbs57TRz7yv5Ey0EJ4FOkvgNSF2L2/YM61G80JPc3tiT9doxfYln
- HSUaMsMKvE+T0eLh2Sxywjnk7z1xd3vvKPoe0yB31fAOLc1p7eFUJEDdZ4JUgivgSJ0a
- 45rTXu+KRJN+Jk9m5483948sxUv/L6NtjIhCuN++k4bC5FX9bvPgzkoDxK5Ls+8IdAKl
- z80Q==
-X-Gm-Message-State: APjAAAW+0xvYVPu4cYP4ArKd0pbcwjmcNueeSF935wtZlOF3R/Jv4Djb
- 4PI86JGSuA++ezmtfRox6uNp3FFN6U8AU9L7VPMsgg==
-X-Google-Smtp-Source: APXvYqyLlYpHy9+AMc/X38t5BFMinZJQ01XTqDg0vHmjdWTN0eXoTzXdkzMkhqYvcnewmJArWXl9rZoSGD4d6S4ISik=
-X-Received: by 2002:aca:ec82:: with SMTP id k124mr4183998oih.73.1562109479302; 
- Tue, 02 Jul 2019 16:17:59 -0700 (PDT)
+Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
+ [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 4946B6E0AA
+ for <nouveau@lists.freedesktop.org>; Wed,  3 Jul 2019 00:00:41 +0000 (UTC)
+Received: by culpepper.freedesktop.org (Postfix, from userid 33)
+ id 454E872167; Wed,  3 Jul 2019 00:00:41 +0000 (UTC)
+From: bugzilla-daemon@freedesktop.org
+To: nouveau@lists.freedesktop.org
+Date: Wed, 03 Jul 2019 00:00:38 +0000
+X-Bugzilla-Reason: AssignedTo
+X-Bugzilla-Type: new
+X-Bugzilla-Watch-Reason: None
+X-Bugzilla-Product: xorg
+X-Bugzilla-Component: Driver/nouveau
+X-Bugzilla-Version: git
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: normal
+X-Bugzilla-Who: jhnmlkvch9@gmail.com
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: medium
+X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: bug_id short_desc product version rep_platform
+ op_sys bug_status bug_severity priority component assigned_to reporter
+ qa_contact
+Message-ID: <bug-111044-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-References: <20190701062020.19239-1-hch@lst.de> <20190701082517.GA22461@lst.de>
- <20190702184201.GO31718@mellanox.com>
-In-Reply-To: <20190702184201.GO31718@mellanox.com>
-From: Dan Williams <dan.j.williams@intel.com>
-Date: Tue, 2 Jul 2019 16:17:48 -0700
-Message-ID: <CAPcyv4iWXJ-c7LahPD=Qt4RuDNTU7w_8HjsitDuj3cxngzb56g@mail.gmail.com>
-To: Jason Gunthorpe <jgg@mellanox.com>
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=intel-com.20150623.gappssmtp.com; s=20150623;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc;
- bh=u5UwRiHjXkEAlhFHmvxN8ePNlS4fXC/47jr2WEGpIzo=;
- b=OuN/4ptiyR+plJoUbh14HMfrLiUOlvumFP0tzROycbsFqfygYxNO3xqFi028k9qP6U
- 2hsxYQ/2r3+ffTRQvqv/sCf8RYf+3AvuvLqH7ogDKbeVFyv/k7MsfBkCxG4uRyEvLytD
- 3hBMhCKOWYcfttKhsfT8Y19T3NlQHBTeuu1o3bC0SKi1LDuyTUAXjHnls8TPzw595KLC
- nNTom92Iwyk5ROjrmSXSDkHChpxbNbnGWGRWyw3laBL4fIp/E7U50dYgr8AGkfNKV1ux
- j9NiIvFe4orlhguGifJ7Su4YhO973/sL8kBVtipoBIsWxN1zYFyjnK/YO/aROHHw66yH
- 203w==
-Subject: Re: [Nouveau] dev_pagemap related cleanups v4
+Subject: [Nouveau] [Bug 111044] New: Resume up from suspend sometimes
+ freezes system (Optimus/Nouveau)
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -62,53 +52,218 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: "linux-nvdimm@lists.01.org" <linux-nvdimm@lists.01.org>,
- "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
- "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
- "linux-mm@kvack.org" <linux-mm@kvack.org>, Ben Skeggs <bskeggs@redhat.com>,
- "linux-pci@vger.kernel.org" <linux-pci@vger.kernel.org>,
- Ira Weiny <ira.weiny@intel.com>, Christoph Hellwig <hch@lst.de>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1892290876=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-T24gVHVlLCBKdWwgMiwgMjAxOSBhdCAxMTo0MiBBTSBKYXNvbiBHdW50aG9ycGUgPGpnZ0BtZWxs
-YW5veC5jb20+IHdyb3RlOgo+Cj4gT24gTW9uLCBKdWwgMDEsIDIwMTkgYXQgMTA6MjU6MTdBTSAr
-MDIwMCwgQ2hyaXN0b3BoIEhlbGx3aWcgd3JvdGU6Cj4gPiBBbmQgSSd2ZSBkZW1vbnN0cmF0ZWQg
-dGhhdCBJIGNhbid0IHNlbmQgcGF0Y2ggc2VyaWVzLi4gIFdoaWxlIHRoaXMKPiA+IGhhcyBhbGwg
-dGhlIHJpZ2h0IHBhdGNoZXMsIGl0IGFsc28gaGFzIHRoZSBleHRyYSBwYXRjaGVzIGFscmVhZHkK
-PiA+IGluIHRoZSBobW0gdHJlZSwgYW5kIGZvdXIgZXh0cmEgcGF0Y2hlcyBJIHdhbnRlZCB0byBz
-ZW5kIG9uY2UKPiA+IHRoaXMgc2VyaWVzIGlzIG1lcmdlZC4gIEknbGwgZ2l2ZSB1cCBmb3Igbm93
-LCBwbGVhc2UgdXNlIHRoZSBnaXQKPiA+IHVybCBmb3IgYW55dGhpbmcgc2VyaW91cywgYXMgaXQg
-Y29udGFpbnMgdGhlIHJpZ2h0IHRoaW5nLgo+Cj4gT2theSwgSSBzb3J0ZWQgaXQgYWxsIG91dCBh
-bmQgdGVtcG9yYXJpbHkgcHV0IGl0IGhlcmU6Cj4KPiBodHRwczovL2dpdGh1Yi5jb20vamd1bnRo
-b3JwZS9saW51eC9jb21taXRzL2htbQo+Cj4gQml0IGludm9sdmVkIGpvYjoKPiAtIFRvb2sgSXJh
-J3MgdjQgcGF0Y2ggaW50byBobW0uZ2l0IGFuZCBjb25maXJtZWQgaXQgbWF0Y2hlcyB3aGF0Cj4g
-ICBBbmRyZXcgaGFzIGluIGxpbnV4LW5leHQgYWZ0ZXIgYWxsIHRoZSBmaXh1cHMKPiAtIENoZWNr
-ZWQgeW91ciBnaXRodWIgdjQgYW5kIHRoZSB2MyB0aGF0IGhpdCB0aGUgbWFpbGluZyBsaXN0IHdl
-cmUKPiAgIHN1YnN0YW50aWFsbHkgc2ltaWxhciAoSSBuZXZlciBkaWQgZ2V0IGEgY2xlYW4gdjQp
-IGFuZCBsYXJnZWx5Cj4gICB3ZW50IHdpdGggdGhlIGdpdGh1YiB2ZXJzaW9uCj4gLSBCYXNlZCBD
-SCdzIHY0IHNlcmllcyBvbiAtcmM3IGFuZCBwdXQgYmFjayB0aGUgcmVtb3ZhbCBodW5rIGluIHN3
-YXAuYwo+ICAgc28gaXQgY29tcGlsZXMKPiAtIE1lcmdlJ2QgQ0gncyBzZXJpZXMgdG8gaG1tLmdp
-dCBhbmQgZml4ZWQgYWxsIHRoZSBjb25mbGljdHMgd2l0aCBJcmEKPiAgIGFuZCBSYWxwaCdzIHBh
-dGNoZXMgKHN1Y2ggdGhhdCBzd2FwLmMgcmVtYWlucyB1bmNoYW5nZWQpCj4gLSBBZGRlZCBEYW4n
-cyBhY2sncyBhbmQgdGVzdGVkLWJ5J3MKCkxvb2tzIGdvb2QuIFRlc3QgbWVyZ2UgKHdpdGggc29t
-ZSBjb2xsaXNpb25zLCBzZWUgYmVsb3cpIGFsc28gcGFzc2VzCm15IHRlc3Qgc3VpdGUuCgo+Cj4g
-SSB0aGluayB0aGlzIGZhaXJseSBjbG9zZWx5IGZvbGxvd3Mgd2hhdCB3YXMgcG9zdGVkIHRvIHRo
-ZSBtYWlsaW5nCj4gbGlzdC4KPgo+IEFzIGl0IHdhcyBtb3JlIHRoYW4gYSBzaW1wbGUgJ2dpdCBh
-bScsIEknbGwgbGV0IGl0IHNpdCBvbiBnaXRodWIgdW50aWwKPiBJIGhlYXIgT0sncyB0aGVuIEkn
-bGwgbW92ZSBpdCB0byBrZXJuZWwub3JnJ3MgaG1tLmdpdCBhbmQgaXQgd2lsbCBoaXQKPiBsaW51
-eC1uZXh0LiAwLWRheSBzaG91bGQgYWxzbyBydW4gb24gdGhpcyB3aG9sZSB0aGluZyBmcm9tIG15
-IGdpdGh1Yi4KPgo+IFdoYXQgSSBrbm93IGlzIG91dHN0YW5kaW5nOgo+ICAtIFRoZSBjb25mbGlj
-dGluZyBBUk0gcGF0Y2hlcywgSSB1bmRlcnN0YW5kIEFuZHJldyB3aWxsIGhhbmRsZSB0aGVzZQo+
-ICAgIHBvc3QtbGludXgtbmV4dAo+ICAtIFRoZSBjb25mbGljdCB3aXRoIEFNRCBHUFUgaW4gLW5l
-eHQsIEkgYW0gd2FpdGluZyB0byBoZWFyIGZyb20gQU1ECgpKdXN0IGEgaGVhZHMgdXAgdGhhdCB0
-aGlzIGFsc28gY29sbGlkZXMgd2l0aCB0aGUgInN1Yi1zZWN0aW9uIiBwYXRjaGVzCmluIEFuZHJl
-dydzIHRyZWUuIFRoZSByZXNvbHV0aW9uIGlzIHN0cmFpZ2h0Zm9yd2FyZCwgbW9zdGx5IGp1c3QK
-Y29sbGlkaW5nIHVwZGF0ZXMgdG8gYXJjaF97YWRkLHJlbW92ZX1fbWVtb3J5KCkgY2FsbCBzaXRl
-cyBpbgprZXJuZWwvbWVtcmVtYXAuYyBhbmQgY29sbGlzaW9ucyB3aXRoIHBnbWFwX2FsdG1hcCgp
-IHVzYWdlLgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpO
-b3V2ZWF1IG1haWxpbmcgbGlzdApOb3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczov
-L2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL25vdXZlYXU=
+
+--===============1892290876==
+Content-Type: multipart/alternative; boundary="15621120410.E3AB8aa4.7770"
+Content-Transfer-Encoding: 7bit
+
+
+--15621120410.E3AB8aa4.7770
+Date: Wed, 3 Jul 2019 00:00:41 +0000
+MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+https://bugs.freedesktop.org/show_bug.cgi?id=3D111044
+
+            Bug ID: 111044
+           Summary: Resume up from suspend sometimes freezes system
+                    (Optimus/Nouveau)
+           Product: xorg
+           Version: git
+          Hardware: x86-64 (AMD64)
+                OS: Linux (All)
+            Status: NEW
+          Severity: normal
+          Priority: medium
+         Component: Driver/nouveau
+          Assignee: nouveau@lists.freedesktop.org
+          Reporter: jhnmlkvch9@gmail.com
+        QA Contact: xorg-team@lists.x.org
+
+I'm on an Optimus laptop. Every time, I resume from suspend, I get this mes=
+sage
+and the resume succeeds.=20
+
+tmp tpm0: tpm_try_transmit: send(): error -5
+
+However, sometimes, I get this following messages and the system freezes:
+
+nouveau 0000:01: 00.0: disp: outp 03:0006:0f81: link rate unsupported by si=
+nk
+nouveau 0000:01: 00.0: disp: outp 03:0006:0f81: training failed
+
+Not sure if this is relevant, but I also have a external multi-monitor setu=
+p.
+
+
+$lspci -v | grep VGA=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=
+=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=
+=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20
+
+00:02.0 VGA compatible controller: Intel Corporation 4th Gen Core Processor
+Integrated Graphics Controller (rev 06) (prog-if 00 [VGA controller])
+
+01:00.0 VGA compatible controller: NVIDIA Corporation GK104GLM [Quadro K310=
+0M]
+(rev a1) (prog-if 00 [VGA controller])
+
+--=20
+You are receiving this mail because:
+You are the assignee for the bug.=
+
+--15621120410.E3AB8aa4.7770
+Date: Wed, 3 Jul 2019 00:00:41 +0000
+MIME-Version: 1.0
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+<html>
+    <head>
+      <base href=3D"https://bugs.freedesktop.org/">
+    </head>
+    <body><table border=3D"1" cellspacing=3D"0" cellpadding=3D"8">
+        <tr>
+          <th>Bug ID</th>
+          <td><a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - Resume up from suspend sometimes freezes system (Optimus/=
+Nouveau)"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111044">111044</a>
+          </td>
+        </tr>
+
+        <tr>
+          <th>Summary</th>
+          <td>Resume up from suspend sometimes freezes system (Optimus/Nouv=
+eau)
+          </td>
+        </tr>
+
+        <tr>
+          <th>Product</th>
+          <td>xorg
+          </td>
+        </tr>
+
+        <tr>
+          <th>Version</th>
+          <td>git
+          </td>
+        </tr>
+
+        <tr>
+          <th>Hardware</th>
+          <td>x86-64 (AMD64)
+          </td>
+        </tr>
+
+        <tr>
+          <th>OS</th>
+          <td>Linux (All)
+          </td>
+        </tr>
+
+        <tr>
+          <th>Status</th>
+          <td>NEW
+          </td>
+        </tr>
+
+        <tr>
+          <th>Severity</th>
+          <td>normal
+          </td>
+        </tr>
+
+        <tr>
+          <th>Priority</th>
+          <td>medium
+          </td>
+        </tr>
+
+        <tr>
+          <th>Component</th>
+          <td>Driver/nouveau
+          </td>
+        </tr>
+
+        <tr>
+          <th>Assignee</th>
+          <td>nouveau&#64;lists.freedesktop.org
+          </td>
+        </tr>
+
+        <tr>
+          <th>Reporter</th>
+          <td>jhnmlkvch9&#64;gmail.com
+          </td>
+        </tr>
+
+        <tr>
+          <th>QA Contact</th>
+          <td>xorg-team&#64;lists.x.org
+          </td>
+        </tr></table>
+      <p>
+        <div>
+        <pre>I'm on an Optimus laptop. Every time, I resume from suspend, I=
+ get this message
+and the resume succeeds.=20
+
+tmp tpm0: tpm_try_transmit: send(): error -5
+
+However, sometimes, I get this following messages and the system freezes:
+
+nouveau 0000:01: 00.0: disp: outp 03:0006:0f81: link rate unsupported by si=
+nk
+nouveau 0000:01: 00.0: disp: outp 03:0006:0f81: training failed
+
+Not sure if this is relevant, but I also have a external multi-monitor setu=
+p.
+
+
+$lspci -v | grep VGA=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=
+=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=
+=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20
+
+00:02.0 VGA compatible controller: Intel Corporation 4th Gen Core Processor
+Integrated Graphics Controller (rev 06) (prog-if 00 [VGA controller])
+
+01:00.0 VGA compatible controller: NVIDIA Corporation GK104GLM [Quadro K310=
+0M]
+(rev a1) (prog-if 00 [VGA controller])</pre>
+        </div>
+      </p>
+
+
+      <hr>
+      <span>You are receiving this mail because:</span>
+
+      <ul>
+          <li>You are the assignee for the bug.</li>
+      </ul>
+    </body>
+</html>=
+
+--15621120410.E3AB8aa4.7770--
+
+--===============1892290876==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
+YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
+cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============1892290876==--
