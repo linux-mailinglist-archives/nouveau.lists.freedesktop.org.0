@@ -1,46 +1,83 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 24FD05EC0A
-	for <lists+nouveau@lfdr.de>; Wed,  3 Jul 2019 20:56:41 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3DCC65EC11
+	for <lists+nouveau@lfdr.de>; Wed,  3 Jul 2019 21:00:57 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id EE3666E193;
-	Wed,  3 Jul 2019 18:56:38 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 880EB6E1B2;
+	Wed,  3 Jul 2019 19:00:55 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [131.252.210.165])
- by gabe.freedesktop.org (Postfix) with ESMTP id 4DB2C6E194
- for <nouveau@lists.freedesktop.org>; Wed,  3 Jul 2019 18:56:38 +0000 (UTC)
-Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 4B19372167; Wed,  3 Jul 2019 18:56:38 +0000 (UTC)
-From: bugzilla-daemon@freedesktop.org
-To: nouveau@lists.freedesktop.org
-Date: Wed, 03 Jul 2019 18:56:38 +0000
-X-Bugzilla-Reason: AssignedTo
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: None
-X-Bugzilla-Product: xorg
-X-Bugzilla-Component: Driver/nouveau
-X-Bugzilla-Version: git
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: normal
-X-Bugzilla-Who: jhnmlkvch9@gmail.com
-X-Bugzilla-Status: NEW
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: medium
-X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-111044-8800-7hInpfumTM@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-111044-8800@http.bugs.freedesktop.org/>
-References: <bug-111044-8800@http.bugs.freedesktop.org/>
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
+Received: from EUR03-VE1-obe.outbound.protection.outlook.com
+ (mail-ve1eur03on0614.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:fe09::614])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id BFEC46E1AA;
+ Wed,  3 Jul 2019 19:00:53 +0000 (UTC)
+Received: from VI1PR05MB4141.eurprd05.prod.outlook.com (10.171.182.144) by
+ VI1PR05MB6032.eurprd05.prod.outlook.com (20.178.127.217) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.2032.20; Wed, 3 Jul 2019 19:00:50 +0000
+Received: from VI1PR05MB4141.eurprd05.prod.outlook.com
+ ([fe80::f5d8:df9:731:682e]) by VI1PR05MB4141.eurprd05.prod.outlook.com
+ ([fe80::f5d8:df9:731:682e%5]) with mapi id 15.20.2032.019; Wed, 3 Jul 2019
+ 19:00:50 +0000
+From: Jason Gunthorpe <jgg@mellanox.com>
+To: Christoph Hellwig <hch@lst.de>
+Thread-Topic: [PATCH 1/5] mm: return valid info from hmm_range_unregister
+Thread-Index: AQHVMc9vbnYVs0S/206V41dM/fYuDaa5P52A
+Date: Wed, 3 Jul 2019 19:00:50 +0000
+Message-ID: <20190703190045.GN18688@mellanox.com>
+References: <20190703184502.16234-1-hch@lst.de>
+ <20190703184502.16234-2-hch@lst.de>
+In-Reply-To: <20190703184502.16234-2-hch@lst.de>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-clientproxiedby: BL0PR02CA0052.namprd02.prod.outlook.com
+ (2603:10b6:207:3d::29) To VI1PR05MB4141.eurprd05.prod.outlook.com
+ (2603:10a6:803:4d::16)
+x-ms-exchange-messagesentrepresentingtype: 1
+x-originating-ip: [156.34.55.100]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: e5c54ad6-e426-42ce-989f-08d6ffe8c394
+x-ms-office365-filtering-ht: Tenant
+x-microsoft-antispam: BCL:0; PCL:0;
+ RULEID:(2390118)(7020095)(4652040)(8989299)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(5600148)(711020)(4605104)(1401327)(4618075)(2017052603328)(7193020);
+ SRVR:VI1PR05MB6032; 
+x-ms-traffictypediagnostic: VI1PR05MB6032:
+x-microsoft-antispam-prvs: <VI1PR05MB6032B3B10FE9F9E9C6D63DB5CFFB0@VI1PR05MB6032.eurprd05.prod.outlook.com>
+x-ms-oob-tlc-oobclassifiers: OLM:8273;
+x-forefront-prvs: 00872B689F
+x-forefront-antispam-report: SFV:NSPM;
+ SFS:(10009020)(4636009)(366004)(346002)(39860400002)(376002)(136003)(396003)(199004)(189003)(33656002)(26005)(81156014)(316002)(2616005)(36756003)(4326008)(6486002)(86362001)(386003)(81166006)(6506007)(53936002)(186003)(486006)(102836004)(14454004)(8936002)(6916009)(8676002)(305945005)(68736007)(11346002)(478600001)(476003)(446003)(54906003)(66476007)(52116002)(6246003)(5660300002)(2906002)(64756008)(66946007)(6512007)(66446008)(25786009)(73956011)(66556008)(1076003)(6436002)(3846002)(229853002)(99286004)(7736002)(76176011)(71190400001)(14444005)(66066001)(256004)(6116002)(71200400001);
+ DIR:OUT; SFP:1101; SCL:1; SRVR:VI1PR05MB6032;
+ H:VI1PR05MB4141.eurprd05.prod.outlook.com; FPR:; SPF:None; LANG:en;
+ PTR:InfoNoRecords; A:1; MX:1; 
+received-spf: None (protection.outlook.com: mellanox.com does not designate
+ permitted sender hosts)
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam-message-info: tGLXfkxhn4UMvbBsaWRxIq0U0KZWaqqcr+rFSUIlHqJy9FP57IS59e+yPBehjk1jXreBrmMYaZKLDwE60fBKQncizWEKCVlj7f2vVm63/bzW05sS2PMhxm398RP5Hmv/P590lkCoPjMQRKB24p2IP8a8x3NPijoeN+P04YH6/1QVAa/Ik/7e6apiSgb6jpe142Ul4RF7XDbGN/OnPmjZDxet9AOe/f9F5VOtiFbKUcS7Djs89CW1B8IWygw8aQIjhFsM8y5zg6F8pwjrSjrILw1s2W+pW5X1P2ryJv8DOc4BKwt08BVubCP3a7kICP9tfw2lv58U0FlYDvtPxJanewqzVQN4kT2YfhNa4uNVh1wxPLzIUsEU7SwYel5Y7gnz2MQiytuGVMkswgQbJ2vsnwFMaFQae/LCLEwwjkolSqs=
+Content-ID: <9EED1B508716C14685B4671208A7B4A6@eurprd05.prod.outlook.com>
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 111044] Resume up from suspend sometimes freezes
- system (Optimus/Nouveau)
+X-OriginatorOrg: Mellanox.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: e5c54ad6-e426-42ce-989f-08d6ffe8c394
+X-MS-Exchange-CrossTenant-originalarrivaltime: 03 Jul 2019 19:00:50.2152 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: a652971c-7d2e-4d9b-a6a4-d149256f461b
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: jgg@mellanox.com
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR05MB6032
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=Mellanox.com; s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=jW1QLqG0Yl8+6QA1y0hpQO2CW7YVwBm9xRUpZgg5RV8=;
+ b=qCfJh6wtkaqMswWFwHSQZb4Z/kbjELjDI12Ai5aNxFMY7TXtie2JJdRuFId4OaJZbyNV9KI5zcICr+uBShl1DpHfsSe/jRb3b2mOxRKuBi7M4jMhTj9uPZj2VEb+9KLsMewYy1GIqsiltXHOOVmoloXhd95CwvPjfZxYkVR1/DE=
+X-Mailman-Original-Authentication-Results: spf=none (sender IP is )
+ smtp.mailfrom=jgg@mellanox.com; 
+Subject: Re: [Nouveau] [PATCH 1/5] mm: return valid info from
+ hmm_range_unregister
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -52,101 +89,48 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1081470658=="
+Cc: Ralph Campbell <rcampbell@nvidia.com>,
+ "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
+ "linux-mm@kvack.org" <linux-mm@kvack.org>, Ben Skeggs <bskeggs@redhat.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-
---===============1081470658==
-Content-Type: multipart/alternative; boundary="15621801982.7FCd8BF.31212"
-Content-Transfer-Encoding: 7bit
-
-
---15621801982.7FCd8BF.31212
-Date: Wed, 3 Jul 2019 18:56:38 +0000
-MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-https://bugs.freedesktop.org/show_bug.cgi?id=3D111044
-
---- Comment #7 from JM9 <jhnmlkvch9@gmail.com> ---
-ok, thanks. This is what it looks like with all the monitors connected:
-
-/sys/class/drm/card0-eDP-1/status:connected
-/sys/class/drm/card0-VGA-1/status:connected
-/sys/class/drm/card1-DP-1/status:connected
-/sys/class/drm/card1-DP-2/status:disconnected
-/sys/class/drm/card1-DP-3/status:connected
-
---=20
-You are receiving this mail because:
-You are the assignee for the bug.=
-
---15621801982.7FCd8BF.31212
-Date: Wed, 3 Jul 2019 18:56:38 +0000
-MIME-Version: 1.0
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-<html>
-    <head>
-      <base href=3D"https://bugs.freedesktop.org/">
-    </head>
-    <body>
-      <p>
-        <div>
-            <b><a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - Resume up from suspend sometimes freezes system (Optimus/=
-Nouveau)"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111044#c7">Commen=
-t # 7</a>
-              on <a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - Resume up from suspend sometimes freezes system (Optimus/=
-Nouveau)"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111044">bug 11104=
-4</a>
-              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
-jhnmlkvch9&#64;gmail.com" title=3D"JM9 &lt;jhnmlkvch9&#64;gmail.com&gt;"> <=
-span class=3D"fn">JM9</span></a>
-</span></b>
-        <pre>ok, thanks. This is what it looks like with all the monitors c=
-onnected:
-
-/sys/class/drm/card0-eDP-1/status:connected
-/sys/class/drm/card0-VGA-1/status:connected
-/sys/class/drm/card1-DP-1/status:connected
-/sys/class/drm/card1-DP-2/status:disconnected
-/sys/class/drm/card1-DP-3/status:connected</pre>
-        </div>
-      </p>
-
-
-      <hr>
-      <span>You are receiving this mail because:</span>
-
-      <ul>
-          <li>You are the assignee for the bug.</li>
-      </ul>
-    </body>
-</html>=
-
---15621801982.7FCd8BF.31212--
-
---===============1081470658==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
+T24gV2VkLCBKdWwgMDMsIDIwMTkgYXQgMTE6NDQ6NThBTSAtMDcwMCwgQ2hyaXN0b3BoIEhlbGx3
+aWcgd3JvdGU6Cj4gQ2hlY2tpbmcgcmFuZ2UtPnZhbGlkIGlzIHRyaXZpYWwgYW5kIGhhcyBubyBt
+ZWFuaW5nZnVsIGNvc3QsIGJ1dAo+IG5pY2VseSBzaW1wbGlmaWVzIHRoZSBmYXN0cGF0aCBpbiB0
+eXBpY2FsIGNhbGxlcnMuICAKCkl0IHNob3VsZCBub3QgYmUgdGhlIHR5cGljYWwgY2FsbGVyLi4K
+Cj4gaG1tX3ZtYV9yYW5nZV9kb25lIGZ1bmN0aW9uLCB3aGljaCBub3cgaXMgYSB0cml2aWFsIHdy
+YXBwZXIgYXJvdW5kCj4gaG1tX3JhbmdlX3VucmVnaXN0ZXIuCj4gCj4gU2lnbmVkLW9mZi1ieTog
+Q2hyaXN0b3BoIEhlbGx3aWcgPGhjaEBsc3QuZGU+Cj4gUmV2aWV3ZWQtYnk6IFJhbHBoIENhbXBi
+ZWxsIDxyY2FtcGJlbGxAbnZpZGlhLmNvbT4KPiAgZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91
+dmVhdV9zdm0uYyB8ICAyICstCj4gIGluY2x1ZGUvbGludXgvaG1tLmggICAgICAgICAgICAgICAg
+ICAgfCAxMSArLS0tLS0tLS0tLQo+ICBtbS9obW0uYyAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgIHwgIDcgKysrKysrLQo+ICAzIGZpbGVzIGNoYW5nZWQsIDggaW5zZXJ0aW9ucygrKSwgMTIg
+ZGVsZXRpb25zKC0pCj4gCj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25v
+dXZlYXVfc3ZtLmMgYi9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X3N2bS5jCj4gaW5k
+ZXggOGM5MjM3NGFmY2YyLi45ZDQwMTE0ZDc5NDkgMTAwNjQ0Cj4gKysrIGIvZHJpdmVycy9ncHUv
+ZHJtL25vdXZlYXUvbm91dmVhdV9zdm0uYwo+IEBAIC02NTIsNyArNjUyLDcgQEAgbm91dmVhdV9z
+dm1fZmF1bHQoc3RydWN0IG52aWZfbm90aWZ5ICpub3RpZnkpCj4gIAkJcmV0ID0gaG1tX3ZtYV9m
+YXVsdCgmc3ZtbS0+bWlycm9yLCAmcmFuZ2UsIHRydWUpOwo+ICAJCWlmIChyZXQgPT0gMCkgewo+
+ICAJCQltdXRleF9sb2NrKCZzdm1tLT5tdXRleCk7Cj4gLQkJCWlmICghaG1tX3ZtYV9yYW5nZV9k
+b25lKCZyYW5nZSkpIHsKPiArCQkJaWYgKCFobW1fcmFuZ2VfdW5yZWdpc3RlcigmcmFuZ2UpKSB7
+Cj4gIAkJCQltdXRleF91bmxvY2soJnN2bW0tPm11dGV4KTsKPiAgCQkJCWdvdG8gYWdhaW47Cj4g
+IAkJCX0KCkluIHRoaXMgY2FzZSBpZiB3ZSB0YWtlIHRoZSAnZ290byBhZ2FpbicgdGhlbiB3ZSBh
+cmUgcG9pbnRsZXNzbHkKcmVtb3ZpbmcgYW5kIHJlLWFkZGluZyB0aGUgcmFuZ2UuCgpUaGUgcGF0
+dGVybiBpcyBzdXBwb3NlZCB0byBiZToKCiAgICBobW1fcmFuZ2VfcmVnaXN0ZXIoKQphZ2FpbjoK
+ICAgIC4uIHJlYWQgcGFnZSB0YWJsZXMgLi4KICAgIGxvY2sKICAgIGlmICghaG1tX3JhbmdlX3Zh
+bGlkKCkpCiAgICAgICAgdW5sb2NrCiAgICAgICAgZ290byBhZ2FpbgogICAgLi4gc2V0dXAgZGV2
+aWNlIC4uCiAgICB1bmxvY2sKICAgIGhtbV9yYW5nZV91bnJlZ2lzdGVyKCkKCkkgZG9uJ3QgdGhp
+bmsgdGhlIEFQSSBzaG91bGQgYmUgZW5jb3VyYWdpbmcgc29tZSBzaG9ydGN1dCBoZXJlLi4KCldl
+IGNhbid0IGRvIHRoZSBhYm92ZSBwYXR0ZXJuIGJlY2F1c2UgdGhlIG9sZCBobW1fdm1hIEFQSSBk
+aWRuJ3QgYWxsb3cKaXQsIHdoaWNoIGlzIHByZXN1bWFibHkgYSByZWFzb24gd2h5IGl0IGlzIG9i
+c29sZXRlLgoKSSdkIHJhdGhlciBzZWUgZHJpdmVycyBtb3ZlIHRvIGEgY29uc2lzdGVudCBwYXR0
+ZXJuIHNvIHdlIGNhbiB0aGVuCmVhc2lseSBob2lzdCB0aGUgc2VxY291bnQgbG9jayBzY2hlbWUg
+aW50byBzb21lIGNvbW1vbiBtbXUgbm90aWZpZXIKY29kZSwgYXMgZGlzY3Vzc2VkLgoKSmFzb24K
 X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
-
---===============1081470658==--
