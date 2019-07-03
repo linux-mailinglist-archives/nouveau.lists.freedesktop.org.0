@@ -2,24 +2,24 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2BF945D885
-	for <lists+nouveau@lfdr.de>; Wed,  3 Jul 2019 02:00:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DF7105D88F
+	for <lists+nouveau@lfdr.de>; Wed,  3 Jul 2019 02:11:38 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 35BF36E0AE;
-	Wed,  3 Jul 2019 00:00:42 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 739626E0AF;
+	Wed,  3 Jul 2019 00:11:35 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
- by gabe.freedesktop.org (Postfix) with ESMTP id 4946B6E0AA
- for <nouveau@lists.freedesktop.org>; Wed,  3 Jul 2019 00:00:41 +0000 (UTC)
+ [131.252.210.165])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 6707B6E0AD
+ for <nouveau@lists.freedesktop.org>; Wed,  3 Jul 2019 00:11:34 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 454E872167; Wed,  3 Jul 2019 00:00:41 +0000 (UTC)
+ id 62F9872167; Wed,  3 Jul 2019 00:11:34 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Wed, 03 Jul 2019 00:00:38 +0000
+Date: Wed, 03 Jul 2019 00:11:34 +0000
 X-Bugzilla-Reason: AssignedTo
-X-Bugzilla-Type: new
+X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
 X-Bugzilla-Product: xorg
 X-Bugzilla-Component: Driver/nouveau
@@ -32,15 +32,15 @@ X-Bugzilla-Resolution:
 X-Bugzilla-Priority: medium
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: bug_id short_desc product version rep_platform
- op_sys bug_status bug_severity priority component assigned_to reporter
- qa_contact
-Message-ID: <bug-111044-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-Changed-Fields: 
+Message-ID: <bug-111044-8800-r2mdIxrjpv@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-111044-8800@http.bugs.freedesktop.org/>
+References: <bug-111044-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 111044] New: Resume up from suspend sometimes
- freezes system (Optimus/Nouveau)
+Subject: [Nouveau] [Bug 111044] Resume up from suspend sometimes freezes
+ system (Optimus/Nouveau)
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -52,18 +52,18 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1892290876=="
+Content-Type: multipart/mixed; boundary="===============0967843847=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============1892290876==
-Content-Type: multipart/alternative; boundary="15621120410.E3AB8aa4.7770"
+--===============0967843847==
+Content-Type: multipart/alternative; boundary="15621126941.D66F4b4E.9561"
 Content-Transfer-Encoding: 7bit
 
 
---15621120410.E3AB8aa4.7770
-Date: Wed, 3 Jul 2019 00:00:41 +0000
+--15621126941.D66F4b4E.9561
+Date: Wed, 3 Jul 2019 00:11:34 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -72,54 +72,17 @@ Auto-Submitted: auto-generated
 
 https://bugs.freedesktop.org/show_bug.cgi?id=3D111044
 
-            Bug ID: 111044
-           Summary: Resume up from suspend sometimes freezes system
-                    (Optimus/Nouveau)
-           Product: xorg
-           Version: git
-          Hardware: x86-64 (AMD64)
-                OS: Linux (All)
-            Status: NEW
-          Severity: normal
-          Priority: medium
-         Component: Driver/nouveau
-          Assignee: nouveau@lists.freedesktop.org
-          Reporter: jhnmlkvch9@gmail.com
-        QA Contact: xorg-team@lists.x.org
-
-I'm on an Optimus laptop. Every time, I resume from suspend, I get this mes=
-sage
-and the resume succeeds.=20
-
-tmp tpm0: tpm_try_transmit: send(): error -5
-
-However, sometimes, I get this following messages and the system freezes:
-
-nouveau 0000:01: 00.0: disp: outp 03:0006:0f81: link rate unsupported by si=
-nk
-nouveau 0000:01: 00.0: disp: outp 03:0006:0f81: training failed
-
-Not sure if this is relevant, but I also have a external multi-monitor setu=
-p.
-
-
-$lspci -v | grep VGA=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=
-=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=
-=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20
-
-00:02.0 VGA compatible controller: Intel Corporation 4th Gen Core Processor
-Integrated Graphics Controller (rev 06) (prog-if 00 [VGA controller])
-
-01:00.0 VGA compatible controller: NVIDIA Corporation GK104GLM [Quadro K310=
-0M]
-(rev a1) (prog-if 00 [VGA controller])
+--- Comment #1 from JM9 <jhnmlkvch9@gmail.com> ---
+Linux jonmhome 5.1.15-arch1-1-ARCH #1 SMP PREEMPT Tue Jun 25 04:49:39 UTC 2=
+019
+x86_64 GNU/Linux
 
 --=20
 You are receiving this mail because:
 You are the assignee for the bug.=
 
---15621120410.E3AB8aa4.7770
-Date: Wed, 3 Jul 2019 00:00:41 +0000
+--15621126941.D66F4b4E.9561
+Date: Wed, 3 Jul 2019 00:11:34 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -130,117 +93,28 @@ Auto-Submitted: auto-generated
     <head>
       <base href=3D"https://bugs.freedesktop.org/">
     </head>
-    <body><table border=3D"1" cellspacing=3D"0" cellpadding=3D"8">
-        <tr>
-          <th>Bug ID</th>
-          <td><a class=3D"bz_bug_link=20
+    <body>
+      <p>
+        <div>
+            <b><a class=3D"bz_bug_link=20
           bz_status_NEW "
    title=3D"NEW - Resume up from suspend sometimes freezes system (Optimus/=
 Nouveau)"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111044">111044</a>
-          </td>
-        </tr>
-
-        <tr>
-          <th>Summary</th>
-          <td>Resume up from suspend sometimes freezes system (Optimus/Nouv=
-eau)
-          </td>
-        </tr>
-
-        <tr>
-          <th>Product</th>
-          <td>xorg
-          </td>
-        </tr>
-
-        <tr>
-          <th>Version</th>
-          <td>git
-          </td>
-        </tr>
-
-        <tr>
-          <th>Hardware</th>
-          <td>x86-64 (AMD64)
-          </td>
-        </tr>
-
-        <tr>
-          <th>OS</th>
-          <td>Linux (All)
-          </td>
-        </tr>
-
-        <tr>
-          <th>Status</th>
-          <td>NEW
-          </td>
-        </tr>
-
-        <tr>
-          <th>Severity</th>
-          <td>normal
-          </td>
-        </tr>
-
-        <tr>
-          <th>Priority</th>
-          <td>medium
-          </td>
-        </tr>
-
-        <tr>
-          <th>Component</th>
-          <td>Driver/nouveau
-          </td>
-        </tr>
-
-        <tr>
-          <th>Assignee</th>
-          <td>nouveau&#64;lists.freedesktop.org
-          </td>
-        </tr>
-
-        <tr>
-          <th>Reporter</th>
-          <td>jhnmlkvch9&#64;gmail.com
-          </td>
-        </tr>
-
-        <tr>
-          <th>QA Contact</th>
-          <td>xorg-team&#64;lists.x.org
-          </td>
-        </tr></table>
-      <p>
-        <div>
-        <pre>I'm on an Optimus laptop. Every time, I resume from suspend, I=
- get this message
-and the resume succeeds.=20
-
-tmp tpm0: tpm_try_transmit: send(): error -5
-
-However, sometimes, I get this following messages and the system freezes:
-
-nouveau 0000:01: 00.0: disp: outp 03:0006:0f81: link rate unsupported by si=
-nk
-nouveau 0000:01: 00.0: disp: outp 03:0006:0f81: training failed
-
-Not sure if this is relevant, but I also have a external multi-monitor setu=
-p.
-
-
-$lspci -v | grep VGA=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=
-=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=
-=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20
-
-00:02.0 VGA compatible controller: Intel Corporation 4th Gen Core Processor
-Integrated Graphics Controller (rev 06) (prog-if 00 [VGA controller])
-
-01:00.0 VGA compatible controller: NVIDIA Corporation GK104GLM [Quadro K310=
-0M]
-(rev a1) (prog-if 00 [VGA controller])</pre>
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111044#c1">Commen=
+t # 1</a>
+              on <a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - Resume up from suspend sometimes freezes system (Optimus/=
+Nouveau)"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111044">bug 11104=
+4</a>
+              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
+jhnmlkvch9&#64;gmail.com" title=3D"JM9 &lt;jhnmlkvch9&#64;gmail.com&gt;"> <=
+span class=3D"fn">JM9</span></a>
+</span></b>
+        <pre>Linux jonmhome 5.1.15-arch1-1-ARCH #1 SMP PREEMPT Tue Jun 25 0=
+4:49:39 UTC 2019
+x86_64 GNU/Linux</pre>
         </div>
       </p>
 
@@ -254,9 +128,9 @@ Integrated Graphics Controller (rev 06) (prog-if 00 [VGA controller])
     </body>
 </html>=
 
---15621120410.E3AB8aa4.7770--
+--15621126941.D66F4b4E.9561--
 
---===============1892290876==
+--===============0967843847==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -266,4 +140,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============1892290876==--
+--===============0967843847==--
