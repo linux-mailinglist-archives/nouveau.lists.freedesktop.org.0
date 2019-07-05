@@ -2,44 +2,68 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5CFC5605D4
-	for <lists+nouveau@lfdr.de>; Fri,  5 Jul 2019 14:20:07 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0AFC4605F3
+	for <lists+nouveau@lfdr.de>; Fri,  5 Jul 2019 14:33:42 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0A2DD6E3AC;
-	Fri,  5 Jul 2019 12:20:05 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 827D26E497;
+	Fri,  5 Jul 2019 12:33:40 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [131.252.210.165])
- by gabe.freedesktop.org (Postfix) with ESMTP id 89ACC6E21D
- for <nouveau@lists.freedesktop.org>; Fri,  5 Jul 2019 12:20:03 +0000 (UTC)
-Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 7BAD672167; Fri,  5 Jul 2019 12:20:03 +0000 (UTC)
-From: bugzilla-daemon@freedesktop.org
-To: nouveau@lists.freedesktop.org
-Date: Fri, 05 Jul 2019 12:20:03 +0000
-X-Bugzilla-Reason: AssignedTo
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: None
-X-Bugzilla-Product: xorg
-X-Bugzilla-Component: Driver/nouveau
-X-Bugzilla-Version: unspecified
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: critical
-X-Bugzilla-Who: pdraganov@taxback.com
-X-Bugzilla-Status: REOPENED
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: medium
-X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-110714-8800-g92iobulwt@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-110714-8800@http.bugs.freedesktop.org/>
-References: <bug-110714-8800@http.bugs.freedesktop.org/>
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
+Received: from mail-qk1-x743.google.com (mail-qk1-x743.google.com
+ [IPv6:2607:f8b0:4864:20::743])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 42B1C6E499
+ for <nouveau@lists.freedesktop.org>; Fri,  5 Jul 2019 12:33:39 +0000 (UTC)
+Received: by mail-qk1-x743.google.com with SMTP id d15so7741755qkl.4
+ for <nouveau@lists.freedesktop.org>; Fri, 05 Jul 2019 05:33:39 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:content-transfer-encoding
+ :in-reply-to:user-agent;
+ bh=SM8/4exhoEHGZvFQb+ptk62AOWI2rKv8kDwMIolo8dI=;
+ b=SRz2V5zW4KDBaApYx8uK6TN2E0tHIfLV8xJeWGWMaHfUKXVnRdc31ZAilBFh10llpx
+ RQggNTfgCYqBb5wWdpykttJpyj546nIaqYnjatUCqlUCfKfLhdt9+OUStOeS1RT9uIu4
+ EHdZTEGpd+SCurPJqiy5HxaSVxB8PA2bJiP7LF70dtkKYNztcCx/pB4nb+jIo0P0mpte
+ E19/4t4UQF1nR2gNnkDCMK/jgtxehPiD8aARDnrt62DDj2/+4fp+uAADvhwmesQ/wcY0
+ ejGH0QyLFKl51yL3MYsApAqIMAfx1zAFOrlZMeea9xuDpyAtbKtosXvPR8Dh4Q8BJr//
+ rqqw==
+X-Gm-Message-State: APjAAAUK1WDnNDcLUVA+MA8pKmAfj8dn4lgGQduZoU1L8ZRvBy4L8nWK
+ 0wBorqL15ZhbYXrB9IZLFKKuxw==
+X-Google-Smtp-Source: APXvYqyX4DTV+YYFhT5OJ/l0wgbSemi0wOkZLMZP/Jtfy+M9HG6Dx7KgQV0v8jgq8UDEfu8Mwq0uQg==
+X-Received: by 2002:a37:a1d6:: with SMTP id k205mr2848006qke.171.1562330018204; 
+ Fri, 05 Jul 2019 05:33:38 -0700 (PDT)
+Received: from ziepe.ca
+ (hlfxns017vw-156-34-55-100.dhcp-dynamic.fibreop.ns.bellaliant.net.
+ [156.34.55.100])
+ by smtp.gmail.com with ESMTPSA id z33sm2504614qtc.56.2019.07.05.05.33.37
+ (version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+ Fri, 05 Jul 2019 05:33:37 -0700 (PDT)
+Received: from jgg by mlx.ziepe.ca with local (Exim 4.90_1)
+ (envelope-from <jgg@ziepe.ca>)
+ id 1hjNPE-0008UP-St; Fri, 05 Jul 2019 09:33:36 -0300
+Date: Fri, 5 Jul 2019 09:33:36 -0300
+From: Jason Gunthorpe <jgg@ziepe.ca>
+To: Christoph Hellwig <hch@lst.de>
+Message-ID: <20190705123336.GA31543@ziepe.ca>
+References: <20190703220214.28319-1-hch@lst.de>
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 110714] Xorg crashes randomly because of memory leak
+Content-Disposition: inline
+In-Reply-To: <20190703220214.28319-1-hch@lst.de>
+User-Agent: Mutt/1.9.4 (2018-02-28)
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ziepe.ca; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:content-transfer-encoding:in-reply-to
+ :user-agent;
+ bh=SM8/4exhoEHGZvFQb+ptk62AOWI2rKv8kDwMIolo8dI=;
+ b=ckYufb+JTejpyz8pDQLhV2fiq+FAfmAMJXOQOHzRQuW89WYkHU4Lnaf8DM+LDzsQly
+ 7DR9KgHXKyZJ5SQnARXpB7b0GDPR+IzumhAhjFElKZoaWbVQqBzOGuOt2mXTD7nzuXt5
+ rht4Mpc03KaerdCaAGd9Zz+VR1Rrl9rREPc+1J7nPBLLCwdHhPvxkD51oec3BWxH/q5A
+ 8y8smn0+FXxH8Gikf6Oak6WiJwqqFwAOKVh2vW+4toDJIiGZgqAhD4f+Uc2n5IztDsqL
+ u3oZpE+TduYcqojeNfFd5skXHK2hBtPlP72gQxG0RENMyEEMZ5xl0dJFmnFf9EpIr4ix
+ WIHQ==
+Subject: Re: [Nouveau] hmm_range_fault related fixes and legacy API removal
+ v2
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -51,114 +75,21 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0634853178=="
+Cc: Ralph Campbell <rcampbell@nvidia.com>, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ linux-mm@kvack.org, Ben Skeggs <bskeggs@redhat.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-
---===============0634853178==
-Content-Type: multipart/alternative; boundary="15623292030.bC88cb97f.23980"
-Content-Transfer-Encoding: 7bit
-
-
---15623292030.bC88cb97f.23980
-Date: Fri, 5 Jul 2019 12:20:03 +0000
-MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-https://bugs.freedesktop.org/show_bug.cgi?id=3D110714
-
---- Comment #9 from Peter Draganov <pdraganov@taxback.com> ---
- - What clients were running at the time the issue occurred
-Skype, System Monitor, Firefox, Mate Terminal, Libre Office, Caja, TigerVNC,
-Virtualbox, Pluma
- - Any special x11 client that can reproduce?
-have no idea
- - Any particular action that triggers the issue?
-Usually crashes during the night, when a black screen saver is running, but=
- it
-happened several times during the day, when I worked
- - which desktop environment/window manager?
-LightDM/MATE
-
-Basically, anything that could help reproducing...
-Just leave X running long enough time - usually after 2-3 days without rest=
-art
-
---=20
-You are receiving this mail because:
-You are the assignee for the bug.=
-
---15623292030.bC88cb97f.23980
-Date: Fri, 5 Jul 2019 12:20:03 +0000
-MIME-Version: 1.0
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-<html>
-    <head>
-      <base href=3D"https://bugs.freedesktop.org/">
-    </head>
-    <body>
-      <p>
-        <div>
-            <b><a class=3D"bz_bug_link=20
-          bz_status_REOPENED "
-   title=3D"REOPENED - Xorg crashes randomly because of memory leak"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110714#c9">Commen=
-t # 9</a>
-              on <a class=3D"bz_bug_link=20
-          bz_status_REOPENED "
-   title=3D"REOPENED - Xorg crashes randomly because of memory leak"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110714">bug 11071=
-4</a>
-              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
-pdraganov&#64;taxback.com" title=3D"Peter Draganov &lt;pdraganov&#64;taxbac=
-k.com&gt;"> <span class=3D"fn">Peter Draganov</span></a>
-</span></b>
-        <pre> - What clients were running at the time the issue occurred
-Skype, System Monitor, Firefox, Mate Terminal, Libre Office, Caja, TigerVNC,
-Virtualbox, Pluma
- - Any special x11 client that can reproduce?
-have no idea
- - Any particular action that triggers the issue?
-Usually crashes during the night, when a black screen saver is running, but=
- it
-happened several times during the day, when I worked
- - which desktop environment/window manager?
-LightDM/MATE
-
-Basically, anything that could help reproducing...
-Just leave X running long enough time - usually after 2-3 days without rest=
-art</pre>
-        </div>
-      </p>
-
-
-      <hr>
-      <span>You are receiving this mail because:</span>
-
-      <ul>
-          <li>You are the assignee for the bug.</li>
-      </ul>
-    </body>
-</html>=
-
---15623292030.bC88cb97f.23980--
-
---===============0634853178==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
-YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
-cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
-
---===============0634853178==--
+T24gV2VkLCBKdWwgMDMsIDIwMTkgYXQgMDM6MDI6MDhQTSAtMDcwMCwgQ2hyaXN0b3BoIEhlbGx3
+aWcgd3JvdGU6Cj4gSGkgSsOpcsO0bWUsIEJlbiBhbmQgSmFzb24sCj4gCj4gYmVsb3cgaXMgYSBz
+ZXJpZXMgYWdhaW5zdCB0aGUgaG1tIHRyZWUgd2hpY2ggZml4ZXMgdXAgdGhlIG1tYXBfc2VtCj4g
+bG9ja2luZyBpbiBub3V2ZWF1IGFuZCB3aGlsZSBhdCBpdCBhbHNvIHJlbW92ZXMgbGVmdG92ZXIg
+bGVnYWN5IEhNTSBBUElzCj4gb25seSB1c2VkIGJ5IG5vdXZlYXUuCgpBcyBtdWNoIGFzIEkgbGlr
+ZSB0aGlzIHNlcmllcywgaXQgd29uJ3QgbWFrZSBpdCB0byB0aGlzIG1lcmdlIHdpbmRvdywKc29y
+cnkuCgpMZXQncyByZXZpc2l0IGl0IGluIGEgZmV3IHdlZWtzIGF0IHJjMS4KClJlZ2FyZHMsCkph
+c29uCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCk5vdXZl
+YXUgbWFpbGluZyBsaXN0Ck5vdXZlYXVAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlz
+dHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vbm91dmVhdQ==
