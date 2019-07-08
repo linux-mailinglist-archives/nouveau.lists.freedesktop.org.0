@@ -2,59 +2,45 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D170461A46
-	for <lists+nouveau@lfdr.de>; Mon,  8 Jul 2019 07:17:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 93EDC62677
+	for <lists+nouveau@lfdr.de>; Mon,  8 Jul 2019 18:38:28 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D787889958;
-	Mon,  8 Jul 2019 05:17:52 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0CEC16E02D;
+	Mon,  8 Jul 2019 16:38:27 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pl1-x642.google.com (mail-pl1-x642.google.com
- [IPv6:2607:f8b0:4864:20::642])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5790889958
- for <nouveau@lists.freedesktop.org>; Mon,  8 Jul 2019 05:17:52 +0000 (UTC)
-Received: by mail-pl1-x642.google.com with SMTP id a93so7624235pla.7
- for <nouveau@lists.freedesktop.org>; Sun, 07 Jul 2019 22:17:52 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=kKGH7Fm+UtkRTmfD97dfpVU44Qifqi0eGIvlidQWlpA=;
- b=kMvb1vb6q57lLJDRPTc3qIzSUf5+PovOrrSlk3M7dflKloUg2usCOigKgs/o0RTVun
- fnZgAvuVwiAbzt5jD6q47zw7XRu5WOgrWSS1uvXlzE1maxIFR5nWXW2AiylUIWvdaLp1
- R+Tok92kw7QQBzxzDqyweA4lm8taGHDAjEsBAASasWwSSGNh2CjiBPwmQmeAIxT64HkA
- ZCjp7ZnZ53AHSMA4VBX/SkeQwRU5W08QG3QFx3TMRrT+uNEosdJ180mkc3PqqiP4jhFk
- bg/iSYXFF8TLGVwtFmdSw9mAgiE/sCAEOVFwwG6PKZLN4jWjtlwQqMRbS6kPttZcAFUn
- iOEQ==
-X-Gm-Message-State: APjAAAWQU6UdUG/6aEeVlcSVt0qkMSVtVCQWZtM8j1o8UkJuIbUh2kq0
- iammaWD1VhDJ76W2uJLQHvY3U+kdCj6sBQ==
-X-Google-Smtp-Source: APXvYqwBzVoAarNEXzKqPoPbkAxtdk6tQuuubr5M3HlaUEkezuzrnQDMOGDMKPlqlGXFM9Qvg3sApQ==
-X-Received: by 2002:a17:902:2926:: with SMTP id
- g35mr21925842plb.269.1562563071739; 
- Sun, 07 Jul 2019 22:17:51 -0700 (PDT)
-Received: from limbo.local (123-204-46-122.static.seed.net.tw.
- [123.204.46.122])
- by smtp.gmail.com with ESMTPSA id j16sm12954799pjz.31.2019.07.07.22.17.47
- (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
- Sun, 07 Jul 2019 22:17:50 -0700 (PDT)
-From: Daniel Drake <drake@endlessm.com>
-To: bhelgaas@google.com
-Date: Mon,  8 Jul 2019 13:17:44 +0800
-Message-Id: <20190708051744.24039-1-drake@endlessm.com>
-X-Mailer: git-send-email 2.20.1
+Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
+ [131.252.210.165])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 96B466E02D
+ for <nouveau@lists.freedesktop.org>; Mon,  8 Jul 2019 16:38:25 +0000 (UTC)
+Received: by culpepper.freedesktop.org (Postfix, from userid 33)
+ id 89B9E72167; Mon,  8 Jul 2019 16:38:25 +0000 (UTC)
+From: bugzilla-daemon@freedesktop.org
+To: nouveau@lists.freedesktop.org
+Date: Mon, 08 Jul 2019 16:38:25 +0000
+X-Bugzilla-Reason: AssignedTo QAcontact
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: None
+X-Bugzilla-Product: Mesa
+X-Bugzilla-Component: Drivers/DRI/nouveau
+X-Bugzilla-Version: git
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: normal
+X-Bugzilla-Who: freedesktop-bugs@theblob.org
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: medium
+X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: 
+Message-ID: <bug-106294-8800-Yu4puDpyYX@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-106294-8800@http.bugs.freedesktop.org/>
+References: <bug-106294-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=endlessm-com.20150623.gappssmtp.com; s=20150623;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=kKGH7Fm+UtkRTmfD97dfpVU44Qifqi0eGIvlidQWlpA=;
- b=PjIyVxECy2DpiNfzVP3hPhOoGDGDU6HyuRGzJSl0c3QtRezCekJ4G7A/8/nq393Mf6
- l4H0SNF9CNLjtRdPbmzB0SOrhknHG+yQyJJYSuXsoX14OZYdctvWPuhufhD3/eNsrH5u
- WRWu9oZfV2BLHCXa0vs+HCJTxfZMxz/wNpvvclAkGBA/Skd2fkkEBui0ae4KAk4wyGYr
- 1m2EisLHusHsc6yR9UN5CVUJgVJHr2tcHLvo7+CKd2vF77h84qrJI6v0GNF4HjPBa+uV
- qD1WoNkD0EqA2BkIlIS6GmAkRROxKnCyLjDMi5tWocgIVbcZmadLQ9fj8zQZ5ZirUzfa
- MJZg==
-Subject: [Nouveau] [PATCH v2] PCI: Expose hidden NVIDIA HDA controllers
+Subject: [Nouveau] [Bug 106294] GM204/modesetting DDX: Odd corruption (red
+ backgrounds) introduced by Mesa
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -66,102 +52,104 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: aplattner@nvidia.com, linux-pci@vger.kernel.org, hhfeuer@gmx.de,
- nouveau@lists.freedesktop.org, linux@endlessm.com
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============2095562642=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-RnJvbTogTHVrYXMgV3VubmVyIDxsdWthc0B3dW5uZXIuZGU+CgpUaGUgaW50ZWdyYXRlZCBIREEg
-Y29udHJvbGxlciBvbiBOdmlkaWEgR1BVcyBjYW4gYmUgaGlkZGVuIHdpdGggYSBiaXQgaW4KdGhl
-IEdQVSdzIGNvbmZpZyBzcGFjZS4gSW5mb3JtYXRpb24gYWJvdXQgdGhpcyBzY2hlbWUgd2FzIHBy
-b3ZpZGVkIGJ5Ck5WSURJQSBvbiB0aGVpciBmb3J1bXMuCgpNYW55IGxhcHRvcHMgbm93IHNoaXAg
-d2l0aCB0aGlzIGRldmljZSBoaWRkZW4sIG1lYW5pbmcgdGhhdCBMaW51eCB1c2VycwpvZiBhZmZl
-Y3RlZCBwbGF0Zm9ybXMgKHdoZXJlIHRoZSBIRE1JIGNvbm5lY3RvciBjb21lcyBvZmYgdGhlIE5W
-SURJQSBHUFUpCmNhbm5vdCB1c2UgSERNSSBhdWRpbyBmdW5jdGlvbmFsaXR5LgoKU29tZSBwbGF0
-Zm9ybXMgaGF2ZSBBQ1BJIERTRFQgY29kZSB0aGF0IHdpbGwgbWFrZSB0aGUgZGV2aWNlIHZpc2li
-bGUgaWYKdGhlIEhETUkgY2FibGUgd2FzIGNvbm5lY3RlZCBhdCBib290IHRpbWUsIGJ1dCB0aGlz
-IGRvZXMgbm90IGhhbmRsZSB0aGUKaG90cGx1ZyBjYXNlLCBhbmQgdGhpcyBsaW1pdGF0aW9uIGhh
-cyBhbHNvIGJlZW4gY29uZmlybWVkIHVuZGVyIFdpbmRvd3MuCgpBdm9pZCB0aGlzIGlzc3VlIGJ5
-IGV4cG9zaW5nIHRoZSBIRE1JIGF1ZGlvIGRldmljZSBvbiBkZXZpY2UgZW51bWVyYXRpb24KYW5k
-IHJlc3VtZS4KClRoZSBHUFUgYW5kIEhEQSBjb250cm9sbGVyIGFyZSB0d28gZnVuY3Rpb25zIG9m
-IHRoZSBzYW1lIFBDSSBkZXZpY2UKKFZHQSBjbGFzcyBkZXZpY2Ugb24gZnVuY3Rpb24gMCBhbmQg
-YXVkaW8gZGV2aWNlIG9uIGZ1bmN0aW9uIDEpLgpUaGUgbXVsdGlmdW5jdGlvbiBmbGFnIGluIHRo
-ZSBHUFUncyBIZWFkZXIgVHlwZSByZWdpc3RlciBpcyBjbGVhcmVkIHdoZW4KdGhlIEhEQSBjb250
-cm9sbGVyIGlzIGhpZGRlbiBhbmQgc2V0IGlmIGl0J3MgZXhwb3NlZCwgc28gcmVyZWFkIHRoZSBm
-bGFnCmFmdGVyIGV4cG9zaW5nIHRoZSBIREEuCgpBY2NvcmRpbmcgdG8gSWxpYSBNaXJraW4sIHRo
-ZSBIREEgY29udHJvbGxlciBpcyBvbmx5IHByZXNlbnQgb24gR1BVcyB3aXRoClBDSSBJRCB2YWx1
-ZXMgZnJvbSBNQ1A4OSdzIG9ud2FyZHMsIHNvIGRvIG5vdCB0b3VjaCBjb25maWcgc3BhY2Ugb24g
-b2xkZXIKR1BVcy4KClRoaXMgcXVpcmsgaXMgbGltaXRlZCB0byBOVklESUEgUENJIGRldmljZXMg
-d2l0aCB0aGUgVkdBIENvbnRyb2xsZXIKZGV2aWNlIGNsYXNzLiBUaGlzIGlzIGV4cGVjdGVkIHRv
-IGNvcnJlc3BvbmQgdG8gcHJvZHVjdCBjb25maWd1cmF0aW9ucwp3aGVyZSB0aGUgTlZJRElBIEdQ
-VSBoYXMgY29ubmVjdG9ycyBhdHRhY2hlZC4gT3RoZXIgcHJvZHVjdHMgd2hlcmUgdGhlCmRldmlj
-ZSBjbGFzcyBpcyAzRCBDb250cm9sbGVyIGFyZSBleHBlY3RlZCB0byBjb3JyZXNwb25kIHRvIGNv
-bmZpZ3VyYXRpb25zCndoZXJlIHRoZSBOVklESUEgR1BVIGlzIGRlZGljYXRlZCAoZEdQVSkgYW5k
-IGhhcyBubyBjb25uZWN0b3JzLgoKSXQncyBzZW5zaWJsZSB0byBhdm9pZCBleHBvc2luZyB0aGUg
-SERBIGNvbnRyb2xsZXIgb24gZEdQVSBzZXR1cHMsCmVzcGVjaWFsbHkgYmVjYXVzZSB3ZSd2ZSBz
-ZWVuIGNhc2VzIHdoZXJlIHRoZSBQQ0kgQkFScyBhcmUgbm90IHNldAp1cCBjb3JyZWN0bHkgYnkg
-dGhlIHBsYXRmb3JtIGluIHRoaXMgY2FzZSwgY2F1c2luZyBMaW51eCB0byBsb2cKZXJyb3JzIGlm
-IHRoZSBkZXZpY2UgaXMgdmlzaWJsZS4gVGhpcyBhc3N1bXB0aW9uIG9mIGRldmljZSBjbGFzcwph
-Y2N1cmF0ZWx5IGNvcnJlc3BvbmRpbmcgdG8gcHJvZHVjdCBjb25maWd1cmF0aW9uIGlzIHRydWUg
-Zm9yIDYgb2YgNgpsYXB0b3BzIHJlY2VudGx5IGNoZWNrZWQgYXQgdGhlIEVuZGxlc3MgbGFiLCBh
-bmQgdGhlcmUgYXJlIGFsc28gc2lnbnMgb2YKYWdyZWVtZW50IGNoZWNraW5nIHRoZSBkYXRhIGZy
-b20gNzQgcHJldmlvdXNseSB0ZXN0ZWQgcHJvZHVjdHMsIGhvd2V2ZXIKSWxpYSBNaXJraW4gY29t
-bWVudHMgdGhhdCBoZSdzIHNlZW4gY2FzZXMgd2hlcmUgaXQgaXMgbm90IHRydWUuIEFueXdheSwg
-aXQKbG9va3MgbGlrZSB0aGlzIHF1aXJrIHNob3VsZCBmaXggYXVkaW8gc3VwcG9ydCBmb3IgdGhl
-IG1ham9yaXR5IG9mCmFmZmVjdGVkIHVzZXJzLgoKVGhpcyBjb21taXQgdGFrZXMgaW5zcGlyYXRp
-b24gZnJvbSBhbiBlYXJsaWVyIHBhdGNoIGJ5IERhbmllbCBEcmFrZS4KCkxpbms6IGh0dHBzOi8v
-ZGV2dGFsay5udmlkaWEuY29tL2RlZmF1bHQvdG9waWMvMTAyNDAyMgpCdWd6aWxsYTogaHR0cHM6
-Ly9idWdzLmZyZWVkZXNrdG9wLm9yZy9zaG93X2J1Zy5jZ2k/aWQ9NzU5ODUKQ2M6IEFhcm9uIFBs
-YXR0bmVyIDxhcGxhdHRuZXJAbnZpZGlhLmNvbT4KQ2M6IFBldGVyIFd1IDxwZXRlckBsZWtlbnN0
-ZXluLm5sPgpDYzogSWxpYSBNaXJraW4gPGltaXJraW5AYWx1bS5taXQuZWR1PgpDYzogS2Fyb2wg
-SGVyYnN0IDxraGVyYnN0QHJlZGhhdC5jb20+CkNjOiBNYWlrIEZyZXVkZW5iZXJnIDxoaGZldWVy
-QGdteC5kZT4KU2lnbmVkLW9mZi1ieTogTHVrYXMgV3VubmVyIDxsdWthc0B3dW5uZXIuZGU+ClNp
-Z25lZC1vZmYtYnk6IERhbmllbCBEcmFrZSA8ZHJha2VAZW5kbGVzc20uY29tPgotLS0KCk5vdGVz
-OgogICAgdjI6CiAgICAgLSBNZW50aW9uIGluIGNvbW1pdCBtZXNzYWdlIHRoYXQgdGhlIEFDUEkg
-Y29kZSB0aGF0IGNvbnRyb2xzIHRoaXMgYml0CiAgICAgICBpcyBpbnN1ZmZpY2llbnQgKGFsc28g
-Y29uZmlybWVkIG9uIFdpbmRvd3Mgb24gdGhlIGJ1Z2xpbmspCiAgICAgLSBUd2VhayBjb21taXQg
-bWVzc2FnZSB0byBjbGFyaWZ5IHRoZSBNQ1A4OSBjb21wYXJpc29uLCB0aGFua3MgdG8gSWxpYQoK
-IGRyaXZlcnMvcGNpL3F1aXJrcy5jICAgIHwgMjggKysrKysrKysrKysrKysrKysrKysrKysrKysr
-KwogaW5jbHVkZS9saW51eC9wY2lfaWRzLmggfCAgMSArCiAyIGZpbGVzIGNoYW5nZWQsIDI5IGlu
-c2VydGlvbnMoKykKCmRpZmYgLS1naXQgYS9kcml2ZXJzL3BjaS9xdWlya3MuYyBiL2RyaXZlcnMv
-cGNpL3F1aXJrcy5jCmluZGV4IDBmMTZhY2MzMjNjNi4uNTIwNDZiNTE3ZTJlIDEwMDY0NAotLS0g
-YS9kcml2ZXJzL3BjaS9xdWlya3MuYworKysgYi9kcml2ZXJzL3BjaS9xdWlya3MuYwpAQCAtNDk3
-MSw2ICs0OTcxLDM0IEBAIERFQ0xBUkVfUENJX0ZJWFVQX0NMQVNTX0ZJTkFMKFBDSV9WRU5ET1Jf
-SURfQU1ELCBQQ0lfQU5ZX0lELAogREVDTEFSRV9QQ0lfRklYVVBfQ0xBU1NfRklOQUwoUENJX1ZF
-TkRPUl9JRF9OVklESUEsIFBDSV9BTllfSUQsCiAJCQkgICAgICBQQ0lfQ0xBU1NfTVVMVElNRURJ
-QV9IRF9BVURJTywgOCwgcXVpcmtfZ3B1X2hkYSk7CiAKKy8qCisgKiBNYW55IGxhcHRvcCBCSU9T
-ZXMgaGlkZSB0aGUgaW50ZWdyYXRlZCBIREEgY29udHJvbGxlciBvbiBOVklESUEgR1BVcworICog
-dmlhIGEgc3BlY2lhbCBiaXQuIFRoaXMgcHJldmVudHMgTGludXggZnJvbSBzZWVpbmcgYW5kIHVz
-aW5nIGl0LgorICogVW5oaWRlIGl0IGhlcmUuCisgKiBodHRwczovL2RldnRhbGsubnZpZGlhLmNv
-bS9kZWZhdWx0L3RvcGljLzEwMjQwMjIKKyAqLworc3RhdGljIHZvaWQgcXVpcmtfbnZpZGlhX2hk
-YShzdHJ1Y3QgcGNpX2RldiAqZ3B1KQoreworCXU4IGhkcl90eXBlOworCXUzMiB2YWw7CisKKwkv
-KiB0aGVyZSB3YXMgbm8gaW50ZWdyYXRlZCBIREEgY29udHJvbGxlciBiZWZvcmUgTUNQODkgKi8K
-KwlpZiAoZ3B1LT5kZXZpY2UgPCBQQ0lfREVWSUNFX0lEX05WSURJQV9HRUZPUkNFXzMyME0pCisJ
-CXJldHVybjsKKworCS8qIGJpdCAyNSBhdCBvZmZzZXQgMHg0ODggaGlkZXMgb3IgZXhwb3NlcyB0
-aGUgSERBIGNvbnRyb2xsZXIgKi8KKwlwY2lfcmVhZF9jb25maWdfZHdvcmQoZ3B1LCAweDQ4OCwg
-JnZhbCk7CisJcGNpX3dyaXRlX2NvbmZpZ19kd29yZChncHUsIDB4NDg4LCB2YWwgfCBCSVQoMjUp
-KTsKKworCS8qIHRoZSBHUFUgYmVjb21lcyBhIG11bHRpZnVuY3Rpb24gZGV2aWNlIHdoZW4gdGhl
-IEhEQSBpcyBleHBvc2VkICovCisJcGNpX3JlYWRfY29uZmlnX2J5dGUoZ3B1LCBQQ0lfSEVBREVS
-X1RZUEUsICZoZHJfdHlwZSk7CisJZ3B1LT5tdWx0aWZ1bmN0aW9uID0gISEoaGRyX3R5cGUgJiBC
-SVQoNykpOworfQorREVDTEFSRV9QQ0lfRklYVVBfQ0xBU1NfSEVBREVSKFBDSV9WRU5ET1JfSURf
-TlZJRElBLCBQQ0lfQU5ZX0lELAorCQkJICAgICAgIFBDSV9CQVNFX0NMQVNTX0RJU1BMQVksIDE2
-LCBxdWlya19udmlkaWFfaGRhKTsKK0RFQ0xBUkVfUENJX0ZJWFVQX0NMQVNTX1JFU1VNRV9FQVJM
-WShQQ0lfVkVORE9SX0lEX05WSURJQSwgUENJX0FOWV9JRCwKKwkJCSAgICAgICBQQ0lfQkFTRV9D
-TEFTU19ESVNQTEFZLCAxNiwgcXVpcmtfbnZpZGlhX2hkYSk7CisKIC8qCiAgKiBTb21lIElEVCBz
-d2l0Y2hlcyBpbmNvcnJlY3RseSBmbGFnIGFuIEFDUyBTb3VyY2UgVmFsaWRhdGlvbiBlcnJvciBv
-bgogICogY29tcGxldGlvbnMgZm9yIGNvbmZpZyByZWFkIHJlcXVlc3RzIGV2ZW4gdGhvdWdoIFBD
-SWUgcjQuMCwgc2VjCmRpZmYgLS1naXQgYS9pbmNsdWRlL2xpbnV4L3BjaV9pZHMuaCBiL2luY2x1
-ZGUvbGludXgvcGNpX2lkcy5oCmluZGV4IDcwZTg2MTQ4Y2IxZS4uNjY4OTg0NjNiODFmIDEwMDY0
-NAotLS0gYS9pbmNsdWRlL2xpbnV4L3BjaV9pZHMuaAorKysgYi9pbmNsdWRlL2xpbnV4L3BjaV9p
-ZHMuaApAQCAtMTMzNiw2ICsxMzM2LDcgQEAKICNkZWZpbmUgUENJX0RFVklDRV9JRF9OVklESUFf
-TkZPUkNFX01DUDc4U19TTUJVUyAgICAweDA3NTIKICNkZWZpbmUgUENJX0RFVklDRV9JRF9OVklE
-SUFfTkZPUkNFX01DUDc3X0lERSAgICAgICAweDA3NTkKICNkZWZpbmUgUENJX0RFVklDRV9JRF9O
-VklESUFfTkZPUkNFX01DUDczX1NNQlVTICAgICAweDA3RDgKKyNkZWZpbmUgUENJX0RFVklDRV9J
-RF9OVklESUFfR0VGT1JDRV8zMjBNICAgICAgICAgICAweDA4QTAKICNkZWZpbmUgUENJX0RFVklD
-RV9JRF9OVklESUFfTkZPUkNFX01DUDc5X1NNQlVTICAgICAweDBBQTIKICNkZWZpbmUgUENJX0RF
-VklDRV9JRF9OVklESUFfTkZPUkNFX01DUDg5X1NBVEEJICAgIDB4MEQ4NQogCi0tIAoyLjIwLjEK
-Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCk5vdXZlYXUg
-bWFpbGluZyBsaXN0Ck5vdXZlYXVAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMu
-ZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vbm91dmVhdQ==
+
+--===============2095562642==
+Content-Type: multipart/alternative; boundary="15626039050.eACDd.28113"
+Content-Transfer-Encoding: 7bit
+
+
+--15626039050.eACDd.28113
+Date: Mon, 8 Jul 2019 16:38:25 +0000
+MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+https://bugs.freedesktop.org/show_bug.cgi?id=3D106294
+
+--- Comment #1 from Sophie Hamilton <freedesktop-bugs@theblob.org> ---
+I just realised I still have this bug open... since then I've switched grap=
+hics
+cards to an AMD card, so I can no longer test this bug or assist with
+debugging. I apologise for this.
+
+This bug may still be relevant, so I'll leave it up to you whether to close=
+ it
+or not. I'm sorry for the inconvenience!
+
+--=20
+You are receiving this mail because:
+You are the assignee for the bug.
+You are the QA Contact for the bug.=
+
+--15626039050.eACDd.28113
+Date: Mon, 8 Jul 2019 16:38:25 +0000
+MIME-Version: 1.0
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+<html>
+    <head>
+      <base href=3D"https://bugs.freedesktop.org/">
+    </head>
+    <body>
+      <p>
+        <div>
+            <b><a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - GM204/modesetting DDX: Odd corruption (red backgrounds) i=
+ntroduced by Mesa"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D106294#c1">Commen=
+t # 1</a>
+              on <a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - GM204/modesetting DDX: Odd corruption (red backgrounds) i=
+ntroduced by Mesa"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D106294">bug 10629=
+4</a>
+              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
+freedesktop-bugs&#64;theblob.org" title=3D"Sophie Hamilton &lt;freedesktop-=
+bugs&#64;theblob.org&gt;"> <span class=3D"fn">Sophie Hamilton</span></a>
+</span></b>
+        <pre>I just realised I still have this bug open... since then I've =
+switched graphics
+cards to an AMD card, so I can no longer test this bug or assist with
+debugging. I apologise for this.
+
+This bug may still be relevant, so I'll leave it up to you whether to close=
+ it
+or not. I'm sorry for the inconvenience!</pre>
+        </div>
+      </p>
+
+
+      <hr>
+      <span>You are receiving this mail because:</span>
+
+      <ul>
+          <li>You are the assignee for the bug.</li>
+          <li>You are the QA Contact for the bug.</li>
+      </ul>
+    </body>
+</html>=
+
+--15626039050.eACDd.28113--
+
+--===============2095562642==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
+YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
+cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============2095562642==--
