@@ -1,46 +1,71 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 55BBC63B4A
-	for <lists+nouveau@lfdr.de>; Tue,  9 Jul 2019 20:42:46 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id B28AE63BF6
+	for <lists+nouveau@lfdr.de>; Tue,  9 Jul 2019 21:33:26 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4D5446E057;
-	Tue,  9 Jul 2019 18:42:44 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 84B9D89CCB;
+	Tue,  9 Jul 2019 19:33:24 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
- by gabe.freedesktop.org (Postfix) with ESMTP id 341266E056
- for <nouveau@lists.freedesktop.org>; Tue,  9 Jul 2019 18:42:43 +0000 (UTC)
-Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 3171872167; Tue,  9 Jul 2019 18:42:43 +0000 (UTC)
-From: bugzilla-daemon@freedesktop.org
-To: nouveau@lists.freedesktop.org
-Date: Tue, 09 Jul 2019 18:42:43 +0000
-X-Bugzilla-Reason: AssignedTo
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: None
-X-Bugzilla-Product: xorg
-X-Bugzilla-Component: Driver/nouveau
-X-Bugzilla-Version: 7.7 (2012.06)
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: normal
-X-Bugzilla-Who: mszpak@wp.pl
-X-Bugzilla-Status: NEW
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: medium
-X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-110830-8800-RIPwXw64fK@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-110830-8800@http.bugs.freedesktop.org/>
-References: <bug-110830-8800@http.bugs.freedesktop.org/>
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
+Received: from mail-qk1-x742.google.com (mail-qk1-x742.google.com
+ [IPv6:2607:f8b0:4864:20::742])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A22F289D44
+ for <nouveau@lists.freedesktop.org>; Tue,  9 Jul 2019 19:33:22 +0000 (UTC)
+Received: by mail-qk1-x742.google.com with SMTP id a27so25401qkk.5
+ for <nouveau@lists.freedesktop.org>; Tue, 09 Jul 2019 12:33:22 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:content-transfer-encoding
+ :in-reply-to:user-agent;
+ bh=TqnFX/ucbxcY5k2LU8B7XgzLfUpDzAFYa9LXap9J5UU=;
+ b=Bt/8IuDh37Z24uz+ScSvJxbg6xdFZj7mC/L7rRQtJaTMqsN2ySkJbNfFd+h+SwokJi
+ xcVzYbg5nD1pTeosv5CFuJY7mHr1ZND+trhTs2qXtdA7rFTMTZarApJiBosq85R4KQTL
+ bUq4Av304gTb/qyNXLYAOnjj48YJLAcNdHchcW+5hJiwwiz7Z/O2cCf03tM+kZ/wwr4t
+ hy/HO58q20bP9de+ToWDoLn4wQY7CJsIia4s6UsrmzNy44GkuP4OpeGUFJRBetmeHfn3
+ +MVYBpJCpOn7RMdgFKkuMLCYo2P8+9Dg0OwRtp8Cf51tVwgzQ4n6kZAealcT1LZPST5s
+ tJBA==
+X-Gm-Message-State: APjAAAXAUxRR3Cr4Kt7HKpAY0iyCnzh2SYSFYBNDH6T0kEi1RuEJX8Zg
+ lM9MAK+2oM6+2HVcqKh6yAuHUQ==
+X-Google-Smtp-Source: APXvYqwJv1A9aQVqldMtbeBQ5nnec3iTfBKL3S6OeKUyA3kkYjNI/CON0uVEHClqFsFEEJNKMO/I9A==
+X-Received: by 2002:a05:620a:1006:: with SMTP id
+ z6mr2854127qkj.312.1562700801760; 
+ Tue, 09 Jul 2019 12:33:21 -0700 (PDT)
+Received: from ziepe.ca
+ (hlfxns017vw-156-34-55-100.dhcp-dynamic.fibreop.ns.bellaliant.net.
+ [156.34.55.100])
+ by smtp.gmail.com with ESMTPSA id 67sm9662013qkh.108.2019.07.09.12.33.21
+ (version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+ Tue, 09 Jul 2019 12:33:21 -0700 (PDT)
+Received: from jgg by mlx.ziepe.ca with local (Exim 4.90_1)
+ (envelope-from <jgg@ziepe.ca>)
+ id 1hkvrc-0003nt-Rl; Tue, 09 Jul 2019 16:33:20 -0300
+Date: Tue, 9 Jul 2019 16:33:20 -0300
+From: Jason Gunthorpe <jgg@ziepe.ca>
+To: Christoph Hellwig <hch@lst.de>
+Message-ID: <20190709193320.GD3422@ziepe.ca>
+References: <20190703220214.28319-1-hch@lst.de>
+ <20190705123336.GA31543@ziepe.ca> <20190709143038.GA3092@lst.de>
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 110830] [nouveau] GeForce GTX 1660 Ti (mobile) not
- supported (NV168/TU116)
+Content-Disposition: inline
+In-Reply-To: <20190709143038.GA3092@lst.de>
+User-Agent: Mutt/1.9.4 (2018-02-28)
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ziepe.ca; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:content-transfer-encoding:in-reply-to
+ :user-agent;
+ bh=TqnFX/ucbxcY5k2LU8B7XgzLfUpDzAFYa9LXap9J5UU=;
+ b=nJSBYwdxUv5VMP0rEUMz93pcWQ28dTbOLxoOwrWHLWCf1MSxkLTpKz2x8fxtV2+E/R
+ tXsUU3isWUYxjOPUM6t0qCMv560B5H1unNR0QcR5JPw3ycBYCoKo4LDe/wsMqNEhL/zl
+ ZczdjxlpNisocOP3/OhjpkUf2xKW2V9mrCM6eDI3EmS5aK4e6AbXWsFA/MaZCNHhyEnk
+ w4Z42pcMYK3A/nvN2x/95LPHdAv9lAcaP70awzU4Hvnyy2CUphCP4NqDwoLxyz/O5kpd
+ AcIgjMsPHoTqJr8TeoXVzKWAKEnMRS83pZDgNEkgwGuWMagj18LeXUOa06mYcaDBm5pC
+ i90Q==
+Subject: Re: [Nouveau] hmm_range_fault related fixes and legacy API removal
+ v2
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -52,99 +77,29 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1417864147=="
+Cc: Ralph Campbell <rcampbell@nvidia.com>, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ linux-mm@kvack.org, Ben Skeggs <bskeggs@redhat.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-
---===============1417864147==
-Content-Type: multipart/alternative; boundary="15626977632.61DecB5.19426"
-Content-Transfer-Encoding: 7bit
-
-
---15626977632.61DecB5.19426
-Date: Tue, 9 Jul 2019 18:42:43 +0000
-MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-https://bugs.freedesktop.org/show_bug.cgi?id=3D110830
-
---- Comment #15 from Marcin Zajaczkowski <mszpak@wp.pl> ---
-Btw, for people with the same laptop and similar issues landing in that iss=
-ue -
-I created a short summary how to solve some problems with Hyperbook NH5/Cle=
-vo
-NH55RCQ (including those with GeForce GTX 1660 Ti):
-https://gist.github.com/szpak/71081b40217fb27c7a565b8c7b972067
-
---=20
-You are receiving this mail because:
-You are the assignee for the bug.=
-
---15626977632.61DecB5.19426
-Date: Tue, 9 Jul 2019 18:42:43 +0000
-MIME-Version: 1.0
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-<html>
-    <head>
-      <base href=3D"https://bugs.freedesktop.org/">
-    </head>
-    <body>
-      <p>
-        <div>
-            <b><a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - [nouveau] GeForce GTX 1660 Ti (mobile) not supported (NV1=
-68/TU116)"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110830#c15">Comme=
-nt # 15</a>
-              on <a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - [nouveau] GeForce GTX 1660 Ti (mobile) not supported (NV1=
-68/TU116)"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110830">bug 11083=
-0</a>
-              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
-mszpak&#64;wp.pl" title=3D"Marcin Zajaczkowski &lt;mszpak&#64;wp.pl&gt;"> <=
-span class=3D"fn">Marcin Zajaczkowski</span></a>
-</span></b>
-        <pre>Btw, for people with the same laptop and similar issues landin=
-g in that issue -
-I created a short summary how to solve some problems with Hyperbook NH5/Cle=
-vo
-NH55RCQ (including those with GeForce GTX 1660 Ti):
-<a href=3D"https://gist.github.com/szpak/71081b40217fb27c7a565b8c7b972067">=
-https://gist.github.com/szpak/71081b40217fb27c7a565b8c7b972067</a></pre>
-        </div>
-      </p>
-
-
-      <hr>
-      <span>You are receiving this mail because:</span>
-
-      <ul>
-          <li>You are the assignee for the bug.</li>
-      </ul>
-    </body>
-</html>=
-
---15626977632.61DecB5.19426--
-
---===============1417864147==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
-YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
-cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
-
---===============1417864147==--
+T24gVHVlLCBKdWwgMDksIDIwMTkgYXQgMDQ6MzA6MzhQTSArMDIwMCwgQ2hyaXN0b3BoIEhlbGx3
+aWcgd3JvdGU6Cj4gT24gRnJpLCBKdWwgMDUsIDIwMTkgYXQgMDk6MzM6MzZBTSAtMDMwMCwgSmFz
+b24gR3VudGhvcnBlIHdyb3RlOgo+ID4gT24gV2VkLCBKdWwgMDMsIDIwMTkgYXQgMDM6MDI6MDhQ
+TSAtMDcwMCwgQ2hyaXN0b3BoIEhlbGx3aWcgd3JvdGU6Cj4gPiA+IEhpIErDqXLDtG1lLCBCZW4g
+YW5kIEphc29uLAo+ID4gPiAKPiA+ID4gYmVsb3cgaXMgYSBzZXJpZXMgYWdhaW5zdCB0aGUgaG1t
+IHRyZWUgd2hpY2ggZml4ZXMgdXAgdGhlIG1tYXBfc2VtCj4gPiA+IGxvY2tpbmcgaW4gbm91dmVh
+dSBhbmQgd2hpbGUgYXQgaXQgYWxzbyByZW1vdmVzIGxlZnRvdmVyIGxlZ2FjeSBITU0gQVBJcwo+
+ID4gPiBvbmx5IHVzZWQgYnkgbm91dmVhdS4KPiA+Cj4gPiBBcyBtdWNoIGFzIEkgbGlrZSB0aGlz
+IHNlcmllcywgaXQgd29uJ3QgbWFrZSBpdCB0byB0aGlzIG1lcmdlIHdpbmRvdywKPiA+IHNvcnJ5
+Lgo+IAo+IE5vdGUgdGhhdCBwYXRjaCA0IGZpeGVzIGEgcHJldHR5IHNldmVyZSBsb2NraW5nIGJ1
+ZywgYW5kIDEtMyBpcyBqdXN0Cj4gcHJlcGFyYXRpb24gZm9yIHRoYXQuICAKClllcywgSSBrbm93
+LCBidXQgdGhhdCBjb2RlIGlzIGFsbCBtYXJrZWQgU1RBR0lORyBsYXN0IEkgc2F3LCBzbyBJCmRv
+bid0IGZlZWwgYW4gdXJnZW5jeSB0byBnZXQgc2V2ZXJlIGJ1ZyBmaXhlcyBpbiBmb3IgaXQgYWZ0
+ZXIgdGhlCm1lcmdlIHdpbmRvdyBvcGVucy4KCkknZCBsaWtlIHRvIGFwcGx5IGl0IHRvIGhtbS5n
+aXQgd2hlbiByYzEgY29tZXMgb3V0IHdpdGggUmFscGgncyB0ZXN0CnJlc3VsdC4uCgpKYXNvbgpf
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpOb3V2ZWF1IG1h
+aWxpbmcgbGlzdApOb3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZy
+ZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL25vdXZlYXU=
