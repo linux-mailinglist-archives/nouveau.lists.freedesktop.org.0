@@ -2,83 +2,44 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1F7A76272B
-	for <lists+nouveau@lfdr.de>; Mon,  8 Jul 2019 19:32:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C5903634D8
+	for <lists+nouveau@lfdr.de>; Tue,  9 Jul 2019 13:22:13 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 90E8689FC5;
-	Mon,  8 Jul 2019 17:32:28 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 414AE89728;
+	Tue,  9 Jul 2019 11:22:11 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from EUR02-VE1-obe.outbound.protection.outlook.com
- (mail-ve1eur02on0616.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:fe06::616])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 53A1689FC5;
- Mon,  8 Jul 2019 17:32:27 +0000 (UTC)
-Received: from VI1PR05MB4141.eurprd05.prod.outlook.com (10.171.182.144) by
- VI1PR05MB6589.eurprd05.prod.outlook.com (20.179.25.212) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.2052.18; Mon, 8 Jul 2019 17:32:24 +0000
-Received: from VI1PR05MB4141.eurprd05.prod.outlook.com
- ([fe80::f5d8:df9:731:682e]) by VI1PR05MB4141.eurprd05.prod.outlook.com
- ([fe80::f5d8:df9:731:682e%5]) with mapi id 15.20.2052.020; Mon, 8 Jul 2019
- 17:32:24 +0000
-From: Jason Gunthorpe <jgg@mellanox.com>
-To: Ralph Campbell <rcampbell@nvidia.com>
-Thread-Topic: hmm_range_fault related fixes and legacy API removal v2
-Thread-Index: AQHVMer7t/tGwC82LkyVSWCA9HbG9qa6qyIAgAZW04CAAABlAA==
-Date: Mon, 8 Jul 2019 17:32:24 +0000
-Message-ID: <20190708173219.GL23966@mellanox.com>
-References: <20190703220214.28319-1-hch@lst.de>
- <20190704164236.GP3401@mellanox.com>
- <41dbb308-fc9e-d730-ffb0-6ce051dff1e1@nvidia.com>
-In-Reply-To: <41dbb308-fc9e-d730-ffb0-6ce051dff1e1@nvidia.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-clientproxiedby: MN2PR04CA0026.namprd04.prod.outlook.com
- (2603:10b6:208:d4::39) To VI1PR05MB4141.eurprd05.prod.outlook.com
- (2603:10a6:803:4d::16)
-x-ms-exchange-messagesentrepresentingtype: 1
-x-originating-ip: [156.34.55.100]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 06f06ac4-6250-447d-49b3-08d703ca3d01
-x-ms-office365-filtering-ht: Tenant
-x-microsoft-antispam: BCL:0; PCL:0;
- RULEID:(2390118)(7020095)(4652040)(8989299)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(5600148)(711020)(4605104)(1401327)(4618075)(2017052603328)(7193020);
- SRVR:VI1PR05MB6589; 
-x-ms-traffictypediagnostic: VI1PR05MB6589:
-x-microsoft-antispam-prvs: <VI1PR05MB65893AD6AA3A6095CC078DD2CFF60@VI1PR05MB6589.eurprd05.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:8273;
-x-forefront-prvs: 00922518D8
-x-forefront-antispam-report: SFV:NSPM;
- SFS:(10009020)(4636009)(376002)(39860400002)(396003)(366004)(346002)(136003)(189003)(199004)(6916009)(8936002)(66556008)(2906002)(66476007)(66446008)(64756008)(66946007)(73956011)(305945005)(99286004)(81166006)(81156014)(8676002)(86362001)(102836004)(316002)(6436002)(54906003)(6246003)(36756003)(52116002)(256004)(71200400001)(71190400001)(6486002)(478600001)(14454004)(53546011)(68736007)(186003)(5660300002)(66574012)(476003)(6512007)(33656002)(11346002)(2616005)(6506007)(25786009)(26005)(386003)(66066001)(7736002)(76176011)(53936002)(486006)(4326008)(6116002)(1076003)(446003)(3846002)(229853002)(4744005);
- DIR:OUT; SFP:1101; SCL:1; SRVR:VI1PR05MB6589;
- H:VI1PR05MB4141.eurprd05.prod.outlook.com; FPR:; SPF:None; LANG:en;
- PTR:InfoNoRecords; MX:1; A:1; 
-received-spf: None (protection.outlook.com: mellanox.com does not designate
- permitted sender hosts)
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam-message-info: nY15vKNO4PNEEgep0hJ6zItN1FcRngQV6udYZyjYDpozrGLDU2uJLKpU0keTx/nEevhOBPj/hvaucyE4urOVb0RHPpgr2ma1NCYL7SbLmv67CmHEs2VXDZV29Hq0kI56JUBDc0nCsGHmevOXqmMKc2qVv25V9aSISiDyC0NRgxlidjKRpQeOgcWgP919clBsGOGQXD4+VKwVCvRlE6vB/fFiI2NdxRwqAdnPVzKZRf6+Sp0FS9gVbCio9cq6zjh7KBqS0fYd4XzYC84u+eziq5JTcxvqrunyUxw4qV5WP6+Q/IiOk4ndl7wR9u8YU3lYua0DsUP7yqWyxJUcLwzIpnwaRM7lFxgy+DzD/mDmG9BZTtcFPpMQGS5A/guKF2ExxGzAfUbQxe5q4dg+9zEsvC+Wuvfv29xC7iQkHNUYRh4=
-Content-ID: <F61E600089470D4898FBE87BCA1D4B71@eurprd05.prod.outlook.com>
+Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
+ [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 9A8FA89728
+ for <nouveau@lists.freedesktop.org>; Tue,  9 Jul 2019 11:22:10 +0000 (UTC)
+Received: by culpepper.freedesktop.org (Postfix, from userid 33)
+ id 91D9872167; Tue,  9 Jul 2019 11:22:10 +0000 (UTC)
+From: bugzilla-daemon@freedesktop.org
+To: nouveau@lists.freedesktop.org
+Date: Tue, 09 Jul 2019 11:22:07 +0000
+X-Bugzilla-Reason: AssignedTo
+X-Bugzilla-Type: new
+X-Bugzilla-Watch-Reason: None
+X-Bugzilla-Product: xorg
+X-Bugzilla-Component: Driver/nouveau
+X-Bugzilla-Version: 7.7 (2012.06)
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: blocker
+X-Bugzilla-Who: guygma@fastmail.com
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: medium
+X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: bug_id short_desc product version rep_platform
+ op_sys bug_status bug_severity priority component assigned_to reporter
+ qa_contact attachments.created
+Message-ID: <bug-111094-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-X-OriginatorOrg: Mellanox.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 06f06ac4-6250-447d-49b3-08d703ca3d01
-X-MS-Exchange-CrossTenant-originalarrivaltime: 08 Jul 2019 17:32:24.4372 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: a652971c-7d2e-4d9b-a6a4-d149256f461b
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: jgg@mellanox.com
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR05MB6589
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=Mellanox.com; s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=CyRZoytxL5GxI8Nuxt8XuYqlyWChhgVpZkttH29Bvqo=;
- b=D4QnriIZp4nCkMSSM2oTOX28PMZcD/EM4rVQVZ1eL2yXyrf+EdxcjiPBRi6WuEX8r2u9lmg+NFOAcTriiU939Jer4mN8rDHc8bGgK3JN5NsLY4eaIiryDsHapvOXyN+VUHZcLA/agG2Z19YfRhT71+nGTx5C2n1X0ZwLgJ2JiyE=
-X-Mailman-Original-Authentication-Results: spf=none (sender IP is )
- smtp.mailfrom=jgg@mellanox.com; 
-Subject: Re: [Nouveau] hmm_range_fault related fixes and legacy API removal
- v2
+Subject: [Nouveau] [Bug 111094] New: Cannot start Xorg on Nvidia GP108M
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -90,34 +51,194 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
- "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
- "linux-mm@kvack.org" <linux-mm@kvack.org>, Ben Skeggs <bskeggs@redhat.com>,
- Christoph Hellwig <hch@lst.de>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1336768960=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-T24gTW9uLCBKdWwgMDgsIDIwMTkgYXQgMTA6MzA6NTVBTSAtMDcwMCwgUmFscGggQ2FtcGJlbGwg
-d3JvdGU6DQo+IA0KPiBPbiA3LzQvMTkgOTo0MiBBTSwgSmFzb24gR3VudGhvcnBlIHdyb3RlOg0K
-PiA+IE9uIFdlZCwgSnVsIDAzLCAyMDE5IGF0IDAzOjAyOjA4UE0gLTA3MDAsIENocmlzdG9waCBI
-ZWxsd2lnIHdyb3RlOg0KPiA+ID4gSGkgSsOpcsO0bWUsIEJlbiBhbmQgSmFzb24sDQo+ID4gPiAN
-Cj4gPiA+IGJlbG93IGlzIGEgc2VyaWVzIGFnYWluc3QgdGhlIGhtbSB0cmVlIHdoaWNoIGZpeGVz
-IHVwIHRoZSBtbWFwX3NlbQ0KPiA+ID4gbG9ja2luZyBpbiBub3V2ZWF1IGFuZCB3aGlsZSBhdCBp
-dCBhbHNvIHJlbW92ZXMgbGVmdG92ZXIgbGVnYWN5IEhNTSBBUElzDQo+ID4gPiBvbmx5IHVzZWQg
-Ynkgbm91dmVhdS4NCj4gPiA+IA0KPiA+ID4gQ2hhbmdlcyBzaW5jZSB2MToNCj4gPiA+ICAgLSBk
-b24ndCByZXR1cm4gdGhlIHZhbGlkIHN0YXRlIGZyb20gaG1tX3JhbmdlX3VucmVnaXN0ZXINCj4g
-PiA+ICAgLSBhZGRpdGlvbmFsIG5vdXZlYXUgY2xlYW51cHMNCj4gPiANCj4gPiBSYWxwaCwgc2lu
-Y2UgbW9zdCBvZiB0aGlzIGlzIG5vdXZlYXUgY291bGQgeW91IGNvbnRyaWJ1dGUgYQ0KPiA+IFRl
-c3RlZC1ieT8gVGhhbmtzDQo+ID4gDQo+ID4gSmFzb24NCj4gPiANCj4gDQo+IEkgY2FuIHRlc3Qg
-dGhpbmdzIGZhaXJseSBlYXNpbHkgYnV0IHdpdGggYWxsIHRoZSBkaWZmZXJlbnQgcGF0Y2hlcywN
-Cj4gY29uZmxpY3RzLCBhbmQgcGVyc29uYWwgZ2l0IHRyZWVzLCBjYW4geW91IHNwZWNpZnkgdGhl
-IGdpdCB0cmVlDQo+IGFuZCBicmFuY2ggd2l0aCBldmVyeXRoaW5nIGFwcGxpZWQgdGhhdCB5b3Ug
-d2FudCBtZSB0byB0ZXN0Pw0KDQpUaGlzIHNlcmllcyB3aWxsIGJlIHB1c2hlZCB0byB0aGUgbmV4
-dCBjeWNsZSwgc28gaWYgeW91IHRlc3QgdjUuMy1yYzENCisgdGhpcyBzZXJpZXMgeW91J2QgZ2V0
-IHRoZSByaWdodCBjb3ZlcmFnZS4NCg0KVGhhbmtzLA0KSmFzb24NCl9fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCk5vdXZlYXUgbWFpbGluZyBsaXN0Ck5vdXZl
-YXVAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21h
-aWxtYW4vbGlzdGluZm8vbm91dmVhdQ==
+
+--===============1336768960==
+Content-Type: multipart/alternative; boundary="15626713300.BD578978F.17312"
+Content-Transfer-Encoding: 7bit
+
+
+--15626713300.BD578978F.17312
+Date: Tue, 9 Jul 2019 11:22:10 +0000
+MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+https://bugs.freedesktop.org/show_bug.cgi?id=3D111094
+
+            Bug ID: 111094
+           Summary: Cannot start Xorg on Nvidia GP108M
+           Product: xorg
+           Version: 7.7 (2012.06)
+          Hardware: x86-64 (AMD64)
+                OS: Linux (All)
+            Status: NEW
+          Severity: blocker
+          Priority: medium
+         Component: Driver/nouveau
+          Assignee: nouveau@lists.freedesktop.org
+          Reporter: guygma@fastmail.com
+        QA Contact: xorg-team@lists.x.org
+
+Created attachment 144735
+  --> https://bugs.freedesktop.org/attachment.cgi?id=3D144735&action=3Dedit
+dmesg, xorg, journal output (concatenated)
+
+Despite support for GP108, it seems that I have problems with the mobile
+variant, GP108M. While my system boots successfully with the kernel module
+loading successfully (though with some warnings) my display manager cannot
+start because no screens can be found by the Xorg server. I have attached l=
+ogs
+from dmesg, Xorg.log, and journalctl. I am on archlinux. Please let me know=
+ if
+anymore information is required. I would *really* prefer to use the opensou=
+rce
+nouveau driver rather the closed nvidia...
+
+--=20
+You are receiving this mail because:
+You are the assignee for the bug.=
+
+--15626713300.BD578978F.17312
+Date: Tue, 9 Jul 2019 11:22:10 +0000
+MIME-Version: 1.0
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+<html>
+    <head>
+      <base href=3D"https://bugs.freedesktop.org/">
+    </head>
+    <body><table border=3D"1" cellspacing=3D"0" cellpadding=3D"8">
+        <tr>
+          <th>Bug ID</th>
+          <td><a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - Cannot start Xorg on Nvidia GP108M"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111094">111094</a>
+          </td>
+        </tr>
+
+        <tr>
+          <th>Summary</th>
+          <td>Cannot start Xorg on Nvidia GP108M
+          </td>
+        </tr>
+
+        <tr>
+          <th>Product</th>
+          <td>xorg
+          </td>
+        </tr>
+
+        <tr>
+          <th>Version</th>
+          <td>7.7 (2012.06)
+          </td>
+        </tr>
+
+        <tr>
+          <th>Hardware</th>
+          <td>x86-64 (AMD64)
+          </td>
+        </tr>
+
+        <tr>
+          <th>OS</th>
+          <td>Linux (All)
+          </td>
+        </tr>
+
+        <tr>
+          <th>Status</th>
+          <td>NEW
+          </td>
+        </tr>
+
+        <tr>
+          <th>Severity</th>
+          <td>blocker
+          </td>
+        </tr>
+
+        <tr>
+          <th>Priority</th>
+          <td>medium
+          </td>
+        </tr>
+
+        <tr>
+          <th>Component</th>
+          <td>Driver/nouveau
+          </td>
+        </tr>
+
+        <tr>
+          <th>Assignee</th>
+          <td>nouveau&#64;lists.freedesktop.org
+          </td>
+        </tr>
+
+        <tr>
+          <th>Reporter</th>
+          <td>guygma&#64;fastmail.com
+          </td>
+        </tr>
+
+        <tr>
+          <th>QA Contact</th>
+          <td>xorg-team&#64;lists.x.org
+          </td>
+        </tr></table>
+      <p>
+        <div>
+        <pre>Created <span class=3D""><a href=3D"attachment.cgi?id=3D144735=
+" name=3D"attach_144735" title=3D"dmesg, xorg, journal output (concatenated=
+)">attachment 144735</a> <a href=3D"attachment.cgi?id=3D144735&amp;action=
+=3Dedit" title=3D"dmesg, xorg, journal output (concatenated)">[details]</a>=
+</span>
+dmesg, xorg, journal output (concatenated)
+
+Despite support for GP108, it seems that I have problems with the mobile
+variant, GP108M. While my system boots successfully with the kernel module
+loading successfully (though with some warnings) my display manager cannot
+start because no screens can be found by the Xorg server. I have attached l=
+ogs
+from dmesg, Xorg.log, and journalctl. I am on archlinux. Please let me know=
+ if
+anymore information is required. I would *really* prefer to use the opensou=
+rce
+nouveau driver rather the closed nvidia...</pre>
+        </div>
+      </p>
+
+
+      <hr>
+      <span>You are receiving this mail because:</span>
+
+      <ul>
+          <li>You are the assignee for the bug.</li>
+      </ul>
+    </body>
+</html>=
+
+--15626713300.BD578978F.17312--
+
+--===============1336768960==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
+YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
+cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============1336768960==--
