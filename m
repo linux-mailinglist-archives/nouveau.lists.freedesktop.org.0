@@ -2,22 +2,22 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id C8511634DE
-	for <lists+nouveau@lfdr.de>; Tue,  9 Jul 2019 13:24:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 70DAD634DF
+	for <lists+nouveau@lfdr.de>; Tue,  9 Jul 2019 13:24:32 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9336E6E035;
-	Tue,  9 Jul 2019 11:24:09 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E2D7189C48;
+	Tue,  9 Jul 2019 11:24:30 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
- by gabe.freedesktop.org (Postfix) with ESMTP id C37086E04A
- for <nouveau@lists.freedesktop.org>; Tue,  9 Jul 2019 11:24:08 +0000 (UTC)
+ [131.252.210.165])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 7197589B61
+ for <nouveau@lists.freedesktop.org>; Tue,  9 Jul 2019 11:24:30 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id C0D5972167; Tue,  9 Jul 2019 11:24:08 +0000 (UTC)
+ id 6F35172167; Tue,  9 Jul 2019 11:24:30 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Tue, 09 Jul 2019 11:24:08 +0000
+Date: Tue, 09 Jul 2019 11:24:30 +0000
 X-Bugzilla-Reason: AssignedTo
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
@@ -33,7 +33,7 @@ X-Bugzilla-Priority: medium
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
 X-Bugzilla-Changed-Fields: attachments.created
-Message-ID: <bug-111094-8800-G6ccsletsz@http.bugs.freedesktop.org/>
+Message-ID: <bug-111094-8800-sD9fKB6Vqe@http.bugs.freedesktop.org/>
 In-Reply-To: <bug-111094-8800@http.bugs.freedesktop.org/>
 References: <bug-111094-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
@@ -51,18 +51,18 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1982627867=="
+Content-Type: multipart/mixed; boundary="===============1976110630=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============1982627867==
-Content-Type: multipart/alternative; boundary="15626714481.Cc9Ae8.17265"
+--===============1976110630==
+Content-Type: multipart/alternative; boundary="15626714701.dA440a66c.17318"
 Content-Transfer-Encoding: 7bit
 
 
---15626714481.Cc9Ae8.17265
-Date: Tue, 9 Jul 2019 11:24:08 +0000
+--15626714701.dA440a66c.17318
+Date: Tue, 9 Jul 2019 11:24:30 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -71,17 +71,17 @@ Auto-Submitted: auto-generated
 
 https://bugs.freedesktop.org/show_bug.cgi?id=3D111094
 
---- Comment #1 from guygma@fastmail.com ---
-Created attachment 144736
-  --> https://bugs.freedesktop.org/attachment.cgi?id=3D144736&action=3Dedit
-xorg
+--- Comment #2 from guygma@fastmail.com ---
+Created attachment 144737
+  --> https://bugs.freedesktop.org/attachment.cgi?id=3D144737&action=3Dedit
+dmesg
 
 --=20
 You are receiving this mail because:
 You are the assignee for the bug.=
 
---15626714481.Cc9Ae8.17265
-Date: Tue, 9 Jul 2019 11:24:08 +0000
+--15626714701.dA440a66c.17318
+Date: Tue, 9 Jul 2019 11:24:30 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -98,8 +98,8 @@ Auto-Submitted: auto-generated
             <b><a class=3D"bz_bug_link=20
           bz_status_NEW "
    title=3D"NEW - Cannot start Xorg on Nvidia GP108M"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111094#c1">Commen=
-t # 1</a>
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111094#c2">Commen=
+t # 2</a>
               on <a class=3D"bz_bug_link=20
           bz_status_NEW "
    title=3D"NEW - Cannot start Xorg on Nvidia GP108M"
@@ -109,11 +109,11 @@ t # 1</a>
 guygma&#64;fastmail.com" title=3D"guygma&#64;fastmail.com">guygma&#64;fastm=
 ail.com</a>
 </span></b>
-        <pre>Created <span class=3D""><a href=3D"attachment.cgi?id=3D144736=
-" name=3D"attach_144736" title=3D"xorg">attachment 144736</a> <a href=3D"at=
-tachment.cgi?id=3D144736&amp;action=3Dedit" title=3D"xorg">[details]</a></s=
-pan>
-xorg</pre>
+        <pre>Created <span class=3D""><a href=3D"attachment.cgi?id=3D144737=
+" name=3D"attach_144737" title=3D"dmesg">attachment 144737</a> <a href=3D"a=
+ttachment.cgi?id=3D144737&amp;action=3Dedit" title=3D"dmesg">[details]</a><=
+/span>
+dmesg</pre>
         </div>
       </p>
 
@@ -127,9 +127,9 @@ xorg</pre>
     </body>
 </html>=
 
---15626714481.Cc9Ae8.17265--
+--15626714701.dA440a66c.17318--
 
---===============1982627867==
+--===============1976110630==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -139,4 +139,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============1982627867==--
+--===============1976110630==--
