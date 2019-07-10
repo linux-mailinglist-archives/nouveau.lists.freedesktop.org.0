@@ -1,23 +1,23 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id CCB8764D1B
-	for <lists+nouveau@lfdr.de>; Wed, 10 Jul 2019 22:00:30 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id A8F1064D26
+	for <lists+nouveau@lfdr.de>; Wed, 10 Jul 2019 22:04:11 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4F3256E129;
-	Wed, 10 Jul 2019 20:00:29 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0447A6E12E;
+	Wed, 10 Jul 2019 20:04:10 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
  [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
- by gabe.freedesktop.org (Postfix) with ESMTP id E7DD46E129
- for <nouveau@lists.freedesktop.org>; Wed, 10 Jul 2019 20:00:27 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTP id 16D3E6E12E
+ for <nouveau@lists.freedesktop.org>; Wed, 10 Jul 2019 20:04:09 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id DE97672167; Wed, 10 Jul 2019 20:00:27 +0000 (UTC)
+ id 0EEBE72167; Wed, 10 Jul 2019 20:04:09 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Wed, 10 Jul 2019 20:00:28 +0000
+Date: Wed, 10 Jul 2019 20:04:09 +0000
 X-Bugzilla-Reason: QAcontact AssignedTo
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
@@ -33,7 +33,7 @@ X-Bugzilla-Priority: medium
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
 X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-110955-8800-t1D90sK3vr@http.bugs.freedesktop.org/>
+Message-ID: <bug-110955-8800-VvOqJQ3AvF@http.bugs.freedesktop.org/>
 In-Reply-To: <bug-110955-8800@http.bugs.freedesktop.org/>
 References: <bug-110955-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
@@ -52,18 +52,18 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0042538526=="
+Content-Type: multipart/mixed; boundary="===============0310586222=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============0042538526==
-Content-Type: multipart/alternative; boundary="15627888270.340ba.14834"
+--===============0310586222==
+Content-Type: multipart/alternative; boundary="15627890490.FBbD2.14842"
 Content-Transfer-Encoding: 7bit
 
 
---15627888270.340ba.14834
-Date: Wed, 10 Jul 2019 20:00:27 +0000
+--15627890490.FBbD2.14842
+Date: Wed, 10 Jul 2019 20:04:08 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -72,19 +72,16 @@ Auto-Submitted: auto-generated
 
 https://bugs.freedesktop.org/show_bug.cgi?id=3D110955
 
---- Comment #9 from power.cyan@openmail.cc ---
-That is true my patching skills are horrible. I see I try the patching again
-let see if its builds, just because some practice can't hurt, if fails agai=
-n I
-go with the mainline that has already been patched.
+--- Comment #10 from power.cyan@openmail.cc ---
+Oh almost forget tank you for the quick response to my problem.
 
 --=20
 You are receiving this mail because:
 You are the QA Contact for the bug.
 You are the assignee for the bug.=
 
---15627888270.340ba.14834
-Date: Wed, 10 Jul 2019 20:00:27 +0000
+--15627890490.FBbD2.14842
+Date: Wed, 10 Jul 2019 20:04:09 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -102,8 +99,8 @@ Auto-Submitted: auto-generated
           bz_status_NEW "
    title=3D"NEW - Mesa 18.2.8 implementation error: Invalid GLSL version in=
  shading_language_version()"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110955#c9">Commen=
-t # 9</a>
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110955#c10">Comme=
+nt # 10</a>
               on <a class=3D"bz_bug_link=20
           bz_status_NEW "
    title=3D"NEW - Mesa 18.2.8 implementation error: Invalid GLSL version in=
@@ -114,11 +111,8 @@ t # 9</a>
 power.cyan&#64;openmail.cc" title=3D"power.cyan&#64;openmail.cc">power.cyan=
 &#64;openmail.cc</a>
 </span></b>
-        <pre>That is true my patching skills are horrible. I see I try the =
-patching again
-let see if its builds, just because some practice can't hurt, if fails agai=
-n I
-go with the mainline that has already been patched.</pre>
+        <pre>Oh almost forget tank you for the quick response to my problem=
+.</pre>
         </div>
       </p>
 
@@ -133,9 +127,9 @@ go with the mainline that has already been patched.</pre>
     </body>
 </html>=
 
---15627888270.340ba.14834--
+--15627890490.FBbD2.14842--
 
---===============0042538526==
+--===============0310586222==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -145,4 +139,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============0042538526==--
+--===============0310586222==--
