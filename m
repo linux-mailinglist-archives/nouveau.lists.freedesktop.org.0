@@ -2,45 +2,49 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id A530C65271
-	for <lists+nouveau@lfdr.de>; Thu, 11 Jul 2019 09:24:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BA1C065933
+	for <lists+nouveau@lfdr.de>; Thu, 11 Jul 2019 16:42:24 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1CAB76E13A;
-	Thu, 11 Jul 2019 07:24:16 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5C6F86E25D;
+	Thu, 11 Jul 2019 14:42:20 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
- by gabe.freedesktop.org (Postfix) with ESMTP id CB64C6E13B
- for <nouveau@lists.freedesktop.org>; Thu, 11 Jul 2019 07:24:10 +0000 (UTC)
-Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id C7E7972167; Thu, 11 Jul 2019 07:24:10 +0000 (UTC)
-From: bugzilla-daemon@freedesktop.org
+Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com
+ [209.85.221.48])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 107E76E24E
+ for <nouveau@lists.freedesktop.org>; Thu, 11 Jul 2019 14:18:17 +0000 (UTC)
+Received: by mail-wr1-f48.google.com with SMTP id j8so2415013wrj.9
+ for <nouveau@lists.freedesktop.org>; Thu, 11 Jul 2019 07:18:16 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=sAzcovVRXPCeaR2nSfCBiJKzt4ll6AfkNLc/XcAygHs=;
+ b=Q5scJgb4T4fb1sWQ3bSX3UEHrtSx5JetzbqWweWHvTantTJzJHoqUm+i1LWOC55GoM
+ MyP0iz4eoadOwomJ70BYJTdyPkUvW6dJC3rENeuNpoqxUgNJkQdx17kZCKMoyVdefwoO
+ fDnndI/t5QQzb84lYjPCinuqg2PJAXBxiLQ/vozpuQu9NQM8Vh/n/w2r21/onaqQoSX5
+ gM5tKcHOZE4gT4b07AOKgYG+DPw9RiNgQpjsBP7hsZnkyY/jl4+upfSryZzn2BwG+po2
+ +vYlAOmF61oMlLKuTwh9uhutD3KxAnwjEfpkqsDMw1dgPZhr6CPrC1SrP8W65pLeO8v4
+ FcKw==
+X-Gm-Message-State: APjAAAViAN+2pX1XbWBk/sChXd8WfTGITqwJBh+0NjXed8sO5iWtk3SO
+ 93o8h3XprI7jF2JKrXg35wGLbU+ikP0=
+X-Google-Smtp-Source: APXvYqy41aDDY9BonBFsucX29jvO1oq4lf1RoVl8jfeJAEOwP7/2KAKkyTTz+i1JN9M8x/NEN1Oa4Q==
+X-Received: by 2002:adf:f8cf:: with SMTP id f15mr5448129wrq.333.1562854695577; 
+ Thu, 11 Jul 2019 07:18:15 -0700 (PDT)
+Received: from localhost.localdomain.com (nat-pool-brq-t.redhat.com.
+ [213.175.37.10])
+ by smtp.gmail.com with ESMTPSA id 5sm5883635wmg.42.2019.07.11.07.18.14
+ (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+ Thu, 11 Jul 2019 07:18:15 -0700 (PDT)
+From: Mark Menzynski <mmenzyns@redhat.com>
 To: nouveau@lists.freedesktop.org
-Date: Thu, 11 Jul 2019 07:24:10 +0000
-X-Bugzilla-Reason: AssignedTo
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: None
-X-Bugzilla-Product: xorg
-X-Bugzilla-Component: Driver/nouveau
-X-Bugzilla-Version: unspecified
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: normal
-X-Bugzilla-Who: dan@reactivated.net
-X-Bugzilla-Status: NEW
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: medium
-X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-75985-8800-J6IYhZM5oK@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-75985-8800@http.bugs.freedesktop.org/>
-References: <bug-75985-8800@http.bugs.freedesktop.org/>
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
+Date: Thu, 11 Jul 2019 16:11:49 +0200
+Message-Id: <20190711141153.7723-1-mmenzyns@redhat.com>
+X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 75985] [NVC1] HDMI audio device only visible after
- rescan
+X-Mailman-Approved-At: Thu, 11 Jul 2019 14:42:17 +0000
+Subject: [Nouveau] [PATCH 0/4] Refuse to load if the power cable are not
+ connected
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -52,93 +56,20 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1628543845=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-
---===============1628543845==
-Content-Type: multipart/alternative; boundary="15628298503.cfd8a96A0.18001"
-Content-Transfer-Encoding: 7bit
-
-
---15628298503.cfd8a96A0.18001
-Date: Thu, 11 Jul 2019 07:24:10 +0000
-MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-https://bugs.freedesktop.org/show_bug.cgi?id=3D75985
-
---- Comment #80 from Daniel Drake <dan@reactivated.net> ---
-A patch titled "PCI: Enable NVIDIA HDA controllers" (effecively attachment
-#137939) is headed into linux-next and potentially Linux 5.3. Testing
-appreciated!
-
---=20
-You are receiving this mail because:
-You are the assignee for the bug.=
-
---15628298503.cfd8a96A0.18001
-Date: Thu, 11 Jul 2019 07:24:10 +0000
-MIME-Version: 1.0
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-<html>
-    <head>
-      <base href=3D"https://bugs.freedesktop.org/">
-    </head>
-    <body>
-      <p>
-        <div>
-            <b><a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - [NVC1] HDMI audio device only visible after rescan"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D75985#c80">Commen=
-t # 80</a>
-              on <a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - [NVC1] HDMI audio device only visible after rescan"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D75985">bug 75985<=
-/a>
-              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
-dan&#64;reactivated.net" title=3D"Daniel Drake &lt;dan&#64;reactivated.net&=
-gt;"> <span class=3D"fn">Daniel Drake</span></a>
-</span></b>
-        <pre>A patch titled &quot;PCI: Enable NVIDIA HDA controllers&quot; =
-(effecively attachment
-#137939 <a href=3D'page.cgi?id=3Dsplinter.html&amp;bug=3D75985&amp;attachme=
-nt=3D137939'>[review]</a>) is headed into linux-next and potentially Linux =
-5.3. Testing
-appreciated!</pre>
-        </div>
-      </p>
-
-
-      <hr>
-      <span>You are receiving this mail because:</span>
-
-      <ul>
-          <li>You are the assignee for the bug.</li>
-      </ul>
-    </body>
-</html>=
-
---15628298503.cfd8a96A0.18001--
-
---===============1628543845==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
-YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
-cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
-
---===============1628543845==--
+dHJlbGxvIGNhcmQ6Cmh0dHBzOi8vdHJlbGxvLmNvbS9jL2FkbXpEUnZkLzUwLXJlZHVjZS1wZXJm
+b3JtYW5jZS1yZWZ1c2UtdG8tYm9vdC1pZi1ub3QtYWxsLXRoZS1wb3dlci1jb25uZWN0b3JzLWFy
+ZS1wbHVnZ2VkCgpNYXJrIE1lbnp5bnNraSAoNCk6CiAgbW92ZWQgZ3BpbyBzbyBpdCBpcyBzb3J0
+ZWQgYnkgdmFsdWVzCiAgZ3BpbzogY2hlY2tpbmcgaWYgZ3B1IHBvd2VyIGNhYmxlIGlzIGNvbm5l
+Y3RlZAogIGdwaW86IGFkZGVkIHBvd2VyIGNoZWNrIGZvciBhbm90aGVyIEdQSU8KICBncGlvOiBh
+ZGRlZCBwb3dlciBjaGVjayBmb3IgYW5vdGhlciBHUElPCgogZHJtL25vdXZlYXUvaW5jbHVkZS9u
+dmttL3N1YmRldi9iaW9zL2dwaW8uaCB8ICA1ICsrKystCiBkcm0vbm91dmVhdS9udmttL3N1YmRl
+di9ncGlvL2Jhc2UuYyAgICAgICAgIHwgMjUgKysrKysrKysrKysrKysrKysrKysrCiAyIGZpbGVz
+IGNoYW5nZWQsIDI5IGluc2VydGlvbnMoKyksIDEgZGVsZXRpb24oLSkKCi0tIAoyLjIxLjAKCl9f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCk5vdXZlYXUgbWFp
+bGluZyBsaXN0Ck5vdXZlYXVAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJl
+ZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vbm91dmVhdQ==
