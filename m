@@ -1,45 +1,49 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id CA4F768115
-	for <lists+nouveau@lfdr.de>; Sun, 14 Jul 2019 21:34:22 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4384F68682
+	for <lists+nouveau@lfdr.de>; Mon, 15 Jul 2019 11:43:10 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D7D96892ED;
-	Sun, 14 Jul 2019 19:34:20 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 2D85589904;
+	Mon, 15 Jul 2019 09:43:08 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
- by gabe.freedesktop.org (Postfix) with ESMTP id A91968905E
- for <nouveau@lists.freedesktop.org>; Sun, 14 Jul 2019 19:34:19 +0000 (UTC)
-Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 9F69E72167; Sun, 14 Jul 2019 19:34:19 +0000 (UTC)
-From: bugzilla-daemon@freedesktop.org
+Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com
+ [209.85.221.51])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 143E589904
+ for <nouveau@lists.freedesktop.org>; Mon, 15 Jul 2019 09:43:06 +0000 (UTC)
+Received: by mail-wr1-f51.google.com with SMTP id z1so16287149wru.13
+ for <nouveau@lists.freedesktop.org>; Mon, 15 Jul 2019 02:43:06 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=ZouXRxeYz5RItgb6WYUSQHKONSVg5uwDIFKhjkglniQ=;
+ b=imS3wp7DnsGv4quNOwKhkbpuAZufusg6gykWiqpTLtKVGVwzCTmKoptaqI9TmegGui
+ 2mv7iIzjfoQUqjhuQmoe6bB8dJrybuW69rm27/ubJQ0H72WIV7Y4kQgQMf3mRY2vlUQd
+ 1czH4Imam8c0faxbtJnYDCLXu9shwLW9Be+u4kIpByzSvMyxcZC0EuApEN4ArXXXTcU0
+ CQju7W05hkiKusD7medUj8zE/Vy9DCHO4anCN2LvPApQxsSzNmVzbHRPGpoT+sJLn6Ni
+ u9SJ8+p0IBM1ZnUneXD9Hre47dLcDL0ZJt4PFWBpNkQQ2eO7IkeY0SLtU3jXyHghfbAs
+ Eo9Q==
+X-Gm-Message-State: APjAAAUhSMmhCJ5EsV9l81pbp/2LmlvRc0PH5cL/T+nRmjvXque+YL/B
+ i4A8+RudnJ9NyJWEIeOWpIDfleZEIu0=
+X-Google-Smtp-Source: APXvYqzDDIGW0jdR+kSDPAaOf6ASkuUQGyKDunjPzArIPhqicVun1P6pIUWIpXNQ/wylpx7kj276mw==
+X-Received: by 2002:adf:da4d:: with SMTP id r13mr22054161wrl.281.1563183784543; 
+ Mon, 15 Jul 2019 02:43:04 -0700 (PDT)
+Received: from localhost.localdomain.com (nat-pool-brq-t.redhat.com.
+ [213.175.37.10])
+ by smtp.gmail.com with ESMTPSA id o126sm14383044wmo.1.2019.07.15.02.43.03
+ (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+ Mon, 15 Jul 2019 02:43:03 -0700 (PDT)
+From: Mark Menzynski <mmenzyns@redhat.com>
 To: nouveau@lists.freedesktop.org
-Date: Sun, 14 Jul 2019 19:34:19 +0000
-X-Bugzilla-Reason: AssignedTo QAcontact
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: None
-X-Bugzilla-Product: Mesa
-X-Bugzilla-Component: Drivers/DRI/nouveau
-X-Bugzilla-Version: 19.1
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: normal
-X-Bugzilla-Who: gzgagz@zoho.eu
-X-Bugzilla-Status: RESOLVED
-X-Bugzilla-Resolution: NOTABUG
-X-Bugzilla-Priority: medium
-X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-111128-8800-l9VtX04sQT@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-111128-8800@http.bugs.freedesktop.org/>
-References: <bug-111128-8800@http.bugs.freedesktop.org/>
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
+Date: Mon, 15 Jul 2019 11:42:43 +0200
+Message-Id: <20190715094247.8331-1-mmenzyns@redhat.com>
+X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 111128] Impossible to change pstate on GT610M
+Subject: [Nouveau] [PATCH v2 0/4] Refuse to load if power cables are not
+ connected
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -51,90 +55,21 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1077235945=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-
---===============1077235945==
-Content-Type: multipart/alternative; boundary="15631328590.B7F3B12.31487"
-Content-Transfer-Encoding: 7bit
-
-
---15631328590.B7F3B12.31487
-Date: Sun, 14 Jul 2019 19:34:19 +0000
-MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-https://bugs.freedesktop.org/show_bug.cgi?id=3D111128
-
---- Comment #2 from Gaga <gzgagz@zoho.eu> ---
-I am sorry, I was sure it was a Kepler GPU, I don't why.
-Thank you for your response and your work anyway !
-
---=20
-You are receiving this mail because:
-You are the assignee for the bug.
-You are the QA Contact for the bug.=
-
---15631328590.B7F3B12.31487
-Date: Sun, 14 Jul 2019 19:34:19 +0000
-MIME-Version: 1.0
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-<html>
-    <head>
-      <base href=3D"https://bugs.freedesktop.org/">
-    </head>
-    <body>
-      <p>
-        <div>
-            <b><a class=3D"bz_bug_link=20
-          bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED NOTABUG - Impossible to change pstate on GT610M"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111128#c2">Commen=
-t # 2</a>
-              on <a class=3D"bz_bug_link=20
-          bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED NOTABUG - Impossible to change pstate on GT610M"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111128">bug 11112=
-8</a>
-              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
-gzgagz&#64;zoho.eu" title=3D"Gaga &lt;gzgagz&#64;zoho.eu&gt;"> <span class=
-=3D"fn">Gaga</span></a>
-</span></b>
-        <pre>I am sorry, I was sure it was a Kepler GPU, I don't why.
-Thank you for your response and your work anyway !</pre>
-        </div>
-      </p>
-
-
-      <hr>
-      <span>You are receiving this mail because:</span>
-
-      <ul>
-          <li>You are the assignee for the bug.</li>
-          <li>You are the QA Contact for the bug.</li>
-      </ul>
-    </body>
-</html>=
-
---15631328590.B7F3B12.31487--
-
---===============1077235945==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
-YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
-cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
-
---===============1077235945==--
+VHJlbGxvOiAKaHR0cHM6Ly90cmVsbG8uY29tL2MvYWRtekRSdmQvNTAtcmVkdWNlLXBlcmZvcm1h
+bmNlLXJlZnVzZS10by1ib290LWlmLW5vdC1hbGwtdGhlLXBvd2VyLWNvbm5lY3RvcnMtYXJlLXBs
+dWdnZWQKCkZpeGVkIGNvbW1pdCBtZXNzYWdlcy4KCk1hcmsgTWVuenluc2tpICg0KToKICBiaW9z
+L2dwaW86IHNvcnQgZ3Bpb3MgYnkgdmFsdWVzCiAgZ3BpbzogZmFpbCBpZiBncHUgZXh0ZXJuYWwg
+cG93ZXIgaXMgbWlzc2luZwogIGdwaW86IGNoZWNrIHRoZSBncGlvIGZ1bmN0aW9uIDE2IGluIHRo
+ZSBwb3dlciBjaGVjayBhcyB3ZWxsCiAgZ3BpbzogY2hlY2sgZnVuY3Rpb24gNzYgaW4gdGhlIHBv
+d2VyIGNoZWNrIGFzIHdlbGwKCiBkcm0vbm91dmVhdS9pbmNsdWRlL252a20vc3ViZGV2L2Jpb3Mv
+Z3Bpby5oIHwgIDUgKysrKy0KIGRybS9ub3V2ZWF1L252a20vc3ViZGV2L2dwaW8vYmFzZS5jICAg
+ICAgICAgfCAyNSArKysrKysrKysrKysrKysrKysrKysKIDIgZmlsZXMgY2hhbmdlZCwgMjkgaW5z
+ZXJ0aW9ucygrKSwgMSBkZWxldGlvbigtKQoKLS0gCjIuMjEuMAoKX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBtYWlsaW5nIGxpc3QKTm91dmVh
+dUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFp
+bG1hbi9saXN0aW5mby9ub3V2ZWF1
