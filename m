@@ -2,45 +2,38 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id D13086BEE1
-	for <lists+nouveau@lfdr.de>; Wed, 17 Jul 2019 17:17:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 444116C484
+	for <lists+nouveau@lfdr.de>; Thu, 18 Jul 2019 03:45:03 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D1D3C6E15E;
-	Wed, 17 Jul 2019 15:17:27 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6F2936E2DF;
+	Thu, 18 Jul 2019 01:44:58 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [131.252.210.165])
- by gabe.freedesktop.org (Postfix) with ESMTP id 19A4A6E15E
- for <nouveau@lists.freedesktop.org>; Wed, 17 Jul 2019 15:17:27 +0000 (UTC)
-Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 0FB4D72167; Wed, 17 Jul 2019 15:17:27 +0000 (UTC)
-From: bugzilla-daemon@freedesktop.org
-To: nouveau@lists.freedesktop.org
-Date: Wed, 17 Jul 2019 15:17:22 +0000
-X-Bugzilla-Reason: QAcontact AssignedTo
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: None
-X-Bugzilla-Product: Mesa
-X-Bugzilla-Component: Drivers/DRI/nouveau
-X-Bugzilla-Version: 19.1
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: normal
-X-Bugzilla-Who: joinlaw@cock.li
-X-Bugzilla-Status: NEW
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: medium
-X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: attachments.created
-Message-ID: <bug-111007-8800-BslGKF8X7e@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-111007-8800@http.bugs.freedesktop.org/>
-References: <bug-111007-8800@http.bugs.freedesktop.org/>
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
+Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 133F16E2CE;
+ Thu, 18 Jul 2019 01:44:56 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
+ [10.5.11.23])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mx1.redhat.com (Postfix) with ESMTPS id 954743082A9C;
+ Thu, 18 Jul 2019 01:44:55 +0000 (UTC)
+Received: from whitewolf.redhat.com (ovpn-120-112.rdu2.redhat.com
+ [10.10.120.112])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 7236E19C67;
+ Thu, 18 Jul 2019 01:44:54 +0000 (UTC)
+From: Lyude Paul <lyude@redhat.com>
+To: dri-devel@lists.freedesktop.org
+Date: Wed, 17 Jul 2019 21:42:44 -0400
+Message-Id: <20190718014329.8107-22-lyude@redhat.com>
+In-Reply-To: <20190718014329.8107-1-lyude@redhat.com>
+References: <20190718014329.8107-1-lyude@redhat.com>
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 111007] Blender crash when opening material tab GTX
- 750Ti -- NV117 (GM107)
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+ (mx1.redhat.com [10.5.110.45]); Thu, 18 Jul 2019 01:44:55 +0000 (UTC)
+Subject: [Nouveau] [PATCH 21/26] drm/nouveau: Don't grab runtime PM refs for
+ HPD IRQs
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -52,115 +45,69 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0626253232=="
+Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
+ Imre Deak <imre.deak@intel.com>, linux-kernel@vger.kernel.org,
+ Juston Li <juston.li@intel.com>, Daniel Vetter <daniel@ffwll.ch>,
+ Harry Wentland <hwentlan@amd.com>,
+ =?UTF-8?q?Ville=20Syrj=C3=A4l=C3=A4?= <ville.syrjala@linux.intel.com>,
+ Ben Skeggs <bskeggs@redhat.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-
---===============0626253232==
-Content-Type: multipart/alternative; boundary="15633766460.035a.1464"
-Content-Transfer-Encoding: 7bit
-
-
---15633766460.035a.1464
-Date: Wed, 17 Jul 2019 15:17:26 +0000
-MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-https://bugs.freedesktop.org/show_bug.cgi?id=3D111007
-
---- Comment #6 from joinlaw <joinlaw@cock.li> ---
-Created attachment 144811
-  --> https://bugs.freedesktop.org/attachment.cgi?id=3D144811&action=3Dedit
-This is an apitrace file for blender 2.8 rc1
-
-This bug appear when using evee realtime rendering engine which is OpenGL 3=
-.0+
-application and seems that is require a lot of GPU power or maybe some Open=
-GL
-3.0+
-functionality in broken in Nouveau.
-
-any way here is the trace file.
-
---=20
-You are receiving this mail because:
-You are the QA Contact for the bug.
-You are the assignee for the bug.=
-
---15633766460.035a.1464
-Date: Wed, 17 Jul 2019 15:17:26 +0000
-MIME-Version: 1.0
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-<html>
-    <head>
-      <base href=3D"https://bugs.freedesktop.org/">
-    </head>
-    <body>
-      <p>
-        <div>
-            <b><a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - Blender crash when opening material tab GTX 750Ti -- NV11=
-7 (GM107)"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111007#c6">Commen=
-t # 6</a>
-              on <a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - Blender crash when opening material tab GTX 750Ti -- NV11=
-7 (GM107)"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111007">bug 11100=
-7</a>
-              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
-joinlaw&#64;cock.li" title=3D"joinlaw &lt;joinlaw&#64;cock.li&gt;"> <span c=
-lass=3D"fn">joinlaw</span></a>
-</span></b>
-        <pre>Created <span class=3D""><a href=3D"attachment.cgi?id=3D144811=
-" name=3D"attach_144811" title=3D"This is an apitrace file for blender 2.8 =
-rc1">attachment 144811</a> <a href=3D"attachment.cgi?id=3D144811&amp;action=
-=3Dedit" title=3D"This is an apitrace file for blender 2.8 rc1">[details]</=
-a></span>
-This is an apitrace file for blender 2.8 rc1
-
-This bug appear when using evee realtime rendering engine which is OpenGL 3=
-.0+
-application and seems that is require a lot of GPU power or maybe some Open=
-GL
-3.0+
-functionality in broken in Nouveau.
-
-any way here is the trace file.</pre>
-        </div>
-      </p>
-
-
-      <hr>
-      <span>You are receiving this mail because:</span>
-
-      <ul>
-          <li>You are the QA Contact for the bug.</li>
-          <li>You are the assignee for the bug.</li>
-      </ul>
-    </body>
-</html>=
-
---15633766460.035a.1464--
-
---===============0626253232==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
-YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
-cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
-
---===============0626253232==--
+SW4gb3JkZXIgZm9yIHN1c3BlbmQvcmVzdW1lIHJlcHJvYmluZyB0byB3b3JrLCB3ZSBuZWVkIHRv
+IGJlIGFibGUgdG8KcGVyZm9ybSBzaWRlYmFuZCBjb21tdW5pY2F0aW9ucyBkdXJpbmcgc3VzcGVu
+ZC9yZXN1bWUsIGFsb25nIHdpdGgKcnVudGltZSBQTSBzdXNwZW5kL3Jlc3VtZS4gSW4gb3JkZXIg
+dG8gZG8gc28sIHdlIGFsc28gbmVlZCB0byBtYWtlIHN1cmUKdGhhdCBub3V2ZWF1IGRvZXNuJ3Qg
+Ym90aGVyIGdyYWJiaW5nIGEgcnVudGltZSBQTSByZWZlcmVuY2UgdG8gZG8gc28sCnNpbmNlIG90
+aGVyd2lzZSB3ZSdsbCBzdGFydCBkZWFkbG9ja2luZyBydW50aW1lIFBNIGFnYWluLgoKTm90ZSB0
+aGF0IHdlIHdlcmVuJ3QgYWJsZSB0byBkbyB0aGlzIGJlZm9yZSwgYmVjYXVzZSBvZiB0aGUgRFAg
+TVNUCmhlbHBlcnMgcHJvY2Vzc2luZyBVUCByZXF1ZXN0cyBmcm9tIHRvcG9sb2dpZXMgaW4gdGhl
+IHNhbWUgY29udGV4dCBhcwpkcm1fZHBfbXN0X2hwZF9pcnEoKSB3aGljaCB3b3VsZCBoYXZlIGNh
+dXNlZCB1cyB0byBvcGVuIG91cnNlbHZlcyB1cCB0bwpyZWNlaXZpbmcgaG90cGx1ZyBldmVudHMg
+YW5kIGRlYWRsb2NraW5nIHdpdGggcnVudGltZSBzdXNwZW5kL3Jlc3VtZS4KTm93IHRoYXQgdGhv
+c2UgcmVxdWVzdHMgYXJlIGhhbmRsZWQgYXN5bmNocm9ub3VzbHksIHRoaXMgY2hhbmdlIHNob3Vs
+ZApiZSBjb21wbGV0ZWx5IHNhZmUuCgpDYzogSnVzdG9uIExpIDxqdXN0b24ubGlAaW50ZWwuY29t
+PgpDYzogSW1yZSBEZWFrIDxpbXJlLmRlYWtAaW50ZWwuY29tPgpDYzogVmlsbGUgU3lyasOkbMOk
+IDx2aWxsZS5zeXJqYWxhQGxpbnV4LmludGVsLmNvbT4KQ2M6IEhhcnJ5IFdlbnRsYW5kIDxod2Vu
+dGxhbkBhbWQuY29tPgpTaWduZWQtb2ZmLWJ5OiBMeXVkZSBQYXVsIDxseXVkZUByZWRoYXQuY29t
+PgotLS0KIGRyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfY29ubmVjdG9yLmMgfCAzMyAr
+KysrKysrKysrKy0tLS0tLS0tLS0KIDEgZmlsZSBjaGFuZ2VkLCAxNyBpbnNlcnRpb25zKCspLCAx
+NiBkZWxldGlvbnMoLSkKCmRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2
+ZWF1X2Nvbm5lY3Rvci5jIGIvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9jb25uZWN0
+b3IuYwppbmRleCA0MTE2ZWU2MmFkYWYuLmU5ZTc4Njk2YTcyOCAxMDA2NDQKLS0tIGEvZHJpdmVy
+cy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9jb25uZWN0b3IuYworKysgYi9kcml2ZXJzL2dwdS9k
+cm0vbm91dmVhdS9ub3V2ZWF1X2Nvbm5lY3Rvci5jCkBAIC0xMTI5LDYgKzExMjksMTYgQEAgbm91
+dmVhdV9jb25uZWN0b3JfaG90cGx1ZyhzdHJ1Y3QgbnZpZl9ub3RpZnkgKm5vdGlmeSkKIAljb25z
+dCBjaGFyICpuYW1lID0gY29ubmVjdG9yLT5uYW1lOwogCXN0cnVjdCBub3V2ZWF1X2VuY29kZXIg
+Km52X2VuY29kZXI7CiAJaW50IHJldDsKKwlib29sIHBsdWdnZWQgPSAocmVwLT5tYXNrICE9IE5W
+SUZfTk9USUZZX0NPTk5fVjBfVU5QTFVHKTsKKworCWlmIChyZXAtPm1hc2sgJiBOVklGX05PVElG
+WV9DT05OX1YwX0lSUSkgeworCQlOVl9ERUJVRyhkcm0sICJzZXJ2aWNlICVzXG4iLCBuYW1lKTsK
+KwkJZHJtX2RwX2NlY19pcnEoJm52X2Nvbm5lY3Rvci0+YXV4KTsKKwkJaWYgKChudl9lbmNvZGVy
+ID0gZmluZF9lbmNvZGVyKGNvbm5lY3RvciwgRENCX09VVFBVVF9EUCkpKQorCQkJbnY1MF9tc3Rt
+X3NlcnZpY2UobnZfZW5jb2Rlci0+ZHAubXN0bSk7CisKKwkJcmV0dXJuIE5WSUZfTk9USUZZX0tF
+RVA7CisJfQogCiAJcmV0ID0gcG1fcnVudGltZV9nZXQoZHJtLT5kZXYtPmRldik7CiAJaWYgKHJl
+dCA9PSAwKSB7CkBAIC0xMTQ5LDI1ICsxMTU5LDE2IEBAIG5vdXZlYXVfY29ubmVjdG9yX2hvdHBs
+dWcoc3RydWN0IG52aWZfbm90aWZ5ICpub3RpZnkpCiAJCXJldHVybiBOVklGX05PVElGWV9EUk9Q
+OwogCX0KIAotCWlmIChyZXAtPm1hc2sgJiBOVklGX05PVElGWV9DT05OX1YwX0lSUSkgewotCQlO
+Vl9ERUJVRyhkcm0sICJzZXJ2aWNlICVzXG4iLCBuYW1lKTsKLQkJZHJtX2RwX2NlY19pcnEoJm52
+X2Nvbm5lY3Rvci0+YXV4KTsKLQkJaWYgKChudl9lbmNvZGVyID0gZmluZF9lbmNvZGVyKGNvbm5l
+Y3RvciwgRENCX09VVFBVVF9EUCkpKQotCQkJbnY1MF9tc3RtX3NlcnZpY2UobnZfZW5jb2Rlci0+
+ZHAubXN0bSk7Ci0JfSBlbHNlIHsKLQkJYm9vbCBwbHVnZ2VkID0gKHJlcC0+bWFzayAhPSBOVklG
+X05PVElGWV9DT05OX1YwX1VOUExVRyk7Ci0KKwlpZiAoIXBsdWdnZWQpCisJCWRybV9kcF9jZWNf
+dW5zZXRfZWRpZCgmbnZfY29ubmVjdG9yLT5hdXgpOworCU5WX0RFQlVHKGRybSwgIiVzcGx1Z2dl
+ZCAlc1xuIiwgcGx1Z2dlZCA/ICIiIDogInVuIiwgbmFtZSk7CisJaWYgKChudl9lbmNvZGVyID0g
+ZmluZF9lbmNvZGVyKGNvbm5lY3RvciwgRENCX09VVFBVVF9EUCkpKSB7CiAJCWlmICghcGx1Z2dl
+ZCkKLQkJCWRybV9kcF9jZWNfdW5zZXRfZWRpZCgmbnZfY29ubmVjdG9yLT5hdXgpOwotCQlOVl9E
+RUJVRyhkcm0sICIlc3BsdWdnZWQgJXNcbiIsIHBsdWdnZWQgPyAiIiA6ICJ1biIsIG5hbWUpOwot
+CQlpZiAoKG52X2VuY29kZXIgPSBmaW5kX2VuY29kZXIoY29ubmVjdG9yLCBEQ0JfT1VUUFVUX0RQ
+KSkpIHsKLQkJCWlmICghcGx1Z2dlZCkKLQkJCQludjUwX21zdG1fcmVtb3ZlKG52X2VuY29kZXIt
+PmRwLm1zdG0pOwotCQl9Ci0KLQkJZHJtX2hlbHBlcl9ocGRfaXJxX2V2ZW50KGNvbm5lY3Rvci0+
+ZGV2KTsKKwkJCW52NTBfbXN0bV9yZW1vdmUobnZfZW5jb2Rlci0+ZHAubXN0bSk7CiAJfQogCisJ
+ZHJtX2hlbHBlcl9ocGRfaXJxX2V2ZW50KGNvbm5lY3Rvci0+ZGV2KTsKKwogCXBtX3J1bnRpbWVf
+bWFya19sYXN0X2J1c3koZHJtLT5kZXYtPmRldik7CiAJcG1fcnVudGltZV9wdXRfYXV0b3N1c3Bl
+bmQoZHJtLT5kZXYtPmRldik7CiAJcmV0dXJuIE5WSUZfTk9USUZZX0tFRVA7Ci0tIAoyLjIxLjAK
+Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCk5vdXZlYXUg
+bWFpbGluZyBsaXN0Ck5vdXZlYXVAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMu
+ZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vbm91dmVhdQ==
