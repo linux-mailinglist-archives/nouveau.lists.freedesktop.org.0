@@ -1,51 +1,46 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7B58C6CAA2
-	for <lists+nouveau@lfdr.de>; Thu, 18 Jul 2019 10:07:55 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 083A16D141
+	for <lists+nouveau@lfdr.de>; Thu, 18 Jul 2019 17:38:41 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 074EE6E33F;
-	Thu, 18 Jul 2019 08:07:54 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 74B176E40F;
+	Thu, 18 Jul 2019 15:38:39 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wr1-f68.google.com (mail-wr1-f68.google.com
- [209.85.221.68])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 2C68C6E342
- for <nouveau@lists.freedesktop.org>; Thu, 18 Jul 2019 08:07:50 +0000 (UTC)
-Received: by mail-wr1-f68.google.com with SMTP id r1so27581165wrl.7
- for <nouveau@lists.freedesktop.org>; Thu, 18 Jul 2019 01:07:50 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=N+aKshin+cvfQzeYY7lvU4p/kfcDFe/TyM5OVeCVtbw=;
- b=hRM7uhE5yxESdaV6XOPL58lff7LnM/P3KxzeJ/9hq3hP1kL9gquQtcxDnBre9JAtHt
- CprnVUc/l7oDK295LWrSzhlgqYxfbf/X+eIw3LMmJx1QHJWecW2fOQI+F+9Lv89CjmEZ
- na1jbnBYGU+ckiwWIW5VybEiR5cu05nv+FGB7NCoUOQHmxDhNGCHT9dq5dEB1SRF2pA4
- 5i6ZkTd46QETjNUevXev8Kub8Xle2OTb3CnKVbfhhh7oU7sJnwJiuTZTFlisfu/rJCpm
- uts/A6ddZem1juCyZQHZBZW8xD+eP0mJvDRQN9yUGkvV0EwRLH1UKELyzRPxhka6xgV+
- +6Cw==
-X-Gm-Message-State: APjAAAXQfUBhici+vDKhY+F5u/ZriFeD35yYXCUq0cqu4cHd9xtYKywT
- GLhGKmPdlxYUh4WjjJuLvKblzXIgihQ=
-X-Google-Smtp-Source: APXvYqyDJbDHBv2ruzWDOTKYIPjMDK0Kyxjv45/QJNPfMB4w/P6zI7BVI9MNDRat3MWUZ8kAQYiG5w==
-X-Received: by 2002:a5d:428b:: with SMTP id k11mr17801898wrq.174.1563437268728; 
- Thu, 18 Jul 2019 01:07:48 -0700 (PDT)
-Received: from localhost.localdomain.com (nat-pool-brq-t.redhat.com.
- [213.175.37.10])
- by smtp.gmail.com with ESMTPSA id z1sm28354532wrv.90.2019.07.18.01.07.47
- (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
- Thu, 18 Jul 2019 01:07:48 -0700 (PDT)
-From: Mark Menzynski <mmenzyns@redhat.com>
+Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
+ [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 5CE816E40C
+ for <nouveau@lists.freedesktop.org>; Thu, 18 Jul 2019 15:38:38 +0000 (UTC)
+Received: by culpepper.freedesktop.org (Postfix, from userid 33)
+ id 5460D72167; Thu, 18 Jul 2019 15:38:38 +0000 (UTC)
+From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Thu, 18 Jul 2019 10:07:41 +0200
-Message-Id: <20190718080741.3147-5-mmenzyns@redhat.com>
-X-Mailer: git-send-email 2.21.0
-In-Reply-To: <20190718080741.3147-1-mmenzyns@redhat.com>
-References: <20190718080741.3147-1-mmenzyns@redhat.com>
+Date: Thu, 18 Jul 2019 15:38:38 +0000
+X-Bugzilla-Reason: AssignedTo QAcontact
+X-Bugzilla-Type: new
+X-Bugzilla-Watch-Reason: None
+X-Bugzilla-Product: Mesa
+X-Bugzilla-Component: Drivers/DRI/nouveau
+X-Bugzilla-Version: git
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: minor
+X-Bugzilla-Who: abelbriggs1@hotmail.com
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: medium
+X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: bug_id short_desc product version rep_platform
+ op_sys bug_status bug_severity priority component assigned_to reporter
+ qa_contact attachments.created
+Message-ID: <bug-111167-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-Subject: [Nouveau] [PATCH v3 4/4] gpio: check function 76 in the power check
- as well
+Subject: [Nouveau] [Bug 111167] New: Dividing zero by a uniform in loop
+ header causes segfault in nv50_ir::NVC0LegalizeSSA::handleDIV
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -57,35 +52,354 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============0404695916=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-QWRkZWQgR1BJTyBpcyAiUG93ZXIgQWxlcnQiLiBJdCdzIHVuY2VydGFpbiBpZiB0aGlzCkdQSU8g
-aXMgc2V0IG9uIEdQVSBpbml0aWFsaXphdGlvbiBvciBvbmx5IGlmIGEgY2hhbmdlIGlzIGRldGVj
-dGVkIGJ5IHRoZQpHUFUgYXQgcnVudGltZS4KClRoaXMgR1BJTyBjYW4gYmUgZm91bmQgb24gVGVz
-bGEgYW5kIHNvbWV0aW1lcyBvbiBGZXJtaSBHUFVzLgoKVW50ZXN0ZWQsIHdyb3RlIGFjY29yZGlu
-ZyB0byBkb2N1bWVudGF0aW9uLgoKU2lnbmVkLW9mZi1ieTogTWFyayBNZW56eW5za2kgPG1tZW56
-eW5zQHJlZGhhdC5jb20+Ci0tLQogZHJtL25vdXZlYXUvaW5jbHVkZS9udmttL3N1YmRldi9iaW9z
-L2dwaW8uaCB8IDEgKwogZHJtL25vdXZlYXUvbnZrbS9zdWJkZXYvZ3Bpby9iYXNlLmMgICAgICAg
-ICB8IDEgKwogMiBmaWxlcyBjaGFuZ2VkLCAyIGluc2VydGlvbnMoKykKCmRpZmYgLS1naXQgYS9k
-cm0vbm91dmVhdS9pbmNsdWRlL252a20vc3ViZGV2L2Jpb3MvZ3Bpby5oIGIvZHJtL25vdXZlYXUv
-aW5jbHVkZS9udmttL3N1YmRldi9iaW9zL2dwaW8uaAppbmRleCBmYzJiNWZiMC4uNzg0YzVmMjIg
-MTAwNjQ0Ci0tLSBhL2RybS9ub3V2ZWF1L2luY2x1ZGUvbnZrbS9zdWJkZXYvYmlvcy9ncGlvLmgK
-KysrIGIvZHJtL25vdXZlYXUvaW5jbHVkZS9udmttL3N1YmRldi9iaW9zL2dwaW8uaApAQCAtOCw2
-ICs4LDcgQEAgZW51bSBkY2JfZ3Bpb19mdW5jX25hbWUgewogCURDQl9HUElPX1RIRVJNX0VYVF9Q
-T1dFUl9FVkVOVCA9IDB4MTAsCiAJRENCX0dQSU9fVFZEQUMxID0gMHgyZCwKIAlEQ0JfR1BJT19G
-QU5fU0VOU0UgPSAweDNkLAorCURDQl9HUElPX1BPV0VSX0FMRVJUID0gMHg0YywKIAlEQ0JfR1BJ
-T19FWFRfUE9XRVJfTE9XID0gMHg3OSwKIAlEQ0JfR1BJT19MT0dPX0xFRF9QV00gPSAweDg0LAog
-CURDQl9HUElPX1VOVVNFRCA9IDB4ZmYsCmRpZmYgLS1naXQgYS9kcm0vbm91dmVhdS9udmttL3N1
-YmRldi9ncGlvL2Jhc2UuYyBiL2RybS9ub3V2ZWF1L252a20vc3ViZGV2L2dwaW8vYmFzZS5jCmlu
-ZGV4IGNjNTY2MzdmLi5hYjU0MWYyNiAxMDA2NDQKLS0tIGEvZHJtL25vdXZlYXUvbnZrbS9zdWJk
-ZXYvZ3Bpby9iYXNlLmMKKysrIGIvZHJtL25vdXZlYXUvbnZrbS9zdWJkZXYvZ3Bpby9iYXNlLmMK
-QEAgLTE4NSw2ICsxODUsNyBAQCBzdGF0aWMgY29uc3Qgc3RydWN0IGRtaV9zeXN0ZW1faWQgZ3Bp
-b19yZXNldF9pZHNbXSA9IHsKIAogc3RhdGljIGVudW0gZGNiX2dwaW9fZnVuY19uYW1lIHBvd2Vy
-X2NoZWNrc1tdID0gewogCURDQl9HUElPX1RIRVJNX0VYVF9QT1dFUl9FVkVOVCwKKwlEQ0JfR1BJ
-T19QT1dFUl9BTEVSVCwKIAlEQ0JfR1BJT19FWFRfUE9XRVJfTE9XLAogfTsKIAotLSAKMi4yMS4w
-CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpOb3V2ZWF1
-IG1haWxpbmcgbGlzdApOb3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3Rz
-LmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL25vdXZlYXU=
+
+--===============0404695916==
+Content-Type: multipart/alternative; boundary="15634643180.0dd4fe.15791"
+Content-Transfer-Encoding: 7bit
+
+
+--15634643180.0dd4fe.15791
+Date: Thu, 18 Jul 2019 15:38:38 +0000
+MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+https://bugs.freedesktop.org/show_bug.cgi?id=3D111167
+
+            Bug ID: 111167
+           Summary: Dividing zero by a uniform in loop header causes
+                    segfault in nv50_ir::NVC0LegalizeSSA::handleDIV
+           Product: Mesa
+           Version: git
+          Hardware: x86-64 (AMD64)
+                OS: Linux (All)
+            Status: NEW
+          Severity: minor
+          Priority: medium
+         Component: Drivers/DRI/nouveau
+          Assignee: nouveau@lists.freedesktop.org
+          Reporter: abelbriggs1@hotmail.com
+        QA Contact: nouveau@lists.freedesktop.org
+
+Created attachment 144815
+  --> https://bugs.freedesktop.org/attachment.cgi?id=3D144815&action=3Dedit
+Reproduction shader_test file, core dump of crash
+
+The attached archive contains a shader that, on the build and PC specified
+below, causes a segmentation fault in nouveau when run. A core dump of the
+crash is supplied as well.
+
+void main()
+{
+  for(int i =3D 1; 1 >=3D (0 / int((injectionSwitch.y))); 1)
+  {
+  }
+}
+
+The value of injectionSwitch is set to (0.0, 1.0) - so (0 /
+int(injectionSwitch.y)) is equivalent to (0 / 1), which should evaluate to =
+zero
+and make the two conditions equal. Notably, if you remove injectionSwitch a=
+nd
+replace it with =E2=80=981=E2=80=99, no segfault occurs.
+
+Steps to reproduce:
+---------------------------------------------------------------------------=
+----
+1. Obtain and build piglit, the Mesa OpenGL test suite runner:=20
+   https://gitlab.freedesktop.org/mesa/piglit
+2. Download the attached archive.
+3. From a terminal, execute the supplied test with the piglit GLES3 shader=
+=20
+   runner:=20
+   $ bin/shader_runner_gles3 minimum_testcase.shader_test
+
+Expected results:
+---------------------------------------------------------------------------=
+----
+The shader should run without crashing (it=E2=80=99s an infinite loop that =
+does
+nothing, but it still shouldn=E2=80=99t crash).
+
+Actual results:
+---------------------------------------------------------------------------=
+----
+The shader causes nouveau to segfault.
+
+Here is a backtrace obtained from using GDB on the core dump=20
+(exact command: $ gdb shader_runner_gles3 core):
+
+#0  std::_Deque_iterator<nv50_ir::ValueRef, nv50_ir::ValueRef&,
+nv50_ir::ValueRef*>::_Deque_iterator (
+    __x=3D<error reading variable: Cannot access memory at address 0xb0>,=20
+    this=3D<synthetic pointer>) at /usr/include/c++/8/bits/stl_deque.h:1401
+#1  std::_Deque_iterator<nv50_ir::ValueRef, nv50_ir::ValueRef&,
+nv50_ir::ValueRef*>::operator+ (__n=3D0, this=3D0xb0) at
+/usr/include/c++/8/bits/stl_deque.h:230
+#2  std::_Deque_iterator<nv50_ir::ValueRef, nv50_ir::ValueRef&,
+nv50_ir::ValueRef*>::operator[] (__n=3D0, this=3D0xb0) at
+/usr/include/c++/8/bits/stl_deque.h:247
+#3  std::deque<nv50_ir::ValueRef, std::allocator<nv50_ir::ValueRef>
+>::operator[] (__n=3D0, this=3D0xa0) at /usr/include/c++/8/bits/stl_deque.h=
+:1404
+#4  nv50_ir::Instruction::getSrc (s=3D0, this=3D0x0)
+    at ../src/gallium/drivers/nouveau/codegen/nv50_ir.h:827
+#5  nv50_ir::NVC0LegalizeSSA::handleDIV (this=3D0x7ffd7753af60, i=3D0x55d2e=
+1b132a0)
+    at ../src/gallium/drivers/nouveau/codegen/nv50_ir_lowering_nvc0.cpp:54
+#6  0x00007fc7191cb4b3 in nv50_ir::NVC0LegalizeSSA::visit (
+    this=3D0x7ffd7753af60, bb=3D<optimized out>)
+    at ../src/gallium/drivers/nouveau/codegen/nv50_ir_lowering_nvc0.cpp:334
+#7  0x00007fc719111928 in nv50_ir::Pass::doRun (this=3D0x7ffd7753af60,=20
+    func=3D<optimized out>, ordered=3D<optimized out>, skipPhi=3Dtrue)
+    at ../src/gallium/drivers/nouveau/codegen/nv50_ir_bb.cpp:500
+#8  0x00007fc7191119f4 in nv50_ir::Pass::doRun (this=3D0x7ffd7753af60,=20
+    prog=3D<optimized out>, ordered=3Dfalse, skipPhi=3Dtrue)
+    at ../src/gallium/drivers/nouveau/codegen/nv50_ir_inlines.h:413
+
+Build & PC specs:
+---------------------------------------------------------------------------=
+----
+CPU: Intel Core i7-5820k=20
+GPU: nVIDIA GTX 970
+
+OS: Ubuntu 19.04
+libdrm: git-5db0f7692d1fdf05f9f6c0c02ffa5a5f4379c1f3
+Mesa: git-a110a8090d
+Xf86-video-nouveau: 1.0.16
+Linux kernel version: 5.0.0-16-generic
+
+This bug was found with GraphicsFuzz: https://github.com/google/graphicsfuzz
+
+--=20
+You are receiving this mail because:
+You are the assignee for the bug.
+You are the QA Contact for the bug.=
+
+--15634643180.0dd4fe.15791
+Date: Thu, 18 Jul 2019 15:38:38 +0000
+MIME-Version: 1.0
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+<html>
+    <head>
+      <base href=3D"https://bugs.freedesktop.org/">
+    </head>
+    <body><table border=3D"1" cellspacing=3D"0" cellpadding=3D"8">
+        <tr>
+          <th>Bug ID</th>
+          <td><a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - Dividing zero by a uniform in loop header causes segfault=
+ in nv50_ir::NVC0LegalizeSSA::handleDIV"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111167">111167</a>
+          </td>
+        </tr>
+
+        <tr>
+          <th>Summary</th>
+          <td>Dividing zero by a uniform in loop header causes segfault in =
+nv50_ir::NVC0LegalizeSSA::handleDIV
+          </td>
+        </tr>
+
+        <tr>
+          <th>Product</th>
+          <td>Mesa
+          </td>
+        </tr>
+
+        <tr>
+          <th>Version</th>
+          <td>git
+          </td>
+        </tr>
+
+        <tr>
+          <th>Hardware</th>
+          <td>x86-64 (AMD64)
+          </td>
+        </tr>
+
+        <tr>
+          <th>OS</th>
+          <td>Linux (All)
+          </td>
+        </tr>
+
+        <tr>
+          <th>Status</th>
+          <td>NEW
+          </td>
+        </tr>
+
+        <tr>
+          <th>Severity</th>
+          <td>minor
+          </td>
+        </tr>
+
+        <tr>
+          <th>Priority</th>
+          <td>medium
+          </td>
+        </tr>
+
+        <tr>
+          <th>Component</th>
+          <td>Drivers/DRI/nouveau
+          </td>
+        </tr>
+
+        <tr>
+          <th>Assignee</th>
+          <td>nouveau&#64;lists.freedesktop.org
+          </td>
+        </tr>
+
+        <tr>
+          <th>Reporter</th>
+          <td>abelbriggs1&#64;hotmail.com
+          </td>
+        </tr>
+
+        <tr>
+          <th>QA Contact</th>
+          <td>nouveau&#64;lists.freedesktop.org
+          </td>
+        </tr></table>
+      <p>
+        <div>
+        <pre>Created <span class=3D""><a href=3D"attachment.cgi?id=3D144815=
+" name=3D"attach_144815" title=3D"Reproduction shader_test file, core dump =
+of crash">attachment 144815</a> <a href=3D"attachment.cgi?id=3D144815&amp;a=
+ction=3Dedit" title=3D"Reproduction shader_test file, core dump of crash">[=
+details]</a></span>
+Reproduction shader_test file, core dump of crash
+
+The attached archive contains a shader that, on the build and PC specified
+below, causes a segmentation fault in nouveau when run. A core dump of the
+crash is supplied as well.
+
+void main()
+{
+  for(int i =3D 1; 1 &gt;=3D (0 / int((injectionSwitch.y))); 1)
+  {
+  }
+}
+
+The value of injectionSwitch is set to (0.0, 1.0) - so (0 /
+int(injectionSwitch.y)) is equivalent to (0 / 1), which should evaluate to =
+zero
+and make the two conditions equal. Notably, if you remove injectionSwitch a=
+nd
+replace it with =E2=80=981=E2=80=99, no segfault occurs.
+
+Steps to reproduce:
+---------------------------------------------------------------------------=
+----
+1. Obtain and build piglit, the Mesa OpenGL test suite runner:=20
+   <a href=3D"https://gitlab.freedesktop.org/mesa/piglit">https://gitlab.fr=
+eedesktop.org/mesa/piglit</a>
+2. Download the attached archive.
+3. From a terminal, execute the supplied test with the piglit GLES3 shader=
+=20
+   runner:=20
+   $ bin/shader_runner_gles3 minimum_testcase.shader_test
+
+Expected results:
+---------------------------------------------------------------------------=
+----
+The shader should run without crashing (it=E2=80=99s an infinite loop that =
+does
+nothing, but it still shouldn=E2=80=99t crash).
+
+Actual results:
+---------------------------------------------------------------------------=
+----
+The shader causes nouveau to segfault.
+
+Here is a backtrace obtained from using GDB on the core dump=20
+(exact command: $ gdb shader_runner_gles3 core):
+
+#0  std::_Deque_iterator&lt;nv50_ir::ValueRef, nv50_ir::ValueRef&amp;,
+nv50_ir::ValueRef*&gt;::_Deque_iterator (
+    __x=3D&lt;error reading variable: Cannot access memory at address 0xb0&=
+gt;,=20
+    this=3D&lt;synthetic pointer&gt;) at /usr/include/c++/8/bits/stl_deque.=
+h:1401
+#1  std::_Deque_iterator&lt;nv50_ir::ValueRef, nv50_ir::ValueRef&amp;,
+nv50_ir::ValueRef*&gt;::operator+ (__n=3D0, this=3D0xb0) at
+/usr/include/c++/8/bits/stl_deque.h:230
+#2  std::_Deque_iterator&lt;nv50_ir::ValueRef, nv50_ir::ValueRef&amp;,
+nv50_ir::ValueRef*&gt;::operator[] (__n=3D0, this=3D0xb0) at
+/usr/include/c++/8/bits/stl_deque.h:247
+#3  std::deque&lt;nv50_ir::ValueRef, std::allocator&lt;nv50_ir::ValueRef&gt;
+<span class=3D"quote">&gt;::operator[] (__n=3D0, this=3D0xa0) at /usr/inclu=
+de/c++/8/bits/stl_deque.h:1404</span >
+#4  nv50_ir::Instruction::getSrc (s=3D0, this=3D0x0)
+    at ../src/gallium/drivers/nouveau/codegen/nv50_ir.h:827
+#5  nv50_ir::NVC0LegalizeSSA::handleDIV (this=3D0x7ffd7753af60, i=3D0x55d2e=
+1b132a0)
+    at ../src/gallium/drivers/nouveau/codegen/nv50_ir_lowering_nvc0.cpp:54
+#6  0x00007fc7191cb4b3 in nv50_ir::NVC0LegalizeSSA::visit (
+    this=3D0x7ffd7753af60, bb=3D&lt;optimized out&gt;)
+    at ../src/gallium/drivers/nouveau/codegen/nv50_ir_lowering_nvc0.cpp:334
+#7  0x00007fc719111928 in nv50_ir::Pass::doRun (this=3D0x7ffd7753af60,=20
+    func=3D&lt;optimized out&gt;, ordered=3D&lt;optimized out&gt;, skipPhi=
+=3Dtrue)
+    at ../src/gallium/drivers/nouveau/codegen/nv50_ir_bb.cpp:500
+#8  0x00007fc7191119f4 in nv50_ir::Pass::doRun (this=3D0x7ffd7753af60,=20
+    prog=3D&lt;optimized out&gt;, ordered=3Dfalse, skipPhi=3Dtrue)
+    at ../src/gallium/drivers/nouveau/codegen/nv50_ir_inlines.h:413
+
+Build &amp; PC specs:
+---------------------------------------------------------------------------=
+----
+CPU: Intel Core i7-5820k=20
+GPU: nVIDIA GTX 970
+
+OS: Ubuntu 19.04
+libdrm: git-5db0f7692d1fdf05f9f6c0c02ffa5a5f4379c1f3
+Mesa: git-a110a8090d
+Xf86-video-nouveau: 1.0.16
+Linux kernel version: 5.0.0-16-generic
+
+This bug was found with GraphicsFuzz: <a href=3D"https://github.com/google/=
+graphicsfuzz">https://github.com/google/graphicsfuzz</a></pre>
+        </div>
+      </p>
+
+
+      <hr>
+      <span>You are receiving this mail because:</span>
+
+      <ul>
+          <li>You are the assignee for the bug.</li>
+          <li>You are the QA Contact for the bug.</li>
+      </ul>
+    </body>
+</html>=
+
+--15634643180.0dd4fe.15791--
+
+--===============0404695916==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
+YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
+cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============0404695916==--
