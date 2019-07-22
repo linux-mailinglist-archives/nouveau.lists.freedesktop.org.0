@@ -2,56 +2,44 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 454517026D
-	for <lists+nouveau@lfdr.de>; Mon, 22 Jul 2019 16:38:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B3A7970A84
+	for <lists+nouveau@lfdr.de>; Mon, 22 Jul 2019 22:20:01 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id EEE42895F5;
-	Mon, 22 Jul 2019 14:37:48 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4483289E5B;
+	Mon, 22 Jul 2019 20:20:00 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-lj1-x244.google.com (mail-lj1-x244.google.com
- [IPv6:2a00:1450:4864:20::244])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 403C8895F5;
- Mon, 22 Jul 2019 14:37:47 +0000 (UTC)
-Received: by mail-lj1-x244.google.com with SMTP id v18so37807518ljh.6;
- Mon, 22 Jul 2019 07:37:47 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=SUH6arJbp14IVMjbkeZ0K94NO/z20TDutwCqOxsq4Fw=;
- b=K8yOIakUYaA+0La7SKvUIX8j4MsCgJDr/DrqV0Nf7j3EoimIDrXNeUpkgX2ULkkue0
- lLQpUxLOcRd+EY6Qs4dsJzOhTOgAyoaIgyjonFqIrQD8FQqN79NtR5gX1gmuXcpcae6G
- 9pBpty/CdPodJsFkw87mxxF7h5GJ2dkSKwvnCFF/oC1n42UUdf6PxGZgZWgwo8Digbt+
- s6RxEzcV+kuoCT1uM6JBd62uYEyrA+yoil9JYNx9AiyKpuI2qaYRN2wl5H769G1wczwE
- iR8buLNv7skRLr5Rr8Z0WBvKn3b9uIufH8/6y2zcCx69LxoKe42PAnGOUV5cbN19jpPA
- 6FZw==
-X-Gm-Message-State: APjAAAWzmxTwqresIrrmq2PhCSOE6JJJtvFD99I4o+vZ3vdUE/oIY1TS
- CwXx0BANyuFBe9mXVpgm+h/PL7keT2LUEa8DZEk=
-X-Google-Smtp-Source: APXvYqyUuyVhvpPVyaK0EtT6IHNJ3TNJikX6jVZCPNEmd7vcNDjv9sQO2bgfO2wFUz2CiCOMPgV4do0itfHJJ3iI0ko=
-X-Received: by 2002:a2e:b009:: with SMTP id y9mr25605680ljk.152.1563806265548; 
- Mon, 22 Jul 2019 07:37:45 -0700 (PDT)
+Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
+ [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 239ED89E5B
+ for <nouveau@lists.freedesktop.org>; Mon, 22 Jul 2019 20:19:59 +0000 (UTC)
+Received: by culpepper.freedesktop.org (Postfix, from userid 33)
+ id 2010172167; Mon, 22 Jul 2019 20:19:59 +0000 (UTC)
+From: bugzilla-daemon@freedesktop.org
+To: nouveau@lists.freedesktop.org
+Date: Mon, 22 Jul 2019 20:19:59 +0000
+X-Bugzilla-Reason: AssignedTo
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: None
+X-Bugzilla-Product: xorg
+X-Bugzilla-Component: Driver/nouveau
+X-Bugzilla-Version: unspecified
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: critical
+X-Bugzilla-Who: jpolowin@sympatico.ca
+X-Bugzilla-Status: REOPENED
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: medium
+X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: 
+Message-ID: <bug-110714-8800-48zIzWWJfD@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-110714-8800@http.bugs.freedesktop.org/>
+References: <bug-110714-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-References: <20190722094426.18563-1-hch@lst.de>
- <20190722094426.18563-2-hch@lst.de>
-In-Reply-To: <20190722094426.18563-2-hch@lst.de>
-From: Souptick Joarder <jrdr.linux@gmail.com>
-Date: Mon, 22 Jul 2019 20:07:33 +0530
-Message-ID: <CAFqt6zY8zWAmc-VTrZ1KxQPBCdbTxmZy_tq2-OkUi3TVrfp7Og@mail.gmail.com>
-To: Christoph Hellwig <hch@lst.de>
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc;
- bh=SUH6arJbp14IVMjbkeZ0K94NO/z20TDutwCqOxsq4Fw=;
- b=cNYsnnjVLguyuhcKHqqxp7hSA5M3S1DZvaBoF80d1MZLvyCLSsdsxyzbqp+hAugfqB
- La4mTA+QaSN25eS7kR5jYbs5x37bIW38yuFEe9LoQUhA4BKZbg7G89i02FTdSaoa/LHD
- 0/lmUGsZBZhSpFQ3CDG0yu7d0XOEvaaddpieq56zgY56JIdUSioPyWlIQN+Coy+AXBhh
- i8jmWmQqzLzSlVGdTV2hn84KzjVBQl4pbwsL+KCS9KIx6GA7hL+D2ZJUFh8ilWXmzYh/
- dAZFYOljbOddCkc8Zmh16FrOyiTux9Y7iKOyUucQi77FVxvyJCXpJp2vmP1KIUydFgVE
- 61bA==
-Subject: Re: [Nouveau] [PATCH 1/6] mm: always return EBUSY for invalid
- ranges in hmm_range_{fault, snapshot}
+Subject: [Nouveau] [Bug 110714] Xorg crashes randomly because of memory leak
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -63,65 +51,110 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Ralph Campbell <rcampbell@nvidia.com>, nouveau@lists.freedesktop.org,
- Felix Kuehling <Felix.Kuehling@amd.com>, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, Linux-MM <linux-mm@kvack.org>,
- Jason Gunthorpe <jgg@mellanox.com>, Ben Skeggs <bskeggs@redhat.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============0297175735=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-T24gTW9uLCBKdWwgMjIsIDIwMTkgYXQgMzoxNCBQTSBDaHJpc3RvcGggSGVsbHdpZyA8aGNoQGxz
-dC5kZT4gd3JvdGU6Cj4KPiBXZSBzaG91bGQgbm90IGhhdmUgdHdvIGRpZmZlcmVudCBlcnJvciBj
-b2RlcyBmb3IgdGhlIHNhbWUgY29uZGl0aW9uLiAgSW4KPiBhZGRpdGlvbiB0aGlzIHJlYWxseSBj
-b21wbGljYXRlcyB0aGUgY29kZSBkdWUgdG8gdGhlIHNwZWNpYWwgaGFuZGxpbmcgb2YKPiBFQUdB
-SU4gdGhhdCBkcm9wcyB0aGUgbW1hcF9zZW0gZHVlIHRvIHRoZSBGQVVMVF9GTEFHX0FMTE9XX1JF
-VFJZIGxvZ2ljCj4gaW4gdGhlIGNvcmUgdm0uCj4KPiBTaWduZWQtb2ZmLWJ5OiBDaHJpc3RvcGgg
-SGVsbHdpZyA8aGNoQGxzdC5kZT4KPiBSZXZpZXdlZC1ieTogUmFscGggQ2FtcGJlbGwgPHJjYW1w
-YmVsbEBudmlkaWEuY29tPgo+IFJldmlld2VkLWJ5OiBGZWxpeCBLdWVobGluZyA8RmVsaXguS3Vl
-aGxpbmdAYW1kLmNvbT4KPiAtLS0KPiAgRG9jdW1lbnRhdGlvbi92bS9obW0ucnN0IHwgIDIgKy0K
-PiAgbW0vaG1tLmMgICAgICAgICAgICAgICAgIHwgMTAgKysrKy0tLS0tLQo+ICAyIGZpbGVzIGNo
-YW5nZWQsIDUgaW5zZXJ0aW9ucygrKSwgNyBkZWxldGlvbnMoLSkKPgo+IGRpZmYgLS1naXQgYS9E
-b2N1bWVudGF0aW9uL3ZtL2htbS5yc3QgYi9Eb2N1bWVudGF0aW9uL3ZtL2htbS5yc3QKPiBpbmRl
-eCA3ZDkwOTY0YWJiYjAuLjcxMGNlMWM3MDFiZiAxMDA2NDQKPiAtLS0gYS9Eb2N1bWVudGF0aW9u
-L3ZtL2htbS5yc3QKPiArKysgYi9Eb2N1bWVudGF0aW9uL3ZtL2htbS5yc3QKPiBAQCAtMjM3LDcg
-KzIzNyw3IEBAIFRoZSB1c2FnZSBwYXR0ZXJuIGlzOjoKPiAgICAgICAgcmV0ID0gaG1tX3Jhbmdl
-X3NuYXBzaG90KCZyYW5nZSk7Cj4gICAgICAgIGlmIChyZXQpIHsKPiAgICAgICAgICAgIHVwX3Jl
-YWQoJm1tLT5tbWFwX3NlbSk7Cj4gLSAgICAgICAgICBpZiAocmV0ID09IC1FQUdBSU4pIHsKPiAr
-ICAgICAgICAgIGlmIChyZXQgPT0gLUVCVVNZKSB7Cj4gICAgICAgICAgICAgIC8qCj4gICAgICAg
-ICAgICAgICAqIE5vIG5lZWQgdG8gY2hlY2sgaG1tX3JhbmdlX3dhaXRfdW50aWxfdmFsaWQoKSBy
-ZXR1cm4gdmFsdWUKPiAgICAgICAgICAgICAgICogb24gcmV0cnkgd2Ugd2lsbCBnZXQgcHJvcGVy
-IGVycm9yIHdpdGggaG1tX3JhbmdlX3NuYXBzaG90KCkKPiBkaWZmIC0tZ2l0IGEvbW0vaG1tLmMg
-Yi9tbS9obW0uYwo+IGluZGV4IGUxZWVkZWYxMjljZi4uMTZiNjczMWEzNGRiIDEwMDY0NAo+IC0t
-LSBhL21tL2htbS5jCj4gKysrIGIvbW0vaG1tLmMKPiBAQCAtOTQ2LDcgKzk0Niw3IEBAIEVYUE9S
-VF9TWU1CT0woaG1tX3JhbmdlX3VucmVnaXN0ZXIpOwo+ICAgKiBAcmFuZ2U6IHJhbmdlCj4gICAq
-IFJldHVybjogLUVJTlZBTCBpZiBpbnZhbGlkIGFyZ3VtZW50LCAtRU5PTUVNIG91dCBvZiBtZW1v
-cnksIC1FUEVSTSBpbnZhbGlkCj4gICAqICAgICAgICAgIHBlcm1pc3Npb24gKGZvciBpbnN0YW5j
-ZSBhc2tpbmcgZm9yIHdyaXRlIGFuZCByYW5nZSBpcyByZWFkIG9ubHkpLAo+IC0gKiAgICAgICAg
-ICAtRUFHQUlOIGlmIHlvdSBuZWVkIHRvIHJldHJ5LCAtRUZBVUxUIGludmFsaWQgKGllIGVpdGhl
-ciBubyB2YWxpZAo+ICsgKiAgICAgICAgICAtRUJVU1kgaWYgeW91IG5lZWQgdG8gcmV0cnksIC1F
-RkFVTFQgaW52YWxpZCAoaWUgZWl0aGVyIG5vIHZhbGlkCj4gICAqICAgICAgICAgIHZtYSBvciBp
-dCBpcyBpbGxlZ2FsIHRvIGFjY2VzcyB0aGF0IHJhbmdlKSwgbnVtYmVyIG9mIHZhbGlkIHBhZ2Vz
-Cj4gICAqICAgICAgICAgIGluIHJhbmdlLT5wZm5zW10gKGZyb20gcmFuZ2Ugc3RhcnQgYWRkcmVz
-cykuCj4gICAqCj4gQEAgLTk2Nyw3ICs5NjcsNyBAQCBsb25nIGhtbV9yYW5nZV9zbmFwc2hvdChz
-dHJ1Y3QgaG1tX3JhbmdlICpyYW5nZSkKPiAgICAgICAgIGRvIHsKPiAgICAgICAgICAgICAgICAg
-LyogSWYgcmFuZ2UgaXMgbm8gbG9uZ2VyIHZhbGlkIGZvcmNlIHJldHJ5LiAqLwo+ICAgICAgICAg
-ICAgICAgICBpZiAoIXJhbmdlLT52YWxpZCkKPiAtICAgICAgICAgICAgICAgICAgICAgICByZXR1
-cm4gLUVBR0FJTjsKPiArICAgICAgICAgICAgICAgICAgICAgICByZXR1cm4gLUVCVVNZOwo+Cj4g
-ICAgICAgICAgICAgICAgIHZtYSA9IGZpbmRfdm1hKGhtbS0+bW0sIHN0YXJ0KTsKPiAgICAgICAg
-ICAgICAgICAgaWYgKHZtYSA9PSBOVUxMIHx8ICh2bWEtPnZtX2ZsYWdzICYgZGV2aWNlX3ZtYSkp
-Cj4gQEAgLTEwNjIsMTAgKzEwNjIsOCBAQCBsb25nIGhtbV9yYW5nZV9mYXVsdChzdHJ1Y3QgaG1t
-X3JhbmdlICpyYW5nZSwgYm9vbCBibG9jaykKPgo+ICAgICAgICAgZG8gewo+ICAgICAgICAgICAg
-ICAgICAvKiBJZiByYW5nZSBpcyBubyBsb25nZXIgdmFsaWQgZm9yY2UgcmV0cnkuICovCj4gLSAg
-ICAgICAgICAgICAgIGlmICghcmFuZ2UtPnZhbGlkKSB7Cj4gLSAgICAgICAgICAgICAgICAgICAg
-ICAgdXBfcmVhZCgmaG1tLT5tbS0+bW1hcF9zZW0pOwo+IC0gICAgICAgICAgICAgICAgICAgICAg
-IHJldHVybiAtRUFHQUlOOwo+IC0gICAgICAgICAgICAgICB9Cj4gKyAgICAgICAgICAgICAgIGlm
-ICghcmFuZ2UtPnZhbGlkKQo+ICsgICAgICAgICAgICAgICAgICAgICAgIHJldHVybiAtRUJVU1k7
-CgpJcyBpdCBmaW5lIHRvIHJlbW92ZSAgdXBfcmVhZCgmaG1tLT5tbS0+bW1hcF9zZW0pID8KCj4K
-PiAgICAgICAgICAgICAgICAgdm1hID0gZmluZF92bWEoaG1tLT5tbSwgc3RhcnQpOwo+ICAgICAg
-ICAgICAgICAgICBpZiAodm1hID09IE5VTEwgfHwgKHZtYS0+dm1fZmxhZ3MgJiBkZXZpY2Vfdm1h
-KSkKPiAtLQo+IDIuMjAuMQo+Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fCk5vdXZlYXUgbWFpbGluZyBsaXN0Ck5vdXZlYXVAbGlzdHMuZnJlZWRlc2t0b3Au
-b3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vbm91dmVh
-dQ==
+
+--===============0297175735==
+Content-Type: multipart/alternative; boundary="15638267991.Ffa8AEdc5.28551"
+Content-Transfer-Encoding: 7bit
+
+
+--15638267991.Ffa8AEdc5.28551
+Date: Mon, 22 Jul 2019 20:19:59 +0000
+MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+https://bugs.freedesktop.org/show_bug.cgi?id=3D110714
+
+--- Comment #15 from Joel Polowin <jpolowin@sympatico.ca> ---
+FWIW, I'm seeing the same symptoms -- I found this report while searching f=
+or
+info about what was going on.  The only notable apps running, so far as I'm
+aware, are VirtualBox and Firefox (along with various terminal and file
+windows).
+I use OpenOffice, but infrequently.  I definitely didn't have any documents
+open at the time of the most recent crash.
+
+I'm running 5.1.15-300.fc30.x86_64 .  I'm willing to send info if it will h=
+elp,
+but I must warn you that I'm anything but a power user -- I'd need some
+coaching
+to find files.
+
+--=20
+You are receiving this mail because:
+You are the assignee for the bug.=
+
+--15638267991.Ffa8AEdc5.28551
+Date: Mon, 22 Jul 2019 20:19:59 +0000
+MIME-Version: 1.0
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+<html>
+    <head>
+      <base href=3D"https://bugs.freedesktop.org/">
+    </head>
+    <body>
+      <p>
+        <div>
+            <b><a class=3D"bz_bug_link=20
+          bz_status_REOPENED "
+   title=3D"REOPENED - Xorg crashes randomly because of memory leak"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110714#c15">Comme=
+nt # 15</a>
+              on <a class=3D"bz_bug_link=20
+          bz_status_REOPENED "
+   title=3D"REOPENED - Xorg crashes randomly because of memory leak"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110714">bug 11071=
+4</a>
+              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
+jpolowin&#64;sympatico.ca" title=3D"Joel Polowin &lt;jpolowin&#64;sympatico=
+.ca&gt;"> <span class=3D"fn">Joel Polowin</span></a>
+</span></b>
+        <pre>FWIW, I'm seeing the same symptoms -- I found this report whil=
+e searching for
+info about what was going on.  The only notable apps running, so far as I'm
+aware, are VirtualBox and Firefox (along with various terminal and file
+windows).
+I use OpenOffice, but infrequently.  I definitely didn't have any documents
+open at the time of the most recent crash.
+
+I'm running 5.1.15-300.fc30.x86_64 .  I'm willing to send info if it will h=
+elp,
+but I must warn you that I'm anything but a power user -- I'd need some
+coaching
+to find files.</pre>
+        </div>
+      </p>
+
+
+      <hr>
+      <span>You are receiving this mail because:</span>
+
+      <ul>
+          <li>You are the assignee for the bug.</li>
+      </ul>
+    </body>
+</html>=
+
+--15638267991.Ffa8AEdc5.28551--
+
+--===============0297175735==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
+YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
+cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============0297175735==--
