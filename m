@@ -2,53 +2,45 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 033C37213E
-	for <lists+nouveau@lfdr.de>; Tue, 23 Jul 2019 23:05:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6EFA172325
+	for <lists+nouveau@lfdr.de>; Wed, 24 Jul 2019 01:39:02 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 70EB66E3BF;
-	Tue, 23 Jul 2019 21:05:20 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D3B0A6E3F9;
+	Tue, 23 Jul 2019 23:38:59 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from hqemgate15.nvidia.com (hqemgate15.nvidia.com [216.228.121.64])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B040B6E3BF;
- Tue, 23 Jul 2019 21:05:19 +0000 (UTC)
-Received: from hqpgpgate101.nvidia.com (Not Verified[216.228.121.13]) by
- hqemgate15.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
- id <B5d3776960000>; Tue, 23 Jul 2019 14:05:26 -0700
-Received: from hqmail.nvidia.com ([172.20.161.6])
- by hqpgpgate101.nvidia.com (PGP Universal service);
- Tue, 23 Jul 2019 14:05:19 -0700
-X-PGP-Universal: processed;
- by hqpgpgate101.nvidia.com on Tue, 23 Jul 2019 14:05:19 -0700
-Received: from HQMAIL107.nvidia.com (172.20.187.13) by HQMAIL108.nvidia.com
- (172.18.146.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Tue, 23 Jul
- 2019 21:05:15 +0000
-Received: from hqnvemgw01.nvidia.com (172.20.150.20) by HQMAIL107.nvidia.com
- (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3 via Frontend
- Transport; Tue, 23 Jul 2019 21:05:15 +0000
-Received: from rcampbell-dev.nvidia.com (Not Verified[10.110.48.66]) by
- hqnvemgw01.nvidia.com with Trustwave SEG (v7, 5, 8, 10121)
- id <B5d37768b0007>; Tue, 23 Jul 2019 14:05:15 -0700
-From: Ralph Campbell <rcampbell@nvidia.com>
-To: <linux-mm@kvack.org>
-Date: Tue, 23 Jul 2019 14:05:06 -0700
-Message-ID: <20190723210506.25127-1-rcampbell@nvidia.com>
-X-Mailer: git-send-email 2.20.1
+Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
+ [131.252.210.165])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 5BF536E404
+ for <nouveau@lists.freedesktop.org>; Tue, 23 Jul 2019 23:38:58 +0000 (UTC)
+Received: by culpepper.freedesktop.org (Postfix, from userid 33)
+ id 5900B72167; Tue, 23 Jul 2019 23:38:58 +0000 (UTC)
+From: bugzilla-daemon@freedesktop.org
+To: nouveau@lists.freedesktop.org
+Date: Tue, 23 Jul 2019 23:38:57 +0000
+X-Bugzilla-Reason: AssignedTo
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: None
+X-Bugzilla-Product: xorg
+X-Bugzilla-Component: Driver/nouveau
+X-Bugzilla-Version: unspecified
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: critical
+X-Bugzilla-Who: aaron.hamid@gmail.com
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: high
+X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: 
+Message-ID: <bug-99900-8800-6Q66YIAIom@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-99900-8800@http.bugs.freedesktop.org/>
+References: <bug-99900-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-X-NVConfidentiality: public
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=nvidia.com; s=n1; 
- t=1563915926; bh=rjC23JCqCu60sr5rHPIEAf4LwcRnQlVgUeBq46RAZu0=;
- h=X-PGP-Universal:From:To:CC:Subject:Date:Message-ID:X-Mailer:
- MIME-Version:X-NVConfidentiality:Content-Type:
- Content-Transfer-Encoding;
- b=clAJYjoGcvm398sj1Wc6QXusiqBt2h19IERPM5F4BhNYeDY+Dl6DDwBYlRyMojqx+
- c78VwtXD7Iv1yCqHRNgQfoil9L/CJeqNtFHc0X0XyG4GXjuYaz5gBl8CGO4s+5vG2n
- CX4bMazKSJZNVT4zgw9o4KOsejlQxYkY51ka1c/w525wmDsg+GvZ+2iOtPZAAycHW2
- PuiTQhdhxPI00ooFnzLrElgS9azGgL4fNNdFxjrfi/lWQQuJwmNmhB+gI8is6+btQD
- GoBt7AUMqR++W4l1w/ceYVCZpevJIRWuq+JMZmaIj+nNc1TdjVpENd0m3IS25SlgiQ
- WmQGHhmhtcnBQ==
-Subject: [Nouveau] [PATCH] mm/hmm: replace hmm_update with mmu_notifier_range
+Subject: [Nouveau] [Bug 99900] [NVC1] nouveau: freeze / crash after kernel
+ update to 4.10
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -60,101 +52,304 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Ralph Campbell <rcampbell@nvidia.com>, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- Jason Gunthorpe <jgg@mellanox.com>, Ben Skeggs <bskeggs@redhat.com>,
- Christoph Hellwig <hch@lst.de>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============0361433283=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-VGhlIGhtbV9taXJyb3Jfb3BzIGNhbGxiYWNrIGZ1bmN0aW9uIHN5bmNfY3B1X2RldmljZV9wYWdl
-dGFibGVzKCkgcGFzc2VzCmEgc3RydWN0IGhtbV91cGRhdGUgd2hpY2ggaXMgYSBzaW1wbGlmaWVk
-IHZlcnNpb24gb2Ygc3RydWN0Cm1tdV9ub3RpZmllcl9yYW5nZS4gVGhpcyBpcyB1bm5lY2Vzc2Fy
-eSBzbyByZXBsYWNlIGhtbV91cGRhdGUgd2l0aAptbXVfbm90aWZpZXJfcmFuZ2UgZGlyZWN0bHku
-CgpTaWduZWQtb2ZmLWJ5OiBSYWxwaCBDYW1wYmVsbCA8cmNhbXBiZWxsQG52aWRpYS5jb20+CkNj
-OiAiSsOpcsO0bWUgR2xpc3NlIiA8amdsaXNzZUByZWRoYXQuY29tPgpDYzogSmFzb24gR3VudGhv
-cnBlIDxqZ2dAbWVsbGFub3guY29tPgpDYzogQ2hyaXN0b3BoIEhlbGx3aWcgPGhjaEBsc3QuZGU+
-CkNjOiBCZW4gU2tlZ2dzIDxic2tlZ2dzQHJlZGhhdC5jb20+Ci0tLQoKVGhpcyBpcyBiYXNlZCBv
-biA1LjMuMC1yYzEgcGx1cyBDaHJpc3RvcGggSGVsbHdpZydzIDYgcGF0Y2hlcwooImhtbV9yYW5n
-ZV9mYXVsdCByZWxhdGVkIGZpeGVzIGFuZCBsZWdhY3kgQVBJIHJlbW92YWwgdjIiKS4KSmFzb24s
-IEkgYmVsaWV2ZSB0aGlzIGlzIHRoZSBwYXRjaCB5b3Ugd2VyZSByZXF1ZXN0aW5nLgoKIGRyaXZl
-cnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfc3ZtLmMgfCAgNCArKy0tCiBpbmNsdWRlL2xpbnV4
-L2htbS5oICAgICAgICAgICAgICAgICAgIHwgMzEgKysrKy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-CiBtbS9obW0uYyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHwgMTMgKysrKy0tLS0tLS0K
-IDMgZmlsZXMgY2hhbmdlZCwgMTAgaW5zZXJ0aW9ucygrKSwgMzggZGVsZXRpb25zKC0pCgpkaWZm
-IC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9zdm0uYyBiL2RyaXZlcnMv
-Z3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfc3ZtLmMKaW5kZXggYTljNWM1OGQ0MjViLi42Mjk4ZDJk
-YWRiNTUgMTAwNjQ0Ci0tLSBhL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfc3ZtLmMK
-KysrIGIvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9zdm0uYwpAQCAtMjUyLDEzICsy
-NTIsMTMgQEAgbm91dmVhdV9zdm1tX2ludmFsaWRhdGUoc3RydWN0IG5vdXZlYXVfc3ZtbSAqc3Zt
-bSwgdTY0IHN0YXJ0LCB1NjQgbGltaXQpCiAKIHN0YXRpYyBpbnQKIG5vdXZlYXVfc3ZtbV9zeW5j
-X2NwdV9kZXZpY2VfcGFnZXRhYmxlcyhzdHJ1Y3QgaG1tX21pcnJvciAqbWlycm9yLAotCQkJCQlj
-b25zdCBzdHJ1Y3QgaG1tX3VwZGF0ZSAqdXBkYXRlKQorCQkJCQljb25zdCBzdHJ1Y3QgbW11X25v
-dGlmaWVyX3JhbmdlICp1cGRhdGUpCiB7CiAJc3RydWN0IG5vdXZlYXVfc3ZtbSAqc3ZtbSA9IGNv
-bnRhaW5lcl9vZihtaXJyb3IsIHR5cGVvZigqc3ZtbSksIG1pcnJvcik7CiAJdW5zaWduZWQgbG9u
-ZyBzdGFydCA9IHVwZGF0ZS0+c3RhcnQ7CiAJdW5zaWduZWQgbG9uZyBsaW1pdCA9IHVwZGF0ZS0+
-ZW5kOwogCi0JaWYgKCF1cGRhdGUtPmJsb2NrYWJsZSkKKwlpZiAoIW1tdV9ub3RpZmllcl9yYW5n
-ZV9ibG9ja2FibGUodXBkYXRlKSkKIAkJcmV0dXJuIC1FQUdBSU47CiAKIAlTVk1NX0RCRyhzdm1t
-LCAiaW52YWxpZGF0ZSAlMDE2bHgtJTAxNmx4Iiwgc3RhcnQsIGxpbWl0KTsKZGlmZiAtLWdpdCBh
-L2luY2x1ZGUvbGludXgvaG1tLmggYi9pbmNsdWRlL2xpbnV4L2htbS5oCmluZGV4IDlmMzI1ODY2
-ODRjOS4uNjU5ZTI1YTE1NzAwIDEwMDY0NAotLS0gYS9pbmNsdWRlL2xpbnV4L2htbS5oCisrKyBi
-L2luY2x1ZGUvbGludXgvaG1tLmgKQEAgLTM0MCwyOSArMzQwLDYgQEAgc3RhdGljIGlubGluZSB1
-aW50NjRfdCBobW1fZGV2aWNlX2VudHJ5X2Zyb21fcGZuKGNvbnN0IHN0cnVjdCBobW1fcmFuZ2Ug
-KnJhbmdlLAogCiBzdHJ1Y3QgaG1tX21pcnJvcjsKIAotLyoKLSAqIGVudW0gaG1tX3VwZGF0ZV9l
-dmVudCAtIHR5cGUgb2YgdXBkYXRlCi0gKiBASE1NX1VQREFURV9JTlZBTElEQVRFOiBpbnZhbGlk
-YXRlIHJhbmdlIChubyBpbmRpY2F0aW9uIGFzIHRvIHdoeSkKLSAqLwotZW51bSBobW1fdXBkYXRl
-X2V2ZW50IHsKLQlITU1fVVBEQVRFX0lOVkFMSURBVEUsCi19OwotCi0vKgotICogc3RydWN0IGht
-bV91cGRhdGUgLSBITU0gdXBkYXRlIGluZm9ybWF0aW9uIGZvciBjYWxsYmFjawotICoKLSAqIEBz
-dGFydDogdmlydHVhbCBzdGFydCBhZGRyZXNzIG9mIHRoZSByYW5nZSB0byB1cGRhdGUKLSAqIEBl
-bmQ6IHZpcnR1YWwgZW5kIGFkZHJlc3Mgb2YgdGhlIHJhbmdlIHRvIHVwZGF0ZQotICogQGV2ZW50
-OiBldmVudCB0cmlnZ2VyaW5nIHRoZSB1cGRhdGUgKHdoYXQgaXMgaGFwcGVuaW5nKQotICogQGJs
-b2NrYWJsZTogY2FuIHRoZSBjYWxsYmFjayBibG9jay9zbGVlcCA/Ci0gKi8KLXN0cnVjdCBobW1f
-dXBkYXRlIHsKLQl1bnNpZ25lZCBsb25nIHN0YXJ0OwotCXVuc2lnbmVkIGxvbmcgZW5kOwotCWVu
-dW0gaG1tX3VwZGF0ZV9ldmVudCBldmVudDsKLQlib29sIGJsb2NrYWJsZTsKLX07Ci0KIC8qCiAg
-KiBzdHJ1Y3QgaG1tX21pcnJvcl9vcHMgLSBITU0gbWlycm9yIGRldmljZSBvcGVyYXRpb25zIGNh
-bGxiYWNrCiAgKgpAQCAtMzgzLDkgKzM2MCw5IEBAIHN0cnVjdCBobW1fbWlycm9yX29wcyB7CiAJ
-Lyogc3luY19jcHVfZGV2aWNlX3BhZ2V0YWJsZXMoKSAtIHN5bmNocm9uaXplIHBhZ2UgdGFibGVz
-CiAJICoKIAkgKiBAbWlycm9yOiBwb2ludGVyIHRvIHN0cnVjdCBobW1fbWlycm9yCi0JICogQHVw
-ZGF0ZTogdXBkYXRlIGluZm9ybWF0aW9uIChzZWUgc3RydWN0IGhtbV91cGRhdGUpCi0JICogUmV0
-dXJuOiAtRUFHQUlOIGlmIHVwZGF0ZS5ibG9ja2FibGUgZmFsc2UgYW5kIGNhbGxiYWNrIG5lZWQg
-dG8KLQkgKiAgICAgICAgICBibG9jaywgMCBvdGhlcndpc2UuCisJICogQHVwZGF0ZTogdXBkYXRl
-IGluZm9ybWF0aW9uIChzZWUgc3RydWN0IG1tdV9ub3RpZmllcl9yYW5nZSkKKwkgKiBSZXR1cm46
-IC1FQUdBSU4gaWYgbW11X25vdGlmaWVyX3JhbmdlX2Jsb2NrYWJsZSh1cGRhdGUpIGlzIGZhbHNl
-CisJICogYW5kIGNhbGxiYWNrIG5lZWRzIHRvIGJsb2NrLCAwIG90aGVyd2lzZS4KIAkgKgogCSAq
-IFRoaXMgY2FsbGJhY2sgdWx0aW1hdGVseSBvcmlnaW5hdGVzIGZyb20gbW11X25vdGlmaWVycyB3
-aGVuIHRoZSBDUFUKIAkgKiBwYWdlIHRhYmxlIGlzIHVwZGF0ZWQuIFRoZSBkZXZpY2UgZHJpdmVy
-IG11c3QgdXBkYXRlIGl0cyBwYWdlIHRhYmxlCkBAIC0zOTcsNyArMzc0LDcgQEAgc3RydWN0IGht
-bV9taXJyb3Jfb3BzIHsKIAkgKiBzeW5jaHJvbm91cyBjYWxsLgogCSAqLwogCWludCAoKnN5bmNf
-Y3B1X2RldmljZV9wYWdldGFibGVzKShzdHJ1Y3QgaG1tX21pcnJvciAqbWlycm9yLAotCQkJCQkg
-IGNvbnN0IHN0cnVjdCBobW1fdXBkYXRlICp1cGRhdGUpOworCQkJCWNvbnN0IHN0cnVjdCBtbXVf
-bm90aWZpZXJfcmFuZ2UgKnVwZGF0ZSk7CiB9OwogCiAvKgpkaWZmIC0tZ2l0IGEvbW0vaG1tLmMg
-Yi9tbS9obW0uYwppbmRleCAxNmI2NzMxYTM0ZGIuLmI4MTBhNGZhM2RlOSAxMDA2NDQKLS0tIGEv
-bW0vaG1tLmMKKysrIGIvbW0vaG1tLmMKQEAgLTE2NSw3ICsxNjUsNiBAQCBzdGF0aWMgaW50IGht
-bV9pbnZhbGlkYXRlX3JhbmdlX3N0YXJ0KHN0cnVjdCBtbXVfbm90aWZpZXIgKm1uLAogewogCXN0
-cnVjdCBobW0gKmhtbSA9IGNvbnRhaW5lcl9vZihtbiwgc3RydWN0IGhtbSwgbW11X25vdGlmaWVy
-KTsKIAlzdHJ1Y3QgaG1tX21pcnJvciAqbWlycm9yOwotCXN0cnVjdCBobW1fdXBkYXRlIHVwZGF0
-ZTsKIAlzdHJ1Y3QgaG1tX3JhbmdlICpyYW5nZTsKIAl1bnNpZ25lZCBsb25nIGZsYWdzOwogCWlu
-dCByZXQgPSAwOwpAQCAtMTczLDE1ICsxNzIsMTAgQEAgc3RhdGljIGludCBobW1faW52YWxpZGF0
-ZV9yYW5nZV9zdGFydChzdHJ1Y3QgbW11X25vdGlmaWVyICptbiwKIAlpZiAoIWtyZWZfZ2V0X3Vu
-bGVzc196ZXJvKCZobW0tPmtyZWYpKQogCQlyZXR1cm4gMDsKIAotCXVwZGF0ZS5zdGFydCA9IG5y
-YW5nZS0+c3RhcnQ7Ci0JdXBkYXRlLmVuZCA9IG5yYW5nZS0+ZW5kOwotCXVwZGF0ZS5ldmVudCA9
-IEhNTV9VUERBVEVfSU5WQUxJREFURTsKLQl1cGRhdGUuYmxvY2thYmxlID0gbW11X25vdGlmaWVy
-X3JhbmdlX2Jsb2NrYWJsZShucmFuZ2UpOwotCiAJc3Bpbl9sb2NrX2lycXNhdmUoJmhtbS0+cmFu
-Z2VzX2xvY2ssIGZsYWdzKTsKIAlobW0tPm5vdGlmaWVycysrOwogCWxpc3RfZm9yX2VhY2hfZW50
-cnkocmFuZ2UsICZobW0tPnJhbmdlcywgbGlzdCkgewotCQlpZiAodXBkYXRlLmVuZCA8IHJhbmdl
-LT5zdGFydCB8fCB1cGRhdGUuc3RhcnQgPj0gcmFuZ2UtPmVuZCkKKwkJaWYgKG5yYW5nZS0+ZW5k
-IDwgcmFuZ2UtPnN0YXJ0IHx8IG5yYW5nZS0+c3RhcnQgPj0gcmFuZ2UtPmVuZCkKIAkJCWNvbnRp
-bnVlOwogCiAJCXJhbmdlLT52YWxpZCA9IGZhbHNlOwpAQCAtMTk4LDkgKzE5MiwxMCBAQCBzdGF0
-aWMgaW50IGhtbV9pbnZhbGlkYXRlX3JhbmdlX3N0YXJ0KHN0cnVjdCBtbXVfbm90aWZpZXIgKm1u
-LAogCWxpc3RfZm9yX2VhY2hfZW50cnkobWlycm9yLCAmaG1tLT5taXJyb3JzLCBsaXN0KSB7CiAJ
-CWludCByYzsKIAotCQlyYyA9IG1pcnJvci0+b3BzLT5zeW5jX2NwdV9kZXZpY2VfcGFnZXRhYmxl
-cyhtaXJyb3IsICZ1cGRhdGUpOworCQlyYyA9IG1pcnJvci0+b3BzLT5zeW5jX2NwdV9kZXZpY2Vf
-cGFnZXRhYmxlcyhtaXJyb3IsIG5yYW5nZSk7CiAJCWlmIChyYykgewotCQkJaWYgKFdBUk5fT04o
-dXBkYXRlLmJsb2NrYWJsZSB8fCByYyAhPSAtRUFHQUlOKSkKKwkJCWlmIChXQVJOX09OKG1tdV9u
-b3RpZmllcl9yYW5nZV9ibG9ja2FibGUobnJhbmdlKSB8fAorCQkJICAgIHJjICE9IC1FQUdBSU4p
-KQogCQkJCWNvbnRpbnVlOwogCQkJcmV0ID0gLUVBR0FJTjsKIAkJCWJyZWFrOwotLSAKMi4yMC4x
-CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpOb3V2ZWF1
-IG1haWxpbmcgbGlzdApOb3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3Rz
-LmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL25vdXZlYXU=
+
+--===============0361433283==
+Content-Type: multipart/alternative; boundary="15639251382.A35E79.20614"
+Content-Transfer-Encoding: 7bit
+
+
+--15639251382.A35E79.20614
+Date: Tue, 23 Jul 2019 23:38:58 +0000
+MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+https://bugs.freedesktop.org/show_bug.cgi?id=3D99900
+
+--- Comment #27 from aaron.hamid@gmail.com ---
+I am encountering the same "kernel rejected pushbuf: Device or resource bus=
+y"
+crash/lock cited here and in
+https://bugs.freedesktop.org/show_bug.cgi?id=3D100567
+I'm posting here as I don't see SCHED_ERROR in my systemd journal, and I can
+reliably trigger it by running qemu android emulator like kong in
+https://bugs.freedesktop.org/show_bug.cgi?id=3D99900#c24 (so as far as I can
+tell, unless resolved android development is dead for me)
+
+Fedora 30
+Linux noir 5.1.18-300.fc30.x86_64 #1 SMP Mon Jul 15 15:42:34 UTC 2019 x86_64
+x86_64 x86_64 GNU/Linux
+
+lsmod | grep nouveau
+nouveau              2248704  10
+mxm_wmi                16384  1 nouveau
+i2c_algo_bit           16384  1 nouveau
+drm_kms_helper        212992  1 nouveau
+ttm                   114688  1 nouveau
+drm                   495616  10 drm_kms_helper,ttm,nouveau
+wmi                    36864  3 wmi_bmof,mxm_wmi,nouveau
+video                  49152  1 nouveau
+
+X11 Package:
+xorg-x11-drv-nouveau.x86_64 1:1.0.15-7.fc30
+
+About, Graphics: "NV134"
+
+lspci -vs 01:00.0
+01:00.0 VGA compatible controller: NVIDIA Corporation GP104 [GeForce GTX 10=
+70
+Ti] (rev a1) (prog-if 00 [VGA controller])
+        Subsystem: Gigabyte Technology Co., Ltd Device 3794
+        Flags: bus master, fast devsel, latency 0, IRQ 126
+        Memory at a2000000 (32-bit, non-prefetchable) [size=3D16M]
+        Memory at 90000000 (64-bit, prefetchable) [size=3D256M]
+        Memory at a0000000 (64-bit, prefetchable) [size=3D32M]
+        I/O ports at 3000 [size=3D128]
+        Expansion ROM at 000c0000 [disabled] [size=3D128K]
+        Capabilities: <access denied>
+        Kernel driver in use: nouveau
+        Kernel modules: nouveau
+
+journalctl
+
+Jul 23 18:56:50 noir org.gnome.Shell.desktop[2455]: nouveau: kernel rejected
+pushbuf: Device or resource busy
+Jul 23 18:56:50 noir org.gnome.Shell.desktop[2455]: nouveau: ch6: krec 0 pu=
+shes
+1 bufs 12 relocs 0
+Jul 23 18:56:50 noir org.gnome.Shell.desktop[2455]: nouveau: ch6: buf 00000=
+000
+00000003 00000004 00000004 00000000
+Jul 23 18:56:50 noir org.gnome.Shell.desktop[2455]: nouveau: ch6: buf 00000=
+001
+00000008 00000002 00000002 00000002
+Jul 23 18:56:50 noir org.gnome.Shell.desktop[2455]: nouveau: ch6: buf 00000=
+002
+0000000a 00000002 00000002 00000000
+Jul 23 18:56:50 noir org.gnome.Shell.desktop[2455]: nouveau: ch6: buf 00000=
+003
+00000006 00000004 00000000 00000004
+Jul 23 18:56:50 noir org.gnome.Shell.desktop[2455]: nouveau: ch6: buf 00000=
+004
+00000007 00000002 00000002 00000000
+Jul 23 18:56:50 noir org.gnome.Shell.desktop[2455]: nouveau: ch6: buf 00000=
+005
+00000021 00000002 00000002 00000002
+Jul 23 18:56:50 noir org.gnome.Shell.desktop[2455]: nouveau: ch6: buf 00000=
+006
+00000013 00000004 00000004 00000000
+Jul 23 18:56:50 noir org.gnome.Shell.desktop[2455]: nouveau: ch6: buf 00000=
+007
+0000003b 00000002 00000002 00000000
+Jul 23 18:56:50 noir org.gnome.Shell.desktop[2455]: nouveau: ch6: buf 00000=
+008
+000000c1 00000002 00000000 00000002
+Jul 23 18:56:50 noir org.gnome.Shell.desktop[2455]: nouveau: ch6: buf 00000=
+009
+0000007e 00000002 00000002 00000000
+Jul 23 18:56:50 noir org.gnome.Shell.desktop[2455]: nouveau: ch6: buf 00000=
+00a
+00000049 00000002 00000002 00000000
+Jul 23 18:56:50 noir org.gnome.Shell.desktop[2455]: nouveau: ch6: buf 00000=
+00b
+00000057 00000002 00000002 00000000
+Jul 23 18:56:50 noir org.gnome.Shell.desktop[2455]: nouveau: ch6: psh 00000=
+000
+000003ff10 0000041c54
+....
+Jul 23 18:56:50 noir kernel: nouveau 0000:01:00.0: Xwayland[2517]:
+nv50cal_space: -16
+...
+Jul 23 18:56:50 noir kernel: nouveau 0000:01:00.0: Xwayland[2517]:
+nv50cal_space: -16
+Jul 23 18:56:51 noir kernel: nouveau 0000:01:00.0: Xwayland[2517]:
+nv50cal_space: -16
+Jul 23 18:56:51 noir kernel: nouveau 0000:01:00.0: Xwayland[2517]:
+nv50cal_space: -16
+Jul 23 18:56:52 noir kernel: nouveau 0000:01:00.0: Xwayland[2517]:
+nv50cal_space: -16
+Jul 23 18:56:52 noir kernel: nouveau 0000:01:00.0: Xwayland[2517]:
+nv50cal_space: -16
+...
+
+--=20
+You are receiving this mail because:
+You are the assignee for the bug.=
+
+--15639251382.A35E79.20614
+Date: Tue, 23 Jul 2019 23:38:58 +0000
+MIME-Version: 1.0
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+<html>
+    <head>
+      <base href=3D"https://bugs.freedesktop.org/">
+    </head>
+    <body>
+      <p>
+        <div>
+            <b><a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - [NVC1] nouveau: freeze / crash after kernel update to 4.1=
+0"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D99900#c27">Commen=
+t # 27</a>
+              on <a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - [NVC1] nouveau: freeze / crash after kernel update to 4.1=
+0"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D99900">bug 99900<=
+/a>
+              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
+aaron.hamid&#64;gmail.com" title=3D"aaron.hamid&#64;gmail.com">aaron.hamid&=
+#64;gmail.com</a>
+</span></b>
+        <pre>I am encountering the same &quot;kernel rejected pushbuf: Devi=
+ce or resource busy&quot;
+crash/lock cited here and in
+<a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - Nouveau system freeze fifo: SCHED_ERROR 0a [CTXSW_TIMEOUT=
+]"
+   href=3D"show_bug.cgi?id=3D100567">https://bugs.freedesktop.org/show_bug.=
+cgi?id=3D100567</a>
+I'm posting here as I don't see SCHED_ERROR in my systemd journal, and I can
+reliably trigger it by running qemu android emulator like kong in
+<a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - [NVC1] nouveau: freeze / crash after kernel update to 4.1=
+0"
+   href=3D"show_bug.cgi?id=3D99900#c24">https://bugs.freedesktop.org/show_b=
+ug.cgi?id=3D99900#c24</a> (so as far as I can
+tell, unless resolved android development is dead for me)
+
+Fedora 30
+Linux noir 5.1.18-300.fc30.x86_64 #1 SMP Mon Jul 15 15:42:34 UTC 2019 x86_64
+x86_64 x86_64 GNU/Linux
+
+lsmod | grep nouveau
+nouveau              2248704  10
+mxm_wmi                16384  1 nouveau
+i2c_algo_bit           16384  1 nouveau
+drm_kms_helper        212992  1 nouveau
+ttm                   114688  1 nouveau
+drm                   495616  10 drm_kms_helper,ttm,nouveau
+wmi                    36864  3 wmi_bmof,mxm_wmi,nouveau
+video                  49152  1 nouveau
+
+X11 Package:
+xorg-x11-drv-nouveau.x86_64 1:1.0.15-7.fc30
+
+About, Graphics: &quot;NV134&quot;
+
+lspci -vs 01:00.0
+01:00.0 VGA compatible controller: NVIDIA Corporation GP104 [GeForce GTX 10=
+70
+Ti] (rev a1) (prog-if 00 [VGA controller])
+        Subsystem: Gigabyte Technology Co., Ltd Device 3794
+        Flags: bus master, fast devsel, latency 0, IRQ 126
+        Memory at a2000000 (32-bit, non-prefetchable) [size=3D16M]
+        Memory at 90000000 (64-bit, prefetchable) [size=3D256M]
+        Memory at a0000000 (64-bit, prefetchable) [size=3D32M]
+        I/O ports at 3000 [size=3D128]
+        Expansion ROM at 000c0000 [disabled] [size=3D128K]
+        Capabilities: &lt;access denied&gt;
+        Kernel driver in use: nouveau
+        Kernel modules: nouveau
+
+journalctl
+
+Jul 23 18:56:50 noir org.gnome.Shell.desktop[2455]: nouveau: kernel rejected
+pushbuf: Device or resource busy
+Jul 23 18:56:50 noir org.gnome.Shell.desktop[2455]: nouveau: ch6: krec 0 pu=
+shes
+1 bufs 12 relocs 0
+Jul 23 18:56:50 noir org.gnome.Shell.desktop[2455]: nouveau: ch6: buf 00000=
+000
+00000003 00000004 00000004 00000000
+Jul 23 18:56:50 noir org.gnome.Shell.desktop[2455]: nouveau: ch6: buf 00000=
+001
+00000008 00000002 00000002 00000002
+Jul 23 18:56:50 noir org.gnome.Shell.desktop[2455]: nouveau: ch6: buf 00000=
+002
+0000000a 00000002 00000002 00000000
+Jul 23 18:56:50 noir org.gnome.Shell.desktop[2455]: nouveau: ch6: buf 00000=
+003
+00000006 00000004 00000000 00000004
+Jul 23 18:56:50 noir org.gnome.Shell.desktop[2455]: nouveau: ch6: buf 00000=
+004
+00000007 00000002 00000002 00000000
+Jul 23 18:56:50 noir org.gnome.Shell.desktop[2455]: nouveau: ch6: buf 00000=
+005
+00000021 00000002 00000002 00000002
+Jul 23 18:56:50 noir org.gnome.Shell.desktop[2455]: nouveau: ch6: buf 00000=
+006
+00000013 00000004 00000004 00000000
+Jul 23 18:56:50 noir org.gnome.Shell.desktop[2455]: nouveau: ch6: buf 00000=
+007
+0000003b 00000002 00000002 00000000
+Jul 23 18:56:50 noir org.gnome.Shell.desktop[2455]: nouveau: ch6: buf 00000=
+008
+000000c1 00000002 00000000 00000002
+Jul 23 18:56:50 noir org.gnome.Shell.desktop[2455]: nouveau: ch6: buf 00000=
+009
+0000007e 00000002 00000002 00000000
+Jul 23 18:56:50 noir org.gnome.Shell.desktop[2455]: nouveau: ch6: buf 00000=
+00a
+00000049 00000002 00000002 00000000
+Jul 23 18:56:50 noir org.gnome.Shell.desktop[2455]: nouveau: ch6: buf 00000=
+00b
+00000057 00000002 00000002 00000000
+Jul 23 18:56:50 noir org.gnome.Shell.desktop[2455]: nouveau: ch6: psh 00000=
+000
+000003ff10 0000041c54
+....
+Jul 23 18:56:50 noir kernel: nouveau 0000:01:00.0: Xwayland[2517]:
+nv50cal_space: -16
+...
+Jul 23 18:56:50 noir kernel: nouveau 0000:01:00.0: Xwayland[2517]:
+nv50cal_space: -16
+Jul 23 18:56:51 noir kernel: nouveau 0000:01:00.0: Xwayland[2517]:
+nv50cal_space: -16
+Jul 23 18:56:51 noir kernel: nouveau 0000:01:00.0: Xwayland[2517]:
+nv50cal_space: -16
+Jul 23 18:56:52 noir kernel: nouveau 0000:01:00.0: Xwayland[2517]:
+nv50cal_space: -16
+Jul 23 18:56:52 noir kernel: nouveau 0000:01:00.0: Xwayland[2517]:
+nv50cal_space: -16
+...</pre>
+        </div>
+      </p>
+
+
+      <hr>
+      <span>You are receiving this mail because:</span>
+
+      <ul>
+          <li>You are the assignee for the bug.</li>
+      </ul>
+    </body>
+</html>=
+
+--15639251382.A35E79.20614--
+
+--===============0361433283==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
+YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
+cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============0361433283==--
