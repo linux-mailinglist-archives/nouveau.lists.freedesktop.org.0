@@ -2,30 +2,30 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 380D671CF3
-	for <lists+nouveau@lfdr.de>; Tue, 23 Jul 2019 18:30:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7345371CF8
+	for <lists+nouveau@lfdr.de>; Tue, 23 Jul 2019 18:32:50 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9B44D6E31A;
-	Tue, 23 Jul 2019 16:30:52 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4150B6E2F8;
+	Tue, 23 Jul 2019 16:32:48 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from verein.lst.de (verein.lst.de [213.95.11.211])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A21F36E317;
- Tue, 23 Jul 2019 16:30:50 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A6F726E2F8;
+ Tue, 23 Jul 2019 16:32:46 +0000 (UTC)
 Received: by verein.lst.de (Postfix, from userid 2407)
- id 9C53F68B02; Tue, 23 Jul 2019 18:30:48 +0200 (CEST)
-Date: Tue, 23 Jul 2019 18:30:48 +0200
+ id 1084268B02; Tue, 23 Jul 2019 18:32:45 +0200 (CEST)
+Date: Tue, 23 Jul 2019 18:32:44 +0200
 From: Christoph Hellwig <hch@lst.de>
 To: Jason Gunthorpe <jgg@mellanox.com>
-Message-ID: <20190723163048.GD1655@lst.de>
+Message-ID: <20190723163244.GE1655@lst.de>
 References: <20190722094426.18563-1-hch@lst.de>
- <20190722094426.18563-5-hch@lst.de> <20190723151824.GL15331@mellanox.com>
+ <20190723152737.GO15331@mellanox.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20190723151824.GL15331@mellanox.com>
+In-Reply-To: <20190723152737.GO15331@mellanox.com>
 User-Agent: Mutt/1.5.17 (2007-11-01)
-Subject: Re: [Nouveau] [PATCH 4/6] nouveau: unlock mmap_sem on all errors
- from nouveau_range_fault
+Subject: Re: [Nouveau] hmm_range_fault related fixes and legacy API removal
+ v2
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -48,22 +48,17 @@ Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-T24gVHVlLCBKdWwgMjMsIDIwMTkgYXQgMDM6MTg6MjhQTSArMDAwMCwgSmFzb24gR3VudGhvcnBl
-IHdyb3RlOgo+IEh1bS4uCj4gCj4gVGhlIGNhbGxlciBkb2VzIHRoaXM6Cj4gCj4gYWdhaW46Cj4g
-CQlyZXQgPSBub3V2ZWF1X3JhbmdlX2ZhdWx0KCZzdm1tLT5taXJyb3IsICZyYW5nZSk7Cj4gCQlp
-ZiAocmV0ID09IDApIHsKPiAJCQltdXRleF9sb2NrKCZzdm1tLT5tdXRleCk7Cj4gCQkJaWYgKCFu
-b3V2ZWF1X3JhbmdlX2RvbmUoJnJhbmdlKSkgewo+IAkJCQltdXRleF91bmxvY2soJnN2bW0tPm11
-dGV4KTsKPiAJCQkJZ290byBhZ2FpbjsKPiAKPiBBbmQgd2UgY2FuJ3QgY2FsbCBub3V2ZWF1X3Jh
-bmdlX2ZhdWx0KCkgLT4gaG1tX3JhbmdlX2ZhdWx0KCkgd2l0aG91dAo+IGhvbGRpbmcgdGhlIG1t
-YXBfc2VtLCBzbyB3ZSBjYW4ndCBhbGxvdyBub3V2ZWF1X3JhbmdlX2ZhdWx0IHRvIHVubG9jawo+
-IGl0LgoKR290byBhZ2FpbiBjYW4gb25seSBoYXBwZW4gaWYgbm91dmVhdV9yYW5nZV9mYXVsdCB3
-YXMgc3VjY2Vzc2Z1bCwKaW4gd2hpY2ggY2FzZSB3ZSBkaWQgbm90IGRyb3AgbW1hcF9zZW0uCgpB
-bHNvOgoKPiAgCXJldCA9IGhtbV9yYW5nZV9mYXVsdChyYW5nZSwgdHJ1ZSk7Cj4gIAlpZiAocmV0
-IDw9IDApIHsKPiAgCQlpZiAocmV0ID09IDApCj4gIAkJCXJldCA9IC1FQlVTWTsKPiAtCQl1cF9y
-ZWFkKCZyYW5nZS0+dm1hLT52bV9tbS0+bW1hcF9zZW0pOwo+ICAJCWhtbV9yYW5nZV91bnJlZ2lz
-dGVyKHJhbmdlKTsKClRoaXMgd291bGQgaG9sZCBtbWFwX3NlbSBvdmVyIGhtbV9yYW5nZV91bnJl
-Z2lzdGVyLCB3aGljaCBjYW4gbGVhZAp0byBkZWFkbG9jayBpZiB3ZSBjYWxsIGV4aXRfbW1hcCBh
-bmQgdGhlbiBhY3F1aXJlIG1tYXBfc2VtIGFnYWluLgpfX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fXwpOb3V2ZWF1IG1haWxpbmcgbGlzdApOb3V2ZWF1QGxpc3Rz
-LmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xp
-c3RpbmZvL25vdXZlYXU=
+T24gVHVlLCBKdWwgMjMsIDIwMTkgYXQgMDM6Mjc6NDFQTSArMDAwMCwgSmFzb24gR3VudGhvcnBl
+IHdyb3RlOgo+IElnbm9yaW5nIHRoZSBTVEFHSU5HIGlzc3VlIEkndmUgdHJpZWQgdG8gdXNlIHRo
+ZSBzYW1lIGd1aWRlbGluZSBhcyBmb3IKPiAtc3RhYmxlIGZvciAtcmMgLi4gCj4gCj4gU28gdGhp
+cyBpcyBhIHJlYWwgcHJvYmxlbSwgd2UgZGVmaW5pdGVseSBoaXQgdGhlIGxvY2tpbmcgYnVncyBp
+ZiB3ZQo+IHJldHJ5L2V0YyB1bmRlciBzdHJlc3MsIHNvIEkgd291bGQgYmUgT0sgdG8gc2VuZCBp
+dCB0byBMaW51cyBmb3IKPiBlYXJseS1yYy4KPiAKPiBIb3dldmVyLCBpdCBkb2Vzbid0IGxvb2sg
+bGlrZSB0aGUgMXN0IHBhdGNoIGlzIGZpeGluZyBhIGN1cnJlbnQgYnVnCj4gdGhvdWdoLCB0aGUg
+b25seSBjYWxsZXJzIHVzZXMgYmxvY2tpbmcgPSB0cnVlLCBzbyBqdXN0IHRoZSBtaWRkbGUKPiB0
+aHJlZSBhcmUgLXJjPwoKbm9uYmxvY2tpbmcgaXNuJ3QgdXNlZCBhbnl3aGVyLCBidXQgaXQgaXMg
+YSBtYWpvciwgbWFqb3IgQVBJIGJ1Zy4KWW91ciBjYWxsLCBidXQgaWYgaXQgd2FzIG15IHRyZWUg
+SSdkIHByb2JhYmx5IHNlbmQgaXQgdG8gTGludXMuCl9fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fCk5vdXZlYXUgbWFpbGluZyBsaXN0Ck5vdXZlYXVAbGlzdHMu
+ZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlz
+dGluZm8vbm91dmVhdQ==
