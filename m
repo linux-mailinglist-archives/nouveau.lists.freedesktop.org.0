@@ -1,45 +1,59 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1DB25775EA
-	for <lists+nouveau@lfdr.de>; Sat, 27 Jul 2019 04:21:24 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4687D7773A
+	for <lists+nouveau@lfdr.de>; Sat, 27 Jul 2019 08:24:17 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id CD1C06EE81;
-	Sat, 27 Jul 2019 02:21:21 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 399956EE8D;
+	Sat, 27 Jul 2019 06:24:15 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [131.252.210.165])
- by gabe.freedesktop.org (Postfix) with ESMTP id 25D656EE81
- for <nouveau@lists.freedesktop.org>; Sat, 27 Jul 2019 02:21:20 +0000 (UTC)
-Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 2345772167; Sat, 27 Jul 2019 02:21:20 +0000 (UTC)
-From: bugzilla-daemon@freedesktop.org
-To: nouveau@lists.freedesktop.org
-Date: Sat, 27 Jul 2019 02:21:20 +0000
-X-Bugzilla-Reason: QAcontact AssignedTo
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: None
-X-Bugzilla-Product: Mesa
-X-Bugzilla-Component: Drivers/DRI/nouveau
-X-Bugzilla-Version: 19.1
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: normal
-X-Bugzilla-Who: imirkin@alum.mit.edu
-X-Bugzilla-Status: NEW
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: medium
-X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-111213-8800-a8f1lKLG4I@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-111213-8800@http.bugs.freedesktop.org/>
-References: <bug-111213-8800@http.bugs.freedesktop.org/>
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
+Received: from mail-pf1-x443.google.com (mail-pf1-x443.google.com
+ [IPv6:2607:f8b0:4864:20::443])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4DDBF898F3;
+ Tue, 23 Jul 2019 10:39:58 +0000 (UTC)
+Received: by mail-pf1-x443.google.com with SMTP id m30so18947824pff.8;
+ Tue, 23 Jul 2019 03:39:58 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=Di0g6EEgkUa8jtL/xEkGliBvl02Xk0g05krGCQwF+C0=;
+ b=VasVHvMp7OfnZPbztOlTKA+HlD8kfbSIhqE5mOegPm/b+u8J/WfsJ9KWguiZBJ7nLs
+ XC6wCGxB/I8e0/Z4VT1qAHFbvxTyF/8VIDlPqqBejiW2EIVikyJbSajjz2esfz2tOouW
+ pUhc0paKQ+Kfuz1LVRDMArrrOmh6z+PlxgUf0YJe/9cKn0RkD8cAfEI+HW48/lGRbL1i
+ IMKk3S4HhwuhkVgmJqEPRGXr9G43AdIdb8fgt7DEWfzNx+AHWAkxY0MV1kW155NDtZfQ
+ jKIvZasYZdCG4I73672BpAQV0HpBcU5dKHfcFaXkLw5J6YRUXu0YEQUrqQZW2rvuQLsB
+ qt6w==
+X-Gm-Message-State: APjAAAXLoWVQKHYCND3QAy/IYTCJVhTvR72Z68tpLQqSKzzkJOiW26Gh
+ ezeAUTfGeijC85Sny1FA1ho=
+X-Google-Smtp-Source: APXvYqy7Kjo9yItNbo9h6YPST0TITXU2NUUbMtA2mboZtD4dEoR9nnh4uwzcJcZLdh/lBbE4uEC2vQ==
+X-Received: by 2002:a63:20d:: with SMTP id 13mr64729846pgc.253.1563878397922; 
+ Tue, 23 Jul 2019 03:39:57 -0700 (PDT)
+Received: from suzukaze.ipads-lab.se.sjtu.edu.cn ([89.31.126.54])
+ by smtp.gmail.com with ESMTPSA id x9sm20574868pgp.75.2019.07.23.03.39.55
+ (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+ Tue, 23 Jul 2019 03:39:57 -0700 (PDT)
+From: Chuhong Yuan <hslester96@gmail.com>
+To: 
+Date: Tue, 23 Jul 2019 18:39:39 +0800
+Message-Id: <20190723103938.4021-1-hslester96@gmail.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 111213] VA-API nouveau SIGSEGV and asserts
+X-Mailman-Approved-At: Sat, 27 Jul 2019 06:24:14 +0000
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20161025;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=Di0g6EEgkUa8jtL/xEkGliBvl02Xk0g05krGCQwF+C0=;
+ b=FwOqdcTPuWHslyIqWCg0jHZvRxaESjUl1kVvzINTDBMD1Pz/t53rxJBG58X7IdmmWL
+ sGPB4oaAXM8veLfN8/TaJNN+KxLHZkIOAR5uX4uMCbJ9LDlpub0BP6KTl6wxxfmqcUe/
+ 0LJHP+CtHakkxv+3kGR0t0gqiArmXgtJezB9n6LryYiAW8ZKDk38hbqSOMgZyZwZN2H4
+ G9QmrsvgHnufM9U8QHoa7FWJCypNLOPhGtDJRp3efrzHoDH+otqKwqbdKcrmXHv+768T
+ KGU9mla+HYsr2XwDu2bMhs4PCzy876fa0Ik209o4naJVpmHOklGN6E9wmwEgjEHWLpX+
+ KWTw==
+Subject: [Nouveau] [PATCH] drm/nouveau: Use dev_get_drvdata where possible
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -51,186 +65,34 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============2008215459=="
+Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
+ Chuhong Yuan <hslester96@gmail.com>, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>,
+ Daniel Vetter <daniel@ffwll.ch>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-
---===============2008215459==
-Content-Type: multipart/alternative; boundary="15641940801.e3Df8.20454"
-Content-Transfer-Encoding: 7bit
-
-
---15641940801.e3Df8.20454
-Date: Sat, 27 Jul 2019 02:21:20 +0000
-MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-https://bugs.freedesktop.org/show_bug.cgi?id=3D111213
-
---- Comment #8 from Ilia Mirkin <imirkin@alum.mit.edu> ---
-(In reply to KJ Liew from comment #6)
-> I don't know how you had verified VDPAU to make sure it is working. Runni=
-ng
-> vdpauinfo is not enough.
-
-mplayer -vo vdpau the-video
-
-See https://nouveau.freedesktop.org/wiki/VideoAcceleration/ -- "Using VDPAU=
-".
-(You also have to tell it to use the "vdpau" codecs.)
-
-> $ LIBVA_DRIVER_NAME=3Dvdpau VDPAU_DRIVER=3Dnouveau chromium
-> [19735:19735:0726/182126.662312:ERROR:vaapi_wrapper.cc(455)]
-> GetConfigAttributes failed for va_profile 13
-> [19735:19735:0726/182126.662353:ERROR:vaapi_wrapper.cc(455)]
-> GetConfigAttributes failed for va_profile 6
-> [19735:19735:0726/182126.662359:ERROR:vaapi_wrapper.cc(455)]
-> GetConfigAttributes failed for va_profile 7
-> [19735:19735:0726/182126.764805:ERROR:sandbox_linux.cc(368)]
-> InitializeSandbox() called with multiple threads in process gpu-process.
-> [19735:19735:0726/182126.808082:ERROR:buffer_manager.cc(488)]
-> [.DisplayCompositor]GL ERROR :GL_INVALID_OPERATION : glBufferData: <- err=
-or
-> from previous GL command
-> romium/chromium --type=3Dgpu-process
-> --field-trial-handle=3D7302155616383548209,8433935369873353489,131072
-> --disable-breakpad
-> --gpu-
-> preferences=3DKAAAAAAAAAAgAACgAQAAAAAAAAAAAGAAAAAAAAAAAAAIAAAAAAAAAAgAAAA=
-AAAAA
-> --service-request-channel-token=3D6382519074401266972:
-> ../mesa-19.1.3/src/gallium/drivers/nouveau/nvc0/nvc0_video.c:43:
-> nvc0_decoder_begin_frame: Assertion `ret =3D=3D 2' failed.
-
-Ah yeah, that's something else.
-
-This appears like it would happen as a result of
-
-   ret =3D nouveau_bo_map(bsp_bo, NOUVEAU_BO_WR, dec->client);
-
-failing. No clue how that could happen... OTOH, I see messages about thread=
-s,
-and certainly video decoding + GL in different threads is highly likely to =
-be
-broken with nouveau.
-
-Please try to build a debug version, see if that yields more info. Also look
-for errors in dmesg.
-
---=20
-You are receiving this mail because:
-You are the QA Contact for the bug.
-You are the assignee for the bug.=
-
---15641940801.e3Df8.20454
-Date: Sat, 27 Jul 2019 02:21:20 +0000
-MIME-Version: 1.0
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-<html>
-    <head>
-      <base href=3D"https://bugs.freedesktop.org/">
-    </head>
-    <body>
-      <p>
-        <div>
-            <b><a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - VA-API nouveau SIGSEGV and asserts"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111213#c8">Commen=
-t # 8</a>
-              on <a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - VA-API nouveau SIGSEGV and asserts"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111213">bug 11121=
-3</a>
-              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
-imirkin&#64;alum.mit.edu" title=3D"Ilia Mirkin &lt;imirkin&#64;alum.mit.edu=
-&gt;"> <span class=3D"fn">Ilia Mirkin</span></a>
-</span></b>
-        <pre>(In reply to KJ Liew from <a href=3D"show_bug.cgi?id=3D111213#=
-c6">comment #6</a>)
-<span class=3D"quote">&gt; I don't know how you had verified VDPAU to make =
-sure it is working. Running
-&gt; vdpauinfo is not enough.</span >
-
-mplayer -vo vdpau the-video
-
-See <a href=3D"https://nouveau.freedesktop.org/wiki/VideoAcceleration/">htt=
-ps://nouveau.freedesktop.org/wiki/VideoAcceleration/</a> -- &quot;Using VDP=
-AU&quot;.
-(You also have to tell it to use the &quot;vdpau&quot; codecs.)
-
-<span class=3D"quote">&gt; $ LIBVA_DRIVER_NAME=3Dvdpau VDPAU_DRIVER=3Dnouve=
-au chromium
-&gt; [19735:19735:0726/182126.662312:ERROR:vaapi_wrapper.cc(455)]
-&gt; GetConfigAttributes failed for va_profile 13
-&gt; [19735:19735:0726/182126.662353:ERROR:vaapi_wrapper.cc(455)]
-&gt; GetConfigAttributes failed for va_profile 6
-&gt; [19735:19735:0726/182126.662359:ERROR:vaapi_wrapper.cc(455)]
-&gt; GetConfigAttributes failed for va_profile 7
-&gt; [19735:19735:0726/182126.764805:ERROR:sandbox_linux.cc(368)]
-&gt; InitializeSandbox() called with multiple threads in process gpu-proces=
-s.
-&gt; [19735:19735:0726/182126.808082:ERROR:buffer_manager.cc(488)]
-&gt; [.DisplayCompositor]GL ERROR :GL_INVALID_OPERATION : glBufferData: &lt=
-;- error
-&gt; from previous GL command
-&gt; romium/chromium --type=3Dgpu-process
-&gt; --field-trial-handle=3D7302155616383548209,8433935369873353489,131072
-&gt; --disable-breakpad
-&gt; --gpu-
-&gt; preferences=3DKAAAAAAAAAAgAACgAQAAAAAAAAAAAGAAAAAAAAAAAAAIAAAAAAAAAAgA=
-AAAAAAAA
-&gt; --service-request-channel-token=3D6382519074401266972:
-&gt; ../mesa-19.1.3/src/gallium/drivers/nouveau/nvc0/nvc0_video.c:43:
-&gt; nvc0_decoder_begin_frame: Assertion `ret =3D=3D 2' failed.</span >
-
-Ah yeah, that's something else.
-
-This appears like it would happen as a result of
-
-   ret =3D nouveau_bo_map(bsp_bo, NOUVEAU_BO_WR, dec-&gt;client);
-
-failing. No clue how that could happen... OTOH, I see messages about thread=
-s,
-and certainly video decoding + GL in different threads is highly likely to =
-be
-broken with nouveau.
-
-Please try to build a debug version, see if that yields more info. Also look
-for errors in dmesg.</pre>
-        </div>
-      </p>
-
-
-      <hr>
-      <span>You are receiving this mail because:</span>
-
-      <ul>
-          <li>You are the QA Contact for the bug.</li>
-          <li>You are the assignee for the bug.</li>
-      </ul>
-    </body>
-</html>=
-
---15641940801.e3Df8.20454--
-
---===============2008215459==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
-YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
-cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
-
---===============2008215459==--
+SW5zdGVhZCBvZiB1c2luZyB0b19wY2lfZGV2ICsgcGNpX2dldF9kcnZkYXRhLAp1c2UgZGV2X2dl
+dF9kcnZkYXRhIHRvIG1ha2UgY29kZSBzaW1wbGVyLgoKU2lnbmVkLW9mZi1ieTogQ2h1aG9uZyBZ
+dWFuIDxoc2xlc3Rlcjk2QGdtYWlsLmNvbT4KLS0tCiBkcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9u
+b3V2ZWF1X2RybS5jIHwgNiArKy0tLS0KIDEgZmlsZSBjaGFuZ2VkLCAyIGluc2VydGlvbnMoKyks
+IDQgZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91
+dmVhdV9kcm0uYyBiL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfZHJtLmMKaW5kZXgg
+N2MyZmNhYmE0MmQ2Li4yMzIwM2RhZTIxMzcgMTAwNjQ0Ci0tLSBhL2RyaXZlcnMvZ3B1L2RybS9u
+b3V2ZWF1L25vdXZlYXVfZHJtLmMKKysrIGIvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVh
+dV9kcm0uYwpAQCAtODgzLDE2ICs4ODMsMTQgQEAgbm91dmVhdV9wbW9wc19yZXN1bWUoc3RydWN0
+IGRldmljZSAqZGV2KQogc3RhdGljIGludAogbm91dmVhdV9wbW9wc19mcmVlemUoc3RydWN0IGRl
+dmljZSAqZGV2KQogewotCXN0cnVjdCBwY2lfZGV2ICpwZGV2ID0gdG9fcGNpX2RldihkZXYpOwot
+CXN0cnVjdCBkcm1fZGV2aWNlICpkcm1fZGV2ID0gcGNpX2dldF9kcnZkYXRhKHBkZXYpOworCXN0
+cnVjdCBkcm1fZGV2aWNlICpkcm1fZGV2ID0gZGV2X2dldF9kcnZkYXRhKGRldik7CiAJcmV0dXJu
+IG5vdXZlYXVfZG9fc3VzcGVuZChkcm1fZGV2LCBmYWxzZSk7CiB9CiAKIHN0YXRpYyBpbnQKIG5v
+dXZlYXVfcG1vcHNfdGhhdyhzdHJ1Y3QgZGV2aWNlICpkZXYpCiB7Ci0Jc3RydWN0IHBjaV9kZXYg
+KnBkZXYgPSB0b19wY2lfZGV2KGRldik7Ci0Jc3RydWN0IGRybV9kZXZpY2UgKmRybV9kZXYgPSBw
+Y2lfZ2V0X2RydmRhdGEocGRldik7CisJc3RydWN0IGRybV9kZXZpY2UgKmRybV9kZXYgPSBkZXZf
+Z2V0X2RydmRhdGEoZGV2KTsKIAlyZXR1cm4gbm91dmVhdV9kb19yZXN1bWUoZHJtX2RldiwgZmFs
+c2UpOwogfQogCi0tIAoyLjIwLjEKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fCk5vdXZlYXUgbWFpbGluZyBsaXN0Ck5vdXZlYXVAbGlzdHMuZnJlZWRlc2t0
+b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vbm91
+dmVhdQ==
