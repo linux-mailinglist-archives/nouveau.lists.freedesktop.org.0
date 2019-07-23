@@ -2,44 +2,58 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8905370CC8
-	for <lists+nouveau@lfdr.de>; Tue, 23 Jul 2019 00:37:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7968370E83
+	for <lists+nouveau@lfdr.de>; Tue, 23 Jul 2019 03:11:09 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id ADA9489F38;
-	Mon, 22 Jul 2019 22:37:06 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 722BD89E7B;
+	Tue, 23 Jul 2019 01:11:07 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
- by gabe.freedesktop.org (Postfix) with ESMTP id 9B82089F38
- for <nouveau@lists.freedesktop.org>; Mon, 22 Jul 2019 22:37:05 +0000 (UTC)
-Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 97C8D72167; Mon, 22 Jul 2019 22:37:05 +0000 (UTC)
-From: bugzilla-daemon@freedesktop.org
-To: nouveau@lists.freedesktop.org
-Date: Mon, 22 Jul 2019 22:37:05 +0000
-X-Bugzilla-Reason: AssignedTo
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: None
-X-Bugzilla-Product: xorg
-X-Bugzilla-Component: Driver/nouveau
-X-Bugzilla-Version: unspecified
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: critical
-X-Bugzilla-Who: jpolowin@sympatico.ca
-X-Bugzilla-Status: REOPENED
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: medium
-X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-110714-8800-SfAIBKG9IN@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-110714-8800@http.bugs.freedesktop.org/>
-References: <bug-110714-8800@http.bugs.freedesktop.org/>
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
+Received: from hqemgate14.nvidia.com (hqemgate14.nvidia.com [216.228.121.143])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9A5BB89E7B;
+ Tue, 23 Jul 2019 01:11:05 +0000 (UTC)
+Received: from hqpgpgate102.nvidia.com (Not Verified[216.228.121.13]) by
+ hqemgate14.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
+ id <B5d365ea90001>; Mon, 22 Jul 2019 18:11:05 -0700
+Received: from hqmail.nvidia.com ([172.20.161.6])
+ by hqpgpgate102.nvidia.com (PGP Universal service);
+ Mon, 22 Jul 2019 18:11:05 -0700
+X-PGP-Universal: processed;
+ by hqpgpgate102.nvidia.com on Mon, 22 Jul 2019 18:11:05 -0700
+Received: from rcampbell-dev.nvidia.com (10.124.1.5) by HQMAIL107.nvidia.com
+ (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Tue, 23 Jul
+ 2019 01:11:04 +0000
+To: Christoph Hellwig <hch@lst.de>, =?UTF-8?B?SsOpcsO0bWUgR2xpc3Nl?=
+ <jglisse@redhat.com>, Jason Gunthorpe <jgg@mellanox.com>, Ben Skeggs
+ <bskeggs@redhat.com>
+References: <20190722094426.18563-1-hch@lst.de>
+X-Nvconfidentiality: public
+From: Ralph Campbell <rcampbell@nvidia.com>
+Message-ID: <7e1f33d4-4d3b-7927-38d1-b98b22ed4d78@nvidia.com>
+Date: Mon, 22 Jul 2019 18:11:04 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.7.0
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 110714] Xorg crashes randomly because of memory leak
+In-Reply-To: <20190722094426.18563-1-hch@lst.de>
+X-Originating-IP: [10.124.1.5]
+X-ClientProxiedBy: HQMAIL104.nvidia.com (172.18.146.11) To
+ HQMAIL107.nvidia.com (172.20.187.13)
+Content-Language: en-US
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=nvidia.com; s=n1; 
+ t=1563844265; bh=kscjS9D5ks2yd1t6YQtphh4j4hyaf8nJbzsPpcUAaRc=;
+ h=X-PGP-Universal:Subject:To:CC:References:X-Nvconfidentiality:From:
+ Message-ID:Date:User-Agent:MIME-Version:In-Reply-To:
+ X-Originating-IP:X-ClientProxiedBy:Content-Type:Content-Language:
+ Content-Transfer-Encoding;
+ b=WU2eFWp8VxG3UTGHueSY5tPs9QU3Wq1Nhlz7guFIcl97+4qhR5QlTL95yfCf6KxaI
+ zvG+wvbWkdeVrOlsvcu9YwOHFT+WhYBVxi0yTHTWJWeWbv6TU9qyGLhWAtsIkPPaUh
+ awR6kqifuiaeIQAF50GonIw3mX+YkzyT++89VwOOVQISWEr4pkMmJrnIHmsaUNvtoH
+ 2zoQh8J+5RREkogqGWoKWu0eSqZGrb3UTIfWNNhJ6ZMui5fwrfv3d5fUl6WLQXvfdN
+ gouWM4XU2Cp0eWulPvR6IKD/vQGHTorAA3LK19GR8gPJFxIuXdMCgf+trx2P/b7oT/
+ xtykT8kHaBN4Q==
+Subject: Re: [Nouveau] hmm_range_fault related fixes and legacy API removal
+ v2
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -51,97 +65,28 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0733080128=="
+Cc: linux-mm@kvack.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-
---===============0733080128==
-Content-Type: multipart/alternative; boundary="15638350251.C26fbcBF.16116"
-Content-Transfer-Encoding: 7bit
-
-
---15638350251.C26fbcBF.16116
-Date: Mon, 22 Jul 2019 22:37:05 +0000
-MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-https://bugs.freedesktop.org/show_bug.cgi?id=3D110714
-
---- Comment #18 from Joel Polowin <jpolowin@sympatico.ca> ---
-(In reply to Joel Polowin from comment #15)
-> The only notable apps running, so far as I'm aware, are VirtualBox and Fi=
-refox
-> (along with various terminal and file windows).
-
-Hmm.  And Chromium, now that I think of it.
-
---=20
-You are receiving this mail because:
-You are the assignee for the bug.=
-
---15638350251.C26fbcBF.16116
-Date: Mon, 22 Jul 2019 22:37:05 +0000
-MIME-Version: 1.0
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-<html>
-    <head>
-      <base href=3D"https://bugs.freedesktop.org/">
-    </head>
-    <body>
-      <p>
-        <div>
-            <b><a class=3D"bz_bug_link=20
-          bz_status_REOPENED "
-   title=3D"REOPENED - Xorg crashes randomly because of memory leak"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110714#c18">Comme=
-nt # 18</a>
-              on <a class=3D"bz_bug_link=20
-          bz_status_REOPENED "
-   title=3D"REOPENED - Xorg crashes randomly because of memory leak"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110714">bug 11071=
-4</a>
-              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
-jpolowin&#64;sympatico.ca" title=3D"Joel Polowin &lt;jpolowin&#64;sympatico=
-.ca&gt;"> <span class=3D"fn">Joel Polowin</span></a>
-</span></b>
-        <pre>(In reply to Joel Polowin from <a href=3D"show_bug.cgi?id=3D11=
-0714#c15">comment #15</a>)
-<span class=3D"quote">&gt; The only notable apps running, so far as I'm awa=
-re, are VirtualBox and Firefox
-&gt; (along with various terminal and file windows).</span >
-
-Hmm.  And Chromium, now that I think of it.</pre>
-        </div>
-      </p>
-
-
-      <hr>
-      <span>You are receiving this mail because:</span>
-
-      <ul>
-          <li>You are the assignee for the bug.</li>
-      </ul>
-    </body>
-</html>=
-
---15638350251.C26fbcBF.16116--
-
---===============0733080128==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
-YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
-cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
-
---===============0733080128==--
+Ck9uIDcvMjIvMTkgMjo0NCBBTSwgQ2hyaXN0b3BoIEhlbGx3aWcgd3JvdGU6Cj4gSGkgSsOpcsO0
+bWUsIEJlbiBhbmQgSmFzb24sCj4gCj4gYmVsb3cgaXMgYSBzZXJpZXMgYWdhaW5zdCB0aGUgaG1t
+IHRyZWUgd2hpY2ggZml4ZXMgdXAgdGhlIG1tYXBfc2VtCj4gbG9ja2luZyBpbiBub3V2ZWF1IGFu
+ZCB3aGlsZSBhdCBpdCBhbHNvIHJlbW92ZXMgbGVmdG92ZXIgbGVnYWN5IEhNTSBBUElzCj4gb25s
+eSB1c2VkIGJ5IG5vdXZlYXUuCj4gCj4gVGhlIGZpcnN0IDQgcGF0Y2hlcyBhcmUgYSBidWcgZml4
+IGZvciBub3V2ZWF1LCB3aGljaCBJIHN1c3BlY3Qgc2hvdWxkCj4gZ28gaW50byB0aGlzIG1lcmdl
+IHdpbmRvdyBldmVuIGlmIHRoZSBjb2RlIGlzIG1hcmtlZCBhcyBzdGFnaW5nLCBqdXN0Cj4gdG8g
+YXZvaWQgcGVvcGxlIGNvcHlpbmcgdGhlIGJyZWFrYWdlLgo+IAo+IENoYW5nZXMgc2luY2UgdjE6
+Cj4gICAtIGRvbid0IHJldHVybiB0aGUgdmFsaWQgc3RhdGUgZnJvbSBobW1fcmFuZ2VfdW5yZWdp
+c3Rlcgo+ICAgLSBhZGRpdGlvbmFsIG5vdXZlYXUgY2xlYW51cHMKPiAKCkkgcmFuIHNvbWUgT3Bl
+bkNMIHRlc3RzIGZyb20gSmVyb21lIHdpdGggbm91dmVhdSBhbmQgdGhpcyBzZXJpZXMsCjUuMy4w
+LXJjMSwgYW5kIG15IHR3byBITU0gZml4ZXM6CigibW0vaG1tOiBmaXggWk9ORV9ERVZJQ0UgYW5v
+biBwYWdlIG1hcHBpbmcgcmV1c2UiKQooIm1tL2htbTogRml4IGJhZCBzdWJwYWdlIHBvaW50ZXIg
+aW4gdHJ5X3RvX3VubWFwX29uZSIpCgpZb3UgY2FuIGFkZCBmb3IgdGhlIHNlcmllczoKVGVzdGVk
+LWJ5OiBSYWxwaCBDYW1wYmVsbCA8cmNhbXBiZWxsQG52aWRpYS5jb20+Cl9fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCk5vdXZlYXUgbWFpbGluZyBsaXN0Ck5v
+dXZlYXVAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3Jn
+L21haWxtYW4vbGlzdGluZm8vbm91dmVhdQ==
