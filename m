@@ -2,44 +2,36 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 61F3574E2D
-	for <lists+nouveau@lfdr.de>; Thu, 25 Jul 2019 14:33:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 192A974F05
+	for <lists+nouveau@lfdr.de>; Thu, 25 Jul 2019 15:19:05 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8126D6E73C;
-	Thu, 25 Jul 2019 12:33:26 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7501E6E757;
+	Thu, 25 Jul 2019 13:19:03 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
- by gabe.freedesktop.org (Postfix) with ESMTP id 94DCF6E73C
- for <nouveau@lists.freedesktop.org>; Thu, 25 Jul 2019 12:33:25 +0000 (UTC)
-Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 91E2972167; Thu, 25 Jul 2019 12:33:25 +0000 (UTC)
-From: bugzilla-daemon@freedesktop.org
-To: nouveau@lists.freedesktop.org
-Date: Thu, 25 Jul 2019 12:33:25 +0000
-X-Bugzilla-Reason: AssignedTo QAcontact
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: None
-X-Bugzilla-Product: Mesa
-X-Bugzilla-Component: Drivers/DRI/nouveau
-X-Bugzilla-Version: 19.1
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: normal
-X-Bugzilla-Who: lonewolf@xs4all.nl
-X-Bugzilla-Status: NEW
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: medium
-X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: version
-Message-ID: <bug-111213-8800-D1gbRnkTk5@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-111213-8800@http.bugs.freedesktop.org/>
-References: <bug-111213-8800@http.bugs.freedesktop.org/>
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
+Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9054B6E758
+ for <nouveau@lists.freedesktop.org>; Thu, 25 Jul 2019 13:19:02 +0000 (UTC)
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from orsmga008.jf.intel.com ([10.7.209.65])
+ by fmsmga102.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+ 25 Jul 2019 06:19:02 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.64,306,1559545200"; d="scan'208";a="164173916"
+Received: from ovasilev-desk1.fi.intel.com ([10.237.72.57])
+ by orsmga008.jf.intel.com with ESMTP; 25 Jul 2019 06:19:00 -0700
+From: Oleg Vasilev <oleg.vasilev@intel.com>
+To: arek@hiler.eu,
+	martin.peres@free.fr
+Date: Thu, 25 Jul 2019 16:18:52 +0300
+Message-Id: <20190725131852.23967-5-oleg.vasilev@intel.com>
+X-Mailer: git-send-email 2.22.0
+In-Reply-To: <20190725131852.23967-1-oleg.vasilev@intel.com>
+References: <20190725131852.23967-1-oleg.vasilev@intel.com>
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 111213] VA-API nouveau SIGSEGV and asserts
+Subject: [Nouveau] [PATCH v3 5/5] drm/nouveau: utilize subconnector property
+ for DP
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -51,118 +43,63 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0074360540=="
+Cc: nouveau@lists.freedesktop.org
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-
---===============0074360540==
-Content-Type: multipart/alternative; boundary="15640580051.3eEB229E.9118"
-Content-Transfer-Encoding: 7bit
-
-
---15640580051.3eEB229E.9118
-Date: Thu, 25 Jul 2019 12:33:25 +0000
-MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-https://bugs.freedesktop.org/show_bug.cgi?id=3D111213
-
-LoneVVolf <lonewolf@xs4all.nl> changed:
-
-           What    |Removed                     |Added
-----------------------------------------------------------------------------
-            Version|19.0                        |19.1
-
---- Comment #1 from LoneVVolf <lonewolf@xs4all.nl> ---
-Problem started with mesa 19.1.x and is also present in git master
-
---=20
-You are receiving this mail because:
-You are the assignee for the bug.
-You are the QA Contact for the bug.=
-
---15640580051.3eEB229E.9118
-Date: Thu, 25 Jul 2019 12:33:25 +0000
-MIME-Version: 1.0
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-<html>
-    <head>
-      <base href=3D"https://bugs.freedesktop.org/">
-    </head>
-    <body><span class=3D"vcard"><a class=3D"email" href=3D"mailto:lonewolf&=
-#64;xs4all.nl" title=3D"LoneVVolf &lt;lonewolf&#64;xs4all.nl&gt;"> <span cl=
-ass=3D"fn">LoneVVolf</span></a>
-</span> changed
-          <a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - VA-API nouveau SIGSEGV and asserts"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111213">bug 11121=
-3</a>
-          <br>
-             <table border=3D"1" cellspacing=3D"0" cellpadding=3D"8">
-          <tr>
-            <th>What</th>
-            <th>Removed</th>
-            <th>Added</th>
-          </tr>
-
-         <tr>
-           <td style=3D"text-align:right;">Version</td>
-           <td>19.0
-           </td>
-           <td>19.1
-           </td>
-         </tr></table>
-      <p>
-        <div>
-            <b><a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - VA-API nouveau SIGSEGV and asserts"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111213#c1">Commen=
-t # 1</a>
-              on <a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - VA-API nouveau SIGSEGV and asserts"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111213">bug 11121=
-3</a>
-              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
-lonewolf&#64;xs4all.nl" title=3D"LoneVVolf &lt;lonewolf&#64;xs4all.nl&gt;">=
- <span class=3D"fn">LoneVVolf</span></a>
-</span></b>
-        <pre>Problem started with mesa 19.1.x and is also present in git ma=
-ster</pre>
-        </div>
-      </p>
-
-
-      <hr>
-      <span>You are receiving this mail because:</span>
-
-      <ul>
-          <li>You are the assignee for the bug.</li>
-          <li>You are the QA Contact for the bug.</li>
-      </ul>
-    </body>
-</html>=
-
---15640580051.3eEB229E.9118--
-
---===============0074360540==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
-YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
-cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
-
---===============0074360540==--
+U2luY2UgRFAtc3BlY2lmaWMgaW5mb3JtYXRpb24gaXMgc3RvcmVkIGluIGRyaXZlcidzIHN0cnVj
+dHVyZXMsIGV2ZXJ5CmRyaXZlciBuZWVkcyB0byBpbXBsZW1lbnQgc3ViY29ubmVjdG9yIHByb3Bl
+cnR5IGJ5IGl0c2VsZi4KClNpZ25lZC1vZmYtYnk6IE9sZWcgVmFzaWxldiA8b2xlZy52YXNpbGV2
+QGludGVsLmNvbT4KQ2M6IG5vdXZlYXVAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCi0tLQogZHJpdmVy
+cy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9jb25uZWN0b3IuYyB8IDEzICsrKysrKysrKysrKysK
+IGRyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfZHAuYyAgICAgICAgfCAgOSArKysrKysr
+KysKIGRyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfZW5jb2Rlci5oICAgfCAgMSArCiAz
+IGZpbGVzIGNoYW5nZWQsIDIzIGluc2VydGlvbnMoKykKCmRpZmYgLS1naXQgYS9kcml2ZXJzL2dw
+dS9kcm0vbm91dmVhdS9ub3V2ZWF1X2Nvbm5lY3Rvci5jIGIvZHJpdmVycy9ncHUvZHJtL25vdXZl
+YXUvbm91dmVhdV9jb25uZWN0b3IuYwppbmRleCA4ZjE1MjgxZmFhNzkuLjVkOGU1MDk1YjVjOCAx
+MDA2NDQKLS0tIGEvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9jb25uZWN0b3IuYwor
+KysgYi9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2Nvbm5lY3Rvci5jCkBAIC02MzYs
+NiArNjM2LDE3IEBAIG5vdXZlYXVfY29ubmVjdG9yX2RldGVjdChzdHJ1Y3QgZHJtX2Nvbm5lY3Rv
+ciAqY29ubmVjdG9yLCBib29sIGZvcmNlKQogCXBtX3J1bnRpbWVfbWFya19sYXN0X2J1c3koZGV2
+LT5kZXYpOwogCXBtX3J1bnRpbWVfcHV0X2F1dG9zdXNwZW5kKGRldi0+ZGV2KTsKIAorCWlmIChj
+b25uZWN0b3ItPmNvbm5lY3Rvcl90eXBlID09IERSTV9NT0RFX0NPTk5FQ1RPUl9EaXNwbGF5UG9y
+dCB8fAorCSAgICBjb25uZWN0b3ItPmNvbm5lY3Rvcl90eXBlID09IERSTV9NT0RFX0NPTk5FQ1RP
+Ul9lRFApIHsKKwkJZW51bSBkcm1fbW9kZV9zdWJjb25uZWN0b3Igc3ViY29ubmVjdG9yID0gRFJN
+X01PREVfU1VCQ09OTkVDVE9SX1Vua25vd247CisKKwkJaWYgKGNvbm5fc3RhdHVzID09IGNvbm5l
+Y3Rvcl9zdGF0dXNfY29ubmVjdGVkICYmIG52X2VuY29kZXIpCisJCQlzdWJjb25uZWN0b3IgPSBu
+dl9lbmNvZGVyLT5kcC5zdWJjb25uZWN0b3I7CisJCWRybV9vYmplY3RfcHJvcGVydHlfc2V0X3Zh
+bHVlKCZjb25uZWN0b3ItPmJhc2UsCisJCQljb25uZWN0b3ItPmRldi0+bW9kZV9jb25maWcuZHBf
+c3ViY29ubmVjdG9yX3Byb3BlcnR5LAorCQkJc3ViY29ubmVjdG9yKTsKKwl9CisKIAlyZXR1cm4g
+Y29ubl9zdGF0dXM7CiB9CiAKQEAgLTEzNjAsNiArMTM3MSw4IEBAIG5vdXZlYXVfY29ubmVjdG9y
+X2NyZWF0ZShzdHJ1Y3QgZHJtX2RldmljZSAqZGV2LAogCQkJa2ZyZWUobnZfY29ubmVjdG9yKTsK
+IAkJCXJldHVybiBFUlJfUFRSKHJldCk7CiAJCX0KKworCQlkcm1fbW9kZV9hZGRfZHBfc3ViY29u
+bmVjdG9yX3Byb3BlcnR5KGNvbm5lY3Rvcik7CiAJCWZ1bmNzID0gJm5vdXZlYXVfY29ubmVjdG9y
+X2Z1bmNzOwogCQlicmVhazsKIAlkZWZhdWx0OgpkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJt
+L25vdXZlYXUvbm91dmVhdV9kcC5jIGIvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9k
+cC5jCmluZGV4IDBkMDUyZTE2NjBmOC4uZGNlNzc4MzBiZTM5IDEwMDY0NAotLS0gYS9kcml2ZXJz
+L2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2RwLmMKKysrIGIvZHJpdmVycy9ncHUvZHJtL25vdXZl
+YXUvbm91dmVhdV9kcC5jCkBAIC02Myw2ICs2Myw3IEBAIG5vdXZlYXVfZHBfZGV0ZWN0KHN0cnVj
+dCBub3V2ZWF1X2VuY29kZXIgKm52X2VuY29kZXIpCiAJc3RydWN0IG5vdXZlYXVfZHJtICpkcm0g
+PSBub3V2ZWF1X2RybShkZXYpOwogCXN0cnVjdCBudmttX2kyY19hdXggKmF1eDsKIAl1OCBkcGNk
+WzhdOworCXU4IHBvcnRfY2FwW0RQX01BWF9ET1dOU1RSRUFNX1BPUlRTXSA9IHt9OwogCWludCBy
+ZXQ7CiAKIAlhdXggPSBudl9lbmNvZGVyLT5hdXg7CkBAIC03Myw2ICs3NCwxNCBAQCBub3V2ZWF1
+X2RwX2RldGVjdChzdHJ1Y3Qgbm91dmVhdV9lbmNvZGVyICpudl9lbmNvZGVyKQogCWlmIChyZXQp
+CiAJCXJldHVybiByZXQ7CiAKKwlpZiAoZHBjZFtEUF9EUENEX1JFVl0gPiAweDEwKSB7CisJCXJl
+dCA9IG52a21fcmRhdXgoYXV4LCBEUF9ET1dOU1RSRUFNX1BPUlRfMCwKKwkJCQkgcG9ydF9jYXAs
+IERQX01BWF9ET1dOU1RSRUFNX1BPUlRTKTsKKwkJaWYgKHJldCkKKwkJCW1lbXNldChwb3J0X2Nh
+cCwgMCwgRFBfTUFYX0RPV05TVFJFQU1fUE9SVFMpOworCX0KKwludl9lbmNvZGVyLT5kcC5zdWJj
+b25uZWN0b3IgPSBkcm1fZHBfc3ViY29ubmVjdG9yX3R5cGUoZHBjZCwgcG9ydF9jYXApOworCiAJ
+bnZfZW5jb2Rlci0+ZHAubGlua19idyA9IDI3MDAwICogZHBjZFsxXTsKIAludl9lbmNvZGVyLT5k
+cC5saW5rX25yID0gZHBjZFsyXSAmIERQX01BWF9MQU5FX0NPVU5UX01BU0s7CiAKZGlmZiAtLWdp
+dCBhL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfZW5jb2Rlci5oIGIvZHJpdmVycy9n
+cHUvZHJtL25vdXZlYXUvbm91dmVhdV9lbmNvZGVyLmgKaW5kZXggMzUxN2Y5MjBiZjg5Li5lMTc5
+NzFhMzAyMjEgMTAwNjQ0Ci0tLSBhL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfZW5j
+b2Rlci5oCisrKyBiL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfZW5jb2Rlci5oCkBA
+IC02Myw2ICs2Myw3IEBAIHN0cnVjdCBub3V2ZWF1X2VuY29kZXIgewogCQkJc3RydWN0IG52NTBf
+bXN0bSAqbXN0bTsKIAkJCWludCBsaW5rX25yOwogCQkJaW50IGxpbmtfYnc7CisJCQllbnVtIGRy
+bV9tb2RlX3N1YmNvbm5lY3RvciBzdWJjb25uZWN0b3I7CiAJCX0gZHA7CiAJfTsKIAotLSAKMi4y
+Mi4wCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpOb3V2
+ZWF1IG1haWxpbmcgbGlzdApOb3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xp
+c3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL25vdXZlYXU=
