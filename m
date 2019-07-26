@@ -1,42 +1,42 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1321676842
-	for <lists+nouveau@lfdr.de>; Fri, 26 Jul 2019 15:43:36 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 624DC76869
+	for <lists+nouveau@lfdr.de>; Fri, 26 Jul 2019 15:44:36 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6476C6ED71;
-	Fri, 26 Jul 2019 13:43:33 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 257776ED74;
+	Fri, 26 Jul 2019 13:44:33 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D178D6ED6C;
- Fri, 26 Jul 2019 13:43:31 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 08C416ED72;
+ Fri, 26 Jul 2019 13:44:32 +0000 (UTC)
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id EBB3C22CC2;
- Fri, 26 Jul 2019 13:43:30 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 2DBD022BF5;
+ Fri, 26 Jul 2019 13:44:31 +0000 (UTC)
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Fri, 26 Jul 2019 09:42:10 -0400
-Message-Id: <20190726134210.12156-47-sashal@kernel.org>
+Date: Fri, 26 Jul 2019 09:43:32 -0400
+Message-Id: <20190726134332.12626-37-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20190726134210.12156-1-sashal@kernel.org>
-References: <20190726134210.12156-1-sashal@kernel.org>
+In-Reply-To: <20190726134332.12626-1-sashal@kernel.org>
+References: <20190726134332.12626-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=kernel.org; s=default; t=1564148611;
- bh=2J4gXIGHaa9ElqJhqutcpFHs3KWy/itKMkN7OI+06wc=;
+ d=kernel.org; s=default; t=1564148671;
+ bh=sGdTX6qKLjso5PUS4UyRoXjmf1z7TAMwe0dJsMXsIs8=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=TbqnRNACZ0DqxmtfoJiUxTostp/LbqRptTAtRxaQQ3OBArH5/AAP9bRDtZ8la9iG0
- cxqF1i28trCHY9iIpAheDPnyxvBesDpkPPi49e/Ecou/f2fECN2wj8aHVxttWn7Z9o
- 7T5SwrBuWimR+5GA2lImfPcuZeWm1ph5iIDny2u0=
-Subject: [Nouveau] [PATCH AUTOSEL 4.19 47/47] drm/nouveau: fix memory leak
+ b=u9V/c/YrW+FIXLslmUTT1TD8YGfTc0R16TKobI57+riL6rzGKRxwm08B5/O5HIU0h
+ jlZF2HFvTsGEuXFRa/vN35TM4mBm5ufAC42xPEtRhXf2w2mjupv2eP/daSGfc9UWbJ
+ pVuTXmb+qB0FpwYvDpElsmIiyjwc9R0KvxYJy9o8=
+Subject: [Nouveau] [PATCH AUTOSEL 4.14 37/37] drm/nouveau: fix memory leak
  in nouveau_conn_reset()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
@@ -91,7 +91,7 @@ bmVkLW9mZi1ieTogU2FzaGEgTGV2aW4gPHNhc2hhbEBrZXJuZWwub3JnPgotLS0KIGRyaXZlcnMv
 Z3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfY29ubmVjdG9yLmMgfCAyICstCiAxIGZpbGUgY2hhbmdl
 ZCwgMSBpbnNlcnRpb24oKyksIDEgZGVsZXRpb24oLSkKCmRpZmYgLS1naXQgYS9kcml2ZXJzL2dw
 dS9kcm0vbm91dmVhdS9ub3V2ZWF1X2Nvbm5lY3Rvci5jIGIvZHJpdmVycy9ncHUvZHJtL25vdXZl
-YXUvbm91dmVhdV9jb25uZWN0b3IuYwppbmRleCAyNDdmNzJjYzRkMTAuLmZiMDA5NGZjNTU4MyAx
+YXUvbm91dmVhdV9jb25uZWN0b3IuYwppbmRleCAyYzZkMTk2ODM2ODguLjRhN2Q1MGE5NmQzNiAx
 MDA2NDQKLS0tIGEvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9jb25uZWN0b3IuYwor
 KysgYi9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2Nvbm5lY3Rvci5jCkBAIC0yNTEs
 NyArMjUxLDcgQEAgbm91dmVhdV9jb25uX3Jlc2V0KHN0cnVjdCBkcm1fY29ubmVjdG9yICpjb25u
