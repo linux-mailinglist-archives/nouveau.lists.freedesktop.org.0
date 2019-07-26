@@ -2,45 +2,42 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2B56276700
-	for <lists+nouveau@lfdr.de>; Fri, 26 Jul 2019 15:13:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 066EA76809
+	for <lists+nouveau@lfdr.de>; Fri, 26 Jul 2019 15:42:09 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 560736ED43;
-	Fri, 26 Jul 2019 13:13:42 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 423C46ED6B;
+	Fri, 26 Jul 2019 13:42:07 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
- by gabe.freedesktop.org (Postfix) with ESMTP id 6E8036ED43
- for <nouveau@lists.freedesktop.org>; Fri, 26 Jul 2019 13:13:41 +0000 (UTC)
-Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 6B09972167; Fri, 26 Jul 2019 13:13:41 +0000 (UTC)
-From: bugzilla-daemon@freedesktop.org
-To: nouveau@lists.freedesktop.org
-Date: Fri, 26 Jul 2019 13:13:41 +0000
-X-Bugzilla-Reason: QAcontact AssignedTo
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: None
-X-Bugzilla-Product: Mesa
-X-Bugzilla-Component: Drivers/DRI/nouveau
-X-Bugzilla-Version: 19.0
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: major
-X-Bugzilla-Who: imirkin@alum.mit.edu
-X-Bugzilla-Status: RESOLVED
-X-Bugzilla-Resolution: DUPLICATE
-X-Bugzilla-Priority: medium
-X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-111218-8800-d3JhKD6ESY@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-111218-8800@http.bugs.freedesktop.org/>
-References: <bug-111218-8800@http.bugs.freedesktop.org/>
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
+Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B263E6ED6B;
+ Fri, 26 Jul 2019 13:42:06 +0000 (UTC)
+Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
+ [73.47.72.35])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id DB30C22CD6;
+ Fri, 26 Jul 2019 13:42:05 +0000 (UTC)
+From: Sasha Levin <sashal@kernel.org>
+To: linux-kernel@vger.kernel.org,
+	stable@vger.kernel.org
+Date: Fri, 26 Jul 2019 09:39:33 -0400
+Message-Id: <20190726133936.11177-83-sashal@kernel.org>
+X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20190726133936.11177-1-sashal@kernel.org>
+References: <20190726133936.11177-1-sashal@kernel.org>
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 111218] Segmentation fault in
- nv50_ir::NVC0LegalizeSSA::handleDIV when dividing result of textureSize
+X-stable: review
+X-Patchwork-Hint: Ignore
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=kernel.org; s=default; t=1564148526;
+ bh=bkXd6B9Dqu+zP7vWK3oLVDih/8Ru2rswszj6L1ELQCw=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=2bwYcYbTzitPeem9Fw4s/Cful/V+/+Uqr5x8vrW97hnQaF1Y38HJpKI+c9OQpUijm
+ DIFD1syjNnXVz/zc/fC4kYCvl8IKjbN9JhCsd6wLJDfg3KC2xTl92vfsarhCrNOPOc
+ Wh2ZgpMm607FNxmod5XRzZcAXuzCDJBTo8Iq9r7k=
+Subject: [Nouveau] [PATCH AUTOSEL 5.2 83/85] drm/nouveau: fix memory leak in
+ nouveau_conn_reset()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -52,119 +49,58 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1118665854=="
+Cc: Sasha Levin <sashal@kernel.org>, nouveau@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-
---===============1118665854==
-Content-Type: multipart/alternative; boundary="15641468211.1af7Cc.13363"
-Content-Transfer-Encoding: 7bit
-
-
---15641468211.1af7Cc.13363
-Date: Fri, 26 Jul 2019 13:13:41 +0000
-MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-https://bugs.freedesktop.org/show_bug.cgi?id=3D111218
-
---- Comment #7 from Ilia Mirkin <imirkin@alum.mit.edu> ---
-(In reply to mmgrqnv from comment #6)
-> That was it. I can confirm that the commit you linked fixes my problem.
-> I will mark this bug as a duplicate of 111167 and close.
-> Thank you very much for your help!
->=20
-> *** This bug has been marked as a duplicate of bug 111167 ***
-
-By the way, what distro is shipping mesa built with asserts enabled? Our
-(mesa's) assumption has always been that distros would NOT have asserts ena=
-bled
-in the binaries they ship to users. [And this issue only pops up in an asse=
-rt.]
-
---=20
-You are receiving this mail because:
-You are the QA Contact for the bug.
-You are the assignee for the bug.=
-
---15641468211.1af7Cc.13363
-Date: Fri, 26 Jul 2019 13:13:41 +0000
-MIME-Version: 1.0
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-<html>
-    <head>
-      <base href=3D"https://bugs.freedesktop.org/">
-    </head>
-    <body>
-      <p>
-        <div>
-            <b><a class=3D"bz_bug_link=20
-          bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED DUPLICATE - Segmentation fault in nv50_ir::NVC0Legaliz=
-eSSA::handleDIV when dividing result of textureSize"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111218#c7">Commen=
-t # 7</a>
-              on <a class=3D"bz_bug_link=20
-          bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED DUPLICATE - Segmentation fault in nv50_ir::NVC0Legaliz=
-eSSA::handleDIV when dividing result of textureSize"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111218">bug 11121=
-8</a>
-              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
-imirkin&#64;alum.mit.edu" title=3D"Ilia Mirkin &lt;imirkin&#64;alum.mit.edu=
-&gt;"> <span class=3D"fn">Ilia Mirkin</span></a>
-</span></b>
-        <pre>(In reply to mmgrqnv from <a href=3D"show_bug.cgi?id=3D111218#=
-c6">comment #6</a>)
-<span class=3D"quote">&gt; That was it. I can confirm that the commit you l=
-inked fixes my problem.
-&gt; I will mark this bug as a duplicate of 111167 and close.
-&gt; Thank you very much for your help!
-&gt;=20
-&gt; *** This bug has been marked as a duplicate of <a class=3D"bz_bug_link=
-=20
-          bz_status_NEW "
-   title=3D"NEW - Dividing zero by a uniform in loop header causes segfault=
- in nv50_ir::NVC0LegalizeSSA::handleDIV"
-   href=3D"show_bug.cgi?id=3D111167">bug 111167</a> ***</span >
-
-By the way, what distro is shipping mesa built with asserts enabled? Our
-(mesa's) assumption has always been that distros would NOT have asserts ena=
-bled
-in the binaries they ship to users. [And this issue only pops up in an asse=
-rt.]</pre>
-        </div>
-      </p>
-
-
-      <hr>
-      <span>You are receiving this mail because:</span>
-
-      <ul>
-          <li>You are the QA Contact for the bug.</li>
-          <li>You are the assignee for the bug.</li>
-      </ul>
-    </body>
-</html>=
-
---15641468211.1af7Cc.13363--
-
---===============1118665854==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
-YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
-cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
-
---===============1118665854==--
+RnJvbTogWW9uZ3hpbiBMaXUgPHlvbmd4aW4ubGl1QHdpbmRyaXZlci5jb20+CgpbIFVwc3RyZWFt
+IGNvbW1pdCAwOWI5MGUyZmUzNWZhZWFjZTI0ODgyMzRlMmE3NzI4ZjJlYThiYTI2IF0KCkluIG5v
+dXZlYXVfY29ubl9yZXNldCgpLCBpZiBjb25uZWN0b3ItPnN0YXRlIGlzIHRydWUsCl9fZHJtX2F0
+b21pY19oZWxwZXJfY29ubmVjdG9yX2Rlc3Ryb3lfc3RhdGUoKSB3aWxsIGJlIGNhbGxlZCwKYnV0
+IHRoZSBtZW1vcnkgcG9pbnRlZCBieSBhc3ljIGlzbid0IGZyZWVkLiBNZW1vcnkgbGVhayBoYXBw
+ZW5zCmluIHRoZSBmb2xsb3dpbmcgZnVuY3Rpb24gX19kcm1fYXRvbWljX2hlbHBlcl9jb25uZWN0
+b3JfcmVzZXQoKSwKd2hlcmUgbmV3bHkgYWxsb2NhdGVkIGFzeWMtPnN0YXRlIHdpbGwgYmUgYXNz
+aWduZWQgdG8gY29ubmVjdG9yLT5zdGF0ZS4KClNvIHVzaW5nIG5vdXZlYXVfY29ubl9hdG9taWNf
+ZGVzdHJveV9zdGF0ZSgpIGluc3RlYWQgb2YKX19kcm1fYXRvbWljX2hlbHBlcl9jb25uZWN0b3Jf
+ZGVzdHJveV9zdGF0ZSB0byBmcmVlIHRoZSAib2xkIiBhc3ljLgoKSGVyZSB0aGUgaXMgdGhlIGxv
+ZyBzaG93aW5nIG1lbW9yeSBsZWFrLgoKdW5yZWZlcmVuY2VkIG9iamVjdCAweGZmZmY4YzU0ODA0
+ODNjODAgKHNpemUgMTkyKToKICBjb21tICJrd29ya2VyLzA6MiIsIHBpZCAxODgsIGppZmZpZXMg
+NDI5NDY5NTI3OSAoYWdlIDUzLjE3OXMpCiAgaGV4IGR1bXAgKGZpcnN0IDMyIGJ5dGVzKToKICAg
+IDAwIGYwIGJhIDdiIDU0IDhjIGZmIGZmIDAwIDAwIDAwIDAwIDAwIDAwIDAwIDAwICAuLi57VC4u
+Li4uLi4uLi4uCiAgICAwMCAwMCAwMCAwMCAwMCAwMCAwMCAwMCAwMCAwMCAwMCAwMCAwMCAwMCAw
+MCAwMCAgLi4uLi4uLi4uLi4uLi4uLgogIGJhY2t0cmFjZToKICAgIFs8MDAwMDAwMDA1MDA1YzBk
+MD5dIGttZW1fY2FjaGVfYWxsb2NfdHJhY2UrMHgxOTUvMHgyYzAKICAgIFs8MDAwMDAwMDBhMTIy
+YmFlZD5dIG5vdXZlYXVfY29ubl9yZXNldCsweDI1LzB4YzAgW25vdXZlYXVdCiAgICBbPDAwMDAw
+MDAwNGZkMTg5YTI+XSBub3V2ZWF1X2Nvbm5lY3Rvcl9jcmVhdGUrMHgzYTcvMHg2MTAgW25vdXZl
+YXVdCiAgICBbPDAwMDAwMDAwYzczMzQzYTg+XSBudjUwX2Rpc3BsYXlfY3JlYXRlKzB4MzQzLzB4
+OTgwIFtub3V2ZWF1XQogICAgWzwwMDAwMDAwMDJlMmIwM2MzPl0gbm91dmVhdV9kaXNwbGF5X2Ny
+ZWF0ZSsweDUxZi8weDY2MCBbbm91dmVhdV0KICAgIFs8MDAwMDAwMDBjOTI0Njk5Yj5dIG5vdXZl
+YXVfZHJtX2RldmljZV9pbml0KzB4MTgyLzB4N2YwIFtub3V2ZWF1XQogICAgWzwwMDAwMDAwMGNj
+MDI5NDM2Pl0gbm91dmVhdV9kcm1fcHJvYmUrMHgyMGMvMHgyYzAgW25vdXZlYXVdCiAgICBbPDAw
+MDAwMDAwN2U5NjFjM2U+XSBsb2NhbF9wY2lfcHJvYmUrMHg0Ny8weGEwCiAgICBbPDAwMDAwMDAw
+ZGExNGQ1Njk+XSB3b3JrX2Zvcl9jcHVfZm4rMHgxYS8weDMwCiAgICBbPDAwMDAwMDAwMjhkYTQ4
+MDU+XSBwcm9jZXNzX29uZV93b3JrKzB4MjdjLzB4NjYwCiAgICBbPDAwMDAwMDAwMWQ0MTViMDQ+
+XSB3b3JrZXJfdGhyZWFkKzB4MjJiLzB4M2YwCiAgICBbPDAwMDAwMDAwMDNiNjlmMWY+XSBrdGhy
+ZWFkKzB4MTJmLzB4MTUwCiAgICBbPDAwMDAwMDAwYzk0YzI5Yjc+XSByZXRfZnJvbV9mb3JrKzB4
+M2EvMHg1MAoKU2lnbmVkLW9mZi1ieTogWW9uZ3hpbiBMaXUgPHlvbmd4aW4ubGl1QHdpbmRyaXZl
+ci5jb20+ClNpZ25lZC1vZmYtYnk6IEJlbiBTa2VnZ3MgPGJza2VnZ3NAcmVkaGF0LmNvbT4KU2ln
+bmVkLW9mZi1ieTogU2FzaGEgTGV2aW4gPHNhc2hhbEBrZXJuZWwub3JnPgotLS0KIGRyaXZlcnMv
+Z3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfY29ubmVjdG9yLmMgfCAyICstCiAxIGZpbGUgY2hhbmdl
+ZCwgMSBpbnNlcnRpb24oKyksIDEgZGVsZXRpb24oLSkKCmRpZmYgLS1naXQgYS9kcml2ZXJzL2dw
+dS9kcm0vbm91dmVhdS9ub3V2ZWF1X2Nvbm5lY3Rvci5jIGIvZHJpdmVycy9ncHUvZHJtL25vdXZl
+YXUvbm91dmVhdV9jb25uZWN0b3IuYwppbmRleCA0MTE2ZWU2MmFkYWYuLmY2OWZmMjJiZWVlMCAx
+MDA2NDQKLS0tIGEvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9jb25uZWN0b3IuYwor
+KysgYi9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2Nvbm5lY3Rvci5jCkBAIC0yNTIs
+NyArMjUyLDcgQEAgbm91dmVhdV9jb25uX3Jlc2V0KHN0cnVjdCBkcm1fY29ubmVjdG9yICpjb25u
+ZWN0b3IpCiAJCXJldHVybjsKIAogCWlmIChjb25uZWN0b3ItPnN0YXRlKQotCQlfX2RybV9hdG9t
+aWNfaGVscGVyX2Nvbm5lY3Rvcl9kZXN0cm95X3N0YXRlKGNvbm5lY3Rvci0+c3RhdGUpOworCQlu
+b3V2ZWF1X2Nvbm5fYXRvbWljX2Rlc3Ryb3lfc3RhdGUoY29ubmVjdG9yLCBjb25uZWN0b3ItPnN0
+YXRlKTsKIAlfX2RybV9hdG9taWNfaGVscGVyX2Nvbm5lY3Rvcl9yZXNldChjb25uZWN0b3IsICZh
+c3ljLT5zdGF0ZSk7CiAJYXN5Yy0+ZGl0aGVyLm1vZGUgPSBESVRIRVJJTkdfTU9ERV9BVVRPOwog
+CWFzeWMtPmRpdGhlci5kZXB0aCA9IERJVEhFUklOR19ERVBUSF9BVVRPOwotLSAKMi4yMC4xCgpf
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpOb3V2ZWF1IG1h
+aWxpbmcgbGlzdApOb3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZy
+ZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL25vdXZlYXU=
