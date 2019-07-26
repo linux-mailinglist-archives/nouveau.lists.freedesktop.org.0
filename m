@@ -2,22 +2,22 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id D007A75D41
-	for <lists+nouveau@lfdr.de>; Fri, 26 Jul 2019 05:00:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6573775D85
+	for <lists+nouveau@lfdr.de>; Fri, 26 Jul 2019 05:45:30 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5070F6E863;
-	Fri, 26 Jul 2019 03:00:49 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id DAAE36E876;
+	Fri, 26 Jul 2019 03:45:28 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [131.252.210.165])
- by gabe.freedesktop.org (Postfix) with ESMTP id 5F42A6E863
- for <nouveau@lists.freedesktop.org>; Fri, 26 Jul 2019 03:00:48 +0000 (UTC)
+ [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 3539C6E876
+ for <nouveau@lists.freedesktop.org>; Fri, 26 Jul 2019 03:45:28 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 2B35B72167; Fri, 26 Jul 2019 03:00:48 +0000 (UTC)
+ id 3192E72167; Fri, 26 Jul 2019 03:45:28 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Fri, 26 Jul 2019 03:00:48 +0000
+Date: Fri, 26 Jul 2019 03:45:28 +0000
 X-Bugzilla-Reason: QAcontact AssignedTo
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
@@ -33,7 +33,7 @@ X-Bugzilla-Priority: medium
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
 X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-111213-8800-ua5k1p6CBg@http.bugs.freedesktop.org/>
+Message-ID: <bug-111213-8800-Etj2zKltcZ@http.bugs.freedesktop.org/>
 In-Reply-To: <bug-111213-8800@http.bugs.freedesktop.org/>
 References: <bug-111213-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
@@ -51,18 +51,18 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1277502125=="
+Content-Type: multipart/mixed; boundary="===============0227389319=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============1277502125==
-Content-Type: multipart/alternative; boundary="15641100480.76D4.12876"
+--===============0227389319==
+Content-Type: multipart/alternative; boundary="15641127282.e75339dBe.19774"
 Content-Transfer-Encoding: 7bit
 
 
---15641100480.76D4.12876
-Date: Fri, 26 Jul 2019 03:00:48 +0000
+--15641127282.e75339dBe.19774
+Date: Fri, 26 Jul 2019 03:45:28 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -71,23 +71,19 @@ Auto-Submitted: auto-generated
 
 https://bugs.freedesktop.org/show_bug.cgi?id=3D111213
 
---- Comment #4 from Ilia Mirkin <imirkin@alum.mit.edu> ---
-Good news -
+--- Comment #5 from Ilia Mirkin <imirkin@alum.mit.edu> ---
+If you guys are able to compile mesa, there's a patch series that fixes the
+various issues with vdpau for me, at least with a GK208:
 
-../src/gallium/drivers/nouveau/nvc0/nve4_compute.c:396:
-nve4_compute_validate_constbufs: Assertion `i > 0' failed.
-
-also happens with vdpau. It's because we don't expect ever receiving a non-=
-user
-constbuf at position 0. Will add handling for it.
+https://patchwork.freedesktop.org/series/64282/
 
 --=20
 You are receiving this mail because:
 You are the QA Contact for the bug.
 You are the assignee for the bug.=
 
---15641100480.76D4.12876
-Date: Fri, 26 Jul 2019 03:00:48 +0000
+--15641127282.e75339dBe.19774
+Date: Fri, 26 Jul 2019 03:45:28 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -104,8 +100,8 @@ Auto-Submitted: auto-generated
             <b><a class=3D"bz_bug_link=20
           bz_status_NEW "
    title=3D"NEW - VA-API nouveau SIGSEGV and asserts"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111213#c4">Commen=
-t # 4</a>
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111213#c5">Commen=
+t # 5</a>
               on <a class=3D"bz_bug_link=20
           bz_status_NEW "
    title=3D"NEW - VA-API nouveau SIGSEGV and asserts"
@@ -115,14 +111,12 @@ t # 4</a>
 imirkin&#64;alum.mit.edu" title=3D"Ilia Mirkin &lt;imirkin&#64;alum.mit.edu=
 &gt;"> <span class=3D"fn">Ilia Mirkin</span></a>
 </span></b>
-        <pre>Good news -
+        <pre>If you guys are able to compile mesa, there's a patch series t=
+hat fixes the
+various issues with vdpau for me, at least with a GK208:
 
-../src/gallium/drivers/nouveau/nvc0/nve4_compute.c:396:
-nve4_compute_validate_constbufs: Assertion `i &gt; 0' failed.
-
-also happens with vdpau. It's because we don't expect ever receiving a non-=
-user
-constbuf at position 0. Will add handling for it.</pre>
+<a href=3D"https://patchwork.freedesktop.org/series/64282/">https://patchwo=
+rk.freedesktop.org/series/64282/</a></pre>
         </div>
       </p>
 
@@ -137,9 +131,9 @@ constbuf at position 0. Will add handling for it.</pre>
     </body>
 </html>=
 
---15641100480.76D4.12876--
+--15641127282.e75339dBe.19774--
 
---===============1277502125==
+--===============0227389319==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -149,4 +143,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============1277502125==--
+--===============0227389319==--
