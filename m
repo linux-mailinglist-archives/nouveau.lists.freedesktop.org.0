@@ -1,59 +1,45 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4687D7773A
-	for <lists+nouveau@lfdr.de>; Sat, 27 Jul 2019 08:24:17 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id EF7BD77866
+	for <lists+nouveau@lfdr.de>; Sat, 27 Jul 2019 13:20:29 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 399956EE8D;
-	Sat, 27 Jul 2019 06:24:15 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1F3466EEA0;
+	Sat, 27 Jul 2019 11:20:28 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pf1-x443.google.com (mail-pf1-x443.google.com
- [IPv6:2607:f8b0:4864:20::443])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4DDBF898F3;
- Tue, 23 Jul 2019 10:39:58 +0000 (UTC)
-Received: by mail-pf1-x443.google.com with SMTP id m30so18947824pff.8;
- Tue, 23 Jul 2019 03:39:58 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=Di0g6EEgkUa8jtL/xEkGliBvl02Xk0g05krGCQwF+C0=;
- b=VasVHvMp7OfnZPbztOlTKA+HlD8kfbSIhqE5mOegPm/b+u8J/WfsJ9KWguiZBJ7nLs
- XC6wCGxB/I8e0/Z4VT1qAHFbvxTyF/8VIDlPqqBejiW2EIVikyJbSajjz2esfz2tOouW
- pUhc0paKQ+Kfuz1LVRDMArrrOmh6z+PlxgUf0YJe/9cKn0RkD8cAfEI+HW48/lGRbL1i
- IMKk3S4HhwuhkVgmJqEPRGXr9G43AdIdb8fgt7DEWfzNx+AHWAkxY0MV1kW155NDtZfQ
- jKIvZasYZdCG4I73672BpAQV0HpBcU5dKHfcFaXkLw5J6YRUXu0YEQUrqQZW2rvuQLsB
- qt6w==
-X-Gm-Message-State: APjAAAXLoWVQKHYCND3QAy/IYTCJVhTvR72Z68tpLQqSKzzkJOiW26Gh
- ezeAUTfGeijC85Sny1FA1ho=
-X-Google-Smtp-Source: APXvYqy7Kjo9yItNbo9h6YPST0TITXU2NUUbMtA2mboZtD4dEoR9nnh4uwzcJcZLdh/lBbE4uEC2vQ==
-X-Received: by 2002:a63:20d:: with SMTP id 13mr64729846pgc.253.1563878397922; 
- Tue, 23 Jul 2019 03:39:57 -0700 (PDT)
-Received: from suzukaze.ipads-lab.se.sjtu.edu.cn ([89.31.126.54])
- by smtp.gmail.com with ESMTPSA id x9sm20574868pgp.75.2019.07.23.03.39.55
- (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
- Tue, 23 Jul 2019 03:39:57 -0700 (PDT)
-From: Chuhong Yuan <hslester96@gmail.com>
-To: 
-Date: Tue, 23 Jul 2019 18:39:39 +0800
-Message-Id: <20190723103938.4021-1-hslester96@gmail.com>
-X-Mailer: git-send-email 2.20.1
+Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
+ [131.252.210.165])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 4BC956EEA0
+ for <nouveau@lists.freedesktop.org>; Sat, 27 Jul 2019 11:20:26 +0000 (UTC)
+Received: by culpepper.freedesktop.org (Postfix, from userid 33)
+ id 4469D72167; Sat, 27 Jul 2019 11:20:26 +0000 (UTC)
+From: bugzilla-daemon@freedesktop.org
+To: nouveau@lists.freedesktop.org
+Date: Sat, 27 Jul 2019 11:20:24 +0000
+X-Bugzilla-Reason: AssignedTo
+X-Bugzilla-Type: new
+X-Bugzilla-Watch-Reason: None
+X-Bugzilla-Product: xorg
+X-Bugzilla-Component: Driver/nouveau
+X-Bugzilla-Version: unspecified
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: critical
+X-Bugzilla-Who: bdurette.pro@gmail.com
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: medium
+X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: bug_id short_desc product version rep_platform
+ op_sys bug_status bug_severity priority component assigned_to reporter
+ qa_contact attachments.created
+Message-ID: <bug-111230-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-X-Mailman-Approved-At: Sat, 27 Jul 2019 06:24:14 +0000
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=Di0g6EEgkUa8jtL/xEkGliBvl02Xk0g05krGCQwF+C0=;
- b=FwOqdcTPuWHslyIqWCg0jHZvRxaESjUl1kVvzINTDBMD1Pz/t53rxJBG58X7IdmmWL
- sGPB4oaAXM8veLfN8/TaJNN+KxLHZkIOAR5uX4uMCbJ9LDlpub0BP6KTl6wxxfmqcUe/
- 0LJHP+CtHakkxv+3kGR0t0gqiArmXgtJezB9n6LryYiAW8ZKDk38hbqSOMgZyZwZN2H4
- G9QmrsvgHnufM9U8QHoa7FWJCypNLOPhGtDJRp3efrzHoDH+otqKwqbdKcrmXHv+768T
- KGU9mla+HYsr2XwDu2bMhs4PCzy876fa0Ik209o4naJVpmHOklGN6E9wmwEgjEHWLpX+
- KWTw==
-Subject: [Nouveau] [PATCH] drm/nouveau: Use dev_get_drvdata where possible
+Subject: [Nouveau] [Bug 111230] New: core dumped while using Rstudio
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -65,34 +51,218 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
- Chuhong Yuan <hslester96@gmail.com>, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>,
- Daniel Vetter <daniel@ffwll.ch>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============0372264192=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-SW5zdGVhZCBvZiB1c2luZyB0b19wY2lfZGV2ICsgcGNpX2dldF9kcnZkYXRhLAp1c2UgZGV2X2dl
-dF9kcnZkYXRhIHRvIG1ha2UgY29kZSBzaW1wbGVyLgoKU2lnbmVkLW9mZi1ieTogQ2h1aG9uZyBZ
-dWFuIDxoc2xlc3Rlcjk2QGdtYWlsLmNvbT4KLS0tCiBkcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9u
-b3V2ZWF1X2RybS5jIHwgNiArKy0tLS0KIDEgZmlsZSBjaGFuZ2VkLCAyIGluc2VydGlvbnMoKyks
-IDQgZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91
-dmVhdV9kcm0uYyBiL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfZHJtLmMKaW5kZXgg
-N2MyZmNhYmE0MmQ2Li4yMzIwM2RhZTIxMzcgMTAwNjQ0Ci0tLSBhL2RyaXZlcnMvZ3B1L2RybS9u
-b3V2ZWF1L25vdXZlYXVfZHJtLmMKKysrIGIvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVh
-dV9kcm0uYwpAQCAtODgzLDE2ICs4ODMsMTQgQEAgbm91dmVhdV9wbW9wc19yZXN1bWUoc3RydWN0
-IGRldmljZSAqZGV2KQogc3RhdGljIGludAogbm91dmVhdV9wbW9wc19mcmVlemUoc3RydWN0IGRl
-dmljZSAqZGV2KQogewotCXN0cnVjdCBwY2lfZGV2ICpwZGV2ID0gdG9fcGNpX2RldihkZXYpOwot
-CXN0cnVjdCBkcm1fZGV2aWNlICpkcm1fZGV2ID0gcGNpX2dldF9kcnZkYXRhKHBkZXYpOworCXN0
-cnVjdCBkcm1fZGV2aWNlICpkcm1fZGV2ID0gZGV2X2dldF9kcnZkYXRhKGRldik7CiAJcmV0dXJu
-IG5vdXZlYXVfZG9fc3VzcGVuZChkcm1fZGV2LCBmYWxzZSk7CiB9CiAKIHN0YXRpYyBpbnQKIG5v
-dXZlYXVfcG1vcHNfdGhhdyhzdHJ1Y3QgZGV2aWNlICpkZXYpCiB7Ci0Jc3RydWN0IHBjaV9kZXYg
-KnBkZXYgPSB0b19wY2lfZGV2KGRldik7Ci0Jc3RydWN0IGRybV9kZXZpY2UgKmRybV9kZXYgPSBw
-Y2lfZ2V0X2RydmRhdGEocGRldik7CisJc3RydWN0IGRybV9kZXZpY2UgKmRybV9kZXYgPSBkZXZf
-Z2V0X2RydmRhdGEoZGV2KTsKIAlyZXR1cm4gbm91dmVhdV9kb19yZXN1bWUoZHJtX2RldiwgZmFs
-c2UpOwogfQogCi0tIAoyLjIwLjEKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fCk5vdXZlYXUgbWFpbGluZyBsaXN0Ck5vdXZlYXVAbGlzdHMuZnJlZWRlc2t0
-b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vbm91
-dmVhdQ==
+
+--===============0372264192==
+Content-Type: multipart/alternative; boundary="15642264261.42fBdD.12117"
+Content-Transfer-Encoding: 7bit
+
+
+--15642264261.42fBdD.12117
+Date: Sat, 27 Jul 2019 11:20:26 +0000
+MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+https://bugs.freedesktop.org/show_bug.cgi?id=3D111230
+
+            Bug ID: 111230
+           Summary: core dumped while using Rstudio
+           Product: xorg
+           Version: unspecified
+          Hardware: x86-64 (AMD64)
+                OS: Linux (All)
+            Status: NEW
+          Severity: critical
+          Priority: medium
+         Component: Driver/nouveau
+          Assignee: nouveau@lists.freedesktop.org
+          Reporter: bdurette.pro@gmail.com
+        QA Contact: xorg-team@lists.x.org
+
+Created attachment 144881
+  --> https://bugs.freedesktop.org/attachment.cgi?id=3D144881&action=3Dedit
+kernel log file
+
+I used Rstudio for professional use. When using the xorg nouveau driver on
+Ubuntu 18, Rstudio "crashes" after a while producing a core dumped error (s=
+ee
+console output below). The bus has allready been filed in the Rstudio webpa=
+ge :
+ https://github.com/rstudio/rstudio/issues/3781. Kernel-log file is attached
+
+nouveau: kernel rejected pushbuf: Aucun fichier ou dossier de ce type
+nouveau: ch4: krec 0 pushes 0 bufs 2 relocs 0
+nouveau: ch4: buf 00000000 00000003 00000004 00000004 00000000
+nouveau: ch4: buf 00000001 00000006 00000004 00000000 00000004
+nouveau: kernel rejected pushbuf: Aucun fichier ou dossier de ce type
+nouveau: ch4: krec 0 pushes 0 bufs 2 relocs 0
+nouveau: ch4: buf 00000000 00000005 00000004 00000004 00000000
+nouveau: ch4: buf 00000001 00000006 00000004 00000000 00000004
+nouveau: ch4: buf 00000002 00000022 00000004 00000004 00000000
+nouveau: kernel rejected pushbuf: Aucun fichier ou dossier de ce type
+nouveau: ch4: krec 0 pushes 0 bufs 2 relocs 0
+nouveau: ch4: buf 00000000 00000003 00000004 00000004 00000000
+nouveau: ch4: buf 00000001 00000006 00000004 00000000 00000004
+Received signal 11 SEGV_MAPERR 7fd01f32c000
+Erreur de segmentation (core dumped)
+
+--=20
+You are receiving this mail because:
+You are the assignee for the bug.=
+
+--15642264261.42fBdD.12117
+Date: Sat, 27 Jul 2019 11:20:26 +0000
+MIME-Version: 1.0
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+<html>
+    <head>
+      <base href=3D"https://bugs.freedesktop.org/">
+    </head>
+    <body><table border=3D"1" cellspacing=3D"0" cellpadding=3D"8">
+        <tr>
+          <th>Bug ID</th>
+          <td><a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - core dumped while using Rstudio"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111230">111230</a>
+          </td>
+        </tr>
+
+        <tr>
+          <th>Summary</th>
+          <td>core dumped while using Rstudio
+          </td>
+        </tr>
+
+        <tr>
+          <th>Product</th>
+          <td>xorg
+          </td>
+        </tr>
+
+        <tr>
+          <th>Version</th>
+          <td>unspecified
+          </td>
+        </tr>
+
+        <tr>
+          <th>Hardware</th>
+          <td>x86-64 (AMD64)
+          </td>
+        </tr>
+
+        <tr>
+          <th>OS</th>
+          <td>Linux (All)
+          </td>
+        </tr>
+
+        <tr>
+          <th>Status</th>
+          <td>NEW
+          </td>
+        </tr>
+
+        <tr>
+          <th>Severity</th>
+          <td>critical
+          </td>
+        </tr>
+
+        <tr>
+          <th>Priority</th>
+          <td>medium
+          </td>
+        </tr>
+
+        <tr>
+          <th>Component</th>
+          <td>Driver/nouveau
+          </td>
+        </tr>
+
+        <tr>
+          <th>Assignee</th>
+          <td>nouveau&#64;lists.freedesktop.org
+          </td>
+        </tr>
+
+        <tr>
+          <th>Reporter</th>
+          <td>bdurette.pro&#64;gmail.com
+          </td>
+        </tr>
+
+        <tr>
+          <th>QA Contact</th>
+          <td>xorg-team&#64;lists.x.org
+          </td>
+        </tr></table>
+      <p>
+        <div>
+        <pre>Created <span class=3D""><a href=3D"attachment.cgi?id=3D144881=
+" name=3D"attach_144881" title=3D"kernel log file">attachment 144881</a> <a=
+ href=3D"attachment.cgi?id=3D144881&amp;action=3Dedit" title=3D"kernel log =
+file">[details]</a></span>
+kernel log file
+
+I used Rstudio for professional use. When using the xorg nouveau driver on
+Ubuntu 18, Rstudio &quot;crashes&quot; after a while producing a core dumpe=
+d error (see
+console output below). The bus has allready been filed in the Rstudio webpa=
+ge :
+ <a href=3D"https://github.com/rstudio/rstudio/issues/3781">https://github.=
+com/rstudio/rstudio/issues/3781</a>. Kernel-log file is attached
+
+nouveau: kernel rejected pushbuf: Aucun fichier ou dossier de ce type
+nouveau: ch4: krec 0 pushes 0 bufs 2 relocs 0
+nouveau: ch4: buf 00000000 00000003 00000004 00000004 00000000
+nouveau: ch4: buf 00000001 00000006 00000004 00000000 00000004
+nouveau: kernel rejected pushbuf: Aucun fichier ou dossier de ce type
+nouveau: ch4: krec 0 pushes 0 bufs 2 relocs 0
+nouveau: ch4: buf 00000000 00000005 00000004 00000004 00000000
+nouveau: ch4: buf 00000001 00000006 00000004 00000000 00000004
+nouveau: ch4: buf 00000002 00000022 00000004 00000004 00000000
+nouveau: kernel rejected pushbuf: Aucun fichier ou dossier de ce type
+nouveau: ch4: krec 0 pushes 0 bufs 2 relocs 0
+nouveau: ch4: buf 00000000 00000003 00000004 00000004 00000000
+nouveau: ch4: buf 00000001 00000006 00000004 00000000 00000004
+Received signal 11 SEGV_MAPERR 7fd01f32c000
+Erreur de segmentation (core dumped)</pre>
+        </div>
+      </p>
+
+
+      <hr>
+      <span>You are receiving this mail because:</span>
+
+      <ul>
+          <li>You are the assignee for the bug.</li>
+      </ul>
+    </body>
+</html>=
+
+--15642264261.42fBdD.12117--
+
+--===============0372264192==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
+YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
+cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============0372264192==--
