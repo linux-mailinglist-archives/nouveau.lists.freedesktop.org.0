@@ -2,44 +2,29 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id EF7BD77866
-	for <lists+nouveau@lfdr.de>; Sat, 27 Jul 2019 13:20:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C351D77875
+	for <lists+nouveau@lfdr.de>; Sat, 27 Jul 2019 13:37:32 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1F3466EEA0;
-	Sat, 27 Jul 2019 11:20:28 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B41E56EE9C;
+	Sat, 27 Jul 2019 11:37:30 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [131.252.210.165])
- by gabe.freedesktop.org (Postfix) with ESMTP id 4BC956EEA0
- for <nouveau@lists.freedesktop.org>; Sat, 27 Jul 2019 11:20:26 +0000 (UTC)
-Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 4469D72167; Sat, 27 Jul 2019 11:20:26 +0000 (UTC)
-From: bugzilla-daemon@freedesktop.org
+Received: from relay05.pair.com (relay05.pair.com [216.92.24.67])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6685E6EE9C
+ for <nouveau@lists.freedesktop.org>; Sat, 27 Jul 2019 11:37:29 +0000 (UTC)
+Received: from orac.inputplus.co.uk (unknown [87.112.147.151])
+ by relay05.pair.com (Postfix) with ESMTP id EEB581A39E2
+ for <nouveau@lists.freedesktop.org>; Sat, 27 Jul 2019 07:37:26 -0400 (EDT)
+Received: from orac.inputplus.co.uk (orac.inputplus.co.uk [IPv6:::1])
+ by orac.inputplus.co.uk (Postfix) with ESMTP id 2EF4D21F78
+ for <nouveau@lists.freedesktop.org>; Sat, 27 Jul 2019 12:37:26 +0100 (BST)
 To: nouveau@lists.freedesktop.org
-Date: Sat, 27 Jul 2019 11:20:24 +0000
-X-Bugzilla-Reason: AssignedTo
-X-Bugzilla-Type: new
-X-Bugzilla-Watch-Reason: None
-X-Bugzilla-Product: xorg
-X-Bugzilla-Component: Driver/nouveau
-X-Bugzilla-Version: unspecified
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: critical
-X-Bugzilla-Who: bdurette.pro@gmail.com
-X-Bugzilla-Status: NEW
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: medium
-X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: bug_id short_desc product version rep_platform
- op_sys bug_status bug_severity priority component assigned_to reporter
- qa_contact attachments.created
-Message-ID: <bug-111230-8800@http.bugs.freedesktop.org/>
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
+From: Ralph Corderoy <ralph@inputplus.co.uk>
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 111230] New: core dumped while using Rstudio
+Date: Sat, 27 Jul 2019 12:37:26 +0100
+Message-Id: <20190727113726.2EF4D21F78@orac.inputplus.co.uk>
+Subject: [Nouveau] Video Hardware Decoding: Jittery Rectangles on Nvidia
+ GT218 NVA8 VP4.
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -51,218 +36,57 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0372264192=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-
---===============0372264192==
-Content-Type: multipart/alternative; boundary="15642264261.42fBdD.12117"
-Content-Transfer-Encoding: 7bit
-
-
---15642264261.42fBdD.12117
-Date: Sat, 27 Jul 2019 11:20:26 +0000
-MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-https://bugs.freedesktop.org/show_bug.cgi?id=3D111230
-
-            Bug ID: 111230
-           Summary: core dumped while using Rstudio
-           Product: xorg
-           Version: unspecified
-          Hardware: x86-64 (AMD64)
-                OS: Linux (All)
-            Status: NEW
-          Severity: critical
-          Priority: medium
-         Component: Driver/nouveau
-          Assignee: nouveau@lists.freedesktop.org
-          Reporter: bdurette.pro@gmail.com
-        QA Contact: xorg-team@lists.x.org
-
-Created attachment 144881
-  --> https://bugs.freedesktop.org/attachment.cgi?id=3D144881&action=3Dedit
-kernel log file
-
-I used Rstudio for professional use. When using the xorg nouveau driver on
-Ubuntu 18, Rstudio "crashes" after a while producing a core dumped error (s=
-ee
-console output below). The bus has allready been filed in the Rstudio webpa=
-ge :
- https://github.com/rstudio/rstudio/issues/3781. Kernel-log file is attached
-
-nouveau: kernel rejected pushbuf: Aucun fichier ou dossier de ce type
-nouveau: ch4: krec 0 pushes 0 bufs 2 relocs 0
-nouveau: ch4: buf 00000000 00000003 00000004 00000004 00000000
-nouveau: ch4: buf 00000001 00000006 00000004 00000000 00000004
-nouveau: kernel rejected pushbuf: Aucun fichier ou dossier de ce type
-nouveau: ch4: krec 0 pushes 0 bufs 2 relocs 0
-nouveau: ch4: buf 00000000 00000005 00000004 00000004 00000000
-nouveau: ch4: buf 00000001 00000006 00000004 00000000 00000004
-nouveau: ch4: buf 00000002 00000022 00000004 00000004 00000000
-nouveau: kernel rejected pushbuf: Aucun fichier ou dossier de ce type
-nouveau: ch4: krec 0 pushes 0 bufs 2 relocs 0
-nouveau: ch4: buf 00000000 00000003 00000004 00000004 00000000
-nouveau: ch4: buf 00000001 00000006 00000004 00000000 00000004
-Received signal 11 SEGV_MAPERR 7fd01f32c000
-Erreur de segmentation (core dumped)
-
---=20
-You are receiving this mail because:
-You are the assignee for the bug.=
-
---15642264261.42fBdD.12117
-Date: Sat, 27 Jul 2019 11:20:26 +0000
-MIME-Version: 1.0
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-<html>
-    <head>
-      <base href=3D"https://bugs.freedesktop.org/">
-    </head>
-    <body><table border=3D"1" cellspacing=3D"0" cellpadding=3D"8">
-        <tr>
-          <th>Bug ID</th>
-          <td><a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - core dumped while using Rstudio"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111230">111230</a>
-          </td>
-        </tr>
-
-        <tr>
-          <th>Summary</th>
-          <td>core dumped while using Rstudio
-          </td>
-        </tr>
-
-        <tr>
-          <th>Product</th>
-          <td>xorg
-          </td>
-        </tr>
-
-        <tr>
-          <th>Version</th>
-          <td>unspecified
-          </td>
-        </tr>
-
-        <tr>
-          <th>Hardware</th>
-          <td>x86-64 (AMD64)
-          </td>
-        </tr>
-
-        <tr>
-          <th>OS</th>
-          <td>Linux (All)
-          </td>
-        </tr>
-
-        <tr>
-          <th>Status</th>
-          <td>NEW
-          </td>
-        </tr>
-
-        <tr>
-          <th>Severity</th>
-          <td>critical
-          </td>
-        </tr>
-
-        <tr>
-          <th>Priority</th>
-          <td>medium
-          </td>
-        </tr>
-
-        <tr>
-          <th>Component</th>
-          <td>Driver/nouveau
-          </td>
-        </tr>
-
-        <tr>
-          <th>Assignee</th>
-          <td>nouveau&#64;lists.freedesktop.org
-          </td>
-        </tr>
-
-        <tr>
-          <th>Reporter</th>
-          <td>bdurette.pro&#64;gmail.com
-          </td>
-        </tr>
-
-        <tr>
-          <th>QA Contact</th>
-          <td>xorg-team&#64;lists.x.org
-          </td>
-        </tr></table>
-      <p>
-        <div>
-        <pre>Created <span class=3D""><a href=3D"attachment.cgi?id=3D144881=
-" name=3D"attach_144881" title=3D"kernel log file">attachment 144881</a> <a=
- href=3D"attachment.cgi?id=3D144881&amp;action=3Dedit" title=3D"kernel log =
-file">[details]</a></span>
-kernel log file
-
-I used Rstudio for professional use. When using the xorg nouveau driver on
-Ubuntu 18, Rstudio &quot;crashes&quot; after a while producing a core dumpe=
-d error (see
-console output below). The bus has allready been filed in the Rstudio webpa=
-ge :
- <a href=3D"https://github.com/rstudio/rstudio/issues/3781">https://github.=
-com/rstudio/rstudio/issues/3781</a>. Kernel-log file is attached
-
-nouveau: kernel rejected pushbuf: Aucun fichier ou dossier de ce type
-nouveau: ch4: krec 0 pushes 0 bufs 2 relocs 0
-nouveau: ch4: buf 00000000 00000003 00000004 00000004 00000000
-nouveau: ch4: buf 00000001 00000006 00000004 00000000 00000004
-nouveau: kernel rejected pushbuf: Aucun fichier ou dossier de ce type
-nouveau: ch4: krec 0 pushes 0 bufs 2 relocs 0
-nouveau: ch4: buf 00000000 00000005 00000004 00000004 00000000
-nouveau: ch4: buf 00000001 00000006 00000004 00000000 00000004
-nouveau: ch4: buf 00000002 00000022 00000004 00000004 00000000
-nouveau: kernel rejected pushbuf: Aucun fichier ou dossier de ce type
-nouveau: ch4: krec 0 pushes 0 bufs 2 relocs 0
-nouveau: ch4: buf 00000000 00000003 00000004 00000004 00000000
-nouveau: ch4: buf 00000001 00000006 00000004 00000000 00000004
-Received signal 11 SEGV_MAPERR 7fd01f32c000
-Erreur de segmentation (core dumped)</pre>
-        </div>
-      </p>
-
-
-      <hr>
-      <span>You are receiving this mail because:</span>
-
-      <ul>
-          <li>You are the assignee for the bug.</li>
-      </ul>
-    </body>
-</html>=
-
---15642264261.42fBdD.12117--
-
---===============0372264192==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
-YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
-cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
-
---===============0372264192==--
+SGksCgpJJ20gaGF2aW5nIHRyb3VibGUgd2l0aCBoYXJkd2FyZSBkZWNvZGluZyBvZiB2aWRlbyB3
+aXRoIG1wdigxKSBoYXZpbmcKc3dpdGNoZWQgZnJvbSBOdmlkaWEncyBwcm9wcmlldGFyeSBkcml2
+ZXIgdG8gbm91dmVhdSBkdWUgdG8gQXJjaCBMaW51eApyZW1vdmluZyBpdHMgbnZpZGlhLTM0MHh4
+IHBhY2thZ2UuCgpUaGUgbWFjaGluZSBpcyBhbiBBY2VyIFJldm8uCgogICAgJCBsc3BjaSAtbm4g
+fCBncmVwIFZHQQogICAgMDE6MDAuMCBWR0EgY29tcGF0aWJsZSBjb250cm9sbGVyIFswMzAwXTog
+TlZJRElBIENvcnBvcmF0aW9uIEdUMjE4IFtJT05dIFsxMGRlOjBhNjRdIChyZXYgYTIpCgpJIHRo
+aW5rIHRoaXMgaXMgY29kZW5hbWUgTlZBOCB3aXRoIHRoZSB2aWRlby1hY2NsZXJhdGlvbiBlbmdp
+bmUgVlA0LjAuCgpJJ3ZlIHRoZXNlIHBhY2thZ2VzIGluc3RhbGxlZCwgZm9sbG93aW5nCmh0dHBz
+Oi8vd2lraS5hcmNobGludXgub3JnL2luZGV4LnBocC9Ob3V2ZWF1IGFuZApodHRwczovL3dpa2ku
+YXJjaGxpbnV4Lm9yZy9pbmRleC5waHAvSGFyZHdhcmVfdmlkZW9fYWNjZWxlcmF0aW9uCgogICAg
+JCBwYWNtYW4gLVEgfCBlZ3JlcCAnbnZpZGlhfG5vdXZlYXV8bWVzYXx2ZHBhdXx2YWFwaXx4b3Jn
+LXNlcnZlcicKICAgIGxpYnZhLW1lc2EtZHJpdmVyIDE5LjEuMy0xCiAgICBsaWJ2YS12ZHBhdS1k
+cml2ZXIgMC43LjQtNAogICAgbGlidmRwYXUgMS4yLTEKICAgIGxpYnZkcGF1LXZhLWdsIDAuNC4y
+LTIKICAgIG1lc2EgMTkuMS4zLTEKICAgIG1lc2EtZGVtb3MgOC40LjAtMQogICAgbWVzYS12ZHBh
+dSAxOS4xLjMtMQogICAgbm91dmVhdS1mdyAzMjUuMTUtMQogICAgdmRwYXVpbmZvIDEuMC0zCiAg
+ICB4Zjg2LXZpZGVvLW5vdXZlYXUgMS4wLjE2LTEKICAgIHhvcmctc2VydmVyIDEuMjAuNS0yCiAg
+ICB4b3JnLXNlcnZlci1jb21tb24gMS4yMC41LTIKICAgICQKCkEgcGFzdGUgb2YgdmRwYXVpbmZv
+KDEpJ3Mgb3V0cHV0IGlzIGF0IGh0dHA6Ly9peC5pby8xUEhpLgoKSSd2ZSBtYW55IHNhbXBsZSB2
+aWRlb3MgdGhhdCBleGhpYml0IHRoZSBzYW1lIHByb2JsZW0sIGJ1dCBJJ2xsIHN0aWNrCndpdGgg
+b25lIGZyb20gQkJDJ3MgaVBsYXllciBvYnRhaW5lZCB3aXRoIGdldF9pcGxheWVyKDEpLgoKICAg
+ICQgZmZtcGVnIC1pICRmIHwmIGdyZXAgVmlkZW86CiAgICAgICAgU3RyZWFtICMwOjAodW5kKTog
+VmlkZW86IGgyNjQgKE1haW4pIChhdmMxIC8gMHgzMTYzNzY2MSksCiAgICAgICAgICAgIHl1djQy
+MHAodHYsIGJ0NzA5KSwgOTYweDU0MCBbU0FSIDE6MSBEQVIgMTY6OV0sIDE2MDIga2IvcywKICAg
+ICAgICAgICAgMjUgZnBzLCAyNSB0YnIsIDkwayB0Ym4sIDUwIHRiYyAoZGVmYXVsdCkKClBsYWlu
+IG9sZCBgbXB2ICRmJyBwbGF5cyBmaW5lLCB1c2luZyBzb2Z0d2FyZSBkZWNvZGluZy4KCiAgICBW
+TzogW2dwdV0gOTYweDU0MCB5dXY0MjBwCgpBZGRpbmcgYC0tdm89dmRwYXUnIGdpdmVzCgogICAg
+Vk86IFt2ZHBhdV0gOTYweDU0MCB5dXY0MjBwCiAgICBbdm8vdmRwYXVdIENvbXBvc2l0aW5nIHdp
+bmRvdyBtYW5hZ2VyIGRldGVjdGVkLiBBc3N1bWluZyB0aW1pbmcgaW5mbwogICAgICAgIGlzIGlu
+YWNjdXJhdGUuCgpQbGF5YmFjayBpcyBmaW5lLCBzdGlsbCBzb2Z0d2FyZSBkZWNvZGluZy4KCmAt
+LXZvPXZkcGF1IC0taHdkZWM9dmRwYXUnIHVzZXMgaGFyZHdhcmUgZGVjb2Rpbmc6CgogICAgVXNp
+bmcgaGFyZHdhcmUgZGVjb2RpbmcgKHZkcGF1KS4KICAgIFZPOiBbdmRwYXVdIDk2MHg1NDAgdmRw
+YXVbeXV2NDIwcF0KICAgIFt2by92ZHBhdV0gQ29tcG9zaXRpbmcgd2luZG93IG1hbmFnZXIgZGV0
+ZWN0ZWQuIEFzc3VtaW5nIHRpbWluZyBpbmZvCiAgICAgICAgaXMgaW5hY2N1cmF0ZS4KClRoZSB2
+aWRlbyBwbGF5cywgQ1BVIGxvYWQgaXMgbGVzcyAobXkgYWltKSwgYnV0IHRoZXJlJ3Mg4oCYdGVh
+cmluZ+KAmSBvZiB0aGUKcGljdHVyZSBhcyBpZiBzbWFsbCByZWN0YW5nbGVzIHRoYXQgYXJlIHVw
+ZGF0ZXMgYXJlIGFwcGVhcmluZyBpbiB0aGUKd3JvbmcgbG9jYXRpb24sIG9mZiBieSBhIGxpdHRs
+ZS4gIElmIEkgc3RlcCB0aHJvdWdoIHRoZSBmcmFtZXMgd2l0aAptcHYncyDigJgu4oCZIGFuZCDi
+gJgs4oCZIHRoZW4gSSd2ZSBmb3VuZCBhIHBhdHRlcm46IG9uZSBmcmFtZSdzIHBpY3R1cmUgaXMK
+Z29vZCwgZm9sbG93ZWQgYnkgTiBiYWQgb25lcyB3aGVyZSBOIGlzIDMgb3IgNywgaS5lLiBldmVy
+eSA0dGggb3IgOHRoCmZyYW1lIGlzIG9rYXkuICBEb24ndCBrbm93IGlmIHRoYXQncyBhIGNsdWUg
+b3IgaGVscHMgc29tZW9uZSBoZXJlCnJlY29nbmlzZSBhIGtub3duIHByb2JsZW0uCgpJIGtub3cg
+WCB3ZWxsLCBidXQgTWVzYSwgZXRjLiwgYmVsb3cgaXQgYXJlIHVua25vd24gdG8gbWUsIGV2ZW4g
+dG8gdGhlCmV4dGVudCBvZiBrbm93aW5nIHF1aXRlIGhvdyBhbGwgdGhlIGJpdHMgZml0IHRvZ2V0
+aGVyLiAgSSdkIGFwcHJlY2lhdGUgYQpwb2ludGVyIG9yIHR3byBhcyB0byBob3cgdG8gdGFja2xl
+IHRoZSBwcm9ibGVtLCBldmVuIGlmIGl0J3MgYSDigJhZb3UndmUKY29tZSB0byB0aGUgd3Jvbmcg
+cGxhY2UsIGdvIG92ZXIgdGhlcmXigJkuICA6LSkKCi0tIApDaGVlcnMsIFJhbHBoLgpfX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpOb3V2ZWF1IG1haWxpbmcg
+bGlzdApOb3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNr
+dG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL25vdXZlYXU=
