@@ -2,63 +2,44 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3310578A8A
-	for <lists+nouveau@lfdr.de>; Mon, 29 Jul 2019 13:29:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8F02478BF6
+	for <lists+nouveau@lfdr.de>; Mon, 29 Jul 2019 14:45:42 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2C42789B30;
-	Mon, 29 Jul 2019 11:29:27 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0D25689D4B;
+	Mon, 29 Jul 2019 12:45:41 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-qk1-x72e.google.com (mail-qk1-x72e.google.com
- [IPv6:2607:f8b0:4864:20::72e])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 90B98893CB
- for <nouveau@lists.freedesktop.org>; Mon, 29 Jul 2019 11:29:25 +0000 (UTC)
-Received: by mail-qk1-x72e.google.com with SMTP id 201so43796754qkm.9
- for <nouveau@lists.freedesktop.org>; Mon, 29 Jul 2019 04:29:25 -0700 (PDT)
+Received: from mail-ua1-f43.google.com (mail-ua1-f43.google.com
+ [209.85.222.43])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id EA43989D4B
+ for <nouveau@lists.freedesktop.org>; Mon, 29 Jul 2019 12:45:39 +0000 (UTC)
+Received: by mail-ua1-f43.google.com with SMTP id a97so23851598uaa.9
+ for <nouveau@lists.freedesktop.org>; Mon, 29 Jul 2019 05:45:39 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-transfer-encoding
- :content-language;
- bh=W6tMYXytvCyQcDV1Ya2OBLuGzCdn6H/t0nuDWrLRKaw=;
- b=Y5fWI5j+CHRxs6lBwVHgbF+zf25RFSjXaNla5Dh7lG5nabsgNiqUSq09GdsWvZ4PqA
- UaPyzzYtOMy+dYBdffn8ZBrKXkYmTXAnCL/XB3UsRb7GMo2ca2tuVBHJVdcdyGYWM69f
- Eed93aX1bP6H1IYvnHWpm/ZKAgV1KDP0J1MRwLuttc4zc1mWHXMT3HxQ3N03+PZTXV7e
- dFqYe5gqWMI11x+aqiZ+UZlkeKPioWKC34Rbitvi9dQprCUbr1La6YL9H0fWjbLMVdEi
- /J6cFQPSBPW8LnIsdmdVNGr2B+70hEqnM+71UAdg0BxYf70RGo88AEvhfWPdXC34lNQv
- k09w==
-X-Gm-Message-State: APjAAAXu3voa1AE5mU8HHcs5Ql2JRynpAONfkEO+CdA0/2UvY7yrmIq2
- k1Y6pTF4gfTT/fJxensJiQUBfaqI
-X-Google-Smtp-Source: APXvYqxq/JFQbauokMLZfre1XSuQCDWs3kePGj43RzXTI+ucDobWWW/rGdoFTmCrLG957bdOZBcW0w==
-X-Received: by 2002:a37:4c01:: with SMTP id z1mr75356770qka.144.1564399764258; 
- Mon, 29 Jul 2019 04:29:24 -0700 (PDT)
-Received: from [192.168.0.32] (ns1.wonder.com.br. [177.126.110.42])
- by smtp.gmail.com with ESMTPSA id o22sm24560694qkk.50.2019.07.29.04.29.22
- for <nouveau@lists.freedesktop.org>
- (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
- Mon, 29 Jul 2019 04:29:23 -0700 (PDT)
-To: nouveau@lists.freedesktop.org
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=8Tg5oK2mpOxSBm0wsiIuGMHKDFRSRdPPU+7BzCovvxw=;
+ b=qWx3GAIe49YYyoe7h6dtCU0Repa23QlAUTi5JTEU5If8aHYqx7rl4k4XR3MixuconC
+ 0N9mrF3D7sRbXHAqeDaavd1E5t1JSSoTsWSMmjp4N0WkYnkRRdDkKdVpmk2EnU1b3BVq
+ XoPYGt9c/L42kUqGXn8WFrw3S7EXmrOuHCHdBEPxmoDOaKlbi2XiyXM6MXdBoE5eQvb4
+ WMb/+BecisyYMBHB7m8Hi596fhYwaulC8egxXm1Hlh4In8hEHqrKWphqGJwg/LIaBb58
+ vY8+YFvPIHbsljMZH172SZelo5geYvzLr5kba0T1n9YpisGbSzK+nwR9bC6B/ordJKOL
+ I3Jw==
+X-Gm-Message-State: APjAAAUoZLQBiTmXYzkhpmc0FePV7mHr7ZE7SU6UoMpej+q7pJu3fuZ/
+ NSTuP595VvUR62RHJOMw8rMsb/WDesUB6sxLQIg=
+X-Google-Smtp-Source: APXvYqxe2lDhyt7a0lk1GpnJbbsHDSWDSxd/eL6kP3LLNK7ZHH4t71dSl9haJezBYSwJ1AbmfLIBwA9HEU8SL9Ld4Qk=
+X-Received: by 2002:ab0:470e:: with SMTP id h14mr42438276uac.98.1564404339014; 
+ Mon, 29 Jul 2019 05:45:39 -0700 (PDT)
+MIME-Version: 1.0
 References: <20190727113726.2EF4D21F78@orac.inputplus.co.uk>
  <CAKb7UvhqXGz7_t9EXJvu02J+f0STGB7wvwNcSM8F7YHCcJ3KbA@mail.gmail.com>
-From: Solerman Kaplon <solerman@gmail.com>
-Message-ID: <97a6ab0d-89bc-0bd6-76d3-445255952d97@gmail.com>
-Date: Mon, 29 Jul 2019 08:29:20 -0300
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.7.0
-MIME-Version: 1.0
-In-Reply-To: <CAKb7UvhqXGz7_t9EXJvu02J+f0STGB7wvwNcSM8F7YHCcJ3KbA@mail.gmail.com>
-Content-Language: pt-BR
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20161025;
- h=subject:to:references:from:message-id:date:user-agent:mime-version
- :in-reply-to:content-transfer-encoding:content-language;
- bh=W6tMYXytvCyQcDV1Ya2OBLuGzCdn6H/t0nuDWrLRKaw=;
- b=N+hctDmRFNMnO1b2ZGDHJ8XNPeQGbDh2gj+MPwVt5iSltjWdI25dVSPUP13w2UZNFA
- GFLbjucYyXIUrx3KXrbNXSRRRefIUQt5CrdG8bZapBEIDQ+UkC/UwG73gBXCOu64NCMo
- 1WiFfACjNXwJNMR6Bnm236NCmDKmyn3PWAqOolqWBWY9tuxlk2KFJQthzwdrjAzWt+zE
- GMyrVGx8OnJaJXAza/Kzq4xX592rC/QzhVKw1ZcsF9u+l24oKsfti7Z2GUoxjZSLhu/Y
- I8hXf6Mg77Fc/2+aAn0qVVMBXyrke5zq8AorN4+j88Xdvs1186j7XF9zf46SigVtIoWz
- jbNA==
+ <97a6ab0d-89bc-0bd6-76d3-445255952d97@gmail.com>
+In-Reply-To: <97a6ab0d-89bc-0bd6-76d3-445255952d97@gmail.com>
+From: Ilia Mirkin <imirkin@alum.mit.edu>
+Date: Mon, 29 Jul 2019 08:45:27 -0400
+Message-ID: <CAKb7UvgxBqicqbpKe5iR2uZvTfCd16xXpNDFMRG2AX17q=JQow@mail.gmail.com>
+To: Solerman Kaplon <solerman@gmail.com>
 Subject: Re: [Nouveau] Video Hardware Decoding: Jittery Rectangles on Nvidia
  GT218 NVA8 VP4.
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -72,33 +53,41 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
+Cc: nouveau <nouveau@lists.freedesktop.org>
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-w4BzIDE0OjQ2IGRlIDI3LzA3LzIwMTksIElsaWEgTWlya2luIGVzY3JldmV1Ogo+IE9uIFNhdCwg
-SnVsIDI3LCAyMDE5IGF0IDc6MzcgQU0gUmFscGggQ29yZGVyb3kgPHJhbHBoQGlucHV0cGx1cy5j
-by51az4gd3JvdGU6Cj4+IFRoZSB2aWRlbyBwbGF5cywgQ1BVIGxvYWQgaXMgbGVzcyAobXkgYWlt
-KSwgYnV0IHRoZXJlJ3Mg4oCYdGVhcmluZ+KAmSBvZiB0aGUKPj4gcGljdHVyZSBhcyBpZiBzbWFs
-bCByZWN0YW5nbGVzIHRoYXQgYXJlIHVwZGF0ZXMgYXJlIGFwcGVhcmluZyBpbiB0aGUKPj4gd3Jv
-bmcgbG9jYXRpb24sIG9mZiBieSBhIGxpdHRsZS4gIElmIEkgc3RlcCB0aHJvdWdoIHRoZSBmcmFt
-ZXMgd2l0aAo+PiBtcHYncyDigJgu4oCZIGFuZCDigJgs4oCZIHRoZW4gSSd2ZSBmb3VuZCBhIHBh
-dHRlcm46IG9uZSBmcmFtZSdzIHBpY3R1cmUgaXMKPj4gZ29vZCwgZm9sbG93ZWQgYnkgTiBiYWQg
-b25lcyB3aGVyZSBOIGlzIDMgb3IgNywgaS5lLiBldmVyeSA0dGggb3IgOHRoCj4+IGZyYW1lIGlz
-IG9rYXkuICBEb24ndCBrbm93IGlmIHRoYXQncyBhIGNsdWUgb3IgaGVscHMgc29tZW9uZSBoZXJl
-Cj4+IHJlY29nbmlzZSBhIGtub3duIHByb2JsZW0uCjxzbmlwPgo+PiBVbmZvcnR1bmF0ZWx5IEkn
-dmUgbmV2ZXIgdHJhY2tlZCBkb3duIHRoZSBjYXVzZSBmb3IgdGhpcy4KPj4gaHR0cHM6Ly9ub3V2
-ZWF1LmZyZWVkZXNrdG9wLm9yZy93aWtpL1ZpZGVvQWNjZWxlcmF0aW9uLyAtIHNlZSBub3RlICM0
-Lgo+Pgo+PiBJIGhhdmUsIG92ZXIgdGltZSwgY29sbGVjdGVkIHNvbWUgc2FtcGxlIHZpZGVvcyB3
-aGVyZSB0aGlzIGhhcHBlbnMgaW4KPj4gdGhlIGZpcnN0IGZldyBmcmFtZXMuIFRoZSBwbGFuIHdh
-cyB0byBkbyBtbXQgdHJhY2VzIG9mIHRoZSBibG9iCj4+IGRyaXZlciwgYW5kIGZpZ3VyZSBvdXQg
-d2hhdCBpdCB3YXMgZG9pbmcgZGlmZmVyZW50bHkuCgo8c25pcD4KCkkgZG9uJ3QgcmVhbGx5IGtu
-b3cgYW55dGhpbmcgYWJvdXQgaHcgY29kaW5nLCBidXQgbG9va2luZyBmcm9tIHRoZSBvdXRzaWRl
-LCBpdCAKc2VlbXMgc29tZSBraW5kIG9mIHJpbmcgYnVmZmVyIHdpdGggZXhhY3QgMyBmcmFtZXMg
-bWF5YmUgaW50ZW5kZWQgdG8gd29yayBraW5kYSAKbGlrZSB1c2luZyB0cmlwcGxlIGJ1ZmZlcmlu
-Zz8gSSBrbm93IGZvciBvbmNlIHRoYXQgbnZpZGlhIHdvcmtzIGJldHRlciB1c2luZyAKdHJpcHBs
-ZSBidWZmZXJpbmcgZnJvbSB3aGF0IEkndmUgcmVhZCBmcm9tIHRoZSBrd2luIHRocmVhZHMuCgoK
-U29sZXJtYW4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+T24gTW9uLCBKdWwgMjksIDIwMTkgYXQgNzoyOSBBTSBTb2xlcm1hbiBLYXBsb24gPHNvbGVybWFu
+QGdtYWlsLmNvbT4gd3JvdGU6Cj4KPiDDgHMgMTQ6NDYgZGUgMjcvMDcvMjAxOSwgSWxpYSBNaXJr
+aW4gZXNjcmV2ZXU6Cj4gPiBPbiBTYXQsIEp1bCAyNywgMjAxOSBhdCA3OjM3IEFNIFJhbHBoIENv
+cmRlcm95IDxyYWxwaEBpbnB1dHBsdXMuY28udWs+IHdyb3RlOgo+ID4+IFRoZSB2aWRlbyBwbGF5
+cywgQ1BVIGxvYWQgaXMgbGVzcyAobXkgYWltKSwgYnV0IHRoZXJlJ3Mg4oCYdGVhcmluZ+KAmSBv
+ZiB0aGUKPiA+PiBwaWN0dXJlIGFzIGlmIHNtYWxsIHJlY3RhbmdsZXMgdGhhdCBhcmUgdXBkYXRl
+cyBhcmUgYXBwZWFyaW5nIGluIHRoZQo+ID4+IHdyb25nIGxvY2F0aW9uLCBvZmYgYnkgYSBsaXR0
+bGUuICBJZiBJIHN0ZXAgdGhyb3VnaCB0aGUgZnJhbWVzIHdpdGgKPiA+PiBtcHYncyDigJgu4oCZ
+IGFuZCDigJgs4oCZIHRoZW4gSSd2ZSBmb3VuZCBhIHBhdHRlcm46IG9uZSBmcmFtZSdzIHBpY3R1
+cmUgaXMKPiA+PiBnb29kLCBmb2xsb3dlZCBieSBOIGJhZCBvbmVzIHdoZXJlIE4gaXMgMyBvciA3
+LCBpLmUuIGV2ZXJ5IDR0aCBvciA4dGgKPiA+PiBmcmFtZSBpcyBva2F5LiAgRG9uJ3Qga25vdyBp
+ZiB0aGF0J3MgYSBjbHVlIG9yIGhlbHBzIHNvbWVvbmUgaGVyZQo+ID4+IHJlY29nbmlzZSBhIGtu
+b3duIHByb2JsZW0uCj4gPHNuaXA+Cj4gPj4gVW5mb3J0dW5hdGVseSBJJ3ZlIG5ldmVyIHRyYWNr
+ZWQgZG93biB0aGUgY2F1c2UgZm9yIHRoaXMuCj4gPj4gaHR0cHM6Ly9ub3V2ZWF1LmZyZWVkZXNr
+dG9wLm9yZy93aWtpL1ZpZGVvQWNjZWxlcmF0aW9uLyAtIHNlZSBub3RlICM0Lgo+ID4+Cj4gPj4g
+SSBoYXZlLCBvdmVyIHRpbWUsIGNvbGxlY3RlZCBzb21lIHNhbXBsZSB2aWRlb3Mgd2hlcmUgdGhp
+cyBoYXBwZW5zIGluCj4gPj4gdGhlIGZpcnN0IGZldyBmcmFtZXMuIFRoZSBwbGFuIHdhcyB0byBk
+byBtbXQgdHJhY2VzIG9mIHRoZSBibG9iCj4gPj4gZHJpdmVyLCBhbmQgZmlndXJlIG91dCB3aGF0
+IGl0IHdhcyBkb2luZyBkaWZmZXJlbnRseS4KPgo+IDxzbmlwPgo+Cj4gSSBkb24ndCByZWFsbHkg
+a25vdyBhbnl0aGluZyBhYm91dCBodyBjb2RpbmcsIGJ1dCBsb29raW5nIGZyb20gdGhlIG91dHNp
+ZGUsIGl0Cj4gc2VlbXMgc29tZSBraW5kIG9mIHJpbmcgYnVmZmVyIHdpdGggZXhhY3QgMyBmcmFt
+ZXMgbWF5YmUgaW50ZW5kZWQgdG8gd29yayBraW5kYQo+IGxpa2UgdXNpbmcgdHJpcHBsZSBidWZm
+ZXJpbmc/IEkga25vdyBmb3Igb25jZSB0aGF0IG52aWRpYSB3b3JrcyBiZXR0ZXIgdXNpbmcKPiB0
+cmlwcGxlIGJ1ZmZlcmluZyBmcm9tIHdoYXQgSSd2ZSByZWFkIGZyb20gdGhlIGt3aW4gdGhyZWFk
+cy4KClRoZSBhY3R1YWwgZGVjb2RlZCBpbWFnZXMgYXJlIHdyb25nIGhlcmUgLS0gdHJpcGxlIGJ1
+ZmZlcmluZyBub3JtYWxseQpyZWZlcnMgdG8gaG93IG1hbnkgKGltYWdlKSBidWZmZXJzIHlvdSBo
+b2xkIGluIHRoZSBkaXNwbGF5IHF1ZXVlLiBUaGUKZGVlcGVyIHRoZSBxdWV1ZSwgdGhlIG1vcmUg
+eW91J3JlIGlzb2xhdGVkIGZyb20gcmVuZGVyIHRpbWluZy4gSG93ZXZlcgppbiB0aGlzIGNhc2Us
+IHRoZSBpbWFnZXMgdGhlbXNlbHZlcyBhcmUgYmFkIG91dCBvZiB0aGUgZGVjb2RpbmcgbG9naWMu
+CgogIC1pbGlhCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
 Ck5vdXZlYXUgbWFpbGluZyBsaXN0Ck5vdXZlYXVAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBz
 Oi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vbm91dmVhdQ==
