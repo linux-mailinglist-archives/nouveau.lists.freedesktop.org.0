@@ -1,46 +1,45 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8055D78DF4
-	for <lists+nouveau@lfdr.de>; Mon, 29 Jul 2019 16:29:26 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id BDD6279C83
+	for <lists+nouveau@lfdr.de>; Tue, 30 Jul 2019 00:44:43 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E6242892BD;
-	Mon, 29 Jul 2019 14:29:24 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D658089BF8;
+	Mon, 29 Jul 2019 22:44:41 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from bombadil.infradead.org (bombadil.infradead.org
- [IPv6:2607:7c80:54:e::133])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 20780891AB;
- Mon, 29 Jul 2019 14:29:23 +0000 (UTC)
-Received: from [195.167.85.94] (helo=localhost)
- by bombadil.infradead.org with esmtpsa (Exim 4.92 #3 (Red Hat Linux))
- id 1hs6eN-0006P2-Jm; Mon, 29 Jul 2019 14:29:20 +0000
-From: Christoph Hellwig <hch@lst.de>
-To: =?UTF-8?q?J=C3=A9r=C3=B4me=20Glisse?= <jglisse@redhat.com>,
- Jason Gunthorpe <jgg@mellanox.com>, Ben Skeggs <bskeggs@redhat.com>
-Date: Mon, 29 Jul 2019 17:28:43 +0300
-Message-Id: <20190729142843.22320-10-hch@lst.de>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20190729142843.22320-1-hch@lst.de>
-References: <20190729142843.22320-1-hch@lst.de>
+Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
+ [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 5DBC089BF8
+ for <nouveau@lists.freedesktop.org>; Mon, 29 Jul 2019 22:44:40 +0000 (UTC)
+Received: by culpepper.freedesktop.org (Postfix, from userid 33)
+ id 53AED72167; Mon, 29 Jul 2019 22:44:40 +0000 (UTC)
+From: bugzilla-daemon@freedesktop.org
+To: nouveau@lists.freedesktop.org
+Date: Mon, 29 Jul 2019 22:44:40 +0000
+X-Bugzilla-Reason: QAcontact AssignedTo
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: None
+X-Bugzilla-Product: Mesa
+X-Bugzilla-Component: Drivers/DRI/nouveau
+X-Bugzilla-Version: 19.1
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: normal
+X-Bugzilla-Who: liewkj@yahoo.com
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: medium
+X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: 
+Message-ID: <bug-111213-8800-tJAZjZ4E05@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-111213-8800@http.bugs.freedesktop.org/>
+References: <bug-111213-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
- bombadil.infradead.org. See http://www.infradead.org/rpr.html
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt;
- c=relaxed/relaxed; 
- d=infradead.org; s=bombadil.20170209; h=Content-Transfer-Encoding:
- MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
- :Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:Resent-From
- :Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
- List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=UZ1iiZ91D5ta7woyBUt0JspQpjAYy1irdMsZOOrHXMc=; b=PsKqXUcN7z7Xz9gU7L79usjrqd
- 1TEUjHamWsPT+rB4y+/yJm/EmvCFSl7ml+1TBJeGQpJ7BwVxO9wF2ewwlhrRVlZhQ2fn7eM4nvSru
- Htj0+NqPiUUfos5bsZ+wlkRab0SxVL9RrtXQZ0X5t45PUuUj7wuHcCn43N+m+i27dIdLRZryJCjb+
- p41WXKWECLMO9LZLn3XL4a/cY1LJKbqbDtDs9Mnwi1jx/mtoDZJwIzftrtvBMEa3DqdCL4xlxrb9T
- Pn5dnuGhyiDr2tSO2dx5kndNT3pjthrpWfVIQvSgWUpbBrW0LeWUm490FPAwN1pfH7BrK6o7UT0aq
- y3B5AiUQ==;
-Subject: [Nouveau] [PATCH 9/9] mm: remove the MIGRATE_PFN_WRITE flag
+Subject: [Nouveau] [Bug 111213] VA-API nouveau SIGSEGV and asserts
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -52,53 +51,244 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Ralph Campbell <rcampbell@nvidia.com>, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- Bharata B Rao <bharata@linux.ibm.com>, linux-mm@kvack.org,
- Andrew Morton <akpm@linux-foundation.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============0167615120=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-VGhlIE1JR1JBVEVfUEZOX1dSSVRFIGlzIG9ubHkgdXNlZCBsb2NhbGx5IGluIG1pZ3JhdGVfdm1h
-X2NvbGxlY3RfcG1kLAp3aGVyZSBpdCBjYW4gYmUgcmVwbGFjZWQgd2l0aCBhIHNpbXBsZSBib29s
-ZWFuIGxvY2FsIHZhcmlhYmxlLgoKU2lnbmVkLW9mZi1ieTogQ2hyaXN0b3BoIEhlbGx3aWcgPGhj
-aEBsc3QuZGU+Ci0tLQogaW5jbHVkZS9saW51eC9taWdyYXRlLmggfCAxIC0KIG1tL21pZ3JhdGUu
-YyAgICAgICAgICAgIHwgOSArKysrKy0tLS0KIDIgZmlsZXMgY2hhbmdlZCwgNSBpbnNlcnRpb25z
-KCspLCA1IGRlbGV0aW9ucygtKQoKZGlmZiAtLWdpdCBhL2luY2x1ZGUvbGludXgvbWlncmF0ZS5o
-IGIvaW5jbHVkZS9saW51eC9taWdyYXRlLmgKaW5kZXggOGI0NmNmZGIxYTBlLi5iYTc0ZWY1YTc3
-MDIgMTAwNjQ0Ci0tLSBhL2luY2x1ZGUvbGludXgvbWlncmF0ZS5oCisrKyBiL2luY2x1ZGUvbGlu
-dXgvbWlncmF0ZS5oCkBAIC0xNjUsNyArMTY1LDYgQEAgc3RhdGljIGlubGluZSBpbnQgbWlncmF0
-ZV9taXNwbGFjZWRfdHJhbnNodWdlX3BhZ2Uoc3RydWN0IG1tX3N0cnVjdCAqbW0sCiAjZGVmaW5l
-IE1JR1JBVEVfUEZOX1ZBTElECSgxVUwgPDwgMCkKICNkZWZpbmUgTUlHUkFURV9QRk5fTUlHUkFU
-RQkoMVVMIDw8IDEpCiAjZGVmaW5lIE1JR1JBVEVfUEZOX0xPQ0tFRAkoMVVMIDw8IDIpCi0jZGVm
-aW5lIE1JR1JBVEVfUEZOX1dSSVRFCSgxVUwgPDwgMykKICNkZWZpbmUgTUlHUkFURV9QRk5fU0hJ
-RlQJNgogCiBzdGF0aWMgaW5saW5lIHN0cnVjdCBwYWdlICptaWdyYXRlX3Bmbl90b19wYWdlKHVu
-c2lnbmVkIGxvbmcgbXBmbikKZGlmZiAtLWdpdCBhL21tL21pZ3JhdGUuYyBiL21tL21pZ3JhdGUu
-YwppbmRleCA3NDczNTI1NmUyNjAuLjcyNGY5MmRjYzMxYiAxMDA2NDQKLS0tIGEvbW0vbWlncmF0
-ZS5jCisrKyBiL21tL21pZ3JhdGUuYwpAQCAtMjIxMiw2ICsyMjEyLDcgQEAgc3RhdGljIGludCBt
-aWdyYXRlX3ZtYV9jb2xsZWN0X3BtZChwbWRfdCAqcG1kcCwKIAkJdW5zaWduZWQgbG9uZyBtcGZu
-LCBwZm47CiAJCXN0cnVjdCBwYWdlICpwYWdlOwogCQlzd3BfZW50cnlfdCBlbnRyeTsKKwkJYm9v
-bCB3cml0YWJsZSA9IGZhbHNlOwogCQlwdGVfdCBwdGU7CiAKIAkJcHRlID0gKnB0ZXA7CkBAIC0y
-MjQwLDcgKzIyNDEsNyBAQCBzdGF0aWMgaW50IG1pZ3JhdGVfdm1hX2NvbGxlY3RfcG1kKHBtZF90
-ICpwbWRwLAogCQkJbXBmbiA9IG1pZ3JhdGVfcGZuKHBhZ2VfdG9fcGZuKHBhZ2UpKSB8CiAJCQkJ
-CU1JR1JBVEVfUEZOX01JR1JBVEU7CiAJCQlpZiAoaXNfd3JpdGVfZGV2aWNlX3ByaXZhdGVfZW50
-cnkoZW50cnkpKQotCQkJCW1wZm4gfD0gTUlHUkFURV9QRk5fV1JJVEU7CisJCQkJd3JpdGFibGUg
-PSB0cnVlOwogCQl9IGVsc2UgewogCQkJaWYgKGlzX3plcm9fcGZuKHBmbikpIHsKIAkJCQltcGZu
-ID0gTUlHUkFURV9QRk5fTUlHUkFURTsKQEAgLTIyNTAsNyArMjI1MSw4IEBAIHN0YXRpYyBpbnQg
-bWlncmF0ZV92bWFfY29sbGVjdF9wbWQocG1kX3QgKnBtZHAsCiAJCQl9CiAJCQlwYWdlID0gdm1f
-bm9ybWFsX3BhZ2UobWlncmF0ZS0+dm1hLCBhZGRyLCBwdGUpOwogCQkJbXBmbiA9IG1pZ3JhdGVf
-cGZuKHBmbikgfCBNSUdSQVRFX1BGTl9NSUdSQVRFOwotCQkJbXBmbiB8PSBwdGVfd3JpdGUocHRl
-KSA/IE1JR1JBVEVfUEZOX1dSSVRFIDogMDsKKwkJCWlmIChwdGVfd3JpdGUocHRlKSkKKwkJCQl3
-cml0YWJsZSA9IHRydWU7CiAJCX0KIAogCQkvKiBGSVhNRSBzdXBwb3J0IFRIUCAqLwpAQCAtMjI4
-NCw4ICsyMjg2LDcgQEAgc3RhdGljIGludCBtaWdyYXRlX3ZtYV9jb2xsZWN0X3BtZChwbWRfdCAq
-cG1kcCwKIAkJCXB0ZXBfZ2V0X2FuZF9jbGVhcihtbSwgYWRkciwgcHRlcCk7CiAKIAkJCS8qIFNl
-dHVwIHNwZWNpYWwgbWlncmF0aW9uIHBhZ2UgdGFibGUgZW50cnkgKi8KLQkJCWVudHJ5ID0gbWFr
-ZV9taWdyYXRpb25fZW50cnkocGFnZSwgbXBmbiAmCi0JCQkJCQkgICAgIE1JR1JBVEVfUEZOX1dS
-SVRFKTsKKwkJCWVudHJ5ID0gbWFrZV9taWdyYXRpb25fZW50cnkocGFnZSwgd3JpdGFibGUpOwog
-CQkJc3dwX3B0ZSA9IHN3cF9lbnRyeV90b19wdGUoZW50cnkpOwogCQkJaWYgKHB0ZV9zb2Z0X2Rp
-cnR5KHB0ZSkpCiAJCQkJc3dwX3B0ZSA9IHB0ZV9zd3BfbWtzb2Z0X2RpcnR5KHN3cF9wdGUpOwot
-LSAKMi4yMC4xCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-XwpOb3V2ZWF1IG1haWxpbmcgbGlzdApOb3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRw
-czovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL25vdXZlYXU=
+
+--===============0167615120==
+Content-Type: multipart/alternative; boundary="15644402800.E5F53bfB4.32192"
+Content-Transfer-Encoding: 7bit
+
+
+--15644402800.E5F53bfB4.32192
+Date: Mon, 29 Jul 2019 22:44:40 +0000
+MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+https://bugs.freedesktop.org/show_bug.cgi?id=3D111213
+
+--- Comment #11 from KJ Liew <liewkj@yahoo.com> ---
+$ LIBVA_DRIVER_NAME=3Dnouveau chromium
+nve4_set_surface_info:969 - unsupported surface format, try
+is_format_supported() !
+nve4_set_surface_info:969 - unsupported surface format, try
+is_format_supported() !
+nve4_set_surface_info:969 - unsupported surface format, try
+is_format_supported() !
+nve4_set_surface_info:969 - unsupported surface format, try
+is_format_supported() !
+nve4_set_surface_info:969 - unsupported surface format, try
+is_format_supported() !
+
+$ LIBVA_DRIVER_NAME=3Dvdpau VDPAU_DRIVER=3Dnouveau chromium
+
+[  550.938006] chromium[1880]: segfault at 1ad ip 00007fef0d3c9afb sp
+00007ffc0e96a530 error 4 in libvdpau_nouveau.so.1.0.0[7fef0d0ad000+4ea000]
+[  550.938013] Code: 55 41 54 55 48 89 fd 53 48 83 ec 08 4c 8b a7 e8 04 00 =
+00
+48 8b 9f 20 05 00 00 4c 8b af c0 03 00 00 41 0f b6 44 24 02 c0 e8 07 <38> 8=
+3 ad
+01 00 00 74 25 48 83 bb f0 01 00 00 00 74 15 48 8d bb f0
+[  551.612811] ------------[ cut here ]------------
+[  551.612912] WARNING: CPU: 3 PID: 168 at
+drivers/gpu/drm/nouveau/nvif/vmm.c:68 nvif_vmm_put.cold+0xc/0x13 [nouveau]
+[  551.612912] Modules linked in: fuse rfcomm cmac bnep nls_iso8859_1 nls_c=
+p437
+vfat fat hid_logitech_hidpp mousedev joydev input_leds snd_hda_codec_hdmi
+bridge stp llc nouveau edac_mce_amd kvm_amd hid_logitech_dj ccp rng_core kvm
+irqbypass btusb mxm_wmi snd_hda_codec_realtek btrtl wmi btbcm btintel
+i2c_algo_bit ttm snd_hda_codec_generic bluetooth ledtrig_audio drm_kms_help=
+er
+hid_generic snd_hda_intel drm crct10dif_pclmul snd_hda_codec crc32_pclmul
+ecdh_generic snd_hda_core usbhid rfkill ghash_clmulni_intel snd_hwdep ecc
+snd_pcm agpgart hid syscopyarea r8169 sysfillrect aesni_intel snd_timer
+sysimgblt realtek sp5100_tco fb_sys_fops aes_x86_64 snd crypto_simd cryptd
+fam15h_power k10temp pcspkr libphy glue_helper soundcore i2c_piix4 evdev
+pcc_cpufreq mac_hid acpi_cpufreq crypto_user ip_tables x_tables ext4
+crc32c_generic crc16 mbcache jbd2 ohci_pci sd_mod ahci libahci libata xhci_=
+pci
+crc32c_intel ehci_pci scsi_mod xhci_hcd ehci_hcd ohci_hcd
+[  551.612945] CPU: 3 PID: 168 Comm: kworker/3:1 Not tainted 5.2.3-arch1-1-=
+ARCH
+#1
+[  551.612946] Hardware name: Gigabyte Technology Co., Ltd. To be filled by
+O.E.M./970A-DS3P, BIOS FD 02/26/2016
+[  551.612986] Workqueue: events nouveau_cli_work [nouveau]
+[  551.613026] RIP: 0010:nvif_vmm_put.cold+0xc/0x13 [nouveau]
+[  551.613028] Code: 45 31 e4 e9 65 1d f1 ff 48 c7 c7 98 1a c6 c0 e8 f3 04 =
+d6
+d3 0f 0b 45 31 e4 e9 4f 1d f1 ff 48 c7 c7 e8 1a c6 c0 e8 dd 04 d6 d3 <0f> 0=
+b e9
+dc 21 f1 ff 48 c7 c7 e8 1a c6 c0 e8 ca 04 d6 d3 0f 0b b8
+[  551.613029] RSP: 0018:ffffb14c41d1bdc8 EFLAGS: 00010246
+[  551.613030] RAX: 0000000000000024 RBX: ffffb14c41d1bdf0 RCX:
+0000000000000000
+[  551.613031] RDX: 0000000000000000 RSI: ffff9ea8dead76e8 RDI:
+00000000ffffffff
+[  551.613032] RBP: ffffb14c41d1be20 R08: 00000000000003b2 R09:
+0000000000000001
+[  551.613032] R10: 0000000000000000 R11: 0000000000000001 R12:
+ffff9ea8c18e3780
+[  551.613033] R13: dead000000000200 R14: dead000000000100 R15:
+ffff9ea8d8ad76a8
+[  551.613034] FS:  0000000000000000(0000) GS:ffff9ea8deac0000(0000)
+knlGS:0000000000000000
+[  551.613035] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[  551.613035] CR2: 00007f3038178000 CR3: 00000003ef73e000 CR4:
+00000000000406e0
+[  551.613036] Call Trace:
+[  551.613080]  nouveau_vma_del+0x81/0xc0 [nouveau]
+[  551.613121]  nouveau_gem_object_delete_work+0x36/0x60 [nouveau]
+[  551.613161]  nouveau_cli_work+0xbd/0x100 [nouveau]
+[  551.613165]  process_one_work+0x1d1/0x3e0
+[  551.613167]  worker_thread+0x4a/0x3d0
+[  551.613170]  kthread+0xfb/0x130
+[  551.613171]  ? process_one_work+0x3e0/0x3e0
+[  551.613172]  ? kthread_park+0x80/0x80
+[  551.613175]  ret_from_fork+0x22/0x40
+[  551.613177] ---[ end trace eae1db9979ded55f ]---
+
+--=20
+You are receiving this mail because:
+You are the QA Contact for the bug.
+You are the assignee for the bug.=
+
+--15644402800.E5F53bfB4.32192
+Date: Mon, 29 Jul 2019 22:44:40 +0000
+MIME-Version: 1.0
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+<html>
+    <head>
+      <base href=3D"https://bugs.freedesktop.org/">
+    </head>
+    <body>
+      <p>
+        <div>
+            <b><a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - VA-API nouveau SIGSEGV and asserts"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111213#c11">Comme=
+nt # 11</a>
+              on <a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - VA-API nouveau SIGSEGV and asserts"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111213">bug 11121=
+3</a>
+              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
+liewkj&#64;yahoo.com" title=3D"KJ Liew &lt;liewkj&#64;yahoo.com&gt;"> <span=
+ class=3D"fn">KJ Liew</span></a>
+</span></b>
+        <pre>$ LIBVA_DRIVER_NAME=3Dnouveau chromium
+nve4_set_surface_info:969 - unsupported surface format, try
+is_format_supported() !
+nve4_set_surface_info:969 - unsupported surface format, try
+is_format_supported() !
+nve4_set_surface_info:969 - unsupported surface format, try
+is_format_supported() !
+nve4_set_surface_info:969 - unsupported surface format, try
+is_format_supported() !
+nve4_set_surface_info:969 - unsupported surface format, try
+is_format_supported() !
+
+$ LIBVA_DRIVER_NAME=3Dvdpau VDPAU_DRIVER=3Dnouveau chromium
+
+[  550.938006] chromium[1880]: segfault at 1ad ip 00007fef0d3c9afb sp
+00007ffc0e96a530 error 4 in libvdpau_nouveau.so.1.0.0[7fef0d0ad000+4ea000]
+[  550.938013] Code: 55 41 54 55 48 89 fd 53 48 83 ec 08 4c 8b a7 e8 04 00 =
+00
+48 8b 9f 20 05 00 00 4c 8b af c0 03 00 00 41 0f b6 44 24 02 c0 e8 07 &lt;38=
+&gt; 83 ad
+01 00 00 74 25 48 83 bb f0 01 00 00 00 74 15 48 8d bb f0
+[  551.612811] ------------[ cut here ]------------
+[  551.612912] WARNING: CPU: 3 PID: 168 at
+drivers/gpu/drm/nouveau/nvif/vmm.c:68 nvif_vmm_put.cold+0xc/0x13 [nouveau]
+[  551.612912] Modules linked in: fuse rfcomm cmac bnep nls_iso8859_1 nls_c=
+p437
+vfat fat hid_logitech_hidpp mousedev joydev input_leds snd_hda_codec_hdmi
+bridge stp llc nouveau edac_mce_amd kvm_amd hid_logitech_dj ccp rng_core kvm
+irqbypass btusb mxm_wmi snd_hda_codec_realtek btrtl wmi btbcm btintel
+i2c_algo_bit ttm snd_hda_codec_generic bluetooth ledtrig_audio drm_kms_help=
+er
+hid_generic snd_hda_intel drm crct10dif_pclmul snd_hda_codec crc32_pclmul
+ecdh_generic snd_hda_core usbhid rfkill ghash_clmulni_intel snd_hwdep ecc
+snd_pcm agpgart hid syscopyarea r8169 sysfillrect aesni_intel snd_timer
+sysimgblt realtek sp5100_tco fb_sys_fops aes_x86_64 snd crypto_simd cryptd
+fam15h_power k10temp pcspkr libphy glue_helper soundcore i2c_piix4 evdev
+pcc_cpufreq mac_hid acpi_cpufreq crypto_user ip_tables x_tables ext4
+crc32c_generic crc16 mbcache jbd2 ohci_pci sd_mod ahci libahci libata xhci_=
+pci
+crc32c_intel ehci_pci scsi_mod xhci_hcd ehci_hcd ohci_hcd
+[  551.612945] CPU: 3 PID: 168 Comm: kworker/3:1 Not tainted 5.2.3-arch1-1-=
+ARCH
+#1
+[  551.612946] Hardware name: Gigabyte Technology Co., Ltd. To be filled by
+O.E.M./970A-DS3P, BIOS FD 02/26/2016
+[  551.612986] Workqueue: events nouveau_cli_work [nouveau]
+[  551.613026] RIP: 0010:nvif_vmm_put.cold+0xc/0x13 [nouveau]
+[  551.613028] Code: 45 31 e4 e9 65 1d f1 ff 48 c7 c7 98 1a c6 c0 e8 f3 04 =
+d6
+d3 0f 0b 45 31 e4 e9 4f 1d f1 ff 48 c7 c7 e8 1a c6 c0 e8 dd 04 d6 d3 &lt;0f=
+&gt; 0b e9
+dc 21 f1 ff 48 c7 c7 e8 1a c6 c0 e8 ca 04 d6 d3 0f 0b b8
+[  551.613029] RSP: 0018:ffffb14c41d1bdc8 EFLAGS: 00010246
+[  551.613030] RAX: 0000000000000024 RBX: ffffb14c41d1bdf0 RCX:
+0000000000000000
+[  551.613031] RDX: 0000000000000000 RSI: ffff9ea8dead76e8 RDI:
+00000000ffffffff
+[  551.613032] RBP: ffffb14c41d1be20 R08: 00000000000003b2 R09:
+0000000000000001
+[  551.613032] R10: 0000000000000000 R11: 0000000000000001 R12:
+ffff9ea8c18e3780
+[  551.613033] R13: dead000000000200 R14: dead000000000100 R15:
+ffff9ea8d8ad76a8
+[  551.613034] FS:  0000000000000000(0000) GS:ffff9ea8deac0000(0000)
+knlGS:0000000000000000
+[  551.613035] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[  551.613035] CR2: 00007f3038178000 CR3: 00000003ef73e000 CR4:
+00000000000406e0
+[  551.613036] Call Trace:
+[  551.613080]  nouveau_vma_del+0x81/0xc0 [nouveau]
+[  551.613121]  nouveau_gem_object_delete_work+0x36/0x60 [nouveau]
+[  551.613161]  nouveau_cli_work+0xbd/0x100 [nouveau]
+[  551.613165]  process_one_work+0x1d1/0x3e0
+[  551.613167]  worker_thread+0x4a/0x3d0
+[  551.613170]  kthread+0xfb/0x130
+[  551.613171]  ? process_one_work+0x3e0/0x3e0
+[  551.613172]  ? kthread_park+0x80/0x80
+[  551.613175]  ret_from_fork+0x22/0x40
+[  551.613177] ---[ end trace eae1db9979ded55f ]---</pre>
+        </div>
+      </p>
+
+
+      <hr>
+      <span>You are receiving this mail because:</span>
+
+      <ul>
+          <li>You are the QA Contact for the bug.</li>
+          <li>You are the assignee for the bug.</li>
+      </ul>
+    </body>
+</html>=
+
+--15644402800.E5F53bfB4.32192--
+
+--===============0167615120==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
+YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
+cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============0167615120==--
