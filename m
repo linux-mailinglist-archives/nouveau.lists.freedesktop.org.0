@@ -1,94 +1,45 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 546717C9CA
-	for <lists+nouveau@lfdr.de>; Wed, 31 Jul 2019 19:02:30 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 794AF7CBC4
+	for <lists+nouveau@lfdr.de>; Wed, 31 Jul 2019 20:19:55 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8798789AFF;
-	Wed, 31 Jul 2019 17:02:28 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C12376E2E3;
+	Wed, 31 Jul 2019 18:19:53 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from EUR04-HE1-obe.outbound.protection.outlook.com
- (mail-eopbgr70079.outbound.protection.outlook.com [40.107.7.79])
- by gabe.freedesktop.org (Postfix) with ESMTPS id ED46789AFF;
- Wed, 31 Jul 2019 17:02:26 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=fOXT2KUTfxcPvEMCppPXk2wrMj4BZLasKl0MVTzmNI0fkSjLV66M4uEv4krqsabdQDAjj/97Yq17EVEK1CYwucARO5gIJ8n49ieAhWP84LKaiJXcCQuzJR2yUnt1e8yP8sAwa7oVw4aMqLe84HOk7VQrTvm3gGJdXNzMc/W56FObR+HJ9D8hv4Qey2bPXSJmcFVGjUXd2Z5LR4WCqHcDwlr89wMcx6SvIx5WIiWdqZdZdFf7rVeBTOniH9u2pzNo7r02r6//ESGNRHeNrfPnix8l/pazfCnh6Ivg6dPk76aksMhEYb2i/t9gJJ7O1u762oYwKhwdbDrus5mfExRACw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=h66GYamRh5h8PU3T095hhzCj9UAlrpEZrkJYNRToWEw=;
- b=XwwlJYgAJQ4rZvYxgaUjCaHIM3BgbPeo8fO7H8WknkiiXp6hPzMXD+HBG0xTmdt5pD5/tsUT6PEoJqkKChPfD7QtMM3203BxKoiY+J5ljyjUjfNrmfwKXb7PV/kZbVW1BRyAWbM0QyMJbIlPAY2LCyM7KY5ioZb9MM5wNwt7HLSIOc+06lDgWhuag9DToWEsnafL8alrqHyG7sa7XCcwarWyTLzgos3EnWmjkG+BLz+BXoWnJ7Jh+/ptHMdFsbqC5fo0/L1D/EhC/OUgSg3pxO/BsTF3mutzY9Cyo6Gx9ZIikl3Ao5OXK5S82QOPRhYmts1cCdJz1dK3+M2ovDYY0A==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1;spf=pass
- smtp.mailfrom=mellanox.com;dmarc=pass action=none
- header.from=mellanox.com;dkim=pass header.d=mellanox.com;arc=none
-Received: from VI1PR05MB4141.eurprd05.prod.outlook.com (10.171.182.144) by
- VI1PR05MB3231.eurprd05.prod.outlook.com (10.170.238.12) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.2115.15; Wed, 31 Jul 2019 17:02:24 +0000
-Received: from VI1PR05MB4141.eurprd05.prod.outlook.com
- ([fe80::5c6f:6120:45cd:2880]) by VI1PR05MB4141.eurprd05.prod.outlook.com
- ([fe80::5c6f:6120:45cd:2880%4]) with mapi id 15.20.2136.010; Wed, 31 Jul 2019
- 17:02:24 +0000
-From: Jason Gunthorpe <jgg@mellanox.com>
-To: "Kuehling, Felix" <Felix.Kuehling@amd.com>
-Thread-Topic: [PATCH 02/13] amdgpu: don't initialize range->list in
- amdgpu_hmm_init_range
-Thread-Index: AQHVRpr2/Xz4jNPu6k2DNRcwdQGPdqbkuYYAgAA8sIA=
-Date: Wed, 31 Jul 2019 17:02:24 +0000
-Message-ID: <20190731170219.GG22677@mellanox.com>
-References: <20190730055203.28467-1-hch@lst.de>
- <20190730055203.28467-3-hch@lst.de>
- <a4586f5c-0ae4-8cbd-65ff-dfe70d34f99b@amd.com>
-In-Reply-To: <a4586f5c-0ae4-8cbd-65ff-dfe70d34f99b@amd.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-clientproxiedby: YQBPR0101CA0071.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:c00:1::48) To VI1PR05MB4141.eurprd05.prod.outlook.com
- (2603:10a6:803:4d::16)
-x-ms-exchange-messagesentrepresentingtype: 1
-x-originating-ip: [156.34.55.100]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: e18b437b-1d80-4064-93a4-08d715d8dbb1
-x-ms-office365-filtering-ht: Tenant
-x-microsoft-antispam: BCL:0; PCL:0;
- RULEID:(2390118)(7020095)(4652040)(8989299)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(5600148)(711020)(4605104)(1401327)(4618075)(2017052603328)(7193020);
- SRVR:VI1PR05MB3231; 
-x-ms-traffictypediagnostic: VI1PR05MB3231:
-x-microsoft-antispam-prvs: <VI1PR05MB3231B23EE08859787CFF93EECFDF0@VI1PR05MB3231.eurprd05.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:9508;
-x-forefront-prvs: 011579F31F
-x-forefront-antispam-report: SFV:NSPM;
- SFS:(10009020)(4636009)(396003)(39860400002)(366004)(376002)(346002)(136003)(189003)(199004)(6512007)(478600001)(66556008)(6916009)(6436002)(11346002)(14454004)(229853002)(446003)(256004)(7416002)(6116002)(3846002)(54906003)(53936002)(305945005)(36756003)(86362001)(316002)(486006)(2906002)(476003)(2616005)(66066001)(33656002)(4744005)(81156014)(8676002)(102836004)(26005)(6506007)(66446008)(71200400001)(1076003)(53546011)(386003)(6486002)(81166006)(4326008)(99286004)(6246003)(52116002)(76176011)(68736007)(66476007)(64756008)(66946007)(25786009)(5660300002)(71190400001)(8936002)(186003)(7736002);
- DIR:OUT; SFP:1101; SCL:1; SRVR:VI1PR05MB3231;
- H:VI1PR05MB4141.eurprd05.prod.outlook.com; FPR:; SPF:None; LANG:en;
- PTR:InfoNoRecords; MX:1; A:1; 
-received-spf: None (protection.outlook.com: mellanox.com does not designate
- permitted sender hosts)
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam-message-info: XvANRZ0wSiwaYImTi/Xr3Vcjvyb3jUZ9kXGpIMAMliLL6nh88DIR9Yh1Zop+BRn/H8Ent1VUnvJsbHWZ2M6wXZBC7utyFXLbpNkbuXcvSREmn69Vjgy9PZoVRZvZjJmGYQy96YC/pPe6eAJXl63HvODgzwUjaz2yy2i2kJea4byM3/AV8p0T+OYwG+WYSIWwJbqWlF6x2pX7NEku1uagH3ZhYaovCn0XJ8Ng0oOvKn9KUrtJRtcyB1WmZKjyFlGGb34I0aa3oYIex22SOsO3C+cC0zOnj089fsi3t9ySZu9jjRa/qEgBWRhE9fLEGuDenzxZOuM4FPdDyp6B3gAm7cXxSg5Kfjb+gyNtPrlWEuFUQBS45zRynPfUGNRudHAY6IhgLvaZjl8nqJltfM/1+bgV7RLjNuiYlQZL8IdecDA=
-Content-ID: <FAC49FFA8B421F49B49EF44701A00263@eurprd05.prod.outlook.com>
+Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
+ [131.252.210.165])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 59ACA6E2EA
+ for <nouveau@lists.freedesktop.org>; Wed, 31 Jul 2019 18:19:53 +0000 (UTC)
+Received: by culpepper.freedesktop.org (Postfix, from userid 33)
+ id 3970372168; Wed, 31 Jul 2019 18:19:53 +0000 (UTC)
+From: bugzilla-daemon@freedesktop.org
+To: nouveau@lists.freedesktop.org
+Date: Wed, 31 Jul 2019 18:19:53 +0000
+X-Bugzilla-Reason: AssignedTo
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: None
+X-Bugzilla-Product: xorg
+X-Bugzilla-Component: Driver/nouveau
+X-Bugzilla-Version: unspecified
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: critical
+X-Bugzilla-Who: bdurette.pro@gmail.com
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: medium
+X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: 
+Message-ID: <bug-111230-8800-tyx13Frqnw@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-111230-8800@http.bugs.freedesktop.org/>
+References: <bug-111230-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-X-OriginatorOrg: Mellanox.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: e18b437b-1d80-4064-93a4-08d715d8dbb1
-X-MS-Exchange-CrossTenant-originalarrivaltime: 31 Jul 2019 17:02:24.1750 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: a652971c-7d2e-4d9b-a6a4-d149256f461b
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: jgg@mellanox.com
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR05MB3231
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=Mellanox.com; s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=h66GYamRh5h8PU3T095hhzCj9UAlrpEZrkJYNRToWEw=;
- b=L5UQjTDS1konX8ry82cmnIKY6y4buSB33dhb+3UGmgB1jB4Vg1G2ZhzCOwrInofPuCtPO3GvfZL63BtlB/3W59RYqZg0AT9ehbXxTjjCeTwybV7EXAQ6AWY+31P8WpQYtN4KeeuCQ4x6NJpluZzswU0VAXr0RZuQgyYmgdREKs0=
-X-Mailman-Original-Authentication-Results: spf=none (sender IP is )
- smtp.mailfrom=jgg@mellanox.com; 
-Subject: Re: [Nouveau] [PATCH 02/13] amdgpu: don't initialize range->list in
- amdgpu_hmm_init_range
+Subject: [Nouveau] [Bug 111230] core dumped while using Rstudio
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -100,32 +51,108 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Ralph Campbell <rcampbell@nvidia.com>,
- "amd-gfx@lists.freedesktop.org" <amd-gfx@lists.freedesktop.org>,
- "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
- "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
- "linux-mm@kvack.org" <linux-mm@kvack.org>, Ben Skeggs <bskeggs@redhat.com>,
- Christoph Hellwig <hch@lst.de>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============0368701062=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-T24gV2VkLCBKdWwgMzEsIDIwMTkgYXQgMDE6MjU6MDZQTSArMDAwMCwgS3VlaGxpbmcsIEZlbGl4
-IHdyb3RlOgo+IE9uIDIwMTktMDctMzAgMTo1MSBhLm0uLCBDaHJpc3RvcGggSGVsbHdpZyB3cm90
-ZToKPiA+IFRoZSBsaXN0IGlzIHVzZWQgdG8gYWRkIHRoZSByYW5nZSB0byBhbm90aGVyIGxpc3Qg
-YXMgYW4gZW50cnkgaW4gdGhlCj4gPiBjb3JlIGhtbSBjb2RlLCBzbyB0aGVyZSBpcyBubyBuZWVk
-IHRvIGluaXRpYWxpemUgaXQgaW4gYSBkcml2ZXIuCj4gCj4gSSd2ZSBzZWVuIGNvZGUgdGhhdCB1
-c2VzIGxpc3RfZW1wdHkgdG8gY2hlY2sgd2hldGhlciBhIGxpc3QgaGVhZCBoYXMgCj4gYmVlbiBh
-ZGRlZCB0byBhIGxpc3Qgb3Igbm90LiBGb3IgdGhhdCB0byB3b3JrLCB0aGUgbGlzdCBoZWFkIG5l
-ZWRzIHRvIGJlIAo+IGluaXRpYWxpemVkLCBhbmQgaXQgaGFzIHRvIGJlIHJlbW92ZWQgd2l0aCBs
-aXN0X2RlbF9pbml0LiAKCkkgdGhpbmsgdGhlIGlkYSBpcyB0aGF0ICdsaXN0JyBpcyBhIHByaXZh
-dGUgbWVtYmVyIG9mIHJhbmdlIGFuZApkcml2ZXJzIHNob3VsZG4ndCB0b3VjaCBpdCBhdCBhbGwu
-Cgo+IGV2ZXIgZG8gdGhhdCB3aXRoIHJhbmdlLT5saXN0LCB0aGVuIHRoaXMgcGF0Y2ggaXMgUmV2
-aWV3ZWQtYnk6IEZlbGl4IAo+IEt1ZWhsaW5nIDxGZWxpeC5LdWVobGluZ0BhbWQuY29tPgoKUGxl
-YXNlIHB1dCB0YWdzIG9uIHRoZWlyIG93biBlbXB0eSBsaW5lIHNvIHRoYXQgcGF0Y2h3b3JrcyB3
-aWxsCmNvbGxlY3QgdGhlbSBhdXRvbWF0aWNhbGx5Li4KCkphc29uCl9fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCk5vdXZlYXUgbWFpbGluZyBsaXN0Ck5vdXZl
-YXVAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21h
-aWxtYW4vbGlzdGluZm8vbm91dmVhdQ==
+
+--===============0368701062==
+Content-Type: multipart/alternative; boundary="15645971931.b001E9.15586"
+Content-Transfer-Encoding: 7bit
+
+
+--15645971931.b001E9.15586
+Date: Wed, 31 Jul 2019 18:19:53 +0000
+MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+https://bugs.freedesktop.org/show_bug.cgi?id=3D111230
+
+--- Comment #2 from bdurette.pro@gmail.com ---
+(In reply to Andre Klapper from comment #1)
+> Please include exact version information for the xorg nouveau driver that
+> you use, and *exact* distribution version information.
+
+Here is for the distribution information. How could I get the exact driver
+version ?
+
+Distributor ID: Ubuntu
+Description:    Ubuntu 18.04.2 LTS
+Release:        18.04
+Codename:       bionic
+
+--=20
+You are receiving this mail because:
+You are the assignee for the bug.=
+
+--15645971931.b001E9.15586
+Date: Wed, 31 Jul 2019 18:19:53 +0000
+MIME-Version: 1.0
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+<html>
+    <head>
+      <base href=3D"https://bugs.freedesktop.org/">
+    </head>
+    <body>
+      <p>
+        <div>
+            <b><a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - core dumped while using Rstudio"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111230#c2">Commen=
+t # 2</a>
+              on <a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - core dumped while using Rstudio"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111230">bug 11123=
+0</a>
+              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
+bdurette.pro&#64;gmail.com" title=3D"bdurette.pro&#64;gmail.com">bdurette.p=
+ro&#64;gmail.com</a>
+</span></b>
+        <pre>(In reply to Andre Klapper from <a href=3D"show_bug.cgi?id=3D1=
+11230#c1">comment #1</a>)
+<span class=3D"quote">&gt; Please include exact version information for the=
+ xorg nouveau driver that
+&gt; you use, and *exact* distribution version information.</span >
+
+Here is for the distribution information. How could I get the exact driver
+version ?
+
+Distributor ID: Ubuntu
+Description:    Ubuntu 18.04.2 LTS
+Release:        18.04
+Codename:       bionic</pre>
+        </div>
+      </p>
+
+
+      <hr>
+      <span>You are receiving this mail because:</span>
+
+      <ul>
+          <li>You are the assignee for the bug.</li>
+      </ul>
+    </body>
+</html>=
+
+--15645971931.b001E9.15586--
+
+--===============0368701062==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
+YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
+cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============0368701062==--
