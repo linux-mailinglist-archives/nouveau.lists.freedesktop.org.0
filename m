@@ -1,23 +1,23 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2210C7BDBF
-	for <lists+nouveau@lfdr.de>; Wed, 31 Jul 2019 11:51:53 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id C16587BDC0
+	for <lists+nouveau@lfdr.de>; Wed, 31 Jul 2019 11:52:35 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 69D0689BFF;
-	Wed, 31 Jul 2019 09:51:51 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3C75089A8B;
+	Wed, 31 Jul 2019 09:52:34 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
- by gabe.freedesktop.org (Postfix) with ESMTP id 125FC89BBE
- for <nouveau@lists.freedesktop.org>; Wed, 31 Jul 2019 09:51:50 +0000 (UTC)
+ [131.252.210.165])
+ by gabe.freedesktop.org (Postfix) with ESMTP id D719889D7C
+ for <nouveau@lists.freedesktop.org>; Wed, 31 Jul 2019 09:52:32 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 0EFAB72167; Wed, 31 Jul 2019 09:51:50 +0000 (UTC)
+ id D388572167; Wed, 31 Jul 2019 09:52:32 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Wed, 31 Jul 2019 09:51:50 +0000
+Date: Wed, 31 Jul 2019 09:52:31 +0000
 X-Bugzilla-Reason: AssignedTo
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
@@ -33,14 +33,14 @@ X-Bugzilla-Priority: medium
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
 X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-101220-8800-ItTDn7quI8@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-101220-8800@http.bugs.freedesktop.org/>
-References: <bug-101220-8800@http.bugs.freedesktop.org/>
+Message-ID: <bug-100228-8800-0wBc97SySA@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-100228-8800@http.bugs.freedesktop.org/>
+References: <bug-100228-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 101220] [NV137/GP107] xorg-server-1.19.3 crashes
- when trying to enable HDMI output
+Subject: [Nouveau] [Bug 100228] [NV137] bus: MMIO read of 00000000 FAULT at
+ 409800 [ TIMEOUT ]
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -52,35 +52,43 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1109882563=="
+Content-Type: multipart/mixed; boundary="===============0227686847=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============1109882563==
-Content-Type: multipart/alternative; boundary="15645667100.0cf530.23156"
+--===============0227686847==
+Content-Type: multipart/alternative; boundary="156456675211.EfbcDf5.23013"
 Content-Transfer-Encoding: 7bit
 
 
---15645667100.0cf530.23156
-Date: Wed, 31 Jul 2019 09:51:50 +0000
+--156456675211.EfbcDf5.23013
+Date: Wed, 31 Jul 2019 09:52:32 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 
-https://bugs.freedesktop.org/show_bug.cgi?id=3D101220
+https://bugs.freedesktop.org/show_bug.cgi?id=3D100228
 
---- Comment #24 from Pacho Ramos <pachoramos1@gmail.com> ---
-Still the same with 5.2.x kernels
+--- Comment #39 from Pacho Ramos <pachoramos1@gmail.com> ---
+(In reply to Pacho Ramos from comment #38)
+> "nouveau.modeset=3D0 i915.modeset=3D1" solves the problem for me, thanks =
+a lot!
+> :D
+
+But, then, nouveau is not listed by:
+$ xrandr --listproviders
+
+Then, it is still not usable :(
 
 --=20
 You are receiving this mail because:
 You are the assignee for the bug.=
 
---15645667100.0cf530.23156
-Date: Wed, 31 Jul 2019 09:51:50 +0000
+--156456675211.EfbcDf5.23013
+Date: Wed, 31 Jul 2019 09:52:32 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -96,21 +104,30 @@ Auto-Submitted: auto-generated
         <div>
             <b><a class=3D"bz_bug_link=20
           bz_status_NEW "
-   title=3D"NEW - [NV137/GP107] xorg-server-1.19.3 crashes when trying to e=
-nable HDMI output"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D101220#c24">Comme=
-nt # 24</a>
+   title=3D"NEW - [NV137] bus: MMIO read of 00000000 FAULT at 409800 [ TIME=
+OUT ]"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D100228#c39">Comme=
+nt # 39</a>
               on <a class=3D"bz_bug_link=20
           bz_status_NEW "
-   title=3D"NEW - [NV137/GP107] xorg-server-1.19.3 crashes when trying to e=
-nable HDMI output"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D101220">bug 10122=
-0</a>
+   title=3D"NEW - [NV137] bus: MMIO read of 00000000 FAULT at 409800 [ TIME=
+OUT ]"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D100228">bug 10022=
+8</a>
               from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
 pachoramos1&#64;gmail.com" title=3D"Pacho Ramos &lt;pachoramos1&#64;gmail.c=
 om&gt;"> <span class=3D"fn">Pacho Ramos</span></a>
 </span></b>
-        <pre>Still the same with 5.2.x kernels</pre>
+        <pre>(In reply to Pacho Ramos from <a href=3D"show_bug.cgi?id=3D100=
+228#c38">comment #38</a>)
+<span class=3D"quote">&gt; &quot;nouveau.modeset=3D0 i915.modeset=3D1&quot;=
+ solves the problem for me, thanks a lot!
+&gt; :D</span >
+
+But, then, nouveau is not listed by:
+$ xrandr --listproviders
+
+Then, it is still not usable :(</pre>
         </div>
       </p>
 
@@ -124,9 +141,9 @@ om&gt;"> <span class=3D"fn">Pacho Ramos</span></a>
     </body>
 </html>=
 
---15645667100.0cf530.23156--
+--156456675211.EfbcDf5.23013--
 
---===============1109882563==
+--===============0227686847==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -136,4 +153,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============1109882563==--
+--===============0227686847==--
