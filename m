@@ -1,20 +1,20 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8D2DD7E5B1
-	for <lists+nouveau@lfdr.de>; Fri,  2 Aug 2019 00:33:49 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 175FC7E5B0
+	for <lists+nouveau@lfdr.de>; Fri,  2 Aug 2019 00:33:48 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2B47E6E82C;
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0254A6E828;
 	Thu,  1 Aug 2019 22:33:46 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
  [131.252.210.165])
- by gabe.freedesktop.org (Postfix) with ESMTP id C7D076E82E
+ by gabe.freedesktop.org (Postfix) with ESMTP id 97CEE6E82C
  for <nouveau@lists.freedesktop.org>; Thu,  1 Aug 2019 22:33:44 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id C461D72167; Thu,  1 Aug 2019 22:33:44 +0000 (UTC)
+ id 9438272167; Thu,  1 Aug 2019 22:33:44 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
 Date: Thu, 01 Aug 2019 22:33:44 +0000
@@ -23,24 +23,24 @@ X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
 X-Bugzilla-Product: Mesa
 X-Bugzilla-Component: Drivers/DRI/nouveau
-X-Bugzilla-Version: unspecified
+X-Bugzilla-Version: 19.1
 X-Bugzilla-Keywords: 
 X-Bugzilla-Severity: normal
 X-Bugzilla-Who: imirkin@alum.mit.edu
 X-Bugzilla-Status: RESOLVED
-X-Bugzilla-Resolution: FIXED
+X-Bugzilla-Resolution: DUPLICATE
 X-Bugzilla-Priority: medium
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: cc
-Message-ID: <bug-111217-8800-mpSniFe9xh@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-111217-8800@http.bugs.freedesktop.org/>
-References: <bug-111217-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-Changed-Fields: bug_status resolution
+Message-ID: <bug-111280-8800-60Q5T2xYdY@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-111280-8800@http.bugs.freedesktop.org/>
+References: <bug-111280-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 111217] compilation of vdpau shaders crashes in
- handleCVT_CVT
+Subject: [Nouveau] [Bug 111280] Playing a video on vlc causes Segmentation
+ Fault
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -52,17 +52,17 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0011982845=="
+Content-Type: multipart/mixed; boundary="===============0267222281=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============0011982845==
-Content-Type: multipart/alternative; boundary="15646988243.C6b1Ff4F.29997"
+--===============0267222281==
+Content-Type: multipart/alternative; boundary="15646988241.A9dCfeD.29997"
 Content-Transfer-Encoding: 7bit
 
 
---15646988243.C6b1Ff4F.29997
+--15646988241.A9dCfeD.29997
 Date: Thu, 1 Aug 2019 22:33:44 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
@@ -70,23 +70,29 @@ Content-Transfer-Encoding: quoted-printable
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 
-https://bugs.freedesktop.org/show_bug.cgi?id=3D111217
+https://bugs.freedesktop.org/show_bug.cgi?id=3D111280
 
 Ilia Mirkin <imirkin@alum.mit.edu> changed:
 
            What    |Removed                     |Added
 ----------------------------------------------------------------------------
-                 CC|                            |madebr@gmail.com
+             Status|NEW                         |RESOLVED
+         Resolution|---                         |DUPLICATE
 
---- Comment #5 from Ilia Mirkin <imirkin@alum.mit.edu> ---
-*** Bug 111280 has been marked as a duplicate of this bug. ***
+--- Comment #1 from Ilia Mirkin <imirkin@alum.mit.edu> ---
+Please try this on the master branch. Not sure that vlc will work, but this
+issue is resolved.
+
+mplayer -vo vdpau worksforme.
+
+*** This bug has been marked as a duplicate of bug 111217 ***
 
 --=20
 You are receiving this mail because:
 You are the assignee for the bug.
 You are the QA Contact for the bug.=
 
---15646988243.C6b1Ff4F.29997
+--15646988241.A9dCfeD.29997
 Date: Thu, 1 Aug 2019 22:33:44 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
@@ -104,10 +110,10 @@ pan class=3D"fn">Ilia Mirkin</span></a>
 </span> changed
           <a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED FIXED - compilation of vdpau shaders crashes in handle=
-CVT_CVT"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111217">bug 11121=
-7</a>
+   title=3D"RESOLVED DUPLICATE - Playing a video on vlc causes Segmentation=
+ Fault"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111280">bug 11128=
+0</a>
           <br>
              <table border=3D"1" cellspacing=3D"0" cellpadding=3D"8">
           <tr>
@@ -117,37 +123,49 @@ CVT_CVT"
           </tr>
 
          <tr>
-           <td style=3D"text-align:right;">CC</td>
-           <td>
-               &nbsp;
+           <td style=3D"text-align:right;">Status</td>
+           <td>NEW
            </td>
-           <td>madebr&#64;gmail.com
+           <td>RESOLVED
+           </td>
+         </tr>
+
+         <tr>
+           <td style=3D"text-align:right;">Resolution</td>
+           <td>---
+           </td>
+           <td>DUPLICATE
            </td>
          </tr></table>
       <p>
         <div>
             <b><a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED FIXED - compilation of vdpau shaders crashes in handle=
-CVT_CVT"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111217#c5">Commen=
-t # 5</a>
+   title=3D"RESOLVED DUPLICATE - Playing a video on vlc causes Segmentation=
+ Fault"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111280#c1">Commen=
+t # 1</a>
               on <a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED FIXED - compilation of vdpau shaders crashes in handle=
-CVT_CVT"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111217">bug 11121=
-7</a>
+   title=3D"RESOLVED DUPLICATE - Playing a video on vlc causes Segmentation=
+ Fault"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111280">bug 11128=
+0</a>
               from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
 imirkin&#64;alum.mit.edu" title=3D"Ilia Mirkin &lt;imirkin&#64;alum.mit.edu=
 &gt;"> <span class=3D"fn">Ilia Mirkin</span></a>
 </span></b>
-        <pre>*** <a class=3D"bz_bug_link=20
+        <pre>Please try this on the master branch. Not sure that vlc will w=
+ork, but this
+issue is resolved.
+
+mplayer -vo vdpau worksforme.
+
+*** This bug has been marked as a duplicate of <a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED DUPLICATE - Playing a video on vlc causes Segmentation=
- Fault"
-   href=3D"show_bug.cgi?id=3D111280">Bug 111280</a> has been marked as a du=
-plicate of this bug. ***</pre>
+   title=3D"RESOLVED FIXED - compilation of vdpau shaders crashes in handle=
+CVT_CVT"
+   href=3D"show_bug.cgi?id=3D111217">bug 111217</a> ***</pre>
         </div>
       </p>
 
@@ -162,9 +180,9 @@ plicate of this bug. ***</pre>
     </body>
 </html>=
 
---15646988243.C6b1Ff4F.29997--
+--15646988241.A9dCfeD.29997--
 
---===============0011982845==
+--===============0267222281==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -174,4 +192,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============0011982845==--
+--===============0267222281==--
