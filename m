@@ -2,36 +2,45 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D0D6D7E51D
-	for <lists+nouveau@lfdr.de>; Fri,  2 Aug 2019 00:02:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 71E237E592
+	for <lists+nouveau@lfdr.de>; Fri,  2 Aug 2019 00:25:06 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B45816E825;
-	Thu,  1 Aug 2019 22:02:35 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C61BC6E82D;
+	Thu,  1 Aug 2019 22:25:03 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C084B6E825;
- Thu,  1 Aug 2019 22:02:34 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
- [10.5.11.22])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id C25D730EA981;
- Thu,  1 Aug 2019 22:02:30 +0000 (UTC)
-Received: from malachite.bss.redhat.com (dhcp-10-20-1-11.bss.redhat.com
- [10.20.1.11])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 15EB61001281;
- Thu,  1 Aug 2019 22:02:25 +0000 (UTC)
-From: Lyude Paul <lyude@redhat.com>
+Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
+ [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
+ by gabe.freedesktop.org (Postfix) with ESMTP id F2E726E82D
+ for <nouveau@lists.freedesktop.org>; Thu,  1 Aug 2019 22:25:02 +0000 (UTC)
+Received: by culpepper.freedesktop.org (Postfix, from userid 33)
+ id E9C6272167; Thu,  1 Aug 2019 22:25:02 +0000 (UTC)
+From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Thu,  1 Aug 2019 18:02:15 -0400
-Message-Id: <20190801220216.15323-1-lyude@redhat.com>
+Date: Thu, 01 Aug 2019 22:25:02 +0000
+X-Bugzilla-Reason: AssignedTo QAcontact
+X-Bugzilla-Type: new
+X-Bugzilla-Watch-Reason: None
+X-Bugzilla-Product: Mesa
+X-Bugzilla-Component: Drivers/DRI/nouveau
+X-Bugzilla-Version: 19.1
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: normal
+X-Bugzilla-Who: madebr@gmail.com
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: medium
+X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: bug_id short_desc product version rep_platform
+ op_sys bug_status bug_severity priority component assigned_to reporter
+ qa_contact attachments.created
+Message-ID: <bug-111280-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.43]); Thu, 01 Aug 2019 22:02:34 +0000 (UTC)
-Subject: [Nouveau] [PATCH] drm/nouveau: Only release VCPI slots on mode
- changes
+Subject: [Nouveau] [Bug 111280] New: Playing a video on vlc causes
+ Segmentation Fault
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -43,77 +52,195 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, dri-devel@lists.freedesktop.org,
- stable@vger.kernel.org, linux-kernel@vger.kernel.org,
- Jerry Zuo <Jerry.Zuo@amd.com>, Ben Skeggs <bskeggs@redhat.com>,
- Daniel Vetter <daniel@ffwll.ch>, David Airlie <airlied@redhat.com>,
- Harry Wentland <harry.wentland@amd.com>, Juston Li <juston.li@intel.com>,
- Laurent Pinchart <laurent.pinchart@ideasonboard.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1711399425=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-TG9va3MgbGlrZSBhIHJlZ3Jlc3Npb24gZ290IGludHJvZHVjZWQgaW50byBudjUwX21zdGNfYXRv
-bWljX2NoZWNrKCkKdGhhdCBzb21laG93IGRpZG4ndCBnZXQgZm91bmQgdW50aWwgbm93LiBJZiB1
-c2Vyc3BhY2UgY2hhbmdlcwpjcnRjX3N0YXRlLT5hY3RpdmUgdG8gZmFsc2UgYnV0IGxlYXZlcyB0
-aGUgQ1JUQyBlbmFibGVkLCB3ZSBlbmQgdXAKY2FsbGluZyBkcm1fZHBfYXRvbWljX2ZpbmRfdmNw
-aV9zbG90cygpIHVzaW5nIHRoZSBQQk4gY2FsY3VsYXRlZCBpbgphc3loLT5kcC5wYm4uIEhvd2V2
-ZXIsIGlmIHRoZSBkaXNwbGF5IGlzIGluYWN0aXZlIHdlIGVuZCB1cCBjYWxjdWxhdGluZwphIFBC
-TiBvZiAwLCB3aGljaCBpbmFkdmVydGVudGx5IGNhdXNlcyB1cyB0byBoYXZlIGFuIGFsbG9jYXRp
-b24gb2YgMC4KRnJvbSB0aGVyZSwgaWYgdXNlcnNwYWNlIHRoZW4gZGlzYWJsZXMgdGhlIENSVEMg
-YWZ0ZXJ3YXJkcyB3ZSBlbmQgdXAKYWNjaWRlbnRhbGx5IGF0dGVtcHRpbmcgdG8gZnJlZSB0aGUg
-VkNQSSB0d2ljZToKCldBUk5JTkc6IENQVTogMCBQSUQ6IDE0ODQgYXQgZHJpdmVycy9ncHUvZHJt
-L2RybV9kcF9tc3RfdG9wb2xvZ3kuYzozMzM2CmRybV9kcF9hdG9taWNfcmVsZWFzZV92Y3BpX3Ns
-b3RzKzB4ODcvMHhiMCBbZHJtX2ttc19oZWxwZXJdClJJUDogMDAxMDpkcm1fZHBfYXRvbWljX3Jl
-bGVhc2VfdmNwaV9zbG90cysweDg3LzB4YjAgW2RybV9rbXNfaGVscGVyXQpDYWxsIFRyYWNlOgog
-ZHJtX2F0b21pY19oZWxwZXJfY2hlY2tfbW9kZXNldCsweDNmMy8weGE2MCBbZHJtX2ttc19oZWxw
-ZXJdCiA/IGRybV9hdG9taWNfY2hlY2tfb25seSsweDQzLzB4NzgwIFtkcm1dCiBkcm1fYXRvbWlj
-X2hlbHBlcl9jaGVjaysweDE1LzB4OTAgW2RybV9rbXNfaGVscGVyXQogbnY1MF9kaXNwX2F0b21p
-Y19jaGVjaysweDgzLzB4MWQwIFtub3V2ZWF1XQogZHJtX2F0b21pY19jaGVja19vbmx5KzB4NTRk
-LzB4NzgwIFtkcm1dCiA/IGRybV9hdG9taWNfc2V0X2NydGNfZm9yX2Nvbm5lY3RvcisweGVjLzB4
-MTAwIFtkcm1dCiBkcm1fYXRvbWljX2NvbW1pdCsweDEzLzB4NTAgW2RybV0KIGRybV9hdG9taWNf
-aGVscGVyX3NldF9jb25maWcrMHg4MS8weDkwIFtkcm1fa21zX2hlbHBlcl0KIGRybV9tb2RlX3Nl
-dGNydGMrMHgxOTQvMHg2YTAgW2RybV0KID8gdnByaW50a19lbWl0KzB4MTZhLzB4MjMwCiA/IGRy
-bV9pb2N0bCsweDE2My8weDM5MCBbZHJtXQogPyBkcm1fbW9kZV9nZXRjcnRjKzB4MTgwLzB4MTgw
-IFtkcm1dCiBkcm1faW9jdGxfa2VybmVsKzB4YWEvMHhmMCBbZHJtXQogZHJtX2lvY3RsKzB4MjA4
-LzB4MzkwIFtkcm1dCiA/IGRybV9tb2RlX2dldGNydGMrMHgxODAvMHgxODAgW2RybV0KIG5vdXZl
-YXVfZHJtX2lvY3RsKzB4NjMvMHhiMCBbbm91dmVhdV0KIGRvX3Zmc19pb2N0bCsweDQwNS8weDY2
-MAogPyByZWNhbGNfc2lncGVuZGluZysweDE3LzB4NTAKID8gX2NvcHlfZnJvbV91c2VyKzB4Mzcv
-MHg2MAoga3N5c19pb2N0bCsweDVlLzB4OTAKID8gZXhpdF90b191c2VybW9kZV9sb29wKzB4OTIv
-MHhlMAogX194NjRfc3lzX2lvY3RsKzB4MTYvMHgyMAogZG9fc3lzY2FsbF82NCsweDU5LzB4MTkw
-CiBlbnRyeV9TWVNDQUxMXzY0X2FmdGVyX2h3ZnJhbWUrMHg0NC8weGE5CldBUk5JTkc6IENQVTog
-MCBQSUQ6IDE0ODQgYXQgZHJpdmVycy9ncHUvZHJtL2RybV9kcF9tc3RfdG9wb2xvZ3kuYzozMzM2
-CmRybV9kcF9hdG9taWNfcmVsZWFzZV92Y3BpX3Nsb3RzKzB4ODcvMHhiMCBbZHJtX2ttc19oZWxw
-ZXJdCi0tLVsgZW5kIHRyYWNlIDRjMzk1YzBjNTFiMWY4OGQgXS0tLQpbZHJtOmRybV9kcF9hdG9t
-aWNfcmVsZWFzZV92Y3BpX3Nsb3RzIFtkcm1fa21zX2hlbHBlcl1dICpFUlJPUiogbm8gVkNQSSBm
-b3IKW01TVCBQT1JUOjAwMDAwMDAwZTI4OGViN2RdIGZvdW5kIGluIG1zdCBzdGF0ZSAwMDAwMDAw
-MDhlNjQyMDcwCgpTbywgZml4IHRoaXMgYnkgZG9pbmcgd2hhdCB3ZSBwcm9iYWJseSBzaG91bGQg
-aGF2ZSBkb25lIGZyb20gdGhlIHN0YXJ0OiBvbmx5CmNhbGwgZHJtX2RwX2F0b21pY19maW5kX3Zj
-cGlfc2xvdHMoKSB3aGVuIGNydGNfc3RhdGUtPm1vZGVfY2hhbmdlZCBpcyBzZXQsIHNvCnRoYXQg
-VkNQSSBhbGxvY2F0aW9ucyByZW1haW4gZm9yIGFzIGxvbmcgYXMgdGhlIENSVEMgaXMgZW5hYmxl
-ZC4KClNpZ25lZC1vZmYtYnk6IEx5dWRlIFBhdWwgPGx5dWRlQHJlZGhhdC5jb20+CkZpeGVzOiAy
-MzJjOWVlYzQxN2EgKCJkcm0vbm91dmVhdTogVXNlIGF0b21pYyBWQ1BJIGhlbHBlcnMgZm9yIE1T
-VCIpCkNjOiBMeXVkZSBQYXVsIDxseXVkZUByZWRoYXQuY29tPgpDYzogQmVuIFNrZWdncyA8YnNr
-ZWdnc0ByZWRoYXQuY29tPgpDYzogRGFuaWVsIFZldHRlciA8ZGFuaWVsLnZldHRlckBmZndsbC5j
-aD4KQ2M6IERhdmlkIEFpcmxpZSA8YWlybGllZEByZWRoYXQuY29tPgpDYzogSmVycnkgWnVvIDxK
-ZXJyeS5adW9AYW1kLmNvbT4KQ2M6IEhhcnJ5IFdlbnRsYW5kIDxoYXJyeS53ZW50bGFuZEBhbWQu
-Y29tPgpDYzogSnVzdG9uIExpIDxqdXN0b24ubGlAaW50ZWwuY29tPgpDYzogS2Fyb2wgSGVyYnN0
-IDxrYXJvbGhlcmJzdEBnbWFpbC5jb20+CkNjOiBMYXVyZW50IFBpbmNoYXJ0IDxsYXVyZW50LnBp
-bmNoYXJ0QGlkZWFzb25ib2FyZC5jb20+CkNjOiBJbGlhIE1pcmtpbiA8aW1pcmtpbkBhbHVtLm1p
-dC5lZHU+CkNjOiA8c3RhYmxlQHZnZXIua2VybmVsLm9yZz4gIyB2NS4xKwotLS0KIGRyaXZlcnMv
-Z3B1L2RybS9ub3V2ZWF1L2Rpc3BudjUwL2Rpc3AuYyB8IDIgKy0KIDEgZmlsZSBjaGFuZ2VkLCAx
-IGluc2VydGlvbigrKSwgMSBkZWxldGlvbigtKQoKZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2Ry
-bS9ub3V2ZWF1L2Rpc3BudjUwL2Rpc3AuYyBiL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L2Rpc3Bu
-djUwL2Rpc3AuYwppbmRleCA4NDk3NzY4ZjFiNDEuLjEyNjcwMzgxNjc5NCAxMDA2NDQKLS0tIGEv
-ZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvZGlzcG52NTAvZGlzcC5jCisrKyBiL2RyaXZlcnMvZ3B1
-L2RybS9ub3V2ZWF1L2Rpc3BudjUwL2Rpc3AuYwpAQCAtNzgwLDcgKzc4MCw3IEBAIG52NTBfbXN0
-b19hdG9taWNfY2hlY2soc3RydWN0IGRybV9lbmNvZGVyICplbmNvZGVyLAogCQkJZHJtX2RwX2Nh
-bGNfcGJuX21vZGUoY3J0Y19zdGF0ZS0+YWRqdXN0ZWRfbW9kZS5jbG9jaywKIAkJCQkJICAgICBj
-b25uZWN0b3ItPmRpc3BsYXlfaW5mby5icGMgKiAzKTsKIAotCWlmIChkcm1fYXRvbWljX2NydGNf
-bmVlZHNfbW9kZXNldChjcnRjX3N0YXRlKSkgeworCWlmIChjcnRjX3N0YXRlLT5tb2RlX2NoYW5n
-ZWQpIHsKIAkJc2xvdHMgPSBkcm1fZHBfYXRvbWljX2ZpbmRfdmNwaV9zbG90cyhzdGF0ZSwgJm1z
-dG0tPm1nciwKIAkJCQkJCSAgICAgIG1zdGMtPnBvcnQsCiAJCQkJCQkgICAgICBhc3loLT5kcC5w
-Ym4pOwotLSAKMi4yMS4wCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fXwpOb3V2ZWF1IG1haWxpbmcgbGlzdApOb3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9y
-ZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL25vdXZlYXU=
+
+--===============1711399425==
+Content-Type: multipart/alternative; boundary="15646983020.C0e8fDF.28546"
+Content-Transfer-Encoding: 7bit
+
+
+--15646983020.C0e8fDF.28546
+Date: Thu, 1 Aug 2019 22:25:02 +0000
+MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+https://bugs.freedesktop.org/show_bug.cgi?id=3D111280
+
+            Bug ID: 111280
+           Summary: Playing a video on vlc causes Segmentation Fault
+           Product: Mesa
+           Version: 19.1
+          Hardware: x86-64 (AMD64)
+                OS: Linux (All)
+            Status: NEW
+          Severity: normal
+          Priority: medium
+         Component: Drivers/DRI/nouveau
+          Assignee: nouveau@lists.freedesktop.org
+          Reporter: madebr@gmail.com
+        QA Contact: nouveau@lists.freedesktop.org
+
+Created attachment 144927
+  --> https://bugs.freedesktop.org/attachment.cgi?id=3D144927&action=3Dedit
+gdb backtrace
+
+When playing a video using vlc on Fedora Linux, vlc segfaults.
+When running vlc under gdb, the following message prints:
+
+Thread 32 "vlc" received signal SIGSEGV, Segmentation fault.
+
+I've attached the complete backtrace
+
+Fedora Linux 30
+Mesa 19.1.3
+nvidea geforce GTX750M
+
+--=20
+You are receiving this mail because:
+You are the assignee for the bug.
+You are the QA Contact for the bug.=
+
+--15646983020.C0e8fDF.28546
+Date: Thu, 1 Aug 2019 22:25:02 +0000
+MIME-Version: 1.0
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+<html>
+    <head>
+      <base href=3D"https://bugs.freedesktop.org/">
+    </head>
+    <body><table border=3D"1" cellspacing=3D"0" cellpadding=3D"8">
+        <tr>
+          <th>Bug ID</th>
+          <td><a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - Playing a video on vlc causes Segmentation Fault"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111280">111280</a>
+          </td>
+        </tr>
+
+        <tr>
+          <th>Summary</th>
+          <td>Playing a video on vlc causes Segmentation Fault
+          </td>
+        </tr>
+
+        <tr>
+          <th>Product</th>
+          <td>Mesa
+          </td>
+        </tr>
+
+        <tr>
+          <th>Version</th>
+          <td>19.1
+          </td>
+        </tr>
+
+        <tr>
+          <th>Hardware</th>
+          <td>x86-64 (AMD64)
+          </td>
+        </tr>
+
+        <tr>
+          <th>OS</th>
+          <td>Linux (All)
+          </td>
+        </tr>
+
+        <tr>
+          <th>Status</th>
+          <td>NEW
+          </td>
+        </tr>
+
+        <tr>
+          <th>Severity</th>
+          <td>normal
+          </td>
+        </tr>
+
+        <tr>
+          <th>Priority</th>
+          <td>medium
+          </td>
+        </tr>
+
+        <tr>
+          <th>Component</th>
+          <td>Drivers/DRI/nouveau
+          </td>
+        </tr>
+
+        <tr>
+          <th>Assignee</th>
+          <td>nouveau&#64;lists.freedesktop.org
+          </td>
+        </tr>
+
+        <tr>
+          <th>Reporter</th>
+          <td>madebr&#64;gmail.com
+          </td>
+        </tr>
+
+        <tr>
+          <th>QA Contact</th>
+          <td>nouveau&#64;lists.freedesktop.org
+          </td>
+        </tr></table>
+      <p>
+        <div>
+        <pre>Created <span class=3D""><a href=3D"attachment.cgi?id=3D144927=
+" name=3D"attach_144927" title=3D"gdb backtrace">attachment 144927</a> <a h=
+ref=3D"attachment.cgi?id=3D144927&amp;action=3Dedit" title=3D"gdb backtrace=
+">[details]</a></span>
+gdb backtrace
+
+When playing a video using vlc on Fedora Linux, vlc segfaults.
+When running vlc under gdb, the following message prints:
+
+Thread 32 &quot;vlc&quot; received signal SIGSEGV, Segmentation fault.
+
+I've attached the complete backtrace
+
+Fedora Linux 30
+Mesa 19.1.3
+nvidea geforce GTX750M</pre>
+        </div>
+      </p>
+
+
+      <hr>
+      <span>You are receiving this mail because:</span>
+
+      <ul>
+          <li>You are the assignee for the bug.</li>
+          <li>You are the QA Contact for the bug.</li>
+      </ul>
+    </body>
+</html>=
+
+--15646983020.C0e8fDF.28546--
+
+--===============1711399425==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
+YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
+cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============1711399425==--
