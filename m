@@ -1,23 +1,23 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id B697C7DFF0
-	for <lists+nouveau@lfdr.de>; Thu,  1 Aug 2019 18:18:34 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id B2BEE7E015
+	for <lists+nouveau@lfdr.de>; Thu,  1 Aug 2019 18:23:30 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 46FB16E724;
-	Thu,  1 Aug 2019 16:18:33 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1DA226E72D;
+	Thu,  1 Aug 2019 16:23:29 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
  [131.252.210.165])
- by gabe.freedesktop.org (Postfix) with ESMTP id 1BFB26E721
- for <nouveau@lists.freedesktop.org>; Thu,  1 Aug 2019 16:18:32 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTP id A857D6E72D
+ for <nouveau@lists.freedesktop.org>; Thu,  1 Aug 2019 16:23:27 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 18C7272167; Thu,  1 Aug 2019 16:18:32 +0000 (UTC)
+ id A5D6072168; Thu,  1 Aug 2019 16:23:27 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Thu, 01 Aug 2019 16:18:32 +0000
+Date: Thu, 01 Aug 2019 16:23:27 +0000
 X-Bugzilla-Reason: AssignedTo
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
@@ -33,7 +33,7 @@ X-Bugzilla-Priority: medium
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
 X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-111230-8800-gPx8e6oQKo@http.bugs.freedesktop.org/>
+Message-ID: <bug-111230-8800-U2YrWm3D8L@http.bugs.freedesktop.org/>
 In-Reply-To: <bug-111230-8800@http.bugs.freedesktop.org/>
 References: <bug-111230-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
@@ -51,18 +51,18 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0509886104=="
+Content-Type: multipart/mixed; boundary="===============0788887119=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============0509886104==
-Content-Type: multipart/alternative; boundary="15646763120.F980C8636.822"
+--===============0788887119==
+Content-Type: multipart/alternative; boundary="15646766071.dbA9bF.1729"
 Content-Transfer-Encoding: 7bit
 
 
---15646763120.F980C8636.822
-Date: Thu, 1 Aug 2019 16:18:32 +0000
+--15646766071.dbA9bF.1729
+Date: Thu, 1 Aug 2019 16:23:27 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -71,17 +71,20 @@ Auto-Submitted: auto-generated
 
 https://bugs.freedesktop.org/show_bug.cgi?id=3D111230
 
---- Comment #4 from bdurette.pro@gmail.com ---
-NVIDIA binary driver - version 340.107
+--- Comment #5 from bdurette.pro@gmail.com ---
+ xserver-xorg-video-nouveau                                  1:1.0.15-2=20=
+=20=20=20=20=20=20=20
+                         amd64        X.Org X server -- Nouveau display dri=
+ver
 
-Is that what you were looking for ?
+Better, isn't it ?
 
 --=20
 You are receiving this mail because:
 You are the assignee for the bug.=
 
---15646763120.F980C8636.822
-Date: Thu, 1 Aug 2019 16:18:32 +0000
+--15646766071.dbA9bF.1729
+Date: Thu, 1 Aug 2019 16:23:27 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -98,8 +101,8 @@ Auto-Submitted: auto-generated
             <b><a class=3D"bz_bug_link=20
           bz_status_NEW "
    title=3D"NEW - core dumped while using Rstudio"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111230#c4">Commen=
-t # 4</a>
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111230#c5">Commen=
+t # 5</a>
               on <a class=3D"bz_bug_link=20
           bz_status_NEW "
    title=3D"NEW - core dumped while using Rstudio"
@@ -109,9 +112,12 @@ t # 4</a>
 bdurette.pro&#64;gmail.com" title=3D"bdurette.pro&#64;gmail.com">bdurette.p=
 ro&#64;gmail.com</a>
 </span></b>
-        <pre>NVIDIA binary driver - version 340.107
+        <pre> xserver-xorg-video-nouveau                                  1=
+:1.0.15-2=20=20=20=20=20=20=20=20
+                         amd64        X.Org X server -- Nouveau display dri=
+ver
 
-Is that what you were looking for ?</pre>
+Better, isn't it ?</pre>
         </div>
       </p>
 
@@ -125,9 +131,9 @@ Is that what you were looking for ?</pre>
     </body>
 </html>=
 
---15646763120.F980C8636.822--
+--15646766071.dbA9bF.1729--
 
---===============0509886104==
+--===============0788887119==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -137,4 +143,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============0509886104==--
+--===============0788887119==--
