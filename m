@@ -1,24 +1,24 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id C552780767
-	for <lists+nouveau@lfdr.de>; Sat,  3 Aug 2019 19:26:55 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5BEDB8078E
+	for <lists+nouveau@lfdr.de>; Sat,  3 Aug 2019 19:56:24 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 984136E0F0;
-	Sat,  3 Aug 2019 17:26:53 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6D0056E149;
+	Sat,  3 Aug 2019 17:56:22 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
  [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
- by gabe.freedesktop.org (Postfix) with ESMTP id 411EB6E0C2
- for <nouveau@lists.freedesktop.org>; Sat,  3 Aug 2019 17:26:52 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTP id EA29B6E149
+ for <nouveau@lists.freedesktop.org>; Sat,  3 Aug 2019 17:56:20 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 174EB72167; Sat,  3 Aug 2019 17:26:52 +0000 (UTC)
+ id E6D0772167; Sat,  3 Aug 2019 17:56:20 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Sat, 03 Aug 2019 17:26:52 +0000
-X-Bugzilla-Reason: QAcontact AssignedTo
+Date: Sat, 03 Aug 2019 17:56:21 +0000
+X-Bugzilla-Reason: AssignedTo QAcontact
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
 X-Bugzilla-Product: Mesa
@@ -33,7 +33,7 @@ X-Bugzilla-Priority: medium
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
 X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-111292-8800-gLmUziYjMp@http.bugs.freedesktop.org/>
+Message-ID: <bug-111292-8800-jwcSTfohD7@http.bugs.freedesktop.org/>
 In-Reply-To: <bug-111292-8800@http.bugs.freedesktop.org/>
 References: <bug-111292-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
@@ -52,18 +52,18 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1885252734=="
+Content-Type: multipart/mixed; boundary="===============0006543681=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============1885252734==
-Content-Type: multipart/alternative; boundary="15648532120.816dB159a.2626"
+--===============0006543681==
+Content-Type: multipart/alternative; boundary="15648549801.28c61.7418"
 Content-Transfer-Encoding: 7bit
 
 
---15648532120.816dB159a.2626
-Date: Sat, 3 Aug 2019 17:26:52 +0000
+--15648549801.28c61.7418
+Date: Sat, 3 Aug 2019 17:56:20 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -72,25 +72,22 @@ Auto-Submitted: auto-generated
 
 https://bugs.freedesktop.org/show_bug.cgi?id=3D111292
 
---- Comment #8 from Ilia Mirkin <imirkin@alum.mit.edu> ---
-Note to anyone taking a look... due to either a bug in the shader or a bug =
+--- Comment #9 from Ilia Mirkin <imirkin@alum.mit.edu> ---
+Andrew - do you see a bunch of "nv50cal_space: -16" errors in dmesg when th=
+is
+happens? I get a lot of submit errors right when the black background appea=
+rs,
+so I think it may be related. But I also have a much lower-end G84 plugged =
 in
-mesa (depending on one's view), you have to run the trace with
-
-MESA_EXTENSION_ENABLE=3D-GL_ARB_gpu_shader5
-
-on DX11+ GPUs. Clarifying the behavior now as to which is right (pretty sure
-mesa behavior is right), but either way it doesn't affect the OP's problem.=
- The
-black floor does not reproduce on a GK208 though.
+right now.
 
 --=20
 You are receiving this mail because:
-You are the QA Contact for the bug.
-You are the assignee for the bug.=
+You are the assignee for the bug.
+You are the QA Contact for the bug.=
 
---15648532120.816dB159a.2626
-Date: Sat, 3 Aug 2019 17:26:52 +0000
+--15648549801.28c61.7418
+Date: Sat, 3 Aug 2019 17:56:20 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -108,8 +105,8 @@ Auto-Submitted: auto-generated
           bz_status_NEW "
    title=3D"NEW - Advanced Lighting option in Firestorm Viewer makes some o=
 bjects black on nv92 card"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111292#c8">Commen=
-t # 8</a>
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111292#c9">Commen=
+t # 9</a>
               on <a class=3D"bz_bug_link=20
           bz_status_NEW "
    title=3D"NEW - Advanced Lighting option in Firestorm Viewer makes some o=
@@ -120,16 +117,13 @@ bjects black on nv92 card"
 imirkin&#64;alum.mit.edu" title=3D"Ilia Mirkin &lt;imirkin&#64;alum.mit.edu=
 &gt;"> <span class=3D"fn">Ilia Mirkin</span></a>
 </span></b>
-        <pre>Note to anyone taking a look... due to either a bug in the sha=
-der or a bug in
-mesa (depending on one's view), you have to run the trace with
-
-MESA_EXTENSION_ENABLE=3D-GL_ARB_gpu_shader5
-
-on DX11+ GPUs. Clarifying the behavior now as to which is right (pretty sure
-mesa behavior is right), but either way it doesn't affect the OP's problem.=
- The
-black floor does not reproduce on a GK208 though.</pre>
+        <pre>Andrew - do you see a bunch of &quot;nv50cal_space: -16&quot; =
+errors in dmesg when this
+happens? I get a lot of submit errors right when the black background appea=
+rs,
+so I think it may be related. But I also have a much lower-end G84 plugged =
+in
+right now.</pre>
         </div>
       </p>
 
@@ -138,15 +132,15 @@ black floor does not reproduce on a GK208 though.</pre>
       <span>You are receiving this mail because:</span>
 
       <ul>
-          <li>You are the QA Contact for the bug.</li>
           <li>You are the assignee for the bug.</li>
+          <li>You are the QA Contact for the bug.</li>
       </ul>
     </body>
 </html>=
 
---15648532120.816dB159a.2626--
+--15648549801.28c61.7418--
 
---===============1885252734==
+--===============0006543681==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -156,4 +150,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============1885252734==--
+--===============0006543681==--
