@@ -1,23 +1,23 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 04DCC805A4
-	for <lists+nouveau@lfdr.de>; Sat,  3 Aug 2019 12:09:06 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1EEED805A5
+	for <lists+nouveau@lfdr.de>; Sat,  3 Aug 2019 12:09:55 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7F9296E485;
-	Sat,  3 Aug 2019 10:09:04 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C35356E486;
+	Sat,  3 Aug 2019 10:09:52 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
  [131.252.210.165])
- by gabe.freedesktop.org (Postfix) with ESMTP id AC51F6E485
- for <nouveau@lists.freedesktop.org>; Sat,  3 Aug 2019 10:09:03 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTP id 4AA026E486
+ for <nouveau@lists.freedesktop.org>; Sat,  3 Aug 2019 10:09:51 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id A90CE72167; Sat,  3 Aug 2019 10:09:03 +0000 (UTC)
+ id 4626172167; Sat,  3 Aug 2019 10:09:51 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Sat, 03 Aug 2019 10:09:03 +0000
+Date: Sat, 03 Aug 2019 10:09:51 +0000
 X-Bugzilla-Reason: AssignedTo QAcontact
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
@@ -33,7 +33,7 @@ X-Bugzilla-Priority: medium
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
 X-Bugzilla-Changed-Fields: attachments.created
-Message-ID: <bug-111292-8800-zndHYXMxfY@http.bugs.freedesktop.org/>
+Message-ID: <bug-111292-8800-4ZmaEA73ZH@http.bugs.freedesktop.org/>
 In-Reply-To: <bug-111292-8800@http.bugs.freedesktop.org/>
 References: <bug-111292-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
@@ -52,18 +52,18 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0290859332=="
+Content-Type: multipart/mixed; boundary="===============0412354928=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============0290859332==
-Content-Type: multipart/alternative; boundary="15648269430.767b70b1.26046"
+--===============0412354928==
+Content-Type: multipart/alternative; boundary="15648269910.da9CE.25941"
 Content-Transfer-Encoding: 7bit
 
 
---15648269430.767b70b1.26046
-Date: Sat, 3 Aug 2019 10:09:03 +0000
+--15648269910.da9CE.25941
+Date: Sat, 3 Aug 2019 10:09:51 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -72,18 +72,18 @@ Auto-Submitted: auto-generated
 
 https://bugs.freedesktop.org/show_bug.cgi?id=3D111292
 
---- Comment #1 from Andrew Randrianasulu <randrik@mail.ru> ---
-Created attachment 144936
-  --> https://bugs.freedesktop.org/attachment.cgi?id=3D144936&action=3Dedit
-Scene with broken lighting
+--- Comment #2 from Andrew Randrianasulu <randrik@mail.ru> ---
+Created attachment 144937
+  --> https://bugs.freedesktop.org/attachment.cgi?id=3D144937&action=3Dedit
+Same scene with correct lights
 
 --=20
 You are receiving this mail because:
 You are the assignee for the bug.
 You are the QA Contact for the bug.=
 
---15648269430.767b70b1.26046
-Date: Sat, 3 Aug 2019 10:09:03 +0000
+--15648269910.da9CE.25941
+Date: Sat, 3 Aug 2019 10:09:51 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -101,8 +101,8 @@ Auto-Submitted: auto-generated
           bz_status_NEW "
    title=3D"NEW - Advanced Lighting option in Firestorm Viewer makes some o=
 bjects black on nv92 card"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111292#c1">Commen=
-t # 1</a>
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111292#c2">Commen=
+t # 2</a>
               on <a class=3D"bz_bug_link=20
           bz_status_NEW "
    title=3D"NEW - Advanced Lighting option in Firestorm Viewer makes some o=
@@ -113,11 +113,11 @@ bjects black on nv92 card"
 randrik&#64;mail.ru" title=3D"Andrew Randrianasulu &lt;randrik&#64;mail.ru&=
 gt;"> <span class=3D"fn">Andrew Randrianasulu</span></a>
 </span></b>
-        <pre>Created <span class=3D""><a href=3D"attachment.cgi?id=3D144936=
-" name=3D"attach_144936" title=3D"Scene with broken lighting">attachment 14=
-4936</a> <a href=3D"attachment.cgi?id=3D144936&amp;action=3Dedit" title=3D"=
-Scene with broken lighting">[details]</a></span>
-Scene with broken lighting</pre>
+        <pre>Created <span class=3D""><a href=3D"attachment.cgi?id=3D144937=
+" name=3D"attach_144937" title=3D"Same scene with correct lights">attachmen=
+t 144937</a> <a href=3D"attachment.cgi?id=3D144937&amp;action=3Dedit" title=
+=3D"Same scene with correct lights">[details]</a></span>
+Same scene with correct lights</pre>
         </div>
       </p>
 
@@ -132,9 +132,9 @@ Scene with broken lighting</pre>
     </body>
 </html>=
 
---15648269430.767b70b1.26046--
+--15648269910.da9CE.25941--
 
---===============0290859332==
+--===============0412354928==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -144,4 +144,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============0290859332==--
+--===============0412354928==--
