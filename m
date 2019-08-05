@@ -1,41 +1,41 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id E2AB384689
-	for <lists+nouveau@lfdr.de>; Wed,  7 Aug 2019 10:00:40 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id C4DAB8468A
+	for <lists+nouveau@lfdr.de>; Wed,  7 Aug 2019 10:00:42 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 557AC6E640;
-	Wed,  7 Aug 2019 08:00:39 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 22DF56E675;
+	Wed,  7 Aug 2019 08:00:40 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 634246E406;
- Mon,  5 Aug 2019 12:43:18 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
- [10.5.11.14])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8A6D36E480;
+ Mon,  5 Aug 2019 14:01:26 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
+ [10.5.11.13])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id ABE01C06511E;
- Mon,  5 Aug 2019 12:43:17 +0000 (UTC)
+ by mx1.redhat.com (Postfix) with ESMTPS id 88099765D0;
+ Mon,  5 Aug 2019 14:01:25 +0000 (UTC)
 Received: from sirius.home.kraxel.org (ovpn-116-81.ams2.redhat.com
  [10.36.116.81])
- by smtp.corp.redhat.com (Postfix) with ESMTP id EC00A5DE5B;
- Mon,  5 Aug 2019 12:43:15 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 4ECC5643E5;
+ Mon,  5 Aug 2019 14:01:23 +0000 (UTC)
 Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id 152739DBF; Mon,  5 Aug 2019 14:43:13 +0200 (CEST)
+ id DA71B9DBF; Mon,  5 Aug 2019 16:01:21 +0200 (CEST)
 From: Gerd Hoffmann <kraxel@redhat.com>
 To: dri-devel@lists.freedesktop.org
-Date: Mon,  5 Aug 2019 14:43:00 +0200
-Message-Id: <20190805124310.3275-9-kraxel@redhat.com>
-In-Reply-To: <20190805124310.3275-1-kraxel@redhat.com>
-References: <20190805124310.3275-1-kraxel@redhat.com>
+Date: Mon,  5 Aug 2019 16:01:10 +0200
+Message-Id: <20190805140119.7337-9-kraxel@redhat.com>
+In-Reply-To: <20190805140119.7337-1-kraxel@redhat.com>
+References: <20190805140119.7337-1-kraxel@redhat.com>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
 X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.31]); Mon, 05 Aug 2019 12:43:17 +0000 (UTC)
+ (mx1.redhat.com [10.5.110.27]); Mon, 05 Aug 2019 14:01:26 +0000 (UTC)
 X-Mailman-Approved-At: Wed, 07 Aug 2019 08:00:38 +0000
-Subject: [Nouveau] [PATCH v5 08/18] drm/ttm: use gem vma_node
+Subject: [Nouveau] [PATCH v6 08/17] drm/ttm: use gem vma_node
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -57,12 +57,12 @@ Cc: David Airlie <airlied@linux.ie>,
  "open list:RADEON and AMDGPU DRM DRIVERS" <amd-gfx@lists.freedesktop.org>,
  Maxime Ripard <maxime.ripard@bootlin.com>,
  VMware Graphics <linux-graphics-maintainer@vmware.com>, bskeggs@redhat.com,
- Dave Airlie <airlied@redhat.com>, thomas@shipmail.org, daniel@ffwll.ch,
+ Dave Airlie <airlied@redhat.com>, thomas@shipmail.org, tzimmermann@suse.de,
  ckoenig.leichtzumerken@gmail.com, intel-gfx@lists.freedesktop.org,
  Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
  "open list:DRM DRIVER FOR QXL VIRTUAL GPU" <spice-devel@lists.freedesktop.org>,
  Sean Paul <sean@poorly.run>, open list <linux-kernel@vger.kernel.org>,
- tzimmermann@suse.de, Alex Deucher <alexander.deucher@amd.com>,
+ daniel@ffwll.ch, Alex Deucher <alexander.deucher@amd.com>,
  =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
