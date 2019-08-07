@@ -2,39 +2,45 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id BC32F85127
-	for <lists+nouveau@lfdr.de>; Wed,  7 Aug 2019 18:35:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2DFE28518B
+	for <lists+nouveau@lfdr.de>; Wed,  7 Aug 2019 18:58:37 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 393816E6DC;
-	Wed,  7 Aug 2019 16:35:14 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 897D689A1F;
+	Wed,  7 Aug 2019 16:58:35 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from blaine.gmane.org (195-159-176-226.customer.powertech.no
- [195.159.176.226])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 12A686E6DC
- for <nouveau@lists.freedesktop.org>; Wed,  7 Aug 2019 16:35:13 +0000 (UTC)
-Received: from list by blaine.gmane.org with local (Exim 4.89)
- (envelope-from <gcfxn-nouveau@m.gmane.org>) id 1hvOu5-000oiQ-PA
- for nouveau@lists.freedesktop.org; Wed, 07 Aug 2019 18:35:09 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
+ [131.252.210.165])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 88B016E73D
+ for <nouveau@lists.freedesktop.org>; Wed,  7 Aug 2019 16:58:34 +0000 (UTC)
+Received: by culpepper.freedesktop.org (Postfix, from userid 33)
+ id 8512972167; Wed,  7 Aug 2019 16:58:34 +0000 (UTC)
+From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-From: James <bjlockie@lockie.ca>
-Date: Wed, 7 Aug 2019 12:35:00 -0400
-Message-ID: <2f68cf6b-550d-5c5b-7052-51500140bd14@lockie.ca>
-References: <qic915$1j2$1@blaine.gmane.org>
- <CAKb7Uvg-7UVzYJXy3YBpV038yfsZx2hx-LZ7omR9HnCiZwYmXA@mail.gmail.com>
- <qicbpr$6q56$1@blaine.gmane.org> <qicci7$9ci$1@blaine.gmane.org>
- <CAKb7Uvgnegj15BMoUoH9UT1oP6e4+KHxUShwpMTnu1U5xOu9_A@mail.gmail.com>
- <16c68653940.279c.665a3322dda79c663fe860d9fff7dd5d@lockie.ca>
- <qicr8j$aar$1@blaine.gmane.org>
- <CAKb7UvhhuHd9uzsn5QtPDG3gfWd0FwCceTxr2nGwdzgD9n7Yuw@mail.gmail.com>
-Mime-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.8.0
-X-Mozilla-News-Host: news://news.gmane.org
-In-Reply-To: <CAKb7UvhhuHd9uzsn5QtPDG3gfWd0FwCceTxr2nGwdzgD9n7Yuw@mail.gmail.com>
-Content-Language: en-US
-Subject: Re: [Nouveau] unstable refresh rate
+Date: Wed, 07 Aug 2019 16:58:34 +0000
+X-Bugzilla-Reason: QAcontact AssignedTo
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: None
+X-Bugzilla-Product: Mesa
+X-Bugzilla-Component: Drivers/DRI/nouveau
+X-Bugzilla-Version: 18.2
+X-Bugzilla-Keywords: have-backtrace
+X-Bugzilla-Severity: minor
+X-Bugzilla-Who: jasuarez@igalia.com
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: medium
+X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: 
+Message-ID: <bug-110955-8800-OfZdoHGgCJ@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-110955-8800@http.bugs.freedesktop.org/>
+References: <bug-110955-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+MIME-Version: 1.0
+Subject: [Nouveau] [Bug 110955] Mesa 18.2.8 implementation error: Invalid
+ GLSL version in shading_language_version()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -46,131 +52,94 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: multipart/mixed; boundary="===============1134167931=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-RG8geW91IGtub3cgd2h5IHhyYW5kciByb3VuZHMgdXAgdG8gIjM4NDB4MjE2MCAgICAgNTkuOTci
-IGJ1dCB0aGUgCmx1YnVudHUgR1VJIHNheXMgIjM4NDB4MjE2MCAgICAgNTkuOTY4NSI/CgpJIHRo
-b3VnaHQgaXQgbWlnaHQgYmUgdGhlIFRWIG9ubHkgZG9lcyAzMEh6IG9yIDYwSHogYnV0IGl0IGRv
-ZXMgCmZyYWN0aW9uYWwgcmF0ZXMgYXQgbG93ZXIgcmVzb2x1dGlvbnMuCkkgZG9uJ3Qga25vdy4K
-TWF5YmUgaXQgaXMgdGhlIGNvbG91ciBkZXB0aC4KV2h5IGlzIG15IGZpcnN0IG1vbml0b3IgMTky
-MHgxMjAwIGZvciA6V2lkdGgiIGFuZCAiSGVpZ2h0Ij8KCiQgeHdpbmluZm8KICAgQWJzb2x1dGUg
-dXBwZXItbGVmdCBYOiAgMgogICBBYnNvbHV0ZSB1cHBlci1sZWZ0IFk6ICA2MgogICBSZWxhdGl2
-ZSB1cHBlci1sZWZ0IFg6ICAyCiAgIFJlbGF0aXZlIHVwcGVyLWxlZnQgWTogIDMwCiAgIFdpZHRo
-OiAxOTEyCiAgIEhlaWdodDogMTEzNgogICBEZXB0aDogMjQKICAgVmlzdWFsOiAweDNlOQogICBW
-aXN1YWwgQ2xhc3M6IFRydWVDb2xvcgogICBCb3JkZXIgd2lkdGg6IDAKICAgQ2xhc3M6IElucHV0
-T3V0cHV0CiAgIENvbG9ybWFwOiAweDJjMDAwMDIgKG5vdCBpbnN0YWxsZWQpCiAgIEJpdCBHcmF2
-aXR5IFN0YXRlOiBOb3J0aFdlc3RHcmF2aXR5CiAgIFdpbmRvdyBHcmF2aXR5IFN0YXRlOiBOb3J0
-aFdlc3RHcmF2aXR5CiAgIEJhY2tpbmcgU3RvcmUgU3RhdGU6IE5vdFVzZWZ1bAogICBTYXZlIFVu
-ZGVyIFN0YXRlOiBubwogICBNYXAgU3RhdGU6IElzVmlld2FibGUKICAgT3ZlcnJpZGUgUmVkaXJl
-Y3QgU3RhdGU6IG5vCiAgIENvcm5lcnM6ICArMis2MiAgLTM4NDYrNjIgIC0zODQ2LTk2MiAgKzIt
-OTYyCiAgIC1nZW9tZXRyeSAxOTEyeDExMzYrMCszMgoKCiQgeHdpbmluZm8KICAgQWJzb2x1dGUg
-dXBwZXItbGVmdCBYOiAgMAogICBBYnNvbHV0ZSB1cHBlci1sZWZ0IFk6ICAwCiAgIFJlbGF0aXZl
-IHVwcGVyLWxlZnQgWDogIDAKICAgUmVsYXRpdmUgdXBwZXItbGVmdCBZOiAgMAogICBXaWR0aDog
-NTc2MAogICBIZWlnaHQ6IDIxNjAKICAgRGVwdGg6IDI0CiAgIFZpc3VhbDogMHgzZTkKICAgVmlz
-dWFsIENsYXNzOiBUcnVlQ29sb3IKICAgQm9yZGVyIHdpZHRoOiAwCiAgIENsYXNzOiBJbnB1dE91
-dHB1dAogICBDb2xvcm1hcDogMHhhMDAwMDUgKG5vdCBpbnN0YWxsZWQpCiAgIEJpdCBHcmF2aXR5
-IFN0YXRlOiBOb3J0aFdlc3RHcmF2aXR5CiAgIFdpbmRvdyBHcmF2aXR5IFN0YXRlOiBOb3J0aFdl
-c3RHcmF2aXR5CiAgIEJhY2tpbmcgU3RvcmUgU3RhdGU6IE5vdFVzZWZ1bAogICBTYXZlIFVuZGVy
-IFN0YXRlOiBubwogICBNYXAgU3RhdGU6IElzVmlld2FibGUKICAgT3ZlcnJpZGUgUmVkaXJlY3Qg
-U3RhdGU6IG5vCiAgIENvcm5lcnM6ICArMCswICAtMCswICAtMC0wICArMC0wCiAgIC1nZW9tZXRy
-eSA1NzYweDIxNjArMCswCgoKJCB4cmFuZHIKU2NyZWVuIDA6IG1pbmltdW0gMzIwIHggMjAwLCBj
-dXJyZW50IDU3NjAgeCAyMTYwLCBtYXhpbXVtIDE2Mzg0IHggMTYzODQKRFZJLUQtMSBjb25uZWN0
-ZWQgcHJpbWFyeSAxOTIweDEyMDArMCswIChub3JtYWwgbGVmdCBpbnZlcnRlZCByaWdodCB4IAph
-eGlzIHkgYXhpcykgNTE4bW0geCAzMjRtbQogICAgMTkyMHgxMjAwICAgICA1OS45NSorCiAgICAx
-OTIweDEwODAgICAgIDU5Ljk2ICAgIDYwLjAwICAgIDUwLjAwICAgIDU5Ljk0ICAgIDU5LjkzCiAg
-ICAxOTIweDEwODBpICAgIDYwLjAwICAgIDUwLjAwICAgIDU5Ljk0CiAgICAxNjAweDEyMDAgICAg
-IDY1LjAwICAgIDYwLjAwCiAgICAxNjgweDEwNTAgICAgIDY5Ljg4ICAgIDU5Ljk1ICAgIDU5Ljg4
-CiAgICAxNjAweDEwMjQgICAgIDYwLjE3CiAgICAxNDAweDEwNTAgICAgIDc0Ljc2ICAgIDcwLjAw
-ICAgIDU5Ljk4CiAgICAxNjAweDkwMCAgICAgIDU5Ljk1ICAgIDU5LjgyCiAgICAxMjgweDEwMjQg
-ICAgIDc1LjAyICAgIDYwLjAyCiAgICAxNDQweDkwMCAgICAgIDU5Ljg5CiAgICAxNDAweDkwMCAg
-ICAgIDU5Ljk2ICAgIDU5Ljg4CiAgICAxMjgweDk2MCAgICAgIDYwLjAwCiAgICAxNDQweDgxMCAg
-ICAgIDU5Ljk3CiAgICAxMzY4eDc2OCAgICAgIDU5Ljg4ICAgIDU5Ljg1CiAgICAxMzYweDc2OCAg
-ICAgIDU5LjgwICAgIDU5Ljk2CiAgICAxMjgweDgwMCAgICAgIDU5Ljk5ICAgIDU5Ljk3ICAgIDU5
-LjgxICAgIDU5LjkxCiAgICAxMTUyeDg2NCAgICAgIDc1LjAwICAgIDc1LjAwICAgIDcwLjAwICAg
-IDYwLjAwCiAgICAxMjgweDcyMCAgICAgIDYwLjAwICAgIDU5Ljk5ICAgIDU5Ljg2ICAgIDYwLjAw
-ICAgIDUwLjAwICAgIDU5Ljk0IDU5Ljc0CiAgICAxMDI0eDc2OCAgICAgIDc1LjA1ICAgIDYwLjA0
-ICAgIDc1LjAzICAgIDcwLjA3ICAgIDYwLjAwCiAgICA5NjB4NzIwICAgICAgIDc1LjAwICAgIDYw
-LjAwCiAgICA5Mjh4Njk2ICAgICAgIDc1LjAwICAgIDYwLjA1CiAgICA4OTZ4NjcyICAgICAgIDc1
-LjA1ICAgIDYwLjAxCiAgICAxMDI0eDU3NiAgICAgIDU5Ljk1ICAgIDU5Ljk2ICAgIDU5LjkwICAg
-IDU5LjgyCiAgICA5NjB4NjAwICAgICAgIDU5LjkzICAgIDYwLjAwCiAgICA4MzJ4NjI0ICAgICAg
-IDc0LjU1CiAgICA5NjB4NTQwICAgICAgIDU5Ljk2ICAgIDU5Ljk5ICAgIDU5LjYzICAgIDU5Ljgy
-CiAgICA4MDB4NjAwICAgICAgIDc1LjAwICAgIDcwLjAwICAgIDY1LjAwICAgIDYwLjAwICAgIDcy
-LjE5ICAgIDc1LjAwIAo2MC4zMiAgICA1Ni4yNQogICAgODQweDUyNSAgICAgICA3NC45NiAgICA2
-OS44OCAgICA2MC4wMSAgICA1OS44OAogICAgODY0eDQ4NiAgICAgICA1OS45MiAgICA1OS41Nwog
-ICAgODAweDUxMiAgICAgICA2MC4xNwogICAgNzAweDUyNSAgICAgICA3NC43NiAgICA3MC4wNiAg
-ICA1OS45OAogICAgODAweDQ1MCAgICAgICA1OS45NSAgICA1OS44MgogICAgNjQweDUxMiAgICAg
-ICA3NS4wMiAgICA2MC4wMgogICAgNzIweDQ1MCAgICAgICA1OS44OQogICAgNzAweDQ1MCAgICAg
-ICA1OS45NiAgICA1OS44OAogICAgNjQweDQ4MCAgICAgICA2MC4wMCAgICA3NS4wMCAgICA3Mi44
-MSAgICA3NS4wMCAgICA2Ni42NyAgICA2MC4wMCA1OS45NAogICAgNzIweDQwNSAgICAgICA1OS41
-MSAgICA1OC45OQogICAgNzIweDQwMCAgICAgICA3MC4wOAogICAgNjg0eDM4NCAgICAgICA1OS44
-OCAgICA1OS44NQogICAgNjgweDM4NCAgICAgICA1OS44MCAgICA1OS45NgogICAgNjQweDQwMCAg
-ICAgICA1OS44OCAgICA1OS45OAogICAgNTc2eDQzMiAgICAgICA3NS4wMCAgICA3NS4wMCAgICA3
-MC4wMCAgICA2MC4wNgogICAgNjQweDM2MCAgICAgICA1OS44NiAgICA1OS44MyAgICA1OS44NCAg
-ICA1OS4zMgogICAgNTEyeDM4NCAgICAgICA3NS4wMyAgICA3MC4wNyAgICA2MC4wMAogICAgNTEy
-eDI4OCAgICAgICA2MC4wMCAgICA1OS45MgogICAgNDE2eDMxMiAgICAgICA3NC42NgogICAgNDgw
-eDI3MCAgICAgICA1OS42MyAgICA1OS44MgogICAgNDAweDMwMCAgICAgICA3Mi4xOSAgICA3NS4x
-MiAgICA2MC4zMiAgICA1Ni4zNAogICAgNDMyeDI0MyAgICAgICA1OS45MiAgICA1OS41NwogICAg
-MzIweDI0MCAgICAgICA3Mi44MSAgICA3NS4wMCAgICA2MC4wNQogICAgMzYweDIwMiAgICAgICA1
-OS41MSAgICA1OS4xMwogICAgMzIweDE4MCAgICAgICA1OS44NCAgICA1OS4zMgpIRE1JLTEgY29u
-bmVjdGVkIDM4NDB4MjE2MCsxOTIwKzAgKG5vcm1hbCBsZWZ0IGludmVydGVkIHJpZ2h0IHggYXhp
-cyB5IApheGlzKSAxNjAwbW0geCA5MDBtbQogICAgNDA5NngyMTYwICAgICAzMC4wMCAgICAyNS4w
-MCAgICAyNC4wMCAgICAyOS45NyAgICAyMy45OAogICAgMzg0MHgyMTYwICAgICA1OS45NyAgICAz
-MC4wMCogICAyNS4wMCAgICAyNC4wMCAgICAyOS45NyAgICAyMy45OAogICAgMzIwMHgxODAwICAg
-ICA1OS45NiAgICA1OS45NAogICAgMjg4MHgxNjIwICAgICA1OS45NiAgICA1OS45NwogICAgMjU2
-MHgxNjAwICAgICA1OS45OSAgICA1OS45NwogICAgMjU2MHgxNDQwICAgICA1OS45OSAgICA1OS45
-NiAgICA1OS45NQogICAgMjA0OHgxNTM2ICAgICA4NS4wMCAgICA3NS4wMCAgICA2MC4wMAogICAg
-MTkyMHgxNDQwICAgICA4NS4wMCAgICA3NS4wMCAgICA2MC4wMAogICAgMTg1NngxMzkyICAgICA3
-NS4wMCAgICA2MC4wMQogICAgMTc5MngxMzQ0ICAgICA3NS4wMCAgICA2MC4wMQogICAgMjA0OHgx
-MTUyICAgICA1OS45OSAgICA1OS45OCAgICA1OS45MCAgICA1OS45MQogICAgMTkyMHgxMjAwICAg
-ICA1OS44OCAgICA1OS45NQogICAgMTkyMHgxMDgwICAgICA2MC4wMSAgIDEyMC4wMCAgIDEwMC4w
-MCAgIDExOS44OCAgICA1OS45NyAgICA1OS45NiAKNjAuMDAgICAgNTAuMDAgICAgNTkuOTQgICAg
-NTkuOTMgICAgMzAuMDAgICAgMjUuMDAgICAgMjQuMDAgICAgMjkuOTcgMjMuOTgKICAgIDE5MjB4
-MTA4MGkgICAgNjAuMDAgICAgNTAuMDAgICAgNTkuOTQKICAgIDE2MDB4MTIwMCAgICAgODUuMDAg
-ICAgNzUuMDAgICAgNzAuMDAgICAgNjUuMDAgICAgNjAuMDAKICAgIDE2ODB4MTA1MCAgICAgODQu
-OTQgICAgNzQuODkgICAgNjkuODggICAgNTkuOTUgICAgNTkuODgKICAgIDE2MDB4MTAyNCAgICAg
-NjAuMTcKICAgIDE0MDB4MTA1MCAgICAgODUuMDAgICAgNzQuNzYgICAgNzAuMDAgICAgNTkuOTgK
-ICAgIDE2MDB4OTAwICAgICAgNTkuOTkgICAgNTkuOTQgICAgNTkuOTUgICAgNTkuODIKICAgIDEy
-ODB4MTAyNCAgICAgODUuMDIgICAgNzUuMDIgICAgNjAuMDIKICAgIDE0NDB4OTAwICAgICAgNTku
-ODkKICAgIDE0MDB4OTAwICAgICAgNTkuOTYgICAgNTkuODgKICAgIDEyODB4OTYwICAgICAgODUu
-MDAgICAgNjAuMDAKICAgIDE0NDB4ODEwICAgICAgNjAuMDAgICAgNTkuOTcKICAgIDEzNjh4NzY4
-ICAgICAgNTkuODggICAgNTkuODUKICAgIDEzNjB4NzY4ICAgICAgNjAuMDIgICAgNTkuODAgICAg
-NTkuOTYKICAgIDEyODB4ODAwICAgICAgNTkuOTkgICAgNTkuOTcgICAgNTkuODEgICAgNTkuOTEK
-ICAgIDExNTJ4ODY0ICAgICAxMDAuMDAgICAgODUuMDYgICAgODUuMDAgICAgNzUuMDAgICAgNzUu
-MDAgICAgNzAuMDAgCjYwLjAwICAgIDU5Ljk3CiAgICAxMjgweDcyMCAgICAgIDYwLjAwICAgIDU5
-Ljk5ICAgIDU5Ljg2ICAgIDYwLjAwICAgIDUwLjAwICAgIDU5Ljk0IDU5Ljc0CiAgICAxMDI0eDc2
-OCAgICAgIDg1LjAwICAgIDc1LjA1ICAgIDYwLjA0ICAgIDg1LjAwICAgIDc1LjAzICAgIDcwLjA3
-IDYwLjAwCiAgICAxMDI0eDc2OGkgICAgIDg2Ljk2CiAgICA5NjB4NzIwICAgICAgIDg1LjAwICAg
-IDc1LjAwICAgIDYwLjAwCiAgICA5Mjh4Njk2ICAgICAgIDc1LjAwICAgIDYwLjA1CiAgICA4OTZ4
-NjcyICAgICAgIDc1LjA1ICAgIDYwLjAxCiAgICAxMDI0eDU3NiAgICAgIDU5Ljk1ICAgIDU5Ljk2
-ICAgIDU5LjkwICAgIDU5LjgyCiAgICA5NjB4NjAwICAgICAgIDU5LjkzICAgIDYwLjAwCiAgICA4
-MzJ4NjI0ICAgICAgIDc0LjU1CiAgICA5NjB4NTQwICAgICAgIDU5Ljk2ICAgIDU5Ljk5ICAgIDU5
-LjYzICAgIDU5LjgyCiAgICA4MDB4NjAwICAgICAgIDg1LjAwICAgIDc1LjAwICAgIDcwLjAwICAg
-IDY1LjAwICAgIDYwLjAwICAgIDg1LjE0IAo3Mi4xOSAgICA3NS4wMCAgICA2MC4zMiAgICA1Ni4y
-NQogICAgODQweDUyNSAgICAgICA4NS4wMiAgICA3NC45NiAgICA2OS44OCAgICA2MC4wMSAgICA1
-OS44OAogICAgODY0eDQ4NiAgICAgICA1OS45MiAgICA1OS41NwogICAgNzIweDU3NiAgICAgICA1
-MC4wMAogICAgODAweDUxMiAgICAgICA2MC4xNwogICAgNzAweDUyNSAgICAgICA4NS4wOCAgICA3
-NC43NiAgICA3MC4wNiAgICA1OS45OAogICAgODAweDQ1MCAgICAgICA1OS45NSAgICA1OS44Mgog
-ICAgNzIweDQ4MCAgICAgICA2MC4wMCAgICA1OS45NAogICAgNjQweDUxMiAgICAgICA4NS4wMiAg
-ICA3NS4wMiAgICA2MC4wMgogICAgNzIweDQ1MCAgICAgICA1OS44OQogICAgNzAweDQ1MCAgICAg
-ICA1OS45NiAgICA1OS44OAogICAgNjQweDQ4MCAgICAgICA4NS4wOSAgICA2MC4wMCAgICA4NS4w
-MSAgICA3Mi44MSAgICA3NS4wMCAgICA2MC4wMCA1OS45NAogICAgNzIweDQwNSAgICAgICA1OS41
-MSAgICA1OC45OQogICAgNzIweDQwMCAgICAgICA4NS4wNCAgICA3MC4wOAogICAgNjg0eDM4NCAg
-ICAgICA1OS44OCAgICA1OS44NQogICAgNjgweDM4NCAgICAgICA1OS44MCAgICA1OS45NgogICAg
-NjQweDQwMCAgICAgICA1OS44OCAgICA1OS45OCAgICA4NS4wOAogICAgNTc2eDQzMiAgICAgIDEw
-MC4xMSAgICA4NS4xNSAgICA4NS4wOSAgICA3NS4wMCAgICA3NS4wMCAgICA3MC4wMCA2MC4wNgog
-ICAgNjQweDM2MCAgICAgICA1OS44NiAgICA1OS44MyAgICA1OS44NCAgICA1OS4zMgogICAgNjQw
-eDM1MCAgICAgICA4NS4wOAogICAgNTEyeDM4NCAgICAgICA4NS4wMCAgICA3NS4wMyAgICA3MC4w
-NyAgICA2MC4wMAogICAgNTEyeDM4NGkgICAgICA4Ny4wNgogICAgNTEyeDI4OCAgICAgICA2MC4w
-MCAgICA1OS45MgogICAgNDE2eDMxMiAgICAgICA3NC42NgogICAgNDgweDI3MCAgICAgICA1OS42
-MyAgICA1OS44MgogICAgNDAweDMwMCAgICAgICA4NS4yNyAgICA3Mi4xOSAgICA3NS4xMiAgICA2
-MC4zMiAgICA1Ni4zNAogICAgNDMyeDI0MyAgICAgICA1OS45MiAgICA1OS41NwogICAgMzIweDI0
-MCAgICAgICA4NS4xOCAgICA3Mi44MSAgICA3NS4wMCAgICA2MC4wNQogICAgMzYweDIwMiAgICAg
-ICA1OS41MSAgICA1OS4xMwogICAgMzYweDIwMCAgICAgICA4NS4wNAogICAgMzIweDIwMCAgICAg
-ICA4NS4yNwogICAgMzIweDE4MCAgICAgICA1OS44NCAgICA1OS4zMgogICAgMzIweDE3NSAgICAg
-ICA4NS4yNwpEUC0xIGRpc2Nvbm5lY3RlZCAobm9ybWFsIGxlZnQgaW52ZXJ0ZWQgcmlnaHQgeCBh
-eGlzIHkgYXhpcykKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fXwpOb3V2ZWF1IG1haWxpbmcgbGlzdApOb3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpo
-dHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL25vdXZlYXU=
+
+--===============1134167931==
+Content-Type: multipart/alternative; boundary="15651971142.Ae65.25092"
+Content-Transfer-Encoding: 7bit
+
+
+--15651971142.Ae65.25092
+Date: Wed, 7 Aug 2019 16:58:34 +0000
+MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+https://bugs.freedesktop.org/show_bug.cgi?id=3D110955
+
+--- Comment #11 from Juan A. Suarez <jasuarez@igalia.com> ---
+This should be fixed in Mesa 19.1.4.
+
+Can you try?
+
+--=20
+You are receiving this mail because:
+You are the QA Contact for the bug.
+You are the assignee for the bug.=
+
+--15651971142.Ae65.25092
+Date: Wed, 7 Aug 2019 16:58:34 +0000
+MIME-Version: 1.0
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+<html>
+    <head>
+      <base href=3D"https://bugs.freedesktop.org/">
+    </head>
+    <body>
+      <p>
+        <div>
+            <b><a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - Mesa 18.2.8 implementation error: Invalid GLSL version in=
+ shading_language_version()"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110955#c11">Comme=
+nt # 11</a>
+              on <a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - Mesa 18.2.8 implementation error: Invalid GLSL version in=
+ shading_language_version()"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110955">bug 11095=
+5</a>
+              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
+jasuarez&#64;igalia.com" title=3D"Juan A. Suarez &lt;jasuarez&#64;igalia.co=
+m&gt;"> <span class=3D"fn">Juan A. Suarez</span></a>
+</span></b>
+        <pre>This should be fixed in Mesa 19.1.4.
+
+Can you try?</pre>
+        </div>
+      </p>
+
+
+      <hr>
+      <span>You are receiving this mail because:</span>
+
+      <ul>
+          <li>You are the QA Contact for the bug.</li>
+          <li>You are the assignee for the bug.</li>
+      </ul>
+    </body>
+</html>=
+
+--15651971142.Ae65.25092--
+
+--===============1134167931==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
+YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
+cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============1134167931==--
