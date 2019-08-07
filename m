@@ -2,45 +2,36 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id F2ED185472
-	for <lists+nouveau@lfdr.de>; Wed,  7 Aug 2019 22:20:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E9BFA8552F
+	for <lists+nouveau@lfdr.de>; Wed,  7 Aug 2019 23:33:21 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 960586E3BF;
-	Wed,  7 Aug 2019 20:20:17 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 894CD891A3;
+	Wed,  7 Aug 2019 21:33:19 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [131.252.210.165])
- by gabe.freedesktop.org (Postfix) with ESMTP id 689E86E3BF
- for <nouveau@lists.freedesktop.org>; Wed,  7 Aug 2019 20:20:16 +0000 (UTC)
-Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 5D98A72168; Wed,  7 Aug 2019 20:20:16 +0000 (UTC)
-From: bugzilla-daemon@freedesktop.org
+Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B61CB6E49C;
+ Wed,  7 Aug 2019 21:33:18 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
+ [10.5.11.11])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mx1.redhat.com (Postfix) with ESMTPS id BD4753DE02;
+ Wed,  7 Aug 2019 21:33:17 +0000 (UTC)
+Received: from whitewolf.redhat.com (ovpn-121-222.rdu2.redhat.com
+ [10.10.121.222])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id ECA21600C6;
+ Wed,  7 Aug 2019 21:33:13 +0000 (UTC)
+From: Lyude Paul <lyude@redhat.com>
 To: nouveau@lists.freedesktop.org
-Date: Wed, 07 Aug 2019 20:20:16 +0000
-X-Bugzilla-Reason: AssignedTo QAcontact
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: None
-X-Bugzilla-Product: Mesa
-X-Bugzilla-Component: Drivers/DRI/nouveau
-X-Bugzilla-Version: git
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: major
-X-Bugzilla-Who: pitersonjuddy09@gmail.com
-X-Bugzilla-Status: RESOLVED
-X-Bugzilla-Resolution: NOTOURBUG
-X-Bugzilla-Priority: medium
-X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-110500-8800-P30T731xDt@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-110500-8800@http.bugs.freedesktop.org/>
-References: <bug-110500-8800@http.bugs.freedesktop.org/>
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
+Date: Wed,  7 Aug 2019 17:32:59 -0400
+Message-Id: <20190807213304.9255-1-lyude@redhat.com>
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 110500] X-Server crashes - GL error:
- GL_OUT_OF_MEMORY in glTexSubImage
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+ (mx1.redhat.com [10.5.110.29]); Wed, 07 Aug 2019 21:33:18 +0000 (UTC)
+Subject: [Nouveau] [PATCH 0/2] drm/nouveau: CRTC Runtime PM ref tracking
+ fixes
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -52,105 +43,25 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0460982173=="
+Cc: David Airlie <airlied@linux.ie>, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>,
+ Daniel Vetter <daniel@ffwll.ch>,
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-
---===============0460982173==
-Content-Type: multipart/alternative; boundary="15652092161.eB21Ef.22589"
-Content-Transfer-Encoding: 7bit
-
-
---15652092161.eB21Ef.22589
-Date: Wed, 7 Aug 2019 20:20:16 +0000
-MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-https://bugs.freedesktop.org/show_bug.cgi?id=3D110500
-
---- Comment #15 from Juddy Piterson <pitersonjuddy09@gmail.com> ---
-If you jot a note down on paper, save it and use the rest of the sheet for =
-your
-notes. American business waste 21 million tonnes of paper per annum! Ideall=
-y,
-try to have your business as paperless as possible
-https://essaywritingstore.com/writing-movie-critique . When it is absolutely
-necessary, print on both sides of the page. And don=E2=80=99t forget to rec=
-ycle it!
-
---=20
-You are receiving this mail because:
-You are the assignee for the bug.
-You are the QA Contact for the bug.=
-
---15652092161.eB21Ef.22589
-Date: Wed, 7 Aug 2019 20:20:16 +0000
-MIME-Version: 1.0
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-<html>
-    <head>
-      <base href=3D"https://bugs.freedesktop.org/">
-    </head>
-    <body>
-      <p>
-        <div>
-            <b><a class=3D"bz_bug_link=20
-          bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED NOTOURBUG - X-Server crashes - GL error: GL_OUT_OF_MEM=
-ORY in glTexSubImage"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110500#c15">Comme=
-nt # 15</a>
-              on <a class=3D"bz_bug_link=20
-          bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED NOTOURBUG - X-Server crashes - GL error: GL_OUT_OF_MEM=
-ORY in glTexSubImage"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110500">bug 11050=
-0</a>
-              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
-pitersonjuddy09&#64;gmail.com" title=3D"Juddy Piterson &lt;pitersonjuddy09&=
-#64;gmail.com&gt;"> <span class=3D"fn">Juddy Piterson</span></a>
-</span></b>
-        <pre>If you jot a note down on paper, save it and use the rest of t=
-he sheet for your
-notes. American business waste 21 million tonnes of paper per annum! Ideall=
-y,
-try to have your business as paperless as possible
-<a href=3D"https://essaywritingstore.com/writing-movie-critique">https://es=
-saywritingstore.com/writing-movie-critique</a> . When it is absolutely
-necessary, print on both sides of the page. And don=E2=80=99t forget to rec=
-ycle it!</pre>
-        </div>
-      </p>
-
-
-      <hr>
-      <span>You are receiving this mail because:</span>
-
-      <ul>
-          <li>You are the assignee for the bug.</li>
-          <li>You are the QA Contact for the bug.</li>
-      </ul>
-    </body>
-</html>=
-
---15652092161.eB21Ef.22589--
-
---===============0460982173==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
-YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
-cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
-
---===============0460982173==--
+SnVzdCBzb21lIHJ1bnRpbWUgUE0gZml4ZXMgZm9yIHNvbWUgbXVjaCBsZXNzIG5vdGljZWFibGUg
+cnVudGltZSBQTSByZWYKdHJhY2tpbmcgaXNzdWVzIHRoYXQgSSBnb3QgcmVtaW5kZWQgb2Ygd2hl
+biBmaXhpbmcgc29tZSB1bnJlbGF0ZWQgaXNzdWVzCndpdGggbm91dmVhdS4KCkx5dWRlIFBhdWwg
+KDIpOgogIGRybS9ub3V2ZWF1L2Rpc3BudjA0OiBHcmFiL3B1dCBydW50aW1lIFBNIHJlZnMgb24g
+RFBNUyBvbi9vZmYKICBkcm0vbm91dmVhdS9kaXNwbnY1MDogRml4IHJ1bnRpbWUgUE0gcmVmIHRy
+YWNraW5nIGZvciBub24tYmxvY2tpbmcKICAgIG1vZGVzZXRzCgogZHJpdmVycy9ncHUvZHJtL25v
+dXZlYXUvZGlzcG52MDQvY3J0Yy5jIHwgMTggKysrLS0tLS0tLS0tCiBkcml2ZXJzL2dwdS9kcm0v
+bm91dmVhdS9kaXNwbnY1MC9kaXNwLmMgfCAzOCArKysrKysrKysrKy0tLS0tLS0tLS0tLS0tCiBk
+cml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2Rydi5oICAgfCAgMyAtLQogMyBmaWxlcyBj
+aGFuZ2VkLCAyMSBpbnNlcnRpb25zKCspLCAzOCBkZWxldGlvbnMoLSkKCi0tIAoyLjIxLjAKCl9f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCk5vdXZlYXUgbWFp
+bGluZyBsaXN0Ck5vdXZlYXVAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJl
+ZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vbm91dmVhdQ==
