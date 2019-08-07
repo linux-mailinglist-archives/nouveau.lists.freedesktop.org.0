@@ -2,45 +2,91 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2DFE28518B
-	for <lists+nouveau@lfdr.de>; Wed,  7 Aug 2019 18:58:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B6F4C851F3
+	for <lists+nouveau@lfdr.de>; Wed,  7 Aug 2019 19:18:08 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 897D689A1F;
-	Wed,  7 Aug 2019 16:58:35 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C71E16E6DE;
+	Wed,  7 Aug 2019 17:18:06 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [131.252.210.165])
- by gabe.freedesktop.org (Postfix) with ESMTP id 88B016E73D
- for <nouveau@lists.freedesktop.org>; Wed,  7 Aug 2019 16:58:34 +0000 (UTC)
-Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 8512972167; Wed,  7 Aug 2019 16:58:34 +0000 (UTC)
-From: bugzilla-daemon@freedesktop.org
-To: nouveau@lists.freedesktop.org
-Date: Wed, 07 Aug 2019 16:58:34 +0000
-X-Bugzilla-Reason: QAcontact AssignedTo
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: None
-X-Bugzilla-Product: Mesa
-X-Bugzilla-Component: Drivers/DRI/nouveau
-X-Bugzilla-Version: 18.2
-X-Bugzilla-Keywords: have-backtrace
-X-Bugzilla-Severity: minor
-X-Bugzilla-Who: jasuarez@igalia.com
-X-Bugzilla-Status: NEW
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: medium
-X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-110955-8800-OfZdoHGgCJ@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-110955-8800@http.bugs.freedesktop.org/>
-References: <bug-110955-8800@http.bugs.freedesktop.org/>
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
+Received: from EUR02-HE1-obe.outbound.protection.outlook.com
+ (mail-eopbgr10072.outbound.protection.outlook.com [40.107.1.72])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id CD0E76E749;
+ Wed,  7 Aug 2019 17:18:04 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=M38IFZTtLXhblLeUKSTOOyY+BzP5VWo2NxFpFzFwsSqL+5D1WSw3A42cJnXH5TiCRayVqKFZ/Bfc22qbGvGxoRHxL/6ToaI+ZJeNohrGahSVStM0Xm7+8MhermUY7N3a9g9IJwASLTMEEpfjx2cUrkuGPiqkoH1n8ubVfqjURQ3lvfOMI8jTiZb4ftvJ4zSCiXGJolt2MkOQmUvueKUHQZn56LyqVsIFD397xBtsYISJaPQhroaJcCgwGGP78QXI/RnxF43yCljkSpEy9cvyT4qWPMBWQyCIsLTa4c9RSy6gpyQGFhVmWxTyNoQXk+VJgCLqksZftFbNthMbkGdOvQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=D4huSkCeVNugOTHQQcM6pySCS6vXgZT5Dzc2lhNeyww=;
+ b=l2mAxgVVWXYxtwncWCfB/L6SZSZ7k8JfjYlANp+YoptrbzgWe7lXBk3vOq2bo+2KV0UA1j+JEqdnP8DF6qcI3bfteRGLxIbA2P6aH6x8d9IlK7MtMyoLNcCAvih/CXKs2qLpP9H/sVa1Ek/3h5ML6Ga+hYPYG9JQMKI1CcRhDwWh8tLamShUlyMQyhNBt2cXTg2hWjB5mszT8w3g5jSwXGe6XY76nbwe7tIuUYrTGBEwyf+cbF6E80kVdvYgC+oYuJgQl2+OZhnXi/QYulSd5+btBX1tTn/C4Dprf8m9w5rL0wz2VtatfuLBVwh6OhotsqLhcH5WHT8I5Puv2qYWYQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1;spf=pass
+ smtp.mailfrom=mellanox.com;dmarc=pass action=none
+ header.from=mellanox.com;dkim=pass header.d=mellanox.com;arc=none
+Received: from VI1PR05MB4141.eurprd05.prod.outlook.com (10.171.182.144) by
+ VI1PR05MB4671.eurprd05.prod.outlook.com (20.176.3.156) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.2136.20; Wed, 7 Aug 2019 17:18:01 +0000
+Received: from VI1PR05MB4141.eurprd05.prod.outlook.com
+ ([fe80::5c6f:6120:45cd:2880]) by VI1PR05MB4141.eurprd05.prod.outlook.com
+ ([fe80::5c6f:6120:45cd:2880%4]) with mapi id 15.20.2136.018; Wed, 7 Aug 2019
+ 17:18:01 +0000
+From: Jason Gunthorpe <jgg@mellanox.com>
+To: Christoph Hellwig <hch@lst.de>
+Thread-Topic: [PATCH 09/15] mm: don't abuse pte_index() in hmm_vma_handle_pmd
+Thread-Index: AQHVTHDjVWJoFh6NnUauF/brrPZnVqbv7ziA
+Date: Wed, 7 Aug 2019 17:18:01 +0000
+Message-ID: <20190807171755.GI1571@mellanox.com>
+References: <20190806160554.14046-1-hch@lst.de>
+ <20190806160554.14046-10-hch@lst.de>
+In-Reply-To: <20190806160554.14046-10-hch@lst.de>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-clientproxiedby: YTOPR0101CA0044.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b00:14::21) To VI1PR05MB4141.eurprd05.prod.outlook.com
+ (2603:10a6:803:4d::16)
+x-ms-exchange-messagesentrepresentingtype: 1
+x-originating-ip: [156.34.55.100]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: 8c56f4fe-05c7-40ef-c6c0-08d71b5b333e
+x-ms-office365-filtering-ht: Tenant
+x-microsoft-antispam: BCL:0; PCL:0;
+ RULEID:(2390118)(7020095)(4652040)(8989299)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(5600148)(711020)(4605104)(1401327)(4618075)(2017052603328)(7193020);
+ SRVR:VI1PR05MB4671; 
+x-ms-traffictypediagnostic: VI1PR05MB4671:
+x-microsoft-antispam-prvs: <VI1PR05MB4671C8FA48DC93F50C99C2F0CFD40@VI1PR05MB4671.eurprd05.prod.outlook.com>
+x-ms-oob-tlc-oobclassifiers: OLM:8273;
+x-forefront-prvs: 01221E3973
+x-forefront-antispam-report: SFV:NSPM;
+ SFS:(10009020)(979002)(4636009)(376002)(346002)(39860400002)(366004)(396003)(136003)(199004)(189003)(6246003)(53936002)(33656002)(6436002)(6486002)(6512007)(6116002)(68736007)(54906003)(3846002)(2906002)(66066001)(316002)(36756003)(71190400001)(476003)(2616005)(11346002)(186003)(446003)(14444005)(26005)(102836004)(99286004)(66476007)(64756008)(7416002)(66556008)(71200400001)(256004)(305945005)(25786009)(5660300002)(6506007)(386003)(66446008)(8936002)(86362001)(52116002)(6916009)(14454004)(229853002)(8676002)(1076003)(4326008)(81166006)(478600001)(66946007)(4744005)(81156014)(7736002)(486006)(76176011)(969003)(989001)(999001)(1009001)(1019001);
+ DIR:OUT; SFP:1101; SCL:1; SRVR:VI1PR05MB4671;
+ H:VI1PR05MB4141.eurprd05.prod.outlook.com; FPR:; SPF:None; LANG:en;
+ PTR:InfoNoRecords; A:1; MX:1; 
+received-spf: None (protection.outlook.com: mellanox.com does not designate
+ permitted sender hosts)
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam-message-info: Y5w2T4TwDEqVW/A/CS5dCgeAwrt8PXGrtm3uRFpMUQxqZmB+oFSvM857UGs06YXyJV1Opb+rNLObiLz2oz48V4ILUx67rdmHAh7jF9WQQzStmE67vdRyKeC91312yvdFPK7QrHPS85XneYw91kz3ArXf1ktjAmP89EfXUOBwPwZqXtC7Fdjq0yEOLfPNTWFGHNLdu75ZvrIXN7EBCXOGkhQu2YfcH8n2FwrK+CPdGvCNhQks2gVxXRrAS3cmhtCGwx08yK1pH2H10rwUWRzDCMPrm/Poynzo+p2AZ2rCAvNZNJ2NG+dOEr4V8O+SHkCh4/PhIg8HO6L5wlXFF9hi2FgYbN3CmNN3WBTa441cdg9OlCfmlA3XrqA+o/NyPwFbtLjRnPXzSBHRt8a9bBek4Qa+hk0mLXMyGBqeA2rLTOk=
+Content-ID: <C7103DD7868C384CA830F3D0DA65CF22@eurprd05.prod.outlook.com>
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 110955] Mesa 18.2.8 implementation error: Invalid
- GLSL version in shading_language_version()
+X-OriginatorOrg: Mellanox.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8c56f4fe-05c7-40ef-c6c0-08d71b5b333e
+X-MS-Exchange-CrossTenant-originalarrivaltime: 07 Aug 2019 17:18:01.4239 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: a652971c-7d2e-4d9b-a6a4-d149256f461b
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: jgg@mellanox.com
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR05MB4671
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=Mellanox.com; s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=D4huSkCeVNugOTHQQcM6pySCS6vXgZT5Dzc2lhNeyww=;
+ b=ig7/cLvzVZOMNO+zztVocw6DLqmOk29OTrf6rZ2X7ZKua0vsUnomtAQRo1svdHUv8s6uISaDHFY6LgbVHR9qvRnEBfoTMG6ejM7vHHuDzwlgxXs11O7tahRu6YxbjLTCLxpo+owGhyodk0CKMpYfvCrdMxraPNNXMyub0L++Bg0=
+X-Mailman-Original-Authentication-Results: spf=none (sender IP is )
+ smtp.mailfrom=jgg@mellanox.com; 
+Subject: Re: [Nouveau] [PATCH 09/15] mm: don't abuse pte_index() in
+ hmm_vma_handle_pmd
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -52,94 +98,29 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1134167931=="
+Cc: Ralph Campbell <rcampbell@nvidia.com>,
+ "amd-gfx@lists.freedesktop.org" <amd-gfx@lists.freedesktop.org>,
+ "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
+ Felix Kuehling <Felix.Kuehling@amd.com>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
+ "linux-mm@kvack.org" <linux-mm@kvack.org>, Ben Skeggs <bskeggs@redhat.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-
---===============1134167931==
-Content-Type: multipart/alternative; boundary="15651971142.Ae65.25092"
-Content-Transfer-Encoding: 7bit
-
-
---15651971142.Ae65.25092
-Date: Wed, 7 Aug 2019 16:58:34 +0000
-MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-https://bugs.freedesktop.org/show_bug.cgi?id=3D110955
-
---- Comment #11 from Juan A. Suarez <jasuarez@igalia.com> ---
-This should be fixed in Mesa 19.1.4.
-
-Can you try?
-
---=20
-You are receiving this mail because:
-You are the QA Contact for the bug.
-You are the assignee for the bug.=
-
---15651971142.Ae65.25092
-Date: Wed, 7 Aug 2019 16:58:34 +0000
-MIME-Version: 1.0
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-<html>
-    <head>
-      <base href=3D"https://bugs.freedesktop.org/">
-    </head>
-    <body>
-      <p>
-        <div>
-            <b><a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - Mesa 18.2.8 implementation error: Invalid GLSL version in=
- shading_language_version()"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110955#c11">Comme=
-nt # 11</a>
-              on <a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - Mesa 18.2.8 implementation error: Invalid GLSL version in=
- shading_language_version()"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110955">bug 11095=
-5</a>
-              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
-jasuarez&#64;igalia.com" title=3D"Juan A. Suarez &lt;jasuarez&#64;igalia.co=
-m&gt;"> <span class=3D"fn">Juan A. Suarez</span></a>
-</span></b>
-        <pre>This should be fixed in Mesa 19.1.4.
-
-Can you try?</pre>
-        </div>
-      </p>
-
-
-      <hr>
-      <span>You are receiving this mail because:</span>
-
-      <ul>
-          <li>You are the QA Contact for the bug.</li>
-          <li>You are the assignee for the bug.</li>
-      </ul>
-    </body>
-</html>=
-
---15651971142.Ae65.25092--
-
---===============1134167931==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
-YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
-cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
-
---===============1134167931==--
+T24gVHVlLCBBdWcgMDYsIDIwMTkgYXQgMDc6MDU6NDdQTSArMDMwMCwgQ2hyaXN0b3BoIEhlbGx3
+aWcgd3JvdGU6Cj4gcHRlX2luZGV4IGlzIGFuIGludGVybmFsIGFyY2ggaGVscGVyIGluIHZhcmlv
+dXMgYXJjaGl0ZWN0dXJlcywKPiB3aXRob3V0IGNvbnNpc3RlbnQgc2VtYW50aWNzLiAgT3BlbiBj
+b2RlIHRoYXQgY2FsY3VsYXRpb24gb2YgYSBQTUQKPiBpbmRleCBiYXNlZCBvbiB0aGUgdmlydHVh
+bCBhZGRyZXNzIGluc3RlYWQuCj4gCj4gU2lnbmVkLW9mZi1ieTogQ2hyaXN0b3BoIEhlbGx3aWcg
+PGhjaEBsc3QuZGU+Cj4gLS0tCj4gIG1tL2htbS5jIHwgMiArLQo+ICAxIGZpbGUgY2hhbmdlZCwg
+MSBpbnNlcnRpb24oKyksIDEgZGVsZXRpb24oLSkKClRoZXJlIHN1cmUgYXJlIGEgbG90IG9mIGRp
+ZmZlcmVudCB3YXlzIHRvIGV4cHJlc3MgdGhpcywgYnV0IHRoaXMgb25lCmxvb2tzIE9LIHRvIG1l
+LCBhdCBsZWFzdCB0aGUgc3dpdGNoIGZyb20gdGhlIFBUUlNfUEVSX1BURSBleHByZXNzaW9uCmlu
+IHRoZSB4ODYgaW1scGVtZW50YXRpb24gdG8gUE1EX01BU0sgbG9va3MgZXF1aXZhbGVudAogClJl
+dmlld2VkLWJ5OiBKYXNvbiBHdW50aG9ycGUgPGpnZ0BtZWxsYW5veC5jb20+CgpKYXNvbgpfX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpOb3V2ZWF1IG1haWxp
+bmcgbGlzdApOb3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVk
+ZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL25vdXZlYXU=
