@@ -2,28 +2,45 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 232BD85B3F
-	for <lists+nouveau@lfdr.de>; Thu,  8 Aug 2019 09:07:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 970BD85E12
+	for <lists+nouveau@lfdr.de>; Thu,  8 Aug 2019 11:19:49 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1BC306E45B;
-	Thu,  8 Aug 2019 07:07:07 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 2BADA6E479;
+	Thu,  8 Aug 2019 09:19:48 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from verein.lst.de (verein.lst.de [213.95.11.211])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 579886E45B;
- Thu,  8 Aug 2019 07:07:05 +0000 (UTC)
-Received: by verein.lst.de (Postfix, from userid 2407)
- id 3426E68B02; Thu,  8 Aug 2019 09:07:02 +0200 (CEST)
-Date: Thu, 8 Aug 2019 09:07:01 +0200
-From: Christoph Hellwig <hch@lst.de>
-To: Ralph Campbell <rcampbell@nvidia.com>
-Message-ID: <20190808070701.GC29382@lst.de>
-References: <20190807150214.3629-1-rcampbell@nvidia.com>
+Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
+ [131.252.210.165])
+ by gabe.freedesktop.org (Postfix) with ESMTP id F367E6E479
+ for <nouveau@lists.freedesktop.org>; Thu,  8 Aug 2019 09:19:46 +0000 (UTC)
+Received: by culpepper.freedesktop.org (Postfix, from userid 33)
+ id EB19972167; Thu,  8 Aug 2019 09:19:46 +0000 (UTC)
+From: bugzilla-daemon@freedesktop.org
+To: nouveau@lists.freedesktop.org
+Date: Thu, 08 Aug 2019 09:19:47 +0000
+X-Bugzilla-Reason: AssignedTo QAcontact
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: None
+X-Bugzilla-Product: Mesa
+X-Bugzilla-Component: Drivers/DRI/nouveau
+X-Bugzilla-Version: 19.0
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: major
+X-Bugzilla-Who: tjaalton@ubuntu.com
+X-Bugzilla-Status: RESOLVED
+X-Bugzilla-Resolution: DUPLICATE
+X-Bugzilla-Priority: medium
+X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: 
+Message-ID: <bug-111218-8800-mDggFyO0HT@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-111218-8800@http.bugs.freedesktop.org/>
+References: <bug-111218-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20190807150214.3629-1-rcampbell@nvidia.com>
-User-Agent: Mutt/1.5.17 (2007-11-01)
-Subject: Re: [Nouveau] [PATCH] nouveau/hmm: map pages after migration
+Subject: [Nouveau] [Bug 111218] Segmentation fault in
+ nv50_ir::NVC0LegalizeSSA::handleDIV when dividing result of textureSize
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -35,68 +52,94 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, linux-mm@kvack.org,
- Jason Gunthorpe <jgg@mellanox.com>, amd-gfx@lists.freedesktop.org,
- Christoph Hellwig <hch@lst.de>, Ben Skeggs <bskeggs@redhat.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1118130507=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-T24gV2VkLCBBdWcgMDcsIDIwMTkgYXQgMDg6MDI6MTRBTSAtMDcwMCwgUmFscGggQ2FtcGJlbGwg
-d3JvdGU6Cj4gV2hlbiBtZW1vcnkgaXMgbWlncmF0ZWQgdG8gdGhlIEdQVSBpdCBpcyBsaWtlbHkg
-dG8gYmUgYWNjZXNzZWQgYnkgR1BVCj4gY29kZSBzb29uIGFmdGVyd2FyZHMuIEluc3RlYWQgb2Yg
-d2FpdGluZyBmb3IgYSBHUFUgZmF1bHQsIG1hcCB0aGUKPiBtaWdyYXRlZCBtZW1vcnkgaW50byB0
-aGUgR1BVIHBhZ2UgdGFibGVzIHdpdGggdGhlIHNhbWUgYWNjZXNzIHBlcm1pc3Npb25zCj4gYXMg
-dGhlIHNvdXJjZSBDUFUgcGFnZSB0YWJsZSBlbnRyaWVzLiBUaGlzIHByZXNlcnZlcyBjb3B5IG9u
-IHdyaXRlCj4gc2VtYW50aWNzLgo+IAo+IFNpZ25lZC1vZmYtYnk6IFJhbHBoIENhbXBiZWxsIDxy
-Y2FtcGJlbGxAbnZpZGlhLmNvbT4KPiBDYzogQ2hyaXN0b3BoIEhlbGx3aWcgPGhjaEBsc3QuZGU+
-Cj4gQ2M6IEphc29uIEd1bnRob3JwZSA8amdnQG1lbGxhbm94LmNvbT4KPiBDYzogIkrDqXLDtG1l
-IEdsaXNzZSIgPGpnbGlzc2VAcmVkaGF0LmNvbT4KPiBDYzogQmVuIFNrZWdncyA8YnNrZWdnc0By
-ZWRoYXQuY29tPgo+IC0tLQo+IAo+IFRoaXMgcGF0Y2ggaXMgYmFzZWQgb24gdG9wIG9mIENocmlz
-dG9waCBIZWxsd2lnJ3MgOSBwYXRjaCBzZXJpZXMKPiBodHRwczovL2xvcmUua2VybmVsLm9yZy9s
-aW51eC1tbS8yMDE5MDcyOTIzNDYxMS5HQzcxNzFAcmVkaGF0LmNvbS9ULyN1Cj4gInR1cm4gdGhl
-IGhtbSBtaWdyYXRlX3ZtYSB1cHNpZGUgZG93biIgYnV0IHdpdGhvdXQgcGF0Y2ggOQo+ICJtbTog
-cmVtb3ZlIHRoZSB1bnVzZWQgTUlHUkFURV9QRk5fV1JJVEUiIGFuZCBhZGRzIGEgdXNlIGZvciB0
-aGUgZmxhZy4KClRoaXMgbG9va3MgdXNlZnVsLiAgSSd2ZSBhbHJlYWR5IGRyb3BwZWQgdGhhdCBw
-YXRjaCBmb3IgdGhlIHBlbmRpbmcKcmVzZW5kLgoKPiAgc3RhdGljIHVuc2lnbmVkIGxvbmcgbm91
-dmVhdV9kbWVtX21pZ3JhdGVfY29weV9vbmUoc3RydWN0IG5vdXZlYXVfZHJtICpkcm0sCj4gLQkJ
-c3RydWN0IHZtX2FyZWFfc3RydWN0ICp2bWEsIHVuc2lnbmVkIGxvbmcgYWRkciwKPiAtCQl1bnNp
-Z25lZCBsb25nIHNyYywgZG1hX2FkZHJfdCAqZG1hX2FkZHIpCj4gKwkJc3RydWN0IHZtX2FyZWFf
-c3RydWN0ICp2bWEsIHVuc2lnbmVkIGxvbmcgc3JjLAo+ICsJCWRtYV9hZGRyX3QgKmRtYV9hZGRy
-LCB1NjQgKnBmbikKCkknbGwgcGljayB1cCB0aGUgcmVtb3ZhbCBvZiB0aGUgbm90IG5lZWRlZCBh
-ZGRyIGFyZ3VtZW50IGZvciB0aGUgcGF0Y2gKaW50cm9kdWNpbmcgbm91dmVhdV9kbWVtX21pZ3Jh
-dGVfY29weV9vbmUsIHRoYW5rcywKCj4gIHN0YXRpYyB2b2lkIG5vdXZlYXVfZG1lbV9taWdyYXRl
-X2NodW5rKHN0cnVjdCBtaWdyYXRlX3ZtYSAqYXJncywKPiAtCQlzdHJ1Y3Qgbm91dmVhdV9kcm0g
-KmRybSwgZG1hX2FkZHJfdCAqZG1hX2FkZHJzKQo+ICsJCXN0cnVjdCBub3V2ZWF1X2RybSAqZHJt
-LCBkbWFfYWRkcl90ICpkbWFfYWRkcnMsIHU2NCAqcGZucykKPiAgewo+ICAJc3RydWN0IG5vdXZl
-YXVfZmVuY2UgKmZlbmNlOwo+ICAJdW5zaWduZWQgbG9uZyBhZGRyID0gYXJncy0+c3RhcnQsIG5y
-X2RtYSA9IDAsIGk7Cj4gIAo+ICAJZm9yIChpID0gMDsgYWRkciA8IGFyZ3MtPmVuZDsgaSsrKSB7
-Cj4gIAkJYXJncy0+ZHN0W2ldID0gbm91dmVhdV9kbWVtX21pZ3JhdGVfY29weV9vbmUoZHJtLCBh
-cmdzLT52bWEsCj4gLQkJCQlhZGRyLCBhcmdzLT5zcmNbaV0sICZkbWFfYWRkcnNbbnJfZG1hXSk7
-Cj4gKwkJCQlhcmdzLT5zcmNbaV0sICZkbWFfYWRkcnNbbnJfZG1hXSwgJnBmbnNbaV0pOwoKTml0
-OiBJIGZpbmQgdGhlICZwZm5zW2ldIHdheSB0byBwYXNzIHRoZSBhcmd1bWVudCBhIGxpdHRsZSB3
-ZWlyZCB0byByZWFkLgpXaHkgbm90ICJwZm5zICsgaSI/Cgo+ICt1NjQgKgo+ICtub3V2ZWF1X3Bm
-bnNfYWxsb2ModW5zaWduZWQgbG9uZyBucGFnZXMpCj4gK3sKPiArCXN0cnVjdCBub3V2ZWF1X3Bm
-bm1hcF9hcmdzICphcmdzOwo+ICsKPiArCWFyZ3MgPSBremFsbG9jKHNpemVvZigqYXJncykgKyBu
-cGFnZXMgKiBzaXplb2YoYXJncy0+cC5waHlzWzBdKSwKCkNhbiB3ZSB1c2Ugc3RydWN0X3NpemUg
-aGVyZT8KCj4gKwlpbnQgcmV0Owo+ICsKPiArCWlmICghc3ZtKQo+ICsJCXJldHVybjsKPiArCj4g
-KwltdXRleF9sb2NrKCZzdm0tPm11dGV4KTsKPiArCXN2bW0gPSBub3V2ZWF1X2ZpbmRfc3ZtbShz
-dm0sIG1tKTsKPiArCWlmICghc3ZtbSkgewo+ICsJCW11dGV4X3VubG9jaygmc3ZtLT5tdXRleCk7
-Cj4gKwkJcmV0dXJuOwo+ICsJfQo+ICsJbXV0ZXhfdW5sb2NrKCZzdm0tPm11dGV4KTsKCkdpdmVu
-IHRoYXQgbm91dmVhdV9maW5kX3N2bW0gZG9lc24ndCB0YWtlIGFueSBraW5kIG9mIHJlZmVyZW5j
-ZSwgd2hhdApndXJhbnRlZXMgc3ZtbSBkb2Vzbid0IGdvIGF3YXkgYWZ0ZXIgZHJvcHBpbmcgdGhl
-IGxvY2s/Cgo+IEBAIC00NCw1ICs0OSwxOSBAQCBzdGF0aWMgaW5saW5lIGludCBub3V2ZWF1X3N2
-bW1fYmluZChzdHJ1Y3QgZHJtX2RldmljZSAqZGV2aWNlLCB2b2lkICpwLAo+ICB7Cj4gIAlyZXR1
-cm4gLUVOT1NZUzsKPiAgfQo+ICsKPiArdTY0ICpub3V2ZWF1X3BmbnNfYWxsb2ModW5zaWduZWQg
-bG9uZyBucGFnZXMpCj4gK3sKPiArCXJldHVybiBOVUxMOwo+ICt9Cj4gKwo+ICt2b2lkIG5vdXZl
-YXVfcGZuc19mcmVlKHU2NCAqcGZucykKPiArewo+ICt9Cj4gKwo+ICt2b2lkIG5vdXZlYXVfcGZu
-c19tYXAoc3RydWN0IG5vdXZlYXVfZHJtICpkcm0sIHN0cnVjdCBtbV9zdHJ1Y3QgKm1tLAo+ICsJ
-CSAgICAgIHVuc2lnbmVkIGxvbmcgYWRkciwgdTY0ICpwZm5zLCB1bnNpZ25lZCBsb25nIG5wYWdl
-cykKPiArewo+ICt9Cj4gICNlbmRpZiAvKiBJU19FTkFCTEVEKENPTkZJR19EUk1fTk9VVkVBVV9T
-Vk0pICovCgpub3V2ZWF1X2RtZW0uYyBhbmQgbm91dmVhdV9zdm0uYyBhcmUgYm90aCBidWlsdCBj
-b25kaXRpb25hbCBvbgpDT05GSUdfRFJNX05PVVZFQVVfU1ZNLCBzbyB0aGVyZSBpcyBubyBuZWVk
-IGZvciBzdHVicyBoZXJlLgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fXwpOb3V2ZWF1IG1haWxpbmcgbGlzdApOb3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9y
-ZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL25vdXZlYXU=
+
+--===============1118130507==
+Content-Type: multipart/alternative; boundary="15652559860.4DBc8b1b.32553"
+Content-Transfer-Encoding: 7bit
+
+
+--15652559860.4DBc8b1b.32553
+Date: Thu, 8 Aug 2019 09:19:46 +0000
+MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+https://bugs.freedesktop.org/show_bug.cgi?id=3D111218
+
+--- Comment #9 from Timo Aaltonen <tjaalton@ubuntu.com> ---
+for the record, we already set '-Db_ndebug=3Dtrue' which was supposed to di=
+sable
+debug builds (and asserts) with meson
+
+--=20
+You are receiving this mail because:
+You are the assignee for the bug.
+You are the QA Contact for the bug.=
+
+--15652559860.4DBc8b1b.32553
+Date: Thu, 8 Aug 2019 09:19:46 +0000
+MIME-Version: 1.0
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+<html>
+    <head>
+      <base href=3D"https://bugs.freedesktop.org/">
+    </head>
+    <body>
+      <p>
+        <div>
+            <b><a class=3D"bz_bug_link=20
+          bz_status_RESOLVED  bz_closed"
+   title=3D"RESOLVED DUPLICATE - Segmentation fault in nv50_ir::NVC0Legaliz=
+eSSA::handleDIV when dividing result of textureSize"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111218#c9">Commen=
+t # 9</a>
+              on <a class=3D"bz_bug_link=20
+          bz_status_RESOLVED  bz_closed"
+   title=3D"RESOLVED DUPLICATE - Segmentation fault in nv50_ir::NVC0Legaliz=
+eSSA::handleDIV when dividing result of textureSize"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111218">bug 11121=
+8</a>
+              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
+tjaalton&#64;ubuntu.com" title=3D"Timo Aaltonen &lt;tjaalton&#64;ubuntu.com=
+&gt;"> <span class=3D"fn">Timo Aaltonen</span></a>
+</span></b>
+        <pre>for the record, we already set '-Db_ndebug=3Dtrue' which was s=
+upposed to disable
+debug builds (and asserts) with meson</pre>
+        </div>
+      </p>
+
+
+      <hr>
+      <span>You are receiving this mail because:</span>
+
+      <ul>
+          <li>You are the assignee for the bug.</li>
+          <li>You are the QA Contact for the bug.</li>
+      </ul>
+    </body>
+</html>=
+
+--15652559860.4DBc8b1b.32553--
+
+--===============1118130507==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
+YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
+cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============1118130507==--
