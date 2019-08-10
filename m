@@ -1,46 +1,45 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6918288B92
-	for <lists+nouveau@lfdr.de>; Sat, 10 Aug 2019 15:23:25 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5D8C788C94
+	for <lists+nouveau@lfdr.de>; Sat, 10 Aug 2019 19:55:35 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5F1126E3F4;
-	Sat, 10 Aug 2019 13:23:23 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D6A466E452;
+	Sat, 10 Aug 2019 17:55:33 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
  [131.252.210.165])
- by gabe.freedesktop.org (Postfix) with ESMTP id 925BD6E3EE
- for <nouveau@lists.freedesktop.org>; Sat, 10 Aug 2019 13:23:21 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTP id 04AE76E452
+ for <nouveau@lists.freedesktop.org>; Sat, 10 Aug 2019 17:55:33 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 8B60772167; Sat, 10 Aug 2019 13:23:21 +0000 (UTC)
+ id ED0D272167; Sat, 10 Aug 2019 17:55:32 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Sat, 10 Aug 2019 13:23:21 +0000
-X-Bugzilla-Reason: AssignedTo
+Date: Sat, 10 Aug 2019 17:55:33 +0000
+X-Bugzilla-Reason: AssignedTo QAcontact
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
-X-Bugzilla-Product: xorg
-X-Bugzilla-Component: Driver/nouveau
-X-Bugzilla-Version: unspecified
+X-Bugzilla-Product: Mesa
+X-Bugzilla-Component: Drivers/DRI/nouveau
+X-Bugzilla-Version: 19.1
 X-Bugzilla-Keywords: 
 X-Bugzilla-Severity: normal
-X-Bugzilla-Who: tothsoft@gmail.com
-X-Bugzilla-Status: REOPENED
+X-Bugzilla-Who: liewkj@yahoo.com
+X-Bugzilla-Status: NEW
 X-Bugzilla-Resolution: 
 X-Bugzilla-Priority: medium
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
 X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-107016-8800-5Y4QmERiVC@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-107016-8800@http.bugs.freedesktop.org/>
-References: <bug-107016-8800@http.bugs.freedesktop.org/>
+Message-ID: <bug-111213-8800-OrZGP4LQ3d@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-111213-8800@http.bugs.freedesktop.org/>
+References: <bug-111213-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 107016] Gpio error only from kernel higher as 4.x
- (k2000m; 0x0e73b0a2; version 80.07.40.00.02)
+Subject: [Nouveau] [Bug 111213] VA-API nouveau SIGSEGV and asserts
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -52,43 +51,72 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1583286546=="
+Content-Type: multipart/mixed; boundary="===============0197041561=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============1583286546==
-Content-Type: multipart/alternative; boundary="15654434012.93A1bc.31229"
+--===============0197041561==
+Content-Type: multipart/alternative; boundary="15654597320.09BC68.14257"
 Content-Transfer-Encoding: 7bit
 
 
---15654434012.93A1bc.31229
-Date: Sat, 10 Aug 2019 13:23:21 +0000
+--15654597320.09BC68.14257
+Date: Sat, 10 Aug 2019 17:55:32 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 
-https://bugs.freedesktop.org/show_bug.cgi?id=3D107016
+https://bugs.freedesktop.org/show_bug.cgi?id=3D111213
 
---- Comment #24 from atirage21 <tothsoft@gmail.com> ---
-It is possible solve this issue with gk107 on base new publicated documenta=
-tion
-from nvidia for gk 104 ?=20
+--- Comment #13 from KJ Liew <liewkj@yahoo.com> ---
+Both VA-API and VDPAU do not play video on GK208B using mpv. There was only
+sound and black screen.
 
-Also i saw error in envytools in row for gk107:  NVE7 [GK107]: ?:?:2:1
+Linux 5.2.7-arch1-1-ARCH
+local/libva-mesa-driver 19.1.4-1
+local/mesa 19.1.4-1
+local/mesa-demos 8.4.0-1
+local/mesa-vdpau 19.1.4-1
 
+$ LIBVA_DRIVER_NAME=3Dnouveau mpv --hwdec=3Dvaapi -vo=3Dvaapi /path/to/MP4
+Playing: /path/to/MP4
+ (+) Video --vid=3D1 (*) (h264 1280x720 23.976fps)
+ (+) Audio --aid=3D1 --alang=3Deng (*) (aac 2ch 44100Hz)
+Using hardware decoding (vaapi).
+AO: [pulse] 44100Hz stereo 2ch float
+VO: [vaapi] 1280x720 vaapi[nv12]
+nve4_set_surface_info:969 - unsupported surface format, try
+is_format_supported() !
+nve4_set_surface_info:969 - unsupported surface format, try
+is_format_supported() !
+nve4_set_surface_info:969 - unsupported surface format, try
+is_format_supported() !
+nve4_set_surface_info:969 - unsupported surface format, try
+is_format_supported() !
+nve4_set_surface_info:969 - unsupported surface format, try
+is_format_supported() !
 
-https://github.com/mharsch/envytools/commit/b70216fcf3d268995d7f9aa275db3a3=
-59c6a80bd
+$ VDPAU_DRIVER=3Dnouveau mpv --hwdec=3Dvdpau -vo=3Dopengl /path/to/MP4=20
+Driver 'opengl' has been replaced with 'gpu'!
+Playing: /path/to/MP4
+ (+) Video --vid=3D1 (*) (h264 1280x720 23.976fps)
+ (+) Audio --aid=3D1 --alang=3Deng (*) (aac 2ch 44100Hz)
+Cannot load libcuda.so.1
+Using hardware decoding (vdpau).
+VO: [gpu] 1280x720 vdpau[yuv420p]
+AO: [pulse] 44100Hz stereo 2ch float
+AV: 00:00:12 / 00:02:03 (10%) A-V:  0.000
 
 --=20
 You are receiving this mail because:
-You are the assignee for the bug.=
+You are the assignee for the bug.
+You are the QA Contact for the bug.=
 
---15654434012.93A1bc.31229
-Date: Sat, 10 Aug 2019 13:23:21 +0000
+--15654597320.09BC68.14257
+Date: Sat, 10 Aug 2019 17:55:32 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -103,31 +131,57 @@ Auto-Submitted: auto-generated
       <p>
         <div>
             <b><a class=3D"bz_bug_link=20
-          bz_status_REOPENED "
-   title=3D"REOPENED - Gpio error only from kernel higher as 4.x (k2000m; 0=
-x0e73b0a2; version 80.07.40.00.02)"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D107016#c24">Comme=
-nt # 24</a>
+          bz_status_NEW "
+   title=3D"NEW - VA-API nouveau SIGSEGV and asserts"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111213#c13">Comme=
+nt # 13</a>
               on <a class=3D"bz_bug_link=20
-          bz_status_REOPENED "
-   title=3D"REOPENED - Gpio error only from kernel higher as 4.x (k2000m; 0=
-x0e73b0a2; version 80.07.40.00.02)"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D107016">bug 10701=
-6</a>
+          bz_status_NEW "
+   title=3D"NEW - VA-API nouveau SIGSEGV and asserts"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111213">bug 11121=
+3</a>
               from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
-tothsoft&#64;gmail.com" title=3D"atirage21 &lt;tothsoft&#64;gmail.com&gt;">=
- <span class=3D"fn">atirage21</span></a>
+liewkj&#64;yahoo.com" title=3D"KJ Liew &lt;liewkj&#64;yahoo.com&gt;"> <span=
+ class=3D"fn">KJ Liew</span></a>
 </span></b>
-        <pre>It is possible solve this issue with gk107 on base new publica=
-ted documentation
-from nvidia for gk 104 ?=20
+        <pre>Both VA-API and VDPAU do not play video on GK208B using mpv. T=
+here was only
+sound and black screen.
 
-Also i saw error in envytools in row for gk107:  NVE7 [GK107]: ?:?:2:1
+Linux 5.2.7-arch1-1-ARCH
+local/libva-mesa-driver 19.1.4-1
+local/mesa 19.1.4-1
+local/mesa-demos 8.4.0-1
+local/mesa-vdpau 19.1.4-1
 
+$ LIBVA_DRIVER_NAME=3Dnouveau mpv --hwdec=3Dvaapi -vo=3Dvaapi /path/to/MP4
+Playing: /path/to/MP4
+ (+) Video --vid=3D1 (*) (h264 1280x720 23.976fps)
+ (+) Audio --aid=3D1 --alang=3Deng (*) (aac 2ch 44100Hz)
+Using hardware decoding (vaapi).
+AO: [pulse] 44100Hz stereo 2ch float
+VO: [vaapi] 1280x720 vaapi[nv12]
+nve4_set_surface_info:969 - unsupported surface format, try
+is_format_supported() !
+nve4_set_surface_info:969 - unsupported surface format, try
+is_format_supported() !
+nve4_set_surface_info:969 - unsupported surface format, try
+is_format_supported() !
+nve4_set_surface_info:969 - unsupported surface format, try
+is_format_supported() !
+nve4_set_surface_info:969 - unsupported surface format, try
+is_format_supported() !
 
-<a href=3D"https://github.com/mharsch/envytools/commit/b70216fcf3d268995d7f=
-9aa275db3a359c6a80bd">https://github.com/mharsch/envytools/commit/b70216fcf=
-3d268995d7f9aa275db3a359c6a80bd</a></pre>
+$ VDPAU_DRIVER=3Dnouveau mpv --hwdec=3Dvdpau -vo=3Dopengl /path/to/MP4=20
+Driver 'opengl' has been replaced with 'gpu'!
+Playing: /path/to/MP4
+ (+) Video --vid=3D1 (*) (h264 1280x720 23.976fps)
+ (+) Audio --aid=3D1 --alang=3Deng (*) (aac 2ch 44100Hz)
+Cannot load libcuda.so.1
+Using hardware decoding (vdpau).
+VO: [gpu] 1280x720 vdpau[yuv420p]
+AO: [pulse] 44100Hz stereo 2ch float
+AV: 00:00:12 / 00:02:03 (10%) A-V:  0.000</pre>
         </div>
       </p>
 
@@ -137,13 +191,14 @@ Also i saw error in envytools in row for gk107:  NVE7 [GK107]: ?:?:2:1
 
       <ul>
           <li>You are the assignee for the bug.</li>
+          <li>You are the QA Contact for the bug.</li>
       </ul>
     </body>
 </html>=
 
---15654434012.93A1bc.31229--
+--15654597320.09BC68.14257--
 
---===============1583286546==
+--===============0197041561==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -153,4 +208,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============1583286546==--
+--===============0197041561==--
