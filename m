@@ -1,32 +1,45 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 17A9B88E98
-	for <lists+nouveau@lfdr.de>; Sat, 10 Aug 2019 23:57:37 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 029B988EE2
+	for <lists+nouveau@lfdr.de>; Sun, 11 Aug 2019 02:13:32 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6989989E35;
-	Sat, 10 Aug 2019 21:57:35 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D70AA6E1B2;
+	Sun, 11 Aug 2019 00:13:29 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from blaine.gmane.org (195-159-176-226.customer.powertech.no
- [195.159.176.226])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0AE6F89E35
- for <nouveau@lists.freedesktop.org>; Sat, 10 Aug 2019 21:57:34 +0000 (UTC)
-Received: from list by blaine.gmane.org with local (Exim 4.89)
- (envelope-from <gcfxn-nouveau@m.gmane.org>) id 1hwZMg-000mZp-4T
- for nouveau@lists.freedesktop.org; Sat, 10 Aug 2019 23:57:30 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
+ [131.252.210.165])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 7AE5F6E1B2
+ for <nouveau@lists.freedesktop.org>; Sun, 11 Aug 2019 00:13:28 +0000 (UTC)
+Received: by culpepper.freedesktop.org (Postfix, from userid 33)
+ id 7738B72167; Sun, 11 Aug 2019 00:13:28 +0000 (UTC)
+From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-From: James <bjlockie@lockie.ca>
-Date: Sat, 10 Aug 2019 17:57:18 -0400
-Message-ID: <qinejv$5lh7$1@blaine.gmane.org>
-Mime-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.8.0
-X-Mozilla-News-Host: news://news.gmane.org
-Content-Language: en-US
-Subject: [Nouveau] 4k tv and UEFI Ultra Fast Boot
+Date: Sun, 11 Aug 2019 00:13:28 +0000
+X-Bugzilla-Reason: QAcontact AssignedTo
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: None
+X-Bugzilla-Product: Mesa
+X-Bugzilla-Component: Drivers/DRI/nouveau
+X-Bugzilla-Version: 19.1
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: normal
+X-Bugzilla-Who: liewkj@yahoo.com
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: medium
+X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: 
+Message-ID: <bug-111213-8800-r28BjQw9jv@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-111213-8800@http.bugs.freedesktop.org/>
+References: <bug-111213-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+MIME-Version: 1.0
+Subject: [Nouveau] [Bug 111213] VA-API nouveau SIGSEGV and asserts
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -38,21 +51,142 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: multipart/mixed; boundary="===============0348383311=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-SSBoYXZlIG1vbml0b3IgY29ubmVjdGVkIGJ5IERWSSBhbmQgYSA0SyB0diBjb25uZWN0ZWQgYnkg
-SERNSS4KSSBoYXZlIGEgR2lnYWJ5dGUgR2VGb3JjZSAxMDUwIE9DIDJHIHZpZGVvIGNhcmQuCgpU
-aGUgZmlybXdhcmUgdGFrZXMgMTUgc2Vjb25kcyB0byBsb2FkIChzeXN0ZW1kLWFuYWx5emUpIHNv
-IEkgdHJpZWQgdGhlIApVbHRyYSBGYXN0IEJvb3QgKFVFRkkpIG9wdGlvbiBpbiB0aGUgQklPUy4K
-V2l0aCBVbHRyYSBGYXN0IEJvb3QgdGhlIGZpcm13YXJlIGxvYWRzIGluIGxlc3MgdGhhbiA1IHNl
-Y29uZHMuCkFsbCBzZWVtcyB0byB3b3JrIHdpdGgganVzdCB0aGUgRFZJIG1vbml0b3IgcGx1Z2dl
-ZCBpbi4KCldoZW4gSSB0cnkgdG8gYm9vdCB3aXRoIHRoZSA0SyB0diBhdHRhY2hlZCwgdGhlIG1v
-bml0b3IgKERWSSkgc2NyZWVuIGlzIAppbnRlcmxhY2VkIChpdCdzIG5vdCBzdXBwb3NlZCB0byBi
-ZSkuCjE5MjB4MTIwMCAgICAgNTkuOTUqKwpJIGNhbiBjaGFuZ2VkIHRvIGEgbG93ZXIgcmVzb2x1
-dGlvbiBhbmQgaXMgbm90IGludGVybGFjZWQuCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBtYWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5m
-cmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0
-aW5mby9ub3V2ZWF1
+
+--===============0348383311==
+Content-Type: multipart/alternative; boundary="15654824081.20C9.11777"
+Content-Transfer-Encoding: 7bit
+
+
+--15654824081.20C9.11777
+Date: Sun, 11 Aug 2019 00:13:28 +0000
+MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+https://bugs.freedesktop.org/show_bug.cgi?id=3D111213
+
+--- Comment #15 from KJ Liew <liewkj@yahoo.com> ---
+(In reply to Ilia Mirkin from comment #14)
+> Yep, I know about this. Needs yet another change... just need to figure o=
+ut
+> how to best resolve it.
+Thanks for looking into this. I believe this is the final hurdle to get
+Chromium-vaapi working with Nouveau.
+
+> >=20
+> > $ VDPAU_DRIVER=3Dnouveau mpv --hwdec=3Dvdpau -vo=3Dopengl /path/to/MP4=
+=20
+> > Driver 'opengl' has been replaced with 'gpu'!
+> > Playing: /path/to/MP4
+> >  (+) Video --vid=3D1 (*) (h264 1280x720 23.976fps)
+> >  (+) Audio --aid=3D1 --alang=3Deng (*) (aac 2ch 44100Hz)
+> > Cannot load libcuda.so.1
+> > Using hardware decoding (vdpau).
+> > VO: [gpu] 1280x720 vdpau[yuv420p]
+> > AO: [pulse] 44100Hz stereo 2ch float
+> > AV: 00:00:12 / 00:02:03 (10%) A-V:  0.000
+>=20
+> mpv doesn't seem to work, yeah. FWIW I'd expect -vo vdpau to work (not -vo
+> opengl,
+
+It works for r600 and radeonsi on my 2 other laptops using mpv and the same
+command-line using -vo gpu. I think it also works with Geforce9300/Nouveau =
+but
+need to double check again.
+
+--=20
+You are receiving this mail because:
+You are the QA Contact for the bug.
+You are the assignee for the bug.=
+
+--15654824081.20C9.11777
+Date: Sun, 11 Aug 2019 00:13:28 +0000
+MIME-Version: 1.0
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+<html>
+    <head>
+      <base href=3D"https://bugs.freedesktop.org/">
+    </head>
+    <body>
+      <p>
+        <div>
+            <b><a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - VA-API nouveau SIGSEGV and asserts"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111213#c15">Comme=
+nt # 15</a>
+              on <a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - VA-API nouveau SIGSEGV and asserts"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111213">bug 11121=
+3</a>
+              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
+liewkj&#64;yahoo.com" title=3D"KJ Liew &lt;liewkj&#64;yahoo.com&gt;"> <span=
+ class=3D"fn">KJ Liew</span></a>
+</span></b>
+        <pre>(In reply to Ilia Mirkin from <a href=3D"show_bug.cgi?id=3D111=
+213#c14">comment #14</a>)
+<span class=3D"quote">&gt; Yep, I know about this. Needs yet another change=
+... just need to figure out
+&gt; how to best resolve it.</span >
+Thanks for looking into this. I believe this is the final hurdle to get
+Chromium-vaapi working with Nouveau.
+
+<span class=3D"quote">&gt; &gt;=20
+&gt; &gt; $ VDPAU_DRIVER=3Dnouveau mpv --hwdec=3Dvdpau -vo=3Dopengl /path/t=
+o/MP4=20
+&gt; &gt; Driver 'opengl' has been replaced with 'gpu'!
+&gt; &gt; Playing: /path/to/MP4
+&gt; &gt;  (+) Video --vid=3D1 (*) (h264 1280x720 23.976fps)
+&gt; &gt;  (+) Audio --aid=3D1 --alang=3Deng (*) (aac 2ch 44100Hz)
+&gt; &gt; Cannot load libcuda.so.1
+&gt; &gt; Using hardware decoding (vdpau).
+&gt; &gt; VO: [gpu] 1280x720 vdpau[yuv420p]
+&gt; &gt; AO: [pulse] 44100Hz stereo 2ch float
+&gt; &gt; AV: 00:00:12 / 00:02:03 (10%) A-V:  0.000
+&gt;=20
+&gt; mpv doesn't seem to work, yeah. FWIW I'd expect -vo vdpau to work (not=
+ -vo
+&gt; opengl,</span >
+
+It works for r600 and radeonsi on my 2 other laptops using mpv and the same
+command-line using -vo gpu. I think it also works with Geforce9300/Nouveau =
+but
+need to double check again.</pre>
+        </div>
+      </p>
+
+
+      <hr>
+      <span>You are receiving this mail because:</span>
+
+      <ul>
+          <li>You are the QA Contact for the bug.</li>
+          <li>You are the assignee for the bug.</li>
+      </ul>
+    </body>
+</html>=
+
+--15654824081.20C9.11777--
+
+--===============0348383311==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
+YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
+cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============0348383311==--
