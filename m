@@ -1,23 +1,23 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9F47A8938A
-	for <lists+nouveau@lfdr.de>; Sun, 11 Aug 2019 22:12:01 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6ED658938C
+	for <lists+nouveau@lfdr.de>; Sun, 11 Aug 2019 22:12:34 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 59F0F6E3AC;
-	Sun, 11 Aug 2019 20:11:59 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id EDE316E3AA;
+	Sun, 11 Aug 2019 20:12:32 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
  [131.252.210.165])
- by gabe.freedesktop.org (Postfix) with ESMTP id 4CA666E3A0
- for <nouveau@lists.freedesktop.org>; Sun, 11 Aug 2019 20:11:58 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTP id 5A4A16E3A0
+ for <nouveau@lists.freedesktop.org>; Sun, 11 Aug 2019 20:12:31 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 493AF72167; Sun, 11 Aug 2019 20:11:58 +0000 (UTC)
+ id 5723B72167; Sun, 11 Aug 2019 20:12:31 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Sun, 11 Aug 2019 20:11:58 +0000
+Date: Sun, 11 Aug 2019 20:12:31 +0000
 X-Bugzilla-Reason: AssignedTo
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
@@ -32,8 +32,8 @@ X-Bugzilla-Resolution:
 X-Bugzilla-Priority: medium
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-111371-8800-RhXWBmg0Cm@http.bugs.freedesktop.org/>
+X-Bugzilla-Changed-Fields: attachments.created
+Message-ID: <bug-111371-8800-gTRMSqWQ3D@http.bugs.freedesktop.org/>
 In-Reply-To: <bug-111371-8800@http.bugs.freedesktop.org/>
 References: <bug-111371-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
@@ -52,18 +52,18 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1872170177=="
+Content-Type: multipart/mixed; boundary="===============0902534704=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============1872170177==
-Content-Type: multipart/alternative; boundary="15655543181.C3BBE4.15515"
+--===============0902534704==
+Content-Type: multipart/alternative; boundary="15655543511.Fa7F8A8.15626"
 Content-Transfer-Encoding: 7bit
 
 
---15655543181.C3BBE4.15515
-Date: Sun, 11 Aug 2019 20:11:58 +0000
+--15655543511.Fa7F8A8.15626
+Date: Sun, 11 Aug 2019 20:12:31 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -72,36 +72,17 @@ Auto-Submitted: auto-generated
 
 https://bugs.freedesktop.org/show_bug.cgi?id=3D111371
 
---- Comment #6 from Jorge Natz <jorgenatzdev@gmail.com> ---
-Sorry about the long wait time, compile takes a while on my machine.
-
-When I try to use nvagetbios without arguments, it gives me this message:
-
-No extraction method specified (using -s extraction_method). Autodetecting.
-Attempt to extract the vbios from card 0 (nv04) using PRAMIN.
-Invalid checksum. Broken vbios or broken retrieval method?
-Attempt to extract the vbios from card 0 (nv04) using PROM.
-Invalid checksum. Broken vbios or broken retrieval method?
-Autodetection failed, aborting.
-
-Therefore I did two runs, one which specified -s prom, the other which
-specified -s pramin.
-
-However, on both of these runs, it gave the message:
-
-Attempt to extract the vbios from card 0 (nv04) using <PROM/PRAMIN>.
-Invalid checksum. Broken vbios or broken retrieval method?
-0xff
-
-
-Thank you for spending you time in dealing with this issue.
+--- Comment #7 from Jorge Natz <jorgenatzdev@gmail.com> ---
+Created attachment 145030
+  --> https://bugs.freedesktop.org/attachment.cgi?id=3D145030&action=3Dedit
+PRAMIN VBIOS dump
 
 --=20
 You are receiving this mail because:
 You are the assignee for the bug.=
 
---15655543181.C3BBE4.15515
-Date: Sun, 11 Aug 2019 20:11:58 +0000
+--15655543511.Fa7F8A8.15626
+Date: Sun, 11 Aug 2019 20:12:31 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -118,8 +99,8 @@ Auto-Submitted: auto-generated
             <b><a class=3D"bz_bug_link=20
           bz_status_NEW "
    title=3D"NEW - [NV04] bios OOB on kernel driver initialization"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111371#c6">Commen=
-t # 6</a>
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111371#c7">Commen=
+t # 7</a>
               on <a class=3D"bz_bug_link=20
           bz_status_NEW "
    title=3D"NEW - [NV04] bios OOB on kernel driver initialization"
@@ -129,29 +110,11 @@ t # 6</a>
 jorgenatzdev&#64;gmail.com" title=3D"Jorge Natz &lt;jorgenatzdev&#64;gmail.=
 com&gt;"> <span class=3D"fn">Jorge Natz</span></a>
 </span></b>
-        <pre>Sorry about the long wait time, compile takes a while on my ma=
-chine.
-
-When I try to use nvagetbios without arguments, it gives me this message:
-
-No extraction method specified (using -s extraction_method). Autodetecting.
-Attempt to extract the vbios from card 0 (nv04) using PRAMIN.
-Invalid checksum. Broken vbios or broken retrieval method?
-Attempt to extract the vbios from card 0 (nv04) using PROM.
-Invalid checksum. Broken vbios or broken retrieval method?
-Autodetection failed, aborting.
-
-Therefore I did two runs, one which specified -s prom, the other which
-specified -s pramin.
-
-However, on both of these runs, it gave the message:
-
-Attempt to extract the vbios from card 0 (nv04) using &lt;PROM/PRAMIN&gt;.
-Invalid checksum. Broken vbios or broken retrieval method?
-0xff
-
-
-Thank you for spending you time in dealing with this issue.</pre>
+        <pre>Created <span class=3D""><a href=3D"attachment.cgi?id=3D145030=
+" name=3D"attach_145030" title=3D"PRAMIN VBIOS dump">attachment 145030</a> =
+<a href=3D"attachment.cgi?id=3D145030&amp;action=3Dedit" title=3D"PRAMIN VB=
+IOS dump">[details]</a></span>
+PRAMIN VBIOS dump</pre>
         </div>
       </p>
 
@@ -165,9 +128,9 @@ Thank you for spending you time in dealing with this issue.</pre>
     </body>
 </html>=
 
---15655543181.C3BBE4.15515--
+--15655543511.Fa7F8A8.15626--
 
---===============1872170177==
+--===============0902534704==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -177,4 +140,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============1872170177==--
+--===============0902534704==--
