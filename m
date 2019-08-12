@@ -2,45 +2,58 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id AFD048A6F5
-	for <lists+nouveau@lfdr.de>; Mon, 12 Aug 2019 21:18:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7F1908A76D
+	for <lists+nouveau@lfdr.de>; Mon, 12 Aug 2019 21:42:40 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B09EF89444;
-	Mon, 12 Aug 2019 19:18:19 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 257B26E5D0;
+	Mon, 12 Aug 2019 19:42:35 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [131.252.210.165])
- by gabe.freedesktop.org (Postfix) with ESMTP id 6844D89444
- for <nouveau@lists.freedesktop.org>; Mon, 12 Aug 2019 19:18:18 +0000 (UTC)
-Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 5F3FB72167; Mon, 12 Aug 2019 19:18:18 +0000 (UTC)
-From: bugzilla-daemon@freedesktop.org
-To: nouveau@lists.freedesktop.org
-Date: Mon, 12 Aug 2019 19:18:18 +0000
-X-Bugzilla-Reason: AssignedTo
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: None
-X-Bugzilla-Product: xorg
-X-Bugzilla-Component: Driver/nouveau
-X-Bugzilla-Version: unspecified
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: normal
-X-Bugzilla-Who: imirkin@alum.mit.edu
-X-Bugzilla-Status: NEW
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: medium
-X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-111371-8800-MqliLl3xj3@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-111371-8800@http.bugs.freedesktop.org/>
-References: <bug-111371-8800@http.bugs.freedesktop.org/>
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
+Received: from hqemgate15.nvidia.com (hqemgate15.nvidia.com [216.228.121.64])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A8E096E5CD;
+ Mon, 12 Aug 2019 19:42:33 +0000 (UTC)
+Received: from hqpgpgate102.nvidia.com (Not Verified[216.228.121.13]) by
+ hqemgate15.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
+ id <B5d51c1340002>; Mon, 12 Aug 2019 12:42:44 -0700
+Received: from hqmail.nvidia.com ([172.20.161.6])
+ by hqpgpgate102.nvidia.com (PGP Universal service);
+ Mon, 12 Aug 2019 12:42:33 -0700
+X-PGP-Universal: processed;
+ by hqpgpgate102.nvidia.com on Mon, 12 Aug 2019 12:42:33 -0700
+Received: from rcampbell-dev.nvidia.com (10.124.1.5) by HQMAIL107.nvidia.com
+ (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Mon, 12 Aug
+ 2019 19:42:30 +0000
+To: Christoph Hellwig <hch@lst.de>
+References: <20190807150214.3629-1-rcampbell@nvidia.com>
+ <20190808070701.GC29382@lst.de>
+ <0b96a8d8-86b5-3ce0-db95-669963c1f8a7@nvidia.com>
+ <20190810111308.GB26349@lst.de>
+From: Ralph Campbell <rcampbell@nvidia.com>
+X-Nvconfidentiality: public
+Message-ID: <1a84e6b6-31e6-6955-509f-9883f4a7a322@nvidia.com>
+Date: Mon, 12 Aug 2019 12:42:30 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.7.0
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 111371] [NV04] bios OOB on kernel driver
- initialization
+In-Reply-To: <20190810111308.GB26349@lst.de>
+X-Originating-IP: [10.124.1.5]
+X-ClientProxiedBy: HQMAIL105.nvidia.com (172.20.187.12) To
+ HQMAIL107.nvidia.com (172.20.187.13)
+Content-Language: en-US
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=nvidia.com; s=n1; 
+ t=1565638964; bh=OU8IJv/lYjVdyGsKoyblYg4ib4y7MVh+DIjHamncxq8=;
+ h=X-PGP-Universal:Subject:To:CC:References:From:X-Nvconfidentiality:
+ Message-ID:Date:User-Agent:MIME-Version:In-Reply-To:
+ X-Originating-IP:X-ClientProxiedBy:Content-Type:Content-Language:
+ Content-Transfer-Encoding;
+ b=AejkOoxomaGMhLpZ3pIIkspkKl7sO550hrdwKO5/NA8faapWC8ktyg1xgZmGlUyIT
+ E8+aD/Eyq4DXtfObw2wb1IDfF5rGaB9SY6L/edDp+qrtiD/VZn2zqviiDYtoL2w5RT
+ G2oreIveRctBxGW5KoLgroNOd1BXtk46jBCX4G5NkjDRbfvrDjsc6GOcIcGt2oLG0z
+ UngAn/Ys1zlFjY6Xwh+/SSpg1UNR5ybYE1cK2qp/6NKJvinEEPJHRCwvguTZlofaqS
+ Pfo7VmGAYM9odOp4MO2GNNvVxTKI+kTKn1BcDsQmcysGiShtWpFpnDFVSIWPomC38i
+ YRYBbJfX49njg==
+Subject: Re: [Nouveau] [PATCH] nouveau/hmm: map pages after migration
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -52,105 +65,30 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0224761037=="
+Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, linux-mm@kvack.org,
+ Jason Gunthorpe <jgg@mellanox.com>, amd-gfx@lists.freedesktop.org,
+ Ben Skeggs <bskeggs@redhat.com>
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-
---===============0224761037==
-Content-Type: multipart/alternative; boundary="15656374980.53823E.15346"
-Content-Transfer-Encoding: 7bit
-
-
---15656374980.53823E.15346
-Date: Mon, 12 Aug 2019 19:18:18 +0000
-MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-https://bugs.freedesktop.org/show_bug.cgi?id=3D111371
-
---- Comment #20 from Ilia Mirkin <imirkin@alum.mit.edu> ---
-(In reply to Jorge Natz from comment #19)
-> Given that I know nearly nothing about DRM/VBIOS internals, I am most lik=
-ely
-> completely wrong, but would the function fabricate_dcb_encoder_table in
-> drivers/gpu/drm/nouveau/nouveau_bios.c be what you were mentioning earlie=
-r?
-
-Yes, that's exactly it. Of course, it's in our OTHER bios parser, not the o=
-ne
-in nvkm. Because you can't have too much of a good thing.
-
---=20
-You are receiving this mail because:
-You are the assignee for the bug.=
-
---15656374980.53823E.15346
-Date: Mon, 12 Aug 2019 19:18:18 +0000
-MIME-Version: 1.0
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-<html>
-    <head>
-      <base href=3D"https://bugs.freedesktop.org/">
-    </head>
-    <body>
-      <p>
-        <div>
-            <b><a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - [NV04] bios OOB on kernel driver initialization"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111371#c20">Comme=
-nt # 20</a>
-              on <a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - [NV04] bios OOB on kernel driver initialization"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111371">bug 11137=
-1</a>
-              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
-imirkin&#64;alum.mit.edu" title=3D"Ilia Mirkin &lt;imirkin&#64;alum.mit.edu=
-&gt;"> <span class=3D"fn">Ilia Mirkin</span></a>
-</span></b>
-        <pre>(In reply to Jorge Natz from <a href=3D"show_bug.cgi?id=3D1113=
-71#c19">comment #19</a>)
-<span class=3D"quote">&gt; Given that I know nearly nothing about DRM/VBIOS=
- internals, I am most likely
-&gt; completely wrong, but would the function fabricate_dcb_encoder_table in
-&gt; drivers/gpu/drm/nouveau/nouveau_bios.c be what you were mentioning ear=
-lier?</span >
-
-Yes, that's exactly it. Of course, it's in our OTHER bios parser, not the o=
-ne
-in nvkm. Because you can't have too much of a good thing.</pre>
-        </div>
-      </p>
-
-
-      <hr>
-      <span>You are receiving this mail because:</span>
-
-      <ul>
-          <li>You are the assignee for the bug.</li>
-      </ul>
-    </body>
-</html>=
-
---15656374980.53823E.15346--
-
---===============0224761037==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
-YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
-cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
-
---===============0224761037==--
+Ck9uIDgvMTAvMTkgNDoxMyBBTSwgQ2hyaXN0b3BoIEhlbGx3aWcgd3JvdGU6Cj4gT24gc29tZXRo
+aW5nIHZhZ3VlbHkgcmVsYXRlZCB0byB0aGlzIHBhdGNoOgo+IAo+IFlvdSB1c2UgdGhlIE5WSUZf
+Vk1NX1BGTk1BUF9WMF9WKiBkZWZpbmVzIGZyb20gbnZpZi9pZjAwMGMuaCwgd2hpY2ggYXJlCj4g
+YSBsaXR0bGUgb2RkIGFzIHdlIG9ubHkgZXZlciBzZXQgdGhlc2UgYml0cywgYnV0IHRoZXkgYWxz
+byBkb24ndCBzZWVtCj4gdG8gYXBwZWFyIHRvIGJlIGluIHZhbHVlcyB0aGF0IGFyZSBkaXJlY3Rs
+eSBmZWQgdG8gdGhlIGhhcmR3YXJlLgo+IAo+IE9uIHRoZSBvdGhlciBoYW5kIG1tdS92bW0uaCBk
+ZWZpbmVzIGEgc2V0IG9mIE5WSUZfVk1NX1BGTk1BUF9WMF8qCgpZZXMsIEkgc2VlIE5WS01fVk1N
+X1BGTl8qCgo+IGNvbnN0YW50cyB3aXRoIHNpbWlsYXIgbmFtZXMgYW5kIGlkZW50aWNhbCB2YWx1
+ZXMsIGFuZCB0aG9zZSBhcmUgdXNlZAo+IGluIG1tdS92bW1ncDEwMC5jIGFuZCB3aGF0IGFwcGVh
+cnMgdG8gZmluYWxseSBkbyB0aGUgbG93LWxldmVsIGRtYQo+IG1hcHBpbmcgYW5kIHRhbGtpbmcg
+dG8gdGhlIGhhcmR3YXJlLiAgQXJlIHRoZXNlIHR3byBzZXRzIG9mIGNvbnN0YW50cwo+IHN1cHBv
+c2VkIHRvIGJlIHRoZSBzYW1lPyAgQXJlIHRoZSBhY3R1YWwgaGFyZHdhcmUgdmFsdWVzIG9yIGp1
+c3QgYQo+IGRyaXZlciBpbnRlcm5hbCBpbnRlcmZhY2U/CgpJdCBsb29rcyBhIGJpdCBvZGQgdG8g
+bWUgdG9vLgpJIGRvbid0IHJlYWxseSBrbm93IHRoZSBzdHJ1Y3R1cmUvaGlzdG9yeSBvZiBub3V2
+ZWF1LgpQZXJoYXBzIEJlbiBTa2VnZ3MgY2FuIHNoZWQgbW9yZSBsaWdodCBvbiB5b3VyIHF1ZXN0
+aW9uLgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpOb3V2
+ZWF1IG1haWxpbmcgbGlzdApOb3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xp
+c3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL25vdXZlYXU=
