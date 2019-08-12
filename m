@@ -1,23 +1,23 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3DA33895D9
-	for <lists+nouveau@lfdr.de>; Mon, 12 Aug 2019 05:41:57 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id F3C6D89753
+	for <lists+nouveau@lfdr.de>; Mon, 12 Aug 2019 08:48:37 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id BBEF56E46C;
-	Mon, 12 Aug 2019 03:41:55 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id CD0916E49F;
+	Mon, 12 Aug 2019 06:48:35 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [131.252.210.165])
- by gabe.freedesktop.org (Postfix) with ESMTP id 0A4016E449
- for <nouveau@lists.freedesktop.org>; Mon, 12 Aug 2019 03:41:54 +0000 (UTC)
+ [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
+ by gabe.freedesktop.org (Postfix) with ESMTP id E27A389065
+ for <nouveau@lists.freedesktop.org>; Mon, 12 Aug 2019 06:48:33 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 0668872167; Mon, 12 Aug 2019 03:41:54 +0000 (UTC)
+ id D988572167; Mon, 12 Aug 2019 06:48:33 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Mon, 12 Aug 2019 03:41:54 +0000
+Date: Mon, 12 Aug 2019 06:48:34 +0000
 X-Bugzilla-Reason: AssignedTo
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
@@ -33,7 +33,7 @@ X-Bugzilla-Priority: medium
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
 X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-111371-8800-OTF8FFpZ9G@http.bugs.freedesktop.org/>
+Message-ID: <bug-111371-8800-6vYyziouTh@http.bugs.freedesktop.org/>
 In-Reply-To: <bug-111371-8800@http.bugs.freedesktop.org/>
 References: <bug-111371-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
@@ -52,18 +52,18 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0350697862=="
+Content-Type: multipart/mixed; boundary="===============0707760007=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============0350697862==
-Content-Type: multipart/alternative; boundary="15655813133.53043DB.23573"
+--===============0707760007==
+Content-Type: multipart/alternative; boundary="15655925130.c63a.24427"
 Content-Transfer-Encoding: 7bit
 
 
---15655813133.53043DB.23573
-Date: Mon, 12 Aug 2019 03:41:53 +0000
+--15655925130.c63a.24427
+Date: Mon, 12 Aug 2019 06:48:33 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -72,29 +72,19 @@ Auto-Submitted: auto-generated
 
 https://bugs.freedesktop.org/show_bug.cgi?id=3D111371
 
---- Comment #13 from Ilia Mirkin <imirkin@alum.mit.edu> ---
-Well that looks much happier. vbios loads fine now.
-
-I wonder if without a DCB table, whether we generate the VGA connector anyw=
-ays
-(since I think all NV4's always had VGA - maybe there was some variant with
-composite/s-video, but we probably don't support that anyways). I seem to
-recall code existing where we would auto-generate a connector for that case,
-but ... I don't remember. Might have been ppc-only.
-
-Next, I'll have to investigate those illegal method errors. Perhaps we're d=
-oing
-something NV5-specific, or the logic has bitrotted. Used to work.
-
-And finally, that null deref, we'll need symbols, otherwise it's hopeless to
-figure out what happened.
+--- Comment #14 from Ilia Mirkin <imirkin@alum.mit.edu> ---
+Additionally a log with drm.debug=3D0x1e would be helpful (with the bios fi=
+x) --
+I really don't see the code that adds the connectors in when there is no DC=
+B.
+So either I'm blind (popular option), or that got dropped at some point.
 
 --=20
 You are receiving this mail because:
 You are the assignee for the bug.=
 
---15655813133.53043DB.23573
-Date: Mon, 12 Aug 2019 03:41:53 +0000
+--15655925130.c63a.24427
+Date: Mon, 12 Aug 2019 06:48:33 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -111,8 +101,8 @@ Auto-Submitted: auto-generated
             <b><a class=3D"bz_bug_link=20
           bz_status_NEW "
    title=3D"NEW - [NV04] bios OOB on kernel driver initialization"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111371#c13">Comme=
-nt # 13</a>
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111371#c14">Comme=
+nt # 14</a>
               on <a class=3D"bz_bug_link=20
           bz_status_NEW "
    title=3D"NEW - [NV04] bios OOB on kernel driver initialization"
@@ -122,21 +112,12 @@ nt # 13</a>
 imirkin&#64;alum.mit.edu" title=3D"Ilia Mirkin &lt;imirkin&#64;alum.mit.edu=
 &gt;"> <span class=3D"fn">Ilia Mirkin</span></a>
 </span></b>
-        <pre>Well that looks much happier. vbios loads fine now.
-
-I wonder if without a DCB table, whether we generate the VGA connector anyw=
-ays
-(since I think all NV4's always had VGA - maybe there was some variant with
-composite/s-video, but we probably don't support that anyways). I seem to
-recall code existing where we would auto-generate a connector for that case,
-but ... I don't remember. Might have been ppc-only.
-
-Next, I'll have to investigate those illegal method errors. Perhaps we're d=
-oing
-something NV5-specific, or the logic has bitrotted. Used to work.
-
-And finally, that null deref, we'll need symbols, otherwise it's hopeless to
-figure out what happened.</pre>
+        <pre>Additionally a log with drm.debug=3D0x1e would be helpful (wit=
+h the bios fix) --
+I really don't see the code that adds the connectors in when there is no DC=
+B.
+So either I'm blind (popular option), or that got dropped at some point.</p=
+re>
         </div>
       </p>
 
@@ -150,9 +131,9 @@ figure out what happened.</pre>
     </body>
 </html>=
 
---15655813133.53043DB.23573--
+--15655925130.c63a.24427--
 
---===============0350697862==
+--===============0707760007==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -162,4 +143,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============0350697862==--
+--===============0707760007==--
