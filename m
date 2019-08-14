@@ -1,61 +1,45 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8971E90D3B
-	for <lists+nouveau@lfdr.de>; Sat, 17 Aug 2019 07:45:53 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 38B2D90D3C
+	for <lists+nouveau@lfdr.de>; Sat, 17 Aug 2019 07:45:54 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 14CE16E9D2;
-	Sat, 17 Aug 2019 05:45:46 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id ECCFD6E9D1;
+	Sat, 17 Aug 2019 05:45:45 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wm1-x342.google.com (mail-wm1-x342.google.com
- [IPv6:2a00:1450:4864:20::342])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 47C596E17D;
- Tue, 13 Aug 2019 15:11:20 +0000 (UTC)
-Received: by mail-wm1-x342.google.com with SMTP id v19so1770642wmj.5;
- Tue, 13 Aug 2019 08:11:20 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to:user-agent;
- bh=Tp5uld9lfHh18m7fY/6QUhAxi+QJxhfd3CiVIG0MbmA=;
- b=UavDRegB2XA4ohJj6kjzcosLJLMbLJjLy+zb74ZDCTZUsajyZOEjsRrOSNXSSb3lON
- Cwa+THPy373WrWgYRxeXhk8mBzpHVq5ycz62WzeC+wOw2CkhPzRgM1aIG6o179oDD7Jp
- rB84Jne5eHnMFnQwRtwLZGlCRYYbMDsWUSHmYYCeGZPto2i5zuNaZm6VmGxz+YbADR/i
- weQfj3okoLIqShVidJllbPnR/5SU2EuLLjwqFgJ49zmhYLmkSXV9U5B4TwS57UBgzyB0
- y6XUuBVkeVV1+MnU9FTIYKG+IA5RXuS+x8QOMThp0zhyOirSJx6ofiNusNUJls/D8HYP
- w5RQ==
-X-Gm-Message-State: APjAAAUinC43mYHEUMj0/dhi89Lu8TdI0daFvyFa4Iu8SY/4Ryf0aR7U
- A2W+fo3r7Ld0P2a5AgXUA6g=
-X-Google-Smtp-Source: APXvYqy/KouDtl6mZwDMbXzYElgl7L4QUaHFAyZlbCtmk8uXlg3ZDrDK6TRLbbn4BMnSxDY6fwWAEQ==
-X-Received: by 2002:a7b:c310:: with SMTP id k16mr3491360wmj.133.1565709078621; 
- Tue, 13 Aug 2019 08:11:18 -0700 (PDT)
-Received: from localhost (pD9E51890.dip0.t-ipconnect.de. [217.229.24.144])
- by smtp.gmail.com with ESMTPSA id k124sm3839100wmk.47.2019.08.13.08.11.16
- (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
- Tue, 13 Aug 2019 08:11:16 -0700 (PDT)
-Date: Tue, 13 Aug 2019 17:11:15 +0200
-From: Thierry Reding <thierry.reding@gmail.com>
-To: Gerd Hoffmann <kraxel@redhat.com>
-Message-ID: <20190813151115.GA29955@ulmo>
+Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 54BFB6E27B;
+ Wed, 14 Aug 2019 05:58:30 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
+ [10.5.11.11])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mx1.redhat.com (Postfix) with ESMTPS id 76ECB10B78;
+ Wed, 14 Aug 2019 05:58:29 +0000 (UTC)
+Received: from sirius.home.kraxel.org (ovpn-116-144.ams2.redhat.com
+ [10.36.116.144])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 127748063E;
+ Wed, 14 Aug 2019 05:58:27 +0000 (UTC)
+Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
+ id 1223117444; Wed, 14 Aug 2019 07:58:27 +0200 (CEST)
+Date: Wed, 14 Aug 2019 07:58:27 +0200
+From: Gerd Hoffmann <kraxel@redhat.com>
+To: Thierry Reding <thierry.reding@gmail.com>
+Message-ID: <20190814055827.6hrxj6daovxxnnvw@sirius.home.kraxel.org>
 References: <20190805140119.7337-1-kraxel@redhat.com>
  <20190805140119.7337-9-kraxel@redhat.com>
+ <20190813151115.GA29955@ulmo>
 MIME-Version: 1.0
-In-Reply-To: <20190805140119.7337-9-kraxel@redhat.com>
-User-Agent: Mutt/1.12.1 (2019-06-15)
+Content-Type: multipart/mixed; boundary="2ebq6yfgxr3jfnrh"
+Content-Disposition: inline
+In-Reply-To: <20190813151115.GA29955@ulmo>
+User-Agent: NeoMutt/20180716
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+ (mx1.redhat.com [10.5.110.39]); Wed, 14 Aug 2019 05:58:29 +0000 (UTC)
 X-Mailman-Approved-At: Sat, 17 Aug 2019 05:45:39 +0000
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20161025;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to:user-agent;
- bh=Tp5uld9lfHh18m7fY/6QUhAxi+QJxhfd3CiVIG0MbmA=;
- b=SvKOy3G5pJS3mk1jeffqIzNAczI/Ay18RBtKMOh1OQQzWPahTziS+4cY+C3TooFhli
- TCP9ULVfdPyKrndaF23rY7fIsC/hZFzlfxXEIe2YjD1Hlik1x4I7oG9Z59wd6otHTKEo
- nzsrLUK8egIfMI4RKMePtWuA+vkZTG7MfDPCgOWj+oYAla2TGgx1BlCtKqAn8jXVX4Zq
- JpPL1gFVVB2XiavP8k5O9G7wUyihZcDTKAaeo2jPQVeW83UnNxNXJjq0VN4Eb3Bd1WrK
- LXoCC1+9rSTyCI+6BF961bkiwsX/On9jTyJ8Fg19e8RPfTtMweR84vbba4/XR3cjYF2d
- /IUA==
 Subject: Re: [Nouveau] [Intel-gfx] [PATCH v6 08/17] drm/ttm: use gem vma_node
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
@@ -84,385 +68,360 @@ Cc: "David \(ChunMing\) Zhou" <David1.Zhou@amd.com>,
  Alex Deucher <alexander.deucher@amd.com>, Dave Airlie <airlied@redhat.com>,
  "open list:DRM DRIVER FOR QXL VIRTUAL GPU" <spice-devel@lists.freedesktop.org>,
  bskeggs@redhat.com
-Content-Type: multipart/mixed; boundary="===============1547582906=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============1547582906==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="tKW2IUtsqtDRztdT"
+--2ebq6yfgxr3jfnrh
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
+> Hi Gerd,
+> 
+> I've been seeing a regression on Nouveau with recent linux-next releases
+> and git bisect points at this commit as the first bad one. If I revert
+> it (there's a tiny conflict with a patch that was merged subsequently),
+> things are back to normal.
+> 
+> I think the reason for this issue is that Nouveau doesn't use GEM
+> objects for all buffer objects,
 
---tKW2IUtsqtDRztdT
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+That shouldn't be a problem ...
 
-On Mon, Aug 05, 2019 at 04:01:10PM +0200, Gerd Hoffmann wrote:
-> Drop vma_node from ttm_buffer_object, use the gem struct
-> (base.vma_node) instead.
->=20
-> Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
-> Reviewed-by: Christian K=C3=B6nig <christian.koenig@amd.com>
-> ---
->  drivers/gpu/drm/amd/amdgpu/amdgpu_object.h | 2 +-
->  drivers/gpu/drm/qxl/qxl_object.h           | 2 +-
->  drivers/gpu/drm/radeon/radeon_object.h     | 2 +-
->  drivers/gpu/drm/virtio/virtgpu_drv.h       | 2 +-
->  include/drm/ttm/ttm_bo_api.h               | 4 ----
->  drivers/gpu/drm/drm_gem_vram_helper.c      | 2 +-
->  drivers/gpu/drm/nouveau/nouveau_display.c  | 2 +-
->  drivers/gpu/drm/nouveau/nouveau_gem.c      | 2 +-
->  drivers/gpu/drm/ttm/ttm_bo.c               | 8 ++++----
->  drivers/gpu/drm/ttm/ttm_bo_util.c          | 2 +-
->  drivers/gpu/drm/ttm/ttm_bo_vm.c            | 9 +++++----
->  drivers/gpu/drm/virtio/virtgpu_prime.c     | 3 ---
->  drivers/gpu/drm/vmwgfx/vmwgfx_bo.c         | 4 ++--
->  drivers/gpu/drm/vmwgfx/vmwgfx_surface.c    | 4 ++--
->  14 files changed, 21 insertions(+), 27 deletions(-)
+> and even when it uses GEM objects, the
+> code will not initialize the GEM object until after the buffer objects
+> and the backing TTM objects have been created.
 
-Hi Gerd,
+... but the initialization order is.
 
-I've been seeing a regression on Nouveau with recent linux-next releases
-and git bisect points at this commit as the first bad one. If I revert
-it (there's a tiny conflict with a patch that was merged subsequently),
-things are back to normal.
+ttm_bo_uses_embedded_gem_object() assumes gem gets initialized first.
 
-I think the reason for this issue is that Nouveau doesn't use GEM
-objects for all buffer objects, and even when it uses GEM objects, the
-code will not initialize the GEM object until after the buffer objects
-and the backing TTM objects have been created.
+drm_gem_object_init() init calling drm_vma_node_reset() again is
+probably the root cause for the breakage.
 
-I tried to fix that by making sure drm_gem_object_init() gets called by
-Nouveau before ttm_bo_init(), but the changes are fairly involved and I
-was unable to get the GEM reference counting right. I can look into the
-proper fix some more, but it might be worth reverting this patch for
-now to get Nouveau working again.
+> I tried to fix that by making sure drm_gem_object_init() gets called by
+> Nouveau before ttm_bo_init(), but the changes are fairly involved and I
+> was unable to get the GEM reference counting right. I can look into the
+> proper fix some more, but it might be worth reverting this patch for
+> now to get Nouveau working again.
 
-Thierry
+Changing the order doesn't look hard.  Patch attached (untested, have no
+test hardware).  But maybe I missed some detail ...
 
-> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_object.h b/drivers/gpu/drm=
-/amd/amdgpu/amdgpu_object.h
-> index 645a189d365c..113fb2feb437 100644
-> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_object.h
-> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_object.h
-> @@ -191,7 +191,7 @@ static inline unsigned amdgpu_bo_gpu_page_alignment(s=
-truct amdgpu_bo *bo)
->   */
->  static inline u64 amdgpu_bo_mmap_offset(struct amdgpu_bo *bo)
->  {
-> -	return drm_vma_node_offset_addr(&bo->tbo.vma_node);
-> +	return drm_vma_node_offset_addr(&bo->tbo.base.vma_node);
->  }
-> =20
->  /**
-> diff --git a/drivers/gpu/drm/qxl/qxl_object.h b/drivers/gpu/drm/qxl/qxl_o=
-bject.h
-> index b812d4ae9d0d..8ae54ba7857c 100644
-> --- a/drivers/gpu/drm/qxl/qxl_object.h
-> +++ b/drivers/gpu/drm/qxl/qxl_object.h
-> @@ -60,7 +60,7 @@ static inline unsigned long qxl_bo_size(struct qxl_bo *=
-bo)
-> =20
->  static inline u64 qxl_bo_mmap_offset(struct qxl_bo *bo)
->  {
-> -	return drm_vma_node_offset_addr(&bo->tbo.vma_node);
-> +	return drm_vma_node_offset_addr(&bo->tbo.base.vma_node);
->  }
-> =20
->  static inline int qxl_bo_wait(struct qxl_bo *bo, u32 *mem_type,
-> diff --git a/drivers/gpu/drm/radeon/radeon_object.h b/drivers/gpu/drm/rad=
-eon/radeon_object.h
-> index 9ffd8215d38a..e5554bf9140e 100644
-> --- a/drivers/gpu/drm/radeon/radeon_object.h
-> +++ b/drivers/gpu/drm/radeon/radeon_object.h
-> @@ -116,7 +116,7 @@ static inline unsigned radeon_bo_gpu_page_alignment(s=
-truct radeon_bo *bo)
->   */
->  static inline u64 radeon_bo_mmap_offset(struct radeon_bo *bo)
->  {
-> -	return drm_vma_node_offset_addr(&bo->tbo.vma_node);
-> +	return drm_vma_node_offset_addr(&bo->tbo.base.vma_node);
->  }
-> =20
->  extern int radeon_bo_wait(struct radeon_bo *bo, u32 *mem_type,
-> diff --git a/drivers/gpu/drm/virtio/virtgpu_drv.h b/drivers/gpu/drm/virti=
-o/virtgpu_drv.h
-> index f4ecea6054ba..e28829661724 100644
-> --- a/drivers/gpu/drm/virtio/virtgpu_drv.h
-> +++ b/drivers/gpu/drm/virtio/virtgpu_drv.h
-> @@ -396,7 +396,7 @@ static inline void virtio_gpu_object_unref(struct vir=
-tio_gpu_object **bo)
-> =20
->  static inline u64 virtio_gpu_object_mmap_offset(struct virtio_gpu_object=
- *bo)
->  {
-> -	return drm_vma_node_offset_addr(&bo->tbo.vma_node);
-> +	return drm_vma_node_offset_addr(&bo->tbo.base.vma_node);
->  }
-> =20
->  static inline int virtio_gpu_object_reserve(struct virtio_gpu_object *bo,
-> diff --git a/include/drm/ttm/ttm_bo_api.h b/include/drm/ttm/ttm_bo_api.h
-> index fa050f0328ab..7ffc50a3303d 100644
-> --- a/include/drm/ttm/ttm_bo_api.h
-> +++ b/include/drm/ttm/ttm_bo_api.h
-> @@ -152,7 +152,6 @@ struct ttm_tt;
->   * @ddestroy: List head for the delayed destroy list.
->   * @swap: List head for swap LRU list.
->   * @moving: Fence set when BO is moving
-> - * @vma_node: Address space manager node.
->   * @offset: The current GPU offset, which can have different meanings
->   * depending on the memory type. For SYSTEM type memory, it should be 0.
->   * @cur_placement: Hint of current placement.
-> @@ -219,9 +218,6 @@ struct ttm_buffer_object {
->  	 */
-> =20
->  	struct dma_fence *moving;
-> -
-> -	struct drm_vma_offset_node vma_node;
-> -
->  	unsigned priority;
-> =20
->  	/**
-> diff --git a/drivers/gpu/drm/drm_gem_vram_helper.c b/drivers/gpu/drm/drm_=
-gem_vram_helper.c
-> index fc13920b3cb4..fd751078bae1 100644
-> --- a/drivers/gpu/drm/drm_gem_vram_helper.c
-> +++ b/drivers/gpu/drm/drm_gem_vram_helper.c
-> @@ -168,7 +168,7 @@ EXPORT_SYMBOL(drm_gem_vram_put);
->   */
->  u64 drm_gem_vram_mmap_offset(struct drm_gem_vram_object *gbo)
->  {
-> -	return drm_vma_node_offset_addr(&gbo->bo.vma_node);
-> +	return drm_vma_node_offset_addr(&gbo->bo.base.vma_node);
->  }
->  EXPORT_SYMBOL(drm_gem_vram_mmap_offset);
-> =20
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_display.c b/drivers/gpu/drm/=
-nouveau/nouveau_display.c
-> index fc8f5bb73ca8..98afc50162e9 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_display.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_display.c
-> @@ -675,7 +675,7 @@ nouveau_display_dumb_map_offset(struct drm_file *file=
-_priv,
->  	gem =3D drm_gem_object_lookup(file_priv, handle);
->  	if (gem) {
->  		struct nouveau_bo *bo =3D nouveau_gem_object(gem);
-> -		*poffset =3D drm_vma_node_offset_addr(&bo->bo.vma_node);
-> +		*poffset =3D drm_vma_node_offset_addr(&bo->bo.base.vma_node);
->  		drm_gem_object_put_unlocked(gem);
->  		return 0;
->  	}
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_gem.c b/drivers/gpu/drm/nouv=
-eau/nouveau_gem.c
-> index 2f484ab7dbca..b1e4852810ed 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_gem.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_gem.c
-> @@ -240,7 +240,7 @@ nouveau_gem_info(struct drm_file *file_priv, struct d=
-rm_gem_object *gem,
->  	}
-> =20
->  	rep->size =3D nvbo->bo.mem.num_pages << PAGE_SHIFT;
-> -	rep->map_handle =3D drm_vma_node_offset_addr(&nvbo->bo.vma_node);
-> +	rep->map_handle =3D drm_vma_node_offset_addr(&nvbo->bo.base.vma_node);
->  	rep->tile_mode =3D nvbo->mode;
->  	rep->tile_flags =3D nvbo->contig ? 0 : NOUVEAU_GEM_TILE_NONCONTIG;
->  	if (cli->device.info.family >=3D NV_DEVICE_INFO_V0_FERMI)
-> diff --git a/drivers/gpu/drm/ttm/ttm_bo.c b/drivers/gpu/drm/ttm/ttm_bo.c
-> index ceff153f7e68..3e0a0cbc410e 100644
-> --- a/drivers/gpu/drm/ttm/ttm_bo.c
-> +++ b/drivers/gpu/drm/ttm/ttm_bo.c
-> @@ -672,7 +672,7 @@ static void ttm_bo_release(struct kref *kref)
->  	struct ttm_bo_device *bdev =3D bo->bdev;
->  	struct ttm_mem_type_manager *man =3D &bdev->man[bo->mem.mem_type];
-> =20
-> -	drm_vma_offset_remove(&bdev->vma_manager, &bo->vma_node);
-> +	drm_vma_offset_remove(&bdev->vma_manager, &bo->base.vma_node);
->  	ttm_mem_io_lock(man, false);
->  	ttm_mem_io_free_vm(bo);
->  	ttm_mem_io_unlock(man);
-> @@ -1343,9 +1343,9 @@ int ttm_bo_init_reserved(struct ttm_bo_device *bdev,
->  		 * struct elements we want use regardless.
->  		 */
->  		reservation_object_init(&bo->base._resv);
-> +		drm_vma_node_reset(&bo->base.vma_node);
->  	}
->  	atomic_inc(&bo->bdev->glob->bo_count);
-> -	drm_vma_node_reset(&bo->vma_node);
-> =20
->  	/*
->  	 * For ttm_bo_type_device buffers, allocate
-> @@ -1353,7 +1353,7 @@ int ttm_bo_init_reserved(struct ttm_bo_device *bdev,
->  	 */
->  	if (bo->type =3D=3D ttm_bo_type_device ||
->  	    bo->type =3D=3D ttm_bo_type_sg)
-> -		ret =3D drm_vma_offset_add(&bdev->vma_manager, &bo->vma_node,
-> +		ret =3D drm_vma_offset_add(&bdev->vma_manager, &bo->base.vma_node,
->  					 bo->mem.num_pages);
-> =20
->  	/* passed reservation objects should already be locked,
-> @@ -1781,7 +1781,7 @@ void ttm_bo_unmap_virtual_locked(struct ttm_buffer_=
-object *bo)
->  {
->  	struct ttm_bo_device *bdev =3D bo->bdev;
-> =20
-> -	drm_vma_node_unmap(&bo->vma_node, bdev->dev_mapping);
-> +	drm_vma_node_unmap(&bo->base.vma_node, bdev->dev_mapping);
->  	ttm_mem_io_free_vm(bo);
->  }
-> =20
-> diff --git a/drivers/gpu/drm/ttm/ttm_bo_util.c b/drivers/gpu/drm/ttm/ttm_=
-bo_util.c
-> index 05fbcaf6a3f2..f5009c1b6a9c 100644
-> --- a/drivers/gpu/drm/ttm/ttm_bo_util.c
-> +++ b/drivers/gpu/drm/ttm/ttm_bo_util.c
-> @@ -510,7 +510,7 @@ static int ttm_buffer_object_transfer(struct ttm_buff=
-er_object *bo,
->  	INIT_LIST_HEAD(&fbo->base.io_reserve_lru);
->  	mutex_init(&fbo->base.wu_mutex);
->  	fbo->base.moving =3D NULL;
-> -	drm_vma_node_reset(&fbo->base.vma_node);
-> +	drm_vma_node_reset(&fbo->base.base.vma_node);
->  	atomic_set(&fbo->base.cpu_writers, 0);
-> =20
->  	kref_init(&fbo->base.list_kref);
-> diff --git a/drivers/gpu/drm/ttm/ttm_bo_vm.c b/drivers/gpu/drm/ttm/ttm_bo=
-_vm.c
-> index 6dacff49c1cc..fb6875a789b7 100644
-> --- a/drivers/gpu/drm/ttm/ttm_bo_vm.c
-> +++ b/drivers/gpu/drm/ttm/ttm_bo_vm.c
-> @@ -211,9 +211,9 @@ static vm_fault_t ttm_bo_vm_fault(struct vm_fault *vm=
-f)
->  	}
-> =20
->  	page_offset =3D ((address - vma->vm_start) >> PAGE_SHIFT) +
-> -		vma->vm_pgoff - drm_vma_node_start(&bo->vma_node);
-> +		vma->vm_pgoff - drm_vma_node_start(&bo->base.vma_node);
->  	page_last =3D vma_pages(vma) + vma->vm_pgoff -
-> -		drm_vma_node_start(&bo->vma_node);
-> +		drm_vma_node_start(&bo->base.vma_node);
-> =20
->  	if (unlikely(page_offset >=3D bo->num_pages)) {
->  		ret =3D VM_FAULT_SIGBUS;
-> @@ -267,7 +267,7 @@ static vm_fault_t ttm_bo_vm_fault(struct vm_fault *vm=
-f)
->  			} else if (unlikely(!page)) {
->  				break;
->  			}
-> -			page->index =3D drm_vma_node_start(&bo->vma_node) +
-> +			page->index =3D drm_vma_node_start(&bo->base.vma_node) +
->  				page_offset;
->  			pfn =3D page_to_pfn(page);
->  		}
-> @@ -413,7 +413,8 @@ static struct ttm_buffer_object *ttm_bo_vm_lookup(str=
-uct ttm_bo_device *bdev,
-> =20
->  	node =3D drm_vma_offset_lookup_locked(&bdev->vma_manager, offset, pages=
-);
->  	if (likely(node)) {
-> -		bo =3D container_of(node, struct ttm_buffer_object, vma_node);
-> +		bo =3D container_of(node, struct ttm_buffer_object,
-> +				  base.vma_node);
->  		bo =3D ttm_bo_get_unless_zero(bo);
->  	}
-> =20
-> diff --git a/drivers/gpu/drm/virtio/virtgpu_prime.c b/drivers/gpu/drm/vir=
-tio/virtgpu_prime.c
-> index 8b3b2caf3364..dc642a884b88 100644
-> --- a/drivers/gpu/drm/virtio/virtgpu_prime.c
-> +++ b/drivers/gpu/drm/virtio/virtgpu_prime.c
-> @@ -68,8 +68,5 @@ void virtgpu_gem_prime_vunmap(struct drm_gem_object *ob=
-j, void *vaddr)
->  int virtgpu_gem_prime_mmap(struct drm_gem_object *obj,
->  			   struct vm_area_struct *vma)
->  {
-> -	struct virtio_gpu_object *bo =3D gem_to_virtio_gpu_obj(obj);
-> -
-> -	bo->gem_base.vma_node.vm_node.start =3D bo->tbo.vma_node.vm_node.start;
->  	return drm_gem_prime_mmap(obj, vma);
->  }
-> diff --git a/drivers/gpu/drm/vmwgfx/vmwgfx_bo.c b/drivers/gpu/drm/vmwgfx/=
-vmwgfx_bo.c
-> index 315da41a18b4..5739c6c49c99 100644
-> --- a/drivers/gpu/drm/vmwgfx/vmwgfx_bo.c
-> +++ b/drivers/gpu/drm/vmwgfx/vmwgfx_bo.c
-> @@ -835,7 +835,7 @@ int vmw_bo_alloc_ioctl(struct drm_device *dev, void *=
-data,
->  		goto out_no_bo;
-> =20
->  	rep->handle =3D handle;
-> -	rep->map_handle =3D drm_vma_node_offset_addr(&vbo->base.vma_node);
-> +	rep->map_handle =3D drm_vma_node_offset_addr(&vbo->base.base.vma_node);
->  	rep->cur_gmr_id =3D handle;
->  	rep->cur_gmr_offset =3D 0;
-> =20
-> @@ -1077,7 +1077,7 @@ int vmw_dumb_map_offset(struct drm_file *file_priv,
->  	if (ret !=3D 0)
->  		return -EINVAL;
-> =20
-> -	*offset =3D drm_vma_node_offset_addr(&out_buf->base.vma_node);
-> +	*offset =3D drm_vma_node_offset_addr(&out_buf->base.base.vma_node);
->  	vmw_bo_unreference(&out_buf);
->  	return 0;
->  }
-> diff --git a/drivers/gpu/drm/vmwgfx/vmwgfx_surface.c b/drivers/gpu/drm/vm=
-wgfx/vmwgfx_surface.c
-> index 219471903bc1..3a6da3b66484 100644
-> --- a/drivers/gpu/drm/vmwgfx/vmwgfx_surface.c
-> +++ b/drivers/gpu/drm/vmwgfx/vmwgfx_surface.c
-> @@ -1669,7 +1669,7 @@ vmw_gb_surface_define_internal(struct drm_device *d=
-ev,
->  	rep->backup_size =3D res->backup_size;
->  	if (res->backup) {
->  		rep->buffer_map_handle =3D
-> -			drm_vma_node_offset_addr(&res->backup->base.vma_node);
-> +			drm_vma_node_offset_addr(&res->backup->base.base.vma_node);
->  		rep->buffer_size =3D res->backup->base.num_pages * PAGE_SIZE;
->  		rep->buffer_handle =3D backup_handle;
->  	} else {
-> @@ -1745,7 +1745,7 @@ vmw_gb_surface_reference_internal(struct drm_device=
- *dev,
->  	rep->crep.backup_size =3D srf->res.backup_size;
->  	rep->crep.buffer_handle =3D backup_handle;
->  	rep->crep.buffer_map_handle =3D
-> -		drm_vma_node_offset_addr(&srf->res.backup->base.vma_node);
-> +		drm_vma_node_offset_addr(&srf->res.backup->base.base.vma_node);
->  	rep->crep.buffer_size =3D srf->res.backup->base.num_pages * PAGE_SIZE;
-> =20
->  	rep->creq.version =3D drm_vmw_gb_surface_v1;
-> --=20
-> 2.18.1
->=20
-> _______________________________________________
-> Intel-gfx mailing list
-> Intel-gfx@lists.freedesktop.org
-> https://lists.freedesktop.org/mailman/listinfo/intel-gfx
+The other patch attached works around the issue with a flag, to avoid
+drm_vma_node_reset() being called twice.
 
---tKW2IUtsqtDRztdT
-Content-Type: application/pgp-signature; name="signature.asc"
+cheers,
+  Gerd
 
------BEGIN PGP SIGNATURE-----
 
-iQIzBAABCAAdFiEEiOrDCAFJzPfAjcif3SOs138+s6EFAl1S0xAACgkQ3SOs138+
-s6EgVA//UpqDE4LMXsS9tr5P4hW4aXeIuY1uiNEyYx+15t1vb6jY5soPOlosXy6j
-qA4qYVBczFCycwulg3rzITwZo1YpWKgCQGDzwrt9rHLYOH0rGIRkWezlYkiB3TKb
-FKTcOioHEuR61wq940Ug9d4mYorSn3APRGh73ftKdsouskrqlBPr17wthobs5cGT
-nq4DyEZEQ1ugM+PNbM2Xir8cdoIGvGo4Yx/Se1J3ua357xO3seRsKlW4N9PYqF8y
-FyWExIed7iHjSbA4CqHiyD3bswHnyKcPlEcezEWAXdFMfgF2/WwTRzQrG/DjlySp
-+FCGq1/S/cPX70ky81OPrO0UOw9Vd/jSy69H37MORQwpmEDFkb3vGxbg9cM1zZEK
-URIls38z/VzvGza3ivvs0bkAk0fNvP6vOKFMpV+m0v+y2jS/J85Uqa05ankuYsdL
-yBDI54eheOIyMvq3T9MPOpFy4wTz4Ud04PLiEdGJEdwXE2oTYrNyy5v/Ap2PE/Wx
-OWzYKa335H4ECZMl/mA2wh47LPiX+W5s3w98q31qbrQm/r3+9/qNQGrdLbUGjFOu
-iF7q0E+051KFoW7msmpmsI2puRAiZHIiv2qwP87svcpSa3AYu1JTenxbrwZ6AvlI
-5rOgC37SnHumsivOjxMxmlr4NtcEsr4uOETcJRBU8Q4nzA4u4xQ=
-=7v7k
------END PGP SIGNATURE-----
+--2ebq6yfgxr3jfnrh
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: attachment; filename="0001-try-unbreak-nouveau-1.patch"
 
---tKW2IUtsqtDRztdT--
+From af43f933533140e2df58176a68df0c60ba082273 Mon Sep 17 00:00:00 2001
+From: Gerd Hoffmann <kraxel@redhat.com>
+Date: Wed, 14 Aug 2019 07:23:31 +0200
+Subject: [PATCH 1/2] try unbreak nouveau #1
 
---===============1547582906==
+---
+ include/drm/drm_gem.h        | 11 +++++++++++
+ drivers/gpu/drm/drm_gem.c    |  6 ++++--
+ drivers/gpu/drm/ttm/ttm_bo.c |  3 ++-
+ 3 files changed, 17 insertions(+), 3 deletions(-)
+
+diff --git a/include/drm/drm_gem.h b/include/drm/drm_gem.h
+index ae693c0666cd..24e8fc58a3e1 100644
+--- a/include/drm/drm_gem.h
++++ b/include/drm/drm_gem.h
+@@ -297,6 +297,17 @@ struct drm_gem_object {
+ 	 *
+ 	 */
+ 	const struct drm_gem_object_funcs *funcs;
++
++	/**
++	 * @ttm_init: indicate ttm has initialized _resv and vma_node fields.
++	 *
++	 * ttm_bo_uses_embedded_gem_object() assumes gem is
++	 * initialized before ttm, nouveau does it the other way
++	 * around though.
++	 *
++	 * This is a temporary stopgap to handle that case.
++	 */
++	bool ttm_init;
+ };
+ 
+ /**
+diff --git a/drivers/gpu/drm/drm_gem.c b/drivers/gpu/drm/drm_gem.c
+index afc38cece3f5..0a75d8cf7ac7 100644
+--- a/drivers/gpu/drm/drm_gem.c
++++ b/drivers/gpu/drm/drm_gem.c
+@@ -159,11 +159,13 @@ void drm_gem_private_object_init(struct drm_device *dev,
+ 	kref_init(&obj->refcount);
+ 	obj->handle_count = 0;
+ 	obj->size = size;
+-	reservation_object_init(&obj->_resv);
+ 	if (!obj->resv)
+ 		obj->resv = &obj->_resv;
+ 
+-	drm_vma_node_reset(&obj->vma_node);
++	if (!obj->ttm_init) {
++		reservation_object_init(&obj->_resv);
++		drm_vma_node_reset(&obj->vma_node);
++	}
+ }
+ EXPORT_SYMBOL(drm_gem_private_object_init);
+ 
+diff --git a/drivers/gpu/drm/ttm/ttm_bo.c b/drivers/gpu/drm/ttm/ttm_bo.c
+index 10a861a1690c..83b389fc117e 100644
+--- a/drivers/gpu/drm/ttm/ttm_bo.c
++++ b/drivers/gpu/drm/ttm/ttm_bo.c
+@@ -160,7 +160,7 @@ static void ttm_bo_release_list(struct kref *list_kref)
+ 	ttm_tt_destroy(bo->ttm);
+ 	atomic_dec(&bo->bdev->glob->bo_count);
+ 	dma_fence_put(bo->moving);
+-	if (!ttm_bo_uses_embedded_gem_object(bo))
++	if (bo->base.ttm_init)
+ 		reservation_object_fini(&bo->base._resv);
+ 	mutex_destroy(&bo->wu_mutex);
+ 	bo->destroy(bo);
+@@ -1344,6 +1344,7 @@ int ttm_bo_init_reserved(struct ttm_bo_device *bdev,
+ 		 */
+ 		reservation_object_init(&bo->base._resv);
+ 		drm_vma_node_reset(&bo->base.vma_node);
++		bo->base.ttm_init = true;
+ 	}
+ 	atomic_inc(&bo->bdev->glob->bo_count);
+ 
+-- 
+2.18.1
+
+
+--2ebq6yfgxr3jfnrh
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: attachment; filename="0002-try-unbreak-nouveau-2.patch"
+
+From 3e36d5819ed5330068340e78c7a1bf35451b1dad Mon Sep 17 00:00:00 2001
+From: Gerd Hoffmann <kraxel@redhat.com>
+Date: Wed, 14 Aug 2019 07:41:05 +0200
+Subject: [PATCH 2/2] try unbreak nouveau #2
+
+---
+ drivers/gpu/drm/nouveau/nouveau_bo.h    |  4 ++--
+ drivers/gpu/drm/nouveau/dispnv04/crtc.c |  2 +-
+ drivers/gpu/drm/nouveau/dispnv50/disp.c |  2 +-
+ drivers/gpu/drm/nouveau/nouveau_bo.c    | 11 ++++++++++-
+ drivers/gpu/drm/nouveau/nouveau_chan.c  |  2 +-
+ drivers/gpu/drm/nouveau/nouveau_dmem.c  |  2 +-
+ drivers/gpu/drm/nouveau/nouveau_gem.c   | 10 +---------
+ drivers/gpu/drm/nouveau/nouveau_prime.c | 10 +---------
+ drivers/gpu/drm/nouveau/nv17_fence.c    |  2 +-
+ drivers/gpu/drm/nouveau/nv50_fence.c    |  2 +-
+ drivers/gpu/drm/nouveau/nv84_fence.c    |  2 +-
+ 11 files changed, 21 insertions(+), 28 deletions(-)
+
+diff --git a/drivers/gpu/drm/nouveau/nouveau_bo.h b/drivers/gpu/drm/nouveau/nouveau_bo.h
+index d675efe8e7f9..4c268f299226 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_bo.h
++++ b/drivers/gpu/drm/nouveau/nouveau_bo.h
+@@ -73,7 +73,7 @@ extern struct ttm_bo_driver nouveau_bo_driver;
+ void nouveau_bo_move_init(struct nouveau_drm *);
+ int  nouveau_bo_new(struct nouveau_cli *, u64 size, int align, u32 flags,
+ 		    u32 tile_mode, u32 tile_flags, struct sg_table *sg,
+-		    struct reservation_object *robj,
++		    struct reservation_object *robj, bool gem_init,
+ 		    struct nouveau_bo **);
+ int  nouveau_bo_pin(struct nouveau_bo *, u32 flags, bool contig);
+ int  nouveau_bo_unpin(struct nouveau_bo *);
+@@ -115,7 +115,7 @@ nouveau_bo_new_pin_map(struct nouveau_cli *cli, u64 size, int align, u32 flags,
+ 		       struct nouveau_bo **pnvbo)
+ {
+ 	int ret = nouveau_bo_new(cli, size, align, flags,
+-				 0, 0, NULL, NULL, pnvbo);
++				 0, 0, NULL, NULL, false, pnvbo);
+ 	if (ret == 0) {
+ 		ret = nouveau_bo_pin(*pnvbo, flags, true);
+ 		if (ret == 0) {
+diff --git a/drivers/gpu/drm/nouveau/dispnv04/crtc.c b/drivers/gpu/drm/nouveau/dispnv04/crtc.c
+index f22f01020625..5640f5e45c11 100644
+--- a/drivers/gpu/drm/nouveau/dispnv04/crtc.c
++++ b/drivers/gpu/drm/nouveau/dispnv04/crtc.c
+@@ -1366,7 +1366,7 @@ nv04_crtc_create(struct drm_device *dev, int crtc_num)
+ 
+ 	ret = nouveau_bo_new(&nouveau_drm(dev)->client, 64*64*4, 0x100,
+ 			     TTM_PL_FLAG_VRAM, 0, 0x0000, NULL, NULL,
+-			     &nv_crtc->cursor.nvbo);
++			     false, &nv_crtc->cursor.nvbo);
+ 	if (!ret) {
+ 		ret = nouveau_bo_pin(nv_crtc->cursor.nvbo, TTM_PL_FLAG_VRAM, false);
+ 		if (!ret) {
+diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.c b/drivers/gpu/drm/nouveau/dispnv50/disp.c
+index 8497768f1b41..047c0166f823 100644
+--- a/drivers/gpu/drm/nouveau/dispnv50/disp.c
++++ b/drivers/gpu/drm/nouveau/dispnv50/disp.c
+@@ -2319,7 +2319,7 @@ nv50_display_create(struct drm_device *dev)
+ 
+ 	/* small shared memory area we use for notifiers and semaphores */
+ 	ret = nouveau_bo_new(&drm->client, 4096, 0x1000, TTM_PL_FLAG_VRAM,
+-			     0, 0x0000, NULL, NULL, &disp->sync);
++			     0, 0x0000, NULL, NULL, false, &disp->sync);
+ 	if (!ret) {
+ 		ret = nouveau_bo_pin(disp->sync, TTM_PL_FLAG_VRAM, true);
+ 		if (!ret) {
+diff --git a/drivers/gpu/drm/nouveau/nouveau_bo.c b/drivers/gpu/drm/nouveau/nouveau_bo.c
+index 99e391be9370..b1b67a427a98 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_bo.c
++++ b/drivers/gpu/drm/nouveau/nouveau_bo.c
+@@ -189,7 +189,7 @@ int
+ nouveau_bo_new(struct nouveau_cli *cli, u64 size, int align,
+ 	       uint32_t flags, uint32_t tile_mode, uint32_t tile_flags,
+ 	       struct sg_table *sg, struct reservation_object *robj,
+-	       struct nouveau_bo **pnvbo)
++	       bool gem_init, struct nouveau_bo **pnvbo)
+ {
+ 	struct nouveau_drm *drm = cli->drm;
+ 	struct nouveau_bo *nvbo;
+@@ -295,6 +295,15 @@ nouveau_bo_new(struct nouveau_cli *cli, u64 size, int align,
+ 	acc_size = ttm_bo_dma_acc_size(&drm->ttm.bdev, size,
+ 				       sizeof(struct nouveau_bo));
+ 
++	if (gem_init) {
++		/* Initialize the embedded gem-object. */
++		ret = drm_gem_object_init(drm->dev, &nvbo->bo.base, size);
++		if (ret) {
++			kfree(nvbo);
++			return -ENOMEM;
++		}
++	}
++
+ 	ret = ttm_bo_init(&drm->ttm.bdev, &nvbo->bo, size,
+ 			  type, &nvbo->placement,
+ 			  align >> PAGE_SHIFT, false, acc_size, sg,
+diff --git a/drivers/gpu/drm/nouveau/nouveau_chan.c b/drivers/gpu/drm/nouveau/nouveau_chan.c
+index 282fd90b65e1..fedf3239b2e4 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_chan.c
++++ b/drivers/gpu/drm/nouveau/nouveau_chan.c
+@@ -144,7 +144,7 @@ nouveau_channel_prep(struct nouveau_drm *drm, struct nvif_device *device,
+ 		target = TTM_PL_FLAG_VRAM;
+ 
+ 	ret = nouveau_bo_new(cli, size, 0, target, 0, 0, NULL, NULL,
+-			    &chan->push.buffer);
++			     false, &chan->push.buffer);
+ 	if (ret == 0) {
+ 		ret = nouveau_bo_pin(chan->push.buffer, target, false);
+ 		if (ret == 0)
+diff --git a/drivers/gpu/drm/nouveau/nouveau_dmem.c b/drivers/gpu/drm/nouveau/nouveau_dmem.c
+index 1333220787a1..4090ba54bbdd 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_dmem.c
++++ b/drivers/gpu/drm/nouveau/nouveau_dmem.c
+@@ -314,7 +314,7 @@ nouveau_dmem_chunk_alloc(struct nouveau_drm *drm)
+ 
+ 	ret = nouveau_bo_new(&drm->client, DMEM_CHUNK_SIZE, 0,
+ 			     TTM_PL_FLAG_VRAM, 0, 0, NULL, NULL,
+-			     &chunk->bo);
++			     false, &chunk->bo);
+ 	if (ret)
+ 		goto out;
+ 
+diff --git a/drivers/gpu/drm/nouveau/nouveau_gem.c b/drivers/gpu/drm/nouveau/nouveau_gem.c
+index c7368aa0bdec..1993f2c90e4c 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_gem.c
++++ b/drivers/gpu/drm/nouveau/nouveau_gem.c
+@@ -189,7 +189,7 @@ nouveau_gem_new(struct nouveau_cli *cli, u64 size, int align, uint32_t domain,
+ 		flags |= TTM_PL_FLAG_UNCACHED;
+ 
+ 	ret = nouveau_bo_new(cli, size, align, flags, tile_mode,
+-			     tile_flags, NULL, NULL, pnvbo);
++			     tile_flags, NULL, NULL, true, pnvbo);
+ 	if (ret)
+ 		return ret;
+ 	nvbo = *pnvbo;
+@@ -203,14 +203,6 @@ nouveau_gem_new(struct nouveau_cli *cli, u64 size, int align, uint32_t domain,
+ 	if (drm->client.device.info.family >= NV_DEVICE_INFO_V0_TESLA)
+ 		nvbo->valid_domains &= domain;
+ 
+-	/* Initialize the embedded gem-object. We return a single gem-reference
+-	 * to the caller, instead of a normal nouveau_bo ttm reference. */
+-	ret = drm_gem_object_init(drm->dev, &nvbo->bo.base, nvbo->bo.mem.size);
+-	if (ret) {
+-		nouveau_bo_ref(NULL, pnvbo);
+-		return -ENOMEM;
+-	}
+-
+ 	nvbo->bo.persistent_swap_storage = nvbo->bo.base.filp;
+ 	return 0;
+ }
+diff --git a/drivers/gpu/drm/nouveau/nouveau_prime.c b/drivers/gpu/drm/nouveau/nouveau_prime.c
+index e86ad7ae622b..db1ec2d0d4c9 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_prime.c
++++ b/drivers/gpu/drm/nouveau/nouveau_prime.c
+@@ -70,21 +70,13 @@ struct drm_gem_object *nouveau_gem_prime_import_sg_table(struct drm_device *dev,
+ 
+ 	reservation_object_lock(robj, NULL);
+ 	ret = nouveau_bo_new(&drm->client, attach->dmabuf->size, 0, flags, 0, 0,
+-			     sg, robj, &nvbo);
++			     sg, robj, true, &nvbo);
+ 	reservation_object_unlock(robj);
+ 	if (ret)
+ 		return ERR_PTR(ret);
+ 
+ 	nvbo->valid_domains = NOUVEAU_GEM_DOMAIN_GART;
+ 
+-	/* Initialize the embedded gem-object. We return a single gem-reference
+-	 * to the caller, instead of a normal nouveau_bo ttm reference. */
+-	ret = drm_gem_object_init(dev, &nvbo->bo.base, nvbo->bo.mem.size);
+-	if (ret) {
+-		nouveau_bo_ref(NULL, &nvbo);
+-		return ERR_PTR(-ENOMEM);
+-	}
+-
+ 	return &nvbo->bo.base;
+ }
+ 
+diff --git a/drivers/gpu/drm/nouveau/nv17_fence.c b/drivers/gpu/drm/nouveau/nv17_fence.c
+index 5d613d43b84d..6c589d0b847c 100644
+--- a/drivers/gpu/drm/nouveau/nv17_fence.c
++++ b/drivers/gpu/drm/nouveau/nv17_fence.c
+@@ -128,7 +128,7 @@ nv17_fence_create(struct nouveau_drm *drm)
+ 	spin_lock_init(&priv->lock);
+ 
+ 	ret = nouveau_bo_new(&drm->client, 4096, 0x1000, TTM_PL_FLAG_VRAM,
+-			     0, 0x0000, NULL, NULL, &priv->bo);
++			     0, 0x0000, NULL, NULL, false, &priv->bo);
+ 	if (!ret) {
+ 		ret = nouveau_bo_pin(priv->bo, TTM_PL_FLAG_VRAM, false);
+ 		if (!ret) {
+diff --git a/drivers/gpu/drm/nouveau/nv50_fence.c b/drivers/gpu/drm/nouveau/nv50_fence.c
+index a00ecc3de053..17910bfca099 100644
+--- a/drivers/gpu/drm/nouveau/nv50_fence.c
++++ b/drivers/gpu/drm/nouveau/nv50_fence.c
+@@ -81,7 +81,7 @@ nv50_fence_create(struct nouveau_drm *drm)
+ 	spin_lock_init(&priv->lock);
+ 
+ 	ret = nouveau_bo_new(&drm->client, 4096, 0x1000, TTM_PL_FLAG_VRAM,
+-			     0, 0x0000, NULL, NULL, &priv->bo);
++			     0, 0x0000, NULL, NULL, false, &priv->bo);
+ 	if (!ret) {
+ 		ret = nouveau_bo_pin(priv->bo, TTM_PL_FLAG_VRAM, false);
+ 		if (!ret) {
+diff --git a/drivers/gpu/drm/nouveau/nv84_fence.c b/drivers/gpu/drm/nouveau/nv84_fence.c
+index f07da00f285f..fecdb036521e 100644
+--- a/drivers/gpu/drm/nouveau/nv84_fence.c
++++ b/drivers/gpu/drm/nouveau/nv84_fence.c
+@@ -204,7 +204,7 @@ nv84_fence_create(struct nouveau_drm *drm)
+ 			  */
+ 			 TTM_PL_FLAG_TT | TTM_PL_FLAG_UNCACHED;
+ 	ret = nouveau_bo_new(&drm->client, 16 * drm->chan.nr, 0,
+-			     domain, 0, 0, NULL, NULL, &priv->bo);
++			     domain, 0, 0, NULL, NULL, false, &priv->bo);
+ 	if (ret == 0) {
+ 		ret = nouveau_bo_pin(priv->bo, domain, false);
+ 		if (ret == 0) {
+-- 
+2.18.1
+
+
+--2ebq6yfgxr3jfnrh
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -472,4 +431,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============1547582906==--
+--2ebq6yfgxr3jfnrh--
