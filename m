@@ -1,46 +1,57 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id E96708E0F2
-	for <lists+nouveau@lfdr.de>; Thu, 15 Aug 2019 00:43:12 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 79D0C8E0FD
+	for <lists+nouveau@lfdr.de>; Thu, 15 Aug 2019 00:47:54 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id BAE2489DDD;
-	Wed, 14 Aug 2019 22:43:10 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E49CD6E874;
+	Wed, 14 Aug 2019 22:47:49 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [131.252.210.165])
- by gabe.freedesktop.org (Postfix) with ESMTP id B046589B30
- for <nouveau@lists.freedesktop.org>; Wed, 14 Aug 2019 22:43:09 +0000 (UTC)
-Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id AD0247215A; Wed, 14 Aug 2019 22:43:09 +0000 (UTC)
-From: bugzilla-daemon@freedesktop.org
-To: nouveau@lists.freedesktop.org
-Date: Wed, 14 Aug 2019 22:43:09 +0000
-X-Bugzilla-Reason: AssignedTo
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: None
-X-Bugzilla-Product: xorg
-X-Bugzilla-Component: Driver/nouveau
-X-Bugzilla-Version: unspecified
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: normal
-X-Bugzilla-Who: gius-italy@live.it
-X-Bugzilla-Status: NEW
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: medium
-X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: short_desc
-Message-ID: <bug-111392-8800-k45uwEUVxA@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-111392-8800@http.bugs.freedesktop.org/>
-References: <bug-111392-8800@http.bugs.freedesktop.org/>
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
+Received: from mail-lf1-x142.google.com (mail-lf1-x142.google.com
+ [IPv6:2a00:1450:4864:20::142])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3BD3E6E69E;
+ Wed, 14 Aug 2019 22:47:48 +0000 (UTC)
+Received: by mail-lf1-x142.google.com with SMTP id j17so434956lfp.3;
+ Wed, 14 Aug 2019 15:47:48 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=mh51nkxw4i+pECwFXd8sLzk2KvgQQNpCm3d01V5SCLc=;
+ b=U28sgPErsqp93OIl0OAuxaqD9mDtzDJyiYCnbqGHt/9WoVQgo4ABZXe/BGTbBBbmHm
+ bUN0YrfPqQ5M4ybaaNgH9f7xuJOmv85kfaFoC6TcLDAf0niGdqVmKtL2L1cpRw5tVZND
+ FBcAeZ5fmU0DBZcv/xgVrBYLMLL1oxXcEcyvGveVha+Ymnf2n6/U4OKq937tgqp5IBRT
+ cfHkCEqaw6i5YirxoInZQCg3t1Xd9yj4lh52rUDP403N245leFQyGLFp6nsoBcfRqEJS
+ eCRM/RNSudTySoY/GLAAJ4WpjS85QOlvSpmkoMbeaXGoSTLljmrIwBHCDB6GA40XWAPu
+ BXsA==
+X-Gm-Message-State: APjAAAUYuhm8iTdi4Sjz3PQlAr4TDwMicZRZM44Fy9eK8KAHFajuq/Bo
+ N99jC1//Xj8tUQYbMN8ldapQtn0VgdcswaIhOcDNlA==
+X-Google-Smtp-Source: APXvYqzycF1dfTKo9tsYRCYMSL5GBTHA1deD7nwmys7qc3LSEcP6H7UGH3733ZypXdOc1Uci79kRpKsqDioFqjLAIa4=
+X-Received: by 2002:a19:f11a:: with SMTP id p26mr857848lfh.160.1565822866359; 
+ Wed, 14 Aug 2019 15:47:46 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 111392] [NV117] bus: MMIO read of 00000000 FAULT at
- 619444 [ IBUS ]
+References: <20190814213118.28473-1-kherbst@redhat.com>
+ <20190814213118.28473-2-kherbst@redhat.com>
+In-Reply-To: <20190814213118.28473-2-kherbst@redhat.com>
+From: Dave Airlie <airlied@gmail.com>
+Date: Thu, 15 Aug 2019 08:47:35 +1000
+Message-ID: <CAPM=9ty7yEUqKrcixV1tTuWCpyh6UikA3rxX8BF1E3fDb6WLQQ@mail.gmail.com>
+To: Karol Herbst <kherbst@redhat.com>
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc;
+ bh=mh51nkxw4i+pECwFXd8sLzk2KvgQQNpCm3d01V5SCLc=;
+ b=CHvoGp4JQnh7/6igKiv8z9GCoTqJCrYoz+fxQiqhikcLHa4LSTrYMYcDueLpewcbV+
+ XsOLYC4hlEUMy0W06WPLP2pbxcMpuNK9WPEKX/Zuqe+ZkRn/7j4TgMFU+g/V3cititf/
+ R3VHGCxWAXQ1/UK7pzfhJAlwkcpcu3XDpiphxohzIWFBsDtc5qR7M6OWCkw2kpRVZth/
+ 527/3uI4ddV8f8XuSpfFD2G7OPazB/kgxg+NKAS6+afixY4TRIJVJW2ReiPubd8TONAD
+ 18iYDC3Oh3nd3IVbpy+yH1rjKpvDmbGNZgr5rsQcT/SST2W4tCDWuU+2vS7RViLWWnpV
+ KAEA==
+Subject: Re: [Nouveau] [PATCH 1/7] Revert "ACPI / OSI: Add OEM _OSI string
+ to enable dGPU direct output"
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -52,98 +63,31 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1311043550=="
+Cc: nouveau <nouveau@lists.freedesktop.org>,
+ "Rafael J . Wysocki" <rafael.j.wysocki@intel.com>,
+ LKML <linux-kernel@vger.kernel.org>,
+ dri-devel <dri-devel@lists.freedesktop.org>,
+ Linux ACPI <linux-acpi@vger.kernel.org>, Alex Hung <alex.hung@canonical.com>,
+ Ben Skeggs <bskeggs@redhat.com>, Dave Airlie <airlied@redhat.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-
---===============1311043550==
-Content-Type: multipart/alternative; boundary="15658225891.eC8a.16231"
-Content-Transfer-Encoding: 7bit
-
-
---15658225891.eC8a.16231
-Date: Wed, 14 Aug 2019 22:43:09 +0000
-MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-https://bugs.freedesktop.org/show_bug.cgi?id=3D111392
-
-Giuseppe Lumia <gius-italy@live.it> changed:
-
-           What    |Removed                     |Added
-----------------------------------------------------------------------------
-            Summary|[NV110] bus: MMIO read of   |[NV117] bus: MMIO read of
-                   |00000000 FAULT at 619444 [  |00000000 FAULT at 619444 [
-                   |IBUS ]                      |IBUS ]
-
---=20
-You are receiving this mail because:
-You are the assignee for the bug.=
-
---15658225891.eC8a.16231
-Date: Wed, 14 Aug 2019 22:43:09 +0000
-MIME-Version: 1.0
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-<html>
-    <head>
-      <base href=3D"https://bugs.freedesktop.org/">
-    </head>
-    <body><span class=3D"vcard"><a class=3D"email" href=3D"mailto:gius-ital=
-y&#64;live.it" title=3D"Giuseppe Lumia &lt;gius-italy&#64;live.it&gt;"> <sp=
-an class=3D"fn">Giuseppe Lumia</span></a>
-</span> changed
-          <a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - [NV117] bus: MMIO read of 00000000 FAULT at 619444 [ IBUS=
- ]"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111392">bug 11139=
-2</a>
-          <br>
-             <table border=3D"1" cellspacing=3D"0" cellpadding=3D"8">
-          <tr>
-            <th>What</th>
-            <th>Removed</th>
-            <th>Added</th>
-          </tr>
-
-         <tr>
-           <td style=3D"text-align:right;">Summary</td>
-           <td>[NV110] bus: MMIO read of 00000000 FAULT at 619444 [ IBUS ]
-           </td>
-           <td>[NV117] bus: MMIO read of 00000000 FAULT at 619444 [ IBUS ]
-           </td>
-         </tr></table>
-      <p>
-      </p>
-
-
-      <hr>
-      <span>You are receiving this mail because:</span>
-
-      <ul>
-          <li>You are the assignee for the bug.</li>
-      </ul>
-    </body>
-</html>=
-
---15658225891.eC8a.16231--
-
---===============1311043550==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
-YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
-cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
-
---===============1311043550==--
+T24gVGh1LCAxNSBBdWcgMjAxOSBhdCAwNzozMSwgS2Fyb2wgSGVyYnN0IDxraGVyYnN0QHJlZGhh
+dC5jb20+IHdyb3RlOgo+Cj4gVGhpcyByZXZlcnRzIGNvbW1pdCAyODU4NmE1MWVlYTY2NmQ1NTMx
+YmNhZWYyZjY4ZTRhYmJkODcyNDJjLgo+Cj4gVGhlIG9yaWdpbmFsIGNvbW1pdCBtZXNzYWdlIGRp
+ZG4ndCBldmVuIG1ha2Ugc2Vuc2UuIEFNRCBfZG9lc18gc3VwcG9ydCBpdCBhbmQKPiBpdCB3b3Jr
+cyB3aXRoIE5vdXZlYXUgYXMgd2VsbC4KPgo+IEFsc28gd2hhdCB3YXMgdGhlIGlzc3VlIGJlaW5n
+IHNvbHZlZCBoZXJlPyBObyByZWZlcmVuY2VzIHRvIGFueSBidWdzIGFuZCBub3QKPiBldmVuIGV4
+cGxhaW5pbmcgYW55IGlzc3VlIGF0IGFsbCBpc24ndCB0aGUgd2F5IHdlIGRvIHRoaW5ncy4KPgo+
+IEFuZCBldmVuIGlmIGl0IG1lYW5zIGEgbXV4ZWQgZGVzaWduLCB0aGVuIHRoZSBmaXggaXMgdG8g
+bWFrZSBpdCB3b3JrIGluc2lkZSB0aGUKPiBkcml2ZXIsIG5vdCBhZGRpbmcgc29tZSBoYWNreSB3
+b3JrYXJvdW5kIHRocm91Z2ggQUNQSSB0cmlja3MuCj4KPiBBbmQgd2hhdCBvdXQgb2YgdHJlZSBk
+cml2ZXJzIGRvIG9yIGRvIG5vdCBzdXBwb3J0IHdlIGRvbid0IGNhcmUgb25lIGJpdCBhbnl3YXku
+Cj4KCkkgdGhpbmsgdGhlIHJldmVydHMgc2hvdWxkIGJlIG1lcmdlZCB2aWEgUmFmYWVsJ3MgdHJl
+ZSBhcyB0aGUgb3JpZ2luYWwKcGF0Y2hlcyB3ZW50IGluIHZpYSB0aGVyZSwgYW5kIHdlIHNob3Vs
+ZCBnZXQgdGhlbSBpbiBhc2FwLgoKQWNrZWQtYnk6IERhdmUgQWlybGllIDxhaXJsaWVkQHJlZGhh
+dC5jb20+CkRhdmUuCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fCk5vdXZlYXUgbWFpbGluZyBsaXN0Ck5vdXZlYXVAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0
+dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vbm91dmVhdQ==
