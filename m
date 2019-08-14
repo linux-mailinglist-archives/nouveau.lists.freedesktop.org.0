@@ -2,45 +2,32 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 811F88D068
-	for <lists+nouveau@lfdr.de>; Wed, 14 Aug 2019 12:14:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C1DBC8D24B
+	for <lists+nouveau@lfdr.de>; Wed, 14 Aug 2019 13:37:58 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id CD6ED6E4CF;
-	Wed, 14 Aug 2019 10:14:13 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id AA87D6E148;
+	Wed, 14 Aug 2019 11:37:56 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id DB3346E4CF;
- Wed, 14 Aug 2019 10:14:12 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
- [10.5.11.13])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id 498122F366E;
- Wed, 14 Aug 2019 10:14:12 +0000 (UTC)
-Received: from sirius.home.kraxel.org (ovpn-116-144.ams2.redhat.com
- [10.36.116.144])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 00501808DD;
- Wed, 14 Aug 2019 10:14:11 +0000 (UTC)
-Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id 2A5FD9D42; Wed, 14 Aug 2019 12:14:11 +0200 (CEST)
-Date: Wed, 14 Aug 2019 12:14:11 +0200
-From: Gerd Hoffmann <kraxel@redhat.com>
-To: Thierry Reding <thierry.reding@gmail.com>
-Message-ID: <20190814101411.lj3p6zjzbjvnnjf4@sirius.home.kraxel.org>
-References: <20190805140119.7337-1-kraxel@redhat.com>
- <20190805140119.7337-9-kraxel@redhat.com>
- <20190813151115.GA29955@ulmo>
- <20190814055827.6hrxj6daovxxnnvw@sirius.home.kraxel.org>
- <20190814093524.GA31345@ulmo>
+Received: from relay05.pair.com (relay05.pair.com [216.92.24.67])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C93E66E130
+ for <nouveau@lists.freedesktop.org>; Wed, 14 Aug 2019 11:37:54 +0000 (UTC)
+Received: from orac.inputplus.co.uk (unknown [87.113.169.30])
+ by relay05.pair.com (Postfix) with ESMTP id 057461A27AB;
+ Wed, 14 Aug 2019 07:37:52 -0400 (EDT)
+Received: from orac.inputplus.co.uk (orac.inputplus.co.uk [IPv6:::1])
+ by orac.inputplus.co.uk (Postfix) with ESMTP id 31EE721EEB;
+ Wed, 14 Aug 2019 12:37:51 +0100 (BST)
+To: Ilia Mirkin <imirkin@alum.mit.edu>
+From: Ralph Corderoy <ralph@inputplus.co.uk>
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20190814093524.GA31345@ulmo>
-User-Agent: NeoMutt/20180716
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.29]); Wed, 14 Aug 2019 10:14:12 +0000 (UTC)
-Subject: Re: [Nouveau] [Intel-gfx] [PATCH v6 08/17] drm/ttm: use gem vma_node
+In-reply-to: <CAKb7UvhqXGz7_t9EXJvu02J+f0STGB7wvwNcSM8F7YHCcJ3KbA@mail.gmail.com>
+References: <20190727113726.2EF4D21F78@orac.inputplus.co.uk>
+ <CAKb7UvhqXGz7_t9EXJvu02J+f0STGB7wvwNcSM8F7YHCcJ3KbA@mail.gmail.com>
+Date: Wed, 14 Aug 2019 12:37:51 +0100
+Message-Id: <20190814113751.31EE721EEB@orac.inputplus.co.uk>
+Subject: Re: [Nouveau] Video Hardware Decoding: Jittery Rectangles on Nvidia
+ GT218 NVA8 VP4.
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -52,24 +39,46 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- intel-gfx@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- amd-gfx@lists.freedesktop.org, linux-graphics-maintainer@vmware.com,
- Ben Skeggs <bskeggs@redhat.com>, spice-devel@lists.freedesktop.org
+Cc: nouveau@lists.freedesktop.org
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-ICBIaSwKCj4gPiBDaGFuZ2luZyB0aGUgb3JkZXIgZG9lc24ndCBsb29rIGhhcmQuICBQYXRjaCBh
-dHRhY2hlZCAodW50ZXN0ZWQsIGhhdmUgbm8KPiA+IHRlc3QgaGFyZHdhcmUpLiAgQnV0IG1heWJl
-IEkgbWlzc2VkIHNvbWUgZGV0YWlsIC4uLgo+IAo+IEkgY2FtZSB1cCB3aXRoIHNvbWV0aGluZyB2
-ZXJ5IHNpbWlsYXIgYnkgc3BsaXR0aW5nIHVwIG5vdXZlYXVfYm9fbmV3KCkKPiBpbnRvIGFsbG9j
-YXRpb24gYW5kIGluaXRpYWxpemF0aW9uIHN0ZXBzLCBzbyB0aGF0IHdoZW4gbmVjZXNzYXJ5IHRo
-ZSBHRU0KPiBvYmplY3QgY2FuIGJlIGluaXRpYWxpemVkIGluIGJldHdlZW4uIEkgdGhpbmsgdGhh
-dCdzIHNsaWdodGx5IG1vcmUKPiBmbGV4aWJsZSBhbmQgZWFzaWVyIHRvIHVuZGVyc3RhbmQgdGhh
-biBhIGJvb2xlYW4gZmxhZy4KClllcywgdGhhdCBzaG91bGQgd29yayB0b28uCgpBY2tlZC1ieTog
-R2VyZCBIb2ZmbWFubiA8a3JheGVsQHJlZGhhdC5jb20+CgpjaGVlcnMsCiAgR2VyZAoKX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBtYWlsaW5n
-IGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVz
-a3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+SGkgSWxpYSwKCkEgZm9ydG5pZ2h0IGFnbywgeW91IHdyb3RlOgo+ID4gVGhlIHZpZGVvIHBsYXlz
+LCBDUFUgbG9hZCBpcyBsZXNzIChteSBhaW0pLCBidXQgdGhlcmUncyDigJh0ZWFyaW5n4oCZIG9m
+Cj4gPiB0aGUgcGljdHVyZSBhcyBpZiBzbWFsbCByZWN0YW5nbGVzIHRoYXQgYXJlIHVwZGF0ZXMg
+YXJlIGFwcGVhcmluZyBpbgo+ID4gdGhlIHdyb25nIGxvY2F0aW9uLCBvZmYgYnkgYSBsaXR0bGUu
+ICBJZiBJIHN0ZXAgdGhyb3VnaCB0aGUgZnJhbWVzCj4gPiB3aXRoIG1wdidzIOKAmC7igJkgYW5k
+IOKAmCzigJkgdGhlbiBJJ3ZlIGZvdW5kIGEgcGF0dGVybjogb25lIGZyYW1lJ3MKPiA+IHBpY3R1
+cmUgaXMgZ29vZCwgZm9sbG93ZWQgYnkgTiBiYWQgb25lcyB3aGVyZSBOIGlzIDMgb3IgNywgaS5l
+Lgo+ID4gZXZlcnkgNHRoIG9yIDh0aCBmcmFtZSBpcyBva2F5LiAgRG9uJ3Qga25vdyBpZiB0aGF0
+J3MgYSBjbHVlIG9yCj4gPiBoZWxwcyBzb21lb25lIGhlcmUgcmVjb2duaXNlIGEga25vd24gcHJv
+YmxlbS4KPgo+IFVuZm9ydHVuYXRlbHkgSSd2ZSBuZXZlciB0cmFja2VkIGRvd24gdGhlIGNhdXNl
+IGZvciB0aGlzLgo+IGh0dHBzOi8vbm91dmVhdS5mcmVlZGVza3RvcC5vcmcvd2lraS9WaWRlb0Fj
+Y2VsZXJhdGlvbi8gLSBzZWUgbm90ZSAjNC4KClRoYXQgc291bmRzIGxpa2UgdGhlIHByb2JsZW0s
+IGJ1dCBpdCBpcyBhbGwgdGhlIHdheSB0aHJvdWdoIFRWIHByb2dyYW1tZQpmcm9tIHRoZSBCQkMg
+aVBsYXllcidzIHNlcnZpY2UuCgo+IEkgaGF2ZSwgb3ZlciB0aW1lLCBjb2xsZWN0ZWQgc29tZSBz
+YW1wbGUgdmlkZW9zIHdoZXJlIHRoaXMgaGFwcGVucyBpbgo+IHRoZSBmaXJzdCBmZXcgZnJhbWVz
+LiBUaGUgcGxhbiB3YXMgdG8gZG8gbW10IHRyYWNlcyBvZiB0aGUgYmxvYgo+IGRyaXZlciwgYW5k
+IGZpZ3VyZSBvdXQgd2hhdCBpdCB3YXMgZG9pbmcgZGlmZmVyZW50bHkuIElmIHRoaXMgaXMKPiBz
+b21ldGhpbmcgeW91J3JlIGludGVyZXN0ZWQgaW4sIEknZCBiZSBoYXBweSB0byBwcm92aWRlIHNv
+bWUgZ3VpZGFuY2UuCgpJJ3ZlIHR3byBtbWlvIHRyYWNlcywgbm91dmVhdSBhbmQgbnZpZGlhLCBl
+YWNoIHVzaW5nIG1wdigxKSB0byBwbGF5IHRoZQpzYW1lIHRlbi1zZWNvbmQgZXh0cmFjdCBvZiBh
+biBpUGxheWVyIE1QNCwgd2l0aCBhbmQgd2l0aG91dCDigJgtLXZvPXZkcGF1Ci0taHdkZWM9dmRw
+YXXigJkuCgogICAgJCBncmVwIC1uIF5NQVJLIG52aWRpYS00Lm1taW90cmFjZQogICAgMjA6TUFS
+SyA2NTY0NS4zMDI5MzkgYnVmZmVyX3NpemVfa2I6IDUyNDI4OAogICAgMjE6TUFSSyA2NTY0NS4z
+ODU3NzYgc3RhcnRpbmcgeAogICAgMTQ0NzU1NDpNQVJLIDY1NjgxLjk3OTg5MiB4IHN0YXJ0ZWQK
+ICAgIDE0NDg1NjA6TUFSSyA2NTY4Mi40NDY3NDcgbXB2IG5vbmUgc3RhcnQKICAgIDE4NjgxOTc6
+TUFSSyA2NTcwMS4xNTM3NzAgbXB2IG5vbmUgZG9uZQogICAgMTg2OTQ2MjpNQVJLIDY1NzAyLjc0
+ODAwNSBtcHYgdm8gc3RhcnQKICAgIDI2MzM3Mjk6TUFSSyA2NTcyNC40NjUxNTQgbXB2IHZvIGRv
+bmUKICAgIDI2MzQ5NTY6TUFSSyA2NTcyNi4yNTk4MjkgbXB2IHZvIGh3ZGVjIHN0YXJ0CiAgICA1
+MzQ3NTIwOk1BUksgNjU3NTkuODQxNDMyIG1wdiB2byBod2RlYyBkb25lCiAgICA1MzQ5MDE5Ok1B
+UksgNjU3NjIuNDMxMTM3IGtpbGxpbmcgY2F0CiAgICAkCgpod2RlYyBvbiBudmlkaWEgZWFzaWx5
+IG92ZXJmbG93ZWQgdGhlIGRlZmF1bHQgMSw0MDjCoEtpQiB0cmFjZSBidWZmZXIsCndoZXJlYXMg
+bm91dmVhdSBkaWRuJ3QuCgpBcmUgdGhlc2UgaGVscGZ1bD8gIFNoYWxsIEkgc3VibWl0IHRoZW0g
+dG8gdGhlIEdtYWlsIGFkZHJlc3MgZ2l2ZW4gaW4KaHR0cHM6Ly9ub3V2ZWF1LmZyZWVkZXNrdG9w
+Lm9yZy93aWtpL01taW9UcmFjZS8KCi0tIApDaGVlcnMsIFJhbHBoLgpfX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpOb3V2ZWF1IG1haWxpbmcgbGlzdApOb3V2
+ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9t
+YWlsbWFuL2xpc3RpbmZvL25vdXZlYXU=
