@@ -1,37 +1,45 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id E164796E1C
-	for <lists+nouveau@lfdr.de>; Wed, 21 Aug 2019 02:17:09 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id DCDAC9712E
+	for <lists+nouveau@lfdr.de>; Wed, 21 Aug 2019 06:37:00 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1EB0C6E8F4;
-	Wed, 21 Aug 2019 00:17:08 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E79BE6E8F9;
+	Wed, 21 Aug 2019 04:36:58 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 17D686E8EE;
- Wed, 21 Aug 2019 00:17:07 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
- [10.5.11.12])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id 61D37308427D;
- Wed, 21 Aug 2019 00:17:06 +0000 (UTC)
-Received: from malachite.bss.redhat.com (dhcp-10-20-1-11.bss.redhat.com
- [10.20.1.11])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 74B8460BF3;
- Wed, 21 Aug 2019 00:17:02 +0000 (UTC)
-From: Lyude Paul <lyude@redhat.com>
-To: dri-devel@lists.freedesktop.org,
-	nouveau@lists.freedesktop.org
-Date: Tue, 20 Aug 2019 20:16:55 -0400
-Message-Id: <20190821001656.32577-1-lyude@redhat.com>
+Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
+ [131.252.210.165])
+ by gabe.freedesktop.org (Postfix) with ESMTP id E05C66E8F9
+ for <nouveau@lists.freedesktop.org>; Wed, 21 Aug 2019 04:36:56 +0000 (UTC)
+Received: by culpepper.freedesktop.org (Postfix, from userid 33)
+ id DD6BE72161; Wed, 21 Aug 2019 04:36:56 +0000 (UTC)
+From: bugzilla-daemon@freedesktop.org
+To: nouveau@lists.freedesktop.org
+Date: Wed, 21 Aug 2019 04:36:57 +0000
+X-Bugzilla-Reason: AssignedTo QAcontact
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: None
+X-Bugzilla-Product: Mesa
+X-Bugzilla-Component: Drivers/DRI/nouveau
+X-Bugzilla-Version: 19.1
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: normal
+X-Bugzilla-Who: imirkin@alum.mit.edu
+X-Bugzilla-Status: RESOLVED
+X-Bugzilla-Resolution: FIXED
+X-Bugzilla-Priority: medium
+X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: bug_status resolution
+Message-ID: <bug-111213-8800-c98b8OrmyD@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-111213-8800@http.bugs.freedesktop.org/>
+References: <bug-111213-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.40]); Wed, 21 Aug 2019 00:17:06 +0000 (UTC)
-Subject: [Nouveau] [PATCH v2] drm: Bump encoder limit from 32 to 64
+Subject: [Nouveau] [Bug 111213] VA-API nouveau SIGSEGV and asserts
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -43,125 +51,193 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Maxime Ripard <maxime.ripard@bootlin.com>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- linux-kernel@vger.kernel.org, David Airlie <airlied@linux.ie>,
- Daniel Vetter <daniel@ffwll.ch>, Sean Paul <sean@poorly.run>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1073307808=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-QXNzdW1pbmcgdGhhdCBHUFVzIHdvdWxkIG5ldmVyIGhhdmUgZXZlbiBjbG9zZSB0byAzMiBzZXBh
-cmF0ZSB2aWRlbwplbmNvZGVycyBpcyBxdWl0ZSBob25lc3RseSBhIHByZXR0eSByZWFzb25hYmxl
-IGFzc3VtcHRpb24uIFVuZm9ydHVuYXRlbHkKd2UgZG8gbm90IGxpdmUgaW4gYSByZWFzb25hYmxl
-IHdvcmxkLCBhcyBpdCBsb29rcyBsaWtlIGl0IGlzIGFjdHVhbGx5CnBvc3NpYmxlIHRvIGZpbmQg
-ZGV2aWNlcyB0aGF0IHdpbGwgY3JlYXRlIG1vcmUgZHJtX2VuY29kZXIgb2JqZWN0cyB0aGVuCnRo
-aXMuIENhc2UgaW4gcG9pbnQ6IHRoZSBUaGlua1BhZCBQNzEncyBkaXNjcmV0ZSBHUFUsIHdoaWNo
-IGV4cG9zZXMgMQplRFAgcG9ydCBhbmQgNSBEUCBwb3J0cy4gT24gdGhlIFA3MSwgbm91dmVhdSBh
-dHRlbXB0cyB0byBjcmVhdGUgb25lCmVuY29kZXIgZm9yIHRoZSBlRFAgcG9ydCwgYW5kIHR3byBl
-bmNvZGVycyBmb3IgZWFjaCBEUCsrL1VTQi1DIHBvcnQKYWxvbmcgd2l0aCA0IE1TVCBlbmNvZGVy
-cyBmb3IgZWFjaCBEUCBwb3J0LiBUaGlzIGNvbWVzIG91dCB0byAzNQpkaWZmZXJlbnQgZW5jb2Rl
-cnMuIFVuZm9ydHVuYXRlbHksIHRoaXMgY2FuJ3QgcmVhbGx5IGJlIG9wdGltaXplZCB0bwptYWtl
-IGxlc3MgZW5jb2RlcnMgZWl0aGVyLgoKU28sIHdoYXQgaWYgd2UgYnVtcGVkIHRoZSBsaW1pdCB0
-byA2ND8gVW5mb3J0dW5hdGVseSB0aGlzIGhhcyBvbmUgdmVyeQphd2t3YXJkIGRyYXdiYWNrOiB3
-ZSBhbHJlYWR5IGV4cG9zZSAzMi1iaXQgYml0bWFza3MgZm9yIGVuY29kZXJzIHRvCnVzZXJzcGFj
-ZSBpbiBkcm1fZW5jb2Rlci0+cG9zc2libGVfY2xvbmVzLiBZaWtlcy4gV2hpbGUgY2xvbmluZyBp
-cyBzdGlsbAoocmFyZWx5KSB1c2VkIGluIGNlcnRhaW4gbW9kZXJuIHZpZGVvIGhhcmR3YXJlLCBp
-dCdzIG1vc3RseSB1c2VkIGluCnNpdHVhdGlvbnMgd2hlcmUgbWVtb3J5IGJhbmR3aWR0aCBpcyBz
-byBsaW1pdGVkIHRoYXQgaXQncyBub3QgcG9zc2libGUKdG8gc2NhbiBvdXQgZnJvbSAyIENSVENz
-IGF0IG9uY2UuCgpTbywgbGV0J3MgdHJ5IHRvIGNvbXByb21pc2UgaGVyZTogYWxsb3cgZW5jb2Rl
-cnMgd2l0aCBpbmRleGVzIDwzMiB0bwpoYXZlIG5vbi16ZXJvIHZhbHVlcyBpbiBkcm1fZW5jb2Rl
-ci0+cG9zc2libGVfY2xvbmVzLCBhbmQgZG9uJ3QgYWxsb3cKZW5jb2RlcnMgd2l0aCBoaWdoZXIg
-aW5kZXhlcyB0byBzZXQgZHJtX2VuY29kZXItPnBvc3NpYmxlX2Nsb25lcyB0byBhCm5vbi16ZXJv
-IHZhbHVlLiBUaGlzIGFsbG93cyB1cyB0byBhdm9pZCBicmVha2luZyBVQVBJIGFuZCBrZWVwIHRo
-aW5ncwp3b3JraW5nIHNhbmVseSBmb3IgaGFyZHdhcmUgd2hpY2ggc3RpbGwgdXNlcyBjbG9uaW5n
-LCB3aGlsZSBzdGlsbCBiZWluZwphYmxlIHRvIGJ1bXAgdXAgdGhlIGVuY29kZXIgbGltaXQuCgpU
-aGlzIGFsc28gZml4ZXMgZHJpdmVyIHByb2JpbmcgZm9yIG5vdXZlYXUgb24gdGhlIFRoaW5rUGFk
-IFA3MS4KCkNoYW5nZXMgc2luY2UgdjE6CiogTW92ZSBpbmRleCtwb3NzaWJsZV9jbG9uZXMgY2hl
-Y2sgb3V0IG9mIGRybV9lbmNvZGVyX2luaXQoKSBhbmQgaW50bwogIGRybV9lbmNvZGVyX3JlZ2lz
-dGVyX2FsbCgpLCBzaW5jZSBlbmNvZGVyLT5wb3NzaWJsZV9jbG9uZXMgY2FuIGdldAogIGNoYW5n
-ZWQgYW55IHRpbWUgYmVmb3JlIHJlZ2lzdHJhdGlvbiAtIERhbmllbCBWZXR0ZXIKKiBVcGRhdGUg
-dGhlIGNvbW1pdCBtZXNzYWdlIGEgYml0IHRvIGFjY3VyYXRlbHkgcmVmbGVjdCBtb2Rlcm4gZGF5
-IHVzYWdlCiAgb2YgaGFyZHdhcmUgY2xvbmluZywgd2hpY2ggYXMgRGFuaWVsIFN0b25lIHBvaW50
-ZWQgb3V0IGlzIGFwcGFyZW50bHkgYQogIHRoaW5nCgpTaWduZWQtb2ZmLWJ5OiBMeXVkZSBQYXVs
-IDxseXVkZUByZWRoYXQuY29tPgpDYzogbm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKLS0t
-CiBkcml2ZXJzL2dwdS9kcm0vZHJtX2F0b21pYy5jICB8ICAyICstCiBkcml2ZXJzL2dwdS9kcm0v
-ZHJtX2VuY29kZXIuYyB8IDEyICsrKysrKysrKystLQogaW5jbHVkZS9kcm0vZHJtX2NydGMuaCAg
-ICAgICAgfCAgMiArLQogaW5jbHVkZS9kcm0vZHJtX2VuY29kZXIuaCAgICAgfCAyMCArKysrKysr
-KysrKysrKystLS0tLQogNCBmaWxlcyBjaGFuZ2VkLCAyNyBpbnNlcnRpb25zKCspLCA5IGRlbGV0
-aW9ucygtKQoKZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9kcm1fYXRvbWljLmMgYi9kcml2
-ZXJzL2dwdS9kcm0vZHJtX2F0b21pYy5jCmluZGV4IDQxOTM4MWFiYmRkMS4uMjdjZTk4OGVmMGNj
-IDEwMDY0NAotLS0gYS9kcml2ZXJzL2dwdS9kcm0vZHJtX2F0b21pYy5jCisrKyBiL2RyaXZlcnMv
-Z3B1L2RybS9kcm1fYXRvbWljLmMKQEAgLTM5Miw3ICszOTIsNyBAQCBzdGF0aWMgdm9pZCBkcm1f
-YXRvbWljX2NydGNfcHJpbnRfc3RhdGUoc3RydWN0IGRybV9wcmludGVyICpwLAogCWRybV9wcmlu
-dGYocCwgIlx0Y29sb3JfbWdtdF9jaGFuZ2VkPSVkXG4iLCBzdGF0ZS0+Y29sb3JfbWdtdF9jaGFu
-Z2VkKTsKIAlkcm1fcHJpbnRmKHAsICJcdHBsYW5lX21hc2s9JXhcbiIsIHN0YXRlLT5wbGFuZV9t
-YXNrKTsKIAlkcm1fcHJpbnRmKHAsICJcdGNvbm5lY3Rvcl9tYXNrPSV4XG4iLCBzdGF0ZS0+Y29u
-bmVjdG9yX21hc2spOwotCWRybV9wcmludGYocCwgIlx0ZW5jb2Rlcl9tYXNrPSV4XG4iLCBzdGF0
-ZS0+ZW5jb2Rlcl9tYXNrKTsKKwlkcm1fcHJpbnRmKHAsICJcdGVuY29kZXJfbWFzaz0lbGx4XG4i
-LCBzdGF0ZS0+ZW5jb2Rlcl9tYXNrKTsKIAlkcm1fcHJpbnRmKHAsICJcdG1vZGU6ICIgRFJNX01P
-REVfRk1UICJcbiIsIERSTV9NT0RFX0FSRygmc3RhdGUtPm1vZGUpKTsKIAogCWlmIChjcnRjLT5m
-dW5jcy0+YXRvbWljX3ByaW50X3N0YXRlKQpkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL2Ry
-bV9lbmNvZGVyLmMgYi9kcml2ZXJzL2dwdS9kcm0vZHJtX2VuY29kZXIuYwppbmRleCA3ZmI0N2I3
-YjhiNDQuLjlkNDQzYjQ1ZWJiYSAxMDA2NDQKLS0tIGEvZHJpdmVycy9ncHUvZHJtL2RybV9lbmNv
-ZGVyLmMKKysrIGIvZHJpdmVycy9ncHUvZHJtL2RybV9lbmNvZGVyLmMKQEAgLTcxLDYgKzcxLDE0
-IEBAIGludCBkcm1fZW5jb2Rlcl9yZWdpc3Rlcl9hbGwoc3RydWN0IGRybV9kZXZpY2UgKmRldikK
-IAlpbnQgcmV0ID0gMDsKIAogCWRybV9mb3JfZWFjaF9lbmNvZGVyKGVuY29kZXIsIGRldikgewor
-CQkvKgorCQkgKiBTaW5jZSBwb3NzaWJsZV9jbG9uZXMgaGFzIGJlZW4gZXhwb3NlZCB0byB1c2Vy
-c3BhY2UgYXMgYQorCQkgKiAzMmJpdCBiaXRtYXNrLCB3ZSBkb24ndCBhbGxvdyBjcmVhdGluZyBl
-bmNvZGVycyB3aXRoIGFuCisJCSAqIGluZGV4ID49MzIgd2hpY2ggYXJlIGNhcGFibGUgb2YgY2xv
-bmluZworCQkgKi8KKwkJaWYgKFdBUk5fT04oZW5jb2Rlci0+aW5kZXggPj0gMzIgJiYgZW5jb2Rl
-ci0+cG9zc2libGVfY2xvbmVzKSkKKwkJCXJldHVybiAtRUlOVkFMOworCiAJCWlmIChlbmNvZGVy
-LT5mdW5jcy0+bGF0ZV9yZWdpc3RlcikKIAkJCXJldCA9IGVuY29kZXItPmZ1bmNzLT5sYXRlX3Jl
-Z2lzdGVyKGVuY29kZXIpOwogCQlpZiAocmV0KQpAQCAtMTEyLDggKzEyMCw4IEBAIGludCBkcm1f
-ZW5jb2Rlcl9pbml0KHN0cnVjdCBkcm1fZGV2aWNlICpkZXYsCiB7CiAJaW50IHJldDsKIAotCS8q
-IGVuY29kZXIgaW5kZXggaXMgdXNlZCB3aXRoIDMyYml0IGJpdG1hc2tzICovCi0JaWYgKFdBUk5f
-T04oZGV2LT5tb2RlX2NvbmZpZy5udW1fZW5jb2RlciA+PSAzMikpCisJLyogZW5jb2RlciBpbmRl
-eCBpcyB1c2VkIHdpdGggNjRiaXQgYml0bWFza3MgKi8KKwlpZiAoV0FSTl9PTihkZXYtPm1vZGVf
-Y29uZmlnLm51bV9lbmNvZGVyID49IDY0KSkKIAkJcmV0dXJuIC1FSU5WQUw7CiAKIAlyZXQgPSBk
-cm1fbW9kZV9vYmplY3RfYWRkKGRldiwgJmVuY29kZXItPmJhc2UsIERSTV9NT0RFX09CSkVDVF9F
-TkNPREVSKTsKZGlmZiAtLWdpdCBhL2luY2x1ZGUvZHJtL2RybV9jcnRjLmggYi9pbmNsdWRlL2Ry
-bS9kcm1fY3J0Yy5oCmluZGV4IDdkMTRjMTFiZGMwYS4uZmQwYjI0MzhjM2Q1IDEwMDY0NAotLS0g
-YS9pbmNsdWRlL2RybS9kcm1fY3J0Yy5oCisrKyBiL2luY2x1ZGUvZHJtL2RybV9jcnRjLmgKQEAg
-LTIxMCw3ICsyMTAsNyBAQCBzdHJ1Y3QgZHJtX2NydGNfc3RhdGUgewogCSAqIEBlbmNvZGVyX21h
-c2s6IEJpdG1hc2sgb2YgZHJtX2VuY29kZXJfbWFzayhlbmNvZGVyKSBvZiBlbmNvZGVycwogCSAq
-IGF0dGFjaGVkIHRvIHRoaXMgQ1JUQy4KIAkgKi8KLQl1MzIgZW5jb2Rlcl9tYXNrOworCXU2NCBl
-bmNvZGVyX21hc2s7CiAKIAkvKioKIAkgKiBAYWRqdXN0ZWRfbW9kZToKZGlmZiAtLWdpdCBhL2lu
-Y2x1ZGUvZHJtL2RybV9lbmNvZGVyLmggYi9pbmNsdWRlL2RybS9kcm1fZW5jb2Rlci5oCmluZGV4
-IDcwY2ZjYTAzZDgxMi4uM2Y5Y2I2NTY5NGUxIDEwMDY0NAotLS0gYS9pbmNsdWRlL2RybS9kcm1f
-ZW5jb2Rlci5oCisrKyBiL2luY2x1ZGUvZHJtL2RybV9lbmNvZGVyLmgKQEAgLTE1OSw3ICsxNTks
-MTUgQEAgc3RydWN0IGRybV9lbmNvZGVyIHsKIAkgKiBlbmNvZGVycyBjYW4gYmUgdXNlZCBpbiBh
-IGNsb25lZCBjb25maWd1cmF0aW9uLCB0aGV5IGJvdGggc2hvdWxkIGhhdmUKIAkgKiBlYWNoIGFu
-b3RoZXIgYml0cyBzZXQuCiAJICoKLQkgKiBJbiByZWFsaXR5IGFsbW9zdCBldmVyeSBkcml2ZXIg
-Z2V0cyB0aGlzIHdyb25nLgorCSAqIEluIHJlYWxpdHkgYWxtb3N0IGV2ZXJ5IGRyaXZlciBnZXRz
-IHRoaXMgd3JvbmcsIGFuZCBtb3N0IG1vZGVybgorCSAqIGRpc3BsYXkgaGFyZHdhcmUgZG9lcyBu
-b3QgaGF2ZSBzdXBwb3J0IGZvciBjbG9uaW5nLiBBcyB3ZWxsLCB3aGlsZSB3ZQorCSAqIGV4cG9z
-ZSB0aGlzIG1hc2sgdG8gdXNlcnNwYWNlIGFzIDMyYml0cyBsb25nLCB3ZSBkbyBzdXJlIHB1cmVs
-eSB0bworCSAqIGF2b2lkIGJyZWFraW5nIHByZS1leGlzdGluZyBVQVBJIHNpbmNlIHRoZSBsaW1p
-dGF0aW9uIG9uIHRoZSBudW1iZXIKKwkgKiBvZiBlbmNvZGVycyBoYXMgYmVlbiBpbmNyZWFzZWQg
-ZnJvbSAzMiBiaXRzIHRvIDY0IGJpdHMuIEluIG9yZGVyIHRvCisJICogbWFpbnRhaW4gZnVuY3Rp
-b25hbGl0eSBmb3IgZHJpdmVycyB3aGljaCBkbyBhY3R1YWxseSBzdXBwb3J0IGNsb25pbmcsCisJ
-ICogd2Ugb25seSBhbGxvdyBjbG9uaW5nIHdpdGggZW5jb2RlcnMgdGhhdCBoYXZlIGFuIGluZGV4
-IDwzMi4gRW5jb2RlcnMKKwkgKiB3aXRoIGluZGV4ZXMgaGlnaGVyIHRoYW4gMzIgYXJlIG5vdCBh
-bGxvd2VkIHRvIHNwZWNpZnkgYSBub24temVybworCSAqIHZhbHVlIGhlcmUuCiAJICoKIAkgKiBO
-b3RlIHRoYXQgc2luY2UgZW5jb2RlciBvYmplY3RzIGNhbid0IGJlIGhvdHBsdWdnZWQgdGhlIGFz
-c2lnbmVkIGluZGljZXMKIAkgKiBhcmUgc3RhYmxlIGFuZCBoZW5jZSBrbm93biBiZWZvcmUgcmVn
-aXN0ZXJpbmcgYWxsIG9iamVjdHMuCkBAIC0xOTgsMTMgKzIwNiwxNSBAQCBzdGF0aWMgaW5saW5l
-IHVuc2lnbmVkIGludCBkcm1fZW5jb2Rlcl9pbmRleChjb25zdCBzdHJ1Y3QgZHJtX2VuY29kZXIg
-KmVuY29kZXIpCiB9CiAKIC8qKgotICogZHJtX2VuY29kZXJfbWFzayAtIGZpbmQgdGhlIG1hc2sg
-b2YgYSByZWdpc3RlcmVkIEVOQ09ERVIKKyAqIGRybV9lbmNvZGVyX21hc2sgLSBmaW5kIHRoZSBt
-YXNrIG9mIGEgcmVnaXN0ZXJlZCBlbmNvZGVyCiAgKiBAZW5jb2RlcjogZW5jb2RlciB0byBmaW5k
-IG1hc2sgZm9yCiAgKgotICogR2l2ZW4gYSByZWdpc3RlcmVkIGVuY29kZXIsIHJldHVybiB0aGUg
-bWFzayBiaXQgb2YgdGhhdCBlbmNvZGVyIGZvciBhbgotICogZW5jb2RlcidzIHBvc3NpYmxlX2Ns
-b25lcyBmaWVsZC4KKyAqIFJldHVybnM6CisgKiBBIGJpdCBtYXNrIHdpdGggdGhlIG50aCBiaXQg
-c2V0LCB3aGVyZSBuIGlzIHRoZSBpbmRleCBvZiB0aGUgZW5jb2Rlci4gVGFrZQorICogY2FyZSB3
-aGVuIHVzaW5nIHRoaXMsIGFzIHRoZSBEUk0gVUFQSSBvbmx5IGFsbG93cyBmb3IgMzIgYml0IGVu
-Y29kZXIgbWFza3MKKyAqIHdoaWxlIGludGVybmFsbHkgZW5jb2RlciBtYXNrcyBhcmUgNjQgYml0
-cy4KICAqLwotc3RhdGljIGlubGluZSB1MzIgZHJtX2VuY29kZXJfbWFzayhjb25zdCBzdHJ1Y3Qg
-ZHJtX2VuY29kZXIgKmVuY29kZXIpCitzdGF0aWMgaW5saW5lIHU2NCBkcm1fZW5jb2Rlcl9tYXNr
-KGNvbnN0IHN0cnVjdCBkcm1fZW5jb2RlciAqZW5jb2RlcikKIHsKIAlyZXR1cm4gMSA8PCBkcm1f
-ZW5jb2Rlcl9pbmRleChlbmNvZGVyKTsKIH0KLS0gCjIuMjEuMAoKX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBtYWlsaW5nIGxpc3QKTm91dmVh
-dUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFp
-bG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============1073307808==
+Content-Type: multipart/alternative; boundary="15663622162.3c3374E.4373"
+Content-Transfer-Encoding: 7bit
+
+
+--15663622162.3c3374E.4373
+Date: Wed, 21 Aug 2019 04:36:56 +0000
+MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+https://bugs.freedesktop.org/show_bug.cgi?id=3D111213
+
+Ilia Mirkin <imirkin@alum.mit.edu> changed:
+
+           What    |Removed                     |Added
+----------------------------------------------------------------------------
+             Status|NEW                         |RESOLVED
+         Resolution|---                         |FIXED
+
+--- Comment #18 from Ilia Mirkin <imirkin@alum.mit.edu> ---
+I've pushed a change to mesa which disables the compute paths for the video
+compositor on nouveau (well, basically just enabled for AMD). Unfortunately=
+ it
+was relying on AMD-specific features. We probably could have implemented th=
+ese,
+but the benefits are dubious, so I didn't want to bother...
+
+This also seems to fix the assertion in libdrm, which is probably triggerab=
+le
+in more general ways, but oh well.
+
+https://cgit.freedesktop.org/mesa/mesa/commit/?id=3D958390a9bf8904522a50f8e=
+9c26c50c96179c183
+
+commit 958390a9bf8904522a50f8e9c26c50c96179c183
+Author: Ilia Mirkin <imirkin@alum.mit.edu>
+Date:   Sat Aug 17 12:13:34 2019 -0400
+
+    gallium/vl: use compute preference for all multimedia, not just blit
+
+    The compute paths in vl are a bit AMD-specific. For example, they (on
+    nouveau), try to use a BGRX8 image format, which is not supported.
+    Fixing all this is probably possible, but since the compute paths aren't
+    in any way better, it's difficult to care.
+
+    Bugzilla: https://bugs.freedesktop.org/show_bug.cgi?id=3D111213
+    Fixes: 9364d66cb7 (gallium/auxiliary/vl: Add video compositor compute
+shader render)
+    Signed-off-by: Ilia Mirkin <imirkin@alum.mit.edu>
+    Reviewed-by: Marek Ol<C5><A1><C3><A1>k <marek.olsak@amd.com>
+
+--=20
+You are receiving this mail because:
+You are the assignee for the bug.
+You are the QA Contact for the bug.=
+
+--15663622162.3c3374E.4373
+Date: Wed, 21 Aug 2019 04:36:56 +0000
+MIME-Version: 1.0
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+<html>
+    <head>
+      <base href=3D"https://bugs.freedesktop.org/">
+    </head>
+    <body><span class=3D"vcard"><a class=3D"email" href=3D"mailto:imirkin&#=
+64;alum.mit.edu" title=3D"Ilia Mirkin &lt;imirkin&#64;alum.mit.edu&gt;"> <s=
+pan class=3D"fn">Ilia Mirkin</span></a>
+</span> changed
+          <a class=3D"bz_bug_link=20
+          bz_status_RESOLVED  bz_closed"
+   title=3D"RESOLVED FIXED - VA-API nouveau SIGSEGV and asserts"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111213">bug 11121=
+3</a>
+          <br>
+             <table border=3D"1" cellspacing=3D"0" cellpadding=3D"8">
+          <tr>
+            <th>What</th>
+            <th>Removed</th>
+            <th>Added</th>
+          </tr>
+
+         <tr>
+           <td style=3D"text-align:right;">Status</td>
+           <td>NEW
+           </td>
+           <td>RESOLVED
+           </td>
+         </tr>
+
+         <tr>
+           <td style=3D"text-align:right;">Resolution</td>
+           <td>---
+           </td>
+           <td>FIXED
+           </td>
+         </tr></table>
+      <p>
+        <div>
+            <b><a class=3D"bz_bug_link=20
+          bz_status_RESOLVED  bz_closed"
+   title=3D"RESOLVED FIXED - VA-API nouveau SIGSEGV and asserts"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111213#c18">Comme=
+nt # 18</a>
+              on <a class=3D"bz_bug_link=20
+          bz_status_RESOLVED  bz_closed"
+   title=3D"RESOLVED FIXED - VA-API nouveau SIGSEGV and asserts"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111213">bug 11121=
+3</a>
+              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
+imirkin&#64;alum.mit.edu" title=3D"Ilia Mirkin &lt;imirkin&#64;alum.mit.edu=
+&gt;"> <span class=3D"fn">Ilia Mirkin</span></a>
+</span></b>
+        <pre>I've pushed a change to mesa which disables the compute paths =
+for the video
+compositor on nouveau (well, basically just enabled for AMD). Unfortunately=
+ it
+was relying on AMD-specific features. We probably could have implemented th=
+ese,
+but the benefits are dubious, so I didn't want to bother...
+
+This also seems to fix the assertion in libdrm, which is probably triggerab=
+le
+in more general ways, but oh well.
+
+<a href=3D"https://cgit.freedesktop.org/mesa/mesa/commit/?id=3D958390a9bf89=
+04522a50f8e9c26c50c96179c183">https://cgit.freedesktop.org/mesa/mesa/commit=
+/?id=3D958390a9bf8904522a50f8e9c26c50c96179c183</a>
+
+commit 958390a9bf8904522a50f8e9c26c50c96179c183
+Author: Ilia Mirkin &lt;<a href=3D"mailto:imirkin&#64;alum.mit.edu">imirkin=
+&#64;alum.mit.edu</a>&gt;
+Date:   Sat Aug 17 12:13:34 2019 -0400
+
+    gallium/vl: use compute preference for all multimedia, not just blit
+
+    The compute paths in vl are a bit AMD-specific. For example, they (on
+    nouveau), try to use a BGRX8 image format, which is not supported.
+    Fixing all this is probably possible, but since the compute paths aren't
+    in any way better, it's difficult to care.
+
+    Bugzilla: <a class=3D"bz_bug_link=20
+          bz_status_RESOLVED  bz_closed"
+   title=3D"RESOLVED FIXED - VA-API nouveau SIGSEGV and asserts"
+   href=3D"show_bug.cgi?id=3D111213">https://bugs.freedesktop.org/show_bug.=
+cgi?id=3D111213</a>
+    Fixes: 9364d66cb7 (gallium/auxiliary/vl: Add video compositor compute
+shader render)
+    Signed-off-by: Ilia Mirkin &lt;<a href=3D"mailto:imirkin&#64;alum.mit.e=
+du">imirkin&#64;alum.mit.edu</a>&gt;
+    Reviewed-by: Marek Ol&lt;C5&gt;&lt;A1&gt;&lt;C3&gt;&lt;A1&gt;k &lt;<a h=
+ref=3D"mailto:marek.olsak&#64;amd.com">marek.olsak&#64;amd.com</a>&gt;</pre>
+        </div>
+      </p>
+
+
+      <hr>
+      <span>You are receiving this mail because:</span>
+
+      <ul>
+          <li>You are the assignee for the bug.</li>
+          <li>You are the QA Contact for the bug.</li>
+      </ul>
+    </body>
+</html>=
+
+--15663622162.3c3374E.4373--
+
+--===============1073307808==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
+YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
+cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============1073307808==--
