@@ -1,59 +1,45 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3B010986D7
-	for <lists+nouveau@lfdr.de>; Wed, 21 Aug 2019 23:50:46 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7F2B298F59
+	for <lists+nouveau@lfdr.de>; Thu, 22 Aug 2019 11:29:38 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 79F016E3AC;
-	Wed, 21 Aug 2019 21:50:43 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 761F78953E;
+	Thu, 22 Aug 2019 09:29:36 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ed1-x544.google.com (mail-ed1-x544.google.com
- [IPv6:2a00:1450:4864:20::544])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 651036E39B
- for <nouveau@lists.freedesktop.org>; Wed, 21 Aug 2019 21:50:42 +0000 (UTC)
-Received: by mail-ed1-x544.google.com with SMTP id h8so4758742edv.7
- for <nouveau@lists.freedesktop.org>; Wed, 21 Aug 2019 14:50:42 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=+NnT7rdcLBHfJIM6soidEUbQ1i6QnhI2MH2x44UYcKQ=;
- b=nSwKB+tsMC0DEg96qydukcjkqSnTYMfQlE+2ES9Oe/RkV5kaooCI+rBIw1nkf7RzBz
- BNYussmKjyOv1kG8+APNpJDWN8avcKnFKv24so02Ciq5m9k0R1CQZJ9qsOOvbGO32GIl
- iXb0fsM8okJBM6e6qCSLpIA7m316RgnhU58WI0iEPeEVCYqwvzJ7O/Rpkh9le47ElyJD
- eEgmUj8xO8AN1Vkz+hG6nk7hz4xg1sljQf81R5YxZpbM/3CH10Dc8u6a86wb1rGd6y1Y
- Q7lbrtnke2ElQhgGG/4oKpN9IqolVX4xVUm3e1ctyZARBVeIpJZILkDiE/ngpy/o+yjQ
- n/lQ==
-X-Gm-Message-State: APjAAAXq7Cj2Pgx905oo0ndcXqbTc1WXGRs1/KVnDE1dxFHulJDrSMDr
- qVZVbmzFBWcxAJTynCHNaPeiXA==
-X-Google-Smtp-Source: APXvYqz+T3t2A06Ucr1Yn7Q6m/LDgc0amFq62ESyR7pXgHYoBP/LGRHdFR56p1B4OnKFVfaXW4z+UA==
-X-Received: by 2002:a17:906:d298:: with SMTP id
- ay24mr8815062ejb.230.1566424240948; 
- Wed, 21 Aug 2019 14:50:40 -0700 (PDT)
-Received: from phenom.ffwll.local (212-51-149-96.fiber7.init7.net.
- [212.51.149.96])
- by smtp.gmail.com with ESMTPSA id ch24sm3329015ejb.3.2019.08.21.14.50.39
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 21 Aug 2019 14:50:40 -0700 (PDT)
-From: Daniel Vetter <daniel.vetter@ffwll.ch>
-To: DRI Development <dri-devel@lists.freedesktop.org>
-Date: Wed, 21 Aug 2019 23:50:29 +0200
-Message-Id: <20190821215030.31660-2-daniel.vetter@ffwll.ch>
-X-Mailer: git-send-email 2.23.0.rc1
-In-Reply-To: <20190821215030.31660-1-daniel.vetter@ffwll.ch>
-References: <20190821215030.31660-1-daniel.vetter@ffwll.ch>
+Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
+ [131.252.210.165])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 213198951B
+ for <nouveau@lists.freedesktop.org>; Thu, 22 Aug 2019 09:29:35 +0000 (UTC)
+Received: by culpepper.freedesktop.org (Postfix, from userid 33)
+ id 1E45872161; Thu, 22 Aug 2019 09:29:35 +0000 (UTC)
+From: bugzilla-daemon@freedesktop.org
+To: nouveau@lists.freedesktop.org
+Date: Thu, 22 Aug 2019 09:29:35 +0000
+X-Bugzilla-Reason: AssignedTo
+X-Bugzilla-Type: new
+X-Bugzilla-Watch-Reason: None
+X-Bugzilla-Product: xorg
+X-Bugzilla-Component: Driver/nouveau
+X-Bugzilla-Version: unspecified
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: not set
+X-Bugzilla-Who: morpheus2051@web.de
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: not set
+X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: bug_id short_desc product version rep_platform
+ op_sys bug_status bug_severity priority component assigned_to reporter
+ qa_contact attachments.created
+Message-ID: <bug-111463-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ffwll.ch; s=google;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=+NnT7rdcLBHfJIM6soidEUbQ1i6QnhI2MH2x44UYcKQ=;
- b=lSzzY9R9uCsKef626CaY/53sNwHCp3ma8ge5txOld4elHRfRKKh2ZvxQUHzyR+Zpn9
- DmngKzDMYGTpaZBcYwNpAor7W+67jOBz/9UANkeVMQd4i4XeFcPsRWWjLBx1qXCn21dF
- 4nmulzrPTpHrv+VwRLSR5V7yEHQwkMBGZdVO4=
-Subject: [Nouveau] [PATCH 2/3] drm/nouveau: slowpath for pushbuf ioctl
+Subject: [Nouveau] [Bug 111463] New: [NV49] MMIO write FAULT at 00c200
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -65,104 +51,233 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org,
- Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
- Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel.vetter@intel.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1907561302=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-V2UgY2FuJ3QgY29weV8qX3VzZXIgd2hpbGUgaG9sZGluZyByZXNlcnZhdGlvbnMsIHRoYXQgd2ls
-bCAoc29vbiBldmVuCmZvciBub3V2ZWF1KSBsZWFkIHRvIGRlYWRsb2Nrcy4gQW5kIGl0IGJyZWFr
-cyB0aGUgY3Jvc3MtZHJpdmVyCmNvbnRyYWN0IGFyb3VuZCBkbWFfcmVzdi4KCkZpeCB0aGlzIGJ5
-IGFkZGluZyBhIHNsb3dwYXRoIGZvciB3aGVuIHdlIG5lZWQgcmVsb2NhdGlvbnMsIGFuZCBieQpw
-dXNoaW5nIHRoZSB3cml0ZWJhY2sgb2YgdGhlIG5ldyBwcmVzdW1lZCBvZmZzZXRzIHRvIHRoZSB2
-ZXJ5IGVuZC4KCkFzaWRlIGZyb20gIml0IGNvbXBpbGVzIiBlbnRpcmVseSB1bnRlc3RlZCB1bmZv
-cnR1bmF0ZWx5LgoKU2lnbmVkLW9mZi1ieTogRGFuaWVsIFZldHRlciA8ZGFuaWVsLnZldHRlckBp
-bnRlbC5jb20+CkNjOiBCZW4gU2tlZ2dzIDxic2tlZ2dzQHJlZGhhdC5jb20+CkNjOiBub3V2ZWF1
-QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwotLS0KIGRyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZl
-YXVfZ2VtLmMgfCA1NyArKysrKysrKysrKysrKysrKystLS0tLS0tLS0KIDEgZmlsZSBjaGFuZ2Vk
-LCAzOCBpbnNlcnRpb25zKCspLCAxOSBkZWxldGlvbnMoLSkKCmRpZmYgLS1naXQgYS9kcml2ZXJz
-L2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2dlbS5jIGIvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUv
-bm91dmVhdV9nZW0uYwppbmRleCBjNzczMDJmOTY5ZTguLjYwMzA5Yjk5Nzk1MSAxMDA2NDQKLS0t
-IGEvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9nZW0uYworKysgYi9kcml2ZXJzL2dw
-dS9kcm0vbm91dmVhdS9ub3V2ZWF1X2dlbS5jCkBAIC00ODIsMTIgKzQ4Miw5IEBAIHZhbGlkYXRl
-X2luaXQoc3RydWN0IG5vdXZlYXVfY2hhbm5lbCAqY2hhbiwgc3RydWN0IGRybV9maWxlICpmaWxl
-X3ByaXYsCiAKIHN0YXRpYyBpbnQKIHZhbGlkYXRlX2xpc3Qoc3RydWN0IG5vdXZlYXVfY2hhbm5l
-bCAqY2hhbiwgc3RydWN0IG5vdXZlYXVfY2xpICpjbGksCi0JICAgICAgc3RydWN0IGxpc3RfaGVh
-ZCAqbGlzdCwgc3RydWN0IGRybV9ub3V2ZWF1X2dlbV9wdXNoYnVmX2JvICpwYmJvLAotCSAgICAg
-IHVpbnQ2NF90IHVzZXJfcGJib19wdHIpCisJICAgICAgc3RydWN0IGxpc3RfaGVhZCAqbGlzdCwg
-c3RydWN0IGRybV9ub3V2ZWF1X2dlbV9wdXNoYnVmX2JvICpwYmJvKQogewogCXN0cnVjdCBub3V2
-ZWF1X2RybSAqZHJtID0gY2hhbi0+ZHJtOwotCXN0cnVjdCBkcm1fbm91dmVhdV9nZW1fcHVzaGJ1
-Zl9ibyBfX3VzZXIgKnVwYmJvID0KLQkJCQkodm9pZCBfX2ZvcmNlIF9fdXNlciAqKSh1aW50cHRy
-X3QpdXNlcl9wYmJvX3B0cjsKIAlzdHJ1Y3Qgbm91dmVhdV9ibyAqbnZibzsKIAlpbnQgcmV0LCBy
-ZWxvY3MgPSAwOwogCkBAIC01MzEsMTAgKzUyOCw2IEBAIHZhbGlkYXRlX2xpc3Qoc3RydWN0IG5v
-dXZlYXVfY2hhbm5lbCAqY2hhbiwgc3RydWN0IG5vdXZlYXVfY2xpICpjbGksCiAJCQliLT5wcmVz
-dW1lZC5vZmZzZXQgPSBudmJvLT5iby5vZmZzZXQ7CiAJCQliLT5wcmVzdW1lZC52YWxpZCA9IDA7
-CiAJCQlyZWxvY3MrKzsKLQotCQkJaWYgKGNvcHlfdG9fdXNlcigmdXBiYm9bbnZiby0+cGJib19p
-bmRleF0ucHJlc3VtZWQsCi0JCQkJCSAgICAgJmItPnByZXN1bWVkLCBzaXplb2YoYi0+cHJlc3Vt
-ZWQpKSkKLQkJCQlyZXR1cm4gLUVGQVVMVDsKIAkJfQogCX0KIApAQCAtNTQ1LDggKzUzOCw4IEBA
-IHN0YXRpYyBpbnQKIG5vdXZlYXVfZ2VtX3B1c2hidWZfdmFsaWRhdGUoc3RydWN0IG5vdXZlYXVf
-Y2hhbm5lbCAqY2hhbiwKIAkJCSAgICAgc3RydWN0IGRybV9maWxlICpmaWxlX3ByaXYsCiAJCQkg
-ICAgIHN0cnVjdCBkcm1fbm91dmVhdV9nZW1fcHVzaGJ1Zl9ibyAqcGJibywKLQkJCSAgICAgdWlu
-dDY0X3QgdXNlcl9idWZmZXJzLCBpbnQgbnJfYnVmZmVycywKLQkJCSAgICAgc3RydWN0IHZhbGlk
-YXRlX29wICpvcCwgaW50ICphcHBseV9yZWxvY3MpCisJCQkgICAgIGludCBucl9idWZmZXJzLAor
-CQkJICAgICBzdHJ1Y3QgdmFsaWRhdGVfb3AgKm9wLCBib29sICphcHBseV9yZWxvY3MpCiB7CiAJ
-c3RydWN0IG5vdXZlYXVfY2xpICpjbGkgPSBub3V2ZWF1X2NsaShmaWxlX3ByaXYpOwogCWludCBy
-ZXQ7CkBAIC01NjMsNyArNTU2LDcgQEAgbm91dmVhdV9nZW1fcHVzaGJ1Zl92YWxpZGF0ZShzdHJ1
-Y3Qgbm91dmVhdV9jaGFubmVsICpjaGFuLAogCQlyZXR1cm4gcmV0OwogCX0KIAotCXJldCA9IHZh
-bGlkYXRlX2xpc3QoY2hhbiwgY2xpLCAmb3AtPmxpc3QsIHBiYm8sIHVzZXJfYnVmZmVycyk7CisJ
-cmV0ID0gdmFsaWRhdGVfbGlzdChjaGFuLCBjbGksICZvcC0+bGlzdCwgcGJibyk7CiAJaWYgKHVu
-bGlrZWx5KHJldCA8IDApKSB7CiAJCWlmIChyZXQgIT0gLUVSRVNUQVJUU1lTKQogCQkJTlZfUFJJ
-TlRLKGVyciwgY2xpLCAidmFsaWRhdGluZyBibyBsaXN0XG4iKTsKQEAgLTYwMywxNiArNTk2LDEy
-IEBAIHVfbWVtY3B5YSh1aW50NjRfdCB1c2VyLCB1bnNpZ25lZCBubWVtYiwgdW5zaWduZWQgc2l6
-ZSkKIHN0YXRpYyBpbnQKIG5vdXZlYXVfZ2VtX3B1c2hidWZfcmVsb2NfYXBwbHkoc3RydWN0IG5v
-dXZlYXVfY2xpICpjbGksCiAJCQkJc3RydWN0IGRybV9ub3V2ZWF1X2dlbV9wdXNoYnVmICpyZXEs
-CisJCQkJc3RydWN0IGRybV9ub3V2ZWF1X2dlbV9wdXNoYnVmX3JlbG9jICpyZWxvYywKIAkJCQlz
-dHJ1Y3QgZHJtX25vdXZlYXVfZ2VtX3B1c2hidWZfYm8gKmJvKQogewotCXN0cnVjdCBkcm1fbm91
-dmVhdV9nZW1fcHVzaGJ1Zl9yZWxvYyAqcmVsb2MgPSBOVUxMOwogCWludCByZXQgPSAwOwogCXVu
-c2lnbmVkIGk7CiAKLQlyZWxvYyA9IHVfbWVtY3B5YShyZXEtPnJlbG9jcywgcmVxLT5ucl9yZWxv
-Y3MsIHNpemVvZigqcmVsb2MpKTsKLQlpZiAoSVNfRVJSKHJlbG9jKSkKLQkJcmV0dXJuIFBUUl9F
-UlIocmVsb2MpOwotCiAJZm9yIChpID0gMDsgaSA8IHJlcS0+bnJfcmVsb2NzOyBpKyspIHsKIAkJ
-c3RydWN0IGRybV9ub3V2ZWF1X2dlbV9wdXNoYnVmX3JlbG9jICpyID0gJnJlbG9jW2ldOwogCQlz
-dHJ1Y3QgZHJtX25vdXZlYXVfZ2VtX3B1c2hidWZfYm8gKmI7CkBAIC02OTEsMTEgKzY4MCwxMyBA
-QCBub3V2ZWF1X2dlbV9pb2N0bF9wdXNoYnVmKHN0cnVjdCBkcm1fZGV2aWNlICpkZXYsIHZvaWQg
-KmRhdGEsCiAJc3RydWN0IG5vdXZlYXVfZHJtICpkcm0gPSBub3V2ZWF1X2RybShkZXYpOwogCXN0
-cnVjdCBkcm1fbm91dmVhdV9nZW1fcHVzaGJ1ZiAqcmVxID0gZGF0YTsKIAlzdHJ1Y3QgZHJtX25v
-dXZlYXVfZ2VtX3B1c2hidWZfcHVzaCAqcHVzaDsKKwlzdHJ1Y3QgZHJtX25vdXZlYXVfZ2VtX3B1
-c2hidWZfcmVsb2MgKnJlbG9jID0gTlVMTDsKIAlzdHJ1Y3QgZHJtX25vdXZlYXVfZ2VtX3B1c2hi
-dWZfYm8gKmJvOwogCXN0cnVjdCBub3V2ZWF1X2NoYW5uZWwgKmNoYW4gPSBOVUxMOwogCXN0cnVj
-dCB2YWxpZGF0ZV9vcCBvcDsKIAlzdHJ1Y3Qgbm91dmVhdV9mZW5jZSAqZmVuY2UgPSBOVUxMOwot
-CWludCBpLCBqLCByZXQgPSAwLCBkb19yZWxvYyA9IDA7CisJaW50IGksIGosIHJldCA9IDA7CisJ
-Ym9vbCBkb19yZWxvYyA9IGZhbHNlOwogCiAJaWYgKHVubGlrZWx5KCFhYmkxNikpCiAJCXJldHVy
-biAtRU5PTUVNOwpAQCAtNzUzLDcgKzc0NCw4IEBAIG5vdXZlYXVfZ2VtX2lvY3RsX3B1c2hidWYo
-c3RydWN0IGRybV9kZXZpY2UgKmRldiwgdm9pZCAqZGF0YSwKIAl9CiAKIAkvKiBWYWxpZGF0ZSBi
-dWZmZXIgbGlzdCAqLwotCXJldCA9IG5vdXZlYXVfZ2VtX3B1c2hidWZfdmFsaWRhdGUoY2hhbiwg
-ZmlsZV9wcml2LCBibywgcmVxLT5idWZmZXJzLAorcmV2YWxpZGF0ZToKKwlyZXQgPSBub3V2ZWF1
-X2dlbV9wdXNoYnVmX3ZhbGlkYXRlKGNoYW4sIGZpbGVfcHJpdiwgYm8sCiAJCQkJCSAgIHJlcS0+
-bnJfYnVmZmVycywgJm9wLCAmZG9fcmVsb2MpOwogCWlmIChyZXQpIHsKIAkJaWYgKHJldCAhPSAt
-RVJFU1RBUlRTWVMpCkBAIC03NjMsNyArNzU1LDE4IEBAIG5vdXZlYXVfZ2VtX2lvY3RsX3B1c2hi
-dWYoc3RydWN0IGRybV9kZXZpY2UgKmRldiwgdm9pZCAqZGF0YSwKIAogCS8qIEFwcGx5IGFueSBy
-ZWxvY2F0aW9ucyB0aGF0IGFyZSByZXF1aXJlZCAqLwogCWlmIChkb19yZWxvYykgewotCQlyZXQg
-PSBub3V2ZWF1X2dlbV9wdXNoYnVmX3JlbG9jX2FwcGx5KGNsaSwgcmVxLCBibyk7CisJCWlmICgh
-cmVsb2MpIHsKKwkJCXZhbGlkYXRlX2ZpbmkoJm9wLCBjaGFuLCBOVUxMLCBibyk7CisJCQlyZWxv
-YyA9IHVfbWVtY3B5YShyZXEtPnJlbG9jcywgcmVxLT5ucl9yZWxvY3MsIHNpemVvZigqcmVsb2Mp
-KTsKKwkJCWlmIChJU19FUlIocmVsb2MpKSB7CisJCQkJcmV0ID0gUFRSX0VSUihyZWxvYyk7CisJ
-CQkJZ290byBvdXRfcHJldmFsaWQ7CisJCQl9CisKKwkJCWdvdG8gcmV2YWxpZGF0ZTsKKwkJfQor
-CisJCXJldCA9IG5vdXZlYXVfZ2VtX3B1c2hidWZfcmVsb2NfYXBwbHkoY2xpLCByZXEsIHJlbG9j
-LCBibyk7CiAJCWlmIChyZXQpIHsKIAkJCU5WX1BSSU5USyhlcnIsIGNsaSwgInJlbG9jIGFwcGx5
-OiAlZFxuIiwgcmV0KTsKIAkJCWdvdG8gb3V0OwpAQCAtODQ5LDYgKzg1MiwyMiBAQCBub3V2ZWF1
-X2dlbV9pb2N0bF9wdXNoYnVmKHN0cnVjdCBkcm1fZGV2aWNlICpkZXYsIHZvaWQgKmRhdGEsCiAJ
-dmFsaWRhdGVfZmluaSgmb3AsIGNoYW4sIGZlbmNlLCBibyk7CiAJbm91dmVhdV9mZW5jZV91bnJl
-ZigmZmVuY2UpOwogCisJaWYgKGRvX3JlbG9jKSB7CisJCXN0cnVjdCBkcm1fbm91dmVhdV9nZW1f
-cHVzaGJ1Zl9ibyBfX3VzZXIgKnVwYmJvID0KKwkJCXU2NF90b191c2VyX3B0cihyZXEtPmJ1ZmZl
-cnMpOworCisJCWZvciAoaSA9IDA7IGkgPCByZXEtPm5yX2J1ZmZlcnM7IGkrKykgeworCQkJaWYg
-KGJvW2ldLnByZXN1bWVkLnZhbGlkKQorCQkJCWNvbnRpbnVlOworCisJCQlpZiAoY29weV90b191
-c2VyKCZ1cGJib1tpXS5wcmVzdW1lZCwgJmJvW2ldLnByZXN1bWVkLAorCQkJCQkgc2l6ZW9mKGJv
-W2ldLnByZXN1bWVkKSkpIHsKKwkJCQlyZXQgPSAtRUZBVUxUOworCQkJCWJyZWFrOworCQkJfQor
-CQl9CisJCXVfZnJlZShyZWxvYyk7CisJfQogb3V0X3ByZXZhbGlkOgogCXVfZnJlZShibyk7CiAJ
-dV9mcmVlKHB1c2gpOwotLSAKMi4yMy4wLnJjMQoKX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBtYWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5m
-cmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0
-aW5mby9ub3V2ZWF1
+
+--===============1907561302==
+Content-Type: multipart/alternative; boundary="15664661751.aaFC7075.30451"
+Content-Transfer-Encoding: 7bit
+
+
+--15664661751.aaFC7075.30451
+Date: Thu, 22 Aug 2019 09:29:35 +0000
+MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+https://bugs.freedesktop.org/show_bug.cgi?id=3D111463
+
+            Bug ID: 111463
+           Summary: [NV49] MMIO write FAULT at 00c200
+           Product: xorg
+           Version: unspecified
+          Hardware: x86-64 (AMD64)
+                OS: Linux (All)
+            Status: NEW
+          Severity: not set
+          Priority: not set
+         Component: Driver/nouveau
+          Assignee: nouveau@lists.freedesktop.org
+          Reporter: morpheus2051@web.de
+        QA Contact: xorg-team@lists.x.org
+
+Created attachment 145128
+  --> https://bugs.freedesktop.org/attachment.cgi?id=3D145128&action=3Dedit
+dmesg with write fault
+
+Hello,
+
+on my HP NW9440 Laptop with the following GPU:
+01:00.0 VGA compatible controller: NVIDIA Corporation G71GLM [Quadro FX 150=
+0M]
+(rev a1)
+I am getting MMIO write faults always at the same address. I think these wr=
+ite
+faults lock up my machine sometimes. I use plasma desktop environment. To
+trigger the MMIO write faults I have to just use the machine. I have not fo=
+und
+a pattern to provoke a hard lockup.=20
+
+Known good kernel version: none
+Known bad kernel versions: 4.19, 5.0, 5.1, 5.2
+
+Relevant software versions:
+
+media-libs/mesa 19.0.8
+sys-kernel/gentoo-sources 5.2.9
+x11-base/xorg-server 1.20.5
+x11-libs/libdrm 2.4.97
+x11-drivers/xf86-video-nouveau 1.0.16
+kde-plasma 5.15.5
+kde-frameworks 5.60.0
+qt 5.12.3
+
+Distribution is gentoo.
+
+Greetings
+
+--=20
+You are receiving this mail because:
+You are the assignee for the bug.=
+
+--15664661751.aaFC7075.30451
+Date: Thu, 22 Aug 2019 09:29:35 +0000
+MIME-Version: 1.0
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+<html>
+    <head>
+      <base href=3D"https://bugs.freedesktop.org/">
+    </head>
+    <body><table border=3D"1" cellspacing=3D"0" cellpadding=3D"8">
+        <tr>
+          <th>Bug ID</th>
+          <td><a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - [NV49] MMIO write FAULT at 00c200"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111463">111463</a>
+          </td>
+        </tr>
+
+        <tr>
+          <th>Summary</th>
+          <td>[NV49] MMIO write FAULT at 00c200
+          </td>
+        </tr>
+
+        <tr>
+          <th>Product</th>
+          <td>xorg
+          </td>
+        </tr>
+
+        <tr>
+          <th>Version</th>
+          <td>unspecified
+          </td>
+        </tr>
+
+        <tr>
+          <th>Hardware</th>
+          <td>x86-64 (AMD64)
+          </td>
+        </tr>
+
+        <tr>
+          <th>OS</th>
+          <td>Linux (All)
+          </td>
+        </tr>
+
+        <tr>
+          <th>Status</th>
+          <td>NEW
+          </td>
+        </tr>
+
+        <tr>
+          <th>Severity</th>
+          <td>not set
+          </td>
+        </tr>
+
+        <tr>
+          <th>Priority</th>
+          <td>not set
+          </td>
+        </tr>
+
+        <tr>
+          <th>Component</th>
+          <td>Driver/nouveau
+          </td>
+        </tr>
+
+        <tr>
+          <th>Assignee</th>
+          <td>nouveau&#64;lists.freedesktop.org
+          </td>
+        </tr>
+
+        <tr>
+          <th>Reporter</th>
+          <td>morpheus2051&#64;web.de
+          </td>
+        </tr>
+
+        <tr>
+          <th>QA Contact</th>
+          <td>xorg-team&#64;lists.x.org
+          </td>
+        </tr></table>
+      <p>
+        <div>
+        <pre>Created <span class=3D""><a href=3D"attachment.cgi?id=3D145128=
+" name=3D"attach_145128" title=3D"dmesg with write fault">attachment 145128=
+</a> <a href=3D"attachment.cgi?id=3D145128&amp;action=3Dedit" title=3D"dmes=
+g with write fault">[details]</a></span>
+dmesg with write fault
+
+Hello,
+
+on my HP NW9440 Laptop with the following GPU:
+01:00.0 VGA compatible controller: NVIDIA Corporation G71GLM [Quadro FX 150=
+0M]
+(rev a1)
+I am getting MMIO write faults always at the same address. I think these wr=
+ite
+faults lock up my machine sometimes. I use plasma desktop environment. To
+trigger the MMIO write faults I have to just use the machine. I have not fo=
+und
+a pattern to provoke a hard lockup.=20
+
+Known good kernel version: none
+Known bad kernel versions: 4.19, 5.0, 5.1, 5.2
+
+Relevant software versions:
+
+media-libs/mesa 19.0.8
+sys-kernel/gentoo-sources 5.2.9
+x11-base/xorg-server 1.20.5
+x11-libs/libdrm 2.4.97
+x11-drivers/xf86-video-nouveau 1.0.16
+kde-plasma 5.15.5
+kde-frameworks 5.60.0
+qt 5.12.3
+
+Distribution is gentoo.
+
+Greetings</pre>
+        </div>
+      </p>
+
+
+      <hr>
+      <span>You are receiving this mail because:</span>
+
+      <ul>
+          <li>You are the assignee for the bug.</li>
+      </ul>
+    </body>
+</html>=
+
+--15664661751.aaFC7075.30451--
+
+--===============1907561302==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
+YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
+cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============1907561302==--
