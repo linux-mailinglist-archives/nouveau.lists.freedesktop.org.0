@@ -2,44 +2,32 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id EB30A98F68
-	for <lists+nouveau@lfdr.de>; Thu, 22 Aug 2019 11:34:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 83DE59ADD2
+	for <lists+nouveau@lfdr.de>; Fri, 23 Aug 2019 13:03:55 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3B9036EAE6;
-	Thu, 22 Aug 2019 09:34:08 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3B3DD6EC74;
+	Fri, 23 Aug 2019 11:03:53 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [131.252.210.165])
- by gabe.freedesktop.org (Postfix) with ESMTP id B602D6EAD3
- for <nouveau@lists.freedesktop.org>; Thu, 22 Aug 2019 09:34:06 +0000 (UTC)
-Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id B283572161; Thu, 22 Aug 2019 09:34:06 +0000 (UTC)
-From: bugzilla-daemon@freedesktop.org
-To: nouveau@lists.freedesktop.org
-Date: Thu, 22 Aug 2019 09:34:06 +0000
-X-Bugzilla-Reason: AssignedTo
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: None
-X-Bugzilla-Product: xorg
-X-Bugzilla-Component: Driver/nouveau
-X-Bugzilla-Version: unspecified
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: not set
-X-Bugzilla-Who: morpheus2051@web.de
-X-Bugzilla-Status: NEW
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: not set
-X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: attachments.created
-Message-ID: <bug-111463-8800-xtm18Sgy7R@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-111463-8800@http.bugs.freedesktop.org/>
-References: <bug-111463-8800@http.bugs.freedesktop.org/>
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
+X-Greylist: delayed 7801 seconds by postgrey-1.36 at gabe;
+ Fri, 23 Aug 2019 11:03:51 UTC
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id BCBE16E065;
+ Fri, 23 Aug 2019 11:03:51 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
+ by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x7N8rmpG008844
+ (version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+ Fri, 23 Aug 2019 01:53:48 -0700 (PDT)
+Received: from pek-lpggp6.wrs.com (128.224.153.40) by ALA-HCB.corp.ad.wrs.com
+ (147.11.189.41) with Microsoft SMTP Server id 14.3.468.0;
+ Fri, 23 Aug 2019 01:53:47 -0700
+From: Yongxin Liu <yongxin.liu@windriver.com>
+To: <bskeggs@redhat.com>, <dri-devel@lists.freedesktop.org>
+Date: Fri, 23 Aug 2019 16:50:42 +0800
+Message-ID: <20190823085042.37349-1-yongxin.liu@windriver.com>
+X-Mailer: git-send-email 2.14.4
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 111463] [NV49] MMIO write FAULT at 00c200
+Subject: [Nouveau] [PATCH] drm/nouveau: Fix memory leak in nvkm_ram_get()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -51,92 +39,52 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1762652042=="
+Cc: nouveau@lists.freedesktop.org, Yunguo.Wei@windriver.com,
+ Paul.Gortmaker@windriver.com
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-
---===============1762652042==
-Content-Type: multipart/alternative; boundary="15664664460.b3b8.30977"
-Content-Transfer-Encoding: 7bit
-
-
---15664664460.b3b8.30977
-Date: Thu, 22 Aug 2019 09:34:06 +0000
-MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-https://bugs.freedesktop.org/show_bug.cgi?id=3D111463
-
---- Comment #4 from Matthias <morpheus2051@web.de> ---
-Created attachment 145132
-  --> https://bugs.freedesktop.org/attachment.cgi?id=3D145132&action=3Dedit
-Video BIOS of the GPU
-
---=20
-You are receiving this mail because:
-You are the assignee for the bug.=
-
---15664664460.b3b8.30977
-Date: Thu, 22 Aug 2019 09:34:06 +0000
-MIME-Version: 1.0
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-<html>
-    <head>
-      <base href=3D"https://bugs.freedesktop.org/">
-    </head>
-    <body>
-      <p>
-        <div>
-            <b><a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - [NV49] MMIO write FAULT at 00c200"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111463#c4">Commen=
-t # 4</a>
-              on <a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - [NV49] MMIO write FAULT at 00c200"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111463">bug 11146=
-3</a>
-              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
-morpheus2051&#64;web.de" title=3D"Matthias &lt;morpheus2051&#64;web.de&gt;"=
-> <span class=3D"fn">Matthias</span></a>
-</span></b>
-        <pre>Created <span class=3D""><a href=3D"attachment.cgi?id=3D145132=
-" name=3D"attach_145132" title=3D"Video BIOS of the GPU">attachment 145132<=
-/a> <a href=3D"attachment.cgi?id=3D145132&amp;action=3Dedit" title=3D"Video=
- BIOS of the GPU">[details]</a></span>
-Video BIOS of the GPU</pre>
-        </div>
-      </p>
-
-
-      <hr>
-      <span>You are receiving this mail because:</span>
-
-      <ul>
-          <li>You are the assignee for the bug.</li>
-      </ul>
-    </body>
-</html>=
-
---15664664460.b3b8.30977--
-
---===============1762652042==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
-YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
-cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
-
---===============1762652042==--
+V2hlbiByZXN1bWluZyBmcm9tIEFDUEkgUzMsIG1lbW9yeSBsZWFrIGhhcHBlbnMgaW4gbnZrbV9y
+YW1fZ2V0KCkuClRoaXMgaXMgYmVjYXVzZSAqcG1lbW9yeSBwb2ludHMgdG8gbmV3bHkgYWxsb2Nh
+dGVkIG1lbW9yeSB3aXRob3V0CmNoZWNraW5nIGFuZCBmcmVlaW5nIHRoZSBvbGQgbWVtb3J5LgoK
+SGVyZSBpcyB0aGUgbG9nIHNob3dpbmcgdGhpcyBpc3N1ZS4KCnVucmVmZXJlbmNlZCBvYmplY3Qg
+MHhmZmZmYTNiNjA4YzZkNWMwIChzaXplIDY0KToKICBjb21tICJrd29ya2VyL3UzMjozMCIsIHBp
+ZCA5MzQsIGppZmZpZXMgNDI5NDgyMzUyMCAoYWdlIDUwMDAuMjE3cykKICBoZXggZHVtcCAoZmly
+c3QgMzIgYnl0ZXMpOgogICAgMDAgZmMgNGEgYzAgZmYgZmYgZmYgZmYgMDAgMDAgMDAgMDAgMDAg
+MDAgMDAgMDAgIC4uSi4uLi4uLi4uLi4uLi4KICAgIDAxIDAwIDAwIDAwIDAwIDAwIDAwIDAwIDAw
+IDAwIDAwIDAwIDAwIDAwIDAwIDAwICAuLi4uLi4uLi4uLi4uLi4uCiAgYmFja3RyYWNlOgogICAg
+WzwwMDAwMDAwMGU5MjNiZjgxPl0ga21lbV9jYWNoZV9hbGxvY190cmFjZSsweDE4MS8weDI1MAog
+ICAgWzwwMDAwMDAwMGVkYjdiZWFhPl0gbnZrbV9yYW1fZ2V0KzB4YjAvMHgxZDAgW25vdXZlYXVd
+CiAgICBbPDAwMDAwMDAwNGVjYWE5MTg+XSBndDIxNV9yYW1faW5pdCsweGM1LzB4MmYwIFtub3V2
+ZWF1XQogICAgWzwwMDAwMDAwMDAwN2JhMWEwPl0gbnZrbV9yYW1faW5pdCsweDFhLzB4MjAgW25v
+dXZlYXVdCiAgICBbPDAwMDAwMDAwNTBhYmY4NGI+XSBudmttX2ZiX2luaXQrMHgyNy8weGUwIFtu
+b3V2ZWF1XQogICAgWzwwMDAwMDAwMGZhZTdmZWRjPl0gbnZrbV9zdWJkZXZfaW5pdCsweGJjLzB4
+MjEwIFtub3V2ZWF1XQogICAgWzwwMDAwMDAwMGE2N2I4NmU0Pl0gbnZrbV9kZXZpY2VfaW5pdCsw
+eDEyYS8weDI4MCBbbm91dmVhdV0KICAgIFs8MDAwMDAwMDBjMDJhYzAzZT5dIG52a21fdWRldmlj
+ZV9pbml0KzB4NDgvMHg2MCBbbm91dmVhdV0KICAgIFs8MDAwMDAwMDA0OGYzNTY0MT5dIG52a21f
+b2JqZWN0X2luaXQrMHg0My8weDExMCBbbm91dmVhdV0KICAgIFs8MDAwMDAwMDBjNmY5MmRjMD5d
+IG52a21fb2JqZWN0X2luaXQrMHg3NC8weDExMCBbbm91dmVhdV0KICAgIFs8MDAwMDAwMDBjNmY5
+MmRjMD5dIG52a21fb2JqZWN0X2luaXQrMHg3NC8weDExMCBbbm91dmVhdV0KICAgIFs8MDAwMDAw
+MDA3NDE2OTUxYz5dIG52a21fY2xpZW50X3Jlc3VtZSsweGUvMHgxMCBbbm91dmVhdV0KICAgIFs8
+MDAwMDAwMDBjNWQzMWRmZD5dIG52aWZfY2xpZW50X3Jlc3VtZSsweDFkLzB4MjAgW25vdXZlYXVd
+CiAgICBbPDAwMDAwMDAwOGYzYTYzOGY+XSBub3V2ZWF1X2RvX3Jlc3VtZSsweDJkLzB4MTUwIFtu
+b3V2ZWF1XQogICAgWzwwMDAwMDAwMGRmMmMyYjg1Pl0gbm91dmVhdV9wbW9wc19yZXN1bWUrMHg2
+Yi8weGEwIFtub3V2ZWF1XQogICAgWzwwMDAwMDAwMGY0NGM2NDlkPl0gcGNpX3BtX3Jlc3VtZSsw
+eDcxLzB4YjAKClNpZ25lZC1vZmYtYnk6IFlvbmd4aW4gTGl1IDx5b25neGluLmxpdUB3aW5kcml2
+ZXIuY29tPgotLS0KIGRyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L252a20vc3ViZGV2L2ZiL3JhbS5j
+IHwgMyArKysKIDEgZmlsZSBjaGFuZ2VkLCAzIGluc2VydGlvbnMoKykKCmRpZmYgLS1naXQgYS9k
+cml2ZXJzL2dwdS9kcm0vbm91dmVhdS9udmttL3N1YmRldi9mYi9yYW0uYyBiL2RyaXZlcnMvZ3B1
+L2RybS9ub3V2ZWF1L252a20vc3ViZGV2L2ZiL3JhbS5jCmluZGV4IGIxMTg2N2Y2ODJjYi4uNjBi
+ZTRkODExMTg3IDEwMDY0NAotLS0gYS9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9udmttL3N1YmRl
+di9mYi9yYW0uYworKysgYi9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9udmttL3N1YmRldi9mYi9y
+YW0uYwpAQCAtMTI0LDYgKzEyNCw5IEBAIG52a21fcmFtX2dldChzdHJ1Y3QgbnZrbV9kZXZpY2Ug
+KmRldmljZSwgdTggaGVhcCwgdTggdHlwZSwgdTggcnBhZ2UsIHU2NCBzaXplLAogCW52a21fbWVt
+b3J5X2N0b3IoJm52a21fdnJhbSwgJnZyYW0tPm1lbW9yeSk7CiAJdnJhbS0+cmFtID0gcmFtOwog
+CXZyYW0tPnBhZ2UgPSBwYWdlOworCisJaWYgKCpwbWVtb3J5KQorCQludmttX21lbW9yeV91bnJl
+ZihwbWVtb3J5KTsKIAkqcG1lbW9yeSA9ICZ2cmFtLT5tZW1vcnk7CiAKIAltdXRleF9sb2NrKCZy
+YW0tPmZiLT5zdWJkZXYubXV0ZXgpOwotLSAKMi4xNC40CgpfX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fXwpOb3V2ZWF1IG1haWxpbmcgbGlzdApOb3V2ZWF1QGxp
+c3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFu
+L2xpc3RpbmZvL25vdXZlYXU=
