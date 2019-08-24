@@ -1,45 +1,30 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1E3C79BAF7
-	for <lists+nouveau@lfdr.de>; Sat, 24 Aug 2019 04:51:43 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id C27AE9C0CA
+	for <lists+nouveau@lfdr.de>; Sun, 25 Aug 2019 00:38:04 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 050286E062;
-	Sat, 24 Aug 2019 02:51:41 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8CAD46E0EA;
+	Sat, 24 Aug 2019 22:38:02 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
- by gabe.freedesktop.org (Postfix) with ESMTP id 759A06E062
- for <nouveau@lists.freedesktop.org>; Sat, 24 Aug 2019 02:51:39 +0000 (UTC)
-Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 69EE072161; Sat, 24 Aug 2019 02:51:39 +0000 (UTC)
-From: bugzilla-daemon@freedesktop.org
-To: nouveau@lists.freedesktop.org
-Date: Sat, 24 Aug 2019 02:51:39 +0000
-X-Bugzilla-Reason: AssignedTo QAcontact
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: None
-X-Bugzilla-Product: Mesa
-X-Bugzilla-Component: Drivers/DRI/nouveau
-X-Bugzilla-Version: 19.1
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: normal
-X-Bugzilla-Who: imirkin@alum.mit.edu
-X-Bugzilla-Status: RESOLVED
-X-Bugzilla-Resolution: FIXED
-X-Bugzilla-Priority: medium
-X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-111213-8800-DGo74tegqQ@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-111213-8800@http.bugs.freedesktop.org/>
-References: <bug-111213-8800@http.bugs.freedesktop.org/>
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
+Received: from verein.lst.de (verein.lst.de [213.95.11.211])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id DF0506E0E8;
+ Sat, 24 Aug 2019 22:38:00 +0000 (UTC)
+Received: by verein.lst.de (Postfix, from userid 2407)
+ id 5FED368B02; Sun, 25 Aug 2019 00:37:54 +0200 (CEST)
+Date: Sun, 25 Aug 2019 00:37:54 +0200
+From: Christoph Hellwig <hch@lst.de>
+To: Ralph Campbell <rcampbell@nvidia.com>
+Message-ID: <20190824223754.GA21891@lst.de>
+References: <20190823221753.2514-1-rcampbell@nvidia.com>
+ <20190823221753.2514-2-rcampbell@nvidia.com>
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 111213] VA-API nouveau SIGSEGV and asserts
+Content-Disposition: inline
+In-Reply-To: <20190823221753.2514-2-rcampbell@nvidia.com>
+User-Agent: Mutt/1.5.17 (2007-11-01)
+Subject: Re: [Nouveau] [PATCH 1/2] mm/hmm: hmm_range_fault() NULL pointer bug
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -51,92 +36,24 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1806718026=="
+Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, linux-mm@kvack.org,
+ Jason Gunthorpe <jgg@mellanox.com>, amd-gfx@lists.freedesktop.org,
+ Andrew Morton <akpm@linux-foundation.org>, Christoph Hellwig <hch@lst.de>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-
---===============1806718026==
-Content-Type: multipart/alternative; boundary="15666150990.aAc7E.12935"
-Content-Transfer-Encoding: 7bit
-
-
---15666150990.aAc7E.12935
-Date: Sat, 24 Aug 2019 02:51:39 +0000
-MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-https://bugs.freedesktop.org/show_bug.cgi?id=3D111213
-
---- Comment #20 from Ilia Mirkin <imirkin@alum.mit.edu> ---
-I pushed the patch after both of those releases were cut. I expect it to be
-included in the next 19.1.x and 19.2.x releases (based on the "Fixes" tag).
-
---=20
-You are receiving this mail because:
-You are the assignee for the bug.
-You are the QA Contact for the bug.=
-
---15666150990.aAc7E.12935
-Date: Sat, 24 Aug 2019 02:51:39 +0000
-MIME-Version: 1.0
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-<html>
-    <head>
-      <base href=3D"https://bugs.freedesktop.org/">
-    </head>
-    <body>
-      <p>
-        <div>
-            <b><a class=3D"bz_bug_link=20
-          bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED FIXED - VA-API nouveau SIGSEGV and asserts"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111213#c20">Comme=
-nt # 20</a>
-              on <a class=3D"bz_bug_link=20
-          bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED FIXED - VA-API nouveau SIGSEGV and asserts"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111213">bug 11121=
-3</a>
-              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
-imirkin&#64;alum.mit.edu" title=3D"Ilia Mirkin &lt;imirkin&#64;alum.mit.edu=
-&gt;"> <span class=3D"fn">Ilia Mirkin</span></a>
-</span></b>
-        <pre>I pushed the patch after both of those releases were cut. I ex=
-pect it to be
-included in the next 19.1.x and 19.2.x releases (based on the &quot;Fixes&q=
-uot; tag).</pre>
-        </div>
-      </p>
-
-
-      <hr>
-      <span>You are receiving this mail because:</span>
-
-      <ul>
-          <li>You are the assignee for the bug.</li>
-          <li>You are the QA Contact for the bug.</li>
-      </ul>
-    </body>
-</html>=
-
---15666150990.aAc7E.12935--
-
---===============1806718026==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
-YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
-cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
-
---===============1806718026==--
+T24gRnJpLCBBdWcgMjMsIDIwMTkgYXQgMDM6MTc6NTJQTSAtMDcwMCwgUmFscGggQ2FtcGJlbGwg
+d3JvdGU6Cj4gQWx0aG91Z2ggaG1tX3JhbmdlX2ZhdWx0KCkgY2FsbHMgZmluZF92bWEoKSB0byBt
+YWtlIHN1cmUgdGhhdCBhIHZtYSBleGlzdHMKPiBiZWZvcmUgY2FsbGluZyB3YWxrX3BhZ2VfcmFu
+Z2UoKSwgaG1tX3ZtYV93YWxrX2hvbGUoKSBjYW4gc3RpbGwgYmUgY2FsbGVkCj4gd2l0aCB3YWxr
+LT52bWEgPT0gTlVMTCBpZiB0aGUgc3RhcnQgYW5kIGVuZCBhZGRyZXNzIGFyZSBub3QgY29udGFp
+bmVkCj4gd2l0aGluIHRoZSB2bWEgcmFuZ2UuCgpTaG91bGQgd2UgY29udmVydCB0byB3YWxrX3Zt
+YV9yYW5nZSBpbnN0ZWFkPyAgT3Iga2VlcCB3YWxrX3BhZ2VfcmFuZ2UKYnV0IGRyb3Agc2VhcmNo
+aW5nIHRoZSB2bWEgb3Vyc2VsdmVzPwoKRXhjZXB0IGZvciB0aGF0IHRoZSBwYXRjaCBsb29rcyBn
+b29kIHRvIG1lOgoKUmV2aWV3ZWQtYnk6IENocmlzdG9waCBIZWxsd2lnIDxoY2hAbHN0LmRlPgpf
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpOb3V2ZWF1IG1h
+aWxpbmcgbGlzdApOb3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZy
+ZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL25vdXZlYXU=
