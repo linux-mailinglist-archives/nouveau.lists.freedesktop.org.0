@@ -2,45 +2,44 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1B2F09D0BC
-	for <lists+nouveau@lfdr.de>; Mon, 26 Aug 2019 15:37:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CB4F39D3F1
+	for <lists+nouveau@lfdr.de>; Mon, 26 Aug 2019 18:25:49 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 742046E153;
-	Mon, 26 Aug 2019 13:37:03 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 52A796E265;
+	Mon, 26 Aug 2019 16:25:48 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-vk1-f196.google.com (mail-vk1-f196.google.com
- [209.85.221.196])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 599196E139;
- Mon, 26 Aug 2019 13:37:02 +0000 (UTC)
-Received: by mail-vk1-f196.google.com with SMTP id b11so3949931vkk.10;
- Mon, 26 Aug 2019 06:37:02 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=PeCHsXidITjfI3JwZ2oo2ue4X1uPLn6Kt+foIF6yyAg=;
- b=kHMVdwO42dG0csRz8xOY6XfK1GH6DRQ5a1vkIjGAOACZwVeAc/yIp8hDovA+a/L1/p
- OxWj/IseTcdOEnqZ+IS8UW3w/gY4k0iQqc1Y/Nkn9czJXXWKusPecF1Bc+BFYWSg3XSo
- Pgz43e70R8zTE5xWomFSgYMuDxbt/Bt+f2jJcoPdcxC7O4Dkyio7pw1d0KhJZsh4wCi2
- +rVUKR0kufBNPRtvDkj3i+wkyNJDpsWMjDc5eUyN5RjZIZtr66cSUWr/3/HR0m/nSfCq
- pB/MxkURgoB97IjkHKI++hhl75e29HDcCX/bhHkbBdUb430r+xgp5TQEystzDvFFmraD
- i1zg==
-X-Gm-Message-State: APjAAAWxoJySiuWRFxJ0M2jx0vSRmUO3kAi1fb4gjNTOjkKbJ3W1Xld7
- TVWIITmQWTuIgiui15lFVLIK6teglX7/K/57iDM=
-X-Google-Smtp-Source: APXvYqwWWdSeS/iSWQh8xZ089zk9hCX0hNzCmI5Mmq739Z4j7O7zhBzmuQsWVCVaPqtY3GXOKziExuPvVHe2bo9nk+E=
-X-Received: by 2002:a1f:8b07:: with SMTP id n7mr8343543vkd.67.1566826621182;
- Mon, 26 Aug 2019 06:37:01 -0700 (PDT)
+Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
+ [131.252.210.165])
+ by gabe.freedesktop.org (Postfix) with ESMTP id F24426E265
+ for <nouveau@lists.freedesktop.org>; Mon, 26 Aug 2019 16:25:47 +0000 (UTC)
+Received: by culpepper.freedesktop.org (Postfix, from userid 33)
+ id EAB3072161; Mon, 26 Aug 2019 16:25:47 +0000 (UTC)
+From: bugzilla-daemon@freedesktop.org
+To: nouveau@lists.freedesktop.org
+Date: Mon, 26 Aug 2019 16:25:48 +0000
+X-Bugzilla-Reason: AssignedTo
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: None
+X-Bugzilla-Product: xorg
+X-Bugzilla-Component: Driver/nouveau
+X-Bugzilla-Version: unspecified
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: normal
+X-Bugzilla-Who: ak@axet.ru
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: medium
+X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: 
+Message-ID: <bug-110660-8800-AjAVQCa2Ts@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-110660-8800@http.bugs.freedesktop.org/>
+References: <bug-110660-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-References: <20190826132216.2823-1-oleg.vasilev@intel.com>
- <20190826132216.2823-6-oleg.vasilev@intel.com>
-In-Reply-To: <20190826132216.2823-6-oleg.vasilev@intel.com>
-From: Ilia Mirkin <imirkin@alum.mit.edu>
-Date: Mon, 26 Aug 2019 09:36:50 -0400
-Message-ID: <CAKb7UviahO6HWbxOoLyqN2X6WFw_GyucQuMs7Wj-MrKVNP1n_g@mail.gmail.com>
-To: Oleg Vasilev <oleg.vasilev@intel.com>
-Subject: Re: [Nouveau] [PATCH v3 5/7] drm/nouveau: utilize subconnector
- property for DP
+Subject: [Nouveau] [Bug 110660] GeForce GT 750M Mac Edition fullscreen issues
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -52,87 +51,136 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau <nouveau@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>,
- dri-devel <dri-devel@lists.freedesktop.org>,
- Emil Velikov <emil.velikov@collabora.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1615101868=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-VGhpcyBzaG91bGQgcHJvYmFibHkgYmUgZml4ZWQgdG8gYWNjb3VudCBmb3IgdGhlIHNjZW5hcmlv
-IHdoZXJlIGFuCkhETUkgY29ubmVjdG9yIGlzIHBsdWdnZWQgZGlyZWN0bHkgaW50byB0aGUgRFAr
-KyBwb3J0LiBJIGRvbid0IHRoaW5rCnRoZSBkcC5zdWJjb25uZWN0b3IgcHJvcGVydHkgd2lsbCBi
-ZSB2YWxpZCBpbiB0aGF0IGNhc2UuCihVbmZvcnR1bmF0ZWx5IEkgZG9uJ3QgcmVtZW1iZXIgaG93
-IG9uZSBkZXRlY3RzIHRoYXQgcGFydGljdWxhcgpzaXR1YXRpb24uKQoKT24gTW9uLCBBdWcgMjYs
-IDIwMTkgYXQgOToyMiBBTSBPbGVnIFZhc2lsZXYgPG9sZWcudmFzaWxldkBpbnRlbC5jb20+IHdy
-b3RlOgo+Cj4gU2luY2UgRFAtc3BlY2lmaWMgaW5mb3JtYXRpb24gaXMgc3RvcmVkIGluIGRyaXZl
-cidzIHN0cnVjdHVyZXMsIGV2ZXJ5Cj4gZHJpdmVyIG5lZWRzIHRvIGltcGxlbWVudCBzdWJjb25u
-ZWN0b3IgcHJvcGVydHkgYnkgaXRzZWxmLgo+Cj4gUmV2aWV3ZWQtYnk6IEVtaWwgVmVsaWtvdiA8
-ZW1pbC52ZWxpa292QGNvbGxhYm9yYS5jb20+Cj4gU2lnbmVkLW9mZi1ieTogT2xlZyBWYXNpbGV2
-IDxvbGVnLnZhc2lsZXZAaW50ZWwuY29tPgo+IENjOiBCZW4gU2tlZ2dzIDxic2tlZ2dzQHJlZGhh
-dC5jb20+Cj4gQ2M6IG5vdXZlYXVAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCj4gLS0tCj4gIGRyaXZl
-cnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfY29ubmVjdG9yLmMgfCAxMyArKysrKysrKysrKysr
-Cj4gIGRyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfZHAuYyAgICAgICAgfCAgOSArKysr
-KysrKysKPiAgZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9lbmNvZGVyLmggICB8ICAx
-ICsKPiAgMyBmaWxlcyBjaGFuZ2VkLCAyMyBpbnNlcnRpb25zKCspCj4KPiBkaWZmIC0tZ2l0IGEv
-ZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9jb25uZWN0b3IuYyBiL2RyaXZlcnMvZ3B1
-L2RybS9ub3V2ZWF1L25vdXZlYXVfY29ubmVjdG9yLmMKPiBpbmRleCA5NGRmYTJlNWE5YWIuLmQ5
-YzExNmNjMTFiOSAxMDA2NDQKPiAtLS0gYS9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1
-X2Nvbm5lY3Rvci5jCj4gKysrIGIvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9jb25u
-ZWN0b3IuYwo+IEBAIC02MzUsNiArNjM1LDE3IEBAIG5vdXZlYXVfY29ubmVjdG9yX2RldGVjdChz
-dHJ1Y3QgZHJtX2Nvbm5lY3RvciAqY29ubmVjdG9yLCBib29sIGZvcmNlKQo+ICAgICAgICAgcG1f
-cnVudGltZV9tYXJrX2xhc3RfYnVzeShkZXYtPmRldik7Cj4gICAgICAgICBwbV9ydW50aW1lX3B1
-dF9hdXRvc3VzcGVuZChkZXYtPmRldik7Cj4KPiArICAgICAgIGlmIChjb25uZWN0b3ItPmNvbm5l
-Y3Rvcl90eXBlID09IERSTV9NT0RFX0NPTk5FQ1RPUl9EaXNwbGF5UG9ydCB8fAo+ICsgICAgICAg
-ICAgIGNvbm5lY3Rvci0+Y29ubmVjdG9yX3R5cGUgPT0gRFJNX01PREVfQ09OTkVDVE9SX2VEUCkg
-ewo+ICsgICAgICAgICAgICAgICBlbnVtIGRybV9tb2RlX3N1YmNvbm5lY3RvciBzdWJjb25uZWN0
-b3IgPSBEUk1fTU9ERV9TVUJDT05ORUNUT1JfVW5rbm93bjsKPiArCj4gKyAgICAgICAgICAgICAg
-IGlmIChjb25uX3N0YXR1cyA9PSBjb25uZWN0b3Jfc3RhdHVzX2Nvbm5lY3RlZCAmJiBudl9lbmNv
-ZGVyKQo+ICsgICAgICAgICAgICAgICAgICAgICAgIHN1YmNvbm5lY3RvciA9IG52X2VuY29kZXIt
-PmRwLnN1YmNvbm5lY3RvcjsKPiArICAgICAgICAgICAgICAgZHJtX29iamVjdF9wcm9wZXJ0eV9z
-ZXRfdmFsdWUoJmNvbm5lY3Rvci0+YmFzZSwKPiArICAgICAgICAgICAgICAgICAgICAgICBjb25u
-ZWN0b3ItPmRldi0+bW9kZV9jb25maWcuZHBfc3ViY29ubmVjdG9yX3Byb3BlcnR5LAo+ICsgICAg
-ICAgICAgICAgICAgICAgICAgIHN1YmNvbm5lY3Rvcik7Cj4gKyAgICAgICB9Cj4gKwo+ICAgICAg
-ICAgcmV0dXJuIGNvbm5fc3RhdHVzOwo+ICB9Cj4KPiBAQCAtMTM1OSw2ICsxMzcwLDggQEAgbm91
-dmVhdV9jb25uZWN0b3JfY3JlYXRlKHN0cnVjdCBkcm1fZGV2aWNlICpkZXYsCj4gICAgICAgICAg
-ICAgICAgICAgICAgICAga2ZyZWUobnZfY29ubmVjdG9yKTsKPiAgICAgICAgICAgICAgICAgICAg
-ICAgICByZXR1cm4gRVJSX1BUUihyZXQpOwo+ICAgICAgICAgICAgICAgICB9Cj4gKwo+ICsgICAg
-ICAgICAgICAgICBkcm1fbW9kZV9hZGRfZHBfc3ViY29ubmVjdG9yX3Byb3BlcnR5KGNvbm5lY3Rv
-cik7Cj4gICAgICAgICAgICAgICAgIGZ1bmNzID0gJm5vdXZlYXVfY29ubmVjdG9yX2Z1bmNzOwo+
-ICAgICAgICAgICAgICAgICBicmVhazsKPiAgICAgICAgIGRlZmF1bHQ6Cj4gZGlmZiAtLWdpdCBh
-L2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfZHAuYyBiL2RyaXZlcnMvZ3B1L2RybS9u
-b3V2ZWF1L25vdXZlYXVfZHAuYwo+IGluZGV4IDI2NzRmMTU4NzQ1Ny4uODVlYWM4NTNlM2Y4IDEw
-MDY0NAo+IC0tLSBhL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfZHAuYwo+ICsrKyBi
-L2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfZHAuYwo+IEBAIC02Miw2ICs2Miw3IEBA
-IG5vdXZlYXVfZHBfZGV0ZWN0KHN0cnVjdCBub3V2ZWF1X2VuY29kZXIgKm52X2VuY29kZXIpCj4g
-ICAgICAgICBzdHJ1Y3Qgbm91dmVhdV9kcm0gKmRybSA9IG5vdXZlYXVfZHJtKGRldik7Cj4gICAg
-ICAgICBzdHJ1Y3QgbnZrbV9pMmNfYXV4ICphdXg7Cj4gICAgICAgICB1OCBkcGNkWzhdOwo+ICsg
-ICAgICAgdTggcG9ydF9jYXBbRFBfTUFYX0RPV05TVFJFQU1fUE9SVFNdID0ge307Cj4gICAgICAg
-ICBpbnQgcmV0Owo+Cj4gICAgICAgICBhdXggPSBudl9lbmNvZGVyLT5hdXg7Cj4gQEAgLTcyLDYg
-KzczLDE0IEBAIG5vdXZlYXVfZHBfZGV0ZWN0KHN0cnVjdCBub3V2ZWF1X2VuY29kZXIgKm52X2Vu
-Y29kZXIpCj4gICAgICAgICBpZiAocmV0KQo+ICAgICAgICAgICAgICAgICByZXR1cm4gcmV0Owo+
-Cj4gKyAgICAgICBpZiAoZHBjZFtEUF9EUENEX1JFVl0gPiAweDEwKSB7Cj4gKyAgICAgICAgICAg
-ICAgIHJldCA9IG52a21fcmRhdXgoYXV4LCBEUF9ET1dOU1RSRUFNX1BPUlRfMCwKPiArICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICBwb3J0X2NhcCwgRFBfTUFYX0RPV05TVFJFQU1fUE9S
-VFMpOwo+ICsgICAgICAgICAgICAgICBpZiAocmV0KQo+ICsgICAgICAgICAgICAgICAgICAgICAg
-IG1lbXNldChwb3J0X2NhcCwgMCwgRFBfTUFYX0RPV05TVFJFQU1fUE9SVFMpOwo+ICsgICAgICAg
-fQo+ICsgICAgICAgbnZfZW5jb2Rlci0+ZHAuc3ViY29ubmVjdG9yID0gZHJtX2RwX3N1YmNvbm5l
-Y3Rvcl90eXBlKGRwY2QsIHBvcnRfY2FwKTsKPiArCj4gICAgICAgICBudl9lbmNvZGVyLT5kcC5s
-aW5rX2J3ID0gMjcwMDAgKiBkcGNkWzFdOwo+ICAgICAgICAgbnZfZW5jb2Rlci0+ZHAubGlua19u
-ciA9IGRwY2RbMl0gJiBEUF9NQVhfTEFORV9DT1VOVF9NQVNLOwo+Cj4gZGlmZiAtLWdpdCBhL2Ry
-aXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfZW5jb2Rlci5oIGIvZHJpdmVycy9ncHUvZHJt
-L25vdXZlYXUvbm91dmVhdV9lbmNvZGVyLmgKPiBpbmRleCAzNTE3ZjkyMGJmODkuLmUxNzk3MWEz
-MDIyMSAxMDA2NDQKPiAtLS0gYS9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2VuY29k
-ZXIuaAo+ICsrKyBiL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfZW5jb2Rlci5oCj4g
-QEAgLTYzLDYgKzYzLDcgQEAgc3RydWN0IG5vdXZlYXVfZW5jb2RlciB7Cj4gICAgICAgICAgICAg
-ICAgICAgICAgICAgc3RydWN0IG52NTBfbXN0bSAqbXN0bTsKPiAgICAgICAgICAgICAgICAgICAg
-ICAgICBpbnQgbGlua19ucjsKPiAgICAgICAgICAgICAgICAgICAgICAgICBpbnQgbGlua19idzsK
-PiArICAgICAgICAgICAgICAgICAgICAgICBlbnVtIGRybV9tb2RlX3N1YmNvbm5lY3RvciBzdWJj
-b25uZWN0b3I7Cj4gICAgICAgICAgICAgICAgIH0gZHA7Cj4gICAgICAgICB9Owo+Cj4gLS0KPiAy
-LjIzLjAKPgo+IF9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-Cj4gTm91dmVhdSBtYWlsaW5nIGxpc3QKPiBOb3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwo+
-IGh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vbm91dmVhdQpf
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpOb3V2ZWF1IG1h
-aWxpbmcgbGlzdApOb3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZy
-ZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL25vdXZlYXU=
+
+--===============1615101868==
+Content-Type: multipart/alternative; boundary="15668367470.9A2Ce.14347"
+Content-Transfer-Encoding: 7bit
+
+
+--15668367470.9A2Ce.14347
+Date: Mon, 26 Aug 2019 16:25:47 +0000
+MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+https://bugs.freedesktop.org/show_bug.cgi?id=3D110660
+
+--- Comment #42 from Alexey Kuznetsov <ak@axet.ru> ---
+@Ilia Mirkin this "blank screen" still happens time to time. Some time it is
+not just black screen, but previous screen buffer from another app (can be
+Login screen, or game). And now I found how to reanimate X11 and allow to s=
+ee
+desktop, just run "killall -3 gnome-shell" from Alt+F3 console. Seems like
+gnome shell some how interfering with mode switching and crashing. It may g=
+ive
+you a better understanding what is going on, since you know what is under h=
+ood.
+
+Just a little reminder, "blank screen" appears after I start and exit game,=
+ I
+have mouse cursor which react for underlying windows (change cursor to edit
+text or resize window) but I can't click anything, and most of the time I s=
+ee
+just blank screen. Using ubuntu 19.10 when "black screen" occures I can swi=
+tch
+to login screen, type my password (X11 works on login screen!) and get back=
+ to
+current running account under "black screen" strike, this time screen appea=
+rs
+as login screen, mouse cursor still reacts to my original windows (so nothi=
+ng
+killed, music playing, and windows alive) but I can't click anyting as usua=
+l.
+
+--=20
+You are receiving this mail because:
+You are the assignee for the bug.=
+
+--15668367470.9A2Ce.14347
+Date: Mon, 26 Aug 2019 16:25:47 +0000
+MIME-Version: 1.0
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+<html>
+    <head>
+      <base href=3D"https://bugs.freedesktop.org/">
+    </head>
+    <body>
+      <p>
+        <div>
+            <b><a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - GeForce GT 750M Mac Edition fullscreen issues"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110660#c42">Comme=
+nt # 42</a>
+              on <a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - GeForce GT 750M Mac Edition fullscreen issues"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110660">bug 11066=
+0</a>
+              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
+ak&#64;axet.ru" title=3D"Alexey Kuznetsov &lt;ak&#64;axet.ru&gt;"> <span cl=
+ass=3D"fn">Alexey Kuznetsov</span></a>
+</span></b>
+        <pre>&#64;Ilia Mirkin this &quot;blank screen&quot; still happens t=
+ime to time. Some time it is
+not just black screen, but previous screen buffer from another app (can be
+Login screen, or game). And now I found how to reanimate X11 and allow to s=
+ee
+desktop, just run &quot;killall -3 gnome-shell&quot; from Alt+F3 console. S=
+eems like
+gnome shell some how interfering with mode switching and crashing. It may g=
+ive
+you a better understanding what is going on, since you know what is under h=
+ood.
+
+Just a little reminder, &quot;blank screen&quot; appears after I start and =
+exit game, I
+have mouse cursor which react for underlying windows (change cursor to edit
+text or resize window) but I can't click anything, and most of the time I s=
+ee
+just blank screen. Using ubuntu 19.10 when &quot;black screen&quot; occures=
+ I can switch
+to login screen, type my password (X11 works on login screen!) and get back=
+ to
+current running account under &quot;black screen&quot; strike, this time sc=
+reen appears
+as login screen, mouse cursor still reacts to my original windows (so nothi=
+ng
+killed, music playing, and windows alive) but I can't click anyting as usua=
+l.</pre>
+        </div>
+      </p>
+
+
+      <hr>
+      <span>You are receiving this mail because:</span>
+
+      <ul>
+          <li>You are the assignee for the bug.</li>
+      </ul>
+    </body>
+</html>=
+
+--15668367470.9A2Ce.14347--
+
+--===============1615101868==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
+YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
+cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============1615101868==--
