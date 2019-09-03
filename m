@@ -2,45 +2,38 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1B867B2981
-	for <lists+nouveau@lfdr.de>; Sat, 14 Sep 2019 05:48:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 667CFB2C15
+	for <lists+nouveau@lfdr.de>; Sat, 14 Sep 2019 18:00:26 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9BCE66F4C3;
-	Sat, 14 Sep 2019 03:48:49 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3861C6F52C;
+	Sat, 14 Sep 2019 16:00:24 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
- by gabe.freedesktop.org (Postfix) with ESMTP id 4F45A6F4C3
- for <nouveau@lists.freedesktop.org>; Sat, 14 Sep 2019 03:48:48 +0000 (UTC)
-Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 4684072167; Sat, 14 Sep 2019 03:48:48 +0000 (UTC)
-From: bugzilla-daemon@freedesktop.org
-To: nouveau@lists.freedesktop.org
-Date: Sat, 14 Sep 2019 03:48:48 +0000
-X-Bugzilla-Reason: AssignedTo
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: None
-X-Bugzilla-Product: xorg
-X-Bugzilla-Component: Driver/nouveau
-X-Bugzilla-Version: unspecified
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: not set
-X-Bugzilla-Who: diggest@gmail.com
-X-Bugzilla-Status: NEW
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: not set
-X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-111642-8800-Fwtkp8FQYt@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-111642-8800@http.bugs.freedesktop.org/>
-References: <bug-111642-8800@http.bugs.freedesktop.org/>
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
+Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E2996898B7;
+ Tue,  3 Sep 2019 20:47:39 +0000 (UTC)
+Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
+ [10.5.11.22])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mx1.redhat.com (Postfix) with ESMTPS id 5CF94307BCC7;
+ Tue,  3 Sep 2019 20:47:38 +0000 (UTC)
+Received: from malachite.bss.redhat.com (dhcp-10-20-1-34.bss.redhat.com
+ [10.20.1.34])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id DC23D1001956;
+ Tue,  3 Sep 2019 20:47:30 +0000 (UTC)
+From: Lyude Paul <lyude@redhat.com>
+To: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ amd-gfx@lists.freedesktop.org
+Date: Tue,  3 Sep 2019 16:45:38 -0400
+Message-Id: <20190903204645.25487-1-lyude@redhat.com>
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 111642] NV43 GeForce 6600 Nouveau is not stable on
- legacy hardware
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
+ (mx1.redhat.com [10.5.110.49]); Tue, 03 Sep 2019 20:47:39 +0000 (UTC)
+X-Mailman-Approved-At: Sat, 14 Sep 2019 16:00:23 +0000
+Subject: [Nouveau] [PATCH v2 00/27] DP MST Refactors + debugging tools +
+ suspend/resume reprobing
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -52,91 +45,127 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0185053193=="
+Cc: Neil Armstrong <narmstrong@baylibre.com>, David Airlie <airlied@linux.ie>,
+ Imre Deak <imre.deak@intel.com>,
+ Alexandru Gheorghe <alexandru-cosmin.gheorghe@arm.com>,
+ Dhinakaran Pandiyan <dhinakaran.pandiyan@intel.com>,
+ Huang Rui <ray.huang@amd.com>,
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Sam Ravnborg <sam@ravnborg.org>,
+ Markus Elfring <elfring@users.sourceforge.net>,
+ =?UTF-8?q?Ville=20Syrj=C3=A4l=C3=A4?= <ville.syrjala@linux.intel.com>,
+ Emil Velikov <emil.velikov@collabora.com>,
+ "David \(ChunMing\) Zhou" <david1.zhou@amd.com>,
+ Thomas Hellstrom <thellstrom@vmware.com>, Deepak Rawat <drawat@vmware.com>,
+ Yu Zhao <yuzhao@google.com>, Bhawanpreet Lakha <bhawanpreet.lakha@amd.com>,
+ David Francis <david.francis@amd.com>, Jani Nikula <jani.nikula@intel.com>,
+ Ben Skeggs <bskeggs@redhat.com>, Thierry Reding <treding@nvidia.com>,
+ Harry Wentland <harry.wentland@amd.com>,
+ Andrey Grodzovsky <andrey.grodzovsky@amd.com>, Tao Zhou <tao.zhou1@amd.com>,
+ Leo Li <sunpeng.li@amd.com>, intel-gfx@lists.freedesktop.org,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Mario Kleiner <mario.kleiner.de@gmail.com>, Maxime Ripard <mripard@kernel.org>,
+ Emily Deng <emily.deng@amd.com>, Jani Nikula <jani.nikula@linux.intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>, Thomas Gleixner <tglx@linutronix.de>,
+ Evan Quan <evan.quan@amd.com>, Sean Paul <sean@poorly.run>,
+ Chris Wilson <chris@chris-wilson.co.uk>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Felix Kuehling <felix.kuehling@amd.com>, xinhui pan <xinhui.pan@amd.com>,
+ =?UTF-8?q?Michel=20D=C3=A4nzer?= <michel.daenzer@amd.com>,
+ linux-kernel@vger.kernel.org, Andrzej Pietrasiewicz <andrzej.p@collabora.com>,
+ Manasi Navare <manasi.d.navare@intel.com>, Daniel Vetter <daniel@ffwll.ch>,
+ Alex Deucher <alexander.deucher@amd.com>,
+ Colin Ian King <colin.king@canonical.com>,
+ Nicholas Kazlauskas <nicholas.kazlauskas@amd.com>, Rex Zhu <rex.zhu@amd.com>,
+ =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
+ Hawking Zhang <hawking.zhang@amd.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-
---===============0185053193==
-Content-Type: multipart/alternative; boundary="15684329280.F80c.7596"
-Content-Transfer-Encoding: 7bit
-
-
---15684329280.F80c.7596
-Date: Sat, 14 Sep 2019 03:48:48 +0000
-MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-https://bugs.freedesktop.org/show_bug.cgi?id=3D111642
-
---- Comment #16 from Vasili Pupkin <diggest@gmail.com> ---
-I am using gnome 3.28.2 on xorg 1.20.4, wayland disappeared from the list on
-gdm login screen after recent upgrades
-
---=20
-You are receiving this mail because:
-You are the assignee for the bug.=
-
---15684329280.F80c.7596
-Date: Sat, 14 Sep 2019 03:48:48 +0000
-MIME-Version: 1.0
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-<html>
-    <head>
-      <base href=3D"https://bugs.freedesktop.org/">
-    </head>
-    <body>
-      <p>
-        <div>
-            <b><a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - NV43 GeForce 6600 Nouveau is not stable on legacy hardwar=
-e"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111642#c16">Comme=
-nt # 16</a>
-              on <a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - NV43 GeForce 6600 Nouveau is not stable on legacy hardwar=
-e"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111642">bug 11164=
-2</a>
-              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
-diggest&#64;gmail.com" title=3D"Vasili Pupkin &lt;diggest&#64;gmail.com&gt;=
-"> <span class=3D"fn">Vasili Pupkin</span></a>
-</span></b>
-        <pre>I am using gnome 3.28.2 on xorg 1.20.4, wayland disappeared fr=
-om the list on
-gdm login screen after recent upgrades</pre>
-        </div>
-      </p>
-
-
-      <hr>
-      <span>You are receiving this mail because:</span>
-
-      <ul>
-          <li>You are the assignee for the bug.</li>
-      </ul>
-    </body>
-</html>=
-
---15684329280.F80c.7596--
-
---===============0185053193==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
-YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
-cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
-
---===============0185053193==--
+VGhpcyBpcyB0aGUgbGFyZ2Ugc2VyaWVzIGZvciBhZGRpbmcgTVNUIHN1c3BlbmQvcmVzdW1lIHJl
+cHJvYmluZyB0aGF0CkkndmUgYmVlbiB3b3JraW5nIG9uIGZvciBxdWl0ZSBhIHdoaWxlIG5vdy4g
+SW4gYWRkaXRpb24sIEk6CgotIFJlZmFjdG9yZWQgYW5kIGNsZWFuZWQgdXAgYW55IGNvZGUgSSBl
+bmRlZCB1cCBkaWdnaW5nIHRocm91Z2ggaW4gdGhlCiAgcHJvY2VzcyBvZiB1bmRlcnN0YW5kaW5n
+IGhvdyBzb21lIHBhcnRzIG9mIHRoZXNlIGhlbHBlcnMgd29ya2VkLgotIEFkZGVkIHNvbWUgZGVi
+dWdnaW5nIHRvb2xzIGFsb25nIHRoZSB3YXkgdGhhdCBJIGVuZGVkIHVwIG5lZWRpbmcgdG8KICBm
+aWd1cmUgb3V0IHNvbWUgaXNzdWVzIGluIG15IG93biBjb2RlCgpOb3RlIHRoYXQgdGhlcmUncyBz
+dGlsbCBvbmUgaW1wb3J0YW50IHBhcnQgb2YgdGhpcyBwcm9jZXNzIG1pc3NpbmcKdGhhdCdzIG5v
+dCBpbmNsdWRlZCBpbiB0aGlzIHBhdGNoIHNlcmllczogRURJRCByZXByb2JpbmcsIHdoaWNoIEkK
+YmVsaWV2ZSBTdGFuaXNsYXYgTGlzb3Zza2l5IGZyb20gSW50ZWwgaXMgY3VycmVudGx5IHdvcmtp
+bmcgb24uIFRoZSBtYWluCnB1cnBvc2Ugb2YgdGhpcyBzZXJpZXMgaXMgdG8gZml4IHRoZSBpc3N1
+ZSBvZiB0aGUgaW4tbWVtb3J5IHRvcG9sb2d5CnN0YXRlIChlLmcuIGNvbm5lY3RvcnMgY29ubmVj
+dGVkIHRvIGFuIE1TVCBodWIsIGJyYW5jaCBkZXZpY2VzLCBldGMuKQpnb2luZyBvdXQgb2Ygc3lu
+YyBpZiBhIHRvcG9sb2d5IGNvbm5lY3RlZCB0byBhIGNvbm5lY3RvciBpcyBzd2FwcGVkIG91dAp3
+aXRoIGEgZGlmZmVyZW50IHRvcG9sb2d5IHdoaWxlIHRoZSBzeXN0ZW0gaXMgcmVzdW1lZCwgb3Ig
+d2hpbGUgdGhlCmRldmljZSBob3VzaW5nIHNhaWQgY29ubmVjdG9yIGlzIGluIHJ1bnRpbWUgc3Vz
+cGVuZC4KCkFzIHdlbGwsIHRoZSBkZWJ1Z2dpbmcgdG9vbHMgdGhhdCBhcmUgYWRkZWQgaW4gdGhp
+cyBpbmNsdWRlOgotIEEgbGltaXRlZCBkZWJ1Z2dpbmcgdXRpbGl0eSBmb3IgZHVtcGluZyB0aGUg
+bGlzdCBvZiB0b3BvbG9neQogIHJlZmVyZW5jZXMgb24gYW4gTVNUIHBvcnQgb3IgYnJhbmNoIGNv
+bm5lY3RvciB3aG9zZSB0b3BvbG9neSByZWZlcmVuY2UKICBjb3VudCBoYXMgcmVhY2hlZCAwCi0g
+U2lkZWJhbmQgZG93biByZXF1ZXN0IGR1bXBpbmcsIGFsb25nIHdpdGggc29tZSBiYXNpYyBzZWxm
+dGVzdHMgZm9yCiAgdGVzdGluZyBvdXIgZW5jb2RpbmcvZGVjb2RpbmcgZnVuY3Rpb25zCgoJCSAg
+IFBhdGNoc2VyaWVzIHdpZGUgY2hhbmdlcyBzaW5jZSB2MQotIEFkZCAiQ29tYmluZSByZWR1bmRh
+bnQgY2FzZXMgaW4gZHJtX2RwX2VuY29kZV9zaWRlYmFuZF9yZXEoKSIgdG8KICBmdWxmaWxsIHNv
+bWUgb2YgdGhlIGRhbnZldCdzIHJldmlldyByZXF1ZXN0cwoKTHl1ZGUgUGF1bCAoMjcpOgogIGRy
+bS9kcF9tc3Q6IE1vdmUgbGluayBhZGRyZXNzIGR1bXBpbmcgaW50byBhIGZ1bmN0aW9uCiAgZHJt
+L2RwX21zdDogR2V0IHJpZCBvZiBsaXN0IGNsZWFyIGluIGRlc3Ryb3lfY29ubmVjdG9yX3dvcmsK
+ICBkcm0vZHBfbXN0OiBEZXN0cm95IE1TVEJzIGFzeW5jaHJvbm91c2x5CiAgZHJtL2RwX21zdDog
+TW92ZSB0ZXN0X2NhbGNfcGJuX21vZGUoKSBpbnRvIGFuIGFjdHVhbCBzZWxmdGVzdAogIGRybS9w
+cmludDogQWRkIGRybV9lcnJfcHJpbnRlcigpCiAgZHJtL2RwX21zdDogQ29tYmluZSByZWR1bmRh
+bnQgY2FzZXMgaW4gZHJtX2RwX2VuY29kZV9zaWRlYmFuZF9yZXEoKQogIGRybS9kcF9tc3Q6IEFk
+ZCBzaWRlYmFuZCBkb3duIHJlcXVlc3QgdHJhY2luZyArIHNlbGZ0ZXN0cwogIGRybS9kcF9tc3Q6
+IFJlbW92ZSBQRFQgdGVhcmRvd24gaW4gZHJtX2RwX2Rlc3Ryb3lfcG9ydCgpIGFuZCByZWZhY3Rv
+cgogIGRybS9kcF9tc3Q6IFJlZmFjdG9yIGRybV9kcF9zZW5kX2VudW1fcGF0aF9yZXNvdXJjZXMK
+ICBkcm0vZHBfbXN0OiBSZW1vdmUgaHVnZSBjb25kaXRpb25hbCBpbiBkcm1fZHBfbXN0X2hhbmRs
+ZV91cF9yZXEoKQogIGRybS9kcF9tc3Q6IENvbnN0aWZ5IGd1aWQgaW4gZHJtX2RwX2dldF9tc3Rf
+YnJhbmNoX2J5X2d1aWQoKQogIGRybS9kcF9tc3Q6IFJlZmFjdG9yIGRybV9kcF9tc3RfaGFuZGxl
+X3VwX3JlcSgpCiAgZHJtL2RwX21zdDogUmVmYWN0b3IgZHJtX2RwX21zdF9oYW5kbGVfZG93bl9y
+ZXAoKQogIGRybS9kcF9tc3Q6IERlc3Ryb3kgdG9wb2xvZ3lfbWdyIG11dGV4ZXMKICBkcm0vZHBf
+bXN0OiBDbGVhbnVwIGRybV9kcF9zZW5kX2xpbmtfYWRkcmVzcygpIGEgYml0CiAgZHJtL2RwX21z
+dDogUmVmYWN0b3IgcGR0IHNldHVwL3RlYXJkb3duLCBhZGQgbW9yZSBsb2NraW5nCiAgZHJtL2Rw
+X21zdDogUmVuYW1lIGRybV9kcF9hZGRfcG9ydCBhbmQgZHJtX2RwX3VwZGF0ZV9wb3J0CiAgZHJt
+L2RwX21zdDogUmVtb3ZlIGxpZXMgaW4ge3VwLGRvd259X3JlcF9yZWN2IGRvY3VtZW50YXRpb24K
+ICBkcm0vZHBfbXN0OiBIYW5kbGUgVVAgcmVxdWVzdHMgYXN5bmNocm9ub3VzbHkKICBkcm0vZHBf
+bXN0OiBQcm90ZWN0IGRybV9kcF9tc3RfcG9ydCBtZW1iZXJzIHdpdGggY29ubmVjdGlvbl9tdXRl
+eAogIGRybS9kcF9tc3Q6IERvbid0IGZvcmdldCB0byB1cGRhdGUgcG9ydC0+aW5wdXQgaW4KICAg
+IGRybV9kcF9tc3RfaGFuZGxlX2Nvbm5fc3RhdCgpCiAgZHJtL25vdXZlYXU6IERvbid0IGdyYWIg
+cnVudGltZSBQTSByZWZzIGZvciBIUEQgSVJRcwogIGRybS9hbWRncHU6IEl0ZXJhdGUgdGhyb3Vn
+aCBEUk0gY29ubmVjdG9ycyBjb3JyZWN0bHkKICBkcm0vYW1kZ3B1L2RtOiBSZXN1bWUgc2hvcnQg
+SFBEIElSUXMgYmVmb3JlIHJlc3VtaW5nIE1TVCB0b3BvbG9neQogIGRybS9kcF9tc3Q6IEFkZCBi
+YXNpYyB0b3BvbG9neSByZXByb2Jpbmcgd2hlbiByZXN1bWluZwogIGRybS9kcF9tc3Q6IEFsc28g
+cHJpbnQgdW5oYXNoZWQgcG9pbnRlcnMgZm9yIG1hbGxvYy90b3BvbG9neQogICAgcmVmZXJlbmNl
+cwogIGRybS9kcF9tc3Q6IEFkZCB0b3BvbG9neSByZWYgaGlzdG9yeSB0cmFja2luZyBmb3IgZGVi
+dWdnaW5nCgogZHJpdmVycy9ncHUvZHJtL0tjb25maWcgICAgICAgICAgICAgICAgICAgICAgIHwg
+ICAxNCArCiAuLi4vZ3B1L2RybS9hbWQvYW1kZ3B1L2FtZGdwdV9jb25uZWN0b3JzLmMgICAgfCAg
+IDEzICstCiBkcml2ZXJzL2dwdS9kcm0vYW1kL2FtZGdwdS9hbWRncHVfZGV2aWNlLmMgICAgfCAg
+IDIwICstCiBkcml2ZXJzL2dwdS9kcm0vYW1kL2FtZGdwdS9hbWRncHVfZGlzcGxheS5jICAgfCAg
+ICA1ICstCiBkcml2ZXJzL2dwdS9kcm0vYW1kL2FtZGdwdS9hbWRncHVfZW5jb2RlcnMuYyAgfCAg
+IDQwICstCiBkcml2ZXJzL2dwdS9kcm0vYW1kL2FtZGdwdS9hbWRncHVfaXJxLmMgICAgICAgfCAg
+ICA1ICstCiBkcml2ZXJzL2dwdS9kcm0vYW1kL2FtZGdwdS9kY2VfdjEwXzAuYyAgICAgICAgfCAg
+IDM0ICstCiBkcml2ZXJzL2dwdS9kcm0vYW1kL2FtZGdwdS9kY2VfdjExXzAuYyAgICAgICAgfCAg
+IDM0ICstCiBkcml2ZXJzL2dwdS9kcm0vYW1kL2FtZGdwdS9kY2VfdjZfMC5jICAgICAgICAgfCAg
+IDQwICstCiBkcml2ZXJzL2dwdS9kcm0vYW1kL2FtZGdwdS9kY2VfdjhfMC5jICAgICAgICAgfCAg
+IDM0ICstCiAuLi4vZ3B1L2RybS9hbWQvZGlzcGxheS9hbWRncHVfZG0vYW1kZ3B1X2RtLmMgfCAg
+IDQxICstCiAuLi4vZHJtL2FtZC9kaXNwbGF5L2FtZGdwdV9kbS9hbWRncHVfZG1faXJxLmMgfCAg
+IDEwICstCiBkcml2ZXJzL2dwdS9kcm0vZHJtX2RwX21zdF90b3BvbG9neS5jICAgICAgICAgfCAx
+NjMzICsrKysrKysrKysrKystLS0tCiAuLi4vZ3B1L2RybS9kcm1fZHBfbXN0X3RvcG9sb2d5X2lu
+dGVybmFsLmggICAgfCAgIDI0ICsKIGRyaXZlcnMvZ3B1L2RybS9kcm1fcHJpbnQuYyAgICAgICAg
+ICAgICAgICAgICB8ICAgIDYgKwogZHJpdmVycy9ncHUvZHJtL2k5MTUvZGlzcGxheS9pbnRlbF9k
+cC5jICAgICAgIHwgICAgMyArLQogZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvZGlzcG52NTAvZGlz
+cC5jICAgICAgIHwgICAgNiArLQogZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9jb25u
+ZWN0b3IuYyAgIHwgICAzMyArLQogZHJpdmVycy9ncHUvZHJtL3NlbGZ0ZXN0cy9NYWtlZmlsZSAg
+ICAgICAgICAgIHwgICAgMiArLQogLi4uL2dwdS9kcm0vc2VsZnRlc3RzL2RybV9tb2Rlc2V0X3Nl
+bGZ0ZXN0cy5oIHwgICAgMiArCiAuLi4vZHJtL3NlbGZ0ZXN0cy90ZXN0LWRybV9kcF9tc3RfaGVs
+cGVyLmMgICAgfCAgMjM4ICsrKwogLi4uL2RybS9zZWxmdGVzdHMvdGVzdC1kcm1fbW9kZXNldF9j
+b21tb24uaCAgIHwgICAgMiArCiBpbmNsdWRlL2RybS9kcm1fZHBfbXN0X2hlbHBlci5oICAgICAg
+ICAgICAgICAgfCAgMTQzICstCiBpbmNsdWRlL2RybS9kcm1fcHJpbnQuaCAgICAgICAgICAgICAg
+ICAgICAgICAgfCAgIDE3ICsKIDI0IGZpbGVzIGNoYW5nZWQsIDE4NzMgaW5zZXJ0aW9ucygrKSwg
+NTI2IGRlbGV0aW9ucygtKQogY3JlYXRlIG1vZGUgMTAwNjQ0IGRyaXZlcnMvZ3B1L2RybS9kcm1f
+ZHBfbXN0X3RvcG9sb2d5X2ludGVybmFsLmgKIGNyZWF0ZSBtb2RlIDEwMDY0NCBkcml2ZXJzL2dw
+dS9kcm0vc2VsZnRlc3RzL3Rlc3QtZHJtX2RwX21zdF9oZWxwZXIuYwoKLS0gCjIuMjEuMAoKX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBtYWls
+aW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5mcmVl
+ZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
