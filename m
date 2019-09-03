@@ -1,46 +1,43 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 834E3A6DF7
-	for <lists+nouveau@lfdr.de>; Tue,  3 Sep 2019 18:20:54 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 287A7A6E81
+	for <lists+nouveau@lfdr.de>; Tue,  3 Sep 2019 18:27:31 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0C3A6890FE;
-	Tue,  3 Sep 2019 16:20:53 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 877CD89780;
+	Tue,  3 Sep 2019 16:27:29 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
- by gabe.freedesktop.org (Postfix) with ESMTP id 8D9CA89356
- for <nouveau@lists.freedesktop.org>; Tue,  3 Sep 2019 16:20:52 +0000 (UTC)
-Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 8A37F72161; Tue,  3 Sep 2019 16:20:52 +0000 (UTC)
-From: bugzilla-daemon@freedesktop.org
-To: nouveau@lists.freedesktop.org
-Date: Tue, 03 Sep 2019 16:20:52 +0000
-X-Bugzilla-Reason: AssignedTo
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: None
-X-Bugzilla-Product: xorg
-X-Bugzilla-Component: Driver/nouveau
-X-Bugzilla-Version: unspecified
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: normal
-X-Bugzilla-Who: brayden08sheean@gmail.com
-X-Bugzilla-Status: NEW
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: medium
-X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-108980-8800-jUrWAJNNCh@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-108980-8800@http.bugs.freedesktop.org/>
-References: <bug-108980-8800@http.bugs.freedesktop.org/>
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
+Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7650189780;
+ Tue,  3 Sep 2019 16:27:28 +0000 (UTC)
+Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
+ [73.47.72.35])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 920FB23878;
+ Tue,  3 Sep 2019 16:27:27 +0000 (UTC)
+From: Sasha Levin <sashal@kernel.org>
+To: linux-kernel@vger.kernel.org,
+	stable@vger.kernel.org
+Date: Tue,  3 Sep 2019 12:23:42 -0400
+Message-Id: <20190903162519.7136-70-sashal@kernel.org>
+X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20190903162519.7136-1-sashal@kernel.org>
+References: <20190903162519.7136-1-sashal@kernel.org>
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 108980] GF117: MMIO write of 0000001f FAULT at
- 6013d4 [ IBUS ]
+X-stable: review
+X-Patchwork-Hint: Ignore
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=kernel.org; s=default; t=1567528048;
+ bh=HhjMPDYWRfDZBm9ZYOsXvGnHX2QeGL7rJQdeG914/1Y=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=UEPGl3zVYHlg0Lp7IqIfM/3pHGmWwoGB2qAicL8fNttm0BVEmnYVihsmww+k+OsKf
+ f7rt21rER34hnnhwvdQKW4Z0wGr0y4eINtFX9/GW5iLp04dVuYr4Gpg+HBEH6L7h5H
+ nBMKbwcrn8nQW6H7PFl6bZUKMQFw40yk1xVUj1fc=
+Subject: [Nouveau] [PATCH AUTOSEL 4.19 070/167] drm/nouveau: Don't WARN_ON
+ VCPI allocation failures
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -52,98 +49,38 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1658624408=="
+Cc: Sasha Levin <sashal@kernel.org>, nouveau@lists.freedesktop.org,
+ Ben Skeggs <bskeggs@redhat.com>, dri-devel@lists.freedesktop.org
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-
---===============1658624408==
-Content-Type: multipart/alternative; boundary="15675276523.E515B58.13520"
-Content-Transfer-Encoding: 7bit
-
-
---15675276523.E515B58.13520
-Date: Tue, 3 Sep 2019 16:20:52 +0000
-MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-https://bugs.freedesktop.org/show_bug.cgi?id=3D108980
-
---- Comment #17 from Katie Webber <brayden08sheean@gmail.com> ---
-That would be a great extra menu. This software can really be used for
-educational purposes. This menu will greatly simplify the task. I would also
-add a feature to buy coursework through some kind of educational website. I
-recommend using the service https://papersowl.com/buy-term-paper I have been
-using this for many years and have always been pleased. This can be a great
-addition to all the software.
-
---=20
-You are receiving this mail because:
-You are the assignee for the bug.=
-
---15675276523.E515B58.13520
-Date: Tue, 3 Sep 2019 16:20:52 +0000
-MIME-Version: 1.0
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-<html>
-    <head>
-      <base href=3D"https://bugs.freedesktop.org/">
-    </head>
-    <body>
-      <p>
-        <div>
-            <b><a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - GF117: MMIO write of 0000001f FAULT at 6013d4 [ IBUS ]"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D108980#c17">Comme=
-nt # 17</a>
-              on <a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - GF117: MMIO write of 0000001f FAULT at 6013d4 [ IBUS ]"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D108980">bug 10898=
-0</a>
-              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
-brayden08sheean&#64;gmail.com" title=3D"Katie Webber &lt;brayden08sheean&#6=
-4;gmail.com&gt;"> <span class=3D"fn">Katie Webber</span></a>
-</span></b>
-        <pre>That would be a great extra menu. This software can really be =
-used for
-educational purposes. This menu will greatly simplify the task. I would also
-add a feature to buy coursework through some kind of educational website. I
-recommend using the service <a href=3D"https://papersowl.com/buy-term-paper=
-">https://papersowl.com/buy-term-paper</a> I have been
-using this for many years and have always been pleased. This can be a great
-addition to all the software.</pre>
-        </div>
-      </p>
-
-
-      <hr>
-      <span>You are receiving this mail because:</span>
-
-      <ul>
-          <li>You are the assignee for the bug.</li>
-      </ul>
-    </body>
-</html>=
-
---15675276523.E515B58.13520--
-
---===============1658624408==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
-YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
-cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
-
---===============1658624408==--
+RnJvbTogTHl1ZGUgUGF1bCA8bHl1ZGVAcmVkaGF0LmNvbT4KClsgVXBzdHJlYW0gY29tbWl0IGI1
+MTNhMThjZjFkNzA1YmQwNGVmZDkxYzQxN2U3OWU0OTM4YmUwOTMgXQoKVGhpcyBpcyBtdWNoIGxv
+dWRlciB0aGVuIHdlIHdhbnQuIFZDUEkgYWxsb2NhdGlvbiBmYWlsdXJlcyBhcmUgcXVpdGUKbm9y
+bWFsLCBzaW5jZSB0aGV5IHdpbGwgaGFwcGVuIGlmIGFueSBwYXJ0IG9mIHRoZSBtb2Rlc2V0dGlu
+ZyBwcm9jZXNzIGlzCmludGVycnVwdGVkIGJ5IHJlbW92aW5nIHRoZSBEUCBNU1QgdG9wb2xvZ3kg
+aW4gcXVlc3Rpb24uIFNvIGp1c3QgcHJpbnQgYQpkZWJ1Z2dpbmcgbWVzc2FnZSBvbiBWQ1BJIGZh
+aWx1cmVzIGluc3RlYWQuCgpTaWduZWQtb2ZmLWJ5OiBMeXVkZSBQYXVsIDxseXVkZUByZWRoYXQu
+Y29tPgpGaXhlczogZjQ3OWMwYmE0YTE3ICgiZHJtL25vdXZlYXUva21zL252NTA6IGluaXRpYWwg
+c3VwcG9ydCBmb3IgRFAgMS4yIG11bHRpLXN0cmVhbSIpCkNjOiBCZW4gU2tlZ2dzIDxic2tlZ2dz
+QHJlZGhhdC5jb20+CkNjOiBkcmktZGV2ZWxAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCkNjOiBub3V2
+ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpDYzogPHN0YWJsZUB2Z2VyLmtlcm5lbC5vcmc+ICMg
+djQuMTArClNpZ25lZC1vZmYtYnk6IEJlbiBTa2VnZ3MgPGJza2VnZ3NAcmVkaGF0LmNvbT4KU2ln
+bmVkLW9mZi1ieTogU2FzaGEgTGV2aW4gPHNhc2hhbEBrZXJuZWwub3JnPgotLS0KIGRyaXZlcnMv
+Z3B1L2RybS9ub3V2ZWF1L2Rpc3BudjUwL2Rpc3AuYyB8IDMgKystCiAxIGZpbGUgY2hhbmdlZCwg
+MiBpbnNlcnRpb25zKCspLCAxIGRlbGV0aW9uKC0pCgpkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUv
+ZHJtL25vdXZlYXUvZGlzcG52NTAvZGlzcC5jIGIvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvZGlz
+cG52NTAvZGlzcC5jCmluZGV4IGY4ODlkNDFhMjgxZmEuLjVlMDFiZmI2OWQ3YTMgMTAwNjQ0Ci0t
+LSBhL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L2Rpc3BudjUwL2Rpc3AuYworKysgYi9kcml2ZXJz
+L2dwdS9kcm0vbm91dmVhdS9kaXNwbnY1MC9kaXNwLmMKQEAgLTc1OSw3ICs3NTksOCBAQCBudjUw
+X21zdG9fZW5hYmxlKHN0cnVjdCBkcm1fZW5jb2RlciAqZW5jb2RlcikKIAogCXNsb3RzID0gZHJt
+X2RwX2ZpbmRfdmNwaV9zbG90cygmbXN0bS0+bWdyLCBtc3RjLT5wYm4pOwogCXIgPSBkcm1fZHBf
+bXN0X2FsbG9jYXRlX3ZjcGkoJm1zdG0tPm1nciwgbXN0Yy0+cG9ydCwgbXN0Yy0+cGJuLCBzbG90
+cyk7Ci0JV0FSTl9PTighcik7CisJaWYgKCFyKQorCQlEUk1fREVCVUdfS01TKCJGYWlsZWQgdG8g
+YWxsb2NhdGUgVkNQSVxuIik7CiAKIAlpZiAoIW1zdG0tPmxpbmtzKyspCiAJCW52NTBfb3V0cF9h
+Y3F1aXJlKG1zdG0tPm91dHApOwotLSAKMi4yMC4xCgpfX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fXwpOb3V2ZWF1IG1haWxpbmcgbGlzdApOb3V2ZWF1QGxpc3Rz
+LmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xp
+c3RpbmZvL25vdXZlYXU=
