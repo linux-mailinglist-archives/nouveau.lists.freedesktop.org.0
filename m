@@ -2,51 +2,45 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 96174A9DEB
-	for <lists+nouveau@lfdr.de>; Thu,  5 Sep 2019 11:12:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3ADA0AA660
+	for <lists+nouveau@lfdr.de>; Thu,  5 Sep 2019 16:48:08 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9BB1989ECD;
-	Thu,  5 Sep 2019 09:12:02 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 173CA6E112;
+	Thu,  5 Sep 2019 14:48:06 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4B7BF89ECD
- for <nouveau@lists.freedesktop.org>; Thu,  5 Sep 2019 09:12:01 +0000 (UTC)
-Received: from mail-io1-f69.google.com (mail-io1-f69.google.com
- [209.85.166.69])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id DDDED19CF89
- for <nouveau@lists.freedesktop.org>; Thu,  5 Sep 2019 09:12:00 +0000 (UTC)
-Received: by mail-io1-f69.google.com with SMTP id x21so2385872ion.10
- for <nouveau@lists.freedesktop.org>; Thu, 05 Sep 2019 02:12:00 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=8YgkTckHnd+oBCtkJ3PeDRAfoIVwhj7X9BQME1lU8Rk=;
- b=MJmID51kwlrZafGWPVl4W+COjPIW6EbiY4hFA41E6IkZddVSHeVXbSA2GTDmfGTzvW
- LyDSbatHW58owgk0F9JdZ/HC13Cx27XUOFe2S7EA26NJ+IcChWCN5WLYG9zzxuP3fTEu
- dgt37QlIvW+72H3W1bZua+qRo8MHG2WV94b1AgtBN6MHgwSKkAxiaBAxcnNqN8bLdvJm
- e7VQhGy+f+TpdwPX+KfzvLQCY21weAMSMV2cUptng2GFTtIxiPi8JfSOBxw/QT6VGkZm
- hDL7Ijp4EOOnyPe/NGppAl3KpRXRdh3QOhSJFuIk9xsjdzQWjHKUaZzZ3HTwWfr22Fzk
- TubA==
-X-Gm-Message-State: APjAAAV7xK5YmQZqnDLhdZVDQQY48MCRHEQM3gQh1Q3vWa66HsaxleqR
- OwuELL5tdZY1Jtpmq/V1vni3Maf7M9SxQa1bl2n533PGPQJk33+ngiaIqF00yXF8SRG+MRleIIf
- njZFEpKo14NKPBHsRw7hA4PoG1rEaVuP0b+VzGDtq4g==
-X-Received: by 2002:a5e:9509:: with SMTP id r9mr2974890ioj.100.1567674720331; 
- Thu, 05 Sep 2019 02:12:00 -0700 (PDT)
-X-Google-Smtp-Source: APXvYqxrAdsLGhijKZkQDVkShWA1yVxV6uG4TFkYu7Bb2m8Nd+GkGxi48OkzyFxBIWpeZjPbwU+pUog6KRuQLHZzDhI=
-X-Received: by 2002:a5e:9509:: with SMTP id r9mr2974868ioj.100.1567674720115; 
- Thu, 05 Sep 2019 02:12:00 -0700 (PDT)
+Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
+ [131.252.210.165])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 1AAAF6E113
+ for <nouveau@lists.freedesktop.org>; Thu,  5 Sep 2019 14:48:04 +0000 (UTC)
+Received: by culpepper.freedesktop.org (Postfix, from userid 33)
+ id 16D0C72161; Thu,  5 Sep 2019 14:48:04 +0000 (UTC)
+From: bugzilla-daemon@freedesktop.org
+To: nouveau@lists.freedesktop.org
+Date: Thu, 05 Sep 2019 14:48:03 +0000
+X-Bugzilla-Reason: AssignedTo
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: None
+X-Bugzilla-Product: xorg
+X-Bugzilla-Component: Driver/nouveau
+X-Bugzilla-Version: unspecified
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: critical
+X-Bugzilla-Who: walicki@us.ibm.com
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: high
+X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: cc
+Message-ID: <bug-100567-8800-qwAnE5mKda@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-100567-8800@http.bugs.freedesktop.org/>
+References: <bug-100567-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-References: <20190904141857.196103-1-weiyongjun1@huawei.com>
-In-Reply-To: <20190904141857.196103-1-weiyongjun1@huawei.com>
-From: Karol Herbst <kherbst@redhat.com>
-Date: Thu, 5 Sep 2019 11:11:49 +0200
-Message-ID: <CACO55tsJt2Z-EQBpPw1=yq_jya2kJ5u5xs_xg=nhB8ZHwhjCoA@mail.gmail.com>
-To: Wei Yongjun <weiyongjun1@huawei.com>
-Subject: Re: [Nouveau] [PATCH] drm/nouveau: add missing single_release()
+Subject: [Nouveau] [Bug 100567] Nouveau system freeze fifo: SCHED_ERROR 0a
+ [CTXSW_TIMEOUT]
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -58,37 +52,225 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, nouveau <nouveau@lists.freedesktop.org>,
- kernel-janitors@vger.kernel.org, LKML <linux-kernel@vger.kernel.org>,
- dri-devel <dri-devel@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>,
- Daniel Vetter <daniel@ffwll.ch>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============0294196047=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-UmV2aWV3ZWQtYnk6IEthcm9sIEhlcmJzdCA8a2hlcmJzdEByZWRoYXQuY29tPgoKT24gVGh1LCBT
-ZXAgNSwgMjAxOSBhdCA5OjE0IEFNIFdlaSBZb25nanVuIDx3ZWl5b25nanVuMUBodWF3ZWkuY29t
-PiB3cm90ZToKPgo+IFdoZW4gdXNpbmcgc2luZ2xlX29wZW4oKSBmb3Igb3BlbmluZywgc2luZ2xl
-X3JlbGVhc2UoKSBzaG91bGQgYmUKPiB1c2VkLCBvdGhlcndpc2UgdGhlcmUgaXMgYSBtZW1vcnkg
-bGVhay4KPgo+IFRoaXMgaXMgZGV0ZWN0ZWQgYnkgQ29jY2luZWxsZSBzZW1hbnRpYyBwYXRjaC4K
-Pgo+IEZpeGVzOiA2ZTlmYzE3NzM5OWYgKCJkcm0vbm91dmVhdS9kZWJ1Z2ZzOiBhZGQgY29weSBv
-ZiBzeXNmcyBwc3RhdGUgaW50ZXJmYWNlIHBvcnRlZCB0byBkZWJ1Z2ZzIikKPiBTaWduZWQtb2Zm
-LWJ5OiBXZWkgWW9uZ2p1biA8d2VpeW9uZ2p1bjFAaHVhd2VpLmNvbT4KPiAtLS0KPiAgZHJpdmVy
-cy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9kZWJ1Z2ZzLmMgfCAxICsKPiAgMSBmaWxlIGNoYW5n
-ZWQsIDEgaW5zZXJ0aW9uKCspCj4KPiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL25vdXZl
-YXUvbm91dmVhdV9kZWJ1Z2ZzLmMgYi9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2Rl
-YnVnZnMuYwo+IGluZGV4IDdkZmJiYmMxYmVlYS4uMzU2OTVmNDkzMjcxIDEwMDY0NAo+IC0tLSBh
-L2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfZGVidWdmcy5jCj4gKysrIGIvZHJpdmVy
-cy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9kZWJ1Z2ZzLmMKPiBAQCAtMjAyLDYgKzIwMiw3IEBA
-IHN0YXRpYyBjb25zdCBzdHJ1Y3QgZmlsZV9vcGVyYXRpb25zIG5vdXZlYXVfcHN0YXRlX2ZvcHMg
-PSB7Cj4gICAgICAgICAub3BlbiA9IG5vdXZlYXVfZGVidWdmc19wc3RhdGVfb3BlbiwKPiAgICAg
-ICAgIC5yZWFkID0gc2VxX3JlYWQsCj4gICAgICAgICAud3JpdGUgPSBub3V2ZWF1X2RlYnVnZnNf
-cHN0YXRlX3NldCwKPiArICAgICAgIC5yZWxlYXNlID0gc2luZ2xlX3JlbGVhc2UsCj4gIH07Cj4K
-PiAgc3RhdGljIHN0cnVjdCBkcm1faW5mb19saXN0IG5vdXZlYXVfZGVidWdmc19saXN0W10gPSB7
-Cj4KPgo+Cj4gX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18K
-PiBkcmktZGV2ZWwgbWFpbGluZyBsaXN0Cj4gZHJpLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9y
-Zwo+IGh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vZHJpLWRl
-dmVsCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCk5vdXZl
-YXUgbWFpbGluZyBsaXN0Ck5vdXZlYXVAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlz
-dHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vbm91dmVhdQ==
+
+--===============0294196047==
+Content-Type: multipart/alternative; boundary="15676948840.F9AE.12436"
+Content-Transfer-Encoding: 7bit
+
+
+--15676948840.F9AE.12436
+Date: Thu, 5 Sep 2019 14:48:04 +0000
+MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+https://bugs.freedesktop.org/show_bug.cgi?id=3D100567
+
+John Walicki <walicki@us.ibm.com> changed:
+
+           What    |Removed                     |Added
+----------------------------------------------------------------------------
+                 CC|                            |walicki@us.ibm.com
+
+--- Comment #38 from John Walicki <walicki@us.ibm.com> ---
+The nouveau driver on my ThinkPad P50 (running RHEL 7.7 with a
+5.2.11-1.el7.elrepo.x86_64 kernel) just hung up with this same error.
+
+Sep  5 09:04:48 jaw-p50rhel7 kernel: nouveau 0000:01:00.0: fifo: SCHED_ERRO=
+R 0a
+[CTXSW_TIMEOUT]
+Sep  5 09:04:48 jaw-p50rhel7 kernel: nouveau 0000:01:00.0: fifo: runlist 0:
+scheduled for recovery
+Sep  5 09:04:48 jaw-p50rhel7 kernel: nouveau 0000:01:00.0: fifo: channel 2:
+killed
+Sep  5 09:04:48 jaw-p50rhel7 kernel: nouveau 0000:01:00.0: fifo: engine 0:
+scheduled for recovery
+Sep  5 09:04:48 jaw-p50rhel7 kernel: nouveau 0000:01:00.0: X[5775]: channel=
+ 2
+killed!
+
+What is possibly interesting is that in /var/log/Xorg.0.log
+there was a mouse event that matches exactly with the timing of the nouveau
+errors.
+
+[150241.393] AUDIT: Thu Sep  5 09:04:19 2019: 5775: client 43 disconnected
+[150241.396] AUDIT: Thu Sep  5 09:04:19 2019: 5775: client 44 disconnected
+[150270.473] (II) event8  - Logitech USB Receiver: SYN_DROPPED event - some
+input events have been lost.
+
+The [bracket] is a timestamp which indicates the time since the system last
+booted, in seconds. So 150270 is 29 seconds after the 09:04:19 timestamped
+line.=20
+09:04:19 + 29 seconds is 09:04:48
+The nouveau driver hung at that time (see /var/log/messages timestamp above)
+Not certain if that was cause or effect of the video driver hang.
+
+I was able to ssh into my system to reboot.
+
+$ lspci -vv -s 01:00.0
+01:00.0 VGA compatible controller: NVIDIA Corporation GM107GLM [Quadro M100=
+0M]
+(rev a2) (prog-if 00 [VGA controller])
+        Subsystem: Lenovo Device 2230
+        Control: I/O+ Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr-
+Stepping- SERR- FastB2B- DisINTx+
+        Status: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=3Dfast >TAbort- <T=
+Abort-
+<MAbort- >SERR- <PERR- INTx-
+        Latency: 0
+        Interrupt: pin A routed to IRQ 129
+        Region 0: Memory at b2000000 (32-bit, non-prefetchable) [size=3D16M]
+        Region 1: Memory at a0000000 (64-bit, prefetchable) [size=3D256M]
+        Region 3: Memory at b0000000 (64-bit, prefetchable) [size=3D32M]
+        Region 5: I/O ports at 4000 [size=3D128]
+        Expansion ROM at 000c0000 [disabled] [size=3D128K]
+        Capabilities: <access denied>
+        Kernel driver in use: nouveau
+        Kernel modules: nouveau
+
+--=20
+You are receiving this mail because:
+You are the assignee for the bug.=
+
+--15676948840.F9AE.12436
+Date: Thu, 5 Sep 2019 14:48:04 +0000
+MIME-Version: 1.0
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+<html>
+    <head>
+      <base href=3D"https://bugs.freedesktop.org/">
+    </head>
+    <body><span class=3D"vcard"><a class=3D"email" href=3D"mailto:walicki&#=
+64;us.ibm.com" title=3D"John Walicki &lt;walicki&#64;us.ibm.com&gt;"> <span=
+ class=3D"fn">John Walicki</span></a>
+</span> changed
+          <a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - Nouveau system freeze fifo: SCHED_ERROR 0a [CTXSW_TIMEOUT=
+]"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D100567">bug 10056=
+7</a>
+          <br>
+             <table border=3D"1" cellspacing=3D"0" cellpadding=3D"8">
+          <tr>
+            <th>What</th>
+            <th>Removed</th>
+            <th>Added</th>
+          </tr>
+
+         <tr>
+           <td style=3D"text-align:right;">CC</td>
+           <td>
+               &nbsp;
+           </td>
+           <td>walicki&#64;us.ibm.com
+           </td>
+         </tr></table>
+      <p>
+        <div>
+            <b><a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - Nouveau system freeze fifo: SCHED_ERROR 0a [CTXSW_TIMEOUT=
+]"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D100567#c38">Comme=
+nt # 38</a>
+              on <a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - Nouveau system freeze fifo: SCHED_ERROR 0a [CTXSW_TIMEOUT=
+]"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D100567">bug 10056=
+7</a>
+              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
+walicki&#64;us.ibm.com" title=3D"John Walicki &lt;walicki&#64;us.ibm.com&gt=
+;"> <span class=3D"fn">John Walicki</span></a>
+</span></b>
+        <pre>The nouveau driver on my ThinkPad P50 (running RHEL 7.7 with a
+5.2.11-1.el7.elrepo.x86_64 kernel) just hung up with this same error.
+
+Sep  5 09:04:48 jaw-p50rhel7 kernel: nouveau 0000:01:00.0: fifo: SCHED_ERRO=
+R 0a
+[CTXSW_TIMEOUT]
+Sep  5 09:04:48 jaw-p50rhel7 kernel: nouveau 0000:01:00.0: fifo: runlist 0:
+scheduled for recovery
+Sep  5 09:04:48 jaw-p50rhel7 kernel: nouveau 0000:01:00.0: fifo: channel 2:
+killed
+Sep  5 09:04:48 jaw-p50rhel7 kernel: nouveau 0000:01:00.0: fifo: engine 0:
+scheduled for recovery
+Sep  5 09:04:48 jaw-p50rhel7 kernel: nouveau 0000:01:00.0: X[5775]: channel=
+ 2
+killed!
+
+What is possibly interesting is that in /var/log/Xorg.0.log
+there was a mouse event that matches exactly with the timing of the nouveau
+errors.
+
+[150241.393] AUDIT: Thu Sep  5 09:04:19 2019: 5775: client 43 disconnected
+[150241.396] AUDIT: Thu Sep  5 09:04:19 2019: 5775: client 44 disconnected
+[150270.473] (II) event8  - Logitech USB Receiver: SYN_DROPPED event - some
+input events have been lost.
+
+The [bracket] is a timestamp which indicates the time since the system last
+booted, in seconds. So 150270 is 29 seconds after the 09:04:19 timestamped
+line.=20
+09:04:19 + 29 seconds is 09:04:48
+The nouveau driver hung at that time (see /var/log/messages timestamp above)
+Not certain if that was cause or effect of the video driver hang.
+
+I was able to ssh into my system to reboot.
+
+$ lspci -vv -s 01:00.0
+01:00.0 VGA compatible controller: NVIDIA Corporation GM107GLM [Quadro M100=
+0M]
+(rev a2) (prog-if 00 [VGA controller])
+        Subsystem: Lenovo Device 2230
+        Control: I/O+ Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr-
+Stepping- SERR- FastB2B- DisINTx+
+        Status: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=3Dfast &gt;TAbort-=
+ &lt;TAbort-
+&lt;MAbort- &gt;SERR- &lt;PERR- INTx-
+        Latency: 0
+        Interrupt: pin A routed to IRQ 129
+        Region 0: Memory at b2000000 (32-bit, non-prefetchable) [size=3D16M]
+        Region 1: Memory at a0000000 (64-bit, prefetchable) [size=3D256M]
+        Region 3: Memory at b0000000 (64-bit, prefetchable) [size=3D32M]
+        Region 5: I/O ports at 4000 [size=3D128]
+        Expansion ROM at 000c0000 [disabled] [size=3D128K]
+        Capabilities: &lt;access denied&gt;
+        Kernel driver in use: nouveau
+        Kernel modules: nouveau</pre>
+        </div>
+      </p>
+
+
+      <hr>
+      <span>You are receiving this mail because:</span>
+
+      <ul>
+          <li>You are the assignee for the bug.</li>
+      </ul>
+    </body>
+</html>=
+
+--15676948840.F9AE.12436--
+
+--===============0294196047==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
+YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
+cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============0294196047==--
