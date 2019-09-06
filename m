@@ -1,56 +1,45 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 76237AB74C
-	for <lists+nouveau@lfdr.de>; Fri,  6 Sep 2019 13:43:11 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 32498ABD84
+	for <lists+nouveau@lfdr.de>; Fri,  6 Sep 2019 18:17:45 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id ED9796E264;
-	Fri,  6 Sep 2019 11:43:09 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B9FA76E31D;
+	Fri,  6 Sep 2019 16:17:42 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7D1006E264
- for <nouveau@lists.freedesktop.org>; Fri,  6 Sep 2019 11:43:09 +0000 (UTC)
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id DCF8169060
- for <nouveau@lists.freedesktop.org>; Fri,  6 Sep 2019 11:43:08 +0000 (UTC)
-Received: by mail-wm1-f72.google.com with SMTP id k67so2084241wmf.3
- for <nouveau@lists.freedesktop.org>; Fri, 06 Sep 2019 04:43:08 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=gByWDGKI6+JrCtmdIoDDq0628OZn46GYDbFIMf0dhwQ=;
- b=nFvcL4RVm+BsWLE3QJXG5H3ivpr0xf+LMlfPbFZMWGyWNC6GKu/DBeon1CHoaNXIBP
- ovo4RBF6Z4beESiF9uA4YoZBJoLrZwjOBExWXkfFAimDBDug5kEYHhk86OajUsioOEea
- J9hbpHGDYLzfrUau6OsXGcl5Cf+X/AfuxISCSDDk5zCEdnY/oq/BC43uvrTKXKRPNSkB
- C14wFNXC1tajNOYbRH92Pkd5BUzVYcM6vsXslDbOy3Pm96Iq6Mlx1ANUXYllLNs3z5M/
- smgngO8uZTJqOfPKjTY+/rkHUQmTp/kWGK1ed5RNcbn52fAaLU6EH9uQlEwKLDjBJPNR
- l7vw==
-X-Gm-Message-State: APjAAAUe6yOPu1nCexNfefFkb43Ri6+0EM4tdoJHaoOKg0saVb7bKmIL
- V9/OJSHR+5UdR0LCfasbQfzXVfkQ/PX4IARVTxaOIkWoSwwajHKtZUukTeF4yu3mWJN/gx7o89l
- GMhtLMmvx07q9DbcOejG6Jfzt6w==
-X-Received: by 2002:adf:e881:: with SMTP id d1mr6763818wrm.301.1567770187518; 
- Fri, 06 Sep 2019 04:43:07 -0700 (PDT)
-X-Google-Smtp-Source: APXvYqy2G7OqN1Ndb145lLRVh28PrqL03QXfdLgij0+bSPaairnwclMa4zKvOiy/f0OX6ax5ObgXug==
-X-Received: by 2002:adf:e881:: with SMTP id d1mr6763800wrm.301.1567770187306; 
- Fri, 06 Sep 2019 04:43:07 -0700 (PDT)
-Received: from localhost.localdomain.com (nat-pool-brq-t.redhat.com.
- [213.175.37.10])
- by smtp.gmail.com with ESMTPSA id y3sm4914289wrl.78.2019.09.06.04.43.06
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 06 Sep 2019 04:43:06 -0700 (PDT)
-From: Mark Menzynski <mmenzyns@redhat.com>
+Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
+ [131.252.210.165])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 07DC16E31D
+ for <nouveau@lists.freedesktop.org>; Fri,  6 Sep 2019 16:17:42 +0000 (UTC)
+Received: by culpepper.freedesktop.org (Postfix, from userid 33)
+ id F3F5572161; Fri,  6 Sep 2019 16:17:41 +0000 (UTC)
+From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Fri,  6 Sep 2019 13:43:03 +0200
-Message-Id: <20190906114303.7559-1-mmenzyns@redhat.com>
-X-Mailer: git-send-email 2.21.0
+Date: Fri, 06 Sep 2019 16:17:42 +0000
+X-Bugzilla-Reason: AssignedTo
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: None
+X-Bugzilla-Product: xorg
+X-Bugzilla-Component: Driver/nouveau
+X-Bugzilla-Version: unspecified
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: critical
+X-Bugzilla-Who: john@jlindgren.net
+X-Bugzilla-Status: REOPENED
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: medium
+X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: 
+Message-ID: <bug-110714-8800-OkiPNK8Tpi@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-110714-8800@http.bugs.freedesktop.org/>
+References: <bug-110714-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-Subject: [Nouveau] [PATCH v3] clk: Restore BYPASS_PLL_CHECK from PLLs
+Subject: [Nouveau] [Bug 110714] Xorg crashes randomly because of memory leak
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -62,76 +51,113 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1274407736=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-SSBoYXZlIGxvb2tlZCBhdCBwcm9ibGVtIHdpdGggRmVybWkgR1BVcyB3aGVyZSBjaGFuZ2luZyB0
-byBoaWdoZXIgY2xvY2sKbGVkIHRvIHJlYWxseSBiYWQgcGVyZm9tYW5jZSAod2l0aCBHcHVUZXN0
-IDIweCB3b3JzZSBwZXJmb21hbmNlKSBhbmQgbGF0ZXIgYWxzbyBjcmFzaGVzIG9mIHRoZSBub3V2
-ZWF1LiBJdCBzZWVtZWQKdG8gYmUgYWZmZWN0ZWQgYnkgU2hhZGVyIENsb2NrIGluIFZvbHRhZ2Ug
-RW50cmllcyBpbiB0aGUgdmlkZW8gQklPUy4gRGlzYWJsaW5nCkJZUEFTU19QTExfQ0hFQ0sgaW4g
-Q0xLMF9DVFJMIHNlZW1zIHRvIGNvbXBsZXRlbHkgZml4IHRoZSBpc3N1ZS4gSSBoYXZlCnRyaWVk
-IHRvIHNlYXJjaCB0aGlzIEJZUEFTU19QTExfQ0hFQ0sgaW4gTnZpZGlhIHRyYWNlcyBidXQgc2Vl
-bWVkIGl0Cndhc24ndCB1c2VkIG5vd2hlcmUgZm9yIENMSyBzZXR0aW5ncy4KClJlbW92aW5nIHRo
-aXMgd29ya3MgZmluZSwgYnV0IEkgZG9uJ3Qga25vdyB3aGF0IGl0J3MgcmVhbGx5IGZvci4KQWN0
-dWFsIGJpdCBzZXR0aW5nIHRoaXMgQllQQVNTX1BMTF9DSEVDSyBpcyBvbiAweDEwOgoJbG9va3Vw
-IC1hYzAgMHgxMzcwMDAgMHgxMAoJUENMT0NLLkNMSzBfQ1RSTCA9PiB7IEJZUEFTU19QTExfQ0hF
-Q0sgfCBVTksxMiA9IDAgfQpBbHNvLCBkaXNhYmxpbmcgdGhpcyBiaXQgb24gb3RoZXIgQ0xLcyBk
-b2Vzbid0IHNlZW0gdG8gYnJlYWsgYW55dGhpbmcuCgp2MjogYWRkIGJhY2sgUExMIGxvY2sgdGVz
-dAp2MzogYWRkIHJlc3RvcmluZyBvcmlnaW5hbCB2YWx1ZSBhZnRlciBQTEwgbG9jayB0ZXN0CgpT
-aWduZWQtb2ZmLWJ5OiBNYXJrIE1lbnp5bnNraSA8bW1lbnp5bnNAcmVkaGF0LmNvbT4KLS0tCiBk
-cm0vbm91dmVhdS9udmttL3N1YmRldi9jbGsvZ2YxMDAuYyB8IDcgKysrKystLQogZHJtL25vdXZl
-YXUvbnZrbS9zdWJkZXYvY2xrL2drMTA0LmMgfCA1ICsrKystCiAyIGZpbGVzIGNoYW5nZWQsIDkg
-aW5zZXJ0aW9ucygrKSwgMyBkZWxldGlvbnMoLSkKCmRpZmYgLS1naXQgYS9kcm0vbm91dmVhdS9u
-dmttL3N1YmRldi9jbGsvZ2YxMDAuYyBiL2RybS9ub3V2ZWF1L252a20vc3ViZGV2L2Nsay9nZjEw
-MC5jCmluZGV4IDdmNjdmOWY1Li5hOTdhZjBlOSAxMDA2NDQKLS0tIGEvZHJtL25vdXZlYXUvbnZr
-bS9zdWJkZXYvY2xrL2dmMTAwLmMKKysrIGIvZHJtL25vdXZlYXUvbnZrbS9zdWJkZXYvY2xrL2dm
-MTAwLmMKQEAgLTM2OCw2ICszNjgsNyBAQCBnZjEwMF9jbGtfcHJvZ18yKHN0cnVjdCBnZjEwMF9j
-bGsgKmNsaywgaW50IGlkeCkKIAlzdHJ1Y3QgZ2YxMDBfY2xrX2luZm8gKmluZm8gPSAmY2xrLT5l
-bmdbaWR4XTsKIAlzdHJ1Y3QgbnZrbV9kZXZpY2UgKmRldmljZSA9IGNsay0+YmFzZS5zdWJkZXYu
-ZGV2aWNlOwogCWNvbnN0IHUzMiBhZGRyID0gMHgxMzcwMDAgKyAoaWR4ICogMHgyMCk7CisJYm9v
-bCBieXBhc3Nfc3RhdGUgPSBmYWxzZTsKIAlpZiAoaWR4IDw9IDcpIHsKIAkJbnZrbV9tYXNrKGRl
-dmljZSwgYWRkciArIDB4MDAsIDB4MDAwMDAwMDQsIDB4MDAwMDAwMDApOwogCQludmttX21hc2so
-ZGV2aWNlLCBhZGRyICsgMHgwMCwgMHgwMDAwMDAwMSwgMHgwMDAwMDAwMCk7CkBAIC0zNzYsMTIg
-KzM3NywxNCBAQCBnZjEwMF9jbGtfcHJvZ18yKHN0cnVjdCBnZjEwMF9jbGsgKmNsaywgaW50IGlk
-eCkKIAkJCW52a21fbWFzayhkZXZpY2UsIGFkZHIgKyAweDAwLCAweDAwMDAwMDAxLCAweDAwMDAw
-MDAxKTsKIAogCQkJLyogVGVzdCBQTEwgbG9jayAqLworCQkJYnlwYXNzX3N0YXRlID0gbnZrbV9y
-ZDMyKGRldmljZSwgYWRkciArIDB4MDApICYgMHgwMDAwMDAxMDsKIAkJCW52a21fbWFzayhkZXZp
-Y2UsIGFkZHIgKyAweDAwLCAweDAwMDAwMDEwLCAweDAwMDAwMDAwKTsKIAkJCW52a21fbXNlYyhk
-ZXZpY2UsIDIwMDAsCiAJCQkJaWYgKG52a21fcmQzMihkZXZpY2UsIGFkZHIgKyAweDAwKSAmIDB4
-MDAwMjAwMDApCiAJCQkJCWJyZWFrOwogCQkJKTsKLQkJCW52a21fbWFzayhkZXZpY2UsIGFkZHIg
-KyAweDAwLCAweDAwMDAwMDEwLCAweDAwMDAwMDEwKTsKKwkJCWlmIChieXBhc3Nfc3RhdGUpCisJ
-CQkJbnZrbV9tYXNrKGRldmljZSwgYWRkciArIDB4MDAsIDB4MDAwMDAwMTAsIDB4MDAwMDAwMTAp
-OwogCiAJCQkvKiBFbmFibGUgc3luYyBtb2RlICovCiAJCQludmttX21hc2soZGV2aWNlLCBhZGRy
-ICsgMHgwMCwgMHgwMDAwMDAwNCwgMHgwMDAwMDAwNCk7CkBAIC00NzYsNSArNDc5LDUgQEAgZ2Yx
-MDBfY2xrX25ldyhzdHJ1Y3QgbnZrbV9kZXZpY2UgKmRldmljZSwgaW50IGluZGV4LCBzdHJ1Y3Qg
-bnZrbV9jbGsgKipwY2xrKQogCQlyZXR1cm4gLUVOT01FTTsKIAkqcGNsayA9ICZjbGstPmJhc2U7
-CiAKLQlyZXR1cm4gbnZrbV9jbGtfY3RvcigmZ2YxMDBfY2xrLCBkZXZpY2UsIGluZGV4LCBmYWxz
-ZSwgJmNsay0+YmFzZSk7CisJcmV0dXJuIG52a21fY2xrX2N0b3IoJmdmMTAwX2NsaywgZGV2aWNl
-LCBpbmRleCwgdHJ1ZSwgJmNsay0+YmFzZSk7CiB9CmRpZmYgLS1naXQgYS9kcm0vbm91dmVhdS9u
-dmttL3N1YmRldi9jbGsvZ2sxMDQuYyBiL2RybS9ub3V2ZWF1L252a20vc3ViZGV2L2Nsay9nazEw
-NC5jCmluZGV4IDBiMzdlM2RhLi5jOWVkZTQwNCAxMDA2NDQKLS0tIGEvZHJtL25vdXZlYXUvbnZr
-bS9zdWJkZXYvY2xrL2drMTA0LmMKKysrIGIvZHJtL25vdXZlYXUvbnZrbS9zdWJkZXYvY2xrL2dr
-MTA0LmMKQEAgLTM4OCw2ICszODgsNyBAQCBnazEwNF9jbGtfcHJvZ18yKHN0cnVjdCBnazEwNF9j
-bGsgKmNsaywgaW50IGlkeCkKIAlzdHJ1Y3QgZ2sxMDRfY2xrX2luZm8gKmluZm8gPSAmY2xrLT5l
-bmdbaWR4XTsKIAlzdHJ1Y3QgbnZrbV9kZXZpY2UgKmRldmljZSA9IGNsay0+YmFzZS5zdWJkZXYu
-ZGV2aWNlOwogCWNvbnN0IHUzMiBhZGRyID0gMHgxMzcwMDAgKyAoaWR4ICogMHgyMCk7CisJYm9v
-bCBieXBhc3Nfc3RhdGUgPSBmYWxzZTsKIAludmttX21hc2soZGV2aWNlLCBhZGRyICsgMHgwMCwg
-MHgwMDAwMDAwNCwgMHgwMDAwMDAwMCk7CiAJbnZrbV9tYXNrKGRldmljZSwgYWRkciArIDB4MDAs
-IDB4MDAwMDAwMDEsIDB4MDAwMDAwMDApOwogCWlmIChpbmZvLT5jb2VmKSB7CkBAIC0zOTUsMTIg
-KzM5NiwxNCBAQCBnazEwNF9jbGtfcHJvZ18yKHN0cnVjdCBnazEwNF9jbGsgKmNsaywgaW50IGlk
-eCkKIAkJbnZrbV9tYXNrKGRldmljZSwgYWRkciArIDB4MDAsIDB4MDAwMDAwMDEsIDB4MDAwMDAw
-MDEpOwogCiAJCS8qIFRlc3QgUExMIGxvY2sgKi8KKwkJYnlwYXNzX3N0YXRlID0gbnZrbV9yZDMy
-KGRldmljZSwgYWRkciArIDB4MDApOwogCQludmttX21hc2soZGV2aWNlLCBhZGRyICsgMHgwMCwg
-MHgwMDAwMDAxMCwgMHgwMDAwMDAwMCk7CiAJCW52a21fbXNlYyhkZXZpY2UsIDIwMDAsCiAJCQlp
-ZiAobnZrbV9yZDMyKGRldmljZSwgYWRkciArIDB4MDApICYgMHgwMDAyMDAwMCkKIAkJCQlicmVh
-azsKIAkJKTsKLQkJbnZrbV9tYXNrKGRldmljZSwgYWRkciArIDB4MDAsIDB4MDAwMDAwMTAsIDB4
-MDAwMDAwMTApOworCQlpZiAoYnlwYXNzX3N0YXRlKQorCQkJbnZrbV9tYXNrKGRldmljZSwgYWRk
-ciArIDB4MDAsIDB4MDAwMDAwMTAsIDB4MDAwMDAwMTApOwogCiAJCS8qIEVuYWJsZSBzeW5jIG1v
-ZGUgKi8KIAkJbnZrbV9tYXNrKGRldmljZSwgYWRkciArIDB4MDAsIDB4MDAwMDAwMDQsIDB4MDAw
-MDAwMDQpOwotLSAKMi4yMS4wCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fXwpOb3V2ZWF1IG1haWxpbmcgbGlzdApOb3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9w
-Lm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL25vdXZl
-YXU=
+
+--===============1274407736==
+Content-Type: multipart/alternative; boundary="15677866612.271BdD6D.26747"
+Content-Transfer-Encoding: 7bit
+
+
+--15677866612.271BdD6D.26747
+Date: Fri, 6 Sep 2019 16:17:41 +0000
+MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+https://bugs.freedesktop.org/show_bug.cgi?id=3D110714
+
+--- Comment #19 from John Lindgren <john@jlindgren.net> ---
+I just saw this same crash (Xorg 1.20.4 here still though).  I also had
+Firefox, VirtualBox, Evolution, and a few smaller applications running.  The
+computer had been running for most of the week already, so maybe a memory l=
+eak
+somewhere?
+
+My card is:
+
+01:00.0 VGA compatible controller: NVIDIA Corporation GM107GLM [Quadro M200=
+0M]
+(rev a2)
+
+I am using xf86-video-modesetting.  Should I be using xf86-video-nouveau
+instead?
+
+--=20
+You are receiving this mail because:
+You are the assignee for the bug.=
+
+--15677866612.271BdD6D.26747
+Date: Fri, 6 Sep 2019 16:17:41 +0000
+MIME-Version: 1.0
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+<html>
+    <head>
+      <base href=3D"https://bugs.freedesktop.org/">
+    </head>
+    <body>
+      <p>
+        <div>
+            <b><a class=3D"bz_bug_link=20
+          bz_status_REOPENED "
+   title=3D"REOPENED - Xorg crashes randomly because of memory leak"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110714#c19">Comme=
+nt # 19</a>
+              on <a class=3D"bz_bug_link=20
+          bz_status_REOPENED "
+   title=3D"REOPENED - Xorg crashes randomly because of memory leak"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110714">bug 11071=
+4</a>
+              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
+john&#64;jlindgren.net" title=3D"John Lindgren &lt;john&#64;jlindgren.net&g=
+t;"> <span class=3D"fn">John Lindgren</span></a>
+</span></b>
+        <pre>I just saw this same crash (Xorg 1.20.4 here still though).  I=
+ also had
+Firefox, VirtualBox, Evolution, and a few smaller applications running.  The
+computer had been running for most of the week already, so maybe a memory l=
+eak
+somewhere?
+
+My card is:
+
+01:00.0 VGA compatible controller: NVIDIA Corporation GM107GLM [Quadro M200=
+0M]
+(rev a2)
+
+I am using xf86-video-modesetting.  Should I be using xf86-video-nouveau
+instead?</pre>
+        </div>
+      </p>
+
+
+      <hr>
+      <span>You are receiving this mail because:</span>
+
+      <ul>
+          <li>You are the assignee for the bug.</li>
+      </ul>
+    </body>
+</html>=
+
+--15677866612.271BdD6D.26747--
+
+--===============1274407736==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
+YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
+cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============1274407736==--
