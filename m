@@ -1,50 +1,52 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id AA8C9B2C1B
-	for <lists+nouveau@lfdr.de>; Sat, 14 Sep 2019 18:00:33 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id B142DB2C14
+	for <lists+nouveau@lfdr.de>; Sat, 14 Sep 2019 18:00:25 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 829706F536;
-	Sat, 14 Sep 2019 16:00:25 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id EF8FE6F529;
+	Sat, 14 Sep 2019 16:00:23 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-io1-f69.google.com (mail-io1-f69.google.com
- [209.85.166.69])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 67CE26E32D
- for <nouveau@lists.freedesktop.org>; Fri,  6 Sep 2019 17:08:11 +0000 (UTC)
-Received: by mail-io1-f69.google.com with SMTP id f5so8423997ioo.11
- for <nouveau@lists.freedesktop.org>; Fri, 06 Sep 2019 10:08:11 -0700 (PDT)
+Received: from mail-qt1-x82f.google.com (mail-qt1-x82f.google.com
+ [IPv6:2607:f8b0:4864:20::82f])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id ED0EF89E7B
+ for <nouveau@lists.freedesktop.org>; Sat,  7 Sep 2019 04:56:10 +0000 (UTC)
+Received: by mail-qt1-x82f.google.com with SMTP id v11so9700535qto.13
+ for <nouveau@lists.freedesktop.org>; Fri, 06 Sep 2019 21:56:10 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:date:message-id:subject:from:to;
- bh=q8OkoEi+GgJ9/q6d/Q9AdtdIt7JwUh/xgslJcUrjLWU=;
- b=gkE6tZpoublijKYOPqLDUgAgo8LTpIFak2+CClu0tr8fiKAsRqJlv+RqKqTX90LbZS
- wR1Y9iEY2Alwiasdw06R5ZAeYpVT9rf3dKTM5NulSaHFESBU8AvFn3eCSsqhI9EeRsSg
- uv7eJJSuQuUoLguf8JqMlbob93opV/CAcRyN5AZN6DnhesxSYmnMRj8HVxk7NZ4OUqH7
- bSvJrpoDTE/KvSuPc1Rj1DKCl6LBxp7+7hA4CF5q8rStX+BEcDlvLchl7FhWKpYfrjfH
- zehMQlgMh5NCSqhU3fvLiqJO9v7VYkPMlVl9FHLEo2FFmebneyHpMSzrKDQOw1Okfc4P
- nyRw==
-X-Gm-Message-State: APjAAAXFQUmFYo9FuZYhIZTcHen+a5k2mOMzxVT7/LqaY42TUNBFTTey
- jb6HvsdLG3nKYHLnjBa0DR1lSui/DLBQS72ztyfCOkGR6Cwt
-X-Google-Smtp-Source: APXvYqxq9lFbaa7rIg62dtip3JkaDW3dot2lG41o2i7UeccV9NumUayL9rzEyecN8Uafq7zcSeGbik42IxMAYgTf+f5QLedVTxzb
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=1nHlVCm4NHlKWWLRrfnD+Jn5u3UwU1FEnKv48RNeNqs=;
+ b=R03xs78sEVRxhZQDgnmVQ6sFI5Vidbm2NEYr3T5pWJ52xEezavW4x6PplYTLhs2E95
+ wiUN1E0tysfEONGJICUqs0/otZKS94ZoZrZRTbXap868UMg5N2CtbwXfn4RlWedyA7U3
+ jflFIhm7oO/51e36bx54YG7Ra0sU195hkQXzggivy6RHv2tkJtjtbEOzA5wRybiL1LZl
+ 76YH1WvIe3ljvHnb75U6EfD1iI5THFGTYX8WW1r0Fo1TR9Sa4B05QwASJjocmJTksYWL
+ vPwsATjrECqInxgSuYv3ygOR+RF99892pj53r7Y6uH4VejWKy7hia5MiKUZVWxNKx3Dw
+ kI4w==
+X-Gm-Message-State: APjAAAW2QO9lHJKz8u7M3E8+EN1OKgQPblf0jjwqA7RVdZcmXvJHO+Vr
+ YdyPMIIztC0GO3AUxjEK6PfvISOukuilHazL7Xw2UQMSuL4VRQ==
+X-Google-Smtp-Source: APXvYqwxuUAS1TDPfpcGXFjd+t3oJ+tKcI/01FRAJM0arV+/lInryllSiffPt8LEH91YwM1HtQjOFMItspR4txeQmC8=
+X-Received: by 2002:ac8:845:: with SMTP id x5mr12688919qth.42.1567832169495;
+ Fri, 06 Sep 2019 21:56:09 -0700 (PDT)
 MIME-Version: 1.0
-X-Received: by 2002:a02:920b:: with SMTP id x11mr11516568jag.17.1567789690508; 
- Fri, 06 Sep 2019 10:08:10 -0700 (PDT)
-Date: Fri, 06 Sep 2019 10:08:10 -0700
-X-Google-Appengine-App-Id: s~syzkaller
-X-Google-Appengine-App-Id-Alias: syzkaller
-Message-ID: <0000000000009611470591e57be6@google.com>
-From: syzbot <syzbot+aaedc50d99a03250fe1f@syzkaller.appspotmail.com>
-To: airlied@linux.ie, akpm@linux-foundation.org, bhelgaas@google.com, 
- bskeggs@redhat.com, dan.j.williams@intel.com, daniel.vetter@ffwll.ch, 
- daniel@ffwll.ch, dri-devel@lists.freedesktop.org, jean-philippe@linaro.org, 
- jgg@ziepe.ca, jglisse@redhat.com, linux-kernel@vger.kernel.org, 
- linux-mm@kvack.org, logang@deltatee.com, mhocko@suse.com, 
- nouveau@lists.freedesktop.org, rcampbell@nvidia.com, sfr@canb.auug.org.au, 
- syzkaller-bugs@googlegroups.com, tglx@linutronix.de
+From: Ayush Goyal <goyalayush782@gmail.com>
+Date: Sat, 7 Sep 2019 10:25:59 +0530
+Message-ID: <CAPO76zLhufoOpn2qPnaMqb4JGG+EJsOYcp4-ZOBNzh6VM79ceA@mail.gmail.com>
+To: nouveau@lists.freedesktop.org
 X-Mailman-Approved-At: Sat, 14 Sep 2019 16:00:23 +0000
-Subject: [Nouveau] possible deadlock in __mmu_notifier_invalidate_range_end
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20161025;
+ h=mime-version:from:date:message-id:subject:to;
+ bh=1nHlVCm4NHlKWWLRrfnD+Jn5u3UwU1FEnKv48RNeNqs=;
+ b=iUpx5PJtsZMKe2VZVG0dnjJqRIeYH6AVAhg0WChCdYXHL1Avgg1s/Cs8EPqR88pzVM
+ AGrEd4MaA+vmArm7xi/Z+jSau90BrWBW8KRv5m3r0rgfdQiXuoPVnA8CKTB/yn70XAQP
+ +G3b7K1rcgMDWCI6uyFG5+UR1OKJNTnN2xSieRvByFysvQdBh0GU3fco3NTIq8DItDhx
+ KIMqZ+Ki871j25KwFT1uDeIvtjBWxU9FntddedNmO31ERmyeVCty1zYJ+iuSE8oOk394
+ 4Jxn5iHK9dDBOCp8AIQn6sLYtKWExXFZi3wTjHPxU0Di5X3Klib1BC2VXFB4/7xdXj1K
+ exTA==
+Subject: [Nouveau] X.Org Endless Vacation of Code programs
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -56,90 +58,63 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"; DelSp="yes"
+Content-Type: multipart/mixed; boundary="===============0254056635=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-SGVsbG8sCgpzeXpib3QgZm91bmQgdGhlIGZvbGxvd2luZyBjcmFzaCBvbjoKCkhFQUQgY29tbWl0
-OiAgICA2ZDAyODA0MyBBZGQgbGludXgtbmV4dCBzcGVjaWZpYyBmaWxlcyBmb3IgMjAxOTA4MzAK
-Z2l0IHRyZWU6ICAgICAgIGxpbnV4LW5leHQKY29uc29sZSBvdXRwdXQ6IGh0dHBzOi8vc3l6a2Fs
-bGVyLmFwcHNwb3QuY29tL3gvbG9nLnR4dD94PTE2Y2JmMjJhNjAwMDAwCmtlcm5lbCBjb25maWc6
-ICBodHRwczovL3N5emthbGxlci5hcHBzcG90LmNvbS94Ly5jb25maWc/eD04MmE2YmVjNDNhYjBj
-YjY5CmRhc2hib2FyZCBsaW5rOiBodHRwczovL3N5emthbGxlci5hcHBzcG90LmNvbS9idWc/ZXh0
-aWQ9YWFlZGM1MGQ5OWEwMzI1MGZlMWYKY29tcGlsZXI6ICAgICAgIGdjYyAoR0NDKSA5LjAuMCAy
-MDE4MTIzMSAoZXhwZXJpbWVudGFsKQpzeXogcmVwcm86ICAgICAgaHR0cHM6Ly9zeXprYWxsZXIu
-YXBwc3BvdC5jb20veC9yZXByby5zeXo/eD0xNTI2OTg3NjYwMDAwMApDIHJlcHJvZHVjZXI6ICAg
-aHR0cHM6Ly9zeXprYWxsZXIuYXBwc3BvdC5jb20veC9yZXByby5jP3g9MTI2ODUwOTI2MDAwMDAK
-ClRoZSBidWcgd2FzIGJpc2VjdGVkIHRvOgoKY29tbWl0IGU1OGIzNDExMzRjYTc1MWQ5YzEyYmFj
-ZGVkMTJhOGI0ZGQ1MTM2OGQKQXV0aG9yOiBTdGVwaGVuIFJvdGh3ZWxsIDxzZnJAY2FuYi5hdXVn
-Lm9yZy5hdT4KRGF0ZTogICBGcmkgQXVnIDMwIDA5OjQyOjE0IDIwMTkgKzAwMDAKCiAgICAgTWVy
-Z2UgcmVtb3RlLXRyYWNraW5nIGJyYW5jaCAnaG1tL2htbScKCmJpc2VjdGlvbiBsb2c6ICBodHRw
-czovL3N5emthbGxlci5hcHBzcG90LmNvbS94L2Jpc2VjdC50eHQ/eD0xMWVhNjVlYTYwMDAwMApm
-aW5hbCBjcmFzaDogICAgaHR0cHM6Ly9zeXprYWxsZXIuYXBwc3BvdC5jb20veC9yZXBvcnQudHh0
-P3g9MTNlYTY1ZWE2MDAwMDAKY29uc29sZSBvdXRwdXQ6IGh0dHBzOi8vc3l6a2FsbGVyLmFwcHNw
-b3QuY29tL3gvbG9nLnR4dD94PTE1ZWE2NWVhNjAwMDAwCgpJTVBPUlRBTlQ6IGlmIHlvdSBmaXgg
-dGhlIGJ1ZywgcGxlYXNlIGFkZCB0aGUgZm9sbG93aW5nIHRhZyB0byB0aGUgY29tbWl0OgpSZXBv
-cnRlZC1ieTogc3l6Ym90K2FhZWRjNTBkOTlhMDMyNTBmZTFmQHN5emthbGxlci5hcHBzcG90bWFp
-bC5jb20KRml4ZXM6IGU1OGIzNDExMzRjYSAoIk1lcmdlIHJlbW90ZS10cmFja2luZyBicmFuY2gg
-J2htbS9obW0nIikKCj09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-CldBUk5JTkc6IHBvc3NpYmxlIHJlY3Vyc2l2ZSBsb2NraW5nIGRldGVjdGVkCjUuMy4wLXJjNi1u
-ZXh0LTIwMTkwODMwICM3NSBOb3QgdGFpbnRlZAotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLQpvb21fcmVhcGVyLzEwNjUgaXMgdHJ5aW5nIHRvIGFjcXVpcmUgbG9j
-azoKZmZmZmZmZmY4OTA0ZmY2MCAobW11X25vdGlmaWVyX2ludmFsaWRhdGVfcmFuZ2Vfc3RhcnQp
-eysuKy59LCBhdDogIApfX21tdV9ub3RpZmllcl9pbnZhbGlkYXRlX3JhbmdlX2VuZCsweDAvMHgz
-NjAgbW0vbW11X25vdGlmaWVyLmM6MTY5CgpidXQgdGFzayBpcyBhbHJlYWR5IGhvbGRpbmcgbG9j
-azoKZmZmZmZmZmY4OTA0ZmY2MCAobW11X25vdGlmaWVyX2ludmFsaWRhdGVfcmFuZ2Vfc3RhcnQp
-eysuKy59LCBhdDogIApfX29vbV9yZWFwX3Rhc2tfbW0rMHgxOTYvMHg0OTAgbW0vb29tX2tpbGwu
-Yzo1NDIKCm90aGVyIGluZm8gdGhhdCBtaWdodCBoZWxwIHVzIGRlYnVnIHRoaXM6CiAgUG9zc2li
-bGUgdW5zYWZlIGxvY2tpbmcgc2NlbmFyaW86CgogICAgICAgIENQVTAKICAgICAgICAtLS0tCiAg
-IGxvY2sobW11X25vdGlmaWVyX2ludmFsaWRhdGVfcmFuZ2Vfc3RhcnQpOwogICBsb2NrKG1tdV9u
-b3RpZmllcl9pbnZhbGlkYXRlX3JhbmdlX3N0YXJ0KTsKCiAgKioqIERFQURMT0NLICoqKgoKICBN
-YXkgYmUgZHVlIHRvIG1pc3NpbmcgbG9jayBuZXN0aW5nIG5vdGF0aW9uCgoyIGxvY2tzIGhlbGQg
-Ynkgb29tX3JlYXBlci8xMDY1OgogICMwOiBmZmZmODg4MDk0YWQzOTkwICgmbW0tPm1tYXBfc2Vt
-IzIpeysrKyt9LCBhdDogb29tX3JlYXBfdGFza19tbSAgCm1tL29vbV9raWxsLmM6NTcwIFtpbmxp
-bmVdCiAgIzA6IGZmZmY4ODgwOTRhZDM5OTAgKCZtbS0+bW1hcF9zZW0jMil7KysrK30sIGF0OiBv
-b21fcmVhcF90YXNrICAKbW0vb29tX2tpbGwuYzo2MTMgW2lubGluZV0KICAjMDogZmZmZjg4ODA5
-NGFkMzk5MCAoJm1tLT5tbWFwX3NlbSMyKXsrKysrfSwgYXQ6IG9vbV9yZWFwZXIrMHgzYTcvMHgx
-MzIwICAKbW0vb29tX2tpbGwuYzo2NTEKICAjMTogZmZmZmZmZmY4OTA0ZmY2MCAobW11X25vdGlm
-aWVyX2ludmFsaWRhdGVfcmFuZ2Vfc3RhcnQpeysuKy59LCBhdDogIApfX29vbV9yZWFwX3Rhc2tf
-bW0rMHgxOTYvMHg0OTAgbW0vb29tX2tpbGwuYzo1NDIKCnN0YWNrIGJhY2t0cmFjZToKQ1BVOiAx
-IFBJRDogMTA2NSBDb21tOiBvb21fcmVhcGVyIE5vdCB0YWludGVkIDUuMy4wLXJjNi1uZXh0LTIw
-MTkwODMwICM3NQpIYXJkd2FyZSBuYW1lOiBHb29nbGUgR29vZ2xlIENvbXB1dGUgRW5naW5lL0dv
-b2dsZSBDb21wdXRlIEVuZ2luZSwgQklPUyAgCkdvb2dsZSAwMS8wMS8yMDExCkNhbGwgVHJhY2U6
-CiAgX19kdW1wX3N0YWNrIGxpYi9kdW1wX3N0YWNrLmM6NzcgW2lubGluZV0KICBkdW1wX3N0YWNr
-KzB4MTcyLzB4MWYwIGxpYi9kdW1wX3N0YWNrLmM6MTEzCiAgcHJpbnRfZGVhZGxvY2tfYnVnIGtl
-cm5lbC9sb2NraW5nL2xvY2tkZXAuYzoyMzcxIFtpbmxpbmVdCiAgY2hlY2tfZGVhZGxvY2sga2Vy
-bmVsL2xvY2tpbmcvbG9ja2RlcC5jOjI0MTIgW2lubGluZV0KICB2YWxpZGF0ZV9jaGFpbiBrZXJu
-ZWwvbG9ja2luZy9sb2NrZGVwLmM6Mjk1NSBbaW5saW5lXQogIF9fbG9ja19hY3F1aXJlLmNvbGQr
-MHgxNWQvMHgzODUga2VybmVsL2xvY2tpbmcvbG9ja2RlcC5jOjM5NTUKICBsb2NrX2FjcXVpcmUr
-MHgxOTAvMHg0MTAga2VybmVsL2xvY2tpbmcvbG9ja2RlcC5jOjQ0ODcKICBfX21tdV9ub3RpZmll
-cl9pbnZhbGlkYXRlX3JhbmdlX2VuZCsweDNjLzB4MzYwIG1tL21tdV9ub3RpZmllci5jOjE5Mwog
-IG1tdV9ub3RpZmllcl9pbnZhbGlkYXRlX3JhbmdlX2VuZCBpbmNsdWRlL2xpbnV4L21tdV9ub3Rp
-Zmllci5oOjM3NSBbaW5saW5lXQogIF9fb29tX3JlYXBfdGFza19tbSsweDNmYS8weDQ5MCBtbS9v
-b21fa2lsbC5jOjU1MgogIG9vbV9yZWFwX3Rhc2tfbW0gbW0vb29tX2tpbGwuYzo1ODkgW2lubGlu
-ZV0KICBvb21fcmVhcF90YXNrIG1tL29vbV9raWxsLmM6NjEzIFtpbmxpbmVdCiAgb29tX3JlYXBl
-cisweDJiMi8weDEzMjAgbW0vb29tX2tpbGwuYzo2NTEKICBrdGhyZWFkKzB4MzYxLzB4NDMwIGtl
-cm5lbC9rdGhyZWFkLmM6MjU1CiAgcmV0X2Zyb21fZm9yaysweDI0LzB4MzAgYXJjaC94ODYvZW50
-cnkvZW50cnlfNjQuUzozNTIKb29tX3JlYXBlcjogcmVhcGVkIHByb2Nlc3MgMTAxNDUgKHN5ei1l
-eGVjdXRvcjI4MiksIG5vdyBhbm9uLXJzczoxNjQ4MGtCLCAgCmZpbGUtcnNzOjg3MmtCLCBzaG1l
-bS1yc3M6MGtCCm9vbV9yZWFwZXI6IHJlYXBlZCBwcm9jZXNzIDEwMTQ0IChzeXotZXhlY3V0b3Iy
-ODIpLCBub3cgYW5vbi1yc3M6MGtCLCAgCmZpbGUtcnNzOjBrQiwgc2htZW0tcnNzOjBrQgpvb21f
-cmVhcGVyOiByZWFwZWQgcHJvY2VzcyAxMDE1OCAoc3l6LWV4ZWN1dG9yMjgyKSwgbm93IGFub24t
-cnNzOjE2ODI0a0IsICAKZmlsZS1yc3M6ODcya0IsIHNobWVtLXJzczowa0IKb29tX3JlYXBlcjog
-cmVhcGVkIHByb2Nlc3MgMTAxODcgKHN5ei1leGVjdXRvcjI4MiksIG5vdyBhbm9uLXJzczowa0Is
-ICAKZmlsZS1yc3M6MGtCLCBzaG1lbS1yc3M6MGtCCm9vbV9yZWFwZXI6IHJlYXBlZCBwcm9jZXNz
-IDEwMTczIChzeXotZXhlY3V0b3IyODIpLCBub3cgYW5vbi1yc3M6MGtCLCAgCmZpbGUtcnNzOjBr
-Qiwgc2htZW0tcnNzOjBrQgpvb21fcmVhcGVyOiByZWFwZWQgcHJvY2VzcyAxMDEzOSAoc3l6LWV4
-ZWN1dG9yMjgyKSwgbm93IGFub24tcnNzOjBrQiwgIApmaWxlLXJzczowa0IsIHNobWVtLXJzczow
-a0IKCgotLS0KVGhpcyBidWcgaXMgZ2VuZXJhdGVkIGJ5IGEgYm90LiBJdCBtYXkgY29udGFpbiBl
-cnJvcnMuClNlZSBodHRwczovL2dvby5nbC90cHNtRUogZm9yIG1vcmUgaW5mb3JtYXRpb24gYWJv
-dXQgc3l6Ym90LgpzeXpib3QgZW5naW5lZXJzIGNhbiBiZSByZWFjaGVkIGF0IHN5emthbGxlckBn
-b29nbGVncm91cHMuY29tLgoKc3l6Ym90IHdpbGwga2VlcCB0cmFjayBvZiB0aGlzIGJ1ZyByZXBv
-cnQuIFNlZToKaHR0cHM6Ly9nb28uZ2wvdHBzbUVKI3N0YXR1cyBmb3IgaG93IHRvIGNvbW11bmlj
-YXRlIHdpdGggc3l6Ym90LgpGb3IgaW5mb3JtYXRpb24gYWJvdXQgYmlzZWN0aW9uIHByb2Nlc3Mg
-c2VlOiBodHRwczovL2dvby5nbC90cHNtRUojYmlzZWN0aW9uCnN5emJvdCBjYW4gdGVzdCBwYXRj
-aGVzIGZvciB0aGlzIGJ1ZywgZm9yIGRldGFpbHMgc2VlOgpodHRwczovL2dvby5nbC90cHNtRUoj
-dGVzdGluZy1wYXRjaGVzCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fCk5vdXZlYXUgbWFpbGluZyBsaXN0Ck5vdXZlYXVAbGlzdHMuZnJlZWRlc2t0b3Aub3Jn
-Cmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vbm91dmVhdQ==
+--===============0254056635==
+Content-Type: multipart/alternative; boundary="00000000000087c2720591ef5f6a"
+
+--00000000000087c2720591ef5f6a
+Content-Type: text/plain; charset="UTF-8"
+
+Hi
+I am Ayush Goyal from India currently doing B.E. in my final year.
+
+I would like to know that whether project
+Instruction Scheduler
+is open to contribute and what are the steps to be taken to contribute in
+it.
+I would like to build it and also if you can brief me about it as there is
+very less info about it on the website
+https://www.x.org/wiki/SummerOfCodeIdeas/
+Also if this project has already started then can you share me the link of
+its open source code.
+
+Feel free to reply anytime soon.
+You can reach me out on this email only and my contact no is +919780421078
+
+Ayush Goyal
+
+--00000000000087c2720591ef5f6a
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Hi<div>I am Ayush Goyal from India currently doing B.E. in=
+ my final year.=C2=A0</div><div><br></div><div>I would like to know that wh=
+ether project=C2=A0</div><h4 id=3D"gmail-instructionscheduler" style=3D"col=
+or:rgb(43,94,130);font-size:17.776px;font-family:&quot;Times New Roman&quot=
+;">Instruction Scheduler</h4><div>is open to contribute and what are the st=
+eps to be=C2=A0taken to contribute=C2=A0in it.=C2=A0</div><div>I would like=
+ to build it and also if you can brief=C2=A0me about it as there is very le=
+ss info about it on the=C2=A0website=C2=A0<a href=3D"https://www.x.org/wiki=
+/SummerOfCodeIdeas/">https://www.x.org/wiki/SummerOfCodeIdeas/</a>=C2=A0</d=
+iv><div>Also if this project has already started then can you share me the =
+link of its open source code.</div><div><br></div><div>Feel free to reply a=
+nytime soon.</div><div>You can reach me out on this email only and my conta=
+ct no is=C2=A0+919780421078</div><div><br></div><div>Ayush Goyal</div></div=
+>
+
+--00000000000087c2720591ef5f6a--
+
+--===============0254056635==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
+YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
+cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============0254056635==--
