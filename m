@@ -1,23 +1,23 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D61C3AFDA9
-	for <lists+nouveau@lfdr.de>; Wed, 11 Sep 2019 15:23:13 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id E2A30AFDB0
+	for <lists+nouveau@lfdr.de>; Wed, 11 Sep 2019 15:25:22 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8E68B6EAF4;
-	Wed, 11 Sep 2019 13:23:11 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 599536EB02;
+	Wed, 11 Sep 2019 13:25:21 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
  [131.252.210.165])
- by gabe.freedesktop.org (Postfix) with ESMTP id 7D8F96EAF4
- for <nouveau@lists.freedesktop.org>; Wed, 11 Sep 2019 13:23:10 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTP id 0E6B86EAFF
+ for <nouveau@lists.freedesktop.org>; Wed, 11 Sep 2019 13:25:20 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 7A71472168; Wed, 11 Sep 2019 13:23:10 +0000 (UTC)
+ id 0B77E72167; Wed, 11 Sep 2019 13:25:20 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Wed, 11 Sep 2019 13:23:10 +0000
+Date: Wed, 11 Sep 2019 13:25:20 +0000
 X-Bugzilla-Reason: AssignedTo
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
@@ -26,14 +26,14 @@ X-Bugzilla-Component: Driver/nouveau
 X-Bugzilla-Version: unspecified
 X-Bugzilla-Keywords: 
 X-Bugzilla-Severity: not set
-X-Bugzilla-Who: diggest@gmail.com
+X-Bugzilla-Who: imirkin@alum.mit.edu
 X-Bugzilla-Status: NEW
 X-Bugzilla-Resolution: 
 X-Bugzilla-Priority: not set
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
 X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-111642-8800-CtpLPkGVeL@http.bugs.freedesktop.org/>
+Message-ID: <bug-111642-8800-9Czmxo9pia@http.bugs.freedesktop.org/>
 In-Reply-To: <bug-111642-8800@http.bugs.freedesktop.org/>
 References: <bug-111642-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
@@ -52,18 +52,18 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============2070898761=="
+Content-Type: multipart/mixed; boundary="===============1003049179=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============2070898761==
-Content-Type: multipart/alternative; boundary="15682081901.1f35C0A.9699"
+--===============1003049179==
+Content-Type: multipart/alternative; boundary="15682083200.aD1da94b0.9762"
 Content-Transfer-Encoding: 7bit
 
 
---15682081901.1f35C0A.9699
-Date: Wed, 11 Sep 2019 13:23:10 +0000
+--15682083200.aD1da94b0.9762
+Date: Wed, 11 Sep 2019 13:25:20 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -72,16 +72,22 @@ Auto-Submitted: auto-generated
 
 https://bugs.freedesktop.org/show_bug.cgi?id=3D111642
 
---- Comment #8 from Vasili Pupkin <diggest@gmail.com> ---
-LIBGL_ALWAYS_SOFTWARE=3D1 didn't help at all, same messages in dmesg and sy=
-slog
+--- Comment #9 from Ilia Mirkin <imirkin@alum.mit.edu> ---
+(In reply to Vasili Pupkin from comment #8)
+> LIBGL_ALWAYS_SOFTWARE=3D1 didn't help at all, same messages in dmesg and =
+syslog
+
+Must not have gotten picked up =3D/
+
+Just remove nouveau_dri.so from ... /usr/lib/dri/ or something along those
+lines.
 
 --=20
 You are receiving this mail because:
 You are the assignee for the bug.=
 
---15682081901.1f35C0A.9699
-Date: Wed, 11 Sep 2019 13:23:10 +0000
+--15682083200.aD1da94b0.9762
+Date: Wed, 11 Sep 2019 13:25:20 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -99,8 +105,8 @@ Auto-Submitted: auto-generated
           bz_status_NEW "
    title=3D"NEW - NV43 GeForce 6600 Nouveau is not stable on legacy hardwar=
 e"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111642#c8">Commen=
-t # 8</a>
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111642#c9">Commen=
+t # 9</a>
               on <a class=3D"bz_bug_link=20
           bz_status_NEW "
    title=3D"NEW - NV43 GeForce 6600 Nouveau is not stable on legacy hardwar=
@@ -108,11 +114,18 @@ e"
    href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111642">bug 11164=
 2</a>
               from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
-diggest&#64;gmail.com" title=3D"Vasili Pupkin &lt;diggest&#64;gmail.com&gt;=
-"> <span class=3D"fn">Vasili Pupkin</span></a>
+imirkin&#64;alum.mit.edu" title=3D"Ilia Mirkin &lt;imirkin&#64;alum.mit.edu=
+&gt;"> <span class=3D"fn">Ilia Mirkin</span></a>
 </span></b>
-        <pre>LIBGL_ALWAYS_SOFTWARE=3D1 didn't help at all, same messages in=
- dmesg and syslog</pre>
+        <pre>(In reply to Vasili Pupkin from <a href=3D"show_bug.cgi?id=3D1=
+11642#c8">comment #8</a>)
+<span class=3D"quote">&gt; LIBGL_ALWAYS_SOFTWARE=3D1 didn't help at all, sa=
+me messages in dmesg and syslog</span >
+
+Must not have gotten picked up =3D/
+
+Just remove nouveau_dri.so from ... /usr/lib/dri/ or something along those
+lines.</pre>
         </div>
       </p>
 
@@ -126,9 +139,9 @@ diggest&#64;gmail.com" title=3D"Vasili Pupkin &lt;diggest&#64;gmail.com&gt;=
     </body>
 </html>=
 
---15682081901.1f35C0A.9699--
+--15682083200.aD1da94b0.9762--
 
---===============2070898761==
+--===============1003049179==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -138,4 +151,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============2070898761==--
+--===============1003049179==--
