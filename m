@@ -2,22 +2,22 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5CC12AFCAF
-	for <lists+nouveau@lfdr.de>; Wed, 11 Sep 2019 14:29:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D61C3AFDA9
+	for <lists+nouveau@lfdr.de>; Wed, 11 Sep 2019 15:23:13 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2AF106E262;
-	Wed, 11 Sep 2019 12:29:34 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8E68B6EAF4;
+	Wed, 11 Sep 2019 13:23:11 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
- by gabe.freedesktop.org (Postfix) with ESMTP id D14246E277
- for <nouveau@lists.freedesktop.org>; Wed, 11 Sep 2019 12:29:32 +0000 (UTC)
+ [131.252.210.165])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 7D8F96EAF4
+ for <nouveau@lists.freedesktop.org>; Wed, 11 Sep 2019 13:23:10 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id CE71E72167; Wed, 11 Sep 2019 12:29:32 +0000 (UTC)
+ id 7A71472168; Wed, 11 Sep 2019 13:23:10 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Wed, 11 Sep 2019 12:29:33 +0000
+Date: Wed, 11 Sep 2019 13:23:10 +0000
 X-Bugzilla-Reason: AssignedTo
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
@@ -26,14 +26,14 @@ X-Bugzilla-Component: Driver/nouveau
 X-Bugzilla-Version: unspecified
 X-Bugzilla-Keywords: 
 X-Bugzilla-Severity: not set
-X-Bugzilla-Who: imirkin@alum.mit.edu
+X-Bugzilla-Who: diggest@gmail.com
 X-Bugzilla-Status: NEW
 X-Bugzilla-Resolution: 
 X-Bugzilla-Priority: not set
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
 X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-111642-8800-yr5A35K8i2@http.bugs.freedesktop.org/>
+Message-ID: <bug-111642-8800-CtpLPkGVeL@http.bugs.freedesktop.org/>
 In-Reply-To: <bug-111642-8800@http.bugs.freedesktop.org/>
 References: <bug-111642-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
@@ -52,18 +52,18 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1129095288=="
+Content-Type: multipart/mixed; boundary="===============2070898761=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============1129095288==
-Content-Type: multipart/alternative; boundary="15682049721.98BdAcD.32205"
+--===============2070898761==
+Content-Type: multipart/alternative; boundary="15682081901.1f35C0A.9699"
 Content-Transfer-Encoding: 7bit
 
 
---15682049721.98BdAcD.32205
-Date: Wed, 11 Sep 2019 12:29:32 +0000
+--15682081901.1f35C0A.9699
+Date: Wed, 11 Sep 2019 13:23:10 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -72,22 +72,16 @@ Auto-Submitted: auto-generated
 
 https://bugs.freedesktop.org/show_bug.cgi?id=3D111642
 
---- Comment #7 from Ilia Mirkin <imirkin@alum.mit.edu> ---
-In the meanwhile, I suspect if you add LIBGL_ALWAYS_SOFTWARE=3D1 into your
-/etc/environment, you will be much happier.
-
-You can then still enable GL for certain programs that you actually want to=
- use
-it for, but not for random GTK/Qt programs that want to draw a button and t=
-hink
-it's a great idea to start using GL for that.
+--- Comment #8 from Vasili Pupkin <diggest@gmail.com> ---
+LIBGL_ALWAYS_SOFTWARE=3D1 didn't help at all, same messages in dmesg and sy=
+slog
 
 --=20
 You are receiving this mail because:
 You are the assignee for the bug.=
 
---15682049721.98BdAcD.32205
-Date: Wed, 11 Sep 2019 12:29:32 +0000
+--15682081901.1f35C0A.9699
+Date: Wed, 11 Sep 2019 13:23:10 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -105,8 +99,8 @@ Auto-Submitted: auto-generated
           bz_status_NEW "
    title=3D"NEW - NV43 GeForce 6600 Nouveau is not stable on legacy hardwar=
 e"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111642#c7">Commen=
-t # 7</a>
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111642#c8">Commen=
+t # 8</a>
               on <a class=3D"bz_bug_link=20
           bz_status_NEW "
    title=3D"NEW - NV43 GeForce 6600 Nouveau is not stable on legacy hardwar=
@@ -114,18 +108,11 @@ e"
    href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111642">bug 11164=
 2</a>
               from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
-imirkin&#64;alum.mit.edu" title=3D"Ilia Mirkin &lt;imirkin&#64;alum.mit.edu=
-&gt;"> <span class=3D"fn">Ilia Mirkin</span></a>
+diggest&#64;gmail.com" title=3D"Vasili Pupkin &lt;diggest&#64;gmail.com&gt;=
+"> <span class=3D"fn">Vasili Pupkin</span></a>
 </span></b>
-        <pre>In the meanwhile, I suspect if you add LIBGL_ALWAYS_SOFTWARE=
-=3D1 into your
-/etc/environment, you will be much happier.
-
-You can then still enable GL for certain programs that you actually want to=
- use
-it for, but not for random GTK/Qt programs that want to draw a button and t=
-hink
-it's a great idea to start using GL for that.</pre>
+        <pre>LIBGL_ALWAYS_SOFTWARE=3D1 didn't help at all, same messages in=
+ dmesg and syslog</pre>
         </div>
       </p>
 
@@ -139,9 +126,9 @@ it's a great idea to start using GL for that.</pre>
     </body>
 </html>=
 
---15682049721.98BdAcD.32205--
+--15682081901.1f35C0A.9699--
 
---===============1129095288==
+--===============2070898761==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -151,4 +138,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============1129095288==--
+--===============2070898761==--
