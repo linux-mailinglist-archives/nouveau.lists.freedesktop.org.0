@@ -1,23 +1,23 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id CED80AFC58
-	for <lists+nouveau@lfdr.de>; Wed, 11 Sep 2019 14:18:06 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id A7353AFC73
+	for <lists+nouveau@lfdr.de>; Wed, 11 Sep 2019 14:23:44 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 220886EAE8;
-	Wed, 11 Sep 2019 12:18:05 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 801AA6EAEC;
+	Wed, 11 Sep 2019 12:23:42 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
  [131.252.210.165])
- by gabe.freedesktop.org (Postfix) with ESMTP id F12966EAE3
- for <nouveau@lists.freedesktop.org>; Wed, 11 Sep 2019 12:18:03 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTP id 0EF796EAEA
+ for <nouveau@lists.freedesktop.org>; Wed, 11 Sep 2019 12:23:41 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id EDCD972167; Wed, 11 Sep 2019 12:18:03 +0000 (UTC)
+ id 0231D72167; Wed, 11 Sep 2019 12:23:40 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Wed, 11 Sep 2019 12:18:04 +0000
+Date: Wed, 11 Sep 2019 12:23:41 +0000
 X-Bugzilla-Reason: AssignedTo
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
@@ -26,14 +26,14 @@ X-Bugzilla-Component: Driver/nouveau
 X-Bugzilla-Version: unspecified
 X-Bugzilla-Keywords: 
 X-Bugzilla-Severity: not set
-X-Bugzilla-Who: imirkin@alum.mit.edu
+X-Bugzilla-Who: diggest@gmail.com
 X-Bugzilla-Status: NEW
 X-Bugzilla-Resolution: 
 X-Bugzilla-Priority: not set
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
 X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-111642-8800-rZH18drqnK@http.bugs.freedesktop.org/>
+Message-ID: <bug-111642-8800-ayFBV0pIWI@http.bugs.freedesktop.org/>
 In-Reply-To: <bug-111642-8800@http.bugs.freedesktop.org/>
 References: <bug-111642-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
@@ -52,18 +52,18 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1594138676=="
+Content-Type: multipart/mixed; boundary="===============0039524477=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============1594138676==
-Content-Type: multipart/alternative; boundary="15682042833.6Cfcfcb0.31376"
+--===============0039524477==
+Content-Type: multipart/alternative; boundary="15682046200.f4ad7CF.31587"
 Content-Transfer-Encoding: 7bit
 
 
---15682042833.6Cfcfcb0.31376
-Date: Wed, 11 Sep 2019 12:18:03 +0000
+--15682046200.f4ad7CF.31587
+Date: Wed, 11 Sep 2019 12:23:40 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -72,24 +72,21 @@ Auto-Submitted: auto-generated
 
 https://bugs.freedesktop.org/show_bug.cgi?id=3D111642
 
---- Comment #5 from Ilia Mirkin <imirkin@alum.mit.edu> ---
-(In reply to Vasili Pupkin from comment #4)
-> This diagnostics is only make sense for developers of nouveau.=20
-> nvidia-304 drivers are dropped and nouveau seams like the only out of the
-> box option for Ubuntu 18.04. But why is nvidia drivers don't experience t=
-his
-> lack of vram problem?
+--- Comment #6 from Vasili Pupkin <diggest@gmail.com> ---
+The lack of human resources is sad but it is still a bug. Mark it as wontfi=
+x if
+the support of this legacy hardware is outside of the project goal.=20
 
-Because they've had man-decades invested into their development to ensure t=
-hat
-they handle these types of situations well. Nouveau GL drivers have not.
+I am happy to test a patch if it is not architectural impossible in nouveau=
+ to
+fix it and back vram in main memory.
 
 --=20
 You are receiving this mail because:
 You are the assignee for the bug.=
 
---15682042833.6Cfcfcb0.31376
-Date: Wed, 11 Sep 2019 12:18:03 +0000
+--15682046200.f4ad7CF.31587
+Date: Wed, 11 Sep 2019 12:23:40 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -107,8 +104,8 @@ Auto-Submitted: auto-generated
           bz_status_NEW "
    title=3D"NEW - NV43 GeForce 6600 Nouveau is not stable on legacy hardwar=
 e"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111642#c5">Commen=
-t # 5</a>
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111642#c6">Commen=
+t # 6</a>
               on <a class=3D"bz_bug_link=20
           bz_status_NEW "
    title=3D"NEW - NV43 GeForce 6600 Nouveau is not stable on legacy hardwar=
@@ -116,23 +113,16 @@ e"
    href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111642">bug 11164=
 2</a>
               from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
-imirkin&#64;alum.mit.edu" title=3D"Ilia Mirkin &lt;imirkin&#64;alum.mit.edu=
-&gt;"> <span class=3D"fn">Ilia Mirkin</span></a>
+diggest&#64;gmail.com" title=3D"Vasili Pupkin &lt;diggest&#64;gmail.com&gt;=
+"> <span class=3D"fn">Vasili Pupkin</span></a>
 </span></b>
-        <pre>(In reply to Vasili Pupkin from <a href=3D"show_bug.cgi?id=3D1=
-11642#c4">comment #4</a>)
-<span class=3D"quote">&gt; This diagnostics is only make sense for develope=
-rs of nouveau.=20
-&gt; nvidia-304 drivers are dropped and nouveau seams like the only out of =
-the
-&gt; box option for Ubuntu 18.04. But why is nvidia drivers don't experienc=
-e this
-&gt; lack of vram problem?</span >
+        <pre>The lack of human resources is sad but it is still a bug. Mark=
+ it as wontfix if
+the support of this legacy hardware is outside of the project goal.=20
 
-Because they've had man-decades invested into their development to ensure t=
-hat
-they handle these types of situations well. Nouveau GL drivers have not.</p=
-re>
+I am happy to test a patch if it is not architectural impossible in nouveau=
+ to
+fix it and back vram in main memory.</pre>
         </div>
       </p>
 
@@ -146,9 +136,9 @@ re>
     </body>
 </html>=
 
---15682042833.6Cfcfcb0.31376--
+--15682046200.f4ad7CF.31587--
 
---===============1594138676==
+--===============0039524477==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -158,4 +148,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============1594138676==--
+--===============0039524477==--
