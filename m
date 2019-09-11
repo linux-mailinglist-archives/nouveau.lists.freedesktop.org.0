@@ -2,22 +2,22 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id E2A30AFDB0
-	for <lists+nouveau@lfdr.de>; Wed, 11 Sep 2019 15:25:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E50BFB075C
+	for <lists+nouveau@lfdr.de>; Thu, 12 Sep 2019 06:12:35 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 599536EB02;
-	Wed, 11 Sep 2019 13:25:21 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 986036E0A2;
+	Thu, 12 Sep 2019 04:12:21 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
  [131.252.210.165])
- by gabe.freedesktop.org (Postfix) with ESMTP id 0E6B86EAFF
- for <nouveau@lists.freedesktop.org>; Wed, 11 Sep 2019 13:25:20 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTP id BC8BF6E316
+ for <nouveau@lists.freedesktop.org>; Wed, 11 Sep 2019 16:50:01 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 0B77E72167; Wed, 11 Sep 2019 13:25:20 +0000 (UTC)
+ id B4F4372168; Wed, 11 Sep 2019 16:50:01 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Wed, 11 Sep 2019 13:25:20 +0000
+Date: Wed, 11 Sep 2019 16:50:02 +0000
 X-Bugzilla-Reason: AssignedTo
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
@@ -26,14 +26,14 @@ X-Bugzilla-Component: Driver/nouveau
 X-Bugzilla-Version: unspecified
 X-Bugzilla-Keywords: 
 X-Bugzilla-Severity: not set
-X-Bugzilla-Who: imirkin@alum.mit.edu
+X-Bugzilla-Who: diggest@gmail.com
 X-Bugzilla-Status: NEW
 X-Bugzilla-Resolution: 
 X-Bugzilla-Priority: not set
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
 X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-111642-8800-9Czmxo9pia@http.bugs.freedesktop.org/>
+Message-ID: <bug-111642-8800-wT0LPU1vXa@http.bugs.freedesktop.org/>
 In-Reply-To: <bug-111642-8800@http.bugs.freedesktop.org/>
 References: <bug-111642-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
@@ -52,18 +52,18 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1003049179=="
+Content-Type: multipart/mixed; boundary="===============2117949103=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============1003049179==
-Content-Type: multipart/alternative; boundary="15682083200.aD1da94b0.9762"
+--===============2117949103==
+Content-Type: multipart/alternative; boundary="15682206011.ffD5FfB.22033"
 Content-Transfer-Encoding: 7bit
 
 
---15682083200.aD1da94b0.9762
-Date: Wed, 11 Sep 2019 13:25:20 +0000
+--15682206011.ffD5FfB.22033
+Date: Wed, 11 Sep 2019 16:50:01 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -72,22 +72,15 @@ Auto-Submitted: auto-generated
 
 https://bugs.freedesktop.org/show_bug.cgi?id=3D111642
 
---- Comment #9 from Ilia Mirkin <imirkin@alum.mit.edu> ---
-(In reply to Vasili Pupkin from comment #8)
-> LIBGL_ALWAYS_SOFTWARE=3D1 didn't help at all, same messages in dmesg and =
-syslog
-
-Must not have gotten picked up =3D/
-
-Just remove nouveau_dri.so from ... /usr/lib/dri/ or something along those
-lines.
+--- Comment #10 from Vasili Pupkin <diggest@gmail.com> ---
+Removing nouveau_dri.so didn't help either
 
 --=20
 You are receiving this mail because:
 You are the assignee for the bug.=
 
---15682083200.aD1da94b0.9762
-Date: Wed, 11 Sep 2019 13:25:20 +0000
+--15682206011.ffD5FfB.22033
+Date: Wed, 11 Sep 2019 16:50:01 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -105,8 +98,8 @@ Auto-Submitted: auto-generated
           bz_status_NEW "
    title=3D"NEW - NV43 GeForce 6600 Nouveau is not stable on legacy hardwar=
 e"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111642#c9">Commen=
-t # 9</a>
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111642#c10">Comme=
+nt # 10</a>
               on <a class=3D"bz_bug_link=20
           bz_status_NEW "
    title=3D"NEW - NV43 GeForce 6600 Nouveau is not stable on legacy hardwar=
@@ -114,18 +107,10 @@ e"
    href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111642">bug 11164=
 2</a>
               from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
-imirkin&#64;alum.mit.edu" title=3D"Ilia Mirkin &lt;imirkin&#64;alum.mit.edu=
-&gt;"> <span class=3D"fn">Ilia Mirkin</span></a>
+diggest&#64;gmail.com" title=3D"Vasili Pupkin &lt;diggest&#64;gmail.com&gt;=
+"> <span class=3D"fn">Vasili Pupkin</span></a>
 </span></b>
-        <pre>(In reply to Vasili Pupkin from <a href=3D"show_bug.cgi?id=3D1=
-11642#c8">comment #8</a>)
-<span class=3D"quote">&gt; LIBGL_ALWAYS_SOFTWARE=3D1 didn't help at all, sa=
-me messages in dmesg and syslog</span >
-
-Must not have gotten picked up =3D/
-
-Just remove nouveau_dri.so from ... /usr/lib/dri/ or something along those
-lines.</pre>
+        <pre>Removing nouveau_dri.so didn't help either</pre>
         </div>
       </p>
 
@@ -139,9 +124,9 @@ lines.</pre>
     </body>
 </html>=
 
---15682083200.aD1da94b0.9762--
+--15682206011.ffD5FfB.22033--
 
---===============1003049179==
+--===============2117949103==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -151,4 +136,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============1003049179==--
+--===============2117949103==--
