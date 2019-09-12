@@ -2,45 +2,29 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 07EF4B0862
-	for <lists+nouveau@lfdr.de>; Thu, 12 Sep 2019 07:42:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F41CFB0A46
+	for <lists+nouveau@lfdr.de>; Thu, 12 Sep 2019 10:26:20 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 985666E95E;
-	Thu, 12 Sep 2019 05:42:27 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 379B76EC53;
+	Thu, 12 Sep 2019 08:26:19 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [131.252.210.165])
- by gabe.freedesktop.org (Postfix) with ESMTP id 2D3126E146
- for <nouveau@lists.freedesktop.org>; Thu, 12 Sep 2019 05:42:25 +0000 (UTC)
-Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 9684672167; Thu, 12 Sep 2019 05:42:23 +0000 (UTC)
-From: bugzilla-daemon@freedesktop.org
-To: nouveau@lists.freedesktop.org
-Date: Thu, 12 Sep 2019 05:42:22 +0000
-X-Bugzilla-Reason: AssignedTo
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: None
-X-Bugzilla-Product: xorg
-X-Bugzilla-Component: Driver/nouveau
-X-Bugzilla-Version: unspecified
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: not set
-X-Bugzilla-Who: imirkin@alum.mit.edu
-X-Bugzilla-Status: NEW
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: not set
-X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-111642-8800-elyvvCOiHg@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-111642-8800@http.bugs.freedesktop.org/>
-References: <bug-111642-8800@http.bugs.freedesktop.org/>
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
+Received: from verein.lst.de (verein.lst.de [213.95.11.211])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7311A6EC53;
+ Thu, 12 Sep 2019 08:26:18 +0000 (UTC)
+Received: by verein.lst.de (Postfix, from userid 2407)
+ id 573D1227A81; Thu, 12 Sep 2019 10:26:13 +0200 (CEST)
+Date: Thu, 12 Sep 2019 10:26:13 +0200
+From: Christoph Hellwig <hch@lst.de>
+To: Ralph Campbell <rcampbell@nvidia.com>
+Message-ID: <20190912082613.GA14368@lst.de>
+References: <20190911222829.28874-1-rcampbell@nvidia.com>
+ <20190911222829.28874-2-rcampbell@nvidia.com>
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 111642] NV43 GeForce 6600 Nouveau is not stable on
- legacy hardware
+Content-Disposition: inline
+In-Reply-To: <20190911222829.28874-2-rcampbell@nvidia.com>
+User-Agent: Mutt/1.5.17 (2007-11-01)
+Subject: Re: [Nouveau] [PATCH 1/4] mm/hmm: make full use of walk_page_range()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -52,109 +36,26 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1275267444=="
+Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, linux-mm@kvack.org,
+ Jason Gunthorpe <jgg@mellanox.com>, amd-gfx@lists.freedesktop.org,
+ Andrew Morton <akpm@linux-foundation.org>, Christoph Hellwig <hch@lst.de>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-
---===============1275267444==
-Content-Type: multipart/alternative; boundary="15682669430.8Cebde1E.4207"
-Content-Transfer-Encoding: 7bit
-
-
---15682669430.8Cebde1E.4207
-Date: Thu, 12 Sep 2019 05:42:23 +0000
-MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-https://bugs.freedesktop.org/show_bug.cgi?id=3D111642
-
---- Comment #13 from Ilia Mirkin <imirkin@alum.mit.edu> ---
-(In reply to Vasili Pupkin from comment #12)
-> It shows
->=20
-> OpenGL renderer string: llvmpipe (LLVM 8.0, 256 bits)
-
-OK. So you've successfully killed off nouveau GL impl, but you're still see=
-ing
-those errors? That's very very very surprising.
-
-Can you tell me more about your environment? (Have you tried restarting your
-desktop / window manager? Otherwise this is all moot.)
-
---=20
-You are receiving this mail because:
-You are the assignee for the bug.=
-
---15682669430.8Cebde1E.4207
-Date: Thu, 12 Sep 2019 05:42:23 +0000
-MIME-Version: 1.0
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-<html>
-    <head>
-      <base href=3D"https://bugs.freedesktop.org/">
-    </head>
-    <body>
-      <p>
-        <div>
-            <b><a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - NV43 GeForce 6600 Nouveau is not stable on legacy hardwar=
-e"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111642#c13">Comme=
-nt # 13</a>
-              on <a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - NV43 GeForce 6600 Nouveau is not stable on legacy hardwar=
-e"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111642">bug 11164=
-2</a>
-              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
-imirkin&#64;alum.mit.edu" title=3D"Ilia Mirkin &lt;imirkin&#64;alum.mit.edu=
-&gt;"> <span class=3D"fn">Ilia Mirkin</span></a>
-</span></b>
-        <pre>(In reply to Vasili Pupkin from <a href=3D"show_bug.cgi?id=3D1=
-11642#c12">comment #12</a>)
-<span class=3D"quote">&gt; It shows
-&gt;=20
-&gt; OpenGL renderer string: llvmpipe (LLVM 8.0, 256 bits)</span >
-
-OK. So you've successfully killed off nouveau GL impl, but you're still see=
-ing
-those errors? That's very very very surprising.
-
-Can you tell me more about your environment? (Have you tried restarting your
-desktop / window manager? Otherwise this is all moot.)</pre>
-        </div>
-      </p>
-
-
-      <hr>
-      <span>You are receiving this mail because:</span>
-
-      <ul>
-          <li>You are the assignee for the bug.</li>
-      </ul>
-    </body>
-</html>=
-
---15682669430.8Cebde1E.4207--
-
---===============1275267444==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
-YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
-cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
-
---===============1275267444==--
+PiArc3RhdGljIGludCBobW1fcGZuc19maWxsKHVuc2lnbmVkIGxvbmcgYWRkciwKPiArCQkJIHVu
+c2lnbmVkIGxvbmcgZW5kLAo+ICsJCQkgc3RydWN0IGhtbV9yYW5nZSAqcmFuZ2UsCj4gKwkJCSBl
+bnVtIGhtbV9wZm5fdmFsdWVfZSB2YWx1ZSkKCk5pdDogY2FuIHdlIHVzZSB0aGUgc3BhY2UgYSBs
+aXR0bGUgbW9yZSBlZmZpY2llbnQsIGUuZy46CgpzdGF0aWMgaW50IGhtbV9wZm5zX2ZpbGwodW5z
+aWduZWQgbG9uZyBhZGRyLCB1bnNpZ25lZCBsb25nIGVuZCwKCQlzdHJ1Y3QgaG1tX3JhbmdlICpy
+YW5nZSwgZW51bSBobW1fcGZuX3ZhbHVlX2UgdmFsdWUpCgo+ICtzdGF0aWMgaW50IGhtbV92bWFf
+d2Fsa190ZXN0KHVuc2lnbmVkIGxvbmcgc3RhcnQsCj4gKwkJCSAgICAgdW5zaWduZWQgbG9uZyBl
+bmQsCj4gKwkJCSAgICAgc3RydWN0IG1tX3dhbGsgKndhbGspCgpTYW1lIGhlcmUuCgo+ICsJaWYg
+KCEodm1hLT52bV9mbGFncyAmIFZNX1JFQUQpKSB7Cj4gKwkJKHZvaWQpIGhtbV9wZm5zX2ZpbGwo
+c3RhcnQsIGVuZCwgcmFuZ2UsIEhNTV9QRk5fTk9ORSk7CgpUaGVyZSBzaG91bGQgYmUgbm8gbmVl
+ZCBmb3IgdGhlIHZvaWQgY2FzdCBoZXJlLgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fXwpOb3V2ZWF1IG1haWxpbmcgbGlzdApOb3V2ZWF1QGxpc3RzLmZyZWVk
+ZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZv
+L25vdXZlYXU=
