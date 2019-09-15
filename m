@@ -2,38 +2,45 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 589A7B2CD0
-	for <lists+nouveau@lfdr.de>; Sat, 14 Sep 2019 21:47:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 749A6B3205
+	for <lists+nouveau@lfdr.de>; Sun, 15 Sep 2019 22:29:27 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2A9896F553;
-	Sat, 14 Sep 2019 19:47:22 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0DE08897FF;
+	Sun, 15 Sep 2019 20:29:25 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E14FA6F553
- for <nouveau@lists.freedesktop.org>; Sat, 14 Sep 2019 19:47:20 +0000 (UTC)
-Received: from localhost (unknown [40.117.208.15])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 7399F2084F;
- Sat, 14 Sep 2019 19:47:20 +0000 (UTC)
-Date: Sat, 14 Sep 2019 19:47:19 +0000
-From: Sasha Levin <sashal@kernel.org>
-To: Sasha Levin <sashal@kernel.org>
-To: Lyude Paul <lyude@redhat.com>
+Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
+ [131.252.210.165])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 3AE44897FF
+ for <nouveau@lists.freedesktop.org>; Sun, 15 Sep 2019 20:29:24 +0000 (UTC)
+Received: by culpepper.freedesktop.org (Postfix, from userid 33)
+ id 2FEB372167; Sun, 15 Sep 2019 20:29:24 +0000 (UTC)
+From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-In-Reply-To: <20190913220355.6883-1-lyude@redhat.com>
-References: <20190913220355.6883-1-lyude@redhat.com>
-Message-Id: <20190914194720.7399F2084F@mail.kernel.org>
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=kernel.org; s=default; t=1568490440;
- bh=W2N5l6clAnR7Zj+hRVr5KkoUaoqAdMFvaxvyDDkO+94=;
- h=Date:From:To:To:To:Cc:Cc:Cc:Subject:In-Reply-To:References:From;
- b=j5zz/XpUakAv98areh1P0JgyB37uQUmjes2qt7h6XCLfwPLMfRZBYk5i8HzzjmlxD
- xt0A7eJphOzQW1C2XSbDr7FCPI3PmsgVyVCH8QwfI7T9/07RK/dYBG7TUNHZuCo53H
- IWV77CJGeS3A2oI//DmIRfGbU5kTwBt3jyAodZag=
-Subject: Re: [Nouveau] [PATCH 1/4] drm/nouveau: dispnv50: Don't create MSTMs
- for eDP connectors
+Date: Sun, 15 Sep 2019 20:29:24 +0000
+X-Bugzilla-Reason: AssignedTo
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: None
+X-Bugzilla-Product: xorg
+X-Bugzilla-Component: Driver/nouveau
+X-Bugzilla-Version: unspecified
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: not set
+X-Bugzilla-Who: diggest@gmail.com
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: not set
+X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: 
+Message-ID: <bug-111642-8800-229H62aCad@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-111642-8800@http.bugs.freedesktop.org/>
+References: <bug-111642-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+MIME-Version: 1.0
+Subject: [Nouveau] [Bug 111642] NV43 GeForce 6600 Nouveau is not stable on
+ legacy hardware
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -45,80 +52,98 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: , Ben Skeggs <bskeggs@redhat.com>, stable@vger.kernel.org
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============0184335559=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-SGksCgpbVGhpcyBpcyBhbiBhdXRvbWF0ZWQgZW1haWxdCgpUaGlzIGNvbW1pdCBoYXMgYmVlbiBw
-cm9jZXNzZWQgYmVjYXVzZSBpdCBjb250YWlucyBhIC1zdGFibGUgdGFnLgpUaGUgc3RhYmxlIHRh
-ZyBpbmRpY2F0ZXMgdGhhdCBpdCdzIHJlbGV2YW50IGZvciB0aGUgZm9sbG93aW5nIHRyZWVzOiBh
-bGwKClRoZSBib3QgaGFzIHRlc3RlZCB0aGUgZm9sbG93aW5nIHRyZWVzOiB2NS4yLjE0LCB2NC4x
-OS43MiwgdjQuMTQuMTQzLCB2NC45LjE5MiwgdjQuNC4xOTIuCgp2NS4yLjE0OiBCdWlsZCBPSyEK
-djQuMTkuNzI6IEJ1aWxkIE9LIQp2NC4xNC4xNDM6IEZhaWxlZCB0byBhcHBseSEgUG9zc2libGUg
-ZGVwZW5kZW5jaWVzOgogICAgMDdiYmMxYzVmNDliICgiZHJtL25vdXZlYXUvY29yZS9tZW1vcnk6
-IHNwbGl0IGluZm8gcG9pbnRlcnMgZnJvbSBhY2Nlc3NvciBwb2ludGVycyIpCiAgICAwYjExYjMw
-ZGU5ZDIgKCJkcm0vbm91dmVhdS9tbXUvbnYwNC1udjR4OiBtb3ZlIGdsb2JhbCB2bW0gdG8gbnZr
-bV9tbXUiKQogICAgMTFmYzAxN2RmYjFlICgiZHJtL25vdXZlYXUva21zL252NTA6IHByZXBhcmUg
-Zm9yIGRvdWJsZS1idWZmZXJlZCBMVVRzIikKICAgIDE1OTA3MDBkOTRhYyAoImRybS9ub3V2ZWF1
-L2ttcy9udjUwLTogc3BsaXQgZWFjaCByZXNvdXJjZSB0eXBlIGludG8gdGhlaXIgb3duIHNvdXJj
-ZSBmaWxlcyIpCiAgICAyNjlmZTMyZDMzNDMgKCJkcm0vbm91dmVhdS9iYXI6IHN3YXAgb25laW5p
-dC9pbml0IG9yZGVyaW5nLCBhbmQgcmVuYW1lIGJhcjMgdG8gYmFyMiIpCiAgICAzMGVkNDliNTVi
-NmUgKCJkcm0vbm91dmVhdS9rbXMvbnY1MC06IG1vdmUgY29kZSB1bmRlcm5lYXRoIGRpc3BudjUw
-LyIpCiAgICAzNDUwOGY5ZDI2MGMgKCJkcm0vbm91dmVhdS9rbXMvbnY1MC06IGRldGVybWluZSBN
-U1Qgc3VwcG9ydCBmcm9tIERQIEluZm8gVGFibGUiKQogICAgNWIxN2YzNjI0ZWZhICgiZHJtL25v
-dXZlYXUvbW11L252MDQ6IGltcGxlbWVudCB2bW0gb24gdG9wIG9mIG5ldyBiYXNlIikKICAgIDVl
-MDc1ZmRlYjE2NiAoImRybS9ub3V2ZWF1L21tdTogYXV0b21hdGljYWxseSBoYW5kbGUgInVuLWJv
-b3RzdHJhcHBpbmciIG9mIHZtbSIpCiAgICA2MzU5Yzk4MjI0M2UgKCJkcm0vbm91dmVhdS9tbXUv
-Z3AxMGI6IGZvcmsgZnJvbSBnZjEwMCIpCiAgICA3ZjUzZDZkYzlhNzIgKCJkcm0vbm91dmVhdS9j
-b3JlL21lbW9yeTogY29tcHRhZyBhbGxvY2F0aW9uIikKICAgIDgwNmE3MzM1NjUzNyAoImRybS9u
-b3V2ZWF1L21tdTogaW1wbGVtZW50IGJhc2UgZm9yIG5ldyB2bSBtYW5hZ2VtZW50IikKICAgIDkw
-ZGY1MjI5MTJhYyAoImRybS9ub3V2ZWF1L2ttcy9udjUwOiB1c2UgSU5URVJQT0xBVEVfMjU3X1VO
-SVRZX1JBTkdFIExVVCBvbiBuZXdlciBjaGlwc2V0cyIpCiAgICA5OTdhODkwMDNjMmQgKCJkcm0v
-bm91dmVhdS9jb3JlL21lbW9yeTogYWRkIHJlZmVyZW5jZSBjb3VudGluZyIpCiAgICBiODZhNDU4
-NzdlYWQgKCJkcm0vbm91dmVhdS9tbXUvZ3AxMDA6IGZvcmsgZnJvbSBnZjEwMCIpCiAgICBjODNj
-NDA5N2ViYTggKCJkcm0vbm91dmVhdS9tbXU6IGRlZmluZSB1c2VyIGludGVyZmFjZXMgdG8gbW11
-IG1lbW9yeSBhbGxvY2F0aW9uIikKICAgIGNlZGM0ZDU3ZGYyNiAoImRybS9ub3V2ZWF1L21tdS9n
-bTIwYjogZm9yayBmcm9tIGdmMTAwIikKICAgIGQxZjZjOGQyZTlkZiAoImRybS9ub3V2ZWF1L21t
-dS9nazIwYTogZm9yayBmcm9tIGdmMTAwIikKICAgIGRiMDE4NTg1YTUxYSAoImRybS9ub3V2ZWF1
-L21tdS9nazEwNDogZm9yayBmcm9tIGdmMTAwIikKICAgIGUxZTMzYzc5MWEyMyAoImRybS9ub3V2
-ZWF1L21tdS9nbTIwMDogZm9yayBmcm9tIGdmMTAwIikKICAgIGU2OWRhZTg1YzkwYiAoImRybS9u
-b3V2ZWF1L2Jhci9udjUwLGc4NDogZHJvcCBtbXUgaW52YWxpZGF0ZSIpCiAgICBlNzUxODJmNjhi
-N2IgKCJkcm0vbm91dmVhdS9rbXMvbnY1MDogdXNlICJsb3cgcmVzIiBsdXQgZm9yIGluZGV4ZWQg
-bW9kZSIpCiAgICBlYWYxYTY5MTEwZjQgKCJkcm0vbm91dmVhdS9tbXU6IGFkZCBiYXNlIGZvciB0
-eXBlLWJhc2VkIG1lbW9yeSBhbGxvY2F0aW9uIikKICAgIGY0Nzc4ZjA4YTAzOCAoImRybS9ub3V2
-ZWF1L2ttcy9udjUwOiBmaXggaGFuZGxpbmcgb2YgZ2FtbWEgc2luY2UgYXRvbWljIGNvbnZlcnNp
-b24iKQogICAgZjU2NTA0NzhhYjA3ICgiZHJtL25vdXZlYXUvZGlzcC9udjUwLTogcGFzcyBudmtt
-X21lbW9yeSBvYmplY3RzIGZvciBjaGFubmVsIHB1c2ggYnVmZmVycyIpCgp2NC45LjE5MjogRmFp
-bGVkIHRvIGFwcGx5ISBQb3NzaWJsZSBkZXBlbmRlbmNpZXM6CiAgICAxMWZjMDE3ZGZiMWUgKCJk
-cm0vbm91dmVhdS9rbXMvbnY1MDogcHJlcGFyZSBmb3IgZG91YmxlLWJ1ZmZlcmVkIExVVHMiKQog
-ICAgMzQ1MDhmOWQyNjBjICgiZHJtL25vdXZlYXUva21zL252NTAtOiBkZXRlcm1pbmUgTVNUIHN1
-cHBvcnQgZnJvbSBEUCBJbmZvIFRhYmxlIikKICAgIDNkYmQwMzZiODQxOSAoImRybS9ub3V2ZWF1
-L2ttcy9udjUwOiBzZXBhcmF0ZSBvdXQgbW9kZSBjb21taXQiKQogICAgNTJhYTMwZjI1MjRkICgi
-ZHJtL25vdXZlYXUva21zL252NTA6IHN3aXRjaCBtc3Qgc2luayBiYWNrIGludG8gc3N0IG1vZGUi
-KQogICAgNmJiYWIzYjZiNjU2ICgiZHJtL25vdXZlYXUva21zL252NTA6IHNlcGFyYXRlIG91dCBi
-YXNlL292bHkgY2hhbm5lbCB1c2FnZSBib3VuZHMgY29tbWl0IikKICAgIGE3YWUxNTYxOTA5ZCAo
-ImRybS9ub3V2ZWF1L2ttcy9udjUwOiBzZXBhcmF0ZSBvdXQgbHV0IGNvbW1pdCIpCiAgICBhZDYz
-MzYxOTUzOTMgKCJkcm0vbm91dmVhdS9rbXMvbnY1MDogc2VwYXJhdGUgb3V0IGNvcmUgc3VyZmFj
-ZSBjb21taXQiKQogICAgZWE4ZWUzOTAwMmExICgiZHJtL25vdXZlYXUva21zL252NTA6IHNlcGFy
-YXRlIG91dCBjdXJzb3Igc3VyZmFjZSBjb21taXQiKQogICAgZjQ3NzhmMDhhMDM4ICgiZHJtL25v
-dXZlYXUva21zL252NTA6IGZpeCBoYW5kbGluZyBvZiBnYW1tYSBzaW5jZSBhdG9taWMgY29udmVy
-c2lvbiIpCgp2NC40LjE5MjogRmFpbGVkIHRvIGFwcGx5ISBQb3NzaWJsZSBkZXBlbmRlbmNpZXM6
-CiAgICAxM2EzZDkxZjE3YTUgKCJkcm06IFBhc3MgJ25hbWUnIHRvIGRybV9lbmNvZGVyX2luaXQo
-KSIpCiAgICAzNDUwOGY5ZDI2MGMgKCJkcm0vbm91dmVhdS9rbXMvbnY1MC06IGRldGVybWluZSBN
-U1Qgc3VwcG9ydCBmcm9tIERQIEluZm8gVGFibGUiKQogICAgM2RiZDAzNmI4NDE5ICgiZHJtL25v
-dXZlYXUva21zL252NTA6IHNlcGFyYXRlIG91dCBtb2RlIGNvbW1pdCIpCiAgICA1MmFhMzBmMjUy
-NGQgKCJkcm0vbm91dmVhdS9rbXMvbnY1MDogc3dpdGNoIG1zdCBzaW5rIGJhY2sgaW50byBzc3Qg
-bW9kZSIpCiAgICBhN2FlMTU2MTkwOWQgKCJkcm0vbm91dmVhdS9rbXMvbnY1MDogc2VwYXJhdGUg
-b3V0IGx1dCBjb21taXQiKQogICAgYWQ2MzM2MTk1MzkzICgiZHJtL25vdXZlYXUva21zL252NTA6
-IHNlcGFyYXRlIG91dCBjb3JlIHN1cmZhY2UgY29tbWl0IikKICAgIGI1MTZhOWVmYjdhZiAoImRy
-bTogTW92ZSBMRUFWRS9FTlRFUl9BVE9NSUNfTU9ERVNFVCB0byBmYmRldiBoZWxwZXJzIikKICAg
-IGY0Nzc4ZjA4YTAzOCAoImRybS9ub3V2ZWF1L2ttcy9udjUwOiBmaXggaGFuZGxpbmcgb2YgZ2Ft
-bWEgc2luY2UgYXRvbWljIGNvbnZlcnNpb24iKQoKCk5PVEU6IFRoZSBwYXRjaCB3aWxsIG5vdCBi
-ZSBxdWV1ZWQgdG8gc3RhYmxlIHRyZWVzIHVudGlsIGl0IGlzIHVwc3RyZWFtLgoKSG93IHNob3Vs
-ZCB3ZSBwcm9jZWVkIHdpdGggdGhpcyBwYXRjaD8KCi0tClRoYW5rcywKU2FzaGEKX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBtYWlsaW5nIGxp
-c3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVza3Rv
-cC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============0184335559==
+Content-Type: multipart/alternative; boundary="15685793640.eFB5.13821"
+Content-Transfer-Encoding: 7bit
+
+
+--15685793640.eFB5.13821
+Date: Sun, 15 Sep 2019 20:29:24 +0000
+MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+https://bugs.freedesktop.org/show_bug.cgi?id=3D111642
+
+--- Comment #17 from Vasili Pupkin <diggest@gmail.com> ---
+It seems that this timeout error in nv41_vmm_flush may not be the cause of =
+the
+problem but a consequence of the bug. nouveau starts issuing this timeout
+exception log after a freeze and there can be quite a few such timeouts unt=
+il I
+restart the system.
+
+--=20
+You are receiving this mail because:
+You are the assignee for the bug.=
+
+--15685793640.eFB5.13821
+Date: Sun, 15 Sep 2019 20:29:24 +0000
+MIME-Version: 1.0
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+<html>
+    <head>
+      <base href=3D"https://bugs.freedesktop.org/">
+    </head>
+    <body>
+      <p>
+        <div>
+            <b><a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - NV43 GeForce 6600 Nouveau is not stable on legacy hardwar=
+e"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111642#c17">Comme=
+nt # 17</a>
+              on <a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - NV43 GeForce 6600 Nouveau is not stable on legacy hardwar=
+e"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111642">bug 11164=
+2</a>
+              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
+diggest&#64;gmail.com" title=3D"Vasili Pupkin &lt;diggest&#64;gmail.com&gt;=
+"> <span class=3D"fn">Vasili Pupkin</span></a>
+</span></b>
+        <pre>It seems that this timeout error in nv41_vmm_flush may not be =
+the cause of the
+problem but a consequence of the bug. nouveau starts issuing this timeout
+exception log after a freeze and there can be quite a few such timeouts unt=
+il I
+restart the system.</pre>
+        </div>
+      </p>
+
+
+      <hr>
+      <span>You are receiving this mail because:</span>
+
+      <ul>
+          <li>You are the assignee for the bug.</li>
+      </ul>
+    </body>
+</html>=
+
+--15685793640.eFB5.13821--
+
+--===============0184335559==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
+YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
+cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============0184335559==--
