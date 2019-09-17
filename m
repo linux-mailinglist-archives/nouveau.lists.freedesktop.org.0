@@ -1,55 +1,65 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id DB376B472C
-	for <lists+nouveau@lfdr.de>; Tue, 17 Sep 2019 08:08:09 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id B22D8B48AF
+	for <lists+nouveau@lfdr.de>; Tue, 17 Sep 2019 09:59:44 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 954856E132;
-	Tue, 17 Sep 2019 06:08:07 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 188F76EB2F;
+	Tue, 17 Sep 2019 07:59:40 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-vs1-xe42.google.com (mail-vs1-xe42.google.com
- [IPv6:2607:f8b0:4864:20::e42])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 45F286E132;
- Tue, 17 Sep 2019 06:08:06 +0000 (UTC)
-Received: by mail-vs1-xe42.google.com with SMTP id p13so1282543vsr.4;
- Mon, 16 Sep 2019 23:08:06 -0700 (PDT)
+Received: from mail-ed1-x544.google.com (mail-ed1-x544.google.com
+ [IPv6:2a00:1450:4864:20::544])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 749376EB2E;
+ Tue, 17 Sep 2019 07:59:38 +0000 (UTC)
+Received: by mail-ed1-x544.google.com with SMTP id v8so2433161eds.2;
+ Tue, 17 Sep 2019 00:59:38 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=YC7L+bkQI26UJ9Jopn74TmHa/KLaLdaVDJxc/i8+6hU=;
- b=nrUOkn94ckH+5GqHT8jZ18Ck0PPkbvM4Ge+/BFsqOH/3N6rDzelpT+0k7152GsSVjl
- wBzA8QPKl9WcBDIV1f8ITLh94t1laGo70eiXaznuUPNWAPwLdJGzb9DJkrsJdMQEdEqm
- IXnvzSsybA7waEEAV6VDQ94a60MeRXNEAORY3klNz8uzQ4jquia54JhvnMaUEa/FlCu6
- 7MsQngADlWPJi929qqQ9yvyyH6yrr8pVFnW+saMHcTUgeGp2gig+T3eAqIEasG4aoIq9
- CKDZOkqRcivVVywKeKA4nfDJuxI6mYlsArynQqhlpdCDHaUQ+xjW1hAK+Yf06kFoFJpC
- fAuQ==
-X-Gm-Message-State: APjAAAXAXrq/WlQyAPRkw7sSsrpJM0EW4P8ZeK5VvgC4jMlr9h+kt5oz
- z1pE0WgmKW06yOt7mOMjQDrXnwmZ4qfX17RaTuY=
-X-Google-Smtp-Source: APXvYqx9Xxzhk3EBJ2wTqpQF00UnXzgw7RlhLUlMeLY4HzmYtbyuZAnSFRJ+MJBRA7b2prjPxAM8dbRCnR3DB/W+Izs=
-X-Received: by 2002:a67:fa0b:: with SMTP id i11mr842803vsq.132.1568700485254; 
- Mon, 16 Sep 2019 23:08:05 -0700 (PDT)
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to:user-agent;
+ bh=ZHGwUNOCyjOPDdx+Yrefit8eCw93ObtYl/8hRGsz09E=;
+ b=bZkDFgnzuVBpZEW3xW1Mi6+PbrDh5M+LY/e/NpO3z0Y1GucUQHXZEdmVy2tAFwtwbq
+ e3WZ97V0L1KtAPNz1UMpGW6ZQ7H6msmELj0kFeYTIt6QovSrE/am7rsRs1vnjTUCTtEf
+ wOLtEy/TBz4IJFXeJaXXjBFnDC7JQPD5D5ENnD/XBlL7pAyEinN5/UifnnmLMwfX7KMV
+ d6cr7f6i5G0pr5zI56kaBYAnUJZeO8b18gNqAY1nhb0jiSinlrYlOpjmUHT8oVhEACpq
+ Q/ZaWdipW6bNLQgneFD+ObJsi0tan2E928z2fxaBaWNkOxZqfGYFFVh9YeodDbRzT0KN
+ VGaA==
+X-Gm-Message-State: APjAAAVeko6bDsURf0+1tDE8W1g02aVw5QxvzeyNuagO5+w642frGgvb
+ WllydZigbvY0KkbLffQsEn1z6H9p
+X-Google-Smtp-Source: APXvYqzM+xCQRgTQDsb2mdu5TFdC68GXX72wg8XT5iVM/08xxe39qMIFdJKseU6I330sGm6I8Cj4mg==
+X-Received: by 2002:a50:d096:: with SMTP id v22mr3291356edd.81.1568707176926; 
+ Tue, 17 Sep 2019 00:59:36 -0700 (PDT)
+Received: from localhost (p2E5BE2CE.dip0.t-ipconnect.de. [46.91.226.206])
+ by smtp.gmail.com with ESMTPSA id br15sm171293ejb.2.2019.09.17.00.59.35
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 17 Sep 2019 00:59:35 -0700 (PDT)
+Date: Tue, 17 Sep 2019 09:59:34 +0200
+From: Thierry Reding <thierry.reding@gmail.com>
+To: Robin Murphy <robin.murphy@arm.com>
+Message-ID: <20190917075934.GA17854@ulmo>
+References: <20190916150412.10025-1-thierry.reding@gmail.com>
+ <20190916150412.10025-9-thierry.reding@gmail.com>
+ <156993ea-ece6-9eb5-b664-a55c631e2600@arm.com>
+ <20190916155724.GG7488@ulmo>
+ <ee285d4f-e5ff-e043-35cd-1338b1bb238f@arm.com>
 MIME-Version: 1.0
-References: <20190916143606.9272-1-thierry.reding@gmail.com>
-In-Reply-To: <20190916143606.9272-1-thierry.reding@gmail.com>
-From: Ben Skeggs <skeggsb@gmail.com>
-Date: Tue, 17 Sep 2019 16:07:54 +1000
-Message-ID: <CACAvsv6jXCLm-3Y1yOAUpHk6pXFUN0_hSrUQeMrmqPc1hfpHAQ@mail.gmail.com>
-To: Thierry Reding <thierry.reding@gmail.com>
+In-Reply-To: <ee285d4f-e5ff-e043-35cd-1338b1bb238f@arm.com>
+User-Agent: Mutt/1.12.1 (2019-06-15)
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc;
- bh=YC7L+bkQI26UJ9Jopn74TmHa/KLaLdaVDJxc/i8+6hU=;
- b=Law/23zOBfBMcfdsFZf52Ki1m7XufQCjij7X9cCu7GZDWlgkV4p/4cvJ9Jfc1Anmv1
- A8BirnZQPRPSLOhrtM1QB09QO29aqsKTCG9cILnoXthABx77xHHwBokxD/ROIfE4RpJ6
- yqbTjDcpgXqHfrXkNGnJLdGR2RzpMucB7YnY1PMpMOTawPX4CWpqytOwzMR602TRe/qE
- 1mT91vM1t1nind1B0cYjSiKEtCean08PYCY+Fxi7TTtAsdhO7oC9qd4bqAwV6GRAQpvE
- /YCsqNDzBX4uBpSBSv7rKrIc7rZdg6iqhkyMAhuVPWf5AwRREQ6WpILgI5cywfyucBc8
- QDUQ==
-Subject: Re: [Nouveau] [PATCH 0/2] drm/nouveau: Two more fixes
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to:user-agent;
+ bh=ZHGwUNOCyjOPDdx+Yrefit8eCw93ObtYl/8hRGsz09E=;
+ b=gFsLnygtUgh0OalHHJCYidLRZwxJE324ArlZhQpf8nQ6yarOj+CThBCq0+kDtbfwCL
+ 6vE9rjU3bg4Wr1Y9m8y64e+J1orAbMNXE5cAaphPnxOR660wWOepFEB/T64n6ElPb2lr
+ 8aQlkNCD9rR9U29a0WScUKtfe2UR98bHLlb4Vlj1rYic8VYuyAQmP7evNpOy3UYX5Qpt
+ OJeXrudOo/d3fetiFy7Mld85PZeNn2FSeEUH5YW64axsHbDxZvvKqfwksp4dpJtQ8Gc3
+ gvQGKrbzT2KJ8HTUn9BciFE2hiCD+S8pwrEJUf5pj/dj5fyYCf1/U9BXVXfNemgiUJzx
+ qbqw==
+Subject: Re: [Nouveau] [PATCH 08/11] drm/nouveau: tegra: Skip IOMMU
+ initialization if already attached
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -61,64 +71,145 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: ML nouveau <nouveau@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>,
- ML dri-devel <dri-devel@lists.freedesktop.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: linux-tegra@vger.kernel.org, nouveau@lists.freedesktop.org,
+ Ben Skeggs <bskeggs@redhat.com>, dri-devel@lists.freedesktop.org
+Content-Type: multipart/mixed; boundary="===============1222346873=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-T24gVHVlLCAxNyBTZXAgMjAxOSBhdCAwMDozNiwgVGhpZXJyeSBSZWRpbmcgPHRoaWVycnkucmVk
-aW5nQGdtYWlsLmNvbT4gd3JvdGU6Cj4KPiBGcm9tOiBUaGllcnJ5IFJlZGluZyA8dHJlZGluZ0Bu
-dmlkaWEuY29tPgo+Cj4gSGkgQmVuLAo+Cj4gSSBtZXNzZWQgdXAgdGhlIG9yZGVyaW5nIG9mIHBh
-dGNoZXMgaW4gbXkgdHJlZSBhIGJpdCwgc28gdGhlc2UgdHdvIGZpeGVzCj4gZ290IHNlcGFyYXRl
-ZCBmcm9tIHRoZSBvdGhlcnMuIEkgZG9uJ3QgY29uc2lkZXIgdGhlc2UgcGFydGljdWxhcmlseQo+
-IHVyZ2VudCBiZWNhdXNlIHRoZSBjcmFzaCB0aGF0IHRoZSBmaXJzdCBvbmUgZml4ZXMgb25seSBo
-YXBwZW5zIG9uIGdwMTBiCj4gd2hpY2ggd2UgZG9uJ3QgZW5hYmxlIGJ5IGRlZmF1bHQgeWV0IGFu
-ZCB0aGUgc2Vjb25kIHBhdGNoIGZpeGVzIGEgY3Jhc2gKPiB0aGF0IG9ubHkgaGFwcGVucyBvbiBt
-b2R1bGUgdW5sb2FkIChvciBkcml2ZXIgdW5iaW5kLCBtb3JlIGFjY3VyYXRlbHkpLAo+IHdoaWNo
-IGlzbid0IGEgdGVycmlibHkgY29tbW9uIHRoaW5nIHRvIGRvLgo+Cj4gSSdsbCBiZSBzZW5kaW5n
-IG91dCBmaXhlcyBzaG9ydGx5IHRvIG1ha2UgdGhlIEdQMTBCIHdvcmsgbW9yZSBwcm9wZXJseQo+
-IG9uIGEgd2lkZXIgcmFuZ2Ugb2YgSmV0c29uIFRYMiBkZXZpY2VzIGFuZCBlbmFibGUgaXQgYnkg
-ZGVmYXVsdC4KPgo+IE9uZSB0aGluZyB0byBtZW50aW9uIGlzIHRoYXQgSSdtIG5vdCBleGFjdGx5
-IHN1cmUgaWYgdGhlIGZpcnN0IHBhdGNoIGlzCj4gdGhlIHJpZ2h0IHRoaW5nIHRvIGRvLiBJIGhh
-dmVuJ3Qgc2VlbiBhbnkgaXNzdWVzIGFmdGVyIHRoYXQgY2hhbmdlLCBidXQKPiBJJ20gYWxzbyBu
-b3QgZXhhY3RseSBzdXJlIEkgdW5kZXJzdGFuZCB3aGF0IEJBUjIgaXMgdXNlZCBmb3IsIHNvIEkg
-ZG9uJ3QKPiBrbm93IGlmIEkgd291bGQndmUgZXZlbiBjb3ZlcmVkIHRob3NlIGNvZGUgcGF0aHMg
-KG90aGVyIHRoYW4gdGhlIG9uZQo+IGNhdXNpbmcgdGhlIGNyYXNoIGF0IHByb2JlIHRpbWUpIGlu
-IG15IHRlc3RzLgpCQVIyIG9uIGRHUFVzIGlzIHVzZWQgdG8gbWFwIGtlcm5lbC1sZXZlbCBHUFUg
-b2JqZWN0cyBpbiBWUkFNIHNvIHRoZXkKY2FuIGJlIGFjY2Vzc2VkIGJ5IHRoZSBkcml2ZXIuICBJ
-dCdzIHByZXR0eSBtdWNoIGEgc21hbGxlciB2ZXJzaW9uIG9mCkJBUjEsIGJ1dCBpbnRlbmRlZCBm
-b3IgYSBkaWZmZXJlbnQgcHVycG9zZS4KCk9uIGRHUFVzLCB0aGVyZSdzIGEgY291cGxlIG9mIHBs
-YWNlcyAoZmF1bHQgYnVmZmVyIGFkZHJlc3MsIGFuZCBmYXVsdAptZXRob2QgYnVmZmVyIG9uIHZv
-bHRhKSB3aGVyZSB0aGUgR1BVIHdhbnRzIFBSSSByZWdzIHRvIGJlIHBva2VkIHdpdGgKYW4gb2Zm
-c2V0IHdpdGhpbiBCQVIyIHJhdGhlciB0aGFuIGFuIGFwZXJ0dXJlK29mZnNldCBjb21iaW5hdGlv
-bi4gIEknbQpub3QgMTAwJSBzdXJlIHdoYXQgVGVncmEgcGFydHMgZG8gaGVyZSwgYnV0IHByZXN1
-bWFibHkgaWYgaXQncyB3b3JraW5nCmZvciB5b3UsIHRoZXkncmUgaGFwcHkgdG8ganVzdCBhY2Nl
-cHQgYSBzeXN0ZW0gbWVtb3J5IGFkZHJlc3MgaW5zdGVhZC4KCkkgZ3Vlc3MgdGhpcyB3b3VsZCBi
-ZSB0aGUgcmlnaHQgdGhpbmcgdG8gZG8gaGVyZSBpbiB0aGF0IHNpdHVhdGlvbi4KVGhlIG1vcmUg
-b2J2aW91cyAoZnJvbSBhICJyZWFkaW5nIHRoZSBjb2RlIiBQT1YpIHRoaW5nIHRvIGRvIHdvdWxk
-IGJlCnRvIHdyaXRlIFRlZ3JhLXNwZWNpZmljIHZlcnNpb25zIG9mIHRoZSBmdW5jdGlvbnMgdGhh
-dCB1c2UKbnZrbV9tZW1vcnlfYmFyMigpIHRvIHBlcmZvcm0gdGhpcyBtYXBwaW5nLCBhbmQgdXNl
-IG52a21fbWVtb3J5X2FkZHIoKQppbnN0ZWFkIGJ1dCBJJ20gbm90IHN1cmUgaWYgd2UgbmVlZC93
-YW50IHRvIGdvIHRvIHRoYXQgZWZmb3J0LiAgSXQncwpjb25jZWl2YWJsZSBpdCBjb3VsZCBiZSBy
-ZXF1aXJlZCBhdCBzb21lIHBvaW50LgoKQmVuLgoKPgo+IEl0J2QgYmUgZ3JlYXQgdG8gZ2V0IEx5
-dWRlJ3MgZmVlZGJhY2sgb24gdGhlIHNlY29uZCBwYXRjaCwgc2luY2UgdGhhdAo+IGNhbGwgdG8g
-cGNpX2Rpc2FibGVfZGV2aWNlKCkgd2FzIHJhdGhlciBvZGRseSBwbGFjZWQgYW5kIEknbSBub3Qg
-c3VyZSBpZgo+IHRoYXQgd2FzIGVzc2VudGlhbCBmb3IgdGhpbmdzIHRvIHdvcmsgb3Igd2hldGhl
-ciB0aGUgc2xpZ2h0bHkgZGlmZmVyZW50Cj4gcG9pbnQgaW4gdGltZSB3aGVyZSBpdCdzIGNhbGxl
-ZCBhZnRlciB0aGlzIHBhdGNoIGlzIGFsc28gb2theS4gSXQgbG9va3MKPiB0byBtZSBsaWtlIGl0
-IHNob3VsZCB3b3JrIGZpbmUsIGJ1dCBJIGRvbid0IGN1cnJlbnRseSBoYXZlIGEgd2F5IHRvIHRl
-c3QKPiB0aGlzIG9uIGRlc2t0b3AgR1BVcy4KPgo+IFRoaWVycnkKPgo+IFRoaWVycnkgUmVkaW5n
-ICgyKToKPiAgIGRybS9ub3V2ZWF1OiB0ZWdyYTogRml4IE5VTEwgcG9pbnRlciBkZXJlZmVyZW5j
-ZQo+ICAgZHJtL25vdXZlYXU6IHRlZ3JhOiBEbyBub3QgdHJ5IHRvIGRpc2FibGUgUENJIGRldmlj
-ZQo+Cj4gIGRyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfZHJtLmMgICAgICAgICB8ICAz
-ICstCj4gIC4uLi9kcm0vbm91dmVhdS9udmttL3N1YmRldi9pbnN0bWVtL2drMjBhLmMgICB8IDMw
-ICsrKysrKysrKysrKysrKysrKysKPiAgMiBmaWxlcyBjaGFuZ2VkLCAzMSBpbnNlcnRpb25zKCsp
-LCAyIGRlbGV0aW9ucygtKQo+Cj4gLS0KPiAyLjIzLjAKPgo+IF9fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fCj4gTm91dmVhdSBtYWlsaW5nIGxpc3QKPiBOb3V2
-ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwo+IGh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3Jn
-L21haWxtYW4vbGlzdGluZm8vbm91dmVhdQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fXwpOb3V2ZWF1IG1haWxpbmcgbGlzdApOb3V2ZWF1QGxpc3RzLmZyZWVk
-ZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZv
-L25vdXZlYXU=
+
+--===============1222346873==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="/04w6evG8XlLl3ft"
+Content-Disposition: inline
+
+
+--/04w6evG8XlLl3ft
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Mon, Sep 16, 2019 at 05:15:25PM +0100, Robin Murphy wrote:
+> On 16/09/2019 16:57, Thierry Reding wrote:
+> > On Mon, Sep 16, 2019 at 04:29:18PM +0100, Robin Murphy wrote:
+> > > Hi Thierry,
+> > >=20
+> > > On 16/09/2019 16:04, Thierry Reding wrote:
+> > > > From: Thierry Reding <treding@nvidia.com>
+> > > >=20
+> > > > If the GPU is already attached to an IOMMU, don't detach it and set=
+up an
+> > > > explicit IOMMU domain. Since Nouveau can now properly handle the ca=
+se of
+> > > > the DMA API being backed by an IOMMU, just continue using the DMA A=
+PI.
+> > > >=20
+> > > > Signed-off-by: Thierry Reding <treding@nvidia.com>
+> > > > ---
+> > > >    .../drm/nouveau/nvkm/engine/device/tegra.c    | 19 +++++++------=
+------
+> > > >    1 file changed, 7 insertions(+), 12 deletions(-)
+> > > >=20
+> > > > diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/device/tegra.c b/d=
+rivers/gpu/drm/nouveau/nvkm/engine/device/tegra.c
+> > > > index d0d52c1d4aee..fc652aaa41c7 100644
+> > > > --- a/drivers/gpu/drm/nouveau/nvkm/engine/device/tegra.c
+> > > > +++ b/drivers/gpu/drm/nouveau/nvkm/engine/device/tegra.c
+> > > > @@ -23,10 +23,6 @@
+> > > >    #ifdef CONFIG_NOUVEAU_PLATFORM_DRIVER
+> > > >    #include "priv.h"
+> > > > -#if IS_ENABLED(CONFIG_ARM_DMA_USE_IOMMU)
+> > > > -#include <asm/dma-iommu.h>
+> > > > -#endif
+> > > > -
+> > > >    static int
+> > > >    nvkm_device_tegra_power_up(struct nvkm_device_tegra *tdev)
+> > > >    {
+> > > > @@ -109,14 +105,13 @@ nvkm_device_tegra_probe_iommu(struct nvkm_dev=
+ice_tegra *tdev)
+> > > >    	unsigned long pgsize_bitmap;
+> > > >    	int ret;
+> > > > -#if IS_ENABLED(CONFIG_ARM_DMA_USE_IOMMU)
+> > > > -	if (dev->archdata.mapping) {
+> > > > -		struct dma_iommu_mapping *mapping =3D to_dma_iommu_mapping(dev);
+> > > > -
+> > > > -		arm_iommu_detach_device(dev);
+> > > > -		arm_iommu_release_mapping(mapping);
+> > > > -	}
+> > > > -#endif
+> > > > +	/*
+> > > > +	 * Skip explicit IOMMU initialization if the GPU is already attac=
+hed
+> > > > +	 * to an IOMMU domain. This can happen if the DMA API is backed b=
+y an
+> > > > +	 * IOMMU.
+> > > > +	 */
+> > > > +	if (iommu_get_domain_for_dev(dev))
+> > > > +		return;
+> > >=20
+> > > Beware of "iommu.passthrough=3D1" - you could get a valid default dom=
+ain here
+> > > yet still have direct/SWIOTLB DMA ops. I guess you probably want to
+> > > double-check the domain type as well.
+> >=20
+> > Good point. An earlier version of this patch had an additional check for
+> > IOMMU_DOMAIN_DMA, but then that failed on 32-bit ARM because there the
+> > DMA API can also use IOMMU_DOMAIN_UNMANAGED type domains. Checking for
+> > IOMMU_DOMAIN_IDENTIFY should be safe, though. That doesn't seem to
+> > appear in arch/arm, arch/arm64 or drivers/iommu/dma-iommu.c.
+>=20
+> Right, "domain && domain->type !=3D IOMMU_DOMAIN_IDENTITY" should be
+> sufficient to answer "is the DMA layer managing my address space for me?"
+> unless and until some massive API change happens (which I certainly don't
+> foresee).
+
+Might be a good idea to roll that up into a function to have a standard
+way for drivers to check for this rather than open-coding the same
+condition everywhere (and maybe get things wrong). As an additional
+advantage, if that massive API change ever does happen we don't have to
+go and update all the callers.
+
+Something like this perhaps?
+
+	static inline bool iommu_managed(struct device *dev)
+	{
+		struct iommu_domain *domain =3D iommu_get_domain_for_dev(dev);
+
+		return domain && domain->type !=3D IOMMU_DOMAIN_UNMANAGED;
+	}
+
+Thierry
+
+--/04w6evG8XlLl3ft
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEEiOrDCAFJzPfAjcif3SOs138+s6EFAl2AkmMACgkQ3SOs138+
+s6EcaA//TNs1sJ9eP9hen7EqmO83waX5OeHPZSc0qZBn2O5QDEi/myOyEDyyM99X
+3kRZGNe8kWGgOeOdmNHHBufu8q4nC3OubH+qc6pC3iLCX7mTRUOKmY7WgMqk3min
+mj3/Yy5+rTfxCAEpJJ3y3Ml29WoHxAPD00QjkZVZJe/Cnf6fZn4YX7iejfx6Fp+k
+TSzICC9FWjVXxCbwLMw7iN79DCydNyLv9jRlZGHk9eJ1DUAwdtlWBNfqmQSSOI0B
+Je1SuzT3AvL3kORC7vySzPF5PIn1VReXU2AgYKTBmtuAHhFOdBmUmCn629khTHqY
+RUXmMm2uRhzA8y57egMTHZQkqO0XkBhv0KUECPKhCcWpjQjTjdmaLMWYrb5f5VD6
+4/zLSbtyCH98PBd1amOJeIC7b8GXUbKJ0069kSTgleLRA0afMQEAM7sLKB3WSRdI
+9Lw85Q3nxot/h+icCZwkM0wJsTmq7J34RZMmIIk4+b+1y9jnI+Edzb5rfD2hm410
+W+vwRsfG60eEiQ8FiODNv9fmykn0eSc0IfJRL0TBTN4LQ5hV10Gh5b9HE/2rxnZE
+vSFBxPBfBZxDw1BAtVp0qQyHqcWs2jzLkdNPpwr3pPm9HkkoNeusPbExaSJ00qD1
+s1eW4oxqW0aywBubPduFvy2qmI+rGRfvRedOCHCEEz04haHJax4=
+=UbIy
+-----END PGP SIGNATURE-----
+
+--/04w6evG8XlLl3ft--
+
+--===============1222346873==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
+YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
+cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============1222346873==--
