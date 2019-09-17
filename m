@@ -2,60 +2,62 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 14B9BB4999
-	for <lists+nouveau@lfdr.de>; Tue, 17 Sep 2019 10:36:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4C191B49B2
+	for <lists+nouveau@lfdr.de>; Tue, 17 Sep 2019 10:40:48 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 923336EB63;
-	Tue, 17 Sep 2019 08:36:01 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 548826EB67;
+	Tue, 17 Sep 2019 08:40:46 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-vs1-xe44.google.com (mail-vs1-xe44.google.com
- [IPv6:2607:f8b0:4864:20::e44])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 31BDC6EB63
- for <nouveau@lists.freedesktop.org>; Tue, 17 Sep 2019 08:36:00 +0000 (UTC)
-Received: by mail-vs1-xe44.google.com with SMTP id m22so1478390vsl.9
- for <nouveau@lists.freedesktop.org>; Tue, 17 Sep 2019 01:36:00 -0700 (PDT)
+Received: from mail-wm1-x341.google.com (mail-wm1-x341.google.com
+ [IPv6:2a00:1450:4864:20::341])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2B8916EB67;
+ Tue, 17 Sep 2019 08:40:45 +0000 (UTC)
+Received: by mail-wm1-x341.google.com with SMTP id p7so2241798wmp.4;
+ Tue, 17 Sep 2019 01:40:45 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=eAB78a/n2iN6Bt2Ao73obtLDAotTaOHVmy6Vrv1VNgQ=;
- b=XVbFRxOKcPkxP0/myaSlJzZz0b27d4YTbaIFK/3riuzij8g5BYaZV77GhCjxGknwMl
- pzhuqfZHoKdj8vMgGkstE9dpI2ji/UlW9Dt7QctALnLNs8DwyyDqZ+76CT6FvKWYvYdl
- SaJNSxDxYaZ+cYoQu1v+11PESmaydt1XFWG4vDVmZoiqGagwIwccXuiGJugch9TRWr+k
- tvFL9Lcm03CP3UzAVgOGmdkLB1P4e37NKWhqw3zO+VRdE+EaIh6ofxS1BJMI/gKyzjFe
- EQyrddGaRAWQaZz1P1/L5KZ0HGh/euPbvt71OMRl5tutDIlgOOTEX85bQOMx2Gq8uDIP
- FFiQ==
-X-Gm-Message-State: APjAAAXh1RWoGC3OQ6yTXDeDqZr0f1vNAyIL4Ik3WFZ1mWOeMdrOmco5
- Yl7knGaOGbyMzB/+cT15IWaStUHh5S8+brEWtYM=
-X-Google-Smtp-Source: APXvYqwpN/uchf4j9ub98okgltiHi7Dcq11tiW7IVBMS7mWUKz/7He+KIt7Tm7CgooaWHGEDVLl0lYwBcIVCTQWTem4=
-X-Received: by 2002:a67:2981:: with SMTP id p123mr1150541vsp.121.1568709359169; 
- Tue, 17 Sep 2019 01:35:59 -0700 (PDT)
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to:user-agent;
+ bh=No1DYAFFqaXnRiq29VLXRiHR5QPMNilGMWiCBsgVxF0=;
+ b=c5JNNClhpM0WlUKjma1f+uZaAUQbJismMWe8/c2QyDZOIeaAZ5rfFmsOJIGXEEvPCM
+ Ty/kZ6v6H1B9C0MKgqbECvnQvIdILX2Crz8mhB7Nz4XEtX2oPKm8UCmUz73xEJs7bejN
+ U3gMDwdOKLhZhGUXziGtj0LOa9/+eCKAIW+zzAFboq/xGUVnRj/3Jrc+32RM+UQkQ8/u
+ o1csYXdMexs85zDiJXgb8+tiPhMrG1S1RVRsZQ9WtGqGeOoqm4kF7YFrpwip/UJ/QzJm
+ nALmuppLKORyxVdLDEK+wvo0ube+j6m5LahB+0/z6A3A3+OaGN1OPzS5JgT5KUcD/Cum
+ b8Sg==
+X-Gm-Message-State: APjAAAVDsLiYRX00I84QZZ9jQvAW8WDUk6fQn8SIzK+uNmIGb0j1pIA2
+ LZBGd58qCEPYFx212ng9ml0=
+X-Google-Smtp-Source: APXvYqyXMmvlcivoeguL/I3PycyUG3ZkZnPP6Flvo57r+SxVYvLuAs74FVrGsKSwgU+DKMxzCvKx9A==
+X-Received: by 2002:a1c:a7d2:: with SMTP id q201mr2397784wme.146.1568709643537; 
+ Tue, 17 Sep 2019 01:40:43 -0700 (PDT)
+Received: from localhost (p2E5BE2CE.dip0.t-ipconnect.de. [46.91.226.206])
+ by smtp.gmail.com with ESMTPSA id o19sm1936122wro.50.2019.09.17.01.40.42
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 17 Sep 2019 01:40:42 -0700 (PDT)
+Date: Tue, 17 Sep 2019 10:40:41 +0200
+From: Thierry Reding <thierry.reding@gmail.com>
+To: Ben Skeggs <skeggsb@gmail.com>
+Message-ID: <20190917084041.GB17854@ulmo>
+References: <20190916150412.10025-1-thierry.reding@gmail.com>
+ <20190916150412.10025-4-thierry.reding@gmail.com>
+ <CACAvsv6AcwWW542AJNkyR-q+aQ0GLFc0C3Sior_bYPTEjBV4LA@mail.gmail.com>
 MIME-Version: 1.0
-References: <20190913113306.20972-1-kherbst@redhat.com>
- <20190913113306.20972-4-kherbst@redhat.com>
- <CACAvsv4gP5rX2K9pCx2TSHtgAGbqPfYYMA05TgRZkAKXb3RMow@mail.gmail.com>
- <CACO55tsU1hHz=KxP392vkJ8NZRtY5cGx+t51jOVwTNdftHyUzQ@mail.gmail.com>
- <CACAvsv7a2O8Z1A6czhr6-eTUy0qa5n6Xen4atzrbTEZAq0mkTg@mail.gmail.com>
- <CACO55tsRU4cj37S9vt3RK_3+kv49P9v+daoZhn1=68hD_ecarg@mail.gmail.com>
-In-Reply-To: <CACO55tsRU4cj37S9vt3RK_3+kv49P9v+daoZhn1=68hD_ecarg@mail.gmail.com>
-From: Ben Skeggs <skeggsb@gmail.com>
-Date: Tue, 17 Sep 2019 18:35:48 +1000
-Message-ID: <CACAvsv6Mta3pO_YS0SKB7kq9wv6XStx3SVDBY4O_XznOLvT1Tg@mail.gmail.com>
-To: Karol Herbst <kherbst@redhat.com>
+In-Reply-To: <CACAvsv6AcwWW542AJNkyR-q+aQ0GLFc0C3Sior_bYPTEjBV4LA@mail.gmail.com>
+User-Agent: Mutt/1.12.1 (2019-06-15)
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc;
- bh=eAB78a/n2iN6Bt2Ao73obtLDAotTaOHVmy6Vrv1VNgQ=;
- b=HgyZcqCeKkErtsLZ9ZxBcpoWMcADstDaHtJMnJHicyk6+a7dQfpejcPS+i2EK0PPde
- 1Q8Pty6+haHCZAEhQjv1rh9w33kmdEY8SL7LS9OE8+li8n7sA+03wq9qwX/T1IF7MgK6
- UbkyHaRT9ymGEl8IyVg3j8dEdubkHyuyj1PHmPi1uxfiDqCYYve8BBqnd7NsMhNOm4vj
- 7gGAU+IPn3V3EqWDayuz8IOa95bS1PgBvdUGnB1Hct091W1fIpGk/o78uR5wB5nTSYMQ
- QlpQ8cxa9vEuIFpGUGyCAXrkQKOg04CKwwHqunIElLTLf/4ygxNNI17QtilupCSZwM2r
- N6wQ==
-Subject: Re: [Nouveau] [PATCH v4 3/4] pci: set the pcie link speed to 8.0
- when suspending
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to:user-agent;
+ bh=No1DYAFFqaXnRiq29VLXRiHR5QPMNilGMWiCBsgVxF0=;
+ b=bHgk5DhVF3U2wQbFMj63D1AbMCvfuYv0v063TdtctCPBiVRploqRQON7NyIOlrIDUI
+ MvSEvupA12X/Q84YWCtFP4o/WILbPeeh5BLL1jPCgWpsp6eTmTIi6rlCqCsyn+PD3ytr
+ K8/VuL8yWJXUlr6LPmfHYSv03rjQ2D9gUpor6loUYyFiNK3TW9EBBYJSuVtPhilFffQV
+ Ag1/dYBG99IZJaJ7ekV1cmBAWqIysosR1z8Bt3Nee0oBgBQmRGAUXQnb9EzpzM3p2nA7
+ 7exUs9VDksA4tOCbTfv57Tjznkw8MH10sO8FBQ7aywjXVAixA42kENvT90Sdd85XF5B9
+ NuOg==
+Subject: Re: [Nouveau] [PATCH 03/11] drm/nouveau: secboot: Read WPR
+ configuration from GPU registers
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -67,180 +69,296 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: ML nouveau <nouveau@lists.freedesktop.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: linux-tegra@vger.kernel.org, ML nouveau <nouveau@lists.freedesktop.org>,
+ Ben Skeggs <bskeggs@redhat.com>,
+ ML dri-devel <dri-devel@lists.freedesktop.org>
+Content-Type: multipart/mixed; boundary="===============1903858813=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-T24gVHVlLCAxNyBTZXAgMjAxOSBhdCAxODoyOCwgS2Fyb2wgSGVyYnN0IDxraGVyYnN0QHJlZGhh
-dC5jb20+IHdyb3RlOgo+Cj4gT24gVHVlLCBTZXAgMTcsIDIwMTkgYXQgMTA6MjEgQU0gQmVuIFNr
-ZWdncyA8c2tlZ2dzYkBnbWFpbC5jb20+IHdyb3RlOgo+ID4KPiA+IE9uIFR1ZSwgMTcgU2VwIDIw
-MTkgYXQgMTg6MDcsIEthcm9sIEhlcmJzdCA8a2hlcmJzdEByZWRoYXQuY29tPiB3cm90ZToKPiA+
-ID4KPiA+ID4gT24gVHVlLCBTZXAgMTcsIDIwMTkgYXQgODowMSBBTSBCZW4gU2tlZ2dzIDxza2Vn
-Z3NiQGdtYWlsLmNvbT4gd3JvdGU6Cj4gPiA+ID4KPiA+ID4gPiBPbiBGcmksIDEzIFNlcCAyMDE5
-IGF0IDIxOjMzLCBLYXJvbCBIZXJic3QgPGtoZXJic3RAcmVkaGF0LmNvbT4gd3JvdGU6Cj4gPiA+
-ID4gPgo+ID4gPiA+ID4gQXBwZXJhbnRseSB0aGluZ3MgZ28gc291dGggaWYgd2Ugc3VzcGVuZCB0
-aGUgZGV2aWNlIHdpdGggYSBQQ0llIGxpbmsgc3BlZWQKPiA+ID4gPiA+IHNldCB0byAyLjUuIEZp
-eGVzIHJ1bnRpbWUgc3VzcGVuZCBvbiBteSBncDEwNy4KPiA+ID4gPiA+Cj4gPiA+ID4gPiBUaGlz
-IGFsbCBsb29rcyBsaWtlIHNvbWUgYnVnIGluc2lkZSB0aGUgcGNpIHN1YnN5c3RlbSBhbmQgSSB3
-b3VsZCBwcmVmZXIgYQo+ID4gPiA+ID4gZml4IHRoZXJlIGluc3RlYWQgb2Ygbm91dmVhdSwgYnV0
-IG1heWJlIHRoZXJlIGlzIG5vIHJlYWwgbmljZSB3YXkgb2YgZG9pbmcKPiA+ID4gPiA+IHRoYXQg
-b3V0c2lkZSBvZiBkcml2ZXJzPwo+ID4gPiA+ID4KPiA+ID4gPiA+IHYyOiBzcXVhc2hlZCB0b2dl
-dGhlciBwYXRjaCA0IGFuZCA1Cj4gPiA+ID4gPiB2Mzogb25seSByZXN0b3JlIHBjaWUgc3BlZWQg
-b24gbWFjaGluZXMgd2l0aCBydW5wbQo+ID4gPiA+ID4gICAgIGFkZCBOdlJ1bnBtV29ya2Fyb3Vu
-ZCBjb25maWcgb3B0aW9uIHRvIGRpc2FibGUgdGhlIHdvcmthcm91bmQKPiA+ID4gPiA+IHY0OiBv
-bmx5IHJ1biB0aGUgY29kZSBvbiBzdXNwZW5kCj4gPiA+ID4gPiAgICAgYWx3YXlzIHB1dCB0aGUg
-Y2FyZCBpbnRvIDguMCBtb2RlLCBub3Qgd2hhdCBub3V2ZWF1IGRldGVjdGVkIG9uIGxvYWQKPiA+
-ID4gPiBXaHkgdGhpcyBjaGFuZ2U/Cj4gPiA+Cj4gPiA+IG1vZHByb2JlIG5vdXZlYXUKPiA+ID4g
-cm1tb2Qgbm91dmVhdQo+ID4gPiBtb2Rwcm9iZSBub3V2ZWF1IChzYXZlZCAyLjUgYXMgdGhlICJi
-b290IiBzcGVlZCkKPiA+ID4gcnVucG0gYnJlYWtzLgo+ID4gR2l2ZW4gdGhhdCB0aGlzIGlzIG1v
-cmUgdGhhbiBsaWtlbHkgYSBoYWNrL3dvcmthcm91bmQgZm9yIGFub3RoZXIKPiA+IGlzc3VlIHRv
-IGJlZ2luIHdpdGgsIHRoYXQgaXNuJ3QgdGhlIGVuZCBvZiB0aGUgd29ybGQuCj4gPgo+ID4gPgo+
-ID4gPiBNYWlubHkgSSBkb24ndCBhY3R1YWxseSB3YW50IHRvIGRlcGVuZCBvbiB0aGUgaW5pdGlh
-bCBzdGF0ZSBhcyB3ZQo+ID4gPiBsb3dlciB0byAyLjUvNS4wIGRlcGVuZGluZyBvbiB3aGF0IHdl
-IHF1ZXJpZWQgaXMgcG9zc2libGUgYW5kIG5vdAo+ID4gPiB1c2luZyAyLjUgaXMgYWN0dWFsbHkg
-dGhlIGZpeCwgbm90IHVzZSB3aGF0ZXZlciB0aGUgR1BVIGJvb3RlZCB3aXRoLgo+ID4gSXMgOCBh
-dmFpbGFibGUgZXZlcnl3aGVyZSB3ZSdyZSBnb2luZyB0byBiZSB1c2luZyB0aGlzPwo+ID4KPgo+
-IG5vdXZlYXUgZmFsbHNiYWNrIHRvIGEgbG93ZXIgc3BlZWQgaWYgdGhlIHJlcXVlc3RlZCBvbmUg
-aXMgbm90Cj4gYXZhaWxhYmxlLiBXZSBoYXZlIHRvIGRvIHRoaXMgZGV0ZWN0aW9uIGZvciBwc3Rh
-dGVzIGFueXdheSwgd2hlcmUgdGhlCj4gdmJpb3MgcmVxdWVzdHMgOC4wLCBidXQgdGhlIHN5c3Rl
-bSBjYW4gb25seSBkbyA1LjAgb3IgMi41CkFjay4gIEkgZ3Vlc3MgSSdtIE9LIHdpdGggdGhpcyB0
-aGVuLiAgSSB3b3VsZG4ndCBtaW5kIGEgY29tbWVudCBpbgpmaW5pKCkgYmVmb3JlIHRoZSBjYWxs
-LCBleHBsYWluaW5nIHdoeSB3ZSdyZSBhY3R1YWxseSBkb2luZyB0aGlzIHNvCnRoZSByYXRpb25h
-bGUgZG9lc24ndCBnZXQgbG9zdCBpbiBoaXN0b3J5IGF0IHNvbWUgcG9pbnQuCgo+Cj4gPiA+Cj4g
-PiA+ID4gQWxzbywgSSBrbm93IHdlIGRvbid0IGN1cnJlbnRseSB0b3VjaCBpdCwgYnV0IHdoYXQK
-PiA+ID4gPiBpZiB4MTYgaXNuJ3QgYXZhaWxhYmxlIG9uIHNvbWUgc3lzdGVtcyBhbmQgd2UgYnJl
-YWsgc3R1ZmYgd2hlbiB3ZSBkbwo+ID4gPiA+IHN0YXJ0IHBsYXlpbmcgd2l0aCBsaW5rIHdpZHRo
-Pwo+ID4gPiA+Cj4gPiA+Cj4gPiA+IEkgdGhpbmsgaWYgd2UgYWRkIGNvZGUgZm9yIHRoZSB3aWR0
-aCwgd2Ugd291bGQgYWRkIGEgbWF4aW11bSB3aWR0aAo+ID4gPiBkZXRlY3Rpb24gYXMgd2VsbCBh
-cyB3ZSBkbyBmb3IgdGhlIGxpbmsgc3BlZWQuCj4gPiA+Cj4gPiA+ID4gPgo+ID4gPiA+ID4gU2ln
-bmVkLW9mZi1ieTogS2Fyb2wgSGVyYnN0IDxraGVyYnN0QHJlZGhhdC5jb20+Cj4gPiA+ID4gPiBS
-ZXZpZXdlZC1ieTogTHl1ZGUgUGF1bCA8bHl1ZGVAcmVkaGF0LmNvbT4gKHYyKQo+ID4gPiA+ID4g
-LS0tCj4gPiA+ID4gPiAgZHJtL25vdXZlYXUvaW5jbHVkZS9udmttL2NvcmUvZGV2aWNlLmggfCAg
-MiArKwo+ID4gPiA+ID4gIGRybS9ub3V2ZWF1L2luY2x1ZGUvbnZrbS9zdWJkZXYvcGNpLmggIHwg
-IDMgKystCj4gPiA+ID4gPiAgZHJtL25vdXZlYXUvbm91dmVhdV9kcm0uYyAgICAgICAgICAgICAg
-fCAgMSArCj4gPiA+ID4gPiAgZHJtL25vdXZlYXUvbnZrbS9zdWJkZXYvY2xrL2Jhc2UuYyAgICAg
-fCAgMiArLQo+ID4gPiA+ID4gIGRybS9ub3V2ZWF1L252a20vc3ViZGV2L3BjaS9iYXNlLmMgICAg
-IHwgIDIgKysKPiA+ID4gPiA+ICBkcm0vbm91dmVhdS9udmttL3N1YmRldi9wY2kvcGNpZS5jICAg
-ICB8IDI3ICsrKysrKysrKysrKysrKysrKysrKystLS0tCj4gPiA+ID4gPiAgZHJtL25vdXZlYXUv
-bnZrbS9zdWJkZXYvcGNpL3ByaXYuaCAgICAgfCAgMSArCj4gPiA+ID4gPiAgNyBmaWxlcyBjaGFu
-Z2VkLCAzMiBpbnNlcnRpb25zKCspLCA2IGRlbGV0aW9ucygtKQo+ID4gPiA+ID4KPiA+ID4gPiA+
-IGRpZmYgLS1naXQgYS9kcm0vbm91dmVhdS9pbmNsdWRlL252a20vY29yZS9kZXZpY2UuaCBiL2Ry
-bS9ub3V2ZWF1L2luY2x1ZGUvbnZrbS9jb3JlL2RldmljZS5oCj4gPiA+ID4gPiBpbmRleCA2ZDU1
-Y2QwNDcuLjRmYjNmOTcyZiAxMDA2NDQKPiA+ID4gPiA+IC0tLSBhL2RybS9ub3V2ZWF1L2luY2x1
-ZGUvbnZrbS9jb3JlL2RldmljZS5oCj4gPiA+ID4gPiArKysgYi9kcm0vbm91dmVhdS9pbmNsdWRl
-L252a20vY29yZS9kZXZpY2UuaAo+ID4gPiA+ID4gQEAgLTEyNSw2ICsxMjUsOCBAQCBzdHJ1Y3Qg
-bnZrbV9kZXZpY2Ugewo+ID4gPiA+ID4gICAgICAgICB1OCAgY2hpcHJldjsKPiA+ID4gPiA+ICAg
-ICAgICAgdTMyIGNyeXN0YWw7Cj4gPiA+ID4gPgo+ID4gPiA+ID4gKyAgICAgICBib29sIGhhc19y
-dW5wbTsKPiA+ID4gPiA+ICsKPiA+ID4gPiA+ICAgICAgICAgc3RydWN0IHsKPiA+ID4gPiA+ICAg
-ICAgICAgICAgICAgICBzdHJ1Y3Qgbm90aWZpZXJfYmxvY2sgbmI7Cj4gPiA+ID4gPiAgICAgICAg
-IH0gYWNwaTsKPiA+ID4gPiA+IGRpZmYgLS1naXQgYS9kcm0vbm91dmVhdS9pbmNsdWRlL252a20v
-c3ViZGV2L3BjaS5oIGIvZHJtL25vdXZlYXUvaW5jbHVkZS9udmttL3N1YmRldi9wY2kuaAo+ID4g
-PiA+ID4gaW5kZXggYjI5MTAxZTQ4Li43MjQ1NTEzZDkgMTAwNjQ0Cj4gPiA+ID4gPiAtLS0gYS9k
-cm0vbm91dmVhdS9pbmNsdWRlL252a20vc3ViZGV2L3BjaS5oCj4gPiA+ID4gPiArKysgYi9kcm0v
-bm91dmVhdS9pbmNsdWRlL252a20vc3ViZGV2L3BjaS5oCj4gPiA+ID4gPiBAQCAtNTIsNiArNTIs
-NyBAQCBpbnQgZ2sxMDRfcGNpX25ldyhzdHJ1Y3QgbnZrbV9kZXZpY2UgKiwgaW50LCBzdHJ1Y3Qg
-bnZrbV9wY2kgKiopOwo+ID4gPiA+ID4gIGludCBncDEwMF9wY2lfbmV3KHN0cnVjdCBudmttX2Rl
-dmljZSAqLCBpbnQsIHN0cnVjdCBudmttX3BjaSAqKik7Cj4gPiA+ID4gPgo+ID4gPiA+ID4gIC8q
-IHBjaWUgZnVuY3Rpb25zICovCj4gPiA+ID4gPiAtaW50IG52a21fcGNpZV9zZXRfbGluayhzdHJ1
-Y3QgbnZrbV9wY2kgKiwgZW51bSBudmttX3BjaWVfc3BlZWQsIHU4IHdpZHRoKTsKPiA+ID4gPiA+
-ICtpbnQgbnZrbV9wY2llX3NldF9saW5rKHN0cnVjdCBudmttX3BjaSAqLCBlbnVtIG52a21fcGNp
-ZV9zcGVlZCwgdTggd2lkdGgsCj4gPiA+ID4gPiArICAgICAgICAgICAgICAgICAgICAgIGJvb2wg
-c2F2ZSk7Cj4gPiA+ID4gPiAgZW51bSBudmttX3BjaWVfc3BlZWQgbnZrbV9wY2llX2dldF9zcGVl
-ZChzdHJ1Y3QgbnZrbV9wY2kgKik7Cj4gPiA+ID4gPiAgI2VuZGlmCj4gPiA+ID4gPiBkaWZmIC0t
-Z2l0IGEvZHJtL25vdXZlYXUvbm91dmVhdV9kcm0uYyBiL2RybS9ub3V2ZWF1L25vdXZlYXVfZHJt
-LmMKPiA+ID4gPiA+IGluZGV4IDNkMzJhZmU4YS4uNzhkNTVjNTI1IDEwMDY0NAo+ID4gPiA+ID4g
-LS0tIGEvZHJtL25vdXZlYXUvbm91dmVhdV9kcm0uYwo+ID4gPiA+ID4gKysrIGIvZHJtL25vdXZl
-YXUvbm91dmVhdV9kcm0uYwo+ID4gPiA+ID4gQEAgLTY3Niw2ICs2NzYsNyBAQCBzdGF0aWMgaW50
-IG5vdXZlYXVfZHJtX3Byb2JlKHN0cnVjdCBwY2lfZGV2ICpwZGV2LAo+ID4gPiA+ID4KPiA+ID4g
-PiA+ICAgICAgICAgaWYgKG5vdXZlYXVfYXRvbWljKQo+ID4gPiA+ID4gICAgICAgICAgICAgICAg
-IGRyaXZlcl9wY2kuZHJpdmVyX2ZlYXR1cmVzIHw9IERSSVZFUl9BVE9NSUM7Cj4gPiA+ID4gPiAr
-ICAgICAgIGRldmljZS0+aGFzX3J1bnBtID0gbm91dmVhdV9wbW9wc19ydW50aW1lKCk7Cj4gPiA+
-ID4gPgo+ID4gPiA+ID4gICAgICAgICBkcm1fZGV2ID0gZHJtX2Rldl9hbGxvYygmZHJpdmVyX3Bj
-aSwgJnBkZXYtPmRldik7Cj4gPiA+ID4gPiAgICAgICAgIGlmIChJU19FUlIoZHJtX2RldikpIHsK
-PiA+ID4gPiA+IGRpZmYgLS1naXQgYS9kcm0vbm91dmVhdS9udmttL3N1YmRldi9jbGsvYmFzZS5j
-IGIvZHJtL25vdXZlYXUvbnZrbS9zdWJkZXYvY2xrL2Jhc2UuYwo+ID4gPiA+ID4gaW5kZXggYmE2
-YTg2OGQ0Li5lMzBlNzc0NTMgMTAwNjQ0Cj4gPiA+ID4gPiAtLS0gYS9kcm0vbm91dmVhdS9udmtt
-L3N1YmRldi9jbGsvYmFzZS5jCj4gPiA+ID4gPiArKysgYi9kcm0vbm91dmVhdS9udmttL3N1YmRl
-di9jbGsvYmFzZS5jCj4gPiA+ID4gPiBAQCAtMjc3LDcgKzI3Nyw3IEBAIG52a21fcHN0YXRlX3By
-b2coc3RydWN0IG52a21fY2xrICpjbGssIGludCBwc3RhdGVpKQo+ID4gPiA+ID4gICAgICAgICBu
-dmttX2RlYnVnKHN1YmRldiwgInNldHRpbmcgcGVyZm9ybWFuY2Ugc3RhdGUgJWRcbiIsIHBzdGF0
-ZWkpOwo+ID4gPiA+ID4gICAgICAgICBjbGstPnBzdGF0ZSA9IHBzdGF0ZWk7Cj4gPiA+ID4gPgo+
-ID4gPiA+ID4gLSAgICAgICBudmttX3BjaWVfc2V0X2xpbmsocGNpLCBwc3RhdGUtPnBjaWVfc3Bl
-ZWQsIHBzdGF0ZS0+cGNpZV93aWR0aCk7Cj4gPiA+ID4gPiArICAgICAgIG52a21fcGNpZV9zZXRf
-bGluayhwY2ksIHBzdGF0ZS0+cGNpZV9zcGVlZCwgcHN0YXRlLT5wY2llX3dpZHRoLCB0cnVlKTsK
-PiA+ID4gPiA+Cj4gPiA+ID4gPiAgICAgICAgIGlmIChmYiAmJiBmYi0+cmFtICYmIGZiLT5yYW0t
-PmZ1bmMtPmNhbGMpIHsKPiA+ID4gPiA+ICAgICAgICAgICAgICAgICBzdHJ1Y3QgbnZrbV9yYW0g
-KnJhbSA9IGZiLT5yYW07Cj4gPiA+ID4gPiBkaWZmIC0tZ2l0IGEvZHJtL25vdXZlYXUvbnZrbS9z
-dWJkZXYvcGNpL2Jhc2UuYyBiL2RybS9ub3V2ZWF1L252a20vc3ViZGV2L3BjaS9iYXNlLmMKPiA+
-ID4gPiA+IGluZGV4IGVlMjQzMWE3OC4uYzliNjBlZjc2IDEwMDY0NAo+ID4gPiA+ID4gLS0tIGEv
-ZHJtL25vdXZlYXUvbnZrbS9zdWJkZXYvcGNpL2Jhc2UuYwo+ID4gPiA+ID4gKysrIGIvZHJtL25v
-dXZlYXUvbnZrbS9zdWJkZXYvcGNpL2Jhc2UuYwo+ID4gPiA+ID4gQEAgLTkwLDYgKzkwLDggQEAg
-bnZrbV9wY2lfZmluaShzdHJ1Y3QgbnZrbV9zdWJkZXYgKnN1YmRldiwgYm9vbCBzdXNwZW5kKQo+
-ID4gPiA+ID4KPiA+ID4gPiA+ICAgICAgICAgaWYgKHBjaS0+YWdwLmJyaWRnZSkKPiA+ID4gPiA+
-ICAgICAgICAgICAgICAgICBudmttX2FncF9maW5pKHBjaSk7Cj4gPiA+ID4gPiArICAgICAgIGVs
-c2UgaWYgKHBjaV9pc19wY2llKHBjaS0+cGRldikpCj4gPiA+ID4gPiArICAgICAgICAgICAgICAg
-bnZrbV9wY2llX2ZpbmkocGNpLCBzdXNwZW5kKTsKPiA+ID4gPiA+Cj4gPiA+ID4gPiAgICAgICAg
-IHJldHVybiAwOwo+ID4gPiA+ID4gIH0KPiA+ID4gPiA+IGRpZmYgLS1naXQgYS9kcm0vbm91dmVh
-dS9udmttL3N1YmRldi9wY2kvcGNpZS5jIGIvZHJtL25vdXZlYXUvbnZrbS9zdWJkZXYvcGNpL3Bj
-aWUuYwo+ID4gPiA+ID4gaW5kZXggYjQyMDNmZjFhLi41Y2FiNGEyNDAgMTAwNjQ0Cj4gPiA+ID4g
-PiAtLS0gYS9kcm0vbm91dmVhdS9udmttL3N1YmRldi9wY2kvcGNpZS5jCj4gPiA+ID4gPiArKysg
-Yi9kcm0vbm91dmVhdS9udmttL3N1YmRldi9wY2kvcGNpZS5jCj4gPiA+ID4gPiBAQCAtMjMsNiAr
-MjMsOCBAQAo+ID4gPiA+ID4gICAqLwo+ID4gPiA+ID4gICNpbmNsdWRlICJwcml2LmgiCj4gPiA+
-ID4gPgo+ID4gPiA+ID4gKyNpbmNsdWRlIDxjb3JlL29wdGlvbi5oPgo+ID4gPiA+ID4gKwo+ID4g
-PiA+ID4gIHN0YXRpYyBjaGFyICpudmttX3BjaWVfc3BlZWRzW10gPSB7Cj4gPiA+ID4gPiAgICAg
-ICAgICIyLjVHVC9zIiwKPiA+ID4gPiA+ICAgICAgICAgIjUuMEdUL3MiLAo+ID4gPiA+ID4gQEAg
-LTEwNiwxMSArMTA4LDI1IEBAIG52a21fcGNpZV9pbml0KHN0cnVjdCBudmttX3BjaSAqcGNpKQo+
-ID4gPiA+ID4gICAgICAgICAgICAgICAgIHBjaS0+ZnVuYy0+cGNpZS5pbml0KHBjaSk7Cj4gPiA+
-ID4gPgo+ID4gPiA+ID4gICAgICAgICBpZiAocGNpLT5wY2llLnNwZWVkICE9IC0xKQo+ID4gPiA+
-ID4gLSAgICAgICAgICAgICAgIG52a21fcGNpZV9zZXRfbGluayhwY2ksIHBjaS0+cGNpZS5zcGVl
-ZCwgcGNpLT5wY2llLndpZHRoKTsKPiA+ID4gPiA+ICsgICAgICAgICAgICAgICBudmttX3BjaWVf
-c2V0X2xpbmsocGNpLCBwY2ktPnBjaWUuc3BlZWQsCj4gPiA+ID4gPiArICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgIHBjaS0+cGNpZS53aWR0aCwgZmFsc2UpOwo+ID4gPiA+ID4KPiA+
-ID4gPiA+ICAgICAgICAgcmV0dXJuIDA7Cj4gPiA+ID4gPiAgfQo+ID4gPiA+ID4KPiA+ID4gPiA+
-ICtpbnQKPiA+ID4gPiA+ICtudmttX3BjaWVfZmluaShzdHJ1Y3QgbnZrbV9wY2kgKnBjaSwgYm9v
-bCBzdXNwZW5kKQo+ID4gPiA+ID4gK3sKPiA+ID4gPiA+ICsgICAgICAgc3RydWN0IG52a21fZGV2
-aWNlICpkZXZpY2UgPSBwY2ktPnN1YmRldi5kZXZpY2U7Cj4gPiA+ID4gPiArICAgICAgIGlmICgh
-ZGV2aWNlLT5oYXNfcnVucG0gfHwgIXN1c3BlbmQpCj4gPiA+ID4gPiArICAgICAgICAgICAgICAg
-cmV0dXJuIDA7Cj4gPiA+ID4gPiArCj4gPiA+ID4gPiArICAgICAgIGlmICghbnZrbV9ib29sb3B0
-KGRldmljZS0+Y2Znb3B0LCAiTnZSdW5wbVdvcmthcm91bmQiLCB0cnVlKSkKPiA+ID4gPiA+ICsg
-ICAgICAgICAgICAgICByZXR1cm4gMDsKPiA+ID4gPiA+ICsKPiA+ID4gPiA+ICsgICAgICAgcmV0
-dXJuIG52a21fcGNpZV9zZXRfbGluayhwY2ksIE5WS01fUENJRV9TUEVFRF84XzAsIDE2LCBmYWxz
-ZSk7Cj4gPiA+ID4gPiArfQo+ID4gPiA+ID4gKwo+ID4gPiA+ID4gIHZvaWQKPiA+ID4gPiA+ICBu
-dmttX3BjaWVfZm9yY2VfYXNwbV9vZmYoc3RydWN0IG52a21fcGNpICpwY2ksIGJvb2wgc3RhdHVz
-KQo+ID4gPiA+ID4gIHsKPiA+ID4gPiA+IEBAIC0xMjAsNyArMTM2LDggQEAgbnZrbV9wY2llX2Zv
-cmNlX2FzcG1fb2ZmKHN0cnVjdCBudmttX3BjaSAqcGNpLCBib29sIHN0YXR1cykKPiA+ID4gPiA+
-ICB9Cj4gPiA+ID4gPgo+ID4gPiA+ID4gIGludAo+ID4gPiA+ID4gLW52a21fcGNpZV9zZXRfbGlu
-ayhzdHJ1Y3QgbnZrbV9wY2kgKnBjaSwgZW51bSBudmttX3BjaWVfc3BlZWQgc3BlZWQsIHU4IHdp
-ZHRoKQo+ID4gPiA+ID4gK252a21fcGNpZV9zZXRfbGluayhzdHJ1Y3QgbnZrbV9wY2kgKnBjaSwg
-ZW51bSBudmttX3BjaWVfc3BlZWQgc3BlZWQsIHU4IHdpZHRoLAo+ID4gPiA+ID4gKyAgICAgICAg
-ICAgICAgICAgICBib29sIHNhdmUpCj4gPiA+ID4gPiAgewo+ID4gPiA+ID4gICAgICAgICBzdHJ1
-Y3QgbnZrbV9zdWJkZXYgKnN1YmRldiA9ICZwY2ktPnN1YmRldjsKPiA+ID4gPiA+ICAgICAgICAg
-ZW51bSBudmttX3BjaWVfc3BlZWQgY3VyX3NwZWVkLCBtYXhfc3BlZWQ7Cj4gPiA+ID4gPiBAQCAt
-MTU0LDggKzE3MSwxMCBAQCBudmttX3BjaWVfc2V0X2xpbmsoc3RydWN0IG52a21fcGNpICpwY2ks
-IGVudW0gbnZrbV9wY2llX3NwZWVkIHNwZWVkLCB1OCB3aWR0aCkKPiA+ID4gPiA+ICAgICAgICAg
-ICAgICAgICBzcGVlZCA9IG1heF9zcGVlZDsKPiA+ID4gPiA+ICAgICAgICAgfQo+ID4gPiA+ID4K
-PiA+ID4gPiA+IC0gICAgICAgcGNpLT5wY2llLnNwZWVkID0gc3BlZWQ7Cj4gPiA+ID4gPiAtICAg
-ICAgIHBjaS0+cGNpZS53aWR0aCA9IHdpZHRoOwo+ID4gPiA+ID4gKyAgICAgICBpZiAoc2F2ZSkg
-ewo+ID4gPiA+ID4gKyAgICAgICAgICAgICAgIHBjaS0+cGNpZS5zcGVlZCA9IHNwZWVkOwo+ID4g
-PiA+ID4gKyAgICAgICAgICAgICAgIHBjaS0+cGNpZS53aWR0aCA9IHdpZHRoOwo+ID4gPiA+ID4g
-KyAgICAgICB9Cj4gPiA+ID4gPgo+ID4gPiA+ID4gICAgICAgICBpZiAoc3BlZWQgPT0gY3VyX3Nw
-ZWVkKSB7Cj4gPiA+ID4gPiAgICAgICAgICAgICAgICAgbnZrbV9kZWJ1ZyhzdWJkZXYsICJyZXF1
-ZXN0ZWQgbWF0Y2hlcyBjdXJyZW50IHNwZWVkXG4iKTsKPiA+ID4gPiA+IGRpZmYgLS1naXQgYS9k
-cm0vbm91dmVhdS9udmttL3N1YmRldi9wY2kvcHJpdi5oIGIvZHJtL25vdXZlYXUvbnZrbS9zdWJk
-ZXYvcGNpL3ByaXYuaAo+ID4gPiA+ID4gaW5kZXggODJjNzhiZWZhLi42YmVhMzdjMTUgMTAwNjQ0
-Cj4gPiA+ID4gPiAtLS0gYS9kcm0vbm91dmVhdS9udmttL3N1YmRldi9wY2kvcHJpdi5oCj4gPiA+
-ID4gPiArKysgYi9kcm0vbm91dmVhdS9udmttL3N1YmRldi9wY2kvcHJpdi5oCj4gPiA+ID4gPiBA
-QCAtNjMsNCArNjMsNSBAQCBpbnQgZ2sxMDRfcGNpZV92ZXJzaW9uX3N1cHBvcnRlZChzdHJ1Y3Qg
-bnZrbV9wY2kgKik7Cj4gPiA+ID4gPgo+ID4gPiA+ID4gIGludCBudmttX3BjaWVfb25laW5pdChz
-dHJ1Y3QgbnZrbV9wY2kgKik7Cj4gPiA+ID4gPiAgaW50IG52a21fcGNpZV9pbml0KHN0cnVjdCBu
-dmttX3BjaSAqKTsKPiA+ID4gPiA+ICtpbnQgbnZrbV9wY2llX2Zpbmkoc3RydWN0IG52a21fcGNp
-ICosIGJvb2wgc3VzcGVuZCk7Cj4gPiA+ID4gPiAgI2VuZGlmCj4gPiA+ID4gPiAtLQo+ID4gPiA+
-ID4gMi4yMS4wCj4gPiA+ID4gPgo+ID4gPiA+ID4gX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX18KPiA+ID4gPiA+IE5vdXZlYXUgbWFpbGluZyBsaXN0Cj4gPiA+
-ID4gPiBOb3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwo+ID4gPiA+ID4gaHR0cHM6Ly9saXN0
-cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1Cj4gPiA+Cj4KX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBtYWlsaW5n
-IGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVz
-a3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============1903858813==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="1UWUbFP1cBYEclgG"
+Content-Disposition: inline
+
+
+--1UWUbFP1cBYEclgG
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Tue, Sep 17, 2019 at 01:49:57PM +1000, Ben Skeggs wrote:
+> On Tue, 17 Sep 2019 at 01:04, Thierry Reding <thierry.reding@gmail.com> w=
+rote:
+> >
+> > From: Thierry Reding <treding@nvidia.com>
+> >
+> > The GPUs found on Tegra SoCs have registers that can be used to read the
+> > WPR configuration. Use these registers instead of reaching into the
+> > memory controller's register space to read the same information.
+> >
+> > Signed-off-by: Thierry Reding <treding@nvidia.com>
+> > ---
+> >  .../drm/nouveau/nvkm/subdev/secboot/gm200.h   |  2 +-
+> >  .../drm/nouveau/nvkm/subdev/secboot/gm20b.c   | 81 ++++++++++++-------
+> >  .../drm/nouveau/nvkm/subdev/secboot/gp10b.c   |  4 +-
+> >  3 files changed, 53 insertions(+), 34 deletions(-)
+> >
+> > diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/secboot/gm200.h b/driv=
+ers/gpu/drm/nouveau/nvkm/subdev/secboot/gm200.h
+> > index 62c5e162099a..280b1448df88 100644
+> > --- a/drivers/gpu/drm/nouveau/nvkm/subdev/secboot/gm200.h
+> > +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/secboot/gm200.h
+> > @@ -41,6 +41,6 @@ int gm200_secboot_run_blob(struct nvkm_secboot *, str=
+uct nvkm_gpuobj *,
+> >                            struct nvkm_falcon *);
+> >
+> >  /* Tegra-only */
+> > -int gm20b_secboot_tegra_read_wpr(struct gm200_secboot *, u32);
+> > +int gm20b_secboot_tegra_read_wpr(struct gm200_secboot *);
+> >
+> >  #endif
+> > diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/secboot/gm20b.c b/driv=
+ers/gpu/drm/nouveau/nvkm/subdev/secboot/gm20b.c
+> > index df8b919dcf09..f8a543122219 100644
+> > --- a/drivers/gpu/drm/nouveau/nvkm/subdev/secboot/gm20b.c
+> > +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/secboot/gm20b.c
+> > @@ -23,39 +23,65 @@
+> >  #include "acr.h"
+> >  #include "gm200.h"
+> >
+> > -#define TEGRA210_MC_BASE                       0x70019000
+> > -
+> >  #ifdef CONFIG_ARCH_TEGRA
+> > -#define MC_SECURITY_CARVEOUT2_CFG0             0xc58
+> > -#define MC_SECURITY_CARVEOUT2_BOM_0            0xc5c
+> > -#define MC_SECURITY_CARVEOUT2_BOM_HI_0         0xc60
+> > -#define MC_SECURITY_CARVEOUT2_SIZE_128K                0xc64
+> > -#define TEGRA_MC_SECURITY_CARVEOUT_CFG_LOCKED  (1 << 1)
+> >  /**
+> >   * gm20b_secboot_tegra_read_wpr() - read the WPR registers on Tegra
+> >   *
+> > - * On dGPU, we can manage the WPR region ourselves, but on Tegra the W=
+PR region
+> > - * is reserved from system memory by the bootloader and irreversibly l=
+ocked.
+> > - * This function reads the address and size of the pre-configured WPR =
+region.
+> > + * On dGPU, we can manage the WPR region ourselves, but on Tegra this =
+region
+> > + * is allocated from system memory by the secure firmware. The region =
+is then
+> > + * marked as a "secure carveout" and irreversibly locked. Furthermore,=
+ the WPR
+> > + * secure carveout is also configured to be sent to the GPU via a dedi=
+cated
+> > + * serial bus between the memory controller and the GPU. The GPU reque=
+sts this
+> > + * information upon leaving reset and exposes it through a FIFO regist=
+er at
+> > + * offset 0x100cd4.
+> > + *
+> > + * The FIFO register's lower 4 bits can be used to set the read index =
+into the
+> > + * FIFO. After each read of the FIFO register, the read index is incre=
+mented.
+> > + *
+> > + * Indices 2 and 3 contain the lower and upper addresses of the WPR. T=
+hese are
+> > + * stored in units of 256 B. The WPR is inclusive of both addresses.
+> > + *
+> > + * Unfortunately, for some reason the WPR info register doesn't contai=
+n the
+> > + * correct values for the secure carveout. It seems like the upper add=
+ress is
+> > + * always too small by 128 KiB - 1. Given that the secure carvout size=
+ in the
+> > + * memory controller configuration is specified in units of 128 KiB, i=
+t's
+> > + * possible that the computation of the upper address of the WPR is wr=
+ong and
+> > + * causes this difference.
+> >   */
+> >  int
+> > -gm20b_secboot_tegra_read_wpr(struct gm200_secboot *gsb, u32 mc_base)
+> > +gm20b_secboot_tegra_read_wpr(struct gm200_secboot *gsb)
+> >  {
+> > +       struct nvkm_device *device =3D gsb->base.subdev.device;
+> >         struct nvkm_secboot *sb =3D &gsb->base;
+> > -       void __iomem *mc;
+> > -       u32 cfg;
+> > +       u64 base, limit;
+> > +       u32 value;
+> >
+> > -       mc =3D ioremap(mc_base, 0xd00);
+> > -       if (!mc) {
+> > -               nvkm_error(&sb->subdev, "Cannot map Tegra MC registers\=
+n");
+> > -               return -ENOMEM;
+> > -       }
+> > -       sb->wpr_addr =3D ioread32_native(mc + MC_SECURITY_CARVEOUT2_BOM=
+_0) |
+> > -             ((u64)ioread32_native(mc + MC_SECURITY_CARVEOUT2_BOM_HI_0=
+) << 32);
+> > -       sb->wpr_size =3D ioread32_native(mc + MC_SECURITY_CARVEOUT2_SIZ=
+E_128K)
+> > -               << 17;
+> > -       cfg =3D ioread32_native(mc + MC_SECURITY_CARVEOUT2_CFG0);
+> > -       iounmap(mc);
+> > +       /* set WPR info register to point at WPR base address register =
+*/
+> > +       value =3D nvkm_rd32(device, 0x100cd4);
+> > +       value &=3D ~0xf;
+> > +       value |=3D 0x2;
+> > +       nvkm_wr32(device, 0x100cd4, value);
+> > +
+> > +       /* read base address */
+> > +       value =3D nvkm_rd32(device, 0x100cd4);
+> > +       base =3D (u64)(value >> 4) << 12;
+> > +
+> > +       /* read limit */
+> > +       value =3D nvkm_rd32(device, 0x100cd4);
+> > +       limit =3D (u64)(value >> 4) << 12;
+> acr_r352_wpr_is_set() does a similar readout to confirm the HS
+> firmware did its job on dGPU, perhaps this part of it could be
+> factored out into a function that could be used in both places?
+
+I hadn't seen that function. It looks to me like these are now both
+doing exactly the same thing. The acr_r352_wpr_is_set() also seems to
+serve only to check that what's read from these WPR info registers
+matches what was configured as the WPR region previously. This is now
+rather pointless because, unless the computations differ, the result
+must be true.
+
+Honestly, I'm not sure we really need to check this. My understanding is
+that these WPR info registers are the canonical way of obtaining the WPR
+region base and limit. The way that this works is that the GPU has a
+dedicated bus to the memory controller and it fetches these parameters
+=66rom the MC when it leaves reset.
+
+One oddity here, though, is that the code in acr_r352_wpr_is_set() does
+not account for the strange way that the limit is encoded in these
+registers. I suspect that this is some weird hardware bug that happens
+during the transfer of the WPR information to the GPU. I came across
+some documentation that specifically defines the limit register to
+contain the upper limit of the WPR in units of 256 B with the WPR being
+inclusive of both the base and the limit. I'm not exactly sure why this
+has gone unnoticed, but I think nvgpu doesn't actually test for the WPR
+size when it loads the firmware. I only ran into this when implementing
+the WPR info register readout because Nouveau would refuse to load the
+firmware because it didn't fit into what it thought was the WPR.
+
+Anyway, I've tested this on all of gm20b, gp10b and gv11b and the above
+computations give me the same values that the (SoC) firmware claims that
+it configured the WPR with.
+
+Given the above, do you see any further use for acr_r352_wpr_is_set()?
+Should I follow up with a patch removing it?
+
+Thierry
+
+>=20
+> > +
+> > +       /*
+> > +        * The upper address of the WPR seems to be computed wrongly an=
+d is
+> > +        * actually SZ_128K - 1 bytes lower than it should be. Adjust t=
+he
+> > +        * value accordingly.
+> > +        */
+> > +       limit +=3D SZ_128K - 1;
+> > +
+> > +       sb->wpr_size =3D limit - base + 1;
+> > +       sb->wpr_addr =3D base;
+> > +
+> > +       nvkm_info(&sb->subdev, "WPR: %016llx-%016llx\n", sb->wpr_addr,
+> > +                 sb->wpr_addr + sb->wpr_size - 1);
+> >
+> >         /* Check that WPR settings are valid */
+> >         if (sb->wpr_size =3D=3D 0) {
+> > @@ -63,11 +89,6 @@ gm20b_secboot_tegra_read_wpr(struct gm200_secboot *g=
+sb, u32 mc_base)
+> >                 return -EINVAL;
+> >         }
+> >
+> > -       if (!(cfg & TEGRA_MC_SECURITY_CARVEOUT_CFG_LOCKED)) {
+> > -               nvkm_error(&sb->subdev, "WPR region not locked\n");
+> > -               return -EINVAL;
+> > -       }
+> > -
+> >         return 0;
+> >  }
+> >  #else
+> > @@ -85,7 +106,7 @@ gm20b_secboot_oneinit(struct nvkm_secboot *sb)
+> >         struct gm200_secboot *gsb =3D gm200_secboot(sb);
+> >         int ret;
+> >
+> > -       ret =3D gm20b_secboot_tegra_read_wpr(gsb, TEGRA210_MC_BASE);
+> > +       ret =3D gm20b_secboot_tegra_read_wpr(gsb);
+> >         if (ret)
+> >                 return ret;
+> >
+> > diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/secboot/gp10b.c b/driv=
+ers/gpu/drm/nouveau/nvkm/subdev/secboot/gp10b.c
+> > index 28ca29d0eeee..d84e85825995 100644
+> > --- a/drivers/gpu/drm/nouveau/nvkm/subdev/secboot/gp10b.c
+> > +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/secboot/gp10b.c
+> > @@ -23,15 +23,13 @@
+> >  #include "acr.h"
+> >  #include "gm200.h"
+> >
+> > -#define TEGRA186_MC_BASE                       0x02c10000
+> > -
+> >  static int
+> >  gp10b_secboot_oneinit(struct nvkm_secboot *sb)
+> >  {
+> >         struct gm200_secboot *gsb =3D gm200_secboot(sb);
+> >         int ret;
+> >
+> > -       ret =3D gm20b_secboot_tegra_read_wpr(gsb, TEGRA186_MC_BASE);
+> > +       ret =3D gm20b_secboot_tegra_read_wpr(gsb);
+> >         if (ret)
+> >                 return ret;
+> >
+> > --
+> > 2.23.0
+> >
+> > _______________________________________________
+> > dri-devel mailing list
+> > dri-devel@lists.freedesktop.org
+> > https://lists.freedesktop.org/mailman/listinfo/dri-devel
+
+--1UWUbFP1cBYEclgG
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEEiOrDCAFJzPfAjcif3SOs138+s6EFAl2AnAYACgkQ3SOs138+
+s6G4EQ//W+7nrgwOka0kREfhnDOeKFM+h4ElazaIUv/0KnTvaAKfcBaBC+kVlcJI
+QzVIy/Fwsf9eXvCUzNH6Hz8o9A9RJYx6zemj7J/DSpCU1I1P35Jsj0KC2xsuDjL+
+EhfwmQ4ccP2xdn1S1U3BsK6SDJh7KiPLLA6IPQrdkpQTsJtdXiUr8oNYdb8V5giX
+pjZNo/CLlvkAnE2pWeS7WJvr/Vgqm9DOVWEOyT3IYGkUHfQSKWEDutkcc0BWy/zG
+ApxTZeeeLI4Z19CszAE9qjwACVO/zcKAk/PTMv7MTlDiONgTumGbk2P/AFZLfIs2
+yXClFqnxH5Ul5m4OrSTyO/emOUgbbov49HFOB6pKUCrwmBGQ74pc7H/TKTxB9gtb
+YfLmErlayVYA+eypJ1myfvpKZZibpSivhyw91+uH8E29oSY41Ctb74fAmoEfwOka
+I92ICTwqxQVt1OBSg+AFDGtsVabJbCsQOyxDjeTNKqbByNxOcSMUQgtK/74oh3kv
+Jo9QsGluXmRBOT88rCou/9GrIs+R1ufGzy1Dtmn9sbiGZmzb2gr/6tj5YSnRFR63
+tgGmA91vIyhPluBAhM6tpm5+ziTx2kTj+ZzQKNFLWMwplDLtHfeI27stYVi7FsHh
+swnuUIoLUWEy1DSCQfCu+NqlKtOnZw4BPLV4AvBzDc57k593N0Q=
+=kmci
+-----END PGP SIGNATURE-----
+
+--1UWUbFP1cBYEclgG--
+
+--===============1903858813==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
+YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
+cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============1903858813==--
