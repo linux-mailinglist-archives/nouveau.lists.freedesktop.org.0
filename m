@@ -1,23 +1,23 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1C375B5117
-	for <lists+nouveau@lfdr.de>; Tue, 17 Sep 2019 17:11:10 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id CFDAFB5189
+	for <lists+nouveau@lfdr.de>; Tue, 17 Sep 2019 17:29:58 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8CFA06ECDC;
-	Tue, 17 Sep 2019 15:11:08 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4C1AE6ECEC;
+	Tue, 17 Sep 2019 15:29:57 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
- by gabe.freedesktop.org (Postfix) with ESMTP id 6A3346ECDC
- for <nouveau@lists.freedesktop.org>; Tue, 17 Sep 2019 15:11:07 +0000 (UTC)
+ [131.252.210.165])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 924146ECEC
+ for <nouveau@lists.freedesktop.org>; Tue, 17 Sep 2019 15:29:55 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 6121972167; Tue, 17 Sep 2019 15:11:07 +0000 (UTC)
+ id 8BF1D72167; Tue, 17 Sep 2019 15:29:55 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Tue, 17 Sep 2019 15:11:07 +0000
+Date: Tue, 17 Sep 2019 15:29:55 +0000
 X-Bugzilla-Reason: AssignedTo
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
@@ -32,8 +32,8 @@ X-Bugzilla-Resolution:
 X-Bugzilla-Priority: not set
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: attachments.created
-Message-ID: <bug-111724-8800-eEPBrlrhMF@http.bugs.freedesktop.org/>
+X-Bugzilla-Changed-Fields: 
+Message-ID: <bug-111724-8800-0FeO8wvz1K@http.bugs.freedesktop.org/>
 In-Reply-To: <bug-111724-8800@http.bugs.freedesktop.org/>
 References: <bug-111724-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
@@ -52,18 +52,18 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1257368912=="
+Content-Type: multipart/mixed; boundary="===============0085275544=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============1257368912==
-Content-Type: multipart/alternative; boundary="15687330671.1116E2E.20814"
+--===============0085275544==
+Content-Type: multipart/alternative; boundary="15687341952.6Fd2EECE.27035"
 Content-Transfer-Encoding: 7bit
 
 
---15687330671.1116E2E.20814
-Date: Tue, 17 Sep 2019 15:11:07 +0000
+--15687341952.6Fd2EECE.27035
+Date: Tue, 17 Sep 2019 15:29:55 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -72,17 +72,21 @@ Auto-Submitted: auto-generated
 
 https://bugs.freedesktop.org/show_bug.cgi?id=3D111724
 
---- Comment #11 from Mark Menzynski <mmenzyns@redhat.com> ---
-Created attachment 145404
-  --> https://bugs.freedesktop.org/attachment.cgi?id=3D145404&action=3Dedit
-screenshot from the glitchy benchmark
+--- Comment #12 from Mark Menzynski <mmenzyns@redhat.com> ---
+(In reply to Ilia Mirkin from comment #9)
+> Mark - try using blob ctxsw firmware. Perhaps ours misses something. There
+> are some GK106's which just die immediately with out firmware... (See
+> VideoAcceleration wiki page for how to extract firmware from blob drivers=
+.)
+
+Doesn't work. Same problem.
 
 --=20
 You are receiving this mail because:
 You are the assignee for the bug.=
 
---15687330671.1116E2E.20814
-Date: Tue, 17 Sep 2019 15:11:07 +0000
+--15687341952.6Fd2EECE.27035
+Date: Tue, 17 Sep 2019 15:29:55 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -100,8 +104,8 @@ Auto-Submitted: auto-generated
           bz_status_NEW "
    title=3D"NEW - NVE6 (GK106) memory re-clocking breaks GpuTest plot3d ben=
 chmark"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111724#c11">Comme=
-nt # 11</a>
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111724#c12">Comme=
+nt # 12</a>
               on <a class=3D"bz_bug_link=20
           bz_status_NEW "
    title=3D"NEW - NVE6 (GK106) memory re-clocking breaks GpuTest plot3d ben=
@@ -112,11 +116,15 @@ chmark"
 mmenzyns&#64;redhat.com" title=3D"Mark Menzynski &lt;mmenzyns&#64;redhat.co=
 m&gt;"> <span class=3D"fn">Mark Menzynski</span></a>
 </span></b>
-        <pre>Created <span class=3D""><a href=3D"attachment.cgi?id=3D145404=
-" name=3D"attach_145404" title=3D"screenshot from the glitchy benchmark">at=
-tachment 145404</a> <a href=3D"attachment.cgi?id=3D145404&amp;action=3Dedit=
-" title=3D"screenshot from the glitchy benchmark">[details]</a></span>
-screenshot from the glitchy benchmark</pre>
+        <pre>(In reply to Ilia Mirkin from <a href=3D"show_bug.cgi?id=3D111=
+724#c9">comment #9</a>)
+<span class=3D"quote">&gt; Mark - try using blob ctxsw firmware. Perhaps ou=
+rs misses something. There
+&gt; are some GK106's which just die immediately with out firmware... (See
+&gt; VideoAcceleration wiki page for how to extract firmware from blob driv=
+ers.)</span >
+
+Doesn't work. Same problem.</pre>
         </div>
       </p>
 
@@ -130,9 +138,9 @@ screenshot from the glitchy benchmark</pre>
     </body>
 </html>=
 
---15687330671.1116E2E.20814--
+--15687341952.6Fd2EECE.27035--
 
---===============1257368912==
+--===============0085275544==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -142,4 +150,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============1257368912==--
+--===============0085275544==--
