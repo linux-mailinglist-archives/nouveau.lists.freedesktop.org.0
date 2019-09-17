@@ -2,64 +2,67 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B22D8B48AF
-	for <lists+nouveau@lfdr.de>; Tue, 17 Sep 2019 09:59:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E048FB48D7
+	for <lists+nouveau@lfdr.de>; Tue, 17 Sep 2019 10:10:17 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 188F76EB2F;
-	Tue, 17 Sep 2019 07:59:40 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 675116EB34;
+	Tue, 17 Sep 2019 08:10:16 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ed1-x544.google.com (mail-ed1-x544.google.com
- [IPv6:2a00:1450:4864:20::544])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 749376EB2E;
- Tue, 17 Sep 2019 07:59:38 +0000 (UTC)
-Received: by mail-ed1-x544.google.com with SMTP id v8so2433161eds.2;
- Tue, 17 Sep 2019 00:59:38 -0700 (PDT)
+X-Greylist: delayed 369 seconds by postgrey-1.36 at gabe;
+ Tue, 17 Sep 2019 08:10:14 UTC
+Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
+ [207.211.31.120])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D35E36EB34
+ for <nouveau@lists.freedesktop.org>; Tue, 17 Sep 2019 08:10:14 +0000 (UTC)
+Received: from mail-io1-f69.google.com (mail-io1-f69.google.com
+ [209.85.166.69]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-141-_Zhf_MH0MH-ePP_d3zMLGw-1; Tue, 17 Sep 2019 04:04:01 -0400
+Received: by mail-io1-f69.google.com with SMTP id a13so4487905ioh.18
+ for <nouveau@lists.freedesktop.org>; Tue, 17 Sep 2019 01:04:01 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to:user-agent;
- bh=ZHGwUNOCyjOPDdx+Yrefit8eCw93ObtYl/8hRGsz09E=;
- b=bZkDFgnzuVBpZEW3xW1Mi6+PbrDh5M+LY/e/NpO3z0Y1GucUQHXZEdmVy2tAFwtwbq
- e3WZ97V0L1KtAPNz1UMpGW6ZQ7H6msmELj0kFeYTIt6QovSrE/am7rsRs1vnjTUCTtEf
- wOLtEy/TBz4IJFXeJaXXjBFnDC7JQPD5D5ENnD/XBlL7pAyEinN5/UifnnmLMwfX7KMV
- d6cr7f6i5G0pr5zI56kaBYAnUJZeO8b18gNqAY1nhb0jiSinlrYlOpjmUHT8oVhEACpq
- Q/ZaWdipW6bNLQgneFD+ObJsi0tan2E928z2fxaBaWNkOxZqfGYFFVh9YeodDbRzT0KN
- VGaA==
-X-Gm-Message-State: APjAAAVeko6bDsURf0+1tDE8W1g02aVw5QxvzeyNuagO5+w642frGgvb
- WllydZigbvY0KkbLffQsEn1z6H9p
-X-Google-Smtp-Source: APXvYqzM+xCQRgTQDsb2mdu5TFdC68GXX72wg8XT5iVM/08xxe39qMIFdJKseU6I330sGm6I8Cj4mg==
-X-Received: by 2002:a50:d096:: with SMTP id v22mr3291356edd.81.1568707176926; 
- Tue, 17 Sep 2019 00:59:36 -0700 (PDT)
-Received: from localhost (p2E5BE2CE.dip0.t-ipconnect.de. [46.91.226.206])
- by smtp.gmail.com with ESMTPSA id br15sm171293ejb.2.2019.09.17.00.59.35
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 17 Sep 2019 00:59:35 -0700 (PDT)
-Date: Tue, 17 Sep 2019 09:59:34 +0200
-From: Thierry Reding <thierry.reding@gmail.com>
-To: Robin Murphy <robin.murphy@arm.com>
-Message-ID: <20190917075934.GA17854@ulmo>
-References: <20190916150412.10025-1-thierry.reding@gmail.com>
- <20190916150412.10025-9-thierry.reding@gmail.com>
- <156993ea-ece6-9eb5-b664-a55c631e2600@arm.com>
- <20190916155724.GG7488@ulmo>
- <ee285d4f-e5ff-e043-35cd-1338b1bb238f@arm.com>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=JAdDl0ZnJruHGQDayt0eUJfADY0etC7Y9sM1EAtvAuY=;
+ b=otvg7JKjLkfvG+dzwBWf3knpdQ3ogq62yOkUPPVl1kjzmkHW/7l4zp4q2CEEiLgodq
+ 3jiG/7STaSdByBowUEIAtsRCCibKXk/ZlKJJcmOJBx5kf6c+dHmxpfhEOH3dLHGttdQB
+ xM9jpax4JlTcTJl40KhUPp0ThyQbkNLvH29qbI82H5X/+vdv0Tui24ztqwEkgBnUnf3x
+ zYVuJXgRnESbk5F6AIB7lZ7D02GSI7POi7x1olukicbjnl05YueMTosQs6YTpYzg3nOE
+ cRwz+oUZv1gHX4Q5sZV5kCSsK5yZ5Sy2PId11msf55NrzjX1buIRQ3vvjNbnJeQylsfA
+ GDyg==
+X-Gm-Message-State: APjAAAUEYAJ6zn55Iu7mLM8nkfqoJ7l2oEr4jIhzRwu0mme2OzvDNsic
+ QrlyhdiKl1NJ6XauHmhgewoCYLtTdN7H5P3yulUbrgG0fSLdIrHy7AmZa/uGp+OuliVmesfCbAz
+ lbWm12Eqz5phDSD3ggaMcmSmikckBhwvfR5vcQSegYg==
+X-Received: by 2002:a6b:db10:: with SMTP id t16mr2404835ioc.260.1568707440472; 
+ Tue, 17 Sep 2019 01:04:00 -0700 (PDT)
+X-Google-Smtp-Source: APXvYqxBAgPn3fD1GCiYTMwLlG/iY0u04wD8r3klpW5ExSbuBgMkDRwGkEioUgLmuCB2eg6ZEv8ZQAGtLBGgsrGdFrk=
+X-Received: by 2002:a6b:db10:: with SMTP id t16mr2404812ioc.260.1568707440220; 
+ Tue, 17 Sep 2019 01:04:00 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <ee285d4f-e5ff-e043-35cd-1338b1bb238f@arm.com>
-User-Agent: Mutt/1.12.1 (2019-06-15)
+References: <20190912190028.27977-1-kherbst@redhat.com>
+ <20190912190028.27977-2-kherbst@redhat.com>
+ <CACAvsv73OSi1ELoERRy0H9qVLaG+6Lu8FQy_L7VNA1w_uKSSJA@mail.gmail.com>
+In-Reply-To: <CACAvsv73OSi1ELoERRy0H9qVLaG+6Lu8FQy_L7VNA1w_uKSSJA@mail.gmail.com>
+From: Karol Herbst <kherbst@redhat.com>
+Date: Tue, 17 Sep 2019 10:03:48 +0200
+Message-ID: <CACO55ttwFizmvb5NGi95E8-WQQFMD4UJfki=brFRjaFiNDNXAA@mail.gmail.com>
+To: Ben Skeggs <skeggsb@gmail.com>
+X-MC-Unique: _Zhf_MH0MH-ePP_d3zMLGw-1
+X-Mimecast-Spam-Score: 0
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20161025;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to:user-agent;
- bh=ZHGwUNOCyjOPDdx+Yrefit8eCw93ObtYl/8hRGsz09E=;
- b=gFsLnygtUgh0OalHHJCYidLRZwxJE324ArlZhQpf8nQ6yarOj+CThBCq0+kDtbfwCL
- 6vE9rjU3bg4Wr1Y9m8y64e+J1orAbMNXE5cAaphPnxOR660wWOepFEB/T64n6ElPb2lr
- 8aQlkNCD9rR9U29a0WScUKtfe2UR98bHLlb4Vlj1rYic8VYuyAQmP7evNpOy3UYX5Qpt
- OJeXrudOo/d3fetiFy7Mld85PZeNn2FSeEUH5YW64axsHbDxZvvKqfwksp4dpJtQ8Gc3
- gvQGKrbzT2KJ8HTUn9BciFE2hiCD+S8pwrEJUf5pj/dj5fyYCf1/U9BXVXfNemgiUJzx
- qbqw==
-Subject: Re: [Nouveau] [PATCH 08/11] drm/nouveau: tegra: Skip IOMMU
- initialization if already attached
+ d=redhat.com; 
+ s=mimecast20190719; t=1568707813;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=4fZHAooBND5g812IpSxzvLMqgwdUrwkfkZrSQcmUscM=;
+ b=Sh9QnbskxCyKBfuVck2/o/MrMwZL1uPPNbJwrbhRhGZE5SXPc7ysjEhX5ZXX7sb21DXuc7
+ 7aMU1tQQVnh/I4qcmpmTGSF0A5XkrJQv1eny4PsT0tfFJNgqolTkZAezIxd+GTjOQCdEMY
+ trM03mrwsFlptPH4sjBA4X3fwHhEjTc=
+Subject: Re: [Nouveau] [PATCH 1/3] pci: force disable ASPM before changing
+ the link speed
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -71,145 +74,132 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: linux-tegra@vger.kernel.org, nouveau@lists.freedesktop.org,
- Ben Skeggs <bskeggs@redhat.com>, dri-devel@lists.freedesktop.org
-Content-Type: multipart/mixed; boundary="===============1222346873=="
+Cc: ML nouveau <nouveau@lists.freedesktop.org>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-
---===============1222346873==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="/04w6evG8XlLl3ft"
-Content-Disposition: inline
-
-
---/04w6evG8XlLl3ft
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Mon, Sep 16, 2019 at 05:15:25PM +0100, Robin Murphy wrote:
-> On 16/09/2019 16:57, Thierry Reding wrote:
-> > On Mon, Sep 16, 2019 at 04:29:18PM +0100, Robin Murphy wrote:
-> > > Hi Thierry,
-> > >=20
-> > > On 16/09/2019 16:04, Thierry Reding wrote:
-> > > > From: Thierry Reding <treding@nvidia.com>
-> > > >=20
-> > > > If the GPU is already attached to an IOMMU, don't detach it and set=
-up an
-> > > > explicit IOMMU domain. Since Nouveau can now properly handle the ca=
-se of
-> > > > the DMA API being backed by an IOMMU, just continue using the DMA A=
-PI.
-> > > >=20
-> > > > Signed-off-by: Thierry Reding <treding@nvidia.com>
-> > > > ---
-> > > >    .../drm/nouveau/nvkm/engine/device/tegra.c    | 19 +++++++------=
-------
-> > > >    1 file changed, 7 insertions(+), 12 deletions(-)
-> > > >=20
-> > > > diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/device/tegra.c b/d=
-rivers/gpu/drm/nouveau/nvkm/engine/device/tegra.c
-> > > > index d0d52c1d4aee..fc652aaa41c7 100644
-> > > > --- a/drivers/gpu/drm/nouveau/nvkm/engine/device/tegra.c
-> > > > +++ b/drivers/gpu/drm/nouveau/nvkm/engine/device/tegra.c
-> > > > @@ -23,10 +23,6 @@
-> > > >    #ifdef CONFIG_NOUVEAU_PLATFORM_DRIVER
-> > > >    #include "priv.h"
-> > > > -#if IS_ENABLED(CONFIG_ARM_DMA_USE_IOMMU)
-> > > > -#include <asm/dma-iommu.h>
-> > > > -#endif
-> > > > -
-> > > >    static int
-> > > >    nvkm_device_tegra_power_up(struct nvkm_device_tegra *tdev)
-> > > >    {
-> > > > @@ -109,14 +105,13 @@ nvkm_device_tegra_probe_iommu(struct nvkm_dev=
-ice_tegra *tdev)
-> > > >    	unsigned long pgsize_bitmap;
-> > > >    	int ret;
-> > > > -#if IS_ENABLED(CONFIG_ARM_DMA_USE_IOMMU)
-> > > > -	if (dev->archdata.mapping) {
-> > > > -		struct dma_iommu_mapping *mapping =3D to_dma_iommu_mapping(dev);
-> > > > -
-> > > > -		arm_iommu_detach_device(dev);
-> > > > -		arm_iommu_release_mapping(mapping);
-> > > > -	}
-> > > > -#endif
-> > > > +	/*
-> > > > +	 * Skip explicit IOMMU initialization if the GPU is already attac=
-hed
-> > > > +	 * to an IOMMU domain. This can happen if the DMA API is backed b=
-y an
-> > > > +	 * IOMMU.
-> > > > +	 */
-> > > > +	if (iommu_get_domain_for_dev(dev))
-> > > > +		return;
-> > >=20
-> > > Beware of "iommu.passthrough=3D1" - you could get a valid default dom=
-ain here
-> > > yet still have direct/SWIOTLB DMA ops. I guess you probably want to
-> > > double-check the domain type as well.
-> >=20
-> > Good point. An earlier version of this patch had an additional check for
-> > IOMMU_DOMAIN_DMA, but then that failed on 32-bit ARM because there the
-> > DMA API can also use IOMMU_DOMAIN_UNMANAGED type domains. Checking for
-> > IOMMU_DOMAIN_IDENTIFY should be safe, though. That doesn't seem to
-> > appear in arch/arm, arch/arm64 or drivers/iommu/dma-iommu.c.
->=20
-> Right, "domain && domain->type !=3D IOMMU_DOMAIN_IDENTITY" should be
-> sufficient to answer "is the DMA layer managing my address space for me?"
-> unless and until some massive API change happens (which I certainly don't
-> foresee).
-
-Might be a good idea to roll that up into a function to have a standard
-way for drivers to check for this rather than open-coding the same
-condition everywhere (and maybe get things wrong). As an additional
-advantage, if that massive API change ever does happen we don't have to
-go and update all the callers.
-
-Something like this perhaps?
-
-	static inline bool iommu_managed(struct device *dev)
-	{
-		struct iommu_domain *domain =3D iommu_get_domain_for_dev(dev);
-
-		return domain && domain->type !=3D IOMMU_DOMAIN_UNMANAGED;
-	}
-
-Thierry
-
---/04w6evG8XlLl3ft
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEEiOrDCAFJzPfAjcif3SOs138+s6EFAl2AkmMACgkQ3SOs138+
-s6EcaA//TNs1sJ9eP9hen7EqmO83waX5OeHPZSc0qZBn2O5QDEi/myOyEDyyM99X
-3kRZGNe8kWGgOeOdmNHHBufu8q4nC3OubH+qc6pC3iLCX7mTRUOKmY7WgMqk3min
-mj3/Yy5+rTfxCAEpJJ3y3Ml29WoHxAPD00QjkZVZJe/Cnf6fZn4YX7iejfx6Fp+k
-TSzICC9FWjVXxCbwLMw7iN79DCydNyLv9jRlZGHk9eJ1DUAwdtlWBNfqmQSSOI0B
-Je1SuzT3AvL3kORC7vySzPF5PIn1VReXU2AgYKTBmtuAHhFOdBmUmCn629khTHqY
-RUXmMm2uRhzA8y57egMTHZQkqO0XkBhv0KUECPKhCcWpjQjTjdmaLMWYrb5f5VD6
-4/zLSbtyCH98PBd1amOJeIC7b8GXUbKJ0069kSTgleLRA0afMQEAM7sLKB3WSRdI
-9Lw85Q3nxot/h+icCZwkM0wJsTmq7J34RZMmIIk4+b+1y9jnI+Edzb5rfD2hm410
-W+vwRsfG60eEiQ8FiODNv9fmykn0eSc0IfJRL0TBTN4LQ5hV10Gh5b9HE/2rxnZE
-vSFBxPBfBZxDw1BAtVp0qQyHqcWs2jzLkdNPpwr3pPm9HkkoNeusPbExaSJ00qD1
-s1eW4oxqW0aywBubPduFvy2qmI+rGRfvRedOCHCEEz04haHJax4=
-=UbIy
------END PGP SIGNATURE-----
-
---/04w6evG8XlLl3ft--
-
---===============1222346873==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
-YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
-cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
-
---===============1222346873==--
+T24gVHVlLCBTZXAgMTcsIDIwMTkgYXQgNzo1NiBBTSBCZW4gU2tlZ2dzIDxza2VnZ3NiQGdtYWls
+LmNvbT4gd3JvdGU6Cj4KPiBPbiBGcmksIDEzIFNlcCAyMDE5IGF0IDA1OjAwLCBLYXJvbCBIZXJi
+c3QgPGtoZXJic3RAcmVkaGF0LmNvbT4gd3JvdGU6Cj4gPgo+ID4gdGFrZW4gZnJvbSBudmdwdQo+
+ID4KPiA+IFNpZ25lZC1vZmYtYnk6IEthcm9sIEhlcmJzdCA8a2hlcmJzdEByZWRoYXQuY29tPgo+
+ID4gLS0tCj4gPiAgZHJtL25vdXZlYXUvbnZrbS9zdWJkZXYvcGNpL2c4NC5jICAgfCAgOSArKysr
+KysrKysKPiA+ICBkcm0vbm91dmVhdS9udmttL3N1YmRldi9wY2kvZzkyLmMgICB8ICAxICsKPiA+
+ICBkcm0vbm91dmVhdS9udmttL3N1YmRldi9wY2kvZzk0LmMgICB8ICAxICsKPiA+ICBkcm0vbm91
+dmVhdS9udmttL3N1YmRldi9wY2kvZ2YxMDAuYyB8ICAxICsKPiA+ICBkcm0vbm91dmVhdS9udmtt
+L3N1YmRldi9wY2kvZ2YxMDYuYyB8ICAxICsKPiA+ICBkcm0vbm91dmVhdS9udmttL3N1YmRldi9w
+Y2kvZ2sxMDQuYyB8ICAxICsKPiA+ICBkcm0vbm91dmVhdS9udmttL3N1YmRldi9wY2kvcGNpZS5j
+ICB8IDE0ICsrKysrKysrKysrKysrCj4gPiAgZHJtL25vdXZlYXUvbnZrbS9zdWJkZXYvcGNpL3By
+aXYuaCAgfCAgMiArKwo+ID4gIDggZmlsZXMgY2hhbmdlZCwgMzAgaW5zZXJ0aW9ucygrKQo+ID4K
+PiA+IGRpZmYgLS1naXQgYS9kcm0vbm91dmVhdS9udmttL3N1YmRldi9wY2kvZzg0LmMgYi9kcm0v
+bm91dmVhdS9udmttL3N1YmRldi9wY2kvZzg0LmMKPiA+IGluZGV4IDYyNDM4ZDg5Mi4uMzUzZDcw
+ZDdlIDEwMDY0NAo+ID4gLS0tIGEvZHJtL25vdXZlYXUvbnZrbS9zdWJkZXYvcGNpL2c4NC5jCj4g
+PiArKysgYi9kcm0vbm91dmVhdS9udmttL3N1YmRldi9wY2kvZzg0LmMKPiA+IEBAIC0xMjIsNiAr
+MTIyLDE0IEBAIGc4NF9wY2lfaW5pdChzdHJ1Y3QgbnZrbV9wY2kgKnBjaSkKPiA+ICAgICAgICAg
+ICAgICAgICBudmttX3BjaV9tYXNrKHBjaSwgMHgwNDFjLCAweDAwMDAwMDYwLCAweDAwMDAwMDAw
+KTsKPiA+ICB9Cj4gPgo+ID4gK3ZvaWQKPiA+ICtnODRfcGNpZV9mb3JjZV9hc3BtX29mZihzdHJ1
+Y3QgbnZrbV9wY2kgKnBjaSwgYm9vbCBzdGF0dXMpCj4gPiArewo+ID4gKyAgICAgICAvKiBMMHMg
+YW5kIEwxICovCj4gPiArICAgICAgIHUzMiB2YWx1ZSA9IHN0YXR1cyA/IDB4MTgwIDogMHgwOwo+
+ID4gKyAgICAgICBudmttX3BjaV9tYXNrKHBjaSwgMHgxNTAsIDB4MTgwLCB2YWx1ZSk7Cj4gPiAr
+fQo+ID4gKwo+ID4gIGludAo+ID4gIGc4NF9wY2llX2luaXQoc3RydWN0IG52a21fcGNpICpwY2kp
+Cj4gPiAgewo+ID4gQEAgLTE0Nyw2ICsxNTUsNyBAQCBnODRfcGNpX2Z1bmMgPSB7Cj4gPiAgICAg
+ICAgIC5wY2llLnNldF92ZXJzaW9uID0gZzg0X3BjaWVfc2V0X3ZlcnNpb24sCj4gPiAgICAgICAg
+IC5wY2llLnZlcnNpb24gPSBnODRfcGNpZV92ZXJzaW9uLAo+ID4gICAgICAgICAucGNpZS52ZXJz
+aW9uX3N1cHBvcnRlZCA9IGc4NF9wY2llX3ZlcnNpb25fc3VwcG9ydGVkLAo+ID4gKyAgICAgICAu
+cGNpZS5mb3JjZV9hc3BtX29mZiA9IGc4NF9wY2llX2ZvcmNlX2FzcG1fb2ZmLAo+ID4gIH07Cj4g
+Pgo+ID4gIGludAo+ID4gZGlmZiAtLWdpdCBhL2RybS9ub3V2ZWF1L252a20vc3ViZGV2L3BjaS9n
+OTIuYyBiL2RybS9ub3V2ZWF1L252a20vc3ViZGV2L3BjaS9nOTIuYwo+ID4gaW5kZXggNDg4NzQz
+NTlkLi44YzM1Y2M4OWUgMTAwNjQ0Cj4gPiAtLS0gYS9kcm0vbm91dmVhdS9udmttL3N1YmRldi9w
+Y2kvZzkyLmMKPiA+ICsrKyBiL2RybS9ub3V2ZWF1L252a20vc3ViZGV2L3BjaS9nOTIuYwo+ID4g
+QEAgLTQ4LDYgKzQ4LDcgQEAgZzkyX3BjaV9mdW5jID0gewo+ID4gICAgICAgICAucGNpZS5zZXRf
+dmVyc2lvbiA9IGc4NF9wY2llX3NldF92ZXJzaW9uLAo+ID4gICAgICAgICAucGNpZS52ZXJzaW9u
+ID0gZzg0X3BjaWVfdmVyc2lvbiwKPiA+ICAgICAgICAgLnBjaWUudmVyc2lvbl9zdXBwb3J0ZWQg
+PSBnOTJfcGNpZV92ZXJzaW9uX3N1cHBvcnRlZCwKPiA+ICsgICAgICAgLnBjaWUuZm9yY2VfYXNw
+bV9vZmYgPSBnODRfcGNpZV9mb3JjZV9hc3BtX29mZiwKPiA+ICB9Owo+ID4KPiA+ICBpbnQKPiA+
+IGRpZmYgLS1naXQgYS9kcm0vbm91dmVhdS9udmttL3N1YmRldi9wY2kvZzk0LmMgYi9kcm0vbm91
+dmVhdS9udmttL3N1YmRldi9wY2kvZzk0LmMKPiA+IGluZGV4IDA5YWRiMzdhNS4uYWExNTJkNzk4
+IDEwMDY0NAo+ID4gLS0tIGEvZHJtL25vdXZlYXUvbnZrbS9zdWJkZXYvcGNpL2c5NC5jCj4gPiAr
+KysgYi9kcm0vbm91dmVhdS9udmttL3N1YmRldi9wY2kvZzk0LmMKPiA+IEBAIC00MCw2ICs0MCw3
+IEBAIGc5NF9wY2lfZnVuYyA9IHsKPiA+ICAgICAgICAgLnBjaWUuc2V0X3ZlcnNpb24gPSBnODRf
+cGNpZV9zZXRfdmVyc2lvbiwKPiA+ICAgICAgICAgLnBjaWUudmVyc2lvbiA9IGc4NF9wY2llX3Zl
+cnNpb24sCj4gPiAgICAgICAgIC5wY2llLnZlcnNpb25fc3VwcG9ydGVkID0gZzkyX3BjaWVfdmVy
+c2lvbl9zdXBwb3J0ZWQsCj4gPiArICAgICAgIC5wY2llLmZvcmNlX2FzcG1fb2ZmID0gZzg0X3Bj
+aWVfZm9yY2VfYXNwbV9vZmYsCj4gPiAgfTsKPiA+Cj4gPiAgaW50Cj4gPiBkaWZmIC0tZ2l0IGEv
+ZHJtL25vdXZlYXUvbnZrbS9zdWJkZXYvcGNpL2dmMTAwLmMgYi9kcm0vbm91dmVhdS9udmttL3N1
+YmRldi9wY2kvZ2YxMDAuYwo+ID4gaW5kZXggMDBhNWU3ZDNlLi44Njc2NDgwYzMgMTAwNjQ0Cj4g
+PiAtLS0gYS9kcm0vbm91dmVhdS9udmttL3N1YmRldi9wY2kvZ2YxMDAuYwo+ID4gKysrIGIvZHJt
+L25vdXZlYXUvbnZrbS9zdWJkZXYvcGNpL2dmMTAwLmMKPiA+IEBAIC05Myw2ICs5Myw3IEBAIGdm
+MTAwX3BjaV9mdW5jID0gewo+ID4gICAgICAgICAucGNpZS5zZXRfdmVyc2lvbiA9IGdmMTAwX3Bj
+aWVfc2V0X3ZlcnNpb24sCj4gPiAgICAgICAgIC5wY2llLnZlcnNpb24gPSBnZjEwMF9wY2llX3Zl
+cnNpb24sCj4gPiAgICAgICAgIC5wY2llLnZlcnNpb25fc3VwcG9ydGVkID0gZzkyX3BjaWVfdmVy
+c2lvbl9zdXBwb3J0ZWQsCj4gPiArICAgICAgIC5wY2llLmZvcmNlX2FzcG1fb2ZmID0gZzg0X3Bj
+aWVfZm9yY2VfYXNwbV9vZmYsCj4gPiAgfTsKPiA+Cj4gPiAgaW50Cj4gPiBkaWZmIC0tZ2l0IGEv
+ZHJtL25vdXZlYXUvbnZrbS9zdWJkZXYvcGNpL2dmMTA2LmMgYi9kcm0vbm91dmVhdS9udmttL3N1
+YmRldi9wY2kvZ2YxMDYuYwo+ID4gaW5kZXggMTFiZjQxOWFmLi44MDc5ZWJkZDQgMTAwNjQ0Cj4g
+PiAtLS0gYS9kcm0vbm91dmVhdS9udmttL3N1YmRldi9wY2kvZ2YxMDYuYwo+ID4gKysrIGIvZHJt
+L25vdXZlYXUvbnZrbS9zdWJkZXYvcGNpL2dmMTA2LmMKPiA+IEBAIC00MCw2ICs0MCw3IEBAIGdm
+MTA2X3BjaV9mdW5jID0gewo+ID4gICAgICAgICAucGNpZS5zZXRfdmVyc2lvbiA9IGdmMTAwX3Bj
+aWVfc2V0X3ZlcnNpb24sCj4gPiAgICAgICAgIC5wY2llLnZlcnNpb24gPSBnZjEwMF9wY2llX3Zl
+cnNpb24sCj4gPiAgICAgICAgIC5wY2llLnZlcnNpb25fc3VwcG9ydGVkID0gZzkyX3BjaWVfdmVy
+c2lvbl9zdXBwb3J0ZWQsCj4gPiArICAgICAgIC5wY2llLmZvcmNlX2FzcG1fb2ZmID0gZzg0X3Bj
+aWVfZm9yY2VfYXNwbV9vZmYsCj4gPiAgfTsKPiA+Cj4gPiAgaW50Cj4gPiBkaWZmIC0tZ2l0IGEv
+ZHJtL25vdXZlYXUvbnZrbS9zdWJkZXYvcGNpL2drMTA0LmMgYi9kcm0vbm91dmVhdS9udmttL3N1
+YmRldi9wY2kvZ2sxMDQuYwo+ID4gaW5kZXggZTY4MDMwNTA3Li5iNzM5MjJjNTIgMTAwNjQ0Cj4g
+PiAtLS0gYS9kcm0vbm91dmVhdS9udmttL3N1YmRldi9wY2kvZ2sxMDQuYwo+ID4gKysrIGIvZHJt
+L25vdXZlYXUvbnZrbS9zdWJkZXYvcGNpL2drMTA0LmMKPiA+IEBAIC0yMTksNiArMjE5LDcgQEAg
+Z2sxMDRfcGNpX2Z1bmMgPSB7Cj4gPiAgICAgICAgIC5wY2llLnNldF92ZXJzaW9uID0gZ2YxMDBf
+cGNpZV9zZXRfdmVyc2lvbiwKPiA+ICAgICAgICAgLnBjaWUudmVyc2lvbiA9IGdmMTAwX3BjaWVf
+dmVyc2lvbiwKPiA+ICAgICAgICAgLnBjaWUudmVyc2lvbl9zdXBwb3J0ZWQgPSBnazEwNF9wY2ll
+X3ZlcnNpb25fc3VwcG9ydGVkLAo+ID4gKyAgICAgICAucGNpZS5mb3JjZV9hc3BtX29mZiA9IGc4
+NF9wY2llX2ZvcmNlX2FzcG1fb2ZmLAo+ID4gIH07Cj4gPgo+ID4gIGludAo+ID4gZGlmZiAtLWdp
+dCBhL2RybS9ub3V2ZWF1L252a20vc3ViZGV2L3BjaS9wY2llLmMgYi9kcm0vbm91dmVhdS9udmtt
+L3N1YmRldi9wY2kvcGNpZS5jCj4gPiBpbmRleCBkNzFlNWRiNTAuLjM1NGFjNGM4NSAxMDA2NDQK
+PiA+IC0tLSBhL2RybS9ub3V2ZWF1L252a20vc3ViZGV2L3BjaS9wY2llLmMKPiA+ICsrKyBiL2Ry
+bS9ub3V2ZWF1L252a20vc3ViZGV2L3BjaS9wY2llLmMKPiA+IEBAIC0xMTEsNiArMTExLDE0IEBA
+IG52a21fcGNpZV9pbml0KHN0cnVjdCBudmttX3BjaSAqcGNpKQo+ID4gICAgICAgICByZXR1cm4g
+MDsKPiA+ICB9Cj4gPgo+ID4gK3ZvaWQKPiA+ICtudmttX3BjaWVfZm9yY2VfYXNwbV9vZmYoc3Ry
+dWN0IG52a21fcGNpICpwY2ksIGJvb2wgc3RhdHVzKQo+ID4gK3sKPiA+ICsgICAgICAgaWYgKCFw
+Y2ktPmZ1bmMtPnBjaWUuZm9yY2VfYXNwbV9vZmYpCj4gPiArICAgICAgICAgICAgICAgcmV0dXJu
+Owo+ID4gKyAgICAgICBwY2ktPmZ1bmMtPnBjaWUuZm9yY2VfYXNwbV9vZmYocGNpLCBzdGF0dXMp
+Owo+ID4gK30KPiA+ICsKPiA+ICBpbnQKPiA+ICBudmttX3BjaWVfc2V0X2xpbmsoc3RydWN0IG52
+a21fcGNpICpwY2ksIGVudW0gbnZrbV9wY2llX3NwZWVkIHNwZWVkLCB1OCB3aWR0aCkKPiA+ICB7
+Cj4gPiBAQCAtMTU3LDkgKzE2NSwxNSBAQCBudmttX3BjaWVfc2V0X2xpbmsoc3RydWN0IG52a21f
+cGNpICpwY2ksIGVudW0gbnZrbV9wY2llX3NwZWVkIHNwZWVkLCB1OCB3aWR0aCkKPiA+ICAgICAg
+ICAgbnZrbV9kZWJ1ZyhzdWJkZXYsICJzZXQgbGluayB0byAlcyB4JWlcbiIsCj4gPiAgICAgICAg
+ICAgICAgICAgICAgbnZrbV9wY2llX3NwZWVkc1tzcGVlZF0sIHdpZHRoKTsKPiA+Cj4gPiArICAg
+ICAgIC8qIGZvcmNlIGRpc2FibGUgQVNQTSAqLwo+ID4gKyAgICAgICBudmttX3BjaWVfZm9yY2Vf
+YXNwbV9vZmYocGNpLCB0cnVlKTsKPiA+ICsKPiA+ICAgICAgICAgcmV0ID0gcGNpLT5mdW5jLT5w
+Y2llLnNldF9saW5rKHBjaSwgc3BlZWQsIHdpZHRoKTsKPiA+ICAgICAgICAgaWYgKHJldCA8IDAp
+Cj4gPiAgICAgICAgICAgICAgICAgbnZrbV9lcnJvcihzdWJkZXYsICJzZXR0aW5nIGxpbmsgZmFp
+bGVkOiAlaVxuIiwgcmV0KTsKPiA+Cj4gPiArICAgICAgIC8qIGxpZnQgZm9yY2UgZGlzYWJsZSBB
+U1BNICovCj4gPiArICAgICAgIG52a21fcGNpZV9mb3JjZV9hc3BtX29mZihwY2ksIGZhbHNlKTsK
+PiBUaGlzIGRvZXNuJ3QgZG8gd2hhdCBpcyBzYXlzIG9uIHRoZSBib3guICBJdCdzIGZvcmNpYmx5
+IGRpc2FibGluZwo+IEFTUE0sIHRoZW4gZm9yY2libHkgZW5hYmxpbmcgaXQuICBZb3Ugc2hvdWxk
+IGluc3RlYWQgcmVzdG9yZSB0aGUKPiBzZXR0aW5ncyBmcm9tIGJlZm9yZSBmb3JjaW5nIGl0IG9m
+Ziwgd2hpY2ggaXMgd2hhdCBOVkdQVSBhY3R1YWxseSBkb2VzCj4gdG9vLgo+Cj4gQmVuLgo+Cgpv
+aGgsIHNvbWVob3cgSSBtaXNzZWQgdGhhdC4KCj4gPiArCj4gPiAgICAgICAgIHJldHVybiByZXQ7
+Cj4gPiAgfQo+ID4gZGlmZiAtLWdpdCBhL2RybS9ub3V2ZWF1L252a20vc3ViZGV2L3BjaS9wcml2
+LmggYi9kcm0vbm91dmVhdS9udmttL3N1YmRldi9wY2kvcHJpdi5oCj4gPiBpbmRleCA3MDA5YWFk
+ODYuLmM2YTllZjMzMCAxMDA2NDQKPiA+IC0tLSBhL2RybS9ub3V2ZWF1L252a20vc3ViZGV2L3Bj
+aS9wcml2LmgKPiA+ICsrKyBiL2RybS9ub3V2ZWF1L252a20vc3ViZGV2L3BjaS9wcml2LmgKPiA+
+IEBAIC0yNCw2ICsyNCw3IEBAIHN0cnVjdCBudmttX3BjaV9mdW5jIHsKPiA+ICAgICAgICAgICAg
+ICAgICB2b2lkICgqc2V0X3ZlcnNpb24pKHN0cnVjdCBudmttX3BjaSAqLCB1OCk7Cj4gPiAgICAg
+ICAgICAgICAgICAgaW50ICgqdmVyc2lvbikoc3RydWN0IG52a21fcGNpICopOwo+ID4gICAgICAg
+ICAgICAgICAgIGludCAoKnZlcnNpb25fc3VwcG9ydGVkKShzdHJ1Y3QgbnZrbV9wY2kgKik7Cj4g
+PiArICAgICAgICAgICAgICAgdm9pZCAoKmZvcmNlX2FzcG1fb2ZmKShzdHJ1Y3QgbnZrbV9wY2kg
+KiwgYm9vbCk7Cj4gPiAgICAgICAgIH0gcGNpZTsKPiA+ICB9Owo+ID4KPiA+IEBAIC00Miw2ICs0
+Myw3IEBAIGludCBnODRfcGNpZV92ZXJzaW9uKHN0cnVjdCBudmttX3BjaSAqKTsKPiA+ICB2b2lk
+IGc4NF9wY2llX3NldF9saW5rX3NwZWVkKHN0cnVjdCBudmttX3BjaSAqLCBlbnVtIG52a21fcGNp
+ZV9zcGVlZCk7Cj4gPiAgZW51bSBudmttX3BjaWVfc3BlZWQgZzg0X3BjaWVfY3VyX3NwZWVkKHN0
+cnVjdCBudmttX3BjaSAqKTsKPiA+ICBlbnVtIG52a21fcGNpZV9zcGVlZCBnODRfcGNpZV9tYXhf
+c3BlZWQoc3RydWN0IG52a21fcGNpICopOwo+ID4gK3ZvaWQgZzg0X3BjaWVfZm9yY2VfYXNwbV9v
+ZmYoc3RydWN0IG52a21fcGNpICosIGJvb2wgc3RhdHVzKTsKPiA+ICBpbnQgZzg0X3BjaWVfaW5p
+dChzdHJ1Y3QgbnZrbV9wY2kgKik7Cj4gPiAgaW50IGc4NF9wY2llX3NldF9saW5rKHN0cnVjdCBu
+dmttX3BjaSAqLCBlbnVtIG52a21fcGNpZV9zcGVlZCwgdTgpOwo+ID4KPiA+IC0tCj4gPiAyLjIx
+LjAKPiA+Cj4gPiBfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+Xwo+ID4gTm91dmVhdSBtYWlsaW5nIGxpc3QKPiA+IE5vdXZlYXVAbGlzdHMuZnJlZWRlc2t0b3Au
+b3JnCj4gPiBodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL25v
+dXZlYXUKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCk5v
+dXZlYXUgbWFpbGluZyBsaXN0Ck5vdXZlYXVAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8v
+bGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vbm91dmVhdQ==
