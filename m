@@ -1,63 +1,64 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4C191B49B2
-	for <lists+nouveau@lfdr.de>; Tue, 17 Sep 2019 10:40:48 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1D638B49FD
+	for <lists+nouveau@lfdr.de>; Tue, 17 Sep 2019 11:03:03 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 548826EB67;
-	Tue, 17 Sep 2019 08:40:46 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4FDA96E22B;
+	Tue, 17 Sep 2019 09:03:00 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wm1-x341.google.com (mail-wm1-x341.google.com
- [IPv6:2a00:1450:4864:20::341])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 2B8916EB67;
- Tue, 17 Sep 2019 08:40:45 +0000 (UTC)
-Received: by mail-wm1-x341.google.com with SMTP id p7so2241798wmp.4;
- Tue, 17 Sep 2019 01:40:45 -0700 (PDT)
+Received: from mail-ed1-x544.google.com (mail-ed1-x544.google.com
+ [IPv6:2a00:1450:4864:20::544])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 33A2E6E22B;
+ Tue, 17 Sep 2019 09:02:59 +0000 (UTC)
+Received: by mail-ed1-x544.google.com with SMTP id p10so779727edq.1;
+ Tue, 17 Sep 2019 02:02:59 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to:user-agent;
- bh=No1DYAFFqaXnRiq29VLXRiHR5QPMNilGMWiCBsgVxF0=;
- b=c5JNNClhpM0WlUKjma1f+uZaAUQbJismMWe8/c2QyDZOIeaAZ5rfFmsOJIGXEEvPCM
- Ty/kZ6v6H1B9C0MKgqbECvnQvIdILX2Crz8mhB7Nz4XEtX2oPKm8UCmUz73xEJs7bejN
- U3gMDwdOKLhZhGUXziGtj0LOa9/+eCKAIW+zzAFboq/xGUVnRj/3Jrc+32RM+UQkQ8/u
- o1csYXdMexs85zDiJXgb8+tiPhMrG1S1RVRsZQ9WtGqGeOoqm4kF7YFrpwip/UJ/QzJm
- nALmuppLKORyxVdLDEK+wvo0ube+j6m5LahB+0/z6A3A3+OaGN1OPzS5JgT5KUcD/Cum
- b8Sg==
-X-Gm-Message-State: APjAAAVDsLiYRX00I84QZZ9jQvAW8WDUk6fQn8SIzK+uNmIGb0j1pIA2
- LZBGd58qCEPYFx212ng9ml0=
-X-Google-Smtp-Source: APXvYqyXMmvlcivoeguL/I3PycyUG3ZkZnPP6Flvo57r+SxVYvLuAs74FVrGsKSwgU+DKMxzCvKx9A==
-X-Received: by 2002:a1c:a7d2:: with SMTP id q201mr2397784wme.146.1568709643537; 
- Tue, 17 Sep 2019 01:40:43 -0700 (PDT)
+ bh=DU4yQ2hShwpmq/8aDVPi27Lddm5uNrq35I8PfAHE5qg=;
+ b=ULDlWjSuz2WTMChhDV+IvfyiQTH0xr28OQfHQ7M0pA0B7c2mRNj89+kMIPtWCnebiW
+ 7h0km2/Q9dl79ugKZ3KElx4CKNt9ANsN64tvQ3RlkIFy2NAhrobEhgmJbjKTxqSeJLgG
+ QheQPty9hh8XKXrAhFP9nv8IFzIBEia2aEz1dgnLRuupjF1jfuPV7URi8hZU9FfAj7g+
+ L8idimT3cK9ZDuW3pXEkvY/Y943aauJr0ITTj7cKHcmeabm1LR7U4/8aFWo96Gc/kENo
+ bS/89wvwKiFfsxpXSvBKKBDxz5wuXclA4fULDYyC1JoKSFzP+XnS9V2n41/QBH838kbS
+ bOvg==
+X-Gm-Message-State: APjAAAWkIQUn8g7FbO8ZcjqVmg1HwFlypLFB/SnuhijiBiXbtgtuQ/tK
+ vstL9p1d25nhFoaSFCH9m3M=
+X-Google-Smtp-Source: APXvYqxoRQ9n2XISv+o4h5FilHhCzmGue0pwrmAffm+0d+0wFzAZdJRvbnv86CY+9GRqZwe6zzEIow==
+X-Received: by 2002:a17:906:fc20:: with SMTP id
+ ov32mr3823086ejb.22.1568710977664; 
+ Tue, 17 Sep 2019 02:02:57 -0700 (PDT)
 Received: from localhost (p2E5BE2CE.dip0.t-ipconnect.de. [46.91.226.206])
- by smtp.gmail.com with ESMTPSA id o19sm1936122wro.50.2019.09.17.01.40.42
+ by smtp.gmail.com with ESMTPSA id v8sm319381edl.74.2019.09.17.02.02.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 17 Sep 2019 01:40:42 -0700 (PDT)
-Date: Tue, 17 Sep 2019 10:40:41 +0200
+ Tue, 17 Sep 2019 02:02:55 -0700 (PDT)
+Date: Tue, 17 Sep 2019 11:02:54 +0200
 From: Thierry Reding <thierry.reding@gmail.com>
 To: Ben Skeggs <skeggsb@gmail.com>
-Message-ID: <20190917084041.GB17854@ulmo>
-References: <20190916150412.10025-1-thierry.reding@gmail.com>
- <20190916150412.10025-4-thierry.reding@gmail.com>
- <CACAvsv6AcwWW542AJNkyR-q+aQ0GLFc0C3Sior_bYPTEjBV4LA@mail.gmail.com>
+Message-ID: <20190917090254.GC17854@ulmo>
+References: <20190916151757.10953-1-thierry.reding@gmail.com>
+ <20190916151757.10953-4-thierry.reding@gmail.com>
+ <CACAvsv6AzWvpPLaOKahpJErTAMCJet4_4mBvRC8Z+e4+bwaD4w@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <CACAvsv6AcwWW542AJNkyR-q+aQ0GLFc0C3Sior_bYPTEjBV4LA@mail.gmail.com>
+In-Reply-To: <CACAvsv6AzWvpPLaOKahpJErTAMCJet4_4mBvRC8Z+e4+bwaD4w@mail.gmail.com>
 User-Agent: Mutt/1.12.1 (2019-06-15)
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=gmail.com; s=20161025;
  h=date:from:to:cc:subject:message-id:references:mime-version
  :content-disposition:in-reply-to:user-agent;
- bh=No1DYAFFqaXnRiq29VLXRiHR5QPMNilGMWiCBsgVxF0=;
- b=bHgk5DhVF3U2wQbFMj63D1AbMCvfuYv0v063TdtctCPBiVRploqRQON7NyIOlrIDUI
- MvSEvupA12X/Q84YWCtFP4o/WILbPeeh5BLL1jPCgWpsp6eTmTIi6rlCqCsyn+PD3ytr
- K8/VuL8yWJXUlr6LPmfHYSv03rjQ2D9gUpor6loUYyFiNK3TW9EBBYJSuVtPhilFffQV
- Ag1/dYBG99IZJaJ7ekV1cmBAWqIysosR1z8Bt3Nee0oBgBQmRGAUXQnb9EzpzM3p2nA7
- 7exUs9VDksA4tOCbTfv57Tjznkw8MH10sO8FBQ7aywjXVAixA42kENvT90Sdd85XF5B9
- NuOg==
-Subject: Re: [Nouveau] [PATCH 03/11] drm/nouveau: secboot: Read WPR
- configuration from GPU registers
+ bh=DU4yQ2hShwpmq/8aDVPi27Lddm5uNrq35I8PfAHE5qg=;
+ b=uxvgU27Wy6n6UvVRJOWdEpa1KfS8hQuvtT5wXmtEK8sTt92UDGivkXfrjrHkoEWvS0
+ ShCEqYsyH800Dqpx1gqUF/4GXgMEuL7dxU3YGqFH+b2S6fHZ4oxs0SM6efUbpyKxRVuh
+ /4nE/oUni+akwyJS1A67zfNEisv8Uiw7kmk6+ewdUx8rNMGZ6KEu+I05hGDLX8VyTNi+
+ q6dkhkZSm0gRJ4QDSx46BsaDdwmgPwMPVgI0UO6dhFDi8lqCwFLmG5wx3VkLe4WuDJdG
+ bCPJLUOP3KQzUzqOqRNyOFJABVwN+3wbzlWHnh/FQURkanuQPGfwNMAQvlzRyXEwp+ZQ
+ hBGw==
+Subject: Re: [Nouveau] [PATCH 3/6] drm/nouveau: Remove bogus gk20a aperture
+ callback
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -69,289 +70,178 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: linux-tegra@vger.kernel.org, ML nouveau <nouveau@lists.freedesktop.org>,
- Ben Skeggs <bskeggs@redhat.com>,
+Cc: ML nouveau <nouveau@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>,
  ML dri-devel <dri-devel@lists.freedesktop.org>
-Content-Type: multipart/mixed; boundary="===============1903858813=="
+Content-Type: multipart/mixed; boundary="===============0145585315=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============1903858813==
+--===============0145585315==
 Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="1UWUbFP1cBYEclgG"
+	protocol="application/pgp-signature"; boundary="NU0Ex4SbNnrxsi6C"
 Content-Disposition: inline
 
 
---1UWUbFP1cBYEclgG
+--NU0Ex4SbNnrxsi6C
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Sep 17, 2019 at 01:49:57PM +1000, Ben Skeggs wrote:
-> On Tue, 17 Sep 2019 at 01:04, Thierry Reding <thierry.reding@gmail.com> w=
+On Tue, Sep 17, 2019 at 01:43:13PM +1000, Ben Skeggs wrote:
+> On Tue, 17 Sep 2019 at 01:18, Thierry Reding <thierry.reding@gmail.com> w=
 rote:
 > >
 > > From: Thierry Reding <treding@nvidia.com>
 > >
-> > The GPUs found on Tegra SoCs have registers that can be used to read the
-> > WPR configuration. Use these registers instead of reaching into the
-> > memory controller's register space to read the same information.
-> >
-> > Signed-off-by: Thierry Reding <treding@nvidia.com>
-> > ---
-> >  .../drm/nouveau/nvkm/subdev/secboot/gm200.h   |  2 +-
-> >  .../drm/nouveau/nvkm/subdev/secboot/gm20b.c   | 81 ++++++++++++-------
-> >  .../drm/nouveau/nvkm/subdev/secboot/gp10b.c   |  4 +-
-> >  3 files changed, 53 insertions(+), 34 deletions(-)
-> >
-> > diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/secboot/gm200.h b/driv=
-ers/gpu/drm/nouveau/nvkm/subdev/secboot/gm200.h
-> > index 62c5e162099a..280b1448df88 100644
-> > --- a/drivers/gpu/drm/nouveau/nvkm/subdev/secboot/gm200.h
-> > +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/secboot/gm200.h
-> > @@ -41,6 +41,6 @@ int gm200_secboot_run_blob(struct nvkm_secboot *, str=
-uct nvkm_gpuobj *,
-> >                            struct nvkm_falcon *);
-> >
-> >  /* Tegra-only */
-> > -int gm20b_secboot_tegra_read_wpr(struct gm200_secboot *, u32);
-> > +int gm20b_secboot_tegra_read_wpr(struct gm200_secboot *);
-> >
-> >  #endif
-> > diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/secboot/gm20b.c b/driv=
-ers/gpu/drm/nouveau/nvkm/subdev/secboot/gm20b.c
-> > index df8b919dcf09..f8a543122219 100644
-> > --- a/drivers/gpu/drm/nouveau/nvkm/subdev/secboot/gm20b.c
-> > +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/secboot/gm20b.c
-> > @@ -23,39 +23,65 @@
-> >  #include "acr.h"
-> >  #include "gm200.h"
-> >
-> > -#define TEGRA210_MC_BASE                       0x70019000
-> > -
-> >  #ifdef CONFIG_ARCH_TEGRA
-> > -#define MC_SECURITY_CARVEOUT2_CFG0             0xc58
-> > -#define MC_SECURITY_CARVEOUT2_BOM_0            0xc5c
-> > -#define MC_SECURITY_CARVEOUT2_BOM_HI_0         0xc60
-> > -#define MC_SECURITY_CARVEOUT2_SIZE_128K                0xc64
-> > -#define TEGRA_MC_SECURITY_CARVEOUT_CFG_LOCKED  (1 << 1)
-> >  /**
-> >   * gm20b_secboot_tegra_read_wpr() - read the WPR registers on Tegra
-> >   *
-> > - * On dGPU, we can manage the WPR region ourselves, but on Tegra the W=
-PR region
-> > - * is reserved from system memory by the bootloader and irreversibly l=
-ocked.
-> > - * This function reads the address and size of the pre-configured WPR =
-region.
-> > + * On dGPU, we can manage the WPR region ourselves, but on Tegra this =
-region
-> > + * is allocated from system memory by the secure firmware. The region =
-is then
-> > + * marked as a "secure carveout" and irreversibly locked. Furthermore,=
- the WPR
-> > + * secure carveout is also configured to be sent to the GPU via a dedi=
-cated
-> > + * serial bus between the memory controller and the GPU. The GPU reque=
-sts this
-> > + * information upon leaving reset and exposes it through a FIFO regist=
-er at
-> > + * offset 0x100cd4.
-> > + *
-> > + * The FIFO register's lower 4 bits can be used to set the read index =
-into the
-> > + * FIFO. After each read of the FIFO register, the read index is incre=
-mented.
-> > + *
-> > + * Indices 2 and 3 contain the lower and upper addresses of the WPR. T=
-hese are
-> > + * stored in units of 256 B. The WPR is inclusive of both addresses.
-> > + *
-> > + * Unfortunately, for some reason the WPR info register doesn't contai=
-n the
-> > + * correct values for the secure carveout. It seems like the upper add=
-ress is
-> > + * always too small by 128 KiB - 1. Given that the secure carvout size=
- in the
-> > + * memory controller configuration is specified in units of 128 KiB, i=
-t's
-> > + * possible that the computation of the upper address of the WPR is wr=
-ong and
-> > + * causes this difference.
-> >   */
-> >  int
-> > -gm20b_secboot_tegra_read_wpr(struct gm200_secboot *gsb, u32 mc_base)
-> > +gm20b_secboot_tegra_read_wpr(struct gm200_secboot *gsb)
-> >  {
-> > +       struct nvkm_device *device =3D gsb->base.subdev.device;
-> >         struct nvkm_secboot *sb =3D &gsb->base;
-> > -       void __iomem *mc;
-> > -       u32 cfg;
-> > +       u64 base, limit;
-> > +       u32 value;
-> >
-> > -       mc =3D ioremap(mc_base, 0xd00);
-> > -       if (!mc) {
-> > -               nvkm_error(&sb->subdev, "Cannot map Tegra MC registers\=
-n");
-> > -               return -ENOMEM;
-> > -       }
-> > -       sb->wpr_addr =3D ioread32_native(mc + MC_SECURITY_CARVEOUT2_BOM=
-_0) |
-> > -             ((u64)ioread32_native(mc + MC_SECURITY_CARVEOUT2_BOM_HI_0=
-) << 32);
-> > -       sb->wpr_size =3D ioread32_native(mc + MC_SECURITY_CARVEOUT2_SIZ=
-E_128K)
-> > -               << 17;
-> > -       cfg =3D ioread32_native(mc + MC_SECURITY_CARVEOUT2_CFG0);
-> > -       iounmap(mc);
-> > +       /* set WPR info register to point at WPR base address register =
-*/
-> > +       value =3D nvkm_rd32(device, 0x100cd4);
-> > +       value &=3D ~0xf;
-> > +       value |=3D 0x2;
-> > +       nvkm_wr32(device, 0x100cd4, value);
-> > +
-> > +       /* read base address */
-> > +       value =3D nvkm_rd32(device, 0x100cd4);
-> > +       base =3D (u64)(value >> 4) << 12;
-> > +
-> > +       /* read limit */
-> > +       value =3D nvkm_rd32(device, 0x100cd4);
-> > +       limit =3D (u64)(value >> 4) << 12;
-> acr_r352_wpr_is_set() does a similar readout to confirm the HS
-> firmware did its job on dGPU, perhaps this part of it could be
-> factored out into a function that could be used in both places?
+> > The gk20a (as well as all subsequent Tegra instantiations of the GPU) do
+> > in fact use the same apertures as regular GPUs. Prior to gv11b there are
+> > no checks in hardware for the aperture, so we get away with setting VRAM
+> > as the aperture for buffers that are actually in system memory.
+> Can GK20A take comptags with aperture set to system memory?  For some
+> reason I can recall, I was under the impression PTEs needed to be
+> pointed at "vidmem" (despite them actually accessing system memory
+> anyway) on Tegra parts for compression to work?  I could be mistaken
+> though.
 
-I hadn't seen that function. It looks to me like these are now both
-doing exactly the same thing. The acr_r352_wpr_is_set() also seems to
-serve only to check that what's read from these WPR info registers
-matches what was configured as the WPR region previously. This is now
-rather pointless because, unless the computations differ, the result
-must be true.
+I don't think GK20A supports comptags at all. I think this wasn't
+introduced until GM20B. nvgpu has some "gk20a" code to flush comptags,
+but that's only used on GM20B and later.
 
-Honestly, I'm not sure we really need to check this. My understanding is
-that these WPR info registers are the canonical way of obtaining the WPR
-region base and limit. The way that this works is that the GPU has a
-dedicated bus to the memory controller and it fetches these parameters
-=66rom the MC when it leaves reset.
+Anyway, my understanding is that on all of GK20A, GM20B and GP10B the
+aperture field is completely ignored. I think that also goes for
+comptags. nvgpu in particular never requests comptags to be allocated
+=66rom vidmem. See:
 
-One oddity here, though, is that the code in acr_r352_wpr_is_set() does
-not account for the strange way that the limit is encoded in these
-registers. I suspect that this is some weird hardware bug that happens
-during the transfer of the WPR information to the GPU. I came across
-some documentation that specifically defines the limit register to
-contain the upper limit of the WPR in units of 256 B with the WPR being
-inclusive of both the base and the limit. I'm not exactly sure why this
-has gone unnoticed, but I think nvgpu doesn't actually test for the WPR
-size when it loads the firmware. I only ran into this when implementing
-the WPR info register readout because Nouveau would refuse to load the
-firmware because it didn't fit into what it thought was the WPR.
+	https://nv-tegra.nvidia.com/gitweb/?p=3Dlinux-nvgpu.git;a=3Dblob;f=3Ddrive=
+rs/gpu/nvgpu/os/linux/ltc.c;h=3Dbaeb20b2e539cc6cb70667ce168603546678dc73;hb=
+=3D2081ce686bfd4deb461b4130df424d592000ff88#l30
 
-Anyway, I've tested this on all of gm20b, gp10b and gv11b and the above
-computations give me the same values that the (SoC) firmware claims that
-it configured the WPR with.
+There are two callers of that, both passing "false" for the vidmem_alloc
+parameter, so comptags always do end up in system memory for Tegra.
 
-Given the above, do you see any further use for acr_r352_wpr_is_set()?
-Should I follow up with a patch removing it?
+That said, I'll go confirm that with one of our experts and get back to
+you.
 
 Thierry
 
 >=20
-> > +
-> > +       /*
-> > +        * The upper address of the WPR seems to be computed wrongly an=
-d is
-> > +        * actually SZ_128K - 1 bytes lower than it should be. Adjust t=
-he
-> > +        * value accordingly.
-> > +        */
-> > +       limit +=3D SZ_128K - 1;
-> > +
-> > +       sb->wpr_size =3D limit - base + 1;
-> > +       sb->wpr_addr =3D base;
-> > +
-> > +       nvkm_info(&sb->subdev, "WPR: %016llx-%016llx\n", sb->wpr_addr,
-> > +                 sb->wpr_addr + sb->wpr_size - 1);
+> Ben.
+>=20
 > >
-> >         /* Check that WPR settings are valid */
-> >         if (sb->wpr_size =3D=3D 0) {
-> > @@ -63,11 +89,6 @@ gm20b_secboot_tegra_read_wpr(struct gm200_secboot *g=
-sb, u32 mc_base)
-> >                 return -EINVAL;
-> >         }
+> > Signed-off-by: Thierry Reding <treding@nvidia.com>
+> > ---
+> >  drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.h      |  1 -
+> >  drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmgk20a.c | 10 ----------
+> >  drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmgm20b.c |  4 ++--
+> >  drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmgp10b.c |  2 +-
+> >  4 files changed, 3 insertions(+), 14 deletions(-)
 > >
-> > -       if (!(cfg & TEGRA_MC_SECURITY_CARVEOUT_CFG_LOCKED)) {
-> > -               nvkm_error(&sb->subdev, "WPR region not locked\n");
+> > diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.h b/drivers/gp=
+u/drm/nouveau/nvkm/subdev/mmu/vmm.h
+> > index fb3a9e8bb9cd..9862f44ac8b5 100644
+> > --- a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.h
+> > +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.h
+> > @@ -212,7 +212,6 @@ void gf100_vmm_flush(struct nvkm_vmm *, int);
+> >  void gf100_vmm_invalidate(struct nvkm_vmm *, u32 type);
+> >  void gf100_vmm_invalidate_pdb(struct nvkm_vmm *, u64 addr);
+> >
+> > -int gk20a_vmm_aper(enum nvkm_memory_target);
+> >  int gk20a_vmm_valid(struct nvkm_vmm *, void *, u32, struct nvkm_vmm_ma=
+p *);
+> >
+> >  int gm200_vmm_new_(const struct nvkm_vmm_func *, const struct nvkm_vmm=
+_func *,
+> > diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmgk20a.c b/drive=
+rs/gpu/drm/nouveau/nvkm/subdev/mmu/vmmgk20a.c
+> > index 16d7bf727292..999b953505b3 100644
+> > --- a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmgk20a.c
+> > +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmgk20a.c
+> > @@ -25,16 +25,6 @@
+> >
+> >  #include <core/memory.h>
+> >
+> > -int
+> > -gk20a_vmm_aper(enum nvkm_memory_target target)
+> > -{
+> > -       switch (target) {
+> > -       case NVKM_MEM_TARGET_NCOH: return 0;
+> > -       default:
 > > -               return -EINVAL;
 > > -       }
+> > -}
 > > -
-> >         return 0;
-> >  }
-> >  #else
-> > @@ -85,7 +106,7 @@ gm20b_secboot_oneinit(struct nvkm_secboot *sb)
-> >         struct gm200_secboot *gsb =3D gm200_secboot(sb);
-> >         int ret;
-> >
-> > -       ret =3D gm20b_secboot_tegra_read_wpr(gsb, TEGRA210_MC_BASE);
-> > +       ret =3D gm20b_secboot_tegra_read_wpr(gsb);
-> >         if (ret)
-> >                 return ret;
-> >
-> > diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/secboot/gp10b.c b/driv=
-ers/gpu/drm/nouveau/nvkm/subdev/secboot/gp10b.c
-> > index 28ca29d0eeee..d84e85825995 100644
-> > --- a/drivers/gpu/drm/nouveau/nvkm/subdev/secboot/gp10b.c
-> > +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/secboot/gp10b.c
-> > @@ -23,15 +23,13 @@
-> >  #include "acr.h"
-> >  #include "gm200.h"
-> >
-> > -#define TEGRA186_MC_BASE                       0x02c10000
-> > -
-> >  static int
-> >  gp10b_secboot_oneinit(struct nvkm_secboot *sb)
-> >  {
-> >         struct gm200_secboot *gsb =3D gm200_secboot(sb);
-> >         int ret;
-> >
-> > -       ret =3D gm20b_secboot_tegra_read_wpr(gsb, TEGRA186_MC_BASE);
-> > +       ret =3D gm20b_secboot_tegra_read_wpr(gsb);
-> >         if (ret)
-> >                 return ret;
-> >
+> >  int
+> >  gk20a_vmm_valid(struct nvkm_vmm *vmm, void *argv, u32 argc,
+> >                 struct nvkm_vmm_map *map)
+> > diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmgm20b.c b/drive=
+rs/gpu/drm/nouveau/nvkm/subdev/mmu/vmmgm20b.c
+> > index 7a6066d886cd..f5d7819c4a40 100644
+> > --- a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmgm20b.c
+> > +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmgm20b.c
+> > @@ -25,7 +25,7 @@ static const struct nvkm_vmm_func
+> >  gm20b_vmm_17 =3D {
+> >         .join =3D gm200_vmm_join,
+> >         .part =3D gf100_vmm_part,
+> > -       .aper =3D gk20a_vmm_aper,
+> > +       .aper =3D gf100_vmm_aper,
+> >         .valid =3D gk20a_vmm_valid,
+> >         .flush =3D gf100_vmm_flush,
+> >         .invalidate_pdb =3D gf100_vmm_invalidate_pdb,
+> > @@ -41,7 +41,7 @@ static const struct nvkm_vmm_func
+> >  gm20b_vmm_16 =3D {
+> >         .join =3D gm200_vmm_join,
+> >         .part =3D gf100_vmm_part,
+> > -       .aper =3D gk20a_vmm_aper,
+> > +       .aper =3D gf100_vmm_aper,
+> >         .valid =3D gk20a_vmm_valid,
+> >         .flush =3D gf100_vmm_flush,
+> >         .invalidate_pdb =3D gf100_vmm_invalidate_pdb,
+> > diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmgp10b.c b/drive=
+rs/gpu/drm/nouveau/nvkm/subdev/mmu/vmmgp10b.c
+> > index 180c8f006e32..ffe84ea2f7d9 100644
+> > --- a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmgp10b.c
+> > +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmgp10b.c
+> > @@ -43,7 +43,7 @@ static const struct nvkm_vmm_func
+> >  gp10b_vmm =3D {
+> >         .join =3D gp100_vmm_join,
+> >         .part =3D gf100_vmm_part,
+> > -       .aper =3D gk20a_vmm_aper,
+> > +       .aper =3D gf100_vmm_aper,
+> >         .valid =3D gp10b_vmm_valid,
+> >         .flush =3D gp100_vmm_flush,
+> >         .mthd =3D gp100_vmm_mthd,
 > > --
 > > 2.23.0
 > >
 > > _______________________________________________
-> > dri-devel mailing list
-> > dri-devel@lists.freedesktop.org
-> > https://lists.freedesktop.org/mailman/listinfo/dri-devel
+> > Nouveau mailing list
+> > Nouveau@lists.freedesktop.org
+> > https://lists.freedesktop.org/mailman/listinfo/nouveau
 
---1UWUbFP1cBYEclgG
+--NU0Ex4SbNnrxsi6C
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAABCAAdFiEEiOrDCAFJzPfAjcif3SOs138+s6EFAl2AnAYACgkQ3SOs138+
-s6G4EQ//W+7nrgwOka0kREfhnDOeKFM+h4ElazaIUv/0KnTvaAKfcBaBC+kVlcJI
-QzVIy/Fwsf9eXvCUzNH6Hz8o9A9RJYx6zemj7J/DSpCU1I1P35Jsj0KC2xsuDjL+
-EhfwmQ4ccP2xdn1S1U3BsK6SDJh7KiPLLA6IPQrdkpQTsJtdXiUr8oNYdb8V5giX
-pjZNo/CLlvkAnE2pWeS7WJvr/Vgqm9DOVWEOyT3IYGkUHfQSKWEDutkcc0BWy/zG
-ApxTZeeeLI4Z19CszAE9qjwACVO/zcKAk/PTMv7MTlDiONgTumGbk2P/AFZLfIs2
-yXClFqnxH5Ul5m4OrSTyO/emOUgbbov49HFOB6pKUCrwmBGQ74pc7H/TKTxB9gtb
-YfLmErlayVYA+eypJ1myfvpKZZibpSivhyw91+uH8E29oSY41Ctb74fAmoEfwOka
-I92ICTwqxQVt1OBSg+AFDGtsVabJbCsQOyxDjeTNKqbByNxOcSMUQgtK/74oh3kv
-Jo9QsGluXmRBOT88rCou/9GrIs+R1ufGzy1Dtmn9sbiGZmzb2gr/6tj5YSnRFR63
-tgGmA91vIyhPluBAhM6tpm5+ziTx2kTj+ZzQKNFLWMwplDLtHfeI27stYVi7FsHh
-swnuUIoLUWEy1DSCQfCu+NqlKtOnZw4BPLV4AvBzDc57k593N0Q=
-=kmci
+iQIzBAABCAAdFiEEiOrDCAFJzPfAjcif3SOs138+s6EFAl2AoTsACgkQ3SOs138+
+s6HzKQ/9EB5wLiorfO4HVVbB2tmuk2ROy4mZrh768Rlv4NB08ZJOhIBSray6eMvl
+JFvyKXvfQiT2B4eFGlRqswnYiVZFm6QNFXpm/u/UtaKgygGLyIZ9OSxX/RFQK69p
+lxcaP5b4pEi9T0KKboYRfiRfoZ/qtTg3NMy+pBSdQ4TVES47fZJTql+bDMIWb4A4
+Cmf5fhmRkxN7YuPY0yTljS5e2yBTh2wGvRJxJNxhyp+fnUK737DbKeZ/sPC89bNY
+pxdTGpGHyMp9/WCe2PFl3eVJKBJ9cZJT8AMLyQhC4qFD7qc2GxCpmJhxNQr2dmwA
+WpI5rvlblZzDZrz9lxdkhrsmYb4Ck2Z9gbDHmefI6B0Kz6nysALPt6XviIh5VUqe
+ilAXAFx6Euk28ecbepoIUQPtSYJXn2Wnz0o9gxB8QEMj/SfIhcPoAUjRvmkcfBYH
+7LzSY2aNHLZYg2bl34KtbQBh4dWBSaTLam4M3An7MQJTJ9aQxZqZVk8l573i9TMa
+N/NpMNwSCdJnHOR6DOkQ7pOLn96c6qKJSD3ejTgwEpOWqMrpXSUairNcZU3busKJ
+m6N0t0ZmALrVXYsgB6MNtLdMqiTKqcbWDumMlvL4Mbw5Ag1KY5TKG5UEuNzbRuSc
+C3d8kFhhqgpHRycoLcLvMMx560ByXhZKmirouDU7Ktexr4wOimg=
+=Nq5T
 -----END PGP SIGNATURE-----
 
---1UWUbFP1cBYEclgG--
+--NU0Ex4SbNnrxsi6C--
 
---===============1903858813==
+--===============0145585315==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -361,4 +251,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============1903858813==--
+--===============0145585315==--
