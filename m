@@ -2,22 +2,22 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 72BAEB508B
-	for <lists+nouveau@lfdr.de>; Tue, 17 Sep 2019 16:37:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6F92FB5091
+	for <lists+nouveau@lfdr.de>; Tue, 17 Sep 2019 16:38:47 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C9E3D6ECA9;
-	Tue, 17 Sep 2019 14:37:28 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E1F816ECB5;
+	Tue, 17 Sep 2019 14:38:45 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [131.252.210.165])
- by gabe.freedesktop.org (Postfix) with ESMTP id 323E56ECA9
- for <nouveau@lists.freedesktop.org>; Tue, 17 Sep 2019 14:37:28 +0000 (UTC)
+ [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 496186ECB4
+ for <nouveau@lists.freedesktop.org>; Tue, 17 Sep 2019 14:38:45 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 2F47972167; Tue, 17 Sep 2019 14:37:28 +0000 (UTC)
+ id 45C7072167; Tue, 17 Sep 2019 14:38:45 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Tue, 17 Sep 2019 14:37:28 +0000
+Date: Tue, 17 Sep 2019 14:38:45 +0000
 X-Bugzilla-Reason: AssignedTo
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
@@ -26,14 +26,14 @@ X-Bugzilla-Component: Driver/nouveau
 X-Bugzilla-Version: unspecified
 X-Bugzilla-Keywords: 
 X-Bugzilla-Severity: normal
-X-Bugzilla-Who: mmenzyns@redhat.com
+X-Bugzilla-Who: imirkin@alum.mit.edu
 X-Bugzilla-Status: NEW
 X-Bugzilla-Resolution: 
 X-Bugzilla-Priority: not set
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: attachments.created
-Message-ID: <bug-111724-8800-ObVEWiEtkC@http.bugs.freedesktop.org/>
+X-Bugzilla-Changed-Fields: 
+Message-ID: <bug-111724-8800-X1Xo6Bo2JG@http.bugs.freedesktop.org/>
 In-Reply-To: <bug-111724-8800@http.bugs.freedesktop.org/>
 References: <bug-111724-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
@@ -52,18 +52,18 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0726830295=="
+Content-Type: multipart/mixed; boundary="===============1956044494=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============0726830295==
-Content-Type: multipart/alternative; boundary="15687310480.56b1331.10626"
+--===============1956044494==
+Content-Type: multipart/alternative; boundary="15687311250.01D9BA9c.10666"
 Content-Transfer-Encoding: 7bit
 
 
---15687310480.56b1331.10626
-Date: Tue, 17 Sep 2019 14:37:28 +0000
+--15687311250.01D9BA9c.10666
+Date: Tue, 17 Sep 2019 14:38:45 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -72,17 +72,18 @@ Auto-Submitted: auto-generated
 
 https://bugs.freedesktop.org/show_bug.cgi?id=3D111724
 
---- Comment #8 from Mark Menzynski <mmenzyns@redhat.com> ---
-Created attachment 145402
-  --> https://bugs.freedesktop.org/attachment.cgi?id=3D145402&action=3Dedit
-vbios.rom
+--- Comment #9 from Ilia Mirkin <imirkin@alum.mit.edu> ---
+Mark - try using blob ctxsw firmware. Perhaps ours misses something. There =
+are
+some GK106's which just die immediately with out firmware... (See
+VideoAcceleration wiki page for how to extract firmware from blob drivers.)
 
 --=20
 You are receiving this mail because:
 You are the assignee for the bug.=
 
---15687310480.56b1331.10626
-Date: Tue, 17 Sep 2019 14:37:28 +0000
+--15687311250.01D9BA9c.10666
+Date: Tue, 17 Sep 2019 14:38:45 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -100,8 +101,8 @@ Auto-Submitted: auto-generated
           bz_status_NEW "
    title=3D"NEW - NVE6 (GK106) memory re-clocking breaks GpuTest plot3d ben=
 chmark"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111724#c8">Commen=
-t # 8</a>
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111724#c9">Commen=
+t # 9</a>
               on <a class=3D"bz_bug_link=20
           bz_status_NEW "
    title=3D"NEW - NVE6 (GK106) memory re-clocking breaks GpuTest plot3d ben=
@@ -109,14 +110,14 @@ chmark"
    href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111724">bug 11172=
 4</a>
               from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
-mmenzyns&#64;redhat.com" title=3D"Mark Menzynski &lt;mmenzyns&#64;redhat.co=
-m&gt;"> <span class=3D"fn">Mark Menzynski</span></a>
+imirkin&#64;alum.mit.edu" title=3D"Ilia Mirkin &lt;imirkin&#64;alum.mit.edu=
+&gt;"> <span class=3D"fn">Ilia Mirkin</span></a>
 </span></b>
-        <pre>Created <span class=3D""><a href=3D"attachment.cgi?id=3D145402=
-" name=3D"attach_145402" title=3D"vbios.rom">attachment 145402</a> <a href=
-=3D"attachment.cgi?id=3D145402&amp;action=3Dedit" title=3D"vbios.rom">[deta=
-ils]</a></span>
-vbios.rom</pre>
+        <pre>Mark - try using blob ctxsw firmware. Perhaps ours misses some=
+thing. There are
+some GK106's which just die immediately with out firmware... (See
+VideoAcceleration wiki page for how to extract firmware from blob drivers.)=
+</pre>
         </div>
       </p>
 
@@ -130,9 +131,9 @@ vbios.rom</pre>
     </body>
 </html>=
 
---15687310480.56b1331.10626--
+--15687311250.01D9BA9c.10666--
 
---===============0726830295==
+--===============1956044494==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -142,4 +143,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============0726830295==--
+--===============1956044494==--
