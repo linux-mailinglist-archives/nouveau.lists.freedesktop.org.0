@@ -2,28 +2,28 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 63715B6E21
-	for <lists+nouveau@lfdr.de>; Wed, 18 Sep 2019 22:43:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D4602B6E22
+	for <lists+nouveau@lfdr.de>; Wed, 18 Sep 2019 22:43:57 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E4EFA72ECE;
-	Wed, 18 Sep 2019 20:43:54 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5767972ECF;
+	Wed, 18 Sep 2019 20:43:56 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
  [131.252.210.165])
- by gabe.freedesktop.org (Postfix) with ESMTP id EF58A72ECE
- for <nouveau@lists.freedesktop.org>; Wed, 18 Sep 2019 20:43:53 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTP id 05A8A72ECF
+ for <nouveau@lists.freedesktop.org>; Wed, 18 Sep 2019 20:43:56 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id EB43E72167; Wed, 18 Sep 2019 20:43:53 +0000 (UTC)
+ id 0327E72167; Wed, 18 Sep 2019 20:43:56 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Wed, 18 Sep 2019 20:43:54 +0000
-X-Bugzilla-Reason: AssignedTo QAcontact
+Date: Wed, 18 Sep 2019 20:43:56 +0000
+X-Bugzilla-Reason: QAcontact AssignedTo
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
 X-Bugzilla-Product: Mesa
 X-Bugzilla-Component: Drivers/DRI/nouveau
-X-Bugzilla-Version: 13.0
+X-Bugzilla-Version: 12.0
 X-Bugzilla-Keywords: 
 X-Bugzilla-Severity: normal
 X-Bugzilla-Who: gitlab-migration@fdo.invalid
@@ -33,14 +33,14 @@ X-Bugzilla-Priority: medium
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
 X-Bugzilla-Changed-Fields: resolution bug_status
-Message-ID: <bug-98656-8800-4j3oyEkJbJ@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-98656-8800@http.bugs.freedesktop.org/>
-References: <bug-98656-8800@http.bugs.freedesktop.org/>
+Message-ID: <bug-98709-8800-idZLZ27lZH@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-98709-8800@http.bugs.freedesktop.org/>
+References: <bug-98709-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 98656] [NVE6] Nouveau hangs after opening Chromium
- on GNOME 3
+Subject: [Nouveau] [Bug 98709] [NV84] fifo intr 00c00000,
+ subchan mapping messed up
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -52,25 +52,25 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0146674142=="
+Content-Type: multipart/mixed; boundary="===============1175139778=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============0146674142==
-Content-Type: multipart/alternative; boundary="15688394330.b4D6.25588"
+--===============1175139778==
+Content-Type: multipart/alternative; boundary="15688394350.30D1.25588"
 Content-Transfer-Encoding: 7bit
 
 
---15688394330.b4D6.25588
-Date: Wed, 18 Sep 2019 20:43:53 +0000
+--15688394350.30D1.25588
+Date: Wed, 18 Sep 2019 20:43:55 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 
-https://bugs.freedesktop.org/show_bug.cgi?id=3D98656
+https://bugs.freedesktop.org/show_bug.cgi?id=3D98709
 
 GitLab Migration User <gitlab-migration@fdo.invalid> changed:
 
@@ -79,7 +79,7 @@ GitLab Migration User <gitlab-migration@fdo.invalid> changed:
          Resolution|---                         |MOVED
              Status|NEW                         |RESOLVED
 
---- Comment #1 from GitLab Migration User <gitlab-migration@fdo.invalid> ---
+--- Comment #3 from GitLab Migration User <gitlab-migration@fdo.invalid> ---
 -- GitLab Migration Automatic Message --
 
 This bug has been migrated to freedesktop.org's GitLab instance and has been
@@ -88,15 +88,15 @@ closed from further activity.
 You can subscribe and participate further through the new bug through this =
 link
 to our GitLab instance: https://gitlab.freedesktop.org/mesa/mesa/issues/111=
-7.
+8.
 
 --=20
 You are receiving this mail because:
-You are the assignee for the bug.
-You are the QA Contact for the bug.=
+You are the QA Contact for the bug.
+You are the assignee for the bug.=
 
---15688394330.b4D6.25588
-Date: Wed, 18 Sep 2019 20:43:53 +0000
+--15688394350.30D1.25588
+Date: Wed, 18 Sep 2019 20:43:55 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -113,9 +113,9 @@ n&#64;fdo.invalid&gt;"> <span class=3D"fn">GitLab Migration User</span></a>
 </span> changed
           <a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - [NVE6] Nouveau hangs after opening Chromium on=
- GNOME 3"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D98656">bug 98656<=
+   title=3D"RESOLVED MOVED - [NV84] fifo intr 00c00000, subchan mapping mes=
+sed up"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D98709">bug 98709<=
 /a>
           <br>
              <table border=3D"1" cellspacing=3D"0" cellpadding=3D"8">
@@ -144,15 +144,15 @@ n&#64;fdo.invalid&gt;"> <span class=3D"fn">GitLab Migration User</span></a>
         <div>
             <b><a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - [NVE6] Nouveau hangs after opening Chromium on=
- GNOME 3"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D98656#c1">Comment=
- # 1</a>
+   title=3D"RESOLVED MOVED - [NV84] fifo intr 00c00000, subchan mapping mes=
+sed up"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D98709#c3">Comment=
+ # 3</a>
               on <a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - [NVE6] Nouveau hangs after opening Chromium on=
- GNOME 3"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D98656">bug 98656<=
+   title=3D"RESOLVED MOVED - [NV84] fifo intr 00c00000, subchan mapping mes=
+sed up"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D98709">bug 98709<=
 /a>
               from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
 gitlab-migration&#64;fdo.invalid" title=3D"GitLab Migration User &lt;gitlab=
@@ -167,7 +167,7 @@ closed from further activity.
 You can subscribe and participate further through the new bug through this =
 link
 to our GitLab instance: <a href=3D"https://gitlab.freedesktop.org/mesa/mesa=
-/issues/1117">https://gitlab.freedesktop.org/mesa/mesa/issues/1117</a>.</pr=
+/issues/1118">https://gitlab.freedesktop.org/mesa/mesa/issues/1118</a>.</pr=
 e>
         </div>
       </p>
@@ -177,15 +177,15 @@ e>
       <span>You are receiving this mail because:</span>
 
       <ul>
-          <li>You are the assignee for the bug.</li>
           <li>You are the QA Contact for the bug.</li>
+          <li>You are the assignee for the bug.</li>
       </ul>
     </body>
 </html>=
 
---15688394330.b4D6.25588--
+--15688394350.30D1.25588--
 
---===============0146674142==
+--===============1175139778==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -195,4 +195,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============0146674142==--
+--===============1175139778==--
