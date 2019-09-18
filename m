@@ -2,22 +2,22 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 592F2B6E2A
-	for <lists+nouveau@lfdr.de>; Wed, 18 Sep 2019 22:44:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5837FB6E2B
+	for <lists+nouveau@lfdr.de>; Wed, 18 Sep 2019 22:44:55 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 71D1972D2E;
-	Wed, 18 Sep 2019 20:44:51 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8AFE86FE8B;
+	Wed, 18 Sep 2019 20:44:53 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
  [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
- by gabe.freedesktop.org (Postfix) with ESMTP id 4C6B26FEAB
- for <nouveau@lists.freedesktop.org>; Wed, 18 Sep 2019 20:44:49 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTP id 2EA2172D13
+ for <nouveau@lists.freedesktop.org>; Wed, 18 Sep 2019 20:44:52 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 49DBE72167; Wed, 18 Sep 2019 20:44:49 +0000 (UTC)
+ id 2BC27721A2; Wed, 18 Sep 2019 20:44:52 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Wed, 18 Sep 2019 20:44:49 +0000
+Date: Wed, 18 Sep 2019 20:44:52 +0000
 X-Bugzilla-Reason: QAcontact AssignedTo
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
@@ -32,15 +32,15 @@ X-Bugzilla-Resolution: MOVED
 X-Bugzilla-Priority: medium
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: resolution bug_status
-Message-ID: <bug-99584-8800-JcbAyi99i4@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-99584-8800@http.bugs.freedesktop.org/>
-References: <bug-99584-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-Changed-Fields: bug_status resolution
+Message-ID: <bug-99799-8800-hoJjwAkU8B@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-99799-8800@http.bugs.freedesktop.org/>
+References: <bug-99799-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 99584] XVMC on nv43 class card broken with recent
- mesa + kernel.
+Subject: [Nouveau] [Bug 99799] Civilization VI makes nouveau crash on
+ register allocation
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -52,34 +52,34 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1163165822=="
+Content-Type: multipart/mixed; boundary="===============0836782619=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============1163165822==
-Content-Type: multipart/alternative; boundary="15688394890.D3C1CeB.25588"
+--===============0836782619==
+Content-Type: multipart/alternative; boundary="15688394921.f9D9A4C2.25588"
 Content-Transfer-Encoding: 7bit
 
 
---15688394890.D3C1CeB.25588
-Date: Wed, 18 Sep 2019 20:44:49 +0000
+--15688394921.f9D9A4C2.25588
+Date: Wed, 18 Sep 2019 20:44:52 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 
-https://bugs.freedesktop.org/show_bug.cgi?id=3D99584
+https://bugs.freedesktop.org/show_bug.cgi?id=3D99799
 
 GitLab Migration User <gitlab-migration@fdo.invalid> changed:
 
            What    |Removed                     |Added
 ----------------------------------------------------------------------------
-         Resolution|---                         |MOVED
              Status|NEW                         |RESOLVED
+         Resolution|---                         |MOVED
 
---- Comment #9 from GitLab Migration User <gitlab-migration@fdo.invalid> ---
+--- Comment #8 from GitLab Migration User <gitlab-migration@fdo.invalid> ---
 -- GitLab Migration Automatic Message --
 
 This bug has been migrated to freedesktop.org's GitLab instance and has been
@@ -88,15 +88,15 @@ closed from further activity.
 You can subscribe and participate further through the new bug through this =
 link
 to our GitLab instance: https://gitlab.freedesktop.org/mesa/mesa/issues/112=
-6.
+7.
 
 --=20
 You are receiving this mail because:
 You are the QA Contact for the bug.
 You are the assignee for the bug.=
 
---15688394890.D3C1CeB.25588
-Date: Wed, 18 Sep 2019 20:44:49 +0000
+--15688394921.f9D9A4C2.25588
+Date: Wed, 18 Sep 2019 20:44:52 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -113,9 +113,9 @@ n&#64;fdo.invalid&gt;"> <span class=3D"fn">GitLab Migration User</span></a>
 </span> changed
           <a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - XVMC on nv43 class card broken with recent mes=
-a + kernel."
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D99584">bug 99584<=
+   title=3D"RESOLVED MOVED - Civilization VI makes nouveau crash on registe=
+r allocation"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D99799">bug 99799<=
 /a>
           <br>
              <table border=3D"1" cellspacing=3D"0" cellpadding=3D"8">
@@ -126,33 +126,33 @@ a + kernel."
           </tr>
 
          <tr>
-           <td style=3D"text-align:right;">Resolution</td>
-           <td>---
-           </td>
-           <td>MOVED
-           </td>
-         </tr>
-
-         <tr>
            <td style=3D"text-align:right;">Status</td>
            <td>NEW
            </td>
            <td>RESOLVED
+           </td>
+         </tr>
+
+         <tr>
+           <td style=3D"text-align:right;">Resolution</td>
+           <td>---
+           </td>
+           <td>MOVED
            </td>
          </tr></table>
       <p>
         <div>
             <b><a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - XVMC on nv43 class card broken with recent mes=
-a + kernel."
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D99584#c9">Comment=
- # 9</a>
+   title=3D"RESOLVED MOVED - Civilization VI makes nouveau crash on registe=
+r allocation"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D99799#c8">Comment=
+ # 8</a>
               on <a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - XVMC on nv43 class card broken with recent mes=
-a + kernel."
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D99584">bug 99584<=
+   title=3D"RESOLVED MOVED - Civilization VI makes nouveau crash on registe=
+r allocation"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D99799">bug 99799<=
 /a>
               from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
 gitlab-migration&#64;fdo.invalid" title=3D"GitLab Migration User &lt;gitlab=
@@ -167,7 +167,7 @@ closed from further activity.
 You can subscribe and participate further through the new bug through this =
 link
 to our GitLab instance: <a href=3D"https://gitlab.freedesktop.org/mesa/mesa=
-/issues/1126">https://gitlab.freedesktop.org/mesa/mesa/issues/1126</a>.</pr=
+/issues/1127">https://gitlab.freedesktop.org/mesa/mesa/issues/1127</a>.</pr=
 e>
         </div>
       </p>
@@ -183,9 +183,9 @@ e>
     </body>
 </html>=
 
---15688394890.D3C1CeB.25588--
+--15688394921.f9D9A4C2.25588--
 
---===============1163165822==
+--===============0836782619==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -195,4 +195,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============1163165822==--
+--===============0836782619==--
