@@ -1,46 +1,46 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id CDCF6B6DFC
-	for <lists+nouveau@lfdr.de>; Wed, 18 Sep 2019 22:41:19 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 89B82B6DFE
+	for <lists+nouveau@lfdr.de>; Wed, 18 Sep 2019 22:41:21 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9923A72E61;
-	Wed, 18 Sep 2019 20:41:16 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D4DE172E66;
+	Wed, 18 Sep 2019 20:41:19 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [131.252.210.165])
- by gabe.freedesktop.org (Postfix) with ESMTP id 3C52372E63
- for <nouveau@lists.freedesktop.org>; Wed, 18 Sep 2019 20:41:15 +0000 (UTC)
+ [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 6137772E64
+ for <nouveau@lists.freedesktop.org>; Wed, 18 Sep 2019 20:41:17 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 3954572168; Wed, 18 Sep 2019 20:41:15 +0000 (UTC)
+ id 5938872167; Wed, 18 Sep 2019 20:41:17 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Wed, 18 Sep 2019 20:41:15 +0000
-X-Bugzilla-Reason: AssignedTo QAcontact
-X-Bugzilla-Type: dep_changed
+Date: Wed, 18 Sep 2019 20:41:17 +0000
+X-Bugzilla-Reason: QAcontact AssignedTo
+X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
 X-Bugzilla-Product: Mesa
 X-Bugzilla-Component: Drivers/DRI/nouveau
-X-Bugzilla-Version: 11.2
+X-Bugzilla-Version: unspecified
 X-Bugzilla-Keywords: 
 X-Bugzilla-Severity: normal
 X-Bugzilla-Who: gitlab-migration@fdo.invalid
-X-Bugzilla-Status: ASSIGNED
-X-Bugzilla-Resolution: 
+X-Bugzilla-Status: RESOLVED
+X-Bugzilla-Resolution: MOVED
 X-Bugzilla-Priority: medium
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: bug_status resolution
-Message-ID: <bug-97537-8800-n1yHMho0gT@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-97537-8800@http.bugs.freedesktop.org/>
-References: <bug-97537-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-Changed-Fields: resolution bug_status
+Message-ID: <bug-92136-8800-oeo6Jip7fC@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-92136-8800@http.bugs.freedesktop.org/>
+References: <bug-92136-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 97537] nvc0 occasionally crashes in glDrawArrays in
- a multi-threaded/multi-context app
+Subject: [Nouveau] [Bug 92136] WebGL Conformance
+ conformance/textures/texture-size-limit.html -> system freeze
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -52,43 +52,51 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1143348748=="
+Content-Type: multipart/mixed; boundary="===============1439751007=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============1143348748==
-Content-Type: multipart/alternative; boundary="15688392753.49F9cCa37.25589"
+--===============1439751007==
+Content-Type: multipart/alternative; boundary="15688392771.50E838D.25589"
 Content-Transfer-Encoding: 7bit
 
 
---15688392753.49F9cCa37.25589
-Date: Wed, 18 Sep 2019 20:41:15 +0000
+--15688392771.50E838D.25589
+Date: Wed, 18 Sep 2019 20:41:17 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 
-https://bugs.freedesktop.org/show_bug.cgi?id=3D97537
-Bug 97537 depends on bug 92077, which changed state.
+https://bugs.freedesktop.org/show_bug.cgi?id=3D92136
 
-Bug 92077 Summary: nouveau graphics freeze when using KDE Plasma 5; PGR eng=
-ine fault
-https://bugs.freedesktop.org/show_bug.cgi?id=3D92077
+GitLab Migration User <gitlab-migration@fdo.invalid> changed:
 
            What    |Removed                     |Added
 ----------------------------------------------------------------------------
-             Status|NEW                         |RESOLVED
          Resolution|---                         |MOVED
+             Status|NEW                         |RESOLVED
+
+--- Comment #2 from GitLab Migration User <gitlab-migration@fdo.invalid> ---
+-- GitLab Migration Automatic Message --
+
+This bug has been migrated to freedesktop.org's GitLab instance and has been
+closed from further activity.
+
+You can subscribe and participate further through the new bug through this =
+link
+to our GitLab instance: https://gitlab.freedesktop.org/mesa/mesa/issues/108=
+5.
 
 --=20
 You are receiving this mail because:
-You are the assignee for the bug.
-You are the QA Contact for the bug.=
+You are the QA Contact for the bug.
+You are the assignee for the bug.=
 
---15688392753.49F9cCa37.25589
-Date: Wed, 18 Sep 2019 20:41:15 +0000
+--15688392771.50E838D.25589
+Date: Wed, 18 Sep 2019 20:41:17 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -99,20 +107,16 @@ Auto-Submitted: auto-generated
     <head>
       <base href=3D"https://bugs.freedesktop.org/">
     </head>
-    <body><a class=3D"bz_bug_link=20
-          bz_status_ASSIGNED "
-   title=3D"ASSIGNED - nvc0 occasionally crashes in glDrawArrays in a multi=
--threaded/multi-context app"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D97537">Bug 97537<=
-/a>
-          depends on
+    <body><span class=3D"vcard"><a class=3D"email" href=3D"mailto:gitlab-mi=
+gration&#64;fdo.invalid" title=3D"GitLab Migration User &lt;gitlab-migratio=
+n&#64;fdo.invalid&gt;"> <span class=3D"fn">GitLab Migration User</span></a>
+</span> changed
           <a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - nouveau graphics freeze when using KDE Plasma =
-5; PGR engine fault"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D92077">bug 92077<=
-/a>,
-          which changed state.
+   title=3D"RESOLVED MOVED - WebGL Conformance conformance/textures/texture=
+-size-limit.html -&gt; system freeze"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D92136">bug 92136<=
+/a>
           <br>
              <table border=3D"1" cellspacing=3D"0" cellpadding=3D"8">
           <tr>
@@ -122,21 +126,50 @@ Auto-Submitted: auto-generated
           </tr>
 
          <tr>
-           <td style=3D"text-align:right;">Status</td>
-           <td>NEW
-           </td>
-           <td>RESOLVED
-           </td>
-         </tr>
-
-         <tr>
            <td style=3D"text-align:right;">Resolution</td>
            <td>---
            </td>
            <td>MOVED
            </td>
+         </tr>
+
+         <tr>
+           <td style=3D"text-align:right;">Status</td>
+           <td>NEW
+           </td>
+           <td>RESOLVED
+           </td>
          </tr></table>
       <p>
+        <div>
+            <b><a class=3D"bz_bug_link=20
+          bz_status_RESOLVED  bz_closed"
+   title=3D"RESOLVED MOVED - WebGL Conformance conformance/textures/texture=
+-size-limit.html -&gt; system freeze"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D92136#c2">Comment=
+ # 2</a>
+              on <a class=3D"bz_bug_link=20
+          bz_status_RESOLVED  bz_closed"
+   title=3D"RESOLVED MOVED - WebGL Conformance conformance/textures/texture=
+-size-limit.html -&gt; system freeze"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D92136">bug 92136<=
+/a>
+              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
+gitlab-migration&#64;fdo.invalid" title=3D"GitLab Migration User &lt;gitlab=
+-migration&#64;fdo.invalid&gt;"> <span class=3D"fn">GitLab Migration User</=
+span></a>
+</span></b>
+        <pre>-- GitLab Migration Automatic Message --
+
+This bug has been migrated to freedesktop.org's GitLab instance and has been
+closed from further activity.
+
+You can subscribe and participate further through the new bug through this =
+link
+to our GitLab instance: <a href=3D"https://gitlab.freedesktop.org/mesa/mesa=
+/issues/1085">https://gitlab.freedesktop.org/mesa/mesa/issues/1085</a>.</pr=
+e>
+        </div>
       </p>
 
 
@@ -144,15 +177,15 @@ Auto-Submitted: auto-generated
       <span>You are receiving this mail because:</span>
 
       <ul>
-          <li>You are the assignee for the bug.</li>
           <li>You are the QA Contact for the bug.</li>
+          <li>You are the assignee for the bug.</li>
       </ul>
     </body>
 </html>=
 
---15688392753.49F9cCa37.25589--
+--15688392771.50E838D.25589--
 
---===============1143348748==
+--===============1439751007==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -162,4 +195,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============1143348748==--
+--===============1439751007==--
