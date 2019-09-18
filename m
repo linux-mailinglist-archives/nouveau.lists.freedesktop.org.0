@@ -2,30 +2,30 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3A6A0B6E73
-	for <lists+nouveau@lfdr.de>; Wed, 18 Sep 2019 22:49:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B56A7B6E74
+	for <lists+nouveau@lfdr.de>; Wed, 18 Sep 2019 22:49:16 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9B10472F9B;
-	Wed, 18 Sep 2019 20:49:09 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3379C72F9F;
+	Wed, 18 Sep 2019 20:49:15 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
  [131.252.210.165])
- by gabe.freedesktop.org (Postfix) with ESMTP id C6AAC72F93
- for <nouveau@lists.freedesktop.org>; Wed, 18 Sep 2019 20:49:08 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTP id E2F1B72F96
+ for <nouveau@lists.freedesktop.org>; Wed, 18 Sep 2019 20:49:14 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id C31E872167; Wed, 18 Sep 2019 20:49:08 +0000 (UTC)
+ id DF69172167; Wed, 18 Sep 2019 20:49:14 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Wed, 18 Sep 2019 20:49:09 +0000
-X-Bugzilla-Reason: AssignedTo QAcontact
+Date: Wed, 18 Sep 2019 20:49:15 +0000
+X-Bugzilla-Reason: QAcontact AssignedTo
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
 X-Bugzilla-Product: Mesa
 X-Bugzilla-Component: Drivers/DRI/nouveau
-X-Bugzilla-Version: 19.1
+X-Bugzilla-Version: git
 X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: normal
+X-Bugzilla-Severity: minor
 X-Bugzilla-Who: gitlab-migration@fdo.invalid
 X-Bugzilla-Status: RESOLVED
 X-Bugzilla-Resolution: MOVED
@@ -33,14 +33,14 @@ X-Bugzilla-Priority: medium
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
 X-Bugzilla-Changed-Fields: bug_status resolution
-Message-ID: <bug-111110-8800-aTq4njpozZ@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-111110-8800@http.bugs.freedesktop.org/>
-References: <bug-111110-8800@http.bugs.freedesktop.org/>
+Message-ID: <bug-111167-8800-2sGmaEJgry@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-111167-8800@http.bugs.freedesktop.org/>
+References: <bug-111167-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 111110] Nvidia quadro + nouveau : second terminal
- wake up but doesn't more display
+Subject: [Nouveau] [Bug 111167] Dividing zero by a uniform in loop header
+ causes segfault in nv50_ir::NVC0LegalizeSSA::handleDIV
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -52,25 +52,25 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1083531939=="
+Content-Type: multipart/mixed; boundary="===============0425898390=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============1083531939==
-Content-Type: multipart/alternative; boundary="15688397480.43Cf573a3.28711"
+--===============0425898390==
+Content-Type: multipart/alternative; boundary="15688397540.fF8deF.28711"
 Content-Transfer-Encoding: 7bit
 
 
---15688397480.43Cf573a3.28711
-Date: Wed, 18 Sep 2019 20:49:08 +0000
+--15688397540.fF8deF.28711
+Date: Wed, 18 Sep 2019 20:49:14 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 
-https://bugs.freedesktop.org/show_bug.cgi?id=3D111110
+https://bugs.freedesktop.org/show_bug.cgi?id=3D111167
 
 GitLab Migration User <gitlab-migration@fdo.invalid> changed:
 
@@ -79,8 +79,7 @@ GitLab Migration User <gitlab-migration@fdo.invalid> changed:
              Status|NEW                         |RESOLVED
          Resolution|---                         |MOVED
 
---- Comment #10 from GitLab Migration User <gitlab-migration@fdo.invalid> -=
---
+--- Comment #3 from GitLab Migration User <gitlab-migration@fdo.invalid> ---
 -- GitLab Migration Automatic Message --
 
 This bug has been migrated to freedesktop.org's GitLab instance and has been
@@ -89,15 +88,15 @@ closed from further activity.
 You can subscribe and participate further through the new bug through this =
 link
 to our GitLab instance: https://gitlab.freedesktop.org/mesa/mesa/issues/118=
-6.
+7.
 
 --=20
 You are receiving this mail because:
-You are the assignee for the bug.
-You are the QA Contact for the bug.=
+You are the QA Contact for the bug.
+You are the assignee for the bug.=
 
---15688397480.43Cf573a3.28711
-Date: Wed, 18 Sep 2019 20:49:08 +0000
+--15688397540.fF8deF.28711
+Date: Wed, 18 Sep 2019 20:49:14 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -114,10 +113,10 @@ n&#64;fdo.invalid&gt;"> <span class=3D"fn">GitLab Migration User</span></a>
 </span> changed
           <a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - Nvidia quadro + nouveau : second terminal wake=
- up but doesn't more display"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111110">bug 11111=
-0</a>
+   title=3D"RESOLVED MOVED - Dividing zero by a uniform in loop header caus=
+es segfault in nv50_ir::NVC0LegalizeSSA::handleDIV"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111167">bug 11116=
+7</a>
           <br>
              <table border=3D"1" cellspacing=3D"0" cellpadding=3D"8">
           <tr>
@@ -145,16 +144,16 @@ n&#64;fdo.invalid&gt;"> <span class=3D"fn">GitLab Migration User</span></a>
         <div>
             <b><a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - Nvidia quadro + nouveau : second terminal wake=
- up but doesn't more display"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111110#c10">Comme=
-nt # 10</a>
+   title=3D"RESOLVED MOVED - Dividing zero by a uniform in loop header caus=
+es segfault in nv50_ir::NVC0LegalizeSSA::handleDIV"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111167#c3">Commen=
+t # 3</a>
               on <a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - Nvidia quadro + nouveau : second terminal wake=
- up but doesn't more display"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111110">bug 11111=
-0</a>
+   title=3D"RESOLVED MOVED - Dividing zero by a uniform in loop header caus=
+es segfault in nv50_ir::NVC0LegalizeSSA::handleDIV"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111167">bug 11116=
+7</a>
               from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
 gitlab-migration&#64;fdo.invalid" title=3D"GitLab Migration User &lt;gitlab=
 -migration&#64;fdo.invalid&gt;"> <span class=3D"fn">GitLab Migration User</=
@@ -168,7 +167,7 @@ closed from further activity.
 You can subscribe and participate further through the new bug through this =
 link
 to our GitLab instance: <a href=3D"https://gitlab.freedesktop.org/mesa/mesa=
-/issues/1186">https://gitlab.freedesktop.org/mesa/mesa/issues/1186</a>.</pr=
+/issues/1187">https://gitlab.freedesktop.org/mesa/mesa/issues/1187</a>.</pr=
 e>
         </div>
       </p>
@@ -178,15 +177,15 @@ e>
       <span>You are receiving this mail because:</span>
 
       <ul>
-          <li>You are the assignee for the bug.</li>
           <li>You are the QA Contact for the bug.</li>
+          <li>You are the assignee for the bug.</li>
       </ul>
     </body>
 </html>=
 
---15688397480.43Cf573a3.28711--
+--15688397540.fF8deF.28711--
 
---===============1083531939==
+--===============0425898390==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -196,4 +195,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============1083531939==--
+--===============0425898390==--
