@@ -1,31 +1,31 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7865FB6E4A
-	for <lists+nouveau@lfdr.de>; Wed, 18 Sep 2019 22:46:43 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 69E59B6E4C
+	for <lists+nouveau@lfdr.de>; Wed, 18 Sep 2019 22:46:45 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7454F72F15;
-	Wed, 18 Sep 2019 20:46:41 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C385172F12;
+	Wed, 18 Sep 2019 20:46:43 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
  [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
- by gabe.freedesktop.org (Postfix) with ESMTP id 77B5872F15
- for <nouveau@lists.freedesktop.org>; Wed, 18 Sep 2019 20:46:40 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTP id D95F172F19
+ for <nouveau@lists.freedesktop.org>; Wed, 18 Sep 2019 20:46:42 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 7513E72167; Wed, 18 Sep 2019 20:46:40 +0000 (UTC)
+ id D62C372167; Wed, 18 Sep 2019 20:46:42 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Wed, 18 Sep 2019 20:46:40 +0000
+Date: Wed, 18 Sep 2019 20:46:43 +0000
 X-Bugzilla-Reason: AssignedTo QAcontact
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
 X-Bugzilla-Product: Mesa
 X-Bugzilla-Component: Drivers/DRI/nouveau
-X-Bugzilla-Version: 17.3
+X-Bugzilla-Version: 18.0
 X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: major
+X-Bugzilla-Severity: normal
 X-Bugzilla-Who: gitlab-migration@fdo.invalid
 X-Bugzilla-Status: RESOLVED
 X-Bugzilla-Resolution: MOVED
@@ -33,14 +33,14 @@ X-Bugzilla-Priority: medium
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
 X-Bugzilla-Changed-Fields: resolution bug_status
-Message-ID: <bug-105935-8800-biNOQOP7D4@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-105935-8800@http.bugs.freedesktop.org/>
-References: <bug-105935-8800@http.bugs.freedesktop.org/>
+Message-ID: <bug-106041-8800-N1zmYNU0o2@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-106041-8800@http.bugs.freedesktop.org/>
+References: <bug-106041-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 105935] DRI3 suddenly stopped turning on at some
- point in the past 5 months
+Subject: [Nouveau] [Bug 106041] Nvidia GeForce GTX 970M blank screen after
+ resume
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -52,25 +52,25 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1845350672=="
+Content-Type: multipart/mixed; boundary="===============2084754328=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============1845350672==
-Content-Type: multipart/alternative; boundary="15688396001.C67B.25514"
+--===============2084754328==
+Content-Type: multipart/alternative; boundary="15688396020.f541.28023"
 Content-Transfer-Encoding: 7bit
 
 
---15688396001.C67B.25514
-Date: Wed, 18 Sep 2019 20:46:40 +0000
+--15688396020.f541.28023
+Date: Wed, 18 Sep 2019 20:46:42 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 
-https://bugs.freedesktop.org/show_bug.cgi?id=3D105935
+https://bugs.freedesktop.org/show_bug.cgi?id=3D106041
 
 GitLab Migration User <gitlab-migration@fdo.invalid> changed:
 
@@ -79,7 +79,7 @@ GitLab Migration User <gitlab-migration@fdo.invalid> changed:
          Resolution|---                         |MOVED
              Status|NEW                         |RESOLVED
 
---- Comment #9 from GitLab Migration User <gitlab-migration@fdo.invalid> ---
+--- Comment #1 from GitLab Migration User <gitlab-migration@fdo.invalid> ---
 -- GitLab Migration Automatic Message --
 
 This bug has been migrated to freedesktop.org's GitLab instance and has been
@@ -88,15 +88,15 @@ closed from further activity.
 You can subscribe and participate further through the new bug through this =
 link
 to our GitLab instance: https://gitlab.freedesktop.org/mesa/mesa/issues/115=
-4.
+5.
 
 --=20
 You are receiving this mail because:
 You are the assignee for the bug.
 You are the QA Contact for the bug.=
 
---15688396001.C67B.25514
-Date: Wed, 18 Sep 2019 20:46:40 +0000
+--15688396020.f541.28023
+Date: Wed, 18 Sep 2019 20:46:42 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -113,10 +113,10 @@ n&#64;fdo.invalid&gt;"> <span class=3D"fn">GitLab Migration User</span></a>
 </span> changed
           <a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - DRI3 suddenly stopped turning on at some point=
- in the past 5 months"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D105935">bug 10593=
-5</a>
+   title=3D"RESOLVED MOVED - Nvidia GeForce GTX 970M blank screen after res=
+ume"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D106041">bug 10604=
+1</a>
           <br>
              <table border=3D"1" cellspacing=3D"0" cellpadding=3D"8">
           <tr>
@@ -144,16 +144,16 @@ n&#64;fdo.invalid&gt;"> <span class=3D"fn">GitLab Migration User</span></a>
         <div>
             <b><a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - DRI3 suddenly stopped turning on at some point=
- in the past 5 months"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D105935#c9">Commen=
-t # 9</a>
+   title=3D"RESOLVED MOVED - Nvidia GeForce GTX 970M blank screen after res=
+ume"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D106041#c1">Commen=
+t # 1</a>
               on <a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - DRI3 suddenly stopped turning on at some point=
- in the past 5 months"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D105935">bug 10593=
-5</a>
+   title=3D"RESOLVED MOVED - Nvidia GeForce GTX 970M blank screen after res=
+ume"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D106041">bug 10604=
+1</a>
               from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
 gitlab-migration&#64;fdo.invalid" title=3D"GitLab Migration User &lt;gitlab=
 -migration&#64;fdo.invalid&gt;"> <span class=3D"fn">GitLab Migration User</=
@@ -167,7 +167,7 @@ closed from further activity.
 You can subscribe and participate further through the new bug through this =
 link
 to our GitLab instance: <a href=3D"https://gitlab.freedesktop.org/mesa/mesa=
-/issues/1154">https://gitlab.freedesktop.org/mesa/mesa/issues/1154</a>.</pr=
+/issues/1155">https://gitlab.freedesktop.org/mesa/mesa/issues/1155</a>.</pr=
 e>
         </div>
       </p>
@@ -183,9 +183,9 @@ e>
     </body>
 </html>=
 
---15688396001.C67B.25514--
+--15688396020.f541.28023--
 
---===============1845350672==
+--===============2084754328==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -195,4 +195,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============1845350672==--
+--===============2084754328==--
