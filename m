@@ -1,57 +1,46 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 72FC6BBD2D
-	for <lists+nouveau@lfdr.de>; Mon, 23 Sep 2019 22:40:13 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4BC7EBBD8E
+	for <lists+nouveau@lfdr.de>; Mon, 23 Sep 2019 23:07:16 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E69E389FCC;
-	Mon, 23 Sep 2019 20:40:10 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3DC5888401;
+	Mon, 23 Sep 2019 21:07:14 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 72C5989F99
- for <nouveau@lists.freedesktop.org>; Mon, 23 Sep 2019 20:40:09 +0000 (UTC)
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id E96DC3DE31
- for <nouveau@lists.freedesktop.org>; Mon, 23 Sep 2019 20:40:08 +0000 (UTC)
-Received: by mail-wm1-f72.google.com with SMTP id s19so2951883wmj.0
- for <nouveau@lists.freedesktop.org>; Mon, 23 Sep 2019 13:40:08 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=BkDlr9WjsdtjevjPQx25uNODJGzumrq9ayOZpNhiomE=;
- b=F0OO+xiyXYleCrPQGG67ntCk4Qqa77rJZkgi7vh8/ZSZ8CECA90nLindK3cOM4AbZy
- Wyb4mYHCkM8S3MMZWN0ax70rnMpiBaKjIJtw5pVizWUva+JOG4Zt1Q7K9+G0gAYlujXO
- 5/548X4tqjyq+pbIT6ifTdL83G0U4uAs/tqUgrzt94Kavy35uflnOYxkZ4GBaydRkJ81
- Q8Fi2kJxZcI3GQkrOReerGJ72r9LcU1PcGTirgJDg1rJmqHjl4UTfIooIkjOZsEMfXad
- AMre3Dbxu/hhBsOANtV2v0XMP1s2n+jJZX49sSmATV7Fc/r3LdACVh36TZVPKyZ27+s/
- ZK5w==
-X-Gm-Message-State: APjAAAWJCgXJDKhlcfLkh9zm86gqvYggOweq4AY1Lm9XymobxS9eNvcY
- iu8tsxD9wYLiS1/GpSg5vAu2a+cy37iKMiHHjc0jNB7GwnzpghumiB0aedTbh2EAjvcCzEQhJmr
- WX1K6YAQy+tTMGFhCdOUYmDNliA==
-X-Received: by 2002:adf:f401:: with SMTP id g1mr849666wro.275.1569271207249;
- Mon, 23 Sep 2019 13:40:07 -0700 (PDT)
-X-Google-Smtp-Source: APXvYqxSeLrc9B+JHUskHyAdLYbfsOJO8DCd648ghgZiGIyDpJdbesUljGQjbdBeJpz6yEcwPESYrQ==
-X-Received: by 2002:adf:f401:: with SMTP id g1mr849656wro.275.1569271207082;
- Mon, 23 Sep 2019 13:40:07 -0700 (PDT)
-Received: from kherbst.pingu.com ([2a02:8308:b0be:6900:2d3c:bd88:58b8:6e7c])
- by smtp.gmail.com with ESMTPSA id o9sm21912918wrh.46.2019.09.23.13.40.05
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 23 Sep 2019 13:40:05 -0700 (PDT)
-From: Karol Herbst <kherbst@redhat.com>
+Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
+ [131.252.210.165])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 2945188401
+ for <nouveau@lists.freedesktop.org>; Mon, 23 Sep 2019 21:07:12 +0000 (UTC)
+Received: by culpepper.freedesktop.org (Postfix, from userid 33)
+ id 21BFF72162; Mon, 23 Sep 2019 21:07:12 +0000 (UTC)
+From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Mon, 23 Sep 2019 22:39:51 +0200
-Message-Id: <20190923203951.1652-9-kherbst@redhat.com>
-X-Mailer: git-send-email 2.21.0
-In-Reply-To: <20190923203951.1652-1-kherbst@redhat.com>
-References: <20190923203951.1652-1-kherbst@redhat.com>
+Date: Mon, 23 Sep 2019 21:07:12 +0000
+X-Bugzilla-Reason: AssignedTo
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: None
+X-Bugzilla-Product: xorg
+X-Bugzilla-Component: Driver/nouveau
+X-Bugzilla-Version: unspecified
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: critical
+X-Bugzilla-Who: lucasout@gmail.com
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: high
+X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: 
+Message-ID: <bug-100567-8800-ct11mnlQYj@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-100567-8800@http.bugs.freedesktop.org/>
+References: <bug-100567-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-Subject: [Nouveau] [PATCH 8/8] drm: abort runtime suspend if we hit an error
+Subject: [Nouveau] [Bug 100567] Nouveau system freeze fifo: SCHED_ERROR 0a
+ [CTXSW_TIMEOUT]
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -63,28 +52,112 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1299728163=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-U2lnbmVkLW9mZi1ieTogS2Fyb2wgSGVyYnN0IDxraGVyYnN0QHJlZGhhdC5jb20+Ci0tLQogZHJt
-L25vdXZlYXUvbm91dmVhdV9kcm0uYyB8IDUgKysrKysKIDEgZmlsZSBjaGFuZ2VkLCA1IGluc2Vy
-dGlvbnMoKykKCmRpZmYgLS1naXQgYS9kcm0vbm91dmVhdS9ub3V2ZWF1X2RybS5jIGIvZHJtL25v
-dXZlYXUvbm91dmVhdV9kcm0uYwppbmRleCBkY2U4ZTdmZTYuLmFkMTMxMWIyMSAxMDA2NDQKLS0t
-IGEvZHJtL25vdXZlYXUvbm91dmVhdV9kcm0uYworKysgYi9kcm0vbm91dmVhdS9ub3V2ZWF1X2Ry
-bS5jCkBAIC05MTEsNiArOTExLDcgQEAgbm91dmVhdV9wbW9wc19ydW50aW1lX3N1c3BlbmQoc3Ry
-dWN0IGRldmljZSAqZGV2KQogewogCXN0cnVjdCBwY2lfZGV2ICpwZGV2ID0gdG9fcGNpX2Rldihk
-ZXYpOwogCXN0cnVjdCBkcm1fZGV2aWNlICpkcm1fZGV2ID0gcGNpX2dldF9kcnZkYXRhKHBkZXYp
-OworCXN0cnVjdCBub3V2ZWF1X2RybSAqZHJtID0gbm91dmVhdV9kcm0oZHJtX2Rldik7CiAJaW50
-IHJldDsKIAogCWlmICghbm91dmVhdV9wbW9wc19ydW50aW1lKCkpIHsKQEAgLTkyMSw2ICs5MjIs
-MTAgQEAgbm91dmVhdV9wbW9wc19ydW50aW1lX3N1c3BlbmQoc3RydWN0IGRldmljZSAqZGV2KQog
-CWRybV9kZXYtPnN3aXRjaF9wb3dlcl9zdGF0ZSA9IERSTV9TV0lUQ0hfUE9XRVJfQ0hBTkdJTkc7
-CiAJbm91dmVhdV9zd2l0Y2hlcm9vX29wdGltdXNfZHNtKCk7CiAJcmV0ID0gbm91dmVhdV9kb19z
-dXNwZW5kKGRybV9kZXYsIHRydWUpOworCWlmIChyZXQpIHsKKwkJTlZfRVJST1IoZHJtLCAic3Vz
-cGVuZCBmYWlsZWQgd2l0aDogJWRcbiIsIHJldCk7CisJCXJldHVybiByZXQ7CisJfQogCXBjaV9z
-YXZlX3N0YXRlKHBkZXYpOwogCXBjaV9kaXNhYmxlX2RldmljZShwZGV2KTsKIAlwY2lfaWdub3Jl
-X2hvdHBsdWcocGRldik7Ci0tIAoyLjIxLjAKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fCk5vdXZlYXUgbWFpbGluZyBsaXN0Ck5vdXZlYXVAbGlzdHMuZnJl
-ZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGlu
-Zm8vbm91dmVhdQ==
+
+--===============1299728163==
+Content-Type: multipart/alternative; boundary="15692728320.c1C6a0fFa.4179"
+Content-Transfer-Encoding: 7bit
+
+
+--15692728320.c1C6a0fFa.4179
+Date: Mon, 23 Sep 2019 21:07:12 +0000
+MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+https://bugs.freedesktop.org/show_bug.cgi?id=3D100567
+
+--- Comment #39 from Lucas Ribeiro <lucasout@gmail.com> ---
+I've been using this 660Ti (NVE4) card with nouveau and tested several kern=
+els:
+4.14, 4.19 and 5.3, all with the same problem. During different usage or ga=
+mes,
+the system freezes. It is recoverable with SysRq + RE, though. It might be
+possible to SSH into the system and kill this process manually, but I'm not
+sure.
+
+This freezes happens with multi-monitor and single-monitor setups. The mach=
+ine
+has two videocards.
+
+I also would love to help with traces, if anyone has ideas.
+
+--=20
+You are receiving this mail because:
+You are the assignee for the bug.=
+
+--15692728320.c1C6a0fFa.4179
+Date: Mon, 23 Sep 2019 21:07:12 +0000
+MIME-Version: 1.0
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+<html>
+    <head>
+      <base href=3D"https://bugs.freedesktop.org/">
+    </head>
+    <body>
+      <p>
+        <div>
+            <b><a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - Nouveau system freeze fifo: SCHED_ERROR 0a [CTXSW_TIMEOUT=
+]"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D100567#c39">Comme=
+nt # 39</a>
+              on <a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - Nouveau system freeze fifo: SCHED_ERROR 0a [CTXSW_TIMEOUT=
+]"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D100567">bug 10056=
+7</a>
+              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
+lucasout&#64;gmail.com" title=3D"Lucas Ribeiro &lt;lucasout&#64;gmail.com&g=
+t;"> <span class=3D"fn">Lucas Ribeiro</span></a>
+</span></b>
+        <pre>I've been using this 660Ti (NVE4) card with nouveau and tested=
+ several kernels:
+4.14, 4.19 and 5.3, all with the same problem. During different usage or ga=
+mes,
+the system freezes. It is recoverable with SysRq + RE, though. It might be
+possible to SSH into the system and kill this process manually, but I'm not
+sure.
+
+This freezes happens with multi-monitor and single-monitor setups. The mach=
+ine
+has two videocards.
+
+I also would love to help with traces, if anyone has ideas.</pre>
+        </div>
+      </p>
+
+
+      <hr>
+      <span>You are receiving this mail because:</span>
+
+      <ul>
+          <li>You are the assignee for the bug.</li>
+      </ul>
+    </body>
+</html>=
+
+--15692728320.c1C6a0fFa.4179--
+
+--===============1299728163==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
+YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
+cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============1299728163==--
