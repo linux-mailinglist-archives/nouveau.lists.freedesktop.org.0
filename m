@@ -1,25 +1,25 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id C39FBBBF28
-	for <lists+nouveau@lfdr.de>; Tue, 24 Sep 2019 01:55:10 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 71BE4BBF2A
+	for <lists+nouveau@lfdr.de>; Tue, 24 Sep 2019 01:55:35 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7E62B89A75;
-	Mon, 23 Sep 2019 23:55:08 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E0DA66E9BA;
+	Mon, 23 Sep 2019 23:55:33 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
  [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
- by gabe.freedesktop.org (Postfix) with ESMTP id 1AE2B89A5C
- for <nouveau@lists.freedesktop.org>; Mon, 23 Sep 2019 23:55:07 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTP id 5092C6E9BA
+ for <nouveau@lists.freedesktop.org>; Mon, 23 Sep 2019 23:55:33 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 132F572162; Mon, 23 Sep 2019 23:55:07 +0000 (UTC)
+ id 4D8B272162; Mon, 23 Sep 2019 23:55:33 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Mon, 23 Sep 2019 23:55:07 +0000
+Date: Mon, 23 Sep 2019 23:55:33 +0000
 X-Bugzilla-Reason: AssignedTo
-X-Bugzilla-Type: new
+X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
 X-Bugzilla-Product: xorg
 X-Bugzilla-Component: Driver/nouveau
@@ -32,14 +32,14 @@ X-Bugzilla-Resolution:
 X-Bugzilla-Priority: not set
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: bug_id short_desc product version rep_platform
- op_sys bug_status bug_severity priority component assigned_to reporter
- qa_contact attachments.created
-Message-ID: <bug-111793-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-Changed-Fields: attachments.created
+Message-ID: <bug-111793-8800-VFLkjAs1bR@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-111793-8800@http.bugs.freedesktop.org/>
+References: <bug-111793-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 111793] New: double free or corruption (fasttop) in
+Subject: [Nouveau] [Bug 111793] double free or corruption (fasttop) in
  nouveau_bo_del
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
@@ -52,18 +52,18 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1964656850=="
+Content-Type: multipart/mixed; boundary="===============1757907978=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============1964656850==
-Content-Type: multipart/alternative; boundary="15692829070.eBA09.1445"
+--===============1757907978==
+Content-Type: multipart/alternative; boundary="15692829331.c36d.1515"
 Content-Transfer-Encoding: 7bit
 
 
---15692829070.eBA09.1445
-Date: Mon, 23 Sep 2019 23:55:07 +0000
+--15692829331.c36d.1515
+Date: Mon, 23 Sep 2019 23:55:33 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -72,37 +72,17 @@ Auto-Submitted: auto-generated
 
 https://bugs.freedesktop.org/show_bug.cgi?id=3D111793
 
-            Bug ID: 111793
-           Summary: double free or corruption (fasttop) in nouveau_bo_del
-           Product: xorg
-           Version: unspecified
-          Hardware: x86-64 (AMD64)
-                OS: Linux (All)
-            Status: NEW
-          Severity: not set
-          Priority: not set
-         Component: Driver/nouveau
-          Assignee: nouveau@lists.freedesktop.org
-          Reporter: yurys@chromium.org
-        QA Contact: xorg-team@lists.x.org
-
-Created attachment 145484
-  --> https://bugs.freedesktop.org/attachment.cgi?id=3D145484&action=3Dedit
-double free or corruption (fasttop)
-
-This happens all the time when I'm trying to load cnn.com in WebKit
-minibrowser. More details about the scenario can be found at
-https://bugs.webkit.org/show_bug.cgi?id=3D200437
-
-There is either segfault or assertion failure everytime I load the site.
-Attaching a couple of core dumps to the bug.
+--- Comment #1 from Yury Semikhatsky <yurys@chromium.org> ---
+Created attachment 145485
+  --> https://bugs.freedesktop.org/attachment.cgi?id=3D145485&action=3Dedit
+dmesg output
 
 --=20
 You are receiving this mail because:
 You are the assignee for the bug.=
 
---15692829070.eBA09.1445
-Date: Mon, 23 Sep 2019 23:55:07 +0000
+--15692829331.c36d.1515
+Date: Mon, 23 Sep 2019 23:55:33 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -113,102 +93,28 @@ Auto-Submitted: auto-generated
     <head>
       <base href=3D"https://bugs.freedesktop.org/">
     </head>
-    <body><table border=3D"1" cellspacing=3D"0" cellpadding=3D"8">
-        <tr>
-          <th>Bug ID</th>
-          <td><a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - double free or corruption (fasttop) in nouveau_bo_del"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111793">111793</a>
-          </td>
-        </tr>
-
-        <tr>
-          <th>Summary</th>
-          <td>double free or corruption (fasttop) in nouveau_bo_del
-          </td>
-        </tr>
-
-        <tr>
-          <th>Product</th>
-          <td>xorg
-          </td>
-        </tr>
-
-        <tr>
-          <th>Version</th>
-          <td>unspecified
-          </td>
-        </tr>
-
-        <tr>
-          <th>Hardware</th>
-          <td>x86-64 (AMD64)
-          </td>
-        </tr>
-
-        <tr>
-          <th>OS</th>
-          <td>Linux (All)
-          </td>
-        </tr>
-
-        <tr>
-          <th>Status</th>
-          <td>NEW
-          </td>
-        </tr>
-
-        <tr>
-          <th>Severity</th>
-          <td>not set
-          </td>
-        </tr>
-
-        <tr>
-          <th>Priority</th>
-          <td>not set
-          </td>
-        </tr>
-
-        <tr>
-          <th>Component</th>
-          <td>Driver/nouveau
-          </td>
-        </tr>
-
-        <tr>
-          <th>Assignee</th>
-          <td>nouveau&#64;lists.freedesktop.org
-          </td>
-        </tr>
-
-        <tr>
-          <th>Reporter</th>
-          <td>yurys&#64;chromium.org
-          </td>
-        </tr>
-
-        <tr>
-          <th>QA Contact</th>
-          <td>xorg-team&#64;lists.x.org
-          </td>
-        </tr></table>
+    <body>
       <p>
         <div>
-        <pre>Created <span class=3D""><a href=3D"attachment.cgi?id=3D145484=
-" name=3D"attach_145484" title=3D"double free or corruption (fasttop)">atta=
-chment 145484</a> <a href=3D"attachment.cgi?id=3D145484&amp;action=3Dedit" =
-title=3D"double free or corruption (fasttop)">[details]</a></span>
-double free or corruption (fasttop)
-
-This happens all the time when I'm trying to load cnn.com in WebKit
-minibrowser. More details about the scenario can be found at
-<a href=3D"https://bugs.webkit.org/show_bug.cgi?id=3D200437">https://bugs.w=
-ebkit.org/show_bug.cgi?id=3D200437</a>
-
-There is either segfault or assertion failure everytime I load the site.
-Attaching a couple of core dumps to the bug.</pre>
+            <b><a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - double free or corruption (fasttop) in nouveau_bo_del"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111793#c1">Commen=
+t # 1</a>
+              on <a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - double free or corruption (fasttop) in nouveau_bo_del"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111793">bug 11179=
+3</a>
+              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
+yurys&#64;chromium.org" title=3D"Yury Semikhatsky &lt;yurys&#64;chromium.or=
+g&gt;"> <span class=3D"fn">Yury Semikhatsky</span></a>
+</span></b>
+        <pre>Created <span class=3D""><a href=3D"attachment.cgi?id=3D145485=
+" name=3D"attach_145485" title=3D"dmesg output">attachment 145485</a> <a hr=
+ef=3D"attachment.cgi?id=3D145485&amp;action=3Dedit" title=3D"dmesg output">=
+[details]</a></span>
+dmesg output</pre>
         </div>
       </p>
 
@@ -222,9 +128,9 @@ Attaching a couple of core dumps to the bug.</pre>
     </body>
 </html>=
 
---15692829070.eBA09.1445--
+--15692829331.c36d.1515--
 
---===============1964656850==
+--===============1757907978==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -234,4 +140,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============1964656850==--
+--===============1757907978==--
