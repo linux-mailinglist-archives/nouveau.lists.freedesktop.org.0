@@ -1,47 +1,46 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3349BBB72C
-	for <lists+nouveau@lfdr.de>; Mon, 23 Sep 2019 16:51:30 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4C043BB79B
+	for <lists+nouveau@lfdr.de>; Mon, 23 Sep 2019 17:12:34 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5AF7A6E8E2;
-	Mon, 23 Sep 2019 14:51:28 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E1D176E887;
+	Mon, 23 Sep 2019 15:12:29 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
- by gabe.freedesktop.org (Postfix) with ESMTP id 8ACF76E939
- for <nouveau@lists.freedesktop.org>; Mon, 23 Sep 2019 14:51:26 +0000 (UTC)
-Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 87B6372162; Mon, 23 Sep 2019 14:51:26 +0000 (UTC)
-From: bugzilla-daemon@freedesktop.org
-To: nouveau@lists.freedesktop.org
-Date: Mon, 23 Sep 2019 14:51:26 +0000
-X-Bugzilla-Reason: QAcontact
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: None
-X-Bugzilla-Product: Spam
-X-Bugzilla-Component: Two
-X-Bugzilla-Version: unspecified
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: major
-X-Bugzilla-Who: a9016009@gmx.de
-X-Bugzilla-Status: RESOLVED
-X-Bugzilla-Resolution: INVALID
-X-Bugzilla-Priority: not set
-X-Bugzilla-Assigned-To: rameshpondugala@gmail.com
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: version bug_group component bug_status product
- resolution
-Message-ID: <bug-111787-8800-zTpdxz4zkg@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-111787-8800@http.bugs.freedesktop.org/>
-References: <bug-111787-8800@http.bugs.freedesktop.org/>
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
+Received: from mail-ua1-f66.google.com (mail-ua1-f66.google.com
+ [209.85.222.66])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E17FE6E840;
+ Mon, 23 Sep 2019 15:12:27 +0000 (UTC)
+Received: by mail-ua1-f66.google.com with SMTP id r19so4438963uap.9;
+ Mon, 23 Sep 2019 08:12:27 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=s3kJHh6x6PZgjBD0We03FtFePJ26YGI0fd0dSyGdyrw=;
+ b=nOczdpmQ9k5JBiIRfXVtcS27cdWI5OSTdF74vvXO1W45/0hJeiL/pUaZ/yF8KRcIId
+ Ss0Ymw3RbUgWpsBuDrgZTGt4GMc9piYdDE/9XvNAXcEzSlMAxo4jvh5MwDfhP4We8qp5
+ qiwvOvgpUbz59vhRxAWp+NpXPg9D4rsl0MnaEI0n/8t80ZSjW6jLpkYK7D/KoZj0jVFU
+ KksR//0YRysoGV/QOBl6nKW4/137tES2llCydEF/Yy1lQnEcJjRwjF/bXwRpl/2u3r22
+ WG8FqlEjshHPFBc1diy96RRriSmL9+kVGxh/v7giEb1VK1i8mMn+mvwvtZNiRyuMgriM
+ 9iUg==
+X-Gm-Message-State: APjAAAX43eXj3FdJovSrYZ/i0wLADnn21PytrsdBqKBVTQMVg0IHeJdK
+ IBUSYVMKecvQV6WXbs6mFoyewBuz1najNxo2x0A=
+X-Google-Smtp-Source: APXvYqzQoQmYenWT7/Rp/GfofyPGwYSQdRq84aMIVrUQrSCxufEIPREpZK2n9BbCiTar8xtgEzovOQ3o2DCwEH89QN4=
+X-Received: by 2002:a9f:21f6:: with SMTP id 109mr15199844uac.109.1569251546830; 
+ Mon, 23 Sep 2019 08:12:26 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 111787] reverse engineered nvidia 3d driver not
- working
+References: <1569242880-182878-1-git-send-email-hjc@rock-chips.com>
+ <1569242880-182878-3-git-send-email-hjc@rock-chips.com>
+In-Reply-To: <1569242880-182878-3-git-send-email-hjc@rock-chips.com>
+From: Ilia Mirkin <imirkin@alum.mit.edu>
+Date: Mon, 23 Sep 2019 11:12:15 -0400
+Message-ID: <CAKb7Uvgo=93HxGX9F9BvReKbPpbQRozztk0_+GXKqZ3PydCHsA@mail.gmail.com>
+To: Sandy Huang <hjc@rock-chips.com>
+Subject: Re: [Nouveau] [PATCH 13/36] drm/nouveau: use bpp instead of cpp for
+ drm_format_info
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -53,164 +52,80 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0444764035=="
+Cc: David Airlie <airlied@linux.ie>, nouveau <nouveau@lists.freedesktop.org>,
+ LKML <linux-kernel@vger.kernel.org>,
+ dri-devel <dri-devel@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>,
+ Daniel Vetter <daniel@ffwll.ch>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-
---===============0444764035==
-Content-Type: multipart/alternative; boundary="15692502862.1aefD9.22322"
-Content-Transfer-Encoding: 7bit
-
-
---15692502862.1aefD9.22322
-Date: Mon, 23 Sep 2019 14:51:26 +0000
-MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-https://bugs.freedesktop.org/show_bug.cgi?id=3D111787
-
-Andre Klapper <a9016009@gmx.de> changed:
-
-           What    |Removed                     |Added
-----------------------------------------------------------------------------
-            Version|19.0                        |unspecified
-              Group|                            |spam
-          Component|Drivers/DRI/nouveau         |Two
-             Status|NEW                         |RESOLVED
-            Product|Mesa                        |Spam
-         Resolution|---                         |INVALID
-
---- Comment #1 from Andre Klapper <a9016009@gmx.de> ---
-Go away and test somewhere else.
-
---=20
-You are receiving this mail because:
-You are the QA Contact for the bug.=
-
---15692502862.1aefD9.22322
-Date: Mon, 23 Sep 2019 14:51:26 +0000
-MIME-Version: 1.0
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-<html>
-    <head>
-      <base href=3D"https://bugs.freedesktop.org/">
-    </head>
-    <body><span class=3D"vcard"><a class=3D"email" href=3D"mailto:a9016009&=
-#64;gmx.de" title=3D"Andre Klapper &lt;a9016009&#64;gmx.de&gt;"> <span clas=
-s=3D"fn">Andre Klapper</span></a>
-</span> changed
-          <a class=3D"bz_bug_link=20
-          bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED INVALID - reverse engineered nvidia 3d driver not work=
-ing"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111787">bug 11178=
-7</a>
-          <br>
-             <table border=3D"1" cellspacing=3D"0" cellpadding=3D"8">
-          <tr>
-            <th>What</th>
-            <th>Removed</th>
-            <th>Added</th>
-          </tr>
-
-         <tr>
-           <td style=3D"text-align:right;">Version</td>
-           <td>19.0
-           </td>
-           <td>unspecified
-           </td>
-         </tr>
-
-         <tr>
-           <td style=3D"text-align:right;">Group</td>
-           <td>
-               &nbsp;
-           </td>
-           <td>spam
-           </td>
-         </tr>
-
-         <tr>
-           <td style=3D"text-align:right;">Component</td>
-           <td>Drivers/DRI/nouveau
-           </td>
-           <td>Two
-           </td>
-         </tr>
-
-         <tr>
-           <td style=3D"text-align:right;">Status</td>
-           <td>NEW
-           </td>
-           <td>RESOLVED
-           </td>
-         </tr>
-
-         <tr>
-           <td style=3D"text-align:right;">Product</td>
-           <td>Mesa
-           </td>
-           <td>Spam
-           </td>
-         </tr>
-
-         <tr>
-           <td style=3D"text-align:right;">Resolution</td>
-           <td>---
-           </td>
-           <td>INVALID
-           </td>
-         </tr></table>
-      <p>
-        <div>
-            <b><a class=3D"bz_bug_link=20
-          bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED INVALID - reverse engineered nvidia 3d driver not work=
-ing"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111787#c1">Commen=
-t # 1</a>
-              on <a class=3D"bz_bug_link=20
-          bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED INVALID - reverse engineered nvidia 3d driver not work=
-ing"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111787">bug 11178=
-7</a>
-              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
-a9016009&#64;gmx.de" title=3D"Andre Klapper &lt;a9016009&#64;gmx.de&gt;"> <=
-span class=3D"fn">Andre Klapper</span></a>
-</span></b>
-        <pre>Go away and test somewhere else.</pre>
-        </div>
-      </p>
-
-
-      <hr>
-      <span>You are receiving this mail because:</span>
-
-      <ul>
-          <li>You are the QA Contact for the bug.</li>
-      </ul>
-    </body>
-</html>=
-
---15692502862.1aefD9.22322--
-
---===============0444764035==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
-YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
-cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
-
---===============0444764035==--
+T24gTW9uLCBTZXAgMjMsIDIwMTkgYXQgODo1NiBBTSBTYW5keSBIdWFuZyA8aGpjQHJvY2stY2hp
+cHMuY29tPiB3cm90ZToKPgo+IGNwcFtCeXRlUGVyUGxhbmVdIGNhbid0IGRlc2NyaWJlIHRoZSAx
+MGJpdCBkYXRhIGZvcm1hdCBjb3JyZWN0bHksCj4gU28gd2UgdXNlIGJwcFtCaXRQZXJQbGFuZV0g
+dG8gaW5zdGVhZCBjcHAuCj4KPiBTaWduZWQtb2ZmLWJ5OiBTYW5keSBIdWFuZyA8aGpjQHJvY2st
+Y2hpcHMuY29tPgo+IC0tLQo+ICBkcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9kaXNwbnYwNC9jcnRj
+LmMgICAgIHwgNyArKysrLS0tCj4gIGRyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L2Rpc3BudjUwL2Jh
+c2U1MDdjLmMgfCA0ICsrLS0KPiAgZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvZGlzcG52NTAvb3Zs
+eTUwN2UuYyB8IDIgKy0KPiAgMyBmaWxlcyBjaGFuZ2VkLCA3IGluc2VydGlvbnMoKyksIDYgZGVs
+ZXRpb25zKC0pCj4KPiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvZGlzcG52
+MDQvY3J0Yy5jIGIvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvZGlzcG52MDQvY3J0Yy5jCj4gaW5k
+ZXggZjIyZjAxMC4uNTlkMmYwNyAxMDA2NDQKPiAtLS0gYS9kcml2ZXJzL2dwdS9kcm0vbm91dmVh
+dS9kaXNwbnYwNC9jcnRjLmMKPiArKysgYi9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9kaXNwbnYw
+NC9jcnRjLmMKPiBAQCAtODc0LDExICs4NzQsMTIgQEAgbnYwNF9jcnRjX2RvX21vZGVfc2V0X2Jh
+c2Uoc3RydWN0IGRybV9jcnRjICpjcnRjLAo+Cj4gICAgICAgICAvKiBVcGRhdGUgdGhlIGZyYW1l
+YnVmZmVyIGxvY2F0aW9uLiAqLwo+ICAgICAgICAgcmVncC0+ZmJfc3RhcnQgPSBudl9jcnRjLT5m
+Yi5vZmZzZXQgJiB+MzsKPiAtICAgICAgIHJlZ3AtPmZiX3N0YXJ0ICs9ICh5ICogZHJtX2ZiLT5w
+aXRjaGVzWzBdKSArICh4ICogZHJtX2ZiLT5mb3JtYXQtPmNwcFswXSk7Cj4gKyAgICAgICByZWdw
+LT5mYl9zdGFydCArPSAoeSAqIGRybV9mYi0+cGl0Y2hlc1swXSkgKwo+ICsgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgKHggKiBkcm1fZmItPmZvcm1hdC0+YnBwWzBdIC8gOCk7Cj4gICAg
+ICAgICBudl9zZXRfY3J0Y19iYXNlKGRldiwgbnZfY3J0Yy0+aW5kZXgsIHJlZ3AtPmZiX3N0YXJ0
+KTsKPgo+ICAgICAgICAgLyogVXBkYXRlIHRoZSBhcmJpdHJhdGlvbiBwYXJhbWV0ZXJzLiAqLwo+
+IC0gICAgICAgbm91dmVhdV9jYWxjX2FyYihkZXYsIGNydGMtPm1vZGUuY2xvY2ssIGRybV9mYi0+
+Zm9ybWF0LT5jcHBbMF0gKiA4LAo+ICsgICAgICAgbm91dmVhdV9jYWxjX2FyYihkZXYsIGNydGMt
+Pm1vZGUuY2xvY2ssIGRybV9mYi0+Zm9ybWF0LT5icHBbMF0sCj4gICAgICAgICAgICAgICAgICAg
+ICAgICAgICZhcmJfYnVyc3QsICZhcmJfbHdtKTsKPgo+ICAgICAgICAgcmVncC0+Q1JUQ1tOVl9D
+SU9fQ1JFX0ZGX0lOREVYXSA9IGFyYl9idXJzdDsKPiBAQCAtMTIzOCw3ICsxMjM5LDcgQEAgbnYw
+NF9jcnRjX3BhZ2VfZmxpcChzdHJ1Y3QgZHJtX2NydGMgKmNydGMsIHN0cnVjdCBkcm1fZnJhbWVi
+dWZmZXIgKmZiLAo+Cj4gICAgICAgICAvKiBJbml0aWFsaXplIGEgcGFnZSBmbGlwIHN0cnVjdCAq
+Lwo+ICAgICAgICAgKnMgPSAoc3RydWN0IG52MDRfcGFnZV9mbGlwX3N0YXRlKQo+IC0gICAgICAg
+ICAgICAgICB7IHsgfSwgZXZlbnQsIGNydGMsIGZiLT5mb3JtYXQtPmNwcFswXSAqIDgsIGZiLT5w
+aXRjaGVzWzBdLAo+ICsgICAgICAgICAgICAgICB7IHsgfSwgZXZlbnQsIGNydGMsIGZiLT5mb3Jt
+YXQtPmJwcFswXSwgZmItPnBpdGNoZXNbMF0sCj4gICAgICAgICAgICAgICAgICAgbmV3X2JvLT5i
+by5vZmZzZXQgfTsKPgo+ICAgICAgICAgLyogS2VlcCB2YmxhbmtzIG9uIGR1cmluZyBmbGlwLCBm
+b3IgdGhlIHRhcmdldCBjcnRjIG9mIHRoaXMgZmxpcCAqLwo+IGRpZmYgLS1naXQgYS9kcml2ZXJz
+L2dwdS9kcm0vbm91dmVhdS9kaXNwbnY1MC9iYXNlNTA3Yy5jIGIvZHJpdmVycy9ncHUvZHJtL25v
+dXZlYXUvZGlzcG52NTAvYmFzZTUwN2MuYwo+IGluZGV4IGQ1ZTI5NWMuLjU5ODgzYmQwIDEwMDY0
+NAo+IC0tLSBhL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L2Rpc3BudjUwL2Jhc2U1MDdjLmMKPiAr
+KysgYi9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9kaXNwbnY1MC9iYXNlNTA3Yy5jCj4gQEAgLTE5
+MCwxMiArMTkwLDEyIEBAIGJhc2U1MDdjX2FjcXVpcmUoc3RydWN0IG52NTBfd25kdyAqd25kdywg
+c3RydWN0IG52NTBfd25kd19hdG9tICphc3l3LAo+ICAgICAgICAgICAgICAgICByZXR1cm4gcmV0
+Owo+Cj4gICAgICAgICBpZiAoIXduZHctPmZ1bmMtPmlsdXQpIHsKPiAtICAgICAgICAgICAgICAg
+aWYgKChhc3loLT5iYXNlLmNwcCAhPSAxKSBeIChmYi0+Zm9ybWF0LT5jcHBbMF0gIT0gMSkpCj4g
+KyAgICAgICAgICAgICAgIGlmIChhc3loLT5iYXNlLmNwcCAhPSAxIF4gZmItPmZvcm1hdC0+YnBw
+WzBdICE9IDgpCgpQbGVhc2UgbGVhdmUgdGhlIHBhcmVucyBpbi4gRXZlbiBpZiBpdCB3b3JrcyBv
+dXQgdG8gdGhlIHNhbWUgdGhpbmcKKGRvbid0IGtub3cpLCBeIHZzICE9IG9yZGVyaW5nIGlzbid0
+IGZyZXNoIGluIG1hbnkgcGVvcGxlJ3MgbWluZHMKKG1pbmUgaW5jbHVkZWQpLgoKPiAgICAgICAg
+ICAgICAgICAgICAgICAgICBhc3loLT5zdGF0ZS5jb2xvcl9tZ210X2NoYW5nZWQgPSB0cnVlOwo+
+ICAgICAgICAgfQo+Cj4gICAgICAgICBhc3loLT5iYXNlLmRlcHRoID0gZmItPmZvcm1hdC0+ZGVw
+dGg7Cj4gLSAgICAgICBhc3loLT5iYXNlLmNwcCA9IGZiLT5mb3JtYXQtPmNwcFswXTsKPiArICAg
+ICAgIGFzeWgtPmJhc2UuY3BwID0gZmItPmZvcm1hdC0+YnBwWzBdIC8gODsKPiAgICAgICAgIGFz
+eWgtPmJhc2UueCA9IGFzeXctPnN0YXRlLnNyYy54MSA+PiAxNjsKPiAgICAgICAgIGFzeWgtPmJh
+c2UueSA9IGFzeXctPnN0YXRlLnNyYy55MSA+PiAxNjsKPiAgICAgICAgIGFzeWgtPmJhc2UudyA9
+IGFzeXctPnN0YXRlLmZiLT53aWR0aDsKPiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL25v
+dXZlYXUvZGlzcG52NTAvb3ZseTUwN2UuYyBiL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L2Rpc3Bu
+djUwL292bHk1MDdlLmMKPiBpbmRleCBjYzQxNzY2Li5jNmMyZTBiIDEwMDY0NAo+IC0tLSBhL2Ry
+aXZlcnMvZ3B1L2RybS9ub3V2ZWF1L2Rpc3BudjUwL292bHk1MDdlLmMKPiArKysgYi9kcml2ZXJz
+L2dwdS9kcm0vbm91dmVhdS9kaXNwbnY1MC9vdmx5NTA3ZS5jCj4gQEAgLTEzNSw3ICsxMzUsNyBA
+QCBvdmx5NTA3ZV9hY3F1aXJlKHN0cnVjdCBudjUwX3duZHcgKnduZHcsIHN0cnVjdCBudjUwX3du
+ZHdfYXRvbSAqYXN5dywKPiAgICAgICAgIGlmIChyZXQpCj4gICAgICAgICAgICAgICAgIHJldHVy
+biByZXQ7Cj4KPiAtICAgICAgIGFzeWgtPm92bHkuY3BwID0gZmItPmZvcm1hdC0+Y3BwWzBdOwo+
+ICsgICAgICAgYXN5aC0+b3ZseS5jcHAgPSBmYi0+Zm9ybWF0LT5icHBbMF0gLyA4Owo+ICAgICAg
+ICAgcmV0dXJuIDA7Cj4gIH0KPgo+IC0tCj4gMi43LjQKPgo+Cj4KPiBfX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwo+IGRyaS1kZXZlbCBtYWlsaW5nIGxpc3QK
+PiBkcmktZGV2ZWxAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCj4gaHR0cHM6Ly9saXN0cy5mcmVlZGVz
+a3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9kcmktZGV2ZWwKX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBtYWlsaW5nIGxpc3QKTm91dmVhdUBs
+aXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1h
+bi9saXN0aW5mby9ub3V2ZWF1
