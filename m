@@ -2,41 +2,41 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 50D97BCD93
-	for <lists+nouveau@lfdr.de>; Tue, 24 Sep 2019 18:47:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1AC42BCDB4
+	for <lists+nouveau@lfdr.de>; Tue, 24 Sep 2019 18:49:56 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5EEF16EA9C;
-	Tue, 24 Sep 2019 16:47:39 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 33D5E6EA56;
+	Tue, 24 Sep 2019 16:49:53 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0EF9A6EA8B;
- Tue, 24 Sep 2019 16:47:38 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 48F516EA50;
+ Tue, 24 Sep 2019 16:49:52 +0000 (UTC)
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id E8DB220673;
- Tue, 24 Sep 2019 16:47:36 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 3D5BD21971;
+ Tue, 24 Sep 2019 16:49:51 +0000 (UTC)
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Tue, 24 Sep 2019 12:45:22 -0400
-Message-Id: <20190924164549.27058-43-sashal@kernel.org>
+Date: Tue, 24 Sep 2019 12:48:28 -0400
+Message-Id: <20190924164847.27780-31-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20190924164549.27058-1-sashal@kernel.org>
-References: <20190924164549.27058-1-sashal@kernel.org>
+In-Reply-To: <20190924164847.27780-1-sashal@kernel.org>
+References: <20190924164847.27780-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=kernel.org; s=default; t=1569343657;
+ d=kernel.org; s=default; t=1569343792;
  bh=xnovLF+3uh2WwoA52FYSiy8zjjoMSiF+mmojNkCbgjQ=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=b/BP3fwns5wEeGwubLKxMgVosRRw8RKtLurfFXTRafDMpG8aPv2K35slqEEwM6KQG
- DN1hwgciWOgOugx3UR5FQTWTtk7FDdTSbNTCsn5uSjYC2WmD26dQLVNWoiFgPj6Bvu
- Ln775SvcZVWRd1HqGKhPmtsHZkWHwbNwtKLxSWvk=
-Subject: [Nouveau] [PATCH AUTOSEL 5.2 43/70] drm/nouveau/volt: Fix for some
+ b=wagG87v4g9pTJqBxynBcKlllWJn/sz7SqItoactpvosaMxqSVdVup8T/HrvpI5XHb
+ hg1EvSueyTuoPo6jENUVB8SfZUncGz9JDMHd2RlkhrB5wg9aRx+EiTi46zfh86Z4ly
+ EvHzSZNc0Y5EVJDB2lLwIr0yTfqa/9FmVANx4U8g=
+Subject: [Nouveau] [PATCH AUTOSEL 4.19 31/50] drm/nouveau/volt: Fix for some
  cards having 0 maximum voltage
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
