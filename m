@@ -2,45 +2,54 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id DA6A0BF97B
-	for <lists+nouveau@lfdr.de>; Thu, 26 Sep 2019 20:44:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3051EBFB14
+	for <lists+nouveau@lfdr.de>; Thu, 26 Sep 2019 23:44:34 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 570A16EDD8;
-	Thu, 26 Sep 2019 18:44:30 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 2E5086EB12;
+	Thu, 26 Sep 2019 21:44:32 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
- by gabe.freedesktop.org (Postfix) with ESMTP id 6AF5B6EDDC
- for <nouveau@lists.freedesktop.org>; Thu, 26 Sep 2019 18:44:29 +0000 (UTC)
-Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 67FE772162; Thu, 26 Sep 2019 18:44:29 +0000 (UTC)
-From: bugzilla-daemon@freedesktop.org
-To: nouveau@lists.freedesktop.org
-Date: Thu, 26 Sep 2019 18:44:29 +0000
-X-Bugzilla-Reason: AssignedTo
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: None
-X-Bugzilla-Product: xorg
-X-Bugzilla-Component: Driver/nouveau
-X-Bugzilla-Version: 7.7 (2012.06)
-X-Bugzilla-Keywords: regression
-X-Bugzilla-Severity: major
-X-Bugzilla-Who: maris.nartiss@gmail.com
-X-Bugzilla-Status: NEW
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: high
-X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: cc attachments.created
-Message-ID: <bug-108615-8800-cf3yWf0QtU@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-108615-8800@http.bugs.freedesktop.org/>
-References: <bug-108615-8800@http.bugs.freedesktop.org/>
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
+Received: from mail-ua1-x92c.google.com (mail-ua1-x92c.google.com
+ [IPv6:2607:f8b0:4864:20::92c])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 069556EB12;
+ Thu, 26 Sep 2019 21:44:30 +0000 (UTC)
+Received: by mail-ua1-x92c.google.com with SMTP id k24so1283057uag.10;
+ Thu, 26 Sep 2019 14:44:30 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=2VtMv+VSNh6HHfIJ2Y/iSuqqoT+LLaE8R1CJELxWo8o=;
+ b=TF3SJxnOknAtAFbsu0xResAgjXe4mwff7TYu4ko9MxMX9J36ADHdFF1pBDMaOQBZri
+ b5xdpEV5IfMUwOBbw7Rh2CKqirmeL+hc/jBIQW/cYPjHMBvPiy8fCmOfkk1ij3Gn4ZTp
+ 0MtIM5GHA72JD0Sg7MNjeR1dA0LmVvnw/cpmrUJJv7jJXhFeZd0CMUXFMzH9dkvhWkTk
+ mQIy9EZz5id1InQmXuiQB0JbJgx7ASpKFEPfO7Xt6anjofAzQJTcNyKpcYEZfXGFyN1K
+ tZMub9P/CZPH6IiIORKfdgXtelzMAKw4/8KsQKPMBziF7Mc8+LvArHkMxIZW0yIkjhyN
+ 5gZA==
+X-Gm-Message-State: APjAAAX5byZyUNHieRk4Ht/uCMegA3YWtO3p25BRB5qvkHrlIVGO/CUN
+ YD1zkvGcjd/KsqRYFPVR/xaHxklwYMNtiwYdsIo=
+X-Google-Smtp-Source: APXvYqzGEghfwM43/y5s/ikRPGSPPulfUUYMMGkH7TZpvDdxSoEjzgKmUbs0k7wIBLiIYGzF+L10qUOm9z2/mHmbpw8=
+X-Received: by 2002:ab0:5514:: with SMTP id t20mr2614206uaa.35.1569534269931; 
+ Thu, 26 Sep 2019 14:44:29 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 108615] [NVE7] changing resolution causes blank
- screen
+References: <ec6739a5-af3a-0aeb-fdae-dd11d6b2ec1f@gmail.com>
+In-Reply-To: <ec6739a5-af3a-0aeb-fdae-dd11d6b2ec1f@gmail.com>
+From: Ben Skeggs <skeggsb@gmail.com>
+Date: Fri, 27 Sep 2019 07:44:19 +1000
+Message-ID: <CACAvsv7jwLeY04SyaGjPcRN-ZPaGdVUUY6tC5q33kSsdwJumdg@mail.gmail.com>
+To: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=2VtMv+VSNh6HHfIJ2Y/iSuqqoT+LLaE8R1CJELxWo8o=;
+ b=FNKRadrXUEQQpAIWl1l5hQzOQttwn5Vd727spe68lWvkBMK1qt97xboxU60ZWgtK7U
+ EvalyEDWH61s/3kmJAZoCSf49ewNaQR2/9q2+jNoO0tzwrffFmqcb7Nh6Idg/ZoblRIN
+ 533rIS7rB8wtnkp2mAiLPgorT+HzyQayfZD+XOrfVMjYLWVKVos5G5MSvjmYf/7kEVf/
+ 2J6eWKINeNwFYNP/TD4B0gjya59322xJkVxZNYl1j9j4RUHtWiHUYCB5g2xTrtp+9PmC
+ tXwOeqiRep270EHb4Z8BqEObl7j2RyHdxKJtfqg8EQnErsM9OWyA21TDdhmM1qpA2Nsd
+ gLlQ==
+Subject: Re: [Nouveau] Is Nouveau really using the io_reserve_lru?
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -52,155 +61,28 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0120968533=="
+Cc: Dave Airlie <airlied@linux.ie>, nouveau <nouveau@lists.freedesktop.org>,
+ "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
+ Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-
---===============0120968533==
-Content-Type: multipart/alternative; boundary="15695234693.Adf752Bce.17896"
-Content-Transfer-Encoding: 7bit
-
-
---15695234693.Adf752Bce.17896
-Date: Thu, 26 Sep 2019 18:44:29 +0000
-MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-https://bugs.freedesktop.org/show_bug.cgi?id=3D108615
-
-Maris Nartiss <maris.nartiss@gmail.com> changed:
-
-           What    |Removed                     |Added
-----------------------------------------------------------------------------
-                 CC|                            |maris.nartiss@gmail.com
-
---- Comment #8 from Maris Nartiss <maris.nartiss@gmail.com> ---
-Created attachment 145527
-  --> https://bugs.freedesktop.org/attachment.cgi?id=3D145527&action=3Dedit
-Kernel log with a switch from native to lower resolution
-
-Phil Turmel =E2=80=93 I am not certain if your issue is the same as the rep=
-orter has.
-I do have exactly same symptoms =E2=80=93 after changing resolution to not =
-native, I
-get black screen with backlight on. It is not an DE or WM issue, as I was
-testing with bare xinit session. If there are other outputs active, they st=
-ill
-show picture just fine (split screen or clone mode). Thus, as jbytecoder wr=
-ote,
-X is still fine, just nothing goes to particular output device.
-
-G98M (NV50 family) card tested with kernel 5.0 and 5.3.
-
-Attached dmesg was generated after a reboot, stopping sddm, starting xinit
-session and changing resolution to 1024x768 (native is 1440x900).
-
---=20
-You are receiving this mail because:
-You are the assignee for the bug.=
-
---15695234693.Adf752Bce.17896
-Date: Thu, 26 Sep 2019 18:44:29 +0000
-MIME-Version: 1.0
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-<html>
-    <head>
-      <base href=3D"https://bugs.freedesktop.org/">
-    </head>
-    <body><span class=3D"vcard"><a class=3D"email" href=3D"mailto:maris.nar=
-tiss&#64;gmail.com" title=3D"Maris Nartiss &lt;maris.nartiss&#64;gmail.com&=
-gt;"> <span class=3D"fn">Maris Nartiss</span></a>
-</span> changed
-          <a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - [NVE7] changing resolution causes blank screen"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D108615">bug 10861=
-5</a>
-          <br>
-             <table border=3D"1" cellspacing=3D"0" cellpadding=3D"8">
-          <tr>
-            <th>What</th>
-            <th>Removed</th>
-            <th>Added</th>
-          </tr>
-
-         <tr>
-           <td style=3D"text-align:right;">CC</td>
-           <td>
-               &nbsp;
-           </td>
-           <td>maris.nartiss&#64;gmail.com
-           </td>
-         </tr></table>
-      <p>
-        <div>
-            <b><a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - [NVE7] changing resolution causes blank screen"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D108615#c8">Commen=
-t # 8</a>
-              on <a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - [NVE7] changing resolution causes blank screen"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D108615">bug 10861=
-5</a>
-              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
-maris.nartiss&#64;gmail.com" title=3D"Maris Nartiss &lt;maris.nartiss&#64;g=
-mail.com&gt;"> <span class=3D"fn">Maris Nartiss</span></a>
-</span></b>
-        <pre>Created <span class=3D""><a href=3D"attachment.cgi?id=3D145527=
-" name=3D"attach_145527" title=3D"Kernel log with a switch from native to l=
-ower resolution">attachment 145527</a> <a href=3D"attachment.cgi?id=3D14552=
-7&amp;action=3Dedit" title=3D"Kernel log with a switch from native to lower=
- resolution">[details]</a></span>
-Kernel log with a switch from native to lower resolution
-
-Phil Turmel =E2=80=93 I am not certain if your issue is the same as the rep=
-orter has.
-I do have exactly same symptoms =E2=80=93 after changing resolution to not =
-native, I
-get black screen with backlight on. It is not an DE or WM issue, as I was
-testing with bare xinit session. If there are other outputs active, they st=
-ill
-show picture just fine (split screen or clone mode). Thus, as jbytecoder wr=
-ote,
-X is still fine, just nothing goes to particular output device.
-
-G98M (NV50 family) card tested with kernel 5.0 and 5.3.
-
-Attached dmesg was generated after a reboot, stopping sddm, starting xinit
-session and changing resolution to 1024x768 (native is 1440x900).</pre>
-        </div>
-      </p>
-
-
-      <hr>
-      <span>You are receiving this mail because:</span>
-
-      <ul>
-          <li>You are the assignee for the bug.</li>
-      </ul>
-    </body>
-</html>=
-
---15695234693.Adf752Bce.17896--
-
---===============0120968533==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
-YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
-cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
-
---===============0120968533==--
+T24gVHVlLCAyNCBTZXAgMjAxOSBhdCAyMjoxOSwgQ2hyaXN0aWFuIEvDtm5pZwo8Y2tvZW5pZy5s
+ZWljaHR6dW1lcmtlbkBnbWFpbC5jb20+IHdyb3RlOgo+Cj4gSGkgZ3V5cywKPgo+IHdoaWxlIHdv
+cmtpbmcgdGhyb3VnaCBtb3JlIG9sZCBUVE0gZnVuY3Rpb25hbGl0eSBJIHN0dW1ibGVkIG92ZXIg
+dGhlCj4gaW9fcmVzZXJ2ZV9scnUuCj4KPiBCYXNpYyBpZGVhIGlzIHRoYXQgd2hlbiB0aGlzIGZs
+YWcgaXMgc2V0IHRoZSBkcml2ZXItPmlvX21lbV9yZXNlcnZlKCkKPiBjYWxsYmFjayBjYW4gcmV0
+dXJuIC1FQUdBSU4gcmVzdWx0aW5nIGluIHVubWFwcGluZyBvZiBvdGhlciBCT3MuCj4KPiBCdXQg
+Tm91dmVhdSBkb2Vzbid0IHNlZW0gdG8gcmV0dXJuIC1FQUdBSU4gaW4gdGhlIGNhbGwgcGF0aCBv
+Zgo+IGlvX21lbV9yZXNlcnZlIGFueXdoZXJlLgpJIGJlbGlldmUgdGhpcyBpcyBhIGJ1ZyBpbiBO
+b3V2ZWF1LiAgV2UgKnNob3VsZCogYmUgcmV0dXJuaW5nIC1FQUdBSU4KaWYgd2UgZmFpbCB0byBm
+aW5kIHNwYWNlIGluIEJBUjEgdG8gbWFwIHRoZSBCTyBpbnRvLgoKQmVuLgo+Cj4gU28gaXMgdGhp
+cyB1bnVzZWQgb3IgYW0gSSBtaXNzaW5nIHNvbWV0aGluZz8KPgo+IFJlZ2FyZHMsCj4gQ2hyaXN0
+aWFuLgo+IF9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCj4g
+Tm91dmVhdSBtYWlsaW5nIGxpc3QKPiBOb3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwo+IGh0
+dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vbm91dmVhdQpfX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpOb3V2ZWF1IG1haWxp
+bmcgbGlzdApOb3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVk
+ZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL25vdXZlYXU=
