@@ -2,54 +2,45 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3051EBFB14
-	for <lists+nouveau@lfdr.de>; Thu, 26 Sep 2019 23:44:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 825A1C01C4
+	for <lists+nouveau@lfdr.de>; Fri, 27 Sep 2019 11:07:13 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2E5086EB12;
-	Thu, 26 Sep 2019 21:44:32 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1E17B6EEC1;
+	Fri, 27 Sep 2019 09:07:11 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ua1-x92c.google.com (mail-ua1-x92c.google.com
- [IPv6:2607:f8b0:4864:20::92c])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 069556EB12;
- Thu, 26 Sep 2019 21:44:30 +0000 (UTC)
-Received: by mail-ua1-x92c.google.com with SMTP id k24so1283057uag.10;
- Thu, 26 Sep 2019 14:44:30 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=2VtMv+VSNh6HHfIJ2Y/iSuqqoT+LLaE8R1CJELxWo8o=;
- b=TF3SJxnOknAtAFbsu0xResAgjXe4mwff7TYu4ko9MxMX9J36ADHdFF1pBDMaOQBZri
- b5xdpEV5IfMUwOBbw7Rh2CKqirmeL+hc/jBIQW/cYPjHMBvPiy8fCmOfkk1ij3Gn4ZTp
- 0MtIM5GHA72JD0Sg7MNjeR1dA0LmVvnw/cpmrUJJv7jJXhFeZd0CMUXFMzH9dkvhWkTk
- mQIy9EZz5id1InQmXuiQB0JbJgx7ASpKFEPfO7Xt6anjofAzQJTcNyKpcYEZfXGFyN1K
- tZMub9P/CZPH6IiIORKfdgXtelzMAKw4/8KsQKPMBziF7Mc8+LvArHkMxIZW0yIkjhyN
- 5gZA==
-X-Gm-Message-State: APjAAAX5byZyUNHieRk4Ht/uCMegA3YWtO3p25BRB5qvkHrlIVGO/CUN
- YD1zkvGcjd/KsqRYFPVR/xaHxklwYMNtiwYdsIo=
-X-Google-Smtp-Source: APXvYqzGEghfwM43/y5s/ikRPGSPPulfUUYMMGkH7TZpvDdxSoEjzgKmUbs0k7wIBLiIYGzF+L10qUOm9z2/mHmbpw8=
-X-Received: by 2002:ab0:5514:: with SMTP id t20mr2614206uaa.35.1569534269931; 
- Thu, 26 Sep 2019 14:44:29 -0700 (PDT)
+Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
+ [131.252.210.165])
+ by gabe.freedesktop.org (Postfix) with ESMTP id B1E836EEC1
+ for <nouveau@lists.freedesktop.org>; Fri, 27 Sep 2019 09:07:09 +0000 (UTC)
+Received: by culpepper.freedesktop.org (Postfix, from userid 33)
+ id AEEB172162; Fri, 27 Sep 2019 09:07:09 +0000 (UTC)
+From: bugzilla-daemon@freedesktop.org
+To: nouveau@lists.freedesktop.org
+Date: Fri, 27 Sep 2019 09:07:09 +0000
+X-Bugzilla-Reason: AssignedTo
+X-Bugzilla-Type: new
+X-Bugzilla-Watch-Reason: None
+X-Bugzilla-Product: xorg
+X-Bugzilla-Component: Driver/nouveau
+X-Bugzilla-Version: unspecified
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: normal
+X-Bugzilla-Who: brianclinkenbeard@protonmail.com
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: not set
+X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: bug_id short_desc product version rep_platform
+ op_sys bug_status bug_severity priority component assigned_to reporter
+ qa_contact attachments.created
+Message-ID: <bug-111841-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-References: <ec6739a5-af3a-0aeb-fdae-dd11d6b2ec1f@gmail.com>
-In-Reply-To: <ec6739a5-af3a-0aeb-fdae-dd11d6b2ec1f@gmail.com>
-From: Ben Skeggs <skeggsb@gmail.com>
-Date: Fri, 27 Sep 2019 07:44:19 +1000
-Message-ID: <CACAvsv7jwLeY04SyaGjPcRN-ZPaGdVUUY6tC5q33kSsdwJumdg@mail.gmail.com>
-To: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=2VtMv+VSNh6HHfIJ2Y/iSuqqoT+LLaE8R1CJELxWo8o=;
- b=FNKRadrXUEQQpAIWl1l5hQzOQttwn5Vd727spe68lWvkBMK1qt97xboxU60ZWgtK7U
- EvalyEDWH61s/3kmJAZoCSf49ewNaQR2/9q2+jNoO0tzwrffFmqcb7Nh6Idg/ZoblRIN
- 533rIS7rB8wtnkp2mAiLPgorT+HzyQayfZD+XOrfVMjYLWVKVos5G5MSvjmYf/7kEVf/
- 2J6eWKINeNwFYNP/TD4B0gjya59322xJkVxZNYl1j9j4RUHtWiHUYCB5g2xTrtp+9PmC
- tXwOeqiRep270EHb4Z8BqEObl7j2RyHdxKJtfqg8EQnErsM9OWyA21TDdhmM1qpA2Nsd
- gLlQ==
-Subject: Re: [Nouveau] Is Nouveau really using the io_reserve_lru?
+Subject: [Nouveau] [Bug 111841] New: Setting gamma or color temperature on
+ GK104 causes horizontal artifacts / flickering
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -61,28 +52,232 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Dave Airlie <airlied@linux.ie>, nouveau <nouveau@lists.freedesktop.org>,
- "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
- Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1185700456=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-T24gVHVlLCAyNCBTZXAgMjAxOSBhdCAyMjoxOSwgQ2hyaXN0aWFuIEvDtm5pZwo8Y2tvZW5pZy5s
-ZWljaHR6dW1lcmtlbkBnbWFpbC5jb20+IHdyb3RlOgo+Cj4gSGkgZ3V5cywKPgo+IHdoaWxlIHdv
-cmtpbmcgdGhyb3VnaCBtb3JlIG9sZCBUVE0gZnVuY3Rpb25hbGl0eSBJIHN0dW1ibGVkIG92ZXIg
-dGhlCj4gaW9fcmVzZXJ2ZV9scnUuCj4KPiBCYXNpYyBpZGVhIGlzIHRoYXQgd2hlbiB0aGlzIGZs
-YWcgaXMgc2V0IHRoZSBkcml2ZXItPmlvX21lbV9yZXNlcnZlKCkKPiBjYWxsYmFjayBjYW4gcmV0
-dXJuIC1FQUdBSU4gcmVzdWx0aW5nIGluIHVubWFwcGluZyBvZiBvdGhlciBCT3MuCj4KPiBCdXQg
-Tm91dmVhdSBkb2Vzbid0IHNlZW0gdG8gcmV0dXJuIC1FQUdBSU4gaW4gdGhlIGNhbGwgcGF0aCBv
-Zgo+IGlvX21lbV9yZXNlcnZlIGFueXdoZXJlLgpJIGJlbGlldmUgdGhpcyBpcyBhIGJ1ZyBpbiBO
-b3V2ZWF1LiAgV2UgKnNob3VsZCogYmUgcmV0dXJuaW5nIC1FQUdBSU4KaWYgd2UgZmFpbCB0byBm
-aW5kIHNwYWNlIGluIEJBUjEgdG8gbWFwIHRoZSBCTyBpbnRvLgoKQmVuLgo+Cj4gU28gaXMgdGhp
-cyB1bnVzZWQgb3IgYW0gSSBtaXNzaW5nIHNvbWV0aGluZz8KPgo+IFJlZ2FyZHMsCj4gQ2hyaXN0
-aWFuLgo+IF9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCj4g
-Tm91dmVhdSBtYWlsaW5nIGxpc3QKPiBOb3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwo+IGh0
-dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vbm91dmVhdQpfX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpOb3V2ZWF1IG1haWxp
-bmcgbGlzdApOb3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVk
-ZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL25vdXZlYXU=
+
+--===============1185700456==
+Content-Type: multipart/alternative; boundary="15695752291.edff84.12755"
+Content-Transfer-Encoding: 7bit
+
+
+--15695752291.edff84.12755
+Date: Fri, 27 Sep 2019 09:07:09 +0000
+MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+https://bugs.freedesktop.org/show_bug.cgi?id=3D111841
+
+            Bug ID: 111841
+           Summary: Setting gamma or color temperature on GK104 causes
+                    horizontal artifacts / flickering
+           Product: xorg
+           Version: unspecified
+          Hardware: x86-64 (AMD64)
+                OS: Linux (All)
+            Status: NEW
+          Severity: normal
+          Priority: not set
+         Component: Driver/nouveau
+          Assignee: nouveau@lists.freedesktop.org
+          Reporter: brianclinkenbeard@protonmail.com
+        QA Contact: xorg-team@lists.x.org
+
+Created attachment 145545
+  --> https://bugs.freedesktop.org/attachment.cgi?id=3D145545&action=3Dedit
+dmesg log
+
+After setting the gamma or color temperature through various methods (redsh=
+ift
+-m randr, redshift -m drm, GNOME night shift on xorg or wayland) horizontal
+artifacts begin to flicker. This does not severely obscure the screen but
+appears as small lines horizontal lines flickering quickly. This notably do=
+es
+not happen using the "vidmode" method of redshift
+(https://github.com/jonls/redshift/blob/master/src/gamma-vidmode.c). I've
+tested this on multiple displays.
+
+The effect is more noticeable on darker backgrounds.
+
+Steps to reproduce:
+1) Use GK104/NVE0 on Xorg or Wayland.
+2) Try to adjust color temperature or gamma with software such as redshift =
+(-m
+randr or drm).
+
+I've attached the dmesg log, note that I am not certain the gnome-shell
+segfaults have anything to do with this issue.
+
+Kernel:
+Linux desktop 5.2.0-2-amd64 #1 SMP Debian 5.2.9-2 (2019-08-21) x86_64 GNU/L=
+inux
+
+Card:
+NVIDIA Corporation GK104 [GeForce GTX 770]
+
+--=20
+You are receiving this mail because:
+You are the assignee for the bug.=
+
+--15695752291.edff84.12755
+Date: Fri, 27 Sep 2019 09:07:09 +0000
+MIME-Version: 1.0
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+<html>
+    <head>
+      <base href=3D"https://bugs.freedesktop.org/">
+    </head>
+    <body><table border=3D"1" cellspacing=3D"0" cellpadding=3D"8">
+        <tr>
+          <th>Bug ID</th>
+          <td><a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - Setting gamma or color temperature on GK104 causes horizo=
+ntal artifacts / flickering"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111841">111841</a>
+          </td>
+        </tr>
+
+        <tr>
+          <th>Summary</th>
+          <td>Setting gamma or color temperature on GK104 causes horizontal=
+ artifacts / flickering
+          </td>
+        </tr>
+
+        <tr>
+          <th>Product</th>
+          <td>xorg
+          </td>
+        </tr>
+
+        <tr>
+          <th>Version</th>
+          <td>unspecified
+          </td>
+        </tr>
+
+        <tr>
+          <th>Hardware</th>
+          <td>x86-64 (AMD64)
+          </td>
+        </tr>
+
+        <tr>
+          <th>OS</th>
+          <td>Linux (All)
+          </td>
+        </tr>
+
+        <tr>
+          <th>Status</th>
+          <td>NEW
+          </td>
+        </tr>
+
+        <tr>
+          <th>Severity</th>
+          <td>normal
+          </td>
+        </tr>
+
+        <tr>
+          <th>Priority</th>
+          <td>not set
+          </td>
+        </tr>
+
+        <tr>
+          <th>Component</th>
+          <td>Driver/nouveau
+          </td>
+        </tr>
+
+        <tr>
+          <th>Assignee</th>
+          <td>nouveau&#64;lists.freedesktop.org
+          </td>
+        </tr>
+
+        <tr>
+          <th>Reporter</th>
+          <td>brianclinkenbeard&#64;protonmail.com
+          </td>
+        </tr>
+
+        <tr>
+          <th>QA Contact</th>
+          <td>xorg-team&#64;lists.x.org
+          </td>
+        </tr></table>
+      <p>
+        <div>
+        <pre>Created <span class=3D""><a href=3D"attachment.cgi?id=3D145545=
+" name=3D"attach_145545" title=3D"dmesg log">attachment 145545</a> <a href=
+=3D"attachment.cgi?id=3D145545&amp;action=3Dedit" title=3D"dmesg log">[deta=
+ils]</a></span>
+dmesg log
+
+After setting the gamma or color temperature through various methods (redsh=
+ift
+-m randr, redshift -m drm, GNOME night shift on xorg or wayland) horizontal
+artifacts begin to flicker. This does not severely obscure the screen but
+appears as small lines horizontal lines flickering quickly. This notably do=
+es
+not happen using the &quot;vidmode&quot; method of redshift
+(<a href=3D"https://github.com/jonls/redshift/blob/master/src/gamma-vidmode=
+.c">https://github.com/jonls/redshift/blob/master/src/gamma-vidmode.c</a>).=
+ I've
+tested this on multiple displays.
+
+The effect is more noticeable on darker backgrounds.
+
+Steps to reproduce:
+1) Use GK104/NVE0 on Xorg or Wayland.
+2) Try to adjust color temperature or gamma with software such as redshift =
+(-m
+randr or drm).
+
+I've attached the dmesg log, note that I am not certain the gnome-shell
+segfaults have anything to do with this issue.
+
+Kernel:
+Linux desktop 5.2.0-2-amd64 #1 SMP Debian 5.2.9-2 (2019-08-21) x86_64 GNU/L=
+inux
+
+Card:
+NVIDIA Corporation GK104 [GeForce GTX 770]</pre>
+        </div>
+      </p>
+
+
+      <hr>
+      <span>You are receiving this mail because:</span>
+
+      <ul>
+          <li>You are the assignee for the bug.</li>
+      </ul>
+    </body>
+</html>=
+
+--15695752291.edff84.12755--
+
+--===============1185700456==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
+YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
+cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============1185700456==--
