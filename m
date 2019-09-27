@@ -1,67 +1,46 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 37B91C0657
-	for <lists+nouveau@lfdr.de>; Fri, 27 Sep 2019 15:31:14 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id A4F83C06A1
+	for <lists+nouveau@lfdr.de>; Fri, 27 Sep 2019 15:48:27 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id BF8286E118;
-	Fri, 27 Sep 2019 13:31:10 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 179396E25D;
+	Fri, 27 Sep 2019 13:48:26 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-yw1-xc41.google.com (mail-yw1-xc41.google.com
- [IPv6:2607:f8b0:4864:20::c41])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 488BD6E112
- for <nouveau@lists.freedesktop.org>; Fri, 27 Sep 2019 13:31:09 +0000 (UTC)
-Received: by mail-yw1-xc41.google.com with SMTP id 201so874981ywn.13
- for <nouveau@lists.freedesktop.org>; Fri, 27 Sep 2019 06:31:09 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:content-transfer-encoding
- :in-reply-to:user-agent;
- bh=qYB5dsI6pw1AaiAQgGLORr8jZcoFuXEt35OZRnEbQJE=;
- b=P464+MCd9fzeZ/siMRhcp6X4MV+s0tU5EPyKnB61F/BJ+jt9sDWyV2D1MfQeUSNexQ
- ga6CoZm5zupJH2OMIYoemyltLdooCPj0dHEkGUKNbCvJOecCmJROZ67jX2eNs88c0kEh
- 6sHLnXMueDL3CO3xP/OAjOeBnYFOkgyfWwNrcXxGyojZTqanFtTlbzh1mQ+T6LgKnMnD
- 7nWIPfEmbAmyPLQZU458u7IBjuYmSftb7trzN8rLkfM1LtF9m3Vd0g66L9B9xxnw4LoK
- rMP/za835Dw3XRLlYhw4SBpF/Ru0EMhr4ejDBU6QDYWxHRHP4cW5xfEO+GWcZif74lr1
- gODA==
-X-Gm-Message-State: APjAAAVlOqYBvkzFxBJm+Zp4ykNgdbgwJSPJjbVIfpp00mLglxOHMUHV
- top8n5dIR7b1UUp+2682kIfEOQ==
-X-Google-Smtp-Source: APXvYqw3UKtWx/8c/EBfd5V9ouBNMey7S0YbJ4vTvGTIpB37MvicbXYHHJf33/MDE3Ugyqe73rcYXg==
-X-Received: by 2002:a81:b619:: with SMTP id u25mr2536514ywh.407.1569591068361; 
- Fri, 27 Sep 2019 06:31:08 -0700 (PDT)
-Received: from localhost ([2620:0:1013:11:89c6:2139:5435:371d])
- by smtp.gmail.com with ESMTPSA id q128sm588863ywg.108.2019.09.27.06.31.07
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 27 Sep 2019 06:31:07 -0700 (PDT)
-Date: Fri, 27 Sep 2019 09:31:07 -0400
-From: Sean Paul <sean@poorly.run>
-To: Lyude Paul <lyude@redhat.com>
-Message-ID: <20190927133107.GQ218215@art_vandelay>
-References: <20190903204645.25487-1-lyude@redhat.com>
- <20190903204645.25487-4-lyude@redhat.com>
- <20190925181644.GD218215@art_vandelay>
- <e9a2638663549d86779002e3616fc2e89f9c7028.camel@redhat.com>
+Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
+ [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
+ by gabe.freedesktop.org (Postfix) with ESMTP id E46636E24E
+ for <nouveau@lists.freedesktop.org>; Fri, 27 Sep 2019 13:48:24 +0000 (UTC)
+Received: by culpepper.freedesktop.org (Postfix, from userid 33)
+ id E1D2272162; Fri, 27 Sep 2019 13:48:24 +0000 (UTC)
+From: bugzilla-daemon@freedesktop.org
+To: nouveau@lists.freedesktop.org
+Date: Fri, 27 Sep 2019 13:48:24 +0000
+X-Bugzilla-Reason: AssignedTo
+X-Bugzilla-Type: new
+X-Bugzilla-Watch-Reason: None
+X-Bugzilla-Product: xorg
+X-Bugzilla-Component: Driver/nouveau
+X-Bugzilla-Version: unspecified
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: not set
+X-Bugzilla-Who: jesaenh@gmail.com
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: not set
+X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: bug_id short_desc product version rep_platform
+ op_sys bug_status bug_severity priority component assigned_to reporter
+ qa_contact
+Message-ID: <bug-111843-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <e9a2638663549d86779002e3616fc2e89f9c7028.camel@redhat.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=poorly.run; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:content-transfer-encoding:in-reply-to
- :user-agent;
- bh=qYB5dsI6pw1AaiAQgGLORr8jZcoFuXEt35OZRnEbQJE=;
- b=Yyt03/qoCfrtPDoth18a8czanIbv2L3Ll5m0IzUPyqx0JJ8qu+A0NSh+iZbMJPkTjJ
- laNHMv43J25MMZ74oFbXbS4XoO1qcbo+Ncw5IpELdoDnptMoFyJl0AlakhnyavsxFsH3
- 6X64Fwj78gGMIIBdr1CbektKHuzIDH3lFCoyvRjT3VcoNq1KFAs0KCJP9wJ5pmtI39mB
- onszTycFbbm0mPmap/EWN3HF58VC3WLB0n4RQnloCYG7EBnA9Uxsb9tCD48BTPkcJ8R7
- JV+LnYvy2oiNLx1yfWNG/qa8We7aPAxZWCBKc0CNB9zOymeEB/Jnd2Z4B7Jf93kZdimV
- GkuA==
-Subject: Re: [Nouveau] [PATCH v2 03/27] drm/dp_mst: Destroy MSTBs
- asynchronously
+Subject: [Nouveau] [Bug 111843] New: Resume fails after suspend with nouveau
+ and Gtx 1050 ti
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -73,254 +52,419 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Maxime Ripard <mripard@kernel.org>, David Airlie <airlied@linux.ie>,
- nouveau@lists.freedesktop.org, Imre Deak <imre.deak@intel.com>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- linux-kernel@vger.kernel.org, amd-gfx@lists.freedesktop.org,
- Harry Wentland <hwentlan@amd.com>,
- Ville =?iso-8859-1?Q?Syrj=E4l=E4?= <ville.syrjala@linux.intel.com>,
- dri-devel@lists.freedesktop.org, Daniel Vetter <daniel@ffwll.ch>,
- Sean Paul <sean@poorly.run>, Juston Li <juston.li@intel.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============2024294343=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-T24gV2VkLCBTZXAgMjUsIDIwMTkgYXQgMDQ6MDg6MjJQTSAtMDQwMCwgTHl1ZGUgUGF1bCB3cm90
-ZToKPiBPbiBXZWQsIDIwMTktMDktMjUgYXQgMTQ6MTYgLTA0MDAsIFNlYW4gUGF1bCB3cm90ZToK
-PiA+IE9uIFR1ZSwgU2VwIDAzLCAyMDE5IGF0IDA0OjQ1OjQxUE0gLTA0MDAsIEx5dWRlIFBhdWwg
-d3JvdGU6Cj4gPiA+IFdoZW4gcmVwcm9iaW5nIGFuIE1TVCB0b3BvbG9neSBkdXJpbmcgcmVzdW1l
-LCB3ZSBoYXZlIHRvIGFjY291bnQgZm9yIHRoZQo+ID4gPiBmYWN0IHRoYXQgd2hpbGUgd2Ugd2Vy
-ZSBzdXNwZW5kZWQgaXQncyBwb3NzaWJsZSB0aGF0IG1zdGJzIG1heSBoYXZlIGJlZW4KPiA+ID4g
-cmVtb3ZlZCBmcm9tIGFueSBwb3J0cyBpbiB0aGUgdG9wb2xvZ3kuIFNpbmNlIGl0ZXJhdGluZyBk
-b3dud2FyZHMgaW4gdGhlCj4gPiA+IHRvcG9sb2d5IHJlcXVpcmVzIHRoYXQgd2UgaG9sZCAmbWdy
-LT5sb2NrLCBkZXN0cm95aW5nIE1TVEJzIGZyb20gdGhpcwo+ID4gPiBjb250ZXh0IHdvdWxkIHJl
-c3VsdCBpbiBhdHRlbXB0aW5nIHRvIGxvY2sgJm1nci0+bG9jayBhIHNlY29uZCB0aW1lIGFuZAo+
-ID4gPiBkZWFkbG9ja2luZy4KPiA+ID4gCj4gPiA+IFNvLCBmaXggdGhpcyBieSBmaXJzdCBtb3Zp
-bmcgZGVzdHJ1Y3Rpb24gb2YgTVNUQnMgaW50bwo+ID4gPiBkZXN0cm95X2Nvbm5lY3Rvcl93b3Jr
-LCB0aGVuIHJlbmFtZSBkZXN0cm95X2Nvbm5lY3Rvcl93b3JrIGFuZCBmcmllbmRzCj4gPiA+IHRv
-IHJlZmxlY3QgdGhhdCB0aGV5IG5vdyBkZXN0cm95IGJvdGggcG9ydHMgYW5kIG1zdGJzLgo+ID4g
-PiAKPiA+ID4gQ2hhbmdlcyBzaW5jZSB2MToKPiA+ID4gKiBzL2Rlc3Ryb3lfY29ubmVjdG9yX2xp
-c3QvZGVzdHJveV9wb3J0X2xpc3QvCj4gPiA+ICAgcy9jb25uZWN0b3JfZGVzdHJveV9sb2NrL2Rl
-bGF5ZWRfZGVzdHJveV9sb2NrLwo+ID4gPiAgIHMvY29ubmVjdG9yX2Rlc3Ryb3lfd29yay9kZWxh
-eWVkX2Rlc3Ryb3lfd29yay8KPiA+ID4gICBzL2RybV9kcF9maW5pc2hfZGVzdHJveV9icmFuY2hf
-ZGV2aWNlL2RybV9kcF9kZWxheWVkX2Rlc3Ryb3lfbXN0Yi8KPiA+ID4gICBzL2RybV9kcF9maW5p
-c2hfZGVzdHJveV9wb3J0L2RybV9kcF9kZWxheWVkX2Rlc3Ryb3lfcG9ydC8KPiA+ID4gICAtIGRh
-bnZldAo+ID4gPiAqIFVzZSB0d28gbG9vcHMgaW4gZHJtX2RwX2RlbGF5ZWRfZGVzdHJveV93b3Jr
-KCkgLSBkYW52ZXQKPiA+ID4gKiBCZXR0ZXIgZXhwbGFpbiB3aHkgd2UgbmVlZCB0byBkbyB0aGlz
-IC0gZGFudmV0Cj4gPiA+ICogVXNlIGNhbmNlbF93b3JrX3N5bmMoKSBpbnN0ZWFkIG9mIGZsdXNo
-X3dvcmsoKSAtIGZsdXNoX3dvcmsoKSBkb2Vzbid0Cj4gPiA+ICAgYWNjb3VudCBmb3Igd29yayBy
-ZXF1ZWluZwo+ID4gPiAKPiA+ID4gQ2M6IEp1c3RvbiBMaSA8anVzdG9uLmxpQGludGVsLmNvbT4K
-PiA+ID4gQ2M6IEltcmUgRGVhayA8aW1yZS5kZWFrQGludGVsLmNvbT4KPiA+ID4gQ2M6IFZpbGxl
-IFN5cmrDpGzDpCA8dmlsbGUuc3lyamFsYUBsaW51eC5pbnRlbC5jb20+Cj4gPiA+IENjOiBIYXJy
-eSBXZW50bGFuZCA8aHdlbnRsYW5AYW1kLmNvbT4KPiA+ID4gQ2M6IERhbmllbCBWZXR0ZXIgPGRh
-bmllbEBmZndsbC5jaD4KPiA+ID4gU2lnbmVkLW9mZi1ieTogTHl1ZGUgUGF1bCA8bHl1ZGVAcmVk
-aGF0LmNvbT4KPiA+IAo+ID4gVG9vayBtZSBhIHdoaWxlIHRvIGdyb2sgdGhpcywgYW5kIEknbSBz
-dGlsbCBub3QgMTAwJSBjb25maWRlbnQgbXkgbWVudGFsCj4gPiBtb2RlbAo+ID4gaXMgY29ycmVj
-dCwgc28gcGxlYXNlIGJlYXIgd2l0aCBtZSB3aGlsZSBJIGFzayBzaWxseSBxdWVzdGlvbnMgOikK
-PiA+IAo+ID4gTm93IHRoYXQgdGhlIGRlc3Ryb3kgaXMgZGVsYXllZCwgYW5kIHRoZSBwb3J0IHJl
-bWFpbnMgaW4gdGhlIHRvcG9sb2d5LCBpcyBpdAo+ID4gcG9zc2libGUgd2Ugd2lsbCB1bmRlcmZs
-b3cgdGhlIHRvcG9sb2d5IGtyZWYgYnkgY2FsbGluZyBwdXRfbXN0YiBtdWx0aXBsZQo+ID4gdGlt
-ZXM/Cj4gPiBJdCBsb29rcyBsaWtlIHRoYXQgd291bGQgcmVzdWx0IGluIGEgV0FSTiBmcm9tIHJl
-ZmNvdW50LmMsIGFuZCB3b3VsZG4ndCBjYWxsCj4gPiB0aGUKPiA+IGRlc3Ryb3kgZnVuY3Rpb24g
-bXVsdGlwbGUgdGltZXMsIHNvIHRoYXQncyBuaWNlIDopCj4gPiAKPiA+IFNpbWlsYXJseSwgaXMg
-dGhlcmUgYW55IGRlZmVuc2UgYWdhaW5zdCBjYWxsaW5nIGdldF9tc3RiKCkgYmV0d2VlbiBkZXN0
-cm95KCkKPiA+IGFuZAo+ID4gdGhlIGRlbGF5ZWQgZGVzdHJveSB3b3JrZXIgcnVubmluZz8KPiA+
-IAo+IEdvb2QgcXVlc3Rpb24hIFRoZXJlJ3Mgb25seSBvbmUgaW5zdGFuY2Ugd2hlcmUgd2UgdW5j
-b25kaXRpb25hbGx5IGdyYWIgYW4gTVNUQgo+IHJlZiwgZHJtX2RwX21zdF90b3BvbG9neV9tZ3Jf
-c2V0X21zdCgpLCBhbmQgaW4gdGhhdCBsb2NhdGlvbiB3ZSdyZSBndWFyYW50ZWVkCj4gdG8gYmUg
-dGhlIG9ubHkgb25lIHdpdGggYWNjZXNzIHRvIHRoYXQgbXN0YiB1bnRpbCB3ZSBkcm9wICZtZ3It
-PmxvY2suCj4gRXZlcnl3aGVyZSBlbHNlIHdlIHVzZSBkcm1fZHBfbXN0X3RvcG9sb2d5X3RyeV9n
-ZXRfbXN0YigpLCB3aGljaCB1c2VzCj4ga3JlZl9nZXRfdW5sZXNzX3plcm8oKSB0byBwcm90ZWN0
-IGFnYWluc3QgdGhhdCBraW5kIG9mIHNpdHVhdGlvbiAoYW5kIGZvcmNlcwo+IHRoZSBjYWxsZXIg
-dG8gY2hlY2sgd2l0aCBfX211c3RfY2hlY2spCgpBd2Vzb21lLCB0aGFua3MgZm9yIHRoZSBicmVh
-a2Rvd24hCgoKUmV2aWV3ZWQtYnk6IFNlYW4gUGF1bCA8c2VhbkBwb29ybHkucnVuPgoKCj4gCj4g
-PiBTZWFuCj4gPiAKPiA+ID4gLS0tCj4gPiA+ICBkcml2ZXJzL2dwdS9kcm0vZHJtX2RwX21zdF90
-b3BvbG9neS5jIHwgMTYyICsrKysrKysrKysrKysrKysrLS0tLS0tLS0tCj4gPiA+ICBpbmNsdWRl
-L2RybS9kcm1fZHBfbXN0X2hlbHBlci5oICAgICAgIHwgIDI2ICsrKy0tCj4gPiA+ICAyIGZpbGVz
-IGNoYW5nZWQsIDEyNyBpbnNlcnRpb25zKCspLCA2MSBkZWxldGlvbnMoLSkKPiA+ID4gCj4gPiA+
-IGRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0vZHJtX2RwX21zdF90b3BvbG9neS5jCj4gPiA+
-IGIvZHJpdmVycy9ncHUvZHJtL2RybV9kcF9tc3RfdG9wb2xvZ3kuYwo+ID4gPiBpbmRleCAzMDU0
-ZWM2MjI1MDYuLjczOGYyNjBkNGIxNSAxMDA2NDQKPiA+ID4gLS0tIGEvZHJpdmVycy9ncHUvZHJt
-L2RybV9kcF9tc3RfdG9wb2xvZ3kuYwo+ID4gPiArKysgYi9kcml2ZXJzL2dwdS9kcm0vZHJtX2Rw
-X21zdF90b3BvbG9neS5jCj4gPiA+IEBAIC0xMTEzLDM0ICsxMTEzLDE3IEBAIHN0YXRpYyB2b2lk
-Cj4gPiA+IGRybV9kcF9kZXN0cm95X21zdF9icmFuY2hfZGV2aWNlKHN0cnVjdCBrcmVmICprcmVm
-KQo+ID4gPiAgCXN0cnVjdCBkcm1fZHBfbXN0X2JyYW5jaCAqbXN0YiA9Cj4gPiA+ICAJCWNvbnRh
-aW5lcl9vZihrcmVmLCBzdHJ1Y3QgZHJtX2RwX21zdF9icmFuY2gsIHRvcG9sb2d5X2tyZWYpOwo+
-ID4gPiAgCXN0cnVjdCBkcm1fZHBfbXN0X3RvcG9sb2d5X21nciAqbWdyID0gbXN0Yi0+bWdyOwo+
-ID4gPiAtCXN0cnVjdCBkcm1fZHBfbXN0X3BvcnQgKnBvcnQsICp0bXA7Cj4gPiA+IC0JYm9vbCB3
-YWtlX3R4ID0gZmFsc2U7Cj4gPiA+ICAKPiA+ID4gLQltdXRleF9sb2NrKCZtZ3ItPmxvY2spOwo+
-ID4gPiAtCWxpc3RfZm9yX2VhY2hfZW50cnlfc2FmZShwb3J0LCB0bXAsICZtc3RiLT5wb3J0cywg
-bmV4dCkgewo+ID4gPiAtCQlsaXN0X2RlbCgmcG9ydC0+bmV4dCk7Cj4gPiA+IC0JCWRybV9kcF9t
-c3RfdG9wb2xvZ3lfcHV0X3BvcnQocG9ydCk7Cj4gPiA+IC0JfQo+ID4gPiAtCW11dGV4X3VubG9j
-aygmbWdyLT5sb2NrKTsKPiA+ID4gLQo+ID4gPiAtCS8qIGRyb3AgYW55IHR4IHNsb3RzIG1zZyAq
-Lwo+ID4gPiAtCW11dGV4X2xvY2soJm1zdGItPm1nci0+cWxvY2spOwo+ID4gPiAtCWlmIChtc3Ri
-LT50eF9zbG90c1swXSkgewo+ID4gPiAtCQltc3RiLT50eF9zbG90c1swXS0+c3RhdGUgPSBEUk1f
-RFBfU0lERUJBTkRfVFhfVElNRU9VVDsKPiA+ID4gLQkJbXN0Yi0+dHhfc2xvdHNbMF0gPSBOVUxM
-Owo+ID4gPiAtCQl3YWtlX3R4ID0gdHJ1ZTsKPiA+ID4gLQl9Cj4gPiA+IC0JaWYgKG1zdGItPnR4
-X3Nsb3RzWzFdKSB7Cj4gPiA+IC0JCW1zdGItPnR4X3Nsb3RzWzFdLT5zdGF0ZSA9IERSTV9EUF9T
-SURFQkFORF9UWF9USU1FT1VUOwo+ID4gPiAtCQltc3RiLT50eF9zbG90c1sxXSA9IE5VTEw7Cj4g
-PiA+IC0JCXdha2VfdHggPSB0cnVlOwo+ID4gPiAtCX0KPiA+ID4gLQltdXRleF91bmxvY2soJm1z
-dGItPm1nci0+cWxvY2spOwo+ID4gPiArCUlOSVRfTElTVF9IRUFEKCZtc3RiLT5kZXN0cm95X25l
-eHQpOwo+ID4gPiAgCj4gPiA+IC0JaWYgKHdha2VfdHgpCj4gPiA+IC0JCXdha2VfdXBfYWxsKCZt
-c3RiLT5tZ3ItPnR4X3dhaXRxKTsKPiA+ID4gLQo+ID4gPiAtCWRybV9kcF9tc3RfcHV0X21zdGJf
-bWFsbG9jKG1zdGIpOwo+ID4gPiArCS8qCj4gPiA+ICsJICogVGhpcyBjYW4gZ2V0IGNhbGxlZCB1
-bmRlciBtZ3ItPm11dGV4LCBzbyB3ZSBuZWVkIHRvIHBlcmZvcm0gdGhlCj4gPiA+ICsJICogYWN0
-dWFsIGRlc3RydWN0aW9uIG9mIHRoZSBtc3RiIGluIGFub3RoZXIgd29ya2VyCj4gPiA+ICsJICov
-Cj4gPiA+ICsJbXV0ZXhfbG9jaygmbWdyLT5kZWxheWVkX2Rlc3Ryb3lfbG9jayk7Cj4gPiA+ICsJ
-bGlzdF9hZGQoJm1zdGItPmRlc3Ryb3lfbmV4dCwgJm1nci0+ZGVzdHJveV9icmFuY2hfZGV2aWNl
-X2xpc3QpOwo+ID4gPiArCW11dGV4X3VubG9jaygmbWdyLT5kZWxheWVkX2Rlc3Ryb3lfbG9jayk7
-Cj4gPiA+ICsJc2NoZWR1bGVfd29yaygmbWdyLT5kZWxheWVkX2Rlc3Ryb3lfd29yayk7Cj4gPiA+
-ICB9Cj4gPiA+ICAKPiA+ID4gIC8qKgo+ID4gPiBAQCAtMTI1NSwxMCArMTIzOCwxMCBAQCBzdGF0
-aWMgdm9pZCBkcm1fZHBfZGVzdHJveV9wb3J0KHN0cnVjdCBrcmVmICprcmVmKQo+ID4gPiAgCQkJ
-ICogd2UgbWlnaHQgYmUgaG9sZGluZyB0aGUgbW9kZV9jb25maWcubXV0ZXgKPiA+ID4gIAkJCSAq
-IGZyb20gYW4gRURJRCByZXRyaWV2YWwgKi8KPiA+ID4gIAo+ID4gPiAtCQkJbXV0ZXhfbG9jaygm
-bWdyLT5kZXN0cm95X2Nvbm5lY3Rvcl9sb2NrKTsKPiA+ID4gLQkJCWxpc3RfYWRkKCZwb3J0LT5u
-ZXh0LCAmbWdyLT5kZXN0cm95X2Nvbm5lY3Rvcl9saXN0KTsKPiA+ID4gLQkJCW11dGV4X3VubG9j
-aygmbWdyLT5kZXN0cm95X2Nvbm5lY3Rvcl9sb2NrKTsKPiA+ID4gLQkJCXNjaGVkdWxlX3dvcmso
-Jm1nci0+ZGVzdHJveV9jb25uZWN0b3Jfd29yayk7Cj4gPiA+ICsJCQltdXRleF9sb2NrKCZtZ3It
-PmRlbGF5ZWRfZGVzdHJveV9sb2NrKTsKPiA+ID4gKwkJCWxpc3RfYWRkKCZwb3J0LT5uZXh0LCAm
-bWdyLT5kZXN0cm95X3BvcnRfbGlzdCk7Cj4gPiA+ICsJCQltdXRleF91bmxvY2soJm1nci0+ZGVs
-YXllZF9kZXN0cm95X2xvY2spOwo+ID4gPiArCQkJc2NoZWR1bGVfd29yaygmbWdyLT5kZWxheWVk
-X2Rlc3Ryb3lfd29yayk7Cj4gPiA+ICAJCQlyZXR1cm47Cj4gPiA+ICAJCX0KPiA+ID4gIAkJLyog
-bm8gbmVlZCB0byBjbGVhbiB1cCB2Y3BpCj4gPiA+IEBAIC0yNzkyLDcgKzI3NzUsNyBAQCB2b2lk
-IGRybV9kcF9tc3RfdG9wb2xvZ3lfbWdyX3N1c3BlbmQoc3RydWN0Cj4gPiA+IGRybV9kcF9tc3Rf
-dG9wb2xvZ3lfbWdyICptZ3IpCj4gPiA+ICAJCQkgICBEUF9NU1RfRU4gfCBEUF9VUFNUUkVBTV9J
-U19TUkMpOwo+ID4gPiAgCW11dGV4X3VubG9jaygmbWdyLT5sb2NrKTsKPiA+ID4gIAlmbHVzaF93
-b3JrKCZtZ3ItPndvcmspOwo+ID4gPiAtCWZsdXNoX3dvcmsoJm1nci0+ZGVzdHJveV9jb25uZWN0
-b3Jfd29yayk7Cj4gPiA+ICsJZmx1c2hfd29yaygmbWdyLT5kZWxheWVkX2Rlc3Ryb3lfd29yayk7
-Cj4gPiA+ICB9Cj4gPiA+ICBFWFBPUlRfU1lNQk9MKGRybV9kcF9tc3RfdG9wb2xvZ3lfbWdyX3N1
-c3BlbmQpOwo+ID4gPiAgCj4gPiA+IEBAIC0zNzQwLDM0ICszNzIzLDEwNCBAQCBzdGF0aWMgdm9p
-ZCBkcm1fZHBfdHhfd29yayhzdHJ1Y3Qgd29ya19zdHJ1Y3QKPiA+ID4gKndvcmspCj4gPiA+ICAJ
-bXV0ZXhfdW5sb2NrKCZtZ3ItPnFsb2NrKTsKPiA+ID4gIH0KPiA+ID4gIAo+ID4gPiAtc3RhdGlj
-IHZvaWQgZHJtX2RwX2Rlc3Ryb3lfY29ubmVjdG9yX3dvcmsoc3RydWN0IHdvcmtfc3RydWN0ICp3
-b3JrKQo+ID4gPiArc3RhdGljIGlubGluZSB2b2lkCj4gPiA+ICtkcm1fZHBfZGVsYXllZF9kZXN0
-cm95X3BvcnQoc3RydWN0IGRybV9kcF9tc3RfcG9ydCAqcG9ydCkKPiA+ID4gIHsKPiA+ID4gLQlz
-dHJ1Y3QgZHJtX2RwX21zdF90b3BvbG9neV9tZ3IgKm1nciA9IGNvbnRhaW5lcl9vZih3b3JrLCBz
-dHJ1Y3QKPiA+ID4gZHJtX2RwX21zdF90b3BvbG9neV9tZ3IsIGRlc3Ryb3lfY29ubmVjdG9yX3dv
-cmspOwo+ID4gPiAtCXN0cnVjdCBkcm1fZHBfbXN0X3BvcnQgKnBvcnQ7Cj4gPiA+IC0JYm9vbCBz
-ZW5kX2hvdHBsdWcgPSBmYWxzZTsKPiA+ID4gKwlwb3J0LT5tZ3ItPmNicy0+ZGVzdHJveV9jb25u
-ZWN0b3IocG9ydC0+bWdyLCBwb3J0LT5jb25uZWN0b3IpOwo+ID4gPiArCj4gPiA+ICsJZHJtX2Rw
-X3BvcnRfdGVhcmRvd25fcGR0KHBvcnQsIHBvcnQtPnBkdCk7Cj4gPiA+ICsJcG9ydC0+cGR0ID0g
-RFBfUEVFUl9ERVZJQ0VfTk9ORTsKPiA+ID4gKwo+ID4gPiArCWRybV9kcF9tc3RfcHV0X3BvcnRf
-bWFsbG9jKHBvcnQpOwo+ID4gPiArfQo+ID4gPiArCj4gPiA+ICtzdGF0aWMgaW5saW5lIHZvaWQK
-PiA+ID4gK2RybV9kcF9kZWxheWVkX2Rlc3Ryb3lfbXN0YihzdHJ1Y3QgZHJtX2RwX21zdF9icmFu
-Y2ggKm1zdGIpCj4gPiA+ICt7Cj4gPiA+ICsJc3RydWN0IGRybV9kcF9tc3RfdG9wb2xvZ3lfbWdy
-ICptZ3IgPSBtc3RiLT5tZ3I7Cj4gPiA+ICsJc3RydWN0IGRybV9kcF9tc3RfcG9ydCAqcG9ydCwg
-KnRtcDsKPiA+ID4gKwlib29sIHdha2VfdHggPSBmYWxzZTsKPiA+ID4gKwo+ID4gPiArCW11dGV4
-X2xvY2soJm1nci0+bG9jayk7Cj4gPiA+ICsJbGlzdF9mb3JfZWFjaF9lbnRyeV9zYWZlKHBvcnQs
-IHRtcCwgJm1zdGItPnBvcnRzLCBuZXh0KSB7Cj4gPiA+ICsJCWxpc3RfZGVsKCZwb3J0LT5uZXh0
-KTsKPiA+ID4gKwkJZHJtX2RwX21zdF90b3BvbG9neV9wdXRfcG9ydChwb3J0KTsKPiA+ID4gKwl9
-Cj4gPiA+ICsJbXV0ZXhfdW5sb2NrKCZtZ3ItPmxvY2spOwo+ID4gPiArCj4gPiA+ICsJLyogZHJv
-cCBhbnkgdHggc2xvdHMgbXNnICovCj4gPiA+ICsJbXV0ZXhfbG9jaygmbXN0Yi0+bWdyLT5xbG9j
-ayk7Cj4gPiA+ICsJaWYgKG1zdGItPnR4X3Nsb3RzWzBdKSB7Cj4gPiA+ICsJCW1zdGItPnR4X3Ns
-b3RzWzBdLT5zdGF0ZSA9IERSTV9EUF9TSURFQkFORF9UWF9USU1FT1VUOwo+ID4gPiArCQltc3Ri
-LT50eF9zbG90c1swXSA9IE5VTEw7Cj4gPiA+ICsJCXdha2VfdHggPSB0cnVlOwo+ID4gPiArCX0K
-PiA+ID4gKwlpZiAobXN0Yi0+dHhfc2xvdHNbMV0pIHsKPiA+ID4gKwkJbXN0Yi0+dHhfc2xvdHNb
-MV0tPnN0YXRlID0gRFJNX0RQX1NJREVCQU5EX1RYX1RJTUVPVVQ7Cj4gPiA+ICsJCW1zdGItPnR4
-X3Nsb3RzWzFdID0gTlVMTDsKPiA+ID4gKwkJd2FrZV90eCA9IHRydWU7Cj4gPiA+ICsJfQo+ID4g
-PiArCW11dGV4X3VubG9jaygmbXN0Yi0+bWdyLT5xbG9jayk7Cj4gPiA+ICsKPiA+ID4gKwlpZiAo
-d2FrZV90eCkKPiA+ID4gKwkJd2FrZV91cF9hbGwoJm1zdGItPm1nci0+dHhfd2FpdHEpOwo+ID4g
-PiArCj4gPiA+ICsJZHJtX2RwX21zdF9wdXRfbXN0Yl9tYWxsb2MobXN0Yik7Cj4gPiA+ICt9Cj4g
-PiA+ICsKPiA+ID4gK3N0YXRpYyB2b2lkIGRybV9kcF9kZWxheWVkX2Rlc3Ryb3lfd29yayhzdHJ1
-Y3Qgd29ya19zdHJ1Y3QgKndvcmspCj4gPiA+ICt7Cj4gPiA+ICsJc3RydWN0IGRybV9kcF9tc3Rf
-dG9wb2xvZ3lfbWdyICptZ3IgPQo+ID4gPiArCQljb250YWluZXJfb2Yod29yaywgc3RydWN0IGRy
-bV9kcF9tc3RfdG9wb2xvZ3lfbWdyLAo+ID4gPiArCQkJICAgICBkZWxheWVkX2Rlc3Ryb3lfd29y
-ayk7Cj4gPiA+ICsJYm9vbCBzZW5kX2hvdHBsdWcgPSBmYWxzZSwgZ29fYWdhaW47Cj4gPiA+ICsK
-PiA+ID4gIAkvKgo+ID4gPiAgCSAqIE5vdCBhIHJlZ3VsYXIgbGlzdCB0cmF2ZXJzZSBhcyB3ZSBo
-YXZlIHRvIGRyb3AgdGhlIGRlc3Ryb3kKPiA+ID4gLQkgKiBjb25uZWN0b3IgbG9jayBiZWZvcmUg
-ZGVzdHJveWluZyB0aGUgY29ubmVjdG9yLCB0byBhdm9pZCBBQi0+QkEKPiA+ID4gKwkgKiBjb25u
-ZWN0b3IgbG9jayBiZWZvcmUgZGVzdHJveWluZyB0aGUgbXN0Yi9wb3J0LCB0byBhdm9pZCBBQi0+
-QkEKPiA+ID4gIAkgKiBvcmRlcmluZyBiZXR3ZWVuIHRoaXMgbG9jayBhbmQgdGhlIGNvbmZpZyBt
-dXRleC4KPiA+ID4gIAkgKi8KPiA+ID4gLQlmb3IgKDs7KSB7Cj4gPiA+IC0JCW11dGV4X2xvY2so
-Jm1nci0+ZGVzdHJveV9jb25uZWN0b3JfbG9jayk7Cj4gPiA+IC0JCXBvcnQgPSBsaXN0X2ZpcnN0
-X2VudHJ5X29yX251bGwoJm1nci0+ZGVzdHJveV9jb25uZWN0b3JfbGlzdCwKPiA+ID4gc3RydWN0
-IGRybV9kcF9tc3RfcG9ydCwgbmV4dCk7Cj4gPiA+IC0JCWlmICghcG9ydCkgewo+ID4gPiAtCQkJ
-bXV0ZXhfdW5sb2NrKCZtZ3ItPmRlc3Ryb3lfY29ubmVjdG9yX2xvY2spOwo+ID4gPiAtCQkJYnJl
-YWs7Cj4gPiA+ICsJZG8gewo+ID4gPiArCQlnb19hZ2FpbiA9IGZhbHNlOwo+ID4gPiArCj4gPiA+
-ICsJCWZvciAoOzspIHsKPiA+ID4gKwkJCXN0cnVjdCBkcm1fZHBfbXN0X2JyYW5jaCAqbXN0YjsK
-PiA+ID4gKwo+ID4gPiArCQkJbXV0ZXhfbG9jaygmbWdyLT5kZWxheWVkX2Rlc3Ryb3lfbG9jayk7
-Cj4gPiA+ICsJCQltc3RiID0gbGlzdF9maXJzdF9lbnRyeV9vcl9udWxsKCZtZ3ItCj4gPiA+ID5k
-ZXN0cm95X2JyYW5jaF9kZXZpY2VfbGlzdCwKPiA+ID4gKwkJCQkJCQlzdHJ1Y3QKPiA+ID4gZHJt
-X2RwX21zdF9icmFuY2gsCj4gPiA+ICsJCQkJCQkJZGVzdHJveV9uZXh0KTsKPiA+ID4gKwkJCWlm
-IChtc3RiKQo+ID4gPiArCQkJCWxpc3RfZGVsKCZtc3RiLT5kZXN0cm95X25leHQpOwo+ID4gPiAr
-CQkJbXV0ZXhfdW5sb2NrKCZtZ3ItPmRlbGF5ZWRfZGVzdHJveV9sb2NrKTsKPiA+ID4gKwo+ID4g
-PiArCQkJaWYgKCFtc3RiKQo+ID4gPiArCQkJCWJyZWFrOwo+ID4gPiArCj4gPiA+ICsJCQlkcm1f
-ZHBfZGVsYXllZF9kZXN0cm95X21zdGIobXN0Yik7Cj4gPiA+ICsJCQlnb19hZ2FpbiA9IHRydWU7
-Cj4gPiA+ICAJCX0KPiA+ID4gLQkJbGlzdF9kZWwoJnBvcnQtPm5leHQpOwo+ID4gPiAtCQltdXRl
-eF91bmxvY2soJm1nci0+ZGVzdHJveV9jb25uZWN0b3JfbG9jayk7Cj4gPiA+ICAKPiA+ID4gLQkJ
-bWdyLT5jYnMtPmRlc3Ryb3lfY29ubmVjdG9yKG1nciwgcG9ydC0+Y29ubmVjdG9yKTsKPiA+ID4g
-KwkJZm9yICg7Oykgewo+ID4gPiArCQkJc3RydWN0IGRybV9kcF9tc3RfcG9ydCAqcG9ydDsKPiA+
-ID4gIAo+ID4gPiAtCQlkcm1fZHBfcG9ydF90ZWFyZG93bl9wZHQocG9ydCwgcG9ydC0+cGR0KTsK
-PiA+ID4gLQkJcG9ydC0+cGR0ID0gRFBfUEVFUl9ERVZJQ0VfTk9ORTsKPiA+ID4gKwkJCW11dGV4
-X2xvY2soJm1nci0+ZGVsYXllZF9kZXN0cm95X2xvY2spOwo+ID4gPiArCQkJcG9ydCA9IGxpc3Rf
-Zmlyc3RfZW50cnlfb3JfbnVsbCgmbWdyLQo+ID4gPiA+ZGVzdHJveV9wb3J0X2xpc3QsCj4gPiA+
-ICsJCQkJCQkJc3RydWN0Cj4gPiA+IGRybV9kcF9tc3RfcG9ydCwKPiA+ID4gKwkJCQkJCQluZXh0
-KTsKPiA+ID4gKwkJCWlmIChwb3J0KQo+ID4gPiArCQkJCWxpc3RfZGVsKCZwb3J0LT5uZXh0KTsK
-PiA+ID4gKwkJCW11dGV4X3VubG9jaygmbWdyLT5kZWxheWVkX2Rlc3Ryb3lfbG9jayk7Cj4gPiA+
-ICsKPiA+ID4gKwkJCWlmICghcG9ydCkKPiA+ID4gKwkJCQlicmVhazsKPiA+ID4gKwo+ID4gPiAr
-CQkJZHJtX2RwX2RlbGF5ZWRfZGVzdHJveV9wb3J0KHBvcnQpOwo+ID4gPiArCQkJc2VuZF9ob3Rw
-bHVnID0gdHJ1ZTsKPiA+ID4gKwkJCWdvX2FnYWluID0gdHJ1ZTsKPiA+ID4gKwkJfQo+ID4gPiAr
-CX0gd2hpbGUgKGdvX2FnYWluKTsKPiA+ID4gIAo+ID4gPiAtCQlkcm1fZHBfbXN0X3B1dF9wb3J0
-X21hbGxvYyhwb3J0KTsKPiA+ID4gLQkJc2VuZF9ob3RwbHVnID0gdHJ1ZTsKPiA+ID4gLQl9Cj4g
-PiA+ICAJaWYgKHNlbmRfaG90cGx1ZykKPiA+ID4gIAkJZHJtX2ttc19oZWxwZXJfaG90cGx1Z19l
-dmVudChtZ3ItPmRldik7Cj4gPiA+ICB9Cj4gPiA+IEBAIC0zOTU3LDEyICs0MDEwLDEzIEBAIGlu
-dCBkcm1fZHBfbXN0X3RvcG9sb2d5X21ncl9pbml0KHN0cnVjdAo+ID4gPiBkcm1fZHBfbXN0X3Rv
-cG9sb2d5X21nciAqbWdyLAo+ID4gPiAgCW11dGV4X2luaXQoJm1nci0+bG9jayk7Cj4gPiA+ICAJ
-bXV0ZXhfaW5pdCgmbWdyLT5xbG9jayk7Cj4gPiA+ICAJbXV0ZXhfaW5pdCgmbWdyLT5wYXlsb2Fk
-X2xvY2spOwo+ID4gPiAtCW11dGV4X2luaXQoJm1nci0+ZGVzdHJveV9jb25uZWN0b3JfbG9jayk7
-Cj4gPiA+ICsJbXV0ZXhfaW5pdCgmbWdyLT5kZWxheWVkX2Rlc3Ryb3lfbG9jayk7Cj4gPiA+ICAJ
-SU5JVF9MSVNUX0hFQUQoJm1nci0+dHhfbXNnX2Rvd25xKTsKPiA+ID4gLQlJTklUX0xJU1RfSEVB
-RCgmbWdyLT5kZXN0cm95X2Nvbm5lY3Rvcl9saXN0KTsKPiA+ID4gKwlJTklUX0xJU1RfSEVBRCgm
-bWdyLT5kZXN0cm95X3BvcnRfbGlzdCk7Cj4gPiA+ICsJSU5JVF9MSVNUX0hFQUQoJm1nci0+ZGVz
-dHJveV9icmFuY2hfZGV2aWNlX2xpc3QpOwo+ID4gPiAgCUlOSVRfV09SSygmbWdyLT53b3JrLCBk
-cm1fZHBfbXN0X2xpbmtfcHJvYmVfd29yayk7Cj4gPiA+ICAJSU5JVF9XT1JLKCZtZ3ItPnR4X3dv
-cmssIGRybV9kcF90eF93b3JrKTsKPiA+ID4gLQlJTklUX1dPUksoJm1nci0+ZGVzdHJveV9jb25u
-ZWN0b3Jfd29yaywKPiA+ID4gZHJtX2RwX2Rlc3Ryb3lfY29ubmVjdG9yX3dvcmspOwo+ID4gPiAr
-CUlOSVRfV09SSygmbWdyLT5kZWxheWVkX2Rlc3Ryb3lfd29yaywgZHJtX2RwX2RlbGF5ZWRfZGVz
-dHJveV93b3JrKTsKPiA+ID4gIAlpbml0X3dhaXRxdWV1ZV9oZWFkKCZtZ3ItPnR4X3dhaXRxKTsK
-PiA+ID4gIAltZ3ItPmRldiA9IGRldjsKPiA+ID4gIAltZ3ItPmF1eCA9IGF1eDsKPiA+ID4gQEAg
-LTQwMDUsNyArNDA1OSw3IEBAIHZvaWQgZHJtX2RwX21zdF90b3BvbG9neV9tZ3JfZGVzdHJveShz
-dHJ1Y3QKPiA+ID4gZHJtX2RwX21zdF90b3BvbG9neV9tZ3IgKm1ncikKPiA+ID4gIHsKPiA+ID4g
-IAlkcm1fZHBfbXN0X3RvcG9sb2d5X21ncl9zZXRfbXN0KG1nciwgZmFsc2UpOwo+ID4gPiAgCWZs
-dXNoX3dvcmsoJm1nci0+d29yayk7Cj4gPiA+IC0JZmx1c2hfd29yaygmbWdyLT5kZXN0cm95X2Nv
-bm5lY3Rvcl93b3JrKTsKPiA+ID4gKwljYW5jZWxfd29ya19zeW5jKCZtZ3ItPmRlbGF5ZWRfZGVz
-dHJveV93b3JrKTsKPiA+ID4gIAltdXRleF9sb2NrKCZtZ3ItPnBheWxvYWRfbG9jayk7Cj4gPiA+
-ICAJa2ZyZWUobWdyLT5wYXlsb2Fkcyk7Cj4gPiA+ICAJbWdyLT5wYXlsb2FkcyA9IE5VTEw7Cj4g
-PiA+IGRpZmYgLS1naXQgYS9pbmNsdWRlL2RybS9kcm1fZHBfbXN0X2hlbHBlci5oCj4gPiA+IGIv
-aW5jbHVkZS9kcm0vZHJtX2RwX21zdF9oZWxwZXIuaAo+ID4gPiBpbmRleCBmYzM0OTIwNGE3MWIu
-LjRhNDUwN2ZlOTI4ZCAxMDA2NDQKPiA+ID4gLS0tIGEvaW5jbHVkZS9kcm0vZHJtX2RwX21zdF9o
-ZWxwZXIuaAo+ID4gPiArKysgYi9pbmNsdWRlL2RybS9kcm1fZHBfbXN0X2hlbHBlci5oCj4gPiA+
-IEBAIC0xNDMsNiArMTQzLDEyIEBAIHN0cnVjdCBkcm1fZHBfbXN0X2JyYW5jaCB7Cj4gPiA+ICAJ
-ICovCj4gPiA+ICAJc3RydWN0IGtyZWYgbWFsbG9jX2tyZWY7Cj4gPiA+ICAKPiA+ID4gKwkvKioK
-PiA+ID4gKwkgKiBAZGVzdHJveV9uZXh0OiBsaW5rZWQtbGlzdCBlbnRyeSB1c2VkIGJ5Cj4gPiA+
-ICsJICogZHJtX2RwX2RlbGF5ZWRfZGVzdHJveV93b3JrKCkKPiA+ID4gKwkgKi8KPiA+ID4gKwlz
-dHJ1Y3QgbGlzdF9oZWFkIGRlc3Ryb3lfbmV4dDsKPiA+ID4gKwo+ID4gPiAgCXU4IHJhZFs4XTsK
-PiA+ID4gIAl1OCBsY3Q7Cj4gPiA+ICAJaW50IG51bV9wb3J0czsKPiA+ID4gQEAgLTU3NSwxOCAr
-NTgxLDI0IEBAIHN0cnVjdCBkcm1fZHBfbXN0X3RvcG9sb2d5X21nciB7Cj4gPiA+ICAJc3RydWN0
-IHdvcmtfc3RydWN0IHR4X3dvcms7Cj4gPiA+ICAKPiA+ID4gIAkvKioKPiA+ID4gLQkgKiBAZGVz
-dHJveV9jb25uZWN0b3JfbGlzdDogTGlzdCBvZiB0byBiZSBkZXN0cm95ZWQgY29ubmVjdG9ycy4K
-PiA+ID4gKwkgKiBAZGVzdHJveV9wb3J0X2xpc3Q6IExpc3Qgb2YgdG8gYmUgZGVzdHJveWVkIGNv
-bm5lY3RvcnMuCj4gPiA+ICsJICovCj4gPiA+ICsJc3RydWN0IGxpc3RfaGVhZCBkZXN0cm95X3Bv
-cnRfbGlzdDsKPiA+ID4gKwkvKioKPiA+ID4gKwkgKiBAZGVzdHJveV9icmFuY2hfZGV2aWNlX2xp
-c3Q6IExpc3Qgb2YgdG8gYmUgZGVzdHJveWVkIGJyYW5jaAo+ID4gPiArCSAqIGRldmljZXMuCj4g
-PiA+ICAJICovCj4gPiA+IC0Jc3RydWN0IGxpc3RfaGVhZCBkZXN0cm95X2Nvbm5lY3Rvcl9saXN0
-Owo+ID4gPiArCXN0cnVjdCBsaXN0X2hlYWQgZGVzdHJveV9icmFuY2hfZGV2aWNlX2xpc3Q7Cj4g
-PiA+ICAJLyoqCj4gPiA+IC0JICogQGRlc3Ryb3lfY29ubmVjdG9yX2xvY2s6IFByb3RlY3RzIEBj
-b25uZWN0b3JfbGlzdC4KPiA+ID4gKwkgKiBAZGVsYXllZF9kZXN0cm95X2xvY2s6IFByb3RlY3Rz
-IEBkZXN0cm95X3BvcnRfbGlzdCBhbmQKPiA+ID4gKwkgKiBAZGVzdHJveV9icmFuY2hfZGV2aWNl
-X2xpc3QuCj4gPiA+ICAJICovCj4gPiA+IC0Jc3RydWN0IG11dGV4IGRlc3Ryb3lfY29ubmVjdG9y
-X2xvY2s7Cj4gPiA+ICsJc3RydWN0IG11dGV4IGRlbGF5ZWRfZGVzdHJveV9sb2NrOwo+ID4gPiAg
-CS8qKgo+ID4gPiAtCSAqIEBkZXN0cm95X2Nvbm5lY3Rvcl93b3JrOiBXb3JrIGl0ZW0gdG8gZGVz
-dHJveSBjb25uZWN0b3JzLiBOZWVkZWQgdG8KPiA+ID4gLQkgKiBhdm9pZCBsb2NraW5nIGludmVy
-c2lvbi4KPiA+ID4gKwkgKiBAZGVsYXllZF9kZXN0cm95X3dvcms6IFdvcmsgaXRlbSB0byBkZXN0
-cm95IE1TVCBwb3J0IGFuZCBicmFuY2gKPiA+ID4gKwkgKiBkZXZpY2VzLCBuZWVkZWQgdG8gYXZv
-aWQgbG9ja2luZyBpbnZlcnNpb24uCj4gPiA+ICAJICovCj4gPiA+IC0Jc3RydWN0IHdvcmtfc3Ry
-dWN0IGRlc3Ryb3lfY29ubmVjdG9yX3dvcms7Cj4gPiA+ICsJc3RydWN0IHdvcmtfc3RydWN0IGRl
-bGF5ZWRfZGVzdHJveV93b3JrOwo+ID4gPiAgfTsKPiA+ID4gIAo+ID4gPiAgaW50IGRybV9kcF9t
-c3RfdG9wb2xvZ3lfbWdyX2luaXQoc3RydWN0IGRybV9kcF9tc3RfdG9wb2xvZ3lfbWdyICptZ3Is
-Cj4gPiA+IC0tIAo+ID4gPiAyLjIxLjAKPiA+ID4gCj4gLS0gCj4gQ2hlZXJzLAo+IAlMeXVkZSBQ
-YXVsCj4gCgotLSAKU2VhbiBQYXVsLCBTb2Z0d2FyZSBFbmdpbmVlciwgR29vZ2xlIC8gQ2hyb21p
-dW0gT1MKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91
-dmVhdSBtYWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9s
-aXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============2024294343==
+Content-Type: multipart/alternative; boundary="15695921041.DceCE8de.32712"
+Content-Transfer-Encoding: 7bit
+
+
+--15695921041.DceCE8de.32712
+Date: Fri, 27 Sep 2019 13:48:24 +0000
+MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+https://bugs.freedesktop.org/show_bug.cgi?id=3D111843
+
+            Bug ID: 111843
+           Summary: Resume fails after suspend with nouveau and Gtx 1050
+                    ti
+           Product: xorg
+           Version: unspecified
+          Hardware: Other
+                OS: All
+            Status: NEW
+          Severity: not set
+          Priority: not set
+         Component: Driver/nouveau
+          Assignee: nouveau@lists.freedesktop.org
+          Reporter: jesaenh@gmail.com
+        QA Contact: xorg-team@lists.x.org
+
+My system is  Opensuse tumbleweed updated (kernel 5.2.XX) with Kde (5.16).
+
+This problems happens with nouveau (not with nvidia driver). Ift I resume a=
+fter
+suspend, Screen is not activated. I got this log in dmesg (via ssh):
+
+
+
+
+
+[  469.931682] WARNING: CPU: 2 PID: 2178 at
+drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmgf100.c:221
+gf100_vmm_invalidate+0x1a6/0x1c0 [nouveau]
+[  469.931683] Modules linked in: cmac rfcomm af_packet libcrc32c vmnet(OE)
+vmw_vsock_vmci_transport vsock vmw_vmci ip_set hid_logitech_hidpp nfnetlink
+joydev vmmon(OE) scsi_transport_iscsi x_tables bpfilter intel_rapl snd_seq =
+bnep
+snd_seq_device snd_hda_codec_hdmi hid_logitech_dj x86_pkg_temp_thermal
+intel_powerclamp kvm_intel iTCO_wdt kvm iTCO_vendor_support mei_hdcp irqbyp=
+ass
+hid_generic ppdev crct10dif_pclmul crc32_pclmul ghash_clmulni_intel aesni_i=
+ntel
+msr coretemp e1000e snd_hda_codec_realtek aes_x86_64 crypto_simd
+snd_hda_codec_generic cryptd ptp i2c_i801 glue_helper pps_core ledtrig_audio
+pcspkr snd_hda_intel snd_hda_codec btusb btrtl btbcm snd_hda_core btintel
+snd_hwdep bluetooth snd_pcm snd_timer snd uas mei_me ecdh_generic rfkill
+usb_storage pcc_cpufreq ecc usbhid usblp soundcore ipmi_devintf mei thermal=
+ fan
+parport_pc parport acpi_pad nls_iso8859_1 fuse nls_cp437 vfat fat
+ipmi_msghandler nouveau mxm_wmi wmi i2c_algo_bit drm_kms_helper syscopyarea
+sysfillrect sysimgblt fb_sys_fops
+[  469.931696]  xhci_pci ttm xhci_hcd crc32c_intel drm usbcore video button=
+ sg
+dm_multipath dm_mod scsi_dh_rdac scsi_dh_emc scsi_dh_alua efivarfs [last
+unloaded: ip_tables]
+[  469.931700] CPU: 2 PID: 2178 Comm: kwin_x11 Tainted: P        W  OE=20=
+=20=20=20
+5.2.14-1-default #1 openSUSE Tumbleweed (unreleased)
+[  469.931700] Hardware name: Gigabyte Technology Co., Ltd.
+Z270M-D3H/Z270M-D3H-CF, BIOS F8b 01/10/2018
+[  469.931718] RIP: 0010:gf100_vmm_invalidate+0x1a6/0x1c0 [nouveau]
+[  469.931719] Code: 8b 40 10 48 8b 78 10 4c 8b 6f 50 4d 85 ed 75 03 4c 8b =
+2f
+e8 0c 9d d3 d1 4c 89 ea 48 c7 c7 1e d0 89 c0 48 89 c6 e8 19 20 76 d1 <0f> 0=
+b e9
+6d ff ff ff e8 1e 1d 76 d1 66 66 2e 0f 1f 84 00 00 00 00
+[  469.931719] RSP: 0018:ffffaeea439bf570 EFLAGS: 00010282
+[  469.931720] RAX: 0000000000000000 RBX: ffff9dee56cee400 RCX:
+0000000000000006
+[  469.931720] RDX: 0000000000000007 RSI: 0000000000000086 RDI:
+ffff9dee9ea99a10
+[  469.931721] RBP: 0000000000000001 R08: 0000000000001c4f R09:
+0000000000000001
+[  469.931721] R10: 0000000000000000 R11: 0000000000000001 R12:
+ffff9dee962dc420
+[  469.931721] R13: ffff9dee9e6f6110 R14: ffff9dee56c9d7c0 R15:
+ffff9deddae1a2a0
+[  469.931722] FS:  00007f2e72aa5880(0000) GS:ffff9dee9ea80000(0000)
+knlGS:0000000000000000
+[  469.931722] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[  469.931723] CR2: 000055dc891692d0 CR3: 00000003cdf80002 CR4:
+00000000003606e0
+[  469.931723] DR0: 0000000000000000 DR1: 0000000000000000 DR2:
+0000000000000000
+[  469.931724] DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7:
+0000000000000400
+[  469.931724] Call Trace:
+[  469.931740]  nvkm_vmm_iter.constprop.0+0x34b/0x810 [nouveau]
+[  469.931756]  ? nvkm_vmm_sparse_unref_ptes+0x70/0x70 [nouveau]
+[  469.931772]  ? gp100_vmm_join+0x20/0x20 [nouveau]
+[  469.931787]  ? gf100_vmm_invalidate+0x122/0x1c0 [nouveau]
+[  469.931803]  nvkm_vmm_ptes_get_map+0x2e/0x70 [nouveau]
+[  469.931818]  ? nvkm_vmm_sparse_unref_ptes+0x70/0x70 [nouveau]
+[  469.931833]  ? gp100_vmm_join+0x20/0x20 [nouveau]
+[  469.931848]  nvkm_vmm_map+0x1cf/0x360 [nouveau]
+[  469.931863]  nvkm_mem_map_dma+0x56/0x80 [nouveau]
+[  469.931878]  nvkm_uvmm_mthd+0x66a/0x780 [nouveau]
+[  469.931888]  nvkm_ioctl+0xde/0x180 [nouveau]
+[  469.931903]  ? nvkm_uvmm_mthd+0x17f/0x780 [nouveau]
+[  469.931912]  nvif_object_mthd+0x104/0x130 [nouveau]
+[  469.931921]  ? nvif_object_mthd+0x117/0x130 [nouveau]
+[  469.931929]  nvif_vmm_map+0x115/0x130 [nouveau]
+[  469.931949]  nouveau_mem_map+0x8d/0xf0 [nouveau]
+[  469.931969]  nouveau_bo_move_m2mf.constprop.0+0x113/0x200 [nouveau]
+[  469.931989]  nouveau_bo_move+0xa5/0x430 [nouveau]
+[  469.932008]  ? nouveau_vma_map+0x44/0x70 [nouveau]
+[  469.932011]  ttm_bo_handle_move_mem+0x10b/0x4f0 [ttm]
+[  469.932013]  ttm_bo_validate+0x11b/0x130 [ttm]
+[  469.932032]  nouveau_bo_validate+0x59/0x90 [nouveau]
+[  469.932051]  nouveau_gem_ioctl_pushbuf+0x323/0xbd0 [nouveau]
+[  469.932069]  ? nouveau_gem_ioctl_new+0xe0/0xe0 [nouveau]
+[  469.932076]  drm_ioctl_kernel+0xaa/0xf0 [drm]
+[  469.932081]  drm_ioctl+0x1f7/0x390 [drm]
+[  469.932099]  ? nouveau_gem_ioctl_new+0xe0/0xe0 [nouveau]
+[  469.932101]  ? try_to_wake_up+0x53/0x5f0
+[  469.932120]  nouveau_drm_ioctl+0x63/0xb0 [nouveau]
+[  469.932122]  do_vfs_ioctl+0x40e/0x670
+[  469.932124]  ? do_futex+0x157/0x1d0
+[  469.932124]  ksys_ioctl+0x5e/0x90
+[  469.932126]  ? trace_hardirqs_off_thunk+0x1a/0x2e
+[  469.932127]  __x64_sys_ioctl+0x16/0x20
+[  469.932128]  do_syscall_64+0x6e/0x1e0
+[  469.932129]  entry_SYSCALL_64_after_hwframe+0x49/0xbe
+[  469.932130] RIP: 0033:0x7f2e77a977c7
+[  469.932130] Code: 00 00 90 48 8b 05 d1 86 0c 00 64 c7 00 26 00 00 00 48 =
+c7
+c0 ff ff ff ff c3 66 2e 0f 1f 84 00 00 00 00 00 b8 10 00 00 00 0f 05 <48> 3=
+d 01
+f0 ff ff 73 01 c3 48 8b 0d a1 86 0c 00 f7 d8 64 89 01 48
+[  469.932131] RSP: 002b:00007ffc0c650ed8 EFLAGS: 00000246 ORIG_RAX:
+0000000000000010
+[  469.932131] RAX: ffffffffffffffda RBX: 00007ffc0c650f40 RCX:
+00007f2e77a977c7
+[  469.932132] RDX: 00007ffc0c650f40 RSI: 00000000c0406481 RDI:
+0000000000000014
+[  469.932132] RBP: 00000000c0406481 R08: 0000556220b378e0 R09:
+000055622075a390
+[  469.932133] R10: 00005562208d0e98 R11: 0000000000000246 R12:
+0000556220af85c0
+[  469.932133] R13: 0000000000000014 R14: 00005562207450c0 R15:
+000055622075a390
+[  469.932134] ---[ end trace 8a79010dd231cb3c ]---
+
+
+
+
+PD. Motherboard is Gigabyte Z270-D3H with BIOS updated F8d
+
+--=20
+You are receiving this mail because:
+You are the assignee for the bug.=
+
+--15695921041.DceCE8de.32712
+Date: Fri, 27 Sep 2019 13:48:24 +0000
+MIME-Version: 1.0
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+<html>
+    <head>
+      <base href=3D"https://bugs.freedesktop.org/">
+    </head>
+    <body><table border=3D"1" cellspacing=3D"0" cellpadding=3D"8">
+        <tr>
+          <th>Bug ID</th>
+          <td><a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - Resume fails after suspend with nouveau and Gtx 1050 ti"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111843">111843</a>
+          </td>
+        </tr>
+
+        <tr>
+          <th>Summary</th>
+          <td>Resume fails after suspend with nouveau and Gtx 1050 ti
+          </td>
+        </tr>
+
+        <tr>
+          <th>Product</th>
+          <td>xorg
+          </td>
+        </tr>
+
+        <tr>
+          <th>Version</th>
+          <td>unspecified
+          </td>
+        </tr>
+
+        <tr>
+          <th>Hardware</th>
+          <td>Other
+          </td>
+        </tr>
+
+        <tr>
+          <th>OS</th>
+          <td>All
+          </td>
+        </tr>
+
+        <tr>
+          <th>Status</th>
+          <td>NEW
+          </td>
+        </tr>
+
+        <tr>
+          <th>Severity</th>
+          <td>not set
+          </td>
+        </tr>
+
+        <tr>
+          <th>Priority</th>
+          <td>not set
+          </td>
+        </tr>
+
+        <tr>
+          <th>Component</th>
+          <td>Driver/nouveau
+          </td>
+        </tr>
+
+        <tr>
+          <th>Assignee</th>
+          <td>nouveau&#64;lists.freedesktop.org
+          </td>
+        </tr>
+
+        <tr>
+          <th>Reporter</th>
+          <td>jesaenh&#64;gmail.com
+          </td>
+        </tr>
+
+        <tr>
+          <th>QA Contact</th>
+          <td>xorg-team&#64;lists.x.org
+          </td>
+        </tr></table>
+      <p>
+        <div>
+        <pre>My system is  Opensuse tumbleweed updated (kernel 5.2.XX) with=
+ Kde (5.16).
+
+This problems happens with nouveau (not with nvidia driver). Ift I resume a=
+fter
+suspend, Screen is not activated. I got this log in dmesg (via ssh):
+
+
+
+
+
+[  469.931682] WARNING: CPU: 2 PID: 2178 at
+drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmgf100.c:221
+gf100_vmm_invalidate+0x1a6/0x1c0 [nouveau]
+[  469.931683] Modules linked in: cmac rfcomm af_packet libcrc32c vmnet(OE)
+vmw_vsock_vmci_transport vsock vmw_vmci ip_set hid_logitech_hidpp nfnetlink
+joydev vmmon(OE) scsi_transport_iscsi x_tables bpfilter intel_rapl snd_seq =
+bnep
+snd_seq_device snd_hda_codec_hdmi hid_logitech_dj x86_pkg_temp_thermal
+intel_powerclamp kvm_intel iTCO_wdt kvm iTCO_vendor_support mei_hdcp irqbyp=
+ass
+hid_generic ppdev crct10dif_pclmul crc32_pclmul ghash_clmulni_intel aesni_i=
+ntel
+msr coretemp e1000e snd_hda_codec_realtek aes_x86_64 crypto_simd
+snd_hda_codec_generic cryptd ptp i2c_i801 glue_helper pps_core ledtrig_audio
+pcspkr snd_hda_intel snd_hda_codec btusb btrtl btbcm snd_hda_core btintel
+snd_hwdep bluetooth snd_pcm snd_timer snd uas mei_me ecdh_generic rfkill
+usb_storage pcc_cpufreq ecc usbhid usblp soundcore ipmi_devintf mei thermal=
+ fan
+parport_pc parport acpi_pad nls_iso8859_1 fuse nls_cp437 vfat fat
+ipmi_msghandler nouveau mxm_wmi wmi i2c_algo_bit drm_kms_helper syscopyarea
+sysfillrect sysimgblt fb_sys_fops
+[  469.931696]  xhci_pci ttm xhci_hcd crc32c_intel drm usbcore video button=
+ sg
+dm_multipath dm_mod scsi_dh_rdac scsi_dh_emc scsi_dh_alua efivarfs [last
+unloaded: ip_tables]
+[  469.931700] CPU: 2 PID: 2178 Comm: kwin_x11 Tainted: P        W  OE=20=
+=20=20=20
+5.2.14-1-default #1 openSUSE Tumbleweed (unreleased)
+[  469.931700] Hardware name: Gigabyte Technology Co., Ltd.
+Z270M-D3H/Z270M-D3H-CF, BIOS F8b 01/10/2018
+[  469.931718] RIP: 0010:gf100_vmm_invalidate+0x1a6/0x1c0 [nouveau]
+[  469.931719] Code: 8b 40 10 48 8b 78 10 4c 8b 6f 50 4d 85 ed 75 03 4c 8b =
+2f
+e8 0c 9d d3 d1 4c 89 ea 48 c7 c7 1e d0 89 c0 48 89 c6 e8 19 20 76 d1 &lt;0f=
+&gt; 0b e9
+6d ff ff ff e8 1e 1d 76 d1 66 66 2e 0f 1f 84 00 00 00 00
+[  469.931719] RSP: 0018:ffffaeea439bf570 EFLAGS: 00010282
+[  469.931720] RAX: 0000000000000000 RBX: ffff9dee56cee400 RCX:
+0000000000000006
+[  469.931720] RDX: 0000000000000007 RSI: 0000000000000086 RDI:
+ffff9dee9ea99a10
+[  469.931721] RBP: 0000000000000001 R08: 0000000000001c4f R09:
+0000000000000001
+[  469.931721] R10: 0000000000000000 R11: 0000000000000001 R12:
+ffff9dee962dc420
+[  469.931721] R13: ffff9dee9e6f6110 R14: ffff9dee56c9d7c0 R15:
+ffff9deddae1a2a0
+[  469.931722] FS:  00007f2e72aa5880(0000) GS:ffff9dee9ea80000(0000)
+knlGS:0000000000000000
+[  469.931722] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[  469.931723] CR2: 000055dc891692d0 CR3: 00000003cdf80002 CR4:
+00000000003606e0
+[  469.931723] DR0: 0000000000000000 DR1: 0000000000000000 DR2:
+0000000000000000
+[  469.931724] DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7:
+0000000000000400
+[  469.931724] Call Trace:
+[  469.931740]  nvkm_vmm_iter.constprop.0+0x34b/0x810 [nouveau]
+[  469.931756]  ? nvkm_vmm_sparse_unref_ptes+0x70/0x70 [nouveau]
+[  469.931772]  ? gp100_vmm_join+0x20/0x20 [nouveau]
+[  469.931787]  ? gf100_vmm_invalidate+0x122/0x1c0 [nouveau]
+[  469.931803]  nvkm_vmm_ptes_get_map+0x2e/0x70 [nouveau]
+[  469.931818]  ? nvkm_vmm_sparse_unref_ptes+0x70/0x70 [nouveau]
+[  469.931833]  ? gp100_vmm_join+0x20/0x20 [nouveau]
+[  469.931848]  nvkm_vmm_map+0x1cf/0x360 [nouveau]
+[  469.931863]  nvkm_mem_map_dma+0x56/0x80 [nouveau]
+[  469.931878]  nvkm_uvmm_mthd+0x66a/0x780 [nouveau]
+[  469.931888]  nvkm_ioctl+0xde/0x180 [nouveau]
+[  469.931903]  ? nvkm_uvmm_mthd+0x17f/0x780 [nouveau]
+[  469.931912]  nvif_object_mthd+0x104/0x130 [nouveau]
+[  469.931921]  ? nvif_object_mthd+0x117/0x130 [nouveau]
+[  469.931929]  nvif_vmm_map+0x115/0x130 [nouveau]
+[  469.931949]  nouveau_mem_map+0x8d/0xf0 [nouveau]
+[  469.931969]  nouveau_bo_move_m2mf.constprop.0+0x113/0x200 [nouveau]
+[  469.931989]  nouveau_bo_move+0xa5/0x430 [nouveau]
+[  469.932008]  ? nouveau_vma_map+0x44/0x70 [nouveau]
+[  469.932011]  ttm_bo_handle_move_mem+0x10b/0x4f0 [ttm]
+[  469.932013]  ttm_bo_validate+0x11b/0x130 [ttm]
+[  469.932032]  nouveau_bo_validate+0x59/0x90 [nouveau]
+[  469.932051]  nouveau_gem_ioctl_pushbuf+0x323/0xbd0 [nouveau]
+[  469.932069]  ? nouveau_gem_ioctl_new+0xe0/0xe0 [nouveau]
+[  469.932076]  drm_ioctl_kernel+0xaa/0xf0 [drm]
+[  469.932081]  drm_ioctl+0x1f7/0x390 [drm]
+[  469.932099]  ? nouveau_gem_ioctl_new+0xe0/0xe0 [nouveau]
+[  469.932101]  ? try_to_wake_up+0x53/0x5f0
+[  469.932120]  nouveau_drm_ioctl+0x63/0xb0 [nouveau]
+[  469.932122]  do_vfs_ioctl+0x40e/0x670
+[  469.932124]  ? do_futex+0x157/0x1d0
+[  469.932124]  ksys_ioctl+0x5e/0x90
+[  469.932126]  ? trace_hardirqs_off_thunk+0x1a/0x2e
+[  469.932127]  __x64_sys_ioctl+0x16/0x20
+[  469.932128]  do_syscall_64+0x6e/0x1e0
+[  469.932129]  entry_SYSCALL_64_after_hwframe+0x49/0xbe
+[  469.932130] RIP: 0033:0x7f2e77a977c7
+[  469.932130] Code: 00 00 90 48 8b 05 d1 86 0c 00 64 c7 00 26 00 00 00 48 =
+c7
+c0 ff ff ff ff c3 66 2e 0f 1f 84 00 00 00 00 00 b8 10 00 00 00 0f 05 &lt;48=
+&gt; 3d 01
+f0 ff ff 73 01 c3 48 8b 0d a1 86 0c 00 f7 d8 64 89 01 48
+[  469.932131] RSP: 002b:00007ffc0c650ed8 EFLAGS: 00000246 ORIG_RAX:
+0000000000000010
+[  469.932131] RAX: ffffffffffffffda RBX: 00007ffc0c650f40 RCX:
+00007f2e77a977c7
+[  469.932132] RDX: 00007ffc0c650f40 RSI: 00000000c0406481 RDI:
+0000000000000014
+[  469.932132] RBP: 00000000c0406481 R08: 0000556220b378e0 R09:
+000055622075a390
+[  469.932133] R10: 00005562208d0e98 R11: 0000000000000246 R12:
+0000556220af85c0
+[  469.932133] R13: 0000000000000014 R14: 00005562207450c0 R15:
+000055622075a390
+[  469.932134] ---[ end trace 8a79010dd231cb3c ]---
+
+
+
+
+PD. Motherboard is Gigabyte Z270-D3H with BIOS updated F8d</pre>
+        </div>
+      </p>
+
+
+      <hr>
+      <span>You are receiving this mail because:</span>
+
+      <ul>
+          <li>You are the assignee for the bug.</li>
+      </ul>
+    </body>
+</html>=
+
+--15695921041.DceCE8de.32712--
+
+--===============2024294343==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
+YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
+cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============2024294343==--
