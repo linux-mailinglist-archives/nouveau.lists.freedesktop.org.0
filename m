@@ -1,44 +1,46 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5CE34C15D1
-	for <lists+nouveau@lfdr.de>; Sun, 29 Sep 2019 16:33:00 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8A5FCC15D2
+	for <lists+nouveau@lfdr.de>; Sun, 29 Sep 2019 16:36:59 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 729176E10C;
-	Sun, 29 Sep 2019 14:32:58 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 562656E30E;
+	Sun, 29 Sep 2019 14:36:57 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-vk1-f179.google.com (mail-vk1-f179.google.com
- [209.85.221.179])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8B4A96E10C
- for <nouveau@lists.freedesktop.org>; Sun, 29 Sep 2019 14:32:57 +0000 (UTC)
-Received: by mail-vk1-f179.google.com with SMTP id j21so2140657vki.11
- for <nouveau@lists.freedesktop.org>; Sun, 29 Sep 2019 07:32:57 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=DzylgxJC18yMhF36Oi4zjs6RGplMSQueKiySJpT8Uyw=;
- b=XVddDcj1BveCZmZ2FQ4OLmvHEsNhc3D+J/9+NEkLiT92bU8O5h4NiXOiParwZis8GL
- EuP+6H3I091fRQ1TLn3Ugfr3Uav9b9I0QCILA9Z/PVRe+L+j938wsOAbeUkqmuB7xbg9
- x3VWQdgMyrh12Dfg1EYPsLoJzS7/W9kKwx/U5Ec96Rj4UPRAadmkxVHEyJg4RU2y9Gb5
- lJk5n8/pvJ3xDvaXixRQaq/O1DfnxQI8EQ66lBCJKs1AHMawuCfSVoWjYbb3FhljSL7V
- Vjr3b7Ra1nGzBErwbtz+ux9VhNGsAPUeknrcZ3n8HIc3FroU2JSBYSKYZyJVsM4u+sPP
- EdNA==
-X-Gm-Message-State: APjAAAXL8/ZEOKunwywA+6PDyqdQGFNHDXqzhIvTZpKq5MtKpooeC91w
- fgGmiUwxtluwki3QDeNsKxf0bugjOMfk35Xbwgs=
-X-Google-Smtp-Source: APXvYqwyxQLLVnmLvKFIL70xL0tzIZAVnorOuOcnYEFens6NIP9t6qe+eBmrP7I/PIQaIIBzMtUKhvVwBjMtw/sle20=
-X-Received: by 2002:a1f:db43:: with SMTP id s64mr9004129vkg.67.1569767576596; 
- Sun, 29 Sep 2019 07:32:56 -0700 (PDT)
+Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
+ [131.252.210.165])
+ by gabe.freedesktop.org (Postfix) with ESMTP id C38C26E2FF
+ for <nouveau@lists.freedesktop.org>; Sun, 29 Sep 2019 14:36:55 +0000 (UTC)
+Received: by culpepper.freedesktop.org (Postfix, from userid 33)
+ id BE67072162; Sun, 29 Sep 2019 14:36:55 +0000 (UTC)
+From: bugzilla-daemon@freedesktop.org
+To: nouveau@lists.freedesktop.org
+Date: Sun, 29 Sep 2019 14:36:56 +0000
+X-Bugzilla-Reason: AssignedTo
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: None
+X-Bugzilla-Product: xorg
+X-Bugzilla-Component: Driver/nouveau
+X-Bugzilla-Version: unspecified
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: major
+X-Bugzilla-Who: imirkin@alum.mit.edu
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: not set
+X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: 
+Message-ID: <bug-111853-8800-mFLmxBAqgN@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-111853-8800@http.bugs.freedesktop.org/>
+References: <bug-111853-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-References: <20190929094544.5e0b9040@ds9>
-In-Reply-To: <20190929094544.5e0b9040@ds9>
-From: Ilia Mirkin <imirkin@alum.mit.edu>
-Date: Sun, 29 Sep 2019 10:32:45 -0400
-Message-ID: <CAKb7Uvgws_-M+usTAVDD4Y6B8XZGF-CT9nfNVG4xP8kstBrJeg@mail.gmail.com>
-To: pete <pg.nikolic1@gmail.com>
-Subject: Re: [Nouveau] nouveau locking machine solid
+Subject: [Nouveau] [Bug 111853] nouveau kernel module won't load (not
+ available) on Sony laptop with NVIDIA G86M [GeForce 8400M GT] ID: 10de:0426
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -50,23 +52,92 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau <nouveau@lists.freedesktop.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============0405342359=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-T24gU3VuLCBTZXAgMjksIDIwMTkgYXQgNDo0NiBBTSBwZXRlIDxwZy5uaWtvbGljMUBnbWFpbC5j
-b20+IHdyb3RlOgo+Cj4KPiBIaSAuCj4KPiBJIGFtIGhhdmluZyBhIHZlcnkgYW5ub3lpbmcgcHJv
-YmxlbSBub3Qgc3VyZSB3aGVyZSB0aGUgcm9vdCBvZiBpdCBsaWVzCj4KPiBXaGVuIHJ1bm5pbmcg
-RkxkaWdpIGl0IHJ1bnMgZmluZSBmb3IgYWJvdXQgMTAgbWluZXV0cyB0aGVuIGkgc3RhcnQKPiBn
-ZXR0aW5nIGVycm9ycyAgbGVhZGluZyB0byBhIGNvbXBsZXRlIGxvY2sgdXAgdGhhdCBuZWVkcyBh
-IHBvd2VyIGJ1dHRvbgo+IHRvIGZyZWUgaXQgdXAgaSBnZXQgdGhlIGZvbGxvd2luZwo+Cj4gWyAg
-NjUzLjA4MDQ5N10gbm91dmVhdSAwMDAwOjAxOjAwLjA6IGZpZm86IERNQV9QVVNIRVIgLSBjaCAz
-CgpUaGlzIGlzIHZlcnkgbXVjaCBhIG5vdXZlYXUgcHJvYmxlbS4gV2UgZG8gc29tZXRoaW5nIHdy
-b25nIHdoZW4Kc3dpdGNoaW5nIGNoYW5uZWxzIGFuZCB0aGUgcHVzaGVyIGdldHMgdXBzZXQuIFRo
-aXMgYWZmZWN0cyBUZXNsYQpmYW1pbHkgR1BVcyAoRzh4LCBHOXgsIEdUMnh4KS4KCk5vIGtub3du
-IHNvbHV0aW9uLgoKQ2hlZXJzLAoKICAtaWxpYQpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fXwpOb3V2ZWF1IG1haWxpbmcgbGlzdApOb3V2ZWF1QGxpc3RzLmZy
-ZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3Rp
-bmZvL25vdXZlYXU=
+
+--===============0405342359==
+Content-Type: multipart/alternative; boundary="15697678151.f52d4.4083"
+Content-Transfer-Encoding: 7bit
+
+
+--15697678151.f52d4.4083
+Date: Sun, 29 Sep 2019 14:36:55 +0000
+MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+https://bugs.freedesktop.org/show_bug.cgi?id=3D111853
+
+--- Comment #1 from Ilia Mirkin <imirkin@alum.mit.edu> ---
+I see no record of nouveau loading in the kernel logs. This most likely mea=
+ns
+that it's blacklisted somehow.
+
+--=20
+You are receiving this mail because:
+You are the assignee for the bug.=
+
+--15697678151.f52d4.4083
+Date: Sun, 29 Sep 2019 14:36:55 +0000
+MIME-Version: 1.0
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+<html>
+    <head>
+      <base href=3D"https://bugs.freedesktop.org/">
+    </head>
+    <body>
+      <p>
+        <div>
+            <b><a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - nouveau kernel module won't load (not available) on Sony =
+laptop with NVIDIA G86M [GeForce 8400M GT] ID: 10de:0426"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111853#c1">Commen=
+t # 1</a>
+              on <a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - nouveau kernel module won't load (not available) on Sony =
+laptop with NVIDIA G86M [GeForce 8400M GT] ID: 10de:0426"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111853">bug 11185=
+3</a>
+              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
+imirkin&#64;alum.mit.edu" title=3D"Ilia Mirkin &lt;imirkin&#64;alum.mit.edu=
+&gt;"> <span class=3D"fn">Ilia Mirkin</span></a>
+</span></b>
+        <pre>I see no record of nouveau loading in the kernel logs. This mo=
+st likely means
+that it's blacklisted somehow.</pre>
+        </div>
+      </p>
+
+
+      <hr>
+      <span>You are receiving this mail because:</span>
+
+      <ul>
+          <li>You are the assignee for the bug.</li>
+      </ul>
+    </body>
+</html>=
+
+--15697678151.f52d4.4083--
+
+--===============0405342359==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
+YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
+cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============0405342359==--
