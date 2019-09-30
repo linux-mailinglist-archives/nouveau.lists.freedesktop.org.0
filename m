@@ -2,43 +2,45 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4EF97C1DFB
-	for <lists+nouveau@lfdr.de>; Mon, 30 Sep 2019 11:29:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F4064C203F
+	for <lists+nouveau@lfdr.de>; Mon, 30 Sep 2019 13:57:06 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C7D526E056;
-	Mon, 30 Sep 2019 09:29:39 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6F96F6E3D3;
+	Mon, 30 Sep 2019 11:57:05 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mga17.intel.com (mga17.intel.com [192.55.52.151])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 96A526E056;
- Mon, 30 Sep 2019 09:29:38 +0000 (UTC)
-X-Amp-Result: UNKNOWN
-X-Amp-Original-Verdict: FILE UNKNOWN
-X-Amp-File-Uploaded: False
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
- by fmsmga107.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
- 30 Sep 2019 02:29:38 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.64,565,1559545200"; d="scan'208";a="204793408"
-Received: from lahna.fi.intel.com (HELO lahna) ([10.237.72.157])
- by fmsmga001.fm.intel.com with SMTP; 30 Sep 2019 02:29:35 -0700
-Received: by lahna (sSMTP sendmail emulation); Mon, 30 Sep 2019 12:29:34 +0300
-Date: Mon, 30 Sep 2019 12:29:34 +0300
-From: Mika Westerberg <mika.westerberg@linux.intel.com>
-To: Karol Herbst <kherbst@redhat.com>
-Message-ID: <20190930092934.GT2714@lahna.fi.intel.com>
-References: <20190927144421.22608-1-kherbst@redhat.com>
- <20190927214252.GA65801@google.com>
- <CACO55tuaY1jFXpJPeC9M4PoWEDyy547_tE8MpLaTDb+C+ffsbg@mail.gmail.com>
- <20190930080534.GS2714@lahna.fi.intel.com>
- <CACO55tuMo1aAA7meGtEey6J6sOS-ZA0ebZeL52i2zfkWtPqe_g@mail.gmail.com>
+Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
+ [131.252.210.165])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 6E1EE6E3CB
+ for <nouveau@lists.freedesktop.org>; Mon, 30 Sep 2019 11:57:03 +0000 (UTC)
+Received: by culpepper.freedesktop.org (Postfix, from userid 33)
+ id 6ACBE72162; Mon, 30 Sep 2019 11:57:03 +0000 (UTC)
+From: bugzilla-daemon@freedesktop.org
+To: nouveau@lists.freedesktop.org
+Date: Mon, 30 Sep 2019 11:57:03 +0000
+X-Bugzilla-Reason: AssignedTo
+X-Bugzilla-Type: new
+X-Bugzilla-Watch-Reason: None
+X-Bugzilla-Product: xorg
+X-Bugzilla-Component: Driver/nouveau
+X-Bugzilla-Version: unspecified
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: not set
+X-Bugzilla-Who: alain.prignet@u-pem.fr
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: not set
+X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: bug_id short_desc product version rep_platform
+ op_sys bug_status bug_severity priority component assigned_to reporter
+ qa_contact attachments.created
+Message-ID: <bug-111868-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <CACO55tuMo1aAA7meGtEey6J6sOS-ZA0ebZeL52i2zfkWtPqe_g@mail.gmail.com>
-Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
-User-Agent: Mutt/1.12.1 (2019-06-15)
-Subject: Re: [Nouveau] [RFC PATCH] pci: prevent putting pcie devices into
- lower device states on certain intel bridges
+Subject: [Nouveau] [Bug 111868] New: xorg with nouveau crash when starting
+ mate-session in debian 10
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -50,63 +52,210 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Linux PM <linux-pm@vger.kernel.org>,
- nouveau <nouveau@lists.freedesktop.org>,
- "Rafael J. Wysocki" <rjw@rjwysocki.net>, LKML <linux-kernel@vger.kernel.org>,
- dri-devel <dri-devel@lists.freedesktop.org>,
- Bjorn Helgaas <helgaas@kernel.org>, Linux PCI <linux-pci@vger.kernel.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1171630443=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-T24gTW9uLCBTZXAgMzAsIDIwMTkgYXQgMTE6MTU6NDhBTSArMDIwMCwgS2Fyb2wgSGVyYnN0IHdy
-b3RlOgo+IE9uIE1vbiwgU2VwIDMwLCAyMDE5IGF0IDEwOjA1IEFNIE1pa2EgV2VzdGVyYmVyZwo+
-IDxtaWthLndlc3RlcmJlcmdAbGludXguaW50ZWwuY29tPiB3cm90ZToKPiA+Cj4gPiBIaSBLYXJv
-bCwKPiA+Cj4gPiBPbiBGcmksIFNlcCAyNywgMjAxOSBhdCAxMTo1Mzo0OFBNICswMjAwLCBLYXJv
-bCBIZXJic3Qgd3JvdGU6Cj4gPiA+ID4gV2hhdCBleGFjdGx5IGlzIHRoZSBzZXJpb3VzIGlzc3Vl
-PyAgSSBndWVzcyBpdCdzIHRoYXQgdGhlIHJlc2Nhbgo+ID4gPiA+IGRvZXNuJ3QgZGV0ZWN0IHRo
-ZSBHUFUsIHdoaWNoIG1lYW5zIGl0J3Mgbm90IHJlc3BvbmRpbmcgdG8gY29uZmlnCj4gPiA+ID4g
-YWNjZXNzZXM/ICBJcyB0aGVyZSBhbnkgdGltaW5nIGNvbXBvbmVudCBoZXJlLCBlLmcuLCBtYXli
-ZSB3ZSdyZQo+ID4gPiA+IG1pc3Npbmcgc29tZSBkZWxheSBsaWtlIHRoZSBvbmVzIE1pa2EgaXMg
-YWRkaW5nIHRvIHRoZSByZXNldCBwYXRocz8KPiA+ID4KPiA+ID4gV2hlbiBJIHdhcyBjaGVja2lu
-ZyB1cCBvbiBzb21lIG9mIHRoZSBQQ0kgcmVnaXN0ZXJzIG9mIHRoZSBicmlkZ2UKPiA+ID4gY29u
-dHJvbGxlciwgdGhlIHNsb3QgZGV0ZWN0aW9uIHRvbGQgbWUgdGhhdCB0aGVyZSBpcyBubyBkZXZp
-Y2UKPiA+ID4gcmVjb2duaXplZCBhbnltb3JlLiBJIGRvbid0IGtub3cgd2hpY2ggcmVnaXN0ZXIg
-aXQgd2FzIGFueW1vcmUsIHRob3VnaAo+ID4gPiBJIGd1ZXNzIG9uZSBjb3VsZCByZWFkIGl0IHVw
-IGluIHRoZSBTb0Mgc3BlYyBkb2N1bWVudCBieSBJbnRlbC4KPiA+ID4KPiA+ID4gTXkgZ3Vlc3Mg
-aXMsIHRoYXQgdGhlIGJyaWRnZSBjb250cm9sbGVyIGZhaWxzIHRvIGRldGVjdCB0aGUgR1BVIGJl
-aW5nCj4gPiA+IGhlcmUgb3IgYWN0aXZlbHkgdGhyZXcgaXQgb2YgdGhlIGJ1cyBvciBzb21ldGhp
-bmcuIEJ1dCBhIG5vcm1hbCBzeXN0ZW0KPiA+ID4gc3VzcGVuZC9yZXN1bWUgY3ljbGUgYnJpbmdz
-IHRoZSBHUFUgYmFjayBvbmxpbmUgKGRvaW5nIGEgcmVzY2FuIHZpYQo+ID4gPiBzeXNmcyBnZXRz
-IHRoZSBkZXZpY2UgZGV0ZWN0ZWQgYWdhaW4pCj4gPgo+ID4gQ2FuIHlvdSBlbGFib3JhdGUgYSBi
-aXQgd2hhdCBraW5kIG9mIHNjZW5hcmlvIHRoZSBpc3N1ZSBoYXBwZW5zIChlLmcKPiA+IHN0ZXBz
-IGhvdyBpdCByZXByb2R1Y2VzKT8gSXQgd2FzIG5vdCAxMDAlIGNsZWFyIGZyb20gdGhlIGNoYW5n
-ZWxvZy4gQWxzbwo+ID4gd2hhdCB0aGUgcmVzdWx0IHdoZW4gdGhlIGZhaWx1cmUgaGFwcGVucz8K
-PiA+Cj4gCj4geWVhaCwgSSBhbHJlYWR5IGhhdmUgYW4gdXBkYXRlZCBwYXRjaCBpbiB0aGUgd29y
-a3Mgd2hpY2ggYWxzbyBkb2VzIHRoZQo+IHJld29yayBCam9ybiBzdWdnZXN0ZWQuIEhhZCBubyB0
-aW1lIHlldCB0byB0ZXN0IGlmIEkgZGlkbid0IG1lc3MgaXQKPiB1cC4KPiAKPiBJIGFtIGFsc28g
-dGhpbmtpbmcgb2YgYWRkaW5nIGEga2VybmVsIHBhcmFtZXRlciB0byBlbmFibGUgdGhpcwo+IHdv
-cmthcm91bmQgb24gZGVtYW5kLCBidXQgbm90IHF1aXRlIHN1cmUgb24gdGhhdCBvbmUgeWV0LgoK
-UmlnaHQsIEkgdGhpbmsgaXQgd291bGQgYmUgZ29vZCB0byBmaWd1cmUgb3V0IHRoZSByb290IGNh
-dXNlIGJlZm9yZQphZGRpbmcgYW55IHdvcmthcm91bmRzIDstKSBJdCBtaWdodCB2ZXJ5IHdlbGwg
-YmUgdGhhdCB3ZSBhcmUganVzdAptaXNzaW5nIHNvbWV0aGluZyB0aGUgUENJZSBzcGVjIHJlcXVp
-cmVzIGJ1dCBub3QgaW1wbGVtZW50ZWQgaW4gTGludXguCgo+ID4gSSBzZWUgdGhlcmUgaXMgYSBz
-Y3JpcHQgdGhhdCBkb2VzIHNvbWV0aGluZyBidXQgdW5mb3J0dW5hdGVseSBJJ20gbm90Cj4gPiBm
-bHVlbnQgaW4gUHl0aG9uIHNvIGNhbid0IGV4dHJhY3QgdGhlIHN0ZXBzIGhvdyB0aGUgaXNzdWUg
-Y2FuIGJlCj4gPiByZXByb2R1Y2VkIDstKQo+ID4KPiA+IE9uZSB0aGluZyB0aGF0IEknbSB3b3Jr
-aW5nIG9uIGlzIHRoYXQgTGludXggUENJIHN1YnN5c3RlbSBtaXNzZXMgY2VydGFpbgo+ID4gZGVs
-YXlzIHRoYXQgYXJlIG5lZWRlZCBhZnRlciBEM2NvbGQgLT4gRDAgdHJhbnNpdGlvbiwgb3RoZXJ3
-aXNlIHRoZQo+ID4gZGV2aWNlIGFuZC9vciBsaW5rIG1heSBub3QgYmUgcmVhZHkgYmVmb3JlIHdl
-IGFjY2VzcyBpdC4gV2hhdCB5b3UgYXJlCj4gPiBleHBlcmllbmNpbmcgc291bmRzIHNpbWlsYXIu
-IEkgd29uZGVyIGlmIHlvdSBjb3VsZCB0cnkgdGhlIGZvbGxvd2luZwo+ID4gcGF0Y2ggYW5kIHNl
-ZSBpZiBpdCBtYWtlcyBhbnkgZGlmZmVyZW5jZT8KPiA+Cj4gPiBodHRwczovL3BhdGNod29yay5r
-ZXJuZWwub3JnL3BhdGNoLzExMTA2NjExLwo+IAo+IEkgdGhpbmsgSSBhbHJlYWR5IHRyaWVkIHRo
-aXMgcGF0aC4gVGhlIHByb2JsZW0gaXNuJ3QgdGhhdCB0aGUgZGV2aWNlCj4gaXNuJ3QgYWNjZXNz
-aWJsZSB0b28gbGF0ZSwgYnV0IHRoYXQgaXQgc2VlbXMgdGhhdCB0aGUgZGV2aWNlCj4gY29tcGxl
-dGVseSBmYWxscyBvZmYgdGhlIGJ1cy4gQnV0IEkgY2FuIHJldGVzdCBhZ2FpbiBqdXN0IHRvIGJl
-IHN1cmUuCgpZZXMsIHBsZWFzZSB0cnkgaXQgYW5kIHNoYXJlIGZ1bGwgZG1lc2cgaWYvd2hlbiB0
-aGUgZmFpbHVyZSBzdGlsbCBoYXBwZW5zLgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fXwpOb3V2ZWF1IG1haWxpbmcgbGlzdApOb3V2ZWF1QGxpc3RzLmZyZWVk
-ZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZv
-L25vdXZlYXU=
+
+--===============1171630443==
+Content-Type: multipart/alternative; boundary="15698446231.2a84C562f.9265"
+Content-Transfer-Encoding: 7bit
+
+
+--15698446231.2a84C562f.9265
+Date: Mon, 30 Sep 2019 11:57:03 +0000
+MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+https://bugs.freedesktop.org/show_bug.cgi?id=3D111868
+
+            Bug ID: 111868
+           Summary: xorg with nouveau crash when starting mate-session in
+                    debian 10
+           Product: xorg
+           Version: unspecified
+          Hardware: Other
+                OS: All
+            Status: NEW
+          Severity: not set
+          Priority: not set
+         Component: Driver/nouveau
+          Assignee: nouveau@lists.freedesktop.org
+          Reporter: alain.prignet@u-pem.fr
+        QA Contact: xorg-team@lists.x.org
+
+Created attachment 145592
+  --> https://bugs.freedesktop.org/attachment.cgi?id=3D145592&action=3Dedit
+xorg.0.log with xorg backtrace
+
+Geforce 2 since debian 10 crash when starting mate-session (but not with
+xfce4-session or showing gdm3 or lightdm).
+
+I have also downgrade xorg-server-core to debian 9 and I get the same crash.
+All was working with debian 9 (and 4.9 kernel).
+
+I have tried 4.19 and 4.9 kernel : both crash.
+
+If I launch mate-session from command line in a xfce4-session, mate-session
+works.
+
+The backtrace of Xorg.0.log is the same as
+https://termbin.com/7avc
+I put it in attachment since I have not the non working computer with me. L=
+ater
+I will give a working Xorg.0.log (with xfce4) and the non working (with mat=
+e).
+
+--=20
+You are receiving this mail because:
+You are the assignee for the bug.=
+
+--15698446231.2a84C562f.9265
+Date: Mon, 30 Sep 2019 11:57:03 +0000
+MIME-Version: 1.0
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+<html>
+    <head>
+      <base href=3D"https://bugs.freedesktop.org/">
+    </head>
+    <body><table border=3D"1" cellspacing=3D"0" cellpadding=3D"8">
+        <tr>
+          <th>Bug ID</th>
+          <td><a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - xorg with nouveau crash when starting mate-session in deb=
+ian 10"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111868">111868</a>
+          </td>
+        </tr>
+
+        <tr>
+          <th>Summary</th>
+          <td>xorg with nouveau crash when starting mate-session in debian =
+10
+          </td>
+        </tr>
+
+        <tr>
+          <th>Product</th>
+          <td>xorg
+          </td>
+        </tr>
+
+        <tr>
+          <th>Version</th>
+          <td>unspecified
+          </td>
+        </tr>
+
+        <tr>
+          <th>Hardware</th>
+          <td>Other
+          </td>
+        </tr>
+
+        <tr>
+          <th>OS</th>
+          <td>All
+          </td>
+        </tr>
+
+        <tr>
+          <th>Status</th>
+          <td>NEW
+          </td>
+        </tr>
+
+        <tr>
+          <th>Severity</th>
+          <td>not set
+          </td>
+        </tr>
+
+        <tr>
+          <th>Priority</th>
+          <td>not set
+          </td>
+        </tr>
+
+        <tr>
+          <th>Component</th>
+          <td>Driver/nouveau
+          </td>
+        </tr>
+
+        <tr>
+          <th>Assignee</th>
+          <td>nouveau&#64;lists.freedesktop.org
+          </td>
+        </tr>
+
+        <tr>
+          <th>Reporter</th>
+          <td>alain.prignet&#64;u-pem.fr
+          </td>
+        </tr>
+
+        <tr>
+          <th>QA Contact</th>
+          <td>xorg-team&#64;lists.x.org
+          </td>
+        </tr></table>
+      <p>
+        <div>
+        <pre>Created <span class=3D""><a href=3D"attachment.cgi?id=3D145592=
+" name=3D"attach_145592" title=3D"xorg.0.log with xorg backtrace">attachmen=
+t 145592</a> <a href=3D"attachment.cgi?id=3D145592&amp;action=3Dedit" title=
+=3D"xorg.0.log with xorg backtrace">[details]</a></span>
+xorg.0.log with xorg backtrace
+
+Geforce 2 since debian 10 crash when starting mate-session (but not with
+xfce4-session or showing gdm3 or lightdm).
+
+I have also downgrade xorg-server-core to debian 9 and I get the same crash.
+All was working with debian 9 (and 4.9 kernel).
+
+I have tried 4.19 and 4.9 kernel : both crash.
+
+If I launch mate-session from command line in a xfce4-session, mate-session
+works.
+
+The backtrace of Xorg.0.log is the same as
+<a href=3D"https://termbin.com/7avc">https://termbin.com/7avc</a>
+I put it in attachment since I have not the non working computer with me. L=
+ater
+I will give a working Xorg.0.log (with xfce4) and the non working (with mat=
+e).</pre>
+        </div>
+      </p>
+
+
+      <hr>
+      <span>You are receiving this mail because:</span>
+
+      <ul>
+          <li>You are the assignee for the bug.</li>
+      </ul>
+    </body>
+</html>=
+
+--15698446231.2a84C562f.9265--
+
+--===============1171630443==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
+YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
+cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============1171630443==--
