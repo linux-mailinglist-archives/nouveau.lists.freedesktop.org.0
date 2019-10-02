@@ -2,22 +2,22 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1061BC8F80
-	for <lists+nouveau@lfdr.de>; Wed,  2 Oct 2019 19:13:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 27B8EC8F87
+	for <lists+nouveau@lfdr.de>; Wed,  2 Oct 2019 19:15:21 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 289D56E90A;
-	Wed,  2 Oct 2019 17:13:12 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 46FF36E15B;
+	Wed,  2 Oct 2019 17:15:19 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [131.252.210.165])
- by gabe.freedesktop.org (Postfix) with ESMTP id 591906E970
- for <nouveau@lists.freedesktop.org>; Wed,  2 Oct 2019 17:13:11 +0000 (UTC)
+ [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 0140C6E0E6
+ for <nouveau@lists.freedesktop.org>; Wed,  2 Oct 2019 17:15:19 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 5638F72162; Wed,  2 Oct 2019 17:13:11 +0000 (UTC)
+ id E8D5D72162; Wed,  2 Oct 2019 17:15:18 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Wed, 02 Oct 2019 17:13:11 +0000
+Date: Wed, 02 Oct 2019 17:15:19 +0000
 X-Bugzilla-Reason: AssignedTo
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
@@ -32,8 +32,8 @@ X-Bugzilla-Resolution:
 X-Bugzilla-Priority: medium
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-75985-8800-4s25O8Fe57@http.bugs.freedesktop.org/>
+X-Bugzilla-Changed-Fields: attachments.created
+Message-ID: <bug-75985-8800-uakQE07FAN@http.bugs.freedesktop.org/>
 In-Reply-To: <bug-75985-8800@http.bugs.freedesktop.org/>
 References: <bug-75985-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
@@ -52,18 +52,18 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0297556855=="
+Content-Type: multipart/mixed; boundary="===============0998374158=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============0297556855==
-Content-Type: multipart/alternative; boundary="15700363915.DB81A35d.22647"
+--===============0998374158==
+Content-Type: multipart/alternative; boundary="15700365180.fD7bb2839.23252"
 Content-Transfer-Encoding: 7bit
 
 
---15700363915.DB81A35d.22647
-Date: Wed, 2 Oct 2019 17:13:11 +0000
+--15700365180.fD7bb2839.23252
+Date: Wed, 2 Oct 2019 17:15:18 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -72,15 +72,17 @@ Auto-Submitted: auto-generated
 
 https://bugs.freedesktop.org/show_bug.cgi?id=3D75985
 
---- Comment #99 from Przemys=C5=82aw Kopa <prymoo@gmail.com> ---
-Here is the dmesg dump generated when running patched kernel.
+--- Comment #100 from Przemys=C5=82aw Kopa <prymoo@gmail.com> ---
+Created attachment 145615
+  --> https://bugs.freedesktop.org/attachment.cgi?id=3D145615&action=3Dedit
+Dmesg dump to present the problem of NVIDIA HDA not suspending correctly.
 
 --=20
 You are receiving this mail because:
 You are the assignee for the bug.=
 
---15700363915.DB81A35d.22647
-Date: Wed, 2 Oct 2019 17:13:11 +0000
+--15700365180.fD7bb2839.23252
+Date: Wed, 2 Oct 2019 17:15:18 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -97,8 +99,8 @@ Auto-Submitted: auto-generated
             <b><a class=3D"bz_bug_link=20
           bz_status_NEW "
    title=3D"NEW - [NVC1] HDMI audio device only visible after rescan"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D75985#c99">Commen=
-t # 99</a>
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D75985#c100">Comme=
+nt # 100</a>
               on <a class=3D"bz_bug_link=20
           bz_status_NEW "
    title=3D"NEW - [NVC1] HDMI audio device only visible after rescan"
@@ -108,8 +110,13 @@ t # 99</a>
 prymoo&#64;gmail.com" title=3D"Przemys=C5=82aw Kopa &lt;prymoo&#64;gmail.co=
 m&gt;"> <span class=3D"fn">Przemys=C5=82aw Kopa</span></a>
 </span></b>
-        <pre>Here is the dmesg dump generated when running patched kernel.<=
-/pre>
+        <pre>Created <span class=3D""><a href=3D"attachment.cgi?id=3D145615=
+" name=3D"attach_145615" title=3D"Dmesg dump to present the problem of NVID=
+IA HDA not suspending correctly.">attachment 145615</a> <a href=3D"attachme=
+nt.cgi?id=3D145615&amp;action=3Dedit" title=3D"Dmesg dump to present the pr=
+oblem of NVIDIA HDA not suspending correctly.">[details]</a></span>
+Dmesg dump to present the problem of NVIDIA HDA not suspending correctly.</=
+pre>
         </div>
       </p>
 
@@ -123,9 +130,9 @@ m&gt;"> <span class=3D"fn">Przemys=C5=82aw Kopa</span></a>
     </body>
 </html>=
 
---15700363915.DB81A35d.22647--
+--15700365180.fD7bb2839.23252--
 
---===============0297556855==
+--===============0998374158==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -135,4 +142,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============0297556855==--
+--===============0998374158==--
