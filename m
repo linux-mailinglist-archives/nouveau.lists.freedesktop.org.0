@@ -1,73 +1,65 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 03F8E12B316
-	for <lists+nouveau@lfdr.de>; Fri, 27 Dec 2019 09:15:55 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8339A12B2A7
+	for <lists+nouveau@lfdr.de>; Fri, 27 Dec 2019 09:14:00 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 034146E150;
-	Fri, 27 Dec 2019 08:14:36 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id AF27E89A76;
+	Fri, 27 Dec 2019 08:13:33 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from new2-smtp.messagingengine.com (new2-smtp.messagingengine.com
- [66.111.4.224])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6EFE089A92;
- Tue,  1 Oct 2019 12:34:50 +0000 (UTC)
-Received: from compute6.internal (compute6.nyi.internal [10.202.2.46])
- by mailnew.nyi.internal (Postfix) with ESMTP id 4639E3845;
- Tue,  1 Oct 2019 08:34:49 -0400 (EDT)
-Received: from mailfrontend1 ([10.202.2.162])
- by compute6.internal (MEProxy); Tue, 01 Oct 2019 08:34:49 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=engestrom.ch; h=
- date:from:to:cc:subject:message-id:references:mime-version
- :content-type:content-transfer-encoding:in-reply-to; s=fm2; bh=Z
- CFe4FL8sKu9d7TI/87cwj1RdFKXW/Wz6HLGUaYeNnI=; b=m1Gp8kez+Mhsuoi4T
- 59CzNqI2xz6J0ri2zucjgbPVBpCPvNnfW1I72iQXt6Ccox2FP7sJPMmq5zedAaAe
- u1VPItyQPpjyQRFyXLABtQZVCX0P0uH2FzLn2NmqOuLaYJOSN5VU47/lOSUjOe4l
- 10L619Byl8rGD3Bll6LxYMBHAxSGFk/BmfxVcx4iWebAmS73+F/KI7qTkY1uHh/u
- C0WCeIIomn/3XwiQbITJhzqN1mrZD5QWT4nuM3wTpeVcbSZ/r9g4GRzGfwndPcn/
- wMgufUBTsqR1gaqBjh/OsDNHbxl/DETQWdRettbCLJMo/c3CU6qnDoAlsIiSYJcu
- dGINA==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:content-transfer-encoding:content-type
- :date:from:in-reply-to:message-id:mime-version:references
- :subject:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
- :x-sasl-enc; s=fm3; bh=ZCFe4FL8sKu9d7TI/87cwj1RdFKXW/Wz6HLGUaYeN
- nI=; b=dFkaVP4Bn7gJ7omMjlTiFoZ3cnoGb1zVvbfEcidS6uuin4hSKTI/FQkpM
- zrpw4kCydNUWW7HHlHwEnvhRD7bC8pH6CPFbq78ZkvF4NIT1YfBW+xrlFYJFuZOQ
- oPz3LA8UEE7ymCFnz42v4YbUbuOgW2PGFPpIwXDhwnycwEArIuViJveZv9+mc1A2
- +27Xa/s1R5THXnZEuGDNHmWyN/l73sFel1UlCWLVpA/KJUcbo1S4UxTA4lC2Rqit
- RGfhGguKP2Fa3PcNJbplp03LkW3LzoonmSTQXJeTngjexH5pZEZ3mTvq9vJlbKss
- tgX+5AvE3XsovZdSMK6O9JZjXKo4A==
-X-ME-Sender: <xms:6EeTXaSmkTPeD39T2XSHPMTkp-WY5YDiPJ21ZP7vgHNsw9n7GZVnGw>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedufedrgeeggdehvdcutefuodetggdotefrodftvf
- curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
- uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
- fjughrpeffhffvuffkfhggtggugfgjfgesthekredttderjeenucfhrhhomhepgfhrihgt
- ucfgnhhgvghsthhrohhmuceovghrihgtsegvnhhgvghsthhrohhmrdgthheqnecuffhomh
- grihhnpehmrghilhdqrghrtghhihhvvgdrtghomhenucfkphepudelvddrudelkedrudeh
- uddriedvnecurfgrrhgrmhepmhgrihhlfhhrohhmpegvrhhitgesvghnghgvshhtrhhomh
- drtghhnecuvehluhhsthgvrhfuihiivgeptd
-X-ME-Proxy: <xmx:6EeTXRq02QouW8yYwmy576gHcxbzTACIpWRw9FmcOKU-dphW9L1tPA>
- <xmx:6EeTXcdHOdUg3DLb04l7Uhsu16HO86uiu8934PHotLo8U-m-CLnLAA>
- <xmx:6EeTXUiivZCN_PjMxsSFybsxeAROleH822OQOgl6Mn1QOHG761oRwg>
- <xmx:6UeTXTH9iBGYqKpoM4s6_nphjJRotkce6hOVza1LY-Dt49PiVZuoKQ>
-Received: from engestrom.ch (unknown [192.198.151.62])
- by mail.messagingengine.com (Postfix) with ESMTPA id 0DE7680063;
- Tue,  1 Oct 2019 08:34:45 -0400 (EDT)
-Date: Tue, 1 Oct 2019 13:34:44 +0100
-From: Eric Engestrom <eric@engestrom.ch>
-To: Jani Nikula <jani.nikula@intel.com>
-Message-ID: <20191001123444.xtp7wpickwjus4m2@engestrom.ch>
-References: <20190926074814.rdzxjmut6izqf4d5@engestrom.ch>
- <875zl8d8x0.fsf@intel.com>
+Received: from mail-yw1-xc43.google.com (mail-yw1-xc43.google.com
+ [IPv6:2607:f8b0:4864:20::c43])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 62CF46E0E8
+ for <nouveau@lists.freedesktop.org>; Wed,  2 Oct 2019 21:07:54 +0000 (UTC)
+Received: by mail-yw1-xc43.google.com with SMTP id e205so218711ywc.7
+ for <nouveau@lists.freedesktop.org>; Wed, 02 Oct 2019 14:07:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=T2JVXi2n7aIjQPfd/y2Qza7rCOQAGt2XVrhneTlTFqk=;
+ b=a48bnacKL3bHQCAPTzjpwOWeh35mQfcT2+1l7mws8a+hPVifJauAclcUDowffjOciD
+ 7uzBDNymTolORf/fs9l5zGGzRzz1hSg5yfarrk9unbU0agAgkyHjNdV3ca808h83hVDC
+ ZA1LnWCehKYL3I+DIx90V/bnighUg2HmkiHF3mnXA6EWwd/FZPqiJolqmmcQqE/499oN
+ JR4bJoR0fgCl2zzIeZ9BkOiXp5m1FinDcASY+l3yvJgazfbBMi1M1GskUfbZPFh0l8Yh
+ 7FdZxNMS7krkjz8dI7du0pR8FAcyCuE7SyvDXqOi1NeqBG+KoqNaZ0sB8BP/lu+hpQQI
+ IcNw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=T2JVXi2n7aIjQPfd/y2Qza7rCOQAGt2XVrhneTlTFqk=;
+ b=qJDz5MQCpeTrYZgz61WQWv6miZp0H5nuhjcm6aPPLY+zxDlmag0w6JMm0zpk36O+D6
+ siNB+Wqj5aEP2Hl3UJhAIb9VIugb+ZYq07BDhBDizpdXNE0JyYOupY5LfzBXZ9G/oOzU
+ 7BMiOvP/FMMN13Del2AWJBRPklgqALkREWTZJeEjN7WHx0xPXIRyrQPZ2SzR0F0zxRkr
+ e6XXmLAPDiDMQk0BO60CwHswSbPXAsdMj3pE5e0j08RElBNsgAddLs3J/dxvgHwPgKJN
+ fw+qEF7RBqOE3CtaptchaeP8eGDPQaLmh+6Zxa7UpQtTvlc1ojBRfrdqZ0Jtw42f3zqJ
+ 5v1g==
+X-Gm-Message-State: APjAAAVeA4TM2sGz2USixAlSQIpmtsPaV4B9ARRikdHJGKqEDPOFvKE/
+ d9ATxOtQaurQu6t3zHDUx/q7+i4mOsI=
+X-Google-Smtp-Source: APXvYqyLKx+kkY+wuTy86SoPKa6xoVoAlsiAqUo/BGkcHwaTGqeptog/1/EbNBH3HxB/C2k5FnXr9A==
+X-Received: by 2002:a81:698b:: with SMTP id e133mr3952381ywc.415.1570050473038; 
+ Wed, 02 Oct 2019 14:07:53 -0700 (PDT)
+Received: from mail-yw1-f53.google.com (mail-yw1-f53.google.com.
+ [209.85.161.53])
+ by smtp.gmail.com with ESMTPSA id 80sm107708ywp.56.2019.10.02.14.07.52
+ for <nouveau@lists.freedesktop.org>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 02 Oct 2019 14:07:52 -0700 (PDT)
+Received: by mail-yw1-f53.google.com with SMTP id x64so227541ywg.3
+ for <nouveau@lists.freedesktop.org>; Wed, 02 Oct 2019 14:07:52 -0700 (PDT)
+X-Received: by 2002:a81:6f8a:: with SMTP id k132mr4013325ywc.275.1570050020507; 
+ Wed, 02 Oct 2019 14:00:20 -0700 (PDT)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <875zl8d8x0.fsf@intel.com>
-User-Agent: NeoMutt/20180716
-X-Mailman-Approved-At: Fri, 27 Dec 2019 08:13:32 +0000
-Subject: Re: [Nouveau] [PATCH v2 0/9] drm/print: add and use
- drm_debug_enabled()
+References: <00000000000051e9280593f2dc9f@google.com>
+In-Reply-To: <00000000000051e9280593f2dc9f@google.com>
+From: Willem de Bruijn <willemdebruijn.kernel@gmail.com>
+Date: Wed, 2 Oct 2019 16:59:44 -0400
+X-Gmail-Original-Message-ID: <CA+FuTSedj9+UJKLfuER+FuEmQvWNqsDfO5i+Z6vit0OoLv=NLA@mail.gmail.com>
+Message-ID: <CA+FuTSedj9+UJKLfuER+FuEmQvWNqsDfO5i+Z6vit0OoLv=NLA@mail.gmail.com>
+To: syzbot <syzbot+3f3e5e77d793c7a6fe6c@syzkaller.appspotmail.com>
+X-Mailman-Approved-At: Fri, 27 Dec 2019 08:13:31 +0000
+Subject: Re: [Nouveau] general protection fault in veth_get_stats64
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -79,77 +71,172 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Zhou <David1.Zhou@amd.com>, nouveau@lists.freedesktop.org,
- intel-gfx@lists.freedesktop.org, Russell King <linux+etnaviv@armlinux.org.uk>,
- Christian Gmeiner <christian.gmeiner@gmail.com>, amd-gfx@lists.freedesktop.org,
- etnaviv@lists.freedesktop.org, Rob Clark <robdclark@gmail.com>,
- Lucas Stach <l.stach@pengutronix.de>, dri-devel@lists.freedesktop.org,
- linux-arm-msm@vger.kernel.org, Alex Deucher <alexander.deucher@amd.com>,
- freedreno@lists.freedesktop.org, Sean Paul <sean@poorly.run>,
- Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>,
- Ben Skeggs <bskeggs@redhat.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: songliubraving@fb.com, Jakub Kicinski <jakub.kicinski@netronome.com>,
+ airlied@linux.ie, John Fastabend <john.fastabend@gmail.com>,
+ Alexei Starovoitov <ast@kernel.org>, dri-devel@lists.freedesktop.org,
+ guoren@kernel.org, f.fainelli@gmail.com, wanghai26@huawei.com,
+ Daniel Borkmann <daniel@iogearbox.net>, toshiaki.makita1@gmail.com,
+ jwi@linux.ibm.com, bskeggs@redhat.com, nouveau@lists.freedesktop.org,
+ Yonghong Song <yhs@fb.com>, yuehaibing@huawei.com, hawk@kernel.org,
+ syzkaller-bugs@googlegroups.com, idosch@mellanox.com, jiri@mellanox.com,
+ kimbrownkd@gmail.com, petrm@mellanox.com, tglx@linutronix.de,
+ andriy.shevchenko@linux.intel.com,
+ Network Development <netdev@vger.kernel.org>,
+ linux-kernel <linux-kernel@vger.kernel.org>,
+ David Miller <davem@davemloft.net>, daniel@ffwll.ch,
+ David Ahern <dsahern@gmail.com>, bpf <bpf@vger.kernel.org>,
+ torvalds@linux-foundation.org, Martin Lau <kafai@fb.com>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-T24gVHVlc2RheSwgMjAxOS0xMC0wMSAxNDowMzo1NSArMDMwMCwgSmFuaSBOaWt1bGEgd3JvdGU6
-Cj4gT24gVGh1LCAyNiBTZXAgMjAxOSwgRXJpYyBFbmdlc3Ryb20gPGVyaWNAZW5nZXN0cm9tLmNo
-PiB3cm90ZToKPiA+IE9uIFR1ZXNkYXksIDIwMTktMDktMjQgMTU6NTg6NTYgKzAzMDAsIEphbmkg
-TmlrdWxhIHdyb3RlOgo+ID4+IEhpIGFsbCwgdjIgb2YgWzFdLCBhIGxpdHRsZSByZWZhY3Rvcmlu
-ZyBhcm91bmQgZHJtX2RlYnVnIGFjY2VzcyB0bwo+ID4+IGFic3RyYWN0IGl0IGJldHRlci4gVGhl
-cmUgc2hvdWxkbid0IGJlIGFueSBmdW5jdGlvbmFsIGNoYW5nZXMuCj4gPj4gCj4gPj4gSSdkIGFw
-cHJlY2lhdGUgYWNrcyBmb3IgbWVyZ2luZyB0aGUgbG90IHZpYSBkcm0tbWlzYy4gSWYgdGhlcmUg
-YXJlIGFueQo+ID4+IG9iamVjdGlvbnMgdG8gdGhhdCwgd2UnbGwgbmVlZCB0byBwb3N0cG9uZSB0
-aGUgbGFzdCBwYXRjaCB1bnRpbAo+ID4+IGV2ZXJ5dGhpbmcgaGFzIGJlZW4gbWVyZ2VkIGFuZCBj
-b252ZXJ0ZWQgaW4gZHJtLW5leHQuCj4gPj4gCj4gPj4gQlIsCj4gPj4gSmFuaS4KPiA+PiAKPiA+
-PiBDYzogRXJpYyBFbmdlc3Ryb20gPGVyaWMuZW5nZXN0cm9tQGludGVsLmNvbT4KPiA+PiBDYzog
-QWxleCBEZXVjaGVyIDxhbGV4YW5kZXIuZGV1Y2hlckBhbWQuY29tPgo+ID4+IENjOiBDaHJpc3Rp
-YW4gS8O2bmlnIDxjaHJpc3RpYW4ua29lbmlnQGFtZC5jb20+Cj4gPj4gQ2M6IERhdmlkIChDaHVu
-TWluZykgWmhvdSA8RGF2aWQxLlpob3VAYW1kLmNvbT4KPiA+PiBDYzogYW1kLWdmeEBsaXN0cy5m
-cmVlZGVza3RvcC5vcmcKPiA+PiBDYzogQmVuIFNrZWdncyA8YnNrZWdnc0ByZWRoYXQuY29tPgo+
-ID4+IENjOiBub3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwo+ID4+IENjOiBSb2IgQ2xhcmsg
-PHJvYmRjbGFya0BnbWFpbC5jb20+Cj4gPj4gQ2M6IFNlYW4gUGF1bCA8c2VhbkBwb29ybHkucnVu
-Pgo+ID4+IENjOiBsaW51eC1hcm0tbXNtQHZnZXIua2VybmVsLm9yZwo+ID4+IENjOiBmcmVlZHJl
-bm9AbGlzdHMuZnJlZWRlc2t0b3Aub3JnCj4gPj4gQ2M6IEZyYW5jaXNjbyBKZXJleiA8Y3Vycm9q
-ZXJlekByaXNldXAubmV0Pgo+ID4+IENjOiBMdWNhcyBTdGFjaCA8bC5zdGFjaEBwZW5ndXRyb25p
-eC5kZT4KPiA+PiBDYzogUnVzc2VsbCBLaW5nIDxsaW51eCtldG5hdml2QGFybWxpbnV4Lm9yZy51
-az4KPiA+PiBDYzogQ2hyaXN0aWFuIEdtZWluZXIgPGNocmlzdGlhbi5nbWVpbmVyQGdtYWlsLmNv
-bT4KPiA+PiBDYzogZXRuYXZpdkBsaXN0cy5mcmVlZGVza3RvcC5vcmcKPiA+PiAKPiA+PiAKPiA+
-PiBbMV0gaHR0cDovL21pZC5tYWlsLWFyY2hpdmUuY29tL2NvdmVyLjE1NjgzNzUxODkuZ2l0Lmph
-bmkubmlrdWxhQGludGVsLmNvbQo+ID4+IAo+ID4+IEphbmkgTmlrdWxhICg5KToKPiA+PiAgIGRy
-bS9wcmludDogbW92ZSBkcm1fZGVidWcgdmFyaWFibGUgdG8gZHJtX3ByaW50LltjaF0KPiA+PiAg
-IGRybS9wcmludDogYWRkIGRybV9kZWJ1Z19lbmFibGVkKCkKPiA+PiAgIGRybS9pOTE1OiB1c2Ug
-ZHJtX2RlYnVnX2VuYWJsZWQoKSB0byBjaGVjayBmb3IgZGVidWcgY2F0ZWdvcmllcwo+ID4+ICAg
-ZHJtL3ByaW50OiByZW5hbWUgZHJtX2RlYnVnIHRvIF9fZHJtX2RlYnVnIHRvIGRpc2NvdXJhZ2Ug
-dXNlCj4gPgo+ID4gVGhlIGFib3ZlIGZvdXIgcGF0Y2hlcyBhcmU6Cj4gPiBSZXZpZXdlZC1ieTog
-RXJpYyBFbmdlc3Ryb20gPGVyaWNAZW5nZXN0cm9tLmNoPgo+ID4KPiA+IERpZCB5b3UgY2hlY2sg
-dG8gbWFrZSBzdXJlIHRoZSBgdW5saWtlbHkoKWAgaXMgcHJvcGFnYXRlZCBjb3JyZWN0bHkKPiA+
-IG91dHNpZGUgdGhlIGBkcm1fZGVidWdfZW5hYmxlZCgpYCBjYWxsPwo+IAo+IEkgZGlkIG5vdy4K
-PiAKPiBIYXZpbmcgZHJtX2RlYnVnX2VuYWJsZWQoKSBhcyBhIG1hY3JvIHZzLiBhcyBhbiBpbmxp
-bmUgZnVuY3Rpb24gZG9lcyBub3QKPiBzZWVtIHRvIG1ha2UgYSBkaWZmZXJlbmNlLCBzbyBJIHRo
-aW5rIHRoZSBpbmxpbmUgaXMgY2xlYXJseSBwcmVmZXJyYWJsZS4KCkFncmVlZCA6KQoKPiAKPiBI
-b3dldmVyLCBmb3IgZXhhbXBsZQo+IAo+IAl1bmxpa2VseShmb28gJiYgZHJtX2RlYnVnICYgRFJN
-X1VUX0RQKQo+IAo+IGRvZXMgcHJvZHVjZSBjb2RlIGRpZmZlcmVudCBmcm9tCj4gCj4gCShmb28g
-JiYgZHJtX2RlYnVnX2VuYWJsZWQoRFJNX1VUX0RQKSkKPiAKPiBpbmRpY2F0aW5nIHRoYXQgdGhl
-IHVubGlrZWx5KCkgd2l0aGluIGRybV9kZWJ1Z19lbmFibGVkKCkgZG9lcyBub3QKPiBwcm9wYWdh
-dGUgdG8gdGhlIHdob2xlIGNvbmRpdGlvbi4gSXQncyBwb3NzaWJsZSB0byByZXRhaW4gdGhlIHNh
-bWUKPiBhc3NlbWJseSBvdXRwdXQgd2l0aAo+IAo+IAkodW5saWtlbHkoZm9vKSAmJiBkcm1fZGVi
-dWdfZW5hYmxlZChEUk1fVVRfRFApKQo+IAo+IGJ1dCBpdCdzIHVuY2xlYXIgdG8gbWUgd2hldGhl
-ciB0aGlzIGlzIHJlYWxseSB3b3J0aCBpdCwgZWl0aGVyCj4gcmVhZGFiaWxpdHkgb3IgcGVyZm9y
-bWFuY2Ugd2lzZS4KPiAKPiBUaG91Z2h0cz8KClRoYXQga2luZCBvZiBjb2RlIG9ubHkgaGFwcGVu
-cyAyIHRpbWVzLCBib3RoIGluCmRyaXZlcnMvZ3B1L2RybS9kcm1fZHBfbXN0X3RvcG9sb2d5LmMg
-KGluIHBhdGNoIDIvOSksIHJpZ2h0PwoKSSB0aGluayB5b3VyIHN1Z2dlc3Rpb24gaXMgdGhlIHJp
-Z2h0IHRoaW5nIHRvIGRvIGhlcmU6CgotICAgaWYgKHVubGlrZWx5KHJldCAmJiBkcm1fZGVidWcg
-JiBEUk1fVVRfRFApKSB7CisgICBpZiAodW5saWtlbHkocmV0KSAmJiBkcm1fZGVidWdfZW5hYmxl
-ZChEUk1fVVRfRFApKSB7CgpJdCBkb2Vzbid0IHJlYWxseSBjb3N0IG11Y2ggaW4gcmVhZGFiaWxp
-dHkgKGVzcGVjaWFsbHkgY29tcGFyZWQgdG8gd2hhdAppdCB3YXMgYmVmb3JlKSwgYW5kIHdoZXRo
-ZXIgaXQncyBpbXBvcnRhbnQgcGVyZm9ybWFuY2Ugd2lzZSBJIGNvdWxkbid0CnRlbGwsIGJ1dCBJ
-IHRoaW5rIGl0J3MgYmVzdCB0byBrZWVwIHRoZSBjb2RlIG9wdGltaXNlZCBhcyBpdCB3YXMgYmVm
-b3JlCnVubGVzcyB0aGVyZSdzIGEgcmVhc29uIHRvIGRyb3AgaXQuCgpMeXVkZSBtaWdodCBrbm93
-IG1vcmUgc2luY2Ugc2hlIHdyb3RlIDJmMDE1ZWM2ZWFiNjkzMDFmZGNmNSwgaWYgeW91IHdhbnQK
-dG8gcGluZyBoZXI/Cgo+IAo+IEJSLAo+IEphbmkuCj4gCj4gCj4gLS0gCj4gSmFuaSBOaWt1bGEs
-IEludGVsIE9wZW4gU291cmNlIEdyYXBoaWNzIENlbnRlcgpfX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fXwpOb3V2ZWF1IG1haWxpbmcgbGlzdApOb3V2ZWF1QGxp
-c3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFu
-L2xpc3RpbmZvL25vdXZlYXUK
+On Wed, Oct 2, 2019 at 3:56 PM syzbot
+<syzbot+3f3e5e77d793c7a6fe6c@syzkaller.appspotmail.com> wrote:
+>
+> Hello,
+>
+> syzbot found the following crash on:
+>
+> HEAD commit:    a32db7e1 Add linux-next specific files for 20191002
+> git tree:       linux-next
+> console output: https://syzkaller.appspot.com/x/log.txt?x=175ab7cd600000
+> kernel config:  https://syzkaller.appspot.com/x/.config?x=599cf05035799eef
+> dashboard link: https://syzkaller.appspot.com/bug?extid=3f3e5e77d793c7a6fe6c
+> compiler:       gcc (GCC) 9.0.0 20181231 (experimental)
+> syz repro:      https://syzkaller.appspot.com/x/repro.syz?x=12f8b943600000
+> C reproducer:   https://syzkaller.appspot.com/x/repro.c?x=16981a25600000
+>
+> The bug was bisected to:
+>
+> commit 84da111de0b4be15bd500deff773f5116f39f7be
+> Author: Linus Torvalds <torvalds@linux-foundation.org>
+> Date:   Sat Sep 21 17:07:42 2019 +0000
+>
+>      Merge tag 'for-linus-hmm' of
+> git://git.kernel.org/pub/scm/linux/kernel/git/rdma/rdma
+>
+> bisection log:  https://syzkaller.appspot.com/x/bisect.txt?x=17c55847600000
+> final crash:    https://syzkaller.appspot.com/x/report.txt?x=14255847600000
+> console output: https://syzkaller.appspot.com/x/log.txt?x=10255847600000
+>
+> IMPORTANT: if you fix the bug, please add the following tag to the commit:
+> Reported-by: syzbot+3f3e5e77d793c7a6fe6c@syzkaller.appspotmail.com
+> Fixes: 84da111de0b4 ("Merge tag 'for-linus-hmm' of
+> git://git.kernel.org/pub/scm/linux/kernel/git/rdma/rdma")
+>
+> RSP: 002b:00007fff0ba6c998 EFLAGS: 00000246 ORIG_RAX: 000000000000002e
+> RAX: ffffffffffffffda RBX: 0000000000000003 RCX: 00000000004424a9
+> RDX: 0000000000000000 RSI: 0000000020000140 RDI: 0000000000000003
+> RBP: 0000000000000000 R08: 0000000000000002 R09: 0000000000000000
+> R10: 0000000000000000 R11: 0000000000000246 R12: ffffffffffffffff
+> R13: 0000000000000004 R14: 0000000000000000 R15: 0000000000000000
+> kasan: CONFIG_KASAN_INLINE enabled
+> kasan: GPF could be caused by NULL-ptr deref or user memory access
+> general protection fault: 0000 [#1] PREEMPT SMP KASAN
+> CPU: 1 PID: 8605 Comm: syz-executor330 Not tainted 5.4.0-rc1-next-20191002
+> #0
+> Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS
+> Google 01/01/2011
+> RIP: 0010:veth_stats_rx drivers/net/veth.c:322 [inline]
+> RIP: 0010:veth_get_stats64+0x523/0x900 drivers/net/veth.c:356
+> Code: 89 85 60 ff ff ff e8 6c 74 31 fd 49 63 c7 48 69 c0 c0 02 00 00 48 03
+> 85 60 ff ff ff 48 8d b8 a0 01 00 00 48 89 fa 48 c1 ea 03 <42> 80 3c 32 00
+> 0f 85 c9 02 00 00 48 8d b8 a8 01 00 00 48 8b 90 a0
+> RSP: 0018:ffff88809996ed00 EFLAGS: 00010202
+> RAX: 0000000000000000 RBX: 0000000000000001 RCX: ffffffff84418daf
+> RDX: 0000000000000034 RSI: ffffffff84418e04 RDI: 00000000000001a0
+> RBP: ffff88809996ede0 R08: ffff888093182180 R09: ffffed1013202d6a
+> R10: ffffed1013202d69 R11: ffff888099016b4f R12: 0000000000000000
+> R13: 0000000000000000 R14: dffffc0000000000 R15: 0000000000000000
+> FS:  0000000001f4a880(0000) GS:ffff8880ae900000(0000) knlGS:0000000000000000
+> CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+> CR2: 0000000020000140 CR3: 000000009a80b000 CR4: 00000000001406e0
+> DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+> DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
+> Call Trace:
+>   dev_get_stats+0x8e/0x280 net/core/dev.c:9220
+>   rtnl_fill_stats+0x4d/0xac0 net/core/rtnetlink.c:1191
+>   rtnl_fill_ifinfo+0x10ad/0x3af0 net/core/rtnetlink.c:1717
+>   rtmsg_ifinfo_build_skb+0xc9/0x1a0 net/core/rtnetlink.c:3635
+>   rtmsg_ifinfo_event.part.0+0x43/0xe0 net/core/rtnetlink.c:3667
+>   rtmsg_ifinfo_event net/core/rtnetlink.c:3678 [inline]
+>   rtmsg_ifinfo+0x8d/0xa0 net/core/rtnetlink.c:3676
+>   __dev_notify_flags+0x235/0x2c0 net/core/dev.c:7757
+>   rtnl_configure_link+0x175/0x250 net/core/rtnetlink.c:2968
+>   __rtnl_newlink+0x10c4/0x16d0 net/core/rtnetlink.c:3285
+>   rtnl_newlink+0x69/0xa0 net/core/rtnetlink.c:3325
+>   rtnetlink_rcv_msg+0x463/0xb00 net/core/rtnetlink.c:5386
+>   netlink_rcv_skb+0x177/0x450 net/netlink/af_netlink.c:2477
+>   rtnetlink_rcv+0x1d/0x30 net/core/rtnetlink.c:5404
+>   netlink_unicast_kernel net/netlink/af_netlink.c:1302 [inline]
+>   netlink_unicast+0x531/0x710 net/netlink/af_netlink.c:1328
+>   netlink_sendmsg+0x8a5/0xd60 net/netlink/af_netlink.c:1917
+>   sock_sendmsg_nosec net/socket.c:638 [inline]
+>   sock_sendmsg+0xd7/0x130 net/socket.c:658
+>   ___sys_sendmsg+0x803/0x920 net/socket.c:2312
+>   __sys_sendmsg+0x105/0x1d0 net/socket.c:2357
+>   __do_sys_sendmsg net/socket.c:2366 [inline]
+>   __se_sys_sendmsg net/socket.c:2364 [inline]
+>   __x64_sys_sendmsg+0x78/0xb0 net/socket.c:2364
+>   do_syscall_64+0xfa/0x760 arch/x86/entry/common.c:290
+>   entry_SYSCALL_64_after_hwframe+0x49/0xbe
+> RIP: 0033:0x4424a9
+> Code: e8 9c 07 03 00 48 83 c4 18 c3 0f 1f 80 00 00 00 00 48 89 f8 48 89 f7
+> 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff
+> ff 0f 83 3b 0a fc ff c3 66 2e 0f 1f 84 00 00 00 00
+> RSP: 002b:00007fff0ba6c998 EFLAGS: 00000246 ORIG_RAX: 000000000000002e
+> RAX: ffffffffffffffda RBX: 0000000000000003 RCX: 00000000004424a9
+> RDX: 0000000000000000 RSI: 0000000020000140 RDI: 0000000000000003
+> RBP: 0000000000000000 R08: 0000000000000002 R09: 0000000000000000
+> R10: 0000000000000000 R11: 0000000000000246 R12: ffffffffffffffff
+> R13: 0000000000000004 R14: 0000000000000000 R15: 0000000000000000
+> Modules linked in:
+> ---[ end trace cc6dec8a4962bfff ]---
+> RIP: 0010:veth_stats_rx drivers/net/veth.c:322 [inline]
+> RIP: 0010:veth_get_stats64+0x523/0x900 drivers/net/veth.c:356
+> Code: 89 85 60 ff ff ff e8 6c 74 31 fd 49 63 c7 48 69 c0 c0 02 00 00 48 03
+> 85 60 ff ff ff 48 8d b8 a0 01 00 00 48 89 fa 48 c1 ea 03 <42> 80 3c 32 00
+> 0f 85 c9 02 00 00 48 8d b8 a8 01 00 00 48 8b 90 a0
+> RSP: 0018:ffff88809996ed00 EFLAGS: 00010202
+> RAX: 0000000000000000 RBX: 0000000000000001 RCX: ffffffff84418daf
+> RDX: 0000000000000034 RSI: ffffffff84418e04 RDI: 00000000000001a0
+> RBP: ffff88809996ede0 R08: ffff888093182180 R09: ffffed1013202d6a
+> R10: ffffed1013202d69 R11: ffff888099016b4f R12: 0000000000000000
+> R13: 0000000000000000 R14: dffffc0000000000 R15: 0000000000000000
+> FS:  0000000001f4a880(0000) GS:ffff8880ae900000(0000) knlGS:0000000000000000
+> CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+> CR2: 0000000020000140 CR3: 000000009a80b000 CR4: 00000000001406e0
+> DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+> DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
+
+Syzbot CC:ed a lot of people directly on this report. Perhaps because
+of the bisection?
+
+Specific to the report: I think this may be introduced with the
+alternative names for network interfaces patchset.
+
+The reproducer
+
+fails on      76c9ac0ee878 net: rtnetlink: add possibility to use
+alternative names as message handle
+passes on be2644aac3e1 tcp: add ipv6_addr_v4mapped_loopback() helper
+
+Leaving
+
+76c9ac0ee878 net: rtnetlink: add possibility to use alternative names
+as message handle
+cc6090e985d7 net: rtnetlink: introduce helper to get net_device
+instance by ifname
+7af12cba4ef0 net: rtnetlink: unify the code in __rtnl_newlink get dev
+with the rest
+88f4fb0c7496 net: rtnetlink: put alternative names to getlink message
+36fbf1e52bd3 net: rtnetlink: add linkprop commands to add and delete
+alternative ifnames
+ff92741270bf net: introduce name_node struct to be used in hashlist
+6958c97a488c net: procfs: use index hashlist instead of name hashlist
+be2
+_______________________________________________
+Nouveau mailing list
+Nouveau@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/nouveau
