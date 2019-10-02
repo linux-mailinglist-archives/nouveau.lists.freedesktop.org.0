@@ -1,23 +1,23 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id AFDD9C4AD2
-	for <lists+nouveau@lfdr.de>; Wed,  2 Oct 2019 11:53:03 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 56B4CC4AEA
+	for <lists+nouveau@lfdr.de>; Wed,  2 Oct 2019 11:58:42 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 853816E8F8;
-	Wed,  2 Oct 2019 09:53:01 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 17E916E925;
+	Wed,  2 Oct 2019 09:58:40 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
- by gabe.freedesktop.org (Postfix) with ESMTP id B26076E913
- for <nouveau@lists.freedesktop.org>; Wed,  2 Oct 2019 09:52:59 +0000 (UTC)
+ [131.252.210.165])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 411A56E92D
+ for <nouveau@lists.freedesktop.org>; Wed,  2 Oct 2019 09:58:39 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id AE76D72162; Wed,  2 Oct 2019 09:52:59 +0000 (UTC)
+ id 3E15372162; Wed,  2 Oct 2019 09:58:39 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Wed, 02 Oct 2019 09:52:59 +0000
+Date: Wed, 02 Oct 2019 09:58:38 +0000
 X-Bugzilla-Reason: AssignedTo
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
@@ -26,14 +26,14 @@ X-Bugzilla-Component: Driver/nouveau
 X-Bugzilla-Version: unspecified
 X-Bugzilla-Keywords: 
 X-Bugzilla-Severity: normal
-X-Bugzilla-Who: dan@reactivated.net
+X-Bugzilla-Who: prymoo@gmail.com
 X-Bugzilla-Status: NEW
 X-Bugzilla-Resolution: 
 X-Bugzilla-Priority: medium
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
 X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-75985-8800-qYjj73sHRg@http.bugs.freedesktop.org/>
+Message-ID: <bug-75985-8800-39nTQi9dG3@http.bugs.freedesktop.org/>
 In-Reply-To: <bug-75985-8800@http.bugs.freedesktop.org/>
 References: <bug-75985-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
@@ -52,18 +52,18 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1249999436=="
+Content-Type: multipart/mixed; boundary="===============0385526689=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============1249999436==
-Content-Type: multipart/alternative; boundary="15700099797.1d6011D2.22553"
+--===============0385526689==
+Content-Type: multipart/alternative; boundary="15700103193.51b88.22852"
 Content-Transfer-Encoding: 7bit
 
 
---15700099797.1d6011D2.22553
-Date: Wed, 2 Oct 2019 09:52:59 +0000
+--15700103193.51b88.22852
+Date: Wed, 2 Oct 2019 09:58:39 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -72,22 +72,23 @@ Auto-Submitted: auto-generated
 
 https://bugs.freedesktop.org/show_bug.cgi?id=3D75985
 
---- Comment #91 from Daniel Drake <dan@reactivated.net> ---
-(In reply to Przemys=C5=82aw Kopa from comment #90)
-> Wasn't this bug fixed already?
-> https://github.com/torvalds/linux/commit/
-> fc09ab7a767394f9ecdad84ea6e85d68b83c8e21
+--- Comment #92 from Przemys=C5=82aw Kopa <prymoo@gmail.com> ---
+(In reply to Daniel Drake from comment #91)
 
-That looks promising! Since you are the bug reporter, could you please test=
- it?
-Or have you already confirmed that it fixes the issue reported here?
+> That looks promising! Since you are the bug reporter, could you please te=
+st
+> it?
+> Or have you already confirmed that it fixes the issue reported here?
+
+Am I wrong, or was this patch already pulled in linux 4.20? In that case, it
+obviously didn't solve my problem. ;)
 
 --=20
 You are receiving this mail because:
 You are the assignee for the bug.=
 
---15700099797.1d6011D2.22553
-Date: Wed, 2 Oct 2019 09:52:59 +0000
+--15700103193.51b88.22852
+Date: Wed, 2 Oct 2019 09:58:39 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -104,27 +105,28 @@ Auto-Submitted: auto-generated
             <b><a class=3D"bz_bug_link=20
           bz_status_NEW "
    title=3D"NEW - [NVC1] HDMI audio device only visible after rescan"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D75985#c91">Commen=
-t # 91</a>
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D75985#c92">Commen=
+t # 92</a>
               on <a class=3D"bz_bug_link=20
           bz_status_NEW "
    title=3D"NEW - [NVC1] HDMI audio device only visible after rescan"
    href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D75985">bug 75985<=
 /a>
               from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
-dan&#64;reactivated.net" title=3D"Daniel Drake &lt;dan&#64;reactivated.net&=
-gt;"> <span class=3D"fn">Daniel Drake</span></a>
+prymoo&#64;gmail.com" title=3D"Przemys=C5=82aw Kopa &lt;prymoo&#64;gmail.co=
+m&gt;"> <span class=3D"fn">Przemys=C5=82aw Kopa</span></a>
 </span></b>
-        <pre>(In reply to Przemys=C5=82aw Kopa from <a href=3D"show_bug.cgi=
-?id=3D75985#c90">comment #90</a>)
-<span class=3D"quote">&gt; Wasn't this bug fixed already?
-&gt; <a href=3D"https://github.com/torvalds/linux/commit/">https://github.c=
-om/torvalds/linux/commit/</a>
-&gt; fc09ab7a767394f9ecdad84ea6e85d68b83c8e21</span >
+        <pre>(In reply to Daniel Drake from <a href=3D"show_bug.cgi?id=3D75=
+985#c91">comment #91</a>)
 
-That looks promising! Since you are the bug reporter, could you please test=
- it?
-Or have you already confirmed that it fixes the issue reported here?</pre>
+<span class=3D"quote">&gt; That looks promising! Since you are the bug repo=
+rter, could you please test
+&gt; it?
+&gt; Or have you already confirmed that it fixes the issue reported here?</=
+span >
+
+Am I wrong, or was this patch already pulled in linux 4.20? In that case, it
+obviously didn't solve my problem. ;)</pre>
         </div>
       </p>
 
@@ -138,9 +140,9 @@ Or have you already confirmed that it fixes the issue reported here?</pre>
     </body>
 </html>=
 
---15700099797.1d6011D2.22553--
+--15700103193.51b88.22852--
 
---===============1249999436==
+--===============0385526689==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -150,4 +152,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============1249999436==--
+--===============0385526689==--
