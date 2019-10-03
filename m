@@ -1,23 +1,23 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id A5D02C9024
-	for <lists+nouveau@lfdr.de>; Wed,  2 Oct 2019 19:45:42 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 30D8EC970B
+	for <lists+nouveau@lfdr.de>; Thu,  3 Oct 2019 05:50:26 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0C1AD6E162;
-	Wed,  2 Oct 2019 17:45:41 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 440CF6E1F2;
+	Thu,  3 Oct 2019 03:50:24 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
  [131.252.210.165])
- by gabe.freedesktop.org (Postfix) with ESMTP id 9F8AC6E962
- for <nouveau@lists.freedesktop.org>; Wed,  2 Oct 2019 17:45:39 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTP id CD1796E1F2
+ for <nouveau@lists.freedesktop.org>; Thu,  3 Oct 2019 03:50:22 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 9C52A72162; Wed,  2 Oct 2019 17:45:39 +0000 (UTC)
+ id CA4DC72162; Thu,  3 Oct 2019 03:50:22 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Wed, 02 Oct 2019 17:45:38 +0000
+Date: Thu, 03 Oct 2019 03:50:22 +0000
 X-Bugzilla-Reason: AssignedTo
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
@@ -26,14 +26,14 @@ X-Bugzilla-Component: Driver/nouveau
 X-Bugzilla-Version: unspecified
 X-Bugzilla-Keywords: 
 X-Bugzilla-Severity: normal
-X-Bugzilla-Who: prymoo@gmail.com
+X-Bugzilla-Who: dan@reactivated.net
 X-Bugzilla-Status: NEW
 X-Bugzilla-Resolution: 
 X-Bugzilla-Priority: medium
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: attachments.isobsolete attachments.created
-Message-ID: <bug-75985-8800-KuvUFIXWeG@http.bugs.freedesktop.org/>
+X-Bugzilla-Changed-Fields: 
+Message-ID: <bug-75985-8800-VEAw0s3vYA@http.bugs.freedesktop.org/>
 In-Reply-To: <bug-75985-8800@http.bugs.freedesktop.org/>
 References: <bug-75985-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
@@ -52,18 +52,18 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1386245215=="
+Content-Type: multipart/mixed; boundary="===============1410856130=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============1386245215==
-Content-Type: multipart/alternative; boundary="157003833910.95D0.31061"
+--===============1410856130==
+Content-Type: multipart/alternative; boundary="15700746225.16AE8b.18746"
 Content-Transfer-Encoding: 7bit
 
 
---157003833910.95D0.31061
-Date: Wed, 2 Oct 2019 17:45:39 +0000
+--15700746225.16AE8b.18746
+Date: Thu, 3 Oct 2019 03:50:22 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -72,28 +72,47 @@ Auto-Submitted: auto-generated
 
 https://bugs.freedesktop.org/show_bug.cgi?id=3D75985
 
-Przemys=C5=82aw Kopa <prymoo@gmail.com> changed:
+--- Comment #102 from Daniel Drake <dan@reactivated.net> ---
+Thanks. azx_runtime_idle() is returning EBUSY because
+azx_bus(chip)->codec_powered=3D0xf.
 
-           What    |Removed                     |Added
-----------------------------------------------------------------------------
- Attachment #145615|0                           |1
-        is obsolete|                            |
+codec_powered is set during initialization via snd_hdac_bus_add_device(),
+presumably to reflect that the device is definitely powered up at
+initialization time.
 
---- Comment #101 from Przemys=C5=82aw Kopa <prymoo@gmail.com> ---
-Created attachment 145616
-  --> https://bugs.freedesktop.org/attachment.cgi?id=3D145616&action=3Dedit
-Dmesg dump to present the problem of NVIDIA HDA not suspending correctly.
+It's unset during hdac_hdmi_runtime_suspend() (and/or during
+hda_codec_runtime_suspend()) via the call to snd_hdac_codec_link_down().
 
-Dmesg dump to present the problem of NVIDIA HDA not suspending correctly.
+I guess this implies that the HDA codec (hdac_hdmi.c) is expected to be ful=
+ly
+runtime suspended before the controller (hda_intel.c) runtime idle check is
+executed, and that this is not happening.
 
-NVIDIA HDA power control was manually set to "auto".
+
+Under /sys/bus/pci/devices/0000:01:00.1 you should see some subdirectories =
+that
+are named hdaudioC?D?. Those subdirectories in turn have power subdirectori=
+es
+for runtime pm control.
+
+In addition to the steps already taken, please could you set all the hdaudi=
+o*
+subdevices power/control to auto too, then use grep to dump the power/
+directory contents for all of the hdaudio* devices there and the controller.
+And let us know if this has any effect on the issue at hand.
+
+I did try 4 Asus products we currently have in the Endless lab but none of =
+them
+have a nvidia HDMI controller that can be exposed via the magic bit (and th=
+eir
+HDMI audio functionality does go through the integrated intel gpu).
 
 --=20
 You are receiving this mail because:
 You are the assignee for the bug.=
 
---157003833910.95D0.31061
-Date: Wed, 2 Oct 2019 17:45:39 +0000
+--15700746225.16AE8b.18746
+Date: Thu, 3 Oct 2019 03:50:22 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -104,58 +123,56 @@ Auto-Submitted: auto-generated
     <head>
       <base href=3D"https://bugs.freedesktop.org/">
     </head>
-    <body><span class=3D"vcard"><a class=3D"email" href=3D"mailto:prymoo&#6=
-4;gmail.com" title=3D"Przemys=C5=82aw Kopa &lt;prymoo&#64;gmail.com&gt;"> <=
-span class=3D"fn">Przemys=C5=82aw Kopa</span></a>
-</span> changed
-          <a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - [NVC1] HDMI audio device only visible after rescan"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D75985">bug 75985<=
-/a>
-          <br>
-             <table border=3D"1" cellspacing=3D"0" cellpadding=3D"8">
-          <tr>
-            <th>What</th>
-            <th>Removed</th>
-            <th>Added</th>
-          </tr>
-
-         <tr>
-           <td style=3D"text-align:right;">Attachment #145615 is obsolete</=
-td>
-           <td>
-               &nbsp;
-           </td>
-           <td>1
-           </td>
-         </tr></table>
+    <body>
       <p>
         <div>
             <b><a class=3D"bz_bug_link=20
           bz_status_NEW "
    title=3D"NEW - [NVC1] HDMI audio device only visible after rescan"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D75985#c101">Comme=
-nt # 101</a>
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D75985#c102">Comme=
+nt # 102</a>
               on <a class=3D"bz_bug_link=20
           bz_status_NEW "
    title=3D"NEW - [NVC1] HDMI audio device only visible after rescan"
    href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D75985">bug 75985<=
 /a>
               from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
-prymoo&#64;gmail.com" title=3D"Przemys=C5=82aw Kopa &lt;prymoo&#64;gmail.co=
-m&gt;"> <span class=3D"fn">Przemys=C5=82aw Kopa</span></a>
+dan&#64;reactivated.net" title=3D"Daniel Drake &lt;dan&#64;reactivated.net&=
+gt;"> <span class=3D"fn">Daniel Drake</span></a>
 </span></b>
-        <pre>Created <span class=3D""><a href=3D"attachment.cgi?id=3D145616=
-" name=3D"attach_145616" title=3D"Dmesg dump to present the problem of NVID=
-IA HDA not suspending correctly.">attachment 145616</a> <a href=3D"attachme=
-nt.cgi?id=3D145616&amp;action=3Dedit" title=3D"Dmesg dump to present the pr=
-oblem of NVIDIA HDA not suspending correctly.">[details]</a></span>
-Dmesg dump to present the problem of NVIDIA HDA not suspending correctly.
+        <pre>Thanks. azx_runtime_idle() is returning EBUSY because
+azx_bus(chip)-&gt;codec_powered=3D0xf.
 
-Dmesg dump to present the problem of NVIDIA HDA not suspending correctly.
+codec_powered is set during initialization via snd_hdac_bus_add_device(),
+presumably to reflect that the device is definitely powered up at
+initialization time.
 
-NVIDIA HDA power control was manually set to &quot;auto&quot;.</pre>
+It's unset during hdac_hdmi_runtime_suspend() (and/or during
+hda_codec_runtime_suspend()) via the call to snd_hdac_codec_link_down().
+
+I guess this implies that the HDA codec (hdac_hdmi.c) is expected to be ful=
+ly
+runtime suspended before the controller (hda_intel.c) runtime idle check is
+executed, and that this is not happening.
+
+
+Under /sys/bus/pci/devices/0000:01:00.1 you should see some subdirectories =
+that
+are named hdaudioC?D?. Those subdirectories in turn have power subdirectori=
+es
+for runtime pm control.
+
+In addition to the steps already taken, please could you set all the hdaudi=
+o*
+subdevices power/control to auto too, then use grep to dump the power/
+directory contents for all of the hdaudio* devices there and the controller.
+And let us know if this has any effect on the issue at hand.
+
+I did try 4 Asus products we currently have in the Endless lab but none of =
+them
+have a nvidia HDMI controller that can be exposed via the magic bit (and th=
+eir
+HDMI audio functionality does go through the integrated intel gpu).</pre>
         </div>
       </p>
 
@@ -169,9 +186,9 @@ NVIDIA HDA power control was manually set to &quot;auto&quot;.</pre>
     </body>
 </html>=
 
---157003833910.95D0.31061--
+--15700746225.16AE8b.18746--
 
---===============1386245215==
+--===============1410856130==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -181,4 +198,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============1386245215==--
+--===============1410856130==--
