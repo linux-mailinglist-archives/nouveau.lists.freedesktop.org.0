@@ -1,62 +1,51 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8339A12B2A7
-	for <lists+nouveau@lfdr.de>; Fri, 27 Dec 2019 09:14:00 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2CA5812B31B
+	for <lists+nouveau@lfdr.de>; Fri, 27 Dec 2019 09:16:01 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id AF27E89A76;
-	Fri, 27 Dec 2019 08:13:33 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 830C86E320;
+	Fri, 27 Dec 2019 08:14:36 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-yw1-xc43.google.com (mail-yw1-xc43.google.com
- [IPv6:2607:f8b0:4864:20::c43])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 62CF46E0E8
- for <nouveau@lists.freedesktop.org>; Wed,  2 Oct 2019 21:07:54 +0000 (UTC)
-Received: by mail-yw1-xc43.google.com with SMTP id e205so218711ywc.7
- for <nouveau@lists.freedesktop.org>; Wed, 02 Oct 2019 14:07:54 -0700 (PDT)
+Received: from mail-ed1-x541.google.com (mail-ed1-x541.google.com
+ [IPv6:2a00:1450:4864:20::541])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 779846EB97;
+ Fri,  4 Oct 2019 13:55:56 +0000 (UTC)
+Received: by mail-ed1-x541.google.com with SMTP id t3so5883812edw.13;
+ Fri, 04 Oct 2019 06:55:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=T2JVXi2n7aIjQPfd/y2Qza7rCOQAGt2XVrhneTlTFqk=;
- b=a48bnacKL3bHQCAPTzjpwOWeh35mQfcT2+1l7mws8a+hPVifJauAclcUDowffjOciD
- 7uzBDNymTolORf/fs9l5zGGzRzz1hSg5yfarrk9unbU0agAgkyHjNdV3ca808h83hVDC
- ZA1LnWCehKYL3I+DIx90V/bnighUg2HmkiHF3mnXA6EWwd/FZPqiJolqmmcQqE/499oN
- JR4bJoR0fgCl2zzIeZ9BkOiXp5m1FinDcASY+l3yvJgazfbBMi1M1GskUfbZPFh0l8Yh
- 7FdZxNMS7krkjz8dI7du0pR8FAcyCuE7SyvDXqOi1NeqBG+KoqNaZ0sB8BP/lu+hpQQI
- IcNw==
+ :cc; bh=1csabjhWVNY3kOmJm1w8vuqsbkwQCoftT+YyWdw/wF8=;
+ b=JPGkyZ1C0hfdUrp9qoqlHLQlkrEWaEBcK5nHm9C3iBhXl8f87HwcYJMnJpBEzQOdSO
+ T2478ascOBGZkafOmfqmJY4feY1t065/trwiw8pQsO/Epi6Esdh4vWrEdOFOQXkNL00p
+ 9vvXs/Uj6wl2cf1s2EIXAKLx7smSv7/RBgZHaH1aL8aJqQSD6lZgxmvgxolcaxgzhDmc
+ ctnPsuOLeB4iBiH87r6c0we5duiLkCCnaPislwiAjN8QSmHMKDwsW0cn/UP0tedzlrvL
+ HB+P1TcEAKyE6Xv458Kr87p5W5CBu0ZypFc/CoZK4Vm/mV1A0kR8ec40FtVrxwyg2VjG
+ i80Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=T2JVXi2n7aIjQPfd/y2Qza7rCOQAGt2XVrhneTlTFqk=;
- b=qJDz5MQCpeTrYZgz61WQWv6miZp0H5nuhjcm6aPPLY+zxDlmag0w6JMm0zpk36O+D6
- siNB+Wqj5aEP2Hl3UJhAIb9VIugb+ZYq07BDhBDizpdXNE0JyYOupY5LfzBXZ9G/oOzU
- 7BMiOvP/FMMN13Del2AWJBRPklgqALkREWTZJeEjN7WHx0xPXIRyrQPZ2SzR0F0zxRkr
- e6XXmLAPDiDMQk0BO60CwHswSbPXAsdMj3pE5e0j08RElBNsgAddLs3J/dxvgHwPgKJN
- fw+qEF7RBqOE3CtaptchaeP8eGDPQaLmh+6Zxa7UpQtTvlc1ojBRfrdqZ0Jtw42f3zqJ
- 5v1g==
-X-Gm-Message-State: APjAAAVeA4TM2sGz2USixAlSQIpmtsPaV4B9ARRikdHJGKqEDPOFvKE/
- d9ATxOtQaurQu6t3zHDUx/q7+i4mOsI=
-X-Google-Smtp-Source: APXvYqyLKx+kkY+wuTy86SoPKa6xoVoAlsiAqUo/BGkcHwaTGqeptog/1/EbNBH3HxB/C2k5FnXr9A==
-X-Received: by 2002:a81:698b:: with SMTP id e133mr3952381ywc.415.1570050473038; 
- Wed, 02 Oct 2019 14:07:53 -0700 (PDT)
-Received: from mail-yw1-f53.google.com (mail-yw1-f53.google.com.
- [209.85.161.53])
- by smtp.gmail.com with ESMTPSA id 80sm107708ywp.56.2019.10.02.14.07.52
- for <nouveau@lists.freedesktop.org>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 02 Oct 2019 14:07:52 -0700 (PDT)
-Received: by mail-yw1-f53.google.com with SMTP id x64so227541ywg.3
- for <nouveau@lists.freedesktop.org>; Wed, 02 Oct 2019 14:07:52 -0700 (PDT)
-X-Received: by 2002:a81:6f8a:: with SMTP id k132mr4013325ywc.275.1570050020507; 
- Wed, 02 Oct 2019 14:00:20 -0700 (PDT)
+ bh=1csabjhWVNY3kOmJm1w8vuqsbkwQCoftT+YyWdw/wF8=;
+ b=S2WZy/+Y+BsQBrdZzAoALkPATyaYSk6f2UCCAy+s9y2jArY3aFd6nvGtKwrfqmFOnn
+ e9FaU/3CToXPZdoyOjAAdUmlvrTc3BvJc0Q5hIsv984KmwLEbepRqMimzt5EMr9jnXQa
+ BmGsVGSefkR4vwJhQsr3UogH3V1TEllHf46jzfHj8XHmNDJ+EnBECqoek5i4Le5OaBSb
+ hhI9Z27/tgbXqtDJO/xVbM313pNawXFKXXin04rM42L8xcdj7z/peDVJfZRKOKOlkSYD
+ DeqR0T2nz65FC03qMKnkOzO70RwYTxkpIV2v8vucaMRn3DSKvhkXbLaSlthiRNn+evat
+ V0PQ==
+X-Gm-Message-State: APjAAAVa870kL5FkHkAZfIWa1JzmKggXSKfYcsKABkN8T0T6Su8Jn348
+ 1DhZQOJxSqDQp002fM4JFhnWC5+gxLTg0RDpIxCeBw==
+X-Google-Smtp-Source: APXvYqzzKOfL4IXEV8NTYa6HFtfKh2JmOq/jPD1SkT4mywatbIhJKh84XSwTj/v19amYnQntfnu2mbh5/1tZy5+/UtM=
+X-Received: by 2002:aa7:d789:: with SMTP id s9mr15371233edq.62.1570197354887; 
+ Fri, 04 Oct 2019 06:55:54 -0700 (PDT)
 MIME-Version: 1.0
 References: <00000000000051e9280593f2dc9f@google.com>
 In-Reply-To: <00000000000051e9280593f2dc9f@google.com>
 From: Willem de Bruijn <willemdebruijn.kernel@gmail.com>
-Date: Wed, 2 Oct 2019 16:59:44 -0400
-X-Gmail-Original-Message-ID: <CA+FuTSedj9+UJKLfuER+FuEmQvWNqsDfO5i+Z6vit0OoLv=NLA@mail.gmail.com>
-Message-ID: <CA+FuTSedj9+UJKLfuER+FuEmQvWNqsDfO5i+Z6vit0OoLv=NLA@mail.gmail.com>
+Date: Fri, 4 Oct 2019 09:55:18 -0400
+Message-ID: <CAF=yD-J-qZv+K5AJc_W8zbyfV2FrtN1kV2pwL65CXzVo8cmH1w@mail.gmail.com>
 To: syzbot <syzbot+3f3e5e77d793c7a6fe6c@syzkaller.appspotmail.com>
 X-Mailman-Approved-At: Fri, 27 Dec 2019 08:13:31 +0000
 Subject: Re: [Nouveau] general protection fault in veth_get_stats64
@@ -74,24 +63,25 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Cc: songliubraving@fb.com, Jakub Kicinski <jakub.kicinski@netronome.com>,
  airlied@linux.ie, John Fastabend <john.fastabend@gmail.com>,
  Alexei Starovoitov <ast@kernel.org>, dri-devel@lists.freedesktop.org,
- guoren@kernel.org, f.fainelli@gmail.com, wanghai26@huawei.com,
- Daniel Borkmann <daniel@iogearbox.net>, toshiaki.makita1@gmail.com,
- jwi@linux.ibm.com, bskeggs@redhat.com, nouveau@lists.freedesktop.org,
- Yonghong Song <yhs@fb.com>, yuehaibing@huawei.com, hawk@kernel.org,
- syzkaller-bugs@googlegroups.com, idosch@mellanox.com, jiri@mellanox.com,
- kimbrownkd@gmail.com, petrm@mellanox.com, tglx@linutronix.de,
- andriy.shevchenko@linux.intel.com,
+ guoren@kernel.org, Florian Fainelli <f.fainelli@gmail.com>,
+ wanghai26@huawei.com, Daniel Borkmann <daniel@iogearbox.net>,
+ toshiaki.makita1@gmail.com, jwi@linux.ibm.com, bskeggs@redhat.com,
+ nouveau@lists.freedesktop.org, Yonghong Song <yhs@fb.com>,
+ yuehaibing@huawei.com, hawk@kernel.org,
+ syzkaller-bugs <syzkaller-bugs@googlegroups.com>,
+ Ido Schimmel <idosch@mellanox.com>, kimbrownkd@gmail.com, petrm@mellanox.com,
+ Thomas Gleixner <tglx@linutronix.de>, andriy.shevchenko@linux.intel.com,
  Network Development <netdev@vger.kernel.org>,
- linux-kernel <linux-kernel@vger.kernel.org>,
- David Miller <davem@davemloft.net>, daniel@ffwll.ch,
- David Ahern <dsahern@gmail.com>, bpf <bpf@vger.kernel.org>,
- torvalds@linux-foundation.org, Martin Lau <kafai@fb.com>
+ LKML <linux-kernel@vger.kernel.org>, David Miller <davem@davemloft.net>,
+ Daniel Vetter <daniel@ffwll.ch>, David Ahern <dsahern@gmail.com>,
+ bpf <bpf@vger.kernel.org>, Linus Torvalds <torvalds@linux-foundation.org>,
+ Martin KaFai Lau <kafai@fb.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, Oct 2, 2019 at 3:56 PM syzbot
+On Wed, Oct 2, 2019 at 5:45 PM syzbot
 <syzbot+3f3e5e77d793c7a6fe6c@syzkaller.appspotmail.com> wrote:
 >
 > Hello,
@@ -209,33 +199,20 @@ On Wed, Oct 2, 2019 at 3:56 PM syzbot
 > CR2: 0000000020000140 CR3: 000000009a80b000 CR4: 00000000001406e0
 > DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
 > DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
+>
+>
+> ---
+> This bug is generated by a bot. It may contain errors.
+> See https://goo.gl/tpsmEJ for more information about syzbot.
+> syzbot engineers can be reached at syzkaller@googlegroups.com.
+>
+> syzbot will keep track of this bug report. See:
+> https://goo.gl/tpsmEJ#status for how to communicate with syzbot.
+> For information about bisection process see: https://goo.gl/tpsmEJ#bisection
+> syzbot can test patches for this bug, for details see:
+> https://goo.gl/tpsmEJ#testing-patches
 
-Syzbot CC:ed a lot of people directly on this report. Perhaps because
-of the bisection?
-
-Specific to the report: I think this may be introduced with the
-alternative names for network interfaces patchset.
-
-The reproducer
-
-fails on      76c9ac0ee878 net: rtnetlink: add possibility to use
-alternative names as message handle
-passes on be2644aac3e1 tcp: add ipv6_addr_v4mapped_loopback() helper
-
-Leaving
-
-76c9ac0ee878 net: rtnetlink: add possibility to use alternative names
-as message handle
-cc6090e985d7 net: rtnetlink: introduce helper to get net_device
-instance by ifname
-7af12cba4ef0 net: rtnetlink: unify the code in __rtnl_newlink get dev
-with the rest
-88f4fb0c7496 net: rtnetlink: put alternative names to getlink message
-36fbf1e52bd3 net: rtnetlink: add linkprop commands to add and delete
-alternative ifnames
-ff92741270bf net: introduce name_node struct to be used in hashlist
-6958c97a488c net: procfs: use index hashlist instead of name hashlist
-be2
+#syz fix: net: propagate errors correctly in register_netdevice()
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
