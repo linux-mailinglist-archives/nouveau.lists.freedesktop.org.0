@@ -2,22 +2,22 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id DE890CE546
-	for <lists+nouveau@lfdr.de>; Mon,  7 Oct 2019 16:31:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 43E53CE54C
+	for <lists+nouveau@lfdr.de>; Mon,  7 Oct 2019 16:32:31 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id BB2F86E09E;
-	Mon,  7 Oct 2019 14:31:27 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 721BA6E10E;
+	Mon,  7 Oct 2019 14:32:29 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
- by gabe.freedesktop.org (Postfix) with ESMTP id EC97B89FE6
- for <nouveau@lists.freedesktop.org>; Mon,  7 Oct 2019 14:31:26 +0000 (UTC)
+ [131.252.210.165])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 658C289FE6
+ for <nouveau@lists.freedesktop.org>; Mon,  7 Oct 2019 14:32:28 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id E917272162; Mon,  7 Oct 2019 14:31:26 +0000 (UTC)
+ id 6280E72162; Mon,  7 Oct 2019 14:32:28 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Mon, 07 Oct 2019 14:31:26 +0000
+Date: Mon, 07 Oct 2019 14:32:28 +0000
 X-Bugzilla-Reason: AssignedTo
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
@@ -32,8 +32,8 @@ X-Bugzilla-Resolution:
 X-Bugzilla-Priority: medium
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: attachments.created
-Message-ID: <bug-110714-8800-g3AlwUuN1T@http.bugs.freedesktop.org/>
+X-Bugzilla-Changed-Fields: 
+Message-ID: <bug-110714-8800-w0UbpGqcOB@http.bugs.freedesktop.org/>
 In-Reply-To: <bug-110714-8800@http.bugs.freedesktop.org/>
 References: <bug-110714-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
@@ -51,18 +51,18 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0278836109=="
+Content-Type: multipart/mixed; boundary="===============0935344803=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============0278836109==
-Content-Type: multipart/alternative; boundary="15704586862.879e45.664"
+--===============0935344803==
+Content-Type: multipart/alternative; boundary="15704587481.1819F5C5.928"
 Content-Transfer-Encoding: 7bit
 
 
---15704586862.879e45.664
-Date: Mon, 7 Oct 2019 14:31:26 +0000
+--15704587481.1819F5C5.928
+Date: Mon, 7 Oct 2019 14:32:28 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -71,17 +71,34 @@ Auto-Submitted: auto-generated
 
 https://bugs.freedesktop.org/show_bug.cgi?id=3D110714
 
---- Comment #22 from Andrey Sychev <developer@bk.ru> ---
-Created attachment 145675
-  --> https://bugs.freedesktop.org/attachment.cgi?id=3D145675&action=3Dedit
-My Xorg.0.log.old
+--- Comment #23 from Andrey Sychev <developer@bk.ru> ---
+I can confirm that bug still persists.
+
+My OS: Debian (Buster)
+Desktop: Xfce
+Apps on which crash happens: Meld (frequently, but not every time). Libre
+office (rare)
+
+In attepmt to fix crush
+I have downloaded and installed
+
+https://launchpad.net/ubuntu/+source/xorg-server/2:1.20.5+git20190820-0ubun=
+tu3
+
+but this does not help.
+
+I can say that in my case crash does not happens after first message:
+
+glamor0: GL error: GL_OUT_OF_MEMORY in glTexSubImage
+
+Crash happens only after several similar messages.
 
 --=20
 You are receiving this mail because:
 You are the assignee for the bug.=
 
---15704586862.879e45.664
-Date: Mon, 7 Oct 2019 14:31:26 +0000
+--15704587481.1819F5C5.928
+Date: Mon, 7 Oct 2019 14:32:28 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -98,8 +115,8 @@ Auto-Submitted: auto-generated
             <b><a class=3D"bz_bug_link=20
           bz_status_REOPENED "
    title=3D"REOPENED - Xorg crashes randomly because of memory leak"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110714#c22">Comme=
-nt # 22</a>
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110714#c23">Comme=
+nt # 23</a>
               on <a class=3D"bz_bug_link=20
           bz_status_REOPENED "
    title=3D"REOPENED - Xorg crashes randomly because of memory leak"
@@ -109,11 +126,27 @@ nt # 22</a>
 developer&#64;bk.ru" title=3D"Andrey Sychev &lt;developer&#64;bk.ru&gt;"> <=
 span class=3D"fn">Andrey Sychev</span></a>
 </span></b>
-        <pre>Created <span class=3D""><a href=3D"attachment.cgi?id=3D145675=
-" name=3D"attach_145675" title=3D"My Xorg.0.log.old">attachment 145675</a> =
-<a href=3D"attachment.cgi?id=3D145675&amp;action=3Dedit" title=3D"My Xorg.0=
-.log.old">[details]</a></span>
-My Xorg.0.log.old</pre>
+        <pre>I can confirm that bug still persists.
+
+My OS: Debian (Buster)
+Desktop: Xfce
+Apps on which crash happens: Meld (frequently, but not every time). Libre
+office (rare)
+
+In attepmt to fix crush
+I have downloaded and installed
+
+<a href=3D"https://launchpad.net/ubuntu/+source/xorg-server/2:1.20.5+git201=
+90820-0ubuntu3">https://launchpad.net/ubuntu/+source/xorg-server/2:1.20.5+g=
+it20190820-0ubuntu3</a>
+
+but this does not help.
+
+I can say that in my case crash does not happens after first message:
+
+glamor0: GL error: GL_OUT_OF_MEMORY in glTexSubImage
+
+Crash happens only after several similar messages.</pre>
         </div>
       </p>
 
@@ -127,9 +160,9 @@ My Xorg.0.log.old</pre>
     </body>
 </html>=
 
---15704586862.879e45.664--
+--15704587481.1819F5C5.928--
 
---===============0278836109==
+--===============0935344803==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -139,4 +172,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============0278836109==--
+--===============0935344803==--
