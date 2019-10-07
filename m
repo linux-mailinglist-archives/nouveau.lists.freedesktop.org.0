@@ -2,54 +2,45 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3A54ECE8B5
-	for <lists+nouveau@lfdr.de>; Mon,  7 Oct 2019 18:09:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 475D7CEAFA
+	for <lists+nouveau@lfdr.de>; Mon,  7 Oct 2019 19:51:23 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0A52A6E600;
-	Mon,  7 Oct 2019 16:09:56 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4CD9A6E123;
+	Mon,  7 Oct 2019 17:51:21 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wr1-x442.google.com (mail-wr1-x442.google.com
- [IPv6:2a00:1450:4864:20::442])
- by gabe.freedesktop.org (Postfix) with ESMTPS id EAFF76E200;
- Mon,  7 Oct 2019 16:09:53 +0000 (UTC)
-Received: by mail-wr1-x442.google.com with SMTP id y19so16032373wrd.3;
- Mon, 07 Oct 2019 09:09:53 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=cqJ0vbvGAeolZd2vSOe/7rP/jwOR0aoF9Fh0aImNAAY=;
- b=s8B9v1t64AnbBSdFhjhfNj1aWyGJlIkg4ccRLS9aAGLruZrv+b0yr/YKC2V9muCjuL
- OjREZLOjq3jCq4+tKoCMDxI7ZSv1BL1WM8IAELjdSfJLUr4Ns734lYzv2gnmTdcpCf8l
- wfGb7zturjl/0sXyS4B98NwRVDUU4mk9kUBZ3xk9oZfMilgtRiIudHtGMkP4fCnBP+GK
- bdAMk4a8AAsKVyOeiVjnWdyXj1YTNftNPl3rWzVyvs9slheZj9Bu0RQZwtDwnOttNZbR
- 8cKAuCZSq/3mVumQRAEzDz0rcghfEGRfNrwSXQyraEAijl/Xt5K1JYHOK36mf9tKNhDp
- yXaA==
-X-Gm-Message-State: APjAAAU6+vLed0IU3goQXAZSyXrq30gqdWh2zvVpyvvSlDY/eeQ6ncwT
- GyF5Z24h4LTE2Hf7P9JnibsC0JuTgIRWk0yE1iE=
-X-Google-Smtp-Source: APXvYqxgHqJZNgIWzKRUTN0lTc9yubZcuhBGUiP8kclFNKByTkdixaX3OZuWxl98eB2sTzFDMiLudNl4WXyL54+19BU=
-X-Received: by 2002:adf:e951:: with SMTP id m17mr22737714wrn.154.1570464592558; 
- Mon, 07 Oct 2019 09:09:52 -0700 (PDT)
+Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
+ [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 68A1F6E673
+ for <nouveau@lists.freedesktop.org>; Mon,  7 Oct 2019 17:51:20 +0000 (UTC)
+Received: by culpepper.freedesktop.org (Postfix, from userid 33)
+ id 6538772162; Mon,  7 Oct 2019 17:51:20 +0000 (UTC)
+From: bugzilla-daemon@freedesktop.org
+To: nouveau@lists.freedesktop.org
+Date: Mon, 07 Oct 2019 17:51:17 +0000
+X-Bugzilla-Reason: AssignedTo
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: None
+X-Bugzilla-Product: xorg
+X-Bugzilla-Component: Driver/nouveau
+X-Bugzilla-Version: unspecified
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: normal
+X-Bugzilla-Who: prymoo@gmail.com
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: medium
+X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: 
+Message-ID: <bug-75985-8800-rupt4Xv2Df@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-75985-8800@http.bugs.freedesktop.org/>
+References: <bug-75985-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-References: <20191004144549.3567-1-krzk@kernel.org> <87sgo4hjii.fsf@intel.com>
-In-Reply-To: <87sgo4hjii.fsf@intel.com>
-From: Alex Deucher <alexdeucher@gmail.com>
-Date: Mon, 7 Oct 2019 12:09:40 -0400
-Message-ID: <CADnq5_MqGehpWwOAxYg0T2x3qXisqmae2uGG5dijQX+Aa4NsoQ@mail.gmail.com>
-To: Jani Nikula <jani.nikula@linux.intel.com>
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc;
- bh=cqJ0vbvGAeolZd2vSOe/7rP/jwOR0aoF9Fh0aImNAAY=;
- b=fFDyTPz/c3ABifR0uGkkFfA3T4wZKNjifQ194u3nCRCSJY4LsrTNWUeX1jcPlWprOT
- 1MbCxB6ZLCVa430OOIZ454NIJujssKIzCSNwDei2E588Ha11s/YCWG6fqB/iW/sg7IDn
- EKihD2BfJp/c+a2C1d7MMJtVJ0AtgOI+Dqmo6gh7UYAKDQPfvGhnHsJ09EYKGzM+OY0M
- /2mwRPdsmLRIdWqNOFGBQOZoTlAvdt7s/xNAeCGCodT/fTDwgYd2cJsc0kUPShUL3xo6
- OpkBqoyI2EUTaQZdGRJmaAHyw7l5AOFFufhTCbCHLQj94lPqsNlBoE3sPz6oMdFbfna0
- KNrg==
-Subject: Re: [Nouveau] [PATCH TRIVIAL v2] gpu: Fix Kconfig indentation
+Subject: [Nouveau] [Bug 75985] [NVC1] HDMI audio device only visible after
+ rescan
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -61,35 +52,123 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: amd-gfx list <amd-gfx@lists.freedesktop.org>,
- Jiri Kosina <trivial@kernel.org>, lima@lists.freedesktop.org,
- David Airlie <airlied@linux.ie>, nouveau <nouveau@lists.freedesktop.org>,
- Maling list - DRI developers <dri-devel@lists.freedesktop.org>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- LKML <linux-kernel@vger.kernel.org>, Maxime Ripard <mripard@kernel.org>,
- linux-rockchip@lists.infradead.org, Krzysztof Kozlowski <krzk@kernel.org>,
- Daniel Vetter <daniel@ffwll.ch>, Sean Paul <sean@poorly.run>,
- Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
- linux-arm-kernel <linux-arm-kernel@lists.infradead.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1058284572=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-T24gTW9uLCBPY3QgNywgMjAxOSBhdCA3OjM5IEFNIEphbmkgTmlrdWxhIDxqYW5pLm5pa3VsYUBs
-aW51eC5pbnRlbC5jb20+IHdyb3RlOgo+Cj4gT24gRnJpLCAwNCBPY3QgMjAxOSwgS3J6eXN6dG9m
-IEtvemxvd3NraSA8a3J6a0BrZXJuZWwub3JnPiB3cm90ZToKPiA+ICBkcml2ZXJzL2dwdS9kcm0v
-aTkxNS9LY29uZmlnICAgICAgICAgICAgIHwgIDEyICstCj4gPiAgZHJpdmVycy9ncHUvZHJtL2k5
-MTUvS2NvbmZpZy5kZWJ1ZyAgICAgICB8IDE0NCArKysrKysrKysrKy0tLS0tLS0tLS0tLQo+Cj4g
-UGxlYXNlIHNwbGl0IHRoZXNlIG91dCB0byBhIHNlcGFyYXRlIHBhdGNoLiBDYW4ndCBzcGVhayBm
-b3Igb3RoZXJzLCBidXQKPiB0aGUgcGF0Y2ggbG9va3MgbGlrZSBpdCdsbCBiZSBjb25mbGljdHMg
-Z2Fsb3JlIGFuZCBhIHByb2JsZW0gdG8gbWFuYWdlCj4gaWYgbWVyZ2VkIGluIG9uZSBiaWcgbHVt
-cC4KClllcywgaXQgd291bGQgYmUgbmljZSB0byBoYXZlIHRoZSBhbWQgcGF0Y2ggc2VwYXJhdGUg
-YXMgd2VsbC4KCkFsZXgKCj4KPiBCUiwKPiBKYW5pLgo+Cj4KPiAtLQo+IEphbmkgTmlrdWxhLCBJ
-bnRlbCBPcGVuIFNvdXJjZSBHcmFwaGljcyBDZW50ZXIKPiBfX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fXwo+IGFtZC1nZnggbWFpbGluZyBsaXN0Cj4gYW1kLWdm
-eEBsaXN0cy5mcmVlZGVza3RvcC5vcmcKPiBodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9t
-YWlsbWFuL2xpc3RpbmZvL2FtZC1nZngKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX18KTm91dmVhdSBtYWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVz
-a3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9u
-b3V2ZWF1
+
+--===============1058284572==
+Content-Type: multipart/alternative; boundary="15704706801.0B5d1c.9879"
+Content-Transfer-Encoding: 7bit
+
+
+--15704706801.0B5d1c.9879
+Date: Mon, 7 Oct 2019 17:51:20 +0000
+MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+https://bugs.freedesktop.org/show_bug.cgi?id=3D75985
+
+--- Comment #111 from Przemys=C5=82aw Kopa <prymoo@gmail.com> ---
+(In reply to Lukas Wunner from comment #110)
+> What does "cat /sys/bus/pci/devices/0000:01:00.1/hdaudioC1D0/revision_id"=
+ say?
+It says: 0x100100
+
+> If you add "codec->link_down_at_suspend =3D 1;" to patch_nvhdmi() in
+> sound/pci/hda/patch_hdmi.c, the issue may go away.
+>=20
+> The only question is whether your card's revision_id is listed in
+> snd_hda_id_hdmi[] such that patch_nvhdmi() is executed for your card.
+
+I added "HDA_CODEC_ENTRY(0x10de0403, "GPU 0403 HDMI/DP", patch_nvhdmi)" to
+snd_hda_id_hdmi[] (PCI ID of my Nvidia HDA wasn't there) and
+"codec->link_down_at_suspend =3D 1;" to patch_nvhdmi(). With those changes =
+dGPU
+and HDA suspended normally (after echoing "auto" to HDA control file), so I
+think that this is definiteley the right track!
+
+--=20
+You are receiving this mail because:
+You are the assignee for the bug.=
+
+--15704706801.0B5d1c.9879
+Date: Mon, 7 Oct 2019 17:51:20 +0000
+MIME-Version: 1.0
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+<html>
+    <head>
+      <base href=3D"https://bugs.freedesktop.org/">
+    </head>
+    <body>
+      <p>
+        <div>
+            <b><a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - [NVC1] HDMI audio device only visible after rescan"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D75985#c111">Comme=
+nt # 111</a>
+              on <a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - [NVC1] HDMI audio device only visible after rescan"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D75985">bug 75985<=
+/a>
+              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
+prymoo&#64;gmail.com" title=3D"Przemys=C5=82aw Kopa &lt;prymoo&#64;gmail.co=
+m&gt;"> <span class=3D"fn">Przemys=C5=82aw Kopa</span></a>
+</span></b>
+        <pre>(In reply to Lukas Wunner from <a href=3D"show_bug.cgi?id=3D75=
+985#c110">comment #110</a>)
+<span class=3D"quote">&gt; What does &quot;cat /sys/bus/pci/devices/0000:01=
+:00.1/hdaudioC1D0/revision_id&quot; say?</span >
+It says: 0x100100
+
+<span class=3D"quote">&gt; If you add &quot;codec-&gt;link_down_at_suspend =
+=3D 1;&quot; to patch_nvhdmi() in
+&gt; sound/pci/hda/patch_hdmi.c, the issue may go away.
+&gt;=20
+&gt; The only question is whether your card's revision_id is listed in
+&gt; snd_hda_id_hdmi[] such that patch_nvhdmi() is executed for your card.<=
+/span >
+
+I added &quot;HDA_CODEC_ENTRY(0x10de0403, &quot;GPU 0403 HDMI/DP&quot;, pat=
+ch_nvhdmi)&quot; to
+snd_hda_id_hdmi[] (PCI ID of my Nvidia HDA wasn't there) and
+&quot;codec-&gt;link_down_at_suspend =3D 1;&quot; to patch_nvhdmi(). With t=
+hose changes dGPU
+and HDA suspended normally (after echoing &quot;auto&quot; to HDA control f=
+ile), so I
+think that this is definiteley the right track!</pre>
+        </div>
+      </p>
+
+
+      <hr>
+      <span>You are receiving this mail because:</span>
+
+      <ul>
+          <li>You are the assignee for the bug.</li>
+      </ul>
+    </body>
+</html>=
+
+--15704706801.0B5d1c.9879--
+
+--===============1058284572==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
+YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
+cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============1058284572==--
