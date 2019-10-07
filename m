@@ -2,42 +2,44 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id CBC53CE0AE
-	for <lists+nouveau@lfdr.de>; Mon,  7 Oct 2019 13:39:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DE890CE546
+	for <lists+nouveau@lfdr.de>; Mon,  7 Oct 2019 16:31:29 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 994816E595;
-	Mon,  7 Oct 2019 11:39:43 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id BB2F86E09E;
+	Mon,  7 Oct 2019 14:31:27 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mga12.intel.com (mga12.intel.com [192.55.52.136])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 445256E591;
- Mon,  7 Oct 2019 11:39:42 +0000 (UTC)
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from orsmga007.jf.intel.com ([10.7.209.58])
- by fmsmga106.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
- 07 Oct 2019 04:39:41 -0700
-X-IronPort-AV: E=Sophos;i="5.67,268,1566889200"; d="scan'208";a="183404878"
-Received: from jnikula-mobl3.fi.intel.com (HELO localhost) ([10.237.66.161])
- by orsmga007-auth.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
- 07 Oct 2019 04:39:35 -0700
-From: Jani Nikula <jani.nikula@linux.intel.com>
-To: Krzysztof Kozlowski <krzk@kernel.org>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Sean Paul <sean@poorly.run>,
- David Airlie <airlied@linux.ie>, Daniel Vetter <daniel@ffwll.ch>,
- Jiri Kosina <trivial@kernel.org>, dri-devel@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, amd-gfx@lists.freedesktop.org,
- intel-gfx@lists.freedesktop.org, lima@lists.freedesktop.org,
- nouveau@lists.freedesktop.org, linux-arm-kernel@lists.infradead.org,
- linux-rockchip@lists.infradead.org
-In-Reply-To: <20191004144549.3567-1-krzk@kernel.org>
-Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
-References: <20191004144549.3567-1-krzk@kernel.org>
-Date: Mon, 07 Oct 2019 14:39:33 +0300
-Message-ID: <87sgo4hjii.fsf@intel.com>
+Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
+ [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
+ by gabe.freedesktop.org (Postfix) with ESMTP id EC97B89FE6
+ for <nouveau@lists.freedesktop.org>; Mon,  7 Oct 2019 14:31:26 +0000 (UTC)
+Received: by culpepper.freedesktop.org (Postfix, from userid 33)
+ id E917272162; Mon,  7 Oct 2019 14:31:26 +0000 (UTC)
+From: bugzilla-daemon@freedesktop.org
+To: nouveau@lists.freedesktop.org
+Date: Mon, 07 Oct 2019 14:31:26 +0000
+X-Bugzilla-Reason: AssignedTo
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: None
+X-Bugzilla-Product: xorg
+X-Bugzilla-Component: Driver/nouveau
+X-Bugzilla-Version: unspecified
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: critical
+X-Bugzilla-Who: developer@bk.ru
+X-Bugzilla-Status: REOPENED
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: medium
+X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: attachments.created
+Message-ID: <bug-110714-8800-g3AlwUuN1T@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-110714-8800@http.bugs.freedesktop.org/>
+References: <bug-110714-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-Subject: Re: [Nouveau] [PATCH TRIVIAL v2] gpu: Fix Kconfig indentation
+Subject: [Nouveau] [Bug 110714] Xorg crashes randomly because of memory leak
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -49,20 +51,92 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Krzysztof Kozlowski <krzk@kernel.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============0278836109=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-T24gRnJpLCAwNCBPY3QgMjAxOSwgS3J6eXN6dG9mIEtvemxvd3NraSA8a3J6a0BrZXJuZWwub3Jn
-PiB3cm90ZToKPiAgZHJpdmVycy9ncHUvZHJtL2k5MTUvS2NvbmZpZyAgICAgICAgICAgICB8ICAx
-MiArLQo+ICBkcml2ZXJzL2dwdS9kcm0vaTkxNS9LY29uZmlnLmRlYnVnICAgICAgIHwgMTQ0ICsr
-KysrKysrKysrLS0tLS0tLS0tLS0tCgpQbGVhc2Ugc3BsaXQgdGhlc2Ugb3V0IHRvIGEgc2VwYXJh
-dGUgcGF0Y2guIENhbid0IHNwZWFrIGZvciBvdGhlcnMsIGJ1dAp0aGUgcGF0Y2ggbG9va3MgbGlr
-ZSBpdCdsbCBiZSBjb25mbGljdHMgZ2Fsb3JlIGFuZCBhIHByb2JsZW0gdG8gbWFuYWdlCmlmIG1l
-cmdlZCBpbiBvbmUgYmlnIGx1bXAuCgpCUiwKSmFuaS4KCgotLSAKSmFuaSBOaWt1bGEsIEludGVs
-IE9wZW4gU291cmNlIEdyYXBoaWNzIENlbnRlcgpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fXwpOb3V2ZWF1IG1haWxpbmcgbGlzdApOb3V2ZWF1QGxpc3RzLmZy
-ZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3Rp
-bmZvL25vdXZlYXU=
+
+--===============0278836109==
+Content-Type: multipart/alternative; boundary="15704586862.879e45.664"
+Content-Transfer-Encoding: 7bit
+
+
+--15704586862.879e45.664
+Date: Mon, 7 Oct 2019 14:31:26 +0000
+MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+https://bugs.freedesktop.org/show_bug.cgi?id=3D110714
+
+--- Comment #22 from Andrey Sychev <developer@bk.ru> ---
+Created attachment 145675
+  --> https://bugs.freedesktop.org/attachment.cgi?id=3D145675&action=3Dedit
+My Xorg.0.log.old
+
+--=20
+You are receiving this mail because:
+You are the assignee for the bug.=
+
+--15704586862.879e45.664
+Date: Mon, 7 Oct 2019 14:31:26 +0000
+MIME-Version: 1.0
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+<html>
+    <head>
+      <base href=3D"https://bugs.freedesktop.org/">
+    </head>
+    <body>
+      <p>
+        <div>
+            <b><a class=3D"bz_bug_link=20
+          bz_status_REOPENED "
+   title=3D"REOPENED - Xorg crashes randomly because of memory leak"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110714#c22">Comme=
+nt # 22</a>
+              on <a class=3D"bz_bug_link=20
+          bz_status_REOPENED "
+   title=3D"REOPENED - Xorg crashes randomly because of memory leak"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D110714">bug 11071=
+4</a>
+              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
+developer&#64;bk.ru" title=3D"Andrey Sychev &lt;developer&#64;bk.ru&gt;"> <=
+span class=3D"fn">Andrey Sychev</span></a>
+</span></b>
+        <pre>Created <span class=3D""><a href=3D"attachment.cgi?id=3D145675=
+" name=3D"attach_145675" title=3D"My Xorg.0.log.old">attachment 145675</a> =
+<a href=3D"attachment.cgi?id=3D145675&amp;action=3Dedit" title=3D"My Xorg.0=
+.log.old">[details]</a></span>
+My Xorg.0.log.old</pre>
+        </div>
+      </p>
+
+
+      <hr>
+      <span>You are receiving this mail because:</span>
+
+      <ul>
+          <li>You are the assignee for the bug.</li>
+      </ul>
+    </body>
+</html>=
+
+--15704586862.879e45.664--
+
+--===============0278836109==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
+YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
+cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============0278836109==--
