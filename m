@@ -2,45 +2,36 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 46424CEB88
-	for <lists+nouveau@lfdr.de>; Mon,  7 Oct 2019 20:12:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9DF18CF260
+	for <lists+nouveau@lfdr.de>; Tue,  8 Oct 2019 08:05:36 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 832196E13A;
-	Mon,  7 Oct 2019 18:12:51 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 407D589EB1;
+	Tue,  8 Oct 2019 06:05:33 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
- by gabe.freedesktop.org (Postfix) with ESMTP id B293A6E135
- for <nouveau@lists.freedesktop.org>; Mon,  7 Oct 2019 18:12:49 +0000 (UTC)
-Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id AF86F72162; Mon,  7 Oct 2019 18:12:49 +0000 (UTC)
-From: bugzilla-daemon@freedesktop.org
-To: nouveau@lists.freedesktop.org
-Date: Mon, 07 Oct 2019 18:12:49 +0000
-X-Bugzilla-Reason: AssignedTo
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: None
-X-Bugzilla-Product: xorg
-X-Bugzilla-Component: Driver/nouveau
-X-Bugzilla-Version: unspecified
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: normal
-X-Bugzilla-Who: lukas@wunner.de
-X-Bugzilla-Status: NEW
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: medium
-X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-75985-8800-RCoSYUkvSi@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-75985-8800@http.bugs.freedesktop.org/>
-References: <bug-75985-8800@http.bugs.freedesktop.org/>
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
+Received: from mga06.intel.com (mga06.intel.com [134.134.136.31])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id AE86489E4C;
+ Tue,  8 Oct 2019 06:05:31 +0000 (UTC)
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+ by orsmga104.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+ 07 Oct 2019 23:05:14 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.67,269,1566889200"; d="scan'208";a="206577319"
+Received: from wpross-mobl.ger.corp.intel.com (HELO localhost) ([10.252.55.86])
+ by fmsmga001.fm.intel.com with ESMTP; 07 Oct 2019 23:05:09 -0700
+From: Jani Nikula <jani.nikula@linux.intel.com>
+To: Krzysztof Kozlowski <krzk@kernel.org>, Alex Deucher <alexdeucher@gmail.com>
+In-Reply-To: <CAJKOXPeVFeSDpxPv-rDywCafWbN3mivtcM3UQX_+wZkyPcZwPQ@mail.gmail.com>
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
+References: <20191004144549.3567-1-krzk@kernel.org> <87sgo4hjii.fsf@intel.com>
+ <CADnq5_MqGehpWwOAxYg0T2x3qXisqmae2uGG5dijQX+Aa4NsoQ@mail.gmail.com>
+ <CAJKOXPeVFeSDpxPv-rDywCafWbN3mivtcM3UQX_+wZkyPcZwPQ@mail.gmail.com>
+Date: Tue, 08 Oct 2019 09:05:49 +0300
+Message-ID: <87v9szdb5u.fsf@intel.com>
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 75985] [NVC1] HDMI audio device only visible after
- rescan
+Subject: Re: [Nouveau] [PATCH TRIVIAL v2] gpu: Fix Kconfig indentation
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -52,148 +43,45 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============2037584146=="
+Cc: amd-gfx list <amd-gfx@lists.freedesktop.org>,
+ Jiri Kosina <trivial@kernel.org>, lima@lists.freedesktop.org,
+ David Airlie <airlied@linux.ie>, nouveau <nouveau@lists.freedesktop.org>,
+ Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ LKML <linux-kernel@vger.kernel.org>, Maxime Ripard <mripard@kernel.org>,
+ linux-rockchip@lists.infradead.org,
+ Maling list - DRI developers <dri-devel@lists.freedesktop.org>,
+ Daniel Vetter <daniel@ffwll.ch>, Sean Paul <sean@poorly.run>,
+ linux-arm-kernel <linux-arm-kernel@lists.infradead.org>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-
---===============2037584146==
-Content-Type: multipart/alternative; boundary="15704719692.Ce1CEE53.14885"
-Content-Transfer-Encoding: 7bit
-
-
---15704719692.Ce1CEE53.14885
-Date: Mon, 7 Oct 2019 18:12:49 +0000
-MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-https://bugs.freedesktop.org/show_bug.cgi?id=3D75985
-
---- Comment #112 from Lukas Wunner <lukas@wunner.de> ---
-(In reply to Przemys=C5=82aw Kopa from comment #111)
-> (In reply to Lukas Wunner from comment #110)
-> > What does "cat /sys/bus/pci/devices/0000:01:00.1/hdaudioC1D0/revision_i=
-d" say?
-> It says: 0x100100
->=20
-> > If you add "codec->link_down_at_suspend =3D 1;" to patch_nvhdmi() in
-> > sound/pci/hda/patch_hdmi.c, the issue may go away.
-> >=20
-> > The only question is whether your card's revision_id is listed in
-> > snd_hda_id_hdmi[] such that patch_nvhdmi() is executed for your card.
->=20
-> I added "HDA_CODEC_ENTRY(0x10de0403, "GPU 0403 HDMI/DP", patch_nvhdmi)" to
-> snd_hda_id_hdmi[] (PCI ID of my Nvidia HDA wasn't there) and
-> "codec->link_down_at_suspend =3D 1;" to patch_nvhdmi(). With those changes
-> dGPU and HDA suspended normally (after echoing "auto" to HDA control file=
-),
-> so I think that this is definiteley the right track!
-
-Glad to hear. You don't seem to have any commits in the kernel so far. Would
-you like to try and bake these changes into a proper patch? If not I'll gla=
-dly
-create and submit the patch myself but mentoring someone else make their fi=
-rst
-contribution is more beneficial to the community, hence my question. You co=
-uld
-attach the patch to this bugzilla and we can provide you with comments befo=
-re
-you submit it to the list.
-
---=20
-You are receiving this mail because:
-You are the assignee for the bug.=
-
---15704719692.Ce1CEE53.14885
-Date: Mon, 7 Oct 2019 18:12:49 +0000
-MIME-Version: 1.0
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-<html>
-    <head>
-      <base href=3D"https://bugs.freedesktop.org/">
-    </head>
-    <body>
-      <p>
-        <div>
-            <b><a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - [NVC1] HDMI audio device only visible after rescan"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D75985#c112">Comme=
-nt # 112</a>
-              on <a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - [NVC1] HDMI audio device only visible after rescan"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D75985">bug 75985<=
-/a>
-              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
-lukas&#64;wunner.de" title=3D"Lukas Wunner &lt;lukas&#64;wunner.de&gt;"> <s=
-pan class=3D"fn">Lukas Wunner</span></a>
-</span></b>
-        <pre>(In reply to Przemys=C5=82aw Kopa from <a href=3D"show_bug.cgi=
-?id=3D75985#c111">comment #111</a>)
-<span class=3D"quote">&gt; (In reply to Lukas Wunner from <a href=3D"show_b=
-ug.cgi?id=3D75985#c110">comment #110</a>)
-&gt; &gt; What does &quot;cat /sys/bus/pci/devices/0000:01:00.1/hdaudioC1D0=
-/revision_id&quot; say?
-&gt; It says: 0x100100
-&gt;=20
-&gt; &gt; If you add &quot;codec-&gt;link_down_at_suspend =3D 1;&quot; to p=
-atch_nvhdmi() in
-&gt; &gt; sound/pci/hda/patch_hdmi.c, the issue may go away.
-&gt; &gt;=20
-&gt; &gt; The only question is whether your card's revision_id is listed in
-&gt; &gt; snd_hda_id_hdmi[] such that patch_nvhdmi() is executed for your c=
-ard.
-&gt;=20
-&gt; I added &quot;HDA_CODEC_ENTRY(0x10de0403, &quot;GPU 0403 HDMI/DP&quot;=
-, patch_nvhdmi)&quot; to
-&gt; snd_hda_id_hdmi[] (PCI ID of my Nvidia HDA wasn't there) and
-&gt; &quot;codec-&gt;link_down_at_suspend =3D 1;&quot; to patch_nvhdmi(). W=
-ith those changes
-&gt; dGPU and HDA suspended normally (after echoing &quot;auto&quot; to HDA=
- control file),
-&gt; so I think that this is definiteley the right track!</span >
-
-Glad to hear. You don't seem to have any commits in the kernel so far. Would
-you like to try and bake these changes into a proper patch? If not I'll gla=
-dly
-create and submit the patch myself but mentoring someone else make their fi=
-rst
-contribution is more beneficial to the community, hence my question. You co=
-uld
-attach the patch to this bugzilla and we can provide you with comments befo=
-re
-you submit it to the list.</pre>
-        </div>
-      </p>
-
-
-      <hr>
-      <span>You are receiving this mail because:</span>
-
-      <ul>
-          <li>You are the assignee for the bug.</li>
-      </ul>
-    </body>
-</html>=
-
---15704719692.Ce1CEE53.14885--
-
---===============2037584146==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
-YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
-cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
-
---===============2037584146==--
+T24gTW9uLCAwNyBPY3QgMjAxOSwgS3J6eXN6dG9mIEtvemxvd3NraSA8a3J6a0BrZXJuZWwub3Jn
+PiB3cm90ZToKPiBPbiBNb24sIDcgT2N0IDIwMTkgYXQgMTg6MDksIEFsZXggRGV1Y2hlciA8YWxl
+eGRldWNoZXJAZ21haWwuY29tPiB3cm90ZToKPj4KPj4gT24gTW9uLCBPY3QgNywgMjAxOSBhdCA3
+OjM5IEFNIEphbmkgTmlrdWxhIDxqYW5pLm5pa3VsYUBsaW51eC5pbnRlbC5jb20+IHdyb3RlOgo+
+PiA+Cj4+ID4gT24gRnJpLCAwNCBPY3QgMjAxOSwgS3J6eXN6dG9mIEtvemxvd3NraSA8a3J6a0Br
+ZXJuZWwub3JnPiB3cm90ZToKPj4gPiA+ICBkcml2ZXJzL2dwdS9kcm0vaTkxNS9LY29uZmlnICAg
+ICAgICAgICAgIHwgIDEyICstCj4+ID4gPiAgZHJpdmVycy9ncHUvZHJtL2k5MTUvS2NvbmZpZy5k
+ZWJ1ZyAgICAgICB8IDE0NCArKysrKysrKysrKy0tLS0tLS0tLS0tLQo+PiA+Cj4+ID4gUGxlYXNl
+IHNwbGl0IHRoZXNlIG91dCB0byBhIHNlcGFyYXRlIHBhdGNoLiBDYW4ndCBzcGVhayBmb3Igb3Ro
+ZXJzLCBidXQKPj4gPiB0aGUgcGF0Y2ggbG9va3MgbGlrZSBpdCdsbCBiZSBjb25mbGljdHMgZ2Fs
+b3JlIGFuZCBhIHByb2JsZW0gdG8gbWFuYWdlCj4+ID4gaWYgbWVyZ2VkIGluIG9uZSBiaWcgbHVt
+cC4KPj4KPj4gWWVzLCBpdCB3b3VsZCBiZSBuaWNlIHRvIGhhdmUgdGhlIGFtZCBwYXRjaCBzZXBh
+cmF0ZSBhcyB3ZWxsLgo+Cj4gSSdsbCBzcGxpdCB0aGUgQU1EIGFuZCBpOTE1IGFsdGhvdWdoIEkg
+YW0gbm90IHN1cmUgaWYgaXQgaXMgc2Vuc2UgdG8KPiBzcGxpdCBzdWNoIHRyaXZpYWwgcGF0Y2gg
+cGVyIGVhY2ggZHJpdmVyLgoKVGhhbmtzLgoKU2VlIE1BSU5UQUlORVJTLCBtYW55IG9mIHRoZSBk
+cml2ZXJzIGFyZSBtYWludGFpbmVkIGluIHRoZSBzYW1lIGRybS1taXNjCnJlcG8sIGFuZCBpdCBt
+YWtlcyBubyBkaWZmZXJlbmNlIHRvIHNwbGl0IHRob3NlLgoKSW4gZ2VuZXJhbCBpdCdzLCB3ZWxs
+LCB0cml2aWFsIHRvIHNwbGl0IHVwIHBhdGNoZXMgbGlrZSB0aGlzIHBlciBkcml2ZXIKb3IgcmVw
+bywgYnV0IG5vdCBzcGxpdHRpbmcgaXQgdXAgZ2VuZXJhdGVzIGV4dHJhIGJ1c3l3b3JrIGluIG1h
+bmFnaW5nCmNvbmZsaWN0cyB1bnRpbCBzb21lIGNvbW1vbiBtZXJnZS9iYWNrbWVyZ2UgaGFwcGVu
+cy4gV2UganVzdCB3YW50IHRvCmFwcGx5IHRoZSBwYXRjaCBhbmQgZm9yZ2V0IGFib3V0IGl0LCBp
+bnN0ZWFkIG9mIGRlYWxpbmcgd2l0aCBhIHRyaXZpYWwKd2hpdGVzcGFjZSBjbGVhbnVwIG1hbnkg
+dGltZXMgb3Zlci4KCkJSLApKYW5pLgoKCi0tIApKYW5pIE5pa3VsYSwgSW50ZWwgT3BlbiBTb3Vy
+Y2UgR3JhcGhpY3MgQ2VudGVyCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fCk5vdXZlYXUgbWFpbGluZyBsaXN0Ck5vdXZlYXVAbGlzdHMuZnJlZWRlc2t0b3Au
+b3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vbm91dmVh
+dQ==
