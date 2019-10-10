@@ -1,73 +1,46 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9AC5FD1917
-	for <lists+nouveau@lfdr.de>; Wed,  9 Oct 2019 21:40:38 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 330F2D1FF2
+	for <lists+nouveau@lfdr.de>; Thu, 10 Oct 2019 07:18:49 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 824CA6EA4B;
-	Wed,  9 Oct 2019 19:40:36 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0ABE96EA8F;
+	Thu, 10 Oct 2019 05:18:47 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [205.139.110.120])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4010E6E959
- for <nouveau@lists.freedesktop.org>; Wed,  9 Oct 2019 19:40:35 +0000 (UTC)
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com
- [209.85.222.198]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-16-RX3MUCfFOYecyG97B0A64Q-1; Wed, 09 Oct 2019 15:40:32 -0400
-Received: by mail-qk1-f198.google.com with SMTP id b67so3088541qkc.1
- for <nouveau@lists.freedesktop.org>; Wed, 09 Oct 2019 12:40:32 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
- :references:organization:user-agent:mime-version
- :content-transfer-encoding;
- bh=4KxjULPGLqjAZrTVsVVDxzvB76dQUgaEDF7zWxkJIms=;
- b=oHqeDgBeJK1JIJBnxMN//RuhJZv1r2sljuGfQVr3zb5K5ZuOGoxjcUrkQz3FMa95kS
- 7BA8DsBlH1HX7Qrv/VOBxBOYUIzBAB0jJPNApnWrQoS4QX/zRKzpIHvhq2hxtxT8fI0S
- dtSYwjTITxXweaVjr1e012B5xppmXHnz5KA4O4G2ayvZ+DVf51H1XT4ZlWB8dGurEpTT
- ypjki7PTLT8jV/Wcas+5AUesfULEoEv+qO37jwWv8sVXLWgwvqsxdCIPtAb7DdQyBJUn
- leOb74qzlHGAPiPragk+apFxn23QFDgM/HZE3RN/GGr9GDuBa2K972BcdrSu3giguWMa
- HwnQ==
-X-Gm-Message-State: APjAAAU93tVGRVp1Kh+2v+NHDVycscCBBrF4k8ZSjQV8xoZge2GKB7tt
- zYMOJi3KlMYgEDru2J6k7xqWwHQlfpzsydbeleSooWO4r6PyADqFECWbQ9XcNEg79FqqAZoEMGK
- evOdA2ODNu1nwXMIJM0PJd9OTEA==
-X-Received: by 2002:ac8:6683:: with SMTP id d3mr5538962qtp.85.1570650031903;
- Wed, 09 Oct 2019 12:40:31 -0700 (PDT)
-X-Google-Smtp-Source: APXvYqzTfbsLv4+WnHvBD3IUlVlWZk20K6FFZoR9W+ieQtbpCsR8I5HeuaYr+WgOErds/sxPg/WDDw==
-X-Received: by 2002:ac8:6683:: with SMTP id d3mr5538940qtp.85.1570650031595;
- Wed, 09 Oct 2019 12:40:31 -0700 (PDT)
-Received: from dhcp-10-20-1-34.bss.redhat.com ([144.121.20.162])
- by smtp.gmail.com with ESMTPSA id 139sm1451793qkf.14.2019.10.09.12.40.30
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 09 Oct 2019 12:40:30 -0700 (PDT)
-Message-ID: <308f0fe3bf2705a975d4b1f9dfd16dc07724d454.camel@redhat.com>
-From: Lyude Paul <lyude@redhat.com>
-To: Sean Paul <sean@poorly.run>
-Date: Wed, 09 Oct 2019 15:40:29 -0400
-In-Reply-To: <20190927142510.GS218215@art_vandelay>
-References: <20190903204645.25487-1-lyude@redhat.com>
- <20190903204645.25487-27-lyude@redhat.com>
- <20190927142510.GS218215@art_vandelay>
-Organization: Red Hat
-User-Agent: Evolution 3.32.4 (3.32.4-1.fc30)
+Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
+ [131.252.210.165])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 4EDA66EA8C
+ for <nouveau@lists.freedesktop.org>; Thu, 10 Oct 2019 05:18:45 +0000 (UTC)
+Received: by culpepper.freedesktop.org (Postfix, from userid 33)
+ id 13B847296E; Thu, 10 Oct 2019 05:18:45 +0000 (UTC)
+From: bugzilla-daemon@freedesktop.org
+To: nouveau@lists.freedesktop.org
+Date: Thu, 10 Oct 2019 05:18:45 +0000
+X-Bugzilla-Reason: AssignedTo
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: None
+X-Bugzilla-Product: xorg
+X-Bugzilla-Component: Driver/nouveau
+X-Bugzilla-Version: unspecified
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: major
+X-Bugzilla-Who: mrmazda@earthlink.net
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: not set
+X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: 
+Message-ID: <bug-111853-8800-Xnx8luTkFm@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-111853-8800@http.bugs.freedesktop.org/>
+References: <bug-111853-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-X-MC-Unique: RX3MUCfFOYecyG97B0A64Q-1
-X-Mimecast-Spam-Score: 0
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=redhat.com; 
- s=mimecast20190719; t=1570650034;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=AES1euluYpt8pZOrifbFD6nxniRMA/NiiVgR/kvQytg=;
- b=ijG4zWCx2fJazKde0Hj/NlJqaLDkL2CljHOmYbYygrFxFGehf2qBOyMIRy5zv4GujBycuc
- EXSDHibaiFaXd9REx/Eyk2of4isq3vqpTuZkcixgafKHQDs1qLRL9dwHpo+iNRWz6w96Xx
- I0MlzUf6Qm6ZfNXG0B563N5oJq1BpgI=
-Subject: Re: [Nouveau] [PATCH v2 26/27] drm/dp_mst: Also print unhashed
- pointers for malloc/topology references
+Subject: [Nouveau] [Bug 111853] nouveau kernel module won't load (not
+ available) on Sony laptop with NVIDIA G86M [GeForce 8400M GT] ID: 10de:0426
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -79,128 +52,96 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Maxime Ripard <mripard@kernel.org>, dri-devel@lists.freedesktop.org,
- David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
- Imre Deak <imre.deak@intel.com>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- linux-kernel@vger.kernel.org, amd-gfx@lists.freedesktop.org,
- Juston Li <juston.li@intel.com>, Daniel Vetter <daniel@ffwll.ch>,
- Harry Wentland <hwentlan@amd.com>,
- Ville =?ISO-8859-1?Q?Syrj=E4l=E4?= <ville.syrjala@linux.intel.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1473408584=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-SGV5ISBSZTogb3VyIGRpc2N1c3Npb24gYWJvdXQgdGhpcyBhdCBYREMsIEkgdGhpbmsgSSdtIGdv
-aW5nIHRvIGRyb3AgdGhpcwpwYXRjaCBhbmQganVzdCBmaXggS0FTQU4gc28gaXQgcHJpbnRzIHRo
-ZSBoYXNoZWQgcG9pbnRlciBhcyB3ZWxsLCBJJ2xsIGNjIHlvdQpvbiB0aGUgcGF0Y2hlcyBmb3Ig
-dGhhdCBhcyB3ZWxsCgpPbiBGcmksIDIwMTktMDktMjcgYXQgMTA6MjUgLTA0MDAsIFNlYW4gUGF1
-bCB3cm90ZToKPiBPbiBUdWUsIFNlcCAwMywgMjAxOSBhdCAwNDo0NjowNFBNIC0wNDAwLCBMeXVk
-ZSBQYXVsIHdyb3RlOgo+ID4gQ3VycmVudGx5IHdlIG9ubHkgcHJpbnQgbXN0Yi9wb3J0IHBvaW50
-ZXIgYWRkcmVzc2VzIGluIG91ciBtYWxsb2MgYW5kCj4gPiB0b3BvbG9neSByZWZjb3VudCBmdW5j
-dGlvbnMgdXNpbmcgdGhlIGhhc2hlZC1ieS1kZWZhdWx0ICVwLCBidXQKPiA+IHVuZm9ydHVuYXRl
-bHkgaWYgeW91J3JlIHRyeWluZyB0byBkZWJ1ZyBhIHVzZS1hZnRlci1mcmVlIGVycm9yIGNhdXNl
-ZCBieQo+ID4gYSByZWZjb3VudGluZyBlcnJvciB0aGVuIHRoaXMgcmVhbGx5IGlzbid0IHRlcnJp
-Ymx5IHVzZWZ1bC4gT24gdGhlIG90aGVyCj4gPiBoYW5kIHRob3VnaCwgZXZlcnl0aGluZyBpbiB0
-aGUgcmVzdCBvZiB0aGUgRFAgTVNUIGhlbHBlcnMgdXNlcyBoYXNoZWQKPiA+IHBvaW50ZXIgdmFs
-dWVzIGFzIHdlbGwgYW5kIHByb2JhYmx5IGlzbid0IHVzZWZ1bCB0byBjb252ZXJ0IHRvIHVuaGFz
-aGVkLgo+ID4gU28sIGxldCdzIGp1c3QgZ2V0IHRoZSBiZXN0IG9mIGJvdGggd29ybGRzIGFuZCBw
-cmludCBib3RoIHRoZSBoYXNoZWQgYW5kCj4gPiB1bmhhc2hlZCBwb2ludGVyIGluIG91ciBtYWxs
-b2MvdG9wb2xvZ3kgcmVmY291bnQgZGVidWdnaW5nIG91dHB1dC4gVGhpcwo+ID4gd2lsbCBob3Bl
-ZnVsbHkgbWFrZSBpdCBhIGxvdCBlYXNpZXIgdG8gZmlndXJlIG91dCB3aGljaCBwb3J0L21zdGIg
-aXMKPiA+IGNhdXNpbmcgS0FTQU4gdG8gZ2V0IHVwc2V0Lgo+ID4gCj4gPiBDYzogSnVzdG9uIExp
-IDxqdXN0b24ubGlAaW50ZWwuY29tPgo+ID4gQ2M6IEltcmUgRGVhayA8aW1yZS5kZWFrQGludGVs
-LmNvbT4KPiA+IENjOiBWaWxsZSBTeXJqw6Rsw6QgPHZpbGxlLnN5cmphbGFAbGludXguaW50ZWwu
-Y29tPgo+ID4gQ2M6IEhhcnJ5IFdlbnRsYW5kIDxod2VudGxhbkBhbWQuY29tPgo+ID4gQ2M6IERh
-bmllbCBWZXR0ZXIgPGRhbmllbC52ZXR0ZXJAZmZ3bGwuY2g+Cj4gPiBTaWduZWQtb2ZmLWJ5OiBM
-eXVkZSBQYXVsIDxseXVkZUByZWRoYXQuY29tPgo+IAo+IEl0J3MgcmVhbGx5IHRvbyBiYWQgdGhl
-cmUgaXNuJ3QgYSBDT05GSUdfREVCVUdfU0hPV19QS19BRERSRVNTRVMgb3IgZXZlbiBhCj4gdmFs
-dWUKPiBvZiBrcHRyX3Jlc3RyaWN0IHZhbHVlIHRoYXQgYnlwYXNzZXMgcG9pbnRlciBoYXNoaW5n
-LiBJJ20gc3VyZSB3ZSdyZSBub3QgdGhlCj4gb25seSBvbmVzIHRvIGZlZWwgdGhpcyBwYWluLiBN
-YXliZSBldmVyeW9uZSBqdXN0IGhhY2tzIHZzbnByaW50Zi4uLgo+IAo+IEFzIGl0IGlzLCBJJ20g
-bm90IHRvdGFsbHkgc29sZCBvbiBleHBvc2luZyB0aGUgYWN0dWFsIGFkZHJlc3Nlcwo+IHVuY29u
-ZGl0aW9uYWxseS4KPiBXaGF0IGRvIHlvdSB0aGluayBhYm91dCBwdWxsaW5nIHRoZSBwcmludCBv
-dXQgaW50byBhIGZ1bmN0aW9uIGFuZCBvbmx5Cj4gcHJpbnRpbmcKPiBweCBpZiBhIGRlYnVnIGtj
-b25maWcgaXMgc2V0Pwo+IAo+IFNlYW4KPiAKPiA+IC0tLQo+ID4gIGRyaXZlcnMvZ3B1L2RybS9k
-cm1fZHBfbXN0X3RvcG9sb2d5LmMgfCAzNCArKysrKysrKysrKysrKysrLS0tLS0tLS0tLS0KPiA+
-ICAxIGZpbGUgY2hhbmdlZCwgMjAgaW5zZXJ0aW9ucygrKSwgMTQgZGVsZXRpb25zKC0pCj4gPiAK
-PiA+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0vZHJtX2RwX21zdF90b3BvbG9neS5jCj4g
-PiBiL2RyaXZlcnMvZ3B1L2RybS9kcm1fZHBfbXN0X3RvcG9sb2d5LmMKPiA+IGluZGV4IDJmZTI0
-ZTM2NjkyNS4uNWI1YzBiM2IzYzBlIDEwMDY0NAo+ID4gLS0tIGEvZHJpdmVycy9ncHUvZHJtL2Ry
-bV9kcF9tc3RfdG9wb2xvZ3kuYwo+ID4gKysrIGIvZHJpdmVycy9ncHUvZHJtL2RybV9kcF9tc3Rf
-dG9wb2xvZ3kuYwo+ID4gQEAgLTEzMjcsNyArMTMyNyw4IEBAIHN0YXRpYyB2b2lkCj4gPiAgZHJt
-X2RwX21zdF9nZXRfbXN0Yl9tYWxsb2Moc3RydWN0IGRybV9kcF9tc3RfYnJhbmNoICptc3RiKQo+
-ID4gIHsKPiA+ICAJa3JlZl9nZXQoJm1zdGItPm1hbGxvY19rcmVmKTsKPiA+IC0JRFJNX0RFQlVH
-KCJtc3RiICVwICglZClcbiIsIG1zdGIsIGtyZWZfcmVhZCgmbXN0Yi0+bWFsbG9jX2tyZWYpKTsK
-PiA+ICsJRFJNX0RFQlVHKCJtc3RiICVwLyVweCAoJWQpXG4iLAo+ID4gKwkJICBtc3RiLCBtc3Ri
-LCBrcmVmX3JlYWQoJm1zdGItPm1hbGxvY19rcmVmKSk7Cj4gPiAgfQo+ID4gIAo+ID4gIC8qKgo+
-ID4gQEAgLTEzNDQsNyArMTM0NSw4IEBAIGRybV9kcF9tc3RfZ2V0X21zdGJfbWFsbG9jKHN0cnVj
-dCBkcm1fZHBfbXN0X2JyYW5jaAo+ID4gKm1zdGIpCj4gPiAgc3RhdGljIHZvaWQKPiA+ICBkcm1f
-ZHBfbXN0X3B1dF9tc3RiX21hbGxvYyhzdHJ1Y3QgZHJtX2RwX21zdF9icmFuY2ggKm1zdGIpCj4g
-PiAgewo+ID4gLQlEUk1fREVCVUcoIm1zdGIgJXAgKCVkKVxuIiwgbXN0Yiwga3JlZl9yZWFkKCZt
-c3RiLT5tYWxsb2Nfa3JlZikgLSAxKTsKPiA+ICsJRFJNX0RFQlVHKCJtc3RiICVwLyVweCAoJWQp
-XG4iLAo+ID4gKwkJICBtc3RiLCBtc3RiLCBrcmVmX3JlYWQoJm1zdGItPm1hbGxvY19rcmVmKSAt
-IDEpOwo+ID4gIAlrcmVmX3B1dCgmbXN0Yi0+bWFsbG9jX2tyZWYsIGRybV9kcF9mcmVlX21zdF9i
-cmFuY2hfZGV2aWNlKTsKPiA+ICB9Cj4gPiAgCj4gPiBAQCAtMTM3OSw3ICsxMzgxLDggQEAgdm9p
-ZAo+ID4gIGRybV9kcF9tc3RfZ2V0X3BvcnRfbWFsbG9jKHN0cnVjdCBkcm1fZHBfbXN0X3BvcnQg
-KnBvcnQpCj4gPiAgewo+ID4gIAlrcmVmX2dldCgmcG9ydC0+bWFsbG9jX2tyZWYpOwo+ID4gLQlE
-Uk1fREVCVUcoInBvcnQgJXAgKCVkKVxuIiwgcG9ydCwga3JlZl9yZWFkKCZwb3J0LT5tYWxsb2Nf
-a3JlZikpOwo+ID4gKwlEUk1fREVCVUcoInBvcnQgJXAvJXB4ICglZClcbiIsCj4gPiArCQkgIHBv
-cnQsIHBvcnQsIGtyZWZfcmVhZCgmcG9ydC0+bWFsbG9jX2tyZWYpKTsKPiA+ICB9Cj4gPiAgRVhQ
-T1JUX1NZTUJPTChkcm1fZHBfbXN0X2dldF9wb3J0X21hbGxvYyk7Cj4gPiAgCj4gPiBAQCAtMTM5
-Niw3ICsxMzk5LDggQEAgRVhQT1JUX1NZTUJPTChkcm1fZHBfbXN0X2dldF9wb3J0X21hbGxvYyk7
-Cj4gPiAgdm9pZAo+ID4gIGRybV9kcF9tc3RfcHV0X3BvcnRfbWFsbG9jKHN0cnVjdCBkcm1fZHBf
-bXN0X3BvcnQgKnBvcnQpCj4gPiAgewo+ID4gLQlEUk1fREVCVUcoInBvcnQgJXAgKCVkKVxuIiwg
-cG9ydCwga3JlZl9yZWFkKCZwb3J0LT5tYWxsb2Nfa3JlZikgLSAxKTsKPiA+ICsJRFJNX0RFQlVH
-KCJwb3J0ICVwLyVweCAoJWQpXG4iLAo+ID4gKwkJICBwb3J0LCBwb3J0LCBrcmVmX3JlYWQoJnBv
-cnQtPm1hbGxvY19rcmVmKSAtIDEpOwo+ID4gIAlrcmVmX3B1dCgmcG9ydC0+bWFsbG9jX2tyZWYs
-IGRybV9kcF9mcmVlX21zdF9wb3J0KTsKPiA+ICB9Cj4gPiAgRVhQT1JUX1NZTUJPTChkcm1fZHBf
-bXN0X3B1dF9wb3J0X21hbGxvYyk7Cj4gPiBAQCAtMTQ0Nyw4ICsxNDUxLDggQEAgZHJtX2RwX21z
-dF90b3BvbG9neV90cnlfZ2V0X21zdGIoc3RydWN0Cj4gPiBkcm1fZHBfbXN0X2JyYW5jaCAqbXN0
-YikKPiA+ICAJaW50IHJldCA9IGtyZWZfZ2V0X3VubGVzc196ZXJvKCZtc3RiLT50b3BvbG9neV9r
-cmVmKTsKPiA+ICAKPiA+ICAJaWYgKHJldCkKPiA+IC0JCURSTV9ERUJVRygibXN0YiAlcCAoJWQp
-XG4iLCBtc3RiLAo+ID4gLQkJCSAga3JlZl9yZWFkKCZtc3RiLT50b3BvbG9neV9rcmVmKSk7Cj4g
-PiArCQlEUk1fREVCVUcoIm1zdGIgJXAvJXB4ICglZClcbiIsCj4gPiArCQkJICBtc3RiLCBtc3Ri
-LCBrcmVmX3JlYWQoJm1zdGItPnRvcG9sb2d5X2tyZWYpKTsKPiA+ICAKPiA+ICAJcmV0dXJuIHJl
-dDsKPiA+ICB9Cj4gPiBAQCAtMTQ3MSw3ICsxNDc1LDggQEAgc3RhdGljIHZvaWQgZHJtX2RwX21z
-dF90b3BvbG9neV9nZXRfbXN0YihzdHJ1Y3QKPiA+IGRybV9kcF9tc3RfYnJhbmNoICptc3RiKQo+
-ID4gIHsKPiA+ICAJV0FSTl9PTihrcmVmX3JlYWQoJm1zdGItPnRvcG9sb2d5X2tyZWYpID09IDAp
-Owo+ID4gIAlrcmVmX2dldCgmbXN0Yi0+dG9wb2xvZ3lfa3JlZik7Cj4gPiAtCURSTV9ERUJVRygi
-bXN0YiAlcCAoJWQpXG4iLCBtc3RiLCBrcmVmX3JlYWQoJm1zdGItPnRvcG9sb2d5X2tyZWYpKTsK
-PiA+ICsJRFJNX0RFQlVHKCJtc3RiICVwLyVweCAoJWQpXG4iLAo+ID4gKwkJICBtc3RiLCBtc3Ri
-LCBrcmVmX3JlYWQoJm1zdGItPnRvcG9sb2d5X2tyZWYpKTsKPiA+ICB9Cj4gPiAgCj4gPiAgLyoq
-Cj4gPiBAQCAtMTQ4OSw4ICsxNDk0LDggQEAgc3RhdGljIHZvaWQgZHJtX2RwX21zdF90b3BvbG9n
-eV9nZXRfbXN0YihzdHJ1Y3QKPiA+IGRybV9kcF9tc3RfYnJhbmNoICptc3RiKQo+ID4gIHN0YXRp
-YyB2b2lkCj4gPiAgZHJtX2RwX21zdF90b3BvbG9neV9wdXRfbXN0YihzdHJ1Y3QgZHJtX2RwX21z
-dF9icmFuY2ggKm1zdGIpCj4gPiAgewo+ID4gLQlEUk1fREVCVUcoIm1zdGIgJXAgKCVkKVxuIiwK
-PiA+IC0JCSAgbXN0Yiwga3JlZl9yZWFkKCZtc3RiLT50b3BvbG9neV9rcmVmKSAtIDEpOwo+ID4g
-KwlEUk1fREVCVUcoIm1zdGIgJXAvJXB4ICglZClcbiIsCj4gPiArCQkgIG1zdGIsIG1zdGIsIGty
-ZWZfcmVhZCgmbXN0Yi0+dG9wb2xvZ3lfa3JlZikgLSAxKTsKPiA+ICAJa3JlZl9wdXQoJm1zdGIt
-PnRvcG9sb2d5X2tyZWYsIGRybV9kcF9kZXN0cm95X21zdF9icmFuY2hfZGV2aWNlKTsKPiA+ICB9
-Cj4gPiAgCj4gPiBAQCAtMTU0Niw4ICsxNTUxLDggQEAgZHJtX2RwX21zdF90b3BvbG9neV90cnlf
-Z2V0X3BvcnQoc3RydWN0Cj4gPiBkcm1fZHBfbXN0X3BvcnQgKnBvcnQpCj4gPiAgCWludCByZXQg
-PSBrcmVmX2dldF91bmxlc3NfemVybygmcG9ydC0+dG9wb2xvZ3lfa3JlZik7Cj4gPiAgCj4gPiAg
-CWlmIChyZXQpCj4gPiAtCQlEUk1fREVCVUcoInBvcnQgJXAgKCVkKVxuIiwgcG9ydCwKPiA+IC0J
-CQkgIGtyZWZfcmVhZCgmcG9ydC0+dG9wb2xvZ3lfa3JlZikpOwo+ID4gKwkJRFJNX0RFQlVHKCJw
-b3J0ICVwLyVweCAoJWQpXG4iLAo+ID4gKwkJCSAgcG9ydCwgcG9ydCwga3JlZl9yZWFkKCZwb3J0
-LT50b3BvbG9neV9rcmVmKSk7Cj4gPiAgCj4gPiAgCXJldHVybiByZXQ7Cj4gPiAgfQo+ID4gQEAg
-LTE1NjksNyArMTU3NCw4IEBAIHN0YXRpYyB2b2lkIGRybV9kcF9tc3RfdG9wb2xvZ3lfZ2V0X3Bv
-cnQoc3RydWN0Cj4gPiBkcm1fZHBfbXN0X3BvcnQgKnBvcnQpCj4gPiAgewo+ID4gIAlXQVJOX09O
-KGtyZWZfcmVhZCgmcG9ydC0+dG9wb2xvZ3lfa3JlZikgPT0gMCk7Cj4gPiAgCWtyZWZfZ2V0KCZw
-b3J0LT50b3BvbG9neV9rcmVmKTsKPiA+IC0JRFJNX0RFQlVHKCJwb3J0ICVwICglZClcbiIsIHBv
-cnQsIGtyZWZfcmVhZCgmcG9ydC0+dG9wb2xvZ3lfa3JlZikpOwo+ID4gKwlEUk1fREVCVUcoInBv
-cnQgJXAvJXB4ICglZClcbiIsCj4gPiArCQkgIHBvcnQsIHBvcnQsIGtyZWZfcmVhZCgmcG9ydC0+
-dG9wb2xvZ3lfa3JlZikpOwo+ID4gIH0KPiA+ICAKPiA+ICAvKioKPiA+IEBAIC0xNTg1LDggKzE1
-OTEsOCBAQCBzdGF0aWMgdm9pZCBkcm1fZHBfbXN0X3RvcG9sb2d5X2dldF9wb3J0KHN0cnVjdAo+
-ID4gZHJtX2RwX21zdF9wb3J0ICpwb3J0KQo+ID4gICAqLwo+ID4gIHN0YXRpYyB2b2lkIGRybV9k
-cF9tc3RfdG9wb2xvZ3lfcHV0X3BvcnQoc3RydWN0IGRybV9kcF9tc3RfcG9ydCAqcG9ydCkKPiA+
-ICB7Cj4gPiAtCURSTV9ERUJVRygicG9ydCAlcCAoJWQpXG4iLAo+ID4gLQkJICBwb3J0LCBrcmVm
-X3JlYWQoJnBvcnQtPnRvcG9sb2d5X2tyZWYpIC0gMSk7Cj4gPiArCURSTV9ERUJVRygicG9ydCAl
-cC8lcHggKCVkKVxuIiwKPiA+ICsJCSAgcG9ydCwgcG9ydCwga3JlZl9yZWFkKCZwb3J0LT50b3Bv
-bG9neV9rcmVmKSAtIDEpOwo+ID4gIAlrcmVmX3B1dCgmcG9ydC0+dG9wb2xvZ3lfa3JlZiwgZHJt
-X2RwX2Rlc3Ryb3lfcG9ydCk7Cj4gPiAgfQo+ID4gIAo+ID4gLS0gCj4gPiAyLjIxLjAKPiA+IAot
-LSAKQ2hlZXJzLAoJTHl1ZGUgUGF1bAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX18KTm91dmVhdSBtYWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVz
-a3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9u
-b3V2ZWF1
+
+--===============1473408584==
+Content-Type: multipart/alternative; boundary="15706847251.9A419AA8c.25819"
+Content-Transfer-Encoding: 7bit
+
+
+--15706847251.9A419AA8c.25819
+Date: Thu, 10 Oct 2019 05:18:45 +0000
+MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+https://bugs.freedesktop.org/show_bug.cgi?id=3D111853
+
+--- Comment #8 from Felix Miata <mrmazda@earthlink.net> ---
+A fresh installation of Windows 7 uses the panel's native 1440x900 mode via=
+ its
+"VGA" driver, though the HDMI port sends nothing to a display more than wha=
+t's
+necessary to make it complain mode not supported.
+
+--=20
+You are receiving this mail because:
+You are the assignee for the bug.=
+
+--15706847251.9A419AA8c.25819
+Date: Thu, 10 Oct 2019 05:18:45 +0000
+MIME-Version: 1.0
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+<html>
+    <head>
+      <base href=3D"https://bugs.freedesktop.org/">
+    </head>
+    <body>
+      <p>
+        <div>
+            <b><a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - nouveau kernel module won't load (not available) on Sony =
+laptop with NVIDIA G86M [GeForce 8400M GT] ID: 10de:0426"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111853#c8">Commen=
+t # 8</a>
+              on <a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - nouveau kernel module won't load (not available) on Sony =
+laptop with NVIDIA G86M [GeForce 8400M GT] ID: 10de:0426"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111853">bug 11185=
+3</a>
+              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
+mrmazda&#64;earthlink.net" title=3D"Felix Miata &lt;mrmazda&#64;earthlink.n=
+et&gt;"> <span class=3D"fn">Felix Miata</span></a>
+</span></b>
+        <pre>A fresh installation of Windows 7 uses the panel's native 1440=
+x900 mode via its
+&quot;VGA&quot; driver, though the HDMI port sends nothing to a display mor=
+e than what's
+necessary to make it complain mode not supported.</pre>
+        </div>
+      </p>
+
+
+      <hr>
+      <span>You are receiving this mail because:</span>
+
+      <ul>
+          <li>You are the assignee for the bug.</li>
+      </ul>
+    </body>
+</html>=
+
+--15706847251.9A419AA8c.25819--
+
+--===============1473408584==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
+YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
+cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============1473408584==--
