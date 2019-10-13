@@ -2,22 +2,22 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 42D0AD56B9
-	for <lists+nouveau@lfdr.de>; Sun, 13 Oct 2019 18:02:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BFB8AD56C0
+	for <lists+nouveau@lfdr.de>; Sun, 13 Oct 2019 18:09:04 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0DE8B6E151;
-	Sun, 13 Oct 2019 16:02:09 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 331B86E157;
+	Sun, 13 Oct 2019 16:09:03 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
- by gabe.freedesktop.org (Postfix) with ESMTP id DAB956E14C
- for <nouveau@lists.freedesktop.org>; Sun, 13 Oct 2019 16:02:07 +0000 (UTC)
+ [131.252.210.165])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 560F16E14D
+ for <nouveau@lists.freedesktop.org>; Sun, 13 Oct 2019 16:09:02 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id D80357296E; Sun, 13 Oct 2019 16:02:07 +0000 (UTC)
+ id 533D57296E; Sun, 13 Oct 2019 16:09:02 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Sun, 13 Oct 2019 16:02:08 +0000
+Date: Sun, 13 Oct 2019 16:09:02 +0000
 X-Bugzilla-Reason: AssignedTo
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
@@ -25,7 +25,7 @@ X-Bugzilla-Product: xorg
 X-Bugzilla-Component: Driver/nouveau
 X-Bugzilla-Version: unspecified
 X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: not set
+X-Bugzilla-Severity: normal
 X-Bugzilla-Who: imirkin@alum.mit.edu
 X-Bugzilla-Status: NEW
 X-Bugzilla-Resolution: 
@@ -33,14 +33,14 @@ X-Bugzilla-Priority: not set
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
 X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-111868-8800-koX8HHbKHp@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-111868-8800@http.bugs.freedesktop.org/>
-References: <bug-111868-8800@http.bugs.freedesktop.org/>
+Message-ID: <bug-111841-8800-cYpkQvMuPh@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-111841-8800@http.bugs.freedesktop.org/>
+References: <bug-111841-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 111868] xorg with nouveau crash when starting
- mate-session in debian 10
+Subject: [Nouveau] [Bug 111841] Setting gamma or color temperature on GK104
+ causes horizontal artifacts / flickering
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -52,40 +52,37 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0820870094=="
+Content-Type: multipart/mixed; boundary="===============1929581390=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============0820870094==
-Content-Type: multipart/alternative; boundary="15709825272.D8d83DEe.5861"
+--===============1929581390==
+Content-Type: multipart/alternative; boundary="15709829421.ecd9f9efC.6818"
 Content-Transfer-Encoding: 7bit
 
 
---15709825272.D8d83DEe.5861
-Date: Sun, 13 Oct 2019 16:02:07 +0000
+--15709829421.ecd9f9efC.6818
+Date: Sun, 13 Oct 2019 16:09:02 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 
-https://bugs.freedesktop.org/show_bug.cgi?id=3D111868
+https://bugs.freedesktop.org/show_bug.cgi?id=3D111841
 
---- Comment #11 from Ilia Mirkin <imirkin@alum.mit.edu> ---
-This patch may help:
-
-https://patchwork.freedesktop.org/patch/335616/
-
-I believe that primarily GPUs with 32MB of VRAM (or less) would be affected.
-However it may also have a rarer effect on larger-VRAM devices.
+--- Comment #4 from Ilia Mirkin <imirkin@alum.mit.edu> ---
+Wait, why is dithering even a thing here -- are you using 10bpc formats? Or=
+ do
+you have a LVDS/eDP panel that can only do 6bpc?
 
 --=20
 You are receiving this mail because:
 You are the assignee for the bug.=
 
---15709825272.D8d83DEe.5861
-Date: Sun, 13 Oct 2019 16:02:07 +0000
+--15709829421.ecd9f9efC.6818
+Date: Sun, 13 Oct 2019 16:09:02 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -101,27 +98,23 @@ Auto-Submitted: auto-generated
         <div>
             <b><a class=3D"bz_bug_link=20
           bz_status_NEW "
-   title=3D"NEW - xorg with nouveau crash when starting mate-session in deb=
-ian 10"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111868#c11">Comme=
-nt # 11</a>
+   title=3D"NEW - Setting gamma or color temperature on GK104 causes horizo=
+ntal artifacts / flickering"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111841#c4">Commen=
+t # 4</a>
               on <a class=3D"bz_bug_link=20
           bz_status_NEW "
-   title=3D"NEW - xorg with nouveau crash when starting mate-session in deb=
-ian 10"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111868">bug 11186=
-8</a>
+   title=3D"NEW - Setting gamma or color temperature on GK104 causes horizo=
+ntal artifacts / flickering"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111841">bug 11184=
+1</a>
               from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
 imirkin&#64;alum.mit.edu" title=3D"Ilia Mirkin &lt;imirkin&#64;alum.mit.edu=
 &gt;"> <span class=3D"fn">Ilia Mirkin</span></a>
 </span></b>
-        <pre>This patch may help:
-
-<a href=3D"https://patchwork.freedesktop.org/patch/335616/">https://patchwo=
-rk.freedesktop.org/patch/335616/</a>
-
-I believe that primarily GPUs with 32MB of VRAM (or less) would be affected.
-However it may also have a rarer effect on larger-VRAM devices.</pre>
+        <pre>Wait, why is dithering even a thing here -- are you using 10bp=
+c formats? Or do
+you have a LVDS/eDP panel that can only do 6bpc?</pre>
         </div>
       </p>
 
@@ -135,9 +128,9 @@ However it may also have a rarer effect on larger-VRAM devices.</pre>
     </body>
 </html>=
 
---15709825272.D8d83DEe.5861--
+--15709829421.ecd9f9efC.6818--
 
---===============0820870094==
+--===============1929581390==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -147,4 +140,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============0820870094==--
+--===============1929581390==--
