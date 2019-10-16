@@ -1,54 +1,46 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4C42CD99DB
-	for <lists+nouveau@lfdr.de>; Wed, 16 Oct 2019 21:18:50 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 42C42D9BE3
+	for <lists+nouveau@lfdr.de>; Wed, 16 Oct 2019 22:38:58 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 37A736E42A;
-	Wed, 16 Oct 2019 19:18:48 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 038E36E9CF;
+	Wed, 16 Oct 2019 20:38:56 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id ADA146E42A
- for <nouveau@lists.freedesktop.org>; Wed, 16 Oct 2019 19:18:46 +0000 (UTC)
-Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com
- [209.85.160.199])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id 11F8281F0C
- for <nouveau@lists.freedesktop.org>; Wed, 16 Oct 2019 19:18:46 +0000 (UTC)
-Received: by mail-qt1-f199.google.com with SMTP id c8so25965644qtd.20
- for <nouveau@lists.freedesktop.org>; Wed, 16 Oct 2019 12:18:46 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=/80yb/oOmyIBcoEfrbikH3HGafwnqok36b0yp7q1QSw=;
- b=NchL4lBWy+9WzYDZ1aLjooGnW3VAm9B1JyZWICRtvwhNlEqxPRe2QNmq8ljaQ0ThiZ
- Xj//az/46sfVGssx+6dMFhpDXteAuiUKUL7rIQbJ34n1AIKKCVrcPXMkcoDPEZfpHfIz
- mdg9UvwXVZGf7S+Tiow4aqunUZoSa9Ru2CJW2L8wOXU5mb6Y+tQRaik66YZexfVm+Gh8
- AIhFrb7f1/0ehWUiFUkABdCAVkmhweXB1t49ARz1e5kR+5BDeX68lyrvEZaq7tc6Q8aT
- 1PLnFf5O09azXG9Dg3uGTdxsKXTvhXcl006WEsWoZ7e1AG+AmfIQ4FX5ux3RA/hNqTNG
- PyKQ==
-X-Gm-Message-State: APjAAAVmSNg4JVinF/ZkExaLy3Ysrw0ZmUiB1WXdbzHkEnzut6n83dC6
- x/kQ6J2kh7RINYXh99T75ajCbI7LLaCW6wHXRHlV+hvHgrwZb4Xj0tfvNMvIiwvN9c6Qkb+cbO0
- au6doYTEK+55G4OYEP4I8/2hBK7QqoTuw8S08UzeZtg==
-X-Received: by 2002:ac8:2fe5:: with SMTP id m34mr45948276qta.254.1571253525366; 
- Wed, 16 Oct 2019 12:18:45 -0700 (PDT)
-X-Google-Smtp-Source: APXvYqw/3HiT7nhi/MzRf4Tbd+P+DknuXiO46xBf/PXguJN8MQOF7K/dZdL2WHTaARMthMC+YIiwVL37F9mvrRVS8PQ=
-X-Received: by 2002:ac8:2fe5:: with SMTP id m34mr45948248qta.254.1571253525032; 
- Wed, 16 Oct 2019 12:18:45 -0700 (PDT)
+Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
+ [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
+ by gabe.freedesktop.org (Postfix) with ESMTP id A3EC56E176
+ for <nouveau@lists.freedesktop.org>; Wed, 16 Oct 2019 20:38:54 +0000 (UTC)
+Received: by culpepper.freedesktop.org (Postfix, from userid 33)
+ id 9BC5B7296E; Wed, 16 Oct 2019 20:38:54 +0000 (UTC)
+From: bugzilla-daemon@freedesktop.org
+To: nouveau@lists.freedesktop.org
+Date: Wed, 16 Oct 2019 20:38:54 +0000
+X-Bugzilla-Reason: AssignedTo
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: None
+X-Bugzilla-Product: xorg
+X-Bugzilla-Component: Driver/nouveau
+X-Bugzilla-Version: unspecified
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: normal
+X-Bugzilla-Who: lukas@wunner.de
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: medium
+X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: 
+Message-ID: <bug-75985-8800-Cbjamd39ov@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-75985-8800@http.bugs.freedesktop.org/>
+References: <bug-75985-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-References: <20191016144449.24646-1-kherbst@redhat.com>
- <20191016191424.GA59381@google.com>
-In-Reply-To: <20191016191424.GA59381@google.com>
-From: Karol Herbst <kherbst@redhat.com>
-Date: Wed, 16 Oct 2019 21:18:32 +0200
-Message-ID: <CACO55ttOJaXKWmKQQbMAQRJHLXF-VtNn58n4BZhFKYmAdfiJjA@mail.gmail.com>
-To: Bjorn Helgaas <helgaas@kernel.org>
-Subject: Re: [Nouveau] [PATCH v3] pci: prevent putting nvidia GPUs into
- lower device states on certain intel bridges
+Subject: [Nouveau] [Bug 75985] [NVC1] HDMI audio device only visible after
+ rescan
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -60,132 +52,146 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Linux PM <linux-pm@vger.kernel.org>, Linux PCI <linux-pci@vger.kernel.org>,
- Mika Westerberg <mika.westerberg@intel.com>,
- "Rafael J . Wysocki" <rjw@rjwysocki.net>, LKML <linux-kernel@vger.kernel.org>,
- dri-devel <dri-devel@lists.freedesktop.org>,
- nouveau <nouveau@lists.freedesktop.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1384384926=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-YnV0IHNldHRpbmcgdGhlIFBDSV9ERVZfRkxBR1NfTk9fRDMgZmxhZyBkb2VzIHByZXZlbnQgdXNp
-bmcgdGhlCnBsYXRmb3JtIG1lYW5zIG9mIHB1dHRpbmcgdGhlIGRldmljZSBpbnRvIEQzY29sZCwg
-cmlnaHQ/IFRoYXQncwphY3R1YWxseSB3aGF0IHNob3VsZCBzdGlsbCBoYXBwZW4sIGp1c3QgdGhl
-IEQzaG90IHN0ZXAgc2hvdWxkIGJlCnNraXBwZWQuCgpPbiBXZWQsIE9jdCAxNiwgMjAxOSBhdCA5
-OjE0IFBNIEJqb3JuIEhlbGdhYXMgPGhlbGdhYXNAa2VybmVsLm9yZz4gd3JvdGU6Cj4KPiBPbiBX
-ZWQsIE9jdCAxNiwgMjAxOSBhdCAwNDo0NDo0OVBNICswMjAwLCBLYXJvbCBIZXJic3Qgd3JvdGU6
-Cj4gPiBGaXhlcyBzdGF0ZSB0cmFuc2l0aW9ucyBvZiBOdmlkaWEgUGFzY2FsIEdQVXMgZnJvbSBE
-M2NvbGQgaW50byBoaWdoZXIgZGV2aWNlCj4gPiBzdGF0ZXMuCj4gPgo+ID4gdjI6IGNvbnZlcnQg
-dG8gcGNpX2RldiBxdWlyawo+ID4gICAgIHB1dCBhIHByb3BlciB0ZWNobmljYWwgZXhwbGFuYXRp
-b24gb2YgdGhlIGlzc3VlIGFzIGEgaW4tY29kZSBjb21tZW50Cj4gPiB2MzogZGlzYWJsZSBpdCBv
-bmx5IGZvciBjZXJ0YWluIGNvbWJpbmF0aW9ucyBvZiBpbnRlbCBhbmQgbnZpZGlhIGhhcmR3YXJl
-Cj4gPgo+ID4gU2lnbmVkLW9mZi1ieTogS2Fyb2wgSGVyYnN0IDxraGVyYnN0QHJlZGhhdC5jb20+
-Cj4gPiBDYzogQmpvcm4gSGVsZ2FhcyA8YmhlbGdhYXNAZ29vZ2xlLmNvbT4KPiA+IENjOiBMeXVk
-ZSBQYXVsIDxseXVkZUByZWRoYXQuY29tPgo+ID4gQ2M6IFJhZmFlbCBKLiBXeXNvY2tpIDxyandA
-cmp3eXNvY2tpLm5ldD4KPiA+IENjOiBNaWthIFdlc3RlcmJlcmcgPG1pa2Eud2VzdGVyYmVyZ0Bp
-bnRlbC5jb20+Cj4gPiBDYzogbGludXgtcGNpQHZnZXIua2VybmVsLm9yZwo+ID4gQ2M6IGxpbnV4
-LXBtQHZnZXIua2VybmVsLm9yZwo+ID4gQ2M6IGRyaS1kZXZlbEBsaXN0cy5mcmVlZGVza3RvcC5v
-cmcKPiA+IENjOiBub3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwo+ID4gLS0tCj4gPiAgZHJp
-dmVycy9wY2kvcGNpLmMgICAgfCAxMSArKysrKysrKysrCj4gPiAgZHJpdmVycy9wY2kvcXVpcmtz
-LmMgfCA1MiArKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKwo+ID4g
-IGluY2x1ZGUvbGludXgvcGNpLmggIHwgIDEgKwo+ID4gIDMgZmlsZXMgY2hhbmdlZCwgNjQgaW5z
-ZXJ0aW9ucygrKQo+ID4KPiA+IGRpZmYgLS1naXQgYS9kcml2ZXJzL3BjaS9wY2kuYyBiL2RyaXZl
-cnMvcGNpL3BjaS5jCj4gPiBpbmRleCBiOTdkOWUxMGM5Y2MuLjhlMDU2ZWI3ZTZmZiAxMDA2NDQK
-PiA+IC0tLSBhL2RyaXZlcnMvcGNpL3BjaS5jCj4gPiArKysgYi9kcml2ZXJzL3BjaS9wY2kuYwo+
-ID4gQEAgLTgwNSw2ICs4MDUsMTMgQEAgc3RhdGljIGlubGluZSBib29sIHBsYXRmb3JtX3BjaV9i
-cmlkZ2VfZDMoc3RydWN0IHBjaV9kZXYgKmRldikKPiA+ICAgICAgIHJldHVybiBwY2lfcGxhdGZv
-cm1fcG0gPyBwY2lfcGxhdGZvcm1fcG0tPmJyaWRnZV9kMyhkZXYpIDogZmFsc2U7Cj4gPiAgfQo+
-ID4KPiA+ICtzdGF0aWMgaW5saW5lIGJvb2wgcGFyZW50X2Jyb2tlbl9jaGlsZF9wbShzdHJ1Y3Qg
-cGNpX2RldiAqZGV2KQo+ID4gK3sKPiA+ICsgICAgIGlmICghZGV2LT5idXMgfHwgIWRldi0+YnVz
-LT5zZWxmKQo+ID4gKyAgICAgICAgICAgICByZXR1cm4gZmFsc2U7Cj4gPiArICAgICByZXR1cm4g
-ZGV2LT5idXMtPnNlbGYtPmJyb2tlbl9udl9ydW5wbSAmJiBkZXYtPmJyb2tlbl9udl9ydW5wbTsK
-PiA+ICt9Cj4gPiArCj4gPiAgLyoqCj4gPiAgICogcGNpX3Jhd19zZXRfcG93ZXJfc3RhdGUgLSBV
-c2UgUENJIFBNIHJlZ2lzdGVycyB0byBzZXQgdGhlIHBvd2VyIHN0YXRlIG9mCj4gPiAgICogICAg
-ICAgICAgICAgICAgICAgICAgICBnaXZlbiBQQ0kgZGV2aWNlCj4gPiBAQCAtODUwLDYgKzg1Nywx
-MCBAQCBzdGF0aWMgaW50IHBjaV9yYXdfc2V0X3Bvd2VyX3N0YXRlKHN0cnVjdCBwY2lfZGV2ICpk
-ZXYsIHBjaV9wb3dlcl90IHN0YXRlKQo+ID4gICAgICAgICAgfHwgKHN0YXRlID09IFBDSV9EMiAm
-JiAhZGV2LT5kMl9zdXBwb3J0KSkKPiA+ICAgICAgICAgICAgICAgcmV0dXJuIC1FSU87Cj4gPgo+
-ID4gKyAgICAgLyogY2hlY2sgaWYgdGhlIGJ1cyBjb250cm9sbGVyIGNhdXNlcyBpc3N1ZXMgKi8K
-PiA+ICsgICAgIGlmIChzdGF0ZSAhPSBQQ0lfRDAgJiYgcGFyZW50X2Jyb2tlbl9jaGlsZF9wbShk
-ZXYpKQo+ID4gKyAgICAgICAgICAgICByZXR1cm4gMDsKPiA+ICsKPiA+ICAgICAgIHBjaV9yZWFk
-X2NvbmZpZ193b3JkKGRldiwgZGV2LT5wbV9jYXAgKyBQQ0lfUE1fQ1RSTCwgJnBtY3NyKTsKPiA+
-Cj4gPiAgICAgICAvKgo+ID4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvcGNpL3F1aXJrcy5jIGIvZHJp
-dmVycy9wY2kvcXVpcmtzLmMKPiA+IGluZGV4IDQ0YzRhZTFhYmQwMC4uYzJmMjBiNzQ1ZGQ0IDEw
-MDY0NAo+ID4gLS0tIGEvZHJpdmVycy9wY2kvcXVpcmtzLmMKPiA+ICsrKyBiL2RyaXZlcnMvcGNp
-L3F1aXJrcy5jCj4gPiBAQCAtNTI2OCwzICs1MjY4LDU1IEBAIHN0YXRpYyB2b2lkIHF1aXJrX3Jl
-c2V0X2xlbm92b190aGlua3BhZF9wNTBfbnZncHUoc3RydWN0IHBjaV9kZXYgKnBkZXYpCj4gPiAg
-REVDTEFSRV9QQ0lfRklYVVBfQ0xBU1NfRklOQUwoUENJX1ZFTkRPUl9JRF9OVklESUEsIDB4MTNi
-MSwKPiA+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBQQ0lfQ0xBU1NfRElTUExBWV9WR0Es
-IDgsCj4gPiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcXVpcmtfcmVzZXRfbGVub3ZvX3Ro
-aW5rcGFkX3A1MF9udmdwdSk7Cj4gPiArCj4gPiArLyoKPiA+ICsgKiBTb21lIEludGVsIFBDSWUg
-YnJpZGdlcyBjYXVzZSBkZXZpY2VzIHRvIGRpc2FwcGVhciBmcm9tIHRoZSBQQ0llIGJ1cyBhZnRl
-cgo+ID4gKyAqIHRob3NlIHdlcmUgcHV0IGludG8gRDNjb2xkIHN0YXRlIGlmIHRoZXkgd2VyZSBw
-dXQgaW50byBhIG5vbiBEMCBQQ0kgUE0KPiA+ICsgKiBkZXZpY2Ugc3RhdGUgYmVmb3JlIGRvaW5n
-IHNvLgo+ID4gKyAqCj4gPiArICogVGhpcyBsZWFkcyB0byB2YXJpb3VzIGlzc3VlIGRpZmZlcmVu
-dCBpc3N1ZXMgd2hpY2ggYWxsIG1hbmlmZXN0IGRpZmZlcmVudGx5LAo+ID4gKyAqIGJ1dCBoYXZl
-IHRoZSBzYW1lIHJvb3QgY2F1c2U6Cj4gPiArICogIC0gQUlNTCBjb2RlIGV4ZWN1dGlvbiBoaXRz
-IGFuIGluZmluaXRlIGxvb3AgKGFzIHRoZSBjb2Ugd2FpdHMgb24gZGV2aWNlCj4gPiArICogICAg
-bWVtb3J5IHRvIGNoYW5nZSkuCj4gPiArICogIC0ga2VybmVsIGNyYXNoZXMsIGFzIGFsbCBwY2kg
-cmVhZHMgcmV0dXJuIC0xLCB3aGljaCBtb3N0IGNvZGUgaXNuJ3QgYWJsZQo+ID4gKyAqICAgIHRv
-IGhhbmRsZSB3ZWxsIGVub3VnaC4KPiA+ICsgKiAgLSBzdWRkZW4gc2h1dGRvd25zLCBhcyB0aGUg
-a2VybmVsIGlkZW50aWZpZWQgYW4gdW5yZWNvdmVyYWJsZSBlcnJvciBhZnRlcgo+ID4gKyAqICAg
-IHVzZXJzcGFjZSB0cmllcyB0byBhY2Nlc3MgdGhlIEdQVS4KPiA+ICsgKgo+ID4gKyAqIEluIGFs
-bCBjYXNlcyBkbWVzZyB3aWxsIGNvbnRhaW4gYXQgbGVhc3Qgb25lIGxpbmUgbGlrZSB0aGlzOgo+
-ID4gKyAqICdub3V2ZWF1IDAwMDA6MDE6MDAuMDogUmVmdXNlZCB0byBjaGFuZ2UgcG93ZXIgc3Rh
-dGUsIGN1cnJlbnRseSBpbiBEMycKPiA+ICsgKiBmb2xsb3dlZCBieSBhIGxvdCBvZiBub3V2ZWF1
-IHRpbWVvdXRzLgo+ID4gKyAqCj4gPiArICogQUNQSSBjb2RlIHdyaXRlcyBiaXQgMHg4MCB0byB0
-aGUgbm90IGRvY3VtZW50ZWQgUENJIHJlZ2lzdGVyIDB4MjQ4IG9mIHRoZQo+ID4gKyAqIFBDSWUg
-YnJpZGdlIGNvbnRyb2xsZXIgaW4gb3JkZXIgdG8gcG93ZXIgZG93biB0aGUgR1BVLgo+ID4gKyAq
-IE5vbmV0aGVsZXNzLCB0aGVyZSBhcmUgb3RoZXIgY29kZSBwYXRocyBpbnNpZGUgdGhlIEFDUEkg
-ZmlybXdhcmUgd2hpY2ggdXNlCj4gPiArICogb3RoZXIgcmVnaXN0ZXJzLCB3aGljaCBzZWVtIHRv
-IHdvcmsgZmluZToKPiA+ICsgKiAgLSAweGJjIGJpdCAweDIwIChwdWJsaWNseSBhdmFpbGFibGUg
-ZG9jdW1lbnRhdGlvbiBjbGFpbXMgJ3Jlc2VydmVkJykKPiA+ICsgKiAgLSAweGIwIGJpdCAweDEw
-IChsaW5rIGRpc2FibGUpCj4gPiArICogQ2hhbmdpbmcgdGhlIGNvbmRpdGlvbnMgaW5zaWRlIHRo
-ZSBmaXJtd2FyZSBieSBwb2tpbmcgaW50byB0aGUgcmVsZXZhbnQKPiA+ICsgKiBhZGRyZXNzZXMg
-ZG9lcyByZXNvbHZlIHRoZSBpc3N1ZSwgYnV0IGl0IHNlZW1lZCB0byBiZSBBQ1BJIHByaXZhdGUg
-bWVtb3J5Cj4gPiArICogYW5kIG5vdCBhbnkgZGV2aWNlIGFjY2Vzc2libGUgbWVtb3J5IGF0IGFs
-bCwgc28gdGhlcmUgaXMgbm8gcG9ydGFibGUgd2F5IG9mCj4gPiArICogY2hhbmdpbmcgdGhlIGNv
-bmRpdGlvbnMuCj4gPiArICoKPiA+ICsgKiBUaGUgb25seSBzeXN0ZW1zIHdoZXJlIHRoaXMgYmVo
-YXZpb3IgY2FuIGJlIHNlZW4gYXJlIGh5YnJpZCBncmFwaGljcyBsYXB0b3BzCj4gPiArICogd2l0
-aCBhIHNlY29uZGFyeSBOdmlkaWEgUGFzY2FsIEdQVS4gSXQgY2Fubm90IGJlIHJ1bGVkIG91dCB0
-aGF0IHRoaXMgaXNzdWUKPiA+ICsgKiBvbmx5IG9jY3VycyBpbiBjb21iaW5hdGlvbiB3aXRoIGxp
-c3RlZCBJbnRlbCBQQ0llIGJyaWRnZSBjb250cm9sbGVycyBhbmQKPiA+ICsgKiB0aGUgbWVudGlv
-bmVkIEdQVXMgb3IgaWYgaXQncyBvbmx5IGEgaHcgYnVnIGluIHRoZSBicmlkZ2UgY29udHJvbGxl
-ci4KPiA+ICsgKgo+ID4gKyAqIEJ1dCBiZWNhdXNlIHRoaXMgaXNzdWUgd2FzIE5PVCBzZWVuIG9u
-IGxhcHRvcHMgd2l0aCBhbiBOdmlkaWEgUGFzY2FsIEdQVQo+ID4gKyAqIGFuZCBhbiBJbnRlbCBD
-b2ZmZWUgTGFrZSBTb0MsIHRoZXJlIGlzIGEgaGlnaGVyIGNoYW5jZSBvZiB0aGVyZSBiZWluZyBh
-IGJ1Zwo+ID4gKyAqIGluIHRoZSBicmlkZ2UgY29udHJvbGxlciByYXRoZXIgdGhhbiBpbiB0aGUg
-R1BVLgo+ID4gKyAqCj4gPiArICogVGhpcyBpc3N1ZSB3YXMgbm90IGFibGUgdG8gYmUgcmVwcm9k
-dWNlZCBvbiBub24gbGFwdG9wIHN5c3RlbXMuCj4gPiArICovCj4gPiArCj4gPiArc3RhdGljIHZv
-aWQgcXVpcmtfYnJva2VuX252X3J1bnBtKHN0cnVjdCBwY2lfZGV2ICpkZXYpCj4gPiArewo+ID4g
-KyAgICAgZGV2LT5icm9rZW5fbnZfcnVucG0gPSAxOwo+Cj4gQ2FuIHlvdSB1c2UgdGhlIGV4aXN0
-aW5nIFBDSV9ERVZfRkxBR1NfTk9fRDMgZmxhZyBmb3IgdGhpcyBpbnN0ZWFkIG9mCj4gYWRkaW5n
-IGEgbmV3IGZsYWc/Cj4KPiBJIHdvdWxkIHB1dCB0aGUgcGFyZW50X2Jyb2tlbl9jaGlsZF9wbSgp
-IGxvZ2ljIGhlcmUsIGlmIHBvc3NpYmxlLAo+IGUuZy4sIHNvbWV0aGluZyBsaWtlOgo+Cj4gICBz
-dHJ1Y3QgcGNpX2RldiAqYnJpZGdlID0gcGNpX3Vwc3RyZWFtX2JyaWRnZShkZXYpOwo+Cj4gICBp
-ZiAoYnJpZGdlICYmCj4gICAgICAgYnJpZGdlLT52ZW5kb3IgPT0gUENJX1ZFTkRPUl9JRF9JTlRF
-TCAmJiBicmlkZ2UtPmRldmljZSA9PSAweDE5MDEpCj4gICAgICAgICBkZXYtPmRldl9mbGFncyB8
-PSBQQ0lfREVWX0ZMQUdTX05PX0QzOwo+Cj4gPiArfQo+ID4gK0RFQ0xBUkVfUENJX0ZJWFVQX0NM
-QVNTX0ZJTkFMKFBDSV9WRU5ET1JfSURfTlZJRElBLCBQQ0lfQU5ZX0lELAo+ID4gKyAgICAgICAg
-ICAgICAgICAgICAgICAgICAgIFBDSV9CQVNFX0NMQVNTX0RJU1BMQVksIDE2LAo+ID4gKyAgICAg
-ICAgICAgICAgICAgICAgICAgICAgIHF1aXJrX2Jyb2tlbl9udl9ydW5wbSk7Cj4gPiArLyoga2Fi
-eSBsYWtlICovCj4gPiArREVDTEFSRV9QQ0lfRklYVVBfRklOQUwoUENJX1ZFTkRPUl9JRF9JTlRF
-TCwgMHgxOTAxLAo+ID4gKyAgICAgICAgICAgICAgICAgICAgIHF1aXJrX2Jyb2tlbl9udl9ydW5w
-bSk7Cj4gPiBkaWZmIC0tZ2l0IGEvaW5jbHVkZS9saW51eC9wY2kuaCBiL2luY2x1ZGUvbGludXgv
-cGNpLmgKPiA+IGluZGV4IGFjOGE2YzRlMTc5Mi4uOTAzYTBiM2EzOWVjIDEwMDY0NAo+ID4gLS0t
-IGEvaW5jbHVkZS9saW51eC9wY2kuaAo+ID4gKysrIGIvaW5jbHVkZS9saW51eC9wY2kuaAo+ID4g
-QEAgLTQxNiw2ICs0MTYsNyBAQCBzdHJ1Y3QgcGNpX2RldiB7Cj4gPiAgICAgICB1bnNpZ25lZCBp
-bnQgICAgX19hZXJfZmlybXdhcmVfZmlyc3RfdmFsaWQ6MTsKPiA+ICAgICAgIHVuc2lnbmVkIGlu
-dCAgICBfX2Flcl9maXJtd2FyZV9maXJzdDoxOwo+ID4gICAgICAgdW5zaWduZWQgaW50ICAgIGJy
-b2tlbl9pbnR4X21hc2tpbmc6MTsgIC8qIElOVHggbWFza2luZyBjYW4ndCBiZSB1c2VkICovCj4g
-PiArICAgICB1bnNpZ25lZCBpbnQgICAgYnJva2VuX252X3J1bnBtOjE7ICAgICAgLyogc29tZSBj
-b21iaW5hdGlvbnMgb2YgaW50ZWwgYnJpZGdlIGNvbnRyb2xsZXIgYW5kIG52aWRpYSBHUFVzIGJy
-ZWFrIHJ0ZDMgKi8KPiA+ICAgICAgIHVuc2lnbmVkIGludCAgICBpb193aW5kb3dfMWs6MTsgICAg
-ICAgICAvKiBJbnRlbCBicmlkZ2UgMUsgSS9PIHdpbmRvd3MgKi8KPiA+ICAgICAgIHVuc2lnbmVk
-IGludCAgICBpcnFfbWFuYWdlZDoxOwo+ID4gICAgICAgdW5zaWduZWQgaW50ICAgIGhhc19zZWNv
-bmRhcnlfbGluazoxOwo+ID4gLS0KPiA+IDIuMjEuMAo+ID4KX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBtYWlsaW5nIGxpc3QKTm91dmVhdUBs
-aXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1h
-bi9saXN0aW5mby9ub3V2ZWF1
+
+--===============1384384926==
+Content-Type: multipart/alternative; boundary="15712583340.C4e2.2321"
+Content-Transfer-Encoding: 7bit
+
+
+--15712583340.C4e2.2321
+Date: Wed, 16 Oct 2019 20:38:54 +0000
+MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+https://bugs.freedesktop.org/show_bug.cgi?id=3D75985
+
+--- Comment #114 from Lukas Wunner <lukas@wunner.de> ---
+(In reply to Przemys=C5=82aw Kopa from comment #113)
+> (In reply to Lukas Wunner from comment #112)
+> > Glad to hear. You don't seem to have any commits in the kernel so far. =
+Would
+> > you like to try and bake these changes into a proper patch? If not I'll
+> > gladly create and submit the patch myself but mentoring someone else ma=
+ke
+> > their first contribution is more beneficial to the community, hence my
+> > question.
+>=20
+> Lukas, could you please handle it this time? Sorry for not posting sooner.
+
+Sure thing.
+
+Just one question, you wrote that you had to add "HDA_CODEC_ENTRY(0x10de040=
+3,
+"GPU 0403 HDMI/DP", patch_nvhdmi)" to snd_hda_id_hdmi[] with the rationale =
+that
+the "PCI ID of my Nvidia HDA wasn't there".
+
+This confuses me because the PCI device ID of the HDA controller is "0bea" =
+and
+"0403" are the 16 most significant bits of the PCI class ID.
+
+HDA_CODEC_ENTRY() needs to match for the 32-bit HD audio vendor ID. Just to
+double-check, could you execute "cat
+/sys/bus/pci/devices/0000:01:00.1/hdaudioC1D0/vendor_id" and post the result
+here? Is it really 0x10de0403? Thanks!
+
+--=20
+You are receiving this mail because:
+You are the assignee for the bug.=
+
+--15712583340.C4e2.2321
+Date: Wed, 16 Oct 2019 20:38:54 +0000
+MIME-Version: 1.0
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+<html>
+    <head>
+      <base href=3D"https://bugs.freedesktop.org/">
+    </head>
+    <body>
+      <p>
+        <div>
+            <b><a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - [NVC1] HDMI audio device only visible after rescan"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D75985#c114">Comme=
+nt # 114</a>
+              on <a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - [NVC1] HDMI audio device only visible after rescan"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D75985">bug 75985<=
+/a>
+              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
+lukas&#64;wunner.de" title=3D"Lukas Wunner &lt;lukas&#64;wunner.de&gt;"> <s=
+pan class=3D"fn">Lukas Wunner</span></a>
+</span></b>
+        <pre>(In reply to Przemys=C5=82aw Kopa from <a href=3D"show_bug.cgi=
+?id=3D75985#c113">comment #113</a>)
+<span class=3D"quote">&gt; (In reply to Lukas Wunner from <a href=3D"show_b=
+ug.cgi?id=3D75985#c112">comment #112</a>)
+&gt; &gt; Glad to hear. You don't seem to have any commits in the kernel so=
+ far. Would
+&gt; &gt; you like to try and bake these changes into a proper patch? If no=
+t I'll
+&gt; &gt; gladly create and submit the patch myself but mentoring someone e=
+lse make
+&gt; &gt; their first contribution is more beneficial to the community, hen=
+ce my
+&gt; &gt; question.
+&gt;=20
+&gt; Lukas, could you please handle it this time? Sorry for not posting soo=
+ner.</span >
+
+Sure thing.
+
+Just one question, you wrote that you had to add &quot;HDA_CODEC_ENTRY(0x10=
+de0403,
+&quot;GPU 0403 HDMI/DP&quot;, patch_nvhdmi)&quot; to snd_hda_id_hdmi[] with=
+ the rationale that
+the &quot;PCI ID of my Nvidia HDA wasn't there&quot;.
+
+This confuses me because the PCI device ID of the HDA controller is &quot;0=
+bea&quot; and
+&quot;0403&quot; are the 16 most significant bits of the PCI class ID.
+
+HDA_CODEC_ENTRY() needs to match for the 32-bit HD audio vendor ID. Just to
+double-check, could you execute &quot;cat
+/sys/bus/pci/devices/0000:01:00.1/hdaudioC1D0/vendor_id&quot; and post the =
+result
+here? Is it really 0x10de0403? Thanks!</pre>
+        </div>
+      </p>
+
+
+      <hr>
+      <span>You are receiving this mail because:</span>
+
+      <ul>
+          <li>You are the assignee for the bug.</li>
+      </ul>
+    </body>
+</html>=
+
+--15712583340.C4e2.2321--
+
+--===============1384384926==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
+YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
+cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============1384384926==--
