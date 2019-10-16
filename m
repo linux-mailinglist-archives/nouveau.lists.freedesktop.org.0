@@ -2,55 +2,45 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 506F0D9430
-	for <lists+nouveau@lfdr.de>; Wed, 16 Oct 2019 16:44:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A9682D9730
+	for <lists+nouveau@lfdr.de>; Wed, 16 Oct 2019 18:24:36 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id BDA506E0BC;
-	Wed, 16 Oct 2019 14:44:56 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A190E6E9AA;
+	Wed, 16 Oct 2019 16:24:34 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A908E6E0BC
- for <nouveau@lists.freedesktop.org>; Wed, 16 Oct 2019 14:44:55 +0000 (UTC)
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id 04903155E0
- for <nouveau@lists.freedesktop.org>; Wed, 16 Oct 2019 14:44:55 +0000 (UTC)
-Received: by mail-wm1-f72.google.com with SMTP id j125so1305284wmj.6
- for <nouveau@lists.freedesktop.org>; Wed, 16 Oct 2019 07:44:54 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=IRjHpnYNT4sbRQOMIirKpnwWpi19ynH9Iju8Io/i9X4=;
- b=fm7nyXonuDweO8Vm98Yd1gmsBmno85nsVlvfOrbb1DCv4qDNjOR11sPkawvwbSP562
- RE5XeQrZ/Exy1C7tIGmY3j6WLNt0j9kp58FFvwCcbcZSWLchRYhhyohefsE9zl2ULe0G
- XEctB6oWucSIP8/gmOw19urtMFrWrFL4+bhIFICxS5ZTia2TveNCQ32xqpVALddhddCF
- jRyv4Th6Ohh4Zq7FSh+fUaNtiL2unFH7RCaxaYkNGmA5qz1AxI079ATWb3NCxGxr7Rlb
- nc9s9I7YRadpXNVlEIg+CR2Mx2Ja0+5zVL6ALWiXZocWTUDozNR0NAr6w7t+1sKCtXkd
- lE4g==
-X-Gm-Message-State: APjAAAU7GKa3DMfBr+QOk4X0jKp5ORChyYADQI3ydTS8o/ECfD2MdG51
- hua9x07Xv6ts/cXgi75D0fH2zx9p2YC7tVi3ZLjdUIYprDFnBM178irUmmxbbFWCftXRfmJlRAV
- Jqi3rMyra5xeBoMd344IgPraFRg==
-X-Received: by 2002:a1c:720a:: with SMTP id n10mr4061967wmc.0.1571237093736;
- Wed, 16 Oct 2019 07:44:53 -0700 (PDT)
-X-Google-Smtp-Source: APXvYqzVvbNuN5d0qg6PSKMOXh8qMP20JpD2mZs0ofIuVNkpoUlEkUmYc4sND9wo2dnmM4fjlX552A==
-X-Received: by 2002:a1c:720a:: with SMTP id n10mr4061945wmc.0.1571237093477;
- Wed, 16 Oct 2019 07:44:53 -0700 (PDT)
-Received: from kherbst.pingu.com ([2a02:8308:b0be:6900:cad:c7ca:f3fc:e27c])
- by smtp.gmail.com with ESMTPSA id 63sm37743603wri.25.2019.10.16.07.44.51
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 16 Oct 2019 07:44:52 -0700 (PDT)
-From: Karol Herbst <kherbst@redhat.com>
-To: linux-kernel@vger.kernel.org
-Date: Wed, 16 Oct 2019 16:44:49 +0200
-Message-Id: <20191016144449.24646-1-kherbst@redhat.com>
-X-Mailer: git-send-email 2.21.0
+Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
+ [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
+ by gabe.freedesktop.org (Postfix) with ESMTP id DE8706E9B6
+ for <nouveau@lists.freedesktop.org>; Wed, 16 Oct 2019 16:24:33 +0000 (UTC)
+Received: by culpepper.freedesktop.org (Postfix, from userid 33)
+ id DA2AE7296E; Wed, 16 Oct 2019 16:24:33 +0000 (UTC)
+From: bugzilla-daemon@freedesktop.org
+To: nouveau@lists.freedesktop.org
+Date: Wed, 16 Oct 2019 16:24:31 +0000
+X-Bugzilla-Reason: AssignedTo
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: None
+X-Bugzilla-Product: xorg
+X-Bugzilla-Component: Driver/nouveau
+X-Bugzilla-Version: unspecified
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: normal
+X-Bugzilla-Who: prymoo@gmail.com
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: medium
+X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: 
+Message-ID: <bug-75985-8800-1H5IWZT4La@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-75985-8800@http.bugs.freedesktop.org/>
+References: <bug-75985-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-Subject: [Nouveau] [PATCH v3] pci: prevent putting nvidia GPUs into lower
- device states on certain intel bridges
+Subject: [Nouveau] [Bug 75985] [NVC1] HDMI audio device only visible after
+ rescan
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -62,105 +52,107 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: linux-pm@vger.kernel.org, linux-pci@vger.kernel.org,
- Mika Westerberg <mika.westerberg@intel.com>,
- "Rafael J . Wysocki" <rjw@rjwysocki.net>, dri-devel@lists.freedesktop.org,
- nouveau@lists.freedesktop.org, Bjorn Helgaas <bhelgaas@google.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1150338145=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Rml4ZXMgc3RhdGUgdHJhbnNpdGlvbnMgb2YgTnZpZGlhIFBhc2NhbCBHUFVzIGZyb20gRDNjb2xk
-IGludG8gaGlnaGVyIGRldmljZQpzdGF0ZXMuCgp2MjogY29udmVydCB0byBwY2lfZGV2IHF1aXJr
-CiAgICBwdXQgYSBwcm9wZXIgdGVjaG5pY2FsIGV4cGxhbmF0aW9uIG9mIHRoZSBpc3N1ZSBhcyBh
-IGluLWNvZGUgY29tbWVudAp2MzogZGlzYWJsZSBpdCBvbmx5IGZvciBjZXJ0YWluIGNvbWJpbmF0
-aW9ucyBvZiBpbnRlbCBhbmQgbnZpZGlhIGhhcmR3YXJlCgpTaWduZWQtb2ZmLWJ5OiBLYXJvbCBI
-ZXJic3QgPGtoZXJic3RAcmVkaGF0LmNvbT4KQ2M6IEJqb3JuIEhlbGdhYXMgPGJoZWxnYWFzQGdv
-b2dsZS5jb20+CkNjOiBMeXVkZSBQYXVsIDxseXVkZUByZWRoYXQuY29tPgpDYzogUmFmYWVsIEou
-IFd5c29ja2kgPHJqd0Byand5c29ja2kubmV0PgpDYzogTWlrYSBXZXN0ZXJiZXJnIDxtaWthLndl
-c3RlcmJlcmdAaW50ZWwuY29tPgpDYzogbGludXgtcGNpQHZnZXIua2VybmVsLm9yZwpDYzogbGlu
-dXgtcG1Admdlci5rZXJuZWwub3JnCkNjOiBkcmktZGV2ZWxAbGlzdHMuZnJlZWRlc2t0b3Aub3Jn
-CkNjOiBub3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwotLS0KIGRyaXZlcnMvcGNpL3BjaS5j
-ICAgIHwgMTEgKysrKysrKysrKwogZHJpdmVycy9wY2kvcXVpcmtzLmMgfCA1MiArKysrKysrKysr
-KysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKwogaW5jbHVkZS9saW51eC9wY2kuaCAg
-fCAgMSArCiAzIGZpbGVzIGNoYW5nZWQsIDY0IGluc2VydGlvbnMoKykKCmRpZmYgLS1naXQgYS9k
-cml2ZXJzL3BjaS9wY2kuYyBiL2RyaXZlcnMvcGNpL3BjaS5jCmluZGV4IGI5N2Q5ZTEwYzljYy4u
-OGUwNTZlYjdlNmZmIDEwMDY0NAotLS0gYS9kcml2ZXJzL3BjaS9wY2kuYworKysgYi9kcml2ZXJz
-L3BjaS9wY2kuYwpAQCAtODA1LDYgKzgwNSwxMyBAQCBzdGF0aWMgaW5saW5lIGJvb2wgcGxhdGZv
-cm1fcGNpX2JyaWRnZV9kMyhzdHJ1Y3QgcGNpX2RldiAqZGV2KQogCXJldHVybiBwY2lfcGxhdGZv
-cm1fcG0gPyBwY2lfcGxhdGZvcm1fcG0tPmJyaWRnZV9kMyhkZXYpIDogZmFsc2U7CiB9CiAKK3N0
-YXRpYyBpbmxpbmUgYm9vbCBwYXJlbnRfYnJva2VuX2NoaWxkX3BtKHN0cnVjdCBwY2lfZGV2ICpk
-ZXYpCit7CisJaWYgKCFkZXYtPmJ1cyB8fCAhZGV2LT5idXMtPnNlbGYpCisJCXJldHVybiBmYWxz
-ZTsKKwlyZXR1cm4gZGV2LT5idXMtPnNlbGYtPmJyb2tlbl9udl9ydW5wbSAmJiBkZXYtPmJyb2tl
-bl9udl9ydW5wbTsKK30KKwogLyoqCiAgKiBwY2lfcmF3X3NldF9wb3dlcl9zdGF0ZSAtIFVzZSBQ
-Q0kgUE0gcmVnaXN0ZXJzIHRvIHNldCB0aGUgcG93ZXIgc3RhdGUgb2YKICAqCQkJICAgICBnaXZl
-biBQQ0kgZGV2aWNlCkBAIC04NTAsNiArODU3LDEwIEBAIHN0YXRpYyBpbnQgcGNpX3Jhd19zZXRf
-cG93ZXJfc3RhdGUoc3RydWN0IHBjaV9kZXYgKmRldiwgcGNpX3Bvd2VyX3Qgc3RhdGUpCiAJICAg
-fHwgKHN0YXRlID09IFBDSV9EMiAmJiAhZGV2LT5kMl9zdXBwb3J0KSkKIAkJcmV0dXJuIC1FSU87
-CiAKKwkvKiBjaGVjayBpZiB0aGUgYnVzIGNvbnRyb2xsZXIgY2F1c2VzIGlzc3VlcyAqLworCWlm
-IChzdGF0ZSAhPSBQQ0lfRDAgJiYgcGFyZW50X2Jyb2tlbl9jaGlsZF9wbShkZXYpKQorCQlyZXR1
-cm4gMDsKKwogCXBjaV9yZWFkX2NvbmZpZ193b3JkKGRldiwgZGV2LT5wbV9jYXAgKyBQQ0lfUE1f
-Q1RSTCwgJnBtY3NyKTsKIAogCS8qCmRpZmYgLS1naXQgYS9kcml2ZXJzL3BjaS9xdWlya3MuYyBi
-L2RyaXZlcnMvcGNpL3F1aXJrcy5jCmluZGV4IDQ0YzRhZTFhYmQwMC4uYzJmMjBiNzQ1ZGQ0IDEw
-MDY0NAotLS0gYS9kcml2ZXJzL3BjaS9xdWlya3MuYworKysgYi9kcml2ZXJzL3BjaS9xdWlya3Mu
-YwpAQCAtNTI2OCwzICs1MjY4LDU1IEBAIHN0YXRpYyB2b2lkIHF1aXJrX3Jlc2V0X2xlbm92b190
-aGlua3BhZF9wNTBfbnZncHUoc3RydWN0IHBjaV9kZXYgKnBkZXYpCiBERUNMQVJFX1BDSV9GSVhV
-UF9DTEFTU19GSU5BTChQQ0lfVkVORE9SX0lEX05WSURJQSwgMHgxM2IxLAogCQkJICAgICAgUENJ
-X0NMQVNTX0RJU1BMQVlfVkdBLCA4LAogCQkJICAgICAgcXVpcmtfcmVzZXRfbGVub3ZvX3RoaW5r
-cGFkX3A1MF9udmdwdSk7CisKKy8qCisgKiBTb21lIEludGVsIFBDSWUgYnJpZGdlcyBjYXVzZSBk
-ZXZpY2VzIHRvIGRpc2FwcGVhciBmcm9tIHRoZSBQQ0llIGJ1cyBhZnRlcgorICogdGhvc2Ugd2Vy
-ZSBwdXQgaW50byBEM2NvbGQgc3RhdGUgaWYgdGhleSB3ZXJlIHB1dCBpbnRvIGEgbm9uIEQwIFBD
-SSBQTQorICogZGV2aWNlIHN0YXRlIGJlZm9yZSBkb2luZyBzby4KKyAqCisgKiBUaGlzIGxlYWRz
-IHRvIHZhcmlvdXMgaXNzdWUgZGlmZmVyZW50IGlzc3VlcyB3aGljaCBhbGwgbWFuaWZlc3QgZGlm
-ZmVyZW50bHksCisgKiBidXQgaGF2ZSB0aGUgc2FtZSByb290IGNhdXNlOgorICogIC0gQUlNTCBj
-b2RlIGV4ZWN1dGlvbiBoaXRzIGFuIGluZmluaXRlIGxvb3AgKGFzIHRoZSBjb2Ugd2FpdHMgb24g
-ZGV2aWNlCisgKiAgICBtZW1vcnkgdG8gY2hhbmdlKS4KKyAqICAtIGtlcm5lbCBjcmFzaGVzLCBh
-cyBhbGwgcGNpIHJlYWRzIHJldHVybiAtMSwgd2hpY2ggbW9zdCBjb2RlIGlzbid0IGFibGUKKyAq
-ICAgIHRvIGhhbmRsZSB3ZWxsIGVub3VnaC4KKyAqICAtIHN1ZGRlbiBzaHV0ZG93bnMsIGFzIHRo
-ZSBrZXJuZWwgaWRlbnRpZmllZCBhbiB1bnJlY292ZXJhYmxlIGVycm9yIGFmdGVyCisgKiAgICB1
-c2Vyc3BhY2UgdHJpZXMgdG8gYWNjZXNzIHRoZSBHUFUuCisgKgorICogSW4gYWxsIGNhc2VzIGRt
-ZXNnIHdpbGwgY29udGFpbiBhdCBsZWFzdCBvbmUgbGluZSBsaWtlIHRoaXM6CisgKiAnbm91dmVh
-dSAwMDAwOjAxOjAwLjA6IFJlZnVzZWQgdG8gY2hhbmdlIHBvd2VyIHN0YXRlLCBjdXJyZW50bHkg
-aW4gRDMnCisgKiBmb2xsb3dlZCBieSBhIGxvdCBvZiBub3V2ZWF1IHRpbWVvdXRzLgorICoKKyAq
-IEFDUEkgY29kZSB3cml0ZXMgYml0IDB4ODAgdG8gdGhlIG5vdCBkb2N1bWVudGVkIFBDSSByZWdp
-c3RlciAweDI0OCBvZiB0aGUKKyAqIFBDSWUgYnJpZGdlIGNvbnRyb2xsZXIgaW4gb3JkZXIgdG8g
-cG93ZXIgZG93biB0aGUgR1BVLgorICogTm9uZXRoZWxlc3MsIHRoZXJlIGFyZSBvdGhlciBjb2Rl
-IHBhdGhzIGluc2lkZSB0aGUgQUNQSSBmaXJtd2FyZSB3aGljaCB1c2UKKyAqIG90aGVyIHJlZ2lz
-dGVycywgd2hpY2ggc2VlbSB0byB3b3JrIGZpbmU6CisgKiAgLSAweGJjIGJpdCAweDIwIChwdWJs
-aWNseSBhdmFpbGFibGUgZG9jdW1lbnRhdGlvbiBjbGFpbXMgJ3Jlc2VydmVkJykKKyAqICAtIDB4
-YjAgYml0IDB4MTAgKGxpbmsgZGlzYWJsZSkKKyAqIENoYW5naW5nIHRoZSBjb25kaXRpb25zIGlu
-c2lkZSB0aGUgZmlybXdhcmUgYnkgcG9raW5nIGludG8gdGhlIHJlbGV2YW50CisgKiBhZGRyZXNz
-ZXMgZG9lcyByZXNvbHZlIHRoZSBpc3N1ZSwgYnV0IGl0IHNlZW1lZCB0byBiZSBBQ1BJIHByaXZh
-dGUgbWVtb3J5CisgKiBhbmQgbm90IGFueSBkZXZpY2UgYWNjZXNzaWJsZSBtZW1vcnkgYXQgYWxs
-LCBzbyB0aGVyZSBpcyBubyBwb3J0YWJsZSB3YXkgb2YKKyAqIGNoYW5naW5nIHRoZSBjb25kaXRp
-b25zLgorICoKKyAqIFRoZSBvbmx5IHN5c3RlbXMgd2hlcmUgdGhpcyBiZWhhdmlvciBjYW4gYmUg
-c2VlbiBhcmUgaHlicmlkIGdyYXBoaWNzIGxhcHRvcHMKKyAqIHdpdGggYSBzZWNvbmRhcnkgTnZp
-ZGlhIFBhc2NhbCBHUFUuIEl0IGNhbm5vdCBiZSBydWxlZCBvdXQgdGhhdCB0aGlzIGlzc3VlCisg
-KiBvbmx5IG9jY3VycyBpbiBjb21iaW5hdGlvbiB3aXRoIGxpc3RlZCBJbnRlbCBQQ0llIGJyaWRn
-ZSBjb250cm9sbGVycyBhbmQKKyAqIHRoZSBtZW50aW9uZWQgR1BVcyBvciBpZiBpdCdzIG9ubHkg
-YSBodyBidWcgaW4gdGhlIGJyaWRnZSBjb250cm9sbGVyLgorICoKKyAqIEJ1dCBiZWNhdXNlIHRo
-aXMgaXNzdWUgd2FzIE5PVCBzZWVuIG9uIGxhcHRvcHMgd2l0aCBhbiBOdmlkaWEgUGFzY2FsIEdQ
-VQorICogYW5kIGFuIEludGVsIENvZmZlZSBMYWtlIFNvQywgdGhlcmUgaXMgYSBoaWdoZXIgY2hh
-bmNlIG9mIHRoZXJlIGJlaW5nIGEgYnVnCisgKiBpbiB0aGUgYnJpZGdlIGNvbnRyb2xsZXIgcmF0
-aGVyIHRoYW4gaW4gdGhlIEdQVS4KKyAqCisgKiBUaGlzIGlzc3VlIHdhcyBub3QgYWJsZSB0byBi
-ZSByZXByb2R1Y2VkIG9uIG5vbiBsYXB0b3Agc3lzdGVtcy4KKyAqLworCitzdGF0aWMgdm9pZCBx
-dWlya19icm9rZW5fbnZfcnVucG0oc3RydWN0IHBjaV9kZXYgKmRldikKK3sKKwlkZXYtPmJyb2tl
-bl9udl9ydW5wbSA9IDE7Cit9CitERUNMQVJFX1BDSV9GSVhVUF9DTEFTU19GSU5BTChQQ0lfVkVO
-RE9SX0lEX05WSURJQSwgUENJX0FOWV9JRCwKKwkJCSAgICAgIFBDSV9CQVNFX0NMQVNTX0RJU1BM
-QVksIDE2LAorCQkJICAgICAgcXVpcmtfYnJva2VuX252X3J1bnBtKTsKKy8qIGthYnkgbGFrZSAq
-LworREVDTEFSRV9QQ0lfRklYVVBfRklOQUwoUENJX1ZFTkRPUl9JRF9JTlRFTCwgMHgxOTAxLAor
-CQkJcXVpcmtfYnJva2VuX252X3J1bnBtKTsKZGlmZiAtLWdpdCBhL2luY2x1ZGUvbGludXgvcGNp
-LmggYi9pbmNsdWRlL2xpbnV4L3BjaS5oCmluZGV4IGFjOGE2YzRlMTc5Mi4uOTAzYTBiM2EzOWVj
-IDEwMDY0NAotLS0gYS9pbmNsdWRlL2xpbnV4L3BjaS5oCisrKyBiL2luY2x1ZGUvbGludXgvcGNp
-LmgKQEAgLTQxNiw2ICs0MTYsNyBAQCBzdHJ1Y3QgcGNpX2RldiB7CiAJdW5zaWduZWQgaW50CV9f
-YWVyX2Zpcm13YXJlX2ZpcnN0X3ZhbGlkOjE7CiAJdW5zaWduZWQgaW50CV9fYWVyX2Zpcm13YXJl
-X2ZpcnN0OjE7CiAJdW5zaWduZWQgaW50CWJyb2tlbl9pbnR4X21hc2tpbmc6MTsJLyogSU5UeCBt
-YXNraW5nIGNhbid0IGJlIHVzZWQgKi8KKwl1bnNpZ25lZCBpbnQJYnJva2VuX252X3J1bnBtOjE7
-CS8qIHNvbWUgY29tYmluYXRpb25zIG9mIGludGVsIGJyaWRnZSBjb250cm9sbGVyIGFuZCBudmlk
-aWEgR1BVcyBicmVhayBydGQzICovCiAJdW5zaWduZWQgaW50CWlvX3dpbmRvd18xazoxOwkJLyog
-SW50ZWwgYnJpZGdlIDFLIEkvTyB3aW5kb3dzICovCiAJdW5zaWduZWQgaW50CWlycV9tYW5hZ2Vk
-OjE7CiAJdW5zaWduZWQgaW50CWhhc19zZWNvbmRhcnlfbGluazoxOwotLSAKMi4yMS4wCgpfX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpOb3V2ZWF1IG1haWxp
-bmcgbGlzdApOb3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVk
-ZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL25vdXZlYXU=
+
+--===============1150338145==
+Content-Type: multipart/alternative; boundary="15712430736.fBd17e4a.15762"
+Content-Transfer-Encoding: 7bit
+
+
+--15712430736.fBd17e4a.15762
+Date: Wed, 16 Oct 2019 16:24:33 +0000
+MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+https://bugs.freedesktop.org/show_bug.cgi?id=3D75985
+
+--- Comment #113 from Przemys=C5=82aw Kopa <prymoo@gmail.com> ---
+(In reply to Lukas Wunner from comment #112)
+>
+> Glad to hear. You don't seem to have any commits in the kernel so far. Wo=
+uld
+> you like to try and bake these changes into a proper patch? If not I'll
+> gladly create and submit the patch myself but mentoring someone else make
+> their first contribution is more beneficial to the community, hence my
+> question.
+
+Lukas, could you please handle it this time? Sorry for not posting sooner.
+
+--=20
+You are receiving this mail because:
+You are the assignee for the bug.=
+
+--15712430736.fBd17e4a.15762
+Date: Wed, 16 Oct 2019 16:24:33 +0000
+MIME-Version: 1.0
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+<html>
+    <head>
+      <base href=3D"https://bugs.freedesktop.org/">
+    </head>
+    <body>
+      <p>
+        <div>
+            <b><a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - [NVC1] HDMI audio device only visible after rescan"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D75985#c113">Comme=
+nt # 113</a>
+              on <a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - [NVC1] HDMI audio device only visible after rescan"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D75985">bug 75985<=
+/a>
+              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
+prymoo&#64;gmail.com" title=3D"Przemys=C5=82aw Kopa &lt;prymoo&#64;gmail.co=
+m&gt;"> <span class=3D"fn">Przemys=C5=82aw Kopa</span></a>
+</span></b>
+        <pre>(In reply to Lukas Wunner from <a href=3D"show_bug.cgi?id=3D75=
+985#c112">comment #112</a>)
+&gt;
+<span class=3D"quote">&gt; Glad to hear. You don't seem to have any commits=
+ in the kernel so far. Would
+&gt; you like to try and bake these changes into a proper patch? If not I'll
+&gt; gladly create and submit the patch myself but mentoring someone else m=
+ake
+&gt; their first contribution is more beneficial to the community, hence my
+&gt; question.</span >
+
+Lukas, could you please handle it this time? Sorry for not posting sooner.<=
+/pre>
+        </div>
+      </p>
+
+
+      <hr>
+      <span>You are receiving this mail because:</span>
+
+      <ul>
+          <li>You are the assignee for the bug.</li>
+      </ul>
+    </body>
+</html>=
+
+--15712430736.fBd17e4a.15762--
+
+--===============1150338145==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
+YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
+cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============1150338145==--
