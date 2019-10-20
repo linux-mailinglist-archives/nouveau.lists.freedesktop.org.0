@@ -2,22 +2,22 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id A39FFDDD34
-	for <lists+nouveau@lfdr.de>; Sun, 20 Oct 2019 09:43:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0EFCCDDEA0
+	for <lists+nouveau@lfdr.de>; Sun, 20 Oct 2019 15:33:35 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 728C789DA9;
-	Sun, 20 Oct 2019 07:43:44 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 783E489B0D;
+	Sun, 20 Oct 2019 13:33:32 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
- by gabe.freedesktop.org (Postfix) with ESMTP id 5E1A089D5F
- for <nouveau@lists.freedesktop.org>; Sun, 20 Oct 2019 07:43:43 +0000 (UTC)
+ [131.252.210.165])
+ by gabe.freedesktop.org (Postfix) with ESMTP id ED5E489B20
+ for <nouveau@lists.freedesktop.org>; Sun, 20 Oct 2019 13:33:31 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 567FC720E2; Sun, 20 Oct 2019 07:43:43 +0000 (UTC)
+ id EA0C1720E2; Sun, 20 Oct 2019 13:33:31 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Sun, 20 Oct 2019 07:43:43 +0000
+Date: Sun, 20 Oct 2019 13:33:32 +0000
 X-Bugzilla-Reason: AssignedTo
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
@@ -25,22 +25,22 @@ X-Bugzilla-Product: xorg
 X-Bugzilla-Component: Driver/nouveau
 X-Bugzilla-Version: unspecified
 X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: normal
-X-Bugzilla-Who: lukas@wunner.de
+X-Bugzilla-Severity: critical
+X-Bugzilla-Who: dooby.dave@virgin.net
 X-Bugzilla-Status: NEW
 X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: medium
+X-Bugzilla-Priority: not set
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: attachments.created
-Message-ID: <bug-75985-8800-JJreBkK4WX@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-75985-8800@http.bugs.freedesktop.org/>
-References: <bug-75985-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-Changed-Fields: 
+Message-ID: <bug-112070-8800-BrosJJL5zX@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-112070-8800@http.bugs.freedesktop.org/>
+References: <bug-112070-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 75985] [NVC1] HDMI audio device only visible after
- rescan
+Subject: [Nouveau] [Bug 112070] H/W Acceleration sufficiently buggy on
+ Debian to hard lock machine GeForce 7600 GO
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -52,37 +52,45 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0336171795=="
+Content-Type: multipart/mixed; boundary="===============1386150866=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============0336171795==
-Content-Type: multipart/alternative; boundary="15715574232.721D6.4430"
+--===============1386150866==
+Content-Type: multipart/alternative; boundary="15715784112.11ADCaB0.22086"
 Content-Transfer-Encoding: 7bit
 
 
---15715574232.721D6.4430
-Date: Sun, 20 Oct 2019 07:43:43 +0000
+--15715784112.11ADCaB0.22086
+Date: Sun, 20 Oct 2019 13:33:31 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 
-https://bugs.freedesktop.org/show_bug.cgi?id=3D75985
+https://bugs.freedesktop.org/show_bug.cgi?id=3D112070
 
---- Comment #117 from Lukas Wunner <lukas@wunner.de> ---
-Created attachment 145778
-  --> https://bugs.freedesktop.org/attachment.cgi?id=3D145778&action=3Dedit
-Debug patch to log invocations of pm_runtime_forbid()
+--- Comment #9 from Doobz <dooby.dave@virgin.net> ---
+So I went ahead and installed Sabayon. Same behaviour - garbled 360 degree
+videos in Firefox.
+
+I did try flipping layers.acceleration.disabled =3D true in about:config bu=
+t it
+made no difference.
+
+
+Does nouveau need any firmware for my card? I thought it didn't, but looking
+here it appears it might.
+https://nouveau.freedesktop.org/wiki/VideoAcceleration/
 
 --=20
 You are receiving this mail because:
 You are the assignee for the bug.=
 
---15715574232.721D6.4430
-Date: Sun, 20 Oct 2019 07:43:43 +0000
+--15715784112.11ADCaB0.22086
+Date: Sun, 20 Oct 2019 13:33:31 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -98,25 +106,33 @@ Auto-Submitted: auto-generated
         <div>
             <b><a class=3D"bz_bug_link=20
           bz_status_NEW "
-   title=3D"NEW - [NVC1] HDMI audio device only visible after rescan"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D75985#c117">Comme=
-nt # 117</a>
+   title=3D"NEW - H/W Acceleration sufficiently buggy on Debian to hard loc=
+k machine GeForce 7600 GO"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D112070#c9">Commen=
+t # 9</a>
               on <a class=3D"bz_bug_link=20
           bz_status_NEW "
-   title=3D"NEW - [NVC1] HDMI audio device only visible after rescan"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D75985">bug 75985<=
-/a>
+   title=3D"NEW - H/W Acceleration sufficiently buggy on Debian to hard loc=
+k machine GeForce 7600 GO"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D112070">bug 11207=
+0</a>
               from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
-lukas&#64;wunner.de" title=3D"Lukas Wunner &lt;lukas&#64;wunner.de&gt;"> <s=
-pan class=3D"fn">Lukas Wunner</span></a>
+dooby.dave&#64;virgin.net" title=3D"Doobz &lt;dooby.dave&#64;virgin.net&gt;=
+"> <span class=3D"fn">Doobz</span></a>
 </span></b>
-        <pre>Created <span class=3D""><a href=3D"attachment.cgi?id=3D145778=
-" name=3D"attach_145778" title=3D"Debug patch to log invocations of pm_runt=
-ime_forbid()">attachment 145778</a> <a href=3D"attachment.cgi?id=3D145778&a=
-mp;action=3Dedit" title=3D"Debug patch to log invocations of pm_runtime_for=
-bid()">[details]</a></span> <a href=3D'page.cgi?id=3Dsplinter.html&amp;bug=
-=3D75985&amp;attachment=3D145778'>[review]</a>
-Debug patch to log invocations of pm_runtime_forbid()</pre>
+        <pre>So I went ahead and installed Sabayon. Same behaviour - garble=
+d 360 degree
+videos in Firefox.
+
+I did try flipping layers.acceleration.disabled =3D true in about:config bu=
+t it
+made no difference.
+
+
+Does nouveau need any firmware for my card? I thought it didn't, but looking
+here it appears it might.
+<a href=3D"https://nouveau.freedesktop.org/wiki/VideoAcceleration/">https:/=
+/nouveau.freedesktop.org/wiki/VideoAcceleration/</a></pre>
         </div>
       </p>
 
@@ -130,9 +146,9 @@ Debug patch to log invocations of pm_runtime_forbid()</pre>
     </body>
 </html>=
 
---15715574232.721D6.4430--
+--15715784112.11ADCaB0.22086--
 
---===============0336171795==
+--===============1386150866==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -142,4 +158,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============0336171795==--
+--===============1386150866==--
