@@ -2,22 +2,22 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id CAE9FDDD33
-	for <lists+nouveau@lfdr.de>; Sun, 20 Oct 2019 09:41:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A39FFDDD34
+	for <lists+nouveau@lfdr.de>; Sun, 20 Oct 2019 09:43:46 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 41DC089D83;
-	Sun, 20 Oct 2019 07:41:08 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 728C789DA9;
+	Sun, 20 Oct 2019 07:43:44 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [131.252.210.165])
- by gabe.freedesktop.org (Postfix) with ESMTP id D7E9089D7D
- for <nouveau@lists.freedesktop.org>; Sun, 20 Oct 2019 07:41:06 +0000 (UTC)
+ [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 5E1A089D5F
+ for <nouveau@lists.freedesktop.org>; Sun, 20 Oct 2019 07:43:43 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id D4AF2720E2; Sun, 20 Oct 2019 07:41:06 +0000 (UTC)
+ id 567FC720E2; Sun, 20 Oct 2019 07:43:43 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Sun, 20 Oct 2019 07:41:06 +0000
+Date: Sun, 20 Oct 2019 07:43:43 +0000
 X-Bugzilla-Reason: AssignedTo
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
@@ -32,8 +32,8 @@ X-Bugzilla-Resolution:
 X-Bugzilla-Priority: medium
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-75985-8800-WYcHh6XEKg@http.bugs.freedesktop.org/>
+X-Bugzilla-Changed-Fields: attachments.created
+Message-ID: <bug-75985-8800-JJreBkK4WX@http.bugs.freedesktop.org/>
 In-Reply-To: <bug-75985-8800@http.bugs.freedesktop.org/>
 References: <bug-75985-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
@@ -52,18 +52,18 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0530833099=="
+Content-Type: multipart/mixed; boundary="===============0336171795=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============0530833099==
-Content-Type: multipart/alternative; boundary="15715572668.C5dc9E23c.4343"
+--===============0336171795==
+Content-Type: multipart/alternative; boundary="15715574232.721D6.4430"
 Content-Transfer-Encoding: 7bit
 
 
---15715572668.C5dc9E23c.4343
-Date: Sun, 20 Oct 2019 07:41:06 +0000
+--15715574232.721D6.4430
+Date: Sun, 20 Oct 2019 07:43:43 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -72,33 +72,17 @@ Auto-Submitted: auto-generated
 
 https://bugs.freedesktop.org/show_bug.cgi?id=3D75985
 
---- Comment #116 from Lukas Wunner <lukas@wunner.de> ---
-@Przemys=C5=82aw Kopa:
-
-The fix was applied by Takashi Iwai on Thursday Oct 17 with commit
-94989e318b2f, it was merged to Linus' tree on Friday Oct 18 and will thus be
-part of v5.4-rc4 due out later today. It should appear in v5.3-stable withi=
-n 1
-or 2 weeks. You may want to double-check that the issue is gone with this f=
-ix.
-
-There's one problem remaining, you shouldn't have to manually echo "auto" to
-the HDA's control file because we call pm_runtime_allow() on the HDA device=
- in
-drivers/pci/quirks.c:quirk_gpu_hda() -> pci_create_device_link(). Something
-must be calling pm_runtime_forbid() afterwards, perhaps this is triggered f=
-rom
-user space on Arch Linux. I'm attaching a little debug patch which logs a
-stacktrace to dmesg whenever pm_runtime_allow() / _forbid() is called for a
-device. Feel free to attach dmesg output with this patch applied and I'll be
-happy to take a look at it.
+--- Comment #117 from Lukas Wunner <lukas@wunner.de> ---
+Created attachment 145778
+  --> https://bugs.freedesktop.org/attachment.cgi?id=3D145778&action=3Dedit
+Debug patch to log invocations of pm_runtime_forbid()
 
 --=20
 You are receiving this mail because:
 You are the assignee for the bug.=
 
---15715572668.C5dc9E23c.4343
-Date: Sun, 20 Oct 2019 07:41:06 +0000
+--15715574232.721D6.4430
+Date: Sun, 20 Oct 2019 07:43:43 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -115,8 +99,8 @@ Auto-Submitted: auto-generated
             <b><a class=3D"bz_bug_link=20
           bz_status_NEW "
    title=3D"NEW - [NVC1] HDMI audio device only visible after rescan"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D75985#c116">Comme=
-nt # 116</a>
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D75985#c117">Comme=
+nt # 117</a>
               on <a class=3D"bz_bug_link=20
           bz_status_NEW "
    title=3D"NEW - [NVC1] HDMI audio device only visible after rescan"
@@ -126,27 +110,13 @@ nt # 116</a>
 lukas&#64;wunner.de" title=3D"Lukas Wunner &lt;lukas&#64;wunner.de&gt;"> <s=
 pan class=3D"fn">Lukas Wunner</span></a>
 </span></b>
-        <pre>&#64;Przemys=C5=82aw Kopa:
-
-The fix was applied by Takashi Iwai on Thursday Oct 17 with commit
-94989e318b2f, it was merged to Linus' tree on Friday Oct 18 and will thus be
-part of v5.4-rc4 due out later today. It should appear in v5.3-stable withi=
-n 1
-or 2 weeks. You may want to double-check that the issue is gone with this f=
-ix.
-
-There's one problem remaining, you shouldn't have to manually echo &quot;au=
-to&quot; to
-the HDA's control file because we call pm_runtime_allow() on the HDA device=
- in
-drivers/pci/quirks.c:quirk_gpu_hda() -&gt; pci_create_device_link(). Someth=
-ing
-must be calling pm_runtime_forbid() afterwards, perhaps this is triggered f=
-rom
-user space on Arch Linux. I'm attaching a little debug patch which logs a
-stacktrace to dmesg whenever pm_runtime_allow() / _forbid() is called for a
-device. Feel free to attach dmesg output with this patch applied and I'll be
-happy to take a look at it.</pre>
+        <pre>Created <span class=3D""><a href=3D"attachment.cgi?id=3D145778=
+" name=3D"attach_145778" title=3D"Debug patch to log invocations of pm_runt=
+ime_forbid()">attachment 145778</a> <a href=3D"attachment.cgi?id=3D145778&a=
+mp;action=3Dedit" title=3D"Debug patch to log invocations of pm_runtime_for=
+bid()">[details]</a></span> <a href=3D'page.cgi?id=3Dsplinter.html&amp;bug=
+=3D75985&amp;attachment=3D145778'>[review]</a>
+Debug patch to log invocations of pm_runtime_forbid()</pre>
         </div>
       </p>
 
@@ -160,9 +130,9 @@ happy to take a look at it.</pre>
     </body>
 </html>=
 
---15715572668.C5dc9E23c.4343--
+--15715574232.721D6.4430--
 
---===============0530833099==
+--===============0336171795==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -172,4 +142,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============0530833099==--
+--===============0336171795==--
