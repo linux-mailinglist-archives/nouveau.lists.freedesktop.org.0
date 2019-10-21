@@ -1,52 +1,46 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id E8AB1DE72D
-	for <lists+nouveau@lfdr.de>; Mon, 21 Oct 2019 10:55:06 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 76256DE8FB
+	for <lists+nouveau@lfdr.de>; Mon, 21 Oct 2019 12:05:46 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1AB7389AB2;
-	Mon, 21 Oct 2019 08:55:02 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A209989AC6;
+	Mon, 21 Oct 2019 10:05:44 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-oi1-f194.google.com (mail-oi1-f194.google.com
- [209.85.167.194])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A705A88784;
- Mon, 21 Oct 2019 08:55:00 +0000 (UTC)
-Received: by mail-oi1-f194.google.com with SMTP id d140so6068519oib.5;
- Mon, 21 Oct 2019 01:55:00 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=P/ILjmf9K7qy+5ndurAox0KwdPha8scfK03vxEE4NRY=;
- b=hJDHAncJ3pAT1lNewOQhJ+mXAJfaXdTf4kghIUDYG6qDXEwLMZULEYKEwwp38GGx2W
- g4X8wCl4dEkAuCEOHsGTolkHgWG8dg6fK2ucss6KaLIwkbRSz1S/62cJszIO6QRZZMxT
- SxUqRbYoIgqtMtbqYqZX2XE2k2zkwAFmqwAQODmK/4MACjGeeVVzxXvPeodtI+xU9RnJ
- B9aB5HepLqAvZh+FeAsL7HCgmwCNRY4hoYDVKkb6RNpPWGdQUIqGN+dOSTvbnVEygHV+
- GKTkQ4bQTjLjx1SWTjZ7UADHw8A1nGXTthQzVrcXbzS+aazXTmvPXIH9zFOwaEQArCdm
- fbDg==
-X-Gm-Message-State: APjAAAVj8Pu876pMIaDJ/pIKASBA3rowLAC7oTt2ldczOa2ue3vvVCKZ
- 2h1+E1TLPq0wDwy3hIRgXZ9OCfpEOl3AkK1iWyI=
-X-Google-Smtp-Source: APXvYqxjzY5Z9AlzOzvJ1XuK2u9xTXSln0v5M1CtCTChjomBuQeW7TgO9aX3S6FSb4eoCSqoL9ysnO+NpbIvsAV6Oss=
-X-Received: by 2002:aca:5885:: with SMTP id
- m127mr18881140oib.110.1571648099816; 
- Mon, 21 Oct 2019 01:54:59 -0700 (PDT)
+Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
+ [131.252.210.165])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 11AD8896EC
+ for <nouveau@lists.freedesktop.org>; Mon, 21 Oct 2019 10:05:44 +0000 (UTC)
+Received: by culpepper.freedesktop.org (Postfix, from userid 33)
+ id 0EF80720E2; Mon, 21 Oct 2019 10:05:44 +0000 (UTC)
+From: bugzilla-daemon@freedesktop.org
+To: nouveau@lists.freedesktop.org
+Date: Mon, 21 Oct 2019 10:05:44 +0000
+X-Bugzilla-Reason: AssignedTo
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: None
+X-Bugzilla-Product: xorg
+X-Bugzilla-Component: Driver/nouveau
+X-Bugzilla-Version: unspecified
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: critical
+X-Bugzilla-Who: dooby.dave@virgin.net
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: not set
+X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: 
+Message-ID: <bug-112070-8800-DvrmeltbO4@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-112070-8800@http.bugs.freedesktop.org/>
+References: <bug-112070-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-References: <20190814213118.28473-1-kherbst@redhat.com>
- <2215840.qs0dBhReda@kreacher>
- <CACO55ttC-o9bKU7nHNcfjm2YnffiupQ7UHUt7BYL3fu+yEyTbw@mail.gmail.com>
- <5228680.jBuKzensJx@kreacher>
- <CAJ=jquZLU2=yxayGCs=XGghxdMMre6qAWRY0Q4VErjBGqeWdjQ@mail.gmail.com>
- <CAJZ5v0hogSM3OgfJ0GFn7+BYwxR05Hb5ZMLo=NiB2wmpu=qeug@mail.gmail.com>
- <CACO55tvAyE1t2Bm8J=Yb_Gi5PDAgof=mRsJAKHFxOvEZpV-qGg@mail.gmail.com>
-In-Reply-To: <CACO55tvAyE1t2Bm8J=Yb_Gi5PDAgof=mRsJAKHFxOvEZpV-qGg@mail.gmail.com>
-From: "Rafael J. Wysocki" <rafael@kernel.org>
-Date: Mon, 21 Oct 2019 10:54:48 +0200
-Message-ID: <CAJZ5v0hedXR13mw2FANuMNNOx0XmXiUUTus5C14Y-ADGteM4hA@mail.gmail.com>
-To: Karol Herbst <kherbst@redhat.com>
-Subject: Re: [Nouveau] [PATCH 1/7] Revert "ACPI / OSI: Add OEM _OSI string
- to enable dGPU direct output"
+Subject: [Nouveau] [Bug 112070] H/W Acceleration sufficiently buggy on
+ Debian to hard lock machine GeForce 7600 GO
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -58,48 +52,101 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: "Rafael J. Wysocki" <rafael@kernel.org>,
- nouveau <nouveau@lists.freedesktop.org>,
- Mario Limonciello <mario.limonciello@dell.com>,
- "Rafael J. Wysocki" <rjw@rjwysocki.net>, LKML <linux-kernel@vger.kernel.org>,
- dri-devel <dri-devel@lists.freedesktop.org>,
- Linux ACPI <linux-acpi@vger.kernel.org>, Alex Hung <alex.hung@canonical.com>,
- Ben Skeggs <bskeggs@redhat.com>, Dave Airlie <airlied@redhat.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============2115702938=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-T24gTW9uLCBPY3QgMjEsIDIwMTkgYXQgMTA6NDggQU0gS2Fyb2wgSGVyYnN0IDxraGVyYnN0QHJl
-ZGhhdC5jb20+IHdyb3RlOgo+Cj4gZnlpOiBJIGRlY2lkZWQgdG8gZ28gZm9yIGEgZGlmZmVyZW50
-IHdvcmthcm91bmQgdG8gZml4IHRoZSBydW5wbQo+IGlzc3VlcyBvYnNlcnZlZCB3aXRoIG52aWRp
-YSBncHVzIHdpdGggbm91dmVhdSBpbiB0aGUgInBjaTogcHJldmVudAo+IHB1dHRpbmcgbnZpZGlh
-IEdQVXMgaW50byBsb3dlciBkZXZpY2Ugc3RhdGVzIG9uIGNlcnRhaW4gaW50ZWwgYnJpZGdlcyIK
-PiB0aHJlYWQKCk9LLCBJJ3ZlIHNlZW4gdGhhdC4KCj4gdGhhdCdzIG9uIHRoZSBwY2kgYW5kIHBt
-IG1haWxpbmcgbGlzdC4gTWF5YmUgaXQgbWFrZXMgc2Vuc2UgdG8gd2FpdAo+IGZvciB0aGF0IHRv
-IGxhbmQgYmVmb3JlIGFjdHVhbGx5IHJlbW92aW5nIHRoZSBBQ1BJIHdvcmthcm91bmRzIGhlcmU/
-CgpTb3VuZHMgcmVhc29uYWJsZS4KCj4gVGhlIHdvcmthcm91bmQgSSBoYWQgaW4gdGhpcyBzZXJp
-ZXMgZGlkbid0IHNlZW0gdG8gYmUgcmVsaWFibGUgZW5vdWdoLAo+IHNvIEkgZGl0Y2hlZCB0aGF0
-IGFwcHJvYWNoZWQuCgpPSywgcGxlYXNlIGxldCBtZSBrbm93IHdoZW4gdGhlIF9PU0kgc3RyaW5n
-IGluIHF1ZXN0aW9uIGNhbiBiZSBkcm9wcGVkLgoKPiBPbiBNb24sIE9jdCAyMSwgMjAxOSBhdCAx
-MDoxNCBBTSBSYWZhZWwgSi4gV3lzb2NraSA8cmFmYWVsQGtlcm5lbC5vcmc+IHdyb3RlOgo+ID4K
-PiA+IE9uIE1vbiwgT2N0IDIxLCAyMDE5IGF0IDQ6MTQgQU0gQWxleCBIdW5nIDxhbGV4Lmh1bmdA
-Y2Fub25pY2FsLmNvbT4gd3JvdGU6Cj4gPiA+Cj4gPiA+IFdlIGhhdmUgZG9uZSBzb21lIHRlc3Rz
-IG9uIHRocmVlIG9mIEludGVsICsgblZpZGlhIGNvbmZpZ3VyYXRpb24KPiA+ID4gc3lzdGVtcyB3
-aXRoIE9FTSBfT1NJIHN0cmluZ3MgcmVtb3ZlZCAtIHdoaWxlIHNvbWUgYnVncyBhcmUgc3RpbGwK
-PiA+ID4gb2JzZXJ2ZWQsIGV4LiBvbmUgb3V0IG9mIHRocmVlIGhhcyBzdXNwZW5kL3Jlc3VtZSBp
-c3N1ZXMsIG5vIHN5c3RlbQo+ID4gPiBjcmFzaGVzIHdlcmUgb2JzZXJ2ZWQgLSB0aGUgYmlnZ2Vz
-dCBpc3N1ZSB0aGF0IHdvcnJpZXMgdXMuCj4gPiA+Cj4gPiA+IFRoZSBwb3NpdGl2ZSByZXN1bHRz
-IGdpdmUgdXMgY29uZmlkZW50IHRvIGFjayB0aGUgcmVtb3ZhbCBvZiB0aGUgT0VNCj4gPiA+IF9P
-U0kgc3RyaW5ncy4gV2hpbGUgb3VyIHRlc3RzIHdlcmUgbm90IGFibGUgdG8gY292ZXIgYWxsIHBv
-c3NpYmxlIEkrTgo+ID4gPiBzeXN0ZW1zLCB3ZSBhcmUgc3VyZSB3ZSBjYW4gZml4IGlzc3VlcyBh
-bG9uZyB0aGUgd2F5LiBJZiB0aGVyZSBhcmVuJ3QKPiA+ID4gc3lzdGVtcyB0aGF0IGNhbm5vdCBi
-ZSBmaXhlZCB3aXRob3V0IHRoZXNlIE9FTSBfT1NJIHN0cmluZ3MsIHRoZXNlCj4gPiA+IHN0cmlu
-Z3Mgc2hvdWxkIHByb2JhYmx5IGVuYWJsZSB3aXRoIERNSSBxdWlya3MgKHBvc3NpYmxlIGZ1dHVy
-ZQo+ID4gPiBwYXRjaGVzKSBzbyB0aGV5IHdvbid0IGFmZmVjdCBvdGhlcnMuCj4gPiA+Cj4gPiA+
-IEFja2VkLWJ5OiBBbGV4IEh1bmcgPGFsZXguaHVuZ0BjYW5vbmljYWwuY29tPgo+ID4KPiA+IE9L
-LCB0aGFua3MhCj4gPgo+ID4gSSBjYW4gcXVldWUgdGhpcyB1cCBvciBpZiBpdCdzIGJldHRlciB0
-byByb3V0ZSBpdCB0aHJvdWdoIHRoZSBEUk0KPiA+IHRyZWUsIHBsZWFzZSBkbyB0aGF0IChhbmQg
-bGV0IG1lIGtub3cpLgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fXwpOb3V2ZWF1IG1haWxpbmcgbGlzdApOb3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpo
-dHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL25vdXZlYXU=
+
+--===============2115702938==
+Content-Type: multipart/alternative; boundary="15716523440.ACebEBE3E.4312"
+Content-Transfer-Encoding: 7bit
+
+
+--15716523440.ACebEBE3E.4312
+Date: Mon, 21 Oct 2019 10:05:44 +0000
+MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+https://bugs.freedesktop.org/show_bug.cgi?id=3D112070
+
+--- Comment #11 from Doobz <dooby.dave@virgin.net> ---
+I don't know if you were able to deduce anything tangible from the valgrind
+log. It crossed my mind that glmark2 might by default not run on such old
+hardware.
+
+Also, the 360 degree video could be a bug in Firefox, like you mentioned. I=
+ can
+download the garbled videos and watch successfully in vlc.
+
+--=20
+You are receiving this mail because:
+You are the assignee for the bug.=
+
+--15716523440.ACebEBE3E.4312
+Date: Mon, 21 Oct 2019 10:05:44 +0000
+MIME-Version: 1.0
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+<html>
+    <head>
+      <base href=3D"https://bugs.freedesktop.org/">
+    </head>
+    <body>
+      <p>
+        <div>
+            <b><a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - H/W Acceleration sufficiently buggy on Debian to hard loc=
+k machine GeForce 7600 GO"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D112070#c11">Comme=
+nt # 11</a>
+              on <a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - H/W Acceleration sufficiently buggy on Debian to hard loc=
+k machine GeForce 7600 GO"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D112070">bug 11207=
+0</a>
+              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
+dooby.dave&#64;virgin.net" title=3D"Doobz &lt;dooby.dave&#64;virgin.net&gt;=
+"> <span class=3D"fn">Doobz</span></a>
+</span></b>
+        <pre>I don't know if you were able to deduce anything tangible from=
+ the valgrind
+log. It crossed my mind that glmark2 might by default not run on such old
+hardware.
+
+Also, the 360 degree video could be a bug in Firefox, like you mentioned. I=
+ can
+download the garbled videos and watch successfully in vlc.</pre>
+        </div>
+      </p>
+
+
+      <hr>
+      <span>You are receiving this mail because:</span>
+
+      <ul>
+          <li>You are the assignee for the bug.</li>
+      </ul>
+    </body>
+</html>=
+
+--15716523440.ACebEBE3E.4312--
+
+--===============2115702938==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
+YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
+cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============2115702938==--
