@@ -2,57 +2,45 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 23062DF05C
-	for <lists+nouveau@lfdr.de>; Mon, 21 Oct 2019 16:50:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E781FDF542
+	for <lists+nouveau@lfdr.de>; Mon, 21 Oct 2019 20:42:29 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4C6276E143;
-	Mon, 21 Oct 2019 14:50:30 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6A3076E1F8;
+	Mon, 21 Oct 2019 18:42:28 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wm1-x344.google.com (mail-wm1-x344.google.com
- [IPv6:2a00:1450:4864:20::344])
- by gabe.freedesktop.org (Postfix) with ESMTPS id EBD6689805
- for <nouveau@lists.freedesktop.org>; Mon, 21 Oct 2019 14:50:27 +0000 (UTC)
-Received: by mail-wm1-x344.google.com with SMTP id r19so13686394wmh.2
- for <nouveau@lists.freedesktop.org>; Mon, 21 Oct 2019 07:50:27 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=LSk8rxPZABwOHnYJlQ17LTRUCWopUUQ6TkJqPqRXhMQ=;
- b=q7YBGYkXPHGb+wjfDTfbTSB2znl4pvDVHDzK3ekGPU/Eu6qjnAz/o4RGHi6+iyhDUL
- mt8xMJ+AOHDDP1PDrbodCrpek0CkV1vPoxcBztNHUT+egGeraDHrGvrLieY7IKBJ2DFA
- b0aBC4b02XBmAIzTvss6ofqqYR61OwCdqVxYcFkcjGZEj356OFGMl9h5DN8SKrtv4FcE
- 08LMmbtTCS77B8au+Vg+9la/2lu73YXL0FYChckxFAxi3J6Vmqwh1A8M3UgafcNOXVVO
- R6gI2NiDtqHZO1utJertlS2XOszPGslxqJqBDZ3feueF7mNMD5aqgX3Qqq2TUu0xEq71
- xcWQ==
-X-Gm-Message-State: APjAAAWukcT6tc1Wyxyg8gAPRNfb9CElaBQGzoIIRt37YYnDIRdUVEuN
- BgtaMKTrKviUSHTc8zFuZ4LjsA==
-X-Google-Smtp-Source: APXvYqymhQytiTF1yVP6deDsmoqgBl05/B/fcX90/ePg68cVHVT38ML1FDXtgJ8mWk+Y5bGLvjFJ3g==
-X-Received: by 2002:a1c:80c7:: with SMTP id b190mr289802wmd.3.1571669425770;
- Mon, 21 Oct 2019 07:50:25 -0700 (PDT)
-Received: from phenom.ffwll.local (212-51-149-96.fiber7.init7.net.
- [212.51.149.96])
- by smtp.gmail.com with ESMTPSA id u7sm7712053wre.59.2019.10.21.07.50.24
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 21 Oct 2019 07:50:24 -0700 (PDT)
-From: Daniel Vetter <daniel.vetter@ffwll.ch>
-To: DRI Development <dri-devel@lists.freedesktop.org>
-Date: Mon, 21 Oct 2019 16:50:16 +0200
-Message-Id: <20191021145017.17384-3-daniel.vetter@ffwll.ch>
-X-Mailer: git-send-email 2.23.0
-In-Reply-To: <20191021145017.17384-1-daniel.vetter@ffwll.ch>
-References: <20191021145017.17384-1-daniel.vetter@ffwll.ch>
+Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
+ [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
+ by gabe.freedesktop.org (Postfix) with ESMTP id DF8E26E1F8
+ for <nouveau@lists.freedesktop.org>; Mon, 21 Oct 2019 18:42:26 +0000 (UTC)
+Received: by culpepper.freedesktop.org (Postfix, from userid 33)
+ id DCB2D720E2; Mon, 21 Oct 2019 18:42:26 +0000 (UTC)
+From: bugzilla-daemon@freedesktop.org
+To: nouveau@lists.freedesktop.org
+Date: Mon, 21 Oct 2019 18:42:27 +0000
+X-Bugzilla-Reason: AssignedTo
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: None
+X-Bugzilla-Product: xorg
+X-Bugzilla-Component: Driver/nouveau
+X-Bugzilla-Version: unspecified
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: critical
+X-Bugzilla-Who: dooby.dave@virgin.net
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: not set
+X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: 
+Message-ID: <bug-112070-8800-O0DsFkdpWH@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-112070-8800@http.bugs.freedesktop.org/>
+References: <bug-112070-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ffwll.ch; s=google;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=LSk8rxPZABwOHnYJlQ17LTRUCWopUUQ6TkJqPqRXhMQ=;
- b=jmzw2yHjJPRM0d412ACz4mpKMVFNEkwwb+nBKMGOe4+Ac9V4KefO5RWiOXGYYjQV41
- ZPfTEuGJY07ph94HsP0pANk9Jfncw1D81y9EdUeNsLUUG+tfF5U7bly4Cr0Sn8WIhU52
- KCBrVI1jBGgS+OW0gtHau4VYx71t9D3zP9QQ0=
-Subject: [Nouveau] [PATCH 2/3] drm/nouveau: slowpath for pushbuf ioctl
+Subject: [Nouveau] [Bug 112070] H/W Acceleration sufficiently buggy on
+ Debian to hard lock machine GeForce 7600 GO
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -64,106 +52,106 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Ben Skeggs <bskeggs@redhat.com>, nouveau@lists.freedesktop.org,
- Daniel Vetter <daniel.vetter@intel.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============0504924366=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-V2UgY2FuJ3QgY29weV8qX3VzZXIgd2hpbGUgaG9sZGluZyByZXNlcnZhdGlvbnMsIHRoYXQgd2ls
-bCAoc29vbiBldmVuCmZvciBub3V2ZWF1KSBsZWFkIHRvIGRlYWRsb2Nrcy4gQW5kIGl0IGJyZWFr
-cyB0aGUgY3Jvc3MtZHJpdmVyCmNvbnRyYWN0IGFyb3VuZCBkbWFfcmVzdi4KCkZpeCB0aGlzIGJ5
-IGFkZGluZyBhIHNsb3dwYXRoIGZvciB3aGVuIHdlIG5lZWQgcmVsb2NhdGlvbnMsIGFuZCBieQpw
-dXNoaW5nIHRoZSB3cml0ZWJhY2sgb2YgdGhlIG5ldyBwcmVzdW1lZCBvZmZzZXRzIHRvIHRoZSB2
-ZXJ5IGVuZC4KCkFzaWRlIGZyb20gIml0IGNvbXBpbGVzIiBlbnRpcmVseSB1bnRlc3RlZCB1bmZv
-cnR1bmF0ZWx5LgoKU2lnbmVkLW9mZi1ieTogRGFuaWVsIFZldHRlciA8ZGFuaWVsLnZldHRlckBp
-bnRlbC5jb20+CkNjOiBJbGlhIE1pcmtpbiA8aW1pcmtpbkBhbHVtLm1pdC5lZHU+CkNjOiBNYWFy
-dGVuIExhbmtob3JzdCA8bWFhcnRlbi5sYW5raG9yc3RAbGludXguaW50ZWwuY29tPgpDYzogQmVu
-IFNrZWdncyA8YnNrZWdnc0ByZWRoYXQuY29tPgpDYzogbm91dmVhdUBsaXN0cy5mcmVlZGVza3Rv
-cC5vcmcKLS0tCiBkcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2dlbS5jIHwgNTcgKysr
-KysrKysrKysrKysrKysrLS0tLS0tLS0tCiAxIGZpbGUgY2hhbmdlZCwgMzggaW5zZXJ0aW9ucygr
-KSwgMTkgZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUv
-bm91dmVhdV9nZW0uYyBiL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfZ2VtLmMKaW5k
-ZXggMTMyNGMxOWY0ZTVjLi4wNWVjOGVkZDZhOGIgMTAwNjQ0Ci0tLSBhL2RyaXZlcnMvZ3B1L2Ry
-bS9ub3V2ZWF1L25vdXZlYXVfZ2VtLmMKKysrIGIvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91
-dmVhdV9nZW0uYwpAQCAtNDg0LDEyICs0ODQsOSBAQCB2YWxpZGF0ZV9pbml0KHN0cnVjdCBub3V2
-ZWF1X2NoYW5uZWwgKmNoYW4sIHN0cnVjdCBkcm1fZmlsZSAqZmlsZV9wcml2LAogCiBzdGF0aWMg
-aW50CiB2YWxpZGF0ZV9saXN0KHN0cnVjdCBub3V2ZWF1X2NoYW5uZWwgKmNoYW4sIHN0cnVjdCBu
-b3V2ZWF1X2NsaSAqY2xpLAotCSAgICAgIHN0cnVjdCBsaXN0X2hlYWQgKmxpc3QsIHN0cnVjdCBk
-cm1fbm91dmVhdV9nZW1fcHVzaGJ1Zl9ibyAqcGJibywKLQkgICAgICB1aW50NjRfdCB1c2VyX3Bi
-Ym9fcHRyKQorCSAgICAgIHN0cnVjdCBsaXN0X2hlYWQgKmxpc3QsIHN0cnVjdCBkcm1fbm91dmVh
-dV9nZW1fcHVzaGJ1Zl9ibyAqcGJibykKIHsKIAlzdHJ1Y3Qgbm91dmVhdV9kcm0gKmRybSA9IGNo
-YW4tPmRybTsKLQlzdHJ1Y3QgZHJtX25vdXZlYXVfZ2VtX3B1c2hidWZfYm8gX191c2VyICp1cGJi
-byA9Ci0JCQkJKHZvaWQgX19mb3JjZSBfX3VzZXIgKikodWludHB0cl90KXVzZXJfcGJib19wdHI7
-CiAJc3RydWN0IG5vdXZlYXVfYm8gKm52Ym87CiAJaW50IHJldCwgcmVsb2NzID0gMDsKIApAQCAt
-NTMzLDEwICs1MzAsNiBAQCB2YWxpZGF0ZV9saXN0KHN0cnVjdCBub3V2ZWF1X2NoYW5uZWwgKmNo
-YW4sIHN0cnVjdCBub3V2ZWF1X2NsaSAqY2xpLAogCQkJYi0+cHJlc3VtZWQub2Zmc2V0ID0gbnZi
-by0+Ym8ub2Zmc2V0OwogCQkJYi0+cHJlc3VtZWQudmFsaWQgPSAwOwogCQkJcmVsb2NzKys7Ci0K
-LQkJCWlmIChjb3B5X3RvX3VzZXIoJnVwYmJvW252Ym8tPnBiYm9faW5kZXhdLnByZXN1bWVkLAot
-CQkJCQkgICAgICZiLT5wcmVzdW1lZCwgc2l6ZW9mKGItPnByZXN1bWVkKSkpCi0JCQkJcmV0dXJu
-IC1FRkFVTFQ7CiAJCX0KIAl9CiAKQEAgLTU0Nyw4ICs1NDAsOCBAQCBzdGF0aWMgaW50CiBub3V2
-ZWF1X2dlbV9wdXNoYnVmX3ZhbGlkYXRlKHN0cnVjdCBub3V2ZWF1X2NoYW5uZWwgKmNoYW4sCiAJ
-CQkgICAgIHN0cnVjdCBkcm1fZmlsZSAqZmlsZV9wcml2LAogCQkJICAgICBzdHJ1Y3QgZHJtX25v
-dXZlYXVfZ2VtX3B1c2hidWZfYm8gKnBiYm8sCi0JCQkgICAgIHVpbnQ2NF90IHVzZXJfYnVmZmVy
-cywgaW50IG5yX2J1ZmZlcnMsCi0JCQkgICAgIHN0cnVjdCB2YWxpZGF0ZV9vcCAqb3AsIGludCAq
-YXBwbHlfcmVsb2NzKQorCQkJICAgICBpbnQgbnJfYnVmZmVycywKKwkJCSAgICAgc3RydWN0IHZh
-bGlkYXRlX29wICpvcCwgYm9vbCAqYXBwbHlfcmVsb2NzKQogewogCXN0cnVjdCBub3V2ZWF1X2Ns
-aSAqY2xpID0gbm91dmVhdV9jbGkoZmlsZV9wcml2KTsKIAlpbnQgcmV0OwpAQCAtNTY1LDcgKzU1
-OCw3IEBAIG5vdXZlYXVfZ2VtX3B1c2hidWZfdmFsaWRhdGUoc3RydWN0IG5vdXZlYXVfY2hhbm5l
-bCAqY2hhbiwKIAkJcmV0dXJuIHJldDsKIAl9CiAKLQlyZXQgPSB2YWxpZGF0ZV9saXN0KGNoYW4s
-IGNsaSwgJm9wLT5saXN0LCBwYmJvLCB1c2VyX2J1ZmZlcnMpOworCXJldCA9IHZhbGlkYXRlX2xp
-c3QoY2hhbiwgY2xpLCAmb3AtPmxpc3QsIHBiYm8pOwogCWlmICh1bmxpa2VseShyZXQgPCAwKSkg
-ewogCQlpZiAocmV0ICE9IC1FUkVTVEFSVFNZUykKIAkJCU5WX1BSSU5USyhlcnIsIGNsaSwgInZh
-bGlkYXRpbmcgYm8gbGlzdFxuIik7CkBAIC02MDUsMTYgKzU5OCwxMiBAQCB1X21lbWNweWEodWlu
-dDY0X3QgdXNlciwgdW5zaWduZWQgbm1lbWIsIHVuc2lnbmVkIHNpemUpCiBzdGF0aWMgaW50CiBu
-b3V2ZWF1X2dlbV9wdXNoYnVmX3JlbG9jX2FwcGx5KHN0cnVjdCBub3V2ZWF1X2NsaSAqY2xpLAog
-CQkJCXN0cnVjdCBkcm1fbm91dmVhdV9nZW1fcHVzaGJ1ZiAqcmVxLAorCQkJCXN0cnVjdCBkcm1f
-bm91dmVhdV9nZW1fcHVzaGJ1Zl9yZWxvYyAqcmVsb2MsCiAJCQkJc3RydWN0IGRybV9ub3V2ZWF1
-X2dlbV9wdXNoYnVmX2JvICpibykKIHsKLQlzdHJ1Y3QgZHJtX25vdXZlYXVfZ2VtX3B1c2hidWZf
-cmVsb2MgKnJlbG9jID0gTlVMTDsKIAlpbnQgcmV0ID0gMDsKIAl1bnNpZ25lZCBpOwogCi0JcmVs
-b2MgPSB1X21lbWNweWEocmVxLT5yZWxvY3MsIHJlcS0+bnJfcmVsb2NzLCBzaXplb2YoKnJlbG9j
-KSk7Ci0JaWYgKElTX0VSUihyZWxvYykpCi0JCXJldHVybiBQVFJfRVJSKHJlbG9jKTsKLQogCWZv
-ciAoaSA9IDA7IGkgPCByZXEtPm5yX3JlbG9jczsgaSsrKSB7CiAJCXN0cnVjdCBkcm1fbm91dmVh
-dV9nZW1fcHVzaGJ1Zl9yZWxvYyAqciA9ICZyZWxvY1tpXTsKIAkJc3RydWN0IGRybV9ub3V2ZWF1
-X2dlbV9wdXNoYnVmX2JvICpiOwpAQCAtNjkzLDExICs2ODIsMTMgQEAgbm91dmVhdV9nZW1faW9j
-dGxfcHVzaGJ1ZihzdHJ1Y3QgZHJtX2RldmljZSAqZGV2LCB2b2lkICpkYXRhLAogCXN0cnVjdCBu
-b3V2ZWF1X2RybSAqZHJtID0gbm91dmVhdV9kcm0oZGV2KTsKIAlzdHJ1Y3QgZHJtX25vdXZlYXVf
-Z2VtX3B1c2hidWYgKnJlcSA9IGRhdGE7CiAJc3RydWN0IGRybV9ub3V2ZWF1X2dlbV9wdXNoYnVm
-X3B1c2ggKnB1c2g7CisJc3RydWN0IGRybV9ub3V2ZWF1X2dlbV9wdXNoYnVmX3JlbG9jICpyZWxv
-YyA9IE5VTEw7CiAJc3RydWN0IGRybV9ub3V2ZWF1X2dlbV9wdXNoYnVmX2JvICpibzsKIAlzdHJ1
-Y3Qgbm91dmVhdV9jaGFubmVsICpjaGFuID0gTlVMTDsKIAlzdHJ1Y3QgdmFsaWRhdGVfb3Agb3A7
-CiAJc3RydWN0IG5vdXZlYXVfZmVuY2UgKmZlbmNlID0gTlVMTDsKLQlpbnQgaSwgaiwgcmV0ID0g
-MCwgZG9fcmVsb2MgPSAwOworCWludCBpLCBqLCByZXQgPSAwOworCWJvb2wgZG9fcmVsb2MgPSBm
-YWxzZTsKIAogCWlmICh1bmxpa2VseSghYWJpMTYpKQogCQlyZXR1cm4gLUVOT01FTTsKQEAgLTc1
-NSw3ICs3NDYsOCBAQCBub3V2ZWF1X2dlbV9pb2N0bF9wdXNoYnVmKHN0cnVjdCBkcm1fZGV2aWNl
-ICpkZXYsIHZvaWQgKmRhdGEsCiAJfQogCiAJLyogVmFsaWRhdGUgYnVmZmVyIGxpc3QgKi8KLQly
-ZXQgPSBub3V2ZWF1X2dlbV9wdXNoYnVmX3ZhbGlkYXRlKGNoYW4sIGZpbGVfcHJpdiwgYm8sIHJl
-cS0+YnVmZmVycywKK3JldmFsaWRhdGU6CisJcmV0ID0gbm91dmVhdV9nZW1fcHVzaGJ1Zl92YWxp
-ZGF0ZShjaGFuLCBmaWxlX3ByaXYsIGJvLAogCQkJCQkgICByZXEtPm5yX2J1ZmZlcnMsICZvcCwg
-JmRvX3JlbG9jKTsKIAlpZiAocmV0KSB7CiAJCWlmIChyZXQgIT0gLUVSRVNUQVJUU1lTKQpAQCAt
-NzY1LDcgKzc1NywxOCBAQCBub3V2ZWF1X2dlbV9pb2N0bF9wdXNoYnVmKHN0cnVjdCBkcm1fZGV2
-aWNlICpkZXYsIHZvaWQgKmRhdGEsCiAKIAkvKiBBcHBseSBhbnkgcmVsb2NhdGlvbnMgdGhhdCBh
-cmUgcmVxdWlyZWQgKi8KIAlpZiAoZG9fcmVsb2MpIHsKLQkJcmV0ID0gbm91dmVhdV9nZW1fcHVz
-aGJ1Zl9yZWxvY19hcHBseShjbGksIHJlcSwgYm8pOworCQlpZiAoIXJlbG9jKSB7CisJCQl2YWxp
-ZGF0ZV9maW5pKCZvcCwgY2hhbiwgTlVMTCwgYm8pOworCQkJcmVsb2MgPSB1X21lbWNweWEocmVx
-LT5yZWxvY3MsIHJlcS0+bnJfcmVsb2NzLCBzaXplb2YoKnJlbG9jKSk7CisJCQlpZiAoSVNfRVJS
-KHJlbG9jKSkgeworCQkJCXJldCA9IFBUUl9FUlIocmVsb2MpOworCQkJCWdvdG8gb3V0X3ByZXZh
-bGlkOworCQkJfQorCisJCQlnb3RvIHJldmFsaWRhdGU7CisJCX0KKworCQlyZXQgPSBub3V2ZWF1
-X2dlbV9wdXNoYnVmX3JlbG9jX2FwcGx5KGNsaSwgcmVxLCByZWxvYywgYm8pOwogCQlpZiAocmV0
-KSB7CiAJCQlOVl9QUklOVEsoZXJyLCBjbGksICJyZWxvYyBhcHBseTogJWRcbiIsIHJldCk7CiAJ
-CQlnb3RvIG91dDsKQEAgLTg1MSw2ICs4NTQsMjIgQEAgbm91dmVhdV9nZW1faW9jdGxfcHVzaGJ1
-ZihzdHJ1Y3QgZHJtX2RldmljZSAqZGV2LCB2b2lkICpkYXRhLAogCXZhbGlkYXRlX2ZpbmkoJm9w
-LCBjaGFuLCBmZW5jZSwgYm8pOwogCW5vdXZlYXVfZmVuY2VfdW5yZWYoJmZlbmNlKTsKIAorCWlm
-IChkb19yZWxvYykgeworCQlzdHJ1Y3QgZHJtX25vdXZlYXVfZ2VtX3B1c2hidWZfYm8gX191c2Vy
-ICp1cGJibyA9CisJCQl1NjRfdG9fdXNlcl9wdHIocmVxLT5idWZmZXJzKTsKKworCQlmb3IgKGkg
-PSAwOyBpIDwgcmVxLT5ucl9idWZmZXJzOyBpKyspIHsKKwkJCWlmIChib1tpXS5wcmVzdW1lZC52
-YWxpZCkKKwkJCQljb250aW51ZTsKKworCQkJaWYgKGNvcHlfdG9fdXNlcigmdXBiYm9baV0ucHJl
-c3VtZWQsICZib1tpXS5wcmVzdW1lZCwKKwkJCQkJIHNpemVvZihib1tpXS5wcmVzdW1lZCkpKSB7
-CisJCQkJcmV0ID0gLUVGQVVMVDsKKwkJCQlicmVhazsKKwkJCX0KKwkJfQorCQl1X2ZyZWUocmVs
-b2MpOworCX0KIG91dF9wcmV2YWxpZDoKIAl1X2ZyZWUoYm8pOwogCXVfZnJlZShwdXNoKTsKLS0g
-CjIuMjMuMAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18K
-Tm91dmVhdSBtYWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6
-Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============0504924366==
+Content-Type: multipart/alternative; boundary="15716833461.dfDAA4E7.12703"
+Content-Transfer-Encoding: 7bit
+
+
+--15716833461.dfDAA4E7.12703
+Date: Mon, 21 Oct 2019 18:42:26 +0000
+MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+https://bugs.freedesktop.org/show_bug.cgi?id=3D112070
+
+--- Comment #15 from Doobz <dooby.dave@virgin.net> ---
+Quick update:-
+
+glmark2 runs fine on geforce 8200 laptop
+
+But on the geforce 7100 (NV63) desktop it produces segmentation fault at sa=
+me
+point as on my 7600GO laptop.
+
+I can try to upgrade from mesa 18.3.6 to 19.2.1-1 if you think it's worth
+doing.
+
+--=20
+You are receiving this mail because:
+You are the assignee for the bug.=
+
+--15716833461.dfDAA4E7.12703
+Date: Mon, 21 Oct 2019 18:42:26 +0000
+MIME-Version: 1.0
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+<html>
+    <head>
+      <base href=3D"https://bugs.freedesktop.org/">
+    </head>
+    <body>
+      <p>
+        <div>
+            <b><a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - H/W Acceleration sufficiently buggy on Debian to hard loc=
+k machine GeForce 7600 GO"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D112070#c15">Comme=
+nt # 15</a>
+              on <a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - H/W Acceleration sufficiently buggy on Debian to hard loc=
+k machine GeForce 7600 GO"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D112070">bug 11207=
+0</a>
+              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
+dooby.dave&#64;virgin.net" title=3D"Doobz &lt;dooby.dave&#64;virgin.net&gt;=
+"> <span class=3D"fn">Doobz</span></a>
+</span></b>
+        <pre>Quick update:-
+
+glmark2 runs fine on geforce 8200 laptop
+
+But on the geforce 7100 (NV63) desktop it produces segmentation fault at sa=
+me
+point as on my 7600GO laptop.
+
+I can try to upgrade from mesa 18.3.6 to 19.2.1-1 if you think it's worth
+doing.</pre>
+        </div>
+      </p>
+
+
+      <hr>
+      <span>You are receiving this mail because:</span>
+
+      <ul>
+          <li>You are the assignee for the bug.</li>
+      </ul>
+    </body>
+</html>=
+
+--15716833461.dfDAA4E7.12703--
+
+--===============0504924366==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
+YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
+cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============0504924366==--
