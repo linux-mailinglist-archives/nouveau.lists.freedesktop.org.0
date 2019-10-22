@@ -1,23 +1,23 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6A2A2E07E4
-	for <lists+nouveau@lfdr.de>; Tue, 22 Oct 2019 17:51:45 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1AB0AE0801
+	for <lists+nouveau@lfdr.de>; Tue, 22 Oct 2019 17:54:32 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id ED1B06E861;
-	Tue, 22 Oct 2019 15:51:42 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6AEE36E864;
+	Tue, 22 Oct 2019 15:54:30 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [131.252.210.165])
- by gabe.freedesktop.org (Postfix) with ESMTP id 77DBA6E85D
- for <nouveau@lists.freedesktop.org>; Tue, 22 Oct 2019 15:51:41 +0000 (UTC)
+ [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 1C5176E862
+ for <nouveau@lists.freedesktop.org>; Tue, 22 Oct 2019 15:54:29 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 743AD720E2; Tue, 22 Oct 2019 15:51:41 +0000 (UTC)
+ id 1988B720E2; Tue, 22 Oct 2019 15:54:29 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Tue, 22 Oct 2019 15:51:41 +0000
+Date: Tue, 22 Oct 2019 15:54:29 +0000
 X-Bugzilla-Reason: AssignedTo
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
@@ -32,8 +32,8 @@ X-Bugzilla-Resolution:
 X-Bugzilla-Priority: not set
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-112070-8800-7Xvlg4X5Pd@http.bugs.freedesktop.org/>
+X-Bugzilla-Changed-Fields: attachments.created
+Message-ID: <bug-112070-8800-bdWnVHPpyW@http.bugs.freedesktop.org/>
 In-Reply-To: <bug-112070-8800@http.bugs.freedesktop.org/>
 References: <bug-112070-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
@@ -52,18 +52,18 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============2077154933=="
+Content-Type: multipart/mixed; boundary="===============1249996486=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============2077154933==
-Content-Type: multipart/alternative; boundary="15717595010.79F3B.29808"
+--===============1249996486==
+Content-Type: multipart/alternative; boundary="15717596691.A72482.30365"
 Content-Transfer-Encoding: 7bit
 
 
---15717595010.79F3B.29808
-Date: Tue, 22 Oct 2019 15:51:41 +0000
+--15717596691.A72482.30365
+Date: Tue, 22 Oct 2019 15:54:29 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -72,27 +72,17 @@ Auto-Submitted: auto-generated
 
 https://bugs.freedesktop.org/show_bug.cgi?id=3D112070
 
---- Comment #19 from Doobz <dooby.dave@virgin.net> ---
-Not managed to do the backtrace yet, but thought I'd attach dmesg from
-7100-based desktop. Had it sitting cycling gl screensavers for a while.
-
-Lots of these:-
-[   45.639455] nouveau 0000:00:10.0: bus: MMIO write of 00540001 FAULT at
-00b000
-
-And some of these:-
-[  825.282398] perf: interrupt took too long (5006 > 4996), lowering
-kernel.perf_event_max_sample_rate to 39750
-
-In other news, same machine hard locked as soon as I tried to play an local
-video file.
+--- Comment #20 from Doobz <dooby.dave@virgin.net> ---
+Created attachment 145794
+  --> https://bugs.freedesktop.org/attachment.cgi?id=3D145794&action=3Dedit
+dmesg output from NV63 GF7100 desktop
 
 --=20
 You are receiving this mail because:
 You are the assignee for the bug.=
 
---15717595010.79F3B.29808
-Date: Tue, 22 Oct 2019 15:51:41 +0000
+--15717596691.A72482.30365
+Date: Tue, 22 Oct 2019 15:54:29 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -110,8 +100,8 @@ Auto-Submitted: auto-generated
           bz_status_NEW "
    title=3D"NEW - H/W Acceleration sufficiently buggy on Debian to hard loc=
 k machine GeForce 7600 GO"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D112070#c19">Comme=
-nt # 19</a>
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D112070#c20">Comme=
+nt # 20</a>
               on <a class=3D"bz_bug_link=20
           bz_status_NEW "
    title=3D"NEW - H/W Acceleration sufficiently buggy on Debian to hard loc=
@@ -122,20 +112,11 @@ k machine GeForce 7600 GO"
 dooby.dave&#64;virgin.net" title=3D"Doobz &lt;dooby.dave&#64;virgin.net&gt;=
 "> <span class=3D"fn">Doobz</span></a>
 </span></b>
-        <pre>Not managed to do the backtrace yet, but thought I'd attach dm=
-esg from
-7100-based desktop. Had it sitting cycling gl screensavers for a while.
-
-Lots of these:-
-[   45.639455] nouveau 0000:00:10.0: bus: MMIO write of 00540001 FAULT at
-00b000
-
-And some of these:-
-[  825.282398] perf: interrupt took too long (5006 &gt; 4996), lowering
-kernel.perf_event_max_sample_rate to 39750
-
-In other news, same machine hard locked as soon as I tried to play an local
-video file.</pre>
+        <pre>Created <span class=3D""><a href=3D"attachment.cgi?id=3D145794=
+" name=3D"attach_145794" title=3D"dmesg output from NV63 GF7100 desktop">at=
+tachment 145794</a> <a href=3D"attachment.cgi?id=3D145794&amp;action=3Dedit=
+" title=3D"dmesg output from NV63 GF7100 desktop">[details]</a></span>
+dmesg output from NV63 GF7100 desktop</pre>
         </div>
       </p>
 
@@ -149,9 +130,9 @@ video file.</pre>
     </body>
 </html>=
 
---15717595010.79F3B.29808--
+--15717596691.A72482.30365--
 
---===============2077154933==
+--===============1249996486==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -161,4 +142,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============2077154933==--
+--===============1249996486==--
