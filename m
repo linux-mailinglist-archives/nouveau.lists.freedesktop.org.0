@@ -1,63 +1,46 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 892BCE042E
-	for <lists+nouveau@lfdr.de>; Tue, 22 Oct 2019 14:52:11 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6A2A2E07E4
+	for <lists+nouveau@lfdr.de>; Tue, 22 Oct 2019 17:51:45 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E55576E798;
-	Tue, 22 Oct 2019 12:52:07 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id ED1B06E861;
+	Tue, 22 Oct 2019 15:51:42 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mx1.redhat.com (mx1.redhat.com [209.132.183.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 492F76E593
- for <nouveau@lists.freedesktop.org>; Tue, 22 Oct 2019 12:52:06 +0000 (UTC)
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com
- [209.85.222.198])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id BB95B859FF
- for <nouveau@lists.freedesktop.org>; Tue, 22 Oct 2019 12:52:05 +0000 (UTC)
-Received: by mail-qk1-f198.google.com with SMTP id s14so16540039qkg.12
- for <nouveau@lists.freedesktop.org>; Tue, 22 Oct 2019 05:52:05 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=3yeQelJTclqqXcJSeLCRYJucLdCvZTdooL8LQ/VknXg=;
- b=GO5FS0Jv30rR/dMIqh30EKf3+WEXC2h0gpOmNv9kOKjdCFOWqEuLaZynq07qZJJTaA
- QRLqyRDPT+8QmDrHZ2J12Atv8kN7SQbYrcIziHLH+uheC6KbbwgA3Mp5AMVBA3yw5Nks
- v7bVxQOPpCUMqsieUGa/iSiq4ry6Qp21YExsYBPT20pnDhLmVWD5Vq5Hw/03sCZRKnwf
- 8TACWWmPCxIh/lDogWnHd9AYWXchL+xLa9s376ItUcsdpZtoeSwm/niCp6TPDCdBm2n2
- HzoTEVhQSHcFLNWowOJd83DzTJ2ojzo0+xf1eUz3qb1WgJ2CYKMcFZGU4IbQOTUM/AvM
- n8qw==
-X-Gm-Message-State: APjAAAXdn+ArmaBED97KufftntK1FnWWfc7SykZKCJOLi17LBpWHuMIC
- +rtRODUcGrG9SjGq2Obcg9UjHB0FKW67EHizRhZQVBOuQyj1bAhtVyvIIelNL9gHoSYlFfzYTBm
- Yzd9EYLi6CaQ5ZtqyO+J9S+tbHqkFM8DAyIqAAcW3rw==
-X-Received: by 2002:a37:9c0f:: with SMTP id f15mr2853219qke.62.1571748724999; 
- Tue, 22 Oct 2019 05:52:04 -0700 (PDT)
-X-Google-Smtp-Source: APXvYqyTSf/89W7mLASTE6fmyhuNivQ1p+xmXUQgPgY57L2MD0+HVVER/VSyOJiIJsiIDyT24Z8QmXi/IjC27y0EsqE=
-X-Received: by 2002:a37:9c0f:: with SMTP id f15mr2853196qke.62.1571748724699; 
- Tue, 22 Oct 2019 05:52:04 -0700 (PDT)
+Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
+ [131.252.210.165])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 77DBA6E85D
+ for <nouveau@lists.freedesktop.org>; Tue, 22 Oct 2019 15:51:41 +0000 (UTC)
+Received: by culpepper.freedesktop.org (Postfix, from userid 33)
+ id 743AD720E2; Tue, 22 Oct 2019 15:51:41 +0000 (UTC)
+From: bugzilla-daemon@freedesktop.org
+To: nouveau@lists.freedesktop.org
+Date: Tue, 22 Oct 2019 15:51:41 +0000
+X-Bugzilla-Reason: AssignedTo
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: None
+X-Bugzilla-Product: xorg
+X-Bugzilla-Component: Driver/nouveau
+X-Bugzilla-Version: unspecified
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: critical
+X-Bugzilla-Who: dooby.dave@virgin.net
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: not set
+X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: 
+Message-ID: <bug-112070-8800-7Xvlg4X5Pd@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-112070-8800@http.bugs.freedesktop.org/>
+References: <bug-112070-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-References: <CACO55ttOJaXKWmKQQbMAQRJHLXF-VtNn58n4BZhFKYmAdfiJjA@mail.gmail.com>
- <20191016213722.GA72810@google.com>
- <CACO55tuXck7vqGVLmMBGFg6A2pr3h8koRuvvWHLNDH8XvBVxew@mail.gmail.com>
- <20191021133328.GI2819@lahna.fi.intel.com>
- <CACO55tujUZr+rKkyrkfN+wkNOJWdNEVhVc-eZ3RCXJD+G1z=7A@mail.gmail.com>
- <20191021140852.GM2819@lahna.fi.intel.com>
- <CACO55tvp6n2ahizwhc70xRJ1uTohs2ep962vwtHGQK-MkcLmsw@mail.gmail.com>
- <20191021154606.GT2819@lahna.fi.intel.com>
- <CACO55tsGhvG1qapRkdu_j7R534cFa5o=Gv2s4VZDrWUrxjBFwA@mail.gmail.com>
- <CACO55ts7hivYgN7=3bcAjWx2h8FfbR5UiKiOOExYY9m-TGRNfw@mail.gmail.com>
- <20191022124453.GK2819@lahna.fi.intel.com>
-In-Reply-To: <20191022124453.GK2819@lahna.fi.intel.com>
-From: Karol Herbst <kherbst@redhat.com>
-Date: Tue, 22 Oct 2019 14:51:53 +0200
-Message-ID: <CACO55tvxvwUqzg=jLoO6bhmcaXQwRaTv9S4pt2t0V5TUi+HsEw@mail.gmail.com>
-To: Mika Westerberg <mika.westerberg@intel.com>
-Subject: Re: [Nouveau] [PATCH v3] pci: prevent putting nvidia GPUs into
- lower device states on certain intel bridges
+Subject: [Nouveau] [Bug 112070] H/W Acceleration sufficiently buggy on
+ Debian to hard lock machine GeForce 7600 GO
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -69,55 +52,113 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Linux PM <linux-pm@vger.kernel.org>, Linux PCI <linux-pci@vger.kernel.org>,
- "Rafael J . Wysocki" <rjw@rjwysocki.net>, LKML <linux-kernel@vger.kernel.org>,
- dri-devel <dri-devel@lists.freedesktop.org>,
- Linux ACPI Mailing List <linux-acpi@vger.kernel.org>,
- Bjorn Helgaas <helgaas@kernel.org>, nouveau <nouveau@lists.freedesktop.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============2077154933=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-T24gVHVlLCBPY3QgMjIsIDIwMTkgYXQgMjo0NSBQTSBNaWthIFdlc3RlcmJlcmcKPG1pa2Eud2Vz
-dGVyYmVyZ0BpbnRlbC5jb20+IHdyb3RlOgo+Cj4gT24gVHVlLCBPY3QgMjIsIDIwMTkgYXQgMTE6
-MTY6MTRBTSArMDIwMCwgS2Fyb2wgSGVyYnN0IHdyb3RlOgo+ID4gSSB0aGluayB0aGVyZSBpcyBz
-b21ldGhpbmcgSSB0b3RhbGx5IGZvcmdvdCBhYm91dDoKPiA+Cj4gPiBXaGVuIHRoZXJlIHdhcyBu
-ZXZlciBhIGRyaXZlciBib3VuZCB0byB0aGUgR1BVLCBhbmQgaWYgcnVudGltZSBwb3dlcgo+ID4g
-bWFuYWdlbWVudCBnZXRzIGVuYWJsZWQgb24gdGhhdCBkZXZpY2UsIHJ1bnRpbWUgc3VzcGVuZC9y
-ZXN1bWUgd29ya3MKPiA+IGFzIGV4cGVjdGVkIChJIGFtIG5vdCAxMDAlIHN1cmUgb24gaWYgdGhh
-dCBhbHdheXMgd29ya3MsIGJ1dCBJIHdpbGwKPiA+IHJlY2hlY2sgdGhhdCkuCj4KPiBBRkFJSywg
-aWYgdGhlcmUgaXMgbm8gZHJpdmVyIGJvdW5kIHRvIHRoZSBQQ0kgZGV2aWNlIGl0IGlzIGxlZnQg
-dG8gRDAKPiByZWdhcmRsZXNzIG9mIHRoZSBydW50aW1lIFBNIHN0YXRlIHdoaWNoIGNvdWxkIGV4
-cGxhaW4gd2h5IGl0IHdvcmtzIGluCj4gdGhhdCBjYXNlIChpdCBpcyBuZXZlciBwdXQgaW50byBE
-M2hvdCkuCj4KPiBJIGxvb2tlZCBhdCB0aGUgYWNwaWR1bXAgeW91IHNlbnQgYW5kIHRoZXJlIGlz
-IG9uZSB0aGluZyB0aGF0IG1heQo+IGV4cGxhaW4gdGhlIGRpZmZlcmVuY2VzIGJldHdlZW4gV2lu
-ZG93cyBhbmQgTGludXguIE5vdCBzdXJlIGlmIHlvdSB3ZXJlCj4gYXdhcmUgb2YgdGhpcyBhbHJl
-YWR5LCB0aG91Z2guIFRoZSBwb3dlciByZXNvdXJjZSBQR09GKCkgbWV0aG9kIGhhcwo+IHRoaXM6
-Cj4KPiAgICBJZiAoKChPU1lTIDw9IDB4MDdEOSkgfHwgKChPU1lTID09IDB4MDdERikgJiYgKF9S
-RVYgPT0gMHgwNSkpKSkgewo+ICAgICAgIC4uLgo+ICAgIH0KPgoKSSB0aGluayB0aGlzIGlzIHRo
-ZSBmYWxsYmFjayB0byBzb21lIG9sZGVyIG1ldGhvZCBvZiBydW50aW1lCnN1c3BlbmRpbmcgdGhl
-IGRldmljZSwgYW5kIEkgdGhpbmsgaXQgd2lsbCBlbmQgdXAgdG91Y2hpbmcgZGlmZmVyZW50CnJl
-Z2lzdGVycyBvbiB0aGUgYnJpZGdlIGNvbnRyb2xsZXIgd2hpY2ggZG8gbm90IHNob3cgdGhlIGJy
-b2tlbgpiZWhhdmlvdXIuCgpZb3UnbGwgZmluZCByZWZlcmVuY2VzIHRvIGZvbGxvd2luZyB2YXJp
-YWJsZXMgd2hpY2ggYWxsIGNhdXNlIGEgbGluawp0byBiZSBwb3dlcmVkIGRvd246IFEwTDIgKG5l
-d2VzdCksIFAwTDIsIFAwTEQgKG9sZGVzdCwgSSB0aGluaykuCgpNYXliZSBJIHJlbWVtYmVyIGlu
-Y29ycmVjdGx5IGFuZCBoYXZlIHRvIHJlYWQgdGhlIGNvZGUgYWdhaW4uLi4gb2theSwKdGhlIGZh
-bGxiYWNrIHBhdGggdXNlcyBQMExEIGluZGVlZC4gVGhhdCdzIGFjdHVhbGx5IHRoZSBvbmx5IHJl
-Z2lzdGVyCm9mIHRob3NlIGJlaW5nIGRvY3VtZW50ZWQgYnkgSW50ZWwgYWZhaWsuCgo+IElmIEkg
-cmVhZCBpdCByaWdodCwgdGhlIGxhdGVyIGNvbmRpdGlvbiB0cmllcyB0byBkZXRlY3QgTGludXgg
-d2hpY2gKPiBmYWlscyBub3dhZGF5cyBidXQgaWYgeW91IGhhdmUgYWNwaV9yZXZfb3ZlcnJpZGUg
-aW4gdGhlIGNvbW1hbmQgbGluZSAob3IKPiB0aGUgbWFjaGluZSBpcyBsaXN0ZWQgaW4gYWNwaV9y
-ZXZfZG1pX3RhYmxlKSB0aGlzIGNoZWNrIHBhc3NlcyBhbmQgZG9lcwo+IHNvbWUgbWFnaWMgd2hp
-Y2ggaXMgbm90IGNsZWFyIHRvIG1lLiBUaGVyZSBpcyBzaW1pbGFyIGluIFBHT04oKSBzaWRlCj4g
-d2hpY2ggaXMgdXNlZCB0byB0dXJuIHRoZSBkZXZpY2UgYmFjayBvbi4KPgo+IFlvdSBjYW4gY2hl
-Y2sgd2hhdCBhY3R1YWxseSBoYXBwZW5zIHdoZW4gX09OKCkvX09GRigpIGlzIGNhbGxlZCBieQo+
-IHBhc3Npbmcgc29tZXRoaW5nIGxpa2UgYmVsb3cgdG8gdGhlIGtlcm5lbCBjb21tYW5kIGxpbmU6
-Cj4KPiAgIGFjcGkudHJhY2VfZGVidWdfbGF5ZXI9MHg4MCBhY3BpLnRyYWNlX2RlYnVnX2xldmVs
-PTB4MTAgYWNwaS50cmFjZV9tZXRob2RfbmFtZT1cX1NCLlBDSTAuUEVHMC5QRzAwLl9PTiBhY3Bp
-LnRyYWNlX3N0YXRlPW1ldGhvZAo+Cj4gKFNlZSBhbHNvIERvY3VtZW50YXRpb24vZmlybXdhcmUt
-Z3VpZGUvYWNwaS9tZXRob2QtdHJhY2luZy5yc3QpLgo+Cj4gVHJhY2UgZ29lcyB0byBzeXN0ZW0g
-ZG1lc2cuCgpUaGlzIHNvdW5kcyB0byBiZSB2ZXJ5IGhlbHBmdWwsIEknbGwgZ2l2ZSBpdCBhIHRy
-eS4KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVh
-dSBtYWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0
-cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============2077154933==
+Content-Type: multipart/alternative; boundary="15717595010.79F3B.29808"
+Content-Transfer-Encoding: 7bit
+
+
+--15717595010.79F3B.29808
+Date: Tue, 22 Oct 2019 15:51:41 +0000
+MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+https://bugs.freedesktop.org/show_bug.cgi?id=3D112070
+
+--- Comment #19 from Doobz <dooby.dave@virgin.net> ---
+Not managed to do the backtrace yet, but thought I'd attach dmesg from
+7100-based desktop. Had it sitting cycling gl screensavers for a while.
+
+Lots of these:-
+[   45.639455] nouveau 0000:00:10.0: bus: MMIO write of 00540001 FAULT at
+00b000
+
+And some of these:-
+[  825.282398] perf: interrupt took too long (5006 > 4996), lowering
+kernel.perf_event_max_sample_rate to 39750
+
+In other news, same machine hard locked as soon as I tried to play an local
+video file.
+
+--=20
+You are receiving this mail because:
+You are the assignee for the bug.=
+
+--15717595010.79F3B.29808
+Date: Tue, 22 Oct 2019 15:51:41 +0000
+MIME-Version: 1.0
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+<html>
+    <head>
+      <base href=3D"https://bugs.freedesktop.org/">
+    </head>
+    <body>
+      <p>
+        <div>
+            <b><a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - H/W Acceleration sufficiently buggy on Debian to hard loc=
+k machine GeForce 7600 GO"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D112070#c19">Comme=
+nt # 19</a>
+              on <a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - H/W Acceleration sufficiently buggy on Debian to hard loc=
+k machine GeForce 7600 GO"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D112070">bug 11207=
+0</a>
+              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
+dooby.dave&#64;virgin.net" title=3D"Doobz &lt;dooby.dave&#64;virgin.net&gt;=
+"> <span class=3D"fn">Doobz</span></a>
+</span></b>
+        <pre>Not managed to do the backtrace yet, but thought I'd attach dm=
+esg from
+7100-based desktop. Had it sitting cycling gl screensavers for a while.
+
+Lots of these:-
+[   45.639455] nouveau 0000:00:10.0: bus: MMIO write of 00540001 FAULT at
+00b000
+
+And some of these:-
+[  825.282398] perf: interrupt took too long (5006 &gt; 4996), lowering
+kernel.perf_event_max_sample_rate to 39750
+
+In other news, same machine hard locked as soon as I tried to play an local
+video file.</pre>
+        </div>
+      </p>
+
+
+      <hr>
+      <span>You are receiving this mail because:</span>
+
+      <ul>
+          <li>You are the assignee for the bug.</li>
+      </ul>
+    </body>
+</html>=
+
+--15717595010.79F3B.29808--
+
+--===============2077154933==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
+YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
+cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============2077154933==--
