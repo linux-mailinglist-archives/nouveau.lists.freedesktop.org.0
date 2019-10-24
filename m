@@ -2,53 +2,45 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9B9F7E2CCA
-	for <lists+nouveau@lfdr.de>; Thu, 24 Oct 2019 11:04:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A59F5E3D61
+	for <lists+nouveau@lfdr.de>; Thu, 24 Oct 2019 22:34:20 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D1CC36E177;
-	Thu, 24 Oct 2019 09:04:28 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0E79C6E7A3;
+	Thu, 24 Oct 2019 20:34:19 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-oi1-x241.google.com (mail-oi1-x241.google.com
- [IPv6:2607:f8b0:4864:20::241])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 402326E177
- for <nouveau@lists.freedesktop.org>; Thu, 24 Oct 2019 09:04:28 +0000 (UTC)
-Received: by mail-oi1-x241.google.com with SMTP id j7so1219956oib.3
- for <nouveau@lists.freedesktop.org>; Thu, 24 Oct 2019 02:04:28 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=LI6A5/WkSbkCLEF6Gi3QmlKrlWf74OE55pWrbF8qr9c=;
- b=OQY+Qwl0Hyz22zL+uInwL2RctCW2l4PvkGlP3OmJQzwFUWi1FMXn0obRP0lO17xg25
- 6UaA/QErOMZ8qpx7gBa8aqF2YxheOox7FAkRuGaJNOcu5QJS32pKUV20n4YR0Rl3T9PD
- V3OF5IwNIYZGfqmRD9krKRVeEdeF/s9lUyWD1OFExEXg2yDVqWzg9TOYK/9+HbIiwY+y
- bU5VmMx+CT2mJKzPkFkC9bHZJ1Gie9GRmeY8k7cpv9e0DaaYo3ebaZuf6YJXXRMYGz/s
- vfxVYfxbnmzrt7RZnHyhoIwlS372+H1j7AqkjLJmYh5RVPt49kNccfj9ETXIFxee6QIN
- gK5Q==
-X-Gm-Message-State: APjAAAXjnBeEOOZBEKiSKqjpAeqbcDRNX5qcdZHqFE1CuDLGFEI/guWI
- hwWPdS48Uwlt1wSwLxMAn8mLZM5F147zps5hpu78ug==
-X-Google-Smtp-Source: APXvYqw6in35B5fxb5wINiS5ncPrdD/94h0ujQzPPvl9W2HWM7U8lT3UxbtSbfrKbNpv/Z/IgJjcILFXJ8NfWrrosXc=
-X-Received: by 2002:a54:4e8a:: with SMTP id c10mr3697050oiy.14.1571907867284; 
- Thu, 24 Oct 2019 02:04:27 -0700 (PDT)
+Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
+ [131.252.210.165])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 869DF6E79D
+ for <nouveau@lists.freedesktop.org>; Thu, 24 Oct 2019 20:34:18 +0000 (UTC)
+Received: by culpepper.freedesktop.org (Postfix, from userid 33)
+ id 7F18B720E2; Thu, 24 Oct 2019 20:34:18 +0000 (UTC)
+From: bugzilla-daemon@freedesktop.org
+To: nouveau@lists.freedesktop.org
+Date: Thu, 24 Oct 2019 20:34:18 +0000
+X-Bugzilla-Reason: AssignedTo
+X-Bugzilla-Type: new
+X-Bugzilla-Watch-Reason: None
+X-Bugzilla-Product: xorg
+X-Bugzilla-Component: Driver/nouveau
+X-Bugzilla-Version: unspecified
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: critical
+X-Bugzilla-Who: sandy97@buziaczek.pl
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: not set
+X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: bug_id short_desc product version rep_platform
+ op_sys bug_status bug_severity priority component assigned_to reporter
+ qa_contact attachments.created
+Message-ID: <bug-112123-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-References: <20191021145017.17384-1-daniel.vetter@ffwll.ch>
- <20191021145017.17384-3-daniel.vetter@ffwll.ch>
-In-Reply-To: <20191021145017.17384-3-daniel.vetter@ffwll.ch>
-From: Daniel Vetter <daniel.vetter@ffwll.ch>
-Date: Thu, 24 Oct 2019 11:04:15 +0200
-Message-ID: <CAKMK7uH=ULdw6_1y5XsUt=9YhBy96BPyuELc97kWwF+tVCqY2A@mail.gmail.com>
-To: DRI Development <dri-devel@lists.freedesktop.org>, 
- "airlied@gmail.com" <airlied@gmail.com>
-X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ffwll.ch; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc;
- bh=LI6A5/WkSbkCLEF6Gi3QmlKrlWf74OE55pWrbF8qr9c=;
- b=NxogbiI/XEhXGXhDD7iMdfdstE6KmgLlgp0qNqx3simzDdQOxPxKTZqAfnbS0gnjZ3
- A61HJ6g6uti0/nk3pLAF21dgkgAEoEh+I2yDC7C412COmvZGH1atf9gSt6+Iw1pGf31D
- 90Jjj9KbjeZlH9MeivctQDX84ylzjnm0NriM8=
-Subject: Re: [Nouveau] [PATCH 2/3] drm/nouveau: slowpath for pushbuf ioctl
+Subject: [Nouveau] [Bug 112123] New: Laptop freezes after suspend [write
+ fault]
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -60,139 +52,280 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Nouveau Dev <nouveau@lists.freedesktop.org>,
- Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel.vetter@intel.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============0762643960=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-T24gTW9uLCBPY3QgMjEsIDIwMTkgYXQgNDo1MCBQTSBEYW5pZWwgVmV0dGVyIDxkYW5pZWwudmV0
-dGVyQGZmd2xsLmNoPiB3cm90ZToKPgo+IFdlIGNhbid0IGNvcHlfKl91c2VyIHdoaWxlIGhvbGRp
-bmcgcmVzZXJ2YXRpb25zLCB0aGF0IHdpbGwgKHNvb24gZXZlbgo+IGZvciBub3V2ZWF1KSBsZWFk
-IHRvIGRlYWRsb2Nrcy4gQW5kIGl0IGJyZWFrcyB0aGUgY3Jvc3MtZHJpdmVyCj4gY29udHJhY3Qg
-YXJvdW5kIGRtYV9yZXN2Lgo+Cj4gRml4IHRoaXMgYnkgYWRkaW5nIGEgc2xvd3BhdGggZm9yIHdo
-ZW4gd2UgbmVlZCByZWxvY2F0aW9ucywgYW5kIGJ5Cj4gcHVzaGluZyB0aGUgd3JpdGViYWNrIG9m
-IHRoZSBuZXcgcHJlc3VtZWQgb2Zmc2V0cyB0byB0aGUgdmVyeSBlbmQuCj4KPiBBc2lkZSBmcm9t
-ICJpdCBjb21waWxlcyIgZW50aXJlbHkgdW50ZXN0ZWQgdW5mb3J0dW5hdGVseS4KPgo+IFNpZ25l
-ZC1vZmYtYnk6IERhbmllbCBWZXR0ZXIgPGRhbmllbC52ZXR0ZXJAaW50ZWwuY29tPgo+IENjOiBJ
-bGlhIE1pcmtpbiA8aW1pcmtpbkBhbHVtLm1pdC5lZHU+Cj4gQ2M6IE1hYXJ0ZW4gTGFua2hvcnN0
-IDxtYWFydGVuLmxhbmtob3JzdEBsaW51eC5pbnRlbC5jb20+Cj4gQ2M6IEJlbiBTa2VnZ3MgPGJz
-a2VnZ3NAcmVkaGF0LmNvbT4KPiBDYzogbm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKClBp
-bmcgZm9yIHJldmlldy90ZXN0aW5nL2FjaywgSSdkIHJlYWxseSBsaWtlIHRvIGdldCB0aGlzIGlu
-LgotRGFuaWVsCgo+IC0tLQo+ICBkcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2dlbS5j
-IHwgNTcgKysrKysrKysrKysrKysrKysrLS0tLS0tLS0tCj4gIDEgZmlsZSBjaGFuZ2VkLCAzOCBp
-bnNlcnRpb25zKCspLCAxOSBkZWxldGlvbnMoLSkKPgo+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2dw
-dS9kcm0vbm91dmVhdS9ub3V2ZWF1X2dlbS5jIGIvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91
-dmVhdV9nZW0uYwo+IGluZGV4IDEzMjRjMTlmNGU1Yy4uMDVlYzhlZGQ2YThiIDEwMDY0NAo+IC0t
-LSBhL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfZ2VtLmMKPiArKysgYi9kcml2ZXJz
-L2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2dlbS5jCj4gQEAgLTQ4NCwxMiArNDg0LDkgQEAgdmFs
-aWRhdGVfaW5pdChzdHJ1Y3Qgbm91dmVhdV9jaGFubmVsICpjaGFuLCBzdHJ1Y3QgZHJtX2ZpbGUg
-KmZpbGVfcHJpdiwKPgo+ICBzdGF0aWMgaW50Cj4gIHZhbGlkYXRlX2xpc3Qoc3RydWN0IG5vdXZl
-YXVfY2hhbm5lbCAqY2hhbiwgc3RydWN0IG5vdXZlYXVfY2xpICpjbGksCj4gLSAgICAgICAgICAg
-ICBzdHJ1Y3QgbGlzdF9oZWFkICpsaXN0LCBzdHJ1Y3QgZHJtX25vdXZlYXVfZ2VtX3B1c2hidWZf
-Ym8gKnBiYm8sCj4gLSAgICAgICAgICAgICB1aW50NjRfdCB1c2VyX3BiYm9fcHRyKQo+ICsgICAg
-ICAgICAgICAgc3RydWN0IGxpc3RfaGVhZCAqbGlzdCwgc3RydWN0IGRybV9ub3V2ZWF1X2dlbV9w
-dXNoYnVmX2JvICpwYmJvKQo+ICB7Cj4gICAgICAgICBzdHJ1Y3Qgbm91dmVhdV9kcm0gKmRybSA9
-IGNoYW4tPmRybTsKPiAtICAgICAgIHN0cnVjdCBkcm1fbm91dmVhdV9nZW1fcHVzaGJ1Zl9ibyBf
-X3VzZXIgKnVwYmJvID0KPiAtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICh2b2lkIF9f
-Zm9yY2UgX191c2VyICopKHVpbnRwdHJfdCl1c2VyX3BiYm9fcHRyOwo+ICAgICAgICAgc3RydWN0
-IG5vdXZlYXVfYm8gKm52Ym87Cj4gICAgICAgICBpbnQgcmV0LCByZWxvY3MgPSAwOwo+Cj4gQEAg
-LTUzMywxMCArNTMwLDYgQEAgdmFsaWRhdGVfbGlzdChzdHJ1Y3Qgbm91dmVhdV9jaGFubmVsICpj
-aGFuLCBzdHJ1Y3Qgbm91dmVhdV9jbGkgKmNsaSwKPiAgICAgICAgICAgICAgICAgICAgICAgICBi
-LT5wcmVzdW1lZC5vZmZzZXQgPSBudmJvLT5iby5vZmZzZXQ7Cj4gICAgICAgICAgICAgICAgICAg
-ICAgICAgYi0+cHJlc3VtZWQudmFsaWQgPSAwOwo+ICAgICAgICAgICAgICAgICAgICAgICAgIHJl
-bG9jcysrOwo+IC0KPiAtICAgICAgICAgICAgICAgICAgICAgICBpZiAoY29weV90b191c2VyKCZ1
-cGJib1tudmJvLT5wYmJvX2luZGV4XS5wcmVzdW1lZCwKPiAtICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAmYi0+cHJlc3VtZWQsIHNpemVvZihiLT5wcmVzdW1lZCkp
-KQo+IC0gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcmV0dXJuIC1FRkFVTFQ7Cj4gICAg
-ICAgICAgICAgICAgIH0KPiAgICAgICAgIH0KPgo+IEBAIC01NDcsOCArNTQwLDggQEAgc3RhdGlj
-IGludAo+ICBub3V2ZWF1X2dlbV9wdXNoYnVmX3ZhbGlkYXRlKHN0cnVjdCBub3V2ZWF1X2NoYW5u
-ZWwgKmNoYW4sCj4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICBzdHJ1Y3QgZHJtX2ZpbGUg
-KmZpbGVfcHJpdiwKPiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHN0cnVjdCBkcm1fbm91
-dmVhdV9nZW1fcHVzaGJ1Zl9ibyAqcGJibywKPiAtICAgICAgICAgICAgICAgICAgICAgICAgICAg
-IHVpbnQ2NF90IHVzZXJfYnVmZmVycywgaW50IG5yX2J1ZmZlcnMsCj4gLSAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICBzdHJ1Y3QgdmFsaWRhdGVfb3AgKm9wLCBpbnQgKmFwcGx5X3JlbG9jcykK
-PiArICAgICAgICAgICAgICAgICAgICAgICAgICAgIGludCBucl9idWZmZXJzLAo+ICsgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgc3RydWN0IHZhbGlkYXRlX29wICpvcCwgYm9vbCAqYXBwbHlf
-cmVsb2NzKQo+ICB7Cj4gICAgICAgICBzdHJ1Y3Qgbm91dmVhdV9jbGkgKmNsaSA9IG5vdXZlYXVf
-Y2xpKGZpbGVfcHJpdik7Cj4gICAgICAgICBpbnQgcmV0Owo+IEBAIC01NjUsNyArNTU4LDcgQEAg
-bm91dmVhdV9nZW1fcHVzaGJ1Zl92YWxpZGF0ZShzdHJ1Y3Qgbm91dmVhdV9jaGFubmVsICpjaGFu
-LAo+ICAgICAgICAgICAgICAgICByZXR1cm4gcmV0Owo+ICAgICAgICAgfQo+Cj4gLSAgICAgICBy
-ZXQgPSB2YWxpZGF0ZV9saXN0KGNoYW4sIGNsaSwgJm9wLT5saXN0LCBwYmJvLCB1c2VyX2J1ZmZl
-cnMpOwo+ICsgICAgICAgcmV0ID0gdmFsaWRhdGVfbGlzdChjaGFuLCBjbGksICZvcC0+bGlzdCwg
-cGJibyk7Cj4gICAgICAgICBpZiAodW5saWtlbHkocmV0IDwgMCkpIHsKPiAgICAgICAgICAgICAg
-ICAgaWYgKHJldCAhPSAtRVJFU1RBUlRTWVMpCj4gICAgICAgICAgICAgICAgICAgICAgICAgTlZf
-UFJJTlRLKGVyciwgY2xpLCAidmFsaWRhdGluZyBibyBsaXN0XG4iKTsKPiBAQCAtNjA1LDE2ICs1
-OTgsMTIgQEAgdV9tZW1jcHlhKHVpbnQ2NF90IHVzZXIsIHVuc2lnbmVkIG5tZW1iLCB1bnNpZ25l
-ZCBzaXplKQo+ICBzdGF0aWMgaW50Cj4gIG5vdXZlYXVfZ2VtX3B1c2hidWZfcmVsb2NfYXBwbHko
-c3RydWN0IG5vdXZlYXVfY2xpICpjbGksCj4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICBzdHJ1Y3QgZHJtX25vdXZlYXVfZ2VtX3B1c2hidWYgKnJlcSwKPiArICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgIHN0cnVjdCBkcm1fbm91dmVhdV9nZW1fcHVzaGJ1Zl9yZWxvYyAqcmVs
-b2MsCj4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBzdHJ1Y3QgZHJtX25vdXZlYXVf
-Z2VtX3B1c2hidWZfYm8gKmJvKQo+ICB7Cj4gLSAgICAgICBzdHJ1Y3QgZHJtX25vdXZlYXVfZ2Vt
-X3B1c2hidWZfcmVsb2MgKnJlbG9jID0gTlVMTDsKPiAgICAgICAgIGludCByZXQgPSAwOwo+ICAg
-ICAgICAgdW5zaWduZWQgaTsKPgo+IC0gICAgICAgcmVsb2MgPSB1X21lbWNweWEocmVxLT5yZWxv
-Y3MsIHJlcS0+bnJfcmVsb2NzLCBzaXplb2YoKnJlbG9jKSk7Cj4gLSAgICAgICBpZiAoSVNfRVJS
-KHJlbG9jKSkKPiAtICAgICAgICAgICAgICAgcmV0dXJuIFBUUl9FUlIocmVsb2MpOwo+IC0KPiAg
-ICAgICAgIGZvciAoaSA9IDA7IGkgPCByZXEtPm5yX3JlbG9jczsgaSsrKSB7Cj4gICAgICAgICAg
-ICAgICAgIHN0cnVjdCBkcm1fbm91dmVhdV9nZW1fcHVzaGJ1Zl9yZWxvYyAqciA9ICZyZWxvY1tp
-XTsKPiAgICAgICAgICAgICAgICAgc3RydWN0IGRybV9ub3V2ZWF1X2dlbV9wdXNoYnVmX2JvICpi
-Owo+IEBAIC02OTMsMTEgKzY4MiwxMyBAQCBub3V2ZWF1X2dlbV9pb2N0bF9wdXNoYnVmKHN0cnVj
-dCBkcm1fZGV2aWNlICpkZXYsIHZvaWQgKmRhdGEsCj4gICAgICAgICBzdHJ1Y3Qgbm91dmVhdV9k
-cm0gKmRybSA9IG5vdXZlYXVfZHJtKGRldik7Cj4gICAgICAgICBzdHJ1Y3QgZHJtX25vdXZlYXVf
-Z2VtX3B1c2hidWYgKnJlcSA9IGRhdGE7Cj4gICAgICAgICBzdHJ1Y3QgZHJtX25vdXZlYXVfZ2Vt
-X3B1c2hidWZfcHVzaCAqcHVzaDsKPiArICAgICAgIHN0cnVjdCBkcm1fbm91dmVhdV9nZW1fcHVz
-aGJ1Zl9yZWxvYyAqcmVsb2MgPSBOVUxMOwo+ICAgICAgICAgc3RydWN0IGRybV9ub3V2ZWF1X2dl
-bV9wdXNoYnVmX2JvICpibzsKPiAgICAgICAgIHN0cnVjdCBub3V2ZWF1X2NoYW5uZWwgKmNoYW4g
-PSBOVUxMOwo+ICAgICAgICAgc3RydWN0IHZhbGlkYXRlX29wIG9wOwo+ICAgICAgICAgc3RydWN0
-IG5vdXZlYXVfZmVuY2UgKmZlbmNlID0gTlVMTDsKPiAtICAgICAgIGludCBpLCBqLCByZXQgPSAw
-LCBkb19yZWxvYyA9IDA7Cj4gKyAgICAgICBpbnQgaSwgaiwgcmV0ID0gMDsKPiArICAgICAgIGJv
-b2wgZG9fcmVsb2MgPSBmYWxzZTsKPgo+ICAgICAgICAgaWYgKHVubGlrZWx5KCFhYmkxNikpCj4g
-ICAgICAgICAgICAgICAgIHJldHVybiAtRU5PTUVNOwo+IEBAIC03NTUsNyArNzQ2LDggQEAgbm91
-dmVhdV9nZW1faW9jdGxfcHVzaGJ1ZihzdHJ1Y3QgZHJtX2RldmljZSAqZGV2LCB2b2lkICpkYXRh
-LAo+ICAgICAgICAgfQo+Cj4gICAgICAgICAvKiBWYWxpZGF0ZSBidWZmZXIgbGlzdCAqLwo+IC0g
-ICAgICAgcmV0ID0gbm91dmVhdV9nZW1fcHVzaGJ1Zl92YWxpZGF0ZShjaGFuLCBmaWxlX3ByaXYs
-IGJvLCByZXEtPmJ1ZmZlcnMsCj4gK3JldmFsaWRhdGU6Cj4gKyAgICAgICByZXQgPSBub3V2ZWF1
-X2dlbV9wdXNoYnVmX3ZhbGlkYXRlKGNoYW4sIGZpbGVfcHJpdiwgYm8sCj4gICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHJlcS0+bnJfYnVmZmVycywgJm9wLCAmZG9f
-cmVsb2MpOwo+ICAgICAgICAgaWYgKHJldCkgewo+ICAgICAgICAgICAgICAgICBpZiAocmV0ICE9
-IC1FUkVTVEFSVFNZUykKPiBAQCAtNzY1LDcgKzc1NywxOCBAQCBub3V2ZWF1X2dlbV9pb2N0bF9w
-dXNoYnVmKHN0cnVjdCBkcm1fZGV2aWNlICpkZXYsIHZvaWQgKmRhdGEsCj4KPiAgICAgICAgIC8q
-IEFwcGx5IGFueSByZWxvY2F0aW9ucyB0aGF0IGFyZSByZXF1aXJlZCAqLwo+ICAgICAgICAgaWYg
-KGRvX3JlbG9jKSB7Cj4gLSAgICAgICAgICAgICAgIHJldCA9IG5vdXZlYXVfZ2VtX3B1c2hidWZf
-cmVsb2NfYXBwbHkoY2xpLCByZXEsIGJvKTsKPiArICAgICAgICAgICAgICAgaWYgKCFyZWxvYykg
-ewo+ICsgICAgICAgICAgICAgICAgICAgICAgIHZhbGlkYXRlX2ZpbmkoJm9wLCBjaGFuLCBOVUxM
-LCBibyk7Cj4gKyAgICAgICAgICAgICAgICAgICAgICAgcmVsb2MgPSB1X21lbWNweWEocmVxLT5y
-ZWxvY3MsIHJlcS0+bnJfcmVsb2NzLCBzaXplb2YoKnJlbG9jKSk7Cj4gKyAgICAgICAgICAgICAg
-ICAgICAgICAgaWYgKElTX0VSUihyZWxvYykpIHsKPiArICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgIHJldCA9IFBUUl9FUlIocmVsb2MpOwo+ICsgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgZ290byBvdXRfcHJldmFsaWQ7Cj4gKyAgICAgICAgICAgICAgICAgICAgICAgfQo+ICsK
-PiArICAgICAgICAgICAgICAgICAgICAgICBnb3RvIHJldmFsaWRhdGU7Cj4gKyAgICAgICAgICAg
-ICAgIH0KPiArCj4gKyAgICAgICAgICAgICAgIHJldCA9IG5vdXZlYXVfZ2VtX3B1c2hidWZfcmVs
-b2NfYXBwbHkoY2xpLCByZXEsIHJlbG9jLCBibyk7Cj4gICAgICAgICAgICAgICAgIGlmIChyZXQp
-IHsKPiAgICAgICAgICAgICAgICAgICAgICAgICBOVl9QUklOVEsoZXJyLCBjbGksICJyZWxvYyBh
-cHBseTogJWRcbiIsIHJldCk7Cj4gICAgICAgICAgICAgICAgICAgICAgICAgZ290byBvdXQ7Cj4g
-QEAgLTg1MSw2ICs4NTQsMjIgQEAgbm91dmVhdV9nZW1faW9jdGxfcHVzaGJ1ZihzdHJ1Y3QgZHJt
-X2RldmljZSAqZGV2LCB2b2lkICpkYXRhLAo+ICAgICAgICAgdmFsaWRhdGVfZmluaSgmb3AsIGNo
-YW4sIGZlbmNlLCBibyk7Cj4gICAgICAgICBub3V2ZWF1X2ZlbmNlX3VucmVmKCZmZW5jZSk7Cj4K
-PiArICAgICAgIGlmIChkb19yZWxvYykgewo+ICsgICAgICAgICAgICAgICBzdHJ1Y3QgZHJtX25v
-dXZlYXVfZ2VtX3B1c2hidWZfYm8gX191c2VyICp1cGJibyA9Cj4gKyAgICAgICAgICAgICAgICAg
-ICAgICAgdTY0X3RvX3VzZXJfcHRyKHJlcS0+YnVmZmVycyk7Cj4gKwo+ICsgICAgICAgICAgICAg
-ICBmb3IgKGkgPSAwOyBpIDwgcmVxLT5ucl9idWZmZXJzOyBpKyspIHsKPiArICAgICAgICAgICAg
-ICAgICAgICAgICBpZiAoYm9baV0ucHJlc3VtZWQudmFsaWQpCj4gKyAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICBjb250aW51ZTsKPiArCj4gKyAgICAgICAgICAgICAgICAgICAgICAgaWYg
-KGNvcHlfdG9fdXNlcigmdXBiYm9baV0ucHJlc3VtZWQsICZib1tpXS5wcmVzdW1lZCwKPiArICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHNpemVvZihib1tpXS5wcmVzdW1l
-ZCkpKSB7Cj4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICByZXQgPSAtRUZBVUxUOwo+
-ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYnJlYWs7Cj4gKyAgICAgICAgICAgICAg
-ICAgICAgICAgfQo+ICsgICAgICAgICAgICAgICB9Cj4gKyAgICAgICAgICAgICAgIHVfZnJlZShy
-ZWxvYyk7Cj4gKyAgICAgICB9Cj4gIG91dF9wcmV2YWxpZDoKPiAgICAgICAgIHVfZnJlZShibyk7
-Cj4gICAgICAgICB1X2ZyZWUocHVzaCk7Cj4gLS0KPiAyLjIzLjAKPgoKCi0tIApEYW5pZWwgVmV0
-dGVyClNvZnR3YXJlIEVuZ2luZWVyLCBJbnRlbCBDb3Jwb3JhdGlvbgorNDEgKDApIDc5IDM2NSA1
-NyA0OCAtIGh0dHA6Ly9ibG9nLmZmd2xsLmNoCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fCk5vdXZlYXUgbWFpbGluZyBsaXN0Ck5vdXZlYXVAbGlzdHMuZnJl
-ZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGlu
-Zm8vbm91dmVhdQ==
+
+--===============0762643960==
+Content-Type: multipart/alternative; boundary="15719492580.BF0C30.28029"
+Content-Transfer-Encoding: 7bit
+
+
+--15719492580.BF0C30.28029
+Date: Thu, 24 Oct 2019 20:34:18 +0000
+MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+https://bugs.freedesktop.org/show_bug.cgi?id=3D112123
+
+            Bug ID: 112123
+           Summary: Laptop freezes after suspend [write fault]
+           Product: xorg
+           Version: unspecified
+          Hardware: x86-64 (AMD64)
+                OS: Linux (All)
+            Status: NEW
+          Severity: critical
+          Priority: not set
+         Component: Driver/nouveau
+          Assignee: nouveau@lists.freedesktop.org
+          Reporter: sandy97@buziaczek.pl
+        QA Contact: xorg-team@lists.x.org
+
+Created attachment 145812
+  --> https://bugs.freedesktop.org/attachment.cgi?id=3D145812&action=3Dedit
+A part of journalctl, describing process of crash
+
+Description:
+When I suspend (close) my laptop and then try to wake it up, it freezes;
+everything is displayed, however, inputs stop reacting and everything on sc=
+reen
+stops moving too. It happens only with GUIs - when I suspend it while in
+terminal, it works fine (when I go back to GUI it switches and then freezes,
+sadly).
+According to journal, this is because of Nouveau having trouble with memory
+read:
+
+pa=C5=BA 24 13:43:31 Langley kernel: [drm] Initialized nouveau 1.3.1 201208=
+01 for
+0000:01:00.0 on minor 0
+pa=C5=BA 24 21:42:32 Langley kernel: nouveau 0000:01:00.0: fifo: write faul=
+t at
+0000048000 engine 07 [PFIFO] client 07 [BAR_READ] reason 02 [PAGE_NOT_PRESE=
+NT]
+on channel 2 [003fc13000 Xorg[538]]
+pa=C5=BA 24 21:42:32 Langley kernel: nouveau 0000:01:00.0: fifo: fifo engin=
+e fault
+on channel 2, recovering...
+(don't mind Polish month)
+
+Usually, keyboard works just for a few seconds (Caps/Num Lock LEDs react),
+touchpad doesn't. I don't think the whole system crashes, I believe it's st=
+ill
+working but is blocked by unresponsive driver.
+
+I believe that if I wait 10 minutes or so, it actually may start working ag=
+ain;
+however, reboot is faster in this case.
+
+If I just let my laptop be, so it suspends while open, it wakes up perfectl=
+y.
+
+Specs:
+Distribution: Arch
+Kernel: 5.3.7-arch1-1-ARCH (tested mainline 5.4.0-rc4, bug still occurs; al=
+so
+occurs on other, older kernels; didn't test other distros)
+Laptop: Sony Vaio, model VPCEH2D1E C1065BHW=20
+GPU: GeForce 410M
+
+Steps to reproduce:
+1. Close the laptop so it goes to sleep
+2. Open it and press something
+Since I couldn't find anyone else with this same error, I suppose you need
+similar/same model, graphic card or configuration (Sony Vaio with 410M etc).
+
+I am attaching a part of journalctl (starts at lid closing).
+
+Also, I was instructed to report the bug here at the Arch bug list, where I
+first described the bug.
+
+--=20
+You are receiving this mail because:
+You are the assignee for the bug.=
+
+--15719492580.BF0C30.28029
+Date: Thu, 24 Oct 2019 20:34:18 +0000
+MIME-Version: 1.0
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+<html>
+    <head>
+      <base href=3D"https://bugs.freedesktop.org/">
+    </head>
+    <body><table border=3D"1" cellspacing=3D"0" cellpadding=3D"8">
+        <tr>
+          <th>Bug ID</th>
+          <td><a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - Laptop freezes after suspend [write fault]"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D112123">112123</a>
+          </td>
+        </tr>
+
+        <tr>
+          <th>Summary</th>
+          <td>Laptop freezes after suspend [write fault]
+          </td>
+        </tr>
+
+        <tr>
+          <th>Product</th>
+          <td>xorg
+          </td>
+        </tr>
+
+        <tr>
+          <th>Version</th>
+          <td>unspecified
+          </td>
+        </tr>
+
+        <tr>
+          <th>Hardware</th>
+          <td>x86-64 (AMD64)
+          </td>
+        </tr>
+
+        <tr>
+          <th>OS</th>
+          <td>Linux (All)
+          </td>
+        </tr>
+
+        <tr>
+          <th>Status</th>
+          <td>NEW
+          </td>
+        </tr>
+
+        <tr>
+          <th>Severity</th>
+          <td>critical
+          </td>
+        </tr>
+
+        <tr>
+          <th>Priority</th>
+          <td>not set
+          </td>
+        </tr>
+
+        <tr>
+          <th>Component</th>
+          <td>Driver/nouveau
+          </td>
+        </tr>
+
+        <tr>
+          <th>Assignee</th>
+          <td>nouveau&#64;lists.freedesktop.org
+          </td>
+        </tr>
+
+        <tr>
+          <th>Reporter</th>
+          <td>sandy97&#64;buziaczek.pl
+          </td>
+        </tr>
+
+        <tr>
+          <th>QA Contact</th>
+          <td>xorg-team&#64;lists.x.org
+          </td>
+        </tr></table>
+      <p>
+        <div>
+        <pre>Created <span class=3D""><a href=3D"attachment.cgi?id=3D145812=
+" name=3D"attach_145812" title=3D"A part of journalctl, describing process =
+of crash">attachment 145812</a> <a href=3D"attachment.cgi?id=3D145812&amp;a=
+ction=3Dedit" title=3D"A part of journalctl, describing process of crash">[=
+details]</a></span>
+A part of journalctl, describing process of crash
+
+Description:
+When I suspend (close) my laptop and then try to wake it up, it freezes;
+everything is displayed, however, inputs stop reacting and everything on sc=
+reen
+stops moving too. It happens only with GUIs - when I suspend it while in
+terminal, it works fine (when I go back to GUI it switches and then freezes,
+sadly).
+According to journal, this is because of Nouveau having trouble with memory
+read:
+
+pa=C5=BA 24 13:43:31 Langley kernel: [drm] Initialized nouveau 1.3.1 201208=
+01 for
+0000:01:00.0 on minor 0
+pa=C5=BA 24 21:42:32 Langley kernel: nouveau 0000:01:00.0: fifo: write faul=
+t at
+0000048000 engine 07 [PFIFO] client 07 [BAR_READ] reason 02 [PAGE_NOT_PRESE=
+NT]
+on channel 2 [003fc13000 Xorg[538]]
+pa=C5=BA 24 21:42:32 Langley kernel: nouveau 0000:01:00.0: fifo: fifo engin=
+e fault
+on channel 2, recovering...
+(don't mind Polish month)
+
+Usually, keyboard works just for a few seconds (Caps/Num Lock LEDs react),
+touchpad doesn't. I don't think the whole system crashes, I believe it's st=
+ill
+working but is blocked by unresponsive driver.
+
+I believe that if I wait 10 minutes or so, it actually may start working ag=
+ain;
+however, reboot is faster in this case.
+
+If I just let my laptop be, so it suspends while open, it wakes up perfectl=
+y.
+
+Specs:
+Distribution: Arch
+Kernel: 5.3.7-arch1-1-ARCH (tested mainline 5.4.0-rc4, bug still occurs; al=
+so
+occurs on other, older kernels; didn't test other distros)
+Laptop: Sony Vaio, model VPCEH2D1E C1065BHW=20
+GPU: GeForce 410M
+
+Steps to reproduce:
+1. Close the laptop so it goes to sleep
+2. Open it and press something
+Since I couldn't find anyone else with this same error, I suppose you need
+similar/same model, graphic card or configuration (Sony Vaio with 410M etc).
+
+I am attaching a part of journalctl (starts at lid closing).
+
+Also, I was instructed to report the bug here at the Arch bug list, where I
+first described the bug.</pre>
+        </div>
+      </p>
+
+
+      <hr>
+      <span>You are receiving this mail because:</span>
+
+      <ul>
+          <li>You are the assignee for the bug.</li>
+      </ul>
+    </body>
+</html>=
+
+--15719492580.BF0C30.28029--
+
+--===============0762643960==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
+YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
+cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============0762643960==--
