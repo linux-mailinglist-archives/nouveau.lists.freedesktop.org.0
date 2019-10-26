@@ -1,23 +1,23 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id CBFBFE5D95
-	for <lists+nouveau@lfdr.de>; Sat, 26 Oct 2019 16:06:31 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id DDEC2E5D98
+	for <lists+nouveau@lfdr.de>; Sat, 26 Oct 2019 16:12:21 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E6C5A6E0B7;
-	Sat, 26 Oct 2019 14:06:29 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 930B86EC2A;
+	Sat, 26 Oct 2019 14:12:19 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
  [131.252.210.165])
- by gabe.freedesktop.org (Postfix) with ESMTP id 8E7B16E0B7
- for <nouveau@lists.freedesktop.org>; Sat, 26 Oct 2019 14:06:28 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTP id 4907C6E0EA
+ for <nouveau@lists.freedesktop.org>; Sat, 26 Oct 2019 14:12:18 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 84BBD720E2; Sat, 26 Oct 2019 14:06:28 +0000 (UTC)
+ id 43FCB720E2; Sat, 26 Oct 2019 14:12:18 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Sat, 26 Oct 2019 14:06:28 +0000
+Date: Sat, 26 Oct 2019 14:12:18 +0000
 X-Bugzilla-Reason: AssignedTo
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
@@ -32,8 +32,8 @@ X-Bugzilla-Resolution:
 X-Bugzilla-Priority: not set
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-112070-8800-tWLg5A7xTp@http.bugs.freedesktop.org/>
+X-Bugzilla-Changed-Fields: attachments.created
+Message-ID: <bug-112070-8800-J4XZgbpLRY@http.bugs.freedesktop.org/>
 In-Reply-To: <bug-112070-8800@http.bugs.freedesktop.org/>
 References: <bug-112070-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
@@ -52,18 +52,18 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0966772922=="
+Content-Type: multipart/mixed; boundary="===============0360979065=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============0966772922==
-Content-Type: multipart/alternative; boundary="15720987880.4eD0bb6.10690"
+--===============0360979065==
+Content-Type: multipart/alternative; boundary="15720991382.6d83D.12241"
 Content-Transfer-Encoding: 7bit
 
 
---15720987880.4eD0bb6.10690
-Date: Sat, 26 Oct 2019 14:06:28 +0000
+--15720991382.6d83D.12241
+Date: Sat, 26 Oct 2019 14:12:18 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -72,32 +72,17 @@ Auto-Submitted: auto-generated
 
 https://bugs.freedesktop.org/show_bug.cgi?id=3D112070
 
---- Comment #24 from Doobz <dooby.dave@virgin.net> ---
-Turns out opensuse tumbleweed has mesa 19.1.7 and a packaged glmark2
-
-Framerate much slower than on previous kernel/mesa. Only getting ~130 vs >2=
-00
-previously.
-
-Identical graphical glitch on laptop and desktop with Suse Welcome window.
-
-The only shared dmesg oddities are
-[    0.202564] acpi PNP0A08:00: _OSC failed (AE_NOT_FOUND); disabling ASPM
-
-[            ] acpi PNP0A08:00: _OSC failed (AE_SUPPORT); disabling ASPM
-
-..and the hpet warnings on both of them
-
-[ 1670.140263] CE: hpet increased min_delta_ns to 30172 nsec
-
-I will attach both suse dmesg logs.
+--- Comment #25 from Doobz <dooby.dave@virgin.net> ---
+Created attachment 145823
+  --> https://bugs.freedesktop.org/attachment.cgi?id=3D145823&action=3Dedit
+dmesg from Acer5685 GeForce 7600GO, opensuse Mesa 19.1.7
 
 --=20
 You are receiving this mail because:
 You are the assignee for the bug.=
 
---15720987880.4eD0bb6.10690
-Date: Sat, 26 Oct 2019 14:06:28 +0000
+--15720991382.6d83D.12241
+Date: Sat, 26 Oct 2019 14:12:18 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -115,8 +100,8 @@ Auto-Submitted: auto-generated
           bz_status_NEW "
    title=3D"NEW - H/W Acceleration sufficiently buggy on Debian to hard loc=
 k machine GeForce 7600 GO"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D112070#c24">Comme=
-nt # 24</a>
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D112070#c25">Comme=
+nt # 25</a>
               on <a class=3D"bz_bug_link=20
           bz_status_NEW "
    title=3D"NEW - H/W Acceleration sufficiently buggy on Debian to hard loc=
@@ -127,25 +112,12 @@ k machine GeForce 7600 GO"
 dooby.dave&#64;virgin.net" title=3D"Doobz &lt;dooby.dave&#64;virgin.net&gt;=
 "> <span class=3D"fn">Doobz</span></a>
 </span></b>
-        <pre>Turns out opensuse tumbleweed has mesa 19.1.7 and a packaged g=
-lmark2
-
-Framerate much slower than on previous kernel/mesa. Only getting ~130 vs &g=
-t;200
-previously.
-
-Identical graphical glitch on laptop and desktop with Suse Welcome window.
-
-The only shared dmesg oddities are
-[    0.202564] acpi PNP0A08:00: _OSC failed (AE_NOT_FOUND); disabling ASPM
-
-[            ] acpi PNP0A08:00: _OSC failed (AE_SUPPORT); disabling ASPM
-
-..and the hpet warnings on both of them
-
-[ 1670.140263] CE: hpet increased min_delta_ns to 30172 nsec
-
-I will attach both suse dmesg logs.</pre>
+        <pre>Created <span class=3D""><a href=3D"attachment.cgi?id=3D145823=
+" name=3D"attach_145823" title=3D"dmesg from Acer5685 GeForce 7600GO, opens=
+use Mesa 19.1.7">attachment 145823</a> <a href=3D"attachment.cgi?id=3D14582=
+3&amp;action=3Dedit" title=3D"dmesg from Acer5685 GeForce 7600GO, opensuse =
+Mesa 19.1.7">[details]</a></span>
+dmesg from Acer5685 GeForce 7600GO, opensuse Mesa 19.1.7</pre>
         </div>
       </p>
 
@@ -159,9 +131,9 @@ I will attach both suse dmesg logs.</pre>
     </body>
 </html>=
 
---15720987880.4eD0bb6.10690--
+--15720991382.6d83D.12241--
 
---===============0966772922==
+--===============0360979065==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -171,4 +143,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============0966772922==--
+--===============0360979065==--
