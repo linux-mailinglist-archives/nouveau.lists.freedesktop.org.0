@@ -1,23 +1,23 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2B74EE6275
-	for <lists+nouveau@lfdr.de>; Sun, 27 Oct 2019 13:37:12 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id AE6ECE62A6
+	for <lists+nouveau@lfdr.de>; Sun, 27 Oct 2019 14:27:13 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id EF7A86E220;
-	Sun, 27 Oct 2019 12:37:09 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 16F1D6E243;
+	Sun, 27 Oct 2019 13:27:12 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
  [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
- by gabe.freedesktop.org (Postfix) with ESMTP id D5DD36E220
- for <nouveau@lists.freedesktop.org>; Sun, 27 Oct 2019 12:37:07 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTP id E66636E243
+ for <nouveau@lists.freedesktop.org>; Sun, 27 Oct 2019 13:27:10 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id D2956720E2; Sun, 27 Oct 2019 12:37:07 +0000 (UTC)
+ id E2EA4720E2; Sun, 27 Oct 2019 13:27:10 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Sun, 27 Oct 2019 12:37:08 +0000
+Date: Sun, 27 Oct 2019 13:27:11 +0000
 X-Bugzilla-Reason: AssignedTo
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
@@ -33,7 +33,7 @@ X-Bugzilla-Priority: not set
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
 X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-112070-8800-bEiKL5Y57z@http.bugs.freedesktop.org/>
+Message-ID: <bug-112070-8800-9exu7aN2Cb@http.bugs.freedesktop.org/>
 In-Reply-To: <bug-112070-8800@http.bugs.freedesktop.org/>
 References: <bug-112070-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
@@ -52,18 +52,18 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1435442611=="
+Content-Type: multipart/mixed; boundary="===============0260522373=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============1435442611==
-Content-Type: multipart/alternative; boundary="15721798271.3CcC.7096"
+--===============0260522373==
+Content-Type: multipart/alternative; boundary="15721828301.F966F5.18099"
 Content-Transfer-Encoding: 7bit
 
 
---15721798271.3CcC.7096
-Date: Sun, 27 Oct 2019 12:37:07 +0000
+--15721828301.F966F5.18099
+Date: Sun, 27 Oct 2019 13:27:10 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -72,18 +72,16 @@ Auto-Submitted: auto-generated
 
 https://bugs.freedesktop.org/show_bug.cgi?id=3D112070
 
---- Comment #30 from Doobz <dooby.dave@virgin.net> ---
-Sorry to spam, but I did notice partially visible text in the garbled stuff=
- FF
-was displaying instead of video. Like there is some memory overlap/confusion
-somewhere.
+--- Comment #31 from Doobz <dooby.dave@virgin.net> ---
+Some good news - irq 0 timer interrupts fixed by booting with processor.noc=
+st=3D1
 
 --=20
 You are receiving this mail because:
 You are the assignee for the bug.=
 
---15721798271.3CcC.7096
-Date: Sun, 27 Oct 2019 12:37:07 +0000
+--15721828301.F966F5.18099
+Date: Sun, 27 Oct 2019 13:27:10 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -101,8 +99,8 @@ Auto-Submitted: auto-generated
           bz_status_NEW "
    title=3D"NEW - H/W Acceleration sufficiently buggy on Debian to hard loc=
 k machine GeForce 7600 GO"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D112070#c30">Comme=
-nt # 30</a>
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D112070#c31">Comme=
+nt # 31</a>
               on <a class=3D"bz_bug_link=20
           bz_status_NEW "
    title=3D"NEW - H/W Acceleration sufficiently buggy on Debian to hard loc=
@@ -113,10 +111,8 @@ k machine GeForce 7600 GO"
 dooby.dave&#64;virgin.net" title=3D"Doobz &lt;dooby.dave&#64;virgin.net&gt;=
 "> <span class=3D"fn">Doobz</span></a>
 </span></b>
-        <pre>Sorry to spam, but I did notice partially visible text in the =
-garbled stuff FF
-was displaying instead of video. Like there is some memory overlap/confusion
-somewhere.</pre>
+        <pre>Some good news - irq 0 timer interrupts fixed by booting with =
+processor.nocst=3D1</pre>
         </div>
       </p>
 
@@ -130,9 +126,9 @@ somewhere.</pre>
     </body>
 </html>=
 
---15721798271.3CcC.7096--
+--15721828301.F966F5.18099--
 
---===============1435442611==
+--===============0260522373==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -142,4 +138,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============1435442611==--
+--===============0260522373==--
