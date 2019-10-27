@@ -2,22 +2,22 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 14FFAE6258
-	for <lists+nouveau@lfdr.de>; Sun, 27 Oct 2019 13:04:26 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2B74EE6275
+	for <lists+nouveau@lfdr.de>; Sun, 27 Oct 2019 13:37:12 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8D7376E20B;
-	Sun, 27 Oct 2019 12:04:23 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id EF7A86E220;
+	Sun, 27 Oct 2019 12:37:09 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [131.252.210.165])
- by gabe.freedesktop.org (Postfix) with ESMTP id B8DE66E203
- for <nouveau@lists.freedesktop.org>; Sun, 27 Oct 2019 12:04:22 +0000 (UTC)
+ [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
+ by gabe.freedesktop.org (Postfix) with ESMTP id D5DD36E220
+ for <nouveau@lists.freedesktop.org>; Sun, 27 Oct 2019 12:37:07 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id B47F1720E2; Sun, 27 Oct 2019 12:04:22 +0000 (UTC)
+ id D2956720E2; Sun, 27 Oct 2019 12:37:07 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Sun, 27 Oct 2019 12:04:22 +0000
+Date: Sun, 27 Oct 2019 12:37:08 +0000
 X-Bugzilla-Reason: AssignedTo
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
@@ -33,7 +33,7 @@ X-Bugzilla-Priority: not set
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
 X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-112070-8800-HoPiYJKRtS@http.bugs.freedesktop.org/>
+Message-ID: <bug-112070-8800-bEiKL5Y57z@http.bugs.freedesktop.org/>
 In-Reply-To: <bug-112070-8800@http.bugs.freedesktop.org/>
 References: <bug-112070-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
@@ -52,18 +52,18 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1836565673=="
+Content-Type: multipart/mixed; boundary="===============1435442611=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============1836565673==
-Content-Type: multipart/alternative; boundary="15721778622.BCAd0D8.32641"
+--===============1435442611==
+Content-Type: multipart/alternative; boundary="15721798271.3CcC.7096"
 Content-Transfer-Encoding: 7bit
 
 
---15721778622.BCAd0D8.32641
-Date: Sun, 27 Oct 2019 12:04:22 +0000
+--15721798271.3CcC.7096
+Date: Sun, 27 Oct 2019 12:37:07 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -72,42 +72,18 @@ Auto-Submitted: auto-generated
 
 https://bugs.freedesktop.org/show_bug.cgi?id=3D112070
 
---- Comment #29 from Doobz <dooby.dave@virgin.net> ---
-So..
-
-My laptop's interrupt issues disappear when booting with acpi=3Doff. So did
-nouveau however. Have tried a few other boot parameters, including
-acpi_apic_instance=3D2 as suggested in dmesg, but no joy.
-
-Could these ACPI warnings be hinting at something?=20
-
-[   20.414011] i801_smbus 0000:00:1f.3: SMBus using PCI interrupt
-[   20.416862] ACPI Warning: SystemIO range
-0x0000000000001028-0x000000000000102F conflicts with OpRegion
-0x0000000000001000-0x000000000000107F (\PMIO) (20190703/utaddress-204)
-[   20.416870] ACPI: If an ACPI driver is available for this device, you sh=
-ould
-use it instead of the native driver
-[   20.416873] ACPI Warning: SystemIO range
-0x00000000000011B0-0x00000000000011BF conflicts with OpRegion
-0x0000000000001180-0x00000000000011BB (\GPIO) (20190703/utaddress-204)
-[   20.416878] ACPI: If an ACPI driver is available for this device, you sh=
-ould
-use it instead of the native driver
-[   20.416879] ACPI Warning: SystemIO range
-0x0000000000001180-0x00000000000011AF conflicts with OpRegion
-0x0000000000001180-0x00000000000011BB (\GPIO) (20190703/utaddress-204)
-[   20.416883] ACPI: If an ACPI driver is available for this device, you sh=
-ould
-use it instead of the native driver
-[   20.416884] lpc_ich: Resource conflict(s) found affecting gpio_ich
+--- Comment #30 from Doobz <dooby.dave@virgin.net> ---
+Sorry to spam, but I did notice partially visible text in the garbled stuff=
+ FF
+was displaying instead of video. Like there is some memory overlap/confusion
+somewhere.
 
 --=20
 You are receiving this mail because:
 You are the assignee for the bug.=
 
---15721778622.BCAd0D8.32641
-Date: Sun, 27 Oct 2019 12:04:22 +0000
+--15721798271.3CcC.7096
+Date: Sun, 27 Oct 2019 12:37:07 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -125,8 +101,8 @@ Auto-Submitted: auto-generated
           bz_status_NEW "
    title=3D"NEW - H/W Acceleration sufficiently buggy on Debian to hard loc=
 k machine GeForce 7600 GO"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D112070#c29">Comme=
-nt # 29</a>
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D112070#c30">Comme=
+nt # 30</a>
               on <a class=3D"bz_bug_link=20
           bz_status_NEW "
    title=3D"NEW - H/W Acceleration sufficiently buggy on Debian to hard loc=
@@ -137,34 +113,10 @@ k machine GeForce 7600 GO"
 dooby.dave&#64;virgin.net" title=3D"Doobz &lt;dooby.dave&#64;virgin.net&gt;=
 "> <span class=3D"fn">Doobz</span></a>
 </span></b>
-        <pre>So..
-
-My laptop's interrupt issues disappear when booting with acpi=3Doff. So did
-nouveau however. Have tried a few other boot parameters, including
-acpi_apic_instance=3D2 as suggested in dmesg, but no joy.
-
-Could these ACPI warnings be hinting at something?=20
-
-[   20.414011] i801_smbus 0000:00:1f.3: SMBus using PCI interrupt
-[   20.416862] ACPI Warning: SystemIO range
-0x0000000000001028-0x000000000000102F conflicts with OpRegion
-0x0000000000001000-0x000000000000107F (\PMIO) (20190703/utaddress-204)
-[   20.416870] ACPI: If an ACPI driver is available for this device, you sh=
-ould
-use it instead of the native driver
-[   20.416873] ACPI Warning: SystemIO range
-0x00000000000011B0-0x00000000000011BF conflicts with OpRegion
-0x0000000000001180-0x00000000000011BB (\GPIO) (20190703/utaddress-204)
-[   20.416878] ACPI: If an ACPI driver is available for this device, you sh=
-ould
-use it instead of the native driver
-[   20.416879] ACPI Warning: SystemIO range
-0x0000000000001180-0x00000000000011AF conflicts with OpRegion
-0x0000000000001180-0x00000000000011BB (\GPIO) (20190703/utaddress-204)
-[   20.416883] ACPI: If an ACPI driver is available for this device, you sh=
-ould
-use it instead of the native driver
-[   20.416884] lpc_ich: Resource conflict(s) found affecting gpio_ich</pre>
+        <pre>Sorry to spam, but I did notice partially visible text in the =
+garbled stuff FF
+was displaying instead of video. Like there is some memory overlap/confusion
+somewhere.</pre>
         </div>
       </p>
 
@@ -178,9 +130,9 @@ use it instead of the native driver
     </body>
 </html>=
 
---15721778622.BCAd0D8.32641--
+--15721798271.3CcC.7096--
 
---===============1836565673==
+--===============1435442611==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -190,4 +142,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============1836565673==--
+--===============1435442611==--
