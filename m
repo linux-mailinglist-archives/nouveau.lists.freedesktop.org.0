@@ -1,68 +1,68 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3039312B2EC
-	for <lists+nouveau@lfdr.de>; Fri, 27 Dec 2019 09:15:07 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id EA0F712B2BE
+	for <lists+nouveau@lfdr.de>; Fri, 27 Dec 2019 09:14:24 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4E50F6E13D;
-	Fri, 27 Dec 2019 08:14:08 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 445F66E056;
+	Fri, 27 Dec 2019 08:13:45 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-qt1-x842.google.com (mail-qt1-x842.google.com
- [IPv6:2607:f8b0:4864:20::842])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5FD3089DC9
- for <nouveau@lists.freedesktop.org>; Mon, 28 Oct 2019 20:10:47 +0000 (UTC)
-Received: by mail-qt1-x842.google.com with SMTP id o49so16510764qta.7
- for <nouveau@lists.freedesktop.org>; Mon, 28 Oct 2019 13:10:47 -0700 (PDT)
+Received: from mail-qt1-x844.google.com (mail-qt1-x844.google.com
+ [IPv6:2607:f8b0:4864:20::844])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 77D2389DF7
+ for <nouveau@lists.freedesktop.org>; Mon, 28 Oct 2019 20:10:49 +0000 (UTC)
+Received: by mail-qt1-x844.google.com with SMTP id g50so16546797qtb.4
+ for <nouveau@lists.freedesktop.org>; Mon, 28 Oct 2019 13:10:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ziepe.ca; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=XfZfiXb3zJ195gWPi/l/D27toKL96PSF+DrXZsTvCKc=;
- b=Vc58TGVq1lmjMY4eOa7KbtL6DEqVXlgPnJsOzrFIA+Kq+VIv+n8OiCivi4cUtamTnT
- 1KYSo7v2A3a+ickTwHSH38kA5tGy8OuuNpGMwWxeSjiIUwF3+ru9o9EbSpkLUVe4ONKL
- vwoevPFvTqW4AXdpTwIwYVfG1lCs2EgIFUFFard0RfJWd72B2i5FrekyEo9dDa85D8eS
- IgS1EDvxvQkqOsgxFumEvEuegOpwLnX2TxR9uWKcEKPRRgLoUO9yKB4vsfjdqKaXA3Zr
- 0ht0Y4lwbn51FabpNrQPAmMzXA34J6VR9wDC/ZusGDpxulAVuNULgD/MF+Wf668IbxSy
- 16vA==
+ bh=p2sO9HeBGe55xT+CHTSwfg39F5YjFhzL8wq3LxZbe6w=;
+ b=cXvTHdIKZK55cQQin8dGci427hTRiUockWlEy6Y0ICdq582fHBOfb30HIaxmsyyS/p
+ VO48joMXKjHRdPQsTx7NYVCc27xyHbl0ljkVD1bnlqKgp2mbaxe+/vNwxle/N375wmN7
+ LLiLx61YfjoYug+9VNzD6w4Vz4EQxLAkMLyXTDa9JOOn86fAWGzlUS2JLAhQ5bmecZZ/
+ a5+OzqMmMbmY9WYvRiligl1TnCVrKxVwZlm0cjHkBnOrOSpHAla+MEOnGgkh4pOfoVMO
+ 36bGxek2HKVb0rJgSusQ9TNBqCn6uiIo6I8hU9X6aLkg+2p0L2e5guBKt+QltMY6afCu
+ /2hw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=XfZfiXb3zJ195gWPi/l/D27toKL96PSF+DrXZsTvCKc=;
- b=cRtOIhHF7GTQXhGHvFgG7NIqZ36AwAyDqnrj/qPlNwmLS77Z9GS/NOC33ER4e9faj1
- p0H0Ls2GaYuu5cAr5vd+tzWpUnB08kuxYHh67spiBE3KuvfY0QC/OSaEJf7kjq4Ainzw
- ah6trNwihOh7f9aKX2NA+gDDlr0RY0kp0YZTUHYeghnvCBSg0QTT4+KODrE+KZDYjGsj
- ufHk5a6yK6p7SKU+SxpQvbF5aUaADNMNS1zKQmzKeo79b7QwIFud3fY2PAlG6GZOuvN1
- xxi1I0ZDHvY6aK6jMhjNeOj9/UlK70jyHAu1dnTbfFYr6n/53GHrAHnLTlN5CN2n934N
- 4m2Q==
-X-Gm-Message-State: APjAAAU3zBACbEZMPdKr2JMJl1hOsT6VWf19PRu068Xc2PcZtB4+KOd3
- JdI8/8iqZ86eNfXZaukHsvTNNg==
-X-Google-Smtp-Source: APXvYqyzwQd88COzKjNYUtUi77xt5inAXAbC04JrmAuM/rVN/+ea+Lu0JHPIt/2aFSc9iA4BmT0l3w==
-X-Received: by 2002:ac8:3f67:: with SMTP id w36mr271020qtk.99.1572293446378;
- Mon, 28 Oct 2019 13:10:46 -0700 (PDT)
+ bh=p2sO9HeBGe55xT+CHTSwfg39F5YjFhzL8wq3LxZbe6w=;
+ b=mVR5S90dWp7pECUKSZxsKIGdnrhpYCyFjyPbbxaOEaOzIJb36k45VaqSVegeG9/12W
+ I3uB0AxqTFUJMY2Gt38Q8T12VvRYb9ssCN4MxiLCY0djFfAlWzeFAqNmEfVmnw1NFU2Y
+ 6zGqiqfcSMCttlt1PIMq5fytFNPvkrPUn9QRoIbHZtBxbRCt9fy8Hv+XrUd5zNX223Q3
+ uX8KfvVjADorWho5O7RNUypBpNaLdqL5K9qvcQYxfjNIrJaEzSyBLRl5nd6rIwNUhpbn
+ RI/8nYUgvtNh1CxOE5AQPRb5CHhSpkJppVebnucg79w+9XdERYSD55R/C7W2MaaGlPuy
+ 2ZvQ==
+X-Gm-Message-State: APjAAAVOxoIy1iLq4Ql87/4aPQW+tqqD+S63m6OOxhQwRevx5YkXAe2y
+ xRAjM70SDVeidB3SIr3Ar6Qc6g==
+X-Google-Smtp-Source: APXvYqxk4tf4YFjeg5NLxezOvsTX/rHJRfFXNqIANjhcGIKgcc8HiyI9ezh/HHJDJoeromDlsXvJEg==
+X-Received: by 2002:a05:6214:2aa:: with SMTP id
+ m10mr17377906qvv.224.1572293448000; 
+ Mon, 28 Oct 2019 13:10:48 -0700 (PDT)
 Received: from ziepe.ca
  (hlfxns017vw-142-162-113-180.dhcp-dynamic.fibreop.ns.bellaliant.net.
  [142.162.113.180])
- by smtp.gmail.com with ESMTPSA id r7sm6375208qkf.124.2019.10.28.13.10.43
+ by smtp.gmail.com with ESMTPSA id t127sm6775397qkf.43.2019.10.28.13.10.43
  (version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
  Mon, 28 Oct 2019 13:10:43 -0700 (PDT)
 Received: from jgg by mlx.ziepe.ca with local (Exim 4.90_1)
  (envelope-from <jgg@ziepe.ca>)
- id 1iPBLf-0001gM-77; Mon, 28 Oct 2019 17:10:43 -0300
+ id 1iPBLf-0001gS-8N; Mon, 28 Oct 2019 17:10:43 -0300
 From: Jason Gunthorpe <jgg@ziepe.ca>
 To: linux-mm@kvack.org, Jerome Glisse <jglisse@redhat.com>,
  Ralph Campbell <rcampbell@nvidia.com>, John Hubbard <jhubbard@nvidia.com>,
  Felix.Kuehling@amd.com
-Date: Mon, 28 Oct 2019 17:10:21 -0300
-Message-Id: <20191028201032.6352-5-jgg@ziepe.ca>
+Date: Mon, 28 Oct 2019 17:10:22 -0300
+Message-Id: <20191028201032.6352-6-jgg@ziepe.ca>
 X-Mailer: git-send-email 2.23.0
 In-Reply-To: <20191028201032.6352-1-jgg@ziepe.ca>
 References: <20191028201032.6352-1-jgg@ziepe.ca>
 MIME-Version: 1.0
 X-Mailman-Approved-At: Fri, 27 Dec 2019 08:13:31 +0000
-Subject: [Nouveau] [PATCH v2 04/15] mm/hmm: define the pre-processor related
- parts of hmm.h even if disabled
+Subject: [Nouveau] [PATCH v2 05/15] RDMA/odp: Use mmu_range_notifier_insert()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -86,72 +86,795 @@ Cc: Juergen Gross <jgross@suse.com>, David Zhou <David1.Zhou@amd.com>,
  Boris Ostrovsky <boris.ostrovsky@oracle.com>, Petr Cvek <petrcvekcz@gmail.com>,
  =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
  Ben Skeggs <bskeggs@redhat.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-RnJvbTogSmFzb24gR3VudGhvcnBlIDxqZ2dAbWVsbGFub3guY29tPgoKT25seSB0aGUgZnVuY3Rp
-b24gY2FsbHMgYXJlIHN0dWJiZWQgb3V0IHdpdGggc3RhdGljIGlubGluZXMgdGhhdCBhbHdheXMK
-ZmFpbC4gVGhpcyBpcyB0aGUgc3RhbmRhcmQgd2F5IHRvIHdyaXRlIGEgaGVhZGVyIGZvciBhbiBv
-cHRpb25hbCBjb21wb25lbnQKYW5kIG1ha2VzIGl0IGVhc2llciBmb3IgZHJpdmVycyB0aGF0IG9u
-bHkgb3B0aW9uYWxseSBuZWVkIEhNTV9NSVJST1IuCgpSZXZpZXdlZC1ieTogSsOpcsO0bWUgR2xp
-c3NlIDxqZ2xpc3NlQHJlZGhhdC5jb20+ClNpZ25lZC1vZmYtYnk6IEphc29uIEd1bnRob3JwZSA8
-amdnQG1lbGxhbm94LmNvbT4KLS0tCiBpbmNsdWRlL2xpbnV4L2htbS5oIHwgNTkgKysrKysrKysr
-KysrKysrKysrKysrKysrKysrKysrKysrKysrLS0tLS0tLS0tCiBrZXJuZWwvZm9yay5jICAgICAg
-IHwgIDEgLQogMiBmaWxlcyBjaGFuZ2VkLCA0NyBpbnNlcnRpb25zKCspLCAxMyBkZWxldGlvbnMo
-LSkKCmRpZmYgLS1naXQgYS9pbmNsdWRlL2xpbnV4L2htbS5oIGIvaW5jbHVkZS9saW51eC9obW0u
-aAppbmRleCA4YWMxZmQ2YTgxYWY4Zi4uMjY2NmViMDhhNDA2MTUgMTAwNjQ0Ci0tLSBhL2luY2x1
-ZGUvbGludXgvaG1tLmgKKysrIGIvaW5jbHVkZS9saW51eC9obW0uaApAQCAtNjIsOCArNjIsNiBA
-QAogI2luY2x1ZGUgPGxpbnV4L2tjb25maWcuaD4KICNpbmNsdWRlIDxhc20vcGd0YWJsZS5oPgog
-Ci0jaWZkZWYgQ09ORklHX0hNTV9NSVJST1IKLQogI2luY2x1ZGUgPGxpbnV4L2RldmljZS5oPgog
-I2luY2x1ZGUgPGxpbnV4L21pZ3JhdGUuaD4KICNpbmNsdWRlIDxsaW51eC9tZW1yZW1hcC5oPgpA
-QCAtMzc0LDYgKzM3MiwxNSBAQCBzdHJ1Y3QgaG1tX21pcnJvciB7CiAJc3RydWN0IGxpc3RfaGVh
-ZAkJbGlzdDsKIH07CiAKKy8qCisgKiBSZXRyeSBmYXVsdCBpZiBub24tYmxvY2tpbmcsIGRyb3Ag
-bW1hcF9zZW0gYW5kIHJldHVybiAtRUFHQUlOIGluIHRoYXQgY2FzZS4KKyAqLworI2RlZmluZSBI
-TU1fRkFVTFRfQUxMT1dfUkVUUlkJCSgxIDw8IDApCisKKy8qIERvbid0IGZhdWx0IGluIG1pc3Np
-bmcgUFRFcywganVzdCBzbmFwc2hvdCB0aGUgY3VycmVudCBzdGF0ZS4gKi8KKyNkZWZpbmUgSE1N
-X0ZBVUxUX1NOQVBTSE9UCQkoMSA8PCAxKQorCisjaWZkZWYgQ09ORklHX0hNTV9NSVJST1IKIGlu
-dCBobW1fbWlycm9yX3JlZ2lzdGVyKHN0cnVjdCBobW1fbWlycm9yICptaXJyb3IsIHN0cnVjdCBt
-bV9zdHJ1Y3QgKm1tKTsKIHZvaWQgaG1tX21pcnJvcl91bnJlZ2lzdGVyKHN0cnVjdCBobW1fbWly
-cm9yICptaXJyb3IpOwogCkBAIC0zODMsMTQgKzM5MCw2IEBAIHZvaWQgaG1tX21pcnJvcl91bnJl
-Z2lzdGVyKHN0cnVjdCBobW1fbWlycm9yICptaXJyb3IpOwogaW50IGhtbV9yYW5nZV9yZWdpc3Rl
-cihzdHJ1Y3QgaG1tX3JhbmdlICpyYW5nZSwgc3RydWN0IGhtbV9taXJyb3IgKm1pcnJvcik7CiB2
-b2lkIGhtbV9yYW5nZV91bnJlZ2lzdGVyKHN0cnVjdCBobW1fcmFuZ2UgKnJhbmdlKTsKIAotLyoK
-LSAqIFJldHJ5IGZhdWx0IGlmIG5vbi1ibG9ja2luZywgZHJvcCBtbWFwX3NlbSBhbmQgcmV0dXJu
-IC1FQUdBSU4gaW4gdGhhdCBjYXNlLgotICovCi0jZGVmaW5lIEhNTV9GQVVMVF9BTExPV19SRVRS
-WQkJKDEgPDwgMCkKLQotLyogRG9uJ3QgZmF1bHQgaW4gbWlzc2luZyBQVEVzLCBqdXN0IHNuYXBz
-aG90IHRoZSBjdXJyZW50IHN0YXRlLiAqLwotI2RlZmluZSBITU1fRkFVTFRfU05BUFNIT1QJCSgx
-IDw8IDEpCi0KIGxvbmcgaG1tX3JhbmdlX2ZhdWx0KHN0cnVjdCBobW1fcmFuZ2UgKnJhbmdlLCB1
-bnNpZ25lZCBpbnQgZmxhZ3MpOwogCiBsb25nIGhtbV9yYW5nZV9kbWFfbWFwKHN0cnVjdCBobW1f
-cmFuZ2UgKnJhbmdlLApAQCAtNDAxLDYgKzQwMCw0NCBAQCBsb25nIGhtbV9yYW5nZV9kbWFfdW5t
-YXAoc3RydWN0IGhtbV9yYW5nZSAqcmFuZ2UsCiAJCQkgc3RydWN0IGRldmljZSAqZGV2aWNlLAog
-CQkJIGRtYV9hZGRyX3QgKmRhZGRycywKIAkJCSBib29sIGRpcnR5KTsKKyNlbHNlCitpbnQgaG1t
-X21pcnJvcl9yZWdpc3RlcihzdHJ1Y3QgaG1tX21pcnJvciAqbWlycm9yLCBzdHJ1Y3QgbW1fc3Ry
-dWN0ICptbSkKK3sKKwlyZXR1cm4gLUVPUE5PVFNVUFA7Cit9CisKK3ZvaWQgaG1tX21pcnJvcl91
-bnJlZ2lzdGVyKHN0cnVjdCBobW1fbWlycm9yICptaXJyb3IpCit7Cit9CisKK2ludCBobW1fcmFu
-Z2VfcmVnaXN0ZXIoc3RydWN0IGhtbV9yYW5nZSAqcmFuZ2UsIHN0cnVjdCBobW1fbWlycm9yICpt
-aXJyb3IpCit7CisJcmV0dXJuIC1FT1BOT1RTVVBQOworfQorCit2b2lkIGhtbV9yYW5nZV91bnJl
-Z2lzdGVyKHN0cnVjdCBobW1fcmFuZ2UgKnJhbmdlKQoreworfQorCitzdGF0aWMgaW5saW5lIGxv
-bmcgaG1tX3JhbmdlX2ZhdWx0KHN0cnVjdCBobW1fcmFuZ2UgKnJhbmdlLCB1bnNpZ25lZCBpbnQg
-ZmxhZ3MpCit7CisJcmV0dXJuIC1FT1BOT1RTVVBQOworfQorCitzdGF0aWMgaW5saW5lIGxvbmcg
-aG1tX3JhbmdlX2RtYV9tYXAoc3RydWN0IGhtbV9yYW5nZSAqcmFuZ2UsCisJCQkJICAgICBzdHJ1
-Y3QgZGV2aWNlICpkZXZpY2UsIGRtYV9hZGRyX3QgKmRhZGRycywKKwkJCQkgICAgIHVuc2lnbmVk
-IGludCBmbGFncykKK3sKKwlyZXR1cm4gLUVPUE5PVFNVUFA7Cit9CisKK3N0YXRpYyBpbmxpbmUg
-bG9uZyBobW1fcmFuZ2VfZG1hX3VubWFwKHN0cnVjdCBobW1fcmFuZ2UgKnJhbmdlLAorCQkJCSAg
-ICAgICBzdHJ1Y3QgZGV2aWNlICpkZXZpY2UsCisJCQkJICAgICAgIGRtYV9hZGRyX3QgKmRhZGRy
-cywgYm9vbCBkaXJ0eSkKK3sKKwlyZXR1cm4gLUVPUE5PVFNVUFA7Cit9CisjZW5kaWYKIAogLyoK
-ICAqIEhNTV9SQU5HRV9ERUZBVUxUX1RJTUVPVVQgLSBkZWZhdWx0IHRpbWVvdXQgKG1zKSB3aGVu
-IHdhaXRpbmcgZm9yIGEgcmFuZ2UKQEAgLTQxMSw2ICs0NDgsNCBAQCBsb25nIGhtbV9yYW5nZV9k
-bWFfdW5tYXAoc3RydWN0IGhtbV9yYW5nZSAqcmFuZ2UsCiAgKi8KICNkZWZpbmUgSE1NX1JBTkdF
-X0RFRkFVTFRfVElNRU9VVCAxMDAwCiAKLSNlbmRpZiAvKiBJU19FTkFCTEVEKENPTkZJR19ITU1f
-TUlSUk9SKSAqLwotCiAjZW5kaWYgLyogTElOVVhfSE1NX0ggKi8KZGlmZiAtLWdpdCBhL2tlcm5l
-bC9mb3JrLmMgYi9rZXJuZWwvZm9yay5jCmluZGV4IGY5NTcyZjQxNjEyNjI4Li40NTYxYTY1ZDE5
-ZGI4OCAxMDA2NDQKLS0tIGEva2VybmVsL2ZvcmsuYworKysgYi9rZXJuZWwvZm9yay5jCkBAIC00
-MCw3ICs0MCw2IEBACiAjaW5jbHVkZSA8bGludXgvYmluZm10cy5oPgogI2luY2x1ZGUgPGxpbnV4
-L21tYW4uaD4KICNpbmNsdWRlIDxsaW51eC9tbXVfbm90aWZpZXIuaD4KLSNpbmNsdWRlIDxsaW51
-eC9obW0uaD4KICNpbmNsdWRlIDxsaW51eC9mcy5oPgogI2luY2x1ZGUgPGxpbnV4L21tLmg+CiAj
-aW5jbHVkZSA8bGludXgvdm1hY2FjaGUuaD4KLS0gCjIuMjMuMAoKX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBtYWlsaW5nIGxpc3QKTm91dmVh
-dUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFp
-bG1hbi9saXN0aW5mby9ub3V2ZWF1Cg==
+From: Jason Gunthorpe <jgg@mellanox.com>
+
+Replace the internal interval tree based mmu notifier with the new common
+mmu_range_notifier_insert() API. This removes a lot of code and fixes a
+deadlock that can be triggered in ODP:
+
+ zap_page_range()
+  mmu_notifier_invalidate_range_start()
+   [..]
+    ib_umem_notifier_invalidate_range_start()
+       down_read(&per_mm->umem_rwsem)
+  unmap_single_vma()
+    [..]
+      __split_huge_page_pmd()
+        mmu_notifier_invalidate_range_start()
+        [..]
+           ib_umem_notifier_invalidate_range_start()
+              down_read(&per_mm->umem_rwsem)   // DEADLOCK
+
+        mmu_notifier_invalidate_range_end()
+           up_read(&per_mm->umem_rwsem)
+  mmu_notifier_invalidate_range_end()
+     up_read(&per_mm->umem_rwsem)
+
+The umem_rwsem is held across the range_start/end as the ODP algorithm for
+invalidate_range_end cannot tolerate changes to the interval
+tree. However, due to the nested invalidation regions the second
+down_read() can deadlock if there are competing writers. The new core code
+provides an alternative scheme to solve this problem.
+
+Fixes: ca748c39ea3f ("RDMA/umem: Get rid of per_mm->notifier_count")
+Signed-off-by: Jason Gunthorpe <jgg@mellanox.com>
+---
+ drivers/infiniband/core/device.c     |   1 -
+ drivers/infiniband/core/umem_odp.c   | 288 +++------------------------
+ drivers/infiniband/hw/mlx5/mlx5_ib.h |   7 +-
+ drivers/infiniband/hw/mlx5/mr.c      |   3 +-
+ drivers/infiniband/hw/mlx5/odp.c     |  50 +++--
+ include/rdma/ib_umem_odp.h           |  65 ++----
+ include/rdma/ib_verbs.h              |   2 -
+ 7 files changed, 69 insertions(+), 347 deletions(-)
+
+diff --git a/drivers/infiniband/core/device.c b/drivers/infiniband/core/device.c
+index 2dd2cfe9b56136..ac7924b3c73abe 100644
+--- a/drivers/infiniband/core/device.c
++++ b/drivers/infiniband/core/device.c
+@@ -2617,7 +2617,6 @@ void ib_set_device_ops(struct ib_device *dev, const struct ib_device_ops *ops)
+ 	SET_DEVICE_OP(dev_ops, get_vf_config);
+ 	SET_DEVICE_OP(dev_ops, get_vf_stats);
+ 	SET_DEVICE_OP(dev_ops, init_port);
+-	SET_DEVICE_OP(dev_ops, invalidate_range);
+ 	SET_DEVICE_OP(dev_ops, iw_accept);
+ 	SET_DEVICE_OP(dev_ops, iw_add_ref);
+ 	SET_DEVICE_OP(dev_ops, iw_connect);
+diff --git a/drivers/infiniband/core/umem_odp.c b/drivers/infiniband/core/umem_odp.c
+index d7d5fadf0899ad..6132b8127e8435 100644
+--- a/drivers/infiniband/core/umem_odp.c
++++ b/drivers/infiniband/core/umem_odp.c
+@@ -48,197 +48,32 @@
+ 
+ #include "uverbs.h"
+ 
+-static void ib_umem_notifier_start_account(struct ib_umem_odp *umem_odp)
+-{
+-	mutex_lock(&umem_odp->umem_mutex);
+-	if (umem_odp->notifiers_count++ == 0)
+-		/*
+-		 * Initialize the completion object for waiting on
+-		 * notifiers. Since notifier_count is zero, no one should be
+-		 * waiting right now.
+-		 */
+-		reinit_completion(&umem_odp->notifier_completion);
+-	mutex_unlock(&umem_odp->umem_mutex);
+-}
+-
+-static void ib_umem_notifier_end_account(struct ib_umem_odp *umem_odp)
+-{
+-	mutex_lock(&umem_odp->umem_mutex);
+-	/*
+-	 * This sequence increase will notify the QP page fault that the page
+-	 * that is going to be mapped in the spte could have been freed.
+-	 */
+-	++umem_odp->notifiers_seq;
+-	if (--umem_odp->notifiers_count == 0)
+-		complete_all(&umem_odp->notifier_completion);
+-	mutex_unlock(&umem_odp->umem_mutex);
+-}
+-
+-static void ib_umem_notifier_release(struct mmu_notifier *mn,
+-				     struct mm_struct *mm)
+-{
+-	struct ib_ucontext_per_mm *per_mm =
+-		container_of(mn, struct ib_ucontext_per_mm, mn);
+-	struct rb_node *node;
+-
+-	down_read(&per_mm->umem_rwsem);
+-	if (!per_mm->mn.users)
+-		goto out;
+-
+-	for (node = rb_first_cached(&per_mm->umem_tree); node;
+-	     node = rb_next(node)) {
+-		struct ib_umem_odp *umem_odp =
+-			rb_entry(node, struct ib_umem_odp, interval_tree.rb);
+-
+-		/*
+-		 * Increase the number of notifiers running, to prevent any
+-		 * further fault handling on this MR.
+-		 */
+-		ib_umem_notifier_start_account(umem_odp);
+-		complete_all(&umem_odp->notifier_completion);
+-		umem_odp->umem.ibdev->ops.invalidate_range(
+-			umem_odp, ib_umem_start(umem_odp),
+-			ib_umem_end(umem_odp));
+-	}
+-
+-out:
+-	up_read(&per_mm->umem_rwsem);
+-}
+-
+-static int invalidate_range_start_trampoline(struct ib_umem_odp *item,
+-					     u64 start, u64 end, void *cookie)
+-{
+-	ib_umem_notifier_start_account(item);
+-	item->umem.ibdev->ops.invalidate_range(item, start, end);
+-	return 0;
+-}
+-
+-static int ib_umem_notifier_invalidate_range_start(struct mmu_notifier *mn,
+-				const struct mmu_notifier_range *range)
+-{
+-	struct ib_ucontext_per_mm *per_mm =
+-		container_of(mn, struct ib_ucontext_per_mm, mn);
+-	int rc;
+-
+-	if (mmu_notifier_range_blockable(range))
+-		down_read(&per_mm->umem_rwsem);
+-	else if (!down_read_trylock(&per_mm->umem_rwsem))
+-		return -EAGAIN;
+-
+-	if (!per_mm->mn.users) {
+-		up_read(&per_mm->umem_rwsem);
+-		/*
+-		 * At this point users is permanently zero and visible to this
+-		 * CPU without a lock, that fact is relied on to skip the unlock
+-		 * in range_end.
+-		 */
+-		return 0;
+-	}
+-
+-	rc = rbt_ib_umem_for_each_in_range(&per_mm->umem_tree, range->start,
+-					   range->end,
+-					   invalidate_range_start_trampoline,
+-					   mmu_notifier_range_blockable(range),
+-					   NULL);
+-	if (rc)
+-		up_read(&per_mm->umem_rwsem);
+-	return rc;
+-}
+-
+-static int invalidate_range_end_trampoline(struct ib_umem_odp *item, u64 start,
+-					   u64 end, void *cookie)
+-{
+-	ib_umem_notifier_end_account(item);
+-	return 0;
+-}
+-
+-static void ib_umem_notifier_invalidate_range_end(struct mmu_notifier *mn,
+-				const struct mmu_notifier_range *range)
+-{
+-	struct ib_ucontext_per_mm *per_mm =
+-		container_of(mn, struct ib_ucontext_per_mm, mn);
+-
+-	if (unlikely(!per_mm->mn.users))
+-		return;
+-
+-	rbt_ib_umem_for_each_in_range(&per_mm->umem_tree, range->start,
+-				      range->end,
+-				      invalidate_range_end_trampoline, true, NULL);
+-	up_read(&per_mm->umem_rwsem);
+-}
+-
+-static struct mmu_notifier *ib_umem_alloc_notifier(struct mm_struct *mm)
+-{
+-	struct ib_ucontext_per_mm *per_mm;
+-
+-	per_mm = kzalloc(sizeof(*per_mm), GFP_KERNEL);
+-	if (!per_mm)
+-		return ERR_PTR(-ENOMEM);
+-
+-	per_mm->umem_tree = RB_ROOT_CACHED;
+-	init_rwsem(&per_mm->umem_rwsem);
+-
+-	WARN_ON(mm != current->mm);
+-	rcu_read_lock();
+-	per_mm->tgid = get_task_pid(current->group_leader, PIDTYPE_PID);
+-	rcu_read_unlock();
+-	return &per_mm->mn;
+-}
+-
+-static void ib_umem_free_notifier(struct mmu_notifier *mn)
+-{
+-	struct ib_ucontext_per_mm *per_mm =
+-		container_of(mn, struct ib_ucontext_per_mm, mn);
+-
+-	WARN_ON(!RB_EMPTY_ROOT(&per_mm->umem_tree.rb_root));
+-
+-	put_pid(per_mm->tgid);
+-	kfree(per_mm);
+-}
+-
+-static const struct mmu_notifier_ops ib_umem_notifiers = {
+-	.release                    = ib_umem_notifier_release,
+-	.invalidate_range_start     = ib_umem_notifier_invalidate_range_start,
+-	.invalidate_range_end       = ib_umem_notifier_invalidate_range_end,
+-	.alloc_notifier		    = ib_umem_alloc_notifier,
+-	.free_notifier		    = ib_umem_free_notifier,
+-};
+-
+ static inline int ib_init_umem_odp(struct ib_umem_odp *umem_odp)
+ {
+-	struct ib_ucontext_per_mm *per_mm;
+-	struct mmu_notifier *mn;
+ 	int ret;
+ 
+ 	umem_odp->umem.is_odp = 1;
++	mutex_init(&umem_odp->umem_mutex);
++
+ 	if (!umem_odp->is_implicit_odp) {
+ 		size_t page_size = 1UL << umem_odp->page_shift;
++		unsigned long start;
++		unsigned long end;
+ 		size_t pages;
+ 
+-		umem_odp->interval_tree.start =
+-			ALIGN_DOWN(umem_odp->umem.address, page_size);
++		start = ALIGN_DOWN(umem_odp->umem.address, page_size);
+ 		if (check_add_overflow(umem_odp->umem.address,
+ 				       (unsigned long)umem_odp->umem.length,
+-				       &umem_odp->interval_tree.last))
++				       &end))
+ 			return -EOVERFLOW;
+-		umem_odp->interval_tree.last =
+-			ALIGN(umem_odp->interval_tree.last, page_size);
+-		if (unlikely(umem_odp->interval_tree.last < page_size))
++		end = ALIGN(end, page_size);
++		if (unlikely(end < page_size))
+ 			return -EOVERFLOW;
+ 
+-		pages = (umem_odp->interval_tree.last -
+-			 umem_odp->interval_tree.start) >>
+-			umem_odp->page_shift;
++		pages = (end - start) >> umem_odp->page_shift;
+ 		if (!pages)
+ 			return -EINVAL;
+ 
+-		/*
+-		 * Note that the representation of the intervals in the
+-		 * interval tree considers the ending point as contained in
+-		 * the interval.
+-		 */
+-		umem_odp->interval_tree.last--;
+-
+ 		umem_odp->page_list = kvcalloc(
+ 			pages, sizeof(*umem_odp->page_list), GFP_KERNEL);
+ 		if (!umem_odp->page_list)
+@@ -250,26 +85,15 @@ static inline int ib_init_umem_odp(struct ib_umem_odp *umem_odp)
+ 			ret = -ENOMEM;
+ 			goto out_page_list;
+ 		}
+-	}
+ 
+-	mn = mmu_notifier_get(&ib_umem_notifiers, umem_odp->umem.owning_mm);
+-	if (IS_ERR(mn)) {
+-		ret = PTR_ERR(mn);
+-		goto out_dma_list;
+-	}
+-	umem_odp->per_mm = per_mm =
+-		container_of(mn, struct ib_ucontext_per_mm, mn);
+-
+-	mutex_init(&umem_odp->umem_mutex);
+-	init_completion(&umem_odp->notifier_completion);
++		ret = mmu_range_notifier_insert(&umem_odp->notifier, start,
++						end - start, current->mm);
++		if (ret)
++			goto out_dma_list;
+ 
+-	if (!umem_odp->is_implicit_odp) {
+-		down_write(&per_mm->umem_rwsem);
+-		interval_tree_insert(&umem_odp->interval_tree,
+-				     &per_mm->umem_tree);
+-		up_write(&per_mm->umem_rwsem);
++		umem_odp->tgid =
++			get_task_pid(current->group_leader, PIDTYPE_PID);
+ 	}
+-	mmgrab(umem_odp->umem.owning_mm);
+ 
+ 	return 0;
+ 
+@@ -290,8 +114,8 @@ static inline int ib_init_umem_odp(struct ib_umem_odp *umem_odp)
+  * @udata: udata from the syscall being used to create the umem
+  * @access: ib_reg_mr access flags
+  */
+-struct ib_umem_odp *ib_umem_odp_alloc_implicit(struct ib_udata *udata,
+-					       int access)
++struct ib_umem_odp *
++ib_umem_odp_alloc_implicit(struct ib_udata *udata, int access)
+ {
+ 	struct ib_ucontext *context =
+ 		container_of(udata, struct uverbs_attr_bundle, driver_udata)
+@@ -305,8 +129,6 @@ struct ib_umem_odp *ib_umem_odp_alloc_implicit(struct ib_udata *udata,
+ 
+ 	if (!context)
+ 		return ERR_PTR(-EIO);
+-	if (WARN_ON_ONCE(!context->device->ops.invalidate_range))
+-		return ERR_PTR(-EINVAL);
+ 
+ 	umem_odp = kzalloc(sizeof(*umem_odp), GFP_KERNEL);
+ 	if (!umem_odp)
+@@ -336,8 +158,9 @@ EXPORT_SYMBOL(ib_umem_odp_alloc_implicit);
+  * @addr: The starting userspace VA
+  * @size: The length of the userspace VA
+  */
+-struct ib_umem_odp *ib_umem_odp_alloc_child(struct ib_umem_odp *root,
+-					    unsigned long addr, size_t size)
++struct ib_umem_odp *
++ib_umem_odp_alloc_child(struct ib_umem_odp *root, unsigned long addr,
++			size_t size, const struct mmu_range_notifier_ops *ops)
+ {
+ 	/*
+ 	 * Caller must ensure that root cannot be freed during the call to
+@@ -360,6 +183,7 @@ struct ib_umem_odp *ib_umem_odp_alloc_child(struct ib_umem_odp *root,
+ 	umem->writable   = root->umem.writable;
+ 	umem->owning_mm  = root->umem.owning_mm;
+ 	odp_data->page_shift = PAGE_SHIFT;
++	odp_data->notifier.ops = ops;
+ 
+ 	ret = ib_init_umem_odp(odp_data);
+ 	if (ret) {
+@@ -383,7 +207,8 @@ EXPORT_SYMBOL(ib_umem_odp_alloc_child);
+  * conjunction with MMU notifiers.
+  */
+ struct ib_umem_odp *ib_umem_odp_get(struct ib_udata *udata, unsigned long addr,
+-				    size_t size, int access)
++				    size_t size, int access,
++				    const struct mmu_range_notifier_ops *ops)
+ {
+ 	struct ib_umem_odp *umem_odp;
+ 	struct ib_ucontext *context;
+@@ -398,8 +223,7 @@ struct ib_umem_odp *ib_umem_odp_get(struct ib_udata *udata, unsigned long addr,
+ 	if (!context)
+ 		return ERR_PTR(-EIO);
+ 
+-	if (WARN_ON_ONCE(!(access & IB_ACCESS_ON_DEMAND)) ||
+-	    WARN_ON_ONCE(!context->device->ops.invalidate_range))
++	if (WARN_ON_ONCE(!(access & IB_ACCESS_ON_DEMAND)))
+ 		return ERR_PTR(-EINVAL);
+ 
+ 	umem_odp = kzalloc(sizeof(struct ib_umem_odp), GFP_KERNEL);
+@@ -411,6 +235,7 @@ struct ib_umem_odp *ib_umem_odp_get(struct ib_udata *udata, unsigned long addr,
+ 	umem_odp->umem.address = addr;
+ 	umem_odp->umem.writable = ib_access_writable(access);
+ 	umem_odp->umem.owning_mm = mm = current->mm;
++	umem_odp->notifier.ops = ops;
+ 
+ 	umem_odp->page_shift = PAGE_SHIFT;
+ 	if (access & IB_ACCESS_HUGETLB) {
+@@ -442,8 +267,6 @@ EXPORT_SYMBOL(ib_umem_odp_get);
+ 
+ void ib_umem_odp_release(struct ib_umem_odp *umem_odp)
+ {
+-	struct ib_ucontext_per_mm *per_mm = umem_odp->per_mm;
+-
+ 	/*
+ 	 * Ensure that no more pages are mapped in the umem.
+ 	 *
+@@ -455,28 +278,11 @@ void ib_umem_odp_release(struct ib_umem_odp *umem_odp)
+ 		ib_umem_odp_unmap_dma_pages(umem_odp, ib_umem_start(umem_odp),
+ 					    ib_umem_end(umem_odp));
+ 		mutex_unlock(&umem_odp->umem_mutex);
++		mmu_range_notifier_remove(&umem_odp->notifier);
+ 		kvfree(umem_odp->dma_list);
+ 		kvfree(umem_odp->page_list);
++		put_pid(umem_odp->tgid);
+ 	}
+-
+-	down_write(&per_mm->umem_rwsem);
+-	if (!umem_odp->is_implicit_odp) {
+-		interval_tree_remove(&umem_odp->interval_tree,
+-				     &per_mm->umem_tree);
+-		complete_all(&umem_odp->notifier_completion);
+-	}
+-	/*
+-	 * NOTE! mmu_notifier_unregister() can happen between a start/end
+-	 * callback, resulting in a missing end, and thus an unbalanced
+-	 * lock. This doesn't really matter to us since we are about to kfree
+-	 * the memory that holds the lock, however LOCKDEP doesn't like this.
+-	 * Thus we call the mmu_notifier_put under the rwsem and test the
+-	 * internal users count to reliably see if we are past this point.
+-	 */
+-	mmu_notifier_put(&per_mm->mn);
+-	up_write(&per_mm->umem_rwsem);
+-
+-	mmdrop(umem_odp->umem.owning_mm);
+ 	kfree(umem_odp);
+ }
+ EXPORT_SYMBOL(ib_umem_odp_release);
+@@ -501,7 +307,7 @@ EXPORT_SYMBOL(ib_umem_odp_release);
+  */
+ static int ib_umem_odp_map_dma_single_page(
+ 		struct ib_umem_odp *umem_odp,
+-		int page_index,
++		unsigned int page_index,
+ 		struct page *page,
+ 		u64 access_mask,
+ 		unsigned long current_seq)
+@@ -510,12 +316,7 @@ static int ib_umem_odp_map_dma_single_page(
+ 	dma_addr_t dma_addr;
+ 	int ret = 0;
+ 
+-	/*
+-	 * Note: we avoid writing if seq is different from the initial seq, to
+-	 * handle case of a racing notifier. This check also allows us to bail
+-	 * early if we have a notifier running in parallel with us.
+-	 */
+-	if (ib_umem_mmu_notifier_retry(umem_odp, current_seq)) {
++	if (mmu_range_check_retry(&umem_odp->notifier, current_seq)) {
+ 		ret = -EAGAIN;
+ 		goto out;
+ 	}
+@@ -618,7 +419,7 @@ int ib_umem_odp_map_dma_pages(struct ib_umem_odp *umem_odp, u64 user_virt,
+ 	 * existing beyond the lifetime of the originating process.. Presumably
+ 	 * mmget_not_zero will fail in this case.
+ 	 */
+-	owning_process = get_pid_task(umem_odp->per_mm->tgid, PIDTYPE_PID);
++	owning_process = get_pid_task(umem_odp->tgid, PIDTYPE_PID);
+ 	if (!owning_process || !mmget_not_zero(owning_mm)) {
+ 		ret = -EINVAL;
+ 		goto out_put_task;
+@@ -762,32 +563,3 @@ void ib_umem_odp_unmap_dma_pages(struct ib_umem_odp *umem_odp, u64 virt,
+ 	}
+ }
+ EXPORT_SYMBOL(ib_umem_odp_unmap_dma_pages);
+-
+-/* @last is not a part of the interval. See comment for function
+- * node_last.
+- */
+-int rbt_ib_umem_for_each_in_range(struct rb_root_cached *root,
+-				  u64 start, u64 last,
+-				  umem_call_back cb,
+-				  bool blockable,
+-				  void *cookie)
+-{
+-	int ret_val = 0;
+-	struct interval_tree_node *node, *next;
+-	struct ib_umem_odp *umem;
+-
+-	if (unlikely(start == last))
+-		return ret_val;
+-
+-	for (node = interval_tree_iter_first(root, start, last - 1);
+-			node; node = next) {
+-		/* TODO move the blockable decision up to the callback */
+-		if (!blockable)
+-			return -EAGAIN;
+-		next = interval_tree_iter_next(node, start, last - 1);
+-		umem = container_of(node, struct ib_umem_odp, interval_tree);
+-		ret_val = cb(umem, start, last, cookie) || ret_val;
+-	}
+-
+-	return ret_val;
+-}
+diff --git a/drivers/infiniband/hw/mlx5/mlx5_ib.h b/drivers/infiniband/hw/mlx5/mlx5_ib.h
+index f61d4005c6c379..c719f08b351670 100644
+--- a/drivers/infiniband/hw/mlx5/mlx5_ib.h
++++ b/drivers/infiniband/hw/mlx5/mlx5_ib.h
+@@ -1263,8 +1263,6 @@ int mlx5_ib_odp_init_one(struct mlx5_ib_dev *ibdev);
+ void mlx5_ib_odp_cleanup_one(struct mlx5_ib_dev *ibdev);
+ int __init mlx5_ib_odp_init(void);
+ void mlx5_ib_odp_cleanup(void);
+-void mlx5_ib_invalidate_range(struct ib_umem_odp *umem_odp, unsigned long start,
+-			      unsigned long end);
+ void mlx5_odp_init_mr_cache_entry(struct mlx5_cache_ent *ent);
+ void mlx5_odp_populate_klm(struct mlx5_klm *pklm, size_t offset,
+ 			   size_t nentries, struct mlx5_ib_mr *mr, int flags);
+@@ -1294,11 +1292,10 @@ mlx5_ib_advise_mr_prefetch(struct ib_pd *pd,
+ {
+ 	return -EOPNOTSUPP;
+ }
+-static inline void mlx5_ib_invalidate_range(struct ib_umem_odp *umem_odp,
+-					    unsigned long start,
+-					    unsigned long end){};
+ #endif /* CONFIG_INFINIBAND_ON_DEMAND_PAGING */
+ 
++extern const struct mmu_range_notifier_ops mlx5_mn_ops;
++
+ /* Needed for rep profile */
+ void __mlx5_ib_remove(struct mlx5_ib_dev *dev,
+ 		      const struct mlx5_ib_profile *profile,
+diff --git a/drivers/infiniband/hw/mlx5/mr.c b/drivers/infiniband/hw/mlx5/mr.c
+index 199f7959aaa510..fbe31830b22807 100644
+--- a/drivers/infiniband/hw/mlx5/mr.c
++++ b/drivers/infiniband/hw/mlx5/mr.c
+@@ -743,7 +743,8 @@ static int mr_umem_get(struct mlx5_ib_dev *dev, struct ib_udata *udata,
+ 	if (access_flags & IB_ACCESS_ON_DEMAND) {
+ 		struct ib_umem_odp *odp;
+ 
+-		odp = ib_umem_odp_get(udata, start, length, access_flags);
++		odp = ib_umem_odp_get(udata, start, length, access_flags,
++				      &mlx5_mn_ops);
+ 		if (IS_ERR(odp)) {
+ 			mlx5_ib_dbg(dev, "umem get failed (%ld)\n",
+ 				    PTR_ERR(odp));
+diff --git a/drivers/infiniband/hw/mlx5/odp.c b/drivers/infiniband/hw/mlx5/odp.c
+index bcfc098466977e..f713eb82eeead4 100644
+--- a/drivers/infiniband/hw/mlx5/odp.c
++++ b/drivers/infiniband/hw/mlx5/odp.c
+@@ -241,17 +241,26 @@ static void destroy_unused_implicit_child_mr(struct mlx5_ib_mr *mr)
+ 	xa_unlock(&imr->implicit_children);
+ }
+ 
+-void mlx5_ib_invalidate_range(struct ib_umem_odp *umem_odp, unsigned long start,
+-			      unsigned long end)
++static bool mlx5_ib_invalidate_range(struct mmu_range_notifier *mrn,
++				     const struct mmu_notifier_range *range,
++				     unsigned long cur_seq)
+ {
++	struct ib_umem_odp *umem_odp =
++		container_of(mrn, struct ib_umem_odp, notifier);
+ 	struct mlx5_ib_mr *mr;
+ 	const u64 umr_block_mask = (MLX5_UMR_MTT_ALIGNMENT /
+ 				    sizeof(struct mlx5_mtt)) - 1;
+ 	u64 idx = 0, blk_start_idx = 0;
++	unsigned long start;
++	unsigned long end;
+ 	int in_block = 0;
+ 	u64 addr;
+ 
++	if (!mmu_notifier_range_blockable(range))
++		return false;
++
+ 	mutex_lock(&umem_odp->umem_mutex);
++	mmu_range_set_seq(mrn, cur_seq);
+ 	/*
+ 	 * If npages is zero then umem_odp->private may not be setup yet. This
+ 	 * does not complete until after the first page is mapped for DMA.
+@@ -260,8 +269,8 @@ void mlx5_ib_invalidate_range(struct ib_umem_odp *umem_odp, unsigned long start,
+ 		goto out;
+ 	mr = umem_odp->private;
+ 
+-	start = max_t(u64, ib_umem_start(umem_odp), start);
+-	end = min_t(u64, ib_umem_end(umem_odp), end);
++	start = max_t(u64, ib_umem_start(umem_odp), range->start);
++	end = min_t(u64, ib_umem_end(umem_odp), range->end);
+ 
+ 	/*
+ 	 * Iteration one - zap the HW's MTTs. The notifiers_count ensures that
+@@ -312,8 +321,13 @@ void mlx5_ib_invalidate_range(struct ib_umem_odp *umem_odp, unsigned long start,
+ 		destroy_unused_implicit_child_mr(mr);
+ out:
+ 	mutex_unlock(&umem_odp->umem_mutex);
++	return true;
+ }
+ 
++const struct mmu_range_notifier_ops mlx5_mn_ops = {
++	.invalidate = mlx5_ib_invalidate_range,
++};
++
+ void mlx5_ib_internal_fill_odp_caps(struct mlx5_ib_dev *dev)
+ {
+ 	struct ib_odp_caps *caps = &dev->odp_caps;
+@@ -414,7 +428,7 @@ static struct mlx5_ib_mr *implicit_get_child_mr(struct mlx5_ib_mr *imr,
+ 
+ 	odp = ib_umem_odp_alloc_child(to_ib_umem_odp(imr->umem),
+ 				      idx * MLX5_IMR_MTT_SIZE,
+-				      MLX5_IMR_MTT_SIZE);
++				      MLX5_IMR_MTT_SIZE, &mlx5_mn_ops);
+ 	if (IS_ERR(odp))
+ 		return ERR_CAST(odp);
+ 
+@@ -600,8 +614,9 @@ static int pagefault_real_mr(struct mlx5_ib_mr *mr, struct ib_umem_odp *odp,
+ 			     u64 user_va, size_t bcnt, u32 *bytes_mapped,
+ 			     u32 flags)
+ {
+-	int current_seq, page_shift, ret, np;
++	int page_shift, ret, np;
+ 	bool downgrade = flags & MLX5_PF_FLAGS_DOWNGRADE;
++	unsigned long current_seq;
+ 	u64 access_mask;
+ 	u64 start_idx, page_mask;
+ 
+@@ -613,12 +628,7 @@ static int pagefault_real_mr(struct mlx5_ib_mr *mr, struct ib_umem_odp *odp,
+ 	if (odp->umem.writable && !downgrade)
+ 		access_mask |= ODP_WRITE_ALLOWED_BIT;
+ 
+-	current_seq = READ_ONCE(odp->notifiers_seq);
+-	/*
+-	 * Ensure the sequence number is valid for some time before we call
+-	 * gup.
+-	 */
+-	smp_rmb();
++	current_seq = mmu_range_read_begin(&odp->notifier);
+ 
+ 	np = ib_umem_odp_map_dma_pages(odp, user_va, bcnt, access_mask,
+ 				       current_seq);
+@@ -626,7 +636,7 @@ static int pagefault_real_mr(struct mlx5_ib_mr *mr, struct ib_umem_odp *odp,
+ 		return np;
+ 
+ 	mutex_lock(&odp->umem_mutex);
+-	if (!ib_umem_mmu_notifier_retry(odp, current_seq)) {
++	if (!mmu_range_read_retry(&odp->notifier, current_seq)) {
+ 		/*
+ 		 * No need to check whether the MTTs really belong to
+ 		 * this MR, since ib_umem_odp_map_dma_pages already
+@@ -656,19 +666,6 @@ static int pagefault_real_mr(struct mlx5_ib_mr *mr, struct ib_umem_odp *odp,
+ 	return np << (page_shift - PAGE_SHIFT);
+ 
+ out:
+-	if (ret == -EAGAIN) {
+-		unsigned long timeout = msecs_to_jiffies(MMU_NOTIFIER_TIMEOUT);
+-
+-		if (!wait_for_completion_timeout(&odp->notifier_completion,
+-						 timeout)) {
+-			mlx5_ib_warn(
+-				mr->dev,
+-				"timeout waiting for mmu notifier. seq %d against %d. notifiers_count=%d\n",
+-				current_seq, odp->notifiers_seq,
+-				odp->notifiers_count);
+-		}
+-	}
+-
+ 	return ret;
+ }
+ 
+@@ -1609,7 +1606,6 @@ void mlx5_odp_init_mr_cache_entry(struct mlx5_cache_ent *ent)
+ 
+ static const struct ib_device_ops mlx5_ib_dev_odp_ops = {
+ 	.advise_mr = mlx5_ib_advise_mr,
+-	.invalidate_range = mlx5_ib_invalidate_range,
+ };
+ 
+ int mlx5_ib_odp_init_one(struct mlx5_ib_dev *dev)
+diff --git a/include/rdma/ib_umem_odp.h b/include/rdma/ib_umem_odp.h
+index 09b0e4494986a9..98ed5435afccd9 100644
+--- a/include/rdma/ib_umem_odp.h
++++ b/include/rdma/ib_umem_odp.h
+@@ -35,11 +35,11 @@
+ 
+ #include <rdma/ib_umem.h>
+ #include <rdma/ib_verbs.h>
+-#include <linux/interval_tree.h>
+ 
+ struct ib_umem_odp {
+ 	struct ib_umem umem;
+-	struct ib_ucontext_per_mm *per_mm;
++	struct mmu_range_notifier notifier;
++	struct pid *tgid;
+ 
+ 	/*
+ 	 * An array of the pages included in the on-demand paging umem.
+@@ -62,13 +62,8 @@ struct ib_umem_odp {
+ 	struct mutex		umem_mutex;
+ 	void			*private; /* for the HW driver to use. */
+ 
+-	int notifiers_seq;
+-	int notifiers_count;
+ 	int npages;
+ 
+-	/* Tree tracking */
+-	struct interval_tree_node interval_tree;
+-
+ 	/*
+ 	 * An implicit odp umem cannot be DMA mapped, has 0 length, and serves
+ 	 * only as an anchor for the driver to hold onto the per_mm. FIXME:
+@@ -77,7 +72,6 @@ struct ib_umem_odp {
+ 	 */
+ 	bool is_implicit_odp;
+ 
+-	struct completion	notifier_completion;
+ 	unsigned int		page_shift;
+ };
+ 
+@@ -89,13 +83,13 @@ static inline struct ib_umem_odp *to_ib_umem_odp(struct ib_umem *umem)
+ /* Returns the first page of an ODP umem. */
+ static inline unsigned long ib_umem_start(struct ib_umem_odp *umem_odp)
+ {
+-	return umem_odp->interval_tree.start;
++	return umem_odp->notifier.interval_tree.start;
+ }
+ 
+ /* Returns the address of the page after the last one of an ODP umem. */
+ static inline unsigned long ib_umem_end(struct ib_umem_odp *umem_odp)
+ {
+-	return umem_odp->interval_tree.last + 1;
++	return umem_odp->notifier.interval_tree.last + 1;
+ }
+ 
+ static inline size_t ib_umem_odp_num_pages(struct ib_umem_odp *umem_odp)
+@@ -119,21 +113,14 @@ static inline size_t ib_umem_odp_num_pages(struct ib_umem_odp *umem_odp)
+ 
+ #ifdef CONFIG_INFINIBAND_ON_DEMAND_PAGING
+ 
+-struct ib_ucontext_per_mm {
+-	struct mmu_notifier mn;
+-	struct pid *tgid;
+-
+-	struct rb_root_cached umem_tree;
+-	/* Protects umem_tree */
+-	struct rw_semaphore umem_rwsem;
+-};
+-
+ struct ib_umem_odp *ib_umem_odp_get(struct ib_udata *udata, unsigned long addr,
+-				    size_t size, int access);
++				    size_t size, int access,
++				    const struct mmu_range_notifier_ops *ops);
+ struct ib_umem_odp *ib_umem_odp_alloc_implicit(struct ib_udata *udata,
+ 					       int access);
+-struct ib_umem_odp *ib_umem_odp_alloc_child(struct ib_umem_odp *root_umem,
+-					    unsigned long addr, size_t size);
++struct ib_umem_odp *
++ib_umem_odp_alloc_child(struct ib_umem_odp *root_umem, unsigned long addr,
++			size_t size, const struct mmu_range_notifier_ops *ops);
+ void ib_umem_odp_release(struct ib_umem_odp *umem_odp);
+ 
+ int ib_umem_odp_map_dma_pages(struct ib_umem_odp *umem_odp, u64 start_offset,
+@@ -143,39 +130,11 @@ int ib_umem_odp_map_dma_pages(struct ib_umem_odp *umem_odp, u64 start_offset,
+ void ib_umem_odp_unmap_dma_pages(struct ib_umem_odp *umem_odp, u64 start_offset,
+ 				 u64 bound);
+ 
+-typedef int (*umem_call_back)(struct ib_umem_odp *item, u64 start, u64 end,
+-			      void *cookie);
+-/*
+- * Call the callback on each ib_umem in the range. Returns the logical or of
+- * the return values of the functions called.
+- */
+-int rbt_ib_umem_for_each_in_range(struct rb_root_cached *root,
+-				  u64 start, u64 end,
+-				  umem_call_back cb,
+-				  bool blockable, void *cookie);
+-
+-static inline int ib_umem_mmu_notifier_retry(struct ib_umem_odp *umem_odp,
+-					     unsigned long mmu_seq)
+-{
+-	/*
+-	 * This code is strongly based on the KVM code from
+-	 * mmu_notifier_retry. Should be called with
+-	 * the relevant locks taken (umem_odp->umem_mutex
+-	 * and the ucontext umem_mutex semaphore locked for read).
+-	 */
+-
+-	if (unlikely(umem_odp->notifiers_count))
+-		return 1;
+-	if (umem_odp->notifiers_seq != mmu_seq)
+-		return 1;
+-	return 0;
+-}
+-
+ #else /* CONFIG_INFINIBAND_ON_DEMAND_PAGING */
+ 
+-static inline struct ib_umem_odp *ib_umem_odp_get(struct ib_udata *udata,
+-						  unsigned long addr,
+-						  size_t size, int access)
++static inline struct ib_umem_odp *
++ib_umem_odp_get(struct ib_udata *udata, unsigned long addr, size_t size,
++		int access, const struct mmu_range_notifier_ops *ops)
+ {
+ 	return ERR_PTR(-EINVAL);
+ }
+diff --git a/include/rdma/ib_verbs.h b/include/rdma/ib_verbs.h
+index 6a47ba85c54c11..2c30c859ae0d13 100644
+--- a/include/rdma/ib_verbs.h
++++ b/include/rdma/ib_verbs.h
+@@ -2422,8 +2422,6 @@ struct ib_device_ops {
+ 			    u64 iova);
+ 	int (*unmap_fmr)(struct list_head *fmr_list);
+ 	int (*dealloc_fmr)(struct ib_fmr *fmr);
+-	void (*invalidate_range)(struct ib_umem_odp *umem_odp,
+-				 unsigned long start, unsigned long end);
+ 	int (*attach_mcast)(struct ib_qp *qp, union ib_gid *gid, u16 lid);
+ 	int (*detach_mcast)(struct ib_qp *qp, union ib_gid *gid, u16 lid);
+ 	struct ib_xrcd *(*alloc_xrcd)(struct ib_device *device,
+-- 
+2.23.0
+
+_______________________________________________
+Nouveau mailing list
+Nouveau@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/nouveau
