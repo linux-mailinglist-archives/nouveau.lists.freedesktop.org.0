@@ -2,69 +2,69 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 21B3812B30F
-	for <lists+nouveau@lfdr.de>; Fri, 27 Dec 2019 09:15:45 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6C73712B335
+	for <lists+nouveau@lfdr.de>; Fri, 27 Dec 2019 09:16:38 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8FC1C6E186;
-	Fri, 27 Dec 2019 08:14:10 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1B09D6E424;
+	Fri, 27 Dec 2019 08:14:48 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wr1-x442.google.com (mail-wr1-x442.google.com
- [IPv6:2a00:1450:4864:20::442])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C88EE6EC4F;
- Tue, 29 Oct 2019 17:19:58 +0000 (UTC)
-Received: by mail-wr1-x442.google.com with SMTP id s1so14578830wro.0;
- Tue, 29 Oct 2019 10:19:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=reply-to:subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-transfer-encoding:content-language;
- bh=+7k6Tgo7zdAI3sdkV2vUab4Qg2cErY2tDGH+QpqLC8g=;
- b=kMvDAfqNMsgwLVSlQz2HGv5SXkrMFIA/sC5PQVA0qHCk2uNpr3vgteNY32KO6XolN9
- jrYaAZAZBspll0O/IT//xBGYiWDFZD8KU1uPmY2vK3KPsyhTb7mzyGHCGTLByQgbXpOx
- OeloXmN2vq/6bG5ZHNwG845uL6ZvA2Sdmd4uYMZ4E+4NJ7wccdnycw840yvcV4FBt6VL
- /xrA8JLUiBY/5hX+ugxid7ZLni4gqfgl/j7jRF06f5phYKlyiq6OI+yIzaRotZfKsIyc
- R7JU0GMg+/jruClJEMts6SYQJZeL4C+Qp1GS1gxReNthE6HvcZsnnoBEcT3avouO/n1H
- WYQw==
+Received: from mail-qk1-x742.google.com (mail-qk1-x742.google.com
+ [IPv6:2607:f8b0:4864:20::742])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0FA916E40A
+ for <nouveau@lists.freedesktop.org>; Tue, 29 Oct 2019 13:59:39 +0000 (UTC)
+Received: by mail-qk1-x742.google.com with SMTP id e66so12275214qkf.13
+ for <nouveau@lists.freedesktop.org>; Tue, 29 Oct 2019 06:59:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ziepe.ca; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to:user-agent;
+ bh=8jOH6aTboFzH2FE5ebDVzGbVS8tkTfz/e6O//bI0tkY=;
+ b=TOjiKaf4drtV5ldH8zR3DdZRftx4pfyMK7aX+WxF+hP7GAklHNLQJLB3u6THZAuUwq
+ 2J8U2Z8jfa4RHHqJi86VA8XDEEftIwINME4Xcqo7Lwf5TfQ/5CHndbgRjMZBi7ltmTD/
+ 9/OIdOP+IKZBXBOnw95rEg1RRCcplq0VveMXmbgEcrW0nIfOMVnpZGUZJC/dcmVtrcLp
+ GnztoS4X7Cig0PpARFdiBQAFwuPsNE3oq28XslCe7YAiytEpFuhH3cYXFITze125lBn3
+ w8SiavcWCCYZB5EGHirP4nTYv97GbqlF/YYAtwW9ZFYvfLIJ06XZktP4ccL77Rn8KbAv
+ rdng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:reply-to:subject:to:cc:references:from
- :message-id:date:user-agent:mime-version:in-reply-to
- :content-transfer-encoding:content-language;
- bh=+7k6Tgo7zdAI3sdkV2vUab4Qg2cErY2tDGH+QpqLC8g=;
- b=S8hKaTz2G6pztg0JMTKZOTO4zP8wIcoSzmrsuB25x51JUb/xRmmKGJpWXzplNd9r6c
- Umk4q+UM6CatUexvnS0ClpzoxuinMymGe+fZHDl5xfiT1SBcoxpg2M6lkex8Dgs3qa4B
- 2W9R4H2YRiq85J4XMhmEGmBzwhMTAwKN6IOxPAL+PGcKeFNXbiClxFd9Z4/+1sAKaG0h
- Mx+RaLF9NPga4sBmwDWQV/w1eW35ajCfuuauUnxsrFAVc/ahoUvnbBaFobrDs3XuuVUk
- ouQHwnGjx5FbfHt1kbbkLVTP67a0IpDqDIv3AesmCnB15MqrkXoCux5F7TFDfFHIamWH
- vKnQ==
-X-Gm-Message-State: APjAAAVWdzQ5vAd3pviHoCaZLY5BjLj1y4wmL2a/uitOUIx41hNCYtKw
- IwgMGNr4adLFlJj6F1TDVGE=
-X-Google-Smtp-Source: APXvYqyE7qwpgL7KV62AOaDM+oFRQdWcTDjdZKuljhwWYaRRqCfiSc2s9/fNi7ZWZZwXl8hUkkgUgA==
-X-Received: by 2002:adf:ef0a:: with SMTP id e10mr20205293wro.234.1572369597497; 
- Tue, 29 Oct 2019 10:19:57 -0700 (PDT)
-Received: from ?IPv6:2a02:908:1252:fb60:be8a:bd56:1f94:86e7?
- ([2a02:908:1252:fb60:be8a:bd56:1f94:86e7])
- by smtp.gmail.com with ESMTPSA id f8sm3544088wmb.37.2019.10.29.10.19.55
- (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
- Tue, 29 Oct 2019 10:19:56 -0700 (PDT)
-To: "Kuehling, Felix" <Felix.Kuehling@amd.com>, Jason Gunthorpe
- <jgg@ziepe.ca>, "linux-mm@kvack.org" <linux-mm@kvack.org>,
- Jerome Glisse <jglisse@redhat.com>, Ralph Campbell <rcampbell@nvidia.com>,
- John Hubbard <jhubbard@nvidia.com>
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to:user-agent;
+ bh=8jOH6aTboFzH2FE5ebDVzGbVS8tkTfz/e6O//bI0tkY=;
+ b=Fv0Some3Ka0XTpr8WBWetUxPOlBwuJRxmMWn4QpI0+6+EGyxgWA7k1Wg6IO4lpOBLX
+ O+1eLgPYIW48iyNjundFOLv5D7FH0h1WYahnpT5xays5LvqkuArUYZRGdFi/QKY7gAtT
+ 91AU+iM+zjOnOX8Wq/Bp8OcrBN/CLUw6YWe8hlOKG4zPCJnrteEBAk2+aUpInw+lUigp
+ KtqIroIobxifpQMvtVTcW+ace5X4ESFHcMQhInEF7BFDzMsShxGxbXpbUz06whaAaF0H
+ +BfB7Zxw+JM5RsRtJ5M3rsVIP1I1XuTI4440EthRMEzWXDrfF4NCBnCYQTq2MTucRBbe
+ a5Nw==
+X-Gm-Message-State: APjAAAXKlce7dNoHE+hrojMh8yH4RTlkUf6uZtmZnjxNaDWLDaRkPVxz
+ MSnxY7YXw/VoFRbd4uwUaMB8ZQ==
+X-Google-Smtp-Source: APXvYqw2t3qlIvqK+Izwy8tw608BKfVw2jgQ/Y0rREEshgcaboVymXi/nbliXAwFtIZ8GNBEqxuwOw==
+X-Received: by 2002:a05:620a:8cb:: with SMTP id
+ z11mr15146993qkz.72.1572357577964; 
+ Tue, 29 Oct 2019 06:59:37 -0700 (PDT)
+Received: from ziepe.ca
+ (hlfxns017vw-142-162-113-180.dhcp-dynamic.fibreop.ns.bellaliant.net.
+ [142.162.113.180])
+ by smtp.gmail.com with ESMTPSA id p188sm7446102qkb.33.2019.10.29.06.59.36
+ (version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+ Tue, 29 Oct 2019 06:59:36 -0700 (PDT)
+Received: from jgg by mlx.ziepe.ca with local (Exim 4.90_1)
+ (envelope-from <jgg@ziepe.ca>)
+ id 1iPS24-0005x3-D2; Tue, 29 Oct 2019 10:59:36 -0300
+Date: Tue, 29 Oct 2019 10:59:36 -0300
+From: Jason Gunthorpe <jgg@ziepe.ca>
+To: "Koenig, Christian" <Christian.Koenig@amd.com>
+Message-ID: <20191029135936.GD6128@ziepe.ca>
 References: <20191028201032.6352-1-jgg@ziepe.ca>
- <20191028201032.6352-13-jgg@ziepe.ca>
- <a368d1bf-ba69-bb63-2bfd-b674acc2f19b@amd.com>
-From: =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>
-Message-ID: <cd0507d9-80b9-34fc-1cd3-12d90ee65c21@gmail.com>
-Date: Tue, 29 Oct 2019 14:07:37 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.9.0
+ <20191028201032.6352-14-jgg@ziepe.ca>
+ <bc44f331-5448-ddc0-ecc3-d0ccb92e11a4@amd.com>
 MIME-Version: 1.0
-In-Reply-To: <a368d1bf-ba69-bb63-2bfd-b674acc2f19b@amd.com>
-Content-Language: en-US
-X-Mailman-Approved-At: Fri, 27 Dec 2019 08:13:30 +0000
-Subject: Re: [Nouveau] [PATCH v2 12/15] drm/amdgpu: Call find_vma under
- mmap_sem
+Content-Disposition: inline
+In-Reply-To: <bc44f331-5448-ddc0-ecc3-d0ccb92e11a4@amd.com>
+User-Agent: Mutt/1.9.4 (2018-02-28)
+X-Mailman-Approved-At: Fri, 27 Dec 2019 08:13:31 +0000
+Subject: Re: [Nouveau] [PATCH v2 13/15] drm/amdgpu: Use mmu_range_insert
+ instead of hmm_mirror
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -76,109 +76,104 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Reply-To: christian.koenig@amd.com
 Cc: Juergen Gross <jgross@suse.com>, "Zhou,
  David\(ChunMing\)" <David1.Zhou@amd.com>,
- Mike Marciniszyn <mike.marciniszyn@intel.com>,
+ Ralph Campbell <rcampbell@nvidia.com>,
  Stefano Stabellini <sstabellini@kernel.org>,
  Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
- "linux-rdma@vger.kernel.org" <linux-rdma@vger.kernel.org>,
- "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
- Dennis Dalessandro <dennis.dalessandro@intel.com>,
+ "linux-rdma@vger.kernel.org" <linux-rdma@vger.kernel.org>, "Kuehling,
+ Felix" <Felix.Kuehling@amd.com>, Mike Marciniszyn <mike.marciniszyn@intel.com>,
+ "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
+ Christoph Hellwig <hch@infradead.org>,
+ "linux-mm@kvack.org" <linux-mm@kvack.org>,
  "amd-gfx@lists.freedesktop.org" <amd-gfx@lists.freedesktop.org>,
- Christoph Hellwig <hch@infradead.org>, Jason Gunthorpe <jgg@mellanox.com>,
- "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, "Deucher,
+ "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>, "Deucher,
  Alexander" <Alexander.Deucher@amd.com>,
  "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
  Boris Ostrovsky <boris.ostrovsky@oracle.com>, Petr Cvek <petrcvekcz@gmail.com>,
- "Koenig, Christian" <Christian.Koenig@amd.com>,
+ Dennis Dalessandro <dennis.dalessandro@intel.com>,
  Ben Skeggs <bskeggs@redhat.com>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-QW0gMjkuMTAuMTkgdW0gMTc6Mjggc2NocmllYiBLdWVobGluZywgRmVsaXg6Cj4gT24gMjAxOS0x
-MC0yOCA0OjEwIHAubS4sIEphc29uIEd1bnRob3JwZSB3cm90ZToKPj4gRnJvbTogSmFzb24gR3Vu
-dGhvcnBlIDxqZ2dAbWVsbGFub3guY29tPgo+Pgo+PiBmaW5kX3ZtYSgpIG11c3QgYmUgY2FsbGVk
-IHVuZGVyIHRoZSBtbWFwX3NlbSwgcmVvcmdhbml6ZSB0aGlzIGNvZGUgdG8KPj4gZG8gdGhlIHZt
-YSBjaGVjayBhZnRlciBlbnRlcmluZyB0aGUgbG9jay4KPj4KPj4gRnVydGhlciwgZml4IHRoZSB1
-bmxvY2tlZCB1c2Ugb2Ygc3RydWN0IHRhc2tfc3RydWN0J3MgbW0sIGluc3RlYWQgdXNlCj4+IHRo
-ZSBtbSBmcm9tIGhtbV9taXJyb3Igd2hpY2ggaGFzIGFuIGFjdGl2ZSBtbV9ncmFiLiBBbHNvIHRo
-ZSBtbV9ncmFiCj4+IG11c3QgYmUgY29udmVydGVkIHRvIGEgbW1fZ2V0IGJlZm9yZSBhY3F1aXJp
-bmcgbW1hcF9zZW0gb3IgY2FsbGluZwo+PiBmaW5kX3ZtYSgpLgo+Pgo+PiBGaXhlczogNjZjNDU1
-MDBiZmRjICgiZHJtL2FtZGdwdTogdXNlIG5ldyBITU0gQVBJcyBhbmQgaGVscGVycyIpCj4+IEZp
-eGVzOiAwOTE5MTk1ZjJiMGQgKCJkcm0vYW1kZ3B1OiBFbmFibGUgYW1kZ3B1X3R0bV90dF9nZXRf
-dXNlcl9wYWdlcyBpbiB3b3JrZXIgdGhyZWFkcyIpCj4+IENjOiBBbGV4IERldWNoZXIgPGFsZXhh
-bmRlci5kZXVjaGVyQGFtZC5jb20+Cj4+IENjOiBDaHJpc3RpYW4gS8O2bmlnIDxjaHJpc3RpYW4u
-a29lbmlnQGFtZC5jb20+Cj4+IENjOiBEYXZpZCAoQ2h1bk1pbmcpIFpob3UgPERhdmlkMS5aaG91
-QGFtZC5jb20+Cj4+IENjOiBhbWQtZ2Z4QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwo+PiBTaWduZWQt
-b2ZmLWJ5OiBKYXNvbiBHdW50aG9ycGUgPGpnZ0BtZWxsYW5veC5jb20+Cj4gT25lIHF1ZXN0aW9u
-IGlubGluZSB0byBjb25maXJtIG15IHVuZGVyc3RhbmRpbmcuIE90aGVyd2lzZSB0aGlzIHBhdGNo
-IGlzCj4KPiBSZXZpZXdlZC1ieTogRmVsaXggS3VlaGxpbmcgPEZlbGl4Lkt1ZWhsaW5nQGFtZC5j
-b20+Cj4KPgo+PiAtLS0KPj4gICAgZHJpdmVycy9ncHUvZHJtL2FtZC9hbWRncHUvYW1kZ3B1X3R0
-bS5jIHwgMzcgKysrKysrKysrKysrKystLS0tLS0tLS0tLQo+PiAgICAxIGZpbGUgY2hhbmdlZCwg
-MjEgaW5zZXJ0aW9ucygrKSwgMTYgZGVsZXRpb25zKC0pCj4+Cj4+IGRpZmYgLS1naXQgYS9kcml2
-ZXJzL2dwdS9kcm0vYW1kL2FtZGdwdS9hbWRncHVfdHRtLmMgYi9kcml2ZXJzL2dwdS9kcm0vYW1k
-L2FtZGdwdS9hbWRncHVfdHRtLmMKPj4gaW5kZXggZGZmNDFkMGE4NWZlOTYuLmMwZTQxZjFmMGMy
-MzY1IDEwMDY0NAo+PiAtLS0gYS9kcml2ZXJzL2dwdS9kcm0vYW1kL2FtZGdwdS9hbWRncHVfdHRt
-LmMKPj4gKysrIGIvZHJpdmVycy9ncHUvZHJtL2FtZC9hbWRncHUvYW1kZ3B1X3R0bS5jCj4+IEBA
-IC0zNSw2ICszNSw3IEBACj4+ICAgICNpbmNsdWRlIDxsaW51eC9obW0uaD4KPj4gICAgI2luY2x1
-ZGUgPGxpbnV4L3BhZ2VtYXAuaD4KPj4gICAgI2luY2x1ZGUgPGxpbnV4L3NjaGVkL3Rhc2suaD4K
-Pj4gKyNpbmNsdWRlIDxsaW51eC9zY2hlZC9tbS5oPgo+PiAgICAjaW5jbHVkZSA8bGludXgvc2Vx
-X2ZpbGUuaD4KPj4gICAgI2luY2x1ZGUgPGxpbnV4L3NsYWIuaD4KPj4gICAgI2luY2x1ZGUgPGxp
-bnV4L3N3YXAuaD4KPj4gQEAgLTc4OCw3ICs3ODksNyBAQCBpbnQgYW1kZ3B1X3R0bV90dF9nZXRf
-dXNlcl9wYWdlcyhzdHJ1Y3QgYW1kZ3B1X2JvICpibywgc3RydWN0IHBhZ2UgKipwYWdlcykKPj4g
-ICAgCXN0cnVjdCBobW1fbWlycm9yICptaXJyb3IgPSBiby0+bW4gPyAmYm8tPm1uLT5taXJyb3Ig
-OiBOVUxMOwo+PiAgICAJc3RydWN0IHR0bV90dCAqdHRtID0gYm8tPnRiby50dG07Cj4+ICAgIAlz
-dHJ1Y3QgYW1kZ3B1X3R0bV90dCAqZ3R0ID0gKHZvaWQgKil0dG07Cj4+IC0Jc3RydWN0IG1tX3N0
-cnVjdCAqbW0gPSBndHQtPnVzZXJ0YXNrLT5tbTsKPj4gKwlzdHJ1Y3QgbW1fc3RydWN0ICptbTsK
-Pj4gICAgCXVuc2lnbmVkIGxvbmcgc3RhcnQgPSBndHQtPnVzZXJwdHI7Cj4+ICAgIAlzdHJ1Y3Qg
-dm1fYXJlYV9zdHJ1Y3QgKnZtYTsKPj4gICAgCXN0cnVjdCBobW1fcmFuZ2UgKnJhbmdlOwo+PiBA
-QCAtNzk2LDI1ICs3OTcsMTQgQEAgaW50IGFtZGdwdV90dG1fdHRfZ2V0X3VzZXJfcGFnZXMoc3Ry
-dWN0IGFtZGdwdV9ibyAqYm8sIHN0cnVjdCBwYWdlICoqcGFnZXMpCj4+ICAgIAl1aW50NjRfdCAq
-cGZuczsKPj4gICAgCWludCByID0gMDsKPj4gICAgCj4+IC0JaWYgKCFtbSkgLyogSGFwcGVucyBk
-dXJpbmcgcHJvY2VzcyBzaHV0ZG93biAqLwo+PiAtCQlyZXR1cm4gLUVTUkNIOwo+PiAtCj4+ICAg
-IAlpZiAodW5saWtlbHkoIW1pcnJvcikpIHsKPj4gICAgCQlEUk1fREVCVUdfRFJJVkVSKCJGYWls
-ZWQgdG8gZ2V0IGhtbV9taXJyb3JcbiIpOwo+PiAtCQlyID0gLUVGQVVMVDsKPj4gLQkJZ290byBv
-dXQ7Cj4+ICsJCXJldHVybiAtRUZBVUxUOwo+PiAgICAJfQo+PiAgICAKPj4gLQl2bWEgPSBmaW5k
-X3ZtYShtbSwgc3RhcnQpOwo+PiAtCWlmICh1bmxpa2VseSghdm1hIHx8IHN0YXJ0IDwgdm1hLT52
-bV9zdGFydCkpIHsKPj4gLQkJciA9IC1FRkFVTFQ7Cj4+IC0JCWdvdG8gb3V0Owo+PiAtCX0KPj4g
-LQlpZiAodW5saWtlbHkoKGd0dC0+dXNlcmZsYWdzICYgQU1ER1BVX0dFTV9VU0VSUFRSX0FOT05P
-TkxZKSAmJgo+PiAtCQl2bWEtPnZtX2ZpbGUpKSB7Cj4+IC0JCXIgPSAtRVBFUk07Cj4+IC0JCWdv
-dG8gb3V0Owo+PiAtCX0KPj4gKwltbSA9IG1pcnJvci0+aG1tLT5tbXVfbm90aWZpZXIubW07Cj4+
-ICsJaWYgKCFtbWdldF9ub3RfemVybyhtbSkpIC8qIEhhcHBlbnMgZHVyaW5nIHByb2Nlc3Mgc2h1
-dGRvd24gKi8KPiBUaGlzIHdvcmtzIGJlY2F1c2UgbWlycm9yLT5obW0tPm1tdV9ub3RpZmllciBo
-b2xkcyBhbiBtbWdyYWIgcmVmZXJlbmNlCj4gdG8gdGhlIG1tPyBTbyB0aGUgTU0gd2lsbCBub3Qg
-anVzdCBnbyBhd2F5LCBidXQgaWYgdGhlIG1tZ2V0IHJlZmNvdW50IGlzCj4gMCwgaXQgbWVhbnMg
-dGhlIG1tIGlzIG1hcmtlZCBmb3IgZGVzdHJ1Y3Rpb24gYW5kIHNob3VsZG4ndCBiZSB1c2VkIGFu
-eSBtb3JlLgoKWWVzLCBleGFjdGx5LiBUaGF0IGlzIGEgcmF0aGVyIGNvbW1vbiBwYXR0ZXJuLCBv
-bmUgcmVmZXJlbmNlIGNvdW50IGZvciAKdGhlIGZ1bmN0aW9uYWxpdHkgYW5kIG9uZSBmb3IgdGhl
-IHN0cnVjdHVyZS4KCldoZW4gdGhlIGZ1bmN0aW9uYWxpdHkgaXMgZ29uZSB0aGUgc3RydWN0dXJl
-IG1pZ2h0IHN0aWxsIGJlIGFsaXZlIGZvciAKc29tZSByZWFzb24uIFRUTSBhbmQgYSBjb3VwbGUg
-b2Ygb3RoZXIgc3RydWN0dXJlcyB1c2UgdGhlIHNhbWUgYXBwcm9hY2guCgpDaHJpc3RpYW4uCgo+
-Cj4KPj4gKwkJcmV0dXJuIC1FU1JDSDsKPj4gICAgCj4+ICAgIAlyYW5nZSA9IGt6YWxsb2Moc2l6
-ZW9mKCpyYW5nZSksIEdGUF9LRVJORUwpOwo+PiAgICAJaWYgKHVubGlrZWx5KCFyYW5nZSkpIHsK
-Pj4gQEAgLTg0Nyw2ICs4MzcsMTcgQEAgaW50IGFtZGdwdV90dG1fdHRfZ2V0X3VzZXJfcGFnZXMo
-c3RydWN0IGFtZGdwdV9ibyAqYm8sIHN0cnVjdCBwYWdlICoqcGFnZXMpCj4+ICAgIAlobW1fcmFu
-Z2Vfd2FpdF91bnRpbF92YWxpZChyYW5nZSwgSE1NX1JBTkdFX0RFRkFVTFRfVElNRU9VVCk7Cj4+
-ICAgIAo+PiAgICAJZG93bl9yZWFkKCZtbS0+bW1hcF9zZW0pOwo+PiArCXZtYSA9IGZpbmRfdm1h
-KG1tLCBzdGFydCk7Cj4+ICsJaWYgKHVubGlrZWx5KCF2bWEgfHwgc3RhcnQgPCB2bWEtPnZtX3N0
-YXJ0KSkgewo+PiArCQlyID0gLUVGQVVMVDsKPj4gKwkJZ290byBvdXRfdW5sb2NrOwo+PiArCX0K
-Pj4gKwlpZiAodW5saWtlbHkoKGd0dC0+dXNlcmZsYWdzICYgQU1ER1BVX0dFTV9VU0VSUFRSX0FO
-T05PTkxZKSAmJgo+PiArCQl2bWEtPnZtX2ZpbGUpKSB7Cj4+ICsJCXIgPSAtRVBFUk07Cj4+ICsJ
-CWdvdG8gb3V0X3VubG9jazsKPj4gKwl9Cj4+ICsKPj4gICAgCXIgPSBobW1fcmFuZ2VfZmF1bHQo
-cmFuZ2UsIDApOwo+PiAgICAJdXBfcmVhZCgmbW0tPm1tYXBfc2VtKTsKPj4gICAgCj4+IEBAIC04
-NjUsMTUgKzg2NiwxOSBAQCBpbnQgYW1kZ3B1X3R0bV90dF9nZXRfdXNlcl9wYWdlcyhzdHJ1Y3Qg
-YW1kZ3B1X2JvICpibywgc3RydWN0IHBhZ2UgKipwYWdlcykKPj4gICAgCX0KPj4gICAgCj4+ICAg
-IAlndHQtPnJhbmdlID0gcmFuZ2U7Cj4+ICsJbW1wdXQobW0pOwo+PiAgICAKPj4gICAgCXJldHVy
-biAwOwo+PiAgICAKPj4gK291dF91bmxvY2s6Cj4+ICsJdXBfcmVhZCgmbW0tPm1tYXBfc2VtKTsK
-Pj4gICAgb3V0X2ZyZWVfcGZuczoKPj4gICAgCWhtbV9yYW5nZV91bnJlZ2lzdGVyKHJhbmdlKTsK
-Pj4gICAgCWt2ZnJlZShwZm5zKTsKPj4gICAgb3V0X2ZyZWVfcmFuZ2VzOgo+PiAgICAJa2ZyZWUo
-cmFuZ2UpOwo+PiAgICBvdXQ6Cj4+ICsJbW1wdXQobW0pOwo+PiAgICAJcmV0dXJuIHI7Cj4+ICAg
-IH0KPj4gICAgCj4gX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X18KPiBhbWQtZ2Z4IG1haWxpbmcgbGlzdAo+IGFtZC1nZnhAbGlzdHMuZnJlZWRlc2t0b3Aub3Jn
-Cj4gaHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9hbWQtZ2Z4
-CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpOb3V2ZWF1
-IG1haWxpbmcgbGlzdApOb3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3Rz
-LmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL25vdXZlYXUK
+On Tue, Oct 29, 2019 at 07:51:30AM +0000, Koenig, Christian wrote:
+> > +static bool amdgpu_mn_invalidate_gfx(struct mmu_range_notifier *mrn,
+> > +				     const struct mmu_notifier_range *range)
+> >   {
+> > -	struct amdgpu_bo *bo;
+> > +	struct amdgpu_bo *bo = container_of(mrn, struct amdgpu_bo, notifier);
+> > +	struct amdgpu_device *adev = amdgpu_ttm_adev(bo->tbo.bdev);
+> >   	long r;
+> >   
+> > -	list_for_each_entry(bo, &node->bos, mn_list) {
+> > -
+> > -		if (!amdgpu_ttm_tt_affect_userptr(bo->tbo.ttm, start, end))
+> > -			continue;
+> > -
+> > -		r = dma_resv_wait_timeout_rcu(bo->tbo.base.resv,
+> > -			true, false, MAX_SCHEDULE_TIMEOUT);
+> > -		if (r <= 0)
+> > -			DRM_ERROR("(%ld) failed to wait for user bo\n", r);
+> > -	}
+> > +	/* FIXME: Is this necessary? */
+> 
+> Most likely not.
+> 
+> Christian.
+> 
+> > +	if (!amdgpu_ttm_tt_affect_userptr(bo->tbo.ttm, range->start,
+> > +					  range->end))
+> > +		return true;
+
+So is the bo->tbo.mem.num_pages == bo->tbo.ttm.num_pages always?
+
+And userptr can't be zero here, or at least it doesn't matter if it is?
+
+> > +static bool amdgpu_mn_invalidate_hsa(struct mmu_range_notifier *mrn,
+> > +				     const struct mmu_notifier_range *range)
+> >   {
+> > -	struct amdgpu_mn *amn = container_of(mirror, struct amdgpu_mn, mirror);
+> > -	unsigned long start = update->start;
+> > -	unsigned long end = update->end;
+> > -	bool blockable = mmu_notifier_range_blockable(update);
+> > -	struct interval_tree_node *it;
+> > -
+> > -	/* notification is exclusive, but interval is inclusive */
+> > -	end -= 1;
+> > -
+> > -	/* TODO we should be able to split locking for interval tree and
+> > -	 * amdgpu_mn_invalidate_node
+> > -	 */
+> > -	if (amdgpu_mn_read_lock(amn, blockable))
+> > -		return -EAGAIN;
+> > -
+> > -	it = interval_tree_iter_first(&amn->objects, start, end);
+> > -	while (it) {
+> > -		struct amdgpu_mn_node *node;
+> > -
+> > -		if (!blockable) {
+> > -			amdgpu_mn_read_unlock(amn);
+> > -			return -EAGAIN;
+> > -		}
+> > +	struct amdgpu_bo *bo = container_of(mrn, struct amdgpu_bo, notifier);
+> > +	struct amdgpu_device *adev = amdgpu_ttm_adev(bo->tbo.bdev);
+> >   
+> > -		node = container_of(it, struct amdgpu_mn_node, it);
+> > -		it = interval_tree_iter_next(it, start, end);
+> > +	/* FIXME: Is this necessary? */
+> > +	if (!amdgpu_ttm_tt_affect_userptr(bo->tbo.ttm, range->start,
+> > +					  range->end))
+> > +		return true;
+> >   
+> > -		amdgpu_mn_invalidate_node(node, start, end);
+> > -	}
+
+This one too right?
+
+Jason
+_______________________________________________
+Nouveau mailing list
+Nouveau@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/nouveau
