@@ -1,23 +1,23 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0EA26EB490
-	for <lists+nouveau@lfdr.de>; Thu, 31 Oct 2019 17:21:03 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5DD27EB4A9
+	for <lists+nouveau@lfdr.de>; Thu, 31 Oct 2019 17:24:58 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7CD736EF01;
-	Thu, 31 Oct 2019 16:21:01 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C6D0C6EF00;
+	Thu, 31 Oct 2019 16:24:56 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
- by gabe.freedesktop.org (Postfix) with ESMTP id 044436EF01
- for <nouveau@lists.freedesktop.org>; Thu, 31 Oct 2019 16:21:01 +0000 (UTC)
+ [131.252.210.165])
+ by gabe.freedesktop.org (Postfix) with ESMTP id BA3696EF05
+ for <nouveau@lists.freedesktop.org>; Thu, 31 Oct 2019 16:24:55 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 01268720E2; Thu, 31 Oct 2019 16:21:00 +0000 (UTC)
+ id B7562720E2; Thu, 31 Oct 2019 16:24:55 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Thu, 31 Oct 2019 16:21:01 +0000
+Date: Thu, 31 Oct 2019 16:24:55 +0000
 X-Bugzilla-Reason: AssignedTo
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
@@ -32,8 +32,8 @@ X-Bugzilla-Resolution:
 X-Bugzilla-Priority: not set
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: 
-Message-ID: <bug-112185-8800-8mGaPx6hpR@http.bugs.freedesktop.org/>
+X-Bugzilla-Changed-Fields: attachments.created
+Message-ID: <bug-112185-8800-bxYmHsRcY2@http.bugs.freedesktop.org/>
 In-Reply-To: <bug-112185-8800@http.bugs.freedesktop.org/>
 References: <bug-112185-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
@@ -51,18 +51,18 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============2084770709=="
+Content-Type: multipart/mixed; boundary="===============1657089765=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============2084770709==
-Content-Type: multipart/alternative; boundary="15725388601.AfcD.5193"
+--===============1657089765==
+Content-Type: multipart/alternative; boundary="15725390951.7cD31.6764"
 Content-Transfer-Encoding: 7bit
 
 
---15725388601.AfcD.5193
-Date: Thu, 31 Oct 2019 16:21:00 +0000
+--15725390951.7cD31.6764
+Date: Thu, 31 Oct 2019 16:24:55 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -71,17 +71,17 @@ Auto-Submitted: auto-generated
 
 https://bugs.freedesktop.org/show_bug.cgi?id=3D112185
 
---- Comment #6 from Elmar Stellnberger <estellnb@elstel.org> ---
-Seems to be a kernel related issue since I have booted Debian 9 where it us=
-ed
-to work with the Mageia kernel and no mouse pointer appeared.
+--- Comment #7 from Elmar Stellnberger <estellnb@elstel.org> ---
+Created attachment 145860
+  --> https://bugs.freedesktop.org/attachment.cgi?id=3D145860&action=3Dedit
+journal.dmesg hang #1
 
 --=20
 You are receiving this mail because:
 You are the assignee for the bug.=
 
---15725388601.AfcD.5193
-Date: Thu, 31 Oct 2019 16:21:00 +0000
+--15725390951.7cD31.6764
+Date: Thu, 31 Oct 2019 16:24:55 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -98,8 +98,8 @@ Auto-Submitted: auto-generated
             <b><a class=3D"bz_bug_link=20
           bz_status_NEW "
    title=3D"NEW - Xorg hangs from time to time"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D112185#c6">Commen=
-t # 6</a>
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D112185#c7">Commen=
+t # 7</a>
               on <a class=3D"bz_bug_link=20
           bz_status_NEW "
    title=3D"NEW - Xorg hangs from time to time"
@@ -109,9 +109,11 @@ t # 6</a>
 estellnb&#64;elstel.org" title=3D"Elmar Stellnberger &lt;estellnb&#64;elste=
 l.org&gt;"> <span class=3D"fn">Elmar Stellnberger</span></a>
 </span></b>
-        <pre>Seems to be a kernel related issue since I have booted Debian =
-9 where it used
-to work with the Mageia kernel and no mouse pointer appeared.</pre>
+        <pre>Created <span class=3D""><a href=3D"attachment.cgi?id=3D145860=
+" name=3D"attach_145860" title=3D"journal.dmesg hang #1">attachment 145860<=
+/a> <a href=3D"attachment.cgi?id=3D145860&amp;action=3Dedit" title=3D"journ=
+al.dmesg hang #1">[details]</a></span>
+journal.dmesg hang #1</pre>
         </div>
       </p>
 
@@ -125,9 +127,9 @@ to work with the Mageia kernel and no mouse pointer appeared.</pre>
     </body>
 </html>=
 
---15725388601.AfcD.5193--
+--15725390951.7cD31.6764--
 
---===============2084770709==
+--===============1657089765==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -137,4 +139,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============2084770709==--
+--===============1657089765==--
