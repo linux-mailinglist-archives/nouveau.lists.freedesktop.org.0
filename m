@@ -2,93 +2,94 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7DB5612B2D3
-	for <lists+nouveau@lfdr.de>; Fri, 27 Dec 2019 09:14:39 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B1CCA12B308
+	for <lists+nouveau@lfdr.de>; Fri, 27 Dec 2019 09:15:37 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D15056E107;
-	Fri, 27 Dec 2019 08:14:03 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id BACEF6E33E;
+	Fri, 27 Dec 2019 08:14:11 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from EUR03-VE1-obe.outbound.protection.outlook.com
- (mail-eopbgr50060.outbound.protection.outlook.com [40.107.5.60])
- by gabe.freedesktop.org (Postfix) with ESMTPS id BB8D36E22F;
- Fri,  1 Nov 2019 15:12:30 +0000 (UTC)
+Received: from NAM04-BN3-obe.outbound.protection.outlook.com
+ (mail-eopbgr680053.outbound.protection.outlook.com [40.107.68.53])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id F06D96E24E;
+ Fri,  1 Nov 2019 15:59:30 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=XgdC4d24Rdtu00wf76tr/TjDTx2aWKmDIzVNYGp5ljjpdhopFRK9GZbf0JfB5tok5L9rh3aoQI4VRmjBQVigpNBNc97tFv5QhSx3mAOWZr6brmy+Mndg0n09rRgcOpr4ihHtxRUl3hkfekp+e25Z1ioiBmjA4chhX8r03Xrmwz+DzI0z7f+cJVl3cya4U++b+PhuzmiOe6b0UR5doPtLZClyz0D249PtqnrlY+6cmRWtn1DfU0VAGK6W8oPa4fYhbymrzc/LVDrlagpcDWZBPmp//XmMICAy1zCcjKEKzogs4Rl4JBDBBw58bXO7okn5aJn1QoZm+zGqI9poxxaP4g==
+ b=Rb0vaTjrjgp43A1K3TkjU94osaOI2fbMPyv/gVDiR83E+XtBSkwpz5+5dK2AG0RNh7JBYwHqZWEP4u9s7wwwSHGZX0v/w65xUBWZA8nfJLdMD4CZY42gPHLdd5QyfMruhTAHPwMq78DD5tNkVvZKOCT3OlLdlUnOKq1VMxiRLa18sdD03PSIameqK/WR5sg5zH75vkey48xgrrD1FUOb4kc15Qpo8pHBggD+2OsyeRav4aAXviFkj/yrZXEgJ+HPk+Zc5M4Pg2l9jLm+NRUT1VSklq25o8xQQGbUXu4BWI1glwvZO5HlNnunKGFHOKs59GACySgu9w3G2riJKMILvQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=bBkO4Aj0byn7s6Bm0dFVLfpXWPn4l83nSzrjzVuIjYM=;
- b=cVHZJRIGZr9UlfgrqZBAOZlvrPTJSuatYApR3bYE2bRumC3sUFFk7Y2L7FMkZQf6oW8ozX0LUTqxknMoW00QMlPh+25T8tVL4e2BtCTaDthLsy6lR+N0ex9Vp6Y/MO7fazndK7grryy59ECQU8vALxxwmFsshkspOufk4Dv3Im1H7tkAy/q/HowhDTMwVmEVQWWK+m2mlNx7l78x34iU7QmdGjyIB97vJL01uczSDTGu3MHn2UzsABL0qb+CoPYhxl97jAOY6S5QjLhYSoNHEAEaMU5UwoCfH649qi2QAm+onspqx4z2E9sxvGv4nPb1JOSwM6fg5LgHWLsPNCMdpQ==
+ bh=+B70gKRy7javyiS02uROv/RyLGEqbq/siw3rZJOLViU=;
+ b=AwHK7/UYginbUL4x0txuclKvMvMXqXNBOiWVhyld45VUVpTAWw8ehyy393Os+LZeZXsFQvDqViCrk0zSsOZn3sXZN53QiqRSpp3YdIqkUmQTXOYlFK9EA/9OJa3i6wJKs2tYkzwX9ZD78vVcoE/JhwVweBYn+6FBQdfduurepDjAXSzXOIwesUrwhRxXZZSqkJBrbM8TBkJMbn28bvoPe9No5hsy1g/6oMfUz1iyoY+WKc/6bxf8ZWYKmBVFkOLKh01IRjX7Cxl4NRata8j4+DcmWmFZI+a6+XhzrcySZohpW7IgxNpBbY72uLs80Av/RRqJ/bss0Xwwm8fU9XIySg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=mellanox.com; dmarc=pass action=none header.from=mellanox.com;
- dkim=pass header.d=mellanox.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Mellanox.com;
- s=selector2;
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=amdcloud.onmicrosoft.com; s=selector2-amdcloud-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=bBkO4Aj0byn7s6Bm0dFVLfpXWPn4l83nSzrjzVuIjYM=;
- b=bDHwJTdqflJxu7YIoWqMyjjeiyB25GsQ4j55aDhprJ65AXQxtK17c3ZyQDS4jBt3NqEFRR2LSlV9756M/MxeSLmPYTkowS+zZaNzQTRxP6VJNyMqD7VZO4snXRypdIaojIykpeYFPNJM8GvMHI001h0fNW849iHfj9T+rtypnxE=
-Received: from VI1PR05MB4141.eurprd05.prod.outlook.com (52.133.14.15) by
- VI1PR05MB6272.eurprd05.prod.outlook.com (20.177.52.97) with Microsoft SMTP
+ bh=+B70gKRy7javyiS02uROv/RyLGEqbq/siw3rZJOLViU=;
+ b=Xa+dATVHv9YhBVcztkih9Pf0+hZmBnP4hDtTwdryQP/7tnvQKjMpl0cy91VyPoIp/VIBvNYn9SbE+EYoM2ij0RpdC5vAG20EprqhN7nrLnmREwFHsOJmYk7vKT41hAM2Pwm+bIuIdDIrpnrS+Nj0dsqyEQYsW1uydOjCdGdjp9Y=
+Received: from MN2PR12MB4030.namprd12.prod.outlook.com (10.255.86.25) by
+ MN2PR12MB2959.namprd12.prod.outlook.com (20.179.81.157) with Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.2387.25; Fri, 1 Nov 2019 15:12:27 +0000
-Received: from VI1PR05MB4141.eurprd05.prod.outlook.com
- ([fe80::b179:e8bf:22d4:bf8d]) by VI1PR05MB4141.eurprd05.prod.outlook.com
- ([fe80::b179:e8bf:22d4:bf8d%5]) with mapi id 15.20.2387.028; Fri, 1 Nov 2019
- 15:12:27 +0000
-From: Jason Gunthorpe <jgg@mellanox.com>
-To: "Yang, Philip" <Philip.Yang@amd.com>
+ 15.20.2408.24; Fri, 1 Nov 2019 15:59:27 +0000
+Received: from MN2PR12MB4030.namprd12.prod.outlook.com
+ ([fe80::1ee:c734:15e5:d8b9]) by MN2PR12MB4030.namprd12.prod.outlook.com
+ ([fe80::1ee:c734:15e5:d8b9%5]) with mapi id 15.20.2387.027; Fri, 1 Nov 2019
+ 15:59:27 +0000
+From: "Yang, Philip" <Philip.Yang@amd.com>
+To: Jason Gunthorpe <jgg@mellanox.com>
 Thread-Topic: [PATCH v2 14/15] drm/amdgpu: Use mmu_range_notifier instead of
  hmm_mirror
-Thread-Index: AQHVjcvOUfhzqykxXkO0v7SQaQq3BKdyANqAgAAA3wCABGiEgIAAB7AA
-Date: Fri, 1 Nov 2019 15:12:27 +0000
-Message-ID: <20191101151222.GN22766@mellanox.com>
+Thread-Index: AQHVjcy5krMagvVO3k2ER8a03a+2l6dyANaAgAAA5gCABGh8AIAAB7mAgAANHgA=
+Date: Fri, 1 Nov 2019 15:59:26 +0000
+Message-ID: <8280fb65-a897-3d71-79f9-9f80d9e474e9@amd.com>
 References: <20191028201032.6352-1-jgg@ziepe.ca>
  <20191028201032.6352-15-jgg@ziepe.ca>
  <a456ebd0-28cf-997b-31ff-72d9077a9b8e@amd.com>
  <20191029192544.GU22766@mellanox.com>
  <30b2f569-bf7a-5166-c98d-4a4a13d1351f@amd.com>
-In-Reply-To: <30b2f569-bf7a-5166-c98d-4a4a13d1351f@amd.com>
-Accept-Language: en-US
+ <20191101151222.GN22766@mellanox.com>
+In-Reply-To: <20191101151222.GN22766@mellanox.com>
+Accept-Language: en-ZA, en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
-x-clientproxiedby: BN6PR22CA0046.namprd22.prod.outlook.com
- (2603:10b6:404:37::32) To VI1PR05MB4141.eurprd05.prod.outlook.com
- (2603:10a6:803:44::15)
+x-clientproxiedby: YTBPR01CA0022.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b01:14::35) To MN2PR12MB4030.namprd12.prod.outlook.com
+ (2603:10b6:208:159::25)
 authentication-results: spf=none (sender IP is )
- smtp.mailfrom=jgg@mellanox.com; 
+ smtp.mailfrom=Philip.Yang@amd.com; 
 x-ms-exchange-messagesentrepresentingtype: 1
-x-originating-ip: [142.162.113.180]
+x-originating-ip: [165.204.55.251]
 x-ms-publictraffictype: Email
 x-ms-office365-filtering-ht: Tenant
-x-ms-office365-filtering-correlation-id: 2778cc13-f4ca-4bcf-a336-08d75edde7fe
-x-ms-traffictypediagnostic: VI1PR05MB6272:
-x-microsoft-antispam-prvs: <VI1PR05MB6272CE1186E06EA63BEAFCCECF620@VI1PR05MB6272.eurprd05.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:4941;
+x-ms-office365-filtering-correlation-id: 1c66652d-a310-4869-6dcc-08d75ee4789e
+x-ms-traffictypediagnostic: MN2PR12MB2959:
+x-ms-exchange-transport-forked: True
+x-microsoft-antispam-prvs: <MN2PR12MB2959AEFA4AFCD810CAD6FAF2E6620@MN2PR12MB2959.namprd12.prod.outlook.com>
+x-ms-oob-tlc-oobclassifiers: OLM:7219;
 x-forefront-prvs: 020877E0CB
 x-forefront-antispam-report: SFV:NSPM;
- SFS:(10009020)(4636009)(376002)(396003)(136003)(366004)(39860400002)(346002)(199004)(189003)(71200400001)(3846002)(71190400001)(229853002)(7416002)(6436002)(36756003)(8936002)(4326008)(6916009)(6246003)(81166006)(4001150100001)(81156014)(256004)(6486002)(14444005)(6512007)(305945005)(316002)(8676002)(5024004)(54906003)(7736002)(1076003)(11346002)(476003)(2616005)(52116002)(33656002)(446003)(25786009)(66946007)(386003)(66476007)(66446008)(64756008)(6506007)(186003)(66556008)(99286004)(66066001)(86362001)(5660300002)(53546011)(14454004)(76176011)(102836004)(26005)(6116002)(2906002)(486006)(478600001);
- DIR:OUT; SFP:1101; SCL:1; SRVR:VI1PR05MB6272;
- H:VI1PR05MB4141.eurprd05.prod.outlook.com; FPR:; SPF:None; LANG:en;
+ SFS:(10009020)(4636009)(39860400002)(396003)(376002)(366004)(136003)(346002)(199004)(189003)(36756003)(256004)(14444005)(5024004)(5660300002)(186003)(476003)(102836004)(14454004)(386003)(2616005)(6436002)(478600001)(52116002)(66476007)(66946007)(64756008)(66556008)(66446008)(6486002)(7736002)(6116002)(305945005)(76176011)(486006)(6506007)(6246003)(26005)(99286004)(66066001)(3846002)(71200400001)(25786009)(8676002)(71190400001)(6916009)(4001150100001)(316002)(81166006)(81156014)(31686004)(8936002)(229853002)(7416002)(86362001)(53546011)(6512007)(11346002)(446003)(2906002)(4326008)(54906003)(31696002);
+ DIR:OUT; SFP:1101; SCL:1; SRVR:MN2PR12MB2959;
+ H:MN2PR12MB4030.namprd12.prod.outlook.com; FPR:; SPF:None; LANG:en;
  PTR:InfoNoRecords; A:1; MX:1; 
-received-spf: None (protection.outlook.com: mellanox.com does not designate
+received-spf: None (protection.outlook.com: amd.com does not designate
  permitted sender hosts)
 x-ms-exchange-senderadcheck: 1
 x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: 0PHZo1jiT1pkz33nCJj8So/VbYak/n14O0cbehhz3RR1ym22xMr9KmU+ZWIpMKKp1GJiXGv4CBcItN+k5mMgzadBxM4wqZ2otHp/FbvhGjL377p2XLoFgCwJMsPYcBIzqtZBQ8DeS3k0Zo+H1EtxytFNEGiaTmf5kKrTheDqgxmJSc6+thxaBdeO8THCsrvQPn6kFFUeS7R0/Uybm2ll/MRiQOL19dudiVLo94i+BjLenM2l90VDSfxjaQglwfhR3TIX3nQ4aMSm/HbtjsGgw2Lu3zto2kBGEB5G2AY4FSXjDG0rjtRW0Gw7X50RXwtSQjCFgoHylb9NK75usq4GiwBGrkm44kf4Sv3+SE3xDXHbIClXiaGswYGw14ROASHeGkWtVjB7DwFSZvI/fjMTRwjzZKGq3Q1Q61j+KSQyA+b1R4vq1u9UUOuEqZ0epj2b
-x-ms-exchange-transport-forked: True
-Content-ID: <57BD06A1E1219245833195A807EB8970@eurprd05.prod.outlook.com>
+x-microsoft-antispam-message-info: 8Fd+ZIRFlYHudINQjv2FvowZfkrp/UC4KJ/g1mKxUpCr2aaHHg47rITqylM7RQ8PxGEG8AIl6rus7MGBRS2ZAP+XIQMsH4r7bCbQnifg0Ud8+QJbz5yp/F6a+LveWqATX1PIMrgBw5toqCvauirfcnzFC0id9f6m9VCd/UdYe0g0X2RggKlWMkRgROMYBL7vmZ/00bAbwXFzXh/NAXWIah5G9pGDnKB77lL3/nU1NQF79qejd5Gtuhalz5ReJyAPg919z13BitZ8MHkMixIrXjKbjSrfs/0WWmgltXVPYhhiUVF2sM4zwLw0Iyz+RkYR+1iixjW4+I85KKwe8rUtxq+2Q+dbvHEYk30efUgG7Yqq5fyVx/kzRYoygt5Az6+BPTpTlFPwfu4l7nxcnZ1D6g0pwMBI+SGROmGVst5to4Z7xn8vclH5OFK1g1zoFO2u
+Content-ID: <2B29A7595DFC8C4E904872A54BF79A49@namprd12.prod.outlook.com>
 MIME-Version: 1.0
-X-OriginatorOrg: Mellanox.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2778cc13-f4ca-4bcf-a336-08d75edde7fe
-X-MS-Exchange-CrossTenant-originalarrivaltime: 01 Nov 2019 15:12:27.2730 (UTC)
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1c66652d-a310-4869-6dcc-08d75ee4789e
+X-MS-Exchange-CrossTenant-originalarrivaltime: 01 Nov 2019 15:59:26.8086 (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: a652971c-7d2e-4d9b-a6a4-d149256f461b
+X-MS-Exchange-CrossTenant-id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: IAUkTm1jGhsDFiwCZ1GCJfQdaQdau5qLwgyjoO3DI3luUvfYVzzuKVYtAwoTn37NQaBhgOUxb+jgb9QRdBIpOw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR05MB6272
-X-Mailman-Approved-At: Fri, 27 Dec 2019 08:13:32 +0000
+X-MS-Exchange-CrossTenant-userprincipalname: YRcD5rCkg9YRWPD2cG2lq3anT/Bpz7B7kUKNijCPZ8WgFl7AmV8bKnq9OD3C7uBU
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB2959
+X-Mailman-Approved-At: Fri, 27 Dec 2019 08:13:31 +0000
 Subject: Re: [Nouveau] [PATCH v2 14/15] drm/amdgpu: Use mmu_range_notifier
  instead of hmm_mirror
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -124,145 +125,168 @@ Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, Nov 01, 2019 at 02:44:51PM +0000, Yang, Philip wrote:
+
+
+On 2019-11-01 11:12 a.m., Jason Gunthorpe wrote:
+> On Fri, Nov 01, 2019 at 02:44:51PM +0000, Yang, Philip wrote:
+>>
+>>
+>> On 2019-10-29 3:25 p.m., Jason Gunthorpe wrote:
+>>> On Tue, Oct 29, 2019 at 07:22:37PM +0000, Yang, Philip wrote:
+>>>> Hi Jason,
+>>>>
+>>>> I did quick test after merging amd-staging-drm-next with the
+>>>> mmu_notifier branch, which includes this set changes. The test result
+>>>> has different failures, app stuck intermittently, GUI no display etc. I
+>>>> am understanding the changes and will try to figure out the cause.
+>>>
+>>> Thanks! I'm not surprised by this given how difficult this patch was
+>>> to make. Let me know if I can assist in any way
+>>>
+>>> Please ensure to run with lockdep enabled.. Your symptops sounds sort
+>>> of like deadlocking?
+>>>
+>> Hi Jason,
+>>
+>> Attached patch fix several issues in amdgpu driver, maybe you can squash
+>> this into patch 14. With this is done, patch 12, 13, 14 is Reviewed-by
+>> and Tested-by Philip Yang <philip.yang@amd.com>
 > 
+> Wow, this is great thanks! Can you clarify what the problems you found
+> were? Was the bug the 'return !r' below?
 > 
-> On 2019-10-29 3:25 p.m., Jason Gunthorpe wrote:
-> > On Tue, Oct 29, 2019 at 07:22:37PM +0000, Yang, Philip wrote:
-> >> Hi Jason,
-> >>
-> >> I did quick test after merging amd-staging-drm-next with the
-> >> mmu_notifier branch, which includes this set changes. The test result
-> >> has different failures, app stuck intermittently, GUI no display etc. I
-> >> am understanding the changes and will try to figure out the cause.
-> > 
-> > Thanks! I'm not surprised by this given how difficult this patch was
-> > to make. Let me know if I can assist in any way
-> > 
-> > Please ensure to run with lockdep enabled.. Your symptops sounds sort
-> > of like deadlocking?
-> > 
-> Hi Jason,
+Yes. return !r is critical one, and retry if hmm_range_fault return 
+-EBUSY is needed too.
+
+> I'll also add your signed off by
 > 
-> Attached patch fix several issues in amdgpu driver, maybe you can squash 
-> this into patch 14. With this is done, patch 12, 13, 14 is Reviewed-by 
-> and Tested-by Philip Yang <philip.yang@amd.com>
+> Here are some remarks:
+> 
+>> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_mn.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_mn.c
+>> index cb718a064eb4..c8bbd06f1009 100644
+>> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_mn.c
+>> @@ -67,21 +67,15 @@ static bool amdgpu_mn_invalidate_gfx(struct mmu_range_notifier *mrn,
+>>   	struct amdgpu_device *adev = amdgpu_ttm_adev(bo->tbo.bdev);
+>>   	long r;
+>>   
+>> -	/*
+>> -	 * FIXME: Must hold some lock shared with
+>> -	 * amdgpu_ttm_tt_get_user_pages_done()
+>> -	 */
+>> -	mmu_range_set_seq(mrn, cur_seq);
+>> +	mutex_lock(&adev->notifier_lock);
+>>   
+>> -	/* FIXME: Is this necessary? */
+>> -	if (!amdgpu_ttm_tt_affect_userptr(bo->tbo.ttm, range->start,
+>> -					  range->end))
+>> -		return true;
+>> +	mmu_range_set_seq(mrn, cur_seq);
+>>   
+>> -	if (!mmu_notifier_range_blockable(range))
+>> +	if (!mmu_notifier_range_blockable(range)) {
+>> +		mutex_unlock(&adev->notifier_lock);
+>>   		return false;
+> 
+> This test for range_blockable should be before mutex_lock, I can move
+> it up
+> 
+yes, thanks.
+> Also, do you know if notifier_lock is held while calling
+> amdgpu_ttm_tt_get_user_pages_done()? Can we add a 'lock assert held'
+> to amdgpu_ttm_tt_get_user_pages_done()?
+> 
+gpu side hold notifier_lock but kfd side doesn't. kfd side doesn't check 
+amdgpu_ttm_tt_get_user_pages_done/mmu_range_read_retry return value but 
+check mem->invalid flag which is updated from invalidate callback. It 
+takes more time to change, I will come to another patch to fix it later.
 
-Wow, this is great thanks! Can you clarify what the problems you found
-were? Was the bug the 'return !r' below?
+>> @@ -854,12 +853,20 @@ int amdgpu_ttm_tt_get_user_pages(struct amdgpu_bo *bo, struct page **pages)
+>>   		r = -EPERM;
+>>   		goto out_unlock;
+>>   	}
+>> +	up_read(&mm->mmap_sem);
+>> +	timeout = jiffies + msecs_to_jiffies(HMM_RANGE_DEFAULT_TIMEOUT);
+>> +
+>> +retry:
+>> +	range->notifier_seq = mmu_range_read_begin(&bo->notifier);
+>>   
+>> +	down_read(&mm->mmap_sem);
+>>   	r = hmm_range_fault(range, 0);
+>>   	up_read(&mm->mmap_sem);
+>> -
+>> -	if (unlikely(r < 0))
+>> +	if (unlikely(r <= 0)) {
+>> +		if ((r == 0 || r == -EBUSY) && !time_after(jiffies, timeout))
+>> +			goto retry;
+>>   		goto out_free_pfns;
+>> +	}
+> 
+> This isn't really right, a retry loop like this needs to go all the
+> way to mmu_range_read_retry() and done under the notifier_lock. ie
+> mmu_range_read_retry() can fail just as likely as hmm_range_fault()
+> can, and drivers are supposed to retry in both cases, with a single
+> timeout.
+> 
+For gpu, check mmu_range_read_retry return value under the notifier_lock 
+to do retry is in seperate location, not in same retry loop.
 
-I'll also add your signed off by
+> AFAICT it is a major bug that many places ignore the return code of
+> amdgpu_ttm_tt_get_user_pages_done() ???
+>
+For kfd, explained above.
 
-Here are some remarks:
+> However, this is all pre-existing bugs, so I'm OK go ahead with this
+> patch as modified. I advise AMD to make a followup patch ..
+> 
+yes, I will.
+> I'll add a FIXME note to this effect.
+> 
+>>   	for (i = 0; i < ttm->num_pages; i++) {
+>>   		pages[i] = hmm_device_entry_to_page(range, range->pfns[i]);
+>> @@ -916,7 +923,7 @@ bool amdgpu_ttm_tt_get_user_pages_done(struct ttm_tt *ttm)
+>>   		gtt->range = NULL;
+>>   	}
+>>   
+>> -	return r;
+>> +	return !r;
+> 
+> Ah is this the major error? hmm_range_valid() is inverted vs
+> mmu_range_read_retry()?
+> 
+yes.
+>>   }
+>>   #endif
+>>   
+>> @@ -997,10 +1004,18 @@ static void amdgpu_ttm_tt_unpin_userptr(struct ttm_tt *ttm)
+>>   	sg_free_table(ttm->sg);
+>>   
+>>   #if IS_ENABLED(CONFIG_DRM_AMDGPU_USERPTR)
+>> -	if (gtt->range &&
+>> -	    ttm->pages[0] == hmm_device_entry_to_page(gtt->range,
+>> -						      gtt->range->pfns[0]))
+>> -		WARN_ONCE(1, "Missing get_user_page_done\n");
+>> +	if (gtt->range) {
+>> +		unsigned long i;
+>> +
+>> +		for (i = 0; i < ttm->num_pages; i++) {
+>> +			if (ttm->pages[i] !=
+>> +				hmm_device_entry_to_page(gtt->range,
+>> +					      gtt->range->pfns[i]))
+>> +				break;
+>> +		}
+>> +
+>> +		WARN((i == ttm->num_pages), "Missing get_user_page_done\n");
+>> +	}
+> 
+> Is this related/necessary? I can put it in another patch if it is just
+> debugging improvement? Please advise
+> 
+I see this WARN backtrace now, but I didn't see it before. This is 
+somehow related.
 
-> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_mn.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_mn.c
-> index cb718a064eb4..c8bbd06f1009 100644
-> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_mn.c
-> @@ -67,21 +67,15 @@ static bool amdgpu_mn_invalidate_gfx(struct mmu_range_notifier *mrn,
->  	struct amdgpu_device *adev = amdgpu_ttm_adev(bo->tbo.bdev);
->  	long r;
->  
-> -	/*
-> -	 * FIXME: Must hold some lock shared with
-> -	 * amdgpu_ttm_tt_get_user_pages_done()
-> -	 */
-> -	mmu_range_set_seq(mrn, cur_seq);
-> +	mutex_lock(&adev->notifier_lock);
->  
-> -	/* FIXME: Is this necessary? */
-> -	if (!amdgpu_ttm_tt_affect_userptr(bo->tbo.ttm, range->start,
-> -					  range->end))
-> -		return true;
-> +	mmu_range_set_seq(mrn, cur_seq);
->  
-> -	if (!mmu_notifier_range_blockable(range))
-> +	if (!mmu_notifier_range_blockable(range)) {
-> +		mutex_unlock(&adev->notifier_lock);
->  		return false;
-
-This test for range_blockable should be before mutex_lock, I can move
-it up
-
-Also, do you know if notifier_lock is held while calling
-amdgpu_ttm_tt_get_user_pages_done()? Can we add a 'lock assert held'
-to amdgpu_ttm_tt_get_user_pages_done()?
-
-> @@ -854,12 +853,20 @@ int amdgpu_ttm_tt_get_user_pages(struct amdgpu_bo *bo, struct page **pages)
->  		r = -EPERM;
->  		goto out_unlock;
->  	}
-> +	up_read(&mm->mmap_sem);
-> +	timeout = jiffies + msecs_to_jiffies(HMM_RANGE_DEFAULT_TIMEOUT);
-> +
-> +retry:
-> +	range->notifier_seq = mmu_range_read_begin(&bo->notifier);
->  
-> +	down_read(&mm->mmap_sem);
->  	r = hmm_range_fault(range, 0);
->  	up_read(&mm->mmap_sem);
-> -
-> -	if (unlikely(r < 0))
-> +	if (unlikely(r <= 0)) {
-> +		if ((r == 0 || r == -EBUSY) && !time_after(jiffies, timeout))
-> +			goto retry;
->  		goto out_free_pfns;
-> +	}
-
-This isn't really right, a retry loop like this needs to go all the
-way to mmu_range_read_retry() and done under the notifier_lock. ie
-mmu_range_read_retry() can fail just as likely as hmm_range_fault()
-can, and drivers are supposed to retry in both cases, with a single
-timeout.
-
-AFAICT it is a major bug that many places ignore the return code of
-amdgpu_ttm_tt_get_user_pages_done() ???
-
-However, this is all pre-existing bugs, so I'm OK go ahead with this
-patch as modified. I advise AMD to make a followup patch ..
-
-I'll add a FIXME note to this effect.
-
->  	for (i = 0; i < ttm->num_pages; i++) {
->  		pages[i] = hmm_device_entry_to_page(range, range->pfns[i]);
-> @@ -916,7 +923,7 @@ bool amdgpu_ttm_tt_get_user_pages_done(struct ttm_tt *ttm)
->  		gtt->range = NULL;
->  	}
->  
-> -	return r;
-> +	return !r;
-
-Ah is this the major error? hmm_range_valid() is inverted vs
-mmu_range_read_retry()?
-
->  }
->  #endif
->  
-> @@ -997,10 +1004,18 @@ static void amdgpu_ttm_tt_unpin_userptr(struct ttm_tt *ttm)
->  	sg_free_table(ttm->sg);
->  
->  #if IS_ENABLED(CONFIG_DRM_AMDGPU_USERPTR)
-> -	if (gtt->range &&
-> -	    ttm->pages[0] == hmm_device_entry_to_page(gtt->range,
-> -						      gtt->range->pfns[0]))
-> -		WARN_ONCE(1, "Missing get_user_page_done\n");
-> +	if (gtt->range) {
-> +		unsigned long i;
-> +
-> +		for (i = 0; i < ttm->num_pages; i++) {
-> +			if (ttm->pages[i] !=
-> +				hmm_device_entry_to_page(gtt->range,
-> +					      gtt->range->pfns[i]))
-> +				break;
-> +		}
-> +
-> +		WARN((i == ttm->num_pages), "Missing get_user_page_done\n");
-> +	}
-
-Is this related/necessary? I can put it in another patch if it is just
-debugging improvement? Please advise
-
-Thanks a lot,
-Jason
+> Thanks a lot,
+> Jason
+> 
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
