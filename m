@@ -1,45 +1,67 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4DCBFEB4B1
-	for <lists+nouveau@lfdr.de>; Thu, 31 Oct 2019 17:26:04 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id CCFF0EC95A
+	for <lists+nouveau@lfdr.de>; Fri,  1 Nov 2019 21:06:54 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 60B7E6EF13;
-	Thu, 31 Oct 2019 16:26:02 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4E5616F85B;
+	Fri,  1 Nov 2019 20:06:50 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
- by gabe.freedesktop.org (Postfix) with ESMTP id 721D76EF0F
- for <nouveau@lists.freedesktop.org>; Thu, 31 Oct 2019 16:26:00 +0000 (UTC)
-Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 6EB7B720E2; Thu, 31 Oct 2019 16:26:00 +0000 (UTC)
-From: bugzilla-daemon@freedesktop.org
-To: nouveau@lists.freedesktop.org
-Date: Thu, 31 Oct 2019 16:26:00 +0000
-X-Bugzilla-Reason: AssignedTo
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: None
-X-Bugzilla-Product: xorg
-X-Bugzilla-Component: Driver/nouveau
-X-Bugzilla-Version: unspecified
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: critical
-X-Bugzilla-Who: estellnb@elstel.org
-X-Bugzilla-Status: NEW
-X-Bugzilla-Resolution: 
-X-Bugzilla-Priority: not set
-X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: attachments.created
-Message-ID: <bug-112185-8800-fkO8rXRHbu@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-112185-8800@http.bugs.freedesktop.org/>
-References: <bug-112185-8800@http.bugs.freedesktop.org/>
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
+Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
+ [205.139.110.120])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0DE166E301
+ for <nouveau@lists.freedesktop.org>; Fri,  1 Nov 2019 20:06:48 +0000 (UTC)
+Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com
+ [209.85.222.197]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-322-bXrx_3UeOGaj75h3NFAhhQ-1; Fri, 01 Nov 2019 16:06:44 -0400
+Received: by mail-qk1-f197.google.com with SMTP id a186so8078994qkb.18
+ for <nouveau@lists.freedesktop.org>; Fri, 01 Nov 2019 13:06:44 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:message-id:subject:from:to:cc:date:organization
+ :user-agent:mime-version:content-transfer-encoding;
+ bh=T0uidzvnSOYOIyqMlnQPdQRM6HckHVeBK/+Gw1LVgoc=;
+ b=KAMtVNdnG3ybbiql0LfTZOinK1psXqlN03oiC1e+OvKaypGfmQUYwIsbSylMtKUWn1
+ XK5XhJ4tYfuDpV9YbLY+hsDBbVJtw+0MwtCz0mcb7+s9k1LWxQ5y3enX+O0Q0useLMF6
+ mnUtkmilPyN4pTEChQr+R8sg9Gpj5aVNygWQv3MunEEW7vYO/BQPCEdg0wCFwb62uBOI
+ IzLyL2GnWbLFHHfybX5lwFtw6QCL6iSr/p5N5S8XY3WTPglrsHvUbyhcbANtaUmCN2Aw
+ F437JvuWREh2d1zMhQM8MN6IPy7W09kMZLZ3LtX1OdcLJb8uixB1dZnglF7ti2EdK9XU
+ LMtA==
+X-Gm-Message-State: APjAAAXm/qv2KW19yWYmIwBW/eSFE8SnF6bnmuB+m0uLCnnSx/kdr+SH
+ g9YSSnS43EQcIATKj9/u/GXB+FAldX3LPFFWeCDJhHOossuqfKJDtr44au8s4MbtZAHo5Stm4kt
+ 9T6DfFqjHCCHzwGVmxOX3NXnKsA==
+X-Received: by 2002:ac8:6a04:: with SMTP id t4mr1203930qtr.37.1572638804197;
+ Fri, 01 Nov 2019 13:06:44 -0700 (PDT)
+X-Google-Smtp-Source: APXvYqwNSOfgqDMYNbamEmlFYFB8GSv+3Bq/jbE8/WSmF2D5uk3m9IYE7IszplOMqJoINO5ly82u0A==
+X-Received: by 2002:ac8:6a04:: with SMTP id t4mr1203915qtr.37.1572638804015;
+ Fri, 01 Nov 2019 13:06:44 -0700 (PDT)
+Received: from dhcp-10-20-1-46.bss.redhat.com ([144.121.20.162])
+ by smtp.gmail.com with ESMTPSA id c204sm4092436qkb.90.2019.11.01.13.06.42
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 01 Nov 2019 13:06:42 -0700 (PDT)
+Message-ID: <91aa24ed23e2b8c012ec43ef9eb5baed2532f96c.camel@redhat.com>
+From: Lyude Paul <lyude@redhat.com>
+To: "members@x.org" <members@x.org>, xorg-devel@lists.x.org, dri-devel
+ <dri-devel@lists.freedesktop.org>, nouveau <nouveau@lists.freedesktop.org>
+Date: Fri, 01 Nov 2019 16:06:40 -0400
+Organization: Red Hat
+User-Agent: Evolution 3.32.4 (3.32.4-1.fc30)
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 112185] Xorg hangs from time to time
+X-MC-Unique: bXrx_3UeOGaj75h3NFAhhQ-1
+X-Mimecast-Spam-Score: 0
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=redhat.com; 
+ s=mimecast20190719; t=1572638808;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=xRjJf6mDuz5grOqzevKLN/DK88NMiYZAX/hKIofKo8s=;
+ b=I6yJI+ZI5mbYBNptKO0ShO0D6qqD3YED8iTuymJBn86T6EQ+erEZxQ9nQMOqsA/K8unNhJ
+ ljnHxgmfmVpmDTZzo46KWIqIGYTCA5QDz5zB+e6y1QwIRvgLp4tYkhABMK/zJK+mTWHPah
+ 3MiKpECw7Js8KfgEg3sRsi5wviHwdVA=
+Subject: [Nouveau] Individuals interested in VESA memberships?
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -51,92 +73,27 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============2091711403=="
+Cc: "X.Org Foundation Board" <board@foundation.x.org>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-
---===============2091711403==
-Content-Type: multipart/alternative; boundary="15725391600.3F11.7243"
-Content-Transfer-Encoding: 7bit
-
-
---15725391600.3F11.7243
-Date: Thu, 31 Oct 2019 16:26:00 +0000
-MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-https://bugs.freedesktop.org/show_bug.cgi?id=3D112185
-
---- Comment #10 from Elmar Stellnberger <estellnb@elstel.org> ---
-Created attachment 145863
-  --> https://bugs.freedesktop.org/attachment.cgi?id=3D145863&action=3Dedit
-Xorg.0.log, hang #2
-
---=20
-You are receiving this mail because:
-You are the assignee for the bug.=
-
---15725391600.3F11.7243
-Date: Thu, 31 Oct 2019 16:26:00 +0000
-MIME-Version: 1.0
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-<html>
-    <head>
-      <base href=3D"https://bugs.freedesktop.org/">
-    </head>
-    <body>
-      <p>
-        <div>
-            <b><a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - Xorg hangs from time to time"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D112185#c10">Comme=
-nt # 10</a>
-              on <a class=3D"bz_bug_link=20
-          bz_status_NEW "
-   title=3D"NEW - Xorg hangs from time to time"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D112185">bug 11218=
-5</a>
-              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
-estellnb&#64;elstel.org" title=3D"Elmar Stellnberger &lt;estellnb&#64;elste=
-l.org&gt;"> <span class=3D"fn">Elmar Stellnberger</span></a>
-</span></b>
-        <pre>Created <span class=3D""><a href=3D"attachment.cgi?id=3D145863=
-" name=3D"attach_145863" title=3D"Xorg.0.log, hang #2">attachment 145863</a=
-> <a href=3D"attachment.cgi?id=3D145863&amp;action=3Dedit" title=3D"Xorg.0.=
-log, hang #2">[details]</a></span>
-Xorg.0.log, hang #2</pre>
-        </div>
-      </p>
-
-
-      <hr>
-      <span>You are receiving this mail because:</span>
-
-      <ul>
-          <li>You are the assignee for the bug.</li>
-      </ul>
-    </body>
-</html>=
-
---15725391600.3F11.7243--
-
---===============2091711403==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
-YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
-cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
-
---===============2091711403==--
+SGkhIFJlY2VudGx5IEkndmUgYmVlbiB3b3JraW5nIHdpdGggdGhlIHJlc3Qgb2YgdGhlIFguT3Jn
+IGJvYXJkIHRvIHRyeSB0byBnZXQKWC5vcmcgYWNjZXNzIHRvIFZFU0EgbWVtYmVyc2hpcHMgc28g
+dGhhdCBjb250cmlidXRvcnMgdGhhdCBkb24ndCBoYXZlIGFuCmVtcGxveWVyIHdobyBpcyBhYmxl
+L3dpbGxpbmcgdG8gam9pbiBWRVNBIGNhbiBwb3RlbnRpYWxseSBnZXQgYWNjZXNzIHRvIHRoZQp2
+YXJpb3VzIGJlbmVmaXRzIG9mIGEgVkVTQSBtZW1iZXJzaGlwLCBzdWNoIGFzIGFjY2VzcyB0byBE
+aXNwbGF5UG9ydApzcGVjaWZpY2F0aW9ucy4gU2luY2UgSSBuZWVkIHRvIGdhdGhlciBhIGxpc3Qg
+b2YgaW50ZXJlc3RlZCBYLm9yZyBtZW1iZXJzLCBJJ2QKbGlrZSB0byBrbm93IHdobyBhbGwgbWln
+aHQgYmUgaW50ZXJlc3RlZCBpbiBhIG1lbWJlcnNoaXAgbGlrZSB0aGlzLiBUaGVyZSBhcmUKbm8g
+Y29zdHMgaW52b2x2ZWQsIGFzIHRoZSBWRVNBIG1lbWJlcnNoaXAgd2UncmUgbG9va2luZyBhdCBp
+biBwYXJ0aWN1bGFyIGNvbWVzCmF0IG5vIGNvc3QgdG8gdXMgc2luY2Ugd2UncmUgYSBub24tcHJv
+Zml0LgoKVGhlIGN1cnJlbnQgcGxhbiBpcyB0byBleHRlbmQgVkVTQSBtZW1iZXJzaGlwIHRvIFgu
+T3JnIG1lbWJlcnMgd2hvCnNwZWNpZmljYWxseSByZXF1ZXN0IGl0LiBJZiB5b3UgdGhpbmsgeW91
+J2QgYmUgYXQgYWxsIGludGVyZXN0ZWQgaW4gdGhpcywgb3IKa25vdyBhbnkgcHJvamVjdHMgb3Ig
+Y29udHJpYnV0b3JzIHdobyB3b3VsZCBiZSwgcGxlYXNlIGZlZWwgZnJlZSB0byByZXNwb25kIHRv
+CnRoaXMgbWVzc2FnZSBhbmQgbGV0IG1lIGtub3chCi0tIApDaGVlcnMsCglMeXVkZSBQYXVsCgpf
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpOb3V2ZWF1IG1h
+aWxpbmcgbGlzdApOb3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZy
+ZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL25vdXZlYXU=
