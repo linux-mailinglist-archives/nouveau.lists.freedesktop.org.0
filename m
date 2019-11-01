@@ -1,122 +1,96 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9D05E12B2CB
-	for <lists+nouveau@lfdr.de>; Fri, 27 Dec 2019 09:14:33 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id C86BB12B304
+	for <lists+nouveau@lfdr.de>; Fri, 27 Dec 2019 09:15:33 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 82D506E086;
-	Fri, 27 Dec 2019 08:13:46 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1EC896E3B5;
+	Fri, 27 Dec 2019 08:14:13 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from aserp2120.oracle.com (aserp2120.oracle.com [141.146.126.78])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A36216EAE6;
- Wed, 30 Oct 2019 16:58:54 +0000 (UTC)
-Received: from pps.filterd (aserp2120.oracle.com [127.0.0.1])
- by aserp2120.oracle.com (8.16.0.27/8.16.0.27) with SMTP id x9UGuWWH108547;
- Wed, 30 Oct 2019 16:58:32 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
- h=subject : to : cc :
- references : from : message-id : date : mime-version : in-reply-to :
- content-type : content-transfer-encoding; s=corp-2019-08-05;
- bh=keEeUnYROMUeA95knhT+FHD4/E7a1Ew6FHXEch8uzww=;
- b=D1JqQda86dNVGPCQ4AUxb9fjj0QImKbpnU4eXnAq4WKhYhIzGpDbxQPM21NnRfkDSd3q
- GMq2yw4MLnwF8r4yxGrvyWKTS1QGywHwz9Eyqw+QMfJKvP5TQyEdju2DI5xLYQaB5o6z
- q9tb7fptCGUyuQe3aIshog8URVKWfsrb8RBspmlEbJpgW14dlFsRlJZU1sTVn+gh7RY+
- IDpHzotWRV3WUp40BHtSwPtRwPJZujcKjBl/eFBe9OPkQUVHq4rmBgNgsY9PjJxmFLs/
- LV8pmJR+ureH1dB94B1cx7Dxisj4B014VgKDrV4gIKW/c0G0ibxOYatufRDqlocmu1bi JQ== 
-Received: from aserp3020.oracle.com (aserp3020.oracle.com [141.146.126.70])
- by aserp2120.oracle.com with ESMTP id 2vxwhfdpwb-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 30 Oct 2019 16:58:32 +0000
-Received: from pps.filterd (aserp3020.oracle.com [127.0.0.1])
- by aserp3020.oracle.com (8.16.0.27/8.16.0.27) with SMTP id x9UGrciw067506;
- Wed, 30 Oct 2019 16:56:32 GMT
-Received: from userv0122.oracle.com (userv0122.oracle.com [156.151.31.75])
- by aserp3020.oracle.com with ESMTP id 2vxwj72q6y-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 30 Oct 2019 16:56:31 +0000
-Received: from abhmp0003.oracle.com (abhmp0003.oracle.com [141.146.116.9])
- by userv0122.oracle.com (8.14.4/8.14.4) with ESMTP id x9UGuOon011005;
- Wed, 30 Oct 2019 16:56:24 GMT
-Received: from bostrovs-us.us.oracle.com (/10.152.32.65)
- by default (Oracle Beehive Gateway v4.0)
- with ESMTP ; Wed, 30 Oct 2019 09:56:24 -0700
-To: Jason Gunthorpe <jgg@ziepe.ca>, linux-mm@kvack.org,
- Jerome Glisse <jglisse@redhat.com>, Ralph Campbell <rcampbell@nvidia.com>,
- John Hubbard <jhubbard@nvidia.com>, Felix.Kuehling@amd.com
+Received: from NAM02-BL2-obe.outbound.protection.outlook.com
+ (mail-eopbgr750054.outbound.protection.outlook.com [40.107.75.54])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B825D6F818;
+ Fri,  1 Nov 2019 14:44:54 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=fVsQ3+vAvWEvNg/20qysyCpuBr6TWXgdI/Z95sb7EBJpNFu0h+8n5otHtiN6lxqN7RF38R2W3LUCRoJ90Tm2rXyY9KctqstPkIpTOndThtGCJbK4ZLTcOPbFOrFUPikQEYXrTR8DuUsW7wSLBQkcYpoRmTbKRp9XKdLQ0853CMc0XjEd4Z6x41rWdQaJTILMopHwchDeWCrjQtA539rTamfTCNOM8jzLJ6ROTDm/tMvVVuN2rB09xBcVDpB5e4YYTYyoIj/sagPdsiJVIKZOIS4NOxdN3LpdV0pMarF4d++5PfgqMO7XzTFi6WL4cscw4PoD6MY2ok3yaDazWN/PiA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=t/gYdaOI8x2bX1dIrOP77CnRKCRPFsrVkyEXAJteFIg=;
+ b=JfhkkbwAPVqmCTDJzzRr5cY+B33fCXgWYMxL8ih52LZG8b/4oD6Tj/ngXwexk78FoKS3zUAWWsoBgoBp8rXkMkZqSpHxwpZv+lrfYuhgdLNgdn9/ydmbebqcbjfIelLwhj0ANweAQviyOQLIfkr5PtdkNOY+iDx7B9PBZzebaa3GrsVmE3++0eP1jqlpS1xJUjDYdCu+2G7w+zuyk0eAMTMimkGRhNpsvL0/qpCN/0BTigpjOagRsfRuPOP4rPuLcxUcybMjR3rjKPUqH2SsIpopiI6OrAFL955NrFdjZ0VNWlaw1tGEg25KYdHXevIZ88KLfatX+Z2sW9QuEMF/9Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=amdcloud.onmicrosoft.com; s=selector2-amdcloud-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=t/gYdaOI8x2bX1dIrOP77CnRKCRPFsrVkyEXAJteFIg=;
+ b=iNhMWRLZfgriKhRVHFHrrOsGiv56NajvZqkVmtfNdnvFvlRL9CW0P0TBnJvBq16SinGGfITf2EDGJmOYTuQGw90k0+HsRBlEZqJMR3Y4rRc9AJAq8lyK920PIy2iIBFYajsG2cROpC+Q62+sPmebePvvE/usb0QEKYtFd4g5XHg=
+Received: from MN2PR12MB4030.namprd12.prod.outlook.com (10.255.86.25) by
+ MN2PR12MB3342.namprd12.prod.outlook.com (20.178.240.224) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.2408.24; Fri, 1 Nov 2019 14:44:51 +0000
+Received: from MN2PR12MB4030.namprd12.prod.outlook.com
+ ([fe80::1ee:c734:15e5:d8b9]) by MN2PR12MB4030.namprd12.prod.outlook.com
+ ([fe80::1ee:c734:15e5:d8b9%5]) with mapi id 15.20.2387.027; Fri, 1 Nov 2019
+ 14:44:51 +0000
+From: "Yang, Philip" <Philip.Yang@amd.com>
+To: Jason Gunthorpe <jgg@mellanox.com>
+Thread-Topic: [PATCH v2 14/15] drm/amdgpu: Use mmu_range_notifier instead of
+ hmm_mirror
+Thread-Index: AQHVjcy5krMagvVO3k2ER8a03a+2l6dyANaAgAAA5gCABGh8AA==
+Date: Fri, 1 Nov 2019 14:44:51 +0000
+Message-ID: <30b2f569-bf7a-5166-c98d-4a4a13d1351f@amd.com>
 References: <20191028201032.6352-1-jgg@ziepe.ca>
- <20191028201032.6352-10-jgg@ziepe.ca>
-From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-Openpgp: preference=signencrypt
-Autocrypt: addr=boris.ostrovsky@oracle.com; prefer-encrypt=mutual; keydata=
- mQINBFH8CgsBEAC0KiOi9siOvlXatK2xX99e/J3OvApoYWjieVQ9232Eb7GzCWrItCzP8FUV
- PQg8rMsSd0OzIvvjbEAvaWLlbs8wa3MtVLysHY/DfqRK9Zvr/RgrsYC6ukOB7igy2PGqZd+M
- MDnSmVzik0sPvB6xPV7QyFsykEgpnHbvdZAUy/vyys8xgT0PVYR5hyvhyf6VIfGuvqIsvJw5
- C8+P71CHI+U/IhsKrLrsiYHpAhQkw+Zvyeml6XSi5w4LXDbF+3oholKYCkPwxmGdK8MUIdkM
- d7iYdKqiP4W6FKQou/lC3jvOceGupEoDV9botSWEIIlKdtm6C4GfL45RD8V4B9iy24JHPlom
- woVWc0xBZboQguhauQqrBFooHO3roEeM1pxXjLUbDtH4t3SAI3gt4dpSyT3EvzhyNQVVIxj2
- FXnIChrYxR6S0ijSqUKO0cAduenhBrpYbz9qFcB/GyxD+ZWY7OgQKHUZMWapx5bHGQ8bUZz2
- SfjZwK+GETGhfkvNMf6zXbZkDq4kKB/ywaKvVPodS1Poa44+B9sxbUp1jMfFtlOJ3AYB0WDS
- Op3d7F2ry20CIf1Ifh0nIxkQPkTX7aX5rI92oZeu5u038dHUu/dO2EcuCjl1eDMGm5PLHDSP
- 0QUw5xzk1Y8MG1JQ56PtqReO33inBXG63yTIikJmUXFTw6lLJwARAQABtDNCb3JpcyBPc3Ry
- b3Zza3kgKFdvcmspIDxib3Jpcy5vc3Ryb3Zza3lAb3JhY2xlLmNvbT6JAjgEEwECACIFAlH8
- CgsCGwMGCwkIBwMCBhUIAgkKCwQWAgMBAh4BAheAAAoJEIredpCGysGyasEP/j5xApopUf4g
- 9Fl3UxZuBx+oduuw3JHqgbGZ2siA3EA4bKwtKq8eT7ekpApn4c0HA8TWTDtgZtLSV5IdH+9z
- JimBDrhLkDI3Zsx2CafL4pMJvpUavhc5mEU8myp4dWCuIylHiWG65agvUeFZYK4P33fGqoaS
- VGx3tsQIAr7MsQxilMfRiTEoYH0WWthhE0YVQzV6kx4wj4yLGYPPBtFqnrapKKC8yFTpgjaK
- jImqWhU9CSUAXdNEs/oKVR1XlkDpMCFDl88vKAuJwugnixjbPFTVPyoC7+4Bm/FnL3iwlJVE
- qIGQRspt09r+datFzPqSbp5Fo/9m4JSvgtPp2X2+gIGgLPWp2ft1NXHHVWP19sPgEsEJXSr9
- tskM8ScxEkqAUuDs6+x/ISX8wa5Pvmo65drN+JWA8EqKOHQG6LUsUdJolFM2i4Z0k40BnFU/
- kjTARjrXW94LwokVy4x+ZYgImrnKWeKac6fMfMwH2aKpCQLlVxdO4qvJkv92SzZz4538az1T
- m+3ekJAimou89cXwXHCFb5WqJcyjDfdQF857vTn1z4qu7udYCuuV/4xDEhslUq1+GcNDjAhB
- nNYPzD+SvhWEsrjuXv+fDONdJtmLUpKs4Jtak3smGGhZsqpcNv8nQzUGDQZjuCSmDqW8vn2o
- hWwveNeRTkxh+2x1Qb3GT46uuQINBFH8CgsBEADGC/yx5ctcLQlB9hbq7KNqCDyZNoYu1HAB
- Hal3MuxPfoGKObEktawQPQaSTB5vNlDxKihezLnlT/PKjcXC2R1OjSDinlu5XNGc6mnky03q
- yymUPyiMtWhBBftezTRxWRslPaFWlg/h/Y1iDuOcklhpr7K1h1jRPCrf1yIoxbIpDbffnuyz
- kuto4AahRvBU4Js4sU7f/btU+h+e0AcLVzIhTVPIz7PM+Gk2LNzZ3/on4dnEc/qd+ZZFlOQ4
- KDN/hPqlwA/YJsKzAPX51L6Vv344pqTm6Z0f9M7YALB/11FO2nBB7zw7HAUYqJeHutCwxm7i
- BDNt0g9fhviNcJzagqJ1R7aPjtjBoYvKkbwNu5sWDpQ4idnsnck4YT6ctzN4I+6lfkU8zMzC
- gM2R4qqUXmxFIS4Bee+gnJi0Pc3KcBYBZsDK44FtM//5Cp9DrxRQOh19kNHBlxkmEb8kL/pw
- XIDcEq8MXzPBbxwHKJ3QRWRe5jPNpf8HCjnZz0XyJV0/4M1JvOua7IZftOttQ6KnM4m6WNIZ
- 2ydg7dBhDa6iv1oKdL7wdp/rCulVWn8R7+3cRK95SnWiJ0qKDlMbIN8oGMhHdin8cSRYdmHK
- kTnvSGJNlkis5a+048o0C6jI3LozQYD/W9wq7MvgChgVQw1iEOB4u/3FXDEGulRVko6xCBU4
- SQARAQABiQIfBBgBAgAJBQJR/AoLAhsMAAoJEIredpCGysGyfvMQAIywR6jTqix6/fL0Ip8G
- jpt3uk//QNxGJE3ZkUNLX6N786vnEJvc1beCu6EwqD1ezG9fJKMl7F3SEgpYaiKEcHfoKGdh
- 30B3Hsq44vOoxR6zxw2B/giADjhmWTP5tWQ9548N4VhIZMYQMQCkdqaueSL+8asp8tBNP+TJ
- PAIIANYvJaD8xA7sYUXGTzOXDh2THWSvmEWWmzok8er/u6ZKdS1YmZkUy8cfzrll/9hiGCTj
- u3qcaOM6i/m4hqtvsI1cOORMVwjJF4+IkC5ZBoeRs/xW5zIBdSUoC8L+OCyj5JETWTt40+lu
- qoqAF/AEGsNZTrwHJYu9rbHH260C0KYCNqmxDdcROUqIzJdzDKOrDmebkEVnxVeLJBIhYZUd
- t3Iq9hdjpU50TA6sQ3mZxzBdfRgg+vaj2DsJqI5Xla9QGKD+xNT6v14cZuIMZzO7w0DoojM4
- ByrabFsOQxGvE0w9Dch2BDSI2Xyk1zjPKxG1VNBQVx3flH37QDWpL2zlJikW29Ws86PHdthh
- Fm5PY8YtX576DchSP6qJC57/eAAe/9ztZdVAdesQwGb9hZHJc75B+VNm4xrh/PJO6c1THqdQ
- 19WVJ+7rDx3PhVncGlbAOiiiE3NOFPJ1OQYxPKtpBUukAlOTnkKE6QcA4zckFepUkfmBV1wM
- Jg6OxFYd01z+a+oL
-Message-ID: <0355257f-6a3a-cdcd-d206-aec3df97dded@oracle.com>
-Date: Wed, 30 Oct 2019 12:55:37 -0400
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.7.0
-MIME-Version: 1.0
-In-Reply-To: <20191028201032.6352-10-jgg@ziepe.ca>
+ <20191028201032.6352-15-jgg@ziepe.ca>
+ <a456ebd0-28cf-997b-31ff-72d9077a9b8e@amd.com>
+ <20191029192544.GU22766@mellanox.com>
+In-Reply-To: <20191029192544.GU22766@mellanox.com>
+Accept-Language: en-ZA, en-US
 Content-Language: en-US
-X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9426
- signatures=668685
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=2
- malwarescore=0
- phishscore=0 bulkscore=0 spamscore=0 mlxscore=0 mlxlogscore=999
- adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.0.1-1908290000 definitions=main-1910300151
-X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9426
- signatures=668685
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0
- priorityscore=1501 malwarescore=0
- suspectscore=2 phishscore=0 bulkscore=0 spamscore=0 clxscore=1011
- lowpriorityscore=0 mlxscore=0 impostorscore=0 mlxlogscore=999 adultscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.0.1-1908290000
- definitions=main-1910300151
-X-Mailman-Approved-At: Fri, 27 Dec 2019 08:13:30 +0000
-Subject: Re: [Nouveau] [PATCH v2 09/15] xen/gntdev: use
- mmu_range_notifier_insert
+X-MS-Has-Attach: yes
+X-MS-TNEF-Correlator: 
+x-clientproxiedby: YTXPR0101CA0070.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b00:1::47) To MN2PR12MB4030.namprd12.prod.outlook.com
+ (2603:10b6:208:159::25)
+authentication-results: spf=none (sender IP is )
+ smtp.mailfrom=Philip.Yang@amd.com; 
+x-ms-exchange-messagesentrepresentingtype: 1
+x-originating-ip: [165.204.55.251]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-ht: Tenant
+x-ms-office365-filtering-correlation-id: 1e84a755-144c-46ba-08a3-08d75eda0d22
+x-ms-traffictypediagnostic: MN2PR12MB3342:
+x-ms-exchange-transport-forked: True
+x-microsoft-antispam-prvs: <MN2PR12MB3342C5C26DA97994E45ED02DE6620@MN2PR12MB3342.namprd12.prod.outlook.com>
+x-ms-oob-tlc-oobclassifiers: OLM:7691;
+x-forefront-prvs: 020877E0CB
+x-forefront-antispam-report: SFV:NSPM;
+ SFS:(10009020)(4636009)(396003)(366004)(346002)(376002)(39860400002)(136003)(189003)(199004)(4326008)(99286004)(316002)(2616005)(476003)(2906002)(229853002)(6512007)(3846002)(53546011)(31686004)(14454004)(25786009)(36756003)(66446008)(6116002)(66946007)(54906003)(66066001)(66476007)(66616009)(66556008)(64756008)(4744005)(486006)(11346002)(446003)(4001150100001)(81156014)(6916009)(76176011)(7416002)(305945005)(7736002)(86362001)(26005)(99936001)(6506007)(31696002)(386003)(102836004)(5660300002)(81166006)(6436002)(71200400001)(71190400001)(6246003)(6486002)(478600001)(256004)(8936002)(5024004)(8676002)(186003)(52116002);
+ DIR:OUT; SFP:1101; SCL:1; SRVR:MN2PR12MB3342;
+ H:MN2PR12MB4030.namprd12.prod.outlook.com; FPR:; SPF:None; LANG:en;
+ PTR:InfoNoRecords; MX:1; A:1; 
+received-spf: None (protection.outlook.com: amd.com does not designate
+ permitted sender hosts)
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: VGDoQB5SWI1dnEqCrKNTaBPVuwOPOs4xKyjrmjCuZecHXxW+bHJfwvKzWHsR5H4NITm72kh/2dDSYEPuggMn5PdtUkVQ51ewEk1xibdA8xGO+oLDceqqhc73Lfxww3StuElw2CDctdN78TCFLWJSdNMIxe0i3MuQY9Xs2QMy8gj9BGKxCI0oQDzNVTGS6J7Anm3FQqqi+u37gF7Wk88QRc9aAI6akRYMTySg+Cc8PUvB7i1fjJohJJDOCE65APiSW7VXwopmxhB0aKx8s+y805P+cyAKTRCEIrQVZUt8GBdx8nlpEhNVnBGIfvmIK9NWRQWfDQFsvFaMP7/KxD7wO7a+AzkjEw7mgaatEY9T/KNcfxsXZHJGu8VRcb7vKRev5ow0paXZ2shhkoUal94/3VBoF4gyjtgzfMFriFUfXkqjWqXsdrZMCoaAql8gwW1f
+Content-Type: multipart/mixed;
+ boundary="_002_30b2f569bf7a5166c98d4a4a13d1351famdcom_"
+MIME-Version: 1.0
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1e84a755-144c-46ba-08a3-08d75eda0d22
+X-MS-Exchange-CrossTenant-originalarrivaltime: 01 Nov 2019 14:44:51.4878 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: CKQ7c71vRiI+FvQgBL3GLjt2Qjl7mKen8t6YK+ysETD/CZd3kiTUwdb9rOgJXs0/
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB3342
+X-Mailman-Approved-At: Fri, 27 Dec 2019 08:13:31 +0000
+Subject: Re: [Nouveau] [PATCH v2 14/15] drm/amdgpu: Use mmu_range_notifier
+ instead of hmm_mirror
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -128,377 +102,162 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Juergen Gross <jgross@suse.com>, David Zhou <David1.Zhou@amd.com>,
- Mike Marciniszyn <mike.marciniszyn@intel.com>,
+Cc: "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
+ "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
+ "linux-mm@kvack.org" <linux-mm@kvack.org>, "Zhou,
+ David\(ChunMing\)" <David1.Zhou@amd.com>,
  Stefano Stabellini <sstabellini@kernel.org>,
  Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
- linux-rdma@vger.kernel.org, nouveau@lists.freedesktop.org,
+ "linux-rdma@vger.kernel.org" <linux-rdma@vger.kernel.org>,
+ "amd-gfx@lists.freedesktop.org" <amd-gfx@lists.freedesktop.org>,
+ Christoph Hellwig <hch@infradead.org>, Ben Skeggs <bskeggs@redhat.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ Ralph Campbell <rcampbell@nvidia.com>,
  Dennis Dalessandro <dennis.dalessandro@intel.com>,
- amd-gfx@lists.freedesktop.org, Christoph Hellwig <hch@infradead.org>,
- Jason Gunthorpe <jgg@mellanox.com>, dri-devel@lists.freedesktop.org,
- Alex Deucher <alexander.deucher@amd.com>, xen-devel@lists.xenproject.org,
- Petr Cvek <petrcvekcz@gmail.com>,
- =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
- Ben Skeggs <bskeggs@redhat.com>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+ Boris Ostrovsky <boris.ostrovsky@oracle.com>, Petr Cvek <petrcvekcz@gmail.com>,
+ Juergen Gross <jgross@suse.com>, Mike Marciniszyn <mike.marciniszyn@intel.com>,
+ "Kuehling, Felix" <Felix.Kuehling@amd.com>, "Deucher,
+ Alexander" <Alexander.Deucher@amd.com>, "Koenig,
+ Christian" <Christian.Koenig@amd.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 10/28/19 4:10 PM, Jason Gunthorpe wrote:
-> From: Jason Gunthorpe <jgg@mellanox.com>
->
-> gntdev simply wants to monitor a specific VMA for any notifier events,
-> this can be done straightforwardly using mmu_range_notifier_insert() over
-> the VMA's VA range.
->
-> The notifier should be attached until the original VMA is destroyed.
->
-> It is unclear if any of this is even sane, but at least a lot of duplicate
-> code is removed.
+--_002_30b2f569bf7a5166c98d4a4a13d1351famdcom_
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <C03A7A635863A34A87DE1F3224C32099@namprd12.prod.outlook.com>
+Content-Transfer-Encoding: base64
 
-I didn't have a chance to look at the patch itself yet but as a heads-up
---- it crashes dom0.
+DQoNCk9uIDIwMTktMTAtMjkgMzoyNSBwLm0uLCBKYXNvbiBHdW50aG9ycGUgd3JvdGU6DQo+IE9u
+IFR1ZSwgT2N0IDI5LCAyMDE5IGF0IDA3OjIyOjM3UE0gKzAwMDAsIFlhbmcsIFBoaWxpcCB3cm90
+ZToNCj4+IEhpIEphc29uLA0KPj4NCj4+IEkgZGlkIHF1aWNrIHRlc3QgYWZ0ZXIgbWVyZ2luZyBh
+bWQtc3RhZ2luZy1kcm0tbmV4dCB3aXRoIHRoZQ0KPj4gbW11X25vdGlmaWVyIGJyYW5jaCwgd2hp
+Y2ggaW5jbHVkZXMgdGhpcyBzZXQgY2hhbmdlcy4gVGhlIHRlc3QgcmVzdWx0DQo+PiBoYXMgZGlm
+ZmVyZW50IGZhaWx1cmVzLCBhcHAgc3R1Y2sgaW50ZXJtaXR0ZW50bHksIEdVSSBubyBkaXNwbGF5
+IGV0Yy4gSQ0KPj4gYW0gdW5kZXJzdGFuZGluZyB0aGUgY2hhbmdlcyBhbmQgd2lsbCB0cnkgdG8g
+ZmlndXJlIG91dCB0aGUgY2F1c2UuDQo+IA0KPiBUaGFua3MhIEknbSBub3Qgc3VycHJpc2VkIGJ5
+IHRoaXMgZ2l2ZW4gaG93IGRpZmZpY3VsdCB0aGlzIHBhdGNoIHdhcw0KPiB0byBtYWtlLiBMZXQg
+bWUga25vdyBpZiBJIGNhbiBhc3Npc3QgaW4gYW55IHdheQ0KPiANCj4gUGxlYXNlIGVuc3VyZSB0
+byBydW4gd2l0aCBsb2NrZGVwIGVuYWJsZWQuLiBZb3VyIHN5bXB0b3BzIHNvdW5kcyBzb3J0DQo+
+IG9mIGxpa2UgZGVhZGxvY2tpbmc/DQo+IA0KSGkgSmFzb24sDQoNCkF0dGFjaGVkIHBhdGNoIGZp
+eCBzZXZlcmFsIGlzc3VlcyBpbiBhbWRncHUgZHJpdmVyLCBtYXliZSB5b3UgY2FuIHNxdWFzaCAN
+CnRoaXMgaW50byBwYXRjaCAxNC4gV2l0aCB0aGlzIGlzIGRvbmUsIHBhdGNoIDEyLCAxMywgMTQg
+aXMgUmV2aWV3ZWQtYnkgDQphbmQgVGVzdGVkLWJ5IFBoaWxpcCBZYW5nIDxwaGlsaXAueWFuZ0Bh
+bWQuY29tPg0KDQpSZWdhcmRzLA0KUGhpbGlwDQoNCj4gUmVnYXJkcywNCj4gSmFzb24NCj4gDQo=
 
--boris
+--_002_30b2f569bf7a5166c98d4a4a13d1351famdcom_
+Content-Type: text/x-patch;
+	name="0001-drm-amdgpu-issues-with-new-mmu_range_notifier-api.patch"
+Content-Description:  0001-drm-amdgpu-issues-with-new-mmu_range_notifier-api.patch
+Content-Disposition: attachment;
+	filename="0001-drm-amdgpu-issues-with-new-mmu_range_notifier-api.patch";
+	size=5274; creation-date="Fri, 01 Nov 2019 14:44:51 GMT";
+	modification-date="Fri, 01 Nov 2019 14:44:51 GMT"
+Content-ID: <E67811A1EA16E145B2E72546F8F70301@namprd12.prod.outlook.com>
+Content-Transfer-Encoding: base64
 
+RnJvbSA1YTBiZDRkOGNlZjg0NzJmZTI5MDQ1NTAxNDJkMjg4ZmVlZDhjZDgxIE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQ0KRnJvbTogUGhpbGlwIFlhbmcgPFBoaWxpcC5ZYW5nQGFtZC5jb20+DQpE
+YXRlOiBUaHUsIDMxIE9jdCAyMDE5IDA5OjEwOjMwIC0wNDAwDQpTdWJqZWN0OiBbUEFUQ0hdIGRy
+bS9hbWRncHU6IGlzc3VlcyB3aXRoIG5ldyBtbXVfcmFuZ2Vfbm90aWZpZXIgYXBpDQoNCnB1dCBt
+bXVfcmFuZ2Vfc2V0X3NlcSB1bmRlciB0aGUgc2FtZSBsb2NrIHdoaWNoIGlzIHVzZWQgdG8gY2Fs
+bA0KbW11X3JhbmdlX3JlYWRfcmV0cnkuDQoNCmZpeCBhbWRncHVfdHRtX3R0X2dldF91c2VyX3Bh
+Z2VzX2RvbmUgcmV0dXJuIHZhbHVlLCBiZWNhdXNlDQptbXVfcmFuZ2VfcmVhZF9yZXRyeSBtZWFu
+cyAhaG1tX3JhbmdlX3ZhbGlkDQoNCnJldHJ5IGlmIGhtbV9yYW5nZV9mYXVsdCByZXR1cm4gLUVC
+VVNZDQoNCmZpeCBmYWxzZSBXQVJOIGZvciBtaXNzaW5nIGdldF91c2VyX3BhZ2VfZG9uZSwgd2Ug
+c2hvdWxkIGNoZWNrIGFsbA0KcGFnZXMgbm90IGp1c3QgdGhlIGZpcnN0IHBhZ2UsIGRvbid0IHVu
+ZGVyc3RhbmQgd2h5IHRoaXMgaXNzdWUgaXMNCnRyaWdnZXJlZCBieSB0aGlzIGNoYW5nZS4NCg0K
+U2lnbmVkLW9mZi1ieTogUGhpbGlwIFlhbmcgPFBoaWxpcC5ZYW5nQGFtZC5jb20+DQotLS0NCiBk
+cml2ZXJzL2dwdS9kcm0vYW1kL2FtZGdwdS9hbWRncHVfbW4uYyAgfCAzMiArKysrKysrLS0tLS0t
+LS0tLS0tLS0NCiBkcml2ZXJzL2dwdS9kcm0vYW1kL2FtZGdwdS9hbWRncHVfdHRtLmMgfCAzNyAr
+KysrKysrKysrKysrKysrKy0tLS0tLS0tDQogMiBmaWxlcyBjaGFuZ2VkLCAzNiBpbnNlcnRpb25z
+KCspLCAzMyBkZWxldGlvbnMoLSkNCg0KZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9hbWQv
+YW1kZ3B1L2FtZGdwdV9tbi5jIGIvZHJpdmVycy9ncHUvZHJtL2FtZC9hbWRncHUvYW1kZ3B1X21u
+LmMNCmluZGV4IGNiNzE4YTA2NGViNC4uYzhiYmQwNmYxMDA5IDEwMDY0NA0KLS0tIGEvZHJpdmVy
+cy9ncHUvZHJtL2FtZC9hbWRncHUvYW1kZ3B1X21uLmMNCisrKyBiL2RyaXZlcnMvZ3B1L2RybS9h
+bWQvYW1kZ3B1L2FtZGdwdV9tbi5jDQpAQCAtNjcsMjEgKzY3LDE1IEBAIHN0YXRpYyBib29sIGFt
+ZGdwdV9tbl9pbnZhbGlkYXRlX2dmeChzdHJ1Y3QgbW11X3JhbmdlX25vdGlmaWVyICptcm4sDQog
+CXN0cnVjdCBhbWRncHVfZGV2aWNlICphZGV2ID0gYW1kZ3B1X3R0bV9hZGV2KGJvLT50Ym8uYmRl
+dik7DQogCWxvbmcgcjsNCiANCi0JLyoNCi0JICogRklYTUU6IE11c3QgaG9sZCBzb21lIGxvY2sg
+c2hhcmVkIHdpdGgNCi0JICogYW1kZ3B1X3R0bV90dF9nZXRfdXNlcl9wYWdlc19kb25lKCkNCi0J
+ICovDQotCW1tdV9yYW5nZV9zZXRfc2VxKG1ybiwgY3VyX3NlcSk7DQorCW11dGV4X2xvY2soJmFk
+ZXYtPm5vdGlmaWVyX2xvY2spOw0KIA0KLQkvKiBGSVhNRTogSXMgdGhpcyBuZWNlc3Nhcnk/ICov
+DQotCWlmICghYW1kZ3B1X3R0bV90dF9hZmZlY3RfdXNlcnB0cihiby0+dGJvLnR0bSwgcmFuZ2Ut
+PnN0YXJ0LA0KLQkJCQkJICByYW5nZS0+ZW5kKSkNCi0JCXJldHVybiB0cnVlOw0KKwltbXVfcmFu
+Z2Vfc2V0X3NlcShtcm4sIGN1cl9zZXEpOw0KIA0KLQlpZiAoIW1tdV9ub3RpZmllcl9yYW5nZV9i
+bG9ja2FibGUocmFuZ2UpKQ0KKwlpZiAoIW1tdV9ub3RpZmllcl9yYW5nZV9ibG9ja2FibGUocmFu
+Z2UpKSB7DQorCQltdXRleF91bmxvY2soJmFkZXYtPm5vdGlmaWVyX2xvY2spOw0KIAkJcmV0dXJu
+IGZhbHNlOw0KKwl9DQogDQotCW11dGV4X2xvY2soJmFkZXYtPm5vdGlmaWVyX2xvY2spOw0KIAly
+ID0gZG1hX3Jlc3Zfd2FpdF90aW1lb3V0X3JjdShiby0+dGJvLmJhc2UucmVzdiwgdHJ1ZSwgZmFs
+c2UsDQogCQkJCSAgICAgIE1BWF9TQ0hFRFVMRV9USU1FT1VUKTsNCiAJbXV0ZXhfdW5sb2NrKCZh
+ZGV2LT5ub3RpZmllcl9sb2NrKTsNCkBAIC0xMTAsMjEgKzEwNCwxNSBAQCBzdGF0aWMgYm9vbCBh
+bWRncHVfbW5faW52YWxpZGF0ZV9oc2Eoc3RydWN0IG1tdV9yYW5nZV9ub3RpZmllciAqbXJuLA0K
+IAlzdHJ1Y3QgYW1kZ3B1X2JvICpibyA9IGNvbnRhaW5lcl9vZihtcm4sIHN0cnVjdCBhbWRncHVf
+Ym8sIG5vdGlmaWVyKTsNCiAJc3RydWN0IGFtZGdwdV9kZXZpY2UgKmFkZXYgPSBhbWRncHVfdHRt
+X2FkZXYoYm8tPnRiby5iZGV2KTsNCiANCi0JLyoNCi0JICogRklYTUU6IE11c3QgaG9sZCBzb21l
+IGxvY2sgc2hhcmVkIHdpdGgNCi0JICogYW1kZ3B1X3R0bV90dF9nZXRfdXNlcl9wYWdlc19kb25l
+KCkNCi0JICovDQotCW1tdV9yYW5nZV9zZXRfc2VxKG1ybiwgY3VyX3NlcSk7DQorCW11dGV4X2xv
+Y2soJmFkZXYtPm5vdGlmaWVyX2xvY2spOw0KIA0KLQkvKiBGSVhNRTogSXMgdGhpcyBuZWNlc3Nh
+cnk/ICovDQotCWlmICghYW1kZ3B1X3R0bV90dF9hZmZlY3RfdXNlcnB0cihiby0+dGJvLnR0bSwg
+cmFuZ2UtPnN0YXJ0LA0KLQkJCQkJICByYW5nZS0+ZW5kKSkNCi0JCXJldHVybiB0cnVlOw0KKwlt
+bXVfcmFuZ2Vfc2V0X3NlcShtcm4sIGN1cl9zZXEpOw0KIA0KLQlpZiAoIW1tdV9ub3RpZmllcl9y
+YW5nZV9ibG9ja2FibGUocmFuZ2UpKQ0KKwlpZiAoIW1tdV9ub3RpZmllcl9yYW5nZV9ibG9ja2Fi
+bGUocmFuZ2UpKSB7DQorCQltdXRleF91bmxvY2soJmFkZXYtPm5vdGlmaWVyX2xvY2spOw0KIAkJ
+cmV0dXJuIGZhbHNlOw0KKwl9DQogDQotCW11dGV4X2xvY2soJmFkZXYtPm5vdGlmaWVyX2xvY2sp
+Ow0KIAlhbWRncHVfYW1ka2ZkX2V2aWN0X3VzZXJwdHIoYm8tPmtmZF9ibywgYm8tPm5vdGlmaWVy
+Lm1tKTsNCiAJbXV0ZXhfdW5sb2NrKCZhZGV2LT5ub3RpZmllcl9sb2NrKTsNCiANCmRpZmYgLS1n
+aXQgYS9kcml2ZXJzL2dwdS9kcm0vYW1kL2FtZGdwdS9hbWRncHVfdHRtLmMgYi9kcml2ZXJzL2dw
+dS9kcm0vYW1kL2FtZGdwdS9hbWRncHVfdHRtLmMNCmluZGV4IGEzODQzN2ZkMjkwYS4uNTZmZGU0
+M2Q1ZWZhIDEwMDY0NA0KLS0tIGEvZHJpdmVycy9ncHUvZHJtL2FtZC9hbWRncHUvYW1kZ3B1X3R0
+bS5jDQorKysgYi9kcml2ZXJzL2dwdS9kcm0vYW1kL2FtZGdwdS9hbWRncHVfdHRtLmMNCkBAIC03
+OTksMTAgKzc5OSwxMSBAQCBpbnQgYW1kZ3B1X3R0bV90dF9nZXRfdXNlcl9wYWdlcyhzdHJ1Y3Qg
+YW1kZ3B1X2JvICpibywgc3RydWN0IHBhZ2UgKipwYWdlcykNCiB7DQogCXN0cnVjdCB0dG1fdHQg
+KnR0bSA9IGJvLT50Ym8udHRtOw0KIAlzdHJ1Y3QgYW1kZ3B1X3R0bV90dCAqZ3R0ID0gKHZvaWQg
+Kil0dG07DQotCXN0cnVjdCBtbV9zdHJ1Y3QgKm1tOw0KLQlzdHJ1Y3QgaG1tX3JhbmdlICpyYW5n
+ZTsNCiAJdW5zaWduZWQgbG9uZyBzdGFydCA9IGd0dC0+dXNlcnB0cjsNCiAJc3RydWN0IHZtX2Fy
+ZWFfc3RydWN0ICp2bWE7DQorCXN0cnVjdCBobW1fcmFuZ2UgKnJhbmdlOw0KKwl1bnNpZ25lZCBs
+b25nIHRpbWVvdXQ7DQorCXN0cnVjdCBtbV9zdHJ1Y3QgKm1tOw0KIAl1bnNpZ25lZCBsb25nIGk7
+DQogCWludCByID0gMDsNCiANCkBAIC04NDEsOCArODQyLDYgQEAgaW50IGFtZGdwdV90dG1fdHRf
+Z2V0X3VzZXJfcGFnZXMoc3RydWN0IGFtZGdwdV9ibyAqYm8sIHN0cnVjdCBwYWdlICoqcGFnZXMp
+DQogCQlnb3RvIG91dF9mcmVlX3JhbmdlczsNCiAJfQ0KIA0KLQlyYW5nZS0+bm90aWZpZXJfc2Vx
+ID0gbW11X3JhbmdlX3JlYWRfYmVnaW4oJmJvLT5ub3RpZmllcik7DQotDQogCWRvd25fcmVhZCgm
+bW0tPm1tYXBfc2VtKTsNCiAJdm1hID0gZmluZF92bWEobW0sIHN0YXJ0KTsNCiAJaWYgKHVubGlr
+ZWx5KCF2bWEgfHwgc3RhcnQgPCB2bWEtPnZtX3N0YXJ0KSkgew0KQEAgLTg1NCwxMiArODUzLDIw
+IEBAIGludCBhbWRncHVfdHRtX3R0X2dldF91c2VyX3BhZ2VzKHN0cnVjdCBhbWRncHVfYm8gKmJv
+LCBzdHJ1Y3QgcGFnZSAqKnBhZ2VzKQ0KIAkJciA9IC1FUEVSTTsNCiAJCWdvdG8gb3V0X3VubG9j
+azsNCiAJfQ0KKwl1cF9yZWFkKCZtbS0+bW1hcF9zZW0pOw0KKwl0aW1lb3V0ID0gamlmZmllcyAr
+IG1zZWNzX3RvX2ppZmZpZXMoSE1NX1JBTkdFX0RFRkFVTFRfVElNRU9VVCk7DQorDQorcmV0cnk6
+DQorCXJhbmdlLT5ub3RpZmllcl9zZXEgPSBtbXVfcmFuZ2VfcmVhZF9iZWdpbigmYm8tPm5vdGlm
+aWVyKTsNCiANCisJZG93bl9yZWFkKCZtbS0+bW1hcF9zZW0pOw0KIAlyID0gaG1tX3JhbmdlX2Zh
+dWx0KHJhbmdlLCAwKTsNCiAJdXBfcmVhZCgmbW0tPm1tYXBfc2VtKTsNCi0NCi0JaWYgKHVubGlr
+ZWx5KHIgPCAwKSkNCisJaWYgKHVubGlrZWx5KHIgPD0gMCkpIHsNCisJCWlmICgociA9PSAwIHx8
+IHIgPT0gLUVCVVNZKSAmJiAhdGltZV9hZnRlcihqaWZmaWVzLCB0aW1lb3V0KSkNCisJCQlnb3Rv
+IHJldHJ5Ow0KIAkJZ290byBvdXRfZnJlZV9wZm5zOw0KKwl9DQogDQogCWZvciAoaSA9IDA7IGkg
+PCB0dG0tPm51bV9wYWdlczsgaSsrKSB7DQogCQlwYWdlc1tpXSA9IGhtbV9kZXZpY2VfZW50cnlf
+dG9fcGFnZShyYW5nZSwgcmFuZ2UtPnBmbnNbaV0pOw0KQEAgLTkxNiw3ICs5MjMsNyBAQCBib29s
+IGFtZGdwdV90dG1fdHRfZ2V0X3VzZXJfcGFnZXNfZG9uZShzdHJ1Y3QgdHRtX3R0ICp0dG0pDQog
+CQlndHQtPnJhbmdlID0gTlVMTDsNCiAJfQ0KIA0KLQlyZXR1cm4gcjsNCisJcmV0dXJuICFyOw0K
+IH0NCiAjZW5kaWYNCiANCkBAIC05OTcsMTAgKzEwMDQsMTggQEAgc3RhdGljIHZvaWQgYW1kZ3B1
+X3R0bV90dF91bnBpbl91c2VycHRyKHN0cnVjdCB0dG1fdHQgKnR0bSkNCiAJc2dfZnJlZV90YWJs
+ZSh0dG0tPnNnKTsNCiANCiAjaWYgSVNfRU5BQkxFRChDT05GSUdfRFJNX0FNREdQVV9VU0VSUFRS
+KQ0KLQlpZiAoZ3R0LT5yYW5nZSAmJg0KLQkgICAgdHRtLT5wYWdlc1swXSA9PSBobW1fZGV2aWNl
+X2VudHJ5X3RvX3BhZ2UoZ3R0LT5yYW5nZSwNCi0JCQkJCQkgICAgICBndHQtPnJhbmdlLT5wZm5z
+WzBdKSkNCi0JCVdBUk5fT05DRSgxLCAiTWlzc2luZyBnZXRfdXNlcl9wYWdlX2RvbmVcbiIpOw0K
+KwlpZiAoZ3R0LT5yYW5nZSkgew0KKwkJdW5zaWduZWQgbG9uZyBpOw0KKw0KKwkJZm9yIChpID0g
+MDsgaSA8IHR0bS0+bnVtX3BhZ2VzOyBpKyspIHsNCisJCQlpZiAodHRtLT5wYWdlc1tpXSAhPQ0K
+KwkJCQlobW1fZGV2aWNlX2VudHJ5X3RvX3BhZ2UoZ3R0LT5yYW5nZSwNCisJCQkJCSAgICAgIGd0
+dC0+cmFuZ2UtPnBmbnNbaV0pKQ0KKwkJCQlicmVhazsNCisJCX0NCisNCisJCVdBUk4oKGkgPT0g
+dHRtLT5udW1fcGFnZXMpLCAiTWlzc2luZyBnZXRfdXNlcl9wYWdlX2RvbmVcbiIpOw0KKwl9DQog
+I2VuZGlmDQogfQ0KIA0KLS0gDQoyLjE3LjENCg0K
 
->
-> Cc: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
-> Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-> Cc: xen-devel@lists.xenproject.org
-> Cc: Juergen Gross <jgross@suse.com>
-> Cc: Stefano Stabellini <sstabellini@kernel.org>
-> Signed-off-by: Jason Gunthorpe <jgg@mellanox.com>
-> ---
->  drivers/xen/gntdev-common.h |   8 +-
->  drivers/xen/gntdev.c        | 180 ++++++++++--------------------------
->  2 files changed, 49 insertions(+), 139 deletions(-)
->
-> diff --git a/drivers/xen/gntdev-common.h b/drivers/xen/gntdev-common.h
-> index 2f8b949c3eeb14..b201fdd20b667b 100644
-> --- a/drivers/xen/gntdev-common.h
-> +++ b/drivers/xen/gntdev-common.h
-> @@ -21,15 +21,8 @@ struct gntdev_dmabuf_priv;
->  struct gntdev_priv {
->  	/* Maps with visible offsets in the file descriptor. */
->  	struct list_head maps;
-> -	/*
-> -	 * Maps that are not visible; will be freed on munmap.
-> -	 * Only populated if populate_freeable_maps == 1
-> -	 */
-> -	struct list_head freeable_maps;
->  	/* lock protects maps and freeable_maps. */
->  	struct mutex lock;
-> -	struct mm_struct *mm;
-> -	struct mmu_notifier mn;
->  
->  #ifdef CONFIG_XEN_GRANT_DMA_ALLOC
->  	/* Device for which DMA memory is allocated. */
-> @@ -49,6 +42,7 @@ struct gntdev_unmap_notify {
->  };
->  
->  struct gntdev_grant_map {
-> +	struct mmu_range_notifier notifier;
->  	struct list_head next;
->  	struct vm_area_struct *vma;
->  	int index;
-> diff --git a/drivers/xen/gntdev.c b/drivers/xen/gntdev.c
-> index a446a7221e13e9..12d626670bebbc 100644
-> --- a/drivers/xen/gntdev.c
-> +++ b/drivers/xen/gntdev.c
-> @@ -65,7 +65,6 @@ MODULE_PARM_DESC(limit, "Maximum number of grants that may be mapped by "
->  static atomic_t pages_mapped = ATOMIC_INIT(0);
->  
->  static int use_ptemod;
-> -#define populate_freeable_maps use_ptemod
->  
->  static int unmap_grant_pages(struct gntdev_grant_map *map,
->  			     int offset, int pages);
-> @@ -251,12 +250,6 @@ void gntdev_put_map(struct gntdev_priv *priv, struct gntdev_grant_map *map)
->  		evtchn_put(map->notify.event);
->  	}
->  
-> -	if (populate_freeable_maps && priv) {
-> -		mutex_lock(&priv->lock);
-> -		list_del(&map->next);
-> -		mutex_unlock(&priv->lock);
-> -	}
-> -
->  	if (map->pages && !use_ptemod)
->  		unmap_grant_pages(map, 0, map->count);
->  	gntdev_free_map(map);
-> @@ -445,17 +438,9 @@ static void gntdev_vma_close(struct vm_area_struct *vma)
->  	struct gntdev_priv *priv = file->private_data;
->  
->  	pr_debug("gntdev_vma_close %p\n", vma);
-> -	if (use_ptemod) {
-> -		/* It is possible that an mmu notifier could be running
-> -		 * concurrently, so take priv->lock to ensure that the vma won't
-> -		 * vanishing during the unmap_grant_pages call, since we will
-> -		 * spin here until that completes. Such a concurrent call will
-> -		 * not do any unmapping, since that has been done prior to
-> -		 * closing the vma, but it may still iterate the unmap_ops list.
-> -		 */
-> -		mutex_lock(&priv->lock);
-> +	if (use_ptemod && map->vma == vma) {
-> +		mmu_range_notifier_remove(&map->notifier);
->  		map->vma = NULL;
-> -		mutex_unlock(&priv->lock);
->  	}
->  	vma->vm_private_data = NULL;
->  	gntdev_put_map(priv, map);
-> @@ -477,109 +462,44 @@ static const struct vm_operations_struct gntdev_vmops = {
->  
->  /* ------------------------------------------------------------------ */
->  
-> -static bool in_range(struct gntdev_grant_map *map,
-> -			      unsigned long start, unsigned long end)
-> -{
-> -	if (!map->vma)
-> -		return false;
-> -	if (map->vma->vm_start >= end)
-> -		return false;
-> -	if (map->vma->vm_end <= start)
-> -		return false;
-> -
-> -	return true;
-> -}
-> -
-> -static int unmap_if_in_range(struct gntdev_grant_map *map,
-> -			      unsigned long start, unsigned long end,
-> -			      bool blockable)
-> +static bool gntdev_invalidate(struct mmu_range_notifier *mn,
-> +			      const struct mmu_notifier_range *range,
-> +			      unsigned long cur_seq)
->  {
-> +	struct gntdev_grant_map *map =
-> +		container_of(mn, struct gntdev_grant_map, notifier);
->  	unsigned long mstart, mend;
->  	int err;
->  
-> -	if (!in_range(map, start, end))
-> -		return 0;
-> +	if (!mmu_notifier_range_blockable(range))
-> +		return false;
->  
-> -	if (!blockable)
-> -		return -EAGAIN;
-> +	/*
-> +	 * If the VMA is split or otherwise changed the notifier is not
-> +	 * updated, but we don't want to process VA's outside the modified
-> +	 * VMA. FIXME: It would be much more understandable to just prevent
-> +	 * modifying the VMA in the first place.
-> +	 */
-> +	if (map->vma->vm_start >= range->end ||
-> +	    map->vma->vm_end <= range->start)
-> +		return true;
->  
-> -	mstart = max(start, map->vma->vm_start);
-> -	mend   = min(end,   map->vma->vm_end);
-> +	mstart = max(range->start, map->vma->vm_start);
-> +	mend = min(range->end, map->vma->vm_end);
->  	pr_debug("map %d+%d (%lx %lx), range %lx %lx, mrange %lx %lx\n",
->  			map->index, map->count,
->  			map->vma->vm_start, map->vma->vm_end,
-> -			start, end, mstart, mend);
-> +			range->start, range->end, mstart, mend);
->  	err = unmap_grant_pages(map,
->  				(mstart - map->vma->vm_start) >> PAGE_SHIFT,
->  				(mend - mstart) >> PAGE_SHIFT);
->  	WARN_ON(err);
->  
-> -	return 0;
-> -}
-> -
-> -static int mn_invl_range_start(struct mmu_notifier *mn,
-> -			       const struct mmu_notifier_range *range)
-> -{
-> -	struct gntdev_priv *priv = container_of(mn, struct gntdev_priv, mn);
-> -	struct gntdev_grant_map *map;
-> -	int ret = 0;
-> -
-> -	if (mmu_notifier_range_blockable(range))
-> -		mutex_lock(&priv->lock);
-> -	else if (!mutex_trylock(&priv->lock))
-> -		return -EAGAIN;
-> -
-> -	list_for_each_entry(map, &priv->maps, next) {
-> -		ret = unmap_if_in_range(map, range->start, range->end,
-> -					mmu_notifier_range_blockable(range));
-> -		if (ret)
-> -			goto out_unlock;
-> -	}
-> -	list_for_each_entry(map, &priv->freeable_maps, next) {
-> -		ret = unmap_if_in_range(map, range->start, range->end,
-> -					mmu_notifier_range_blockable(range));
-> -		if (ret)
-> -			goto out_unlock;
-> -	}
-> -
-> -out_unlock:
-> -	mutex_unlock(&priv->lock);
-> -
-> -	return ret;
-> -}
-> -
-> -static void mn_release(struct mmu_notifier *mn,
-> -		       struct mm_struct *mm)
-> -{
-> -	struct gntdev_priv *priv = container_of(mn, struct gntdev_priv, mn);
-> -	struct gntdev_grant_map *map;
-> -	int err;
-> -
-> -	mutex_lock(&priv->lock);
-> -	list_for_each_entry(map, &priv->maps, next) {
-> -		if (!map->vma)
-> -			continue;
-> -		pr_debug("map %d+%d (%lx %lx)\n",
-> -				map->index, map->count,
-> -				map->vma->vm_start, map->vma->vm_end);
-> -		err = unmap_grant_pages(map, /* offset */ 0, map->count);
-> -		WARN_ON(err);
-> -	}
-> -	list_for_each_entry(map, &priv->freeable_maps, next) {
-> -		if (!map->vma)
-> -			continue;
-> -		pr_debug("map %d+%d (%lx %lx)\n",
-> -				map->index, map->count,
-> -				map->vma->vm_start, map->vma->vm_end);
-> -		err = unmap_grant_pages(map, /* offset */ 0, map->count);
-> -		WARN_ON(err);
-> -	}
-> -	mutex_unlock(&priv->lock);
-> +	return true;
->  }
->  
-> -static const struct mmu_notifier_ops gntdev_mmu_ops = {
-> -	.release                = mn_release,
-> -	.invalidate_range_start = mn_invl_range_start,
-> +static const struct mmu_range_notifier_ops gntdev_mmu_ops = {
-> +	.invalidate = gntdev_invalidate,
->  };
->  
->  /* ------------------------------------------------------------------ */
-> @@ -594,7 +514,6 @@ static int gntdev_open(struct inode *inode, struct file *flip)
->  		return -ENOMEM;
->  
->  	INIT_LIST_HEAD(&priv->maps);
-> -	INIT_LIST_HEAD(&priv->freeable_maps);
->  	mutex_init(&priv->lock);
->  
->  #ifdef CONFIG_XEN_GNTDEV_DMABUF
-> @@ -606,17 +525,6 @@ static int gntdev_open(struct inode *inode, struct file *flip)
->  	}
->  #endif
->  
-> -	if (use_ptemod) {
-> -		priv->mm = get_task_mm(current);
-> -		if (!priv->mm) {
-> -			kfree(priv);
-> -			return -ENOMEM;
-> -		}
-> -		priv->mn.ops = &gntdev_mmu_ops;
-> -		ret = mmu_notifier_register(&priv->mn, priv->mm);
-> -		mmput(priv->mm);
-> -	}
-> -
->  	if (ret) {
->  		kfree(priv);
->  		return ret;
-> @@ -653,16 +561,12 @@ static int gntdev_release(struct inode *inode, struct file *flip)
->  		list_del(&map->next);
->  		gntdev_put_map(NULL /* already removed */, map);
->  	}
-> -	WARN_ON(!list_empty(&priv->freeable_maps));
->  	mutex_unlock(&priv->lock);
->  
->  #ifdef CONFIG_XEN_GNTDEV_DMABUF
->  	gntdev_dmabuf_fini(priv->dmabuf_priv);
->  #endif
->  
-> -	if (use_ptemod)
-> -		mmu_notifier_unregister(&priv->mn, priv->mm);
-> -
->  	kfree(priv);
->  	return 0;
->  }
-> @@ -723,8 +627,6 @@ static long gntdev_ioctl_unmap_grant_ref(struct gntdev_priv *priv,
->  	map = gntdev_find_map_index(priv, op.index >> PAGE_SHIFT, op.count);
->  	if (map) {
->  		list_del(&map->next);
-> -		if (populate_freeable_maps)
-> -			list_add_tail(&map->next, &priv->freeable_maps);
->  		err = 0;
->  	}
->  	mutex_unlock(&priv->lock);
-> @@ -1096,11 +998,6 @@ static int gntdev_mmap(struct file *flip, struct vm_area_struct *vma)
->  		goto unlock_out;
->  	if (use_ptemod && map->vma)
->  		goto unlock_out;
-> -	if (use_ptemod && priv->mm != vma->vm_mm) {
-> -		pr_warn("Huh? Other mm?\n");
-> -		goto unlock_out;
-> -	}
-> -
->  	refcount_inc(&map->users);
->  
->  	vma->vm_ops = &gntdev_vmops;
-> @@ -1111,10 +1008,6 @@ static int gntdev_mmap(struct file *flip, struct vm_area_struct *vma)
->  		vma->vm_flags |= VM_DONTCOPY;
->  
->  	vma->vm_private_data = map;
-> -
-> -	if (use_ptemod)
-> -		map->vma = vma;
-> -
->  	if (map->flags) {
->  		if ((vma->vm_flags & VM_WRITE) &&
->  				(map->flags & GNTMAP_readonly))
-> @@ -1125,8 +1018,28 @@ static int gntdev_mmap(struct file *flip, struct vm_area_struct *vma)
->  			map->flags |= GNTMAP_readonly;
->  	}
->  
-> +	if (use_ptemod) {
-> +		map->vma = vma;
-> +		err = mmu_range_notifier_insert_locked(
-> +			&map->notifier, vma->vm_start,
-> +			vma->vm_end - vma->vm_start, vma->vm_mm);
-> +		if (err)
-> +			goto out_unlock_put;
-> +	}
->  	mutex_unlock(&priv->lock);
->  
-> +	/*
-> +	 * gntdev takes the address of the PTE in find_grant_ptes() and passes
-> +	 * it to the hypervisor in gntdev_map_grant_pages(). The purpose of
-> +	 * the notifier is to prevent the hypervisor pointer to the PTE from
-> +	 * going stale.
-> +	 *
-> +	 * Since this vma's mappings can't be touched without the mmap_sem,
-> +	 * and we are holding it now, there is no need for the notifier_range
-> +	 * locking pattern.
-> +	 */
-> +	mmu_range_read_begin(&map->notifier);
-> +
->  	if (use_ptemod) {
->  		map->pages_vm_start = vma->vm_start;
->  		err = apply_to_page_range(vma->vm_mm, vma->vm_start,
-> @@ -1175,8 +1088,11 @@ static int gntdev_mmap(struct file *flip, struct vm_area_struct *vma)
->  	mutex_unlock(&priv->lock);
->  out_put_map:
->  	if (use_ptemod) {
-> -		map->vma = NULL;
->  		unmap_grant_pages(map, 0, map->count);
-> +		if (map->vma) {
-> +			mmu_range_notifier_remove(&map->notifier);
-> +			map->vma = NULL;
-> +		}
->  	}
->  	gntdev_put_map(priv, map);
->  	return err;
+--_002_30b2f569bf7a5166c98d4a4a13d1351famdcom_
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/nouveau
+
+--_002_30b2f569bf7a5166c98d4a4a13d1351famdcom_--
