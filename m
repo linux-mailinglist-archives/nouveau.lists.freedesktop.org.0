@@ -1,67 +1,56 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id CCFF0EC95A
-	for <lists+nouveau@lfdr.de>; Fri,  1 Nov 2019 21:06:54 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 958FCECD07
+	for <lists+nouveau@lfdr.de>; Sat,  2 Nov 2019 04:19:56 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4E5616F85B;
-	Fri,  1 Nov 2019 20:06:50 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4CF586E34C;
+	Sat,  2 Nov 2019 03:19:54 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [205.139.110.120])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0DE166E301
- for <nouveau@lists.freedesktop.org>; Fri,  1 Nov 2019 20:06:48 +0000 (UTC)
-Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com
- [209.85.222.197]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-322-bXrx_3UeOGaj75h3NFAhhQ-1; Fri, 01 Nov 2019 16:06:44 -0400
-Received: by mail-qk1-f197.google.com with SMTP id a186so8078994qkb.18
- for <nouveau@lists.freedesktop.org>; Fri, 01 Nov 2019 13:06:44 -0700 (PDT)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 58DFA6E353;
+ Sat,  2 Nov 2019 03:19:53 +0000 (UTC)
+Received: by mail-ed1-x529.google.com with SMTP id l25so8951729edt.6;
+ Fri, 01 Nov 2019 20:19:53 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:message-id:subject:from:to:cc:date:organization
- :user-agent:mime-version:content-transfer-encoding;
- bh=T0uidzvnSOYOIyqMlnQPdQRM6HckHVeBK/+Gw1LVgoc=;
- b=KAMtVNdnG3ybbiql0LfTZOinK1psXqlN03oiC1e+OvKaypGfmQUYwIsbSylMtKUWn1
- XK5XhJ4tYfuDpV9YbLY+hsDBbVJtw+0MwtCz0mcb7+s9k1LWxQ5y3enX+O0Q0useLMF6
- mnUtkmilPyN4pTEChQr+R8sg9Gpj5aVNygWQv3MunEEW7vYO/BQPCEdg0wCFwb62uBOI
- IzLyL2GnWbLFHHfybX5lwFtw6QCL6iSr/p5N5S8XY3WTPglrsHvUbyhcbANtaUmCN2Aw
- F437JvuWREh2d1zMhQM8MN6IPy7W09kMZLZ3LtX1OdcLJb8uixB1dZnglF7ti2EdK9XU
- LMtA==
-X-Gm-Message-State: APjAAAXm/qv2KW19yWYmIwBW/eSFE8SnF6bnmuB+m0uLCnnSx/kdr+SH
- g9YSSnS43EQcIATKj9/u/GXB+FAldX3LPFFWeCDJhHOossuqfKJDtr44au8s4MbtZAHo5Stm4kt
- 9T6DfFqjHCCHzwGVmxOX3NXnKsA==
-X-Received: by 2002:ac8:6a04:: with SMTP id t4mr1203930qtr.37.1572638804197;
- Fri, 01 Nov 2019 13:06:44 -0700 (PDT)
-X-Google-Smtp-Source: APXvYqwNSOfgqDMYNbamEmlFYFB8GSv+3Bq/jbE8/WSmF2D5uk3m9IYE7IszplOMqJoINO5ly82u0A==
-X-Received: by 2002:ac8:6a04:: with SMTP id t4mr1203915qtr.37.1572638804015;
- Fri, 01 Nov 2019 13:06:44 -0700 (PDT)
-Received: from dhcp-10-20-1-46.bss.redhat.com ([144.121.20.162])
- by smtp.gmail.com with ESMTPSA id c204sm4092436qkb.90.2019.11.01.13.06.42
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 01 Nov 2019 13:06:42 -0700 (PDT)
-Message-ID: <91aa24ed23e2b8c012ec43ef9eb5baed2532f96c.camel@redhat.com>
-From: Lyude Paul <lyude@redhat.com>
-To: "members@x.org" <members@x.org>, xorg-devel@lists.x.org, dri-devel
- <dri-devel@lists.freedesktop.org>, nouveau <nouveau@lists.freedesktop.org>
-Date: Fri, 01 Nov 2019 16:06:40 -0400
-Organization: Red Hat
-User-Agent: Evolution 3.32.4 (3.32.4-1.fc30)
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=wjGtAWk57zKoDpHC/fEQW7q8HjHzHeDFeYCXw7S2s8g=;
+ b=geR/YTzki+fGFoTeg4JoxoV/DRyZq6gXr4be3gqnJkTdZxFcY+5C4o4fSPYIEZF2/+
+ Ls2TlVr+lVJ9H9wW/Sx9QHoy7rre9yBZoBWcb7IY0XYTFlTNn+e0n0/e5bD2vl8si0W0
+ 9uxiM4kqBzEH+ijaO0c9kDWQx+ik8SBVwbrbwtYrFKnAyS1b3gvj4bnYReP5xXRDerbc
+ DzI9fQlAQete0Mdhtvx7vMBvUqooWWoO2WYaa8dmLuszBhLqlDh6YPJfO06o31OeIxQ5
+ YPWZ6nFUl5XtTvwZfB/U4C0ghOmCOLsj8lm9Ht9jf+gktkapN1iXhyPnklF9c5UGisvY
+ xWBg==
+X-Gm-Message-State: APjAAAVrHhb3/Mxke+s149fxBGrOSO0hWZAXH2xAQo8OsH6m41bk6+ZK
+ Bs+3LLnjIACV44KVV8eDqfLJjfhzCK4NPONqJ9Q=
+X-Google-Smtp-Source: APXvYqy+DR1lfyBs0ikRxLA36cpjMbMIXk0sv+W9I26H0MFvkdfYftbLI093Mtm/9mpg4g95jBHxscXd+4l4gP92vrE=
+X-Received: by 2002:a17:906:b74c:: with SMTP id
+ fx12mr5921876ejb.324.1572664791920; 
+ Fri, 01 Nov 2019 20:19:51 -0700 (PDT)
 MIME-Version: 1.0
-X-MC-Unique: bXrx_3UeOGaj75h3NFAhhQ-1
-X-Mimecast-Spam-Score: 0
+References: <91aa24ed23e2b8c012ec43ef9eb5baed2532f96c.camel@redhat.com>
+In-Reply-To: <91aa24ed23e2b8c012ec43ef9eb5baed2532f96c.camel@redhat.com>
+From: Rhys Kidd <rhyskidd@gmail.com>
+Date: Sat, 2 Nov 2019 14:19:40 +1100
+Message-ID: <CA+iOQUHRCRu1ygj_SUOHOCNVgXfPB16PQ0MLXYB1ZH-BMTDvxw@mail.gmail.com>
+To: Lyude Paul <lyude@redhat.com>
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=redhat.com; 
- s=mimecast20190719; t=1572638808;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=xRjJf6mDuz5grOqzevKLN/DK88NMiYZAX/hKIofKo8s=;
- b=I6yJI+ZI5mbYBNptKO0ShO0D6qqD3YED8iTuymJBn86T6EQ+erEZxQ9nQMOqsA/K8unNhJ
- ljnHxgmfmVpmDTZzo46KWIqIGYTCA5QDz5zB+e6y1QwIRvgLp4tYkhABMK/zJK+mTWHPah
- 3MiKpECw7Js8KfgEg3sRsi5wviHwdVA=
-Subject: [Nouveau] Individuals interested in VESA memberships?
+ d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc;
+ bh=wjGtAWk57zKoDpHC/fEQW7q8HjHzHeDFeYCXw7S2s8g=;
+ b=UJ+Iso6odCK3l3YmHKMYDwy86JsJjXc4melQSY1hbacQh3JNChRtLGN5EzZi9LqBFN
+ Vhw6XHvJswGi3imQZnaRvYQTwqD6UpPYoikgiThX6JDYP+esQ5SvFapo0mHkL8I5B7cX
+ yAHP8GCu2AmgPANjaCSehP7AFO1OWUYunp7YKQnNVxYZB+jPGP9hqGtfIoVDjyLSNcv5
+ 5M9gYO1iE0RNwfYuJraZUbzfffR8gsgSSGCsArx+eXZB6o3tnw1vuBQLP0oOGNLHX2WL
+ VlePFFc7lkH1P2q07Fq38VhbHnr1ps8Fmv19TfLCF7SGF7CjoaZTSOHhAtlZaymS2ej4
+ o9Jw==
+Subject: Re: [Nouveau] Individuals interested in VESA memberships?
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -73,27 +62,133 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: "X.Org Foundation Board" <board@foundation.x.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: xorg-devel@lists.x.org, "X.Org Foundation Board" <board@foundation.x.org>,
+ "members@x.org" <members@x.org>, dri-devel <dri-devel@lists.freedesktop.org>,
+ nouveau <nouveau@lists.freedesktop.org>
+Content-Type: multipart/mixed; boundary="===============0668555940=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-SGkhIFJlY2VudGx5IEkndmUgYmVlbiB3b3JraW5nIHdpdGggdGhlIHJlc3Qgb2YgdGhlIFguT3Jn
-IGJvYXJkIHRvIHRyeSB0byBnZXQKWC5vcmcgYWNjZXNzIHRvIFZFU0EgbWVtYmVyc2hpcHMgc28g
-dGhhdCBjb250cmlidXRvcnMgdGhhdCBkb24ndCBoYXZlIGFuCmVtcGxveWVyIHdobyBpcyBhYmxl
-L3dpbGxpbmcgdG8gam9pbiBWRVNBIGNhbiBwb3RlbnRpYWxseSBnZXQgYWNjZXNzIHRvIHRoZQp2
-YXJpb3VzIGJlbmVmaXRzIG9mIGEgVkVTQSBtZW1iZXJzaGlwLCBzdWNoIGFzIGFjY2VzcyB0byBE
-aXNwbGF5UG9ydApzcGVjaWZpY2F0aW9ucy4gU2luY2UgSSBuZWVkIHRvIGdhdGhlciBhIGxpc3Qg
-b2YgaW50ZXJlc3RlZCBYLm9yZyBtZW1iZXJzLCBJJ2QKbGlrZSB0byBrbm93IHdobyBhbGwgbWln
-aHQgYmUgaW50ZXJlc3RlZCBpbiBhIG1lbWJlcnNoaXAgbGlrZSB0aGlzLiBUaGVyZSBhcmUKbm8g
-Y29zdHMgaW52b2x2ZWQsIGFzIHRoZSBWRVNBIG1lbWJlcnNoaXAgd2UncmUgbG9va2luZyBhdCBp
-biBwYXJ0aWN1bGFyIGNvbWVzCmF0IG5vIGNvc3QgdG8gdXMgc2luY2Ugd2UncmUgYSBub24tcHJv
-Zml0LgoKVGhlIGN1cnJlbnQgcGxhbiBpcyB0byBleHRlbmQgVkVTQSBtZW1iZXJzaGlwIHRvIFgu
-T3JnIG1lbWJlcnMgd2hvCnNwZWNpZmljYWxseSByZXF1ZXN0IGl0LiBJZiB5b3UgdGhpbmsgeW91
-J2QgYmUgYXQgYWxsIGludGVyZXN0ZWQgaW4gdGhpcywgb3IKa25vdyBhbnkgcHJvamVjdHMgb3Ig
-Y29udHJpYnV0b3JzIHdobyB3b3VsZCBiZSwgcGxlYXNlIGZlZWwgZnJlZSB0byByZXNwb25kIHRv
-CnRoaXMgbWVzc2FnZSBhbmQgbGV0IG1lIGtub3chCi0tIApDaGVlcnMsCglMeXVkZSBQYXVsCgpf
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpOb3V2ZWF1IG1h
-aWxpbmcgbGlzdApOb3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZy
-ZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL25vdXZlYXU=
+--===============0668555940==
+Content-Type: multipart/alternative; boundary="00000000000045f3c60596548e7e"
+
+--00000000000045f3c60596548e7e
+Content-Type: text/plain; charset="UTF-8"
+
+On Sat, 2 Nov 2019 at 07:06, Lyude Paul <lyude@redhat.com> wrote:
+
+> Hi! Recently I've been working with the rest of the X.Org board to try to
+> get
+> X.org access to VESA memberships so that contributors that don't have an
+> employer who is able/willing to join VESA can potentially get access to the
+> various benefits of a VESA membership, such as access to DisplayPort
+> specifications. Since I need to gather a list of interested X.org members,
+> I'd
+> like to know who all might be interested in a membership like this. There
+> are
+> no costs involved, as the VESA membership we're looking at in particular
+> comes
+> at no cost to us since we're a non-profit.
+>
+> The current plan is to extend VESA membership to X.Org members who
+> specifically request it. If you think you'd be at all interested in this,
+> or
+> know any projects or contributors who would be, please feel free to
+> respond to
+> this message and let me know!
+>
+
+Hi Lyude,
+
+This is super helpful, thank you for advancing this with X.org <> VESA.
+
+I would be interested, as recently released nvidia register documentation
+on crc
+functionality in the display block removes another roadblock for nouveau
+testing
+support in igt-gpu-tools.
+
+My time to work on nouveau independently remains limited, so if there's a
+limit
+on the number of VESA memberships available -- I'd rather not be at the top
+of that list over other more active open source contributors.
+
+Regards,
+Rhys
+
+
+
+> --
+> Cheers,
+>         Lyude Paul
+>
+> _______________________________________________
+> Nouveau mailing list
+> Nouveau@lists.freedesktop.org
+> https://lists.freedesktop.org/mailman/listinfo/nouveau
+
+--00000000000045f3c60596548e7e
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
+<div dir=3D"ltr" class=3D"gmail_attr">On Sat, 2 Nov 2019 at 07:06, Lyude Pa=
+ul &lt;<a href=3D"mailto:lyude@redhat.com">lyude@redhat.com</a>&gt; wrote:<=
+br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8e=
+x;border-left:1px solid rgb(204,204,204);padding-left:1ex">Hi! Recently I&#=
+39;ve been working with the rest of the X.Org board to try to get<br>
+X.org access to VESA memberships so that contributors that don&#39;t have a=
+n<br>
+employer who is able/willing to join VESA can potentially get access to the=
+<br>
+various benefits of a VESA membership, such as access to DisplayPort<br>
+specifications. Since I need to gather a list of interested X.org members, =
+I&#39;d<br>
+like to know who all might be interested in a membership like this. There a=
+re<br>
+no costs involved, as the VESA membership we&#39;re looking at in particula=
+r comes<br>
+at no cost to us since we&#39;re a non-profit.<br>
+<br>
+The current plan is to extend VESA membership to X.Org members who<br>
+specifically request it. If you think you&#39;d be at all interested in thi=
+s, or<br>
+know any projects or contributors who would be, please feel free to respond=
+ to<br>
+this message and let me know!<br></blockquote><div><br></div><div>Hi Lyude,=
+</div><div><br></div><div>This is super helpful, thank you for advancing th=
+is with X.org &lt;&gt; VESA.</div><div><br></div><div>I would be interested=
+, as recently released nvidia register documentation on crc</div><div>funct=
+ionality in the display block removes another roadblock for nouveau testing=
+</div><div>support in igt-gpu-tools.</div><div><br></div><div>My time to wo=
+rk on nouveau independently remains limited, so if there&#39;s a limit</div=
+><div>on the number of VESA memberships available -- I&#39;d rather not be =
+at the top</div><div>of that list over other more active open source contri=
+butors.</div><div><br></div><div>Regards,</div><div>Rhys<br></div><div><br>=
+</div><div>=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:0p=
+x 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
+-- <br>
+Cheers,<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 Lyude Paul<br>
+<br>
+_______________________________________________<br>
+Nouveau mailing list<br>
+<a href=3D"mailto:Nouveau@lists.freedesktop.org" target=3D"_blank">Nouveau@=
+lists.freedesktop.org</a><br>
+<a href=3D"https://lists.freedesktop.org/mailman/listinfo/nouveau" rel=3D"n=
+oreferrer" target=3D"_blank">https://lists.freedesktop.org/mailman/listinfo=
+/nouveau</a></blockquote></div></div>
+
+--00000000000045f3c60596548e7e--
+
+--===============0668555940==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
+YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
+cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============0668555940==--
