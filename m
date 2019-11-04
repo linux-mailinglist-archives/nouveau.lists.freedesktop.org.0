@@ -2,53 +2,92 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 70CFF12B292
-	for <lists+nouveau@lfdr.de>; Fri, 27 Dec 2019 09:13:05 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A962B12B31F
+	for <lists+nouveau@lfdr.de>; Fri, 27 Dec 2019 09:16:06 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8834489949;
-	Fri, 27 Dec 2019 08:13:02 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4C2466E3EB;
+	Fri, 27 Dec 2019 08:14:40 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
- [IPv6:2a00:1450:4864:20::136])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 462746E061;
- Sun,  3 Nov 2019 17:20:33 +0000 (UTC)
-Received: by mail-lf1-x136.google.com with SMTP id f4so10501476lfk.7;
- Sun, 03 Nov 2019 09:20:33 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=7/J3WmH+heGbGFy441q1wW8UBPaHKts1+/gJ9Oc9zwI=;
- b=emu7lu9ijDrRW/BWDaIamH9xSPbfBFUYLQDPtJjsozXGmHTnXsLjNpM7J37vyEazo7
- fluVfoDCa6w2Z3g/d//s3/IXKtCJ99ccsS5hMB6j0wglWSWvGAyt+897tpcJuZrRGimW
- abUDObykwGaLjNqwJttll6bVflBwzVCNU/rqv5JkdLvCk1tZETwTRcxyuhMtzrU7uJo1
- yod1axA8c7LwN/AWneM+QYMwUXTYBi8KpC559MuZMoXcpEubCpD6gOMNn/QOPx/lZzr6
- 4W5T9FAtxPEpzCi64gINVww1PnOHY4wQzko4aLJhSp4IL6mA2/72eCkkgy1VSNyXaPFD
- ubow==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=7/J3WmH+heGbGFy441q1wW8UBPaHKts1+/gJ9Oc9zwI=;
- b=lTv1c6zaHT6wUl8R+6iAGhf91sjHsrsxdg+bwUWD5vafxBMdMXbsGNpElwR2rytibu
- I6yLGkJUQpQ/0e4gRGF4olUVlBjp6+c9FEEdoxSddHz3Ox7hcJR22mT3JqOjXQ3CoWHV
- SMwZK7jFb5Ls61h99iPO5Q812HllYSKTiNRMvuBoMJ2NRq9boHmaAgkA2H3wzyV3Tqcy
- 0qnR6ZHXxMDixIShbFkmFTlwtzuO+JoifnyTm+ZEKk7CBrZB0xZaj7lUGiJbfRwgiLFp
- /LiBGPue3zUaA6I5K61UUcxVD0+cEjt9rXJcpDCWt1oGtPRB6a+jxEuSBo/ZyjvB2OpT
- cKEw==
-X-Gm-Message-State: APjAAAUhcLF2PtrHbCu+L+3+boRRrn66m05xSvo86POguip2JJPhPry/
- EiZgQAG7sYWjwmrmvKLxXS5Tq4L/Pa5o64fRgZI=
-X-Google-Smtp-Source: APXvYqyTOfX9lg31WTjo2Fa1qfsfmxdXDL/Y1XpeXC386prybErMv5mrJbiefJ32/2M79L0S9SQ0ycxt9V0ZqloB4VM=
-X-Received: by 2002:a19:e018:: with SMTP id x24mr13626910lfg.191.1572801631502; 
- Sun, 03 Nov 2019 09:20:31 -0800 (PST)
+Received: from EUR03-VE1-obe.outbound.protection.outlook.com
+ (mail-eopbgr50051.outbound.protection.outlook.com [40.107.5.51])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7A4476E863;
+ Mon,  4 Nov 2019 20:40:44 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=mrFmKXvEvOAGQApIKCtvQWkgR8Bp1tbndl2ro1VQ0W8tCPR6RhUTPSSvMvzwKMQDyk4MuAHy6GbfsjAv72Nm8rRyoSMT/bthr7W/dCdM3BShBcLVyjWR5rNsY95UzixtYWWD1ewuv2SzqKTzA+kt+ppy1ZKBH/VG0sGAT5lBTI6S6o0TG8RF2aBuu1mjLopHHjzW1sjD1k4FZKwxcm/3xvN7CmEumVIQMj3xMQcj9hLrtdIlLIHdJClAySFR6J8uI6YJMwkqb0tjyyYBOE8N2I3e453CtfZ1BzSCHCdv90VwrhqvIo9TPplG730ZY6cv85i5sTZvv7uOXsr87cBzeA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=4yjOZ2muVLhUKzy/pkv6eId+JQmPd5ao6ccDg2ky/x8=;
+ b=SZDB3GspfiTiLn6lWi2NQUolOKgEkcvmRA5RqAzQeq3v4d+nglK1dLv7t+IlFXbN/8VlFvugpcg9KHyxkOWED56NTR7hqZSSijDfrTpi6ThXloBA7PEg3bTlIxO6Dg/OfJMAmyFa+PtupQEl06pelUtECTZ1YZTVog2o1kj0hIgckwvg+W1JH9DtLRn7Sb3JvCm+CWxzlwpdZXbT8MN42gACVyujRHNisn7ftyjKu/tVDb/mxMvQ6RWKSCgXvBfwpC7h/1H93rz0AOkZsJ+M13dMXLfymx2ko+JOF2ODefH1TcMoHPucDKxnEVeRbKiDYwBPATH0lrMS5tQplkzCpA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=mellanox.com; dmarc=pass action=none header.from=mellanox.com;
+ dkim=pass header.d=mellanox.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Mellanox.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=4yjOZ2muVLhUKzy/pkv6eId+JQmPd5ao6ccDg2ky/x8=;
+ b=c0q8QH4DQV5HmZlhbZCM9jUi1EcF+dpzpFkMKgf70YWNvPy9t/9A/OOYu05midQOmQPXAnY/OxOWhSsN4FtYedOJLoVad6S4Zb1Sj/TW5mUduDbC9XkwD5P3Uy8x0A+cm2UgW7iVn6at9MS2WBcru3h2SBw2SB8EyHAnwvNfDIs=
+Received: from VI1PR05MB4141.eurprd05.prod.outlook.com (52.133.14.15) by
+ VI1PR05MB4558.eurprd05.prod.outlook.com (20.176.3.140) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.2408.24; Mon, 4 Nov 2019 20:40:40 +0000
+Received: from VI1PR05MB4141.eurprd05.prod.outlook.com
+ ([fe80::b179:e8bf:22d4:bf8d]) by VI1PR05MB4141.eurprd05.prod.outlook.com
+ ([fe80::b179:e8bf:22d4:bf8d%5]) with mapi id 15.20.2408.024; Mon, 4 Nov 2019
+ 20:40:40 +0000
+From: Jason Gunthorpe <jgg@mellanox.com>
+To: Ralph Campbell <rcampbell@nvidia.com>
+Thread-Topic: [PATCH v2 00/15] Consolidate the mmu notifier interval_tree and
+ locking
+Thread-Index: AQHVjcvLcMrGmvTkCUuCiBG3ZcB8kKd20ZaAgASzCwA=
+Date: Mon, 4 Nov 2019 20:40:40 +0000
+Message-ID: <20191104204036.GJ22766@mellanox.com>
+References: <20191028201032.6352-1-jgg@ziepe.ca>
+ <c2b67afe-cb32-14c9-6513-6cda6cd891d2@nvidia.com>
+In-Reply-To: <c2b67afe-cb32-14c9-6513-6cda6cd891d2@nvidia.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-clientproxiedby: BL0PR01CA0017.prod.exchangelabs.com (2603:10b6:208:71::30)
+ To VI1PR05MB4141.eurprd05.prod.outlook.com
+ (2603:10a6:803:44::15)
+authentication-results: spf=none (sender IP is )
+ smtp.mailfrom=jgg@mellanox.com; 
+x-ms-exchange-messagesentrepresentingtype: 1
+x-originating-ip: [142.162.113.180]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-ht: Tenant
+x-ms-office365-filtering-correlation-id: 2dbcd9f4-a65d-4d3f-a953-08d761674145
+x-ms-traffictypediagnostic: VI1PR05MB4558:
+x-microsoft-antispam-prvs: <VI1PR05MB45588E89980D7E011A5A0E89CF7F0@VI1PR05MB4558.eurprd05.prod.outlook.com>
+x-ms-oob-tlc-oobclassifiers: OLM:4502;
+x-forefront-prvs: 0211965D06
+x-forefront-antispam-report: SFV:NSPM;
+ SFS:(10009020)(4636009)(366004)(396003)(39860400002)(136003)(376002)(346002)(189003)(199004)(229853002)(8936002)(81156014)(81166006)(99286004)(256004)(8676002)(6486002)(6246003)(33656002)(2906002)(6116002)(3846002)(71200400001)(71190400001)(25786009)(7416002)(4326008)(7736002)(305945005)(6436002)(6512007)(66556008)(66066001)(6916009)(86362001)(558084003)(102836004)(478600001)(26005)(316002)(76176011)(52116002)(6506007)(386003)(476003)(36756003)(14454004)(11346002)(486006)(2616005)(446003)(54906003)(1076003)(186003)(66446008)(5660300002)(66476007)(66946007)(64756008);
+ DIR:OUT; SFP:1101; SCL:1; SRVR:VI1PR05MB4558;
+ H:VI1PR05MB4141.eurprd05.prod.outlook.com; FPR:; SPF:None; LANG:en;
+ PTR:InfoNoRecords; MX:1; A:1; 
+received-spf: None (protection.outlook.com: mellanox.com does not designate
+ permitted sender hosts)
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: uhAOSQq4UPPixbonKN57rpa085/AjAKzpIvyIsrk90mxd4hE/T9ugFN7TN8FWHpHFyYwVQcoPqOF90t0d5honRx2huhU/X6EDEsGPgDhi2f34i9nrmo+C8tfEX56bZ0j+SP8d6SeI5rvZVLluqqLGV8D7jx6B1I3rbKHoNFzas0lcjbToZpFy5W+6qQ5X45yD/D6cLZ0pxz/KhgfK0jCEExytwfFVSRdTGp1JjPKnJ8zKtcI9XNhSa9vCjdySfuw0CczQJvTsncTEyX0MfYSZLm1FSy1rrXZBRDP0J7eB1qa7Nz5ySJ5BV2XfSfaajoEBuN1ofysq9Nn+bcOOZi2JPSjsLrJVY1KAgXwd/LeDKr1Qyzh+NClraK5FMT+WZk8LWGw61AIRhwK8HHLBceUm6CpRBXTjo0bVGusBR8UHQ91y3dv+JnP86I6sP9M0NTM
+x-ms-exchange-transport-forked: True
+Content-ID: <20E8275A38048B43835498D8056B902F@eurprd05.prod.outlook.com>
 MIME-Version: 1.0
-References: <91aa24ed23e2b8c012ec43ef9eb5baed2532f96c.camel@redhat.com>
-In-Reply-To: <91aa24ed23e2b8c012ec43ef9eb5baed2532f96c.camel@redhat.com>
-From: Roman Gilg <subdiff@gmail.com>
-Date: Sun, 3 Nov 2019 18:11:11 +0100
-Message-ID: <CAJcyoyui_fUasU4dKNHY60DEMAUSPwHMO8smNdcSO9ftY2z2nQ@mail.gmail.com>
-To: Lyude Paul <lyude@redhat.com>
-X-Mailman-Approved-At: Fri, 27 Dec 2019 08:13:01 +0000
-Subject: Re: [Nouveau] Individuals interested in VESA memberships?
+X-OriginatorOrg: Mellanox.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2dbcd9f4-a65d-4d3f-a953-08d761674145
+X-MS-Exchange-CrossTenant-originalarrivaltime: 04 Nov 2019 20:40:40.4182 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: a652971c-7d2e-4d9b-a6a4-d149256f461b
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: huZeQIXViZp4S02Wf5rDY5D7M+g+n+iTWOqeotChIUytr/K4gNDlnU6un0+gcw9hWnOpDSCp1sZC6zU0a1gctg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR05MB4558
+X-Mailman-Approved-At: Fri, 27 Dec 2019 08:13:32 +0000
+Subject: Re: [Nouveau] [PATCH v2 00/15] Consolidate the mmu notifier
+ interval_tree and locking
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,46 +99,37 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: xorg-devel <xorg-devel@lists.x.org>,
- "X.Org Foundation Board" <board@foundation.x.org>,
- "members@x.org" <members@x.org>, dri-devel <dri-devel@lists.freedesktop.org>,
- nouveau <nouveau@lists.freedesktop.org>
+Cc: Juergen Gross <jgross@suse.com>, David Zhou <David1.Zhou@amd.com>,
+ Mike Marciniszyn <mike.marciniszyn@intel.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
+ "linux-rdma@vger.kernel.org" <linux-rdma@vger.kernel.org>,
+ "Felix.Kuehling@amd.com" <Felix.Kuehling@amd.com>,
+ "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
+ Christoph Hellwig <hch@infradead.org>,
+ "linux-mm@kvack.org" <linux-mm@kvack.org>,
+ Dennis Dalessandro <dennis.dalessandro@intel.com>,
+ "amd-gfx@lists.freedesktop.org" <amd-gfx@lists.freedesktop.org>,
+ "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
+ Alex Deucher <alexander.deucher@amd.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ Boris Ostrovsky <boris.ostrovsky@oracle.com>, Petr Cvek <petrcvekcz@gmail.com>,
+ =?iso-8859-1?Q?Christian_K=F6nig?= <christian.koenig@amd.com>,
+ Ben Skeggs <bskeggs@redhat.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, Nov 1, 2019 at 9:06 PM Lyude Paul <lyude@redhat.com> wrote:
->
-> Hi! Recently I've been working with the rest of the X.Org board to try to get
-> X.org access to VESA memberships so that contributors that don't have an
-> employer who is able/willing to join VESA can potentially get access to the
-> various benefits of a VESA membership, such as access to DisplayPort
-> specifications. Since I need to gather a list of interested X.org members, I'd
-> like to know who all might be interested in a membership like this. There are
-> no costs involved, as the VESA membership we're looking at in particular comes
-> at no cost to us since we're a non-profit.
->
-> The current plan is to extend VESA membership to X.Org members who
-> specifically request it. If you think you'd be at all interested in this, or
-> know any projects or contributors who would be, please feel free to respond to
-> this message and let me know!
+On Fri, Nov 01, 2019 at 01:54:45PM -0700, Ralph Campbell wrote:
+> You can add my Tested-by for the mm and nouveau changes.
+> IOW, patches 1-4, 10-11, and 15.
+> 
+> Tested-by: Ralph Campbell <rcampbell@nvidia.com>
 
-Hi Lyude,
+Got it, thanks
 
-I would be interested.
-
-Thanks,
-Roman
-
-> --
-> Cheers,
->         Lyude Paul
->
-> _______________________________________________
-> dri-devel mailing list
-> dri-devel@lists.freedesktop.org
-> https://lists.freedesktop.org/mailman/listinfo/dri-devel
+Jason
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
