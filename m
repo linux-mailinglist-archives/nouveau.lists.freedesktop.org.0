@@ -2,40 +2,44 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 37AE0EFD22
-	for <lists+nouveau@lfdr.de>; Tue,  5 Nov 2019 13:30:42 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E3583F1F82
+	for <lists+nouveau@lfdr.de>; Wed,  6 Nov 2019 21:05:03 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4F94D6EA24;
-	Tue,  5 Nov 2019 12:30:39 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 80DEF6E046;
+	Wed,  6 Nov 2019 20:05:01 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 22CF16EA21;
- Tue,  5 Nov 2019 12:30:38 +0000 (UTC)
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from fmsmga006.fm.intel.com ([10.253.24.20])
- by fmsmga102.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
- 05 Nov 2019 04:30:37 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.68,271,1569308400"; d="scan'208";a="403335439"
-Received: from savicrad-mobl.ger.corp.intel.com (HELO [10.249.40.217])
- ([10.249.40.217])
- by fmsmga006.fm.intel.com with ESMTP; 05 Nov 2019 04:30:35 -0800
-To: Daniel Vetter <daniel@ffwll.ch>,
- DRI Development <dri-devel@lists.freedesktop.org>
-References: <20191104173801.2972-1-daniel.vetter@ffwll.ch>
- <20191104173801.2972-2-daniel.vetter@ffwll.ch>
- <20191105110419.GG10326@phenom.ffwll.local>
-From: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>
-Message-ID: <0e78e335-a632-4f73-6680-1bae169a7c83@linux.intel.com>
-Date: Tue, 5 Nov 2019 13:30:34 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.9.0
+Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
+ [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 2A1CD6E054
+ for <nouveau@lists.freedesktop.org>; Wed,  6 Nov 2019 20:05:00 +0000 (UTC)
+Received: by culpepper.freedesktop.org (Postfix, from userid 33)
+ id 22899720E4; Wed,  6 Nov 2019 20:05:00 +0000 (UTC)
+From: bugzilla-daemon@freedesktop.org
+To: nouveau@lists.freedesktop.org
+Date: Wed, 06 Nov 2019 20:05:00 +0000
+X-Bugzilla-Reason: AssignedTo
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: None
+X-Bugzilla-Product: xorg
+X-Bugzilla-Component: Driver/nouveau
+X-Bugzilla-Version: unspecified
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: critical
+X-Bugzilla-Who: estellnb@elstel.org
+X-Bugzilla-Status: NEW
+X-Bugzilla-Resolution: 
+X-Bugzilla-Priority: not set
+X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: attachments.created
+Message-ID: <bug-112185-8800-xDiKvdhYv0@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-112185-8800@http.bugs.freedesktop.org/>
+References: <bug-112185-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
 MIME-Version: 1.0
-In-Reply-To: <20191105110419.GG10326@phenom.ffwll.local>
-Content-Language: en-US
-Subject: Re: [Nouveau] [PATCH 2/3] drm/nouveau: slowpath for pushbuf ioctl
+Subject: [Nouveau] [Bug 112185] Xorg hangs from time to time
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -47,34 +51,98 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org,
- Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
- Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel.vetter@intel.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============2126815608=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-T3AgMDUtMTEtMjAxOSBvbSAxMjowNCBzY2hyZWVmIERhbmllbCBWZXR0ZXI6Cj4gT24gTW9uLCBO
-b3YgMDQsIDIwMTkgYXQgMDY6Mzg6MDBQTSArMDEwMCwgRGFuaWVsIFZldHRlciB3cm90ZToKPj4g
-V2UgY2FuJ3QgY29weV8qX3VzZXIgd2hpbGUgaG9sZGluZyByZXNlcnZhdGlvbnMsIHRoYXQgd2ls
-bCAoc29vbiBldmVuCj4+IGZvciBub3V2ZWF1KSBsZWFkIHRvIGRlYWRsb2Nrcy4gQW5kIGl0IGJy
-ZWFrcyB0aGUgY3Jvc3MtZHJpdmVyCj4+IGNvbnRyYWN0IGFyb3VuZCBkbWFfcmVzdi4KPj4KPj4g
-Rml4IHRoaXMgYnkgYWRkaW5nIGEgc2xvd3BhdGggZm9yIHdoZW4gd2UgbmVlZCByZWxvY2F0aW9u
-cywgYW5kIGJ5Cj4+IHB1c2hpbmcgdGhlIHdyaXRlYmFjayBvZiB0aGUgbmV3IHByZXN1bWVkIG9m
-ZnNldHMgdG8gdGhlIHZlcnkgZW5kLgo+Pgo+PiBBc2lkZSBmcm9tICJpdCBjb21waWxlcyIgZW50
-aXJlbHkgdW50ZXN0ZWQgdW5mb3J0dW5hdGVseS4KPj4KPj4gU2lnbmVkLW9mZi1ieTogRGFuaWVs
-IFZldHRlciA8ZGFuaWVsLnZldHRlckBpbnRlbC5jb20+Cj4+IENjOiBJbGlhIE1pcmtpbiA8aW1p
-cmtpbkBhbHVtLm1pdC5lZHU+Cj4+IENjOiBNYWFydGVuIExhbmtob3JzdCA8bWFhcnRlbi5sYW5r
-aG9yc3RAbGludXguaW50ZWwuY29tPgo+PiBDYzogQmVuIFNrZWdncyA8YnNrZWdnc0ByZWRoYXQu
-Y29tPgo+PiBDYzogbm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKPiBQaW5nIGZvciBhY2sv
-cmV2aWV3IHNvIEkgY2FuIGxhbmQgdGhpcyBlbnRpcmUgc2VyaWVzLiBpbnRlbC1nZngtY2kgaXMg
-YWxsCj4gaGFwcHkgd2l0aCB0aGUgcmViYXNlZCB2ZXJzaW9uLCBzbyBub3V2ZWF1IGFjayBpcyB0
-aGUgb25seSBob2xkLXVwIGhlcmUuCgpJIGRvbid0IGZlZWwgY29uZmlkZW50IHJldmlld2luZyB0
-aGlzIGFzIEkgbGFjayB0aGUgaHcsIHNvIGFsbCByZXZpZXcgY2F2ZWF0cyByZXBseS4KCkhhdmlu
-ZyBzYWlkIHRoYXQsIHRoaXMgbG9va3Mgc2FuZSwgYW5kIGlmIGl0IGJsb3dzIHVwIHdlJ2xsIGZv
-dW5kIG91dCBldmVudHVhbGx5LiA6KQoKUmV2aWV3ZWQtYnk6IE1hYXJ0ZW4gTGFua2hvcnN0IDxt
-YWFydGVuLmxhbmtob3JzdEBsaW51eC5pbnRlbC5jb20+CgpfX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fXwpOb3V2ZWF1IG1haWxpbmcgbGlzdApOb3V2ZWF1QGxp
-c3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFu
-L2xpc3RpbmZvL25vdXZlYXU=
+
+--===============2126815608==
+Content-Type: multipart/alternative; boundary="15730707001.6b32cb74.27347"
+Content-Transfer-Encoding: 7bit
+
+
+--15730707001.6b32cb74.27347
+Date: Wed, 6 Nov 2019 20:05:00 +0000
+MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+https://bugs.freedesktop.org/show_bug.cgi?id=3D112185
+
+--- Comment #11 from Elmar Stellnberger <estellnb@elstel.org> ---
+Created attachment 145905
+  --> https://bugs.freedesktop.org/attachment.cgi?id=3D145905&action=3Dedit
+xfce: Xorg.0.log
+
+Now I have tried it with Xfce. It should not use glx. For KDE I believe you
+cannot switch it off completely, at least not for the logout.
+
+--=20
+You are receiving this mail because:
+You are the assignee for the bug.=
+
+--15730707001.6b32cb74.27347
+Date: Wed, 6 Nov 2019 20:05:00 +0000
+MIME-Version: 1.0
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Bugzilla-URL: http://bugs.freedesktop.org/
+Auto-Submitted: auto-generated
+
+<html>
+    <head>
+      <base href=3D"https://bugs.freedesktop.org/">
+    </head>
+    <body>
+      <p>
+        <div>
+            <b><a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - Xorg hangs from time to time"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D112185#c11">Comme=
+nt # 11</a>
+              on <a class=3D"bz_bug_link=20
+          bz_status_NEW "
+   title=3D"NEW - Xorg hangs from time to time"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D112185">bug 11218=
+5</a>
+              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
+estellnb&#64;elstel.org" title=3D"Elmar Stellnberger &lt;estellnb&#64;elste=
+l.org&gt;"> <span class=3D"fn">Elmar Stellnberger</span></a>
+</span></b>
+        <pre>Created <span class=3D""><a href=3D"attachment.cgi?id=3D145905=
+" name=3D"attach_145905" title=3D"xfce: Xorg.0.log">attachment 145905</a> <=
+a href=3D"attachment.cgi?id=3D145905&amp;action=3Dedit" title=3D"xfce: Xorg=
+.0.log">[details]</a></span>
+xfce: Xorg.0.log
+
+Now I have tried it with Xfce. It should not use glx. For KDE I believe you
+cannot switch it off completely, at least not for the logout.</pre>
+        </div>
+      </p>
+
+
+      <hr>
+      <span>You are receiving this mail because:</span>
+
+      <ul>
+          <li>You are the assignee for the bug.</li>
+      </ul>
+    </body>
+</html>=
+
+--15730707001.6b32cb74.27347--
+
+--===============2126815608==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
+YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
+cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============2126815608==--
