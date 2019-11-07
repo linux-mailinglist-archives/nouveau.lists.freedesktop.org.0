@@ -2,93 +2,71 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7CC7712B337
-	for <lists+nouveau@lfdr.de>; Fri, 27 Dec 2019 09:16:42 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 583B012B33B
+	for <lists+nouveau@lfdr.de>; Fri, 27 Dec 2019 09:16:46 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 541F06E428;
-	Fri, 27 Dec 2019 08:14:48 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8DD5B6E418;
+	Fri, 27 Dec 2019 08:14:57 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from EUR04-HE1-obe.outbound.protection.outlook.com
- (mail-eopbgr70049.outbound.protection.outlook.com [40.107.7.49])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 21A3E6F78E;
- Thu,  7 Nov 2019 20:11:10 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=nm8BTQc4XcVTH5AaIKywjzo0C9fWhL5LyHHaZXEcnqCacomefreNfCKYQ2Oa0s16aXW/c2911ukmgASDwn20ZW6cnBzvAqn8cyj8vO63bdPEgpPjdyVeLlt4Mak0civxWgMIpYwzLQ0KSDYPZ/gD4kroy5KkQif6whPF91zAh3v7+1YTYQdeiAtFx2lIKky2rwPSwPhs1FWpC8j3vAtxEKvCBxcP4DR77nl18J6wCkgZPeqZAg9BFa4zbCTv3vvDa7O2Ht5Mu1Ro18uRYhGu5yoRkzSf/MN+2W5ls0uPTsCZ/tO/eQHaoBAI3YU9UVv+c1l3kNpq3O4DTNIrHAiMHw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=xgxel6wzKCB7iAx3fWFDmhvkjcwH++biBi9chHqduk0=;
- b=Y1VPdXKJOiXfUGO+KcCfgfc7X6vspbWwExS7JeTNyrHYmgiqc7w5TOu7GYwxtKutUPCOrvzwGby8zAXw2DUmL5NwGjxi75ZkhmtsZyDuaaeny6JyRpQUL3o++LbgL0PUENxQSPmCYtMcp8cuYR7IsrhUjixrjELVOnX7uzHOdde30hIqPYLlJ8QILxJxMjkat5ZsHj1asY0s0JLc46RanLeTw1CMhdYjPBFj5oSSiiwjDot2qTz6s82GyCVoQss1X5F0X23FCAfRBSs5xpAoDfO9EK2RrbKnawEG0Lk2NSfgEg/bkf6pJ7vSnunTwOQiGdj209mcO6w4NJZbfnGpQA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=mellanox.com; dmarc=pass action=none header.from=mellanox.com;
- dkim=pass header.d=mellanox.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Mellanox.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=xgxel6wzKCB7iAx3fWFDmhvkjcwH++biBi9chHqduk0=;
- b=BNXsKXL9nJvqfGHHD/lPQbRXn/qd1yJwC3pT5azbBvdC35OPaGVyJz11549WonzkCt8RbubfZxch6PcjKWWnmHJTSZ38OOWd162SVBKSns8OP2ugL8tVb3WrTIhZUl9ji1XzNUD8Cpr2qo1jQvBAzvWBLCnkH2TiPtk2d3cY9Tw=
-Received: from VI1PR05MB4141.eurprd05.prod.outlook.com (52.133.14.15) by
- VI1PR05MB3406.eurprd05.prod.outlook.com (10.175.245.23) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.2430.23; Thu, 7 Nov 2019 20:11:06 +0000
-Received: from VI1PR05MB4141.eurprd05.prod.outlook.com
- ([fe80::b179:e8bf:22d4:bf8d]) by VI1PR05MB4141.eurprd05.prod.outlook.com
- ([fe80::b179:e8bf:22d4:bf8d%5]) with mapi id 15.20.2408.028; Thu, 7 Nov 2019
- 20:11:06 +0000
-From: Jason Gunthorpe <jgg@mellanox.com>
-To: Jerome Glisse <jglisse@redhat.com>
-Thread-Topic: [PATCH v2 02/15] mm/mmu_notifier: add an interval tree notifier
-Thread-Index: AQHVjcvJYOye0EiwZkisYK74G5bmhqd+54eAgAAdRYCAAS6QAA==
-Date: Thu, 7 Nov 2019 20:11:06 +0000
-Message-ID: <20191107201102.GC21728@mellanox.com>
+Received: from mail-qt1-x844.google.com (mail-qt1-x844.google.com
+ [IPv6:2607:f8b0:4864:20::844])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E10D36F7A5
+ for <nouveau@lists.freedesktop.org>; Thu,  7 Nov 2019 20:36:31 +0000 (UTC)
+Received: by mail-qt1-x844.google.com with SMTP id t20so3853947qtn.9
+ for <nouveau@lists.freedesktop.org>; Thu, 07 Nov 2019 12:36:31 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ziepe.ca; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:content-transfer-encoding:in-reply-to
+ :user-agent; bh=71LM+xH1wkNpW127vr6ZxQkFrR5SvDtsBzUQHq660ZY=;
+ b=D3bFpO22vYKzoP0y0kJzENmUIyEWWuBeZdrbWOd1NSHyV6jshwYAek9v0UQlPVNFPm
+ gMM8Mo2Kxc8gRUHzzjxaadcVCTPEcRYvCbAIX8OusFUjw7o9YpFUkiK3RoQQUeow2ms9
+ eGazhDIo9mJpashFsikQQIbjd6TISyD1pZmFKifpX4Zhcl//XXhGcH3+Zo5Kzt51FlB3
+ w1yAflYz0ICBGX3upadZlsBXvu1aRMmxOCzSLHPZYss2G0V4O2B7ESmEO3vtegVYkAKW
+ tSKEpqMzverpHSnG3I+axEeI7kQum6AfY8LA3KuUKxqL3srA0wFn9Z1ou/8PeWVKM40a
+ a1yA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:content-transfer-encoding
+ :in-reply-to:user-agent;
+ bh=71LM+xH1wkNpW127vr6ZxQkFrR5SvDtsBzUQHq660ZY=;
+ b=WabNov58IQ/zP9h8Fl5M3Ph82xfmlOhiqs48ZRHHdaCHcO5AMpRRSXoA6hTAmesY6v
+ 4TjUdw5ypevGazpxzgisY5QS6SsltpjrZFitCpPXMuoURCmmcdot3r/lU8qUQMggQ1Dc
+ eMdwIOkLXVJ6Motxhh3EhfKODZoN+tkOPGhtBwR2mgAOCFqsi2VZjafR0UZOofhYb2+D
+ gTFn1PLSQ/NRD/VrgVbNhW/og9bJKQeIsVw6Pj7n+3mmYKOfiyAbkzToXtqL2LCaRe/c
+ 22TqPMa21Cf3zL8Tlk/QwE15QmaCzmrm/uduzNHA1H2MuIrTa4k/+GfZ1e4pnMrmBXOi
+ zGDg==
+X-Gm-Message-State: APjAAAVs4Bg0eUd3b9S8vFs5xn7/xDXSf2QaF744lcWI0pL8Z3q/itsK
+ /LipoL2PN0XU8XmS5j1oDPSMCg==
+X-Google-Smtp-Source: APXvYqyNBsBryLeEi7SIRoAPqzH4cK3zfUarxZiwLJPOIp00fgPi4tyHDHRm5q/vs9/sR4SDhwZ/Hw==
+X-Received: by 2002:ac8:67d9:: with SMTP id r25mr6108730qtp.7.1573158991013;
+ Thu, 07 Nov 2019 12:36:31 -0800 (PST)
+Received: from ziepe.ca
+ (hlfxns017vw-142-162-113-180.dhcp-dynamic.fibreop.ns.bellaliant.net.
+ [142.162.113.180])
+ by smtp.gmail.com with ESMTPSA id q17sm2194836qtq.58.2019.11.07.12.36.30
+ (version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+ Thu, 07 Nov 2019 12:36:30 -0800 (PST)
+Received: from jgg by mlx.ziepe.ca with local (Exim 4.90_1)
+ (envelope-from <jgg@ziepe.ca>)
+ id 1iSoW5-0000Io-Qj; Thu, 07 Nov 2019 16:36:29 -0400
+Date: Thu, 7 Nov 2019 16:36:29 -0400
+From: Jason Gunthorpe <jgg@ziepe.ca>
+To: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Message-ID: <20191107203629.GF6730@ziepe.ca>
 References: <20191028201032.6352-1-jgg@ziepe.ca>
- <20191028201032.6352-3-jgg@ziepe.ca>
- <35c2b322-004e-0e18-87e4-1920dc71bfd5@nvidia.com>
- <20191107020807.GA747656@redhat.com>
-In-Reply-To: <20191107020807.GA747656@redhat.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-clientproxiedby: BN4PR13CA0015.namprd13.prod.outlook.com
- (2603:10b6:403:3::25) To VI1PR05MB4141.eurprd05.prod.outlook.com
- (2603:10a6:803:44::15)
-authentication-results: spf=none (sender IP is )
- smtp.mailfrom=jgg@mellanox.com; 
-x-ms-exchange-messagesentrepresentingtype: 1
-x-originating-ip: [142.162.113.180]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-ht: Tenant
-x-ms-office365-filtering-correlation-id: 4cdf982f-b6aa-4a1e-ead0-08d763be9f65
-x-ms-traffictypediagnostic: VI1PR05MB3406:
-x-microsoft-antispam-prvs: <VI1PR05MB340605F186CF3F42C41E3009CF780@VI1PR05MB3406.eurprd05.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:10000;
-x-forefront-prvs: 0214EB3F68
-x-forefront-antispam-report: SFV:NSPM;
- SFS:(10009020)(4636009)(366004)(376002)(136003)(39850400004)(346002)(396003)(199004)(189003)(14454004)(25786009)(7416002)(305945005)(6916009)(478600001)(7736002)(6512007)(8936002)(6486002)(6436002)(36756003)(229853002)(86362001)(2906002)(81166006)(8676002)(81156014)(4326008)(6246003)(71190400001)(386003)(316002)(1076003)(66946007)(54906003)(99286004)(33656002)(5660300002)(256004)(14444005)(66066001)(52116002)(76176011)(3846002)(486006)(2616005)(476003)(71200400001)(11346002)(6116002)(66446008)(64756008)(66556008)(66476007)(186003)(26005)(6506007)(102836004)(446003);
- DIR:OUT; SFP:1101; SCL:1; SRVR:VI1PR05MB3406;
- H:VI1PR05MB4141.eurprd05.prod.outlook.com; FPR:; SPF:None; LANG:en;
- PTR:InfoNoRecords; A:1; MX:1; 
-received-spf: None (protection.outlook.com: mellanox.com does not designate
- permitted sender hosts)
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: H5+pRnFkA5QDCMKd68E5ZKcpCb4oVJ3md863xj2cktKvQTKyzXn1xrpDtS9RNSLvsS1j3UXr/9v9oIJDV32GgFLWBOgnOoFuBJ+0TqRXfuiiBoeTrLB2abbk55CpA8TFeZgPeHvt1+1YlT8wbXygJthoj7FkBQm05t2h9kPXeCtZFWApw4yQb1Jx9p8Z/fO9qNjtRHWosI+hnxeHeIk2HHUNKsPCCMlbVe9qBgUy/ZqunC95Ji8bAPUOKQ9idWmIDjErlGSbaD0b3lXAiatAeC7ND7VLBjyk5L52U3MpSGDpVj/2KbTxDZSmwMG6yjJ0dQFfPcQe2XNhIa+YATjVxGRONmg1JkQc4QttBO2T2/f5ekxfmYtl2Xw00zNQJpnN6h42OLr296dVCm7jMhiGk07NexaMqkbX4v7XUttzwHCpqBwhWvIRTlmxi9y91JRG
-x-ms-exchange-transport-forked: True
-Content-ID: <9C8D977ED7A453449570F9D0913CEE68@eurprd05.prod.outlook.com>
+ <20191028201032.6352-10-jgg@ziepe.ca>
+ <3938b588-c6c5-3bd1-8ea9-47e4d5b2045c@oracle.com>
+ <20191105023108.GN22766@mellanox.com>
+ <a62e58f6-d98b-1feb-d0ca-fb8210f3e831@oracle.com>
 MIME-Version: 1.0
-X-OriginatorOrg: Mellanox.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4cdf982f-b6aa-4a1e-ead0-08d763be9f65
-X-MS-Exchange-CrossTenant-originalarrivaltime: 07 Nov 2019 20:11:06.8215 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: a652971c-7d2e-4d9b-a6a4-d149256f461b
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: z8D1valdPpKPqSFVylDJ7wF0U0fhXCJCXosYRLsrWDT8na41aquw4LOQzKGcVcTaq+RimeECKXfXEcNqGoIfXw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR05MB3406
-X-Mailman-Approved-At: Fri, 27 Dec 2019 08:13:32 +0000
-Subject: Re: [Nouveau] [PATCH v2 02/15] mm/mmu_notifier: add an interval
- tree notifier
+Content-Disposition: inline
+In-Reply-To: <a62e58f6-d98b-1feb-d0ca-fb8210f3e831@oracle.com>
+User-Agent: Mutt/1.9.4 (2018-02-28)
+X-Mailman-Approved-At: Fri, 27 Dec 2019 08:13:31 +0000
+Subject: Re: [Nouveau] [PATCH v2 09/15] xen/gntdev: use
+ mmu_range_notifier_insert
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -100,140 +78,43 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
- "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
- Michal Hocko <mhocko@kernel.org>, "linux-mm@kvack.org" <linux-mm@kvack.org>,
- Andrea Arcangeli <aarcange@redhat.com>, David Zhou <David1.Zhou@amd.com>,
+Cc: Juergen Gross <jgross@suse.com>, David Zhou <David1.Zhou@amd.com>,
+ Ralph Campbell <rcampbell@nvidia.com>,
  Stefano Stabellini <sstabellini@kernel.org>,
  Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
  "linux-rdma@vger.kernel.org" <linux-rdma@vger.kernel.org>,
- "amd-gfx@lists.freedesktop.org" <amd-gfx@lists.freedesktop.org>,
- Christoph Hellwig <hch@infradead.org>, Ben Skeggs <bskeggs@redhat.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Ralph Campbell <rcampbell@nvidia.com>,
- Boris Ostrovsky <boris.ostrovsky@oracle.com>, Petr Cvek <petrcvekcz@gmail.com>,
- Juergen Gross <jgross@suse.com>, Mike Marciniszyn <mike.marciniszyn@intel.com>,
  "Felix.Kuehling@amd.com" <Felix.Kuehling@amd.com>,
- =?iso-8859-1?Q?Christian_K=F6nig?= <christian.koenig@amd.com>,
+ Mike Marciniszyn <mike.marciniszyn@intel.com>,
+ "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
+ Christoph Hellwig <hch@infradead.org>,
+ "linux-mm@kvack.org" <linux-mm@kvack.org>,
+ "amd-gfx@lists.freedesktop.org" <amd-gfx@lists.freedesktop.org>,
+ "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
  Alex Deucher <alexander.deucher@amd.com>,
- Dennis Dalessandro <dennis.dalessandro@intel.com>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ Dennis Dalessandro <dennis.dalessandro@intel.com>,
+ Petr Cvek <petrcvekcz@gmail.com>,
+ Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>,
+ Ben Skeggs <bskeggs@redhat.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, Nov 06, 2019 at 09:08:07PM -0500, Jerome Glisse wrote:
-
-> > 
-> > Extra credit: IMHO, this clearly deserves to all be in a new mmu_range_notifier.h
-> > header file, but I know that's extra work. Maybe later as a follow-up patch,
-> > if anyone has the time.
-> 
-> The range notifier should get the event too, it would be a waste, i think it is
-> an oversight here. The release event is fine so NAK to you separate event. Event
-> is really an helper for notifier i had a set of patch for nouveau to leverage
-> this i need to resucite them. So no need to split thing, i would just forward
-> the event ie add event to mmu_range_notifier_ops.invalidate() i failed to catch
-> that in v1 sorry.
-
-I think what you mean is already done?
-
-struct mmu_range_notifier_ops {
-	bool (*invalidate)(struct mmu_range_notifier *mrn,
-			   const struct mmu_notifier_range *range,
-			   unsigned long cur_seq);
-
-> No it is always odd, you must call mmu_range_set_seq() only from the
-> op->invalidate_range() callback at which point the seq is odd. As well
-> when mrn is added and its seq first set it is set to an odd value
-> always. Maybe the comment, should read:
-> 
->  * mrn->invalidate_seq is always, yes always, set to an odd value. This ensures
-> 
-> To stress that it is not an error.
-
-I went with this:
-
-	/*
-	 * mrn->invalidate_seq must always be set to an odd value via
-	 * mmu_range_set_seq() using the provided cur_seq from
-	 * mn_itree_inv_start_range(). This ensures that if seq does wrap we
-	 * will always clear the below sleep in some reasonable time as
-	 * mmn_mm->invalidate_seq is even in the idle state.
-	 */
-
-> > > +	spin_lock(&mmn_mm->lock);
-> > > +	if (mmn_mm->active_invalidate_ranges) {
-> > > +		if (mn_itree_is_invalidating(mmn_mm))
-> > > +			hlist_add_head(&mrn->deferred_item,
-> > > +				       &mmn_mm->deferred_list);
-> > > +		else {
-> > > +			mmn_mm->invalidate_seq |= 1;
-> > > +			interval_tree_insert(&mrn->interval_tree,
-> > > +					     &mmn_mm->itree);
-> > > +		}
-> > > +		mrn->invalidate_seq = mmn_mm->invalidate_seq;
-> > > +	} else {
-> > > +		WARN_ON(mn_itree_is_invalidating(mmn_mm));
-> > > +		mrn->invalidate_seq = mmn_mm->invalidate_seq - 1;
-> > 
-> > Ohhh, checkmate. I lose. Why is *subtracting* the right thing to do
-> > for seq numbers here?  I'm acutely unhappy trying to figure this out.
-> > I suspect it's another unfortunate side effect of trying to use the
-> > lower bit of the seq number (even/odd) for something else.
-> 
-> If there is no mmn_mm->active_invalidate_ranges then it means that
-> mmn_mm->invalidate_seq is even and thus mmn_mm->invalidate_seq - 1
-> is an odd number which means that mrn->invalidate_seq is initialized
-> to odd value and if you follow the rule for calling mmu_range_set_seq()
-> then it will _always_ be an odd number and this close the loop with
-> the above comments :)
-
-The key thing is that it is an odd value that will take a long time
-before mmn_mm->invalidate seq reaches it
-
-> > > +	might_lock(&mm->mmap_sem);
-> > > +
-> > > +	mmn_mm = smp_load_acquire(&mm->mmu_notifier_mm);
-> > 
-> > What does the above pair with? Should have a comment that specifies that.
-> 
-> It was discussed in v1 but maybe a comment of what was said back then would
-> be helpful. Something like:
-> 
-> /*
->  * We need to insure that all writes to mm->mmu_notifier_mm are visible before
->  * any checks we do on mmn_mm below as otherwise CPU might re-order write done
->  * by another CPU core to mm->mmu_notifier_mm structure fields after the read
->  * belows.
->  */
-
-This comment made it, just at the store side:
-
-	/*
-	 * Serialize the update against mmu_notifier_unregister. A
-	 * side note: mmu_notifier_release can't run concurrently with
-	 * us because we hold the mm_users pin (either implicitly as
-	 * current->mm or explicitly with get_task_mm() or similar).
-	 * We can't race against any other mmu notifier method either
-	 * thanks to mm_take_all_locks().
-	 *
-	 * release semantics on the initialization of the mmu_notifier_mm's
-         * contents are provided for unlocked readers.  acquire can only be
-         * used while holding the mmgrab or mmget, and is safe because once
-         * created the mmu_notififer_mm is not freed until the mm is
-         * destroyed.  As above, users holding the mmap_sem or one of the
-         * mm_take_all_locks() do not need to use acquire semantics.
-	 */
-	if (mmu_notifier_mm)
-		smp_store_release(&mm->mmu_notifier_mm, mmu_notifier_mm);
-
-Which I think is really overly belaboring the typical smp
-store/release pattern, but people do seem unfamiliar with them...
-
-Thanks,
-Jason
-_______________________________________________
-Nouveau mailing list
-Nouveau@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/nouveau
+T24gVHVlLCBOb3YgMDUsIDIwMTkgYXQgMTA6MTY6NDZBTSAtMDUwMCwgQm9yaXMgT3N0cm92c2t5
+IHdyb3RlOgoKPiA+IFNvLCBJIHN1cHBvc2UgaXQgY2FuIGJlIHJlbGF4ZWQgdG8gYSBudWxsIHRl
+c3QgYW5kIGEgV0FSTl9PTiB0aGF0IGl0Cj4gPiBoYXNuJ3QgY2hhbmdlZD8KPiAKPiBZb3UgbWVh
+bgo+IAo+IGlmICh1c2VfcHRlbW9kKSB7Cj4gwqDCoMKgwqDCoMKgwqAgV0FSTl9PTihtYXAtPnZt
+YSAhPSB2bWEpOwo+IMKgwqDCoMKgwqDCoMKgIC4uLgo+IAo+IAo+IFllcywgdGhhdCBzb3VuZHMg
+Z29vZC4KCkkgYW1lbmRlZCBteSBjb3B5IG9mIHRoZSBwYXRjaCB3aXRoIHRoZSBhYm92ZSwgaGFz
+IHRoaXMgcmV3b3JrIHNob3duCnNpZ25zIG9mIHdvcmtpbmc/CgpAQCAtNDM2LDcgKzQzNiw4IEBA
+IHN0YXRpYyB2b2lkIGdudGRldl92bWFfY2xvc2Uoc3RydWN0IHZtX2FyZWFfc3RydWN0ICp2bWEp
+CiAgICAgICAgc3RydWN0IGdudGRldl9wcml2ICpwcml2ID0gZmlsZS0+cHJpdmF0ZV9kYXRhOwog
+CiAgICAgICAgcHJfZGVidWcoImdudGRldl92bWFfY2xvc2UgJXBcbiIsIHZtYSk7Ci0gICAgICAg
+aWYgKHVzZV9wdGVtb2QgJiYgbWFwLT52bWEgPT0gdm1hKSB7CisgICAgICAgaWYgKHVzZV9wdGVt
+b2QpIHsKKyAgICAgICAgICAgICAgIFdBUk5fT04obWFwLT52bWEgIT0gdm1hKTsKICAgICAgICAg
+ICAgICAgIG1tdV9yYW5nZV9ub3RpZmllcl9yZW1vdmUoJm1hcC0+bm90aWZpZXIpOwogICAgICAg
+ICAgICAgICAgbWFwLT52bWEgPSBOVUxMOwogICAgICAgIH0KCkphc29uCl9fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCk5vdXZlYXUgbWFpbGluZyBsaXN0Ck5v
+dXZlYXVAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3Jn
+L21haWxtYW4vbGlzdGluZm8vbm91dmVhdQo=
