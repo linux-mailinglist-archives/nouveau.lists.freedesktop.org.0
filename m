@@ -2,46 +2,56 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 35D8112B33A
-	for <lists+nouveau@lfdr.de>; Fri, 27 Dec 2019 09:16:45 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C319D12B2C5
+	for <lists+nouveau@lfdr.de>; Fri, 27 Dec 2019 09:14:29 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 94F2A6E426;
-	Fri, 27 Dec 2019 08:14:57 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E52906E064;
+	Fri, 27 Dec 2019 08:13:45 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from bombadil.infradead.org (bombadil.infradead.org
- [IPv6:2607:7c80:54:e::133])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 798596E5BB;
- Fri,  8 Nov 2019 06:33:11 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=bombadil.20170209; h=In-Reply-To:Content-Type:MIME-Version
- :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=sfdfvBL2vL+6/zKzcRD8BS56fyubhIZ+MnB63+Whqww=; b=FyyBMRXg7xjEFz//LRCdOwL18
- hKB/D3F1bPGKiHdQWF5m35XG4E3WD+6E0CxgvcikgS5iRvO035mZUNmAfQsrTxXbipkMtN7Csh82U
- TkXb00nbArvJ4o9o1oSsuBXDYKdWjjL+gFeJdHZim38W2w/ASDOrOw7R4zUEvGcf9P4Zly7OuHtXi
- R2b9mpCV+5doe05qxCME3B/ZrpaUGvMjyxA/fTYrGvV7sgs0phhNbJEtc/O73szxHJx/zSNnzUmhw
- WnNF01/JTBJLgMj7/spP8/IEmmGPsj93eGRwYEwNwsz/7/7UlAROrdUCayb+qrzFziI1mB1Ncy4fZ
- vWBdHpcGA==;
-Received: from hch by bombadil.infradead.org with local (Exim 4.92.3 #3 (Red
- Hat Linux)) id 1iSxpO-0004uP-RP; Fri, 08 Nov 2019 06:33:02 +0000
-Date: Thu, 7 Nov 2019 22:33:02 -0800
-From: Christoph Hellwig <hch@infradead.org>
-To: Jason Gunthorpe <jgg@mellanox.com>
-Message-ID: <20191108063302.GA18778@infradead.org>
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
+ [207.211.31.81])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1D7CE6F98F
+ for <nouveau@lists.freedesktop.org>; Fri,  8 Nov 2019 13:43:42 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1573220620;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=p2GiDgurLDTLnKDD84ZeRHZfEMXgwhDnYu1U65URo2k=;
+ b=X5L1L1Dvt2VD4wgLd2ThvFRorrC8z5//fvXQ9/D1v1E/2zDmfPkj32me7SDxMbtG0L4sQn
+ CWXx1Nib6/EE+M5vWD+6/6K4N0sYzAxoqKyEz2zyI467tQ0pjwgXzk4nv99/lpjOMppzID
+ zGpLW6xlhs2eIVVkQm7VD/4jFld+RT8=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-337-Rd7IsiSjOY2MUWNuakLiow-1; Fri, 08 Nov 2019 08:43:36 -0500
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
+ [10.5.11.23])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 69BA41800D7B;
+ Fri,  8 Nov 2019 13:43:33 +0000 (UTC)
+Received: from redhat.com (ovpn-123-175.rdu2.redhat.com [10.10.123.175])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 57C09196AE;
+ Fri,  8 Nov 2019 13:43:30 +0000 (UTC)
+Date: Fri, 8 Nov 2019 08:43:28 -0500
+From: Jerome Glisse <jglisse@redhat.com>
+To: Christoph Hellwig <hch@infradead.org>
+Message-ID: <20191108134328.GA4456@redhat.com>
 References: <20191028201032.6352-1-jgg@ziepe.ca>
  <20191028201032.6352-3-jgg@ziepe.ca>
  <35c2b322-004e-0e18-87e4-1920dc71bfd5@nvidia.com>
  <20191107200604.GB21728@mellanox.com>
+ <20191108063302.GA18778@infradead.org>
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20191107200604.GB21728@mellanox.com>
+In-Reply-To: <20191108063302.GA18778@infradead.org>
 User-Agent: Mutt/1.12.1 (2019-06-15)
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
- bombadil.infradead.org. See http://www.infradead.org/rpr.html
-X-Mailman-Approved-At: Fri, 27 Dec 2019 08:13:30 +0000
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
+X-MC-Unique: Rd7IsiSjOY2MUWNuakLiow-1
+X-Mimecast-Spam-Score: 0
+Content-Disposition: inline
+X-Mailman-Approved-At: Fri, 27 Dec 2019 08:13:32 +0000
 Subject: Re: [Nouveau] [PATCH v2 02/15] mm/mmu_notifier: add an interval
  tree notifier
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -63,7 +73,7 @@ Cc: "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
  Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
  "linux-rdma@vger.kernel.org" <linux-rdma@vger.kernel.org>,
  "amd-gfx@lists.freedesktop.org" <amd-gfx@lists.freedesktop.org>,
- Christoph Hellwig <hch@infradead.org>, Ben Skeggs <bskeggs@redhat.com>,
+ Jason Gunthorpe <jgg@mellanox.com>, Ben Skeggs <bskeggs@redhat.com>,
  "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
  Ralph Campbell <rcampbell@nvidia.com>,
  Boris Ostrovsky <boris.ostrovsky@oracle.com>, Petr Cvek <petrcvekcz@gmail.com>,
@@ -72,33 +82,50 @@ Cc: "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
  Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
  Alex Deucher <alexander.deucher@amd.com>,
  Dennis Dalessandro <dennis.dalessandro@intel.com>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="windows-1252"
+Content-Transfer-Encoding: quoted-printable
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, Nov 07, 2019 at 08:06:08PM +0000, Jason Gunthorpe wrote:
-> > 
-> > enum mmu_range_notifier_event {
-> > 	MMU_NOTIFY_RELEASE,
-> > };
-> > 
-> > ...assuming that we stay with "mmu_range_notifier" as a core name for this 
-> > whole thing.
-> > 
-> > Also, it is best moved down to be next to the new MNR structs, so that all the
-> > MNR stuff is in one group.
-> 
-> I agree with Jerome, this enum is part of the 'struct
-> mmu_notifier_range' (ie the description of the invalidation) and it
-> doesn't really matter that only these new notifiers can be called with
-> this type, it is still part of the mmu_notifier_range.
-> 
-> The comment already says it only applies to the mmu_range_notifier
-> scheme..
+On Thu, Nov 07, 2019 at 10:33:02PM -0800, Christoph Hellwig wrote:
+> On Thu, Nov 07, 2019 at 08:06:08PM +0000, Jason Gunthorpe wrote:
+> > > =
 
-In fact the enum is entirely unused.  We might as well just kill it off
-entirely.
+> > > enum mmu_range_notifier_event {
+> > > 	MMU_NOTIFY_RELEASE,
+> > > };
+> > > =
+
+> > > ...assuming that we stay with "mmu_range_notifier" as a core name for=
+ this =
+
+> > > whole thing.
+> > > =
+
+> > > Also, it is best moved down to be next to the new MNR structs, so tha=
+t all the
+> > > MNR stuff is in one group.
+> > =
+
+> > I agree with Jerome, this enum is part of the 'struct
+> > mmu_notifier_range' (ie the description of the invalidation) and it
+> > doesn't really matter that only these new notifiers can be called with
+> > this type, it is still part of the mmu_notifier_range.
+> > =
+
+> > The comment already says it only applies to the mmu_range_notifier
+> > scheme..
+> =
+
+> In fact the enum is entirely unused.  We might as well just kill it off
+> entirely.
+
+I had patches to use it, i need to re-post them. I posted them long ago
+and i droped the ball. I will re-spin after this.
+
+Cheers,
+J=E9r=F4me
+
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
