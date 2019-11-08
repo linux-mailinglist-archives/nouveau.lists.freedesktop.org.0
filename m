@@ -1,23 +1,23 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id ED332F445D
-	for <lists+nouveau@lfdr.de>; Fri,  8 Nov 2019 11:20:51 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id CA6D9F445E
+	for <lists+nouveau@lfdr.de>; Fri,  8 Nov 2019 11:21:13 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6862A6F910;
-	Fri,  8 Nov 2019 10:20:50 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 2DC556F90E;
+	Fri,  8 Nov 2019 10:21:12 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
  [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
- by gabe.freedesktop.org (Postfix) with ESMTP id AFB176F90F
- for <nouveau@lists.freedesktop.org>; Fri,  8 Nov 2019 10:20:48 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTP id ABB906F912
+ for <nouveau@lists.freedesktop.org>; Fri,  8 Nov 2019 10:21:10 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id ACA39720E2; Fri,  8 Nov 2019 10:20:48 +0000 (UTC)
+ id A8C8C720E2; Fri,  8 Nov 2019 10:21:10 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Fri, 08 Nov 2019 10:20:48 +0000
+Date: Fri, 08 Nov 2019 10:21:10 +0000
 X-Bugzilla-Reason: AssignedTo
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
@@ -33,7 +33,7 @@ X-Bugzilla-Priority: not set
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
 X-Bugzilla-Changed-Fields: attachments.created
-Message-ID: <bug-112185-8800-jiQRmayOOj@http.bugs.freedesktop.org/>
+Message-ID: <bug-112185-8800-ILMFMwapIy@http.bugs.freedesktop.org/>
 In-Reply-To: <bug-112185-8800@http.bugs.freedesktop.org/>
 References: <bug-112185-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
@@ -51,18 +51,18 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1262203913=="
+Content-Type: multipart/mixed; boundary="===============0583350722=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============1262203913==
-Content-Type: multipart/alternative; boundary="15732084481.8f4F6e1.30373"
+--===============0583350722==
+Content-Type: multipart/alternative; boundary="15732084702.90FAA7957.30864"
 Content-Transfer-Encoding: 7bit
 
 
---15732084481.8f4F6e1.30373
-Date: Fri, 8 Nov 2019 10:20:48 +0000
+--15732084702.90FAA7957.30864
+Date: Fri, 8 Nov 2019 10:21:10 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -71,19 +71,17 @@ Auto-Submitted: auto-generated
 
 https://bugs.freedesktop.org/show_bug.cgi?id=3D112185
 
---- Comment #14 from Elmar Stellnberger <estellnb@elstel.org> ---
-Created attachment 145911
-  --> https://bugs.freedesktop.org/attachment.cgi?id=3D145911&action=3Dedit
-icewm-crash: journal
-
-You are not even safe from these crashes when using icewm
+--- Comment #15 from Elmar Stellnberger <estellnb@elstel.org> ---
+Created attachment 145912
+  --> https://bugs.freedesktop.org/attachment.cgi?id=3D145912&action=3Dedit
+icewm-crash: Xorg.0.log
 
 --=20
 You are receiving this mail because:
 You are the assignee for the bug.=
 
---15732084481.8f4F6e1.30373
-Date: Fri, 8 Nov 2019 10:20:48 +0000
+--15732084702.90FAA7957.30864
+Date: Fri, 8 Nov 2019 10:21:10 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -100,8 +98,8 @@ Auto-Submitted: auto-generated
             <b><a class=3D"bz_bug_link=20
           bz_status_NEW "
    title=3D"NEW - Xorg hangs from time to time"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D112185#c14">Comme=
-nt # 14</a>
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D112185#c15">Comme=
+nt # 15</a>
               on <a class=3D"bz_bug_link=20
           bz_status_NEW "
    title=3D"NEW - Xorg hangs from time to time"
@@ -111,13 +109,11 @@ nt # 14</a>
 estellnb&#64;elstel.org" title=3D"Elmar Stellnberger &lt;estellnb&#64;elste=
 l.org&gt;"> <span class=3D"fn">Elmar Stellnberger</span></a>
 </span></b>
-        <pre>Created <span class=3D""><a href=3D"attachment.cgi?id=3D145911=
-" name=3D"attach_145911" title=3D"icewm-crash: journal">attachment 145911</=
-a> <a href=3D"attachment.cgi?id=3D145911&amp;action=3Dedit" title=3D"icewm-=
-crash: journal">[details]</a></span>
-icewm-crash: journal
-
-You are not even safe from these crashes when using icewm</pre>
+        <pre>Created <span class=3D""><a href=3D"attachment.cgi?id=3D145912=
+" name=3D"attach_145912" title=3D"icewm-crash: Xorg.0.log">attachment 14591=
+2</a> <a href=3D"attachment.cgi?id=3D145912&amp;action=3Dedit" title=3D"ice=
+wm-crash: Xorg.0.log">[details]</a></span>
+icewm-crash: Xorg.0.log</pre>
         </div>
       </p>
 
@@ -131,9 +127,9 @@ You are not even safe from these crashes when using icewm</pre>
     </body>
 </html>=
 
---15732084481.8f4F6e1.30373--
+--15732084702.90FAA7957.30864--
 
---===============1262203913==
+--===============0583350722==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -143,4 +139,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============1262203913==--
+--===============0583350722==--
