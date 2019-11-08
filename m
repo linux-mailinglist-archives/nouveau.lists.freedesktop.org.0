@@ -2,57 +2,59 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 252E8F5078
-	for <lists+nouveau@lfdr.de>; Fri,  8 Nov 2019 17:02:21 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 765E8F533D
+	for <lists+nouveau@lfdr.de>; Fri,  8 Nov 2019 19:07:50 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 719F76F9E4;
-	Fri,  8 Nov 2019 16:02:19 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 897C06FA4A;
+	Fri,  8 Nov 2019 18:07:47 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wr1-x441.google.com (mail-wr1-x441.google.com
- [IPv6:2a00:1450:4864:20::441])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E5C7D6F9E2;
- Fri,  8 Nov 2019 16:02:17 +0000 (UTC)
-Received: by mail-wr1-x441.google.com with SMTP id a11so7639232wra.6;
- Fri, 08 Nov 2019 08:02:17 -0800 (PST)
+Received: from mail-wr1-x443.google.com (mail-wr1-x443.google.com
+ [IPv6:2a00:1450:4864:20::443])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7D68A6FA48;
+ Fri,  8 Nov 2019 18:07:45 +0000 (UTC)
+Received: by mail-wr1-x443.google.com with SMTP id i12so1162002wro.5;
+ Fri, 08 Nov 2019 10:07:45 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=tRe8BuIhTzjKi6rU5sy2ha3fVp/1Le6t14PKl9vP2FE=;
- b=K824VAjxGVoboscy70U5FBTXqgphAcnheROUIQ3SMcNlKt8dcJuV16sCe17JNv49to
- 53NDzgZaYwUCKBTZdxuZ9cBKbAVOPR5R/XXqzaSx9bBJCynTLJdJptB4jmnraqKPJxFH
- ZlO8F5QJ0rWVb9A/DggSAe8/V84XTRSjGCGPUEqYL2EOg9D5HmRT+UfbM+2PyjPyYBTo
- bUFaS30xiVqfoLdBFuELFSxH6J5kDa9ctoSHzTcG0TA6Qyr2R1WZD7FKOahL1J5dXx+T
- /QL30ijuWWhPFZ1VmaD+8LWGVhy2ceqdKvcFjdl28j62ER2CpMXEsTkz6Jn/7srX/0k6
- 4hwQ==
-X-Gm-Message-State: APjAAAVKymPYJlkSyOfq7WeWrwxRVia2OwB7yyJx5or7WALQXOEHmY+U
- 1ooWNA1bYuyWQ/RhwK9/UiQ=
-X-Google-Smtp-Source: APXvYqwuX9MKBWfeB/yZc92Q8TUMpIfp0QZbcnUcxcv8a18EujaPwGBELnShZ20eW95ny3iEaJWTwA==
-X-Received: by 2002:a5d:6585:: with SMTP id q5mr8749895wru.158.1573228935550; 
- Fri, 08 Nov 2019 08:02:15 -0800 (PST)
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to:user-agent;
+ bh=agxieXSwLTzpcRW0NHY5w8qsVBQBIwY6VTu1b3TdrTY=;
+ b=Nz2RConDK/7CVPVS8pQj0s8DMXAZ9olTmEZgsU4te2sAwY8H2mxFrC8yBfOMzjTb35
+ /jW9CjC66vY12xAWJP8D1LterTR376ORt5cKfgoUTTE5jW66RnvlF46H+5gEoIkav2+l
+ 2Ji5v7JK4tXezmVM4scxuhan9+YtKWlhrH+WMpIkGxLgNu/wiNmi7rb4aniGebsP2AK1
+ Rh4AuDAXJAvEnuDe1jDAx4NiLO4kdydvYyUsQo+6hRRqYlIPjSOTXi64ETXOMQ0IPTFy
+ ACzlGZceGrg02kDWJTjwXuwg5gzYjiwvANRFIZv6WzoHwiv2GZWU66Hv7ITR2QCqV5S+
+ PftA==
+X-Gm-Message-State: APjAAAVH5kylaxKDkxDfrUK+5LW4JG/jF4ZeYsX44iWo6CfoZ3/Beeyj
+ ieepQgZfW3wvIqrWjx8cCdI=
+X-Google-Smtp-Source: APXvYqxNCc5raOdkYYfou/Ok+AkMrXnjjpp1CiVI9VH28I8G46R59cUYcfVjYdatxxYA8wWtvP9fWQ==
+X-Received: by 2002:a5d:6389:: with SMTP id p9mr9197566wru.324.1573236463753; 
+ Fri, 08 Nov 2019 10:07:43 -0800 (PST)
 Received: from localhost (p2E5BE2CE.dip0.t-ipconnect.de. [46.91.226.206])
- by smtp.gmail.com with ESMTPSA id u4sm6150887wrq.22.2019.11.08.08.02.13
+ by smtp.gmail.com with ESMTPSA id g14sm7552313wro.33.2019.11.08.10.07.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 08 Nov 2019 08:02:14 -0800 (PST)
+ Fri, 08 Nov 2019 10:07:41 -0800 (PST)
+Date: Fri, 8 Nov 2019 19:07:40 +0100
 From: Thierry Reding <thierry.reding@gmail.com>
 To: Ben Skeggs <bskeggs@redhat.com>
-Date: Fri,  8 Nov 2019 17:02:07 +0100
-Message-Id: <20191108160207.3251019-1-thierry.reding@gmail.com>
-X-Mailer: git-send-email 2.23.0
+Message-ID: <20191108180740.GA3384779@ulmo>
+References: <20191108160207.3251019-1-thierry.reding@gmail.com>
 MIME-Version: 1.0
+In-Reply-To: <20191108160207.3251019-1-thierry.reding@gmail.com>
+User-Agent: Mutt/1.12.2 (2019-09-21)
 X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=tRe8BuIhTzjKi6rU5sy2ha3fVp/1Le6t14PKl9vP2FE=;
- b=Y7hCn2AWKsUEAGkNCVeJRTm8AnsRc7rJmoedGX5KyZ62xIxuZbh9I8GXqWaeuY5U8D
- JI+OuWY4FPRo+rajhXSYpwsHHXAo4BN11QkVaZTM0iz9a/k22+FQYENj52zVJdybQAEn
- 2fSnGve1P1to8L+p8e0Jzc2o6AiqJ9AUai87Om7QC/yxTme4LASCFr6RA6ZzC9L3JgCE
- 9VC0eN3BQ8PsbuoUBBRPTNeZJNXQt3hfELTlFN7/yvCV5mSthFbfq0bZyNH+L1C2ma8e
- pAmKFULsoYuCeMGazlNatH6GANsil+wdlY/LAutJwpmBlrKzU+rknkTFGbGm9LINKtSm
- NkYQ==
-Subject: [Nouveau] [PATCH] RFC: drm/nouveau: Make BAR1 support optional
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to:user-agent;
+ bh=agxieXSwLTzpcRW0NHY5w8qsVBQBIwY6VTu1b3TdrTY=;
+ b=NzRCwAQl4v9W5RLeqAlH5n6+8TTAwBEEy4D/3QX5mh5HUgUrs4cIozdIPOxmeAJkFM
+ neI2pyXtTD8V7dZsYSV6+ZOPoZ25vgvjrG/nAENrtbhTDdE+wI9iFgmFLqRvYxP+JHzW
+ D41iXdFfsfswcjMx5mosIP7f0C/xNHS3oksoTkrOvBPgQoQBUSwKv+kJGcq6N5wkuemE
+ WLfxsa4IMlHy2TlevAzQ1Lnr0cLde5N4lO+FXVlImTFlcC/7SnSkMsC8nuZTXdUxx4U5
+ KxFy1tZ/DHNVBCYIbWfqs2ltbNzTQjPCe2NDPmZd/CdM+iUFLL+u5hH/e3Oz67cSeeqH
+ xfdQ==
+Subject: Re: [Nouveau] [PATCH] RFC: drm/nouveau: Make BAR1 support optional
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -65,224 +67,447 @@ List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
 Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1349926427=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-RnJvbTogVGhpZXJyeSBSZWRpbmcgPHRyZWRpbmdAbnZpZGlhLmNvbT4KClRoZSBwdXJwb3NlIG9m
-IEJBUjEgaXMgcHJpbWFyaWx5IHRvIG1ha2UgbWVtb3J5IGFjY2Vzc2VzIGNvaGVyZW50LgpIb3dl
-dmVyLCBzb21lIEdQVXMgZG8gbm90IGhhdmUgQkFSMSBmdW5jdGlvbmFsaXR5LiBGb3IgZXhhbXBs
-ZSwgdGhlCkdWMTFCIGZvdW5kIG9uIHRoZSBYYXZpZXIgU29DIGlzIERNQSBjb2hlcmVudCBhbmQg
-dGhlcmVmb3JlIGRvZXNuJ3QKbmVlZCBCQVIxLgoKSW1wbGVtZW50IGEgdmFyaWFudCBvZiBGSUZP
-IGNoYW5uZWxzIHRoYXQgd29yayB3aXRob3V0IGEgbWFwcGluZyBvZgppbnN0YW5jZSBtZW1vcnkg
-dGhyb3VnaCBCQVIxLgoKWFhYIGVuc3VyZSBtZW1vcnkgYmFycmllcnMgYXJlIGluIHBsYWNlIGZv
-ciB3cml0ZXMKClNpZ25lZC1vZmYtYnk6IFRoaWVycnkgUmVkaW5nIDx0cmVkaW5nQG52aWRpYS5j
-b20+Ci0tLQpIaSBCZW4sCgpJJ20gc2VuZGluZyB0aGlzIGEgYml0IG91dCBvZiBjb250ZXh0IChp
-dCdzIHBhcnQgb2YgdGhlIGxhcmdlciBzZXJpZXMgdG8KZW5hYmxlIGJhc2ljIEdWMTFCIHN1cHBv
-cnQpIGJlY2F1c2UgSSB3YW50ZWQgdG8gZ2V0IHNvbWUgZWFybHkgZmVlZGJhY2sKZnJvbSB5b3Ug
-b24gdGhpcy4KCkZvciBhIGJpdCBvZiBiYWNrZ3JvdW5kOiBHVjExQiBhcyBpdCB0dXJucyBvdXQg
-ZG9lc24ndCByZWFsbHkgaGF2ZSBCQVIxCmFueW1vcmUuIFRoZSBTb0MgaGFzIGEgY29oZXJlbmN5
-IGZhYnJpYyB3aGljaCBtZWFucyB0aGF0IGJhc2ljYWxseSB0aGUKR1BVJ3Mgc3lzdGVtIG1lbW9y
-eSBhY2Nlc3NlcyBhcmUgYWxyZWFkeSBjb2hlcmVudCBhbmQgaGVuY2Ugd2Ugbm8gbG9uZ2VyCm5l
-ZWQgdG8gZ28gdmlhIEJBUjEgdG8gZW5zdXJlIHRoYXQuIEZ1bmN0aW9uYWxseSB0aGUgc2FtZSBj
-YW4gYmUgZG9uZSBieQpqdXN0IHdyaXRpbmcgdG8gdGhlIG1lbW9yeSB2aWEgdGhlIENQVSdzIHZp
-cnR1YWwgbWFwcGluZy4KClNvIHRoaXMgcGF0Y2ggaW1wbGVtZW50IGJhc2ljYWxseSBhIHNlY29u
-ZCB2YXJpYW50IG9mIHRoZSBGSUZPIGNoYW5uZWwKd2hpY2gsIGluc3RlYWQgb2YgdGFraW5nIGEg
-cGh5c2ljYWwgYWRkcmVzcyBhbmQgdGhlbiBpb3JlbWFwcGluZyB0aGF0LAp0YWtlcyBhIHN0cnVj
-dCBudmttX21lbW9yeSBvYmplY3QuIFRoaXMgc2VlbXMgdG8gd29yaywgdGhvdWdoIHNpbmNlIEkn
-bQpub3QgcmVhbGx5IGRvaW5nIG11Y2ggeWV0IChmaXJtd2FyZSBsb2FkaW5nIGZhaWxzLCBldGMu
-KSBJIHdvdWxkbid0IGNhbGwKdGhpcyAiZG9uZSIganVzdCB5ZXQuCgpJbiBmYWN0IHRoZXJlIGFy
-ZSBhIGZldyB0aGluZ3MgdGhhdCBJJ20gbm90IGhhcHB5IGFib3V0LiBGb3IgZXhhbXBsZSBJCnRo
-aW5rIHdlJ2xsIGV2ZW50dWFsbHkgbmVlZCB0byBoYXZlIGJhcnJpZXJzIHRvIGVuc3VyZSB0aGF0
-IHRoZSBDUFUKd3JpdGUgYnVmZmVycyBhcmUgZmx1c2hlZCwgZXRjLiBJdCBhbHNvIHNlZW1zIGxp
-a2UgbW9zdCB1c2VycyBvZiB0aGUKRklGTyBjaGFubmVsIG9iamVjdCB3aWxsIGp1c3QgZ28gYW5k
-IG1hcCBpdHMgYnVmZmVyIG9uY2UgYW5kIHRoZW4gb25seQphY2Nlc3MgaXQgdmlhIHRoZSB2aXJ0
-dWFsIG1hcHBpbmcgb25seSwgd2l0aG91dCBnb2luZyB0aHJvdWdoIHRoZQotPnJkMzIoKS8tPndy
-MzIoKSBjYWxsYmFja3Mgbm9yIHVubWFwcGluZyB2aWEgLT51bm1hcCgpLiBUaGF0IG1lYW5zIHdl
-CmVmZmVjdGl2ZWx5IGRvbid0IGhhdmUgYSBnb29kIHBvaW50IHdoZXJlIHdlIGNvdWxkIGVtaXQg
-dGhlIG1lbW9yeQpiYXJyaWVycy4KCkkgc2VlIHR3byBwb3NzaWJpbGl0aWVzIGhlcmU6IDEpIG1h
-a2UgYWxsIGFjY2Vzc2VzIGdvIHRocm91Z2ggdGhlCmFjY2Vzc29ycyBvciAyKSBndWFyZCBlYWNo
-IHNlcmllcyBvZiBhY2Nlc3NlcyB3aXRoIGEgcGFpciBvZiBudmttX21hcCgpCmFuZCBudmttX2Rv
-bmUoKSBjYWxscy4gQm90aCBvZiB0aG9zZSB3b3VsZCBtZWFuIHRoYXQgYWxsIGNvZGUgcGF0aHMg
-bmVlZAp0byBiZSBjYXJlZnVsbHkgYXVkaXRlZC4KCk9uZSBvdGhlciB0aGluZyBJJ20gd29uZGVy
-aW5nIGlzIGlmIGl0J3Mgb2theSB0byBwdXQgYWxsIG9mIHRoaXMgaW50bwp0aGUgZ2sxMDRfZmlm
-byBpbXBsZW1lbnRhdGlvbi4gSSB0aGluayB0aGUgcmVzdWx0IG9mIHBhcmFtZXRlcml6aW5nIG9u
-CmRldmljZS0+YmFyIGlzIHByZXR0eSBuZWF0LiBBbHNvLCBpdCBzZWVtcyBsaWtlIG1vc3Qgb2Yg
-dGhlIHJlc3Qgb2YgdGhlCmNvZGUgd291bGQgaGF2ZSB0byBiZSBkdXBsaWNhdGVkLCBvciBhIGxv
-dCBvZiB0aGUgZ2sxMDRfKigpIGZ1bmN0aW9uCmV4cG9ydGVkIHRvIGEgbmV3IGltcGxlbWVudGF0
-aW9uLiBTbyBJJ20gbm90IHN1cmUgdGhhdCBpdCdzIHJlYWxseSB3b3J0aAppdC4KClRoaWVycnkK
-CiAuLi4vZHJtL25vdXZlYXUvaW5jbHVkZS9udmttL2VuZ2luZS9maWZvLmggICAgfCAgIDcgKy0K
-IC4uLi9ncHUvZHJtL25vdXZlYXUvbnZrbS9lbmdpbmUvZmlmby9jaGFuLmMgICB8IDE1NyArKysr
-KysrKysrKysrKysrLS0KIC4uLi9ncHUvZHJtL25vdXZlYXUvbnZrbS9lbmdpbmUvZmlmby9jaGFu
-LmggICB8ICAgNiArCiAuLi4vZ3B1L2RybS9ub3V2ZWF1L252a20vZW5naW5lL2ZpZm8vZ2sxMDQu
-YyAgfCAgMjkgKysrLQogNCBmaWxlcyBjaGFuZ2VkLCAxODAgaW5zZXJ0aW9ucygrKSwgMTkgZGVs
-ZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvaW5jbHVkZS9u
-dmttL2VuZ2luZS9maWZvLmggYi9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9pbmNsdWRlL252a20v
-ZW5naW5lL2ZpZm8uaAppbmRleCA0YmQ2ZTFlN2M0MTMuLmMwZmI1NDVlZmIyYiAxMDA2NDQKLS0t
-IGEvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvaW5jbHVkZS9udmttL2VuZ2luZS9maWZvLmgKKysr
-IGIvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvaW5jbHVkZS9udmttL2VuZ2luZS9maWZvLmgKQEAg
-LTI1LDcgKzI1LDEyIEBAIHN0cnVjdCBudmttX2ZpZm9fY2hhbiB7CiAJc3RydWN0IG52a21fZ3B1
-b2JqICppbnN0OwogCXN0cnVjdCBudmttX2dwdW9iaiAqcHVzaDsKIAlzdHJ1Y3QgbnZrbV92bW0g
-KnZtbTsKLQl2b2lkIF9faW9tZW0gKnVzZXI7CisKKwl1bmlvbiB7CisJCXN0cnVjdCBudmttX21l
-bW9yeSAqbWVtOworCQl2b2lkIF9faW9tZW0gKnVzZXI7CisJfTsKKwogCXU2NCBhZGRyOwogCXUz
-MiBzaXplOwogCmRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9udmttL2VuZ2lu
-ZS9maWZvL2NoYW4uYyBiL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L252a20vZW5naW5lL2ZpZm8v
-Y2hhbi5jCmluZGV4IGQ4MzQ4NTM4NTkzNC4uZjQ3YmM5NmJiYjZkIDEwMDY0NAotLS0gYS9kcml2
-ZXJzL2dwdS9kcm0vbm91dmVhdS9udmttL2VuZ2luZS9maWZvL2NoYW4uYworKysgYi9kcml2ZXJz
-L2dwdS9kcm0vbm91dmVhdS9udmttL2VuZ2luZS9maWZvL2NoYW4uYwpAQCAtMzEwLDcgKzMxMCw3
-IEBAIG52a21fZmlmb19jaGFuX2luaXQoc3RydWN0IG52a21fb2JqZWN0ICpvYmplY3QpCiB9CiAK
-IHN0YXRpYyB2b2lkICoKLW52a21fZmlmb19jaGFuX2R0b3Ioc3RydWN0IG52a21fb2JqZWN0ICpv
-YmplY3QpCitfX252a21fZmlmb19jaGFuX2R0b3Ioc3RydWN0IG52a21fb2JqZWN0ICpvYmplY3Qp
-CiB7CiAJc3RydWN0IG52a21fZmlmb19jaGFuICpjaGFuID0gbnZrbV9maWZvX2NoYW4ob2JqZWN0
-KTsKIAlzdHJ1Y3QgbnZrbV9maWZvICpmaWZvID0gY2hhbi0+ZmlmbzsKQEAgLTMyNCw5ICszMjQs
-NiBAQCBudmttX2ZpZm9fY2hhbl9kdG9yKHN0cnVjdCBudmttX29iamVjdCAqb2JqZWN0KQogCX0K
-IAlzcGluX3VubG9ja19pcnFyZXN0b3JlKCZmaWZvLT5sb2NrLCBmbGFncyk7CiAKLQlpZiAoY2hh
-bi0+dXNlcikKLQkJaW91bm1hcChjaGFuLT51c2VyKTsKLQogCWlmIChjaGFuLT52bW0pIHsKIAkJ
-bnZrbV92bW1fcGFydChjaGFuLT52bW0sIGNoYW4tPmluc3QtPm1lbW9yeSk7CiAJCW52a21fdm1t
-X3VucmVmKCZjaGFuLT52bW0pOwpAQCAtMzM3LDYgKzMzNCwxNyBAQCBudmttX2ZpZm9fY2hhbl9k
-dG9yKHN0cnVjdCBudmttX29iamVjdCAqb2JqZWN0KQogCXJldHVybiBkYXRhOwogfQogCitzdGF0
-aWMgdm9pZCAqCitudmttX2ZpZm9fY2hhbl9kdG9yKHN0cnVjdCBudmttX29iamVjdCAqb2JqZWN0
-KQoreworCXN0cnVjdCBudmttX2ZpZm9fY2hhbiAqY2hhbiA9IG52a21fZmlmb19jaGFuKG9iamVj
-dCk7CisKKwlpZiAoY2hhbi0+dXNlcikKKwkJaW91bm1hcChjaGFuLT51c2VyKTsKKworCXJldHVy
-biBfX252a21fZmlmb19jaGFuX2R0b3Iob2JqZWN0KTsKK30KKwogc3RhdGljIGNvbnN0IHN0cnVj
-dCBudmttX29iamVjdF9mdW5jCiBudmttX2ZpZm9fY2hhbl9mdW5jID0gewogCS5kdG9yID0gbnZr
-bV9maWZvX2NoYW5fZHRvciwKQEAgLTM0OSwxMiArMzU3LDk4IEBAIG52a21fZmlmb19jaGFuX2Z1
-bmMgPSB7CiAJLnNjbGFzcyA9IG52a21fZmlmb19jaGFuX2NoaWxkX2dldCwKIH07CiAKK3N0YXRp
-YyB2b2lkICoKK252a21fZmlmb19jaGFuX21lbV9kdG9yKHN0cnVjdCBudmttX29iamVjdCAqb2Jq
-ZWN0KQoreworCXJldHVybiBfX252a21fZmlmb19jaGFuX2R0b3Iob2JqZWN0KTsKK30KKworc3Rh
-dGljIGludAorbnZrbV9maWZvX2NoYW5fbWVtX21hcChzdHJ1Y3QgbnZrbV9vYmplY3QgKm9iamVj
-dCwgdm9pZCAqYXJndiwgdTMyIGFyZ2MsCisJCSAgICAgICBlbnVtIG52a21fb2JqZWN0X21hcCAq
-dHlwZSwgdTY0ICphZGRyLCB1NjQgKnNpemUpCit7CisJc3RydWN0IG52a21fZmlmb19jaGFuICpj
-aGFuID0gbnZrbV9maWZvX2NoYW4ob2JqZWN0KTsKKworCXByX2luZm8oIj4gJXMob2JqZWN0PSVw
-eCwgYXJndj0lcHgsIGFyZ2M9JXUsIHR5cGU9JXB4LCBhZGRyPSVweCwgc2l6ZT0lcHgpXG4iLCBf
-X2Z1bmNfXywgb2JqZWN0LCBhcmd2LCBhcmdjLCB0eXBlLCBhZGRyLCBzaXplKTsKKworCSp0eXBl
-ID0gTlZLTV9PQkpFQ1RfTUFQX1ZBOworCSphZGRyID0gKHU2NCludmttX2ttYXAoY2hhbi0+bWVt
-KTsKKwkqc2l6ZSA9IGNoYW4tPnNpemU7CisKKwlwcl9pbmZvKCIgIHR5cGU6ICVkXG4iLCAqdHlw
-ZSk7CisJcHJfaW5mbygiICBhZGRyOiAlMDE2bGx4XG4iLCAqYWRkcik7CisJcHJfaW5mbygiICBz
-aXplOiAlMDE2bGx4XG4iLCAqc2l6ZSk7CisJcHJfaW5mbygiPCAlcygpXG4iLCBfX2Z1bmNfXyk7
-CisJcmV0dXJuIDA7Cit9CisKK3N0YXRpYyBpbnQKK252a21fZmlmb19jaGFuX21lbV91bm1hcChz
-dHJ1Y3QgbnZrbV9vYmplY3QgKm9iamVjdCkKK3sKKwlzdHJ1Y3QgbnZrbV9maWZvX2NoYW4gKmNo
-YW4gPSBudmttX2ZpZm9fY2hhbihvYmplY3QpOworCisJcHJfaW5mbygiPiAlcyhvYmplY3Q9JXB4
-KVxuIiwgX19mdW5jX18sIG9iamVjdCk7CisKKwludmttX2RvbmUoY2hhbi0+bWVtKTsKKworCXBy
-X2luZm8oIjwgJXMoKVxuIiwgX19mdW5jX18pOworCXJldHVybiAwOworfQorCitzdGF0aWMgaW50
-CitudmttX2ZpZm9fY2hhbl9tZW1fcmQzMihzdHJ1Y3QgbnZrbV9vYmplY3QgKm9iamVjdCwgdTY0
-IGFkZHIsIHUzMiAqZGF0YSkKK3sKKwlzdHJ1Y3QgbnZrbV9maWZvX2NoYW4gKmNoYW4gPSBudmtt
-X2ZpZm9fY2hhbihvYmplY3QpOworCisJcHJfaW5mbygiPiAlcyhvYmplY3Q9JXB4LCBhZGRyPSUw
-MTZsbHgsIGRhdGE9JXB4KVxuIiwgX19mdW5jX18sIG9iamVjdCwgYWRkciwgZGF0YSk7CisKKwlp
-ZiAodW5saWtlbHkoYWRkciArIDQgPiBjaGFuLT5zaXplKSkKKwkJcmV0dXJuIC1FSU5WQUw7CisK
-KwkqZGF0YSA9IG52a21fcm8zMihjaGFuLT5tZW0sIGFkZHIpOworCisJcHJfaW5mbygiICBkYXRh
-OiAlMDh4XG4iLCAqZGF0YSk7CisJcHJfaW5mbygiPCAlcygpXG4iLCBfX2Z1bmNfXyk7CisJcmV0
-dXJuIDA7Cit9CisKK3N0YXRpYyBpbnQKK252a21fZmlmb19jaGFuX21lbV93cjMyKHN0cnVjdCBu
-dmttX29iamVjdCAqb2JqZWN0LCB1NjQgYWRkciwgdTMyIGRhdGEpCit7CisJc3RydWN0IG52a21f
-Zmlmb19jaGFuICpjaGFuID0gbnZrbV9maWZvX2NoYW4ob2JqZWN0KTsKKworCXByX2luZm8oIj4g
-JXMob2JqZWN0PSVweCwgYWRkcj0lMDE2bGx4LCBkYXRhPSUwOHgpXG4iLCBfX2Z1bmNfXywgb2Jq
-ZWN0LCBhZGRyLCBkYXRhKTsKKworCWlmICh1bmxpa2VseShhZGRyICsgNCA+IGNoYW4tPnNpemUp
-KQorCQlyZXR1cm4gLUVJTlZBTDsKKworCW52a21fd28zMihjaGFuLT5tZW0sIGFkZHIsIGRhdGEp
-OworCisJLyogWFhYIGFkZCBiYXJyaWVyICovCisKKwlwcl9pbmZvKCI8ICVzKClcbiIsIF9fZnVu
-Y19fKTsKKwlyZXR1cm4gMDsKK30KKworc3RhdGljIGNvbnN0IHN0cnVjdCBudmttX29iamVjdF9m
-dW5jCitudmttX2ZpZm9fY2hhbl9tZW1fZnVuYyA9IHsKKwkuZHRvciA9IG52a21fZmlmb19jaGFu
-X21lbV9kdG9yLAorCS5pbml0ID0gbnZrbV9maWZvX2NoYW5faW5pdCwKKwkuZmluaSA9IG52a21f
-Zmlmb19jaGFuX2ZpbmksCisJLm50ZnkgPSBudmttX2ZpZm9fY2hhbl9udGZ5LAorCS5tYXAgPSBu
-dmttX2ZpZm9fY2hhbl9tZW1fbWFwLAorCS51bm1hcCA9IG52a21fZmlmb19jaGFuX21lbV91bm1h
-cCwKKwkucmQzMiA9IG52a21fZmlmb19jaGFuX21lbV9yZDMyLAorCS53cjMyID0gbnZrbV9maWZv
-X2NoYW5fbWVtX3dyMzIsCisJLnNjbGFzcyA9IG52a21fZmlmb19jaGFuX2NoaWxkX2dldCwKK307
-CisKIGludAotbnZrbV9maWZvX2NoYW5fY3Rvcihjb25zdCBzdHJ1Y3QgbnZrbV9maWZvX2NoYW5f
-ZnVuYyAqZnVuYywKLQkJICAgIHN0cnVjdCBudmttX2ZpZm8gKmZpZm8sIHUzMiBzaXplLCB1MzIg
-YWxpZ24sIGJvb2wgemVybywKLQkJICAgIHU2NCBodm1tLCB1NjQgcHVzaCwgdTY0IGVuZ2luZXMs
-IGludCBiYXIsIHUzMiBiYXNlLAotCQkgICAgdTMyIHVzZXIsIGNvbnN0IHN0cnVjdCBudmttX29j
-bGFzcyAqb2NsYXNzLAotCQkgICAgc3RydWN0IG52a21fZmlmb19jaGFuICpjaGFuKQorX19udmtt
-X2ZpZm9fY2hhbl9jdG9yKGNvbnN0IHN0cnVjdCBudmttX2ZpZm9fY2hhbl9mdW5jICpmdW5jLAor
-CQkgICAgICBzdHJ1Y3QgbnZrbV9maWZvICpmaWZvLCB1MzIgc2l6ZSwgdTMyIGFsaWduLCBib29s
-IHplcm8sCisJCSAgICAgIHU2NCBodm1tLCB1NjQgcHVzaCwgdTY0IGVuZ2luZXMsCisJCSAgICAg
-IGNvbnN0IHN0cnVjdCBudmttX29jbGFzcyAqb2NsYXNzLAorCQkgICAgICBzdHJ1Y3QgbnZrbV9m
-aWZvX2NoYW4gKmNoYW4pCiB7CiAJc3RydWN0IG52a21fY2xpZW50ICpjbGllbnQgPSBvY2xhc3Mt
-PmNsaWVudDsKIAlzdHJ1Y3QgbnZrbV9kZXZpY2UgKmRldmljZSA9IGZpZm8tPmVuZ2luZS5zdWJk
-ZXYuZGV2aWNlOwpAQCAtMzYyLDcgKzQ1Niw2IEBAIG52a21fZmlmb19jaGFuX2N0b3IoY29uc3Qg
-c3RydWN0IG52a21fZmlmb19jaGFuX2Z1bmMgKmZ1bmMsCiAJdW5zaWduZWQgbG9uZyBmbGFnczsK
-IAlpbnQgcmV0OwogCi0JbnZrbV9vYmplY3RfY3RvcigmbnZrbV9maWZvX2NoYW5fZnVuYywgb2Ns
-YXNzLCAmY2hhbi0+b2JqZWN0KTsKIAljaGFuLT5mdW5jID0gZnVuYzsKIAljaGFuLT5maWZvID0g
-ZmlmbzsKIAljaGFuLT5lbmdpbmVzID0gZW5naW5lczsKQEAgLTQxMiw2ICs1MDUsMjYgQEAgbnZr
-bV9maWZvX2NoYW5fY3Rvcihjb25zdCBzdHJ1Y3QgbnZrbV9maWZvX2NoYW5fZnVuYyAqZnVuYywK
-IAlfX3NldF9iaXQoY2hhbi0+Y2hpZCwgZmlmby0+bWFzayk7CiAJc3Bpbl91bmxvY2tfaXJxcmVz
-dG9yZSgmZmlmby0+bG9jaywgZmxhZ3MpOwogCisJcmV0dXJuIDA7Cit9CisKK2ludAorbnZrbV9m
-aWZvX2NoYW5fY3Rvcihjb25zdCBzdHJ1Y3QgbnZrbV9maWZvX2NoYW5fZnVuYyAqZnVuYywKKwkJ
-ICAgIHN0cnVjdCBudmttX2ZpZm8gKmZpZm8sIHUzMiBzaXplLCB1MzIgYWxpZ24sIGJvb2wgemVy
-bywKKwkJICAgIHU2NCBodm1tLCB1NjQgcHVzaCwgdTY0IGVuZ2luZXMsIGludCBiYXIsIHUzMiBi
-YXNlLAorCQkgICAgdTMyIHVzZXIsIGNvbnN0IHN0cnVjdCBudmttX29jbGFzcyAqb2NsYXNzLAor
-CQkgICAgc3RydWN0IG52a21fZmlmb19jaGFuICpjaGFuKQoreworCXN0cnVjdCBudmttX2Rldmlj
-ZSAqZGV2aWNlID0gZmlmby0+ZW5naW5lLnN1YmRldi5kZXZpY2U7CisJaW50IHJldDsKKworCW52
-a21fb2JqZWN0X2N0b3IoJm52a21fZmlmb19jaGFuX2Z1bmMsIG9jbGFzcywgJmNoYW4tPm9iamVj
-dCk7CisKKwlyZXQgPSBfX252a21fZmlmb19jaGFuX2N0b3IoZnVuYywgZmlmbywgc2l6ZSwgYWxp
-Z24sIHplcm8sIGh2bW0sIHB1c2gsCisJCQkJICAgIGVuZ2luZXMsIG9jbGFzcywgY2hhbik7CisJ
-aWYgKHJldCkKKwkJcmV0dXJuIHJldDsKKwogCS8qIGRldGVybWluZSBhZGRyZXNzIG9mIHRoaXMg
-Y2hhbm5lbCdzIHVzZXIgcmVnaXN0ZXJzICovCiAJY2hhbi0+YWRkciA9IGRldmljZS0+ZnVuYy0+
-cmVzb3VyY2VfYWRkcihkZXZpY2UsIGJhcikgKwogCQkgICAgIGJhc2UgKyB1c2VyICogY2hhbi0+
-Y2hpZDsKQEAgLTQyMCwzICs1MzMsMjcgQEAgbnZrbV9maWZvX2NoYW5fY3Rvcihjb25zdCBzdHJ1
-Y3QgbnZrbV9maWZvX2NoYW5fZnVuYyAqZnVuYywKIAludmttX2ZpZm9fY2V2ZW50KGZpZm8pOwog
-CXJldHVybiAwOwogfQorCitpbnQgbnZrbV9maWZvX2NoYW5fbWVtX2N0b3IoY29uc3Qgc3RydWN0
-IG52a21fZmlmb19jaGFuX2Z1bmMgKmZ1bmMsCisJCQkgICAgc3RydWN0IG52a21fZmlmbyAqZmlm
-bywgdTMyIHNpemUsIHUzMiBhbGlnbiwKKwkJCSAgICBib29sIHplcm8sIHU2NCBodm1tLCB1NjQg
-cHVzaCwgdTY0IGVuZ2luZXMsCisJCQkgICAgc3RydWN0IG52a21fbWVtb3J5ICptZW0sIHUzMiB1
-c2VyLAorCQkJICAgIGNvbnN0IHN0cnVjdCBudmttX29jbGFzcyAqb2NsYXNzLAorCQkJICAgIHN0
-cnVjdCBudmttX2ZpZm9fY2hhbiAqY2hhbikKK3sKKwlpbnQgcmV0OworCisJbnZrbV9vYmplY3Rf
-Y3RvcigmbnZrbV9maWZvX2NoYW5fbWVtX2Z1bmMsIG9jbGFzcywgJmNoYW4tPm9iamVjdCk7CisK
-KwlyZXQgPSBfX252a21fZmlmb19jaGFuX2N0b3IoZnVuYywgZmlmbywgc2l6ZSwgYWxpZ24sIHpl
-cm8sIGh2bW0sIHB1c2gsCisJCQkJICAgIGVuZ2luZXMsIG9jbGFzcywgY2hhbik7CisJaWYgKHJl
-dCkKKwkJcmV0dXJuIHJldDsKKworCWNoYW4tPm1lbSA9IG1lbTsKKwljaGFuLT5hZGRyID0gdXNl
-ciAqIGNoYW4tPmNoaWQ7CisJY2hhbi0+c2l6ZSA9IHVzZXI7CisKKwludmttX2ZpZm9fY2V2ZW50
-KGZpZm8pOworCXJldHVybiAwOworfQpkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL25vdXZl
-YXUvbnZrbS9lbmdpbmUvZmlmby9jaGFuLmggYi9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9udmtt
-L2VuZ2luZS9maWZvL2NoYW4uaAppbmRleCAxNzdlMTA1NjI2MDAuLjcxZjMyYjFlYmJhMCAxMDA2
-NDQKLS0tIGEvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbnZrbS9lbmdpbmUvZmlmby9jaGFuLmgK
-KysrIGIvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbnZrbS9lbmdpbmUvZmlmby9jaGFuLmgKQEAg
-LTI0LDYgKzI0LDEyIEBAIGludCBudmttX2ZpZm9fY2hhbl9jdG9yKGNvbnN0IHN0cnVjdCBudmtt
-X2ZpZm9fY2hhbl9mdW5jICosIHN0cnVjdCBudmttX2ZpZm8gKiwKIAkJCXUzMiBzaXplLCB1MzIg
-YWxpZ24sIGJvb2wgemVybywgdTY0IHZtLCB1NjQgcHVzaCwKIAkJCXU2NCBlbmdpbmVzLCBpbnQg
-YmFyLCB1MzIgYmFzZSwgdTMyIHVzZXIsCiAJCQljb25zdCBzdHJ1Y3QgbnZrbV9vY2xhc3MgKiwg
-c3RydWN0IG52a21fZmlmb19jaGFuICopOworaW50IG52a21fZmlmb19jaGFuX21lbV9jdG9yKGNv
-bnN0IHN0cnVjdCBudmttX2ZpZm9fY2hhbl9mdW5jICosCisJCQkgICAgc3RydWN0IG52a21fZmlm
-byAqLCB1MzIgc2l6ZSwgdTMyIGFsaWduLAorCQkJICAgIGJvb2wgemVybywgdTY0IHZtLCB1NjQg
-cHVzaCwgdTY0IGVuZ2luZXMsCisJCQkgICAgc3RydWN0IG52a21fbWVtb3J5ICptZW0sIHUzMiB1
-c2VyLAorCQkJICAgIGNvbnN0IHN0cnVjdCBudmttX29jbGFzcyAqLAorCQkJICAgIHN0cnVjdCBu
-dmttX2ZpZm9fY2hhbiAqKTsKIAogc3RydWN0IG52a21fZmlmb19jaGFuX29jbGFzcyB7CiAJaW50
-ICgqY3Rvcikoc3RydWN0IG52a21fZmlmbyAqLCBjb25zdCBzdHJ1Y3QgbnZrbV9vY2xhc3MgKiwK
-ZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L252a20vZW5naW5lL2ZpZm8vZ2sx
-MDQuYyBiL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L252a20vZW5naW5lL2ZpZm8vZ2sxMDQuYwpp
-bmRleCA4MWNiZTFjYzQ4MDQuLjU0MDRhMTgyZWIwYSAxMDA2NDQKLS0tIGEvZHJpdmVycy9ncHUv
-ZHJtL25vdXZlYXUvbnZrbS9lbmdpbmUvZmlmby9nazEwNC5jCisrKyBiL2RyaXZlcnMvZ3B1L2Ry
-bS9ub3V2ZWF1L252a20vZW5naW5lL2ZpZm8vZ2sxMDQuYwpAQCAtOTA2LDcgKzkwNiw2IEBAIGdr
-MTA0X2ZpZm9fb25laW5pdChzdHJ1Y3QgbnZrbV9maWZvICpiYXNlKQogCXN0cnVjdCBnazEwNF9m
-aWZvICpmaWZvID0gZ2sxMDRfZmlmbyhiYXNlKTsKIAlzdHJ1Y3QgbnZrbV9zdWJkZXYgKnN1YmRl
-diA9ICZmaWZvLT5iYXNlLmVuZ2luZS5zdWJkZXY7CiAJc3RydWN0IG52a21fZGV2aWNlICpkZXZp
-Y2UgPSBzdWJkZXYtPmRldmljZTsKLQlzdHJ1Y3QgbnZrbV92bW0gKmJhciA9IG52a21fYmFyX2Jh
-cjFfdm1tKGRldmljZSk7CiAJaW50IGVuZ24sIHJ1bmwsIHBiaWQsIHJldCwgaSwgajsKIAllbnVt
-IG52a21fZGV2aWR4IGVuZ2lkeDsKIAl1MzIgKm1hcDsKQEAgLTk2NywxMiArOTY2LDE5IEBAIGdr
-MTA0X2ZpZm9fb25laW5pdChzdHJ1Y3QgbnZrbV9maWZvICpiYXNlKQogCWlmIChyZXQpCiAJCXJl
-dHVybiByZXQ7CiAKLQlyZXQgPSBudmttX3ZtbV9nZXQoYmFyLCAxMiwgbnZrbV9tZW1vcnlfc2l6
-ZShmaWZvLT51c2VyLm1lbSksCi0JCQkgICAmZmlmby0+dXNlci5iYXIpOwotCWlmIChyZXQpCi0J
-CXJldHVybiByZXQ7CisJaWYgKGRldmljZS0+YmFyKSB7CisJCXN0cnVjdCBudmttX3ZtbSAqYmFy
-ID0gbnZrbV9iYXJfYmFyMV92bW0oZGV2aWNlKTsKKworCQlyZXQgPSBudmttX3ZtbV9nZXQoYmFy
-LCAxMiwgbnZrbV9tZW1vcnlfc2l6ZShmaWZvLT51c2VyLm1lbSksCisJCQkJICAgJmZpZm8tPnVz
-ZXIuYmFyKTsKKwkJaWYgKHJldCkKKwkJCXJldHVybiByZXQ7CisKKwkJcmV0dXJuIG52a21fbWVt
-b3J5X21hcChmaWZvLT51c2VyLm1lbSwgMCwgYmFyLCBmaWZvLT51c2VyLmJhciwKKwkJCQkgICAg
-ICAgTlVMTCwgMCk7CisJfQogCi0JcmV0dXJuIG52a21fbWVtb3J5X21hcChmaWZvLT51c2VyLm1l
-bSwgMCwgYmFyLCBmaWZvLT51c2VyLmJhciwgTlVMTCwgMCk7CisJcmV0dXJuIDA7CiB9CiAKIHN0
-YXRpYyB2b2lkCkBAIC05OTgsNyArMTAwNCwxMiBAQCBnazEwNF9maWZvX2luaXQoc3RydWN0IG52
-a21fZmlmbyAqYmFzZSkKIAkJbnZrbV93cjMyKGRldmljZSwgMHgwNDAxNGMgKyAoaSAqIDB4MjAw
-MCksIDB4ZmZmZmZmZmYpOyAvKiBJTlRSRU4gKi8KIAl9CiAKLQludmttX3dyMzIoZGV2aWNlLCAw
-eDAwMjI1NCwgMHgxMDAwMDAwMCB8IGZpZm8tPnVzZXIuYmFyLT5hZGRyID4+IDEyKTsKKwkvKiBv
-YnNvbGV0ZSBvbiBHVjEwMCBhbmQgbGF0ZXIgKi8KKwlpZiAoZmlmby0+dXNlci5iYXIpIHsKKwkJ
-dTMyIHZhbHVlID0gMHgxMDAwMDAwMCB8IGZpZm8tPnVzZXIuYmFyLT5hZGRyID4+IDEyOworCisJ
-CW52a21fd3IzMihkZXZpY2UsIDB4MDAyMjU0LCB2YWx1ZSk7CisJfQogCiAJaWYgKGZpZm8tPmZ1
-bmMtPnBiZG1hLT5pbml0X3RpbWVvdXQpCiAJCWZpZm8tPmZ1bmMtPnBiZG1hLT5pbml0X3RpbWVv
-dXQoZmlmbyk7CkBAIC0xMDE0LDcgKzEwMjUsOSBAQCBnazEwNF9maWZvX2R0b3Ioc3RydWN0IG52
-a21fZmlmbyAqYmFzZSkKIAlzdHJ1Y3QgbnZrbV9kZXZpY2UgKmRldmljZSA9IGZpZm8tPmJhc2Uu
-ZW5naW5lLnN1YmRldi5kZXZpY2U7CiAJaW50IGk7CiAKLQludmttX3ZtbV9wdXQobnZrbV9iYXJf
-YmFyMV92bW0oZGV2aWNlKSwgJmZpZm8tPnVzZXIuYmFyKTsKKwlpZiAoZmlmby0+dXNlci5iYXIp
-CisJCW52a21fdm1tX3B1dChudmttX2Jhcl9iYXIxX3ZtbShkZXZpY2UpLCAmZmlmby0+dXNlci5i
-YXIpOworCiAJbnZrbV9tZW1vcnlfdW5yZWYoJmZpZm8tPnVzZXIubWVtKTsKIAogCWZvciAoaSA9
-IDA7IGkgPCBmaWZvLT5ydW5saXN0X25yOyBpKyspIHsKLS0gCjIuMjMuMAoKX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBtYWlsaW5nIGxpc3QK
-Tm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5v
-cmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============1349926427==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="OgqxwSJOaUobr8KG"
+Content-Disposition: inline
+
+
+--OgqxwSJOaUobr8KG
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Fri, Nov 08, 2019 at 05:02:07PM +0100, Thierry Reding wrote:
+> From: Thierry Reding <treding@nvidia.com>
+>=20
+> The purpose of BAR1 is primarily to make memory accesses coherent.
+> However, some GPUs do not have BAR1 functionality. For example, the
+> GV11B found on the Xavier SoC is DMA coherent and therefore doesn't
+> need BAR1.
+>=20
+> Implement a variant of FIFO channels that work without a mapping of
+> instance memory through BAR1.
+>=20
+> XXX ensure memory barriers are in place for writes
+>=20
+> Signed-off-by: Thierry Reding <treding@nvidia.com>
+> ---
+> Hi Ben,
+>=20
+> I'm sending this a bit out of context (it's part of the larger series to
+> enable basic GV11B support) because I wanted to get some early feedback
+> from you on this.
+>=20
+> For a bit of background: GV11B as it turns out doesn't really have BAR1
+> anymore. The SoC has a coherency fabric which means that basically the
+> GPU's system memory accesses are already coherent and hence we no longer
+> need to go via BAR1 to ensure that. Functionally the same can be done by
+> just writing to the memory via the CPU's virtual mapping.
+>=20
+> So this patch implement basically a second variant of the FIFO channel
+> which, instead of taking a physical address and then ioremapping that,
+> takes a struct nvkm_memory object. This seems to work, though since I'm
+> not really doing much yet (firmware loading fails, etc.) I wouldn't call
+> this "done" just yet.
+>=20
+> In fact there are a few things that I'm not happy about. For example I
+> think we'll eventually need to have barriers to ensure that the CPU
+> write buffers are flushed, etc. It also seems like most users of the
+> FIFO channel object will just go and map its buffer once and then only
+> access it via the virtual mapping only, without going through the
+> ->rd32()/->wr32() callbacks nor unmapping via ->unmap(). That means we
+> effectively don't have a good point where we could emit the memory
+> barriers.
+>=20
+> I see two possibilities here: 1) make all accesses go through the
+> accessors or 2) guard each series of accesses with a pair of nvkm_map()
+> and nvkm_done() calls. Both of those would mean that all code paths need
+> to be carefully audited.
+
+Actually it looks like this is already working if I return 0 as the
+address from the ->unmap() callback. That seems to result in the
+->wr32() and ->rd32() callbacks getting called instead of the callers
+trying to directly dereference the address, which obviously they now
+can't.
+
+So this seems like it could give me exactly what I need to make this
+work. Again, this seems to get me past probe, but I see only a single
+write at this point, so that's not saying much.
+
+Thierry
+
+>=20
+> One other thing I'm wondering is if it's okay to put all of this into
+> the gk104_fifo implementation. I think the result of parameterizing on
+> device->bar is pretty neat. Also, it seems like most of the rest of the
+> code would have to be duplicated, or a lot of the gk104_*() function
+> exported to a new implementation. So I'm not sure that it's really worth
+> it.
+>=20
+> Thierry
+>=20
+>  .../drm/nouveau/include/nvkm/engine/fifo.h    |   7 +-
+>  .../gpu/drm/nouveau/nvkm/engine/fifo/chan.c   | 157 ++++++++++++++++--
+>  .../gpu/drm/nouveau/nvkm/engine/fifo/chan.h   |   6 +
+>  .../gpu/drm/nouveau/nvkm/engine/fifo/gk104.c  |  29 +++-
+>  4 files changed, 180 insertions(+), 19 deletions(-)
+>=20
+> diff --git a/drivers/gpu/drm/nouveau/include/nvkm/engine/fifo.h b/drivers=
+/gpu/drm/nouveau/include/nvkm/engine/fifo.h
+> index 4bd6e1e7c413..c0fb545efb2b 100644
+> --- a/drivers/gpu/drm/nouveau/include/nvkm/engine/fifo.h
+> +++ b/drivers/gpu/drm/nouveau/include/nvkm/engine/fifo.h
+> @@ -25,7 +25,12 @@ struct nvkm_fifo_chan {
+>  	struct nvkm_gpuobj *inst;
+>  	struct nvkm_gpuobj *push;
+>  	struct nvkm_vmm *vmm;
+> -	void __iomem *user;
+> +
+> +	union {
+> +		struct nvkm_memory *mem;
+> +		void __iomem *user;
+> +	};
+> +
+>  	u64 addr;
+>  	u32 size;
+> =20
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/chan.c b/drivers/gp=
+u/drm/nouveau/nvkm/engine/fifo/chan.c
+> index d83485385934..f47bc96bbb6d 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/chan.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/chan.c
+> @@ -310,7 +310,7 @@ nvkm_fifo_chan_init(struct nvkm_object *object)
+>  }
+> =20
+>  static void *
+> -nvkm_fifo_chan_dtor(struct nvkm_object *object)
+> +__nvkm_fifo_chan_dtor(struct nvkm_object *object)
+>  {
+>  	struct nvkm_fifo_chan *chan =3D nvkm_fifo_chan(object);
+>  	struct nvkm_fifo *fifo =3D chan->fifo;
+> @@ -324,9 +324,6 @@ nvkm_fifo_chan_dtor(struct nvkm_object *object)
+>  	}
+>  	spin_unlock_irqrestore(&fifo->lock, flags);
+> =20
+> -	if (chan->user)
+> -		iounmap(chan->user);
+> -
+>  	if (chan->vmm) {
+>  		nvkm_vmm_part(chan->vmm, chan->inst->memory);
+>  		nvkm_vmm_unref(&chan->vmm);
+> @@ -337,6 +334,17 @@ nvkm_fifo_chan_dtor(struct nvkm_object *object)
+>  	return data;
+>  }
+> =20
+> +static void *
+> +nvkm_fifo_chan_dtor(struct nvkm_object *object)
+> +{
+> +	struct nvkm_fifo_chan *chan =3D nvkm_fifo_chan(object);
+> +
+> +	if (chan->user)
+> +		iounmap(chan->user);
+> +
+> +	return __nvkm_fifo_chan_dtor(object);
+> +}
+> +
+>  static const struct nvkm_object_func
+>  nvkm_fifo_chan_func =3D {
+>  	.dtor =3D nvkm_fifo_chan_dtor,
+> @@ -349,12 +357,98 @@ nvkm_fifo_chan_func =3D {
+>  	.sclass =3D nvkm_fifo_chan_child_get,
+>  };
+> =20
+> +static void *
+> +nvkm_fifo_chan_mem_dtor(struct nvkm_object *object)
+> +{
+> +	return __nvkm_fifo_chan_dtor(object);
+> +}
+> +
+> +static int
+> +nvkm_fifo_chan_mem_map(struct nvkm_object *object, void *argv, u32 argc,
+> +		       enum nvkm_object_map *type, u64 *addr, u64 *size)
+> +{
+> +	struct nvkm_fifo_chan *chan =3D nvkm_fifo_chan(object);
+> +
+> +	pr_info("> %s(object=3D%px, argv=3D%px, argc=3D%u, type=3D%px, addr=3D%=
+px, size=3D%px)\n", __func__, object, argv, argc, type, addr, size);
+> +
+> +	*type =3D NVKM_OBJECT_MAP_VA;
+> +	*addr =3D (u64)nvkm_kmap(chan->mem);
+> +	*size =3D chan->size;
+> +
+> +	pr_info("  type: %d\n", *type);
+> +	pr_info("  addr: %016llx\n", *addr);
+> +	pr_info("  size: %016llx\n", *size);
+> +	pr_info("< %s()\n", __func__);
+> +	return 0;
+> +}
+> +
+> +static int
+> +nvkm_fifo_chan_mem_unmap(struct nvkm_object *object)
+> +{
+> +	struct nvkm_fifo_chan *chan =3D nvkm_fifo_chan(object);
+> +
+> +	pr_info("> %s(object=3D%px)\n", __func__, object);
+> +
+> +	nvkm_done(chan->mem);
+> +
+> +	pr_info("< %s()\n", __func__);
+> +	return 0;
+> +}
+> +
+> +static int
+> +nvkm_fifo_chan_mem_rd32(struct nvkm_object *object, u64 addr, u32 *data)
+> +{
+> +	struct nvkm_fifo_chan *chan =3D nvkm_fifo_chan(object);
+> +
+> +	pr_info("> %s(object=3D%px, addr=3D%016llx, data=3D%px)\n", __func__, o=
+bject, addr, data);
+> +
+> +	if (unlikely(addr + 4 > chan->size))
+> +		return -EINVAL;
+> +
+> +	*data =3D nvkm_ro32(chan->mem, addr);
+> +
+> +	pr_info("  data: %08x\n", *data);
+> +	pr_info("< %s()\n", __func__);
+> +	return 0;
+> +}
+> +
+> +static int
+> +nvkm_fifo_chan_mem_wr32(struct nvkm_object *object, u64 addr, u32 data)
+> +{
+> +	struct nvkm_fifo_chan *chan =3D nvkm_fifo_chan(object);
+> +
+> +	pr_info("> %s(object=3D%px, addr=3D%016llx, data=3D%08x)\n", __func__, =
+object, addr, data);
+> +
+> +	if (unlikely(addr + 4 > chan->size))
+> +		return -EINVAL;
+> +
+> +	nvkm_wo32(chan->mem, addr, data);
+> +
+> +	/* XXX add barrier */
+> +
+> +	pr_info("< %s()\n", __func__);
+> +	return 0;
+> +}
+> +
+> +static const struct nvkm_object_func
+> +nvkm_fifo_chan_mem_func =3D {
+> +	.dtor =3D nvkm_fifo_chan_mem_dtor,
+> +	.init =3D nvkm_fifo_chan_init,
+> +	.fini =3D nvkm_fifo_chan_fini,
+> +	.ntfy =3D nvkm_fifo_chan_ntfy,
+> +	.map =3D nvkm_fifo_chan_mem_map,
+> +	.unmap =3D nvkm_fifo_chan_mem_unmap,
+> +	.rd32 =3D nvkm_fifo_chan_mem_rd32,
+> +	.wr32 =3D nvkm_fifo_chan_mem_wr32,
+> +	.sclass =3D nvkm_fifo_chan_child_get,
+> +};
+> +
+>  int
+> -nvkm_fifo_chan_ctor(const struct nvkm_fifo_chan_func *func,
+> -		    struct nvkm_fifo *fifo, u32 size, u32 align, bool zero,
+> -		    u64 hvmm, u64 push, u64 engines, int bar, u32 base,
+> -		    u32 user, const struct nvkm_oclass *oclass,
+> -		    struct nvkm_fifo_chan *chan)
+> +__nvkm_fifo_chan_ctor(const struct nvkm_fifo_chan_func *func,
+> +		      struct nvkm_fifo *fifo, u32 size, u32 align, bool zero,
+> +		      u64 hvmm, u64 push, u64 engines,
+> +		      const struct nvkm_oclass *oclass,
+> +		      struct nvkm_fifo_chan *chan)
+>  {
+>  	struct nvkm_client *client =3D oclass->client;
+>  	struct nvkm_device *device =3D fifo->engine.subdev.device;
+> @@ -362,7 +456,6 @@ nvkm_fifo_chan_ctor(const struct nvkm_fifo_chan_func =
+*func,
+>  	unsigned long flags;
+>  	int ret;
+> =20
+> -	nvkm_object_ctor(&nvkm_fifo_chan_func, oclass, &chan->object);
+>  	chan->func =3D func;
+>  	chan->fifo =3D fifo;
+>  	chan->engines =3D engines;
+> @@ -412,6 +505,26 @@ nvkm_fifo_chan_ctor(const struct nvkm_fifo_chan_func=
+ *func,
+>  	__set_bit(chan->chid, fifo->mask);
+>  	spin_unlock_irqrestore(&fifo->lock, flags);
+> =20
+> +	return 0;
+> +}
+> +
+> +int
+> +nvkm_fifo_chan_ctor(const struct nvkm_fifo_chan_func *func,
+> +		    struct nvkm_fifo *fifo, u32 size, u32 align, bool zero,
+> +		    u64 hvmm, u64 push, u64 engines, int bar, u32 base,
+> +		    u32 user, const struct nvkm_oclass *oclass,
+> +		    struct nvkm_fifo_chan *chan)
+> +{
+> +	struct nvkm_device *device =3D fifo->engine.subdev.device;
+> +	int ret;
+> +
+> +	nvkm_object_ctor(&nvkm_fifo_chan_func, oclass, &chan->object);
+> +
+> +	ret =3D __nvkm_fifo_chan_ctor(func, fifo, size, align, zero, hvmm, push,
+> +				    engines, oclass, chan);
+> +	if (ret)
+> +		return ret;
+> +
+>  	/* determine address of this channel's user registers */
+>  	chan->addr =3D device->func->resource_addr(device, bar) +
+>  		     base + user * chan->chid;
+> @@ -420,3 +533,27 @@ nvkm_fifo_chan_ctor(const struct nvkm_fifo_chan_func=
+ *func,
+>  	nvkm_fifo_cevent(fifo);
+>  	return 0;
+>  }
+> +
+> +int nvkm_fifo_chan_mem_ctor(const struct nvkm_fifo_chan_func *func,
+> +			    struct nvkm_fifo *fifo, u32 size, u32 align,
+> +			    bool zero, u64 hvmm, u64 push, u64 engines,
+> +			    struct nvkm_memory *mem, u32 user,
+> +			    const struct nvkm_oclass *oclass,
+> +			    struct nvkm_fifo_chan *chan)
+> +{
+> +	int ret;
+> +
+> +	nvkm_object_ctor(&nvkm_fifo_chan_mem_func, oclass, &chan->object);
+> +
+> +	ret =3D __nvkm_fifo_chan_ctor(func, fifo, size, align, zero, hvmm, push,
+> +				    engines, oclass, chan);
+> +	if (ret)
+> +		return ret;
+> +
+> +	chan->mem =3D mem;
+> +	chan->addr =3D user * chan->chid;
+> +	chan->size =3D user;
+> +
+> +	nvkm_fifo_cevent(fifo);
+> +	return 0;
+> +}
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/chan.h b/drivers/gp=
+u/drm/nouveau/nvkm/engine/fifo/chan.h
+> index 177e10562600..71f32b1ebba0 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/chan.h
+> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/chan.h
+> @@ -24,6 +24,12 @@ int nvkm_fifo_chan_ctor(const struct nvkm_fifo_chan_fu=
+nc *, struct nvkm_fifo *,
+>  			u32 size, u32 align, bool zero, u64 vm, u64 push,
+>  			u64 engines, int bar, u32 base, u32 user,
+>  			const struct nvkm_oclass *, struct nvkm_fifo_chan *);
+> +int nvkm_fifo_chan_mem_ctor(const struct nvkm_fifo_chan_func *,
+> +			    struct nvkm_fifo *, u32 size, u32 align,
+> +			    bool zero, u64 vm, u64 push, u64 engines,
+> +			    struct nvkm_memory *mem, u32 user,
+> +			    const struct nvkm_oclass *,
+> +			    struct nvkm_fifo_chan *);
+> =20
+>  struct nvkm_fifo_chan_oclass {
+>  	int (*ctor)(struct nvkm_fifo *, const struct nvkm_oclass *,
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/gk104.c b/drivers/g=
+pu/drm/nouveau/nvkm/engine/fifo/gk104.c
+> index 81cbe1cc4804..5404a182eb0a 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/gk104.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/gk104.c
+> @@ -906,7 +906,6 @@ gk104_fifo_oneinit(struct nvkm_fifo *base)
+>  	struct gk104_fifo *fifo =3D gk104_fifo(base);
+>  	struct nvkm_subdev *subdev =3D &fifo->base.engine.subdev;
+>  	struct nvkm_device *device =3D subdev->device;
+> -	struct nvkm_vmm *bar =3D nvkm_bar_bar1_vmm(device);
+>  	int engn, runl, pbid, ret, i, j;
+>  	enum nvkm_devidx engidx;
+>  	u32 *map;
+> @@ -967,12 +966,19 @@ gk104_fifo_oneinit(struct nvkm_fifo *base)
+>  	if (ret)
+>  		return ret;
+> =20
+> -	ret =3D nvkm_vmm_get(bar, 12, nvkm_memory_size(fifo->user.mem),
+> -			   &fifo->user.bar);
+> -	if (ret)
+> -		return ret;
+> +	if (device->bar) {
+> +		struct nvkm_vmm *bar =3D nvkm_bar_bar1_vmm(device);
+> +
+> +		ret =3D nvkm_vmm_get(bar, 12, nvkm_memory_size(fifo->user.mem),
+> +				   &fifo->user.bar);
+> +		if (ret)
+> +			return ret;
+> +
+> +		return nvkm_memory_map(fifo->user.mem, 0, bar, fifo->user.bar,
+> +				       NULL, 0);
+> +	}
+> =20
+> -	return nvkm_memory_map(fifo->user.mem, 0, bar, fifo->user.bar, NULL, 0);
+> +	return 0;
+>  }
+> =20
+>  static void
+> @@ -998,7 +1004,12 @@ gk104_fifo_init(struct nvkm_fifo *base)
+>  		nvkm_wr32(device, 0x04014c + (i * 0x2000), 0xffffffff); /* INTREN */
+>  	}
+> =20
+> -	nvkm_wr32(device, 0x002254, 0x10000000 | fifo->user.bar->addr >> 12);
+> +	/* obsolete on GV100 and later */
+> +	if (fifo->user.bar) {
+> +		u32 value =3D 0x10000000 | fifo->user.bar->addr >> 12;
+> +
+> +		nvkm_wr32(device, 0x002254, value);
+> +	}
+> =20
+>  	if (fifo->func->pbdma->init_timeout)
+>  		fifo->func->pbdma->init_timeout(fifo);
+> @@ -1014,7 +1025,9 @@ gk104_fifo_dtor(struct nvkm_fifo *base)
+>  	struct nvkm_device *device =3D fifo->base.engine.subdev.device;
+>  	int i;
+> =20
+> -	nvkm_vmm_put(nvkm_bar_bar1_vmm(device), &fifo->user.bar);
+> +	if (fifo->user.bar)
+> +		nvkm_vmm_put(nvkm_bar_bar1_vmm(device), &fifo->user.bar);
+> +
+>  	nvkm_memory_unref(&fifo->user.mem);
+> =20
+>  	for (i =3D 0; i < fifo->runlist_nr; i++) {
+> --=20
+> 2.23.0
+>=20
+
+--OgqxwSJOaUobr8KG
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEEiOrDCAFJzPfAjcif3SOs138+s6EFAl3FrukACgkQ3SOs138+
+s6FCfQ//WEwmHW/OWX0l9EtaTw76u3KKHpm9v7JtQSOq/BxDIIBlAQFbihc40EmL
+wk9V5ZPycp90LzuO6uQRHP3hpcCe+jxKd8awCXKFWrxlm8Piav79F5Ffzx6/VR0t
+33NHsHeVWqMZK9qvKrKB8EuMLOis8PIV4JYtwEclGIIpEzKoauknX/YpavS2nVgc
+bCmIORztrvrqX+TfdTl3e3TwBW7XwbR/yJdYHZqNBuYeS0czNtXpf7TZmpV+64Tc
+wSYoeMQAp9xYZJyBAgbwxUJnYIBETjIzQXjs9seuKEnS0EqXd1BZXcSOhbOoH+U5
+eQDc01J/r6VTc/xGuZkD00qmfuvpr890FwvPmCrRS0Oe2l6Cb3Lq2O2GRlQridE+
+sCgIEcSIJNokxE/VxhGrnnROzuieqehD8pQpFr7nGpcqv3LYTfM/jGVcqwbh+82j
+wYTQq68cBA9Qu1ob6k4Yy6IaKihk9v1HhbwAby/kdUxSpLYVt/BfJc3nDlEJ1nvi
+yZeAFZYrUh/fF81OnqdMseayho3J9uWJ96fP7OgtdUIeHcu/dUKWiaUxMSn142v9
+FTCxSawp7TP5b9wqB568gbySP+LzkkKHB8p8onF6Cro4FFVJcAcaw0rUAJugj0AH
++8wSbtiB4eq48HE5teCADsRZW0Ti5dNIvhSHkVebM9PCOlwVegA=
+=NYiW
+-----END PGP SIGNATURE-----
+
+--OgqxwSJOaUobr8KG--
+
+--===============1349926427==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
+YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
+cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
+
+--===============1349926427==--
