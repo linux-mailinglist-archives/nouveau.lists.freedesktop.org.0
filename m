@@ -1,59 +1,60 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1704A12B2AC
-	for <lists+nouveau@lfdr.de>; Fri, 27 Dec 2019 09:14:06 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id D63C212B2A2
+	for <lists+nouveau@lfdr.de>; Fri, 27 Dec 2019 09:13:56 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1AD7E89FEA;
-	Fri, 27 Dec 2019 08:13:36 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 73BBB89D81;
+	Fri, 27 Dec 2019 08:13:34 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from EUR03-VE1-obe.outbound.protection.outlook.com
- (mail-eopbgr50074.outbound.protection.outlook.com [40.107.5.74])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D61C46F9CD;
- Fri,  8 Nov 2019 15:26:06 +0000 (UTC)
+Received: from EUR03-AM5-obe.outbound.protection.outlook.com
+ (mail-eopbgr30075.outbound.protection.outlook.com [40.107.3.75])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B21BB6E073;
+ Fri,  8 Nov 2019 20:19:09 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=idKNgVf6jVKmbn6oZNk9d+o8KH7zrMRnjZD09mWHwJr1/Kxwjg9irWZz8wWN8iMzB+kY6x+9k/dogRsJj3V7yEwt2b+4OFPvnbx391j5hjzouuGcFBN5P4G22TybBTWhVB81KY/RZyfH+qFzCBzuTiPsL+wgIQd07yvHjjuU59+wdgxn+FxMpsQiCOoxgdcjIPFKaDH6wSiwDrzBlaz9Lww5l2XpW20b3OmI2RlMnAcdL6TJGAvQepg7DXJ8oZ3lfTW2rLzSpmJ3ZMhKuH5l+QRkygbkZjy3PcYMuP4lhEAcN0rfB0ggFNTOxeczIqDQAV2gNOMTwnYs2gwOF1XlOw==
+ b=Shdek16O9havtmmpIcPaNy0nMjZfNtQaHnmv+kvg/zzjzztNUaGgl1VsRdeq/KNBNTQRjBr818Vd0dP8mO2p23Czwmoo86E9VJKjBC6jj+vKWn8LHRsWTwugeQWpl1xb3iHxxo2MIWB0vdSOGvZ1aqZAykHdr8EJxzIfJ4W1aZ1cEj+fvIF8eqcML0FNRiDLHFexCl1xB4epfXyAxP/S8LMXsvQDMNomOFf7HSnZetVx5IyqNl3y8SpGzLip+8746qOCx3x8/MmkzDN+dd6SKbr4VQwJSr73+rx9oVXLFpsJHMd/K1umckOcmuNOiUkp8q4qo5bC3BtM0KhxUDbapA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=+kzwnbT9lm5Y4lK5jkW6EgWFPhy9eP7jnPkK++jCXto=;
- b=Q8DoVKO4xnqyDKSCkqug+bVxTz+cnMeujvO8wrNNM32hDUD4MHUDMPpuThmelGAywWEkmjgLL2yaZDGXEEGW28al/EOTeelBH09HIJmoLLapQQQMR2Wa3lJKGBNEKpUv4w5mT+zFM5d8+N7ppJHb+sj4jZOzLC2f6UQEvKTPA1pnXni4rUz1TVLxDF4OWUuK8Pi6FckgsvAWQnfd/lD2aYaSNLTIBZ+miFpOMeaFnkhjg7hy12ft+FCvFi8UrWOhYr4Idh+J8+wZOFDw/kfwnMUEb2JDeGtrbfOSDMN3xcQyNhy//2L1EFoTwx5ugi0xvS8XFKgCXCD6TQfILJ8veA==
+ bh=MXu1ftVqG84gk5mWA7L5dB+kOrKG7FI6r7w4CIV8Itk=;
+ b=MGYWJDnlvTn0sIKQR+dsdqrnUNFRANEz4K7x0IqHSOPhf0oO2BIskWi1K/FHugxhKZMZR8BZTw+PIKMIMZ1ph5fYYl83tsMlwgr02LOXo7ozU+Pp8AFFR+jt68kCxMDgJcynDz3UWahoCwMj8yoJf/KwUrOjCxj5BvhzOTppaNaKgl9dyZX6HiQnTDxL/fbc8hGHGuBRFJUoh+tQSQcbUf7ayrD4YV9y3KmiZLfdu/sYRjCWqAp0JeGrxZxkVPB4kzM+N3flwJBHMyGs74zdGxj1B+zgK6m+9/NMVTVX3RyGNWZCA/RVKx6QnLCulYXhQa+8/511dbtaepYVLnHr3g==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=mellanox.com; dmarc=pass action=none header.from=mellanox.com;
  dkim=pass header.d=mellanox.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Mellanox.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=+kzwnbT9lm5Y4lK5jkW6EgWFPhy9eP7jnPkK++jCXto=;
- b=c0UJRdvRuINyqTVmXmI/thqBzveZgdEHz47hKMouKFoyBRIHHDEk5fB0460jdTvl8snP1wiYe+IApdU+ZKaRIND+OK8IsMS4uIkkzc7pyh4nKycQBPIpbZ5XCcdsTd0WS/jSFmyiqf/xjGlmQmzUP8rvNf5998PPM3tyH/mT8c4=
+ bh=MXu1ftVqG84gk5mWA7L5dB+kOrKG7FI6r7w4CIV8Itk=;
+ b=ejgWWnujEWLXP8SwiCcM0J9Vwypgncc+gaz/AMmBR4H+8/wWlaLJF03Oxp1iRjfzGDFTxyJOr0bcCHxxNrWp2GOZfF5+tR35fgI0GE0lN77VapkhH6kfHskDINvWNALckCrkexkVSMMYb98nDgQHbecF4TCECeoQ80PZfWGP7H0=
 Received: from VI1PR05MB4141.eurprd05.prod.outlook.com (52.133.14.15) by
- VI1PR05MB4109.eurprd05.prod.outlook.com (10.171.182.30) with Microsoft SMTP
+ VI1PR05MB5215.eurprd05.prod.outlook.com (20.178.9.207) with Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.2430.20; Fri, 8 Nov 2019 15:26:03 +0000
+ 15.20.2430.20; Fri, 8 Nov 2019 20:19:06 +0000
 Received: from VI1PR05MB4141.eurprd05.prod.outlook.com
  ([fe80::b179:e8bf:22d4:bf8d]) by VI1PR05MB4141.eurprd05.prod.outlook.com
  ([fe80::b179:e8bf:22d4:bf8d%5]) with mapi id 15.20.2430.023; Fri, 8 Nov 2019
- 15:26:03 +0000
+ 20:19:06 +0000
 From: Jason Gunthorpe <jgg@mellanox.com>
-To: John Hubbard <jhubbard@nvidia.com>
+To: Jerome Glisse <jglisse@redhat.com>
 Thread-Topic: [PATCH v2 02/15] mm/mmu_notifier: add an interval tree notifier
-Thread-Index: AQHVjcvJYOye0EiwZkisYK74G5bmhqd+54eAgAFKcgCAAA1gAIABNrMA
-Date: Fri, 8 Nov 2019 15:26:03 +0000
-Message-ID: <20191108152558.GG21728@mellanox.com>
+Thread-Index: AQHVjcvJYOye0EiwZkisYK74G5bmhqd+54eAgAAdRYCAAS6QAIAADtYAgAA6K4CAABioAIABMugA
+Date: Fri, 8 Nov 2019 20:19:06 +0000
+Message-ID: <20191108201902.GM21728@mellanox.com>
 References: <20191028201032.6352-1-jgg@ziepe.ca>
  <20191028201032.6352-3-jgg@ziepe.ca>
  <35c2b322-004e-0e18-87e4-1920dc71bfd5@nvidia.com>
- <20191107200604.GB21728@mellanox.com>
- <9dc2b3c7-f945-b645-b3a3-313a21d2fdfc@nvidia.com>
-In-Reply-To: <9dc2b3c7-f945-b645-b3a3-313a21d2fdfc@nvidia.com>
+ <20191107020807.GA747656@redhat.com> <20191107201102.GC21728@mellanox.com>
+ <20191107210408.GA4716@redhat.com> <20191108003219.GD21728@mellanox.com>
+ <20191108020034.GA470884@redhat.com>
+In-Reply-To: <20191108020034.GA470884@redhat.com>
 Accept-Language: en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
-x-clientproxiedby: MN2PR13CA0030.namprd13.prod.outlook.com
- (2603:10b6:208:160::43) To VI1PR05MB4141.eurprd05.prod.outlook.com
+x-clientproxiedby: BN6PR17CA0042.namprd17.prod.outlook.com
+ (2603:10b6:405:75::31) To VI1PR05MB4141.eurprd05.prod.outlook.com
  (2603:10a6:803:44::15)
 authentication-results: spf=none (sender IP is )
  smtp.mailfrom=jgg@mellanox.com; 
@@ -61,32 +62,33 @@ x-ms-exchange-messagesentrepresentingtype: 1
 x-originating-ip: [142.162.113.180]
 x-ms-publictraffictype: Email
 x-ms-office365-filtering-ht: Tenant
-x-ms-office365-filtering-correlation-id: 48b76905-ba05-4f4b-6fcb-08d7645ff747
-x-ms-traffictypediagnostic: VI1PR05MB4109:
-x-microsoft-antispam-prvs: <VI1PR05MB4109D9C9A1D1C0D6DB42E1FFCF7B0@VI1PR05MB4109.eurprd05.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:10000;
+x-ms-office365-filtering-correlation-id: b986b512-2b45-41d3-b746-08d76488e780
+x-ms-traffictypediagnostic: VI1PR05MB5215:
+x-ms-exchange-purlcount: 1
+x-microsoft-antispam-prvs: <VI1PR05MB5215A383E16B61C1949A18AFCF7B0@VI1PR05MB5215.eurprd05.prod.outlook.com>
+x-ms-oob-tlc-oobclassifiers: OLM:9508;
 x-forefront-prvs: 0215D7173F
 x-forefront-antispam-report: SFV:NSPM;
- SFS:(10009020)(4636009)(376002)(346002)(136003)(396003)(366004)(39860400002)(199004)(189003)(25786009)(1076003)(486006)(386003)(14454004)(6916009)(316002)(99286004)(81156014)(478600001)(7416002)(81166006)(2906002)(6486002)(8676002)(446003)(6246003)(26005)(6512007)(6506007)(71200400001)(102836004)(2616005)(6436002)(71190400001)(8936002)(86362001)(36756003)(186003)(64756008)(6116002)(33656002)(305945005)(66946007)(66446008)(66556008)(66476007)(229853002)(76176011)(3846002)(256004)(66066001)(5660300002)(54906003)(476003)(11346002)(4326008)(52116002)(7736002);
- DIR:OUT; SFP:1101; SCL:1; SRVR:VI1PR05MB4109;
+ SFS:(10009020)(4636009)(136003)(376002)(346002)(396003)(39860400002)(366004)(199004)(189003)(316002)(99286004)(386003)(486006)(305945005)(66446008)(7736002)(229853002)(2616005)(71200400001)(6246003)(71190400001)(86362001)(476003)(6506007)(102836004)(26005)(1076003)(6436002)(66556008)(7416002)(76176011)(64756008)(66946007)(6916009)(446003)(6512007)(6306002)(54906003)(186003)(5660300002)(14444005)(256004)(11346002)(52116002)(6486002)(66476007)(6116002)(81156014)(81166006)(25786009)(8676002)(33656002)(4326008)(66066001)(36756003)(3846002)(2906002)(478600001)(8936002)(966005)(14454004);
+ DIR:OUT; SFP:1101; SCL:1; SRVR:VI1PR05MB5215;
  H:VI1PR05MB4141.eurprd05.prod.outlook.com; FPR:; SPF:None; LANG:en;
  PTR:InfoNoRecords; A:1; MX:1; 
 received-spf: None (protection.outlook.com: mellanox.com does not designate
  permitted sender hosts)
 x-ms-exchange-senderadcheck: 1
 x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: mV1RVWzPHLCQNN+LpAFkG7yEBh05U7w1QVa67j7ZZAtua2jv39j8Xb/7sQh+UCt9aThT0voGO9OdBWBO7n/SrpZAMioLYZvB+KfM5+vdiurRcDSwB6cwms1JEOijwDUI7PzJ17D+O1lQos3uJuuJfa8q4CYuLJBWWtJnPkMUtSCvrQxVcO1SX59e8ioTGsgr4YIF707P6SvIbKYtwhclZ9SVHODVVBIi/4ol3HIn/v0CqXXZmpCbGknthx8K3MmtzmcNWP/XIl/fknAYdSlD5iq+qhM9SljIFCAHf27p/G0xhqIR7uXIbG/JC/jWG0bXYL119G0tCCoc2nyNzHCl6Aqe2AsfgAHapZB06CTo0QYGBqce5X4BhyUF5AhjZV66BcyKIx8ZrHRi6eXMZ1zUuHfwwlj1GKM1dM4yw3F1cmjeODUl1sqKfofwGUv5jQ3l
+x-microsoft-antispam-message-info: deARcU8CVWe9irQLX8J1FwM7UgKWuCcJuxHyyVmGNZwHSq7P575eWWnZVkV/JtA7nzbny3mhni67QSL5gFP9LUS0WgE/FQiVk+qXiL9GI52Jrui8uS9mMQgyu9iXRiqGi/HhSL7kuAd+QP3xYNI1HmLMD6ZC/BTWar4l9Ob2Q8pVojuwvk1d0DbD9HiRnKNUHwqaouBstOWCBYjxoQuBQtC4nzmswKIrFIM1dXStrjFtpNzZTU1zwQwlg5gqDNA7EOLyX19cclPKL5IvLOfgr8NISyDtqPNJgS4fw69ym6ql+bmRM6Yt1Cx9WiAZTxmfKQV79m1HirPVTdBLrIzZafXeyDjLg1Cj+yJ9bQeNsMynCjtPTzhCHHFD9sjznCw7R3UQFCeyZp4Bf8STfOuT70HlwYk5O1iKB101C0xkaOdP1DMhKdbvXJuKGDO5Bs5chT65xcMj2J89t1mdhvzsk0Y/RXQrznwk1X90hs4srjg=
 x-ms-exchange-transport-forked: True
-Content-ID: <8E8D480DDF199A4F8FA32DCA04F55AF3@eurprd05.prod.outlook.com>
+Content-ID: <4A274D8A173AC34180928F1E00490803@eurprd05.prod.outlook.com>
 MIME-Version: 1.0
 X-OriginatorOrg: Mellanox.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 48b76905-ba05-4f4b-6fcb-08d7645ff747
-X-MS-Exchange-CrossTenant-originalarrivaltime: 08 Nov 2019 15:26:03.3786 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: b986b512-2b45-41d3-b746-08d76488e780
+X-MS-Exchange-CrossTenant-originalarrivaltime: 08 Nov 2019 20:19:06.0725 (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: a652971c-7d2e-4d9b-a6a4-d149256f461b
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: azgdi27g8r0XKelABYVgzind4SWdZTnXU+8dGloSmUVxbgjx88SpHAZBy5oMZKbrSYfHEZNJYuOPM8eICD97RA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR05MB4109
+X-MS-Exchange-CrossTenant-userprincipalname: 8CdqcksxZm0V0FsWFGI1qc0P7nV5ILTdo+MvFOiFbnxSrDdSkJm+yyhgv9ItjaUuzBBxRkxXIQTO3pxa5dmtNA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR05MB5215
 X-Mailman-Approved-At: Fri, 27 Dec 2019 08:13:32 +0000
 Subject: Re: [Nouveau] [PATCH v2 02/15] mm/mmu_notifier: add an interval
  tree notifier
@@ -114,100 +116,92 @@ Cc: "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
  Ralph Campbell <rcampbell@nvidia.com>,
  Boris Ostrovsky <boris.ostrovsky@oracle.com>, Petr Cvek <petrcvekcz@gmail.com>,
  Juergen Gross <jgross@suse.com>, Mike Marciniszyn <mike.marciniszyn@intel.com>,
- Dennis Dalessandro <dennis.dalessandro@intel.com>,
+ "Felix.Kuehling@amd.com" <Felix.Kuehling@amd.com>,
  =?iso-8859-1?Q?Christian_K=F6nig?= <christian.koenig@amd.com>,
  Alex Deucher <alexander.deucher@amd.com>,
- "Felix.Kuehling@amd.com" <Felix.Kuehling@amd.com>
+ Dennis Dalessandro <dennis.dalessandro@intel.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, Nov 07, 2019 at 12:53:56PM -0800, John Hubbard wrote:
-> > > > +/**
-> > > > + * struct mmu_range_notifier_ops
-> > > > + * @invalidate: Upon return the caller must stop using any SPTEs within this
-> > > > + *              range, this function can sleep. Return false if blocking was
-> > > > + *              required but range is non-blocking
-> > > > + */
+On Thu, Nov 07, 2019 at 09:00:34PM -0500, Jerome Glisse wrote:
+> On Fri, Nov 08, 2019 at 12:32:25AM +0000, Jason Gunthorpe wrote:
+> > On Thu, Nov 07, 2019 at 04:04:08PM -0500, Jerome Glisse wrote:
+> > > On Thu, Nov 07, 2019 at 08:11:06PM +0000, Jason Gunthorpe wrote:
+> > > > On Wed, Nov 06, 2019 at 09:08:07PM -0500, Jerome Glisse wrote:
+> > > > 
+> > > > > > 
+> > > > > > Extra credit: IMHO, this clearly deserves to all be in a new mmu_range_notifier.h
+> > > > > > header file, but I know that's extra work. Maybe later as a follow-up patch,
+> > > > > > if anyone has the time.
+> > > > > 
+> > > > > The range notifier should get the event too, it would be a waste, i think it is
+> > > > > an oversight here. The release event is fine so NAK to you separate event. Event
+> > > > > is really an helper for notifier i had a set of patch for nouveau to leverage
+> > > > > this i need to resucite them. So no need to split thing, i would just forward
+> > > > > the event ie add event to mmu_range_notifier_ops.invalidate() i failed to catch
+> > > > > that in v1 sorry.
+> > > > 
+> > > > I think what you mean is already done?
+> > > > 
+> > > > struct mmu_range_notifier_ops {
+> > > > 	bool (*invalidate)(struct mmu_range_notifier *mrn,
+> > > > 			   const struct mmu_notifier_range *range,
+> > > > 			   unsigned long cur_seq);
 > > > 
-> > > How about this (I'm not sure I fully understand the return value, though):
-> > > 
-> > > /**
-> > >   * struct mmu_range_notifier_ops
-> > >   * @invalidate: Upon return the caller must stop using any SPTEs within this
-> > >   * 		range.
-> > >   *
-> > >   * 		This function is permitted to sleep.
-> > >   *
-> > >   *      	@Return: false if blocking was required, but @range is
-> > >   *			non-blocking.
-> > >   *
-> > >   */
+> > > Yes it is sorry, i got confuse with mmu_range_notifier and mmu_notifier_range :)
+> > > It is almost a palyndrome structure ;)
 > > 
-> > Is this kdoc format for function pointers?
+> > Lets change the name then, this is clearly not working. I'll reflow
+> > everything tomorrow
 > 
-> heh, I'm sort of winging it, I'm not sure how function pointers are supposed
-> to be documented in kdoc. Actually the only key take-away here is to write
+> Semantic patch to do that run from your linux kernel directory with your patch
+> applied (you can run it one patch after the other and the git commit -a --fixup HEAD)
 > 
-> "This function can sleep"
+> spatch --sp-file name-of-the-file-below --dir . --all-includes --in-place
 > 
-> as a separate sentence..
-
-Sure
-
-> > This odd duality has already cause some confusion, but names here are
-> > hard.  mmu_interval_notifier is the best alternative I've heard.
-> > 
-> > Changing this name is a lot of work - are we happy
-> > 'mmu_interval_notifier' is the right choice? 
+> %< ------------------------------------------------------------------
+> @@
+> @@
+> struct
+> -mmu_range_notifier
+> +mmu_interval_notifier
 > 
-> Yes, it's my favorite too. I'd vote for going with that.
-
-Okay, lets give it a go
-
-> Very nice, would you be open to putting that into (any) one of the comment
-> headers? That's an unusually clear and concise description:
-
-Yep, done
-
-> > > > +int mmu_range_notifier_insert(struct mmu_range_notifier *mrn,
-> > > > +			      unsigned long start, unsigned long length,
-> > > > +			      struct mm_struct *mm)
-> > > > +{
-> > > > +	struct mmu_notifier_mm *mmn_mm;
-> > > > +	int ret;
-> > > 
-> > > Hmmm, I think a later patch improperly changes the above to "int ret = 0;".
-> > > I'll check on that. It's correct here, though.
-> > 
-> > Looks OK in my tree?
+> @@
+> @@
+> struct
+> -mmu_range_notifier
+> +mmu_interval_notifier
+> {...};
 > 
-> Nope, that's how I found it. The top of your mmu_notifier branch has this:
+> // Change mrn name to mmu_in
+> @@
+> struct mmu_interval_notifier *mrn;
+> @@
+> -mrn
+> +mmu_in
 > 
-> int __mmu_notifier_invalidate_range_start(struct mmu_notifier_range *range)
-> {
->         struct mmu_notifier_mm *mmn_mm = range->mm->mmu_notifier_mm;
->         int ret = 0;
+> @@
+> identifier fn;
+> @@
+> fn(..., 
+> -struct mmu_interval_notifier *mrn,
+> +struct mmu_interval_notifier *mmu_in,
+> ...) {...}
 > 
->         if (mmn_mm->has_interval) {
->                 ret = mn_itree_invalidate(mmn_mm, range);
->                 if (ret)
->                         return ret;
->         }
->         if (!hlist_empty(&mmn_mm->list))
->                 return mn_hlist_invalidate_range_start(mmn_mm, range);
->         return 0;
-> }
+> You need coccinelle (which provides spatch). It is untested but it should work
+> also i could not come up with a nice name to update mrn as min is way too
+> confusing. If you have better name feel free to use it.
 
-Ah, that is a different function :) Fixed
+I used 'mni' as we already use 'mn' to refer to the notifier, and
+'mmu_in' looks like some input parameter or something
 
-> Looks good. We're just polishing up minor points now, so you can add:
-> 
-> Reviewed-by: John Hubbard <jhubbard@nvidia.com>
+It mostly worked, lots of comments to fix manually though:
 
-Great, thanks, I'll post a v3 with the rename
+https://github.com/jgunthorpe/linux/commits/mmu_notifier
 
+Thanks,
 Jason
 _______________________________________________
 Nouveau mailing list
