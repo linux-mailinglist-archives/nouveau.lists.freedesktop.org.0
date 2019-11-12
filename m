@@ -2,66 +2,68 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id A996912B2DD
-	for <lists+nouveau@lfdr.de>; Fri, 27 Dec 2019 09:14:50 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8176E12B2F8
+	for <lists+nouveau@lfdr.de>; Fri, 27 Dec 2019 09:15:20 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8CE366E142;
-	Fri, 27 Dec 2019 08:14:08 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 2D4346E1A4;
+	Fri, 27 Dec 2019 08:14:11 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-qv1-xf41.google.com (mail-qv1-xf41.google.com
- [IPv6:2607:f8b0:4864:20::f41])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 53EC96EBC9
+Received: from mail-qv1-xf43.google.com (mail-qv1-xf43.google.com
+ [IPv6:2607:f8b0:4864:20::f43])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 404DD6E432
  for <nouveau@lists.freedesktop.org>; Tue, 12 Nov 2019 20:22:49 +0000 (UTC)
-Received: by mail-qv1-xf41.google.com with SMTP id d3so5366760qvs.11
+Received: by mail-qv1-xf43.google.com with SMTP id s18so6951042qvr.4
  for <nouveau@lists.freedesktop.org>; Tue, 12 Nov 2019 12:22:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ziepe.ca; s=google;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=GWMSOcigcFkvS1mXDN4UZKv/Sz4qJBz/Xw1txpllC58=;
- b=SdP44dA/qt3Cafkmp5tDYwUfTKua1RYFbjfub38WMqp1Vetd5HDAMxGgKpbA4Ao+oK
- gsEL1oHkgBYSL5wAFUvGW4WL3U/pvufnqzGsum5CGpKAJYB+qH5Upt6hHPp0oyUiUVZQ
- luFJjPDkpYMu/LEwn7P4i1KvQc3sG0kQARArCClpXMObiDqr/9YyrAyqL0dxb++bMYDb
- XbTfpT4OBOBeoefNdIfWJ+fDQI8fjcFqTYyS9qXYt67Hx6qKRVE8+RXhoDoz1lpBwD/V
- slDxBVQ6lEnBCWWDRENPVOvt6nSoUCSoIGfYhgVkElAgGx2oznQ/Ekwnr6eHH2zAzayA
- jOxw==
+ h=from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding;
+ bh=vnS3z876J83ixoyjmv49DG9xbHQOY1MbChbRcHTvym4=;
+ b=Dzk0IYPNoeuja6Z87jLZ16h5TFzbWhhaL2hE6e59eRJAr2o3x1k/qz1haRHmaKm2Oo
+ pJdjmv04a60AokPpqfbEs8fcyiISwOqa6zHSTlPcqeOyWCS8kySDbonYwBGZimXEsiCr
+ m+99Yx7WlBmR7rBCtzYugbBaq8RGC03XIHbn2PpO3V8jyiqo5Hk0w/HBZzsp2aMrUtNM
+ 6LE16wMsLdbDUqIZRBITP0567Jo4IONU9HkH5/mvp6Sr+ybWOj9b1NnCn2oFxTupAE27
+ smAd6xHPhgykqaEmfbT/1zs/1tv2/o4ldY0ZS0sj1TBlKGbqpB11Kml+kU8JiiV0ASzB
+ Lu1g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=GWMSOcigcFkvS1mXDN4UZKv/Sz4qJBz/Xw1txpllC58=;
- b=IytThDfje3SmJ5fOLHCF4T09l1Hg7Ny7hAZc6tH6LJhbhLZLU0BvZ9FJflHDnMX9OF
- nS3kF9sPGpeNwA/paofubxSDkZIsaxm39JahIO0mI9HFIFdUbVbyb7QSft7NAjT4zoKT
- WVn5mPGq1ze35L9qBGa805V5Uu4WomnfjCzrXmhcfbepixq5kKQp/l0eYguzpcJKg8oS
- dmnLHzoTrUPHwq2Dnj98VBme0Z8KYceaN31Eb+mz0F4fQ5Yqj1ne98jL1eGZI5cjVeNG
- 9+SVDwOj+ZE/ZIDQy151Z6M3Q5sVNoPe9d9eJICOYLgNDqZPSrmIRh+14mKd8DXQYMwh
- 2RIA==
-X-Gm-Message-State: APjAAAWUk2SD3GXVj+fsGo2svCIVnzjR9fQEs2IxIonRPnZ+z+WQ427B
- C2AfcADHjHMIUE+zjQX06cEgpQ==
-X-Google-Smtp-Source: APXvYqyZGwIPop6xwsfhsv3DLyXXAOZa8Eq5KSgCu6w55310PeMbie/nmCz5Pj6znsHarv3wD6pCCQ==
-X-Received: by 2002:a05:6214:14b2:: with SMTP id
- bo18mr30642652qvb.72.1573590168105; 
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=vnS3z876J83ixoyjmv49DG9xbHQOY1MbChbRcHTvym4=;
+ b=gFZQBKqZsJ9/YUIzAgvzUxHamiuKBtmwpXMvVDaIfOEkKS9Ge/sC/3wkKTczmQm5gR
+ 6fw9WKCv/dpeLLHtqd5MZ+9oQoW3P3zt1snlFA3+gU5gOHXBxYuFwRFjJgT1IDcLwX06
+ /Q3ZOo0HFyaLqxgPk93bglxA5YZbDwXhRFi9jzuCdw4GL5XKzvdF2ZIG4Xg5nvakfTHG
+ MvmMQTspPyOjCg2gW5nDDi2vavIG5j94bOggBPF69N07zlDt20IQYYbchqWZXul89RVu
+ JJ0KIG99boMELqe+w5zoSrHuHcySaCfO/NguWKUmr8gkucIVnTaTHPqzA5Srx4CgdODR
+ 7Mbg==
+X-Gm-Message-State: APjAAAXYtLlsGQ+xGzdudFPLNZPYytYRRZ+cU0yJ0XJ24QNkclQHD/NL
+ RmaYe6FVHK6iKh1mjpPwsRY1gQ==
+X-Google-Smtp-Source: APXvYqwt6TPTyhRT+Pf1utgCUQUY7yQF048IJVBt4Y/k4d6RD16npyce/49GYasfkdRZSZLp6DS/WQ==
+X-Received: by 2002:a05:6214:14ac:: with SMTP id
+ bo12mr30993106qvb.67.1573590168353; 
  Tue, 12 Nov 2019 12:22:48 -0800 (PST)
 Received: from ziepe.ca
  (hlfxns017vw-142-162-113-180.dhcp-dynamic.fibreop.ns.bellaliant.net.
  [142.162.113.180])
- by smtp.gmail.com with ESMTPSA id j71sm10881994qke.90.2019.11.12.12.22.47
+ by smtp.gmail.com with ESMTPSA id z17sm8848536qtq.69.2019.11.12.12.22.47
  (version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
- Tue, 12 Nov 2019 12:22:47 -0800 (PST)
+ Tue, 12 Nov 2019 12:22:48 -0800 (PST)
 Received: from jgg by mlx.ziepe.ca with local (Exim 4.90_1)
  (envelope-from <jgg@ziepe.ca>)
- id 1iUcgZ-0003jU-35; Tue, 12 Nov 2019 16:22:47 -0400
+ id 1iUcgZ-0003ja-5T; Tue, 12 Nov 2019 16:22:47 -0400
 From: Jason Gunthorpe <jgg@ziepe.ca>
 To: linux-mm@kvack.org, Jerome Glisse <jglisse@redhat.com>,
  Ralph Campbell <rcampbell@nvidia.com>, John Hubbard <jhubbard@nvidia.com>,
  Felix.Kuehling@amd.com
-Date: Tue, 12 Nov 2019 16:22:17 -0400
-Message-Id: <20191112202231.3856-1-jgg@ziepe.ca>
+Date: Tue, 12 Nov 2019 16:22:18 -0400
+Message-Id: <20191112202231.3856-2-jgg@ziepe.ca>
 X-Mailer: git-send-email 2.24.0
+In-Reply-To: <20191112202231.3856-1-jgg@ziepe.ca>
+References: <20191112202231.3856-1-jgg@ziepe.ca>
 MIME-Version: 1.0
 X-Mailman-Approved-At: Fri, 27 Dec 2019 08:13:31 +0000
-Subject: [Nouveau] [PATCH hmm v3 00/14] Consolidate the mmu notifier
- interval_tree and locking
+Subject: [Nouveau] [PATCH v3 01/14] mm/mmu_notifier: define the header
+ pre-processor parts even if disabled
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -85,120 +87,75 @@ Cc: Juergen Gross <jgross@suse.com>, David Zhou <David1.Zhou@amd.com>,
  Boris Ostrovsky <boris.ostrovsky@oracle.com>, Petr Cvek <petrcvekcz@gmail.com>,
  =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
  Ben Skeggs <bskeggs@redhat.com>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-From: Jason Gunthorpe <jgg@mellanox.com>
-
-8 of the mmu_notifier using drivers (i915_gem, radeon_mn, umem_odp, hfi1,
-scif_dma, vhost, gntdev, hmm) drivers are using a common pattern where
-they only use invalidate_range_start/end and immediately check the
-invalidating range against some driver data structure to tell if the
-driver is interested. Half of them use an interval_tree, the others are
-simple linear search lists.
-
-Of the ones I checked they largely seem to have various kinds of races,
-bugs and poor implementation. This is a result of the complexity in how
-the notifier interacts with get_user_pages(). It is extremely difficult to
-use it correctly.
-
-Consolidate all of this code together into the core mmu_notifier and
-provide a locking scheme similar to hmm_mirror that allows the user to
-safely use get_user_pages() and reliably know if the page list still
-matches the mm.
-
-This new arrangment plays nicely with the !blockable mode for
-OOM. Scanning the interval tree is done such that the intersection test
-will always succeed, and since there is no invalidate_range_end exposed to
-drivers the scheme safely allows multiple drivers to be subscribed.
-
-Four places are converted as an example of how the new API is used.
-Four are left for future patches:
- - i915_gem has complex locking around destruction of a registration,
-   needs more study
- - hfi1 (2nd user) needs access to the rbtree
- - scif_dma has a complicated logic flow
- - vhost's mmu notifiers are already being rewritten
-
-This is already in linux-next, a git tree is available here:
-
- https://github.com/jgunthorpe/linux/commits/mmu_notifier
-
-v3:
-- Rename mmu_range_notifier to mmu_interval_notifier for clarity
-  Avoids confusion with struct mmu_notifier_range
-- Fix bugs in odp, amdgpu and xen gntdev from testing
-- Make ops an argument to mmu_interval_notifier_insert() to make it
-  harder to misuse
-- Update many comments
-- Add testing of mm_count during insertion
-
-v2: https://lore.kernel.org/r/20191028201032.6352-1-jgg@ziepe.ca
-v1: https://lore.kernel.org/r/20191015181242.8343-1-jgg@ziepe.ca
-
-Absent any new discussion I think this will go to Linus at the next merge
-window.
-
-Thanks to everyone to helped!
-
-Jason Gunthorpe (14):
-  mm/mmu_notifier: define the header pre-processor parts even if
-    disabled
-  mm/mmu_notifier: add an interval tree notifier
-  mm/hmm: allow hmm_range to be used with a mmu_interval_notifier or
-    hmm_mirror
-  mm/hmm: define the pre-processor related parts of hmm.h even if
-    disabled
-  RDMA/odp: Use mmu_interval_notifier_insert()
-  RDMA/hfi1: Use mmu_interval_notifier_insert for user_exp_rcv
-  drm/radeon: use mmu_interval_notifier_insert
-  nouveau: use mmu_notifier directly for invalidate_range_start
-  nouveau: use mmu_interval_notifier instead of hmm_mirror
-  drm/amdgpu: Call find_vma under mmap_sem
-  drm/amdgpu: Use mmu_interval_insert instead of hmm_mirror
-  drm/amdgpu: Use mmu_interval_notifier instead of hmm_mirror
-  mm/hmm: remove hmm_mirror and related
-  xen/gntdev: use mmu_interval_notifier_insert
-
- Documentation/vm/hmm.rst                      | 105 +---
- drivers/gpu/drm/amd/amdgpu/amdgpu.h           |   2 +
- .../gpu/drm/amd/amdgpu/amdgpu_amdkfd_gpuvm.c  |   9 +-
- drivers/gpu/drm/amd/amdgpu/amdgpu_cs.c        |  14 +-
- drivers/gpu/drm/amd/amdgpu/amdgpu_device.c    |   1 +
- drivers/gpu/drm/amd/amdgpu/amdgpu_mn.c        | 443 ++------------
- drivers/gpu/drm/amd/amdgpu/amdgpu_mn.h        |  53 --
- drivers/gpu/drm/amd/amdgpu/amdgpu_object.h    |  13 +-
- drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c       | 145 +++--
- drivers/gpu/drm/nouveau/nouveau_svm.c         | 230 ++++---
- drivers/gpu/drm/radeon/radeon.h               |   9 +-
- drivers/gpu/drm/radeon/radeon_mn.c            | 218 ++-----
- drivers/infiniband/core/device.c              |   1 -
- drivers/infiniband/core/umem_odp.c            | 303 ++--------
- drivers/infiniband/hw/hfi1/file_ops.c         |   2 +-
- drivers/infiniband/hw/hfi1/hfi.h              |   2 +-
- drivers/infiniband/hw/hfi1/user_exp_rcv.c     | 146 ++---
- drivers/infiniband/hw/hfi1/user_exp_rcv.h     |   3 +-
- drivers/infiniband/hw/mlx5/mlx5_ib.h          |   7 +-
- drivers/infiniband/hw/mlx5/mr.c               |   3 +-
- drivers/infiniband/hw/mlx5/odp.c              |  50 +-
- drivers/xen/gntdev-common.h                   |   8 +-
- drivers/xen/gntdev.c                          | 179 ++----
- include/linux/hmm.h                           | 195 +-----
- include/linux/mmu_notifier.h                  | 147 ++++-
- include/rdma/ib_umem_odp.h                    |  68 +--
- include/rdma/ib_verbs.h                       |   2 -
- kernel/fork.c                                 |   1 -
- mm/Kconfig                                    |   2 +-
- mm/hmm.c                                      | 276 +--------
- mm/mmu_notifier.c                             | 565 +++++++++++++++++-
- 31 files changed, 1271 insertions(+), 1931 deletions(-)
-
--- 
-2.24.0
-
-_______________________________________________
-Nouveau mailing list
-Nouveau@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/nouveau
+RnJvbTogSmFzb24gR3VudGhvcnBlIDxqZ2dAbWVsbGFub3guY29tPgoKTm93IHRoYXQgd2UgaGF2
+ZSBLRVJORUxfSEVBREVSX1RFU1QgYWxsIGhlYWRlcnMgYXJlIGdlbmVyYWxseSBjb21waWxlCnRl
+c3RlZCwgc28gcmVseWluZyBvbiBtYWtlZmlsZSB0cmlja3MgdG8gYXZvaWQgY29tcGlsaW5nIGNv
+ZGUgdGhhdCBkZXBlbmRzCm9uIENPTkZJR19NTVVfTk9USUZJRVIgaXMgbW9yZSBhbm5veWluZy4K
+Ckluc3RlYWQgZm9sbG93IHRoZSB1c3VhbCBwYXR0ZXJuIGFuZCBwcm92aWRlIG1vc3Qgb2YgdGhl
+IGhlYWRlciB3aXRoIG9ubHkKdGhlIGZ1bmN0aW9ucyBzdHViYmVkIG91dCB3aGVuIENPTkZJR19N
+TVVfTk9USUZJRVIgaXMgZGlzYWJsZWQuIFRoaXMKZW5zdXJlcyBjb2RlIGNvbXBpbGVzIG5vIG1h
+dHRlciB3aGF0IHRoZSBjb25maWcgc2V0dGluZyBpcy4KCldoaWxlIGhlcmUsIHN0cnVjdCBtbXVf
+bm90aWZpZXJfbW0gaXMgcHJpdmF0ZSB0byBtbXVfbm90aWZpZXIuYywgbW92ZSBpdC4KClJldmll
+d2VkLWJ5OiBKw6lyw7RtZSBHbGlzc2UgPGpnbGlzc2VAcmVkaGF0LmNvbT4KVGVzdGVkLWJ5OiBS
+YWxwaCBDYW1wYmVsbCA8cmNhbXBiZWxsQG52aWRpYS5jb20+ClJldmlld2VkLWJ5OiBKb2huIEh1
+YmJhcmQgPGpodWJiYXJkQG52aWRpYS5jb20+ClNpZ25lZC1vZmYtYnk6IEphc29uIEd1bnRob3Jw
+ZSA8amdnQG1lbGxhbm94LmNvbT4KLS0tCiBpbmNsdWRlL2xpbnV4L21tdV9ub3RpZmllci5oIHwg
+NDYgKysrKysrKysrKysrKy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCiBtbS9tbXVfbm90aWZpZXIu
+YyAgICAgICAgICAgIHwgMTMgKysrKysrKysrKwogMiBmaWxlcyBjaGFuZ2VkLCAzMCBpbnNlcnRp
+b25zKCspLCAyOSBkZWxldGlvbnMoLSkKCmRpZmYgLS1naXQgYS9pbmNsdWRlL2xpbnV4L21tdV9u
+b3RpZmllci5oIGIvaW5jbHVkZS9saW51eC9tbXVfbm90aWZpZXIuaAppbmRleCAxYmQ4ZTZhMDlh
+M2MyNy4uMTJiZDYwM2QzMThjZTcgMTAwNjQ0Ci0tLSBhL2luY2x1ZGUvbGludXgvbW11X25vdGlm
+aWVyLmgKKysrIGIvaW5jbHVkZS9saW51eC9tbXVfbm90aWZpZXIuaApAQCAtNyw4ICs3LDkgQEAK
+ICNpbmNsdWRlIDxsaW51eC9tbV90eXBlcy5oPgogI2luY2x1ZGUgPGxpbnV4L3NyY3UuaD4KIAor
+c3RydWN0IG1tdV9ub3RpZmllcl9tbTsKIHN0cnVjdCBtbXVfbm90aWZpZXI7Ci1zdHJ1Y3QgbW11
+X25vdGlmaWVyX29wczsKK3N0cnVjdCBtbXVfbm90aWZpZXJfcmFuZ2U7CiAKIC8qKgogICogZW51
+bSBtbXVfbm90aWZpZXJfZXZlbnQgLSByZWFzb24gZm9yIHRoZSBtbXUgbm90aWZpZXIgY2FsbGJh
+Y2sKQEAgLTQwLDM2ICs0MSw4IEBAIGVudW0gbW11X25vdGlmaWVyX2V2ZW50IHsKIAlNTVVfTk9U
+SUZZX1NPRlRfRElSVFksCiB9OwogCi0jaWZkZWYgQ09ORklHX01NVV9OT1RJRklFUgotCi0jaWZk
+ZWYgQ09ORklHX0xPQ0tERVAKLWV4dGVybiBzdHJ1Y3QgbG9ja2RlcF9tYXAgX19tbXVfbm90aWZp
+ZXJfaW52YWxpZGF0ZV9yYW5nZV9zdGFydF9tYXA7Ci0jZW5kaWYKLQotLyoKLSAqIFRoZSBtbXUg
+bm90aWZpZXJfbW0gc3RydWN0dXJlIGlzIGFsbG9jYXRlZCBhbmQgaW5zdGFsbGVkIGluCi0gKiBt
+bS0+bW11X25vdGlmaWVyX21tIGluc2lkZSB0aGUgbW1fdGFrZV9hbGxfbG9ja3MoKSBwcm90ZWN0
+ZWQKLSAqIGNyaXRpY2FsIHNlY3Rpb24gYW5kIGl0J3MgcmVsZWFzZWQgb25seSB3aGVuIG1tX2Nv
+dW50IHJlYWNoZXMgemVybwotICogaW4gbW1kcm9wKCkuCi0gKi8KLXN0cnVjdCBtbXVfbm90aWZp
+ZXJfbW0gewotCS8qIGFsbCBtbXUgbm90aWZpZXJzIHJlZ2lzdGVyZCBpbiB0aGlzIG1tIGFyZSBx
+dWV1ZWQgaW4gdGhpcyBsaXN0ICovCi0Jc3RydWN0IGhsaXN0X2hlYWQgbGlzdDsKLQkvKiB0byBz
+ZXJpYWxpemUgdGhlIGxpc3QgbW9kaWZpY2F0aW9ucyBhbmQgaGxpc3RfdW5oYXNoZWQgKi8KLQlz
+cGlubG9ja190IGxvY2s7Ci19OwotCiAjZGVmaW5lIE1NVV9OT1RJRklFUl9SQU5HRV9CTE9DS0FC
+TEUgKDEgPDwgMCkKIAotc3RydWN0IG1tdV9ub3RpZmllcl9yYW5nZSB7Ci0Jc3RydWN0IHZtX2Fy
+ZWFfc3RydWN0ICp2bWE7Ci0Jc3RydWN0IG1tX3N0cnVjdCAqbW07Ci0JdW5zaWduZWQgbG9uZyBz
+dGFydDsKLQl1bnNpZ25lZCBsb25nIGVuZDsKLQl1bnNpZ25lZCBmbGFnczsKLQllbnVtIG1tdV9u
+b3RpZmllcl9ldmVudCBldmVudDsKLX07Ci0KIHN0cnVjdCBtbXVfbm90aWZpZXJfb3BzIHsKIAkv
+KgogCSAqIENhbGxlZCBlaXRoZXIgYnkgbW11X25vdGlmaWVyX3VucmVnaXN0ZXIgb3Igd2hlbiB0
+aGUgbW0gaXMKQEAgLTI0OSw2ICsyMjIsMjEgQEAgc3RydWN0IG1tdV9ub3RpZmllciB7CiAJdW5z
+aWduZWQgaW50IHVzZXJzOwogfTsKIAorI2lmZGVmIENPTkZJR19NTVVfTk9USUZJRVIKKworI2lm
+ZGVmIENPTkZJR19MT0NLREVQCitleHRlcm4gc3RydWN0IGxvY2tkZXBfbWFwIF9fbW11X25vdGlm
+aWVyX2ludmFsaWRhdGVfcmFuZ2Vfc3RhcnRfbWFwOworI2VuZGlmCisKK3N0cnVjdCBtbXVfbm90
+aWZpZXJfcmFuZ2UgeworCXN0cnVjdCB2bV9hcmVhX3N0cnVjdCAqdm1hOworCXN0cnVjdCBtbV9z
+dHJ1Y3QgKm1tOworCXVuc2lnbmVkIGxvbmcgc3RhcnQ7CisJdW5zaWduZWQgbG9uZyBlbmQ7CisJ
+dW5zaWduZWQgZmxhZ3M7CisJZW51bSBtbXVfbm90aWZpZXJfZXZlbnQgZXZlbnQ7Cit9OworCiBz
+dGF0aWMgaW5saW5lIGludCBtbV9oYXNfbm90aWZpZXJzKHN0cnVjdCBtbV9zdHJ1Y3QgKm1tKQog
+ewogCXJldHVybiB1bmxpa2VseShtbS0+bW11X25vdGlmaWVyX21tKTsKZGlmZiAtLWdpdCBhL21t
+L21tdV9ub3RpZmllci5jIGIvbW0vbW11X25vdGlmaWVyLmMKaW5kZXggN2ZkZTg4Njk1ZjM1ZDYu
+LjM2NzY3MGNmZDAyYjdiIDEwMDY0NAotLS0gYS9tbS9tbXVfbm90aWZpZXIuYworKysgYi9tbS9t
+bXVfbm90aWZpZXIuYwpAQCAtMjcsNiArMjcsMTkgQEAgc3RydWN0IGxvY2tkZXBfbWFwIF9fbW11
+X25vdGlmaWVyX2ludmFsaWRhdGVfcmFuZ2Vfc3RhcnRfbWFwID0gewogfTsKICNlbmRpZgogCisv
+KgorICogVGhlIG1tdSBub3RpZmllcl9tbSBzdHJ1Y3R1cmUgaXMgYWxsb2NhdGVkIGFuZCBpbnN0
+YWxsZWQgaW4KKyAqIG1tLT5tbXVfbm90aWZpZXJfbW0gaW5zaWRlIHRoZSBtbV90YWtlX2FsbF9s
+b2NrcygpIHByb3RlY3RlZAorICogY3JpdGljYWwgc2VjdGlvbiBhbmQgaXQncyByZWxlYXNlZCBv
+bmx5IHdoZW4gbW1fY291bnQgcmVhY2hlcyB6ZXJvCisgKiBpbiBtbWRyb3AoKS4KKyAqLworc3Ry
+dWN0IG1tdV9ub3RpZmllcl9tbSB7CisJLyogYWxsIG1tdSBub3RpZmllcnMgcmVnaXN0ZXJlZCBp
+biB0aGlzIG1tIGFyZSBxdWV1ZWQgaW4gdGhpcyBsaXN0ICovCisJc3RydWN0IGhsaXN0X2hlYWQg
+bGlzdDsKKwkvKiB0byBzZXJpYWxpemUgdGhlIGxpc3QgbW9kaWZpY2F0aW9ucyBhbmQgaGxpc3Rf
+dW5oYXNoZWQgKi8KKwlzcGlubG9ja190IGxvY2s7Cit9OworCiAvKgogICogVGhpcyBmdW5jdGlv
+biBjYW4ndCBydW4gY29uY3VycmVudGx5IGFnYWluc3QgbW11X25vdGlmaWVyX3JlZ2lzdGVyCiAg
+KiBiZWNhdXNlIG1tLT5tbV91c2VycyA+IDAgZHVyaW5nIG1tdV9ub3RpZmllcl9yZWdpc3RlciBh
+bmQgZXhpdF9tbWFwCi0tIAoyLjI0LjAKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fCk5vdXZlYXUgbWFpbGluZyBsaXN0Ck5vdXZlYXVAbGlzdHMuZnJlZWRl
+c2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8v
+bm91dmVhdQo=
