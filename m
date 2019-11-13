@@ -1,47 +1,46 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4B74912B313
-	for <lists+nouveau@lfdr.de>; Fri, 27 Dec 2019 09:15:51 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3FCB112B31E
+	for <lists+nouveau@lfdr.de>; Fri, 27 Dec 2019 09:16:05 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C60556E110;
-	Fri, 27 Dec 2019 08:14:35 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0B31E6E19C;
+	Fri, 27 Dec 2019 08:14:36 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from bombadil.infradead.org (bombadil.infradead.org
  [IPv6:2607:7c80:54:e::133])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0A7F66ED15;
- Wed, 13 Nov 2019 14:01:41 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8644C6ED15;
+ Wed, 13 Nov 2019 14:02:06 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20170209; h=In-Reply-To:Content-Type:MIME-Version
  :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
  Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
  List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=1umyAol6qJ52sj688B0QitsfoTQEqbkW4R/EnVJiSfk=; b=gExlmud2ECMJ7KIWs1/XfgJUw
- WIAuxAr096JG6EEc9OvgImYcFSTOylwO20r1g7Z9LKWQ/nQaViBB7UDy3S/XK8/qo+lIz18G2mAwl
- GdTMpKKIqVtjo+fCUGfTLIaQQKeHyan8+FVhGa+4OnOvxz/wEP/PiIUpFuGgpYqztbmMAWQt014OL
- qdKLsQz/tTd+dNbmegRtIpYBQdCOJ+nvfdVTACdnAuNFLKMNsgOOxBun79fFb9olojNKy/62z5gWb
- eaRch/3EAvpaMZBUIjefF996PjPjNnqWcbzVYUHv0pMLESGMVSxXxVRhrSfcvLoljEXpDW3oblocv
- XjhksirCQ==;
+ bh=M7NmYC/Iylm9myghHwqILim55SAUt9QrM+UZYk0eJlw=; b=KG/qQUL4DZQXYc1pMyWSalewO
+ CUe5XZ5XQZJBjvlnGDv3m9jaSmO0vPBGoit4xOCMLlvtv3hjDiS1iw2zCZKDV9ssM6jOqZ5803/A6
+ KzmLgUh7agfIIISBu471c4+mFOQBn/9MasTqV+bAwWBzhsZzLGWZWQmOX3RQTzM0EO4wFm2RNzTTZ
+ TQ2EkrBT1m9oXFdRC2754qZkN9hXg8y5kZHMSX6TntGmx3W4pPSprL/uWqIfxoPneS+BMUWte+5NJ
+ Vh7KYj/Mjgx8OWU4aUhuwcq0TUgL9pA/6azzf3rbf3Pr+3kX/4XaD5XkIKkqa1tcHaMefMIiSwTTB
+ EkuelBDAQ==;
 Received: from hch by bombadil.infradead.org with local (Exim 4.92.3 #3 (Red
- Hat Linux)) id 1iUtDD-0002t4-Um; Wed, 13 Nov 2019 14:01:35 +0000
-Date: Wed, 13 Nov 2019 06:01:35 -0800
+ Hat Linux)) id 1iUtDf-0003BY-2B; Wed, 13 Nov 2019 14:02:03 +0000
+Date: Wed, 13 Nov 2019 06:02:03 -0800
 From: Christoph Hellwig <hch@infradead.org>
 To: Jason Gunthorpe <jgg@ziepe.ca>
-Message-ID: <20191113140135.GD20531@infradead.org>
+Message-ID: <20191113140203.GE20531@infradead.org>
 References: <20191112202231.3856-1-jgg@ziepe.ca>
- <20191112202231.3856-5-jgg@ziepe.ca>
+ <20191112202231.3856-14-jgg@ziepe.ca>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20191112202231.3856-5-jgg@ziepe.ca>
+In-Reply-To: <20191112202231.3856-14-jgg@ziepe.ca>
 User-Agent: Mutt/1.12.1 (2019-06-15)
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
  bombadil.infradead.org. See http://www.infradead.org/rpr.html
 X-Mailman-Approved-At: Fri, 27 Dec 2019 08:13:30 +0000
-Subject: Re: [Nouveau] [PATCH v3 04/14] mm/hmm: define the pre-processor
- related parts of hmm.h even if disabled
+Subject: Re: [Nouveau] [PATCH v3 13/14] mm/hmm: remove hmm_mirror and related
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,6 +70,8 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
+
+Looks good:
 
 Reviewed-by: Christoph Hellwig <hch@lst.de>
 _______________________________________________
