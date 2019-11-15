@@ -2,18 +2,18 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 61D1312B33C
-	for <lists+nouveau@lfdr.de>; Fri, 27 Dec 2019 09:16:47 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8030912B2AD
+	for <lists+nouveau@lfdr.de>; Fri, 27 Dec 2019 09:14:06 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0F4E76E434;
-	Fri, 27 Dec 2019 08:14:58 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 96AB089AAE;
+	Fri, 27 Dec 2019 08:13:35 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from huawei.com (szxga06-in.huawei.com [45.249.212.32])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 57BEE6E5F5;
+ by gabe.freedesktop.org (Postfix) with ESMTPS id DA8206E330;
  Fri, 15 Nov 2019 13:35:23 +0000 (UTC)
 Received: from DGGEMS404-HUB.china.huawei.com (unknown [172.30.72.58])
- by Forcepoint Email with ESMTP id 5A0283D9A540D32C7C2C;
+ by Forcepoint Email with ESMTP id 609BAF30AD47373AD799;
  Fri, 15 Nov 2019 21:35:20 +0800 (CST)
 Received: from huawei.com (10.90.53.225) by DGGEMS404-HUB.china.huawei.com
  (10.3.19.204) with Microsoft SMTP Server id 14.3.439.0; Fri, 15 Nov 2019
@@ -22,8 +22,8 @@ From: zhengbin <zhengbin13@huawei.com>
 To: <bskeggs@redhat.com>, <lyude@redhat.com>, <airlied@linux.ie>,
  <daniel@ffwll.ch>, <dri-devel@lists.freedesktop.org>,
  <nouveau@lists.freedesktop.org>
-Date: Fri, 15 Nov 2019 21:42:32 +0800
-Message-ID: <1573825353-86268-2-git-send-email-zhengbin13@huawei.com>
+Date: Fri, 15 Nov 2019 21:42:33 +0800
+Message-ID: <1573825353-86268-3-git-send-email-zhengbin13@huawei.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1573825353-86268-1-git-send-email-zhengbin13@huawei.com>
 References: <1573825353-86268-1-git-send-email-zhengbin13@huawei.com>
@@ -31,8 +31,8 @@ MIME-Version: 1.0
 X-Originating-IP: [10.90.53.225]
 X-CFilter-Loop: Reflected
 X-Mailman-Approved-At: Fri, 27 Dec 2019 08:13:31 +0000
-Subject: [Nouveau] [PATCH 1/2] drm/nouveau: remove set but not used variable
- 'pclks', 'width'
+Subject: [Nouveau] [PATCH 2/2] drm/nouveau: remove set but not used variable
+ 'mem'
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -52,48 +52,55 @@ Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 Fixes gcc '-Wunused-but-set-variable' warning:
 
-drivers/gpu/drm/nouveau/dispnv04/arb.c: In function nv04_calc_arb:
-drivers/gpu/drm/nouveau/dispnv04/arb.c:59:21: warning: variable pclks set but not used [-Wunused-but-set-variable]
-drivers/gpu/drm/nouveau/dispnv04/arb.c: In function nv04_calc_arb:
-drivers/gpu/drm/nouveau/dispnv04/arb.c:58:21: warning: variable width set but not used [-Wunused-but-set-variable]
+drivers/gpu/drm/nouveau/nouveau_ttm.c: In function nouveau_vram_manager_new:
+drivers/gpu/drm/nouveau/nouveau_ttm.c:66:22: warning: variable mem set but not used [-Wunused-but-set-variable]
+drivers/gpu/drm/nouveau/nouveau_ttm.c: In function nouveau_gart_manager_new:
+drivers/gpu/drm/nouveau/nouveau_ttm.c:106:22: warning: variable mem set but not used [-Wunused-but-set-variable]
 
-It is introduced by commit 6ee738610f41 ("drm/nouveau:
-Add DRM driver for NVIDIA GPUs"), but never used,
-so remove it.
+The first 'mem' is introduced by commit 9ce523cc3bf2 ("drm/nouveau:
+separate buffer object backing memory from nvkm structures"),
+but never used, so remove it.
+
+The second 'mem' is not used since commit d7722134b825 ("drm/nouveau:
+switch over to new memory and vmm interfaces")
 
 Reported-by: Hulk Robot <hulkci@huawei.com>
 Signed-off-by: zhengbin <zhengbin13@huawei.com>
 ---
- drivers/gpu/drm/nouveau/dispnv04/arb.c | 6 ++----
- 1 file changed, 2 insertions(+), 4 deletions(-)
+ drivers/gpu/drm/nouveau/nouveau_ttm.c | 4 ----
+ 1 file changed, 4 deletions(-)
 
-diff --git a/drivers/gpu/drm/nouveau/dispnv04/arb.c b/drivers/gpu/drm/nouveau/dispnv04/arb.c
-index 3624955..9d4a2d9 100644
---- a/drivers/gpu/drm/nouveau/dispnv04/arb.c
-+++ b/drivers/gpu/drm/nouveau/dispnv04/arb.c
-@@ -53,8 +53,8 @@ struct nv_sim_state {
- static void
- nv04_calc_arb(struct nv_fifo_info *fifo, struct nv_sim_state *arb)
+diff --git a/drivers/gpu/drm/nouveau/nouveau_ttm.c b/drivers/gpu/drm/nouveau/nouveau_ttm.c
+index 77a0c6a..7ca0a24 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_ttm.c
++++ b/drivers/gpu/drm/nouveau/nouveau_ttm.c
+@@ -63,14 +63,12 @@ nouveau_vram_manager_new(struct ttm_mem_type_manager *man,
  {
--	int pagemiss, cas, width, bpp;
--	int nvclks, mclks, pclks, crtpagemiss;
-+	int pagemiss, cas, bpp;
-+	int nvclks, mclks, crtpagemiss;
- 	int found, mclk_extra, mclk_loop, cbs, m1, p1;
- 	int mclk_freq, pclk_freq, nvclk_freq;
- 	int us_m, us_n, us_p, crtc_drain_rate;
-@@ -65,11 +65,9 @@ nv04_calc_arb(struct nv_fifo_info *fifo, struct nv_sim_state *arb)
- 	nvclk_freq = arb->nvclk_khz;
- 	pagemiss = arb->mem_page_miss;
- 	cas = arb->mem_latency;
--	width = arb->memory_width >> 6;
- 	bpp = arb->bpp;
- 	cbs = 128;
+ 	struct nouveau_bo *nvbo = nouveau_bo(bo);
+ 	struct nouveau_drm *drm = nouveau_bdev(bo->bdev);
+-	struct nouveau_mem *mem;
+ 	int ret;
 
--	pclks = 2;
- 	nvclks = 10;
- 	mclks = 13 + cas;
- 	mclk_extra = 3;
+ 	if (drm->client.device.info.ram_size == 0)
+ 		return -ENOMEM;
+
+ 	ret = nouveau_mem_new(&drm->master, nvbo->kind, nvbo->comp, reg);
+-	mem = nouveau_mem(reg);
+ 	if (ret)
+ 		return ret;
+
+@@ -103,11 +101,9 @@ nouveau_gart_manager_new(struct ttm_mem_type_manager *man,
+ {
+ 	struct nouveau_bo *nvbo = nouveau_bo(bo);
+ 	struct nouveau_drm *drm = nouveau_bdev(bo->bdev);
+-	struct nouveau_mem *mem;
+ 	int ret;
+
+ 	ret = nouveau_mem_new(&drm->master, nvbo->kind, nvbo->comp, reg);
+-	mem = nouveau_mem(reg);
+ 	if (ret)
+ 		return ret;
+
 --
 2.7.4
 
