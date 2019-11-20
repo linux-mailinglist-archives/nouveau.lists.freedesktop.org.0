@@ -1,89 +1,43 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 619EA12B322
-	for <lists+nouveau@lfdr.de>; Fri, 27 Dec 2019 09:16:11 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 63E6512B2EF
+	for <lists+nouveau@lfdr.de>; Fri, 27 Dec 2019 09:15:10 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 53F866E3C6;
-	Fri, 27 Dec 2019 08:14:39 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 12B776E3B0;
+	Fri, 27 Dec 2019 08:14:13 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM01-SN1-obe.outbound.protection.outlook.com
- (mail-eopbgr820084.outbound.protection.outlook.com [40.107.82.84])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 513B66E8C3;
- Tue, 19 Nov 2019 19:59:50 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=UdHKf1n6AA9fKDKdMY+ZpcHfOW9c5okOVsVstIO7j1Cn3ej+xp7rJldSgHBMForwXpsMNAjcW8Wh9ilVvuea9bVRzjRhG8isBXKgaR36CMwQVyAhtuOU7DIYxygTu2eBiOZYuwQq9ADUn+4iUmQ9AVEtiOiRmRBxIHl8blNmp8Y0s1KdphUkunI0r9HaYK96zihECC3D1bsXkSuOpHVtSKJ2Lq15i/grYitrV7/dQ3XmG8hDVdECiedkqPooS401ze+ek1Le15FOkq/NyVXCFj03pSABpfcxKFjAA8M53wKV+nfWpjoHoWApJPBZYdVC5rjRRN0J6kRjZnx2QOScwg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=mSYXDeMAN05psprQO41iWZ2GrM0UOoxGgU0DoZIN7Hk=;
- b=MrYEf+pOeIKc2Sa9GfL89/H0EwbDxAYFayvQG3YWQGs7R/KC/6V/4w2dVZYBCFnoaOEyp3RauwZg0mh4Psv5nGwo7tFAQWr1vOvkeMFzLGGPI9W1SsiapRrN72+/FCr6SXeW2sTHGsnAfyDTQ4gmf6VU/nE0GJJuFZpirCKlKJeHbztVaIHi/Qrhqc2nRLfhj5ImDzVazQlxbNQ98uC7KanUVAAd2Af9KYU4IkG3ppLad0UsmpYR7RaEB0nHO3IPnouJwe91typBd+th+AuibL4kb/DlDCz/R34i/arAgdls0ZvLlNG/3GfOcB6jg4BTCZJZR4Yc+O7XHykZI7DtTQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amdcloud.onmicrosoft.com; s=selector2-amdcloud-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=mSYXDeMAN05psprQO41iWZ2GrM0UOoxGgU0DoZIN7Hk=;
- b=oUhw6Ft0Os6VotvTuoMsrkZO4buKsU4VPP59ZCG2T4h+3iRmGxE+psdCdL8Ic50eqFnSBfvAB85rvYUirJq4QpGpcXd902W9w6QIl0VlXCBx8K5eBsaZes95ewKHZs2Q8wslsFXyDaBLa6FTQvK/fUdF3s+d426kFld4TKziot0=
-Authentication-Results: spf=none (sender IP is )
- smtp.mailfrom=Philip.Yang@amd.com; 
-Received: from MN2PR12MB4030.namprd12.prod.outlook.com (10.255.86.25) by
- MN2PR12MB4174.namprd12.prod.outlook.com (10.255.224.140) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.2474.16; Tue, 19 Nov 2019 19:59:47 +0000
-Received: from MN2PR12MB4030.namprd12.prod.outlook.com
- ([fe80::b9e3:2087:df4d:1e0a]) by MN2PR12MB4030.namprd12.prod.outlook.com
- ([fe80::b9e3:2087:df4d:1e0a%6]) with mapi id 15.20.2451.031; Tue, 19 Nov 2019
- 19:59:47 +0000
-To: Jason Gunthorpe <jgg@ziepe.ca>, linux-mm@kvack.org,
- Jerome Glisse <jglisse@redhat.com>, Ralph Campbell <rcampbell@nvidia.com>,
- John Hubbard <jhubbard@nvidia.com>, Felix.Kuehling@amd.com
-References: <20191112202231.3856-1-jgg@ziepe.ca>
- <20191112202231.3856-13-jgg@ziepe.ca>
-From: Philip Yang <philip.yang@amd.com>
-Message-ID: <34d0a0d6-9800-be3f-c1f0-4d87b1b4cbdb@amd.com>
-Date: Tue, 19 Nov 2019 14:59:43 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.1.0
-In-Reply-To: <20191112202231.3856-13-jgg@ziepe.ca>
-Content-Language: en-GB
-X-ClientProxiedBy: YT1PR01CA0036.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01::49)
- To MN2PR12MB4030.namprd12.prod.outlook.com
- (2603:10b6:208:159::25)
+Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8DDF96E1C4;
+ Wed, 20 Nov 2019 10:18:21 +0000 (UTC)
+X-Amp-Result: UNKNOWN
+X-Amp-Original-Verdict: FILE UNKNOWN
+X-Amp-File-Uploaded: False
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+ by orsmga103.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+ 20 Nov 2019 02:18:20 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.69,221,1571727600"; d="scan'208";a="215747198"
+Received: from lahna.fi.intel.com (HELO lahna) ([10.237.72.163])
+ by fmsmga001.fm.intel.com with SMTP; 20 Nov 2019 02:18:17 -0800
+Received: by lahna (sSMTP sendmail emulation); Wed, 20 Nov 2019 12:18:16 +0200
+Date: Wed, 20 Nov 2019 12:18:16 +0200
+From: Mika Westerberg <mika.westerberg@intel.com>
+To: Karol Herbst <kherbst@redhat.com>
+Message-ID: <20191120101816.GX11621@lahna.fi.intel.com>
+References: <20191017121901.13699-1-kherbst@redhat.com>
+ <20191119214955.GA223696@google.com>
+ <CACO55tu+8VeyMw1Lb6QvNspaJm9LDgoRbooVhr0s3v9uBt=feg@mail.gmail.com>
 MIME-Version: 1.0
-X-Originating-IP: [165.204.55.251]
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-HT: Tenant
-X-MS-Office365-Filtering-Correlation-Id: 6fbe2520-1a7c-4eee-cbda-08d76d2b077d
-X-MS-TrafficTypeDiagnostic: MN2PR12MB4174:
-X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: <MN2PR12MB417438D013404B150B256E6BE64C0@MN2PR12MB4174.namprd12.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:6430;
-X-Forefront-PRVS: 022649CC2C
-X-Forefront-Antispam-Report: SFV:NSPM;
- SFS:(10009020)(4636009)(366004)(376002)(396003)(136003)(39860400002)(346002)(189003)(199004)(6486002)(316002)(6436002)(30864003)(229853002)(5660300002)(14444005)(6512007)(31696002)(8936002)(76176011)(4326008)(54906003)(110136005)(58126008)(52116002)(86362001)(23676004)(2486003)(8676002)(81156014)(81166006)(99286004)(6246003)(186003)(36756003)(31686004)(4001150100001)(478600001)(386003)(7416002)(26005)(66946007)(446003)(66556008)(66476007)(6636002)(6506007)(53546011)(305945005)(25786009)(47776003)(6666004)(7736002)(230700001)(486006)(3846002)(2616005)(476003)(6116002)(14454004)(65806001)(65956001)(66066001)(44832011)(2906002)(50466002)(11346002);
- DIR:OUT; SFP:1101; SCL:1; SRVR:MN2PR12MB4174;
- H:MN2PR12MB4030.namprd12.prod.outlook.com; FPR:; SPF:None; LANG:en;
- PTR:InfoNoRecords; MX:1; A:1; 
-Received-SPF: None (protection.outlook.com: amd.com does not designate
- permitted sender hosts)
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: cq0PTmd2uTnCej6+cYyMY2/tqp+k2CbRZxPw4YGXc6sufNVJcz8vWxvh2fHbdOT6+io3V2R3UYaXQ553WC03zX5TAs6e2yG8BICHdmTqfsKbzZMj8UDQM5YTnvM2Zr31m/qfnzLj55Jo5OHeytiyFP1srL5pc8Ht8PsxRYmaiKdfIX4+PmjJQFvnkubjzsG85AlvaUZLufHJ4Ew9zmGXMx+I1yvhKa/9nahsQbK2VKaxzOP+IOHW8lUOlIOvoz2OfyGz+3s+V4i4VnI1lSbHUobYpx3eOuJX8qfPSsuIxQqZHwKvxNUIfXkKf9ogemesq58TwcSuADzPWEZibv49XK3PmJ7Snfq7wD69cjGr++9mMF4A11iz7x3drJo493g+NvPQmgPFGOIjXgtbXgZr7aFJdFtrKtkVYynm+sktbsX1AuAXCr5RNQgHX04mdUKr
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6fbe2520-1a7c-4eee-cbda-08d76d2b077d
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Nov 2019 19:59:47.6968 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ij3w6ScInDA8Ei9N9WcygQqTAagFF/062xPkSG+Mrl//z9mKl/1nsYwhEivC5daa
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB4174
-X-Mailman-Approved-At: Fri, 27 Dec 2019 08:13:31 +0000
-Subject: Re: [Nouveau] [PATCH v3 12/14] drm/amdgpu: Use
- mmu_interval_notifier instead of hmm_mirror
+Content-Disposition: inline
+In-Reply-To: <CACO55tu+8VeyMw1Lb6QvNspaJm9LDgoRbooVhr0s3v9uBt=feg@mail.gmail.com>
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
+User-Agent: Mutt/1.12.1 (2019-06-15)
+X-Mailman-Approved-At: Fri, 27 Dec 2019 08:13:30 +0000
+Subject: Re: [Nouveau] [PATCH v4] pci: prevent putting nvidia GPUs into
+ lower device states on certain intel bridges
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -95,569 +49,315 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Juergen Gross <jgross@suse.com>, David Zhou <David1.Zhou@amd.com>,
- Mike Marciniszyn <mike.marciniszyn@intel.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
- linux-rdma@vger.kernel.org, nouveau@lists.freedesktop.org,
- Dennis Dalessandro <dennis.dalessandro@intel.com>,
- amd-gfx@lists.freedesktop.org, Christoph Hellwig <hch@infradead.org>,
- Jason Gunthorpe <jgg@mellanox.com>, dri-devel@lists.freedesktop.org,
- Alex Deucher <alexander.deucher@amd.com>, xen-devel@lists.xenproject.org,
- Boris Ostrovsky <boris.ostrovsky@oracle.com>, Petr Cvek <petrcvekcz@gmail.com>,
- =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
- Ben Skeggs <bskeggs@redhat.com>
+Cc: Linux PM <linux-pm@vger.kernel.org>, Linux PCI <linux-pci@vger.kernel.org>,
+ Mario.Limonciello@dell.com, "Rafael J . Wysocki" <rjw@rjwysocki.net>,
+ LKML <linux-kernel@vger.kernel.org>,
+ dri-devel <dri-devel@lists.freedesktop.org>,
+ Bjorn Helgaas <helgaas@kernel.org>, nouveau <nouveau@lists.freedesktop.org>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-I test v3 and it works fine.
+Hi Karol,
 
-Regards,
-Philip
+On Tue, Nov 19, 2019 at 11:26:45PM +0100, Karol Herbst wrote:
+> On Tue, Nov 19, 2019 at 10:50 PM Bjorn Helgaas <helgaas@kernel.org> wrote:
+> >
+> > [+cc Dave]
+> >
+> > On Thu, Oct 17, 2019 at 02:19:01PM +0200, Karol Herbst wrote:
+> > > Fixes state transitions of Nvidia Pascal GPUs from D3cold into higher device
+> > > states.
+> > >
+> > > v2: convert to pci_dev quirk
+> > >     put a proper technical explanation of the issue as a in-code comment
+> > > v3: disable it only for certain combinations of intel and nvidia hardware
+> > > v4: simplify quirk by setting flag on the GPU itself
+> >
+> > I have zero confidence that we understand the real problem, but we do
+> > need to do something with this.  I'll merge it for v5.5 if we get the
+> > minor procedural stuff below straightened out.
+> >
+> 
+> Thanks, and I agree with your statement, but at this point I think
+> only Intel can help out digging deeper as I see no way to debug this
+> further.
 
-On 2019-11-12 3:22 p.m., Jason Gunthorpe wrote:
-> From: Jason Gunthorpe <jgg@mellanox.com>
+I don't have anything against this patch, as long as the quirk stays
+limited to the particular root port leading to the NVIDIA GPU. The
+reason why I think it should to be limited is that I'm pretty certain
+the problem is not in the root port itself. I have here a KBL based
+Thinkpad X1 Carbon 6th gen that can put the TBT controller into D3cold
+(it is connected to PCH root port) and it wakes up there just fine, so
+don't want to break that.
+
+Now, PCIe devices cannot go into D3cold all by themselves. They always
+need help from the platform side which is ACPI in this case. This is
+done by having the device to have _PR3 method that returns one or more
+power resources that the OS is supposed to turn off when the device is
+put into D3cold. All of that is implemented as form of ACPI methods that
+pretty much do the hardware specific things that are outside of PCIe
+spec to get the device into D3cold. At high level the _OFF() method
+causes the root port to broadcast PME_Turn_Off message that results the
+link to enter L2/3 ready, it then asserts PERST, configures WAKE (both
+can be GPIOs) and finally removes power (if the link goes into L3,
+otherwise it goes into L2).
+
+I think this is where the problem actually lies - the ASL methods that
+are used to put the device into D3cold and back. We know that in Windows
+this all works fine so unless Windows quirks the root port the same way
+there is another reason behind this.
+
+In case of Dell XPS 9560 (IIRC that's the machine you have) the
+corresponding power resource is called \_SB.PCI0.PEG0.PG00 and its
+_ON/_OFF methods end up calling PGON()/PGOF() accordingly. The methods
+itself do lots of things and it is hard to follow the dissassembled
+ASL which does not have any comments but there are couple of things that
+stand out where we may go into a different path. One of them is this in
+the PGOF() method:
+
+   If (((OSYS <= 0x07D9) || ((OSYS == 0x07DF) && (_REV == 0x05))))
+
+The ((OSYS == 0x07DF) && (_REV == 0x05)) checks specifically for Linux
+(see [1] and 18d78b64fddc ("ACPI / init: Make it possible to override
+_REV")) so it might be that Dell people tested this at some point in
+Linux as well. Added Mario in case he has any ideas.
+
+Previously I suggested you to try the ACPI method tracing to see what
+happens inside PGOF(). Did you have time to try it? It may provide more
+information about that is happening inside those methods and hopefully
+point us to the root cause.
+
+Also if you haven't tried already passing acpi_rev_override in the
+command line makes the _REV to return 5 so it should go into the "Linux"
+path in PGOF().
+
+[1] https://www.kernel.org/doc/html/latest/firmware-guide/acpi/osi.html#do-not-use-rev
+
+> > > Signed-off-by: Karol Herbst <kherbst@redhat.com>
+> > > Cc: Bjorn Helgaas <bhelgaas@google.com>
+> > > Cc: Lyude Paul <lyude@redhat.com>
+> > > Cc: Rafael J. Wysocki <rjw@rjwysocki.net>
+> > > Cc: Mika Westerberg <mika.westerberg@intel.com>
+> > > Cc: linux-pci@vger.kernel.org
+> > > Cc: linux-pm@vger.kernel.org
+> > > Cc: dri-devel@lists.freedesktop.org
+> > > Cc: nouveau@lists.freedesktop.org
+> > > ---
+> > >  drivers/pci/pci.c    |  7 ++++++
+> > >  drivers/pci/quirks.c | 53 ++++++++++++++++++++++++++++++++++++++++++++
+> > >  include/linux/pci.h  |  1 +
+> > >  3 files changed, 61 insertions(+)
+> > >
+> > > diff --git a/drivers/pci/pci.c b/drivers/pci/pci.c
+> > > index b97d9e10c9cc..02e71e0bcdd7 100644
+> > > --- a/drivers/pci/pci.c
+> > > +++ b/drivers/pci/pci.c
+> > > @@ -850,6 +850,13 @@ static int pci_raw_set_power_state(struct pci_dev *dev, pci_power_t state)
+> > >          || (state == PCI_D2 && !dev->d2_support))
+> > >               return -EIO;
+> > >
+> > > +     /*
+> > > +      * check if we have a bad combination of bridge controller and nvidia
+> > > +         * GPU, see quirk_broken_nv_runpm for more info
+> >
+> > Whitespace damage.  Capitalized incorrectly (see other comments
+> > nearby).
+> >
+> > > +      */
+> > > +     if (state != PCI_D0 && dev->broken_nv_runpm)
+> > > +             return 0;
+> > > +
+> > >       pci_read_config_word(dev, dev->pm_cap + PCI_PM_CTRL, &pmcsr);
+> > >
+> > >       /*
+> > > diff --git a/drivers/pci/quirks.c b/drivers/pci/quirks.c
+> > > index 44c4ae1abd00..0006c9e37b6f 100644
+> > > --- a/drivers/pci/quirks.c
+> > > +++ b/drivers/pci/quirks.c
+> > > @@ -5268,3 +5268,56 @@ static void quirk_reset_lenovo_thinkpad_p50_nvgpu(struct pci_dev *pdev)
+> > >  DECLARE_PCI_FIXUP_CLASS_FINAL(PCI_VENDOR_ID_NVIDIA, 0x13b1,
+> > >                             PCI_CLASS_DISPLAY_VGA, 8,
+> > >                             quirk_reset_lenovo_thinkpad_p50_nvgpu);
+> > > +
+> > > +/*
+> > > + * Some Intel PCIe bridges cause devices to disappear from the PCIe bus after
+> > > + * those were put into D3cold state if they were put into a non D0 PCI PM
+> > > + * device state before doing so.
+> >
+> > A device in D3cold is off the bus by definition.
+> >
+> > IIUC the problem is that the sequence D0 -> D3hot -> D3cold -> D0 for
+> > the GPU fails in the transition back to D0, while D0 -> D3cold -> D0
+> > works fine.
+> >
+> > So I guess the problem is that we can put the device in D3cold with no
+> > problem, but if we put in D3hot before going to D3cold, the device
+> > never comes back to D0.  Right?
+> >
 > 
-> Convert the collision-retry lock around hmm_range_fault to use the one now
-> provided by the mmu_interval notifier.
+> correct. It By the way, it doesn't matter if I put the device into D1
+> instead, as long as the device is not in D0 state before putting it
+> into D3cold, it fails.
 > 
-> Although this driver does not seem to use the collision retry lock that
-> hmm provides correctly, it can still be converted over to use the
-> mmu_interval_notifier api instead of hmm_mirror without too much trouble.
+> > > + * This leads to various issue different issues which all manifest differently,
+> >
+> > s/issue different//
+> >
+> > Actually, I think there's only one underlying issue with several
+> > manifestations.
+> >
+> > > + * but have the same root cause:
+> > > + *  - AIML code execution hits an infinite loop (as the coe waits on device
+> > > + *    memory to change).
+> >
+> > s/AIML/AML/
+> > s/coe/code/
+> >
+> > > + *  - kernel crashes, as all pci reads return -1, which most code isn't able
+> > > + *    to handle well enough.
+> >
+> > s/pci/PCI/
+> >
+> > More details about these crashes would be useful as we look at places
+> > that *should* be able to handle errors like this.
+> >
 > 
-> This also deletes another place where a driver is associating additional
-> data (struct amdgpu_mn) with a mmu_struct.
+> makes sense, I could ,orthogonal to this, make the code more robust if
+> we hit issues like this in the future. What I am mostly wondering
+> about is, why pci core doesn't give up if the device doesn't come back
+> from D3cold? It sounds like, that the most sane thing to do here is to
+> just give up and fail runtime_resume and report errors back to
+> userspace trying to make use of the devices.
 > 
-> Signed-off-by: Philip Yang <Philip.Yang@amd.com>
-> Reviewed-by: Philip Yang <Philip.Yang@amd.com>
-> Tested-by: Philip Yang <Philip.Yang@amd.com>
-> Signed-off-by: Jason Gunthorpe <jgg@mellanox.com>
-> ---
->   .../gpu/drm/amd/amdgpu/amdgpu_amdkfd_gpuvm.c  |   4 +
->   drivers/gpu/drm/amd/amdgpu/amdgpu_cs.c        |  14 +-
->   drivers/gpu/drm/amd/amdgpu/amdgpu_mn.c        | 148 ++----------------
->   drivers/gpu/drm/amd/amdgpu/amdgpu_mn.h        |  49 ------
->   drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c       | 116 ++++++++------
->   5 files changed, 94 insertions(+), 237 deletions(-)
+> > > + *  - sudden shutdowns, as the kernel identified an unrecoverable error after
+> > > + *    userspace tries to access the GPU.
+> >
+> > This doesn't fit with the others and more details might be
+> > informative here as well.
+> >
 > 
-> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_amdkfd_gpuvm.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_amdkfd_gpuvm.c
-> index 47700302a08b7f..1bcedb9b477dce 100644
-> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_amdkfd_gpuvm.c
-> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_amdkfd_gpuvm.c
-> @@ -1738,6 +1738,10 @@ static int update_invalid_user_pages(struct amdkfd_process_info *process_info,
->   			return ret;
->   		}
->   
-> +		/*
-> +		 * FIXME: Cannot ignore the return code, must hold
-> +		 * notifier_lock
-> +		 */
->   		amdgpu_ttm_tt_get_user_pages_done(bo->tbo.ttm);
->   
->   		/* Mark the BO as valid unless it was invalidated
-> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_cs.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_cs.c
-> index 82823d9a8ba887..22c989bca7514c 100644
-> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_cs.c
-> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_cs.c
-> @@ -603,8 +603,6 @@ static int amdgpu_cs_parser_bos(struct amdgpu_cs_parser *p,
->   		e->tv.num_shared = 2;
->   
->   	amdgpu_bo_list_get_list(p->bo_list, &p->validated);
-> -	if (p->bo_list->first_userptr != p->bo_list->num_entries)
-> -		p->mn = amdgpu_mn_get(p->adev, AMDGPU_MN_TYPE_GFX);
->   
->   	INIT_LIST_HEAD(&duplicates);
->   	amdgpu_vm_get_pd_bo(&fpriv->vm, &p->validated, &p->vm_pd);
-> @@ -1287,11 +1285,11 @@ static int amdgpu_cs_submit(struct amdgpu_cs_parser *p,
->   	if (r)
->   		goto error_unlock;
->   
-> -	/* No memory allocation is allowed while holding the mn lock.
-> -	 * p->mn is hold until amdgpu_cs_submit is finished and fence is added
-> -	 * to BOs.
-> +	/* No memory allocation is allowed while holding the notifier lock.
-> +	 * The lock is held until amdgpu_cs_submit is finished and fence is
-> +	 * added to BOs.
->   	 */
-> -	amdgpu_mn_lock(p->mn);
-> +	mutex_lock(&p->adev->notifier_lock);
->   
->   	/* If userptr are invalidated after amdgpu_cs_parser_bos(), return
->   	 * -EAGAIN, drmIoctl in libdrm will restart the amdgpu_cs_ioctl.
-> @@ -1334,13 +1332,13 @@ static int amdgpu_cs_submit(struct amdgpu_cs_parser *p,
->   	amdgpu_vm_move_to_lru_tail(p->adev, &fpriv->vm);
->   
->   	ttm_eu_fence_buffer_objects(&p->ticket, &p->validated, p->fence);
-> -	amdgpu_mn_unlock(p->mn);
-> +	mutex_unlock(&p->adev->notifier_lock);
->   
->   	return 0;
->   
->   error_abort:
->   	drm_sched_job_cleanup(&job->base);
-> -	amdgpu_mn_unlock(p->mn);
-> +	mutex_unlock(&p->adev->notifier_lock);
->   
->   error_unlock:
->   	amdgpu_job_free(job);
-> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_mn.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_mn.c
-> index 9fe1c31ce17a30..828b5167ff128f 100644
-> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_mn.c
-> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_mn.c
-> @@ -50,28 +50,6 @@
->   #include "amdgpu.h"
->   #include "amdgpu_amdkfd.h"
->   
-> -/**
-> - * amdgpu_mn_lock - take the write side lock for this notifier
-> - *
-> - * @mn: our notifier
-> - */
-> -void amdgpu_mn_lock(struct amdgpu_mn *mn)
-> -{
-> -	if (mn)
-> -		down_write(&mn->lock);
-> -}
-> -
-> -/**
-> - * amdgpu_mn_unlock - drop the write side lock for this notifier
-> - *
-> - * @mn: our notifier
-> - */
-> -void amdgpu_mn_unlock(struct amdgpu_mn *mn)
-> -{
-> -	if (mn)
-> -		up_write(&mn->lock);
-> -}
-> -
->   /**
->    * amdgpu_mn_invalidate_gfx - callback to notify about mm change
->    *
-> @@ -94,6 +72,9 @@ static bool amdgpu_mn_invalidate_gfx(struct mmu_interval_notifier *mni,
->   		return false;
->   
->   	mutex_lock(&adev->notifier_lock);
-> +
-> +	mmu_interval_set_seq(mni, cur_seq);
-> +
->   	r = dma_resv_wait_timeout_rcu(bo->tbo.base.resv, true, false,
->   				      MAX_SCHEDULE_TIMEOUT);
->   	mutex_unlock(&adev->notifier_lock);
-> @@ -127,6 +108,9 @@ static bool amdgpu_mn_invalidate_hsa(struct mmu_interval_notifier *mni,
->   		return false;
->   
->   	mutex_lock(&adev->notifier_lock);
-> +
-> +	mmu_interval_set_seq(mni, cur_seq);
-> +
->   	amdgpu_amdkfd_evict_userptr(bo->kfd_bo, bo->notifier.mm);
->   	mutex_unlock(&adev->notifier_lock);
->   
-> @@ -137,92 +121,6 @@ static const struct mmu_interval_notifier_ops amdgpu_mn_hsa_ops = {
->   	.invalidate = amdgpu_mn_invalidate_hsa,
->   };
->   
-> -static int amdgpu_mn_sync_pagetables(struct hmm_mirror *mirror,
-> -				     const struct mmu_notifier_range *update)
-> -{
-> -	struct amdgpu_mn *amn = container_of(mirror, struct amdgpu_mn, mirror);
-> -
-> -	if (!mmu_notifier_range_blockable(update))
-> -		return -EAGAIN;
-> -
-> -	down_read(&amn->lock);
-> -	up_read(&amn->lock);
-> -	return 0;
-> -}
-> -
-> -/* Low bits of any reasonable mm pointer will be unused due to struct
-> - * alignment. Use these bits to make a unique key from the mm pointer
-> - * and notifier type.
-> - */
-> -#define AMDGPU_MN_KEY(mm, type) ((unsigned long)(mm) + (type))
-> -
-> -static struct hmm_mirror_ops amdgpu_hmm_mirror_ops[] = {
-> -	[AMDGPU_MN_TYPE_GFX] = {
-> -		.sync_cpu_device_pagetables = amdgpu_mn_sync_pagetables,
-> -	},
-> -	[AMDGPU_MN_TYPE_HSA] = {
-> -		.sync_cpu_device_pagetables = amdgpu_mn_sync_pagetables,
-> -	},
-> -};
-> -
-> -/**
-> - * amdgpu_mn_get - create HMM mirror context
-> - *
-> - * @adev: amdgpu device pointer
-> - * @type: type of MMU notifier context
-> - *
-> - * Creates a HMM mirror context for current->mm.
-> - */
-> -struct amdgpu_mn *amdgpu_mn_get(struct amdgpu_device *adev,
-> -				enum amdgpu_mn_type type)
-> -{
-> -	struct mm_struct *mm = current->mm;
-> -	struct amdgpu_mn *amn;
-> -	unsigned long key = AMDGPU_MN_KEY(mm, type);
-> -	int r;
-> -
-> -	mutex_lock(&adev->mn_lock);
-> -	if (down_write_killable(&mm->mmap_sem)) {
-> -		mutex_unlock(&adev->mn_lock);
-> -		return ERR_PTR(-EINTR);
-> -	}
-> -
-> -	hash_for_each_possible(adev->mn_hash, amn, node, key)
-> -		if (AMDGPU_MN_KEY(amn->mirror.hmm->mmu_notifier.mm,
-> -				  amn->type) == key)
-> -			goto release_locks;
-> -
-> -	amn = kzalloc(sizeof(*amn), GFP_KERNEL);
-> -	if (!amn) {
-> -		amn = ERR_PTR(-ENOMEM);
-> -		goto release_locks;
-> -	}
-> -
-> -	amn->adev = adev;
-> -	init_rwsem(&amn->lock);
-> -	amn->type = type;
-> -
-> -	amn->mirror.ops = &amdgpu_hmm_mirror_ops[type];
-> -	r = hmm_mirror_register(&amn->mirror, mm);
-> -	if (r)
-> -		goto free_amn;
-> -
-> -	hash_add(adev->mn_hash, &amn->node, AMDGPU_MN_KEY(mm, type));
-> -
-> -release_locks:
-> -	up_write(&mm->mmap_sem);
-> -	mutex_unlock(&adev->mn_lock);
-> -
-> -	return amn;
-> -
-> -free_amn:
-> -	up_write(&mm->mmap_sem);
-> -	mutex_unlock(&adev->mn_lock);
-> -	kfree(amn);
-> -
-> -	return ERR_PTR(r);
-> -}
-> -
->   /**
->    * amdgpu_mn_register - register a BO for notifier updates
->    *
-> @@ -235,12 +133,12 @@ struct amdgpu_mn *amdgpu_mn_get(struct amdgpu_device *adev,
->   int amdgpu_mn_register(struct amdgpu_bo *bo, unsigned long addr)
->   {
->   	if (bo->kfd_bo)
-> -		bo->notifier.ops = &amdgpu_mn_hsa_ops;
-> -	else
-> -		bo->notifier.ops = &amdgpu_mn_gfx_ops;
-> -
-> -	return mmu_interval_notifier_insert(&bo->notifier, addr,
-> -					    amdgpu_bo_size(bo), current->mm);
-> +		return mmu_interval_notifier_insert(&bo->notifier, current->mm,
-> +						    addr, amdgpu_bo_size(bo),
-> +						    &amdgpu_mn_hsa_ops);
-> +	return mmu_interval_notifier_insert(&bo->notifier, current->mm, addr,
-> +					    amdgpu_bo_size(bo),
-> +					    &amdgpu_mn_gfx_ops);
->   }
->   
->   /**
-> @@ -257,25 +155,3 @@ void amdgpu_mn_unregister(struct amdgpu_bo *bo)
->   	mmu_interval_notifier_remove(&bo->notifier);
->   	bo->notifier.mm = NULL;
->   }
-> -
-> -/* flags used by HMM internal, not related to CPU/GPU PTE flags */
-> -static const uint64_t hmm_range_flags[HMM_PFN_FLAG_MAX] = {
-> -		(1 << 0), /* HMM_PFN_VALID */
-> -		(1 << 1), /* HMM_PFN_WRITE */
-> -		0 /* HMM_PFN_DEVICE_PRIVATE */
-> -};
-> -
-> -static const uint64_t hmm_range_values[HMM_PFN_VALUE_MAX] = {
-> -		0xfffffffffffffffeUL, /* HMM_PFN_ERROR */
-> -		0, /* HMM_PFN_NONE */
-> -		0xfffffffffffffffcUL /* HMM_PFN_SPECIAL */
-> -};
-> -
-> -void amdgpu_hmm_init_range(struct hmm_range *range)
-> -{
-> -	if (range) {
-> -		range->flags = hmm_range_flags;
-> -		range->values = hmm_range_values;
-> -		range->pfn_shift = PAGE_SHIFT;
-> -	}
-> -}
-> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_mn.h b/drivers/gpu/drm/amd/amdgpu/amdgpu_mn.h
-> index d73ab2947b22b2..a292238f75ebae 100644
-> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_mn.h
-> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_mn.h
-> @@ -30,59 +30,10 @@
->   #include <linux/workqueue.h>
->   #include <linux/interval_tree.h>
->   
-> -enum amdgpu_mn_type {
-> -	AMDGPU_MN_TYPE_GFX,
-> -	AMDGPU_MN_TYPE_HSA,
-> -};
-> -
-> -/**
-> - * struct amdgpu_mn
-> - *
-> - * @adev: amdgpu device pointer
-> - * @type: type of MMU notifier
-> - * @work: destruction work item
-> - * @node: hash table node to find structure by adev and mn
-> - * @lock: rw semaphore protecting the notifier nodes
-> - * @mirror: HMM mirror function support
-> - *
-> - * Data for each amdgpu device and process address space.
-> - */
-> -struct amdgpu_mn {
-> -	/* constant after initialisation */
-> -	struct amdgpu_device	*adev;
-> -	enum amdgpu_mn_type	type;
-> -
-> -	/* only used on destruction */
-> -	struct work_struct	work;
-> -
-> -	/* protected by adev->mn_lock */
-> -	struct hlist_node	node;
-> -
-> -	/* objects protected by lock */
-> -	struct rw_semaphore	lock;
-> -
-> -#ifdef CONFIG_HMM_MIRROR
-> -	/* HMM mirror */
-> -	struct hmm_mirror	mirror;
-> -#endif
-> -};
-> -
->   #if defined(CONFIG_HMM_MIRROR)
-> -void amdgpu_mn_lock(struct amdgpu_mn *mn);
-> -void amdgpu_mn_unlock(struct amdgpu_mn *mn);
-> -struct amdgpu_mn *amdgpu_mn_get(struct amdgpu_device *adev,
-> -				enum amdgpu_mn_type type);
->   int amdgpu_mn_register(struct amdgpu_bo *bo, unsigned long addr);
->   void amdgpu_mn_unregister(struct amdgpu_bo *bo);
-> -void amdgpu_hmm_init_range(struct hmm_range *range);
->   #else
-> -static inline void amdgpu_mn_lock(struct amdgpu_mn *mn) {}
-> -static inline void amdgpu_mn_unlock(struct amdgpu_mn *mn) {}
-> -static inline struct amdgpu_mn *amdgpu_mn_get(struct amdgpu_device *adev,
-> -					      enum amdgpu_mn_type type)
-> -{
-> -	return NULL;
-> -}
->   static inline int amdgpu_mn_register(struct amdgpu_bo *bo, unsigned long addr)
->   {
->   	DRM_WARN_ONCE("HMM_MIRROR kernel config option is not enabled, "
-> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c
-> index c0e41f1f0c2365..c41a26bde852e6 100644
-> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c
-> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c
-> @@ -773,6 +773,20 @@ struct amdgpu_ttm_tt {
->   #endif
->   };
->   
-> +#ifdef CONFIG_DRM_AMDGPU_USERPTR
-> +/* flags used by HMM internal, not related to CPU/GPU PTE flags */
-> +static const uint64_t hmm_range_flags[HMM_PFN_FLAG_MAX] = {
-> +	(1 << 0), /* HMM_PFN_VALID */
-> +	(1 << 1), /* HMM_PFN_WRITE */
-> +	0 /* HMM_PFN_DEVICE_PRIVATE */
-> +};
-> +
-> +static const uint64_t hmm_range_values[HMM_PFN_VALUE_MAX] = {
-> +	0xfffffffffffffffeUL, /* HMM_PFN_ERROR */
-> +	0, /* HMM_PFN_NONE */
-> +	0xfffffffffffffffcUL /* HMM_PFN_SPECIAL */
-> +};
-> +
->   /**
->    * amdgpu_ttm_tt_get_user_pages - get device accessible pages that back user
->    * memory and start HMM tracking CPU page table update
-> @@ -780,29 +794,28 @@ struct amdgpu_ttm_tt {
->    * Calling function must call amdgpu_ttm_tt_userptr_range_done() once and only
->    * once afterwards to stop HMM tracking
->    */
-> -#if IS_ENABLED(CONFIG_DRM_AMDGPU_USERPTR)
-> -
-> -#define MAX_RETRY_HMM_RANGE_FAULT	16
-> -
->   int amdgpu_ttm_tt_get_user_pages(struct amdgpu_bo *bo, struct page **pages)
->   {
-> -	struct hmm_mirror *mirror = bo->mn ? &bo->mn->mirror : NULL;
->   	struct ttm_tt *ttm = bo->tbo.ttm;
->   	struct amdgpu_ttm_tt *gtt = (void *)ttm;
-> -	struct mm_struct *mm;
->   	unsigned long start = gtt->userptr;
->   	struct vm_area_struct *vma;
->   	struct hmm_range *range;
-> +	unsigned long timeout;
-> +	struct mm_struct *mm;
->   	unsigned long i;
-> -	uint64_t *pfns;
->   	int r = 0;
->   
-> -	if (unlikely(!mirror)) {
-> -		DRM_DEBUG_DRIVER("Failed to get hmm_mirror\n");
-> +	mm = bo->notifier.mm;
-> +	if (unlikely(!mm)) {
-> +		DRM_DEBUG_DRIVER("BO is not registered?\n");
->   		return -EFAULT;
->   	}
->   
-> -	mm = mirror->hmm->mmu_notifier.mm;
-> +	/* Another get_user_pages is running at the same time?? */
-> +	if (WARN_ON(gtt->range))
-> +		return -EFAULT;
-> +
->   	if (!mmget_not_zero(mm)) /* Happens during process shutdown */
->   		return -ESRCH;
->   
-> @@ -811,31 +824,23 @@ int amdgpu_ttm_tt_get_user_pages(struct amdgpu_bo *bo, struct page **pages)
->   		r = -ENOMEM;
->   		goto out;
->   	}
-> +	range->notifier = &bo->notifier;
-> +	range->flags = hmm_range_flags;
-> +	range->values = hmm_range_values;
-> +	range->pfn_shift = PAGE_SHIFT;
-> +	range->start = bo->notifier.interval_tree.start;
-> +	range->end = bo->notifier.interval_tree.last + 1;
-> +	range->default_flags = hmm_range_flags[HMM_PFN_VALID];
-> +	if (!amdgpu_ttm_tt_is_readonly(ttm))
-> +		range->default_flags |= range->flags[HMM_PFN_WRITE];
->   
-> -	pfns = kvmalloc_array(ttm->num_pages, sizeof(*pfns), GFP_KERNEL);
-> -	if (unlikely(!pfns)) {
-> +	range->pfns = kvmalloc_array(ttm->num_pages, sizeof(*range->pfns),
-> +				     GFP_KERNEL);
-> +	if (unlikely(!range->pfns)) {
->   		r = -ENOMEM;
->   		goto out_free_ranges;
->   	}
->   
-> -	amdgpu_hmm_init_range(range);
-> -	range->default_flags = range->flags[HMM_PFN_VALID];
-> -	range->default_flags |= amdgpu_ttm_tt_is_readonly(ttm) ?
-> -				0 : range->flags[HMM_PFN_WRITE];
-> -	range->pfn_flags_mask = 0;
-> -	range->pfns = pfns;
-> -	range->start = start;
-> -	range->end = start + ttm->num_pages * PAGE_SIZE;
-> -
-> -	hmm_range_register(range, mirror);
-> -
-> -	/*
-> -	 * Just wait for range to be valid, safe to ignore return value as we
-> -	 * will use the return value of hmm_range_fault() below under the
-> -	 * mmap_sem to ascertain the validity of the range.
-> -	 */
-> -	hmm_range_wait_until_valid(range, HMM_RANGE_DEFAULT_TIMEOUT);
-> -
->   	down_read(&mm->mmap_sem);
->   	vma = find_vma(mm, start);
->   	if (unlikely(!vma || start < vma->vm_start)) {
-> @@ -847,18 +852,31 @@ int amdgpu_ttm_tt_get_user_pages(struct amdgpu_bo *bo, struct page **pages)
->   		r = -EPERM;
->   		goto out_unlock;
->   	}
-> +	up_read(&mm->mmap_sem);
-> +	timeout = jiffies + msecs_to_jiffies(HMM_RANGE_DEFAULT_TIMEOUT);
->   
-> +retry:
-> +	range->notifier_seq = mmu_interval_read_begin(&bo->notifier);
-> +
-> +	down_read(&mm->mmap_sem);
->   	r = hmm_range_fault(range, 0);
->   	up_read(&mm->mmap_sem);
-> -
-> -	if (unlikely(r < 0))
-> +	if (unlikely(r <= 0)) {
-> +		/*
-> +		 * FIXME: This timeout should encompass the retry from
-> +		 * mmu_interval_read_retry() as well.
-> +		 */
-> +		if ((r == 0 || r == -EBUSY) && !time_after(jiffies, timeout))
-> +			goto retry;
->   		goto out_free_pfns;
-> +	}
->   
->   	for (i = 0; i < ttm->num_pages; i++) {
-> -		pages[i] = hmm_device_entry_to_page(range, pfns[i]);
-> +		/* FIXME: The pages cannot be touched outside the notifier_lock */
-> +		pages[i] = hmm_device_entry_to_page(range, range->pfns[i]);
->   		if (unlikely(!pages[i])) {
->   			pr_err("Page fault failed for pfn[%lu] = 0x%llx\n",
-> -			       i, pfns[i]);
-> +			       i, range->pfns[i]);
->   			r = -ENOMEM;
->   
->   			goto out_free_pfns;
-> @@ -873,8 +891,7 @@ int amdgpu_ttm_tt_get_user_pages(struct amdgpu_bo *bo, struct page **pages)
->   out_unlock:
->   	up_read(&mm->mmap_sem);
->   out_free_pfns:
-> -	hmm_range_unregister(range);
-> -	kvfree(pfns);
-> +	kvfree(range->pfns);
->   out_free_ranges:
->   	kfree(range);
->   out:
-> @@ -903,15 +920,18 @@ bool amdgpu_ttm_tt_get_user_pages_done(struct ttm_tt *ttm)
->   		"No user pages to check\n");
->   
->   	if (gtt->range) {
-> -		r = hmm_range_valid(gtt->range);
-> -		hmm_range_unregister(gtt->range);
-> -
-> +		/*
-> +		 * FIXME: Must always hold notifier_lock for this, and must
-> +		 * not ignore the return code.
-> +		 */
-> +		r = mmu_interval_read_retry(gtt->range->notifier,
-> +					 gtt->range->notifier_seq);
->   		kvfree(gtt->range->pfns);
->   		kfree(gtt->range);
->   		gtt->range = NULL;
->   	}
->   
-> -	return r;
-> +	return !r;
->   }
->   #endif
->   
-> @@ -992,10 +1012,18 @@ static void amdgpu_ttm_tt_unpin_userptr(struct ttm_tt *ttm)
->   	sg_free_table(ttm->sg);
->   
->   #if IS_ENABLED(CONFIG_DRM_AMDGPU_USERPTR)
-> -	if (gtt->range &&
-> -	    ttm->pages[0] == hmm_device_entry_to_page(gtt->range,
-> -						      gtt->range->pfns[0]))
-> -		WARN_ONCE(1, "Missing get_user_page_done\n");
-> +	if (gtt->range) {
-> +		unsigned long i;
-> +
-> +		for (i = 0; i < ttm->num_pages; i++) {
-> +			if (ttm->pages[i] !=
-> +				hmm_device_entry_to_page(gtt->range,
-> +					      gtt->range->pfns[i]))
-> +				break;
-> +		}
-> +
-> +		WARN((i == ttm->num_pages), "Missing get_user_page_done\n");
-> +	}
->   #endif
->   }
->   
+> yeah.. I try to get more infos on that. But at least for me (and it
+> might be a distribution thing) if I execute lspci, the system shuts
+> down, or at least tries to and might fail.
 > 
+> > > + * In all cases dmesg will contain at least one line like this:
+> > > + * 'nouveau 0000:01:00.0: Refused to change power state, currently in D3'
+> > > + * followed by a lot of nouveau timeouts.
+> > > + *
+> > > + * ACPI code writes bit 0x80 to the not documented PCI register 0x248 of the
+> > > + * PCIe bridge controller in order to power down the GPU.
+> > > + * Nonetheless, there are other code paths inside the ACPI firmware which use
+> > > + * other registers, which seem to work fine:
+> > > + *  - 0xbc bit 0x20 (publicly available documentation claims 'reserved')
+> > > + *  - 0xb0 bit 0x10 (link disable)
+> >
+> > All these register addresses are device-specific, so they're useless
+> > without identifying the device.  "lspci -vvnn" output would let us at
+> > least connect this with something.  It would be nice to have that info
+> > archived along with your acpidump and python repro scripts in a
+> > bugzilla with the URL in the commit log.
+> >
+> > These are likely in PCI capabilities.  If I make the leap of assuming
+> > the "link disable" bit is PCI_EXP_LNKCTL_LD, that would mean the Link
+> > Control register is at 0xb0 and the register at 0xbc would be the Root
+> > Control register, and indeed 0x20 in Root Control is reserved.
+> >
+> > I don't know what the relevance of all this is, though.  It's not
+> > remarkable that accesses to these registers work.
+> >
+> 
+> those are registers on the bridge controller and are using inside ACPI
+> to power down the link. Depending on the OS detected other methods are
+> used afaik.
+> 
+> > Unless you mean you can access these registers *after* trying to put
+> > the device back in D0, but other accesses to the device fail.  That
+> > would indeed be very interesting.
+> >
+> > > + * Changing the conditions inside the firmware by poking into the relevant
+> > > + * addresses does resolve the issue, but it seemed to be ACPI private memory
+> > > + * and not any device accessible memory at all, so there is no portable way of
+> > > + * changing the conditions.
+> > > + *
+> > > + * The only systems where this behavior can be seen are hybrid graphics laptops
+> > > + * with a secondary Nvidia Pascal GPU. It cannot be ruled out that this issue
+> > > + * only occurs in combination with listed Intel PCIe bridge controllers and
+> > > + * the mentioned GPUs or if it's only a hw bug in the bridge controller.
+> > > + *
+> > > + * But because this issue was NOT seen on laptops with an Nvidia Pascal GPU
+> > > + * and an Intel Coffee Lake SoC, there is a higher chance of there being a bug
+> > > + * in the bridge controller rather than in the GPU.
+> >
+> > I don't think we can conclude anything about where the defect is and I
+> > don't think speculating here will help future readers of this code.
+> >
+> > I *would* still like to see a bugzilla listing the systems where this
+> > problem has been seen with the "lspci -vvnn", dmesg logs, and at least
+> > one acpidump.  I think there's more to this story, and I suspect we
+> > may be revisiting this in the future.
+> >
+> 
+> one big one is https://bugzilla.kernel.org/show_bug.cgi?id=156341 but
+> it's filled with a lot of different reports, but I am sure most of
+> them point to this very issue.
+> 
+> Sadly nobody thought of checking lspci with runpm disabled.. but I
+> could check for other bugs.
+> 
+> > > + * This issue was not able to be reproduced on non laptop systems.
+> > > + */
+> > > +
+> > > +static void quirk_broken_nv_runpm(struct pci_dev *dev)
+> > > +{
+> > > +     struct pci_dev *bridge = pci_upstream_bridge(dev);
+> > > +
+> > > +     if (bridge->vendor == PCI_VENDOR_ID_INTEL &&
+> > > +         bridge->device == 0x1901)
+> >
+> > pci_upstream_bridge() may return NULL, so you need
+> >
+> >   if (bridge && bridge->vendor == PCI_VENDOR_ID_INTEL ...
+> >
+> > https://lore.kernel.org/r/20190927144421.22608-1-kherbst@redhat.com
+> > says Skylake and Kaby Lake SoCs are affected.  But here you only check
+> > for one Device ID?
+> >
+> 
+> yes, I found this bridge controllers on skylake and kaby lake SoCs,
+> but I could verify there are systems with a different architecture
+> (using the "PCI Express Root Port" devices instead of "Processor PCIe
+> Controller") do not show this issue, so I think it might indeed be
+> just this one bridge controller. I couldn't verify this issue on any
+> other so far.
+> 
+> But I could verify this issue with this one bridge controller in
+> combination with Maxwell, Pascal and Turing Nvidia GPUs.
+> 
+> > > +             dev->broken_nv_runpm = 1;
+> > > +}
+> > > +DECLARE_PCI_FIXUP_CLASS_FINAL(PCI_VENDOR_ID_NVIDIA, PCI_ANY_ID,
+> > > +                           PCI_BASE_CLASS_DISPLAY, 16,
+> > > +                           quirk_broken_nv_runpm);
+> > > diff --git a/include/linux/pci.h b/include/linux/pci.h
+> > > index ac8a6c4e1792..903a0b3a39ec 100644
+> > > --- a/include/linux/pci.h
+> > > +++ b/include/linux/pci.h
+> > > @@ -416,6 +416,7 @@ struct pci_dev {
+> > >       unsigned int    __aer_firmware_first_valid:1;
+> > >       unsigned int    __aer_firmware_first:1;
+> > >       unsigned int    broken_intx_masking:1;  /* INTx masking can't be used */
+> > > +     unsigned int    broken_nv_runpm:1;      /* some combinations of intel bridge controller and nvidia GPUs break rtd3 */
+> > >       unsigned int    io_window_1k:1;         /* Intel bridge 1K I/O windows */
+> > >       unsigned int    irq_managed:1;
+> > >       unsigned int    has_secondary_link:1;
+> > > --
+> > > 2.21.0
+> > >
+> >
+> 
+> Will send out a v5 later addressing you review. Thanks!
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
