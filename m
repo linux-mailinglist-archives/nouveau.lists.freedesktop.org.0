@@ -2,49 +2,58 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9C54712B2BC
-	for <lists+nouveau@lfdr.de>; Fri, 27 Dec 2019 09:14:23 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 517F812B310
+	for <lists+nouveau@lfdr.de>; Fri, 27 Dec 2019 09:15:46 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id AA3856E05F;
-	Fri, 27 Dec 2019 08:13:45 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 2D7746E159;
+	Fri, 27 Dec 2019 08:14:09 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A918B6F537;
- Fri, 22 Nov 2019 11:52:22 +0000 (UTC)
-X-Amp-Result: UNKNOWN
-X-Amp-Original-Verdict: FILE UNKNOWN
-X-Amp-File-Uploaded: False
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
- by orsmga103.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
- 22 Nov 2019 03:52:21 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.69,229,1571727600"; d="scan'208";a="216351746"
-Received: from lahna.fi.intel.com (HELO lahna) ([10.237.72.163])
- by fmsmga001.fm.intel.com with SMTP; 22 Nov 2019 03:52:16 -0800
-Received: by lahna (sSMTP sendmail emulation); Fri, 22 Nov 2019 13:52:15 +0200
-Date: Fri, 22 Nov 2019 13:52:14 +0200
-From: Mika Westerberg <mika.westerberg@intel.com>
-To: "Rafael J. Wysocki" <rafael@kernel.org>
-Message-ID: <20191122115214.GH11621@lahna.fi.intel.com>
-References: <CAJZ5v0h=7zu3A+ojgUSmwTH0KeXmYP5OKDL__rwkkWaWqcJcWQ@mail.gmail.com>
- <20191121112821.GU11621@lahna.fi.intel.com>
- <CAJZ5v0hQhj5Wf+piU11abC4pF26yM=XHGHAcDv8Jsgdx04aN-w@mail.gmail.com>
- <20191121114610.GW11621@lahna.fi.intel.com>
- <20191121125236.GX11621@lahna.fi.intel.com>
- <CAJZ5v0iMwhudB7O0hR-6KfRfa+_iGOY=t0Zzeh6+9OiTzeYJfA@mail.gmail.com>
- <20191121194942.GY11621@lahna.fi.intel.com>
- <CAJZ5v0gyna0b135uxBVfNXgB9v-U9-93EYe0uzsr2BukJ9OtuA@mail.gmail.com>
- <20191122103637.GA11621@lahna.fi.intel.com>
- <CAJZ5v0gifnGZcKr6mgc6C2EfqX13OyJnOac0uDxYNKN=A0cgMg@mail.gmail.com>
+Received: from hqemgate14.nvidia.com (hqemgate14.nvidia.com [216.228.121.143])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2C8F26F595;
+ Sat, 23 Nov 2019 00:54:12 +0000 (UTC)
+Received: from hqpgpgate101.nvidia.com (Not Verified[216.228.121.13]) by
+ hqemgate14.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
+ id <B5dd883360002>; Fri, 22 Nov 2019 16:54:14 -0800
+Received: from hqmail.nvidia.com ([172.20.161.6])
+ by hqpgpgate101.nvidia.com (PGP Universal service);
+ Fri, 22 Nov 2019 16:54:11 -0800
+X-PGP-Universal: processed;
+ by hqpgpgate101.nvidia.com on Fri, 22 Nov 2019 16:54:11 -0800
+Received: from rcampbell-dev.nvidia.com (172.20.13.39) by HQMAIL107.nvidia.com
+ (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3;
+ Sat, 23 Nov 2019 00:54:09 +0000
+To: Jason Gunthorpe <jgg@mellanox.com>, Christoph Hellwig <hch@infradead.org>
+References: <20191112202231.3856-1-jgg@ziepe.ca>
+ <20191112202231.3856-3-jgg@ziepe.ca> <20191113135952.GB20531@infradead.org>
+ <20191113164620.GG21728@mellanox.com>
+X-Nvconfidentiality: public
+From: Ralph Campbell <rcampbell@nvidia.com>
+Message-ID: <cc5d4d76-df30-af7f-931c-eed8a7ada122@nvidia.com>
+Date: Fri, 22 Nov 2019 16:54:08 -0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.1.0
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <CAJZ5v0gifnGZcKr6mgc6C2EfqX13OyJnOac0uDxYNKN=A0cgMg@mail.gmail.com>
-Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
-User-Agent: Mutt/1.12.1 (2019-06-15)
-X-Mailman-Approved-At: Fri, 27 Dec 2019 08:13:30 +0000
-Subject: Re: [Nouveau] [PATCH v4] pci: prevent putting nvidia GPUs into
- lower device states on certain intel bridges
+In-Reply-To: <20191113164620.GG21728@mellanox.com>
+X-Originating-IP: [172.20.13.39]
+X-ClientProxiedBy: HQMAIL107.nvidia.com (172.20.187.13) To
+ HQMAIL107.nvidia.com (172.20.187.13)
+Content-Language: en-US
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
+ t=1574470455; bh=bqXekT37QvQAiJj5unYfuv1fXYv5e9H7W3TE2f93DwM=;
+ h=X-PGP-Universal:Subject:To:CC:References:X-Nvconfidentiality:From:
+ Message-ID:Date:User-Agent:MIME-Version:In-Reply-To:
+ X-Originating-IP:X-ClientProxiedBy:Content-Type:Content-Language:
+ Content-Transfer-Encoding;
+ b=GMQ2nBly/CsGkp3ClF3KTIJ1E88XFlogU0CKPbHKGfneOIgU32/QzyXGWCpi3ck0H
+ UKmUjmgchhEpox9obaO4j3qQTTw6eSQygxCGNnxcaBK+BVpFaWRZVbrcittwqkbErs
+ WJejHNJfQFwe6vLEnMD7C7HfZFs1YXQJh9yBGuilTWYTnXvxIDNykws8BWZk+SAp+S
+ d+PBZV9+4/p5SkfIZLXh92wH6ivVMDsbJ2ewuKYIY2bfdn7qLRuC5hVl19t8Vx8dG/
+ mVxeh0/CSHrPHgSQLh5+W8xVMKh8hIouqwSbqQwT0va/zbM7kkP01A2Fu3LxQSm5r1
+ PfohngEf3JGCQ==
+X-Mailman-Approved-At: Fri, 27 Dec 2019 08:13:31 +0000
+Subject: Re: [Nouveau] [PATCH v3 02/14] mm/mmu_notifier: add an interval
+ tree notifier
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,428 +65,76 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Linux PM <linux-pm@vger.kernel.org>, Linux PCI <linux-pci@vger.kernel.org>,
- Mario Limonciello <Mario.Limonciello@dell.com>,
- "Rafael J . Wysocki" <rjw@rjwysocki.net>, LKML <linux-kernel@vger.kernel.org>,
- dri-devel <dri-devel@lists.freedesktop.org>,
- Bjorn Helgaas <helgaas@kernel.org>, nouveau <nouveau@lists.freedesktop.org>
-Content-Type: text/plain; charset="us-ascii"
+Cc: Juergen Gross <jgross@suse.com>, David Zhou <David1.Zhou@amd.com>,
+ Mike Marciniszyn <mike.marciniszyn@intel.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, Philip Yang <Philip.Yang@amd.com>,
+ Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
+ "linux-rdma@vger.kernel.org" <linux-rdma@vger.kernel.org>,
+ "Felix.Kuehling@amd.com" <Felix.Kuehling@amd.com>,
+ "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
+ "linux-mm@kvack.org" <linux-mm@kvack.org>, Dennis
+ Dalessandro <dennis.dalessandro@intel.com>,
+ "amd-gfx@lists.freedesktop.org" <amd-gfx@lists.freedesktop.org>,
+ "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
+ Alex Deucher <alexander.deucher@amd.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ Boris Ostrovsky <boris.ostrovsky@oracle.com>, Petr Cvek <petrcvekcz@gmail.com>,
+ =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
+ Ben Skeggs <bskeggs@redhat.com>
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, Nov 22, 2019 at 12:30:20PM +0100, Rafael J. Wysocki wrote:
-> On Fri, Nov 22, 2019 at 11:36 AM Mika Westerberg
-> <mika.westerberg@intel.com> wrote:
-> >
-> > On Thu, Nov 21, 2019 at 11:39:23PM +0100, Rafael J. Wysocki wrote:
-> > > On Thu, Nov 21, 2019 at 8:49 PM Mika Westerberg
-> > > <mika.westerberg@intel.com> wrote:
-> > > >
-> > > > On Thu, Nov 21, 2019 at 04:43:24PM +0100, Rafael J. Wysocki wrote:
-> > > > > On Thu, Nov 21, 2019 at 1:52 PM Mika Westerberg
-> > > > > <mika.westerberg@intel.com> wrote:
-> > > > > >
-> > > > > > On Thu, Nov 21, 2019 at 01:46:14PM +0200, Mika Westerberg wrote:
-> > > > > > > On Thu, Nov 21, 2019 at 12:34:22PM +0100, Rafael J. Wysocki wrote:
-> > > > > > > > On Thu, Nov 21, 2019 at 12:28 PM Mika Westerberg
-> > > > > > > > <mika.westerberg@intel.com> wrote:
-> > > > > > > > >
-> > > > > > > > > On Wed, Nov 20, 2019 at 11:29:33PM +0100, Rafael J. Wysocki wrote:
-> > > > > > > > > > > last week or so I found systems where the GPU was under the "PCI
-> > > > > > > > > > > Express Root Port" (name from lspci) and on those systems all of that
-> > > > > > > > > > > seems to work. So I am wondering if it's indeed just the 0x1901 one,
-> > > > > > > > > > > which also explains Mikas case that Thunderbolt stuff works as devices
-> > > > > > > > > > > never get populated under this particular bridge controller, but under
-> > > > > > > > > > > those "Root Port"s
-> > > > > > > > > >
-> > > > > > > > > > It always is a PCIe port, but its location within the SoC may matter.
-> > > > > > > > >
-> > > > > > > > > Exactly. Intel hardware has PCIe ports on CPU side (these are called
-> > > > > > > > > PEG, PCI Express Graphics, ports), and the PCH side. I think the IP is
-> > > > > > > > > still the same.
-> > > > > > > > >
-> > > > > > > > > > Also some custom AML-based power management is involved and that may
-> > > > > > > > > > be making specific assumptions on the configuration of the SoC and the
-> > > > > > > > > > GPU at the time of its invocation which unfortunately are not known to
-> > > > > > > > > > us.
-> > > > > > > > > >
-> > > > > > > > > > However, it looks like the AML invoked to power down the GPU from
-> > > > > > > > > > acpi_pci_set_power_state() gets confused if it is not in PCI D0 at
-> > > > > > > > > > that point, so it looks like that AML tries to access device memory on
-> > > > > > > > > > the GPU (beyond the PCI config space) or similar which is not
-> > > > > > > > > > accessible in PCI power states below D0.
-> > > > > > > > >
-> > > > > > > > > Or the PCI config space of the GPU when the parent root port is in D3hot
-> > > > > > > > > (as it is the case here). Also then the GPU config space is not
-> > > > > > > > > accessible.
-> > > > > > > >
-> > > > > > > > Why would the parent port be in D3hot at that point?  Wouldn't that be
-> > > > > > > > a suspend ordering violation?
-> > > > > > >
-> > > > > > > No. We put the GPU into D3hot first,
-> > > > >
-> > > > > OK
-> > > > >
-> > > > > Does this involve any AML, like a _PS3 under the GPU object?
-> > > >
-> > > > I don't see _PS3 (nor _PS0) for that object. If I read it right the GPU
-> > > > itself is not described in ACPI tables at all.
-> > >
-> > > OK
-> > >
-> > > > > > > then the root port and then turn
-> > > > > > > off the power resource (which is attached to the root port) resulting
-> > > > > > > the topology entering D3cold.
-> > > > > >
-> > > > > > I don't see that happening in the AML though.
-> > > > >
-> > > > > Which AML do you mean, specifically?  The _OFF method for the root
-> > > > > port's _PR3 power resource or something else?
-> > > >
-> > > > The root port's _OFF method for the power resource returned by its _PR3.
-> > >
-> > > OK, so without the $subject patch we (1) program the downstream
-> > > component (GPU) into D3hot, then we (2) program the port holding it
-> > > into D3hot and then we (3) let the AML (_OFF for the power resource
-> > > listed by _PR3 under the port object) run.
-> > >
-> > > Something strange happens at this point (and I guess that _OFF doesn't
-> > > even reach the point where it removes power from the port which is why
-> > > we see a lock-up).
-> >
-> > It does not necessary lead to lock-up. Here is dmesg from Karol's
-> > system:
-> >
-> >   https://gist.githubusercontent.com/karolherbst/40eb091c7b7b33ef993525de660f1a3b/raw/2380e31f566e93e5ba7c87ef545420965d4c492c/gistfile1.txt
-> >
-> > what seems to happen is that the GPU never "comes back" from D3cold so
-> > the driver starts breaking apart as the hardware is gone now.
+
+On 11/13/19 8:46 AM, Jason Gunthorpe wrote:
+> On Wed, Nov 13, 2019 at 05:59:52AM -0800, Christoph Hellwig wrote:
+>>> +int mmu_interval_notifier_insert(struct mmu_interval_notifier *mni,
+>>> +				      struct mm_struct *mm, unsigned long start,
+>>> +				      unsigned long length,
+>>> +				      const struct mmu_interval_notifier_ops *ops);
+>>> +int mmu_interval_notifier_insert_locked(
+>>> +	struct mmu_interval_notifier *mni, struct mm_struct *mm,
+>>> +	unsigned long start, unsigned long length,
+>>> +	const struct mmu_interval_notifier_ops *ops);
+>>
+>> Very inconsistent indentation between these two related functions.
 > 
-> I meant a lock-up in hardware to be precise, that causes it to stop to
-> respond (which causes it to appear to be permanently in D3cold).
+> clang-format.. The kernel config is set to prefer a line up under the
+> ( if all the arguments will fit within the 80 cols otherwise it does a
+> 1 tab continuation indent.
 > 
-> I wonder if the port accepts PCI config space writes then.
+>>> +	/*
+>>> +	 * The inv_end incorporates a deferred mechanism like
+>>> +	 * rtnl_unlock(). Adds and removes are queued until the final inv_end
+>>> +	 * happens then they are progressed. This arrangement for tree updates
+>>> +	 * is used to avoid using a blocking lock during
+>>> +	 * invalidate_range_start.
+>>
+>> Nitpick:  That comment can be condensed into one less line:
 > 
-> > > We know that skipping (1) makes things work and we kind of suspect
-> > > that skipping (3) would make things work either, but what about doing
-> > > (1) and (3) without (2)?
-> >
-> > You mean in this particular case or in general?
+> The rtnl_unlock can move up a line too. My editor is failing me on
+> this.
 > 
-> In this case in particular to start with.  Just do an experiment to
-> see what happens if we skip pci_raw_set_power_state() for the port
-> instead of skipping it for the downstream device.
+>>> +	/*
+>>> +	 * TODO: Since we already have a spinlock above, this would be faster
+>>> +	 * as wake_up_q
+>>> +	 */
+>>> +	if (need_wake)
+>>> +		wake_up_all(&mmn_mm->wq);
+>>
+>> So why is this important enough for a TODO comment, but not important
+>> enough to do right away?
 > 
-> > Because if the port has _PSx methods we need to put it into D3hot AFAIK.
-> 
-> Yes, we need to run _PS3 then, but maybe we don't need to write to its
-> PMCSR directly.
-> 
-> > > > > > Basically the difference is that when Windows 7 or Linux (the _REV==5
-> > > > > > check) then we directly do link disable whereas in Windows 8+ we invoke
-> > > > > > LKDS() method that puts the link into L2/L3. None of the fields they
-> > > > > > access seem to touch the GPU itself.
-> > > > >
-> > > > > So that may be where the problem is.
-> > > > >
-> > > > > Putting the downstream component into PCI D[1-3] is expected to put
-> > > > > the link into L1, so I'm not sure how that plays with the later
-> > > > > attempt to put it into L2/L3 Ready.
-> > > >
-> > > > That should be fine. What I've seen the link goes into L1 when
-> > > > downstream component is put to D-state (not D0) and then it is put back
-> > > > to L0 when L2/3 ready is propagated. Eventually it goes into L2 or L3.
-> > >
-> > > Well, that's the expected behavior, but the observed behavior isn't as
-> > > expected. :-)
-> >
-> > Right :)
-> >
-> > > > > Also, L2/L3 Ready is expected to be transient, so finally power should
-> > > > > be removed somehow.
-> > > >
-> > > > There is GPIO for both power and PERST, I think the line here:
-> > > >
-> > > >   \_SB.SGOV (0x01010004, Zero)
-> > > >
-> > > > is the one that removes power.
-> > >
-> > > OK
-> > >
-> > > > > > LKDS() for the first PEG port looks like this:
-> > > > > >
-> > > > > >    P0L2 = One
-> > > > > >    Sleep (0x10)
-> > > > > >    Local0 = Zero
-> > > > > >    While (P0L2)
-> > > > > >    {
-> > > > > >         If ((Local0 > 0x04))
-> > > > > >         {
-> > > > > >             Break
-> > > > > >         }
-> > > > > >
-> > > > > >         Sleep (0x10)
-> > > > > >         Local0++
-> > > > > >    }
-> > > > > >
-> > > > > > One thing that comes to mind is that the loop can end even if P0L2 is
-> > > > > > not cleared as it does only 5 iterations with 16 ms sleep between. Maybe
-> > > > > > Sleep() is implemented differently in Windows? I mean Linux may be
-> > > > > > "faster" here and return prematurely and if we leave the port into D0
-> > > > > > this does not happen, or something. I'm just throwing out ideas :)
-> > > > >
-> > > > > But this actually works for the downstream component in D0, doesn't it?
-> > > >
-> > > > It does and that leaves the link in L0 so it could be that then the
-> > > > above AML works better or something.
-> > >
-> > > That would be my guess.
-> > >
-> > > > That reminds me, ASPM may have something to do with this as well.
-> > >
-> > > Not really if D-states are involved.
-> > >
-> > > > > Also, if the downstream component is in D0, the port actually should
-> > > > > stay in D0 too, so what would happen with the $subject patch applied?
-> > > >
-> > > > Parent port cannot be lower D-state than the child so I agree it should
-> > > > stay in D0 as well. However, it seems that what happens is that the
-> > > > issue goes away :)
-> > >
-> > > Well, at least this is kind of out of the spec.
-> > >
-> > > Note that pci_pm_suspend_noirq() won't let the port go into D3 if the
-> > > downstream device is in D0, so the $subject patch will not work as
-> > > expected in the suspend-to-idle case.
-> > >
-> > > Also we really should make up our minds on whether or not to force
-> > > PCIe ports to stay in D0 when downstream devices are in D0 and be
-> > > consequent about that.  Right now we do one thing during system-wide
-> > > suspend and the other one in PM-runtime, which is confusing.
-> > >
-> > > The current design is mostly based on the PCI PM Spec 1.2, so it would
-> > > be consequent to follow system-wide suspend in PM-runtime and avoid
-> > > putting PCIe ports holding devices in D0 into any low-power states.
-> > > but that would make the approach in the $subject patch ineffective.
-> > >
-> > > Moreover, the fact that there are separate branches for "Windows 7"
-> > > and "Windows 8+" kind of suggest a change in the expected behavior
-> > > between Windows 7 and Windows 8, from the AML perspective.  I would
-> > > guess that Windows 7 followed PCI PM 1.2 and Windows 8 (and later)
-> > > does something else.
-> >
-> > My understanding (which may not be correct) is that up to Windows 7 it
-> > never put the devices into D3cold runtime. Only when the system entered
-> > Sx states it evaluated the _OFF methods.
-> 
-> I see.
-> 
-> > Starting from Windows 8 it started doing this runtime so devices can
-> > enter D3cold even when system is in S0.
-> 
-> Hmm.  So by setting _REV to 5 we effectively change the _OFF into a NOP?
+> Lets drop the comment, I'm noto sure wake_up_q is even a function this
+> layer should be calling.
 
-No, there are two paths in the _OFF() and them some common code such as
-removing power etc.
+Actually, I think you can remove the "need_wake" variable since it is
+unconditionally set to "true".
 
-What the _REV 5 did is that it went into path where the AML seemed to
-directly disable the link.
-
-The other path that is taken with Windows 8+ does not disable the link
-but instead it puts it to low power L2 or L3 state (I suppose L3 since
-it removes the power and the GPU probably does not support wake).
-
-The ASL code is below. PGOF() gets called from the power resource
-_OFF():
-
-        Method (PGOF, 1, Serialized)
-        {
-            PIOF = Arg0
-            If ((PIOF == Zero))
-            {
-                If ((SGGP == Zero))
-                {
-                    Return (Zero)
-                }
-            }
-            ElseIf ((PIOF == One))
-            {
-                If ((P1GP == Zero))
-                {
-                    Return (Zero)
-                }
-            }
-            ElseIf ((PIOF == 0x02))
-            {
-                If ((P2GP == Zero))
-                {
-                    Return (Zero)
-                }
-            }
-
-            PEBA = \XBAS /* External reference */
-            PDEV = GDEV (PIOF)
-            PFUN = GFUN (PIOF)
-            Name (SCLK, Package (0x03)
-            {
-                One, 
-                0x80, 
-                Zero
-            })
-            If ((CCHK (PIOF, Zero) == Zero))
-            {
-                Return (Zero)
-            }
-
-            \_SB.PCI0.PEG0.PEGP.LTRE = \_SB.PCI0.PEG0.LREN
-            If ((Arg0 == Zero))
-            {
-                ELC0 = LCT0 /* \_SB_.PCI0.LCT0 */
-                H0VI = S0VI /* \_SB_.PCI0.S0VI */
-                H0DI = S0DI /* \_SB_.PCI0.S0DI */
-                ECP0 = LCP0 /* \_SB_.PCI0.LCP0 */
-            }
-            ElseIf ((Arg0 == One))
-            {
-                ELC1 = LCT1 /* \_SB_.PCI0.LCT1 */
-                H1VI = S1VI /* \_SB_.PCI0.S1VI */
-                H1DI = S1DI /* \_SB_.PCI0.S1DI */
-                ECP1 = LCP1 /* \_SB_.PCI0.LCP1 */
-            }
-            ElseIf ((Arg0 == 0x02))
-            {
-                ELC2 = LCT2 /* \_SB_.PCI0.LCT2 */
-                H2VI = S2VI /* \_SB_.PCI0.S2VI */
-                H2DI = S2DI /* \_SB_.PCI0.S2DI */
-                ECP2 = LCP2 /* \_SB_.PCI0.LCP2 */
-            }
-
-            If (((OSYS <= 0x07D9) || ((OSYS == 0x07DF) && (_REV == 
-                0x05))))
-            {
-                If ((PIOF == Zero))
-                {
-                    P0LD = One
-                    TCNT = Zero
-                    While ((TCNT < LDLY))
-                    {
-                        If ((P0LT == 0x08))
-                        {
-                            Break
-                        }
-
-                        Sleep (0x10)
-                        TCNT += 0x10
-                    }
-
-                    P0RM = One
-                    P0AP = 0x03
-                }
-                ElseIf ((PIOF == One))
-                {
-                    P1LD = One
-                    TCNT = Zero
-                    While ((TCNT < LDLY))
-                    {
-                        If ((P1LT == 0x08))
-                        {
-                            Break
-                        }
-
-                        Sleep (0x10)
-                        TCNT += 0x10
-                    }
-
-                    P1RM = One
-                    P1AP = 0x03
-                }
-                ElseIf ((PIOF == 0x02))
-                {
-                    P2LD = One
-                    TCNT = Zero
-                    While ((TCNT < LDLY))
-                    {
-                        If ((P2LT == 0x08))
-                        {
-                            Break
-                        }
-
-                        Sleep (0x10)
-                        TCNT += 0x10
-                    }
-
-                    P2RM = One
-                    P2AP = 0x03
-                }
-
-                If ((PBGE != Zero))
-                {
-                    If (SBDL (PIOF))
-                    {
-                        MBDL = GMXB (PIOF)
-                        PDUB (PIOF, MBDL)
-                    }
-                }
-            }
-            Else
-            {
-                LKDS (PIOF)
-            }
-
-            If ((DerefOf (SCLK [Zero]) != Zero))
-            {
-                PCRO (0xDC, 0x100C, DerefOf (SCLK [One]))
-                Sleep (0x10)
-            }
-
-            GPPR (PIOF, Zero)
-            If ((OSYS != 0x07D9))
-            {
-                DIWK (PIOF)
-            }
-
-            \_SB.SGOV (0x01010004, Zero)
-            Sleep (0x14)
-            Return (Zero)
-        }
-
-> > > Now, the structure of the "Windows 8+" branch
-> > > described by you suggests that, at least in the cases when it is going
-> > > to remove power from the port eventually, it goes straight for the
-> > > link preparation (the L2/L3 Ready transition) and power removal
-> > > without bothering to program the downstream device and port into D3hot
-> > > (because that's kind of redundant).
-> > >
-> > > That hypothetical "Windows 8+" approach may really work universally,
-> > > because it doesn't seem to break any rules (going straight from D0 to
-> > > D3cold is not disallowed and doing that for both a port and a
-> > > downstream device at the same time is kind of OK either, as long as
-> > > the link is ready for that).
-> >
-> > I guess it depends on how you interpret the specs ;-) From PCIe 5.0 sec
-> > 5.8 we can see the supported PM state transitions and it shows that you
-> > get to D3cold through D3hot. Of course the device goes into D3cold if
-> > you simply remove its power so I agree with you as well. However, if
-> > there is _PS3 method we can't skip the D3hot phase.
-> 
-> That's my understanding too, but I'm wondering about direct PMCSR
-> writes.  It is unclear to me if they are necessary, or more precisely,
-> whether or not Windows 10, say, carries them out if ACPI PM is going
-> to be applied.
-
-According to this:
-
-https://docs.microsoft.com/en-us/windows-hardware/drivers/pci/pci-power-management-and-device-drivers#scenario-1-turning-off-a-device
-
-it does write PMCSR.
-
-> Maybe I'm going too far with my conclusions, but please let me know
-> what you think about the approach proposed at the end of
-> https://lore.kernel.org/linux-pm/CAJZ5v0iQttGB4m5TbzCtjp2C1j5qEkUhqhpWb++LhSk3mbW=Lw@mail.gmail.com/T/#t
-> ?
-
-Yes, I think that is better approach.
+Also, the comment in__mmu_interval_notifier_insert() says
+"mni->mr_invalidate_seq" and I think that should be
+"mni->invalidate_seq".
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
