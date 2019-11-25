@@ -2,37 +2,40 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 740D812B31C
-	for <lists+nouveau@lfdr.de>; Fri, 27 Dec 2019 09:16:02 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8B7E412B32A
+	for <lists+nouveau@lfdr.de>; Fri, 27 Dec 2019 09:16:23 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 928966E37C;
-	Fri, 27 Dec 2019 08:14:36 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B5DC66E3DB;
+	Fri, 27 Dec 2019 08:14:39 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 483 seconds by postgrey-1.36 at gabe;
- Sun, 24 Nov 2019 17:23:13 UTC
-Received: from hygieia.sysophe.eu (hygieia.sysophe.eu
- [IPv6:2a01:4f8:c17:3977::2])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4CA6A89ECB;
- Sun, 24 Nov 2019 17:23:13 +0000 (UTC)
-Received: from neptune (unknown [IPv6:2a06:4944:bfe:5600:f6:5d6d:40bd:1038])
- by smtp.sysophe.eu (Postfix) with ESMTPSA id 6D2B6103DD60B;
- Sun, 24 Nov 2019 18:10:09 +0100 (CET)
+X-Greylist: delayed 58866 seconds by postgrey-1.36 at gabe;
+ Mon, 25 Nov 2019 09:36:18 UTC
+Received: from hygieia.sysophe.eu (hygieia.sysophe.eu [138.201.91.14])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 14D1B6E07F;
+ Mon, 25 Nov 2019 09:36:18 +0000 (UTC)
+Received: from pluto.restena.lu (pluto.restena.lu [IPv6:2001:a18:1:10::156])
+ by smtp.sysophe.eu (Postfix) with ESMTPSA id C126B103DB8C2;
+ Mon, 25 Nov 2019 10:31:14 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=sysophe.eu; s=201205;
- t=1574615409; x=1574701809;
- bh=RSApybNarNfdjvKyMqeTRTfrWvj05nzabYqxCrwHrsI=;
- h=Date:From:To:Cc:Subject;
- b=fEBI1SNpXK41RjDGUeMhM0ZGXjvdJAqBCcwNtCUy9ar1Q2xRBSsVeUC4y7eLcXj18
- egk5xWyFJ1gbNiIACMFC0HgrFKlBn6LGS6uc9R31nlyMPIcjGz9VLC4e/4L74MqwmS
- KmpWTBJ/cN0oyFS9l7plRzcBbM90o2bLsCH8ppms=
-Date: Sun, 24 Nov 2019 18:15:03 +0100
+ t=1574674274; x=1574760674;
+ bh=F6tYHHp6NDSyBNG2GM8DEayM/XEqushyHE/P206bIZ0=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References;
+ b=GsuM1q4VWokVIqwfbBjgYIJVGsFDuLFNyfqrIkDFK6d8FPFbKVrDUMkQ3ykbW+5yq
+ GFzYlqIWNaI4wIxE2F9/yT9S0PpHdMlVHCmFLJRWHAX7ZMVvIRSN9G5lpp6zn5ny7x
+ 0/gpEsN8RoMqUZIJZ9Bhqkvaia9+ziYQJ/gRrRCw=
+Date: Mon, 25 Nov 2019 10:36:13 +0100
 From: Bruno =?UTF-8?B?UHLDqW1vbnQ=?= <bonbons@sysophe.eu>
-To: nouveau@lists.freedesktop.org
-Message-ID: <20191124181441.488d3841@neptune>
-X-Mailer: Claws Mail 3.17.3 (GTK+ 2.24.32; i686-pc-linux-gnu)
+To: Daniel Vetter <daniel@ffwll.ch>
+Message-ID: <20191125103613.17dcade6@pluto.restena.lu>
+In-Reply-To: <CAKMK7uHQYsWJNapM91TJeYVU_05hvCew3YADbzrOhyiXokGTqQ@mail.gmail.com>
+References: <20191124181441.488d3841@neptune>
+ <CAKMK7uHQYsWJNapM91TJeYVU_05hvCew3YADbzrOhyiXokGTqQ@mail.gmail.com>
+X-Mailer: Claws Mail 3.17.3 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
 X-Mailman-Approved-At: Fri, 27 Dec 2019 08:13:30 +0000
-Subject: [Nouveau] nouveau on NV04 calling illegal method 02fc under fbcon
+Subject: Re: [Nouveau] nouveau on NV04 calling illegal method 02fc under
+ fbcon
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -44,195 +47,330 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: dri-devel@lists.freedesktop.org
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: Nouveau Dev <nouveau@lists.freedesktop.org>,
+ dri-devel <dri-devel@lists.freedesktop.org>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi,
-
-Trying a new kernel on old [NV04] system I get tons of 
-  nouveau 0000:01:00.0: gr: intr 00000001 [NOTIFY] nsource 00000040
-    [ILLEGAL_MTHD] nstatus 00004000 [PROTECTION_FAULT] ch 0
-    [DRM] subc 3 class 004a mthd 02fc data 00000003
-errors when operating on console.
-
-As I updated from 4.3 kernel, a bisect does not feel like the best start.
-
-What is that 02fc method which fbcon is probably triggering as
-hardware-acceleration on nouveau side.
-
-Thanks,
-Bruno
-
-
-
-Below, a grep for nouveau on kernel log:
-
-Nov 24 18:27:27 zeus kernel: Kernel command line: BOOT_IMAGE=5.3.12 ro root=802 slub_debug=FZP nouveau.runpm=1 nouveau.debug=debug console=ttyS0,115200 nouveau.agpmode=0
-Nov 24 18:27:27 zeus kernel: nouveau 0000:01:00.0: NVIDIA NV04 (20044001)
-Nov 24 18:27:27 zeus kernel: nouveau 0000:01:00.0: bios: trying PRAMIN...
-Nov 24 18:27:27 zeus kernel: nouveau 0000:01:00.0: bios: 00000260: NPDE signature (9b030041) unknown
-Nov 24 18:27:27 zeus kernel: nouveau 0000:01:00.0: bios: 00000000: type 00, 32768 bytes
-Nov 24 18:27:27 zeus kernel: nouveau 0000:01:00.0: bios: scored 4
-Nov 24 18:27:27 zeus kernel: nouveau 0000:01:00.0: bios: trying PROM...
-Nov 24 18:27:27 zeus kernel: nouveau 0000:01:00.0: bios: 00000000: ROM signature (0000) unknown
-Nov 24 18:27:27 zeus kernel: nouveau 0000:01:00.0: bios: image 0 invalid
-Nov 24 18:27:27 zeus kernel: nouveau 0000:01:00.0: bios: scored 0
-Nov 24 18:27:27 zeus kernel: nouveau 0000:01:00.0: bios: trying ACPI...
-Nov 24 18:27:27 zeus kernel: nouveau 0000:01:00.0: bios: using image from PRAMIN
-Nov 24 18:27:27 zeus kernel: nouveau 0000:01:00.0: bios: 00000260: NPDE signature (9b030041) unknown
-Nov 24 18:27:27 zeus kernel: nouveau 0000:01:00.0: bios: 00000260: NPDE signature (9b030041) unknown
-Nov 24 18:27:27 zeus kernel: nouveau 0000:01:00.0: bios: BMP version 1.1
-Nov 24 18:27:27 zeus kernel: nouveau 0000:01:00.0: bios: version 02.04.19.00.00
-Nov 24 18:27:27 zeus kernel: nouveau 0000:01:00.0: bios: DCB table not found
-Nov 24 18:27:27 zeus kernel: nouveau 0000:01:00.0: i2c: ccb 00: type 00 drive 3f sense 3e share ff auxch cb
-Nov 24 18:27:27 zeus kernel: nouveau 0000:01:00.0: bios: DCB table not found
-Nov 24 18:27:27 zeus kernel: nouveau 0000:01:00.0: i2c: ccb 01: type 00 drive 37 sense 36 share ff auxch cb
-Nov 24 18:27:27 zeus kernel: nouveau 0000:01:00.0: bios: DCB table not found
-Nov 24 18:27:27 zeus kernel: nouveau 0000:01:00.0: bios: DCB table not found
-Nov 24 18:27:27 zeus kernel: nouveau 0000:01:00.0: disp: head-0: ctor
-Nov 24 18:27:27 zeus kernel: nouveau 0000:01:00.0: disp: head-1: ctor
-Nov 24 18:27:27 zeus kernel: nouveau: DRM-master:00000000:00000080: init running...
-Nov 24 18:27:27 zeus kernel: nouveau 0000:01:00.0: putting AGP V2 device into 0x mode
-Nov 24 18:27:27 zeus kernel: nouveau 0000:01:00.0: tmr: unknown input clock freq
-Nov 24 18:27:27 zeus kernel: nouveau 0000:01:00.0: tmr: input frequency : 0Hz
-Nov 24 18:27:27 zeus kernel: nouveau 0000:01:00.0: tmr: numerator       : 00000001
-Nov 24 18:27:27 zeus kernel: nouveau 0000:01:00.0: tmr: denominator     : 00000001
-Nov 24 18:27:27 zeus kernel: nouveau 0000:01:00.0: tmr: timer frequency : 0Hz
-Nov 24 18:27:27 zeus kernel: nouveau 0000:01:00.0: tmr: time low        : 87dbe4df
-Nov 24 18:27:27 zeus kernel: nouveau 0000:01:00.0: tmr: time high       : 00000000
-Nov 24 18:27:27 zeus kernel: nouveau 0000:01:00.0: fb: 16 MiB SDRAM
-Nov 24 18:27:27 zeus kernel: nouveau 0000:01:00.0: clk: --:   
-Nov 24 18:27:27 zeus kernel: nouveau: DRM-master:00000000:00000080: init children...
-Nov 24 18:27:27 zeus kernel: nouveau: DRM-master:00000000:00000080: init completed in 80915us
-Nov 24 18:27:27 zeus kernel: nouveau: DRM-master:00000000:80000009: init running...
-Nov 24 18:27:27 zeus kernel: nouveau: DRM-master:00000000:80000009: init children...
-Nov 24 18:27:27 zeus kernel: nouveau: DRM-master:00000000:80000009: init completed in 6315us
-Nov 24 18:27:27 zeus kernel: nouveau: DRM-master:00000000:8000000d: init running...
-Nov 24 18:27:27 zeus kernel: nouveau: DRM-master:00000000:8000000d: init children...
-Nov 24 18:27:27 zeus kernel: nouveau: DRM-master:00000000:8000000d: init completed in 6319us
-Nov 24 18:27:27 zeus kernel: nouveau: DRM-master:00000000:00000000: init running...
-Nov 24 18:27:27 zeus kernel: nouveau: DRM-master:00000000:00000000: init children...
-Nov 24 18:27:27 zeus kernel: nouveau: DRM-master:00000000:00000000: init completed in 6317us
-Nov 24 18:27:27 zeus kernel: nouveau: DRM:00000000:00000080: init running...
-Nov 24 18:27:27 zeus kernel: nouveau: DRM:00000000:00000080: init children...
-Nov 24 18:27:27 zeus kernel: nouveau: DRM:00000000:00000080: init completed in 5713us
-Nov 24 18:27:27 zeus kernel: nouveau: DRM:00000000:80000009: init running...
-Nov 24 18:27:27 zeus kernel: nouveau: DRM:00000000:80000009: init children...
-Nov 24 18:27:27 zeus kernel: nouveau: DRM:00000000:80000009: init completed in 5664us
-Nov 24 18:27:27 zeus kernel: nouveau: DRM:00000000:8000000d: init running...
-Nov 24 18:27:27 zeus kernel: nouveau: DRM:00000000:8000000d: init children...
-Nov 24 18:27:27 zeus kernel: nouveau: DRM:00000000:8000000d: init completed in 5663us
-Nov 24 18:27:27 zeus kernel: nouveau 0000:01:00.0: DRM: VRAM: 15 MiB
-Nov 24 18:27:27 zeus kernel: nouveau 0000:01:00.0: DRM: GART: 64 MiB
-Nov 24 18:27:27 zeus kernel: nouveau 0000:01:00.0: DRM: BMP version 1.1
-Nov 24 18:27:27 zeus kernel: nouveau 0000:01:00.0: DRM: No DCB data found in VBIOS
-Nov 24 18:27:27 zeus kernel: nouveau 0000:01:00.0: i2c: bus 0000: probing TV encoders
-Nov 24 18:27:27 zeus kernel: nouveau 0000:01:00.0: i2c: bus 0000: no devices found.
-Nov 24 18:27:27 zeus kernel: nouveau: DRM:00000000:00000002: init running...
-Nov 24 18:27:27 zeus kernel: nouveau: DRM:00000000:00000002: init children...
-Nov 24 18:27:27 zeus kernel: nouveau: DRM:00000000:00000002: init completed in 5751us
-Nov 24 18:27:27 zeus kernel: nouveau: DRM:00000000:00000002: fini children...
-Nov 24 18:27:27 zeus kernel: nouveau: DRM:00000000:00000002: fini running...
-Nov 24 18:27:27 zeus kernel: nouveau: DRM:00000000:00000002: fini completed in 5622us
-Nov 24 18:27:27 zeus kernel: nouveau: DRM:00000000:00000002: destroy children...
-Nov 24 18:27:27 zeus kernel: nouveau: DRM:00000000:00000002: destroy running...
-Nov 24 18:27:27 zeus kernel: nouveau: DRM:00000000:00000002: destroy completed in 5892us...
-Nov 24 18:27:27 zeus kernel: nouveau: DRM:00000000:00000002: init running...
-Nov 24 18:27:27 zeus kernel: nouveau: DRM:00000000:00000002: init children...
-Nov 24 18:27:28 zeus kernel: nouveau: DRM:00000000:00000002: init completed in 5709us
-Nov 24 18:27:28 zeus kernel: nouveau: DRM:00000000:0000006b: init running...
-Nov 24 18:27:28 zeus kernel: nouveau: DRM:00000000:0000006b: init children...
-Nov 24 18:27:28 zeus kernel: nouveau: DRM:00000000:0000006b: init completed in 5665us
-Nov 24 18:27:28 zeus kernel: nouveau: DRM:80000002:0000003d: init running...
-Nov 24 18:27:28 zeus kernel: nouveau: DRM:80000002:0000003d: init children...
-Nov 24 18:27:28 zeus kernel: nouveau: DRM:80000002:0000003d: init completed in 5666us
-Nov 24 18:27:28 zeus kernel: nouveau: DRM:80000003:0000003d: init running...
-Nov 24 18:27:28 zeus kernel: nouveau: DRM:80000003:0000003d: init children...
-Nov 24 18:27:28 zeus kernel: nouveau: DRM:80000003:0000003d: init completed in 5712us
-Nov 24 18:27:28 zeus kernel: nouveau: DRM:0000006e:fffffffc: init running...
-Nov 24 18:27:28 zeus kernel: nouveau: DRM:00000000:00000000: init running...
-Nov 24 18:27:28 zeus kernel: nouveau: DRM:00000000:00000000: init children...
-Nov 24 18:27:28 zeus kernel: nouveau: DRM:00000000:00000000: init completed in 5710us
-Nov 24 18:27:28 zeus kernel: nouveau: DRM:0000006e:fffffffc: init children...
-Nov 24 18:27:28 zeus kernel: nouveau: DRM:0000006e:fffffffc: init completed in 23391us
-Nov 24 18:27:28 zeus kernel: nouveau: DRM:55550000:fffffffc: init running...
-Nov 24 18:27:28 zeus kernel: nouveau: DRM:55550000:fffffffc: init children...
-Nov 24 18:27:28 zeus kernel: nouveau: DRM:55550000:fffffffc: init completed in 5714us
-Nov 24 18:27:28 zeus kernel: nouveau: DRM:80000006:0000003d: init running...
-Nov 24 18:27:28 zeus kernel: nouveau: DRM:80000006:0000003d: init children...
-Nov 24 18:27:28 zeus kernel: nouveau: DRM:80000006:0000003d: init completed in 5665us
-Nov 24 18:27:28 zeus kernel: nouveau: DRM:00000039:00000039: init running...
-Nov 24 18:27:28 zeus kernel: nouveau: DRM:00000000:00000000: init running...
-Nov 24 18:27:28 zeus kernel: nouveau: DRM:00000000:00000000: init children...
-Nov 24 18:27:28 zeus kernel: nouveau: DRM:00000000:00000000: init completed in 5705us
-Nov 24 18:27:28 zeus kernel: nouveau: DRM:00000039:00000039: init children...
-Nov 24 18:27:28 zeus kernel: nouveau: DRM:00000039:00000039: init completed in 23339us
-Nov 24 18:27:28 zeus kernel: nouveau 0000:01:00.0: DRM: MM: using M2MF for buffer copies
-Nov 24 18:27:28 zeus kernel: nouveau 0000:01:00.0: bios: DCB table not found
-Nov 24 18:27:28 zeus kernel: nouveau: DRM:00000000:00000046: init running...
-Nov 24 18:27:28 zeus kernel: nouveau: DRM:00000000:00000046: init children...
-Nov 24 18:27:28 zeus kernel: nouveau: DRM:00000000:00000046: init completed in 5664us
-Nov 24 18:27:28 zeus kernel: nouveau 0000:01:00.0: DRM: Saving VGA fonts
-Nov 24 18:27:28 zeus kernel: nouveau 0000:01:00.0: DRM: No DCB data found in VBIOS
-Nov 24 18:27:28 zeus kernel: nouveau: DRM:00000000:ffffffff: init running...
-Nov 24 18:27:28 zeus kernel: nouveau: DRM:00000000:ffffffff: init children...
-Nov 24 18:27:28 zeus kernel: nouveau: DRM:00000000:ffffffff: init completed in 5711us
-Nov 24 18:27:28 zeus kernel: nouveau: DRM-master:00000000:00000000: init running...
-Nov 24 18:27:28 zeus kernel: nouveau: DRM-master:00000000:00000000: init children...
-Nov 24 18:27:28 zeus kernel: nouveau: DRM-master:00000000:00000000: init completed in 6320us
-Nov 24 18:27:28 zeus kernel: nouveau: swapper[1]:00000000:00000080: init running...
-Nov 24 18:27:28 zeus kernel: nouveau: swapper[1]:00000000:00000080: init children...
-Nov 24 18:27:28 zeus kernel: nouveau: swapper[1]:00000000:00000080: init completed in 6320us
-Nov 24 18:27:28 zeus kernel: nouveau: swapper[1]:00000000:80000009: init running...
-Nov 24 18:27:28 zeus kernel: nouveau: swapper[1]:00000000:80000009: init children...
-Nov 24 18:27:28 zeus kernel: nouveau: swapper[1]:00000000:80000009: init completed in 6320us
-Nov 24 18:27:28 zeus kernel: nouveau: swapper[1]:00000000:8000000d: init running...
-Nov 24 18:27:28 zeus kernel: nouveau: swapper[1]:00000000:8000000d: init children...
-Nov 24 18:27:28 zeus kernel: nouveau: swapper[1]:00000000:8000000d: init completed in 6317us
-Nov 24 18:27:28 zeus kernel: nouveau: DRM:00000062:00000042: init running...
-Nov 24 18:27:28 zeus kernel: nouveau: DRM:00000062:00000042: init children...
-Nov 24 18:27:28 zeus kernel: nouveau: DRM:00000062:00000042: init completed in 5719us
-Nov 24 18:27:28 zeus kernel: nouveau: DRM:00000019:00000019: init running...
-Nov 24 18:27:28 zeus kernel: nouveau: DRM:00000019:00000019: init children...
-Nov 24 18:27:28 zeus kernel: nouveau: DRM:00000019:00000019: init completed in 5712us
-Nov 24 18:27:28 zeus kernel: nouveau: DRM:00000043:00000043: init running...
-Nov 24 18:27:28 zeus kernel: nouveau: DRM:00000043:00000043: init children...
-Nov 24 18:27:28 zeus kernel: nouveau: DRM:00000043:00000043: init completed in 5667us
-Nov 24 18:27:28 zeus kernel: nouveau: DRM:00000044:00000044: init running...
-Nov 24 18:27:28 zeus kernel: nouveau: DRM:00000044:00000044: init children...
-Nov 24 18:27:28 zeus kernel: nouveau: DRM:00000044:00000044: init completed in 5667us
-Nov 24 18:27:28 zeus kernel: nouveau: DRM:0000004a:0000004a: init running...
-Nov 24 18:27:28 zeus kernel: nouveau: DRM:0000004a:0000004a: init children...
-Nov 24 18:27:28 zeus kernel: nouveau: DRM:0000004a:0000004a: init completed in 5712us
-Nov 24 18:27:28 zeus kernel: nouveau: DRM:0000005f:0000005f: init running...
-Nov 24 18:27:28 zeus kernel: nouveau: DRM:0000005f:0000005f: init children...
-Nov 24 18:27:28 zeus kernel: nouveau: DRM:0000005f:0000005f: init completed in 5712us
-Nov 24 18:27:28 zeus kernel: nouveau 0000:01:00.0: gr: intr 00000001 [NOTIFY] nsource 00000040 [ILLEGAL_MTHD] nstatus 00004000 [PROTECTION_FAULT] ch 0 [DRM] subc 2 class 005f mthd 019c data 000018a6
-Nov 24 18:27:28 zeus kernel: nouveau 0000:01:00.0: gr: intr 00000001 [NOTIFY] nsource 00000040 [ILLEGAL_MTHD] nstatus 00004000 [PROTECTION_FAULT] ch 0 [DRM] subc 2 class 005f mthd 02fc data 00000003
-Nov 24 18:27:28 zeus kernel: nouveau 0000:01:00.0: gr: intr 00000001 [NOTIFY] nsource 00000040 [ILLEGAL_MTHD] nstatus 00004000 [PROTECTION_FAULT] ch 0 [DRM] subc 3 class 004a mthd 0198 data 000018a6
-Nov 24 18:27:28 zeus kernel: nouveau 0000:01:00.0: gr: intr 00000001 [NOTIFY] nsource 00000040 [ILLEGAL_MTHD] nstatus 00004000 [PROTECTION_FAULT] ch 0 [DRM] subc 3 class 004a mthd 0188 data 000018a9
-Nov 24 18:27:28 zeus kernel: nouveau 0000:01:00.0: gr: intr 00000001 [NOTIFY] nsource 00000040 [ILLEGAL_MTHD] nstatus 00004000 [PROTECTION_FAULT] ch 0 [DRM] subc 3 class 004a mthd 018c data 000018a8
-Nov 24 18:27:28 zeus kernel: nouveau 0000:01:00.0: gr: intr 00000001 [NOTIFY] nsource 00000040 [ILLEGAL_MTHD] nstatus 00004000 [PROTECTION_FAULT] ch 0 [DRM] subc 3 class 004a mthd 02fc data 00000003
-Nov 24 18:27:28 zeus kernel: nouveau 0000:01:00.0: gr: intr 00000001 [NOTIFY] nsource 00000040 [ILLEGAL_MTHD] nstatus 00004000 [PROTECTION_FAULT] ch 0 [DRM] subc 3 class 004a mthd 02fc data 00000003
-Nov 24 18:27:28 zeus kernel: nouveau 0000:01:00.0: DRM: allocated 1280x1024 fb: 0x4000, bo (ptrval)
-Nov 24 18:27:28 zeus kernel: fbcon: nouveaudrmfb (fb0) is primary device
-Nov 24 18:27:28 zeus kernel: nouveau 0000:01:00.0: fb0: nouveaudrmfb frame buffer device
-Nov 24 18:27:28 zeus kernel: [drm] Initialized nouveau 1.3.1 20120801 for 0000:01:00.0 on minor 0
-Nov 24 18:28:10 zeus kernel: nouveau 0000:01:00.0: gr: intr 00000001 [NOTIFY] nsource 00000040 [ILLEGAL_MTHD] nstatus 00004000 [PROTECTION_FAULT] ch 0 [DRM] subc 3 class 004a mthd 02fc data 00000003
-Nov 24 18:28:10 zeus kernel: nouveau 0000:01:00.0: gr: intr 00000001 [NOTIFY] nsource 00000040 [ILLEGAL_MTHD] nstatus 00004000 [PROTECTION_FAULT] ch 0 [DRM] subc 3 class 004a mthd 02fc data 00000003
-Nov 24 18:28:10 zeus kernel: nouveau 0000:01:00.0: gr: intr 00000001 [NOTIFY] nsource 00000040 [ILLEGAL_MTHD] nstatus 00004000 [PROTECTION_FAULT] ch 0 [DRM] subc 3 class 004a mthd 02fc data 00000003
-Nov 24 18:28:10 zeus kernel: nouveau 0000:01:00.0: gr: intr 00000001 [NOTIFY] nsource 00000040 [ILLEGAL_MTHD] nstatus 00004000 [PROTECTION_FAULT] ch 0 [DRM] subc 3 class 004a mthd 02fc data 00000003
-Nov 24 18:28:10 zeus kernel: nouveau 0000:01:00.0: gr: intr 00000001 [NOTIFY] nsource 00000040 [ILLEGAL_MTHD] nstatus 00004000 [PROTECTION_FAULT] ch 0 [DRM] subc 3 class 004a mthd 02fc data 00000003
-Nov 24 18:28:10 zeus kernel: nouveau 0000:01:00.0: gr: intr 00000001 [NOTIFY] nsource 00000040 [ILLEGAL_MTHD] nstatus 00004000 [PROTECTION_FAULT] ch 0 [DRM] subc 3 class 004a mthd 02fc data 00000003
-Nov 24 18:28:10 zeus kernel: nouveau 0000:01:00.0: gr: intr 00000001 [NOTIFY] nsource 00000040 [ILLEGAL_MTHD] nstatus 00004000 [PROTECTION_FAULT] ch 0 [DRM] subc 3 class 004a mthd 02fc data 00000003
-Nov 24 18:28:10 zeus kernel: nouveau 0000:01:00.0: gr: intr 00000001 [NOTIFY] nsource 00000040 [ILLEGAL_MTHD] nstatus 00004000 [PROTECTION_FAULT] ch 0 [DRM] subc 3 class 004a mthd 02fc data 00000003
-Nov 24 18:28:10 zeus kernel: nouveau 0000:01:00.0: gr: intr 00000001 [NOTIFY] nsource 00000040 [ILLEGAL_MTHD] nstatus 00004000 [PROTECTION_FAULT] ch 0 [DRM] subc 3 class 004a mthd 02fc data 00000003
-Nov 24 18:28:10 zeus kernel: nouveau 0000:01:00.0: gr: intr 00000001 [NOTIFY] nsource 00000040 [ILLEGAL_MTHD] nstatus 00004000 [PROTECTION_FAULT] ch 0 [DRM] subc 3 class 004a mthd 02fc data 00000003
-...
-_______________________________________________
-Nouveau mailing list
-Nouveau@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/nouveau
+SGkgRGFuaWVsLAoKT24gTW9uLCAyNSBOb3YgMjAxOSAwOToxODo0MSArMDEwMCBEYW5pZWwgVmV0
+dGVyIHdyb3RlOgo+IE9uIE1vbiwgTm92IDI1LCAyMDE5IGF0IDk6MDggQU0gQnJ1bm8gUHLDqW1v
+bnQgPGJvbmJvbnNAc3lzb3BoZS5ldT4gd3JvdGU6Cj4gPiBUcnlpbmcgYSBuZXcga2VybmVsIG9u
+IG9sZCBbTlYwNF0gc3lzdGVtIEkgZ2V0IHRvbnMgb2YKPiA+ICAgbm91dmVhdSAwMDAwOjAxOjAw
+LjA6IGdyOiBpbnRyIDAwMDAwMDAxIFtOT1RJRlldIG5zb3VyY2UgMDAwMDAwNDAKPiA+ICAgICBb
+SUxMRUdBTF9NVEhEXSBuc3RhdHVzIDAwMDA0MDAwIFtQUk9URUNUSU9OX0ZBVUxUXSBjaCAwCj4g
+PiAgICAgW0RSTV0gc3ViYyAzIGNsYXNzIDAwNGEgbXRoZCAwMmZjIGRhdGEgMDAwMDAwMDMKPiA+
+IGVycm9ycyB3aGVuIG9wZXJhdGluZyBvbiBjb25zb2xlLgo+ID4KPiA+IEFzIEkgdXBkYXRlZCBm
+cm9tIDQuMyBrZXJuZWwsIGEgYmlzZWN0IGRvZXMgbm90IGZlZWwgbGlrZSB0aGUgYmVzdCBzdGFy
+dC4gIAo+IAo+IFRoZSBiaWdnZXIgeW91ciB1cGdyYWRlLCB0aGUgbW9yZSBlZmZpY2llbnQgYmlz
+ZWN0aW5nIGFjdHVhbGx5IGlzLiBUaGUKPiBkaWZmZXJlbmNlIGJldHdlZW4gb25lIGtlcm5lbCAo
+dXN1YWxseSAxMi0xMyBiaXNlY3RzKSBhbmQgMjAga2VybmVscwo+IGlzIGp1c3QgNC01IGJpc2Vj
+dHMgbW9yZS4KCldlbGwgd2l0aCB0aGUgdGltZSBpdCB0YWtlcyB0byBjb21waWxlIHRoZSBrZXJu
+ZWwgKGFuZCB3b3JzZSB0aGUgS2NvbmZpZwpjaGFuZ2luZyBxdWl0ZSBhIGxvdCBiZXR3ZWVuIHRo
+ZSBlbmRwb2ludHMpIGl0J3Mgbm90IGZ1biBhdCBhbGwuCgpUaHVzIEkgd2lsbCBmaXJzdCB0cnkg
+d2l0aCByZXZlcnRpbmcgYmVsb3cgZmV3IGNvbW1pdHMuCgo+ID4gV2hhdCBpcyB0aGF0IDAyZmMg
+bWV0aG9kIHdoaWNoIGZiY29uIGlzIHByb2JhYmx5IHRyaWdnZXJpbmcgYXMKPiA+IGhhcmR3YXJl
+LWFjY2VsZXJhdGlvbiBvbiBub3V2ZWF1IHNpZGUuICAKPiAKPiBCb290aW5nIHdpdGggbm91dmVh
+dS5ub2ZiYWNjZWw9MCAodGhhdCBzaG91bGQgYmUgdGhlIGRlZmF1bHQsIEkgZ3Vlc3MKPiB5b3Ug
+Y2hhbmdlZCBpdCkgc2hvdWxkIGhlbHAgY29uZmlybSB0aGF0J3MgaXQncyBpbmRlZWQgZmJjb24g
+Y2F1c2luZwo+IHRoaXMgc3R1ZmYuCgpJIHdpbGwgdHJ5IG91dCB3aGVuIEkgYW0gYmFjayBuZXh0
+IHRvIHRoYXQgbWFjaGluZS4KCklmIGl0J3MgZmJjb24gYWNjZWxlcmF0aW9uICh3aGljaCBJIGFz
+c3VtZSBhcyBvdXRwdXQgdG8gZmJjb24gY2F1c2VzCm5ldyBlcnJvcnMpLCBwcm9iYWJseSBvbmUg
+b2YgdGhlIGZldyBjb21taXRzIHRvCmRyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L252MDRfZmJjb24u
+YyB3b3VsZCBiZSB0aGUgY2F1c2U6CgogIDExNjdjNmJjNTE4ODBjYjc0YTNiMWEwMjI4NmZjMjUz
+OTI2ODQyODEKICAgIGRybS9ub3V2ZWF1OiBhbGxvY2F0ZSBkZXZpY2Ugb2JqZWN0IGZvciBldmVy
+eSBjbGllbnQKICA5ZGVjOTI4MDUyMzE1N2RhODIwZjkyM2UxOGRkNmE3YmY5OWZlYWQ3CiAgICBk
+cm0vbm91dmVhdS9mYmNvbjogbWFrZSB1c2Ugb2YgZHJtX2ZiX2hlbHBlci5kZXYKICAyODY2OGY0
+M2I4ZTQyMTYzNGUxNjIzZjcyYTg3OTgxMjI4OGRkMDZiCiAgICBkcm0vbm91dmVhdS9mYmNvbjog
+Zml4IGZvbnQgd2lkdGggbm90IGRpdmlzaWJsZSBieSA4CiAgZjA0NWY0NTlkOTI1MTM4ZmU3ZDYx
+OTNhOGM4NjQwNmJkYTdlNDlkYQogICAgZHJtL25vdXZlYXUvZmJjb246IGZpeCBvdXQtb2YtYm91
+bmRzIG1lbW9yeSBhY2Nlc3NlcwogIDRkYzI4MTM0YThjMTI0YWEwMWI0NDFlMWU1YjhiNTQzMTJl
+ZGM1ZGQKICAgIGRybS9ub3V2ZWF1OiByZW5hbWUgbm91dmVhdV9kcm0uaCB0byBub3V2ZWF1X2Ry
+di5oCgpBdCBmaXJzdCBnbGFuY2UgSSB3b3VsZCBzdXNwZWN0IG9uZSBvZjoKICAyODY2OGY0M2I4
+ZTQyMTYzNGUxNjIzZjcyYTg3OTgxMjI4OGRkMDZiCiAgZjA0NWY0NTlkOTI1MTM4ZmU3ZDYxOTNh
+OGM4NjQwNmJkYTdlNDlkYQoKQnJ1bm8KCgo+IEkgdGhpbmsgYXQgbGVhc3QsIG5vdCBhIG5vdXZl
+YXUgZXhwZXJ0Lgo+IC1EYW5pZWwKPiA+Cj4gPiBUaGFua3MsCj4gPiBCcnVubwo+ID4KPiA+Cj4g
+Pgo+ID4gQmVsb3csIGEgZ3JlcCBmb3Igbm91dmVhdSBvbiBrZXJuZWwgbG9nOgo+ID4KPiA+IE5v
+diAyNCAxODoyNzoyNyB6ZXVzIGtlcm5lbDogS2VybmVsIGNvbW1hbmQgbGluZTogQk9PVF9JTUFH
+RT01LjMuMTIgcm8gcm9vdD04MDIgc2x1Yl9kZWJ1Zz1GWlAgbm91dmVhdS5ydW5wbT0xIG5vdXZl
+YXUuZGVidWc9ZGVidWcgY29uc29sZT10dHlTMCwxMTUyMDAgbm91dmVhdS5hZ3Btb2RlPTAKPiA+
+IE5vdiAyNCAxODoyNzoyNyB6ZXVzIGtlcm5lbDogbm91dmVhdSAwMDAwOjAxOjAwLjA6IE5WSURJ
+QSBOVjA0ICgyMDA0NDAwMSkKPiA+IE5vdiAyNCAxODoyNzoyNyB6ZXVzIGtlcm5lbDogbm91dmVh
+dSAwMDAwOjAxOjAwLjA6IGJpb3M6IHRyeWluZyBQUkFNSU4uLi4KPiA+IE5vdiAyNCAxODoyNzoy
+NyB6ZXVzIGtlcm5lbDogbm91dmVhdSAwMDAwOjAxOjAwLjA6IGJpb3M6IDAwMDAwMjYwOiBOUERF
+IHNpZ25hdHVyZSAoOWIwMzAwNDEpIHVua25vd24KPiA+IE5vdiAyNCAxODoyNzoyNyB6ZXVzIGtl
+cm5lbDogbm91dmVhdSAwMDAwOjAxOjAwLjA6IGJpb3M6IDAwMDAwMDAwOiB0eXBlIDAwLCAzMjc2
+OCBieXRlcwo+ID4gTm92IDI0IDE4OjI3OjI3IHpldXMga2VybmVsOiBub3V2ZWF1IDAwMDA6MDE6
+MDAuMDogYmlvczogc2NvcmVkIDQKPiA+IE5vdiAyNCAxODoyNzoyNyB6ZXVzIGtlcm5lbDogbm91
+dmVhdSAwMDAwOjAxOjAwLjA6IGJpb3M6IHRyeWluZyBQUk9NLi4uCj4gPiBOb3YgMjQgMTg6Mjc6
+MjcgemV1cyBrZXJuZWw6IG5vdXZlYXUgMDAwMDowMTowMC4wOiBiaW9zOiAwMDAwMDAwMDogUk9N
+IHNpZ25hdHVyZSAoMDAwMCkgdW5rbm93bgo+ID4gTm92IDI0IDE4OjI3OjI3IHpldXMga2VybmVs
+OiBub3V2ZWF1IDAwMDA6MDE6MDAuMDogYmlvczogaW1hZ2UgMCBpbnZhbGlkCj4gPiBOb3YgMjQg
+MTg6Mjc6MjcgemV1cyBrZXJuZWw6IG5vdXZlYXUgMDAwMDowMTowMC4wOiBiaW9zOiBzY29yZWQg
+MAo+ID4gTm92IDI0IDE4OjI3OjI3IHpldXMga2VybmVsOiBub3V2ZWF1IDAwMDA6MDE6MDAuMDog
+YmlvczogdHJ5aW5nIEFDUEkuLi4KPiA+IE5vdiAyNCAxODoyNzoyNyB6ZXVzIGtlcm5lbDogbm91
+dmVhdSAwMDAwOjAxOjAwLjA6IGJpb3M6IHVzaW5nIGltYWdlIGZyb20gUFJBTUlOCj4gPiBOb3Yg
+MjQgMTg6Mjc6MjcgemV1cyBrZXJuZWw6IG5vdXZlYXUgMDAwMDowMTowMC4wOiBiaW9zOiAwMDAw
+MDI2MDogTlBERSBzaWduYXR1cmUgKDliMDMwMDQxKSB1bmtub3duCj4gPiBOb3YgMjQgMTg6Mjc6
+MjcgemV1cyBrZXJuZWw6IG5vdXZlYXUgMDAwMDowMTowMC4wOiBiaW9zOiAwMDAwMDI2MDogTlBE
+RSBzaWduYXR1cmUgKDliMDMwMDQxKSB1bmtub3duCj4gPiBOb3YgMjQgMTg6Mjc6MjcgemV1cyBr
+ZXJuZWw6IG5vdXZlYXUgMDAwMDowMTowMC4wOiBiaW9zOiBCTVAgdmVyc2lvbiAxLjEKPiA+IE5v
+diAyNCAxODoyNzoyNyB6ZXVzIGtlcm5lbDogbm91dmVhdSAwMDAwOjAxOjAwLjA6IGJpb3M6IHZl
+cnNpb24gMDIuMDQuMTkuMDAuMDAKPiA+IE5vdiAyNCAxODoyNzoyNyB6ZXVzIGtlcm5lbDogbm91
+dmVhdSAwMDAwOjAxOjAwLjA6IGJpb3M6IERDQiB0YWJsZSBub3QgZm91bmQKPiA+IE5vdiAyNCAx
+ODoyNzoyNyB6ZXVzIGtlcm5lbDogbm91dmVhdSAwMDAwOjAxOjAwLjA6IGkyYzogY2NiIDAwOiB0
+eXBlIDAwIGRyaXZlIDNmIHNlbnNlIDNlIHNoYXJlIGZmIGF1eGNoIGNiCj4gPiBOb3YgMjQgMTg6
+Mjc6MjcgemV1cyBrZXJuZWw6IG5vdXZlYXUgMDAwMDowMTowMC4wOiBiaW9zOiBEQ0IgdGFibGUg
+bm90IGZvdW5kCj4gPiBOb3YgMjQgMTg6Mjc6MjcgemV1cyBrZXJuZWw6IG5vdXZlYXUgMDAwMDow
+MTowMC4wOiBpMmM6IGNjYiAwMTogdHlwZSAwMCBkcml2ZSAzNyBzZW5zZSAzNiBzaGFyZSBmZiBh
+dXhjaCBjYgo+ID4gTm92IDI0IDE4OjI3OjI3IHpldXMga2VybmVsOiBub3V2ZWF1IDAwMDA6MDE6
+MDAuMDogYmlvczogRENCIHRhYmxlIG5vdCBmb3VuZAo+ID4gTm92IDI0IDE4OjI3OjI3IHpldXMg
+a2VybmVsOiBub3V2ZWF1IDAwMDA6MDE6MDAuMDogYmlvczogRENCIHRhYmxlIG5vdCBmb3VuZAo+
+ID4gTm92IDI0IDE4OjI3OjI3IHpldXMga2VybmVsOiBub3V2ZWF1IDAwMDA6MDE6MDAuMDogZGlz
+cDogaGVhZC0wOiBjdG9yCj4gPiBOb3YgMjQgMTg6Mjc6MjcgemV1cyBrZXJuZWw6IG5vdXZlYXUg
+MDAwMDowMTowMC4wOiBkaXNwOiBoZWFkLTE6IGN0b3IKPiA+IE5vdiAyNCAxODoyNzoyNyB6ZXVz
+IGtlcm5lbDogbm91dmVhdTogRFJNLW1hc3RlcjowMDAwMDAwMDowMDAwMDA4MDogaW5pdCBydW5u
+aW5nLi4uCj4gPiBOb3YgMjQgMTg6Mjc6MjcgemV1cyBrZXJuZWw6IG5vdXZlYXUgMDAwMDowMTow
+MC4wOiBwdXR0aW5nIEFHUCBWMiBkZXZpY2UgaW50byAweCBtb2RlCj4gPiBOb3YgMjQgMTg6Mjc6
+MjcgemV1cyBrZXJuZWw6IG5vdXZlYXUgMDAwMDowMTowMC4wOiB0bXI6IHVua25vd24gaW5wdXQg
+Y2xvY2sgZnJlcQo+ID4gTm92IDI0IDE4OjI3OjI3IHpldXMga2VybmVsOiBub3V2ZWF1IDAwMDA6
+MDE6MDAuMDogdG1yOiBpbnB1dCBmcmVxdWVuY3kgOiAwSHoKPiA+IE5vdiAyNCAxODoyNzoyNyB6
+ZXVzIGtlcm5lbDogbm91dmVhdSAwMDAwOjAxOjAwLjA6IHRtcjogbnVtZXJhdG9yICAgICAgIDog
+MDAwMDAwMDEKPiA+IE5vdiAyNCAxODoyNzoyNyB6ZXVzIGtlcm5lbDogbm91dmVhdSAwMDAwOjAx
+OjAwLjA6IHRtcjogZGVub21pbmF0b3IgICAgIDogMDAwMDAwMDEKPiA+IE5vdiAyNCAxODoyNzoy
+NyB6ZXVzIGtlcm5lbDogbm91dmVhdSAwMDAwOjAxOjAwLjA6IHRtcjogdGltZXIgZnJlcXVlbmN5
+IDogMEh6Cj4gPiBOb3YgMjQgMTg6Mjc6MjcgemV1cyBrZXJuZWw6IG5vdXZlYXUgMDAwMDowMTow
+MC4wOiB0bXI6IHRpbWUgbG93ICAgICAgICA6IDg3ZGJlNGRmCj4gPiBOb3YgMjQgMTg6Mjc6Mjcg
+emV1cyBrZXJuZWw6IG5vdXZlYXUgMDAwMDowMTowMC4wOiB0bXI6IHRpbWUgaGlnaCAgICAgICA6
+IDAwMDAwMDAwCj4gPiBOb3YgMjQgMTg6Mjc6MjcgemV1cyBrZXJuZWw6IG5vdXZlYXUgMDAwMDow
+MTowMC4wOiBmYjogMTYgTWlCIFNEUkFNCj4gPiBOb3YgMjQgMTg6Mjc6MjcgemV1cyBrZXJuZWw6
+IG5vdXZlYXUgMDAwMDowMTowMC4wOiBjbGs6IC0tOgo+ID4gTm92IDI0IDE4OjI3OjI3IHpldXMg
+a2VybmVsOiBub3V2ZWF1OiBEUk0tbWFzdGVyOjAwMDAwMDAwOjAwMDAwMDgwOiBpbml0IGNoaWxk
+cmVuLi4uCj4gPiBOb3YgMjQgMTg6Mjc6MjcgemV1cyBrZXJuZWw6IG5vdXZlYXU6IERSTS1tYXN0
+ZXI6MDAwMDAwMDA6MDAwMDAwODA6IGluaXQgY29tcGxldGVkIGluIDgwOTE1dXMKPiA+IE5vdiAy
+NCAxODoyNzoyNyB6ZXVzIGtlcm5lbDogbm91dmVhdTogRFJNLW1hc3RlcjowMDAwMDAwMDo4MDAw
+MDAwOTogaW5pdCBydW5uaW5nLi4uCj4gPiBOb3YgMjQgMTg6Mjc6MjcgemV1cyBrZXJuZWw6IG5v
+dXZlYXU6IERSTS1tYXN0ZXI6MDAwMDAwMDA6ODAwMDAwMDk6IGluaXQgY2hpbGRyZW4uLi4KPiA+
+IE5vdiAyNCAxODoyNzoyNyB6ZXVzIGtlcm5lbDogbm91dmVhdTogRFJNLW1hc3RlcjowMDAwMDAw
+MDo4MDAwMDAwOTogaW5pdCBjb21wbGV0ZWQgaW4gNjMxNXVzCj4gPiBOb3YgMjQgMTg6Mjc6Mjcg
+emV1cyBrZXJuZWw6IG5vdXZlYXU6IERSTS1tYXN0ZXI6MDAwMDAwMDA6ODAwMDAwMGQ6IGluaXQg
+cnVubmluZy4uLgo+ID4gTm92IDI0IDE4OjI3OjI3IHpldXMga2VybmVsOiBub3V2ZWF1OiBEUk0t
+bWFzdGVyOjAwMDAwMDAwOjgwMDAwMDBkOiBpbml0IGNoaWxkcmVuLi4uCj4gPiBOb3YgMjQgMTg6
+Mjc6MjcgemV1cyBrZXJuZWw6IG5vdXZlYXU6IERSTS1tYXN0ZXI6MDAwMDAwMDA6ODAwMDAwMGQ6
+IGluaXQgY29tcGxldGVkIGluIDYzMTl1cwo+ID4gTm92IDI0IDE4OjI3OjI3IHpldXMga2VybmVs
+OiBub3V2ZWF1OiBEUk0tbWFzdGVyOjAwMDAwMDAwOjAwMDAwMDAwOiBpbml0IHJ1bm5pbmcuLi4K
+PiA+IE5vdiAyNCAxODoyNzoyNyB6ZXVzIGtlcm5lbDogbm91dmVhdTogRFJNLW1hc3RlcjowMDAw
+MDAwMDowMDAwMDAwMDogaW5pdCBjaGlsZHJlbi4uLgo+ID4gTm92IDI0IDE4OjI3OjI3IHpldXMg
+a2VybmVsOiBub3V2ZWF1OiBEUk0tbWFzdGVyOjAwMDAwMDAwOjAwMDAwMDAwOiBpbml0IGNvbXBs
+ZXRlZCBpbiA2MzE3dXMKPiA+IE5vdiAyNCAxODoyNzoyNyB6ZXVzIGtlcm5lbDogbm91dmVhdTog
+RFJNOjAwMDAwMDAwOjAwMDAwMDgwOiBpbml0IHJ1bm5pbmcuLi4KPiA+IE5vdiAyNCAxODoyNzoy
+NyB6ZXVzIGtlcm5lbDogbm91dmVhdTogRFJNOjAwMDAwMDAwOjAwMDAwMDgwOiBpbml0IGNoaWxk
+cmVuLi4uCj4gPiBOb3YgMjQgMTg6Mjc6MjcgemV1cyBrZXJuZWw6IG5vdXZlYXU6IERSTTowMDAw
+MDAwMDowMDAwMDA4MDogaW5pdCBjb21wbGV0ZWQgaW4gNTcxM3VzCj4gPiBOb3YgMjQgMTg6Mjc6
+MjcgemV1cyBrZXJuZWw6IG5vdXZlYXU6IERSTTowMDAwMDAwMDo4MDAwMDAwOTogaW5pdCBydW5u
+aW5nLi4uCj4gPiBOb3YgMjQgMTg6Mjc6MjcgemV1cyBrZXJuZWw6IG5vdXZlYXU6IERSTTowMDAw
+MDAwMDo4MDAwMDAwOTogaW5pdCBjaGlsZHJlbi4uLgo+ID4gTm92IDI0IDE4OjI3OjI3IHpldXMg
+a2VybmVsOiBub3V2ZWF1OiBEUk06MDAwMDAwMDA6ODAwMDAwMDk6IGluaXQgY29tcGxldGVkIGlu
+IDU2NjR1cwo+ID4gTm92IDI0IDE4OjI3OjI3IHpldXMga2VybmVsOiBub3V2ZWF1OiBEUk06MDAw
+MDAwMDA6ODAwMDAwMGQ6IGluaXQgcnVubmluZy4uLgo+ID4gTm92IDI0IDE4OjI3OjI3IHpldXMg
+a2VybmVsOiBub3V2ZWF1OiBEUk06MDAwMDAwMDA6ODAwMDAwMGQ6IGluaXQgY2hpbGRyZW4uLi4K
+PiA+IE5vdiAyNCAxODoyNzoyNyB6ZXVzIGtlcm5lbDogbm91dmVhdTogRFJNOjAwMDAwMDAwOjgw
+MDAwMDBkOiBpbml0IGNvbXBsZXRlZCBpbiA1NjYzdXMKPiA+IE5vdiAyNCAxODoyNzoyNyB6ZXVz
+IGtlcm5lbDogbm91dmVhdSAwMDAwOjAxOjAwLjA6IERSTTogVlJBTTogMTUgTWlCCj4gPiBOb3Yg
+MjQgMTg6Mjc6MjcgemV1cyBrZXJuZWw6IG5vdXZlYXUgMDAwMDowMTowMC4wOiBEUk06IEdBUlQ6
+IDY0IE1pQgo+ID4gTm92IDI0IDE4OjI3OjI3IHpldXMga2VybmVsOiBub3V2ZWF1IDAwMDA6MDE6
+MDAuMDogRFJNOiBCTVAgdmVyc2lvbiAxLjEKPiA+IE5vdiAyNCAxODoyNzoyNyB6ZXVzIGtlcm5l
+bDogbm91dmVhdSAwMDAwOjAxOjAwLjA6IERSTTogTm8gRENCIGRhdGEgZm91bmQgaW4gVkJJT1MK
+PiA+IE5vdiAyNCAxODoyNzoyNyB6ZXVzIGtlcm5lbDogbm91dmVhdSAwMDAwOjAxOjAwLjA6IGky
+YzogYnVzIDAwMDA6IHByb2JpbmcgVFYgZW5jb2RlcnMKPiA+IE5vdiAyNCAxODoyNzoyNyB6ZXVz
+IGtlcm5lbDogbm91dmVhdSAwMDAwOjAxOjAwLjA6IGkyYzogYnVzIDAwMDA6IG5vIGRldmljZXMg
+Zm91bmQuCj4gPiBOb3YgMjQgMTg6Mjc6MjcgemV1cyBrZXJuZWw6IG5vdXZlYXU6IERSTTowMDAw
+MDAwMDowMDAwMDAwMjogaW5pdCBydW5uaW5nLi4uCj4gPiBOb3YgMjQgMTg6Mjc6MjcgemV1cyBr
+ZXJuZWw6IG5vdXZlYXU6IERSTTowMDAwMDAwMDowMDAwMDAwMjogaW5pdCBjaGlsZHJlbi4uLgo+
+ID4gTm92IDI0IDE4OjI3OjI3IHpldXMga2VybmVsOiBub3V2ZWF1OiBEUk06MDAwMDAwMDA6MDAw
+MDAwMDI6IGluaXQgY29tcGxldGVkIGluIDU3NTF1cwo+ID4gTm92IDI0IDE4OjI3OjI3IHpldXMg
+a2VybmVsOiBub3V2ZWF1OiBEUk06MDAwMDAwMDA6MDAwMDAwMDI6IGZpbmkgY2hpbGRyZW4uLi4K
+PiA+IE5vdiAyNCAxODoyNzoyNyB6ZXVzIGtlcm5lbDogbm91dmVhdTogRFJNOjAwMDAwMDAwOjAw
+MDAwMDAyOiBmaW5pIHJ1bm5pbmcuLi4KPiA+IE5vdiAyNCAxODoyNzoyNyB6ZXVzIGtlcm5lbDog
+bm91dmVhdTogRFJNOjAwMDAwMDAwOjAwMDAwMDAyOiBmaW5pIGNvbXBsZXRlZCBpbiA1NjIydXMK
+PiA+IE5vdiAyNCAxODoyNzoyNyB6ZXVzIGtlcm5lbDogbm91dmVhdTogRFJNOjAwMDAwMDAwOjAw
+MDAwMDAyOiBkZXN0cm95IGNoaWxkcmVuLi4uCj4gPiBOb3YgMjQgMTg6Mjc6MjcgemV1cyBrZXJu
+ZWw6IG5vdXZlYXU6IERSTTowMDAwMDAwMDowMDAwMDAwMjogZGVzdHJveSBydW5uaW5nLi4uCj4g
+PiBOb3YgMjQgMTg6Mjc6MjcgemV1cyBrZXJuZWw6IG5vdXZlYXU6IERSTTowMDAwMDAwMDowMDAw
+MDAwMjogZGVzdHJveSBjb21wbGV0ZWQgaW4gNTg5MnVzLi4uCj4gPiBOb3YgMjQgMTg6Mjc6Mjcg
+emV1cyBrZXJuZWw6IG5vdXZlYXU6IERSTTowMDAwMDAwMDowMDAwMDAwMjogaW5pdCBydW5uaW5n
+Li4uCj4gPiBOb3YgMjQgMTg6Mjc6MjcgemV1cyBrZXJuZWw6IG5vdXZlYXU6IERSTTowMDAwMDAw
+MDowMDAwMDAwMjogaW5pdCBjaGlsZHJlbi4uLgo+ID4gTm92IDI0IDE4OjI3OjI4IHpldXMga2Vy
+bmVsOiBub3V2ZWF1OiBEUk06MDAwMDAwMDA6MDAwMDAwMDI6IGluaXQgY29tcGxldGVkIGluIDU3
+MDl1cwo+ID4gTm92IDI0IDE4OjI3OjI4IHpldXMga2VybmVsOiBub3V2ZWF1OiBEUk06MDAwMDAw
+MDA6MDAwMDAwNmI6IGluaXQgcnVubmluZy4uLgo+ID4gTm92IDI0IDE4OjI3OjI4IHpldXMga2Vy
+bmVsOiBub3V2ZWF1OiBEUk06MDAwMDAwMDA6MDAwMDAwNmI6IGluaXQgY2hpbGRyZW4uLi4KPiA+
+IE5vdiAyNCAxODoyNzoyOCB6ZXVzIGtlcm5lbDogbm91dmVhdTogRFJNOjAwMDAwMDAwOjAwMDAw
+MDZiOiBpbml0IGNvbXBsZXRlZCBpbiA1NjY1dXMKPiA+IE5vdiAyNCAxODoyNzoyOCB6ZXVzIGtl
+cm5lbDogbm91dmVhdTogRFJNOjgwMDAwMDAyOjAwMDAwMDNkOiBpbml0IHJ1bm5pbmcuLi4KPiA+
+IE5vdiAyNCAxODoyNzoyOCB6ZXVzIGtlcm5lbDogbm91dmVhdTogRFJNOjgwMDAwMDAyOjAwMDAw
+MDNkOiBpbml0IGNoaWxkcmVuLi4uCj4gPiBOb3YgMjQgMTg6Mjc6MjggemV1cyBrZXJuZWw6IG5v
+dXZlYXU6IERSTTo4MDAwMDAwMjowMDAwMDAzZDogaW5pdCBjb21wbGV0ZWQgaW4gNTY2NnVzCj4g
+PiBOb3YgMjQgMTg6Mjc6MjggemV1cyBrZXJuZWw6IG5vdXZlYXU6IERSTTo4MDAwMDAwMzowMDAw
+MDAzZDogaW5pdCBydW5uaW5nLi4uCj4gPiBOb3YgMjQgMTg6Mjc6MjggemV1cyBrZXJuZWw6IG5v
+dXZlYXU6IERSTTo4MDAwMDAwMzowMDAwMDAzZDogaW5pdCBjaGlsZHJlbi4uLgo+ID4gTm92IDI0
+IDE4OjI3OjI4IHpldXMga2VybmVsOiBub3V2ZWF1OiBEUk06ODAwMDAwMDM6MDAwMDAwM2Q6IGlu
+aXQgY29tcGxldGVkIGluIDU3MTJ1cwo+ID4gTm92IDI0IDE4OjI3OjI4IHpldXMga2VybmVsOiBu
+b3V2ZWF1OiBEUk06MDAwMDAwNmU6ZmZmZmZmZmM6IGluaXQgcnVubmluZy4uLgo+ID4gTm92IDI0
+IDE4OjI3OjI4IHpldXMga2VybmVsOiBub3V2ZWF1OiBEUk06MDAwMDAwMDA6MDAwMDAwMDA6IGlu
+aXQgcnVubmluZy4uLgo+ID4gTm92IDI0IDE4OjI3OjI4IHpldXMga2VybmVsOiBub3V2ZWF1OiBE
+Uk06MDAwMDAwMDA6MDAwMDAwMDA6IGluaXQgY2hpbGRyZW4uLi4KPiA+IE5vdiAyNCAxODoyNzoy
+OCB6ZXVzIGtlcm5lbDogbm91dmVhdTogRFJNOjAwMDAwMDAwOjAwMDAwMDAwOiBpbml0IGNvbXBs
+ZXRlZCBpbiA1NzEwdXMKPiA+IE5vdiAyNCAxODoyNzoyOCB6ZXVzIGtlcm5lbDogbm91dmVhdTog
+RFJNOjAwMDAwMDZlOmZmZmZmZmZjOiBpbml0IGNoaWxkcmVuLi4uCj4gPiBOb3YgMjQgMTg6Mjc6
+MjggemV1cyBrZXJuZWw6IG5vdXZlYXU6IERSTTowMDAwMDA2ZTpmZmZmZmZmYzogaW5pdCBjb21w
+bGV0ZWQgaW4gMjMzOTF1cwo+ID4gTm92IDI0IDE4OjI3OjI4IHpldXMga2VybmVsOiBub3V2ZWF1
+OiBEUk06NTU1NTAwMDA6ZmZmZmZmZmM6IGluaXQgcnVubmluZy4uLgo+ID4gTm92IDI0IDE4OjI3
+OjI4IHpldXMga2VybmVsOiBub3V2ZWF1OiBEUk06NTU1NTAwMDA6ZmZmZmZmZmM6IGluaXQgY2hp
+bGRyZW4uLi4KPiA+IE5vdiAyNCAxODoyNzoyOCB6ZXVzIGtlcm5lbDogbm91dmVhdTogRFJNOjU1
+NTUwMDAwOmZmZmZmZmZjOiBpbml0IGNvbXBsZXRlZCBpbiA1NzE0dXMKPiA+IE5vdiAyNCAxODoy
+NzoyOCB6ZXVzIGtlcm5lbDogbm91dmVhdTogRFJNOjgwMDAwMDA2OjAwMDAwMDNkOiBpbml0IHJ1
+bm5pbmcuLi4KPiA+IE5vdiAyNCAxODoyNzoyOCB6ZXVzIGtlcm5lbDogbm91dmVhdTogRFJNOjgw
+MDAwMDA2OjAwMDAwMDNkOiBpbml0IGNoaWxkcmVuLi4uCj4gPiBOb3YgMjQgMTg6Mjc6MjggemV1
+cyBrZXJuZWw6IG5vdXZlYXU6IERSTTo4MDAwMDAwNjowMDAwMDAzZDogaW5pdCBjb21wbGV0ZWQg
+aW4gNTY2NXVzCj4gPiBOb3YgMjQgMTg6Mjc6MjggemV1cyBrZXJuZWw6IG5vdXZlYXU6IERSTTow
+MDAwMDAzOTowMDAwMDAzOTogaW5pdCBydW5uaW5nLi4uCj4gPiBOb3YgMjQgMTg6Mjc6MjggemV1
+cyBrZXJuZWw6IG5vdXZlYXU6IERSTTowMDAwMDAwMDowMDAwMDAwMDogaW5pdCBydW5uaW5nLi4u
+Cj4gPiBOb3YgMjQgMTg6Mjc6MjggemV1cyBrZXJuZWw6IG5vdXZlYXU6IERSTTowMDAwMDAwMDow
+MDAwMDAwMDogaW5pdCBjaGlsZHJlbi4uLgo+ID4gTm92IDI0IDE4OjI3OjI4IHpldXMga2VybmVs
+OiBub3V2ZWF1OiBEUk06MDAwMDAwMDA6MDAwMDAwMDA6IGluaXQgY29tcGxldGVkIGluIDU3MDV1
+cwo+ID4gTm92IDI0IDE4OjI3OjI4IHpldXMga2VybmVsOiBub3V2ZWF1OiBEUk06MDAwMDAwMzk6
+MDAwMDAwMzk6IGluaXQgY2hpbGRyZW4uLi4KPiA+IE5vdiAyNCAxODoyNzoyOCB6ZXVzIGtlcm5l
+bDogbm91dmVhdTogRFJNOjAwMDAwMDM5OjAwMDAwMDM5OiBpbml0IGNvbXBsZXRlZCBpbiAyMzMz
+OXVzCj4gPiBOb3YgMjQgMTg6Mjc6MjggemV1cyBrZXJuZWw6IG5vdXZlYXUgMDAwMDowMTowMC4w
+OiBEUk06IE1NOiB1c2luZyBNMk1GIGZvciBidWZmZXIgY29waWVzCj4gPiBOb3YgMjQgMTg6Mjc6
+MjggemV1cyBrZXJuZWw6IG5vdXZlYXUgMDAwMDowMTowMC4wOiBiaW9zOiBEQ0IgdGFibGUgbm90
+IGZvdW5kCj4gPiBOb3YgMjQgMTg6Mjc6MjggemV1cyBrZXJuZWw6IG5vdXZlYXU6IERSTTowMDAw
+MDAwMDowMDAwMDA0NjogaW5pdCBydW5uaW5nLi4uCj4gPiBOb3YgMjQgMTg6Mjc6MjggemV1cyBr
+ZXJuZWw6IG5vdXZlYXU6IERSTTowMDAwMDAwMDowMDAwMDA0NjogaW5pdCBjaGlsZHJlbi4uLgo+
+ID4gTm92IDI0IDE4OjI3OjI4IHpldXMga2VybmVsOiBub3V2ZWF1OiBEUk06MDAwMDAwMDA6MDAw
+MDAwNDY6IGluaXQgY29tcGxldGVkIGluIDU2NjR1cwo+ID4gTm92IDI0IDE4OjI3OjI4IHpldXMg
+a2VybmVsOiBub3V2ZWF1IDAwMDA6MDE6MDAuMDogRFJNOiBTYXZpbmcgVkdBIGZvbnRzCj4gPiBO
+b3YgMjQgMTg6Mjc6MjggemV1cyBrZXJuZWw6IG5vdXZlYXUgMDAwMDowMTowMC4wOiBEUk06IE5v
+IERDQiBkYXRhIGZvdW5kIGluIFZCSU9TCj4gPiBOb3YgMjQgMTg6Mjc6MjggemV1cyBrZXJuZWw6
+IG5vdXZlYXU6IERSTTowMDAwMDAwMDpmZmZmZmZmZjogaW5pdCBydW5uaW5nLi4uCj4gPiBOb3Yg
+MjQgMTg6Mjc6MjggemV1cyBrZXJuZWw6IG5vdXZlYXU6IERSTTowMDAwMDAwMDpmZmZmZmZmZjog
+aW5pdCBjaGlsZHJlbi4uLgo+ID4gTm92IDI0IDE4OjI3OjI4IHpldXMga2VybmVsOiBub3V2ZWF1
+OiBEUk06MDAwMDAwMDA6ZmZmZmZmZmY6IGluaXQgY29tcGxldGVkIGluIDU3MTF1cwo+ID4gTm92
+IDI0IDE4OjI3OjI4IHpldXMga2VybmVsOiBub3V2ZWF1OiBEUk0tbWFzdGVyOjAwMDAwMDAwOjAw
+MDAwMDAwOiBpbml0IHJ1bm5pbmcuLi4KPiA+IE5vdiAyNCAxODoyNzoyOCB6ZXVzIGtlcm5lbDog
+bm91dmVhdTogRFJNLW1hc3RlcjowMDAwMDAwMDowMDAwMDAwMDogaW5pdCBjaGlsZHJlbi4uLgo+
+ID4gTm92IDI0IDE4OjI3OjI4IHpldXMga2VybmVsOiBub3V2ZWF1OiBEUk0tbWFzdGVyOjAwMDAw
+MDAwOjAwMDAwMDAwOiBpbml0IGNvbXBsZXRlZCBpbiA2MzIwdXMKPiA+IE5vdiAyNCAxODoyNzoy
+OCB6ZXVzIGtlcm5lbDogbm91dmVhdTogc3dhcHBlclsxXTowMDAwMDAwMDowMDAwMDA4MDogaW5p
+dCBydW5uaW5nLi4uCj4gPiBOb3YgMjQgMTg6Mjc6MjggemV1cyBrZXJuZWw6IG5vdXZlYXU6IHN3
+YXBwZXJbMV06MDAwMDAwMDA6MDAwMDAwODA6IGluaXQgY2hpbGRyZW4uLi4KPiA+IE5vdiAyNCAx
+ODoyNzoyOCB6ZXVzIGtlcm5lbDogbm91dmVhdTogc3dhcHBlclsxXTowMDAwMDAwMDowMDAwMDA4
+MDogaW5pdCBjb21wbGV0ZWQgaW4gNjMyMHVzCj4gPiBOb3YgMjQgMTg6Mjc6MjggemV1cyBrZXJu
+ZWw6IG5vdXZlYXU6IHN3YXBwZXJbMV06MDAwMDAwMDA6ODAwMDAwMDk6IGluaXQgcnVubmluZy4u
+Lgo+ID4gTm92IDI0IDE4OjI3OjI4IHpldXMga2VybmVsOiBub3V2ZWF1OiBzd2FwcGVyWzFdOjAw
+MDAwMDAwOjgwMDAwMDA5OiBpbml0IGNoaWxkcmVuLi4uCj4gPiBOb3YgMjQgMTg6Mjc6MjggemV1
+cyBrZXJuZWw6IG5vdXZlYXU6IHN3YXBwZXJbMV06MDAwMDAwMDA6ODAwMDAwMDk6IGluaXQgY29t
+cGxldGVkIGluIDYzMjB1cwo+ID4gTm92IDI0IDE4OjI3OjI4IHpldXMga2VybmVsOiBub3V2ZWF1
+OiBzd2FwcGVyWzFdOjAwMDAwMDAwOjgwMDAwMDBkOiBpbml0IHJ1bm5pbmcuLi4KPiA+IE5vdiAy
+NCAxODoyNzoyOCB6ZXVzIGtlcm5lbDogbm91dmVhdTogc3dhcHBlclsxXTowMDAwMDAwMDo4MDAw
+MDAwZDogaW5pdCBjaGlsZHJlbi4uLgo+ID4gTm92IDI0IDE4OjI3OjI4IHpldXMga2VybmVsOiBu
+b3V2ZWF1OiBzd2FwcGVyWzFdOjAwMDAwMDAwOjgwMDAwMDBkOiBpbml0IGNvbXBsZXRlZCBpbiA2
+MzE3dXMKPiA+IE5vdiAyNCAxODoyNzoyOCB6ZXVzIGtlcm5lbDogbm91dmVhdTogRFJNOjAwMDAw
+MDYyOjAwMDAwMDQyOiBpbml0IHJ1bm5pbmcuLi4KPiA+IE5vdiAyNCAxODoyNzoyOCB6ZXVzIGtl
+cm5lbDogbm91dmVhdTogRFJNOjAwMDAwMDYyOjAwMDAwMDQyOiBpbml0IGNoaWxkcmVuLi4uCj4g
+PiBOb3YgMjQgMTg6Mjc6MjggemV1cyBrZXJuZWw6IG5vdXZlYXU6IERSTTowMDAwMDA2MjowMDAw
+MDA0MjogaW5pdCBjb21wbGV0ZWQgaW4gNTcxOXVzCj4gPiBOb3YgMjQgMTg6Mjc6MjggemV1cyBr
+ZXJuZWw6IG5vdXZlYXU6IERSTTowMDAwMDAxOTowMDAwMDAxOTogaW5pdCBydW5uaW5nLi4uCj4g
+PiBOb3YgMjQgMTg6Mjc6MjggemV1cyBrZXJuZWw6IG5vdXZlYXU6IERSTTowMDAwMDAxOTowMDAw
+MDAxOTogaW5pdCBjaGlsZHJlbi4uLgo+ID4gTm92IDI0IDE4OjI3OjI4IHpldXMga2VybmVsOiBu
+b3V2ZWF1OiBEUk06MDAwMDAwMTk6MDAwMDAwMTk6IGluaXQgY29tcGxldGVkIGluIDU3MTJ1cwo+
+ID4gTm92IDI0IDE4OjI3OjI4IHpldXMga2VybmVsOiBub3V2ZWF1OiBEUk06MDAwMDAwNDM6MDAw
+MDAwNDM6IGluaXQgcnVubmluZy4uLgo+ID4gTm92IDI0IDE4OjI3OjI4IHpldXMga2VybmVsOiBu
+b3V2ZWF1OiBEUk06MDAwMDAwNDM6MDAwMDAwNDM6IGluaXQgY2hpbGRyZW4uLi4KPiA+IE5vdiAy
+NCAxODoyNzoyOCB6ZXVzIGtlcm5lbDogbm91dmVhdTogRFJNOjAwMDAwMDQzOjAwMDAwMDQzOiBp
+bml0IGNvbXBsZXRlZCBpbiA1NjY3dXMKPiA+IE5vdiAyNCAxODoyNzoyOCB6ZXVzIGtlcm5lbDog
+bm91dmVhdTogRFJNOjAwMDAwMDQ0OjAwMDAwMDQ0OiBpbml0IHJ1bm5pbmcuLi4KPiA+IE5vdiAy
+NCAxODoyNzoyOCB6ZXVzIGtlcm5lbDogbm91dmVhdTogRFJNOjAwMDAwMDQ0OjAwMDAwMDQ0OiBp
+bml0IGNoaWxkcmVuLi4uCj4gPiBOb3YgMjQgMTg6Mjc6MjggemV1cyBrZXJuZWw6IG5vdXZlYXU6
+IERSTTowMDAwMDA0NDowMDAwMDA0NDogaW5pdCBjb21wbGV0ZWQgaW4gNTY2N3VzCj4gPiBOb3Yg
+MjQgMTg6Mjc6MjggemV1cyBrZXJuZWw6IG5vdXZlYXU6IERSTTowMDAwMDA0YTowMDAwMDA0YTog
+aW5pdCBydW5uaW5nLi4uCj4gPiBOb3YgMjQgMTg6Mjc6MjggemV1cyBrZXJuZWw6IG5vdXZlYXU6
+IERSTTowMDAwMDA0YTowMDAwMDA0YTogaW5pdCBjaGlsZHJlbi4uLgo+ID4gTm92IDI0IDE4OjI3
+OjI4IHpldXMga2VybmVsOiBub3V2ZWF1OiBEUk06MDAwMDAwNGE6MDAwMDAwNGE6IGluaXQgY29t
+cGxldGVkIGluIDU3MTJ1cwo+ID4gTm92IDI0IDE4OjI3OjI4IHpldXMga2VybmVsOiBub3V2ZWF1
+OiBEUk06MDAwMDAwNWY6MDAwMDAwNWY6IGluaXQgcnVubmluZy4uLgo+ID4gTm92IDI0IDE4OjI3
+OjI4IHpldXMga2VybmVsOiBub3V2ZWF1OiBEUk06MDAwMDAwNWY6MDAwMDAwNWY6IGluaXQgY2hp
+bGRyZW4uLi4KPiA+IE5vdiAyNCAxODoyNzoyOCB6ZXVzIGtlcm5lbDogbm91dmVhdTogRFJNOjAw
+MDAwMDVmOjAwMDAwMDVmOiBpbml0IGNvbXBsZXRlZCBpbiA1NzEydXMKPiA+IE5vdiAyNCAxODoy
+NzoyOCB6ZXVzIGtlcm5lbDogbm91dmVhdSAwMDAwOjAxOjAwLjA6IGdyOiBpbnRyIDAwMDAwMDAx
+IFtOT1RJRlldIG5zb3VyY2UgMDAwMDAwNDAgW0lMTEVHQUxfTVRIRF0gbnN0YXR1cyAwMDAwNDAw
+MCBbUFJPVEVDVElPTl9GQVVMVF0gY2ggMCBbRFJNXSBzdWJjIDIgY2xhc3MgMDA1ZiBtdGhkIDAx
+OWMgZGF0YSAwMDAwMThhNgo+ID4gTm92IDI0IDE4OjI3OjI4IHpldXMga2VybmVsOiBub3V2ZWF1
+IDAwMDA6MDE6MDAuMDogZ3I6IGludHIgMDAwMDAwMDEgW05PVElGWV0gbnNvdXJjZSAwMDAwMDA0
+MCBbSUxMRUdBTF9NVEhEXSBuc3RhdHVzIDAwMDA0MDAwIFtQUk9URUNUSU9OX0ZBVUxUXSBjaCAw
+IFtEUk1dIHN1YmMgMiBjbGFzcyAwMDVmIG10aGQgMDJmYyBkYXRhIDAwMDAwMDAzCj4gPiBOb3Yg
+MjQgMTg6Mjc6MjggemV1cyBrZXJuZWw6IG5vdXZlYXUgMDAwMDowMTowMC4wOiBncjogaW50ciAw
+MDAwMDAwMSBbTk9USUZZXSBuc291cmNlIDAwMDAwMDQwIFtJTExFR0FMX01USERdIG5zdGF0dXMg
+MDAwMDQwMDAgW1BST1RFQ1RJT05fRkFVTFRdIGNoIDAgW0RSTV0gc3ViYyAzIGNsYXNzIDAwNGEg
+bXRoZCAwMTk4IGRhdGEgMDAwMDE4YTYKPiA+IE5vdiAyNCAxODoyNzoyOCB6ZXVzIGtlcm5lbDog
+bm91dmVhdSAwMDAwOjAxOjAwLjA6IGdyOiBpbnRyIDAwMDAwMDAxIFtOT1RJRlldIG5zb3VyY2Ug
+MDAwMDAwNDAgW0lMTEVHQUxfTVRIRF0gbnN0YXR1cyAwMDAwNDAwMCBbUFJPVEVDVElPTl9GQVVM
+VF0gY2ggMCBbRFJNXSBzdWJjIDMgY2xhc3MgMDA0YSBtdGhkIDAxODggZGF0YSAwMDAwMThhOQo+
+ID4gTm92IDI0IDE4OjI3OjI4IHpldXMga2VybmVsOiBub3V2ZWF1IDAwMDA6MDE6MDAuMDogZ3I6
+IGludHIgMDAwMDAwMDEgW05PVElGWV0gbnNvdXJjZSAwMDAwMDA0MCBbSUxMRUdBTF9NVEhEXSBu
+c3RhdHVzIDAwMDA0MDAwIFtQUk9URUNUSU9OX0ZBVUxUXSBjaCAwIFtEUk1dIHN1YmMgMyBjbGFz
+cyAwMDRhIG10aGQgMDE4YyBkYXRhIDAwMDAxOGE4Cj4gPiBOb3YgMjQgMTg6Mjc6MjggemV1cyBr
+ZXJuZWw6IG5vdXZlYXUgMDAwMDowMTowMC4wOiBncjogaW50ciAwMDAwMDAwMSBbTk9USUZZXSBu
+c291cmNlIDAwMDAwMDQwIFtJTExFR0FMX01USERdIG5zdGF0dXMgMDAwMDQwMDAgW1BST1RFQ1RJ
+T05fRkFVTFRdIGNoIDAgW0RSTV0gc3ViYyAzIGNsYXNzIDAwNGEgbXRoZCAwMmZjIGRhdGEgMDAw
+MDAwMDMKPiA+IE5vdiAyNCAxODoyNzoyOCB6ZXVzIGtlcm5lbDogbm91dmVhdSAwMDAwOjAxOjAw
+LjA6IGdyOiBpbnRyIDAwMDAwMDAxIFtOT1RJRlldIG5zb3VyY2UgMDAwMDAwNDAgW0lMTEVHQUxf
+TVRIRF0gbnN0YXR1cyAwMDAwNDAwMCBbUFJPVEVDVElPTl9GQVVMVF0gY2ggMCBbRFJNXSBzdWJj
+IDMgY2xhc3MgMDA0YSBtdGhkIDAyZmMgZGF0YSAwMDAwMDAwMwo+ID4gTm92IDI0IDE4OjI3OjI4
+IHpldXMga2VybmVsOiBub3V2ZWF1IDAwMDA6MDE6MDAuMDogRFJNOiBhbGxvY2F0ZWQgMTI4MHgx
+MDI0IGZiOiAweDQwMDAsIGJvIChwdHJ2YWwpCj4gPiBOb3YgMjQgMTg6Mjc6MjggemV1cyBrZXJu
+ZWw6IGZiY29uOiBub3V2ZWF1ZHJtZmIgKGZiMCkgaXMgcHJpbWFyeSBkZXZpY2UKPiA+IE5vdiAy
+NCAxODoyNzoyOCB6ZXVzIGtlcm5lbDogbm91dmVhdSAwMDAwOjAxOjAwLjA6IGZiMDogbm91dmVh
+dWRybWZiIGZyYW1lIGJ1ZmZlciBkZXZpY2UKPiA+IE5vdiAyNCAxODoyNzoyOCB6ZXVzIGtlcm5l
+bDogW2RybV0gSW5pdGlhbGl6ZWQgbm91dmVhdSAxLjMuMSAyMDEyMDgwMSBmb3IgMDAwMDowMTow
+MC4wIG9uIG1pbm9yIDAKPiA+IE5vdiAyNCAxODoyODoxMCB6ZXVzIGtlcm5lbDogbm91dmVhdSAw
+MDAwOjAxOjAwLjA6IGdyOiBpbnRyIDAwMDAwMDAxIFtOT1RJRlldIG5zb3VyY2UgMDAwMDAwNDAg
+W0lMTEVHQUxfTVRIRF0gbnN0YXR1cyAwMDAwNDAwMCBbUFJPVEVDVElPTl9GQVVMVF0gY2ggMCBb
+RFJNXSBzdWJjIDMgY2xhc3MgMDA0YSBtdGhkIDAyZmMgZGF0YSAwMDAwMDAwMwo+ID4gTm92IDI0
+IDE4OjI4OjEwIHpldXMga2VybmVsOiBub3V2ZWF1IDAwMDA6MDE6MDAuMDogZ3I6IGludHIgMDAw
+MDAwMDEgW05PVElGWV0gbnNvdXJjZSAwMDAwMDA0MCBbSUxMRUdBTF9NVEhEXSBuc3RhdHVzIDAw
+MDA0MDAwIFtQUk9URUNUSU9OX0ZBVUxUXSBjaCAwIFtEUk1dIHN1YmMgMyBjbGFzcyAwMDRhIG10
+aGQgMDJmYyBkYXRhIDAwMDAwMDAzCj4gPiBOb3YgMjQgMTg6Mjg6MTAgemV1cyBrZXJuZWw6IG5v
+dXZlYXUgMDAwMDowMTowMC4wOiBncjogaW50ciAwMDAwMDAwMSBbTk9USUZZXSBuc291cmNlIDAw
+MDAwMDQwIFtJTExFR0FMX01USERdIG5zdGF0dXMgMDAwMDQwMDAgW1BST1RFQ1RJT05fRkFVTFRd
+IGNoIDAgW0RSTV0gc3ViYyAzIGNsYXNzIDAwNGEgbXRoZCAwMmZjIGRhdGEgMDAwMDAwMDMKPiA+
+IE5vdiAyNCAxODoyODoxMCB6ZXVzIGtlcm5lbDogbm91dmVhdSAwMDAwOjAxOjAwLjA6IGdyOiBp
+bnRyIDAwMDAwMDAxIFtOT1RJRlldIG5zb3VyY2UgMDAwMDAwNDAgW0lMTEVHQUxfTVRIRF0gbnN0
+YXR1cyAwMDAwNDAwMCBbUFJPVEVDVElPTl9GQVVMVF0gY2ggMCBbRFJNXSBzdWJjIDMgY2xhc3Mg
+MDA0YSBtdGhkIDAyZmMgZGF0YSAwMDAwMDAwMwo+ID4gTm92IDI0IDE4OjI4OjEwIHpldXMga2Vy
+bmVsOiBub3V2ZWF1IDAwMDA6MDE6MDAuMDogZ3I6IGludHIgMDAwMDAwMDEgW05PVElGWV0gbnNv
+dXJjZSAwMDAwMDA0MCBbSUxMRUdBTF9NVEhEXSBuc3RhdHVzIDAwMDA0MDAwIFtQUk9URUNUSU9O
+X0ZBVUxUXSBjaCAwIFtEUk1dIHN1YmMgMyBjbGFzcyAwMDRhIG10aGQgMDJmYyBkYXRhIDAwMDAw
+MDAzCj4gPiBOb3YgMjQgMTg6Mjg6MTAgemV1cyBrZXJuZWw6IG5vdXZlYXUgMDAwMDowMTowMC4w
+OiBncjogaW50ciAwMDAwMDAwMSBbTk9USUZZXSBuc291cmNlIDAwMDAwMDQwIFtJTExFR0FMX01U
+SERdIG5zdGF0dXMgMDAwMDQwMDAgW1BST1RFQ1RJT05fRkFVTFRdIGNoIDAgW0RSTV0gc3ViYyAz
+IGNsYXNzIDAwNGEgbXRoZCAwMmZjIGRhdGEgMDAwMDAwMDMKPiA+IE5vdiAyNCAxODoyODoxMCB6
+ZXVzIGtlcm5lbDogbm91dmVhdSAwMDAwOjAxOjAwLjA6IGdyOiBpbnRyIDAwMDAwMDAxIFtOT1RJ
+RlldIG5zb3VyY2UgMDAwMDAwNDAgW0lMTEVHQUxfTVRIRF0gbnN0YXR1cyAwMDAwNDAwMCBbUFJP
+VEVDVElPTl9GQVVMVF0gY2ggMCBbRFJNXSBzdWJjIDMgY2xhc3MgMDA0YSBtdGhkIDAyZmMgZGF0
+YSAwMDAwMDAwMwo+ID4gTm92IDI0IDE4OjI4OjEwIHpldXMga2VybmVsOiBub3V2ZWF1IDAwMDA6
+MDE6MDAuMDogZ3I6IGludHIgMDAwMDAwMDEgW05PVElGWV0gbnNvdXJjZSAwMDAwMDA0MCBbSUxM
+RUdBTF9NVEhEXSBuc3RhdHVzIDAwMDA0MDAwIFtQUk9URUNUSU9OX0ZBVUxUXSBjaCAwIFtEUk1d
+IHN1YmMgMyBjbGFzcyAwMDRhIG10aGQgMDJmYyBkYXRhIDAwMDAwMDAzCj4gPiBOb3YgMjQgMTg6
+Mjg6MTAgemV1cyBrZXJuZWw6IG5vdXZlYXUgMDAwMDowMTowMC4wOiBncjogaW50ciAwMDAwMDAw
+MSBbTk9USUZZXSBuc291cmNlIDAwMDAwMDQwIFtJTExFR0FMX01USERdIG5zdGF0dXMgMDAwMDQw
+MDAgW1BST1RFQ1RJT05fRkFVTFRdIGNoIDAgW0RSTV0gc3ViYyAzIGNsYXNzIDAwNGEgbXRoZCAw
+MmZjIGRhdGEgMDAwMDAwMDMKPiA+IE5vdiAyNCAxODoyODoxMCB6ZXVzIGtlcm5lbDogbm91dmVh
+dSAwMDAwOjAxOjAwLjA6IGdyOiBpbnRyIDAwMDAwMDAxIFtOT1RJRlldIG5zb3VyY2UgMDAwMDAw
+NDAgW0lMTEVHQUxfTVRIRF0gbnN0YXR1cyAwMDAwNDAwMCBbUFJPVEVDVElPTl9GQVVMVF0gY2gg
+MCBbRFJNXSBzdWJjIDMgY2xhc3MgMDA0YSBtdGhkIDAyZmMgZGF0YSAwMDAwMDAwMwo+ID4gLi4u
+Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCk5vdXZlYXUg
+bWFpbGluZyBsaXN0Ck5vdXZlYXVAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMu
+ZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vbm91dmVhdQo=
