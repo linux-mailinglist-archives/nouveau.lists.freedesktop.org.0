@@ -2,22 +2,22 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1E3F41127FE
-	for <lists+nouveau@lfdr.de>; Wed,  4 Dec 2019 10:44:33 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7AEA61127FF
+	for <lists+nouveau@lfdr.de>; Wed,  4 Dec 2019 10:44:35 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7BCBA72B27;
-	Wed,  4 Dec 2019 09:44:31 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id CACD572B38;
+	Wed,  4 Dec 2019 09:44:33 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
  [131.252.210.165])
- by gabe.freedesktop.org (Postfix) with ESMTP id C065972B1C
- for <nouveau@lists.freedesktop.org>; Wed,  4 Dec 2019 09:44:29 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTP id 58A3172B30
+ for <nouveau@lists.freedesktop.org>; Wed,  4 Dec 2019 09:44:32 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id BD970720E2; Wed,  4 Dec 2019 09:44:29 +0000 (UTC)
+ id 554EE720E2; Wed,  4 Dec 2019 09:44:32 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Wed, 04 Dec 2019 09:44:29 +0000
+Date: Wed, 04 Dec 2019 09:44:32 +0000
 X-Bugzilla-Reason: AssignedTo
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
@@ -33,14 +33,15 @@ X-Bugzilla-Priority: medium
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
 X-Bugzilla-Changed-Fields: bug_status resolution
-Message-ID: <bug-107537-8800-6hIdCssLPO@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-107537-8800@http.bugs.freedesktop.org/>
-References: <bug-107537-8800@http.bugs.freedesktop.org/>
+Message-ID: <bug-107628-8800-1MWwGPS1bE@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-107628-8800@http.bugs.freedesktop.org/>
+References: <bug-107628-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 107537] 4.14+ - Full screen OpenGL applications
- results in black screen
+Subject: [Nouveau] [Bug 107628] On GeForce 8200M G,
+ driver reports wild temperature fluctuations,
+ effectively blocking the system at boot
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -52,25 +53,25 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0611956224=="
+Content-Type: multipart/mixed; boundary="===============1458326725=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============0611956224==
-Content-Type: multipart/alternative; boundary="15754526692.D7E4ddb88.30361"
+--===============1458326725==
+Content-Type: multipart/alternative; boundary="15754526720.e19B1Eb.30361"
 Content-Transfer-Encoding: 7bit
 
 
---15754526692.D7E4ddb88.30361
-Date: Wed, 4 Dec 2019 09:44:29 +0000
+--15754526720.e19B1Eb.30361
+Date: Wed, 4 Dec 2019 09:44:32 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 
-https://bugs.freedesktop.org/show_bug.cgi?id=3D107537
+https://bugs.freedesktop.org/show_bug.cgi?id=3D107628
 
 Martin Peres <martin.peres@free.fr> changed:
 
@@ -79,7 +80,7 @@ Martin Peres <martin.peres@free.fr> changed:
              Status|NEW                         |RESOLVED
          Resolution|---                         |MOVED
 
---- Comment #5 from Martin Peres <martin.peres@free.fr> ---
+--- Comment #1 from Martin Peres <martin.peres@free.fr> ---
 -- GitLab Migration Automatic Message --
 
 This bug has been migrated to freedesktop.org's GitLab instance and has been
@@ -88,14 +89,14 @@ closed from further activity.
 You can subscribe and participate further through the new bug through this =
 link
 to our GitLab instance:
-https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/issues/450.
+https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/issues/451.
 
 --=20
 You are receiving this mail because:
 You are the assignee for the bug.=
 
---15754526692.D7E4ddb88.30361
-Date: Wed, 4 Dec 2019 09:44:29 +0000
+--15754526720.e19B1Eb.30361
+Date: Wed, 4 Dec 2019 09:44:32 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -112,10 +113,10 @@ span class=3D"fn">Martin Peres</span></a>
 </span> changed
           <a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - 4.14+ - Full screen OpenGL applications result=
-s in black screen"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D107537">bug 10753=
-7</a>
+   title=3D"RESOLVED MOVED - On GeForce 8200M G, driver reports wild temper=
+ature fluctuations, effectively blocking the system at boot"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D107628">bug 10762=
+8</a>
           <br>
              <table border=3D"1" cellspacing=3D"0" cellpadding=3D"8">
           <tr>
@@ -143,16 +144,16 @@ s in black screen"
         <div>
             <b><a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - 4.14+ - Full screen OpenGL applications result=
-s in black screen"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D107537#c5">Commen=
-t # 5</a>
+   title=3D"RESOLVED MOVED - On GeForce 8200M G, driver reports wild temper=
+ature fluctuations, effectively blocking the system at boot"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D107628#c1">Commen=
+t # 1</a>
               on <a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - 4.14+ - Full screen OpenGL applications result=
-s in black screen"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D107537">bug 10753=
-7</a>
+   title=3D"RESOLVED MOVED - On GeForce 8200M G, driver reports wild temper=
+ature fluctuations, effectively blocking the system at boot"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D107628">bug 10762=
+8</a>
               from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
 martin.peres&#64;free.fr" title=3D"Martin Peres &lt;martin.peres&#64;free.f=
 r&gt;"> <span class=3D"fn">Martin Peres</span></a>
@@ -166,8 +167,8 @@ You can subscribe and participate further through the new bug through this =
 link
 to our GitLab instance:
 <a href=3D"https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/is=
-sues/450">https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/iss=
-ues/450</a>.</pre>
+sues/451">https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/iss=
+ues/451</a>.</pre>
         </div>
       </p>
 
@@ -181,9 +182,9 @@ ues/450</a>.</pre>
     </body>
 </html>=
 
---15754526692.D7E4ddb88.30361--
+--15754526720.e19B1Eb.30361--
 
---===============0611956224==
+--===============1458326725==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -193,4 +194,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============0611956224==--
+--===============1458326725==--
