@@ -2,22 +2,22 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8526D112713
-	for <lists+nouveau@lfdr.de>; Wed,  4 Dec 2019 10:22:51 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 21750112714
+	for <lists+nouveau@lfdr.de>; Wed,  4 Dec 2019 10:23:00 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id F08466F96F;
-	Wed,  4 Dec 2019 09:22:48 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 95B806F5A0;
+	Wed,  4 Dec 2019 09:22:58 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
- by gabe.freedesktop.org (Postfix) with ESMTP id 816676F94B
- for <nouveau@lists.freedesktop.org>; Wed,  4 Dec 2019 09:22:47 +0000 (UTC)
+ [131.252.210.165])
+ by gabe.freedesktop.org (Postfix) with ESMTP id D97CC6FAC8
+ for <nouveau@lists.freedesktop.org>; Wed,  4 Dec 2019 09:22:57 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 7DE53720E2; Wed,  4 Dec 2019 09:22:47 +0000 (UTC)
+ id D5358720E2; Wed,  4 Dec 2019 09:22:52 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Wed, 04 Dec 2019 09:22:47 +0000
+Date: Wed, 04 Dec 2019 09:22:53 +0000
 X-Bugzilla-Reason: AssignedTo
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
@@ -33,16 +33,13 @@ X-Bugzilla-Priority: medium
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
 X-Bugzilla-Changed-Fields: resolution bug_status
-Message-ID: <bug-99202-8800-ZAvVkQymhp@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-99202-8800@http.bugs.freedesktop.org/>
-References: <bug-99202-8800@http.bugs.freedesktop.org/>
+Message-ID: <bug-99289-8800-TR9XoOuqka@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-99289-8800@http.bugs.freedesktop.org/>
+References: <bug-99289-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 99202] system freeze - fifo: SCHED_ERROR 0a
- [CTXSW_TIMEOUT] - MULTIPLE_WARP_ERRORS - DATA_ERROR 00000004
- [INVALID_VALUE] - ILLEGAL_CLASS ch 11 - RT_STORAGE_TYPE_MISMATCH -
- CLASS_SUBCH_MISMATCH
+Subject: [Nouveau] [Bug 99289] Display freezes after "gr: TRAP ch 6"
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -54,25 +51,25 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0515830990=="
+Content-Type: multipart/mixed; boundary="===============0105239453=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============0515830990==
-Content-Type: multipart/alternative; boundary="15754513674.CbdFd5f6d.25468"
+--===============0105239453==
+Content-Type: multipart/alternative; boundary="15754513721.79AA.25468"
 Content-Transfer-Encoding: 7bit
 
 
---15754513674.CbdFd5f6d.25468
-Date: Wed, 4 Dec 2019 09:22:47 +0000
+--15754513721.79AA.25468
+Date: Wed, 4 Dec 2019 09:22:52 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 
-https://bugs.freedesktop.org/show_bug.cgi?id=3D99202
+https://bugs.freedesktop.org/show_bug.cgi?id=3D99289
 
 Martin Peres <martin.peres@free.fr> changed:
 
@@ -81,7 +78,7 @@ Martin Peres <martin.peres@free.fr> changed:
          Resolution|---                         |MOVED
              Status|NEW                         |RESOLVED
 
---- Comment #6 from Martin Peres <martin.peres@free.fr> ---
+--- Comment #3 from Martin Peres <martin.peres@free.fr> ---
 -- GitLab Migration Automatic Message --
 
 This bug has been migrated to freedesktop.org's GitLab instance and has been
@@ -90,14 +87,14 @@ closed from further activity.
 You can subscribe and participate further through the new bug through this =
 link
 to our GitLab instance:
-https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/issues/312.
+https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/issues/313.
 
 --=20
 You are receiving this mail because:
 You are the assignee for the bug.=
 
---15754513674.CbdFd5f6d.25468
-Date: Wed, 4 Dec 2019 09:22:47 +0000
+--15754513721.79AA.25468
+Date: Wed, 4 Dec 2019 09:22:52 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -114,10 +111,9 @@ span class=3D"fn">Martin Peres</span></a>
 </span> changed
           <a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - system freeze - fifo: SCHED_ERROR 0a [CTXSW_TI=
-MEOUT] - MULTIPLE_WARP_ERRORS - DATA_ERROR 00000004 [INVALID_VALUE] - ILLEG=
-AL_CLASS ch 11 - RT_STORAGE_TYPE_MISMATCH - CLASS_SUBCH_MISMATCH"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D99202">bug 99202<=
+   title=3D"RESOLVED MOVED - Display freezes after &quot;gr: TRAP ch 6&quot=
+;"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D99289">bug 99289<=
 /a>
           <br>
              <table border=3D"1" cellspacing=3D"0" cellpadding=3D"8">
@@ -146,17 +142,15 @@ AL_CLASS ch 11 - RT_STORAGE_TYPE_MISMATCH - CLASS_SUBCH_MISMATCH"
         <div>
             <b><a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - system freeze - fifo: SCHED_ERROR 0a [CTXSW_TI=
-MEOUT] - MULTIPLE_WARP_ERRORS - DATA_ERROR 00000004 [INVALID_VALUE] - ILLEG=
-AL_CLASS ch 11 - RT_STORAGE_TYPE_MISMATCH - CLASS_SUBCH_MISMATCH"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D99202#c6">Comment=
- # 6</a>
+   title=3D"RESOLVED MOVED - Display freezes after &quot;gr: TRAP ch 6&quot=
+;"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D99289#c3">Comment=
+ # 3</a>
               on <a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - system freeze - fifo: SCHED_ERROR 0a [CTXSW_TI=
-MEOUT] - MULTIPLE_WARP_ERRORS - DATA_ERROR 00000004 [INVALID_VALUE] - ILLEG=
-AL_CLASS ch 11 - RT_STORAGE_TYPE_MISMATCH - CLASS_SUBCH_MISMATCH"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D99202">bug 99202<=
+   title=3D"RESOLVED MOVED - Display freezes after &quot;gr: TRAP ch 6&quot=
+;"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D99289">bug 99289<=
 /a>
               from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
 martin.peres&#64;free.fr" title=3D"Martin Peres &lt;martin.peres&#64;free.f=
@@ -171,8 +165,8 @@ You can subscribe and participate further through the new bug through this =
 link
 to our GitLab instance:
 <a href=3D"https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/is=
-sues/312">https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/iss=
-ues/312</a>.</pre>
+sues/313">https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/iss=
+ues/313</a>.</pre>
         </div>
       </p>
 
@@ -186,9 +180,9 @@ ues/312</a>.</pre>
     </body>
 </html>=
 
---15754513674.CbdFd5f6d.25468--
+--15754513721.79AA.25468--
 
---===============0515830990==
+--===============0105239453==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -198,4 +192,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============0515830990==--
+--===============0105239453==--
