@@ -2,22 +2,22 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 242CB11273E
-	for <lists+nouveau@lfdr.de>; Wed,  4 Dec 2019 10:27:08 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 581AA11273F
+	for <lists+nouveau@lfdr.de>; Wed,  4 Dec 2019 10:27:13 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 877F96FE1D;
-	Wed,  4 Dec 2019 09:27:06 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C00346FE0E;
+	Wed,  4 Dec 2019 09:27:11 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
  [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
- by gabe.freedesktop.org (Postfix) with ESMTP id C5C026FE1A
- for <nouveau@lists.freedesktop.org>; Wed,  4 Dec 2019 09:27:05 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTP id 77DC26FE20
+ for <nouveau@lists.freedesktop.org>; Wed,  4 Dec 2019 09:27:10 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id C2014720E2; Wed,  4 Dec 2019 09:27:05 +0000 (UTC)
+ id 75A94720E2; Wed,  4 Dec 2019 09:27:10 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Wed, 04 Dec 2019 09:27:05 +0000
+Date: Wed, 04 Dec 2019 09:27:10 +0000
 X-Bugzilla-Reason: AssignedTo
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
@@ -25,7 +25,7 @@ X-Bugzilla-Product: xorg
 X-Bugzilla-Component: Driver/nouveau
 X-Bugzilla-Version: git
 X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: major
+X-Bugzilla-Severity: normal
 X-Bugzilla-Who: martin.peres@free.fr
 X-Bugzilla-Status: RESOLVED
 X-Bugzilla-Resolution: MOVED
@@ -33,14 +33,14 @@ X-Bugzilla-Priority: medium
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
 X-Bugzilla-Changed-Fields: bug_status resolution
-Message-ID: <bug-100676-8800-frJ1asbtrO@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-100676-8800@http.bugs.freedesktop.org/>
-References: <bug-100676-8800@http.bugs.freedesktop.org/>
+Message-ID: <bug-100691-8800-LD2ULBmUow@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-100691-8800@http.bugs.freedesktop.org/>
+References: <bug-100691-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 100676] gp104 - messy(random green and/or missing
- pixel lines) then no output at and after boot
+Subject: [Nouveau] [Bug 100691] [4.10] BUG: KASAN: use-after-free in
+ drm_calc_vbltimestamp_from_scanoutpos+0x625/0x740
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -52,25 +52,25 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0146024434=="
+Content-Type: multipart/mixed; boundary="===============0536452845=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============0146024434==
-Content-Type: multipart/alternative; boundary="15754516254.E8f646c.26859"
+--===============0536452845==
+Content-Type: multipart/alternative; boundary="15754516300.0d0FBF.26859"
 Content-Transfer-Encoding: 7bit
 
 
---15754516254.E8f646c.26859
-Date: Wed, 4 Dec 2019 09:27:05 +0000
+--15754516300.0d0FBF.26859
+Date: Wed, 4 Dec 2019 09:27:10 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 
-https://bugs.freedesktop.org/show_bug.cgi?id=3D100676
+https://bugs.freedesktop.org/show_bug.cgi?id=3D100691
 
 Martin Peres <martin.peres@free.fr> changed:
 
@@ -79,7 +79,7 @@ Martin Peres <martin.peres@free.fr> changed:
              Status|NEW                         |RESOLVED
          Resolution|---                         |MOVED
 
---- Comment #6 from Martin Peres <martin.peres@free.fr> ---
+--- Comment #1 from Martin Peres <martin.peres@free.fr> ---
 -- GitLab Migration Automatic Message --
 
 This bug has been migrated to freedesktop.org's GitLab instance and has been
@@ -88,14 +88,14 @@ closed from further activity.
 You can subscribe and participate further through the new bug through this =
 link
 to our GitLab instance:
-https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/issues/342.
+https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/issues/343.
 
 --=20
 You are receiving this mail because:
 You are the assignee for the bug.=
 
---15754516254.E8f646c.26859
-Date: Wed, 4 Dec 2019 09:27:05 +0000
+--15754516300.0d0FBF.26859
+Date: Wed, 4 Dec 2019 09:27:10 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -112,10 +112,10 @@ span class=3D"fn">Martin Peres</span></a>
 </span> changed
           <a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - gp104 - messy(random green and/or missing pixe=
-l lines) then no output at and after boot"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D100676">bug 10067=
-6</a>
+   title=3D"RESOLVED MOVED - [4.10] BUG: KASAN: use-after-free in drm_calc_=
+vbltimestamp_from_scanoutpos+0x625/0x740"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D100691">bug 10069=
+1</a>
           <br>
              <table border=3D"1" cellspacing=3D"0" cellpadding=3D"8">
           <tr>
@@ -143,16 +143,16 @@ l lines) then no output at and after boot"
         <div>
             <b><a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - gp104 - messy(random green and/or missing pixe=
-l lines) then no output at and after boot"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D100676#c6">Commen=
-t # 6</a>
+   title=3D"RESOLVED MOVED - [4.10] BUG: KASAN: use-after-free in drm_calc_=
+vbltimestamp_from_scanoutpos+0x625/0x740"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D100691#c1">Commen=
+t # 1</a>
               on <a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - gp104 - messy(random green and/or missing pixe=
-l lines) then no output at and after boot"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D100676">bug 10067=
-6</a>
+   title=3D"RESOLVED MOVED - [4.10] BUG: KASAN: use-after-free in drm_calc_=
+vbltimestamp_from_scanoutpos+0x625/0x740"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D100691">bug 10069=
+1</a>
               from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
 martin.peres&#64;free.fr" title=3D"Martin Peres &lt;martin.peres&#64;free.f=
 r&gt;"> <span class=3D"fn">Martin Peres</span></a>
@@ -166,8 +166,8 @@ You can subscribe and participate further through the new bug through this =
 link
 to our GitLab instance:
 <a href=3D"https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/is=
-sues/342">https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/iss=
-ues/342</a>.</pre>
+sues/343">https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/iss=
+ues/343</a>.</pre>
         </div>
       </p>
 
@@ -181,9 +181,9 @@ ues/342</a>.</pre>
     </body>
 </html>=
 
---15754516254.E8f646c.26859--
+--15754516300.0d0FBF.26859--
 
---===============0146024434==
+--===============0536452845==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -193,4 +193,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============0146024434==--
+--===============0536452845==--
