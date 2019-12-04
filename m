@@ -2,22 +2,22 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 780871127D1
-	for <lists+nouveau@lfdr.de>; Wed,  4 Dec 2019 10:38:31 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C7B0C1127D3
+	for <lists+nouveau@lfdr.de>; Wed,  4 Dec 2019 10:38:40 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E67CE6FCBF;
-	Wed,  4 Dec 2019 09:38:29 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 28F766FF41;
+	Wed,  4 Dec 2019 09:38:39 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
- by gabe.freedesktop.org (Postfix) with ESMTP id 61B266FEE7
- for <nouveau@lists.freedesktop.org>; Wed,  4 Dec 2019 09:38:29 +0000 (UTC)
+ [131.252.210.165])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 7428B6FEA6
+ for <nouveau@lists.freedesktop.org>; Wed,  4 Dec 2019 09:38:38 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 5EA7C720E2; Wed,  4 Dec 2019 09:38:29 +0000 (UTC)
+ id 710C2720E2; Wed,  4 Dec 2019 09:38:38 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Wed, 04 Dec 2019 09:38:29 +0000
+Date: Wed, 04 Dec 2019 09:38:38 +0000
 X-Bugzilla-Reason: AssignedTo
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
@@ -32,14 +32,14 @@ X-Bugzilla-Resolution: MOVED
 X-Bugzilla-Priority: medium
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: bug_status resolution
-Message-ID: <bug-106077-8800-9n10UGCG3f@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-106077-8800@http.bugs.freedesktop.org/>
-References: <bug-106077-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-Changed-Fields: resolution bug_status
+Message-ID: <bug-106080-8800-m2HoDhQjFq@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-106080-8800@http.bugs.freedesktop.org/>
+References: <bug-106080-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 106077] gr: TRAP DISPATCH_QUERY
+Subject: [Nouveau] [Bug 106080] Time-out in `nvkm_fifo_chan_child_fini()`
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -51,34 +51,34 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1367364063=="
+Content-Type: multipart/mixed; boundary="===============1827737794=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============1367364063==
-Content-Type: multipart/alternative; boundary="15754523090.B20C.29389"
+--===============1827737794==
+Content-Type: multipart/alternative; boundary="15754523182.4DCF.29389"
 Content-Transfer-Encoding: 7bit
 
 
---15754523090.B20C.29389
-Date: Wed, 4 Dec 2019 09:38:29 +0000
+--15754523182.4DCF.29389
+Date: Wed, 4 Dec 2019 09:38:38 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 
-https://bugs.freedesktop.org/show_bug.cgi?id=3D106077
+https://bugs.freedesktop.org/show_bug.cgi?id=3D106080
 
 Martin Peres <martin.peres@free.fr> changed:
 
            What    |Removed                     |Added
 ----------------------------------------------------------------------------
-             Status|NEW                         |RESOLVED
          Resolution|---                         |MOVED
+             Status|NEW                         |RESOLVED
 
---- Comment #1 from Martin Peres <martin.peres@free.fr> ---
+--- Comment #2 from Martin Peres <martin.peres@free.fr> ---
 -- GitLab Migration Automatic Message --
 
 This bug has been migrated to freedesktop.org's GitLab instance and has been
@@ -87,14 +87,14 @@ closed from further activity.
 You can subscribe and participate further through the new bug through this =
 link
 to our GitLab instance:
-https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/issues/423.
+https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/issues/424.
 
 --=20
 You are receiving this mail because:
 You are the assignee for the bug.=
 
---15754523090.B20C.29389
-Date: Wed, 4 Dec 2019 09:38:29 +0000
+--15754523182.4DCF.29389
+Date: Wed, 4 Dec 2019 09:38:38 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -111,9 +111,9 @@ span class=3D"fn">Martin Peres</span></a>
 </span> changed
           <a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - gr: TRAP DISPATCH_QUERY"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D106077">bug 10607=
-7</a>
+   title=3D"RESOLVED MOVED - Time-out in `nvkm_fifo_chan_child_fini()`"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D106080">bug 10608=
+0</a>
           <br>
              <table border=3D"1" cellspacing=3D"0" cellpadding=3D"8">
           <tr>
@@ -123,32 +123,32 @@ span class=3D"fn">Martin Peres</span></a>
           </tr>
 
          <tr>
-           <td style=3D"text-align:right;">Status</td>
-           <td>NEW
-           </td>
-           <td>RESOLVED
-           </td>
-         </tr>
-
-         <tr>
            <td style=3D"text-align:right;">Resolution</td>
            <td>---
            </td>
            <td>MOVED
+           </td>
+         </tr>
+
+         <tr>
+           <td style=3D"text-align:right;">Status</td>
+           <td>NEW
+           </td>
+           <td>RESOLVED
            </td>
          </tr></table>
       <p>
         <div>
             <b><a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - gr: TRAP DISPATCH_QUERY"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D106077#c1">Commen=
-t # 1</a>
+   title=3D"RESOLVED MOVED - Time-out in `nvkm_fifo_chan_child_fini()`"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D106080#c2">Commen=
+t # 2</a>
               on <a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - gr: TRAP DISPATCH_QUERY"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D106077">bug 10607=
-7</a>
+   title=3D"RESOLVED MOVED - Time-out in `nvkm_fifo_chan_child_fini()`"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D106080">bug 10608=
+0</a>
               from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
 martin.peres&#64;free.fr" title=3D"Martin Peres &lt;martin.peres&#64;free.f=
 r&gt;"> <span class=3D"fn">Martin Peres</span></a>
@@ -162,8 +162,8 @@ You can subscribe and participate further through the new bug through this =
 link
 to our GitLab instance:
 <a href=3D"https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/is=
-sues/423">https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/iss=
-ues/423</a>.</pre>
+sues/424">https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/iss=
+ues/424</a>.</pre>
         </div>
       </p>
 
@@ -177,9 +177,9 @@ ues/423</a>.</pre>
     </body>
 </html>=
 
---15754523090.B20C.29389--
+--15754523182.4DCF.29389--
 
---===============1367364063==
+--===============1827737794==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -189,4 +189,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============1367364063==--
+--===============1827737794==--
