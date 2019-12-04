@@ -2,28 +2,28 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B29FD112590
-	for <lists+nouveau@lfdr.de>; Wed,  4 Dec 2019 09:42:46 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C5B58112591
+	for <lists+nouveau@lfdr.de>; Wed,  4 Dec 2019 09:42:55 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2A9FB6F542;
-	Wed,  4 Dec 2019 08:42:45 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 36D5C6F465;
+	Wed,  4 Dec 2019 08:42:54 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
  [131.252.210.165])
- by gabe.freedesktop.org (Postfix) with ESMTP id E4D9D6F4EE
- for <nouveau@lists.freedesktop.org>; Wed,  4 Dec 2019 08:42:43 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTP id 232756F481
+ for <nouveau@lists.freedesktop.org>; Wed,  4 Dec 2019 08:42:53 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id E1A0E720E2; Wed,  4 Dec 2019 08:42:43 +0000 (UTC)
+ id 1FA1C720E2; Wed,  4 Dec 2019 08:42:53 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Wed, 04 Dec 2019 08:42:44 +0000
+Date: Wed, 04 Dec 2019 08:42:53 +0000
 X-Bugzilla-Reason: AssignedTo
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
 X-Bugzilla-Product: xorg
 X-Bugzilla-Component: Driver/nouveau
-X-Bugzilla-Version: unspecified
+X-Bugzilla-Version: 7.7 (2012.06)
 X-Bugzilla-Keywords: 
 X-Bugzilla-Severity: normal
 X-Bugzilla-Who: martin.peres@free.fr
@@ -33,13 +33,13 @@ X-Bugzilla-Priority: medium
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
 X-Bugzilla-Changed-Fields: resolution bug_status
-Message-ID: <bug-74320-8800-7sKcCnhcBc@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-74320-8800@http.bugs.freedesktop.org/>
-References: <bug-74320-8800@http.bugs.freedesktop.org/>
+Message-ID: <bug-74695-8800-HS0QkpIb1u@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-74695-8800@http.bugs.freedesktop.org/>
+References: <bug-74695-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 74320] [NV4B] Screen freeze with flashplugin-nonfree
+Subject: [Nouveau] [Bug 74695] [NV86] GPU hangs on resume, causing X to crash
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -51,25 +51,25 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0498283052=="
+Content-Type: multipart/mixed; boundary="===============1744012535=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============0498283052==
-Content-Type: multipart/alternative; boundary="15754489630.BA7311A.17864"
+--===============1744012535==
+Content-Type: multipart/alternative; boundary="15754489731.4376eEdb.17864"
 Content-Transfer-Encoding: 7bit
 
 
---15754489630.BA7311A.17864
-Date: Wed, 4 Dec 2019 08:42:43 +0000
+--15754489731.4376eEdb.17864
+Date: Wed, 4 Dec 2019 08:42:53 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 
-https://bugs.freedesktop.org/show_bug.cgi?id=3D74320
+https://bugs.freedesktop.org/show_bug.cgi?id=3D74695
 
 Martin Peres <martin.peres@free.fr> changed:
 
@@ -78,7 +78,7 @@ Martin Peres <martin.peres@free.fr> changed:
          Resolution|---                         |MOVED
              Status|NEW                         |RESOLVED
 
---- Comment #3 from Martin Peres <martin.peres@free.fr> ---
+--- Comment #15 from Martin Peres <martin.peres@free.fr> ---
 -- GitLab Migration Automatic Message --
 
 This bug has been migrated to freedesktop.org's GitLab instance and has been
@@ -87,14 +87,14 @@ closed from further activity.
 You can subscribe and participate further through the new bug through this =
 link
 to our GitLab instance:
-https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/issues/90.
+https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/issues/91.
 
 --=20
 You are receiving this mail because:
 You are the assignee for the bug.=
 
---15754489630.BA7311A.17864
-Date: Wed, 4 Dec 2019 08:42:43 +0000
+--15754489731.4376eEdb.17864
+Date: Wed, 4 Dec 2019 08:42:53 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -111,8 +111,8 @@ span class=3D"fn">Martin Peres</span></a>
 </span> changed
           <a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - [NV4B] Screen freeze with flashplugin-nonfree"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D74320">bug 74320<=
+   title=3D"RESOLVED MOVED - [NV86] GPU hangs on resume, causing X to crash"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D74695">bug 74695<=
 /a>
           <br>
              <table border=3D"1" cellspacing=3D"0" cellpadding=3D"8">
@@ -141,13 +141,13 @@ span class=3D"fn">Martin Peres</span></a>
         <div>
             <b><a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - [NV4B] Screen freeze with flashplugin-nonfree"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D74320#c3">Comment=
- # 3</a>
+   title=3D"RESOLVED MOVED - [NV86] GPU hangs on resume, causing X to crash"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D74695#c15">Commen=
+t # 15</a>
               on <a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - [NV4B] Screen freeze with flashplugin-nonfree"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D74320">bug 74320<=
+   title=3D"RESOLVED MOVED - [NV86] GPU hangs on resume, causing X to crash"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D74695">bug 74695<=
 /a>
               from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
 martin.peres&#64;free.fr" title=3D"Martin Peres &lt;martin.peres&#64;free.f=
@@ -162,8 +162,8 @@ You can subscribe and participate further through the new bug through this =
 link
 to our GitLab instance:
 <a href=3D"https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/is=
-sues/90">https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/issu=
-es/90</a>.</pre>
+sues/91">https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/issu=
+es/91</a>.</pre>
         </div>
       </p>
 
@@ -177,9 +177,9 @@ es/90</a>.</pre>
     </body>
 </html>=
 
---15754489630.BA7311A.17864--
+--15754489731.4376eEdb.17864--
 
---===============0498283052==
+--===============1744012535==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -189,4 +189,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============0498283052==--
+--===============1744012535==--
