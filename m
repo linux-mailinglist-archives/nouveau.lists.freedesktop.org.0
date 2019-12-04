@@ -2,22 +2,22 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id C830A11282E
-	for <lists+nouveau@lfdr.de>; Wed,  4 Dec 2019 10:45:44 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B9077112832
+	for <lists+nouveau@lfdr.de>; Wed,  4 Dec 2019 10:45:52 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id EA9AE72BBC;
-	Wed,  4 Dec 2019 09:45:42 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E645472BCC;
+	Wed,  4 Dec 2019 09:45:50 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
  [131.252.210.165])
- by gabe.freedesktop.org (Postfix) with ESMTP id 5121472BC5
- for <nouveau@lists.freedesktop.org>; Wed,  4 Dec 2019 09:45:42 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTP id 2865172BC8
+ for <nouveau@lists.freedesktop.org>; Wed,  4 Dec 2019 09:45:49 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 4E193720E2; Wed,  4 Dec 2019 09:45:42 +0000 (UTC)
+ id 25795720E2; Wed,  4 Dec 2019 09:45:49 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Wed, 04 Dec 2019 09:45:42 +0000
+Date: Wed, 04 Dec 2019 09:45:49 +0000
 X-Bugzilla-Reason: AssignedTo
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
@@ -25,22 +25,22 @@ X-Bugzilla-Product: xorg
 X-Bugzilla-Component: Driver/nouveau
 X-Bugzilla-Version: unspecified
 X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: normal
+X-Bugzilla-Severity: critical
 X-Bugzilla-Who: martin.peres@free.fr
 X-Bugzilla-Status: RESOLVED
 X-Bugzilla-Resolution: MOVED
 X-Bugzilla-Priority: medium
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: bug_status resolution
-Message-ID: <bug-108058-8800-NWxl2kYmkT@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-108058-8800@http.bugs.freedesktop.org/>
-References: <bug-108058-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-Changed-Fields: resolution bug_status
+Message-ID: <bug-108080-8800-pfRV6tSZdr@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-108080-8800@http.bugs.freedesktop.org/>
+References: <bug-108080-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 108058] After resuming from suspend,
- discrete GPU is powered on and can't be turned off
+Subject: [Nouveau] [Bug 108080] GK106 [GeForce GTX 660] System Freeze - warp
+ 3d0009 [ILLEGAL_INSTR_ENCODING]
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -52,34 +52,34 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0155563662=="
+Content-Type: multipart/mixed; boundary="===============1907556543=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============0155563662==
-Content-Type: multipart/alternative; boundary="15754527424.eBEB5Aaad.30568"
+--===============1907556543==
+Content-Type: multipart/alternative; boundary="15754527491.2f9dBc0.30568"
 Content-Transfer-Encoding: 7bit
 
 
---15754527424.eBEB5Aaad.30568
-Date: Wed, 4 Dec 2019 09:45:42 +0000
+--15754527491.2f9dBc0.30568
+Date: Wed, 4 Dec 2019 09:45:49 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 
-https://bugs.freedesktop.org/show_bug.cgi?id=3D108058
+https://bugs.freedesktop.org/show_bug.cgi?id=3D108080
 
 Martin Peres <martin.peres@free.fr> changed:
 
            What    |Removed                     |Added
 ----------------------------------------------------------------------------
-             Status|NEW                         |RESOLVED
          Resolution|---                         |MOVED
+             Status|NEW                         |RESOLVED
 
---- Comment #8 from Martin Peres <martin.peres@free.fr> ---
+--- Comment #2 from Martin Peres <martin.peres@free.fr> ---
 -- GitLab Migration Automatic Message --
 
 This bug has been migrated to freedesktop.org's GitLab instance and has been
@@ -88,14 +88,14 @@ closed from further activity.
 You can subscribe and participate further through the new bug through this =
 link
 to our GitLab instance:
-https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/issues/461.
+https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/issues/462.
 
 --=20
 You are receiving this mail because:
 You are the assignee for the bug.=
 
---15754527424.eBEB5Aaad.30568
-Date: Wed, 4 Dec 2019 09:45:42 +0000
+--15754527491.2f9dBc0.30568
+Date: Wed, 4 Dec 2019 09:45:49 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -112,10 +112,10 @@ span class=3D"fn">Martin Peres</span></a>
 </span> changed
           <a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - After resuming from suspend, discrete GPU is p=
-owered on and can't be turned off"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D108058">bug 10805=
-8</a>
+   title=3D"RESOLVED MOVED - GK106 [GeForce GTX 660] System Freeze - warp 3=
+d0009 [ILLEGAL_INSTR_ENCODING]"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D108080">bug 10808=
+0</a>
           <br>
              <table border=3D"1" cellspacing=3D"0" cellpadding=3D"8">
           <tr>
@@ -125,34 +125,34 @@ owered on and can't be turned off"
           </tr>
 
          <tr>
-           <td style=3D"text-align:right;">Status</td>
-           <td>NEW
-           </td>
-           <td>RESOLVED
-           </td>
-         </tr>
-
-         <tr>
            <td style=3D"text-align:right;">Resolution</td>
            <td>---
            </td>
            <td>MOVED
+           </td>
+         </tr>
+
+         <tr>
+           <td style=3D"text-align:right;">Status</td>
+           <td>NEW
+           </td>
+           <td>RESOLVED
            </td>
          </tr></table>
       <p>
         <div>
             <b><a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - After resuming from suspend, discrete GPU is p=
-owered on and can't be turned off"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D108058#c8">Commen=
-t # 8</a>
+   title=3D"RESOLVED MOVED - GK106 [GeForce GTX 660] System Freeze - warp 3=
+d0009 [ILLEGAL_INSTR_ENCODING]"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D108080#c2">Commen=
+t # 2</a>
               on <a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - After resuming from suspend, discrete GPU is p=
-owered on and can't be turned off"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D108058">bug 10805=
-8</a>
+   title=3D"RESOLVED MOVED - GK106 [GeForce GTX 660] System Freeze - warp 3=
+d0009 [ILLEGAL_INSTR_ENCODING]"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D108080">bug 10808=
+0</a>
               from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
 martin.peres&#64;free.fr" title=3D"Martin Peres &lt;martin.peres&#64;free.f=
 r&gt;"> <span class=3D"fn">Martin Peres</span></a>
@@ -166,8 +166,8 @@ You can subscribe and participate further through the new bug through this =
 link
 to our GitLab instance:
 <a href=3D"https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/is=
-sues/461">https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/iss=
-ues/461</a>.</pre>
+sues/462">https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/iss=
+ues/462</a>.</pre>
         </div>
       </p>
 
@@ -181,9 +181,9 @@ ues/461</a>.</pre>
     </body>
 </html>=
 
---15754527424.eBEB5Aaad.30568--
+--15754527491.2f9dBc0.30568--
 
---===============0155563662==
+--===============1907556543==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -193,4 +193,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============0155563662==--
+--===============1907556543==--
