@@ -2,22 +2,22 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1BD10112664
-	for <lists+nouveau@lfdr.de>; Wed,  4 Dec 2019 10:04:59 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 424D1112665
+	for <lists+nouveau@lfdr.de>; Wed,  4 Dec 2019 10:05:05 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 72E9C6F92A;
-	Wed,  4 Dec 2019 09:04:57 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1757E6F94E;
+	Wed,  4 Dec 2019 09:05:03 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [131.252.210.165])
- by gabe.freedesktop.org (Postfix) with ESMTP id 0186C6F943
- for <nouveau@lists.freedesktop.org>; Wed,  4 Dec 2019 09:04:57 +0000 (UTC)
+ [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
+ by gabe.freedesktop.org (Postfix) with ESMTP id EA3906F931
+ for <nouveau@lists.freedesktop.org>; Wed,  4 Dec 2019 09:05:01 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id F2F03720E2; Wed,  4 Dec 2019 09:04:56 +0000 (UTC)
+ id E6DAA720E2; Wed,  4 Dec 2019 09:05:01 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Wed, 04 Dec 2019 09:04:57 +0000
+Date: Wed, 04 Dec 2019 09:05:02 +0000
 X-Bugzilla-Reason: AssignedTo
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
@@ -32,15 +32,15 @@ X-Bugzilla-Resolution: MOVED
 X-Bugzilla-Priority: medium
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: bug_status resolution
-Message-ID: <bug-92377-8800-Ea2d2bYGul@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-92377-8800@http.bugs.freedesktop.org/>
-References: <bug-92377-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-Changed-Fields: resolution bug_status
+Message-ID: <bug-92386-8800-u9bCcAe1Un@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-92386-8800@http.bugs.freedesktop.org/>
+References: <bug-92386-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 92377] Add support for early voltage table as seen
- on nv43
+Subject: [Nouveau] [Bug 92386] Integrated sensor on nv43 doesn't work (wrong
+ vbios parsing?)
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -52,32 +52,32 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0458990317=="
+Content-Type: multipart/mixed; boundary="===============1978841085=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============0458990317==
-Content-Type: multipart/alternative; boundary="15754502963.3D5e6.22397"
+--===============1978841085==
+Content-Type: multipart/alternative; boundary="15754503010.7bEDF27b.22397"
 Content-Transfer-Encoding: 7bit
 
 
---15754502963.3D5e6.22397
-Date: Wed, 4 Dec 2019 09:04:56 +0000
+--15754503010.7bEDF27b.22397
+Date: Wed, 4 Dec 2019 09:05:01 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 
-https://bugs.freedesktop.org/show_bug.cgi?id=3D92377
+https://bugs.freedesktop.org/show_bug.cgi?id=3D92386
 
 Martin Peres <martin.peres@free.fr> changed:
 
            What    |Removed                     |Added
 ----------------------------------------------------------------------------
-             Status|NEW                         |RESOLVED
          Resolution|---                         |MOVED
+             Status|NEW                         |RESOLVED
 
 --- Comment #2 from Martin Peres <martin.peres@free.fr> ---
 -- GitLab Migration Automatic Message --
@@ -88,14 +88,14 @@ closed from further activity.
 You can subscribe and participate further through the new bug through this =
 link
 to our GitLab instance:
-https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/issues/223.
+https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/issues/224.
 
 --=20
 You are receiving this mail because:
 You are the assignee for the bug.=
 
---15754502963.3D5e6.22397
-Date: Wed, 4 Dec 2019 09:04:56 +0000
+--15754503010.7bEDF27b.22397
+Date: Wed, 4 Dec 2019 09:05:01 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -112,9 +112,9 @@ span class=3D"fn">Martin Peres</span></a>
 </span> changed
           <a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - Add support for early voltage table as seen on=
- nv43"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D92377">bug 92377<=
+   title=3D"RESOLVED MOVED - Integrated sensor on nv43 doesn't work (wrong =
+vbios parsing?)"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D92386">bug 92386<=
 /a>
           <br>
              <table border=3D"1" cellspacing=3D"0" cellpadding=3D"8">
@@ -125,33 +125,33 @@ span class=3D"fn">Martin Peres</span></a>
           </tr>
 
          <tr>
-           <td style=3D"text-align:right;">Status</td>
-           <td>NEW
-           </td>
-           <td>RESOLVED
-           </td>
-         </tr>
-
-         <tr>
            <td style=3D"text-align:right;">Resolution</td>
            <td>---
            </td>
            <td>MOVED
+           </td>
+         </tr>
+
+         <tr>
+           <td style=3D"text-align:right;">Status</td>
+           <td>NEW
+           </td>
+           <td>RESOLVED
            </td>
          </tr></table>
       <p>
         <div>
             <b><a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - Add support for early voltage table as seen on=
- nv43"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D92377#c2">Comment=
+   title=3D"RESOLVED MOVED - Integrated sensor on nv43 doesn't work (wrong =
+vbios parsing?)"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D92386#c2">Comment=
  # 2</a>
               on <a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - Add support for early voltage table as seen on=
- nv43"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D92377">bug 92377<=
+   title=3D"RESOLVED MOVED - Integrated sensor on nv43 doesn't work (wrong =
+vbios parsing?)"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D92386">bug 92386<=
 /a>
               from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
 martin.peres&#64;free.fr" title=3D"Martin Peres &lt;martin.peres&#64;free.f=
@@ -166,8 +166,8 @@ You can subscribe and participate further through the new bug through this =
 link
 to our GitLab instance:
 <a href=3D"https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/is=
-sues/223">https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/iss=
-ues/223</a>.</pre>
+sues/224">https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/iss=
+ues/224</a>.</pre>
         </div>
       </p>
 
@@ -181,9 +181,9 @@ ues/223</a>.</pre>
     </body>
 </html>=
 
---15754502963.3D5e6.22397--
+--15754503010.7bEDF27b.22397--
 
---===============0458990317==
+--===============1978841085==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -193,4 +193,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============0458990317==--
+--===============1978841085==--
