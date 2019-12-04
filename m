@@ -2,22 +2,22 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0786F11255E
-	for <lists+nouveau@lfdr.de>; Wed,  4 Dec 2019 09:38:36 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D12D211255F
+	for <lists+nouveau@lfdr.de>; Wed,  4 Dec 2019 09:38:52 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 60E3E6F4EA;
-	Wed,  4 Dec 2019 08:38:34 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 380D06F4C3;
+	Wed,  4 Dec 2019 08:38:51 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
- by gabe.freedesktop.org (Postfix) with ESMTP id 90A326F4A9
- for <nouveau@lists.freedesktop.org>; Wed,  4 Dec 2019 08:38:33 +0000 (UTC)
+ [131.252.210.165])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 6BEB36F510
+ for <nouveau@lists.freedesktop.org>; Wed,  4 Dec 2019 08:38:49 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 8D058720E2; Wed,  4 Dec 2019 08:38:33 +0000 (UTC)
+ id 682B9720E2; Wed,  4 Dec 2019 08:38:49 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Wed, 04 Dec 2019 08:38:33 +0000
+Date: Wed, 04 Dec 2019 08:38:49 +0000
 X-Bugzilla-Reason: AssignedTo
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
@@ -25,21 +25,21 @@ X-Bugzilla-Product: xorg
 X-Bugzilla-Component: Driver/nouveau
 X-Bugzilla-Version: unspecified
 X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: major
+X-Bugzilla-Severity: normal
 X-Bugzilla-Who: martin.peres@free.fr
 X-Bugzilla-Status: RESOLVED
 X-Bugzilla-Resolution: MOVED
 X-Bugzilla-Priority: medium
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: bug_status resolution
-Message-ID: <bug-70875-8800-4LkgfAO64i@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-70875-8800@http.bugs.freedesktop.org/>
-References: <bug-70875-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-Changed-Fields: resolution bug_status
+Message-ID: <bug-70931-8800-AxbQGNPON8@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-70931-8800@http.bugs.freedesktop.org/>
+References: <bug-70931-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 70875] [NVC1] runtime pm not auto-suspending card
+Subject: [Nouveau] [Bug 70931] Xv causes player segfaults when 4K is decoded
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -51,34 +51,34 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1620739975=="
+Content-Type: multipart/mixed; boundary="===============0055643357=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============1620739975==
-Content-Type: multipart/alternative; boundary="15754487131.A9A596c7.16275"
+--===============0055643357==
+Content-Type: multipart/alternative; boundary="15754487291.B7F3cE9E.16275"
 Content-Transfer-Encoding: 7bit
 
 
---15754487131.A9A596c7.16275
-Date: Wed, 4 Dec 2019 08:38:33 +0000
+--15754487291.B7F3cE9E.16275
+Date: Wed, 4 Dec 2019 08:38:49 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 
-https://bugs.freedesktop.org/show_bug.cgi?id=3D70875
+https://bugs.freedesktop.org/show_bug.cgi?id=3D70931
 
 Martin Peres <martin.peres@free.fr> changed:
 
            What    |Removed                     |Added
 ----------------------------------------------------------------------------
-             Status|NEW                         |RESOLVED
          Resolution|---                         |MOVED
+             Status|NEW                         |RESOLVED
 
---- Comment #20 from Martin Peres <martin.peres@free.fr> ---
+--- Comment #3 from Martin Peres <martin.peres@free.fr> ---
 -- GitLab Migration Automatic Message --
 
 This bug has been migrated to freedesktop.org's GitLab instance and has been
@@ -87,14 +87,14 @@ closed from further activity.
 You can subscribe and participate further through the new bug through this =
 link
 to our GitLab instance:
-https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/issues/66.
+https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/issues/67.
 
 --=20
 You are receiving this mail because:
 You are the assignee for the bug.=
 
---15754487131.A9A596c7.16275
-Date: Wed, 4 Dec 2019 08:38:33 +0000
+--15754487291.B7F3cE9E.16275
+Date: Wed, 4 Dec 2019 08:38:49 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -111,8 +111,8 @@ span class=3D"fn">Martin Peres</span></a>
 </span> changed
           <a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - [NVC1] runtime pm not auto-suspending card"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D70875">bug 70875<=
+   title=3D"RESOLVED MOVED - Xv causes player segfaults when 4K is decoded"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D70931">bug 70931<=
 /a>
           <br>
              <table border=3D"1" cellspacing=3D"0" cellpadding=3D"8">
@@ -123,31 +123,31 @@ span class=3D"fn">Martin Peres</span></a>
           </tr>
 
          <tr>
-           <td style=3D"text-align:right;">Status</td>
-           <td>NEW
-           </td>
-           <td>RESOLVED
-           </td>
-         </tr>
-
-         <tr>
            <td style=3D"text-align:right;">Resolution</td>
            <td>---
            </td>
            <td>MOVED
+           </td>
+         </tr>
+
+         <tr>
+           <td style=3D"text-align:right;">Status</td>
+           <td>NEW
+           </td>
+           <td>RESOLVED
            </td>
          </tr></table>
       <p>
         <div>
             <b><a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - [NVC1] runtime pm not auto-suspending card"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D70875#c20">Commen=
-t # 20</a>
+   title=3D"RESOLVED MOVED - Xv causes player segfaults when 4K is decoded"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D70931#c3">Comment=
+ # 3</a>
               on <a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - [NVC1] runtime pm not auto-suspending card"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D70875">bug 70875<=
+   title=3D"RESOLVED MOVED - Xv causes player segfaults when 4K is decoded"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D70931">bug 70931<=
 /a>
               from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
 martin.peres&#64;free.fr" title=3D"Martin Peres &lt;martin.peres&#64;free.f=
@@ -162,8 +162,8 @@ You can subscribe and participate further through the new bug through this =
 link
 to our GitLab instance:
 <a href=3D"https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/is=
-sues/66">https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/issu=
-es/66</a>.</pre>
+sues/67">https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/issu=
+es/67</a>.</pre>
         </div>
       </p>
 
@@ -177,9 +177,9 @@ es/66</a>.</pre>
     </body>
 </html>=
 
---15754487131.A9A596c7.16275--
+--15754487291.B7F3cE9E.16275--
 
---===============1620739975==
+--===============0055643357==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -189,4 +189,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============1620739975==--
+--===============0055643357==--
