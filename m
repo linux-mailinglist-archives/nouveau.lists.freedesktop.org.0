@@ -2,29 +2,29 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 00306112734
-	for <lists+nouveau@lfdr.de>; Wed,  4 Dec 2019 10:26:04 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id EADEB112735
+	for <lists+nouveau@lfdr.de>; Wed,  4 Dec 2019 10:26:08 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 76D466FDE9;
-	Wed,  4 Dec 2019 09:26:03 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 529396FDD2;
+	Wed,  4 Dec 2019 09:26:07 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [131.252.210.165])
- by gabe.freedesktop.org (Postfix) with ESMTP id 878D46FDE9
- for <nouveau@lists.freedesktop.org>; Wed,  4 Dec 2019 09:26:02 +0000 (UTC)
+ [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
+ by gabe.freedesktop.org (Postfix) with ESMTP id DFA9D6FDE4
+ for <nouveau@lists.freedesktop.org>; Wed,  4 Dec 2019 09:26:06 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 83F75720E2; Wed,  4 Dec 2019 09:26:02 +0000 (UTC)
+ id DC78C720E2; Wed,  4 Dec 2019 09:26:06 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Wed, 04 Dec 2019 09:26:02 +0000
+Date: Wed, 04 Dec 2019 09:26:07 +0000
 X-Bugzilla-Reason: AssignedTo
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
 X-Bugzilla-Product: xorg
 X-Bugzilla-Component: Driver/nouveau
 X-Bugzilla-Version: unspecified
-X-Bugzilla-Keywords: 
+X-Bugzilla-Keywords: have-backtrace
 X-Bugzilla-Severity: major
 X-Bugzilla-Who: martin.peres@free.fr
 X-Bugzilla-Status: RESOLVED
@@ -33,14 +33,14 @@ X-Bugzilla-Priority: medium
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
 X-Bugzilla-Changed-Fields: resolution bug_status
-Message-ID: <bug-100435-8800-76LehG4VHM@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-100435-8800@http.bugs.freedesktop.org/>
-References: <bug-100435-8800@http.bugs.freedesktop.org/>
+Message-ID: <bug-100545-8800-IPcfysqnJu@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-100545-8800@http.bugs.freedesktop.org/>
+References: <bug-100545-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 100435] [GM107] Kernel 4.10(.6) nouveau_fence_sync
- -> ... dma_fence_default_wait, null spinlock error.
+Subject: [Nouveau] [Bug 100545] BUG: null pointer dereference
+ dma_fence_wait_timeout from nouveau_drm_ioctl (linux 4.10.5)
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -52,25 +52,25 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1140661815=="
+Content-Type: multipart/mixed; boundary="===============0356546134=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============1140661815==
-Content-Type: multipart/alternative; boundary="15754515622.e85F.25814"
+--===============0356546134==
+Content-Type: multipart/alternative; boundary="15754515660.D2f2f2C97.25814"
 Content-Transfer-Encoding: 7bit
 
 
---15754515622.e85F.25814
-Date: Wed, 4 Dec 2019 09:26:02 +0000
+--15754515660.D2f2f2C97.25814
+Date: Wed, 4 Dec 2019 09:26:06 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 
-https://bugs.freedesktop.org/show_bug.cgi?id=3D100435
+https://bugs.freedesktop.org/show_bug.cgi?id=3D100545
 
 Martin Peres <martin.peres@free.fr> changed:
 
@@ -79,7 +79,7 @@ Martin Peres <martin.peres@free.fr> changed:
          Resolution|---                         |MOVED
              Status|NEW                         |RESOLVED
 
---- Comment #6 from Martin Peres <martin.peres@free.fr> ---
+--- Comment #2 from Martin Peres <martin.peres@free.fr> ---
 -- GitLab Migration Automatic Message --
 
 This bug has been migrated to freedesktop.org's GitLab instance and has been
@@ -88,14 +88,14 @@ closed from further activity.
 You can subscribe and participate further through the new bug through this =
 link
 to our GitLab instance:
-https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/issues/337.
+https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/issues/338.
 
 --=20
 You are receiving this mail because:
 You are the assignee for the bug.=
 
---15754515622.e85F.25814
-Date: Wed, 4 Dec 2019 09:26:02 +0000
+--15754515660.D2f2f2C97.25814
+Date: Wed, 4 Dec 2019 09:26:06 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -112,9 +112,9 @@ span class=3D"fn">Martin Peres</span></a>
 </span> changed
           <a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - [GM107] Kernel 4.10(.6) nouveau_fence_sync -&g=
-t; ... dma_fence_default_wait, null spinlock error."
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D100435">bug 10043=
+   title=3D"RESOLVED MOVED - BUG: null pointer dereference dma_fence_wait_t=
+imeout from nouveau_drm_ioctl (linux 4.10.5)"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D100545">bug 10054=
 5</a>
           <br>
              <table border=3D"1" cellspacing=3D"0" cellpadding=3D"8">
@@ -143,15 +143,15 @@ t; ... dma_fence_default_wait, null spinlock error."
         <div>
             <b><a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - [GM107] Kernel 4.10(.6) nouveau_fence_sync -&g=
-t; ... dma_fence_default_wait, null spinlock error."
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D100435#c6">Commen=
-t # 6</a>
+   title=3D"RESOLVED MOVED - BUG: null pointer dereference dma_fence_wait_t=
+imeout from nouveau_drm_ioctl (linux 4.10.5)"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D100545#c2">Commen=
+t # 2</a>
               on <a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - [GM107] Kernel 4.10(.6) nouveau_fence_sync -&g=
-t; ... dma_fence_default_wait, null spinlock error."
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D100435">bug 10043=
+   title=3D"RESOLVED MOVED - BUG: null pointer dereference dma_fence_wait_t=
+imeout from nouveau_drm_ioctl (linux 4.10.5)"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D100545">bug 10054=
 5</a>
               from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
 martin.peres&#64;free.fr" title=3D"Martin Peres &lt;martin.peres&#64;free.f=
@@ -166,8 +166,8 @@ You can subscribe and participate further through the new bug through this =
 link
 to our GitLab instance:
 <a href=3D"https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/is=
-sues/337">https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/iss=
-ues/337</a>.</pre>
+sues/338">https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/iss=
+ues/338</a>.</pre>
         </div>
       </p>
 
@@ -181,9 +181,9 @@ ues/337</a>.</pre>
     </body>
 </html>=
 
---15754515622.e85F.25814--
+--15754515660.D2f2f2C97.25814--
 
---===============1140661815==
+--===============0356546134==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -193,4 +193,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============1140661815==--
+--===============0356546134==--
