@@ -2,28 +2,28 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2A6271124A7
-	for <lists+nouveau@lfdr.de>; Wed,  4 Dec 2019 09:23:39 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 817AC1124A8
+	for <lists+nouveau@lfdr.de>; Wed,  4 Dec 2019 09:23:54 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 87FCD6F459;
-	Wed,  4 Dec 2019 08:23:37 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id DBE696F45D;
+	Wed,  4 Dec 2019 08:23:52 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
  [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
- by gabe.freedesktop.org (Postfix) with ESMTP id E20DE6F459
- for <nouveau@lists.freedesktop.org>; Wed,  4 Dec 2019 08:23:35 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTP id C9DC26F45C
+ for <nouveau@lists.freedesktop.org>; Wed,  4 Dec 2019 08:23:51 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id DF00B720E2; Wed,  4 Dec 2019 08:23:35 +0000 (UTC)
+ id C6A01720E2; Wed,  4 Dec 2019 08:23:51 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Wed, 04 Dec 2019 08:23:36 +0000
+Date: Wed, 04 Dec 2019 08:23:52 +0000
 X-Bugzilla-Reason: AssignedTo
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
 X-Bugzilla-Product: xorg
 X-Bugzilla-Component: Driver/nouveau
-X-Bugzilla-Version: unspecified
+X-Bugzilla-Version: 7.4 (2008.09)
 X-Bugzilla-Keywords: 
 X-Bugzilla-Severity: normal
 X-Bugzilla-Who: martin.peres@free.fr
@@ -33,14 +33,14 @@ X-Bugzilla-Priority: medium
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
 X-Bugzilla-Changed-Fields: resolution bug_status
-Message-ID: <bug-26555-8800-8aBxtrEYJz@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-26555-8800@http.bugs.freedesktop.org/>
-References: <bug-26555-8800@http.bugs.freedesktop.org/>
+Message-ID: <bug-26797-8800-p1ePcicpii@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-26797-8800@http.bugs.freedesktop.org/>
+References: <bug-26797-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 26555] nouveau fails to fully resume nforce1 (nv1a)
- after S3
+Subject: [Nouveau] [Bug 26797] [NV4C] GeForce 6150SE: external DVI encoder
+ not supported (Sil1364)
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -52,25 +52,25 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0205707263=="
+Content-Type: multipart/mixed; boundary="===============1883797506=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============0205707263==
-Content-Type: multipart/alternative; boundary="15754478152.10f92Eeb9.14395"
+--===============1883797506==
+Content-Type: multipart/alternative; boundary="15754478311.DAf5C.14395"
 Content-Transfer-Encoding: 7bit
 
 
---15754478152.10f92Eeb9.14395
-Date: Wed, 4 Dec 2019 08:23:35 +0000
+--15754478311.DAf5C.14395
+Date: Wed, 4 Dec 2019 08:23:51 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 
-https://bugs.freedesktop.org/show_bug.cgi?id=3D26555
+https://bugs.freedesktop.org/show_bug.cgi?id=3D26797
 
 Martin Peres <martin.peres@free.fr> changed:
 
@@ -79,7 +79,7 @@ Martin Peres <martin.peres@free.fr> changed:
          Resolution|---                         |MOVED
              Status|REOPENED                    |RESOLVED
 
---- Comment #4 from Martin Peres <martin.peres@free.fr> ---
+--- Comment #25 from Martin Peres <martin.peres@free.fr> ---
 -- GitLab Migration Automatic Message --
 
 This bug has been migrated to freedesktop.org's GitLab instance and has been
@@ -88,14 +88,14 @@ closed from further activity.
 You can subscribe and participate further through the new bug through this =
 link
 to our GitLab instance:
-https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/issues/5.
+https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/issues/6.
 
 --=20
 You are receiving this mail because:
 You are the assignee for the bug.=
 
---15754478152.10f92Eeb9.14395
-Date: Wed, 4 Dec 2019 08:23:35 +0000
+--15754478311.DAf5C.14395
+Date: Wed, 4 Dec 2019 08:23:51 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -112,9 +112,9 @@ span class=3D"fn">Martin Peres</span></a>
 </span> changed
           <a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - nouveau fails to fully resume nforce1 (nv1a) a=
-fter S3"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D26555">bug 26555<=
+   title=3D"RESOLVED MOVED - [NV4C] GeForce 6150SE: external DVI encoder no=
+t supported (Sil1364)"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D26797">bug 26797<=
 /a>
           <br>
              <table border=3D"1" cellspacing=3D"0" cellpadding=3D"8">
@@ -143,15 +143,15 @@ fter S3"
         <div>
             <b><a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - nouveau fails to fully resume nforce1 (nv1a) a=
-fter S3"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D26555#c4">Comment=
- # 4</a>
+   title=3D"RESOLVED MOVED - [NV4C] GeForce 6150SE: external DVI encoder no=
+t supported (Sil1364)"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D26797#c25">Commen=
+t # 25</a>
               on <a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - nouveau fails to fully resume nforce1 (nv1a) a=
-fter S3"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D26555">bug 26555<=
+   title=3D"RESOLVED MOVED - [NV4C] GeForce 6150SE: external DVI encoder no=
+t supported (Sil1364)"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D26797">bug 26797<=
 /a>
               from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
 martin.peres&#64;free.fr" title=3D"Martin Peres &lt;martin.peres&#64;free.f=
@@ -166,8 +166,8 @@ You can subscribe and participate further through the new bug through this =
 link
 to our GitLab instance:
 <a href=3D"https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/is=
-sues/5">https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/issue=
-s/5</a>.</pre>
+sues/6">https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/issue=
+s/6</a>.</pre>
         </div>
       </p>
 
@@ -181,9 +181,9 @@ s/5</a>.</pre>
     </body>
 </html>=
 
---15754478152.10f92Eeb9.14395--
+--15754478311.DAf5C.14395--
 
---===============0205707263==
+--===============1883797506==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -193,4 +193,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============0205707263==--
+--===============1883797506==--
