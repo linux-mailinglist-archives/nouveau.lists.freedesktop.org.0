@@ -1,46 +1,46 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 259761126B1
-	for <lists+nouveau@lfdr.de>; Wed,  4 Dec 2019 10:12:10 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0B7D61126B2
+	for <lists+nouveau@lfdr.de>; Wed,  4 Dec 2019 10:12:23 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7CF3A6FA98;
-	Wed,  4 Dec 2019 09:12:08 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 48A506FA93;
+	Wed,  4 Dec 2019 09:12:21 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
  [131.252.210.165])
- by gabe.freedesktop.org (Postfix) with ESMTP id 09C506FA94
- for <nouveau@lists.freedesktop.org>; Wed,  4 Dec 2019 09:12:07 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTP id 4D1B56FA93
+ for <nouveau@lists.freedesktop.org>; Wed,  4 Dec 2019 09:12:20 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 06B28720E2; Wed,  4 Dec 2019 09:12:07 +0000 (UTC)
+ id 4A072720E2; Wed,  4 Dec 2019 09:12:20 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Wed, 04 Dec 2019 09:12:07 +0000
-X-Bugzilla-Reason: CC
+Date: Wed, 04 Dec 2019 09:12:20 +0000
+X-Bugzilla-Reason: AssignedTo
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
 X-Bugzilla-Product: xorg
 X-Bugzilla-Component: Driver/nouveau
-X-Bugzilla-Version: unspecified
+X-Bugzilla-Version: 7.4 (2008.09)
 X-Bugzilla-Keywords: 
 X-Bugzilla-Severity: normal
 X-Bugzilla-Who: martin.peres@free.fr
 X-Bugzilla-Status: RESOLVED
 X-Bugzilla-Resolution: MOVED
 X-Bugzilla-Priority: medium
-X-Bugzilla-Assigned-To: skeggsb@gmail.com
+X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
 X-Bugzilla-Changed-Fields: resolution bug_status
-Message-ID: <bug-95044-8800-q5Swhj7Lo2@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-95044-8800@http.bugs.freedesktop.org/>
-References: <bug-95044-8800@http.bugs.freedesktop.org/>
+Message-ID: <bug-95054-8800-MEnoKv3fT9@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-95054-8800@http.bugs.freedesktop.org/>
+References: <bug-95054-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 95044] [NVA0] [Reclocking] GPU doesn't relax memory
- clocks
+Subject: [Nouveau] [Bug 95054] KDE 5 / Plasma crashes with nouveau "fifo: gr
+ engine fault on channel 2, recovering" or "gr: TRAP ch 2"
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -52,34 +52,34 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============2137971584=="
+Content-Type: multipart/mixed; boundary="===============1888432536=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============2137971584==
-Content-Type: multipart/alternative; boundary="15754507263.c59Fe.23764"
+--===============1888432536==
+Content-Type: multipart/alternative; boundary="15754507402.a16A.23764"
 Content-Transfer-Encoding: 7bit
 
 
---15754507263.c59Fe.23764
-Date: Wed, 4 Dec 2019 09:12:06 +0000
+--15754507402.a16A.23764
+Date: Wed, 4 Dec 2019 09:12:20 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 
-https://bugs.freedesktop.org/show_bug.cgi?id=3D95044
+https://bugs.freedesktop.org/show_bug.cgi?id=3D95054
 
 Martin Peres <martin.peres@free.fr> changed:
 
            What    |Removed                     |Added
 ----------------------------------------------------------------------------
          Resolution|---                         |MOVED
-             Status|ASSIGNED                    |RESOLVED
+             Status|NEW                         |RESOLVED
 
---- Comment #10 from Martin Peres <martin.peres@free.fr> ---
+--- Comment #11 from Martin Peres <martin.peres@free.fr> ---
 -- GitLab Migration Automatic Message --
 
 This bug has been migrated to freedesktop.org's GitLab instance and has been
@@ -88,14 +88,14 @@ closed from further activity.
 You can subscribe and participate further through the new bug through this =
 link
 to our GitLab instance:
-https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/issues/263.
+https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/issues/264.
 
 --=20
 You are receiving this mail because:
-You are on the CC list for the bug.=
+You are the assignee for the bug.=
 
---15754507263.c59Fe.23764
-Date: Wed, 4 Dec 2019 09:12:06 +0000
+--15754507402.a16A.23764
+Date: Wed, 4 Dec 2019 09:12:20 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -112,9 +112,10 @@ span class=3D"fn">Martin Peres</span></a>
 </span> changed
           <a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - [NVA0] [Reclocking] GPU doesn't relax memory c=
-locks"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D95044">bug 95044<=
+   title=3D"RESOLVED MOVED - KDE 5 / Plasma crashes with nouveau &quot;fifo=
+: gr engine fault on channel 2, recovering&quot; or &quot;gr: TRAP ch 2&quo=
+t;"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D95054">bug 95054<=
 /a>
           <br>
              <table border=3D"1" cellspacing=3D"0" cellpadding=3D"8">
@@ -134,7 +135,7 @@ locks"
 
          <tr>
            <td style=3D"text-align:right;">Status</td>
-           <td>ASSIGNED
+           <td>NEW
            </td>
            <td>RESOLVED
            </td>
@@ -143,15 +144,17 @@ locks"
         <div>
             <b><a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - [NVA0] [Reclocking] GPU doesn't relax memory c=
-locks"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D95044#c10">Commen=
-t # 10</a>
+   title=3D"RESOLVED MOVED - KDE 5 / Plasma crashes with nouveau &quot;fifo=
+: gr engine fault on channel 2, recovering&quot; or &quot;gr: TRAP ch 2&quo=
+t;"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D95054#c11">Commen=
+t # 11</a>
               on <a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - [NVA0] [Reclocking] GPU doesn't relax memory c=
-locks"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D95044">bug 95044<=
+   title=3D"RESOLVED MOVED - KDE 5 / Plasma crashes with nouveau &quot;fifo=
+: gr engine fault on channel 2, recovering&quot; or &quot;gr: TRAP ch 2&quo=
+t;"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D95054">bug 95054<=
 /a>
               from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
 martin.peres&#64;free.fr" title=3D"Martin Peres &lt;martin.peres&#64;free.f=
@@ -166,8 +169,8 @@ You can subscribe and participate further through the new bug through this =
 link
 to our GitLab instance:
 <a href=3D"https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/is=
-sues/263">https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/iss=
-ues/263</a>.</pre>
+sues/264">https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/iss=
+ues/264</a>.</pre>
         </div>
       </p>
 
@@ -176,14 +179,14 @@ ues/263</a>.</pre>
       <span>You are receiving this mail because:</span>
 
       <ul>
-          <li>You are on the CC list for the bug.</li>
+          <li>You are the assignee for the bug.</li>
       </ul>
     </body>
 </html>=
 
---15754507263.c59Fe.23764--
+--15754507402.a16A.23764--
 
---===============2137971584==
+--===============1888432536==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -193,4 +196,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============2137971584==--
+--===============1888432536==--
