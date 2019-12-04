@@ -2,28 +2,28 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6F2CD1124B6
-	for <lists+nouveau@lfdr.de>; Wed,  4 Dec 2019 09:24:53 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id EC5891124B9
+	for <lists+nouveau@lfdr.de>; Wed,  4 Dec 2019 09:25:25 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id CE4426F482;
-	Wed,  4 Dec 2019 08:24:51 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 256FC6F46D;
+	Wed,  4 Dec 2019 08:25:24 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
  [131.252.210.165])
- by gabe.freedesktop.org (Postfix) with ESMTP id CD6536F479
- for <nouveau@lists.freedesktop.org>; Wed,  4 Dec 2019 08:24:50 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTP id 0A15D6F483
+ for <nouveau@lists.freedesktop.org>; Wed,  4 Dec 2019 08:25:23 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id C9AAD720E2; Wed,  4 Dec 2019 08:24:50 +0000 (UTC)
+ id 07724720E2; Wed,  4 Dec 2019 08:25:23 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Wed, 04 Dec 2019 08:24:51 +0000
+Date: Wed, 04 Dec 2019 08:25:22 +0000
 X-Bugzilla-Reason: AssignedTo
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
 X-Bugzilla-Product: xorg
 X-Bugzilla-Component: Driver/nouveau
-X-Bugzilla-Version: git
+X-Bugzilla-Version: 7.5 (2009.10)
 X-Bugzilla-Keywords: 
 X-Bugzilla-Severity: normal
 X-Bugzilla-Who: martin.peres@free.fr
@@ -32,15 +32,15 @@ X-Bugzilla-Resolution: MOVED
 X-Bugzilla-Priority: medium
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: resolution bug_status
-Message-ID: <bug-31961-8800-WSC31A3IGm@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-31961-8800@http.bugs.freedesktop.org/>
-References: <bug-31961-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-Changed-Fields: bug_status resolution
+Message-ID: <bug-33165-8800-dw33FOfGqm@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-33165-8800@http.bugs.freedesktop.org/>
+References: <bug-33165-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 31961] [NV4E] [drm:drm_crtc_helper_set_config]
- *ERROR* failed to set mode on [CRTC:6]
+Subject: [Nouveau] [Bug 33165] [NVA3] GDDR5 vram -> flickering screen
+ (previously GPU lockup)
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -52,34 +52,34 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0040269318=="
+Content-Type: multipart/mixed; boundary="===============0253105995=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============0040269318==
-Content-Type: multipart/alternative; boundary="15754478900.90FeF4a34.14395"
+--===============0253105995==
+Content-Type: multipart/alternative; boundary="15754479230.cDCAf86e.14394"
 Content-Transfer-Encoding: 7bit
 
 
---15754478900.90FeF4a34.14395
-Date: Wed, 4 Dec 2019 08:24:50 +0000
+--15754479230.cDCAf86e.14394
+Date: Wed, 4 Dec 2019 08:25:22 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 
-https://bugs.freedesktop.org/show_bug.cgi?id=3D31961
+https://bugs.freedesktop.org/show_bug.cgi?id=3D33165
 
 Martin Peres <martin.peres@free.fr> changed:
 
            What    |Removed                     |Added
 ----------------------------------------------------------------------------
-         Resolution|---                         |MOVED
              Status|NEW                         |RESOLVED
+         Resolution|---                         |MOVED
 
---- Comment #17 from Martin Peres <martin.peres@free.fr> ---
+--- Comment #42 from Martin Peres <martin.peres@free.fr> ---
 -- GitLab Migration Automatic Message --
 
 This bug has been migrated to freedesktop.org's GitLab instance and has been
@@ -88,14 +88,14 @@ closed from further activity.
 You can subscribe and participate further through the new bug through this =
 link
 to our GitLab instance:
-https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/issues/11.
+https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/issues/12.
 
 --=20
 You are receiving this mail because:
 You are the assignee for the bug.=
 
---15754478900.90FeF4a34.14395
-Date: Wed, 4 Dec 2019 08:24:50 +0000
+--15754479230.cDCAf86e.14394
+Date: Wed, 4 Dec 2019 08:25:22 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -112,9 +112,9 @@ span class=3D"fn">Martin Peres</span></a>
 </span> changed
           <a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - [NV4E] [drm:drm_crtc_helper_set_config] *ERROR=
-* failed to set mode on [CRTC:6]"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D31961">bug 31961<=
+   title=3D"RESOLVED MOVED - [NVA3] GDDR5 vram -&gt; flickering screen (pre=
+viously GPU lockup)"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D33165">bug 33165<=
 /a>
           <br>
              <table border=3D"1" cellspacing=3D"0" cellpadding=3D"8">
@@ -125,33 +125,33 @@ span class=3D"fn">Martin Peres</span></a>
           </tr>
 
          <tr>
-           <td style=3D"text-align:right;">Resolution</td>
-           <td>---
-           </td>
-           <td>MOVED
-           </td>
-         </tr>
-
-         <tr>
            <td style=3D"text-align:right;">Status</td>
            <td>NEW
            </td>
            <td>RESOLVED
+           </td>
+         </tr>
+
+         <tr>
+           <td style=3D"text-align:right;">Resolution</td>
+           <td>---
+           </td>
+           <td>MOVED
            </td>
          </tr></table>
       <p>
         <div>
             <b><a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - [NV4E] [drm:drm_crtc_helper_set_config] *ERROR=
-* failed to set mode on [CRTC:6]"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D31961#c17">Commen=
-t # 17</a>
+   title=3D"RESOLVED MOVED - [NVA3] GDDR5 vram -&gt; flickering screen (pre=
+viously GPU lockup)"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D33165#c42">Commen=
+t # 42</a>
               on <a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - [NV4E] [drm:drm_crtc_helper_set_config] *ERROR=
-* failed to set mode on [CRTC:6]"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D31961">bug 31961<=
+   title=3D"RESOLVED MOVED - [NVA3] GDDR5 vram -&gt; flickering screen (pre=
+viously GPU lockup)"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D33165">bug 33165<=
 /a>
               from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
 martin.peres&#64;free.fr" title=3D"Martin Peres &lt;martin.peres&#64;free.f=
@@ -166,8 +166,8 @@ You can subscribe and participate further through the new bug through this =
 link
 to our GitLab instance:
 <a href=3D"https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/is=
-sues/11">https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/issu=
-es/11</a>.</pre>
+sues/12">https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/issu=
+es/12</a>.</pre>
         </div>
       </p>
 
@@ -181,9 +181,9 @@ es/11</a>.</pre>
     </body>
 </html>=
 
---15754478900.90FeF4a34.14395--
+--15754479230.cDCAf86e.14394--
 
---===============0040269318==
+--===============0253105995==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -193,4 +193,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============0040269318==--
+--===============0253105995==--
