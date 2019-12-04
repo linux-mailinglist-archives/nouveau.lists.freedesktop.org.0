@@ -1,31 +1,31 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id ADB0F1125E5
-	for <lists+nouveau@lfdr.de>; Wed,  4 Dec 2019 09:50:49 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6B3861125E6
+	for <lists+nouveau@lfdr.de>; Wed,  4 Dec 2019 09:50:54 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id ED5DC6F5F7;
-	Wed,  4 Dec 2019 08:50:47 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A0FED6F5D7;
+	Wed,  4 Dec 2019 08:50:52 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
  [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
- by gabe.freedesktop.org (Postfix) with ESMTP id C17936F5D8
- for <nouveau@lists.freedesktop.org>; Wed,  4 Dec 2019 08:50:46 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTP id E32976F585
+ for <nouveau@lists.freedesktop.org>; Wed,  4 Dec 2019 08:50:51 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id BE5B9720E2; Wed,  4 Dec 2019 08:50:46 +0000 (UTC)
+ id DFF39720E2; Wed,  4 Dec 2019 08:50:51 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Wed, 04 Dec 2019 08:50:46 +0000
+Date: Wed, 04 Dec 2019 08:50:51 +0000
 X-Bugzilla-Reason: AssignedTo
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
 X-Bugzilla-Product: xorg
 X-Bugzilla-Component: Driver/nouveau
-X-Bugzilla-Version: git
+X-Bugzilla-Version: unspecified
 X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: normal
+X-Bugzilla-Severity: minor
 X-Bugzilla-Who: martin.peres@free.fr
 X-Bugzilla-Status: RESOLVED
 X-Bugzilla-Resolution: MOVED
@@ -33,14 +33,13 @@ X-Bugzilla-Priority: medium
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
 X-Bugzilla-Changed-Fields: resolution bug_status
-Message-ID: <bug-85444-8800-OmFHqbTX83@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-85444-8800@http.bugs.freedesktop.org/>
-References: <bug-85444-8800@http.bugs.freedesktop.org/>
+Message-ID: <bug-85459-8800-Oz4yNU8jfk@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-85459-8800@http.bugs.freedesktop.org/>
+References: <bug-85459-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 85444] [NV46] Heavy corruption, no hardfreeze,
- back to console and libexa.so segfault
+Subject: [Nouveau] [Bug 85459] DPMS not working on Dell M4800 / QHD+
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -52,25 +51,25 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1101269566=="
+Content-Type: multipart/mixed; boundary="===============1742864017=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============1101269566==
-Content-Type: multipart/alternative; boundary="15754494462.EfFC84.19402"
+--===============1742864017==
+Content-Type: multipart/alternative; boundary="15754494513.c3C20Ad.19860"
 Content-Transfer-Encoding: 7bit
 
 
---15754494462.EfFC84.19402
-Date: Wed, 4 Dec 2019 08:50:46 +0000
+--15754494513.c3C20Ad.19860
+Date: Wed, 4 Dec 2019 08:50:51 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 
-https://bugs.freedesktop.org/show_bug.cgi?id=3D85444
+https://bugs.freedesktop.org/show_bug.cgi?id=3D85459
 
 Martin Peres <martin.peres@free.fr> changed:
 
@@ -79,7 +78,7 @@ Martin Peres <martin.peres@free.fr> changed:
          Resolution|---                         |MOVED
              Status|NEW                         |RESOLVED
 
---- Comment #5 from Martin Peres <martin.peres@free.fr> ---
+--- Comment #2 from Martin Peres <martin.peres@free.fr> ---
 -- GitLab Migration Automatic Message --
 
 This bug has been migrated to freedesktop.org's GitLab instance and has been
@@ -88,14 +87,14 @@ closed from further activity.
 You can subscribe and participate further through the new bug through this =
 link
 to our GitLab instance:
-https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/issues/141.
+https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/issues/142.
 
 --=20
 You are receiving this mail because:
 You are the assignee for the bug.=
 
---15754494462.EfFC84.19402
-Date: Wed, 4 Dec 2019 08:50:46 +0000
+--15754494513.c3C20Ad.19860
+Date: Wed, 4 Dec 2019 08:50:51 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -112,9 +111,8 @@ span class=3D"fn">Martin Peres</span></a>
 </span> changed
           <a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - [NV46] Heavy corruption, no hardfreeze, back t=
-o console and libexa.so segfault"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D85444">bug 85444<=
+   title=3D"RESOLVED MOVED - DPMS not working on Dell M4800 / QHD+"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D85459">bug 85459<=
 /a>
           <br>
              <table border=3D"1" cellspacing=3D"0" cellpadding=3D"8">
@@ -143,15 +141,13 @@ o console and libexa.so segfault"
         <div>
             <b><a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - [NV46] Heavy corruption, no hardfreeze, back t=
-o console and libexa.so segfault"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D85444#c5">Comment=
- # 5</a>
+   title=3D"RESOLVED MOVED - DPMS not working on Dell M4800 / QHD+"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D85459#c2">Comment=
+ # 2</a>
               on <a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - [NV46] Heavy corruption, no hardfreeze, back t=
-o console and libexa.so segfault"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D85444">bug 85444<=
+   title=3D"RESOLVED MOVED - DPMS not working on Dell M4800 / QHD+"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D85459">bug 85459<=
 /a>
               from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
 martin.peres&#64;free.fr" title=3D"Martin Peres &lt;martin.peres&#64;free.f=
@@ -166,8 +162,8 @@ You can subscribe and participate further through the new bug through this =
 link
 to our GitLab instance:
 <a href=3D"https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/is=
-sues/141">https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/iss=
-ues/141</a>.</pre>
+sues/142">https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/iss=
+ues/142</a>.</pre>
         </div>
       </p>
 
@@ -181,9 +177,9 @@ ues/141</a>.</pre>
     </body>
 </html>=
 
---15754494462.EfFC84.19402--
+--15754494513.c3C20Ad.19860--
 
---===============1101269566==
+--===============1742864017==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -193,4 +189,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============1101269566==--
+--===============1742864017==--
