@@ -2,22 +2,22 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0B880112655
-	for <lists+nouveau@lfdr.de>; Wed,  4 Dec 2019 10:03:26 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C1107112656
+	for <lists+nouveau@lfdr.de>; Wed,  4 Dec 2019 10:03:33 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3E4506F8F3;
-	Wed,  4 Dec 2019 09:03:24 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0B7B66F64C;
+	Wed,  4 Dec 2019 09:03:32 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
  [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
- by gabe.freedesktop.org (Postfix) with ESMTP id 050B06F617
- for <nouveau@lists.freedesktop.org>; Wed,  4 Dec 2019 09:03:23 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTP id 6DB336F909
+ for <nouveau@lists.freedesktop.org>; Wed,  4 Dec 2019 09:03:30 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 02236720E2; Wed,  4 Dec 2019 09:03:23 +0000 (UTC)
+ id 6A7C9720E2; Wed,  4 Dec 2019 09:03:30 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Wed, 04 Dec 2019 09:03:23 +0000
+Date: Wed, 04 Dec 2019 09:03:30 +0000
 X-Bugzilla-Reason: AssignedTo
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
@@ -33,14 +33,14 @@ X-Bugzilla-Priority: medium
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
 X-Bugzilla-Changed-Fields: resolution bug_status
-Message-ID: <bug-91756-8800-AYCE6Jv6pm@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-91756-8800@http.bugs.freedesktop.org/>
-References: <bug-91756-8800@http.bugs.freedesktop.org/>
+Message-ID: <bug-91779-8800-DOMl2qSmHa@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-91779-8800@http.bugs.freedesktop.org/>
+References: <bug-91779-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 91756] glean test vertProg1 segfaulting X server in
- exaHWCopyNtoN
+Subject: [Nouveau] [Bug 91779] Pure EFI: MacBookPro3,
+ 1 (NV84) fails to load nouveau on linux 4.1 -- Invalid ROM contents
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -52,25 +52,25 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1507216397=="
+Content-Type: multipart/mixed; boundary="===============1328992161=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============1507216397==
-Content-Type: multipart/alternative; boundary="15754502022.22bAc92E0.21838"
+--===============1328992161==
+Content-Type: multipart/alternative; boundary="15754502102.b35c6.21838"
 Content-Transfer-Encoding: 7bit
 
 
---15754502022.22bAc92E0.21838
-Date: Wed, 4 Dec 2019 09:03:22 +0000
+--15754502102.b35c6.21838
+Date: Wed, 4 Dec 2019 09:03:30 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 
-https://bugs.freedesktop.org/show_bug.cgi?id=3D91756
+https://bugs.freedesktop.org/show_bug.cgi?id=3D91779
 
 Martin Peres <martin.peres@free.fr> changed:
 
@@ -79,7 +79,7 @@ Martin Peres <martin.peres@free.fr> changed:
          Resolution|---                         |MOVED
              Status|NEW                         |RESOLVED
 
---- Comment #1 from Martin Peres <martin.peres@free.fr> ---
+--- Comment #16 from Martin Peres <martin.peres@free.fr> ---
 -- GitLab Migration Automatic Message --
 
 This bug has been migrated to freedesktop.org's GitLab instance and has been
@@ -88,14 +88,14 @@ closed from further activity.
 You can subscribe and participate further through the new bug through this =
 link
 to our GitLab instance:
-https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/issues/210.
+https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/issues/211.
 
 --=20
 You are receiving this mail because:
 You are the assignee for the bug.=
 
---15754502022.22bAc92E0.21838
-Date: Wed, 4 Dec 2019 09:03:22 +0000
+--15754502102.b35c6.21838
+Date: Wed, 4 Dec 2019 09:03:30 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -112,9 +112,9 @@ span class=3D"fn">Martin Peres</span></a>
 </span> changed
           <a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - glean test vertProg1 segfaulting X server in e=
-xaHWCopyNtoN"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D91756">bug 91756<=
+   title=3D"RESOLVED MOVED - Pure EFI: MacBookPro3,1 (NV84) fails to load n=
+ouveau on linux 4.1 -- Invalid ROM contents"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D91779">bug 91779<=
 /a>
           <br>
              <table border=3D"1" cellspacing=3D"0" cellpadding=3D"8">
@@ -143,15 +143,15 @@ xaHWCopyNtoN"
         <div>
             <b><a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - glean test vertProg1 segfaulting X server in e=
-xaHWCopyNtoN"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D91756#c1">Comment=
- # 1</a>
+   title=3D"RESOLVED MOVED - Pure EFI: MacBookPro3,1 (NV84) fails to load n=
+ouveau on linux 4.1 -- Invalid ROM contents"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D91779#c16">Commen=
+t # 16</a>
               on <a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - glean test vertProg1 segfaulting X server in e=
-xaHWCopyNtoN"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D91756">bug 91756<=
+   title=3D"RESOLVED MOVED - Pure EFI: MacBookPro3,1 (NV84) fails to load n=
+ouveau on linux 4.1 -- Invalid ROM contents"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D91779">bug 91779<=
 /a>
               from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
 martin.peres&#64;free.fr" title=3D"Martin Peres &lt;martin.peres&#64;free.f=
@@ -166,8 +166,8 @@ You can subscribe and participate further through the new bug through this =
 link
 to our GitLab instance:
 <a href=3D"https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/is=
-sues/210">https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/iss=
-ues/210</a>.</pre>
+sues/211">https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/iss=
+ues/211</a>.</pre>
         </div>
       </p>
 
@@ -181,9 +181,9 @@ ues/210</a>.</pre>
     </body>
 </html>=
 
---15754502022.22bAc92E0.21838--
+--15754502102.b35c6.21838--
 
---===============1507216397==
+--===============1328992161==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -193,4 +193,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============1507216397==--
+--===============1328992161==--
