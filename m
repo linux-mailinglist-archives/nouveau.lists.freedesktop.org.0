@@ -1,23 +1,23 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 965DA112890
-	for <lists+nouveau@lfdr.de>; Wed,  4 Dec 2019 10:54:07 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 75FC1112895
+	for <lists+nouveau@lfdr.de>; Wed,  4 Dec 2019 10:54:24 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A81C672BCF;
-	Wed,  4 Dec 2019 09:54:05 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id AA41672C41;
+	Wed,  4 Dec 2019 09:54:22 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
- by gabe.freedesktop.org (Postfix) with ESMTP id 07A1D72B9D
- for <nouveau@lists.freedesktop.org>; Wed,  4 Dec 2019 09:54:04 +0000 (UTC)
+ [131.252.210.165])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 86BE372C18
+ for <nouveau@lists.freedesktop.org>; Wed,  4 Dec 2019 09:54:21 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 049F1720E2; Wed,  4 Dec 2019 09:54:04 +0000 (UTC)
+ id 840D2720E2; Wed,  4 Dec 2019 09:54:21 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Wed, 04 Dec 2019 09:54:04 +0000
+Date: Wed, 04 Dec 2019 09:54:21 +0000
 X-Bugzilla-Reason: AssignedTo
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
@@ -25,7 +25,7 @@ X-Bugzilla-Product: xorg
 X-Bugzilla-Component: Driver/nouveau
 X-Bugzilla-Version: unspecified
 X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: normal
+X-Bugzilla-Severity: critical
 X-Bugzilla-Who: martin.peres@free.fr
 X-Bugzilla-Status: RESOLVED
 X-Bugzilla-Resolution: MOVED
@@ -33,14 +33,14 @@ X-Bugzilla-Priority: not set
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
 X-Bugzilla-Changed-Fields: bug_status resolution
-Message-ID: <bug-111940-8800-bQ3ZLbPDGn@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-111940-8800@http.bugs.freedesktop.org/>
-References: <bug-111940-8800@http.bugs.freedesktop.org/>
+Message-ID: <bug-112070-8800-Fi4Rsid0GK@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-112070-8800@http.bugs.freedesktop.org/>
+References: <bug-112070-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 111940] frequent timeout warnings during normal
- operation
+Subject: [Nouveau] [Bug 112070] H/W Acceleration sufficiently buggy on
+ Debian to hard lock machine GeForce 7600 GO
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -52,25 +52,25 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1639999418=="
+Content-Type: multipart/mixed; boundary="===============1090908914=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============1639999418==
-Content-Type: multipart/alternative; boundary="15754532433.9e41.32211"
+--===============1090908914==
+Content-Type: multipart/alternative; boundary="15754532610.1b11C.32412"
 Content-Transfer-Encoding: 7bit
 
 
---15754532433.9e41.32211
-Date: Wed, 4 Dec 2019 09:54:03 +0000
+--15754532610.1b11C.32412
+Date: Wed, 4 Dec 2019 09:54:21 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 
-https://bugs.freedesktop.org/show_bug.cgi?id=3D111940
+https://bugs.freedesktop.org/show_bug.cgi?id=3D112070
 
 Martin Peres <martin.peres@free.fr> changed:
 
@@ -79,7 +79,7 @@ Martin Peres <martin.peres@free.fr> changed:
              Status|NEW                         |RESOLVED
          Resolution|---                         |MOVED
 
---- Comment #3 from Martin Peres <martin.peres@free.fr> ---
+--- Comment #33 from Martin Peres <martin.peres@free.fr> ---
 -- GitLab Migration Automatic Message --
 
 This bug has been migrated to freedesktop.org's GitLab instance and has been
@@ -88,14 +88,14 @@ closed from further activity.
 You can subscribe and participate further through the new bug through this =
 link
 to our GitLab instance:
-https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/issues/509.
+https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/issues/510.
 
 --=20
 You are receiving this mail because:
 You are the assignee for the bug.=
 
---15754532433.9e41.32211
-Date: Wed, 4 Dec 2019 09:54:03 +0000
+--15754532610.1b11C.32412
+Date: Wed, 4 Dec 2019 09:54:21 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -112,9 +112,9 @@ span class=3D"fn">Martin Peres</span></a>
 </span> changed
           <a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - frequent timeout warnings during normal operat=
-ion"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111940">bug 11194=
+   title=3D"RESOLVED MOVED - H/W Acceleration sufficiently buggy on Debian =
+to hard lock machine GeForce 7600 GO"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D112070">bug 11207=
 0</a>
           <br>
              <table border=3D"1" cellspacing=3D"0" cellpadding=3D"8">
@@ -143,15 +143,15 @@ ion"
         <div>
             <b><a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - frequent timeout warnings during normal operat=
-ion"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111940#c3">Commen=
-t # 3</a>
+   title=3D"RESOLVED MOVED - H/W Acceleration sufficiently buggy on Debian =
+to hard lock machine GeForce 7600 GO"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D112070#c33">Comme=
+nt # 33</a>
               on <a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - frequent timeout warnings during normal operat=
-ion"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111940">bug 11194=
+   title=3D"RESOLVED MOVED - H/W Acceleration sufficiently buggy on Debian =
+to hard lock machine GeForce 7600 GO"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D112070">bug 11207=
 0</a>
               from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
 martin.peres&#64;free.fr" title=3D"Martin Peres &lt;martin.peres&#64;free.f=
@@ -166,8 +166,8 @@ You can subscribe and participate further through the new bug through this =
 link
 to our GitLab instance:
 <a href=3D"https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/is=
-sues/509">https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/iss=
-ues/509</a>.</pre>
+sues/510">https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/iss=
+ues/510</a>.</pre>
         </div>
       </p>
 
@@ -181,9 +181,9 @@ ues/509</a>.</pre>
     </body>
 </html>=
 
---15754532433.9e41.32211--
+--15754532610.1b11C.32412--
 
---===============1639999418==
+--===============1090908914==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -193,4 +193,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============1639999418==--
+--===============1090908914==--
