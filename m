@@ -1,23 +1,23 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id F1E66112764
-	for <lists+nouveau@lfdr.de>; Wed,  4 Dec 2019 10:30:37 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1E5C1112765
+	for <lists+nouveau@lfdr.de>; Wed,  4 Dec 2019 10:30:48 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 452016FED8;
-	Wed,  4 Dec 2019 09:30:36 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 898DE6FEE4;
+	Wed,  4 Dec 2019 09:30:46 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
- by gabe.freedesktop.org (Postfix) with ESMTP id 174C16FEA7
- for <nouveau@lists.freedesktop.org>; Wed,  4 Dec 2019 09:30:35 +0000 (UTC)
+ [131.252.210.165])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 3E3F26FEE7
+ for <nouveau@lists.freedesktop.org>; Wed,  4 Dec 2019 09:30:45 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 14C7F720E2; Wed,  4 Dec 2019 09:30:35 +0000 (UTC)
+ id 3B963720E2; Wed,  4 Dec 2019 09:30:45 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Wed, 04 Dec 2019 09:30:34 +0000
+Date: Wed, 04 Dec 2019 09:30:45 +0000
 X-Bugzilla-Reason: AssignedTo
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
@@ -25,22 +25,22 @@ X-Bugzilla-Product: xorg
 X-Bugzilla-Component: Driver/nouveau
 X-Bugzilla-Version: unspecified
 X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: blocker
+X-Bugzilla-Severity: trivial
 X-Bugzilla-Who: martin.peres@free.fr
 X-Bugzilla-Status: RESOLVED
 X-Bugzilla-Resolution: MOVED
-X-Bugzilla-Priority: highest
+X-Bugzilla-Priority: medium
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
 X-Bugzilla-Changed-Fields: bug_status resolution
-Message-ID: <bug-102349-8800-wKSsSyDomQ@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-102349-8800@http.bugs.freedesktop.org/>
-References: <bug-102349-8800@http.bugs.freedesktop.org/>
+Message-ID: <bug-102352-8800-trKtHrXMjQ@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-102352-8800@http.bugs.freedesktop.org/>
+References: <bug-102352-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 102349] nv4x crashing with plasmashell - gdb log
- included
+Subject: [Nouveau] [Bug 102352] nv4x fan run whole time at 100%,
+ stable patch existing since about 1 year, please merge
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -52,34 +52,34 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1041934789=="
+Content-Type: multipart/mixed; boundary="===============1215129150=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============1041934789==
-Content-Type: multipart/alternative; boundary="15754518350.66d9b1DBb.27381"
+--===============1215129150==
+Content-Type: multipart/alternative; boundary="15754518452.FAA2.27475"
 Content-Transfer-Encoding: 7bit
 
 
---15754518350.66d9b1DBb.27381
-Date: Wed, 4 Dec 2019 09:30:35 +0000
+--15754518452.FAA2.27475
+Date: Wed, 4 Dec 2019 09:30:45 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 
-https://bugs.freedesktop.org/show_bug.cgi?id=3D102349
+https://bugs.freedesktop.org/show_bug.cgi?id=3D102352
 
 Martin Peres <martin.peres@free.fr> changed:
 
            What    |Removed                     |Added
 ----------------------------------------------------------------------------
-             Status|REOPENED                    |RESOLVED
+             Status|NEW                         |RESOLVED
          Resolution|---                         |MOVED
 
---- Comment #19 from Martin Peres <martin.peres@free.fr> ---
+--- Comment #13 from Martin Peres <martin.peres@free.fr> ---
 -- GitLab Migration Automatic Message --
 
 This bug has been migrated to freedesktop.org's GitLab instance and has been
@@ -88,14 +88,14 @@ closed from further activity.
 You can subscribe and participate further through the new bug through this =
 link
 to our GitLab instance:
-https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/issues/364.
+https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/issues/365.
 
 --=20
 You are receiving this mail because:
 You are the assignee for the bug.=
 
---15754518350.66d9b1DBb.27381
-Date: Wed, 4 Dec 2019 09:30:35 +0000
+--15754518452.FAA2.27475
+Date: Wed, 4 Dec 2019 09:30:45 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -112,10 +112,10 @@ span class=3D"fn">Martin Peres</span></a>
 </span> changed
           <a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - nv4x crashing with plasmashell - gdb log inclu=
-ded"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D102349">bug 10234=
-9</a>
+   title=3D"RESOLVED MOVED - nv4x fan run whole time at 100%, stable patch =
+existing since about 1 year, please merge"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D102352">bug 10235=
+2</a>
           <br>
              <table border=3D"1" cellspacing=3D"0" cellpadding=3D"8">
           <tr>
@@ -126,7 +126,7 @@ ded"
 
          <tr>
            <td style=3D"text-align:right;">Status</td>
-           <td>REOPENED
+           <td>NEW
            </td>
            <td>RESOLVED
            </td>
@@ -143,16 +143,16 @@ ded"
         <div>
             <b><a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - nv4x crashing with plasmashell - gdb log inclu=
-ded"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D102349#c19">Comme=
-nt # 19</a>
+   title=3D"RESOLVED MOVED - nv4x fan run whole time at 100%, stable patch =
+existing since about 1 year, please merge"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D102352#c13">Comme=
+nt # 13</a>
               on <a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - nv4x crashing with plasmashell - gdb log inclu=
-ded"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D102349">bug 10234=
-9</a>
+   title=3D"RESOLVED MOVED - nv4x fan run whole time at 100%, stable patch =
+existing since about 1 year, please merge"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D102352">bug 10235=
+2</a>
               from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
 martin.peres&#64;free.fr" title=3D"Martin Peres &lt;martin.peres&#64;free.f=
 r&gt;"> <span class=3D"fn">Martin Peres</span></a>
@@ -166,8 +166,8 @@ You can subscribe and participate further through the new bug through this =
 link
 to our GitLab instance:
 <a href=3D"https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/is=
-sues/364">https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/iss=
-ues/364</a>.</pre>
+sues/365">https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/iss=
+ues/365</a>.</pre>
         </div>
       </p>
 
@@ -181,9 +181,9 @@ ues/364</a>.</pre>
     </body>
 </html>=
 
---15754518350.66d9b1DBb.27381--
+--15754518452.FAA2.27475--
 
---===============1041934789==
+--===============1215129150==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -193,4 +193,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============1041934789==--
+--===============1215129150==--
