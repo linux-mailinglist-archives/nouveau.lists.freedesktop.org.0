@@ -1,23 +1,23 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 368A71125D3
-	for <lists+nouveau@lfdr.de>; Wed,  4 Dec 2019 09:48:53 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1873E1125D4
+	for <lists+nouveau@lfdr.de>; Wed,  4 Dec 2019 09:49:06 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A452E6F597;
-	Wed,  4 Dec 2019 08:48:51 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5E14A6F5A5;
+	Wed,  4 Dec 2019 08:49:04 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [131.252.210.165])
- by gabe.freedesktop.org (Postfix) with ESMTP id 379A06F5A5
- for <nouveau@lists.freedesktop.org>; Wed,  4 Dec 2019 08:48:50 +0000 (UTC)
+ [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 91F106F5AE
+ for <nouveau@lists.freedesktop.org>; Wed,  4 Dec 2019 08:49:03 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 34FEF720E2; Wed,  4 Dec 2019 08:48:50 +0000 (UTC)
+ id 8F25D720E2; Wed,  4 Dec 2019 08:49:03 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Wed, 04 Dec 2019 08:48:50 +0000
+Date: Wed, 04 Dec 2019 08:49:03 +0000
 X-Bugzilla-Reason: AssignedTo
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
@@ -33,13 +33,14 @@ X-Bugzilla-Priority: medium
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
 X-Bugzilla-Changed-Fields: resolution bug_status
-Message-ID: <bug-83168-8800-jKQ62VomDo@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-83168-8800@http.bugs.freedesktop.org/>
-References: <bug-83168-8800@http.bugs.freedesktop.org/>
+Message-ID: <bug-83271-8800-Pht9ZAZaOs@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-83271-8800@http.bugs.freedesktop.org/>
+References: <bug-83271-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 83168] [NV46] No display after suspend to RAM
+Subject: [Nouveau] [Bug 83271] [NVE7] Windowed mode causes framebuffer not
+ to refresh with PRIME on optimus/kepler discrete GPU
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -51,25 +52,25 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0625657582=="
+Content-Type: multipart/mixed; boundary="===============1673247026=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============0625657582==
-Content-Type: multipart/alternative; boundary="15754493302.Bd6857643.19402"
+--===============1673247026==
+Content-Type: multipart/alternative; boundary="15754493432.b2f3ce365.19402"
 Content-Transfer-Encoding: 7bit
 
 
---15754493302.Bd6857643.19402
-Date: Wed, 4 Dec 2019 08:48:50 +0000
+--15754493432.b2f3ce365.19402
+Date: Wed, 4 Dec 2019 08:49:03 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 
-https://bugs.freedesktop.org/show_bug.cgi?id=3D83168
+https://bugs.freedesktop.org/show_bug.cgi?id=3D83271
 
 Martin Peres <martin.peres@free.fr> changed:
 
@@ -78,7 +79,7 @@ Martin Peres <martin.peres@free.fr> changed:
          Resolution|---                         |MOVED
              Status|NEW                         |RESOLVED
 
---- Comment #11 from Martin Peres <martin.peres@free.fr> ---
+--- Comment #5 from Martin Peres <martin.peres@free.fr> ---
 -- GitLab Migration Automatic Message --
 
 This bug has been migrated to freedesktop.org's GitLab instance and has been
@@ -87,14 +88,14 @@ closed from further activity.
 You can subscribe and participate further through the new bug through this =
 link
 to our GitLab instance:
-https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/issues/129.
+https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/issues/130.
 
 --=20
 You are receiving this mail because:
 You are the assignee for the bug.=
 
---15754493302.Bd6857643.19402
-Date: Wed, 4 Dec 2019 08:48:50 +0000
+--15754493432.b2f3ce365.19402
+Date: Wed, 4 Dec 2019 08:49:03 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -111,8 +112,9 @@ span class=3D"fn">Martin Peres</span></a>
 </span> changed
           <a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - [NV46] No display after suspend to RAM"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D83168">bug 83168<=
+   title=3D"RESOLVED MOVED - [NVE7] Windowed mode causes framebuffer not to=
+ refresh with PRIME on optimus/kepler discrete GPU"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D83271">bug 83271<=
 /a>
           <br>
              <table border=3D"1" cellspacing=3D"0" cellpadding=3D"8">
@@ -141,13 +143,15 @@ span class=3D"fn">Martin Peres</span></a>
         <div>
             <b><a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - [NV46] No display after suspend to RAM"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D83168#c11">Commen=
-t # 11</a>
+   title=3D"RESOLVED MOVED - [NVE7] Windowed mode causes framebuffer not to=
+ refresh with PRIME on optimus/kepler discrete GPU"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D83271#c5">Comment=
+ # 5</a>
               on <a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - [NV46] No display after suspend to RAM"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D83168">bug 83168<=
+   title=3D"RESOLVED MOVED - [NVE7] Windowed mode causes framebuffer not to=
+ refresh with PRIME on optimus/kepler discrete GPU"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D83271">bug 83271<=
 /a>
               from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
 martin.peres&#64;free.fr" title=3D"Martin Peres &lt;martin.peres&#64;free.f=
@@ -162,8 +166,8 @@ You can subscribe and participate further through the new bug through this =
 link
 to our GitLab instance:
 <a href=3D"https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/is=
-sues/129">https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/iss=
-ues/129</a>.</pre>
+sues/130">https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/iss=
+ues/130</a>.</pre>
         </div>
       </p>
 
@@ -177,9 +181,9 @@ ues/129</a>.</pre>
     </body>
 </html>=
 
---15754493302.Bd6857643.19402--
+--15754493432.b2f3ce365.19402--
 
---===============0625657582==
+--===============1673247026==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -189,4 +193,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============0625657582==--
+--===============1673247026==--
