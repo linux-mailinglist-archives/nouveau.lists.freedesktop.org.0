@@ -2,22 +2,22 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1857A1126DC
-	for <lists+nouveau@lfdr.de>; Wed,  4 Dec 2019 10:17:24 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 512321126DE
+	for <lists+nouveau@lfdr.de>; Wed,  4 Dec 2019 10:17:46 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 73D576FBE9;
-	Wed,  4 Dec 2019 09:17:22 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7723F6F8E4;
+	Wed,  4 Dec 2019 09:17:43 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
  [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
- by gabe.freedesktop.org (Postfix) with ESMTP id 435F66FC2D
- for <nouveau@lists.freedesktop.org>; Wed,  4 Dec 2019 09:17:21 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTP id 357BE6F900
+ for <nouveau@lists.freedesktop.org>; Wed,  4 Dec 2019 09:17:42 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 40C1C720E2; Wed,  4 Dec 2019 09:17:21 +0000 (UTC)
+ id 32918720E2; Wed,  4 Dec 2019 09:17:42 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Wed, 04 Dec 2019 09:17:21 +0000
+Date: Wed, 04 Dec 2019 09:17:42 +0000
 X-Bugzilla-Reason: AssignedTo
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
@@ -25,7 +25,7 @@ X-Bugzilla-Product: xorg
 X-Bugzilla-Component: Driver/nouveau
 X-Bugzilla-Version: unspecified
 X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: critical
+X-Bugzilla-Severity: normal
 X-Bugzilla-Who: martin.peres@free.fr
 X-Bugzilla-Status: RESOLVED
 X-Bugzilla-Resolution: MOVED
@@ -33,15 +33,14 @@ X-Bugzilla-Priority: medium
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
 X-Bugzilla-Changed-Fields: resolution bug_status
-Message-ID: <bug-97620-8800-nyf0Jput0Q@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-97620-8800@http.bugs.freedesktop.org/>
-References: <bug-97620-8800@http.bugs.freedesktop.org/>
+Message-ID: <bug-97922-8800-245QktqIpo@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-97922-8800@http.bugs.freedesktop.org/>
+References: <bug-97922-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 97620] [REGRESSION,
- bisected] KMS can't initialize GeForce GTX 460 after commit
- a6a0f67ca7aae2e6bec7ebf55d1e4853dc220816
+Subject: [Nouveau] [Bug 97922] Having easily reproducible xorg hang on
+ extensive blender 3d editor usage
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -53,25 +52,25 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0123863185=="
+Content-Type: multipart/mixed; boundary="===============1394871701=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============0123863185==
-Content-Type: multipart/alternative; boundary="15754510412.6C2Fd3.24289"
+--===============1394871701==
+Content-Type: multipart/alternative; boundary="15754510620.D7f5899.24832"
 Content-Transfer-Encoding: 7bit
 
 
---15754510412.6C2Fd3.24289
-Date: Wed, 4 Dec 2019 09:17:21 +0000
+--15754510620.D7f5899.24832
+Date: Wed, 4 Dec 2019 09:17:42 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 
-https://bugs.freedesktop.org/show_bug.cgi?id=3D97620
+https://bugs.freedesktop.org/show_bug.cgi?id=3D97922
 
 Martin Peres <martin.peres@free.fr> changed:
 
@@ -80,7 +79,7 @@ Martin Peres <martin.peres@free.fr> changed:
          Resolution|---                         |MOVED
              Status|NEW                         |RESOLVED
 
---- Comment #39 from Martin Peres <martin.peres@free.fr> ---
+--- Comment #1 from Martin Peres <martin.peres@free.fr> ---
 -- GitLab Migration Automatic Message --
 
 This bug has been migrated to freedesktop.org's GitLab instance and has been
@@ -89,14 +88,14 @@ closed from further activity.
 You can subscribe and participate further through the new bug through this =
 link
 to our GitLab instance:
-https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/issues/286.
+https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/issues/287.
 
 --=20
 You are receiving this mail because:
 You are the assignee for the bug.=
 
---15754510412.6C2Fd3.24289
-Date: Wed, 4 Dec 2019 09:17:21 +0000
+--15754510620.D7f5899.24832
+Date: Wed, 4 Dec 2019 09:17:42 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -113,9 +112,9 @@ span class=3D"fn">Martin Peres</span></a>
 </span> changed
           <a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - [REGRESSION, bisected] KMS can't initialize Ge=
-Force GTX 460 after commit a6a0f67ca7aae2e6bec7ebf55d1e4853dc220816"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D97620">bug 97620<=
+   title=3D"RESOLVED MOVED - Having easily reproducible xorg hang on extens=
+ive blender 3d editor usage"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D97922">bug 97922<=
 /a>
           <br>
              <table border=3D"1" cellspacing=3D"0" cellpadding=3D"8">
@@ -144,15 +143,15 @@ Force GTX 460 after commit a6a0f67ca7aae2e6bec7ebf55d1e4853dc220816"
         <div>
             <b><a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - [REGRESSION, bisected] KMS can't initialize Ge=
-Force GTX 460 after commit a6a0f67ca7aae2e6bec7ebf55d1e4853dc220816"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D97620#c39">Commen=
-t # 39</a>
+   title=3D"RESOLVED MOVED - Having easily reproducible xorg hang on extens=
+ive blender 3d editor usage"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D97922#c1">Comment=
+ # 1</a>
               on <a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - [REGRESSION, bisected] KMS can't initialize Ge=
-Force GTX 460 after commit a6a0f67ca7aae2e6bec7ebf55d1e4853dc220816"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D97620">bug 97620<=
+   title=3D"RESOLVED MOVED - Having easily reproducible xorg hang on extens=
+ive blender 3d editor usage"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D97922">bug 97922<=
 /a>
               from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
 martin.peres&#64;free.fr" title=3D"Martin Peres &lt;martin.peres&#64;free.f=
@@ -167,8 +166,8 @@ You can subscribe and participate further through the new bug through this =
 link
 to our GitLab instance:
 <a href=3D"https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/is=
-sues/286">https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/iss=
-ues/286</a>.</pre>
+sues/287">https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/iss=
+ues/287</a>.</pre>
         </div>
       </p>
 
@@ -182,9 +181,9 @@ ues/286</a>.</pre>
     </body>
 </html>=
 
---15754510412.6C2Fd3.24289--
+--15754510620.D7f5899.24832--
 
---===============0123863185==
+--===============1394871701==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -194,4 +193,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============0123863185==--
+--===============1394871701==--
