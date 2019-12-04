@@ -2,22 +2,22 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 28F92112769
-	for <lists+nouveau@lfdr.de>; Wed,  4 Dec 2019 10:30:56 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 57D4311276A
+	for <lists+nouveau@lfdr.de>; Wed,  4 Dec 2019 10:31:01 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 903AA6FED7;
-	Wed,  4 Dec 2019 09:30:54 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 983876FF10;
+	Wed,  4 Dec 2019 09:30:59 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
- by gabe.freedesktop.org (Postfix) with ESMTP id 6B2096FEF9
- for <nouveau@lists.freedesktop.org>; Wed,  4 Dec 2019 09:30:53 +0000 (UTC)
+ [131.252.210.165])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 87D336FEE5
+ for <nouveau@lists.freedesktop.org>; Wed,  4 Dec 2019 09:30:58 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 68AD4720E2; Wed,  4 Dec 2019 09:30:53 +0000 (UTC)
+ id 84F3C720E2; Wed,  4 Dec 2019 09:30:58 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Wed, 04 Dec 2019 09:30:53 +0000
+Date: Wed, 04 Dec 2019 09:30:58 +0000
 X-Bugzilla-Reason: AssignedTo
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
@@ -32,15 +32,16 @@ X-Bugzilla-Resolution: MOVED
 X-Bugzilla-Priority: medium
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: resolution bug_status
-Message-ID: <bug-102430-8800-8temlwuhZH@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-102430-8800@http.bugs.freedesktop.org/>
-References: <bug-102430-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-Changed-Fields: bug_status resolution
+Message-ID: <bug-102593-8800-oSOszYCLhi@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-102593-8800@http.bugs.freedesktop.org/>
+References: <bug-102593-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 102430] nv4x - memory problems when starting
- graphical application - logs included
+Subject: [Nouveau] [Bug 102593] Dell Precision m65 laptop,
+ Nvidia Quadro FX 350M: the Nouveau driver seems to ruin the
+ functionality of the screen
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -52,34 +53,34 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1330401013=="
+Content-Type: multipart/mixed; boundary="===============1228355985=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============1330401013==
-Content-Type: multipart/alternative; boundary="15754518530.DBE4C9324.27475"
+--===============1228355985==
+Content-Type: multipart/alternative; boundary="15754518580.9DFC9C.27475"
 Content-Transfer-Encoding: 7bit
 
 
---15754518530.DBE4C9324.27475
-Date: Wed, 4 Dec 2019 09:30:53 +0000
+--15754518580.9DFC9C.27475
+Date: Wed, 4 Dec 2019 09:30:58 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 
-https://bugs.freedesktop.org/show_bug.cgi?id=3D102430
+https://bugs.freedesktop.org/show_bug.cgi?id=3D102593
 
 Martin Peres <martin.peres@free.fr> changed:
 
            What    |Removed                     |Added
 ----------------------------------------------------------------------------
-         Resolution|---                         |MOVED
              Status|NEW                         |RESOLVED
+         Resolution|---                         |MOVED
 
---- Comment #7 from Martin Peres <martin.peres@free.fr> ---
+--- Comment #3 from Martin Peres <martin.peres@free.fr> ---
 -- GitLab Migration Automatic Message --
 
 This bug has been migrated to freedesktop.org's GitLab instance and has been
@@ -88,14 +89,14 @@ closed from further activity.
 You can subscribe and participate further through the new bug through this =
 link
 to our GitLab instance:
-https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/issues/367.
+https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/issues/368.
 
 --=20
 You are receiving this mail because:
 You are the assignee for the bug.=
 
---15754518530.DBE4C9324.27475
-Date: Wed, 4 Dec 2019 09:30:53 +0000
+--15754518580.9DFC9C.27475
+Date: Wed, 4 Dec 2019 09:30:58 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -112,10 +113,10 @@ span class=3D"fn">Martin Peres</span></a>
 </span> changed
           <a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - nv4x - memory problems when starting graphical=
- application - logs included"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D102430">bug 10243=
-0</a>
+   title=3D"RESOLVED MOVED - Dell Precision m65 laptop, Nvidia Quadro FX 35=
+0M: the Nouveau driver seems to ruin the functionality of the screen"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D102593">bug 10259=
+3</a>
           <br>
              <table border=3D"1" cellspacing=3D"0" cellpadding=3D"8">
           <tr>
@@ -125,34 +126,34 @@ span class=3D"fn">Martin Peres</span></a>
           </tr>
 
          <tr>
-           <td style=3D"text-align:right;">Resolution</td>
-           <td>---
-           </td>
-           <td>MOVED
-           </td>
-         </tr>
-
-         <tr>
            <td style=3D"text-align:right;">Status</td>
            <td>NEW
            </td>
            <td>RESOLVED
+           </td>
+         </tr>
+
+         <tr>
+           <td style=3D"text-align:right;">Resolution</td>
+           <td>---
+           </td>
+           <td>MOVED
            </td>
          </tr></table>
       <p>
         <div>
             <b><a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - nv4x - memory problems when starting graphical=
- application - logs included"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D102430#c7">Commen=
-t # 7</a>
+   title=3D"RESOLVED MOVED - Dell Precision m65 laptop, Nvidia Quadro FX 35=
+0M: the Nouveau driver seems to ruin the functionality of the screen"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D102593#c3">Commen=
+t # 3</a>
               on <a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - nv4x - memory problems when starting graphical=
- application - logs included"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D102430">bug 10243=
-0</a>
+   title=3D"RESOLVED MOVED - Dell Precision m65 laptop, Nvidia Quadro FX 35=
+0M: the Nouveau driver seems to ruin the functionality of the screen"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D102593">bug 10259=
+3</a>
               from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
 martin.peres&#64;free.fr" title=3D"Martin Peres &lt;martin.peres&#64;free.f=
 r&gt;"> <span class=3D"fn">Martin Peres</span></a>
@@ -166,8 +167,8 @@ You can subscribe and participate further through the new bug through this =
 link
 to our GitLab instance:
 <a href=3D"https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/is=
-sues/367">https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/iss=
-ues/367</a>.</pre>
+sues/368">https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/iss=
+ues/368</a>.</pre>
         </div>
       </p>
 
@@ -181,9 +182,9 @@ ues/367</a>.</pre>
     </body>
 </html>=
 
---15754518530.DBE4C9324.27475--
+--15754518580.9DFC9C.27475--
 
---===============1330401013==
+--===============1228355985==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -193,4 +194,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============1330401013==--
+--===============1228355985==--
