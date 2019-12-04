@@ -2,44 +2,44 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id DD734112675
-	for <lists+nouveau@lfdr.de>; Wed,  4 Dec 2019 10:06:21 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9736F112676
+	for <lists+nouveau@lfdr.de>; Wed,  4 Dec 2019 10:06:26 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 534EC6F929;
-	Wed,  4 Dec 2019 09:06:20 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 149746F91B;
+	Wed,  4 Dec 2019 09:06:25 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
  [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
- by gabe.freedesktop.org (Postfix) with ESMTP id 9AC906F97E
- for <nouveau@lists.freedesktop.org>; Wed,  4 Dec 2019 09:06:18 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTP id 303EE6F991
+ for <nouveau@lists.freedesktop.org>; Wed,  4 Dec 2019 09:06:24 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 982A4720E2; Wed,  4 Dec 2019 09:06:18 +0000 (UTC)
+ id 2D2F4720E2; Wed,  4 Dec 2019 09:06:24 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Wed, 04 Dec 2019 09:06:18 +0000
+Date: Wed, 04 Dec 2019 09:06:24 +0000
 X-Bugzilla-Reason: AssignedTo
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
 X-Bugzilla-Product: xorg
 X-Bugzilla-Component: Driver/nouveau
-X-Bugzilla-Version: git
+X-Bugzilla-Version: unspecified
 X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: normal
+X-Bugzilla-Severity: major
 X-Bugzilla-Who: martin.peres@free.fr
 X-Bugzilla-Status: RESOLVED
 X-Bugzilla-Resolution: MOVED
 X-Bugzilla-Priority: medium
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: bug_status resolution
-Message-ID: <bug-92893-8800-eTgFN6bDzm@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-92893-8800@http.bugs.freedesktop.org/>
-References: <bug-92893-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-Changed-Fields: resolution bug_status
+Message-ID: <bug-92922-8800-WtDlccVLZ5@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-92922-8800@http.bugs.freedesktop.org/>
+References: <bug-92922-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 92893] NV34: XPresent compositor scrambled display
+Subject: [Nouveau] [Bug 92922] [NVE6] Xorg random freeze
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -51,34 +51,34 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1244537116=="
+Content-Type: multipart/mixed; boundary="===============0742858403=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============1244537116==
-Content-Type: multipart/alternative; boundary="15754503783.91D86FC6F.22858"
+--===============0742858403==
+Content-Type: multipart/alternative; boundary="15754503842.Db670BEd.22858"
 Content-Transfer-Encoding: 7bit
 
 
---15754503783.91D86FC6F.22858
-Date: Wed, 4 Dec 2019 09:06:18 +0000
+--15754503842.Db670BEd.22858
+Date: Wed, 4 Dec 2019 09:06:24 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 
-https://bugs.freedesktop.org/show_bug.cgi?id=3D92893
+https://bugs.freedesktop.org/show_bug.cgi?id=3D92922
 
 Martin Peres <martin.peres@free.fr> changed:
 
            What    |Removed                     |Added
 ----------------------------------------------------------------------------
-             Status|NEW                         |RESOLVED
          Resolution|---                         |MOVED
+             Status|NEW                         |RESOLVED
 
---- Comment #6 from Martin Peres <martin.peres@free.fr> ---
+--- Comment #9 from Martin Peres <martin.peres@free.fr> ---
 -- GitLab Migration Automatic Message --
 
 This bug has been migrated to freedesktop.org's GitLab instance and has been
@@ -87,14 +87,14 @@ closed from further activity.
 You can subscribe and participate further through the new bug through this =
 link
 to our GitLab instance:
-https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/issues/233.
+https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/issues/234.
 
 --=20
 You are receiving this mail because:
 You are the assignee for the bug.=
 
---15754503783.91D86FC6F.22858
-Date: Wed, 4 Dec 2019 09:06:18 +0000
+--15754503842.Db670BEd.22858
+Date: Wed, 4 Dec 2019 09:06:24 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -111,8 +111,8 @@ span class=3D"fn">Martin Peres</span></a>
 </span> changed
           <a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - NV34: XPresent compositor scrambled display"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D92893">bug 92893<=
+   title=3D"RESOLVED MOVED - [NVE6] Xorg random freeze"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D92922">bug 92922<=
 /a>
           <br>
              <table border=3D"1" cellspacing=3D"0" cellpadding=3D"8">
@@ -123,31 +123,31 @@ span class=3D"fn">Martin Peres</span></a>
           </tr>
 
          <tr>
-           <td style=3D"text-align:right;">Status</td>
-           <td>NEW
-           </td>
-           <td>RESOLVED
-           </td>
-         </tr>
-
-         <tr>
            <td style=3D"text-align:right;">Resolution</td>
            <td>---
            </td>
            <td>MOVED
+           </td>
+         </tr>
+
+         <tr>
+           <td style=3D"text-align:right;">Status</td>
+           <td>NEW
+           </td>
+           <td>RESOLVED
            </td>
          </tr></table>
       <p>
         <div>
             <b><a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - NV34: XPresent compositor scrambled display"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D92893#c6">Comment=
- # 6</a>
+   title=3D"RESOLVED MOVED - [NVE6] Xorg random freeze"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D92922#c9">Comment=
+ # 9</a>
               on <a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - NV34: XPresent compositor scrambled display"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D92893">bug 92893<=
+   title=3D"RESOLVED MOVED - [NVE6] Xorg random freeze"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D92922">bug 92922<=
 /a>
               from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
 martin.peres&#64;free.fr" title=3D"Martin Peres &lt;martin.peres&#64;free.f=
@@ -162,8 +162,8 @@ You can subscribe and participate further through the new bug through this =
 link
 to our GitLab instance:
 <a href=3D"https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/is=
-sues/233">https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/iss=
-ues/233</a>.</pre>
+sues/234">https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/iss=
+ues/234</a>.</pre>
         </div>
       </p>
 
@@ -177,9 +177,9 @@ ues/233</a>.</pre>
     </body>
 </html>=
 
---15754503783.91D86FC6F.22858--
+--15754503842.Db670BEd.22858--
 
---===============1244537116==
+--===============0742858403==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -189,4 +189,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============1244537116==--
+--===============0742858403==--
