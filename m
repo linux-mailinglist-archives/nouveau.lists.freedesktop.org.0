@@ -2,29 +2,29 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 646FC11286D
-	for <lists+nouveau@lfdr.de>; Wed,  4 Dec 2019 10:50:49 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 28E0C11286E
+	for <lists+nouveau@lfdr.de>; Wed,  4 Dec 2019 10:50:53 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id AF93872CC1;
-	Wed,  4 Dec 2019 09:50:47 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5881A72CB2;
+	Wed,  4 Dec 2019 09:50:51 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
- by gabe.freedesktop.org (Postfix) with ESMTP id 8C80272CC1
- for <nouveau@lists.freedesktop.org>; Wed,  4 Dec 2019 09:50:46 +0000 (UTC)
+ [131.252.210.165])
+ by gabe.freedesktop.org (Postfix) with ESMTP id BB9ED72CED
+ for <nouveau@lists.freedesktop.org>; Wed,  4 Dec 2019 09:50:49 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 8A1A1720E2; Wed,  4 Dec 2019 09:50:46 +0000 (UTC)
+ id B81F1720E2; Wed,  4 Dec 2019 09:50:49 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Wed, 04 Dec 2019 09:50:46 +0000
+Date: Wed, 04 Dec 2019 09:50:49 +0000
 X-Bugzilla-Reason: AssignedTo
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
 X-Bugzilla-Product: xorg
 X-Bugzilla-Component: Driver/nouveau
 X-Bugzilla-Version: unspecified
-X-Bugzilla-Keywords: 
+X-Bugzilla-Keywords: janitor
 X-Bugzilla-Severity: normal
 X-Bugzilla-Who: martin.peres@free.fr
 X-Bugzilla-Status: RESOLVED
@@ -32,15 +32,15 @@ X-Bugzilla-Resolution: MOVED
 X-Bugzilla-Priority: medium
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: bug_status resolution
-Message-ID: <bug-111178-8800-H7waTNtNWh@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-111178-8800@http.bugs.freedesktop.org/>
-References: <bug-111178-8800@http.bugs.freedesktop.org/>
+X-Bugzilla-Changed-Fields: resolution bug_status
+Message-ID: <bug-111199-8800-lZlK85ylnj@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-111199-8800@http.bugs.freedesktop.org/>
+References: <bug-111199-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 111178] low quality icc profile for monitor Benq
- ew2775zh
+Subject: [Nouveau] [Bug 111199] Bug in dither.depth property set: Value
+ compared to dither.mode instead of dither.depth
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -52,32 +52,32 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1054213030=="
+Content-Type: multipart/mixed; boundary="===============0613775938=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============1054213030==
-Content-Type: multipart/alternative; boundary="15754530462.cAC6ad4D.31189"
+--===============0613775938==
+Content-Type: multipart/alternative; boundary="15754530493.cFa7f76e.31189"
 Content-Transfer-Encoding: 7bit
 
 
---15754530462.cAC6ad4D.31189
-Date: Wed, 4 Dec 2019 09:50:46 +0000
+--15754530493.cFa7f76e.31189
+Date: Wed, 4 Dec 2019 09:50:49 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 
-https://bugs.freedesktop.org/show_bug.cgi?id=3D111178
+https://bugs.freedesktop.org/show_bug.cgi?id=3D111199
 
 Martin Peres <martin.peres@free.fr> changed:
 
            What    |Removed                     |Added
 ----------------------------------------------------------------------------
-             Status|NEW                         |RESOLVED
          Resolution|---                         |MOVED
+             Status|NEW                         |RESOLVED
 
 --- Comment #1 from Martin Peres <martin.peres@free.fr> ---
 -- GitLab Migration Automatic Message --
@@ -88,14 +88,14 @@ closed from further activity.
 You can subscribe and participate further through the new bug through this =
 link
 to our GitLab instance:
-https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/issues/495.
+https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/issues/496.
 
 --=20
 You are receiving this mail because:
 You are the assignee for the bug.=
 
---15754530462.cAC6ad4D.31189
-Date: Wed, 4 Dec 2019 09:50:46 +0000
+--15754530493.cFa7f76e.31189
+Date: Wed, 4 Dec 2019 09:50:49 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -112,10 +112,10 @@ span class=3D"fn">Martin Peres</span></a>
 </span> changed
           <a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - low quality icc profile for monitor Benq ew277=
-5zh"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111178">bug 11117=
-8</a>
+   title=3D"RESOLVED MOVED - Bug in dither.depth property set: Value compar=
+ed to dither.mode instead of dither.depth"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111199">bug 11119=
+9</a>
           <br>
              <table border=3D"1" cellspacing=3D"0" cellpadding=3D"8">
           <tr>
@@ -125,34 +125,34 @@ span class=3D"fn">Martin Peres</span></a>
           </tr>
 
          <tr>
-           <td style=3D"text-align:right;">Status</td>
-           <td>NEW
-           </td>
-           <td>RESOLVED
-           </td>
-         </tr>
-
-         <tr>
            <td style=3D"text-align:right;">Resolution</td>
            <td>---
            </td>
            <td>MOVED
+           </td>
+         </tr>
+
+         <tr>
+           <td style=3D"text-align:right;">Status</td>
+           <td>NEW
+           </td>
+           <td>RESOLVED
            </td>
          </tr></table>
       <p>
         <div>
             <b><a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - low quality icc profile for monitor Benq ew277=
-5zh"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111178#c1">Commen=
+   title=3D"RESOLVED MOVED - Bug in dither.depth property set: Value compar=
+ed to dither.mode instead of dither.depth"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111199#c1">Commen=
 t # 1</a>
               on <a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - low quality icc profile for monitor Benq ew277=
-5zh"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111178">bug 11117=
-8</a>
+   title=3D"RESOLVED MOVED - Bug in dither.depth property set: Value compar=
+ed to dither.mode instead of dither.depth"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D111199">bug 11119=
+9</a>
               from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
 martin.peres&#64;free.fr" title=3D"Martin Peres &lt;martin.peres&#64;free.f=
 r&gt;"> <span class=3D"fn">Martin Peres</span></a>
@@ -166,8 +166,8 @@ You can subscribe and participate further through the new bug through this =
 link
 to our GitLab instance:
 <a href=3D"https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/is=
-sues/495">https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/iss=
-ues/495</a>.</pre>
+sues/496">https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/iss=
+ues/496</a>.</pre>
         </div>
       </p>
 
@@ -181,9 +181,9 @@ ues/495</a>.</pre>
     </body>
 </html>=
 
---15754530462.cAC6ad4D.31189--
+--15754530493.cFa7f76e.31189--
 
---===============1054213030==
+--===============0613775938==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -193,4 +193,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============1054213030==--
+--===============0613775938==--
