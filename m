@@ -2,28 +2,28 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2E6B81125B4
-	for <lists+nouveau@lfdr.de>; Wed,  4 Dec 2019 09:45:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C06B91125B6
+	for <lists+nouveau@lfdr.de>; Wed,  4 Dec 2019 09:45:48 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 55F2B6F58F;
-	Wed,  4 Dec 2019 08:45:35 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1A6586F57C;
+	Wed,  4 Dec 2019 08:45:47 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
- by gabe.freedesktop.org (Postfix) with ESMTP id 5D4836F584
- for <nouveau@lists.freedesktop.org>; Wed,  4 Dec 2019 08:45:34 +0000 (UTC)
+ [131.252.210.165])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 80FD66F572
+ for <nouveau@lists.freedesktop.org>; Wed,  4 Dec 2019 08:45:45 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 5AA9A720E2; Wed,  4 Dec 2019 08:45:34 +0000 (UTC)
+ id 7DBFE720E2; Wed,  4 Dec 2019 08:45:45 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Wed, 04 Dec 2019 08:45:34 +0000
+Date: Wed, 04 Dec 2019 08:45:45 +0000
 X-Bugzilla-Reason: AssignedTo
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
 X-Bugzilla-Product: xorg
 X-Bugzilla-Component: Driver/nouveau
-X-Bugzilla-Version: unspecified
+X-Bugzilla-Version: 7.7 (2012.06)
 X-Bugzilla-Keywords: 
 X-Bugzilla-Severity: normal
 X-Bugzilla-Who: martin.peres@free.fr
@@ -33,14 +33,13 @@ X-Bugzilla-Priority: medium
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
 X-Bugzilla-Changed-Fields: resolution bug_status
-Message-ID: <bug-79211-8800-HahZrjPlWU@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-79211-8800@http.bugs.freedesktop.org/>
-References: <bug-79211-8800@http.bugs.freedesktop.org/>
+Message-ID: <bug-79518-8800-uNeSwZrFgA@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-79518-8800@http.bugs.freedesktop.org/>
+References: <bug-79518-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 79211] [VP4.2] Video playback using vdpau unusably
- slow
+Subject: [Nouveau] [Bug 79518] nouveau causes lockup and reboot on GT215
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -52,25 +51,25 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1617378614=="
+Content-Type: multipart/mixed; boundary="===============0475631893=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============1617378614==
-Content-Type: multipart/alternative; boundary="15754491340.2eAdeeb.18097"
+--===============0475631893==
+Content-Type: multipart/alternative; boundary="15754491450.AA7a.18097"
 Content-Transfer-Encoding: 7bit
 
 
---15754491340.2eAdeeb.18097
-Date: Wed, 4 Dec 2019 08:45:34 +0000
+--15754491450.AA7a.18097
+Date: Wed, 4 Dec 2019 08:45:45 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 
-https://bugs.freedesktop.org/show_bug.cgi?id=3D79211
+https://bugs.freedesktop.org/show_bug.cgi?id=3D79518
 
 Martin Peres <martin.peres@free.fr> changed:
 
@@ -79,7 +78,7 @@ Martin Peres <martin.peres@free.fr> changed:
          Resolution|---                         |MOVED
              Status|NEW                         |RESOLVED
 
---- Comment #3 from Martin Peres <martin.peres@free.fr> ---
+--- Comment #11 from Martin Peres <martin.peres@free.fr> ---
 -- GitLab Migration Automatic Message --
 
 This bug has been migrated to freedesktop.org's GitLab instance and has been
@@ -88,14 +87,14 @@ closed from further activity.
 You can subscribe and participate further through the new bug through this =
 link
 to our GitLab instance:
-https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/issues/109.
+https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/issues/110.
 
 --=20
 You are receiving this mail because:
 You are the assignee for the bug.=
 
---15754491340.2eAdeeb.18097
-Date: Wed, 4 Dec 2019 08:45:34 +0000
+--15754491450.AA7a.18097
+Date: Wed, 4 Dec 2019 08:45:45 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -112,9 +111,8 @@ span class=3D"fn">Martin Peres</span></a>
 </span> changed
           <a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - [VP4.2] Video playback using vdpau unusably sl=
-ow"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D79211">bug 79211<=
+   title=3D"RESOLVED MOVED - nouveau causes lockup and reboot on GT215"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D79518">bug 79518<=
 /a>
           <br>
              <table border=3D"1" cellspacing=3D"0" cellpadding=3D"8">
@@ -143,15 +141,13 @@ ow"
         <div>
             <b><a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - [VP4.2] Video playback using vdpau unusably sl=
-ow"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D79211#c3">Comment=
- # 3</a>
+   title=3D"RESOLVED MOVED - nouveau causes lockup and reboot on GT215"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D79518#c11">Commen=
+t # 11</a>
               on <a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - [VP4.2] Video playback using vdpau unusably sl=
-ow"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D79211">bug 79211<=
+   title=3D"RESOLVED MOVED - nouveau causes lockup and reboot on GT215"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D79518">bug 79518<=
 /a>
               from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
 martin.peres&#64;free.fr" title=3D"Martin Peres &lt;martin.peres&#64;free.f=
@@ -166,8 +162,8 @@ You can subscribe and participate further through the new bug through this =
 link
 to our GitLab instance:
 <a href=3D"https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/is=
-sues/109">https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/iss=
-ues/109</a>.</pre>
+sues/110">https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/iss=
+ues/110</a>.</pre>
         </div>
       </p>
 
@@ -181,9 +177,9 @@ ues/109</a>.</pre>
     </body>
 </html>=
 
---15754491340.2eAdeeb.18097--
+--15754491450.AA7a.18097--
 
---===============1617378614==
+--===============0475631893==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -193,4 +189,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============1617378614==--
+--===============0475631893==--
