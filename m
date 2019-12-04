@@ -1,29 +1,29 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 92E29112746
-	for <lists+nouveau@lfdr.de>; Wed,  4 Dec 2019 10:27:43 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4D54B112749
+	for <lists+nouveau@lfdr.de>; Wed,  4 Dec 2019 10:27:51 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E7AB86E425;
-	Wed,  4 Dec 2019 09:27:40 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1CBD86F8AA;
+	Wed,  4 Dec 2019 09:27:49 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
  [131.252.210.165])
- by gabe.freedesktop.org (Postfix) with ESMTP id AAAFA6F5B1
- for <nouveau@lists.freedesktop.org>; Wed,  4 Dec 2019 09:27:39 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTP id 4A6446F8BB
+ for <nouveau@lists.freedesktop.org>; Wed,  4 Dec 2019 09:27:47 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 900D1720E2; Wed,  4 Dec 2019 09:27:39 +0000 (UTC)
+ id 47A56720E2; Wed,  4 Dec 2019 09:27:47 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Wed, 04 Dec 2019 09:27:39 +0000
+Date: Wed, 04 Dec 2019 09:27:47 +0000
 X-Bugzilla-Reason: AssignedTo
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
 X-Bugzilla-Product: xorg
 X-Bugzilla-Component: Driver/nouveau
-X-Bugzilla-Version: 7.7 (2012.06)
+X-Bugzilla-Version: unspecified
 X-Bugzilla-Keywords: 
 X-Bugzilla-Severity: normal
 X-Bugzilla-Who: martin.peres@free.fr
@@ -33,14 +33,14 @@ X-Bugzilla-Priority: medium
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
 X-Bugzilla-Changed-Fields: resolution bug_status
-Message-ID: <bug-101191-8800-JoKUCT8Fwj@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-101191-8800@http.bugs.freedesktop.org/>
-References: <bug-101191-8800@http.bugs.freedesktop.org/>
+Message-ID: <bug-101206-8800-c6GltKWsJH@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-101206-8800@http.bugs.freedesktop.org/>
+References: <bug-101206-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 101191] [NVC3] Vsync stops working after mode
- changes in nouveau DDX
+Subject: [Nouveau] [Bug 101206] intermittent lock up after login to GNOME
+ under wayland
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -52,25 +52,25 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0198859007=="
+Content-Type: multipart/mixed; boundary="===============0356002868=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============0198859007==
-Content-Type: multipart/alternative; boundary="15754516590.bafE2f.26859"
+--===============0356002868==
+Content-Type: multipart/alternative; boundary="15754516673.AeaAD3f7.26859"
 Content-Transfer-Encoding: 7bit
 
 
---15754516590.bafE2f.26859
-Date: Wed, 4 Dec 2019 09:27:39 +0000
+--15754516673.AeaAD3f7.26859
+Date: Wed, 4 Dec 2019 09:27:47 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 
-https://bugs.freedesktop.org/show_bug.cgi?id=3D101191
+https://bugs.freedesktop.org/show_bug.cgi?id=3D101206
 
 Martin Peres <martin.peres@free.fr> changed:
 
@@ -79,7 +79,7 @@ Martin Peres <martin.peres@free.fr> changed:
          Resolution|---                         |MOVED
              Status|NEW                         |RESOLVED
 
---- Comment #4 from Martin Peres <martin.peres@free.fr> ---
+--- Comment #6 from Martin Peres <martin.peres@free.fr> ---
 -- GitLab Migration Automatic Message --
 
 This bug has been migrated to freedesktop.org's GitLab instance and has been
@@ -88,14 +88,14 @@ closed from further activity.
 You can subscribe and participate further through the new bug through this =
 link
 to our GitLab instance:
-https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/issues/349.
+https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/issues/350.
 
 --=20
 You are receiving this mail because:
 You are the assignee for the bug.=
 
---15754516590.bafE2f.26859
-Date: Wed, 4 Dec 2019 09:27:39 +0000
+--15754516673.AeaAD3f7.26859
+Date: Wed, 4 Dec 2019 09:27:47 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -112,10 +112,10 @@ span class=3D"fn">Martin Peres</span></a>
 </span> changed
           <a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - [NVC3] Vsync stops working after mode changes =
-in nouveau DDX"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D101191">bug 10119=
-1</a>
+   title=3D"RESOLVED MOVED - intermittent lock up after login to GNOME unde=
+r wayland"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D101206">bug 10120=
+6</a>
           <br>
              <table border=3D"1" cellspacing=3D"0" cellpadding=3D"8">
           <tr>
@@ -143,16 +143,16 @@ in nouveau DDX"
         <div>
             <b><a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - [NVC3] Vsync stops working after mode changes =
-in nouveau DDX"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D101191#c4">Commen=
-t # 4</a>
+   title=3D"RESOLVED MOVED - intermittent lock up after login to GNOME unde=
+r wayland"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D101206#c6">Commen=
+t # 6</a>
               on <a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - [NVC3] Vsync stops working after mode changes =
-in nouveau DDX"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D101191">bug 10119=
-1</a>
+   title=3D"RESOLVED MOVED - intermittent lock up after login to GNOME unde=
+r wayland"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D101206">bug 10120=
+6</a>
               from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
 martin.peres&#64;free.fr" title=3D"Martin Peres &lt;martin.peres&#64;free.f=
 r&gt;"> <span class=3D"fn">Martin Peres</span></a>
@@ -166,8 +166,8 @@ You can subscribe and participate further through the new bug through this =
 link
 to our GitLab instance:
 <a href=3D"https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/is=
-sues/349">https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/iss=
-ues/349</a>.</pre>
+sues/350">https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/iss=
+ues/350</a>.</pre>
         </div>
       </p>
 
@@ -181,9 +181,9 @@ ues/349</a>.</pre>
     </body>
 </html>=
 
---15754516590.bafE2f.26859--
+--15754516673.AeaAD3f7.26859--
 
---===============0198859007==
+--===============0356002868==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -193,4 +193,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============0198859007==--
+--===============0356002868==--
