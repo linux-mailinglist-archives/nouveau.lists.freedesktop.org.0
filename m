@@ -2,30 +2,30 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7CB6D112782
-	for <lists+nouveau@lfdr.de>; Wed,  4 Dec 2019 10:32:48 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A4FD7112783
+	for <lists+nouveau@lfdr.de>; Wed,  4 Dec 2019 10:32:57 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 977276F948;
-	Wed,  4 Dec 2019 09:32:45 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 318626FB51;
+	Wed,  4 Dec 2019 09:32:55 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [131.252.210.165])
- by gabe.freedesktop.org (Postfix) with ESMTP id 1590C6F91C
- for <nouveau@lists.freedesktop.org>; Wed,  4 Dec 2019 09:32:44 +0000 (UTC)
+ [IPv6:2610:10:20:722:a800:ff:fe98:4b55])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 7A5CE6FB35
+ for <nouveau@lists.freedesktop.org>; Wed,  4 Dec 2019 09:32:53 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 12A20720E2; Wed,  4 Dec 2019 09:32:44 +0000 (UTC)
+ id 7712A720E2; Wed,  4 Dec 2019 09:32:53 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Wed, 04 Dec 2019 09:32:44 +0000
-X-Bugzilla-Reason: AssignedTo
+Date: Wed, 04 Dec 2019 09:32:53 +0000
+X-Bugzilla-Reason: CC AssignedTo
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
 X-Bugzilla-Product: xorg
 X-Bugzilla-Component: Driver/nouveau
-X-Bugzilla-Version: 7.7 (2012.06)
+X-Bugzilla-Version: unspecified
 X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: normal
+X-Bugzilla-Severity: critical
 X-Bugzilla-Who: martin.peres@free.fr
 X-Bugzilla-Status: RESOLVED
 X-Bugzilla-Resolution: MOVED
@@ -33,15 +33,13 @@ X-Bugzilla-Priority: medium
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
 X-Bugzilla-Changed-Fields: resolution bug_status
-Message-ID: <bug-103467-8800-qsEJM2DGZz@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-103467-8800@http.bugs.freedesktop.org/>
-References: <bug-103467-8800@http.bugs.freedesktop.org/>
+Message-ID: <bug-103689-8800-gqXQUcQOy1@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-103689-8800@http.bugs.freedesktop.org/>
+References: <bug-103689-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 103467] [NVC0/GF108] fifo: read fault at cd90f4d000
- engine 07 [PFIFO] client 07 [BAR_READ] reason 00 [PT_NOT_PRESENT] on
- channel 1 [003fe11000 DRM]
+Subject: [Nouveau] [Bug 103689] kernel panic via the chromium browser
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -53,25 +51,25 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============2102115773=="
+Content-Type: multipart/mixed; boundary="===============1196934711=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============2102115773==
-Content-Type: multipart/alternative; boundary="15754519640.aDB2A.28225"
+--===============1196934711==
+Content-Type: multipart/alternative; boundary="15754519734.f9BD1aF0.28225"
 Content-Transfer-Encoding: 7bit
 
 
---15754519640.aDB2A.28225
-Date: Wed, 4 Dec 2019 09:32:44 +0000
+--15754519734.f9BD1aF0.28225
+Date: Wed, 4 Dec 2019 09:32:53 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 
-https://bugs.freedesktop.org/show_bug.cgi?id=3D103467
+https://bugs.freedesktop.org/show_bug.cgi?id=3D103689
 
 Martin Peres <martin.peres@free.fr> changed:
 
@@ -80,7 +78,7 @@ Martin Peres <martin.peres@free.fr> changed:
          Resolution|---                         |MOVED
              Status|NEW                         |RESOLVED
 
---- Comment #16 from Martin Peres <martin.peres@free.fr> ---
+--- Comment #8 from Martin Peres <martin.peres@free.fr> ---
 -- GitLab Migration Automatic Message --
 
 This bug has been migrated to freedesktop.org's GitLab instance and has been
@@ -89,14 +87,15 @@ closed from further activity.
 You can subscribe and participate further through the new bug through this =
 link
 to our GitLab instance:
-https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/issues/379.
+https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/issues/380.
 
 --=20
 You are receiving this mail because:
+You are on the CC list for the bug.
 You are the assignee for the bug.=
 
---15754519640.aDB2A.28225
-Date: Wed, 4 Dec 2019 09:32:44 +0000
+--15754519734.f9BD1aF0.28225
+Date: Wed, 4 Dec 2019 09:32:53 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -113,11 +112,9 @@ span class=3D"fn">Martin Peres</span></a>
 </span> changed
           <a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - [NVC0/GF108] fifo: read fault at cd90f4d000 en=
-gine 07 [PFIFO] client 07 [BAR_READ] reason 00 [PT_NOT_PRESENT] on channel =
-1 [003fe11000 DRM]"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D103467">bug 10346=
-7</a>
+   title=3D"RESOLVED MOVED - kernel panic via the chromium browser"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D103689">bug 10368=
+9</a>
           <br>
              <table border=3D"1" cellspacing=3D"0" cellpadding=3D"8">
           <tr>
@@ -145,18 +142,14 @@ gine 07 [PFIFO] client 07 [BAR_READ] reason 00 [PT_NOT_PRESENT] on channel =
         <div>
             <b><a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - [NVC0/GF108] fifo: read fault at cd90f4d000 en=
-gine 07 [PFIFO] client 07 [BAR_READ] reason 00 [PT_NOT_PRESENT] on channel =
-1 [003fe11000 DRM]"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D103467#c16">Comme=
-nt # 16</a>
+   title=3D"RESOLVED MOVED - kernel panic via the chromium browser"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D103689#c8">Commen=
+t # 8</a>
               on <a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - [NVC0/GF108] fifo: read fault at cd90f4d000 en=
-gine 07 [PFIFO] client 07 [BAR_READ] reason 00 [PT_NOT_PRESENT] on channel =
-1 [003fe11000 DRM]"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D103467">bug 10346=
-7</a>
+   title=3D"RESOLVED MOVED - kernel panic via the chromium browser"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D103689">bug 10368=
+9</a>
               from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
 martin.peres&#64;free.fr" title=3D"Martin Peres &lt;martin.peres&#64;free.f=
 r&gt;"> <span class=3D"fn">Martin Peres</span></a>
@@ -170,8 +163,8 @@ You can subscribe and participate further through the new bug through this =
 link
 to our GitLab instance:
 <a href=3D"https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/is=
-sues/379">https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/iss=
-ues/379</a>.</pre>
+sues/380">https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/iss=
+ues/380</a>.</pre>
         </div>
       </p>
 
@@ -180,14 +173,15 @@ ues/379</a>.</pre>
       <span>You are receiving this mail because:</span>
 
       <ul>
+          <li>You are on the CC list for the bug.</li>
           <li>You are the assignee for the bug.</li>
       </ul>
     </body>
 </html>=
 
---15754519640.aDB2A.28225--
+--15754519734.f9BD1aF0.28225--
 
---===============2102115773==
+--===============1196934711==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -197,4 +191,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============2102115773==--
+--===============1196934711==--
