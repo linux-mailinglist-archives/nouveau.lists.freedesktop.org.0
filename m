@@ -1,29 +1,29 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8FA0A112511
-	for <lists+nouveau@lfdr.de>; Wed,  4 Dec 2019 09:33:20 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 35C12112512
+	for <lists+nouveau@lfdr.de>; Wed,  4 Dec 2019 09:33:26 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id DA8826F4CB;
-	Wed,  4 Dec 2019 08:33:18 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 90BDD6F4CE;
+	Wed,  4 Dec 2019 08:33:24 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
  [131.252.210.165])
- by gabe.freedesktop.org (Postfix) with ESMTP id CA79B6F4D2
- for <nouveau@lists.freedesktop.org>; Wed,  4 Dec 2019 08:33:17 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTP id 453556F4CC
+ for <nouveau@lists.freedesktop.org>; Wed,  4 Dec 2019 08:33:23 +0000 (UTC)
 Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id C7646720E2; Wed,  4 Dec 2019 08:33:17 +0000 (UTC)
+ id 424DC720E2; Wed,  4 Dec 2019 08:33:23 +0000 (UTC)
 From: bugzilla-daemon@freedesktop.org
 To: nouveau@lists.freedesktop.org
-Date: Wed, 04 Dec 2019 08:33:17 +0000
+Date: Wed, 04 Dec 2019 08:33:23 +0000
 X-Bugzilla-Reason: AssignedTo
 X-Bugzilla-Type: changed
 X-Bugzilla-Watch-Reason: None
 X-Bugzilla-Product: xorg
 X-Bugzilla-Component: Driver/nouveau
-X-Bugzilla-Version: git
+X-Bugzilla-Version: unspecified
 X-Bugzilla-Keywords: 
 X-Bugzilla-Severity: normal
 X-Bugzilla-Who: martin.peres@free.fr
@@ -33,13 +33,13 @@ X-Bugzilla-Priority: medium
 X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
 X-Bugzilla-Flags: 
 X-Bugzilla-Changed-Fields: bug_status resolution
-Message-ID: <bug-62835-8800-yxEY6RaKSM@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-62835-8800@http.bugs.freedesktop.org/>
-References: <bug-62835-8800@http.bugs.freedesktop.org/>
+Message-ID: <bug-62848-8800-ERvTWLmD7E@http.bugs.freedesktop.org/>
+In-Reply-To: <bug-62848-8800@http.bugs.freedesktop.org/>
+References: <bug-62848-8800@http.bugs.freedesktop.org/>
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 62835] Screen freezes after resume from s2ram
+Subject: [Nouveau] [Bug 62848] xorg not start after kexec when use nouveau
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -51,25 +51,25 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============2050120997=="
+Content-Type: multipart/mixed; boundary="===============0510468262=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
---===============2050120997==
-Content-Type: multipart/alternative; boundary="15754483973.f5CE04a.16181"
+--===============0510468262==
+Content-Type: multipart/alternative; boundary="15754484032.3138.16181"
 Content-Transfer-Encoding: 7bit
 
 
---15754483973.f5CE04a.16181
-Date: Wed, 4 Dec 2019 08:33:17 +0000
+--15754484032.3138.16181
+Date: Wed, 4 Dec 2019 08:33:23 +0000
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Bugzilla-URL: http://bugs.freedesktop.org/
 Auto-Submitted: auto-generated
 
-https://bugs.freedesktop.org/show_bug.cgi?id=3D62835
+https://bugs.freedesktop.org/show_bug.cgi?id=3D62848
 
 Martin Peres <martin.peres@free.fr> changed:
 
@@ -78,7 +78,7 @@ Martin Peres <martin.peres@free.fr> changed:
              Status|NEW                         |RESOLVED
          Resolution|---                         |MOVED
 
---- Comment #10 from Martin Peres <martin.peres@free.fr> ---
+--- Comment #5 from Martin Peres <martin.peres@free.fr> ---
 -- GitLab Migration Automatic Message --
 
 This bug has been migrated to freedesktop.org's GitLab instance and has been
@@ -87,14 +87,14 @@ closed from further activity.
 You can subscribe and participate further through the new bug through this =
 link
 to our GitLab instance:
-https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/issues/41.
+https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/issues/42.
 
 --=20
 You are receiving this mail because:
 You are the assignee for the bug.=
 
---15754483973.f5CE04a.16181
-Date: Wed, 4 Dec 2019 08:33:17 +0000
+--15754484032.3138.16181
+Date: Wed, 4 Dec 2019 08:33:23 +0000
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -111,8 +111,8 @@ span class=3D"fn">Martin Peres</span></a>
 </span> changed
           <a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - Screen freezes after resume from s2ram"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D62835">bug 62835<=
+   title=3D"RESOLVED MOVED - xorg not start after kexec when use nouveau"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D62848">bug 62848<=
 /a>
           <br>
              <table border=3D"1" cellspacing=3D"0" cellpadding=3D"8">
@@ -141,13 +141,13 @@ span class=3D"fn">Martin Peres</span></a>
         <div>
             <b><a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - Screen freezes after resume from s2ram"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D62835#c10">Commen=
-t # 10</a>
+   title=3D"RESOLVED MOVED - xorg not start after kexec when use nouveau"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D62848#c5">Comment=
+ # 5</a>
               on <a class=3D"bz_bug_link=20
           bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - Screen freezes after resume from s2ram"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D62835">bug 62835<=
+   title=3D"RESOLVED MOVED - xorg not start after kexec when use nouveau"
+   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D62848">bug 62848<=
 /a>
               from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
 martin.peres&#64;free.fr" title=3D"Martin Peres &lt;martin.peres&#64;free.f=
@@ -162,8 +162,8 @@ You can subscribe and participate further through the new bug through this =
 link
 to our GitLab instance:
 <a href=3D"https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/is=
-sues/41">https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/issu=
-es/41</a>.</pre>
+sues/42">https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/issu=
+es/42</a>.</pre>
         </div>
       </p>
 
@@ -177,9 +177,9 @@ es/41</a>.</pre>
     </body>
 </html>=
 
---15754483973.f5CE04a.16181--
+--15754484032.3138.16181--
 
---===============2050120997==
+--===============0510468262==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -189,4 +189,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
 YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
 cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
 
---===============2050120997==--
+--===============0510468262==--
