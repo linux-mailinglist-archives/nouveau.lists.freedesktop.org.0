@@ -1,46 +1,59 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4E19D1128A5
-	for <lists+nouveau@lfdr.de>; Wed,  4 Dec 2019 10:55:12 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5DA47114CEF
+	for <lists+nouveau@lfdr.de>; Fri,  6 Dec 2019 08:53:39 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9F9BB72C07;
-	Wed,  4 Dec 2019 09:55:10 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B6D426EA84;
+	Fri,  6 Dec 2019 07:53:37 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from culpepper.freedesktop.org (culpepper.freedesktop.org
- [131.252.210.165])
- by gabe.freedesktop.org (Postfix) with ESMTP id 9D1EB72DD7
- for <nouveau@lists.freedesktop.org>; Wed,  4 Dec 2019 09:55:09 +0000 (UTC)
-Received: by culpepper.freedesktop.org (Postfix, from userid 33)
- id 9A33D720E2; Wed,  4 Dec 2019 09:55:09 +0000 (UTC)
-From: bugzilla-daemon@freedesktop.org
-To: nouveau@lists.freedesktop.org
-Date: Wed, 04 Dec 2019 09:55:09 +0000
-X-Bugzilla-Reason: AssignedTo
-X-Bugzilla-Type: changed
-X-Bugzilla-Watch-Reason: None
-X-Bugzilla-Product: xorg
-X-Bugzilla-Component: Driver/nouveau
-X-Bugzilla-Version: 7.7 (2012.06)
-X-Bugzilla-Keywords: 
-X-Bugzilla-Severity: not set
-X-Bugzilla-Who: martin.peres@free.fr
-X-Bugzilla-Status: RESOLVED
-X-Bugzilla-Resolution: MOVED
-X-Bugzilla-Priority: not set
-X-Bugzilla-Assigned-To: nouveau@lists.freedesktop.org
-X-Bugzilla-Flags: 
-X-Bugzilla-Changed-Fields: resolution bug_status
-Message-ID: <bug-112239-8800-01d7mg3X4k@http.bugs.freedesktop.org/>
-In-Reply-To: <bug-112239-8800@http.bugs.freedesktop.org/>
-References: <bug-112239-8800@http.bugs.freedesktop.org/>
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
+Received: from mail-pg1-x541.google.com (mail-pg1-x541.google.com
+ [IPv6:2607:f8b0:4864:20::541])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5016E6EA6E;
+ Fri,  6 Dec 2019 07:53:36 +0000 (UTC)
+Received: by mail-pg1-x541.google.com with SMTP id b9so2495878pgk.12;
+ Thu, 05 Dec 2019 23:53:36 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=1EgUIOkIOxBCz33igi7r1HkqftzoXNr9Kp6yceaT6vI=;
+ b=hRc1o8rjpZvnjkoVI8aA2jlDrP26s/czOSEnQapZdkoSXkCkccHhnqn6LsoHFxJ5DD
+ MxNTr4DERHd+OaunQE38Jhe3XsjxY5z1G2wgPiNwojoUrx73Ogl0T1bI0/JVDVmuSxyD
+ aBSOuGG3EDFuK05kQi4R6QCZsKs1SSEnOStIV9XYFoPlZhVR6mMlZQbM/KL77DPhvtnV
+ +R4P682PC9RXSVYA0mPZl2ZyLzz2dSDWtT9lpBpxKS30VPVGqzLhHQfKrD4CglPzyx1z
+ jnUwo85CvOTLM2cHl/OuxYOCu1qSFziCUfEqln7obrJvC60f/qLY47iy4USP65/YkU81
+ KGtA==
+X-Gm-Message-State: APjAAAVTmWFirMrqCELBNL2Ja90nKa8Nnx7uKm2Bt+gE3K6PpTlGaogr
+ mvqQSWWwLgS15lLoCC+/gSY=
+X-Google-Smtp-Source: APXvYqywvw21DTGo7hukn/xRAaCsyHCskev0EPREMmv1UJqgV2f1YpgiSRlNmk6PjO5XpUVmgdnI3w==
+X-Received: by 2002:a62:ed0b:: with SMTP id u11mr12890108pfh.46.1575618816036; 
+ Thu, 05 Dec 2019 23:53:36 -0800 (PST)
+Received: from suzukaze.ipads-lab.se.sjtu.edu.cn ([202.120.40.82])
+ by smtp.gmail.com with ESMTPSA id b129sm14876391pfb.147.2019.12.05.23.53.29
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 05 Dec 2019 23:53:35 -0800 (PST)
+From: Chuhong Yuan <hslester96@gmail.com>
+To: 
+Date: Fri,  6 Dec 2019 15:53:21 +0800
+Message-Id: <20191206075321.18239-1-hslester96@gmail.com>
+X-Mailer: git-send-email 2.24.0
 MIME-Version: 1.0
-Subject: [Nouveau] [Bug 112239] nouveau hangs video with TU116 - regression
- in kernel 5.3
+X-Mailman-Original-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20161025;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=1EgUIOkIOxBCz33igi7r1HkqftzoXNr9Kp6yceaT6vI=;
+ b=eB7FB8k+B+Jl6hb20SCbjEVroUS2ALBqXwUYWIDq+UgAqGhSMBSbSJc2BiER4nOoNE
+ guUipg59Ls0JVrUgsWuliKipQ926yRWNwqUxbU2GdCHCjooDIbIlRAAySNFr+qYlcMJS
+ QgZ9QvtNVtTwunVr5KdSwT/Ym6AbVmnscDSM5ADRDN9vilTPiiI+SCUD2FZDDSGyYu4b
+ 1KpHP6HSc+yAK4YS+RDbTfWXjICkzDwiu5Bi3+da53j4WVZynKmebE/5LKexN45TEouE
+ SRi2PNr9wVQa6RtFTIiwyoonPFolMStjJGOd3CfWWNyJ9wk6asTVFy2c921RWBa31K3/
+ Sjng==
+Subject: [Nouveau] [PATCH] drm/dp_mst: add missed nv50_outp_release in
+ nv50_msto_disable
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -52,145 +65,30 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1214608951=="
+Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
+ Chuhong Yuan <hslester96@gmail.com>, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>,
+ Daniel Vetter <daniel@ffwll.ch>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-
---===============1214608951==
-Content-Type: multipart/alternative; boundary="15754533093.3Cf0aD99.32412"
-Content-Transfer-Encoding: 7bit
-
-
---15754533093.3Cf0aD99.32412
-Date: Wed, 4 Dec 2019 09:55:09 +0000
-MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-https://bugs.freedesktop.org/show_bug.cgi?id=3D112239
-
-Martin Peres <martin.peres@free.fr> changed:
-
-           What    |Removed                     |Added
-----------------------------------------------------------------------------
-         Resolution|---                         |MOVED
-             Status|NEW                         |RESOLVED
-
---- Comment #2 from Martin Peres <martin.peres@free.fr> ---
--- GitLab Migration Automatic Message --
-
-This bug has been migrated to freedesktop.org's GitLab instance and has been
-closed from further activity.
-
-You can subscribe and participate further through the new bug through this =
-link
-to our GitLab instance:
-https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/issues/516.
-
---=20
-You are receiving this mail because:
-You are the assignee for the bug.=
-
---15754533093.3Cf0aD99.32412
-Date: Wed, 4 Dec 2019 09:55:09 +0000
-MIME-Version: 1.0
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Bugzilla-URL: http://bugs.freedesktop.org/
-Auto-Submitted: auto-generated
-
-<html>
-    <head>
-      <base href=3D"https://bugs.freedesktop.org/">
-    </head>
-    <body><span class=3D"vcard"><a class=3D"email" href=3D"mailto:martin.pe=
-res&#64;free.fr" title=3D"Martin Peres &lt;martin.peres&#64;free.fr&gt;"> <=
-span class=3D"fn">Martin Peres</span></a>
-</span> changed
-          <a class=3D"bz_bug_link=20
-          bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - nouveau hangs video with TU116 - regression in=
- kernel 5.3"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D112239">bug 11223=
-9</a>
-          <br>
-             <table border=3D"1" cellspacing=3D"0" cellpadding=3D"8">
-          <tr>
-            <th>What</th>
-            <th>Removed</th>
-            <th>Added</th>
-          </tr>
-
-         <tr>
-           <td style=3D"text-align:right;">Resolution</td>
-           <td>---
-           </td>
-           <td>MOVED
-           </td>
-         </tr>
-
-         <tr>
-           <td style=3D"text-align:right;">Status</td>
-           <td>NEW
-           </td>
-           <td>RESOLVED
-           </td>
-         </tr></table>
-      <p>
-        <div>
-            <b><a class=3D"bz_bug_link=20
-          bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - nouveau hangs video with TU116 - regression in=
- kernel 5.3"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D112239#c2">Commen=
-t # 2</a>
-              on <a class=3D"bz_bug_link=20
-          bz_status_RESOLVED  bz_closed"
-   title=3D"RESOLVED MOVED - nouveau hangs video with TU116 - regression in=
- kernel 5.3"
-   href=3D"https://bugs.freedesktop.org/show_bug.cgi?id=3D112239">bug 11223=
-9</a>
-              from <span class=3D"vcard"><a class=3D"email" href=3D"mailto:=
-martin.peres&#64;free.fr" title=3D"Martin Peres &lt;martin.peres&#64;free.f=
-r&gt;"> <span class=3D"fn">Martin Peres</span></a>
-</span></b>
-        <pre>-- GitLab Migration Automatic Message --
-
-This bug has been migrated to freedesktop.org's GitLab instance and has been
-closed from further activity.
-
-You can subscribe and participate further through the new bug through this =
-link
-to our GitLab instance:
-<a href=3D"https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/is=
-sues/516">https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/iss=
-ues/516</a>.</pre>
-        </div>
-      </p>
-
-
-      <hr>
-      <span>You are receiving this mail because:</span>
-
-      <ul>
-          <li>You are the assignee for the bug.</li>
-      </ul>
-    </body>
-</html>=
-
---15754533093.3Cf0aD99.32412--
-
---===============1214608951==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
-YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
-cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
-
---===============1214608951==--
+bnY1MF9tc3RvX2Rpc2FibGUoKSBkb2VzIG5vdCBjYWxsIG52NTBfb3V0cF9yZWxlYXNlKCkgdG8g
+bWF0Y2gKbnY1MF9vdXRwX2FjcXVpcmUoKSBsaWtlIG90aGVyIGRpc2FibGUoKS4KQWRkIHRoZSBt
+aXNzZWQgY2FsbCB0byBmaXggaXQuCgpTaWduZWQtb2ZmLWJ5OiBDaHVob25nIFl1YW4gPGhzbGVz
+dGVyOTZAZ21haWwuY29tPgotLS0KIGRyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L2Rpc3BudjUwL2Rp
+c3AuYyB8IDQgKysrLQogMSBmaWxlIGNoYW5nZWQsIDMgaW5zZXJ0aW9ucygrKSwgMSBkZWxldGlv
+bigtKQoKZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L2Rpc3BudjUwL2Rpc3Au
+YyBiL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L2Rpc3BudjUwL2Rpc3AuYwppbmRleCA1NDk0ODZm
+MWQ5MzcuLjg0ZTE0MTczNTVjYyAxMDA2NDQKLS0tIGEvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUv
+ZGlzcG52NTAvZGlzcC5jCisrKyBiL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L2Rpc3BudjUwL2Rp
+c3AuYwpAQCAtODYyLDggKzg2MiwxMCBAQCBudjUwX21zdG9fZGlzYWJsZShzdHJ1Y3QgZHJtX2Vu
+Y29kZXIgKmVuY29kZXIpCiAKIAltc3RtLT5vdXRwLT51cGRhdGUobXN0bS0+b3V0cCwgbXN0by0+
+aGVhZC0+YmFzZS5pbmRleCwgTlVMTCwgMCwgMCk7CiAJbXN0bS0+bW9kaWZpZWQgPSB0cnVlOwot
+CWlmICghLS1tc3RtLT5saW5rcykKKwlpZiAoIS0tbXN0bS0+bGlua3MpIHsKIAkJbXN0bS0+ZGlz
+YWJsZWQgPSB0cnVlOworCQludjUwX291dHBfcmVsZWFzZShtc3RtLT5vdXRwKTsKKwl9CiAJbXN0
+by0+ZGlzYWJsZWQgPSB0cnVlOwogfQogCi0tIAoyLjI0LjAKCl9fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fCk5vdXZlYXUgbWFpbGluZyBsaXN0Ck5vdXZlYXVA
+bGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxt
+YW4vbGlzdGluZm8vbm91dmVhdQ==
