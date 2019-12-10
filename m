@@ -2,79 +2,42 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 96BCD11928E
-	for <lists+nouveau@lfdr.de>; Tue, 10 Dec 2019 21:56:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A786D119496
+	for <lists+nouveau@lfdr.de>; Tue, 10 Dec 2019 22:17:29 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0BECA6E935;
-	Tue, 10 Dec 2019 20:56:36 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8246B6E968;
+	Tue, 10 Dec 2019 21:17:24 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 305 seconds by postgrey-1.36 at gabe;
- Tue, 10 Dec 2019 20:56:35 UTC
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
- [205.139.110.61])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 899E16E935
- for <nouveau@lists.freedesktop.org>; Tue, 10 Dec 2019 20:56:35 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1576011394;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=QKUGte0LJJOC+2J/QTsxMNBL/KSTWmiIxFV3NdoEcMk=;
- b=dVSP/D+jAZj6LpCwKMoTwdGdU0PvuX4ySGd3BfAwhKcC/bWWUELiGAcy0Vn82jKVz79Jqs
- EDZ6JHzloTLd8xrxBBaW2pUv6weIjr6eRTTzuejOMeVlgQP69/tBeG5c7xkLbXDAd7pyZI
- ZmfIaUNQf6fc2vYEecfW03vbpAJzs0k=
-Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com
- [209.85.219.72]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-417-yi6rsI6oMsaQCrVGMhn_9w-1; Tue, 10 Dec 2019 15:50:11 -0500
-Received: by mail-qv1-f72.google.com with SMTP id l1so7675818qvu.13
- for <nouveau@lists.freedesktop.org>; Tue, 10 Dec 2019 12:50:10 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=L2m4Tv+vpahKKFm5uAjvOrE573uy1RkQak8WAblX7g4=;
- b=L5jVZ3j5aX2qGiOQNigHOaNj6og1dMjluU2kQlWIokAxovDifhOKZRE/J36SrXO5IB
- 4NbrpljkvFdUUbtEy8Z8EJy1qfxzDp+jwocaFAt5MKPRJ20lHPLcYF3Cpb7B2TSUqZAC
- dvA717F/W+3ADcyjR+4MqboPu8cTXXUyHFJtIjtXLXsIBqMGK2cnGKaxYNZo4YxWJqFD
- SVjSccbEvIj4oA+v5MiFNU7aoLQod4gi60dWis3o2id/jtWI+nb3foiN50CB4FGiZimF
- hyf9dolftuQu0hwwUEwfoZbIgMhjwiZr47PwqCO5hdsy2kS6CEi2T1hmGe2q7OV8DJK7
- HmGQ==
-X-Gm-Message-State: APjAAAV7IwH8j+OXbIYmhg8rGAONTklwfPSwTZTzu6n9wzy0YsYhJ9O1
- q0uELQmnnM/t6w5vNfayC+HDC8KTk1HabPv2ib+09DVnCnyOelNtHsJfi6wFU/KlyRxuleqwbOJ
- yNGF+zqe9+BW7wcpdYf7WSHLBmQfMYJsSUgYD+YUewg==
-X-Received: by 2002:a0c:baad:: with SMTP id x45mr29886307qvf.230.1576011010495; 
- Tue, 10 Dec 2019 12:50:10 -0800 (PST)
-X-Google-Smtp-Source: APXvYqyIAonngUfW9uC+kmuZAs4RSR2w6CHMt+zmLNoDWoivMcdar5w1+a+QgsrZGu/DH2I2RocsrHyDBA/p4a7IrDU=
-X-Received: by 2002:a0c:baad:: with SMTP id x45mr29886279qvf.230.1576011010089; 
- Tue, 10 Dec 2019 12:50:10 -0800 (PST)
+Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7FD416E97F
+ for <nouveau@lists.freedesktop.org>; Tue, 10 Dec 2019 21:17:23 +0000 (UTC)
+Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
+ [73.47.72.35])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id E35A6246AB;
+ Tue, 10 Dec 2019 21:09:45 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1576012187;
+ bh=kMEv874BtPuf0HyGoIPf4BP7UuEI4I7m70iZktNpjEA=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=AJUusVM15cvmCkt1Szx/OYUjeEPC1EPQ0mOEURtXmyeL5vga8kDIRnb0Ppzl0rtfy
+ 0nE8OOjRr64YvBft+i/RjhV8q1Aih1+zo06XWmryM2r80T0XUCXKPSnzg3SdrDqqB9
+ xD0d4d3UxUfhfH+6BNqYLwZQ4bu4rTzAPwIzsn/E=
+From: Sasha Levin <sashal@kernel.org>
+To: linux-kernel@vger.kernel.org,
+	stable@vger.kernel.org
+Date: Tue, 10 Dec 2019 16:04:08 -0500
+Message-Id: <20191210210735.9077-104-sashal@kernel.org>
+X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20191210210735.9077-1-sashal@kernel.org>
+References: <20191210210735.9077-1-sashal@kernel.org>
 MIME-Version: 1.0
-References: <CACO55ttTPi2XpRRM_NYJU5c5=OvG0=-YngFy1BiR8WpHkavwXw@mail.gmail.com>
- <CAJZ5v0h=7zu3A+ojgUSmwTH0KeXmYP5OKDL__rwkkWaWqcJcWQ@mail.gmail.com>
- <20191121112821.GU11621@lahna.fi.intel.com>
- <CAJZ5v0hQhj5Wf+piU11abC4pF26yM=XHGHAcDv8Jsgdx04aN-w@mail.gmail.com>
- <20191121114610.GW11621@lahna.fi.intel.com>
- <CACO55ttXJgXG32HzYP_uJDfQ6T-d8zQaGjXK_AZD3kF0Rmft4g@mail.gmail.com>
- <CAJZ5v0ibzcLEm44udUxW2uVgaF9NapdNBF8Ag+RE++u7gi2yNA@mail.gmail.com>
- <CACO55ttBkZD9dm0Y_jT931NnzHHtDFyLz28aoo+ZG0pnLzPgbA@mail.gmail.com>
- <CAJZ5v0jbh7jz+YQcw-gC5ztmMOc4E9+KFBCy4VGRsRFxBw-gnw@mail.gmail.com>
- <e0eeddf4214f54dfac08e428dfb30cbd39f20680.camel@redhat.com>
- <20191127114856.GZ11621@lahna.fi.intel.com>
- <CACO55tt5SAf24vk0XrKguhh2J=WuKirDsdY7T+u7PsGFCpnFxg@mail.gmail.com>
- <e7aec10d789b322ca98f4b250923b0f14f2b8226.camel@redhat.com>
- <CACO55tu+hT1WGbBn_nxLR=A-X6YWmeuz-UztJKw0QAFQDDV_xg@mail.gmail.com>
- <CAJZ5v0hcONxiWD+jpBe62H1SZ-84iNxT+QCn8mcesB1C7SVWjw@mail.gmail.com>
- <CAPM=9txefUg9_EO82an3b313mZz7J7-ydTuJtWD-hOQwE4QXkQ@mail.gmail.com>
-In-Reply-To: <CAPM=9txefUg9_EO82an3b313mZz7J7-ydTuJtWD-hOQwE4QXkQ@mail.gmail.com>
-From: Karol Herbst <kherbst@redhat.com>
-Date: Tue, 10 Dec 2019 21:49:58 +0100
-Message-ID: <CACO55tvhSM0aATBOK05-05aOc6LeN67=US2zO2jqXKWGTpUZFw@mail.gmail.com>
-To: Dave Airlie <airlied@gmail.com>
-X-MC-Unique: yi6rsI6oMsaQCrVGMhn_9w-1
-X-Mimecast-Spam-Score: 0
-Subject: Re: [Nouveau] [PATCH v4] pci: prevent putting nvidia GPUs into
- lower device states on certain intel bridges
+X-stable: review
+X-Patchwork-Hint: Ignore
+Subject: [Nouveau] [PATCH AUTOSEL 5.4 143/350] drm/nouveau: Resume hotplug
+ interrupts earlier
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -86,63 +49,56 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: "Rafael J. Wysocki" <rafael@kernel.org>,
- Linux PCI <linux-pci@vger.kernel.org>,
- Mika Westerberg <mika.westerberg@intel.com>,
- Linux PM <linux-pm@vger.kernel.org>, "Rafael J . Wysocki" <rjw@rjwysocki.net>,
- LKML <linux-kernel@vger.kernel.org>,
- dri-devel <dri-devel@lists.freedesktop.org>,
- Mario Limonciello <Mario.Limonciello@dell.com>,
- Bjorn Helgaas <helgaas@kernel.org>, nouveau <nouveau@lists.freedesktop.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: Sean Paul <sean@poorly.run>, Sasha Levin <sashal@kernel.org>,
+ Imre Deak <imre.deak@intel.com>, dri-devel@lists.freedesktop.org,
+ Juston Li <juston.li@intel.com>, nouveau@lists.freedesktop.org,
+ Harry Wentland <hwentlan@amd.com>,
+ =?UTF-8?q?Ville=20Syrj=C3=A4l=C3=A4?= <ville.syrjala@linux.intel.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, Dec 10, 2019 at 8:58 PM Dave Airlie <airlied@gmail.com> wrote:
->
-> On Mon, 9 Dec 2019 at 21:39, Rafael J. Wysocki <rafael@kernel.org> wrote:
-> >
-> > On Mon, Dec 9, 2019 at 12:17 PM Karol Herbst <kherbst@redhat.com> wrote:
-> > >
-> > > anybody any other ideas?
-> >
-> > Not yet, but I'm trying to collect some more information.
-> >
-> > > It seems that both patches don't really fix
-> > > the issue and I have no idea left on my side to try out. The only
-> > > thing left I could do to further investigate would be to reverse
-> > > engineer the Nvidia driver as they support runpm on Turing+ GPUs now,
-> > > but I've heard users having similar issues to the one Lyude told us
-> > > about... and I couldn't verify that the patches help there either in a
-> > > reliable way.
-> >
-> > It looks like the newer (8+) versions of Windows expect the GPU driver
-> > to prepare the GPU for power removal in some specific way and the
-> > latter fails if the GPU has not been prepared as expected.
-> >
-> > Because testing indicates that the Windows 7 path in the platform
-> > firmware works, it may be worth trying to do what it does to the PCIe
-> > link before invoking the _OFF method for the power resource
-> > controlling the GPU power.
-> >
->
-> Remember the pre Win8 path required calling a DSM method to actually
-> power the card down, I think by the time we reach these methods in
-> those cases the card is already gone.
->
-> Dave.
->
-
-The point was that the firmware seems to do more in the legacy paths
-and maybe we just have to do those things inside the driver instead
-when using the new method. Also the _DSM call just wraps around the
-interfaces on newer firmware anyway. The OS check is usually what
-makes the difference. I might be wrong about the _DSM call just
-wrapping though, but I think I saw it at least in some firmware at
-some point.
-
-_______________________________________________
-Nouveau mailing list
-Nouveau@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/nouveau
+RnJvbTogTHl1ZGUgUGF1bCA8bHl1ZGVAcmVkaGF0LmNvbT4KClsgVXBzdHJlYW0gY29tbWl0IGFj
+MGRlMTZhMzhhOWVjNzAyNmNhOTYxMzJlMzg4M2M1NjQ0OTcwNjggXQoKQ3VycmVudGx5LCB3ZSBl
+bmFibGUgaG90cGx1ZyBkZXRlY3Rpb24gb25seSBhZnRlciB3ZSByZS1lbmFibGUgdGhlCmRpc3Bs
+YXkuIEhvd2V2ZXIsIHRoaXMgaXMgdG9vIGxhdGUgaWYgd2UncmUgcGxhbm5pbmcgb24gc2VuZGlu
+ZyBzaWRlYmFuZAptZXNzYWdlcyBkdXJpbmcgdGhlIHJlc3VtZSBwcm9jZXNzIC0gd2hpY2ggd2Un
+bGwgbmVlZCB0byBkbyBpbiBvcmRlciB0bwpyZXByb2JlIHRoZSB0b3BvbG9neSBvbiByZXN1bWUu
+CgpTbywgZW5hYmxlIGhvdHBsdWcgZXZlbnRzIGJlZm9yZSByZWluaXRpYWxpemluZyB0aGUgZGlz
+cGxheS4KCkNjOiBKdXN0b24gTGkgPGp1c3Rvbi5saUBpbnRlbC5jb20+CkNjOiBJbXJlIERlYWsg
+PGltcmUuZGVha0BpbnRlbC5jb20+CkNjOiBWaWxsZSBTeXJqw6Rsw6QgPHZpbGxlLnN5cmphbGFA
+bGludXguaW50ZWwuY29tPgpDYzogSGFycnkgV2VudGxhbmQgPGh3ZW50bGFuQGFtZC5jb20+CkNj
+OiBEYW5pZWwgVmV0dGVyIDxkYW5pZWwudmV0dGVyQGZmd2xsLmNoPgpSZXZpZXdlZC1ieTogU2Vh
+biBQYXVsIDxzZWFuQHBvb3JseS5ydW4+ClNpZ25lZC1vZmYtYnk6IEx5dWRlIFBhdWwgPGx5dWRl
+QHJlZGhhdC5jb20+Ckxpbms6IGh0dHBzOi8vcGF0Y2h3b3JrLmZyZWVkZXNrdG9wLm9yZy9wYXRj
+aC9tc2dpZC8yMDE5MTAyMjAyMzY0MS44MDI2LTExLWx5dWRlQHJlZGhhdC5jb20KU2lnbmVkLW9m
+Zi1ieTogU2FzaGEgTGV2aW4gPHNhc2hhbEBrZXJuZWwub3JnPgotLS0KIGRyaXZlcnMvZ3B1L2Ry
+bS9ub3V2ZWF1L25vdXZlYXVfZGlzcGxheS5jIHwgMTkgKysrKysrKysrKystLS0tLS0tLQogMSBm
+aWxlIGNoYW5nZWQsIDExIGluc2VydGlvbnMoKyksIDggZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0
+IGEvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9kaXNwbGF5LmMgYi9kcml2ZXJzL2dw
+dS9kcm0vbm91dmVhdS9ub3V2ZWF1X2Rpc3BsYXkuYwppbmRleCA2ZjAzODUxMWEwM2E5Li41M2Y5
+YmNlYWYxN2E1IDEwMDY0NAotLS0gYS9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2Rp
+c3BsYXkuYworKysgYi9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2Rpc3BsYXkuYwpA
+QCAtNDA3LDYgKzQwNywxNyBAQCBub3V2ZWF1X2Rpc3BsYXlfaW5pdChzdHJ1Y3QgZHJtX2Rldmlj
+ZSAqZGV2LCBib29sIHJlc3VtZSwgYm9vbCBydW50aW1lKQogCXN0cnVjdCBkcm1fY29ubmVjdG9y
+X2xpc3RfaXRlciBjb25uX2l0ZXI7CiAJaW50IHJldDsKIAorCS8qCisJICogRW5hYmxlIGhvdHBs
+dWcgaW50ZXJydXB0cyAoZG9uZSBhcyBlYXJseSBhcyBwb3NzaWJsZSwgc2luY2Ugd2UgbmVlZAor
+CSAqIHRoZW0gZm9yIE1TVCkKKwkgKi8KKwlkcm1fY29ubmVjdG9yX2xpc3RfaXRlcl9iZWdpbihk
+ZXYsICZjb25uX2l0ZXIpOworCW5vdXZlYXVfZm9yX2VhY2hfbm9uX21zdF9jb25uZWN0b3JfaXRl
+cihjb25uZWN0b3IsICZjb25uX2l0ZXIpIHsKKwkJc3RydWN0IG5vdXZlYXVfY29ubmVjdG9yICpj
+b25uID0gbm91dmVhdV9jb25uZWN0b3IoY29ubmVjdG9yKTsKKwkJbnZpZl9ub3RpZnlfZ2V0KCZj
+b25uLT5ocGQpOworCX0KKwlkcm1fY29ubmVjdG9yX2xpc3RfaXRlcl9lbmQoJmNvbm5faXRlcik7
+CisKIAlyZXQgPSBkaXNwLT5pbml0KGRldiwgcmVzdW1lLCBydW50aW1lKTsKIAlpZiAocmV0KQog
+CQlyZXR1cm4gcmV0OwpAQCAtNDE2LDE0ICs0MjcsNiBAQCBub3V2ZWF1X2Rpc3BsYXlfaW5pdChz
+dHJ1Y3QgZHJtX2RldmljZSAqZGV2LCBib29sIHJlc3VtZSwgYm9vbCBydW50aW1lKQogCSAqLwog
+CWRybV9rbXNfaGVscGVyX3BvbGxfZW5hYmxlKGRldik7CiAKLQkvKiBlbmFibGUgaG90cGx1ZyBp
+bnRlcnJ1cHRzICovCi0JZHJtX2Nvbm5lY3Rvcl9saXN0X2l0ZXJfYmVnaW4oZGV2LCAmY29ubl9p
+dGVyKTsKLQlub3V2ZWF1X2Zvcl9lYWNoX25vbl9tc3RfY29ubmVjdG9yX2l0ZXIoY29ubmVjdG9y
+LCAmY29ubl9pdGVyKSB7Ci0JCXN0cnVjdCBub3V2ZWF1X2Nvbm5lY3RvciAqY29ubiA9IG5vdXZl
+YXVfY29ubmVjdG9yKGNvbm5lY3Rvcik7Ci0JCW52aWZfbm90aWZ5X2dldCgmY29ubi0+aHBkKTsK
+LQl9Ci0JZHJtX2Nvbm5lY3Rvcl9saXN0X2l0ZXJfZW5kKCZjb25uX2l0ZXIpOwotCiAJcmV0dXJu
+IHJldDsKIH0KIAotLSAKMi4yMC4xCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fXwpOb3V2ZWF1IG1haWxpbmcgbGlzdApOb3V2ZWF1QGxpc3RzLmZyZWVkZXNr
+dG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL25v
+dXZlYXUK
