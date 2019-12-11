@@ -2,73 +2,55 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id CAF391197CE
-	for <lists+nouveau@lfdr.de>; Tue, 10 Dec 2019 22:36:15 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7C77511BEBC
+	for <lists+nouveau@lfdr.de>; Wed, 11 Dec 2019 22:00:42 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id ABA186E977;
-	Tue, 10 Dec 2019 21:36:13 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B0AED6EBCD;
+	Wed, 11 Dec 2019 21:00:37 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 303 seconds by postgrey-1.36 at gabe;
- Tue, 10 Dec 2019 21:36:11 UTC
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [205.139.110.120])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9FC2F6E99C
- for <nouveau@lists.freedesktop.org>; Tue, 10 Dec 2019 21:36:11 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1576013770;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=DHu5hRwqB3tC0gd9elzTe92YoxL1ejzVp+mWTVGomm8=;
- b=LYcubmn6T4HBpBXFNZYfMxfCDzCnq7wKLg23J7uVE6Zk7wbMqFf7tmwrNpphMI+jHXTC0X
- +3NAlBloRBxHgCpFZWzB7pCoPUSthmGS2HMIBIKUQXIx2m3k7V6UYYEUVWE/ZEUmsW8T78
- eXns1cl00ogEo/om6WzRCxgDO9Gxgz0=
-Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com
- [209.85.160.198]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-333-3CepdPLhNw-yzA88mUzuNg-1; Tue, 10 Dec 2019 16:30:02 -0500
-Received: by mail-qt1-f198.google.com with SMTP id l1so2913026qtp.21
- for <nouveau@lists.freedesktop.org>; Tue, 10 Dec 2019 13:30:01 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
- :references:organization:user-agent:mime-version
- :content-transfer-encoding;
- bh=xpN2FnDzTxFXN1g1oq3lTClVwXGfJj+1zSJtFTlzut4=;
- b=PRaBZmKgxy4A2gnVDPY7U1HCFN6PsPRiIl6iPH7xIp8SuRy3iGTNKudurIAiRiv0qs
- MkikMKxLalUuaBKtSIMM9k7V/hEOVIjzQ6QcgrTKAz+AYjpUtSSZ4CDsrZjEwW7Z4HsD
- qje9rbtMBiuSdGghcu/Xp2feCg6Gp7QHK0HsXppUE1CjDQ9PerlgMCl0heV8EBMDWxNR
- 6GEZxItSzS876aBJ+VOTDIHwK0LQMpLrMnr8sMudxJjjEJ8RX8ysavj3O204MJuMEKtQ
- BhZEoPDs8i4LgxtzDnPaJw+rOgQEuCi72v/LBV/OGwek1p0XPA8g2UhbZcf5GkWVtnNG
- bDGw==
-X-Gm-Message-State: APjAAAXJWkbgc3gcsBgwOCKVwamR2EN4Lo2XfosNpSKcCEHP3JOcNoIA
- Rzkd4mDp/vClq6p8sRm0Vo4U4napZ1EP709tmsaYtN9EBavzX7bde9GHOta+USZyY3QBpBliiZp
- 028mXy0MJoBju9KpM+wWe33ZlMA==
-X-Received: by 2002:ae9:ea06:: with SMTP id f6mr36300555qkg.246.1576013401553; 
- Tue, 10 Dec 2019 13:30:01 -0800 (PST)
-X-Google-Smtp-Source: APXvYqw6HfPU/eGOIfyo5HqRG5ep6RNVNFkQBiwi75jTuEdvFpEA7UiCcSPs3KNOxfndMomJWPkDOg==
-X-Received: by 2002:ae9:ea06:: with SMTP id f6mr36300538qkg.246.1576013401306; 
- Tue, 10 Dec 2019 13:30:01 -0800 (PST)
-Received: from dhcp-10-20-1-90.bss.redhat.com ([144.121.20.162])
- by smtp.gmail.com with ESMTPSA id r41sm5405qtr.60.2019.12.10.13.30.00
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Dec 2019 13:30:00 -0800 (PST)
-Message-ID: <90e9126b9692ce6a1b0fcd85a4d0327bf818e58a.camel@redhat.com>
-From: Lyude Paul <lyude@redhat.com>
-To: Sasha Levin <sashal@kernel.org>, linux-kernel@vger.kernel.org, 
- stable@vger.kernel.org
-Date: Tue, 10 Dec 2019 16:29:54 -0500
-In-Reply-To: <20191210210735.9077-104-sashal@kernel.org>
-References: <20191210210735.9077-1-sashal@kernel.org>
- <20191210210735.9077-104-sashal@kernel.org>
-Organization: Red Hat
-User-Agent: Evolution 3.34.2 (3.34.2-1.fc31)
+X-Greylist: delayed 311 seconds by postgrey-1.36 at gabe;
+ Wed, 11 Dec 2019 21:00:36 UTC
+Received: from hqnvemgate25.nvidia.com (hqnvemgate25.nvidia.com
+ [216.228.121.64])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0A7656EBC4;
+ Wed, 11 Dec 2019 21:00:36 +0000 (UTC)
+Received: from hqpgpgate102.nvidia.com (Not Verified[216.228.121.13]) by
+ hqnvemgate25.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
+ id <B5df157b60000>; Wed, 11 Dec 2019 12:55:18 -0800
+Received: from hqmail.nvidia.com ([172.20.161.6])
+ by hqpgpgate102.nvidia.com (PGP Universal service);
+ Wed, 11 Dec 2019 12:55:25 -0800
+X-PGP-Universal: processed;
+ by hqpgpgate102.nvidia.com on Wed, 11 Dec 2019 12:55:25 -0800
+Received: from HQMAIL105.nvidia.com (172.20.187.12) by HQMAIL105.nvidia.com
+ (172.20.187.12) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Wed, 11 Dec
+ 2019 20:55:23 +0000
+Received: from hqnvemgw03.nvidia.com (10.124.88.68) by HQMAIL105.nvidia.com
+ (172.20.187.12) with Microsoft SMTP Server (TLS) id 15.0.1473.3 via Frontend
+ Transport; Wed, 11 Dec 2019 20:55:23 +0000
+Received: from jajones-aftershock.nvidia.com (Not Verified[172.20.42.105]) by
+ hqnvemgw03.nvidia.com with Trustwave SEG (v7, 5, 8, 10121)
+ id <B5df157bb0000>; Wed, 11 Dec 2019 12:55:23 -0800
+From: James Jones <jajones@nvidia.com>
+To: Ben Skeggs <bskeggs@redhat.com>, David Airlie <airlied@linux.ie>, Daniel
+ Vetter <daniel@ffwll.ch>
+Date: Wed, 11 Dec 2019 12:55:47 -0800
+Message-ID: <20191211205547.6907-1-jajones@nvidia.com>
+X-Mailer: git-send-email 2.17.1
+X-NVConfidentiality: public
 MIME-Version: 1.0
-X-MC-Unique: 3CepdPLhNw-yzA88mUzuNg-1
-X-Mimecast-Spam-Score: 0
-Subject: Re: [Nouveau] [PATCH AUTOSEL 5.4 143/350] drm/nouveau: Resume
- hotplug interrupts earlier
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
+ t=1576097718; bh=yzvWtXMTPwuGzAIYFeDtmfVo9JtmlDx7Uohj82eFTLU=;
+ h=X-PGP-Universal:From:To:CC:Subject:Date:Message-ID:X-Mailer:
+ X-NVConfidentiality:MIME-Version:Content-Type;
+ b=mhzCCtxrTUR0GW1ZrDJKKjEdLbXvPdsTN0d/IaLPdNBPGOftSH4404gue3+S/MecC
+ P4+rYTKZiovcIe5EsHZrBqutJOisAT+8WAM6fVMlxMJhsKedZPSp7OQm9BBtjl+rTw
+ IIVMg84VhZ0DUN1n3fXKRm9SwKS+61lKavyyFOyiL1ggsRhMEW+Os6Hl71St73/CRR
+ 1Czmx0JnIlCm3vt1Gqfnnkvtl4fYbYfyzBvofRFa+ZQxZSsjfk8fUwQEvz20aP6HJ1
+ cbQQJAMZA0xKJJM29XLIoSVUm9gHRrbcL24SnAlD4AhjrZcb5urQCXTej69i7630sY
+ gucAZ5Ubat8Nw==
+Subject: [Nouveau] [PATCH v3] drm: Generalized NV Block Linear DRM format mod
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -80,61 +62,221 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Imre Deak <imre.deak@intel.com>, dri-devel@lists.freedesktop.org,
- Harry Wentland <hwentlan@amd.com>, Juston Li <juston.li@intel.com>,
- nouveau@lists.freedesktop.org, Sean Paul <sean@poorly.run>,
- Ville =?ISO-8859-1?Q?Syrj=E4l=E4?= <ville.syrjala@linux.intel.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-aHVoPyBOb3Qgc3VyZSBob3cgdGhpcyBnb3QgcHV0IGluIHRoZSBzdGFibGUgcXVldWUsIGJ1dCB0
-aGlzIHByb2JhYmx5IHNob3VsZApiZSBkcm9wcGVkLiB0aGlzIHdhcyBwcmVwYXRvcnkgd29yayBm
-b3Igc29tZSBNU1QgZnVuY3Rpb25hbGl0eSB0aGF0IGdvdCBhZGRlZApyZWNlbnRseSwgbm90IGEg
-Zml4LgoKT24gVHVlLCAyMDE5LTEyLTEwIGF0IDE2OjA0IC0wNTAwLCBTYXNoYSBMZXZpbiB3cm90
-ZToKPiBGcm9tOiBMeXVkZSBQYXVsIDxseXVkZUByZWRoYXQuY29tPgo+IAo+IFsgVXBzdHJlYW0g
-Y29tbWl0IGFjMGRlMTZhMzhhOWVjNzAyNmNhOTYxMzJlMzg4M2M1NjQ0OTcwNjggXQo+IAo+IEN1
-cnJlbnRseSwgd2UgZW5hYmxlIGhvdHBsdWcgZGV0ZWN0aW9uIG9ubHkgYWZ0ZXIgd2UgcmUtZW5h
-YmxlIHRoZQo+IGRpc3BsYXkuIEhvd2V2ZXIsIHRoaXMgaXMgdG9vIGxhdGUgaWYgd2UncmUgcGxh
-bm5pbmcgb24gc2VuZGluZyBzaWRlYmFuZAo+IG1lc3NhZ2VzIGR1cmluZyB0aGUgcmVzdW1lIHBy
-b2Nlc3MgLSB3aGljaCB3ZSdsbCBuZWVkIHRvIGRvIGluIG9yZGVyIHRvCj4gcmVwcm9iZSB0aGUg
-dG9wb2xvZ3kgb24gcmVzdW1lLgo+IAo+IFNvLCBlbmFibGUgaG90cGx1ZyBldmVudHMgYmVmb3Jl
-IHJlaW5pdGlhbGl6aW5nIHRoZSBkaXNwbGF5Lgo+IAo+IENjOiBKdXN0b24gTGkgPGp1c3Rvbi5s
-aUBpbnRlbC5jb20+Cj4gQ2M6IEltcmUgRGVhayA8aW1yZS5kZWFrQGludGVsLmNvbT4KPiBDYzog
-VmlsbGUgU3lyasOkbMOkIDx2aWxsZS5zeXJqYWxhQGxpbnV4LmludGVsLmNvbT4KPiBDYzogSGFy
-cnkgV2VudGxhbmQgPGh3ZW50bGFuQGFtZC5jb20+Cj4gQ2M6IERhbmllbCBWZXR0ZXIgPGRhbmll
-bC52ZXR0ZXJAZmZ3bGwuY2g+Cj4gUmV2aWV3ZWQtYnk6IFNlYW4gUGF1bCA8c2VhbkBwb29ybHku
-cnVuPgo+IFNpZ25lZC1vZmYtYnk6IEx5dWRlIFBhdWwgPGx5dWRlQHJlZGhhdC5jb20+Cj4gTGlu
-azogCj4gaHR0cHM6Ly9wYXRjaHdvcmsuZnJlZWRlc2t0b3Aub3JnL3BhdGNoL21zZ2lkLzIwMTkx
-MDIyMDIzNjQxLjgwMjYtMTEtbHl1ZGVAcmVkaGF0LmNvbQo+IFNpZ25lZC1vZmYtYnk6IFNhc2hh
-IExldmluIDxzYXNoYWxAa2VybmVsLm9yZz4KPiAtLS0KPiAgZHJpdmVycy9ncHUvZHJtL25vdXZl
-YXUvbm91dmVhdV9kaXNwbGF5LmMgfCAxOSArKysrKysrKysrKy0tLS0tLS0tCj4gIDEgZmlsZSBj
-aGFuZ2VkLCAxMSBpbnNlcnRpb25zKCspLCA4IGRlbGV0aW9ucygtKQo+IAo+IGRpZmYgLS1naXQg
-YS9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2Rpc3BsYXkuYwo+IGIvZHJpdmVycy9n
-cHUvZHJtL25vdXZlYXUvbm91dmVhdV9kaXNwbGF5LmMKPiBpbmRleCA2ZjAzODUxMWEwM2E5Li41
-M2Y5YmNlYWYxN2E1IDEwMDY0NAo+IC0tLSBhL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZl
-YXVfZGlzcGxheS5jCj4gKysrIGIvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9kaXNw
-bGF5LmMKPiBAQCAtNDA3LDYgKzQwNywxNyBAQCBub3V2ZWF1X2Rpc3BsYXlfaW5pdChzdHJ1Y3Qg
-ZHJtX2RldmljZSAqZGV2LCBib29sCj4gcmVzdW1lLCBib29sIHJ1bnRpbWUpCj4gIAlzdHJ1Y3Qg
-ZHJtX2Nvbm5lY3Rvcl9saXN0X2l0ZXIgY29ubl9pdGVyOwo+ICAJaW50IHJldDsKPiAgCj4gKwkv
-Kgo+ICsJICogRW5hYmxlIGhvdHBsdWcgaW50ZXJydXB0cyAoZG9uZSBhcyBlYXJseSBhcyBwb3Nz
-aWJsZSwgc2luY2Ugd2UgbmVlZAo+ICsJICogdGhlbSBmb3IgTVNUKQo+ICsJICovCj4gKwlkcm1f
-Y29ubmVjdG9yX2xpc3RfaXRlcl9iZWdpbihkZXYsICZjb25uX2l0ZXIpOwo+ICsJbm91dmVhdV9m
-b3JfZWFjaF9ub25fbXN0X2Nvbm5lY3Rvcl9pdGVyKGNvbm5lY3RvciwgJmNvbm5faXRlcikgewo+
-ICsJCXN0cnVjdCBub3V2ZWF1X2Nvbm5lY3RvciAqY29ubiA9IG5vdXZlYXVfY29ubmVjdG9yKGNv
-bm5lY3Rvcik7Cj4gKwkJbnZpZl9ub3RpZnlfZ2V0KCZjb25uLT5ocGQpOwo+ICsJfQo+ICsJZHJt
-X2Nvbm5lY3Rvcl9saXN0X2l0ZXJfZW5kKCZjb25uX2l0ZXIpOwo+ICsKPiAgCXJldCA9IGRpc3At
-PmluaXQoZGV2LCByZXN1bWUsIHJ1bnRpbWUpOwo+ICAJaWYgKHJldCkKPiAgCQlyZXR1cm4gcmV0
-Owo+IEBAIC00MTYsMTQgKzQyNyw2IEBAIG5vdXZlYXVfZGlzcGxheV9pbml0KHN0cnVjdCBkcm1f
-ZGV2aWNlICpkZXYsIGJvb2wKPiByZXN1bWUsIGJvb2wgcnVudGltZSkKPiAgCSAqLwo+ICAJZHJt
-X2ttc19oZWxwZXJfcG9sbF9lbmFibGUoZGV2KTsKPiAgCj4gLQkvKiBlbmFibGUgaG90cGx1ZyBp
-bnRlcnJ1cHRzICovCj4gLQlkcm1fY29ubmVjdG9yX2xpc3RfaXRlcl9iZWdpbihkZXYsICZjb25u
-X2l0ZXIpOwo+IC0Jbm91dmVhdV9mb3JfZWFjaF9ub25fbXN0X2Nvbm5lY3Rvcl9pdGVyKGNvbm5l
-Y3RvciwgJmNvbm5faXRlcikgewo+IC0JCXN0cnVjdCBub3V2ZWF1X2Nvbm5lY3RvciAqY29ubiA9
-IG5vdXZlYXVfY29ubmVjdG9yKGNvbm5lY3Rvcik7Cj4gLQkJbnZpZl9ub3RpZnlfZ2V0KCZjb25u
-LT5ocGQpOwo+IC0JfQo+IC0JZHJtX2Nvbm5lY3Rvcl9saXN0X2l0ZXJfZW5kKCZjb25uX2l0ZXIp
-Owo+IC0KPiAgCXJldHVybiByZXQ7Cj4gIH0KPiAgCi0tIApDaGVlcnMsCglMeXVkZSBQYXVsCgpf
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpOb3V2ZWF1IG1h
-aWxpbmcgbGlzdApOb3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZy
-ZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL25vdXZlYXUK
+Builds upon the existing NVIDIA 16Bx2 block linear
+format modifiers by adding more "fields" to the
+existing parameterized
+DRM_FORMAT_MOD_NVIDIA_16BX2_BLOCK format modifier
+macro that allow fully defining a unique-across-
+all-NVIDIA-hardware bit layout using a minimal
+set of fields and values.  The new modifier macro
+DRM_FORMAT_MOD_NVIDIA_BLOCK_LINEAR_2D is
+effectively backwards compatible with the existing
+macro, introducing a superset of the previously
+definable format modifiers.
+
+Backwards compatibility has two quirks.  First,
+the zero value for the "kind" field, which is
+implied by the DRM_FORMAT_MOD_NVIDIA_16BX2_BLOCK
+macro, must be special cased in drivers and
+assumed to map to the pre-Turing generic kind of
+0xfe, since a kind of "zero" is reserved for
+linear buffer layouts on all GPUs.
+
+Second, it is assumed backwards compatibility
+is only needed when running on Tegra GPUs, and
+specifically Tegra GPUs prior to Xavier.  This
+is based on two assertions:
+
+-Tegra GPUs prior to Xavier used a slightly
+ different raw bit layout than desktop GPUs,
+ making it impossible to directly share block
+ linear buffers between the two.
+
+-Support for the existing block linear modifiers
+ was incomplete, making them useful only for
+ exporting buffers created by nouveau and
+ importing them to Tegra DRM as framebuffers for
+ scan out.  There was no support for adding
+ framebuffers using format modifiers in nouveau,
+ nor importing dma-buf/PRIME GEM objects into
+ nouveau userspace drivers with modifiers in Mesa.
+
+Hence it is assumed the prior modifiers were not
+intended for use on desktop GPUs, and as a
+corollary, were not intended to support sharing
+block linear buffers across two different NVIDIA
+GPUs.
+
+v2:
+  - Added canonicalize helper function
+
+v3:
+  - Added additional bit to compression field to
+    support Tesla (NV5x,G8x,G9x,GT1xx,GT2xx) class
+    chips.
+
+Signed-off-by: James Jones <jajones@nvidia.com>
+---
+ include/uapi/drm/drm_fourcc.h | 122 +++++++++++++++++++++++++++++++---
+ 1 file changed, 114 insertions(+), 8 deletions(-)
+
+diff --git a/include/uapi/drm/drm_fourcc.h b/include/uapi/drm/drm_fourcc.h
+index 3feeaa3f987a..4330d930bdbb 100644
+--- a/include/uapi/drm/drm_fourcc.h
++++ b/include/uapi/drm/drm_fourcc.h
+@@ -497,7 +497,113 @@ extern "C" {
+ #define DRM_FORMAT_MOD_NVIDIA_TEGRA_TILED fourcc_mod_code(NVIDIA, 1)
+ 
+ /*
+- * 16Bx2 Block Linear layout, used by desktop GPUs, and Tegra K1 and later
++ * Generalized Block Linear layout, used by desktop GPUs starting with NV50/G80,
++ * and Tegra GPUs starting with Tegra K1.
++ *
++ * Pixels are arranged in Groups of Bytes (GOBs).  GOB size and layout varies
++ * based on the architecture generation.  GOBs themselves are then arranged in
++ * 3D blocks, with the block dimensions (in terms of GOBs) always being a power
++ * of two, and hence expressible as their log2 equivalent (E.g., "2" represents
++ * a block depth or height of "4").
++ *
++ * Chapter 20 "Pixel Memory Formats" of the Tegra X1 TRM describes this format
++ * in full detail.
++ *
++ *       Macro
++ * Bits  Param Description
++ * ----  ----- -----------------------------------------------------------------
++ *
++ *  3:0  h     log2(height) of each block, in GOBs.  Placed here for
++ *             compatibility with the existing
++ *             DRM_FORMAT_MOD_NVIDIA_16BX2_BLOCK()-based modifiers.
++ *
++ *  4:4  -     Must be 1, to indicate block-linear layout.  Necessary for
++ *             compatibility with the existing
++ *             DRM_FORMAT_MOD_NVIDIA_16BX2_BLOCK()-based modifiers.
++ *
++ *  8:5  -     Reserved (To support 3D-surfaces with variable log2(depth) block
++ *             size).  Must be zero.
++ *
++ *             Note there is no log2(width) parameter.  Some portions of the
++ *             hardware support a block width of two gobs, but it is impractical
++ *             to use due to lack of support elsewhere, and has no known
++ *             benefits.
++ *
++ * 11:9  -     Reserved (To support 2D-array textures with variable array stride
++ *             in blocks, specified via log2(tile width in blocks)).  Must be
++ *             zero.
++ *
++ * 19:12 k     Page Kind.  This value directly maps to a field in the page
++ *             tables of all GPUs >= NV50.  It affects the exact layout of bits
++ *             in memory and can be derived from the tuple
++ *
++ *               (format, GPU model, compression type, samples per pixel)
++ *
++ *             Where compression type is defined below.  If GPU model were
++ *             implied by the format modifier, format, or memory buffer, page
++ *             kind would not need to be included in the modifier itself, but
++ *             since the modifier should define the layout of the associated
++ *             memory buffer independent from any device or other context, it
++ *             must be included here.
++ *
++ * 21:20 g     GOB Height and Page Kind Generation.  The height of a GOB changed
++ *             starting with Fermi GPUs.  Additionally, the mapping between page
++ *             kind and bit layout has changed at various points.
++ *
++ *               0 = Gob Height 8, Fermi - Volta, Tegra K1+ Page Kind mapping
++ *               1 = Gob Height 4, G80 - GT2XX Page Kind mapping
++ *               2 = Gob Height 8, Turing+ Page Kind mapping
++ *               3 = Reserved for future use.
++ *
++ * 22:22 s     Sector layout.  On Tegra GPUs prior to Xavier, there is a further
++ *             bit remapping step that occurs at an even lower level than the
++ *             page kind and block linear swizzles.  This causes the layout of
++ *             surfaces mapped in those SOC's GPUs to be incompatible with the
++ *             equivalent mapping on other GPUs in the same system.
++ *
++ *               0 = Tegra K1 - Tegra Parker/TX2 Layout.
++ *               1 = Desktop GPU and Tegra Xavier+ Layout
++ *
++ * 25:23 c     Lossless Framebuffer Compression type.
++ *
++ *               0 = none
++ *               1 = ROP/3D, layout 1, exact compression format implied by Page
++ *                   Kind field
++ *               2 = ROP/3D, layout 2, exact compression format implied by Page
++ *                   Kind field
++ *               3 = CDE horizontal
++ *               4 = CDE vertical
++ *               5 = Reserved for future use
++ *               6 = Reserved for future use
++ *               7 = Reserved for future use
++ *
++ * 55:25 -     Reserved for future use.  Must be zero.
++ */
++#define DRM_FORMAT_MOD_NVIDIA_BLOCK_LINEAR_2D(c, s, g, k, h) \
++	fourcc_mod_code(NVIDIA, (0x10 | \
++				 ((h) & 0xf) | \
++				 (((k) & 0xff) << 12) | \
++				 (((g) & 0x3) << 20) | \
++				 (((s) & 0x1) << 22) | \
++				 (((c) & 0x7) << 23)))
++
++/* To grandfather in prior block linear format modifiers to the above layout,
++ * the page kind "0", which corresponds to "pitch/linear" and hence is unusable
++ * with block-linear layouts, is remapped within drivers to the value 0xfe,
++ * which corresponds to the "generic" kind used for simple single-sample
++ * uncompressed color formats on Fermi - Volta GPUs.
++ */
++static inline __u64
++drm_fourcc_canonicalize_nvidia_format_mod(__u64 modifier)
++{
++	if (!(modifier & 0x10) || (modifier & (0xff << 12)))
++		return modifier;
++	else
++		return modifier | (0xfe << 12);
++}
++
++/*
++ * 16Bx2 Block Linear layout, used by Tegra K1 and later
+  *
+  * Pixels are arranged in 64x8 Groups Of Bytes (GOBs). GOBs are then stacked
+  * vertically by a power of 2 (1 to 32 GOBs) to form a block.
+@@ -518,20 +624,20 @@ extern "C" {
+  * in full detail.
+  */
+ #define DRM_FORMAT_MOD_NVIDIA_16BX2_BLOCK(v) \
+-	fourcc_mod_code(NVIDIA, 0x10 | ((v) & 0xf))
++	DRM_FORMAT_MOD_NVIDIA_BLOCK_LINEAR_2D(0, 0, 0, 0, (v))
+ 
+ #define DRM_FORMAT_MOD_NVIDIA_16BX2_BLOCK_ONE_GOB \
+-	fourcc_mod_code(NVIDIA, 0x10)
++	DRM_FORMAT_MOD_NVIDIA_16BX2_BLOCK(0)
+ #define DRM_FORMAT_MOD_NVIDIA_16BX2_BLOCK_TWO_GOB \
+-	fourcc_mod_code(NVIDIA, 0x11)
++	DRM_FORMAT_MOD_NVIDIA_16BX2_BLOCK(1)
+ #define DRM_FORMAT_MOD_NVIDIA_16BX2_BLOCK_FOUR_GOB \
+-	fourcc_mod_code(NVIDIA, 0x12)
++	DRM_FORMAT_MOD_NVIDIA_16BX2_BLOCK(2)
+ #define DRM_FORMAT_MOD_NVIDIA_16BX2_BLOCK_EIGHT_GOB \
+-	fourcc_mod_code(NVIDIA, 0x13)
++	DRM_FORMAT_MOD_NVIDIA_16BX2_BLOCK(3)
+ #define DRM_FORMAT_MOD_NVIDIA_16BX2_BLOCK_SIXTEEN_GOB \
+-	fourcc_mod_code(NVIDIA, 0x14)
++	DRM_FORMAT_MOD_NVIDIA_16BX2_BLOCK(4)
+ #define DRM_FORMAT_MOD_NVIDIA_16BX2_BLOCK_THIRTYTWO_GOB \
+-	fourcc_mod_code(NVIDIA, 0x15)
++	DRM_FORMAT_MOD_NVIDIA_16BX2_BLOCK(5)
+ 
+ /*
+  * Some Broadcom modifiers take parameters, for example the number of
+-- 
+2.17.1
+
+_______________________________________________
+Nouveau mailing list
+Nouveau@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/nouveau
