@@ -1,58 +1,56 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 69ABB11CA27
-	for <lists+nouveau@lfdr.de>; Thu, 12 Dec 2019 11:04:12 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id A34A511DA24
+	for <lists+nouveau@lfdr.de>; Fri, 13 Dec 2019 00:39:34 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 34FA46ECF2;
-	Thu, 12 Dec 2019 10:04:09 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id DEDF06E22F;
+	Thu, 12 Dec 2019 23:39:29 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pg1-x544.google.com (mail-pg1-x544.google.com
- [IPv6:2607:f8b0:4864:20::544])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B927F6ECF2;
- Thu, 12 Dec 2019 10:04:08 +0000 (UTC)
-Received: by mail-pg1-x544.google.com with SMTP id b137so892968pga.6;
- Thu, 12 Dec 2019 02:04:08 -0800 (PST)
+Received: from mail-vk1-xa41.google.com (mail-vk1-xa41.google.com
+ [IPv6:2607:f8b0:4864:20::a41])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A760E6E22D;
+ Thu, 12 Dec 2019 23:39:28 +0000 (UTC)
+Received: by mail-vk1-xa41.google.com with SMTP id x199so247260vke.6;
+ Thu, 12 Dec 2019 15:39:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=3U83CIcKE/SRi+DvpZ5ExDXp0Aib42JfoWBjJw1CdoY=;
- b=vCnXBu3dpOEsSlMFDA3zopAhw0OK6/iX56Ggf6RICdFnChUXqTdPp0GZCB4crBjViQ
- xKQ9GC1t7Y8tKnAO98HbiNn5bf6rIOwJ0l1LHdlcyb8ONbACAdWkLsC+ghq+Dj2jGZwd
- BkP0a4P8kPPU4krEASG4catRFWcTU08fwZNL9Bjgzf6Vj7Ub5TByUy/bQdHpZaVjkaKe
- sMMfF0UTefMT4+1PyL7u82VY+8jnow6fl4iuqM8eLhAGQT/XsGort5OHykOiQ/PyEGcD
- yOsJAT3lImH6GdddbI3mefW2LVJtpbTTxw+UMf0PKYBI3tvo85StBCS8/gMchZ4gSlqt
- Mp+A==
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=Fc2RGJ3UClAMsvSW+fKzHU87UiE/9k4bA3dodgjrviE=;
+ b=DfOwrr8xJ+MjAGBD5DPRK3CtrM98mBYbvY82OB7HXgLa1lSvy6Oh7roTWvGfy1vYmQ
+ fkK8JvcONlBAl2dde0NnSED13jqqTXZ5ZuN8OUUdY4yirTMTd5eJfgCr0ry8TQ36uANH
+ xdfhYjply1N4IvUEZb0K59zMzDOfBiJNVnbB2r0AW6CyGDbUwwgflvz5Zav1jhZHa2Hc
+ w0YBOCUEr+bBToZQVHj23JGp9HlqIIDmA6NqcJtZxtvD0hBOtbXhVDnIgAt8g0/f/u6n
+ HDWRnEdGP2SDVIYDxscK1eX/jRB4GSAjMlsJGzZvlc9NiCMDtNGeOxgcp0JjR8txI43q
+ ZXQg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=3U83CIcKE/SRi+DvpZ5ExDXp0Aib42JfoWBjJw1CdoY=;
- b=aRoAPGmsSF/sFIqrLUamVVYmDbT5cC3TWI5ekVchbi8ajf9sEWgqjL0aUrYaad4d1A
- SEJTvtgwS9wNyYhVk2i5wBWS2pSZhipt3vfCXcrtGMHiKEVbVU1GmoYD3FjNim5KnWsS
- H+Z9VfD2/nQrXtJ01RoZRdJ7qqa7KEFwvFsVcsmGPtcYG2liOmv3TCyMbPJi0DwpEF8E
- FrjkWAhBupS+ycLNY7gl/h7vpxKiaKTDT8tCwGdunMwWZaKrfGtFsfwjV2fHi3jJ9NkS
- hIYkEzqnGHgZMnkjHyWCDmKsMzDuqG7vE5FzgtQZWZIAwQ080uX8gxI9qNHSyDm9EgV2
- VmBQ==
-X-Gm-Message-State: APjAAAUezCTq+DbyR3Fch68yPgF4lbjn6an9+TEvoEK5hm4HBKT1+Adq
- 7xUpNC1SPYhqFl8c64lgXF4=
-X-Google-Smtp-Source: APXvYqwJREwsRCqyKBWa0CL0bcmG/1cRF3jdvXmB1l6ty6DnFhtsoMoX233t/vjQlv3gcKFWcqzSpg==
-X-Received: by 2002:a62:7590:: with SMTP id q138mr8630797pfc.241.1576145048455; 
- Thu, 12 Dec 2019 02:04:08 -0800 (PST)
-Received: from suzukaze.ipads-lab.se.sjtu.edu.cn ([202.120.40.82])
- by smtp.gmail.com with ESMTPSA id g19sm6375868pfh.134.2019.12.12.02.04.02
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Dec 2019 02:04:07 -0800 (PST)
-From: Chuhong Yuan <hslester96@gmail.com>
-To: 
-Date: Thu, 12 Dec 2019 18:03:56 +0800
-Message-Id: <20191212100356.11309-1-hslester96@gmail.com>
-X-Mailer: git-send-email 2.24.0
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=Fc2RGJ3UClAMsvSW+fKzHU87UiE/9k4bA3dodgjrviE=;
+ b=JeJu6KPAHlGUOHlzGUxjPT+DxlMpp4lSrS7NDXFlknsBHevua2+ft4r8ij8TyMujaz
+ ZfftFhg8ECPneRVOeBmz4BKWQDX2Bys8LpZQnIC7X5rV4UjZmAUrPiRspyOzNeQBom9K
+ ekQT3lcqQ/kVhALrcHjbgGXuNydGbm+2PnyF0CKjowulhL162XmpSV2pD/RszteFlRJt
+ WTZxS9GmsvbfULQgZSUor3mJFA8T/AY70WWOyMig5JFD8HzSbSBtW0tGozRlpxEr9M2+
+ 4owKE9iZVBg6Iohgupr6AEn3StwsypclfCIcxklnaNzbZqTpNeWz34U+1nQZgWcJKt30
+ 2TmQ==
+X-Gm-Message-State: APjAAAXoE09F9Mhu+xak+mtfGFjA7iU5cOmBa8OuJktE1V44SERIHRrX
+ 6M7IzesdUeiRnLwSvIZQijKNa/AViHmXkxm6y/I=
+X-Google-Smtp-Source: APXvYqxiVybcStEMqYeEIGEnJ+HtMBPGQkv8Kki+YBh0DS0X1ru0NT7WrnTsK5Rvcxhr0Gt1sTo4rGQEHf7vCJ/BUvQ=
+X-Received: by 2002:a05:6122:2b6:: with SMTP id
+ 22mr11219224vkq.49.1576193967753; 
+ Thu, 12 Dec 2019 15:39:27 -0800 (PST)
 MIME-Version: 1.0
-Subject: [Nouveau] [PATCH v2] drm/nouveau/dispnv50: add missed
- nv50_outp_release in nv50_msto_disable
+References: <20191206075321.18239-1-hslester96@gmail.com>
+ <8736dq2c66.fsf@intel.com>
+In-Reply-To: <8736dq2c66.fsf@intel.com>
+From: Ben Skeggs <skeggsb@gmail.com>
+Date: Fri, 13 Dec 2019 09:39:16 +1000
+Message-ID: <CACAvsv4He=bKpa2VxJr-cYUoy66sw8mGgFcnpMM0qDb1qXYSrg@mail.gmail.com>
+To: Jani Nikula <jani.nikula@linux.intel.com>
+Subject: Re: [Nouveau] [PATCH] drm/dp_mst: add missed nv50_outp_release in
+ nv50_msto_disable
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -64,46 +62,61 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
- Chuhong Yuan <hslester96@gmail.com>, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>,
- Daniel Vetter <daniel@ffwll.ch>
+Cc: David Airlie <airlied@linux.ie>, ML nouveau <nouveau@lists.freedesktop.org>,
+ Chuhong Yuan <hslester96@gmail.com>, LKML <linux-kernel@vger.kernel.org>,
+ ML dri-devel <dri-devel@lists.freedesktop.org>,
+ Ben Skeggs <bskeggs@redhat.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-nv50_msto_disable() does not call nv50_outp_release() to match
-nv50_outp_acquire() like other disable().
-Add the missed call to fix it.
+On Thu, 12 Dec 2019 at 18:14, Jani Nikula <jani.nikula@linux.intel.com> wrote:
+>
+> On Fri, 06 Dec 2019, Chuhong Yuan <hslester96@gmail.com> wrote:
+> > nv50_msto_disable() does not call nv50_outp_release() to match
+> > nv50_outp_acquire() like other disable().
+> > Add the missed call to fix it.
+This is intentional, and it's called at a later time
+(nv50_mstm_prepare()) to avoid confusing HW.
 
-Signed-off-by: Chuhong Yuan <hslester96@gmail.com>
----
-Changes in v2:
-  - Fix the subject prefix.
+Ben.
 
- drivers/gpu/drm/nouveau/dispnv50/disp.c | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
-
-diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.c b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-index 549486f1d937..84e1417355cc 100644
---- a/drivers/gpu/drm/nouveau/dispnv50/disp.c
-+++ b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-@@ -862,8 +862,10 @@ nv50_msto_disable(struct drm_encoder *encoder)
- 
- 	mstm->outp->update(mstm->outp, msto->head->base.index, NULL, 0, 0);
- 	mstm->modified = true;
--	if (!--mstm->links)
-+	if (!--mstm->links) {
- 		mstm->disabled = true;
-+		nv50_outp_release(mstm->outp);
-+	}
- 	msto->disabled = true;
- }
- 
--- 
-2.24.0
-
+>
+> The subject prefix "drm/dp_mst" implies drm core change, but this is
+> about nouveau. Please fix.
+>
+> BR,
+> Jani.
+>
+> >
+> > Signed-off-by: Chuhong Yuan <hslester96@gmail.com>
+> > ---
+> >  drivers/gpu/drm/nouveau/dispnv50/disp.c | 4 +++-
+> >  1 file changed, 3 insertions(+), 1 deletion(-)
+> >
+> > diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.c b/drivers/gpu/drm/nouveau/dispnv50/disp.c
+> > index 549486f1d937..84e1417355cc 100644
+> > --- a/drivers/gpu/drm/nouveau/dispnv50/disp.c
+> > +++ b/drivers/gpu/drm/nouveau/dispnv50/disp.c
+> > @@ -862,8 +862,10 @@ nv50_msto_disable(struct drm_encoder *encoder)
+> >
+> >       mstm->outp->update(mstm->outp, msto->head->base.index, NULL, 0, 0);
+> >       mstm->modified = true;
+> > -     if (!--mstm->links)
+> > +     if (!--mstm->links) {
+> >               mstm->disabled = true;
+> > +             nv50_outp_release(mstm->outp);
+> > +     }
+> >       msto->disabled = true;
+> >  }
+>
+> --
+> Jani Nikula, Intel Open Source Graphics Center
+> _______________________________________________
+> dri-devel mailing list
+> dri-devel@lists.freedesktop.org
+> https://lists.freedesktop.org/mailman/listinfo/dri-devel
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
