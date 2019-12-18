@@ -2,45 +2,34 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3F3C212B2C8
-	for <lists+nouveau@lfdr.de>; Fri, 27 Dec 2019 09:14:31 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D21C812B300
+	for <lists+nouveau@lfdr.de>; Fri, 27 Dec 2019 09:15:28 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D39936E091;
-	Fri, 27 Dec 2019 08:13:46 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E81F56E171;
+	Fri, 27 Dec 2019 08:14:09 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 449 seconds by postgrey-1.36 at gabe;
- Tue, 17 Dec 2019 17:36:02 UTC
-Received: from mail.pmoreau.org (pmoreau.org [37.187.98.141])
- by gabe.freedesktop.org (Postfix) with ESMTP id DFA886E05C;
- Tue, 17 Dec 2019 17:36:02 +0000 (UTC)
-Received: from pmoreau.org (unknown
- [IPv6:2a01:e35:2fd7:d5a0:a93f:fcc7:d652:2bb2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest
- SHA256) (Client did not present a certificate)
- (Authenticated sender: eiquom6u@pmoreau.org)
- by mail.pmoreau.org (Postfix) with ESMTPSA id 92840A40850;
- Tue, 17 Dec 2019 18:28:31 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=pmoreau.org;
- s=default; t=1576603711;
- bh=30ew8plVfwsmK02Gcyxb8vJmPnlaOBwg60YRDUqEh48=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To;
- b=j7jkJ2dYUBz1ABbfhdITW9qg+t5aRQWQvJbalBFPjblrYoPCFadGprefRebxLVe4y
- bzi+mRMnwRJo+k8t4NrbQxWhTKS9GEQEGGvNynr9259MIeelQpfZq0bEjwYKrsCaFJ
- qWyAQBnPuijRNp+wEj865Q17j9ZkTdT0c76j0hdU=
-Date: Tue, 17 Dec 2019 18:28:22 +0100
-From: Pierre Moreau <contact@pmoreau.org>
-To: zhengbin <zhengbin13@huawei.com>
-Message-ID: <20191217172822.6ivdgdo7g7dorj2a@pmoreau.org>
-Mail-Followup-To: zhengbin <zhengbin13@huawei.com>, bskeggs@redhat.com,
- airlied@linux.ie, daniel@ffwll.ch, nouveau@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org
-References: <1576468096-63366-1-git-send-email-zhengbin13@huawei.com>
+Received: from huawei.com (szxga04-in.huawei.com [45.249.212.190])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 57B076E20F;
+ Wed, 18 Dec 2019 01:20:58 +0000 (UTC)
+Received: from DGGEMS403-HUB.china.huawei.com (unknown [172.30.72.60])
+ by Forcepoint Email with ESMTP id B513051F5F5AE0E61070;
+ Wed, 18 Dec 2019 09:20:53 +0800 (CST)
+Received: from huawei.com (10.90.53.225) by DGGEMS403-HUB.china.huawei.com
+ (10.3.19.203) with Microsoft SMTP Server id 14.3.439.0; Wed, 18 Dec 2019
+ 09:20:47 +0800
+From: zhengbin <zhengbin13@huawei.com>
+To: <bskeggs@redhat.com>, <contact@pmoreau.org>, <airlied@linux.ie>,
+ <daniel@ffwll.ch>, <nouveau@lists.freedesktop.org>,
+ <dri-devel@lists.freedesktop.org>
+Date: Wed, 18 Dec 2019 09:28:03 +0800
+Message-ID: <1576632483-140210-1-git-send-email-zhengbin13@huawei.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-In-Reply-To: <1576468096-63366-1-git-send-email-zhengbin13@huawei.com>
-X-Mailman-Approved-At: Fri, 27 Dec 2019 08:13:32 +0000
-Subject: Re: [Nouveau] [PATCH] drm/nouveau/mmu: Remove unneeded semicolon
+X-Originating-IP: [10.90.53.225]
+X-CFilter-Loop: Reflected
+X-Mailman-Approved-At: Fri, 27 Dec 2019 08:13:31 +0000
+Subject: [Nouveau] [PATCH v2] drm/nouveau/mmu: Remove unneeded semicolon
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -52,116 +41,55 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: airlied@linux.ie, nouveau@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, bskeggs@redhat.com, daniel@ffwll.ch
-Content-Type: multipart/mixed; boundary="===============1399177549=="
+Cc: zhengbin13@huawei.com
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+Fixes coccicheck warning:
 
---===============1399177549==
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="vgqfymq4dbr4mqye"
-Content-Disposition: inline
+drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c:583:2-3: Unneeded semicolon
+drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.h:307:2-3: Unneeded semicolon
 
+Reported-by: Hulk Robot <hulkci@huawei.com>
+Signed-off-by: zhengbin <zhengbin13@huawei.com>
+---
+v1->v2: add missing one space after the closing curly bracket
+ drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c | 2 +-
+ drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.h | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
---vgqfymq4dbr4mqye
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c
+index 41640e0..199f94e 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c
+@@ -580,7 +580,7 @@ nvkm_vmm_iter(struct nvkm_vmm *vmm, const struct nvkm_vmm_page *page,
+ 				it.pte[it.lvl]++;
+ 			}
+ 		}
+-	};
++	}
 
-With the comment further below addressed, this patch is
-Reviewed-by: Pierre Moreau <dev@pmoreau.org>
+ 	nvkm_vmm_flush(&it);
+ 	return ~0ULL;
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.h b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.h
+index 5e55ecb..321bfca 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.h
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.h
+@@ -304,7 +304,7 @@ int tu102_vmm_new(struct nvkm_mmu *, bool, u64, u64, void *, u32,
+ 		FILL(VMM, PT, PTEI, _ptes, MAP, _addr);                        \
+ 		PTEI += _ptes;                                                 \
+ 		PTEN -= _ptes;                                                 \
+-	};                                                                     \
++	}                                                                      \
+ 	nvkm_done((PT)->memory);                                               \
+ } while(0)
 
-On 2019-12-16 =E2=80=94 11:48, zhengbin wrote:
-> Fixes coccicheck warning:
->=20
-> drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c:583:2-3: Unneeded semicolon
-> drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.h:307:2-3: Unneeded semicolon
->=20
-> Reported-by: Hulk Robot <hulkci@huawei.com>
-> Signed-off-by: zhengbin <zhengbin13@huawei.com>
-> ---
->  drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c | 2 +-
->  drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.h | 2 +-
->  2 files changed, 2 insertions(+), 2 deletions(-)
->=20
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c b/drivers/gpu/=
-drm/nouveau/nvkm/subdev/mmu/vmm.c
-> index 41640e0..199f94e 100644
-> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c
-> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c
-> @@ -580,7 +580,7 @@ nvkm_vmm_iter(struct nvkm_vmm *vmm, const struct nvkm=
-_vmm_page *page,
->  				it.pte[it.lvl]++;
->  			}
->  		}
-> -	};
-> +	}
->=20
->  	nvkm_vmm_flush(&it);
->  	return ~0ULL;
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.h b/drivers/gpu/=
-drm/nouveau/nvkm/subdev/mmu/vmm.h
-> index 5e55ecb..321bfca 100644
-> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.h
-> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.h
-> @@ -304,7 +304,7 @@ int tu102_vmm_new(struct nvkm_mmu *, bool, u64, u64, =
-void *, u32,
->  		FILL(VMM, PT, PTEI, _ptes, MAP, _addr);                        \
->  		PTEI +=3D _ptes;                                                 \
->  		PTEN -=3D _ptes;                                                 \
-> -	};                                                                     \
-> +	}                                                                     \
-
-You are missing one space after the closing curly bracket, to align the
-backslash at the end of the line.
-
-Thanks,
-Pierre Moreau
-
->  	nvkm_done((PT)->memory);                                               \
->  } while(0)
->=20
-> --
-> 2.7.4
->=20
-> _______________________________________________
-> dri-devel mailing list
-> dri-devel@lists.freedesktop.org
-> https://lists.freedesktop.org/mailman/listinfo/dri-devel
-
---vgqfymq4dbr4mqye
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCgAdFiEEej50sMo3avjoHMecTsmfhA5fDzsFAl35EDUACgkQTsmfhA5f
-DzuvgQ/8Ctn+W37Q9fWdH1uu0TjXwVACe9zx47KGz8B6af+Jy6eR91sHdjUVjVu3
-cZOAgqiwQa8D9FT7/B0Ti2vWofsABbQ254RTRU1yzAn3B+4LMAMg7isGu8Fn3pyB
-ZEW2moSGaG+pZBwdesWAl5VRRlGEy0VJ6vys78TooJ6z1ve/GchpFkRfqYYcuIF5
-1UrTDbP4QbrijxLjOKh4x3s+jUevbu3oLQVyYv+tLDZ8Pns0OWS453MBJIVIsWg9
-7eB4lpP/hXw7g0b4KlgZRIYx6I7+Xu3TvgffprAaldMvtmYurcF3zE3TEivThpPk
-8KKk0L2r8xq/7mhVLKq4vBcnOXDTYd6qQodcHWWETpkJf45ixidG+qQSw7AbqaSs
-o/h3Pe0W6h1KLjgTWACxlhNZsf+vb187dHi8aLQUKJJyEvABdH08yFbtHZDRKsRj
-la4JAiE4sn9wzg4svgp+yZUWIi54jazEdGKTcBti9iT+lC+wh6zwtGWYFrhB8Gz8
-eEBjFyepLdNXw8SA2G/rNQ47aIFBLKOaeFP/8BtQjtFfFCnRV3ziNvqNfT8+BZNu
-TBtQCs+ior/nrh4EzGMWv39oP6RiJ2VZaaaRbUgyz0JOGKtlFx9+On3DPL/35ud/
-ESP3t9TJAzbMet6NAj5D3h07um4NX/APavYnAMIr3S3H3WzTbAE=
-=04OF
------END PGP SIGNATURE-----
-
---vgqfymq4dbr4mqye--
-
---===============1399177549==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+--
+2.7.4
 
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/nouveau
-
---===============1399177549==--
