@@ -1,43 +1,43 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id A355F127CB3
-	for <lists+nouveau@lfdr.de>; Fri, 20 Dec 2019 15:30:54 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id E4086127D2A
+	for <lists+nouveau@lfdr.de>; Fri, 20 Dec 2019 15:35:08 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id EE01D6EC47;
-	Fri, 20 Dec 2019 14:30:50 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id CFFB46EC4E;
+	Fri, 20 Dec 2019 14:35:05 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by gabe.freedesktop.org (Postfix) with ESMTPS id AE5986EC45;
- Fri, 20 Dec 2019 14:30:46 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3E4C86EC4B;
+ Fri, 20 Dec 2019 14:35:04 +0000 (UTC)
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 994D224685;
- Fri, 20 Dec 2019 14:30:45 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 3ED1824684;
+ Fri, 20 Dec 2019 14:35:03 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1576852246;
- bh=tjRKg4UXjRDa3umwleOY3eLlM2dgbRCxqbyRm2e4EDk=;
+ s=default; t=1576852504;
+ bh=xM2oklz4FFAtArOB5pqVPEnxLppXiEvGloY3AoOlOlk=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=bVjPdCpoCSbPExcC23RqDWl1CcQ3QxjKCz7M1Z95Khen6QAYMnB5wvqpuAaCAbdmQ
- LvbMwLfQpsvNu5IgkE6pfFCEYh4Mf97U1HMr1XifISsCbEqPGB1UGnEk2m8PwmPQa8
- vVvZ5v3eyobP6H7LTcG49gn29IHHXYt1LVS//NxI=
+ b=U5/RHiFcWilLMVTzrgYr5nYt8vE8/EouGZ13o/yAdfvje8XqL+ivNuJs+qcX9ylVk
+ +12bSL5U4OOH4MZ7+U3HkLRbCV3nsi3rrC7YD4LmdNzOyxeWYiLvoqwu+rVhjMIzFu
+ ga5N9ZJTo4Y8O5GT72+WxOF9BG/1DkQ25zj4Bwns=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Fri, 20 Dec 2019 09:29:40 -0500
-Message-Id: <20191220142954.9500-38-sashal@kernel.org>
+Date: Fri, 20 Dec 2019 09:34:22 -0500
+Message-Id: <20191220143433.9922-23-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20191220142954.9500-1-sashal@kernel.org>
-References: <20191220142954.9500-1-sashal@kernel.org>
+In-Reply-To: <20191220143433.9922-1-sashal@kernel.org>
+References: <20191220143433.9922-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
-Subject: [Nouveau] [PATCH AUTOSEL 5.4 38/52] drm/nouveau/kms/nv50-: fix
- panel scaling
+Subject: [Nouveau] [PATCH AUTOSEL 4.19 23/34] drm/nouveau: Move the
+ declaration of struct nouveau_conn_atom up a bit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -50,47 +50,167 @@ List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
 Cc: Sasha Levin <sashal@kernel.org>, nouveau@lists.freedesktop.org,
- Ben Skeggs <bskeggs@redhat.com>, dri-devel@lists.freedesktop.org
+ dri-devel@lists.freedesktop.org, Hans de Goede <hdegoede@redhat.com>,
+ Ben Skeggs <bskeggs@redhat.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-From: Ben Skeggs <bskeggs@redhat.com>
+From: Hans de Goede <hdegoede@redhat.com>
 
-[ Upstream commit 3d1890ef8023e61934e070021b06cc9f417260c0 ]
+[ Upstream commit 37a68eab4cd92b507c9e8afd760fdc18e4fecac6 ]
 
-Under certain circumstances, encoder atomic_check() can be entered
-without adjusted_mode having been reset to the same as mode, which
-confuses the scaling logic and can lead to a misprogrammed display.
+Place the declaration of struct nouveau_conn_atom above that of
+struct nouveau_connector. This commit makes no changes to the moved
+block what so ever, it just moves it up a bit.
 
-Fix this by checking against the user-provided mode directly.
+This is a preparation patch to fix some issues with connector handling
+on pre nv50 displays (which do not use atomic modesetting).
 
-Link: https://bugs.freedesktop.org/show_bug.cgi?id=108615
-Link: https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/issues/464
+Signed-off-by: Hans de Goede <hdegoede@redhat.com>
+Reviewed-by: Lyude Paul <lyude@redhat.com>
 Signed-off-by: Ben Skeggs <bskeggs@redhat.com>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- drivers/gpu/drm/nouveau/dispnv50/disp.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ drivers/gpu/drm/nouveau/nouveau_connector.h | 110 ++++++++++----------
+ 1 file changed, 55 insertions(+), 55 deletions(-)
 
-diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.c b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-index b46be8a091e99..8f4675c28c6f9 100644
---- a/drivers/gpu/drm/nouveau/dispnv50/disp.c
-+++ b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-@@ -326,9 +326,9 @@ nv50_outp_atomic_check_view(struct drm_encoder *encoder,
- 			 * same size as the native one (e.g. different
- 			 * refresh rate)
- 			 */
--			if (adjusted_mode->hdisplay == native_mode->hdisplay &&
--			    adjusted_mode->vdisplay == native_mode->vdisplay &&
--			    adjusted_mode->type & DRM_MODE_TYPE_DRIVER)
-+			if (mode->hdisplay == native_mode->hdisplay &&
-+			    mode->vdisplay == native_mode->vdisplay &&
-+			    mode->type & DRM_MODE_TYPE_DRIVER)
- 				break;
- 			mode = native_mode;
- 			asyc->scaler.full = true;
+diff --git a/drivers/gpu/drm/nouveau/nouveau_connector.h b/drivers/gpu/drm/nouveau/nouveau_connector.h
+index dc7454e7f19aa..b46e99f7641ed 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_connector.h
++++ b/drivers/gpu/drm/nouveau/nouveau_connector.h
+@@ -29,6 +29,7 @@
+ 
+ #include <nvif/notify.h>
+ 
++#include <drm/drm_crtc.h>
+ #include <drm/drm_edid.h>
+ #include <drm/drm_encoder.h>
+ #include <drm/drm_dp_helper.h>
+@@ -37,6 +38,60 @@
+ 
+ struct nvkm_i2c_port;
+ 
++#define nouveau_conn_atom(p)                                                   \
++	container_of((p), struct nouveau_conn_atom, state)
++
++struct nouveau_conn_atom {
++	struct drm_connector_state state;
++
++	struct {
++		/* The enum values specifically defined here match nv50/gf119
++		 * hw values, and the code relies on this.
++		 */
++		enum {
++			DITHERING_MODE_OFF = 0x00,
++			DITHERING_MODE_ON = 0x01,
++			DITHERING_MODE_DYNAMIC2X2 = 0x10 | DITHERING_MODE_ON,
++			DITHERING_MODE_STATIC2X2 = 0x18 | DITHERING_MODE_ON,
++			DITHERING_MODE_TEMPORAL = 0x20 | DITHERING_MODE_ON,
++			DITHERING_MODE_AUTO
++		} mode;
++		enum {
++			DITHERING_DEPTH_6BPC = 0x00,
++			DITHERING_DEPTH_8BPC = 0x02,
++			DITHERING_DEPTH_AUTO
++		} depth;
++	} dither;
++
++	struct {
++		int mode;	/* DRM_MODE_SCALE_* */
++		struct {
++			enum {
++				UNDERSCAN_OFF,
++				UNDERSCAN_ON,
++				UNDERSCAN_AUTO,
++			} mode;
++			u32 hborder;
++			u32 vborder;
++		} underscan;
++		bool full;
++	} scaler;
++
++	struct {
++		int color_vibrance;
++		int vibrant_hue;
++	} procamp;
++
++	union {
++		struct {
++			bool dither:1;
++			bool scaler:1;
++			bool procamp:1;
++		};
++		u8 mask;
++	} set;
++};
++
+ struct nouveau_connector {
+ 	struct drm_connector base;
+ 	enum dcb_connector_type type;
+@@ -111,61 +166,6 @@ extern int nouveau_ignorelid;
+ extern int nouveau_duallink;
+ extern int nouveau_hdmimhz;
+ 
+-#include <drm/drm_crtc.h>
+-#define nouveau_conn_atom(p)                                                   \
+-	container_of((p), struct nouveau_conn_atom, state)
+-
+-struct nouveau_conn_atom {
+-	struct drm_connector_state state;
+-
+-	struct {
+-		/* The enum values specifically defined here match nv50/gf119
+-		 * hw values, and the code relies on this.
+-		 */
+-		enum {
+-			DITHERING_MODE_OFF = 0x00,
+-			DITHERING_MODE_ON = 0x01,
+-			DITHERING_MODE_DYNAMIC2X2 = 0x10 | DITHERING_MODE_ON,
+-			DITHERING_MODE_STATIC2X2 = 0x18 | DITHERING_MODE_ON,
+-			DITHERING_MODE_TEMPORAL = 0x20 | DITHERING_MODE_ON,
+-			DITHERING_MODE_AUTO
+-		} mode;
+-		enum {
+-			DITHERING_DEPTH_6BPC = 0x00,
+-			DITHERING_DEPTH_8BPC = 0x02,
+-			DITHERING_DEPTH_AUTO
+-		} depth;
+-	} dither;
+-
+-	struct {
+-		int mode;	/* DRM_MODE_SCALE_* */
+-		struct {
+-			enum {
+-				UNDERSCAN_OFF,
+-				UNDERSCAN_ON,
+-				UNDERSCAN_AUTO,
+-			} mode;
+-			u32 hborder;
+-			u32 vborder;
+-		} underscan;
+-		bool full;
+-	} scaler;
+-
+-	struct {
+-		int color_vibrance;
+-		int vibrant_hue;
+-	} procamp;
+-
+-	union {
+-		struct {
+-			bool dither:1;
+-			bool scaler:1;
+-			bool procamp:1;
+-		};
+-		u8 mask;
+-	} set;
+-};
+-
+ void nouveau_conn_attach_properties(struct drm_connector *);
+ void nouveau_conn_reset(struct drm_connector *);
+ struct drm_connector_state *
 -- 
 2.20.1
 
