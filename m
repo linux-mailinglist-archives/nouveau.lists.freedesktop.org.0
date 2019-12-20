@@ -1,48 +1,43 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0E7B3127019
-	for <lists+nouveau@lfdr.de>; Thu, 19 Dec 2019 22:58:14 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2D57E127585
+	for <lists+nouveau@lfdr.de>; Fri, 20 Dec 2019 07:05:15 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8283D6EB9F;
-	Thu, 19 Dec 2019 21:58:12 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B951489A9B;
+	Fri, 20 Dec 2019 06:05:12 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mx3.wp.pl (mx3.wp.pl [212.77.101.10])
- by gabe.freedesktop.org (Postfix) with ESMTPS id ED8076EB9F
- for <nouveau@lists.freedesktop.org>; Thu, 19 Dec 2019 21:58:10 +0000 (UTC)
-Received: (wp-smtpd smtp.wp.pl 9783 invoked from network);
- 19 Dec 2019 22:58:08 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=wp.pl; s=1024a;
- t=1576792688; bh=U3hTsTfz2pQGnZHHvq53apeM57BQEFFHhS/MY9yjBl8=;
- h=Subject:To:Cc:From;
- b=fQhthJgk6C8KgObPiwTPoI4nA7FDmICLYBQRCPtCAQxhDcqRoF7yy7MVyjpaXSZZe
- Ci3QvCIiCgWra9qUd4e0qa206RDuIWg8QPDRVpMYcIEp4rsv5qe54ekC9VGXdlXvJk
- fn6x6LD/u8eWyWfsOLPB9jLA7vjYEivDeClErF4w=
-Received: from no-mans-land.m247.com (HELO me.smtp.wp.pl)
- (mszpak@wp.pl@[185.244.214.240]) (envelope-sender <mszpak@wp.pl>)
- by smtp.wp.pl (WP-SMTPD) with ECDHE-RSA-AES256-GCM-SHA384 encrypted SMTP
- for <linux-pci@vger.kernel.org>; 19 Dec 2019 22:58:08 +0100
-To: Ilia Mirkin <imirkin@alum.mit.edu>,
- Mika Westerberg <mika.westerberg@linux.intel.com>,
- "Rafael J. Wysocki" <rafael.j.wysocki@intel.com>
+Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2D64B89A9B
+ for <nouveau@lists.freedesktop.org>; Fri, 20 Dec 2019 06:05:11 +0000 (UTC)
+X-Amp-Result: UNKNOWN
+X-Amp-Original-Verdict: FILE UNKNOWN
+X-Amp-File-Uploaded: False
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+ by orsmga101.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+ 19 Dec 2019 22:05:10 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.69,334,1571727600"; d="scan'208";a="222434519"
+Received: from lahna.fi.intel.com (HELO lahna) ([10.237.72.163])
+ by fmsmga001.fm.intel.com with SMTP; 19 Dec 2019 22:05:07 -0800
+Received: by lahna (sSMTP sendmail emulation); Fri, 20 Dec 2019 08:05:07 +0200
+Date: Fri, 20 Dec 2019 08:05:07 +0200
+From: Mika Westerberg <mika.westerberg@linux.intel.com>
+To: Ilia Mirkin <imirkin@alum.mit.edu>
+Message-ID: <20191220060507.GQ2913417@lahna.fi.intel.com>
 References: <c34a6fe1-80dd-a4db-c605-0a13c69e803f@wp.pl>
  <CAKb7UviSYORoeDm1sbDFEzkGd68+DV=StCpzsiaGbA=1VQX3gw@mail.gmail.com>
  <233aafa2-1474-39bf-8ea0-fe1a3ecef167@wp.pl>
  <CAKb7UvgOVrwC91ys19uTAG2p_MRVqcsV_MAHOSL4-m3f+j=dNg@mail.gmail.com>
  <68def665-d236-f3e0-7033-bcb9b9436d1c@wp.pl>
  <CAKb7Uvion7KuwgNaz0G3UD15nnkfM8hfayQgDtgz4d8W6p98bg@mail.gmail.com>
-From: =?UTF-8?Q?Marcin_Zaj=c4=85czkowski?= <mszpak@wp.pl>
-Message-ID: <b0899b99-dcb3-dcf2-5254-bcfd01373cdb@wp.pl>
-Date: Thu, 19 Dec 2019 22:58:08 +0100
-User-Agent: Thunderbird/60.0
 MIME-Version: 1.0
+Content-Disposition: inline
 In-Reply-To: <CAKb7Uvion7KuwgNaz0G3UD15nnkfM8hfayQgDtgz4d8W6p98bg@mail.gmail.com>
-Content-Language: en-US
-X-WP-MailID: de4e619f7ceafc64b6d80119caa3babe
-X-WP-AV: skaner antywirusowy Poczty Wirtualnej Polski
-X-WP-SPAM: NO 0000002 [4bGR]                               
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
+User-Agent: Mutt/1.12.1 (2019-06-15)
 Subject: Re: [Nouveau] Tracking down severe regression in 5.3-rc4/5.4 for
  TU116 - assistance needed
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -57,111 +52,30 @@ List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
 Cc: nouveau <nouveau@lists.freedesktop.org>,
+ "Rafael J. Wysocki" <rafael.j.wysocki@intel.com>,
  Linux PCI <linux-pci@vger.kernel.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-T24gMjAxOS0xMi0xOSAyMTozOCwgSWxpYSBNaXJraW4gd3JvdGU6Cj4gTGV0J3MgYWRkIE1pa2Eg
-YW5kIFJhZmFlbCwgYXMgdGhleSB3ZXJlIHJlc3BvbnNpYmxlIGZvciB0aGF0IGNvbW1pdC4KPiBN
-aWthL1JhZmFlbCAtIGFueSBpZGVhcz8gVGhlIGNvbW1pdCBpbiBxdWVzdGlvbiBpcwo+IAo+IDA2
-MTdiZGVkZTUxMTRhMDAwMjI5OGIxMmNkMGNhMmIwY2ZkMDM5NWQKPiAKPiBNYXJjaW4gLS0gd291
-bGQgYmUgbmljZSBpZiB5b3UgY291bGQgY29uZmlybSB0aGF0IHRha2luZyBhIHJlY2VudAo+IGtl
-cm5lbCArICJnaXQgcmV2ZXJ0IDA2MTdiZGVkZTUxMTRhMDAwMjI5OGIxMmNkMGNhMmIwY2ZkMDM5
-NWQiIHdvcmtzCj4gd2VsbCBmb3IgeW91LgoKSSBnYXZlIGl0IGEgdHJ5LCBob3dldmVyLCB0aGVy
-ZSB3ZXJlIHN1YnNlcXVlbnQgY2hhbmdlcyBpbiB0aGUKbmVpZ2hib3Job29kIGFuZCBJJ20gbm90
-IHN1cmUgaG93IHRvIHNvbHZlIHRoZSBjb25mbGljdHMgKGFzIG9mIG1hc3Rlcgp0b2RheSkuIE5l
-dmVydGhlbGVzcywgSSBzaG91bGQgYmUgYWJsZSB0byB0ZXN0IGEgcHJvdmlkZWQgcGF0Y2ggdG8K
-dmVyaWZ5IHRoYXQgc29tZSBhc3N1bXB0aW9ucyBhcmUgcmlnaHQuCgpNYXJjaW4KCgo+IAo+IE9u
-IFRodSwgRGVjIDE5LCAyMDE5IGF0IDM6MjcgUE0gTWFyY2luIFphasSFY3prb3dza2kgPG1zenBh
-a0B3cC5wbD4gd3JvdGU6Cj4+Cj4+IE9uIDIwMTktMTItMTYgMTk6NDUsIElsaWEgTWlya2luIHdy
-b3RlOgo+Pj4gVGhlIG9idmlvdXMgY2FuZGlkYXRlIGJhc2VkIG9uIGEgcXVpY2sgc2NhbiBpcwo+
-Pj4gMGFjZjU2NzZkYzBmZmUwNjgzNTQzYTIwZDVlY2JkMTEyYWY1YjhlZSAtLSBpdCBtZXJnZXMg
-YSBmaXggdGhhdAo+Pj4gbWVzc2VzIHdpdGggUENJIHN0dWZmLCBhbmQgdGhlcmUgbGllIGRyYWdv
-bnMuIFlvdSBjb3VsZCB0cnkgYnVpbGRpbmcKPj4+IHRoYXQgY29tbWl0LCBhbmQgaWYgdGhpbmdz
-IHN0aWxsIHdvcmssIHRoZW4gSSBoYXZlIG5vIGlkZWEgKGFuZCB5b3UndmUKPj4KPj4gTmljZSBz
-aG90IElsaWEhCj4+Cj4+IEkgbWFuYWdlZCB0byBidWlsZCBrZXJuZWwgZnJvbSBzdXNwZWN0ZWQg
-YmQxMTJhZjViOGVlIGFuZCBpdCBmYWlscwo+IAo+IFRvb2sgbWUgYSB3aGlsZSwgYnV0IHRoaXMg
-aXMgdGhlIGVuZCBvZiB0aGUgaGFzaC4gTm9ybWFsbHkgeW91IGxpc3QKPiB0aGUgc3RhcnQgb2Yg
-dGhlIGhhc2ggKGFuZCB0aGF0J3Mgd2hhdCBhbGwgdGhlIGdpdCB0b29scyBhY2NlcHQpLiBJbgo+
-IHRoaXMgY2FzZSB0aGlzIGlzIGNvbW1pdAoKV2hhdCBhIGJ1bW1lciwgSSBrbmV3IHRoYXQuLi4K
-Cj4gCj4gMGFjZjU2NzZkYzBmZmUwNjgzNTQzYTIwZDVlY2JkMTEyYWY1YjhlZQo+IAo+PiBtaXNl
-cmFibHkgKGFzIHByZXZpb3VzbHkgZGVzY3JpYmVkKS4gVGhlIGJ1aWxkIGZyb20gdGhlIHByZXZp
-b3VzIGNvbW1pdAo+PiA4NmEwNDU2MTkyMGIgd29ya3MgZmluZS4KPiAKPiBlNTc3ZGMxNTJlMjMy
-Yzc4ZTU3NzRlNGM5YjU0ODZhMDQ1NjE5MjBiCj4gCj4+Cj4+PiBuYXJyb3dlZCB0aGUgcmFuZ2Up
-LiBBbHNvIEknZCByZWNvbW1lbmQgZW5zdXJpbmcgdGhhdCB0aGUgZ29vZCBrZXJuZWwKPj4+IGlz
-IHJlYWxseSBnb29kIGFuZCB0aGUgYmFkIGtlcm5lbCBpcyByZWFsbHkgYmFkIC0tIGJvb3QgdGhl
-bSBhIGZldwo+Pj4gdGltZXMuCj4+Cj4+IFdlbGwsIHRoaXMgcHJvYmxlbSBpcyByZXByb2R1Y2li
-bGUgaW4gMTAwJSBpbiBuZXdlciBrZXJuZWxzLiBJIHNlZSB0aGUKPj4gZXJyb3JzIG9uIGJvb3Qg
-bG9ncyBhbmQgYWZ0ZXIgbG9naW4gdG8gR25vbWUgU2hlbGwgdGhlIGZpcnN0IGV4ZWN1dGlvbgo+
-PiBvZiB4cmFuZHIgKG9yIG9wZW5pbmcgYSBsaWQpIGhhbmdzIHRoZSBzeXN0ZW0gKHRoZSBncmFw
-aGljIGNhcmQpLiBPbiB0aGUKPj4gb3RoZXIgc2lkZSBJIGhhdmVuJ3Qgc2VlbiB0aGF0IHByb2Js
-ZW0gaW4gYW55IGVhcmxpZXIga2VybmVsLiBUaGVyZWZvcmUsCj4+IHRoZSBzaXR1YXRpb24gaXMg
-cmF0aGVyIGNsZWFyIGluIG15IGNhc2UuIE5ldmVydGhlbGVzcywgSSB3aWxsIHN0YXkgd2l0aAo+
-PiB0aGF0IHNlbGYtYnVpbGQgZ29vZCBrZXJuZWwgKDUuMy4wLTAucmMzICsgZ2l0KSB0byBjaGVj
-ayBpdCBmdXJ0aGVyLgo+Pgo+Pgo+PiBIb3cgd291bGQgeW91IHNlZSBpdCwgSWxpYT8gSXMgdGhl
-cmUgYW55dGhpbmcgaW4gbm91dmVhdSB0aGF0IG5lZWRzIHRvCj4+IGJlIGFkanVzdGVkIHRvIHRo
-YXQgY2hhbmdlcyBvciByYXRoZXIgdGhvc2UgY2hhbmdlcyBicmVhayBzb21ldGhpbmcgaW4KPj4g
-bm91dmVhdSB0aGF0IHdvdWxkIGJlIGJlc3QgdG8gZml4L3JldmVydCB0aGVtIChhbmQgaXQgd291
-bGQgYmUgZ29vZCB0bwo+PiBsZXQgdGhlIGNvbW1pdHRlciBrbm93IGFib3V0IHRoZSBwcm9ibGVt
-KT8KPj4KPj4gTWFyY2luCj4+Cj4+Cj4+Cj4+PiBPbiBNb24sIERlYyAxNiwgMjAxOSBhdCAxMjo0
-MiBQTSBNYXJjaW4gWmFqxIVjemtvd3NraSA8bXN6cGFrQHdwLnBsPiB3cm90ZToKPj4+Pgo+Pj4+
-IE9uIDIwMTktMTItMTYgMTg6MDgsIElsaWEgTWlya2luIHdyb3RlOgo+Pj4+PiBIaSBNYXJjaW4s
-Cj4+Pj4+Cj4+Pj4+IFlvdSBzaG91bGQgZG8gYSBnaXQgYmlzZWN0IHJhdGhlciB0aGFuIGd1ZXNz
-aW5nIGFib3V0IGNvbW1pdHMuIEkKPj4+Pj4gc3VzcGVjdCB0aGF0IHNlYXJjaGluZyBmb3IgImtl
-cm5lbCBnaXQgYmlzZWN0IGZlZG9yYSIgc2hvdWxkIHByb3ZlCj4+Pj4+IGluc3RydWN0aXZlIGlm
-IHlvdSdyZSBub3Qgc3VyZSBob3cgdG8gZG8gdGhpcy4KPj4+Pgo+Pj4+IFRoYW5rcyBmb3IgeW91
-ciBzdWdnZXN0aW9uLiBJIHJlYWxpemUgdGhhdCBJIGNhbiBkbyBpdCBhdCB0aGUgR2l0IGxldmVs
-Cj4+Pj4gYW5kIGl0IGlzIHRoZSB1bHRpbWF0ZSB3YXkgdG8gZ28uIEhvd2V2ZXIsIGJ1aWxkaW5n
-IHRoZSBrZXJuZWwgdmVyc2lvbgo+Pj4+IGZyb20gc291cmNlcyB0YWtlcyBzb21lIHRpbWUgKGlu
-IGFkZGl0aW9uIHRvIGEgcmVndWxhciB0aW1lIG5lZWRlZCB0bwo+Pj4+IGluc3RhbGwvcmVzdGFy
-dC92ZXJpZnkgd2hpY2ggSSBhbHJlYWR5IGV4cGVyaWVuY2VkIG5hcnJvd2luZyBkb3duIHRvIGEK
-Pj4+PiAianVzdCIgfjI1MCBjb21taXRzKS4KPj4+Pgo+Pj4+IFRoZXJlZm9yZSwgSSB3b3VsZCBi
-ZSByZWFsbHkgdGhhbmtmdWwgZm9yIGEgc3VnZ2VzdGlvbiB3aGljaCBjb21taXRzCj4+Pj4gY291
-bGQgYmUgZ29vZCB0byBjaGVjayBmaXJzdCAtIGhhdmluZyAyLCA0IGlzIGJldHRlciB0aGFuIDgt
-MTAgKGFzc3VtaW5nCj4+Pj4gc29tZW9uZSBpcyByaWdodCA6KSApLgo+Pj4+Cj4+Pj4gTWFyY2lu
-Cj4+Pj4KPj4+Pgo+Pj4+Cj4+Pj4+IE9uIE1vbiwgRGVjIDE2LCAyMDE5IGF0IDExOjQyIEFNIE1h
-cmNpbiBaYWrEhWN6a293c2tpIDxtc3pwYWtAd3AucGw+IHdyb3RlOgo+Pj4+Pj4KPj4+Pj4+IEhp
-LAo+Pj4+Pj4KPj4+Pj4+IEkndmUgZW5jb3VudGVyZWQgYSBzZXZlcmUgcmVncmVzc2lvbiBpbiBU
-VTExNiAocHJvYmFibHkgYWxzbyBUVTExNykKPj4+Pj4+IGludHJvZHVjZWQgaW4gNS4zLXJjNCAo
-dmFsaWQgYWxzbyBmb3IgcmVjZW50IDUuNC4yKSBbMV0uIFRoZSBzeXN0ZW0KPj4+Pj4+IHVzdWFs
-bHkgaGFuZ3Mgb24gdGhlIHN1YnNlcXVlbnQgZ3JhcGhpYyBtb2RlIHJlbGF0ZWQgb3BlcmF0aW9u
-IChjYWxsaW5nCj4+Pj4+PiB4cmFuZHIgYWZ0ZXIgbG9naW4gaXMgZW5vdWdoKSB3aXRoIHRoZSBm
-b2xsb3dpbmcgZXJyb3I6Cj4+Pj4+Pgo+Pj4+Pj4+IGtlcm5lbDogbm91dmVhdSAwMDAwOjAxOjAw
-LjA6IGZpZm86IFNDSEVEX0VSUk9SIDA4IFtdCj4+Pj4+PiAuLi4KPj4+Pj4+PiBrZXJuZWw6IG5v
-dXZlYXUgMDAwMDowMTowMC4wOiBEUk06IGZhaWxlZCB0byBpZGxlIGNoYW5uZWwgMCBbRFJNXQo+
-Pj4+Pj4+IGtlcm5lbDogbm91dmVhdSAwMDAwOjAxOjAwLjA6IGkyYzogYXV4IDAwMDc6IGJlZ2lu
-IGlkbGUgdGltZW91dCBmZmZmZmZmZgo+Pj4+Pj4+IGtlcm5lbDogbm91dmVhdSAwMDAwOjAxOjAw
-LjA6IHRtcjogc3RhbGxlZCBhdCBmZmZmZmZmZmZmZmZmZmZmCj4+Pj4+Pj4ga2VybmVsOiAtLS0t
-LS0tLS0tLS1bIGN1dCBoZXJlIF0tLS0tLS0tLS0tLS0KPj4+Pj4+PiBrZXJuZWw6IG5vdXZlYXUg
-MDAwMDowMTowMC4wOiB0aW1lb3V0Cj4+Pj4+Pj4ga2VybmVsOiBXQVJOSU5HOiBDUFU6IDEwIFBJ
-RDogMzg0IGF0IGRyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L252a20vc3ViZGV2L2Jhci9nODQuYzoz
-NSBnODRfYmFyX2ZsdXNoKzB4Y2YvPiAweGUwIFtub3V2ZWF1XQo+Pj4+Pj4KPj4+Pj4+IChkZXRh
-aWxlZCBsb2cgaW4gYSBjb3JyZXNwb25kaW5nIGlzc3VlIC0gWzFdKQo+Pj4+Pj4KPj4+Pj4+IFdp
-dGggZWFybGllciBrZXJuZWxzIHRoZXJlIHdhcyBubyBoYXJkd2FyZSBhY2NlbGVyYXRpb24gZm9y
-IE5WaWRpYSBHVFgKPj4+Pj4+IDE2NjAgVGksIGJ1dCBhdCBsZWFzdCBJIGNvdWxkIHVzZSBub3V2
-ZWF1IHRvIGRpc2FibGUgaXQgKHRvIHNhdmUKPj4+Pj4+IGJhdHRlcnksIHRyZWVzIGFuZCBsb3dl
-ciB0ZW1wZXJhdHVyZSkgb3IgZXZlbiBoYXZlIGFuIGV4dGVybmFsIG91dHB1dAo+Pj4+Pj4gKHdp
-dGggV2F5bGFuZCkuIE5vdywgdGhlIHN5c3RlbSBpcyB1bnVzYWJsZSB3aXRoIG5vdXZlYXUgOigu
-Cj4+Pj4+Pgo+Pj4+Pj4gSSBzcGVudCBzb21lIHRpbWUgdHJ5aW5nIHRvIG5hcnJvdyB0aGUgc2Nv
-cGUgdXNpbmcgb24gdGhlIGV4aXN0aW5nCj4+Pj4+PiBrZXJuZWwgYnVpbGRzIGZvciBGZWRvcmEu
-IEkgd2FzIGFibGUgdG8gZGV0ZXJtaW5lIHRoYXQgdGhlIHByb2JsZW0gd2FzCj4+Pj4+PiBpbnRy
-b2R1Y2VkIGJldHdlZW4gNS4zLjAtMC5yYzMuZ2l0MS4xIChjb21taXQgMzM5MjBmMWVjNWJmIC0g
-d29ya3MgZmluZSkKPj4+Pj4+IGFuZCA1LjMuMC0wLnJjNC5naXQwLjEgKHRhZyB2NS4zLXJjNCAt
-IGZhaWxzIHdpdGggZXJyb3JzKS4KPj4+Pj4+Cj4+Pj4+PiBJdCdzIGp1c3QgYSBmZXcgZGF5cyAo
-Ny0xMSBBdWcpIGFuZCAib25seSIgYXJvdW5kIDI1MCBjb21taXRzLiBJIHdlbnQKPj4+Pj4+IHRo
-cm91Z2ggdGhlbSwgYnV0IChiYXNlZCBvbiB0aGUgY29tbWl0cyBuYW1lKSBJIGhhdmVuJ3Qgc2Vl
-biBhbnkgbm91dmVhdQo+Pj4+Pj4gcmVsYXRlZCBjaGFuZ2VzIGFuZCBpbiBnZW5lcmFsIG5vIHZl
-cnkgc3VzcGVjdGVkIGRybSByZWxhdGVkIGNoYW5nZXMuCj4+Pj4+Pgo+Pj4+Pj4+IGdpdCBsb2cg
-MzM5MjBmMWVjNWJmLi52NS4zLXJjNCAtLXN0YXQKPj4+Pj4+Cj4+Pj4+Pgo+Pj4+Pj4gTWF5YmUg
-c29tZSBvZiBtb3JlIG5vdXZlYXUvZHJtLWV4cGVyaWVuY2VkIGRldmVsb3BlcnMgY291bGQgdGFr
-ZSBhIGxvb2sKPj4+Pj4+IGF0IHRoYXQgdG8gZGV0ZXJtaW5lIHdoaWNoIGNvbW1pdCBjb3VsZCBi
-cmVhayBpdCAodG8gbWFrZSBpdCBlYXNpZXIgdG8KPj4+Pj4+IGZpbmQgb3V0IHdoYXQgc2hvdWxk
-IGJlIGZpeGVkIHRvIHByZXZlbnQgdGhhdCByZWdyZXNzaW9uKT8KPj4+Pj4+Cj4+Pj4+Pgo+Pj4+
-Pj4gWzFdIC0KPj4+Pj4+IGh0dHBzOi8vZ2l0bGFiLmZyZWVkZXNrdG9wLm9yZy94b3JnL2RyaXZl
-ci94Zjg2LXZpZGVvLW5vdXZlYXUvaXNzdWVzLzUxNgo+Pj4+Pj4KPj4+Pj4+IFRoYW5rcyBpbiBh
-ZHZhbmNlCj4+Pj4+PiBNYXJjaW4KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX18KTm91dmVhdSBtYWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3Rv
-cC5vcmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2
-ZWF1Cg==
+On Thu, Dec 19, 2019 at 03:38:10PM -0500, Ilia Mirkin wrote:
+> Let's add Mika and Rafael, as they were responsible for that commit.
+> Mika/Rafael - any ideas? The commit in question is
+> 
+> 0617bdede5114a0002298b12cd0ca2b0cfd0395d
+
+This seems to be
+
+  Revert "PCI: Add missing link delays required by the PCIe spec"
+
+Can you try v5.5-rcX without any additional changes? It should include
+the same fix done bit differently (trying to avoid breaking systems
+which caused us to revert the previous one):
+
+  4827d63891b6 PCI/PM: Add pcie_wait_for_link_delay()
+  ad9001f2f411 PCI/PM: Add missing link delays required by the PCIe spec
+_______________________________________________
+Nouveau mailing list
+Nouveau@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/nouveau
