@@ -2,29 +2,27 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 62F8C12B2F4
-	for <lists+nouveau@lfdr.de>; Fri, 27 Dec 2019 09:15:16 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E143012B323
+	for <lists+nouveau@lfdr.de>; Fri, 27 Dec 2019 09:16:12 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 30CD86E3B7;
-	Fri, 27 Dec 2019 08:14:13 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id EACD56E3F3;
+	Fri, 27 Dec 2019 08:14:40 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 958 seconds by postgrey-1.36 at gabe;
- Fri, 20 Dec 2019 14:21:56 UTC
-Received: from huawei.com (szxga04-in.huawei.com [45.249.212.190])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6F6FD6EC34;
- Fri, 20 Dec 2019 14:21:56 +0000 (UTC)
-Received: from DGGEMS414-HUB.china.huawei.com (unknown [172.30.72.60])
- by Forcepoint Email with ESMTP id 1E4A9BC1327BD4EB006A;
- Fri, 20 Dec 2019 22:05:54 +0800 (CST)
-Received: from huawei.com (10.175.127.16) by DGGEMS414-HUB.china.huawei.com
- (10.3.19.214) with Microsoft SMTP Server id 14.3.439.0; Fri, 20 Dec 2019
- 22:05:46 +0800
+Received: from huawei.com (szxga07-in.huawei.com [45.249.212.35])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7740A6E423;
+ Sat, 21 Dec 2019 03:53:03 +0000 (UTC)
+Received: from DGGEMS405-HUB.china.huawei.com (unknown [172.30.72.59])
+ by Forcepoint Email with ESMTP id 14137746516A4DE70EEB;
+ Sat, 21 Dec 2019 11:53:00 +0800 (CST)
+Received: from huawei.com (10.175.127.16) by DGGEMS405-HUB.china.huawei.com
+ (10.3.19.205) with Microsoft SMTP Server id 14.3.439.0; Sat, 21 Dec 2019
+ 11:52:49 +0800
 From: wuxu.wu <wuxu.wu@huawei.com>
 To: <airlied@linux.ie>, <daniel@ffwll.ch>, <dri-devel@lists.freedesktop.org>, 
  <bskeggs@redhat.com>
-Date: Fri, 20 Dec 2019 22:05:26 +0800
-Message-ID: <1576850726-5684-1-git-send-email-wuxu.wu@huawei.com>
+Date: Sat, 21 Dec 2019 11:52:29 +0800
+Message-ID: <1576900349-3786-1-git-send-email-wuxu.wu@huawei.com>
 X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
 X-Originating-IP: [10.175.127.16]
@@ -51,6 +49,8 @@ Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 priv porinter could be free only when priv != null and priv->rom is null.
+
+Signed-off-by: wuxu.wu <wuxu.wu@huawei.com>
 ---
  drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadowpci.c | 3 ++-
  1 file changed, 2 insertions(+), 1 deletion(-)
