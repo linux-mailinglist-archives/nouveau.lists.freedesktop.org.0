@@ -1,44 +1,44 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 656CA12B4DA
-	for <lists+nouveau@lfdr.de>; Fri, 27 Dec 2019 14:30:18 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0FC5D12B4DB
+	for <lists+nouveau@lfdr.de>; Fri, 27 Dec 2019 14:31:19 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A38D66E43C;
-	Fri, 27 Dec 2019 13:30:16 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9CBD46E445;
+	Fri, 27 Dec 2019 13:31:17 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ua1-f68.google.com (mail-ua1-f68.google.com
- [209.85.222.68])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D9E4D6E43C
- for <nouveau@lists.freedesktop.org>; Fri, 27 Dec 2019 13:30:15 +0000 (UTC)
-Received: by mail-ua1-f68.google.com with SMTP id 59so9052533uap.12
- for <nouveau@lists.freedesktop.org>; Fri, 27 Dec 2019 05:30:15 -0800 (PST)
+Received: from mail-ua1-f52.google.com (mail-ua1-f52.google.com
+ [209.85.222.52])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 98E786E445
+ for <nouveau@lists.freedesktop.org>; Fri, 27 Dec 2019 13:31:16 +0000 (UTC)
+Received: by mail-ua1-f52.google.com with SMTP id a12so9071711uan.0
+ for <nouveau@lists.freedesktop.org>; Fri, 27 Dec 2019 05:31:16 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=uL5bPGr1/xPpwmfePLmi+XPi7cR8qhxOFLqggwqhKwA=;
- b=HmGR8183libgHn+R1ft/hcqLezhH/IL7MHC2EzdXQjvkq9nB6QtWIqw+LMDCowVXBK
- CqQdmMEHT2ZZLwFzrORopfE/wF+SsOhH2IjMsixhAsoSjruO7IQBXsBYE2kqOFZoXAhp
- nCAT4nsV8aIYlX3Ze0gnds9ZBVaAyDEtU650u4iSkTrOgr7r8PDeFV2EAPJXM8MgVOgd
- oZ1OL6fXFkXQJdFHZIlWYySoL2r4pufj6msxKgGgiKJEjEbNLiZdWtbkw6tEGxjr7s/i
- wYW3yXVkh7h+xBF4VFeiFV9qbF3+OFYKT8tVK3jToAUDAdbL+7e1tqTMIJ4J/1hEAg30
- 9xIQ==
-X-Gm-Message-State: APjAAAUunhDdxN25j0bu37Knb6P6r9rR5kzZ9BJSy1hB5fHlTTKCclF+
- YvTwb+oZW2yFQ4CgLvm4D4aEWXXnIUDbAnpYFfw=
-X-Google-Smtp-Source: APXvYqyi+RlSjfDwhJ59TjZZa3F13qSzf8GBuo5jRWlrKISODDEW2/9sJU4Ywcz0nuGGj6VuBClxQwAvfX4spe4nC68=
-X-Received: by 2002:ab0:266:: with SMTP id 93mr30315588uas.58.1577453415001;
- Fri, 27 Dec 2019 05:30:15 -0800 (PST)
+ bh=FL9h/+KoyEZKmSeDJXbAFug6VXPK2bqSgo3SlR5J7zQ=;
+ b=RHNN1eTM38M+3V4U4mtPAleN6RJY31zx8hqdt6GPCu6E8qwMC4nPWRu52YsFRJPiTq
+ 1TJXKAt8nZPQLciTxsCD/V3TLwhL+5k4cktM9ugoxa5BZnIiBz2wtIzKXdbCkDjQNkDA
+ HQdW1+xNBBmrrs7pyLcgtujLBRmL5lpc8U+PYo72z9mblm7cELgTWzqsDmM/IWOCcADu
+ 3HqODF0KjIZQZBdpb+B8YklXdCRR7s2LjePVrt+nP/SUBh6h0veioUJcJBQCNUWDV4tK
+ i8xQNvErOiaHnVfyzw1lfcV6IxFzw3tALl0cqS0LnSCj74+WiF7+XQxJDmgT7gtzAFQz
+ mbcw==
+X-Gm-Message-State: APjAAAXIuBUTginK2cjJ9o1mTszLc8ZZJF9L4ICmwinYjauIwsa55n9o
+ cX0qLOD62jFsmAH6Gszyzsx3icIJCH59FPHn1NkVIc/X
+X-Google-Smtp-Source: APXvYqw4Ko2cs7S2Smxn/TMrd8rCkW5D3gSQ4mloMASnr8B8RyBd2vjr3C5clQOoK5ZiIyXAWeCk+Zg8PJNbCREKM3Q=
+X-Received: by 2002:ab0:63c7:: with SMTP id i7mr28144130uap.109.1577453475785; 
+ Fri, 27 Dec 2019 05:31:15 -0800 (PST)
 MIME-Version: 1.0
-References: <CAPm7QYwHte2HzRWGS--BLGvh8aT8EFnc=145KgChFOVuKR5DOg@mail.gmail.com>
-In-Reply-To: <CAPm7QYwHte2HzRWGS--BLGvh8aT8EFnc=145KgChFOVuKR5DOg@mail.gmail.com>
+References: <BN6PR01MB233713E4E456F3C33AF3CAB9E32D0@BN6PR01MB2337.prod.exchangelabs.com>
+In-Reply-To: <BN6PR01MB233713E4E456F3C33AF3CAB9E32D0@BN6PR01MB2337.prod.exchangelabs.com>
 From: Ilia Mirkin <imirkin@alum.mit.edu>
-Date: Fri, 27 Dec 2019 08:30:03 -0500
-Message-ID: <CAKb7Uvjdt6ypoK3O-HNGYr=Xn9CcU7p5k-dqvu4OAFyUJkqYcg@mail.gmail.com>
-To: Jerry Sanders <dragonspark30@gmail.com>
-Subject: Re: [Nouveau] Support for older GPU
+Date: Fri, 27 Dec 2019 08:31:04 -0500
+Message-ID: <CAKb7UvheYyPgSgkVXxd+U4tQdAA+Zq0hOv1nnmG7cHskA=vEfA@mail.gmail.com>
+To: Jairo Quintanilla <jairo_6875@hotmail.com>
+Subject: Re: [Nouveau] Flickering Nvidia GeForce GT210
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -50,32 +50,30 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau <nouveau@lists.freedesktop.org>
+Cc: "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Nouveau should work largely OK, although the Tesla series (to which
-your card belongs) has some unfortunate random hang issues due to what
-we suspect is an incorrect FIFO channel switch procedure.
+Are you on Xorg or wayland of some sort? If on Xorg, which DDX are you
+using -- nouveau or modesetting?
 
-Support should already exist in any linux distro, so as long as you
-don't do anything to proactively disable that support, it should work
-out of the box. You can try with a live cd or something if you don't
-want to commit.
-
-Cheers,
-
-  -ilia
-
-On Fri, Dec 27, 2019 at 3:13 AM Jerry Sanders <dragonspark30@gmail.com> wrote:
+On Fri, Dec 27, 2019 at 3:13 AM Jairo Quintanilla
+<jairo_6875@hotmail.com> wrote:
 >
-> Hello, Name's Jerry. I have GeForce 8500 GT on my computer and I found out that Nvidia does not support my GPU anymore for linux. I wanted to ask you several questions.
-> 1. Will your team support  drivers for old GPUs  on new Linux distros?
-> 2. How can I make a driver work on a kernel that is not meant to work on?
-> 3. Can I somehow solve this problem without updating my card, which i can't do due to lack or cash.
+> Hi mates,
 >
+> First to all thanks for your help.
+>
+> I've installed Nouveau driver for my Nvidia GeForce GT210 using Archlinux, but I have some flickering issues when playing videos, only in the video windows.
+>
+> Sometimes I can see some flickering when scrolling.
+>
+> Please help. I don't know how to fix it.
+>
+>
+> Atte. Jairo Quintanilla
 > _______________________________________________
 > Nouveau mailing list
 > Nouveau@lists.freedesktop.org
