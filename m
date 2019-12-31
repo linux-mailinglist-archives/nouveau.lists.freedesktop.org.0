@@ -1,64 +1,57 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2FE1B12E037
-	for <lists+nouveau@lfdr.de>; Wed,  1 Jan 2020 19:51:55 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id E96AB12EA7B
+	for <lists+nouveau@lfdr.de>; Thu,  2 Jan 2020 20:29:35 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 83E2389A4B;
-	Wed,  1 Jan 2020 18:51:53 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 099FF6E13C;
+	Thu,  2 Jan 2020 19:29:29 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wm1-x344.google.com (mail-wm1-x344.google.com
- [IPv6:2a00:1450:4864:20::344])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D43B889AA2
- for <nouveau@lists.freedesktop.org>; Wed,  1 Jan 2020 18:51:52 +0000 (UTC)
-Received: by mail-wm1-x344.google.com with SMTP id a5so4000814wmb.0
- for <nouveau@lists.freedesktop.org>; Wed, 01 Jan 2020 10:51:52 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
- h=date:from:to:cc:subject:message-id:mail-followup-to:references
- :mime-version:content-disposition:in-reply-to;
- bh=D8uPCxi3Y1/pc0576oAFGCcv9ILxWB3/3GiCiHCXgko=;
- b=CovNZjlE6y41FxRRV2dQgC2LXmUHj1E8p0Nrv8qiRfWxbkQdYpbWLSMjj/b+oII78U
- wl3wEHZITaqtJDiX2UUnM3rU9Poj3VDz0KTlFfXfgsLsgcwqUU8n+ad18kAFMtdYP3Nl
- H6F+gk0amyScbp2FsWH2Pzgq8Mylv+lGIT/y0=
+Received: from mail-ed1-x543.google.com (mail-ed1-x543.google.com
+ [IPv6:2a00:1450:4864:20::543])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A759D89D4B;
+ Tue, 31 Dec 2019 20:53:52 +0000 (UTC)
+Received: by mail-ed1-x543.google.com with SMTP id t17so35994173eds.6;
+ Tue, 31 Dec 2019 12:53:52 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=from:to:subject:date:message-id;
+ bh=NxVPnp1vgRmjH7L7kENjVVXZ5KNtEIGxlFIHfBLkDO0=;
+ b=Gt88ScDFSWLyoxvwTcRbq/5RlwwcCXcfGvg/V8/xg1HspxXhgUgOTDJHotVZbkGEUa
+ hRKxkFOtZ6FPJ8HmLF2h7/oxLvn/+rTsGl5YJbjSlqpFlDPoOke5h56RrKl12GepViuz
+ SlAtu/m7n/+ZlgvIgYDNk1SRN8raTca+hfNKWHyg5n1l8K6zY2rCCI4ykQ7V20XWcdo4
+ Pq1yUdjXqPNYwWWFmUFUGIOPkFsuvrXE3RlmTnkt47TfUJ/c+4B0bpqe05u6eVjmTn39
+ t0RcCciVUWjgJp9feY1rGp7whMb4RCRRg+rLRBWj0huSpYNMa2YWfMCw8HGJdjT1wvZN
+ j61w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id
- :mail-followup-to:references:mime-version:content-disposition
- :in-reply-to;
- bh=D8uPCxi3Y1/pc0576oAFGCcv9ILxWB3/3GiCiHCXgko=;
- b=fy3OyhEyEsgfrgQcmhPmtAyHQA6r87fjTwibFvyQ1xyyg8dpjdfchl2iO3lzQ7F9Ht
- ieCPD4XwSkjrBOp8qWZs5UUyy5EkDMdFrrKWHFavOMveFioazX0lQaRMCpwUIWcyTdw0
- /GADRBnAwfwjKOm2MUjnGo8AD6X9dysktbKtWqhqu8AYKlInmULH5W86Cisrfy5j0oAd
- 5FuQe+3W7YD0EJMAsp+hRsaRvWWtvDuPhZdL8f7EvGQohnpy2taaoI6R1F+1pZFhDvU+
- FTXlmkzy+zjYv4a2NiutulzD7UEmM+XUJf8jeIeTn+34SJ+j4aaGpeQ1EJfPTE2tbcgl
- 7pgg==
-X-Gm-Message-State: APjAAAUrspO1rtDgbmH+4YZrOHYmxTrsAQMeyhdYvkdMF9zg1dg+njDu
- 8mmdtXz/GpXBKXdSVY0AbyxjNw==
-X-Google-Smtp-Source: APXvYqyjqRvgYGtxavvSSbnVsxx3hbCvsLvioRActoXXQldrptMzEMi+l6Q2nwcO1dPqXP/rbpsjRA==
-X-Received: by 2002:a05:600c:224d:: with SMTP id
- a13mr10459265wmm.70.1577904711502; 
- Wed, 01 Jan 2020 10:51:51 -0800 (PST)
-Received: from dvetter-linux.ger.corp.intel.com ([194.230.159.125])
- by smtp.gmail.com with ESMTPSA id b21sm6272694wmd.37.2020.01.01.10.51.49
+ h=x-gm-message-state:from:to:subject:date:message-id;
+ bh=NxVPnp1vgRmjH7L7kENjVVXZ5KNtEIGxlFIHfBLkDO0=;
+ b=suMlk36CSndE9JMrufIfzYeiOeYJ/Rxs5t5BjS0HZdh/cz9wH97Tj2Cxp4SHmRM0ZC
+ fT8j8JTe396YobNmnIjyhtA9a52Y5s0QGRNTCGNLJN+zAW92Q/5NF22EoiEmL2iGCjAg
+ kFfcHkQf9emsJO5lGrPpU5iR7qXI7Ur8DaXHOm/2xpXk2mmUy24yG2uqioWRbZ5JPoYs
+ Qe0nlFCmx6I3C9YjPcBJ3bMQv/+3SqOAc1jvYTadItecEr8Rq3pgUG+qxtkbOZAdXKcF
+ BW2BSOFOGDTX00nRJIv+xHiAXMgexmYM0WvEkHcwMZIvaHbANwfo5GzQzQOMJtju55jn
+ Xu4w==
+X-Gm-Message-State: APjAAAVv7KHoPPIjU0090/28RaA5+jHK6d1N+ukAPn0oiTN5+0QznfmR
+ X96HhIFhqVCDT+QTyk4GM9Y=
+X-Google-Smtp-Source: APXvYqxxUopZ/8pdt6GG0GgS0PFcwFypu8zzOhpDLyQ5fvLYLnMBZmjcdQphbEQIDVYCAE0DxMeoOA==
+X-Received: by 2002:a50:fb0b:: with SMTP id d11mr78494047edq.252.1577825630876; 
+ Tue, 31 Dec 2019 12:53:50 -0800 (PST)
+Received: from localhost.localdomain ([197.254.95.38])
+ by smtp.googlemail.com with ESMTPSA id y25sm6367432ejj.68.2019.12.31.12.53.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 Jan 2020 10:51:50 -0800 (PST)
-Date: Wed, 1 Jan 2020 19:51:47 +0100
-From: Daniel Vetter <daniel@ffwll.ch>
-To: Wambui Karuga <wambui.karugax@gmail.com>
-Message-ID: <20200101185147.GB3856@dvetter-linux.ger.corp.intel.com>
-Mail-Followup-To: Wambui Karuga <wambui.karugax@gmail.com>,
- bskeggs@redhat.com, airlied@linux.ie,
+ Tue, 31 Dec 2019 12:53:50 -0800 (PST)
+From: Wambui Karuga <wambui.karugax@gmail.com>
+To: bskeggs@redhat.com, airlied@linux.ie, daniel@ffwll.ch,
  dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
  linux-kernel@vger.kernel.org
-References: <20191231205734.1452-1-wambui.karugax@gmail.com>
-MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20191231205734.1452-1-wambui.karugax@gmail.com>
-X-Operating-System: Linux dvetter-linux.ger.corp.intel.com
- 5.2.11-200.fc30.x86_64 
-Subject: Re: [Nouveau] [PATCH] drm/nouveau: use NULL for pointer assignment.
+Date: Tue, 31 Dec 2019 23:53:45 +0300
+Message-Id: <20191231205345.32615-1-wambui.karugax@gmail.com>
+X-Mailer: git-send-email 2.17.1
+X-Mailman-Approved-At: Thu, 02 Jan 2020 19:29:27 +0000
+Subject: [Nouveau] [PATCH] drm/nouveau: declare constants as unsigned long.
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,52 +63,107 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: airlied@linux.ie, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- bskeggs@redhat.com, daniel@ffwll.ch
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, Dec 31, 2019 at 11:57:34PM +0300, Wambui Karuga wrote:
-> Replace the use of 0 in the pointer assignment with NULL to address the
-> following sparse warning:
-> drivers/gpu/drm/nouveau/nouveau_hwmon.c:744:29: warning: Using plain integer as NULL pointer
-> 
-> Signed-off-by: Wambui Karuga <wambui.karugax@gmail.com>
+Explicitly declare constants are unsigned long to address the following
+sparse warnings:
+warning: constant is so big it is long
 
-Reviewed-by: Daniel Vetter <daniel.vetter@ffwll.ch>
+Signed-off-by: Wambui Karuga <wambui.karugax@gmail.com>
+---
+ drivers/gpu/drm/nouveau/nvkm/subdev/fb/ramgf100.c | 2 +-
+ drivers/gpu/drm/nouveau/nvkm/subdev/fb/ramgf108.c | 2 +-
+ drivers/gpu/drm/nouveau/nvkm/subdev/fb/ramgk104.c | 2 +-
+ drivers/gpu/drm/nouveau/nvkm/subdev/fb/ramgm107.c | 2 +-
+ drivers/gpu/drm/nouveau/nvkm/subdev/fb/ramgm200.c | 2 +-
+ drivers/gpu/drm/nouveau/nvkm/subdev/fb/ramgp100.c | 2 +-
+ 6 files changed, 6 insertions(+), 6 deletions(-)
 
-I'll check with Ben next week or so whether he wants to pick these up or
-whether I should stuff them into drm-misc-next.
--Daniel
-
-> ---
->  drivers/gpu/drm/nouveau/nouveau_hwmon.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_hwmon.c b/drivers/gpu/drm/nouveau/nouveau_hwmon.c
-> index d445c6f3fece..1c3104d20571 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_hwmon.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_hwmon.c
-> @@ -741,7 +741,7 @@ nouveau_hwmon_init(struct drm_device *dev)
->  			special_groups[i++] = &pwm_fan_sensor_group;
->  	}
->  
-> -	special_groups[i] = 0;
-> +	special_groups[i] = NULL;
->  	hwmon_dev = hwmon_device_register_with_info(dev->dev, "nouveau", dev,
->  							&nouveau_chip_info,
->  							special_groups);
-> -- 
-> 2.17.1
-> 
-
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/ramgf100.c b/drivers/gpu/drm/nouveau/nvkm/subdev/fb/ramgf100.c
+index ac87a3b6b7c9..506b358fcdb6 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/ramgf100.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/fb/ramgf100.c
+@@ -655,7 +655,7 @@ gf100_ram_new_(const struct nvkm_ram_func *func,
+ 
+ static const struct nvkm_ram_func
+ gf100_ram = {
+-	.upper = 0x0200000000,
++	.upper = 0x0200000000UL,
+ 	.probe_fbp = gf100_ram_probe_fbp,
+ 	.probe_fbp_amount = gf100_ram_probe_fbp_amount,
+ 	.probe_fbpa_amount = gf100_ram_probe_fbpa_amount,
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/ramgf108.c b/drivers/gpu/drm/nouveau/nvkm/subdev/fb/ramgf108.c
+index 70a06e3cd55a..3bc39895bbce 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/ramgf108.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/fb/ramgf108.c
+@@ -43,7 +43,7 @@ gf108_ram_probe_fbp_amount(const struct nvkm_ram_func *func, u32 fbpao,
+ 
+ static const struct nvkm_ram_func
+ gf108_ram = {
+-	.upper = 0x0200000000,
++	.upper = 0x0200000000UL,
+ 	.probe_fbp = gf100_ram_probe_fbp,
+ 	.probe_fbp_amount = gf108_ram_probe_fbp_amount,
+ 	.probe_fbpa_amount = gf100_ram_probe_fbpa_amount,
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/ramgk104.c b/drivers/gpu/drm/nouveau/nvkm/subdev/fb/ramgk104.c
+index 456aed1f2a02..d01f32c0956a 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/ramgk104.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/fb/ramgk104.c
+@@ -1698,7 +1698,7 @@ gk104_ram_new_(const struct nvkm_ram_func *func, struct nvkm_fb *fb,
+ 
+ static const struct nvkm_ram_func
+ gk104_ram = {
+-	.upper = 0x0200000000,
++	.upper = 0x0200000000UL,
+ 	.probe_fbp = gf100_ram_probe_fbp,
+ 	.probe_fbp_amount = gf108_ram_probe_fbp_amount,
+ 	.probe_fbpa_amount = gf100_ram_probe_fbpa_amount,
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/ramgm107.c b/drivers/gpu/drm/nouveau/nvkm/subdev/fb/ramgm107.c
+index 27c68e3f9772..e24ac664eb15 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/ramgm107.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/fb/ramgm107.c
+@@ -33,7 +33,7 @@ gm107_ram_probe_fbp(const struct nvkm_ram_func *func,
+ 
+ static const struct nvkm_ram_func
+ gm107_ram = {
+-	.upper = 0x1000000000,
++	.upper = 0x1000000000UL,
+ 	.probe_fbp = gm107_ram_probe_fbp,
+ 	.probe_fbp_amount = gf108_ram_probe_fbp_amount,
+ 	.probe_fbpa_amount = gf100_ram_probe_fbpa_amount,
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/ramgm200.c b/drivers/gpu/drm/nouveau/nvkm/subdev/fb/ramgm200.c
+index 6b0cac1fe7b4..17994cbda54b 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/ramgm200.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/fb/ramgm200.c
+@@ -48,7 +48,7 @@ gm200_ram_probe_fbp_amount(const struct nvkm_ram_func *func, u32 fbpao,
+ 
+ static const struct nvkm_ram_func
+ gm200_ram = {
+-	.upper = 0x1000000000,
++	.upper = 0x1000000000UL,
+ 	.probe_fbp = gm107_ram_probe_fbp,
+ 	.probe_fbp_amount = gm200_ram_probe_fbp_amount,
+ 	.probe_fbpa_amount = gf100_ram_probe_fbpa_amount,
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/ramgp100.c b/drivers/gpu/drm/nouveau/nvkm/subdev/fb/ramgp100.c
+index adb62a6beb63..7a07a6ed4578 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/fb/ramgp100.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/fb/ramgp100.c
+@@ -79,7 +79,7 @@ gp100_ram_probe_fbpa(struct nvkm_device *device, int fbpa)
+ 
+ static const struct nvkm_ram_func
+ gp100_ram = {
+-	.upper = 0x1000000000,
++	.upper = 0x1000000000UL,
+ 	.probe_fbp = gm107_ram_probe_fbp,
+ 	.probe_fbp_amount = gm200_ram_probe_fbp_amount,
+ 	.probe_fbpa_amount = gp100_ram_probe_fbpa,
 -- 
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
+2.17.1
+
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
