@@ -1,45 +1,37 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7613712F7F9
-	for <lists+nouveau@lfdr.de>; Fri,  3 Jan 2020 13:06:33 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id BBD5812F8BF
+	for <lists+nouveau@lfdr.de>; Fri,  3 Jan 2020 14:25:53 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 928526E2D7;
-	Fri,  3 Jan 2020 12:06:31 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E52536E2FF;
+	Fri,  3 Jan 2020 13:25:51 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mupuf.org (mupuf.org [167.71.42.210])
- by gabe.freedesktop.org (Postfix) with ESMTP id 36CC26E2D7
- for <nouveau@lists.freedesktop.org>; Fri,  3 Jan 2020 12:06:30 +0000 (UTC)
-Received: from [192.168.0.115] (84-104-227-30.cable.dynamic.v4.ziggo.nl
- [84.104.227.30])
- by Neelix.spliet.org (Postfix) with ESMTPSA id F2D1260041;
- Fri,  3 Jan 2020 11:58:23 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 Neelix.spliet.org F2D1260041
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=spliet.org;
- s=default; t=1578052704;
- bh=if3OT7trk+3D0p1H1q4P0eAOtA0IRNZQ1F4gmGc6w9U=;
- h=Subject:To:References:From:Date:In-Reply-To:From;
- b=ros4K5vIElpf/kXtFwsMHIG2wuF7Nl5IHl1VQOxOEfYAKTwHp86YIBGkemuSthaCw
- r2Z2wQX0lnIN5avc5FH15cRiMyAof84f+Z+c239k1xVbUrURBXkKJ3LSBz5bsnL+Sk
- C0kDxGNiqiwsJo49hHsGSZpwkcc66Xl7zQ8w3OBg=
-To: nouveau@lists.freedesktop.org, "wuxu.wu" <wuxu.wu@huawei.com>
+Received: from huawei.com (szxga07-in.huawei.com [45.249.212.35])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D1DE16E2FF
+ for <nouveau@lists.freedesktop.org>; Fri,  3 Jan 2020 13:25:50 +0000 (UTC)
+Received: from DGGEMS403-HUB.china.huawei.com (unknown [172.30.72.60])
+ by Forcepoint Email with ESMTP id 8606E88DD324DA67D18B;
+ Fri,  3 Jan 2020 21:25:47 +0800 (CST)
+Received: from [127.0.0.1] (10.173.222.238) by DGGEMS403-HUB.china.huawei.com
+ (10.3.19.203) with Microsoft SMTP Server id 14.3.439.0;
+ Fri, 3 Jan 2020 21:25:44 +0800
+To: Roy Spliet <nouveau@spliet.org>, <nouveau@lists.freedesktop.org>
 References: <1578039033-6458-1-git-send-email-wuxu.wu@huawei.com>
-From: Roy Spliet <nouveau@spliet.org>
-Message-ID: <fd3273d3-5814-be43-dbec-e49bc7990705@spliet.org>
-Date: Fri, 3 Jan 2020 12:58:23 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.3.1
+ <fd3273d3-5814-be43-dbec-e49bc7990705@spliet.org>
+From: "Wuxu (Max)" <wuxu.wu@huawei.com>
+Organization: huawei
+Message-ID: <9a86afda-9ee3-058d-a4b1-88606b8bfcc1@huawei.com>
+Date: Fri, 3 Jan 2020 21:25:38 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101
+ Thunderbird/68.2.0
 MIME-Version: 1.0
-In-Reply-To: <1578039033-6458-1-git-send-email-wuxu.wu@huawei.com>
+In-Reply-To: <fd3273d3-5814-be43-dbec-e49bc7990705@spliet.org>
 Content-Language: en-US
-X-Spam-Status: No, score=-3.1 required=5.0 tests=ALL_TRUSTED,BAYES_00,
- DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,URIBL_BLOCKED
- autolearn=unavailable autolearn_force=no version=3.4.2
-X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on Neelix
-X-Virus-Scanned: clamav-milter 0.101.5 at Neelix
-X-Virus-Status: Clean
+X-Originating-IP: [10.173.222.238]
+X-CFilter-Loop: Reflected
 Subject: Re: [Nouveau] [PATCH] drm/nouveau/bios: fix incorrect kfree in
  platform_init
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -53,45 +45,40 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
+Reply-To: wuxu.wu@huawei.com
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-(re-sending as plain text)
-
-NACK. The before and after of this patch are functionally identical. The 
-if-block returns unconditionally ("return priv;"), so the kfree will 
-only ever be reached if the condition in the if-statement evaluates to 
-false. Explicitly writing out an else-block is thus superfluous.
-
-Op 03-01-2020 om 09:10 schreef wuxu.wu:
-> Hi, I think there has a incorrect kfree in pcirom_init function. In
-> pcirom_init function priv porinter could be free only when priv != null
-> and priv->rom is null.
-> 
-> Signed-off-by: wuxu.wu <wuxu.wu@huawei.com>
-> ---
->   drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadowpci.c | 3 ++-
->   1 file changed, 2 insertions(+), 1 deletion(-)
-> 
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadowpci.c b/drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadowpci.c
-> index 9b91da0..d776e01 100644
-> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadowpci.c
-> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadowpci.c
-> @@ -70,8 +70,9 @@ pcirom_init(struct nvkm_bios *bios, const char *name)
->   			    (priv->rom = pci_map_rom(pdev, &priv->size))) {
->   				priv->pdev = pdev;
->   				return priv;
-> +			} else {
-> +			    kfree(priv);
->   			}
-> -			kfree(priv);
->   		}
->   		pci_disable_rom(pdev);
->   	}
-> 
-_______________________________________________
-Nouveau mailing list
-Nouveau@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/nouveau
+VGhhbmsgeW91LCBJIGdvdCBpdAoKT24gMjAyMC8xLzMgMTk6NTgsIFJveSBTcGxpZXQgd3JvdGU6
+Cj4gKHJlLXNlbmRpbmcgYXMgcGxhaW4gdGV4dCkKPiAKPiBOQUNLLiBUaGUgYmVmb3JlIGFuZCBh
+ZnRlciBvZiB0aGlzIHBhdGNoIGFyZSBmdW5jdGlvbmFsbHkgaWRlbnRpY2FsLiBUaGUgaWYtYmxv
+Y2sgcmV0dXJucyB1bmNvbmRpdGlvbmFsbHkgKCJyZXR1cm4gcHJpdjsiKSwgc28gdGhlIGtmcmVl
+IHdpbGwgb25seSBldmVyIGJlIHJlYWNoZWQgaWYgdGhlIGNvbmRpdGlvbiBpbiB0aGUgaWYtc3Rh
+dGVtZW50IGV2YWx1YXRlcyB0byBmYWxzZS4gRXhwbGljaXRseSB3cml0aW5nIG91dCBhbiBlbHNl
+LWJsb2NrIGlzIHRodXMgc3VwZXJmbHVvdXMuCj4gCj4gT3AgMDMtMDEtMjAyMCBvbSAwOToxMCBz
+Y2hyZWVmIHd1eHUud3U6Cj4+IEhpLCBJIHRoaW5rIHRoZXJlIGhhcyBhIGluY29ycmVjdCBrZnJl
+ZSBpbiBwY2lyb21faW5pdCBmdW5jdGlvbi4gSW4KPj4gcGNpcm9tX2luaXQgZnVuY3Rpb24gcHJp
+diBwb3JpbnRlciBjb3VsZCBiZSBmcmVlIG9ubHkgd2hlbiBwcml2ICE9IG51bGwKPj4gYW5kIHBy
+aXYtPnJvbSBpcyBudWxsLgo+Pgo+PiBTaWduZWQtb2ZmLWJ5OiB3dXh1Lnd1IDx3dXh1Lnd1QGh1
+YXdlaS5jb20+Cj4+IC0tLQo+PiDCoCBkcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9udmttL3N1YmRl
+di9iaW9zL3NoYWRvd3BjaS5jIHwgMyArKy0KPj4gwqAgMSBmaWxlIGNoYW5nZWQsIDIgaW5zZXJ0
+aW9ucygrKSwgMSBkZWxldGlvbigtKQo+Pgo+PiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJt
+L25vdXZlYXUvbnZrbS9zdWJkZXYvYmlvcy9zaGFkb3dwY2kuYyBiL2RyaXZlcnMvZ3B1L2RybS9u
+b3V2ZWF1L252a20vc3ViZGV2L2Jpb3Mvc2hhZG93cGNpLmMKPj4gaW5kZXggOWI5MWRhMC4uZDc3
+NmUwMSAxMDA2NDQKPj4gLS0tIGEvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbnZrbS9zdWJkZXYv
+Ymlvcy9zaGFkb3dwY2kuYwo+PiArKysgYi9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9udmttL3N1
+YmRldi9iaW9zL3NoYWRvd3BjaS5jCj4+IEBAIC03MCw4ICs3MCw5IEBAIHBjaXJvbV9pbml0KHN0
+cnVjdCBudmttX2Jpb3MgKmJpb3MsIGNvbnN0IGNoYXIgKm5hbWUpCj4+IMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqAgKHByaXYtPnJvbSA9IHBjaV9tYXBfcm9tKHBkZXYsICZwcml2
+LT5zaXplKSkpIHsKPj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBwcml2LT5w
+ZGV2ID0gcGRldjsKPj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCByZXR1cm4g
+cHJpdjsKPj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfSBlbHNlIHsKPj4gK8KgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoCBrZnJlZShwcml2KTsKPj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqAgfQo+PiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBrZnJlZShwcml2KTsKPj4gwqDCoMKg
+wqDCoMKgwqDCoMKgIH0KPj4gwqDCoMKgwqDCoMKgwqDCoMKgIHBjaV9kaXNhYmxlX3JvbShwZGV2
+KTsKPj4gwqDCoMKgwqDCoCB9Cj4+Cj4gCj4gLgoKX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBtYWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5m
+cmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0
+aW5mby9ub3V2ZWF1Cg==
