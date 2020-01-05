@@ -2,38 +2,56 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id BBD5812F8BF
-	for <lists+nouveau@lfdr.de>; Fri,  3 Jan 2020 14:25:53 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id F28DA130A1A
+	for <lists+nouveau@lfdr.de>; Sun,  5 Jan 2020 23:07:04 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E52536E2FF;
-	Fri,  3 Jan 2020 13:25:51 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E570989DC0;
+	Sun,  5 Jan 2020 22:06:58 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from huawei.com (szxga07-in.huawei.com [45.249.212.35])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D1DE16E2FF
- for <nouveau@lists.freedesktop.org>; Fri,  3 Jan 2020 13:25:50 +0000 (UTC)
-Received: from DGGEMS403-HUB.china.huawei.com (unknown [172.30.72.60])
- by Forcepoint Email with ESMTP id 8606E88DD324DA67D18B;
- Fri,  3 Jan 2020 21:25:47 +0800 (CST)
-Received: from [127.0.0.1] (10.173.222.238) by DGGEMS403-HUB.china.huawei.com
- (10.3.19.203) with Microsoft SMTP Server id 14.3.439.0;
- Fri, 3 Jan 2020 21:25:44 +0800
-To: Roy Spliet <nouveau@spliet.org>, <nouveau@lists.freedesktop.org>
-References: <1578039033-6458-1-git-send-email-wuxu.wu@huawei.com>
- <fd3273d3-5814-be43-dbec-e49bc7990705@spliet.org>
-From: "Wuxu (Max)" <wuxu.wu@huawei.com>
-Organization: huawei
-Message-ID: <9a86afda-9ee3-058d-a4b1-88606b8bfcc1@huawei.com>
-Date: Fri, 3 Jan 2020 21:25:38 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101
- Thunderbird/68.2.0
+Received: from mail-vs1-xe44.google.com (mail-vs1-xe44.google.com
+ [IPv6:2607:f8b0:4864:20::e44])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5BD6D89DB9;
+ Sun,  5 Jan 2020 22:06:57 +0000 (UTC)
+Received: by mail-vs1-xe44.google.com with SMTP id x18so30539893vsq.4;
+ Sun, 05 Jan 2020 14:06:57 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=Uw6b7W2hJ0QLRZ1xDtPnAWhipPvQAM3seWtHwc/JeWI=;
+ b=n4jadz24z7JBewNrViqatR++YynQbD5azEZKxjZxFfvD368syVdZM1Ub7qpNXso0kX
+ rhnOVjJ964h2axKqSfgW9ZGznWx5H37Wta9Zic+/tf5qtQ3Kw2Jls8ePPuwAIH1LEu9n
+ /ITeQn9WUJVapcMrLG2KqGvJlEZkHWC6J9Chv4sGuO13joIoxXIoAoYk7zPjHfgnkxyG
+ pC+oU2JPFCZTH5XDn5WF5GCI5f14EuYDHEsIWPn7tdx59Ebsi9LeB6pvCQsmpJ98ToEc
+ geFFpUkywXbDL6iGW5LiilUZSb4WgxoECXQMA9oHdFfJkBZb1wyCeHD/MqBNwxnnlp+k
+ 9zzg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=Uw6b7W2hJ0QLRZ1xDtPnAWhipPvQAM3seWtHwc/JeWI=;
+ b=QVwyqkslOzTeL003ghehOJ8GA5qtUFA9dfWxjXzFn1vdAcQsYyd5hkm6yPCcAGlSKC
+ eZO2w0bSbT8/RzI1eLMCKEFqj8QmiGtUJzfdKNGIJcndADc2v2DUDf2bQQV8O/+zQN8G
+ 9Y2dN6UEvWYCU+EmKjS3NLehaZ+g9dS7q3u6+b/16xofkaOAGy4kB13eOnLEdC14fTgo
+ V3FQMnj69RnVQ5OB6mvSZ/UUh7HkWqANLRXahcU+7gx9XMODqKR25ekGQgBTszONldF/
+ cenGIIGJ3wC8yZFXL/hVNlKD+dEdkm3NBJ6TsO2TLn2bJoB4sApI3+XG8j0Bzh935C5S
+ 6/Iw==
+X-Gm-Message-State: APjAAAWv4JB9kjw1ZzEcfUwsdq+VRzg82iW7Gw2ibzRsjQiCqLtFsbgH
+ EAJhqZ3ewlO8k2/ceYvwF8OU3WWmpfLGi8i2lrk=
+X-Google-Smtp-Source: APXvYqwbEJS1ZTfGghkXr5NcdUxqdwwl79ExOgPhvtn/LUVDP0xDOgcJaiiG+qAns3Cs0+AZewOfp016/f8BBavPXUI=
+X-Received: by 2002:a67:1447:: with SMTP id 68mr34488742vsu.76.1578262016414; 
+ Sun, 05 Jan 2020 14:06:56 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <fd3273d3-5814-be43-dbec-e49bc7990705@spliet.org>
-Content-Language: en-US
-X-Originating-IP: [10.173.222.238]
-X-CFilter-Loop: Reflected
-Subject: Re: [Nouveau] [PATCH] drm/nouveau/bios: fix incorrect kfree in
- platform_init
+References: <20191231205607.1005-1-wambui.karugax@gmail.com>
+ <20200101184843.GA3856@dvetter-linux.ger.corp.intel.com>
+In-Reply-To: <20200101184843.GA3856@dvetter-linux.ger.corp.intel.com>
+From: Ben Skeggs <skeggsb@gmail.com>
+Date: Mon, 6 Jan 2020 08:06:45 +1000
+Message-ID: <CACAvsv5YEB0njcvFBhHWiCumuHroAqMm-T+fA8gJfsXijy+LVg@mail.gmail.com>
+To: Wambui Karuga <wambui.karugax@gmail.com>, Ben Skeggs <bskeggs@redhat.com>, 
+ Dave Airlie <airlied@linux.ie>,
+ ML dri-devel <dri-devel@lists.freedesktop.org>, 
+ ML nouveau <nouveau@lists.freedesktop.org>, LKML <linux-kernel@vger.kernel.org>
+Subject: Re: [Nouveau] [PATCH] drm/nouveau: remove set but unused variable.
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -45,40 +63,75 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Reply-To: wuxu.wu@huawei.com
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: Daniel Vetter <daniel@ffwll.ch>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-VGhhbmsgeW91LCBJIGdvdCBpdAoKT24gMjAyMC8xLzMgMTk6NTgsIFJveSBTcGxpZXQgd3JvdGU6
-Cj4gKHJlLXNlbmRpbmcgYXMgcGxhaW4gdGV4dCkKPiAKPiBOQUNLLiBUaGUgYmVmb3JlIGFuZCBh
-ZnRlciBvZiB0aGlzIHBhdGNoIGFyZSBmdW5jdGlvbmFsbHkgaWRlbnRpY2FsLiBUaGUgaWYtYmxv
-Y2sgcmV0dXJucyB1bmNvbmRpdGlvbmFsbHkgKCJyZXR1cm4gcHJpdjsiKSwgc28gdGhlIGtmcmVl
-IHdpbGwgb25seSBldmVyIGJlIHJlYWNoZWQgaWYgdGhlIGNvbmRpdGlvbiBpbiB0aGUgaWYtc3Rh
-dGVtZW50IGV2YWx1YXRlcyB0byBmYWxzZS4gRXhwbGljaXRseSB3cml0aW5nIG91dCBhbiBlbHNl
-LWJsb2NrIGlzIHRodXMgc3VwZXJmbHVvdXMuCj4gCj4gT3AgMDMtMDEtMjAyMCBvbSAwOToxMCBz
-Y2hyZWVmIHd1eHUud3U6Cj4+IEhpLCBJIHRoaW5rIHRoZXJlIGhhcyBhIGluY29ycmVjdCBrZnJl
-ZSBpbiBwY2lyb21faW5pdCBmdW5jdGlvbi4gSW4KPj4gcGNpcm9tX2luaXQgZnVuY3Rpb24gcHJp
-diBwb3JpbnRlciBjb3VsZCBiZSBmcmVlIG9ubHkgd2hlbiBwcml2ICE9IG51bGwKPj4gYW5kIHBy
-aXYtPnJvbSBpcyBudWxsLgo+Pgo+PiBTaWduZWQtb2ZmLWJ5OiB3dXh1Lnd1IDx3dXh1Lnd1QGh1
-YXdlaS5jb20+Cj4+IC0tLQo+PiDCoCBkcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9udmttL3N1YmRl
-di9iaW9zL3NoYWRvd3BjaS5jIHwgMyArKy0KPj4gwqAgMSBmaWxlIGNoYW5nZWQsIDIgaW5zZXJ0
-aW9ucygrKSwgMSBkZWxldGlvbigtKQo+Pgo+PiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJt
-L25vdXZlYXUvbnZrbS9zdWJkZXYvYmlvcy9zaGFkb3dwY2kuYyBiL2RyaXZlcnMvZ3B1L2RybS9u
-b3V2ZWF1L252a20vc3ViZGV2L2Jpb3Mvc2hhZG93cGNpLmMKPj4gaW5kZXggOWI5MWRhMC4uZDc3
-NmUwMSAxMDA2NDQKPj4gLS0tIGEvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbnZrbS9zdWJkZXYv
-Ymlvcy9zaGFkb3dwY2kuYwo+PiArKysgYi9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9udmttL3N1
-YmRldi9iaW9zL3NoYWRvd3BjaS5jCj4+IEBAIC03MCw4ICs3MCw5IEBAIHBjaXJvbV9pbml0KHN0
-cnVjdCBudmttX2Jpb3MgKmJpb3MsIGNvbnN0IGNoYXIgKm5hbWUpCj4+IMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqAgKHByaXYtPnJvbSA9IHBjaV9tYXBfcm9tKHBkZXYsICZwcml2
-LT5zaXplKSkpIHsKPj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBwcml2LT5w
-ZGV2ID0gcGRldjsKPj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCByZXR1cm4g
-cHJpdjsKPj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfSBlbHNlIHsKPj4gK8KgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoCBrZnJlZShwcml2KTsKPj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqAgfQo+PiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBrZnJlZShwcml2KTsKPj4gwqDCoMKg
-wqDCoMKgwqDCoMKgIH0KPj4gwqDCoMKgwqDCoMKgwqDCoMKgIHBjaV9kaXNhYmxlX3JvbShwZGV2
-KTsKPj4gwqDCoMKgwqDCoCB9Cj4+Cj4gCj4gLgoKX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBtYWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5m
-cmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0
-aW5mby9ub3V2ZWF1Cg==
+On Thu, 2 Jan 2020 at 04:48, Daniel Vetter <daniel@ffwll.ch> wrote:
+>
+> On Tue, Dec 31, 2019 at 11:56:07PM +0300, Wambui Karuga wrote:
+> > The local variable `pclks` is defined and set but not used and can
+> > therefore be removed.
+> > Issue found by coccinelle.
+> >
+> > Signed-off-by: Wambui Karuga <wambui.karugax@gmail.com>
+> > ---
+> >  drivers/gpu/drm/nouveau/dispnv04/arb.c | 3 +--
+> >  1 file changed, 1 insertion(+), 2 deletions(-)
+> >
+> > diff --git a/drivers/gpu/drm/nouveau/dispnv04/arb.c b/drivers/gpu/drm/nouveau/dispnv04/arb.c
+> > index 362495535e69..f607a04d262d 100644
+> > --- a/drivers/gpu/drm/nouveau/dispnv04/arb.c
+> > +++ b/drivers/gpu/drm/nouveau/dispnv04/arb.c
+> > @@ -54,7 +54,7 @@ static void
+> >  nv04_calc_arb(struct nv_fifo_info *fifo, struct nv_sim_state *arb)
+> >  {
+> >       int pagemiss, cas, width, bpp;
+> > -     int nvclks, mclks, pclks, crtpagemiss;
+> > +     int nvclks, mclks, crtpagemiss;
+>
+> Hm, reading the code (just from how stuff is named) I wonder whether the
+> original idea was that the calculation for us_p should us pclks, not
+> nvclks, but given that this code is as old as the initial nouveau merge
+> probably not a good idea to touch it. Plus I guess not many with a vintage
+> nv04 in working condition around to even test stuff ...
+>
+> Ben, what should we do here?
+I looked at the original code from xf86-video-nv, and pclks is
+similarly unused there also, so, I'd vote for just picking up this
+patch.  I don't believe anyone has the knowledge+hw anymore to mess
+with it in any other way.
+
+Ben.
+
+> -Daniel
+>
+> >       int found, mclk_extra, mclk_loop, cbs, m1, p1;
+> >       int mclk_freq, pclk_freq, nvclk_freq;
+> >       int us_m, us_n, us_p, crtc_drain_rate;
+> > @@ -69,7 +69,6 @@ nv04_calc_arb(struct nv_fifo_info *fifo, struct nv_sim_state *arb)
+> >       bpp = arb->bpp;
+> >       cbs = 128;
+> >
+> > -     pclks = 2;
+> >       nvclks = 10;
+> >       mclks = 13 + cas;
+> >       mclk_extra = 3;
+> > --
+> > 2.17.1
+> >
+>
+> --
+> Daniel Vetter
+> Software Engineer, Intel Corporation
+> http://blog.ffwll.ch
+> _______________________________________________
+> Nouveau mailing list
+> Nouveau@lists.freedesktop.org
+> https://lists.freedesktop.org/mailman/listinfo/nouveau
+_______________________________________________
+Nouveau mailing list
+Nouveau@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/nouveau
