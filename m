@@ -1,57 +1,54 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id C8117130A1D
-	for <lists+nouveau@lfdr.de>; Sun,  5 Jan 2020 23:08:15 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5319E130B3F
+	for <lists+nouveau@lfdr.de>; Mon,  6 Jan 2020 02:06:26 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2AFF889DC9;
-	Sun,  5 Jan 2020 22:08:14 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C51EA6E1E6;
+	Mon,  6 Jan 2020 01:06:19 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ua1-x943.google.com (mail-ua1-x943.google.com
- [IPv6:2607:f8b0:4864:20::943])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3DCC489DC7;
- Sun,  5 Jan 2020 22:08:13 +0000 (UTC)
-Received: by mail-ua1-x943.google.com with SMTP id u17so15552992uap.9;
- Sun, 05 Jan 2020 14:08:13 -0800 (PST)
+Received: from mail-ua1-x944.google.com (mail-ua1-x944.google.com
+ [IPv6:2607:f8b0:4864:20::944])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C7F5289CE0;
+ Mon,  6 Jan 2020 01:06:17 +0000 (UTC)
+Received: by mail-ua1-x944.google.com with SMTP id c14so15342848uaq.11;
+ Sun, 05 Jan 2020 17:06:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=gN32nj0fCJV1JTpdvkxbljfmBSVYN/OI2ByyfTw0WlA=;
- b=DH/djuKMsWL5Ji9Mluc7+DUJAPlPGwfTWrEJA06R1Gl4RMN200Cvg4hxzeiLl27fJ6
- 7+V6vdsKgEeisXdUU4plTEPrbTYyy5/KrVeSfrjXWra9+2Hm8T4rxOJHrVRpFFBC/iG5
- uw6b6pflkhHdnMX/7hPUT9c/YEY0mm4JSf1w/vZ4vTT9tT+i63PeQf6CEXMtEp582ybR
- VbVZEVzvCvmFSjI7XzsFa0rSFL04ZbjmefKfEjGDaGNA8ZRxnKRofPlIs4M+Pi2OMSjC
- n/VAaw/3DOvNeKbDPHGZ8IASRk/F3s4Hs/YRKWmZ6dtc6NkYxpZsphMuvupJHSQ5R0r5
- C9ag==
+ :cc; bh=oD/TmYE7Rc3ZEG5cPZO14SpBA53dODt6EQBgZE8gYPI=;
+ b=PEmo0PFq7DKBYxBtymV7LxJFLP5A+tQ61Dr0ltLhlVBdB2gwEN7SUZkn6EobnWvRem
+ OOY+ffQNhh4/RyrTB7CjApYSGy04OicYqOgN/yxu270OCR+8vLKP3227IoaoKuTGEKNu
+ 9mzyotU7JeOQnzPwz/GVM78jUm8dSUOobw4X68g2pB4VcfT58ih1EbnaFfXHDuONOBLt
+ zkcRL44LM3kClp35/K3eqEzB7Tj18SjIJxG0L66oSkyefi5kpoM4BRRt3Q/v9IoM8y/p
+ Ezv/Odb3x3dSfYxliNTUjm+idMNtR37QhXGI9QJJ+qIvJc/pXupjc7rIhOdXerPBXK4U
+ Q5Mg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=gN32nj0fCJV1JTpdvkxbljfmBSVYN/OI2ByyfTw0WlA=;
- b=c5i+M2c29R3mknSGYVAsYuOUtagMoCsUhEt2G2N6MzGxzyHuI1VXidPJU8b4rtLA6v
- RI/qS2H3Awj5tahYk8yGVX/1NtA4ERLm9U+0iY8idFp542f00xvYdH6N1OCBrEJLo1ag
- AzI9c0AKxGCmxFPjBvhDCDFk5/17hpSKjnRcP7Fs+cZBlA/QOtmvqXLhnop/Wp5/N4CG
- dbjc/T1h1t6s1PMeT1n7dXEJV+x1GFx1a8tCoCQb3gCJKebdk+PAaiN2ki9sH1pXuLCU
- h/qkhJwz+GOqcabgxhEOXtLneOF8Pa/BT78vVB6F+LbZqUvyYu4Lumh/PzZ6ARp6ZtEs
- HX5w==
-X-Gm-Message-State: APjAAAVvCQJyX7rFJJ/420VBOTYNLevJ1x1O4oeXvodmAiRljm7yn10b
- 933qR0oKXQhRiiknTufV3LmAPqV8dXpE2UE3lM0=
-X-Google-Smtp-Source: APXvYqwVhdsTLtyEOlLYzgTMx5J4xh1D/3v3AigHUqzVPMqquC3uNYmIjP2M9M2z3U81JKr4ewrVpFI1uOHTkV7btNM=
-X-Received: by 2002:ab0:72d0:: with SMTP id g16mr55270503uap.11.1578262092346; 
- Sun, 05 Jan 2020 14:08:12 -0800 (PST)
+ bh=oD/TmYE7Rc3ZEG5cPZO14SpBA53dODt6EQBgZE8gYPI=;
+ b=tO9DDRr6VDzUvGIEMs2kpBiPAIWdXfB9FKBnnejenVqh0nFbrdGzZrTPYrTTRD9RM5
+ n6yVVjDB9kIMeVLz7wkAmJXdGtPrDAJ5oXJxxiXiv89oepTufl2Tz//hIb8lTq4neWwJ
+ tBfBT4C4twMRK8g3Y9c1APziUHIGKWIK5IVVXWNhXORLnseBI+OKD17O1Uk/mLA/sqg9
+ fo2Bt8OoQuh5ETARpjyvbWc5Ioj9hQeXYM+rxoloe3nxG6gmPuA3msR3/f6C2e80Kl22
+ 46lnS0D4+o+aeLfCOBgOk8tz3+hGEl8R8PLhePosEJmdgydHWssSqPlp7i0ux2SRmQz3
+ NXTA==
+X-Gm-Message-State: APjAAAUAvoFmu8028OZxPnE6nZJakylJtY+evgpg2BOrLxSQ27srhq0f
+ IkFuex+NcRD+jDHdl7b8T6p5kI2fjbVJ1/jIK/k=
+X-Google-Smtp-Source: APXvYqx3CyDfxmt7yEu8FyFHyU8Oa/0pVpqjMMDxszF13Rx1oXVB90+4EwrYBUaZfUuxGzrGM8cVVxOcDQ9zrjCmByw=
+X-Received: by 2002:ab0:6029:: with SMTP id n9mr57299619ual.35.1578272776664; 
+ Sun, 05 Jan 2020 17:06:16 -0800 (PST)
 MIME-Version: 1.0
-References: <20191231205734.1452-1-wambui.karugax@gmail.com>
- <20200101185147.GB3856@dvetter-linux.ger.corp.intel.com>
-In-Reply-To: <20200101185147.GB3856@dvetter-linux.ger.corp.intel.com>
+References: <20191230024628.11820-1-yuehaibing@huawei.com>
+In-Reply-To: <20191230024628.11820-1-yuehaibing@huawei.com>
 From: Ben Skeggs <skeggsb@gmail.com>
-Date: Mon, 6 Jan 2020 08:08:01 +1000
-Message-ID: <CACAvsv5SF18v7t8kbo0LPQi3L8U3xGGf70_UEfOnKdHu89yo9A@mail.gmail.com>
-To: Wambui Karuga <wambui.karugax@gmail.com>, Ben Skeggs <bskeggs@redhat.com>, 
- Dave Airlie <airlied@linux.ie>,
- ML dri-devel <dri-devel@lists.freedesktop.org>, 
- ML nouveau <nouveau@lists.freedesktop.org>, LKML <linux-kernel@vger.kernel.org>
-Subject: Re: [Nouveau] [PATCH] drm/nouveau: use NULL for pointer assignment.
+Date: Mon, 6 Jan 2020 11:06:05 +1000
+Message-ID: <CACAvsv6GAO18farNBWy5t-tXyTkZHtNDxZEfHeNpZ475yMdGUA@mail.gmail.com>
+To: YueHaibing <yuehaibing@huawei.com>
+Subject: Re: [Nouveau] [PATCH -next] drm/nouveau/nv04: Use match_string()
+ helper to simplify the code
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,56 +60,59 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Daniel Vetter <daniel@ffwll.ch>
+Cc: Dave Airlie <airlied@linux.ie>, Harry Wentland <harry.wentland@amd.com>,
+ LKML <linux-kernel@vger.kernel.org>,
+ ML dri-devel <dri-devel@lists.freedesktop.org>,
+ Jani Nikula <jani.nikula@intel.com>, Ben Skeggs <bskeggs@redhat.com>,
+ Daniel Vetter <daniel@ffwll.ch>, ML nouveau <nouveau@lists.freedesktop.org>,
+ Alex Deucher <alexander.deucher@amd.com>, Sam Ravnborg <sam@ravnborg.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, 2 Jan 2020 at 04:51, Daniel Vetter <daniel@ffwll.ch> wrote:
+On Mon, 30 Dec 2019 at 12:48, YueHaibing <yuehaibing@huawei.com> wrote:
 >
-> On Tue, Dec 31, 2019 at 11:57:34PM +0300, Wambui Karuga wrote:
-> > Replace the use of 0 in the pointer assignment with NULL to address the
-> > following sparse warning:
-> > drivers/gpu/drm/nouveau/nouveau_hwmon.c:744:29: warning: Using plain integer as NULL pointer
-> >
-> > Signed-off-by: Wambui Karuga <wambui.karugax@gmail.com>
+> match_string() returns the array index of a matching string.
+> Use it instead of the open-coded implementation.
 >
-> Reviewed-by: Daniel Vetter <daniel.vetter@ffwll.ch>
->
-> I'll check with Ben next week or so whether he wants to pick these up or
-> whether I should stuff them into drm-misc-next.
-I'll grab them.
+> Signed-off-by: YueHaibing <yuehaibing@huawei.com>
+Thanks!
 
-Ben.
-
-> -Daniel
+> ---
+>  drivers/gpu/drm/nouveau/dispnv04/tvnv17.c | 13 +++++--------
+>  1 file changed, 5 insertions(+), 8 deletions(-)
 >
-> > ---
-> >  drivers/gpu/drm/nouveau/nouveau_hwmon.c | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >
-> > diff --git a/drivers/gpu/drm/nouveau/nouveau_hwmon.c b/drivers/gpu/drm/nouveau/nouveau_hwmon.c
-> > index d445c6f3fece..1c3104d20571 100644
-> > --- a/drivers/gpu/drm/nouveau/nouveau_hwmon.c
-> > +++ b/drivers/gpu/drm/nouveau/nouveau_hwmon.c
-> > @@ -741,7 +741,7 @@ nouveau_hwmon_init(struct drm_device *dev)
-> >                       special_groups[i++] = &pwm_fan_sensor_group;
-> >       }
-> >
-> > -     special_groups[i] = 0;
-> > +     special_groups[i] = NULL;
-> >       hwmon_dev = hwmon_device_register_with_info(dev->dev, "nouveau", dev,
-> >                                                       &nouveau_chip_info,
-> >                                                       special_groups);
-> > --
-> > 2.17.1
-> >
+> diff --git a/drivers/gpu/drm/nouveau/dispnv04/tvnv17.c b/drivers/gpu/drm/nouveau/dispnv04/tvnv17.c
+> index 03466f0..3a9489e 100644
+> --- a/drivers/gpu/drm/nouveau/dispnv04/tvnv17.c
+> +++ b/drivers/gpu/drm/nouveau/dispnv04/tvnv17.c
+> @@ -644,16 +644,13 @@ static int nv17_tv_create_resources(struct drm_encoder *encoder,
+>         int i;
 >
+>         if (nouveau_tv_norm) {
+> -               for (i = 0; i < num_tv_norms; i++) {
+> -                       if (!strcmp(nv17_tv_norm_names[i], nouveau_tv_norm)) {
+> -                               tv_enc->tv_norm = i;
+> -                               break;
+> -                       }
+> -               }
+> -
+> -               if (i == num_tv_norms)
+> +               i = match_string(nv17_tv_norm_names, num_tv_norms,
+> +                                nouveau_tv_norm);
+> +               if (i < 0)
+>                         NV_WARN(drm, "Invalid TV norm setting \"%s\"\n",
+>                                 nouveau_tv_norm);
+> +               else
+> +                       tv_enc->tv_norm = i;
+>         }
+>
+>         drm_mode_create_tv_properties(dev, num_tv_norms, nv17_tv_norm_names);
 > --
-> Daniel Vetter
-> Software Engineer, Intel Corporation
-> http://blog.ffwll.ch
+> 2.7.4
+>
+>
 > _______________________________________________
 > Nouveau mailing list
 > Nouveau@lists.freedesktop.org
