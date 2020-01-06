@@ -2,55 +2,54 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5A4CC131880
-	for <lists+nouveau@lfdr.de>; Mon,  6 Jan 2020 20:17:46 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 89D31131C51
+	for <lists+nouveau@lfdr.de>; Tue,  7 Jan 2020 00:27:40 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C80606E213;
-	Mon,  6 Jan 2020 19:17:41 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 611F66E59F;
+	Mon,  6 Jan 2020 23:27:34 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from hqnvemgate26.nvidia.com (hqnvemgate26.nvidia.com
- [216.228.121.65])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 792A289CF3;
- Mon,  6 Jan 2020 19:17:40 +0000 (UTC)
-Received: from hqpgpgate101.nvidia.com (Not Verified[216.228.121.13]) by
- hqnvemgate26.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
- id <B5e1387c20000>; Mon, 06 Jan 2020 11:17:22 -0800
-Received: from hqmail.nvidia.com ([172.20.161.6])
- by hqpgpgate101.nvidia.com (PGP Universal service);
- Mon, 06 Jan 2020 11:17:39 -0800
-X-PGP-Universal: processed;
- by hqpgpgate101.nvidia.com on Mon, 06 Jan 2020 11:17:39 -0800
-Received: from [172.20.40.57] (10.124.1.5) by HQMAIL107.nvidia.com
- (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Mon, 6 Jan
- 2020 19:17:39 +0000
-To: Ben Skeggs <skeggsb@gmail.com>
+Received: from mail-vs1-xe42.google.com (mail-vs1-xe42.google.com
+ [IPv6:2607:f8b0:4864:20::e42])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 423E76E59D;
+ Mon,  6 Jan 2020 23:27:32 +0000 (UTC)
+Received: by mail-vs1-xe42.google.com with SMTP id p6so32764530vsj.11;
+ Mon, 06 Jan 2020 15:27:32 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=HR1adj1A3Ic5Jb0NPazOu77KkzAZJIoYDoyM9pqOY08=;
+ b=oqeFlizxumJS3xSs1GLYvD4rPCNojogiwdfHo2ADKRWPANURopELSwAadjJ2NXujSa
+ UHrMi+ntYK/HAoHmE/FTcFMw2qMSFICQonrtuXclCAPq9SeDkX5HF/6zNuNMWRf3dpM6
+ Fca7K1tRUR03UmtRYsdkIhJLBuyGio5J/dAOB9I9jTKr3DU646PZN+wm32NaSFy+LBsv
+ EVSME+gPCO0KEBL2M9+PaTpHvC+KOD9r6kwpnHcyXa8xC49mTfkEJXf3OI0znV0W2iPP
+ ylTLSWSQPBYJMl8/BqjLfrrh/WVe6YhYxgX6Z3xEfW2bE4195F+FPZtb7KE1sxlNoCW/
+ UXhA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=HR1adj1A3Ic5Jb0NPazOu77KkzAZJIoYDoyM9pqOY08=;
+ b=GLF1Afw5uzv2kjtkoM8sXDKYaV3bShMoEBqe1Eld8MLo2yWnCmmv/Tk5wDk/YOjeSz
+ oeQRRUibKvpCV724hZOqmsJTVQTRZVJ7SAOAHRujxn+xjPf8g1idND1a2zuqKUWYYUsg
+ /G7k4+xawBJ/6yaFlASZ+W5z1+gvHCSNvCESbDBJhlJOX7T9TS4mMrYWaDjj6GOFvkv5
+ duxMaqKA3vK0Vi0WrRzFmaROOB2U9EDMCEn8H4X8dRt8P5Fh/5KkcIv3DtzPFz8JDCCY
+ wTTWOzNuupboBXKyCPY6qp4niE9Fn/kDrrQ4Hc6v5HPBgfNPQb9s2wqPIV04RoffTjbL
+ YfWA==
+X-Gm-Message-State: APjAAAXYTUq/WO1kraOiKAu32vVoe10N7hgtrDWWZ/SeFx1yXj5GjmV8
+ 9/ZlMPtGRmbZ/PKmQXNE6QZfrnDdMTBTy2igp0LBlfD3vag=
+X-Google-Smtp-Source: APXvYqwkkkOg/lno/2sC3oRI5T+GHauTDffkyPSndoXTgSJBxq6bIMGr5/8gezWgHbYFVgfICqpfZ9QI9Xm/qWStQoE=
+X-Received: by 2002:a05:6102:3126:: with SMTP id
+ f6mr7144756vsh.204.1578353251286; 
+ Mon, 06 Jan 2020 15:27:31 -0800 (PST)
+MIME-Version: 1.0
 References: <20191217004520.2404-1-jajones@nvidia.com>
  <CACAvsv6AKt=10JgjaEKc=pkmKfGJoUJjq_Unn0yGTuQK85Es2g@mail.gmail.com>
-X-Nvconfidentiality: public
-From: James Jones <jajones@nvidia.com>
-Message-ID: <b273ad88-d246-3395-2fd0-8188bc41a127@nvidia.com>
-Date: Mon, 6 Jan 2020 11:18:14 -0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.2.2
-MIME-Version: 1.0
-In-Reply-To: <CACAvsv6AKt=10JgjaEKc=pkmKfGJoUJjq_Unn0yGTuQK85Es2g@mail.gmail.com>
-X-Originating-IP: [10.124.1.5]
-X-ClientProxiedBy: HQMAIL111.nvidia.com (172.20.187.18) To
- HQMAIL107.nvidia.com (172.20.187.13)
-Content-Language: en-US
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
- t=1578338243; bh=X6bjFnBOKk+zwefRvTuLLXoOga65HDslVx01MKp8iI0=;
- h=X-PGP-Universal:Subject:To:CC:References:X-Nvconfidentiality:From:
- Message-ID:Date:User-Agent:MIME-Version:In-Reply-To:
- X-Originating-IP:X-ClientProxiedBy:Content-Type:Content-Language:
- Content-Transfer-Encoding;
- b=fSfV/myr5gxiOvydL0Vfz6rcQlE6FKrOufTaL4S/xZbec9zlIPMjuT9ZZmruDSr0p
- peYPJ3K97WLSx39jaPysPTxaFB/a0+uXma+nEmw3E8sgul2Mo/1vdzmXmaAcgZdr2d
- b2Ov5MNjZjce+qnFu9nPvmpo76QolbD0Qhqah/15OttTE630Znpm+7WF17/k3kybJD
- NKo85Tl+/RfDH64yW5ZOZ2fSBs2tzFuBwWS6lCyW7B6ilE+TDIQ8RZXl4xmcSbxk5I
- Fo0ZfPWz6OezfgGN+YZ56aI9+eTdvZo2F40DEkkrtRkuyMkoMGN1/dNdMfLx00/0s1
- flaFP4E5xI7+A==
+ <b273ad88-d246-3395-2fd0-8188bc41a127@nvidia.com>
+In-Reply-To: <b273ad88-d246-3395-2fd0-8188bc41a127@nvidia.com>
+From: Ben Skeggs <skeggsb@gmail.com>
+Date: Tue, 7 Jan 2020 09:27:20 +1000
+Message-ID: <CACAvsv5bhaJozct9fgnJ8JNSXpdd5QCH+tCxciZetbnWuzzBPw@mail.gmail.com>
+To: James Jones <jajones@nvidia.com>
 Subject: Re: [Nouveau] [PATCH v2 0/3] drm/nouveau: Support NVIDIA format
  modifiers
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -66,91 +65,97 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
 Cc: ML nouveau <nouveau@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>,
  ML dri-devel <dri-devel@lists.freedesktop.org>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 1/5/20 5:30 PM, Ben Skeggs wrote:
-> On Tue, 17 Dec 2019 at 10:44, James Jones <jajones@nvidia.com> wrote:
->>
->> This series modifies the NV5x+ nouveau display backends to advertise
->> appropriate format modifiers on their display planes in atomic mode
->> setting blobs.
->>
->> Corresponding modifications to Mesa/userspace are available here:
->>
->> https://gitlab.freedesktop.org/cubanismo/mesa/tree/nouveau_work
->>
->> But those need a bit of cleanup before they're ready to submit.
->>
->> I've tested this on Tesla, Kepler, Pascal, and Turing-class hardware
->> using various formats and all the exposed format modifiers, plus some
->> negative testing with invalid ones.
->>
->> NOTE: this series depends on the "[PATCH v3] drm: Generalized NV Block
->> Linear DRM format mod" patch submitted to dri-devel.
->>
->> v2: Used Tesla family instead of NV50 chipset compare to avoid treating
->>      oddly numbered NV4x-class chipsets as NV50+ GPUs.  Other instances
->>      of compares with chipset number in the series were audited, deemed
->>      safe, and left as-is for consistency with existing code.
-> Hey James,
-> 
-> These look OK to me, with the minor issue I mentioned on one of the
-> patches dealt with.  I'll hold off merging anything until I get the
-> go-ahead that the modifier definitions are definitely set in stone /
-> userspace is ready for inclusion.
+On Tue, 7 Jan 2020 at 05:17, James Jones <jajones@nvidia.com> wrote:
+>
+> On 1/5/20 5:30 PM, Ben Skeggs wrote:
+> > On Tue, 17 Dec 2019 at 10:44, James Jones <jajones@nvidia.com> wrote:
+> >>
+> >> This series modifies the NV5x+ nouveau display backends to advertise
+> >> appropriate format modifiers on their display planes in atomic mode
+> >> setting blobs.
+> >>
+> >> Corresponding modifications to Mesa/userspace are available here:
+> >>
+> >> https://gitlab.freedesktop.org/cubanismo/mesa/tree/nouveau_work
+> >>
+> >> But those need a bit of cleanup before they're ready to submit.
+> >>
+> >> I've tested this on Tesla, Kepler, Pascal, and Turing-class hardware
+> >> using various formats and all the exposed format modifiers, plus some
+> >> negative testing with invalid ones.
+> >>
+> >> NOTE: this series depends on the "[PATCH v3] drm: Generalized NV Block
+> >> Linear DRM format mod" patch submitted to dri-devel.
+> >>
+> >> v2: Used Tesla family instead of NV50 chipset compare to avoid treating
+> >>      oddly numbered NV4x-class chipsets as NV50+ GPUs.  Other instances
+> >>      of compares with chipset number in the series were audited, deemed
+> >>      safe, and left as-is for consistency with existing code.
+> > Hey James,
+> >
+> > These look OK to me, with the minor issue I mentioned on one of the
+> > patches dealt with.  I'll hold off merging anything until I get the
+> > go-ahead that the modifier definitions are definitely set in stone /
+> > userspace is ready for inclusion.
+>
+> Thanks for having a look.  I'll try to get the userspace changes
+> finalized soon.  I think from the NV side, we consider the modifier
+> definition itself (the v3 version of the patch) final, so if there's any
+> stand-alone feedback from yourself or other drm/nouveau developers on
+> that layout, we'd be eager to hear it.  I don't want it rushed in, but
+> we do have several projects blocked on getting that approved & committed.
+>
+> I assume the sequencing should be:
+>
+> * Fix the minor issue you identified here/complete review of nouveau
+> kernel patches
+> * Complete review of the related TegraDRM new modifier support patch
+> * Finalize and complete review of userspace/Mesa nouveau modifier
+> support patches
+> * Get drm_fourcc.h updates committed
+> * Get these patches and TegraDRM patches committed
+> * Integrate final drm_fourcc.h to Mesa patches and get Mesa patches
+> committed
+>
+> Does that sound right to you?
+Seems very reasonable!
 
-Thanks for having a look.  I'll try to get the userspace changes 
-finalized soon.  I think from the NV side, we consider the modifier 
-definition itself (the v3 version of the patch) final, so if there's any 
-stand-alone feedback from yourself or other drm/nouveau developers on 
-that layout, we'd be eager to hear it.  I don't want it rushed in, but 
-we do have several projects blocked on getting that approved & committed.
+Ben.
 
-I assume the sequencing should be:
-
-* Fix the minor issue you identified here/complete review of nouveau 
-kernel patches
-* Complete review of the related TegraDRM new modifier support patch
-* Finalize and complete review of userspace/Mesa nouveau modifier 
-support patches
-* Get drm_fourcc.h updates committed
-* Get these patches and TegraDRM patches committed
-* Integrate final drm_fourcc.h to Mesa patches and get Mesa patches 
-committed
-
-Does that sound right to you?
-
-Thanks,
--James
-
+>
 > Thanks,
-> Ben.
-> 
->>
->> James Jones (3):
->>    drm/nouveau: Add format mod prop to base/ovly/nvdisp
->>    drm/nouveau: Check framebuffer size against bo
->>    drm/nouveau: Support NVIDIA format modifiers
->>
->>   drivers/gpu/drm/nouveau/dispnv50/base507c.c |   7 +-
->>   drivers/gpu/drm/nouveau/dispnv50/disp.c     |  59 ++++++++
->>   drivers/gpu/drm/nouveau/dispnv50/disp.h     |   4 +
->>   drivers/gpu/drm/nouveau/dispnv50/wndw.c     |  35 ++++-
->>   drivers/gpu/drm/nouveau/dispnv50/wndwc57e.c |  17 +++
->>   drivers/gpu/drm/nouveau/nouveau_display.c   | 154 ++++++++++++++++++++
->>   drivers/gpu/drm/nouveau/nouveau_display.h   |   4 +
->>   7 files changed, 272 insertions(+), 8 deletions(-)
->>
->> --
->> 2.17.1
->>
->> _______________________________________________
->> Nouveau mailing list
->> Nouveau@lists.freedesktop.org
->> https://lists.freedesktop.org/mailman/listinfo/nouveau
+> -James
+>
+> > Thanks,
+> > Ben.
+> >
+> >>
+> >> James Jones (3):
+> >>    drm/nouveau: Add format mod prop to base/ovly/nvdisp
+> >>    drm/nouveau: Check framebuffer size against bo
+> >>    drm/nouveau: Support NVIDIA format modifiers
+> >>
+> >>   drivers/gpu/drm/nouveau/dispnv50/base507c.c |   7 +-
+> >>   drivers/gpu/drm/nouveau/dispnv50/disp.c     |  59 ++++++++
+> >>   drivers/gpu/drm/nouveau/dispnv50/disp.h     |   4 +
+> >>   drivers/gpu/drm/nouveau/dispnv50/wndw.c     |  35 ++++-
+> >>   drivers/gpu/drm/nouveau/dispnv50/wndwc57e.c |  17 +++
+> >>   drivers/gpu/drm/nouveau/nouveau_display.c   | 154 ++++++++++++++++++++
+> >>   drivers/gpu/drm/nouveau/nouveau_display.h   |   4 +
+> >>   7 files changed, 272 insertions(+), 8 deletions(-)
+> >>
+> >> --
+> >> 2.17.1
+> >>
+> >> _______________________________________________
+> >> Nouveau mailing list
+> >> Nouveau@lists.freedesktop.org
+> >> https://lists.freedesktop.org/mailman/listinfo/nouveau
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
