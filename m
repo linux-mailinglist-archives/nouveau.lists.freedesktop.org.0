@@ -1,54 +1,59 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 759C2130B7D
-	for <lists+nouveau@lfdr.de>; Mon,  6 Jan 2020 02:30:55 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9E28A13183E
+	for <lists+nouveau@lfdr.de>; Mon,  6 Jan 2020 20:05:36 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 644B389BF1;
-	Mon,  6 Jan 2020 01:30:53 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 53A7689A1A;
+	Mon,  6 Jan 2020 19:05:34 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-vk1-xa42.google.com (mail-vk1-xa42.google.com
- [IPv6:2607:f8b0:4864:20::a42])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C3A9689B4D;
- Mon,  6 Jan 2020 01:30:51 +0000 (UTC)
-Received: by mail-vk1-xa42.google.com with SMTP id g7so12081950vkl.12;
- Sun, 05 Jan 2020 17:30:51 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=ijoE6e4s38wqjodm/VFMAPDPo/h7Nctkq2zte82cWkU=;
- b=fzFINUeqysKrynxMaTqrPL/i6sTEQfofJLEp89X3Bror9mIKXa81bNWQW/AelXrNRc
- DigVVkqklQRewGS7Z+Imx56Psz8+tigAsgaTsHeqimj2104FC62DcwoYPNTgwuQEzyhf
- 5K7xdo7qjVXaGqXr6tqAG8Ktxw1OQ/JD4gatJsqGhp+Yurzb1khwkb9DdYoomdx4jAnW
- DmAR2HX2vX7ZvqNfDXzBBOAL0FjRHWKT4SjgZvFxmb5Z+ZllKwUsxIvyG+D8VAJho+FS
- 0V+X9GVdtZFckGy60CD2b+SQe1YANfbfPIJpBTQmtNEL+JXqVd8dAu63RYaA6V7XTx5k
- dmfA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=ijoE6e4s38wqjodm/VFMAPDPo/h7Nctkq2zte82cWkU=;
- b=SSX14Q2hvVmY1poBa3LMotNfv4zq9Sjli5uFhCvjWx2rYE7gPrDrFboc+rTh/FUMoO
- fHaorxqkw4CpwrEqnEia9qWsJSvcsb8+0+NqP8cLCZHX6v7himKeEYiw/qLrYx2ZKjzt
- DO7ujQsKM3VeDQaeCoLNI8aRdQ3jsDlzsdnattETf357Nlnjznj9Hm3ls4PhX7124Czf
- J14VdhVi4nasIqSSewgNV8PHnc7P0DyfhY8exZt9wq+6KOOzbZidscpEbN4u0sXSMcb1
- ht7V7hCLThMa0Us43r2NzKSLvlcQefoxHDVoidBTw54ua9FlLOmpWeMmCgQALfZKgcGq
- KO+Q==
-X-Gm-Message-State: APjAAAWZC2I5JSVA3v7fIHkstzLj8eKBtuiJDfCQmoBBs1d2+9sTavZH
- JtoMOhwr8JFmSR1QNZRITyPKLaJsGDqbKCIVqSU=
-X-Google-Smtp-Source: APXvYqypiKFrLjZN2vFWvRskFXPZ3v9dkUc9capjzXdZBcTlxd17A34TXUGuw2mAZBCmaRFsWn2M9eY4PFs4R5GcY5k=
-X-Received: by 2002:a1f:72c3:: with SMTP id n186mr55923667vkc.12.1578274250848; 
- Sun, 05 Jan 2020 17:30:50 -0800 (PST)
-MIME-Version: 1.0
+Received: from hqnvemgate26.nvidia.com (hqnvemgate26.nvidia.com
+ [216.228.121.65])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1ED2A89A77;
+ Mon,  6 Jan 2020 19:05:33 +0000 (UTC)
+Received: from hqpgpgate101.nvidia.com (Not Verified[216.228.121.13]) by
+ hqnvemgate26.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
+ id <B5e1384eb0000>; Mon, 06 Jan 2020 11:05:15 -0800
+Received: from hqmail.nvidia.com ([172.20.161.6])
+ by hqpgpgate101.nvidia.com (PGP Universal service);
+ Mon, 06 Jan 2020 11:05:32 -0800
+X-PGP-Universal: processed;
+ by hqpgpgate101.nvidia.com on Mon, 06 Jan 2020 11:05:32 -0800
+Received: from [172.20.40.57] (10.124.1.5) by HQMAIL107.nvidia.com
+ (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Mon, 6 Jan
+ 2020 19:05:31 +0000
+To: Ben Skeggs <skeggsb@gmail.com>
 References: <20191217004520.2404-1-jajones@nvidia.com>
-In-Reply-To: <20191217004520.2404-1-jajones@nvidia.com>
-From: Ben Skeggs <skeggsb@gmail.com>
-Date: Mon, 6 Jan 2020 11:30:40 +1000
-Message-ID: <CACAvsv6AKt=10JgjaEKc=pkmKfGJoUJjq_Unn0yGTuQK85Es2g@mail.gmail.com>
-To: James Jones <jajones@nvidia.com>
-Subject: Re: [Nouveau] [PATCH v2 0/3] drm/nouveau: Support NVIDIA format
- modifiers
+ <20191217004520.2404-3-jajones@nvidia.com>
+ <CACAvsv656x+PL7pP=_JVgkJXnLaoUJOD=-H_6k2-UVwXSsREnA@mail.gmail.com>
+X-Nvconfidentiality: public
+From: James Jones <jajones@nvidia.com>
+Message-ID: <d360691b-45f4-81db-3878-aeda5a3253ce@nvidia.com>
+Date: Mon, 6 Jan 2020 11:06:07 -0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.2.2
+MIME-Version: 1.0
+In-Reply-To: <CACAvsv656x+PL7pP=_JVgkJXnLaoUJOD=-H_6k2-UVwXSsREnA@mail.gmail.com>
+X-Originating-IP: [10.124.1.5]
+X-ClientProxiedBy: HQMAIL111.nvidia.com (172.20.187.18) To
+ HQMAIL107.nvidia.com (172.20.187.13)
+Content-Language: en-US
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
+ t=1578337515; bh=qKqkw4UuJl2NVraGnffuNwrkxSz299GZwaxTIFm+rXQ=;
+ h=X-PGP-Universal:Subject:To:CC:References:X-Nvconfidentiality:From:
+ Message-ID:Date:User-Agent:MIME-Version:In-Reply-To:
+ X-Originating-IP:X-ClientProxiedBy:Content-Type:Content-Language:
+ Content-Transfer-Encoding;
+ b=KLztOeO36aKC58GNehEcKKpZa/EH6298eK/zfAHwhk1ZyOZWQSveymCbmYAMKjQYS
+ 3qq7Af4gfgFzZZWP31XJTWZM4IAcCvNZCKai5XTuKWi1DDU2jsxdYTnzV0xXoSKZmj
+ Nr/82BW6Aw2lXHlwrPe0TuhhNH+XTquOepImVcOCzShmWwU9ICKRzIMAUhTCJpL58r
+ e3gRhvW4VCduiQfZM6p4LlN/XxwqXr9y90mTR7ARuNatqUFKBhxTKB2Jx03pYd62//
+ M+k8xjgyAZn1wkpqVXlqRqJRfMIKVrS+k2PgRrehiEKQKrr+XgJcX8iGNz0ZqfdOcU
+ LNHieQYPuUOdQ==
+Subject: Re: [Nouveau] [PATCH v2 2/3] drm/nouveau: Check framebuffer size
+ against bo
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -62,66 +67,158 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
 Cc: ML nouveau <nouveau@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>,
  ML dri-devel <dri-devel@lists.freedesktop.org>
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, 17 Dec 2019 at 10:44, James Jones <jajones@nvidia.com> wrote:
->
-> This series modifies the NV5x+ nouveau display backends to advertise
-> appropriate format modifiers on their display planes in atomic mode
-> setting blobs.
->
-> Corresponding modifications to Mesa/userspace are available here:
->
-> https://gitlab.freedesktop.org/cubanismo/mesa/tree/nouveau_work
->
-> But those need a bit of cleanup before they're ready to submit.
->
-> I've tested this on Tesla, Kepler, Pascal, and Turing-class hardware
-> using various formats and all the exposed format modifiers, plus some
-> negative testing with invalid ones.
->
-> NOTE: this series depends on the "[PATCH v3] drm: Generalized NV Block
-> Linear DRM format mod" patch submitted to dri-devel.
->
-> v2: Used Tesla family instead of NV50 chipset compare to avoid treating
->     oddly numbered NV4x-class chipsets as NV50+ GPUs.  Other instances
->     of compares with chipset number in the series were audited, deemed
->     safe, and left as-is for consistency with existing code.
-Hey James,
+On 1/5/20 5:25 PM, Ben Skeggs wrote:
+> On Tue, 17 Dec 2019 at 10:45, James Jones <jajones@nvidia.com> wrote:
+>>
+>> Make sure framebuffer dimensions and tiling
+>> parameters will not result in accesses beyond the
+>> end of the GEM buffer they are bound to.
+>>
+>> Signed-off-by: James Jones <jajones@nvidia.com>
+>> ---
+>>   drivers/gpu/drm/nouveau/nouveau_display.c | 93 +++++++++++++++++++++++
+>>   1 file changed, 93 insertions(+)
+>>
+>> diff --git a/drivers/gpu/drm/nouveau/nouveau_display.c b/drivers/gpu/drm/nouveau/nouveau_display.c
+>> index 6f038511a03a..f1509392d7b7 100644
+>> --- a/drivers/gpu/drm/nouveau/nouveau_display.c
+>> +++ b/drivers/gpu/drm/nouveau/nouveau_display.c
+>> @@ -224,6 +224,72 @@ static const struct drm_framebuffer_funcs nouveau_framebuffer_funcs = {
+>>          .create_handle = nouveau_user_framebuffer_create_handle,
+>>   };
+>>
+>> +static inline uint32_t
+>> +nouveau_get_width_in_blocks(uint32_t stride)
+>> +{
+>> +       /* GOBs per block in the x direction is always one, and GOBs are
+>> +        * 64 bytes wide
+>> +        */
+>> +       static const uint32_t log_block_width = 6;
+>> +
+>> +       return (stride + (1 << log_block_width) - 1) >> log_block_width;
+>> +}
+>> +
+>> +static inline uint32_t
+>> +nouveau_get_height_in_blocks(struct nouveau_drm *drm,
+>> +                            uint32_t height,
+>> +                            uint32_t log_block_height_in_gobs)
+>> +{
+>> +       uint32_t log_gob_height;
+>> +       uint32_t log_block_height;
+>> +
+>> +       BUG_ON(drm->client.device.info.family < NV_DEVICE_INFO_V0_TESLA);
+>> +
+>> +       if (drm->client.device.info.family < NV_DEVICE_INFO_V0_FERMI)
+>> +               log_gob_height = 2;
+>> +       else
+>> +               log_gob_height = 3;
+>> +
+>> +       log_block_height = log_block_height_in_gobs + log_gob_height;
+>> +
+>> +       return (height + (1 << log_block_height) - 1) >> log_block_height;
+>> +}
+>> +
+>> +static int
+>> +nouveau_check_bl_size(struct nouveau_drm *drm, struct nouveau_bo *nvbo,
+>> +                     uint32_t offset, uint32_t stride, uint32_t h,
+>> +                     uint32_t tile_mode)
+>> +{
+>> +       uint32_t gob_size, bw, bh;
+>> +       uint64_t bl_size;
+>> +
+>> +       BUG_ON(drm->client.device.info.family < NV_DEVICE_INFO_V0_TESLA);
+>> +
+>> +       if (drm->client.device.info.chipset >= 0xc0)
+>> +               tile_mode >>= 4;
+>> +
+>> +       BUG_ON(tile_mode & 0xFFFFFFF0);
+> As far as I can tell, tile_mode can be fed into this function
+> unsanitised from userspace, so we probably want something different to
+> a BUG_ON() here.
 
-These look OK to me, with the minor issue I mentioned on one of the
-patches dealt with.  I'll hold off merging anything until I get the
-go-ahead that the modifier definitions are definitely set in stone /
-userspace is ready for inclusion.
+Good catch.  I had assumed nouveau_bo::mode was validated at creation 
+time.  I'll get this fixed up.
 
 Thanks,
-Ben.
+-James
 
->
-> James Jones (3):
->   drm/nouveau: Add format mod prop to base/ovly/nvdisp
->   drm/nouveau: Check framebuffer size against bo
->   drm/nouveau: Support NVIDIA format modifiers
->
->  drivers/gpu/drm/nouveau/dispnv50/base507c.c |   7 +-
->  drivers/gpu/drm/nouveau/dispnv50/disp.c     |  59 ++++++++
->  drivers/gpu/drm/nouveau/dispnv50/disp.h     |   4 +
->  drivers/gpu/drm/nouveau/dispnv50/wndw.c     |  35 ++++-
->  drivers/gpu/drm/nouveau/dispnv50/wndwc57e.c |  17 +++
->  drivers/gpu/drm/nouveau/nouveau_display.c   | 154 ++++++++++++++++++++
->  drivers/gpu/drm/nouveau/nouveau_display.h   |   4 +
->  7 files changed, 272 insertions(+), 8 deletions(-)
->
-> --
-> 2.17.1
->
-> _______________________________________________
-> Nouveau mailing list
-> Nouveau@lists.freedesktop.org
-> https://lists.freedesktop.org/mailman/listinfo/nouveau
+>> +
+>> +       if (drm->client.device.info.family < NV_DEVICE_INFO_V0_FERMI)
+>> +               gob_size = 256;
+>> +       else
+>> +               gob_size = 512;
+>> +
+>> +       bw = nouveau_get_width_in_blocks(stride);
+>> +       bh = nouveau_get_height_in_blocks(drm, h, tile_mode);
+>> +
+>> +       bl_size = bw * bh * (1 << tile_mode) * gob_size;
+>> +
+>> +       DRM_DEBUG_KMS("offset=%u stride=%u h=%u tile_mode=0x%02x bw=%u bh=%u gob_size=%u bl_size=%llu size=%lu\n",
+>> +                     offset, stride, h, tile_mode, bw, bh, gob_size, bl_size,
+>> +                     nvbo->bo.mem.size);
+>> +
+>> +       if (bl_size + offset > nvbo->bo.mem.size)
+>> +               return -ERANGE;
+>> +
+>> +       return 0;
+>> +}
+>> +
+>>   int
+>>   nouveau_framebuffer_new(struct drm_device *dev,
+>>                          const struct drm_mode_fb_cmd2 *mode_cmd,
+>> @@ -232,6 +298,8 @@ nouveau_framebuffer_new(struct drm_device *dev,
+>>   {
+>>          struct nouveau_drm *drm = nouveau_drm(dev);
+>>          struct nouveau_framebuffer *fb;
+>> +       const struct drm_format_info *info;
+>> +       unsigned int width, height, i;
+>>          int ret;
+>>
+>>           /* YUV overlays have special requirements pre-NV50 */
+>> @@ -254,6 +322,31 @@ nouveau_framebuffer_new(struct drm_device *dev,
+>>                  return -EINVAL;
+>>          }
+>>
+>> +       info = drm_get_format_info(dev, mode_cmd);
+>> +
+>> +       for (i = 0; i < info->num_planes; i++) {
+>> +               width = drm_format_info_plane_width(info,
+>> +                                                   mode_cmd->width,
+>> +                                                   i);
+>> +               height = drm_format_info_plane_height(info,
+>> +                                                     mode_cmd->height,
+>> +                                                     i);
+>> +
+>> +               if (nvbo->kind) {
+>> +                       ret = nouveau_check_bl_size(drm, nvbo,
+>> +                                                   mode_cmd->offsets[i],
+>> +                                                   mode_cmd->pitches[i],
+>> +                                                   height, nvbo->mode);
+>> +                       if (ret)
+>> +                               return ret;
+>> +               } else {
+>> +                       uint32_t size = mode_cmd->pitches[i] * height;
+>> +
+>> +                       if (size + mode_cmd->offsets[i] > nvbo->bo.mem.size)
+>> +                               return -ERANGE;
+>> +               }
+>> +       }
+>> +
+>>          if (!(fb = *pfb = kzalloc(sizeof(*fb), GFP_KERNEL)))
+>>                  return -ENOMEM;
+>>
+>> --
+>> 2.17.1
+>>
+>> _______________________________________________
+>> Nouveau mailing list
+>> Nouveau@lists.freedesktop.org
+>> https://lists.freedesktop.org/mailman/listinfo/nouveau
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
