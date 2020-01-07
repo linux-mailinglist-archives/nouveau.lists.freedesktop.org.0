@@ -1,61 +1,58 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id C717F13833A
-	for <lists+nouveau@lfdr.de>; Sat, 11 Jan 2020 20:33:17 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9500213832B
+	for <lists+nouveau@lfdr.de>; Sat, 11 Jan 2020 20:33:08 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id BE9FB6E456;
+	by gabe.freedesktop.org (Postfix) with ESMTP id E901F6E46F;
 	Sat, 11 Jan 2020 19:32:33 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 304 seconds by postgrey-1.36 at gabe;
- Tue, 07 Jan 2020 17:13:42 UTC
-Received: from mout.kundenserver.de (mout.kundenserver.de [212.227.126.134])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 979DB6E830
- for <nouveau@lists.freedesktop.org>; Tue,  7 Jan 2020 17:13:42 +0000 (UTC)
-Received: from mail-qt1-f176.google.com ([209.85.160.176]) by
- mrelayeu.kundenserver.de (mreue012 [212.227.15.129]) with ESMTPSA (Nemesis)
- id 1N4eOd-1jo5yt39WR-011iUd; Tue, 07 Jan 2020 18:08:36 +0100
-Received: by mail-qt1-f176.google.com with SMTP id e12so383065qto.2;
- Tue, 07 Jan 2020 09:08:36 -0800 (PST)
-X-Gm-Message-State: APjAAAXqTVI9wmEOoULoNlRQy3R9GNmCICUVYlUn8yBG7qDMh+EO8x9j
- mcjhreC9V3O3I+qznkNXp9QBMZed/SfwiFv6ZzI=
-X-Google-Smtp-Source: APXvYqzRk52Ew2lmsQMfvghk3ylFHcEIR88yL70qbdC0HVK9etbYRWgu7fgyXH4+189J3IyWZY+dkJGnvq1XjVlLM+A=
-X-Received: by 2002:a05:620a:a5b:: with SMTP id
- j27mr335658qka.286.1578416914895; 
- Tue, 07 Jan 2020 09:08:34 -0800 (PST)
+Received: from mout.kundenserver.de (mout.kundenserver.de [212.227.126.133])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A976389A57
+ for <nouveau@lists.freedesktop.org>; Tue,  7 Jan 2020 17:15:31 +0000 (UTC)
+Received: from mail-vs1-f42.google.com ([209.85.217.42]) by
+ mrelayeu.kundenserver.de (mreue010 [212.227.15.129]) with ESMTPSA (Nemesis)
+ id 1MsqIi-1jhnLO0rvc-00t9uU; Tue, 07 Jan 2020 18:10:26 +0100
+Received: by mail-vs1-f42.google.com with SMTP id v12so34354252vsv.5;
+ Tue, 07 Jan 2020 09:10:25 -0800 (PST)
+X-Gm-Message-State: APjAAAXcFBPJhtnAplKjHRRjLF/K5QxJWJcXvXVymcNej2rvrXx/X0fi
+ wVBu6JhvdAX+IlcD7MXeTvFjRIiiBGm7+ru0Wro=
+X-Google-Smtp-Source: APXvYqxwO5AyDQus85+IK5BIt7KfSsh7NvpnQb9bzWV5OgyrFYMfLh14xqWUd9CW/X7TSfP34I+W9RVMaa5KUvf/Vb8=
+X-Received: by 2002:a0c:bd20:: with SMTP id m32mr365813qvg.197.1578417023930; 
+ Tue, 07 Jan 2020 09:10:23 -0800 (PST)
 MIME-Version: 1.0
 References: <1578415992-24054-1-git-send-email-krzk@kernel.org>
- <1578415992-24054-6-git-send-email-krzk@kernel.org>
-In-Reply-To: <1578415992-24054-6-git-send-email-krzk@kernel.org>
+ <1578415992-24054-9-git-send-email-krzk@kernel.org>
+In-Reply-To: <1578415992-24054-9-git-send-email-krzk@kernel.org>
 From: Arnd Bergmann <arnd@arndb.de>
-Date: Tue, 7 Jan 2020 18:08:18 +0100
-X-Gmail-Original-Message-ID: <CAK8P3a2eMB34Qd=U_9vGBCN3m5Zh4qDhyEpGH6M=M4e22aPQLQ@mail.gmail.com>
-Message-ID: <CAK8P3a2eMB34Qd=U_9vGBCN3m5Zh4qDhyEpGH6M=M4e22aPQLQ@mail.gmail.com>
+Date: Tue, 7 Jan 2020 18:10:07 +0100
+X-Gmail-Original-Message-ID: <CAK8P3a1RibnRU6SiVjrOy-q+ZDdKacQgD9mrft_aHMgA9hm3PA@mail.gmail.com>
+Message-ID: <CAK8P3a1RibnRU6SiVjrOy-q+ZDdKacQgD9mrft_aHMgA9hm3PA@mail.gmail.com>
 To: Krzysztof Kozlowski <krzk@kernel.org>
-X-Provags-ID: V03:K1:IDMrLgC3H0ekmK6SwU9PMUPDAlZ6fljKTY5XMWA8Myz/jUHSKWE
- pXwUQZK18iHBuQPyaE7xSxkyKwdHREvojqcA9MEODrB/MbXHbg85sr+aRj/zFD4vz53ck5J
- FWTz9ZovYLhMwd21BkrUqaYI4DcqD19BcLadoJ45YmK9GH0tK/vVTscAqoPrzAkd9yBShIg
- t6XFKKvd4xI7+zETbAxkg==
+X-Provags-ID: V03:K1:Wl3I5GL8oTuHF4B8uEWhwYLx8r7xgnH4MKtioAfPmsSS/JrPJvU
+ TG6HFiwedNhpJ6mUOPialIISyutXK5Oog/2XhTpT6MaFdcte+//iRG9NyuQ4EvkOr6NYUOc
+ J/U6C4PJ9yfOSIlagB1J0hniPJ5IBQawFd6F2t/LJUu/jofOwL6F3R/nXWUi4BUreCwiRWa
+ dSsT0RysLpw37gzjP3tQQ==
 X-Spam-Flag: NO
-X-UI-Out-Filterresults: notjunk:1;V03:K0:wZXur4KIFVw=:JUXFSFAUgL8flXyRruMPHu
- soXYhx++jhRQV+S2KE0csUpd+dcBla53JMFcWfJ+f2A7u8FOD+m6u+i6yaojvk8TkW4qGIGWK
- xxUnVk1ouffCEc4nGFNlaoglYg3HAg9uvAjCMzpkPlQgb8cYs5Kxlj2A4mjDQZvVletzpuzqx
- ZCWc3ihZEHwh5421Vlnm1dLApvkZ9Ef5AjkaDvd8iGnXGP1Onz3Fsn0qdfNlRsJixbNfOoIjI
- AmEWDHmsHor3lY/MqKJHfAOj/L1KnLXeZhZVJBE+KLhtMrlA9ppn76s8xNJFZ7EoK7t2f+Xo+
- +h9l6lGXegaeYZ42BRmuN+wnCqd/MqDBo7/WQp+iIU4RdLMHDhiEO0j20OknclNesgAaiHHaQ
- 2L6mszo/o4GaNiQQ5hIeH0HO5MDJMJvMQePdsD7MD97/QXlPVrJe1ZDle9G3RvHHavG5pvmcb
- zcdOY8Rmi2WRpuR2uwcYVmdpDOD5CtJctSOS87MTsByp9r+N43qnFbnRIRu4Y/1I78Iy/a2U/
- D8yzUte3iyMOKc6jG32FrQvc9F3YSTFMQ/g4JDUgORhdzATHlqJmsdtBa7OMmivBFgOuN5IQq
- Rzto3Tq+69liIJAduJnDG2E8V5rGCklfHaDYLuKgGPjHAvQFJP6cSP1UUe4blJdUewLIHH8zt
- NtgN+sofFFd00A8T67mGqur5y+FTwGLrWjCUGTNAaRzulLzzlfVJqfjueg2Altu654wzkCbfS
- p/r+w5+ywkPqIC595yggj2rkx74PChlodqugpqhdFvs16MKkwOhnbfDZ7wAO49NKbhTP6XN7B
- TvFSbc/tnnv+4eLPbPokpWUgIwwPWM7ucGxLoJNea3f1anumyEzh9YUvzcVk8kAbRbfKkO9TB
- N2ykpOC3zOs+rEd24kaA==
+X-UI-Out-Filterresults: notjunk:1;V03:K0:2Hsp65fyom8=:8+N1vr2Y7LksVbpV+rURgY
+ sRCECsN0BC1BsiXze+/gfw02sbdTMaulOEIsfGkIOB0tmjf4P6vpqaqB8XGZimUi6+2K8ELsV
+ 2QA4LooOsVM2xnVNRpkn8nB3mWfO7kmBJ9vkBYJPFOuu8GRyuSo36Z0FW8qOQLAN6rSjZui40
+ 6kBLK0O7JgQudTjJbMRs/MzmolRZO6FTFBtM+ywS/YQSmasHKi1PVyd7Q0ObS3vIueEgkxYso
+ u1nxlbAeddg/u8mk1/YtHc4pAwuwQNKO7R1rrIQ5Zxv/QR8RqA7I+TDcPd4PcTmvhvxvKCAq3
+ O7eWpnXOoYcJ78ktb4FMgYfd2V5jZVQKCB1nRW9IxXO3pWDbNnDMjTvxiy/iiEsXwwX99Nnup
+ CaygvelmWM1RipvsOXxKo/x9HQYQuu56pHbzuvV4VN9kskJH9VLWmLxfM5FKrvTWeqh0qlU2L
+ +0fMPPJT+ohRYh2iV38IPpOevyvBAdzd2Sw4jkvozAD42fULT/g4KulEm5/qonuL9diKYFoGf
+ ctnV8IeXgVGEa6EbrTjH7LfnIzZ/jm6fYGqRS0HW2nxjWApnkJf3VNoQg/j9kwVEa5xpugZuZ
+ 9KjF6e+zN/51bbJS+0+P/S0Cho8JDKv/sxQAK8tfS4YPIPwKPU5/nRPz9a1m5K608Lm37k3Bb
+ 0JmleIr8B5WOskbzKNtzuC7l8RzWc8ojfP8uQco3BEW0cm/ltkzX+Ybs14uRx99GvJ6rXU/ui
+ fXx0tjBYx74fOXXAlJfLwZ+BAs/yLldSFaOnDxkSJeEvsDKvc6mLXTZk4MgkokgAz0sdgUSb5
+ IgR0nBK4vjZQwfyfRJ8DgLJtwxFf7yT1sXpPdZApLtcZZJcEqygh8zmHWkHJ6TrKoNpO8wimj
+ 3tz0OFYK5gC7j1uTNWCw==
 X-Mailman-Approved-At: Sat, 11 Jan 2020 19:32:29 +0000
-Subject: Re: [Nouveau] [RFT 03/13] sh: Constify ioreadX() iomem argument (as
- in generic implementation)
+Subject: Re: [Nouveau] [RFT 06/13] arc: Constify ioreadX() iomem argument
+ (as in generic implementation)
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -107,16 +104,16 @@ On Tue, Jan 7, 2020 at 5:54 PM Krzysztof Kozlowski <krzk@kernel.org> wrote:
 > The ioreadX() helpers have inconsistent interface.  On some architectures
 > void *__iomem address argument is a pointer to const, on some not.
 >
-> Implementations of ioreadX() do not modify the memory under the address
-> so they can be converted to a "const" version for const-safety and
-> consistency among architectures.
+> Implementations of ioreadX() do not modify the memory under the
+> address so they can be converted to a "const" version for const-safety
+> and consistency among architectures.
 >
 > Signed-off-by: Krzysztof Kozlowski <krzk@kernel.org>
 
-The patch looks good, but I think this has to be done together with the powerpc
-version and the header that declares the function, for bisectibility.
+The patch looks correct, but I would not bother here, as it has no
+effect on the compiler or its output.
 
-       Arnd
+      Arnd
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
