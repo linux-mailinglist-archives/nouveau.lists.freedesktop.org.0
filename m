@@ -1,72 +1,54 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id B1462133D0C
-	for <lists+nouveau@lfdr.de>; Wed,  8 Jan 2020 09:26:30 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 866BD135034
+	for <lists+nouveau@lfdr.de>; Thu,  9 Jan 2020 00:58:24 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 381E36E196;
-	Wed,  8 Jan 2020 08:26:29 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B7FD86E358;
+	Wed,  8 Jan 2020 23:58:17 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 9614 seconds by postgrey-1.36 at gabe;
- Wed, 08 Jan 2020 08:26:28 UTC
-Received: from aserp2120.oracle.com (aserp2120.oracle.com [141.146.126.78])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 2CA3B6E196
- for <nouveau@lists.freedesktop.org>; Wed,  8 Jan 2020 08:26:28 +0000 (UTC)
-Received: from pps.filterd (aserp2120.oracle.com [127.0.0.1])
- by aserp2120.oracle.com (8.16.0.27/8.16.0.27) with SMTP id 0085fWK6080687;
- Wed, 8 Jan 2020 05:46:11 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
- h=date : from : to : cc
- : subject : message-id : mime-version : content-type; s=corp-2019-08-05;
- bh=aQRbVUyJHocBW8KCphKH2dI17mFUo+d0ok0/MvtJ5kk=;
- b=E1QP2w1RGWo95dP7F3a6XHbil/PCaQO8nFFUOReHYUEnEl6bmVyMeG+ri+a4yY6yUbkm
- 12ov18ogZDbiFHT5eCQ02yYtc26UaOMRe4HUX9XYXqioRpS8cCxrodJG9mLvOZoGWUFE
- tUBCDGILHD6nD/RQjEyvTqw/tv2Mwz53hwNfKT/9Qt4opcQiEYrA/pUsMz9Brj46hJ4i
- xoauRWu1qFsui0AwRQ9Uh8OB47rWb5m5ImA/JSMP5RPI6ouilEmQ2WHR0CmCIoulVGaq
- mD4sfeqDOO1sUF2FeVtpCqAWG+EgkxvTSVlb1yUfr49wfNzDVD0r5SIYWMfFkHIoO9s7 Og== 
-Received: from userp3020.oracle.com (userp3020.oracle.com [156.151.31.79])
- by aserp2120.oracle.com with ESMTP id 2xajnq1ntw-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 08 Jan 2020 05:46:11 +0000
-Received: from pps.filterd (userp3020.oracle.com [127.0.0.1])
- by userp3020.oracle.com (8.16.0.27/8.16.0.27) with SMTP id 0085flkm028345;
- Wed, 8 Jan 2020 05:46:10 GMT
-Received: from userv0122.oracle.com (userv0122.oracle.com [156.151.31.75])
- by userp3020.oracle.com with ESMTP id 2xcpcrw745-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 08 Jan 2020 05:46:10 +0000
-Received: from abhmp0008.oracle.com (abhmp0008.oracle.com [141.146.116.14])
- by userv0122.oracle.com (8.14.4/8.14.4) with ESMTP id 0085k8cf020709;
- Wed, 8 Jan 2020 05:46:08 GMT
-Received: from kili.mountain (/129.205.23.165)
- by default (Oracle Beehive Gateway v4.0)
- with ESMTP ; Tue, 07 Jan 2020 21:46:08 -0800
-Date: Wed, 8 Jan 2020 08:46:01 +0300
-From: Dan Carpenter <dan.carpenter@oracle.com>
-To: Ben Skeggs <bskeggs@redhat.com>
-Message-ID: <20200108054601.mdwwtcqqpge2iwca@kili.mountain>
+Received: from mail-vs1-xe44.google.com (mail-vs1-xe44.google.com
+ [IPv6:2607:f8b0:4864:20::e44])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 86E496E357;
+ Wed,  8 Jan 2020 23:58:16 +0000 (UTC)
+Received: by mail-vs1-xe44.google.com with SMTP id n27so3122046vsa.0;
+ Wed, 08 Jan 2020 15:58:16 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=+nZtXADyrfsNI2t3xLAuGKVhqb37ykNuxCZAZeGw7DM=;
+ b=iAwp+fCZaLvX/muKgM754JeMKkD7idPOE2o7PBHbcHzg8JrSG9zoSSF8EWXOFtA401
+ dJXpNx32dwiM/LpOeFiZzJj7024cqsQjZzo2+uHMPahH7M6q2DwhDj2xXlPMvBTB+HUX
+ ERou0n5/WG8WT/ChA5nV37bgtXguRvx2iitV2vuHgfmeu28VT/JtjdL/ojyy3Yr8x2/a
+ 9yrz19jR9B86daH/XECUu6lf0GiA3kSGX7M2m/6/IDBixPzjlEkdxQdy0KsBfEBJLuhM
+ Camx9I79Gv0kE74xTlqoDKMcOOuO94fWkejGl6H5xrTUhhUfNyuwy0Ksim/OArakUpsI
+ araw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=+nZtXADyrfsNI2t3xLAuGKVhqb37ykNuxCZAZeGw7DM=;
+ b=tzkWz+ggLqCUG69peL3kCJqmu1Li8O2Iaj7PmqNdN9PZpmZ1kulneuODuLmCwK363d
+ qq1Oq/7IJImfkOtMSJ6Ynfvz8q2U4BUad55PVF2xCYZDje1oycNb4uLu7BMOYFo8m4yz
+ amiSdBsNgKTShKThIee53E5LOGmPWDAR/ZTffe9CfiG4a2oamWZHEVdc1aqD4Z/Vd0z6
+ o+6TfAfRYcPIsTOjJEAABTa10qeJMwJvIYlIM2OnU30XB24rl5VPHMObd3dtMhE4RrcP
+ Fx2LLYlTF6/xGwtitPVrGhv+zgeDOdMq99opDqIK617F0/DO0HJMKk4yoLv2vwJQfMRD
+ 7PXw==
+X-Gm-Message-State: APjAAAUFfwn9YZXsdiqmbAt2cpwpYgrWU0sic8Ob6yIfdDE/9oKstf1q
+ bkR+kSkkhNfsUgIF1vHLwzIlEBHSvqzchQFCZo0=
+X-Google-Smtp-Source: APXvYqxMq8zNTpaV3+2pz3t18Kf9P+tFw/MULex1slX6odPImj9OrwG/evNC/zqK9OvL+pybbZSddcdWPVmyb0WaKjQ=
+X-Received: by 2002:a05:6102:3126:: with SMTP id
+ f6mr4480683vsh.204.1578527895518; 
+ Wed, 08 Jan 2020 15:58:15 -0800 (PST)
 MIME-Version: 1.0
-Content-Disposition: inline
-X-Mailer: git-send-email haha only kidding
-User-Agent: NeoMutt/20170113 (1.7.2)
-X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9493
- signatures=668685
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0
- malwarescore=0
- phishscore=0 bulkscore=0 spamscore=0 mlxscore=0 mlxlogscore=999
- adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.0.1-1911140001 definitions=main-2001080049
-X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9493
- signatures=668685
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0
- priorityscore=1501 malwarescore=0
- suspectscore=0 phishscore=0 bulkscore=0 spamscore=0 clxscore=1011
- lowpriorityscore=0 mlxscore=0 impostorscore=0 mlxlogscore=999 adultscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.0.1-1911140001
- definitions=main-2001080049
-Subject: [Nouveau] [PATCH] nouveau/secboot/gm20b: initialize pointer in
+References: <20200108054601.mdwwtcqqpge2iwca@kili.mountain>
+In-Reply-To: <20200108054601.mdwwtcqqpge2iwca@kili.mountain>
+From: Ben Skeggs <skeggsb@gmail.com>
+Date: Thu, 9 Jan 2020 09:58:04 +1000
+Message-ID: <CACAvsv4ifPYma15xDfu43yanyznpNFyN1vgFrYmao=tdhE6Qjg@mail.gmail.com>
+To: Dan Carpenter <dan.carpenter@oracle.com>
+Subject: Re: [Nouveau] [PATCH] nouveau/secboot/gm20b: initialize pointer in
  gm20b_secboot_new()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -79,53 +61,66 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
- kernel-janitors@vger.kernel.org, dri-devel@lists.freedesktop.org,
- Alexandre Courbot <acourbot@nvidia.com>, Daniel Vetter <daniel@ffwll.ch>
+Cc: David Airlie <airlied@linux.ie>, ML nouveau <nouveau@lists.freedesktop.org>,
+ kernel-janitors@vger.kernel.org,
+ ML dri-devel <dri-devel@lists.freedesktop.org>,
+ Alexandre Courbot <acourbot@nvidia.com>, Ben Skeggs <bskeggs@redhat.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-We accidentally set "psb" which is a no-op instead of "*psb" so it
-generates a static checker warning.  We should probably set it before
-the first error return so that it's always initialized.
+On Wed, 8 Jan 2020 at 15:46, Dan Carpenter <dan.carpenter@oracle.com> wrote:
+>
+> We accidentally set "psb" which is a no-op instead of "*psb" so it
+> generates a static checker warning.  We should probably set it before
+> the first error return so that it's always initialized.
+You actually don't need to do either, *psb will be NULL already on
+entry to the function.  But removing the assignment in the error path
+should be done still.
 
-Fixes: 923f1bd27bf1 ("drm/nouveau/secboot/gm20b: add secure boot support")
-Signed-off-by: Dan Carpenter <dan.carpenter@oracle.com>
----
-Static analysis.  I'm not sure how this is called.
+Ben.
 
- drivers/gpu/drm/nouveau/nvkm/subdev/secboot/gm20b.c | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
-
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/secboot/gm20b.c b/drivers/gpu/drm/nouveau/nvkm/subdev/secboot/gm20b.c
-index df8b919dcf09..ace6fefba428 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/secboot/gm20b.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/secboot/gm20b.c
-@@ -108,6 +108,7 @@ gm20b_secboot_new(struct nvkm_device *device, int index,
- 	struct gm200_secboot *gsb;
- 	struct nvkm_acr *acr;
- 
-+	*psb = NULL;
- 	acr = acr_r352_new(BIT(NVKM_SECBOOT_FALCON_FECS) |
- 			   BIT(NVKM_SECBOOT_FALCON_PMU));
- 	if (IS_ERR(acr))
-@@ -116,10 +117,8 @@ gm20b_secboot_new(struct nvkm_device *device, int index,
- 	acr->optional_falcons = BIT(NVKM_SECBOOT_FALCON_PMU);
- 
- 	gsb = kzalloc(sizeof(*gsb), GFP_KERNEL);
--	if (!gsb) {
--		psb = NULL;
-+	if (!gsb)
- 		return -ENOMEM;
--	}
- 	*psb = &gsb->base;
- 
- 	ret = nvkm_secboot_ctor(&gm20b_secboot, acr, device, index, &gsb->base);
--- 
-2.11.0
-
+>
+> Fixes: 923f1bd27bf1 ("drm/nouveau/secboot/gm20b: add secure boot support")
+> Signed-off-by: Dan Carpenter <dan.carpenter@oracle.com>
+> ---
+> Static analysis.  I'm not sure how this is called.
+>
+>  drivers/gpu/drm/nouveau/nvkm/subdev/secboot/gm20b.c | 5 ++---
+>  1 file changed, 2 insertions(+), 3 deletions(-)
+>
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/secboot/gm20b.c b/drivers/gpu/drm/nouveau/nvkm/subdev/secboot/gm20b.c
+> index df8b919dcf09..ace6fefba428 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/secboot/gm20b.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/secboot/gm20b.c
+> @@ -108,6 +108,7 @@ gm20b_secboot_new(struct nvkm_device *device, int index,
+>         struct gm200_secboot *gsb;
+>         struct nvkm_acr *acr;
+>
+> +       *psb = NULL;
+>         acr = acr_r352_new(BIT(NVKM_SECBOOT_FALCON_FECS) |
+>                            BIT(NVKM_SECBOOT_FALCON_PMU));
+>         if (IS_ERR(acr))
+> @@ -116,10 +117,8 @@ gm20b_secboot_new(struct nvkm_device *device, int index,
+>         acr->optional_falcons = BIT(NVKM_SECBOOT_FALCON_PMU);
+>
+>         gsb = kzalloc(sizeof(*gsb), GFP_KERNEL);
+> -       if (!gsb) {
+> -               psb = NULL;
+> +       if (!gsb)
+>                 return -ENOMEM;
+> -       }
+>         *psb = &gsb->base;
+>
+>         ret = nvkm_secboot_ctor(&gm20b_secboot, acr, device, index, &gsb->base);
+> --
+> 2.11.0
+>
+> _______________________________________________
+> dri-devel mailing list
+> dri-devel@lists.freedesktop.org
+> https://lists.freedesktop.org/mailman/listinfo/dri-devel
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
