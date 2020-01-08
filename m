@@ -1,57 +1,73 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 89D31131C51
-	for <lists+nouveau@lfdr.de>; Tue,  7 Jan 2020 00:27:40 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id B1462133D0C
+	for <lists+nouveau@lfdr.de>; Wed,  8 Jan 2020 09:26:30 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 611F66E59F;
-	Mon,  6 Jan 2020 23:27:34 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 381E36E196;
+	Wed,  8 Jan 2020 08:26:29 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-vs1-xe42.google.com (mail-vs1-xe42.google.com
- [IPv6:2607:f8b0:4864:20::e42])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 423E76E59D;
- Mon,  6 Jan 2020 23:27:32 +0000 (UTC)
-Received: by mail-vs1-xe42.google.com with SMTP id p6so32764530vsj.11;
- Mon, 06 Jan 2020 15:27:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=HR1adj1A3Ic5Jb0NPazOu77KkzAZJIoYDoyM9pqOY08=;
- b=oqeFlizxumJS3xSs1GLYvD4rPCNojogiwdfHo2ADKRWPANURopELSwAadjJ2NXujSa
- UHrMi+ntYK/HAoHmE/FTcFMw2qMSFICQonrtuXclCAPq9SeDkX5HF/6zNuNMWRf3dpM6
- Fca7K1tRUR03UmtRYsdkIhJLBuyGio5J/dAOB9I9jTKr3DU646PZN+wm32NaSFy+LBsv
- EVSME+gPCO0KEBL2M9+PaTpHvC+KOD9r6kwpnHcyXa8xC49mTfkEJXf3OI0znV0W2iPP
- ylTLSWSQPBYJMl8/BqjLfrrh/WVe6YhYxgX6Z3xEfW2bE4195F+FPZtb7KE1sxlNoCW/
- UXhA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=HR1adj1A3Ic5Jb0NPazOu77KkzAZJIoYDoyM9pqOY08=;
- b=GLF1Afw5uzv2kjtkoM8sXDKYaV3bShMoEBqe1Eld8MLo2yWnCmmv/Tk5wDk/YOjeSz
- oeQRRUibKvpCV724hZOqmsJTVQTRZVJ7SAOAHRujxn+xjPf8g1idND1a2zuqKUWYYUsg
- /G7k4+xawBJ/6yaFlASZ+W5z1+gvHCSNvCESbDBJhlJOX7T9TS4mMrYWaDjj6GOFvkv5
- duxMaqKA3vK0Vi0WrRzFmaROOB2U9EDMCEn8H4X8dRt8P5Fh/5KkcIv3DtzPFz8JDCCY
- wTTWOzNuupboBXKyCPY6qp4niE9Fn/kDrrQ4Hc6v5HPBgfNPQb9s2wqPIV04RoffTjbL
- YfWA==
-X-Gm-Message-State: APjAAAXYTUq/WO1kraOiKAu32vVoe10N7hgtrDWWZ/SeFx1yXj5GjmV8
- 9/ZlMPtGRmbZ/PKmQXNE6QZfrnDdMTBTy2igp0LBlfD3vag=
-X-Google-Smtp-Source: APXvYqwkkkOg/lno/2sC3oRI5T+GHauTDffkyPSndoXTgSJBxq6bIMGr5/8gezWgHbYFVgfICqpfZ9QI9Xm/qWStQoE=
-X-Received: by 2002:a05:6102:3126:: with SMTP id
- f6mr7144756vsh.204.1578353251286; 
- Mon, 06 Jan 2020 15:27:31 -0800 (PST)
+X-Greylist: delayed 9614 seconds by postgrey-1.36 at gabe;
+ Wed, 08 Jan 2020 08:26:28 UTC
+Received: from aserp2120.oracle.com (aserp2120.oracle.com [141.146.126.78])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2CA3B6E196
+ for <nouveau@lists.freedesktop.org>; Wed,  8 Jan 2020 08:26:28 +0000 (UTC)
+Received: from pps.filterd (aserp2120.oracle.com [127.0.0.1])
+ by aserp2120.oracle.com (8.16.0.27/8.16.0.27) with SMTP id 0085fWK6080687;
+ Wed, 8 Jan 2020 05:46:11 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
+ h=date : from : to : cc
+ : subject : message-id : mime-version : content-type; s=corp-2019-08-05;
+ bh=aQRbVUyJHocBW8KCphKH2dI17mFUo+d0ok0/MvtJ5kk=;
+ b=E1QP2w1RGWo95dP7F3a6XHbil/PCaQO8nFFUOReHYUEnEl6bmVyMeG+ri+a4yY6yUbkm
+ 12ov18ogZDbiFHT5eCQ02yYtc26UaOMRe4HUX9XYXqioRpS8cCxrodJG9mLvOZoGWUFE
+ tUBCDGILHD6nD/RQjEyvTqw/tv2Mwz53hwNfKT/9Qt4opcQiEYrA/pUsMz9Brj46hJ4i
+ xoauRWu1qFsui0AwRQ9Uh8OB47rWb5m5ImA/JSMP5RPI6ouilEmQ2WHR0CmCIoulVGaq
+ mD4sfeqDOO1sUF2FeVtpCqAWG+EgkxvTSVlb1yUfr49wfNzDVD0r5SIYWMfFkHIoO9s7 Og== 
+Received: from userp3020.oracle.com (userp3020.oracle.com [156.151.31.79])
+ by aserp2120.oracle.com with ESMTP id 2xajnq1ntw-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 08 Jan 2020 05:46:11 +0000
+Received: from pps.filterd (userp3020.oracle.com [127.0.0.1])
+ by userp3020.oracle.com (8.16.0.27/8.16.0.27) with SMTP id 0085flkm028345;
+ Wed, 8 Jan 2020 05:46:10 GMT
+Received: from userv0122.oracle.com (userv0122.oracle.com [156.151.31.75])
+ by userp3020.oracle.com with ESMTP id 2xcpcrw745-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 08 Jan 2020 05:46:10 +0000
+Received: from abhmp0008.oracle.com (abhmp0008.oracle.com [141.146.116.14])
+ by userv0122.oracle.com (8.14.4/8.14.4) with ESMTP id 0085k8cf020709;
+ Wed, 8 Jan 2020 05:46:08 GMT
+Received: from kili.mountain (/129.205.23.165)
+ by default (Oracle Beehive Gateway v4.0)
+ with ESMTP ; Tue, 07 Jan 2020 21:46:08 -0800
+Date: Wed, 8 Jan 2020 08:46:01 +0300
+From: Dan Carpenter <dan.carpenter@oracle.com>
+To: Ben Skeggs <bskeggs@redhat.com>
+Message-ID: <20200108054601.mdwwtcqqpge2iwca@kili.mountain>
 MIME-Version: 1.0
-References: <20191217004520.2404-1-jajones@nvidia.com>
- <CACAvsv6AKt=10JgjaEKc=pkmKfGJoUJjq_Unn0yGTuQK85Es2g@mail.gmail.com>
- <b273ad88-d246-3395-2fd0-8188bc41a127@nvidia.com>
-In-Reply-To: <b273ad88-d246-3395-2fd0-8188bc41a127@nvidia.com>
-From: Ben Skeggs <skeggsb@gmail.com>
-Date: Tue, 7 Jan 2020 09:27:20 +1000
-Message-ID: <CACAvsv5bhaJozct9fgnJ8JNSXpdd5QCH+tCxciZetbnWuzzBPw@mail.gmail.com>
-To: James Jones <jajones@nvidia.com>
-Subject: Re: [Nouveau] [PATCH v2 0/3] drm/nouveau: Support NVIDIA format
- modifiers
+Content-Disposition: inline
+X-Mailer: git-send-email haha only kidding
+User-Agent: NeoMutt/20170113 (1.7.2)
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9493
+ signatures=668685
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0
+ malwarescore=0
+ phishscore=0 bulkscore=0 spamscore=0 mlxscore=0 mlxlogscore=999
+ adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.0.1-1911140001 definitions=main-2001080049
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9493
+ signatures=668685
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0
+ priorityscore=1501 malwarescore=0
+ suspectscore=0 phishscore=0 bulkscore=0 spamscore=0 clxscore=1011
+ lowpriorityscore=0 mlxscore=0 impostorscore=0 mlxlogscore=999 adultscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.0.1-1911140001
+ definitions=main-2001080049
+Subject: [Nouveau] [PATCH] nouveau/secboot/gm20b: initialize pointer in
+ gm20b_secboot_new()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,99 +79,53 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: ML nouveau <nouveau@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>,
- ML dri-devel <dri-devel@lists.freedesktop.org>
+Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
+ kernel-janitors@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ Alexandre Courbot <acourbot@nvidia.com>, Daniel Vetter <daniel@ffwll.ch>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, 7 Jan 2020 at 05:17, James Jones <jajones@nvidia.com> wrote:
->
-> On 1/5/20 5:30 PM, Ben Skeggs wrote:
-> > On Tue, 17 Dec 2019 at 10:44, James Jones <jajones@nvidia.com> wrote:
-> >>
-> >> This series modifies the NV5x+ nouveau display backends to advertise
-> >> appropriate format modifiers on their display planes in atomic mode
-> >> setting blobs.
-> >>
-> >> Corresponding modifications to Mesa/userspace are available here:
-> >>
-> >> https://gitlab.freedesktop.org/cubanismo/mesa/tree/nouveau_work
-> >>
-> >> But those need a bit of cleanup before they're ready to submit.
-> >>
-> >> I've tested this on Tesla, Kepler, Pascal, and Turing-class hardware
-> >> using various formats and all the exposed format modifiers, plus some
-> >> negative testing with invalid ones.
-> >>
-> >> NOTE: this series depends on the "[PATCH v3] drm: Generalized NV Block
-> >> Linear DRM format mod" patch submitted to dri-devel.
-> >>
-> >> v2: Used Tesla family instead of NV50 chipset compare to avoid treating
-> >>      oddly numbered NV4x-class chipsets as NV50+ GPUs.  Other instances
-> >>      of compares with chipset number in the series were audited, deemed
-> >>      safe, and left as-is for consistency with existing code.
-> > Hey James,
-> >
-> > These look OK to me, with the minor issue I mentioned on one of the
-> > patches dealt with.  I'll hold off merging anything until I get the
-> > go-ahead that the modifier definitions are definitely set in stone /
-> > userspace is ready for inclusion.
->
-> Thanks for having a look.  I'll try to get the userspace changes
-> finalized soon.  I think from the NV side, we consider the modifier
-> definition itself (the v3 version of the patch) final, so if there's any
-> stand-alone feedback from yourself or other drm/nouveau developers on
-> that layout, we'd be eager to hear it.  I don't want it rushed in, but
-> we do have several projects blocked on getting that approved & committed.
->
-> I assume the sequencing should be:
->
-> * Fix the minor issue you identified here/complete review of nouveau
-> kernel patches
-> * Complete review of the related TegraDRM new modifier support patch
-> * Finalize and complete review of userspace/Mesa nouveau modifier
-> support patches
-> * Get drm_fourcc.h updates committed
-> * Get these patches and TegraDRM patches committed
-> * Integrate final drm_fourcc.h to Mesa patches and get Mesa patches
-> committed
->
-> Does that sound right to you?
-Seems very reasonable!
+We accidentally set "psb" which is a no-op instead of "*psb" so it
+generates a static checker warning.  We should probably set it before
+the first error return so that it's always initialized.
 
-Ben.
+Fixes: 923f1bd27bf1 ("drm/nouveau/secboot/gm20b: add secure boot support")
+Signed-off-by: Dan Carpenter <dan.carpenter@oracle.com>
+---
+Static analysis.  I'm not sure how this is called.
 
->
-> Thanks,
-> -James
->
-> > Thanks,
-> > Ben.
-> >
-> >>
-> >> James Jones (3):
-> >>    drm/nouveau: Add format mod prop to base/ovly/nvdisp
-> >>    drm/nouveau: Check framebuffer size against bo
-> >>    drm/nouveau: Support NVIDIA format modifiers
-> >>
-> >>   drivers/gpu/drm/nouveau/dispnv50/base507c.c |   7 +-
-> >>   drivers/gpu/drm/nouveau/dispnv50/disp.c     |  59 ++++++++
-> >>   drivers/gpu/drm/nouveau/dispnv50/disp.h     |   4 +
-> >>   drivers/gpu/drm/nouveau/dispnv50/wndw.c     |  35 ++++-
-> >>   drivers/gpu/drm/nouveau/dispnv50/wndwc57e.c |  17 +++
-> >>   drivers/gpu/drm/nouveau/nouveau_display.c   | 154 ++++++++++++++++++++
-> >>   drivers/gpu/drm/nouveau/nouveau_display.h   |   4 +
-> >>   7 files changed, 272 insertions(+), 8 deletions(-)
-> >>
-> >> --
-> >> 2.17.1
-> >>
-> >> _______________________________________________
-> >> Nouveau mailing list
-> >> Nouveau@lists.freedesktop.org
-> >> https://lists.freedesktop.org/mailman/listinfo/nouveau
+ drivers/gpu/drm/nouveau/nvkm/subdev/secboot/gm20b.c | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/secboot/gm20b.c b/drivers/gpu/drm/nouveau/nvkm/subdev/secboot/gm20b.c
+index df8b919dcf09..ace6fefba428 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/secboot/gm20b.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/secboot/gm20b.c
+@@ -108,6 +108,7 @@ gm20b_secboot_new(struct nvkm_device *device, int index,
+ 	struct gm200_secboot *gsb;
+ 	struct nvkm_acr *acr;
+ 
++	*psb = NULL;
+ 	acr = acr_r352_new(BIT(NVKM_SECBOOT_FALCON_FECS) |
+ 			   BIT(NVKM_SECBOOT_FALCON_PMU));
+ 	if (IS_ERR(acr))
+@@ -116,10 +117,8 @@ gm20b_secboot_new(struct nvkm_device *device, int index,
+ 	acr->optional_falcons = BIT(NVKM_SECBOOT_FALCON_PMU);
+ 
+ 	gsb = kzalloc(sizeof(*gsb), GFP_KERNEL);
+-	if (!gsb) {
+-		psb = NULL;
++	if (!gsb)
+ 		return -ENOMEM;
+-	}
+ 	*psb = &gsb->base;
+ 
+ 	ret = nvkm_secboot_ctor(&gm20b_secboot, acr, device, index, &gsb->base);
+-- 
+2.11.0
+
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
