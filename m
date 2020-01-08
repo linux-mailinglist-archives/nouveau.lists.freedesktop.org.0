@@ -1,60 +1,53 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 282D5138346
-	for <lists+nouveau@lfdr.de>; Sat, 11 Jan 2020 20:33:25 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 02EC113834A
+	for <lists+nouveau@lfdr.de>; Sat, 11 Jan 2020 20:33:28 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5198E6E2A8;
-	Sat, 11 Jan 2020 19:32:35 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id EB2C56E48F;
+	Sat, 11 Jan 2020 19:32:34 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mout.kundenserver.de (mout.kundenserver.de [212.227.126.187])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7B4ED6E1BC;
- Wed,  8 Jan 2020 11:55:59 +0000 (UTC)
-Received: from mail-lj1-f176.google.com ([209.85.208.176]) by
- mrelayeu.kundenserver.de (mreue012 [212.227.15.129]) with ESMTPSA (Nemesis)
- id 1M3VAI-1iphuB2d62-000dJk; Wed, 08 Jan 2020 12:55:57 +0100
-Received: by mail-lj1-f176.google.com with SMTP id l2so3013473lja.6;
- Wed, 08 Jan 2020 03:55:57 -0800 (PST)
-X-Gm-Message-State: APjAAAXtpk+eU8G/XidDm1NhiBX5iI5vQzRD5Doqo3WjPpQss9/6tF4/
- lO0Z/6KcADBCunW1KGzqtJqfaQ5H+0Nocb/I6FQ=
-X-Google-Smtp-Source: APXvYqx76A/E4Ch8oNBJvonZ2jianfqelDGhZdcoyIiElnwI+5tX58xf2+wQq15Hqyr3lM5AXUWKqh7e7QV64xZG5mc=
-X-Received: by 2002:a2e:9095:: with SMTP id l21mr2608508ljg.175.1578484556968; 
- Wed, 08 Jan 2020 03:55:56 -0800 (PST)
-MIME-Version: 1.0
+X-Greylist: delayed 303 seconds by postgrey-1.36 at gabe;
+ Wed, 08 Jan 2020 17:46:05 UTC
+Received: from eu-smtp-delivery-151.mimecast.com
+ (eu-smtp-delivery-151.mimecast.com [146.101.78.151])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1B9946E1F1
+ for <nouveau@lists.freedesktop.org>; Wed,  8 Jan 2020 17:46:04 +0000 (UTC)
+Received: from AcuMS.aculab.com (156.67.243.126 [156.67.243.126]) (Using
+ TLS) by relay.mimecast.com with ESMTP id uk-mta-2-XMFewsroMBqNVmL4iq_bTQ-1;
+ Wed, 08 Jan 2020 17:39:44 +0000
+Received: from AcuMS.Aculab.com (fd9f:af1c:a25b:0:43c:695e:880f:8750) by
+ AcuMS.aculab.com (fd9f:af1c:a25b:0:43c:695e:880f:8750) with Microsoft SMTP
+ Server (TLS) id 15.0.1347.2; Wed, 8 Jan 2020 17:39:42 +0000
+Received: from AcuMS.Aculab.com ([fe80::43c:695e:880f:8750]) by
+ AcuMS.aculab.com ([fe80::43c:695e:880f:8750%12]) with mapi id 15.00.1347.000; 
+ Wed, 8 Jan 2020 17:39:42 +0000
+From: David Laight <David.Laight@ACULAB.COM>
+To: 'Christophe Leroy' <christophe.leroy@c-s.fr>, Geert Uytterhoeven
+ <geert@linux-m68k.org>
+Thread-Topic: [RFT 00/13] iomap: Constify ioreadX() iomem argument
+Thread-Index: AQHVxgB0oW/g95TA9k2fcgn+xgLf36fhB6DA
+Date: Wed, 8 Jan 2020 17:39:42 +0000
+Message-ID: <334434313e1642768995acc03a51214f@AcuMS.aculab.com>
 References: <1578415992-24054-1-git-send-email-krzk@kernel.org>
  <CAMuHMdW4ek0OYQDrrbcpZjNUTTP04nSbwkmiZvBmKcU=PQM9qA@mail.gmail.com>
  <CAMuHMdUBmYtJKtSYzS_5u67hVZOqcKSgFY1rDGme6gLNRBJ_gA@mail.gmail.com>
  <CAJKOXPfq9vS4kSyx1jOPHBvi9_HjviRv0LU2A8ZwdmqgUuebHQ@mail.gmail.com>
  <2355489c-a207-1927-54cf-85c04b62f18f@c-s.fr>
- <CAK8P3a21yPrmp4ik3Ei1BZfeqZNf0wL5NZNF3uXqb4FLRDyUPw@mail.gmail.com>
- <20200108091549.GB10145@pi3>
-In-Reply-To: <20200108091549.GB10145@pi3>
-From: Arnd Bergmann <arnd@arndb.de>
-Date: Wed, 8 Jan 2020 12:55:39 +0100
-X-Gmail-Original-Message-ID: <CAK8P3a19ZgLhKJ016Mt_FyZrqnKaWwJyiaauMiUDAHV=DB9_2w@mail.gmail.com>
-Message-ID: <CAK8P3a19ZgLhKJ016Mt_FyZrqnKaWwJyiaauMiUDAHV=DB9_2w@mail.gmail.com>
-To: Krzysztof Kozlowski <krzk@kernel.org>
-X-Provags-ID: V03:K1:OLXxgklWfaLMhKuV8Wm8W39kUcHf4a+JyIfGa7uJ3yUjlTzpkyq
- eUd43K01aWA0i0ihiEp0mFdU1+/TaTZ/mvHEN/LvbjMgj+pw8G3G130nvwrLwWWZ9rkwc9y
- kIqJX9t0G2fM4p+HKuF78v7pt07b490bIVjM/G5rXC1PfGFIuGJzrH6CtWhepiGwo3n8FoV
- f9mNGXU4LtPGfMjnCSQHg==
-X-Spam-Flag: NO
-X-UI-Out-Filterresults: notjunk:1;V03:K0:k1T+yO7/AYI=:wC3ZSi6xX/4CO8QldrMdvY
- JOzpZSuOnyZeuROZmx2xIAHn/3tJjCqCfl+D7wo1n9saXZ2eUIm4HLndFSGzDVvvm01nRYsjX
- IhkaQf/a/tlicda2eH8CmWenZ2z0oi/Hg/5SpWBa5XCdmHaH5aqWvz1hNijlmfPJVpNmRiEek
- gf5E0EauCFUo/eHgBERs1Zx+fhkyqOx3wpS/tKnKDyjA3loKbKczpoAxPMiNfxwX39n+J8R05
- n98+jXAUURpGT8fBQH71ucrLqI5inC9FWvQrPaVlAXy3ggQjmlTPnOo0fHqDPhKw+mZWhHwrZ
- 5R8mE9dgM9gd4rVAGDqevM8kYL9VweOFm1aCRHDRH0X9Db7Ta2w9bOgrEBTOYqnSgCR4Yx0cE
- SPsAEmWWFWdwVNgAob7EgVNz67ZPHdvxPoDMbBXbLcWm1tLZoRRqLS6Gx08MLqOQCJI5ufBaf
- TdlqSWo5wgYc5Istd7nU3/JfFsXK26QdgGERofOrDvUk7v7LQgR/SD12YeuqiXMGEHeLW2ZEs
- w51Brg7z9ATxU9rc3lrFTyXAgdGg0qc+v/ua2ztsQf0r2bS+boy6Dsd6JtERtyetIsqIZj3eE
- a0ry8Opmz4QUO47vFtYuTfDq2VSyI7uoro1845lHmn9/OQpQq4ZLJ1e+wFQLKT9wWQIHHxQKY
- X0CbsTm4C/pg/ATi7nvKDXtHO+WNsRmYXxt6h97uVxYUVHs/0eNGuZ9t9B6MS6sg0aLiwXz0S
- aUn97u2vvRkanwYSEh6N4l8qIlPXGc+W5Ia4gHR4ScnqV6FYWCudsdFdL0NjFKkf/7mZQ8Kaw
- dsqRye3wNWFASPvIud6fqJKCLOITeL5k8vAftrql30E4S2C4niX9a1scUQyxGYgjyw5KkQ2sI
- 4pcaTkoVVB8VBrmP+Xlw==
+ <CAMuHMdV=-m-eN4rOa=XQhk2oBDZZwgXXMU6RMVQRVsc6ALyeoA@mail.gmail.com>
+ <00a43e5c-0708-d49a-9cc4-eb2ce8b4cf99@c-s.fr>
+In-Reply-To: <00a43e5c-0708-d49a-9cc4-eb2ce8b4cf99@c-s.fr>
+Accept-Language: en-GB, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.202.205.107]
+MIME-Version: 1.0
+X-MC-Unique: XMFewsroMBqNVmL4iq_bTQ-1
+X-Mimecast-Spam-Score: 0
 X-Mailman-Approved-At: Sat, 11 Jan 2020 19:32:29 +0000
 Subject: Re: [Nouveau] [RFT 00/13] iomap: Constify ioreadX() iomem argument
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -69,29 +62,31 @@ List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
 Cc: Rich Felker <dalias@libc.org>, Jiri Slaby <jirislaby@gmail.com>,
- David Airlie <airlied@linux.ie>, ML nouveau <nouveau@lists.freedesktop.org>,
+ David Airlie <airlied@linux.ie>,
+ "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
  Jason Wang <jasowang@redhat.com>,
  DRI Development <dri-devel@lists.freedesktop.org>,
- virtualization@lists.linux-foundation.org,
+ "virtualization@lists.linux-foundation.org"
+ <virtualization@lists.linux-foundation.org>,
  "James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>,
  Paul Mackerras <paulus@samba.org>, Linux-Arch <linux-arch@vger.kernel.org>,
  Dave Jiang <dave.jiang@intel.com>, Yoshinori Sato <ysato@users.sourceforge.jp>,
  Helge Deller <deller@gmx.de>, Linux-sh list <linux-sh@vger.kernel.org>,
- Alexey Brodkin <abrodkin@synopsys.com>,
- Geert Uytterhoeven <geert@linux-m68k.org>, Ben Skeggs <bskeggs@redhat.com>,
- Dave Airlie <airlied@redhat.com>, arcml <linux-snps-arc@lists.infradead.org>,
+ Alexey Brodkin <abrodkin@synopsys.com>, Krzysztof Kozlowski <krzk@kernel.org>,
+ Ben Skeggs <bskeggs@redhat.com>, Dave Airlie <airlied@redhat.com>,
+ arcml <linux-snps-arc@lists.infradead.org>,
  Nick Kossifidis <mickflemm@gmail.com>, Allen Hubbe <allenbh@gmail.com>,
- Jon Mason <jdmason@kudzu.us>, Ivan Kokshaysky <ink@jurassic.park.msu.ru>,
- Thomas Gleixner <tglx@linutronix.de>,
+ Arnd Bergmann <arnd@arndb.de>, Jon Mason <jdmason@kudzu.us>, Ivan
+ Kokshaysky <ink@jurassic.park.msu.ru>, Thomas Gleixner <tglx@linutronix.de>,
  Mauro Carvalho Chehab <mchehab@kernel.org>, Kalle Valo <kvalo@codeaurora.org>,
  Richard Henderson <rth@twiddle.net>,
- Christophe Leroy <christophe.leroy@c-s.fr>,
  Parisc List <linux-parisc@vger.kernel.org>, netdev <netdev@vger.kernel.org>,
  linux-wireless <linux-wireless@vger.kernel.org>,
  Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
  Luis Chamberlain <mcgrof@kernel.org>, Vineet Gupta <vgupta@synopsys.com>,
  Daniel Vetter <daniel@ffwll.ch>, alpha <linux-alpha@vger.kernel.org>,
- linux-ntb@googlegroups.com, Andrew Morton <akpm@linux-foundation.org>,
+ "linux-ntb@googlegroups.com" <linux-ntb@googlegroups.com>,
+ Andrew Morton <akpm@linux-foundation.org>,
  Linux Media Mailing List <linux-media@vger.kernel.org>,
  linuxppc-dev <linuxppc-dev@lists.ozlabs.org>,
  "David S. Miller" <davem@davemloft.net>
@@ -100,28 +95,27 @@ Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, Jan 8, 2020 at 10:15 AM Krzysztof Kozlowski <krzk@kernel.org> wrote:
+From: Christophe Leroy
+> Sent: 08 January 2020 08:49
+...
+> And as pointed by Arnd, the volatile is really only necessary for the
+> dereference itself, should the arch use dereferencing.
 
-> > The __force-cast that removes the __iomem here also means that
-> > the 'volatile' keyword could be dropped from the argument list,
-> > as it has no real effect any more, but then there are a few drivers
-> > that mark their iomem pointers as either 'volatile void __iomem*' or
-> > (worse) 'volatile void *', so we keep it in the argument list to not
-> > add warnings for those drivers.
-> >
-> > It may be time to change these drivers to not use volatile for __iomem
-> > pointers, but that seems out of scope for what Krzysztof is trying
-> > to do. Ideally we would be consistent here though, either using volatile
-> > all the time or never.
->
-> Indeed. I guess there are no objections around const so let me send v2
-> for const only.
+I've had trouble with some versions of gcc and reading of 'volatile unsigned char *'.
+It tended to follow the memory read with an extra mask with 0xff.
+(I suspect that internally the value landed into a temporary 'int' variable.)
 
-Ok, sounds good. Maybe mention in the changelog then that the
-'volatile' in the interface is intentionally left out, and that only users
-of readl/writel still have it to deal with existing drivers.
+I got better code using memory barriers.
+So putting an asm barrier for the exact location of the memory read
+either side of the read should have the desired effect without adding
+extra instructions.
+(You might think 'volatile' would mean that - but it doesn't.)
 
-    Arnd
+	David
+
+-
+Registered Address Lakeside, Bramley Road, Mount Farm, Milton Keynes, MK1 1PT, UK
+Registration No: 1397386 (Wales)
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
