@@ -1,84 +1,193 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 68408138314
-	for <lists+nouveau@lfdr.de>; Sat, 11 Jan 2020 20:32:54 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 46315138324
+	for <lists+nouveau@lfdr.de>; Sat, 11 Jan 2020 20:33:04 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9EC8E6E284;
-	Sat, 11 Jan 2020 19:32:31 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id EB3216E471;
+	Sat, 11 Jan 2020 19:32:33 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1B3196E394;
- Thu,  9 Jan 2020 06:04:45 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id DF4A4AEE0;
- Thu,  9 Jan 2020 06:04:42 +0000 (UTC)
-To: Krzysztof Kozlowski <krzk@kernel.org>, Richard Henderson
- <rth@twiddle.net>, Ivan Kokshaysky <ink@jurassic.park.msu.ru>,
- Matt Turner <mattst88@gmail.com>, Alexey Brodkin <abrodkin@synopsys.com>,
- Vineet Gupta <vgupta@synopsys.com>,
- "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
- Helge Deller <deller@gmx.de>,
- Benjamin Herrenschmidt <benh@kernel.crashing.org>,
- Paul Mackerras <paulus@samba.org>, Michael Ellerman <mpe@ellerman.id.au>,
- Yoshinori Sato <ysato@users.sourceforge.jp>, Rich Felker <dalias@libc.org>,
- Dave Airlie <airlied@redhat.com>, David Airlie <airlied@linux.ie>,
- Daniel Vetter <daniel@ffwll.ch>, Ben Skeggs <bskeggs@redhat.com>,
- Mauro Carvalho Chehab <mchehab@kernel.org>, Jiri Slaby
- <jirislaby@gmail.com>, Nick Kossifidis <mickflemm@gmail.com>,
- Luis Chamberlain <mcgrof@kernel.org>, Kalle Valo <kvalo@codeaurora.org>,
- "David S. Miller" <davem@davemloft.net>, Dave Jiang <dave.jiang@intel.com>,
- Jon Mason <jdmason@kudzu.us>, Allen Hubbe <allenbh@gmail.com>,
- "Michael S. Tsirkin" <mst@redhat.com>, Jason Wang <jasowang@redhat.com>,
- Arnd Bergmann <arnd@arndb.de>, Geert Uytterhoeven <geert+renesas@glider.be>,
- Thomas Gleixner <tglx@linutronix.de>, linux-alpha@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-snps-arc@lists.infradead.org,
- linux-parisc@vger.kernel.org, linuxppc-dev@lists.ozlabs.org,
- linux-sh@vger.kernel.org, dri-devel@lists.freedesktop.org,
- nouveau@lists.freedesktop.org, linux-media@vger.kernel.org,
- linux-wireless@vger.kernel.org, netdev@vger.kernel.org,
- linux-ntb@googlegroups.com, virtualization@lists.linux-foundation.org,
- linux-arch@vger.kernel.org
+X-Greylist: delayed 361 seconds by postgrey-1.36 at gabe;
+ Thu, 09 Jan 2020 07:05:23 UTC
+Received: from smtprelay-out1.synopsys.com (us03-smtprelay2.synopsys.com
+ [149.117.87.133])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 85CEE6E3A4
+ for <nouveau@lists.freedesktop.org>; Thu,  9 Jan 2020 07:05:23 +0000 (UTC)
+Received: from mailhost.synopsys.com (badc-mailhost1.synopsys.com
+ [10.192.0.17])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by smtprelay-out1.synopsys.com (Postfix) with ESMTPS id 18D87C009F;
+ Thu,  9 Jan 2020 06:59:13 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=synopsys.com; s=mail;
+ t=1578553161; bh=sqFgFf8gDeA6DLe7eNifMlYr3E6rAjwppK+CWXTkHSY=;
+ h=From:To:CC:Subject:Date:References:In-Reply-To:From;
+ b=WQEGVbElKm4e9Sx1nyR3bYTz+o6NMHjZ9r85q6gLzV02L44OagJtgu1WI9YHfFUsk
+ bqemPNgpMcndc3Q9CedwFNqMClSj6uKA6IQtpWZLqCCNtQG2gY3MIIOZqkngnhN7We
+ RrFSqo0WLbxFD+JRH5khDx7bn6YVt0M/iAilIrsB8HwE6ShytEbmYD4lBA/Zs88ZQE
+ UjuWlPgdXVpyNOEzD1vSXObFFQy2dcy2qDNWIn4CB05D9Rkrv9NwizowhwOE8hQdIc
+ hhgF8ymlr9EBJoouk6gcm+B5nDQ5U8NfXux8Zc777AbZzQBDSChSlHLefc/Ie8P3mZ
+ HD93LYxKASA3g==
+Received: from US01WEHTC3.internal.synopsys.com
+ (us01wehtc3.internal.synopsys.com [10.15.84.232])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mailhost.synopsys.com (Postfix) with ESMTPS id AC426A0083;
+ Thu,  9 Jan 2020 06:59:06 +0000 (UTC)
+Received: from us01hybrid1.internal.synopsys.com (10.200.27.51) by
+ US01WEHTC3.internal.synopsys.com (10.15.84.232) with Microsoft SMTP Server
+ (TLS) id 14.3.408.0; Wed, 8 Jan 2020 22:59:05 -0800
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com (10.202.3.67) by
+ mrs.synopsys.com (10.200.27.51) with Microsoft SMTP Server (TLS) id
+ 14.3.408.0; Wed, 8 Jan 2020 22:59:05 -0800
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=cshDnWFcL3vz2YIk/LsskhD22ozYAL1lqFzfe3F+fLO8Vd4nOftatgoNBw4osWVEFPhP/cWMW5KUwy1QHAoEaZA9hCHWcF0qxJfzedoasDUmPIN1SFQVBx9HdJWNSjFJ7ss/0oyYD5uRp0PSZ61pQESoPWadkv7fPBrIH9ykzeToJJYCRTUeslsglvuGaFZRexwzZt/StfzSqImmWeG6oLSnXwPIrCvCa6SJ51pVYnEEe+L/ZQbZKLUMWMbsqb0QWPBlzFzuIvjbX523iRTdmfNCikNpg996Ru5zdkIoWOrQLF0Gd4Jrla/G5f2HaSeyu6XjpD4BrrPBkfrtEs/5kw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=y8gmFjR/b1fGaQAM2gOqn8nmQPkcV93ur6tT+xau3hk=;
+ b=HgIizoKlI2r0tjlSM9SHuXnac13qnrWBaZk9StULCjuHqkOoa5eyhT8iGmanpB6RGakG0XbbciTXol3XyFTJnJ5PXaGwXOB3VmQF0csxKpYnJ2scd5x30Zl/2wULBxIzkllhqdow8vRfkoKPjL8zlnNHOFJd390CFsPMpJIN5hrHiRQ5yhKjpo4y/8xpODXTPxRXax3DJaL/8TJ6DNwuhuNu/CPeRikCzxQTq7vqOS8heEOqfOxwK91t2kucwuNnchQPy6eXT+Np8cBeDP3YnGUhdTzRBkLV3zj3zQq3R2jEWijD5Me8sO+lRYuOjDwxmSdAf9rF3AQGSPOzFdTqLA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=synopsys.com; dmarc=pass action=none header.from=synopsys.com;
+ dkim=pass header.d=synopsys.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=synopsys.onmicrosoft.com; s=selector2-synopsys-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=y8gmFjR/b1fGaQAM2gOqn8nmQPkcV93ur6tT+xau3hk=;
+ b=ElhTNwP2fmKqiLkP6K0eVs4wCIBFvBaRLA29KxYaNjUlc3rrSROCayZwnhr75qQ88R6OmPyHS0V739ESZrNJOf35FMuZfmOv/Uv1drt1X0326pJQaFZCo00WJDnqi3FN6ohklNxHE1r/blX9POnbzulv1ZFadJxTbMybIPsb5wU=
+Received: from CY4PR1201MB0120.namprd12.prod.outlook.com (10.172.78.14) by
+ CY4PR1201MB0054.namprd12.prod.outlook.com (10.172.77.21) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.2602.15; Thu, 9 Jan 2020 06:59:03 +0000
+Received: from CY4PR1201MB0120.namprd12.prod.outlook.com
+ ([fe80::3977:e2ba:ce57:f79a]) by CY4PR1201MB0120.namprd12.prod.outlook.com
+ ([fe80::3977:e2ba:ce57:f79a%5]) with mapi id 15.20.2602.017; Thu, 9 Jan 2020
+ 06:59:03 +0000
+From: Alexey Brodkin <Alexey.Brodkin@synopsys.com>
+To: Krzysztof Kozlowski <krzk@kernel.org>
+Thread-Topic: [PATCH v2 5/9] arc: Constify ioreadX() iomem argument (as in
+ generic implementation)
+Thread-Index: AQHVxl82ysx9hNAdrEOd7vUo3yqzKKfh5x8g
+Date: Thu, 9 Jan 2020 06:59:03 +0000
+Message-ID: <CY4PR1201MB01201F44C7EBC54F6AA86446A1390@CY4PR1201MB0120.namprd12.prod.outlook.com>
 References: <20200108200528.4614-1-krzk@kernel.org>
- <20200108200528.4614-7-krzk@kernel.org>
-From: Thomas Zimmermann <tzimmermann@suse.de>
-Autocrypt: addr=tzimmermann@suse.de; keydata=
- mQENBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
- XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
- BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
- hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
- 9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
- AAG0J1Rob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPokBVAQTAQgAPhYh
- BHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJbOdLgAhsDBQkDwmcABQsJCAcCBhUKCQgLAgQWAgMB
- Ah4BAheAAAoJEGgNwR1TC3ojR80H/jH+vYavwQ+TvO8ksXL9JQWc3IFSiGpuSVXLCdg62AmR
- irxW+qCwNncNQyb9rd30gzdectSkPWL3KSqEResBe24IbA5/jSkPweJasgXtfhuyoeCJ6PXo
- clQQGKIoFIAEv1s8l0ggPZswvCinegl1diyJXUXmdEJRTWYAtxn/atut1o6Giv6D2qmYbXN7
- mneMC5MzlLaJKUtoH7U/IjVw1sx2qtxAZGKVm4RZxPnMCp9E1MAr5t4dP5gJCIiqsdrVqI6i
- KupZstMxstPU//azmz7ZWWxT0JzgJqZSvPYx/SATeexTYBP47YFyri4jnsty2ErS91E6H8os
- Bv6pnSn7eAq5AQ0EWznS4AEIAMYmP4M/V+T5RY5at/g7rUdNsLhWv1APYrh9RQefODYHrNRH
- UE9eosYbT6XMryR9hT8XlGOYRwKWwiQBoWSDiTMo/Xi29jUnn4BXfI2px2DTXwc22LKtLAgT
- RjP+qbU63Y0xnQN29UGDbYgyyK51DW3H0If2a3JNsheAAK+Xc9baj0LGIc8T9uiEWHBnCH+R
- dhgATnWWGKdDegUR5BkDfDg5O/FISymJBHx2Dyoklv5g4BzkgqTqwmaYzsl8UxZKvbaxq0zb
- ehDda8lvhFXodNFMAgTLJlLuDYOGLK2AwbrS3Sp0AEbkpdJBb44qVlGm5bApZouHeJ/+n+7r
- 12+lqdsAEQEAAYkBPAQYAQgAJhYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJbOdLgAhsMBQkD
- wmcAAAoJEGgNwR1TC3ojpfcIAInwP5OlcEKokTnHCiDTz4Ony4GnHRP2fXATQZCKxmu4AJY2
- h9ifw9Nf2TjCZ6AMvC3thAN0rFDj55N9l4s1CpaDo4J+0fkrHuyNacnT206CeJV1E7NYntxU
- n+LSiRrOdywn6erjxRi9EYTVLCHcDhBEjKmFZfg4AM4GZMWX1lg0+eHbd5oL1as28WvvI/uI
- aMyV8RbyXot1r/8QLlWldU3NrTF5p7TMU2y3ZH2mf5suSKHAMtbE4jKJ8ZHFOo3GhLgjVrBW
- HE9JXO08xKkgD+w6v83+nomsEuf6C6LYrqY/tsZvyEX6zN8CtirPdPWu/VXNRYAl/lat7lSI
- 3H26qrE=
-Message-ID: <ff03b149-b825-47f3-f92e-100899bb05fd@suse.de>
-Date: Thu, 9 Jan 2020 07:04:36 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.3.1
+ <20200108200528.4614-6-krzk@kernel.org>
+In-Reply-To: <20200108200528.4614-6-krzk@kernel.org>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-dg-ref: =?us-ascii?Q?PG1ldGE+PGF0IG5tPSJib2R5LnR4dCIgcD0iYzpcdXNlcnNcYWJyb2RraW5c?=
+ =?us-ascii?Q?YXBwZGF0YVxyb2FtaW5nXDA5ZDg0OWI2LTMyZDMtNGE0MC04NWVlLTZiODRi?=
+ =?us-ascii?Q?YTI5ZTM1Ylxtc2dzXG1zZy04MzJjMmY1Yi0zMmFkLTExZWEtODAwMS04OGIx?=
+ =?us-ascii?Q?MTFjZGUyMTdcYW1lLXRlc3RcODMyYzJmNWQtMzJhZC0xMWVhLTgwMDEtODhi?=
+ =?us-ascii?Q?MTExY2RlMjE3Ym9keS50eHQiIHN6PSI1NzUiIHQ9IjEzMjIzMDI2NzQwOTc2?=
+ =?us-ascii?Q?MzY3NSIgaD0iTll5SFZoTlMzUGh4UWxnWXV0YmErY21FVTdJPSIgaWQ9IiIg?=
+ =?us-ascii?Q?Ymw9IjAiIGJvPSIxIiBjaT0iY0FBQUFFUkhVMVJTUlVGTkNnVUFBQlFKQUFC?=
+ =?us-ascii?Q?YmpZTkZ1c2JWQVRwcEg3YXorOVhTT21rZnRyUDcxZElPQUFBQUFBQUFBQUFB?=
+ =?us-ascii?Q?QUFBQUFBQUFBQUFBQUhBQUFBQ2tDQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFB?=
+ =?us-ascii?Q?QUVBQVFBQkFBQUFSWDJrMUFBQUFBQUFBQUFBQUFBQUFKNEFBQUJtQUdrQWJn?=
+ =?us-ascii?Q?QmhBRzRBWXdCbEFGOEFjQUJzQUdFQWJnQnVBR2tBYmdCbkFGOEFkd0JoQUhR?=
+ =?us-ascii?Q?QVpRQnlBRzBBWVFCeUFHc0FBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFB?=
+ =?us-ascii?Q?QUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFB?=
+ =?us-ascii?Q?QUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFB?=
+ =?us-ascii?Q?RUFBQUFBQUFBQUFnQUFBQUFBbmdBQUFHWUFid0IxQUc0QVpBQnlBSGtBWHdC?=
+ =?us-ascii?Q?d0FHRUFjZ0IwQUc0QVpRQnlBSE1BWHdCbkFHWUFBQUFBQUFBQUFBQUFBQUFB?=
+ =?us-ascii?Q?QUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFB?=
+ =?us-ascii?Q?QUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFB?=
+ =?us-ascii?Q?QUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQVFBQUFBQUFBQUFDQUFB?=
+ =?us-ascii?Q?QUFBQ2VBQUFBWmdCdkFIVUFiZ0JrQUhJQWVRQmZBSEFBWVFCeUFIUUFiZ0Js?=
+ =?us-ascii?Q?QUhJQWN3QmZBSE1BWVFCdEFITUFkUUJ1QUdjQVh3QmpBRzhBYmdCbUFBQUFB?=
+ =?us-ascii?Q?QUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFB?=
+ =?us-ascii?Q?QUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFB?=
+ =?us-ascii?Q?QUFBQUFBQUFBQUFBQUFBQUJBQUFBQUFBQUFBSUFBQUFBQUo0QUFBQm1BRzhB?=
+ =?us-ascii?Q?ZFFCdUFHUUFjZ0I1QUY4QWNBQmhBSElBZEFCdUFHVUFjZ0J6QUY4QWN3QmhB?=
+ =?us-ascii?Q?RzBBY3dCMUFHNEFad0JmQUhJQVpRQnpBQUFBQUFBQUFBQUFBQUFBQUFBQUFB?=
+ =?us-ascii?Q?QUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFB?=
+ =?us-ascii?Q?QUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFB?=
+ =?us-ascii?Q?QUFFQUFBQUFBQUFBQWdBQUFBQUFuZ0FBQUdZQWJ3QjFBRzRBWkFCeUFIa0FY?=
+ =?us-ascii?Q?d0J3QUdFQWNnQjBBRzRBWlFCeUFITUFYd0J6QUcwQWFRQmpBQUFBQUFBQUFB?=
+ =?us-ascii?Q?QUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFB?=
+ =?us-ascii?Q?QUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFB?=
+ =?us-ascii?Q?QUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBUUFBQUFBQUFBQUNB?=
+ =?us-ascii?Q?QUFBQUFDZUFBQUFaZ0J2QUhVQWJnQmtBSElBZVFCZkFIQUFZUUJ5QUhRQWJn?=
+ =?us-ascii?Q?QmxBSElBY3dCZkFITUFkQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFB?=
+ =?us-ascii?Q?QUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFB?=
+ =?us-ascii?Q?QUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFB?=
+ =?us-ascii?Q?QUFBQUFBQUFBQUFBQUFBQUFBQkFBQUFBQUFBQUFJQUFBQUFBSjRBQUFCbUFH?=
+ =?us-ascii?Q?OEFkUUJ1QUdRQWNnQjVBRjhBY0FCaEFISUFkQUJ1QUdVQWNnQnpBRjhBZEFC?=
+ =?us-ascii?Q?ekFHMEFZd0FBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFB?=
+ =?us-ascii?Q?QUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFB?=
+ =?us-ascii?Q?QUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFB?=
+ =?us-ascii?Q?QUFBQUVBQUFBQUFBQUFBZ0FBQUFBQW5nQUFBR1lBYndCMUFHNEFaQUJ5QUhr?=
+ =?us-ascii?Q?QVh3QndBR0VBY2dCMEFHNEFaUUJ5QUhNQVh3QjFBRzBBWXdBQUFBQUFBQUFB?=
+ =?us-ascii?Q?QUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFB?=
+ =?us-ascii?Q?QUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFB?=
+ =?us-ascii?Q?QUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFRQUFBQUFBQUFB?=
+ =?us-ascii?Q?Q0FBQUFBQUNlQUFBQVp3QjBBSE1BWHdCd0FISUFid0JrQUhVQVl3QjBBRjhB?=
+ =?us-ascii?Q?ZEFCeUFHRUFhUUJ1QUdrQWJnQm5BQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFB?=
+ =?us-ascii?Q?QUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFB?=
+ =?us-ascii?Q?QUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFB?=
+ =?us-ascii?Q?QUFBQUFBQUFBQUFBQUFBQUFBQUFCQUFBQUFBQUFBQUlBQUFBQUFKNEFBQUJ6?=
+ =?us-ascii?Q?QUdFQWJBQmxBSE1BWHdCaEFHTUFZd0J2QUhVQWJnQjBBRjhBY0FCc0FHRUFi?=
+ =?us-ascii?Q?Z0FBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFB?=
+ =?us-ascii?Q?QUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFB?=
+ =?us-ascii?Q?QUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFB?=
+ =?us-ascii?Q?QUFBQUFBRUFBQUFBQUFBQUFnQUFBQUFBbmdBQUFITUFZUUJzQUdVQWN3QmZB?=
+ =?us-ascii?Q?SEVBZFFCdkFIUUFaUUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFB?=
+ =?us-ascii?Q?QUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFB?=
+ =?us-ascii?Q?QUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFB?=
+ =?us-ascii?Q?QUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQVFBQUFBQUFB?=
+ =?us-ascii?Q?QUFDQUFBQUFBQ2VBQUFBY3dCdUFIQUFjd0JmQUd3QWFRQmpBR1VBYmdCekFH?=
+ =?us-ascii?Q?VUFYd0IwQUdVQWNnQnRBRjhBTVFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFB?=
+ =?us-ascii?Q?QUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFB?=
+ =?us-ascii?Q?QUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFB?=
+ =?us-ascii?Q?QUFBQUFBQUFBQUFBQUFBQUFBQUFBQUJBQUFBQUFBQUFBSUFBQUFBQUo0QUFB?=
+ =?us-ascii?Q?QnpBRzRBY0FCekFGOEFiQUJwQUdNQVpRQnVBSE1BWlFCZkFIUUFaUUJ5QUcw?=
+ =?us-ascii?Q?QVh3QnpBSFFBZFFCa0FHVUFiZ0IwQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFB?=
+ =?us-ascii?Q?QUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFB?=
+ =?us-ascii?Q?QUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFB?=
+ =?us-ascii?Q?QUFBQUFBQUFFQUFBQUFBQUFBQWdBQUFBQUFuZ0FBQUhZQVp3QmZBR3NBWlFC?=
+ =?us-ascii?Q?NUFIY0Fid0J5QUdRQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFB?=
+ =?us-ascii?Q?QUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFB?=
+ =?us-ascii?Q?QUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFB?=
+ =?us-ascii?Q?QUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBUUFBQUFB?=
+ =?us-ascii?Q?QUFBQUNBQUFBQUFBPSIvPjwvbWV0YT4=3D?=
+x-dg-rorf: true
+authentication-results: spf=none (sender IP is )
+ smtp.mailfrom=abrodkin@synopsys.com; 
+x-originating-ip: [84.204.78.101]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: 63c7ca27-ecc9-4075-3e51-08d794d16992
+x-ms-traffictypediagnostic: CY4PR1201MB0054:
+x-ms-exchange-transport-forked: True
+x-microsoft-antispam-prvs: <CY4PR1201MB00543E76A1688BDB5A9E77E0A1390@CY4PR1201MB0054.namprd12.prod.outlook.com>
+x-ms-oob-tlc-oobclassifiers: OLM:8273;
+x-forefront-prvs: 02778BF158
+x-forefront-antispam-report: SFV:NSPM;
+ SFS:(10019020)(366004)(346002)(396003)(39860400002)(376002)(136003)(189003)(199004)(478600001)(81156014)(81166006)(54906003)(8676002)(7696005)(5660300002)(33656002)(52536014)(86362001)(186003)(8936002)(6506007)(26005)(316002)(9686003)(55016002)(66556008)(4744005)(7406005)(4326008)(7416002)(2906002)(6916009)(66446008)(71200400001)(66476007)(64756008)(66946007)(76116006)(41533002);
+ DIR:OUT; SFP:1102; SCL:1; SRVR:CY4PR1201MB0054;
+ H:CY4PR1201MB0120.namprd12.prod.outlook.com; FPR:; SPF:None; LANG:en;
+ PTR:InfoNoRecords; MX:1; A:1; 
+received-spf: None (protection.outlook.com: synopsys.com does not designate
+ permitted sender hosts)
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: YMnlrJ7QW7WllT9PHw0N7N/gksJdOFPnYmPrWGBpV4B2xWzTTWoE5SjnGdXn/GhSH84HlQTd5YrMSC8KwopriiY3mk4tA0bxu4BYIESOCSVErNvcLooGe1ef02ikuLwhzKVLfZMrE4/dWyGA2rP9xCN7UH3BsoT4XkEi1zAIOe4qtWUsTa9sAeVMv6Mvl1mN0+kw7g5/eLkaXIVZMeX5y6CVZ69YB4Mz5BsGpSehNFiikdcOQruE/Cq2uuFmZ7AeK2FZ9iShJBrxvMoMrtvaSNK0771l3Nvrb52VzRg3xuR7dy3SkTsPQynDSW8QJECknGAj3J1eWVXRchvRL7TcPLybZLCtx2Ml1CVTlTbDwtZ8gJIjjV3ZbffySH2pbevRVCbkcGigoDSX0rw0MwvB6MIFzIgL8Usl8KMedyr6rg3qusTVuDnRFeweo81NEw6sxx2+Fw2qSBJbp8eRVlvNQUK9L9upUX/qxF/ePPJIQDk=
 MIME-Version: 1.0
-In-Reply-To: <20200108200528.4614-7-krzk@kernel.org>
-X-Mailman-Approved-At: Sat, 11 Jan 2020 19:32:28 +0000
-Subject: Re: [Nouveau] [PATCH v2 6/9] drm/mgag200: Constify ioreadX() iomem
- argument (as in generic implementation)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 63c7ca27-ecc9-4075-3e51-08d794d16992
+X-MS-Exchange-CrossTenant-originalarrivaltime: 09 Jan 2020 06:59:03.4083 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: c33c9f88-1eb7-4099-9700-16013fd9e8aa
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: FDpz17WNzPjlQTfYttFBIyOQWptuLfICcdYscr9HUoeY4oXUU7Arulrz6WM3qjUuFFCOBmTrAP0aTEo3sd/3EQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY4PR1201MB0054
+X-OriginatorOrg: synopsys.com
+X-Mailman-Approved-At: Sat, 11 Jan 2020 19:32:29 +0000
+Subject: Re: [Nouveau] [PATCH v2 5/9] arc: Constify ioreadX() iomem argument
+ (as in generic implementation)
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -90,141 +199,59 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1283030726=="
+Cc: Rich Felker <dalias@libc.org>, Jiri Slaby <jirislaby@gmail.com>,
+ Geert Uytterhoeven <geert+renesas@glider.be>, David Airlie <airlied@linux.ie>,
+ Benjamin Herrenschmidt <benh@kernel.crashing.org>,
+ Jason Wang <jasowang@redhat.com>,
+ "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
+ "virtualization@lists.linux-foundation.org"
+ <virtualization@lists.linux-foundation.org>,
+ "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
+ Paul Mackerras <paulus@samba.org>,
+ "linux-arch@vger.kernel.org" <linux-arch@vger.kernel.org>,
+ Dave Jiang <dave.jiang@intel.com>, Yoshinori Sato <ysato@users.sourceforge.jp>,
+ Michael Ellerman <mpe@ellerman.id.au>, Helge Deller <deller@gmx.de>,
+ "linux-sh@vger.kernel.org" <linux-sh@vger.kernel.org>,
+ Ben Skeggs <bskeggs@redhat.com>,
+ "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
+ Dave Airlie <airlied@redhat.com>,
+ "linux-snps-arc@lists.infradead.org" <linux-snps-arc@lists.infradead.org>,
+ Nick Kossifidis <mickflemm@gmail.com>, Allen Hubbe <allenbh@gmail.com>,
+ Arnd Bergmann <arnd@arndb.de>, Vineet Gupta <Vineet.Gupta1@synopsys.com>,
+ "linux-alpha@vger.kernel.org" <linux-alpha@vger.kernel.org>,
+ Ivan Kokshaysky <ink@jurassic.park.msu.ru>,
+ Thomas Gleixner <tglx@linutronix.de>,
+ Mauro Carvalho Chehab <mchehab@kernel.org>, Kalle Valo <kvalo@codeaurora.org>,
+ Richard Henderson <rth@twiddle.net>,
+ "linux-parisc@vger.kernel.org" <linux-parisc@vger.kernel.org>,
+ "netdev@vger.kernel.org" <netdev@vger.kernel.org>,
+ "linux-wireless@vger.kernel.org" <linux-wireless@vger.kernel.org>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ Luis Chamberlain <mcgrof@kernel.org>, Daniel Vetter <daniel@ffwll.ch>,
+ Jon Mason <jdmason@kudzu.us>,
+ "linux-ntb@googlegroups.com" <linux-ntb@googlegroups.com>,
+ "linux-media@vger.kernel.org" <linux-media@vger.kernel.org>,
+ "linuxppc-dev@lists.ozlabs.org" <linuxppc-dev@lists.ozlabs.org>,
+ "David S. Miller" <davem@davemloft.net>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============1283030726==
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="3rd3nqEKmviIlgYXLgxkt4GDz8CFTZqke"
+Hi Krzysztof,
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---3rd3nqEKmviIlgYXLgxkt4GDz8CFTZqke
-Content-Type: multipart/mixed; boundary="EqxkoMtfePcRgHH0AtAZfgeT52t9h5L9b";
- protected-headers="v1"
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: Krzysztof Kozlowski <krzk@kernel.org>, Richard Henderson
- <rth@twiddle.net>, Ivan Kokshaysky <ink@jurassic.park.msu.ru>,
- Matt Turner <mattst88@gmail.com>, Alexey Brodkin <abrodkin@synopsys.com>,
- Vineet Gupta <vgupta@synopsys.com>,
- "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
- Helge Deller <deller@gmx.de>,
- Benjamin Herrenschmidt <benh@kernel.crashing.org>,
- Paul Mackerras <paulus@samba.org>, Michael Ellerman <mpe@ellerman.id.au>,
- Yoshinori Sato <ysato@users.sourceforge.jp>, Rich Felker <dalias@libc.org>,
- Dave Airlie <airlied@redhat.com>, David Airlie <airlied@linux.ie>,
- Daniel Vetter <daniel@ffwll.ch>, Ben Skeggs <bskeggs@redhat.com>,
- Mauro Carvalho Chehab <mchehab@kernel.org>, Jiri Slaby
- <jirislaby@gmail.com>, Nick Kossifidis <mickflemm@gmail.com>,
- Luis Chamberlain <mcgrof@kernel.org>, Kalle Valo <kvalo@codeaurora.org>,
- "David S. Miller" <davem@davemloft.net>, Dave Jiang <dave.jiang@intel.com>,
- Jon Mason <jdmason@kudzu.us>, Allen Hubbe <allenbh@gmail.com>,
- "Michael S. Tsirkin" <mst@redhat.com>, Jason Wang <jasowang@redhat.com>,
- Arnd Bergmann <arnd@arndb.de>, Geert Uytterhoeven <geert+renesas@glider.be>,
- Thomas Gleixner <tglx@linutronix.de>, linux-alpha@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-snps-arc@lists.infradead.org,
- linux-parisc@vger.kernel.org, linuxppc-dev@lists.ozlabs.org,
- linux-sh@vger.kernel.org, dri-devel@lists.freedesktop.org,
- nouveau@lists.freedesktop.org, linux-media@vger.kernel.org,
- linux-wireless@vger.kernel.org, netdev@vger.kernel.org,
- linux-ntb@googlegroups.com, virtualization@lists.linux-foundation.org,
- linux-arch@vger.kernel.org
-Message-ID: <ff03b149-b825-47f3-f92e-100899bb05fd@suse.de>
-Subject: Re: [PATCH v2 6/9] drm/mgag200: Constify ioreadX() iomem argument (as
- in generic implementation)
-References: <20200108200528.4614-1-krzk@kernel.org>
- <20200108200528.4614-7-krzk@kernel.org>
-In-Reply-To: <20200108200528.4614-7-krzk@kernel.org>
-
---EqxkoMtfePcRgHH0AtAZfgeT52t9h5L9b
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
-
-Hi
-
-Am 08.01.20 um 21:05 schrieb Krzysztof Kozlowski:
-> The ioreadX() helpers have inconsistent interface.  On some architectur=
-es
+> The ioreadX() helpers have inconsistent interface.  On some architectures
 > void *__iomem address argument is a pointer to const, on some not.
->=20
-> Implementations of ioreadX() do not modify the memory under the address=
+> 
+> Implementations of ioreadX() do not modify the memory under the
+> address so they can be converted to a "const" version for const-safety
+> and consistency among architectures.
 
-> so they can be converted to a "const" version for const-safety and
-> consistency among architectures.
->=20
-> Signed-off-by: Krzysztof Kozlowski <krzk@kernel.org>
+Thanks for this clean-up. Looks good to me, so ...
 
-Reviewed-by: Thomas Zimmermann <tzimmermann@suse.de>
-
-> ---
->  drivers/gpu/drm/mgag200/mgag200_drv.h | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->=20
-> diff --git a/drivers/gpu/drm/mgag200/mgag200_drv.h b/drivers/gpu/drm/mg=
-ag200/mgag200_drv.h
-> index aa32aad222c2..6512b3af4fb7 100644
-> --- a/drivers/gpu/drm/mgag200/mgag200_drv.h
-> +++ b/drivers/gpu/drm/mgag200/mgag200_drv.h
-> @@ -34,9 +34,9 @@
-> =20
->  #define MGAG200FB_CONN_LIMIT 1
-> =20
-> -#define RREG8(reg) ioread8(((void __iomem *)mdev->rmmio) + (reg))
-> +#define RREG8(reg) ioread8(((const void __iomem *)mdev->rmmio) + (reg)=
-)
->  #define WREG8(reg, v) iowrite8(v, ((void __iomem *)mdev->rmmio) + (reg=
-))
-> -#define RREG32(reg) ioread32(((void __iomem *)mdev->rmmio) + (reg))
-> +#define RREG32(reg) ioread32(((const void __iomem *)mdev->rmmio) + (re=
-g))
->  #define WREG32(reg, v) iowrite32(v, ((void __iomem *)mdev->rmmio) + (r=
-eg))
-> =20
->  #define ATTR_INDEX 0x1fc0
->=20
-
---=20
-Thomas Zimmermann
-Graphics Driver Developer
-SUSE Software Solutions Germany GmbH
-Maxfeldstr. 5, 90409 N=C3=BCrnberg, Germany
-(HRB 36809, AG N=C3=BCrnberg)
-Gesch=C3=A4ftsf=C3=BChrer: Felix Imend=C3=B6rffer
-
-
---EqxkoMtfePcRgHH0AtAZfgeT52t9h5L9b--
-
---3rd3nqEKmviIlgYXLgxkt4GDz8CFTZqke
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEchf7rIzpz2NEoWjlaA3BHVMLeiMFAl4WwngACgkQaA3BHVML
-eiOKNgf/dNIJuZ1NzHHcf9BEmT/BV7QlRe6/FHHA4aiJdqTNYEZ4xQWzoZBT3FUD
-+t1ZzbPtJWF3dx/Bi2AyeI9UK9D5lqSqMPpjgfAgMdT60DkhStpiz4k80WtBG7NY
-dDcotCOrSeaYxImtCFAchwYcIw0l/cAD/ohiQYTfXx3FRj2Sb2hRIKx2h5Mr7k6G
-3lSOqlEt69S2/G/Xlb37VeI2f07RsVR+b89pQPgS5WWUyITa5ukgxWrI5sc7Sn5U
-ogamIdJCPT06fCNVF1JRsOBlI4qw+LNh5Z63REuA8V0qPytUKOW9kdxMwUlhkZJ/
-bQNkg8ibheQ3Xn8Bq6EjM/UUSS7XyQ==
-=C0TM
------END PGP SIGNATURE-----
-
---3rd3nqEKmviIlgYXLgxkt4GDz8CFTZqke--
-
---===============1283030726==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+Acked-by: Alexey Brodkin <abrodkin@synopsys.com>
 
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/nouveau
-
---===============1283030726==--
