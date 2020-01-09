@@ -1,59 +1,83 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 32C8B138309
-	for <lists+nouveau@lfdr.de>; Sat, 11 Jan 2020 20:32:41 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 68408138314
+	for <lists+nouveau@lfdr.de>; Sat, 11 Jan 2020 20:32:54 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id DAC7A6E24D;
-	Sat, 11 Jan 2020 19:32:29 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9EC8E6E284;
+	Sat, 11 Jan 2020 19:32:31 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 303 seconds by postgrey-1.36 at gabe;
- Wed, 08 Jan 2020 20:59:19 UTC
-Received: from mout.kundenserver.de (mout.kundenserver.de [217.72.192.75])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5E4CF6E33A
- for <nouveau@lists.freedesktop.org>; Wed,  8 Jan 2020 20:59:19 +0000 (UTC)
-Received: from mail-pl1-f180.google.com ([209.85.214.180]) by
- mrelayeu.kundenserver.de (mreue108 [212.227.15.145]) with ESMTPSA (Nemesis)
- id 1MOzGc-1j3YT40rQy-00PNKf; Wed, 08 Jan 2020 21:54:14 +0100
-Received: by mail-pl1-f180.google.com with SMTP id ay11so1582367plb.0;
- Wed, 08 Jan 2020 12:54:13 -0800 (PST)
-X-Gm-Message-State: APjAAAW55FakGbrpalHABAQiRPjpJ9RqiyYJY4wTsjvk/r8OK4X+TT+O
- uaULWYRlFfIKhnXEwrHeVRoNwT5r3ylhUVaPwvg=
-X-Google-Smtp-Source: APXvYqyt7qWPMbb6m9h/4PQhRs0y159Kx6Uivm6Z+B5Q5nxhhZUKK+jBierZEh41gZgxiLkvgkWmKuzOcUQAJHTJ9Lg=
-X-Received: by 2002:a0c:bd20:: with SMTP id m32mr5946876qvg.197.1578516850954; 
- Wed, 08 Jan 2020 12:54:10 -0800 (PST)
-MIME-Version: 1.0
+Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1B3196E394;
+ Thu,  9 Jan 2020 06:04:45 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+ by mx2.suse.de (Postfix) with ESMTP id DF4A4AEE0;
+ Thu,  9 Jan 2020 06:04:42 +0000 (UTC)
+To: Krzysztof Kozlowski <krzk@kernel.org>, Richard Henderson
+ <rth@twiddle.net>, Ivan Kokshaysky <ink@jurassic.park.msu.ru>,
+ Matt Turner <mattst88@gmail.com>, Alexey Brodkin <abrodkin@synopsys.com>,
+ Vineet Gupta <vgupta@synopsys.com>,
+ "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
+ Helge Deller <deller@gmx.de>,
+ Benjamin Herrenschmidt <benh@kernel.crashing.org>,
+ Paul Mackerras <paulus@samba.org>, Michael Ellerman <mpe@ellerman.id.au>,
+ Yoshinori Sato <ysato@users.sourceforge.jp>, Rich Felker <dalias@libc.org>,
+ Dave Airlie <airlied@redhat.com>, David Airlie <airlied@linux.ie>,
+ Daniel Vetter <daniel@ffwll.ch>, Ben Skeggs <bskeggs@redhat.com>,
+ Mauro Carvalho Chehab <mchehab@kernel.org>, Jiri Slaby
+ <jirislaby@gmail.com>, Nick Kossifidis <mickflemm@gmail.com>,
+ Luis Chamberlain <mcgrof@kernel.org>, Kalle Valo <kvalo@codeaurora.org>,
+ "David S. Miller" <davem@davemloft.net>, Dave Jiang <dave.jiang@intel.com>,
+ Jon Mason <jdmason@kudzu.us>, Allen Hubbe <allenbh@gmail.com>,
+ "Michael S. Tsirkin" <mst@redhat.com>, Jason Wang <jasowang@redhat.com>,
+ Arnd Bergmann <arnd@arndb.de>, Geert Uytterhoeven <geert+renesas@glider.be>,
+ Thomas Gleixner <tglx@linutronix.de>, linux-alpha@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-snps-arc@lists.infradead.org,
+ linux-parisc@vger.kernel.org, linuxppc-dev@lists.ozlabs.org,
+ linux-sh@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org, linux-media@vger.kernel.org,
+ linux-wireless@vger.kernel.org, netdev@vger.kernel.org,
+ linux-ntb@googlegroups.com, virtualization@lists.linux-foundation.org,
+ linux-arch@vger.kernel.org
 References: <20200108200528.4614-1-krzk@kernel.org>
- <20200108200528.4614-2-krzk@kernel.org>
-In-Reply-To: <20200108200528.4614-2-krzk@kernel.org>
-From: Arnd Bergmann <arnd@arndb.de>
-Date: Wed, 8 Jan 2020 21:53:54 +0100
-X-Gmail-Original-Message-ID: <CAK8P3a2ieH2G5GJvWMev39QkmSFvWSb0sYZ_0L5McR6AZFiayA@mail.gmail.com>
-Message-ID: <CAK8P3a2ieH2G5GJvWMev39QkmSFvWSb0sYZ_0L5McR6AZFiayA@mail.gmail.com>
-To: Krzysztof Kozlowski <krzk@kernel.org>
-X-Provags-ID: V03:K1:g9E/DHYDerAF765D9ZGSli8tbMiChFQuFhlsvtTeCrPpgvB+6fL
- qedf72XEgWTu9gdhgUl/LpAdjTZi065iUEFnyjGMjoUB4EXuS1R1FbkO/AedQ4b0BbktzOc
- bo/A5UqQEtN8C+O8YhB5npqaTICaPCae88zOplIiph5QyZmxKH+V5iWYZNTvtF80xvzZp0+
- aOeKLRjMYO5vLPjAKT5EQ==
-X-Spam-Flag: NO
-X-UI-Out-Filterresults: notjunk:1;V03:K0:m2hLR2rBJ8k=:3wh2C1VgMWyZ4EKvrHI5FW
- 0UQxq3mWLFQydU3CkieWzOFVXsIcAbs6g4pzA+FNjy5x8HrMzW7ax5Ex67jayAGyAM1VKgX04
- hUJrtWozarcdS4cT91E1FGEV37jin1ND5SsYYa+7TsaeBL5U3Evm2+dNWTqbbJK5teDvIcfE8
- 5wXspv+BOTqkHSNu9jVCPu4mYYIObrhcMGUbjuOgKEvosGDF75b43vz+vIXdZ4cCPIuVz8p21
- FSIzLh8z3b20SiGJ/SwRL8Z30xFlomb1AIVbCCXFyDlTqzAgLFA8u0oujqkvt0ikRCwDnB/iL
- qUXkJfZUryfk5gP3NMo3fR3ViDe2f0I69OtATQALEmJE1+Tn2jVWonQtOey/YCzUzBekV5Rrh
- KI63UIVeIX5KRPL+ZQ6cHb3+hnVs7hUzD1i4KvqDQ4YTJVDZUrzK3DxGrQEdTLvbNRCWw+VKy
- GSVCRfhjakRy9yTWnhy2ptkm2URVJ3cAK7oKIv+m+9YJLslMkAV9nUMEviLeSoLVmYUOo3Ifr
- eKZQiO+NfkzEaJaO1xoqPu5lJXy2jYj6rQzy2f8rKCjSw47BQ41X2pZSP10DY/QmZf8JoETaQ
- eLsoVKppIV8fLEtFzLM9+oYPf2FCsyO5BGZGw1yLOtAhOXFLTowK1D1UStk8q5JsxmGoyzccW
- fw6DHdeTr2Mz9QBIUKhIfUrYKmfdm11bs/A6jTQJ/ywcD7svvOSYECWGx4ZIETeEwdcRKlLjM
- 0CS3biHO77tLCKtjL5gyZZhJBnmDlHVRCkuG2esXFwA5UfjBDbK9Fk8VetH+nDCdX/rB4E5EQ
- O/qkgUpewqQrn9yW3RYaFS1M6ZYwc36rhOIMYgGsPru2bgyE+GAqjhYI7a5EDmx5kCp1vbjXv
- GSQv3IWTUZhHdAbwW56g==
-X-Mailman-Approved-At: Sat, 11 Jan 2020 19:32:29 +0000
-Subject: Re: [Nouveau] [PATCH v2 1/9] iomap: Constify ioreadX() iomem
+ <20200108200528.4614-7-krzk@kernel.org>
+From: Thomas Zimmermann <tzimmermann@suse.de>
+Autocrypt: addr=tzimmermann@suse.de; keydata=
+ mQENBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
+ XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
+ BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
+ hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
+ 9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
+ AAG0J1Rob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPokBVAQTAQgAPhYh
+ BHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJbOdLgAhsDBQkDwmcABQsJCAcCBhUKCQgLAgQWAgMB
+ Ah4BAheAAAoJEGgNwR1TC3ojR80H/jH+vYavwQ+TvO8ksXL9JQWc3IFSiGpuSVXLCdg62AmR
+ irxW+qCwNncNQyb9rd30gzdectSkPWL3KSqEResBe24IbA5/jSkPweJasgXtfhuyoeCJ6PXo
+ clQQGKIoFIAEv1s8l0ggPZswvCinegl1diyJXUXmdEJRTWYAtxn/atut1o6Giv6D2qmYbXN7
+ mneMC5MzlLaJKUtoH7U/IjVw1sx2qtxAZGKVm4RZxPnMCp9E1MAr5t4dP5gJCIiqsdrVqI6i
+ KupZstMxstPU//azmz7ZWWxT0JzgJqZSvPYx/SATeexTYBP47YFyri4jnsty2ErS91E6H8os
+ Bv6pnSn7eAq5AQ0EWznS4AEIAMYmP4M/V+T5RY5at/g7rUdNsLhWv1APYrh9RQefODYHrNRH
+ UE9eosYbT6XMryR9hT8XlGOYRwKWwiQBoWSDiTMo/Xi29jUnn4BXfI2px2DTXwc22LKtLAgT
+ RjP+qbU63Y0xnQN29UGDbYgyyK51DW3H0If2a3JNsheAAK+Xc9baj0LGIc8T9uiEWHBnCH+R
+ dhgATnWWGKdDegUR5BkDfDg5O/FISymJBHx2Dyoklv5g4BzkgqTqwmaYzsl8UxZKvbaxq0zb
+ ehDda8lvhFXodNFMAgTLJlLuDYOGLK2AwbrS3Sp0AEbkpdJBb44qVlGm5bApZouHeJ/+n+7r
+ 12+lqdsAEQEAAYkBPAQYAQgAJhYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJbOdLgAhsMBQkD
+ wmcAAAoJEGgNwR1TC3ojpfcIAInwP5OlcEKokTnHCiDTz4Ony4GnHRP2fXATQZCKxmu4AJY2
+ h9ifw9Nf2TjCZ6AMvC3thAN0rFDj55N9l4s1CpaDo4J+0fkrHuyNacnT206CeJV1E7NYntxU
+ n+LSiRrOdywn6erjxRi9EYTVLCHcDhBEjKmFZfg4AM4GZMWX1lg0+eHbd5oL1as28WvvI/uI
+ aMyV8RbyXot1r/8QLlWldU3NrTF5p7TMU2y3ZH2mf5suSKHAMtbE4jKJ8ZHFOo3GhLgjVrBW
+ HE9JXO08xKkgD+w6v83+nomsEuf6C6LYrqY/tsZvyEX6zN8CtirPdPWu/VXNRYAl/lat7lSI
+ 3H26qrE=
+Message-ID: <ff03b149-b825-47f3-f92e-100899bb05fd@suse.de>
+Date: Thu, 9 Jan 2020 07:04:36 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.3.1
+MIME-Version: 1.0
+In-Reply-To: <20200108200528.4614-7-krzk@kernel.org>
+X-Mailman-Approved-At: Sat, 11 Jan 2020 19:32:28 +0000
+Subject: Re: [Nouveau] [PATCH v2 6/9] drm/mgag200: Constify ioreadX() iomem
  argument (as in generic implementation)
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -66,69 +90,141 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Rich Felker <dalias@libc.org>, Jiri Slaby <jirislaby@gmail.com>,
- Geert Uytterhoeven <geert+renesas@glider.be>, David Airlie <airlied@linux.ie>,
- Benjamin Herrenschmidt <benh@kernel.crashing.org>,
- Jason Wang <jasowang@redhat.com>, dri-devel <dri-devel@lists.freedesktop.org>,
- virtualization@lists.linux-foundation.org,
- "James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>,
- Networking <netdev@vger.kernel.org>, Paul Mackerras <paulus@samba.org>,
- linux-arch <linux-arch@vger.kernel.org>, Dave Jiang <dave.jiang@intel.com>,
- Yoshinori Sato <ysato@users.sourceforge.jp>,
- Michael Ellerman <mpe@ellerman.id.au>, Helge Deller <deller@gmx.de>,
- Linux-sh list <linux-sh@vger.kernel.org>,
- Alexey Brodkin <abrodkin@synopsys.com>, Ben Skeggs <bskeggs@redhat.com>,
- ML nouveau <nouveau@lists.freedesktop.org>, Dave Airlie <airlied@redhat.com>,
- "open list:SYNOPSYS ARC ARCHITECTURE" <linux-snps-arc@lists.infradead.org>,
- Nick Kossifidis <mickflemm@gmail.com>, Allen Hubbe <allenbh@gmail.com>,
- alpha <linux-alpha@vger.kernel.org>,
- Ivan Kokshaysky <ink@jurassic.park.msu.ru>,
- Thomas Gleixner <tglx@linutronix.de>,
- Mauro Carvalho Chehab <mchehab@kernel.org>, Kalle Valo <kvalo@codeaurora.org>,
- Richard Henderson <rth@twiddle.net>,
- Parisc List <linux-parisc@vger.kernel.org>, Vineet Gupta <vgupta@synopsys.com>,
- linux-wireless <linux-wireless@vger.kernel.org>,
- "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- Luis Chamberlain <mcgrof@kernel.org>, Daniel Vetter <daniel@ffwll.ch>,
- Jon Mason <jdmason@kudzu.us>, linux-ntb@googlegroups.com,
- Linux Media Mailing List <linux-media@vger.kernel.org>,
- linuxppc-dev <linuxppc-dev@lists.ozlabs.org>,
- "David S. Miller" <davem@davemloft.net>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============1283030726=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, Jan 8, 2020 at 9:05 PM Krzysztof Kozlowski <krzk@kernel.org> wrote:
->
-> The ioreadX() and ioreadX_rep() helpers have inconsistent interface.  On
-> some architectures void *__iomem address argument is a pointer to const,
-> on some not.
->
-> Implementations of ioreadX() do not modify the memory under the address
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--===============1283030726==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="3rd3nqEKmviIlgYXLgxkt4GDz8CFTZqke"
+
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--3rd3nqEKmviIlgYXLgxkt4GDz8CFTZqke
+Content-Type: multipart/mixed; boundary="EqxkoMtfePcRgHH0AtAZfgeT52t9h5L9b";
+ protected-headers="v1"
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: Krzysztof Kozlowski <krzk@kernel.org>, Richard Henderson
+ <rth@twiddle.net>, Ivan Kokshaysky <ink@jurassic.park.msu.ru>,
+ Matt Turner <mattst88@gmail.com>, Alexey Brodkin <abrodkin@synopsys.com>,
+ Vineet Gupta <vgupta@synopsys.com>,
+ "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
+ Helge Deller <deller@gmx.de>,
+ Benjamin Herrenschmidt <benh@kernel.crashing.org>,
+ Paul Mackerras <paulus@samba.org>, Michael Ellerman <mpe@ellerman.id.au>,
+ Yoshinori Sato <ysato@users.sourceforge.jp>, Rich Felker <dalias@libc.org>,
+ Dave Airlie <airlied@redhat.com>, David Airlie <airlied@linux.ie>,
+ Daniel Vetter <daniel@ffwll.ch>, Ben Skeggs <bskeggs@redhat.com>,
+ Mauro Carvalho Chehab <mchehab@kernel.org>, Jiri Slaby
+ <jirislaby@gmail.com>, Nick Kossifidis <mickflemm@gmail.com>,
+ Luis Chamberlain <mcgrof@kernel.org>, Kalle Valo <kvalo@codeaurora.org>,
+ "David S. Miller" <davem@davemloft.net>, Dave Jiang <dave.jiang@intel.com>,
+ Jon Mason <jdmason@kudzu.us>, Allen Hubbe <allenbh@gmail.com>,
+ "Michael S. Tsirkin" <mst@redhat.com>, Jason Wang <jasowang@redhat.com>,
+ Arnd Bergmann <arnd@arndb.de>, Geert Uytterhoeven <geert+renesas@glider.be>,
+ Thomas Gleixner <tglx@linutronix.de>, linux-alpha@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-snps-arc@lists.infradead.org,
+ linux-parisc@vger.kernel.org, linuxppc-dev@lists.ozlabs.org,
+ linux-sh@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org, linux-media@vger.kernel.org,
+ linux-wireless@vger.kernel.org, netdev@vger.kernel.org,
+ linux-ntb@googlegroups.com, virtualization@lists.linux-foundation.org,
+ linux-arch@vger.kernel.org
+Message-ID: <ff03b149-b825-47f3-f92e-100899bb05fd@suse.de>
+Subject: Re: [PATCH v2 6/9] drm/mgag200: Constify ioreadX() iomem argument (as
+ in generic implementation)
+References: <20200108200528.4614-1-krzk@kernel.org>
+ <20200108200528.4614-7-krzk@kernel.org>
+In-Reply-To: <20200108200528.4614-7-krzk@kernel.org>
+
+--EqxkoMtfePcRgHH0AtAZfgeT52t9h5L9b
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
+
+Hi
+
+Am 08.01.20 um 21:05 schrieb Krzysztof Kozlowski:
+> The ioreadX() helpers have inconsistent interface.  On some architectur=
+es
+> void *__iomem address argument is a pointer to const, on some not.
+>=20
+> Implementations of ioreadX() do not modify the memory under the address=
+
 > so they can be converted to a "const" version for const-safety and
 > consistency among architectures.
->
-> Suggested-by: Geert Uytterhoeven <geert@linux-m68k.org>
+>=20
 > Signed-off-by: Krzysztof Kozlowski <krzk@kernel.org>
-> Reviewed-by: Geert Uytterhoeven <geert+renesas@glider.be>
 
-Thanks for getting this done!
+Reviewed-by: Thomas Zimmermann <tzimmermann@suse.de>
 
-Reviewed-by: Arnd Bergmann <arnd@arndb.de>
+> ---
+>  drivers/gpu/drm/mgag200/mgag200_drv.h | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>=20
+> diff --git a/drivers/gpu/drm/mgag200/mgag200_drv.h b/drivers/gpu/drm/mg=
+ag200/mgag200_drv.h
+> index aa32aad222c2..6512b3af4fb7 100644
+> --- a/drivers/gpu/drm/mgag200/mgag200_drv.h
+> +++ b/drivers/gpu/drm/mgag200/mgag200_drv.h
+> @@ -34,9 +34,9 @@
+> =20
+>  #define MGAG200FB_CONN_LIMIT 1
+> =20
+> -#define RREG8(reg) ioread8(((void __iomem *)mdev->rmmio) + (reg))
+> +#define RREG8(reg) ioread8(((const void __iomem *)mdev->rmmio) + (reg)=
+)
+>  #define WREG8(reg, v) iowrite8(v, ((void __iomem *)mdev->rmmio) + (reg=
+))
+> -#define RREG32(reg) ioread32(((void __iomem *)mdev->rmmio) + (reg))
+> +#define RREG32(reg) ioread32(((const void __iomem *)mdev->rmmio) + (re=
+g))
+>  #define WREG32(reg, v) iowrite32(v, ((void __iomem *)mdev->rmmio) + (r=
+eg))
+> =20
+>  #define ATTR_INDEX 0x1fc0
+>=20
 
-> Changes since v1:
-> 1. Constify also ioreadX_rep() and mmio_insX(),
-> 2. Squash lib+alpha+powerpc+parisc+sh into one patch for bisectability,
+--=20
+Thomas Zimmermann
+Graphics Driver Developer
+SUSE Software Solutions Germany GmbH
+Maxfeldstr. 5, 90409 N=C3=BCrnberg, Germany
+(HRB 36809, AG N=C3=BCrnberg)
+Gesch=C3=A4ftsf=C3=BChrer: Felix Imend=C3=B6rffer
 
-The alpha and parisc versions should be independent, I was thinking
-you leave them as separate patches, but this work for me too.
 
-I have no real opinion on the other 8 patches, I would have left
-them out completely, but they don't hurt either.
+--EqxkoMtfePcRgHH0AtAZfgeT52t9h5L9b--
 
-         Arnd
+--3rd3nqEKmviIlgYXLgxkt4GDz8CFTZqke
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEchf7rIzpz2NEoWjlaA3BHVMLeiMFAl4WwngACgkQaA3BHVML
+eiOKNgf/dNIJuZ1NzHHcf9BEmT/BV7QlRe6/FHHA4aiJdqTNYEZ4xQWzoZBT3FUD
++t1ZzbPtJWF3dx/Bi2AyeI9UK9D5lqSqMPpjgfAgMdT60DkhStpiz4k80WtBG7NY
+dDcotCOrSeaYxImtCFAchwYcIw0l/cAD/ohiQYTfXx3FRj2Sb2hRIKx2h5Mr7k6G
+3lSOqlEt69S2/G/Xlb37VeI2f07RsVR+b89pQPgS5WWUyITa5ukgxWrI5sc7Sn5U
+ogamIdJCPT06fCNVF1JRsOBlI4qw+LNh5Z63REuA8V0qPytUKOW9kdxMwUlhkZJ/
+bQNkg8ibheQ3Xn8Bq6EjM/UUSS7XyQ==
+=C0TM
+-----END PGP SIGNATURE-----
+
+--3rd3nqEKmviIlgYXLgxkt4GDz8CFTZqke--
+
+--===============1283030726==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/nouveau
+
+--===============1283030726==--
