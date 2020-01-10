@@ -1,36 +1,34 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 795B2138353
-	for <lists+nouveau@lfdr.de>; Sat, 11 Jan 2020 20:33:34 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id A4C3E138335
+	for <lists+nouveau@lfdr.de>; Sat, 11 Jan 2020 20:33:14 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A7ADE6E4A5;
-	Sat, 11 Jan 2020 19:32:35 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 464C86E2D3;
+	Sat, 11 Jan 2020 19:32:33 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 301 seconds by postgrey-1.36 at gabe;
- Fri, 10 Jan 2020 13:37:34 UTC
 Received: from mail26.static.mailgun.info (mail26.static.mailgun.info
  [104.130.122.26])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 05A3B6EA15
- for <nouveau@lists.freedesktop.org>; Fri, 10 Jan 2020 13:37:34 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0DF396EA15
+ for <nouveau@lists.freedesktop.org>; Fri, 10 Jan 2020 13:38:31 +0000 (UTC)
 DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=mg.codeaurora.org;
  q=dns/txt; 
- s=smtp; t=1578663454; h=Content-Type: MIME-Version: Message-ID:
+ s=smtp; t=1578663512; h=Content-Type: MIME-Version: Message-ID:
  In-Reply-To: Date: References: Subject: Cc: To: From: Sender;
- bh=KvNC+ZtmcyAhVZ56ZMn6CaYYHAi0RWpQoUQ7isluNMU=;
- b=OH2su4eU+BVxOIAJJfJ/Eba/H4cEw0vxcb8sn4ddlEAIx/zbwEwk5R/rPZgfWJzIc7cCKLf8
- r/GpWtQH+eSmnnft841zsfbYtNpzOk5YRdjVftDwAipH6KJy7KryXAQk+Qy6CMC4pX63ueVJ
- cnwO8mMuxrjEmH9pqXxlwDt6s5g=
+ bh=R0YUROCJJ/dav0PwJDeXKOS0FaitFefZwp9Lb2TmZvI=;
+ b=LKvffcOrodzHzFgPTicB6NaIdcXHKrP1D34OSId0j00ZYY4yyQ9el/JOYgYfMVnm1NNIwBr5
+ EY6dNcMpRk9MNHvoRDIZqOgixHWcchO9emvt62tgGKpiPjI+z29TlQHWb+rWpMchz+MZRDRz
+ juXfD8APQBwwBO+qJiq9gAc1t90=
 X-Mailgun-Sending-Ip: 104.130.122.26
 X-Mailgun-Sid: WyIzYWY5ZSIsICJub3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZyIsICJiZTllNGEiXQ==
 Received: from smtp.codeaurora.org
  (ec2-35-166-182-171.us-west-2.compute.amazonaws.com [35.166.182.171])
- by mxa.mailgun.org with ESMTP id 5e187cee.7fec0b84d308-smtp-out-n01;
- Fri, 10 Jan 2020 13:32:30 -0000 (UTC)
+ by mxa.mailgun.org with ESMTP id 5e187d28.7fa1e41f6650-smtp-out-n03;
+ Fri, 10 Jan 2020 13:33:28 -0000 (UTC)
 Received: by smtp.codeaurora.org (Postfix, from userid 1001)
- id A45B3C447AD; Fri, 10 Jan 2020 13:32:28 +0000 (UTC)
+ id 86C3EC447B6; Fri, 10 Jan 2020 13:33:25 +0000 (UTC)
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
  aws-us-west-2-caf-mail-1.web.codeaurora.org
 X-Spam-Level: 
@@ -39,9 +37,9 @@ X-Spam-Status: No, score=-1.0 required=2.0 tests=ALL_TRUSTED,SPF_NONE
 Received: from x230.qca.qualcomm.com (unknown [83.145.195.18])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested) (Authenticated sender: kvalo)
- by smtp.codeaurora.org (Postfix) with ESMTPSA id 1C016C43383;
- Fri, 10 Jan 2020 13:32:15 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 smtp.codeaurora.org 1C016C43383
+ by smtp.codeaurora.org (Postfix) with ESMTPSA id 80C82C43383;
+ Fri, 10 Jan 2020 13:33:13 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 smtp.codeaurora.org 80C82C43383
 Authentication-Results: aws-us-west-2-caf-mail-1.web.codeaurora.org;
  dmarc=none (p=none dis=none) header.from=codeaurora.org
 Authentication-Results: aws-us-west-2-caf-mail-1.web.codeaurora.org;
@@ -49,15 +47,15 @@ Authentication-Results: aws-us-west-2-caf-mail-1.web.codeaurora.org;
 From: Kalle Valo <kvalo@codeaurora.org>
 To: Krzysztof Kozlowski <krzk@kernel.org>
 References: <20200108200528.4614-1-krzk@kernel.org>
- <20200108200528.4614-3-krzk@kernel.org>
-Date: Fri, 10 Jan 2020 15:32:13 +0200
-In-Reply-To: <20200108200528.4614-3-krzk@kernel.org> (Krzysztof Kozlowski's
- message of "Wed, 8 Jan 2020 21:05:21 +0100")
-Message-ID: <87imljsahu.fsf@codeaurora.org>
+ <20200108200528.4614-10-krzk@kernel.org>
+Date: Fri, 10 Jan 2020 15:33:11 +0200
+In-Reply-To: <20200108200528.4614-10-krzk@kernel.org> (Krzysztof Kozlowski's
+ message of "Wed, 8 Jan 2020 21:05:28 +0100")
+Message-ID: <87eew7sag8.fsf@codeaurora.org>
 User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/24.5 (gnu/linux)
 MIME-Version: 1.0
 X-Mailman-Approved-At: Sat, 11 Jan 2020 19:32:29 +0000
-Subject: Re: [Nouveau] [PATCH v2 2/9] net: wireless: rtl818x: Constify
+Subject: Re: [Nouveau] [PATCH v2 9/9] net: wireless: ath5k: Constify
  ioreadX() iomem argument (as in generic implementation)
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -109,21 +107,11 @@ Krzysztof Kozlowski <krzk@kernel.org> writes:
 > consistency among architectures.
 >
 > Signed-off-by: Krzysztof Kozlowski <krzk@kernel.org>
-> Reviewed-by: Geert Uytterhoeven <geert+renesas@glider.be>
->
 > ---
->
-> Changes since v1:
-> 1. Add Geert's review.
-> ---
->  drivers/net/wireless/realtek/rtl818x/rtl8180/rtl8180.h | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
+>  drivers/net/wireless/ath/ath5k/ahb.c | 10 +++++-----
+>  1 file changed, 5 insertions(+), 5 deletions(-)
 
-No need to have "net: wireless: " in the title, this is enough.
-
-rtl818x: Constify ioreadX() iomem argument (as in generic implementation)
-
-I assume someone else will take this so here's my ack:
+No need to have "net: wireless: " in the title, otherwise looks good.
 
 Acked-by: Kalle Valo <kvalo@codeaurora.org>
 
