@@ -1,47 +1,40 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id A2B17138332
-	for <lists+nouveau@lfdr.de>; Sat, 11 Jan 2020 20:33:12 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5B6E613834F
+	for <lists+nouveau@lfdr.de>; Sat, 11 Jan 2020 20:33:31 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 785106E2A5;
-	Sat, 11 Jan 2020 19:32:32 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 74F686E483;
+	Sat, 11 Jan 2020 19:32:34 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-oi1-f194.google.com (mail-oi1-f194.google.com
- [209.85.167.194])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6C4DB89A5D;
- Thu,  9 Jan 2020 12:00:52 +0000 (UTC)
-Received: by mail-oi1-f194.google.com with SMTP id k4so5648115oik.2;
- Thu, 09 Jan 2020 04:00:52 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=nZfyuOmXpaLxOTcihxRatR1N5b6cV8bkVUYtr9LoScQ=;
- b=OgludECFzkjkkmhdFoU7WLQsu8XELbFV3RF5fPxgAn5ynw639XD74YLpJP8xsxI4kM
- l0UDNU3BJ+XZA8TCngnrnbb2yANdYa+mM1ipiW/6nKrPb7f3Jwk8l5etj5io2oVtKF7T
- jeunVg9jEXLoHeGL4aXR71OF2HZcdjL9WNT39k5LDbPdGOpMKFran7xcSaMALIMqJH7R
- HMqiSZN0W2DxiYSqZeWMIcQYXbfHNHLWVbYagcF1vhoPQnyBhLmwE0SqIfg8I9FLgbS+
- 5DGwhYq1zg3R9u9LfAtTXdpe8olubc0iDO//n2QK+8k8OaPqsEbNoP6NVCXrv0AioAl5
- 4/Vw==
-X-Gm-Message-State: APjAAAWeuK57+3G03w5g7aQMPH63WYS/ZIQoUovmRILE2sScTyzj7w80
- Hlks7ady8HJ0yOBJlVo55xin6WfmwV7R84khMWc=
-X-Google-Smtp-Source: APXvYqx2rj2SeSvboe2k3ZgItcDXoEvkOpB0Do773ErXMGvWblx7KEY69OGBF2+yLrNaZ+Tob+6Upx4TfamT+URhRjM=
-X-Received: by 2002:aca:eb83:: with SMTP id j125mr2637148oih.153.1578571251757; 
- Thu, 09 Jan 2020 04:00:51 -0800 (PST)
+Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id ACF006E99E;
+ Fri, 10 Jan 2020 09:21:35 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+ by mx2.suse.de (Postfix) with ESMTP id 2FA18B016;
+ Fri, 10 Jan 2020 09:21:33 +0000 (UTC)
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: airlied@linux.ie, daniel@ffwll.ch, alexander.deucher@amd.com,
+ christian.koenig@amd.com, David1.Zhou@amd.com,
+ maarten.lankhorst@linux.intel.com, patrik.r.jakobsson@gmail.com,
+ robdclark@gmail.com, sean@poorly.run, benjamin.gaignard@linaro.org,
+ vincent.abriou@st.com, yannick.fertre@st.com, philippe.cornu@st.com,
+ mcoquelin.stm32@gmail.com, alexandre.torgue@st.com, eric@anholt.net,
+ rodrigosiqueiramelo@gmail.com, hamohammed.sa@gmail.com,
+ linux-graphics-maintainer@vmware.com, thellstrom@vmware.com,
+ bskeggs@redhat.com, harry.wentland@amd.com, sunpeng.li@amd.com,
+ jani.nikula@linux.intel.com, joonas.lahtinen@linux.intel.com,
+ rodrigo.vivi@intel.com
+Date: Fri, 10 Jan 2020 10:21:04 +0100
+Message-Id: <20200110092127.27847-1-tzimmermann@suse.de>
+X-Mailer: git-send-email 2.24.1
 MIME-Version: 1.0
-References: <20200108200528.4614-1-krzk@kernel.org>
- <20200108200528.4614-2-krzk@kernel.org>
-In-Reply-To: <20200108200528.4614-2-krzk@kernel.org>
-From: Geert Uytterhoeven <geert@linux-m68k.org>
-Date: Thu, 9 Jan 2020 13:00:40 +0100
-Message-ID: <CAMuHMdV8NYiq0744EGw2zit7DZc5=rOpL7en_NeCx2GTD3F3ZQ@mail.gmail.com>
-To: Krzysztof Kozlowski <krzk@kernel.org>
-X-Mailman-Approved-At: Sat, 11 Jan 2020 19:32:29 +0000
-Subject: Re: [Nouveau] [PATCH v2 1/9] iomap: Constify ioreadX() iomem
- argument (as in generic implementation)
+X-Mailman-Approved-At: Sat, 11 Jan 2020 19:32:28 +0000
+Subject: [Nouveau] [PATCH 00/23] drm: Clean up VBLANK callbacks in struct
+ drm_driver
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -53,65 +46,143 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Rich Felker <dalias@libc.org>, Jiri Slaby <jirislaby@gmail.com>,
- Geert Uytterhoeven <geert+renesas@glider.be>, David Airlie <airlied@linux.ie>,
- Benjamin Herrenschmidt <benh@kernel.crashing.org>,
- Jason Wang <jasowang@redhat.com>,
- DRI Development <dri-devel@lists.freedesktop.org>,
- virtualization@lists.linux-foundation.org,
- "James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>,
- netdev <netdev@vger.kernel.org>, Paul Mackerras <paulus@samba.org>,
- Linux-Arch <linux-arch@vger.kernel.org>, Dave Jiang <dave.jiang@intel.com>,
- Yoshinori Sato <ysato@users.sourceforge.jp>,
- Michael Ellerman <mpe@ellerman.id.au>, Helge Deller <deller@gmx.de>,
- Linux-sh list <linux-sh@vger.kernel.org>,
- Alexey Brodkin <abrodkin@synopsys.com>, Ben Skeggs <bskeggs@redhat.com>,
- nouveau@lists.freedesktop.org, Dave Airlie <airlied@redhat.com>,
- arcml <linux-snps-arc@lists.infradead.org>,
- Nick Kossifidis <mickflemm@gmail.com>, Allen Hubbe <allenbh@gmail.com>,
- Arnd Bergmann <arnd@arndb.de>, alpha <linux-alpha@vger.kernel.org>,
- Ivan Kokshaysky <ink@jurassic.park.msu.ru>,
- Thomas Gleixner <tglx@linutronix.de>,
- Mauro Carvalho Chehab <mchehab@kernel.org>, Kalle Valo <kvalo@codeaurora.org>,
- Richard Henderson <rth@twiddle.net>,
- Parisc List <linux-parisc@vger.kernel.org>, Vineet Gupta <vgupta@synopsys.com>,
- linux-wireless <linux-wireless@vger.kernel.org>,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- Luis Chamberlain <mcgrof@kernel.org>, Daniel Vetter <daniel@ffwll.ch>,
- Jon Mason <jdmason@kudzu.us>, linux-ntb@googlegroups.com,
- Linux Media Mailing List <linux-media@vger.kernel.org>,
- linuxppc-dev <linuxppc-dev@lists.ozlabs.org>,
- "David S. Miller" <davem@davemloft.net>
+Cc: linux-arm-msm@vger.kernel.org, intel-gfx@lists.freedesktop.org,
+ amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ Thomas Zimmermann <tzimmermann@suse.de>, nouveau@lists.freedesktop.org,
+ freedreno@lists.freedesktop.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, Jan 8, 2020 at 9:05 PM Krzysztof Kozlowski <krzk@kernel.org> wrote:
-> The ioreadX() and ioreadX_rep() helpers have inconsistent interface.  On
-> some architectures void *__iomem address argument is a pointer to const,
-> on some not.
->
-> Implementations of ioreadX() do not modify the memory under the address
-> so they can be converted to a "const" version for const-safety and
-> consistency among architectures.
->
-> Suggested-by: Geert Uytterhoeven <geert@linux-m68k.org>
-> Signed-off-by: Krzysztof Kozlowski <krzk@kernel.org>
-> Reviewed-by: Geert Uytterhoeven <geert+renesas@glider.be>
+VBLANK handlers in struct drm_driver are deprecated. Only legacy,
+non-KMS drivers are supposed to used them. DRM drivers with kernel
+modesetting are supposed to use VBLANK callbacks of the CRTC
+infrastructure.
 
-Reviewed-by: Geert Uytterhoeven <geert+renesas@glider.be>
+This patchset converts all DRM drivers to CRTC VBLANK callbacks and
+cleans up struct drm_driver. The remaining VBLANK callbacks in struct
+drm_driver are only used by legacy drivers.
 
-Gr{oetje,eeting}s,
+Patches 1 to 9 move get_scanout_position() to struct drm_crtc_helper_funcs
+and convert drivers over. The callback is a helper for the default
+implementation of get_vblank_timestamp() (i.e.,
+drm_calc_vbltimestamp_from_scanoutpos()). The original callback is removed
+from struct drm_driver.
 
-                        Geert
+Patch 10 changes the VBLANK code to evaluate vblank_disable_immediate in
+struct derm_device. This simplifies the later integration of CRTC VBLANK
+callbacks. If necessary, a future patch could move vblank_disable_immedate
+to struct drm_crtc, so that high-precision VBLANKs could be enabled on a
+per-CRTC basis.
 
--- 
-Geert Uytterhoeven -- There's lots of Linux beyond ia32 -- geert@linux-m68k.org
+Patches 11 to 23 move get_vblank_timestamp() to struct drm_crtc_funcs
+and convert DRM drivers over. All VBLANK callbacks are removed from
+struct drm_driver, except for get_vblank_counter(), enable_vblank(), and
+disable_vblank(). These interfaces are moved to the legacy section
+at the end of the structure.
 
-In personal conversations with technical people, I call myself a hacker. But
-when I'm talking to journalists I just say "programmer" or something like that.
-                                -- Linus Torvalds
+To cover all affected drivers, I build the patchset in x86, x86-64,
+arm and aarch64. I smoke-tested amdgpu, gma500, i915, radeon and vc4 on
+respective hardware.
+
+Thomas Zimmermann (23):
+  drm: Add get_scanout_position() to struct drm_crtc_helper_funcs
+  drm/amdgpu: Convert to struct
+    drm_crtc_helper_funcs.get_scanout_position()
+  drm/i915: Don't use struct drm_driver.get_scanout_position()
+  drm/nouveau: Convert to struct
+    drm_crtc_helper_funcs.get_scanout_position()
+  drm/radeon: Convert to struct
+    drm_crtc_helper_funcs.get_scanout_position()
+  drm/msm: Convert to struct
+    drm_crtc_helper_funcs.get_scanout_position()
+  drm/vc4: Convert to struct
+    drm_crtc_helper_funcs.get_scanout_position()
+  drm/stm: Convert to struct
+    drm_crtc_helper_funcs.get_scanout_position()
+  drm: Remove struct drm_driver.get_scanout_position()
+  drm: Evaluate struct drm_device.vblank_disable_immediate on each use
+  drm: Add get_vblank_timestamp() to struct drm_crtc_funcs
+  drm/amdgpu: Convert to CRTC VBLANK callbacks
+  drm/gma500: Convert to CRTC VBLANK callbacks
+  drm/i915: Convert to CRTC VBLANK callbacks
+  drm/msm: Convert to CRTC VBLANK callbacks
+  drm/nouveau: Convert to CRTC VBLANK callbacks
+  drm/radeon: Convert to CRTC VBLANK callbacks
+  drm/sti: Convert to CRTC VBLANK callbacks
+  drm/stm: Convert to CRTC VBLANK callbacks
+  drm/vc4: Convert to CRTC VBLANK callbacks
+  drm/vkms: Convert to CRTC VBLANK callbacks
+  drm/vmwgfx: Convert to CRTC VBLANK callbacks
+  drm: Cleanup VBLANK callbacks in struct drm_driver
+
+ drivers/gpu/drm/amd/amdgpu/amdgpu.h           |   3 +
+ drivers/gpu/drm/amd/amdgpu/amdgpu_display.c   |  12 ++
+ drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c       |  15 --
+ drivers/gpu/drm/amd/amdgpu/amdgpu_kms.c       |  24 +++
+ drivers/gpu/drm/amd/amdgpu/amdgpu_mode.h      |   5 +
+ drivers/gpu/drm/amd/amdgpu/dce_v10_0.c        |   5 +
+ drivers/gpu/drm/amd/amdgpu/dce_v11_0.c        |   5 +
+ drivers/gpu/drm/amd/amdgpu/dce_v6_0.c         |   5 +
+ drivers/gpu/drm/amd/amdgpu/dce_v8_0.c         |   5 +
+ drivers/gpu/drm/amd/amdgpu/dce_virtual.c      |   5 +
+ .../gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c |   5 +-
+ drivers/gpu/drm/drm_vblank.c                  | 128 +++++++++-----
+ drivers/gpu/drm/gma500/cdv_intel_display.c    |   3 +
+ drivers/gpu/drm/gma500/psb_drv.c              |   4 -
+ drivers/gpu/drm/gma500/psb_drv.h              |   6 +-
+ drivers/gpu/drm/gma500/psb_intel_display.c    |   3 +
+ drivers/gpu/drm/gma500/psb_irq.c              |  12 +-
+ drivers/gpu/drm/gma500/psb_irq.h              |   7 +-
+ drivers/gpu/drm/i915/display/intel_display.c  |   7 +
+ drivers/gpu/drm/i915/i915_drv.c               |   3 -
+ drivers/gpu/drm/i915/i915_irq.c               | 110 +++++++++++-
+ drivers/gpu/drm/i915/i915_irq.h               |   8 +-
+ drivers/gpu/drm/msm/disp/dpu1/dpu_crtc.c      |   2 +
+ drivers/gpu/drm/msm/disp/mdp4/mdp4_crtc.c     |   2 +
+ drivers/gpu/drm/msm/disp/mdp5/mdp5_crtc.c     |  82 +++++++++
+ drivers/gpu/drm/msm/disp/mdp5/mdp5_kms.c      |  95 -----------
+ drivers/gpu/drm/msm/msm_drv.c                 |  10 +-
+ drivers/gpu/drm/msm/msm_drv.h                 |   3 +
+ drivers/gpu/drm/nouveau/dispnv04/crtc.c       |   4 +
+ drivers/gpu/drm/nouveau/dispnv50/head.c       |   5 +
+ drivers/gpu/drm/nouveau/nouveau_display.c     |  28 +---
+ drivers/gpu/drm/nouveau/nouveau_display.h     |   6 +-
+ drivers/gpu/drm/nouveau/nouveau_drm.c         |   5 -
+ drivers/gpu/drm/radeon/atombios_crtc.c        |   1 +
+ drivers/gpu/drm/radeon/radeon_display.c       |  25 ++-
+ drivers/gpu/drm/radeon/radeon_drv.c           |  18 --
+ drivers/gpu/drm/radeon/radeon_kms.c           |  29 ++--
+ drivers/gpu/drm/radeon/radeon_legacy_crtc.c   |   3 +-
+ drivers/gpu/drm/radeon/radeon_mode.h          |   6 +
+ drivers/gpu/drm/sti/sti_crtc.c                |  11 +-
+ drivers/gpu/drm/sti/sti_crtc.h                |   2 -
+ drivers/gpu/drm/sti/sti_drv.c                 |   3 -
+ drivers/gpu/drm/stm/drv.c                     |   2 -
+ drivers/gpu/drm/stm/ltdc.c                    |  66 ++++----
+ drivers/gpu/drm/stm/ltdc.h                    |   5 -
+ drivers/gpu/drm/vc4/vc4_crtc.c                |  13 +-
+ drivers/gpu/drm/vc4/vc4_drv.c                 |   3 -
+ drivers/gpu/drm/vc4/vc4_drv.h                 |   4 -
+ drivers/gpu/drm/vkms/vkms_crtc.c              |   9 +-
+ drivers/gpu/drm/vkms/vkms_drv.c               |   1 -
+ drivers/gpu/drm/vkms/vkms_drv.h               |   4 -
+ drivers/gpu/drm/vmwgfx/vmwgfx_drv.c           |   5 +-
+ drivers/gpu/drm/vmwgfx/vmwgfx_drv.h           |   6 +-
+ drivers/gpu/drm/vmwgfx/vmwgfx_kms.c           |   8 +-
+ drivers/gpu/drm/vmwgfx/vmwgfx_ldu.c           |   3 +
+ drivers/gpu/drm/vmwgfx/vmwgfx_scrn.c          |   5 +-
+ drivers/gpu/drm/vmwgfx/vmwgfx_stdu.c          |   3 +
+ include/drm/drm_crtc.h                        |  41 +++++
+ include/drm/drm_drv.h                         | 156 +-----------------
+ include/drm/drm_modeset_helper_vtables.h      |  47 ++++++
+ include/drm/drm_vblank.h                      |   4 +
+ 61 files changed, 631 insertions(+), 474 deletions(-)
+
+--
+2.24.1
+
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
