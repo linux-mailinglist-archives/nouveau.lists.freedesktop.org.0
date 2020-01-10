@@ -1,26 +1,26 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id E862D138320
-	for <lists+nouveau@lfdr.de>; Sat, 11 Jan 2020 20:33:01 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id ED12B138337
+	for <lists+nouveau@lfdr.de>; Sat, 11 Jan 2020 20:33:15 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 006DC6E28E;
-	Sat, 11 Jan 2020 19:32:31 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 26F416E291;
+	Sat, 11 Jan 2020 19:32:32 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mga05.intel.com (mga05.intel.com [192.55.52.43])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 311FC6E9AF;
- Fri, 10 Jan 2020 10:24:18 +0000 (UTC)
+Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id F142D6E9D9;
+ Fri, 10 Jan 2020 11:59:15 +0000 (UTC)
 X-Amp-Result: SKIPPED(no attachment in message)
 X-Amp-File-Uploaded: False
-Received: from orsmga006.jf.intel.com ([10.7.209.51])
- by fmsmga105.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
- 10 Jan 2020 02:24:17 -0800
-X-IronPort-AV: E=Sophos;i="5.69,416,1571727600"; d="scan'208";a="223700705"
+Received: from orsmga005.jf.intel.com ([10.7.209.41])
+ by fmsmga102.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+ 10 Jan 2020 03:59:15 -0800
+X-IronPort-AV: E=Sophos;i="5.69,416,1571727600"; d="scan'208";a="396419144"
 Received: from jnikula-mobl3.fi.intel.com (HELO localhost) ([10.237.66.161])
- by orsmga006-auth.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
- 10 Jan 2020 02:24:09 -0800
+ by orsmga005-auth.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+ 10 Jan 2020 03:59:04 -0800
 From: Jani Nikula <jani.nikula@linux.intel.com>
 To: Thomas Zimmermann <tzimmermann@suse.de>, airlied@linux.ie, daniel@ffwll.ch,
  alexander.deucher@amd.com, christian.koenig@amd.com, David1.Zhou@amd.com,
@@ -32,16 +32,16 @@ To: Thomas Zimmermann <tzimmermann@suse.de>, airlied@linux.ie, daniel@ffwll.ch,
  linux-graphics-maintainer@vmware.com, thellstrom@vmware.com,
  bskeggs@redhat.com, harry.wentland@amd.com, sunpeng.li@amd.com,
  joonas.lahtinen@linux.intel.com, rodrigo.vivi@intel.com
-In-Reply-To: <20200110092127.27847-2-tzimmermann@suse.de>
+In-Reply-To: <20200110092127.27847-4-tzimmermann@suse.de>
 Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
 References: <20200110092127.27847-1-tzimmermann@suse.de>
- <20200110092127.27847-2-tzimmermann@suse.de>
-Date: Fri, 10 Jan 2020 12:24:06 +0200
-Message-ID: <87muavobi1.fsf@intel.com>
+ <20200110092127.27847-4-tzimmermann@suse.de>
+Date: Fri, 10 Jan 2020 13:59:01 +0200
+Message-ID: <87eew7o73u.fsf@intel.com>
 MIME-Version: 1.0
 X-Mailman-Approved-At: Sat, 11 Jan 2020 19:32:29 +0000
-Subject: Re: [Nouveau] [PATCH 01/23] drm: Add get_scanout_position() to
- struct drm_crtc_helper_funcs
+Subject: Re: [Nouveau] [PATCH 03/23] drm/i915: Don't use struct
+ drm_driver.get_scanout_position()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,157 +63,212 @@ Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 On Fri, 10 Jan 2020, Thomas Zimmermann <tzimmermann@suse.de> wrote:
-> The new callback get_scanout_position() reads the current location of
-> the scanout process. The operation is currentyl located in struct
-> drm_driver, but really belongs to the CRTC. Drivers will be converted
-> in separate patches.
+> The callback struct drm_driver.get_scanout_position() is deprecated in
+> favor of struct drm_crtc_helper_funcs.get_scanout_position().
+>
+> i915 doesn't use CRTC helpers. The patch duplicates the caller
+> drm_calc_vbltimestamp_from_scanoutpos() for i915, such that the callback
+> function is not needed.
 >
 > Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
 > ---
->  drivers/gpu/drm/drm_vblank.c             | 24 ++++++++----
->  include/drm/drm_drv.h                    |  7 +---
->  include/drm/drm_modeset_helper_vtables.h | 47 ++++++++++++++++++++++++
->  3 files changed, 65 insertions(+), 13 deletions(-)
->
-> diff --git a/drivers/gpu/drm/drm_vblank.c b/drivers/gpu/drm/drm_vblank.c
-> index 1659b13b178c..c12f0b333e14 100644
-> --- a/drivers/gpu/drm/drm_vblank.c
-> +++ b/drivers/gpu/drm/drm_vblank.c
-> @@ -30,6 +30,7 @@
->  #include <drm/drm_crtc.h>
->  #include <drm/drm_drv.h>
->  #include <drm/drm_framebuffer.h>
-> +#include <drm/drm_modeset_helper_vtables.h>
->  #include <drm/drm_print.h>
->  #include <drm/drm_vblank.h>
->  
-> @@ -590,7 +591,7 @@ EXPORT_SYMBOL(drm_calc_timestamping_constants);
->   * Implements calculation of exact vblank timestamps from given drm_display_mode
->   * timings and current video scanout position of a CRTC. This can be directly
->   * used as the &drm_driver.get_vblank_timestamp implementation of a kms driver
-> - * if &drm_driver.get_scanout_position is implemented.
-> + * if &drm_crtc_helper_funcs.get_scanout_position is implemented.
->   *
->   * The current implementation only handles standard video modes. For double scan
->   * and interlaced modes the driver is supposed to adjust the hardware mode
-> @@ -632,8 +633,9 @@ bool drm_calc_vbltimestamp_from_scanoutpos(struct drm_device *dev,
->  	}
->  
->  	/* Scanout position query not supported? Should not happen. */
-> -	if (!dev->driver->get_scanout_position) {
-> -		DRM_ERROR("Called from driver w/o get_scanout_position()!?\n");
-> +	if (!dev->driver->get_scanout_position ||
-> +	    !crtc->helper_private->get_scanout_position) {
+>  drivers/gpu/drm/i915/i915_drv.c |   3 +-
+>  drivers/gpu/drm/i915/i915_irq.c | 117 ++++++++++++++++++++++++++++++--
+>  drivers/gpu/drm/i915/i915_irq.h |   9 +--
+>  3 files changed, 119 insertions(+), 10 deletions(-)
 
-ITYM s/||/&&/
+Not really enthusiastic about the diffstat in a "cleanup" series.
+
+I wonder if you could add a generic helper version of
+drm_calc_vbltimestamp_from_scanoutpos where you pass the
+get_scanout_position function as a parameter. Both
+drm_calc_vbltimestamp_from_scanoutpos and the new
+i915_calc_vbltimestamp_from_scanoutpos would then be fairly thin
+wrappers passing in the relevant get_scanout_position function.
+
+This would reduce the almost identical duplication of the function in
+i915.
 
 BR,
 Jani.
 
-
-> +		DRM_ERROR("Called from CRTC w/o get_scanout_position()!?\n");
->  		return false;
->  	}
+>
+> diff --git a/drivers/gpu/drm/i915/i915_drv.c b/drivers/gpu/drm/i915/i915_drv.c
+> index f7385abdd74b..4a0a7fb85c53 100644
+> --- a/drivers/gpu/drm/i915/i915_drv.c
+> +++ b/drivers/gpu/drm/i915/i915_drv.c
+> @@ -2769,8 +2769,7 @@ static struct drm_driver driver = {
+>  	.gem_prime_export = i915_gem_prime_export,
+>  	.gem_prime_import = i915_gem_prime_import,
 >  
-> @@ -664,11 +666,17 @@ bool drm_calc_vbltimestamp_from_scanoutpos(struct drm_device *dev,
->  		 * Get vertical and horizontal scanout position vpos, hpos,
->  		 * and bounding timestamps stime, etime, pre/post query.
->  		 */
-> -		vbl_status = dev->driver->get_scanout_position(dev, pipe,
-> -							       in_vblank_irq,
-> -							       &vpos, &hpos,
-> -							       &stime, &etime,
-> -							       mode);
-> +		if (crtc->helper_private->get_scanout_position) {
-> +			vbl_status =
-> +				crtc->helper_private->get_scanout_position(
-> +					crtc, in_vblank_irq, &vpos, &hpos,
-> +					&stime, &etime, mode);
-> +		} else {
-> +			vbl_status =
-> +				dev->driver->get_scanout_position(
-> +					dev, pipe, in_vblank_irq, &vpos,
-> +					&hpos, &stime, &etime, mode);
-> +		}
+> -	.get_vblank_timestamp = drm_calc_vbltimestamp_from_scanoutpos,
+> -	.get_scanout_position = i915_get_crtc_scanoutpos,
+> +	.get_vblank_timestamp = i915_calc_vbltimestamp_from_scanoutpos,
 >  
->  		/* Return as no-op if scanout query unsupported or failed. */
->  		if (!vbl_status) {
-> diff --git a/include/drm/drm_drv.h b/include/drm/drm_drv.h
-> index cf13470810a5..d0049e5786fc 100644
-> --- a/include/drm/drm_drv.h
-> +++ b/include/drm/drm_drv.h
-> @@ -362,11 +362,8 @@ struct drm_driver {
->  	 * True on success, false if a reliable scanout position counter could
->  	 * not be read out.
->  	 *
-> -	 * FIXME:
-> -	 *
-> -	 * Since this is a helper to implement @get_vblank_timestamp, we should
-> -	 * move it to &struct drm_crtc_helper_funcs, like all the other
-> -	 * helper-internal hooks.
-> +	 * This is deprecated and should not be used by new drivers.
-> +	 * Use &drm_crtc_helper_funcs.get_scanout_position instead.
->  	 */
->  	bool (*get_scanout_position) (struct drm_device *dev, unsigned int pipe,
->  				      bool in_vblank_irq, int *vpos, int *hpos,
-> diff --git a/include/drm/drm_modeset_helper_vtables.h b/include/drm/drm_modeset_helper_vtables.h
-> index 5a87f1bd7a3f..e398512bfd5f 100644
-> --- a/include/drm/drm_modeset_helper_vtables.h
-> +++ b/include/drm/drm_modeset_helper_vtables.h
-> @@ -450,6 +450,53 @@ struct drm_crtc_helper_funcs {
->  	 */
->  	void (*atomic_disable)(struct drm_crtc *crtc,
->  			       struct drm_crtc_state *old_crtc_state);
+>  	.dumb_create = i915_gem_dumb_create,
+>  	.dumb_map_offset = i915_gem_dumb_mmap_offset,
+> diff --git a/drivers/gpu/drm/i915/i915_irq.c b/drivers/gpu/drm/i915/i915_irq.c
+> index afc6aad9bf8c..99d0c3b0feae 100644
+> --- a/drivers/gpu/drm/i915/i915_irq.c
+> +++ b/drivers/gpu/drm/i915/i915_irq.c
+> @@ -52,6 +52,11 @@
+>  #include "i915_trace.h"
+>  #include "intel_pm.h"
+>  
+> +/* Retry timestamp calculation up to 3 times to satisfy
+> + * drm_timestamp_precision before giving up.
+> + */
+> +#define I915_TIMESTAMP_MAXRETRIES 3
 > +
-> +	/**
-> +	 * @get_scanout_position:
-> +	 *
-> +	 * Called by vblank timestamping code.
-> +	 *
-> +	 * Returns the current display scanout position from a CRTC and an
-> +	 * optional accurate ktime_get() timestamp of when the position was
-> +	 * measured. Note that this is a helper callback which is only used
-> +	 * if a driver uses drm_calc_vbltimestamp_from_scanoutpos() for the
-> +	 * @drm_driver.get_vblank_timestamp callback.
-> +	 *
-> +	 * Parameters:
-> +	 *
-> +	 * crtc:
-> +	 *     The CRTC.
-> +	 * in_vblank_irq:
-> +	 *     True when called from drm_crtc_handle_vblank(). Some drivers
-> +	 *     need to apply some workarounds for gpu-specific vblank irq
-> +	 *     quirks if the flag is set.
-> +	 * vpos:
-> +	 *     Target location for current vertical scanout position.
-> +	 * hpos:
-> +	 *     Target location for current horizontal scanout position.
-> +	 * stime:
-> +	 *     Target location for timestamp taken immediately before
-> +	 *     scanout position query. Can be NULL to skip timestamp.
-> +	 * etime:
-> +	 *     Target location for timestamp taken immediately after
-> +	 *     scanout position query. Can be NULL to skip timestamp.
-> +	 * mode:
-> +	 *     Current display timings.
-> +	 *
-> +	 * Returns vpos as a positive number while in active scanout area.
-> +	 * Returns vpos as a negative number inside vblank, counting the number
-> +	 * of scanlines to go until end of vblank, e.g., -1 means "one scanline
-> +	 * until start of active scanout / end of vblank."
-> +	 *
-> +	 * Returns:
-> +	 *
-> +	 * True on success, false if a reliable scanout position counter could
-> +	 * not be read out.
-> +	 */
-> +	bool (*get_scanout_position)(struct drm_crtc *crtc,
-> +				     bool in_vblank_irq, int *vpos, int *hpos,
-> +				     ktime_t *stime, ktime_t *etime,
-> +				     const struct drm_display_mode *mode);
->  };
->  
 >  /**
+>   * DOC: interrupt handling
+>   *
+> @@ -762,10 +767,11 @@ static int __intel_get_crtc_scanline(struct intel_crtc *crtc)
+>  	return (position + crtc->scanline_offset) % vtotal;
+>  }
+>  
+> -bool i915_get_crtc_scanoutpos(struct drm_device *dev, unsigned int index,
+> -			      bool in_vblank_irq, int *vpos, int *hpos,
+> -			      ktime_t *stime, ktime_t *etime,
+> -			      const struct drm_display_mode *mode)
+> +static bool i915_get_crtc_scanoutpos(struct drm_device *dev,
+> +				     unsigned int index, bool in_vblank_irq,
+> +				     int *vpos, int *hpos,
+> +				     ktime_t *stime, ktime_t *etime,
+> +				     const struct drm_display_mode *mode)
+>  {
+>  	struct drm_i915_private *dev_priv = to_i915(dev);
+>  	struct intel_crtc *crtc = to_intel_crtc(drm_crtc_from_index(dev, index));
+> @@ -879,6 +885,109 @@ bool i915_get_crtc_scanoutpos(struct drm_device *dev, unsigned int index,
+>  	return true;
+>  }
+>  
+> +bool i915_calc_vbltimestamp_from_scanoutpos(struct drm_device *dev,
+> +					    unsigned int pipe,
+> +					    int *max_error,
+> +					    ktime_t *vblank_time,
+> +					    bool in_vblank_irq)
+> +{
+> +	struct timespec64 ts_etime, ts_vblank_time;
+> +	ktime_t stime, etime;
+> +	bool vbl_status;
+> +	struct drm_crtc *crtc;
+> +	const struct drm_display_mode *mode;
+> +	struct drm_vblank_crtc *vblank = &dev->vblank[pipe];
+> +	int vpos, hpos, i;
+> +	int delta_ns, duration_ns;
+> +
+> +	crtc = drm_crtc_from_index(dev, pipe);
+> +
+> +	if (pipe >= dev->num_crtcs || !crtc) {
+> +		DRM_ERROR("Invalid crtc %u\n", pipe);
+> +		return false;
+> +	}
+> +
+> +	if (drm_drv_uses_atomic_modeset(dev))
+> +		mode = &vblank->hwmode;
+> +	else
+> +		mode = &crtc->hwmode;
+> +
+> +	/* If mode timing undefined, just return as no-op:
+> +	 * Happens during initial modesetting of a crtc.
+> +	 */
+> +	if (mode->crtc_clock == 0) {
+> +		DRM_DEBUG("crtc %u: Noop due to uninitialized mode.\n", pipe);
+> +		WARN_ON_ONCE(drm_drv_uses_atomic_modeset(dev));
+> +
+> +		return false;
+> +	}
+> +
+> +	/* Get current scanout position with system timestamp.
+> +	 * Repeat query up to DRM_TIMESTAMP_MAXRETRIES times
+> +	 * if single query takes longer than max_error nanoseconds.
+> +	 *
+> +	 * This guarantees a tight bound on maximum error if
+> +	 * code gets preempted or delayed for some reason.
+> +	 */
+> +	for (i = 0; i < I915_TIMESTAMP_MAXRETRIES; i++) {
+> +		/*
+> +		 * Get vertical and horizontal scanout position vpos, hpos,
+> +		 * and bounding timestamps stime, etime, pre/post query.
+> +		 */
+> +		vbl_status = i915_get_crtc_scanoutpos(dev, pipe, in_vblank_irq,
+> +						      &vpos, &hpos, &stime,
+> +						      &etime, mode);
+> +		/* Return as no-op if scanout query unsupported or failed. */
+> +		if (!vbl_status) {
+> +			DRM_DEBUG("crtc %u : scanoutpos query failed.\n",
+> +				  pipe);
+> +			return false;
+> +		}
+> +
+> +		/* Compute uncertainty in timestamp of scanout position query. */
+> +		duration_ns = ktime_to_ns(etime) - ktime_to_ns(stime);
+> +
+> +		/* Accept result with <  max_error nsecs timing uncertainty. */
+> +		if (duration_ns <= *max_error)
+> +			break;
+> +	}
+> +
+> +	/* Noisy system timing? */
+> +	if (i == I915_TIMESTAMP_MAXRETRIES) {
+> +		DRM_DEBUG("crtc %u: Noisy timestamp %d us > %d us [%d reps].\n",
+> +			  pipe, duration_ns/1000, *max_error/1000, i);
+> +	}
+> +
+> +	/* Return upper bound of timestamp precision error. */
+> +	*max_error = duration_ns;
+> +
+> +	/* Convert scanout position into elapsed time at raw_time query
+> +	 * since start of scanout at first display scanline. delta_ns
+> +	 * can be negative if start of scanout hasn't happened yet.
+> +	 */
+> +	delta_ns = div_s64(1000000LL * (vpos * mode->crtc_htotal + hpos),
+> +			   mode->crtc_clock);
+> +
+> +	/* Subtract time delta from raw timestamp to get final
+> +	 * vblank_time timestamp for end of vblank.
+> +	 */
+> +	*vblank_time = ktime_sub_ns(etime, delta_ns);
+> +
+> +	if (!drm_debug_enabled(DRM_UT_VBL))
+> +		return true;
+> +
+> +	ts_etime = ktime_to_timespec64(etime);
+> +	ts_vblank_time = ktime_to_timespec64(*vblank_time);
+> +
+> +	DRM_DEBUG_VBL("crtc %u : v p(%d,%d)@ %lld.%06ld -> %lld.%06ld [e %d us, %d rep]\n",
+> +		      pipe, hpos, vpos,
+> +		      (u64)ts_etime.tv_sec, ts_etime.tv_nsec / 1000,
+> +		      (u64)ts_vblank_time.tv_sec, ts_vblank_time.tv_nsec / 1000,
+> +		      duration_ns / 1000, i);
+> +
+> +	return true;
+> +}
+> +
+>  int intel_get_crtc_scanline(struct intel_crtc *crtc)
+>  {
+>  	struct drm_i915_private *dev_priv = to_i915(crtc->base.dev);
+> diff --git a/drivers/gpu/drm/i915/i915_irq.h b/drivers/gpu/drm/i915/i915_irq.h
+> index 812c47a9c2d6..5f7b133ce721 100644
+> --- a/drivers/gpu/drm/i915/i915_irq.h
+> +++ b/drivers/gpu/drm/i915/i915_irq.h
+> @@ -101,10 +101,11 @@ void gen8_irq_power_well_post_enable(struct drm_i915_private *dev_priv,
+>  void gen8_irq_power_well_pre_disable(struct drm_i915_private *dev_priv,
+>  				     u8 pipe_mask);
+>  
+> -bool i915_get_crtc_scanoutpos(struct drm_device *dev, unsigned int pipe,
+> -			      bool in_vblank_irq, int *vpos, int *hpos,
+> -			      ktime_t *stime, ktime_t *etime,
+> -			      const struct drm_display_mode *mode);
+> +bool i915_calc_vbltimestamp_from_scanoutpos(struct drm_device *dev,
+> +					    unsigned int pipe,
+> +					    int *max_error,
+> +					    ktime_t *vblank_time,
+> +					    bool in_vblank_irq);
+>  
+>  u32 i915_get_vblank_counter(struct drm_crtc *crtc);
+>  u32 g4x_get_vblank_counter(struct drm_crtc *crtc);
 
 -- 
 Jani Nikula, Intel Open Source Graphics Center
