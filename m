@@ -2,53 +2,60 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id A9F89138902
-	for <lists+nouveau@lfdr.de>; Mon, 13 Jan 2020 01:07:20 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 277E9138CBC
+	for <lists+nouveau@lfdr.de>; Mon, 13 Jan 2020 09:19:55 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id DA04789CE1;
-	Mon, 13 Jan 2020 00:07:18 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D73C489F3B;
+	Mon, 13 Jan 2020 08:19:48 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ua1-x931.google.com (mail-ua1-x931.google.com
- [IPv6:2607:f8b0:4864:20::931])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8A62589CE1;
- Mon, 13 Jan 2020 00:07:17 +0000 (UTC)
-Received: by mail-ua1-x931.google.com with SMTP id 1so2713199uao.1;
- Sun, 12 Jan 2020 16:07:17 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=Ni1dsk4zQuirgan391D3nIBqR+fxZP8zwkgVrPSLMyE=;
- b=MkTqD2zddrvNJVuacif3IaKo9o4ZcuvBHo8hi3lg+TBK+H8BFbjbTvHR9+EAMNdTYJ
- WjjqL6Unue/SF4hnaz93AJmi4hcLnjoCGXEurbCntUrHtgbd6KLRahlKz5NFS58Vx/C4
- ce//VG0uUvtrEkO34VPYlQWRgbBE0t2+1WG4GIcsVLkBeA0fVKZdTIikIsfBolWw2teo
- wcmcU8IejtRZvDXLBoUPh6gl7TnxuBnA8H45mrv0GnHhmwWHAefhmGpTWi7xCex+SkXi
- 1JGGZfD1KoXo3SioS0hKePFE56IK4C+MZAvibGIWdAR0Jibvsj68q1K+NVTt600PlGWe
- IIBg==
+Received: from mail-pf1-x443.google.com (mail-pf1-x443.google.com
+ [IPv6:2607:f8b0:4864:20::443])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 63C8689FD7
+ for <nouveau@lists.freedesktop.org>; Sun, 12 Jan 2020 22:53:26 +0000 (UTC)
+Received: by mail-pf1-x443.google.com with SMTP id x6so3935842pfo.10
+ for <nouveau@lists.freedesktop.org>; Sun, 12 Jan 2020 14:53:26 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to;
+ bh=mN3OohFuWT/b3tQcks3MjC4mIBwZ0BmU1pug0HHFBA8=;
+ b=kb6TnFq/1j0a2g5CEH0dwgYru/JrTDzsIQ5lH6fwGPfA4FHMT7MUtVeevbRwcdUKCr
+ gJ1umclAsxpCWVsdc9lmxc17CoVkN91Y/fbNlb3MoFW2qbdl4QxvrgVFzjbau0cRitq5
+ sUrLF07n03/0kDexoiN5qBCebux94EmoDTI70=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=Ni1dsk4zQuirgan391D3nIBqR+fxZP8zwkgVrPSLMyE=;
- b=L1NYkXcbsfDairr0i1RnRAgoSAg7Q4EJj7nYJVP6yjwW+mHwYESI5+GzXHME4BaoqS
- qoVhCzsqJtbmKtS1tKuAzcvyBEM4zMJpHPvfns1xBniVLBP+WydrK2jEwBva7LWGNHJh
- 4h/AFBZUQUPj8lgnjTCOBC+ngF9Bhi7lVqwOYhX4EPU0KykbO048HbSbHyS69sr6FaGw
- FQ6HKzbp1jAnYF3+Tozk+x7pTgREcRjopRa/WC7GUF97Q3eiG0d8iCZZhC9Zx7BB7lAi
- aMdaEgWH6uAyQ2nvwRYxjqX/WNjseYn7kQluKFm7YKRpG46PYhgvHbvag9eV7/KFTJSt
- 9b5Q==
-X-Gm-Message-State: APjAAAV3fM4wKkbzAbnRjnTPnl+IyxlaJ+yJi/izv1xC2/qfRenNViVN
- 2KFFoB0vQzMdki4JIWKd3N0jmUF7+STj3wBdIAvfXzsjIdQ=
-X-Google-Smtp-Source: APXvYqyFFBC8dpNMD69+EuEZSci28AmYlHt/twpN4MrbjgbZwGM7Il8XTOOj7wxDtZqsqieKQqHbTh47ZNWd7OBTNy0=
-X-Received: by 2002:ab0:14ea:: with SMTP id f39mr5758331uae.40.1578874036638; 
- Sun, 12 Jan 2020 16:07:16 -0800 (PST)
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=mN3OohFuWT/b3tQcks3MjC4mIBwZ0BmU1pug0HHFBA8=;
+ b=D5ILCTqB11PkF6TPJNBOzmwSVkc1EcVFUdLcWLDpP3SRBLmdK143gmA1QnSbTeTKjb
+ w5Jtnb67oLTAd6Wnr75HXyux8rPd0K3pYMclBvHd5Va/FCTghpANMiBPleXbMuK4rzO+
+ K+6HXzao1N2Dx7vlhS67A8/HCKwHdzQSLo2p/uIX46Wx957D0lkPAJ4wDkuLaEWW3YGk
+ 9+Elb0fHuU0bsqwMIA/2IDX8pFMXvgCsv1oIGiuNhOI2cE+nZWrF0+GyDpmUwfzXk5lp
+ fod3tPr4UvYO91B7ao9I2wWdafclt1UPAqoyBw4r6Z/1fpoOn9sb94MzQ5aAb1G05rrt
+ 6/nQ==
+X-Gm-Message-State: APjAAAXvlf+B/1LnMhPnPZDfKwCjYKeQh0KtIAPPAr7Owg4xFUUhJcPd
+ V0eDJ20ojXlf6+brWlhpfYYZUg==
+X-Google-Smtp-Source: APXvYqzuVMccGIlYN3NWuH5sobRxngrV6L5TKIyuAMS6+VMeeMkB4pB7p1cgi1jZEAORT6jG0Ta+aQ==
+X-Received: by 2002:a62:3703:: with SMTP id e3mr16618728pfa.154.1578869606016; 
+ Sun, 12 Jan 2020 14:53:26 -0800 (PST)
+Received: from dvetter-linux.ger.corp.intel.com ([138.44.248.126])
+ by smtp.gmail.com with ESMTPSA id g67sm11800045pfb.66.2020.01.12.14.53.16
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 12 Jan 2020 14:53:25 -0800 (PST)
+Date: Sun, 12 Jan 2020 23:53:12 +0100
+From: Daniel Vetter <daniel@ffwll.ch>
+To: Thomas Zimmermann <tzimmermann@suse.de>
+Message-ID: <20200112225312.GC5340@dvetter-linux.ger.corp.intel.com>
+References: <20200110092127.27847-1-tzimmermann@suse.de>
+ <20200110092127.27847-24-tzimmermann@suse.de>
 MIME-Version: 1.0
-References: <20200110072837.48060-1-yuehaibing@huawei.com>
-In-Reply-To: <20200110072837.48060-1-yuehaibing@huawei.com>
-From: Ben Skeggs <skeggsb@gmail.com>
-Date: Mon, 13 Jan 2020 10:07:05 +1000
-Message-ID: <CACAvsv4LQAs_GAavgywod1ksxvKe5JE6FNGMnULbnJACJ280KQ@mail.gmail.com>
-To: YueHaibing <yuehaibing@huawei.com>
-Subject: Re: [Nouveau] [PATCH -next] drm/ttm: Remove set but not used
- variable 'mem'
+Content-Disposition: inline
+In-Reply-To: <20200110092127.27847-24-tzimmermann@suse.de>
+X-Operating-System: Linux dvetter-linux.ger.corp.intel.com
+ 5.2.11-200.fc30.x86_64 
+X-Mailman-Approved-At: Mon, 13 Jan 2020 08:19:47 +0000
+Subject: Re: [Nouveau] [PATCH 23/23] drm: Cleanup VBLANK callbacks in struct
+ drm_driver
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,71 +67,279 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Dave Airlie <airlied@linux.ie>, ML nouveau <nouveau@lists.freedesktop.org>,
- LKML <linux-kernel@vger.kernel.org>,
- ML dri-devel <dri-devel@lists.freedesktop.org>,
- Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>
+Cc: hamohammed.sa@gmail.com, airlied@linux.ie, nouveau@lists.freedesktop.org,
+ joonas.lahtinen@linux.intel.com, dri-devel@lists.freedesktop.org,
+ eric@anholt.net, amd-gfx@lists.freedesktop.org, benjamin.gaignard@linaro.org,
+ alexandre.torgue@st.com, David1.Zhou@amd.com, thellstrom@vmware.com,
+ sean@poorly.run, patrik.r.jakobsson@gmail.com,
+ linux-graphics-maintainer@vmware.com, bskeggs@redhat.com,
+ harry.wentland@amd.com, mcoquelin.stm32@gmail.com, sunpeng.li@amd.com,
+ linux-arm-msm@vger.kernel.org, intel-gfx@lists.freedesktop.org,
+ maarten.lankhorst@linux.intel.com, jani.nikula@linux.intel.com,
+ rodrigo.vivi@intel.com, vincent.abriou@st.com, rodrigosiqueiramelo@gmail.com,
+ philippe.cornu@st.com, yannick.fertre@st.com, robdclark@gmail.com,
+ daniel@ffwll.ch, alexander.deucher@amd.com, freedreno@lists.freedesktop.org,
+ christian.koenig@amd.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, 10 Jan 2020 at 17:32, YueHaibing <yuehaibing@huawei.com> wrote:
->
-> drivers/gpu/drm/nouveau/nouveau_ttm.c: In function nouveau_vram_manager_new:
-> drivers/gpu/drm/nouveau/nouveau_ttm.c:66:22: warning: variable mem set but not used [-Wunused-but-set-variable]
-> drivers/gpu/drm/nouveau/nouveau_ttm.c: In function nouveau_gart_manager_new:
-> drivers/gpu/drm/nouveau/nouveau_ttm.c:106:22: warning: variable mem set but not used [-Wunused-but-set-variable]
->
-> They are not used any more, so remove it.
-Thanks!
+On Fri, Jan 10, 2020 at 10:21:27AM +0100, Thomas Zimmermann wrote:
+> All non-legacy users of VBLANK functions in struct drm_driver have been
+> converted to use the respective interfaces in struct drm_crtc_funcs. The
+> remaining users of VBLANK callbacks in struct drm_driver are legacy drivers
+> with userspace modesetting.
+> 
+> There are no users left of get_vblank_timestamp(), so the callback is
+> being removed. The other VBLANK callbacks are being moved to the legacy
+> section at the end of struct drm_driver.
+> 
+> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
 
->
-> Reported-by: Hulk Robot <hulkci@huawei.com>
-> Signed-off-by: YueHaibing <yuehaibing@huawei.com>
+I think sprinkling some WARN_ON (in drm_dev_register or wherever) if new
+drivers try to use the legacy hooks would be really nice. Experience says
+someone is going to copypaste this stuff around forever otherwise.
+
+Reviewed-by: Daniel Vetter <daniel.vetter@ffwll.ch>
+
 > ---
->  drivers/gpu/drm/nouveau/nouveau_ttm.c | 4 ----
->  1 file changed, 4 deletions(-)
->
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_ttm.c b/drivers/gpu/drm/nouveau/nouveau_ttm.c
-> index 77a0c6a..7ca0a24 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_ttm.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_ttm.c
-> @@ -63,14 +63,12 @@ nouveau_vram_manager_new(struct ttm_mem_type_manager *man,
->  {
->         struct nouveau_bo *nvbo = nouveau_bo(bo);
->         struct nouveau_drm *drm = nouveau_bdev(bo->bdev);
-> -       struct nouveau_mem *mem;
->         int ret;
->
->         if (drm->client.device.info.ram_size == 0)
->                 return -ENOMEM;
->
->         ret = nouveau_mem_new(&drm->master, nvbo->kind, nvbo->comp, reg);
-> -       mem = nouveau_mem(reg);
->         if (ret)
->                 return ret;
->
-> @@ -103,11 +101,9 @@ nouveau_gart_manager_new(struct ttm_mem_type_manager *man,
->  {
->         struct nouveau_bo *nvbo = nouveau_bo(bo);
->         struct nouveau_drm *drm = nouveau_bdev(bo->bdev);
-> -       struct nouveau_mem *mem;
->         int ret;
->
->         ret = nouveau_mem_new(&drm->master, nvbo->kind, nvbo->comp, reg);
-> -       mem = nouveau_mem(reg);
->         if (ret)
->                 return ret;
->
-> --
-> 2.7.4
->
->
-> _______________________________________________
-> Nouveau mailing list
-> Nouveau@lists.freedesktop.org
-> https://lists.freedesktop.org/mailman/listinfo/nouveau
+>  drivers/gpu/drm/drm_vblank.c |  39 +++++---------
+>  include/drm/drm_drv.h        | 101 ++---------------------------------
+>  2 files changed, 17 insertions(+), 123 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/drm_vblank.c b/drivers/gpu/drm/drm_vblank.c
+> index 7cf436a4b908..ceff68474d4d 100644
+> --- a/drivers/gpu/drm/drm_vblank.c
+> +++ b/drivers/gpu/drm/drm_vblank.c
+> @@ -138,10 +138,9 @@ static u32 __get_vblank_counter(struct drm_device *dev, unsigned int pipe)
+>  
+>  		if (crtc->funcs->get_vblank_counter)
+>  			return crtc->funcs->get_vblank_counter(crtc);
+> -	}
+> -
+> -	if (dev->driver->get_vblank_counter)
+> +	} else if (dev->driver->get_vblank_counter) {
+>  		return dev->driver->get_vblank_counter(dev, pipe);
+> +	}
+>  
+>  	return drm_vblank_no_hw_counter(dev, pipe);
+>  }
+> @@ -334,8 +333,7 @@ u64 drm_crtc_accurate_vblank_count(struct drm_crtc *crtc)
+>  	unsigned long flags;
+>  
+>  	WARN_ONCE(drm_debug_enabled(DRM_UT_VBL) &&
+> -		  !crtc->funcs->get_vblank_timestamp &&
+> -		  !dev->driver->get_vblank_timestamp,
+> +		  !crtc->funcs->get_vblank_timestamp,
+>  		  "This function requires support for accurate vblank timestamps.");
+>  
+>  	spin_lock_irqsave(&dev->vblank_time_lock, flags);
+> @@ -357,13 +355,11 @@ static void __disable_vblank(struct drm_device *dev, unsigned int pipe)
+>  		if (WARN_ON(!crtc))
+>  			return;
+>  
+> -		if (crtc->funcs->disable_vblank) {
+> +		if (crtc->funcs->disable_vblank)
+>  			crtc->funcs->disable_vblank(crtc);
+> -			return;
+> -		}
+> +	} else {
+> +		dev->driver->disable_vblank(dev, pipe);
+>  	}
+> -
+> -	dev->driver->disable_vblank(dev, pipe);
+>  }
+>  
+>  /*
+> @@ -791,9 +787,6 @@ drm_get_last_vbltimestamp(struct drm_device *dev, unsigned int pipe,
+>  
+>  		ret = crtc->funcs->get_vblank_timestamp(crtc, &max_error,
+>  							tvblank, in_vblank_irq);
+> -	} else if (dev->driver->get_vblank_timestamp && (max_error > 0)) {
+> -		ret = dev->driver->get_vblank_timestamp(dev, pipe, &max_error,
+> -							tvblank, in_vblank_irq);
+>  	}
+>  
+>  	/* GPU high precision timestamp query unsupported or failed.
+> @@ -1016,9 +1009,11 @@ static int __enable_vblank(struct drm_device *dev, unsigned int pipe)
+>  
+>  		if (crtc->funcs->enable_vblank)
+>  			return crtc->funcs->enable_vblank(crtc);
+> +	} else if (dev->driver->enable_vblank) {
+> +		return dev->driver->enable_vblank(dev, pipe);
+>  	}
+>  
+> -	return dev->driver->enable_vblank(dev, pipe);
+> +	return -EINVAL;
+>  }
+>  
+>  static int drm_vblank_enable(struct drm_device *dev, unsigned int pipe)
+> @@ -1109,13 +1104,10 @@ static bool __vblank_disable_immediate(struct drm_device *dev, unsigned int pipe
+>  		return false;
+>  
+>  	crtc = drm_crtc_from_index(dev, pipe);
+> -	if (crtc && crtc->funcs->get_vblank_timestamp)
+> -		return true;
+> -
+> -	if (dev->driver->get_vblank_timestamp)
+> -		return true;
+> +	if (!crtc || !crtc->funcs->get_vblank_timestamp)
+> +		return false;
+>  
+> -	return false;
+> +	return true;
+>  }
+>  
+>  static void drm_vblank_put(struct drm_device *dev, unsigned int pipe)
+> @@ -1798,7 +1790,6 @@ static void drm_handle_vblank_events(struct drm_device *dev, unsigned int pipe)
+>  	struct drm_pending_vblank_event *e, *t;
+>  	ktime_t now;
+>  	u64 seq;
+> -	bool high_prec;
+>  
+>  	assert_spin_locked(&dev->event_lock);
+>  
+> @@ -1818,10 +1809,8 @@ static void drm_handle_vblank_events(struct drm_device *dev, unsigned int pipe)
+>  		send_vblank_event(dev, e, seq, now);
+>  	}
+>  
+> -	high_prec = crtc->funcs->get_vblank_timestamp ||
+> -		    dev->driver->get_vblank_timestamp;
+> -
+> -	trace_drm_vblank_event(pipe, seq, now, high_prec);
+> +	trace_drm_vblank_event(pipe, seq, now,
+> +			       crtc->funcs->get_vblank_timestamp != NULL);
+>  }
+>  
+>  /**
+> diff --git a/include/drm/drm_drv.h b/include/drm/drm_drv.h
+> index b704e252f3b2..e290b3aca6eb 100644
+> --- a/include/drm/drm_drv.h
+> +++ b/include/drm/drm_drv.h
+> @@ -268,104 +268,6 @@ struct drm_driver {
+>  	 */
+>  	void (*release) (struct drm_device *);
+>  
+> -	/**
+> -	 * @get_vblank_counter:
+> -	 *
+> -	 * Driver callback for fetching a raw hardware vblank counter for the
+> -	 * CRTC specified with the pipe argument.  If a device doesn't have a
+> -	 * hardware counter, the driver can simply leave the hook as NULL.
+> -	 * The DRM core will account for missed vblank events while interrupts
+> -	 * where disabled based on system timestamps.
+> -	 *
+> -	 * Wraparound handling and loss of events due to modesetting is dealt
+> -	 * with in the DRM core code, as long as drivers call
+> -	 * drm_crtc_vblank_off() and drm_crtc_vblank_on() when disabling or
+> -	 * enabling a CRTC.
+> -	 *
+> -	 * This is deprecated and should not be used by new drivers.
+> -	 * Use &drm_crtc_funcs.get_vblank_counter instead.
+> -	 *
+> -	 * Returns:
+> -	 *
+> -	 * Raw vblank counter value.
+> -	 */
+> -	u32 (*get_vblank_counter) (struct drm_device *dev, unsigned int pipe);
+> -
+> -	/**
+> -	 * @enable_vblank:
+> -	 *
+> -	 * Enable vblank interrupts for the CRTC specified with the pipe
+> -	 * argument.
+> -	 *
+> -	 * This is deprecated and should not be used by new drivers.
+> -	 * Use &drm_crtc_funcs.enable_vblank instead.
+> -	 *
+> -	 * Returns:
+> -	 *
+> -	 * Zero on success, appropriate errno if the given @crtc's vblank
+> -	 * interrupt cannot be enabled.
+> -	 */
+> -	int (*enable_vblank) (struct drm_device *dev, unsigned int pipe);
+> -
+> -	/**
+> -	 * @disable_vblank:
+> -	 *
+> -	 * Disable vblank interrupts for the CRTC specified with the pipe
+> -	 * argument.
+> -	 *
+> -	 * This is deprecated and should not be used by new drivers.
+> -	 * Use &drm_crtc_funcs.disable_vblank instead.
+> -	 */
+> -	void (*disable_vblank) (struct drm_device *dev, unsigned int pipe);
+> -
+> -	/**
+> -	 * @get_vblank_timestamp:
+> -	 *
+> -	 * Called by drm_get_last_vbltimestamp(). Should return a precise
+> -	 * timestamp when the most recent VBLANK interval ended or will end.
+> -	 *
+> -	 * Specifically, the timestamp in @vblank_time should correspond as
+> -	 * closely as possible to the time when the first video scanline of
+> -	 * the video frame after the end of VBLANK will start scanning out,
+> -	 * the time immediately after end of the VBLANK interval. If the
+> -	 * @crtc is currently inside VBLANK, this will be a time in the future.
+> -	 * If the @crtc is currently scanning out a frame, this will be the
+> -	 * past start time of the current scanout. This is meant to adhere
+> -	 * to the OpenML OML_sync_control extension specification.
+> -	 *
+> -	 * Paramters:
+> -	 *
+> -	 * dev:
+> -	 *     dev DRM device handle.
+> -	 * pipe:
+> -	 *     crtc for which timestamp should be returned.
+> -	 * max_error:
+> -	 *     Maximum allowable timestamp error in nanoseconds.
+> -	 *     Implementation should strive to provide timestamp
+> -	 *     with an error of at most max_error nanoseconds.
+> -	 *     Returns true upper bound on error for timestamp.
+> -	 * vblank_time:
+> -	 *     Target location for returned vblank timestamp.
+> -	 * in_vblank_irq:
+> -	 *     True when called from drm_crtc_handle_vblank().  Some drivers
+> -	 *     need to apply some workarounds for gpu-specific vblank irq quirks
+> -	 *     if flag is set.
+> -	 *
+> -	 * Returns:
+> -	 *
+> -	 * True on success, false on failure, which means the core should
+> -	 * fallback to a simple timestamp taken in drm_crtc_handle_vblank().
+> -	 *
+> -	 * FIXME:
+> -	 *
+> -	 * We should move this hook to &struct drm_crtc_funcs like all the other
+> -	 * vblank hooks.
+> -	 */
+> -	bool (*get_vblank_timestamp) (struct drm_device *dev, unsigned int pipe,
+> -				     int *max_error,
+> -				     ktime_t *vblank_time,
+> -				     bool in_vblank_irq);
+> -
+>  	/**
+>  	 * @irq_handler:
+>  	 *
+> @@ -720,6 +622,9 @@ struct drm_driver {
+>  	int (*dma_ioctl) (struct drm_device *dev, void *data, struct drm_file *file_priv);
+>  	int (*dma_quiescent) (struct drm_device *);
+>  	int (*context_dtor) (struct drm_device *dev, int context);
+> +	u32 (*get_vblank_counter)(struct drm_device *dev, unsigned int pipe);
+> +	int (*enable_vblank)(struct drm_device *dev, unsigned int pipe);
+> +	void (*disable_vblank)(struct drm_device *dev, unsigned int pipe);
+>  	int dev_priv_size;
+>  };
+>  
+> -- 
+> 2.24.1
+> 
+
+-- 
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
