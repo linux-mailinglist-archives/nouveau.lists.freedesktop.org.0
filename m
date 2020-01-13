@@ -2,45 +2,53 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2B6E0138318
-	for <lists+nouveau@lfdr.de>; Sat, 11 Jan 2020 20:32:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3FC251388FD
+	for <lists+nouveau@lfdr.de>; Mon, 13 Jan 2020 01:06:29 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1BF0D6E252;
-	Sat, 11 Jan 2020 19:32:31 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C87A689B68;
+	Mon, 13 Jan 2020 00:06:26 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D74206EA34;
- Fri, 10 Jan 2020 15:26:05 +0000 (UTC)
-X-Amp-Result: UNKNOWN
-X-Amp-Original-Verdict: FILE UNKNOWN
-X-Amp-File-Uploaded: False
-Received: from orsmga008.jf.intel.com ([10.7.209.65])
- by orsmga101.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
- 10 Jan 2020 07:26:05 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.69,417,1571727600"; d="scan'208";a="216694447"
-Received: from stinkbox.fi.intel.com (HELO stinkbox) ([10.237.72.174])
- by orsmga008.jf.intel.com with SMTP; 10 Jan 2020 07:25:56 -0800
-Received: by stinkbox (sSMTP sendmail emulation);
- Fri, 10 Jan 2020 17:25:56 +0200
-Date: Fri, 10 Jan 2020 17:25:56 +0200
-From: Ville =?iso-8859-1?Q?Syrj=E4l=E4?= <ville.syrjala@linux.intel.com>
-To: Jani Nikula <jani.nikula@linux.intel.com>
-Message-ID: <20200110152556.GK13686@intel.com>
-References: <20200110092127.27847-1-tzimmermann@suse.de>
- <20200110092127.27847-4-tzimmermann@suse.de>
- <87eew7o73u.fsf@intel.com>
- <761ae94c-aaf1-9167-9c44-06824304fdfd@suse.de>
- <875zhjo1op.fsf@intel.com>
+Received: from mail-vk1-xa42.google.com (mail-vk1-xa42.google.com
+ [IPv6:2607:f8b0:4864:20::a42])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8422F89B68;
+ Mon, 13 Jan 2020 00:06:25 +0000 (UTC)
+Received: by mail-vk1-xa42.google.com with SMTP id i78so2093396vke.0;
+ Sun, 12 Jan 2020 16:06:25 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=2HL17RsQhpvHGVShSuMEnDCDjyjoYw8RfuvSsolxtKc=;
+ b=BJ46d3g1EqtVBj1REWG1osVEA0ioMzxPhH28Voa7Awf1EbCYKRi/or0ikFnFF0Xtj5
+ e0JfYLf1HxqHlmkqdsJ7sRitHZuL6W1USF1SxIJv60yhpJTNYkDvM4MUVLdt1kUs3sAa
+ hn901YxwMn96I/6B6WDo8r63EhWYRW72DyhKp85pfztWr116M8l96gtMgjJ5uoYjgn7i
+ qLzV40TO01xhlnShJitRxTqNCZgZL76N2mQr3gFOHb79/NGtJkPvH0DsV1MhgHPflAgN
+ Ib0YwyNqtbrWiCbmZVKzEEZUB1P09dM4gNkaqm0cZuppRHBWUK5tW1cUyP8RJaSKvcAT
+ JfuA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=2HL17RsQhpvHGVShSuMEnDCDjyjoYw8RfuvSsolxtKc=;
+ b=EP0X+2D0vo78F8gYMgH8wrhHNP+5T1wYwPmTsbDb773TyY7YOjA6urlZMXV4klYC4e
+ U0ZWZLRpXYUM3CeTaSFY8Row8kqFWUwc/ysZzPIjo/zlG8S49h6kf9kk/RJfavaeaWK6
+ ZKop11oVq9ZmRUgJOLGhGDsuvmHz4hhbvNtNkQu+KmrMURiaZaR2Zaj/WGq5Ymz9b+2I
+ LtXgm8E87gAVRXxdjUvUXKFmImvXdcpSQM1HXSZNGmuML/pYi/kPW+ldv+S303AmoHU8
+ H8VL+GsMXSGgoA0iNYRupiTANI2UwM7gu7yaZojTkCehjfoi2O49zMWFAlZb/b+3uyQW
+ fIFw==
+X-Gm-Message-State: APjAAAVtv82d/bvUWkCKDFhlNxw96pgCCLv9s8C7h0W/4GwcNefYTfKl
+ vvyaIitqjtGztU5TV1mi4qdPxzz5xbe1pZiwBP4=
+X-Google-Smtp-Source: APXvYqzGUmlmfiMEzFg+1Y2A/xrmXNSvnyyQzuYUdfcc1RWK1JrFT8cW87AN1eibIhZjvgcBqYpoB/Fmq6QSxuCaLFI=
+X-Received: by 2002:a1f:1144:: with SMTP id 65mr5884087vkr.77.1578873984539;
+ Sun, 12 Jan 2020 16:06:24 -0800 (PST)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <875zhjo1op.fsf@intel.com>
-X-Patchwork-Hint: comment
-User-Agent: Mutt/1.10.1 (2018-07-13)
-X-Mailman-Approved-At: Sat, 11 Jan 2020 19:32:29 +0000
-Subject: Re: [Nouveau] [PATCH 03/23] drm/i915: Don't use struct
- drm_driver.get_scanout_position()
+References: <20200110063201.47560-1-yuehaibing@huawei.com>
+In-Reply-To: <20200110063201.47560-1-yuehaibing@huawei.com>
+From: Ben Skeggs <skeggsb@gmail.com>
+Date: Mon, 13 Jan 2020 10:06:13 +1000
+Message-ID: <CACAvsv6EG0wvF4XCs=jisEjMDkfVUgMorgURko4uubqc3DOgOQ@mail.gmail.com>
+To: YueHaibing <yuehaibing@huawei.com>
+Subject: Re: [Nouveau] [PATCH] drm/nouveau: Fix copy-paste error in
+ nouveau_fence_wait_uevent_handler
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -52,75 +60,50 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: hamohammed.sa@gmail.com, airlied@linux.ie, nouveau@lists.freedesktop.org,
- joonas.lahtinen@linux.intel.com, dri-devel@lists.freedesktop.org,
- eric@anholt.net, amd-gfx@lists.freedesktop.org, benjamin.gaignard@linaro.org,
- alexandre.torgue@st.com, David1.Zhou@amd.com, thellstrom@vmware.com,
- sean@poorly.run, patrik.r.jakobsson@gmail.com,
- linux-graphics-maintainer@vmware.com, bskeggs@redhat.com,
- harry.wentland@amd.com, daniel@ffwll.ch, sunpeng.li@amd.com,
- linux-arm-msm@vger.kernel.org, intel-gfx@lists.freedesktop.org,
- maarten.lankhorst@linux.intel.com, rodrigo.vivi@intel.com,
- vincent.abriou@st.com, mcoquelin.stm32@gmail.com,
- rodrigosiqueiramelo@gmail.com, philippe.cornu@st.com, yannick.fertre@st.com,
- robdclark@gmail.com, Thomas Zimmermann <tzimmermann@suse.de>,
- alexander.deucher@amd.com, freedreno@lists.freedesktop.org,
- christian.koenig@amd.com
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Cc: Dave Airlie <airlied@linux.ie>, ML nouveau <nouveau@lists.freedesktop.org>,
+ LKML <linux-kernel@vger.kernel.org>,
+ ML dri-devel <dri-devel@lists.freedesktop.org>,
+ Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>,
+ Maarten Lankhorst <maarten.lankhorst@canonical.com>, sumit.semwal@linaro.org
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, Jan 10, 2020 at 03:56:06PM +0200, Jani Nikula wrote:
-> On Fri, 10 Jan 2020, Thomas Zimmermann <tzimmermann@suse.de> wrote:
-> > Hi
-> >
-> > Am 10.01.20 um 12:59 schrieb Jani Nikula:
-> >> On Fri, 10 Jan 2020, Thomas Zimmermann <tzimmermann@suse.de> wrote:
-> >>> The callback struct drm_driver.get_scanout_position() is deprecated in
-> >>> favor of struct drm_crtc_helper_funcs.get_scanout_position().
-> >>>
-> >>> i915 doesn't use CRTC helpers. The patch duplicates the caller
-> >>> drm_calc_vbltimestamp_from_scanoutpos() for i915, such that the callb=
-ack
-> >>> function is not needed.
-> >>>
-> >>> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-> >>> ---
-> >>>  drivers/gpu/drm/i915/i915_drv.c |   3 +-
-> >>>  drivers/gpu/drm/i915/i915_irq.c | 117 ++++++++++++++++++++++++++++++=
---
-> >>>  drivers/gpu/drm/i915/i915_irq.h |   9 +--
-> >>>  3 files changed, 119 insertions(+), 10 deletions(-)
-> >> =
+On Fri, 10 Jan 2020 at 16:51, YueHaibing <yuehaibing@huawei.com> wrote:
+>
+> Like other cases, it should use rcu protected 'chan' rather
+> than 'fence->channel' in nouveau_fence_wait_uevent_handler.
+>
+> Fixes: 0ec5f02f0e2c ("drm/nouveau: prevent stale fence->channel pointers, and protect with rcu")
+> Signed-off-by: YueHaibing <yuehaibing@huawei.com>
+Got it, thanks!
 
-> >> Not really enthusiastic about the diffstat in a "cleanup" series.
-> >
-> > Well, the cleanup is about the content of drm_driver :)
-> >
-> >> =
-
-> >> I wonder if you could add a generic helper version of
-> >> drm_calc_vbltimestamp_from_scanoutpos where you pass the
-> >> get_scanout_position function as a parameter. Both
-> >> drm_calc_vbltimestamp_from_scanoutpos and the new
-> >> i915_calc_vbltimestamp_from_scanoutpos would then be fairly thin
-> >> wrappers passing in the relevant get_scanout_position function.
-> >
-> > Of course. Will be in v2 of the series.
-> =
-
-> Please give Ville (Cc'd) a moment before sending v2 in case he wants to
-> chime in on this.
-
-Passing the function pointer was one option I considered for this a while
-back. Can't remeber what other solutions I condsidered. But I guess I
-didn't like any of them enough to make an actual patch.
-
--- =
-
-Ville Syrj=E4l=E4
-Intel
+> ---
+>  drivers/gpu/drm/nouveau/nouveau_fence.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_fence.c b/drivers/gpu/drm/nouveau/nouveau_fence.c
+> index 9118df0..70bb6bb 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_fence.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_fence.c
+> @@ -156,7 +156,7 @@ nouveau_fence_wait_uevent_handler(struct nvif_notify *notify)
+>
+>                 fence = list_entry(fctx->pending.next, typeof(*fence), head);
+>                 chan = rcu_dereference_protected(fence->channel, lockdep_is_held(&fctx->lock));
+> -               if (nouveau_fence_update(fence->channel, fctx))
+> +               if (nouveau_fence_update(chan, fctx))
+>                         ret = NVIF_NOTIFY_DROP;
+>         }
+>         spin_unlock_irqrestore(&fctx->lock, flags);
+> --
+> 2.7.4
+>
+>
+> _______________________________________________
+> Nouveau mailing list
+> Nouveau@lists.freedesktop.org
+> https://lists.freedesktop.org/mailman/listinfo/nouveau
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
