@@ -1,56 +1,60 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2A694140556
-	for <lists+nouveau@lfdr.de>; Fri, 17 Jan 2020 09:21:45 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id E585F14053B
+	for <lists+nouveau@lfdr.de>; Fri, 17 Jan 2020 09:21:27 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3EB5F6F473;
-	Fri, 17 Jan 2020 08:21:18 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4FE776F431;
+	Fri, 17 Jan 2020 08:21:07 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wm1-x344.google.com (mail-wm1-x344.google.com
- [IPv6:2a00:1450:4864:20::344])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6F3C86E139;
- Mon, 13 Jan 2020 19:02:45 +0000 (UTC)
-Received: by mail-wm1-x344.google.com with SMTP id t14so10920561wmi.5;
- Mon, 13 Jan 2020 11:02:45 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=g5bN8wH7FTCKMaY/O9Oej61HYM/NEwy3Ac5fo9Lh1CM=;
- b=cXihKozMLIK8aRkwyi6CUSBoYteUAU/J+qqx2TR55NghW/eABcq2WEso8oD5IqdhhL
- eFEGmuYYH39qJED57r6lsswXLGelKAqIsAx27U2EThlh8URYtwWfwlDas//1vDH4bIum
- 1TOnoMuDDn8pkMddd09d117aHDVRmBwewvnRJd6nKZH0xhzsE348Fem7TuiS793ACX48
- it0UvTYfUUNDkloSqqD3K1hQoQNf4x/omD8TaTOwwkuiPqNizObDjwTdO5g1Mz+VMzFN
- dtnu5SO8V6aZlfy53MYp4iib/tw9nX5XITsOiHbb+vRDE2ubtXM9AHZruSa66ld0E7o/
- lENw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=g5bN8wH7FTCKMaY/O9Oej61HYM/NEwy3Ac5fo9Lh1CM=;
- b=aS7Kq/WxJC5+em10sRzuR5ANA8RGjQ/XwQdYEmIeWrceu0b/KciZqMhWnMM1i4vqFF
- sK7F2ziiL7qwO51VZQtYlZpMYefQPwYbM6UODG+W5dPzrrVgWWbcmRvfwfxkDmTxRuyl
- yej2taj1nS000qu+hoElsyg55HxgtyA19sR2spa1b9qET7oY/9cUmGfzCk9z4GJNhT27
- mX0x1psxyFjDCz0gy2g8OGP0QjDFMe78hL18hMtaPTUxSjCjhi0RF5QKWSyRIeo5pN8c
- ru6FrqhheVibwe/HqdSqOeWTqlle0mOix5iRcV8quJZhLvrLJG2V2bHFlAzQP7Gxvlid
- q7ZA==
-X-Gm-Message-State: APjAAAX+R/8bUJtaraZ1+/V3DZvpKT5A6BEWTP8oLORpHjzkujcqMD2m
- SNUm4tBlPzzy78qew/55JKTteopPXUXhblZB8mw=
-X-Google-Smtp-Source: APXvYqypf0BaRB3wlCCMXdO+KwGjdkP3TWave4BGBfjMXMdIt0UaOb1bcTDdhs32wKkz3vzR8VjhOSXO3HKDj563ELc=
-X-Received: by 2002:a1c:f30e:: with SMTP id q14mr22026498wmq.65.1578942164075; 
- Mon, 13 Jan 2020 11:02:44 -0800 (PST)
-MIME-Version: 1.0
+Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 036866E2D5;
+ Tue, 14 Jan 2020 07:46:35 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+ by mx2.suse.de (Postfix) with ESMTP id 7CCF6AC6E;
+ Tue, 14 Jan 2020 07:46:32 +0000 (UTC)
+To: Alex Deucher <alexdeucher@gmail.com>
 References: <20200110092127.27847-1-tzimmermann@suse.de>
- <20200110092127.27847-18-tzimmermann@suse.de>
-In-Reply-To: <20200110092127.27847-18-tzimmermann@suse.de>
-From: Alex Deucher <alexdeucher@gmail.com>
-Date: Mon, 13 Jan 2020 14:02:32 -0500
-Message-ID: <CADnq5_MopZ3iP0hV=V-vGd3jdzRDjxq7J=d_NsZU+fDSQoi9fA@mail.gmail.com>
-To: Thomas Zimmermann <tzimmermann@suse.de>
+ <20200110092127.27847-3-tzimmermann@suse.de>
+ <CADnq5_OCsQQ0=Yr6xinWWCursZc0ZGBrNj1=0667kbqE1BorVw@mail.gmail.com>
+From: Thomas Zimmermann <tzimmermann@suse.de>
+Autocrypt: addr=tzimmermann@suse.de; keydata=
+ mQENBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
+ XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
+ BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
+ hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
+ 9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
+ AAG0J1Rob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPokBVAQTAQgAPhYh
+ BHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJbOdLgAhsDBQkDwmcABQsJCAcCBhUKCQgLAgQWAgMB
+ Ah4BAheAAAoJEGgNwR1TC3ojR80H/jH+vYavwQ+TvO8ksXL9JQWc3IFSiGpuSVXLCdg62AmR
+ irxW+qCwNncNQyb9rd30gzdectSkPWL3KSqEResBe24IbA5/jSkPweJasgXtfhuyoeCJ6PXo
+ clQQGKIoFIAEv1s8l0ggPZswvCinegl1diyJXUXmdEJRTWYAtxn/atut1o6Giv6D2qmYbXN7
+ mneMC5MzlLaJKUtoH7U/IjVw1sx2qtxAZGKVm4RZxPnMCp9E1MAr5t4dP5gJCIiqsdrVqI6i
+ KupZstMxstPU//azmz7ZWWxT0JzgJqZSvPYx/SATeexTYBP47YFyri4jnsty2ErS91E6H8os
+ Bv6pnSn7eAq5AQ0EWznS4AEIAMYmP4M/V+T5RY5at/g7rUdNsLhWv1APYrh9RQefODYHrNRH
+ UE9eosYbT6XMryR9hT8XlGOYRwKWwiQBoWSDiTMo/Xi29jUnn4BXfI2px2DTXwc22LKtLAgT
+ RjP+qbU63Y0xnQN29UGDbYgyyK51DW3H0If2a3JNsheAAK+Xc9baj0LGIc8T9uiEWHBnCH+R
+ dhgATnWWGKdDegUR5BkDfDg5O/FISymJBHx2Dyoklv5g4BzkgqTqwmaYzsl8UxZKvbaxq0zb
+ ehDda8lvhFXodNFMAgTLJlLuDYOGLK2AwbrS3Sp0AEbkpdJBb44qVlGm5bApZouHeJ/+n+7r
+ 12+lqdsAEQEAAYkBPAQYAQgAJhYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJbOdLgAhsMBQkD
+ wmcAAAoJEGgNwR1TC3ojpfcIAInwP5OlcEKokTnHCiDTz4Ony4GnHRP2fXATQZCKxmu4AJY2
+ h9ifw9Nf2TjCZ6AMvC3thAN0rFDj55N9l4s1CpaDo4J+0fkrHuyNacnT206CeJV1E7NYntxU
+ n+LSiRrOdywn6erjxRi9EYTVLCHcDhBEjKmFZfg4AM4GZMWX1lg0+eHbd5oL1as28WvvI/uI
+ aMyV8RbyXot1r/8QLlWldU3NrTF5p7TMU2y3ZH2mf5suSKHAMtbE4jKJ8ZHFOo3GhLgjVrBW
+ HE9JXO08xKkgD+w6v83+nomsEuf6C6LYrqY/tsZvyEX6zN8CtirPdPWu/VXNRYAl/lat7lSI
+ 3H26qrE=
+Message-ID: <7ce3554d-b81e-e3bb-804d-1f69df558596@suse.de>
+Date: Tue, 14 Jan 2020 08:46:26 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.3.1
+MIME-Version: 1.0
+In-Reply-To: <CADnq5_OCsQQ0=Yr6xinWWCursZc0ZGBrNj1=0667kbqE1BorVw@mail.gmail.com>
 X-Mailman-Approved-At: Fri, 17 Jan 2020 08:21:04 +0000
-Subject: Re: [Nouveau] [PATCH 17/23] drm/radeon: Convert to CRTC VBLANK
- callbacks
+Subject: Re: [Nouveau] [PATCH 02/23] drm/amdgpu: Convert to struct
+ drm_crtc_helper_funcs.get_scanout_position()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -83,188 +87,314 @@ Cc: hamohammed.sa@gmail.com, Dave Airlie <airlied@linux.ie>,
  Alexander" <alexander.deucher@amd.com>,
  freedreno <freedreno@lists.freedesktop.org>,
  Christian Koenig <christian.koenig@amd.com>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============0444207364=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, Jan 10, 2020 at 4:22 AM Thomas Zimmermann <tzimmermann@suse.de> wrote:
->
-> VBLANK callbacks in struct drm_driver are deprecated in favor of
-> their equivalents in struct drm_crtc_funcs. Convert radeon over.
->
-> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--===============0444207364==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="ze5gAYUIJh5RqpeP1fLk3HyxsXcvJAdv5"
 
-Reviewed-by: Alex Deucher <alexander.deucher@amd.com>
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--ze5gAYUIJh5RqpeP1fLk3HyxsXcvJAdv5
+Content-Type: multipart/mixed; boundary="d8m6vbaJ76KgbPpLDKzJ4x85fVIAmDTHh";
+ protected-headers="v1"
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: Alex Deucher <alexdeucher@gmail.com>
+Cc: Dave Airlie <airlied@linux.ie>, Daniel Vetter <daniel@ffwll.ch>,
+ "Deucher, Alexander" <alexander.deucher@amd.com>,
+ Christian Koenig <christian.koenig@amd.com>,
+ Chunming Zhou <David1.Zhou@amd.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Patrik Jakobsson <patrik.r.jakobsson@gmail.com>,
+ Rob Clark <robdclark@gmail.com>, Sean Paul <sean@poorly.run>,
+ Benjamin Gaignard <benjamin.gaignard@linaro.org>,
+ Vincent Abriou <vincent.abriou@st.com>, yannick.fertre@st.com,
+ philippe.cornu@st.com, mcoquelin.stm32@gmail.com, alexandre.torgue@st.com,
+ Eric Anholt <eric@anholt.net>, rodrigosiqueiramelo@gmail.com,
+ hamohammed.sa@gmail.com,
+ VMware Graphics <linux-graphics-maintainer@vmware.com>,
+ Thomas Hellstrom <thellstrom@vmware.com>, Ben Skeggs <bskeggs@redhat.com>,
+ "Wentland, Harry" <harry.wentland@amd.com>,
+ "Leo (Sunpeng) Li" <sunpeng.li@amd.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ linux-arm-msm <linux-arm-msm@vger.kernel.org>,
+ Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
+ amd-gfx list <amd-gfx@lists.freedesktop.org>,
+ Maling list - DRI developers <dri-devel@lists.freedesktop.org>,
+ nouveau <nouveau@lists.freedesktop.org>,
+ freedreno <freedreno@lists.freedesktop.org>
+Message-ID: <7ce3554d-b81e-e3bb-804d-1f69df558596@suse.de>
+Subject: Re: [PATCH 02/23] drm/amdgpu: Convert to struct
+ drm_crtc_helper_funcs.get_scanout_position()
+References: <20200110092127.27847-1-tzimmermann@suse.de>
+ <20200110092127.27847-3-tzimmermann@suse.de>
+ <CADnq5_OCsQQ0=Yr6xinWWCursZc0ZGBrNj1=0667kbqE1BorVw@mail.gmail.com>
+In-Reply-To: <CADnq5_OCsQQ0=Yr6xinWWCursZc0ZGBrNj1=0667kbqE1BorVw@mail.gmail.com>
 
-> ---
->  drivers/gpu/drm/radeon/radeon_display.c | 12 ++++++++--
->  drivers/gpu/drm/radeon/radeon_drv.c     |  7 ------
->  drivers/gpu/drm/radeon/radeon_kms.c     | 29 ++++++++++++++-----------
->  3 files changed, 26 insertions(+), 22 deletions(-)
->
-> diff --git a/drivers/gpu/drm/radeon/radeon_display.c b/drivers/gpu/drm/radeon/radeon_display.c
-> index 7187158b9963..9116975b6eb9 100644
-> --- a/drivers/gpu/drm/radeon/radeon_display.c
-> +++ b/drivers/gpu/drm/radeon/radeon_display.c
-> @@ -45,6 +45,10 @@
->  #include "atom.h"
->  #include "radeon.h"
->
-> +u32 radeon_get_vblank_counter_kms(struct drm_crtc *crtc);
-> +int radeon_enable_vblank_kms(struct drm_crtc *crtc);
-> +void radeon_disable_vblank_kms(struct drm_crtc *crtc);
-> +
->  static void avivo_crtc_load_lut(struct drm_crtc *crtc)
->  {
->         struct radeon_crtc *radeon_crtc = to_radeon_crtc(crtc);
-> @@ -458,7 +462,7 @@ static void radeon_flip_work_func(struct work_struct *__work)
->                 (DRM_SCANOUTPOS_VALID | DRM_SCANOUTPOS_IN_VBLANK) &&
->                 (!ASIC_IS_AVIVO(rdev) ||
->                 ((int) (work->target_vblank -
-> -               dev->driver->get_vblank_counter(dev, work->crtc_id)) > 0)))
-> +               crtc->funcs->get_vblank_counter(crtc)) > 0)))
->                 usleep_range(1000, 2000);
->
->         /* We borrow the event spin lock for protecting flip_status */
-> @@ -574,7 +578,7 @@ static int radeon_crtc_page_flip_target(struct drm_crtc *crtc,
->         }
->         work->base = base;
->         work->target_vblank = target - (uint32_t)drm_crtc_vblank_count(crtc) +
-> -               dev->driver->get_vblank_counter(dev, work->crtc_id);
-> +               crtc->funcs->get_vblank_counter(crtc);
->
->         /* We borrow the event spin lock for protecting flip_work */
->         spin_lock_irqsave(&crtc->dev->event_lock, flags);
-> @@ -666,6 +670,10 @@ static const struct drm_crtc_funcs radeon_crtc_funcs = {
->         .set_config = radeon_crtc_set_config,
->         .destroy = radeon_crtc_destroy,
->         .page_flip_target = radeon_crtc_page_flip_target,
-> +       .get_vblank_counter = radeon_get_vblank_counter_kms,
-> +       .enable_vblank = radeon_enable_vblank_kms,
-> +       .disable_vblank = radeon_disable_vblank_kms,
-> +       .get_vblank_timestamp = drm_crtc_calc_vbltimestamp_from_scanoutpos,
->  };
->
->  static void radeon_crtc_init(struct drm_device *dev, int index)
-> diff --git a/drivers/gpu/drm/radeon/radeon_drv.c b/drivers/gpu/drm/radeon/radeon_drv.c
-> index 1f597f166bff..49ce2e7d5f9e 100644
-> --- a/drivers/gpu/drm/radeon/radeon_drv.c
-> +++ b/drivers/gpu/drm/radeon/radeon_drv.c
-> @@ -119,9 +119,6 @@ void radeon_driver_postclose_kms(struct drm_device *dev,
->  int radeon_suspend_kms(struct drm_device *dev, bool suspend,
->                        bool fbcon, bool freeze);
->  int radeon_resume_kms(struct drm_device *dev, bool resume, bool fbcon);
-> -u32 radeon_get_vblank_counter_kms(struct drm_device *dev, unsigned int pipe);
-> -int radeon_enable_vblank_kms(struct drm_device *dev, unsigned int pipe);
-> -void radeon_disable_vblank_kms(struct drm_device *dev, unsigned int pipe);
->  void radeon_driver_irq_preinstall_kms(struct drm_device *dev);
->  int radeon_driver_irq_postinstall_kms(struct drm_device *dev);
->  void radeon_driver_irq_uninstall_kms(struct drm_device *dev);
-> @@ -571,10 +568,6 @@ static struct drm_driver kms_driver = {
->         .postclose = radeon_driver_postclose_kms,
->         .lastclose = radeon_driver_lastclose_kms,
->         .unload = radeon_driver_unload_kms,
-> -       .get_vblank_counter = radeon_get_vblank_counter_kms,
-> -       .enable_vblank = radeon_enable_vblank_kms,
-> -       .disable_vblank = radeon_disable_vblank_kms,
-> -       .get_vblank_timestamp = drm_calc_vbltimestamp_from_scanoutpos,
->         .irq_preinstall = radeon_driver_irq_preinstall_kms,
->         .irq_postinstall = radeon_driver_irq_postinstall_kms,
->         .irq_uninstall = radeon_driver_irq_uninstall_kms,
-> diff --git a/drivers/gpu/drm/radeon/radeon_kms.c b/drivers/gpu/drm/radeon/radeon_kms.c
-> index d24f23a81656..cab891f86dc0 100644
-> --- a/drivers/gpu/drm/radeon/radeon_kms.c
-> +++ b/drivers/gpu/drm/radeon/radeon_kms.c
-> @@ -739,14 +739,15 @@ void radeon_driver_postclose_kms(struct drm_device *dev,
->  /**
->   * radeon_get_vblank_counter_kms - get frame count
->   *
-> - * @dev: drm dev pointer
-> - * @pipe: crtc to get the frame count from
-> + * @crtc: crtc to get the frame count from
->   *
->   * Gets the frame count on the requested crtc (all asics).
->   * Returns frame count on success, -EINVAL on failure.
->   */
-> -u32 radeon_get_vblank_counter_kms(struct drm_device *dev, unsigned int pipe)
-> +u32 radeon_get_vblank_counter_kms(struct drm_crtc *crtc)
->  {
-> +       struct drm_device *dev = crtc->dev;
-> +       unsigned int pipe = crtc->index;
->         int vpos, hpos, stat;
->         u32 count;
->         struct radeon_device *rdev = dev->dev_private;
-> @@ -808,25 +809,26 @@ u32 radeon_get_vblank_counter_kms(struct drm_device *dev, unsigned int pipe)
->  /**
->   * radeon_enable_vblank_kms - enable vblank interrupt
->   *
-> - * @dev: drm dev pointer
->   * @crtc: crtc to enable vblank interrupt for
->   *
->   * Enable the interrupt on the requested crtc (all asics).
->   * Returns 0 on success, -EINVAL on failure.
->   */
-> -int radeon_enable_vblank_kms(struct drm_device *dev, int crtc)
-> +int radeon_enable_vblank_kms(struct drm_crtc *crtc)
->  {
-> +       struct drm_device *dev = crtc->dev;
-> +       unsigned int pipe = crtc->index;
->         struct radeon_device *rdev = dev->dev_private;
->         unsigned long irqflags;
->         int r;
->
-> -       if (crtc < 0 || crtc >= rdev->num_crtc) {
-> -               DRM_ERROR("Invalid crtc %d\n", crtc);
-> +       if (pipe < 0 || pipe >= rdev->num_crtc) {
-> +               DRM_ERROR("Invalid crtc %d\n", pipe);
->                 return -EINVAL;
->         }
->
->         spin_lock_irqsave(&rdev->irq.lock, irqflags);
-> -       rdev->irq.crtc_vblank_int[crtc] = true;
-> +       rdev->irq.crtc_vblank_int[pipe] = true;
->         r = radeon_irq_set(rdev);
->         spin_unlock_irqrestore(&rdev->irq.lock, irqflags);
->         return r;
-> @@ -835,23 +837,24 @@ int radeon_enable_vblank_kms(struct drm_device *dev, int crtc)
->  /**
->   * radeon_disable_vblank_kms - disable vblank interrupt
->   *
-> - * @dev: drm dev pointer
->   * @crtc: crtc to disable vblank interrupt for
->   *
->   * Disable the interrupt on the requested crtc (all asics).
->   */
-> -void radeon_disable_vblank_kms(struct drm_device *dev, int crtc)
-> +void radeon_disable_vblank_kms(struct drm_crtc *crtc)
->  {
-> +       struct drm_device *dev = crtc->dev;
-> +       unsigned int pipe = crtc->index;
->         struct radeon_device *rdev = dev->dev_private;
->         unsigned long irqflags;
->
-> -       if (crtc < 0 || crtc >= rdev->num_crtc) {
-> -               DRM_ERROR("Invalid crtc %d\n", crtc);
-> +       if (pipe < 0 || pipe >= rdev->num_crtc) {
-> +               DRM_ERROR("Invalid crtc %d\n", pipe);
->                 return;
->         }
->
->         spin_lock_irqsave(&rdev->irq.lock, irqflags);
-> -       rdev->irq.crtc_vblank_int[crtc] = false;
-> +       rdev->irq.crtc_vblank_int[pipe] = false;
->         radeon_irq_set(rdev);
->         spin_unlock_irqrestore(&rdev->irq.lock, irqflags);
->  }
-> --
-> 2.24.1
->
-> _______________________________________________
-> amd-gfx mailing list
-> amd-gfx@lists.freedesktop.org
-> https://lists.freedesktop.org/mailman/listinfo/amd-gfx
+--d8m6vbaJ76KgbPpLDKzJ4x85fVIAmDTHh
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
+
+Hi
+
+Am 13.01.20 um 19:52 schrieb Alex Deucher:
+> On Fri, Jan 10, 2020 at 4:21 AM Thomas Zimmermann <tzimmermann@suse.de>=
+ wrote:
+>>
+>> The callback struct drm_driver.get_scanout_position() is deprecated in=
+
+>> favor of struct drm_crtc_helper_funcs.get_scanout_position(). Convert
+>> amdgpu over.
+>>
+>=20
+> I would prefer to just change the signature of
+> amdgpu_display_get_crtc_scanoutpos() to match the new API rather than
+> wrapping it again.
+
+Will be fixed in v2. I wrapped these functions in amdgpu and radeon to
+avoid changes to other, unreleted callers.
+
+Best regards
+Thomas
+
+>=20
+> Alex
+>=20
+>> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+>> ---
+>>  drivers/gpu/drm/amd/amdgpu/amdgpu_display.c       | 12 ++++++++++++
+>>  drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c           | 11 -----------
+>>  drivers/gpu/drm/amd/amdgpu/amdgpu_mode.h          |  5 +++++
+>>  drivers/gpu/drm/amd/amdgpu/dce_v10_0.c            |  1 +
+>>  drivers/gpu/drm/amd/amdgpu/dce_v11_0.c            |  1 +
+>>  drivers/gpu/drm/amd/amdgpu/dce_v6_0.c             |  1 +
+>>  drivers/gpu/drm/amd/amdgpu/dce_v8_0.c             |  1 +
+>>  drivers/gpu/drm/amd/amdgpu/dce_virtual.c          |  1 +
+>>  drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c |  3 ++-
+>>  9 files changed, 24 insertions(+), 12 deletions(-)
+>>
+>> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_display.c b/drivers/gpu=
+/drm/amd/amdgpu/amdgpu_display.c
+>> index 4e699071d144..a1e769d4417d 100644
+>> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_display.c
+>> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_display.c
+>> @@ -914,3 +914,15 @@ int amdgpu_display_crtc_idx_to_irq_type(struct am=
+dgpu_device *adev, int crtc)
+>>                 return AMDGPU_CRTC_IRQ_NONE;
+>>         }
+>>  }
+>> +
+>> +bool amdgpu_crtc_get_scanout_position(struct drm_crtc *crtc,
+>> +                       bool in_vblank_irq, int *vpos,
+>> +                       int *hpos, ktime_t *stime, ktime_t *etime,
+>> +                       const struct drm_display_mode *mode)
+>> +{
+>> +       struct drm_device *dev =3D crtc->dev;
+>> +       unsigned int pipe =3D crtc->index;
+>> +
+>> +       return amdgpu_display_get_crtc_scanoutpos(dev, pipe, 0, vpos, =
+hpos,
+>> +                                                 stime, etime, mode);=
+
+>> +}
+>> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c b/drivers/gpu/drm=
+/amd/amdgpu/amdgpu_drv.c
+>> index 3f6f14ce1511..0749285dd1c7 100644
+>> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c
+>> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c
+>> @@ -1367,16 +1367,6 @@ int amdgpu_file_to_fpriv(struct file *filp, str=
+uct amdgpu_fpriv **fpriv)
+>>         return 0;
+>>  }
+>>
+>> -static bool
+>> -amdgpu_get_crtc_scanout_position(struct drm_device *dev, unsigned int=
+ pipe,
+>> -                                bool in_vblank_irq, int *vpos, int *h=
+pos,
+>> -                                ktime_t *stime, ktime_t *etime,
+>> -                                const struct drm_display_mode *mode)
+>> -{
+>> -       return amdgpu_display_get_crtc_scanoutpos(dev, pipe, 0, vpos, =
+hpos,
+>> -                                                 stime, etime, mode);=
+
+>> -}
+>> -
+>>  static struct drm_driver kms_driver =3D {
+>>         .driver_features =3D
+>>             DRIVER_USE_AGP | DRIVER_ATOMIC |
+>> @@ -1391,7 +1381,6 @@ static struct drm_driver kms_driver =3D {
+>>         .enable_vblank =3D amdgpu_enable_vblank_kms,
+>>         .disable_vblank =3D amdgpu_disable_vblank_kms,
+>>         .get_vblank_timestamp =3D drm_calc_vbltimestamp_from_scanoutpo=
+s,
+>> -       .get_scanout_position =3D amdgpu_get_crtc_scanout_position,
+>>         .irq_handler =3D amdgpu_irq_handler,
+>>         .ioctls =3D amdgpu_ioctls_kms,
+>>         .gem_free_object_unlocked =3D amdgpu_gem_object_free,
+>> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_mode.h b/drivers/gpu/dr=
+m/amd/amdgpu/amdgpu_mode.h
+>> index eb9975f4decb..37ba07e2feb5 100644
+>> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_mode.h
+>> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_mode.h
+>> @@ -612,6 +612,11 @@ void amdgpu_panel_mode_fixup(struct drm_encoder *=
+encoder,
+>>                              struct drm_display_mode *adjusted_mode);
+>>  int amdgpu_display_crtc_idx_to_irq_type(struct amdgpu_device *adev, i=
+nt crtc);
+>>
+>> +bool amdgpu_crtc_get_scanout_position(struct drm_crtc *crtc,
+>> +                       bool in_vblank_irq, int *vpos,
+>> +                       int *hpos, ktime_t *stime, ktime_t *etime,
+>> +                       const struct drm_display_mode *mode);
+>> +
+>>  /* fbdev layer */
+>>  int amdgpu_fbdev_init(struct amdgpu_device *adev);
+>>  void amdgpu_fbdev_fini(struct amdgpu_device *adev);
+>> diff --git a/drivers/gpu/drm/amd/amdgpu/dce_v10_0.c b/drivers/gpu/drm/=
+amd/amdgpu/dce_v10_0.c
+>> index 40d2ac723dd6..bdc1e0f036d4 100644
+>> --- a/drivers/gpu/drm/amd/amdgpu/dce_v10_0.c
+>> +++ b/drivers/gpu/drm/amd/amdgpu/dce_v10_0.c
+>> @@ -2685,6 +2685,7 @@ static const struct drm_crtc_helper_funcs dce_v1=
+0_0_crtc_helper_funcs =3D {
+>>         .prepare =3D dce_v10_0_crtc_prepare,
+>>         .commit =3D dce_v10_0_crtc_commit,
+>>         .disable =3D dce_v10_0_crtc_disable,
+>> +       .get_scanout_position =3D amdgpu_crtc_get_scanout_position,
+>>  };
+>>
+>>  static int dce_v10_0_crtc_init(struct amdgpu_device *adev, int index)=
+
+>> diff --git a/drivers/gpu/drm/amd/amdgpu/dce_v11_0.c b/drivers/gpu/drm/=
+amd/amdgpu/dce_v11_0.c
+>> index 898ef72d423c..0319da5f7bf9 100644
+>> --- a/drivers/gpu/drm/amd/amdgpu/dce_v11_0.c
+>> +++ b/drivers/gpu/drm/amd/amdgpu/dce_v11_0.c
+>> @@ -2793,6 +2793,7 @@ static const struct drm_crtc_helper_funcs dce_v1=
+1_0_crtc_helper_funcs =3D {
+>>         .prepare =3D dce_v11_0_crtc_prepare,
+>>         .commit =3D dce_v11_0_crtc_commit,
+>>         .disable =3D dce_v11_0_crtc_disable,
+>> +       .get_scanout_position =3D amdgpu_crtc_get_scanout_position,
+>>  };
+>>
+>>  static int dce_v11_0_crtc_init(struct amdgpu_device *adev, int index)=
+
+>> diff --git a/drivers/gpu/drm/amd/amdgpu/dce_v6_0.c b/drivers/gpu/drm/a=
+md/amdgpu/dce_v6_0.c
+>> index db15a112becc..78642c3b14fc 100644
+>> --- a/drivers/gpu/drm/amd/amdgpu/dce_v6_0.c
+>> +++ b/drivers/gpu/drm/amd/amdgpu/dce_v6_0.c
+>> @@ -2575,6 +2575,7 @@ static const struct drm_crtc_helper_funcs dce_v6=
+_0_crtc_helper_funcs =3D {
+>>         .prepare =3D dce_v6_0_crtc_prepare,
+>>         .commit =3D dce_v6_0_crtc_commit,
+>>         .disable =3D dce_v6_0_crtc_disable,
+>> +       .get_scanout_position =3D amdgpu_crtc_get_scanout_position,
+>>  };
+>>
+>>  static int dce_v6_0_crtc_init(struct amdgpu_device *adev, int index)
+>> diff --git a/drivers/gpu/drm/amd/amdgpu/dce_v8_0.c b/drivers/gpu/drm/a=
+md/amdgpu/dce_v8_0.c
+>> index f06c9022c1fd..1e8d4975435a 100644
+>> --- a/drivers/gpu/drm/amd/amdgpu/dce_v8_0.c
+>> +++ b/drivers/gpu/drm/amd/amdgpu/dce_v8_0.c
+>> @@ -2593,6 +2593,7 @@ static const struct drm_crtc_helper_funcs dce_v8=
+_0_crtc_helper_funcs =3D {
+>>         .prepare =3D dce_v8_0_crtc_prepare,
+>>         .commit =3D dce_v8_0_crtc_commit,
+>>         .disable =3D dce_v8_0_crtc_disable,
+>> +       .get_scanout_position =3D amdgpu_crtc_get_scanout_position,
+>>  };
+>>
+>>  static int dce_v8_0_crtc_init(struct amdgpu_device *adev, int index)
+>> diff --git a/drivers/gpu/drm/amd/amdgpu/dce_virtual.c b/drivers/gpu/dr=
+m/amd/amdgpu/dce_virtual.c
+>> index e4f94863332c..4b2f915aba47 100644
+>> --- a/drivers/gpu/drm/amd/amdgpu/dce_virtual.c
+>> +++ b/drivers/gpu/drm/amd/amdgpu/dce_virtual.c
+>> @@ -218,6 +218,7 @@ static const struct drm_crtc_helper_funcs dce_virt=
+ual_crtc_helper_funcs =3D {
+>>         .prepare =3D dce_virtual_crtc_prepare,
+>>         .commit =3D dce_virtual_crtc_commit,
+>>         .disable =3D dce_virtual_crtc_disable,
+>> +       .get_scanout_position =3D amdgpu_crtc_get_scanout_position,
+>>  };
+>>
+>>  static int dce_virtual_crtc_init(struct amdgpu_device *adev, int inde=
+x)
+>> diff --git a/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c b/drive=
+rs/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c
+>> index f2db400a3920..39c5cf242c1b 100644
+>> --- a/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c
+>> +++ b/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c
+>> @@ -4821,7 +4821,8 @@ static bool dm_crtc_helper_mode_fixup(struct drm=
+_crtc *crtc,
+>>  static const struct drm_crtc_helper_funcs amdgpu_dm_crtc_helper_funcs=
+ =3D {
+>>         .disable =3D dm_crtc_helper_disable,
+>>         .atomic_check =3D dm_crtc_helper_atomic_check,
+>> -       .mode_fixup =3D dm_crtc_helper_mode_fixup
+>> +       .mode_fixup =3D dm_crtc_helper_mode_fixup,
+>> +       .get_scanout_position =3D amdgpu_crtc_get_scanout_position,
+>>  };
+>>
+>>  static void dm_encoder_helper_disable(struct drm_encoder *encoder)
+>> --
+>> 2.24.1
+>>
+>> _______________________________________________
+>> amd-gfx mailing list
+>> amd-gfx@lists.freedesktop.org
+>> https://lists.freedesktop.org/mailman/listinfo/amd-gfx
+
+--=20
+Thomas Zimmermann
+Graphics Driver Developer
+SUSE Software Solutions Germany GmbH
+Maxfeldstr. 5, 90409 N=C3=BCrnberg, Germany
+(HRB 36809, AG N=C3=BCrnberg)
+Gesch=C3=A4ftsf=C3=BChrer: Felix Imend=C3=B6rffer
+
+
+--d8m6vbaJ76KgbPpLDKzJ4x85fVIAmDTHh--
+
+--ze5gAYUIJh5RqpeP1fLk3HyxsXcvJAdv5
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEchf7rIzpz2NEoWjlaA3BHVMLeiMFAl4dcdIACgkQaA3BHVML
+eiPo7Af+O7W21BgMWX8hYlJvRZd0v8wVkJ9VFqgkW5CUexHacuJB9nJYj0T5UDfp
+xWzweSOva5AeHkINjkXqikFWn841Q16BZ0l+UsC/FCDkfBYQARI1xN7Bi01bL80R
+WGzRUV1ORVxzHbUPCR/+hKbLrqa9fuxbYI1QiLlt7++KfXQu87g4huuTrlviU09w
+EOderXnB9UHC5tLvjshI/C1XoMZGxXWwGz9K4giQrRCNMobz1Ib4MTTbg+yoa9g8
+MhzypABzPbu4+P58gwnwjNINe+nTPC0UmlqMNNGdKlQi22ibaJnmSwYyAhoXQbct
+4U32mjCM8Da9wntcqsgyAPT47BVjZA==
+=8NKQ
+-----END PGP SIGNATURE-----
+
+--ze5gAYUIJh5RqpeP1fLk3HyxsXcvJAdv5--
+
+--===============0444207364==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/nouveau
+
+--===============0444207364==--
