@@ -1,60 +1,94 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3D4BA140535
-	for <lists+nouveau@lfdr.de>; Fri, 17 Jan 2020 09:21:22 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 842BA140532
+	for <lists+nouveau@lfdr.de>; Fri, 17 Jan 2020 09:21:17 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C9A9A6F42B;
+	by gabe.freedesktop.org (Postfix) with ESMTP id D591C6F42D;
 	Fri, 17 Jan 2020 08:21:05 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 20D0D6E3C6;
- Tue, 14 Jan 2020 13:48:20 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 35C6CAD0F;
- Tue, 14 Jan 2020 13:48:18 +0000 (UTC)
-To: Daniel Vetter <daniel@ffwll.ch>
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A87BF6E428;
+ Tue, 14 Jan 2020 16:35:42 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
+ 00EFSU4s013513; Tue, 14 Jan 2020 16:31:30 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
+ h=from : to : cc : subject
+ : date : message-id : references : in-reply-to : content-type :
+ mime-version; s=STMicroelectronics;
+ bh=enlckgUlvxZfCBATOpJKX2Zq1B+Co510pLT6z+orC2s=;
+ b=z+KhdCsYKaYHguQWzdXxaC7mKuE011kxM0Uit0yC9DnBWaQUubV8ZSNF60Md51fUVDzs
+ 5RGYrOb8nkaClFrZD8HGKc0YBYPQnMlD5t5j201FfiaW5p1U8HwTbJw8nOLTXz7C/Ckz
+ jCUkDgTG4E+nzxB6TuuCN7UUt/OQl9MeloaRCrFsA59nzlzeufRDgWKfRSYyDmT1WsXI
+ 8mrV/wxXTFxC5xVOTyZLiAF0kakEkvvX2NQuFP5ZijShu5rmfyM4X3L5triRBouzDz+S
+ GJuLPMzl7QPCjUkJ/OU/mByhdeJp7amMYfUycvI1Li0V/3PnGE7Fm0p5jHksuia3/Dtu nw== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com with ESMTP id 2xf7jpe785-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 14 Jan 2020 16:31:30 +0100
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 8A62D100034;
+ Tue, 14 Jan 2020 16:31:26 +0100 (CET)
+Received: from Webmail-eu.st.com (sfhdag6node1.st.com [10.75.127.16])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 0AC722BEC6B;
+ Tue, 14 Jan 2020 16:31:26 +0100 (CET)
+Received: from SFHDAG6NODE1.st.com (10.75.127.16) by SFHDAG6NODE1.st.com
+ (10.75.127.16) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Tue, 14 Jan
+ 2020 16:31:25 +0100
+Received: from SFHDAG6NODE1.st.com ([fe80::8d96:4406:44e3:eb27]) by
+ SFHDAG6NODE1.st.com ([fe80::8d96:4406:44e3:eb27%20]) with mapi id
+ 15.00.1473.003; Tue, 14 Jan 2020 16:31:25 +0100
+From: Yannick FERTRE <yannick.fertre@st.com>
+To: Thomas Zimmermann <tzimmermann@suse.de>, "airlied@linux.ie"
+ <airlied@linux.ie>, "daniel@ffwll.ch" <daniel@ffwll.ch>,
+ "alexander.deucher@amd.com" <alexander.deucher@amd.com>,
+ "christian.koenig@amd.com" <christian.koenig@amd.com>,
+ "David1.Zhou@amd.com" <David1.Zhou@amd.com>,
+ "maarten.lankhorst@linux.intel.com" <maarten.lankhorst@linux.intel.com>,
+ "patrik.r.jakobsson@gmail.com" <patrik.r.jakobsson@gmail.com>,
+ "robdclark@gmail.com" <robdclark@gmail.com>,
+ "sean@poorly.run" <sean@poorly.run>, "benjamin.gaignard@linaro.org"
+ <benjamin.gaignard@linaro.org>, Vincent ABRIOU <vincent.abriou@st.com>,
+ Philippe CORNU <philippe.cornu@st.com>, "mcoquelin.stm32@gmail.com"
+ <mcoquelin.stm32@gmail.com>, Alexandre TORGUE <alexandre.torgue@st.com>,
+ "eric@anholt.net" <eric@anholt.net>, "rodrigosiqueiramelo@gmail.com"
+ <rodrigosiqueiramelo@gmail.com>, "hamohammed.sa@gmail.com"
+ <hamohammed.sa@gmail.com>, "linux-graphics-maintainer@vmware.com"
+ <linux-graphics-maintainer@vmware.com>, "thellstrom@vmware.com"
+ <thellstrom@vmware.com>, "bskeggs@redhat.com" <bskeggs@redhat.com>,
+ "harry.wentland@amd.com" <harry.wentland@amd.com>, "sunpeng.li@amd.com"
+ <sunpeng.li@amd.com>, "jani.nikula@linux.intel.com"
+ <jani.nikula@linux.intel.com>, "joonas.lahtinen@linux.intel.com"
+ <joonas.lahtinen@linux.intel.com>, "rodrigo.vivi@intel.com"
+ <rodrigo.vivi@intel.com>
+Thread-Topic: [PATCH 01/23] drm: Add get_scanout_position() to struct
+ drm_crtc_helper_funcs
+Thread-Index: AQHVx5dbqtOAh1iVCkOgTE6tRsnJu6fqP2iA
+Date: Tue, 14 Jan 2020 15:31:25 +0000
+Message-ID: <921ff745-0f2a-0bb6-c758-07174ac26e40@st.com>
 References: <20200110092127.27847-1-tzimmermann@suse.de>
- <20200110092127.27847-24-tzimmermann@suse.de>
- <20200112225312.GC5340@dvetter-linux.ger.corp.intel.com>
-From: Thomas Zimmermann <tzimmermann@suse.de>
-Autocrypt: addr=tzimmermann@suse.de; keydata=
- mQENBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
- XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
- BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
- hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
- 9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
- AAG0J1Rob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPokBVAQTAQgAPhYh
- BHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJbOdLgAhsDBQkDwmcABQsJCAcCBhUKCQgLAgQWAgMB
- Ah4BAheAAAoJEGgNwR1TC3ojR80H/jH+vYavwQ+TvO8ksXL9JQWc3IFSiGpuSVXLCdg62AmR
- irxW+qCwNncNQyb9rd30gzdectSkPWL3KSqEResBe24IbA5/jSkPweJasgXtfhuyoeCJ6PXo
- clQQGKIoFIAEv1s8l0ggPZswvCinegl1diyJXUXmdEJRTWYAtxn/atut1o6Giv6D2qmYbXN7
- mneMC5MzlLaJKUtoH7U/IjVw1sx2qtxAZGKVm4RZxPnMCp9E1MAr5t4dP5gJCIiqsdrVqI6i
- KupZstMxstPU//azmz7ZWWxT0JzgJqZSvPYx/SATeexTYBP47YFyri4jnsty2ErS91E6H8os
- Bv6pnSn7eAq5AQ0EWznS4AEIAMYmP4M/V+T5RY5at/g7rUdNsLhWv1APYrh9RQefODYHrNRH
- UE9eosYbT6XMryR9hT8XlGOYRwKWwiQBoWSDiTMo/Xi29jUnn4BXfI2px2DTXwc22LKtLAgT
- RjP+qbU63Y0xnQN29UGDbYgyyK51DW3H0If2a3JNsheAAK+Xc9baj0LGIc8T9uiEWHBnCH+R
- dhgATnWWGKdDegUR5BkDfDg5O/FISymJBHx2Dyoklv5g4BzkgqTqwmaYzsl8UxZKvbaxq0zb
- ehDda8lvhFXodNFMAgTLJlLuDYOGLK2AwbrS3Sp0AEbkpdJBb44qVlGm5bApZouHeJ/+n+7r
- 12+lqdsAEQEAAYkBPAQYAQgAJhYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJbOdLgAhsMBQkD
- wmcAAAoJEGgNwR1TC3ojpfcIAInwP5OlcEKokTnHCiDTz4Ony4GnHRP2fXATQZCKxmu4AJY2
- h9ifw9Nf2TjCZ6AMvC3thAN0rFDj55N9l4s1CpaDo4J+0fkrHuyNacnT206CeJV1E7NYntxU
- n+LSiRrOdywn6erjxRi9EYTVLCHcDhBEjKmFZfg4AM4GZMWX1lg0+eHbd5oL1as28WvvI/uI
- aMyV8RbyXot1r/8QLlWldU3NrTF5p7TMU2y3ZH2mf5suSKHAMtbE4jKJ8ZHFOo3GhLgjVrBW
- HE9JXO08xKkgD+w6v83+nomsEuf6C6LYrqY/tsZvyEX6zN8CtirPdPWu/VXNRYAl/lat7lSI
- 3H26qrE=
-Message-ID: <b5f6ac70-0bbe-18d5-f944-3ebba3237a9d@suse.de>
-Date: Tue, 14 Jan 2020 14:48:13 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.3.1
+ <20200110092127.27847-2-tzimmermann@suse.de>
+In-Reply-To: <20200110092127.27847-2-tzimmermann@suse.de>
+Accept-Language: fr-FR, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+user-agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.9.0
+x-ms-exchange-messagesentrepresentingtype: 1
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.75.127.47]
 MIME-Version: 1.0
-In-Reply-To: <20200112225312.GC5340@dvetter-linux.ger.corp.intel.com>
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.572
+ definitions=2020-01-14_04:2020-01-14,
+ 2020-01-14 signatures=0
 X-Mailman-Approved-At: Fri, 17 Jan 2020 08:21:04 +0000
-Subject: Re: [Nouveau] [PATCH 23/23] drm: Cleanup VBLANK callbacks in struct
- drm_driver
+Subject: Re: [Nouveau] [PATCH 01/23] drm: Add get_scanout_position() to
+ struct drm_crtc_helper_funcs
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -66,381 +100,285 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: hamohammed.sa@gmail.com, airlied@linux.ie, nouveau@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, thellstrom@vmware.com, sean@poorly.run,
- amd-gfx@lists.freedesktop.org, linux-graphics-maintainer@vmware.com,
- bskeggs@redhat.com, alexandre.torgue@st.com, sunpeng.li@amd.com,
- linux-arm-msm@vger.kernel.org, intel-gfx@lists.freedesktop.org,
- rodrigo.vivi@intel.com, vincent.abriou@st.com, rodrigosiqueiramelo@gmail.com,
- philippe.cornu@st.com, yannick.fertre@st.com, mcoquelin.stm32@gmail.com,
- alexander.deucher@amd.com, freedreno@lists.freedesktop.org,
- christian.koenig@amd.com
-Content-Type: multipart/mixed; boundary="===============1741885736=="
+Cc: "linux-arm-msm@vger.kernel.org" <linux-arm-msm@vger.kernel.org>,
+ "intel-gfx@lists.freedesktop.org" <intel-gfx@lists.freedesktop.org>,
+ "amd-gfx@lists.freedesktop.org" <amd-gfx@lists.freedesktop.org>,
+ "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
+ "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
+ "freedreno@lists.freedesktop.org" <freedreno@lists.freedesktop.org>
+Content-Type: multipart/mixed; boundary="===============1488239741=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============1741885736==
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="hnX2ORJn5vRIQccq9Tfc7COteUkRxx61k"
-
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---hnX2ORJn5vRIQccq9Tfc7COteUkRxx61k
-Content-Type: multipart/mixed; boundary="RAgxvS6j00AOrEMVpsfV7vPGxWhMlDzKn";
- protected-headers="v1"
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: Daniel Vetter <daniel@ffwll.ch>
-Cc: hamohammed.sa@gmail.com, airlied@linux.ie, nouveau@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
- alexandre.torgue@st.com, thellstrom@vmware.com, sean@poorly.run,
- linux-graphics-maintainer@vmware.com, bskeggs@redhat.com,
- mcoquelin.stm32@gmail.com, sunpeng.li@amd.com,
- linux-arm-msm@vger.kernel.org, intel-gfx@lists.freedesktop.org,
- rodrigo.vivi@intel.com, vincent.abriou@st.com,
- rodrigosiqueiramelo@gmail.com, philippe.cornu@st.com, yannick.fertre@st.com,
- alexander.deucher@amd.com, freedreno@lists.freedesktop.org,
- christian.koenig@amd.com
-Message-ID: <b5f6ac70-0bbe-18d5-f944-3ebba3237a9d@suse.de>
-Subject: Re: [PATCH 23/23] drm: Cleanup VBLANK callbacks in struct drm_driver
-References: <20200110092127.27847-1-tzimmermann@suse.de>
- <20200110092127.27847-24-tzimmermann@suse.de>
- <20200112225312.GC5340@dvetter-linux.ger.corp.intel.com>
-In-Reply-To: <20200112225312.GC5340@dvetter-linux.ger.corp.intel.com>
-
---RAgxvS6j00AOrEMVpsfV7vPGxWhMlDzKn
-Content-Type: text/plain; charset=utf-8
+--===============1488239741==
 Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/alternative;
+	boundary="_000_921ff7450f2a0bb6c75807174ac26e40stcom_"
 
-Hi
+--_000_921ff7450f2a0bb6c75807174ac26e40stcom_
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-Am 12.01.20 um 23:53 schrieb Daniel Vetter:
-> On Fri, Jan 10, 2020 at 10:21:27AM +0100, Thomas Zimmermann wrote:
->> All non-legacy users of VBLANK functions in struct drm_driver have bee=
-n
->> converted to use the respective interfaces in struct drm_crtc_funcs. T=
-he
->> remaining users of VBLANK callbacks in struct drm_driver are legacy dr=
-ivers
->> with userspace modesetting.
->>
->> There are no users left of get_vblank_timestamp(), so the callback is
->> being removed. The other VBLANK callbacks are being moved to the legac=
-y
->> section at the end of struct drm_driver.
->>
->> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
->=20
-> I think sprinkling some WARN_ON (in drm_dev_register or wherever) if ne=
-w
-> drivers try to use the legacy hooks would be really nice. Experience sa=
-ys
-> someone is going to copypaste this stuff around forever otherwise.
+VGhhbmtzIGZvciB0aGUgcGF0Y2guDQoNClRlc3RlZC1ieTogWWFubmljayBGZXJ0csOpIDx5YW5u
+aWNrLmZlcnRyZUBzdC5jb20+PG1haWx0bzp5YW5uaWNrLmZlcnRyZUBzdC5jb20+DQoNCkJSDQpZ
+YW5uaWNrIEZlcnRyw6kNCg0KDQpPbiAxLzEwLzIwIDEwOjIxIEFNLCBUaG9tYXMgWmltbWVybWFu
+biB3cm90ZToNCg0KVGhlIG5ldyBjYWxsYmFjayBnZXRfc2Nhbm91dF9wb3NpdGlvbigpIHJlYWRz
+IHRoZSBjdXJyZW50IGxvY2F0aW9uIG9mDQp0aGUgc2Nhbm91dCBwcm9jZXNzLiBUaGUgb3BlcmF0
+aW9uIGlzIGN1cnJlbnR5bCBsb2NhdGVkIGluIHN0cnVjdA0KZHJtX2RyaXZlciwgYnV0IHJlYWxs
+eSBiZWxvbmdzIHRvIHRoZSBDUlRDLiBEcml2ZXJzIHdpbGwgYmUgY29udmVydGVkDQppbiBzZXBh
+cmF0ZSBwYXRjaGVzLg0KDQpTaWduZWQtb2ZmLWJ5OiBUaG9tYXMgWmltbWVybWFubiA8dHppbW1l
+cm1hbm5Ac3VzZS5kZT48bWFpbHRvOnR6aW1tZXJtYW5uQHN1c2UuZGU+DQotLS0NCiBkcml2ZXJz
+L2dwdS9kcm0vZHJtX3ZibGFuay5jICAgICAgICAgICAgIHwgMjQgKysrKysrKystLS0tDQogaW5j
+bHVkZS9kcm0vZHJtX2Rydi5oICAgICAgICAgICAgICAgICAgICB8ICA3ICstLS0NCiBpbmNsdWRl
+L2RybS9kcm1fbW9kZXNldF9oZWxwZXJfdnRhYmxlcy5oIHwgNDcgKysrKysrKysrKysrKysrKysr
+KysrKysrDQogMyBmaWxlcyBjaGFuZ2VkLCA2NSBpbnNlcnRpb25zKCspLCAxMyBkZWxldGlvbnMo
+LSkNCg0KZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9kcm1fdmJsYW5rLmMgYi9kcml2ZXJz
+L2dwdS9kcm0vZHJtX3ZibGFuay5jDQppbmRleCAxNjU5YjEzYjE3OGMuLmMxMmYwYjMzM2UxNCAx
+MDA2NDQNCi0tLSBhL2RyaXZlcnMvZ3B1L2RybS9kcm1fdmJsYW5rLmMNCisrKyBiL2RyaXZlcnMv
+Z3B1L2RybS9kcm1fdmJsYW5rLmMNCkBAIC0zMCw2ICszMCw3IEBADQogI2luY2x1ZGUgPGRybS9k
+cm1fY3J0Yy5oPg0KICNpbmNsdWRlIDxkcm0vZHJtX2Rydi5oPg0KICNpbmNsdWRlIDxkcm0vZHJt
+X2ZyYW1lYnVmZmVyLmg+DQorI2luY2x1ZGUgPGRybS9kcm1fbW9kZXNldF9oZWxwZXJfdnRhYmxl
+cy5oPg0KICNpbmNsdWRlIDxkcm0vZHJtX3ByaW50Lmg+DQogI2luY2x1ZGUgPGRybS9kcm1fdmJs
+YW5rLmg+DQoNCkBAIC01OTAsNyArNTkxLDcgQEAgRVhQT1JUX1NZTUJPTChkcm1fY2FsY190aW1l
+c3RhbXBpbmdfY29uc3RhbnRzKTsNCiAgKiBJbXBsZW1lbnRzIGNhbGN1bGF0aW9uIG9mIGV4YWN0
+IHZibGFuayB0aW1lc3RhbXBzIGZyb20gZ2l2ZW4gZHJtX2Rpc3BsYXlfbW9kZQ0KICAqIHRpbWlu
+Z3MgYW5kIGN1cnJlbnQgdmlkZW8gc2Nhbm91dCBwb3NpdGlvbiBvZiBhIENSVEMuIFRoaXMgY2Fu
+IGJlIGRpcmVjdGx5DQogICogdXNlZCBhcyB0aGUgJmRybV9kcml2ZXIuZ2V0X3ZibGFua190aW1l
+c3RhbXAgaW1wbGVtZW50YXRpb24gb2YgYSBrbXMgZHJpdmVyDQotICogaWYgJmRybV9kcml2ZXIu
+Z2V0X3NjYW5vdXRfcG9zaXRpb24gaXMgaW1wbGVtZW50ZWQuDQorICogaWYgJmRybV9jcnRjX2hl
+bHBlcl9mdW5jcy5nZXRfc2Nhbm91dF9wb3NpdGlvbiBpcyBpbXBsZW1lbnRlZC4NCiAgKg0KICAq
+IFRoZSBjdXJyZW50IGltcGxlbWVudGF0aW9uIG9ubHkgaGFuZGxlcyBzdGFuZGFyZCB2aWRlbyBt
+b2Rlcy4gRm9yIGRvdWJsZSBzY2FuDQogICogYW5kIGludGVybGFjZWQgbW9kZXMgdGhlIGRyaXZl
+ciBpcyBzdXBwb3NlZCB0byBhZGp1c3QgdGhlIGhhcmR3YXJlIG1vZGUNCkBAIC02MzIsOCArNjMz
+LDkgQEAgYm9vbCBkcm1fY2FsY192Ymx0aW1lc3RhbXBfZnJvbV9zY2Fub3V0cG9zKHN0cnVjdCBk
+cm1fZGV2aWNlICpkZXYsDQogICAgICAgIH0NCg0KICAgICAgICAvKiBTY2Fub3V0IHBvc2l0aW9u
+IHF1ZXJ5IG5vdCBzdXBwb3J0ZWQ/IFNob3VsZCBub3QgaGFwcGVuLiAqLw0KLSAgICAgICBpZiAo
+IWRldi0+ZHJpdmVyLT5nZXRfc2Nhbm91dF9wb3NpdGlvbikgew0KLSAgICAgICAgICAgICAgIERS
+TV9FUlJPUigiQ2FsbGVkIGZyb20gZHJpdmVyIHcvbyBnZXRfc2Nhbm91dF9wb3NpdGlvbigpIT9c
+biIpOw0KKyAgICAgICBpZiAoIWRldi0+ZHJpdmVyLT5nZXRfc2Nhbm91dF9wb3NpdGlvbiB8fA0K
+KyAgICAgICAgICAgIWNydGMtPmhlbHBlcl9wcml2YXRlLT5nZXRfc2Nhbm91dF9wb3NpdGlvbikg
+ew0KKyAgICAgICAgICAgICAgIERSTV9FUlJPUigiQ2FsbGVkIGZyb20gQ1JUQyB3L28gZ2V0X3Nj
+YW5vdXRfcG9zaXRpb24oKSE/XG4iKTsNCiAgICAgICAgICAgICAgICByZXR1cm4gZmFsc2U7DQog
+ICAgICAgIH0NCg0KQEAgLTY2NCwxMSArNjY2LDE3IEBAIGJvb2wgZHJtX2NhbGNfdmJsdGltZXN0
+YW1wX2Zyb21fc2Nhbm91dHBvcyhzdHJ1Y3QgZHJtX2RldmljZSAqZGV2LA0KICAgICAgICAgICAg
+ICAgICAqIEdldCB2ZXJ0aWNhbCBhbmQgaG9yaXpvbnRhbCBzY2Fub3V0IHBvc2l0aW9uIHZwb3Ms
+IGhwb3MsDQogICAgICAgICAgICAgICAgICogYW5kIGJvdW5kaW5nIHRpbWVzdGFtcHMgc3RpbWUs
+IGV0aW1lLCBwcmUvcG9zdCBxdWVyeS4NCiAgICAgICAgICAgICAgICAgKi8NCi0gICAgICAgICAg
+ICAgICB2Ymxfc3RhdHVzID0gZGV2LT5kcml2ZXItPmdldF9zY2Fub3V0X3Bvc2l0aW9uKGRldiwg
+cGlwZSwNCi0gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgIGluX3ZibGFua19pcnEsDQotICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAmdnBvcywgJmhwb3MsDQotICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAm
+c3RpbWUsICZldGltZSwNCi0gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgIG1vZGUpOw0KKyAgICAgICAgICAgICAgIGlmIChjcnRjLT5o
+ZWxwZXJfcHJpdmF0ZS0+Z2V0X3NjYW5vdXRfcG9zaXRpb24pIHsNCisgICAgICAgICAgICAgICAg
+ICAgICAgIHZibF9zdGF0dXMgPQ0KKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBjcnRj
+LT5oZWxwZXJfcHJpdmF0ZS0+Z2V0X3NjYW5vdXRfcG9zaXRpb24oDQorICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgY3J0YywgaW5fdmJsYW5rX2lycSwgJnZwb3MsICZocG9z
+LA0KKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICZzdGltZSwgJmV0aW1l
+LCBtb2RlKTsNCisgICAgICAgICAgICAgICB9IGVsc2Ugew0KKyAgICAgICAgICAgICAgICAgICAg
+ICAgdmJsX3N0YXR1cyA9DQorICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGRldi0+ZHJp
+dmVyLT5nZXRfc2Nhbm91dF9wb3NpdGlvbigNCisgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICBkZXYsIHBpcGUsIGluX3ZibGFua19pcnEsICZ2cG9zLA0KKyAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICZocG9zLCAmc3RpbWUsICZldGltZSwgbW9kZSk7
+DQorICAgICAgICAgICAgICAgfQ0KDQogICAgICAgICAgICAgICAgLyogUmV0dXJuIGFzIG5vLW9w
+IGlmIHNjYW5vdXQgcXVlcnkgdW5zdXBwb3J0ZWQgb3IgZmFpbGVkLiAqLw0KICAgICAgICAgICAg
+ICAgIGlmICghdmJsX3N0YXR1cykgew0KZGlmZiAtLWdpdCBhL2luY2x1ZGUvZHJtL2RybV9kcnYu
+aCBiL2luY2x1ZGUvZHJtL2RybV9kcnYuaA0KaW5kZXggY2YxMzQ3MDgxMGE1Li5kMDA0OWU1Nzg2
+ZmMgMTAwNjQ0DQotLS0gYS9pbmNsdWRlL2RybS9kcm1fZHJ2LmgNCisrKyBiL2luY2x1ZGUvZHJt
+L2RybV9kcnYuaA0KQEAgLTM2MiwxMSArMzYyLDggQEAgc3RydWN0IGRybV9kcml2ZXIgew0KICAg
+ICAgICAgKiBUcnVlIG9uIHN1Y2Nlc3MsIGZhbHNlIGlmIGEgcmVsaWFibGUgc2Nhbm91dCBwb3Np
+dGlvbiBjb3VudGVyIGNvdWxkDQogICAgICAgICAqIG5vdCBiZSByZWFkIG91dC4NCiAgICAgICAg
+ICoNCi0gICAgICAgICogRklYTUU6DQotICAgICAgICAqDQotICAgICAgICAqIFNpbmNlIHRoaXMg
+aXMgYSBoZWxwZXIgdG8gaW1wbGVtZW50IEBnZXRfdmJsYW5rX3RpbWVzdGFtcCwgd2Ugc2hvdWxk
+DQotICAgICAgICAqIG1vdmUgaXQgdG8gJnN0cnVjdCBkcm1fY3J0Y19oZWxwZXJfZnVuY3MsIGxp
+a2UgYWxsIHRoZSBvdGhlcg0KLSAgICAgICAgKiBoZWxwZXItaW50ZXJuYWwgaG9va3MuDQorICAg
+ICAgICAqIFRoaXMgaXMgZGVwcmVjYXRlZCBhbmQgc2hvdWxkIG5vdCBiZSB1c2VkIGJ5IG5ldyBk
+cml2ZXJzLg0KKyAgICAgICAgKiBVc2UgJmRybV9jcnRjX2hlbHBlcl9mdW5jcy5nZXRfc2Nhbm91
+dF9wb3NpdGlvbiBpbnN0ZWFkLg0KICAgICAgICAgKi8NCiAgICAgICAgYm9vbCAoKmdldF9zY2Fu
+b3V0X3Bvc2l0aW9uKSAoc3RydWN0IGRybV9kZXZpY2UgKmRldiwgdW5zaWduZWQgaW50IHBpcGUs
+DQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJvb2wgaW5fdmJsYW5rX2ly
+cSwgaW50ICp2cG9zLCBpbnQgKmhwb3MsDQpkaWZmIC0tZ2l0IGEvaW5jbHVkZS9kcm0vZHJtX21v
+ZGVzZXRfaGVscGVyX3Z0YWJsZXMuaCBiL2luY2x1ZGUvZHJtL2RybV9tb2Rlc2V0X2hlbHBlcl92
+dGFibGVzLmgNCmluZGV4IDVhODdmMWJkN2EzZi4uZTM5ODUxMmJmZDVmIDEwMDY0NA0KLS0tIGEv
+aW5jbHVkZS9kcm0vZHJtX21vZGVzZXRfaGVscGVyX3Z0YWJsZXMuaA0KKysrIGIvaW5jbHVkZS9k
+cm0vZHJtX21vZGVzZXRfaGVscGVyX3Z0YWJsZXMuaA0KQEAgLTQ1MCw2ICs0NTAsNTMgQEAgc3Ry
+dWN0IGRybV9jcnRjX2hlbHBlcl9mdW5jcyB7DQogICAgICAgICAqLw0KICAgICAgICB2b2lkICgq
+YXRvbWljX2Rpc2FibGUpKHN0cnVjdCBkcm1fY3J0YyAqY3J0YywNCiAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICBzdHJ1Y3QgZHJtX2NydGNfc3RhdGUgKm9sZF9jcnRjX3N0YXRlKTsNCisN
+CisgICAgICAgLyoqDQorICAgICAgICAqIEBnZXRfc2Nhbm91dF9wb3NpdGlvbjoNCisgICAgICAg
+ICoNCisgICAgICAgICogQ2FsbGVkIGJ5IHZibGFuayB0aW1lc3RhbXBpbmcgY29kZS4NCisgICAg
+ICAgICoNCisgICAgICAgICogUmV0dXJucyB0aGUgY3VycmVudCBkaXNwbGF5IHNjYW5vdXQgcG9z
+aXRpb24gZnJvbSBhIENSVEMgYW5kIGFuDQorICAgICAgICAqIG9wdGlvbmFsIGFjY3VyYXRlIGt0
+aW1lX2dldCgpIHRpbWVzdGFtcCBvZiB3aGVuIHRoZSBwb3NpdGlvbiB3YXMNCisgICAgICAgICog
+bWVhc3VyZWQuIE5vdGUgdGhhdCB0aGlzIGlzIGEgaGVscGVyIGNhbGxiYWNrIHdoaWNoIGlzIG9u
+bHkgdXNlZA0KKyAgICAgICAgKiBpZiBhIGRyaXZlciB1c2VzIGRybV9jYWxjX3ZibHRpbWVzdGFt
+cF9mcm9tX3NjYW5vdXRwb3MoKSBmb3IgdGhlDQorICAgICAgICAqIEBkcm1fZHJpdmVyLmdldF92
+YmxhbmtfdGltZXN0YW1wIGNhbGxiYWNrLg0KKyAgICAgICAgKg0KKyAgICAgICAgKiBQYXJhbWV0
+ZXJzOg0KKyAgICAgICAgKg0KKyAgICAgICAgKiBjcnRjOg0KKyAgICAgICAgKiAgICAgVGhlIENS
+VEMuDQorICAgICAgICAqIGluX3ZibGFua19pcnE6DQorICAgICAgICAqICAgICBUcnVlIHdoZW4g
+Y2FsbGVkIGZyb20gZHJtX2NydGNfaGFuZGxlX3ZibGFuaygpLiBTb21lIGRyaXZlcnMNCisgICAg
+ICAgICogICAgIG5lZWQgdG8gYXBwbHkgc29tZSB3b3JrYXJvdW5kcyBmb3IgZ3B1LXNwZWNpZmlj
+IHZibGFuayBpcnENCisgICAgICAgICogICAgIHF1aXJrcyBpZiB0aGUgZmxhZyBpcyBzZXQuDQor
+ICAgICAgICAqIHZwb3M6DQorICAgICAgICAqICAgICBUYXJnZXQgbG9jYXRpb24gZm9yIGN1cnJl
+bnQgdmVydGljYWwgc2Nhbm91dCBwb3NpdGlvbi4NCisgICAgICAgICogaHBvczoNCisgICAgICAg
+ICogICAgIFRhcmdldCBsb2NhdGlvbiBmb3IgY3VycmVudCBob3Jpem9udGFsIHNjYW5vdXQgcG9z
+aXRpb24uDQorICAgICAgICAqIHN0aW1lOg0KKyAgICAgICAgKiAgICAgVGFyZ2V0IGxvY2F0aW9u
+IGZvciB0aW1lc3RhbXAgdGFrZW4gaW1tZWRpYXRlbHkgYmVmb3JlDQorICAgICAgICAqICAgICBz
+Y2Fub3V0IHBvc2l0aW9uIHF1ZXJ5LiBDYW4gYmUgTlVMTCB0byBza2lwIHRpbWVzdGFtcC4NCisg
+ICAgICAgICogZXRpbWU6DQorICAgICAgICAqICAgICBUYXJnZXQgbG9jYXRpb24gZm9yIHRpbWVz
+dGFtcCB0YWtlbiBpbW1lZGlhdGVseSBhZnRlcg0KKyAgICAgICAgKiAgICAgc2Nhbm91dCBwb3Np
+dGlvbiBxdWVyeS4gQ2FuIGJlIE5VTEwgdG8gc2tpcCB0aW1lc3RhbXAuDQorICAgICAgICAqIG1v
+ZGU6DQorICAgICAgICAqICAgICBDdXJyZW50IGRpc3BsYXkgdGltaW5ncy4NCisgICAgICAgICoN
+CisgICAgICAgICogUmV0dXJucyB2cG9zIGFzIGEgcG9zaXRpdmUgbnVtYmVyIHdoaWxlIGluIGFj
+dGl2ZSBzY2Fub3V0IGFyZWEuDQorICAgICAgICAqIFJldHVybnMgdnBvcyBhcyBhIG5lZ2F0aXZl
+IG51bWJlciBpbnNpZGUgdmJsYW5rLCBjb3VudGluZyB0aGUgbnVtYmVyDQorICAgICAgICAqIG9m
+IHNjYW5saW5lcyB0byBnbyB1bnRpbCBlbmQgb2YgdmJsYW5rLCBlLmcuLCAtMSBtZWFucyAib25l
+IHNjYW5saW5lDQorICAgICAgICAqIHVudGlsIHN0YXJ0IG9mIGFjdGl2ZSBzY2Fub3V0IC8gZW5k
+IG9mIHZibGFuay4iDQorICAgICAgICAqDQorICAgICAgICAqIFJldHVybnM6DQorICAgICAgICAq
+DQorICAgICAgICAqIFRydWUgb24gc3VjY2VzcywgZmFsc2UgaWYgYSByZWxpYWJsZSBzY2Fub3V0
+IHBvc2l0aW9uIGNvdW50ZXIgY291bGQNCisgICAgICAgICogbm90IGJlIHJlYWQgb3V0Lg0KKyAg
+ICAgICAgKi8NCisgICAgICAgYm9vbCAoKmdldF9zY2Fub3V0X3Bvc2l0aW9uKShzdHJ1Y3QgZHJt
+X2NydGMgKmNydGMsDQorICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYm9vbCBp
+bl92YmxhbmtfaXJxLCBpbnQgKnZwb3MsIGludCAqaHBvcywNCisgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICBrdGltZV90ICpzdGltZSwga3RpbWVfdCAqZXRpbWUsDQorICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgY29uc3Qgc3RydWN0IGRybV9kaXNwbGF5X21v
+ZGUgKm1vZGUpOw0KIH07DQoNCiAvKioNCg0KDQo=
 
-I've been thinking about moving these fields to separate structures, say
-struct drm_legacy_device and struct drm_legacy_driver. Those would be
-allocated for legacy drivers and KMS drivers would never see them
-(except for their forward declaration).
+--_000_921ff7450f2a0bb6c75807174ac26e40stcom_
+Content-Type: text/html; charset="utf-8"
+Content-ID: <8E905E0A6F4A514A8A422D65F470EFCB@st.com>
+Content-Transfer-Encoding: base64
 
-Best regards
-Thomas
+PGh0bWw+DQo8aGVhZD4NCjxtZXRhIGh0dHAtZXF1aXY9IkNvbnRlbnQtVHlwZSIgY29udGVudD0i
+dGV4dC9odG1sOyBjaGFyc2V0PXV0Zi04Ij4NCjwvaGVhZD4NCjxib2R5IHRleHQ9IiMwMDAwMDAi
+IGJnY29sb3I9IiNGRkZGRkYiPg0KPHByZT5UaGFua3MgZm9yIHRoZSBwYXRjaC4NCg0KVGVzdGVk
+LWJ5OiBZYW5uaWNrIEZlcnRyw6kgPGEgY2xhc3M9Im1vei10eHQtbGluay1yZmMyMzk2RSIgaHJl
+Zj0ibWFpbHRvOnlhbm5pY2suZmVydHJlQHN0LmNvbSI+Jmx0O3lhbm5pY2suZmVydHJlQHN0LmNv
+bSZndDs8L2E+IA0KDQpCUg0KWWFubmljayBGZXJ0csOpDQo8L3ByZT4NCjxicj4NCjxkaXYgY2xh
+c3M9Im1vei1jaXRlLXByZWZpeCI+T24gMS8xMC8yMCAxMDoyMSBBTSwgVGhvbWFzIFppbW1lcm1h
+bm4gd3JvdGU6PGJyPg0KPC9kaXY+DQo8YmxvY2txdW90ZSB0eXBlPSJjaXRlIiBjaXRlPSJtaWQ6
+MjAyMDAxMTAwOTIxMjcuMjc4NDctMi10emltbWVybWFubkBzdXNlLmRlIj4NCjxwcmUgY2xhc3M9
+Im1vei1xdW90ZS1wcmUiIHdyYXA9IiI+VGhlIG5ldyBjYWxsYmFjayBnZXRfc2Nhbm91dF9wb3Np
+dGlvbigpIHJlYWRzIHRoZSBjdXJyZW50IGxvY2F0aW9uIG9mDQp0aGUgc2Nhbm91dCBwcm9jZXNz
+LiBUaGUgb3BlcmF0aW9uIGlzIGN1cnJlbnR5bCBsb2NhdGVkIGluIHN0cnVjdA0KZHJtX2RyaXZl
+ciwgYnV0IHJlYWxseSBiZWxvbmdzIHRvIHRoZSBDUlRDLiBEcml2ZXJzIHdpbGwgYmUgY29udmVy
+dGVkDQppbiBzZXBhcmF0ZSBwYXRjaGVzLg0KDQpTaWduZWQtb2ZmLWJ5OiBUaG9tYXMgWmltbWVy
+bWFubiA8YSBjbGFzcz0ibW96LXR4dC1saW5rLXJmYzIzOTZFIiBocmVmPSJtYWlsdG86dHppbW1l
+cm1hbm5Ac3VzZS5kZSI+Jmx0O3R6aW1tZXJtYW5uQHN1c2UuZGUmZ3Q7PC9hPg0KLS0tDQogZHJp
+dmVycy9ncHUvZHJtL2RybV92YmxhbmsuYyAgICAgICAgICAgICB8IDI0ICYjNDM7JiM0MzsmIzQz
+OyYjNDM7JiM0MzsmIzQzOyYjNDM7JiM0MzstLS0tDQogaW5jbHVkZS9kcm0vZHJtX2Rydi5oICAg
+ICAgICAgICAgICAgICAgICB8ICA3ICYjNDM7LS0tDQogaW5jbHVkZS9kcm0vZHJtX21vZGVzZXRf
+aGVscGVyX3Z0YWJsZXMuaCB8IDQ3ICYjNDM7JiM0MzsmIzQzOyYjNDM7JiM0MzsmIzQzOyYjNDM7
+JiM0MzsmIzQzOyYjNDM7JiM0MzsmIzQzOyYjNDM7JiM0MzsmIzQzOyYjNDM7JiM0MzsmIzQzOyYj
+NDM7JiM0MzsmIzQzOyYjNDM7JiM0MzsmIzQzOw0KIDMgZmlsZXMgY2hhbmdlZCwgNjUgaW5zZXJ0
+aW9ucygmIzQzOyksIDEzIGRlbGV0aW9ucygtKQ0KDQpkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUv
+ZHJtL2RybV92YmxhbmsuYyBiL2RyaXZlcnMvZ3B1L2RybS9kcm1fdmJsYW5rLmMNCmluZGV4IDE2
+NTliMTNiMTc4Yy4uYzEyZjBiMzMzZTE0IDEwMDY0NA0KLS0tIGEvZHJpdmVycy9ncHUvZHJtL2Ry
+bV92YmxhbmsuYw0KJiM0MzsmIzQzOyYjNDM7IGIvZHJpdmVycy9ncHUvZHJtL2RybV92Ymxhbmsu
+Yw0KQEAgLTMwLDYgJiM0MzszMCw3IEBADQogI2luY2x1ZGUgJmx0O2RybS9kcm1fY3J0Yy5oJmd0
+Ow0KICNpbmNsdWRlICZsdDtkcm0vZHJtX2Rydi5oJmd0Ow0KICNpbmNsdWRlICZsdDtkcm0vZHJt
+X2ZyYW1lYnVmZmVyLmgmZ3Q7DQomIzQzOyNpbmNsdWRlICZsdDtkcm0vZHJtX21vZGVzZXRfaGVs
+cGVyX3Z0YWJsZXMuaCZndDsNCiAjaW5jbHVkZSAmbHQ7ZHJtL2RybV9wcmludC5oJmd0Ow0KICNp
+bmNsdWRlICZsdDtkcm0vZHJtX3ZibGFuay5oJmd0Ow0KIA0KQEAgLTU5MCw3ICYjNDM7NTkxLDcg
+QEAgRVhQT1JUX1NZTUJPTChkcm1fY2FsY190aW1lc3RhbXBpbmdfY29uc3RhbnRzKTsNCiAgKiBJ
+bXBsZW1lbnRzIGNhbGN1bGF0aW9uIG9mIGV4YWN0IHZibGFuayB0aW1lc3RhbXBzIGZyb20gZ2l2
+ZW4gZHJtX2Rpc3BsYXlfbW9kZQ0KICAqIHRpbWluZ3MgYW5kIGN1cnJlbnQgdmlkZW8gc2Nhbm91
+dCBwb3NpdGlvbiBvZiBhIENSVEMuIFRoaXMgY2FuIGJlIGRpcmVjdGx5DQogICogdXNlZCBhcyB0
+aGUgJmFtcDtkcm1fZHJpdmVyLmdldF92YmxhbmtfdGltZXN0YW1wIGltcGxlbWVudGF0aW9uIG9m
+IGEga21zIGRyaXZlcg0KLSAqIGlmICZhbXA7ZHJtX2RyaXZlci5nZXRfc2Nhbm91dF9wb3NpdGlv
+biBpcyBpbXBsZW1lbnRlZC4NCiYjNDM7ICogaWYgJmFtcDtkcm1fY3J0Y19oZWxwZXJfZnVuY3Mu
+Z2V0X3NjYW5vdXRfcG9zaXRpb24gaXMgaW1wbGVtZW50ZWQuDQogICoNCiAgKiBUaGUgY3VycmVu
+dCBpbXBsZW1lbnRhdGlvbiBvbmx5IGhhbmRsZXMgc3RhbmRhcmQgdmlkZW8gbW9kZXMuIEZvciBk
+b3VibGUgc2Nhbg0KICAqIGFuZCBpbnRlcmxhY2VkIG1vZGVzIHRoZSBkcml2ZXIgaXMgc3VwcG9z
+ZWQgdG8gYWRqdXN0IHRoZSBoYXJkd2FyZSBtb2RlDQpAQCAtNjMyLDggJiM0Mzs2MzMsOSBAQCBi
+b29sIGRybV9jYWxjX3ZibHRpbWVzdGFtcF9mcm9tX3NjYW5vdXRwb3Moc3RydWN0IGRybV9kZXZp
+Y2UgKmRldiwNCiAJfQ0KIA0KIAkvKiBTY2Fub3V0IHBvc2l0aW9uIHF1ZXJ5IG5vdCBzdXBwb3J0
+ZWQ/IFNob3VsZCBub3QgaGFwcGVuLiAqLw0KLQlpZiAoIWRldi0mZ3Q7ZHJpdmVyLSZndDtnZXRf
+c2Nhbm91dF9wb3NpdGlvbikgew0KLQkJRFJNX0VSUk9SKCZxdW90O0NhbGxlZCBmcm9tIGRyaXZl
+ciB3L28gZ2V0X3NjYW5vdXRfcG9zaXRpb24oKSE/XG4mcXVvdDspOw0KJiM0MzsJaWYgKCFkZXYt
+Jmd0O2RyaXZlci0mZ3Q7Z2V0X3NjYW5vdXRfcG9zaXRpb24gfHwNCiYjNDM7CSAgICAhY3J0Yy0m
+Z3Q7aGVscGVyX3ByaXZhdGUtJmd0O2dldF9zY2Fub3V0X3Bvc2l0aW9uKSB7DQomIzQzOwkJRFJN
+X0VSUk9SKCZxdW90O0NhbGxlZCBmcm9tIENSVEMgdy9vIGdldF9zY2Fub3V0X3Bvc2l0aW9uKCkh
+P1xuJnF1b3Q7KTsNCiAJCXJldHVybiBmYWxzZTsNCiAJfQ0KIA0KQEAgLTY2NCwxMSAmIzQzOzY2
+NiwxNyBAQCBib29sIGRybV9jYWxjX3ZibHRpbWVzdGFtcF9mcm9tX3NjYW5vdXRwb3Moc3RydWN0
+IGRybV9kZXZpY2UgKmRldiwNCiAJCSAqIEdldCB2ZXJ0aWNhbCBhbmQgaG9yaXpvbnRhbCBzY2Fu
+b3V0IHBvc2l0aW9uIHZwb3MsIGhwb3MsDQogCQkgKiBhbmQgYm91bmRpbmcgdGltZXN0YW1wcyBz
+dGltZSwgZXRpbWUsIHByZS9wb3N0IHF1ZXJ5Lg0KIAkJICovDQotCQl2Ymxfc3RhdHVzID0gZGV2
+LSZndDtkcml2ZXItJmd0O2dldF9zY2Fub3V0X3Bvc2l0aW9uKGRldiwgcGlwZSwNCi0JCQkJCQkJ
+ICAgICAgIGluX3ZibGFua19pcnEsDQotCQkJCQkJCSAgICAgICAmYW1wO3Zwb3MsICZhbXA7aHBv
+cywNCi0JCQkJCQkJICAgICAgICZhbXA7c3RpbWUsICZhbXA7ZXRpbWUsDQotCQkJCQkJCSAgICAg
+ICBtb2RlKTsNCiYjNDM7CQlpZiAoY3J0Yy0mZ3Q7aGVscGVyX3ByaXZhdGUtJmd0O2dldF9zY2Fu
+b3V0X3Bvc2l0aW9uKSB7DQomIzQzOwkJCXZibF9zdGF0dXMgPQ0KJiM0MzsJCQkJY3J0Yy0mZ3Q7
+aGVscGVyX3ByaXZhdGUtJmd0O2dldF9zY2Fub3V0X3Bvc2l0aW9uKA0KJiM0MzsJCQkJCWNydGMs
+IGluX3ZibGFua19pcnEsICZhbXA7dnBvcywgJmFtcDtocG9zLA0KJiM0MzsJCQkJCSZhbXA7c3Rp
+bWUsICZhbXA7ZXRpbWUsIG1vZGUpOw0KJiM0MzsJCX0gZWxzZSB7DQomIzQzOwkJCXZibF9zdGF0
+dXMgPQ0KJiM0MzsJCQkJZGV2LSZndDtkcml2ZXItJmd0O2dldF9zY2Fub3V0X3Bvc2l0aW9uKA0K
+JiM0MzsJCQkJCWRldiwgcGlwZSwgaW5fdmJsYW5rX2lycSwgJmFtcDt2cG9zLA0KJiM0MzsJCQkJ
+CSZhbXA7aHBvcywgJmFtcDtzdGltZSwgJmFtcDtldGltZSwgbW9kZSk7DQomIzQzOwkJfQ0KIA0K
+IAkJLyogUmV0dXJuIGFzIG5vLW9wIGlmIHNjYW5vdXQgcXVlcnkgdW5zdXBwb3J0ZWQgb3IgZmFp
+bGVkLiAqLw0KIAkJaWYgKCF2Ymxfc3RhdHVzKSB7DQpkaWZmIC0tZ2l0IGEvaW5jbHVkZS9kcm0v
+ZHJtX2Rydi5oIGIvaW5jbHVkZS9kcm0vZHJtX2Rydi5oDQppbmRleCBjZjEzNDcwODEwYTUuLmQw
+MDQ5ZTU3ODZmYyAxMDA2NDQNCi0tLSBhL2luY2x1ZGUvZHJtL2RybV9kcnYuaA0KJiM0MzsmIzQz
+OyYjNDM7IGIvaW5jbHVkZS9kcm0vZHJtX2Rydi5oDQpAQCAtMzYyLDExICYjNDM7MzYyLDggQEAg
+c3RydWN0IGRybV9kcml2ZXIgew0KIAkgKiBUcnVlIG9uIHN1Y2Nlc3MsIGZhbHNlIGlmIGEgcmVs
+aWFibGUgc2Nhbm91dCBwb3NpdGlvbiBjb3VudGVyIGNvdWxkDQogCSAqIG5vdCBiZSByZWFkIG91
+dC4NCiAJICoNCi0JICogRklYTUU6DQotCSAqDQotCSAqIFNpbmNlIHRoaXMgaXMgYSBoZWxwZXIg
+dG8gaW1wbGVtZW50IEBnZXRfdmJsYW5rX3RpbWVzdGFtcCwgd2Ugc2hvdWxkDQotCSAqIG1vdmUg
+aXQgdG8gJmFtcDtzdHJ1Y3QgZHJtX2NydGNfaGVscGVyX2Z1bmNzLCBsaWtlIGFsbCB0aGUgb3Ro
+ZXINCi0JICogaGVscGVyLWludGVybmFsIGhvb2tzLg0KJiM0MzsJICogVGhpcyBpcyBkZXByZWNh
+dGVkIGFuZCBzaG91bGQgbm90IGJlIHVzZWQgYnkgbmV3IGRyaXZlcnMuDQomIzQzOwkgKiBVc2Ug
+JmFtcDtkcm1fY3J0Y19oZWxwZXJfZnVuY3MuZ2V0X3NjYW5vdXRfcG9zaXRpb24gaW5zdGVhZC4N
+CiAJICovDQogCWJvb2wgKCpnZXRfc2Nhbm91dF9wb3NpdGlvbikgKHN0cnVjdCBkcm1fZGV2aWNl
+ICpkZXYsIHVuc2lnbmVkIGludCBwaXBlLA0KIAkJCQkgICAgICBib29sIGluX3ZibGFua19pcnEs
+IGludCAqdnBvcywgaW50ICpocG9zLA0KZGlmZiAtLWdpdCBhL2luY2x1ZGUvZHJtL2RybV9tb2Rl
+c2V0X2hlbHBlcl92dGFibGVzLmggYi9pbmNsdWRlL2RybS9kcm1fbW9kZXNldF9oZWxwZXJfdnRh
+Ymxlcy5oDQppbmRleCA1YTg3ZjFiZDdhM2YuLmUzOTg1MTJiZmQ1ZiAxMDA2NDQNCi0tLSBhL2lu
+Y2x1ZGUvZHJtL2RybV9tb2Rlc2V0X2hlbHBlcl92dGFibGVzLmgNCiYjNDM7JiM0MzsmIzQzOyBi
+L2luY2x1ZGUvZHJtL2RybV9tb2Rlc2V0X2hlbHBlcl92dGFibGVzLmgNCkBAIC00NTAsNiAmIzQz
+OzQ1MCw1MyBAQCBzdHJ1Y3QgZHJtX2NydGNfaGVscGVyX2Z1bmNzIHsNCiAJICovDQogCXZvaWQg
+KCphdG9taWNfZGlzYWJsZSkoc3RydWN0IGRybV9jcnRjICpjcnRjLA0KIAkJCSAgICAgICBzdHJ1
+Y3QgZHJtX2NydGNfc3RhdGUgKm9sZF9jcnRjX3N0YXRlKTsNCiYjNDM7DQomIzQzOwkvKioNCiYj
+NDM7CSAqIEBnZXRfc2Nhbm91dF9wb3NpdGlvbjoNCiYjNDM7CSAqDQomIzQzOwkgKiBDYWxsZWQg
+YnkgdmJsYW5rIHRpbWVzdGFtcGluZyBjb2RlLg0KJiM0MzsJICoNCiYjNDM7CSAqIFJldHVybnMg
+dGhlIGN1cnJlbnQgZGlzcGxheSBzY2Fub3V0IHBvc2l0aW9uIGZyb20gYSBDUlRDIGFuZCBhbg0K
+JiM0MzsJICogb3B0aW9uYWwgYWNjdXJhdGUga3RpbWVfZ2V0KCkgdGltZXN0YW1wIG9mIHdoZW4g
+dGhlIHBvc2l0aW9uIHdhcw0KJiM0MzsJICogbWVhc3VyZWQuIE5vdGUgdGhhdCB0aGlzIGlzIGEg
+aGVscGVyIGNhbGxiYWNrIHdoaWNoIGlzIG9ubHkgdXNlZA0KJiM0MzsJICogaWYgYSBkcml2ZXIg
+dXNlcyBkcm1fY2FsY192Ymx0aW1lc3RhbXBfZnJvbV9zY2Fub3V0cG9zKCkgZm9yIHRoZQ0KJiM0
+MzsJICogQGRybV9kcml2ZXIuZ2V0X3ZibGFua190aW1lc3RhbXAgY2FsbGJhY2suDQomIzQzOwkg
+Kg0KJiM0MzsJICogUGFyYW1ldGVyczoNCiYjNDM7CSAqDQomIzQzOwkgKiBjcnRjOg0KJiM0MzsJ
+ICogICAgIFRoZSBDUlRDLg0KJiM0MzsJICogaW5fdmJsYW5rX2lycToNCiYjNDM7CSAqICAgICBU
+cnVlIHdoZW4gY2FsbGVkIGZyb20gZHJtX2NydGNfaGFuZGxlX3ZibGFuaygpLiBTb21lIGRyaXZl
+cnMNCiYjNDM7CSAqICAgICBuZWVkIHRvIGFwcGx5IHNvbWUgd29ya2Fyb3VuZHMgZm9yIGdwdS1z
+cGVjaWZpYyB2YmxhbmsgaXJxDQomIzQzOwkgKiAgICAgcXVpcmtzIGlmIHRoZSBmbGFnIGlzIHNl
+dC4NCiYjNDM7CSAqIHZwb3M6DQomIzQzOwkgKiAgICAgVGFyZ2V0IGxvY2F0aW9uIGZvciBjdXJy
+ZW50IHZlcnRpY2FsIHNjYW5vdXQgcG9zaXRpb24uDQomIzQzOwkgKiBocG9zOg0KJiM0MzsJICog
+ICAgIFRhcmdldCBsb2NhdGlvbiBmb3IgY3VycmVudCBob3Jpem9udGFsIHNjYW5vdXQgcG9zaXRp
+b24uDQomIzQzOwkgKiBzdGltZToNCiYjNDM7CSAqICAgICBUYXJnZXQgbG9jYXRpb24gZm9yIHRp
+bWVzdGFtcCB0YWtlbiBpbW1lZGlhdGVseSBiZWZvcmUNCiYjNDM7CSAqICAgICBzY2Fub3V0IHBv
+c2l0aW9uIHF1ZXJ5LiBDYW4gYmUgTlVMTCB0byBza2lwIHRpbWVzdGFtcC4NCiYjNDM7CSAqIGV0
+aW1lOg0KJiM0MzsJICogICAgIFRhcmdldCBsb2NhdGlvbiBmb3IgdGltZXN0YW1wIHRha2VuIGlt
+bWVkaWF0ZWx5IGFmdGVyDQomIzQzOwkgKiAgICAgc2Nhbm91dCBwb3NpdGlvbiBxdWVyeS4gQ2Fu
+IGJlIE5VTEwgdG8gc2tpcCB0aW1lc3RhbXAuDQomIzQzOwkgKiBtb2RlOg0KJiM0MzsJICogICAg
+IEN1cnJlbnQgZGlzcGxheSB0aW1pbmdzLg0KJiM0MzsJICoNCiYjNDM7CSAqIFJldHVybnMgdnBv
+cyBhcyBhIHBvc2l0aXZlIG51bWJlciB3aGlsZSBpbiBhY3RpdmUgc2Nhbm91dCBhcmVhLg0KJiM0
+MzsJICogUmV0dXJucyB2cG9zIGFzIGEgbmVnYXRpdmUgbnVtYmVyIGluc2lkZSB2YmxhbmssIGNv
+dW50aW5nIHRoZSBudW1iZXINCiYjNDM7CSAqIG9mIHNjYW5saW5lcyB0byBnbyB1bnRpbCBlbmQg
+b2YgdmJsYW5rLCBlLmcuLCAtMSBtZWFucyAmcXVvdDtvbmUgc2NhbmxpbmUNCiYjNDM7CSAqIHVu
+dGlsIHN0YXJ0IG9mIGFjdGl2ZSBzY2Fub3V0IC8gZW5kIG9mIHZibGFuay4mcXVvdDsNCiYjNDM7
+CSAqDQomIzQzOwkgKiBSZXR1cm5zOg0KJiM0MzsJICoNCiYjNDM7CSAqIFRydWUgb24gc3VjY2Vz
+cywgZmFsc2UgaWYgYSByZWxpYWJsZSBzY2Fub3V0IHBvc2l0aW9uIGNvdW50ZXIgY291bGQNCiYj
+NDM7CSAqIG5vdCBiZSByZWFkIG91dC4NCiYjNDM7CSAqLw0KJiM0MzsJYm9vbCAoKmdldF9zY2Fu
+b3V0X3Bvc2l0aW9uKShzdHJ1Y3QgZHJtX2NydGMgKmNydGMsDQomIzQzOwkJCQkgICAgIGJvb2wg
+aW5fdmJsYW5rX2lycSwgaW50ICp2cG9zLCBpbnQgKmhwb3MsDQomIzQzOwkJCQkgICAgIGt0aW1l
+X3QgKnN0aW1lLCBrdGltZV90ICpldGltZSwNCiYjNDM7CQkJCSAgICAgY29uc3Qgc3RydWN0IGRy
+bV9kaXNwbGF5X21vZGUgKm1vZGUpOw0KIH07DQogDQogLyoqDQo8L3ByZT4NCjwvYmxvY2txdW90
+ZT4NCjxicj4NCjwvYm9keT4NCjwvaHRtbD4NCg==
 
->=20
-> Reviewed-by: Daniel Vetter <daniel.vetter@ffwll.ch>
->=20
->> ---
->>  drivers/gpu/drm/drm_vblank.c |  39 +++++---------
->>  include/drm/drm_drv.h        | 101 ++--------------------------------=
--
->>  2 files changed, 17 insertions(+), 123 deletions(-)
->>
->> diff --git a/drivers/gpu/drm/drm_vblank.c b/drivers/gpu/drm/drm_vblank=
-=2Ec
->> index 7cf436a4b908..ceff68474d4d 100644
->> --- a/drivers/gpu/drm/drm_vblank.c
->> +++ b/drivers/gpu/drm/drm_vblank.c
->> @@ -138,10 +138,9 @@ static u32 __get_vblank_counter(struct drm_device=
- *dev, unsigned int pipe)
->> =20
->>  		if (crtc->funcs->get_vblank_counter)
->>  			return crtc->funcs->get_vblank_counter(crtc);
->> -	}
->> -
->> -	if (dev->driver->get_vblank_counter)
->> +	} else if (dev->driver->get_vblank_counter) {
->>  		return dev->driver->get_vblank_counter(dev, pipe);
->> +	}
->> =20
->>  	return drm_vblank_no_hw_counter(dev, pipe);
->>  }
->> @@ -334,8 +333,7 @@ u64 drm_crtc_accurate_vblank_count(struct drm_crtc=
- *crtc)
->>  	unsigned long flags;
->> =20
->>  	WARN_ONCE(drm_debug_enabled(DRM_UT_VBL) &&
->> -		  !crtc->funcs->get_vblank_timestamp &&
->> -		  !dev->driver->get_vblank_timestamp,
->> +		  !crtc->funcs->get_vblank_timestamp,
->>  		  "This function requires support for accurate vblank timestamps.")=
-;
->> =20
->>  	spin_lock_irqsave(&dev->vblank_time_lock, flags);
->> @@ -357,13 +355,11 @@ static void __disable_vblank(struct drm_device *=
-dev, unsigned int pipe)
->>  		if (WARN_ON(!crtc))
->>  			return;
->> =20
->> -		if (crtc->funcs->disable_vblank) {
->> +		if (crtc->funcs->disable_vblank)
->>  			crtc->funcs->disable_vblank(crtc);
->> -			return;
->> -		}
->> +	} else {
->> +		dev->driver->disable_vblank(dev, pipe);
->>  	}
->> -
->> -	dev->driver->disable_vblank(dev, pipe);
->>  }
->> =20
->>  /*
->> @@ -791,9 +787,6 @@ drm_get_last_vbltimestamp(struct drm_device *dev, =
-unsigned int pipe,
->> =20
->>  		ret =3D crtc->funcs->get_vblank_timestamp(crtc, &max_error,
->>  							tvblank, in_vblank_irq);
->> -	} else if (dev->driver->get_vblank_timestamp && (max_error > 0)) {
->> -		ret =3D dev->driver->get_vblank_timestamp(dev, pipe, &max_error,
->> -							tvblank, in_vblank_irq);
->>  	}
->> =20
->>  	/* GPU high precision timestamp query unsupported or failed.
->> @@ -1016,9 +1009,11 @@ static int __enable_vblank(struct drm_device *d=
-ev, unsigned int pipe)
->> =20
->>  		if (crtc->funcs->enable_vblank)
->>  			return crtc->funcs->enable_vblank(crtc);
->> +	} else if (dev->driver->enable_vblank) {
->> +		return dev->driver->enable_vblank(dev, pipe);
->>  	}
->> =20
->> -	return dev->driver->enable_vblank(dev, pipe);
->> +	return -EINVAL;
->>  }
->> =20
->>  static int drm_vblank_enable(struct drm_device *dev, unsigned int pip=
-e)
->> @@ -1109,13 +1104,10 @@ static bool __vblank_disable_immediate(struct =
-drm_device *dev, unsigned int pipe
->>  		return false;
->> =20
->>  	crtc =3D drm_crtc_from_index(dev, pipe);
->> -	if (crtc && crtc->funcs->get_vblank_timestamp)
->> -		return true;
->> -
->> -	if (dev->driver->get_vblank_timestamp)
->> -		return true;
->> +	if (!crtc || !crtc->funcs->get_vblank_timestamp)
->> +		return false;
->> =20
->> -	return false;
->> +	return true;
->>  }
->> =20
->>  static void drm_vblank_put(struct drm_device *dev, unsigned int pipe)=
+--_000_921ff7450f2a0bb6c75807174ac26e40stcom_--
 
->> @@ -1798,7 +1790,6 @@ static void drm_handle_vblank_events(struct drm_=
-device *dev, unsigned int pipe)
->>  	struct drm_pending_vblank_event *e, *t;
->>  	ktime_t now;
->>  	u64 seq;
->> -	bool high_prec;
->> =20
->>  	assert_spin_locked(&dev->event_lock);
->> =20
->> @@ -1818,10 +1809,8 @@ static void drm_handle_vblank_events(struct drm=
-_device *dev, unsigned int pipe)
->>  		send_vblank_event(dev, e, seq, now);
->>  	}
->> =20
->> -	high_prec =3D crtc->funcs->get_vblank_timestamp ||
->> -		    dev->driver->get_vblank_timestamp;
->> -
->> -	trace_drm_vblank_event(pipe, seq, now, high_prec);
->> +	trace_drm_vblank_event(pipe, seq, now,
->> +			       crtc->funcs->get_vblank_timestamp !=3D NULL);
->>  }
->> =20
->>  /**
->> diff --git a/include/drm/drm_drv.h b/include/drm/drm_drv.h
->> index b704e252f3b2..e290b3aca6eb 100644
->> --- a/include/drm/drm_drv.h
->> +++ b/include/drm/drm_drv.h
->> @@ -268,104 +268,6 @@ struct drm_driver {
->>  	 */
->>  	void (*release) (struct drm_device *);
->> =20
->> -	/**
->> -	 * @get_vblank_counter:
->> -	 *
->> -	 * Driver callback for fetching a raw hardware vblank counter for th=
-e
->> -	 * CRTC specified with the pipe argument.  If a device doesn't have =
-a
->> -	 * hardware counter, the driver can simply leave the hook as NULL.
->> -	 * The DRM core will account for missed vblank events while interrup=
-ts
->> -	 * where disabled based on system timestamps.
->> -	 *
->> -	 * Wraparound handling and loss of events due to modesetting is deal=
-t
->> -	 * with in the DRM core code, as long as drivers call
->> -	 * drm_crtc_vblank_off() and drm_crtc_vblank_on() when disabling or
->> -	 * enabling a CRTC.
->> -	 *
->> -	 * This is deprecated and should not be used by new drivers.
->> -	 * Use &drm_crtc_funcs.get_vblank_counter instead.
->> -	 *
->> -	 * Returns:
->> -	 *
->> -	 * Raw vblank counter value.
->> -	 */
->> -	u32 (*get_vblank_counter) (struct drm_device *dev, unsigned int pipe=
-);
->> -
->> -	/**
->> -	 * @enable_vblank:
->> -	 *
->> -	 * Enable vblank interrupts for the CRTC specified with the pipe
->> -	 * argument.
->> -	 *
->> -	 * This is deprecated and should not be used by new drivers.
->> -	 * Use &drm_crtc_funcs.enable_vblank instead.
->> -	 *
->> -	 * Returns:
->> -	 *
->> -	 * Zero on success, appropriate errno if the given @crtc's vblank
->> -	 * interrupt cannot be enabled.
->> -	 */
->> -	int (*enable_vblank) (struct drm_device *dev, unsigned int pipe);
->> -
->> -	/**
->> -	 * @disable_vblank:
->> -	 *
->> -	 * Disable vblank interrupts for the CRTC specified with the pipe
->> -	 * argument.
->> -	 *
->> -	 * This is deprecated and should not be used by new drivers.
->> -	 * Use &drm_crtc_funcs.disable_vblank instead.
->> -	 */
->> -	void (*disable_vblank) (struct drm_device *dev, unsigned int pipe);
->> -
->> -	/**
->> -	 * @get_vblank_timestamp:
->> -	 *
->> -	 * Called by drm_get_last_vbltimestamp(). Should return a precise
->> -	 * timestamp when the most recent VBLANK interval ended or will end.=
-
->> -	 *
->> -	 * Specifically, the timestamp in @vblank_time should correspond as
->> -	 * closely as possible to the time when the first video scanline of
->> -	 * the video frame after the end of VBLANK will start scanning out,
->> -	 * the time immediately after end of the VBLANK interval. If the
->> -	 * @crtc is currently inside VBLANK, this will be a time in the futu=
-re.
->> -	 * If the @crtc is currently scanning out a frame, this will be the
->> -	 * past start time of the current scanout. This is meant to adhere
->> -	 * to the OpenML OML_sync_control extension specification.
->> -	 *
->> -	 * Paramters:
->> -	 *
->> -	 * dev:
->> -	 *     dev DRM device handle.
->> -	 * pipe:
->> -	 *     crtc for which timestamp should be returned.
->> -	 * max_error:
->> -	 *     Maximum allowable timestamp error in nanoseconds.
->> -	 *     Implementation should strive to provide timestamp
->> -	 *     with an error of at most max_error nanoseconds.
->> -	 *     Returns true upper bound on error for timestamp.
->> -	 * vblank_time:
->> -	 *     Target location for returned vblank timestamp.
->> -	 * in_vblank_irq:
->> -	 *     True when called from drm_crtc_handle_vblank().  Some drivers=
-
->> -	 *     need to apply some workarounds for gpu-specific vblank irq qu=
-irks
->> -	 *     if flag is set.
->> -	 *
->> -	 * Returns:
->> -	 *
->> -	 * True on success, false on failure, which means the core should
->> -	 * fallback to a simple timestamp taken in drm_crtc_handle_vblank().=
-
->> -	 *
->> -	 * FIXME:
->> -	 *
->> -	 * We should move this hook to &struct drm_crtc_funcs like all the o=
-ther
->> -	 * vblank hooks.
->> -	 */
->> -	bool (*get_vblank_timestamp) (struct drm_device *dev, unsigned int p=
-ipe,
->> -				     int *max_error,
->> -				     ktime_t *vblank_time,
->> -				     bool in_vblank_irq);
->> -
->>  	/**
->>  	 * @irq_handler:
->>  	 *
->> @@ -720,6 +622,9 @@ struct drm_driver {
->>  	int (*dma_ioctl) (struct drm_device *dev, void *data, struct drm_fil=
-e *file_priv);
->>  	int (*dma_quiescent) (struct drm_device *);
->>  	int (*context_dtor) (struct drm_device *dev, int context);
->> +	u32 (*get_vblank_counter)(struct drm_device *dev, unsigned int pipe)=
-;
->> +	int (*enable_vblank)(struct drm_device *dev, unsigned int pipe);
->> +	void (*disable_vblank)(struct drm_device *dev, unsigned int pipe);
->>  	int dev_priv_size;
->>  };
->> =20
->> --=20
->> 2.24.1
->>
->=20
-
---=20
-Thomas Zimmermann
-Graphics Driver Developer
-SUSE Software Solutions Germany GmbH
-Maxfeldstr. 5, 90409 N=C3=BCrnberg, Germany
-(HRB 36809, AG N=C3=BCrnberg)
-Gesch=C3=A4ftsf=C3=BChrer: Felix Imend=C3=B6rffer
-
-
---RAgxvS6j00AOrEMVpsfV7vPGxWhMlDzKn--
-
---hnX2ORJn5vRIQccq9Tfc7COteUkRxx61k
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEchf7rIzpz2NEoWjlaA3BHVMLeiMFAl4dxp0ACgkQaA3BHVML
-eiM2LAf+N0P4K1WKEoBwNNQG29y3+S5aPjHn2Z//V9UoNisKLZHcvcqsUvwN1Tev
-N+DXjGdRzpgPCMu8IOfQBi+fob8CKgS5i+Y1t21sqJo1YqLGdeECeVvwofurAjEp
-gNL6hGEG+TnzuuSQdn9JyAzLvwMHS9GR5aBXM3D3v8hBI5VDl3kP7RsvU6Cra2j+
-iT+fKiSwpLbjeRK/tvquY5YD2IHGhThx0foDhYHtNM+Wtp8xuVjd/fkAa8087bfY
-tbIkX44AnNJnkaSwic7tsl9YBKNnXaRDciqcblXWF8FHDpoUocuGJf9NUePvx8XU
-wL9DGhUIxUSIeSr++09yBzi5jXc6vA==
-=2kyn
------END PGP SIGNATURE-----
-
---hnX2ORJn5vRIQccq9Tfc7COteUkRxx61k--
-
---===============1741885736==
+--===============1488239741==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -451,4 +389,4 @@ Nouveau mailing list
 Nouveau@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/nouveau
 
---===============1741885736==--
+--===============1488239741==--
