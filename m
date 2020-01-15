@@ -1,47 +1,43 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 63918140549
-	for <lists+nouveau@lfdr.de>; Fri, 17 Jan 2020 09:21:37 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4166F140536
+	for <lists+nouveau@lfdr.de>; Fri, 17 Jan 2020 09:21:23 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2F0D66F452;
-	Fri, 17 Jan 2020 08:21:16 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 90BBA6F43B;
+	Fri, 17 Jan 2020 08:21:06 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 75D136E981;
- Wed, 15 Jan 2020 12:38:25 +0000 (UTC)
-X-Amp-Result: SKIPPED(no attachment in message)
+Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 936C66EABD;
+ Wed, 15 Jan 2020 14:38:12 +0000 (UTC)
+X-Amp-Result: UNKNOWN
+X-Amp-Original-Verdict: FILE UNKNOWN
 X-Amp-File-Uploaded: False
-Received: from orsmga006.jf.intel.com ([10.7.209.51])
- by orsmga103.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
- 15 Jan 2020 04:38:24 -0800
-X-IronPort-AV: E=Sophos;i="5.70,322,1574150400"; d="scan'208";a="226067880"
-Received: from jnikula-mobl3.fi.intel.com (HELO localhost) ([10.237.66.161])
- by orsmga006-auth.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
- 15 Jan 2020 04:38:16 -0800
-From: Jani Nikula <jani.nikula@linux.intel.com>
-To: Thomas Zimmermann <tzimmermann@suse.de>, airlied@linux.ie, daniel@ffwll.ch,
- alexander.deucher@amd.com, christian.koenig@amd.com, David1.Zhou@amd.com,
- maarten.lankhorst@linux.intel.com, patrik.r.jakobsson@gmail.com,
- robdclark@gmail.com, sean@poorly.run, benjamin.gaignard@linaro.org,
- vincent.abriou@st.com, yannick.fertre@st.com, philippe.cornu@st.com,
- mcoquelin.stm32@gmail.com, alexandre.torgue@st.com, eric@anholt.net,
- rodrigosiqueiramelo@gmail.com, hamohammed.sa@gmail.com,
- linux-graphics-maintainer@vmware.com, thellstrom@vmware.com,
- bskeggs@redhat.com, harry.wentland@amd.com, sunpeng.li@amd.com,
- joonas.lahtinen@linux.intel.com, rodrigo.vivi@intel.com
-In-Reply-To: <20200115121652.7050-8-tzimmermann@suse.de>
-Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
+Received: from fmsmga003.fm.intel.com ([10.253.24.29])
+ by fmsmga102.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+ 15 Jan 2020 06:38:11 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.70,322,1574150400"; d="scan'208";a="273659015"
+Received: from stinkbox.fi.intel.com (HELO stinkbox) ([10.237.72.174])
+ by FMSMGA003.fm.intel.com with SMTP; 15 Jan 2020 06:37:58 -0800
+Received: by stinkbox (sSMTP sendmail emulation);
+ Wed, 15 Jan 2020 16:37:57 +0200
+Date: Wed, 15 Jan 2020 16:37:57 +0200
+From: Ville =?iso-8859-1?Q?Syrj=E4l=E4?= <ville.syrjala@linux.intel.com>
+To: Thomas Zimmermann <tzimmermann@suse.de>
+Message-ID: <20200115143757.GZ13686@intel.com>
 References: <20200115121652.7050-1-tzimmermann@suse.de>
- <20200115121652.7050-8-tzimmermann@suse.de>
-Date: Wed, 15 Jan 2020 14:38:13 +0200
-Message-ID: <87lfq8ki8a.fsf@intel.com>
+ <20200115121652.7050-3-tzimmermann@suse.de>
 MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <20200115121652.7050-3-tzimmermann@suse.de>
+X-Patchwork-Hint: comment
+User-Agent: Mutt/1.10.1 (2018-07-13)
 X-Mailman-Approved-At: Fri, 17 Jan 2020 08:21:04 +0000
-Subject: Re: [Nouveau] [PATCH v2 07/21] drm/i915: Convert to CRTC VBLANK
- callbacks
+Subject: Re: [Nouveau] [Intel-gfx] [PATCH v2 02/21] drm: Evaluate struct
+ drm_device.vblank_disable_immediate on each use
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -53,177 +49,153 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: linux-arm-msm@vger.kernel.org, intel-gfx@lists.freedesktop.org,
- amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- Thomas Zimmermann <tzimmermann@suse.de>, nouveau@lists.freedesktop.org,
- freedreno@lists.freedesktop.org
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: hamohammed.sa@gmail.com, airlied@linux.ie, nouveau@lists.freedesktop.org,
+ joonas.lahtinen@linux.intel.com, dri-devel@lists.freedesktop.org,
+ eric@anholt.net, amd-gfx@lists.freedesktop.org, benjamin.gaignard@linaro.org,
+ alexandre.torgue@st.com, David1.Zhou@amd.com, thellstrom@vmware.com,
+ sean@poorly.run, patrik.r.jakobsson@gmail.com,
+ linux-graphics-maintainer@vmware.com, bskeggs@redhat.com,
+ harry.wentland@amd.com, mcoquelin.stm32@gmail.com, sunpeng.li@amd.com,
+ linux-arm-msm@vger.kernel.org, intel-gfx@lists.freedesktop.org,
+ maarten.lankhorst@linux.intel.com, jani.nikula@linux.intel.com,
+ rodrigo.vivi@intel.com, vincent.abriou@st.com, rodrigosiqueiramelo@gmail.com,
+ philippe.cornu@st.com, yannick.fertre@st.com, robdclark@gmail.com,
+ daniel@ffwll.ch, alexander.deucher@amd.com, freedreno@lists.freedesktop.org,
+ christian.koenig@amd.com
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, 15 Jan 2020, Thomas Zimmermann <tzimmermann@suse.de> wrote:
-> VBLANK callbacks in struct drm_driver are deprecated in favor of their
-> equivalents in struct drm_crtc_funcs. Convert i915 over.
->
-> The callback struct drm_driver.get_scanout_position() is deprecated
-> in favor of struct drm_crtc_helper_funcs.get_scanout_position().
-> i915 doesn't use CRTC helpers. Instead pass i915's implementation of
-> get_scanout_position() to DRM core's
-> drm_crtc_vblank_helper_get_vblank_timestamp_internal().
->
-> v2:
-> 	* use DRM's implementation of get_vblank_timestamp()
-> 	* simplify function names
->
+On Wed, Jan 15, 2020 at 01:16:33PM +0100, Thomas Zimmermann wrote:
+> VBLANK interrupts can be disabled immediately or with a delay, where the
+> latter is the default. The former option can be selected by setting
+> get_vblank_timestamp, and enabling vblank_disable_immediate in struct
+> drm_device.
+> =
+
+> The setup is only evaluated once when DRM initializes VBLANKs. Evaluating
+> the settings on each use of vblank_disable_immediate will allow for easy
+> integration of CRTC VBLANK functions.
+> =
+
 > Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-
-Acked-by: Jani Nikula <jani.nikula@intel.com>
-
-for the approach and for merging through whichever tree makes most
-sense, *however* needs detailed review on the whole.
-
 > ---
->  drivers/gpu/drm/i915/display/intel_display.c |  7 +++++++
->  drivers/gpu/drm/i915/i915_drv.c              |  3 ---
->  drivers/gpu/drm/i915/i915_irq.c              | 20 +++++++++++++++-----
->  drivers/gpu/drm/i915/i915_irq.h              |  6 ++----
->  4 files changed, 24 insertions(+), 12 deletions(-)
->
-> diff --git a/drivers/gpu/drm/i915/display/intel_display.c b/drivers/gpu/drm/i915/display/intel_display.c
-> index 59c375879186..c8f1da845e7d 100644
-> --- a/drivers/gpu/drm/i915/display/intel_display.c
-> +++ b/drivers/gpu/drm/i915/display/intel_display.c
-> @@ -16336,6 +16336,7 @@ static const struct drm_crtc_funcs bdw_crtc_funcs = {
->  	.get_vblank_counter = g4x_get_vblank_counter,
->  	.enable_vblank = bdw_enable_vblank,
->  	.disable_vblank = bdw_disable_vblank,
-> +	.get_vblank_timestamp = i915_crtc_get_vblank_timestamp,
->  };
->  
->  static const struct drm_crtc_funcs ilk_crtc_funcs = {
-> @@ -16344,6 +16345,7 @@ static const struct drm_crtc_funcs ilk_crtc_funcs = {
->  	.get_vblank_counter = g4x_get_vblank_counter,
->  	.enable_vblank = ilk_enable_vblank,
->  	.disable_vblank = ilk_disable_vblank,
-> +	.get_vblank_timestamp = i915_crtc_get_vblank_timestamp,
->  };
->  
->  static const struct drm_crtc_funcs g4x_crtc_funcs = {
-> @@ -16352,6 +16354,7 @@ static const struct drm_crtc_funcs g4x_crtc_funcs = {
->  	.get_vblank_counter = g4x_get_vblank_counter,
->  	.enable_vblank = i965_enable_vblank,
->  	.disable_vblank = i965_disable_vblank,
-> +	.get_vblank_timestamp = i915_crtc_get_vblank_timestamp,
->  };
->  
->  static const struct drm_crtc_funcs i965_crtc_funcs = {
-> @@ -16360,6 +16363,7 @@ static const struct drm_crtc_funcs i965_crtc_funcs = {
->  	.get_vblank_counter = i915_get_vblank_counter,
->  	.enable_vblank = i965_enable_vblank,
->  	.disable_vblank = i965_disable_vblank,
-> +	.get_vblank_timestamp = i915_crtc_get_vblank_timestamp,
->  };
->  
->  static const struct drm_crtc_funcs i915gm_crtc_funcs = {
-> @@ -16368,6 +16372,7 @@ static const struct drm_crtc_funcs i915gm_crtc_funcs = {
->  	.get_vblank_counter = i915_get_vblank_counter,
->  	.enable_vblank = i915gm_enable_vblank,
->  	.disable_vblank = i915gm_disable_vblank,
-> +	.get_vblank_timestamp = i915_crtc_get_vblank_timestamp,
->  };
->  
->  static const struct drm_crtc_funcs i915_crtc_funcs = {
-> @@ -16376,6 +16381,7 @@ static const struct drm_crtc_funcs i915_crtc_funcs = {
->  	.get_vblank_counter = i915_get_vblank_counter,
->  	.enable_vblank = i8xx_enable_vblank,
->  	.disable_vblank = i8xx_disable_vblank,
-> +	.get_vblank_timestamp = i915_crtc_get_vblank_timestamp,
->  };
->  
->  static const struct drm_crtc_funcs i8xx_crtc_funcs = {
-> @@ -16384,6 +16390,7 @@ static const struct drm_crtc_funcs i8xx_crtc_funcs = {
->  	/* no hw vblank counter */
->  	.enable_vblank = i8xx_enable_vblank,
->  	.disable_vblank = i8xx_disable_vblank,
-> +	.get_vblank_timestamp = i915_crtc_get_vblank_timestamp,
->  };
->  
->  static struct intel_crtc *intel_crtc_alloc(void)
-> diff --git a/drivers/gpu/drm/i915/i915_drv.c b/drivers/gpu/drm/i915/i915_drv.c
-> index f7385abdd74b..30b9ba136a81 100644
-> --- a/drivers/gpu/drm/i915/i915_drv.c
-> +++ b/drivers/gpu/drm/i915/i915_drv.c
-> @@ -2769,9 +2769,6 @@ static struct drm_driver driver = {
->  	.gem_prime_export = i915_gem_prime_export,
->  	.gem_prime_import = i915_gem_prime_import,
->  
-> -	.get_vblank_timestamp = drm_calc_vbltimestamp_from_scanoutpos,
-> -	.get_scanout_position = i915_get_crtc_scanoutpos,
+>  drivers/gpu/drm/drm_vblank.c | 31 ++++++++++++++-----------------
+>  1 file changed, 14 insertions(+), 17 deletions(-)
+> =
+
+> diff --git a/drivers/gpu/drm/drm_vblank.c b/drivers/gpu/drm/drm_vblank.c
+> index 3f1dd54cc8bb..abb085c67d82 100644
+> --- a/drivers/gpu/drm/drm_vblank.c
+> +++ b/drivers/gpu/drm/drm_vblank.c
+> @@ -481,19 +481,6 @@ int drm_vblank_init(struct drm_device *dev, unsigned=
+ int num_crtcs)
+>  =
+
+>  	DRM_INFO("Supports vblank timestamp caching Rev 2 (21.10.2013).\n");
+>  =
+
+> -	/* Driver specific high-precision vblank timestamping supported? */
+> -	if (dev->driver->get_vblank_timestamp)
+> -		DRM_INFO("Driver supports precise vblank timestamp query.\n");
+> -	else
+> -		DRM_INFO("No driver support for vblank timestamp query.\n");
 > -
->  	.dumb_create = i915_gem_dumb_create,
->  	.dumb_map_offset = i915_gem_dumb_mmap_offset,
->  
-> diff --git a/drivers/gpu/drm/i915/i915_irq.c b/drivers/gpu/drm/i915/i915_irq.c
-> index afc6aad9bf8c..c39e3ef6e4a2 100644
-> --- a/drivers/gpu/drm/i915/i915_irq.c
-> +++ b/drivers/gpu/drm/i915/i915_irq.c
-> @@ -762,13 +762,15 @@ static int __intel_get_crtc_scanline(struct intel_crtc *crtc)
->  	return (position + crtc->scanline_offset) % vtotal;
+> -	/* Must have precise timestamping for reliable vblank instant disable */
+> -	if (dev->vblank_disable_immediate && !dev->driver->get_vblank_timestamp=
+) {
+> -		dev->vblank_disable_immediate =3D false;
+> -		DRM_INFO("Setting vblank_disable_immediate to false because "
+> -			 "get_vblank_timestamp =3D=3D NULL\n");
+> -	}
+
+Which drivers are so broken they set vblank_disable_immediate to true
+without having the vfunc specified? IMO this code should just go away
+(or converted to a WARN).
+
+> -
+>  	return 0;
+>  =
+
+>  err:
+> @@ -1070,6 +1057,15 @@ int drm_crtc_vblank_get(struct drm_crtc *crtc)
 >  }
->  
-> -bool i915_get_crtc_scanoutpos(struct drm_device *dev, unsigned int index,
-> -			      bool in_vblank_irq, int *vpos, int *hpos,
-> -			      ktime_t *stime, ktime_t *etime,
-> -			      const struct drm_display_mode *mode)
-> +static bool i915_get_crtc_scanoutpos(struct drm_crtc *dcrtc,
-> +				     bool in_vblank_irq,
-> +				     int *vpos, int *hpos,
-> +				     ktime_t *stime, ktime_t *etime,
-> +				     const struct drm_display_mode *mode)
->  {
-> +	struct drm_device *dev = dcrtc->dev;
->  	struct drm_i915_private *dev_priv = to_i915(dev);
-> -	struct intel_crtc *crtc = to_intel_crtc(drm_crtc_from_index(dev, index));
-> +	struct intel_crtc *crtc = to_intel_crtc(dcrtc);
->  	enum pipe pipe = crtc->pipe;
->  	int position;
->  	int vbl_start, vbl_end, hsync_start, htotal, vtotal;
-> @@ -879,6 +881,14 @@ bool i915_get_crtc_scanoutpos(struct drm_device *dev, unsigned int index,
->  	return true;
->  }
->  
-> +bool i915_crtc_get_vblank_timestamp(struct drm_crtc *crtc, int *max_error,
-> +				    ktime_t *vblank_time, bool in_vblank_irq)
+>  EXPORT_SYMBOL(drm_crtc_vblank_get);
+>  =
+
+> +static bool __vblank_disable_immediate(struct drm_device *dev, unsigned =
+int pipe)
 > +{
-> +	return drm_crtc_vblank_helper_get_vblank_timestamp_internal(
-> +		crtc, max_error, vblank_time, in_vblank_irq,
-> +		i915_get_crtc_scanoutpos);
+> +	if (!dev->vblank_disable_immediate)
+> +		return false;
+> +	if (!dev->driver->get_vblank_timestamp)
+> +		return false;
+> +	return true;
 > +}
 > +
->  int intel_get_crtc_scanline(struct intel_crtc *crtc)
+>  static void drm_vblank_put(struct drm_device *dev, unsigned int pipe)
 >  {
->  	struct drm_i915_private *dev_priv = to_i915(crtc->base.dev);
-> diff --git a/drivers/gpu/drm/i915/i915_irq.h b/drivers/gpu/drm/i915/i915_irq.h
-> index 812c47a9c2d6..53ec921c1c67 100644
-> --- a/drivers/gpu/drm/i915/i915_irq.h
-> +++ b/drivers/gpu/drm/i915/i915_irq.h
-> @@ -101,10 +101,8 @@ void gen8_irq_power_well_post_enable(struct drm_i915_private *dev_priv,
->  void gen8_irq_power_well_pre_disable(struct drm_i915_private *dev_priv,
->  				     u8 pipe_mask);
->  
-> -bool i915_get_crtc_scanoutpos(struct drm_device *dev, unsigned int pipe,
-> -			      bool in_vblank_irq, int *vpos, int *hpos,
-> -			      ktime_t *stime, ktime_t *etime,
-> -			      const struct drm_display_mode *mode);
-> +bool i915_crtc_get_vblank_timestamp(struct drm_crtc *crtc, int *max_error,
-> +				    ktime_t *vblank_time, bool in_vblank_irq);
->  
->  u32 i915_get_vblank_counter(struct drm_crtc *crtc);
->  u32 g4x_get_vblank_counter(struct drm_crtc *crtc);
+>  	struct drm_vblank_crtc *vblank =3D &dev->vblank[pipe];
+> @@ -1086,7 +1082,7 @@ static void drm_vblank_put(struct drm_device *dev, =
+unsigned int pipe)
+>  			return;
+>  		else if (drm_vblank_offdelay < 0)
+>  			vblank_disable_fn(&vblank->disable_timer);
+> -		else if (!dev->vblank_disable_immediate)
+> +		else if (__vblank_disable_immediate(dev, pipe))
+>  			mod_timer(&vblank->disable_timer,
+>  				  jiffies + ((drm_vblank_offdelay * HZ)/1000));
+>  	}
+> @@ -1663,7 +1659,7 @@ int drm_wait_vblank_ioctl(struct drm_device *dev, v=
+oid *data,
+>  	/* If the counter is currently enabled and accurate, short-circuit
+>  	 * queries to return the cached timestamp of the last vblank.
+>  	 */
+> -	if (dev->vblank_disable_immediate &&
+> +	if (__vblank_disable_immediate(dev, pipe) &&
+>  	    drm_wait_vblank_is_query(vblwait) &&
+>  	    READ_ONCE(vblank->enabled)) {
+>  		drm_wait_vblank_reply(dev, pipe, &vblwait->reply);
+> @@ -1820,7 +1816,7 @@ bool drm_handle_vblank(struct drm_device *dev, unsi=
+gned int pipe)
+>  	 * been signaled. The disable has to be last (after
+>  	 * drm_handle_vblank_events) so that the timestamp is always accurate.
+>  	 */
+> -	disable_irq =3D (dev->vblank_disable_immediate &&
+> +	disable_irq =3D (__vblank_disable_immediate(dev, pipe) &&
+>  		       drm_vblank_offdelay > 0 &&
+>  		       !atomic_read(&vblank->refcount));
+>  =
 
--- 
-Jani Nikula, Intel Open Source Graphics Center
+> @@ -1893,7 +1889,8 @@ int drm_crtc_get_sequence_ioctl(struct drm_device *=
+dev, void *data,
+>  	pipe =3D drm_crtc_index(crtc);
+>  =
+
+>  	vblank =3D &dev->vblank[pipe];
+> -	vblank_enabled =3D dev->vblank_disable_immediate && READ_ONCE(vblank->e=
+nabled);
+> +	vblank_enabled =3D __vblank_disable_immediate(dev, pipe) &&
+> +			 READ_ONCE(vblank->enabled);
+>  =
+
+>  	if (!vblank_enabled) {
+>  		ret =3D drm_crtc_vblank_get(crtc);
+> -- =
+
+> 2.24.1
+> =
+
+> _______________________________________________
+> Intel-gfx mailing list
+> Intel-gfx@lists.freedesktop.org
+> https://lists.freedesktop.org/mailman/listinfo/intel-gfx
+
+-- =
+
+Ville Syrj=E4l=E4
+Intel
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
