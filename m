@@ -2,58 +2,57 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9992213CFAB
-	for <lists+nouveau@lfdr.de>; Wed, 15 Jan 2020 23:05:33 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0ECFF13CFCA
+	for <lists+nouveau@lfdr.de>; Wed, 15 Jan 2020 23:09:54 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B78816EB64;
-	Wed, 15 Jan 2020 22:05:30 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 2D99A6EB66;
+	Wed, 15 Jan 2020 22:09:51 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from hqnvemgate24.nvidia.com (hqnvemgate24.nvidia.com
  [216.228.121.143])
- by gabe.freedesktop.org (Postfix) with ESMTPS id ADD526EB64
- for <nouveau@lists.freedesktop.org>; Wed, 15 Jan 2020 22:05:29 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B468F6EB66
+ for <nouveau@lists.freedesktop.org>; Wed, 15 Jan 2020 22:09:49 +0000 (UTC)
 Received: from hqpgpgate101.nvidia.com (Not Verified[216.228.121.13]) by
  hqnvemgate24.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
- id <B5e1f8c710000>; Wed, 15 Jan 2020 14:04:33 -0800
+ id <B5e1f8d750000>; Wed, 15 Jan 2020 14:08:53 -0800
 Received: from hqmail.nvidia.com ([172.20.161.6])
  by hqpgpgate101.nvidia.com (PGP Universal service);
- Wed, 15 Jan 2020 14:05:29 -0800
+ Wed, 15 Jan 2020 14:09:49 -0800
 X-PGP-Universal: processed;
- by hqpgpgate101.nvidia.com on Wed, 15 Jan 2020 14:05:29 -0800
+ by hqpgpgate101.nvidia.com on Wed, 15 Jan 2020 14:09:49 -0800
 Received: from rcampbell-dev.nvidia.com (10.124.1.5) by HQMAIL107.nvidia.com
  (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Wed, 15 Jan
- 2020 22:05:24 +0000
+ 2020 22:09:47 +0000
 To: Jason Gunthorpe <jgg@mellanox.com>
 References: <20200113224703.5917-1-rcampbell@nvidia.com>
- <20200113224703.5917-5-rcampbell@nvidia.com>
- <20200114124956.GN20978@mellanox.com>
+ <20200113224703.5917-6-rcampbell@nvidia.com>
+ <20200114125957.GO20978@mellanox.com>
 X-Nvconfidentiality: public
 From: Ralph Campbell <rcampbell@nvidia.com>
-Message-ID: <528c1cff-608c-d342-1e72-90d780555204@nvidia.com>
-Date: Wed, 15 Jan 2020 14:05:24 -0800
+Message-ID: <5845f50e-8bc0-8068-ee21-4f910beb1255@nvidia.com>
+Date: Wed, 15 Jan 2020 14:09:47 -0800
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.1.0
 MIME-Version: 1.0
-In-Reply-To: <20200114124956.GN20978@mellanox.com>
+In-Reply-To: <20200114125957.GO20978@mellanox.com>
 X-Originating-IP: [10.124.1.5]
 X-ClientProxiedBy: HQMAIL101.nvidia.com (172.20.187.10) To
  HQMAIL107.nvidia.com (172.20.187.13)
 Content-Language: en-US
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
- t=1579125873; bh=THfPEihvnXha/ZAsoeHLMyQALJLZvNsiB8lapA3uV7s=;
+ t=1579126133; bh=MrPAo3JYk8FBujvLNtKq6DWwwZ/JG+mRPmzFu/yBjJw=;
  h=X-PGP-Universal:Subject:To:CC:References:X-Nvconfidentiality:From:
  Message-ID:Date:User-Agent:MIME-Version:In-Reply-To:
  X-Originating-IP:X-ClientProxiedBy:Content-Type:Content-Language:
  Content-Transfer-Encoding;
- b=aK0r0qzRe3LL4PZNNQF34X9swSBE5W0PHzaJ16joN7727655IDaVZCMY7EekgCaUu
- 1RFbSpx/YbAPzUYrwRhZIng2dmhPiu/9QTQAjShtmI96eN6fTIEMxqZX/c+XJMLHrL
- kh+A0oXsJioOBNrZZN5C1D4GRmuVf4DsYTs7lGO+OvdEqbiMZdXyjSWf4ouXIwfy46
- whLa+qWHzzwdEkWxOIm8KdlGeh1keYvkMXk1LUeHqZseIwAo19ZOveJVl0bIu0zGnY
- psGlkKBjVp9U9sYpKqnKMB3qpI8EgEprrf1FYOxFEWiDVE/nUIe0g2m9UN8F4A5E/X
- 53r6K6Lc6ZTVA==
-Subject: Re: [Nouveau] [PATCH v6 4/6] mm/mmu_notifier: add
- mmu_interval_notifier_find()
+ b=KCgZjjbOGVCpUcfnChF384KmkaGikg8T6aZB4wVHsbXn2C1/0pliAetYAxMgTQMxD
+ B8vI2r9Qjv0bebJ9qS1kn0pd8cz4DE+kdv8w/JUkHof0rlVOouItkJRdwz8sjDOF9J
+ yHHiUVDAENAhVABED5w96PCfcvNcGIMS1+C8RqSjhzNhSXeBFRLndK7yGHhnP0hxEB
+ RPu6UY+B29DHxqrWT8mmwyVbptzp3vhtO3RRPBv8epmEnBWwFC5TCvJGTK+5KMOZmP
+ y1by/vT2WwyWkWLuhsg5hHukOep6w2LcD2b6p4l2Tx2rrjqpELpD9l7ehajJyG8mG0
+ CojieB3MGsX5g==
+Subject: Re: [Nouveau] [PATCH v6 5/6] nouveau: use new mmu interval notifiers
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -78,72 +77,139 @@ Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
-On 1/14/20 4:49 AM, Jason Gunthorpe wrote:
-> On Mon, Jan 13, 2020 at 02:47:01PM -0800, Ralph Campbell wrote:
->> diff --git a/mm/mmu_notifier.c b/mm/mmu_notifier.c
->> index 47ad9cc89aab..4efecc0f13cb 100644
->> +++ b/mm/mmu_notifier.c
->> @@ -1171,6 +1171,39 @@ void mmu_interval_notifier_update(struct mmu_interval_notifier *mni,
->>   }
->>   EXPORT_SYMBOL_GPL(mmu_interval_notifier_update);
->>   
->> +struct mmu_interval_notifier *mmu_interval_notifier_find(struct mm_struct *mm,
->> +				const struct mmu_interval_notifier_ops *ops,
->> +				unsigned long start, unsigned long last)
->> +{
->> +	struct mmu_notifier_mm *mmn_mm = mm->mmu_notifier_mm;
->> +	struct interval_tree_node *node;
+On 1/14/20 5:00 AM, Jason Gunthorpe wrote:
+> On Mon, Jan 13, 2020 at 02:47:02PM -0800, Ralph Campbell wrote:
+>>   void
+>>   nouveau_svmm_fini(struct nouveau_svmm **psvmm)
+>>   {
+>>   	struct nouveau_svmm *svmm = *psvmm;
 >> +	struct mmu_interval_notifier *mni;
->> +	struct mmu_interval_notifier *res = NULL;
 >> +
->> +	spin_lock(&mmn_mm->lock);
->> +	node = interval_tree_iter_first(&mmn_mm->itree, start, last);
->> +	if (node) {
->> +		mni = container_of(node, struct mmu_interval_notifier,
->> +				   interval_tree);
+>>   	if (svmm) {
+>>   		mutex_lock(&svmm->mutex);
 >> +		while (true) {
->> +			if (mni->ops == ops) {
->> +				res = mni;
+>> +			mni = mmu_interval_notifier_find(svmm->mm,
+>> +					&nouveau_svm_mni_ops, 0UL, ~0UL);
+>> +			if (!mni)
 >> +				break;
->> +			}
->> +			node = interval_tree_iter_next(&mni->interval_tree,
->> +						       start, last);
->> +			if (!node)
->> +				break;
->> +			mni = container_of(node, struct mmu_interval_notifier,
->> +					   interval_tree);
+>> +			mmu_interval_notifier_put(mni);
+> 
+> Oh, now I really don't like the name 'put'. It looks like mni is
+> refcounted here, and it isn't. put should be called 'remove_deferred'
+
+OK.
+
+> And then you also need a way to barrier this scheme on driver unload.
+
+Good point. I can add something like
+void mmu_interval_notifier_synchronize(struct mm_struct *mm)
+that waits for deferred operations to complete similar to
+mmu_interval_read_begin().
+
 >> +		}
->> +	}
->> +	spin_unlock(&mmn_mm->lock);
+>>   		svmm->vmm = NULL;
+>>   		mutex_unlock(&svmm->mutex);
+>> -		mmu_notifier_put(&svmm->notifier);
 > 
-> This doesn't seem safe at all, here we are returning a pointer to
-> memory from the interval tree with out any kind of lifetime
-> protection.
-
-It is memory that the driver has allocated and has full control over
-the lifetime since the driver does all the insertions and removals.
-The driver does have to hold the HW page table lock so lookups are
-synchronized with interval insertions and removals and page table
-entry insertions and removals.
-
-> If the interval tree is read it must be left in the read lock state
-> until the caller is done with the pointer.
+> While here it was actually a refcount.
 > 
-> .. and this poses all sorts of questions about consistency with items
-> on the deferred list. Should find return an item undergoing deletion?
+>> +static void nouveau_svmm_do_unmap(struct mmu_interval_notifier *mni,
+>> +				 const struct mmu_notifier_range *range)
+>> +{
+>> +	struct svmm_interval *smi =
+>> +		container_of(mni, struct svmm_interval, notifier);
+>> +	struct nouveau_svmm *svmm = smi->svmm;
+>> +	unsigned long start = mmu_interval_notifier_start(mni);
+>> +	unsigned long last = mmu_interval_notifier_last(mni);
+> 
+> This whole algorithm only works if it is protected by the read side of
+> the interval tree lock. Deserves at least a comment if not an
+> assertion too.
 
-I don't think so. The deferred operations are all complete when
-mmu_interval_read_begin() returns, and the sequence number check
-with mmu_interval_read_retry() guarantees there have been no changes
-while not holding the driver page table lock and calling hmm_range_fault().
+This is called from the invalidate() callback and while holding the
+driver page table lock so the struct mmu_interval_notifier and
+the interval tree can't change.
+I will add comments for v7.
 
-> Should find return items using the old interval tree values or their
-> new updated values?
+>>   static int nouveau_range_fault(struct nouveau_svmm *svmm,
+>>   			       struct nouveau_drm *drm, void *data, u32 size,
+>> -			       u64 *pfns, struct svm_notifier *notifier)
+>> +			       u64 *pfns, u64 start, u64 end)
+>>   {
+>>   	unsigned long timeout =
+>>   		jiffies + msecs_to_jiffies(HMM_RANGE_DEFAULT_TIMEOUT);
+>>   	/* Have HMM fault pages within the fault window to the GPU. */
+>>   	struct hmm_range range = {
+>> -		.notifier = &notifier->notifier,
+>> -		.start = notifier->notifier.interval_tree.start,
+>> -		.end = notifier->notifier.interval_tree.last + 1,
+>> +		.start = start,
+>> +		.end = end,
+>>   		.pfns = pfns,
+>>   		.flags = nouveau_svm_pfn_flags,
+>>   		.values = nouveau_svm_pfn_values,
+>> +		.default_flags = 0,
+>> +		.pfn_flags_mask = ~0UL,
+>>   		.pfn_shift = NVIF_VMM_PFNMAP_V0_ADDR_SHIFT,
+>>   	};
+>> -	struct mm_struct *mm = notifier->notifier.mm;
+>> +	struct mm_struct *mm = svmm->mm;
+>>   	long ret;
+>>   
+>>   	while (true) {
+>>   		if (time_after(jiffies, timeout))
+>>   			return -EBUSY;
+>>   
+>> -		range.notifier_seq = mmu_interval_read_begin(range.notifier);
+>> -		range.default_flags = 0;
+>> -		range.pfn_flags_mask = -1UL;
+>>   		down_read(&mm->mmap_sem);
+> 
+> mmap sem doesn't have to be held for the interval search, and again we
+> have lifetime issues with the membership here.
+
+I agree mmap_sem isn't needed for the interval search, it is needed if
+the search doesn't find a registered interval and one needs to be created
+to cover the underlying VMA. If an arbitrary size interval was created
+instead, then mmap_sem wouldn't be needed.
+I don't understand the lifetime/membership issue. The driver is the only thing
+that allocates, inserts, or removes struct mmu_interval_notifier and thus
+completely controls the lifetime.
+
+>> +		ret = nouveau_svmm_interval_find(svmm, &range);
+>> +		if (ret) {
+>> +			up_read(&mm->mmap_sem);
+>> +			return ret;
+>> +		}
+>> +		range.notifier_seq = mmu_interval_read_begin(range.notifier);
+>>   		ret = hmm_range_fault(&range, 0);
+>>   		up_read(&mm->mmap_sem);
+>>   		if (ret <= 0) {
+> 
+> I'm still not sure this is a better approach than what ODP does. It
+> looks very expensive on the fault path..
 > 
 > Jason
+> 
 
-I think it should only look at the old interval tree and not the deferred
-insert/remove/updates as explained above.
+ODP doesn't have this problem because users have to call ib_reg_mr()
+before any I/O can happen to the process address space. That is when
+mmu_interval_notifier_insert() / mmu_interval_notifier_remove() can
+be called and the driver doesn't have to worry about the interval
+changing sizes or being removed while I/O is happening.
+For GPU like devices, I'm trying to allow hardware access to any user
+level address without pre-registering it. That means inserting mmu
+interval notifiers for the ranges the GPU page faults on and updating
+the intervals as munmap() calls remove parts of the address space.
+I don't want to register an interval per page so the logical range
+is the underlying VMA.
+
+It isn't that expensive, there is an extra driver lock/unlock as
+part of the lookup and possibly a find_vma() and kmalloc(GFP_ATOMIC)
+for new intervals. Also, the deferred interval updates for munmap().
+Compared to the cost of updating PTEs in the device and GPU fault
+handling, this is minimal overhead.
+
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
