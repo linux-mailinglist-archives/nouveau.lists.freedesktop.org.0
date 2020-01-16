@@ -2,69 +2,98 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8B8D113DD18
-	for <lists+nouveau@lfdr.de>; Thu, 16 Jan 2020 15:11:45 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B2BB013DF6C
+	for <lists+nouveau@lfdr.de>; Thu, 16 Jan 2020 17:00:13 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D880A6ED2D;
-	Thu, 16 Jan 2020 14:11:43 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 66ACF6EDAA;
+	Thu, 16 Jan 2020 16:00:10 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-qk1-x743.google.com (mail-qk1-x743.google.com
- [IPv6:2607:f8b0:4864:20::743])
- by gabe.freedesktop.org (Postfix) with ESMTPS id CD4696ED2D
- for <nouveau@lists.freedesktop.org>; Thu, 16 Jan 2020 14:11:42 +0000 (UTC)
-Received: by mail-qk1-x743.google.com with SMTP id w127so19147489qkb.11
- for <nouveau@lists.freedesktop.org>; Thu, 16 Jan 2020 06:11:42 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ziepe.ca; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to:user-agent;
- bh=E4TXCvIZZmY4SQCWQzeLR1MFoYNB31lrG2Qln+AaBO4=;
- b=JFr3/SZ3UQPbE6tN0WIDrmGEvvrNPfsLSUjntfSPf4H8CaB9Ec8m1JVzlwKdxQI7bR
- 3Wf7o15qkWvfU2BrXgUqDa/P5/s3JU86YwmHmVDJgHJVZpC48Wq+GwpiH70SVGZXzNCW
- tUB0BZs20iU/qGmkxxbEKTg+rfI7uWyRi6HD7SwwKfn6eeOx5NXa2L4khYzmYqdU/Q73
- XJzZwnq1+SkVZNFtHtVAhdji1nJv/bWhk/VqEp4wX7VCiTOc5nBu+Cv/vpBioS4yMhnI
- nFwmiDzAw7e0YnFmBSZ6FJ2C6Eprq+qfGs/8uk/SzOBENKSHugI2ZSccx15T3V2aqTrv
- rb8Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to:user-agent;
- bh=E4TXCvIZZmY4SQCWQzeLR1MFoYNB31lrG2Qln+AaBO4=;
- b=TUt0H1lBFmIMoDm4/wD/gDLwkXyvYfkIWAfuZOf70dP6mYXASoNoX7nmN444gepxwh
- VHmcTkzm1S/2ICXhED1T9Z2AeBy1QiodhWCQNdkB8AXjfwltJYPMYOQMWVyKX1IUr07b
- 4qT85iIpr1Qt0sDxWo88wDMhTLyx2FxWek5ZPf9ndMNOREUXUz/7ve2pZ26bWSFt0cOr
- +s2EBOaZvbLiaVz6nxoJtPH8IITt9uMqx4WFhVY5SByyujIZYb3oZ6FD6fGILxDVL8Cq
- t7leDc6nUmq3KbpCQ+OAoQ32T4yLjXeI4Rttxemx9SFIRkfpHLloj9ngXVEWFK+tbP3/
- 5zLA==
-X-Gm-Message-State: APjAAAWQHbB+ll+ARZW4kVoDgq7mEmhNgMeXp0TpUKnoy9DgjzK6nTwf
- ZAmWPubXUHKZjv1whbXiUEpC4v1fLXM=
-X-Google-Smtp-Source: APXvYqx6uZpu4GcW1N0sXEyw9K5yx2S6JPwxGtld6dzchDnf5W2zeuoRuG/8THysf1WiLlTh8VyUTg==
-X-Received: by 2002:a37:5fc2:: with SMTP id
- t185mr32372460qkb.271.1579183901908; 
- Thu, 16 Jan 2020 06:11:41 -0800 (PST)
-Received: from ziepe.ca
- (hlfxns017vw-142-68-57-212.dhcp-dynamic.fibreop.ns.bellaliant.net.
- [142.68.57.212])
- by smtp.gmail.com with ESMTPSA id g53sm11292147qtk.76.2020.01.16.06.11.40
- (version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
- Thu, 16 Jan 2020 06:11:41 -0800 (PST)
-Received: from jgg by mlx.ziepe.ca with local (Exim 4.90_1)
- (envelope-from <jgg@ziepe.ca>)
- id 1is5s4-0003yp-CZ; Thu, 16 Jan 2020 10:11:40 -0400
-Date: Thu, 16 Jan 2020 10:11:40 -0400
-From: Jason Gunthorpe <jgg@ziepe.ca>
+Received: from EUR02-VE1-obe.outbound.protection.outlook.com
+ (mail-eopbgr20042.outbound.protection.outlook.com [40.107.2.42])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 79FAE89D66
+ for <nouveau@lists.freedesktop.org>; Thu, 16 Jan 2020 16:00:09 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=H7iuwfJMW/KTuiV1yeKh2Z7kplBtIe4fTUSSO0HHsRPCkOzA/xkGYD4Rr/ahoEj9Yfx9sI5Nliyc3OQB4DGkImx19cBH/X91jNllo+bhbPclMH5hsmEAxxOoYw5KxMjRyjEjdDXHlzM6/xrF7IIfJiCO+Ku20X1XzmEFHn0qwazJjWm5Yo2ai7sTKxuUlvn0NXPHY+ekScVkDC6CrfPh53OmNknhJKcGcLoJqyU39v6ESd0fHeQ8Y2+o+6o4SSdSqMuhBGGEWkFqzRqa41NvCqAkikNEniNmFFDz7/R5DHSa2hkVbgW1k+3m+05ZJEdoiamdS8stWUpGb+TjibKMSA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=z3tizVRyq4GUFAfNZmbiLXUnh733M/F+zveIQUtZh9o=;
+ b=LQBA1LGzHXUtAs7ZH8Y0iLJY047XHSXtqpQLfl+s+16nvh0BFhG8IifrDzzEj1Tbv4iKgcT6XS7FICPTFcosbXjOOcVnOYHPklcr6QIiAKlnA10M4jqXJy39Z3U23F3EioOr2eqqj9c5mWc2MzLDDHbW/x//8Ztluej/y1rGx9kduJ921+2KAH4V3meaM1f0E3gDKpL424/1MGu7pEz5KDLxqmZK0IWVM5VnvqFpx0+zyfhDH9kJVwKN1mqYpeDQzkzqGzaADVUt7I4TmFAc0hIU5fZ6eFz9z580ExHWyfas0kzrdJfaLOtGgKM/l6BLXCkohyHbNjSQfMmuIgRQ9w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=mellanox.com; dmarc=pass action=none header.from=mellanox.com;
+ dkim=pass header.d=mellanox.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Mellanox.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=z3tizVRyq4GUFAfNZmbiLXUnh733M/F+zveIQUtZh9o=;
+ b=nEBNDEmLL4utovFupHHfBAyxNQTrdAFDVy+U7z2HSF31naKLiUROZGEqgH2AlU0Lkqo+BvnBHf9M9639SZLNXxYLq+0nWNJjTlu7iTXE5ahSdSQJMAwLbaKSUri6Xp2GjTdVHoU0ySntb38+qmVt5l1QPENVFfxoXBVsjlLK7Gw=
+Received: from VI1PR05MB4141.eurprd05.prod.outlook.com (52.133.14.15) by
+ VI1PR05MB6768.eurprd05.prod.outlook.com (10.186.162.152) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.2644.18; Thu, 16 Jan 2020 16:00:07 +0000
+Received: from VI1PR05MB4141.eurprd05.prod.outlook.com
+ ([fe80::1c00:7925:d5c6:d60d]) by VI1PR05MB4141.eurprd05.prod.outlook.com
+ ([fe80::1c00:7925:d5c6:d60d%7]) with mapi id 15.20.2644.015; Thu, 16 Jan 2020
+ 16:00:07 +0000
+Received: from mlx.ziepe.ca (142.68.57.212) by
+ BN6PR14CA0029.namprd14.prod.outlook.com (2603:10b6:404:13f::15) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2644.18 via Frontend
+ Transport; Thu, 16 Jan 2020 16:00:06 +0000
+Received: from jgg by mlx.ziepe.ca with local (Exim 4.90_1)	(envelope-from
+ <jgg@mellanox.com>)	id 1is7Yw-0006Jf-JR; Thu, 16 Jan 2020 12:00:02 -0400
+From: Jason Gunthorpe <jgg@mellanox.com>
 To: Ralph Campbell <rcampbell@nvidia.com>
-Message-ID: <20200116141140.GA10759@ziepe.ca>
+Thread-Topic: [PATCH v6 5/6] nouveau: use new mmu interval notifiers
+Thread-Index: AQHVymNqjXzbt52uukWssUL4CQa1/qfqIESAgAIr9ICAASsGAA==
+Date: Thu, 16 Jan 2020 16:00:06 +0000
+Message-ID: <20200116160002.GL20978@mellanox.com>
 References: <20200113224703.5917-1-rcampbell@nvidia.com>
- <20200113224703.5917-5-rcampbell@nvidia.com>
- <20200114124956.GN20978@mellanox.com>
- <528c1cff-608c-d342-1e72-90d780555204@nvidia.com>
+ <20200113224703.5917-6-rcampbell@nvidia.com>
+ <20200114125957.GO20978@mellanox.com>
+ <5845f50e-8bc0-8068-ee21-4f910beb1255@nvidia.com>
+In-Reply-To: <5845f50e-8bc0-8068-ee21-4f910beb1255@nvidia.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-clientproxiedby: BN6PR14CA0029.namprd14.prod.outlook.com
+ (2603:10b6:404:13f::15) To VI1PR05MB4141.eurprd05.prod.outlook.com
+ (2603:10a6:803:44::15)
+authentication-results: spf=none (sender IP is )
+ smtp.mailfrom=jgg@mellanox.com; 
+x-ms-exchange-messagesentrepresentingtype: 1
+x-originating-ip: [142.68.57.212]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-ht: Tenant
+x-ms-office365-filtering-correlation-id: 7e34af3e-9c2a-4b8f-7dfa-08d79a9d2809
+x-ms-traffictypediagnostic: VI1PR05MB6768:
+x-microsoft-antispam-prvs: <VI1PR05MB6768856DE0040FF47E7CC132CF360@VI1PR05MB6768.eurprd05.prod.outlook.com>
+x-ms-oob-tlc-oobclassifiers: OLM:10000;
+x-forefront-prvs: 02843AA9E0
+x-forefront-antispam-report: SFV:NSPM;
+ SFS:(10009020)(4636009)(366004)(396003)(136003)(346002)(376002)(39860400002)(199004)(189003)(2616005)(2906002)(1076003)(52116002)(86362001)(33656002)(316002)(36756003)(26005)(81166006)(5660300002)(8676002)(186003)(4326008)(81156014)(66946007)(9786002)(6916009)(66476007)(66556008)(64756008)(66446008)(54906003)(71200400001)(7416002)(8936002)(9746002)(478600001)(24400500001);
+ DIR:OUT; SFP:1101; SCL:1; SRVR:VI1PR05MB6768;
+ H:VI1PR05MB4141.eurprd05.prod.outlook.com; FPR:; SPF:None; LANG:en;
+ PTR:InfoNoRecords; A:1; MX:1; 
+received-spf: None (protection.outlook.com: mellanox.com does not designate
+ permitted sender hosts)
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: iDLgVCiLs+MqFDOwVfDiBXIGC09Ym7bo5DZw3ENsAUQfm5JiV+JBCqp+UiUAG2i+8lgizT8mVQlKOLGC/AmEUL2PI38NHdpGIOYuPYmp7Etins/V/J+GswH//CGYxspz/vRt65BgsPVfhCVzuuYiNZEf3ZvdG9nXATpbRouoOaUrM2mnEceSKq32krSDQwTnTdtxX5NudpsiOkFf77319St+1E0KYuBxawAJLmLBD2HJlM99YUu/gQS0IYAFBiHK78j4a4tB2kh3FmoI2g8QNQC2pGSTI138IekihHc3txY+qzuDuCnRpkAu2oShRkWXPmnavqNnr+UF66rYRuOP729Ixx3XkXFBcu5dZrAuOO6bcKft0blNeEl+l3uQzSQXZiVjtsyMfAEDNvbkTRKKbJME6eBZX/2LjIvMr4u3pN7QhZTNwPS7ENFhcfpdDy8EziM//Naws42hbdRkSRwxulCyfOposaeqGYuboL/sR0fuZV6RLCjOwz71mMu4V71J
+x-ms-exchange-transport-forked: True
+Content-ID: <ECF78F37AB44F842AECF3474CA80857C@eurprd05.prod.outlook.com>
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <528c1cff-608c-d342-1e72-90d780555204@nvidia.com>
-User-Agent: Mutt/1.9.4 (2018-02-28)
-Subject: Re: [Nouveau] [PATCH v6 4/6] mm/mmu_notifier: add
- mmu_interval_notifier_find()
+X-OriginatorOrg: Mellanox.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7e34af3e-9c2a-4b8f-7dfa-08d79a9d2809
+X-MS-Exchange-CrossTenant-originalarrivaltime: 16 Jan 2020 16:00:07.0367 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: a652971c-7d2e-4d9b-a6a4-d149256f461b
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: RFDusbytEkvVty7t1+keIrbzmOcOzhKbDwfejR/hlCLC6PyH+WGWJgHbxr+RmU/pLu0YlJki9Yd14H8BJm6XhA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR05MB6768
+Subject: Re: [Nouveau] [PATCH v6 5/6] nouveau: use new mmu interval notifiers
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -88,85 +117,64 @@ Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, Jan 15, 2020 at 02:05:24PM -0800, Ralph Campbell wrote:
-> 
-> On 1/14/20 4:49 AM, Jason Gunthorpe wrote:
-> > On Mon, Jan 13, 2020 at 02:47:01PM -0800, Ralph Campbell wrote:
-> > > diff --git a/mm/mmu_notifier.c b/mm/mmu_notifier.c
-> > > index 47ad9cc89aab..4efecc0f13cb 100644
-> > > +++ b/mm/mmu_notifier.c
-> > > @@ -1171,6 +1171,39 @@ void mmu_interval_notifier_update(struct mmu_interval_notifier *mni,
-> > >   }
-> > >   EXPORT_SYMBOL_GPL(mmu_interval_notifier_update);
-> > > +struct mmu_interval_notifier *mmu_interval_notifier_find(struct mm_struct *mm,
-> > > +				const struct mmu_interval_notifier_ops *ops,
-> > > +				unsigned long start, unsigned long last)
-> > > +{
-> > > +	struct mmu_notifier_mm *mmn_mm = mm->mmu_notifier_mm;
-> > > +	struct interval_tree_node *node;
-> > > +	struct mmu_interval_notifier *mni;
-> > > +	struct mmu_interval_notifier *res = NULL;
-> > > +
-> > > +	spin_lock(&mmn_mm->lock);
-> > > +	node = interval_tree_iter_first(&mmn_mm->itree, start, last);
-> > > +	if (node) {
-> > > +		mni = container_of(node, struct mmu_interval_notifier,
-> > > +				   interval_tree);
-> > > +		while (true) {
-> > > +			if (mni->ops == ops) {
-> > > +				res = mni;
-> > > +				break;
-> > > +			}
-> > > +			node = interval_tree_iter_next(&mni->interval_tree,
-> > > +						       start, last);
-> > > +			if (!node)
-> > > +				break;
-> > > +			mni = container_of(node, struct mmu_interval_notifier,
-> > > +					   interval_tree);
+On Wed, Jan 15, 2020 at 02:09:47PM -0800, Ralph Campbell wrote:
+
+> I don't understand the lifetime/membership issue. The driver is the only thing
+> that allocates, inserts, or removes struct mmu_interval_notifier and thus
+> completely controls the lifetime.
+
+If the returned value is on the defered list it could be freed at any
+moment. The existing locks do not prevent it.
+
+> > > +		ret = nouveau_svmm_interval_find(svmm, &range);
+> > > +		if (ret) {
+> > > +			up_read(&mm->mmap_sem);
+> > > +			return ret;
 > > > +		}
-> > > +	}
-> > > +	spin_unlock(&mmn_mm->lock);
+> > > +		range.notifier_seq = mmu_interval_read_begin(range.notifier);
+> > >   		ret = hmm_range_fault(&range, 0);
+> > >   		up_read(&mm->mmap_sem);
+> > >   		if (ret <= 0) {
 > > 
-> > This doesn't seem safe at all, here we are returning a pointer to
-> > memory from the interval tree with out any kind of lifetime
-> > protection.
-> 
-> It is memory that the driver has allocated and has full control over
-> the lifetime since the driver does all the insertions and removals.
-> The driver does have to hold the HW page table lock so lookups are
-> synchronized with interval insertions and removals and page table
-> entry insertions and removals.
-
-No.. the ->release is async, so having the driver hold a lock around
-all the mmu_interval_ APIS still doesn't make it safe. The element
-could be on the defered list and it could become freed at any moment.
-
-> > If the interval tree is read it must be left in the read lock state
-> > until the caller is done with the pointer.
+> > I'm still not sure this is a better approach than what ODP does. It
+> > looks very expensive on the fault path..
 > > 
-> > .. and this poses all sorts of questions about consistency with items
-> > on the deferred list. Should find return an item undergoing deletion?
+> > Jason
+> > 
 > 
-> I don't think so. The deferred operations are all complete when
-> mmu_interval_read_begin() returns, and the sequence number check
-> with mmu_interval_read_retry() guarantees there have been no changes
-> while not holding the driver page table lock and calling hmm_range_fault().
+> ODP doesn't have this problem because users have to call ib_reg_mr()
+> before any I/O can happen to the process address space.
 
-It seems very dangerous to say, on one hand, that the driver is
-serialized because it holds a lock around all mmu_interval_* calls,
-while on the other saying that on rare edge cases find does not return
-a result that matches the serial-program-order sequence.
+ODP supports a single 'full VA' call at process startup, just like
+these cases.
 
-This seems like a way to create bugs.
+> That is when mmu_interval_notifier_insert() /
+> mmu_interval_notifier_remove() can be called and the driver doesn't
+> have to worry about the interval changing sizes or being removed
+> while I/O is happening.  
 
-For instance, if find is consistent with the defered list then it will
-not return any element that has a pending deletion and the above issue
-with lifetime wouldn't happen.
+No, for the 'ODP full process VA' (aka implicit ODP) mode it
+dynamically maintains a list of intervals. ODP chooses the align the
+dynamic intervals to it's HW page table levels, and not to SW VMAs.
+This is much simpler to manage and faster to fault, at the cost of
+capturing more VA for invalidations which have to be probed against
+the HW shadow PTEs.
 
-However, I'm still not sure that providing an API tha requires the
-driver to provide tricky locking is the best idea. This basically says
-that if a driver uses find then every single other call to
-mmu_interval_* must be serialized with a single lock.
+> It isn't that expensive, there is an extra driver lock/unlock as
+> part of the lookup and possibly a find_vma() and kmalloc(GFP_ATOMIC)
+> for new intervals. Also, the deferred interval updates for munmap().
+> Compared to the cost of updating PTEs in the device and GPU fault
+> handling, this is minimal overhead.
+
+Well, compared to ODP which does a single xa lookup with no lock to
+find its interval, this looks very expensive and not parallel.
+
+I think if there is merit in having ranges cover the vmas and track
+changes then there is probably merit in having the core code provide
+much of that logic, not the driver.
+
+But it would be interesting to see some kind of analysis on the two
+methods to decide if the complexity is worthwhile.
 
 Jason
 _______________________________________________
