@@ -2,100 +2,33 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 19EFE13FA7B
-	for <lists+nouveau@lfdr.de>; Thu, 16 Jan 2020 21:22:01 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2537E1401AA
+	for <lists+nouveau@lfdr.de>; Fri, 17 Jan 2020 03:01:19 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 416096E491;
-	Thu, 16 Jan 2020 20:21:59 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 923036F37A;
+	Fri, 17 Jan 2020 02:01:17 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from EUR04-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur04on0620.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:fe0e::620])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E31116E491
- for <nouveau@lists.freedesktop.org>; Thu, 16 Jan 2020 20:21:57 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=JLCr3tQeqmO4H6sckgm/nrIzGjYtcKHaEwyF+cia7NAmLZtq3o5eMN+dwM4FwjJayUyRSkD7lLiKUAaduBThxdMYaG/3uYm7x3AedyOgZjC9iYfSisK3RJGND8oOJmY9lWPOFcL4diy/+g5ts2qon1wP+/Cwhg8wO87qKJ+/BANuGoAYZgSMKHK6be0ophQqVZCvdPSucJ1zzDzcXyn1nXhYXTxE3Xpbp9apETG1FpGhFNTr7kkCwkGWCo65Fh7eed9EydjYFSs6VO6llnQZ+LDOlb7jyIRhmK4XS5cFtsq6GlUZXSvq9Oevn2RHmqQcmWmIAPEZInsgjho5kweOew==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=GpkfEskVOZdeXATBRaW56BGB86QEhceibZ9l+k2ap1A=;
- b=YaJQQHLXkGfIIQcWLJtKSfDCOtEARz5fq7RwRAef7/fLXAwQ0W26sCOkgKzG7cK/GUf2K480NTCYrfRB0u8xMNE1qPHC9d+1htLNQy+/1NYs+uuiJkHxZxhM2fs+D16aLobYa23lTtY+iXAyRWY185QACqPb3Y3upmUgTSJ2RAo5mx6qDeIDolT+Re+4VWgym4n8kGNJL6l0MT2WQuZ2ycN44CfhBXNSso5Zgu+J6BzYB2WLOjouBHt3e4Gef0ogdsJj5S1ZyUPMJW7WHgTMpRISH0mZMfWYbWQtQtDOefs1C7dE2i6+oCdUNvFHfeCz98SCDCFebc4ZH03PCA58pA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=mellanox.com; dmarc=pass action=none header.from=mellanox.com;
- dkim=pass header.d=mellanox.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Mellanox.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=GpkfEskVOZdeXATBRaW56BGB86QEhceibZ9l+k2ap1A=;
- b=m843Bre0F83QGtg/HMtHr76yNubZepzA3hW0Yz+DWln+iOZwKbO+5imr6DjjYptvNtLGvYhd7sy4Dql0bVtL8nibqUtgS6jESESXpSRrO+aGzoX+xOkSMPtGb3ThjEdkS55qO3zX9ZYEzNqGgP6Ha4RuhblR3JbQCl7kOYEO0mA=
-Received: from VI1PR05MB4141.eurprd05.prod.outlook.com (52.133.14.15) by
- VI1PR05MB4624.eurprd05.prod.outlook.com (20.176.7.153) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.2644.18; Thu, 16 Jan 2020 20:21:55 +0000
-Received: from VI1PR05MB4141.eurprd05.prod.outlook.com
- ([fe80::1c00:7925:d5c6:d60d]) by VI1PR05MB4141.eurprd05.prod.outlook.com
- ([fe80::1c00:7925:d5c6:d60d%7]) with mapi id 15.20.2644.015; Thu, 16 Jan 2020
- 20:21:55 +0000
-Received: from mlx.ziepe.ca (142.68.57.212) by
- BL0PR02CA0025.namprd02.prod.outlook.com (2603:10b6:207:3c::38) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.2623.13 via Frontend Transport; Thu, 16 Jan 2020 20:21:55 +0000
-Received: from jgg by mlx.ziepe.ca with local (Exim 4.90_1)	(envelope-from
- <jgg@mellanox.com>)	id 1isBeJ-0001J6-KZ; Thu, 16 Jan 2020 16:21:51 -0400
-From: Jason Gunthorpe <jgg@mellanox.com>
-To: Ralph Campbell <rcampbell@nvidia.com>
-Thread-Topic: [PATCH v6 5/6] nouveau: use new mmu interval notifiers
-Thread-Index: AQHVymNqjXzbt52uukWssUL4CQa1/qfqIESAgAIr9ICAASsGAIAAR6gAgAABf4A=
-Date: Thu, 16 Jan 2020 20:21:55 +0000
-Message-ID: <20200116202151.GS20978@mellanox.com>
-References: <20200113224703.5917-1-rcampbell@nvidia.com>
- <20200113224703.5917-6-rcampbell@nvidia.com>
- <20200114125957.GO20978@mellanox.com>
- <5845f50e-8bc0-8068-ee21-4f910beb1255@nvidia.com>
- <20200116160002.GL20978@mellanox.com>
- <01adb7dd-589e-2cde-4fa9-68baa44c0976@nvidia.com>
-In-Reply-To: <01adb7dd-589e-2cde-4fa9-68baa44c0976@nvidia.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-clientproxiedby: BL0PR02CA0025.namprd02.prod.outlook.com
- (2603:10b6:207:3c::38) To VI1PR05MB4141.eurprd05.prod.outlook.com
- (2603:10a6:803:44::15)
-authentication-results: spf=none (sender IP is )
- smtp.mailfrom=jgg@mellanox.com; 
-x-ms-exchange-messagesentrepresentingtype: 1
-x-originating-ip: [142.68.57.212]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-ht: Tenant
-x-ms-office365-filtering-correlation-id: 65f98c01-af34-4ec0-40e2-08d79ac1badc
-x-ms-traffictypediagnostic: VI1PR05MB4624:
-x-microsoft-antispam-prvs: <VI1PR05MB4624B48B705C514E6CAEB395CF360@VI1PR05MB4624.eurprd05.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:8273;
-x-forefront-prvs: 02843AA9E0
-x-forefront-antispam-report: SFV:NSPM;
- SFS:(10009020)(4636009)(366004)(39860400002)(376002)(136003)(346002)(396003)(199004)(189003)(2906002)(52116002)(66556008)(2616005)(7416002)(86362001)(966005)(508600001)(1076003)(33656002)(26005)(6916009)(186003)(5660300002)(81166006)(8676002)(4326008)(81156014)(4744005)(9786002)(36756003)(9746002)(66476007)(316002)(66446008)(64756008)(66946007)(8936002)(71200400001)(54906003)(24400500001);
- DIR:OUT; SFP:1101; SCL:1; SRVR:VI1PR05MB4624;
- H:VI1PR05MB4141.eurprd05.prod.outlook.com; FPR:; SPF:None; LANG:en;
- PTR:InfoNoRecords; A:1; MX:1; 
-received-spf: None (protection.outlook.com: mellanox.com does not designate
- permitted sender hosts)
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: eq3QmYdwbJoRstxm5GiBJeI0xr04HS8KQT2TpDZpiQJEWaMViovPclAyqdXBT0skwHAnhdmzv9v2h64KAkhsUDNBCravLdeXe9Z6K8r7Qr/3dbRQf22+WZ9YoCYy5IrL6X9yXbqDmuUVMf0ZIUzVd+YpUDJ0MNwKpBkXM2xHDdT/CUXR15Kx/GiiLaFHs5aypm7DykGAYsi7OuJwaesRAkBPEif+S+icNYXtKwJ9p+ygI/fjFaHBaVNfRxZUUl1J0j336QBR/GxpZ4ylBP8Q9POKNk0UnAiIk6FgHSnd9+a3pQPtTmiooSwhw2SpyMK/kI7+jTZuyr1uA6ckVFYWBGgxV3CNEg0DB4rrRn/pdT9xNtCicskh7QxZpfkdH5eJjuo9fYsjtJI9fjyuQYekJ3qqhb5RrUE4pK9q0AdirWiBNUgvdmpZg2UlxgV7cZzFMtOyJUOEhpZ85eFZJZ8bJj63RKQazX35MZWbf15GWIAQH8YuWnD7Meqtx9qoX04WiL8LPqAXrcAC0q6GXT4Md9SrpTIB/FSgVzO1wqbADmTohLkNNcMQpJCAfYllDW1i
-x-ms-exchange-transport-forked: True
-Content-ID: <44E2456FEB759847AAF542E9DDA6A620@eurprd05.prod.outlook.com>
+Received: from huawei.com (szxga04-in.huawei.com [45.249.212.190])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6E07A6F37A;
+ Fri, 17 Jan 2020 02:01:16 +0000 (UTC)
+Received: from DGGEMS403-HUB.china.huawei.com (unknown [172.30.72.58])
+ by Forcepoint Email with ESMTP id 26CDE1C1F5589BC9F48E;
+ Fri, 17 Jan 2020 10:01:13 +0800 (CST)
+Received: from localhost (10.133.213.239) by DGGEMS403-HUB.china.huawei.com
+ (10.3.19.203) with Microsoft SMTP Server id 14.3.439.0; Fri, 17 Jan 2020
+ 10:01:05 +0800
+From: YueHaibing <yuehaibing@huawei.com>
+To: <bskeggs@redhat.com>, <airlied@linux.ie>, <daniel@ffwll.ch>,
+ <wambui.karugax@gmail.com>, <yuehaibing@huawei.com>, <sam@ravnborg.org>
+Date: Fri, 17 Jan 2020 10:01:02 +0800
+Message-ID: <20200117020102.56636-1-yuehaibing@huawei.com>
+X-Mailer: git-send-email 2.10.2.windows.1
 MIME-Version: 1.0
-X-OriginatorOrg: Mellanox.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 65f98c01-af34-4ec0-40e2-08d79ac1badc
-X-MS-Exchange-CrossTenant-originalarrivaltime: 16 Jan 2020 20:21:55.2265 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: a652971c-7d2e-4d9b-a6a4-d149256f461b
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: q0vwmZpR647i/FTRBaf6kCMKC7l89kXi+1hZA79sgPcd2QnfLxj6eEKAKVt+ykR1pgN4AuistmaCNT6/08Q6tg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR05MB4624
-Subject: Re: [Nouveau] [PATCH v6 5/6] nouveau: use new mmu interval notifiers
+X-Originating-IP: [10.133.213.239]
+X-CFilter-Loop: Reflected
+Subject: [Nouveau] [PATCH -next] drm/nv04/disp: remove set but not used
+ variable 'width'
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -107,37 +40,50 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: "linux-rdma@vger.kernel.org" <linux-rdma@vger.kernel.org>,
- "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
- "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- "linux-mm@kvack.org" <linux-mm@kvack.org>, Ben Skeggs <bskeggs@redhat.com>,
- "linux-kselftest@vger.kernel.org" <linux-kselftest@vger.kernel.org>,
- Andrew Morton <akpm@linux-foundation.org>, Shuah Khan <shuah@kernel.org>,
- Christoph Hellwig <hch@lst.de>
+Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, Jan 16, 2020 at 12:16:30PM -0800, Ralph Campbell wrote:
-> Can you point me to the latest ODP code? Seems like my understanding is
-> quite off.
+drivers/gpu/drm/nouveau/dispnv04/arb.c: In function nv04_calc_arb:
+drivers/gpu/drm/nouveau/dispnv04/arb.c:56:21: warning:
+ variable width set but not used [-Wunused-but-set-variable]
 
-https://elixir.bootlin.com/linux/v5.5-rc6/source/drivers/infiniband/hw/mlx5/odp.c
+'width' is never used, so remove it.
 
-Look for the word 'implicit'
+Reported-by: Hulk Robot <hulkci@huawei.com>
+Signed-off-by: YueHaibing <yuehaibing@huawei.com>
+---
+ drivers/gpu/drm/nouveau/dispnv04/arb.c | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-mlx5_ib_invalidate_range() releases the interval_notifier when there are
-no populated shadow PTEs in its leaf
+diff --git a/drivers/gpu/drm/nouveau/dispnv04/arb.c b/drivers/gpu/drm/nouveau/dispnv04/arb.c
+index f607a04..9d4a2d9 100644
+--- a/drivers/gpu/drm/nouveau/dispnv04/arb.c
++++ b/drivers/gpu/drm/nouveau/dispnv04/arb.c
+@@ -53,7 +53,7 @@ struct nv_sim_state {
+ static void
+ nv04_calc_arb(struct nv_fifo_info *fifo, struct nv_sim_state *arb)
+ {
+-	int pagemiss, cas, width, bpp;
++	int pagemiss, cas, bpp;
+ 	int nvclks, mclks, crtpagemiss;
+ 	int found, mclk_extra, mclk_loop, cbs, m1, p1;
+ 	int mclk_freq, pclk_freq, nvclk_freq;
+@@ -65,7 +65,6 @@ nv04_calc_arb(struct nv_fifo_info *fifo, struct nv_sim_state *arb)
+ 	nvclk_freq = arb->nvclk_khz;
+ 	pagemiss = arb->mem_page_miss;
+ 	cas = arb->mem_latency;
+-	width = arb->memory_width >> 6;
+ 	bpp = arb->bpp;
+ 	cbs = 128;
+ 
+-- 
+2.7.4
 
-pagefault_implicit_mr() creates an interval_notifier that covers the
-level in the page table that needs population. Notice it just uses an
-unlocked xa_load to find the page table level.
 
-The locking is pretty tricky as it relies on RCU, but the fault flow
-is fairly lightweight.
-
-Jason
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
