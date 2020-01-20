@@ -1,107 +1,55 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1B1691431AD
-	for <lists+nouveau@lfdr.de>; Mon, 20 Jan 2020 19:41:44 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 867DA1431AA
+	for <lists+nouveau@lfdr.de>; Mon, 20 Jan 2020 19:41:42 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4C1A86EAD2;
+	by gabe.freedesktop.org (Postfix) with ESMTP id 013AA6EADC;
 	Mon, 20 Jan 2020 18:41:25 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam11on2060a.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7eaa::60a])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1088D6E925;
- Mon, 20 Jan 2020 12:15:45 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=GLboq9TEBqpbBECml8csOAI9PMnffLRxQ4s2za3ubDtTj6oKRh72GsMIqYq317uzxXPycE1U3dJPeJ7+85M+XhMC4msNmbQn1y9GK8PVSiazEkrNLqB2fk9bEMlvhpUWjsIUiLb2Xrg+isvDx48sNMXh9072aORl9K0lFQQEi4Lj3Dc2VG4BiUAOSFw5vqZyeTParXTjnIoF1Gah6lXPdanYI0nxptkerZefHISa/WBDhcRhs3LpTPPqtZXOPaXbrkT+x3X7UPePwOFPAnMhp/PMk8sEeqNrsPaeKVtjIonSv7zgYuzWcSI00yaJf6gfnJoaeXr1wed+6wcCVM71xA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=f7fy1tCOU8PFTG2of3luuAICqGoAd2EZhart9NygXOQ=;
- b=F0S0q/xsQY7xN60zSEUV0Qo1TfYmuzCxTzDLxyQAefeWdpGo7L7PECqSgVyDGoG1ZOuAMFjcfmUpHvEXbgDTczaQGtq8XVhKZ1OFAl+UD/Y/tm5yed9Vytxhp42tBWP/cdKTGC+/mHfuzLjXFtViaIMcY0GzulgldADKIx09aAm9xZHb+suMHLj6mc3HyV3td3Az8Ghtan1sbncEJEQk6GZES/PQ7VMv2wZQYBZDi1b8nYAFDxcKV7oHzn5wRXUSEj3AgMFE14nG0jY4dQ0WPV0M1qxQO+gUQFTeFZ0xQu/Z7BXZVw5PDsdSR4ghgq3iNkKDxgu8xyDcmez6FcX5SQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=vmware.com; dmarc=pass action=none header.from=vmware.com;
- dkim=pass header.d=vmware.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vmware.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=f7fy1tCOU8PFTG2of3luuAICqGoAd2EZhart9NygXOQ=;
- b=hTm01gaKleZA+5aFMFv3j1XrtEItVw5GEuWBep12NN4fNaVjm8WFjc2r1qfPTM7rlhHpsKZWg4JO8yWNDJD/6r88NKiX2HPBKSf63GgYV9dGVYBYuWl45cmtQNV4Kh5H18XK3LhLfn2iwbNCgenDwxT/wxsKbfHchfZxD+OK2/I=
-Received: from MN2PR05MB6141.namprd05.prod.outlook.com (20.178.241.217) by
- MN2PR05MB6063.namprd05.prod.outlook.com (20.178.241.158) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.2665.15; Mon, 20 Jan 2020 12:15:42 +0000
-Received: from MN2PR05MB6141.namprd05.prod.outlook.com
- ([fe80::b4a2:5c46:955a:2850]) by MN2PR05MB6141.namprd05.prod.outlook.com
- ([fe80::b4a2:5c46:955a:2850%7]) with mapi id 15.20.2665.015; Mon, 20 Jan 2020
- 12:15:42 +0000
-From: Thomas Hellstrom <thellstrom@vmware.com>
-To: Thomas Zimmermann <tzimmermann@suse.de>, "airlied@linux.ie"
- <airlied@linux.ie>, "daniel@ffwll.ch" <daniel@ffwll.ch>,
- "alexander.deucher@amd.com" <alexander.deucher@amd.com>,
- "christian.koenig@amd.com" <christian.koenig@amd.com>, "David1.Zhou@amd.com"
- <David1.Zhou@amd.com>, "maarten.lankhorst@linux.intel.com"
- <maarten.lankhorst@linux.intel.com>, "patrik.r.jakobsson@gmail.com"
- <patrik.r.jakobsson@gmail.com>, "robdclark@gmail.com" <robdclark@gmail.com>,
- "sean@poorly.run" <sean@poorly.run>, "benjamin.gaignard@linaro.org"
- <benjamin.gaignard@linaro.org>, "vincent.abriou@st.com"
- <vincent.abriou@st.com>, "yannick.fertre@st.com" <yannick.fertre@st.com>,
- "philippe.cornu@st.com" <philippe.cornu@st.com>, "mcoquelin.stm32@gmail.com"
- <mcoquelin.stm32@gmail.com>, "alexandre.torgue@st.com"
- <alexandre.torgue@st.com>, "eric@anholt.net" <eric@anholt.net>,
- "rodrigosiqueiramelo@gmail.com" <rodrigosiqueiramelo@gmail.com>,
- "hamohammed.sa@gmail.com" <hamohammed.sa@gmail.com>,
- Linux-graphics-maintainer <Linux-graphics-maintainer@vmware.com>,
- "bskeggs@redhat.com" <bskeggs@redhat.com>, "harry.wentland@amd.com"
- <harry.wentland@amd.com>, "sunpeng.li@amd.com" <sunpeng.li@amd.com>,
- "jani.nikula@linux.intel.com" <jani.nikula@linux.intel.com>,
- "joonas.lahtinen@linux.intel.com" <joonas.lahtinen@linux.intel.com>,
- "rodrigo.vivi@intel.com" <rodrigo.vivi@intel.com>
-Thread-Topic: [PATCH v3 20/22] drm/vmwgfx: Convert to CRTC VBLANK callbacks
-Thread-Index: AQHVz2r2D5dcUIrxVEGgJH3SOH/fbg==
-Date: Mon, 20 Jan 2020 12:15:42 +0000
-Message-ID: <MN2PR05MB6141E734C31A7173C906E76DA1320@MN2PR05MB6141.namprd05.prod.outlook.com>
-References: <20200120082314.14756-1-tzimmermann@suse.de>
- <20200120082314.14756-21-tzimmermann@suse.de>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: spf=none (sender IP is )
- smtp.mailfrom=thellstrom@vmware.com; 
-x-originating-ip: [155.4.205.35]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 18d5d898-5aeb-4045-abfa-08d79da2787c
-x-ms-traffictypediagnostic: MN2PR05MB6063:|MN2PR05MB6063:
-x-ld-processed: b39138ca-3cee-4b4a-a4d6-cd83d9dd62f0,ExtAddr
-x-ms-exchange-transport-forked: True
-x-microsoft-antispam-prvs: <MN2PR05MB6063E94D6317B4C03CC929CFA1320@MN2PR05MB6063.namprd05.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:353;
-x-forefront-prvs: 0288CD37D9
-x-forefront-antispam-report: SFV:NSPM;
- SFS:(10009020)(4636009)(376002)(39860400002)(136003)(396003)(366004)(346002)(189003)(199004)(52536014)(7406005)(478600001)(7416002)(2906002)(4326008)(76116006)(91956017)(5660300002)(33656002)(54906003)(8676002)(6506007)(110136005)(8936002)(7696005)(81156014)(81166006)(71200400001)(4744005)(66946007)(186003)(26005)(53546011)(66446008)(64756008)(66556008)(9686003)(66476007)(86362001)(55016002)(316002)(921003)(1121003);
- DIR:OUT; SFP:1101; SCL:1; SRVR:MN2PR05MB6063;
- H:MN2PR05MB6141.namprd05.prod.outlook.com; FPR:; SPF:None; LANG:en;
- PTR:InfoNoRecords; MX:1; A:1; 
-received-spf: None (protection.outlook.com: vmware.com does not designate
- permitted sender hosts)
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: gTS13OmDCu41gFeOJ0tL99sairAGpV1UOOw/CeBvo+IGQf0NnmUqrIrLOiaDWdFGsAvaS53eco565ZcX2UgJub7YITDEj2djPc9ULQICtr1hiSYdRkOsgvTqJ6QClY60h9s/8Zwd8idpCxfMwJDUpPhaR4m6XKgX2kkjvwvifq3f8w9rE2qLv2DR/K96eygLDJFqHOAAeO4N5ulsZcSJ4CRKG9CTrORQ6ezmcZrtMueG7/wd1NAg+anMRZEYwoka5ATJUMtZSYr9QzYEHuREpPyXaDavgYU68ovV+oQscWUWDkU7oN0hVjiRSfYuGzVfnTJ0W/Ehve7q5hUXDpaCAn7C3FC5zYA46MYofkMarq3H4l4GmwyxT7atZJPAwm/GBgYB4f3B9rRfDXwfBTyceFBepfLmn4aLv6M3z7Dax+UK+RKbZWUFkqFCJNC1H1Vy2BEsUxGaIiLxPhrGlAkRe/vepjGd8+LTJM3mKCM6vveaSbl4k6jHQuAkY0NJ15BQ
-x-ms-exchange-antispam-messagedata: NnVnI+tyE4XZ6Z0baPJS2ROkhwgUCAnuVHlH4IKdH9Ja6jSOBsq5nwz0lPrfnAFTeb4QoRZm0mwDGV7RrQbhLjeQ2S2WT8Fy+qjQHH79eo/HeMpaPVjvHy72Sl/wxjk2gd57tRJsjPJzyrzL89VodQ==
+Received: from mail-lf1-x142.google.com (mail-lf1-x142.google.com
+ [IPv6:2a00:1450:4864:20::142])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id F2DE26FAA4;
+ Mon, 20 Jan 2020 12:32:32 +0000 (UTC)
+Received: by mail-lf1-x142.google.com with SMTP id r14so23939608lfm.5;
+ Mon, 20 Jan 2020 04:32:32 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=AbIDR9pNoiwS2RYYFY1ApWhKRrU6bjvfq6mIUb/01Bw=;
+ b=EpIR8NSfxP5x2csxJaulklUlER55UqNeAKkfCrMVT+CrjYdjSbqgcL3/DEfC8DEz5g
+ SqqGk83CgCetygy8cP7HzJLNg1nvDf8IuJjahfiBa6E8L28BmB+/ATssPM8Huxxebn2V
+ YT+kLovTB1PwUGUnIpRExyXz6QoV8kZppdlaBFEBBkyv7REr2n52a4Ior0K+XAMKxVdQ
+ fnlzPC3cHkH+6kyZ9ZPkYOLnl/8gwp3vS+DGJzY3mIgBlhkJGmSCaYasAoLRsgqDNOyx
+ +Z0xfrAukB2oyzp+kWoAGrSSJg3OsckY6SQYttd0Z7zja6LA46V9pAcyPv827xYjWn3Q
+ 2eDQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=AbIDR9pNoiwS2RYYFY1ApWhKRrU6bjvfq6mIUb/01Bw=;
+ b=VaKb9wR012c5FIzHvB5Oo7sbnAiYoxH9ng0lLYTSV1wOK5g531njygWRojmRrpstTv
+ WA+qISAYj2UfrcJPDxgxKyaiTIG0xSNQOmz37epKqHIJM/cHJW9G2b7ri/Ww9/VdpfTx
+ GJXbHGXsMN0cCd2OJSHIOZqPU9VPTTmi1CUNt8D8W2ZqRBIH34bLsQOmG4ImQdDKy+Dq
+ QEo1OA2xCf9bScw/YZqaAime+dDq1ZMoWMDqPjmj88JFefk6M6yQJoCT4+JIE1fp4Wq0
+ H2pldUJO4aVmf84oZdjft+3pN9n+EAuqOJ9psF33aAnL+xbMQ48Y0cqAz1tizzHkj96O
+ cEZQ==
+X-Gm-Message-State: APjAAAUoWoIaAzC0Cz2cwKr15TDc7uem0ypDOI1Zonhl9ab3XVt6qS6q
+ defZ4kRKV/HmY3T7st5OpPL6J8Ctt2D7b2fTJVo=
+X-Google-Smtp-Source: APXvYqwntAlqjr+2aFaQ6gaY6Ui2SgQ0xx2PBNZex/DNDmgaejFFzmYMRIqgIfSQZ60PmUpyUFAuKlEJCo+PJf7Dbys=
+X-Received: by 2002:a19:228c:: with SMTP id i134mr13301617lfi.2.1579523551378; 
+ Mon, 20 Jan 2020 04:32:31 -0800 (PST)
 MIME-Version: 1.0
-X-OriginatorOrg: vmware.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 18d5d898-5aeb-4045-abfa-08d79da2787c
-X-MS-Exchange-CrossTenant-originalarrivaltime: 20 Jan 2020 12:15:42.5914 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b39138ca-3cee-4b4a-a4d6-cd83d9dd62f0
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: wGW98KMO66TGAJaYVtYiCVkKqbePUPcT9Y2/2QYzi+dSHKaR8I7uGYZCEQdcVzBqXtnpXKIJCTAiYiC7UiSGnA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR05MB6063
+References: <20200120082314.14756-1-tzimmermann@suse.de>
+ <20200120082314.14756-7-tzimmermann@suse.de>
+In-Reply-To: <20200120082314.14756-7-tzimmermann@suse.de>
+From: Patrik Jakobsson <patrik.r.jakobsson@gmail.com>
+Date: Mon, 20 Jan 2020 13:32:20 +0100
+Message-ID: <CAMeQTsYkvo9Pm=TNW95jH=Ffzo36bSbwf5+6p27T7T5L0aPMAQ@mail.gmail.com>
+To: Thomas Zimmermann <tzimmermann@suse.de>
 X-Mailman-Approved-At: Mon, 20 Jan 2020 18:41:18 +0000
-Subject: Re: [Nouveau] [PATCH v3 20/22] drm/vmwgfx: Convert to CRTC VBLANK
+Subject: Re: [Nouveau] [PATCH v3 06/22] drm/gma500: Convert to CRTC VBLANK
  callbacks
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -114,37 +62,189 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: "linux-arm-msm@vger.kernel.org" <linux-arm-msm@vger.kernel.org>,
- "intel-gfx@lists.freedesktop.org" <intel-gfx@lists.freedesktop.org>,
- "amd-gfx@lists.freedesktop.org" <amd-gfx@lists.freedesktop.org>,
- "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
- "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
- "freedreno@lists.freedesktop.org" <freedreno@lists.freedesktop.org>
+Cc: hamohammed.sa@gmail.com, David Airlie <airlied@linux.ie>,
+ nouveau@lists.freedesktop.org, joonas.lahtinen@linux.intel.com,
+ dri-devel <dri-devel@lists.freedesktop.org>, Eric Anholt <eric@anholt.net>,
+ Benjamin Gaignard <benjamin.gaignard@linaro.org>, alexandre.torgue@st.com,
+ David1.Zhou@amd.com, Thomas Hellstrom <thellstrom@vmware.com>,
+ Sean Paul <sean@poorly.run>, amd-gfx@lists.freedesktop.org,
+ VMware Graphics <linux-graphics-maintainer@vmware.com>,
+ Ben Skeggs <bskeggs@redhat.com>, harry.wentland@amd.com,
+ mcoquelin.stm32@gmail.com, sunpeng.li@amd.com, linux-arm-msm@vger.kernel.org,
+ Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>, "Vivi,
+ Rodrigo" <rodrigo.vivi@intel.com>, vincent.abriou@st.com,
+ rodrigosiqueiramelo@gmail.com, philippe.cornu@st.com, yannick.fertre@st.com,
+ Rob Clark <robdclark@gmail.com>, Daniel Vetter <daniel@ffwll.ch>,
+ Alex Deucher <alexander.deucher@amd.com>, freedreno@lists.freedesktop.org,
+ =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 1/20/20 9:23 AM, Thomas Zimmermann wrote:
-> VBLANK callbacks in struct drm_driver are deprecated in favor of
-> their equivalents in struct drm_crtc_funcs. Convert vmwgfx over.
+On Mon, Jan 20, 2020 at 9:23 AM Thomas Zimmermann <tzimmermann@suse.de> wrote:
 >
-> v2:
-> 	* remove accidental whitespace fixes
+> VBLANK callbacks in struct drm_driver are deprecated in favor of
+> their equivalents in struct drm_crtc_funcs. Convert gma500 over.
 >
 > Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+
+Looks good. For this patch:
+
+Acked-by: Patrik Jakobsson <patrik.r.jakobsson@gmail.com>
+
 > ---
->  drivers/gpu/drm/vmwgfx/vmwgfx_drv.c  | 3 ---
->  drivers/gpu/drm/vmwgfx/vmwgfx_drv.h  | 6 +++---
->  drivers/gpu/drm/vmwgfx/vmwgfx_kms.c  | 6 +++---
->  drivers/gpu/drm/vmwgfx/vmwgfx_ldu.c  | 3 +++
->  drivers/gpu/drm/vmwgfx/vmwgfx_scrn.c | 3 +++
->  drivers/gpu/drm/vmwgfx/vmwgfx_stdu.c | 3 +++
->  6 files changed, 15 insertions(+), 9 deletions(-)
+>  drivers/gpu/drm/gma500/cdv_intel_display.c |  3 +++
+>  drivers/gpu/drm/gma500/psb_drv.c           |  4 ----
+>  drivers/gpu/drm/gma500/psb_drv.h           |  6 +++---
+>  drivers/gpu/drm/gma500/psb_intel_display.c |  3 +++
+>  drivers/gpu/drm/gma500/psb_irq.c           | 12 +++++++++---
+>  drivers/gpu/drm/gma500/psb_irq.h           |  7 ++++---
+>  6 files changed, 22 insertions(+), 13 deletions(-)
 >
-Acked-by: Thomas Hellstrom <thellstrom@vmware.com>
-
-
+> diff --git a/drivers/gpu/drm/gma500/cdv_intel_display.c b/drivers/gpu/drm/gma500/cdv_intel_display.c
+> index 1ed854f498b7..686385a66167 100644
+> --- a/drivers/gpu/drm/gma500/cdv_intel_display.c
+> +++ b/drivers/gpu/drm/gma500/cdv_intel_display.c
+> @@ -977,6 +977,9 @@ const struct drm_crtc_funcs cdv_intel_crtc_funcs = {
+>         .set_config = gma_crtc_set_config,
+>         .destroy = gma_crtc_destroy,
+>         .page_flip = gma_crtc_page_flip,
+> +       .enable_vblank = psb_enable_vblank,
+> +       .disable_vblank = psb_disable_vblank,
+> +       .get_vblank_counter = psb_get_vblank_counter,
+>  };
+>
+>  const struct gma_clock_funcs cdv_clock_funcs = {
+> diff --git a/drivers/gpu/drm/gma500/psb_drv.c b/drivers/gpu/drm/gma500/psb_drv.c
+> index 52591416f8fe..36cb292fdebe 100644
+> --- a/drivers/gpu/drm/gma500/psb_drv.c
+> +++ b/drivers/gpu/drm/gma500/psb_drv.c
+> @@ -363,7 +363,6 @@ static int psb_driver_load(struct drm_device *dev, unsigned long flags)
+>         drm_irq_install(dev, dev->pdev->irq);
+>
+>         dev->max_vblank_count = 0xffffff; /* only 24 bits of frame count */
+> -       dev->driver->get_vblank_counter = psb_get_vblank_counter;
+>
+>         psb_modeset_init(dev);
+>         psb_fbdev_init(dev);
+> @@ -507,9 +506,6 @@ static struct drm_driver driver = {
+>         .irq_postinstall = psb_irq_postinstall,
+>         .irq_uninstall = psb_irq_uninstall,
+>         .irq_handler = psb_irq_handler,
+> -       .enable_vblank = psb_enable_vblank,
+> -       .disable_vblank = psb_disable_vblank,
+> -       .get_vblank_counter = psb_get_vblank_counter,
+>
+>         .gem_free_object = psb_gem_free_object,
+>         .gem_vm_ops = &psb_gem_vm_ops,
+> diff --git a/drivers/gpu/drm/gma500/psb_drv.h b/drivers/gpu/drm/gma500/psb_drv.h
+> index 3d4ef3071d45..956926341316 100644
+> --- a/drivers/gpu/drm/gma500/psb_drv.h
+> +++ b/drivers/gpu/drm/gma500/psb_drv.h
+> @@ -681,15 +681,15 @@ extern void psb_irq_turn_off_dpst(struct drm_device *dev);
+>  extern void psb_irq_uninstall_islands(struct drm_device *dev, int hw_islands);
+>  extern int psb_vblank_wait2(struct drm_device *dev, unsigned int *sequence);
+>  extern int psb_vblank_wait(struct drm_device *dev, unsigned int *sequence);
+> -extern int psb_enable_vblank(struct drm_device *dev, unsigned int pipe);
+> -extern void psb_disable_vblank(struct drm_device *dev, unsigned int pipe);
+> +extern int psb_enable_vblank(struct drm_crtc *crtc);
+> +extern void psb_disable_vblank(struct drm_crtc *crtc);
+>  void
+>  psb_enable_pipestat(struct drm_psb_private *dev_priv, int pipe, u32 mask);
+>
+>  void
+>  psb_disable_pipestat(struct drm_psb_private *dev_priv, int pipe, u32 mask);
+>
+> -extern u32 psb_get_vblank_counter(struct drm_device *dev, unsigned int pipe);
+> +extern u32 psb_get_vblank_counter(struct drm_crtc *crtc);
+>
+>  /* framebuffer.c */
+>  extern int psbfb_probed(struct drm_device *dev);
+> diff --git a/drivers/gpu/drm/gma500/psb_intel_display.c b/drivers/gpu/drm/gma500/psb_intel_display.c
+> index fed3b563e62e..531c5485be17 100644
+> --- a/drivers/gpu/drm/gma500/psb_intel_display.c
+> +++ b/drivers/gpu/drm/gma500/psb_intel_display.c
+> @@ -433,6 +433,9 @@ const struct drm_crtc_funcs psb_intel_crtc_funcs = {
+>         .set_config = gma_crtc_set_config,
+>         .destroy = gma_crtc_destroy,
+>         .page_flip = gma_crtc_page_flip,
+> +       .enable_vblank = psb_enable_vblank,
+> +       .disable_vblank = psb_disable_vblank,
+> +       .get_vblank_counter = psb_get_vblank_counter,
+>  };
+>
+>  const struct gma_clock_funcs psb_clock_funcs = {
+> diff --git a/drivers/gpu/drm/gma500/psb_irq.c b/drivers/gpu/drm/gma500/psb_irq.c
+> index 91f90016dba9..15eb3770d817 100644
+> --- a/drivers/gpu/drm/gma500/psb_irq.c
+> +++ b/drivers/gpu/drm/gma500/psb_irq.c
+> @@ -506,8 +506,10 @@ int psb_irq_disable_dpst(struct drm_device *dev)
+>  /*
+>   * It is used to enable VBLANK interrupt
+>   */
+> -int psb_enable_vblank(struct drm_device *dev, unsigned int pipe)
+> +int psb_enable_vblank(struct drm_crtc *crtc)
+>  {
+> +       struct drm_device *dev = crtc->dev;
+> +       unsigned int pipe = crtc->index;
+>         struct drm_psb_private *dev_priv = dev->dev_private;
+>         unsigned long irqflags;
+>         uint32_t reg_val = 0;
+> @@ -545,8 +547,10 @@ int psb_enable_vblank(struct drm_device *dev, unsigned int pipe)
+>  /*
+>   * It is used to disable VBLANK interrupt
+>   */
+> -void psb_disable_vblank(struct drm_device *dev, unsigned int pipe)
+> +void psb_disable_vblank(struct drm_crtc *crtc)
+>  {
+> +       struct drm_device *dev = crtc->dev;
+> +       unsigned int pipe = crtc->index;
+>         struct drm_psb_private *dev_priv = dev->dev_private;
+>         unsigned long irqflags;
+>
+> @@ -618,8 +622,10 @@ void mdfld_disable_te(struct drm_device *dev, int pipe)
+>  /* Called from drm generic code, passed a 'crtc', which
+>   * we use as a pipe index
+>   */
+> -u32 psb_get_vblank_counter(struct drm_device *dev, unsigned int pipe)
+> +u32 psb_get_vblank_counter(struct drm_crtc *crtc)
+>  {
+> +       struct drm_device *dev = crtc->dev;
+> +       unsigned int pipe = crtc->index;
+>         uint32_t high_frame = PIPEAFRAMEHIGH;
+>         uint32_t low_frame = PIPEAFRAMEPIXEL;
+>         uint32_t pipeconf_reg = PIPEACONF;
+> diff --git a/drivers/gpu/drm/gma500/psb_irq.h b/drivers/gpu/drm/gma500/psb_irq.h
+> index 58fd502e3b9d..4f73998848d1 100644
+> --- a/drivers/gpu/drm/gma500/psb_irq.h
+> +++ b/drivers/gpu/drm/gma500/psb_irq.h
+> @@ -12,6 +12,7 @@
+>  #ifndef _PSB_IRQ_H_
+>  #define _PSB_IRQ_H_
+>
+> +struct drm_crtc;
+>  struct drm_device;
+>
+>  bool sysirq_init(struct drm_device *dev);
+> @@ -26,9 +27,9 @@ int psb_irq_enable_dpst(struct drm_device *dev);
+>  int psb_irq_disable_dpst(struct drm_device *dev);
+>  void psb_irq_turn_on_dpst(struct drm_device *dev);
+>  void psb_irq_turn_off_dpst(struct drm_device *dev);
+> -int  psb_enable_vblank(struct drm_device *dev, unsigned int pipe);
+> -void psb_disable_vblank(struct drm_device *dev, unsigned int pipe);
+> -u32  psb_get_vblank_counter(struct drm_device *dev, unsigned int pipe);
+> +int  psb_enable_vblank(struct drm_crtc *crtc);
+> +void psb_disable_vblank(struct drm_crtc *crtc);
+> +u32  psb_get_vblank_counter(struct drm_crtc *crtc);
+>
+>  int mdfld_enable_te(struct drm_device *dev, int pipe);
+>  void mdfld_disable_te(struct drm_device *dev, int pipe);
+> --
+> 2.24.1
+>
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
