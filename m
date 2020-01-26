@@ -2,60 +2,59 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id C0CCC14FCD0
-	for <lists+nouveau@lfdr.de>; Sun,  2 Feb 2020 12:09:30 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8023D14FCD4
+	for <lists+nouveau@lfdr.de>; Sun,  2 Feb 2020 12:09:36 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5B7786EA99;
+	by gabe.freedesktop.org (Postfix) with ESMTP id CB6916EAA1;
 	Sun,  2 Feb 2020 11:09:24 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail26.static.mailgun.info (mail26.static.mailgun.info
- [104.130.122.26])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E98D76E9C1
- for <nouveau@lists.freedesktop.org>; Sun, 26 Jan 2020 15:11:40 +0000 (UTC)
-DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=mg.codeaurora.org;
- q=dns/txt; 
- s=smtp; t=1580051502; h=Date: Message-Id: Cc: To: References:
- In-Reply-To: From: Subject: Content-Transfer-Encoding: MIME-Version:
- Content-Type: Sender; bh=GgNouC08XBq9czPTNzqE2b2+ochAUWZ+cpydcRWvAGA=;
- b=f20bFkXmg4EAzihQcaR0cYvbdMI0SD/alq8Qqwz9s5JWY9FUoKG5caVcRYGYaJCp4Hc8lLP0
- KLROFFNNgDlBcGlus6BiimHxtvYtP9rew9GwShvfU/qAEG1hatNngZG/UNsLrag3VTkGz9bw
- Sn5cHLK0hrsUbTZN9Q6LyxzuWIA=
-X-Mailgun-Sending-Ip: 104.130.122.26
-X-Mailgun-Sid: WyIzYWY5ZSIsICJub3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZyIsICJiZTllNGEiXQ==
-Received: from smtp.codeaurora.org
- (ec2-35-166-182-171.us-west-2.compute.amazonaws.com [35.166.182.171])
- by mxa.mailgun.org with ESMTP id 5e2dac29.7f27f98f6d50-smtp-out-n03;
- Sun, 26 Jan 2020 15:11:37 -0000 (UTC)
-Received: by smtp.codeaurora.org (Postfix, from userid 1001)
- id 9004FC43383; Sun, 26 Jan 2020 15:11:37 +0000 (UTC)
-X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
- aws-us-west-2-caf-mail-1.web.codeaurora.org
-X-Spam-Level: 
-X-Spam-Status: No, score=0.5 required=2.0 tests=ALL_TRUSTED,MISSING_DATE,
- MISSING_MID,SPF_NONE autolearn=no autolearn_force=no version=3.4.0
-Received: from potku.adurom.net (88-114-240-156.elisa-laajakaista.fi
- [88.114.240.156])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested) (Authenticated sender: kvalo)
- by smtp.codeaurora.org (Postfix) with ESMTPSA id 77D01C43383;
- Sun, 26 Jan 2020 15:11:26 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 smtp.codeaurora.org 77D01C43383
-Authentication-Results: aws-us-west-2-caf-mail-1.web.codeaurora.org;
- dmarc=none (p=none dis=none) header.from=codeaurora.org
-Authentication-Results: aws-us-west-2-caf-mail-1.web.codeaurora.org;
- spf=none smtp.mailfrom=kvalo@codeaurora.org
+X-Greylist: delayed 519 seconds by postgrey-1.36 at gabe;
+ Sun, 26 Jan 2020 22:09:47 UTC
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
+ [IPv6:2001:67c:2050::465:101])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id BE0766E279
+ for <nouveau@lists.freedesktop.org>; Sun, 26 Jan 2020 22:09:47 +0000 (UTC)
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:105:465:1:2:0])
+ (using TLSv1.2 with cipher ECDHE-RSA-CHACHA20-POLY1305 (256/256 bits))
+ (No client certificate requested)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 485Rf932R0zKmTw
+ for <nouveau@lists.freedesktop.org>; Sun, 26 Jan 2020 23:01:05 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=mailbox.org; h=
+ content-transfer-encoding:mime-version:content-type:content-type
+ :date:date:from:from:subject:subject:message-id:received; s=
+ mail20150812; t=1580076063; bh=2yPE8VwcFTzTryVYlsf9DyJW/VpzHH8KM
+ TuENOX+HUM=; b=xbKvQWwz1S0jcHAvCFcyoVmOWcfKGNt8D+qIJ1j2ftNF5AfVC
+ qaakHnqfcwf94uFOp/oe4uknz/VTMbLS5sg0hI5vjVl7pKaXOw3FBokMmT7gh4x6
+ Vdu8u4dUVqid5D2rXyDsT0fBfSyWIuD4g6GVzyM1PjkB1u04ceGv6Y5f4mEJY07y
+ HvlkpDj3yUD4/PJhxRCZiUst6R9rgcJLnlQZfJrC02wjAedIjX2JE6r0ry3+fhyp
+ dgHpFBXrNFiFAPdSDQAj8KZNbF/woOfGk/LKqf1iMjnTX+4Ls+C4hT4UX7Jyn6hi
+ JeuvoR7Ka6Vha79PgHCcB2znkL9GF9mk1xklQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1580076063;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=IHSUJwQ3JuV4w5ArfWxikiAAukaS0FqJpaEr9Rh+K0Y=;
+ b=hrz4XVwwou/0s6KaQY/AoV7VuquFxnfJ6um1b4WvaIBEPJOPQm+nJsKFvdoR5ILmkrscdC
+ r5EqJxqTNvf2E6DaLqLV7EzY+c+XIrcdjXr6/KETzzR1ad44LyO8ZEWhEbO13xzZjwr1kX
+ BRUUfbdYdHYXpHh/dqIxDmBTNPP9veCgtUc2RF9CVLt25KGMZRfNutWsh+uJEOGGjY6nDk
+ QIvS3N8SHOVCrwaIieuABGO1S9bo7ZepTVyMVZaWRfTbJ+TxYWP+W6iFLagkfSGVEm+Ooc
+ U9eHM8u1EXa5Nemy26rOv1vLrC/MEEvUN8WV9KeQuoS9HgO9aWL3zBNAlTEfyw==
+X-Virus-Scanned: amavisd-new at heinlein-support.de
+Received: from smtp2.mailbox.org ([80.241.60.241])
+ by spamfilter02.heinlein-hosting.de (spamfilter02.heinlein-hosting.de
+ [80.241.56.116]) (amavisd-new, port 10030)
+ with ESMTP id QMwdmM33hB08 for <nouveau@lists.freedesktop.org>;
+ Sun, 26 Jan 2020 23:01:03 +0100 (CET)
+Message-ID: <608e9087bdb9d18d661912e9704d6d563e510865.camel@mailbox.org>
+From: Dennis den Brok <ddb@mailbox.org>
+To: nouveau@lists.freedesktop.org
+Date: Sun, 26 Jan 2020 23:01:02 +0100
 MIME-Version: 1.0
-From: Kalle Valo <kvalo@codeaurora.org>
-In-Reply-To: <20200108200528.4614-3-krzk@kernel.org>
-References: <20200108200528.4614-3-krzk@kernel.org>
-To: Krzysztof Kozlowski <krzk@kernel.org>
-User-Agent: pwcli/0.0.0-git (https://github.com/kvalo/pwcli/) Python/2.7.12
-Message-Id: <20200126151137.9004FC43383@smtp.codeaurora.org>
-Date: Sun, 26 Jan 2020 15:11:37 +0000 (UTC)
 X-Mailman-Approved-At: Sun, 02 Feb 2020 11:09:23 +0000
-Subject: Re: [Nouveau] [PATCH v2 2/9] net: wireless: rtl818x: Constify
- ioreadX() iomem argument (as in generic implementation)
+Subject: [Nouveau] Firmware required?
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,54 +66,43 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Rich Felker <dalias@libc.org>, Jiri Slaby <jirislaby@gmail.com>,
- Geert Uytterhoeven <geert+renesas@glider.be>, David Airlie <airlied@linux.ie>,
- Benjamin Herrenschmidt <benh@kernel.crashing.org>,
- Jason Wang <jasowang@redhat.com>, dri-devel@lists.freedesktop.org,
- virtualization@lists.linux-foundation.org,
- "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
- netdev@vger.kernel.org, Paul Mackerras <paulus@samba.org>,
- linux-arch@vger.kernel.org, Dave Jiang <dave.jiang@intel.com>,
- Yoshinori Sato <ysato@users.sourceforge.jp>,
- Michael Ellerman <mpe@ellerman.id.au>, Helge Deller <deller@gmx.de>,
- linux-sh@vger.kernel.org, Alexey Brodkin <abrodkin@synopsys.com>,
- Krzysztof Kozlowski <krzk@kernel.org>, Ben Skeggs <bskeggs@redhat.com>,
- nouveau@lists.freedesktop.org, Dave Airlie <airlied@redhat.com>,
- linux-snps-arc@lists.infradead.org, Nick Kossifidis <mickflemm@gmail.com>,
- Allen Hubbe <allenbh@gmail.com>, Arnd Bergmann <arnd@arndb.de>,
- linux-alpha@vger.kernel.org, Ivan Kokshaysky <ink@jurassic.park.msu.ru>,
- Thomas Gleixner <tglx@linutronix.de>,
- Mauro Carvalho Chehab <mchehab@kernel.org>,
- Richard Henderson <rth@twiddle.net>, linux-parisc@vger.kernel.org,
- Vineet Gupta <vgupta@synopsys.com>, linux-wireless@vger.kernel.org,
- linux-kernel@vger.kernel.org, Luis Chamberlain <mcgrof@kernel.org>,
- Daniel Vetter <daniel@ffwll.ch>, Jon Mason <jdmason@kudzu.us>,
- linux-ntb@googlegroups.com, linux-media@vger.kernel.org,
- linuxppc-dev@lists.ozlabs.org, "David S. Miller" <davem@davemloft.net>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Krzysztof Kozlowski <krzk@kernel.org> wrote:
+Dear nouveau@,
 
-> The ioreadX() helpers have inconsistent interface.  On some architectures
-> void *__iomem address argument is a pointer to const, on some not.
-> 
-> Implementations of ioreadX() do not modify the memory under the address
-> so they can be converted to a "const" version for const-safety and
-> consistency among architectures.
-> 
-> Signed-off-by: Krzysztof Kozlowski <krzk@kernel.org>
-> Reviewed-by: Geert Uytterhoeven <geert+renesas@glider.be>
+please forgive me if this is a FAQ or otherwise obvious; it isn't to me
+from searching the web, the nouveau mailing list archives and various
+Linux distributions' wiki pages.
 
-I assume this and patch 9 are going via some other tree so dropping them
-from my patchwork queue.
+I'd like to know for which nvidia GPUs a firmware binary blob needs to
+be loaded to the GPU in order for nouveau to work with it, including
+binaries from what is often called "linux-firmware".  Hopefully more
+precisely:
 
--- 
-https://patchwork.kernel.org/patch/11324461/
+Are there GPUs supported by nouveau which do not work at all without a
+binary blob?
 
-https://wireless.wiki.kernel.org/en/developers/documentation/submittingpatches
+Are there GPUs which work partially without a firmware binary blob? 
+What are the restrictions?
+
+Are there GPUs which work without restrictions?
+
+If there is a resource with answers to my questions, I'd be grateful
+for a reference.
+
+Please CC me, as I am not subscribed to the list.
+
+Thanks and regards,
+
+Dennis den Brok
+
+
+
+
+
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
