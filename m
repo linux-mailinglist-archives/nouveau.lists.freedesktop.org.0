@@ -1,57 +1,41 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id E18ED14FCCF
-	for <lists+nouveau@lfdr.de>; Sun,  2 Feb 2020 12:09:27 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4308914FCD6
+	for <lists+nouveau@lfdr.de>; Sun,  2 Feb 2020 12:09:38 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 22FA56EA98;
-	Sun,  2 Feb 2020 11:09:24 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 74DE66EAA5;
+	Sun,  2 Feb 2020 11:09:29 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-yb1-xb44.google.com (mail-yb1-xb44.google.com
- [IPv6:2607:f8b0:4864:20::b44])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D55E36F49A;
- Wed, 29 Jan 2020 08:26:01 +0000 (UTC)
-Received: by mail-yb1-xb44.google.com with SMTP id q190so8340491ybq.2;
- Wed, 29 Jan 2020 00:26:01 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=sgF2vmhz2T7IeFLxb2F117QIdy1NFOJJsX193BxkqOw=;
- b=dSNO9wjN2SsIBCH49OqTw/A/PZDqYOhzfrV2bZZqib4KDx0TSD+ni80dMEBk59atxI
- N/H3dy3x9h6l8+GyOFyfyhKzsiNKl92xMtTEqSEvQxQktrQ/g/i3fyKSkV2XlzQQXedG
- 9RYuTGVZ9dltnlbFbN6Z3xrsbt26kFKGreKDHGEtBdu6kUzxb3/R+7WvQ27byrztsof5
- a0pOa1tq1O25hD0B/wAnZTeTU3TVu/K3D3pFDFgILT8dfi6xdRkVpw0ZGqusli/vHMMs
- JiOgO4MTQ5p4pkgqTFjrlq6i2a3O0xfuYOgtw/7CZftq7P3zwKz8rTO3xrog1fcCGHJk
- 6nug==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=sgF2vmhz2T7IeFLxb2F117QIdy1NFOJJsX193BxkqOw=;
- b=OMExpqIiP9lyTBXwfdugj+XezqIOw0yha4IgEWWbq/J59SgmDAwt/r0QQL99wVdb/D
- czCL/PnPap0i8zho8ljTWU2xHF/gYBuXzYe4GKJBr6IGqVFxqjehElLC1DTYlzmgBDhZ
- hiWPH/1pMdi8CmQub75xhoHBm5QjMW2IUlFoUnUX0g7u8D/Nvkiy5ykg8ZQVt7sD1GY9
- GWbOR4jsFMcbrX3Nh0d5oSHrJEPiekzjAsqlZQ9dBwYsgO0qucbf+6bSx5VIldG/RAQ5
- +4qcgrGlVYlwcWsi9pApsnVhvyb7G87ALn19ZpOwoPLxPvv9qVoyqSKW1EKzPDoEp7U6
- OE4w==
-X-Gm-Message-State: APjAAAXt9tBhHUdpyOrdphl0EaUobxUN4QaxclflLSpBXKEUOfrLmEPo
- zeGIM/0JP8WfQbUG1yYztgLmpIm4EU/GPoxmgWc=
-X-Google-Smtp-Source: APXvYqyVyK9PjCztHzRXzGqMcg86H7OYSIU9PnLCzOGfOIj82VVVgpuSOxqUS6U+h720ew60ng17+3R2jqUohlRgOEg=
-X-Received: by 2002:a25:69c9:: with SMTP id
- e192mr19401976ybc.162.1580286361002; 
- Wed, 29 Jan 2020 00:26:01 -0800 (PST)
+X-Greylist: delayed 902 seconds by postgrey-1.36 at gabe;
+ Wed, 29 Jan 2020 16:37:25 UTC
+Received: from sender4-of-o53.zoho.com (sender4-of-o53.zoho.com
+ [136.143.188.53])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id CABC46F5D7
+ for <nouveau@lists.freedesktop.org>; Wed, 29 Jan 2020 16:37:25 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1580314941; 
+ s=s; d=qubes-os.org; i=frederic.pierret@qubes-os.org;
+ h=To:Cc:From:Subject:Message-ID:Date:MIME-Version:Content-Type;
+ bh=K19QkB0oonfEXCaZIfhluO472UZCylwbShW7JECNrz4=;
+ b=dhkjDT28WTgsQiHTSAFxGKgecfVFDRMtcygbHG5VvS2NRrseHlU4SAjdx441wML9
+ lRQJMTHBCNZY9NkzRq85nR6O30PkD9ftQXt58Sym5Qn9ii+Zmp8tPKkbXtPWhGMXHfQ
+ J96j7NstVXnSFIORDMFKE5UoXKvuMVvT0oPUaTz4=
+Received: from [10.137.0.19] (185.246.211.176 [185.246.211.176]) by
+ mx.zohomail.com with SMTPS id 1580314936696574.2486897165325;
+ Wed, 29 Jan 2020 08:22:16 -0800 (PST)
+To: Ben Skeggs <bskeggs@redhat.com>
+From: =?UTF-8?B?RnLDqWTDqXJpYyBQaWVycmV0?= <frederic.pierret@qubes-os.org>
+Message-ID: <8a82672e-1a8d-b08e-b387-11ffecd5ba07@qubes-os.org>
+Date: Wed, 29 Jan 2020 17:22:13 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.1.0
 MIME-Version: 1.0
-References: <20200123135943.24140-1-tzimmermann@suse.de>
- <20200123135943.24140-10-tzimmermann@suse.de>
-In-Reply-To: <20200123135943.24140-10-tzimmermann@suse.de>
-From: Ben Skeggs <skeggsb@gmail.com>
-Date: Wed, 29 Jan 2020 18:25:49 +1000
-Message-ID: <CACAvsv4Yp99w845A8kERpnx+mSax16PLzEBx-uEpZyfAoLu_Qg@mail.gmail.com>
-To: Thomas Zimmermann <tzimmermann@suse.de>
+X-Zoho-Virus-Status: 1
+X-ZohoMailClient: External
 X-Mailman-Approved-At: Sun, 02 Feb 2020 11:09:23 +0000
-Subject: Re: [Nouveau] [PATCH v4 09/22] drm/nouveau: Convert to CRTC VBLANK
- callbacks
+Subject: [Nouveau] nv50_disp_chan_mthd: ensure mthd is not NULL
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,158 +47,129 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: hamohammed.sa@gmail.com, Dave Airlie <airlied@linux.ie>,
- ML nouveau <nouveau@lists.freedesktop.org>, joonas.lahtinen@linux.intel.com,
- ML dri-devel <dri-devel@lists.freedesktop.org>, eric@anholt.net,
- amd-gfx mailing list <amd-gfx@lists.freedesktop.org>,
- benjamin.gaignard@linaro.org, alexandre.torgue@st.com, David1.Zhou@amd.com,
- thellstrom@vmware.com, sean@poorly.run, patrik.r.jakobsson@gmail.com,
- linux-graphics-maintainer@vmware.com, Ben Skeggs <bskeggs@redhat.com>,
- Harry Wentland <harry.wentland@amd.com>, mcoquelin.stm32@gmail.com,
- sunpeng.li@amd.com, linux-arm-msm@vger.kernel.org,
- intel-gfx <intel-gfx@lists.freedesktop.org>, maarten.lankhorst@linux.intel.com,
- Jani Nikula <jani.nikula@linux.intel.com>, rodrigo.vivi@intel.com,
- vincent.abriou@st.com, rodrigosiqueiramelo@gmail.com, philippe.cornu@st.com,
- yannick.fertre@st.com, Rob Clark <robdclark@gmail.com>,
- Daniel Vetter <daniel@ffwll.ch>, Alex Deucher <alexander.deucher@amd.com>,
- freedreno@lists.freedesktop.org,
- =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: nouveau@lists.freedesktop.org, stable@vger.kernel.org
+Content-Type: multipart/mixed; boundary="===============0193968887=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, 24 Jan 2020 at 00:00, Thomas Zimmermann <tzimmermann@suse.de> wrote:
->
-> VBLANK callbacks in struct drm_driver are deprecated in favor of
-> their equivalents in struct drm_crtc_funcs. Convert nouvean over.
->
-> v4:
->         * add argument names in function declaration
->
-> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-Reviewed-by: Ben Skeggs <bskeggs@redhat.com>
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--===============0193968887==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="WtQVe9uAsSNEoXDlyAZi0KODmrWFpX0CC"
 
-> ---
->  drivers/gpu/drm/nouveau/dispnv04/crtc.c   |  3 +++
->  drivers/gpu/drm/nouveau/dispnv50/head.c   |  4 ++++
->  drivers/gpu/drm/nouveau/nouveau_display.c | 14 ++------------
->  drivers/gpu/drm/nouveau/nouveau_display.h |  4 ++--
->  drivers/gpu/drm/nouveau/nouveau_drm.c     |  4 ----
->  5 files changed, 11 insertions(+), 18 deletions(-)
->
-> diff --git a/drivers/gpu/drm/nouveau/dispnv04/crtc.c b/drivers/gpu/drm/nouveau/dispnv04/crtc.c
-> index 17e9d1c078a0..1f08de4241e0 100644
-> --- a/drivers/gpu/drm/nouveau/dispnv04/crtc.c
-> +++ b/drivers/gpu/drm/nouveau/dispnv04/crtc.c
-> @@ -1248,6 +1248,9 @@ static const struct drm_crtc_funcs nv04_crtc_funcs = {
->         .set_config = drm_crtc_helper_set_config,
->         .page_flip = nv04_crtc_page_flip,
->         .destroy = nv_crtc_destroy,
-> +       .enable_vblank = nouveau_display_vblank_enable,
-> +       .disable_vblank = nouveau_display_vblank_disable,
-> +       .get_vblank_timestamp = drm_crtc_vblank_helper_get_vblank_timestamp,
->  };
->
->  static const struct drm_crtc_helper_funcs nv04_crtc_helper_funcs = {
-> diff --git a/drivers/gpu/drm/nouveau/dispnv50/head.c b/drivers/gpu/drm/nouveau/dispnv50/head.c
-> index 41852dd8fdbd..8f6455697ba7 100644
-> --- a/drivers/gpu/drm/nouveau/dispnv50/head.c
-> +++ b/drivers/gpu/drm/nouveau/dispnv50/head.c
-> @@ -29,6 +29,7 @@
->
->  #include <drm/drm_atomic_helper.h>
->  #include <drm/drm_crtc_helper.h>
-> +#include <drm/drm_vblank.h>
->  #include "nouveau_connector.h"
->  void
->  nv50_head_flush_clr(struct nv50_head *head,
-> @@ -482,6 +483,9 @@ nv50_head_func = {
->         .page_flip = drm_atomic_helper_page_flip,
->         .atomic_duplicate_state = nv50_head_atomic_duplicate_state,
->         .atomic_destroy_state = nv50_head_atomic_destroy_state,
-> +       .enable_vblank = nouveau_display_vblank_enable,
-> +       .disable_vblank = nouveau_display_vblank_disable,
-> +       .get_vblank_timestamp = drm_crtc_vblank_helper_get_vblank_timestamp,
->  };
->
->  struct nv50_head *
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_display.c b/drivers/gpu/drm/nouveau/nouveau_display.c
-> index 86f99dc8fcef..700817dc4fa0 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_display.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_display.c
-> @@ -54,15 +54,10 @@ nouveau_display_vblank_handler(struct nvif_notify *notify)
->  }
->
->  int
-> -nouveau_display_vblank_enable(struct drm_device *dev, unsigned int pipe)
-> +nouveau_display_vblank_enable(struct drm_crtc *crtc)
->  {
-> -       struct drm_crtc *crtc;
->         struct nouveau_crtc *nv_crtc;
->
-> -       crtc = drm_crtc_from_index(dev, pipe);
-> -       if (!crtc)
-> -               return -EINVAL;
-> -
->         nv_crtc = nouveau_crtc(crtc);
->         nvif_notify_get(&nv_crtc->vblank);
->
-> @@ -70,15 +65,10 @@ nouveau_display_vblank_enable(struct drm_device *dev, unsigned int pipe)
->  }
->
->  void
-> -nouveau_display_vblank_disable(struct drm_device *dev, unsigned int pipe)
-> +nouveau_display_vblank_disable(struct drm_crtc *crtc)
->  {
-> -       struct drm_crtc *crtc;
->         struct nouveau_crtc *nv_crtc;
->
-> -       crtc = drm_crtc_from_index(dev, pipe);
-> -       if (!crtc)
-> -               return;
-> -
->         nv_crtc = nouveau_crtc(crtc);
->         nvif_notify_put(&nv_crtc->vblank);
->  }
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_display.h b/drivers/gpu/drm/nouveau/nouveau_display.h
-> index 26d34f1a77da..de004018ab5c 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_display.h
-> +++ b/drivers/gpu/drm/nouveau/nouveau_display.h
-> @@ -61,8 +61,8 @@ int  nouveau_display_init(struct drm_device *dev, bool resume, bool runtime);
->  void nouveau_display_fini(struct drm_device *dev, bool suspend, bool runtime);
->  int  nouveau_display_suspend(struct drm_device *dev, bool runtime);
->  void nouveau_display_resume(struct drm_device *dev, bool runtime);
-> -int  nouveau_display_vblank_enable(struct drm_device *, unsigned int);
-> -void nouveau_display_vblank_disable(struct drm_device *, unsigned int);
-> +int  nouveau_display_vblank_enable(struct drm_crtc *crtc);
-> +void nouveau_display_vblank_disable(struct drm_crtc *crtc);
->  bool nouveau_display_scanoutpos(struct drm_crtc *crtc,
->                                 bool in_vblank_irq, int *vpos, int *hpos,
->                                 ktime_t *stime, ktime_t *etime,
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_drm.c b/drivers/gpu/drm/nouveau/nouveau_drm.c
-> index fcc036a08965..6b1629c14dd7 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_drm.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_drm.c
-> @@ -1120,10 +1120,6 @@ driver_stub = {
->         .debugfs_init = nouveau_drm_debugfs_init,
->  #endif
->
-> -       .enable_vblank = nouveau_display_vblank_enable,
-> -       .disable_vblank = nouveau_display_vblank_disable,
-> -       .get_vblank_timestamp = drm_calc_vbltimestamp_from_scanoutpos,
-> -
->         .ioctls = nouveau_ioctls,
->         .num_ioctls = ARRAY_SIZE(nouveau_ioctls),
->         .fops = &nouveau_driver_fops,
-> --
-> 2.24.1
->
-> _______________________________________________
-> dri-devel mailing list
-> dri-devel@lists.freedesktop.org
-> https://lists.freedesktop.org/mailman/listinfo/dri-devel
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--WtQVe9uAsSNEoXDlyAZi0KODmrWFpX0CC
+Content-Type: multipart/mixed; boundary="7myXQXT16OI7eX115fyWfxDrwq34iJ4jY"
+
+--7myXQXT16OI7eX115fyWfxDrwq34iJ4jY
+Content-Type: multipart/mixed;
+ boundary="------------96B7C175C78789148090E248"
+Content-Language: en-US
+
+This is a multi-part message in MIME format.
+--------------96B7C175C78789148090E248
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+Dear Ben Skeggs,
+
+Please find attached a patch solving a blocking issue I encountered:
+https://bugzilla.kernel.org/show_bug.cgi?id=3D206299
+
+Basically, running at least a RTX2080TI on Xen makes a bad mmio error
+which causes having 'mthd' pointer to be NULL in 'channv50.c'. From the
+code, it's assumed to be not NULL by accessing directly 'mthd->data[0]'
+which is the reason of the kernel panic. I simply check if the pointer
+is not NULL before continuing.
+
+Best regards,
+
+Fr=C3=A9d=C3=A9ric Pierret
+
+
+--------------96B7C175C78789148090E248
+Content-Type: text/x-patch; charset=UTF-8;
+ name="0001-nv50_disp_chan_mthd-ensure-mthd-is-not-NULL.patch"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: attachment;
+ filename="0001-nv50_disp_chan_mthd-ensure-mthd-is-not-NULL.patch"
+
+From: =3D?UTF-8?q?Fr=3DC3=3DA9d=3DC3=3DA9ric=3D20Pierret=3D20=3D28fepitre=
+=3D29?=3D
+ <frederic.pierret@qubes-os.org>
+Date: Sun, 26 Jan 2020 23:24:33 +0100
+Subject: [PATCH] nv50_disp_chan_mthd: ensure mthd is not NULL
+MIME-Version: 1.0
+Content-Type: text/plain; charset=3DUTF-8
+Content-Transfer-Encoding: 8bit
+
+Pointer to structure array is assumed not NULL by default. It has
+the consequence to raise a kernel panic when it's not the case.
+
+BugLink: https://bugzilla.kernel.org/show_bug.cgi?id=3D206299
+Signed-off-by: Fr=C3=A9d=C3=A9ric Pierret (fepitre) <frederic.pierret@qub=
+es-os.org>
+---
+ drivers/gpu/drm/nouveau/nvkm/engine/disp/channv50.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/channv50.c b/driver=
+s/gpu/drm/nouveau/nvkm/engine/disp/channv50.c
+index bcf32d92ee5a..50e3539f33d2 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/channv50.c
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/channv50.c
+@@ -74,6 +74,8 @@ nv50_disp_chan_mthd(struct nv50_disp_chan *chan, int de=
+bug)
+=20
+ 	if (debug > subdev->debug)
+ 		return;
++	if (!mthd)
++		return;
+=20
+ 	for (i =3D 0; (list =3D mthd->data[i].mthd) !=3D NULL; i++) {
+ 		u32 base =3D chan->head * mthd->addr;
+--=20
+2.21.0
+
+
+--------------96B7C175C78789148090E248--
+
+--7myXQXT16OI7eX115fyWfxDrwq34iJ4jY--
+
+--WtQVe9uAsSNEoXDlyAZi0KODmrWFpX0CC
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEEn6ZLkvlecGvyjiymSEAQtc3FduIFAl4xsTMACgkQSEAQtc3F
+duLH1g//YG5jYl0TjeQVx9BMrx5bLgOo/XTiajguTQwUBSHoJ/Q36zzKZr9D+VUx
++ihJ48G2koPaUTZWxWrARB7mCXU/LFPOzQ7LvokA8ZQ2MtVOjyGKJfxHBhQaBmZq
++R0RTS0rDi74NyVuCzkXEhgYm/uPoQsaVhy5fdbNF+GHrFODuAIsdBYeVfOalsSH
+UtoNyYOA/ccfGfZJHT7XRZNOP3x1UfsfMinInbVrWCEmmQ+g1+pfN837cKf/fILb
+5vPoVn7Lx0hZ7vdPduLMSTvdboddj7AhLREGkpS+szPj1HlNM4t/WVgKBR0YZrUf
+k26xUVNtXNfK14hg3eb43E/63kBWJak+dVy01xhjsn/gCHBzUX4L/8MWoeRtA5zx
+9g4r2BvEKwGiKyvoVtdRec0Mzu0Vf3LzFPo6/V1Pqceelhqh+nS6fWIoCuTEeFeL
+NBGcIPyycIMpYhEHmQoGuJCou1T+RwtDFPGHOvjdiKNvbkt1QbpBlhrQ6uRVyG4I
+tXG2sHJWsLCSboIUPf1pefxT+11LlYp9uU21Zy/vWQT6NsRXHwqTTv8zkrl6pOBd
+j7hBKUCtW2q3UuShmXg85h9UDAJd8j45xwdv+CzlmVaENdhfFdWX3adepE3Sv09q
+CsNDlnOtSa+UKdyP8UWoR8k0LKelQCT5X0HtRGVCxf4hccUR0Ro=
+=X6Bt
+-----END PGP SIGNATURE-----
+
+--WtQVe9uAsSNEoXDlyAZi0KODmrWFpX0CC--
+
+--===============0193968887==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/nouveau
+
+--===============0193968887==--
