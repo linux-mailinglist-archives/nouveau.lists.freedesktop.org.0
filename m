@@ -2,40 +2,43 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4308914FCD6
-	for <lists+nouveau@lfdr.de>; Sun,  2 Feb 2020 12:09:38 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5B89914FECB
+	for <lists+nouveau@lfdr.de>; Sun,  2 Feb 2020 19:57:36 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 74DE66EAA5;
-	Sun,  2 Feb 2020 11:09:29 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8FE4C6E0FD;
+	Sun,  2 Feb 2020 18:57:33 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 902 seconds by postgrey-1.36 at gabe;
- Wed, 29 Jan 2020 16:37:25 UTC
-Received: from sender4-of-o53.zoho.com (sender4-of-o53.zoho.com
- [136.143.188.53])
- by gabe.freedesktop.org (Postfix) with ESMTPS id CABC46F5D7
- for <nouveau@lists.freedesktop.org>; Wed, 29 Jan 2020 16:37:25 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1580314941; 
- s=s; d=qubes-os.org; i=frederic.pierret@qubes-os.org;
- h=To:Cc:From:Subject:Message-ID:Date:MIME-Version:Content-Type;
- bh=K19QkB0oonfEXCaZIfhluO472UZCylwbShW7JECNrz4=;
- b=dhkjDT28WTgsQiHTSAFxGKgecfVFDRMtcygbHG5VvS2NRrseHlU4SAjdx441wML9
- lRQJMTHBCNZY9NkzRq85nR6O30PkD9ftQXt58Sym5Qn9ii+Zmp8tPKkbXtPWhGMXHfQ
- J96j7NstVXnSFIORDMFKE5UoXKvuMVvT0oPUaTz4=
-Received: from [10.137.0.19] (185.246.211.176 [185.246.211.176]) by
- mx.zohomail.com with SMTPS id 1580314936696574.2486897165325;
- Wed, 29 Jan 2020 08:22:16 -0800 (PST)
-To: Ben Skeggs <bskeggs@redhat.com>
-From: =?UTF-8?B?RnLDqWTDqXJpYyBQaWVycmV0?= <frederic.pierret@qubes-os.org>
-Message-ID: <8a82672e-1a8d-b08e-b387-11ffecd5ba07@qubes-os.org>
-Date: Wed, 29 Jan 2020 17:22:13 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.1.0
+Received: from mail-vs1-f67.google.com (mail-vs1-f67.google.com
+ [209.85.217.67])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id EE4806E0FD
+ for <nouveau@lists.freedesktop.org>; Sun,  2 Feb 2020 18:57:31 +0000 (UTC)
+Received: by mail-vs1-f67.google.com with SMTP id k188so7521801vsc.8
+ for <nouveau@lists.freedesktop.org>; Sun, 02 Feb 2020 10:57:31 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=XWrPQ1QVf/RXnmvXP2CXMookfajtPYWGHkQcSKJ4dEk=;
+ b=NdN4/PVBtfZpGh/1fg3088rF7S2TvUW2Bs+Kt0q3zKYharsmJEKgdlV4aPsAoOITYT
+ E//9z0+JO23wF1TELlTOVJa+N9mlUXIELU/D1957dbeXoqMtZtY6hnyTLucOXMa3tAQq
+ qp7tJQHdT93BGuYH054TM5m2uC8DfxjXTmTPk2ZsXEC9siOpVAkQkZyUIrIFRFRRFpiz
+ cRp9h5WrXhKwt2pSaioM4llTl4bBdC9FQHzgxQ2hlqDxrqKgMOw+fyV4aTS8b+Cw2Tvj
+ BwXrAXQZ0gtjaXNzD94RPyFH26bs3EgM6ilX9K5nY3AqOBYD6Z6i6Bt5hhOMzuVw7tpk
+ 5WLA==
+X-Gm-Message-State: APjAAAWYWxfpFNx8xi5vCrQJejkRnD4XFO6X6Zdo3IrsVxSIQY4SLoYz
+ W1Z0Y3oMByVqvgffY5dXOycg89MnFvL3WbZds6k=
+X-Google-Smtp-Source: APXvYqy/3IbJsqDR/1FOGc8rJzu7yAJkhakDvRq3PUJeWHG5xOG2GPaspkhq3u5nCWEq+R7sD1nXiaC5YI9UiuSb+Rw=
+X-Received: by 2002:a67:f412:: with SMTP id p18mr13352164vsn.207.1580669849986; 
+ Sun, 02 Feb 2020 10:57:29 -0800 (PST)
 MIME-Version: 1.0
-X-Zoho-Virus-Status: 1
-X-ZohoMailClient: External
-X-Mailman-Approved-At: Sun, 02 Feb 2020 11:09:23 +0000
-Subject: [Nouveau] nv50_disp_chan_mthd: ensure mthd is not NULL
+References: <608e9087bdb9d18d661912e9704d6d563e510865.camel@mailbox.org>
+In-Reply-To: <608e9087bdb9d18d661912e9704d6d563e510865.camel@mailbox.org>
+From: Ilia Mirkin <imirkin@alum.mit.edu>
+Date: Sun, 2 Feb 2020 13:57:18 -0500
+Message-ID: <CAKb7UvgfACSrGh6fpuXiE61t7upPJAVggg-cQPV5VwyjmvoHWQ@mail.gmail.com>
+To: Dennis den Brok <ddb@mailbox.org>
+Subject: Re: [Nouveau] Firmware required?
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -47,129 +50,112 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, stable@vger.kernel.org
-Content-Type: multipart/mixed; boundary="===============0193968887=="
+Cc: nouveau <nouveau@lists.freedesktop.org>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============0193968887==
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="WtQVe9uAsSNEoXDlyAZi0KODmrWFpX0CC"
+All GPUs supported by nouveau (Riva TNT and newer) can work without
+additional firmware. It all depends on the definition of what one
+means by "work", of course.
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---WtQVe9uAsSNEoXDlyAZi0KODmrWFpX0CC
-Content-Type: multipart/mixed; boundary="7myXQXT16OI7eX115fyWfxDrwq34iJ4jY"
+Across the board, modesetting works without any additional firmware
+(i.e. lighting up displays, making pictures appear on them), including
+DP-MST. There is no support for HDR yet, but it's something I've
+dabbled with a bit. (No firmware required.)
 
---7myXQXT16OI7eX115fyWfxDrwq34iJ4jY
-Content-Type: multipart/mixed;
- boundary="------------96B7C175C78789148090E248"
-Content-Language: en-US
+NV17/18 boards (GeForce 2/4 MX) have support for MPEG1/MPEG2 decoding
+acceleration, but there is no support for this in nouveau (no firmware
+required, just ... motivation).
 
-This is a multi-part message in MIME format.
---------------96B7C175C78789148090E248
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+NV4x/G7x (and the G80, I think) boards have a VP1 video decoding
+engine which helps with some sort of WMV accel, which would require
+firmware to operate. However there is no support for this in nouveau,
+no linux drivers shipped by NVIDIA ever supported this, and by all
+accounts, it didn't actually make things faster on Windows.
 
-Dear Ben Skeggs,
+Starting with the G84 (and nouveau support ending at the GK20x
+series), you need additional firmware for video decoding acceleration.
+There is a script to extract this firmware from shipped NVIDIA
+drivers, although the results can't be redistributed. This is detailed
+at https://nouveau.freedesktop.org/wiki/VideoAcceleration/ . There are
+some bugs in the H264 decoding which have never been tracked down, but
+for most videos, it works fine.
 
-Please find attached a patch solving a blocking issue I encountered:
-https://bugzilla.kernel.org/show_bug.cgi?id=3D206299
+A handful of GK106 boards (marketed as GTX 660) benefit from
+NVIDIA-supplied context switching firmware. We have no idea why - the
+nouveau-supplied one should be fine, but probably some error condition
+is mishandled. Or something else odd.
 
-Basically, running at least a RTX2080TI on Xen makes a bad mmio error
-which causes having 'mthd' pointer to be NULL in 'channv50.c'. From the
-code, it's assumed to be not NULL by accessing directly 'mthd->data[0]'
-which is the reason of the kernel panic. I simply check if the pointer
-is not NULL before continuing.
+Kepler and newer boards support video encoding, which requires
+firmware, but nouveau has no support for this.
 
-Best regards,
+Starting with GM20x (generally, marketing names like GTX 9xx, but not
+always), you need additional firmware for any 2D/3D acceleration, as
+cryptographic signatures are verified by the GPU. While NVIDIA
+supplies the firmware needed for acceleration (generally with a 1-2
+year delay after launch), they do not supply the firmware necessary
+for the PMU, which would control things like fans, voltages, clock
+frequencies. Since (modern) GPUs boot up in the lowest performance
+levels, that means that you're stuck there with nouveau, getting 5-10%
+of maximum performance, depending on specifics.
 
-Fr=C3=A9d=C3=A9ric Pierret
+There is presently no 3D acceleration support in mesa for Volta or
+Turing, although I'm told this is in the works. There is also no 2D
+acceleration support for Volta or Turing in xf86-video-nouveau.
+Volta's shader execution model has changed somewhat from earlier gens
+(while Fermi/Kepler/Maxwell were largely identical), so this has
+required some additional effort (and since there's no ability to have
+reclocking on those boards, a profound lack of caring from me).
 
+I expect there are bits I missed here ... not 100% sure whether s2ram
+would work on GM20x+ without firmware.
 
---------------96B7C175C78789148090E248
-Content-Type: text/x-patch; charset=UTF-8;
- name="0001-nv50_disp_chan_mthd-ensure-mthd-is-not-NULL.patch"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: attachment;
- filename="0001-nv50_disp_chan_mthd-ensure-mthd-is-not-NULL.patch"
+Hope this helps,
 
-From: =3D?UTF-8?q?Fr=3DC3=3DA9d=3DC3=3DA9ric=3D20Pierret=3D20=3D28fepitre=
-=3D29?=3D
- <frederic.pierret@qubes-os.org>
-Date: Sun, 26 Jan 2020 23:24:33 +0100
-Subject: [PATCH] nv50_disp_chan_mthd: ensure mthd is not NULL
-MIME-Version: 1.0
-Content-Type: text/plain; charset=3DUTF-8
-Content-Transfer-Encoding: 8bit
-
-Pointer to structure array is assumed not NULL by default. It has
-the consequence to raise a kernel panic when it's not the case.
-
-BugLink: https://bugzilla.kernel.org/show_bug.cgi?id=3D206299
-Signed-off-by: Fr=C3=A9d=C3=A9ric Pierret (fepitre) <frederic.pierret@qub=
-es-os.org>
----
- drivers/gpu/drm/nouveau/nvkm/engine/disp/channv50.c | 2 ++
- 1 file changed, 2 insertions(+)
-
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/channv50.c b/driver=
-s/gpu/drm/nouveau/nvkm/engine/disp/channv50.c
-index bcf32d92ee5a..50e3539f33d2 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/channv50.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/channv50.c
-@@ -74,6 +74,8 @@ nv50_disp_chan_mthd(struct nv50_disp_chan *chan, int de=
-bug)
-=20
- 	if (debug > subdev->debug)
- 		return;
-+	if (!mthd)
-+		return;
-=20
- 	for (i =3D 0; (list =3D mthd->data[i].mthd) !=3D NULL; i++) {
- 		u32 base =3D chan->head * mthd->addr;
---=20
-2.21.0
+  -ilia
 
 
---------------96B7C175C78789148090E248--
-
---7myXQXT16OI7eX115fyWfxDrwq34iJ4jY--
-
---WtQVe9uAsSNEoXDlyAZi0KODmrWFpX0CC
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEEn6ZLkvlecGvyjiymSEAQtc3FduIFAl4xsTMACgkQSEAQtc3F
-duLH1g//YG5jYl0TjeQVx9BMrx5bLgOo/XTiajguTQwUBSHoJ/Q36zzKZr9D+VUx
-+ihJ48G2koPaUTZWxWrARB7mCXU/LFPOzQ7LvokA8ZQ2MtVOjyGKJfxHBhQaBmZq
-+R0RTS0rDi74NyVuCzkXEhgYm/uPoQsaVhy5fdbNF+GHrFODuAIsdBYeVfOalsSH
-UtoNyYOA/ccfGfZJHT7XRZNOP3x1UfsfMinInbVrWCEmmQ+g1+pfN837cKf/fILb
-5vPoVn7Lx0hZ7vdPduLMSTvdboddj7AhLREGkpS+szPj1HlNM4t/WVgKBR0YZrUf
-k26xUVNtXNfK14hg3eb43E/63kBWJak+dVy01xhjsn/gCHBzUX4L/8MWoeRtA5zx
-9g4r2BvEKwGiKyvoVtdRec0Mzu0Vf3LzFPo6/V1Pqceelhqh+nS6fWIoCuTEeFeL
-NBGcIPyycIMpYhEHmQoGuJCou1T+RwtDFPGHOvjdiKNvbkt1QbpBlhrQ6uRVyG4I
-tXG2sHJWsLCSboIUPf1pefxT+11LlYp9uU21Zy/vWQT6NsRXHwqTTv8zkrl6pOBd
-j7hBKUCtW2q3UuShmXg85h9UDAJd8j45xwdv+CzlmVaENdhfFdWX3adepE3Sv09q
-CsNDlnOtSa+UKdyP8UWoR8k0LKelQCT5X0HtRGVCxf4hccUR0Ro=
-=X6Bt
------END PGP SIGNATURE-----
-
---WtQVe9uAsSNEoXDlyAZi0KODmrWFpX0CC--
-
---===============0193968887==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
+On Sun, Feb 2, 2020 at 6:09 AM Dennis den Brok <ddb@mailbox.org> wrote:
+>
+> Dear nouveau@,
+>
+> please forgive me if this is a FAQ or otherwise obvious; it isn't to me
+> from searching the web, the nouveau mailing list archives and various
+> Linux distributions' wiki pages.
+>
+> I'd like to know for which nvidia GPUs a firmware binary blob needs to
+> be loaded to the GPU in order for nouveau to work with it, including
+> binaries from what is often called "linux-firmware".  Hopefully more
+> precisely:
+>
+> Are there GPUs supported by nouveau which do not work at all without a
+> binary blob?
+>
+> Are there GPUs which work partially without a firmware binary blob?
+> What are the restrictions?
+>
+> Are there GPUs which work without restrictions?
+>
+> If there is a resource with answers to my questions, I'd be grateful
+> for a reference.
+>
+> Please CC me, as I am not subscribed to the list.
+>
+> Thanks and regards,
+>
+> Dennis den Brok
+>
+>
+>
+>
+>
+> _______________________________________________
+> Nouveau mailing list
+> Nouveau@lists.freedesktop.org
+> https://lists.freedesktop.org/mailman/listinfo/nouveau
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/nouveau
-
---===============0193968887==--
