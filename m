@@ -2,59 +2,33 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9AC6E1539F3
-	for <lists+nouveau@lfdr.de>; Wed,  5 Feb 2020 22:07:35 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D9AA8153CDD
+	for <lists+nouveau@lfdr.de>; Thu,  6 Feb 2020 03:05:27 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 135456E9F7;
-	Wed,  5 Feb 2020 21:07:34 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id EA8486E291;
+	Thu,  6 Feb 2020 02:05:25 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from hqnvemgate24.nvidia.com (hqnvemgate24.nvidia.com
- [216.228.121.143])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6503B6E9F7;
- Wed,  5 Feb 2020 21:07:33 +0000 (UTC)
-Received: from hqpgpgate101.nvidia.com (Not Verified[216.228.121.13]) by
- hqnvemgate24.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
- id <B5e3b2e5a0000>; Wed, 05 Feb 2020 13:06:34 -0800
-Received: from hqmail.nvidia.com ([172.20.161.6])
- by hqpgpgate101.nvidia.com (PGP Universal service);
- Wed, 05 Feb 2020 13:07:32 -0800
-X-PGP-Universal: processed;
- by hqpgpgate101.nvidia.com on Wed, 05 Feb 2020 13:07:32 -0800
-Received: from [172.20.40.58] (10.124.1.5) by HQMAIL107.nvidia.com
- (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Wed, 5 Feb
- 2020 21:07:32 +0000
-To: Ben Skeggs <skeggsb@gmail.com>
-References: <20191217004520.2404-1-jajones@nvidia.com>
- <CACAvsv6AKt=10JgjaEKc=pkmKfGJoUJjq_Unn0yGTuQK85Es2g@mail.gmail.com>
- <b273ad88-d246-3395-2fd0-8188bc41a127@nvidia.com>
- <CACAvsv5bhaJozct9fgnJ8JNSXpdd5QCH+tCxciZetbnWuzzBPw@mail.gmail.com>
-X-Nvconfidentiality: public
-From: James Jones <jajones@nvidia.com>
-Message-ID: <4105692e-c8ab-04c6-7008-9e3c946aea8d@nvidia.com>
-Date: Wed, 5 Feb 2020 13:08:31 -0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.4.1
+X-Greylist: delayed 1733 seconds by postgrey-1.36 at gabe;
+ Wed, 05 Feb 2020 15:03:32 UTC
+Received: from Galois.linutronix.de (Galois.linutronix.de
+ [IPv6:2a0a:51c0:0:12e:550::1])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 838C46F5FD
+ for <nouveau@lists.freedesktop.org>; Wed,  5 Feb 2020 15:03:32 +0000 (UTC)
+Received: from localhost ([127.0.0.1] helo=flow.W.breakpoint.cc)
+ by Galois.linutronix.de with esmtp (Exim 4.80)
+ (envelope-from <bigeasy@linutronix.de>)
+ id 1izLlB-0003IJ-Ob; Wed, 05 Feb 2020 15:34:33 +0100
+From: Sebastian Andrzej Siewior <bigeasy@linutronix.de>
+To: linux-kernel@vger.kernel.org,
+	nouveau@lists.freedesktop.org
+Date: Wed,  5 Feb 2020 15:34:26 +0100
+Message-Id: <20200205143426.2592512-1-bigeasy@linutronix.de>
+X-Mailer: git-send-email 2.25.0
 MIME-Version: 1.0
-In-Reply-To: <CACAvsv5bhaJozct9fgnJ8JNSXpdd5QCH+tCxciZetbnWuzzBPw@mail.gmail.com>
-X-Originating-IP: [10.124.1.5]
-X-ClientProxiedBy: HQMAIL101.nvidia.com (172.20.187.10) To
- HQMAIL107.nvidia.com (172.20.187.13)
-Content-Language: en-US
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
- t=1580936795; bh=ZdIqsPJjH4CVvzmArcEfPtS1iBMC8dObGh0i6uTPgmQ=;
- h=X-PGP-Universal:Subject:To:CC:References:X-Nvconfidentiality:From:
- Message-ID:Date:User-Agent:MIME-Version:In-Reply-To:
- X-Originating-IP:X-ClientProxiedBy:Content-Type:Content-Language:
- Content-Transfer-Encoding;
- b=S9gP8UBvLz41SjKtkXKVN1VABScARs4mRHNZm0yahv02xeaP268Ajs2Vq3wjuxKcD
- 0uK75U95ykcn8AkRO7o9DBlvtrqZsD+PBnQ6VlapZSLNPGojftLtTravpVkgWIg/5/
- IsrV7erp5jg317DXx9eIRspQ7bf3DplSBf8DRaXKpKyy3Y3TFXHHlnWASZTqbd47/w
- jbhkVgfRFzoxjEqo5/vAVVblQgo0l91rlEUKe0t94KnmuU5ibO/dpctZ/VPfdK3d1c
- CcVr1jkSwjR+cGzlectx8UKmCT4rs8YFeDV6FOgVDDbfjJceDrykltG8abqt9fMBEe
- AgWXJTunKVsFg==
-Subject: Re: [Nouveau] [PATCH v2 0/3] drm/nouveau: Support NVIDIA format
- modifiers
+X-Mailman-Approved-At: Thu, 06 Feb 2020 02:05:25 +0000
+Subject: [Nouveau] [PATCH] x86/mm/kmmio: Use this_cpu_ptr() instead
+ get_cpu_var() for kmmio_ctx
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -66,110 +40,83 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: ML nouveau <nouveau@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>,
- ML dri-devel <dri-devel@lists.freedesktop.org>
+Cc: x86@kernel.org, Peter Zijlstra <peterz@infradead.org>,
+ Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
+ Dave Hansen <dave.hansen@linux.intel.com>,
+ Steven Rostedt <rostedt@goodmis.org>, Pekka Paalanen <ppaalanen@gmail.com>,
+ Borislav Petkov <bp@alien8.de>, Andy Lutomirski <luto@kernel.org>,
+ "H. Peter Anvin" <hpa@zytor.com>, Thomas Gleixner <tglx@linutronix.de>,
+ Ingo Molnar <mingo@kernel.org>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+Both call sites, that access kmmio_ctx, access kmmio_ctx with interrupts
+disabled. There is no need to use get_cpu_var() which additionally
+disables preemption.
 
+Use this_cpu_ptr() to access the kmmio_ctx variable of the current CPU.
 
-On 1/6/20 3:27 PM, Ben Skeggs wrote:
-> On Tue, 7 Jan 2020 at 05:17, James Jones <jajones@nvidia.com> wrote:
->>
->> On 1/5/20 5:30 PM, Ben Skeggs wrote:
->>> On Tue, 17 Dec 2019 at 10:44, James Jones <jajones@nvidia.com> wrote:
->>>>
->>>> This series modifies the NV5x+ nouveau display backends to advertise
->>>> appropriate format modifiers on their display planes in atomic mode
->>>> setting blobs.
->>>>
->>>> Corresponding modifications to Mesa/userspace are available here:
->>>>
->>>> https://gitlab.freedesktop.org/cubanismo/mesa/tree/nouveau_work
->>>>
->>>> But those need a bit of cleanup before they're ready to submit.
->>>>
->>>> I've tested this on Tesla, Kepler, Pascal, and Turing-class hardware
->>>> using various formats and all the exposed format modifiers, plus some
->>>> negative testing with invalid ones.
->>>>
->>>> NOTE: this series depends on the "[PATCH v3] drm: Generalized NV Block
->>>> Linear DRM format mod" patch submitted to dri-devel.
->>>>
->>>> v2: Used Tesla family instead of NV50 chipset compare to avoid treating
->>>>       oddly numbered NV4x-class chipsets as NV50+ GPUs.  Other instances
->>>>       of compares with chipset number in the series were audited, deemed
->>>>       safe, and left as-is for consistency with existing code.
->>> Hey James,
->>>
->>> These look OK to me, with the minor issue I mentioned on one of the
->>> patches dealt with.  I'll hold off merging anything until I get the
->>> go-ahead that the modifier definitions are definitely set in stone /
->>> userspace is ready for inclusion.
->>
->> Thanks for having a look.  I'll try to get the userspace changes
->> finalized soon.  I think from the NV side, we consider the modifier
->> definition itself (the v3 version of the patch) final, so if there's any
->> stand-alone feedback from yourself or other drm/nouveau developers on
->> that layout, we'd be eager to hear it.  I don't want it rushed in, but
->> we do have several projects blocked on getting that approved & committed.
->>
->> I assume the sequencing should be:
->>
->> * Fix the minor issue you identified here/complete review of nouveau
->> kernel patches
->> * Complete review of the related TegraDRM new modifier support patch
->> * Finalize and complete review of userspace/Mesa nouveau modifier
->> support patches
->> * Get drm_fourcc.h updates committed
->> * Get these patches and TegraDRM patches committed
->> * Integrate final drm_fourcc.h to Mesa patches and get Mesa patches
->> committed
->>
->> Does that sound right to you?
-> Seems very reasonable!
+Signed-off-by: Sebastian Andrzej Siewior <bigeasy@linutronix.de>
+---
+ arch/x86/mm/kmmio.c | 10 +++-------
+ 1 file changed, 3 insertions(+), 7 deletions(-)
 
-Thanks.  I needed to do more cleanup than I expected (a rewrite in the 
-end), but the corresponding Mesa patches are out for review now, and 
-I've sent out v3 of this patchset to address the remaining issue raised 
-here.
+diff --git a/arch/x86/mm/kmmio.c b/arch/x86/mm/kmmio.c
+index 49d7814b59a9b..9994353fb75de 100644
+--- a/arch/x86/mm/kmmio.c
++++ b/arch/x86/mm/kmmio.c
+@@ -260,7 +260,7 @@ int kmmio_handler(struct pt_regs *regs, unsigned long addr)
+ 		goto no_kmmio;
+ 	}
+ 
+-	ctx = &get_cpu_var(kmmio_ctx);
++	ctx = this_cpu_ptr(&kmmio_ctx);
+ 	if (ctx->active) {
+ 		if (page_base == ctx->addr) {
+ 			/*
+@@ -285,7 +285,7 @@ int kmmio_handler(struct pt_regs *regs, unsigned long addr)
+ 			pr_emerg("previous hit was at 0x%08lx.\n", ctx->addr);
+ 			disarm_kmmio_fault_page(faultpage);
+ 		}
+-		goto no_kmmio_ctx;
++		goto no_kmmio;
+ 	}
+ 	ctx->active++;
+ 
+@@ -314,11 +314,8 @@ int kmmio_handler(struct pt_regs *regs, unsigned long addr)
+ 	 * the user should drop to single cpu before tracing.
+ 	 */
+ 
+-	put_cpu_var(kmmio_ctx);
+ 	return 1; /* fault handled */
+ 
+-no_kmmio_ctx:
+-	put_cpu_var(kmmio_ctx);
+ no_kmmio:
+ 	rcu_read_unlock();
+ 	preempt_enable_no_resched();
+@@ -333,7 +330,7 @@ int kmmio_handler(struct pt_regs *regs, unsigned long addr)
+ static int post_kmmio_handler(unsigned long condition, struct pt_regs *regs)
+ {
+ 	int ret = 0;
+-	struct kmmio_context *ctx = &get_cpu_var(kmmio_ctx);
++	struct kmmio_context *ctx = this_cpu_ptr(&kmmio_ctx);
+ 
+ 	if (!ctx->active) {
+ 		/*
+@@ -371,7 +368,6 @@ static int post_kmmio_handler(unsigned long condition, struct pt_regs *regs)
+ 	if (!(regs->flags & X86_EFLAGS_TF))
+ 		ret = 1;
+ out:
+-	put_cpu_var(kmmio_ctx);
+ 	return ret;
+ }
+ 
+-- 
+2.25.0
 
-Thanks,
--James
-
-> Ben.
-> 
->>
->> Thanks,
->> -James
->>
->>> Thanks,
->>> Ben.
->>>
->>>>
->>>> James Jones (3):
->>>>     drm/nouveau: Add format mod prop to base/ovly/nvdisp
->>>>     drm/nouveau: Check framebuffer size against bo
->>>>     drm/nouveau: Support NVIDIA format modifiers
->>>>
->>>>    drivers/gpu/drm/nouveau/dispnv50/base507c.c |   7 +-
->>>>    drivers/gpu/drm/nouveau/dispnv50/disp.c     |  59 ++++++++
->>>>    drivers/gpu/drm/nouveau/dispnv50/disp.h     |   4 +
->>>>    drivers/gpu/drm/nouveau/dispnv50/wndw.c     |  35 ++++-
->>>>    drivers/gpu/drm/nouveau/dispnv50/wndwc57e.c |  17 +++
->>>>    drivers/gpu/drm/nouveau/nouveau_display.c   | 154 ++++++++++++++++++++
->>>>    drivers/gpu/drm/nouveau/nouveau_display.h   |   4 +
->>>>    7 files changed, 272 insertions(+), 8 deletions(-)
->>>>
->>>> --
->>>> 2.17.1
->>>>
->>>> _______________________________________________
->>>> Nouveau mailing list
->>>> Nouveau@lists.freedesktop.org
->>>> https://lists.freedesktop.org/mailman/listinfo/nouveau
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
