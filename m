@@ -1,38 +1,39 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id C1C90154942
-	for <lists+nouveau@lfdr.de>; Thu,  6 Feb 2020 17:32:47 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 45B33154983
+	for <lists+nouveau@lfdr.de>; Thu,  6 Feb 2020 17:44:45 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 51A7E6FAA1;
-	Thu,  6 Feb 2020 16:32:45 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id DA5A76FAB3;
+	Thu,  6 Feb 2020 16:44:41 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from hqnvemgate26.nvidia.com (hqnvemgate26.nvidia.com
- [216.228.121.65])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E73936FAA1;
- Thu,  6 Feb 2020 16:32:43 +0000 (UTC)
+Received: from hqnvemgate24.nvidia.com (hqnvemgate24.nvidia.com
+ [216.228.121.143])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 776DB6FAAF;
+ Thu,  6 Feb 2020 16:44:33 +0000 (UTC)
 Received: from hqpgpgate101.nvidia.com (Not Verified[216.228.121.13]) by
- hqnvemgate26.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
- id <B5e3c3f9d0000>; Thu, 06 Feb 2020 08:32:29 -0800
+ hqnvemgate24.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
+ id <B5e3c42360001>; Thu, 06 Feb 2020 08:43:34 -0800
 Received: from hqmail.nvidia.com ([172.20.161.6])
  by hqpgpgate101.nvidia.com (PGP Universal service);
- Thu, 06 Feb 2020 08:32:43 -0800
+ Thu, 06 Feb 2020 08:44:33 -0800
 X-PGP-Universal: processed;
- by hqpgpgate101.nvidia.com on Thu, 06 Feb 2020 08:32:43 -0800
+ by hqpgpgate101.nvidia.com on Thu, 06 Feb 2020 08:44:33 -0800
 Received: from [172.20.40.67] (172.20.13.39) by HQMAIL107.nvidia.com
  (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Thu, 6 Feb
- 2020 16:32:43 +0000
+ 2020 16:44:32 +0000
+From: James Jones <jajones@nvidia.com>
 To: Thomas Zimmermann <tzimmermann@suse.de>, <bskeggs@redhat.com>,
  <airlied@linux.ie>, <daniel@ffwll.ch>
 References: <20200206101942.1412-1-tzimmermann@suse.de>
  <20200206101942.1412-5-tzimmermann@suse.de>
  <616dead7-030a-b678-3040-9e317549812e@nvidia.com>
  <5d0bc649-9d82-295e-fe00-58e9350f6d94@suse.de>
-From: James Jones <jajones@nvidia.com>
-Message-ID: <2c9ec479-c114-b485-8361-289d8794c65e@nvidia.com>
-Date: Thu, 6 Feb 2020 08:33:43 -0800
+X-Nvconfidentiality: public
+Message-ID: <5d18f259-9d1c-2b83-428d-6e21b6cf779c@nvidia.com>
+Date: Thu, 6 Feb 2020 08:45:32 -0800
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.4.1
 MIME-Version: 1.0
@@ -42,17 +43,17 @@ X-ClientProxiedBy: HQMAIL107.nvidia.com (172.20.187.13) To
  HQMAIL107.nvidia.com (172.20.187.13)
 Content-Language: en-US
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
- t=1581006749; bh=6H/7CWzeVJ63B3VQ81tqirGYlI9Mc77+8GZMJpV8woI=;
- h=X-PGP-Universal:Subject:To:CC:References:From:Message-ID:Date:
- User-Agent:MIME-Version:In-Reply-To:X-Originating-IP:
- X-ClientProxiedBy:Content-Type:Content-Language:
+ t=1581007414; bh=6H/7CWzeVJ63B3VQ81tqirGYlI9Mc77+8GZMJpV8woI=;
+ h=X-PGP-Universal:From:Subject:To:CC:References:X-Nvconfidentiality:
+ Message-ID:Date:User-Agent:MIME-Version:In-Reply-To:
+ X-Originating-IP:X-ClientProxiedBy:Content-Type:Content-Language:
  Content-Transfer-Encoding;
- b=bFSZUOz3zpXvep8+ka4Wl4o9XNkX6VQmXtJNvXyJs5RMJ+9wL3gmGDMK4ZR+QSsJi
- aztYKRV8n4lDZnjMI+WMItFYJ/kPmTwVUL/OwQLJ4MzAglfRTWLKrtezOwX92agB3s
- e1yskNNLNHaRAcEO7l5Sfmpp1uDheG3+GXhdq79iFOVKSe+cTbVZ6yLr60GU4c7Erh
- oOA2LHwbybE1WpJcWkLfYJihci/3jIS6+oubFQLx/+txLw6Yohp6Lxz5xPZLq3EnCi
- InhsZlRMcWS6LaeU1t5ICqMINE7oAW/IjuR5bQ69p/DLp+/72Rua7FwI4DEDFF69bZ
- 7gIIEywsXed/A==
+ b=Dt6fFxyEXSZU520fAHEoua/uvSOQqYUyvLgKXgiVyR2Az0sCzSm9FClCJsXJmXU5l
+ FZTVu/YtqDdcHwixELARUybMQvPpP/uhC9q4yxfRm5xB/NYU2a4mBr+ZF5pGmXp8TJ
+ ZUO11JcH86WRjpMYBCXdB133Gc2EbrVg2cLMnxjEubo+9jMlnjSUSqrxrALY/MJFRR
+ OkvLB7tA87+2MvcYXc4+ntLlOFGybdRVaYY1vDv8MSSsn6pOYtia0l/LcXIerzrwWH
+ AY+yyEZI4LC2f99/Dbk10Cx2qj8BvUdlpqnrzmAe95QSRY9QZ3sTPWQG8bpZRm8ipt
+ 6C2aeHZpP10Ag==
 Subject: Re: [Nouveau] [PATCH 4/4] drm/nouveau: Remove struct
  nouveau_framebuffer
 X-BeenThere: nouveau@lists.freedesktop.org
