@@ -2,56 +2,46 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id BF046154772
-	for <lists+nouveau@lfdr.de>; Thu,  6 Feb 2020 16:16:13 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A989315480F
+	for <lists+nouveau@lfdr.de>; Thu,  6 Feb 2020 16:28:43 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 228036FA83;
-	Thu,  6 Feb 2020 15:16:12 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3A4E96E041;
+	Thu,  6 Feb 2020 15:28:41 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from hqnvemgate25.nvidia.com (hqnvemgate25.nvidia.com
- [216.228.121.64])
- by gabe.freedesktop.org (Postfix) with ESMTPS id F21EA6FA83;
- Thu,  6 Feb 2020 15:16:10 +0000 (UTC)
-Received: from hqpgpgate101.nvidia.com (Not Verified[216.228.121.13]) by
- hqnvemgate25.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
- id <B5e3c2da10000>; Thu, 06 Feb 2020 07:15:45 -0800
-Received: from hqmail.nvidia.com ([172.20.161.6])
- by hqpgpgate101.nvidia.com (PGP Universal service);
- Thu, 06 Feb 2020 07:16:10 -0800
-X-PGP-Universal: processed;
- by hqpgpgate101.nvidia.com on Thu, 06 Feb 2020 07:16:10 -0800
-Received: from [172.20.40.67] (10.124.1.5) by HQMAIL107.nvidia.com
- (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Thu, 6 Feb
- 2020 15:16:10 +0000
-To: Thomas Zimmermann <tzimmermann@suse.de>, <bskeggs@redhat.com>,
- <airlied@linux.ie>, <daniel@ffwll.ch>
+Received: from mupuf.org (mupuf.org [167.71.42.210])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 387756FA87
+ for <nouveau@lists.freedesktop.org>; Thu,  6 Feb 2020 15:28:39 +0000 (UTC)
+Received: from alne.cl.cam.ac.uk (unknown
+ [IPv6:2001:630:212:238:62a4:4cff:fed0:3ab1])
+ by Neelix.spliet.org (Postfix) with ESMTPSA id 2E2BD6006D;
+ Thu,  6 Feb 2020 15:28:32 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 Neelix.spliet.org 2E2BD6006D
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=spliet.org;
+ s=default; t=1581002912;
+ bh=Ez9buxhGBID82rMtiWhcg3WeZufw/S2lF0YO0WdXvi8=;
+ h=Subject:To:References:From:Date:In-Reply-To:From;
+ b=AvfLbk0MPBprg5XnvW7kdnHDb7cyDX7JxwLpE6DIC/iEVW7LwHXFY73QZ6N7JQRut
+ CRSF6HIEx54Do9IsNMx9JrbU2BVajHqx6W6k9O+a7mub+5XLmhbqqEdPxbXULT7KGh
+ haQV40NueVB+ueHtriGxHOPjDox1ReXi4TV1ts40=
+To: nouveau@lists.freedesktop.org, James Jones <jajones@nvidia.com>
 References: <20200206101942.1412-1-tzimmermann@suse.de>
  <20200206101942.1412-5-tzimmermann@suse.de>
-X-Nvconfidentiality: public
-From: James Jones <jajones@nvidia.com>
-Message-ID: <616dead7-030a-b678-3040-9e317549812e@nvidia.com>
-Date: Thu, 6 Feb 2020 07:17:10 -0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.4.1
+ <616dead7-030a-b678-3040-9e317549812e@nvidia.com>
+From: Roy Spliet <nouveau@spliet.org>
+Message-ID: <18b63f3e-ff2d-1008-84f1-ed9e11b9fcee@spliet.org>
+Date: Thu, 6 Feb 2020 15:28:31 +0000
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.9.0
 MIME-Version: 1.0
-In-Reply-To: <20200206101942.1412-5-tzimmermann@suse.de>
-X-Originating-IP: [10.124.1.5]
-X-ClientProxiedBy: HQMAIL101.nvidia.com (172.20.187.10) To
- HQMAIL107.nvidia.com (172.20.187.13)
-Content-Language: en-US
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
- t=1581002146; bh=oAbuEM9RGWXjKFL24YxVNORo840bTLqFoCYtzUWmMHM=;
- h=X-PGP-Universal:Subject:To:CC:References:X-Nvconfidentiality:From:
- Message-ID:Date:User-Agent:MIME-Version:In-Reply-To:
- X-Originating-IP:X-ClientProxiedBy:Content-Type:Content-Language:
- Content-Transfer-Encoding;
- b=ecyYgdf7nwad4VzzEnzc0bmjXQiELcH5wLT7t4LEDGh8/YR4x+x1W/mqvFh0NHpdM
- YuVyeqbLtpOPm/yPQRZRzXqR5BJLKkeSqeneYasnmt2I/whSXYESpoRx2eKzRQryu2
- VAzAXTa0rRGIufGNKOLfbuopUEfs+eYnU4lCxdOy3C0cKdw2gyVE/RJr0JHgIzoNkY
- bx+2LEPBnNl6oxzxzS+YaUB5d2Xe7Q9ZRMv7ID01rlmQAEkvepFmjD2dS7AwxdIyR8
- 8wsogOaAYVMB7orhnWYNatZGYIT4wR52t5YXP9w03+/oREKiH3MrVy1EZ11KIU95Sk
- BPeXzp5D29eQg==
+In-Reply-To: <616dead7-030a-b678-3040-9e317549812e@nvidia.com>
+Content-Language: en-GB
+X-Spam-Status: No, score=-1.7 required=5.0 tests=BAYES_00,DKIM_INVALID,
+ DKIM_SIGNED,UNPARSEABLE_RELAY,URIBL_BLOCKED autolearn=no
+ autolearn_force=no version=3.4.3
+X-Spam-Checker-Version: SpamAssassin 3.4.3 (2019-12-06) on Neelix
+X-Virus-Scanned: clamav-milter 0.101.5 at Neelix
+X-Virus-Status: Clean
 Subject: Re: [Nouveau] [PATCH 4/4] drm/nouveau: Remove struct
  nouveau_framebuffer
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -65,243 +55,205 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Note I'm adding some fields to nouveau_framebuffer in the series 
-"drm/nouveau: Support NVIDIA format modifiers."  I sent out v3 of that 
-yesterday.  It would probably still be possible to avoid them by 
-re-extracting the relevant data from the format modifier on the fly when 
-needed, but it is simpler and likely less error-prone with the wrapper 
-struct.
-
-Thanks,
--James
-
-On 2/6/20 2:19 AM, Thomas Zimmermann wrote:
-> After its cleanup, struct nouveau_framebuffer is only a wrapper around
-> struct drm_framebuffer. Use the latter directly.
-> 
-> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-> ---
->   drivers/gpu/drm/nouveau/dispnv50/wndw.c   | 26 +++++++++++------------
->   drivers/gpu/drm/nouveau/nouveau_display.c | 14 ++++++------
->   drivers/gpu/drm/nouveau/nouveau_display.h | 12 +----------
->   drivers/gpu/drm/nouveau/nouveau_fbcon.c   | 14 ++++++------
->   4 files changed, 28 insertions(+), 38 deletions(-)
-> 
-> diff --git a/drivers/gpu/drm/nouveau/dispnv50/wndw.c b/drivers/gpu/drm/nouveau/dispnv50/wndw.c
-> index ba1399965a1c..4a67a656e007 100644
-> --- a/drivers/gpu/drm/nouveau/dispnv50/wndw.c
-> +++ b/drivers/gpu/drm/nouveau/dispnv50/wndw.c
-> @@ -40,11 +40,11 @@ nv50_wndw_ctxdma_del(struct nv50_wndw_ctxdma *ctxdma)
->   }
->   
->   static struct nv50_wndw_ctxdma *
-> -nv50_wndw_ctxdma_new(struct nv50_wndw *wndw, struct nouveau_framebuffer *fb)
-> +nv50_wndw_ctxdma_new(struct nv50_wndw *wndw, struct drm_framebuffer *fb)
->   {
-> -	struct nouveau_drm *drm = nouveau_drm(fb->base.dev);
-> +	struct nouveau_drm *drm = nouveau_drm(fb->dev);
->   	struct nv50_wndw_ctxdma *ctxdma;
-> -	struct nouveau_bo *nvbo = nouveau_gem_object(fb->base.obj[0]);
-> +	struct nouveau_bo *nvbo = nouveau_gem_object(fb->obj[0]);
->   	const u8    kind = nvbo->kind;
->   	const u32 handle = 0xfb000000 | kind;
->   	struct {
-> @@ -236,16 +236,16 @@ nv50_wndw_atomic_check_acquire(struct nv50_wndw *wndw, bool modeset,
->   			       struct nv50_wndw_atom *asyw,
->   			       struct nv50_head_atom *asyh)
->   {
-> -	struct nouveau_framebuffer *fb = nouveau_framebuffer(asyw->state.fb);
-> +	struct drm_framebuffer *fb = asyw->state.fb;
->   	struct nouveau_drm *drm = nouveau_drm(wndw->plane.dev);
-> -	struct nouveau_bo *nvbo = nouveau_gem_object(fb->base.obj[0]);
-> +	struct nouveau_bo *nvbo = nouveau_gem_object(fb->obj[0]);
->   	int ret;
->   
->   	NV_ATOMIC(drm, "%s acquire\n", wndw->plane.name);
->   
-> -	if (asyw->state.fb != armw->state.fb || !armw->visible || modeset) {
-> -		asyw->image.w = fb->base.width;
-> -		asyw->image.h = fb->base.height;
-> +	if (fb != armw->state.fb || !armw->visible || modeset) {
-> +		asyw->image.w = fb->width;
-> +		asyw->image.h = fb->height;
->   		asyw->image.kind = nvbo->kind;
->   
->   		ret = nv50_wndw_atomic_check_acquire_rgb(asyw);
-> @@ -261,13 +261,13 @@ nv50_wndw_atomic_check_acquire(struct nv50_wndw *wndw, bool modeset,
->   				asyw->image.blockh = nvbo->mode >> 4;
->   			else
->   				asyw->image.blockh = nvbo->mode;
-> -			asyw->image.blocks[0] = fb->base.pitches[0] / 64;
-> +			asyw->image.blocks[0] = fb->pitches[0] / 64;
->   			asyw->image.pitch[0] = 0;
->   		} else {
->   			asyw->image.layout = 1;
->   			asyw->image.blockh = 0;
->   			asyw->image.blocks[0] = 0;
-> -			asyw->image.pitch[0] = fb->base.pitches[0];
-> +			asyw->image.pitch[0] = fb->pitches[0];
->   		}
->   
->   		if (!asyh->state.async_flip)
-> @@ -486,16 +486,16 @@ nv50_wndw_cleanup_fb(struct drm_plane *plane, struct drm_plane_state *old_state)
->   static int
->   nv50_wndw_prepare_fb(struct drm_plane *plane, struct drm_plane_state *state)
->   {
-> -	struct nouveau_framebuffer *fb = nouveau_framebuffer(state->fb);
-> +	struct drm_framebuffer *fb = state->fb;
->   	struct nouveau_drm *drm = nouveau_drm(plane->dev);
->   	struct nv50_wndw *wndw = nv50_wndw(plane);
->   	struct nv50_wndw_atom *asyw = nv50_wndw_atom(state);
-> -	struct nouveau_bo *nvbo = nouveau_gem_object(state->fb->obj[0]);
-> +	struct nouveau_bo *nvbo = nouveau_gem_object(fb->obj[0]);
->   	struct nv50_head_atom *asyh;
->   	struct nv50_wndw_ctxdma *ctxdma;
->   	int ret;
->   
-> -	NV_ATOMIC(drm, "%s prepare: %p\n", plane->name, state->fb);
-> +	NV_ATOMIC(drm, "%s prepare: %p\n", plane->name, fb);
->   	if (!asyw->state.fb)
->   		return 0;
->   
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_display.c b/drivers/gpu/drm/nouveau/nouveau_display.c
-> index bbbff55eb5d5..94f7fd48e1cf 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_display.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_display.c
-> @@ -207,10 +207,10 @@ int
->   nouveau_framebuffer_new(struct drm_device *dev,
->   			const struct drm_mode_fb_cmd2 *mode_cmd,
->   			struct drm_gem_object *gem,
-> -			struct nouveau_framebuffer **pfb)
-> +			struct drm_framebuffer **pfb)
->   {
->   	struct nouveau_drm *drm = nouveau_drm(dev);
-> -	struct nouveau_framebuffer *fb;
-> +	struct drm_framebuffer *fb;
->   	int ret;
->   
->           /* YUV overlays have special requirements pre-NV50 */
-> @@ -236,10 +236,10 @@ nouveau_framebuffer_new(struct drm_device *dev,
->   	if (!(fb = *pfb = kzalloc(sizeof(*fb), GFP_KERNEL)))
->   		return -ENOMEM;
->   
-> -	drm_helper_mode_fill_fb_struct(dev, &fb->base, mode_cmd);
-> -	fb->base.obj[0] = gem;
-> +	drm_helper_mode_fill_fb_struct(dev, fb, mode_cmd);
-> +	fb->obj[0] = gem;
->   
-> -	ret = drm_framebuffer_init(dev, &fb->base, &nouveau_framebuffer_funcs);
-> +	ret = drm_framebuffer_init(dev, fb, &nouveau_framebuffer_funcs);
->   	if (ret)
->   		kfree(fb);
->   	return ret;
-> @@ -250,7 +250,7 @@ nouveau_user_framebuffer_create(struct drm_device *dev,
->   				struct drm_file *file_priv,
->   				const struct drm_mode_fb_cmd2 *mode_cmd)
->   {
-> -	struct nouveau_framebuffer *fb;
-> +	struct drm_framebuffer *fb;
->   	struct drm_gem_object *gem;
->   	int ret;
->   
-> @@ -260,7 +260,7 @@ nouveau_user_framebuffer_create(struct drm_device *dev,
->   
->   	ret = nouveau_framebuffer_new(dev, mode_cmd, gem, &fb);
->   	if (ret == 0)
-> -		return &fb->base;
-> +		return fb;
->   
->   	drm_gem_object_put_unlocked(gem);
->   	return ERR_PTR(ret);
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_display.h b/drivers/gpu/drm/nouveau/nouveau_display.h
-> index 56c1dec8fc28..082bb067d575 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_display.h
-> +++ b/drivers/gpu/drm/nouveau/nouveau_display.h
-> @@ -8,21 +8,11 @@
->   
->   #include <drm/drm_framebuffer.h>
->   
-> -struct nouveau_framebuffer {
-> -	struct drm_framebuffer base;
-> -};
-> -
-> -static inline struct nouveau_framebuffer *
-> -nouveau_framebuffer(struct drm_framebuffer *fb)
-> -{
-> -	return container_of(fb, struct nouveau_framebuffer, base);
-> -}
-> -
->   int
->   nouveau_framebuffer_new(struct drm_device *dev,
->   			const struct drm_mode_fb_cmd2 *mode_cmd,
->   			struct drm_gem_object *gem,
-> -			struct nouveau_framebuffer **pfb);
-> +			struct drm_framebuffer **pfb);
->   
->   struct nouveau_display {
->   	void *priv;
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_fbcon.c b/drivers/gpu/drm/nouveau/nouveau_fbcon.c
-> index 02b36b44409c..d78bc03ad3b8 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_fbcon.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_fbcon.c
-> @@ -312,7 +312,7 @@ nouveau_fbcon_create(struct drm_fb_helper *helper,
->   	struct nouveau_drm *drm = nouveau_drm(dev);
->   	struct nvif_device *device = &drm->client.device;
->   	struct fb_info *info;
-> -	struct nouveau_framebuffer *fb;
-> +	struct drm_framebuffer *fb;
->   	struct nouveau_channel *chan;
->   	struct nouveau_bo *nvbo;
->   	struct drm_mode_fb_cmd2 mode_cmd;
-> @@ -367,7 +367,7 @@ nouveau_fbcon_create(struct drm_fb_helper *helper,
->   	}
->   
->   	/* setup helper */
-> -	fbcon->helper.fb = &fb->base;
-> +	fbcon->helper.fb = fb;
->   
->   	if (!chan)
->   		info->flags = FBINFO_HWACCEL_DISABLED;
-> @@ -393,7 +393,7 @@ nouveau_fbcon_create(struct drm_fb_helper *helper,
->   
->   	/* To allow resizeing without swapping buffers */
->   	NV_INFO(drm, "allocated %dx%d fb: 0x%llx, bo %p\n",
-> -		fb->base.width, fb->base.height, nvbo->bo.offset, nvbo);
-> +		fb->width, fb->height, nvbo->bo.offset, nvbo);
->   
->   	vga_switcheroo_client_fb_set(dev->pdev, info);
->   	return 0;
-> @@ -413,18 +413,18 @@ nouveau_fbcon_create(struct drm_fb_helper *helper,
->   static int
->   nouveau_fbcon_destroy(struct drm_device *dev, struct nouveau_fbdev *fbcon)
->   {
-> -	struct nouveau_framebuffer *nouveau_fb = nouveau_framebuffer(fbcon->helper.fb);
-> +	struct drm_framebuffer *fb = fbcon->helper.fb;
->   	struct nouveau_bo *nvbo;
->   
->   	drm_fb_helper_unregister_fbi(&fbcon->helper);
->   	drm_fb_helper_fini(&fbcon->helper);
->   
-> -	if (nouveau_fb && nouveau_fb->base.obj[0]) {
-> -		nvbo = nouveau_gem_object(nouveau_fb->base.obj[0]);
-> +	if (fb && fb->obj[0]) {
-> +		nvbo = nouveau_gem_object(fb->obj[0]);
->   		nouveau_vma_del(&fbcon->vma);
->   		nouveau_bo_unmap(nvbo);
->   		nouveau_bo_unpin(nvbo);
-> -		drm_framebuffer_put(&nouveau_fb->base);
-> +		drm_framebuffer_put(fb);
->   	}
->   
->   	return 0;
-> 
-_______________________________________________
-Nouveau mailing list
-Nouveau@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/nouveau
+KFJlLXNlbmRpbmcgdG8gbGlzdCByYXRoZXIgdGhhbiBqdXN0IHRvIEphbWVzKQoKSXMgdGhpcyBm
+b3JtYXQgbW9kaWZpZXIgaW5mb3JtYXRpb24gbm90IHN0b3JlZCwgb3Igb3RoZXJ3aXNlIHdvcnRo
+IApzdG9yaW5nLCBkaXJlY3RseSBpbiB0aGUgbm91dmVhdV9ibyBvYmplY3QgYXNzb2NpYXRlZCB3
+aXRoIHRoZSAKZnJhbWVidWZmZXI/IEknbSBub3QgcGFydGljdWxhcmx5IGtub3dsZWRnZWFibGUg
+b24gdGhlIHRvcGljLCBidXQgdGhlcmUgCmFscmVhZHkgc2VlbSB0byBleGlzdCBzb21lIGZpZWxk
+cyB3aXRoIHZlcnkgc2ltaWxhciBuYW1lcyBpbiBub3V2ZWF1X2JvLgpCZXN0LAoKUm95CgpPbiAw
+Ni8wMi8yMDIwIDE1OjE3LCBKYW1lcyBKb25lcyB3cm90ZToKPiBOb3RlIEknbSBhZGRpbmcgc29t
+ZSBmaWVsZHMgdG8gbm91dmVhdV9mcmFtZWJ1ZmZlciBpbiB0aGUgc2VyaWVzIAo+ICJkcm0vbm91
+dmVhdTogU3VwcG9ydCBOVklESUEgZm9ybWF0IG1vZGlmaWVycy4iwqAgSSBzZW50IG91dCB2MyBv
+ZiB0aGF0IAo+IHllc3RlcmRheS7CoCBJdCB3b3VsZCBwcm9iYWJseSBzdGlsbCBiZSBwb3NzaWJs
+ZSB0byBhdm9pZCB0aGVtIGJ5IAo+IHJlLWV4dHJhY3RpbmcgdGhlIHJlbGV2YW50IGRhdGEgZnJv
+bSB0aGUgZm9ybWF0IG1vZGlmaWVyIG9uIHRoZSBmbHkgd2hlbiAKPiBuZWVkZWQsIGJ1dCBpdCBp
+cyBzaW1wbGVyIGFuZCBsaWtlbHkgbGVzcyBlcnJvci1wcm9uZSB3aXRoIHRoZSB3cmFwcGVyIAo+
+IHN0cnVjdC4KPiAKPiBUaGFua3MsCj4gLUphbWVzCj4gCj4gT24gMi82LzIwIDI6MTkgQU0sIFRo
+b21hcyBaaW1tZXJtYW5uIHdyb3RlOgo+PiBBZnRlciBpdHMgY2xlYW51cCwgc3RydWN0IG5vdXZl
+YXVfZnJhbWVidWZmZXIgaXMgb25seSBhIHdyYXBwZXIgYXJvdW5kCj4+IHN0cnVjdCBkcm1fZnJh
+bWVidWZmZXIuIFVzZSB0aGUgbGF0dGVyIGRpcmVjdGx5Lgo+Pgo+PiBTaWduZWQtb2ZmLWJ5OiBU
+aG9tYXMgWmltbWVybWFubiA8dHppbW1lcm1hbm5Ac3VzZS5kZT4KPj4gLS0tCj4+IMKgIGRyaXZl
+cnMvZ3B1L2RybS9ub3V2ZWF1L2Rpc3BudjUwL3duZHcuY8KgwqAgfCAyNiArKysrKysrKysrKy0t
+LS0tLS0tLS0tLQo+PiDCoCBkcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2Rpc3BsYXku
+YyB8IDE0ICsrKysrKy0tLS0tLQo+PiDCoCBkcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1
+X2Rpc3BsYXkuaCB8IDEyICstLS0tLS0tLS0tCj4+IMKgIGRyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1
+L25vdXZlYXVfZmJjb24uY8KgwqAgfCAxNCArKysrKystLS0tLS0KPj4gwqAgNCBmaWxlcyBjaGFu
+Z2VkLCAyOCBpbnNlcnRpb25zKCspLCAzOCBkZWxldGlvbnMoLSkKPj4KPj4gZGlmZiAtLWdpdCBh
+L2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L2Rpc3BudjUwL3duZHcuYyAKPj4gYi9kcml2ZXJzL2dw
+dS9kcm0vbm91dmVhdS9kaXNwbnY1MC93bmR3LmMKPj4gaW5kZXggYmExMzk5OTY1YTFjLi40YTY3
+YTY1NmUwMDcgMTAwNjQ0Cj4+IC0tLSBhL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L2Rpc3BudjUw
+L3duZHcuYwo+PiArKysgYi9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9kaXNwbnY1MC93bmR3LmMK
+Pj4gQEAgLTQwLDExICs0MCwxMSBAQCBudjUwX3duZHdfY3R4ZG1hX2RlbChzdHJ1Y3QgbnY1MF93
+bmR3X2N0eGRtYSAqY3R4ZG1hKQo+PiDCoCB9Cj4+IMKgIHN0YXRpYyBzdHJ1Y3QgbnY1MF93bmR3
+X2N0eGRtYSAqCj4+IC1udjUwX3duZHdfY3R4ZG1hX25ldyhzdHJ1Y3QgbnY1MF93bmR3ICp3bmR3
+LCBzdHJ1Y3QgCj4+IG5vdXZlYXVfZnJhbWVidWZmZXIgKmZiKQo+PiArbnY1MF93bmR3X2N0eGRt
+YV9uZXcoc3RydWN0IG52NTBfd25kdyAqd25kdywgc3RydWN0IGRybV9mcmFtZWJ1ZmZlciAqZmIp
+Cj4+IMKgIHsKPj4gLcKgwqDCoCBzdHJ1Y3Qgbm91dmVhdV9kcm0gKmRybSA9IG5vdXZlYXVfZHJt
+KGZiLT5iYXNlLmRldik7Cj4+ICvCoMKgwqAgc3RydWN0IG5vdXZlYXVfZHJtICpkcm0gPSBub3V2
+ZWF1X2RybShmYi0+ZGV2KTsKPj4gwqDCoMKgwqDCoCBzdHJ1Y3QgbnY1MF93bmR3X2N0eGRtYSAq
+Y3R4ZG1hOwo+PiAtwqDCoMKgIHN0cnVjdCBub3V2ZWF1X2JvICpudmJvID0gbm91dmVhdV9nZW1f
+b2JqZWN0KGZiLT5iYXNlLm9ialswXSk7Cj4+ICvCoMKgwqAgc3RydWN0IG5vdXZlYXVfYm8gKm52
+Ym8gPSBub3V2ZWF1X2dlbV9vYmplY3QoZmItPm9ialswXSk7Cj4+IMKgwqDCoMKgwqAgY29uc3Qg
+dTjCoMKgwqAga2luZCA9IG52Ym8tPmtpbmQ7Cj4+IMKgwqDCoMKgwqAgY29uc3QgdTMyIGhhbmRs
+ZSA9IDB4ZmIwMDAwMDAgfCBraW5kOwo+PiDCoMKgwqDCoMKgIHN0cnVjdCB7Cj4+IEBAIC0yMzYs
+MTYgKzIzNiwxNiBAQCBudjUwX3duZHdfYXRvbWljX2NoZWNrX2FjcXVpcmUoc3RydWN0IG52NTBf
+d25kdyAKPj4gKnduZHcsIGJvb2wgbW9kZXNldCwKPj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoCBzdHJ1Y3QgbnY1MF93bmR3X2F0b20gKmFzeXcsCj4+IMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgc3RydWN0IG52NTBfaGVhZF9hdG9tICph
+c3loKQo+PiDCoCB7Cj4+IC3CoMKgwqAgc3RydWN0IG5vdXZlYXVfZnJhbWVidWZmZXIgKmZiID0g
+Cj4+IG5vdXZlYXVfZnJhbWVidWZmZXIoYXN5dy0+c3RhdGUuZmIpOwo+PiArwqDCoMKgIHN0cnVj
+dCBkcm1fZnJhbWVidWZmZXIgKmZiID0gYXN5dy0+c3RhdGUuZmI7Cj4+IMKgwqDCoMKgwqAgc3Ry
+dWN0IG5vdXZlYXVfZHJtICpkcm0gPSBub3V2ZWF1X2RybSh3bmR3LT5wbGFuZS5kZXYpOwo+PiAt
+wqDCoMKgIHN0cnVjdCBub3V2ZWF1X2JvICpudmJvID0gbm91dmVhdV9nZW1fb2JqZWN0KGZiLT5i
+YXNlLm9ialswXSk7Cj4+ICvCoMKgwqAgc3RydWN0IG5vdXZlYXVfYm8gKm52Ym8gPSBub3V2ZWF1
+X2dlbV9vYmplY3QoZmItPm9ialswXSk7Cj4+IMKgwqDCoMKgwqAgaW50IHJldDsKPj4gwqDCoMKg
+wqDCoCBOVl9BVE9NSUMoZHJtLCAiJXMgYWNxdWlyZVxuIiwgd25kdy0+cGxhbmUubmFtZSk7Cj4+
+IC3CoMKgwqAgaWYgKGFzeXctPnN0YXRlLmZiICE9IGFybXctPnN0YXRlLmZiIHx8ICFhcm13LT52
+aXNpYmxlIHx8IG1vZGVzZXQpIHsKPj4gLcKgwqDCoMKgwqDCoMKgIGFzeXctPmltYWdlLncgPSBm
+Yi0+YmFzZS53aWR0aDsKPj4gLcKgwqDCoMKgwqDCoMKgIGFzeXctPmltYWdlLmggPSBmYi0+YmFz
+ZS5oZWlnaHQ7Cj4+ICvCoMKgwqAgaWYgKGZiICE9IGFybXctPnN0YXRlLmZiIHx8ICFhcm13LT52
+aXNpYmxlIHx8IG1vZGVzZXQpIHsKPj4gK8KgwqDCoMKgwqDCoMKgIGFzeXctPmltYWdlLncgPSBm
+Yi0+d2lkdGg7Cj4+ICvCoMKgwqDCoMKgwqDCoCBhc3l3LT5pbWFnZS5oID0gZmItPmhlaWdodDsK
+Pj4gwqDCoMKgwqDCoMKgwqDCoMKgIGFzeXctPmltYWdlLmtpbmQgPSBudmJvLT5raW5kOwo+PiDC
+oMKgwqDCoMKgwqDCoMKgwqAgcmV0ID0gbnY1MF93bmR3X2F0b21pY19jaGVja19hY3F1aXJlX3Jn
+Yihhc3l3KTsKPj4gQEAgLTI2MSwxMyArMjYxLDEzIEBAIG52NTBfd25kd19hdG9taWNfY2hlY2tf
+YWNxdWlyZShzdHJ1Y3QgbnY1MF93bmR3IAo+PiAqd25kdywgYm9vbCBtb2Rlc2V0LAo+PiDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGFzeXctPmltYWdlLmJsb2NraCA9IG52Ym8t
+Pm1vZGUgPj4gNDsKPj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgZWxzZQo+PiDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGFzeXctPmltYWdlLmJsb2NraCA9IG52Ym8tPm1v
+ZGU7Cj4+IC3CoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGFzeXctPmltYWdlLmJsb2Nrc1swXSA9IGZi
+LT5iYXNlLnBpdGNoZXNbMF0gLyA2NDsKPj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqAgYXN5dy0+
+aW1hZ2UuYmxvY2tzWzBdID0gZmItPnBpdGNoZXNbMF0gLyA2NDsKPj4gwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqAgYXN5dy0+aW1hZ2UucGl0Y2hbMF0gPSAwOwo+PiDCoMKgwqDCoMKgwqDCoMKg
+wqAgfSBlbHNlIHsKPj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgYXN5dy0+aW1hZ2UubGF5
+b3V0ID0gMTsKPj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgYXN5dy0+aW1hZ2UuYmxvY2to
+ID0gMDsKPj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgYXN5dy0+aW1hZ2UuYmxvY2tzWzBd
+ID0gMDsKPj4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgYXN5dy0+aW1hZ2UucGl0Y2hbMF0gPSBm
+Yi0+YmFzZS5waXRjaGVzWzBdOwo+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBhc3l3LT5pbWFn
+ZS5waXRjaFswXSA9IGZiLT5waXRjaGVzWzBdOwo+PiDCoMKgwqDCoMKgwqDCoMKgwqAgfQo+PiDC
+oMKgwqDCoMKgwqDCoMKgwqAgaWYgKCFhc3loLT5zdGF0ZS5hc3luY19mbGlwKQo+PiBAQCAtNDg2
+LDE2ICs0ODYsMTYgQEAgbnY1MF93bmR3X2NsZWFudXBfZmIoc3RydWN0IGRybV9wbGFuZSAqcGxh
+bmUsIAo+PiBzdHJ1Y3QgZHJtX3BsYW5lX3N0YXRlICpvbGRfc3RhdGUpCj4+IMKgIHN0YXRpYyBp
+bnQKPj4gwqAgbnY1MF93bmR3X3ByZXBhcmVfZmIoc3RydWN0IGRybV9wbGFuZSAqcGxhbmUsIHN0
+cnVjdCBkcm1fcGxhbmVfc3RhdGUgCj4+ICpzdGF0ZSkKPj4gwqAgewo+PiAtwqDCoMKgIHN0cnVj
+dCBub3V2ZWF1X2ZyYW1lYnVmZmVyICpmYiA9IG5vdXZlYXVfZnJhbWVidWZmZXIoc3RhdGUtPmZi
+KTsKPj4gK8KgwqDCoCBzdHJ1Y3QgZHJtX2ZyYW1lYnVmZmVyICpmYiA9IHN0YXRlLT5mYjsKPj4g
+wqDCoMKgwqDCoCBzdHJ1Y3Qgbm91dmVhdV9kcm0gKmRybSA9IG5vdXZlYXVfZHJtKHBsYW5lLT5k
+ZXYpOwo+PiDCoMKgwqDCoMKgIHN0cnVjdCBudjUwX3duZHcgKnduZHcgPSBudjUwX3duZHcocGxh
+bmUpOwo+PiDCoMKgwqDCoMKgIHN0cnVjdCBudjUwX3duZHdfYXRvbSAqYXN5dyA9IG52NTBfd25k
+d19hdG9tKHN0YXRlKTsKPj4gLcKgwqDCoCBzdHJ1Y3Qgbm91dmVhdV9ibyAqbnZibyA9IG5vdXZl
+YXVfZ2VtX29iamVjdChzdGF0ZS0+ZmItPm9ialswXSk7Cj4+ICvCoMKgwqAgc3RydWN0IG5vdXZl
+YXVfYm8gKm52Ym8gPSBub3V2ZWF1X2dlbV9vYmplY3QoZmItPm9ialswXSk7Cj4+IMKgwqDCoMKg
+wqAgc3RydWN0IG52NTBfaGVhZF9hdG9tICphc3loOwo+PiDCoMKgwqDCoMKgIHN0cnVjdCBudjUw
+X3duZHdfY3R4ZG1hICpjdHhkbWE7Cj4+IMKgwqDCoMKgwqAgaW50IHJldDsKPj4gLcKgwqDCoCBO
+Vl9BVE9NSUMoZHJtLCAiJXMgcHJlcGFyZTogJXBcbiIsIHBsYW5lLT5uYW1lLCBzdGF0ZS0+ZmIp
+Owo+PiArwqDCoMKgIE5WX0FUT01JQyhkcm0sICIlcyBwcmVwYXJlOiAlcFxuIiwgcGxhbmUtPm5h
+bWUsIGZiKTsKPj4gwqDCoMKgwqDCoCBpZiAoIWFzeXctPnN0YXRlLmZiKQo+PiDCoMKgwqDCoMKg
+wqDCoMKgwqAgcmV0dXJuIDA7Cj4+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0vbm91dmVh
+dS9ub3V2ZWF1X2Rpc3BsYXkuYyAKPj4gYi9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1
+X2Rpc3BsYXkuYwo+PiBpbmRleCBiYmJmZjU1ZWI1ZDUuLjk0ZjdmZDQ4ZTFjZiAxMDA2NDQKPj4g
+LS0tIGEvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9kaXNwbGF5LmMKPj4gKysrIGIv
+ZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9kaXNwbGF5LmMKPj4gQEAgLTIwNywxMCAr
+MjA3LDEwIEBAIGludAo+PiDCoCBub3V2ZWF1X2ZyYW1lYnVmZmVyX25ldyhzdHJ1Y3QgZHJtX2Rl
+dmljZSAqZGV2LAo+PiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBjb25zdCBzdHJ1Y3QgZHJt
+X21vZGVfZmJfY21kMiAqbW9kZV9jbWQsCj4+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHN0
+cnVjdCBkcm1fZ2VtX29iamVjdCAqZ2VtLAo+PiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBzdHJ1
+Y3Qgbm91dmVhdV9mcmFtZWJ1ZmZlciAqKnBmYikKPj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqAg
+c3RydWN0IGRybV9mcmFtZWJ1ZmZlciAqKnBmYikKPj4gwqAgewo+PiDCoMKgwqDCoMKgIHN0cnVj
+dCBub3V2ZWF1X2RybSAqZHJtID0gbm91dmVhdV9kcm0oZGV2KTsKPj4gLcKgwqDCoCBzdHJ1Y3Qg
+bm91dmVhdV9mcmFtZWJ1ZmZlciAqZmI7Cj4+ICvCoMKgwqAgc3RydWN0IGRybV9mcmFtZWJ1ZmZl
+ciAqZmI7Cj4+IMKgwqDCoMKgwqAgaW50IHJldDsKPj4gwqDCoMKgwqDCoMKgwqDCoMKgIC8qIFlV
+ViBvdmVybGF5cyBoYXZlIHNwZWNpYWwgcmVxdWlyZW1lbnRzIHByZS1OVjUwICovCj4+IEBAIC0y
+MzYsMTAgKzIzNiwxMCBAQCBub3V2ZWF1X2ZyYW1lYnVmZmVyX25ldyhzdHJ1Y3QgZHJtX2Rldmlj
+ZSAqZGV2LAo+PiDCoMKgwqDCoMKgIGlmICghKGZiID0gKnBmYiA9IGt6YWxsb2Moc2l6ZW9mKCpm
+YiksIEdGUF9LRVJORUwpKSkKPj4gwqDCoMKgwqDCoMKgwqDCoMKgIHJldHVybiAtRU5PTUVNOwo+
+PiAtwqDCoMKgIGRybV9oZWxwZXJfbW9kZV9maWxsX2ZiX3N0cnVjdChkZXYsICZmYi0+YmFzZSwg
+bW9kZV9jbWQpOwo+PiAtwqDCoMKgIGZiLT5iYXNlLm9ialswXSA9IGdlbTsKPj4gK8KgwqDCoCBk
+cm1faGVscGVyX21vZGVfZmlsbF9mYl9zdHJ1Y3QoZGV2LCBmYiwgbW9kZV9jbWQpOwo+PiArwqDC
+oMKgIGZiLT5vYmpbMF0gPSBnZW07Cj4+IC3CoMKgwqAgcmV0ID0gZHJtX2ZyYW1lYnVmZmVyX2lu
+aXQoZGV2LCAmZmItPmJhc2UsIAo+PiAmbm91dmVhdV9mcmFtZWJ1ZmZlcl9mdW5jcyk7Cj4+ICvC
+oMKgwqAgcmV0ID0gZHJtX2ZyYW1lYnVmZmVyX2luaXQoZGV2LCBmYiwgJm5vdXZlYXVfZnJhbWVi
+dWZmZXJfZnVuY3MpOwo+PiDCoMKgwqDCoMKgIGlmIChyZXQpCj4+IMKgwqDCoMKgwqDCoMKgwqDC
+oCBrZnJlZShmYik7Cj4+IMKgwqDCoMKgwqAgcmV0dXJuIHJldDsKPj4gQEAgLTI1MCw3ICsyNTAs
+NyBAQCBub3V2ZWF1X3VzZXJfZnJhbWVidWZmZXJfY3JlYXRlKHN0cnVjdCBkcm1fZGV2aWNlIAo+
+PiAqZGV2LAo+PiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHN0cnVjdCBkcm1f
+ZmlsZSAqZmlsZV9wcml2LAo+PiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGNv
+bnN0IHN0cnVjdCBkcm1fbW9kZV9mYl9jbWQyICptb2RlX2NtZCkKPj4gwqAgewo+PiAtwqDCoMKg
+IHN0cnVjdCBub3V2ZWF1X2ZyYW1lYnVmZmVyICpmYjsKPj4gK8KgwqDCoCBzdHJ1Y3QgZHJtX2Zy
+YW1lYnVmZmVyICpmYjsKPj4gwqDCoMKgwqDCoCBzdHJ1Y3QgZHJtX2dlbV9vYmplY3QgKmdlbTsK
+Pj4gwqDCoMKgwqDCoCBpbnQgcmV0Owo+PiBAQCAtMjYwLDcgKzI2MCw3IEBAIG5vdXZlYXVfdXNl
+cl9mcmFtZWJ1ZmZlcl9jcmVhdGUoc3RydWN0IGRybV9kZXZpY2UgCj4+ICpkZXYsCj4+IMKgwqDC
+oMKgwqAgcmV0ID0gbm91dmVhdV9mcmFtZWJ1ZmZlcl9uZXcoZGV2LCBtb2RlX2NtZCwgZ2VtLCAm
+ZmIpOwo+PiDCoMKgwqDCoMKgIGlmIChyZXQgPT0gMCkKPj4gLcKgwqDCoMKgwqDCoMKgIHJldHVy
+biAmZmItPmJhc2U7Cj4+ICvCoMKgwqDCoMKgwqDCoCByZXR1cm4gZmI7Cj4+IMKgwqDCoMKgwqAg
+ZHJtX2dlbV9vYmplY3RfcHV0X3VubG9ja2VkKGdlbSk7Cj4+IMKgwqDCoMKgwqAgcmV0dXJuIEVS
+Ul9QVFIocmV0KTsKPj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZl
+YXVfZGlzcGxheS5oIAo+PiBiL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfZGlzcGxh
+eS5oCj4+IGluZGV4IDU2YzFkZWM4ZmMyOC4uMDgyYmIwNjdkNTc1IDEwMDY0NAo+PiAtLS0gYS9k
+cml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2Rpc3BsYXkuaAo+PiArKysgYi9kcml2ZXJz
+L2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2Rpc3BsYXkuaAo+PiBAQCAtOCwyMSArOCwxMSBAQAo+
+PiDCoCAjaW5jbHVkZSA8ZHJtL2RybV9mcmFtZWJ1ZmZlci5oPgo+PiAtc3RydWN0IG5vdXZlYXVf
+ZnJhbWVidWZmZXIgewo+PiAtwqDCoMKgIHN0cnVjdCBkcm1fZnJhbWVidWZmZXIgYmFzZTsKPj4g
+LX07Cj4+IC0KPj4gLXN0YXRpYyBpbmxpbmUgc3RydWN0IG5vdXZlYXVfZnJhbWVidWZmZXIgKgo+
+PiAtbm91dmVhdV9mcmFtZWJ1ZmZlcihzdHJ1Y3QgZHJtX2ZyYW1lYnVmZmVyICpmYikKPj4gLXsK
+Pj4gLcKgwqDCoCByZXR1cm4gY29udGFpbmVyX29mKGZiLCBzdHJ1Y3Qgbm91dmVhdV9mcmFtZWJ1
+ZmZlciwgYmFzZSk7Cj4+IC19Cj4+IC0KPj4gwqAgaW50Cj4+IMKgIG5vdXZlYXVfZnJhbWVidWZm
+ZXJfbmV3KHN0cnVjdCBkcm1fZGV2aWNlICpkZXYsCj4+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgIGNvbnN0IHN0cnVjdCBkcm1fbW9kZV9mYl9jbWQyICptb2RlX2NtZCwKPj4gwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqAgc3RydWN0IGRybV9nZW1fb2JqZWN0ICpnZW0sCj4+IC3CoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgIHN0cnVjdCBub3V2ZWF1X2ZyYW1lYnVmZmVyICoqcGZiKTsKPj4gK8Kg
+wqDCoMKgwqDCoMKgwqDCoMKgwqAgc3RydWN0IGRybV9mcmFtZWJ1ZmZlciAqKnBmYik7Cj4+IMKg
+IHN0cnVjdCBub3V2ZWF1X2Rpc3BsYXkgewo+PiDCoMKgwqDCoMKgIHZvaWQgKnByaXY7Cj4+IGRp
+ZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2ZiY29uLmMgCj4+IGIv
+ZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9mYmNvbi5jCj4+IGluZGV4IDAyYjM2YjQ0
+NDA5Yy4uZDc4YmMwM2FkM2I4IDEwMDY0NAo+PiAtLS0gYS9kcml2ZXJzL2dwdS9kcm0vbm91dmVh
+dS9ub3V2ZWF1X2ZiY29uLmMKPj4gKysrIGIvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVh
+dV9mYmNvbi5jCj4+IEBAIC0zMTIsNyArMzEyLDcgQEAgbm91dmVhdV9mYmNvbl9jcmVhdGUoc3Ry
+dWN0IGRybV9mYl9oZWxwZXIgKmhlbHBlciwKPj4gwqDCoMKgwqDCoCBzdHJ1Y3Qgbm91dmVhdV9k
+cm0gKmRybSA9IG5vdXZlYXVfZHJtKGRldik7Cj4+IMKgwqDCoMKgwqAgc3RydWN0IG52aWZfZGV2
+aWNlICpkZXZpY2UgPSAmZHJtLT5jbGllbnQuZGV2aWNlOwo+PiDCoMKgwqDCoMKgIHN0cnVjdCBm
+Yl9pbmZvICppbmZvOwo+PiAtwqDCoMKgIHN0cnVjdCBub3V2ZWF1X2ZyYW1lYnVmZmVyICpmYjsK
+Pj4gK8KgwqDCoCBzdHJ1Y3QgZHJtX2ZyYW1lYnVmZmVyICpmYjsKPj4gwqDCoMKgwqDCoCBzdHJ1
+Y3Qgbm91dmVhdV9jaGFubmVsICpjaGFuOwo+PiDCoMKgwqDCoMKgIHN0cnVjdCBub3V2ZWF1X2Jv
+ICpudmJvOwo+PiDCoMKgwqDCoMKgIHN0cnVjdCBkcm1fbW9kZV9mYl9jbWQyIG1vZGVfY21kOwo+
+PiBAQCAtMzY3LDcgKzM2Nyw3IEBAIG5vdXZlYXVfZmJjb25fY3JlYXRlKHN0cnVjdCBkcm1fZmJf
+aGVscGVyICpoZWxwZXIsCj4+IMKgwqDCoMKgwqAgfQo+PiDCoMKgwqDCoMKgIC8qIHNldHVwIGhl
+bHBlciAqLwo+PiAtwqDCoMKgIGZiY29uLT5oZWxwZXIuZmIgPSAmZmItPmJhc2U7Cj4+ICvCoMKg
+wqAgZmJjb24tPmhlbHBlci5mYiA9IGZiOwo+PiDCoMKgwqDCoMKgIGlmICghY2hhbikKPj4gwqDC
+oMKgwqDCoMKgwqDCoMKgIGluZm8tPmZsYWdzID0gRkJJTkZPX0hXQUNDRUxfRElTQUJMRUQ7Cj4+
+IEBAIC0zOTMsNyArMzkzLDcgQEAgbm91dmVhdV9mYmNvbl9jcmVhdGUoc3RydWN0IGRybV9mYl9o
+ZWxwZXIgKmhlbHBlciwKPj4gwqDCoMKgwqDCoCAvKiBUbyBhbGxvdyByZXNpemVpbmcgd2l0aG91
+dCBzd2FwcGluZyBidWZmZXJzICovCj4+IMKgwqDCoMKgwqAgTlZfSU5GTyhkcm0sICJhbGxvY2F0
+ZWQgJWR4JWQgZmI6IDB4JWxseCwgYm8gJXBcbiIsCj4+IC3CoMKgwqDCoMKgwqDCoCBmYi0+YmFz
+ZS53aWR0aCwgZmItPmJhc2UuaGVpZ2h0LCBudmJvLT5iby5vZmZzZXQsIG52Ym8pOwo+PiArwqDC
+oMKgwqDCoMKgwqAgZmItPndpZHRoLCBmYi0+aGVpZ2h0LCBudmJvLT5iby5vZmZzZXQsIG52Ym8p
+Owo+PiDCoMKgwqDCoMKgIHZnYV9zd2l0Y2hlcm9vX2NsaWVudF9mYl9zZXQoZGV2LT5wZGV2LCBp
+bmZvKTsKPj4gwqDCoMKgwqDCoCByZXR1cm4gMDsKPj4gQEAgLTQxMywxOCArNDEzLDE4IEBAIG5v
+dXZlYXVfZmJjb25fY3JlYXRlKHN0cnVjdCBkcm1fZmJfaGVscGVyICpoZWxwZXIsCj4+IMKgIHN0
+YXRpYyBpbnQKPj4gwqAgbm91dmVhdV9mYmNvbl9kZXN0cm95KHN0cnVjdCBkcm1fZGV2aWNlICpk
+ZXYsIHN0cnVjdCBub3V2ZWF1X2ZiZGV2IAo+PiAqZmJjb24pCj4+IMKgIHsKPj4gLcKgwqDCoCBz
+dHJ1Y3Qgbm91dmVhdV9mcmFtZWJ1ZmZlciAqbm91dmVhdV9mYiA9IAo+PiBub3V2ZWF1X2ZyYW1l
+YnVmZmVyKGZiY29uLT5oZWxwZXIuZmIpOwo+PiArwqDCoMKgIHN0cnVjdCBkcm1fZnJhbWVidWZm
+ZXIgKmZiID0gZmJjb24tPmhlbHBlci5mYjsKPj4gwqDCoMKgwqDCoCBzdHJ1Y3Qgbm91dmVhdV9i
+byAqbnZibzsKPj4gwqDCoMKgwqDCoCBkcm1fZmJfaGVscGVyX3VucmVnaXN0ZXJfZmJpKCZmYmNv
+bi0+aGVscGVyKTsKPj4gwqDCoMKgwqDCoCBkcm1fZmJfaGVscGVyX2ZpbmkoJmZiY29uLT5oZWxw
+ZXIpOwo+PiAtwqDCoMKgIGlmIChub3V2ZWF1X2ZiICYmIG5vdXZlYXVfZmItPmJhc2Uub2JqWzBd
+KSB7Cj4+IC3CoMKgwqDCoMKgwqDCoCBudmJvID0gbm91dmVhdV9nZW1fb2JqZWN0KG5vdXZlYXVf
+ZmItPmJhc2Uub2JqWzBdKTsKPj4gK8KgwqDCoCBpZiAoZmIgJiYgZmItPm9ialswXSkgewo+PiAr
+wqDCoMKgwqDCoMKgwqAgbnZibyA9IG5vdXZlYXVfZ2VtX29iamVjdChmYi0+b2JqWzBdKTsKPj4g
+wqDCoMKgwqDCoMKgwqDCoMKgIG5vdXZlYXVfdm1hX2RlbCgmZmJjb24tPnZtYSk7Cj4+IMKgwqDC
+oMKgwqDCoMKgwqDCoCBub3V2ZWF1X2JvX3VubWFwKG52Ym8pOwo+PiDCoMKgwqDCoMKgwqDCoMKg
+wqAgbm91dmVhdV9ib191bnBpbihudmJvKTsKPj4gLcKgwqDCoMKgwqDCoMKgIGRybV9mcmFtZWJ1
+ZmZlcl9wdXQoJm5vdXZlYXVfZmItPmJhc2UpOwo+PiArwqDCoMKgwqDCoMKgwqAgZHJtX2ZyYW1l
+YnVmZmVyX3B1dChmYik7Cj4+IMKgwqDCoMKgwqAgfQo+PiDCoMKgwqDCoMKgIHJldHVybiAwOwo+
+Pgo+IF9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCj4gTm91
+dmVhdSBtYWlsaW5nIGxpc3QKPiBOb3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwo+IGh0dHBz
+Oi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vbm91dmVhdQpfX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpOb3V2ZWF1IG1haWxpbmcg
+bGlzdApOb3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNr
+dG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL25vdXZlYXUK
