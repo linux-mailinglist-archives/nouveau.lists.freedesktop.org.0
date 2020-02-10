@@ -1,54 +1,54 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 79BBF1570CA
-	for <lists+nouveau@lfdr.de>; Mon, 10 Feb 2020 09:26:07 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id B77331585F5
+	for <lists+nouveau@lfdr.de>; Tue, 11 Feb 2020 00:09:23 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3DF8D6E92E;
-	Mon, 10 Feb 2020 08:26:05 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id BA9956E260;
+	Mon, 10 Feb 2020 23:09:17 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-yb1-xb42.google.com (mail-yb1-xb42.google.com
- [IPv6:2607:f8b0:4864:20::b42])
- by gabe.freedesktop.org (Postfix) with ESMTPS id BDE626E92B;
- Mon, 10 Feb 2020 08:26:03 +0000 (UTC)
-Received: by mail-yb1-xb42.google.com with SMTP id s35so3215235ybi.0;
- Mon, 10 Feb 2020 00:26:03 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=43XyHfKAaNPwgYgkkYK63R6QsAZuOrXyeXcn4MIztAs=;
- b=rkfXRvAX1M5NcUKiOYmsWZO4yhj9fqUsR0uU/qr0n6Di7YYF7UzDp52ewieCrrqWaC
- o9ccXtoJUiQzlvlRZ+l5GLB1xhJJvulgv+rQeQjdpPVlv8ArY8dKYuqMYL2l7HF42/Mj
- CHRLyqiHcmFSCYN4SNVGUKrgUTQMe0ltKi+P4fqUjkFWjRS+uMpqTKxK6TW1GrYfNvEP
- q3FIy2BTi4BCGrzk7RflswBuTQvCWGDTm4tPNQE/0+ep/+LyP9CANT+ziHY2BYj50y5Y
- x93RFgB7nNci/1uxepf558zRQ+XqWepxyOjQx3xP9wAZDt0vwTEa8lV658XBCVejIB4a
- uJ9g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=43XyHfKAaNPwgYgkkYK63R6QsAZuOrXyeXcn4MIztAs=;
- b=X7AYBfVDNyuNxDEuAtqXSb9UEyR1EDSgqe8/skCTDcWW6Mm2m1RPuEhztktXGi2Jqp
- uctdDAd85pjIVt5eYKedtCTUPyzKWH9TChNo7NeNEgfwMePS6s3RnxB5MD4wRSouWo/z
- ad33iIsp4RhxcX+ART0yADguJ2vFoiDWHB26nxXxF31vOs7NMDWnGHU9EOQcZkIlEWFd
- b6mF7YeqrOv4kEJ61spEI4s/OnG72MBN2sUeohkwNJ9FL6KcUHcyI0jOz0By8YQyWF8Y
- tO0dx7P9MQTbSNoFtimT51243y1MuURSm5sMLPTHFf+y1FcyGRDMbYWP1zTB9D6mstE/
- V7Mg==
-X-Gm-Message-State: APjAAAVVdZVi8aI1/3s/uR6Jt6o8opA5+PHpUq9mrCMElHrmW8R6NCC6
- nRRjRaUtCJtpOxYujuzwZAngm6pil0HYgnOtpdE=
-X-Google-Smtp-Source: APXvYqzNFMeGOWls9djYYg/ae72pshGhzqMBjXzbXcBItVFMrqLENYfkReOiF2tOlz/wfX/QzoYuCCnsi8m4eUNbkCc=
-X-Received: by 2002:a25:7395:: with SMTP id o143mr299899ybc.435.1581323162995; 
- Mon, 10 Feb 2020 00:26:02 -0800 (PST)
+Received: from hqnvemgate24.nvidia.com (hqnvemgate24.nvidia.com
+ [216.228.121.143])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E4BD36E25C;
+ Mon, 10 Feb 2020 23:09:15 +0000 (UTC)
+Received: from hqpgpgate101.nvidia.com (Not Verified[216.228.121.13]) by
+ hqnvemgate24.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
+ id <B5e41e25c0000>; Mon, 10 Feb 2020 15:08:12 -0800
+Received: from hqmail.nvidia.com ([172.20.161.6])
+ by hqpgpgate101.nvidia.com (PGP Universal service);
+ Mon, 10 Feb 2020 15:09:15 -0800
+X-PGP-Universal: processed;
+ by hqpgpgate101.nvidia.com on Mon, 10 Feb 2020 15:09:15 -0800
+Received: from HQMAIL109.nvidia.com (172.20.187.15) by HQMAIL109.nvidia.com
+ (172.20.187.15) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Mon, 10 Feb
+ 2020 23:09:14 +0000
+Received: from rnnvemgw01.nvidia.com (10.128.109.123) by HQMAIL109.nvidia.com
+ (172.20.187.15) with Microsoft SMTP Server (TLS) id 15.0.1473.3 via
+ Frontend Transport; Mon, 10 Feb 2020 23:09:14 +0000
+Received: from jajones-aftershock.nvidia.com (Not Verified[172.20.40.102]) by
+ rnnvemgw01.nvidia.com with Trustwave SEG (v7, 5, 8, 10121)
+ id <B5e41e29a0000>; Mon, 10 Feb 2020 15:09:14 -0800
+From: James Jones <jajones@nvidia.com>
+To: Ben Skeggs <bskeggs@redhat.com>, Thomas Zimmermann <tzimmermann@suse.de>
+Date: Mon, 10 Feb 2020 15:09:43 -0800
+Message-ID: <20200210230943.2874-1-jajones@nvidia.com>
+X-Mailer: git-send-email 2.17.1
+X-NVConfidentiality: public
 MIME-Version: 1.0
-References: <20200209105525.GA1620170@kroah.com>
-In-Reply-To: <20200209105525.GA1620170@kroah.com>
-From: Ben Skeggs <skeggsb@gmail.com>
-Date: Mon, 10 Feb 2020 18:25:52 +1000
-Message-ID: <CACAvsv7YUGE7z5C4j5mT_P01zr-TcoZymN1D4LD3F9vUYc98Cg@mail.gmail.com>
-To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Subject: Re: [Nouveau] [PATCH] nouveau: no need to check return value of
- debugfs_create functions
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
+ t=1581376092; bh=3RQBM41F/QlWJuyJ4Z1DOYgO4df796fPaFDbX16n2l8=;
+ h=X-PGP-Universal:From:To:CC:Subject:Date:Message-ID:X-Mailer:
+ X-NVConfidentiality:MIME-Version:Content-Type;
+ b=W3aHayK8A1cFACH+15DqmN7hP8gf8ff4eccS04AxxRFuqeHLh6Ps/beApvdTxsxnD
+ /J2YJ6ZFlsXpub9tdhJbKn4UNZpmi1+tuny6nIwpktfXw1zAyabcEVhQiVkSbMj45h
+ yVAjeZNoTha4in3ulHcUnS31N4UZOF3gxwOpQWnHPJeiEI9Yczjy1bHRiyk6EDmKrg
+ iKcQQpTMV2FmE7W05aO+JskK51JB76pzjS8tQsbJZ9MeFs1BqCrSXD9uSrR06p4swG
+ QdvpQ4RaWBjsmXwGYmV047F+crxgu07ssJ373lTYbKod7Ra1c389tO8yrkIln8QgTm
+ x97b86oYNQbxA==
+Subject: [Nouveau] [PATCH] drm/nouveau: Fix NULL ptr access in
+ nv50_wndw_prepare_fb()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,63 +60,50 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, ML nouveau <nouveau@lists.freedesktop.org>,
- Daniel Vetter <daniel@ffwll.ch>, Ben Skeggs <bskeggs@redhat.com>,
- ML dri-devel <dri-devel@lists.freedesktop.org>
+Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Sun, 9 Feb 2020 at 22:56, Greg Kroah-Hartman
-<gregkh@linuxfoundation.org> wrote:
->
-> When calling debugfs functions, there is no need to ever check the
-> return value.  The function can work or not, but the code logic should
-> never do something different based on this.
-Thanks!
+This fixes a kernel oops when loading the nouveau
+module with fb console enabled after the change:
 
->
-> Cc: Ben Skeggs <bskeggs@redhat.com>
-> Cc: David Airlie <airlied@linux.ie>
-> Cc: Daniel Vetter <daniel@ffwll.ch>
-> Cc: dri-devel@lists.freedesktop.org
-> Cc: nouveau@lists.freedesktop.org
-> Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-> ---
->  drivers/gpu/drm/nouveau/nouveau_debugfs.c | 12 ++++--------
->  1 file changed, 4 insertions(+), 8 deletions(-)
->
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_debugfs.c b/drivers/gpu/drm/nouveau/nouveau_debugfs.c
-> index 080e964d49aa..d1c82fc45a68 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_debugfs.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_debugfs.c
-> @@ -224,14 +224,10 @@ nouveau_drm_debugfs_init(struct drm_minor *minor)
->         struct dentry *dentry;
->         int i;
->
-> -       for (i = 0; i < ARRAY_SIZE(nouveau_debugfs_files); i++) {
-> -               dentry = debugfs_create_file(nouveau_debugfs_files[i].name,
-> -                                            S_IRUGO | S_IWUSR,
-> -                                            minor->debugfs_root, minor->dev,
-> -                                            nouveau_debugfs_files[i].fops);
-> -               if (!dentry)
-> -                       return -ENOMEM;
-> -       }
-> +       for (i = 0; i < ARRAY_SIZE(nouveau_debugfs_files); i++)
-> +               debugfs_create_file(nouveau_debugfs_files[i].name,
-> +                                   S_IRUGO | S_IWUSR, minor->debugfs_root,
-> +                                   minor->dev, nouveau_debugfs_files[i].fops);
->
->         drm_debugfs_create_files(nouveau_debugfs_list,
->                                  NOUVEAU_DEBUGFS_ENTRIES,
-> --
-> 2.25.0
->
-> _______________________________________________
-> Nouveau mailing list
-> Nouveau@lists.freedesktop.org
-> https://lists.freedesktop.org/mailman/listinfo/nouveau
+  drm/nouveau: Remove field nvbo from struct nouveau_framebuffer
+
+state->fb may be NULL in nv50_wndw_prepare_fb(),
+so defer initializing nvbo from its obj[] array
+until after the NULL check.
+
+Signed-off-by: James Jones <jajones@nvidia.com>
+---
+ drivers/gpu/drm/nouveau/dispnv50/wndw.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/gpu/drm/nouveau/dispnv50/wndw.c b/drivers/gpu/drm/nouveau/dispnv50/wndw.c
+index 4a67a656e007..68c0dc2dc2d3 100644
+--- a/drivers/gpu/drm/nouveau/dispnv50/wndw.c
++++ b/drivers/gpu/drm/nouveau/dispnv50/wndw.c
+@@ -490,7 +490,7 @@ nv50_wndw_prepare_fb(struct drm_plane *plane, struct drm_plane_state *state)
+ 	struct nouveau_drm *drm = nouveau_drm(plane->dev);
+ 	struct nv50_wndw *wndw = nv50_wndw(plane);
+ 	struct nv50_wndw_atom *asyw = nv50_wndw_atom(state);
+-	struct nouveau_bo *nvbo = nouveau_gem_object(fb->obj[0]);
++	struct nouveau_bo *nvbo;
+ 	struct nv50_head_atom *asyh;
+ 	struct nv50_wndw_ctxdma *ctxdma;
+ 	int ret;
+@@ -499,6 +499,7 @@ nv50_wndw_prepare_fb(struct drm_plane *plane, struct drm_plane_state *state)
+ 	if (!asyw->state.fb)
+ 		return 0;
+ 
++	nvbo = nouveau_gem_object(fb->obj[0]);
+ 	ret = nouveau_bo_pin(nvbo, TTM_PL_FLAG_VRAM, true);
+ 	if (ret)
+ 		return ret;
+-- 
+2.17.1
+
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
