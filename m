@@ -1,55 +1,58 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9F95B158997
-	for <lists+nouveau@lfdr.de>; Tue, 11 Feb 2020 06:28:58 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 56F5F158B5E
+	for <lists+nouveau@lfdr.de>; Tue, 11 Feb 2020 09:40:44 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5680E6EDA0;
-	Tue, 11 Feb 2020 05:28:55 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1D3BC6EE03;
+	Tue, 11 Feb 2020 08:40:39 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
- by gabe.freedesktop.org (Postfix) with ESMTPS id EAE6D6ED9F;
- Tue, 11 Feb 2020 05:28:53 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 63B40ADE4;
- Tue, 11 Feb 2020 05:28:52 +0000 (UTC)
-To: James Jones <jajones@nvidia.com>, Ben Skeggs <bskeggs@redhat.com>
+Received: from mail-wr1-x441.google.com (mail-wr1-x441.google.com
+ [IPv6:2a00:1450:4864:20::441])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id EF5056EE00
+ for <nouveau@lists.freedesktop.org>; Tue, 11 Feb 2020 08:40:37 +0000 (UTC)
+Received: by mail-wr1-x441.google.com with SMTP id r11so7899428wrq.10
+ for <nouveau@lists.freedesktop.org>; Tue, 11 Feb 2020 00:40:37 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:content-transfer-encoding:in-reply-to;
+ bh=Kj7xciG/TTqM/ZE2qXR/wKz4HZY6+8KwrA5Al7SDgrA=;
+ b=SKx0PtZvxlM7Ny2VuDUjGTMeJEDJUjAzlgU4l4S6g4oUS8UwOD/yEw3+7r2ufCzXT2
+ 7KbLa4toh71ZcUWaGR+t6bCc8MwGZGwtsPgyDxo8b0Z67Yt5sAwIC7J/dDYRhT1iqR6u
+ 7iplSLuCngUVkgGbMnvJINJw00JZ8wVxFZe9A=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:content-transfer-encoding
+ :in-reply-to;
+ bh=Kj7xciG/TTqM/ZE2qXR/wKz4HZY6+8KwrA5Al7SDgrA=;
+ b=b6JnyLrKjIreeF7Cqzt/BYvPWdcTjzkbOG1Q1mMwgrLkoJr46bOfuAemllbe//2X4P
+ rtFBFcaegu+oNGsg0nYDYrsSnAhUv8bvzKlUaRdJXAtb8RjYAT5XsTBotrbPpoObdw7/
+ HTVvJYrQOKwR0qwpBz91FrivFQ4q11/Lpug8aYOM7jZ6uQuLeKRNvZ/RRLdoVmTck5yK
+ P/lwg+UmvJyw8/sT7NFeNuqACtg2Hiv2isvXSHYAeKeQCYe12UBXsf9S/pfRvGQjY0Lk
+ swBLIjSUZHvurxWh/bXNE2X2WE5QymHhIOrFxKXpZ3fUqqAq/8lc274cw0Nu2MMqgg5K
+ P5gQ==
+X-Gm-Message-State: APjAAAXqrY7TjLTjJKBgmC8yMZJ2QV0xDoBxp+I5aMkCCxNYgVxoCy+6
+ kfEVEgSX0Y+sYMM47ZkJ/L78uA==
+X-Google-Smtp-Source: APXvYqwWYjRXIXW0f2riBsOhu1LJgABv6043dIRK6dkWp7XbxX5UdgOG78YscJSXz71DAbuOfiD9Rg==
+X-Received: by 2002:adf:f886:: with SMTP id u6mr7292938wrp.409.1581410436664; 
+ Tue, 11 Feb 2020 00:40:36 -0800 (PST)
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
+ by smtp.gmail.com with ESMTPSA id x14sm2670484wmj.42.2020.02.11.00.40.35
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 11 Feb 2020 00:40:35 -0800 (PST)
+Date: Tue, 11 Feb 2020 09:40:34 +0100
+From: Daniel Vetter <daniel@ffwll.ch>
+To: Thomas Zimmermann <tzimmermann@suse.de>
+Message-ID: <20200211084034.GW43062@phenom.ffwll.local>
 References: <20200210230943.2874-1-jajones@nvidia.com>
-From: Thomas Zimmermann <tzimmermann@suse.de>
-Autocrypt: addr=tzimmermann@suse.de; keydata=
- mQENBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
- XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
- BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
- hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
- 9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
- AAG0J1Rob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPokBVAQTAQgAPhYh
- BHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJbOdLgAhsDBQkDwmcABQsJCAcCBhUKCQgLAgQWAgMB
- Ah4BAheAAAoJEGgNwR1TC3ojR80H/jH+vYavwQ+TvO8ksXL9JQWc3IFSiGpuSVXLCdg62AmR
- irxW+qCwNncNQyb9rd30gzdectSkPWL3KSqEResBe24IbA5/jSkPweJasgXtfhuyoeCJ6PXo
- clQQGKIoFIAEv1s8l0ggPZswvCinegl1diyJXUXmdEJRTWYAtxn/atut1o6Giv6D2qmYbXN7
- mneMC5MzlLaJKUtoH7U/IjVw1sx2qtxAZGKVm4RZxPnMCp9E1MAr5t4dP5gJCIiqsdrVqI6i
- KupZstMxstPU//azmz7ZWWxT0JzgJqZSvPYx/SATeexTYBP47YFyri4jnsty2ErS91E6H8os
- Bv6pnSn7eAq5AQ0EWznS4AEIAMYmP4M/V+T5RY5at/g7rUdNsLhWv1APYrh9RQefODYHrNRH
- UE9eosYbT6XMryR9hT8XlGOYRwKWwiQBoWSDiTMo/Xi29jUnn4BXfI2px2DTXwc22LKtLAgT
- RjP+qbU63Y0xnQN29UGDbYgyyK51DW3H0If2a3JNsheAAK+Xc9baj0LGIc8T9uiEWHBnCH+R
- dhgATnWWGKdDegUR5BkDfDg5O/FISymJBHx2Dyoklv5g4BzkgqTqwmaYzsl8UxZKvbaxq0zb
- ehDda8lvhFXodNFMAgTLJlLuDYOGLK2AwbrS3Sp0AEbkpdJBb44qVlGm5bApZouHeJ/+n+7r
- 12+lqdsAEQEAAYkBPAQYAQgAJhYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJbOdLgAhsMBQkD
- wmcAAAoJEGgNwR1TC3ojpfcIAInwP5OlcEKokTnHCiDTz4Ony4GnHRP2fXATQZCKxmu4AJY2
- h9ifw9Nf2TjCZ6AMvC3thAN0rFDj55N9l4s1CpaDo4J+0fkrHuyNacnT206CeJV1E7NYntxU
- n+LSiRrOdywn6erjxRi9EYTVLCHcDhBEjKmFZfg4AM4GZMWX1lg0+eHbd5oL1as28WvvI/uI
- aMyV8RbyXot1r/8QLlWldU3NrTF5p7TMU2y3ZH2mf5suSKHAMtbE4jKJ8ZHFOo3GhLgjVrBW
- HE9JXO08xKkgD+w6v83+nomsEuf6C6LYrqY/tsZvyEX6zN8CtirPdPWu/VXNRYAl/lat7lSI
- 3H26qrE=
-Message-ID: <d40e1738-f313-e84d-8d4c-af5efd60aa93@suse.de>
-Date: Tue, 11 Feb 2020 06:28:47 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.4.1
+ <d40e1738-f313-e84d-8d4c-af5efd60aa93@suse.de>
 MIME-Version: 1.0
-In-Reply-To: <20200210230943.2874-1-jajones@nvidia.com>
+Content-Disposition: inline
+In-Reply-To: <d40e1738-f313-e84d-8d4c-af5efd60aa93@suse.de>
+X-Operating-System: Linux phenom 5.3.0-3-amd64 
 Subject: Re: [Nouveau] [PATCH] drm/nouveau: Fix NULL ptr access in
  nv50_wndw_prepare_fb()
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -63,123 +66,109 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org
-Content-Type: multipart/mixed; boundary="===============1375469757=="
+Cc: nouveau@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>,
+ dri-devel@lists.freedesktop.org
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============1375469757==
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="OoueAXJCEkTFSJ8tULKXQ8oe6omqc1UID"
+On Tue, Feb 11, 2020 at 06:28:47AM +0100, Thomas Zimmermann wrote:
+> Hi
+> =
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---OoueAXJCEkTFSJ8tULKXQ8oe6omqc1UID
-Content-Type: multipart/mixed; boundary="q59L1jm9NiShTNrr1fzrvV1anlZz1XX7N";
- protected-headers="v1"
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: James Jones <jajones@nvidia.com>, Ben Skeggs <bskeggs@redhat.com>
-Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org
-Message-ID: <d40e1738-f313-e84d-8d4c-af5efd60aa93@suse.de>
-Subject: Re: [PATCH] drm/nouveau: Fix NULL ptr access in
- nv50_wndw_prepare_fb()
-References: <20200210230943.2874-1-jajones@nvidia.com>
-In-Reply-To: <20200210230943.2874-1-jajones@nvidia.com>
+> I'm surprised that prepare_fb is called with fb =3D=3D NULL. But, OK
 
---q59L1jm9NiShTNrr1fzrvV1anlZz1XX7N
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
+Yeah we don't filter that ... maybe an oversight? I'm not sure whether
+there's any driver that needs to do something special for when the plane
+is disabled here (since "plane off" iff "plane_state-fb =3D=3D NULL").
 
-Hi
+In general I think we have an awful lot of bugs in most drivers for the
+case when the plane state is in the atomic commit, but not enabled.
+-Daniel
 
-I'm surprised that prepare_fb is called with fb =3D=3D NULL. But, OK
+> =
 
-Acked-by: Thomas Zimmermann <tzimmermann@suse.de>
+> Acked-by: Thomas Zimmermann <tzimmermann@suse.de>
+> =
 
-Thanks for the fix.
+> Thanks for the fix.
+> =
 
-Am 11.02.20 um 00:09 schrieb James Jones:
-> This fixes a kernel oops when loading the nouveau
-> module with fb console enabled after the change:
->=20
->   drm/nouveau: Remove field nvbo from struct nouveau_framebuffer
->=20
-> state->fb may be NULL in nv50_wndw_prepare_fb(),
-> so defer initializing nvbo from its obj[] array
-> until after the NULL check.
->=20
-> Signed-off-by: James Jones <jajones@nvidia.com>
-> ---
->  drivers/gpu/drm/nouveau/dispnv50/wndw.c | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
->=20
-> diff --git a/drivers/gpu/drm/nouveau/dispnv50/wndw.c b/drivers/gpu/drm/=
+> Am 11.02.20 um 00:09 schrieb James Jones:
+> > This fixes a kernel oops when loading the nouveau
+> > module with fb console enabled after the change:
+> > =
+
+> >   drm/nouveau: Remove field nvbo from struct nouveau_framebuffer
+> > =
+
+> > state->fb may be NULL in nv50_wndw_prepare_fb(),
+> > so defer initializing nvbo from its obj[] array
+> > until after the NULL check.
+> > =
+
+> > Signed-off-by: James Jones <jajones@nvidia.com>
+> > ---
+> >  drivers/gpu/drm/nouveau/dispnv50/wndw.c | 3 ++-
+> >  1 file changed, 2 insertions(+), 1 deletion(-)
+> > =
+
+> > diff --git a/drivers/gpu/drm/nouveau/dispnv50/wndw.c b/drivers/gpu/drm/=
 nouveau/dispnv50/wndw.c
-> index 4a67a656e007..68c0dc2dc2d3 100644
-> --- a/drivers/gpu/drm/nouveau/dispnv50/wndw.c
-> +++ b/drivers/gpu/drm/nouveau/dispnv50/wndw.c
-> @@ -490,7 +490,7 @@ nv50_wndw_prepare_fb(struct drm_plane *plane, struc=
+> > index 4a67a656e007..68c0dc2dc2d3 100644
+> > --- a/drivers/gpu/drm/nouveau/dispnv50/wndw.c
+> > +++ b/drivers/gpu/drm/nouveau/dispnv50/wndw.c
+> > @@ -490,7 +490,7 @@ nv50_wndw_prepare_fb(struct drm_plane *plane, struc=
 t drm_plane_state *state)
->  	struct nouveau_drm *drm =3D nouveau_drm(plane->dev);
->  	struct nv50_wndw *wndw =3D nv50_wndw(plane);
->  	struct nv50_wndw_atom *asyw =3D nv50_wndw_atom(state);
-> -	struct nouveau_bo *nvbo =3D nouveau_gem_object(fb->obj[0]);
-> +	struct nouveau_bo *nvbo;
->  	struct nv50_head_atom *asyh;
->  	struct nv50_wndw_ctxdma *ctxdma;
->  	int ret;
-> @@ -499,6 +499,7 @@ nv50_wndw_prepare_fb(struct drm_plane *plane, struc=
+> >  	struct nouveau_drm *drm =3D nouveau_drm(plane->dev);
+> >  	struct nv50_wndw *wndw =3D nv50_wndw(plane);
+> >  	struct nv50_wndw_atom *asyw =3D nv50_wndw_atom(state);
+> > -	struct nouveau_bo *nvbo =3D nouveau_gem_object(fb->obj[0]);
+> > +	struct nouveau_bo *nvbo;
+> >  	struct nv50_head_atom *asyh;
+> >  	struct nv50_wndw_ctxdma *ctxdma;
+> >  	int ret;
+> > @@ -499,6 +499,7 @@ nv50_wndw_prepare_fb(struct drm_plane *plane, struc=
 t drm_plane_state *state)
->  	if (!asyw->state.fb)
->  		return 0;
-> =20
-> +	nvbo =3D nouveau_gem_object(fb->obj[0]);
->  	ret =3D nouveau_bo_pin(nvbo, TTM_PL_FLAG_VRAM, true);
->  	if (ret)
->  		return ret;
->=20
+> >  	if (!asyw->state.fb)
+> >  		return 0;
+> >  =
 
---=20
-Thomas Zimmermann
-Graphics Driver Developer
-SUSE Software Solutions Germany GmbH
-Maxfeldstr. 5, 90409 N=C3=BCrnberg, Germany
-(HRB 36809, AG N=C3=BCrnberg)
-Gesch=C3=A4ftsf=C3=BChrer: Felix Imend=C3=B6rffer
+> > +	nvbo =3D nouveau_gem_object(fb->obj[0]);
+> >  	ret =3D nouveau_bo_pin(nvbo, TTM_PL_FLAG_VRAM, true);
+> >  	if (ret)
+> >  		return ret;
+> > =
+
+> =
+
+> -- =
+
+> Thomas Zimmermann
+> Graphics Driver Developer
+> SUSE Software Solutions Germany GmbH
+> Maxfeldstr. 5, 90409 N=FCrnberg, Germany
+> (HRB 36809, AG N=FCrnberg)
+> Gesch=E4ftsf=FChrer: Felix Imend=F6rffer
+> =
 
 
---q59L1jm9NiShTNrr1fzrvV1anlZz1XX7N--
 
---OoueAXJCEkTFSJ8tULKXQ8oe6omqc1UID
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
 
------BEGIN PGP SIGNATURE-----
 
-iQEzBAEBCAAdFiEEchf7rIzpz2NEoWjlaA3BHVMLeiMFAl5CO5MACgkQaA3BHVML
-eiMlHgf/Q3a58ZaiLehyXAfLIa14LRPUa/o5uy6q9Sy0kyZW0JlXz04uXIJJoPt3
-RMAs5HTPXFqj0sAIzJTKrvmJ9xl4ZdTX87bsS5DCNa1haM35crTVuCiYDD+LJqUq
-l+pYiWxRwflYbUY6jIEpXntKobWXxCO882ZvhNRchRutv+0XL2diRAyabySZezQL
-l3Mub00bkQCalPukRjheun4Wmy63jqdwU/gssJsiJ8CUg8zy+7eXvPm6NXMN+vvm
-HYYGl1aWQGOTQ/X1XMVxWKwZ/yawRF+Yxkdfw/2d7K/mmjOYNa/CpFfTWh7yezWi
-w6l0kDkZescLLqroO4i5cVGUPuRwlw==
-=YB2F
------END PGP SIGNATURE-----
+> _______________________________________________
+> Nouveau mailing list
+> Nouveau@lists.freedesktop.org
+> https://lists.freedesktop.org/mailman/listinfo/nouveau
 
---OoueAXJCEkTFSJ8tULKXQ8oe6omqc1UID--
 
---===============1375469757==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+-- =
 
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/nouveau
-
---===============1375469757==--
