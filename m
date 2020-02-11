@@ -2,61 +2,56 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id E652415862C
-	for <lists+nouveau@lfdr.de>; Tue, 11 Feb 2020 00:35:22 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9F95B158997
+	for <lists+nouveau@lfdr.de>; Tue, 11 Feb 2020 06:28:58 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4190189122;
-	Mon, 10 Feb 2020 23:35:20 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5680E6EDA0;
+	Tue, 11 Feb 2020 05:28:55 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-yb1-xb42.google.com (mail-yb1-xb42.google.com
- [IPv6:2607:f8b0:4864:20::b42])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A03EE89B06;
- Mon, 10 Feb 2020 23:35:19 +0000 (UTC)
-Received: by mail-yb1-xb42.google.com with SMTP id b141so2320354ybg.10;
- Mon, 10 Feb 2020 15:35:19 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=zvUon05LfoJKw6QpeWvAvLeHowdjreBH07jI1Ss69lo=;
- b=Fn5j5n5TxLbdEYAv51jCp5OZQEjfm4Lj4q/xMTuaLYAinCYfsTb85RpvD7qCpWw5nY
- 66MbTpSniQw8kWduN40doc7RlIs1N/GNE+t2pqW9ttDhWaEcBAobFfn9O/YwYhjLz2LU
- v3tLL2sQk8NpgJN2ZvC2bTm4J5NqXBNM2xQnO5bFvzGmybFJgSg/ohZeVXURGW6q0VVa
- rl8pv8+6OkMf3o0CdDNRapGC0LRLSMyIlpZpXKRZIvAFDVbtSVECOIDv7voloaToXbT3
- B9Fksf4VuY8f+0OrR9/yy4DMh6EIusY0ncRMAHYaPBsFdyEg3n6jfzXJ+zX/LgHbv9af
- O3RA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=zvUon05LfoJKw6QpeWvAvLeHowdjreBH07jI1Ss69lo=;
- b=GqAxnXmANLnng7ZB8R0FhJd/JDlqLpM04pRMWv5cEKRg412hEnPE4UsaysJ74hf7Mu
- Nv9l7KKS5xyEjX5uw9AQkjd1bRqAI3qcvjWkSM3DjbsSq+GtA5lLq2HqBJQx4lJBXIrj
- dVCDHQlNqA/LOMJKZR2uiZkInoLPu+o+JZL5DWuGoe5Bppz7CjmFTmqbUJUhWfMR/2Jw
- T01MxkpHB9NemeqUmC7NNQ2S5KTqFUqjaIgenvHBPtMva/5MGL2lEX9bzML3GN2byyYp
- pR5r7gLriKDI9Hj2Zr6bstmrwJ5xS890YMaY/OZuEmy6vy9r3jwglnmP7iPTXkoZ5wbw
- 9QnQ==
-X-Gm-Message-State: APjAAAUHpiFOxnSmGdb1bpqmvVm036WZz0k6ooKaO+E3nrCE9uiwpktf
- EBCOC0FHxcZFvkg6VnX7FmjGF+vgp14c+aWqpXc=
-X-Google-Smtp-Source: APXvYqzefFyLM7lK+ZZ24Y6LZWcNvhGH76wXwxqpXft9ffZxzRDOmhkaF6lPNUKuwxbJFXFcrjl95M9uN2KTKDL6hFk=
-X-Received: by 2002:a5b:106:: with SMTP id 6mr3786046ybx.83.1581377718644;
- Mon, 10 Feb 2020 15:35:18 -0800 (PST)
+Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id EAE6D6ED9F;
+ Tue, 11 Feb 2020 05:28:53 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+ by mx2.suse.de (Postfix) with ESMTP id 63B40ADE4;
+ Tue, 11 Feb 2020 05:28:52 +0000 (UTC)
+To: James Jones <jajones@nvidia.com>, Ben Skeggs <bskeggs@redhat.com>
+References: <20200210230943.2874-1-jajones@nvidia.com>
+From: Thomas Zimmermann <tzimmermann@suse.de>
+Autocrypt: addr=tzimmermann@suse.de; keydata=
+ mQENBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
+ XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
+ BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
+ hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
+ 9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
+ AAG0J1Rob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPokBVAQTAQgAPhYh
+ BHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJbOdLgAhsDBQkDwmcABQsJCAcCBhUKCQgLAgQWAgMB
+ Ah4BAheAAAoJEGgNwR1TC3ojR80H/jH+vYavwQ+TvO8ksXL9JQWc3IFSiGpuSVXLCdg62AmR
+ irxW+qCwNncNQyb9rd30gzdectSkPWL3KSqEResBe24IbA5/jSkPweJasgXtfhuyoeCJ6PXo
+ clQQGKIoFIAEv1s8l0ggPZswvCinegl1diyJXUXmdEJRTWYAtxn/atut1o6Giv6D2qmYbXN7
+ mneMC5MzlLaJKUtoH7U/IjVw1sx2qtxAZGKVm4RZxPnMCp9E1MAr5t4dP5gJCIiqsdrVqI6i
+ KupZstMxstPU//azmz7ZWWxT0JzgJqZSvPYx/SATeexTYBP47YFyri4jnsty2ErS91E6H8os
+ Bv6pnSn7eAq5AQ0EWznS4AEIAMYmP4M/V+T5RY5at/g7rUdNsLhWv1APYrh9RQefODYHrNRH
+ UE9eosYbT6XMryR9hT8XlGOYRwKWwiQBoWSDiTMo/Xi29jUnn4BXfI2px2DTXwc22LKtLAgT
+ RjP+qbU63Y0xnQN29UGDbYgyyK51DW3H0If2a3JNsheAAK+Xc9baj0LGIc8T9uiEWHBnCH+R
+ dhgATnWWGKdDegUR5BkDfDg5O/FISymJBHx2Dyoklv5g4BzkgqTqwmaYzsl8UxZKvbaxq0zb
+ ehDda8lvhFXodNFMAgTLJlLuDYOGLK2AwbrS3Sp0AEbkpdJBb44qVlGm5bApZouHeJ/+n+7r
+ 12+lqdsAEQEAAYkBPAQYAQgAJhYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJbOdLgAhsMBQkD
+ wmcAAAoJEGgNwR1TC3ojpfcIAInwP5OlcEKokTnHCiDTz4Ony4GnHRP2fXATQZCKxmu4AJY2
+ h9ifw9Nf2TjCZ6AMvC3thAN0rFDj55N9l4s1CpaDo4J+0fkrHuyNacnT206CeJV1E7NYntxU
+ n+LSiRrOdywn6erjxRi9EYTVLCHcDhBEjKmFZfg4AM4GZMWX1lg0+eHbd5oL1as28WvvI/uI
+ aMyV8RbyXot1r/8QLlWldU3NrTF5p7TMU2y3ZH2mf5suSKHAMtbE4jKJ8ZHFOo3GhLgjVrBW
+ HE9JXO08xKkgD+w6v83+nomsEuf6C6LYrqY/tsZvyEX6zN8CtirPdPWu/VXNRYAl/lat7lSI
+ 3H26qrE=
+Message-ID: <d40e1738-f313-e84d-8d4c-af5efd60aa93@suse.de>
+Date: Tue, 11 Feb 2020 06:28:47 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.4.1
 MIME-Version: 1.0
-References: <20200206101942.1412-1-tzimmermann@suse.de>
- <20200206101942.1412-5-tzimmermann@suse.de>
- <616dead7-030a-b678-3040-9e317549812e@nvidia.com>
- <5d0bc649-9d82-295e-fe00-58e9350f6d94@suse.de>
- <5d18f259-9d1c-2b83-428d-6e21b6cf779c@nvidia.com>
- <9695f3cf-076a-de49-53c9-75944bb4fb8b@nvidia.com>
- <CACAvsv6tVhmHFR=T=L5SyjO3u6-U6_x2pEdHzR+03LZY8NNEkw@mail.gmail.com>
- <9a310fff-4b01-b215-5553-acebd8d2d8e8@suse.de>
- <85b64078-706a-e12e-6ced-3c8566ddc2bd@nvidia.com>
-In-Reply-To: <85b64078-706a-e12e-6ced-3c8566ddc2bd@nvidia.com>
-From: Ben Skeggs <skeggsb@gmail.com>
-Date: Tue, 11 Feb 2020 09:35:07 +1000
-Message-ID: <CACAvsv5+OCZeou6kWrR+Nyh_Ltk4VRucsKXjpSb9VC2Ho-YwaA@mail.gmail.com>
-To: James Jones <jajones@nvidia.com>
-Subject: Re: [Nouveau] [PATCH 4/4] drm/nouveau: Remove struct
- nouveau_framebuffer
+In-Reply-To: <20200210230943.2874-1-jajones@nvidia.com>
+Subject: Re: [Nouveau] [PATCH] drm/nouveau: Fix NULL ptr access in
+ nv50_wndw_prepare_fb()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,335 +63,123 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Dave Airlie <airlied@linux.ie>, ML nouveau <nouveau@lists.freedesktop.org>,
- ML dri-devel <dri-devel@lists.freedesktop.org>,
- Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org
+Content-Type: multipart/mixed; boundary="===============1375469757=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, 11 Feb 2020 at 09:17, James Jones <jajones@nvidia.com> wrote:
->
-> On 2/10/20 12:25 AM, Thomas Zimmermann wrote:
-> > Hi
-> >
-> > Am 10.02.20 um 09:20 schrieb Ben Skeggs:
-> >> On Sat, 8 Feb 2020 at 07:10, James Jones <jajones@nvidia.com> wrote:
-> >>>
-> >>> I've sent out a v4 version of the format modifier patches which avoid
-> >>> caching values in the nouveau_framebuffer struct.  It will have a few
-> >>> trivial conflicts with your series, but should make them structurally
-> >>> compatible.
-> >>>
-> >>> I'm fine with either v3 or v4 of my series personally, but if these
-> >>> cleanup patches are taken, only v4 will work.
-> >> I've taken Tomas' cleanup patches in my tree, and will take James'
-> >> also once they've been fixed up to work on top of the cleanup.
-> >
-> > Thanks!
->
-> After applying this series locally, I'm hitting a NULL deref loading the
-> nouveau module with fbconsole caused by patch 3/4.  I've sent out a
-> trivial fix for review separately.  Please have a look, and Ben, feel
-> free to squash it with Thomas's original patch if you prefer.
-Oops.  Squashed!
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--===============1375469757==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="OoueAXJCEkTFSJ8tULKXQ8oe6omqc1UID"
 
->
-> >>
-> >> James, are you happy for me to take the drm_fourcc.h patch that's on
-> >> dri-devel through my tree for the next merge window too?
->
-> Yes, that would be great.  I couldn't find a public version of your tree
-> with Thomas's patches applied, but I pulled them in locally and rebased
-> my series on top of that as v5, resolving all the remaining trivial
-> conflicts.  Appologies for all the patch spam this generated.
-I've pulled in your patches now too.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--OoueAXJCEkTFSJ8tULKXQ8oe6omqc1UID
+Content-Type: multipart/mixed; boundary="q59L1jm9NiShTNrr1fzrvV1anlZz1XX7N";
+ protected-headers="v1"
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: James Jones <jajones@nvidia.com>, Ben Skeggs <bskeggs@redhat.com>
+Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org
+Message-ID: <d40e1738-f313-e84d-8d4c-af5efd60aa93@suse.de>
+Subject: Re: [PATCH] drm/nouveau: Fix NULL ptr access in
+ nv50_wndw_prepare_fb()
+References: <20200210230943.2874-1-jajones@nvidia.com>
+In-Reply-To: <20200210230943.2874-1-jajones@nvidia.com>
 
-Thank you!
-Ben.
->
-> Thanks,
-> -James
->
-> >> Ben.
-> >>
-> >>>
-> >>> Thanks,
-> >>> -James
-> >>>
-> >>> On 2/6/20 8:45 AM, James Jones wrote:
-> >>>> Yes, that's certainly viable.  If that's the general preference in
-> >>>> direction, I'll rework that patches to do so.
-> >>>>
-> >>>> Thanks,
-> >>>> -James
-> >>>>
-> >>>> On 2/6/20 7:49 AM, Thomas Zimmermann wrote:
-> >>>>> Hi James
-> >>>>>
-> >>>>> Am 06.02.20 um 16:17 schrieb James Jones:
-> >>>>>> Note I'm adding some fields to nouveau_framebuffer in the series
-> >>>>>> "drm/nouveau: Support NVIDIA format modifiers."  I sent out v3 of that
-> >>>>>> yesterday.  It would probably still be possible to avoid them by
-> >>>>>> re-extracting the relevant data from the format modifier on the fly when
-> >>>>>> needed, but it is simpler and likely less error-prone with the wrapper
-> >>>>>> struct.
-> >>>>>
-> >>>>> Thanks for the note.
-> >>>>>
-> >>>>> I just took a look at your patchset. I think struct nouveau_framebuffer
-> >>>>> should not store tile_mode and kind. AFAICT there are only two trivial
-> >>>>> places where these values are used and they can be extracted from the
-> >>>>> framebuffer at any time.
-> >>>>>
-> >>>>> I'd suggest to expand nouveau_decode_mod() to take a drm_framebuffer and
-> >>>>> return the correct values. Kind of what you do in
-> >>>>> nouveau_framebuffer_new() near line 330.
-> >>>>>
-> >>>>> Thoughts?
-> >>>>>
-> >>>>> Best regards
-> >>>>> Thomas
-> >>>>>
-> >>>>> [1] https://patchwork.freedesktop.org/series/70786/#rev3
-> >>>>>
-> >>>>>>
-> >>>>>> Thanks,
-> >>>>>> -James
-> >>>>>>
-> >>>>>> On 2/6/20 2:19 AM, Thomas Zimmermann wrote:
-> >>>>>>> After its cleanup, struct nouveau_framebuffer is only a wrapper around
-> >>>>>>> struct drm_framebuffer. Use the latter directly.
-> >>>>>>>
-> >>>>>>> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-> >>>>>>> ---
-> >>>>>>>     drivers/gpu/drm/nouveau/dispnv50/wndw.c   | 26
-> >>>>>>> +++++++++++------------
-> >>>>>>>     drivers/gpu/drm/nouveau/nouveau_display.c | 14 ++++++------
-> >>>>>>>     drivers/gpu/drm/nouveau/nouveau_display.h | 12 +----------
-> >>>>>>>     drivers/gpu/drm/nouveau/nouveau_fbcon.c   | 14 ++++++------
-> >>>>>>>     4 files changed, 28 insertions(+), 38 deletions(-)
-> >>>>>>>
-> >>>>>>> diff --git a/drivers/gpu/drm/nouveau/dispnv50/wndw.c
-> >>>>>>> b/drivers/gpu/drm/nouveau/dispnv50/wndw.c
-> >>>>>>> index ba1399965a1c..4a67a656e007 100644
-> >>>>>>> --- a/drivers/gpu/drm/nouveau/dispnv50/wndw.c
-> >>>>>>> +++ b/drivers/gpu/drm/nouveau/dispnv50/wndw.c
-> >>>>>>> @@ -40,11 +40,11 @@ nv50_wndw_ctxdma_del(struct nv50_wndw_ctxdma
-> >>>>>>> *ctxdma)
-> >>>>>>>     }
-> >>>>>>>       static struct nv50_wndw_ctxdma *
-> >>>>>>> -nv50_wndw_ctxdma_new(struct nv50_wndw *wndw, struct
-> >>>>>>> nouveau_framebuffer *fb)
-> >>>>>>> +nv50_wndw_ctxdma_new(struct nv50_wndw *wndw, struct drm_framebuffer
-> >>>>>>> *fb)
-> >>>>>>>     {
-> >>>>>>> -    struct nouveau_drm *drm = nouveau_drm(fb->base.dev);
-> >>>>>>> +    struct nouveau_drm *drm = nouveau_drm(fb->dev);
-> >>>>>>>         struct nv50_wndw_ctxdma *ctxdma;
-> >>>>>>> -    struct nouveau_bo *nvbo = nouveau_gem_object(fb->base.obj[0]);
-> >>>>>>> +    struct nouveau_bo *nvbo = nouveau_gem_object(fb->obj[0]);
-> >>>>>>>         const u8    kind = nvbo->kind;
-> >>>>>>>         const u32 handle = 0xfb000000 | kind;
-> >>>>>>>         struct {
-> >>>>>>> @@ -236,16 +236,16 @@ nv50_wndw_atomic_check_acquire(struct nv50_wndw
-> >>>>>>> *wndw, bool modeset,
-> >>>>>>>                        struct nv50_wndw_atom *asyw,
-> >>>>>>>                        struct nv50_head_atom *asyh)
-> >>>>>>>     {
-> >>>>>>> -    struct nouveau_framebuffer *fb =
-> >>>>>>> nouveau_framebuffer(asyw->state.fb);
-> >>>>>>> +    struct drm_framebuffer *fb = asyw->state.fb;
-> >>>>>>>         struct nouveau_drm *drm = nouveau_drm(wndw->plane.dev);
-> >>>>>>> -    struct nouveau_bo *nvbo = nouveau_gem_object(fb->base.obj[0]);
-> >>>>>>> +    struct nouveau_bo *nvbo = nouveau_gem_object(fb->obj[0]);
-> >>>>>>>         int ret;
-> >>>>>>>           NV_ATOMIC(drm, "%s acquire\n", wndw->plane.name);
-> >>>>>>>     -    if (asyw->state.fb != armw->state.fb || !armw->visible ||
-> >>>>>>> modeset) {
-> >>>>>>> -        asyw->image.w = fb->base.width;
-> >>>>>>> -        asyw->image.h = fb->base.height;
-> >>>>>>> +    if (fb != armw->state.fb || !armw->visible || modeset) {
-> >>>>>>> +        asyw->image.w = fb->width;
-> >>>>>>> +        asyw->image.h = fb->height;
-> >>>>>>>             asyw->image.kind = nvbo->kind;
-> >>>>>>>               ret = nv50_wndw_atomic_check_acquire_rgb(asyw);
-> >>>>>>> @@ -261,13 +261,13 @@ nv50_wndw_atomic_check_acquire(struct nv50_wndw
-> >>>>>>> *wndw, bool modeset,
-> >>>>>>>                     asyw->image.blockh = nvbo->mode >> 4;
-> >>>>>>>                 else
-> >>>>>>>                     asyw->image.blockh = nvbo->mode;
-> >>>>>>> -            asyw->image.blocks[0] = fb->base.pitches[0] / 64;
-> >>>>>>> +            asyw->image.blocks[0] = fb->pitches[0] / 64;
-> >>>>>>>                 asyw->image.pitch[0] = 0;
-> >>>>>>>             } else {
-> >>>>>>>                 asyw->image.layout = 1;
-> >>>>>>>                 asyw->image.blockh = 0;
-> >>>>>>>                 asyw->image.blocks[0] = 0;
-> >>>>>>> -            asyw->image.pitch[0] = fb->base.pitches[0];
-> >>>>>>> +            asyw->image.pitch[0] = fb->pitches[0];
-> >>>>>>>             }
-> >>>>>>>               if (!asyh->state.async_flip)
-> >>>>>>> @@ -486,16 +486,16 @@ nv50_wndw_cleanup_fb(struct drm_plane *plane,
-> >>>>>>> struct drm_plane_state *old_state)
-> >>>>>>>     static int
-> >>>>>>>     nv50_wndw_prepare_fb(struct drm_plane *plane, struct drm_plane_state
-> >>>>>>> *state)
-> >>>>>>>     {
-> >>>>>>> -    struct nouveau_framebuffer *fb = nouveau_framebuffer(state->fb);
-> >>>>>>> +    struct drm_framebuffer *fb = state->fb;
-> >>>>>>>         struct nouveau_drm *drm = nouveau_drm(plane->dev);
-> >>>>>>>         struct nv50_wndw *wndw = nv50_wndw(plane);
-> >>>>>>>         struct nv50_wndw_atom *asyw = nv50_wndw_atom(state);
-> >>>>>>> -    struct nouveau_bo *nvbo = nouveau_gem_object(state->fb->obj[0]);
-> >>>>>>> +    struct nouveau_bo *nvbo = nouveau_gem_object(fb->obj[0]);
-> >>>>>>>         struct nv50_head_atom *asyh;
-> >>>>>>>         struct nv50_wndw_ctxdma *ctxdma;
-> >>>>>>>         int ret;
-> >>>>>>>     -    NV_ATOMIC(drm, "%s prepare: %p\n", plane->name, state->fb);
-> >>>>>>> +    NV_ATOMIC(drm, "%s prepare: %p\n", plane->name, fb);
-> >>>>>>>         if (!asyw->state.fb)
-> >>>>>>>             return 0;
-> >>>>>>>     diff --git a/drivers/gpu/drm/nouveau/nouveau_display.c
-> >>>>>>> b/drivers/gpu/drm/nouveau/nouveau_display.c
-> >>>>>>> index bbbff55eb5d5..94f7fd48e1cf 100644
-> >>>>>>> --- a/drivers/gpu/drm/nouveau/nouveau_display.c
-> >>>>>>> +++ b/drivers/gpu/drm/nouveau/nouveau_display.c
-> >>>>>>> @@ -207,10 +207,10 @@ int
-> >>>>>>>     nouveau_framebuffer_new(struct drm_device *dev,
-> >>>>>>>                 const struct drm_mode_fb_cmd2 *mode_cmd,
-> >>>>>>>                 struct drm_gem_object *gem,
-> >>>>>>> -            struct nouveau_framebuffer **pfb)
-> >>>>>>> +            struct drm_framebuffer **pfb)
-> >>>>>>>     {
-> >>>>>>>         struct nouveau_drm *drm = nouveau_drm(dev);
-> >>>>>>> -    struct nouveau_framebuffer *fb;
-> >>>>>>> +    struct drm_framebuffer *fb;
-> >>>>>>>         int ret;
-> >>>>>>>               /* YUV overlays have special requirements pre-NV50 */
-> >>>>>>> @@ -236,10 +236,10 @@ nouveau_framebuffer_new(struct drm_device *dev,
-> >>>>>>>         if (!(fb = *pfb = kzalloc(sizeof(*fb), GFP_KERNEL)))
-> >>>>>>>             return -ENOMEM;
-> >>>>>>>     -    drm_helper_mode_fill_fb_struct(dev, &fb->base, mode_cmd);
-> >>>>>>> -    fb->base.obj[0] = gem;
-> >>>>>>> +    drm_helper_mode_fill_fb_struct(dev, fb, mode_cmd);
-> >>>>>>> +    fb->obj[0] = gem;
-> >>>>>>>     -    ret = drm_framebuffer_init(dev, &fb->base,
-> >>>>>>> &nouveau_framebuffer_funcs);
-> >>>>>>> +    ret = drm_framebuffer_init(dev, fb, &nouveau_framebuffer_funcs);
-> >>>>>>>         if (ret)
-> >>>>>>>             kfree(fb);
-> >>>>>>>         return ret;
-> >>>>>>> @@ -250,7 +250,7 @@ nouveau_user_framebuffer_create(struct drm_device
-> >>>>>>> *dev,
-> >>>>>>>                     struct drm_file *file_priv,
-> >>>>>>>                     const struct drm_mode_fb_cmd2 *mode_cmd)
-> >>>>>>>     {
-> >>>>>>> -    struct nouveau_framebuffer *fb;
-> >>>>>>> +    struct drm_framebuffer *fb;
-> >>>>>>>         struct drm_gem_object *gem;
-> >>>>>>>         int ret;
-> >>>>>>>     @@ -260,7 +260,7 @@ nouveau_user_framebuffer_create(struct
-> >>>>>>> drm_device *dev,
-> >>>>>>>           ret = nouveau_framebuffer_new(dev, mode_cmd, gem, &fb);
-> >>>>>>>         if (ret == 0)
-> >>>>>>> -        return &fb->base;
-> >>>>>>> +        return fb;
-> >>>>>>>           drm_gem_object_put_unlocked(gem);
-> >>>>>>>         return ERR_PTR(ret);
-> >>>>>>> diff --git a/drivers/gpu/drm/nouveau/nouveau_display.h
-> >>>>>>> b/drivers/gpu/drm/nouveau/nouveau_display.h
-> >>>>>>> index 56c1dec8fc28..082bb067d575 100644
-> >>>>>>> --- a/drivers/gpu/drm/nouveau/nouveau_display.h
-> >>>>>>> +++ b/drivers/gpu/drm/nouveau/nouveau_display.h
-> >>>>>>> @@ -8,21 +8,11 @@
-> >>>>>>>       #include <drm/drm_framebuffer.h>
-> >>>>>>>     -struct nouveau_framebuffer {
-> >>>>>>> -    struct drm_framebuffer base;
-> >>>>>>> -};
-> >>>>>>> -
-> >>>>>>> -static inline struct nouveau_framebuffer *
-> >>>>>>> -nouveau_framebuffer(struct drm_framebuffer *fb)
-> >>>>>>> -{
-> >>>>>>> -    return container_of(fb, struct nouveau_framebuffer, base);
-> >>>>>>> -}
-> >>>>>>> -
-> >>>>>>>     int
-> >>>>>>>     nouveau_framebuffer_new(struct drm_device *dev,
-> >>>>>>>                 const struct drm_mode_fb_cmd2 *mode_cmd,
-> >>>>>>>                 struct drm_gem_object *gem,
-> >>>>>>> -            struct nouveau_framebuffer **pfb);
-> >>>>>>> +            struct drm_framebuffer **pfb);
-> >>>>>>>       struct nouveau_display {
-> >>>>>>>         void *priv;
-> >>>>>>> diff --git a/drivers/gpu/drm/nouveau/nouveau_fbcon.c
-> >>>>>>> b/drivers/gpu/drm/nouveau/nouveau_fbcon.c
-> >>>>>>> index 02b36b44409c..d78bc03ad3b8 100644
-> >>>>>>> --- a/drivers/gpu/drm/nouveau/nouveau_fbcon.c
-> >>>>>>> +++ b/drivers/gpu/drm/nouveau/nouveau_fbcon.c
-> >>>>>>> @@ -312,7 +312,7 @@ nouveau_fbcon_create(struct drm_fb_helper *helper,
-> >>>>>>>         struct nouveau_drm *drm = nouveau_drm(dev);
-> >>>>>>>         struct nvif_device *device = &drm->client.device;
-> >>>>>>>         struct fb_info *info;
-> >>>>>>> -    struct nouveau_framebuffer *fb;
-> >>>>>>> +    struct drm_framebuffer *fb;
-> >>>>>>>         struct nouveau_channel *chan;
-> >>>>>>>         struct nouveau_bo *nvbo;
-> >>>>>>>         struct drm_mode_fb_cmd2 mode_cmd;
-> >>>>>>> @@ -367,7 +367,7 @@ nouveau_fbcon_create(struct drm_fb_helper *helper,
-> >>>>>>>         }
-> >>>>>>>           /* setup helper */
-> >>>>>>> -    fbcon->helper.fb = &fb->base;
-> >>>>>>> +    fbcon->helper.fb = fb;
-> >>>>>>>           if (!chan)
-> >>>>>>>             info->flags = FBINFO_HWACCEL_DISABLED;
-> >>>>>>> @@ -393,7 +393,7 @@ nouveau_fbcon_create(struct drm_fb_helper *helper,
-> >>>>>>>           /* To allow resizeing without swapping buffers */
-> >>>>>>>         NV_INFO(drm, "allocated %dx%d fb: 0x%llx, bo %p\n",
-> >>>>>>> -        fb->base.width, fb->base.height, nvbo->bo.offset, nvbo);
-> >>>>>>> +        fb->width, fb->height, nvbo->bo.offset, nvbo);
-> >>>>>>>           vga_switcheroo_client_fb_set(dev->pdev, info);
-> >>>>>>>         return 0;
-> >>>>>>> @@ -413,18 +413,18 @@ nouveau_fbcon_create(struct drm_fb_helper
-> >>>>>>> *helper,
-> >>>>>>>     static int
-> >>>>>>>     nouveau_fbcon_destroy(struct drm_device *dev, struct nouveau_fbdev
-> >>>>>>> *fbcon)
-> >>>>>>>     {
-> >>>>>>> -    struct nouveau_framebuffer *nouveau_fb =
-> >>>>>>> nouveau_framebuffer(fbcon->helper.fb);
-> >>>>>>> +    struct drm_framebuffer *fb = fbcon->helper.fb;
-> >>>>>>>         struct nouveau_bo *nvbo;
-> >>>>>>>           drm_fb_helper_unregister_fbi(&fbcon->helper);
-> >>>>>>>         drm_fb_helper_fini(&fbcon->helper);
-> >>>>>>>     -    if (nouveau_fb && nouveau_fb->base.obj[0]) {
-> >>>>>>> -        nvbo = nouveau_gem_object(nouveau_fb->base.obj[0]);
-> >>>>>>> +    if (fb && fb->obj[0]) {
-> >>>>>>> +        nvbo = nouveau_gem_object(fb->obj[0]);
-> >>>>>>>             nouveau_vma_del(&fbcon->vma);
-> >>>>>>>             nouveau_bo_unmap(nvbo);
-> >>>>>>>             nouveau_bo_unpin(nvbo);
-> >>>>>>> -        drm_framebuffer_put(&nouveau_fb->base);
-> >>>>>>> +        drm_framebuffer_put(fb);
-> >>>>>>>         }
-> >>>>>>>           return 0;
-> >>>>>>>
-> >>>>>> _______________________________________________
-> >>>>>> dri-devel mailing list
-> >>>>>> dri-devel@lists.freedesktop.org
-> >>>>>> https://lists.freedesktop.org/mailman/listinfo/dri-devel
-> >>>>>
-> >>>> _______________________________________________
-> >>>> dri-devel mailing list
-> >>>> dri-devel@lists.freedesktop.org
-> >>>> https://lists.freedesktop.org/mailman/listinfo/dri-devel
-> >>> _______________________________________________
-> >>> dri-devel mailing list
-> >>> dri-devel@lists.freedesktop.org
-> >>> https://lists.freedesktop.org/mailman/listinfo/dri-devel
-> >
+--q59L1jm9NiShTNrr1fzrvV1anlZz1XX7N
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
+
+Hi
+
+I'm surprised that prepare_fb is called with fb =3D=3D NULL. But, OK
+
+Acked-by: Thomas Zimmermann <tzimmermann@suse.de>
+
+Thanks for the fix.
+
+Am 11.02.20 um 00:09 schrieb James Jones:
+> This fixes a kernel oops when loading the nouveau
+> module with fb console enabled after the change:
+>=20
+>   drm/nouveau: Remove field nvbo from struct nouveau_framebuffer
+>=20
+> state->fb may be NULL in nv50_wndw_prepare_fb(),
+> so defer initializing nvbo from its obj[] array
+> until after the NULL check.
+>=20
+> Signed-off-by: James Jones <jajones@nvidia.com>
+> ---
+>  drivers/gpu/drm/nouveau/dispnv50/wndw.c | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+>=20
+> diff --git a/drivers/gpu/drm/nouveau/dispnv50/wndw.c b/drivers/gpu/drm/=
+nouveau/dispnv50/wndw.c
+> index 4a67a656e007..68c0dc2dc2d3 100644
+> --- a/drivers/gpu/drm/nouveau/dispnv50/wndw.c
+> +++ b/drivers/gpu/drm/nouveau/dispnv50/wndw.c
+> @@ -490,7 +490,7 @@ nv50_wndw_prepare_fb(struct drm_plane *plane, struc=
+t drm_plane_state *state)
+>  	struct nouveau_drm *drm =3D nouveau_drm(plane->dev);
+>  	struct nv50_wndw *wndw =3D nv50_wndw(plane);
+>  	struct nv50_wndw_atom *asyw =3D nv50_wndw_atom(state);
+> -	struct nouveau_bo *nvbo =3D nouveau_gem_object(fb->obj[0]);
+> +	struct nouveau_bo *nvbo;
+>  	struct nv50_head_atom *asyh;
+>  	struct nv50_wndw_ctxdma *ctxdma;
+>  	int ret;
+> @@ -499,6 +499,7 @@ nv50_wndw_prepare_fb(struct drm_plane *plane, struc=
+t drm_plane_state *state)
+>  	if (!asyw->state.fb)
+>  		return 0;
+> =20
+> +	nvbo =3D nouveau_gem_object(fb->obj[0]);
+>  	ret =3D nouveau_bo_pin(nvbo, TTM_PL_FLAG_VRAM, true);
+>  	if (ret)
+>  		return ret;
+>=20
+
+--=20
+Thomas Zimmermann
+Graphics Driver Developer
+SUSE Software Solutions Germany GmbH
+Maxfeldstr. 5, 90409 N=C3=BCrnberg, Germany
+(HRB 36809, AG N=C3=BCrnberg)
+Gesch=C3=A4ftsf=C3=BChrer: Felix Imend=C3=B6rffer
+
+
+--q59L1jm9NiShTNrr1fzrvV1anlZz1XX7N--
+
+--OoueAXJCEkTFSJ8tULKXQ8oe6omqc1UID
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEchf7rIzpz2NEoWjlaA3BHVMLeiMFAl5CO5MACgkQaA3BHVML
+eiMlHgf/Q3a58ZaiLehyXAfLIa14LRPUa/o5uy6q9Sy0kyZW0JlXz04uXIJJoPt3
+RMAs5HTPXFqj0sAIzJTKrvmJ9xl4ZdTX87bsS5DCNa1haM35crTVuCiYDD+LJqUq
+l+pYiWxRwflYbUY6jIEpXntKobWXxCO882ZvhNRchRutv+0XL2diRAyabySZezQL
+l3Mub00bkQCalPukRjheun4Wmy63jqdwU/gssJsiJ8CUg8zy+7eXvPm6NXMN+vvm
+HYYGl1aWQGOTQ/X1XMVxWKwZ/yawRF+Yxkdfw/2d7K/mmjOYNa/CpFfTWh7yezWi
+w6l0kDkZescLLqroO4i5cVGUPuRwlw==
+=YB2F
+-----END PGP SIGNATURE-----
+
+--OoueAXJCEkTFSJ8tULKXQ8oe6omqc1UID--
+
+--===============1375469757==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/nouveau
+
+--===============1375469757==--
