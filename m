@@ -1,43 +1,43 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9B4BE15E0E9
-	for <lists+nouveau@lfdr.de>; Fri, 14 Feb 2020 17:16:42 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1599315E1A0
+	for <lists+nouveau@lfdr.de>; Fri, 14 Feb 2020 17:20:00 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 766996FAC1;
-	Fri, 14 Feb 2020 16:16:40 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 741606FAF6;
+	Fri, 14 Feb 2020 16:19:57 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8F39A6FAC1;
- Fri, 14 Feb 2020 16:16:39 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D94BB6FAF4;
+ Fri, 14 Feb 2020 16:19:56 +0000 (UTC)
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id B3055206D7;
- Fri, 14 Feb 2020 16:16:38 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id EC7EB24713;
+ Fri, 14 Feb 2020 16:19:55 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1581696999;
- bh=J82JkTofHDDCykmw5UKeVbFfNcfQzl+TMlBOTvHz5nY=;
+ s=default; t=1581697196;
+ bh=t/3OO/Z5qwKOOusAvvBnwxg/E0dLIpIMxH436hfRD4A=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=jTDpOAvgO05Ia/swvGSyuV+abbpS5yFqpeLlNYtJ1qB4NU2rWPGk3+0wEj0iH9afa
- EpBBYjCN1BeBm0WKt88cjr8TipTFpeE60DF4VDfzvu+9F+aNZyqLJiOIczAuOIXyH8
- zi/nIGCN4mblHdCW/jf+f85K3wosIxplZX9pJWto=
+ b=VQ1zl4ObjFBm8osVr9uPF1yQoMx4ypvTKwdPOywUQ8N9NHd5NjFlCRY0iPA9JLhZb
+ K5VDY3YewMczzgD5YNuuYBl0M7lYrqVMV+pnBQ7AQfGciLK9EJA8tgFmxFkH8A5B8w
+ +vIxgCyS6vvpLvexLMmgWXDE2cUAhzbs6K+0qRCU=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Fri, 14 Feb 2020 11:11:27 -0500
-Message-Id: <20200214161147.15842-232-sashal@kernel.org>
+Date: Fri, 14 Feb 2020 11:16:14 -0500
+Message-Id: <20200214161715.18113-125-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200214161147.15842-1-sashal@kernel.org>
-References: <20200214161147.15842-1-sashal@kernel.org>
+In-Reply-To: <20200214161715.18113-1-sashal@kernel.org>
+References: <20200214161715.18113-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
-Subject: [Nouveau] [PATCH AUTOSEL 4.19 232/252] drm/nouveau/disp/nv50-:
- prevent oops when no channel method map provided
+Subject: [Nouveau] [PATCH AUTOSEL 4.14 125/186] drm/nouveau/secboot/gm20b:
+ initialize pointer in gm20b_secboot_new()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -50,44 +50,53 @@ List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
 Cc: Sasha Levin <sashal@kernel.org>, nouveau@lists.freedesktop.org,
- Ben Skeggs <bskeggs@redhat.com>, dri-devel@lists.freedesktop.org
+ dri-devel@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>,
+ Dan Carpenter <dan.carpenter@oracle.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-From: Ben Skeggs <bskeggs@redhat.com>
+From: Dan Carpenter <dan.carpenter@oracle.com>
 
-[ Upstream commit 0e6176c6d286316e9431b4f695940cfac4ffe6c2 ]
+[ Upstream commit 3613a9bea95a1470dd42e4ed1cc7d86ebe0a2dc0 ]
 
-The implementations for most channel types contains a map of methods to
-priv registers in order to provide debugging info when a disp exception
-has been raised.
+We accidentally set "psb" which is a no-op instead of "*psb" so it
+generates a static checker warning.  We should probably set it before
+the first error return so that it's always initialized.
 
-This info is missing from the implementation of PIO channels as they're
-rather simplistic already, however, if an exception is raised by one of
-them, we'd end up triggering a NULL-pointer deref.  Not ideal...
-
-Bugzilla: https://bugzilla.kernel.org/show_bug.cgi?id=206299
+Fixes: 923f1bd27bf1 ("drm/nouveau/secboot/gm20b: add secure boot support")
+Signed-off-by: Dan Carpenter <dan.carpenter@oracle.com>
 Signed-off-by: Ben Skeggs <bskeggs@redhat.com>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- drivers/gpu/drm/nouveau/nvkm/engine/disp/channv50.c | 2 ++
- 1 file changed, 2 insertions(+)
+ drivers/gpu/drm/nouveau/nvkm/subdev/secboot/gm20b.c | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/channv50.c b/drivers/gpu/drm/nouveau/nvkm/engine/disp/channv50.c
-index bcf32d92ee5a9..50e3539f33d22 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/channv50.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/channv50.c
-@@ -74,6 +74,8 @@ nv50_disp_chan_mthd(struct nv50_disp_chan *chan, int debug)
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/secboot/gm20b.c b/drivers/gpu/drm/nouveau/nvkm/subdev/secboot/gm20b.c
+index 30491d132d59c..fbd10a67c6c6a 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/secboot/gm20b.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/secboot/gm20b.c
+@@ -108,6 +108,7 @@ gm20b_secboot_new(struct nvkm_device *device, int index,
+ 	struct gm200_secboot *gsb;
+ 	struct nvkm_acr *acr;
  
- 	if (debug > subdev->debug)
- 		return;
-+	if (!mthd)
-+		return;
++	*psb = NULL;
+ 	acr = acr_r352_new(BIT(NVKM_SECBOOT_FALCON_FECS) |
+ 			   BIT(NVKM_SECBOOT_FALCON_PMU));
+ 	if (IS_ERR(acr))
+@@ -116,10 +117,8 @@ gm20b_secboot_new(struct nvkm_device *device, int index,
+ 	acr->optional_falcons = BIT(NVKM_SECBOOT_FALCON_PMU);
  
- 	for (i = 0; (list = mthd->data[i].mthd) != NULL; i++) {
- 		u32 base = chan->head * mthd->addr;
+ 	gsb = kzalloc(sizeof(*gsb), GFP_KERNEL);
+-	if (!gsb) {
+-		psb = NULL;
++	if (!gsb)
+ 		return -ENOMEM;
+-	}
+ 	*psb = &gsb->base;
+ 
+ 	ret = nvkm_secboot_ctor(&gm20b_secboot, acr, device, index, &gsb->base);
 -- 
 2.20.1
 
