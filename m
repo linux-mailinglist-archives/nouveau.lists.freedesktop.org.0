@@ -1,43 +1,43 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8738C15DD5A
-	for <lists+nouveau@lfdr.de>; Fri, 14 Feb 2020 16:58:26 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6C66715DD6B
+	for <lists+nouveau@lfdr.de>; Fri, 14 Feb 2020 16:59:30 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1C75E6F9FE;
-	Fri, 14 Feb 2020 15:58:24 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 46D1B6FA09;
+	Fri, 14 Feb 2020 15:59:28 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3F5EA6F9FE;
- Fri, 14 Feb 2020 15:58:21 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5673F6FA06;
+ Fri, 14 Feb 2020 15:59:26 +0000 (UTC)
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 17BDD2067D;
- Fri, 14 Feb 2020 15:58:20 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 80330222C4;
+ Fri, 14 Feb 2020 15:59:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1581695901;
- bh=ps/Ytm66ViZbio9cASrGrz8rEcZC/M/vTrgGiL1IpXA=;
+ s=default; t=1581695966;
+ bh=J82JkTofHDDCykmw5UKeVbFfNcfQzl+TMlBOTvHz5nY=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=MWEtXBTrXwj8t2PEyDS3ltY62vNM/C5a9gyMy3X4Ccr1WkdHjTSfly0uKVWyZtD9H
- KQVP+hkLfaRwZ0DL9te5DP9MPp1Ckj2CbJE6FiyWhUyb7H+YK9KdmhpOXZlRY2hHdr
- +B7m15/AY6ObrBQFdj6pJjeMMcJw4GXwlu0fQ6tI=
+ b=mMOp6lKuD+1QT6tWM8mn4FfAFvV/Vqp43Eworx3qTm/0pAiDhTem/wsJnCe1B5GW/
+ /kIrFs+998Cum4NqrtjBmdGo9StU51OmvRwWxCJF6Ni1szqVqMofTAlH8pjzII6LXE
+ hVES5TrDIYCjdJLR5CRyMYG3oqVBytkSQ/e7fisg=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Fri, 14 Feb 2020 10:47:14 -0500
-Message-Id: <20200214154854.6746-442-sashal@kernel.org>
+Date: Fri, 14 Feb 2020 10:48:06 -0500
+Message-Id: <20200214154854.6746-494-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200214154854.6746-1-sashal@kernel.org>
 References: <20200214154854.6746-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
-Subject: [Nouveau] [PATCH AUTOSEL 5.5 442/542] drm/nouveau/kms/nv50: remove
- set but not unused variable 'nv_connector'
+Subject: [Nouveau] [PATCH AUTOSEL 5.5 494/542] drm/nouveau/disp/nv50-:
+ prevent oops when no channel method map provided
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -50,53 +50,44 @@ List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
 Cc: Sasha Levin <sashal@kernel.org>, nouveau@lists.freedesktop.org,
- YueHaibing <yuehaibing@huawei.com>, dri-devel@lists.freedesktop.org,
- Hulk Robot <hulkci@huawei.com>, Ben Skeggs <bskeggs@redhat.com>
+ Ben Skeggs <bskeggs@redhat.com>, dri-devel@lists.freedesktop.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-From: YueHaibing <yuehaibing@huawei.com>
+From: Ben Skeggs <bskeggs@redhat.com>
 
-[ Upstream commit 39496368ba96b40b1dca07315418e473998eef15 ]
+[ Upstream commit 0e6176c6d286316e9431b4f695940cfac4ffe6c2 ]
 
-drivers/gpu/drm/nouveau/dispnv50/disp.c: In function nv50_pior_enable:
-drivers/gpu/drm/nouveau/dispnv50/disp.c:1672:28: warning:
- variable nv_connector set but not used [-Wunused-but-set-variable]
+The implementations for most channel types contains a map of methods to
+priv registers in order to provide debugging info when a disp exception
+has been raised.
 
-commit ac2d9275f371 ("drm/nouveau/kms/nv50-: Store the
-bpc we're using in nv50_head_atom") left behind this.
+This info is missing from the implementation of PIO channels as they're
+rather simplistic already, however, if an exception is raised by one of
+them, we'd end up triggering a NULL-pointer deref.  Not ideal...
 
-Reported-by: Hulk Robot <hulkci@huawei.com>
-Signed-off-by: YueHaibing <yuehaibing@huawei.com>
-Reviewed-by: Lyude Paul <lyude@redhat.com>
+Bugzilla: https://bugzilla.kernel.org/show_bug.cgi?id=206299
 Signed-off-by: Ben Skeggs <bskeggs@redhat.com>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- drivers/gpu/drm/nouveau/dispnv50/disp.c | 2 --
- 1 file changed, 2 deletions(-)
+ drivers/gpu/drm/nouveau/nvkm/engine/disp/channv50.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.c b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-index 63425e2460189..5b3b0db51d596 100644
---- a/drivers/gpu/drm/nouveau/dispnv50/disp.c
-+++ b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-@@ -1673,7 +1673,6 @@ nv50_pior_enable(struct drm_encoder *encoder)
- {
- 	struct nouveau_encoder *nv_encoder = nouveau_encoder(encoder);
- 	struct nouveau_crtc *nv_crtc = nouveau_crtc(encoder->crtc);
--	struct nouveau_connector *nv_connector;
- 	struct nv50_head_atom *asyh = nv50_head_atom(nv_crtc->base.state);
- 	struct nv50_core *core = nv50_disp(encoder->dev)->core;
- 	u8 owner = 1 << nv_crtc->index;
-@@ -1681,7 +1680,6 @@ nv50_pior_enable(struct drm_encoder *encoder)
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/channv50.c b/drivers/gpu/drm/nouveau/nvkm/engine/disp/channv50.c
+index bcf32d92ee5a9..50e3539f33d22 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/channv50.c
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/channv50.c
+@@ -74,6 +74,8 @@ nv50_disp_chan_mthd(struct nv50_disp_chan *chan, int debug)
  
- 	nv50_outp_acquire(nv_encoder);
+ 	if (debug > subdev->debug)
+ 		return;
++	if (!mthd)
++		return;
  
--	nv_connector = nouveau_encoder_connector_get(nv_encoder);
- 	switch (asyh->or.bpc) {
- 	case 10: asyh->or.depth = 0x6; break;
- 	case  8: asyh->or.depth = 0x5; break;
+ 	for (i = 0; (list = mthd->data[i].mthd) != NULL; i++) {
+ 		u32 base = chan->head * mthd->addr;
 -- 
 2.20.1
 
