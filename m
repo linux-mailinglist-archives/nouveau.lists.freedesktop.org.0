@@ -2,42 +2,42 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 11B9915E1D4
-	for <lists+nouveau@lfdr.de>; Fri, 14 Feb 2020 17:20:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2627015E25C
+	for <lists+nouveau@lfdr.de>; Fri, 14 Feb 2020 17:23:30 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0998F6FAFF;
-	Fri, 14 Feb 2020 16:20:55 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 2A1AB6FB2A;
+	Fri, 14 Feb 2020 16:23:27 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4629B6FAFF;
- Fri, 14 Feb 2020 16:20:53 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 80CA66FB29;
+ Fri, 14 Feb 2020 16:23:25 +0000 (UTC)
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 6F05724739;
- Fri, 14 Feb 2020 16:20:52 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id ABE1424779;
+ Fri, 14 Feb 2020 16:23:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1581697253;
- bh=i9i7Wl759lILGhGaXlNqPkHgaImx6U0G3qiL2XcD3Bo=;
+ s=default; t=1581697405;
+ bh=A5JhqAJW0/T19P0pXEctJKdutmGn5EGnPtPBSXQsXo4=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=PqE/SD7I2jTm9X0Zc5a7zKctoy7LB5zQMh2YLLfHLWOMY1XFSNBOqVeub+Whghjw3
- kGarYZZRFbyefb/mhjUj0Vi9ZXk0Qf4QIJWokqY1G6bSR6x0Q0ea+kOkxznY8vNBvY
- J0WVoKS2SPFwW2hw0KjN0WsjfxnACwVq8lBb1NTw=
+ b=2VJ57DNB1LaD+FdkGkLIJ4l/5GOdxiaWmt+m53vV+sWyThDHHIxBFEsbF+qCy9TCq
+ aNZTV2Jm+PGQAhRWCUwqLpUZSrV0xu1mOJvTxY6ZXkdTbnzuG9hKOmZsRibYqFsWJ/
+ k+durQsuieTW7GT2w1I8FPWb0P9gUq9tYOqaJCHw=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Fri, 14 Feb 2020 11:16:59 -0500
-Message-Id: <20200214161715.18113-170-sashal@kernel.org>
+Date: Fri, 14 Feb 2020 11:20:38 -0500
+Message-Id: <20200214162122.19794-98-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200214161715.18113-1-sashal@kernel.org>
-References: <20200214161715.18113-1-sashal@kernel.org>
+In-Reply-To: <20200214162122.19794-1-sashal@kernel.org>
+References: <20200214162122.19794-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
-Subject: [Nouveau] [PATCH AUTOSEL 4.14 170/186] drm/nouveau/disp/nv50-:
- prevent oops when no channel method map provided
+Subject: [Nouveau] [PATCH AUTOSEL 4.9 098/141] drm/nouveau/gr/gk20a,
+ gm200-: add terminators to method lists read from fw
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,36 +58,71 @@ Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 From: Ben Skeggs <bskeggs@redhat.com>
 
-[ Upstream commit 0e6176c6d286316e9431b4f695940cfac4ffe6c2 ]
+[ Upstream commit 7adc77aa0e11f25b0e762859219c70852cd8d56f ]
 
-The implementations for most channel types contains a map of methods to
-priv registers in order to provide debugging info when a disp exception
-has been raised.
+Method init is typically ordered by class in the FW image as ThreeD,
+TwoD, Compute.
 
-This info is missing from the implementation of PIO channels as they're
-rather simplistic already, however, if an exception is raised by one of
-them, we'd end up triggering a NULL-pointer deref.  Not ideal...
+Due to a bug in parsing the FW into our internal format, we've been
+accidentally sending Twod + Compute methods to the ThreeD class, as
+well as Compute methods to the TwoD class - oops.
 
-Bugzilla: https://bugzilla.kernel.org/show_bug.cgi?id=206299
 Signed-off-by: Ben Skeggs <bskeggs@redhat.com>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- drivers/gpu/drm/nouveau/nvkm/engine/disp/channv50.c | 2 ++
- 1 file changed, 2 insertions(+)
+ .../gpu/drm/nouveau/nvkm/engine/gr/gk20a.c    | 21 ++++++++++---------
+ 1 file changed, 11 insertions(+), 10 deletions(-)
 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/channv50.c b/drivers/gpu/drm/nouveau/nvkm/engine/disp/channv50.c
-index 0c0310498afdb..cd9666583d4bd 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/channv50.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/channv50.c
-@@ -73,6 +73,8 @@ nv50_disp_chan_mthd(struct nv50_disp_chan *chan, int debug)
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/gr/gk20a.c b/drivers/gpu/drm/nouveau/nvkm/engine/gr/gk20a.c
+index de8b806b88fd9..7618b2eb4fdfd 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/gr/gk20a.c
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/gr/gk20a.c
+@@ -143,23 +143,24 @@ gk20a_gr_av_to_method(struct gf100_gr *gr, const char *fw_name,
  
- 	if (debug > subdev->debug)
- 		return;
-+	if (!mthd)
-+		return;
+ 	nent = (fuc.size / sizeof(struct gk20a_fw_av));
  
- 	for (i = 0; (list = mthd->data[i].mthd) != NULL; i++) {
- 		u32 base = chan->head * mthd->addr;
+-	pack = vzalloc((sizeof(*pack) * max_classes) +
+-		       (sizeof(*init) * (nent + 1)));
++	pack = vzalloc((sizeof(*pack) * (max_classes + 1)) +
++		       (sizeof(*init) * (nent + max_classes + 1)));
+ 	if (!pack) {
+ 		ret = -ENOMEM;
+ 		goto end;
+ 	}
+ 
+-	init = (void *)(pack + max_classes);
++	init = (void *)(pack + max_classes + 1);
+ 
+-	for (i = 0; i < nent; i++) {
+-		struct gf100_gr_init *ent = &init[i];
++	for (i = 0; i < nent; i++, init++) {
+ 		struct gk20a_fw_av *av = &((struct gk20a_fw_av *)fuc.data)[i];
+ 		u32 class = av->addr & 0xffff;
+ 		u32 addr = (av->addr & 0xffff0000) >> 14;
+ 
+ 		if (prevclass != class) {
+-			pack[classidx].init = ent;
++			if (prevclass) /* Add terminator to the method list. */
++				init++;
++			pack[classidx].init = init;
+ 			pack[classidx].type = class;
+ 			prevclass = class;
+ 			if (++classidx >= max_classes) {
+@@ -169,10 +170,10 @@ gk20a_gr_av_to_method(struct gf100_gr *gr, const char *fw_name,
+ 			}
+ 		}
+ 
+-		ent->addr = addr;
+-		ent->data = av->data;
+-		ent->count = 1;
+-		ent->pitch = 1;
++		init->addr = addr;
++		init->data = av->data;
++		init->count = 1;
++		init->pitch = 1;
+ 	}
+ 
+ 	*ppack = pack;
 -- 
 2.20.1
 
