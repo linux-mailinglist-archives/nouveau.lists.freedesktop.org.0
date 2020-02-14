@@ -2,41 +2,42 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 94C7415CEB2
-	for <lists+nouveau@lfdr.de>; Fri, 14 Feb 2020 00:37:29 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 810DA15DB99
+	for <lists+nouveau@lfdr.de>; Fri, 14 Feb 2020 16:50:34 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0963E6F897;
-	Thu, 13 Feb 2020 23:37:25 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C2BAF6F984;
+	Fri, 14 Feb 2020 15:50:32 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 2BA086F896;
- Thu, 13 Feb 2020 23:37:23 +0000 (UTC)
-Received: from localhost (unknown [104.132.1.104])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 819F36F981;
+ Fri, 14 Feb 2020 15:50:31 +0000 (UTC)
+Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
+ [73.47.72.35])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id CD39920848;
- Thu, 13 Feb 2020 23:37:22 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 8C0F924680;
+ Fri, 14 Feb 2020 15:50:30 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1581637042;
- bh=2NhaDtopTzrsYDfwgU+ewFCyARPBMcMqCqGNN+M2a0U=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=f68ahqDTGJMeAEVm7AxsMQlIY/bAjN3nQXy35MJAvj6CiG+lmKO2vRLp++5rjPo8F
- iB2cX0EP0/8qyXB27ii0+GdrYvJoJYApVPfbsh5iNPCvT10bioSJks5fvgpNEjZgOs
- dJ4PifwuHPr6oTjULdsgTicgbabm5U9juHKaFj04=
-Date: Thu, 13 Feb 2020 15:37:22 -0800
-From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-To: Daniel Vetter <daniel@ffwll.ch>
-Message-ID: <20200213233722.GA3926134@kroah.com>
-References: <20200209105525.GA1620170@kroah.com>
- <fdb35aa7-7e4a-c44f-94df-bd44585d4bef@nvidia.com>
- <20200213223931.GA3877216@kroah.com>
- <CAKMK7uHO0GOA2AzAh3XzWM5p7JkxuCEhz=yA=d4pbkojA4rYUA@mail.gmail.com>
+ s=default; t=1581695431;
+ bh=dfBe6pGOa3MtzNF/br7Jv7bQkVvBqp+VpqCIZVOiRto=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=uyV8WIm5YhkVyznJXE8okHh1walOKvIdRXRx3C7xcUCciBMzy5kIht/f1HnjSFX37
+ gKJzy6t2cgaZ9VU3BsITxg9lggOMejt3+LFZpfddStJ9WxDqoSv2xe0lx+9tNnEQsY
+ /hKfSAu5rJo7ybk62AJiBctUtt8yosdSjzKmZJ8I=
+From: Sasha Levin <sashal@kernel.org>
+To: linux-kernel@vger.kernel.org,
+	stable@vger.kernel.org
+Date: Fri, 14 Feb 2020 10:41:06 -0500
+Message-Id: <20200214154854.6746-74-sashal@kernel.org>
+X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20200214154854.6746-1-sashal@kernel.org>
+References: <20200214154854.6746-1-sashal@kernel.org>
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <CAKMK7uHO0GOA2AzAh3XzWM5p7JkxuCEhz=yA=d4pbkojA4rYUA@mail.gmail.com>
-Subject: Re: [Nouveau] [PATCH] nouveau: no need to check return value of
- debugfs_create functions
+X-stable: review
+X-Patchwork-Hint: Ignore
+Subject: [Nouveau] [PATCH AUTOSEL 5.5 074/542] drm/nouveau/nouveau: fix
+ incorrect sizeof on args.src an args.dst
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -48,48 +49,52 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>,
- dri-devel <dri-devel@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>,
- Nouveau Dev <nouveau@lists.freedesktop.org>,
- Wambui Karuga <wambui.karugax@gmail.com>
+Cc: Sasha Levin <sashal@kernel.org>, Colin Ian King <colin.king@canonical.com>,
+ Ben Skeggs <bskeggs@redhat.com>, dri-devel@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, Feb 14, 2020 at 12:30:48AM +0100, Daniel Vetter wrote:
-> On Thu, Feb 13, 2020 at 11:39 PM Greg Kroah-Hartman
-> <gregkh@linuxfoundation.org> wrote:
-> >
-> > On Thu, Feb 13, 2020 at 02:30:09PM -0800, John Hubbard wrote:
-> > > On 2/9/20 2:55 AM, Greg Kroah-Hartman wrote:
-> > > > When calling debugfs functions, there is no need to ever check the
-> > > > return value.  The function can work or not, but the code logic should
-> > > > never do something different based on this.
-> > > >
-> > >
-> > > Should we follow that line of reasoning further, and simply return void
-> > > from the debugfs functions--rather than playing whack-a-mole with this
-> > > indefinitely?
-> >
-> > That is what we (well I) have been doing.  Look at all of the changes
-> > that have happened to include/linux/debugfs.h over the past few
-> > releases.  I'm slowly winnowing down the api to make it impossible to
-> > get wrong for this type of thing, and am almost there.
-> >
-> > DRM is the big fish left to tackle, I have submitted some patches in the
-> > past, but lots more cleanup needs to be done to get them into mergable
-> > shape.  I just need to find the time...
-> 
-> Just to avoid duplication, Wambui (cc'ed) just started working on
-> this. Expect a lot more void return values and a pile of deleted code
-> rsn.
+From: Colin Ian King <colin.king@canonical.com>
 
-Nice!
+[ Upstream commit f42e4b337b327b1336c978c4b5174990a25f68a0 ]
 
-It's not duplication if I haven't started on it :)
+The sizeof is currently on args.src and args.dst and should be on
+*args.src and *args.dst. Fortunately these sizes just so happen
+to be the same size so it worked, however, this should be fixed
+and it also cleans up static analysis warnings
 
-greg k-h
+Addresses-Coverity: ("sizeof not portable")
+Fixes: f268307ec7c7 ("nouveau: simplify nouveau_dmem_migrate_vma")
+Signed-off-by: Colin Ian King <colin.king@canonical.com>
+Signed-off-by: Ben Skeggs <bskeggs@redhat.com>
+Signed-off-by: Sasha Levin <sashal@kernel.org>
+---
+ drivers/gpu/drm/nouveau/nouveau_dmem.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/gpu/drm/nouveau/nouveau_dmem.c b/drivers/gpu/drm/nouveau/nouveau_dmem.c
+index fa14399415965..0ad5d87b5a8e5 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_dmem.c
++++ b/drivers/gpu/drm/nouveau/nouveau_dmem.c
+@@ -635,10 +635,10 @@ nouveau_dmem_migrate_vma(struct nouveau_drm *drm,
+ 	unsigned long c, i;
+ 	int ret = -ENOMEM;
+ 
+-	args.src = kcalloc(max, sizeof(args.src), GFP_KERNEL);
++	args.src = kcalloc(max, sizeof(*args.src), GFP_KERNEL);
+ 	if (!args.src)
+ 		goto out;
+-	args.dst = kcalloc(max, sizeof(args.dst), GFP_KERNEL);
++	args.dst = kcalloc(max, sizeof(*args.dst), GFP_KERNEL);
+ 	if (!args.dst)
+ 		goto out_free_src;
+ 
+-- 
+2.20.1
+
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
