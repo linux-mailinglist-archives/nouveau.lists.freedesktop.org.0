@@ -2,42 +2,42 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5E98015E1A3
-	for <lists+nouveau@lfdr.de>; Fri, 14 Feb 2020 17:20:04 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 11B9915E1D4
+	for <lists+nouveau@lfdr.de>; Fri, 14 Feb 2020 17:20:57 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A5F186FAF9;
-	Fri, 14 Feb 2020 16:20:00 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0998F6FAFF;
+	Fri, 14 Feb 2020 16:20:55 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 2EC986FAF7;
- Fri, 14 Feb 2020 16:19:59 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4629B6FAFF;
+ Fri, 14 Feb 2020 16:20:53 +0000 (UTC)
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 3F6B72472E;
- Fri, 14 Feb 2020 16:19:58 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 6F05724739;
+ Fri, 14 Feb 2020 16:20:52 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1581697199;
- bh=IJrHykFkCkyR23gfxYuRwcxF8VQP6BEXnlSz/yBVNzQ=;
+ s=default; t=1581697253;
+ bh=i9i7Wl759lILGhGaXlNqPkHgaImx6U0G3qiL2XcD3Bo=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=Lrj+3xUD4ARrpsByz5SzQqojbgDlxOR/m6drfAXTC4DgJ2gTAxZmI17ITlAqb4/DA
- Rol0T7ur5TlHxlds7VyQMEvtYKZjyA5sXEtebvIg1rAPs/t2eYHxDurm2SpC4Iqhkh
- M6iVZIg7eC235WRXAq6DdHo1JJ175dTEUuhKXgek=
+ b=PqE/SD7I2jTm9X0Zc5a7zKctoy7LB5zQMh2YLLfHLWOMY1XFSNBOqVeub+Whghjw3
+ kGarYZZRFbyefb/mhjUj0Vi9ZXk0Qf4QIJWokqY1G6bSR6x0Q0ea+kOkxznY8vNBvY
+ J0WVoKS2SPFwW2hw0KjN0WsjfxnACwVq8lBb1NTw=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Fri, 14 Feb 2020 11:16:16 -0500
-Message-Id: <20200214161715.18113-127-sashal@kernel.org>
+Date: Fri, 14 Feb 2020 11:16:59 -0500
+Message-Id: <20200214161715.18113-170-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200214161715.18113-1-sashal@kernel.org>
 References: <20200214161715.18113-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
-Subject: [Nouveau] [PATCH AUTOSEL 4.14 127/186] drm/nouveau: Fix copy-paste
- error in nouveau_fence_wait_uevent_handler
+Subject: [Nouveau] [PATCH AUTOSEL 4.14 170/186] drm/nouveau/disp/nv50-:
+ prevent oops when no channel method map provided
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -50,41 +50,44 @@ List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
 Cc: Sasha Levin <sashal@kernel.org>, nouveau@lists.freedesktop.org,
- YueHaibing <yuehaibing@huawei.com>, Ben Skeggs <bskeggs@redhat.com>,
- dri-devel@lists.freedesktop.org
+ Ben Skeggs <bskeggs@redhat.com>, dri-devel@lists.freedesktop.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-From: YueHaibing <yuehaibing@huawei.com>
+From: Ben Skeggs <bskeggs@redhat.com>
 
-[ Upstream commit 1eb013473bff5f95b6fe1ca4dd7deda47257b9c2 ]
+[ Upstream commit 0e6176c6d286316e9431b4f695940cfac4ffe6c2 ]
 
-Like other cases, it should use rcu protected 'chan' rather
-than 'fence->channel' in nouveau_fence_wait_uevent_handler.
+The implementations for most channel types contains a map of methods to
+priv registers in order to provide debugging info when a disp exception
+has been raised.
 
-Fixes: 0ec5f02f0e2c ("drm/nouveau: prevent stale fence->channel pointers, and protect with rcu")
-Signed-off-by: YueHaibing <yuehaibing@huawei.com>
+This info is missing from the implementation of PIO channels as they're
+rather simplistic already, however, if an exception is raised by one of
+them, we'd end up triggering a NULL-pointer deref.  Not ideal...
+
+Bugzilla: https://bugzilla.kernel.org/show_bug.cgi?id=206299
 Signed-off-by: Ben Skeggs <bskeggs@redhat.com>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- drivers/gpu/drm/nouveau/nouveau_fence.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/gpu/drm/nouveau/nvkm/engine/disp/channv50.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_fence.c b/drivers/gpu/drm/nouveau/nouveau_fence.c
-index 99e14e3e0fe4d..72532539369fb 100644
---- a/drivers/gpu/drm/nouveau/nouveau_fence.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_fence.c
-@@ -158,7 +158,7 @@ nouveau_fence_wait_uevent_handler(struct nvif_notify *notify)
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/channv50.c b/drivers/gpu/drm/nouveau/nvkm/engine/disp/channv50.c
+index 0c0310498afdb..cd9666583d4bd 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/channv50.c
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/channv50.c
+@@ -73,6 +73,8 @@ nv50_disp_chan_mthd(struct nv50_disp_chan *chan, int debug)
  
- 		fence = list_entry(fctx->pending.next, typeof(*fence), head);
- 		chan = rcu_dereference_protected(fence->channel, lockdep_is_held(&fctx->lock));
--		if (nouveau_fence_update(fence->channel, fctx))
-+		if (nouveau_fence_update(chan, fctx))
- 			ret = NVIF_NOTIFY_DROP;
- 	}
- 	spin_unlock_irqrestore(&fctx->lock, flags);
+ 	if (debug > subdev->debug)
+ 		return;
++	if (!mthd)
++		return;
+ 
+ 	for (i = 0; (list = mthd->data[i].mthd) != NULL; i++) {
+ 		u32 base = chan->head * mthd->addr;
 -- 
 2.20.1
 
