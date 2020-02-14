@@ -1,43 +1,43 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8FBAE15E0A1
-	for <lists+nouveau@lfdr.de>; Fri, 14 Feb 2020 17:15:30 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 27F2A15E0E2
+	for <lists+nouveau@lfdr.de>; Fri, 14 Feb 2020 17:16:12 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 55ABD6FABF;
-	Fri, 14 Feb 2020 16:15:27 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 2DEED6FABD;
+	Fri, 14 Feb 2020 16:16:10 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7D93F6FABD;
- Fri, 14 Feb 2020 16:15:25 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id BD09A6FABD;
+ Fri, 14 Feb 2020 16:16:09 +0000 (UTC)
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 9DF94246ED;
- Fri, 14 Feb 2020 16:15:24 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id DC974206D7;
+ Fri, 14 Feb 2020 16:16:08 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1581696925;
- bh=YIGZT7Mw55e964DtErPouRe21GxqEoy89dkTezE1Oy8=;
+ s=default; t=1581696969;
+ bh=H+HW9LdC+gGzgBI2knQjxdHksSbqipHsIqlIEKwTmKU=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=Puq/pAZQuwHp3YxZWZDikmu7SUefVZBtKy4bsrmQjAkFoWxoPHDMcMcLsz9TpCJ9c
- h8wudm0KikOOAcEyYjVOQyOC0ZzRdGfaPxVtyHiAPGYPkbOtcpoVL0UG7+Cg+snMOl
- lZ9mYmPXwkJNW6kFYeO2t0Jo1MWRHo68op7LbblU=
+ b=hNcynozCblyBHMz2kCnU/6W6UyMIS5PfUmtXkhUlYry9S7Wo1UUq5lS2d/Lw7bevZ
+ 3d9VoOJKV5n034500n1bhkqlJU9MnJ3nB1bNpsXOWEmaBbWqsCkfsQPrC/rqtqM65z
+ 5M6XZoWKaFDHjRttvuyaEqE3QcN5cymDJ6Ck8sqs=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Fri, 14 Feb 2020 11:10:27 -0500
-Message-Id: <20200214161147.15842-172-sashal@kernel.org>
+Date: Fri, 14 Feb 2020 11:11:03 -0500
+Message-Id: <20200214161147.15842-208-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200214161147.15842-1-sashal@kernel.org>
 References: <20200214161147.15842-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
-Subject: [Nouveau] [PATCH AUTOSEL 4.19 172/252] drm/nouveau/fault/gv100-:
- fix memory leak on module unload
+Subject: [Nouveau] [PATCH AUTOSEL 4.19 208/252] drm/nouveau/mmu: fix comptag
+ memory leak
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,26 +58,28 @@ Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 From: Ben Skeggs <bskeggs@redhat.com>
 
-[ Upstream commit 633cc9beeb6f9b5fa2f17a2a9d0e2790cb6c3de7 ]
+[ Upstream commit 35e4909b6a2b4005ced3c4238da60d926b78fdea ]
 
 Signed-off-by: Ben Skeggs <bskeggs@redhat.com>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- drivers/gpu/drm/nouveau/nvkm/subdev/fault/base.c | 1 +
- 1 file changed, 1 insertion(+)
+ drivers/gpu/drm/nouveau/nvkm/core/memory.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/fault/base.c b/drivers/gpu/drm/nouveau/nvkm/subdev/fault/base.c
-index 16ad91c91a7be..f18ce6ff5b7ed 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/fault/base.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/fault/base.c
-@@ -150,6 +150,7 @@ nvkm_fault_dtor(struct nvkm_subdev *subdev)
- 	struct nvkm_fault *fault = nvkm_fault(subdev);
- 	int i;
+diff --git a/drivers/gpu/drm/nouveau/nvkm/core/memory.c b/drivers/gpu/drm/nouveau/nvkm/core/memory.c
+index e85a08ecd9da5..4cc186262d344 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/core/memory.c
++++ b/drivers/gpu/drm/nouveau/nvkm/core/memory.c
+@@ -91,8 +91,8 @@ nvkm_memory_tags_get(struct nvkm_memory *memory, struct nvkm_device *device,
+ 	}
  
-+	nvkm_notify_fini(&fault->nrpfb);
- 	nvkm_event_fini(&fault->event);
+ 	refcount_set(&tags->refcount, 1);
++	*ptags = memory->tags = tags;
+ 	mutex_unlock(&fb->subdev.mutex);
+-	*ptags = tags;
+ 	return 0;
+ }
  
- 	for (i = 0; i < fault->buffer_nr; i++) {
 -- 
 2.20.1
 
