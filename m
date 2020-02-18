@@ -1,22 +1,54 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id DA8F0162E84
-	for <lists+nouveau@lfdr.de>; Tue, 18 Feb 2020 19:28:40 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id D4EBC162EB7
+	for <lists+nouveau@lfdr.de>; Tue, 18 Feb 2020 19:37:55 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 318C66EA6B;
-	Tue, 18 Feb 2020 18:28:39 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8EFF26E3C6;
+	Tue, 18 Feb 2020 18:37:51 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 496ED6EA67;
- Tue, 18 Feb 2020 18:28:37 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 8A9A3AD82;
- Tue, 18 Feb 2020 18:28:35 +0000 (UTC)
-To: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
+Received: from mail-wm1-x342.google.com (mail-wm1-x342.google.com
+ [IPv6:2a00:1450:4864:20::342])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5C2CA6E225;
+ Tue, 18 Feb 2020 18:37:50 +0000 (UTC)
+Received: by mail-wm1-x342.google.com with SMTP id s10so3823201wmh.3;
+ Tue, 18 Feb 2020 10:37:50 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=reply-to:subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language;
+ bh=vJn5gabJYwPVXLhWyUOhxucar70PnqFXlYN4da5wXjQ=;
+ b=KczMDBoJURaQfN9n3iS1wealYWPZ6jNOjtVKRXeRa/0rZ50AnmlCPloJ39sEynyZl3
+ UOMI/H6E9vR07/wAsBKxRsb64YkqIx3nj1FZ6I47U6YHx4uUJIgHafQ5DvaaEbp8SGj1
+ 6sv6Ig1Q6M7Gdh9vEVh38qVkXzVZteztZiOXMC7tJsIS1N+S9gDscQaeooQOw4gLVGsU
+ WINgy4xnFf1AM1Vgy9H4Q9BooDY1Ve0ziqGGK8Dd2BEe2m7kfuY6P6GdZKszA4DJR4pz
+ DlwCCCKRQpzWlBf081r6exlEKWSeXPO5QsouJDSJ+bTdbzhQQPS7IdYkYp6UbdEDSXE1
+ ghfw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:reply-to:subject:to:cc:references:from
+ :message-id:date:user-agent:mime-version:in-reply-to
+ :content-language;
+ bh=vJn5gabJYwPVXLhWyUOhxucar70PnqFXlYN4da5wXjQ=;
+ b=OdW35gKjuhSQ3hbLa+JZ0ZhesyxKOv0caNyURj90BBFgFYUuFC19b1mHxdcnqs4Wc1
+ fj83OGDxSP2l4SBmZ2go3Qkp/oK2x2+M/ZPhYdt+f9g24tu2XkEiJBiJQD5ynJHdRisG
+ se3lnTzqBB3is5Jq/ydaKr/dBBeFDai7/aPmNshvbbhvd5Amlk2ZhzYzwhP3CjUL3h0S
+ kq82La1D/AYMEjGcv4YF/AoX//nszpAN+lrLGUMwBcLVD49lgBeWCiMKPBK8+4E+kD3f
+ +J/EUiequPFL4g+clpSl/xuQZNmYyv+RZ6BunKv/d//4V1AiG6fJvgcZNmWirLJdb5uJ
+ 2Ptg==
+X-Gm-Message-State: APjAAAVY/tJQd5HgSyVNolSieZPG4qbvUR5LYFsVO2+4rpVb69BJQiz7
+ sz2qUDhR+y+TdN4KIPPZXJY=
+X-Google-Smtp-Source: APXvYqzjhkAmX9oT5F4/GAzysR3FBgZRkbpUmOkA1WS4SesM8XrXUZKIoyRPQHfDNvRtCJMwxVV8jQ==
+X-Received: by 2002:a1c:8086:: with SMTP id b128mr4289376wmd.80.1582051068992; 
+ Tue, 18 Feb 2020 10:37:48 -0800 (PST)
+Received: from ?IPv6:2a02:908:1252:fb60:f960:eb89:795f:e107?
+ ([2a02:908:1252:fb60:f960:eb89:795f:e107])
+ by smtp.gmail.com with ESMTPSA id p26sm4306076wmc.24.2020.02.18.10.37.45
+ (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+ Tue, 18 Feb 2020 10:37:48 -0800 (PST)
+To: Thomas Zimmermann <tzimmermann@suse.de>,
+ =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
  Nirmoy <nirmodas@amd.com>, Nirmoy Das <nirmoy.aiemd@gmail.com>,
  dri-devel@lists.freedesktop.org
 References: <20200217150427.49994-1-nirmoy.das@amd.com>
@@ -26,38 +58,15 @@ References: <20200217150427.49994-1-nirmoy.das@amd.com>
  <edc985f1-8856-4d1a-8960-efe4d21b960d@amd.com>
  <5b8db944-5a55-8161-6ab6-98490cfb0562@suse.de>
  <f8534965-ea14-bbac-bd34-06b951766a7c@amd.com>
-From: Thomas Zimmermann <tzimmermann@suse.de>
-Autocrypt: addr=tzimmermann@suse.de; keydata=
- mQENBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
- XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
- BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
- hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
- 9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
- AAG0J1Rob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPokBVAQTAQgAPhYh
- BHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJbOdLgAhsDBQkDwmcABQsJCAcCBhUKCQgLAgQWAgMB
- Ah4BAheAAAoJEGgNwR1TC3ojR80H/jH+vYavwQ+TvO8ksXL9JQWc3IFSiGpuSVXLCdg62AmR
- irxW+qCwNncNQyb9rd30gzdectSkPWL3KSqEResBe24IbA5/jSkPweJasgXtfhuyoeCJ6PXo
- clQQGKIoFIAEv1s8l0ggPZswvCinegl1diyJXUXmdEJRTWYAtxn/atut1o6Giv6D2qmYbXN7
- mneMC5MzlLaJKUtoH7U/IjVw1sx2qtxAZGKVm4RZxPnMCp9E1MAr5t4dP5gJCIiqsdrVqI6i
- KupZstMxstPU//azmz7ZWWxT0JzgJqZSvPYx/SATeexTYBP47YFyri4jnsty2ErS91E6H8os
- Bv6pnSn7eAq5AQ0EWznS4AEIAMYmP4M/V+T5RY5at/g7rUdNsLhWv1APYrh9RQefODYHrNRH
- UE9eosYbT6XMryR9hT8XlGOYRwKWwiQBoWSDiTMo/Xi29jUnn4BXfI2px2DTXwc22LKtLAgT
- RjP+qbU63Y0xnQN29UGDbYgyyK51DW3H0If2a3JNsheAAK+Xc9baj0LGIc8T9uiEWHBnCH+R
- dhgATnWWGKdDegUR5BkDfDg5O/FISymJBHx2Dyoklv5g4BzkgqTqwmaYzsl8UxZKvbaxq0zb
- ehDda8lvhFXodNFMAgTLJlLuDYOGLK2AwbrS3Sp0AEbkpdJBb44qVlGm5bApZouHeJ/+n+7r
- 12+lqdsAEQEAAYkBPAQYAQgAJhYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJbOdLgAhsMBQkD
- wmcAAAoJEGgNwR1TC3ojpfcIAInwP5OlcEKokTnHCiDTz4Ony4GnHRP2fXATQZCKxmu4AJY2
- h9ifw9Nf2TjCZ6AMvC3thAN0rFDj55N9l4s1CpaDo4J+0fkrHuyNacnT206CeJV1E7NYntxU
- n+LSiRrOdywn6erjxRi9EYTVLCHcDhBEjKmFZfg4AM4GZMWX1lg0+eHbd5oL1as28WvvI/uI
- aMyV8RbyXot1r/8QLlWldU3NrTF5p7TMU2y3ZH2mf5suSKHAMtbE4jKJ8ZHFOo3GhLgjVrBW
- HE9JXO08xKkgD+w6v83+nomsEuf6C6LYrqY/tsZvyEX6zN8CtirPdPWu/VXNRYAl/lat7lSI
- 3H26qrE=
-Message-ID: <48a5e3e2-cb9d-8328-1529-3558601ba860@suse.de>
-Date: Tue, 18 Feb 2020 19:28:23 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.4.1
+ <48a5e3e2-cb9d-8328-1529-3558601ba860@suse.de>
+From: =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>
+Message-ID: <31b0cac7-82c7-60ad-830b-66f7838a1047@gmail.com>
+Date: Tue, 18 Feb 2020 19:37:44 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.9.0
 MIME-Version: 1.0
-In-Reply-To: <f8534965-ea14-bbac-bd34-06b951766a7c@amd.com>
+In-Reply-To: <48a5e3e2-cb9d-8328-1529-3558601ba860@suse.de>
+Content-Language: en-US
 Subject: Re: [Nouveau] [PATCH 8/8] drm/ttm: do not keep GPU dependent
  addresses
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -71,302 +80,489 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
+Reply-To: christian.koenig@amd.com
 Cc: thellstrom@vmware.com, airlied@linux.ie, kenny.ho@amd.com,
  amd-gfx@lists.freedesktop.org, nirmoy.das@amd.com,
  linux-graphics-maintainer@vmware.com, bskeggs@redhat.com,
  nouveau@lists.freedesktop.org, alexander.deucher@amd.com, sean@poorly.run,
  kraxel@redhat.com
-Content-Type: multipart/mixed; boundary="===============0287957474=="
+Content-Type: multipart/mixed; boundary="===============1228905272=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============0287957474==
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="5odbZ9nBjSpbEGJk3Eu9ZnKJP14fWy4mO"
-
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---5odbZ9nBjSpbEGJk3Eu9ZnKJP14fWy4mO
-Content-Type: multipart/mixed; boundary="2QTwX1RqQT5bd67J6YiyKh3dVgnvqnLoS";
- protected-headers="v1"
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
- Nirmoy <nirmodas@amd.com>, Nirmoy Das <nirmoy.aiemd@gmail.com>,
- dri-devel@lists.freedesktop.org
-Cc: thellstrom@vmware.com, airlied@linux.ie, kenny.ho@amd.com,
- amd-gfx@lists.freedesktop.org, nirmoy.das@amd.com,
- linux-graphics-maintainer@vmware.com, bskeggs@redhat.com,
- nouveau@lists.freedesktop.org, alexander.deucher@amd.com, sean@poorly.run,
- kraxel@redhat.com
-Message-ID: <48a5e3e2-cb9d-8328-1529-3558601ba860@suse.de>
-Subject: Re: [PATCH 8/8] drm/ttm: do not keep GPU dependent addresses
-References: <20200217150427.49994-1-nirmoy.das@amd.com>
- <20200217150427.49994-9-nirmoy.das@amd.com>
- <c3a20c1b-0520-1995-7445-9e3f3ea77394@suse.de>
- <9db59846-90b4-2b9a-8200-69297112693a@amd.com>
- <edc985f1-8856-4d1a-8960-efe4d21b960d@amd.com>
- <5b8db944-5a55-8161-6ab6-98490cfb0562@suse.de>
- <f8534965-ea14-bbac-bd34-06b951766a7c@amd.com>
-In-Reply-To: <f8534965-ea14-bbac-bd34-06b951766a7c@amd.com>
-
---2QTwX1RqQT5bd67J6YiyKh3dVgnvqnLoS
-Content-Type: text/plain; charset=utf-8
+This is a multi-part message in MIME format.
+--===============1228905272==
+Content-Type: multipart/alternative;
+ boundary="------------720D19E588A50163BC63142C"
 Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
 
-Hi
+This is a multi-part message in MIME format.
+--------------720D19E588A50163BC63142C
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Am 18.02.20 um 19:23 schrieb Christian K=C3=B6nig:
-> Am 18.02.20 um 19:16 schrieb Thomas Zimmermann:
->> Hi
->>
->> Am 18.02.20 um 18:13 schrieb Nirmoy:
->>> On 2/18/20 1:44 PM, Christian K=C3=B6nig wrote:
->>>> Am 18.02.20 um 13:40 schrieb Thomas Zimmermann:
->>>>> Hi
+Am 18.02.20 um 19:28 schrieb Thomas Zimmermann:
+> Hi
+>
+> Am 18.02.20 um 19:23 schrieb Christian König:
+>> Am 18.02.20 um 19:16 schrieb Thomas Zimmermann:
+>>> Hi
+>>>
+>>> Am 18.02.20 um 18:13 schrieb Nirmoy:
+>>>> On 2/18/20 1:44 PM, Christian König wrote:
+>>>>> Am 18.02.20 um 13:40 schrieb Thomas Zimmermann:
+>>>>>> Hi
+>>>>>>
+>>>>>> Am 17.02.20 um 16:04 schrieb Nirmoy Das:
+>>>>>>> GPU address handling is device specific and should be handle by its
+>>>>>>> device
+>>>>>>> driver.
+>>>>>>>
+>>>>>>> Signed-off-by: Nirmoy Das <nirmoy.das@amd.com>
+>>>>>>> ---
+>>>>>>>     drivers/gpu/drm/ttm/ttm_bo.c    | 7 -------
+>>>>>>>     include/drm/ttm/ttm_bo_api.h    | 2 --
+>>>>>>>     include/drm/ttm/ttm_bo_driver.h | 1 -
+>>>>>>>     3 files changed, 10 deletions(-)
+>>>>>>>
+>>>>>>> diff --git a/drivers/gpu/drm/ttm/ttm_bo.c
+>>>>>>> b/drivers/gpu/drm/ttm/ttm_bo.c
+>>>>>>> index 151edfd8de77..d5885cd609a3 100644
+>>>>>>> --- a/drivers/gpu/drm/ttm/ttm_bo.c
+>>>>>>> +++ b/drivers/gpu/drm/ttm/ttm_bo.c
+>>>>>>> @@ -85,7 +85,6 @@ static void ttm_mem_type_debug(struct
+>>>>>>> ttm_bo_device *bdev, struct drm_printer *p
+>>>>>>>         drm_printf(p, "    has_type: %d\n", man->has_type);
+>>>>>>>         drm_printf(p, "    use_type: %d\n", man->use_type);
+>>>>>>>         drm_printf(p, "    flags: 0x%08X\n", man->flags);
+>>>>>>> -    drm_printf(p, "    gpu_offset: 0x%08llX\n", man->gpu_offset);
+>>>>>>>         drm_printf(p, "    size: %llu\n", man->size);
+>>>>>>>         drm_printf(p, "    available_caching: 0x%08X\n",
+>>>>>>> man->available_caching);
+>>>>>>>         drm_printf(p, "    default_caching: 0x%08X\n",
+>>>>>>> man->default_caching);
+>>>>>>> @@ -345,12 +344,6 @@ static int ttm_bo_handle_move_mem(struct
+>>>>>>> ttm_buffer_object *bo,
+>>>>>>>     moved:
+>>>>>>>         bo->evicted = false;
+>>>>>>>     -    if (bo->mem.mm_node)
+>>>>>>> -        bo->offset = (bo->mem.start << PAGE_SHIFT) +
+>>>>>>> -            bdev->man[bo->mem.mem_type].gpu_offset;
+>>>>>>> -    else
+>>>>>>> -        bo->offset = 0;
+>>>>>>> -
+>>>>>> After moving this into users, the else branch has been lost. Is
+>>>>>> 'bo->mem.mm_node' always true?
+>>>>> At least for the amdgpu and radeon use cases, yes.
 >>>>>
->>>>> Am 17.02.20 um 16:04 schrieb Nirmoy Das:
->>>>>> GPU address handling is device specific and should be handle by it=
-s
->>>>>> device
->>>>>> driver.
->>>>>>
->>>>>> Signed-off-by: Nirmoy Das <nirmoy.das@amd.com>
->>>>>> ---
->>>>>> =C2=A0=C2=A0 drivers/gpu/drm/ttm/ttm_bo.c=C2=A0=C2=A0=C2=A0 | 7 --=
------
->>>>>> =C2=A0=C2=A0 include/drm/ttm/ttm_bo_api.h=C2=A0=C2=A0=C2=A0 | 2 --=
-
->>>>>> =C2=A0=C2=A0 include/drm/ttm/ttm_bo_driver.h | 1 -
->>>>>> =C2=A0=C2=A0 3 files changed, 10 deletions(-)
->>>>>>
->>>>>> diff --git a/drivers/gpu/drm/ttm/ttm_bo.c
->>>>>> b/drivers/gpu/drm/ttm/ttm_bo.c
->>>>>> index 151edfd8de77..d5885cd609a3 100644
->>>>>> --- a/drivers/gpu/drm/ttm/ttm_bo.c
->>>>>> +++ b/drivers/gpu/drm/ttm/ttm_bo.c
->>>>>> @@ -85,7 +85,6 @@ static void ttm_mem_type_debug(struct
->>>>>> ttm_bo_device *bdev, struct drm_printer *p
->>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 drm_printf(p, "=C2=A0=C2=A0=C2=
-=A0 has_type: %d\n", man->has_type);
->>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 drm_printf(p, "=C2=A0=C2=A0=C2=
-=A0 use_type: %d\n", man->use_type);
->>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 drm_printf(p, "=C2=A0=C2=A0=C2=
-=A0 flags: 0x%08X\n", man->flags);
->>>>>> -=C2=A0=C2=A0=C2=A0 drm_printf(p, "=C2=A0=C2=A0=C2=A0 gpu_offset: =
-0x%08llX\n", man->gpu_offset);
->>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 drm_printf(p, "=C2=A0=C2=A0=C2=
-=A0 size: %llu\n", man->size);
->>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 drm_printf(p, "=C2=A0=C2=A0=C2=
-=A0 available_caching: 0x%08X\n",
->>>>>> man->available_caching);
->>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 drm_printf(p, "=C2=A0=C2=A0=C2=
-=A0 default_caching: 0x%08X\n",
->>>>>> man->default_caching);
->>>>>> @@ -345,12 +344,6 @@ static int ttm_bo_handle_move_mem(struct
->>>>>> ttm_buffer_object *bo,
->>>>>> =C2=A0=C2=A0 moved:
->>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 bo->evicted =3D false;
->>>>>> =C2=A0=C2=A0 -=C2=A0=C2=A0=C2=A0 if (bo->mem.mm_node)
->>>>>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 bo->offset =3D (bo->me=
-m.start << PAGE_SHIFT) +
->>>>>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
- bdev->man[bo->mem.mem_type].gpu_offset;
->>>>>> -=C2=A0=C2=A0=C2=A0 else
->>>>>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 bo->offset =3D 0;
->>>>>> -
->>>>> After moving this into users, the else branch has been lost. Is
->>>>> 'bo->mem.mm_node' always true?
->>>> At least for the amdgpu and radeon use cases, yes.
+>>>>> But that is a rather good question I mean for it is illegal to get the
+>>>>> GPU BO address if it is inaccessible (e.g. in the system domain).
+>>>>>
+>>>>> Could be that some driver relied on the behavior to get 0 for the
+>>>>> system domain here.
+>>>> I wonder how to verify that ?
 >>>>
->>>> But that is a rather good question I mean for it is illegal to get t=
-he
->>>> GPU BO address if it is inaccessible (e.g. in the system domain).
+>>>> If I understand correctly:
 >>>>
->>>> Could be that some driver relied on the behavior to get 0 for the
->>>> system domain here.
->>> I wonder how to verify that ?
+>>>> 1 qxl uses bo->offset only in qxl_bo_physical_address() which is not in
+>>>> system domain.
+>>>>
+>>>> 2 unfortunately I can't say the same for bochs but it works with this
+>>>> patch series so I think bochs is fine as well.
+>>>>
+>>>> 3 vmwgfx uses bo->offset only when bo->mem.mem_type == TTM_PL_VRAM so
+>>>> vmwgfx should be fine.
+>>>>
+>>>> 4 amdgpu and radeon runs with 'bo->mem.mm_node' always true
+>>>>
+>>>> I am not sure about  nouveau as bo->offset is being used in many places.
+>>>>
+>>>> I could probably mirror the removed logic to nouveau as
+>>> I suggest to introduce a ttm helper that contains the original branching
+>>> and use it everywhere. Something like
 >>>
->>> If I understand correctly:
+>>>     s64 ttm_bo_offset(struct ttm_buffer_object *bo)
+>>>     {
+>>>        if (WARN_ON_ONCE(!bo->mem.mm_node))
+>>>            return 0;
+>>>        return bo->mem.start << PAGE_SHIFT;
+>>>     }
 >>>
->>> 1 qxl uses bo->offset only in qxl_bo_physical_address() which is not =
-in
->>> system domain.
->>>
->>> 2 unfortunately I can't say the same for bochs but it works with this=
-
->>> patch series so I think bochs is fine as well.
->>>
->>> 3 vmwgfx uses bo->offset only when bo->mem.mem_type =3D=3D TTM_PL_VRA=
-M so
->>> vmwgfx should be fine.
->>>
->>> 4 amdgpu and radeon runs with 'bo->mem.mm_node' always true
->>>
->>> I am not sure about=C2=A0 nouveau as bo->offset is being used in many=
- places.
->>>
->>> I could probably mirror the removed logic to nouveau as
->> I suggest to introduce a ttm helper that contains the original branchi=
-ng
->> and use it everywhere. Something like
+>>> Could be static inline. The warning should point to broken drivers. This
+>>> also gets rid of the ugly shift in the drivers.
+>> Big NAK on this. That is exactly what we should NOT do.
 >>
->> =C2=A0=C2=A0 s64 ttm_bo_offset(struct ttm_buffer_object *bo)
->> =C2=A0=C2=A0 {
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (WARN_ON_ONCE(!bo->mem.mm_node))
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return 0;
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return bo->mem.start << PAGE_SHIFT;
->> =C2=A0=C2=A0 }
+>> See the shift belongs into the driver, because it is driver dependent if
+>> we work with page or byte offsets.
 >>
->> Could be static inline. The warning should point to broken drivers. Th=
-is
->> also gets rid of the ugly shift in the drivers.
->=20
-> Big NAK on this. That is exactly what we should NOT do.
->=20
-> See the shift belongs into the driver, because it is driver dependent i=
-f
-> we work with page or byte offsets.
->=20
-> For amdgpu we for example want to work with byte offsets and TTM should=
+>> For amdgpu we for example want to work with byte offsets and TTM should
+>> not make any assumption about what bo->mem.start actually contains.
+> OK. What about something like ttm_bo_pg_offset()? Same code without the
+> shift. Would also make it clear that it's a page offset.
 
-> not make any assumption about what bo->mem.start actually contains.
+That is a rather good idea. We could name that ttm_bo_man_offset() and 
+put it into ttm_bo_manager.c next to the manager which allocates them.
 
+It's just that this manager is not used by everybody, so amdgpu, radeon 
+and nouveau would still need a separate function.
+
+Christian.
+
+>
+> Best regards
+> Thomas
+>
+>> Regards,
+>> Christian.
+>>
+>>> Best regards
+>>> Thomas
+>>>
+>>>
+>>>> diff --git a/drivers/gpu/drm/nouveau/nouveau_bo.c
+>>>> b/drivers/gpu/drm/nouveau/nouveau_bo.c
+>>>> index f8015e0318d7..5a6a2af91318 100644
+>>>> --- a/drivers/gpu/drm/nouveau/nouveau_bo.c
+>>>> +++ b/drivers/gpu/drm/nouveau/nouveau_bo.c
+>>>> @@ -1317,6 +1317,10 @@ nouveau_bo_move_ntfy(struct ttm_buffer_object
+>>>> *bo, bool evict,
+>>>>                   list_for_each_entry(vma, &nvbo->vma_list, head) {
+>>>>                           nouveau_vma_map(vma, mem);
+>>>>                   }
+>>>> +               if (bo->mem.mm_node)
+>>>> +                       nvbo->offset = (new_reg->start << PAGE_SHIFT);
+>>>> +               else
+>>>> +                       nvbo->offset = 0;
+>>>>           } else {
+>>>>                   list_for_each_entry(vma, &nvbo->vma_list, head) {
+>>>>                           WARN_ON(ttm_bo_wait(bo, false, false));
+>>>>
+>>>> Regards,
+>>>>
+>>>> Nirmoy
+>>>>
+>>>>
+>>>>> Regards,
+>>>>> Christian.
+>>>>>
+>>>>>> Best regards
+>>>>>> Thomas
+>>>>>>
+>>>>>>>         ctx->bytes_moved += bo->num_pages << PAGE_SHIFT;
+>>>>>>>         return 0;
+>>>>>>>     diff --git a/include/drm/ttm/ttm_bo_api.h
+>>>>>>> b/include/drm/ttm/ttm_bo_api.h
+>>>>>>> index b9bc1b00142e..d6f39ee5bf5d 100644
+>>>>>>> --- a/include/drm/ttm/ttm_bo_api.h
+>>>>>>> +++ b/include/drm/ttm/ttm_bo_api.h
+>>>>>>> @@ -213,8 +213,6 @@ struct ttm_buffer_object {
+>>>>>>>          * either of these locks held.
+>>>>>>>          */
+>>>>>>>     -    uint64_t offset; /* GPU address space is independent of CPU
+>>>>>>> word size */
+>>>>>>> -
+>>>>>>>         struct sg_table *sg;
+>>>>>>>     };
+>>>>>>>     diff --git a/include/drm/ttm/ttm_bo_driver.h
+>>>>>>> b/include/drm/ttm/ttm_bo_driver.h
+>>>>>>> index c9e0fd09f4b2..c8ce6c181abe 100644
+>>>>>>> --- a/include/drm/ttm/ttm_bo_driver.h
+>>>>>>> +++ b/include/drm/ttm/ttm_bo_driver.h
+>>>>>>> @@ -177,7 +177,6 @@ struct ttm_mem_type_manager {
+>>>>>>>         bool has_type;
+>>>>>>>         bool use_type;
+>>>>>>>         uint32_t flags;
+>>>>>>> -    uint64_t gpu_offset; /* GPU address space is independent of CPU
+>>>>>>> word size */
+>>>>>>>         uint64_t size;
+>>>>>>>         uint32_t available_caching;
+>>>>>>>         uint32_t default_caching;
+>>>>>>>
+>>>> _______________________________________________
+>>>> dri-devel mailing list
+>>>> dri-devel@lists.freedesktop.org
+>>>> https://lists.freedesktop.org/mailman/listinfo/dri-devel
+>> _______________________________________________
+>> dri-devel mailing list
+>> dri-devel@lists.freedesktop.org
+>> https://lists.freedesktop.org/mailman/listinfo/dri-devel
+>
+> _______________________________________________
+> amd-gfx mailing list
+> amd-gfx@lists.freedesktop.org
+> https://lists.freedesktop.org/mailman/listinfo/amd-gfx
+
+
+--------------720D19E588A50163BC63142C
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: 8bit
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body text="#000000" bgcolor="#FFFFFF">
+    <div class="moz-cite-prefix">Am 18.02.20 um 19:28 schrieb Thomas
+      Zimmermann:<br>
+    </div>
+    <blockquote type="cite"
+      cite="mid:48a5e3e2-cb9d-8328-1529-3558601ba860@suse.de">
+      <pre class="moz-quote-pre" wrap="">Hi
+
+Am 18.02.20 um 19:23 schrieb Christian König:
+</pre>
+      <blockquote type="cite">
+        <pre class="moz-quote-pre" wrap="">Am 18.02.20 um 19:16 schrieb Thomas Zimmermann:
+</pre>
+        <blockquote type="cite">
+          <pre class="moz-quote-pre" wrap="">Hi
+
+Am 18.02.20 um 18:13 schrieb Nirmoy:
+</pre>
+          <blockquote type="cite">
+            <pre class="moz-quote-pre" wrap="">On 2/18/20 1:44 PM, Christian König wrote:
+</pre>
+            <blockquote type="cite">
+              <pre class="moz-quote-pre" wrap="">Am 18.02.20 um 13:40 schrieb Thomas Zimmermann:
+</pre>
+              <blockquote type="cite">
+                <pre class="moz-quote-pre" wrap="">Hi
+
+Am 17.02.20 um 16:04 schrieb Nirmoy Das:
+</pre>
+                <blockquote type="cite">
+                  <pre class="moz-quote-pre" wrap="">GPU address handling is device specific and should be handle by its
+device
+driver.
+
+Signed-off-by: Nirmoy Das <a class="moz-txt-link-rfc2396E" href="mailto:nirmoy.das@amd.com">&lt;nirmoy.das@amd.com&gt;</a>
+---
+   drivers/gpu/drm/ttm/ttm_bo.c    | 7 -------
+   include/drm/ttm/ttm_bo_api.h    | 2 --
+   include/drm/ttm/ttm_bo_driver.h | 1 -
+   3 files changed, 10 deletions(-)
+
+diff --git a/drivers/gpu/drm/ttm/ttm_bo.c
+b/drivers/gpu/drm/ttm/ttm_bo.c
+index 151edfd8de77..d5885cd609a3 100644
+--- a/drivers/gpu/drm/ttm/ttm_bo.c
++++ b/drivers/gpu/drm/ttm/ttm_bo.c
+@@ -85,7 +85,6 @@ static void ttm_mem_type_debug(struct
+ttm_bo_device *bdev, struct drm_printer *p
+       drm_printf(p, "    has_type: %d\n", man-&gt;has_type);
+       drm_printf(p, "    use_type: %d\n", man-&gt;use_type);
+       drm_printf(p, "    flags: 0x%08X\n", man-&gt;flags);
+-    drm_printf(p, "    gpu_offset: 0x%08llX\n", man-&gt;gpu_offset);
+       drm_printf(p, "    size: %llu\n", man-&gt;size);
+       drm_printf(p, "    available_caching: 0x%08X\n",
+man-&gt;available_caching);
+       drm_printf(p, "    default_caching: 0x%08X\n",
+man-&gt;default_caching);
+@@ -345,12 +344,6 @@ static int ttm_bo_handle_move_mem(struct
+ttm_buffer_object *bo,
+   moved:
+       bo-&gt;evicted = false;
+   -    if (bo-&gt;mem.mm_node)
+-        bo-&gt;offset = (bo-&gt;mem.start &lt;&lt; PAGE_SHIFT) +
+-            bdev-&gt;man[bo-&gt;mem.mem_type].gpu_offset;
+-    else
+-        bo-&gt;offset = 0;
+-
+</pre>
+                </blockquote>
+                <pre class="moz-quote-pre" wrap="">After moving this into users, the else branch has been lost. Is
+'bo-&gt;mem.mm_node' always true?
+</pre>
+              </blockquote>
+              <pre class="moz-quote-pre" wrap="">At least for the amdgpu and radeon use cases, yes.
+
+But that is a rather good question I mean for it is illegal to get the
+GPU BO address if it is inaccessible (e.g. in the system domain).
+
+Could be that some driver relied on the behavior to get 0 for the
+system domain here.
+</pre>
+            </blockquote>
+            <pre class="moz-quote-pre" wrap="">I wonder how to verify that ?
+
+If I understand correctly:
+
+1 qxl uses bo-&gt;offset only in qxl_bo_physical_address() which is not in
+system domain.
+
+2 unfortunately I can't say the same for bochs but it works with this
+patch series so I think bochs is fine as well.
+
+3 vmwgfx uses bo-&gt;offset only when bo-&gt;mem.mem_type == TTM_PL_VRAM so
+vmwgfx should be fine.
+
+4 amdgpu and radeon runs with 'bo-&gt;mem.mm_node' always true
+
+I am not sure about  nouveau as bo-&gt;offset is being used in many places.
+
+I could probably mirror the removed logic to nouveau as
+</pre>
+          </blockquote>
+          <pre class="moz-quote-pre" wrap="">I suggest to introduce a ttm helper that contains the original branching
+and use it everywhere. Something like
+
+   s64 ttm_bo_offset(struct ttm_buffer_object *bo)
+   {
+      if (WARN_ON_ONCE(!bo-&gt;mem.mm_node))
+          return 0;
+      return bo-&gt;mem.start &lt;&lt; PAGE_SHIFT;
+   }
+
+Could be static inline. The warning should point to broken drivers. This
+also gets rid of the ugly shift in the drivers.
+</pre>
+        </blockquote>
+        <pre class="moz-quote-pre" wrap="">
+Big NAK on this. That is exactly what we should NOT do.
+
+See the shift belongs into the driver, because it is driver dependent if
+we work with page or byte offsets.
+
+For amdgpu we for example want to work with byte offsets and TTM should
+not make any assumption about what bo-&gt;mem.start actually contains.
+</pre>
+      </blockquote>
+      <pre class="moz-quote-pre" wrap="">
 OK. What about something like ttm_bo_pg_offset()? Same code without the
-shift. Would also make it clear that it's a page offset.
+shift. Would also make it clear that it's a page offset.</pre>
+    </blockquote>
+    <br>
+    That is a rather good idea. We could name that ttm_bo_man_offset()
+    and put it into ttm_bo_manager.c next to the manager which allocates
+    them.<br>
+    <br>
+    It's just that this manager is not used by everybody, so amdgpu,
+    radeon and nouveau would still need a separate function.<br>
+    <br>
+    Christian.<br>
+    <br>
+    <blockquote type="cite"
+      cite="mid:48a5e3e2-cb9d-8328-1529-3558601ba860@suse.de">
+      <pre class="moz-quote-pre" wrap="">
 
 Best regards
 Thomas
 
->=20
-> Regards,
-> Christian.
->=20
->>
->> Best regards
->> Thomas
->>
->>
->>> diff --git a/drivers/gpu/drm/nouveau/nouveau_bo.c
->>> b/drivers/gpu/drm/nouveau/nouveau_bo.c
->>> index f8015e0318d7..5a6a2af91318 100644
->>> --- a/drivers/gpu/drm/nouveau/nouveau_bo.c
->>> +++ b/drivers/gpu/drm/nouveau/nouveau_bo.c
->>> @@ -1317,6 +1317,10 @@ nouveau_bo_move_ntfy(struct ttm_buffer_object
->>> *bo, bool evict,
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0 list_for_each_entry(vma, &nvbo->vma_list, hea=
-d) {
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
- nouveau_vma_map(vma, mem);
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0 }
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0 if (bo->mem.mm_node)
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 nvbo->off=
-set =3D (new_reg->start << PAGE_SHIFT);
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0 else
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 nvbo->off=
-set =3D 0;
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 } else {
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0 list_for_each_entry(vma, &nvbo->vma_list, hea=
-d) {
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
- WARN_ON(ttm_bo_wait(bo, false, false));
->>>
->>> Regards,
->>>
->>> Nirmoy
->>>
->>>
->>>> Regards,
->>>> Christian.
->>>>
->>>>> Best regards
->>>>> Thomas
->>>>>
->>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ctx->bytes_moved +=3D bo->num=
-_pages << PAGE_SHIFT;
->>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return 0;
->>>>>> =C2=A0=C2=A0 diff --git a/include/drm/ttm/ttm_bo_api.h
->>>>>> b/include/drm/ttm/ttm_bo_api.h
->>>>>> index b9bc1b00142e..d6f39ee5bf5d 100644
->>>>>> --- a/include/drm/ttm/ttm_bo_api.h
->>>>>> +++ b/include/drm/ttm/ttm_bo_api.h
->>>>>> @@ -213,8 +213,6 @@ struct ttm_buffer_object {
->>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * either of these locks=
- held.
->>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 */
->>>>>> =C2=A0=C2=A0 -=C2=A0=C2=A0=C2=A0 uint64_t offset; /* GPU address s=
-pace is independent of CPU
->>>>>> word size */
->>>>>> -
->>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 struct sg_table *sg;
->>>>>> =C2=A0=C2=A0 };
->>>>>> =C2=A0=C2=A0 diff --git a/include/drm/ttm/ttm_bo_driver.h
->>>>>> b/include/drm/ttm/ttm_bo_driver.h
->>>>>> index c9e0fd09f4b2..c8ce6c181abe 100644
->>>>>> --- a/include/drm/ttm/ttm_bo_driver.h
->>>>>> +++ b/include/drm/ttm/ttm_bo_driver.h
->>>>>> @@ -177,7 +177,6 @@ struct ttm_mem_type_manager {
->>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 bool has_type;
->>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 bool use_type;
->>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 uint32_t flags;
->>>>>> -=C2=A0=C2=A0=C2=A0 uint64_t gpu_offset; /* GPU address space is i=
-ndependent of CPU
->>>>>> word size */
->>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 uint64_t size;
->>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 uint32_t available_caching;
->>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 uint32_t default_caching;
->>>>>>
->>> _______________________________________________
->>> dri-devel mailing list
->>> dri-devel@lists.freedesktop.org
->>> https://lists.freedesktop.org/mailman/listinfo/dri-devel
->=20
-> _______________________________________________
-> dri-devel mailing list
-> dri-devel@lists.freedesktop.org
-> https://lists.freedesktop.org/mailman/listinfo/dri-devel
+</pre>
+      <blockquote type="cite">
+        <pre class="moz-quote-pre" wrap="">
+Regards,
+Christian.
 
---=20
-Thomas Zimmermann
-Graphics Driver Developer
-SUSE Software Solutions Germany GmbH
-Maxfeldstr. 5, 90409 N=C3=BCrnberg, Germany
-(HRB 36809, AG N=C3=BCrnberg)
-Gesch=C3=A4ftsf=C3=BChrer: Felix Imend=C3=B6rffer
+</pre>
+        <blockquote type="cite">
+          <pre class="moz-quote-pre" wrap="">
+Best regards
+Thomas
 
 
---2QTwX1RqQT5bd67J6YiyKh3dVgnvqnLoS--
+</pre>
+          <blockquote type="cite">
+            <pre class="moz-quote-pre" wrap="">diff --git a/drivers/gpu/drm/nouveau/nouveau_bo.c
+b/drivers/gpu/drm/nouveau/nouveau_bo.c
+index f8015e0318d7..5a6a2af91318 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_bo.c
++++ b/drivers/gpu/drm/nouveau/nouveau_bo.c
+@@ -1317,6 +1317,10 @@ nouveau_bo_move_ntfy(struct ttm_buffer_object
+*bo, bool evict,
+                 list_for_each_entry(vma, &amp;nvbo-&gt;vma_list, head) {
+                         nouveau_vma_map(vma, mem);
+                 }
++               if (bo-&gt;mem.mm_node)
++                       nvbo-&gt;offset = (new_reg-&gt;start &lt;&lt; PAGE_SHIFT);
++               else
++                       nvbo-&gt;offset = 0;
+         } else {
+                 list_for_each_entry(vma, &amp;nvbo-&gt;vma_list, head) {
+                         WARN_ON(ttm_bo_wait(bo, false, false));
 
---5odbZ9nBjSpbEGJk3Eu9ZnKJP14fWy4mO
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
+Regards,
 
------BEGIN PGP SIGNATURE-----
+Nirmoy
 
-iQEzBAEBCAAdFiEEchf7rIzpz2NEoWjlaA3BHVMLeiMFAl5MLMcACgkQaA3BHVML
-eiNMyAf8CRXNe9aql1MAVwCdSaR9/4hR9LapRxTs2j/wUe55kLexyQ+0cL+yy+uI
-hEb8040nUSfLMezCn37xkbRqSsyS8dFmUSg2yJ/o9/1Tk6BZAUwelAFjGWEb+ttv
-yowsCV4C7e6jd9Eo8+UepmXP15TGEUFhJ3vrLfIfi2tRbivcVu6BD0tie5WBJOzB
-/Ty0eRtvDADEQbXJ9lzU+M0I6M3FVj90WYE/dSc5JvanqjCAbJ6kymmqJ/g8qQZ1
-U+f5SM5UTKVDByGqTittRs4iw2Jq9dT5Mb8wNQpJHTL53sxURAiWsFOYmGmSkK12
-oTPO51lCj/wzY1gRDkxbB0c9RzzgtQ==
-=nFJ7
------END PGP SIGNATURE-----
 
---5odbZ9nBjSpbEGJk3Eu9ZnKJP14fWy4mO--
+</pre>
+            <blockquote type="cite">
+              <pre class="moz-quote-pre" wrap="">Regards,
+Christian.
 
---===============0287957474==
+</pre>
+              <blockquote type="cite">
+                <pre class="moz-quote-pre" wrap="">Best regards
+Thomas
+
+</pre>
+                <blockquote type="cite">
+                  <pre class="moz-quote-pre" wrap="">       ctx-&gt;bytes_moved += bo-&gt;num_pages &lt;&lt; PAGE_SHIFT;
+       return 0;
+   diff --git a/include/drm/ttm/ttm_bo_api.h
+b/include/drm/ttm/ttm_bo_api.h
+index b9bc1b00142e..d6f39ee5bf5d 100644
+--- a/include/drm/ttm/ttm_bo_api.h
++++ b/include/drm/ttm/ttm_bo_api.h
+@@ -213,8 +213,6 @@ struct ttm_buffer_object {
+        * either of these locks held.
+        */
+   -    uint64_t offset; /* GPU address space is independent of CPU
+word size */
+-
+       struct sg_table *sg;
+   };
+   diff --git a/include/drm/ttm/ttm_bo_driver.h
+b/include/drm/ttm/ttm_bo_driver.h
+index c9e0fd09f4b2..c8ce6c181abe 100644
+--- a/include/drm/ttm/ttm_bo_driver.h
++++ b/include/drm/ttm/ttm_bo_driver.h
+@@ -177,7 +177,6 @@ struct ttm_mem_type_manager {
+       bool has_type;
+       bool use_type;
+       uint32_t flags;
+-    uint64_t gpu_offset; /* GPU address space is independent of CPU
+word size */
+       uint64_t size;
+       uint32_t available_caching;
+       uint32_t default_caching;
+
+</pre>
+                </blockquote>
+              </blockquote>
+            </blockquote>
+            <pre class="moz-quote-pre" wrap="">_______________________________________________
+dri-devel mailing list
+<a class="moz-txt-link-abbreviated" href="mailto:dri-devel@lists.freedesktop.org">dri-devel@lists.freedesktop.org</a>
+<a class="moz-txt-link-freetext" href="https://lists.freedesktop.org/mailman/listinfo/dri-devel">https://lists.freedesktop.org/mailman/listinfo/dri-devel</a>
+</pre>
+          </blockquote>
+        </blockquote>
+        <pre class="moz-quote-pre" wrap="">
+_______________________________________________
+dri-devel mailing list
+<a class="moz-txt-link-abbreviated" href="mailto:dri-devel@lists.freedesktop.org">dri-devel@lists.freedesktop.org</a>
+<a class="moz-txt-link-freetext" href="https://lists.freedesktop.org/mailman/listinfo/dri-devel">https://lists.freedesktop.org/mailman/listinfo/dri-devel</a>
+</pre>
+      </blockquote>
+      <pre class="moz-quote-pre" wrap="">
+</pre>
+      <br>
+      <fieldset class="mimeAttachmentHeader"></fieldset>
+      <pre class="moz-quote-pre" wrap="">_______________________________________________
+amd-gfx mailing list
+<a class="moz-txt-link-abbreviated" href="mailto:amd-gfx@lists.freedesktop.org">amd-gfx@lists.freedesktop.org</a>
+<a class="moz-txt-link-freetext" href="https://lists.freedesktop.org/mailman/listinfo/amd-gfx">https://lists.freedesktop.org/mailman/listinfo/amd-gfx</a>
+</pre>
+    </blockquote>
+    <br>
+  </body>
+</html>
+
+--------------720D19E588A50163BC63142C--
+
+--===============1228905272==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -377,4 +573,4 @@ Nouveau mailing list
 Nouveau@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/nouveau
 
---===============0287957474==--
+--===============1228905272==--
