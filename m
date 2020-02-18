@@ -2,51 +2,69 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id ED74415FA1A
-	for <lists+nouveau@lfdr.de>; Fri, 14 Feb 2020 23:59:47 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 06945162CA6
+	for <lists+nouveau@lfdr.de>; Tue, 18 Feb 2020 18:24:08 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 005266FBCD;
-	Fri, 14 Feb 2020 22:59:46 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D9F036EA51;
+	Tue, 18 Feb 2020 17:24:00 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
- [207.211.31.81])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5D75F6FBCD
- for <nouveau@lists.freedesktop.org>; Fri, 14 Feb 2020 22:59:44 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1581721183;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=0pGuMWChJi6Xa7DEXY53QXCC5ld+3Dx8o2IOvHbPSiY=;
- b=bSLG/wQz7TkuObhqGSnAvdF6cIB82dVqbr1Aq+CRA4rRliK1wOwUMesPrj9ufHl9TXot0G
- 0wTIsJkstPW8uMb21zhmApxmDj5gywZpdkd6G/95RiajDAPXUYMlz2+4dFt01CoxeupJ79
- gsQHMM15YrTEMgtmkInM40BhX+SePVI=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-225-Fa_9wl4dM6OJSPBD2JeHOw-1; Fri, 14 Feb 2020 17:59:41 -0500
-X-MC-Unique: Fa_9wl4dM6OJSPBD2JeHOw-1
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
- [10.5.11.11])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id DD38C13E4;
- Fri, 14 Feb 2020 22:59:39 +0000 (UTC)
-Received: from Ruby.bss.redhat.com (dhcp-10-20-1-196.bss.redhat.com
- [10.20.1.196])
- by smtp.corp.redhat.com (Postfix) with ESMTP id B6F0860499;
- Fri, 14 Feb 2020 22:59:38 +0000 (UTC)
-From: Lyude Paul <lyude@redhat.com>
-To: nouveau@lists.freedesktop.org
-Date: Fri, 14 Feb 2020 17:58:56 -0500
-Message-Id: <20200214225910.695210-6-lyude@redhat.com>
-In-Reply-To: <20200214225910.695210-1-lyude@redhat.com>
-References: <20200214225910.695210-1-lyude@redhat.com>
+Received: from mail-wm1-x344.google.com (mail-wm1-x344.google.com
+ [IPv6:2a00:1450:4864:20::344])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B826E6EA4C;
+ Tue, 18 Feb 2020 17:23:59 +0000 (UTC)
+Received: by mail-wm1-x344.google.com with SMTP id q9so3590621wmj.5;
+ Tue, 18 Feb 2020 09:23:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=reply-to:subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-transfer-encoding:content-language;
+ bh=oIbM87yhZF+ZH+jKmPC9oE2Wau1kgCqRY99ToID5pw8=;
+ b=ayyzoamN2CHPt5hFg1f5OgYxGvqJnou/kGM2skI3GAtv41tU0ZLa5T5RET8q65wFqB
+ cEOq1477Fy3x74V+tXX+nCRH4NZ71ht3w+GuxAUrrVLdVNspMQ/wbmJEtVSWtL7AhviQ
+ /tGXs5JUmlOIg4yQPrPem6KBmb9svf0xrAc5FxP7VLmu8cvRtZv82jL+5zfR/P6moHFb
+ tny7y40Du3PFWs6mLAPouot0LrWnRLEnK+vhAuJUpadEtUaX7vVus/s0GkPH07dd1ecO
+ wVW/c5I/hXRm2Yn7pF1JsLO4Ev7w+kkb8HdbxXCZAEgS2mZQGBpT3sKvyipn9ZbV5w2e
+ Mwwg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:reply-to:subject:to:cc:references:from
+ :message-id:date:user-agent:mime-version:in-reply-to
+ :content-transfer-encoding:content-language;
+ bh=oIbM87yhZF+ZH+jKmPC9oE2Wau1kgCqRY99ToID5pw8=;
+ b=THIX3Fh27Hm6NHongbwy+sZAp2J8jbiBHfMA3aABsuaiD6+3bd9dt/1H5BtzeHWvxf
+ KdzFaipFHpSY/1ZD2oXdXMcYUDFqX2yfeCnh2JYvVz+AOAmodg3UHvvWFj2MIqs7IxOO
+ M3G3KfBxkSpYojzAVEqyyeJRGiwfauvAGX2+1WCMwuW3LNCNFfFziEtttxt1K3jygp65
+ 3YbbuqV97XLece1Z86JJR1X8A2SAFpUkGcyqBaAd/xDiW8k46lFHmCGpX8x5fWfmrtGZ
+ 36rxqb0mWU1rYZ6vIaXcimNNHgOvfSeXX0TXMr4AL7zeIzfylFQO1p0yibRAEKJ/DxOF
+ XlFw==
+X-Gm-Message-State: APjAAAU8Pk/4h1nl60uoqlMi/Jvctnenq6l7d29QzqpUu5pRbhbfC3NH
+ cCXnVVI2uobSA7tvrei3dhY=
+X-Google-Smtp-Source: APXvYqxIZID/DtFRQYJUOmV9gZ+q4fabUwqFBKQxU5M8U44dq6XMY/pT/pmHKkIhmpSS35WgLZIBxw==
+X-Received: by 2002:a7b:c0c7:: with SMTP id s7mr4426173wmh.129.1582046638192; 
+ Tue, 18 Feb 2020 09:23:58 -0800 (PST)
+Received: from ?IPv6:2a02:908:1252:fb60:be8a:bd56:1f94:86e7?
+ ([2a02:908:1252:fb60:be8a:bd56:1f94:86e7])
+ by smtp.gmail.com with ESMTPSA id m21sm4268832wmi.27.2020.02.18.09.23.56
+ (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+ Tue, 18 Feb 2020 09:23:57 -0800 (PST)
+To: Nirmoy <nirmodas@amd.com>, =?UTF-8?Q?Christian_K=c3=b6nig?=
+ <christian.koenig@amd.com>, Thomas Zimmermann <tzimmermann@suse.de>,
+ Nirmoy Das <nirmoy.aiemd@gmail.com>, dri-devel@lists.freedesktop.org
+References: <20200217150427.49994-1-nirmoy.das@amd.com>
+ <20200217150427.49994-9-nirmoy.das@amd.com>
+ <c3a20c1b-0520-1995-7445-9e3f3ea77394@suse.de>
+ <9db59846-90b4-2b9a-8200-69297112693a@amd.com>
+ <edc985f1-8856-4d1a-8960-efe4d21b960d@amd.com>
+From: =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>
+Message-ID: <6bc47952-393f-9f19-9c87-5a9a31c18880@gmail.com>
+Date: Tue, 18 Feb 2020 18:23:53 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.9.0
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
-Subject: [Nouveau] [PATCH v2 5/5] drm/nouveau/kms/nv50-: Share DP SST
- mode_valid() handling with MST
+In-Reply-To: <edc985f1-8856-4d1a-8960-efe4d21b960d@amd.com>
+Content-Language: en-US
+Subject: Re: [Nouveau] [PATCH 8/8] drm/ttm: do not keep GPU dependent
+ addresses
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,215 +76,111 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, Manasi Navare <manasi.d.navare@intel.com>,
- Takashi Iwai <tiwai@suse.de>, Sean Paul <seanpaul@chromium.org>,
- Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>,
- Mikita Lipski <mikita.lipski@amd.com>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Reply-To: christian.koenig@amd.com
+Cc: thellstrom@vmware.com, airlied@linux.ie, kenny.ho@amd.com,
+ amd-gfx@lists.freedesktop.org, nirmoy.das@amd.com,
+ linux-graphics-maintainer@vmware.com, bskeggs@redhat.com,
+ nouveau@lists.freedesktop.org, alexander.deucher@amd.com, sean@poorly.run,
+ kraxel@redhat.com
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Currently, the nv50_mstc_mode_valid() function is happy to take any and
-all modes, even the ones we can't actually support sometimes like
-interlaced modes.
-
-Luckily, the only difference between the mode validation that needs to
-be performed for MST vs. SST is that eventually we'll need to check the
-minimum PBN against the MSTB's full PBN capabilities (remember-we don't
-care about the current bw state here). Otherwise, all of the other code
-can be shared.
-
-So, we move all of the common mode validation in
-nouveau_connector_mode_valid() into a separate helper,
-nv50_dp_mode_valid(), and use that from both nv50_mstc_mode_valid() and
-nouveau_connector_mode_valid(). Note that we allow for returning the
-calculated clock that nv50_dp_mode_valid() came up with, since we'll
-eventually want to use that for PBN calculation in
-nv50_mstc_mode_valid().
-
-Signed-off-by: Lyude Paul <lyude@redhat.com>
----
- drivers/gpu/drm/nouveau/dispnv50/disp.c     |  9 ++++-
- drivers/gpu/drm/nouveau/nouveau_connector.c | 41 +++++++++++----------
- drivers/gpu/drm/nouveau/nouveau_connector.h |  5 +++
- drivers/gpu/drm/nouveau/nouveau_dp.c        | 31 ++++++++++++++++
- drivers/gpu/drm/nouveau/nouveau_encoder.h   |  4 ++
- 5 files changed, 70 insertions(+), 20 deletions(-)
-
-diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.c b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-index 020058811831..684e2c081ea2 100644
---- a/drivers/gpu/drm/nouveau/dispnv50/disp.c
-+++ b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-@@ -1051,7 +1051,14 @@ static enum drm_mode_status
- nv50_mstc_mode_valid(struct drm_connector *connector,
- 		     struct drm_display_mode *mode)
- {
--	return MODE_OK;
-+	struct nv50_mstc *mstc = nv50_mstc(connector);
-+	struct nouveau_encoder *outp = mstc->mstm->outp;
-+
-+	/* TODO: calculate the PBN from the dotclock and validate against the
-+	 * MSTB's max possible PBN
-+	 */
-+
-+	return nv50_dp_mode_valid(connector, outp, mode, NULL);
- }
- 
- static int
-diff --git a/drivers/gpu/drm/nouveau/nouveau_connector.c b/drivers/gpu/drm/nouveau/nouveau_connector.c
-index 6dae00da5d7e..a82a51661ca1 100644
---- a/drivers/gpu/drm/nouveau/nouveau_connector.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_connector.c
-@@ -38,6 +38,7 @@
- #include "nouveau_reg.h"
- #include "nouveau_drv.h"
- #include "dispnv04/hw.h"
-+#include "dispnv50/disp.h"
- #include "nouveau_acpi.h"
- 
- #include "nouveau_display.h"
-@@ -1033,6 +1034,24 @@ get_tmds_link_bandwidth(struct drm_connector *connector)
- 		return 112000 * duallink_scale;
- }
- 
-+enum drm_mode_status
-+nouveau_conn_mode_clock_valid(const struct drm_display_mode *mode,
-+			      const unsigned min_clock,
-+			      const unsigned max_clock,
-+			      unsigned *clock)
-+{
-+	if ((mode->flags & DRM_MODE_FLAG_3D_MASK) ==
-+	    DRM_MODE_FLAG_3D_FRAME_PACKING)
-+		*clock *= 2;
-+
-+	if (*clock < min_clock)
-+		return MODE_CLOCK_LOW;
-+	if (*clock > max_clock)
-+		return MODE_CLOCK_HIGH;
-+
-+	return MODE_OK;
-+}
-+
- static enum drm_mode_status
- nouveau_connector_mode_valid(struct drm_connector *connector,
- 			     struct drm_display_mode *mode)
-@@ -1041,7 +1060,6 @@ nouveau_connector_mode_valid(struct drm_connector *connector,
- 	struct nouveau_encoder *nv_encoder = nv_connector->detected_encoder;
- 	struct drm_encoder *encoder = to_drm_encoder(nv_encoder);
- 	unsigned min_clock = 25000, max_clock = min_clock;
--	unsigned clock = mode->clock;
- 
- 	switch (nv_encoder->dcb->type) {
- 	case DCB_OUTPUT_LVDS:
-@@ -1064,29 +1082,14 @@ nouveau_connector_mode_valid(struct drm_connector *connector,
- 	case DCB_OUTPUT_TV:
- 		return get_slave_funcs(encoder)->mode_valid(encoder, mode);
- 	case DCB_OUTPUT_DP:
--		if (mode->flags & DRM_MODE_FLAG_INTERLACE &&
--		    !nv_encoder->caps.dp_interlace)
--			return MODE_NO_INTERLACE;
--
--		max_clock  = nv_encoder->dp.link_nr;
--		max_clock *= nv_encoder->dp.link_bw;
--		clock = clock * (connector->display_info.bpc * 3) / 10;
--		break;
-+		return nv50_dp_mode_valid(connector, nv_encoder, mode, NULL);
- 	default:
- 		BUG();
- 		return MODE_BAD;
- 	}
- 
--	if ((mode->flags & DRM_MODE_FLAG_3D_MASK) == DRM_MODE_FLAG_3D_FRAME_PACKING)
--		clock *= 2;
--
--	if (clock < min_clock)
--		return MODE_CLOCK_LOW;
--
--	if (clock > max_clock)
--		return MODE_CLOCK_HIGH;
--
--	return MODE_OK;
-+	return nouveau_conn_mode_clock_valid(mode, min_clock, max_clock,
-+					     NULL);
- }
- 
- static struct drm_encoder *
-diff --git a/drivers/gpu/drm/nouveau/nouveau_connector.h b/drivers/gpu/drm/nouveau/nouveau_connector.h
-index de84fb4708c7..9e062c7adec8 100644
---- a/drivers/gpu/drm/nouveau/nouveau_connector.h
-+++ b/drivers/gpu/drm/nouveau/nouveau_connector.h
-@@ -195,6 +195,11 @@ int nouveau_conn_atomic_get_property(struct drm_connector *,
- 				     const struct drm_connector_state *,
- 				     struct drm_property *, u64 *);
- struct drm_display_mode *nouveau_conn_native_mode(struct drm_connector *);
-+enum drm_mode_status
-+nouveau_conn_mode_clock_valid(const struct drm_display_mode *,
-+			      const unsigned min_clock,
-+			      const unsigned max_clock,
-+			      unsigned *clock);
- 
- #ifdef CONFIG_DRM_NOUVEAU_BACKLIGHT
- extern int nouveau_backlight_init(struct drm_connector *);
-diff --git a/drivers/gpu/drm/nouveau/nouveau_dp.c b/drivers/gpu/drm/nouveau/nouveau_dp.c
-index 2674f1587457..8a0f7994e1ae 100644
---- a/drivers/gpu/drm/nouveau/nouveau_dp.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_dp.c
-@@ -98,3 +98,34 @@ nouveau_dp_detect(struct nouveau_encoder *nv_encoder)
- 		return NOUVEAU_DP_SST;
- 	return ret;
- }
-+
-+/* TODO:
-+ * - Use the minimum possible BPC here, once we add support for the max bpc
-+ *   property.
-+ * - Validate the mode against downstream port caps (see
-+ *   drm_dp_downstream_max_clock())
-+ * - Validate against the DP caps advertised by the GPU (we don't check these
-+ *   yet)
-+ */
-+enum drm_mode_status
-+nv50_dp_mode_valid(struct drm_connector *connector,
-+		   struct nouveau_encoder *outp,
-+		   const struct drm_display_mode *mode,
-+		   unsigned *out_clock)
-+{
-+	const unsigned min_clock = 25000;
-+	unsigned max_clock, clock;
-+	enum drm_mode_status ret;
-+
-+	if (mode->flags & DRM_MODE_FLAG_INTERLACE && !outp->caps.dp_interlace)
-+		return MODE_NO_INTERLACE;
-+
-+	max_clock = outp->dp.link_nr * outp->dp.link_bw;
-+	clock = mode->clock * (connector->display_info.bpc * 3) / 10;
-+
-+	ret = nouveau_conn_mode_clock_valid(mode, min_clock, max_clock,
-+					    &clock);
-+	if (out_clock)
-+		*out_clock = clock;
-+	return ret;
-+}
-diff --git a/drivers/gpu/drm/nouveau/nouveau_encoder.h b/drivers/gpu/drm/nouveau/nouveau_encoder.h
-index 3217f587eceb..de51733b0476 100644
---- a/drivers/gpu/drm/nouveau/nouveau_encoder.h
-+++ b/drivers/gpu/drm/nouveau/nouveau_encoder.h
-@@ -104,6 +104,10 @@ enum nouveau_dp_status {
- };
- 
- int nouveau_dp_detect(struct nouveau_encoder *);
-+enum drm_mode_status nv50_dp_mode_valid(struct drm_connector *,
-+					struct nouveau_encoder *,
-+					const struct drm_display_mode *,
-+					unsigned *clock);
- 
- struct nouveau_connector *
- nouveau_encoder_connector_get(struct nouveau_encoder *encoder);
--- 
-2.24.1
-
-_______________________________________________
-Nouveau mailing list
-Nouveau@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/nouveau
+QW0gMTguMDIuMjAgdW0gMTg6MTMgc2NocmllYiBOaXJtb3k6Cj4KPiBPbiAyLzE4LzIwIDE6NDQg
+UE0sIENocmlzdGlhbiBLw7ZuaWcgd3JvdGU6Cj4+IEFtIDE4LjAyLjIwIHVtIDEzOjQwIHNjaHJp
+ZWIgVGhvbWFzIFppbW1lcm1hbm46Cj4+PiBIaQo+Pj4KPj4+IEFtIDE3LjAyLjIwIHVtIDE2OjA0
+IHNjaHJpZWIgTmlybW95IERhczoKPj4+PiBHUFUgYWRkcmVzcyBoYW5kbGluZyBpcyBkZXZpY2Ug
+c3BlY2lmaWMgYW5kIHNob3VsZCBiZSBoYW5kbGUgYnkgaXRzIAo+Pj4+IGRldmljZQo+Pj4+IGRy
+aXZlci4KPj4+Pgo+Pj4+IFNpZ25lZC1vZmYtYnk6IE5pcm1veSBEYXMgPG5pcm1veS5kYXNAYW1k
+LmNvbT4KPj4+PiAtLS0KPj4+PiDCoCBkcml2ZXJzL2dwdS9kcm0vdHRtL3R0bV9iby5jwqDCoMKg
+IHwgNyAtLS0tLS0tCj4+Pj4gwqAgaW5jbHVkZS9kcm0vdHRtL3R0bV9ib19hcGkuaMKgwqDCoCB8
+IDIgLS0KPj4+PiDCoCBpbmNsdWRlL2RybS90dG0vdHRtX2JvX2RyaXZlci5oIHwgMSAtCj4+Pj4g
+wqAgMyBmaWxlcyBjaGFuZ2VkLCAxMCBkZWxldGlvbnMoLSkKPj4+Pgo+Pj4+IGRpZmYgLS1naXQg
+YS9kcml2ZXJzL2dwdS9kcm0vdHRtL3R0bV9iby5jIAo+Pj4+IGIvZHJpdmVycy9ncHUvZHJtL3R0
+bS90dG1fYm8uYwo+Pj4+IGluZGV4IDE1MWVkZmQ4ZGU3Ny4uZDU4ODVjZDYwOWEzIDEwMDY0NAo+
+Pj4+IC0tLSBhL2RyaXZlcnMvZ3B1L2RybS90dG0vdHRtX2JvLmMKPj4+PiArKysgYi9kcml2ZXJz
+L2dwdS9kcm0vdHRtL3R0bV9iby5jCj4+Pj4gQEAgLTg1LDcgKzg1LDYgQEAgc3RhdGljIHZvaWQg
+dHRtX21lbV90eXBlX2RlYnVnKHN0cnVjdCAKPj4+PiB0dG1fYm9fZGV2aWNlICpiZGV2LCBzdHJ1
+Y3QgZHJtX3ByaW50ZXIgKnAKPj4+PiDCoMKgwqDCoMKgIGRybV9wcmludGYocCwgIsKgwqDCoCBo
+YXNfdHlwZTogJWRcbiIsIG1hbi0+aGFzX3R5cGUpOwo+Pj4+IMKgwqDCoMKgwqAgZHJtX3ByaW50
+ZihwLCAiwqDCoMKgIHVzZV90eXBlOiAlZFxuIiwgbWFuLT51c2VfdHlwZSk7Cj4+Pj4gwqDCoMKg
+wqDCoCBkcm1fcHJpbnRmKHAsICLCoMKgwqAgZmxhZ3M6IDB4JTA4WFxuIiwgbWFuLT5mbGFncyk7
+Cj4+Pj4gLcKgwqDCoCBkcm1fcHJpbnRmKHAsICLCoMKgwqAgZ3B1X29mZnNldDogMHglMDhsbFhc
+biIsIG1hbi0+Z3B1X29mZnNldCk7Cj4+Pj4gwqDCoMKgwqDCoCBkcm1fcHJpbnRmKHAsICLCoMKg
+wqAgc2l6ZTogJWxsdVxuIiwgbWFuLT5zaXplKTsKPj4+PiDCoMKgwqDCoMKgIGRybV9wcmludGYo
+cCwgIsKgwqDCoCBhdmFpbGFibGVfY2FjaGluZzogMHglMDhYXG4iLCAKPj4+PiBtYW4tPmF2YWls
+YWJsZV9jYWNoaW5nKTsKPj4+PiDCoMKgwqDCoMKgIGRybV9wcmludGYocCwgIsKgwqDCoCBkZWZh
+dWx0X2NhY2hpbmc6IDB4JTA4WFxuIiwgCj4+Pj4gbWFuLT5kZWZhdWx0X2NhY2hpbmcpOwo+Pj4+
+IEBAIC0zNDUsMTIgKzM0NCw2IEBAIHN0YXRpYyBpbnQgdHRtX2JvX2hhbmRsZV9tb3ZlX21lbShz
+dHJ1Y3QgCj4+Pj4gdHRtX2J1ZmZlcl9vYmplY3QgKmJvLAo+Pj4+IMKgIG1vdmVkOgo+Pj4+IMKg
+wqDCoMKgwqAgYm8tPmV2aWN0ZWQgPSBmYWxzZTsKPj4+PiDCoCAtwqDCoMKgIGlmIChiby0+bWVt
+Lm1tX25vZGUpCj4+Pj4gLcKgwqDCoMKgwqDCoMKgIGJvLT5vZmZzZXQgPSAoYm8tPm1lbS5zdGFy
+dCA8PCBQQUdFX1NISUZUKSArCj4+Pj4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgYmRldi0+bWFu
+W2JvLT5tZW0ubWVtX3R5cGVdLmdwdV9vZmZzZXQ7Cj4+Pj4gLcKgwqDCoCBlbHNlCj4+Pj4gLcKg
+wqDCoMKgwqDCoMKgIGJvLT5vZmZzZXQgPSAwOwo+Pj4+IC0KPj4+IEFmdGVyIG1vdmluZyB0aGlz
+IGludG8gdXNlcnMsIHRoZSBlbHNlIGJyYW5jaCBoYXMgYmVlbiBsb3N0LiBJcwo+Pj4gJ2JvLT5t
+ZW0ubW1fbm9kZScgYWx3YXlzIHRydWU/Cj4+Cj4+IEF0IGxlYXN0IGZvciB0aGUgYW1kZ3B1IGFu
+ZCByYWRlb24gdXNlIGNhc2VzLCB5ZXMuCj4+Cj4+IEJ1dCB0aGF0IGlzIGEgcmF0aGVyIGdvb2Qg
+cXVlc3Rpb24gSSBtZWFuIGZvciBpdCBpcyBpbGxlZ2FsIHRvIGdldCAKPj4gdGhlIEdQVSBCTyBh
+ZGRyZXNzIGlmIGl0IGlzIGluYWNjZXNzaWJsZSAoZS5nLiBpbiB0aGUgc3lzdGVtIGRvbWFpbiku
+Cj4+Cj4+IENvdWxkIGJlIHRoYXQgc29tZSBkcml2ZXIgcmVsaWVkIG9uIHRoZSBiZWhhdmlvciB0
+byBnZXQgMCBmb3IgdGhlIAo+PiBzeXN0ZW0gZG9tYWluIGhlcmUuCj4KPiBJIHdvbmRlciBob3cg
+dG8gdmVyaWZ5IHRoYXQgPwoKTm8gaWRlYSwgYnV0IEkgd291bGRuJ3Qgd29ycnkgdG8gbXVjaCBh
+Ym91dCB0aGF0LgoKPgo+IElmIEkgdW5kZXJzdGFuZCBjb3JyZWN0bHk6Cj4KPiAxIHF4bCB1c2Vz
+IGJvLT5vZmZzZXQgb25seSBpbiBxeGxfYm9fcGh5c2ljYWxfYWRkcmVzcygpIHdoaWNoIGlzIG5v
+dCAKPiBpbsKgIHN5c3RlbSBkb21haW4uCj4KPiAyIHVuZm9ydHVuYXRlbHkgSSBjYW4ndCBzYXkg
+dGhlIHNhbWUgZm9yIGJvY2hzIGJ1dCBpdCB3b3JrcyB3aXRoIHRoaXMgCj4gcGF0Y2ggc2VyaWVz
+IHNvIEkgdGhpbmsgYm9jaHMgaXMgZmluZSBhcyB3ZWxsLgo+Cj4gMyB2bXdnZnggdXNlcyBiby0+
+b2Zmc2V0IG9ubHkgd2hlbiBiby0+bWVtLm1lbV90eXBlID09IFRUTV9QTF9WUkFNIHNvIAo+IHZt
+d2dmeCBzaG91bGQgYmUgZmluZS4KPgo+IDQgYW1kZ3B1IGFuZCByYWRlb24gcnVucyB3aXRoICdi
+by0+bWVtLm1tX25vZGUnIGFsd2F5cyB0cnVlCgpUaGF0IHNvdW5kcyBsaWtlIHRob3NlIGZvdXIg
+YXJlIG9rIHRvIG1lLgoKPgo+IEkgYW0gbm90IHN1cmUgYWJvdXTCoCBub3V2ZWF1IGFzIGJvLT5v
+ZmZzZXQgaXMgYmVpbmcgdXNlZCBpbiBtYW55IHBsYWNlcy4KPgo+IEkgY291bGQgcHJvYmFibHkg
+bWlycm9yIHRoZSByZW1vdmVkIGxvZ2ljIHRvIG5vdXZlYXUgYXMKPgo+IGRpZmYgLS1naXQgYS9k
+cml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2JvLmMgCj4gYi9kcml2ZXJzL2dwdS9kcm0v
+bm91dmVhdS9ub3V2ZWF1X2JvLmMKPiBpbmRleCBmODAxNWUwMzE4ZDcuLjVhNmEyYWY5MTMxOCAx
+MDA2NDQKPiAtLS0gYS9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2JvLmMKPiArKysg
+Yi9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2JvLmMKPiBAQCAtMTMxNyw2ICsxMzE3
+LDEwIEBAIG5vdXZlYXVfYm9fbW92ZV9udGZ5KHN0cnVjdCB0dG1fYnVmZmVyX29iamVjdCAKPiAq
+Ym8sIGJvb2wgZXZpY3QsCj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGxpc3RfZm9y
+X2VhY2hfZW50cnkodm1hLCAmbnZiby0+dm1hX2xpc3QsIGhlYWQpIHsKPiDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIG5vdXZlYXVfdm1hX21hcCh2bWEsIG1l
+bSk7Cj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIH0KPiArwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoCBpZiAoYm8tPm1lbS5tbV9ub2RlKQo+ICvCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBudmJvLT5vZmZzZXQgPSAobmV3X3JlZy0+c3RhcnQg
+PDwgUEFHRV9TSElGVCk7Cj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgZWxzZQo+ICvC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBudmJvLT5vZmZzZXQg
+PSAwOwo+IMKgwqDCoMKgwqDCoMKgIH0gZWxzZSB7Cj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgIGxpc3RfZm9yX2VhY2hfZW50cnkodm1hLCAmbnZiby0+dm1hX2xpc3QsIGhlYWQpIHsK
+PiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIFdBUk5fT04o
+dHRtX2JvX3dhaXQoYm8sIGZhbHNlLCBmYWxzZSkpOwoKWWVhaCwgSSB3b3VsZCBnbyBkb3duIHRo
+YXQgcm91dGUuCgpDaHJpc3RpYW4uCgo+Cj4gUmVnYXJkcywKPgo+IE5pcm1veQo+Cj4KPj4KPj4g
+UmVnYXJkcywKPj4gQ2hyaXN0aWFuLgo+Pgo+Pj4KPj4+IEJlc3QgcmVnYXJkcwo+Pj4gVGhvbWFz
+Cj4+Pgo+Pj4+IMKgwqDCoMKgwqAgY3R4LT5ieXRlc19tb3ZlZCArPSBiby0+bnVtX3BhZ2VzIDw8
+IFBBR0VfU0hJRlQ7Cj4+Pj4gwqDCoMKgwqDCoCByZXR1cm4gMDsKPj4+PiDCoCBkaWZmIC0tZ2l0
+IGEvaW5jbHVkZS9kcm0vdHRtL3R0bV9ib19hcGkuaCAKPj4+PiBiL2luY2x1ZGUvZHJtL3R0bS90
+dG1fYm9fYXBpLmgKPj4+PiBpbmRleCBiOWJjMWIwMDE0MmUuLmQ2ZjM5ZWU1YmY1ZCAxMDA2NDQK
+Pj4+PiAtLS0gYS9pbmNsdWRlL2RybS90dG0vdHRtX2JvX2FwaS5oCj4+Pj4gKysrIGIvaW5jbHVk
+ZS9kcm0vdHRtL3R0bV9ib19hcGkuaAo+Pj4+IEBAIC0yMTMsOCArMjEzLDYgQEAgc3RydWN0IHR0
+bV9idWZmZXJfb2JqZWN0IHsKPj4+PiDCoMKgwqDCoMKgwqAgKiBlaXRoZXIgb2YgdGhlc2UgbG9j
+a3MgaGVsZC4KPj4+PiDCoMKgwqDCoMKgwqAgKi8KPj4+PiDCoCAtwqDCoMKgIHVpbnQ2NF90IG9m
+ZnNldDsgLyogR1BVIGFkZHJlc3Mgc3BhY2UgaXMgaW5kZXBlbmRlbnQgb2YgQ1BVIAo+Pj4+IHdv
+cmQgc2l6ZSAqLwo+Pj4+IC0KPj4+PiDCoMKgwqDCoMKgIHN0cnVjdCBzZ190YWJsZSAqc2c7Cj4+
+Pj4gwqAgfTsKPj4+PiDCoCBkaWZmIC0tZ2l0IGEvaW5jbHVkZS9kcm0vdHRtL3R0bV9ib19kcml2
+ZXIuaCAKPj4+PiBiL2luY2x1ZGUvZHJtL3R0bS90dG1fYm9fZHJpdmVyLmgKPj4+PiBpbmRleCBj
+OWUwZmQwOWY0YjIuLmM4Y2U2YzE4MWFiZSAxMDA2NDQKPj4+PiAtLS0gYS9pbmNsdWRlL2RybS90
+dG0vdHRtX2JvX2RyaXZlci5oCj4+Pj4gKysrIGIvaW5jbHVkZS9kcm0vdHRtL3R0bV9ib19kcml2
+ZXIuaAo+Pj4+IEBAIC0xNzcsNyArMTc3LDYgQEAgc3RydWN0IHR0bV9tZW1fdHlwZV9tYW5hZ2Vy
+IHsKPj4+PiDCoMKgwqDCoMKgIGJvb2wgaGFzX3R5cGU7Cj4+Pj4gwqDCoMKgwqDCoCBib29sIHVz
+ZV90eXBlOwo+Pj4+IMKgwqDCoMKgwqAgdWludDMyX3QgZmxhZ3M7Cj4+Pj4gLcKgwqDCoCB1aW50
+NjRfdCBncHVfb2Zmc2V0OyAvKiBHUFUgYWRkcmVzcyBzcGFjZSBpcyBpbmRlcGVuZGVudCBvZiAK
+Pj4+PiBDUFUgd29yZCBzaXplICovCj4+Pj4gwqDCoMKgwqDCoCB1aW50NjRfdCBzaXplOwo+Pj4+
+IMKgwqDCoMKgwqAgdWludDMyX3QgYXZhaWxhYmxlX2NhY2hpbmc7Cj4+Pj4gwqDCoMKgwqDCoCB1
+aW50MzJfdCBkZWZhdWx0X2NhY2hpbmc7Cj4+Pj4KPj4KPiBfX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fXwo+IGFtZC1nZnggbWFpbGluZyBsaXN0Cj4gYW1kLWdm
+eEBsaXN0cy5mcmVlZGVza3RvcC5vcmcKPiBodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9t
+YWlsbWFuL2xpc3RpbmZvL2FtZC1nZngKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fCk5vdXZlYXUgbWFpbGluZyBsaXN0Ck5vdXZlYXVAbGlzdHMuZnJlZWRl
+c2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8v
+bm91dmVhdQo=
