@@ -2,28 +2,28 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2185B16ACD3
-	for <lists+nouveau@lfdr.de>; Mon, 24 Feb 2020 18:13:30 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 021DD16ACBF
+	for <lists+nouveau@lfdr.de>; Mon, 24 Feb 2020 18:13:13 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 097B86E7D5;
-	Mon, 24 Feb 2020 17:13:14 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6BB036E5D1;
+	Mon, 24 Feb 2020 17:13:09 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E09A86EC62;
- Wed, 19 Feb 2020 17:52:22 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5D0696EC64;
+ Wed, 19 Feb 2020 17:52:34 +0000 (UTC)
 Received: from localhost.localdomain (unknown [194.230.155.125])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 9ECE124671;
- Wed, 19 Feb 2020 17:52:10 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 6BEF824672;
+ Wed, 19 Feb 2020 17:52:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1582134742;
- bh=9j4Wqmtnrm+aYUsHCZ4ooV/8lCGRX1ceFNDIpPGSnzM=;
+ s=default; t=1582134754;
+ bh=HDn1c+OCg4Fxwj0uJTYLgnTqOgR4bEcc2OImuEKXcQg=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=nm1WAez1jNKXLSvW7J07Tbu90KQFEkmZity4oGOnVRPXsXM+hDFW5K6Tinm5MRxB0
- WmxFTCqql9bAOnA8rju+Ll6+AjyoFTRt2mVhrLGPAW7sOr9jTILaKYuFP5x34AJbfm
- vB/5/wk1OU7xGWOO0ZojgLGfdpGedlnCP90LLVcU=
+ b=mWeABfyOQaHBfM1Tl4Rl2aedyBAE8jc2SywErFB4jyNFhmM9UdvOiGm3LE3U1nkFc
+ 873iQ9IusUp84dBz6YY/fHsHUBu//dBjjVwQQwc5Wp4QlJOHXM0h8vQp7TnxMb2yLh
+ vk6aSGDTtV8yJjISbJPkkW9wkktuJxNSCdZTdaOY=
 From: Krzysztof Kozlowski <krzk@kernel.org>
 To: Richard Henderson <rth@twiddle.net>,
  Ivan Kokshaysky <ink@jurassic.park.msu.ru>,
@@ -53,13 +53,13 @@ To: Richard Henderson <rth@twiddle.net>,
  linux-wireless@vger.kernel.org, netdev@vger.kernel.org,
  linux-ntb@googlegroups.com, virtualization@lists.linux-foundation.org,
  linux-arch@vger.kernel.org
-Date: Wed, 19 Feb 2020 18:50:05 +0100
-Message-Id: <20200219175007.13627-8-krzk@kernel.org>
+Date: Wed, 19 Feb 2020 18:50:06 +0100
+Message-Id: <20200219175007.13627-9-krzk@kernel.org>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200219175007.13627-1-krzk@kernel.org>
 References: <20200219175007.13627-1-krzk@kernel.org>
 X-Mailman-Approved-At: Mon, 24 Feb 2020 17:13:08 +0000
-Subject: [Nouveau] [RESEND PATCH v2 7/9] drm/nouveau: Constify ioreadX()
+Subject: [Nouveau] [RESEND PATCH v2 8/9] media: fsl-viu: Constify ioreadX()
  iomem argument (as in generic implementation)
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -88,22 +88,22 @@ consistency among architectures.
 
 Signed-off-by: Krzysztof Kozlowski <krzk@kernel.org>
 ---
- drivers/gpu/drm/nouveau/nouveau_bo.c | 2 +-
+ drivers/media/platform/fsl-viu.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_bo.c b/drivers/gpu/drm/nouveau/nouveau_bo.c
-index 1b62ccc57aef..d95bdd65dbca 100644
---- a/drivers/gpu/drm/nouveau/nouveau_bo.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_bo.c
-@@ -613,7 +613,7 @@ nouveau_bo_rd32(struct nouveau_bo *nvbo, unsigned index)
- 	mem += index;
+diff --git a/drivers/media/platform/fsl-viu.c b/drivers/media/platform/fsl-viu.c
+index 81a8faedbba6..991d9dc82749 100644
+--- a/drivers/media/platform/fsl-viu.c
++++ b/drivers/media/platform/fsl-viu.c
+@@ -34,7 +34,7 @@
+ /* Allow building this driver with COMPILE_TEST */
+ #if !defined(CONFIG_PPC) && !defined(CONFIG_MICROBLAZE)
+ #define out_be32(v, a)	iowrite32be(a, (void __iomem *)v)
+-#define in_be32(a)	ioread32be((void __iomem *)a)
++#define in_be32(a)	ioread32be((const void __iomem *)a)
+ #endif
  
- 	if (is_iomem)
--		return ioread32_native((void __force __iomem *)mem);
-+		return ioread32_native((const void __force __iomem *)mem);
- 	else
- 		return *mem;
- }
+ #define BUFFER_TIMEOUT		msecs_to_jiffies(500)  /* 0.5 seconds */
 -- 
 2.17.1
 
