@@ -1,62 +1,55 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 024D516540A
-	for <lists+nouveau@lfdr.de>; Thu, 20 Feb 2020 02:10:56 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id E214F166434
+	for <lists+nouveau@lfdr.de>; Thu, 20 Feb 2020 18:19:33 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6DBAD6E892;
-	Thu, 20 Feb 2020 01:10:52 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5158D6EE04;
+	Thu, 20 Feb 2020 17:19:32 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from hqnvemgate26.nvidia.com (hqnvemgate26.nvidia.com
- [216.228.121.65])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1AD706E892
- for <nouveau@lists.freedesktop.org>; Thu, 20 Feb 2020 01:10:52 +0000 (UTC)
-Received: from hqpgpgate101.nvidia.com (Not Verified[216.228.121.13]) by
- hqnvemgate26.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
- id <B5e4ddc8d0001>; Wed, 19 Feb 2020 17:10:37 -0800
-Received: from hqmail.nvidia.com ([172.20.161.6])
- by hqpgpgate101.nvidia.com (PGP Universal service);
- Wed, 19 Feb 2020 17:10:50 -0800
-X-PGP-Universal: processed;
- by hqpgpgate101.nvidia.com on Wed, 19 Feb 2020 17:10:50 -0800
-Received: from rcampbell-dev.nvidia.com (172.20.13.39) by HQMAIL107.nvidia.com
- (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3;
- Thu, 20 Feb 2020 01:10:45 +0000
-To: Jason Gunthorpe <jgg@mellanox.com>
-References: <20200113224703.5917-1-rcampbell@nvidia.com>
- <20200113224703.5917-6-rcampbell@nvidia.com>
- <20200114125957.GO20978@mellanox.com>
- <5845f50e-8bc0-8068-ee21-4f910beb1255@nvidia.com>
- <20200116160002.GL20978@mellanox.com>
- <01adb7dd-589e-2cde-4fa9-68baa44c0976@nvidia.com>
- <20200116202151.GS20978@mellanox.com>
-From: Ralph Campbell <rcampbell@nvidia.com>
-X-Nvconfidentiality: public
-Message-ID: <770d0aab-726a-12b0-944d-ef71722ad587@nvidia.com>
-Date: Wed, 19 Feb 2020 17:10:45 -0800
+Received: from sender4-of-o58.zoho.com (sender4-of-o58.zoho.com
+ [136.143.188.58])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A863B6EE04;
+ Thu, 20 Feb 2020 17:19:30 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; t=1582219169; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=TykvQRtLa6qKlvUpanYdzcziqL4aJysJiSaEO3f43+VQQVZNXKt+NaL/h3fNlqejjxzOTw/BEpn5L1JUEN9t/jGnUgoNHpnFscjpSYnuS9i5adRJ4nOaUZmyClIK0+CeYjktaZo91DiYT5H7AmTNmp9f4CMbjDhCvVICrrtC+ek=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1582219169;
+ h=Content-Type:Date:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:To;
+ bh=z3eev3rxdU7OtsSnvVilC23PC1pkssIitHEb4D8Hojw=; 
+ b=SgH5iM3wn55HVdhB4YGYZ8omjvBHsnkqMu6rX5MYSzwIOjBsl79E+Kq9guq9nEctcAUQ5uTAi41GVX+QASLAYOZK+mQ0Z1ISYYTXxEy5l1GJI+kI3bKgg4sRCwhbo+iv+8zJASiXAjRHsDCBXf1khnNMcex/i/DedPnK0z2VbX0=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+ dkim=pass  header.i=qubes-os.org;
+ spf=pass  smtp.mailfrom=frederic.pierret@qubes-os.org;
+ dmarc=pass header.from=<frederic.pierret@qubes-os.org>
+ header.from=<frederic.pierret@qubes-os.org>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1582219169; 
+ s=s; d=qubes-os.org; i=frederic.pierret@qubes-os.org;
+ h=Subject:From:To:References:Message-ID:Date:MIME-Version:In-Reply-To:Content-Type;
+ bh=z3eev3rxdU7OtsSnvVilC23PC1pkssIitHEb4D8Hojw=;
+ b=dxG7rdJcYmWHT/KkvqLHVFgOiYsAEmpT8DnTrTFMy90rAiAlAvXp4vSjJgm96reZ
+ avFTQquYqJgqlBFdhY7DVhnTUjFqD0JmXP7JNtGOkSy4PKyngryqanimVf7urB6Tyl6
+ iWk+gygYCf2eAotV5SNJl/Tc6NGz1zfvi0zRSn4M=
+Received: from [10.137.0.45] (82.102.18.6 [82.102.18.6]) by mx.zohomail.com
+ with SMTPS id 1582219167645457.9527982400665;
+ Thu, 20 Feb 2020 09:19:27 -0800 (PST)
+From: =?UTF-8?B?RnLDqWTDqXJpYyBQaWVycmV0?= <frederic.pierret@qubes-os.org>
+To: bskeggs@redhat.com, airlied@linux.ie, daniel@ffwll.ch,
+ dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org
+References: <dac89843-5258-5bed-ee86-7038e94e56da@qubes-os.org>
+Message-ID: <c94ce223-56d5-e31a-2a2c-59defb988b28@qubes-os.org>
+Date: Thu, 20 Feb 2020 18:19:24 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.1.0
+ Thunderbird/68.2.2
 MIME-Version: 1.0
-In-Reply-To: <20200116202151.GS20978@mellanox.com>
-X-Originating-IP: [172.20.13.39]
-X-ClientProxiedBy: HQMAIL107.nvidia.com (172.20.187.13) To
- HQMAIL107.nvidia.com (172.20.187.13)
-Content-Language: en-US
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
- t=1582161037; bh=j5Kl9BSF2vTH61P01nHLq9s0kQA2Bt6KxZQ3tGK3SiY=;
- h=X-PGP-Universal:Subject:To:CC:References:From:X-Nvconfidentiality:
- Message-ID:Date:User-Agent:MIME-Version:In-Reply-To:
- X-Originating-IP:X-ClientProxiedBy:Content-Type:Content-Language:
- Content-Transfer-Encoding;
- b=mymMtlTV6FEpRSSfBKo8/J22MnNOMqhoctTnXKtoJNXQCGrFu2vD/UZWIgrhZKqx2
- yZX/Olb+DHLawdffw5s7tzbLtq7L3rLMA1whAzYQmLJpjpty6SZQAOavs1iUYrF1rT
- HTrA2u4UhZkBa3u67AZuNNObcH0GFzqZuWVoCrb3FMeLJawDhdGSPpaALw7Im9razI
- cdAiQcigaPwrLsRhllcboZoB++U+H935O4KnvWag0CdyBtpgYEPvHrVhtmgYCjF3/O
- +FBDcYWSeu5STzMh3DIwhAnhoJpFjvDMzrkPN0aVKcAQLw28WJpkfqGpDZrzCncRtb
- +ixSSVVng+RzQ==
-Subject: Re: [Nouveau] [PATCH v6 5/6] nouveau: use new mmu interval notifiers
+In-Reply-To: <dac89843-5258-5bed-ee86-7038e94e56da@qubes-os.org>
+X-Zoho-Virus-Status: 1
+X-ZohoMailClient: External
+Subject: Re: [Nouveau] [PATCH] nv50_disp_chan_mthd: ensure mthd is not NULL
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,60 +61,104 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: "linux-rdma@vger.kernel.org" <linux-rdma@vger.kernel.org>,
- "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
- "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- "linux-mm@kvack.org" <linux-mm@kvack.org>, Ben Skeggs <bskeggs@redhat.com>,
- "linux-kselftest@vger.kernel.org" <linux-kselftest@vger.kernel.org>,
- Andrew Morton <akpm@linux-foundation.org>, Shuah Khan <shuah@kernel.org>,
- Christoph Hellwig <hch@lst.de>
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
+Content-Type: multipart/mixed; boundary="===============1699095104=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--===============1699095104==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="w32BqMJ8HV23tU4jg2Bb4RtNFGXOHFoba"
 
-On 1/16/20 12:21 PM, Jason Gunthorpe wrote:
-> On Thu, Jan 16, 2020 at 12:16:30PM -0800, Ralph Campbell wrote:
->> Can you point me to the latest ODP code? Seems like my understanding is
->> quite off.
-> 
-> https://elixir.bootlin.com/linux/v5.5-rc6/source/drivers/infiniband/hw/mlx5/odp.c
-> 
-> Look for the word 'implicit'
-> 
-> mlx5_ib_invalidate_range() releases the interval_notifier when there are
-> no populated shadow PTEs in its leaf
-> 
-> pagefault_implicit_mr() creates an interval_notifier that covers the
-> level in the page table that needs population. Notice it just uses an
-> unlocked xa_load to find the page table level.
-> 
-> The locking is pretty tricky as it relies on RCU, but the fault flow
-> is fairly lightweight.
-> 
-> Jason
-> 
-Thanks for the information, Jason.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--w32BqMJ8HV23tU4jg2Bb4RtNFGXOHFoba
+Content-Type: multipart/mixed; boundary="8CHATbdN7dX0VKeJHOzRWHdG37WhI5eiD"
 
-I'm still interested in finding a way to support range based hints to device drivers.
-madvise() looks like it only sets a bit in vma->vm_flags or acts on the
-advice immediately. mbind() and set_mempolicy() only work with CPUs and memory
-with NUMA a node number. What I'm looking for is a way for the device to know
-whether to migrate pages to device private memory on a fault, whether to duplicate
-read-only pages in device private memory, or remote map/access a page instead of migrating it.
-For example, there is a working draft extension to OpenCL,
-https://github.com/intel/llvm/blob/sycl/sycl/doc/extensions/USM/cl_intel_unified_shared_memory.asciidoc
-that could provide a way to specify this sort of advice.
-C++ is also looking at extentions for specifying affinity attributes.
-In any case, these are probably a long ways off before being finalized and implemented.
+--8CHATbdN7dX0VKeJHOzRWHdG37WhI5eiD
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
 
-I also have some changes to support THP migration to device private memory but that
-will require updating nouveau to use 2MB TLB mappings.
+Hi,
+Is anything missing here? How can I get this merged?
 
-In the mean time, I can update the HMM self tests to do something like ODP without
-changing mm/mmu_notifier.c but I don't think I can easily change nouveau to that model.
+Best regards,
+Fr=C3=A9d=C3=A9ric Pierret
+
+On 2020-02-08 20:43, Fr=C3=A9d=C3=A9ric Pierret wrote:
+> Pointer to structure array is assumed not NULL by default. It has
+> the consequence to raise a kernel panic when it's not the case.
+>=20
+> Basically, running at least a RTX2080TI on Xen makes a bad mmio error
+> which causes having 'mthd' pointer to be NULL in 'channv50.c'. From the=
+
+> code, it's assumed to be not NULL by accessing directly 'mthd->data[0]'=
+
+> which is the reason of the kernel panic. Simply check if the pointer
+> is not NULL before continuing.
+>=20
+> BugLink: https://bugzilla.kernel.org/show_bug.cgi?id=3D206299
+> Cc: stable@vger.kernel.org
+> Signed-off-by: Fr=C3=A9d=C3=A9ric Pierret (fepitre) <frederic.pierret@q=
+ubes-os.org>
+> ---
+>  drivers/gpu/drm/nouveau/nvkm/engine/disp/channv50.c | 2 ++
+>  1 file changed, 2 insertions(+)
+>=20
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/channv50.c b/driv=
+ers/gpu/drm/nouveau/nvkm/engine/disp/channv50.c
+> index bcf32d92ee5a..50e3539f33d2 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/channv50.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/channv50.c
+> @@ -74,6 +74,8 @@ nv50_disp_chan_mthd(struct nv50_disp_chan *chan, int =
+debug)
+> =20
+>  	if (debug > subdev->debug)
+>  		return;
+> +	if (!mthd)
+> +		return;
+> =20
+>  	for (i =3D 0; (list =3D mthd->data[i].mthd) !=3D NULL; i++) {
+>  		u32 base =3D chan->head * mthd->addr;
+>=20
+
+
+--8CHATbdN7dX0VKeJHOzRWHdG37WhI5eiD--
+
+--w32BqMJ8HV23tU4jg2Bb4RtNFGXOHFoba
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEEn6ZLkvlecGvyjiymSEAQtc3FduIFAl5Ov5wACgkQSEAQtc3F
+duLSHw/+P2mgoCNKTxx7otQopMCHby1vNGeAhUhLrEBEcyH+s8HUw0PKa+sMcibJ
+VBNFWivU/COlSowQWklTL3E21wTZNf7Wjw4Bn6R/G7GHYbEdHo/8o7kwcPT8+2J6
+eF+AttjMc2wYlqiGea0PULs3plbDpJBtJXVzQG//5TVZXiVNF1RF+sCH0jyqfLfn
+axvuE8I8kJO/yN6gstsumDzBdXA6TtgzVyJDs2KHm3P5z7OdECk9/UJDtp70Gsr7
+bfBcAneBZNCPAekqB1VOl5399OYEINbRlyycb1CKtfkqW0Ydk24dsA2ymw9lairn
+yi/3gOAI+cmSsuWK9xFBRgjtXmrduBhD68UtLGno5JA4qoKhYryGHyIhf5EGbQvA
+aBTVrdvRQwlu9sipUvUYWeVHZ/nn7D3n3RVUXZ/lf8svoVfl4AeMqhI3+poDrG2C
+cNHRiW8pwh/g6qoYbZjvCkI/A4gftqGQGZwJf+IvOGZz7+cO16d9KUA9nYQY7wRq
+f7hVRbA5TgM62VI05uWLmdUGnbmNJh8T698dm2q/ghf2TIt6pbxPfCjEUtw8a0jH
+Pp0u0kvclJ5pFAdOXHSqxs9tdZEbmMrdj1APXn6GhYY0cjaf59o08bJ9+AQtxFgB
+OfX8vtDOrtQR7ROHp/rKpRy1qX1wB6ZIQnAIan93/vD26Dxl9lY=
+=V2u5
+-----END PGP SIGNATURE-----
+
+--w32BqMJ8HV23tU4jg2Bb4RtNFGXOHFoba--
+
+--===============1699095104==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/nouveau
+
+--===============1699095104==--
