@@ -2,55 +2,61 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 39E7D163CC2
-	for <lists+nouveau@lfdr.de>; Wed, 19 Feb 2020 06:39:34 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 024D516540A
+	for <lists+nouveau@lfdr.de>; Thu, 20 Feb 2020 02:10:56 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9FD2F6E431;
-	Wed, 19 Feb 2020 05:39:32 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6DBAD6E892;
+	Thu, 20 Feb 2020 01:10:52 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-yb1-xb42.google.com (mail-yb1-xb42.google.com
- [IPv6:2607:f8b0:4864:20::b42])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D91866E431;
- Wed, 19 Feb 2020 05:39:31 +0000 (UTC)
-Received: by mail-yb1-xb42.google.com with SMTP id k69so11804899ybk.4;
- Tue, 18 Feb 2020 21:39:31 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=d6qeSHn0R8eb7oUSh15TXKxMRyNgkmSfzopxI3yp3FM=;
- b=RcJvnBF7TNNpu0kEihSEJQdZW95fpfOgZ8O3iNQbqQAgROzILUpdP+uVsm/rcl1j+J
- pjHjdUQD8jTt8MxZmqU2s6sl3TKCO/vW71rwrEK/UNzllPgXKlnfv5KaYhTHQQZhpq0q
- JzCLLmRVQWZMfwLNHqdwVTUvsX+P25oawWZv8lgqmJqQxFnKmdRsV7u5bPjM+hGEOwQW
- jbjIL2+JuT+a7/TcxjKhX4/fI4aVB7FYyLDvxHe0mCM5rGF8gzWRiVHauRngciMbMnGR
- 5cuP6muvicfgeDgvGntE9eVb9lOsAigqLa/NwsuMIcUXZjY07CHLO43xs3HWFA8ufjwd
- gpMg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=d6qeSHn0R8eb7oUSh15TXKxMRyNgkmSfzopxI3yp3FM=;
- b=fGE1gYTPwe207ElgkMMNoQFB4m9fQflqPoAF40K1hOZ7/hWQleSVmZf6RTr2LMoZgP
- Ly9VpiOom6bGJtt/oGmNhokYMadeIjXyy2ZF42ojQCb3nYhvXCyc9I1k01UHZ6FeXXSs
- YdqheUyLRno9oRKXre4uGZUOfV4DQl7mUnj+HYnQuHG8FUAocNWmmQ5xoPvi31kpd3OH
- EJxHdTS6e/i+Kv7R9Q8lhndwtqGNXQxzFPhW9G9Q/XoPHQT5fHAQ4Orw6c+GRydf/7N5
- zaBSG1t4BXK83g7AFZSjEVFFjaO/oknuUZwCVy/QSUDtiFrrnV+7Tu11QPHeMAs2Tvx8
- OnMg==
-X-Gm-Message-State: APjAAAUcBf6qifxd/XiAGRva6soMwOIFMx6MSddioed8waxx5Nui3JFd
- zGaYfEzpsobdWCMu8uEtVRZoZL91F91nO/5kZsU=
-X-Google-Smtp-Source: APXvYqw7XK3ql/hUSl5JmamnqXChYaKmxXHXPH/aXXM9HWgu2rFUFD7ZrvlJDTyhaeZmP6y0+qG8Ip7GA1hGQ3aztoo=
-X-Received: by 2002:a25:42ca:: with SMTP id
- p193mr20880605yba.147.1582090771031; 
- Tue, 18 Feb 2020 21:39:31 -0800 (PST)
+Received: from hqnvemgate26.nvidia.com (hqnvemgate26.nvidia.com
+ [216.228.121.65])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1AD706E892
+ for <nouveau@lists.freedesktop.org>; Thu, 20 Feb 2020 01:10:52 +0000 (UTC)
+Received: from hqpgpgate101.nvidia.com (Not Verified[216.228.121.13]) by
+ hqnvemgate26.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
+ id <B5e4ddc8d0001>; Wed, 19 Feb 2020 17:10:37 -0800
+Received: from hqmail.nvidia.com ([172.20.161.6])
+ by hqpgpgate101.nvidia.com (PGP Universal service);
+ Wed, 19 Feb 2020 17:10:50 -0800
+X-PGP-Universal: processed;
+ by hqpgpgate101.nvidia.com on Wed, 19 Feb 2020 17:10:50 -0800
+Received: from rcampbell-dev.nvidia.com (172.20.13.39) by HQMAIL107.nvidia.com
+ (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3;
+ Thu, 20 Feb 2020 01:10:45 +0000
+To: Jason Gunthorpe <jgg@mellanox.com>
+References: <20200113224703.5917-1-rcampbell@nvidia.com>
+ <20200113224703.5917-6-rcampbell@nvidia.com>
+ <20200114125957.GO20978@mellanox.com>
+ <5845f50e-8bc0-8068-ee21-4f910beb1255@nvidia.com>
+ <20200116160002.GL20978@mellanox.com>
+ <01adb7dd-589e-2cde-4fa9-68baa44c0976@nvidia.com>
+ <20200116202151.GS20978@mellanox.com>
+From: Ralph Campbell <rcampbell@nvidia.com>
+X-Nvconfidentiality: public
+Message-ID: <770d0aab-726a-12b0-944d-ef71722ad587@nvidia.com>
+Date: Wed, 19 Feb 2020 17:10:45 -0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.1.0
 MIME-Version: 1.0
-References: <20200218172821.18378-1-wambui.karugax@gmail.com>
- <20200218172821.18378-6-wambui.karugax@gmail.com>
-In-Reply-To: <20200218172821.18378-6-wambui.karugax@gmail.com>
-From: Ben Skeggs <skeggsb@gmail.com>
-Date: Wed, 19 Feb 2020 15:39:20 +1000
-Message-ID: <CACAvsv4fWZWqQozMFPnyk7nXVyGPvszhY33qEQ74D0eAHofp2Q@mail.gmail.com>
-To: Wambui Karuga <wambui.karugax@gmail.com>
-Subject: Re: [Nouveau] [PATCH] drm/nouveau: remove checks for return value
- of debugfs functions
+In-Reply-To: <20200116202151.GS20978@mellanox.com>
+X-Originating-IP: [172.20.13.39]
+X-ClientProxiedBy: HQMAIL107.nvidia.com (172.20.187.13) To
+ HQMAIL107.nvidia.com (172.20.187.13)
+Content-Language: en-US
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
+ t=1582161037; bh=j5Kl9BSF2vTH61P01nHLq9s0kQA2Bt6KxZQ3tGK3SiY=;
+ h=X-PGP-Universal:Subject:To:CC:References:From:X-Nvconfidentiality:
+ Message-ID:Date:User-Agent:MIME-Version:In-Reply-To:
+ X-Originating-IP:X-ClientProxiedBy:Content-Type:Content-Language:
+ Content-Transfer-Encoding;
+ b=mymMtlTV6FEpRSSfBKo8/J22MnNOMqhoctTnXKtoJNXQCGrFu2vD/UZWIgrhZKqx2
+ yZX/Olb+DHLawdffw5s7tzbLtq7L3rLMA1whAzYQmLJpjpty6SZQAOavs1iUYrF1rT
+ HTrA2u4UhZkBa3u67AZuNNObcH0GFzqZuWVoCrb3FMeLJawDhdGSPpaALw7Im9razI
+ cdAiQcigaPwrLsRhllcboZoB++U+H935O4KnvWag0CdyBtpgYEPvHrVhtmgYCjF3/O
+ +FBDcYWSeu5STzMh3DIwhAnhoJpFjvDMzrkPN0aVKcAQLw28WJpkfqGpDZrzCncRtb
+ +ixSSVVng+RzQ==
+Subject: Re: [Nouveau] [PATCH v6 5/6] nouveau: use new mmu interval notifiers
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -62,71 +68,59 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Dave Airlie <airlied@linux.ie>, ML nouveau <nouveau@lists.freedesktop.org>,
- LKML <linux-kernel@vger.kernel.org>,
- ML dri-devel <dri-devel@lists.freedesktop.org>,
- Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Content-Type: text/plain; charset="us-ascii"
+Cc: "linux-rdma@vger.kernel.org" <linux-rdma@vger.kernel.org>,
+ "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "linux-mm@kvack.org" <linux-mm@kvack.org>, Ben Skeggs <bskeggs@redhat.com>,
+ "linux-kselftest@vger.kernel.org" <linux-kselftest@vger.kernel.org>,
+ Andrew Morton <akpm@linux-foundation.org>, Shuah Khan <shuah@kernel.org>,
+ Christoph Hellwig <hch@lst.de>
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, 19 Feb 2020 at 03:28, Wambui Karuga <wambui.karugax@gmail.com> wrote:
->
-> As there is no need to check for the return value of debugfs_create_file
-> and drm_debugfs_create_files, remove unnecessary checks and error
-> handling in nouveau_drm_debugfs_init.
-Thanks!
 
->
-> Signed-off-by: Wambui Karuga <wambui.karugax@gmail.com>
-> ---
->  drivers/gpu/drm/nouveau/nouveau_debugfs.c | 20 ++++++++------------
->  1 file changed, 8 insertions(+), 12 deletions(-)
->
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_debugfs.c b/drivers/gpu/drm/nouveau/nouveau_debugfs.c
-> index 7dfbbbc1beea..15a3d40edf02 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_debugfs.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_debugfs.c
-> @@ -222,22 +222,18 @@ nouveau_drm_debugfs_init(struct drm_minor *minor)
->  {
->         struct nouveau_drm *drm = nouveau_drm(minor->dev);
->         struct dentry *dentry;
-> -       int i, ret;
-> +       int i;
->
->         for (i = 0; i < ARRAY_SIZE(nouveau_debugfs_files); i++) {
-> -               dentry = debugfs_create_file(nouveau_debugfs_files[i].name,
-> -                                            S_IRUGO | S_IWUSR,
-> -                                            minor->debugfs_root, minor->dev,
-> -                                            nouveau_debugfs_files[i].fops);
-> -               if (!dentry)
-> -                       return -ENOMEM;
-> +               debugfs_create_file(nouveau_debugfs_files[i].name,
-> +                                   S_IRUGO | S_IWUSR,
-> +                                   minor->debugfs_root, minor->dev,
-> +                                   nouveau_debugfs_files[i].fops);
->         }
->
-> -       ret = drm_debugfs_create_files(nouveau_debugfs_list,
-> -                                      NOUVEAU_DEBUGFS_ENTRIES,
-> -                                      minor->debugfs_root, minor);
-> -       if (ret)
-> -               return ret;
-> +       drm_debugfs_create_files(nouveau_debugfs_list,
-> +                                NOUVEAU_DEBUGFS_ENTRIES,
-> +                                minor->debugfs_root, minor);
->
->         /* Set the size of the vbios since we know it, and it's confusing to
->          * userspace if it wants to seek() but the file has a length of 0
-> --
-> 2.25.0
->
-> _______________________________________________
-> Nouveau mailing list
-> Nouveau@lists.freedesktop.org
-> https://lists.freedesktop.org/mailman/listinfo/nouveau
+On 1/16/20 12:21 PM, Jason Gunthorpe wrote:
+> On Thu, Jan 16, 2020 at 12:16:30PM -0800, Ralph Campbell wrote:
+>> Can you point me to the latest ODP code? Seems like my understanding is
+>> quite off.
+> 
+> https://elixir.bootlin.com/linux/v5.5-rc6/source/drivers/infiniband/hw/mlx5/odp.c
+> 
+> Look for the word 'implicit'
+> 
+> mlx5_ib_invalidate_range() releases the interval_notifier when there are
+> no populated shadow PTEs in its leaf
+> 
+> pagefault_implicit_mr() creates an interval_notifier that covers the
+> level in the page table that needs population. Notice it just uses an
+> unlocked xa_load to find the page table level.
+> 
+> The locking is pretty tricky as it relies on RCU, but the fault flow
+> is fairly lightweight.
+> 
+> Jason
+> 
+Thanks for the information, Jason.
+
+I'm still interested in finding a way to support range based hints to device drivers.
+madvise() looks like it only sets a bit in vma->vm_flags or acts on the
+advice immediately. mbind() and set_mempolicy() only work with CPUs and memory
+with NUMA a node number. What I'm looking for is a way for the device to know
+whether to migrate pages to device private memory on a fault, whether to duplicate
+read-only pages in device private memory, or remote map/access a page instead of migrating it.
+For example, there is a working draft extension to OpenCL,
+https://github.com/intel/llvm/blob/sycl/sycl/doc/extensions/USM/cl_intel_unified_shared_memory.asciidoc
+that could provide a way to specify this sort of advice.
+C++ is also looking at extentions for specifying affinity attributes.
+In any case, these are probably a long ways off before being finalized and implemented.
+
+I also have some changes to support THP migration to device private memory but that
+will require updating nouveau to use 2MB TLB mappings.
+
+In the mean time, I can update the HMM self tests to do something like ODP without
+changing mm/mmu_notifier.c but I don't think I can easily change nouveau to that model.
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
