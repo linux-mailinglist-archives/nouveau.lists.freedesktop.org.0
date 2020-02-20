@@ -1,54 +1,44 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id E214F166434
-	for <lists+nouveau@lfdr.de>; Thu, 20 Feb 2020 18:19:33 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id E88A21664EB
+	for <lists+nouveau@lfdr.de>; Thu, 20 Feb 2020 18:33:03 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5158D6EE04;
-	Thu, 20 Feb 2020 17:19:32 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D62D46E216;
+	Thu, 20 Feb 2020 17:32:58 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from sender4-of-o58.zoho.com (sender4-of-o58.zoho.com
- [136.143.188.58])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A863B6EE04;
- Thu, 20 Feb 2020 17:19:30 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; t=1582219169; cv=none; 
- d=zohomail.com; s=zohoarc; 
- b=TykvQRtLa6qKlvUpanYdzcziqL4aJysJiSaEO3f43+VQQVZNXKt+NaL/h3fNlqejjxzOTw/BEpn5L1JUEN9t/jGnUgoNHpnFscjpSYnuS9i5adRJ4nOaUZmyClIK0+CeYjktaZo91DiYT5H7AmTNmp9f4CMbjDhCvVICrrtC+ek=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1582219169;
- h=Content-Type:Date:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:To;
- bh=z3eev3rxdU7OtsSnvVilC23PC1pkssIitHEb4D8Hojw=; 
- b=SgH5iM3wn55HVdhB4YGYZ8omjvBHsnkqMu6rX5MYSzwIOjBsl79E+Kq9guq9nEctcAUQ5uTAi41GVX+QASLAYOZK+mQ0Z1ISYYTXxEy5l1GJI+kI3bKgg4sRCwhbo+iv+8zJASiXAjRHsDCBXf1khnNMcex/i/DedPnK0z2VbX0=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
- dkim=pass  header.i=qubes-os.org;
- spf=pass  smtp.mailfrom=frederic.pierret@qubes-os.org;
- dmarc=pass header.from=<frederic.pierret@qubes-os.org>
- header.from=<frederic.pierret@qubes-os.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1582219169; 
- s=s; d=qubes-os.org; i=frederic.pierret@qubes-os.org;
- h=Subject:From:To:References:Message-ID:Date:MIME-Version:In-Reply-To:Content-Type;
- bh=z3eev3rxdU7OtsSnvVilC23PC1pkssIitHEb4D8Hojw=;
- b=dxG7rdJcYmWHT/KkvqLHVFgOiYsAEmpT8DnTrTFMy90rAiAlAvXp4vSjJgm96reZ
- avFTQquYqJgqlBFdhY7DVhnTUjFqD0JmXP7JNtGOkSy4PKyngryqanimVf7urB6Tyl6
- iWk+gygYCf2eAotV5SNJl/Tc6NGz1zfvi0zRSn4M=
-Received: from [10.137.0.45] (82.102.18.6 [82.102.18.6]) by mx.zohomail.com
- with SMTPS id 1582219167645457.9527982400665;
- Thu, 20 Feb 2020 09:19:27 -0800 (PST)
-From: =?UTF-8?B?RnLDqWTDqXJpYyBQaWVycmV0?= <frederic.pierret@qubes-os.org>
-To: bskeggs@redhat.com, airlied@linux.ie, daniel@ffwll.ch,
- dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org
-References: <dac89843-5258-5bed-ee86-7038e94e56da@qubes-os.org>
-Message-ID: <c94ce223-56d5-e31a-2a2c-59defb988b28@qubes-os.org>
-Date: Thu, 20 Feb 2020 18:19:24 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.2.2
+Received: from mail-vs1-f66.google.com (mail-vs1-f66.google.com
+ [209.85.217.66])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id CB525896DD;
+ Thu, 20 Feb 2020 17:32:57 +0000 (UTC)
+Received: by mail-vs1-f66.google.com with SMTP id 7so3180694vsr.10;
+ Thu, 20 Feb 2020 09:32:57 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=FQc9DcjywetNpCF4Lbw4T0x+cYC+tfLtotoC3/DL5NA=;
+ b=bQqJ6FBa+S0W23bXMeA9YwD6bxuaReRVUm4JaiorL8wMneTeb1j9Rnxid11uayP0Yi
+ +zumKWFuJHAJsYp/5TqoSqZxf54HgnbilPifxPcp0zXeF2TLuntoJIaUAJDXB4En3u03
+ DpMIH1lARvZwaPaCPV02/eo40aZAkKdTzblCFr2OVINHwLIeWpP/Qh06FpMdbTjrkr0D
+ XtCzShZkMF25GBiKKuZ908iLf3hGqp5qmmTH9nhiMcAP/TtcSiePY9huP1RXeK13o5Nm
+ QMT3P21S4boFdKWPa15VnMCoaDh/n9nXvRA/KFpOMZP+2VggaSoJ6RkRKX84jV8han+B
+ lHUA==
+X-Gm-Message-State: APjAAAV578ZaZCW9G0neKNvzO25V9Cr0CfJHXbGxXstGiXvTAbNRpvdK
+ dClNSugAvbNr6Mzd5He04FJGqKwNxnOnRiiK9tw=
+X-Google-Smtp-Source: APXvYqx4kt7MHHbKi0SjwgZkjp+H3tuQgvLnGV4lQ1Qi1dUUjvSAWJLZlwr3QRTs60UyN+0mHesS993+k7i+NF7ntmI=
+X-Received: by 2002:a67:f412:: with SMTP id p18mr18444585vsn.207.1582219976717; 
+ Thu, 20 Feb 2020 09:32:56 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <dac89843-5258-5bed-ee86-7038e94e56da@qubes-os.org>
-X-Zoho-Virus-Status: 1
-X-ZohoMailClient: External
+References: <dac89843-5258-5bed-ee86-7038e94e56da@qubes-os.org>
+ <c94ce223-56d5-e31a-2a2c-59defb988b28@qubes-os.org>
+In-Reply-To: <c94ce223-56d5-e31a-2a2c-59defb988b28@qubes-os.org>
+From: Ilia Mirkin <imirkin@alum.mit.edu>
+Date: Thu, 20 Feb 2020 12:32:45 -0500
+Message-ID: <CAKb7Uvh8Ob592LOizH9FGZz5ag=VJ3R=dh0G5iZSg2-JzWZFMQ@mail.gmail.com>
+To: =?UTF-8?B?RnLDqWTDqXJpYyBQaWVycmV0?= <frederic.pierret@qubes-os.org>
 Subject: Re: [Nouveau] [PATCH] nv50_disp_chan_mthd: ensure mthd is not NULL
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -61,104 +51,52 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1699095104=="
+Cc: David Airlie <airlied@linux.ie>, nouveau <nouveau@lists.freedesktop.org>,
+ LKML <linux-kernel@vger.kernel.org>,
+ dri-devel <dri-devel@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>,
+ Daniel Vetter <daniel@ffwll.ch>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============1699095104==
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="w32BqMJ8HV23tU4jg2Bb4RtNFGXOHFoba"
-
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---w32BqMJ8HV23tU4jg2Bb4RtNFGXOHFoba
-Content-Type: multipart/mixed; boundary="8CHATbdN7dX0VKeJHOzRWHdG37WhI5eiD"
-
---8CHATbdN7dX0VKeJHOzRWHdG37WhI5eiD
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
-
-Hi,
-Is anything missing here? How can I get this merged?
-
-Best regards,
-Fr=C3=A9d=C3=A9ric Pierret
-
-On 2020-02-08 20:43, Fr=C3=A9d=C3=A9ric Pierret wrote:
-> Pointer to structure array is assumed not NULL by default. It has
-> the consequence to raise a kernel panic when it's not the case.
->=20
-> Basically, running at least a RTX2080TI on Xen makes a bad mmio error
-> which causes having 'mthd' pointer to be NULL in 'channv50.c'. From the=
-
-> code, it's assumed to be not NULL by accessing directly 'mthd->data[0]'=
-
-> which is the reason of the kernel panic. Simply check if the pointer
-> is not NULL before continuing.
->=20
-> BugLink: https://bugzilla.kernel.org/show_bug.cgi?id=3D206299
-> Cc: stable@vger.kernel.org
-> Signed-off-by: Fr=C3=A9d=C3=A9ric Pierret (fepitre) <frederic.pierret@q=
-ubes-os.org>
-> ---
->  drivers/gpu/drm/nouveau/nvkm/engine/disp/channv50.c | 2 ++
->  1 file changed, 2 insertions(+)
->=20
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/channv50.c b/driv=
-ers/gpu/drm/nouveau/nvkm/engine/disp/channv50.c
-> index bcf32d92ee5a..50e3539f33d2 100644
-> --- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/channv50.c
-> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/channv50.c
-> @@ -74,6 +74,8 @@ nv50_disp_chan_mthd(struct nv50_disp_chan *chan, int =
-debug)
-> =20
->  	if (debug > subdev->debug)
->  		return;
-> +	if (!mthd)
-> +		return;
-> =20
->  	for (i =3D 0; (list =3D mthd->data[i].mthd) !=3D NULL; i++) {
->  		u32 base =3D chan->head * mthd->addr;
->=20
-
-
---8CHATbdN7dX0VKeJHOzRWHdG37WhI5eiD--
-
---w32BqMJ8HV23tU4jg2Bb4RtNFGXOHFoba
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEEn6ZLkvlecGvyjiymSEAQtc3FduIFAl5Ov5wACgkQSEAQtc3F
-duLSHw/+P2mgoCNKTxx7otQopMCHby1vNGeAhUhLrEBEcyH+s8HUw0PKa+sMcibJ
-VBNFWivU/COlSowQWklTL3E21wTZNf7Wjw4Bn6R/G7GHYbEdHo/8o7kwcPT8+2J6
-eF+AttjMc2wYlqiGea0PULs3plbDpJBtJXVzQG//5TVZXiVNF1RF+sCH0jyqfLfn
-axvuE8I8kJO/yN6gstsumDzBdXA6TtgzVyJDs2KHm3P5z7OdECk9/UJDtp70Gsr7
-bfBcAneBZNCPAekqB1VOl5399OYEINbRlyycb1CKtfkqW0Ydk24dsA2ymw9lairn
-yi/3gOAI+cmSsuWK9xFBRgjtXmrduBhD68UtLGno5JA4qoKhYryGHyIhf5EGbQvA
-aBTVrdvRQwlu9sipUvUYWeVHZ/nn7D3n3RVUXZ/lf8svoVfl4AeMqhI3+poDrG2C
-cNHRiW8pwh/g6qoYbZjvCkI/A4gftqGQGZwJf+IvOGZz7+cO16d9KUA9nYQY7wRq
-f7hVRbA5TgM62VI05uWLmdUGnbmNJh8T698dm2q/ghf2TIt6pbxPfCjEUtw8a0jH
-Pp0u0kvclJ5pFAdOXHSqxs9tdZEbmMrdj1APXn6GhYY0cjaf59o08bJ9+AQtxFgB
-OfX8vtDOrtQR7ROHp/rKpRy1qX1wB6ZIQnAIan93/vD26Dxl9lY=
-=V2u5
------END PGP SIGNATURE-----
-
---w32BqMJ8HV23tU4jg2Bb4RtNFGXOHFoba--
-
---===============1699095104==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
-_______________________________________________
-Nouveau mailing list
-Nouveau@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/nouveau
-
---===============1699095104==--
+SGkgRnLDqWTDqXJpYywKCkl0IGFwcGVhcnMgQmVuIG1hZGUgaGlzIG93biB2ZXJzaW9uIG9mIHRo
+aXMgcGF0Y2ggKHByb2JhYmx5IGJhc2VkIG9uCnRoZSBvbmUgeW91IGFkZGVkIHRvIHRoZSBrZXJu
+ZWwgYnopLCBhbmQgaXQncyBhbHJlYWR5IHVwc3RyZWFtOgoKaHR0cHM6Ly9naXQua2VybmVsLm9y
+Zy9wdWIvc2NtL2xpbnV4L2tlcm5lbC9naXQvdG9ydmFsZHMvbGludXguZ2l0L2NvbW1pdC8/aD12
+NS42LXJjMiZpZD0wZTYxNzZjNmQyODYzMTZlOTQzMWI0ZjY5NTk0MGNmYWM0ZmZlNmMyCgpDaGVl
+cnMsCgogIC1pbGlhCgpPbiBUaHUsIEZlYiAyMCwgMjAyMCBhdCAxMjoxOSBQTSBGcsOpZMOpcmlj
+IFBpZXJyZXQKPGZyZWRlcmljLnBpZXJyZXRAcXViZXMtb3Mub3JnPiB3cm90ZToKPgo+IEhpLAo+
+IElzIGFueXRoaW5nIG1pc3NpbmcgaGVyZT8gSG93IGNhbiBJIGdldCB0aGlzIG1lcmdlZD8KPgo+
+IEJlc3QgcmVnYXJkcywKPiBGcsOpZMOpcmljIFBpZXJyZXQKPgo+IE9uIDIwMjAtMDItMDggMjA6
+NDMsIEZyw6lkw6lyaWMgUGllcnJldCB3cm90ZToKPiA+IFBvaW50ZXIgdG8gc3RydWN0dXJlIGFy
+cmF5IGlzIGFzc3VtZWQgbm90IE5VTEwgYnkgZGVmYXVsdC4gSXQgaGFzCj4gPiB0aGUgY29uc2Vx
+dWVuY2UgdG8gcmFpc2UgYSBrZXJuZWwgcGFuaWMgd2hlbiBpdCdzIG5vdCB0aGUgY2FzZS4KPiA+
+Cj4gPiBCYXNpY2FsbHksIHJ1bm5pbmcgYXQgbGVhc3QgYSBSVFgyMDgwVEkgb24gWGVuIG1ha2Vz
+IGEgYmFkIG1taW8gZXJyb3IKPiA+IHdoaWNoIGNhdXNlcyBoYXZpbmcgJ210aGQnIHBvaW50ZXIg
+dG8gYmUgTlVMTCBpbiAnY2hhbm52NTAuYycuIEZyb20gdGhlCj4gPiBjb2RlLCBpdCdzIGFzc3Vt
+ZWQgdG8gYmUgbm90IE5VTEwgYnkgYWNjZXNzaW5nIGRpcmVjdGx5ICdtdGhkLT5kYXRhWzBdJwo+
+ID4gd2hpY2ggaXMgdGhlIHJlYXNvbiBvZiB0aGUga2VybmVsIHBhbmljLiBTaW1wbHkgY2hlY2sg
+aWYgdGhlIHBvaW50ZXIKPiA+IGlzIG5vdCBOVUxMIGJlZm9yZSBjb250aW51aW5nLgo+ID4KPiA+
+IEJ1Z0xpbms6IGh0dHBzOi8vYnVnemlsbGEua2VybmVsLm9yZy9zaG93X2J1Zy5jZ2k/aWQ9MjA2
+Mjk5Cj4gPiBDYzogc3RhYmxlQHZnZXIua2VybmVsLm9yZwo+ID4gU2lnbmVkLW9mZi1ieTogRnLD
+qWTDqXJpYyBQaWVycmV0IChmZXBpdHJlKSA8ZnJlZGVyaWMucGllcnJldEBxdWJlcy1vcy5vcmc+
+Cj4gPiAtLS0KPiA+ICBkcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9udmttL2VuZ2luZS9kaXNwL2No
+YW5udjUwLmMgfCAyICsrCj4gPiAgMSBmaWxlIGNoYW5nZWQsIDIgaW5zZXJ0aW9ucygrKQo+ID4K
+PiA+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9udmttL2VuZ2luZS9kaXNw
+L2NoYW5udjUwLmMgYi9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9udmttL2VuZ2luZS9kaXNwL2No
+YW5udjUwLmMKPiA+IGluZGV4IGJjZjMyZDkyZWU1YS4uNTBlMzUzOWYzM2QyIDEwMDY0NAo+ID4g
+LS0tIGEvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbnZrbS9lbmdpbmUvZGlzcC9jaGFubnY1MC5j
+Cj4gPiArKysgYi9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9udmttL2VuZ2luZS9kaXNwL2NoYW5u
+djUwLmMKPiA+IEBAIC03NCw2ICs3NCw4IEBAIG52NTBfZGlzcF9jaGFuX210aGQoc3RydWN0IG52
+NTBfZGlzcF9jaGFuICpjaGFuLCBpbnQgZGVidWcpCj4gPgo+ID4gICAgICAgaWYgKGRlYnVnID4g
+c3ViZGV2LT5kZWJ1ZykKPiA+ICAgICAgICAgICAgICAgcmV0dXJuOwo+ID4gKyAgICAgaWYgKCFt
+dGhkKQo+ID4gKyAgICAgICAgICAgICByZXR1cm47Cj4gPgo+ID4gICAgICAgZm9yIChpID0gMDsg
+KGxpc3QgPSBtdGhkLT5kYXRhW2ldLm10aGQpICE9IE5VTEw7IGkrKykgewo+ID4gICAgICAgICAg
+ICAgICB1MzIgYmFzZSA9IGNoYW4tPmhlYWQgKiBtdGhkLT5hZGRyOwo+ID4KPgo+IF9fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCj4gTm91dmVhdSBtYWlsaW5n
+IGxpc3QKPiBOb3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwo+IGh0dHBzOi8vbGlzdHMuZnJl
+ZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vbm91dmVhdQpfX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fXwpOb3V2ZWF1IG1haWxpbmcgbGlzdApOb3V2ZWF1
+QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWls
+bWFuL2xpc3RpbmZvL25vdXZlYXUK
