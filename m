@@ -1,55 +1,56 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9A1231665CF
-	for <lists+nouveau@lfdr.de>; Thu, 20 Feb 2020 19:09:25 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id C9D1A169121
+	for <lists+nouveau@lfdr.de>; Sat, 22 Feb 2020 19:02:13 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 629DF6EE29;
-	Thu, 20 Feb 2020 18:09:22 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1EDD789332;
+	Sat, 22 Feb 2020 18:02:12 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from sender4-of-o58.zoho.com (sender4-of-o58.zoho.com
- [136.143.188.58])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B9C606EE29;
- Thu, 20 Feb 2020 18:09:20 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; t=1582222159; cv=none; 
- d=zohomail.com; s=zohoarc; 
- b=IhZrbv3LTYkKC0B91LP6afzc/JR2dokKMlVIyk4/2XJyTI1aR2Un4DuyHL+PRgH0FxChRBC0Vw6yfZ2nPmUXclYAqpXTa7Tbc49ahLPSvX9+9BGgaiWOF6LIWOcMRWtoGjyeBgdpoH06sLPCTeJj1yZFSkDeGC6/DJ4VI+vpfeM=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1582222159;
- h=Content-Type:Cc:Date:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:To;
- bh=xw/sotA4oNFNJ04Z9OYEFDPVK+QMI4XGv7s7J3CTotQ=; 
- b=hc3uTlOBpX+CUrKjMVfTRdd681Z3GHnvGmQSoPPvs9WBBjEu09BbXXWGtuqlEUdaVVzYzEOCikGPcrvJrvGI0qIP09QAV+djYTdqd17mqiWerpiU8DlJh+rirzcIiOQ6P9EgQ6NvSEdxCdhp5bOW5eTPUXi1nM+KZf1e2dNUW+A=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
- dkim=pass  header.i=qubes-os.org;
- spf=pass  smtp.mailfrom=frederic.pierret@qubes-os.org;
- dmarc=pass header.from=<frederic.pierret@qubes-os.org>
- header.from=<frederic.pierret@qubes-os.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1582222159; 
- s=s; d=qubes-os.org; i=frederic.pierret@qubes-os.org;
- h=Subject:To:Cc:References:From:Message-ID:Date:MIME-Version:In-Reply-To:Content-Type;
- bh=xw/sotA4oNFNJ04Z9OYEFDPVK+QMI4XGv7s7J3CTotQ=;
- b=C036gvuCI6PgqiMq2RqXs7sWe3NdWmzr2TqcGGnLCNMtpfROXd1zm1JDQI8Gri6A
- 3xqNM5+Ytq+j5RNn1qSSPuzQNQbqb8m+iOUQNj2b+SaEn0xUoOiHleHeQZd2/hFR+J0
- Bg+bxomaJvwW25C6i0lR0Tx10qGb/TDmuuGHp4ks=
-Received: from [10.137.0.45] (82.102.18.6 [82.102.18.6]) by mx.zohomail.com
- with SMTPS id 1582222157595579.3135438206202;
- Thu, 20 Feb 2020 10:09:17 -0800 (PST)
-To: Ilia Mirkin <imirkin@alum.mit.edu>
-References: <dac89843-5258-5bed-ee86-7038e94e56da@qubes-os.org>
- <c94ce223-56d5-e31a-2a2c-59defb988b28@qubes-os.org>
- <CAKb7Uvh8Ob592LOizH9FGZz5ag=VJ3R=dh0G5iZSg2-JzWZFMQ@mail.gmail.com>
-From: =?UTF-8?B?RnLDqWTDqXJpYyBQaWVycmV0?= <frederic.pierret@qubes-os.org>
-Message-ID: <ea846dcd-0fc9-01a6-4bb4-dde68888d06e@qubes-os.org>
-Date: Thu, 20 Feb 2020 19:09:13 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.2.2
+X-Greylist: delayed 304 seconds by postgrey-1.36 at gabe;
+ Sat, 22 Feb 2020 18:02:11 UTC
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2688989332
+ for <nouveau@lists.freedesktop.org>; Sat, 22 Feb 2020 18:02:10 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.net;
+ s=badeba3b8450; t=1582394529;
+ bh=uNwhePpCebimwAHiBacDLpAX3OiNLOObqiRMpSys7NQ=;
+ h=X-UI-Sender-Class:From:To:Subject:Date;
+ b=E/djaBTed/XxBcG9MporUibTI3caLec+k/vgRxQaOaYxo5uBDTe9XtdfeVwdlC1/X
+ V8HoAbNsF6w0gsmXRCFIXZL02/48YS7gYQKvvG7oMeFkFvQwzXhRhpsKDAFl7cqq+C
+ 1eYQUUFByhnHljga8fT6uZiv5+R3qKZM0ZU9igqU=
+X-UI-Sender-Class: 01bb95c1-4bf8-414a-932a-4f6e2808ef9c
+Received: from [79.203.240.238] ([79.203.240.238]) by web-mail.gmx.net
+ (3c-app-gmx-bs13.server.lan [172.19.170.65]) (via HTTP); Sat, 22 Feb 2020
+ 18:57:04 +0100
 MIME-Version: 1.0
-In-Reply-To: <CAKb7Uvh8Ob592LOizH9FGZz5ag=VJ3R=dh0G5iZSg2-JzWZFMQ@mail.gmail.com>
-X-Zoho-Virus-Status: 1
-X-ZohoMailClient: External
-Subject: Re: [Nouveau] [PATCH] nv50_disp_chan_mthd: ensure mthd is not NULL
+Message-ID: <trinity-c5570114-8f17-4b15-bb54-f6a39340ef19-1582394224520@3c-app-gmx-bs13>
+From: "Lukas Schubert" <lukas.schubert@gmx.de>
+To: nouveau@lists.freedesktop.org
+Date: Sat, 22 Feb 2020 18:57:04 +0100
+Importance: normal
+Sensitivity: Normal
+X-Priority: 3
+X-Provags-ID: V03:K1:r0wuBjzMblpgYWF6ULYuMEw3SF341iSF9uVB2vrxHFylmrX8mpvhFfi2rifqUd/sjTBt/
+ KywJaMlO11Bw+yep5bQFR0y5DYhzI2l6VFUmzWcRFKf1lZdgZsiTuy0CM0+Y/17ekaJlFUlLhwMN
+ Un5CvoulUpDsKMoyI9058GGiPoN9q56GKpsHni35+bEo9rjVS0CMxo7V+nPyi0pL7VXpfb6gy4m6
+ /kyx/Aolg42vegB8g9CGgM4z4nAKjoq+wuolknIY+EbZ6yHu96qD1h1Se8G+wrI/MSZB3rvrr0Ey
+ vQ=
+X-Spam-Flag: NO
+X-UI-Out-Filterresults: notjunk:1;V03:K0:pyGZvcKvQjw=:HbCaW14dHHll8Y9O6Vqcsd
+ TdGeDj7bVz/vtBC922BoCi9LTZ5XkMsij1MdaQsjtXvGOmqy55btobyg8VvevH47UVRS6+BVr
+ 2Nd2yz893KOEWThudXSj4OnYIYUS2hUDHTf4mtk7ue3oxIVh5xwi/F6gyzVuSfoXfYt6lUhCl
+ 2H6vehGjapZF9RzyQxa8HruMk+t5y2gmLzywx9eWccKIKNbYxoOuB7fHKyKWg6N9vyoNyllmU
+ nCPG68/Y7UQsvCxMLKjsTyo7agx9RM7ecosgc8Ksmz40rZwXdevBQnvQntRdvQ31Rwm1kZ0+1
+ LgTWu+x2mGQ8B9znczObiPy8eqeoOG+7ZR7fnu4kAxxe1djW2QTe6NhIcGq6tFUd2A+my2+5y
+ YEA55+jY3garWq9ieOeFUte4QYxu+Dk583sNJUBahFC8uIyZ5EJAInC+MNo+fWum/o2nm3vuI
+ JONVMxgXwWwx4AA/pGg/qgirUNehpb7SP4qKvRvogJgv+FNlZEopM00DVaJP2MhMOEJrNVQL4
+ dC+qptDsorPGvHdptamab+X8Tq08dBHPWDWhww5bWb8T0J+FAlEMRHt6BC+akC1R9PV9NHy/R
+ PPpWiBOvq+NjbDQs1c0dCQvPYrEV+ZQZYTp8O1HQ+3dzX2iJpCP5pUX2NE2wOazxhs5iCC9uO
+ TfWEEupi30tB22kd5uK/ploNuxnORbHVteTZHWItl1JOBDTZagT/KToPIHnxPs79i0kk=
+Subject: [Nouveau] NV40 under Debian
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,140 +62,33 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, nouveau <nouveau@lists.freedesktop.org>,
- LKML <linux-kernel@vger.kernel.org>,
- dri-devel <dri-devel@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>,
- Daniel Vetter <daniel@ffwll.ch>
-Content-Type: multipart/mixed; boundary="===============0330107956=="
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============0330107956==
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="hkI44MPNhtb0IuTBA6t4rXJyj69YDa5QI"
+Hi list,
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---hkI44MPNhtb0IuTBA6t4rXJyj69YDa5QI
-Content-Type: multipart/mixed; boundary="WLJy850lTfsTLeed3UAVaXbc1Hmlnodt8"
+my media center PC is freshly installed with Debian 10.2 "Buster". It doesn't support Geforce 6800 GT (NV40) boards through the nvidia nor the nvidia-legacy drivers any longer. The legacy drivers worked up until Debian 9 "Stretch", but no longer.
 
---WLJy850lTfsTLeed3UAVaXbc1Hmlnodt8
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
+I know that the hardware works because I can boot SystemRescueCD from CD and get a flawless desktop presentation on the attached full HD TV.
 
-Hi Ilia,
-Well...if Ben made it's own version you mean using my patch given on comm=
-ent https://bugzilla.kernel.org/show_bug.cgi?id=3D206299#c9 and then addi=
-ng commit message without quoting me as reporter ok...
+But in Debian 10, the colours are distorted. Have a look at "Nouveau.jpg" here: https://jumpshare.com/b/Se5d7xMu5tBSsR2Zcz8p
+I can get the colours to work by starting the kernel with "nomodeset". Look at the same link, "NoModeSet.jpg".
 
-At least, upstream is patched.
+SystemRescueCD (working nouveau version) uses an older kernel:
+root@sysresccd /root % uname -a
+Linux sysresccd 3.2.28-std300-amd64 #2 SMP Tue Aug 21 18:35:38 UTC 2012 x86_64 Intel(R) Core(TM)2 CPU 6420 @ 2.13GHz GenuineIntel GNU/Linux
 
-Best,
-Fr=C3=A9d=C3=A9ric
+Debian 10.2 (distorted colours) uses this kernel:
+luker@michael:~$ uname -a
+Linux michael 4.19.0-8-amd64 #1 SMP Debian 4.19.98-1 (2020-01-26) x86_64 GNU/Linux
 
-On 2020-02-20 18:32, Ilia Mirkin wrote:
-> Hi Fr=C3=A9d=C3=A9ric,
->=20
-> It appears Ben made his own version of this patch (probably based on
-> the one you added to the kernel bz), and it's already upstream:
->=20
-> https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/comm=
-it/?h=3Dv5.6-rc2&id=3D0e6176c6d286316e9431b4f695940cfac4ffe6c2
->=20
-> Cheers,
->=20
->   -ilia
->=20
-> On Thu, Feb 20, 2020 at 12:19 PM Fr=C3=A9d=C3=A9ric Pierret
-> <frederic.pierret@qubes-os.org> wrote:
->>
->> Hi,
->> Is anything missing here? How can I get this merged?
->>
->> Best regards,
->> Fr=C3=A9d=C3=A9ric Pierret
->>
->> On 2020-02-08 20:43, Fr=C3=A9d=C3=A9ric Pierret wrote:
->>> Pointer to structure array is assumed not NULL by default. It has
->>> the consequence to raise a kernel panic when it's not the case.
->>>
->>> Basically, running at least a RTX2080TI on Xen makes a bad mmio error=
+Is there a configuration setting in nouveau that causes those weird colours?
+Bit order/byte order maybe?
 
->>> which causes having 'mthd' pointer to be NULL in 'channv50.c'. From t=
-he
->>> code, it's assumed to be not NULL by accessing directly 'mthd->data[0=
-]'
->>> which is the reason of the kernel panic. Simply check if the pointer
->>> is not NULL before continuing.
->>>
->>> BugLink: https://bugzilla.kernel.org/show_bug.cgi?id=3D206299
->>> Cc: stable@vger.kernel.org
->>> Signed-off-by: Fr=C3=A9d=C3=A9ric Pierret (fepitre) <frederic.pierret=
-@qubes-os.org>
->>> ---
->>>  drivers/gpu/drm/nouveau/nvkm/engine/disp/channv50.c | 2 ++
->>>  1 file changed, 2 insertions(+)
->>>
->>> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/channv50.c b/dr=
-ivers/gpu/drm/nouveau/nvkm/engine/disp/channv50.c
->>> index bcf32d92ee5a..50e3539f33d2 100644
->>> --- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/channv50.c
->>> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/channv50.c
->>> @@ -74,6 +74,8 @@ nv50_disp_chan_mthd(struct nv50_disp_chan *chan, in=
-t debug)
->>>
->>>       if (debug > subdev->debug)
->>>               return;
->>> +     if (!mthd)
->>> +             return;
->>>
->>>       for (i =3D 0; (list =3D mthd->data[i].mthd) !=3D NULL; i++) {
->>>               u32 base =3D chan->head * mthd->addr;
->>>
->>
->> _______________________________________________
->> Nouveau mailing list
->> Nouveau@lists.freedesktop.org
->> https://lists.freedesktop.org/mailman/listinfo/nouveau
-
-
---WLJy850lTfsTLeed3UAVaXbc1Hmlnodt8--
-
---hkI44MPNhtb0IuTBA6t4rXJyj69YDa5QI
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEEn6ZLkvlecGvyjiymSEAQtc3FduIFAl5Oy0gACgkQSEAQtc3F
-duLVXQ//UcaE2INvYMM1EVdYZv3qU9YSA1kGBFofdUewle8ME//5XfA1y9+Regdz
-m/iunXPFn06NOCv13zYYTtmvs0PbHEdjWyi0GmfU5Qvmmr7Z+jsFetBDTi3y8IZu
-CffSroIMUGSEP0l06JA0Bg4gWJv/fGCIOXcn5rAdL1L0kbE1jAP3Y6nxhQExTgYq
-OvvSa2sxOBZ82fkuTTzN/qRKIMY+UGsHzMx+wUbGkRI4ncyxO0M6ZFqBAt4nTFA2
-k+FWQc9e8+mUXxQJSQ/8d8z+o2c16ss30CektB8KHQNQX3UqvrzXaOo1+VS3LduG
-3HI8kU4KnHT/K3Dy0Bf5AhyAHInS1URBETVEyANzQOMYQ3IOX6ORjdUP6pXeBiht
-lGf6OgakKWAos6gAcYYcYbpRFBFZEJEhfYcjvboPmL0WjhuKnmPjwS0UZVdA9iKr
-PD8BVzRZW+twgblxMvr1KNfIAyWCYckP53tpsqPq9+WbOEBBg5ub3o/S1UqLp2cH
-9h2jTzZoYjY6u+Kuaxw69aL4uZGwToKDD6sD6MW+dND5QE+N4E0zuDUCiUzDmmPm
-Aw7DFYVdHJIKDgbWPtdKAePZd3WVZ5OxBGgZAzslY7O26CUyvkUS8GnRqoB3UTdd
-aVghJwC5dw0lEXpast9xk0nPyd1TQIoFHFVXnxbxTV38LQ3xrrQ=
-=RGFd
------END PGP SIGNATURE-----
-
---hkI44MPNhtb0IuTBA6t4rXJyj69YDa5QI--
-
---===============0330107956==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
+Thanks
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/nouveau
-
---===============0330107956==--
