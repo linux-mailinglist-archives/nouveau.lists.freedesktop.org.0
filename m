@@ -1,54 +1,39 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2E7D516ACD0
-	for <lists+nouveau@lfdr.de>; Mon, 24 Feb 2020 18:13:28 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9029416ACC5
+	for <lists+nouveau@lfdr.de>; Mon, 24 Feb 2020 18:13:19 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B3F176E7D1;
-	Mon, 24 Feb 2020 17:13:13 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8F72B6E5D3;
+	Mon, 24 Feb 2020 17:13:09 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-vs1-xe44.google.com (mail-vs1-xe44.google.com
- [IPv6:2607:f8b0:4864:20::e44])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 53FF36ED38;
- Thu, 20 Feb 2020 12:00:17 +0000 (UTC)
-Received: by mail-vs1-xe44.google.com with SMTP id p14so2471105vsq.6;
- Thu, 20 Feb 2020 04:00:17 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=2maRxbwaWQdYG4KYSFEZQXuW4XTvPWB6+BI1DcPAf7s=;
- b=uiPbHKi5ifQGd/+vU3Bg2bWwW7uLXfeb9jyg9h2kuFqSvFAb1meTuoyQT7Y9xyn+yh
- 4GG01nAiQRzNFnEJrL47dFGQKR1BYAmbCJf+MfMsaxFYIJuOV/5vU6V05TXW0iicvMgx
- T7tuBRl0TROqcMMqKJh83gz12LnbkmlMWphR1KmZU8esWp5KmbFCQID1SH7M7DIdj/7e
- wjmfYeR4RdGMh8NA8mptJhe16sKbTGyIRlaVruSMOr7muGBwwGjUvNRt/vVGeEyq9xL0
- zYGcpP0qYWT/GA6N40zvpI8RYaTAIz4/1gP/YlGXbiNKi0PkhuHjxSgonlp/utReHYwp
- HLyQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=2maRxbwaWQdYG4KYSFEZQXuW4XTvPWB6+BI1DcPAf7s=;
- b=aBWjwmgqWmRrD3MQWOch+smgMDutJP2QWZax1U2K6oHv6j5I0ptbZjFSq5K+2DAyII
- 2gcKmLeySdiRwLQwavx8cS9W4leVEQSJIdGOfnka6m+D5xhZ8lhm2T4CDTQrC+8jtN9x
- uOAjBAARubWFPc2I6EK/mhfglK9jT/rTyMt9GOQ1ljqMPOAWvX5y5Kwv3OCprx/4sTlP
- ZRT2unjDr32Vp/Bs6l3raKYIME4NhrwJ3rCPAqXTV9Y6t4AVWaVcJvEBcucDM6OkXYay
- Qn8W8r3BKOnYz41Ns8loM2SwqQZTso91Dvfeg+TYWhEw1HGvoMnGI7QvG8k8JauWiKRa
- AHFg==
-X-Gm-Message-State: APjAAAUCPpWFxe13w2hvNz82cz3mYZwQwG7ip1wBUdnua15o5F1NmK4f
- CcAf41ZrPTk65eNR8carcLceDV9cBUGUve+uHgQ=
-X-Google-Smtp-Source: APXvYqxXNcOfGZ2acPaakwTwE7nSVQySWcCd6QGUbcsKuezSgJtJAGBBcyUTM0+jsTO+dzIDRVrFr42LH1TZAFyMVv0=
-X-Received: by 2002:a67:c204:: with SMTP id i4mr17663271vsj.118.1582200016567; 
- Thu, 20 Feb 2020 04:00:16 -0800 (PST)
-MIME-Version: 1.0
+X-Greylist: delayed 665 seconds by postgrey-1.36 at gabe;
+ Sat, 22 Feb 2020 12:43:55 UTC
+Received: from asavdk3.altibox.net (asavdk3.altibox.net [109.247.116.14])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id EA8BB6E8C9
+ for <nouveau@lists.freedesktop.org>; Sat, 22 Feb 2020 12:43:55 +0000 (UTC)
+Received: from ravnborg.org (unknown [158.248.194.18])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by asavdk3.altibox.net (Postfix) with ESMTPS id 8BA26200A0;
+ Sat, 22 Feb 2020 13:32:41 +0100 (CET)
+Date: Sat, 22 Feb 2020 13:32:40 +0100
+From: Sam Ravnborg <sam@ravnborg.org>
+To: Ville Syrjala <ville.syrjala@linux.intel.com>
+Message-ID: <20200222123240.GD28287@ravnborg.org>
 References: <20200219203544.31013-1-ville.syrjala@linux.intel.com>
  <20200219203544.31013-5-ville.syrjala@linux.intel.com>
+MIME-Version: 1.0
+Content-Disposition: inline
 In-Reply-To: <20200219203544.31013-5-ville.syrjala@linux.intel.com>
-From: Emil Velikov <emil.l.velikov@gmail.com>
-Date: Thu, 20 Feb 2020 12:00:04 +0000
-Message-ID: <CACvgo52gOX7OioTqaLUEi1Luc49y2FpREv5ERRP5DPYxodRMLw@mail.gmail.com>
-To: Ville Syrjala <ville.syrjala@linux.intel.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.3 cv=eMA9ckh1 c=1 sm=1 tr=0
+ a=UWs3HLbX/2nnQ3s7vZ42gw==:117 a=UWs3HLbX/2nnQ3s7vZ42gw==:17
+ a=jpOVt7BSZ2e4Z31A5e1TngXxSK0=:19 a=kj9zAlcOel0A:10 a=7gkXJVJtAAAA:8
+ a=IwXrOhc2p5v2XRWg7c8A:9 a=CjuIK1q_8ugA:10 a=E9Po1WZjFZOl8hwRPBS3:22
 X-Mailman-Approved-At: Mon, 24 Feb 2020 17:13:08 +0000
 Subject: Re: [Nouveau] [PATCH 04/12] drm: Nuke mode->vrefresh
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -62,42 +47,65 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Neil Armstrong <narmstrong@baylibre.com>,
- ML nouveau <nouveau@lists.freedesktop.org>,
- =?UTF-8?Q?Guido_G=C3=BCnther?= <agx@sigxcpu.org>,
- ML dri-devel <dri-devel@lists.freedesktop.org>,
- Andrzej Hajda <a.hajda@samsung.com>, Thierry Reding <thierry.reding@gmail.com>,
+Cc: Neil Armstrong <narmstrong@baylibre.com>, nouveau@lists.freedesktop.org,
+ Guido =?iso-8859-1?Q?G=FCnther?= <agx@sigxcpu.org>,
+ dri-devel@lists.freedesktop.org, Andrzej Hajda <a.hajda@samsung.com>,
+ Thierry Reding <thierry.reding@gmail.com>,
  Laurent Pinchart <Laurent.pinchart@ideasonboard.com>,
- Sam Ravnborg <sam@ravnborg.org>, Thomas Hellstrom <thellstrom@vmware.com>,
+ Benjamin Gaignard <benjamin.gaignard@linaro.org>,
+ Thomas Hellstrom <thellstrom@vmware.com>,
  Joonyoung Shim <jy0922.shim@samsung.com>, Stefan Mavrodiev <stefan@olimex.com>,
  Jerry Han <hanxu5@huaqin.corp-partner.google.com>,
+ Ben Skeggs <bskeggs@redhat.com>,
  VMware Graphics <linux-graphics-maintainer@vmware.com>,
  Jagan Teki <jagan@amarulasolutions.com>, Robert Chiras <robert.chiras@nxp.com>,
- Icenowy Zheng <icenowy@aosc.io>, Jonas Karlman <jonas@kwiboo.se>,
- Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
- Ben Skeggs <bskeggs@redhat.com>, linux-amlogic@lists.infradead.org,
- Vincent Abriou <vincent.abriou@st.com>,
+ Linus Walleij <linus.walleij@linaro.org>, Icenowy Zheng <icenowy@aosc.io>,
+ Jonas Karlman <jonas@kwiboo.se>, intel-gfx@lists.freedesktop.org,
+ Inki Dae <inki.dae@samsung.com>, CK Hu <ck.hu@mediatek.com>,
+ linux-amlogic@lists.infradead.org, Vincent Abriou <vincent.abriou@st.com>,
  Jernej Skrabec <jernej.skrabec@siol.net>, Purism Kernel Team <kernel@puri.sm>,
  Seung-Woo Kim <sw0312.kim@samsung.com>,
- Kyungmin Park <kyungmin.park@samsung.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ Kyungmin Park <kyungmin.park@samsung.com>,
+ Philipp Zabel <p.zabel@pengutronix.de>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-T24gV2VkLCAxOSBGZWIgMjAyMCBhdCAyMDozNiwgVmlsbGUgU3lyamFsYQo8dmlsbGUuc3lyamFs
-YUBsaW51eC5pbnRlbC5jb20+IHdyb3RlOgo+Cj4gRnJvbTogVmlsbGUgU3lyasOkbMOkIDx2aWxs
-ZS5zeXJqYWxhQGxpbnV4LmludGVsLmNvbT4KPgo+IEdldCByaWQgb2YgbW9kZS0+dnJlZnJlc2gg
-YW5kIGp1c3QgY2FsY3VsYXRlIGl0IG9uIGRlbWFuZC4gU2F2ZXMKPiBhIGJpdCBvZiBzcGFjZSBh
-bmQgYXZvaWRzIHRoZSBjYWNoZWQgdmFsdWUgZ2V0dGluZyBvdXQgb2Ygc3luYwo+IHdpdGggcmVh
-bGl0eS4KPgo+IE1vc3RseSBkb25lIHdpdGggY29jY2ksIHdpdGggdGhlIGZvbGxvd2luZyBtYW51
-YWwgZml4dXBzOgo+IC0gUmVtb3ZlIHRoZSBub3cgZW1wdHkgbG9vcCBpbiBkcm1faGVscGVyX3By
-b2JlX3NpbmdsZV9jb25uZWN0b3JfbW9kZXMoKQo+IC0gRml4IF9fTU9ERSgpIG1hY3JvIGluIGNo
-NzAwNl9tb2RlLmMKClNwZWFraW5nIG9mIGNoNzAwNl9tb2RlLmMsIGl0IGhhcyBpdHMgb3duICJm
-aXhlZCB2cmVmcmVzaCIsIHdoaWNoCmRvZXNuJ3Qgc2VlbSB0byBiZSB1c2VkIGFueXdoZXJlLgpP
-bmUgY291bGQgcG90ZW50aWFsbHkgbnVrZSBpdCwgYWx0aG91Z2ggaXQgY2FuIGJlIGEgY29tcGxl
-dGVseSBzZXBhcmF0ZSBwYXRjaC4KClRoaXMgcGF0Y2ggaXM6ClJldmlld2VkLWJ5OiBFbWlsIFZl
-bGlrb3YgPGVtaWwudmVsaWtvdkBjb2xsYWJvcmEuY29tPgoKLUVtaWwKX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBtYWlsaW5nIGxpc3QKTm91
-dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcv
-bWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1Cg==
+Hi Ville.
+
+Nice patch - and diffstat looks good:
+>  63 files changed, 217 insertions(+), 392 deletions(-)
+
+There is an item in the Documentation/gpu/todo.rst that
+describes this.
+Could you drop this from todo.rst in this patch too.
+
+> diff --git a/drivers/gpu/drm/mcde/mcde_dsi.c b/drivers/gpu/drm/mcde/mcde_dsi.c
+> index bb6528b01cd0..6dca5344c0b3 100644
+> --- a/drivers/gpu/drm/mcde/mcde_dsi.c
+> +++ b/drivers/gpu/drm/mcde/mcde_dsi.c
+> @@ -538,7 +538,7 @@ static void mcde_dsi_setup_video_mode(struct mcde_dsi *d,
+>  	 */
+>  	/* (ps/s) / (pixels/s) = ps/pixels */
+>  	pclk = DIV_ROUND_UP_ULL(1000000000000,
+> -				(mode->vrefresh * mode->htotal * mode->vtotal));
+> +				(drm_mode_vrefresh(mode) * mode->htotal * mode->vtotal));
+>  	dev_dbg(d->dev, "picoseconds between two pixels: %llu\n",
+>  		pclk);
+>  
+
+This just caught my eye while browsing the patch.
+It looks like a backward way to get the clock.
+
+But patch is fine, it was just a drive-by comment.
+
+Whole patch is:
+Reviewed-by: Sam Ravnborg <sam@ravnborg.org>
+(with or without removal of todo item added)
+
+	Sam
+_______________________________________________
+Nouveau mailing list
+Nouveau@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/nouveau
