@@ -2,34 +2,60 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3A272169277
-	for <lists+nouveau@lfdr.de>; Sun, 23 Feb 2020 01:16:10 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B3B4B169FB6
+	for <lists+nouveau@lfdr.de>; Mon, 24 Feb 2020 09:04:32 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6CB786E10B;
-	Sun, 23 Feb 2020 00:16:07 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D5E196E195;
+	Mon, 24 Feb 2020 08:04:26 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from elasmtp-dupuy.atl.sa.earthlink.net
- (elasmtp-dupuy.atl.sa.earthlink.net [209.86.89.62])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E8AB66E10B
- for <nouveau@lists.freedesktop.org>; Sun, 23 Feb 2020 00:16:06 +0000 (UTC)
-Received: from [24.144.102.41] (helo=[192.168.0.11])
- by elasmtp-dupuy.atl.sa.earthlink.net with esmtpa (Exim 4)
- (envelope-from <mrmazda@earthlink.net>) id 1j5ewG-000A9c-RV
- for nouveau@lists.freedesktop.org; Sat, 22 Feb 2020 19:16:05 -0500
-To: nouveau@lists.freedesktop.org
-References: <trinity-c5570114-8f17-4b15-bb54-f6a39340ef19-1582394224520@3c-app-gmx-bs13>
-From: Felix Miata <mrmazda@earthlink.net>
-Organization: less than infinite
-Message-ID: <4300b272-063d-f609-4b6f-92fd524cb5ed@earthlink.net>
-Date: Sat, 22 Feb 2020 19:16:04 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
- SeaMonkey/2.49.5
+Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
+ [207.211.31.120])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2DB056E192
+ for <nouveau@lists.freedesktop.org>; Mon, 24 Feb 2020 08:04:25 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1582531464;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=Kf7GST9fk8uTcZgslluWz97Hyc5RANSQq3UtFOeXkYo=;
+ b=O0j5EkX+iwbwEl43RDiuBrGgXZvZalLbEMxtZSjMrFr1b8c8nk195ONFGW05mNNRNs07gt
+ lerIKfhdZTvzWjAH7SXwecuNnJtxCbI+DTqepmy9Ku3iD9UmJ9lsQZFNIVBiVpVSdPmkxm
+ NBC2l8XTcX9c3HJewe4spxrqh7cA+dQ=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-245-So_lvQODNCmE5ohAMnyHRg-1; Mon, 24 Feb 2020 03:04:22 -0500
+X-MC-Unique: So_lvQODNCmE5ohAMnyHRg-1
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
+ [10.5.11.13])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id EB69F107ACC9;
+ Mon, 24 Feb 2020 08:04:19 +0000 (UTC)
+Received: from sirius.home.kraxel.org (ovpn-116-87.ams2.redhat.com
+ [10.36.116.87])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id A5D45909E5;
+ Mon, 24 Feb 2020 08:04:19 +0000 (UTC)
+Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
+ id EA7CF1747F; Mon, 24 Feb 2020 09:04:18 +0100 (CET)
+Date: Mon, 24 Feb 2020 09:04:18 +0100
+From: Gerd Hoffmann <kraxel@redhat.com>
+To: Nirmoy <nirmodas@amd.com>
+Message-ID: <20200224080418.3cggiohw43afc2hp@sirius.home.kraxel.org>
+References: <20200217150427.49994-1-nirmoy.das@amd.com>
+ <20200217150427.49994-9-nirmoy.das@amd.com>
+ <c3a20c1b-0520-1995-7445-9e3f3ea77394@suse.de>
+ <9db59846-90b4-2b9a-8200-69297112693a@amd.com>
+ <edc985f1-8856-4d1a-8960-efe4d21b960d@amd.com>
 MIME-Version: 1.0
-In-Reply-To: <trinity-c5570114-8f17-4b15-bb54-f6a39340ef19-1582394224520@3c-app-gmx-bs13>
-X-ELNK-Trace: 7235c9a3853724b974bf435c0eb9d478b2840978631958361b16ad098d2487287739e3f108b71a35350badd9bab72f9c350badd9bab72f9c350badd9bab72f9c
-X-Originating-IP: 24.144.102.41
-Subject: Re: [Nouveau] NV40 under Debian
+In-Reply-To: <edc985f1-8856-4d1a-8960-efe4d21b960d@amd.com>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Disposition: inline
+Subject: Re: [Nouveau] [PATCH 8/8] drm/ttm: do not keep GPU dependent
+ addresses
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -41,65 +67,28 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
+Cc: thellstrom@vmware.com, airlied@linux.ie, kenny.ho@amd.com,
+ dri-devel@lists.freedesktop.org, bskeggs@redhat.com, nirmoy.das@amd.com,
+ linux-graphics-maintainer@vmware.com, amd-gfx@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org, alexander.deucher@amd.com, sean@poorly.run,
+ Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>,
+ Nirmoy Das <nirmoy.aiemd@gmail.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Lukas Schubert composed on 2020-02-22 12:57 (UTC-0500):
- 
-> my media center PC is freshly installed with Debian 10.2 "Buster". It doesn't support Geforce 6800 GT (NV40) boards through the nvidia nor the nvidia-legacy drivers any longer. The legacy drivers worked up until Debian 9 "Stretch", but no longer.
- 
-> I know that the hardware works because I can boot SystemRescueCD from CD and get a flawless desktop presentation on the attached full HD TV.
- 
-> But in Debian 10, the colours are distorted. Have a look at "Nouveau.jpg" here: https://jumpshare.com/b/Se5d7xMu5tBSsR2Zcz8p
-> I can get the colours to work by starting the kernel with "nomodeset". Look at the same link, "NoModeSet.jpg".
+  Hi,
 
-Nomodeset causes use of fallback X video drivers that typically utilize far
-less than all of the videoram, usually running in a lower resolution mode
-such as 1024x768 or 1280x1024, lower than most current widescreen displays
-support.
+> 2 unfortunately I can't say the same for bochs but it works with this patch
+> series so I think bochs is fine as well.
 
-> SystemRescueCD (working nouveau version) uses an older kernel:
-> root@sysresccd /root % uname -a
-> Linux sysresccd 3.2.28-std300-amd64 #2 SMP Tue Aug 21 18:35:38 UTC 2012 x86_64 Intel(R) Core(TM)2 CPU 6420 @ 2.13GHz GenuineIntel GNU/Linux
- 
-> Debian 10.2 (distorted colours) uses this kernel:
-> luker@michael:~$ uname -a
-> Linux michael 4.19.0-8-amd64 #1 SMP Debian 4.19.98-1 (2020-01-26) x86_64 GNU/Linux
- 
-> Is there a configuration setting in nouveau that causes those weird colours?
-> Bit order/byte order maybe?
+bochs needs the offset only to scanout framebuffers, which in turn
+requires framebuffers being pinned to vram.  So all green here.
 
-Which DDX is X employing to produce that?:
+cheers,
+  Gerd
 
-	inxi -Gxx
-
-It's quite possible your colors trouble is caused by a failing GeForce. I have
-both newer and older working fine on either of the FOSS DDX, e.g.:
-
-> inxi -SGxx
-System:    Host: gx270.ij.net Kernel: 4.19.0-8-686 i686 bits: 32 compiler: gcc v: 8.3.0 Desktop: Trinity wm: Twin dm: startx
-           Distro: Debian GNU/Linux 10 (buster)
-Graphics:  Device-1: NVIDIA NV34 [GeForce FX 5200] driver: nouveau v: kernel bus ID: 01:00.0 chip ID: 10de:0322
-           Display: server: X.Org 1.20.4 driver: nouveau unloaded: fbdev,modesetting,vesa alternate: nv
-           resolution: 1680x1050~60Hz, 1920x1200~60Hz
-           OpenGL: renderer: NV34 v: 1.5 Mesa 18.3.6 direct render: Yes
-root@gx270:~# xrandr | egrep 'onnect|creen|\*' | grep -v disconn | sort -r
-VGA-1 connected primary 1680x1050+0+0 (normal left inverted right x axis y axis) 474mm x 296mm
-Screen 0: minimum 320 x 200, current 3600 x 1200, maximum 4096 x 4096
-DVI-I-1 connected 1920x1200+1680+0 (normal left inverted right x axis y axis) 519mm x 324mm
-   1920x1200     59.95*+
-   1680x1050     59.97*+  74.89
-
-I have in the past with NVidia and AMD cards seen similar colors disruption instead
-of normal output when a card is failing.
--- 
-Evolution as taught in public schools is religion, not science.
-
- Team OS/2 ** Reg. Linux User #211409 ** a11y rocks!
-
-Felix Miata  ***  http://fm.no-ip.com/
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
