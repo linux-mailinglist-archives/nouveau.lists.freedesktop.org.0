@@ -2,41 +2,105 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id EFEF916FA7E
-	for <lists+nouveau@lfdr.de>; Wed, 26 Feb 2020 10:18:54 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1AEC516FA80
+	for <lists+nouveau@lfdr.de>; Wed, 26 Feb 2020 10:18:59 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 50C016E297;
-	Wed, 26 Feb 2020 09:18:53 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 812E56E2BD;
+	Wed, 26 Feb 2020 09:18:54 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E14346EA98;
- Tue, 25 Feb 2020 11:21:22 +0000 (UTC)
-X-Amp-Result: UNKNOWN
-X-Amp-Original-Verdict: FILE UNKNOWN
-X-Amp-File-Uploaded: False
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
- by fmsmga102.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
- 25 Feb 2020 03:21:22 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.70,483,1574150400"; d="scan'208";a="350131736"
-Received: from stinkbox.fi.intel.com (HELO stinkbox) ([10.237.72.174])
- by fmsmga001.fm.intel.com with SMTP; 25 Feb 2020 03:21:15 -0800
-Received: by stinkbox (sSMTP sendmail emulation);
- Tue, 25 Feb 2020 13:21:14 +0200
-Date: Tue, 25 Feb 2020 13:21:14 +0200
-From: Ville =?iso-8859-1?Q?Syrj=E4l=E4?= <ville.syrjala@linux.intel.com>
-To: Andrzej Hajda <a.hajda@samsung.com>
-Message-ID: <20200225112114.GA13686@intel.com>
+Received: from mailout1.w1.samsung.com (mailout1.w1.samsung.com
+ [210.118.77.11])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 649A56EB2B
+ for <nouveau@lists.freedesktop.org>; Tue, 25 Feb 2020 15:19:31 +0000 (UTC)
+Received: from eucas1p2.samsung.com (unknown [182.198.249.207])
+ by mailout1.w1.samsung.com (KnoxPortal) with ESMTP id
+ 20200225151929euoutp018f8f95807ff94fb132030a752c22f27d~2rk4nK1YL0882408824euoutp01T
+ for <nouveau@lists.freedesktop.org>; Tue, 25 Feb 2020 15:19:29 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.w1.samsung.com
+ 20200225151929euoutp018f8f95807ff94fb132030a752c22f27d~2rk4nK1YL0882408824euoutp01T
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+ s=mail20170921; t=1582643969;
+ bh=a0XztLp6xwTLwM/NryR7JW01QC+Df8Zpek1nXjPIKt4=;
+ h=Subject:To:Cc:From:Date:In-Reply-To:References:From;
+ b=Poo/EjtzvJeKPW27RORgFm85tlcg4NrWGPDyoIVpIL2S2g/GYRuv1xrYQiENUH9E3
+ yRT0Xkgaip5qcQwcMeHejnSyqLzw4oQamxPXOmzcntOOiKg1uNtJN+1O6dLYMAP2mh
+ l8GE3bsZV3gNDpTtxo+pCjHHNKss3w5jIWhAAMcg=
+Received: from eusmges1new.samsung.com (unknown [203.254.199.242]) by
+ eucas1p2.samsung.com (KnoxPortal) with ESMTP id
+ 20200225151929eucas1p2138a433997471922f6770dc0172c53b7~2rk4P4CHa0989009890eucas1p2d;
+ Tue, 25 Feb 2020 15:19:29 +0000 (GMT)
+Received: from eucas1p2.samsung.com ( [182.198.249.207]) by
+ eusmges1new.samsung.com (EUCPMTA) with SMTP id F0.19.61286.10B355E5; Tue, 25
+ Feb 2020 15:19:29 +0000 (GMT)
+Received: from eusmtrp1.samsung.com (unknown [182.198.249.138]) by
+ eucas1p1.samsung.com (KnoxPortal) with ESMTPA id
+ 20200225151928eucas1p187315cf23b4a9692deb344017234b179~2rk3zlc-K1827918279eucas1p1N;
+ Tue, 25 Feb 2020 15:19:28 +0000 (GMT)
+Received: from eusmgms2.samsung.com (unknown [182.198.249.180]) by
+ eusmtrp1.samsung.com (KnoxPortal) with ESMTP id
+ 20200225151928eusmtrp12b9255d113edb38b9c7b4627cb5fa7db~2rk3xqTS30926909269eusmtrp1B;
+ Tue, 25 Feb 2020 15:19:28 +0000 (GMT)
+X-AuditID: cbfec7f2-f0bff7000001ef66-1e-5e553b014a9f
+Received: from eusmtip2.samsung.com ( [203.254.199.222]) by
+ eusmgms2.samsung.com (EUCPMTA) with SMTP id 80.84.07950.00B355E5; Tue, 25
+ Feb 2020 15:19:28 +0000 (GMT)
+Received: from [106.120.51.74] (unknown [106.120.51.74]) by
+ eusmtip2.samsung.com (KnoxPortal) with ESMTPA id
+ 20200225151927eusmtip236b328a1a8e1667041fa142abeed19d9~2rk2vV6Pd0386803868eusmtip2M;
+ Tue, 25 Feb 2020 15:19:27 +0000 (GMT)
+To: =?UTF-8?B?VmlsbGUgU3lyasOkbMOk?= <ville.syrjala@linux.intel.com>
+From: Andrzej Hajda <a.hajda@samsung.com>
+Message-ID: <3ca785f2-9032-aaf9-0965-8657d31116ba@samsung.com>
+Date: Tue, 25 Feb 2020 16:19:27 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.4.1
+MIME-Version: 1.0
+In-Reply-To: <20200225112114.GA13686@intel.com>
+Content-Language: en-US
+X-Brightmail-Tracker: H4sIAAAAAAAAA02Sa0wTWRTHc+fVoTJmqBiOaKJbsyaYKOsjeo3EaELi6K6JmmA2PtAqEyAC
+ YgsofhEVtLhu7aqgtCoPa4ooEa1FChuyO0tARFYlVisK9QERtIq8hKLWpZ2a5cvN757zP4//
+ zWVJVR0TySanZYjaNE2KmlFS1Y3e+/PQ8rj4n7o/cbj/0Esa91r1CD8a7mOw1FZF4MHSTgKb
+ jTYCD900Mtg50kviZo+Twj2dDylcfPQchVsPexQ4/w+LApeYJ2FPQyPCkmELHjEYaPx3sUTj
+ cq8dYV9HLoHPne5l8ODdRgZ7ay9SeMRXSuB7zr+oldOEyn43LVzy+gihz5WnEBymDoVg63AQ
+ gllfRAt3jG2EcLF5g+D+rYkQbJaDwo0PNYQwdn+J8KqmHQmWQicj9NWPH4ZbFWh9+GZlTIKY
+ kpwlaqNX7FAmnWl0kukGPbVfqnPQOWj4AnkchbDALwZL4Rf6OFKyKr4cwZlDekK+DCFokF4E
+ M4MInpfVM99L2iqeMHLCiqBdKgte3iPov9aF/Kop/CJ4+fsphZ/D+Vh4am8KtCL5VwrwHOkM
+ iBg+Cr7angbacvwKKL5UFWCK/xFG31QSfp7K/wqFt31I1oRBc1EX5ecQPhqsZ8/Tfib5mXDE
+ biZljoD2ruKACeBHWXjmvYfkvWPBeScv6GEKvG26pZB5BrScPkHJfBDc5bmkXKxHYK9yBN9p
+ OTz/d2y8mB2fEAXXa6Pl8CpwWCpofxj4yeB6HybvMBlOVZ8l5TAH+qMqWf0DuFvtwYYRcPnB
+ MGNEatMEZ6YJbkwT3Jj+n1uCqAoUIWbqUhNF3YI0cd98nSZVl5mWOH/XntSbaPxLt/iaBmrQ
+ cNtOCfEsUodyPSFx8Spak6XLTpUQsKQ6nPsZbYxXcQma7AOids92bWaKqJPQdJZSR3CLynq3
+ qfhETYa4WxTTRe33LMGGROag1Vs9s9z5C1u5okmasOT9U4+VPm6ozYgqKPj8i/XF3lq3JwEK
+ ut4s/ZTjGuQeDSxNSi8yUgtjruKr3ZVDStolFZ68m/enuY4O/dbisv7jTcpaZ3DmDWXot2fH
+ llyb43mWu2a9dZdt2kD33NeOZS19obuvvLs+e+3s+vzqko/WTQ09akqXpFkwl9TqNP8Bj8Kx
+ wM4DAAA=
+X-Brightmail-Tracker: H4sIAAAAAAAAA02Se0hTURyAO/exh7W4zYUno5JRRELTudRjmUT0uBGEGVFkacMuKjonu1uk
+ //Swci0cW6/pNGekaIakTkuzLFdOl0okTStQ08QUTZOStbDR5gr2z+HjnO87hwM/Hi7sI0N5
+ mTlqRpUjzxZzgogeT9fw1mU7jqZEfq+IQPMXR0k0Va0F6P3CHAfZ+usx9OPeMIZKDVYM/Ww0
+ cJDTNYUjx4yTQJPD7whkuVpMoL5LM1x0zVjJRRWly9HMaztANn0ycun1JOqw2EhU424GyDN0
+ GUPFN6c46McbOwe5n5YTyOW5h6Fe50ti1xq6bn6EpO+7PRg99+EKl241D3Fp61ArRpdqS0i6
+ 29CP0eWOw/TI9S6MtlaepxtmWzD699sYeqzlE6Ar7zg59Fy7d9E31YJE0QlJvEqpUTNhGUpW
+ vVOcLEVREmkckkRti5NIZbGntkdFiyMS4s8w2ZlnGVVEwmlJxi27E8/Va4lztrZW8gJYuIvr
+ AJ8HqW2wv3aQ42MhVQVg+9Vj/v0Q2Gb59s8JhosDOq8T5HWmAXzX+wrzHQRTMjhadIPrYxG1
+ B35s7iJ9Ek5NcOE3pxH3Fw8wWFRdtfQEh9oC/1g/LrGASoCW+/VLTFCb4K+vdUu3rqaOwy/G
+ QuB3VkFHyTjhYz4VAatNZaSPcWozXCzvx/28ARY0l/7jEPhp3IIZgNAckJsDEnNAYg5IKgBR
+ C0SMhlWkK9goCStXsJqcdEmaUtEIvKP02O5uagG62SM2QPGAeIVgkn80RUjKz7J5ChuAPFws
+ EhwESSlCwRl5Xj6jUqaqNNkMawPR3s8Z8dDVaUrvYOaoU6XR0lgUJ42VxcpikDhEoKU6Tgqp
+ dLmayWKYXEb1v8N4/NALoJOcc0w/saYxnZr8hSd7m58Vjg3mD2wU5sk6Rl1H2EdaDfN6fm3P
+ 7VHTunOhDx3XiiIfFGVtCMfLDogUdcnrXyQlHpIhO8+Ze9fJrxhcn/xWpUtk9OO/icrdi64B
+ TU1S5gSYLXje021qa9jHfpas/W4K7itc2WB+OFK7NSxrv5hgM+TScFzFyv8CwS26oWADAAA=
+X-CMS-MailID: 20200225151928eucas1p187315cf23b4a9692deb344017234b179
+X-Msg-Generator: CA
+X-RootMTR: 20200219203620eucas1p24b4990a91e758dbcf3e9b943669b0c8f
+X-EPHeader: CA
+CMS-TYPE: 201P
+X-CMS-RootMailID: 20200219203620eucas1p24b4990a91e758dbcf3e9b943669b0c8f
 References: <20200219203544.31013-1-ville.syrjala@linux.intel.com>
  <CGME20200219203620eucas1p24b4990a91e758dbcf3e9b943669b0c8f@eucas1p2.samsung.com>
  <20200219203544.31013-5-ville.syrjala@linux.intel.com>
  <0f278771-79ce-fe23-e72c-3935dbe82d24@samsung.com>
-MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <0f278771-79ce-fe23-e72c-3935dbe82d24@samsung.com>
-X-Patchwork-Hint: comment
-User-Agent: Mutt/1.10.1 (2018-07-13)
+ <20200225112114.GA13686@intel.com>
 X-Mailman-Approved-At: Wed, 26 Feb 2020 09:18:53 +0000
 Subject: Re: [Nouveau] [PATCH 04/12] drm: Nuke mode->vrefresh
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -51,2054 +115,1165 @@ List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
 Cc: Neil Armstrong <narmstrong@baylibre.com>, nouveau@lists.freedesktop.org,
- Guido =?iso-8859-1?Q?G=FCnther?= <agx@sigxcpu.org>,
+ =?UTF-8?Q?Guido_G=c3=bcnther?= <agx@sigxcpu.org>,
  dri-devel@lists.freedesktop.org, Thierry Reding <thierry.reding@gmail.com>,
  Laurent Pinchart <Laurent.pinchart@ideasonboard.com>,
- Sam Ravnborg <sam@ravnborg.org>, Thomas Hellstrom <thellstrom@vmware.com>,
+ Sam Ravnborg <sam@ravnborg.org>, Jagan Teki <jagan@amarulasolutions.com>,
+ Thomas Hellstrom <thellstrom@vmware.com>,
  Joonyoung Shim <jy0922.shim@samsung.com>, Stefan Mavrodiev <stefan@olimex.com>,
  Jerry Han <hanxu5@huaqin.corp-partner.google.com>,
  VMware Graphics <linux-graphics-maintainer@vmware.com>,
- Jagan Teki <jagan@amarulasolutions.com>, Robert Chiras <robert.chiras@nxp.com>,
+ Ben Skeggs <bskeggs@redhat.com>, Robert Chiras <robert.chiras@nxp.com>,
  Icenowy Zheng <icenowy@aosc.io>, Jonas Karlman <jonas@kwiboo.se>,
- intel-gfx@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>,
- linux-amlogic@lists.infradead.org, Vincent Abriou <vincent.abriou@st.com>,
+ intel-gfx@lists.freedesktop.org, linux-amlogic@lists.infradead.org,
+ Vincent Abriou <vincent.abriou@st.com>,
  Jernej Skrabec <jernej.skrabec@siol.net>, Purism Kernel Team <kernel@puri.sm>,
  Seung-Woo Kim <sw0312.kim@samsung.com>,
  Kyungmin Park <kyungmin.park@samsung.com>
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Mon, Feb 24, 2020 at 03:14:54PM +0100, Andrzej Hajda wrote:
-> On 19.02.2020 21:35, Ville Syrjala wrote:
-> > From: Ville Syrj=E4l=E4 <ville.syrjala@linux.intel.com>
-> >
-> > Get rid of mode->vrefresh and just calculate it on demand. Saves
-> > a bit of space and avoids the cached value getting out of sync
-> > with reality.
-> >
-> > Mostly done with cocci, with the following manual fixups:
-> > - Remove the now empty loop in drm_helper_probe_single_connector_modes()
-> > - Fix __MODE() macro in ch7006_mode.c
-> > - Fix DRM_MODE_ARG() macro in drm_modes.h
-> > - Remove leftover comment from samsung_s6d16d0_mode
-> ...
-> > diff --git a/drivers/gpu/drm/panel/panel-arm-versatile.c b/drivers/gpu/=
-drm/panel/panel-arm-versatile.c
-> > index 41444a73c980..47b37fef7ee8 100644
-> > --- a/drivers/gpu/drm/panel/panel-arm-versatile.c
-> > +++ b/drivers/gpu/drm/panel/panel-arm-versatile.c
-> > @@ -143,7 +143,6 @@ static const struct versatile_panel_type versatile_=
-panels[] =3D {
-> >  			.vsync_start =3D 240 + 5,
-> >  			.vsync_end =3D 240 + 5 + 6,
-> >  			.vtotal =3D 240 + 5 + 6 + 5,
-> > -			.vrefresh =3D 116,
-> =
-
-> =
-
-> Are you sure vrefresh calculated (from totals and clock) is different
-> than this field? If not, we risk regressions.
-> =
-
-> This case is OK, but there is plenty other cases.
-
-IIRC I did spot check a few of them. But which code exactly do you think
-is abusing vrefresh and thus could break?
-
-> =
-
-> =
-
-> Regards
-> =
-
-> Andrzej
-> =
-
-> =
-
-> >  			.flags =3D DRM_MODE_FLAG_PHSYNC | DRM_MODE_FLAG_PVSYNC,
-> >  		},
-> >  	},
-> > @@ -167,7 +166,6 @@ static const struct versatile_panel_type versatile_=
-panels[] =3D {
-> >  			.vsync_start =3D 480 + 11,
-> >  			.vsync_end =3D 480 + 11 + 2,
-> >  			.vtotal =3D 480 + 11 + 2 + 32,
-> > -			.vrefresh =3D 60,
-> >  			.flags =3D DRM_MODE_FLAG_PHSYNC | DRM_MODE_FLAG_PVSYNC,
-> >  		},
-> >  	},
-> > @@ -190,7 +188,6 @@ static const struct versatile_panel_type versatile_=
-panels[] =3D {
-> >  			.vsync_start =3D 220 + 0,
-> >  			.vsync_end =3D 220 + 0 + 2,
-> >  			.vtotal =3D 220 + 0 + 2 + 1,
-> > -			.vrefresh =3D 390,
-> >  			.flags =3D DRM_MODE_FLAG_PHSYNC | DRM_MODE_FLAG_PVSYNC,
-> >  		},
-> >  		.bus_flags =3D DRM_BUS_FLAG_PIXDATA_DRIVE_NEGEDGE,
-> > @@ -214,7 +211,6 @@ static const struct versatile_panel_type versatile_=
-panels[] =3D {
-> >  			.vsync_start =3D 320 + 2,
-> >  			.vsync_end =3D 320 + 2 + 2,
-> >  			.vtotal =3D 320 + 2 + 2 + 2,
-> > -			.vrefresh =3D 116,
-> >  			.flags =3D DRM_MODE_FLAG_NHSYNC | DRM_MODE_FLAG_NVSYNC,
-> >  		},
-> >  		.bus_flags =3D DRM_BUS_FLAG_PIXDATA_DRIVE_NEGEDGE,
-> > diff --git a/drivers/gpu/drm/panel/panel-boe-himax8279d.c b/drivers/gpu=
-/drm/panel/panel-boe-himax8279d.c
-> > index 74d58ee7d04c..7c27bd5e3486 100644
-> > --- a/drivers/gpu/drm/panel/panel-boe-himax8279d.c
-> > +++ b/drivers/gpu/drm/panel/panel-boe-himax8279d.c
-> > @@ -229,7 +229,7 @@ static int boe_panel_get_modes(struct drm_panel *pa=
-nel,
-> >  	mode =3D drm_mode_duplicate(connector->dev, m);
-> >  	if (!mode) {
-> >  		DRM_DEV_ERROR(pinfo->base.dev, "failed to add mode %ux%u@%u\n",
-> > -			      m->hdisplay, m->vdisplay, m->vrefresh);
-> > +			      m->hdisplay, m->vdisplay, drm_mode_vrefresh(m));
-> >  		return -ENOMEM;
-> >  	}
-> >  =
-
-> > @@ -262,7 +262,6 @@ static const struct drm_display_mode default_displa=
-y_mode =3D {
-> >  	.vsync_start =3D 1920 + 10,
-> >  	.vsync_end =3D 1920 + 10 + 14,
-> >  	.vtotal =3D 1920 + 10 + 14 + 4,
-> > -	.vrefresh =3D 60,
-> >  };
-> >  =
-
-> >  /* 8 inch */
-> > diff --git a/drivers/gpu/drm/panel/panel-boe-tv101wum-nl6.c b/drivers/g=
-pu/drm/panel/panel-boe-tv101wum-nl6.c
-> > index 48a164257d18..c580bd1e121c 100644
-> > --- a/drivers/gpu/drm/panel/panel-boe-tv101wum-nl6.c
-> > +++ b/drivers/gpu/drm/panel/panel-boe-tv101wum-nl6.c
-> > @@ -594,7 +594,6 @@ static const struct drm_display_mode boe_tv101wum_n=
-l6_default_mode =3D {
-> >  	.vsync_start =3D 1920 + 10,
-> >  	.vsync_end =3D 1920 + 10 + 14,
-> >  	.vtotal =3D 1920 + 10 + 14 + 4,
-> > -	.vrefresh =3D 60,
-> >  };
-> >  =
-
-> >  static const struct panel_desc boe_tv101wum_nl6_desc =3D {
-> > @@ -622,7 +621,6 @@ static const struct drm_display_mode auo_kd101n80_4=
-5na_default_mode =3D {
-> >  	.vsync_start =3D 1920 + 16,
-> >  	.vsync_end =3D 1920 + 16 + 4,
-> >  	.vtotal =3D 1920 + 16 + 4 + 16,
-> > -	.vrefresh =3D 60,
-> >  };
-> >  =
-
-> >  static const struct panel_desc auo_kd101n80_45na_desc =3D {
-> > @@ -650,7 +648,6 @@ static const struct drm_display_mode boe_tv101wum_n=
-53_default_mode =3D {
-> >  	.vsync_start =3D 1920 + 20,
-> >  	.vsync_end =3D 1920 + 20 + 4,
-> >  	.vtotal =3D 1920 + 20 + 4 + 10,
-> > -	.vrefresh =3D 60,
-> >  	.type =3D DRM_MODE_TYPE_DRIVER | DRM_MODE_TYPE_PREFERRED,
-> >  };
-> >  =
-
-> > @@ -678,7 +675,6 @@ static const struct drm_display_mode auo_b101uan08_=
-3_default_mode =3D {
-> >  	.vsync_start =3D 1920 + 34,
-> >  	.vsync_end =3D 1920 + 34 + 2,
-> >  	.vtotal =3D 1920 + 34 + 2 + 24,
-> > -	.vrefresh =3D 60,
-> >  	.type =3D DRM_MODE_TYPE_DRIVER | DRM_MODE_TYPE_PREFERRED,
-> >  };
-> >  =
-
-> > @@ -706,7 +702,7 @@ static int boe_panel_get_modes(struct drm_panel *pa=
-nel,
-> >  	mode =3D drm_mode_duplicate(connector->dev, m);
-> >  	if (!mode) {
-> >  		dev_err(panel->dev, "failed to add mode %ux%u@%u\n",
-> > -			m->hdisplay, m->vdisplay, m->vrefresh);
-> > +			m->hdisplay, m->vdisplay, drm_mode_vrefresh(m));
-> >  		return -ENOMEM;
-> >  	}
-> >  =
-
-> > diff --git a/drivers/gpu/drm/panel/panel-feixin-k101-im2ba02.c b/driver=
-s/gpu/drm/panel/panel-feixin-k101-im2ba02.c
-> > index fddbfddf6566..54610651ecdb 100644
-> > --- a/drivers/gpu/drm/panel/panel-feixin-k101-im2ba02.c
-> > +++ b/drivers/gpu/drm/panel/panel-feixin-k101-im2ba02.c
-> > @@ -392,7 +392,6 @@ static int k101_im2ba02_unprepare(struct drm_panel =
-*panel)
-> >  =
-
-> >  static const struct drm_display_mode k101_im2ba02_default_mode =3D {
-> >  	.clock =3D 70000,
-> > -	.vrefresh =3D 60,
-> >  =
-
-> >  	.hdisplay =3D 800,
-> >  	.hsync_start =3D 800 + 20,
-> > @@ -420,7 +419,7 @@ static int k101_im2ba02_get_modes(struct drm_panel =
-*panel,
-> >  		DRM_DEV_ERROR(&ctx->dsi->dev, "failed to add mode %ux%ux@%u\n",
-> >  			      k101_im2ba02_default_mode.hdisplay,
-> >  			      k101_im2ba02_default_mode.vdisplay,
-> > -			      k101_im2ba02_default_mode.vrefresh);
-> > +			      drm_mode_vrefresh(&k101_im2ba02_default_mode));
-> >  		return -ENOMEM;
-> >  	}
-> >  =
-
-> > diff --git a/drivers/gpu/drm/panel/panel-feiyang-fy07024di26a30d.c b/dr=
-ivers/gpu/drm/panel/panel-feiyang-fy07024di26a30d.c
-> > index 95b789ab9d29..19a6274b10f5 100644
-> > --- a/drivers/gpu/drm/panel/panel-feiyang-fy07024di26a30d.c
-> > +++ b/drivers/gpu/drm/panel/panel-feiyang-fy07024di26a30d.c
-> > @@ -153,7 +153,6 @@ static const struct drm_display_mode feiyang_defaul=
-t_mode =3D {
-> >  	.vsync_start	=3D 600 + 12,
-> >  	.vsync_end	=3D 600 + 12 + 2,
-> >  	.vtotal		=3D 600 + 12 + 2 + 21,
-> > -	.vrefresh	=3D 60,
-> >  =
-
-> >  	.type =3D DRM_MODE_TYPE_DRIVER | DRM_MODE_TYPE_PREFERRED,
-> >  };
-> > @@ -169,7 +168,7 @@ static int feiyang_get_modes(struct drm_panel *pane=
-l,
-> >  		DRM_DEV_ERROR(&ctx->dsi->dev, "failed to add mode %ux%ux@%u\n",
-> >  			      feiyang_default_mode.hdisplay,
-> >  			      feiyang_default_mode.vdisplay,
-> > -			      feiyang_default_mode.vrefresh);
-> > +			      drm_mode_vrefresh(&feiyang_default_mode));
-> >  		return -ENOMEM;
-> >  	}
-> >  =
-
-> > diff --git a/drivers/gpu/drm/panel/panel-ilitek-ili9322.c b/drivers/gpu=
-/drm/panel/panel-ilitek-ili9322.c
-> > index f394d53a7da4..d2c98d381bef 100644
-> > --- a/drivers/gpu/drm/panel/panel-ilitek-ili9322.c
-> > +++ b/drivers/gpu/drm/panel/panel-ilitek-ili9322.c
-> > @@ -549,7 +549,6 @@ static const struct drm_display_mode srgb_320x240_m=
-ode =3D {
-> >  	.vsync_start =3D 240 + 4,
-> >  	.vsync_end =3D 240 + 4 + 1,
-> >  	.vtotal =3D 262,
-> > -	.vrefresh =3D 60,
-> >  	.flags =3D 0,
-> >  };
-> >  =
-
-> > @@ -563,7 +562,6 @@ static const struct drm_display_mode srgb_360x240_m=
-ode =3D {
-> >  	.vsync_start =3D 240 + 21,
-> >  	.vsync_end =3D 240 + 21 + 1,
-> >  	.vtotal =3D 262,
-> > -	.vrefresh =3D 60,
-> >  	.flags =3D 0,
-> >  };
-> >  =
-
-> > @@ -578,7 +576,6 @@ static const struct drm_display_mode prgb_320x240_m=
-ode =3D {
-> >  	.vsync_start =3D 240 + 4,
-> >  	.vsync_end =3D 240 + 4 + 1,
-> >  	.vtotal =3D 262,
-> > -	.vrefresh =3D 60,
-> >  	.flags =3D 0,
-> >  };
-> >  =
-
-> > @@ -593,7 +590,6 @@ static const struct drm_display_mode yuv_640x320_mo=
-de =3D {
-> >  	.vsync_start =3D 320 + 4,
-> >  	.vsync_end =3D 320 + 4 + 1,
-> >  	.vtotal =3D 320 + 4 + 1 + 18,
-> > -	.vrefresh =3D 60,
-> >  	.flags =3D 0,
-> >  };
-> >  =
-
-> > @@ -607,7 +603,6 @@ static const struct drm_display_mode yuv_720x360_mo=
-de =3D {
-> >  	.vsync_start =3D 360 + 4,
-> >  	.vsync_end =3D 360 + 4 + 1,
-> >  	.vtotal =3D 360 + 4 + 1 + 18,
-> > -	.vrefresh =3D 60,
-> >  	.flags =3D 0,
-> >  };
-> >  =
-
-> > @@ -622,7 +617,6 @@ static const struct drm_display_mode itu_r_bt_656_6=
-40_mode =3D {
-> >  	.vsync_start =3D 480 + 4,
-> >  	.vsync_end =3D 480 + 4 + 1,
-> >  	.vtotal =3D 500,
-> > -	.vrefresh =3D 60,
-> >  	.flags =3D 0,
-> >  };
-> >  =
-
-> > @@ -637,7 +631,6 @@ static const struct drm_display_mode itu_r_bt_656_7=
-20_mode =3D {
-> >  	.vsync_start =3D 480 + 4,
-> >  	.vsync_end =3D 480 + 4 + 1,
-> >  	.vtotal =3D 500,
-> > -	.vrefresh =3D 60,
-> >  	.flags =3D 0,
-> >  };
-> >  =
-
-> > diff --git a/drivers/gpu/drm/panel/panel-ilitek-ili9881c.c b/drivers/gp=
-u/drm/panel/panel-ilitek-ili9881c.c
-> > index f54077c216a3..3ed8635a6fbd 100644
-> > --- a/drivers/gpu/drm/panel/panel-ilitek-ili9881c.c
-> > +++ b/drivers/gpu/drm/panel/panel-ilitek-ili9881c.c
-> > @@ -370,7 +370,6 @@ static int ili9881c_unprepare(struct drm_panel *pan=
-el)
-> >  =
-
-> >  static const struct drm_display_mode bananapi_default_mode =3D {
-> >  	.clock		=3D 62000,
-> > -	.vrefresh	=3D 60,
-> >  =
-
-> >  	.hdisplay	=3D 720,
-> >  	.hsync_start	=3D 720 + 10,
-> > @@ -394,7 +393,7 @@ static int ili9881c_get_modes(struct drm_panel *pan=
-el,
-> >  		dev_err(&ctx->dsi->dev, "failed to add mode %ux%ux@%u\n",
-> >  			bananapi_default_mode.hdisplay,
-> >  			bananapi_default_mode.vdisplay,
-> > -			bananapi_default_mode.vrefresh);
-> > +			drm_mode_vrefresh(&bananapi_default_mode));
-> >  		return -ENOMEM;
-> >  	}
-> >  =
-
-> > diff --git a/drivers/gpu/drm/panel/panel-innolux-p079zca.c b/drivers/gp=
-u/drm/panel/panel-innolux-p079zca.c
-> > index 7419f1f0acee..fdf030f4cf92 100644
-> > --- a/drivers/gpu/drm/panel/panel-innolux-p079zca.c
-> > +++ b/drivers/gpu/drm/panel/panel-innolux-p079zca.c
-> > @@ -223,7 +223,6 @@ static const struct drm_display_mode innolux_p079zc=
-a_mode =3D {
-> >  	.vsync_start =3D 1024 + 20,
-> >  	.vsync_end =3D 1024 + 20 + 4,
-> >  	.vtotal =3D 1024 + 20 + 4 + 20,
-> > -	.vrefresh =3D 60,
-> >  };
-> >  =
-
-> >  static const struct panel_desc innolux_p079zca_panel_desc =3D {
-> > @@ -257,7 +256,6 @@ static const struct drm_display_mode innolux_p097pf=
-g_mode =3D {
-> >  	.vsync_start =3D 2048 + 100,
-> >  	.vsync_end =3D 2048 + 100 + 2,
-> >  	.vtotal =3D 2048 + 100 + 2 + 18,
-> > -	.vrefresh =3D 60,
-> >  };
-> >  =
-
-> >  /*
-> > @@ -401,7 +399,7 @@ static int innolux_panel_get_modes(struct drm_panel=
- *panel,
-> >  	mode =3D drm_mode_duplicate(connector->dev, m);
-> >  	if (!mode) {
-> >  		DRM_DEV_ERROR(panel->dev, "failed to add mode %ux%ux@%u\n",
-> > -			      m->hdisplay, m->vdisplay, m->vrefresh);
-> > +			      m->hdisplay, m->vdisplay, drm_mode_vrefresh(m));
-> >  		return -ENOMEM;
-> >  	}
-> >  =
-
-> > diff --git a/drivers/gpu/drm/panel/panel-jdi-lt070me05000.c b/drivers/g=
-pu/drm/panel/panel-jdi-lt070me05000.c
-> > index 4bfd8c877c8e..1e3fd6633981 100644
-> > --- a/drivers/gpu/drm/panel/panel-jdi-lt070me05000.c
-> > +++ b/drivers/gpu/drm/panel/panel-jdi-lt070me05000.c
-> > @@ -296,7 +296,6 @@ static const struct drm_display_mode default_mode =
-=3D {
-> >  		.vsync_start =3D 1920 + 3,
-> >  		.vsync_end =3D 1920 + 3 + 5,
-> >  		.vtotal =3D 1920 + 3 + 5 + 6,
-> > -		.vrefresh =3D 60,
-> >  		.flags =3D 0,
-> >  };
-> >  =
-
-> > @@ -311,7 +310,7 @@ static int jdi_panel_get_modes(struct drm_panel *pa=
-nel,
-> >  	if (!mode) {
-> >  		dev_err(dev, "failed to add mode %ux%ux@%u\n",
-> >  			default_mode.hdisplay, default_mode.vdisplay,
-> > -			default_mode.vrefresh);
-> > +			drm_mode_vrefresh(&default_mode));
-> >  		return -ENOMEM;
-> >  	}
-> >  =
-
-> > diff --git a/drivers/gpu/drm/panel/panel-kingdisplay-kd097d04.c b/drive=
-rs/gpu/drm/panel/panel-kingdisplay-kd097d04.c
-> > index bac1a2a06c92..0d397af23afe 100644
-> > --- a/drivers/gpu/drm/panel/panel-kingdisplay-kd097d04.c
-> > +++ b/drivers/gpu/drm/panel/panel-kingdisplay-kd097d04.c
-> > @@ -318,7 +318,6 @@ static const struct drm_display_mode default_mode =
-=3D {
-> >  	.vsync_start =3D 2048 + 95,
-> >  	.vsync_end =3D 2048 + 95 + 2,
-> >  	.vtotal =3D 2048 + 95 + 2 + 23,
-> > -	.vrefresh =3D 60,
-> >  };
-> >  =
-
-> >  static int kingdisplay_panel_get_modes(struct drm_panel *panel,
-> > @@ -330,7 +329,7 @@ static int kingdisplay_panel_get_modes(struct drm_p=
-anel *panel,
-> >  	if (!mode) {
-> >  		DRM_DEV_ERROR(panel->dev, "failed to add mode %ux%ux@%u\n",
-> >  			      default_mode.hdisplay, default_mode.vdisplay,
-> > -			      default_mode.vrefresh);
-> > +			      drm_mode_vrefresh(&default_mode));
-> >  		return -ENOMEM;
-> >  	}
-> >  =
-
-> > diff --git a/drivers/gpu/drm/panel/panel-leadtek-ltk500hd1829.c b/drive=
-rs/gpu/drm/panel/panel-leadtek-ltk500hd1829.c
-> > index 76ecf2de9c44..c39e7f6f5c2d 100644
-> > --- a/drivers/gpu/drm/panel/panel-leadtek-ltk500hd1829.c
-> > +++ b/drivers/gpu/drm/panel/panel-leadtek-ltk500hd1829.c
-> > @@ -376,7 +376,6 @@ static const struct drm_display_mode default_mode =
-=3D {
-> >  	.vsync_start	=3D 1280 + 30,
-> >  	.vsync_end	=3D 1280 + 30 + 4,
-> >  	.vtotal		=3D 1280 + 30 + 4 + 12,
-> > -	.vrefresh	=3D 60,
-> >  	.clock		=3D 41600,
-> >  	.width_mm	=3D 62,
-> >  	.height_mm	=3D 110,
-> > @@ -392,7 +391,7 @@ static int ltk500hd1829_get_modes(struct drm_panel =
-*panel,
-> >  	if (!mode) {
-> >  		DRM_DEV_ERROR(ctx->dev, "failed to add mode %ux%ux@%u\n",
-> >  			      default_mode.hdisplay, default_mode.vdisplay,
-> > -			      default_mode.vrefresh);
-> > +			      drm_mode_vrefresh(&default_mode));
-> >  		return -ENOMEM;
-> >  	}
-> >  =
-
-> > diff --git a/drivers/gpu/drm/panel/panel-lg-lb035q02.c b/drivers/gpu/dr=
-m/panel/panel-lg-lb035q02.c
-> > index e90efeaba4ad..14456b9cd5c0 100644
-> > --- a/drivers/gpu/drm/panel/panel-lg-lb035q02.c
-> > +++ b/drivers/gpu/drm/panel/panel-lg-lb035q02.c
-> > @@ -134,7 +134,6 @@ static const struct drm_display_mode lb035q02_mode =
-=3D {
-> >  	.vsync_start =3D 240 + 4,
-> >  	.vsync_end =3D 240 + 4 + 2,
-> >  	.vtotal =3D 240 + 4 + 2 + 18,
-> > -	.vrefresh =3D 60,
-> >  	.type =3D DRM_MODE_TYPE_DRIVER | DRM_MODE_TYPE_PREFERRED,
-> >  	.flags =3D DRM_MODE_FLAG_NHSYNC | DRM_MODE_FLAG_NVSYNC,
-> >  	.width_mm =3D 70,
-> > diff --git a/drivers/gpu/drm/panel/panel-lg-lg4573.c b/drivers/gpu/drm/=
-panel/panel-lg-lg4573.c
-> > index b262b53dbd85..497f3b888a1d 100644
-> > --- a/drivers/gpu/drm/panel/panel-lg-lg4573.c
-> > +++ b/drivers/gpu/drm/panel/panel-lg-lg4573.c
-> > @@ -206,7 +206,6 @@ static const struct drm_display_mode default_mode =
-=3D {
-> >  	.vsync_start =3D 800 + 15,
-> >  	.vsync_end =3D 800 + 15 + 15,
-> >  	.vtotal =3D 800 + 15 + 15 + 15,
-> > -	.vrefresh =3D 60,
-> >  };
-> >  =
-
-> >  static int lg4573_get_modes(struct drm_panel *panel,
-> > @@ -218,7 +217,7 @@ static int lg4573_get_modes(struct drm_panel *panel,
-> >  	if (!mode) {
-> >  		dev_err(panel->dev, "failed to add mode %ux%ux@%u\n",
-> >  			default_mode.hdisplay, default_mode.vdisplay,
-> > -			default_mode.vrefresh);
-> > +			drm_mode_vrefresh(&default_mode));
-> >  		return -ENOMEM;
-> >  	}
-> >  =
-
-> > diff --git a/drivers/gpu/drm/panel/panel-nec-nl8048hl11.c b/drivers/gpu=
-/drm/panel/panel-nec-nl8048hl11.c
-> > index c4f83f6384e1..f894971c1c7c 100644
-> > --- a/drivers/gpu/drm/panel/panel-nec-nl8048hl11.c
-> > +++ b/drivers/gpu/drm/panel/panel-nec-nl8048hl11.c
-> > @@ -116,7 +116,6 @@ static const struct drm_display_mode nl8048_mode =
-=3D {
-> >  	.vsync_start =3D 480 + 3,
-> >  	.vsync_end =3D 480 + 3 + 1,
-> >  	.vtotal =3D 480 + 3 + 1 + 4,
-> > -	.vrefresh =3D 60,
-> >  	.type =3D DRM_MODE_TYPE_DRIVER | DRM_MODE_TYPE_PREFERRED,
-> >  	.flags =3D DRM_MODE_FLAG_NHSYNC | DRM_MODE_FLAG_NVSYNC,
-> >  	.width_mm =3D 89,
-> > diff --git a/drivers/gpu/drm/panel/panel-novatek-nt39016.c b/drivers/gp=
-u/drm/panel/panel-novatek-nt39016.c
-> > index a470810f7dbe..4b545e081b1e 100644
-> > --- a/drivers/gpu/drm/panel/panel-novatek-nt39016.c
-> > +++ b/drivers/gpu/drm/panel/panel-novatek-nt39016.c
-> > @@ -327,7 +327,6 @@ static const struct nt39016_panel_info kd035g6_info=
- =3D {
-> >  		.vsync_start =3D 240 + 5,
-> >  		.vsync_end =3D 240 + 5 + 1,
-> >  		.vtotal =3D 240 + 5 + 1 + 4,
-> > -		.vrefresh =3D 60,
-> >  		.flags =3D DRM_MODE_FLAG_NHSYNC | DRM_MODE_FLAG_NVSYNC,
-> >  	},
-> >  	.width_mm =3D 71,
-> > diff --git a/drivers/gpu/drm/panel/panel-olimex-lcd-olinuxino.c b/drive=
-rs/gpu/drm/panel/panel-olimex-lcd-olinuxino.c
-> > index 09deb99981a4..ecd76b5391d3 100644
-> > --- a/drivers/gpu/drm/panel/panel-olimex-lcd-olinuxino.c
-> > +++ b/drivers/gpu/drm/panel/panel-olimex-lcd-olinuxino.c
-> > @@ -170,7 +170,6 @@ static int lcd_olinuxino_get_modes(struct drm_panel=
- *panel,
-> >  				  lcd_mode->vpw;
-> >  		mode->vtotal =3D lcd_mode->vactive + lcd_mode->vfp +
-> >  			       lcd_mode->vpw + lcd_mode->vbp;
-> > -		mode->vrefresh =3D lcd_mode->refresh;
-> >  =
-
-> >  		/* Always make the first mode preferred */
-> >  		if (i =3D=3D 0)
-> > diff --git a/drivers/gpu/drm/panel/panel-orisetech-otm8009a.c b/drivers=
-/gpu/drm/panel/panel-orisetech-otm8009a.c
-> > index bb0c992171e8..895ee3d1371e 100644
-> > --- a/drivers/gpu/drm/panel/panel-orisetech-otm8009a.c
-> > +++ b/drivers/gpu/drm/panel/panel-orisetech-otm8009a.c
-> > @@ -81,7 +81,6 @@ static const struct drm_display_mode default_mode =3D=
- {
-> >  	.vsync_start =3D 800 + 15,
-> >  	.vsync_end =3D 800 + 15 + 10,
-> >  	.vtotal =3D 800 + 15 + 10 + 14,
-> > -	.vrefresh =3D 50,
-> >  	.flags =3D 0,
-> >  	.width_mm =3D 52,
-> >  	.height_mm =3D 86,
-> > @@ -358,7 +357,7 @@ static int otm8009a_get_modes(struct drm_panel *pan=
-el,
-> >  	if (!mode) {
-> >  		DRM_ERROR("failed to add mode %ux%ux@%u\n",
-> >  			  default_mode.hdisplay, default_mode.vdisplay,
-> > -			  default_mode.vrefresh);
-> > +			  drm_mode_vrefresh(&default_mode));
-> >  		return -ENOMEM;
-> >  	}
-> >  =
-
-> > diff --git a/drivers/gpu/drm/panel/panel-osd-osd101t2587-53ts.c b/drive=
-rs/gpu/drm/panel/panel-osd-osd101t2587-53ts.c
-> > index 3a0229d60095..11b3d01aca56 100644
-> > --- a/drivers/gpu/drm/panel/panel-osd-osd101t2587-53ts.c
-> > +++ b/drivers/gpu/drm/panel/panel-osd-osd101t2587-53ts.c
-> > @@ -102,7 +102,6 @@ static const struct drm_display_mode default_mode_o=
-sd101t2587 =3D {
-> >  	.vsync_start =3D 1200 + 24,
-> >  	.vsync_end =3D 1200 + 24 + 6,
-> >  	.vtotal =3D 1200 + 24 + 6 + 48,
-> > -	.vrefresh =3D 60,
-> >  	.flags =3D DRM_MODE_FLAG_NHSYNC | DRM_MODE_FLAG_NVSYNC,
-> >  };
-> >  =
-
-> > @@ -117,7 +116,7 @@ static int osd101t2587_panel_get_modes(struct drm_p=
-anel *panel,
-> >  		dev_err(panel->dev, "failed to add mode %ux%ux@%u\n",
-> >  			osd101t2587->default_mode->hdisplay,
-> >  			osd101t2587->default_mode->vdisplay,
-> > -			osd101t2587->default_mode->vrefresh);
-> > +			drm_mode_vrefresh(osd101t2587->default_mode));
-> >  		return -ENOMEM;
-> >  	}
-> >  =
-
-> > diff --git a/drivers/gpu/drm/panel/panel-panasonic-vvx10f034n00.c b/dri=
-vers/gpu/drm/panel/panel-panasonic-vvx10f034n00.c
-> > index 69693451462e..627dfcf8adb4 100644
-> > --- a/drivers/gpu/drm/panel/panel-panasonic-vvx10f034n00.c
-> > +++ b/drivers/gpu/drm/panel/panel-panasonic-vvx10f034n00.c
-> > @@ -149,7 +149,6 @@ static const struct drm_display_mode default_mode =
-=3D {
-> >  	.vsync_start =3D 1200 + 24,
-> >  	.vsync_end =3D 1200 + 24 + 6,
-> >  	.vtotal =3D 1200 + 24 + 6 + 48,
-> > -	.vrefresh =3D 60,
-> >  };
-> >  =
-
-> >  static int wuxga_nt_panel_get_modes(struct drm_panel *panel,
-> > @@ -161,7 +160,7 @@ static int wuxga_nt_panel_get_modes(struct drm_pane=
-l *panel,
-> >  	if (!mode) {
-> >  		dev_err(panel->dev, "failed to add mode %ux%u@%u\n",
-> >  			default_mode.hdisplay, default_mode.vdisplay,
-> > -			default_mode.vrefresh);
-> > +			drm_mode_vrefresh(&default_mode));
-> >  		return -ENOMEM;
-> >  	}
-> >  =
-
-> > diff --git a/drivers/gpu/drm/panel/panel-raspberrypi-touchscreen.c b/dr=
-ivers/gpu/drm/panel/panel-raspberrypi-touchscreen.c
-> > index 8f078b7dd89e..e50ee26474cf 100644
-> > --- a/drivers/gpu/drm/panel/panel-raspberrypi-touchscreen.c
-> > +++ b/drivers/gpu/drm/panel/panel-raspberrypi-touchscreen.c
-> > @@ -209,7 +209,6 @@ static const struct drm_display_mode rpi_touchscree=
-n_modes[] =3D {
-> >  		.vsync_start =3D 480 + 7,
-> >  		.vsync_end =3D 480 + 7 + 2,
-> >  		.vtotal =3D 480 + 7 + 2 + 21,
-> > -		.vrefresh =3D 60,
-> >  	},
-> >  };
-> >  =
-
-> > @@ -322,7 +321,8 @@ static int rpi_touchscreen_get_modes(struct drm_pan=
-el *panel,
-> >  		mode =3D drm_mode_duplicate(connector->dev, m);
-> >  		if (!mode) {
-> >  			dev_err(panel->dev, "failed to add mode %ux%u@%u\n",
-> > -				m->hdisplay, m->vdisplay, m->vrefresh);
-> > +				m->hdisplay, m->vdisplay,
-> > +				drm_mode_vrefresh(m));
-> >  			continue;
-> >  		}
-> >  =
-
-> > diff --git a/drivers/gpu/drm/panel/panel-raydium-rm67191.c b/drivers/gp=
-u/drm/panel/panel-raydium-rm67191.c
-> > index 313637d53d28..d001c52e0ca9 100644
-> > --- a/drivers/gpu/drm/panel/panel-raydium-rm67191.c
-> > +++ b/drivers/gpu/drm/panel/panel-raydium-rm67191.c
-> > @@ -218,7 +218,6 @@ static const struct drm_display_mode default_mode =
-=3D {
-> >  	.vsync_start =3D 1920 + 10,
-> >  	.vsync_end =3D 1920 + 10 + 2,
-> >  	.vtotal =3D 1920 + 10 + 2 + 4,
-> > -	.vrefresh =3D 60,
-> >  	.width_mm =3D 68,
-> >  	.height_mm =3D 121,
-> >  	.flags =3D DRM_MODE_FLAG_NHSYNC |
-> > @@ -445,7 +444,7 @@ static int rad_panel_get_modes(struct drm_panel *pa=
-nel,
-> >  	if (!mode) {
-> >  		DRM_DEV_ERROR(panel->dev, "failed to add mode %ux%ux@%u\n",
-> >  			      default_mode.hdisplay, default_mode.vdisplay,
-> > -			      default_mode.vrefresh);
-> > +			      drm_mode_vrefresh(&default_mode));
-> >  		return -ENOMEM;
-> >  	}
-> >  =
-
-> > diff --git a/drivers/gpu/drm/panel/panel-raydium-rm68200.c b/drivers/gp=
-u/drm/panel/panel-raydium-rm68200.c
-> > index e8982948e0ea..81ae8be62d15 100644
-> > --- a/drivers/gpu/drm/panel/panel-raydium-rm68200.c
-> > +++ b/drivers/gpu/drm/panel/panel-raydium-rm68200.c
-> > @@ -92,7 +92,6 @@ static const struct drm_display_mode default_mode =3D=
- {
-> >  	.vsync_start =3D 1280 + 12,
-> >  	.vsync_end =3D 1280 + 12 + 4,
-> >  	.vtotal =3D 1280 + 12 + 4 + 12,
-> > -	.vrefresh =3D 50,
-> >  	.flags =3D 0,
-> >  	.width_mm =3D 68,
-> >  	.height_mm =3D 122,
-> > @@ -339,7 +338,7 @@ static int rm68200_get_modes(struct drm_panel *pane=
-l,
-> >  	if (!mode) {
-> >  		DRM_ERROR("failed to add mode %ux%ux@%u\n",
-> >  			  default_mode.hdisplay, default_mode.vdisplay,
-> > -			  default_mode.vrefresh);
-> > +			  drm_mode_vrefresh(&default_mode));
-> >  		return -ENOMEM;
-> >  	}
-> >  =
-
-> > diff --git a/drivers/gpu/drm/panel/panel-rocktech-jh057n00900.c b/drive=
-rs/gpu/drm/panel/panel-rocktech-jh057n00900.c
-> > index 38ff742bc120..da4e373291f9 100644
-> > --- a/drivers/gpu/drm/panel/panel-rocktech-jh057n00900.c
-> > +++ b/drivers/gpu/drm/panel/panel-rocktech-jh057n00900.c
-> > @@ -223,7 +223,6 @@ static const struct drm_display_mode default_mode =
-=3D {
-> >  	.vsync_start =3D 1440 + 20,
-> >  	.vsync_end   =3D 1440 + 20 + 4,
-> >  	.vtotal	     =3D 1440 + 20 + 4 + 12,
-> > -	.vrefresh    =3D 60,
-> >  	.clock	     =3D 75276,
-> >  	.flags	     =3D DRM_MODE_FLAG_NHSYNC | DRM_MODE_FLAG_NVSYNC,
-> >  	.width_mm    =3D 65,
-> > @@ -240,7 +239,7 @@ static int jh057n_get_modes(struct drm_panel *panel,
-> >  	if (!mode) {
-> >  		DRM_DEV_ERROR(ctx->dev, "Failed to add mode %ux%u@%u\n",
-> >  			      default_mode.hdisplay, default_mode.vdisplay,
-> > -			      default_mode.vrefresh);
-> > +			      drm_mode_vrefresh(&default_mode));
-> >  		return -ENOMEM;
-> >  	}
-> >  =
-
-> > @@ -360,7 +359,7 @@ static int jh057n_probe(struct mipi_dsi_device *dsi)
-> >  =
-
-> >  	DRM_DEV_INFO(dev, "%ux%u@%u %ubpp dsi %udl - ready\n",
-> >  		     default_mode.hdisplay, default_mode.vdisplay,
-> > -		     default_mode.vrefresh,
-> > +		     drm_mode_vrefresh(&default_mode),
-> >  		     mipi_dsi_pixel_format_to_bpp(dsi->format), dsi->lanes);
-> >  =
-
-> >  	jh057n_debugfs_init(ctx);
-> > diff --git a/drivers/gpu/drm/panel/panel-ronbo-rb070d30.c b/drivers/gpu=
-/drm/panel/panel-ronbo-rb070d30.c
-> > index ef18559e237e..a7b0b3e39e1a 100644
-> > --- a/drivers/gpu/drm/panel/panel-ronbo-rb070d30.c
-> > +++ b/drivers/gpu/drm/panel/panel-ronbo-rb070d30.c
-> > @@ -103,7 +103,6 @@ static const struct drm_display_mode default_mode =
-=3D {
-> >  	.vsync_start	=3D 600 + 12,
-> >  	.vsync_end	=3D 600 + 12 + 10,
-> >  	.vtotal		=3D 600 + 12 + 10 + 13,
-> > -	.vrefresh	=3D 60,
-> >  =
-
-> >  	.width_mm	=3D 154,
-> >  	.height_mm	=3D 85,
-> > diff --git a/drivers/gpu/drm/panel/panel-samsung-s6d16d0.c b/drivers/gp=
-u/drm/panel/panel-samsung-s6d16d0.c
-> > index 2150043dcf6b..f02645d396ac 100644
-> > --- a/drivers/gpu/drm/panel/panel-samsung-s6d16d0.c
-> > +++ b/drivers/gpu/drm/panel/panel-samsung-s6d16d0.c
-> > @@ -37,12 +37,6 @@ static const struct drm_display_mode samsung_s6d16d0=
-_mode =3D {
-> >  	.vsync_start =3D 480 + 1,
-> >  	.vsync_end =3D 480 + 1 + 1,
-> >  	.vtotal =3D 480 + 1 + 1 + 1,
-> > -	/*
-> > -	 * This depends on the clocking HS vs LP rate, this value
-> > -	 * is calculated as:
-> > -	 * vrefresh =3D (clock * 1000) / (htotal*vtotal)
-> > -	 */
-> > -	.vrefresh =3D 816,
-> >  	.width_mm =3D 84,
-> >  	.height_mm =3D 48,
-> >  };
-> > diff --git a/drivers/gpu/drm/panel/panel-samsung-s6e3ha2.c b/drivers/gp=
-u/drm/panel/panel-samsung-s6e3ha2.c
-> > index 36ebd5a4ac7b..80ef122e7466 100644
-> > --- a/drivers/gpu/drm/panel/panel-samsung-s6e3ha2.c
-> > +++ b/drivers/gpu/drm/panel/panel-samsung-s6e3ha2.c
-> > @@ -617,7 +617,6 @@ static const struct drm_display_mode s6e3ha2_mode =
-=3D {
-> >  	.vsync_start =3D 2560 + 1,
-> >  	.vsync_end =3D 2560 + 1 + 1,
-> >  	.vtotal =3D 2560 + 1 + 1 + 15,
-> > -	.vrefresh =3D 60,
-> >  	.flags =3D 0,
-> >  };
-> >  =
-
-> > @@ -636,7 +635,6 @@ static const struct drm_display_mode s6e3hf2_mode =
-=3D {
-> >  	.vsync_start =3D 2560 + 1,
-> >  	.vsync_end =3D 2560 + 1 + 1,
-> >  	.vtotal =3D 2560 + 1 + 1 + 15,
-> > -	.vrefresh =3D 60,
-> >  	.flags =3D 0,
-> >  };
-> >  =
-
-> > @@ -655,7 +653,7 @@ static int s6e3ha2_get_modes(struct drm_panel *pane=
-l,
-> >  	if (!mode) {
-> >  		DRM_ERROR("failed to add mode %ux%ux@%u\n",
-> >  			ctx->desc->mode->hdisplay, ctx->desc->mode->vdisplay,
-> > -			ctx->desc->mode->vrefresh);
-> > +			drm_mode_vrefresh(ctx->desc->mode));
-> >  		return -ENOMEM;
-> >  	}
-> >  =
-
-> > diff --git a/drivers/gpu/drm/panel/panel-samsung-s6e63j0x03.c b/drivers=
-/gpu/drm/panel/panel-samsung-s6e63j0x03.c
-> > index a3570e0a90a8..1247656d73bf 100644
-> > --- a/drivers/gpu/drm/panel/panel-samsung-s6e63j0x03.c
-> > +++ b/drivers/gpu/drm/panel/panel-samsung-s6e63j0x03.c
-> > @@ -52,7 +52,6 @@ static const struct drm_display_mode default_mode =3D=
- {
-> >  	.vsync_start =3D 320 + 150,
-> >  	.vsync_end =3D 320 + 150 + 1,
-> >  	.vtotal =3D 320 + 150 + 1 + 2,
-> > -	.vrefresh =3D 30,
-> >  	.flags =3D 0,
-> >  };
-> >  =
-
-> > @@ -409,7 +408,7 @@ static int s6e63j0x03_get_modes(struct drm_panel *p=
-anel,
-> >  	if (!mode) {
-> >  		DRM_ERROR("failed to add mode %ux%ux@%u\n",
-> >  			default_mode.hdisplay, default_mode.vdisplay,
-> > -			default_mode.vrefresh);
-> > +			drm_mode_vrefresh(&default_mode));
-> >  		return -ENOMEM;
-> >  	}
-> >  =
-
-> > diff --git a/drivers/gpu/drm/panel/panel-samsung-s6e63m0.c b/drivers/gp=
-u/drm/panel/panel-samsung-s6e63m0.c
-> > index a5f76eb4fa25..64421347bfd4 100644
-> > --- a/drivers/gpu/drm/panel/panel-samsung-s6e63m0.c
-> > +++ b/drivers/gpu/drm/panel/panel-samsung-s6e63m0.c
-> > @@ -117,7 +117,6 @@ static const struct drm_display_mode default_mode =
-=3D {
-> >  	.vsync_start	=3D 800 + 28,
-> >  	.vsync_end	=3D 800 + 28 + 2,
-> >  	.vtotal		=3D 800 + 28 + 2 + 1,
-> > -	.vrefresh	=3D 60,
-> >  	.width_mm	=3D 53,
-> >  	.height_mm	=3D 89,
-> >  	.flags		=3D DRM_MODE_FLAG_NVSYNC | DRM_MODE_FLAG_NHSYNC,
-> > @@ -371,7 +370,7 @@ static int s6e63m0_get_modes(struct drm_panel *pane=
-l,
-> >  	if (!mode) {
-> >  		DRM_ERROR("failed to add mode %ux%ux@%u\n",
-> >  			  default_mode.hdisplay, default_mode.vdisplay,
-> > -			  default_mode.vrefresh);
-> > +			  drm_mode_vrefresh(&default_mode));
-> >  		return -ENOMEM;
-> >  	}
-> >  =
-
-> > diff --git a/drivers/gpu/drm/panel/panel-samsung-s6e88a0-ams452ef01.c b=
-/drivers/gpu/drm/panel/panel-samsung-s6e88a0-ams452ef01.c
-> > index 9d843fcc3a22..485eabecfcc9 100644
-> > --- a/drivers/gpu/drm/panel/panel-samsung-s6e88a0-ams452ef01.c
-> > +++ b/drivers/gpu/drm/panel/panel-samsung-s6e88a0-ams452ef01.c
-> > @@ -177,7 +177,6 @@ static const struct drm_display_mode s6e88a0_ams452=
-ef01_mode =3D {
-> >  	.vsync_start =3D 960 + 14,
-> >  	.vsync_end =3D 960 + 14 + 2,
-> >  	.vtotal =3D 960 + 14 + 2 + 8,
-> > -	.vrefresh =3D 60,
-> >  	.width_mm =3D 56,
-> >  	.height_mm =3D 100,
-> >  };
-> > diff --git a/drivers/gpu/drm/panel/panel-seiko-43wvf1g.c b/drivers/gpu/=
-drm/panel/panel-seiko-43wvf1g.c
-> > index 40fcbbbacb2c..e417dc4921c2 100644
-> > --- a/drivers/gpu/drm/panel/panel-seiko-43wvf1g.c
-> > +++ b/drivers/gpu/drm/panel/panel-seiko-43wvf1g.c
-> > @@ -92,7 +92,8 @@ static int seiko_panel_get_fixed_modes(struct seiko_p=
-anel *panel,
-> >  		mode =3D drm_mode_duplicate(connector->dev, m);
-> >  		if (!mode) {
-> >  			dev_err(panel->base.dev, "failed to add mode %ux%u@%u\n",
-> > -				m->hdisplay, m->vdisplay, m->vrefresh);
-> > +				m->hdisplay, m->vdisplay,
-> > +				drm_mode_vrefresh(m));
-> >  			continue;
-> >  		}
-> >  =
-
-> > diff --git a/drivers/gpu/drm/panel/panel-sharp-lq101r1sx01.c b/drivers/=
-gpu/drm/panel/panel-sharp-lq101r1sx01.c
-> > index b5d1977221a7..f07324b705b3 100644
-> > --- a/drivers/gpu/drm/panel/panel-sharp-lq101r1sx01.c
-> > +++ b/drivers/gpu/drm/panel/panel-sharp-lq101r1sx01.c
-> > @@ -269,7 +269,6 @@ static const struct drm_display_mode default_mode =
-=3D {
-> >  	.vsync_start =3D 1600 + 4,
-> >  	.vsync_end =3D 1600 + 4 + 8,
-> >  	.vtotal =3D 1600 + 4 + 8 + 32,
-> > -	.vrefresh =3D 60,
-> >  };
-> >  =
-
-> >  static int sharp_panel_get_modes(struct drm_panel *panel,
-> > @@ -281,7 +280,7 @@ static int sharp_panel_get_modes(struct drm_panel *=
-panel,
-> >  	if (!mode) {
-> >  		dev_err(panel->dev, "failed to add mode %ux%ux@%u\n",
-> >  			default_mode.hdisplay, default_mode.vdisplay,
-> > -			default_mode.vrefresh);
-> > +			drm_mode_vrefresh(&default_mode));
-> >  		return -ENOMEM;
-> >  	}
-> >  =
-
-> > diff --git a/drivers/gpu/drm/panel/panel-sharp-ls037v7dw01.c b/drivers/=
-gpu/drm/panel/panel-sharp-ls037v7dw01.c
-> > index 1cf3f02435c1..d7bf13b9e1d6 100644
-> > --- a/drivers/gpu/drm/panel/panel-sharp-ls037v7dw01.c
-> > +++ b/drivers/gpu/drm/panel/panel-sharp-ls037v7dw01.c
-> > @@ -93,7 +93,6 @@ static const struct drm_display_mode ls037v7dw01_mode=
- =3D {
-> >  	.vsync_start =3D 640 + 1,
-> >  	.vsync_end =3D 640 + 1 + 1,
-> >  	.vtotal =3D 640 + 1 + 1 + 1,
-> > -	.vrefresh =3D 58,
-> >  	.type =3D DRM_MODE_TYPE_DRIVER | DRM_MODE_TYPE_PREFERRED,
-> >  	.flags =3D DRM_MODE_FLAG_NHSYNC | DRM_MODE_FLAG_NVSYNC,
-> >  	.width_mm =3D 56,
-> > diff --git a/drivers/gpu/drm/panel/panel-sharp-ls043t1le01.c b/drivers/=
-gpu/drm/panel/panel-sharp-ls043t1le01.c
-> > index ce586c6d70c7..b2e58935529c 100644
-> > --- a/drivers/gpu/drm/panel/panel-sharp-ls043t1le01.c
-> > +++ b/drivers/gpu/drm/panel/panel-sharp-ls043t1le01.c
-> > @@ -201,7 +201,6 @@ static const struct drm_display_mode default_mode =
-=3D {
-> >  	.vsync_start =3D 960 + 3,
-> >  	.vsync_end =3D 960 + 3 + 15,
-> >  	.vtotal =3D 960 + 3 + 15 + 1,
-> > -	.vrefresh =3D 60,
-> >  };
-> >  =
-
-> >  static int sharp_nt_panel_get_modes(struct drm_panel *panel,
-> > @@ -213,7 +212,7 @@ static int sharp_nt_panel_get_modes(struct drm_pane=
-l *panel,
-> >  	if (!mode) {
-> >  		dev_err(panel->dev, "failed to add mode %ux%u@%u\n",
-> >  			default_mode.hdisplay, default_mode.vdisplay,
-> > -			default_mode.vrefresh);
-> > +			drm_mode_vrefresh(&default_mode));
-> >  		return -ENOMEM;
-> >  	}
-> >  =
-
-> > diff --git a/drivers/gpu/drm/panel/panel-simple.c b/drivers/gpu/drm/pan=
-el/panel-simple.c
-> > index 82363d05bad4..9ba9d69df41b 100644
-> > --- a/drivers/gpu/drm/panel/panel-simple.c
-> > +++ b/drivers/gpu/drm/panel/panel-simple.c
-> > @@ -161,7 +161,8 @@ static unsigned int panel_simple_get_display_modes(=
-struct panel_simple *panel,
-> >  		mode =3D drm_mode_duplicate(connector->dev, m);
-> >  		if (!mode) {
-> >  			dev_err(panel->base.dev, "failed to add mode %ux%u@%u\n",
-> > -				m->hdisplay, m->vdisplay, m->vrefresh);
-> > +				m->hdisplay, m->vdisplay,
-> > +				drm_mode_vrefresh(m));
-> >  			continue;
-> >  		}
-> >  =
-
-> > @@ -494,7 +495,6 @@ static const struct drm_display_mode ampire_am_4802=
-72h3tmqw_t01h_mode =3D {
-> >  	.vsync_start =3D 272 + 2,
-> >  	.vsync_end =3D 272 + 2 + 10,
-> >  	.vtotal =3D 272 + 2 + 10 + 2,
-> > -	.vrefresh =3D 60,
-> >  	.flags =3D DRM_MODE_FLAG_PHSYNC | DRM_MODE_FLAG_PVSYNC,
-> >  };
-> >  =
-
-> > @@ -519,7 +519,6 @@ static const struct drm_display_mode ampire_am80048=
-0r3tmqwa1h_mode =3D {
-> >  	.vsync_start =3D 480 + 2,
-> >  	.vsync_end =3D 480 + 2 + 45,
-> >  	.vtotal =3D 480 + 2 + 45 + 0,
-> > -	.vrefresh =3D 60,
-> >  	.flags =3D DRM_MODE_FLAG_PHSYNC | DRM_MODE_FLAG_PVSYNC,
-> >  };
-> >  =
-
-> > @@ -570,7 +569,6 @@ static const struct drm_display_mode auo_b101aw03_m=
-ode =3D {
-> >  	.vsync_start =3D 600 + 16,
-> >  	.vsync_end =3D 600 + 16 + 6,
-> >  	.vtotal =3D 600 + 16 + 6 + 16,
-> > -	.vrefresh =3D 60,
-> >  };
-> >  =
-
-> >  static const struct panel_desc auo_b101aw03 =3D {
-> > @@ -615,7 +613,6 @@ static const struct drm_display_mode auo_b101xtn01_=
-mode =3D {
-> >  	.vsync_start =3D 768 + 14,
-> >  	.vsync_end =3D 768 + 14 + 42,
-> >  	.vtotal =3D 768 + 14 + 42,
-> > -	.vrefresh =3D 60,
-> >  	.flags =3D DRM_MODE_FLAG_NVSYNC | DRM_MODE_FLAG_NHSYNC,
-> >  };
-> >  =
-
-> > @@ -639,7 +636,6 @@ static const struct drm_display_mode auo_b116xak01_=
-mode =3D {
-> >  	.vsync_start =3D 768 + 4,
-> >  	.vsync_end =3D 768 + 4 + 6,
-> >  	.vtotal =3D 768 + 4 + 6 + 15,
-> > -	.vrefresh =3D 60,
-> >  	.flags =3D DRM_MODE_FLAG_NVSYNC | DRM_MODE_FLAG_NHSYNC,
-> >  };
-> >  =
-
-> > @@ -668,7 +664,6 @@ static const struct drm_display_mode auo_b116xw03_m=
-ode =3D {
-> >  	.vsync_start =3D 768 + 10,
-> >  	.vsync_end =3D 768 + 10 + 12,
-> >  	.vtotal =3D 768 + 10 + 12 + 6,
-> > -	.vrefresh =3D 60,
-> >  };
-> >  =
-
-> >  static const struct panel_desc auo_b116xw03 =3D {
-> > @@ -691,7 +686,6 @@ static const struct drm_display_mode auo_b133xtn01_=
-mode =3D {
-> >  	.vsync_start =3D 768 + 3,
-> >  	.vsync_end =3D 768 + 3 + 6,
-> >  	.vtotal =3D 768 + 3 + 6 + 13,
-> > -	.vrefresh =3D 60,
-> >  };
-> >  =
-
-> >  static const struct panel_desc auo_b133xtn01 =3D {
-> > @@ -714,7 +708,6 @@ static const struct drm_display_mode auo_b133htn01_=
-mode =3D {
-> >  	.vsync_start =3D 1080 + 25,
-> >  	.vsync_end =3D 1080 + 25 + 10,
-> >  	.vtotal =3D 1080 + 25 + 10 + 10,
-> > -	.vrefresh =3D 60,
-> >  };
-> >  =
-
-> >  static const struct panel_desc auo_b133htn01 =3D {
-> > @@ -770,7 +763,6 @@ static const struct drm_display_mode auo_g101evn010=
-_mode =3D {
-> >  	.vsync_start =3D 800 + 8,
-> >  	.vsync_end =3D 800 + 8 + 2,
-> >  	.vtotal =3D 800 + 8 + 2 + 6,
-> > -	.vrefresh =3D 60,
-> >  };
-> >  =
-
-> >  static const struct panel_desc auo_g101evn010 =3D {
-> > @@ -794,7 +786,6 @@ static const struct drm_display_mode auo_g104sn02_m=
-ode =3D {
-> >  	.vsync_start =3D 600 + 10,
-> >  	.vsync_end =3D 600 + 10 + 35,
-> >  	.vtotal =3D 600 + 10 + 35 + 2,
-> > -	.vrefresh =3D 60,
-> >  };
-> >  =
-
-> >  static const struct panel_desc auo_g104sn02 =3D {
-> > @@ -906,7 +897,6 @@ static const struct drm_display_mode auo_t215hvn01_=
-mode =3D {
-> >  	.vsync_start =3D 1080 + 4,
-> >  	.vsync_end =3D 1080 + 4 + 5,
-> >  	.vtotal =3D 1080 + 4 + 5 + 36,
-> > -	.vrefresh =3D 60,
-> >  };
-> >  =
-
-> >  static const struct panel_desc auo_t215hvn01 =3D {
-> > @@ -933,7 +923,6 @@ static const struct drm_display_mode avic_tm070ddh0=
-3_mode =3D {
-> >  	.vsync_start =3D 600 + 17,
-> >  	.vsync_end =3D 600 + 17 + 1,
-> >  	.vtotal =3D 600 + 17 + 1 + 17,
-> > -	.vrefresh =3D 60,
-> >  };
-> >  =
-
-> >  static const struct panel_desc avic_tm070ddh03 =3D {
-> > @@ -983,7 +972,6 @@ static const struct drm_display_mode boe_hv070wsa_m=
-ode =3D {
-> >  	.vsync_start =3D 600 + 10,
-> >  	.vsync_end =3D 600 + 10 + 10,
-> >  	.vtotal =3D 600 + 10 + 10 + 10,
-> > -	.vrefresh =3D 60,
-> >  };
-> >  =
-
-> >  static const struct panel_desc boe_hv070wsa =3D {
-> > @@ -1006,7 +994,6 @@ static const struct drm_display_mode boe_nv101wxmn=
-51_modes[] =3D {
-> >  		.vsync_start =3D 800 + 3,
-> >  		.vsync_end =3D 800 + 3 + 5,
-> >  		.vtotal =3D 800 + 3 + 5 + 24,
-> > -		.vrefresh =3D 60,
-> >  	},
-> >  	{
-> >  		.clock =3D 57500,
-> > @@ -1018,7 +1005,6 @@ static const struct drm_display_mode boe_nv101wxm=
-n51_modes[] =3D {
-> >  		.vsync_start =3D 800 + 3,
-> >  		.vsync_end =3D 800 + 3 + 5,
-> >  		.vtotal =3D 800 + 3 + 5 + 24,
-> > -		.vrefresh =3D 48,
-> >  	},
-> >  };
-> >  =
-
-> > @@ -1048,7 +1034,6 @@ static const struct drm_display_mode boe_nv140fhm=
-n49_modes[] =3D {
-> >  		.vsync_start =3D 1080 + 3,
-> >  		.vsync_end =3D 1080 + 3 + 5,
-> >  		.vtotal =3D 1125,
-> > -		.vrefresh =3D 60,
-> >  	},
-> >  };
-> >  =
-
-> > @@ -1079,7 +1064,6 @@ static const struct drm_display_mode cdtech_s043w=
-q26h_ct7_mode =3D {
-> >  	.vsync_start =3D 272 + 8,
-> >  	.vsync_end =3D 272 + 8 + 8,
-> >  	.vtotal =3D 272 + 8 + 8 + 8,
-> > -	.vrefresh =3D 60,
-> >  	.flags =3D DRM_MODE_FLAG_NHSYNC | DRM_MODE_FLAG_NVSYNC,
-> >  };
-> >  =
-
-> > @@ -1104,7 +1088,6 @@ static const struct drm_display_mode cdtech_s070w=
-v95_ct16_mode =3D {
-> >  	.vsync_start =3D 480 + 29,
-> >  	.vsync_end =3D 480 + 29 + 13,
-> >  	.vtotal =3D 480 + 29 + 13 + 3,
-> > -	.vrefresh =3D 60,
-> >  	.flags =3D DRM_MODE_FLAG_NHSYNC | DRM_MODE_FLAG_NVSYNC,
-> >  };
-> >  =
-
-> > @@ -1128,7 +1111,6 @@ static const struct drm_display_mode chunghwa_cla=
-a070wp03xg_mode =3D {
-> >  	.vsync_start =3D 1280 + 1,
-> >  	.vsync_end =3D 1280 + 1 + 7,
-> >  	.vtotal =3D 1280 + 1 + 7 + 15,
-> > -	.vrefresh =3D 60,
-> >  	.flags =3D DRM_MODE_FLAG_NVSYNC | DRM_MODE_FLAG_NHSYNC,
-> >  };
-> >  =
-
-> > @@ -1152,7 +1134,6 @@ static const struct drm_display_mode chunghwa_cla=
-a101wa01a_mode =3D {
-> >  	.vsync_start =3D 768 + 4,
-> >  	.vsync_end =3D 768 + 4 + 4,
-> >  	.vtotal =3D 768 + 4 + 4 + 4,
-> > -	.vrefresh =3D 60,
-> >  };
-> >  =
-
-> >  static const struct panel_desc chunghwa_claa101wa01a =3D {
-> > @@ -1175,7 +1156,6 @@ static const struct drm_display_mode chunghwa_cla=
-a101wb01_mode =3D {
-> >  	.vsync_start =3D 768 + 16,
-> >  	.vsync_end =3D 768 + 16 + 8,
-> >  	.vtotal =3D 768 + 16 + 8 + 16,
-> > -	.vrefresh =3D 60,
-> >  };
-> >  =
-
-> >  static const struct panel_desc chunghwa_claa101wb01 =3D {
-> > @@ -1198,7 +1178,6 @@ static const struct drm_display_mode dataimage_sc=
-f0700c48ggu18_mode =3D {
-> >  	.vsync_start =3D 480 + 10,
-> >  	.vsync_end =3D 480 + 10 + 2,
-> >  	.vtotal =3D 480 + 10 + 2 + 33,
-> > -	.vrefresh =3D 60,
-> >  	.flags =3D DRM_MODE_FLAG_NVSYNC | DRM_MODE_FLAG_NHSYNC,
-> >  };
-> >  =
-
-> > @@ -1285,7 +1264,6 @@ static const struct drm_display_mode edt_et035012=
-dm6_mode =3D {
-> >  	.vsync_start =3D 240 + 4,
-> >  	.vsync_end =3D 240 + 4 + 4,
-> >  	.vtotal =3D 240 + 4 + 4 + 14,
-> > -	.vrefresh =3D 60,
-> >  	.flags =3D DRM_MODE_FLAG_NVSYNC | DRM_MODE_FLAG_NHSYNC,
-> >  };
-> >  =
-
-> > @@ -1317,7 +1295,6 @@ static const struct drm_display_mode edt_etm04308=
-0dh6gp_mode =3D {
-> >  	.vsync_start =3D 288 + 2,
-> >  	.vsync_end =3D 288 + 2 + 4,
-> >  	.vtotal =3D 288 + 2 + 4 + 10,
-> > -	.vrefresh =3D 60,
-> >  };
-> >  =
-
-> >  static const struct panel_desc edt_etm043080dh6gp =3D {
-> > @@ -1342,7 +1319,6 @@ static const struct drm_display_mode edt_etm0430g=
-0dh6_mode =3D {
-> >  	.vsync_start =3D 272 + 2,
-> >  	.vsync_end =3D 272 + 2 + 10,
-> >  	.vtotal =3D 272 + 2 + 10 + 2,
-> > -	.vrefresh =3D 60,
-> >  	.flags =3D DRM_MODE_FLAG_NHSYNC | DRM_MODE_FLAG_NVSYNC,
-> >  };
-> >  =
-
-> > @@ -1366,7 +1342,6 @@ static const struct drm_display_mode edt_et057090=
-dhu_mode =3D {
-> >  	.vsync_start =3D 480 + 10,
-> >  	.vsync_end =3D 480 + 10 + 3,
-> >  	.vtotal =3D 480 + 10 + 3 + 32,
-> > -	.vrefresh =3D 60,
-> >  	.flags =3D DRM_MODE_FLAG_NVSYNC | DRM_MODE_FLAG_NHSYNC,
-> >  };
-> >  =
-
-> > @@ -1392,7 +1367,6 @@ static const struct drm_display_mode edt_etm0700g=
-0dh6_mode =3D {
-> >  	.vsync_start =3D 480 + 10,
-> >  	.vsync_end =3D 480 + 10 + 2,
-> >  	.vtotal =3D 480 + 10 + 2 + 33,
-> > -	.vrefresh =3D 60,
-> >  	.flags =3D DRM_MODE_FLAG_NHSYNC | DRM_MODE_FLAG_NVSYNC,
-> >  };
-> >  =
-
-> > @@ -1457,7 +1431,6 @@ static const struct drm_display_mode foxlink_fl50=
-0wvr00_a0t_mode =3D {
-> >  	.vsync_start =3D 480 + 37,
-> >  	.vsync_end =3D 480 + 37 + 2,
-> >  	.vtotal =3D 480 + 37 + 2 + 8,
-> > -	.vrefresh =3D 60,
-> >  };
-> >  =
-
-> >  static const struct panel_desc foxlink_fl500wvr00_a0t =3D {
-> > @@ -1481,7 +1454,6 @@ static const struct drm_display_mode frida_frd350=
-h54004_mode =3D {
-> >  	.vsync_start =3D 240 + 2,
-> >  	.vsync_end =3D 240 + 2 + 6,
-> >  	.vtotal =3D 240 + 2 + 6 + 2,
-> > -	.vrefresh =3D 60,
-> >  	.flags =3D DRM_MODE_FLAG_PHSYNC | DRM_MODE_FLAG_PVSYNC,
-> >  };
-> >  =
-
-> > @@ -1508,7 +1480,6 @@ static const struct drm_display_mode friendlyarm_=
-hd702e_mode =3D {
-> >  	.vsync_start	=3D 1280 + 4,
-> >  	.vsync_end	=3D 1280 + 4 + 8,
-> >  	.vtotal		=3D 1280 + 4 + 8 + 4,
-> > -	.vrefresh	=3D 60,
-> >  	.flags		=3D DRM_MODE_FLAG_NVSYNC | DRM_MODE_FLAG_NHSYNC,
-> >  };
-> >  =
-
-> > @@ -1531,7 +1502,6 @@ static const struct drm_display_mode giantplus_gp=
-g482739qs5_mode =3D {
-> >  	.vsync_start =3D 272 + 8,
-> >  	.vsync_end =3D 272 + 8 + 1,
-> >  	.vtotal =3D 272 + 8 + 1 + 8,
-> > -	.vrefresh =3D 60,
-> >  };
-> >  =
-
-> >  static const struct panel_desc giantplus_gpg482739qs5 =3D {
-> > @@ -1635,7 +1605,6 @@ static const struct drm_display_mode hitachi_tx23=
-d38vm0caa_mode =3D {
-> >  	.vsync_start =3D 480 + 16,
-> >  	.vsync_end =3D 480 + 16 + 13,
-> >  	.vtotal =3D 480 + 16 + 13 + 16,
-> > -	.vrefresh =3D 60,
-> >  };
-> >  =
-
-> >  static const struct panel_desc hitachi_tx23d38vm0caa =3D {
-> > @@ -1662,7 +1631,6 @@ static const struct drm_display_mode innolux_at04=
-3tn24_mode =3D {
-> >  	.vsync_start =3D 272 + 2,
-> >  	.vsync_end =3D 272 + 2 + 10,
-> >  	.vtotal =3D 272 + 2 + 10 + 2,
-> > -	.vrefresh =3D 60,
-> >  	.flags =3D DRM_MODE_FLAG_NHSYNC | DRM_MODE_FLAG_NVSYNC,
-> >  };
-> >  =
-
-> > @@ -1688,7 +1656,6 @@ static const struct drm_display_mode innolux_at07=
-0tn92_mode =3D {
-> >  	.vsync_start =3D 480 + 22,
-> >  	.vsync_end =3D 480 + 22 + 10,
-> >  	.vtotal =3D 480 + 22 + 23 + 10,
-> > -	.vrefresh =3D 60,
-> >  };
-> >  =
-
-> >  static const struct panel_desc innolux_at070tn92 =3D {
-> > @@ -1799,7 +1766,6 @@ static const struct drm_display_mode innolux_g121=
-x1_l03_mode =3D {
-> >  	.vsync_start =3D 768 + 38,
-> >  	.vsync_end =3D 768 + 38 + 1,
-> >  	.vtotal =3D 768 + 38 + 1 + 0,
-> > -	.vrefresh =3D 60,
-> >  	.flags =3D DRM_MODE_FLAG_NHSYNC | DRM_MODE_FLAG_NVSYNC,
-> >  };
-> >  =
-
-> > @@ -1861,7 +1827,6 @@ static const struct drm_display_mode innolux_n156=
-bge_l21_mode =3D {
-> >  	.vsync_start =3D 768 + 2,
-> >  	.vsync_end =3D 768 + 2 + 6,
-> >  	.vtotal =3D 768 + 2 + 6 + 12,
-> > -	.vrefresh =3D 60,
-> >  };
-> >  =
-
-> >  static const struct panel_desc innolux_n156bge_l21 =3D {
-> > @@ -1884,7 +1849,6 @@ static const struct drm_display_mode innolux_p120=
-zdg_bf1_mode =3D {
-> >  	.vsync_start =3D 1440 + 3,
-> >  	.vsync_end =3D 1440 + 3 + 10,
-> >  	.vtotal =3D 1440 + 3 + 10 + 27,
-> > -	.vrefresh =3D 60,
-> >  	.flags =3D DRM_MODE_FLAG_PHSYNC | DRM_MODE_FLAG_PVSYNC,
-> >  };
-> >  =
-
-> > @@ -1912,7 +1876,6 @@ static const struct drm_display_mode innolux_zj07=
-0na_01p_mode =3D {
-> >  	.vsync_start =3D 600 + 16,
-> >  	.vsync_end =3D 600 + 16 + 4,
-> >  	.vtotal =3D 600 + 16 + 4 + 16,
-> > -	.vrefresh =3D 60,
-> >  };
-> >  =
-
-> >  static const struct panel_desc innolux_zj070na_01p =3D {
-> > @@ -2008,7 +1971,6 @@ static const struct drm_display_mode lemaker_bl03=
-5_rgb_002_mode =3D {
-> >  	.vsync_start =3D 240 + 4,
-> >  	.vsync_end =3D 240 + 4 + 3,
-> >  	.vtotal =3D 240 + 4 + 3 + 15,
-> > -	.vrefresh =3D 60,
-> >  };
-> >  =
-
-> >  static const struct panel_desc lemaker_bl035_rgb_002 =3D {
-> > @@ -2032,7 +1994,6 @@ static const struct drm_display_mode lg_lb070wv8_=
-mode =3D {
-> >  	.vsync_start =3D 480 + 10,
-> >  	.vsync_end =3D 480 + 10 + 25,
-> >  	.vtotal =3D 480 + 10 + 25 + 10,
-> > -	.vrefresh =3D 60,
-> >  };
-> >  =
-
-> >  static const struct panel_desc lg_lb070wv8 =3D {
-> > @@ -2057,7 +2018,6 @@ static const struct drm_display_mode lg_lp079qx1_=
-sp0v_mode =3D {
-> >  	.vsync_start =3D 2048 + 8,
-> >  	.vsync_end =3D 2048 + 8 + 4,
-> >  	.vtotal =3D 2048 + 8 + 4 + 8,
-> > -	.vrefresh =3D 60,
-> >  	.flags =3D DRM_MODE_FLAG_NVSYNC | DRM_MODE_FLAG_NHSYNC,
-> >  };
-> >  =
-
-> > @@ -2080,7 +2040,6 @@ static const struct drm_display_mode lg_lp097qx1_=
-spa1_mode =3D {
-> >  	.vsync_start =3D 1536 + 3,
-> >  	.vsync_end =3D 1536 + 3 + 1,
-> >  	.vtotal =3D 1536 + 3 + 1 + 9,
-> > -	.vrefresh =3D 60,
-> >  };
-> >  =
-
-> >  static const struct panel_desc lg_lp097qx1_spa1 =3D {
-> > @@ -2102,7 +2061,6 @@ static const struct drm_display_mode lg_lp120up1_=
-mode =3D {
-> >  	.vsync_start =3D 1280 + 4,
-> >  	.vsync_end =3D 1280 + 4 + 4,
-> >  	.vtotal =3D 1280 + 4 + 4 + 12,
-> > -	.vrefresh =3D 60,
-> >  };
-> >  =
-
-> >  static const struct panel_desc lg_lp120up1 =3D {
-> > @@ -2125,7 +2083,6 @@ static const struct drm_display_mode lg_lp129qe_m=
-ode =3D {
-> >  	.vsync_start =3D 1700 + 3,
-> >  	.vsync_end =3D 1700 + 3 + 10,
-> >  	.vtotal =3D 1700 + 3 + 10 + 36,
-> > -	.vrefresh =3D 60,
-> >  };
-> >  =
-
-> >  static const struct panel_desc lg_lp129qe =3D {
-> > @@ -2206,7 +2163,6 @@ static const struct drm_display_mode mitsubishi_a=
-a070mc01_mode =3D {
-> >  	.vsync_start =3D 480 + 0,
-> >  	.vsync_end =3D 480 + 48 + 1,
-> >  	.vtotal =3D 480 + 48 + 1 + 0,
-> > -	.vrefresh =3D 60,
-> >  	.flags =3D DRM_MODE_FLAG_NHSYNC | DRM_MODE_FLAG_NVSYNC,
-> >  };
-> >  =
-
-> > @@ -2221,7 +2177,6 @@ static const struct drm_display_mode logicpd_type=
-_28_mode =3D {
-> >  	.vsync_start =3D 272 + 2,
-> >  	.vsync_end =3D 272 + 2 + 11,
-> >  	.vtotal =3D 272 + 2 + 11 + 3,
-> > -	.vrefresh =3D 60,
-> >  	.flags =3D DRM_MODE_FLAG_PHSYNC | DRM_MODE_FLAG_PVSYNC,
-> >  };
-> >  =
-
-> > @@ -2301,7 +2256,6 @@ static const struct drm_display_mode nec_nl4827hc=
-19_05b_mode =3D {
-> >  	.vsync_start =3D 272 + 2,
-> >  	.vsync_end =3D 272 + 2 + 4,
-> >  	.vtotal =3D 272 + 2 + 4 + 2,
-> > -	.vrefresh =3D 74,
-> >  	.flags =3D DRM_MODE_FLAG_NVSYNC | DRM_MODE_FLAG_NHSYNC,
-> >  };
-> >  =
-
-> > @@ -2327,7 +2281,6 @@ static const struct drm_display_mode netron_dy_e2=
-31732_mode =3D {
-> >  	.vsync_start =3D 600 + 127,
-> >  	.vsync_end =3D 600 + 127 + 20,
-> >  	.vtotal =3D 600 + 127 + 20 + 3,
-> > -	.vrefresh =3D 60,
-> >  };
-> >  =
-
-> >  static const struct panel_desc netron_dy_e231732 =3D {
-> > @@ -2350,7 +2303,6 @@ static const struct drm_display_mode newhaven_nhd=
-_43_480272ef_atxl_mode =3D {
-> >  	.vsync_start =3D 272 + 2,
-> >  	.vsync_end =3D 272 + 2 + 10,
-> >  	.vtotal =3D 272 + 2 + 10 + 2,
-> > -	.vrefresh =3D 60,
-> >  	.flags =3D DRM_MODE_FLAG_NVSYNC | DRM_MODE_FLAG_NHSYNC,
-> >  };
-> >  =
-
-> > @@ -2458,7 +2410,6 @@ static const struct drm_display_mode olimex_lcd_o=
-linuxino_43ts_mode =3D {
-> >  	.vsync_start =3D 272 + 8,
-> >  	.vsync_end =3D 272 + 8 + 5,
-> >  	.vtotal =3D 272 + 8 + 5 + 3,
-> > -	.vrefresh =3D 60,
-> >  };
-> >  =
-
-> >  static const struct panel_desc olimex_lcd_olinuxino_43ts =3D {
-> > @@ -2486,7 +2437,6 @@ static const struct drm_display_mode ontat_yx700w=
-v03_mode =3D {
-> >  	.vsync_start =3D 483,
-> >  	.vsync_end =3D 493,
-> >  	.vtotal =3D 500,
-> > -	.vrefresh =3D 60,
-> >  	.flags =3D DRM_MODE_FLAG_NVSYNC | DRM_MODE_FLAG_NHSYNC,
-> >  };
-> >  =
-
-> > @@ -2515,7 +2465,6 @@ static const struct drm_display_mode ortustech_co=
-m37h3m_mode  =3D {
-> >  	.vsync_start =3D 640 + 4,
-> >  	.vsync_end =3D 640 + 4 + 3,
-> >  	.vtotal =3D 640 + 4 + 3 + 4,
-> > -	.vrefresh =3D 60,
-> >  	.flags =3D DRM_MODE_FLAG_NVSYNC | DRM_MODE_FLAG_NHSYNC,
-> >  };
-> >  =
-
-> > @@ -2542,7 +2491,6 @@ static const struct drm_display_mode ortustech_co=
-m43h4m85ulc_mode  =3D {
-> >  	.vsync_start =3D 800 + 3,
-> >  	.vsync_end =3D 800 + 3 + 3,
-> >  	.vtotal =3D 800 + 3 + 3 + 3,
-> > -	.vrefresh =3D 60,
-> >  };
-> >  =
-
-> >  static const struct panel_desc ortustech_com43h4m85ulc =3D {
-> > @@ -2567,7 +2515,6 @@ static const struct drm_display_mode osddisplays_=
-osd070t1718_19ts_mode  =3D {
-> >  	.vsync_start =3D 480 + 22,
-> >  	.vsync_end =3D 480 + 22 + 13,
-> >  	.vtotal =3D 480 + 22 + 13 + 10,
-> > -	.vrefresh =3D 60,
-> >  	.flags =3D DRM_MODE_FLAG_NVSYNC | DRM_MODE_FLAG_NHSYNC,
-> >  };
-> >  =
-
-> > @@ -2594,7 +2541,6 @@ static const struct drm_display_mode pda_91_00156=
-_a0_mode =3D {
-> >  	.vsync_start =3D 480 + 1,
-> >  	.vsync_end =3D 480 + 1 + 23,
-> >  	.vtotal =3D 480 + 1 + 23 + 22,
-> > -	.vrefresh =3D 60,
-> >  };
-> >  =
-
-> >  static const struct panel_desc pda_91_00156_a0  =3D {
-> > @@ -2618,7 +2564,6 @@ static const struct drm_display_mode qd43003c0_40=
-_mode =3D {
-> >  	.vsync_start =3D 272 + 4,
-> >  	.vsync_end =3D 272 + 4 + 10,
-> >  	.vtotal =3D 272 + 4 + 10 + 2,
-> > -	.vrefresh =3D 60,
-> >  };
-> >  =
-
-> >  static const struct panel_desc qd43003c0_40 =3D {
-> > @@ -2672,7 +2617,6 @@ static const struct drm_display_mode rocktech_rk1=
-01ii01d_ct_mode =3D {
-> >  	.vsync_start =3D 800 + 2,
-> >  	.vsync_end =3D 800 + 2 + 5,
-> >  	.vtotal =3D 800 + 2 + 5 + 16,
-> > -	.vrefresh =3D 60,
-> >  };
-> >  =
-
-> >  static const struct panel_desc rocktech_rk101ii01d_ct =3D {
-> > @@ -2701,7 +2645,6 @@ static const struct drm_display_mode samsung_lsn1=
-22dl01_c01_mode =3D {
-> >  	.vsync_start =3D 1600 + 2,
-> >  	.vsync_end =3D 1600 + 2 + 5,
-> >  	.vtotal =3D 1600 + 2 + 5 + 57,
-> > -	.vrefresh =3D 60,
-> >  };
-> >  =
-
-> >  static const struct panel_desc samsung_lsn122dl01_c01 =3D {
-> > @@ -2723,7 +2666,6 @@ static const struct drm_display_mode samsung_ltn1=
-01nt05_mode =3D {
-> >  	.vsync_start =3D 600 + 3,
-> >  	.vsync_end =3D 600 + 3 + 6,
-> >  	.vtotal =3D 600 + 3 + 6 + 61,
-> > -	.vrefresh =3D 60,
-> >  };
-> >  =
-
-> >  static const struct panel_desc samsung_ltn101nt05 =3D {
-> > @@ -2746,7 +2688,6 @@ static const struct drm_display_mode samsung_ltn1=
-40at29_301_mode =3D {
-> >  	.vsync_start =3D 768 + 2,
-> >  	.vsync_end =3D 768 + 2 + 5,
-> >  	.vtotal =3D 768 + 2 + 5 + 17,
-> > -	.vrefresh =3D 60,
-> >  };
-> >  =
-
-> >  static const struct panel_desc samsung_ltn140at29_301 =3D {
-> > @@ -2793,7 +2734,6 @@ static const struct drm_display_mode sharp_ld_d51=
-16z01b_mode =3D {
-> >  	.vsync_start =3D 1280 + 3,
-> >  	.vsync_end =3D 1280 + 3 + 10,
-> >  	.vtotal =3D 1280 + 3 + 10 + 57,
-> > -	.vrefresh =3D 60,
-> >  	.flags =3D DRM_MODE_FLAG_PHSYNC | DRM_MODE_FLAG_PVSYNC,
-> >  };
-> >  =
-
-> > @@ -2819,7 +2759,6 @@ static const struct drm_display_mode sharp_lq070y=
-3dg3b_mode =3D {
-> >  	.vsync_start =3D 480 + 8,
-> >  	.vsync_end =3D 480 + 8 + 2,
-> >  	.vtotal =3D 480 + 8 + 2 + 35,
-> > -	.vrefresh =3D 60,
-> >  	.flags =3D DISPLAY_FLAGS_PIXDATA_POSEDGE,
-> >  };
-> >  =
-
-> > @@ -2846,7 +2785,6 @@ static const struct drm_display_mode sharp_lq035q=
-7db03_mode =3D {
-> >  	.vsync_start =3D 320 + 9,
-> >  	.vsync_end =3D 320 + 9 + 1,
-> >  	.vtotal =3D 320 + 9 + 1 + 7,
-> > -	.vrefresh =3D 60,
-> >  };
-> >  =
-
-> >  static const struct panel_desc sharp_lq035q7db03 =3D {
-> > @@ -2923,7 +2861,6 @@ static const struct drm_display_mode sharp_lq150x=
-1lg11_mode =3D {
-> >  	.vsync_start =3D 768 + 37,
-> >  	.vsync_end =3D 768 + 37 + 2,
-> >  	.vtotal =3D 768 + 37 + 2 + 8,
-> > -	.vrefresh =3D 60,
-> >  };
-> >  =
-
-> >  static const struct panel_desc sharp_lq150x1lg11 =3D {
-> > @@ -2974,7 +2911,6 @@ static const struct drm_display_mode shelly_sca07=
-010_bfn_lnn_mode =3D {
-> >  	.vsync_start =3D 480 + 1,
-> >  	.vsync_end =3D 480 + 1 + 23,
-> >  	.vtotal =3D 480 + 1 + 23 + 22,
-> > -	.vrefresh =3D 60,
-> >  };
-> >  =
-
-> >  static const struct panel_desc shelly_sca07010_bfn_lnn =3D {
-> > @@ -2997,7 +2933,6 @@ static const struct drm_display_mode starry_kr122=
-ea0sra_mode =3D {
-> >  	.vsync_start =3D 1200 + 15,
-> >  	.vsync_end =3D 1200 + 15 + 2,
-> >  	.vtotal =3D 1200 + 15 + 2 + 18,
-> > -	.vrefresh =3D 60,
-> >  	.flags =3D DRM_MODE_FLAG_NVSYNC | DRM_MODE_FLAG_NHSYNC,
-> >  };
-> >  =
-
-> > @@ -3025,7 +2960,6 @@ static const struct drm_display_mode tfc_s9700rtw=
-v43tr_01b_mode =3D {
-> >  	.vsync_start =3D 480 + 13,
-> >  	.vsync_end =3D 480 + 13 + 2,
-> >  	.vtotal =3D 480 + 13 + 2 + 29,
-> > -	.vrefresh =3D 62,
-> >  };
-> >  =
-
-> >  static const struct panel_desc tfc_s9700rtwv43tr_01b =3D {
-> > @@ -3101,7 +3035,6 @@ static const struct drm_display_mode ti_nspire_cx=
-_lcd_mode[] =3D {
-> >  		.vsync_start =3D 240 + 3,
-> >  		.vsync_end =3D 240 + 3 + 1,
-> >  		.vtotal =3D 240 + 3 + 1 + 17,
-> > -		.vrefresh =3D 60,
-> >  		.flags =3D DRM_MODE_FLAG_NVSYNC | DRM_MODE_FLAG_NHSYNC,
-> >  	},
-> >  };
-> > @@ -3129,7 +3062,6 @@ static const struct drm_display_mode ti_nspire_cl=
-assic_lcd_mode[] =3D {
-> >  		.vsync_start =3D 240 + 0,
-> >  		.vsync_end =3D 240 + 0 + 1,
-> >  		.vtotal =3D 240 + 0 + 1 + 0,
-> > -		.vrefresh =3D 60,
-> >  		.flags =3D DRM_MODE_FLAG_PHSYNC | DRM_MODE_FLAG_PVSYNC,
-> >  	},
-> >  };
-> > @@ -3158,7 +3090,6 @@ static const struct drm_display_mode toshiba_lt08=
-9ac29000_mode =3D {
-> >  	.vsync_start =3D 768 + 20,
-> >  	.vsync_end =3D 768 + 20 + 7,
-> >  	.vtotal =3D 768 + 20 + 7 + 3,
-> > -	.vrefresh =3D 60,
-> >  };
-> >  =
-
-> >  static const struct panel_desc toshiba_lt089ac29000 =3D {
-> > @@ -3183,7 +3114,6 @@ static const struct drm_display_mode tpk_f07a_010=
-2_mode =3D {
-> >  	.vsync_start =3D 480 + 10,
-> >  	.vsync_end =3D 480 + 10 + 2,
-> >  	.vtotal =3D 480 + 10 + 2 + 33,
-> > -	.vrefresh =3D 60,
-> >  };
-> >  =
-
-> >  static const struct panel_desc tpk_f07a_0102 =3D {
-> > @@ -3206,7 +3136,6 @@ static const struct drm_display_mode tpk_f10a_010=
-2_mode =3D {
-> >  	.vsync_start =3D 600 + 20,
-> >  	.vsync_end =3D 600 + 20 + 5,
-> >  	.vtotal =3D 600 + 20 + 5 + 25,
-> > -	.vrefresh =3D 60,
-> >  };
-> >  =
-
-> >  static const struct panel_desc tpk_f10a_0102 =3D {
-> > @@ -3265,7 +3194,6 @@ static const struct drm_display_mode vl050_8048nt=
-_c01_mode =3D {
-> >  	.vsync_start =3D 480 + 22,
-> >  	.vsync_end =3D 480 + 22 + 10,
-> >  	.vtotal =3D 480 + 22 + 10 + 23,
-> > -	.vrefresh =3D 60,
-> >  	.flags =3D DRM_MODE_FLAG_NHSYNC | DRM_MODE_FLAG_NVSYNC,
-> >  };
-> >  =
-
-> > @@ -3291,7 +3219,6 @@ static const struct drm_display_mode winstar_wf35=
-ltiacd_mode =3D {
-> >  	.vsync_start =3D 240 + 4,
-> >  	.vsync_end =3D 240 + 4 + 3,
-> >  	.vtotal =3D 240 + 4 + 3 + 15,
-> > -	.vrefresh =3D 60,
-> >  	.flags =3D DRM_MODE_FLAG_NVSYNC | DRM_MODE_FLAG_NHSYNC,
-> >  };
-> >  =
-
-> > @@ -3317,7 +3244,6 @@ static const struct drm_display_mode arm_rtsm_mod=
-e[] =3D {
-> >  		.vsync_start =3D 768 + 3,
-> >  		.vsync_end =3D 768 + 3 + 6,
-> >  		.vtotal =3D 768 + 3 + 6 + 29,
-> > -		.vrefresh =3D 60,
-> >  		.flags =3D DRM_MODE_FLAG_NVSYNC | DRM_MODE_FLAG_NHSYNC,
-> >  	},
-> >  };
-> > @@ -3743,7 +3669,6 @@ static const struct drm_display_mode auo_b080uan0=
-1_mode =3D {
-> >  	.vsync_start =3D 1920 + 9,
-> >  	.vsync_end =3D 1920 + 9 + 2,
-> >  	.vtotal =3D 1920 + 9 + 2 + 8,
-> > -	.vrefresh =3D 60,
-> >  };
-> >  =
-
-> >  static const struct panel_desc_dsi auo_b080uan01 =3D {
-> > @@ -3771,7 +3696,6 @@ static const struct drm_display_mode boe_tv080wum=
-_nl0_mode =3D {
-> >  	.vsync_start =3D 1920 + 21,
-> >  	.vsync_end =3D 1920 + 21 + 3,
-> >  	.vtotal =3D 1920 + 21 + 3 + 18,
-> > -	.vrefresh =3D 60,
-> >  	.flags =3D DRM_MODE_FLAG_NVSYNC | DRM_MODE_FLAG_NHSYNC,
-> >  };
-> >  =
-
-> > @@ -3801,7 +3725,6 @@ static const struct drm_display_mode lg_ld070wx3_=
-sl01_mode =3D {
-> >  	.vsync_start =3D 1280 + 28,
-> >  	.vsync_end =3D 1280 + 28 + 1,
-> >  	.vtotal =3D 1280 + 28 + 1 + 14,
-> > -	.vrefresh =3D 60,
-> >  };
-> >  =
-
-> >  static const struct panel_desc_dsi lg_ld070wx3_sl01 =3D {
-> > @@ -3829,7 +3752,6 @@ static const struct drm_display_mode lg_lh500wx1_=
-sd03_mode =3D {
-> >  	.vsync_start =3D 1280 + 8,
-> >  	.vsync_end =3D 1280 + 8 + 4,
-> >  	.vtotal =3D 1280 + 8 + 4 + 12,
-> > -	.vrefresh =3D 60,
-> >  };
-> >  =
-
-> >  static const struct panel_desc_dsi lg_lh500wx1_sd03 =3D {
-> > @@ -3857,7 +3779,6 @@ static const struct drm_display_mode panasonic_vv=
-x10f004b00_mode =3D {
-> >  	.vsync_start =3D 1200 + 17,
-> >  	.vsync_end =3D 1200 + 17 + 2,
-> >  	.vtotal =3D 1200 + 17 + 2 + 16,
-> > -	.vrefresh =3D 60,
-> >  };
-> >  =
-
-> >  static const struct panel_desc_dsi panasonic_vvx10f004b00 =3D {
-> > @@ -3886,7 +3807,6 @@ static const struct drm_display_mode lg_acx467akm=
-_7_mode =3D {
-> >  	.vsync_start =3D 1920 + 2,
-> >  	.vsync_end =3D 1920 + 2 + 2,
-> >  	.vtotal =3D 1920 + 2 + 2 + 2,
-> > -	.vrefresh =3D 60,
-> >  };
-> >  =
-
-> >  static const struct panel_desc_dsi lg_acx467akm_7 =3D {
-> > @@ -3914,7 +3834,6 @@ static const struct drm_display_mode osd101t2045_=
-53ts_mode =3D {
-> >  	.vsync_start =3D 1200 + 16,
-> >  	.vsync_end =3D 1200 + 16 + 2,
-> >  	.vtotal =3D 1200 + 16 + 2 + 16,
-> > -	.vrefresh =3D 60,
-> >  	.flags =3D DRM_MODE_FLAG_NHSYNC | DRM_MODE_FLAG_NVSYNC,
-> >  };
-> >  =
-
-> > diff --git a/drivers/gpu/drm/panel/panel-sitronix-st7701.c b/drivers/gp=
-u/drm/panel/panel-sitronix-st7701.c
-> > index 4b4f2558e3b4..692041ae4eb6 100644
-> > --- a/drivers/gpu/drm/panel/panel-sitronix-st7701.c
-> > +++ b/drivers/gpu/drm/panel/panel-sitronix-st7701.c
-> > @@ -272,7 +272,7 @@ static int st7701_get_modes(struct drm_panel *panel,
-> >  		DRM_DEV_ERROR(&st7701->dsi->dev,
-> >  			      "failed to add mode %ux%ux@%u\n",
-> >  			      desc_mode->hdisplay, desc_mode->vdisplay,
-> > -			      desc_mode->vrefresh);
-> > +			      drm_mode_vrefresh(desc_mode));
-> >  		return -ENOMEM;
-> >  	}
-> >  =
-
-> > diff --git a/drivers/gpu/drm/panel/panel-sitronix-st7789v.c b/drivers/g=
-pu/drm/panel/panel-sitronix-st7789v.c
-> > index cc02c54c1b2e..3513ae40efa8 100644
-> > --- a/drivers/gpu/drm/panel/panel-sitronix-st7789v.c
-> > +++ b/drivers/gpu/drm/panel/panel-sitronix-st7789v.c
-> > @@ -165,7 +165,6 @@ static const struct drm_display_mode default_mode =
-=3D {
-> >  	.vsync_start =3D 320 + 8,
-> >  	.vsync_end =3D 320 + 8 + 4,
-> >  	.vtotal =3D 320 + 8 + 4 + 4,
-> > -	.vrefresh =3D 60,
-> >  };
-> >  =
-
-> >  static int st7789v_get_modes(struct drm_panel *panel,
-> > @@ -177,7 +176,7 @@ static int st7789v_get_modes(struct drm_panel *pane=
-l,
-> >  	if (!mode) {
-> >  		dev_err(panel->dev, "failed to add mode %ux%ux@%u\n",
-> >  			default_mode.hdisplay, default_mode.vdisplay,
-> > -			default_mode.vrefresh);
-> > +			drm_mode_vrefresh(&default_mode));
-> >  		return -ENOMEM;
-> >  	}
-> >  =
-
-> > diff --git a/drivers/gpu/drm/panel/panel-sony-acx424akp.c b/drivers/gpu=
-/drm/panel/panel-sony-acx424akp.c
-> > index de0abf76ae6f..eba05bd6ec9a 100644
-> > --- a/drivers/gpu/drm/panel/panel-sony-acx424akp.c
-> > +++ b/drivers/gpu/drm/panel/panel-sony-acx424akp.c
-> > @@ -57,7 +57,6 @@ static const struct drm_display_mode sony_acx424akp_v=
-id_mode =3D {
-> >  	.vsync_start =3D 864 + 14,
-> >  	.vsync_end =3D 864 + 14 + 1,
-> >  	.vtotal =3D 864 + 14 + 1 + 11,
-> > -	.vrefresh =3D 60,
-> >  	.width_mm =3D 48,
-> >  	.height_mm =3D 84,
-> >  	.flags =3D DRM_MODE_FLAG_PVSYNC,
-> > @@ -81,7 +80,6 @@ static const struct drm_display_mode sony_acx424akp_c=
-md_mode =3D {
-> >  	 * Some desired refresh rate, experiments at the maximum "pixel"
-> >  	 * clock speed (HS clock 420 MHz) yields around 117Hz.
-> >  	 */
-> > -	.vrefresh =3D 60,
-> >  	.width_mm =3D 48,
-> >  	.height_mm =3D 84,
-> >  };
-> > diff --git a/drivers/gpu/drm/panel/panel-sony-acx565akm.c b/drivers/gpu=
-/drm/panel/panel-sony-acx565akm.c
-> > index 5c4b6f6e5c2d..fc6a7e451abe 100644
-> > --- a/drivers/gpu/drm/panel/panel-sony-acx565akm.c
-> > +++ b/drivers/gpu/drm/panel/panel-sony-acx565akm.c
-> > @@ -514,7 +514,6 @@ static const struct drm_display_mode acx565akm_mode=
- =3D {
-> >  	.vsync_start =3D 480 + 3,
-> >  	.vsync_end =3D 480 + 3 + 3,
-> >  	.vtotal =3D 480 + 3 + 3 + 4,
-> > -	.vrefresh =3D 57,
-> >  	.type =3D DRM_MODE_TYPE_DRIVER | DRM_MODE_TYPE_PREFERRED,
-> >  	.flags =3D DRM_MODE_FLAG_NHSYNC | DRM_MODE_FLAG_NVSYNC,
-> >  	.width_mm =3D 77,
-> > diff --git a/drivers/gpu/drm/panel/panel-tpo-td028ttec1.c b/drivers/gpu=
-/drm/panel/panel-tpo-td028ttec1.c
-> > index aeca15dfeb3c..58d683cc5215 100644
-> > --- a/drivers/gpu/drm/panel/panel-tpo-td028ttec1.c
-> > +++ b/drivers/gpu/drm/panel/panel-tpo-td028ttec1.c
-> > @@ -281,7 +281,6 @@ static const struct drm_display_mode td028ttec1_mod=
-e =3D {
-> >  	.vsync_start =3D 640 + 4,
-> >  	.vsync_end =3D 640 + 4 + 2,
-> >  	.vtotal =3D 640 + 4 + 2 + 2,
-> > -	.vrefresh =3D 66,
-> >  	.type =3D DRM_MODE_TYPE_DRIVER | DRM_MODE_TYPE_PREFERRED,
-> >  	.flags =3D DRM_MODE_FLAG_NHSYNC | DRM_MODE_FLAG_NVSYNC,
-> >  	.width_mm =3D 43,
-> > diff --git a/drivers/gpu/drm/panel/panel-tpo-td043mtea1.c b/drivers/gpu=
-/drm/panel/panel-tpo-td043mtea1.c
-> > index 75f1f1f1b6de..9b2a356c4d9a 100644
-> > --- a/drivers/gpu/drm/panel/panel-tpo-td043mtea1.c
-> > +++ b/drivers/gpu/drm/panel/panel-tpo-td043mtea1.c
-> > @@ -339,7 +339,6 @@ static const struct drm_display_mode td043mtea1_mod=
-e =3D {
-> >  	.vsync_start =3D 480 + 39,
-> >  	.vsync_end =3D 480 + 39 + 1,
-> >  	.vtotal =3D 480 + 39 + 1 + 34,
-> > -	.vrefresh =3D 60,
-> >  	.type =3D DRM_MODE_TYPE_DRIVER | DRM_MODE_TYPE_PREFERRED,
-> >  	.flags =3D DRM_MODE_FLAG_NHSYNC | DRM_MODE_FLAG_NVSYNC,
-> >  	.width_mm =3D 94,
-> > diff --git a/drivers/gpu/drm/panel/panel-tpo-tpg110.c b/drivers/gpu/drm=
-/panel/panel-tpo-tpg110.c
-> > index 8472d018c16f..c7a2f0ae5ba5 100644
-> > --- a/drivers/gpu/drm/panel/panel-tpo-tpg110.c
-> > +++ b/drivers/gpu/drm/panel/panel-tpo-tpg110.c
-> > @@ -112,7 +112,6 @@ static const struct tpg110_panel_mode tpg110_modes[=
-] =3D {
-> >  			.vsync_start =3D 480 + 10,
-> >  			.vsync_end =3D 480 + 10 + 1,
-> >  			.vtotal =3D 480 + 10 + 1 + 35,
-> > -			.vrefresh =3D 60,
-> >  		},
-> >  		.bus_flags =3D DRM_BUS_FLAG_PIXDATA_DRIVE_POSEDGE,
-> >  	},
-> > @@ -129,7 +128,6 @@ static const struct tpg110_panel_mode tpg110_modes[=
-] =3D {
-> >  			.vsync_start =3D 480 + 18,
-> >  			.vsync_end =3D 480 + 18 + 1,
-> >  			.vtotal =3D 480 + 18 + 1 + 27,
-> > -			.vrefresh =3D 60,
-> >  		},
-> >  		.bus_flags =3D DRM_BUS_FLAG_PIXDATA_DRIVE_POSEDGE,
-> >  	},
-> > @@ -146,7 +144,6 @@ static const struct tpg110_panel_mode tpg110_modes[=
-] =3D {
-> >  			.vsync_start =3D 272 + 2,
-> >  			.vsync_end =3D 272 + 2 + 1,
-> >  			.vtotal =3D 272 + 2 + 1 + 12,
-> > -			.vrefresh =3D 60,
-> >  		},
-> >  		.bus_flags =3D DRM_BUS_FLAG_PIXDATA_DRIVE_POSEDGE,
-> >  	},
-> > @@ -163,7 +160,6 @@ static const struct tpg110_panel_mode tpg110_modes[=
-] =3D {
-> >  			.vsync_start =3D 640 + 4,
-> >  			.vsync_end =3D 640 + 4 + 1,
-> >  			.vtotal =3D 640 + 4 + 1 + 8,
-> > -			.vrefresh =3D 60,
-> >  		},
-> >  		.bus_flags =3D DRM_BUS_FLAG_PIXDATA_DRIVE_POSEDGE,
-> >  	},
-> > @@ -180,7 +176,6 @@ static const struct tpg110_panel_mode tpg110_modes[=
-] =3D {
-> >  			.vsync_start =3D 240 + 2,
-> >  			.vsync_end =3D 240 + 2 + 1,
-> >  			.vtotal =3D 240 + 2 + 1 + 20,
-> > -			.vrefresh =3D 60,
-> >  		},
-> >  		.bus_flags =3D DRM_BUS_FLAG_PIXDATA_DRIVE_POSEDGE,
-> >  	},
-> > diff --git a/drivers/gpu/drm/panel/panel-truly-nt35597.c b/drivers/gpu/=
-drm/panel/panel-truly-nt35597.c
-> > index 012ca62bf30e..9d669088cffc 100644
-> > --- a/drivers/gpu/drm/panel/panel-truly-nt35597.c
-> > +++ b/drivers/gpu/drm/panel/panel-truly-nt35597.c
-> > @@ -536,7 +536,6 @@ static const struct drm_display_mode qcom_sdm845_mt=
-p_2k_mode =3D {
-> >  	.vsync_start =3D 2560 + 8,
-> >  	.vsync_end =3D 2560 + 8 + 1,
-> >  	.vtotal =3D 2560 + 8 + 1 + 7,
-> > -	.vrefresh =3D 60,
-> >  	.flags =3D 0,
-> >  };
-> >  =
-
-> > diff --git a/drivers/gpu/drm/panel/panel-xinpeng-xpp055c272.c b/drivers=
-/gpu/drm/panel/panel-xinpeng-xpp055c272.c
-> > index 1645aceab597..8a3b2f906e63 100644
-> > --- a/drivers/gpu/drm/panel/panel-xinpeng-xpp055c272.c
-> > +++ b/drivers/gpu/drm/panel/panel-xinpeng-xpp055c272.c
-> > @@ -243,7 +243,6 @@ static const struct drm_display_mode default_mode =
-=3D {
-> >  	.vsync_start	=3D 1280 + 22,
-> >  	.vsync_end	=3D 1280 + 22 + 4,
-> >  	.vtotal		=3D 1280 + 22 + 4 + 11,
-> > -	.vrefresh	=3D 60,
-> >  	.clock		=3D 64000,
-> >  	.width_mm	=3D 68,
-> >  	.height_mm	=3D 121,
-> > @@ -259,7 +258,7 @@ static int xpp055c272_get_modes(struct drm_panel *p=
-anel,
-> >  	if (!mode) {
-> >  		DRM_DEV_ERROR(ctx->dev, "Failed to add mode %ux%u@%u\n",
-> >  			      default_mode.hdisplay, default_mode.vdisplay,
-> > -			      default_mode.vrefresh);
-> > +			      drm_mode_vrefresh(&default_mode));
-> >  		return -ENOMEM;
-> >  	}
-> >  =
-
-> > diff --git a/drivers/gpu/drm/sti/sti_hda.c b/drivers/gpu/drm/sti/sti_hd=
-a.c
-> > index 2bb32009d117..3dc6e2e96541 100644
-> > --- a/drivers/gpu/drm/sti/sti_hda.c
-> > +++ b/drivers/gpu/drm/sti/sti_hda.c
-> > @@ -586,7 +586,6 @@ static int sti_hda_connector_get_modes(struct drm_c=
-onnector *connector)
-> >  					&hda_supported_modes[i].mode);
-> >  		if (!mode)
-> >  			continue;
-> > -		mode->vrefresh =3D drm_mode_vrefresh(mode);
-> >  =
-
-> >  		/* the first mode is the preferred mode */
-> >  		if (i =3D=3D 0)
-> > diff --git a/drivers/gpu/drm/vmwgfx/vmwgfx_kms.c b/drivers/gpu/drm/vmwg=
-fx/vmwgfx_kms.c
-> > index eb6e23e8d8ef..0b07f7b5ece4 100644
-> > --- a/drivers/gpu/drm/vmwgfx/vmwgfx_kms.c
-> > +++ b/drivers/gpu/drm/vmwgfx/vmwgfx_kms.c
-> > @@ -2226,7 +2226,6 @@ void vmw_guess_mode_timing(struct drm_display_mod=
-e *mode)
-> >  	mode->vtotal =3D mode->vsync_end + 50;
-> >  =
-
-> >  	mode->clock =3D (u32)mode->htotal * (u32)mode->vtotal / 100 * 6;
-> > -	mode->vrefresh =3D drm_mode_vrefresh(mode);
-> >  }
-> >  =
-
-> >  =
-
-> > @@ -2300,7 +2299,6 @@ int vmw_du_connector_fill_modes(struct drm_connec=
-tor *connector,
-> >  		mode =3D drm_mode_duplicate(dev, bmode);
-> >  		if (!mode)
-> >  			return 0;
-> > -		mode->vrefresh =3D drm_mode_vrefresh(mode);
-> >  =
-
-> >  		drm_mode_probed_add(connector, mode);
-> >  	}
-> > diff --git a/include/drm/drm_modes.h b/include/drm/drm_modes.h
-> > index 7dab7f172431..52e8ca613e4b 100644
-> > --- a/include/drm/drm_modes.h
-> > +++ b/include/drm/drm_modes.h
-> > @@ -380,16 +380,6 @@ struct drm_display_mode {
-> >  	 */
-> >  	int private_flags;
-> >  =
-
-> > -	/**
-> > -	 * @vrefresh:
-> > -	 *
-> > -	 * Vertical refresh rate, for debug output in human readable form. Not
-> > -	 * used in a functional way.
-> > -	 *
-> > -	 * This value is in Hz.
-> > -	 */
-> > -	int vrefresh;
-> > -
-> >  	/**
-> >  	 * @picture_aspect_ratio:
-> >  	 *
-> > @@ -421,7 +411,7 @@ struct drm_display_mode {
-> >   * @m: display mode
-> >   */
-> >  #define DRM_MODE_ARG(m) \
-> > -	(m)->name, (m)->vrefresh, (m)->clock, \
-> > +	(m)->name, drm_mode_vrefresh(m), (m)->clock, \
-> >  	(m)->hdisplay, (m)->hsync_start, (m)->hsync_end, (m)->htotal, \
-> >  	(m)->vdisplay, (m)->vsync_start, (m)->vsync_end, (m)->vtotal, \
-> >  	(m)->type, (m)->flags
-> =
-
-
--- =
-
-Ville Syrj=E4l=E4
-Intel
-_______________________________________________
-Nouveau mailing list
-Nouveau@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/nouveau
+T24gMjUuMDIuMjAyMCAxMjoyMSwgVmlsbGUgU3lyasOkbMOkIHdyb3RlOgo+IE9uIE1vbiwgRmVi
+IDI0LCAyMDIwIGF0IDAzOjE0OjU0UE0gKzAxMDAsIEFuZHJ6ZWogSGFqZGEgd3JvdGU6Cj4+IE9u
+IDE5LjAyLjIwMjAgMjE6MzUsIFZpbGxlIFN5cmphbGEgd3JvdGU6Cj4+PiBGcm9tOiBWaWxsZSBT
+eXJqw6Rsw6QgPHZpbGxlLnN5cmphbGFAbGludXguaW50ZWwuY29tPgo+Pj4KPj4+IEdldCByaWQg
+b2YgbW9kZS0+dnJlZnJlc2ggYW5kIGp1c3QgY2FsY3VsYXRlIGl0IG9uIGRlbWFuZC4gU2F2ZXMK
+Pj4+IGEgYml0IG9mIHNwYWNlIGFuZCBhdm9pZHMgdGhlIGNhY2hlZCB2YWx1ZSBnZXR0aW5nIG91
+dCBvZiBzeW5jCj4+PiB3aXRoIHJlYWxpdHkuCj4+Pgo+Pj4gTW9zdGx5IGRvbmUgd2l0aCBjb2Nj
+aSwgd2l0aCB0aGUgZm9sbG93aW5nIG1hbnVhbCBmaXh1cHM6Cj4+PiAtIFJlbW92ZSB0aGUgbm93
+IGVtcHR5IGxvb3AgaW4gZHJtX2hlbHBlcl9wcm9iZV9zaW5nbGVfY29ubmVjdG9yX21vZGVzKCkK
+Pj4+IC0gRml4IF9fTU9ERSgpIG1hY3JvIGluIGNoNzAwNl9tb2RlLmMKPj4+IC0gRml4IERSTV9N
+T0RFX0FSRygpIG1hY3JvIGluIGRybV9tb2Rlcy5oCj4+PiAtIFJlbW92ZSBsZWZ0b3ZlciBjb21t
+ZW50IGZyb20gc2Ftc3VuZ19zNmQxNmQwX21vZGUKPj4gLi4uCj4+PiBkaWZmIC0tZ2l0IGEvZHJp
+dmVycy9ncHUvZHJtL3BhbmVsL3BhbmVsLWFybS12ZXJzYXRpbGUuYyBiL2RyaXZlcnMvZ3B1L2Ry
+bS9wYW5lbC9wYW5lbC1hcm0tdmVyc2F0aWxlLmMKPj4+IGluZGV4IDQxNDQ0YTczYzk4MC4uNDdi
+MzdmZWY3ZWU4IDEwMDY0NAo+Pj4gLS0tIGEvZHJpdmVycy9ncHUvZHJtL3BhbmVsL3BhbmVsLWFy
+bS12ZXJzYXRpbGUuYwo+Pj4gKysrIGIvZHJpdmVycy9ncHUvZHJtL3BhbmVsL3BhbmVsLWFybS12
+ZXJzYXRpbGUuYwo+Pj4gQEAgLTE0Myw3ICsxNDMsNiBAQCBzdGF0aWMgY29uc3Qgc3RydWN0IHZl
+cnNhdGlsZV9wYW5lbF90eXBlIHZlcnNhdGlsZV9wYW5lbHNbXSA9IHsKPj4+ICAJCQkudnN5bmNf
+c3RhcnQgPSAyNDAgKyA1LAo+Pj4gIAkJCS52c3luY19lbmQgPSAyNDAgKyA1ICsgNiwKPj4+ICAJ
+CQkudnRvdGFsID0gMjQwICsgNSArIDYgKyA1LAo+Pj4gLQkJCS52cmVmcmVzaCA9IDExNiwKPj4K
+Pj4gQXJlIHlvdSBzdXJlIHZyZWZyZXNoIGNhbGN1bGF0ZWQgKGZyb20gdG90YWxzIGFuZCBjbG9j
+aykgaXMgZGlmZmVyZW50Cj4+IHRoYW4gdGhpcyBmaWVsZD8gSWYgbm90LCB3ZSByaXNrIHJlZ3Jl
+c3Npb25zLgo+Pgo+PiBUaGlzIGNhc2UgaXMgT0ssIGJ1dCB0aGVyZSBpcyBwbGVudHkgb3RoZXIg
+Y2FzZXMuCj4gSUlSQyBJIGRpZCBzcG90IGNoZWNrIGEgZmV3IG9mIHRoZW0uIEJ1dCB3aGljaCBj
+b2RlIGV4YWN0bHkgZG8geW91IHRoaW5rCj4gaXMgYWJ1c2luZyB2cmVmcmVzaCBhbmQgdGh1cyBj
+b3VsZCBicmVhaz8KCgpJIGd1ZXNzIHN1c3BlY3QvcG90ZW50aWFsIHZpY3RpbSBpcyBldmVyeSBj
+b2RlIHdoaWNoIHVzZXMKZHJtX21vZGVfdnJlZnJlc2ggLSBhZnRlciB0aGlzIHBhdGNoIHRoZSBm
+dW5jdGlvbiBjYW4gcmV0dXJuIGRpZmZlcmVudAp2YWx1ZShpZiB0aGVyZSBhcmUgZGlmZmVyZW5j
+ZXMgYmV0d2VlbiBwcm92aWRlZCBhbmQgY2FsY3VsYXRlZCB2cmVmcmVzaCkuCgpRdWljayBleGFt
+cGxlcyB3aGVyZSBvdXRwdXQgb2YgdGhpcyBmdW5jdGlvbiBtYXR0ZXJzOgoKaHR0cHM6Ly9lbGl4
+aXIuYm9vdGxpbi5jb20vbGludXgvbGF0ZXN0L3NvdXJjZS9kcml2ZXJzL2dwdS9kcm0vbXNtL2Rp
+c3AvZHB1MS9kcHVfZW5jb2Rlcl9waHlzX2NtZC5jI0wzODcKCmh0dHBzOi8vZWxpeGlyLmJvb3Rs
+aW4uY29tL2xpbnV4L2xhdGVzdC9zb3VyY2UvZHJpdmVycy9ncHUvZHJtL3BhbmVsL3BhbmVsLXNo
+YXJwLWxxMTAxcjFzeDAxLmMjTDQyCgpodHRwczovL2VsaXhpci5ib290bGluLmNvbS9saW51eC9s
+YXRlc3Qvc291cmNlL2RyaXZlcnMvZ3B1L2RybS90aWxjZGMvdGlsY2RjX2NydGMuYyNMODEwCgoK
+UmVnYXJkcwoKQW5kcnplagoKCj4KPj4KPj4gUmVnYXJkcwo+Pgo+PiBBbmRyemVqCj4+Cj4+Cj4+
+PiAgCQkJLmZsYWdzID0gRFJNX01PREVfRkxBR19QSFNZTkMgfCBEUk1fTU9ERV9GTEFHX1BWU1lO
+QywKPj4+ICAJCX0sCj4+PiAgCX0sCj4+PiBAQCAtMTY3LDcgKzE2Niw2IEBAIHN0YXRpYyBjb25z
+dCBzdHJ1Y3QgdmVyc2F0aWxlX3BhbmVsX3R5cGUgdmVyc2F0aWxlX3BhbmVsc1tdID0gewo+Pj4g
+IAkJCS52c3luY19zdGFydCA9IDQ4MCArIDExLAo+Pj4gIAkJCS52c3luY19lbmQgPSA0ODAgKyAx
+MSArIDIsCj4+PiAgCQkJLnZ0b3RhbCA9IDQ4MCArIDExICsgMiArIDMyLAo+Pj4gLQkJCS52cmVm
+cmVzaCA9IDYwLAo+Pj4gIAkJCS5mbGFncyA9IERSTV9NT0RFX0ZMQUdfUEhTWU5DIHwgRFJNX01P
+REVfRkxBR19QVlNZTkMsCj4+PiAgCQl9LAo+Pj4gIAl9LAo+Pj4gQEAgLTE5MCw3ICsxODgsNiBA
+QCBzdGF0aWMgY29uc3Qgc3RydWN0IHZlcnNhdGlsZV9wYW5lbF90eXBlIHZlcnNhdGlsZV9wYW5l
+bHNbXSA9IHsKPj4+ICAJCQkudnN5bmNfc3RhcnQgPSAyMjAgKyAwLAo+Pj4gIAkJCS52c3luY19l
+bmQgPSAyMjAgKyAwICsgMiwKPj4+ICAJCQkudnRvdGFsID0gMjIwICsgMCArIDIgKyAxLAo+Pj4g
+LQkJCS52cmVmcmVzaCA9IDM5MCwKPj4+ICAJCQkuZmxhZ3MgPSBEUk1fTU9ERV9GTEFHX1BIU1lO
+QyB8IERSTV9NT0RFX0ZMQUdfUFZTWU5DLAo+Pj4gIAkJfSwKPj4+ICAJCS5idXNfZmxhZ3MgPSBE
+Uk1fQlVTX0ZMQUdfUElYREFUQV9EUklWRV9ORUdFREdFLAo+Pj4gQEAgLTIxNCw3ICsyMTEsNiBA
+QCBzdGF0aWMgY29uc3Qgc3RydWN0IHZlcnNhdGlsZV9wYW5lbF90eXBlIHZlcnNhdGlsZV9wYW5l
+bHNbXSA9IHsKPj4+ICAJCQkudnN5bmNfc3RhcnQgPSAzMjAgKyAyLAo+Pj4gIAkJCS52c3luY19l
+bmQgPSAzMjAgKyAyICsgMiwKPj4+ICAJCQkudnRvdGFsID0gMzIwICsgMiArIDIgKyAyLAo+Pj4g
+LQkJCS52cmVmcmVzaCA9IDExNiwKPj4+ICAJCQkuZmxhZ3MgPSBEUk1fTU9ERV9GTEFHX05IU1lO
+QyB8IERSTV9NT0RFX0ZMQUdfTlZTWU5DLAo+Pj4gIAkJfSwKPj4+ICAJCS5idXNfZmxhZ3MgPSBE
+Uk1fQlVTX0ZMQUdfUElYREFUQV9EUklWRV9ORUdFREdFLAo+Pj4gZGlmZiAtLWdpdCBhL2RyaXZl
+cnMvZ3B1L2RybS9wYW5lbC9wYW5lbC1ib2UtaGltYXg4Mjc5ZC5jIGIvZHJpdmVycy9ncHUvZHJt
+L3BhbmVsL3BhbmVsLWJvZS1oaW1heDgyNzlkLmMKPj4+IGluZGV4IDc0ZDU4ZWU3ZDA0Yy4uN2My
+N2JkNWUzNDg2IDEwMDY0NAo+Pj4gLS0tIGEvZHJpdmVycy9ncHUvZHJtL3BhbmVsL3BhbmVsLWJv
+ZS1oaW1heDgyNzlkLmMKPj4+ICsrKyBiL2RyaXZlcnMvZ3B1L2RybS9wYW5lbC9wYW5lbC1ib2Ut
+aGltYXg4Mjc5ZC5jCj4+PiBAQCAtMjI5LDcgKzIyOSw3IEBAIHN0YXRpYyBpbnQgYm9lX3BhbmVs
+X2dldF9tb2RlcyhzdHJ1Y3QgZHJtX3BhbmVsICpwYW5lbCwKPj4+ICAJbW9kZSA9IGRybV9tb2Rl
+X2R1cGxpY2F0ZShjb25uZWN0b3ItPmRldiwgbSk7Cj4+PiAgCWlmICghbW9kZSkgewo+Pj4gIAkJ
+RFJNX0RFVl9FUlJPUihwaW5mby0+YmFzZS5kZXYsICJmYWlsZWQgdG8gYWRkIG1vZGUgJXV4JXVA
+JXVcbiIsCj4+PiAtCQkJICAgICAgbS0+aGRpc3BsYXksIG0tPnZkaXNwbGF5LCBtLT52cmVmcmVz
+aCk7Cj4+PiArCQkJICAgICAgbS0+aGRpc3BsYXksIG0tPnZkaXNwbGF5LCBkcm1fbW9kZV92cmVm
+cmVzaChtKSk7Cj4+PiAgCQlyZXR1cm4gLUVOT01FTTsKPj4+ICAJfQo+Pj4gIAo+Pj4gQEAgLTI2
+Miw3ICsyNjIsNiBAQCBzdGF0aWMgY29uc3Qgc3RydWN0IGRybV9kaXNwbGF5X21vZGUgZGVmYXVs
+dF9kaXNwbGF5X21vZGUgPSB7Cj4+PiAgCS52c3luY19zdGFydCA9IDE5MjAgKyAxMCwKPj4+ICAJ
+LnZzeW5jX2VuZCA9IDE5MjAgKyAxMCArIDE0LAo+Pj4gIAkudnRvdGFsID0gMTkyMCArIDEwICsg
+MTQgKyA0LAo+Pj4gLQkudnJlZnJlc2ggPSA2MCwKPj4+ICB9Owo+Pj4gIAo+Pj4gIC8qIDggaW5j
+aCAqLwo+Pj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9wYW5lbC9wYW5lbC1ib2UtdHYx
+MDF3dW0tbmw2LmMgYi9kcml2ZXJzL2dwdS9kcm0vcGFuZWwvcGFuZWwtYm9lLXR2MTAxd3VtLW5s
+Ni5jCj4+PiBpbmRleCA0OGExNjQyNTdkMTguLmM1ODBiZDFlMTIxYyAxMDA2NDQKPj4+IC0tLSBh
+L2RyaXZlcnMvZ3B1L2RybS9wYW5lbC9wYW5lbC1ib2UtdHYxMDF3dW0tbmw2LmMKPj4+ICsrKyBi
+L2RyaXZlcnMvZ3B1L2RybS9wYW5lbC9wYW5lbC1ib2UtdHYxMDF3dW0tbmw2LmMKPj4+IEBAIC01
+OTQsNyArNTk0LDYgQEAgc3RhdGljIGNvbnN0IHN0cnVjdCBkcm1fZGlzcGxheV9tb2RlIGJvZV90
+djEwMXd1bV9ubDZfZGVmYXVsdF9tb2RlID0gewo+Pj4gIAkudnN5bmNfc3RhcnQgPSAxOTIwICsg
+MTAsCj4+PiAgCS52c3luY19lbmQgPSAxOTIwICsgMTAgKyAxNCwKPj4+ICAJLnZ0b3RhbCA9IDE5
+MjAgKyAxMCArIDE0ICsgNCwKPj4+IC0JLnZyZWZyZXNoID0gNjAsCj4+PiAgfTsKPj4+ICAKPj4+
+ICBzdGF0aWMgY29uc3Qgc3RydWN0IHBhbmVsX2Rlc2MgYm9lX3R2MTAxd3VtX25sNl9kZXNjID0g
+ewo+Pj4gQEAgLTYyMiw3ICs2MjEsNiBAQCBzdGF0aWMgY29uc3Qgc3RydWN0IGRybV9kaXNwbGF5
+X21vZGUgYXVvX2tkMTAxbjgwXzQ1bmFfZGVmYXVsdF9tb2RlID0gewo+Pj4gIAkudnN5bmNfc3Rh
+cnQgPSAxOTIwICsgMTYsCj4+PiAgCS52c3luY19lbmQgPSAxOTIwICsgMTYgKyA0LAo+Pj4gIAku
+dnRvdGFsID0gMTkyMCArIDE2ICsgNCArIDE2LAo+Pj4gLQkudnJlZnJlc2ggPSA2MCwKPj4+ICB9
+Owo+Pj4gIAo+Pj4gIHN0YXRpYyBjb25zdCBzdHJ1Y3QgcGFuZWxfZGVzYyBhdW9fa2QxMDFuODBf
+NDVuYV9kZXNjID0gewo+Pj4gQEAgLTY1MCw3ICs2NDgsNiBAQCBzdGF0aWMgY29uc3Qgc3RydWN0
+IGRybV9kaXNwbGF5X21vZGUgYm9lX3R2MTAxd3VtX241M19kZWZhdWx0X21vZGUgPSB7Cj4+PiAg
+CS52c3luY19zdGFydCA9IDE5MjAgKyAyMCwKPj4+ICAJLnZzeW5jX2VuZCA9IDE5MjAgKyAyMCAr
+IDQsCj4+PiAgCS52dG90YWwgPSAxOTIwICsgMjAgKyA0ICsgMTAsCj4+PiAtCS52cmVmcmVzaCA9
+IDYwLAo+Pj4gIAkudHlwZSA9IERSTV9NT0RFX1RZUEVfRFJJVkVSIHwgRFJNX01PREVfVFlQRV9Q
+UkVGRVJSRUQsCj4+PiAgfTsKPj4+ICAKPj4+IEBAIC02NzgsNyArNjc1LDYgQEAgc3RhdGljIGNv
+bnN0IHN0cnVjdCBkcm1fZGlzcGxheV9tb2RlIGF1b19iMTAxdWFuMDhfM19kZWZhdWx0X21vZGUg
+PSB7Cj4+PiAgCS52c3luY19zdGFydCA9IDE5MjAgKyAzNCwKPj4+ICAJLnZzeW5jX2VuZCA9IDE5
+MjAgKyAzNCArIDIsCj4+PiAgCS52dG90YWwgPSAxOTIwICsgMzQgKyAyICsgMjQsCj4+PiAtCS52
+cmVmcmVzaCA9IDYwLAo+Pj4gIAkudHlwZSA9IERSTV9NT0RFX1RZUEVfRFJJVkVSIHwgRFJNX01P
+REVfVFlQRV9QUkVGRVJSRUQsCj4+PiAgfTsKPj4+ICAKPj4+IEBAIC03MDYsNyArNzAyLDcgQEAg
+c3RhdGljIGludCBib2VfcGFuZWxfZ2V0X21vZGVzKHN0cnVjdCBkcm1fcGFuZWwgKnBhbmVsLAo+
+Pj4gIAltb2RlID0gZHJtX21vZGVfZHVwbGljYXRlKGNvbm5lY3Rvci0+ZGV2LCBtKTsKPj4+ICAJ
+aWYgKCFtb2RlKSB7Cj4+PiAgCQlkZXZfZXJyKHBhbmVsLT5kZXYsICJmYWlsZWQgdG8gYWRkIG1v
+ZGUgJXV4JXVAJXVcbiIsCj4+PiAtCQkJbS0+aGRpc3BsYXksIG0tPnZkaXNwbGF5LCBtLT52cmVm
+cmVzaCk7Cj4+PiArCQkJbS0+aGRpc3BsYXksIG0tPnZkaXNwbGF5LCBkcm1fbW9kZV92cmVmcmVz
+aChtKSk7Cj4+PiAgCQlyZXR1cm4gLUVOT01FTTsKPj4+ICAJfQo+Pj4gIAo+Pj4gZGlmZiAtLWdp
+dCBhL2RyaXZlcnMvZ3B1L2RybS9wYW5lbC9wYW5lbC1mZWl4aW4tazEwMS1pbTJiYTAyLmMgYi9k
+cml2ZXJzL2dwdS9kcm0vcGFuZWwvcGFuZWwtZmVpeGluLWsxMDEtaW0yYmEwMi5jCj4+PiBpbmRl
+eCBmZGRiZmRkZjY1NjYuLjU0NjEwNjUxZWNkYiAxMDA2NDQKPj4+IC0tLSBhL2RyaXZlcnMvZ3B1
+L2RybS9wYW5lbC9wYW5lbC1mZWl4aW4tazEwMS1pbTJiYTAyLmMKPj4+ICsrKyBiL2RyaXZlcnMv
+Z3B1L2RybS9wYW5lbC9wYW5lbC1mZWl4aW4tazEwMS1pbTJiYTAyLmMKPj4+IEBAIC0zOTIsNyAr
+MzkyLDYgQEAgc3RhdGljIGludCBrMTAxX2ltMmJhMDJfdW5wcmVwYXJlKHN0cnVjdCBkcm1fcGFu
+ZWwgKnBhbmVsKQo+Pj4gIAo+Pj4gIHN0YXRpYyBjb25zdCBzdHJ1Y3QgZHJtX2Rpc3BsYXlfbW9k
+ZSBrMTAxX2ltMmJhMDJfZGVmYXVsdF9tb2RlID0gewo+Pj4gIAkuY2xvY2sgPSA3MDAwMCwKPj4+
+IC0JLnZyZWZyZXNoID0gNjAsCj4+PiAgCj4+PiAgCS5oZGlzcGxheSA9IDgwMCwKPj4+ICAJLmhz
+eW5jX3N0YXJ0ID0gODAwICsgMjAsCj4+PiBAQCAtNDIwLDcgKzQxOSw3IEBAIHN0YXRpYyBpbnQg
+azEwMV9pbTJiYTAyX2dldF9tb2RlcyhzdHJ1Y3QgZHJtX3BhbmVsICpwYW5lbCwKPj4+ICAJCURS
+TV9ERVZfRVJST1IoJmN0eC0+ZHNpLT5kZXYsICJmYWlsZWQgdG8gYWRkIG1vZGUgJXV4JXV4QCV1
+XG4iLAo+Pj4gIAkJCSAgICAgIGsxMDFfaW0yYmEwMl9kZWZhdWx0X21vZGUuaGRpc3BsYXksCj4+
+PiAgCQkJICAgICAgazEwMV9pbTJiYTAyX2RlZmF1bHRfbW9kZS52ZGlzcGxheSwKPj4+IC0JCQkg
+ICAgICBrMTAxX2ltMmJhMDJfZGVmYXVsdF9tb2RlLnZyZWZyZXNoKTsKPj4+ICsJCQkgICAgICBk
+cm1fbW9kZV92cmVmcmVzaCgmazEwMV9pbTJiYTAyX2RlZmF1bHRfbW9kZSkpOwo+Pj4gIAkJcmV0
+dXJuIC1FTk9NRU07Cj4+PiAgCX0KPj4+ICAKPj4+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9k
+cm0vcGFuZWwvcGFuZWwtZmVpeWFuZy1meTA3MDI0ZGkyNmEzMGQuYyBiL2RyaXZlcnMvZ3B1L2Ry
+bS9wYW5lbC9wYW5lbC1mZWl5YW5nLWZ5MDcwMjRkaTI2YTMwZC5jCj4+PiBpbmRleCA5NWI3ODlh
+YjlkMjkuLjE5YTYyNzRiMTBmNSAxMDA2NDQKPj4+IC0tLSBhL2RyaXZlcnMvZ3B1L2RybS9wYW5l
+bC9wYW5lbC1mZWl5YW5nLWZ5MDcwMjRkaTI2YTMwZC5jCj4+PiArKysgYi9kcml2ZXJzL2dwdS9k
+cm0vcGFuZWwvcGFuZWwtZmVpeWFuZy1meTA3MDI0ZGkyNmEzMGQuYwo+Pj4gQEAgLTE1Myw3ICsx
+NTMsNiBAQCBzdGF0aWMgY29uc3Qgc3RydWN0IGRybV9kaXNwbGF5X21vZGUgZmVpeWFuZ19kZWZh
+dWx0X21vZGUgPSB7Cj4+PiAgCS52c3luY19zdGFydAk9IDYwMCArIDEyLAo+Pj4gIAkudnN5bmNf
+ZW5kCT0gNjAwICsgMTIgKyAyLAo+Pj4gIAkudnRvdGFsCQk9IDYwMCArIDEyICsgMiArIDIxLAo+
+Pj4gLQkudnJlZnJlc2gJPSA2MCwKPj4+ICAKPj4+ICAJLnR5cGUgPSBEUk1fTU9ERV9UWVBFX0RS
+SVZFUiB8IERSTV9NT0RFX1RZUEVfUFJFRkVSUkVELAo+Pj4gIH07Cj4+PiBAQCAtMTY5LDcgKzE2
+OCw3IEBAIHN0YXRpYyBpbnQgZmVpeWFuZ19nZXRfbW9kZXMoc3RydWN0IGRybV9wYW5lbCAqcGFu
+ZWwsCj4+PiAgCQlEUk1fREVWX0VSUk9SKCZjdHgtPmRzaS0+ZGV2LCAiZmFpbGVkIHRvIGFkZCBt
+b2RlICV1eCV1eEAldVxuIiwKPj4+ICAJCQkgICAgICBmZWl5YW5nX2RlZmF1bHRfbW9kZS5oZGlz
+cGxheSwKPj4+ICAJCQkgICAgICBmZWl5YW5nX2RlZmF1bHRfbW9kZS52ZGlzcGxheSwKPj4+IC0J
+CQkgICAgICBmZWl5YW5nX2RlZmF1bHRfbW9kZS52cmVmcmVzaCk7Cj4+PiArCQkJICAgICAgZHJt
+X21vZGVfdnJlZnJlc2goJmZlaXlhbmdfZGVmYXVsdF9tb2RlKSk7Cj4+PiAgCQlyZXR1cm4gLUVO
+T01FTTsKPj4+ICAJfQo+Pj4gIAo+Pj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9wYW5l
+bC9wYW5lbC1pbGl0ZWstaWxpOTMyMi5jIGIvZHJpdmVycy9ncHUvZHJtL3BhbmVsL3BhbmVsLWls
+aXRlay1pbGk5MzIyLmMKPj4+IGluZGV4IGYzOTRkNTNhN2RhNC4uZDJjOThkMzgxYmVmIDEwMDY0
+NAo+Pj4gLS0tIGEvZHJpdmVycy9ncHUvZHJtL3BhbmVsL3BhbmVsLWlsaXRlay1pbGk5MzIyLmMK
+Pj4+ICsrKyBiL2RyaXZlcnMvZ3B1L2RybS9wYW5lbC9wYW5lbC1pbGl0ZWstaWxpOTMyMi5jCj4+
+PiBAQCAtNTQ5LDcgKzU0OSw2IEBAIHN0YXRpYyBjb25zdCBzdHJ1Y3QgZHJtX2Rpc3BsYXlfbW9k
+ZSBzcmdiXzMyMHgyNDBfbW9kZSA9IHsKPj4+ICAJLnZzeW5jX3N0YXJ0ID0gMjQwICsgNCwKPj4+
+ICAJLnZzeW5jX2VuZCA9IDI0MCArIDQgKyAxLAo+Pj4gIAkudnRvdGFsID0gMjYyLAo+Pj4gLQku
+dnJlZnJlc2ggPSA2MCwKPj4+ICAJLmZsYWdzID0gMCwKPj4+ICB9Owo+Pj4gIAo+Pj4gQEAgLTU2
+Myw3ICs1NjIsNiBAQCBzdGF0aWMgY29uc3Qgc3RydWN0IGRybV9kaXNwbGF5X21vZGUgc3JnYl8z
+NjB4MjQwX21vZGUgPSB7Cj4+PiAgCS52c3luY19zdGFydCA9IDI0MCArIDIxLAo+Pj4gIAkudnN5
+bmNfZW5kID0gMjQwICsgMjEgKyAxLAo+Pj4gIAkudnRvdGFsID0gMjYyLAo+Pj4gLQkudnJlZnJl
+c2ggPSA2MCwKPj4+ICAJLmZsYWdzID0gMCwKPj4+ICB9Owo+Pj4gIAo+Pj4gQEAgLTU3OCw3ICs1
+NzYsNiBAQCBzdGF0aWMgY29uc3Qgc3RydWN0IGRybV9kaXNwbGF5X21vZGUgcHJnYl8zMjB4MjQw
+X21vZGUgPSB7Cj4+PiAgCS52c3luY19zdGFydCA9IDI0MCArIDQsCj4+PiAgCS52c3luY19lbmQg
+PSAyNDAgKyA0ICsgMSwKPj4+ICAJLnZ0b3RhbCA9IDI2MiwKPj4+IC0JLnZyZWZyZXNoID0gNjAs
+Cj4+PiAgCS5mbGFncyA9IDAsCj4+PiAgfTsKPj4+ICAKPj4+IEBAIC01OTMsNyArNTkwLDYgQEAg
+c3RhdGljIGNvbnN0IHN0cnVjdCBkcm1fZGlzcGxheV9tb2RlIHl1dl82NDB4MzIwX21vZGUgPSB7
+Cj4+PiAgCS52c3luY19zdGFydCA9IDMyMCArIDQsCj4+PiAgCS52c3luY19lbmQgPSAzMjAgKyA0
+ICsgMSwKPj4+ICAJLnZ0b3RhbCA9IDMyMCArIDQgKyAxICsgMTgsCj4+PiAtCS52cmVmcmVzaCA9
+IDYwLAo+Pj4gIAkuZmxhZ3MgPSAwLAo+Pj4gIH07Cj4+PiAgCj4+PiBAQCAtNjA3LDcgKzYwMyw2
+IEBAIHN0YXRpYyBjb25zdCBzdHJ1Y3QgZHJtX2Rpc3BsYXlfbW9kZSB5dXZfNzIweDM2MF9tb2Rl
+ID0gewo+Pj4gIAkudnN5bmNfc3RhcnQgPSAzNjAgKyA0LAo+Pj4gIAkudnN5bmNfZW5kID0gMzYw
+ICsgNCArIDEsCj4+PiAgCS52dG90YWwgPSAzNjAgKyA0ICsgMSArIDE4LAo+Pj4gLQkudnJlZnJl
+c2ggPSA2MCwKPj4+ICAJLmZsYWdzID0gMCwKPj4+ICB9Owo+Pj4gIAo+Pj4gQEAgLTYyMiw3ICs2
+MTcsNiBAQCBzdGF0aWMgY29uc3Qgc3RydWN0IGRybV9kaXNwbGF5X21vZGUgaXR1X3JfYnRfNjU2
+XzY0MF9tb2RlID0gewo+Pj4gIAkudnN5bmNfc3RhcnQgPSA0ODAgKyA0LAo+Pj4gIAkudnN5bmNf
+ZW5kID0gNDgwICsgNCArIDEsCj4+PiAgCS52dG90YWwgPSA1MDAsCj4+PiAtCS52cmVmcmVzaCA9
+IDYwLAo+Pj4gIAkuZmxhZ3MgPSAwLAo+Pj4gIH07Cj4+PiAgCj4+PiBAQCAtNjM3LDcgKzYzMSw2
+IEBAIHN0YXRpYyBjb25zdCBzdHJ1Y3QgZHJtX2Rpc3BsYXlfbW9kZSBpdHVfcl9idF82NTZfNzIw
+X21vZGUgPSB7Cj4+PiAgCS52c3luY19zdGFydCA9IDQ4MCArIDQsCj4+PiAgCS52c3luY19lbmQg
+PSA0ODAgKyA0ICsgMSwKPj4+ICAJLnZ0b3RhbCA9IDUwMCwKPj4+IC0JLnZyZWZyZXNoID0gNjAs
+Cj4+PiAgCS5mbGFncyA9IDAsCj4+PiAgfTsKPj4+ICAKPj4+IGRpZmYgLS1naXQgYS9kcml2ZXJz
+L2dwdS9kcm0vcGFuZWwvcGFuZWwtaWxpdGVrLWlsaTk4ODFjLmMgYi9kcml2ZXJzL2dwdS9kcm0v
+cGFuZWwvcGFuZWwtaWxpdGVrLWlsaTk4ODFjLmMKPj4+IGluZGV4IGY1NDA3N2MyMTZhMy4uM2Vk
+ODYzNWE2ZmJkIDEwMDY0NAo+Pj4gLS0tIGEvZHJpdmVycy9ncHUvZHJtL3BhbmVsL3BhbmVsLWls
+aXRlay1pbGk5ODgxYy5jCj4+PiArKysgYi9kcml2ZXJzL2dwdS9kcm0vcGFuZWwvcGFuZWwtaWxp
+dGVrLWlsaTk4ODFjLmMKPj4+IEBAIC0zNzAsNyArMzcwLDYgQEAgc3RhdGljIGludCBpbGk5ODgx
+Y191bnByZXBhcmUoc3RydWN0IGRybV9wYW5lbCAqcGFuZWwpCj4+PiAgCj4+PiAgc3RhdGljIGNv
+bnN0IHN0cnVjdCBkcm1fZGlzcGxheV9tb2RlIGJhbmFuYXBpX2RlZmF1bHRfbW9kZSA9IHsKPj4+
+ICAJLmNsb2NrCQk9IDYyMDAwLAo+Pj4gLQkudnJlZnJlc2gJPSA2MCwKPj4+ICAKPj4+ICAJLmhk
+aXNwbGF5CT0gNzIwLAo+Pj4gIAkuaHN5bmNfc3RhcnQJPSA3MjAgKyAxMCwKPj4+IEBAIC0zOTQs
+NyArMzkzLDcgQEAgc3RhdGljIGludCBpbGk5ODgxY19nZXRfbW9kZXMoc3RydWN0IGRybV9wYW5l
+bCAqcGFuZWwsCj4+PiAgCQlkZXZfZXJyKCZjdHgtPmRzaS0+ZGV2LCAiZmFpbGVkIHRvIGFkZCBt
+b2RlICV1eCV1eEAldVxuIiwKPj4+ICAJCQliYW5hbmFwaV9kZWZhdWx0X21vZGUuaGRpc3BsYXks
+Cj4+PiAgCQkJYmFuYW5hcGlfZGVmYXVsdF9tb2RlLnZkaXNwbGF5LAo+Pj4gLQkJCWJhbmFuYXBp
+X2RlZmF1bHRfbW9kZS52cmVmcmVzaCk7Cj4+PiArCQkJZHJtX21vZGVfdnJlZnJlc2goJmJhbmFu
+YXBpX2RlZmF1bHRfbW9kZSkpOwo+Pj4gIAkJcmV0dXJuIC1FTk9NRU07Cj4+PiAgCX0KPj4+ICAK
+Pj4+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0vcGFuZWwvcGFuZWwtaW5ub2x1eC1wMDc5
+emNhLmMgYi9kcml2ZXJzL2dwdS9kcm0vcGFuZWwvcGFuZWwtaW5ub2x1eC1wMDc5emNhLmMKPj4+
+IGluZGV4IDc0MTlmMWYwYWNlZS4uZmRmMDMwZjRjZjkyIDEwMDY0NAo+Pj4gLS0tIGEvZHJpdmVy
+cy9ncHUvZHJtL3BhbmVsL3BhbmVsLWlubm9sdXgtcDA3OXpjYS5jCj4+PiArKysgYi9kcml2ZXJz
+L2dwdS9kcm0vcGFuZWwvcGFuZWwtaW5ub2x1eC1wMDc5emNhLmMKPj4+IEBAIC0yMjMsNyArMjIz
+LDYgQEAgc3RhdGljIGNvbnN0IHN0cnVjdCBkcm1fZGlzcGxheV9tb2RlIGlubm9sdXhfcDA3OXpj
+YV9tb2RlID0gewo+Pj4gIAkudnN5bmNfc3RhcnQgPSAxMDI0ICsgMjAsCj4+PiAgCS52c3luY19l
+bmQgPSAxMDI0ICsgMjAgKyA0LAo+Pj4gIAkudnRvdGFsID0gMTAyNCArIDIwICsgNCArIDIwLAo+
+Pj4gLQkudnJlZnJlc2ggPSA2MCwKPj4+ICB9Owo+Pj4gIAo+Pj4gIHN0YXRpYyBjb25zdCBzdHJ1
+Y3QgcGFuZWxfZGVzYyBpbm5vbHV4X3AwNzl6Y2FfcGFuZWxfZGVzYyA9IHsKPj4+IEBAIC0yNTcs
+NyArMjU2LDYgQEAgc3RhdGljIGNvbnN0IHN0cnVjdCBkcm1fZGlzcGxheV9tb2RlIGlubm9sdXhf
+cDA5N3BmZ19tb2RlID0gewo+Pj4gIAkudnN5bmNfc3RhcnQgPSAyMDQ4ICsgMTAwLAo+Pj4gIAku
+dnN5bmNfZW5kID0gMjA0OCArIDEwMCArIDIsCj4+PiAgCS52dG90YWwgPSAyMDQ4ICsgMTAwICsg
+MiArIDE4LAo+Pj4gLQkudnJlZnJlc2ggPSA2MCwKPj4+ICB9Owo+Pj4gIAo+Pj4gIC8qCj4+PiBA
+QCAtNDAxLDcgKzM5OSw3IEBAIHN0YXRpYyBpbnQgaW5ub2x1eF9wYW5lbF9nZXRfbW9kZXMoc3Ry
+dWN0IGRybV9wYW5lbCAqcGFuZWwsCj4+PiAgCW1vZGUgPSBkcm1fbW9kZV9kdXBsaWNhdGUoY29u
+bmVjdG9yLT5kZXYsIG0pOwo+Pj4gIAlpZiAoIW1vZGUpIHsKPj4+ICAJCURSTV9ERVZfRVJST1Io
+cGFuZWwtPmRldiwgImZhaWxlZCB0byBhZGQgbW9kZSAldXgldXhAJXVcbiIsCj4+PiAtCQkJICAg
+ICAgbS0+aGRpc3BsYXksIG0tPnZkaXNwbGF5LCBtLT52cmVmcmVzaCk7Cj4+PiArCQkJICAgICAg
+bS0+aGRpc3BsYXksIG0tPnZkaXNwbGF5LCBkcm1fbW9kZV92cmVmcmVzaChtKSk7Cj4+PiAgCQly
+ZXR1cm4gLUVOT01FTTsKPj4+ICAJfQo+Pj4gIAo+Pj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1
+L2RybS9wYW5lbC9wYW5lbC1qZGktbHQwNzBtZTA1MDAwLmMgYi9kcml2ZXJzL2dwdS9kcm0vcGFu
+ZWwvcGFuZWwtamRpLWx0MDcwbWUwNTAwMC5jCj4+PiBpbmRleCA0YmZkOGM4NzdjOGUuLjFlM2Zk
+NjYzMzk4MSAxMDA2NDQKPj4+IC0tLSBhL2RyaXZlcnMvZ3B1L2RybS9wYW5lbC9wYW5lbC1qZGkt
+bHQwNzBtZTA1MDAwLmMKPj4+ICsrKyBiL2RyaXZlcnMvZ3B1L2RybS9wYW5lbC9wYW5lbC1qZGkt
+bHQwNzBtZTA1MDAwLmMKPj4+IEBAIC0yOTYsNyArMjk2LDYgQEAgc3RhdGljIGNvbnN0IHN0cnVj
+dCBkcm1fZGlzcGxheV9tb2RlIGRlZmF1bHRfbW9kZSA9IHsKPj4+ICAJCS52c3luY19zdGFydCA9
+IDE5MjAgKyAzLAo+Pj4gIAkJLnZzeW5jX2VuZCA9IDE5MjAgKyAzICsgNSwKPj4+ICAJCS52dG90
+YWwgPSAxOTIwICsgMyArIDUgKyA2LAo+Pj4gLQkJLnZyZWZyZXNoID0gNjAsCj4+PiAgCQkuZmxh
+Z3MgPSAwLAo+Pj4gIH07Cj4+PiAgCj4+PiBAQCAtMzExLDcgKzMxMCw3IEBAIHN0YXRpYyBpbnQg
+amRpX3BhbmVsX2dldF9tb2RlcyhzdHJ1Y3QgZHJtX3BhbmVsICpwYW5lbCwKPj4+ICAJaWYgKCFt
+b2RlKSB7Cj4+PiAgCQlkZXZfZXJyKGRldiwgImZhaWxlZCB0byBhZGQgbW9kZSAldXgldXhAJXVc
+biIsCj4+PiAgCQkJZGVmYXVsdF9tb2RlLmhkaXNwbGF5LCBkZWZhdWx0X21vZGUudmRpc3BsYXks
+Cj4+PiAtCQkJZGVmYXVsdF9tb2RlLnZyZWZyZXNoKTsKPj4+ICsJCQlkcm1fbW9kZV92cmVmcmVz
+aCgmZGVmYXVsdF9tb2RlKSk7Cj4+PiAgCQlyZXR1cm4gLUVOT01FTTsKPj4+ICAJfQo+Pj4gIAo+
+Pj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9wYW5lbC9wYW5lbC1raW5nZGlzcGxheS1r
+ZDA5N2QwNC5jIGIvZHJpdmVycy9ncHUvZHJtL3BhbmVsL3BhbmVsLWtpbmdkaXNwbGF5LWtkMDk3
+ZDA0LmMKPj4+IGluZGV4IGJhYzFhMmEwNmM5Mi4uMGQzOTdhZjIzYWZlIDEwMDY0NAo+Pj4gLS0t
+IGEvZHJpdmVycy9ncHUvZHJtL3BhbmVsL3BhbmVsLWtpbmdkaXNwbGF5LWtkMDk3ZDA0LmMKPj4+
+ICsrKyBiL2RyaXZlcnMvZ3B1L2RybS9wYW5lbC9wYW5lbC1raW5nZGlzcGxheS1rZDA5N2QwNC5j
+Cj4+PiBAQCAtMzE4LDcgKzMxOCw2IEBAIHN0YXRpYyBjb25zdCBzdHJ1Y3QgZHJtX2Rpc3BsYXlf
+bW9kZSBkZWZhdWx0X21vZGUgPSB7Cj4+PiAgCS52c3luY19zdGFydCA9IDIwNDggKyA5NSwKPj4+
+ICAJLnZzeW5jX2VuZCA9IDIwNDggKyA5NSArIDIsCj4+PiAgCS52dG90YWwgPSAyMDQ4ICsgOTUg
+KyAyICsgMjMsCj4+PiAtCS52cmVmcmVzaCA9IDYwLAo+Pj4gIH07Cj4+PiAgCj4+PiAgc3RhdGlj
+IGludCBraW5nZGlzcGxheV9wYW5lbF9nZXRfbW9kZXMoc3RydWN0IGRybV9wYW5lbCAqcGFuZWws
+Cj4+PiBAQCAtMzMwLDcgKzMyOSw3IEBAIHN0YXRpYyBpbnQga2luZ2Rpc3BsYXlfcGFuZWxfZ2V0
+X21vZGVzKHN0cnVjdCBkcm1fcGFuZWwgKnBhbmVsLAo+Pj4gIAlpZiAoIW1vZGUpIHsKPj4+ICAJ
+CURSTV9ERVZfRVJST1IocGFuZWwtPmRldiwgImZhaWxlZCB0byBhZGQgbW9kZSAldXgldXhAJXVc
+biIsCj4+PiAgCQkJICAgICAgZGVmYXVsdF9tb2RlLmhkaXNwbGF5LCBkZWZhdWx0X21vZGUudmRp
+c3BsYXksCj4+PiAtCQkJICAgICAgZGVmYXVsdF9tb2RlLnZyZWZyZXNoKTsKPj4+ICsJCQkgICAg
+ICBkcm1fbW9kZV92cmVmcmVzaCgmZGVmYXVsdF9tb2RlKSk7Cj4+PiAgCQlyZXR1cm4gLUVOT01F
+TTsKPj4+ICAJfQo+Pj4gIAo+Pj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9wYW5lbC9w
+YW5lbC1sZWFkdGVrLWx0azUwMGhkMTgyOS5jIGIvZHJpdmVycy9ncHUvZHJtL3BhbmVsL3BhbmVs
+LWxlYWR0ZWstbHRrNTAwaGQxODI5LmMKPj4+IGluZGV4IDc2ZWNmMmRlOWM0NC4uYzM5ZTdmNmY1
+YzJkIDEwMDY0NAo+Pj4gLS0tIGEvZHJpdmVycy9ncHUvZHJtL3BhbmVsL3BhbmVsLWxlYWR0ZWst
+bHRrNTAwaGQxODI5LmMKPj4+ICsrKyBiL2RyaXZlcnMvZ3B1L2RybS9wYW5lbC9wYW5lbC1sZWFk
+dGVrLWx0azUwMGhkMTgyOS5jCj4+PiBAQCAtMzc2LDcgKzM3Niw2IEBAIHN0YXRpYyBjb25zdCBz
+dHJ1Y3QgZHJtX2Rpc3BsYXlfbW9kZSBkZWZhdWx0X21vZGUgPSB7Cj4+PiAgCS52c3luY19zdGFy
+dAk9IDEyODAgKyAzMCwKPj4+ICAJLnZzeW5jX2VuZAk9IDEyODAgKyAzMCArIDQsCj4+PiAgCS52
+dG90YWwJCT0gMTI4MCArIDMwICsgNCArIDEyLAo+Pj4gLQkudnJlZnJlc2gJPSA2MCwKPj4+ICAJ
+LmNsb2NrCQk9IDQxNjAwLAo+Pj4gIAkud2lkdGhfbW0JPSA2MiwKPj4+ICAJLmhlaWdodF9tbQk9
+IDExMCwKPj4+IEBAIC0zOTIsNyArMzkxLDcgQEAgc3RhdGljIGludCBsdGs1MDBoZDE4MjlfZ2V0
+X21vZGVzKHN0cnVjdCBkcm1fcGFuZWwgKnBhbmVsLAo+Pj4gIAlpZiAoIW1vZGUpIHsKPj4+ICAJ
+CURSTV9ERVZfRVJST1IoY3R4LT5kZXYsICJmYWlsZWQgdG8gYWRkIG1vZGUgJXV4JXV4QCV1XG4i
+LAo+Pj4gIAkJCSAgICAgIGRlZmF1bHRfbW9kZS5oZGlzcGxheSwgZGVmYXVsdF9tb2RlLnZkaXNw
+bGF5LAo+Pj4gLQkJCSAgICAgIGRlZmF1bHRfbW9kZS52cmVmcmVzaCk7Cj4+PiArCQkJICAgICAg
+ZHJtX21vZGVfdnJlZnJlc2goJmRlZmF1bHRfbW9kZSkpOwo+Pj4gIAkJcmV0dXJuIC1FTk9NRU07
+Cj4+PiAgCX0KPj4+ICAKPj4+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0vcGFuZWwvcGFu
+ZWwtbGctbGIwMzVxMDIuYyBiL2RyaXZlcnMvZ3B1L2RybS9wYW5lbC9wYW5lbC1sZy1sYjAzNXEw
+Mi5jCj4+PiBpbmRleCBlOTBlZmVhYmE0YWQuLjE0NDU2YjljZDVjMCAxMDA2NDQKPj4+IC0tLSBh
+L2RyaXZlcnMvZ3B1L2RybS9wYW5lbC9wYW5lbC1sZy1sYjAzNXEwMi5jCj4+PiArKysgYi9kcml2
+ZXJzL2dwdS9kcm0vcGFuZWwvcGFuZWwtbGctbGIwMzVxMDIuYwo+Pj4gQEAgLTEzNCw3ICsxMzQs
+NiBAQCBzdGF0aWMgY29uc3Qgc3RydWN0IGRybV9kaXNwbGF5X21vZGUgbGIwMzVxMDJfbW9kZSA9
+IHsKPj4+ICAJLnZzeW5jX3N0YXJ0ID0gMjQwICsgNCwKPj4+ICAJLnZzeW5jX2VuZCA9IDI0MCAr
+IDQgKyAyLAo+Pj4gIAkudnRvdGFsID0gMjQwICsgNCArIDIgKyAxOCwKPj4+IC0JLnZyZWZyZXNo
+ID0gNjAsCj4+PiAgCS50eXBlID0gRFJNX01PREVfVFlQRV9EUklWRVIgfCBEUk1fTU9ERV9UWVBF
+X1BSRUZFUlJFRCwKPj4+ICAJLmZsYWdzID0gRFJNX01PREVfRkxBR19OSFNZTkMgfCBEUk1fTU9E
+RV9GTEFHX05WU1lOQywKPj4+ICAJLndpZHRoX21tID0gNzAsCj4+PiBkaWZmIC0tZ2l0IGEvZHJp
+dmVycy9ncHUvZHJtL3BhbmVsL3BhbmVsLWxnLWxnNDU3My5jIGIvZHJpdmVycy9ncHUvZHJtL3Bh
+bmVsL3BhbmVsLWxnLWxnNDU3My5jCj4+PiBpbmRleCBiMjYyYjUzZGJkODUuLjQ5N2YzYjg4OGEx
+ZCAxMDA2NDQKPj4+IC0tLSBhL2RyaXZlcnMvZ3B1L2RybS9wYW5lbC9wYW5lbC1sZy1sZzQ1NzMu
+Ywo+Pj4gKysrIGIvZHJpdmVycy9ncHUvZHJtL3BhbmVsL3BhbmVsLWxnLWxnNDU3My5jCj4+PiBA
+QCAtMjA2LDcgKzIwNiw2IEBAIHN0YXRpYyBjb25zdCBzdHJ1Y3QgZHJtX2Rpc3BsYXlfbW9kZSBk
+ZWZhdWx0X21vZGUgPSB7Cj4+PiAgCS52c3luY19zdGFydCA9IDgwMCArIDE1LAo+Pj4gIAkudnN5
+bmNfZW5kID0gODAwICsgMTUgKyAxNSwKPj4+ICAJLnZ0b3RhbCA9IDgwMCArIDE1ICsgMTUgKyAx
+NSwKPj4+IC0JLnZyZWZyZXNoID0gNjAsCj4+PiAgfTsKPj4+ICAKPj4+ICBzdGF0aWMgaW50IGxn
+NDU3M19nZXRfbW9kZXMoc3RydWN0IGRybV9wYW5lbCAqcGFuZWwsCj4+PiBAQCAtMjE4LDcgKzIx
+Nyw3IEBAIHN0YXRpYyBpbnQgbGc0NTczX2dldF9tb2RlcyhzdHJ1Y3QgZHJtX3BhbmVsICpwYW5l
+bCwKPj4+ICAJaWYgKCFtb2RlKSB7Cj4+PiAgCQlkZXZfZXJyKHBhbmVsLT5kZXYsICJmYWlsZWQg
+dG8gYWRkIG1vZGUgJXV4JXV4QCV1XG4iLAo+Pj4gIAkJCWRlZmF1bHRfbW9kZS5oZGlzcGxheSwg
+ZGVmYXVsdF9tb2RlLnZkaXNwbGF5LAo+Pj4gLQkJCWRlZmF1bHRfbW9kZS52cmVmcmVzaCk7Cj4+
+PiArCQkJZHJtX21vZGVfdnJlZnJlc2goJmRlZmF1bHRfbW9kZSkpOwo+Pj4gIAkJcmV0dXJuIC1F
+Tk9NRU07Cj4+PiAgCX0KPj4+ICAKPj4+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0vcGFu
+ZWwvcGFuZWwtbmVjLW5sODA0OGhsMTEuYyBiL2RyaXZlcnMvZ3B1L2RybS9wYW5lbC9wYW5lbC1u
+ZWMtbmw4MDQ4aGwxMS5jCj4+PiBpbmRleCBjNGY4M2Y2Mzg0ZTEuLmY4OTQ5NzFjMWM3YyAxMDA2
+NDQKPj4+IC0tLSBhL2RyaXZlcnMvZ3B1L2RybS9wYW5lbC9wYW5lbC1uZWMtbmw4MDQ4aGwxMS5j
+Cj4+PiArKysgYi9kcml2ZXJzL2dwdS9kcm0vcGFuZWwvcGFuZWwtbmVjLW5sODA0OGhsMTEuYwo+
+Pj4gQEAgLTExNiw3ICsxMTYsNiBAQCBzdGF0aWMgY29uc3Qgc3RydWN0IGRybV9kaXNwbGF5X21v
+ZGUgbmw4MDQ4X21vZGUgPSB7Cj4+PiAgCS52c3luY19zdGFydCA9IDQ4MCArIDMsCj4+PiAgCS52
+c3luY19lbmQgPSA0ODAgKyAzICsgMSwKPj4+ICAJLnZ0b3RhbCA9IDQ4MCArIDMgKyAxICsgNCwK
+Pj4+IC0JLnZyZWZyZXNoID0gNjAsCj4+PiAgCS50eXBlID0gRFJNX01PREVfVFlQRV9EUklWRVIg
+fCBEUk1fTU9ERV9UWVBFX1BSRUZFUlJFRCwKPj4+ICAJLmZsYWdzID0gRFJNX01PREVfRkxBR19O
+SFNZTkMgfCBEUk1fTU9ERV9GTEFHX05WU1lOQywKPj4+ICAJLndpZHRoX21tID0gODksCj4+PiBk
+aWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL3BhbmVsL3BhbmVsLW5vdmF0ZWstbnQzOTAxNi5j
+IGIvZHJpdmVycy9ncHUvZHJtL3BhbmVsL3BhbmVsLW5vdmF0ZWstbnQzOTAxNi5jCj4+PiBpbmRl
+eCBhNDcwODEwZjdkYmUuLjRiNTQ1ZTA4MWIxZSAxMDA2NDQKPj4+IC0tLSBhL2RyaXZlcnMvZ3B1
+L2RybS9wYW5lbC9wYW5lbC1ub3ZhdGVrLW50MzkwMTYuYwo+Pj4gKysrIGIvZHJpdmVycy9ncHUv
+ZHJtL3BhbmVsL3BhbmVsLW5vdmF0ZWstbnQzOTAxNi5jCj4+PiBAQCAtMzI3LDcgKzMyNyw2IEBA
+IHN0YXRpYyBjb25zdCBzdHJ1Y3QgbnQzOTAxNl9wYW5lbF9pbmZvIGtkMDM1ZzZfaW5mbyA9IHsK
+Pj4+ICAJCS52c3luY19zdGFydCA9IDI0MCArIDUsCj4+PiAgCQkudnN5bmNfZW5kID0gMjQwICsg
+NSArIDEsCj4+PiAgCQkudnRvdGFsID0gMjQwICsgNSArIDEgKyA0LAo+Pj4gLQkJLnZyZWZyZXNo
+ID0gNjAsCj4+PiAgCQkuZmxhZ3MgPSBEUk1fTU9ERV9GTEFHX05IU1lOQyB8IERSTV9NT0RFX0ZM
+QUdfTlZTWU5DLAo+Pj4gIAl9LAo+Pj4gIAkud2lkdGhfbW0gPSA3MSwKPj4+IGRpZmYgLS1naXQg
+YS9kcml2ZXJzL2dwdS9kcm0vcGFuZWwvcGFuZWwtb2xpbWV4LWxjZC1vbGludXhpbm8uYyBiL2Ry
+aXZlcnMvZ3B1L2RybS9wYW5lbC9wYW5lbC1vbGltZXgtbGNkLW9saW51eGluby5jCj4+PiBpbmRl
+eCAwOWRlYjk5OTgxYTQuLmVjZDc2YjUzOTFkMyAxMDA2NDQKPj4+IC0tLSBhL2RyaXZlcnMvZ3B1
+L2RybS9wYW5lbC9wYW5lbC1vbGltZXgtbGNkLW9saW51eGluby5jCj4+PiArKysgYi9kcml2ZXJz
+L2dwdS9kcm0vcGFuZWwvcGFuZWwtb2xpbWV4LWxjZC1vbGludXhpbm8uYwo+Pj4gQEAgLTE3MCw3
+ICsxNzAsNiBAQCBzdGF0aWMgaW50IGxjZF9vbGludXhpbm9fZ2V0X21vZGVzKHN0cnVjdCBkcm1f
+cGFuZWwgKnBhbmVsLAo+Pj4gIAkJCQkgIGxjZF9tb2RlLT52cHc7Cj4+PiAgCQltb2RlLT52dG90
+YWwgPSBsY2RfbW9kZS0+dmFjdGl2ZSArIGxjZF9tb2RlLT52ZnAgKwo+Pj4gIAkJCSAgICAgICBs
+Y2RfbW9kZS0+dnB3ICsgbGNkX21vZGUtPnZicDsKPj4+IC0JCW1vZGUtPnZyZWZyZXNoID0gbGNk
+X21vZGUtPnJlZnJlc2g7Cj4+PiAgCj4+PiAgCQkvKiBBbHdheXMgbWFrZSB0aGUgZmlyc3QgbW9k
+ZSBwcmVmZXJyZWQgKi8KPj4+ICAJCWlmIChpID09IDApCj4+PiBkaWZmIC0tZ2l0IGEvZHJpdmVy
+cy9ncHUvZHJtL3BhbmVsL3BhbmVsLW9yaXNldGVjaC1vdG04MDA5YS5jIGIvZHJpdmVycy9ncHUv
+ZHJtL3BhbmVsL3BhbmVsLW9yaXNldGVjaC1vdG04MDA5YS5jCj4+PiBpbmRleCBiYjBjOTkyMTcx
+ZTguLjg5NWVlM2QxMzcxZSAxMDA2NDQKPj4+IC0tLSBhL2RyaXZlcnMvZ3B1L2RybS9wYW5lbC9w
+YW5lbC1vcmlzZXRlY2gtb3RtODAwOWEuYwo+Pj4gKysrIGIvZHJpdmVycy9ncHUvZHJtL3BhbmVs
+L3BhbmVsLW9yaXNldGVjaC1vdG04MDA5YS5jCj4+PiBAQCAtODEsNyArODEsNiBAQCBzdGF0aWMg
+Y29uc3Qgc3RydWN0IGRybV9kaXNwbGF5X21vZGUgZGVmYXVsdF9tb2RlID0gewo+Pj4gIAkudnN5
+bmNfc3RhcnQgPSA4MDAgKyAxNSwKPj4+ICAJLnZzeW5jX2VuZCA9IDgwMCArIDE1ICsgMTAsCj4+
+PiAgCS52dG90YWwgPSA4MDAgKyAxNSArIDEwICsgMTQsCj4+PiAtCS52cmVmcmVzaCA9IDUwLAo+
+Pj4gIAkuZmxhZ3MgPSAwLAo+Pj4gIAkud2lkdGhfbW0gPSA1MiwKPj4+ICAJLmhlaWdodF9tbSA9
+IDg2LAo+Pj4gQEAgLTM1OCw3ICszNTcsNyBAQCBzdGF0aWMgaW50IG90bTgwMDlhX2dldF9tb2Rl
+cyhzdHJ1Y3QgZHJtX3BhbmVsICpwYW5lbCwKPj4+ICAJaWYgKCFtb2RlKSB7Cj4+PiAgCQlEUk1f
+RVJST1IoImZhaWxlZCB0byBhZGQgbW9kZSAldXgldXhAJXVcbiIsCj4+PiAgCQkJICBkZWZhdWx0
+X21vZGUuaGRpc3BsYXksIGRlZmF1bHRfbW9kZS52ZGlzcGxheSwKPj4+IC0JCQkgIGRlZmF1bHRf
+bW9kZS52cmVmcmVzaCk7Cj4+PiArCQkJICBkcm1fbW9kZV92cmVmcmVzaCgmZGVmYXVsdF9tb2Rl
+KSk7Cj4+PiAgCQlyZXR1cm4gLUVOT01FTTsKPj4+ICAJfQo+Pj4gIAo+Pj4gZGlmZiAtLWdpdCBh
+L2RyaXZlcnMvZ3B1L2RybS9wYW5lbC9wYW5lbC1vc2Qtb3NkMTAxdDI1ODctNTN0cy5jIGIvZHJp
+dmVycy9ncHUvZHJtL3BhbmVsL3BhbmVsLW9zZC1vc2QxMDF0MjU4Ny01M3RzLmMKPj4+IGluZGV4
+IDNhMDIyOWQ2MDA5NS4uMTFiM2QwMWFjYTU2IDEwMDY0NAo+Pj4gLS0tIGEvZHJpdmVycy9ncHUv
+ZHJtL3BhbmVsL3BhbmVsLW9zZC1vc2QxMDF0MjU4Ny01M3RzLmMKPj4+ICsrKyBiL2RyaXZlcnMv
+Z3B1L2RybS9wYW5lbC9wYW5lbC1vc2Qtb3NkMTAxdDI1ODctNTN0cy5jCj4+PiBAQCAtMTAyLDcg
+KzEwMiw2IEBAIHN0YXRpYyBjb25zdCBzdHJ1Y3QgZHJtX2Rpc3BsYXlfbW9kZSBkZWZhdWx0X21v
+ZGVfb3NkMTAxdDI1ODcgPSB7Cj4+PiAgCS52c3luY19zdGFydCA9IDEyMDAgKyAyNCwKPj4+ICAJ
+LnZzeW5jX2VuZCA9IDEyMDAgKyAyNCArIDYsCj4+PiAgCS52dG90YWwgPSAxMjAwICsgMjQgKyA2
+ICsgNDgsCj4+PiAtCS52cmVmcmVzaCA9IDYwLAo+Pj4gIAkuZmxhZ3MgPSBEUk1fTU9ERV9GTEFH
+X05IU1lOQyB8IERSTV9NT0RFX0ZMQUdfTlZTWU5DLAo+Pj4gIH07Cj4+PiAgCj4+PiBAQCAtMTE3
+LDcgKzExNiw3IEBAIHN0YXRpYyBpbnQgb3NkMTAxdDI1ODdfcGFuZWxfZ2V0X21vZGVzKHN0cnVj
+dCBkcm1fcGFuZWwgKnBhbmVsLAo+Pj4gIAkJZGV2X2VycihwYW5lbC0+ZGV2LCAiZmFpbGVkIHRv
+IGFkZCBtb2RlICV1eCV1eEAldVxuIiwKPj4+ICAJCQlvc2QxMDF0MjU4Ny0+ZGVmYXVsdF9tb2Rl
+LT5oZGlzcGxheSwKPj4+ICAJCQlvc2QxMDF0MjU4Ny0+ZGVmYXVsdF9tb2RlLT52ZGlzcGxheSwK
+Pj4+IC0JCQlvc2QxMDF0MjU4Ny0+ZGVmYXVsdF9tb2RlLT52cmVmcmVzaCk7Cj4+PiArCQkJZHJt
+X21vZGVfdnJlZnJlc2gob3NkMTAxdDI1ODctPmRlZmF1bHRfbW9kZSkpOwo+Pj4gIAkJcmV0dXJu
+IC1FTk9NRU07Cj4+PiAgCX0KPj4+ICAKPj4+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0v
+cGFuZWwvcGFuZWwtcGFuYXNvbmljLXZ2eDEwZjAzNG4wMC5jIGIvZHJpdmVycy9ncHUvZHJtL3Bh
+bmVsL3BhbmVsLXBhbmFzb25pYy12dngxMGYwMzRuMDAuYwo+Pj4gaW5kZXggNjk2OTM0NTE0NjJl
+Li42MjdkZmNmOGFkYjQgMTAwNjQ0Cj4+PiAtLS0gYS9kcml2ZXJzL2dwdS9kcm0vcGFuZWwvcGFu
+ZWwtcGFuYXNvbmljLXZ2eDEwZjAzNG4wMC5jCj4+PiArKysgYi9kcml2ZXJzL2dwdS9kcm0vcGFu
+ZWwvcGFuZWwtcGFuYXNvbmljLXZ2eDEwZjAzNG4wMC5jCj4+PiBAQCAtMTQ5LDcgKzE0OSw2IEBA
+IHN0YXRpYyBjb25zdCBzdHJ1Y3QgZHJtX2Rpc3BsYXlfbW9kZSBkZWZhdWx0X21vZGUgPSB7Cj4+
+PiAgCS52c3luY19zdGFydCA9IDEyMDAgKyAyNCwKPj4+ICAJLnZzeW5jX2VuZCA9IDEyMDAgKyAy
+NCArIDYsCj4+PiAgCS52dG90YWwgPSAxMjAwICsgMjQgKyA2ICsgNDgsCj4+PiAtCS52cmVmcmVz
+aCA9IDYwLAo+Pj4gIH07Cj4+PiAgCj4+PiAgc3RhdGljIGludCB3dXhnYV9udF9wYW5lbF9nZXRf
+bW9kZXMoc3RydWN0IGRybV9wYW5lbCAqcGFuZWwsCj4+PiBAQCAtMTYxLDcgKzE2MCw3IEBAIHN0
+YXRpYyBpbnQgd3V4Z2FfbnRfcGFuZWxfZ2V0X21vZGVzKHN0cnVjdCBkcm1fcGFuZWwgKnBhbmVs
+LAo+Pj4gIAlpZiAoIW1vZGUpIHsKPj4+ICAJCWRldl9lcnIocGFuZWwtPmRldiwgImZhaWxlZCB0
+byBhZGQgbW9kZSAldXgldUAldVxuIiwKPj4+ICAJCQlkZWZhdWx0X21vZGUuaGRpc3BsYXksIGRl
+ZmF1bHRfbW9kZS52ZGlzcGxheSwKPj4+IC0JCQlkZWZhdWx0X21vZGUudnJlZnJlc2gpOwo+Pj4g
+KwkJCWRybV9tb2RlX3ZyZWZyZXNoKCZkZWZhdWx0X21vZGUpKTsKPj4+ICAJCXJldHVybiAtRU5P
+TUVNOwo+Pj4gIAl9Cj4+PiAgCj4+PiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL3BhbmVs
+L3BhbmVsLXJhc3BiZXJyeXBpLXRvdWNoc2NyZWVuLmMgYi9kcml2ZXJzL2dwdS9kcm0vcGFuZWwv
+cGFuZWwtcmFzcGJlcnJ5cGktdG91Y2hzY3JlZW4uYwo+Pj4gaW5kZXggOGYwNzhiN2RkODllLi5l
+NTBlZTI2NDc0Y2YgMTAwNjQ0Cj4+PiAtLS0gYS9kcml2ZXJzL2dwdS9kcm0vcGFuZWwvcGFuZWwt
+cmFzcGJlcnJ5cGktdG91Y2hzY3JlZW4uYwo+Pj4gKysrIGIvZHJpdmVycy9ncHUvZHJtL3BhbmVs
+L3BhbmVsLXJhc3BiZXJyeXBpLXRvdWNoc2NyZWVuLmMKPj4+IEBAIC0yMDksNyArMjA5LDYgQEAg
+c3RhdGljIGNvbnN0IHN0cnVjdCBkcm1fZGlzcGxheV9tb2RlIHJwaV90b3VjaHNjcmVlbl9tb2Rl
+c1tdID0gewo+Pj4gIAkJLnZzeW5jX3N0YXJ0ID0gNDgwICsgNywKPj4+ICAJCS52c3luY19lbmQg
+PSA0ODAgKyA3ICsgMiwKPj4+ICAJCS52dG90YWwgPSA0ODAgKyA3ICsgMiArIDIxLAo+Pj4gLQkJ
+LnZyZWZyZXNoID0gNjAsCj4+PiAgCX0sCj4+PiAgfTsKPj4+ICAKPj4+IEBAIC0zMjIsNyArMzIx
+LDggQEAgc3RhdGljIGludCBycGlfdG91Y2hzY3JlZW5fZ2V0X21vZGVzKHN0cnVjdCBkcm1fcGFu
+ZWwgKnBhbmVsLAo+Pj4gIAkJbW9kZSA9IGRybV9tb2RlX2R1cGxpY2F0ZShjb25uZWN0b3ItPmRl
+diwgbSk7Cj4+PiAgCQlpZiAoIW1vZGUpIHsKPj4+ICAJCQlkZXZfZXJyKHBhbmVsLT5kZXYsICJm
+YWlsZWQgdG8gYWRkIG1vZGUgJXV4JXVAJXVcbiIsCj4+PiAtCQkJCW0tPmhkaXNwbGF5LCBtLT52
+ZGlzcGxheSwgbS0+dnJlZnJlc2gpOwo+Pj4gKwkJCQltLT5oZGlzcGxheSwgbS0+dmRpc3BsYXks
+Cj4+PiArCQkJCWRybV9tb2RlX3ZyZWZyZXNoKG0pKTsKPj4+ICAJCQljb250aW51ZTsKPj4+ICAJ
+CX0KPj4+ICAKPj4+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0vcGFuZWwvcGFuZWwtcmF5
+ZGl1bS1ybTY3MTkxLmMgYi9kcml2ZXJzL2dwdS9kcm0vcGFuZWwvcGFuZWwtcmF5ZGl1bS1ybTY3
+MTkxLmMKPj4+IGluZGV4IDMxMzYzN2Q1M2QyOC4uZDAwMWM1MmUwY2E5IDEwMDY0NAo+Pj4gLS0t
+IGEvZHJpdmVycy9ncHUvZHJtL3BhbmVsL3BhbmVsLXJheWRpdW0tcm02NzE5MS5jCj4+PiArKysg
+Yi9kcml2ZXJzL2dwdS9kcm0vcGFuZWwvcGFuZWwtcmF5ZGl1bS1ybTY3MTkxLmMKPj4+IEBAIC0y
+MTgsNyArMjE4LDYgQEAgc3RhdGljIGNvbnN0IHN0cnVjdCBkcm1fZGlzcGxheV9tb2RlIGRlZmF1
+bHRfbW9kZSA9IHsKPj4+ICAJLnZzeW5jX3N0YXJ0ID0gMTkyMCArIDEwLAo+Pj4gIAkudnN5bmNf
+ZW5kID0gMTkyMCArIDEwICsgMiwKPj4+ICAJLnZ0b3RhbCA9IDE5MjAgKyAxMCArIDIgKyA0LAo+
+Pj4gLQkudnJlZnJlc2ggPSA2MCwKPj4+ICAJLndpZHRoX21tID0gNjgsCj4+PiAgCS5oZWlnaHRf
+bW0gPSAxMjEsCj4+PiAgCS5mbGFncyA9IERSTV9NT0RFX0ZMQUdfTkhTWU5DIHwKPj4+IEBAIC00
+NDUsNyArNDQ0LDcgQEAgc3RhdGljIGludCByYWRfcGFuZWxfZ2V0X21vZGVzKHN0cnVjdCBkcm1f
+cGFuZWwgKnBhbmVsLAo+Pj4gIAlpZiAoIW1vZGUpIHsKPj4+ICAJCURSTV9ERVZfRVJST1IocGFu
+ZWwtPmRldiwgImZhaWxlZCB0byBhZGQgbW9kZSAldXgldXhAJXVcbiIsCj4+PiAgCQkJICAgICAg
+ZGVmYXVsdF9tb2RlLmhkaXNwbGF5LCBkZWZhdWx0X21vZGUudmRpc3BsYXksCj4+PiAtCQkJICAg
+ICAgZGVmYXVsdF9tb2RlLnZyZWZyZXNoKTsKPj4+ICsJCQkgICAgICBkcm1fbW9kZV92cmVmcmVz
+aCgmZGVmYXVsdF9tb2RlKSk7Cj4+PiAgCQlyZXR1cm4gLUVOT01FTTsKPj4+ICAJfQo+Pj4gIAo+
+Pj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9wYW5lbC9wYW5lbC1yYXlkaXVtLXJtNjgy
+MDAuYyBiL2RyaXZlcnMvZ3B1L2RybS9wYW5lbC9wYW5lbC1yYXlkaXVtLXJtNjgyMDAuYwo+Pj4g
+aW5kZXggZTg5ODI5NDhlMGVhLi44MWFlOGJlNjJkMTUgMTAwNjQ0Cj4+PiAtLS0gYS9kcml2ZXJz
+L2dwdS9kcm0vcGFuZWwvcGFuZWwtcmF5ZGl1bS1ybTY4MjAwLmMKPj4+ICsrKyBiL2RyaXZlcnMv
+Z3B1L2RybS9wYW5lbC9wYW5lbC1yYXlkaXVtLXJtNjgyMDAuYwo+Pj4gQEAgLTkyLDcgKzkyLDYg
+QEAgc3RhdGljIGNvbnN0IHN0cnVjdCBkcm1fZGlzcGxheV9tb2RlIGRlZmF1bHRfbW9kZSA9IHsK
+Pj4+ICAJLnZzeW5jX3N0YXJ0ID0gMTI4MCArIDEyLAo+Pj4gIAkudnN5bmNfZW5kID0gMTI4MCAr
+IDEyICsgNCwKPj4+ICAJLnZ0b3RhbCA9IDEyODAgKyAxMiArIDQgKyAxMiwKPj4+IC0JLnZyZWZy
+ZXNoID0gNTAsCj4+PiAgCS5mbGFncyA9IDAsCj4+PiAgCS53aWR0aF9tbSA9IDY4LAo+Pj4gIAku
+aGVpZ2h0X21tID0gMTIyLAo+Pj4gQEAgLTMzOSw3ICszMzgsNyBAQCBzdGF0aWMgaW50IHJtNjgy
+MDBfZ2V0X21vZGVzKHN0cnVjdCBkcm1fcGFuZWwgKnBhbmVsLAo+Pj4gIAlpZiAoIW1vZGUpIHsK
+Pj4+ICAJCURSTV9FUlJPUigiZmFpbGVkIHRvIGFkZCBtb2RlICV1eCV1eEAldVxuIiwKPj4+ICAJ
+CQkgIGRlZmF1bHRfbW9kZS5oZGlzcGxheSwgZGVmYXVsdF9tb2RlLnZkaXNwbGF5LAo+Pj4gLQkJ
+CSAgZGVmYXVsdF9tb2RlLnZyZWZyZXNoKTsKPj4+ICsJCQkgIGRybV9tb2RlX3ZyZWZyZXNoKCZk
+ZWZhdWx0X21vZGUpKTsKPj4+ICAJCXJldHVybiAtRU5PTUVNOwo+Pj4gIAl9Cj4+PiAgCj4+PiBk
+aWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL3BhbmVsL3BhbmVsLXJvY2t0ZWNoLWpoMDU3bjAw
+OTAwLmMgYi9kcml2ZXJzL2dwdS9kcm0vcGFuZWwvcGFuZWwtcm9ja3RlY2gtamgwNTduMDA5MDAu
+Ywo+Pj4gaW5kZXggMzhmZjc0MmJjMTIwLi5kYTRlMzczMjkxZjkgMTAwNjQ0Cj4+PiAtLS0gYS9k
+cml2ZXJzL2dwdS9kcm0vcGFuZWwvcGFuZWwtcm9ja3RlY2gtamgwNTduMDA5MDAuYwo+Pj4gKysr
+IGIvZHJpdmVycy9ncHUvZHJtL3BhbmVsL3BhbmVsLXJvY2t0ZWNoLWpoMDU3bjAwOTAwLmMKPj4+
+IEBAIC0yMjMsNyArMjIzLDYgQEAgc3RhdGljIGNvbnN0IHN0cnVjdCBkcm1fZGlzcGxheV9tb2Rl
+IGRlZmF1bHRfbW9kZSA9IHsKPj4+ICAJLnZzeW5jX3N0YXJ0ID0gMTQ0MCArIDIwLAo+Pj4gIAku
+dnN5bmNfZW5kICAgPSAxNDQwICsgMjAgKyA0LAo+Pj4gIAkudnRvdGFsCSAgICAgPSAxNDQwICsg
+MjAgKyA0ICsgMTIsCj4+PiAtCS52cmVmcmVzaCAgICA9IDYwLAo+Pj4gIAkuY2xvY2sJICAgICA9
+IDc1Mjc2LAo+Pj4gIAkuZmxhZ3MJICAgICA9IERSTV9NT0RFX0ZMQUdfTkhTWU5DIHwgRFJNX01P
+REVfRkxBR19OVlNZTkMsCj4+PiAgCS53aWR0aF9tbSAgICA9IDY1LAo+Pj4gQEAgLTI0MCw3ICsy
+MzksNyBAQCBzdGF0aWMgaW50IGpoMDU3bl9nZXRfbW9kZXMoc3RydWN0IGRybV9wYW5lbCAqcGFu
+ZWwsCj4+PiAgCWlmICghbW9kZSkgewo+Pj4gIAkJRFJNX0RFVl9FUlJPUihjdHgtPmRldiwgIkZh
+aWxlZCB0byBhZGQgbW9kZSAldXgldUAldVxuIiwKPj4+ICAJCQkgICAgICBkZWZhdWx0X21vZGUu
+aGRpc3BsYXksIGRlZmF1bHRfbW9kZS52ZGlzcGxheSwKPj4+IC0JCQkgICAgICBkZWZhdWx0X21v
+ZGUudnJlZnJlc2gpOwo+Pj4gKwkJCSAgICAgIGRybV9tb2RlX3ZyZWZyZXNoKCZkZWZhdWx0X21v
+ZGUpKTsKPj4+ICAJCXJldHVybiAtRU5PTUVNOwo+Pj4gIAl9Cj4+PiAgCj4+PiBAQCAtMzYwLDcg
+KzM1OSw3IEBAIHN0YXRpYyBpbnQgamgwNTduX3Byb2JlKHN0cnVjdCBtaXBpX2RzaV9kZXZpY2Ug
+KmRzaSkKPj4+ICAKPj4+ICAJRFJNX0RFVl9JTkZPKGRldiwgIiV1eCV1QCV1ICV1YnBwIGRzaSAl
+dWRsIC0gcmVhZHlcbiIsCj4+PiAgCQkgICAgIGRlZmF1bHRfbW9kZS5oZGlzcGxheSwgZGVmYXVs
+dF9tb2RlLnZkaXNwbGF5LAo+Pj4gLQkJICAgICBkZWZhdWx0X21vZGUudnJlZnJlc2gsCj4+PiAr
+CQkgICAgIGRybV9tb2RlX3ZyZWZyZXNoKCZkZWZhdWx0X21vZGUpLAo+Pj4gIAkJICAgICBtaXBp
+X2RzaV9waXhlbF9mb3JtYXRfdG9fYnBwKGRzaS0+Zm9ybWF0KSwgZHNpLT5sYW5lcyk7Cj4+PiAg
+Cj4+PiAgCWpoMDU3bl9kZWJ1Z2ZzX2luaXQoY3R4KTsKPj4+IGRpZmYgLS1naXQgYS9kcml2ZXJz
+L2dwdS9kcm0vcGFuZWwvcGFuZWwtcm9uYm8tcmIwNzBkMzAuYyBiL2RyaXZlcnMvZ3B1L2RybS9w
+YW5lbC9wYW5lbC1yb25iby1yYjA3MGQzMC5jCj4+PiBpbmRleCBlZjE4NTU5ZTIzN2UuLmE3YjBi
+M2UzOWUxYSAxMDA2NDQKPj4+IC0tLSBhL2RyaXZlcnMvZ3B1L2RybS9wYW5lbC9wYW5lbC1yb25i
+by1yYjA3MGQzMC5jCj4+PiArKysgYi9kcml2ZXJzL2dwdS9kcm0vcGFuZWwvcGFuZWwtcm9uYm8t
+cmIwNzBkMzAuYwo+Pj4gQEAgLTEwMyw3ICsxMDMsNiBAQCBzdGF0aWMgY29uc3Qgc3RydWN0IGRy
+bV9kaXNwbGF5X21vZGUgZGVmYXVsdF9tb2RlID0gewo+Pj4gIAkudnN5bmNfc3RhcnQJPSA2MDAg
+KyAxMiwKPj4+ICAJLnZzeW5jX2VuZAk9IDYwMCArIDEyICsgMTAsCj4+PiAgCS52dG90YWwJCT0g
+NjAwICsgMTIgKyAxMCArIDEzLAo+Pj4gLQkudnJlZnJlc2gJPSA2MCwKPj4+ICAKPj4+ICAJLndp
+ZHRoX21tCT0gMTU0LAo+Pj4gIAkuaGVpZ2h0X21tCT0gODUsCj4+PiBkaWZmIC0tZ2l0IGEvZHJp
+dmVycy9ncHUvZHJtL3BhbmVsL3BhbmVsLXNhbXN1bmctczZkMTZkMC5jIGIvZHJpdmVycy9ncHUv
+ZHJtL3BhbmVsL3BhbmVsLXNhbXN1bmctczZkMTZkMC5jCj4+PiBpbmRleCAyMTUwMDQzZGNmNmIu
+LmYwMjY0NWQzOTZhYyAxMDA2NDQKPj4+IC0tLSBhL2RyaXZlcnMvZ3B1L2RybS9wYW5lbC9wYW5l
+bC1zYW1zdW5nLXM2ZDE2ZDAuYwo+Pj4gKysrIGIvZHJpdmVycy9ncHUvZHJtL3BhbmVsL3BhbmVs
+LXNhbXN1bmctczZkMTZkMC5jCj4+PiBAQCAtMzcsMTIgKzM3LDYgQEAgc3RhdGljIGNvbnN0IHN0
+cnVjdCBkcm1fZGlzcGxheV9tb2RlIHNhbXN1bmdfczZkMTZkMF9tb2RlID0gewo+Pj4gIAkudnN5
+bmNfc3RhcnQgPSA0ODAgKyAxLAo+Pj4gIAkudnN5bmNfZW5kID0gNDgwICsgMSArIDEsCj4+PiAg
+CS52dG90YWwgPSA0ODAgKyAxICsgMSArIDEsCj4+PiAtCS8qCj4+PiAtCSAqIFRoaXMgZGVwZW5k
+cyBvbiB0aGUgY2xvY2tpbmcgSFMgdnMgTFAgcmF0ZSwgdGhpcyB2YWx1ZQo+Pj4gLQkgKiBpcyBj
+YWxjdWxhdGVkIGFzOgo+Pj4gLQkgKiB2cmVmcmVzaCA9IChjbG9jayAqIDEwMDApIC8gKGh0b3Rh
+bCp2dG90YWwpCj4+PiAtCSAqLwo+Pj4gLQkudnJlZnJlc2ggPSA4MTYsCj4+PiAgCS53aWR0aF9t
+bSA9IDg0LAo+Pj4gIAkuaGVpZ2h0X21tID0gNDgsCj4+PiAgfTsKPj4+IGRpZmYgLS1naXQgYS9k
+cml2ZXJzL2dwdS9kcm0vcGFuZWwvcGFuZWwtc2Ftc3VuZy1zNmUzaGEyLmMgYi9kcml2ZXJzL2dw
+dS9kcm0vcGFuZWwvcGFuZWwtc2Ftc3VuZy1zNmUzaGEyLmMKPj4+IGluZGV4IDM2ZWJkNWE0YWM3
+Yi4uODBlZjEyMmU3NDY2IDEwMDY0NAo+Pj4gLS0tIGEvZHJpdmVycy9ncHUvZHJtL3BhbmVsL3Bh
+bmVsLXNhbXN1bmctczZlM2hhMi5jCj4+PiArKysgYi9kcml2ZXJzL2dwdS9kcm0vcGFuZWwvcGFu
+ZWwtc2Ftc3VuZy1zNmUzaGEyLmMKPj4+IEBAIC02MTcsNyArNjE3LDYgQEAgc3RhdGljIGNvbnN0
+IHN0cnVjdCBkcm1fZGlzcGxheV9tb2RlIHM2ZTNoYTJfbW9kZSA9IHsKPj4+ICAJLnZzeW5jX3N0
+YXJ0ID0gMjU2MCArIDEsCj4+PiAgCS52c3luY19lbmQgPSAyNTYwICsgMSArIDEsCj4+PiAgCS52
+dG90YWwgPSAyNTYwICsgMSArIDEgKyAxNSwKPj4+IC0JLnZyZWZyZXNoID0gNjAsCj4+PiAgCS5m
+bGFncyA9IDAsCj4+PiAgfTsKPj4+ICAKPj4+IEBAIC02MzYsNyArNjM1LDYgQEAgc3RhdGljIGNv
+bnN0IHN0cnVjdCBkcm1fZGlzcGxheV9tb2RlIHM2ZTNoZjJfbW9kZSA9IHsKPj4+ICAJLnZzeW5j
+X3N0YXJ0ID0gMjU2MCArIDEsCj4+PiAgCS52c3luY19lbmQgPSAyNTYwICsgMSArIDEsCj4+PiAg
+CS52dG90YWwgPSAyNTYwICsgMSArIDEgKyAxNSwKPj4+IC0JLnZyZWZyZXNoID0gNjAsCj4+PiAg
+CS5mbGFncyA9IDAsCj4+PiAgfTsKPj4+ICAKPj4+IEBAIC02NTUsNyArNjUzLDcgQEAgc3RhdGlj
+IGludCBzNmUzaGEyX2dldF9tb2RlcyhzdHJ1Y3QgZHJtX3BhbmVsICpwYW5lbCwKPj4+ICAJaWYg
+KCFtb2RlKSB7Cj4+PiAgCQlEUk1fRVJST1IoImZhaWxlZCB0byBhZGQgbW9kZSAldXgldXhAJXVc
+biIsCj4+PiAgCQkJY3R4LT5kZXNjLT5tb2RlLT5oZGlzcGxheSwgY3R4LT5kZXNjLT5tb2RlLT52
+ZGlzcGxheSwKPj4+IC0JCQljdHgtPmRlc2MtPm1vZGUtPnZyZWZyZXNoKTsKPj4+ICsJCQlkcm1f
+bW9kZV92cmVmcmVzaChjdHgtPmRlc2MtPm1vZGUpKTsKPj4+ICAJCXJldHVybiAtRU5PTUVNOwo+
+Pj4gIAl9Cj4+PiAgCj4+PiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL3BhbmVsL3BhbmVs
+LXNhbXN1bmctczZlNjNqMHgwMy5jIGIvZHJpdmVycy9ncHUvZHJtL3BhbmVsL3BhbmVsLXNhbXN1
+bmctczZlNjNqMHgwMy5jCj4+PiBpbmRleCBhMzU3MGUwYTkwYTguLjEyNDc2NTZkNzNiZiAxMDA2
+NDQKPj4+IC0tLSBhL2RyaXZlcnMvZ3B1L2RybS9wYW5lbC9wYW5lbC1zYW1zdW5nLXM2ZTYzajB4
+MDMuYwo+Pj4gKysrIGIvZHJpdmVycy9ncHUvZHJtL3BhbmVsL3BhbmVsLXNhbXN1bmctczZlNjNq
+MHgwMy5jCj4+PiBAQCAtNTIsNyArNTIsNiBAQCBzdGF0aWMgY29uc3Qgc3RydWN0IGRybV9kaXNw
+bGF5X21vZGUgZGVmYXVsdF9tb2RlID0gewo+Pj4gIAkudnN5bmNfc3RhcnQgPSAzMjAgKyAxNTAs
+Cj4+PiAgCS52c3luY19lbmQgPSAzMjAgKyAxNTAgKyAxLAo+Pj4gIAkudnRvdGFsID0gMzIwICsg
+MTUwICsgMSArIDIsCj4+PiAtCS52cmVmcmVzaCA9IDMwLAo+Pj4gIAkuZmxhZ3MgPSAwLAo+Pj4g
+IH07Cj4+PiAgCj4+PiBAQCAtNDA5LDcgKzQwOCw3IEBAIHN0YXRpYyBpbnQgczZlNjNqMHgwM19n
+ZXRfbW9kZXMoc3RydWN0IGRybV9wYW5lbCAqcGFuZWwsCj4+PiAgCWlmICghbW9kZSkgewo+Pj4g
+IAkJRFJNX0VSUk9SKCJmYWlsZWQgdG8gYWRkIG1vZGUgJXV4JXV4QCV1XG4iLAo+Pj4gIAkJCWRl
+ZmF1bHRfbW9kZS5oZGlzcGxheSwgZGVmYXVsdF9tb2RlLnZkaXNwbGF5LAo+Pj4gLQkJCWRlZmF1
+bHRfbW9kZS52cmVmcmVzaCk7Cj4+PiArCQkJZHJtX21vZGVfdnJlZnJlc2goJmRlZmF1bHRfbW9k
+ZSkpOwo+Pj4gIAkJcmV0dXJuIC1FTk9NRU07Cj4+PiAgCX0KPj4+ICAKPj4+IGRpZmYgLS1naXQg
+YS9kcml2ZXJzL2dwdS9kcm0vcGFuZWwvcGFuZWwtc2Ftc3VuZy1zNmU2M20wLmMgYi9kcml2ZXJz
+L2dwdS9kcm0vcGFuZWwvcGFuZWwtc2Ftc3VuZy1zNmU2M20wLmMKPj4+IGluZGV4IGE1Zjc2ZWI0
+ZmEyNS4uNjQ0MjEzNDdiZmQ0IDEwMDY0NAo+Pj4gLS0tIGEvZHJpdmVycy9ncHUvZHJtL3BhbmVs
+L3BhbmVsLXNhbXN1bmctczZlNjNtMC5jCj4+PiArKysgYi9kcml2ZXJzL2dwdS9kcm0vcGFuZWwv
+cGFuZWwtc2Ftc3VuZy1zNmU2M20wLmMKPj4+IEBAIC0xMTcsNyArMTE3LDYgQEAgc3RhdGljIGNv
+bnN0IHN0cnVjdCBkcm1fZGlzcGxheV9tb2RlIGRlZmF1bHRfbW9kZSA9IHsKPj4+ICAJLnZzeW5j
+X3N0YXJ0CT0gODAwICsgMjgsCj4+PiAgCS52c3luY19lbmQJPSA4MDAgKyAyOCArIDIsCj4+PiAg
+CS52dG90YWwJCT0gODAwICsgMjggKyAyICsgMSwKPj4+IC0JLnZyZWZyZXNoCT0gNjAsCj4+PiAg
+CS53aWR0aF9tbQk9IDUzLAo+Pj4gIAkuaGVpZ2h0X21tCT0gODksCj4+PiAgCS5mbGFncwkJPSBE
+Uk1fTU9ERV9GTEFHX05WU1lOQyB8IERSTV9NT0RFX0ZMQUdfTkhTWU5DLAo+Pj4gQEAgLTM3MSw3
+ICszNzAsNyBAQCBzdGF0aWMgaW50IHM2ZTYzbTBfZ2V0X21vZGVzKHN0cnVjdCBkcm1fcGFuZWwg
+KnBhbmVsLAo+Pj4gIAlpZiAoIW1vZGUpIHsKPj4+ICAJCURSTV9FUlJPUigiZmFpbGVkIHRvIGFk
+ZCBtb2RlICV1eCV1eEAldVxuIiwKPj4+ICAJCQkgIGRlZmF1bHRfbW9kZS5oZGlzcGxheSwgZGVm
+YXVsdF9tb2RlLnZkaXNwbGF5LAo+Pj4gLQkJCSAgZGVmYXVsdF9tb2RlLnZyZWZyZXNoKTsKPj4+
+ICsJCQkgIGRybV9tb2RlX3ZyZWZyZXNoKCZkZWZhdWx0X21vZGUpKTsKPj4+ICAJCXJldHVybiAt
+RU5PTUVNOwo+Pj4gIAl9Cj4+PiAgCj4+PiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL3Bh
+bmVsL3BhbmVsLXNhbXN1bmctczZlODhhMC1hbXM0NTJlZjAxLmMgYi9kcml2ZXJzL2dwdS9kcm0v
+cGFuZWwvcGFuZWwtc2Ftc3VuZy1zNmU4OGEwLWFtczQ1MmVmMDEuYwo+Pj4gaW5kZXggOWQ4NDNm
+Y2MzYTIyLi40ODVlYWJlY2ZjYzkgMTAwNjQ0Cj4+PiAtLS0gYS9kcml2ZXJzL2dwdS9kcm0vcGFu
+ZWwvcGFuZWwtc2Ftc3VuZy1zNmU4OGEwLWFtczQ1MmVmMDEuYwo+Pj4gKysrIGIvZHJpdmVycy9n
+cHUvZHJtL3BhbmVsL3BhbmVsLXNhbXN1bmctczZlODhhMC1hbXM0NTJlZjAxLmMKPj4+IEBAIC0x
+NzcsNyArMTc3LDYgQEAgc3RhdGljIGNvbnN0IHN0cnVjdCBkcm1fZGlzcGxheV9tb2RlIHM2ZTg4
+YTBfYW1zNDUyZWYwMV9tb2RlID0gewo+Pj4gIAkudnN5bmNfc3RhcnQgPSA5NjAgKyAxNCwKPj4+
+ICAJLnZzeW5jX2VuZCA9IDk2MCArIDE0ICsgMiwKPj4+ICAJLnZ0b3RhbCA9IDk2MCArIDE0ICsg
+MiArIDgsCj4+PiAtCS52cmVmcmVzaCA9IDYwLAo+Pj4gIAkud2lkdGhfbW0gPSA1NiwKPj4+ICAJ
+LmhlaWdodF9tbSA9IDEwMCwKPj4+ICB9Owo+Pj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2Ry
+bS9wYW5lbC9wYW5lbC1zZWlrby00M3d2ZjFnLmMgYi9kcml2ZXJzL2dwdS9kcm0vcGFuZWwvcGFu
+ZWwtc2Vpa28tNDN3dmYxZy5jCj4+PiBpbmRleCA0MGZjYmJiYWNiMmMuLmU0MTdkYzQ5MjFjMiAx
+MDA2NDQKPj4+IC0tLSBhL2RyaXZlcnMvZ3B1L2RybS9wYW5lbC9wYW5lbC1zZWlrby00M3d2ZjFn
+LmMKPj4+ICsrKyBiL2RyaXZlcnMvZ3B1L2RybS9wYW5lbC9wYW5lbC1zZWlrby00M3d2ZjFnLmMK
+Pj4+IEBAIC05Miw3ICs5Miw4IEBAIHN0YXRpYyBpbnQgc2Vpa29fcGFuZWxfZ2V0X2ZpeGVkX21v
+ZGVzKHN0cnVjdCBzZWlrb19wYW5lbCAqcGFuZWwsCj4+PiAgCQltb2RlID0gZHJtX21vZGVfZHVw
+bGljYXRlKGNvbm5lY3Rvci0+ZGV2LCBtKTsKPj4+ICAJCWlmICghbW9kZSkgewo+Pj4gIAkJCWRl
+dl9lcnIocGFuZWwtPmJhc2UuZGV2LCAiZmFpbGVkIHRvIGFkZCBtb2RlICV1eCV1QCV1XG4iLAo+
+Pj4gLQkJCQltLT5oZGlzcGxheSwgbS0+dmRpc3BsYXksIG0tPnZyZWZyZXNoKTsKPj4+ICsJCQkJ
+bS0+aGRpc3BsYXksIG0tPnZkaXNwbGF5LAo+Pj4gKwkJCQlkcm1fbW9kZV92cmVmcmVzaChtKSk7
+Cj4+PiAgCQkJY29udGludWU7Cj4+PiAgCQl9Cj4+PiAgCj4+PiBkaWZmIC0tZ2l0IGEvZHJpdmVy
+cy9ncHUvZHJtL3BhbmVsL3BhbmVsLXNoYXJwLWxxMTAxcjFzeDAxLmMgYi9kcml2ZXJzL2dwdS9k
+cm0vcGFuZWwvcGFuZWwtc2hhcnAtbHExMDFyMXN4MDEuYwo+Pj4gaW5kZXggYjVkMTk3NzIyMWE3
+Li5mMDczMjRiNzA1YjMgMTAwNjQ0Cj4+PiAtLS0gYS9kcml2ZXJzL2dwdS9kcm0vcGFuZWwvcGFu
+ZWwtc2hhcnAtbHExMDFyMXN4MDEuYwo+Pj4gKysrIGIvZHJpdmVycy9ncHUvZHJtL3BhbmVsL3Bh
+bmVsLXNoYXJwLWxxMTAxcjFzeDAxLmMKPj4+IEBAIC0yNjksNyArMjY5LDYgQEAgc3RhdGljIGNv
+bnN0IHN0cnVjdCBkcm1fZGlzcGxheV9tb2RlIGRlZmF1bHRfbW9kZSA9IHsKPj4+ICAJLnZzeW5j
+X3N0YXJ0ID0gMTYwMCArIDQsCj4+PiAgCS52c3luY19lbmQgPSAxNjAwICsgNCArIDgsCj4+PiAg
+CS52dG90YWwgPSAxNjAwICsgNCArIDggKyAzMiwKPj4+IC0JLnZyZWZyZXNoID0gNjAsCj4+PiAg
+fTsKPj4+ICAKPj4+ICBzdGF0aWMgaW50IHNoYXJwX3BhbmVsX2dldF9tb2RlcyhzdHJ1Y3QgZHJt
+X3BhbmVsICpwYW5lbCwKPj4+IEBAIC0yODEsNyArMjgwLDcgQEAgc3RhdGljIGludCBzaGFycF9w
+YW5lbF9nZXRfbW9kZXMoc3RydWN0IGRybV9wYW5lbCAqcGFuZWwsCj4+PiAgCWlmICghbW9kZSkg
+ewo+Pj4gIAkJZGV2X2VycihwYW5lbC0+ZGV2LCAiZmFpbGVkIHRvIGFkZCBtb2RlICV1eCV1eEAl
+dVxuIiwKPj4+ICAJCQlkZWZhdWx0X21vZGUuaGRpc3BsYXksIGRlZmF1bHRfbW9kZS52ZGlzcGxh
+eSwKPj4+IC0JCQlkZWZhdWx0X21vZGUudnJlZnJlc2gpOwo+Pj4gKwkJCWRybV9tb2RlX3ZyZWZy
+ZXNoKCZkZWZhdWx0X21vZGUpKTsKPj4+ICAJCXJldHVybiAtRU5PTUVNOwo+Pj4gIAl9Cj4+PiAg
+Cj4+PiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL3BhbmVsL3BhbmVsLXNoYXJwLWxzMDM3
+djdkdzAxLmMgYi9kcml2ZXJzL2dwdS9kcm0vcGFuZWwvcGFuZWwtc2hhcnAtbHMwMzd2N2R3MDEu
+Ywo+Pj4gaW5kZXggMWNmM2YwMjQzNWMxLi5kN2JmMTNiOWUxZDYgMTAwNjQ0Cj4+PiAtLS0gYS9k
+cml2ZXJzL2dwdS9kcm0vcGFuZWwvcGFuZWwtc2hhcnAtbHMwMzd2N2R3MDEuYwo+Pj4gKysrIGIv
+ZHJpdmVycy9ncHUvZHJtL3BhbmVsL3BhbmVsLXNoYXJwLWxzMDM3djdkdzAxLmMKPj4+IEBAIC05
+Myw3ICs5Myw2IEBAIHN0YXRpYyBjb25zdCBzdHJ1Y3QgZHJtX2Rpc3BsYXlfbW9kZSBsczAzN3Y3
+ZHcwMV9tb2RlID0gewo+Pj4gIAkudnN5bmNfc3RhcnQgPSA2NDAgKyAxLAo+Pj4gIAkudnN5bmNf
+ZW5kID0gNjQwICsgMSArIDEsCj4+PiAgCS52dG90YWwgPSA2NDAgKyAxICsgMSArIDEsCj4+PiAt
+CS52cmVmcmVzaCA9IDU4LAo+Pj4gIAkudHlwZSA9IERSTV9NT0RFX1RZUEVfRFJJVkVSIHwgRFJN
+X01PREVfVFlQRV9QUkVGRVJSRUQsCj4+PiAgCS5mbGFncyA9IERSTV9NT0RFX0ZMQUdfTkhTWU5D
+IHwgRFJNX01PREVfRkxBR19OVlNZTkMsCj4+PiAgCS53aWR0aF9tbSA9IDU2LAo+Pj4gZGlmZiAt
+LWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9wYW5lbC9wYW5lbC1zaGFycC1sczA0M3QxbGUwMS5jIGIv
+ZHJpdmVycy9ncHUvZHJtL3BhbmVsL3BhbmVsLXNoYXJwLWxzMDQzdDFsZTAxLmMKPj4+IGluZGV4
+IGNlNTg2YzZkNzBjNy4uYjJlNTg5MzU1MjljIDEwMDY0NAo+Pj4gLS0tIGEvZHJpdmVycy9ncHUv
+ZHJtL3BhbmVsL3BhbmVsLXNoYXJwLWxzMDQzdDFsZTAxLmMKPj4+ICsrKyBiL2RyaXZlcnMvZ3B1
+L2RybS9wYW5lbC9wYW5lbC1zaGFycC1sczA0M3QxbGUwMS5jCj4+PiBAQCAtMjAxLDcgKzIwMSw2
+IEBAIHN0YXRpYyBjb25zdCBzdHJ1Y3QgZHJtX2Rpc3BsYXlfbW9kZSBkZWZhdWx0X21vZGUgPSB7
+Cj4+PiAgCS52c3luY19zdGFydCA9IDk2MCArIDMsCj4+PiAgCS52c3luY19lbmQgPSA5NjAgKyAz
+ICsgMTUsCj4+PiAgCS52dG90YWwgPSA5NjAgKyAzICsgMTUgKyAxLAo+Pj4gLQkudnJlZnJlc2gg
+PSA2MCwKPj4+ICB9Owo+Pj4gIAo+Pj4gIHN0YXRpYyBpbnQgc2hhcnBfbnRfcGFuZWxfZ2V0X21v
+ZGVzKHN0cnVjdCBkcm1fcGFuZWwgKnBhbmVsLAo+Pj4gQEAgLTIxMyw3ICsyMTIsNyBAQCBzdGF0
+aWMgaW50IHNoYXJwX250X3BhbmVsX2dldF9tb2RlcyhzdHJ1Y3QgZHJtX3BhbmVsICpwYW5lbCwK
+Pj4+ICAJaWYgKCFtb2RlKSB7Cj4+PiAgCQlkZXZfZXJyKHBhbmVsLT5kZXYsICJmYWlsZWQgdG8g
+YWRkIG1vZGUgJXV4JXVAJXVcbiIsCj4+PiAgCQkJZGVmYXVsdF9tb2RlLmhkaXNwbGF5LCBkZWZh
+dWx0X21vZGUudmRpc3BsYXksCj4+PiAtCQkJZGVmYXVsdF9tb2RlLnZyZWZyZXNoKTsKPj4+ICsJ
+CQlkcm1fbW9kZV92cmVmcmVzaCgmZGVmYXVsdF9tb2RlKSk7Cj4+PiAgCQlyZXR1cm4gLUVOT01F
+TTsKPj4+ICAJfQo+Pj4gIAo+Pj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9wYW5lbC9w
+YW5lbC1zaW1wbGUuYyBiL2RyaXZlcnMvZ3B1L2RybS9wYW5lbC9wYW5lbC1zaW1wbGUuYwo+Pj4g
+aW5kZXggODIzNjNkMDViYWQ0Li45YmE5ZDY5ZGY0MWIgMTAwNjQ0Cj4+PiAtLS0gYS9kcml2ZXJz
+L2dwdS9kcm0vcGFuZWwvcGFuZWwtc2ltcGxlLmMKPj4+ICsrKyBiL2RyaXZlcnMvZ3B1L2RybS9w
+YW5lbC9wYW5lbC1zaW1wbGUuYwo+Pj4gQEAgLTE2MSw3ICsxNjEsOCBAQCBzdGF0aWMgdW5zaWdu
+ZWQgaW50IHBhbmVsX3NpbXBsZV9nZXRfZGlzcGxheV9tb2RlcyhzdHJ1Y3QgcGFuZWxfc2ltcGxl
+ICpwYW5lbCwKPj4+ICAJCW1vZGUgPSBkcm1fbW9kZV9kdXBsaWNhdGUoY29ubmVjdG9yLT5kZXYs
+IG0pOwo+Pj4gIAkJaWYgKCFtb2RlKSB7Cj4+PiAgCQkJZGV2X2VycihwYW5lbC0+YmFzZS5kZXYs
+ICJmYWlsZWQgdG8gYWRkIG1vZGUgJXV4JXVAJXVcbiIsCj4+PiAtCQkJCW0tPmhkaXNwbGF5LCBt
+LT52ZGlzcGxheSwgbS0+dnJlZnJlc2gpOwo+Pj4gKwkJCQltLT5oZGlzcGxheSwgbS0+dmRpc3Bs
+YXksCj4+PiArCQkJCWRybV9tb2RlX3ZyZWZyZXNoKG0pKTsKPj4+ICAJCQljb250aW51ZTsKPj4+
+ICAJCX0KPj4+ICAKPj4+IEBAIC00OTQsNyArNDk1LDYgQEAgc3RhdGljIGNvbnN0IHN0cnVjdCBk
+cm1fZGlzcGxheV9tb2RlIGFtcGlyZV9hbV80ODAyNzJoM3RtcXdfdDAxaF9tb2RlID0gewo+Pj4g
+IAkudnN5bmNfc3RhcnQgPSAyNzIgKyAyLAo+Pj4gIAkudnN5bmNfZW5kID0gMjcyICsgMiArIDEw
+LAo+Pj4gIAkudnRvdGFsID0gMjcyICsgMiArIDEwICsgMiwKPj4+IC0JLnZyZWZyZXNoID0gNjAs
+Cj4+PiAgCS5mbGFncyA9IERSTV9NT0RFX0ZMQUdfUEhTWU5DIHwgRFJNX01PREVfRkxBR19QVlNZ
+TkMsCj4+PiAgfTsKPj4+ICAKPj4+IEBAIC01MTksNyArNTE5LDYgQEAgc3RhdGljIGNvbnN0IHN0
+cnVjdCBkcm1fZGlzcGxheV9tb2RlIGFtcGlyZV9hbTgwMDQ4MHIzdG1xd2ExaF9tb2RlID0gewo+
+Pj4gIAkudnN5bmNfc3RhcnQgPSA0ODAgKyAyLAo+Pj4gIAkudnN5bmNfZW5kID0gNDgwICsgMiAr
+IDQ1LAo+Pj4gIAkudnRvdGFsID0gNDgwICsgMiArIDQ1ICsgMCwKPj4+IC0JLnZyZWZyZXNoID0g
+NjAsCj4+PiAgCS5mbGFncyA9IERSTV9NT0RFX0ZMQUdfUEhTWU5DIHwgRFJNX01PREVfRkxBR19Q
+VlNZTkMsCj4+PiAgfTsKPj4+ICAKPj4+IEBAIC01NzAsNyArNTY5LDYgQEAgc3RhdGljIGNvbnN0
+IHN0cnVjdCBkcm1fZGlzcGxheV9tb2RlIGF1b19iMTAxYXcwM19tb2RlID0gewo+Pj4gIAkudnN5
+bmNfc3RhcnQgPSA2MDAgKyAxNiwKPj4+ICAJLnZzeW5jX2VuZCA9IDYwMCArIDE2ICsgNiwKPj4+
+ICAJLnZ0b3RhbCA9IDYwMCArIDE2ICsgNiArIDE2LAo+Pj4gLQkudnJlZnJlc2ggPSA2MCwKPj4+
+ICB9Owo+Pj4gIAo+Pj4gIHN0YXRpYyBjb25zdCBzdHJ1Y3QgcGFuZWxfZGVzYyBhdW9fYjEwMWF3
+MDMgPSB7Cj4+PiBAQCAtNjE1LDcgKzYxMyw2IEBAIHN0YXRpYyBjb25zdCBzdHJ1Y3QgZHJtX2Rp
+c3BsYXlfbW9kZSBhdW9fYjEwMXh0bjAxX21vZGUgPSB7Cj4+PiAgCS52c3luY19zdGFydCA9IDc2
+OCArIDE0LAo+Pj4gIAkudnN5bmNfZW5kID0gNzY4ICsgMTQgKyA0MiwKPj4+ICAJLnZ0b3RhbCA9
+IDc2OCArIDE0ICsgNDIsCj4+PiAtCS52cmVmcmVzaCA9IDYwLAo+Pj4gIAkuZmxhZ3MgPSBEUk1f
+TU9ERV9GTEFHX05WU1lOQyB8IERSTV9NT0RFX0ZMQUdfTkhTWU5DLAo+Pj4gIH07Cj4+PiAgCj4+
+PiBAQCAtNjM5LDcgKzYzNiw2IEBAIHN0YXRpYyBjb25zdCBzdHJ1Y3QgZHJtX2Rpc3BsYXlfbW9k
+ZSBhdW9fYjExNnhhazAxX21vZGUgPSB7Cj4+PiAgCS52c3luY19zdGFydCA9IDc2OCArIDQsCj4+
+PiAgCS52c3luY19lbmQgPSA3NjggKyA0ICsgNiwKPj4+ICAJLnZ0b3RhbCA9IDc2OCArIDQgKyA2
+ICsgMTUsCj4+PiAtCS52cmVmcmVzaCA9IDYwLAo+Pj4gIAkuZmxhZ3MgPSBEUk1fTU9ERV9GTEFH
+X05WU1lOQyB8IERSTV9NT0RFX0ZMQUdfTkhTWU5DLAo+Pj4gIH07Cj4+PiAgCj4+PiBAQCAtNjY4
+LDcgKzY2NCw2IEBAIHN0YXRpYyBjb25zdCBzdHJ1Y3QgZHJtX2Rpc3BsYXlfbW9kZSBhdW9fYjEx
+Nnh3MDNfbW9kZSA9IHsKPj4+ICAJLnZzeW5jX3N0YXJ0ID0gNzY4ICsgMTAsCj4+PiAgCS52c3lu
+Y19lbmQgPSA3NjggKyAxMCArIDEyLAo+Pj4gIAkudnRvdGFsID0gNzY4ICsgMTAgKyAxMiArIDYs
+Cj4+PiAtCS52cmVmcmVzaCA9IDYwLAo+Pj4gIH07Cj4+PiAgCj4+PiAgc3RhdGljIGNvbnN0IHN0
+cnVjdCBwYW5lbF9kZXNjIGF1b19iMTE2eHcwMyA9IHsKPj4+IEBAIC02OTEsNyArNjg2LDYgQEAg
+c3RhdGljIGNvbnN0IHN0cnVjdCBkcm1fZGlzcGxheV9tb2RlIGF1b19iMTMzeHRuMDFfbW9kZSA9
+IHsKPj4+ICAJLnZzeW5jX3N0YXJ0ID0gNzY4ICsgMywKPj4+ICAJLnZzeW5jX2VuZCA9IDc2OCAr
+IDMgKyA2LAo+Pj4gIAkudnRvdGFsID0gNzY4ICsgMyArIDYgKyAxMywKPj4+IC0JLnZyZWZyZXNo
+ID0gNjAsCj4+PiAgfTsKPj4+ICAKPj4+ICBzdGF0aWMgY29uc3Qgc3RydWN0IHBhbmVsX2Rlc2Mg
+YXVvX2IxMzN4dG4wMSA9IHsKPj4+IEBAIC03MTQsNyArNzA4LDYgQEAgc3RhdGljIGNvbnN0IHN0
+cnVjdCBkcm1fZGlzcGxheV9tb2RlIGF1b19iMTMzaHRuMDFfbW9kZSA9IHsKPj4+ICAJLnZzeW5j
+X3N0YXJ0ID0gMTA4MCArIDI1LAo+Pj4gIAkudnN5bmNfZW5kID0gMTA4MCArIDI1ICsgMTAsCj4+
+PiAgCS52dG90YWwgPSAxMDgwICsgMjUgKyAxMCArIDEwLAo+Pj4gLQkudnJlZnJlc2ggPSA2MCwK
+Pj4+ICB9Owo+Pj4gIAo+Pj4gIHN0YXRpYyBjb25zdCBzdHJ1Y3QgcGFuZWxfZGVzYyBhdW9fYjEz
+M2h0bjAxID0gewo+Pj4gQEAgLTc3MCw3ICs3NjMsNiBAQCBzdGF0aWMgY29uc3Qgc3RydWN0IGRy
+bV9kaXNwbGF5X21vZGUgYXVvX2cxMDFldm4wMTBfbW9kZSA9IHsKPj4+ICAJLnZzeW5jX3N0YXJ0
+ID0gODAwICsgOCwKPj4+ICAJLnZzeW5jX2VuZCA9IDgwMCArIDggKyAyLAo+Pj4gIAkudnRvdGFs
+ID0gODAwICsgOCArIDIgKyA2LAo+Pj4gLQkudnJlZnJlc2ggPSA2MCwKPj4+ICB9Owo+Pj4gIAo+
+Pj4gIHN0YXRpYyBjb25zdCBzdHJ1Y3QgcGFuZWxfZGVzYyBhdW9fZzEwMWV2bjAxMCA9IHsKPj4+
+IEBAIC03OTQsNyArNzg2LDYgQEAgc3RhdGljIGNvbnN0IHN0cnVjdCBkcm1fZGlzcGxheV9tb2Rl
+IGF1b19nMTA0c24wMl9tb2RlID0gewo+Pj4gIAkudnN5bmNfc3RhcnQgPSA2MDAgKyAxMCwKPj4+
+ICAJLnZzeW5jX2VuZCA9IDYwMCArIDEwICsgMzUsCj4+PiAgCS52dG90YWwgPSA2MDAgKyAxMCAr
+IDM1ICsgMiwKPj4+IC0JLnZyZWZyZXNoID0gNjAsCj4+PiAgfTsKPj4+ICAKPj4+ICBzdGF0aWMg
+Y29uc3Qgc3RydWN0IHBhbmVsX2Rlc2MgYXVvX2cxMDRzbjAyID0gewo+Pj4gQEAgLTkwNiw3ICs4
+OTcsNiBAQCBzdGF0aWMgY29uc3Qgc3RydWN0IGRybV9kaXNwbGF5X21vZGUgYXVvX3QyMTVodm4w
+MV9tb2RlID0gewo+Pj4gIAkudnN5bmNfc3RhcnQgPSAxMDgwICsgNCwKPj4+ICAJLnZzeW5jX2Vu
+ZCA9IDEwODAgKyA0ICsgNSwKPj4+ICAJLnZ0b3RhbCA9IDEwODAgKyA0ICsgNSArIDM2LAo+Pj4g
+LQkudnJlZnJlc2ggPSA2MCwKPj4+ICB9Owo+Pj4gIAo+Pj4gIHN0YXRpYyBjb25zdCBzdHJ1Y3Qg
+cGFuZWxfZGVzYyBhdW9fdDIxNWh2bjAxID0gewo+Pj4gQEAgLTkzMyw3ICs5MjMsNiBAQCBzdGF0
+aWMgY29uc3Qgc3RydWN0IGRybV9kaXNwbGF5X21vZGUgYXZpY190bTA3MGRkaDAzX21vZGUgPSB7
+Cj4+PiAgCS52c3luY19zdGFydCA9IDYwMCArIDE3LAo+Pj4gIAkudnN5bmNfZW5kID0gNjAwICsg
+MTcgKyAxLAo+Pj4gIAkudnRvdGFsID0gNjAwICsgMTcgKyAxICsgMTcsCj4+PiAtCS52cmVmcmVz
+aCA9IDYwLAo+Pj4gIH07Cj4+PiAgCj4+PiAgc3RhdGljIGNvbnN0IHN0cnVjdCBwYW5lbF9kZXNj
+IGF2aWNfdG0wNzBkZGgwMyA9IHsKPj4+IEBAIC05ODMsNyArOTcyLDYgQEAgc3RhdGljIGNvbnN0
+IHN0cnVjdCBkcm1fZGlzcGxheV9tb2RlIGJvZV9odjA3MHdzYV9tb2RlID0gewo+Pj4gIAkudnN5
+bmNfc3RhcnQgPSA2MDAgKyAxMCwKPj4+ICAJLnZzeW5jX2VuZCA9IDYwMCArIDEwICsgMTAsCj4+
+PiAgCS52dG90YWwgPSA2MDAgKyAxMCArIDEwICsgMTAsCj4+PiAtCS52cmVmcmVzaCA9IDYwLAo+
+Pj4gIH07Cj4+PiAgCj4+PiAgc3RhdGljIGNvbnN0IHN0cnVjdCBwYW5lbF9kZXNjIGJvZV9odjA3
+MHdzYSA9IHsKPj4+IEBAIC0xMDA2LDcgKzk5NCw2IEBAIHN0YXRpYyBjb25zdCBzdHJ1Y3QgZHJt
+X2Rpc3BsYXlfbW9kZSBib2VfbnYxMDF3eG1uNTFfbW9kZXNbXSA9IHsKPj4+ICAJCS52c3luY19z
+dGFydCA9IDgwMCArIDMsCj4+PiAgCQkudnN5bmNfZW5kID0gODAwICsgMyArIDUsCj4+PiAgCQku
+dnRvdGFsID0gODAwICsgMyArIDUgKyAyNCwKPj4+IC0JCS52cmVmcmVzaCA9IDYwLAo+Pj4gIAl9
+LAo+Pj4gIAl7Cj4+PiAgCQkuY2xvY2sgPSA1NzUwMCwKPj4+IEBAIC0xMDE4LDcgKzEwMDUsNiBA
+QCBzdGF0aWMgY29uc3Qgc3RydWN0IGRybV9kaXNwbGF5X21vZGUgYm9lX252MTAxd3htbjUxX21v
+ZGVzW10gPSB7Cj4+PiAgCQkudnN5bmNfc3RhcnQgPSA4MDAgKyAzLAo+Pj4gIAkJLnZzeW5jX2Vu
+ZCA9IDgwMCArIDMgKyA1LAo+Pj4gIAkJLnZ0b3RhbCA9IDgwMCArIDMgKyA1ICsgMjQsCj4+PiAt
+CQkudnJlZnJlc2ggPSA0OCwKPj4+ICAJfSwKPj4+ICB9Owo+Pj4gIAo+Pj4gQEAgLTEwNDgsNyAr
+MTAzNCw2IEBAIHN0YXRpYyBjb25zdCBzdHJ1Y3QgZHJtX2Rpc3BsYXlfbW9kZSBib2VfbnYxNDBm
+aG1uNDlfbW9kZXNbXSA9IHsKPj4+ICAJCS52c3luY19zdGFydCA9IDEwODAgKyAzLAo+Pj4gIAkJ
+LnZzeW5jX2VuZCA9IDEwODAgKyAzICsgNSwKPj4+ICAJCS52dG90YWwgPSAxMTI1LAo+Pj4gLQkJ
+LnZyZWZyZXNoID0gNjAsCj4+PiAgCX0sCj4+PiAgfTsKPj4+ICAKPj4+IEBAIC0xMDc5LDcgKzEw
+NjQsNiBAQCBzdGF0aWMgY29uc3Qgc3RydWN0IGRybV9kaXNwbGF5X21vZGUgY2R0ZWNoX3MwNDN3
+cTI2aF9jdDdfbW9kZSA9IHsKPj4+ICAJLnZzeW5jX3N0YXJ0ID0gMjcyICsgOCwKPj4+ICAJLnZz
+eW5jX2VuZCA9IDI3MiArIDggKyA4LAo+Pj4gIAkudnRvdGFsID0gMjcyICsgOCArIDggKyA4LAo+
+Pj4gLQkudnJlZnJlc2ggPSA2MCwKPj4+ICAJLmZsYWdzID0gRFJNX01PREVfRkxBR19OSFNZTkMg
+fCBEUk1fTU9ERV9GTEFHX05WU1lOQywKPj4+ICB9Owo+Pj4gIAo+Pj4gQEAgLTExMDQsNyArMTA4
+OCw2IEBAIHN0YXRpYyBjb25zdCBzdHJ1Y3QgZHJtX2Rpc3BsYXlfbW9kZSBjZHRlY2hfczA3MHd2
+OTVfY3QxNl9tb2RlID0gewo+Pj4gIAkudnN5bmNfc3RhcnQgPSA0ODAgKyAyOSwKPj4+ICAJLnZz
+eW5jX2VuZCA9IDQ4MCArIDI5ICsgMTMsCj4+PiAgCS52dG90YWwgPSA0ODAgKyAyOSArIDEzICsg
+MywKPj4+IC0JLnZyZWZyZXNoID0gNjAsCj4+PiAgCS5mbGFncyA9IERSTV9NT0RFX0ZMQUdfTkhT
+WU5DIHwgRFJNX01PREVfRkxBR19OVlNZTkMsCj4+PiAgfTsKPj4+ICAKPj4+IEBAIC0xMTI4LDcg
+KzExMTEsNiBAQCBzdGF0aWMgY29uc3Qgc3RydWN0IGRybV9kaXNwbGF5X21vZGUgY2h1bmdod2Ff
+Y2xhYTA3MHdwMDN4Z19tb2RlID0gewo+Pj4gIAkudnN5bmNfc3RhcnQgPSAxMjgwICsgMSwKPj4+
+ICAJLnZzeW5jX2VuZCA9IDEyODAgKyAxICsgNywKPj4+ICAJLnZ0b3RhbCA9IDEyODAgKyAxICsg
+NyArIDE1LAo+Pj4gLQkudnJlZnJlc2ggPSA2MCwKPj4+ICAJLmZsYWdzID0gRFJNX01PREVfRkxB
+R19OVlNZTkMgfCBEUk1fTU9ERV9GTEFHX05IU1lOQywKPj4+ICB9Owo+Pj4gIAo+Pj4gQEAgLTEx
+NTIsNyArMTEzNCw2IEBAIHN0YXRpYyBjb25zdCBzdHJ1Y3QgZHJtX2Rpc3BsYXlfbW9kZSBjaHVu
+Z2h3YV9jbGFhMTAxd2EwMWFfbW9kZSA9IHsKPj4+ICAJLnZzeW5jX3N0YXJ0ID0gNzY4ICsgNCwK
+Pj4+ICAJLnZzeW5jX2VuZCA9IDc2OCArIDQgKyA0LAo+Pj4gIAkudnRvdGFsID0gNzY4ICsgNCAr
+IDQgKyA0LAo+Pj4gLQkudnJlZnJlc2ggPSA2MCwKPj4+ICB9Owo+Pj4gIAo+Pj4gIHN0YXRpYyBj
+b25zdCBzdHJ1Y3QgcGFuZWxfZGVzYyBjaHVuZ2h3YV9jbGFhMTAxd2EwMWEgPSB7Cj4+PiBAQCAt
+MTE3NSw3ICsxMTU2LDYgQEAgc3RhdGljIGNvbnN0IHN0cnVjdCBkcm1fZGlzcGxheV9tb2RlIGNo
+dW5naHdhX2NsYWExMDF3YjAxX21vZGUgPSB7Cj4+PiAgCS52c3luY19zdGFydCA9IDc2OCArIDE2
+LAo+Pj4gIAkudnN5bmNfZW5kID0gNzY4ICsgMTYgKyA4LAo+Pj4gIAkudnRvdGFsID0gNzY4ICsg
+MTYgKyA4ICsgMTYsCj4+PiAtCS52cmVmcmVzaCA9IDYwLAo+Pj4gIH07Cj4+PiAgCj4+PiAgc3Rh
+dGljIGNvbnN0IHN0cnVjdCBwYW5lbF9kZXNjIGNodW5naHdhX2NsYWExMDF3YjAxID0gewo+Pj4g
+QEAgLTExOTgsNyArMTE3OCw2IEBAIHN0YXRpYyBjb25zdCBzdHJ1Y3QgZHJtX2Rpc3BsYXlfbW9k
+ZSBkYXRhaW1hZ2Vfc2NmMDcwMGM0OGdndTE4X21vZGUgPSB7Cj4+PiAgCS52c3luY19zdGFydCA9
+IDQ4MCArIDEwLAo+Pj4gIAkudnN5bmNfZW5kID0gNDgwICsgMTAgKyAyLAo+Pj4gIAkudnRvdGFs
+ID0gNDgwICsgMTAgKyAyICsgMzMsCj4+PiAtCS52cmVmcmVzaCA9IDYwLAo+Pj4gIAkuZmxhZ3Mg
+PSBEUk1fTU9ERV9GTEFHX05WU1lOQyB8IERSTV9NT0RFX0ZMQUdfTkhTWU5DLAo+Pj4gIH07Cj4+
+PiAgCj4+PiBAQCAtMTI4NSw3ICsxMjY0LDYgQEAgc3RhdGljIGNvbnN0IHN0cnVjdCBkcm1fZGlz
+cGxheV9tb2RlIGVkdF9ldDAzNTAxMmRtNl9tb2RlID0gewo+Pj4gIAkudnN5bmNfc3RhcnQgPSAy
+NDAgKyA0LAo+Pj4gIAkudnN5bmNfZW5kID0gMjQwICsgNCArIDQsCj4+PiAgCS52dG90YWwgPSAy
+NDAgKyA0ICsgNCArIDE0LAo+Pj4gLQkudnJlZnJlc2ggPSA2MCwKPj4+ICAJLmZsYWdzID0gRFJN
+X01PREVfRkxBR19OVlNZTkMgfCBEUk1fTU9ERV9GTEFHX05IU1lOQywKPj4+ICB9Owo+Pj4gIAo+
+Pj4gQEAgLTEzMTcsNyArMTI5NSw2IEBAIHN0YXRpYyBjb25zdCBzdHJ1Y3QgZHJtX2Rpc3BsYXlf
+bW9kZSBlZHRfZXRtMDQzMDgwZGg2Z3BfbW9kZSA9IHsKPj4+ICAJLnZzeW5jX3N0YXJ0ID0gMjg4
+ICsgMiwKPj4+ICAJLnZzeW5jX2VuZCA9IDI4OCArIDIgKyA0LAo+Pj4gIAkudnRvdGFsID0gMjg4
+ICsgMiArIDQgKyAxMCwKPj4+IC0JLnZyZWZyZXNoID0gNjAsCj4+PiAgfTsKPj4+ICAKPj4+ICBz
+dGF0aWMgY29uc3Qgc3RydWN0IHBhbmVsX2Rlc2MgZWR0X2V0bTA0MzA4MGRoNmdwID0gewo+Pj4g
+QEAgLTEzNDIsNyArMTMxOSw2IEBAIHN0YXRpYyBjb25zdCBzdHJ1Y3QgZHJtX2Rpc3BsYXlfbW9k
+ZSBlZHRfZXRtMDQzMGcwZGg2X21vZGUgPSB7Cj4+PiAgCS52c3luY19zdGFydCA9IDI3MiArIDIs
+Cj4+PiAgCS52c3luY19lbmQgPSAyNzIgKyAyICsgMTAsCj4+PiAgCS52dG90YWwgPSAyNzIgKyAy
+ICsgMTAgKyAyLAo+Pj4gLQkudnJlZnJlc2ggPSA2MCwKPj4+ICAJLmZsYWdzID0gRFJNX01PREVf
+RkxBR19OSFNZTkMgfCBEUk1fTU9ERV9GTEFHX05WU1lOQywKPj4+ICB9Owo+Pj4gIAo+Pj4gQEAg
+LTEzNjYsNyArMTM0Miw2IEBAIHN0YXRpYyBjb25zdCBzdHJ1Y3QgZHJtX2Rpc3BsYXlfbW9kZSBl
+ZHRfZXQwNTcwOTBkaHVfbW9kZSA9IHsKPj4+ICAJLnZzeW5jX3N0YXJ0ID0gNDgwICsgMTAsCj4+
+PiAgCS52c3luY19lbmQgPSA0ODAgKyAxMCArIDMsCj4+PiAgCS52dG90YWwgPSA0ODAgKyAxMCAr
+IDMgKyAzMiwKPj4+IC0JLnZyZWZyZXNoID0gNjAsCj4+PiAgCS5mbGFncyA9IERSTV9NT0RFX0ZM
+QUdfTlZTWU5DIHwgRFJNX01PREVfRkxBR19OSFNZTkMsCj4+PiAgfTsKPj4+ICAKPj4+IEBAIC0x
+MzkyLDcgKzEzNjcsNiBAQCBzdGF0aWMgY29uc3Qgc3RydWN0IGRybV9kaXNwbGF5X21vZGUgZWR0
+X2V0bTA3MDBnMGRoNl9tb2RlID0gewo+Pj4gIAkudnN5bmNfc3RhcnQgPSA0ODAgKyAxMCwKPj4+
+ICAJLnZzeW5jX2VuZCA9IDQ4MCArIDEwICsgMiwKPj4+ICAJLnZ0b3RhbCA9IDQ4MCArIDEwICsg
+MiArIDMzLAo+Pj4gLQkudnJlZnJlc2ggPSA2MCwKPj4+ICAJLmZsYWdzID0gRFJNX01PREVfRkxB
+R19OSFNZTkMgfCBEUk1fTU9ERV9GTEFHX05WU1lOQywKPj4+ICB9Owo+Pj4gIAo+Pj4gQEAgLTE0
+NTcsNyArMTQzMSw2IEBAIHN0YXRpYyBjb25zdCBzdHJ1Y3QgZHJtX2Rpc3BsYXlfbW9kZSBmb3hs
+aW5rX2ZsNTAwd3ZyMDBfYTB0X21vZGUgPSB7Cj4+PiAgCS52c3luY19zdGFydCA9IDQ4MCArIDM3
+LAo+Pj4gIAkudnN5bmNfZW5kID0gNDgwICsgMzcgKyAyLAo+Pj4gIAkudnRvdGFsID0gNDgwICsg
+MzcgKyAyICsgOCwKPj4+IC0JLnZyZWZyZXNoID0gNjAsCj4+PiAgfTsKPj4+ICAKPj4+ICBzdGF0
+aWMgY29uc3Qgc3RydWN0IHBhbmVsX2Rlc2MgZm94bGlua19mbDUwMHd2cjAwX2EwdCA9IHsKPj4+
+IEBAIC0xNDgxLDcgKzE0NTQsNiBAQCBzdGF0aWMgY29uc3Qgc3RydWN0IGRybV9kaXNwbGF5X21v
+ZGUgZnJpZGFfZnJkMzUwaDU0MDA0X21vZGUgPSB7Cj4+PiAgCS52c3luY19zdGFydCA9IDI0MCAr
+IDIsCj4+PiAgCS52c3luY19lbmQgPSAyNDAgKyAyICsgNiwKPj4+ICAJLnZ0b3RhbCA9IDI0MCAr
+IDIgKyA2ICsgMiwKPj4+IC0JLnZyZWZyZXNoID0gNjAsCj4+PiAgCS5mbGFncyA9IERSTV9NT0RF
+X0ZMQUdfUEhTWU5DIHwgRFJNX01PREVfRkxBR19QVlNZTkMsCj4+PiAgfTsKPj4+ICAKPj4+IEBA
+IC0xNTA4LDcgKzE0ODAsNiBAQCBzdGF0aWMgY29uc3Qgc3RydWN0IGRybV9kaXNwbGF5X21vZGUg
+ZnJpZW5kbHlhcm1faGQ3MDJlX21vZGUgPSB7Cj4+PiAgCS52c3luY19zdGFydAk9IDEyODAgKyA0
+LAo+Pj4gIAkudnN5bmNfZW5kCT0gMTI4MCArIDQgKyA4LAo+Pj4gIAkudnRvdGFsCQk9IDEyODAg
+KyA0ICsgOCArIDQsCj4+PiAtCS52cmVmcmVzaAk9IDYwLAo+Pj4gIAkuZmxhZ3MJCT0gRFJNX01P
+REVfRkxBR19OVlNZTkMgfCBEUk1fTU9ERV9GTEFHX05IU1lOQywKPj4+ICB9Owo+Pj4gIAo+Pj4g
+QEAgLTE1MzEsNyArMTUwMiw2IEBAIHN0YXRpYyBjb25zdCBzdHJ1Y3QgZHJtX2Rpc3BsYXlfbW9k
+ZSBnaWFudHBsdXNfZ3BnNDgyNzM5cXM1X21vZGUgPSB7Cj4+PiAgCS52c3luY19zdGFydCA9IDI3
+MiArIDgsCj4+PiAgCS52c3luY19lbmQgPSAyNzIgKyA4ICsgMSwKPj4+ICAJLnZ0b3RhbCA9IDI3
+MiArIDggKyAxICsgOCwKPj4+IC0JLnZyZWZyZXNoID0gNjAsCj4+PiAgfTsKPj4+ICAKPj4+ICBz
+dGF0aWMgY29uc3Qgc3RydWN0IHBhbmVsX2Rlc2MgZ2lhbnRwbHVzX2dwZzQ4MjczOXFzNSA9IHsK
+Pj4+IEBAIC0xNjM1LDcgKzE2MDUsNiBAQCBzdGF0aWMgY29uc3Qgc3RydWN0IGRybV9kaXNwbGF5
+X21vZGUgaGl0YWNoaV90eDIzZDM4dm0wY2FhX21vZGUgPSB7Cj4+PiAgCS52c3luY19zdGFydCA9
+IDQ4MCArIDE2LAo+Pj4gIAkudnN5bmNfZW5kID0gNDgwICsgMTYgKyAxMywKPj4+ICAJLnZ0b3Rh
+bCA9IDQ4MCArIDE2ICsgMTMgKyAxNiwKPj4+IC0JLnZyZWZyZXNoID0gNjAsCj4+PiAgfTsKPj4+
+ICAKPj4+ICBzdGF0aWMgY29uc3Qgc3RydWN0IHBhbmVsX2Rlc2MgaGl0YWNoaV90eDIzZDM4dm0w
+Y2FhID0gewo+Pj4gQEAgLTE2NjIsNyArMTYzMSw2IEBAIHN0YXRpYyBjb25zdCBzdHJ1Y3QgZHJt
+X2Rpc3BsYXlfbW9kZSBpbm5vbHV4X2F0MDQzdG4yNF9tb2RlID0gewo+Pj4gIAkudnN5bmNfc3Rh
+cnQgPSAyNzIgKyAyLAo+Pj4gIAkudnN5bmNfZW5kID0gMjcyICsgMiArIDEwLAo+Pj4gIAkudnRv
+dGFsID0gMjcyICsgMiArIDEwICsgMiwKPj4+IC0JLnZyZWZyZXNoID0gNjAsCj4+PiAgCS5mbGFn
+cyA9IERSTV9NT0RFX0ZMQUdfTkhTWU5DIHwgRFJNX01PREVfRkxBR19OVlNZTkMsCj4+PiAgfTsK
+Pj4+ICAKPj4+IEBAIC0xNjg4LDcgKzE2NTYsNiBAQCBzdGF0aWMgY29uc3Qgc3RydWN0IGRybV9k
+aXNwbGF5X21vZGUgaW5ub2x1eF9hdDA3MHRuOTJfbW9kZSA9IHsKPj4+ICAJLnZzeW5jX3N0YXJ0
+ID0gNDgwICsgMjIsCj4+PiAgCS52c3luY19lbmQgPSA0ODAgKyAyMiArIDEwLAo+Pj4gIAkudnRv
+dGFsID0gNDgwICsgMjIgKyAyMyArIDEwLAo+Pj4gLQkudnJlZnJlc2ggPSA2MCwKPj4+ICB9Owo+
+Pj4gIAo+Pj4gIHN0YXRpYyBjb25zdCBzdHJ1Y3QgcGFuZWxfZGVzYyBpbm5vbHV4X2F0MDcwdG45
+MiA9IHsKPj4+IEBAIC0xNzk5LDcgKzE3NjYsNiBAQCBzdGF0aWMgY29uc3Qgc3RydWN0IGRybV9k
+aXNwbGF5X21vZGUgaW5ub2x1eF9nMTIxeDFfbDAzX21vZGUgPSB7Cj4+PiAgCS52c3luY19zdGFy
+dCA9IDc2OCArIDM4LAo+Pj4gIAkudnN5bmNfZW5kID0gNzY4ICsgMzggKyAxLAo+Pj4gIAkudnRv
+dGFsID0gNzY4ICsgMzggKyAxICsgMCwKPj4+IC0JLnZyZWZyZXNoID0gNjAsCj4+PiAgCS5mbGFn
+cyA9IERSTV9NT0RFX0ZMQUdfTkhTWU5DIHwgRFJNX01PREVfRkxBR19OVlNZTkMsCj4+PiAgfTsK
+Pj4+ICAKPj4+IEBAIC0xODYxLDcgKzE4MjcsNiBAQCBzdGF0aWMgY29uc3Qgc3RydWN0IGRybV9k
+aXNwbGF5X21vZGUgaW5ub2x1eF9uMTU2YmdlX2wyMV9tb2RlID0gewo+Pj4gIAkudnN5bmNfc3Rh
+cnQgPSA3NjggKyAyLAo+Pj4gIAkudnN5bmNfZW5kID0gNzY4ICsgMiArIDYsCj4+PiAgCS52dG90
+YWwgPSA3NjggKyAyICsgNiArIDEyLAo+Pj4gLQkudnJlZnJlc2ggPSA2MCwKPj4+ICB9Owo+Pj4g
+IAo+Pj4gIHN0YXRpYyBjb25zdCBzdHJ1Y3QgcGFuZWxfZGVzYyBpbm5vbHV4X24xNTZiZ2VfbDIx
+ID0gewo+Pj4gQEAgLTE4ODQsNyArMTg0OSw2IEBAIHN0YXRpYyBjb25zdCBzdHJ1Y3QgZHJtX2Rp
+c3BsYXlfbW9kZSBpbm5vbHV4X3AxMjB6ZGdfYmYxX21vZGUgPSB7Cj4+PiAgCS52c3luY19zdGFy
+dCA9IDE0NDAgKyAzLAo+Pj4gIAkudnN5bmNfZW5kID0gMTQ0MCArIDMgKyAxMCwKPj4+ICAJLnZ0
+b3RhbCA9IDE0NDAgKyAzICsgMTAgKyAyNywKPj4+IC0JLnZyZWZyZXNoID0gNjAsCj4+PiAgCS5m
+bGFncyA9IERSTV9NT0RFX0ZMQUdfUEhTWU5DIHwgRFJNX01PREVfRkxBR19QVlNZTkMsCj4+PiAg
+fTsKPj4+ICAKPj4+IEBAIC0xOTEyLDcgKzE4NzYsNiBAQCBzdGF0aWMgY29uc3Qgc3RydWN0IGRy
+bV9kaXNwbGF5X21vZGUgaW5ub2x1eF96ajA3MG5hXzAxcF9tb2RlID0gewo+Pj4gIAkudnN5bmNf
+c3RhcnQgPSA2MDAgKyAxNiwKPj4+ICAJLnZzeW5jX2VuZCA9IDYwMCArIDE2ICsgNCwKPj4+ICAJ
+LnZ0b3RhbCA9IDYwMCArIDE2ICsgNCArIDE2LAo+Pj4gLQkudnJlZnJlc2ggPSA2MCwKPj4+ICB9
+Owo+Pj4gIAo+Pj4gIHN0YXRpYyBjb25zdCBzdHJ1Y3QgcGFuZWxfZGVzYyBpbm5vbHV4X3pqMDcw
+bmFfMDFwID0gewo+Pj4gQEAgLTIwMDgsNyArMTk3MSw2IEBAIHN0YXRpYyBjb25zdCBzdHJ1Y3Qg
+ZHJtX2Rpc3BsYXlfbW9kZSBsZW1ha2VyX2JsMDM1X3JnYl8wMDJfbW9kZSA9IHsKPj4+ICAJLnZz
+eW5jX3N0YXJ0ID0gMjQwICsgNCwKPj4+ICAJLnZzeW5jX2VuZCA9IDI0MCArIDQgKyAzLAo+Pj4g
+IAkudnRvdGFsID0gMjQwICsgNCArIDMgKyAxNSwKPj4+IC0JLnZyZWZyZXNoID0gNjAsCj4+PiAg
+fTsKPj4+ICAKPj4+ICBzdGF0aWMgY29uc3Qgc3RydWN0IHBhbmVsX2Rlc2MgbGVtYWtlcl9ibDAz
+NV9yZ2JfMDAyID0gewo+Pj4gQEAgLTIwMzIsNyArMTk5NCw2IEBAIHN0YXRpYyBjb25zdCBzdHJ1
+Y3QgZHJtX2Rpc3BsYXlfbW9kZSBsZ19sYjA3MHd2OF9tb2RlID0gewo+Pj4gIAkudnN5bmNfc3Rh
+cnQgPSA0ODAgKyAxMCwKPj4+ICAJLnZzeW5jX2VuZCA9IDQ4MCArIDEwICsgMjUsCj4+PiAgCS52
+dG90YWwgPSA0ODAgKyAxMCArIDI1ICsgMTAsCj4+PiAtCS52cmVmcmVzaCA9IDYwLAo+Pj4gIH07
+Cj4+PiAgCj4+PiAgc3RhdGljIGNvbnN0IHN0cnVjdCBwYW5lbF9kZXNjIGxnX2xiMDcwd3Y4ID0g
+ewo+Pj4gQEAgLTIwNTcsNyArMjAxOCw2IEBAIHN0YXRpYyBjb25zdCBzdHJ1Y3QgZHJtX2Rpc3Bs
+YXlfbW9kZSBsZ19scDA3OXF4MV9zcDB2X21vZGUgPSB7Cj4+PiAgCS52c3luY19zdGFydCA9IDIw
+NDggKyA4LAo+Pj4gIAkudnN5bmNfZW5kID0gMjA0OCArIDggKyA0LAo+Pj4gIAkudnRvdGFsID0g
+MjA0OCArIDggKyA0ICsgOCwKPj4+IC0JLnZyZWZyZXNoID0gNjAsCj4+PiAgCS5mbGFncyA9IERS
+TV9NT0RFX0ZMQUdfTlZTWU5DIHwgRFJNX01PREVfRkxBR19OSFNZTkMsCj4+PiAgfTsKPj4+ICAK
+Pj4+IEBAIC0yMDgwLDcgKzIwNDAsNiBAQCBzdGF0aWMgY29uc3Qgc3RydWN0IGRybV9kaXNwbGF5
+X21vZGUgbGdfbHAwOTdxeDFfc3BhMV9tb2RlID0gewo+Pj4gIAkudnN5bmNfc3RhcnQgPSAxNTM2
+ICsgMywKPj4+ICAJLnZzeW5jX2VuZCA9IDE1MzYgKyAzICsgMSwKPj4+ICAJLnZ0b3RhbCA9IDE1
+MzYgKyAzICsgMSArIDksCj4+PiAtCS52cmVmcmVzaCA9IDYwLAo+Pj4gIH07Cj4+PiAgCj4+PiAg
+c3RhdGljIGNvbnN0IHN0cnVjdCBwYW5lbF9kZXNjIGxnX2xwMDk3cXgxX3NwYTEgPSB7Cj4+PiBA
+QCAtMjEwMiw3ICsyMDYxLDYgQEAgc3RhdGljIGNvbnN0IHN0cnVjdCBkcm1fZGlzcGxheV9tb2Rl
+IGxnX2xwMTIwdXAxX21vZGUgPSB7Cj4+PiAgCS52c3luY19zdGFydCA9IDEyODAgKyA0LAo+Pj4g
+IAkudnN5bmNfZW5kID0gMTI4MCArIDQgKyA0LAo+Pj4gIAkudnRvdGFsID0gMTI4MCArIDQgKyA0
+ICsgMTIsCj4+PiAtCS52cmVmcmVzaCA9IDYwLAo+Pj4gIH07Cj4+PiAgCj4+PiAgc3RhdGljIGNv
+bnN0IHN0cnVjdCBwYW5lbF9kZXNjIGxnX2xwMTIwdXAxID0gewo+Pj4gQEAgLTIxMjUsNyArMjA4
+Myw2IEBAIHN0YXRpYyBjb25zdCBzdHJ1Y3QgZHJtX2Rpc3BsYXlfbW9kZSBsZ19scDEyOXFlX21v
+ZGUgPSB7Cj4+PiAgCS52c3luY19zdGFydCA9IDE3MDAgKyAzLAo+Pj4gIAkudnN5bmNfZW5kID0g
+MTcwMCArIDMgKyAxMCwKPj4+ICAJLnZ0b3RhbCA9IDE3MDAgKyAzICsgMTAgKyAzNiwKPj4+IC0J
+LnZyZWZyZXNoID0gNjAsCj4+PiAgfTsKPj4+ICAKPj4+ICBzdGF0aWMgY29uc3Qgc3RydWN0IHBh
+bmVsX2Rlc2MgbGdfbHAxMjlxZSA9IHsKPj4+IEBAIC0yMjA2LDcgKzIxNjMsNiBAQCBzdGF0aWMg
+Y29uc3Qgc3RydWN0IGRybV9kaXNwbGF5X21vZGUgbWl0c3ViaXNoaV9hYTA3MG1jMDFfbW9kZSA9
+IHsKPj4+ICAJLnZzeW5jX3N0YXJ0ID0gNDgwICsgMCwKPj4+ICAJLnZzeW5jX2VuZCA9IDQ4MCAr
+IDQ4ICsgMSwKPj4+ICAJLnZ0b3RhbCA9IDQ4MCArIDQ4ICsgMSArIDAsCj4+PiAtCS52cmVmcmVz
+aCA9IDYwLAo+Pj4gIAkuZmxhZ3MgPSBEUk1fTU9ERV9GTEFHX05IU1lOQyB8IERSTV9NT0RFX0ZM
+QUdfTlZTWU5DLAo+Pj4gIH07Cj4+PiAgCj4+PiBAQCAtMjIyMSw3ICsyMTc3LDYgQEAgc3RhdGlj
+IGNvbnN0IHN0cnVjdCBkcm1fZGlzcGxheV9tb2RlIGxvZ2ljcGRfdHlwZV8yOF9tb2RlID0gewo+
+Pj4gIAkudnN5bmNfc3RhcnQgPSAyNzIgKyAyLAo+Pj4gIAkudnN5bmNfZW5kID0gMjcyICsgMiAr
+IDExLAo+Pj4gIAkudnRvdGFsID0gMjcyICsgMiArIDExICsgMywKPj4+IC0JLnZyZWZyZXNoID0g
+NjAsCj4+PiAgCS5mbGFncyA9IERSTV9NT0RFX0ZMQUdfUEhTWU5DIHwgRFJNX01PREVfRkxBR19Q
+VlNZTkMsCj4+PiAgfTsKPj4+ICAKPj4+IEBAIC0yMzAxLDcgKzIyNTYsNiBAQCBzdGF0aWMgY29u
+c3Qgc3RydWN0IGRybV9kaXNwbGF5X21vZGUgbmVjX25sNDgyN2hjMTlfMDViX21vZGUgPSB7Cj4+
+PiAgCS52c3luY19zdGFydCA9IDI3MiArIDIsCj4+PiAgCS52c3luY19lbmQgPSAyNzIgKyAyICsg
+NCwKPj4+ICAJLnZ0b3RhbCA9IDI3MiArIDIgKyA0ICsgMiwKPj4+IC0JLnZyZWZyZXNoID0gNzQs
+Cj4+PiAgCS5mbGFncyA9IERSTV9NT0RFX0ZMQUdfTlZTWU5DIHwgRFJNX01PREVfRkxBR19OSFNZ
+TkMsCj4+PiAgfTsKPj4+ICAKPj4+IEBAIC0yMzI3LDcgKzIyODEsNiBAQCBzdGF0aWMgY29uc3Qg
+c3RydWN0IGRybV9kaXNwbGF5X21vZGUgbmV0cm9uX2R5X2UyMzE3MzJfbW9kZSA9IHsKPj4+ICAJ
+LnZzeW5jX3N0YXJ0ID0gNjAwICsgMTI3LAo+Pj4gIAkudnN5bmNfZW5kID0gNjAwICsgMTI3ICsg
+MjAsCj4+PiAgCS52dG90YWwgPSA2MDAgKyAxMjcgKyAyMCArIDMsCj4+PiAtCS52cmVmcmVzaCA9
+IDYwLAo+Pj4gIH07Cj4+PiAgCj4+PiAgc3RhdGljIGNvbnN0IHN0cnVjdCBwYW5lbF9kZXNjIG5l
+dHJvbl9keV9lMjMxNzMyID0gewo+Pj4gQEAgLTIzNTAsNyArMjMwMyw2IEBAIHN0YXRpYyBjb25z
+dCBzdHJ1Y3QgZHJtX2Rpc3BsYXlfbW9kZSBuZXdoYXZlbl9uaGRfNDNfNDgwMjcyZWZfYXR4bF9t
+b2RlID0gewo+Pj4gIAkudnN5bmNfc3RhcnQgPSAyNzIgKyAyLAo+Pj4gIAkudnN5bmNfZW5kID0g
+MjcyICsgMiArIDEwLAo+Pj4gIAkudnRvdGFsID0gMjcyICsgMiArIDEwICsgMiwKPj4+IC0JLnZy
+ZWZyZXNoID0gNjAsCj4+PiAgCS5mbGFncyA9IERSTV9NT0RFX0ZMQUdfTlZTWU5DIHwgRFJNX01P
+REVfRkxBR19OSFNZTkMsCj4+PiAgfTsKPj4+ICAKPj4+IEBAIC0yNDU4LDcgKzI0MTAsNiBAQCBz
+dGF0aWMgY29uc3Qgc3RydWN0IGRybV9kaXNwbGF5X21vZGUgb2xpbWV4X2xjZF9vbGludXhpbm9f
+NDN0c19tb2RlID0gewo+Pj4gIAkudnN5bmNfc3RhcnQgPSAyNzIgKyA4LAo+Pj4gIAkudnN5bmNf
+ZW5kID0gMjcyICsgOCArIDUsCj4+PiAgCS52dG90YWwgPSAyNzIgKyA4ICsgNSArIDMsCj4+PiAt
+CS52cmVmcmVzaCA9IDYwLAo+Pj4gIH07Cj4+PiAgCj4+PiAgc3RhdGljIGNvbnN0IHN0cnVjdCBw
+YW5lbF9kZXNjIG9saW1leF9sY2Rfb2xpbnV4aW5vXzQzdHMgPSB7Cj4+PiBAQCAtMjQ4Niw3ICsy
+NDM3LDYgQEAgc3RhdGljIGNvbnN0IHN0cnVjdCBkcm1fZGlzcGxheV9tb2RlIG9udGF0X3l4NzAw
+d3YwM19tb2RlID0gewo+Pj4gIAkudnN5bmNfc3RhcnQgPSA0ODMsCj4+PiAgCS52c3luY19lbmQg
+PSA0OTMsCj4+PiAgCS52dG90YWwgPSA1MDAsCj4+PiAtCS52cmVmcmVzaCA9IDYwLAo+Pj4gIAku
+ZmxhZ3MgPSBEUk1fTU9ERV9GTEFHX05WU1lOQyB8IERSTV9NT0RFX0ZMQUdfTkhTWU5DLAo+Pj4g
+IH07Cj4+PiAgCj4+PiBAQCAtMjUxNSw3ICsyNDY1LDYgQEAgc3RhdGljIGNvbnN0IHN0cnVjdCBk
+cm1fZGlzcGxheV9tb2RlIG9ydHVzdGVjaF9jb20zN2gzbV9tb2RlICA9IHsKPj4+ICAJLnZzeW5j
+X3N0YXJ0ID0gNjQwICsgNCwKPj4+ICAJLnZzeW5jX2VuZCA9IDY0MCArIDQgKyAzLAo+Pj4gIAku
+dnRvdGFsID0gNjQwICsgNCArIDMgKyA0LAo+Pj4gLQkudnJlZnJlc2ggPSA2MCwKPj4+ICAJLmZs
+YWdzID0gRFJNX01PREVfRkxBR19OVlNZTkMgfCBEUk1fTU9ERV9GTEFHX05IU1lOQywKPj4+ICB9
+Owo+Pj4gIAo+Pj4gQEAgLTI1NDIsNyArMjQ5MSw2IEBAIHN0YXRpYyBjb25zdCBzdHJ1Y3QgZHJt
+X2Rpc3BsYXlfbW9kZSBvcnR1c3RlY2hfY29tNDNoNG04NXVsY19tb2RlICA9IHsKPj4+ICAJLnZz
+eW5jX3N0YXJ0ID0gODAwICsgMywKPj4+ICAJLnZzeW5jX2VuZCA9IDgwMCArIDMgKyAzLAo+Pj4g
+IAkudnRvdGFsID0gODAwICsgMyArIDMgKyAzLAo+Pj4gLQkudnJlZnJlc2ggPSA2MCwKPj4+ICB9
+Owo+Pj4gIAo+Pj4gIHN0YXRpYyBjb25zdCBzdHJ1Y3QgcGFuZWxfZGVzYyBvcnR1c3RlY2hfY29t
+NDNoNG04NXVsYyA9IHsKPj4+IEBAIC0yNTY3LDcgKzI1MTUsNiBAQCBzdGF0aWMgY29uc3Qgc3Ry
+dWN0IGRybV9kaXNwbGF5X21vZGUgb3NkZGlzcGxheXNfb3NkMDcwdDE3MThfMTl0c19tb2RlICA9
+IHsKPj4+ICAJLnZzeW5jX3N0YXJ0ID0gNDgwICsgMjIsCj4+PiAgCS52c3luY19lbmQgPSA0ODAg
+KyAyMiArIDEzLAo+Pj4gIAkudnRvdGFsID0gNDgwICsgMjIgKyAxMyArIDEwLAo+Pj4gLQkudnJl
+ZnJlc2ggPSA2MCwKPj4+ICAJLmZsYWdzID0gRFJNX01PREVfRkxBR19OVlNZTkMgfCBEUk1fTU9E
+RV9GTEFHX05IU1lOQywKPj4+ICB9Owo+Pj4gIAo+Pj4gQEAgLTI1OTQsNyArMjU0MSw2IEBAIHN0
+YXRpYyBjb25zdCBzdHJ1Y3QgZHJtX2Rpc3BsYXlfbW9kZSBwZGFfOTFfMDAxNTZfYTBfbW9kZSA9
+IHsKPj4+ICAJLnZzeW5jX3N0YXJ0ID0gNDgwICsgMSwKPj4+ICAJLnZzeW5jX2VuZCA9IDQ4MCAr
+IDEgKyAyMywKPj4+ICAJLnZ0b3RhbCA9IDQ4MCArIDEgKyAyMyArIDIyLAo+Pj4gLQkudnJlZnJl
+c2ggPSA2MCwKPj4+ICB9Owo+Pj4gIAo+Pj4gIHN0YXRpYyBjb25zdCBzdHJ1Y3QgcGFuZWxfZGVz
+YyBwZGFfOTFfMDAxNTZfYTAgID0gewo+Pj4gQEAgLTI2MTgsNyArMjU2NCw2IEBAIHN0YXRpYyBj
+b25zdCBzdHJ1Y3QgZHJtX2Rpc3BsYXlfbW9kZSBxZDQzMDAzYzBfNDBfbW9kZSA9IHsKPj4+ICAJ
+LnZzeW5jX3N0YXJ0ID0gMjcyICsgNCwKPj4+ICAJLnZzeW5jX2VuZCA9IDI3MiArIDQgKyAxMCwK
+Pj4+ICAJLnZ0b3RhbCA9IDI3MiArIDQgKyAxMCArIDIsCj4+PiAtCS52cmVmcmVzaCA9IDYwLAo+
+Pj4gIH07Cj4+PiAgCj4+PiAgc3RhdGljIGNvbnN0IHN0cnVjdCBwYW5lbF9kZXNjIHFkNDMwMDNj
+MF80MCA9IHsKPj4+IEBAIC0yNjcyLDcgKzI2MTcsNiBAQCBzdGF0aWMgY29uc3Qgc3RydWN0IGRy
+bV9kaXNwbGF5X21vZGUgcm9ja3RlY2hfcmsxMDFpaTAxZF9jdF9tb2RlID0gewo+Pj4gIAkudnN5
+bmNfc3RhcnQgPSA4MDAgKyAyLAo+Pj4gIAkudnN5bmNfZW5kID0gODAwICsgMiArIDUsCj4+PiAg
+CS52dG90YWwgPSA4MDAgKyAyICsgNSArIDE2LAo+Pj4gLQkudnJlZnJlc2ggPSA2MCwKPj4+ICB9
+Owo+Pj4gIAo+Pj4gIHN0YXRpYyBjb25zdCBzdHJ1Y3QgcGFuZWxfZGVzYyByb2NrdGVjaF9yazEw
+MWlpMDFkX2N0ID0gewo+Pj4gQEAgLTI3MDEsNyArMjY0NSw2IEBAIHN0YXRpYyBjb25zdCBzdHJ1
+Y3QgZHJtX2Rpc3BsYXlfbW9kZSBzYW1zdW5nX2xzbjEyMmRsMDFfYzAxX21vZGUgPSB7Cj4+PiAg
+CS52c3luY19zdGFydCA9IDE2MDAgKyAyLAo+Pj4gIAkudnN5bmNfZW5kID0gMTYwMCArIDIgKyA1
+LAo+Pj4gIAkudnRvdGFsID0gMTYwMCArIDIgKyA1ICsgNTcsCj4+PiAtCS52cmVmcmVzaCA9IDYw
+LAo+Pj4gIH07Cj4+PiAgCj4+PiAgc3RhdGljIGNvbnN0IHN0cnVjdCBwYW5lbF9kZXNjIHNhbXN1
+bmdfbHNuMTIyZGwwMV9jMDEgPSB7Cj4+PiBAQCAtMjcyMyw3ICsyNjY2LDYgQEAgc3RhdGljIGNv
+bnN0IHN0cnVjdCBkcm1fZGlzcGxheV9tb2RlIHNhbXN1bmdfbHRuMTAxbnQwNV9tb2RlID0gewo+
+Pj4gIAkudnN5bmNfc3RhcnQgPSA2MDAgKyAzLAo+Pj4gIAkudnN5bmNfZW5kID0gNjAwICsgMyAr
+IDYsCj4+PiAgCS52dG90YWwgPSA2MDAgKyAzICsgNiArIDYxLAo+Pj4gLQkudnJlZnJlc2ggPSA2
+MCwKPj4+ICB9Owo+Pj4gIAo+Pj4gIHN0YXRpYyBjb25zdCBzdHJ1Y3QgcGFuZWxfZGVzYyBzYW1z
+dW5nX2x0bjEwMW50MDUgPSB7Cj4+PiBAQCAtMjc0Niw3ICsyNjg4LDYgQEAgc3RhdGljIGNvbnN0
+IHN0cnVjdCBkcm1fZGlzcGxheV9tb2RlIHNhbXN1bmdfbHRuMTQwYXQyOV8zMDFfbW9kZSA9IHsK
+Pj4+ICAJLnZzeW5jX3N0YXJ0ID0gNzY4ICsgMiwKPj4+ICAJLnZzeW5jX2VuZCA9IDc2OCArIDIg
+KyA1LAo+Pj4gIAkudnRvdGFsID0gNzY4ICsgMiArIDUgKyAxNywKPj4+IC0JLnZyZWZyZXNoID0g
+NjAsCj4+PiAgfTsKPj4+ICAKPj4+ICBzdGF0aWMgY29uc3Qgc3RydWN0IHBhbmVsX2Rlc2Mgc2Ft
+c3VuZ19sdG4xNDBhdDI5XzMwMSA9IHsKPj4+IEBAIC0yNzkzLDcgKzI3MzQsNiBAQCBzdGF0aWMg
+Y29uc3Qgc3RydWN0IGRybV9kaXNwbGF5X21vZGUgc2hhcnBfbGRfZDUxMTZ6MDFiX21vZGUgPSB7
+Cj4+PiAgCS52c3luY19zdGFydCA9IDEyODAgKyAzLAo+Pj4gIAkudnN5bmNfZW5kID0gMTI4MCAr
+IDMgKyAxMCwKPj4+ICAJLnZ0b3RhbCA9IDEyODAgKyAzICsgMTAgKyA1NywKPj4+IC0JLnZyZWZy
+ZXNoID0gNjAsCj4+PiAgCS5mbGFncyA9IERSTV9NT0RFX0ZMQUdfUEhTWU5DIHwgRFJNX01PREVf
+RkxBR19QVlNZTkMsCj4+PiAgfTsKPj4+ICAKPj4+IEBAIC0yODE5LDcgKzI3NTksNiBAQCBzdGF0
+aWMgY29uc3Qgc3RydWN0IGRybV9kaXNwbGF5X21vZGUgc2hhcnBfbHEwNzB5M2RnM2JfbW9kZSA9
+IHsKPj4+ICAJLnZzeW5jX3N0YXJ0ID0gNDgwICsgOCwKPj4+ICAJLnZzeW5jX2VuZCA9IDQ4MCAr
+IDggKyAyLAo+Pj4gIAkudnRvdGFsID0gNDgwICsgOCArIDIgKyAzNSwKPj4+IC0JLnZyZWZyZXNo
+ID0gNjAsCj4+PiAgCS5mbGFncyA9IERJU1BMQVlfRkxBR1NfUElYREFUQV9QT1NFREdFLAo+Pj4g
+IH07Cj4+PiAgCj4+PiBAQCAtMjg0Niw3ICsyNzg1LDYgQEAgc3RhdGljIGNvbnN0IHN0cnVjdCBk
+cm1fZGlzcGxheV9tb2RlIHNoYXJwX2xxMDM1cTdkYjAzX21vZGUgPSB7Cj4+PiAgCS52c3luY19z
+dGFydCA9IDMyMCArIDksCj4+PiAgCS52c3luY19lbmQgPSAzMjAgKyA5ICsgMSwKPj4+ICAJLnZ0
+b3RhbCA9IDMyMCArIDkgKyAxICsgNywKPj4+IC0JLnZyZWZyZXNoID0gNjAsCj4+PiAgfTsKPj4+
+ICAKPj4+ICBzdGF0aWMgY29uc3Qgc3RydWN0IHBhbmVsX2Rlc2Mgc2hhcnBfbHEwMzVxN2RiMDMg
+PSB7Cj4+PiBAQCAtMjkyMyw3ICsyODYxLDYgQEAgc3RhdGljIGNvbnN0IHN0cnVjdCBkcm1fZGlz
+cGxheV9tb2RlIHNoYXJwX2xxMTUweDFsZzExX21vZGUgPSB7Cj4+PiAgCS52c3luY19zdGFydCA9
+IDc2OCArIDM3LAo+Pj4gIAkudnN5bmNfZW5kID0gNzY4ICsgMzcgKyAyLAo+Pj4gIAkudnRvdGFs
+ID0gNzY4ICsgMzcgKyAyICsgOCwKPj4+IC0JLnZyZWZyZXNoID0gNjAsCj4+PiAgfTsKPj4+ICAK
+Pj4+ICBzdGF0aWMgY29uc3Qgc3RydWN0IHBhbmVsX2Rlc2Mgc2hhcnBfbHExNTB4MWxnMTEgPSB7
+Cj4+PiBAQCAtMjk3NCw3ICsyOTExLDYgQEAgc3RhdGljIGNvbnN0IHN0cnVjdCBkcm1fZGlzcGxh
+eV9tb2RlIHNoZWxseV9zY2EwNzAxMF9iZm5fbG5uX21vZGUgPSB7Cj4+PiAgCS52c3luY19zdGFy
+dCA9IDQ4MCArIDEsCj4+PiAgCS52c3luY19lbmQgPSA0ODAgKyAxICsgMjMsCj4+PiAgCS52dG90
+YWwgPSA0ODAgKyAxICsgMjMgKyAyMiwKPj4+IC0JLnZyZWZyZXNoID0gNjAsCj4+PiAgfTsKPj4+
+ICAKPj4+ICBzdGF0aWMgY29uc3Qgc3RydWN0IHBhbmVsX2Rlc2Mgc2hlbGx5X3NjYTA3MDEwX2Jm
+bl9sbm4gPSB7Cj4+PiBAQCAtMjk5Nyw3ICsyOTMzLDYgQEAgc3RhdGljIGNvbnN0IHN0cnVjdCBk
+cm1fZGlzcGxheV9tb2RlIHN0YXJyeV9rcjEyMmVhMHNyYV9tb2RlID0gewo+Pj4gIAkudnN5bmNf
+c3RhcnQgPSAxMjAwICsgMTUsCj4+PiAgCS52c3luY19lbmQgPSAxMjAwICsgMTUgKyAyLAo+Pj4g
+IAkudnRvdGFsID0gMTIwMCArIDE1ICsgMiArIDE4LAo+Pj4gLQkudnJlZnJlc2ggPSA2MCwKPj4+
+ICAJLmZsYWdzID0gRFJNX01PREVfRkxBR19OVlNZTkMgfCBEUk1fTU9ERV9GTEFHX05IU1lOQywK
+Pj4+ICB9Owo+Pj4gIAo+Pj4gQEAgLTMwMjUsNyArMjk2MCw2IEBAIHN0YXRpYyBjb25zdCBzdHJ1
+Y3QgZHJtX2Rpc3BsYXlfbW9kZSB0ZmNfczk3MDBydHd2NDN0cl8wMWJfbW9kZSA9IHsKPj4+ICAJ
+LnZzeW5jX3N0YXJ0ID0gNDgwICsgMTMsCj4+PiAgCS52c3luY19lbmQgPSA0ODAgKyAxMyArIDIs
+Cj4+PiAgCS52dG90YWwgPSA0ODAgKyAxMyArIDIgKyAyOSwKPj4+IC0JLnZyZWZyZXNoID0gNjIs
+Cj4+PiAgfTsKPj4+ICAKPj4+ICBzdGF0aWMgY29uc3Qgc3RydWN0IHBhbmVsX2Rlc2MgdGZjX3M5
+NzAwcnR3djQzdHJfMDFiID0gewo+Pj4gQEAgLTMxMDEsNyArMzAzNSw2IEBAIHN0YXRpYyBjb25z
+dCBzdHJ1Y3QgZHJtX2Rpc3BsYXlfbW9kZSB0aV9uc3BpcmVfY3hfbGNkX21vZGVbXSA9IHsKPj4+
+ICAJCS52c3luY19zdGFydCA9IDI0MCArIDMsCj4+PiAgCQkudnN5bmNfZW5kID0gMjQwICsgMyAr
+IDEsCj4+PiAgCQkudnRvdGFsID0gMjQwICsgMyArIDEgKyAxNywKPj4+IC0JCS52cmVmcmVzaCA9
+IDYwLAo+Pj4gIAkJLmZsYWdzID0gRFJNX01PREVfRkxBR19OVlNZTkMgfCBEUk1fTU9ERV9GTEFH
+X05IU1lOQywKPj4+ICAJfSwKPj4+ICB9Owo+Pj4gQEAgLTMxMjksNyArMzA2Miw2IEBAIHN0YXRp
+YyBjb25zdCBzdHJ1Y3QgZHJtX2Rpc3BsYXlfbW9kZSB0aV9uc3BpcmVfY2xhc3NpY19sY2RfbW9k
+ZVtdID0gewo+Pj4gIAkJLnZzeW5jX3N0YXJ0ID0gMjQwICsgMCwKPj4+ICAJCS52c3luY19lbmQg
+PSAyNDAgKyAwICsgMSwKPj4+ICAJCS52dG90YWwgPSAyNDAgKyAwICsgMSArIDAsCj4+PiAtCQku
+dnJlZnJlc2ggPSA2MCwKPj4+ICAJCS5mbGFncyA9IERSTV9NT0RFX0ZMQUdfUEhTWU5DIHwgRFJN
+X01PREVfRkxBR19QVlNZTkMsCj4+PiAgCX0sCj4+PiAgfTsKPj4+IEBAIC0zMTU4LDcgKzMwOTAs
+NiBAQCBzdGF0aWMgY29uc3Qgc3RydWN0IGRybV9kaXNwbGF5X21vZGUgdG9zaGliYV9sdDA4OWFj
+MjkwMDBfbW9kZSA9IHsKPj4+ICAJLnZzeW5jX3N0YXJ0ID0gNzY4ICsgMjAsCj4+PiAgCS52c3lu
+Y19lbmQgPSA3NjggKyAyMCArIDcsCj4+PiAgCS52dG90YWwgPSA3NjggKyAyMCArIDcgKyAzLAo+
+Pj4gLQkudnJlZnJlc2ggPSA2MCwKPj4+ICB9Owo+Pj4gIAo+Pj4gIHN0YXRpYyBjb25zdCBzdHJ1
+Y3QgcGFuZWxfZGVzYyB0b3NoaWJhX2x0MDg5YWMyOTAwMCA9IHsKPj4+IEBAIC0zMTgzLDcgKzMx
+MTQsNiBAQCBzdGF0aWMgY29uc3Qgc3RydWN0IGRybV9kaXNwbGF5X21vZGUgdHBrX2YwN2FfMDEw
+Ml9tb2RlID0gewo+Pj4gIAkudnN5bmNfc3RhcnQgPSA0ODAgKyAxMCwKPj4+ICAJLnZzeW5jX2Vu
+ZCA9IDQ4MCArIDEwICsgMiwKPj4+ICAJLnZ0b3RhbCA9IDQ4MCArIDEwICsgMiArIDMzLAo+Pj4g
+LQkudnJlZnJlc2ggPSA2MCwKPj4+ICB9Owo+Pj4gIAo+Pj4gIHN0YXRpYyBjb25zdCBzdHJ1Y3Qg
+cGFuZWxfZGVzYyB0cGtfZjA3YV8wMTAyID0gewo+Pj4gQEAgLTMyMDYsNyArMzEzNiw2IEBAIHN0
+YXRpYyBjb25zdCBzdHJ1Y3QgZHJtX2Rpc3BsYXlfbW9kZSB0cGtfZjEwYV8wMTAyX21vZGUgPSB7
+Cj4+PiAgCS52c3luY19zdGFydCA9IDYwMCArIDIwLAo+Pj4gIAkudnN5bmNfZW5kID0gNjAwICsg
+MjAgKyA1LAo+Pj4gIAkudnRvdGFsID0gNjAwICsgMjAgKyA1ICsgMjUsCj4+PiAtCS52cmVmcmVz
+aCA9IDYwLAo+Pj4gIH07Cj4+PiAgCj4+PiAgc3RhdGljIGNvbnN0IHN0cnVjdCBwYW5lbF9kZXNj
+IHRwa19mMTBhXzAxMDIgPSB7Cj4+PiBAQCAtMzI2NSw3ICszMTk0LDYgQEAgc3RhdGljIGNvbnN0
+IHN0cnVjdCBkcm1fZGlzcGxheV9tb2RlIHZsMDUwXzgwNDhudF9jMDFfbW9kZSA9IHsKPj4+ICAJ
+LnZzeW5jX3N0YXJ0ID0gNDgwICsgMjIsCj4+PiAgCS52c3luY19lbmQgPSA0ODAgKyAyMiArIDEw
+LAo+Pj4gIAkudnRvdGFsID0gNDgwICsgMjIgKyAxMCArIDIzLAo+Pj4gLQkudnJlZnJlc2ggPSA2
+MCwKPj4+ICAJLmZsYWdzID0gRFJNX01PREVfRkxBR19OSFNZTkMgfCBEUk1fTU9ERV9GTEFHX05W
+U1lOQywKPj4+ICB9Owo+Pj4gIAo+Pj4gQEAgLTMyOTEsNyArMzIxOSw2IEBAIHN0YXRpYyBjb25z
+dCBzdHJ1Y3QgZHJtX2Rpc3BsYXlfbW9kZSB3aW5zdGFyX3dmMzVsdGlhY2RfbW9kZSA9IHsKPj4+
+ICAJLnZzeW5jX3N0YXJ0ID0gMjQwICsgNCwKPj4+ICAJLnZzeW5jX2VuZCA9IDI0MCArIDQgKyAz
+LAo+Pj4gIAkudnRvdGFsID0gMjQwICsgNCArIDMgKyAxNSwKPj4+IC0JLnZyZWZyZXNoID0gNjAs
+Cj4+PiAgCS5mbGFncyA9IERSTV9NT0RFX0ZMQUdfTlZTWU5DIHwgRFJNX01PREVfRkxBR19OSFNZ
+TkMsCj4+PiAgfTsKPj4+ICAKPj4+IEBAIC0zMzE3LDcgKzMyNDQsNiBAQCBzdGF0aWMgY29uc3Qg
+c3RydWN0IGRybV9kaXNwbGF5X21vZGUgYXJtX3J0c21fbW9kZVtdID0gewo+Pj4gIAkJLnZzeW5j
+X3N0YXJ0ID0gNzY4ICsgMywKPj4+ICAJCS52c3luY19lbmQgPSA3NjggKyAzICsgNiwKPj4+ICAJ
+CS52dG90YWwgPSA3NjggKyAzICsgNiArIDI5LAo+Pj4gLQkJLnZyZWZyZXNoID0gNjAsCj4+PiAg
+CQkuZmxhZ3MgPSBEUk1fTU9ERV9GTEFHX05WU1lOQyB8IERSTV9NT0RFX0ZMQUdfTkhTWU5DLAo+
+Pj4gIAl9LAo+Pj4gIH07Cj4+PiBAQCAtMzc0Myw3ICszNjY5LDYgQEAgc3RhdGljIGNvbnN0IHN0
+cnVjdCBkcm1fZGlzcGxheV9tb2RlIGF1b19iMDgwdWFuMDFfbW9kZSA9IHsKPj4+ICAJLnZzeW5j
+X3N0YXJ0ID0gMTkyMCArIDksCj4+PiAgCS52c3luY19lbmQgPSAxOTIwICsgOSArIDIsCj4+PiAg
+CS52dG90YWwgPSAxOTIwICsgOSArIDIgKyA4LAo+Pj4gLQkudnJlZnJlc2ggPSA2MCwKPj4+ICB9
+Owo+Pj4gIAo+Pj4gIHN0YXRpYyBjb25zdCBzdHJ1Y3QgcGFuZWxfZGVzY19kc2kgYXVvX2IwODB1
+YW4wMSA9IHsKPj4+IEBAIC0zNzcxLDcgKzM2OTYsNiBAQCBzdGF0aWMgY29uc3Qgc3RydWN0IGRy
+bV9kaXNwbGF5X21vZGUgYm9lX3R2MDgwd3VtX25sMF9tb2RlID0gewo+Pj4gIAkudnN5bmNfc3Rh
+cnQgPSAxOTIwICsgMjEsCj4+PiAgCS52c3luY19lbmQgPSAxOTIwICsgMjEgKyAzLAo+Pj4gIAku
+dnRvdGFsID0gMTkyMCArIDIxICsgMyArIDE4LAo+Pj4gLQkudnJlZnJlc2ggPSA2MCwKPj4+ICAJ
+LmZsYWdzID0gRFJNX01PREVfRkxBR19OVlNZTkMgfCBEUk1fTU9ERV9GTEFHX05IU1lOQywKPj4+
+ICB9Owo+Pj4gIAo+Pj4gQEAgLTM4MDEsNyArMzcyNSw2IEBAIHN0YXRpYyBjb25zdCBzdHJ1Y3Qg
+ZHJtX2Rpc3BsYXlfbW9kZSBsZ19sZDA3MHd4M19zbDAxX21vZGUgPSB7Cj4+PiAgCS52c3luY19z
+dGFydCA9IDEyODAgKyAyOCwKPj4+ICAJLnZzeW5jX2VuZCA9IDEyODAgKyAyOCArIDEsCj4+PiAg
+CS52dG90YWwgPSAxMjgwICsgMjggKyAxICsgMTQsCj4+PiAtCS52cmVmcmVzaCA9IDYwLAo+Pj4g
+IH07Cj4+PiAgCj4+PiAgc3RhdGljIGNvbnN0IHN0cnVjdCBwYW5lbF9kZXNjX2RzaSBsZ19sZDA3
+MHd4M19zbDAxID0gewo+Pj4gQEAgLTM4MjksNyArMzc1Miw2IEBAIHN0YXRpYyBjb25zdCBzdHJ1
+Y3QgZHJtX2Rpc3BsYXlfbW9kZSBsZ19saDUwMHd4MV9zZDAzX21vZGUgPSB7Cj4+PiAgCS52c3lu
+Y19zdGFydCA9IDEyODAgKyA4LAo+Pj4gIAkudnN5bmNfZW5kID0gMTI4MCArIDggKyA0LAo+Pj4g
+IAkudnRvdGFsID0gMTI4MCArIDggKyA0ICsgMTIsCj4+PiAtCS52cmVmcmVzaCA9IDYwLAo+Pj4g
+IH07Cj4+PiAgCj4+PiAgc3RhdGljIGNvbnN0IHN0cnVjdCBwYW5lbF9kZXNjX2RzaSBsZ19saDUw
+MHd4MV9zZDAzID0gewo+Pj4gQEAgLTM4NTcsNyArMzc3OSw2IEBAIHN0YXRpYyBjb25zdCBzdHJ1
+Y3QgZHJtX2Rpc3BsYXlfbW9kZSBwYW5hc29uaWNfdnZ4MTBmMDA0YjAwX21vZGUgPSB7Cj4+PiAg
+CS52c3luY19zdGFydCA9IDEyMDAgKyAxNywKPj4+ICAJLnZzeW5jX2VuZCA9IDEyMDAgKyAxNyAr
+IDIsCj4+PiAgCS52dG90YWwgPSAxMjAwICsgMTcgKyAyICsgMTYsCj4+PiAtCS52cmVmcmVzaCA9
+IDYwLAo+Pj4gIH07Cj4+PiAgCj4+PiAgc3RhdGljIGNvbnN0IHN0cnVjdCBwYW5lbF9kZXNjX2Rz
+aSBwYW5hc29uaWNfdnZ4MTBmMDA0YjAwID0gewo+Pj4gQEAgLTM4ODYsNyArMzgwNyw2IEBAIHN0
+YXRpYyBjb25zdCBzdHJ1Y3QgZHJtX2Rpc3BsYXlfbW9kZSBsZ19hY3g0Njdha21fN19tb2RlID0g
+ewo+Pj4gIAkudnN5bmNfc3RhcnQgPSAxOTIwICsgMiwKPj4+ICAJLnZzeW5jX2VuZCA9IDE5MjAg
+KyAyICsgMiwKPj4+ICAJLnZ0b3RhbCA9IDE5MjAgKyAyICsgMiArIDIsCj4+PiAtCS52cmVmcmVz
+aCA9IDYwLAo+Pj4gIH07Cj4+PiAgCj4+PiAgc3RhdGljIGNvbnN0IHN0cnVjdCBwYW5lbF9kZXNj
+X2RzaSBsZ19hY3g0Njdha21fNyA9IHsKPj4+IEBAIC0zOTE0LDcgKzM4MzQsNiBAQCBzdGF0aWMg
+Y29uc3Qgc3RydWN0IGRybV9kaXNwbGF5X21vZGUgb3NkMTAxdDIwNDVfNTN0c19tb2RlID0gewo+
+Pj4gIAkudnN5bmNfc3RhcnQgPSAxMjAwICsgMTYsCj4+PiAgCS52c3luY19lbmQgPSAxMjAwICsg
+MTYgKyAyLAo+Pj4gIAkudnRvdGFsID0gMTIwMCArIDE2ICsgMiArIDE2LAo+Pj4gLQkudnJlZnJl
+c2ggPSA2MCwKPj4+ICAJLmZsYWdzID0gRFJNX01PREVfRkxBR19OSFNZTkMgfCBEUk1fTU9ERV9G
+TEFHX05WU1lOQywKPj4+ICB9Owo+Pj4gIAo+Pj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2Ry
+bS9wYW5lbC9wYW5lbC1zaXRyb25peC1zdDc3MDEuYyBiL2RyaXZlcnMvZ3B1L2RybS9wYW5lbC9w
+YW5lbC1zaXRyb25peC1zdDc3MDEuYwo+Pj4gaW5kZXggNGI0ZjI1NThlM2I0Li42OTIwNDFhZTRl
+YjYgMTAwNjQ0Cj4+PiAtLS0gYS9kcml2ZXJzL2dwdS9kcm0vcGFuZWwvcGFuZWwtc2l0cm9uaXgt
+c3Q3NzAxLmMKPj4+ICsrKyBiL2RyaXZlcnMvZ3B1L2RybS9wYW5lbC9wYW5lbC1zaXRyb25peC1z
+dDc3MDEuYwo+Pj4gQEAgLTI3Miw3ICsyNzIsNyBAQCBzdGF0aWMgaW50IHN0NzcwMV9nZXRfbW9k
+ZXMoc3RydWN0IGRybV9wYW5lbCAqcGFuZWwsCj4+PiAgCQlEUk1fREVWX0VSUk9SKCZzdDc3MDEt
+PmRzaS0+ZGV2LAo+Pj4gIAkJCSAgICAgICJmYWlsZWQgdG8gYWRkIG1vZGUgJXV4JXV4QCV1XG4i
+LAo+Pj4gIAkJCSAgICAgIGRlc2NfbW9kZS0+aGRpc3BsYXksIGRlc2NfbW9kZS0+dmRpc3BsYXks
+Cj4+PiAtCQkJICAgICAgZGVzY19tb2RlLT52cmVmcmVzaCk7Cj4+PiArCQkJICAgICAgZHJtX21v
+ZGVfdnJlZnJlc2goZGVzY19tb2RlKSk7Cj4+PiAgCQlyZXR1cm4gLUVOT01FTTsKPj4+ICAJfQo+
+Pj4gIAo+Pj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9wYW5lbC9wYW5lbC1zaXRyb25p
+eC1zdDc3ODl2LmMgYi9kcml2ZXJzL2dwdS9kcm0vcGFuZWwvcGFuZWwtc2l0cm9uaXgtc3Q3Nzg5
+di5jCj4+PiBpbmRleCBjYzAyYzU0YzFiMmUuLjM1MTNhZTQwZWZhOCAxMDA2NDQKPj4+IC0tLSBh
+L2RyaXZlcnMvZ3B1L2RybS9wYW5lbC9wYW5lbC1zaXRyb25peC1zdDc3ODl2LmMKPj4+ICsrKyBi
+L2RyaXZlcnMvZ3B1L2RybS9wYW5lbC9wYW5lbC1zaXRyb25peC1zdDc3ODl2LmMKPj4+IEBAIC0x
+NjUsNyArMTY1LDYgQEAgc3RhdGljIGNvbnN0IHN0cnVjdCBkcm1fZGlzcGxheV9tb2RlIGRlZmF1
+bHRfbW9kZSA9IHsKPj4+ICAJLnZzeW5jX3N0YXJ0ID0gMzIwICsgOCwKPj4+ICAJLnZzeW5jX2Vu
+ZCA9IDMyMCArIDggKyA0LAo+Pj4gIAkudnRvdGFsID0gMzIwICsgOCArIDQgKyA0LAo+Pj4gLQku
+dnJlZnJlc2ggPSA2MCwKPj4+ICB9Owo+Pj4gIAo+Pj4gIHN0YXRpYyBpbnQgc3Q3Nzg5dl9nZXRf
+bW9kZXMoc3RydWN0IGRybV9wYW5lbCAqcGFuZWwsCj4+PiBAQCAtMTc3LDcgKzE3Niw3IEBAIHN0
+YXRpYyBpbnQgc3Q3Nzg5dl9nZXRfbW9kZXMoc3RydWN0IGRybV9wYW5lbCAqcGFuZWwsCj4+PiAg
+CWlmICghbW9kZSkgewo+Pj4gIAkJZGV2X2VycihwYW5lbC0+ZGV2LCAiZmFpbGVkIHRvIGFkZCBt
+b2RlICV1eCV1eEAldVxuIiwKPj4+ICAJCQlkZWZhdWx0X21vZGUuaGRpc3BsYXksIGRlZmF1bHRf
+bW9kZS52ZGlzcGxheSwKPj4+IC0JCQlkZWZhdWx0X21vZGUudnJlZnJlc2gpOwo+Pj4gKwkJCWRy
+bV9tb2RlX3ZyZWZyZXNoKCZkZWZhdWx0X21vZGUpKTsKPj4+ICAJCXJldHVybiAtRU5PTUVNOwo+
+Pj4gIAl9Cj4+PiAgCj4+PiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL3BhbmVsL3BhbmVs
+LXNvbnktYWN4NDI0YWtwLmMgYi9kcml2ZXJzL2dwdS9kcm0vcGFuZWwvcGFuZWwtc29ueS1hY3g0
+MjRha3AuYwo+Pj4gaW5kZXggZGUwYWJmNzZhZTZmLi5lYmEwNWJkNmVjOWEgMTAwNjQ0Cj4+PiAt
+LS0gYS9kcml2ZXJzL2dwdS9kcm0vcGFuZWwvcGFuZWwtc29ueS1hY3g0MjRha3AuYwo+Pj4gKysr
+IGIvZHJpdmVycy9ncHUvZHJtL3BhbmVsL3BhbmVsLXNvbnktYWN4NDI0YWtwLmMKPj4+IEBAIC01
+Nyw3ICs1Nyw2IEBAIHN0YXRpYyBjb25zdCBzdHJ1Y3QgZHJtX2Rpc3BsYXlfbW9kZSBzb255X2Fj
+eDQyNGFrcF92aWRfbW9kZSA9IHsKPj4+ICAJLnZzeW5jX3N0YXJ0ID0gODY0ICsgMTQsCj4+PiAg
+CS52c3luY19lbmQgPSA4NjQgKyAxNCArIDEsCj4+PiAgCS52dG90YWwgPSA4NjQgKyAxNCArIDEg
+KyAxMSwKPj4+IC0JLnZyZWZyZXNoID0gNjAsCj4+PiAgCS53aWR0aF9tbSA9IDQ4LAo+Pj4gIAku
+aGVpZ2h0X21tID0gODQsCj4+PiAgCS5mbGFncyA9IERSTV9NT0RFX0ZMQUdfUFZTWU5DLAo+Pj4g
+QEAgLTgxLDcgKzgwLDYgQEAgc3RhdGljIGNvbnN0IHN0cnVjdCBkcm1fZGlzcGxheV9tb2RlIHNv
+bnlfYWN4NDI0YWtwX2NtZF9tb2RlID0gewo+Pj4gIAkgKiBTb21lIGRlc2lyZWQgcmVmcmVzaCBy
+YXRlLCBleHBlcmltZW50cyBhdCB0aGUgbWF4aW11bSAicGl4ZWwiCj4+PiAgCSAqIGNsb2NrIHNw
+ZWVkIChIUyBjbG9jayA0MjAgTUh6KSB5aWVsZHMgYXJvdW5kIDExN0h6Lgo+Pj4gIAkgKi8KPj4+
+IC0JLnZyZWZyZXNoID0gNjAsCj4+PiAgCS53aWR0aF9tbSA9IDQ4LAo+Pj4gIAkuaGVpZ2h0X21t
+ID0gODQsCj4+PiAgfTsKPj4+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0vcGFuZWwvcGFu
+ZWwtc29ueS1hY3g1NjVha20uYyBiL2RyaXZlcnMvZ3B1L2RybS9wYW5lbC9wYW5lbC1zb255LWFj
+eDU2NWFrbS5jCj4+PiBpbmRleCA1YzRiNmY2ZTVjMmQuLmZjNmE3ZTQ1MWFiZSAxMDA2NDQKPj4+
+IC0tLSBhL2RyaXZlcnMvZ3B1L2RybS9wYW5lbC9wYW5lbC1zb255LWFjeDU2NWFrbS5jCj4+PiAr
+KysgYi9kcml2ZXJzL2dwdS9kcm0vcGFuZWwvcGFuZWwtc29ueS1hY3g1NjVha20uYwo+Pj4gQEAg
+LTUxNCw3ICs1MTQsNiBAQCBzdGF0aWMgY29uc3Qgc3RydWN0IGRybV9kaXNwbGF5X21vZGUgYWN4
+NTY1YWttX21vZGUgPSB7Cj4+PiAgCS52c3luY19zdGFydCA9IDQ4MCArIDMsCj4+PiAgCS52c3lu
+Y19lbmQgPSA0ODAgKyAzICsgMywKPj4+ICAJLnZ0b3RhbCA9IDQ4MCArIDMgKyAzICsgNCwKPj4+
+IC0JLnZyZWZyZXNoID0gNTcsCj4+PiAgCS50eXBlID0gRFJNX01PREVfVFlQRV9EUklWRVIgfCBE
+Uk1fTU9ERV9UWVBFX1BSRUZFUlJFRCwKPj4+ICAJLmZsYWdzID0gRFJNX01PREVfRkxBR19OSFNZ
+TkMgfCBEUk1fTU9ERV9GTEFHX05WU1lOQywKPj4+ICAJLndpZHRoX21tID0gNzcsCj4+PiBkaWZm
+IC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL3BhbmVsL3BhbmVsLXRwby10ZDAyOHR0ZWMxLmMgYi9k
+cml2ZXJzL2dwdS9kcm0vcGFuZWwvcGFuZWwtdHBvLXRkMDI4dHRlYzEuYwo+Pj4gaW5kZXggYWVj
+YTE1ZGZlYjNjLi41OGQ2ODNjYzUyMTUgMTAwNjQ0Cj4+PiAtLS0gYS9kcml2ZXJzL2dwdS9kcm0v
+cGFuZWwvcGFuZWwtdHBvLXRkMDI4dHRlYzEuYwo+Pj4gKysrIGIvZHJpdmVycy9ncHUvZHJtL3Bh
+bmVsL3BhbmVsLXRwby10ZDAyOHR0ZWMxLmMKPj4+IEBAIC0yODEsNyArMjgxLDYgQEAgc3RhdGlj
+IGNvbnN0IHN0cnVjdCBkcm1fZGlzcGxheV9tb2RlIHRkMDI4dHRlYzFfbW9kZSA9IHsKPj4+ICAJ
+LnZzeW5jX3N0YXJ0ID0gNjQwICsgNCwKPj4+ICAJLnZzeW5jX2VuZCA9IDY0MCArIDQgKyAyLAo+
+Pj4gIAkudnRvdGFsID0gNjQwICsgNCArIDIgKyAyLAo+Pj4gLQkudnJlZnJlc2ggPSA2NiwKPj4+
+ICAJLnR5cGUgPSBEUk1fTU9ERV9UWVBFX0RSSVZFUiB8IERSTV9NT0RFX1RZUEVfUFJFRkVSUkVE
+LAo+Pj4gIAkuZmxhZ3MgPSBEUk1fTU9ERV9GTEFHX05IU1lOQyB8IERSTV9NT0RFX0ZMQUdfTlZT
+WU5DLAo+Pj4gIAkud2lkdGhfbW0gPSA0MywKPj4+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9k
+cm0vcGFuZWwvcGFuZWwtdHBvLXRkMDQzbXRlYTEuYyBiL2RyaXZlcnMvZ3B1L2RybS9wYW5lbC9w
+YW5lbC10cG8tdGQwNDNtdGVhMS5jCj4+PiBpbmRleCA3NWYxZjFmMWI2ZGUuLjliMmEzNTZjNGQ5
+YSAxMDA2NDQKPj4+IC0tLSBhL2RyaXZlcnMvZ3B1L2RybS9wYW5lbC9wYW5lbC10cG8tdGQwNDNt
+dGVhMS5jCj4+PiArKysgYi9kcml2ZXJzL2dwdS9kcm0vcGFuZWwvcGFuZWwtdHBvLXRkMDQzbXRl
+YTEuYwo+Pj4gQEAgLTMzOSw3ICszMzksNiBAQCBzdGF0aWMgY29uc3Qgc3RydWN0IGRybV9kaXNw
+bGF5X21vZGUgdGQwNDNtdGVhMV9tb2RlID0gewo+Pj4gIAkudnN5bmNfc3RhcnQgPSA0ODAgKyAz
+OSwKPj4+ICAJLnZzeW5jX2VuZCA9IDQ4MCArIDM5ICsgMSwKPj4+ICAJLnZ0b3RhbCA9IDQ4MCAr
+IDM5ICsgMSArIDM0LAo+Pj4gLQkudnJlZnJlc2ggPSA2MCwKPj4+ICAJLnR5cGUgPSBEUk1fTU9E
+RV9UWVBFX0RSSVZFUiB8IERSTV9NT0RFX1RZUEVfUFJFRkVSUkVELAo+Pj4gIAkuZmxhZ3MgPSBE
+Uk1fTU9ERV9GTEFHX05IU1lOQyB8IERSTV9NT0RFX0ZMQUdfTlZTWU5DLAo+Pj4gIAkud2lkdGhf
+bW0gPSA5NCwKPj4+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0vcGFuZWwvcGFuZWwtdHBv
+LXRwZzExMC5jIGIvZHJpdmVycy9ncHUvZHJtL3BhbmVsL3BhbmVsLXRwby10cGcxMTAuYwo+Pj4g
+aW5kZXggODQ3MmQwMThjMTZmLi5jN2EyZjBhZTViYTUgMTAwNjQ0Cj4+PiAtLS0gYS9kcml2ZXJz
+L2dwdS9kcm0vcGFuZWwvcGFuZWwtdHBvLXRwZzExMC5jCj4+PiArKysgYi9kcml2ZXJzL2dwdS9k
+cm0vcGFuZWwvcGFuZWwtdHBvLXRwZzExMC5jCj4+PiBAQCAtMTEyLDcgKzExMiw2IEBAIHN0YXRp
+YyBjb25zdCBzdHJ1Y3QgdHBnMTEwX3BhbmVsX21vZGUgdHBnMTEwX21vZGVzW10gPSB7Cj4+PiAg
+CQkJLnZzeW5jX3N0YXJ0ID0gNDgwICsgMTAsCj4+PiAgCQkJLnZzeW5jX2VuZCA9IDQ4MCArIDEw
+ICsgMSwKPj4+ICAJCQkudnRvdGFsID0gNDgwICsgMTAgKyAxICsgMzUsCj4+PiAtCQkJLnZyZWZy
+ZXNoID0gNjAsCj4+PiAgCQl9LAo+Pj4gIAkJLmJ1c19mbGFncyA9IERSTV9CVVNfRkxBR19QSVhE
+QVRBX0RSSVZFX1BPU0VER0UsCj4+PiAgCX0sCj4+PiBAQCAtMTI5LDcgKzEyOCw2IEBAIHN0YXRp
+YyBjb25zdCBzdHJ1Y3QgdHBnMTEwX3BhbmVsX21vZGUgdHBnMTEwX21vZGVzW10gPSB7Cj4+PiAg
+CQkJLnZzeW5jX3N0YXJ0ID0gNDgwICsgMTgsCj4+PiAgCQkJLnZzeW5jX2VuZCA9IDQ4MCArIDE4
+ICsgMSwKPj4+ICAJCQkudnRvdGFsID0gNDgwICsgMTggKyAxICsgMjcsCj4+PiAtCQkJLnZyZWZy
+ZXNoID0gNjAsCj4+PiAgCQl9LAo+Pj4gIAkJLmJ1c19mbGFncyA9IERSTV9CVVNfRkxBR19QSVhE
+QVRBX0RSSVZFX1BPU0VER0UsCj4+PiAgCX0sCj4+PiBAQCAtMTQ2LDcgKzE0NCw2IEBAIHN0YXRp
+YyBjb25zdCBzdHJ1Y3QgdHBnMTEwX3BhbmVsX21vZGUgdHBnMTEwX21vZGVzW10gPSB7Cj4+PiAg
+CQkJLnZzeW5jX3N0YXJ0ID0gMjcyICsgMiwKPj4+ICAJCQkudnN5bmNfZW5kID0gMjcyICsgMiAr
+IDEsCj4+PiAgCQkJLnZ0b3RhbCA9IDI3MiArIDIgKyAxICsgMTIsCj4+PiAtCQkJLnZyZWZyZXNo
+ID0gNjAsCj4+PiAgCQl9LAo+Pj4gIAkJLmJ1c19mbGFncyA9IERSTV9CVVNfRkxBR19QSVhEQVRB
+X0RSSVZFX1BPU0VER0UsCj4+PiAgCX0sCj4+PiBAQCAtMTYzLDcgKzE2MCw2IEBAIHN0YXRpYyBj
+b25zdCBzdHJ1Y3QgdHBnMTEwX3BhbmVsX21vZGUgdHBnMTEwX21vZGVzW10gPSB7Cj4+PiAgCQkJ
+LnZzeW5jX3N0YXJ0ID0gNjQwICsgNCwKPj4+ICAJCQkudnN5bmNfZW5kID0gNjQwICsgNCArIDEs
+Cj4+PiAgCQkJLnZ0b3RhbCA9IDY0MCArIDQgKyAxICsgOCwKPj4+IC0JCQkudnJlZnJlc2ggPSA2
+MCwKPj4+ICAJCX0sCj4+PiAgCQkuYnVzX2ZsYWdzID0gRFJNX0JVU19GTEFHX1BJWERBVEFfRFJJ
+VkVfUE9TRURHRSwKPj4+ICAJfSwKPj4+IEBAIC0xODAsNyArMTc2LDYgQEAgc3RhdGljIGNvbnN0
+IHN0cnVjdCB0cGcxMTBfcGFuZWxfbW9kZSB0cGcxMTBfbW9kZXNbXSA9IHsKPj4+ICAJCQkudnN5
+bmNfc3RhcnQgPSAyNDAgKyAyLAo+Pj4gIAkJCS52c3luY19lbmQgPSAyNDAgKyAyICsgMSwKPj4+
+ICAJCQkudnRvdGFsID0gMjQwICsgMiArIDEgKyAyMCwKPj4+IC0JCQkudnJlZnJlc2ggPSA2MCwK
+Pj4+ICAJCX0sCj4+PiAgCQkuYnVzX2ZsYWdzID0gRFJNX0JVU19GTEFHX1BJWERBVEFfRFJJVkVf
+UE9TRURHRSwKPj4+ICAJfSwKPj4+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0vcGFuZWwv
+cGFuZWwtdHJ1bHktbnQzNTU5Ny5jIGIvZHJpdmVycy9ncHUvZHJtL3BhbmVsL3BhbmVsLXRydWx5
+LW50MzU1OTcuYwo+Pj4gaW5kZXggMDEyY2E2MmJmMzBlLi45ZDY2OTA4OGNmZmMgMTAwNjQ0Cj4+
+PiAtLS0gYS9kcml2ZXJzL2dwdS9kcm0vcGFuZWwvcGFuZWwtdHJ1bHktbnQzNTU5Ny5jCj4+PiAr
+KysgYi9kcml2ZXJzL2dwdS9kcm0vcGFuZWwvcGFuZWwtdHJ1bHktbnQzNTU5Ny5jCj4+PiBAQCAt
+NTM2LDcgKzUzNiw2IEBAIHN0YXRpYyBjb25zdCBzdHJ1Y3QgZHJtX2Rpc3BsYXlfbW9kZSBxY29t
+X3NkbTg0NV9tdHBfMmtfbW9kZSA9IHsKPj4+ICAJLnZzeW5jX3N0YXJ0ID0gMjU2MCArIDgsCj4+
+PiAgCS52c3luY19lbmQgPSAyNTYwICsgOCArIDEsCj4+PiAgCS52dG90YWwgPSAyNTYwICsgOCAr
+IDEgKyA3LAo+Pj4gLQkudnJlZnJlc2ggPSA2MCwKPj4+ICAJLmZsYWdzID0gMCwKPj4+ICB9Owo+
+Pj4gIAo+Pj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9wYW5lbC9wYW5lbC14aW5wZW5n
+LXhwcDA1NWMyNzIuYyBiL2RyaXZlcnMvZ3B1L2RybS9wYW5lbC9wYW5lbC14aW5wZW5nLXhwcDA1
+NWMyNzIuYwo+Pj4gaW5kZXggMTY0NWFjZWFiNTk3Li44YTNiMmY5MDZlNjMgMTAwNjQ0Cj4+PiAt
+LS0gYS9kcml2ZXJzL2dwdS9kcm0vcGFuZWwvcGFuZWwteGlucGVuZy14cHAwNTVjMjcyLmMKPj4+
+ICsrKyBiL2RyaXZlcnMvZ3B1L2RybS9wYW5lbC9wYW5lbC14aW5wZW5nLXhwcDA1NWMyNzIuYwo+
+Pj4gQEAgLTI0Myw3ICsyNDMsNiBAQCBzdGF0aWMgY29uc3Qgc3RydWN0IGRybV9kaXNwbGF5X21v
+ZGUgZGVmYXVsdF9tb2RlID0gewo+Pj4gIAkudnN5bmNfc3RhcnQJPSAxMjgwICsgMjIsCj4+PiAg
+CS52c3luY19lbmQJPSAxMjgwICsgMjIgKyA0LAo+Pj4gIAkudnRvdGFsCQk9IDEyODAgKyAyMiAr
+IDQgKyAxMSwKPj4+IC0JLnZyZWZyZXNoCT0gNjAsCj4+PiAgCS5jbG9jawkJPSA2NDAwMCwKPj4+
+ICAJLndpZHRoX21tCT0gNjgsCj4+PiAgCS5oZWlnaHRfbW0JPSAxMjEsCj4+PiBAQCAtMjU5LDcg
+KzI1OCw3IEBAIHN0YXRpYyBpbnQgeHBwMDU1YzI3Ml9nZXRfbW9kZXMoc3RydWN0IGRybV9wYW5l
+bCAqcGFuZWwsCj4+PiAgCWlmICghbW9kZSkgewo+Pj4gIAkJRFJNX0RFVl9FUlJPUihjdHgtPmRl
+diwgIkZhaWxlZCB0byBhZGQgbW9kZSAldXgldUAldVxuIiwKPj4+ICAJCQkgICAgICBkZWZhdWx0
+X21vZGUuaGRpc3BsYXksIGRlZmF1bHRfbW9kZS52ZGlzcGxheSwKPj4+IC0JCQkgICAgICBkZWZh
+dWx0X21vZGUudnJlZnJlc2gpOwo+Pj4gKwkJCSAgICAgIGRybV9tb2RlX3ZyZWZyZXNoKCZkZWZh
+dWx0X21vZGUpKTsKPj4+ICAJCXJldHVybiAtRU5PTUVNOwo+Pj4gIAl9Cj4+PiAgCj4+PiBkaWZm
+IC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL3N0aS9zdGlfaGRhLmMgYi9kcml2ZXJzL2dwdS9kcm0v
+c3RpL3N0aV9oZGEuYwo+Pj4gaW5kZXggMmJiMzIwMDlkMTE3Li4zZGM2ZTJlOTY1NDEgMTAwNjQ0
+Cj4+PiAtLS0gYS9kcml2ZXJzL2dwdS9kcm0vc3RpL3N0aV9oZGEuYwo+Pj4gKysrIGIvZHJpdmVy
+cy9ncHUvZHJtL3N0aS9zdGlfaGRhLmMKPj4+IEBAIC01ODYsNyArNTg2LDYgQEAgc3RhdGljIGlu
+dCBzdGlfaGRhX2Nvbm5lY3Rvcl9nZXRfbW9kZXMoc3RydWN0IGRybV9jb25uZWN0b3IgKmNvbm5l
+Y3RvcikKPj4+ICAJCQkJCSZoZGFfc3VwcG9ydGVkX21vZGVzW2ldLm1vZGUpOwo+Pj4gIAkJaWYg
+KCFtb2RlKQo+Pj4gIAkJCWNvbnRpbnVlOwo+Pj4gLQkJbW9kZS0+dnJlZnJlc2ggPSBkcm1fbW9k
+ZV92cmVmcmVzaChtb2RlKTsKPj4+ICAKPj4+ICAJCS8qIHRoZSBmaXJzdCBtb2RlIGlzIHRoZSBw
+cmVmZXJyZWQgbW9kZSAqLwo+Pj4gIAkJaWYgKGkgPT0gMCkKPj4+IGRpZmYgLS1naXQgYS9kcml2
+ZXJzL2dwdS9kcm0vdm13Z2Z4L3Ztd2dmeF9rbXMuYyBiL2RyaXZlcnMvZ3B1L2RybS92bXdnZngv
+dm13Z2Z4X2ttcy5jCj4+PiBpbmRleCBlYjZlMjNlOGQ4ZWYuLjBiMDdmN2I1ZWNlNCAxMDA2NDQK
+Pj4+IC0tLSBhL2RyaXZlcnMvZ3B1L2RybS92bXdnZngvdm13Z2Z4X2ttcy5jCj4+PiArKysgYi9k
+cml2ZXJzL2dwdS9kcm0vdm13Z2Z4L3Ztd2dmeF9rbXMuYwo+Pj4gQEAgLTIyMjYsNyArMjIyNiw2
+IEBAIHZvaWQgdm13X2d1ZXNzX21vZGVfdGltaW5nKHN0cnVjdCBkcm1fZGlzcGxheV9tb2RlICpt
+b2RlKQo+Pj4gIAltb2RlLT52dG90YWwgPSBtb2RlLT52c3luY19lbmQgKyA1MDsKPj4+ICAKPj4+
+ICAJbW9kZS0+Y2xvY2sgPSAodTMyKW1vZGUtPmh0b3RhbCAqICh1MzIpbW9kZS0+dnRvdGFsIC8g
+MTAwICogNjsKPj4+IC0JbW9kZS0+dnJlZnJlc2ggPSBkcm1fbW9kZV92cmVmcmVzaChtb2RlKTsK
+Pj4+ICB9Cj4+PiAgCj4+PiAgCj4+PiBAQCAtMjMwMCw3ICsyMjk5LDYgQEAgaW50IHZtd19kdV9j
+b25uZWN0b3JfZmlsbF9tb2RlcyhzdHJ1Y3QgZHJtX2Nvbm5lY3RvciAqY29ubmVjdG9yLAo+Pj4g
+IAkJbW9kZSA9IGRybV9tb2RlX2R1cGxpY2F0ZShkZXYsIGJtb2RlKTsKPj4+ICAJCWlmICghbW9k
+ZSkKPj4+ICAJCQlyZXR1cm4gMDsKPj4+IC0JCW1vZGUtPnZyZWZyZXNoID0gZHJtX21vZGVfdnJl
+ZnJlc2gobW9kZSk7Cj4+PiAgCj4+PiAgCQlkcm1fbW9kZV9wcm9iZWRfYWRkKGNvbm5lY3Rvciwg
+bW9kZSk7Cj4+PiAgCX0KPj4+IGRpZmYgLS1naXQgYS9pbmNsdWRlL2RybS9kcm1fbW9kZXMuaCBi
+L2luY2x1ZGUvZHJtL2RybV9tb2Rlcy5oCj4+PiBpbmRleCA3ZGFiN2YxNzI0MzEuLjUyZThjYTYx
+M2U0YiAxMDA2NDQKPj4+IC0tLSBhL2luY2x1ZGUvZHJtL2RybV9tb2Rlcy5oCj4+PiArKysgYi9p
+bmNsdWRlL2RybS9kcm1fbW9kZXMuaAo+Pj4gQEAgLTM4MCwxNiArMzgwLDYgQEAgc3RydWN0IGRy
+bV9kaXNwbGF5X21vZGUgewo+Pj4gIAkgKi8KPj4+ICAJaW50IHByaXZhdGVfZmxhZ3M7Cj4+PiAg
+Cj4+PiAtCS8qKgo+Pj4gLQkgKiBAdnJlZnJlc2g6Cj4+PiAtCSAqCj4+PiAtCSAqIFZlcnRpY2Fs
+IHJlZnJlc2ggcmF0ZSwgZm9yIGRlYnVnIG91dHB1dCBpbiBodW1hbiByZWFkYWJsZSBmb3JtLiBO
+b3QKPj4+IC0JICogdXNlZCBpbiBhIGZ1bmN0aW9uYWwgd2F5Lgo+Pj4gLQkgKgo+Pj4gLQkgKiBU
+aGlzIHZhbHVlIGlzIGluIEh6Lgo+Pj4gLQkgKi8KPj4+IC0JaW50IHZyZWZyZXNoOwo+Pj4gLQo+
+Pj4gIAkvKioKPj4+ICAJICogQHBpY3R1cmVfYXNwZWN0X3JhdGlvOgo+Pj4gIAkgKgo+Pj4gQEAg
+LTQyMSw3ICs0MTEsNyBAQCBzdHJ1Y3QgZHJtX2Rpc3BsYXlfbW9kZSB7Cj4+PiAgICogQG06IGRp
+c3BsYXkgbW9kZQo+Pj4gICAqLwo+Pj4gICNkZWZpbmUgRFJNX01PREVfQVJHKG0pIFwKPj4+IC0J
+KG0pLT5uYW1lLCAobSktPnZyZWZyZXNoLCAobSktPmNsb2NrLCBcCj4+PiArCShtKS0+bmFtZSwg
+ZHJtX21vZGVfdnJlZnJlc2gobSksIChtKS0+Y2xvY2ssIFwKPj4+ICAJKG0pLT5oZGlzcGxheSwg
+KG0pLT5oc3luY19zdGFydCwgKG0pLT5oc3luY19lbmQsIChtKS0+aHRvdGFsLCBcCj4+PiAgCSht
+KS0+dmRpc3BsYXksIChtKS0+dnN5bmNfc3RhcnQsIChtKS0+dnN5bmNfZW5kLCAobSktPnZ0b3Rh
+bCwgXAo+Pj4gIAkobSktPnR5cGUsIChtKS0+ZmxhZ3MKCgpfX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fXwpOb3V2ZWF1IG1haWxpbmcgbGlzdApOb3V2ZWF1QGxp
+c3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFu
+L2xpc3RpbmZvL25vdXZlYXUK
