@@ -2,44 +2,58 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5D1F216FA7F
-	for <lists+nouveau@lfdr.de>; Wed, 26 Feb 2020 10:18:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D1D0C16FA81
+	for <lists+nouveau@lfdr.de>; Wed, 26 Feb 2020 10:19:00 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A7B276E2C7;
-	Wed, 26 Feb 2020 09:18:53 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C08A26E2CC;
+	Wed, 26 Feb 2020 09:18:54 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mga18.intel.com (mga18.intel.com [134.134.136.126])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 52387892E0;
- Tue, 25 Feb 2020 19:27:37 +0000 (UTC)
-X-Amp-Result: UNKNOWN
-X-Amp-Original-Verdict: FILE UNKNOWN
-X-Amp-File-Uploaded: False
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
- by orsmga106.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
- 25 Feb 2020 11:27:35 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.70,485,1574150400"; d="scan'208";a="317179148"
-Received: from stinkbox.fi.intel.com (HELO stinkbox) ([10.237.72.174])
- by orsmga001.jf.intel.com with SMTP; 25 Feb 2020 11:27:21 -0800
-Received: by stinkbox (sSMTP sendmail emulation);
- Tue, 25 Feb 2020 21:27:20 +0200
-Date: Tue, 25 Feb 2020 21:27:20 +0200
-From: Ville =?iso-8859-1?Q?Syrj=E4l=E4?= <ville.syrjala@linux.intel.com>
-To: Andrzej Hajda <a.hajda@samsung.com>
-Message-ID: <20200225192720.GG13686@intel.com>
+Received: from mail-lj1-x241.google.com (mail-lj1-x241.google.com
+ [IPv6:2a00:1450:4864:20::241])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6C1316E229
+ for <nouveau@lists.freedesktop.org>; Tue, 25 Feb 2020 21:52:39 +0000 (UTC)
+Received: by mail-lj1-x241.google.com with SMTP id q8so562417ljj.11
+ for <nouveau@lists.freedesktop.org>; Tue, 25 Feb 2020 13:52:39 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=A2ys7Ib2/Xnmb6RfJjBVglHxRB3L0ppD5nek4nNUG54=;
+ b=dggYPJl/S1l5xcOIfxIS/BtjTf2Yhm1QVvH0GMrusu3UZdTJ+2IVNtl7if5lr+GING
+ XpTndQesM1wBpqwKNuobZBIXrCPwzFtaklN3vLh2Qnd0+FWtpS3ZfwdtKmGftCZkxItM
+ pt0dP1pU0t9V2smNwYJsoeHg/Qbpco6HesYKBw8Pilr2pVi84p88M5YAUcqk8Zh5lIHD
+ CSe5MrLa4qFV3znicGDhh7dez3zSSB2e+gT6zhNI5c95nKfh15KuMLKm2jZQougUJ8qj
+ kiKUiHXiaPkAZpyYO/fu8wpfUCAfkkn3icXFTgbLvWoWqO41x1j9KZ28pWh6LPjraRTR
+ t6KA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=A2ys7Ib2/Xnmb6RfJjBVglHxRB3L0ppD5nek4nNUG54=;
+ b=bo1ZHJ6hTjhJQhJSr1OoprUw5vk3HQnDU+sc/UYOOGu6D9+RzbhBCpnXjnux1NJAhR
+ F+6srHpzcpjOjvYCA8BAAV50Y04u76h9olg9MajrLbGVMCIqgsxng4L7mLIYFiq8faJq
+ M+rl8P3oD46gqz9hoel1n8Uekpf0Qp2q6JpBlJVb6nCUgOECzJrrVjVtk7wAeij49vyQ
+ /YOC+V9AGRc8cqV71ZvxWCIN3Ip2hP3ydt04klm5HANwMoyUqMJDf9C0ueeM9ijbutRr
+ ga5f0IceVus9rSuGtj/SEbmmZkwBdw3ESTnD/QtKRYs22Ow6BeI4flURYiVbiKyx5kPc
+ dJ5A==
+X-Gm-Message-State: APjAAAUsawdquZF70yQGSo9KEgKwhynY++G9GzegB78v2Wa45ulBEOb4
+ z8ZcFKBFjwBRXpaNP8r7avINB2BkPYC/W5NmHtLKSw==
+X-Google-Smtp-Source: APXvYqxOOzmfnyf+WeuQucvX5m9qM2Leiiv6kMjRVdA/nrsazbB0Q+l2xDGTGCvseEFr/CMgRzfQtQJ4YToGbq+Lxpk=
+X-Received: by 2002:a2e:7d0c:: with SMTP id y12mr663831ljc.39.1582667557689;
+ Tue, 25 Feb 2020 13:52:37 -0800 (PST)
+MIME-Version: 1.0
 References: <20200219203544.31013-1-ville.syrjala@linux.intel.com>
  <CGME20200219203620eucas1p24b4990a91e758dbcf3e9b943669b0c8f@eucas1p2.samsung.com>
  <20200219203544.31013-5-ville.syrjala@linux.intel.com>
  <0f278771-79ce-fe23-e72c-3935dbe82d24@samsung.com>
  <20200225112114.GA13686@intel.com>
  <3ca785f2-9032-aaf9-0965-8657d31116ba@samsung.com>
- <20200225154506.GF13686@intel.com>
-MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20200225154506.GF13686@intel.com>
-X-Patchwork-Hint: comment
-User-Agent: Mutt/1.10.1 (2018-07-13)
+ <20200225154506.GF13686@intel.com> <20200225192720.GG13686@intel.com>
+In-Reply-To: <20200225192720.GG13686@intel.com>
+From: Linus Walleij <linus.walleij@linaro.org>
+Date: Tue, 25 Feb 2020 22:52:25 +0100
+Message-ID: <CACRpkdZk9QEy+Kzkmy4BXiHB+aq9hprf=dmA_-R23yqH3NCt1g@mail.gmail.com>
+To: =?UTF-8?B?VmlsbGUgU3lyasOkbMOk?= <ville.syrjala@linux.intel.com>
 X-Mailman-Approved-At: Wed, 26 Feb 2020 09:18:53 +0000
 Subject: Re: [Nouveau] [PATCH 04/12] drm: Nuke mode->vrefresh
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -55,11 +69,13 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
 Cc: Josh Wu <josh.wu@atmel.com>,
  Bhuvanchandra DV <bhuvanchandra.dv@toradex.com>,
- Neil Armstrong <narmstrong@baylibre.com>, nouveau@lists.freedesktop.org,
- Guido =?iso-8859-1?Q?G=FCnther?= <agx@sigxcpu.org>,
- Paul Kocialkowski <contact@paulk.fr>, dri-devel@lists.freedesktop.org,
- Gustaf =?iso-8859-1?Q?Lindstr=F6m?= <gl@axentia.se>,
- Eric Anholt <eric@anholt.net>, Thierry Reding <thierry.reding@gmail.com>,
+ Neil Armstrong <narmstrong@baylibre.com>, Eric Anholt <eric@anholt.net>,
+ nouveau@lists.freedesktop.org,
+ =?UTF-8?Q?Guido_G=C3=BCnther?= <agx@sigxcpu.org>,
+ Paul Kocialkowski <contact@paulk.fr>,
+ "open list:DRM PANEL DRIVERS" <dri-devel@lists.freedesktop.org>,
+ =?UTF-8?Q?Gustaf_Lindstr=C3=B6m?= <gl@axentia.se>,
+ Andrzej Hajda <a.hajda@samsung.com>, Thierry Reding <thierry.reding@gmail.com>,
  Laurent Pinchart <Laurent.pinchart@ideasonboard.com>,
  Sam Ravnborg <sam@ravnborg.org>,
  Marian-Cristian Rotariu <marian-cristian.rotariu.rb@bp.renesas.com>,
@@ -71,13 +87,13 @@ Cc: Josh Wu <josh.wu@atmel.com>,
  VMware Graphics <linux-graphics-maintainer@vmware.com>,
  Ben Skeggs <bskeggs@redhat.com>, "H. Nikolaus Schaller" <hns@goldelico.com>,
  Robert Chiras <robert.chiras@nxp.com>, Heiko Schocher <hs@denx.de>,
- Linus Walleij <linus.walleij@linaro.org>, Icenowy Zheng <icenowy@aosc.io>,
- Jonas Karlman <jonas@kwiboo.se>, intel-gfx@lists.freedesktop.org,
- Randy Li <ayaka@soulik.info>, Maxime Ripard <mripard@kernel.org>,
- Alexandre Courbot <acourbot@nvidia.com>, Fabio Estevam <festevam@gmail.com>,
- Riccardo Bortolato <bortolato@navaltechitalia>,
- linux-amlogic@lists.infradead.org, Vincent Abriou <vincent.abriou@st.com>,
- Andreas Pretzsch <apr@cn-eng.de>, Jernej Skrabec <jernej.skrabec@siol.net>,
+ Icenowy Zheng <icenowy@aosc.io>, Jonas Karlman <jonas@kwiboo.se>,
+ intel-gfx <intel-gfx@lists.freedesktop.org>, Randy Li <ayaka@soulik.info>,
+ Maxime Ripard <mripard@kernel.org>, Alexandre Courbot <acourbot@nvidia.com>,
+ Fabio Estevam <festevam@gmail.com>,
+ "open list:ARM/Amlogic Meson..." <linux-amlogic@lists.infradead.org>,
+ Vincent Abriou <vincent.abriou@st.com>, Andreas Pretzsch <apr@cn-eng.de>,
+ Jernej Skrabec <jernej.skrabec@siol.net>,
  Alex Gonzalez <alex.gonzalez@digi.com>, Purism Kernel Team <kernel@puri.sm>,
  Boris Brezillon <bbrezillon@kernel.org>,
  Seung-Woo Kim <sw0312.kim@samsung.com>,
@@ -86,330 +102,72 @@ Cc: Josh Wu <josh.wu@atmel.com>,
  Heiko Stuebner <heiko.stuebner@theobroma-systems.com>,
  Eugen Hristev <eugen.hristev@microchip.com>,
  Giulio Benetti <giulio.benetti@micronovasrl.com>
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, Feb 25, 2020 at 05:45:06PM +0200, Ville Syrj=E4l=E4 wrote:
-> On Tue, Feb 25, 2020 at 04:19:27PM +0100, Andrzej Hajda wrote:
-> > On 25.02.2020 12:21, Ville Syrj=E4l=E4 wrote:
-> > > On Mon, Feb 24, 2020 at 03:14:54PM +0100, Andrzej Hajda wrote:
-> > >> On 19.02.2020 21:35, Ville Syrjala wrote:
-> > >>> From: Ville Syrj=E4l=E4 <ville.syrjala@linux.intel.com>
-> > >>>
-> > >>> Get rid of mode->vrefresh and just calculate it on demand. Saves
-> > >>> a bit of space and avoids the cached value getting out of sync
-> > >>> with reality.
-> > >>>
-> > >>> Mostly done with cocci, with the following manual fixups:
-> > >>> - Remove the now empty loop in drm_helper_probe_single_connector_mo=
-des()
-> > >>> - Fix __MODE() macro in ch7006_mode.c
-> > >>> - Fix DRM_MODE_ARG() macro in drm_modes.h
-> > >>> - Remove leftover comment from samsung_s6d16d0_mode
-> > >> ...
-> > >>> diff --git a/drivers/gpu/drm/panel/panel-arm-versatile.c b/drivers/=
-gpu/drm/panel/panel-arm-versatile.c
-> > >>> index 41444a73c980..47b37fef7ee8 100644
-> > >>> --- a/drivers/gpu/drm/panel/panel-arm-versatile.c
-> > >>> +++ b/drivers/gpu/drm/panel/panel-arm-versatile.c
-> > >>> @@ -143,7 +143,6 @@ static const struct versatile_panel_type versat=
-ile_panels[] =3D {
-> > >>>  			.vsync_start =3D 240 + 5,
-> > >>>  			.vsync_end =3D 240 + 5 + 6,
-> > >>>  			.vtotal =3D 240 + 5 + 6 + 5,
-> > >>> -			.vrefresh =3D 116,
-> > >>
-> > >> Are you sure vrefresh calculated (from totals and clock) is different
-> > >> than this field? If not, we risk regressions.
-> > >>
-> > >> This case is OK, but there is plenty other cases.
-> > > IIRC I did spot check a few of them. But which code exactly do you th=
-ink
-> > > is abusing vrefresh and thus could break?
-> > =
-
-> > =
-
-> > I guess suspect/potential victim is every code which uses
-> > drm_mode_vrefresh - after this patch the function can return different
-> > value(if there are differences between provided and calculated vrefresh=
-).
-> > =
-
-> > Quick examples where output of this function matters:
-> > =
-
-> > https://elixir.bootlin.com/linux/latest/source/drivers/gpu/drm/msm/disp=
-/dpu1/dpu_encoder_phys_cmd.c#L387
-> =
-
-> Already looks quite sketchy due to rounding.
-> =
-
-> > =
-
-> > https://elixir.bootlin.com/linux/latest/source/drivers/gpu/drm/panel/pa=
-nel-sharp-lq101r1sx01.c#L42
-> =
-
-> msleep() is in no way accurate so looks rather sketchy as well.
-> =
-
-> > https://elixir.bootlin.com/linux/latest/source/drivers/gpu/drm/tilcdc/t=
-ilcdc_crtc.c#L810
-> =
-
-> Another thing that suffers from rounding issues.
-> =
-
-> So to me these all look like code that someone should fix regardless.
-
-OK, so I went ahead a wrote a bit of cocci [1] to find the bad apples.
-
-Unfortunately it found a lot of strange stuff:
-panel-sony-acx424akp.c:51/sony_acx424akp_vid_mode: 60 vs. 727 (.clock=3D330=
-000 .htotal=3D480 + 15 + 0 + 15 .vtotal=3D864 + 14 + 1 + 11)
-panel-sony-acx424akp.c:71/sony_acx424akp_cmd_mode: 60 vs. 711 (.clock=3D420=
-160 .htotal=3D480 + 154 + 16 + 32 .vtotal=3D864 + 1 + 1 + 1)
-panel-ilitek-ili9322.c:543/srgb_320x240_mode: 60 vs. 10168 (.clock=3D245350=
-0 .htotal=3D320 + 359 + 1 + 241 .vtotal=3D262)
-panel-ilitek-ili9322.c:587/yuv_640x320_mode: 60 vs. 7768 (.clock=3D2454000 =
-.htotal=3D640 + 252 + 1 + 28 .vtotal=3D320 + 4 + 1 + 18)
-panel-ilitek-ili9322.c:616/itu_r_bt_656_640_mode: 60 vs. 5358 (.clock=3D245=
-4000 .htotal=3D640 + 3 + 1 + 272 .vtotal=3D500)
-panel-ilitek-ili9322.c:557/srgb_360x240_mode: 60 vs. 16178 (.clock=3D270000=
-0 .htotal=3D360 + 35 + 1 + 241 .vtotal=3D262)
-panel-ilitek-ili9322.c:601/yuv_720x360_mode: 60 vs. 7071 (.clock=3D2700000 =
-.htotal=3D720 + 252 + 1 + 24 .vtotal=3D360 + 4 + 1 + 18)
-panel-ilitek-ili9322.c:631/itu_r_bt_656_720_mode: 60 vs. 5422 (.clock=3D270=
-0000 .htotal=3D720 + 3 + 1 + 272 .vtotal=3D500)
-panel-ilitek-ili9322.c:572/prgb_320x240_mode: 60 vs. 59725 (.clock=3D640000=
-0 .htotal=3D320 + 38 + 1 + 50 .vtotal=3D262)
-panel-lg-lg4573.c:200/default_mode: 60 vs. 57 (.clock=3D27000 .htotal=3D480=
- + 10 + 59 + 10 .vtotal=3D800 + 15 + 15 + 15)
-panel-sitronix-st7789v.c:159/default_mode: 60 vs. 70 (.clock=3D7000 .htotal=
-=3D240 + 38 + 10 + 10 .vtotal=3D320 + 8 + 4 + 4)
-panel-arm-versatile.c:161/versatile_panels[]: 60 vs. 61 (.clock=3D25000 .ht=
-otal=3D640 + 24 + 96 + 24 .vtotal=3D480 + 11 + 2 + 32)
-panel-arm-versatile.c:208/versatile_panels[]: 116 vs. 59 (.clock=3D5400 .ht=
-otal=3D240 + 10 + 10 + 20 .vtotal=3D320 + 2 + 2 + 2)
-panel-arm-versatile.c:184/versatile_panels[]: 390 vs. 1523 (.clock=3D62500 =
-.htotal=3D176 + 2 + 3 + 3 .vtotal=3D220 + 0 + 2 + 1)
-panel-leadtek-ltk500hd1829.c:380/default_mode: 60 vs. 36 (.clock=3D41600 .h=
-total=3D720 + 50 + 50 + 50 .vtotal=3D1280 + 30 + 4 + 12)
-panel-feixin-k101-im2ba02.c:394/k101_im2ba02_default_mode: 60 vs. 62 (.cloc=
-k=3D70000 .htotal=3D800 + 20 + 20 + 20 .vtotal=3D1280 + 16 + 4 + 4)
-panel-simple.c:1305/edt_etm043080dh6gp_mode: 60 vs. 67 (.clock=3D10870 .hto=
-tal=3D480 + 8 + 4 + 41 .vtotal=3D288 + 2 + 4 + 10)
-panel-simple.c:3881/lg_acx467akm_7_mode: 60 vs. 72 (.clock=3D150000 .htotal=
-=3D1080 + 2 + 2 + 2 .vtotal=3D1920 + 2 + 2 + 2)
-panel-simple.c:2509/ortustech_com37h3m_mode: 60 vs. 67 (.clock=3D22153 .hto=
-tal=3D480 + 8 + 10 + 10 .vtotal=3D640 + 4 + 3 + 4)
-panel-simple.c:2480/ontat_yx700wv03_mode: 60 vs. 59 (.clock=3D29500 .htotal=
-=3D992 .vtotal=3D500)
-panel-simple.c:1451/foxlink_fl500wvr00_a0t_mode: 60 vs. 55 (.clock=3D32260 =
-.htotal=3D800 + 168 + 64 + 88 .vtotal=3D480 + 37 + 2 + 8)
-panel-simple.c:2589/pda_91_00156_a0_mode: 60 vs. 68 (.clock=3D33300 .htotal=
-=3D800 + 1 + 64 + 64 .vtotal=3D480 + 1 + 23 + 22)
-panel-simple.c:2969/shelly_sca07010_bfn_lnn_mode: 60 vs. 68 (.clock=3D33300=
- .htotal=3D800 + 1 + 64 + 64 .vtotal=3D480 + 1 + 23 + 22)
-panel-simple.c:1682/innolux_at070tn92_mode: 60 vs. 58 (.clock=3D33333 .htot=
-al=3D800 + 210 + 20 + 46 .vtotal=3D480 + 22 + 23 + 10)
-panel-simple.c:3260/vl050_8048nt_c01_mode: 60 vs. 58 (.clock=3D33333 .htota=
-l=3D800 + 210 + 20 + 46 .vtotal=3D480 + 22 + 10 + 23)
-panel-simple.c:1098/cdtech_s070wv95_ct16_mode: 60 vs. 72 (.clock=3D35000 .h=
-total=3D800 + 40 + 40 + 48 .vtotal=3D480 + 29 + 13 + 3)
-panel-simple.c:788/auo_g104sn02_mode: 60 vs. 52 (.clock=3D40000 .htotal=3D8=
-00 + 40 + 216 + 128 .vtotal=3D600 + 10 + 35 + 2)
-panel-simple.c:3201/tpk_f10a_0102_mode: 60 vs. 54 (.clock=3D45000 .htotal=
-=3D1024 + 176 + 5 + 88 .vtotal=3D600 + 20 + 5 + 25)
-panel-simple.c:2841/sharp_lq035q7db03_mode: 60 vs. 61 (.clock=3D5500 .htota=
-l=3D240 + 16 + 7 + 5 .vtotal=3D320 + 9 + 1 + 7)
-panel-simple.c:1279/edt_et035012dm6_mode: 60 vs. 61 (.clock=3D6500 .htotal=
-=3D320 + 20 + 68 .vtotal=3D240 + 4 + 4 + 14)
-panel-simple.c:2321/netron_dy_e231732_mode: 60 vs. 65 (.clock=3D66000 .htot=
-al=3D1024 + 160 + 70 + 90 .vtotal=3D600 + 127 + 20 + 3)
-panel-simple.c:1122/chunghwa_claa070wp03xg_mode: 60 vs. 57 (.clock=3D66770 =
-.htotal=3D800 + 49 + 33 + 17 .vtotal=3D1280 + 1 + 7 + 15)
-panel-simple.c:3824/lg_lh500wx1_sd03_mode: 60 vs. 61 (.clock=3D67000 .htota=
-l=3D720 + 12 + 4 + 112 .vtotal=3D1280 + 8 + 4 + 12)
-panel-simple.c:764/auo_g101evn010_mode: 60 vs. 58 (.clock=3D68930 .htotal=
-=3D1280 + 82 + 2 + 84 .vtotal=3D800 + 8 + 2 + 6)
-panel-simple.c:1169/chunghwa_claa101wb01_mode: 60 vs. 59 (.clock=3D69300 .h=
-total=3D1366 + 48 + 32 + 20 .vtotal=3D768 + 16 + 8 + 16)
-panel-simple.c:2002/lemaker_bl035_rgb_002_mode: 60 vs. 65 (.clock=3D7000 .h=
-total=3D320 + 20 + 30 + 38 .vtotal=3D240 + 4 + 3 + 15)
-panel-simple.c:2918/sharp_lq150x1lg11_mode: 60 vs. 65 (.clock=3D71100 .htot=
-al=3D1024 + 168 + 64 + 88 .vtotal=3D768 + 37 + 2 + 8)
-panel-simple.c:2214/logicpd_type_28_mode: 60 vs. 59 (.clock=3D9000 .htotal=
-=3D480 + 3 + 42 + 2 .vtotal=3D272 + 2 + 11 + 3)
-panel-simple.c:1525/giantplus_gpg482739qs5_mode: 60 vs. 59 (.clock=3D9000 .=
-htotal=3D480 + 5 + 1 + 40 .vtotal=3D272 + 8 + 1 + 8)
-panel-simple.c:1073/cdtech_s043wq26h_ct7_mode: 60 vs. 57 (.clock=3D9000 .ht=
-otal=3D480 + 5 + 5 + 40 .vtotal=3D272 + 8 + 8 + 8)
-panel-simple.c:2613/qd43003c0_40_mode: 60 vs. 59 (.clock=3D9000 .htotal=3D4=
-80 + 8 + 4 + 39 .vtotal=3D272 + 4 + 10 + 2)
-panel-simple.c:3124/ti_nspire_classic_lcd_mode[]: 60 vs. 123 (.clock=3D1000=
-0 .htotal=3D320 + 6 + 6 + 6 .vtotal=3D240 + 0 + 1 + 0)
-panel-simple.c:3096/ti_nspire_cx_lcd_mode[]: 60 vs. 93 (.clock=3D10000 .hto=
-tal=3D320 + 50 + 6 + 38 .vtotal=3D240 + 3 + 1 + 17)
-
-I presume a bunch of those are just lazyness, but there some
-real oddballs in the mix for sure. CCing everyone...
-
-[1]
-@find_substruct@
-identifier P, C;
-@@
-struct P {
-...
-	struct drm_display_mode C;
-...
-};
-
-@submode@
-identifier find_substruct.P, find_substruct.C, M;
-expression CLK, HT, VT, VREF;
-position POS;
-@@
-struct P M =3D {
-...,
-.C =3D {
-	.clock =3D CLK@POS
-	,...,
-	.htotal =3D HT
-	,...,
-	.vtotal =3D VT
-	,...,
-	.vrefresh =3D VREF
-}
-,...
-};
-
-@submodes@
-identifier find_substruct.P, find_substruct.C, A;
-expression CLK, HT, VT, VREF;
-position POS;
-@@
-struct P A[...] =3D {
-...,
-{
-	.C =3D {
-		.clock =3D CLK@POS
-		,...,
-		.htotal =3D HT
-		,...,
-		.vtotal =3D VT
-		,...,
-		.vrefresh =3D VREF
-	}
-}
-,...
-};
-
-@mode@
-identifier M;
-expression CLK, HT, VT, VREF;
-position POS;
-@@
-struct drm_display_mode M =3D {
-	.clock =3D CLK@POS
-	,...,
-	.htotal =3D HT
-	,...,
-	.vtotal =3D VT
-	,...,
-	.vrefresh =3D VREF
-};
-
-@modes@
-identifier A;
-expression CLK, HT, VT, VREF;
-position POS;
-@@
-struct drm_display_mode A[...] =3D {
-	...,
-	{
-	...,
-	.clock =3D CLK@POS
-	,...,
-	.htotal =3D HT
-	,...,
-	.vtotal =3D VT
-	,...,
-	.vrefresh =3D VREF
-	,...
-	}
-	,...
-};
-
-@script:python@
-ht << mode.HT;
-vt << mode.VT;
-clk << mode.CLK;
-vref << mode.VREF;
-m << mode.M;
-pos << mode.POS;
-@@
-def mode_vrefresh(clk, ht, vt):
-    return int(eval(clk)*1000.0/(eval(ht)*eval(vt))+0.5)
-if mode_vrefresh(clk, ht, vt) !=3D eval(vref):
-   print "{}:{}/{}: {} vs. {} (.clock=3D{} .htotal=3D{} .vtotal=3D{})".form=
-at(pos[0].file, pos[0].line, m, vref, mode_vrefresh(clk, ht, vt), clk, ht, =
-vt)
-
-@script:python@
-ht << submode.HT;
-vt << submode.VT;
-clk << submode.CLK;
-vref << submode.VREF;
-m << submode.M;
-pos << submode.POS;
-@@
-def mode_vrefresh(clk, ht, vt):
-    return int(eval(clk)*1000.0/(eval(ht)*eval(vt))+0.5)
-if mode_vrefresh(clk, ht, vt) !=3D eval(vref):
-   print "{}:{}/{}: {} vs. {} (.clock=3D{} .htotal=3D{} .vtotal=3D{})".form=
-at(pos[0].file, pos[0].line, m, vref, mode_vrefresh(clk, ht, vt), clk, ht, =
-vt)
-
-@script:python@
-ht << modes.HT;
-vt << modes.VT;
-clk << modes.CLK;
-vref << modes.VREF;
-m << modes.A;
-pos << modes.POS;
-@@
-def mode_vrefresh(clk, ht, vt):
-    return int(eval(clk)*1000.0/(eval(ht)*eval(vt))+0.5)
-if mode_vrefresh(clk, ht, vt) !=3D eval(vref):
-   print "{}:{}/{}[]: {} vs. {} (.clock=3D{} .htotal=3D{} .vtotal=3D{})".fo=
-rmat(pos[0].file, pos[0].line, m, vref, mode_vrefresh(clk, ht, vt), clk, ht=
-, vt)
-
-@script:python@
-ht << submodes.HT;
-vt << submodes.VT;
-clk << submodes.CLK;
-vref << submodes.VREF;
-m << submodes.A;
-pos << submodes.POS;
-@@
-def mode_vrefresh(clk, ht, vt):
-    return int(eval(clk)*1000.0/(eval(ht)*eval(vt))+0.5)
-if mode_vrefresh(clk, ht, vt) !=3D eval(vref):
-   print "{}:{}/{}[]: {} vs. {} (.clock=3D{} .htotal=3D{} .vtotal=3D{})".fo=
-rmat(pos[0].file, pos[0].line, m, vref, mode_vrefresh(clk, ht, vt), clk, ht=
-, vt)
-
--- =
-
-Ville Syrj=E4l=E4
-Intel
-_______________________________________________
-Nouveau mailing list
-Nouveau@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/nouveau
+T24gVHVlLCBGZWIgMjUsIDIwMjAgYXQgODoyNyBQTSBWaWxsZSBTeXJqw6Rsw6QKPHZpbGxlLnN5
+cmphbGFAbGludXguaW50ZWwuY29tPiB3cm90ZToKCj4gT0ssIHNvIEkgd2VudCBhaGVhZCBhIHdy
+b3RlIGEgYml0IG9mIGNvY2NpIFsxXSB0byBmaW5kIHRoZSBiYWQgYXBwbGVzLgoKVGhhdCdzIGlt
+cHJlc3NpdmUgOkQKCj4gVW5mb3J0dW5hdGVseSBpdCBmb3VuZCBhIGxvdCBvZiBzdHJhbmdlIHN0
+dWZmOgoKSSB3aWxsIGFuc3dlciBmb3IgdGhlIHdlaXJkbmVzcyBJIGNhdXNlZC4KCkkgaGF2ZSBs
+b25nIHN1c3BlY3RlZCB0aGF0IGEgd2hvbGUgYnVuY2ggb2YgdGhlICJzaW1wbGUiIGRpc3BsYXlz
+CmFyZSBub3Qgc2ltcGxlIGJ1dCBjb250YWlucyBhIGRpc3BsYXkgY29udHJvbGxlciBhbmQgbWVt
+b3J5LgpUaGF0IG1lYW5zIHRoYXQgdGhlIHNwZWVkIG92ZXIgdGhlIGxpbmsgdG8gdGhlIGRpc3Bs
+YXkgYW5kCmFjdHVhbCByZWZyZXNoIHJhdGUgb24gdGhlIGFjdHVhbCBkaXNwbGF5IGlzIGFzeW1t
+ZXRyaWMgYmVjYXVzZQp3ZWxsIHdlIGFyZSBqdXN0IHVwZGF0aW5nIGEgUkFNLCB0aGUgcmVzb2x1
+dGlvbiBqdXN0IGxpbWl0cyBob3cKbXVjaCBkYXRhIHdlIGFyZSBzZW5kaW5nLCB0aGUgY2xvY2sg
+bGltaXRzIHRoZSBzcGVlZCBvbiB0aGUKYnVzIG92ZXIgdG8gdGhlIFJBTSBvbiB0aGUgb3RoZXIg
+c2lkZS4KCkluIG1vc3QgY2FzZXMgSSB0aGluZyB0aGUgY2xvY2sgaXMgdGhlIHdheSB0byBnby4K
+Cj4gcGFuZWwtc29ueS1hY3g0MjRha3AuYzo1MS9zb255X2FjeDQyNGFrcF92aWRfbW9kZTogNjAg
+dnMuIDcyNyAoLmNsb2NrPTMzMDAwMCAuaHRvdGFsPTQ4MCArIDE1ICsgMCArIDE1IC52dG90YWw9
+ODY0ICsgMTQgKyAxICsgMTEpCgpJIHN1c3BlY3QgY2xvY2sgc2hvdWxkIGJlIGFkanVzdGVkIGFm
+dGVyIHZmcmVzaCA9IDYwIGhlcmUgaW5zdGVhZCBvZiB0aGUKb3RoZXIgd2F5IGFyb3VuZC4gSSBj
+b3VsZG4ndCBxdWl0ZSB0ZXN0IHRoZSB2aWRlbyBtb2RlLCBidXQgdGhlIHZlbmRvcgpkcml2ZXIg
+KG5vIGRvY3VtZW50YXRpb24gLi4uLikgZG9lcyBzdGF0ZSAzMzAgTUh6IHdoaWNoIHNlZW1zIGEK
+Yml0IGhpZ2guCgpKdXN0IGRyb3AgdnJlZnJlc2ggZm9yIG5vdy4KCj4gcGFuZWwtc29ueS1hY3g0
+MjRha3AuYzo3MS9zb255X2FjeDQyNGFrcF9jbWRfbW9kZTogNjAgdnMuIDcxMSAoLmNsb2NrPTQy
+MDE2MCAuaHRvdGFsPTQ4MCArIDE1NCArIDE2ICsgMzIgLnZ0b3RhbD04NjQgKyAxICsgMSArIDEp
+CgpZb3UgY2FuIG92ZXJyaWRlIHRoaXMgaWdub3JpbmcgdGhlIHZyZWZyZXNoLCB0aGlzIGlzIGEg
+Y29tbWFuZC1tb2RlCm9ubHksIGFuZCBpbiBjb21tYW5kIG1vZGUgdGhlIHJlZnJlc2ggZG9lc24n
+dCBjb21lIGludG8gcGxheSwgb3IgaXMKdmVyeSBoaWdoIGFuZCBsaW1pdGVkIGJ5IGEgYnVuY2gg
+b2Ygb3RoZXIgb3ZlcmhlYWQgdGhhbiBqdXN0IHRoZQpyZXNvbHV0aW9uLiBUaGUgY29tbWFuZCBt
+b2RlIEhTIGNsb2NrIGlzIEA0MjArIE1IeiBpbmRlZWQuClRlc3RzIHNob3dlZCBhcm91bmQgMTE2
+IEh6IGZvciB0aGlzIHBhcnRpY3VsYXIgZGlzcGxheSBpbiBwcmFjdGljZQp3aXRoIGNvbnRpbnVv
+dXMgdXBkYXRlcy4KCj4gcGFuZWwtaWxpdGVrLWlsaTkzMjIuYzo1NDMvc3JnYl8zMjB4MjQwX21v
+ZGU6IDYwIHZzLiAxMDE2OCAoLmNsb2NrPTI0NTM1MDAgLmh0b3RhbD0zMjAgKyAzNTkgKyAxICsg
+MjQxIC52dG90YWw9MjYyKQo+IHBhbmVsLWlsaXRlay1pbGk5MzIyLmM6NTg3L3l1dl82NDB4MzIw
+X21vZGU6IDYwIHZzLiA3NzY4ICguY2xvY2s9MjQ1NDAwMCAuaHRvdGFsPTY0MCArIDI1MiArIDEg
+KyAyOCAudnRvdGFsPTMyMCArIDQgKyAxICsgMTgpCj4gcGFuZWwtaWxpdGVrLWlsaTkzMjIuYzo2
+MTYvaXR1X3JfYnRfNjU2XzY0MF9tb2RlOiA2MCB2cy4gNTM1OCAoLmNsb2NrPTI0NTQwMDAgLmh0
+b3RhbD02NDAgKyAzICsgMSArIDI3MiAudnRvdGFsPTUwMCkKPiBwYW5lbC1pbGl0ZWstaWxpOTMy
+Mi5jOjU1Ny9zcmdiXzM2MHgyNDBfbW9kZTogNjAgdnMuIDE2MTc4ICguY2xvY2s9MjcwMDAwMCAu
+aHRvdGFsPTM2MCArIDM1ICsgMSArIDI0MSAudnRvdGFsPTI2MikKPiBwYW5lbC1pbGl0ZWstaWxp
+OTMyMi5jOjYwMS95dXZfNzIweDM2MF9tb2RlOiA2MCB2cy4gNzA3MSAoLmNsb2NrPTI3MDAwMDAg
+Lmh0b3RhbD03MjAgKyAyNTIgKyAxICsgMjQgLnZ0b3RhbD0zNjAgKyA0ICsgMSArIDE4KQo+IHBh
+bmVsLWlsaXRlay1pbGk5MzIyLmM6NjMxL2l0dV9yX2J0XzY1Nl83MjBfbW9kZTogNjAgdnMuIDU0
+MjIgKC5jbG9jaz0yNzAwMDAwIC5odG90YWw9NzIwICsgMyArIDEgKyAyNzIgLnZ0b3RhbD01MDAp
+Cj4gcGFuZWwtaWxpdGVrLWlsaTkzMjIuYzo1NzIvcHJnYl8zMjB4MjQwX21vZGU6IDYwIHZzLiA1
+OTcyNSAoLmNsb2NrPTY0MDAwMDAgLmh0b3RhbD0zMjAgKyAzOCArIDEgKyA1MCAudnRvdGFsPTI2
+MikKClRoaXMgaXMgdGhlIGRhdGFzaGVldCBpZiB5b3Ugd2FudCB0byB0YWtlIGEgbG9vazoKaHR0
+cHM6Ly9kZmx1bmQuc2UvfnRyaWFkL2tyYWQvZGxpbmstZGlyLTY4NS9JTEk5MzIyRFNfVjEuMTIu
+cGRmCgpUaGUgb25lIHBsYXRmb3JtIHVzaW5nIHRoaXMgaXMgdXNpbmcgdGhlCjggYml0IElUVS1S
+IEJULjY1NiA2NDBZIDMyMENiQ3IgbW9kZSB3aGljaAooSSB0aGluaykgaXMgc2ltaWxhciB0byBE
+U0kgY29tbWFuZCBtb2RlIGFnYWluOiB0aGVyZSBpcyBhIHN0cmVhbQpvZiBkYXRhIGluIGEgYnVy
+c3QgYW5kIHlvdSBkZWNpZGUgaG93IG9mdGVuIHlvdSB3YW50IHRvIHNlbmQgaXQKYmVjYXVzZSB0
+aGUgcGFuZWwgYWx3YXlzIGhhcyBiYWNraW5nIG1lbW9yeSBhbmQgdGhlCnNwZWVkIG91dCB0byB0
+aGUgcGh5c2ljYWwgZGlzcGxheSBpcyBzb21ldGhpbmcgY29tcGxldGVseQpkaWZmZXJlbnQuCgpZ
+b3UgY2FuIHNhZmVseSBkZWxldGUgdnJlZnJlc2ggZnJvbSBhbGwgb2YgdGhlc2Ugc2l0ZXMuCgo+
+IHBhbmVsLWFybS12ZXJzYXRpbGUuYzoxNjEvdmVyc2F0aWxlX3BhbmVsc1tdOiA2MCB2cy4gNjEg
+KC5jbG9jaz0yNTAwMCAuaHRvdGFsPTY0MCArIDI0ICsgOTYgKyAyNCAudnRvdGFsPTQ4MCArIDEx
+ICsgMiArIDMyKQo+IHBhbmVsLWFybS12ZXJzYXRpbGUuYzoyMDgvdmVyc2F0aWxlX3BhbmVsc1td
+OiAxMTYgdnMuIDU5ICguY2xvY2s9NTQwMCAuaHRvdGFsPTI0MCArIDEwICsgMTAgKyAyMCAudnRv
+dGFsPTMyMCArIDIgKyAyICsgMikKPiBwYW5lbC1hcm0tdmVyc2F0aWxlLmM6MTg0L3ZlcnNhdGls
+ZV9wYW5lbHNbXTogMzkwIHZzLiAxNTIzICguY2xvY2s9NjI1MDAgLmh0b3RhbD0xNzYgKyAyICsg
+MyArIDMgLnZ0b3RhbD0yMjAgKyAwICsgMiArIDEpCgpUaGUgb25seSBkcml2ZXIgIGRyaXZlcnMv
+Z3B1L2RybS9wbDExMS9wbDExMV9kaXNwbGF5LmMKVXNlcyBtb2RlLT5jbG9jayBzbyBqdXN0IGRy
+b3AgdnJlZnJlc2guCgpZb3VycywKTGludXMgV2FsbGVpagpfX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fXwpOb3V2ZWF1IG1haWxpbmcgbGlzdApOb3V2ZWF1QGxp
+c3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFu
+L2xpc3RpbmZvL25vdXZlYXUK
