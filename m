@@ -2,24 +2,23 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 86E4F16F742
-	for <lists+nouveau@lfdr.de>; Wed, 26 Feb 2020 06:28:27 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id F35BB16F771
+	for <lists+nouveau@lfdr.de>; Wed, 26 Feb 2020 06:39:18 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 08F736E0EA;
-	Wed, 26 Feb 2020 05:28:24 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 61E4D6E106;
+	Wed, 26 Feb 2020 05:39:17 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C4A626E0EA;
- Wed, 26 Feb 2020 05:28:22 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 307C76E106;
+ Wed, 26 Feb 2020 05:39:16 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 77661AE41;
- Wed, 26 Feb 2020 05:28:20 +0000 (UTC)
-To: Emil Velikov <emil.l.velikov@gmail.com>
+ by mx2.suse.de (Postfix) with ESMTP id C7D85AFB1;
+ Wed, 26 Feb 2020 05:39:14 +0000 (UTC)
+To: Daniel Vetter <daniel@ffwll.ch>
 References: <20200225155902.9751-1-tzimmermann@suse.de>
- <20200225155902.9751-2-tzimmermann@suse.de>
- <CACvgo52fCMEiohuOkXyZi_mVrFnhMmmB--W64AvhEgVe3i2T5A@mail.gmail.com>
+ <20200225174400.GP2363188@phenom.ffwll.local>
 From: Thomas Zimmermann <tzimmermann@suse.de>
 Autocrypt: addr=tzimmermann@suse.de; keydata=
  mQENBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
@@ -46,14 +45,14 @@ Autocrypt: addr=tzimmermann@suse.de; keydata=
  aMyV8RbyXot1r/8QLlWldU3NrTF5p7TMU2y3ZH2mf5suSKHAMtbE4jKJ8ZHFOo3GhLgjVrBW
  HE9JXO08xKkgD+w6v83+nomsEuf6C6LYrqY/tsZvyEX6zN8CtirPdPWu/VXNRYAl/lat7lSI
  3H26qrE=
-Message-ID: <d64d2de7-8c0d-ca32-e9a3-706b98019c46@suse.de>
-Date: Wed, 26 Feb 2020 06:28:15 +0100
+Message-ID: <f042cfae-8f74-0bd5-bd5f-dfb962c0c3b4@suse.de>
+Date: Wed, 26 Feb 2020 06:39:08 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.4.1
 MIME-Version: 1.0
-In-Reply-To: <CACvgo52fCMEiohuOkXyZi_mVrFnhMmmB--W64AvhEgVe3i2T5A@mail.gmail.com>
-Subject: Re: [Nouveau] [PATCH 1/3] drm: Add separate state structure for
- legacy, non-KMS drivers
+In-Reply-To: <20200225174400.GP2363188@phenom.ffwll.local>
+Subject: Re: [Nouveau] [PATCH 0/3] Add separate non-KMS state;
+ constify struct drm_driver
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -65,86 +64,144 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: "airlied@linux.ie" <airlied@linux.ie>,
- "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
- "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
- "maarten.lankhorst@linux.intel.com" <maarten.lankhorst@linux.intel.com>,
- "mripard@kernel.org" <mripard@kernel.org>,
- "bskeggs@redhat.com" <bskeggs@redhat.com>, "daniel@ffwll.ch" <daniel@ffwll.ch>,
- "alexander.deucher@amd.com" <alexander.deucher@amd.com>,
- "sam@ravnborg.org" <sam@ravnborg.org>,
- "emil.velikov@collabora.com" <emil.velikov@collabora.com>
-Content-Type: multipart/mixed; boundary="===============0472917992=="
+Cc: airlied@linux.ie, nouveau@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, maarten.lankhorst@linux.intel.com,
+ mripard@kernel.org, bskeggs@redhat.com, alexander.deucher@amd.com,
+ sam@ravnborg.org, emil.velikov@collabora.com
+Content-Type: multipart/mixed; boundary="===============0787541944=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============0472917992==
+--===============0787541944==
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="Hx0UVgGfo7vakdBHIVTMh3shlfJiKBprl"
+ boundary="nPqAdVrr1M7PHyIBAqpGtdjaVMw8fR6f3"
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---Hx0UVgGfo7vakdBHIVTMh3shlfJiKBprl
-Content-Type: multipart/mixed; boundary="CDRuovX7jI9aChelSbkaae7Qnej5MM0rK";
+--nPqAdVrr1M7PHyIBAqpGtdjaVMw8fR6f3
+Content-Type: multipart/mixed; boundary="uwINkE9aUz1Amsuxs93ui3Lma6VXhBB9g";
  protected-headers="v1"
 From: Thomas Zimmermann <tzimmermann@suse.de>
-To: Emil Velikov <emil.l.velikov@gmail.com>
-Cc: "maarten.lankhorst@linux.intel.com" <maarten.lankhorst@linux.intel.com>,
- "mripard@kernel.org" <mripard@kernel.org>,
- "airlied@linux.ie" <airlied@linux.ie>, "daniel@ffwll.ch" <daniel@ffwll.ch>,
- "bskeggs@redhat.com" <bskeggs@redhat.com>,
- "emil.velikov@collabora.com" <emil.velikov@collabora.com>,
- "alexander.deucher@amd.com" <alexander.deucher@amd.com>,
- "sam@ravnborg.org" <sam@ravnborg.org>,
- "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
- "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>
-Message-ID: <d64d2de7-8c0d-ca32-e9a3-706b98019c46@suse.de>
-Subject: Re: [Nouveau] [PATCH 1/3] drm: Add separate state structure for
- legacy, non-KMS drivers
+To: Daniel Vetter <daniel@ffwll.ch>
+Cc: maarten.lankhorst@linux.intel.com, mripard@kernel.org, airlied@linux.ie,
+ bskeggs@redhat.com, emil.velikov@collabora.com, alexander.deucher@amd.com,
+ sam@ravnborg.org, dri-devel@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org
+Message-ID: <f042cfae-8f74-0bd5-bd5f-dfb962c0c3b4@suse.de>
+Subject: Re: [PATCH 0/3] Add separate non-KMS state; constify struct
+ drm_driver
 References: <20200225155902.9751-1-tzimmermann@suse.de>
- <20200225155902.9751-2-tzimmermann@suse.de>
- <CACvgo52fCMEiohuOkXyZi_mVrFnhMmmB--W64AvhEgVe3i2T5A@mail.gmail.com>
-In-Reply-To: <CACvgo52fCMEiohuOkXyZi_mVrFnhMmmB--W64AvhEgVe3i2T5A@mail.gmail.com>
+ <20200225174400.GP2363188@phenom.ffwll.local>
+In-Reply-To: <20200225174400.GP2363188@phenom.ffwll.local>
 
---CDRuovX7jI9aChelSbkaae7Qnej5MM0rK
+--uwINkE9aUz1Amsuxs93ui3Lma6VXhBB9g
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: quoted-printable
 
-Hi Emil
+Hi
 
-Am 25.02.20 um 18:37 schrieb Emil Velikov:
-> Hi Thomas,
->=20
-> On Tuesday, 25 February 2020, Thomas Zimmermann <tzimmermann@suse.de
-> <mailto:tzimmermann@suse.de>> wrote:
->=20
->     Non-KMS drivers store state in struct drm_driver. This bloats the
->     structure for KMS drivers and prevents it from being declared with
->     'static const' qualifiers. Moving the non-KMS state into a separate=
+Am 25.02.20 um 18:44 schrieb Daniel Vetter:
+> On Tue, Feb 25, 2020 at 04:58:59PM +0100, Thomas Zimmermann wrote:
+>> This patchset moves legacy, non-KMS driver state from struct drm_drive=
+r
+>> into struct drm_legacy_state. Only non-KMS drivers provide an instance=
 
->     data structure resolves this.
->=20
->=20
-> Have you considered subclassing the const drm_driver for legacy drivers=
-=2E
-> This way the legacy (pointer) data does not need to be exposed to
-> non-legacy drivers.
+>> of the latter structure. One special case is nouveau, which supports
+>> legacy interfaces. It also provides an instance of the legacy state if=
 
-I didn't want to do an upcast each time the legacy data is required. I
-know that subclassing is closer to the style of current DRM, but given
-the current code base, the additional legacy pointer seemed like the
-lesser evil.
+>> the legacy interfaces have been enabled (i.e., defines the config opti=
+on
+>> CONFIG_NOUVEAU_LEGACY_CTX_SUPPORT)
+>>
+>> I reviewed all call sites of legacy state and functions to verify that=
+
+>> DRIVER_LEGACY or DRIVER_KMS_LEGACY_CONTEXT is set on the device; or th=
+at
+>> DRIVER_MODESET is not set.
+>>
+>> With the mutable KMS state removed, instances of struct drm_driver can=
+
+>> be declared as constant. The patchset modifies the DRM core accordingl=
+y.
+>> Individual drivers can follow later on.
+>=20
+> Bikeshed: We very much have modern non-KMS drivers (vgem, etnaviv, v3d,=
+
+> panfrost, ...). non-KMS !=3D legacy, which is what you're talking about=
+
+> here.
+
+OK, probably needs to be more precise.
+
+>=20
+> Other thing, and it's a bit raining on your parade: I don't see the poi=
+nt.
+> Sprinkling a few more #ifdef CONFIG_DRM_LEGACY over the relevant parts
+> sounds like a reasonable idea. But this is a lot of churn for drivers
+> which are all pretty much dead, and just waiting for their eventual
+> removal. And from a compile-testing pov of making sure modern drivers
+> don't use any of the deprecated stuff wrapping it in CONFIG_DRM_LEGACY
+> should be plenty enough.
+
+It's not about these old drivers, it's about having constant driver
+structures and maybe saving a few bytes in the modern drivers. If these
+old drivers hold back improvements to the drivers we care about, I don't
+see we they are not to be touched.
+
+This cannot be solved with CONFIG_DRM_LEGACY, unless you want to wrap
+any reference in core code to legacy data. I tried at first and it
+turned out to be an unreadable mess.
+
+And from a complexity POV the patchset is trivial. It adds a data
+structure to each old driver and moves a few initializers around. The
+worst thing that can happen is that code tried to dereference the legacy
+pointer when it's not set. This bug will happen with modern drivers, so
+we should see it easily.
 
 Best regards
 Thomas
 
 >=20
-> Not to mention that const data (drm_driver), which has (const) pointer
-> to mutable data (legacy bits) is a trap IMHO
+> And from a "make stuff const" I think Laurent's much more minimal serie=
+s
+> also gets us there for all the drivers we care about.
+> -Daniel
 >=20
-> Emil
+>>
+>> Thomas Zimmermann (3):
+>>   drm: Add separate state structure for legacy, non-KMS drivers
+>>   drm: Move non-kms driver state into struct drm_legacy_state
+>>   drm: Constify struct drm_driver in DRM core
+>>
+>>  drivers/gpu/drm/drm_bufs.c            | 10 +++++-----
+>>  drivers/gpu/drm/drm_context.c         |  9 +++++----
+>>  drivers/gpu/drm/drm_drv.c             | 12 ++++++++----
+>>  drivers/gpu/drm/drm_file.c            |  4 ++--
+>>  drivers/gpu/drm/drm_legacy_misc.c     |  6 +++---
+>>  drivers/gpu/drm/drm_lock.c            |  7 ++++---
+>>  drivers/gpu/drm/drm_pci.c             | 16 ++++++++++------
+>>  drivers/gpu/drm/drm_vblank.c          | 11 ++++++-----
+>>  drivers/gpu/drm/i810/i810_drv.c       | 10 +++++++---
+>>  drivers/gpu/drm/mga/mga_drv.c         | 16 ++++++++++------
+>>  drivers/gpu/drm/nouveau/nouveau_drm.c |  8 ++++++++
+>>  drivers/gpu/drm/r128/r128_drv.c       | 16 ++++++++++------
+>>  drivers/gpu/drm/savage/savage_drv.c   | 12 ++++++++----
+>>  drivers/gpu/drm/sis/sis_drv.c         |  8 ++++++--
+>>  drivers/gpu/drm/tdfx/tdfx_drv.c       |  6 +++++-
+>>  drivers/gpu/drm/via/via_drv.c         | 16 ++++++++++------
+>>  include/drm/drm_device.h              |  2 +-
+>>  include/drm/drm_drv.h                 | 21 +++++----------------
+>>  include/drm/drm_legacy.h              | 27 +++++++++++++++++++++++---=
+-
+>>  include/drm/drm_pci.h                 |  4 ++--
+>>  20 files changed, 138 insertions(+), 83 deletions(-)
+>>
+>> --
+>> 2.25.0
+>>
+>=20
 
 --=20
 Thomas Zimmermann
@@ -155,28 +212,28 @@ Maxfeldstr. 5, 90409 N=C3=BCrnberg, Germany
 Gesch=C3=A4ftsf=C3=BChrer: Felix Imend=C3=B6rffer
 
 
---CDRuovX7jI9aChelSbkaae7Qnej5MM0rK--
+--uwINkE9aUz1Amsuxs93ui3Lma6VXhBB9g--
 
---Hx0UVgGfo7vakdBHIVTMh3shlfJiKBprl
+--nPqAdVrr1M7PHyIBAqpGtdjaVMw8fR6f3
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQEzBAEBCAAdFiEEchf7rIzpz2NEoWjlaA3BHVMLeiMFAl5WAfMACgkQaA3BHVML
-eiPooggAnxmtcTkZSlg/VKh8bBT+rcT3+1L9bVvmSY71wBKeFJATIQWIFiceXENW
-3qjpSIl9NI7A4L2j7oO7pdbQCI0onxzGYdPl3ua59ys28zoUCJ+W0pnrJgD6Zxdl
-euXiOJR7g8PdvpMMtaVPe0zCQhGFMN4+Z8HT+EmuxMdoz0JT4aaqpA2/8nHXNEYl
-d+0QFHqNPA9rp1+sdVe+mrR148adaC+0bqHs3k8L9CxMacERjyj0ozHj0EhHrSbU
-6rV5Pp/x9HxBdMKhA1BQlOy8G0PCbsETNsoFPVJ18IM1H+UlcXVDVZq1mpvLM6sm
-GyHYmIK55k/Dk6OlamduDiGXci1stw==
-=E9s1
+iQEzBAEBCAAdFiEEchf7rIzpz2NEoWjlaA3BHVMLeiMFAl5WBHwACgkQaA3BHVML
+eiPDxAf/eiIvploVeGdiACfKJPm6kAk2t4I2o1E9q91jJ4r9T4+p9VNpxZ4cjM3x
+px7LWVyba99XA+oddmzCkOUyMA4hAEsKxGqV1lfnS3XAb6AX0ztSLPGGGAnIuoIm
+i0+AlrFj1XFaEIhyfORVaLpO3SLmTZ7GOOxsZVZSeDcECkMXMaCAKsRfinCOYwTn
+oB8/9prIoqMB/E3DNxMl4RWqB+8B/g1Uv+sHnmEQ0jD9Z+HMJaEbefzTWvkQ0V1R
+Hjknl7bAytXDeaRTuNaBK3sNh0e0QrE1XbENWANQqV8A1efm1H4GXCrBT4Wol9rV
+pz6X5w8dvSFEW2mmCb42Cqv43B7FYg==
+=P47h
 -----END PGP SIGNATURE-----
 
---Hx0UVgGfo7vakdBHIVTMh3shlfJiKBprl--
+--nPqAdVrr1M7PHyIBAqpGtdjaVMw8fR6f3--
 
---===============0472917992==
+--===============0787541944==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -187,4 +244,4 @@ Nouveau mailing list
 Nouveau@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/nouveau
 
---===============0472917992==--
+--===============0787541944==--
