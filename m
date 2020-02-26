@@ -2,60 +2,60 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D1D0C16FA81
-	for <lists+nouveau@lfdr.de>; Wed, 26 Feb 2020 10:19:00 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 53A8816FC21
+	for <lists+nouveau@lfdr.de>; Wed, 26 Feb 2020 11:26:59 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C08A26E2CC;
-	Wed, 26 Feb 2020 09:18:54 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 878106E484;
+	Wed, 26 Feb 2020 10:26:57 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-lj1-x241.google.com (mail-lj1-x241.google.com
- [IPv6:2a00:1450:4864:20::241])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6C1316E229
- for <nouveau@lists.freedesktop.org>; Tue, 25 Feb 2020 21:52:39 +0000 (UTC)
-Received: by mail-lj1-x241.google.com with SMTP id q8so562417ljj.11
- for <nouveau@lists.freedesktop.org>; Tue, 25 Feb 2020 13:52:39 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=A2ys7Ib2/Xnmb6RfJjBVglHxRB3L0ppD5nek4nNUG54=;
- b=dggYPJl/S1l5xcOIfxIS/BtjTf2Yhm1QVvH0GMrusu3UZdTJ+2IVNtl7if5lr+GING
- XpTndQesM1wBpqwKNuobZBIXrCPwzFtaklN3vLh2Qnd0+FWtpS3ZfwdtKmGftCZkxItM
- pt0dP1pU0t9V2smNwYJsoeHg/Qbpco6HesYKBw8Pilr2pVi84p88M5YAUcqk8Zh5lIHD
- CSe5MrLa4qFV3znicGDhh7dez3zSSB2e+gT6zhNI5c95nKfh15KuMLKm2jZQougUJ8qj
- kiKUiHXiaPkAZpyYO/fu8wpfUCAfkkn3icXFTgbLvWoWqO41x1j9KZ28pWh6LPjraRTR
- t6KA==
+Received: from mail-wr1-x444.google.com (mail-wr1-x444.google.com
+ [IPv6:2a00:1450:4864:20::444])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3C5EA6E25C
+ for <nouveau@lists.freedesktop.org>; Wed, 26 Feb 2020 10:26:56 +0000 (UTC)
+Received: by mail-wr1-x444.google.com with SMTP id y17so2277792wrn.6
+ for <nouveau@lists.freedesktop.org>; Wed, 26 Feb 2020 02:26:56 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:content-transfer-encoding:in-reply-to;
+ bh=B/so+mAbz6NPl+q0Sx9udFy2WbzDNdKEQXFbnDQqQj8=;
+ b=cUQ6CGdv6WcoV4LLyhRQ4NK2vSe2wWSZgdVgVoBmGwn0pBzsavxYJ0HA5Cpr5pgrO/
+ uWxzbSr41SeX3wBUXsFGL8bMxKSE1foG6QURLqVzb4+bGm0zPhnWmTmWs6uyxgNMINNb
+ TgqhAjFJFWAgkS5HPxd1w+TKx/JfSYvcVqYJY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=A2ys7Ib2/Xnmb6RfJjBVglHxRB3L0ppD5nek4nNUG54=;
- b=bo1ZHJ6hTjhJQhJSr1OoprUw5vk3HQnDU+sc/UYOOGu6D9+RzbhBCpnXjnux1NJAhR
- F+6srHpzcpjOjvYCA8BAAV50Y04u76h9olg9MajrLbGVMCIqgsxng4L7mLIYFiq8faJq
- M+rl8P3oD46gqz9hoel1n8Uekpf0Qp2q6JpBlJVb6nCUgOECzJrrVjVtk7wAeij49vyQ
- /YOC+V9AGRc8cqV71ZvxWCIN3Ip2hP3ydt04klm5HANwMoyUqMJDf9C0ueeM9ijbutRr
- ga5f0IceVus9rSuGtj/SEbmmZkwBdw3ESTnD/QtKRYs22Ow6BeI4flURYiVbiKyx5kPc
- dJ5A==
-X-Gm-Message-State: APjAAAUsawdquZF70yQGSo9KEgKwhynY++G9GzegB78v2Wa45ulBEOb4
- z8ZcFKBFjwBRXpaNP8r7avINB2BkPYC/W5NmHtLKSw==
-X-Google-Smtp-Source: APXvYqxOOzmfnyf+WeuQucvX5m9qM2Leiiv6kMjRVdA/nrsazbB0Q+l2xDGTGCvseEFr/CMgRzfQtQJ4YToGbq+Lxpk=
-X-Received: by 2002:a2e:7d0c:: with SMTP id y12mr663831ljc.39.1582667557689;
- Tue, 25 Feb 2020 13:52:37 -0800 (PST)
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:content-transfer-encoding
+ :in-reply-to;
+ bh=B/so+mAbz6NPl+q0Sx9udFy2WbzDNdKEQXFbnDQqQj8=;
+ b=c0kNhkIreCSPXnX9UpF8S4nDY9AV2Ng0AuBEdC8GD9pXO3Srdide9f6P+2/LjIBV3F
+ q7VZinvpeKKCfsWiAVac5/ouWM/BZ463ZJAV5mUb5lDRMW8BHG7pxPIuoT6uOoIfFc0/
+ ALpwNJBNUmjfs+w7hDMXE9wtI76x83X37hJ07G4m3gP6NvG+Ayjj6uEFPJivQuwjEfRO
+ yvQJyp3AmL7Xsac5p+Z2ih8pPHGdioGQTRgCHBr9ebGr3fFXjqXD4sugHj8ZXxFkH9cm
+ 4nAa5IbtcJ3xk1fgYo9GYgcgf+LMxx4quN28NG+3cMiqmqc+chqWN+lponMqnH9wUpdF
+ Wn8g==
+X-Gm-Message-State: APjAAAU77znTzjzUVK3OeoB0sji2HMc2zXanc3i+hOA0grPuFw942zSw
+ HcysPOFiWwqKS0Q9QBICfKAMlg==
+X-Google-Smtp-Source: APXvYqyaic4xQo3E/Unf2CRaHpk+u/TEAf+XZMWgyDfAqAgQQDfLUgUJjo2RiePHT9YbE25buECfyA==
+X-Received: by 2002:adf:f288:: with SMTP id k8mr4974500wro.301.1582712814854; 
+ Wed, 26 Feb 2020 02:26:54 -0800 (PST)
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
+ by smtp.gmail.com with ESMTPSA id v8sm2579370wrw.2.2020.02.26.02.26.53
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 26 Feb 2020 02:26:54 -0800 (PST)
+Date: Wed, 26 Feb 2020 11:26:52 +0100
+From: Daniel Vetter <daniel@ffwll.ch>
+To: Thomas Zimmermann <tzimmermann@suse.de>
+Message-ID: <20200226102652.GT2363188@phenom.ffwll.local>
+References: <20200225155902.9751-1-tzimmermann@suse.de>
+ <20200225174400.GP2363188@phenom.ffwll.local>
+ <f042cfae-8f74-0bd5-bd5f-dfb962c0c3b4@suse.de>
 MIME-Version: 1.0
-References: <20200219203544.31013-1-ville.syrjala@linux.intel.com>
- <CGME20200219203620eucas1p24b4990a91e758dbcf3e9b943669b0c8f@eucas1p2.samsung.com>
- <20200219203544.31013-5-ville.syrjala@linux.intel.com>
- <0f278771-79ce-fe23-e72c-3935dbe82d24@samsung.com>
- <20200225112114.GA13686@intel.com>
- <3ca785f2-9032-aaf9-0965-8657d31116ba@samsung.com>
- <20200225154506.GF13686@intel.com> <20200225192720.GG13686@intel.com>
-In-Reply-To: <20200225192720.GG13686@intel.com>
-From: Linus Walleij <linus.walleij@linaro.org>
-Date: Tue, 25 Feb 2020 22:52:25 +0100
-Message-ID: <CACRpkdZk9QEy+Kzkmy4BXiHB+aq9hprf=dmA_-R23yqH3NCt1g@mail.gmail.com>
-To: =?UTF-8?B?VmlsbGUgU3lyasOkbMOk?= <ville.syrjala@linux.intel.com>
-X-Mailman-Approved-At: Wed, 26 Feb 2020 09:18:53 +0000
-Subject: Re: [Nouveau] [PATCH 04/12] drm: Nuke mode->vrefresh
+Content-Disposition: inline
+In-Reply-To: <f042cfae-8f74-0bd5-bd5f-dfb962c0c3b4@suse.de>
+X-Operating-System: Linux phenom 5.3.0-3-amd64 
+Subject: Re: [Nouveau] [PATCH 0/3] Add separate non-KMS state;
+ constify struct drm_driver
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,107 +67,155 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Josh Wu <josh.wu@atmel.com>,
- Bhuvanchandra DV <bhuvanchandra.dv@toradex.com>,
- Neil Armstrong <narmstrong@baylibre.com>, Eric Anholt <eric@anholt.net>,
- nouveau@lists.freedesktop.org,
- =?UTF-8?Q?Guido_G=C3=BCnther?= <agx@sigxcpu.org>,
- Paul Kocialkowski <contact@paulk.fr>,
- "open list:DRM PANEL DRIVERS" <dri-devel@lists.freedesktop.org>,
- =?UTF-8?Q?Gustaf_Lindstr=C3=B6m?= <gl@axentia.se>,
- Andrzej Hajda <a.hajda@samsung.com>, Thierry Reding <thierry.reding@gmail.com>,
- Laurent Pinchart <Laurent.pinchart@ideasonboard.com>,
- Sam Ravnborg <sam@ravnborg.org>,
- Marian-Cristian Rotariu <marian-cristian.rotariu.rb@bp.renesas.com>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Thomas Hellstrom <thellstrom@vmware.com>,
- Joonyoung Shim <jy0922.shim@samsung.com>, Jonathan Marek <jonathan@marek.ca>,
- Stefan Mavrodiev <stefan@olimex.com>, Adam Ford <aford173@gmail.com>,
- Jerry Han <hanxu5@huaqin.corp-partner.google.com>,
- VMware Graphics <linux-graphics-maintainer@vmware.com>,
- Ben Skeggs <bskeggs@redhat.com>, "H. Nikolaus Schaller" <hns@goldelico.com>,
- Robert Chiras <robert.chiras@nxp.com>, Heiko Schocher <hs@denx.de>,
- Icenowy Zheng <icenowy@aosc.io>, Jonas Karlman <jonas@kwiboo.se>,
- intel-gfx <intel-gfx@lists.freedesktop.org>, Randy Li <ayaka@soulik.info>,
- Maxime Ripard <mripard@kernel.org>, Alexandre Courbot <acourbot@nvidia.com>,
- Fabio Estevam <festevam@gmail.com>,
- "open list:ARM/Amlogic Meson..." <linux-amlogic@lists.infradead.org>,
- Vincent Abriou <vincent.abriou@st.com>, Andreas Pretzsch <apr@cn-eng.de>,
- Jernej Skrabec <jernej.skrabec@siol.net>,
- Alex Gonzalez <alex.gonzalez@digi.com>, Purism Kernel Team <kernel@puri.sm>,
- Boris Brezillon <bbrezillon@kernel.org>,
- Seung-Woo Kim <sw0312.kim@samsung.com>,
- Christoph Fritz <chf.fritz@googlemail.com>,
- Kyungmin Park <kyungmin.park@samsung.com>,
- Heiko Stuebner <heiko.stuebner@theobroma-systems.com>,
- Eugen Hristev <eugen.hristev@microchip.com>,
- Giulio Benetti <giulio.benetti@micronovasrl.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: airlied@linux.ie, nouveau@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, maarten.lankhorst@linux.intel.com,
+ mripard@kernel.org, bskeggs@redhat.com, Daniel Vetter <daniel@ffwll.ch>,
+ alexander.deucher@amd.com, sam@ravnborg.org, emil.velikov@collabora.com
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-T24gVHVlLCBGZWIgMjUsIDIwMjAgYXQgODoyNyBQTSBWaWxsZSBTeXJqw6Rsw6QKPHZpbGxlLnN5
-cmphbGFAbGludXguaW50ZWwuY29tPiB3cm90ZToKCj4gT0ssIHNvIEkgd2VudCBhaGVhZCBhIHdy
-b3RlIGEgYml0IG9mIGNvY2NpIFsxXSB0byBmaW5kIHRoZSBiYWQgYXBwbGVzLgoKVGhhdCdzIGlt
-cHJlc3NpdmUgOkQKCj4gVW5mb3J0dW5hdGVseSBpdCBmb3VuZCBhIGxvdCBvZiBzdHJhbmdlIHN0
-dWZmOgoKSSB3aWxsIGFuc3dlciBmb3IgdGhlIHdlaXJkbmVzcyBJIGNhdXNlZC4KCkkgaGF2ZSBs
-b25nIHN1c3BlY3RlZCB0aGF0IGEgd2hvbGUgYnVuY2ggb2YgdGhlICJzaW1wbGUiIGRpc3BsYXlz
-CmFyZSBub3Qgc2ltcGxlIGJ1dCBjb250YWlucyBhIGRpc3BsYXkgY29udHJvbGxlciBhbmQgbWVt
-b3J5LgpUaGF0IG1lYW5zIHRoYXQgdGhlIHNwZWVkIG92ZXIgdGhlIGxpbmsgdG8gdGhlIGRpc3Bs
-YXkgYW5kCmFjdHVhbCByZWZyZXNoIHJhdGUgb24gdGhlIGFjdHVhbCBkaXNwbGF5IGlzIGFzeW1t
-ZXRyaWMgYmVjYXVzZQp3ZWxsIHdlIGFyZSBqdXN0IHVwZGF0aW5nIGEgUkFNLCB0aGUgcmVzb2x1
-dGlvbiBqdXN0IGxpbWl0cyBob3cKbXVjaCBkYXRhIHdlIGFyZSBzZW5kaW5nLCB0aGUgY2xvY2sg
-bGltaXRzIHRoZSBzcGVlZCBvbiB0aGUKYnVzIG92ZXIgdG8gdGhlIFJBTSBvbiB0aGUgb3RoZXIg
-c2lkZS4KCkluIG1vc3QgY2FzZXMgSSB0aGluZyB0aGUgY2xvY2sgaXMgdGhlIHdheSB0byBnby4K
-Cj4gcGFuZWwtc29ueS1hY3g0MjRha3AuYzo1MS9zb255X2FjeDQyNGFrcF92aWRfbW9kZTogNjAg
-dnMuIDcyNyAoLmNsb2NrPTMzMDAwMCAuaHRvdGFsPTQ4MCArIDE1ICsgMCArIDE1IC52dG90YWw9
-ODY0ICsgMTQgKyAxICsgMTEpCgpJIHN1c3BlY3QgY2xvY2sgc2hvdWxkIGJlIGFkanVzdGVkIGFm
-dGVyIHZmcmVzaCA9IDYwIGhlcmUgaW5zdGVhZCBvZiB0aGUKb3RoZXIgd2F5IGFyb3VuZC4gSSBj
-b3VsZG4ndCBxdWl0ZSB0ZXN0IHRoZSB2aWRlbyBtb2RlLCBidXQgdGhlIHZlbmRvcgpkcml2ZXIg
-KG5vIGRvY3VtZW50YXRpb24gLi4uLikgZG9lcyBzdGF0ZSAzMzAgTUh6IHdoaWNoIHNlZW1zIGEK
-Yml0IGhpZ2guCgpKdXN0IGRyb3AgdnJlZnJlc2ggZm9yIG5vdy4KCj4gcGFuZWwtc29ueS1hY3g0
-MjRha3AuYzo3MS9zb255X2FjeDQyNGFrcF9jbWRfbW9kZTogNjAgdnMuIDcxMSAoLmNsb2NrPTQy
-MDE2MCAuaHRvdGFsPTQ4MCArIDE1NCArIDE2ICsgMzIgLnZ0b3RhbD04NjQgKyAxICsgMSArIDEp
-CgpZb3UgY2FuIG92ZXJyaWRlIHRoaXMgaWdub3JpbmcgdGhlIHZyZWZyZXNoLCB0aGlzIGlzIGEg
-Y29tbWFuZC1tb2RlCm9ubHksIGFuZCBpbiBjb21tYW5kIG1vZGUgdGhlIHJlZnJlc2ggZG9lc24n
-dCBjb21lIGludG8gcGxheSwgb3IgaXMKdmVyeSBoaWdoIGFuZCBsaW1pdGVkIGJ5IGEgYnVuY2gg
-b2Ygb3RoZXIgb3ZlcmhlYWQgdGhhbiBqdXN0IHRoZQpyZXNvbHV0aW9uLiBUaGUgY29tbWFuZCBt
-b2RlIEhTIGNsb2NrIGlzIEA0MjArIE1IeiBpbmRlZWQuClRlc3RzIHNob3dlZCBhcm91bmQgMTE2
-IEh6IGZvciB0aGlzIHBhcnRpY3VsYXIgZGlzcGxheSBpbiBwcmFjdGljZQp3aXRoIGNvbnRpbnVv
-dXMgdXBkYXRlcy4KCj4gcGFuZWwtaWxpdGVrLWlsaTkzMjIuYzo1NDMvc3JnYl8zMjB4MjQwX21v
-ZGU6IDYwIHZzLiAxMDE2OCAoLmNsb2NrPTI0NTM1MDAgLmh0b3RhbD0zMjAgKyAzNTkgKyAxICsg
-MjQxIC52dG90YWw9MjYyKQo+IHBhbmVsLWlsaXRlay1pbGk5MzIyLmM6NTg3L3l1dl82NDB4MzIw
-X21vZGU6IDYwIHZzLiA3NzY4ICguY2xvY2s9MjQ1NDAwMCAuaHRvdGFsPTY0MCArIDI1MiArIDEg
-KyAyOCAudnRvdGFsPTMyMCArIDQgKyAxICsgMTgpCj4gcGFuZWwtaWxpdGVrLWlsaTkzMjIuYzo2
-MTYvaXR1X3JfYnRfNjU2XzY0MF9tb2RlOiA2MCB2cy4gNTM1OCAoLmNsb2NrPTI0NTQwMDAgLmh0
-b3RhbD02NDAgKyAzICsgMSArIDI3MiAudnRvdGFsPTUwMCkKPiBwYW5lbC1pbGl0ZWstaWxpOTMy
-Mi5jOjU1Ny9zcmdiXzM2MHgyNDBfbW9kZTogNjAgdnMuIDE2MTc4ICguY2xvY2s9MjcwMDAwMCAu
-aHRvdGFsPTM2MCArIDM1ICsgMSArIDI0MSAudnRvdGFsPTI2MikKPiBwYW5lbC1pbGl0ZWstaWxp
-OTMyMi5jOjYwMS95dXZfNzIweDM2MF9tb2RlOiA2MCB2cy4gNzA3MSAoLmNsb2NrPTI3MDAwMDAg
-Lmh0b3RhbD03MjAgKyAyNTIgKyAxICsgMjQgLnZ0b3RhbD0zNjAgKyA0ICsgMSArIDE4KQo+IHBh
-bmVsLWlsaXRlay1pbGk5MzIyLmM6NjMxL2l0dV9yX2J0XzY1Nl83MjBfbW9kZTogNjAgdnMuIDU0
-MjIgKC5jbG9jaz0yNzAwMDAwIC5odG90YWw9NzIwICsgMyArIDEgKyAyNzIgLnZ0b3RhbD01MDAp
-Cj4gcGFuZWwtaWxpdGVrLWlsaTkzMjIuYzo1NzIvcHJnYl8zMjB4MjQwX21vZGU6IDYwIHZzLiA1
-OTcyNSAoLmNsb2NrPTY0MDAwMDAgLmh0b3RhbD0zMjAgKyAzOCArIDEgKyA1MCAudnRvdGFsPTI2
-MikKClRoaXMgaXMgdGhlIGRhdGFzaGVldCBpZiB5b3Ugd2FudCB0byB0YWtlIGEgbG9vazoKaHR0
-cHM6Ly9kZmx1bmQuc2UvfnRyaWFkL2tyYWQvZGxpbmstZGlyLTY4NS9JTEk5MzIyRFNfVjEuMTIu
-cGRmCgpUaGUgb25lIHBsYXRmb3JtIHVzaW5nIHRoaXMgaXMgdXNpbmcgdGhlCjggYml0IElUVS1S
-IEJULjY1NiA2NDBZIDMyMENiQ3IgbW9kZSB3aGljaAooSSB0aGluaykgaXMgc2ltaWxhciB0byBE
-U0kgY29tbWFuZCBtb2RlIGFnYWluOiB0aGVyZSBpcyBhIHN0cmVhbQpvZiBkYXRhIGluIGEgYnVy
-c3QgYW5kIHlvdSBkZWNpZGUgaG93IG9mdGVuIHlvdSB3YW50IHRvIHNlbmQgaXQKYmVjYXVzZSB0
-aGUgcGFuZWwgYWx3YXlzIGhhcyBiYWNraW5nIG1lbW9yeSBhbmQgdGhlCnNwZWVkIG91dCB0byB0
-aGUgcGh5c2ljYWwgZGlzcGxheSBpcyBzb21ldGhpbmcgY29tcGxldGVseQpkaWZmZXJlbnQuCgpZ
-b3UgY2FuIHNhZmVseSBkZWxldGUgdnJlZnJlc2ggZnJvbSBhbGwgb2YgdGhlc2Ugc2l0ZXMuCgo+
-IHBhbmVsLWFybS12ZXJzYXRpbGUuYzoxNjEvdmVyc2F0aWxlX3BhbmVsc1tdOiA2MCB2cy4gNjEg
-KC5jbG9jaz0yNTAwMCAuaHRvdGFsPTY0MCArIDI0ICsgOTYgKyAyNCAudnRvdGFsPTQ4MCArIDEx
-ICsgMiArIDMyKQo+IHBhbmVsLWFybS12ZXJzYXRpbGUuYzoyMDgvdmVyc2F0aWxlX3BhbmVsc1td
-OiAxMTYgdnMuIDU5ICguY2xvY2s9NTQwMCAuaHRvdGFsPTI0MCArIDEwICsgMTAgKyAyMCAudnRv
-dGFsPTMyMCArIDIgKyAyICsgMikKPiBwYW5lbC1hcm0tdmVyc2F0aWxlLmM6MTg0L3ZlcnNhdGls
-ZV9wYW5lbHNbXTogMzkwIHZzLiAxNTIzICguY2xvY2s9NjI1MDAgLmh0b3RhbD0xNzYgKyAyICsg
-MyArIDMgLnZ0b3RhbD0yMjAgKyAwICsgMiArIDEpCgpUaGUgb25seSBkcml2ZXIgIGRyaXZlcnMv
-Z3B1L2RybS9wbDExMS9wbDExMV9kaXNwbGF5LmMKVXNlcyBtb2RlLT5jbG9jayBzbyBqdXN0IGRy
-b3AgdnJlZnJlc2guCgpZb3VycywKTGludXMgV2FsbGVpagpfX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fXwpOb3V2ZWF1IG1haWxpbmcgbGlzdApOb3V2ZWF1QGxp
-c3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFu
-L2xpc3RpbmZvL25vdXZlYXUK
+On Wed, Feb 26, 2020 at 06:39:08AM +0100, Thomas Zimmermann wrote:
+> Hi
+> =
+
+> Am 25.02.20 um 18:44 schrieb Daniel Vetter:
+> > On Tue, Feb 25, 2020 at 04:58:59PM +0100, Thomas Zimmermann wrote:
+> >> This patchset moves legacy, non-KMS driver state from struct drm_driver
+> >> into struct drm_legacy_state. Only non-KMS drivers provide an instance
+> >> of the latter structure. One special case is nouveau, which supports
+> >> legacy interfaces. It also provides an instance of the legacy state if
+> >> the legacy interfaces have been enabled (i.e., defines the config opti=
+on
+> >> CONFIG_NOUVEAU_LEGACY_CTX_SUPPORT)
+> >>
+> >> I reviewed all call sites of legacy state and functions to verify that
+> >> DRIVER_LEGACY or DRIVER_KMS_LEGACY_CONTEXT is set on the device; or th=
+at
+> >> DRIVER_MODESET is not set.
+> >>
+> >> With the mutable KMS state removed, instances of struct drm_driver can
+> >> be declared as constant. The patchset modifies the DRM core accordingl=
+y.
+> >> Individual drivers can follow later on.
+> > =
+
+> > Bikeshed: We very much have modern non-KMS drivers (vgem, etnaviv, v3d,
+> > panfrost, ...). non-KMS !=3D legacy, which is what you're talking about
+> > here.
+> =
+
+> OK, probably needs to be more precise.
+> =
+
+> > =
+
+> > Other thing, and it's a bit raining on your parade: I don't see the poi=
+nt.
+> > Sprinkling a few more #ifdef CONFIG_DRM_LEGACY over the relevant parts
+> > sounds like a reasonable idea. But this is a lot of churn for drivers
+> > which are all pretty much dead, and just waiting for their eventual
+> > removal. And from a compile-testing pov of making sure modern drivers
+> > don't use any of the deprecated stuff wrapping it in CONFIG_DRM_LEGACY
+> > should be plenty enough.
+> =
+
+> It's not about these old drivers, it's about having constant driver
+> structures and maybe saving a few bytes in the modern drivers. If these
+> old drivers hold back improvements to the drivers we care about, I don't
+> see we they are not to be touched.
+> =
+
+> This cannot be solved with CONFIG_DRM_LEGACY, unless you want to wrap
+> any reference in core code to legacy data. I tried at first and it
+> turned out to be an unreadable mess.
+
+Laurent has a patch series to constify drm_driver for all !legacy drivers.
+Without changing the world.
+
+So yeah it's possible, we're not hurting ourselves here (aside from the
+few bytes if we don't do the #ifdev CONFIG_DRM_LEGACY).
+
+https://patchwork.freedesktop.org/series/73811/
+
+> And from a complexity POV the patchset is trivial. It adds a data
+> structure to each old driver and moves a few initializers around. The
+> worst thing that can happen is that code tried to dereference the legacy
+> pointer when it's not set. This bug will happen with modern drivers, so
+> we should see it easily.
+
+Laurent's series is even more trivial I think.
+-Daniel
+
+> =
+
+> Best regards
+> Thomas
+> =
+
+> > =
+
+> > And from a "make stuff const" I think Laurent's much more minimal series
+> > also gets us there for all the drivers we care about.
+> > -Daniel
+> > =
+
+> >>
+> >> Thomas Zimmermann (3):
+> >>   drm: Add separate state structure for legacy, non-KMS drivers
+> >>   drm: Move non-kms driver state into struct drm_legacy_state
+> >>   drm: Constify struct drm_driver in DRM core
+> >>
+> >>  drivers/gpu/drm/drm_bufs.c            | 10 +++++-----
+> >>  drivers/gpu/drm/drm_context.c         |  9 +++++----
+> >>  drivers/gpu/drm/drm_drv.c             | 12 ++++++++----
+> >>  drivers/gpu/drm/drm_file.c            |  4 ++--
+> >>  drivers/gpu/drm/drm_legacy_misc.c     |  6 +++---
+> >>  drivers/gpu/drm/drm_lock.c            |  7 ++++---
+> >>  drivers/gpu/drm/drm_pci.c             | 16 ++++++++++------
+> >>  drivers/gpu/drm/drm_vblank.c          | 11 ++++++-----
+> >>  drivers/gpu/drm/i810/i810_drv.c       | 10 +++++++---
+> >>  drivers/gpu/drm/mga/mga_drv.c         | 16 ++++++++++------
+> >>  drivers/gpu/drm/nouveau/nouveau_drm.c |  8 ++++++++
+> >>  drivers/gpu/drm/r128/r128_drv.c       | 16 ++++++++++------
+> >>  drivers/gpu/drm/savage/savage_drv.c   | 12 ++++++++----
+> >>  drivers/gpu/drm/sis/sis_drv.c         |  8 ++++++--
+> >>  drivers/gpu/drm/tdfx/tdfx_drv.c       |  6 +++++-
+> >>  drivers/gpu/drm/via/via_drv.c         | 16 ++++++++++------
+> >>  include/drm/drm_device.h              |  2 +-
+> >>  include/drm/drm_drv.h                 | 21 +++++----------------
+> >>  include/drm/drm_legacy.h              | 27 +++++++++++++++++++++++----
+> >>  include/drm/drm_pci.h                 |  4 ++--
+> >>  20 files changed, 138 insertions(+), 83 deletions(-)
+> >>
+> >> --
+> >> 2.25.0
+> >>
+> > =
+
+> =
+
+> -- =
+
+> Thomas Zimmermann
+> Graphics Driver Developer
+> SUSE Software Solutions Germany GmbH
+> Maxfeldstr. 5, 90409 N=FCrnberg, Germany
+> (HRB 36809, AG N=FCrnberg)
+> Gesch=E4ftsf=FChrer: Felix Imend=F6rffer
+> =
+
+
+
+
+
+-- =
+
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
+_______________________________________________
+Nouveau mailing list
+Nouveau@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/nouveau
