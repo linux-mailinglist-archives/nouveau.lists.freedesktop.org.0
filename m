@@ -2,39 +2,54 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0BF43171262
-	for <lists+nouveau@lfdr.de>; Thu, 27 Feb 2020 09:24:41 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5E6F2171263
+	for <lists+nouveau@lfdr.de>; Thu, 27 Feb 2020 09:24:42 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0D78B6EC3B;
+	by gabe.freedesktop.org (Postfix) with ESMTP id 20E866EC3C;
 	Thu, 27 Feb 2020 08:24:35 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 640396E99B;
- Wed, 26 Feb 2020 14:34:23 +0000 (UTC)
-X-Amp-Result: UNKNOWN
-X-Amp-Original-Verdict: FILE UNKNOWN
-X-Amp-File-Uploaded: False
-Received: from orsmga008.jf.intel.com ([10.7.209.65])
- by fmsmga102.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
- 26 Feb 2020 06:34:22 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.70,488,1574150400"; d="scan'208";a="231416670"
-Received: from stinkbox.fi.intel.com (HELO stinkbox) ([10.237.72.174])
- by orsmga008.jf.intel.com with SMTP; 26 Feb 2020 06:34:08 -0800
-Received: by stinkbox (sSMTP sendmail emulation);
- Wed, 26 Feb 2020 16:34:09 +0200
-Date: Wed, 26 Feb 2020 16:34:09 +0200
-From: Ville =?iso-8859-1?Q?Syrj=E4l=E4?= <ville.syrjala@linux.intel.com>
-To: Linus Walleij <linus.walleij@linaro.org>
-Message-ID: <20200226143409.GJ13686@intel.com>
+Received: from mail-lf1-x141.google.com (mail-lf1-x141.google.com
+ [IPv6:2a00:1450:4864:20::141])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id CCFED89FCE
+ for <nouveau@lists.freedesktop.org>; Wed, 26 Feb 2020 14:56:48 +0000 (UTC)
+Received: by mail-lf1-x141.google.com with SMTP id r14so2208594lfm.5
+ for <nouveau@lists.freedesktop.org>; Wed, 26 Feb 2020 06:56:48 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=2/QJ7qneGgZqHBfg/JeUxK+PnqdeXh8I7JayjH2DAAk=;
+ b=tgf1A5us8lqNpmexYFG5Q12HV9cxSK7xP47154fKzLMHEGi+WF1zpVkRi/ROUfb2tu
+ M4kZQ5sEHPEU+K9Fkg4D+fVwymV4tHMZZxDBYFkiMEvSKqd8u3WQcFW5lL3iQ9nHUJv4
+ KVnlA7+FFUQ6NfqSJmYDYsuKJp6/FCv7dUpSH3tFTbWuhKMVXYmvvvO6Zk9I9kY7DpuE
+ cOH27GChwSYm17N6YerQ6arYLDUd2VqUX8CIYENfiiCBWAbXciEQoCHhBzWFsH3ASMe6
+ m99lKeXtqvoGzO5fAg0BNlczd/KZ1XvyYTglHBHYIVQrbIgfdbUf9oNIKSj8nwSdWDKv
+ vctA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=2/QJ7qneGgZqHBfg/JeUxK+PnqdeXh8I7JayjH2DAAk=;
+ b=A3KZj+4PjB2Sk+KuXRCQG3FB3FZ8/W/3qOwV44i7vubrlwyjZClIXFB6TdwCCzoaIu
+ qY5G8sHhRtrgIiiS9fIXqQC8heUxGnqEjImxMQlvMUMWWohsFQraSkdmypdlufefX1OS
+ xSk3v8poxvUvaunD1YNU+1G4PmrdZ1KcgOol7BO8GQLmP8MMlp5NGg5Oog4IKdlOwuKc
+ zuN4cYj/AFHXCp9s2AYHg4JImxDnzwQAFZ5BYCQvqkydKyvT6R7TiM+y6ytUuPO6jO5u
+ OSN8cjgpHxSHcyN5H1OJOX7fjdDbU29qFhz+97EB/ntlYlfehYGP5iWR9I31aaeBXjJn
+ BeAw==
+X-Gm-Message-State: APjAAAXO+oDosBx4nfNXfhcCbNkUCDfEdiVgO+RZ9LIFZGjn4rixhGJT
+ JaufyMwI44J+2Jc4SzU2sioT4Ld7PXvtmSV82wzv2Q==
+X-Google-Smtp-Source: APXvYqxugddSDx0KpCsivrnIWfVdfRPBLi9YTA6pB7mkbI7w3gfaVV9vjpWWz0qhLNNr/jRaahCfwcHQv0tC+t2sbmE=
+X-Received: by 2002:a19:ed0b:: with SMTP id y11mr2751538lfy.77.1582729007166; 
+ Wed, 26 Feb 2020 06:56:47 -0800 (PST)
+MIME-Version: 1.0
 References: <86d0ec$ae4ffc@fmsmga001.fm.intel.com>
  <CACRpkdZ4H5fdWsxsXnsbyxb6fwKbgm0h5a6CdqEjU9w5+z0a7Q@mail.gmail.com>
-MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <CACRpkdZ4H5fdWsxsXnsbyxb6fwKbgm0h5a6CdqEjU9w5+z0a7Q@mail.gmail.com>
-X-Patchwork-Hint: comment
-User-Agent: Mutt/1.10.1 (2018-07-13)
+ <20200226143409.GJ13686@intel.com>
+In-Reply-To: <20200226143409.GJ13686@intel.com>
+From: Linus Walleij <linus.walleij@linaro.org>
+Date: Wed, 26 Feb 2020 15:56:36 +0100
+Message-ID: <CACRpkdZSapEh3sCqGjpnOuX-vbf1C=AjzN7Ryu2v6V5npoWgoA@mail.gmail.com>
+To: =?UTF-8?B?VmlsbGUgU3lyasOkbMOk?= <ville.syrjala@linux.intel.com>
 X-Mailman-Approved-At: Thu, 27 Feb 2020 08:24:33 +0000
 Subject: Re: [Nouveau] (no subject)
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -52,10 +67,10 @@ Cc: Josh Wu <josh.wu@atmel.com>,
  Bhuvanchandra DV <bhuvanchandra.dv@toradex.com>,
  Neil Armstrong <narmstrong@baylibre.com>, Eric Anholt <eric@anholt.net>,
  nouveau@lists.freedesktop.org,
- Guido =?iso-8859-1?Q?G=FCnther?= <agx@sigxcpu.org>,
+ =?UTF-8?Q?Guido_G=C3=BCnther?= <agx@sigxcpu.org>,
  Paul Kocialkowski <contact@paulk.fr>,
  "open list:DRM PANEL DRIVERS" <dri-devel@lists.freedesktop.org>,
- Gustaf =?iso-8859-1?Q?Lindstr=F6m?= <gl@axentia.se>,
+ =?UTF-8?Q?Gustaf_Lindstr=C3=B6m?= <gl@axentia.se>,
  Andrzej Hajda <a.hajda@samsung.com>, Thierry Reding <thierry.reding@gmail.com>,
  Laurent Pinchart <Laurent.pinchart@ideasonboard.com>,
  Sam Ravnborg <sam@ravnborg.org>,
@@ -83,50 +98,53 @@ Cc: Josh Wu <josh.wu@atmel.com>,
  Heiko Stuebner <heiko.stuebner@theobroma-systems.com>,
  Eugen Hristev <eugen.hristev@microchip.com>,
  Giulio Benetti <giulio.benetti@micronovasrl.com>
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, Feb 26, 2020 at 01:08:06PM +0100, Linus Walleij wrote:
-> On Wed, Feb 26, 2020 at 12:57 PM Ville Syrj=E4l=E4
-> <ville.syrjala@linux.intel.com> wrote:
-> > On Tue, Feb 25, 2020 at 10:52:25PM +0100, Linus Walleij wrote:
-> =
-
-> > > I have long suspected that a whole bunch of the "simple" displays
-> > > are not simple but contains a display controller and memory.
-> > > That means that the speed over the link to the display and
-> > > actual refresh rate on the actual display is asymmetric because
-> > > well we are just updating a RAM, the resolution just limits how
-> > > much data we are sending, the clock limits the speed on the
-> > > bus over to the RAM on the other side.
-> >
-> > IMO even in command mode mode->clock should probably be the actual
-> > dotclock used by the display. If there's another clock for the bus
-> > speed/etc. it should be stored somewhere else.
-> =
-
-> Good point. For the DSI panels we have the field hs_rate
-> for the HS clock in struct mipi_dsi_device which is based
-> on exactly this reasoning. And that is what I actually use for
-> setting the HS clock.
-> =
-
-> The problem is however that we in many cases have so
-> substandard documentation of these panels that we have
-> absolutely no idea about the dotclock. Maybe we should
-> just set it to 0 in these cases?
-
-Don't you always have a TE interrupt or something like that
-available? Could just measure it from that if no better
-information is available?
-
--- =
-
-Ville Syrj=E4l=E4
-Intel
-_______________________________________________
-Nouveau mailing list
-Nouveau@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/nouveau
+T24gV2VkLCBGZWIgMjYsIDIwMjAgYXQgMzozNCBQTSBWaWxsZSBTeXJqw6Rsw6QKPHZpbGxlLnN5
+cmphbGFAbGludXguaW50ZWwuY29tPiB3cm90ZToKPiBPbiBXZWQsIEZlYiAyNiwgMjAyMCBhdCAw
+MTowODowNlBNICswMTAwLCBMaW51cyBXYWxsZWlqIHdyb3RlOgo+ID4gT24gV2VkLCBGZWIgMjYs
+IDIwMjAgYXQgMTI6NTcgUE0gVmlsbGUgU3lyasOkbMOkCj4gPiA8dmlsbGUuc3lyamFsYUBsaW51
+eC5pbnRlbC5jb20+IHdyb3RlOgo+ID4gPiBPbiBUdWUsIEZlYiAyNSwgMjAyMCBhdCAxMDo1Mjoy
+NVBNICswMTAwLCBMaW51cyBXYWxsZWlqIHdyb3RlOgo+ID4KPiA+ID4gPiBJIGhhdmUgbG9uZyBz
+dXNwZWN0ZWQgdGhhdCBhIHdob2xlIGJ1bmNoIG9mIHRoZSAic2ltcGxlIiBkaXNwbGF5cwo+ID4g
+PiA+IGFyZSBub3Qgc2ltcGxlIGJ1dCBjb250YWlucyBhIGRpc3BsYXkgY29udHJvbGxlciBhbmQg
+bWVtb3J5Lgo+ID4gPiA+IFRoYXQgbWVhbnMgdGhhdCB0aGUgc3BlZWQgb3ZlciB0aGUgbGluayB0
+byB0aGUgZGlzcGxheSBhbmQKPiA+ID4gPiBhY3R1YWwgcmVmcmVzaCByYXRlIG9uIHRoZSBhY3R1
+YWwgZGlzcGxheSBpcyBhc3ltbWV0cmljIGJlY2F1c2UKPiA+ID4gPiB3ZWxsIHdlIGFyZSBqdXN0
+IHVwZGF0aW5nIGEgUkFNLCB0aGUgcmVzb2x1dGlvbiBqdXN0IGxpbWl0cyBob3cKPiA+ID4gPiBt
+dWNoIGRhdGEgd2UgYXJlIHNlbmRpbmcsIHRoZSBjbG9jayBsaW1pdHMgdGhlIHNwZWVkIG9uIHRo
+ZQo+ID4gPiA+IGJ1cyBvdmVyIHRvIHRoZSBSQU0gb24gdGhlIG90aGVyIHNpZGUuCj4gPiA+Cj4g
+PiA+IElNTyBldmVuIGluIGNvbW1hbmQgbW9kZSBtb2RlLT5jbG9jayBzaG91bGQgcHJvYmFibHkg
+YmUgdGhlIGFjdHVhbAo+ID4gPiBkb3RjbG9jayB1c2VkIGJ5IHRoZSBkaXNwbGF5LiBJZiB0aGVy
+ZSdzIGFub3RoZXIgY2xvY2sgZm9yIHRoZSBidXMKPiA+ID4gc3BlZWQvZXRjLiBpdCBzaG91bGQg
+YmUgc3RvcmVkIHNvbWV3aGVyZSBlbHNlLgo+ID4KPiA+IEdvb2QgcG9pbnQuIEZvciB0aGUgRFNJ
+IHBhbmVscyB3ZSBoYXZlIHRoZSBmaWVsZCBoc19yYXRlCj4gPiBmb3IgdGhlIEhTIGNsb2NrIGlu
+IHN0cnVjdCBtaXBpX2RzaV9kZXZpY2Ugd2hpY2ggaXMgYmFzZWQKPiA+IG9uIGV4YWN0bHkgdGhp
+cyByZWFzb25pbmcuIEFuZCB0aGF0IGlzIHdoYXQgSSBhY3R1YWxseSB1c2UgZm9yCj4gPiBzZXR0
+aW5nIHRoZSBIUyBjbG9jay4KPiA+Cj4gPiBUaGUgcHJvYmxlbSBpcyBob3dldmVyIHRoYXQgd2Ug
+aW4gbWFueSBjYXNlcyBoYXZlIHNvCj4gPiBzdWJzdGFuZGFyZCBkb2N1bWVudGF0aW9uIG9mIHRo
+ZXNlIHBhbmVscyB0aGF0IHdlIGhhdmUKPiA+IGFic29sdXRlbHkgbm8gaWRlYSBhYm91dCB0aGUg
+ZG90Y2xvY2suIE1heWJlIHdlIHNob3VsZAo+ID4ganVzdCBzZXQgaXQgdG8gMCBpbiB0aGVzZSBj
+YXNlcz8KPgo+IERvbid0IHlvdSBhbHdheXMgaGF2ZSBhIFRFIGludGVycnVwdCBvciBzb21ldGhp
+bmcgbGlrZSB0aGF0Cj4gYXZhaWxhYmxlPyBDb3VsZCBqdXN0IG1lYXN1cmUgaXQgZnJvbSB0aGF0
+IGlmIG5vIGJldHRlcgo+IGluZm9ybWF0aW9uIGlzIGF2YWlsYWJsZT8KClllcyBhbmQgSSBkaWQg
+ZXhhY3RseSB0aGF0LCBzbyB0aGF0IGlzIHdoeSB0aGlzIGNvbW1lbnQgaXMgaW4KdGhlIGRyaXZl
+cjoKCnN0YXRpYyBjb25zdCBzdHJ1Y3QgZHJtX2Rpc3BsYXlfbW9kZSBzb255X2FjeDQyNGFrcF9j
+bWRfbW9kZSA9IHsKKC4uLikKICAgICAgICAvKgogICAgICAgICAqIFNvbWUgZGVzaXJlZCByZWZy
+ZXNoIHJhdGUsIGV4cGVyaW1lbnRzIGF0IHRoZSBtYXhpbXVtICJwaXhlbCIKICAgICAgICAgKiBj
+bG9jayBzcGVlZCAoSFMgY2xvY2sgNDIwIE1IeikgeWllbGRzIGFyb3VuZCAxMTdIei4KICAgICAg
+ICAgKi8KICAgICAgICAudnJlZnJlc2ggPSA2MCwKCkkgZ290IGEgcmV2aWV3IGNvbW1lbnQgYXQg
+dGhlIHRpbWUgc2F5aW5nIDExNyBIeiB3YXMgd2VpcmQuCldlIGRpZG4ndCByZWFjaCBhIHByb3Bl
+ciBjb25jbHVzaW9uIG9uIHRoaXM6Cmh0dHBzOi8vbG9yZS5rZXJuZWwub3JnL2RyaS1kZXZlbC9D
+QUNScGtkWVczWU5QU05NWTNBNDRHUW44RHFLLW45VEx2cjd1aXBGN0xNX0RIWjU9TGdAbWFpbC5n
+bWFpbC5jb20vCgpUaGllcnJ5IHdhc24ndCBzdXJlIGlmIDYwSHogd2FzIGdvb2Qgb3Igbm90LCBz
+byBJIGp1c3QgaGFkIHRvCmdvIHdpdGggc29tZXRoaW5nLgoKV2UgY291bGQgY2FsY3VsYXRlIHRo
+ZSByZXN1bHRpbmcgcGl4ZWwgY2xvY2sgZm9yIH4xMTcgSHogd2l0aAp0aGlzIHJlc29sdXRpb24g
+YW5kIHB1dCB0aGF0IGluIHRoZSBjbG9jayBmaWVsZCBidXQgLi4uIGRvbid0IGtub3cKd2hhdCBp
+cyB0aGUgYmVzdD8KCllvdXJzLApMaW51cyBXYWxsZWlqCl9fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fCk5vdXZlYXUgbWFpbGluZyBsaXN0Ck5vdXZlYXVAbGlz
+dHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4v
+bGlzdGluZm8vbm91dmVhdQo=
