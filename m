@@ -1,34 +1,55 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8AA7F171264
-	for <lists+nouveau@lfdr.de>; Thu, 27 Feb 2020 09:24:43 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id A071617125F
+	for <lists+nouveau@lfdr.de>; Thu, 27 Feb 2020 09:24:36 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id DC7EB6EC3E;
-	Thu, 27 Feb 2020 08:24:37 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E8B766EC38;
+	Thu, 27 Feb 2020 08:24:33 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mga17.intel.com (mga17.intel.com [192.55.52.151])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7A6B06E284;
- Wed, 26 Feb 2020 11:57:20 +0000 (UTC)
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
- by fmsmga107.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
- 26 Feb 2020 03:57:19 -0800
-Message-Id: <86d0ec$ae4ffc@fmsmga001.fm.intel.com>
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.70,488,1574150400"; d="scan'208";a="350371308"
-Received: from stinkbox.fi.intel.com (HELO stinkbox) ([10.237.72.174])
- by fmsmga001.fm.intel.com with SMTP; 26 Feb 2020 03:57:09 -0800
-Received: by stinkbox (sSMTP sendmail emulation);
- Wed, 26 Feb 2020 13:57:08 +0200
-Date: Wed, 26 Feb 2020 13:57:08 +0200
-From: Ville =?iso-8859-1?Q?Syrj=E4l=E4?= <ville.syrjala@linux.intel.com>
-To: Linus Walleij <linus.walleij@linaro.org>
+Received: from mail-lf1-x144.google.com (mail-lf1-x144.google.com
+ [IPv6:2a00:1450:4864:20::144])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A2DA46E8DF
+ for <nouveau@lists.freedesktop.org>; Wed, 26 Feb 2020 12:08:19 +0000 (UTC)
+Received: by mail-lf1-x144.google.com with SMTP id z9so1808246lfa.2
+ for <nouveau@lists.freedesktop.org>; Wed, 26 Feb 2020 04:08:19 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=S9JJYIkNlP5nnK3wfZZu/X+SbI6aTTWOA87BK2SDDno=;
+ b=fKlN8HgXtxN2pScLUyXqaU2uMf2lHDdWgGN0YorCQqJiyRnrHxxv++xhjpyp4nJ0n6
+ MGjQACQUjmwX22flv3nS8PHVJYGT4oOArcrtzYKk4o3gwoemxxv5UCct/9Yp8q2hyM5t
+ VlPGg1SYuNex0ZU5SRkMFrChNs7KMC931tZgSegsc9Q0wrS3huNnj5eunAPfXIZOpSQ+
+ 3HWc0aOpexHwRciEWsAX2yQYGC/FRJ4nituPrcObbFHn97RtclII9L4fKRfrkVneveuz
+ nxoO0+0kCdR+q40YKfIbLSM5KyZLJW+voidkAsXwCyiv0betswmHnBsK5rBnK0JkzybZ
+ lsgA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=S9JJYIkNlP5nnK3wfZZu/X+SbI6aTTWOA87BK2SDDno=;
+ b=p4eaxiaIzMvF9WtnotmmYnh2nyKuEt/PqkGb3mffVyrR6STsaW9eE9/XxhcCz82RGC
+ xKZTAFTw751WPQRpuN90g7gQGa8kWT9IQuKxBRrb/WcFgoPa1Q4OFObvUdqBb8TLyGCr
+ bDF6bPspb9ZYlZr0q2+j3CerPcCxiXbfNT1ejl0/+beu8AfLZ366WEz8LZ7RGmY3Ptvx
+ Dx1RiSf2h5P0WnN3LIisEgz+CwR37EN3XldwXl3Je6uPxpwUJ7D7W2K1lTGAcasOii35
+ FOv+cPRxn1Adfc8gBCROJ78CkvF/MwKNCgC7MnZbwi1tnJhDh5ldsuuMSbsO5TlBmC4O
+ IaUg==
+X-Gm-Message-State: APjAAAWbdmkSmTefTZ+ykiE/ThMufhHQ2iAy/nw467KfMjFQwUe7kR9C
+ FacLaEbDTE2oAz7V1Mhsa1p7wdthxG/v8p5+PycC/w==
+X-Google-Smtp-Source: APXvYqw8gFoORTwT9oT2KeMHn3WNzmj9I20a9wQ+SMdkIuI3epVQlzv+ANEqiMJJC4viusDiSZCX4jG7GU6F5yyPgus=
+X-Received: by 2002:a19:ed0b:: with SMTP id y11mr2359667lfy.77.1582718897894; 
+ Wed, 26 Feb 2020 04:08:17 -0800 (PST)
+MIME-Version: 1.0
+References: <86d0ec$ae4ffc@fmsmga001.fm.intel.com>
+In-Reply-To: <86d0ec$ae4ffc@fmsmga001.fm.intel.com>
+From: Linus Walleij <linus.walleij@linaro.org>
+Date: Wed, 26 Feb 2020 13:08:06 +0100
+Message-ID: <CACRpkdZ4H5fdWsxsXnsbyxb6fwKbgm0h5a6CdqEjU9w5+z0a7Q@mail.gmail.com>
+To: =?UTF-8?B?VmlsbGUgU3lyasOkbMOk?= <ville.syrjala@linux.intel.com>
 X-Mailman-Approved-At: Thu, 27 Feb 2020 08:24:33 +0000
-Subject: [Nouveau] (no subject)
+Subject: Re: [Nouveau] (no subject)
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -44,10 +65,10 @@ Cc: Josh Wu <josh.wu@atmel.com>,
  Bhuvanchandra DV <bhuvanchandra.dv@toradex.com>,
  Neil Armstrong <narmstrong@baylibre.com>, Eric Anholt <eric@anholt.net>,
  nouveau@lists.freedesktop.org,
- Guido =?iso-8859-1?Q?G=FCnther?= <agx@sigxcpu.org>,
+ =?UTF-8?Q?Guido_G=C3=BCnther?= <agx@sigxcpu.org>,
  Paul Kocialkowski <contact@paulk.fr>,
  "open list:DRM PANEL DRIVERS" <dri-devel@lists.freedesktop.org>,
- Gustaf =?iso-8859-1?Q?Lindstr=F6m?= <gl@axentia.se>,
+ =?UTF-8?Q?Gustaf_Lindstr=C3=B6m?= <gl@axentia.se>,
  Andrzej Hajda <a.hajda@samsung.com>, Thierry Reding <thierry.reding@gmail.com>,
  Laurent Pinchart <Laurent.pinchart@ideasonboard.com>,
  Sam Ravnborg <sam@ravnborg.org>,
@@ -75,70 +96,32 @@ Cc: Josh Wu <josh.wu@atmel.com>,
  Heiko Stuebner <heiko.stuebner@theobroma-systems.com>,
  Eugen Hristev <eugen.hristev@microchip.com>,
  Giulio Benetti <giulio.benetti@micronovasrl.com>
-MIME-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============1255017626=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
---===============1255017626==
-Content-Type: text/plain
-
-Subject: Re: [PATCH 04/12] drm: Nuke mode->vrefresh
-Message-ID: <20200226115708.GH13686@intel.com>
-References: <20200219203544.31013-1-ville.syrjala@linux.intel.com>
- <CGME20200219203620eucas1p24b4990a91e758dbcf3e9b943669b0c8f@eucas1p2.samsung.com>
- <20200219203544.31013-5-ville.syrjala@linux.intel.com>
- <0f278771-79ce-fe23-e72c-3935dbe82d24@samsung.com>
- <20200225112114.GA13686@intel.com>
- <3ca785f2-9032-aaf9-0965-8657d31116ba@samsung.com>
- <20200225154506.GF13686@intel.com>
- <20200225192720.GG13686@intel.com>
- <CACRpkdZk9QEy+Kzkmy4BXiHB+aq9hprf=dmA_-R23yqH3NCt1g@mail.gmail.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <CACRpkdZk9QEy+Kzkmy4BXiHB+aq9hprf=dmA_-R23yqH3NCt1g@mail.gmail.com>
-X-Patchwork-Hint: comment
-User-Agent: Mutt/1.10.1 (2018-07-13)
-
-On Tue, Feb 25, 2020 at 10:52:25PM +0100, Linus Walleij wrote:
-> On Tue, Feb 25, 2020 at 8:27 PM Ville Syrjälä
-> <ville.syrjala@linux.intel.com> wrote:
-> 
-> > OK, so I went ahead a wrote a bit of cocci [1] to find the bad apples.
-> 
-> That's impressive :D
-> 
-> > Unfortunately it found a lot of strange stuff:
-> 
-> I will answer for the weirdness I caused.
-> 
-> I have long suspected that a whole bunch of the "simple" displays
-> are not simple but contains a display controller and memory.
-> That means that the speed over the link to the display and
-> actual refresh rate on the actual display is asymmetric because
-> well we are just updating a RAM, the resolution just limits how
-> much data we are sending, the clock limits the speed on the
-> bus over to the RAM on the other side.
-
-IMO even in command mode mode->clock should probably be the actual
-dotclock used by the display. If there's another clock for the bus
-speed/etc. it should be stored somewhere else.
-
--- 
-Ville Syrjälä
-Intel
-
---===============1255017626==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
-_______________________________________________
-Nouveau mailing list
-Nouveau@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/nouveau
-
---===============1255017626==--
+T24gV2VkLCBGZWIgMjYsIDIwMjAgYXQgMTI6NTcgUE0gVmlsbGUgU3lyasOkbMOkCjx2aWxsZS5z
+eXJqYWxhQGxpbnV4LmludGVsLmNvbT4gd3JvdGU6Cj4gT24gVHVlLCBGZWIgMjUsIDIwMjAgYXQg
+MTA6NTI6MjVQTSArMDEwMCwgTGludXMgV2FsbGVpaiB3cm90ZToKCj4gPiBJIGhhdmUgbG9uZyBz
+dXNwZWN0ZWQgdGhhdCBhIHdob2xlIGJ1bmNoIG9mIHRoZSAic2ltcGxlIiBkaXNwbGF5cwo+ID4g
+YXJlIG5vdCBzaW1wbGUgYnV0IGNvbnRhaW5zIGEgZGlzcGxheSBjb250cm9sbGVyIGFuZCBtZW1v
+cnkuCj4gPiBUaGF0IG1lYW5zIHRoYXQgdGhlIHNwZWVkIG92ZXIgdGhlIGxpbmsgdG8gdGhlIGRp
+c3BsYXkgYW5kCj4gPiBhY3R1YWwgcmVmcmVzaCByYXRlIG9uIHRoZSBhY3R1YWwgZGlzcGxheSBp
+cyBhc3ltbWV0cmljIGJlY2F1c2UKPiA+IHdlbGwgd2UgYXJlIGp1c3QgdXBkYXRpbmcgYSBSQU0s
+IHRoZSByZXNvbHV0aW9uIGp1c3QgbGltaXRzIGhvdwo+ID4gbXVjaCBkYXRhIHdlIGFyZSBzZW5k
+aW5nLCB0aGUgY2xvY2sgbGltaXRzIHRoZSBzcGVlZCBvbiB0aGUKPiA+IGJ1cyBvdmVyIHRvIHRo
+ZSBSQU0gb24gdGhlIG90aGVyIHNpZGUuCj4KPiBJTU8gZXZlbiBpbiBjb21tYW5kIG1vZGUgbW9k
+ZS0+Y2xvY2sgc2hvdWxkIHByb2JhYmx5IGJlIHRoZSBhY3R1YWwKPiBkb3RjbG9jayB1c2VkIGJ5
+IHRoZSBkaXNwbGF5LiBJZiB0aGVyZSdzIGFub3RoZXIgY2xvY2sgZm9yIHRoZSBidXMKPiBzcGVl
+ZC9ldGMuIGl0IHNob3VsZCBiZSBzdG9yZWQgc29tZXdoZXJlIGVsc2UuCgpHb29kIHBvaW50LiBG
+b3IgdGhlIERTSSBwYW5lbHMgd2UgaGF2ZSB0aGUgZmllbGQgaHNfcmF0ZQpmb3IgdGhlIEhTIGNs
+b2NrIGluIHN0cnVjdCBtaXBpX2RzaV9kZXZpY2Ugd2hpY2ggaXMgYmFzZWQKb24gZXhhY3RseSB0
+aGlzIHJlYXNvbmluZy4gQW5kIHRoYXQgaXMgd2hhdCBJIGFjdHVhbGx5IHVzZSBmb3IKc2V0dGlu
+ZyB0aGUgSFMgY2xvY2suCgpUaGUgcHJvYmxlbSBpcyBob3dldmVyIHRoYXQgd2UgaW4gbWFueSBj
+YXNlcyBoYXZlIHNvCnN1YnN0YW5kYXJkIGRvY3VtZW50YXRpb24gb2YgdGhlc2UgcGFuZWxzIHRo
+YXQgd2UgaGF2ZQphYnNvbHV0ZWx5IG5vIGlkZWEgYWJvdXQgdGhlIGRvdGNsb2NrLiBNYXliZSB3
+ZSBzaG91bGQKanVzdCBzZXQgaXQgdG8gMCBpbiB0aGVzZSBjYXNlcz8KCllvdXJzLApMaW51cyBX
+YWxsZWlqCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCk5v
+dXZlYXUgbWFpbGluZyBsaXN0Ck5vdXZlYXVAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8v
+bGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vbm91dmVhdQo=
