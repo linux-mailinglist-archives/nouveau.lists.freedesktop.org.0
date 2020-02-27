@@ -1,44 +1,63 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0A751171261
-	for <lists+nouveau@lfdr.de>; Thu, 27 Feb 2020 09:24:39 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id F04C11716AB
+	for <lists+nouveau@lfdr.de>; Thu, 27 Feb 2020 13:03:23 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 964996EC39;
-	Thu, 27 Feb 2020 08:24:34 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id DD7BA6E875;
+	Thu, 27 Feb 2020 12:03:21 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 26C166E2D6;
- Wed, 26 Feb 2020 15:08:32 +0000 (UTC)
-X-Amp-Result: UNKNOWN
-X-Amp-Original-Verdict: FILE UNKNOWN
-X-Amp-File-Uploaded: False
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
- by fmsmga102.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
- 26 Feb 2020 07:08:31 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.70,488,1574150400"; d="scan'208";a="350409339"
-Received: from stinkbox.fi.intel.com (HELO stinkbox) ([10.237.72.174])
- by fmsmga001.fm.intel.com with SMTP; 26 Feb 2020 07:08:20 -0800
-Received: by stinkbox (sSMTP sendmail emulation);
- Wed, 26 Feb 2020 17:08:19 +0200
-Date: Wed, 26 Feb 2020 17:08:19 +0200
-From: Ville =?iso-8859-1?Q?Syrj=E4l=E4?= <ville.syrjala@linux.intel.com>
-To: Linus Walleij <linus.walleij@linaro.org>
-Message-ID: <20200226150819.GK13686@intel.com>
-References: <86d0ec$ae4ffc@fmsmga001.fm.intel.com>
- <CACRpkdZ4H5fdWsxsXnsbyxb6fwKbgm0h5a6CdqEjU9w5+z0a7Q@mail.gmail.com>
- <20200226143409.GJ13686@intel.com>
- <CACRpkdZSapEh3sCqGjpnOuX-vbf1C=AjzN7Ryu2v6V5npoWgoA@mail.gmail.com>
+Received: from mail-wm1-x344.google.com (mail-wm1-x344.google.com
+ [IPv6:2a00:1450:4864:20::344])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 982776E885;
+ Thu, 27 Feb 2020 12:03:20 +0000 (UTC)
+Received: by mail-wm1-x344.google.com with SMTP id z12so3231371wmi.4;
+ Thu, 27 Feb 2020 04:03:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding;
+ bh=FF1NrpSPuilvGFuBlDAjCo1EkW/20qE/sk6srnRxdwk=;
+ b=hqt0uVTKwEJgrrFViTZSdoN5IyrDGa0MnWpSVpKfzAJ/q4CYucez5Y9GL9cyO3mkIX
+ uPhquZ+n6+onWBaMCPga9B+8QCHT5lbST/AIoFCjP/z9QjtWBRQwCNFykzvp+giIIxHx
+ ftcx33fAul6ms0T/zjnHYprjSfmeXBZ6+Zf3xUPDcfzQYs4saNULJTigGrxmo+Zt4VWb
+ n5F9x6L3itJsG4d9F4cotAAY35c3wH6JIb3TN1Zi5s5loMOSTEw0XMGVtQFlu+HfXvpt
+ Hep3CCkcw9XCJxyArNAUaSfdnFIqgdAY//zqMW3nDOggIgF5Bnjhu41nBBSm7noCtzFP
+ Xh+Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=FF1NrpSPuilvGFuBlDAjCo1EkW/20qE/sk6srnRxdwk=;
+ b=M/XOUlhgyiKfSfuQbe4/jLKLuK2y3EfipituZu4Ba976Hjn2drpLjk987r+piEkIGe
+ 9alVZRdJZgCQp5brZAFE0Y9gVvpJ0YeZ2g8OMOlYzYZoqKo4WlPNwgas0byWoU6udP20
+ KZs0j87ciC9rqtSuiNAhVl21mohIK3FsZ6tdqrXEAeYfyE2q1BkKeX1jzOCGkRrJxeVZ
+ rAmsJsUW1JZESVjwhDi4gMmFMR+hRcKHzZ/GcalFJsbTxfQchgCMCvt02WhwQWXtJ7t5
+ FvRG3xg8vcsXU/5b3/GF7hZE0rEiEJA2ob+Kj0N0+sJDhywVcOJxL4XVl7irTwR5YA18
+ /CnA==
+X-Gm-Message-State: APjAAAX6RbEDqKIuctVFOMIfo3E27gzVpE+bGcacR4Btaz1d2umGmSm7
+ 2spy7dI5BY/S+hJc/k3GUN0=
+X-Google-Smtp-Source: APXvYqxaNmMPo4uh3u7cD404NdTjAHMYEUcbV9NVopmZg+bCAqm3J+SaBK6YQlOOsAh9UdiCZSuDXg==
+X-Received: by 2002:a05:600c:218d:: with SMTP id
+ e13mr5110294wme.102.1582804998319; 
+ Thu, 27 Feb 2020 04:03:18 -0800 (PST)
+Received: from wambui.zuku.co.ke ([197.237.61.225])
+ by smtp.googlemail.com with ESMTPSA id t10sm7655017wru.59.2020.02.27.04.03.14
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 27 Feb 2020 04:03:17 -0800 (PST)
+From: Wambui Karuga <wambui.karugax@gmail.com>
+To: daniel@ffwll.ch,
+	airlied@linux.ie,
+	bskeggs@redhat.com
+Date: Thu, 27 Feb 2020 15:02:20 +0300
+Message-Id: <20200227120232.19413-10-wambui.karugax@gmail.com>
+X-Mailer: git-send-email 2.25.0
+In-Reply-To: <20200227120232.19413-1-wambui.karugax@gmail.com>
+References: <20200227120232.19413-1-wambui.karugax@gmail.com>
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <CACRpkdZSapEh3sCqGjpnOuX-vbf1C=AjzN7Ryu2v6V5npoWgoA@mail.gmail.com>
-X-Patchwork-Hint: comment
-User-Agent: Mutt/1.10.1 (2018-07-13)
-X-Mailman-Approved-At: Thu, 27 Feb 2020 08:24:33 +0000
-Subject: Re: [Nouveau] (no subject)
+Subject: [Nouveau] [PATCH 09/21] drm/nouveau: remove checks for return value
+ of debugfs functions
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -50,114 +69,106 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Josh Wu <josh.wu@atmel.com>,
- Bhuvanchandra DV <bhuvanchandra.dv@toradex.com>,
- Neil Armstrong <narmstrong@baylibre.com>, Eric Anholt <eric@anholt.net>,
- nouveau@lists.freedesktop.org,
- Guido =?iso-8859-1?Q?G=FCnther?= <agx@sigxcpu.org>,
- Paul Kocialkowski <contact@paulk.fr>,
- "open list:DRM PANEL DRIVERS" <dri-devel@lists.freedesktop.org>,
- Gustaf =?iso-8859-1?Q?Lindstr=F6m?= <gl@axentia.se>,
- Andrzej Hajda <a.hajda@samsung.com>, Thierry Reding <thierry.reding@gmail.com>,
- Laurent Pinchart <Laurent.pinchart@ideasonboard.com>,
- Sam Ravnborg <sam@ravnborg.org>,
- Marian-Cristian Rotariu <marian-cristian.rotariu.rb@bp.renesas.com>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Thomas Hellstrom <thellstrom@vmware.com>,
- Joonyoung Shim <jy0922.shim@samsung.com>, Jonathan Marek <jonathan@marek.ca>,
- Stefan Mavrodiev <stefan@olimex.com>, Adam Ford <aford173@gmail.com>,
- Jerry Han <hanxu5@huaqin.corp-partner.google.com>,
- VMware Graphics <linux-graphics-maintainer@vmware.com>,
- Ben Skeggs <bskeggs@redhat.com>, "H. Nikolaus Schaller" <hns@goldelico.com>,
- Robert Chiras <robert.chiras@nxp.com>, Heiko Schocher <hs@denx.de>,
- Icenowy Zheng <icenowy@aosc.io>, Jonas Karlman <jonas@kwiboo.se>,
- intel-gfx <intel-gfx@lists.freedesktop.org>,
- Maxime Ripard <mripard@kernel.org>, Alexandre Courbot <acourbot@nvidia.com>,
- Fabio Estevam <festevam@gmail.com>,
- "open list:ARM/Amlogic Meson..." <linux-amlogic@lists.infradead.org>,
- Vincent Abriou <vincent.abriou@st.com>, Andreas Pretzsch <apr@cn-eng.de>,
- Jernej Skrabec <jernej.skrabec@siol.net>,
- Alex Gonzalez <alex.gonzalez@digi.com>, Purism Kernel Team <kernel@puri.sm>,
- Boris Brezillon <bbrezillon@kernel.org>,
- Seung-Woo Kim <sw0312.kim@samsung.com>,
- Christoph Fritz <chf.fritz@googlemail.com>,
- Kyungmin Park <kyungmin.park@samsung.com>,
- Heiko Stuebner <heiko.stuebner@theobroma-systems.com>,
- Eugen Hristev <eugen.hristev@microchip.com>,
- Giulio Benetti <giulio.benetti@micronovasrl.com>
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Cc: gregkh@linuxfoundation.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, Feb 26, 2020 at 03:56:36PM +0100, Linus Walleij wrote:
-> On Wed, Feb 26, 2020 at 3:34 PM Ville Syrj=E4l=E4
-> <ville.syrjala@linux.intel.com> wrote:
-> > On Wed, Feb 26, 2020 at 01:08:06PM +0100, Linus Walleij wrote:
-> > > On Wed, Feb 26, 2020 at 12:57 PM Ville Syrj=E4l=E4
-> > > <ville.syrjala@linux.intel.com> wrote:
-> > > > On Tue, Feb 25, 2020 at 10:52:25PM +0100, Linus Walleij wrote:
-> > >
-> > > > > I have long suspected that a whole bunch of the "simple" displays
-> > > > > are not simple but contains a display controller and memory.
-> > > > > That means that the speed over the link to the display and
-> > > > > actual refresh rate on the actual display is asymmetric because
-> > > > > well we are just updating a RAM, the resolution just limits how
-> > > > > much data we are sending, the clock limits the speed on the
-> > > > > bus over to the RAM on the other side.
-> > > >
-> > > > IMO even in command mode mode->clock should probably be the actual
-> > > > dotclock used by the display. If there's another clock for the bus
-> > > > speed/etc. it should be stored somewhere else.
-> > >
-> > > Good point. For the DSI panels we have the field hs_rate
-> > > for the HS clock in struct mipi_dsi_device which is based
-> > > on exactly this reasoning. And that is what I actually use for
-> > > setting the HS clock.
-> > >
-> > > The problem is however that we in many cases have so
-> > > substandard documentation of these panels that we have
-> > > absolutely no idea about the dotclock. Maybe we should
-> > > just set it to 0 in these cases?
-> >
-> > Don't you always have a TE interrupt or something like that
-> > available? Could just measure it from that if no better
-> > information is available?
-> =
+Since 987d65d01356 (drm: debugfs: make
+drm_debugfs_create_files() never fail), there is no need to ever check
+for the the return value of debugfs_create_file() and
+drm_debugfs_create_files(). Therefore, remove unnecessary checks and
+error handling in nouveau_drm_debugfs_init.
 
-> Yes and I did exactly that, so that is why this comment is in
-> the driver:
-> =
+These changes also enable nouveau_drm_debugfs_init() to be declared
+as void.
 
-> static const struct drm_display_mode sony_acx424akp_cmd_mode =3D {
-> (...)
->         /*
->          * Some desired refresh rate, experiments at the maximum "pixel"
->          * clock speed (HS clock 420 MHz) yields around 117Hz.
->          */
->         .vrefresh =3D 60,
-> =
+Signed-off-by: Wambui Karuga <wambui.karugax@gmail.com>
+---
+ drivers/gpu/drm/nouveau/nouveau_debugfs.c | 26 +++++++++--------------
+ drivers/gpu/drm/nouveau/nouveau_debugfs.h |  5 ++---
+ 2 files changed, 12 insertions(+), 19 deletions(-)
 
-> I got a review comment at the time saying 117 Hz was weird.
-> We didn't reach a proper conclusion on this:
-> https://lore.kernel.org/dri-devel/CACRpkdYW3YNPSNMY3A44GQn8DqK-n9TLvr7uip=
-F7LM_DHZ5=3DLg@mail.gmail.com/
-> =
+diff --git a/drivers/gpu/drm/nouveau/nouveau_debugfs.c b/drivers/gpu/drm/nouveau/nouveau_debugfs.c
+index 7dfbbbc1beea..63cb5e432f8a 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_debugfs.c
++++ b/drivers/gpu/drm/nouveau/nouveau_debugfs.c
+@@ -217,39 +217,33 @@ static const struct nouveau_debugfs_files {
+ 	{"pstate", &nouveau_pstate_fops},
+ };
+ 
+-int
++void
+ nouveau_drm_debugfs_init(struct drm_minor *minor)
+ {
+ 	struct nouveau_drm *drm = nouveau_drm(minor->dev);
+ 	struct dentry *dentry;
+-	int i, ret;
++	int i;
+ 
+ 	for (i = 0; i < ARRAY_SIZE(nouveau_debugfs_files); i++) {
+-		dentry = debugfs_create_file(nouveau_debugfs_files[i].name,
+-					     S_IRUGO | S_IWUSR,
+-					     minor->debugfs_root, minor->dev,
+-					     nouveau_debugfs_files[i].fops);
+-		if (!dentry)
+-			return -ENOMEM;
++		debugfs_create_file(nouveau_debugfs_files[i].name,
++				    S_IRUGO | S_IWUSR,
++				    minor->debugfs_root, minor->dev,
++				    nouveau_debugfs_files[i].fops);
+ 	}
+ 
+-	ret = drm_debugfs_create_files(nouveau_debugfs_list,
+-				       NOUVEAU_DEBUGFS_ENTRIES,
+-				       minor->debugfs_root, minor);
+-	if (ret)
+-		return ret;
++	drm_debugfs_create_files(nouveau_debugfs_list,
++				 NOUVEAU_DEBUGFS_ENTRIES,
++				 minor->debugfs_root, minor);
+ 
+ 	/* Set the size of the vbios since we know it, and it's confusing to
+ 	 * userspace if it wants to seek() but the file has a length of 0
+ 	 */
+ 	dentry = debugfs_lookup("vbios.rom", minor->debugfs_root);
+ 	if (!dentry)
+-		return 0;
++		return;
+ 
+ 	d_inode(dentry)->i_size = drm->vbios.length;
+ 	dput(dentry);
+-
+-	return 0;
+ }
+ 
+ int
+diff --git a/drivers/gpu/drm/nouveau/nouveau_debugfs.h b/drivers/gpu/drm/nouveau/nouveau_debugfs.h
+index 8909c010e8ea..ccb842d9da87 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_debugfs.h
++++ b/drivers/gpu/drm/nouveau/nouveau_debugfs.h
+@@ -18,14 +18,13 @@ nouveau_debugfs(struct drm_device *dev)
+ 	return nouveau_drm(dev)->debugfs;
+ }
+ 
+-extern int  nouveau_drm_debugfs_init(struct drm_minor *);
++extern void nouveau_drm_debugfs_init(struct drm_minor *);
+ extern int  nouveau_debugfs_init(struct nouveau_drm *);
+ extern void nouveau_debugfs_fini(struct nouveau_drm *);
+ #else
+-static inline int
++static inline void
+ nouveau_drm_debugfs_init(struct drm_minor *minor)
+ {
+-       return 0;
+ }
+ 
+ static inline int
+-- 
+2.25.0
 
-> Thierry wasn't sure if 60Hz was good or not, so I just had to
-> go with something.
-> =
-
-> We could calculate the resulting pixel clock for ~117 Hz with
-> this resolution and put that in the clock field but ... don't know
-> what is the best?
-
-I would vote for that approach.
-
--- =
-
-Ville Syrj=E4l=E4
-Intel
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
