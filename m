@@ -2,83 +2,55 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0C66F175C77
-	for <lists+nouveau@lfdr.de>; Mon,  2 Mar 2020 14:58:11 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6A0CB1769BD
+	for <lists+nouveau@lfdr.de>; Tue,  3 Mar 2020 02:00:40 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 714BE6E2A8;
-	Mon,  2 Mar 2020 13:58:09 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id AEEDE6E908;
+	Tue,  3 Mar 2020 01:00:33 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from EUR04-HE1-obe.outbound.protection.outlook.com
- (mail-he1eur04olkn0828.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:fe0d::828])
- by gabe.freedesktop.org (Postfix) with ESMTPS id CECBF6E2A8
- for <nouveau@lists.freedesktop.org>; Mon,  2 Mar 2020 13:58:07 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=IvSdtgrS8iYyv1jo01mC2sLDxKYXWCB1ZVo4BsdZa1lBT5sn6sgFi7QK2M8gqHNEaPBQ1Rn/rsC7U/I3Gp8YbQh3DhxcGUtd61mceI9zlUdH7/8SXILX9BEJRJQvredxtwPp+/XgYQJssKwH9aJoA037UflRl3xj7Er6hxBOAvVFRSKsTb1A1SjUMc6LgqgnNtphqRuAZan4qDp9NN28nrpmeXzOLykzTN1rxyC20SYwzYBc2nfzz41d3oOmxbSWTmUipsWqodhIonNqpz0AYoaQbcuMYdlNnLDl+F6wWmFeXjQBcf9QO4fjrDH6DEXIbg2hu1awMogb1Tm0GLJlTg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=TU3mbQv1x4oPJR10vU3EF1aaUiEbCXR7jXwxGt26Wi0=;
- b=V4dx8ptYKkpiHlyW5WcnZw8ny9PuWKX7NVbLGNt453l0WDbWmDSv3kzgf0jM+qSDUhQ69jOvWnCcGU/eEnmkaI+wZOOCZGqwQhQHrsBkH3WlhuGdUCXZVQija1igyewBD/TvBb68yb5Wcmm5gYSEmiipAE8bdHq3uBCH0aK1jh4VLOzmEH0xYVqwnPDJA1D96tyUsmTDWzkfVW8LMJx+dFkCTUCU8S7Qkj3FBTMiaMlvV8Kuk1+Ab6PjV7dIyS99F3vj5X7lbfzev7GJVriOZaiEqIHPTQuIqulpQVGa2D0pDW7BmExZ81p0GjX7pymM/Vx5L3DZImZS2X/VUxOeqA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
- dkim=none; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hotmail.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=TU3mbQv1x4oPJR10vU3EF1aaUiEbCXR7jXwxGt26Wi0=;
- b=Sh2vZxg9wTixFi5KmV6OGU0jqi2j1aMMmH6JujF6QoSzXZW0kR++fb+ofOTWID46ze3vLhizNOVYgnh7NLnrJgDeKqRZTCfr0jgG2192ivqZIZM8tHj9vQwWU7fikmLODV6UdGCHspkdB9USzZtpMMl+C41cbgqK/+066ta2eJeOu9pYudprOwFGa0B8UnVRJH9FhDEraOgDhSUOe0RORJZP4+hZWLDnA60QmQkY7tPwswA3X+nwOYSBJAgwdXQW9YD3rUI0W1spLi1AxPVPRb1o5fW5jUO56lffYvYORw/faxYheiMmtzhTYKE8oxD2JgKk7256zeITbh/irg+y1g==
-Received: from HE1EUR04FT055.eop-eur04.prod.protection.outlook.com
- (2a01:111:e400:7e0d::38) by
- HE1EUR04HT179.eop-eur04.prod.protection.outlook.com (2a01:111:e400:7e0d::391)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2772.15; Mon, 2 Mar
- 2020 13:58:05 +0000
-Received: from AM6PR09MB3447.eurprd09.prod.outlook.com (10.152.26.57) by
- HE1EUR04FT055.mail.protection.outlook.com (10.152.27.44) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.2772.15 via Frontend Transport; Mon, 2 Mar 2020 13:58:05 +0000
-Received: from AM6PR09MB3447.eurprd09.prod.outlook.com
- ([fe80::3d05:4bdb:ba30:ff49]) by AM6PR09MB3447.eurprd09.prod.outlook.com
- ([fe80::3d05:4bdb:ba30:ff49%5]) with mapi id 15.20.2772.018; Mon, 2 Mar 2020
- 13:58:05 +0000
-From: Juan Manuel Alvarez <alvarez_juanma@hotmail.com>
-To: Ilia Mirkin <imirkin@alum.mit.edu>
-Thread-Topic: [Nouveau] Problems with nouveau driver in Ubuntu 18.04
-Thread-Index: AQHV7VUVBS4hvAIvq0qYY/auqWko8agyof2AgAK4WcE=
-Date: Mon, 2 Mar 2020 13:58:05 +0000
-Message-ID: <AM6PR09MB34475CCDB0389669141C7803FBE70@AM6PR09MB3447.eurprd09.prod.outlook.com>
-References: <AM6PR09MB3447992A0A96D6377F7B9CF8FBEB0@AM6PR09MB3447.eurprd09.prod.outlook.com>,
- <CAKb7UvgpgsmddaVwSxF8mWhyPyOxZ9JxCG10hNXU=9UGEbvNwQ@mail.gmail.com>
-In-Reply-To: <CAKb7UvgpgsmddaVwSxF8mWhyPyOxZ9JxCG10hNXU=9UGEbvNwQ@mail.gmail.com>
-Accept-Language: es-ES, en-US
-Content-Language: es-ES
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-incomingtopheadermarker: OriginalChecksum:83CFA471264F5CFF978B411F1DD932A67DA10F11A2EC7154DC8349D4499C24C4;
- UpperCasedChecksum:D2F354D14B16D64D420028FED0D37F75E5AC871685EB7E3B0971077D332FAABB;
- SizeAsReceived:7109; Count:46
-x-ms-exchange-messagesentrepresentingtype: 1
-x-tmn: [BlESwCYJtJhAAH9meQlUCqT/YqFY5LrB]
-x-ms-publictraffictype: Email
-x-incomingheadercount: 46
-x-eopattributedmessage: 0
-x-ms-office365-filtering-correlation-id: bd88c96a-36b0-4cd2-bf4c-08d7beb1bb16
-x-ms-traffictypediagnostic: HE1EUR04HT179:
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: 29uBzpSJtglRWeHWgHVS5vHTzmKb4j2pEr3QjQ4l7+nBtoxmy90FKOS3omTxG1tmAUdFrmMKyuxoE8yMX8ExqXxRHjKzO4OXfdouKPz9awmaPL3IqevGvPKHhmYF82nS2309SRVc56WMGEArDwX7azBVh1ynRKLEvJCmlxVhA8AJqwzBAy8u4ZNv0nlvULXfnh2Iz9R+52bI9TPBU6laAp+BO2seb5scJtxFOyMwLJU=
-x-ms-exchange-antispam-messagedata: ENcg5q+js6Wd988wP30REYAVz2QTVgSi8zPvJZ3R6ZxcuKy59w88Of4gmKcMfOQHHxoOMtKU/NV2DatwZj8mFtzYRz4k/2rKFALwrF9vXpSsSz7zouZ7UbZeAKZ1jq33Xrw0QiMwDTjZBJVtVBBIUw==
-x-ms-exchange-transport-forked: True
+Received: from hqnvemgate26.nvidia.com (hqnvemgate26.nvidia.com
+ [216.228.121.65])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2B0416E906;
+ Tue,  3 Mar 2020 01:00:32 +0000 (UTC)
+Received: from hqpgpgate102.nvidia.com (Not Verified[216.228.121.13]) by
+ hqnvemgate26.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
+ id <B5e5dac220000>; Mon, 02 Mar 2020 17:00:18 -0800
+Received: from hqmail.nvidia.com ([172.20.161.6])
+ by hqpgpgate102.nvidia.com (PGP Universal service);
+ Mon, 02 Mar 2020 17:00:31 -0800
+X-PGP-Universal: processed;
+ by hqpgpgate102.nvidia.com on Mon, 02 Mar 2020 17:00:31 -0800
+Received: from HQMAIL101.nvidia.com (172.20.187.10) by HQMAIL105.nvidia.com
+ (172.20.187.12) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Tue, 3 Mar
+ 2020 01:00:30 +0000
+Received: from rnnvemgw01.nvidia.com (10.128.109.123) by HQMAIL101.nvidia.com
+ (172.20.187.10) with Microsoft SMTP Server (TLS) id 15.0.1473.3 via
+ Frontend Transport; Tue, 3 Mar 2020 01:00:30 +0000
+Received: from rcampbell-dev.nvidia.com (Not Verified[10.110.48.66]) by
+ rnnvemgw01.nvidia.com with Trustwave SEG (v7, 5, 8, 10121)
+ id <B5e5dac2d001f>; Mon, 02 Mar 2020 17:00:29 -0800
+From: Ralph Campbell <rcampbell@nvidia.com>
+To: <dri-devel@lists.freedesktop.org>, <linux-rdma@vger.kernel.org>,
+ <linux-mm@kvack.org>, <linux-kernel@vger.kernel.org>,
+ <nouveau@lists.freedesktop.org>
+Date: Mon, 2 Mar 2020 17:00:23 -0800
+Message-ID: <20200303010023.2983-1-rcampbell@nvidia.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-X-OriginatorOrg: hotmail.com
-X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-CrossTenant-Network-Message-Id: bd88c96a-36b0-4cd2-bf4c-08d7beb1bb16
-X-MS-Exchange-CrossTenant-rms-persistedconsumerorg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-CrossTenant-originalarrivaltime: 02 Mar 2020 13:58:05.2354 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Internet
-X-MS-Exchange-CrossTenant-id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: HE1EUR04HT179
-Subject: Re: [Nouveau] Problems with nouveau driver in Ubuntu 18.04
+X-NVConfidentiality: public
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
+ t=1583197218; bh=VM/GObbgHQMpS+HiC4HrNLp5DB1tYqNPFUeLAghZ4TE=;
+ h=X-PGP-Universal:From:To:CC:Subject:Date:Message-ID:X-Mailer:
+ MIME-Version:X-NVConfidentiality:Content-Type:
+ Content-Transfer-Encoding;
+ b=bmAF3JWZrjJw+REMWKCRILuRkCfGsGeAHORL/SiS4W8k3LK4FJEPqHkUvKbsTuarQ
+ J5cTpBVw4fAcoi3sAHehaQUbLGVOOr0d/PdP9LFE/8JCHw+U4gdYyEKzE0cNyqqu6e
+ irbKhY+GsJqgGv6l+U0tOYIg9AbnPeGXJpSxMQXytATjPTvataSBsFl7jSKh72VLyL
+ j0QM2CBaEPyNLVtMo1QccpxSwvQipx5Nb2E4nRHReREXhgy/XsPFzBQ2Q/9wNuZirC
+ LYWcOG8089kbDtjG7mdLdEd+9ck0QpFlovQKGxktrZRDDnaypi/N4OfaFUa+ETUaTh
+ gV2wTNRHHXzqA==
+Subject: [Nouveau] [PATCH v2] nouveau/hmm: map pages after migration
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -90,206 +62,163 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>
-Content-Type: multipart/mixed; boundary="===============1277883636=="
+Cc: Ralph Campbell <rcampbell@nvidia.com>, Jason Gunthorpe <jgg@mellanox.com>,
+ Ben Skeggs <bskeggs@redhat.com>, Andrew
+ Morton <akpm@linux-foundation.org>, Christoph Hellwig <hch@lst.de>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
---===============1277883636==
-Content-Language: es-ES
-Content-Type: multipart/alternative;
-	boundary="_000_AM6PR09MB34475CCDB0389669141C7803FBE70AM6PR09MB3447eurp_"
-
---_000_AM6PR09MB34475CCDB0389669141C7803FBE70AM6PR09MB3447eurp_
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
-
-Hi!
-
-It seems that it works! Thanks!
-
-Regars!
-
-________________________________
-De: Ilia Mirkin <imirkin@alum.mit.edu>
-Enviado: s=E1bado, 29 de febrero de 2020 20:25
-Para: Juan Manuel Alvarez <alvarez_juanma@hotmail.com>
-Cc: nouveau@lists.freedesktop.org <nouveau@lists.freedesktop.org>
-Asunto: Re: [Nouveau] Problems with nouveau driver in Ubuntu 18.04
-
-Can you try to figure out what was updated in the latest updates? My
-guess would be that it's actually the software used to display your
-desktop/etc which changed.
-
-You can disable all accel by booting with nouveau.noaccel=3D1.
-
-Cheers,
-
-  -ilia
-
-On Sat, Feb 29, 2020 at 12:31 AM Juan Manuel Alvarez
-<alvarez_juanma@hotmail.com> wrote:
->
-> Hello,
->
->
-> I use Ubuntu 18.04, since one of the last upgrades I have problems with n=
-ouveau drivers.
->
-> My screen look like the picture atteched.
->
->
->  [~]$ uname -a
-> Linux  5.3.0-40-generic #32~18.04.1-Ubuntu SMP Mon Feb 3 14:05:59 UTC 202=
-0 x86_64 x86_64 x86_64 GNU/Linux
->
-> [~]$ inxi -Gx
-> Graphics:  Card: NVIDIA G71GL [Quadro FX 1500] bus-ID: 01:00.0
->            Display Server: x11 (X.Org 1.20.5 ) driver: nouveau Resolution=
-: 1920x1080@60.00hz, 1920x1080@60.00hz
->            OpenGL: renderer: NV49 version: 2.1 Mesa 19.2.8 Direct Render:=
- Yes
->
-> I have tried to install Nvidia driver 304.137, but it seems is not suppor=
-ted in Ubuntu 18.04 anymore.
->
->
-> Are there any nouveau upgrade (that it is not on Canonical) that fixes th=
-is problem?
->
-> Or how I can downgrade nouveau driver to any previous one that works fine=
- in ubuntu 18.04 with my graphics card?
->
->
-> Regards!
->
-> Juanma
-> _______________________________________________
-> Nouveau mailing list
-> Nouveau@lists.freedesktop.org
-> https://lists.freedesktop.org/mailman/listinfo/nouveau
-
---_000_AM6PR09MB34475CCDB0389669141C7803FBE70AM6PR09MB3447eurp_
-Content-Type: text/html; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
-
-<html>
-<head>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Diso-8859-=
-1">
-<style type=3D"text/css" style=3D"display:none;"> P {margin-top:0;margin-bo=
-ttom:0;} </style>
-</head>
-<body dir=3D"ltr">
-<div style=3D"font-family: Calibri, Helvetica, sans-serif; font-size: 12pt;=
- color: rgb(0, 0, 0);">
-Hi!</div>
-<div style=3D"font-family: Calibri, Helvetica, sans-serif; font-size: 12pt;=
- color: rgb(0, 0, 0);">
-<br>
-</div>
-<div style=3D"font-family: Calibri, Helvetica, sans-serif; font-size: 12pt;=
- color: rgb(0, 0, 0);">
-It seems that it works! Thanks!</div>
-<div style=3D"font-family: Calibri, Helvetica, sans-serif; font-size: 12pt;=
- color: rgb(0, 0, 0);">
-<br>
-</div>
-<div style=3D"font-family: Calibri, Helvetica, sans-serif; font-size: 12pt;=
- color: rgb(0, 0, 0);">
-Regars!</div>
-<div>
-<div id=3D"appendonsend"></div>
-<div style=3D"font-family:Calibri,Helvetica,sans-serif; font-size:12pt; col=
-or:rgb(0,0,0)">
-<br>
-</div>
-<hr tabindex=3D"-1" style=3D"display:inline-block; width:98%">
-<div id=3D"divRplyFwdMsg" dir=3D"ltr"><font face=3D"Calibri, sans-serif" co=
-lor=3D"#000000" style=3D"font-size:11pt"><b>De:</b> Ilia Mirkin &lt;imirkin=
-@alum.mit.edu&gt;<br>
-<b>Enviado:</b> s=E1bado, 29 de febrero de 2020 20:25<br>
-<b>Para:</b> Juan Manuel Alvarez &lt;alvarez_juanma@hotmail.com&gt;<br>
-<b>Cc:</b> nouveau@lists.freedesktop.org &lt;nouveau@lists.freedesktop.org&=
-gt;<br>
-<b>Asunto:</b> Re: [Nouveau] Problems with nouveau driver in Ubuntu 18.04</=
-font>
-<div>&nbsp;</div>
-</div>
-<div class=3D"BodyFragment"><font size=3D"2"><span style=3D"font-size:11pt"=
->
-<div class=3D"PlainText">Can you try to figure out what was updated in the =
-latest updates? My<br>
-guess would be that it's actually the software used to display your<br>
-desktop/etc which changed.<br>
-<br>
-You can disable all accel by booting with nouveau.noaccel=3D1.<br>
-<br>
-Cheers,<br>
-<br>
-&nbsp; -ilia<br>
-<br>
-On Sat, Feb 29, 2020 at 12:31 AM Juan Manuel Alvarez<br>
-&lt;alvarez_juanma@hotmail.com&gt; wrote:<br>
-&gt;<br>
-&gt; Hello,<br>
-&gt;<br>
-&gt;<br>
-&gt; I use Ubuntu 18.04, since one of the last upgrades I have problems wit=
-h nouveau drivers.<br>
-&gt;<br>
-&gt; My screen look like the picture atteched.<br>
-&gt;<br>
-&gt;<br>
-&gt;&nbsp; [~]$ uname -a<br>
-&gt; Linux&nbsp; 5.3.0-40-generic #32~18.04.1-Ubuntu SMP Mon Feb 3 14:05:59=
- UTC 2020 x86_64 x86_64 x86_64 GNU/Linux<br>
-&gt;<br>
-&gt; [~]$ inxi -Gx<br>
-&gt; Graphics:&nbsp; Card: NVIDIA G71GL [Quadro FX 1500] bus-ID: 01:00.0<br=
->
-&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Disp=
-lay Server: x11 (X.Org 1.20.5 ) driver: nouveau Resolution: 1920x1080@60.00=
-hz, 1920x1080@60.00hz<br>
-&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Open=
-GL: renderer: NV49 version: 2.1 Mesa 19.2.8 Direct Render: Yes<br>
-&gt;<br>
-&gt; I have tried to install Nvidia driver 304.137, but it seems is not sup=
-ported in Ubuntu 18.04 anymore.<br>
-&gt;<br>
-&gt;<br>
-&gt; Are there any nouveau upgrade (that it is not on Canonical) that fixes=
- this problem?<br>
-&gt;<br>
-&gt; Or how I can downgrade nouveau driver to any previous one that works f=
-ine in ubuntu 18.04 with my graphics card?<br>
-&gt;<br>
-&gt;<br>
-&gt; Regards!<br>
-&gt;<br>
-&gt; Juanma<br>
-&gt; _______________________________________________<br>
-&gt; Nouveau mailing list<br>
-&gt; Nouveau@lists.freedesktop.org<br>
-&gt; <a href=3D"https://lists.freedesktop.org/mailman/listinfo/nouveau">htt=
-ps://lists.freedesktop.org/mailman/listinfo/nouveau</a><br>
-</div>
-</span></font></div>
-</div>
-</body>
-</html>
-
---_000_AM6PR09MB34475CCDB0389669141C7803FBE70AM6PR09MB3447eurp_--
-
---===============1277883636==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
-_______________________________________________
-Nouveau mailing list
-Nouveau@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/nouveau
-
---===============1277883636==--
+V2hlbiBtZW1vcnkgaXMgbWlncmF0ZWQgdG8gdGhlIEdQVSwgaXQgaXMgbGlrZWx5IHRvIGJlIGFj
+Y2Vzc2VkIGJ5IEdQVQpjb2RlIHNvb24gYWZ0ZXJ3YXJkcy4gSW5zdGVhZCBvZiB3YWl0aW5nIGZv
+ciBhIEdQVSBmYXVsdCwgbWFwIHRoZQptaWdyYXRlZCBtZW1vcnkgaW50byB0aGUgR1BVIHBhZ2Ug
+dGFibGVzIHdpdGggdGhlIHNhbWUgYWNjZXNzIHBlcm1pc3Npb25zCmFzIHRoZSBzb3VyY2UgQ1BV
+IHBhZ2UgdGFibGUgZW50cmllcy4gVGhpcyBwcmVzZXJ2ZXMgY29weSBvbiB3cml0ZQpzZW1hbnRp
+Y3MuCgpTaWduZWQtb2ZmLWJ5OiBSYWxwaCBDYW1wYmVsbCA8cmNhbXBiZWxsQG52aWRpYS5jb20+
+CkNjOiBDaHJpc3RvcGggSGVsbHdpZyA8aGNoQGxzdC5kZT4KQ2M6IEphc29uIEd1bnRob3JwZSA8
+amdnQG1lbGxhbm94LmNvbT4KQ2M6ICJKw6lyw7RtZSBHbGlzc2UiIDxqZ2xpc3NlQHJlZGhhdC5j
+b20+CkNjOiBCZW4gU2tlZ2dzIDxic2tlZ2dzQHJlZGhhdC5jb20+Ci0tLQoKT3JpZ2luYWxseSB0
+aGlzIHBhdGNoIHdhcyB0YXJnZXRlZCBmb3IgSmFzb24ncyByZG1hIHRyZWUgc2luY2Ugb3RoZXIg
+SE1NCnJlbGF0ZWQgY2hhbmdlcyB3ZXJlIHF1ZXVlZCB0aGVyZS4gTm93IHRoYXQgdGhvc2UgaGF2
+ZSBiZWVuIG1lcmdlZCwgdGhpcwpwYXRjaCBqdXN0IGNvbnRhaW5zIGNoYW5nZXMgdG8gbm91dmVh
+dSBzbyBpdCBjb3VsZCBnbyB0aHJvdWdoIGFueSB0cmVlLgpJIGd1ZXNzIEJlbiBTa2VnZ3MnIHRy
+ZWUgd291bGQgYmUgYXBwcm9wcmlhdGUuCgpDaGFuZ2VzIHNpbmNlIHYxOgogUmViYXNlIHRvIGxp
+bnV4LTUuNi4wLXJjNAogQWRkcmVzcyBDaHJpc3RvcGggSGVsbHdpZydzIGNvbW1lbnRzCgogZHJp
+dmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9kbWVtLmMgfCA0NCArKysrKysrKy0tLS0tCiBk
+cml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X3N2bS5jICB8IDg1ICsrKysrKysrKysrKysr
+KysrKysrKysrKysrCiBkcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X3N2bS5oICB8ICA1
+ICsrCiAzIGZpbGVzIGNoYW5nZWQsIDExOCBpbnNlcnRpb25zKCspLCAxNiBkZWxldGlvbnMoLSkK
+CmRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2RtZW0uYyBiL2Ry
+aXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfZG1lbS5jCmluZGV4IDBhZDVkODdiNWE4ZS4u
+MTcyZTBjOThjZWM1IDEwMDY0NAotLS0gYS9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1
+X2RtZW0uYworKysgYi9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2RtZW0uYwpAQCAt
+MjUsMTEgKzI1LDEzIEBACiAjaW5jbHVkZSAibm91dmVhdV9kbWEuaCIKICNpbmNsdWRlICJub3V2
+ZWF1X21lbS5oIgogI2luY2x1ZGUgIm5vdXZlYXVfYm8uaCIKKyNpbmNsdWRlICJub3V2ZWF1X3N2
+bS5oIgogCiAjaW5jbHVkZSA8bnZpZi9jbGFzcy5oPgogI2luY2x1ZGUgPG52aWYvb2JqZWN0Lmg+
+CiAjaW5jbHVkZSA8bnZpZi9pZjUwMGIuaD4KICNpbmNsdWRlIDxudmlmL2lmOTAwYi5oPgorI2lu
+Y2x1ZGUgPG52aWYvaWYwMDBjLmg+CiAKICNpbmNsdWRlIDxsaW51eC9zY2hlZC9tbS5oPgogI2lu
+Y2x1ZGUgPGxpbnV4L2htbS5oPgpAQCAtNTU4LDEwICs1NjAsMTEgQEAgbm91dmVhdV9kbWVtX2lu
+aXQoc3RydWN0IG5vdXZlYXVfZHJtICpkcm0pCiB9CiAKIHN0YXRpYyB1bnNpZ25lZCBsb25nIG5v
+dXZlYXVfZG1lbV9taWdyYXRlX2NvcHlfb25lKHN0cnVjdCBub3V2ZWF1X2RybSAqZHJtLAotCQl1
+bnNpZ25lZCBsb25nIHNyYywgZG1hX2FkZHJfdCAqZG1hX2FkZHIpCisJCXVuc2lnbmVkIGxvbmcg
+c3JjLCBkbWFfYWRkcl90ICpkbWFfYWRkciwgdTY0ICpwZm4pCiB7CiAJc3RydWN0IGRldmljZSAq
+ZGV2ID0gZHJtLT5kZXYtPmRldjsKIAlzdHJ1Y3QgcGFnZSAqZHBhZ2UsICpzcGFnZTsKKwl1bnNp
+Z25lZCBsb25nIHBhZGRyOwogCiAJc3BhZ2UgPSBtaWdyYXRlX3Bmbl90b19wYWdlKHNyYyk7CiAJ
+aWYgKCFzcGFnZSB8fCAhKHNyYyAmIE1JR1JBVEVfUEZOX01JR1JBVEUpKQpAQCAtNTY5LDE3ICs1
+NzIsMjEgQEAgc3RhdGljIHVuc2lnbmVkIGxvbmcgbm91dmVhdV9kbWVtX21pZ3JhdGVfY29weV9v
+bmUoc3RydWN0IG5vdXZlYXVfZHJtICpkcm0sCiAKIAlkcGFnZSA9IG5vdXZlYXVfZG1lbV9wYWdl
+X2FsbG9jX2xvY2tlZChkcm0pOwogCWlmICghZHBhZ2UpCi0JCXJldHVybiAwOworCQlnb3RvIG91
+dDsKIAogCSpkbWFfYWRkciA9IGRtYV9tYXBfcGFnZShkZXYsIHNwYWdlLCAwLCBQQUdFX1NJWkUs
+IERNQV9CSURJUkVDVElPTkFMKTsKIAlpZiAoZG1hX21hcHBpbmdfZXJyb3IoZGV2LCAqZG1hX2Fk
+ZHIpKQogCQlnb3RvIG91dF9mcmVlX3BhZ2U7CiAKKwlwYWRkciA9IG5vdXZlYXVfZG1lbV9wYWdl
+X2FkZHIoZHBhZ2UpOwogCWlmIChkcm0tPmRtZW0tPm1pZ3JhdGUuY29weV9mdW5jKGRybSwgMSwg
+Tk9VVkVBVV9BUEVSX1ZSQU0sCi0JCQlub3V2ZWF1X2RtZW1fcGFnZV9hZGRyKGRwYWdlKSwgTk9V
+VkVBVV9BUEVSX0hPU1QsCi0JCQkqZG1hX2FkZHIpKQorCQkJcGFkZHIsIE5PVVZFQVVfQVBFUl9I
+T1NULCAqZG1hX2FkZHIpKQogCQlnb3RvIG91dF9kbWFfdW5tYXA7CiAKKwkqcGZuID0gTlZJRl9W
+TU1fUEZOTUFQX1YwX1YgfCBOVklGX1ZNTV9QRk5NQVBfVjBfVlJBTSB8CisJCSgocGFkZHIgPj4g
+UEFHRV9TSElGVCkgPDwgTlZJRl9WTU1fUEZOTUFQX1YwX0FERFJfU0hJRlQpOworCWlmIChzcmMg
+JiBNSUdSQVRFX1BGTl9XUklURSkKKwkJKnBmbiB8PSBOVklGX1ZNTV9QRk5NQVBfVjBfVzsKIAly
+ZXR1cm4gbWlncmF0ZV9wZm4ocGFnZV90b19wZm4oZHBhZ2UpKSB8IE1JR1JBVEVfUEZOX0xPQ0tF
+RDsKIAogb3V0X2RtYV91bm1hcDoKQEAgLTU4NywxOCArNTk0LDE5IEBAIHN0YXRpYyB1bnNpZ25l
+ZCBsb25nIG5vdXZlYXVfZG1lbV9taWdyYXRlX2NvcHlfb25lKHN0cnVjdCBub3V2ZWF1X2RybSAq
+ZHJtLAogb3V0X2ZyZWVfcGFnZToKIAlub3V2ZWF1X2RtZW1fcGFnZV9mcmVlX2xvY2tlZChkcm0s
+IGRwYWdlKTsKIG91dDoKKwkqcGZuID0gTlZJRl9WTU1fUEZOTUFQX1YwX05PTkU7CiAJcmV0dXJu
+IDA7CiB9CiAKIHN0YXRpYyB2b2lkIG5vdXZlYXVfZG1lbV9taWdyYXRlX2NodW5rKHN0cnVjdCBu
+b3V2ZWF1X2RybSAqZHJtLAotCQlzdHJ1Y3QgbWlncmF0ZV92bWEgKmFyZ3MsIGRtYV9hZGRyX3Qg
+KmRtYV9hZGRycykKKwkJc3RydWN0IG1pZ3JhdGVfdm1hICphcmdzLCBkbWFfYWRkcl90ICpkbWFf
+YWRkcnMsIHU2NCAqcGZucykKIHsKIAlzdHJ1Y3Qgbm91dmVhdV9mZW5jZSAqZmVuY2U7CiAJdW5z
+aWduZWQgbG9uZyBhZGRyID0gYXJncy0+c3RhcnQsIG5yX2RtYSA9IDAsIGk7CiAKIAlmb3IgKGkg
+PSAwOyBhZGRyIDwgYXJncy0+ZW5kOyBpKyspIHsKIAkJYXJncy0+ZHN0W2ldID0gbm91dmVhdV9k
+bWVtX21pZ3JhdGVfY29weV9vbmUoZHJtLCBhcmdzLT5zcmNbaV0sCi0JCQkJZG1hX2FkZHJzICsg
+bnJfZG1hKTsKKwkJCQlkbWFfYWRkcnMgKyBucl9kbWEsIHBmbnMgKyBpKTsKIAkJaWYgKGFyZ3Mt
+PmRzdFtpXSkKIAkJCW5yX2RtYSsrOwogCQlhZGRyICs9IFBBR0VfU0laRTsKQEAgLTYwNywxNSAr
+NjE1LDEyIEBAIHN0YXRpYyB2b2lkIG5vdXZlYXVfZG1lbV9taWdyYXRlX2NodW5rKHN0cnVjdCBu
+b3V2ZWF1X2RybSAqZHJtLAogCW5vdXZlYXVfZmVuY2VfbmV3KGRybS0+ZG1lbS0+bWlncmF0ZS5j
+aGFuLCBmYWxzZSwgJmZlbmNlKTsKIAltaWdyYXRlX3ZtYV9wYWdlcyhhcmdzKTsKIAlub3V2ZWF1
+X2RtZW1fZmVuY2VfZG9uZSgmZmVuY2UpOworCW5vdXZlYXVfcGZuc19tYXAoZHJtLCBhcmdzLT52
+bWEtPnZtX21tLCBhcmdzLT5zdGFydCwgcGZucywgaSk7CiAKIAl3aGlsZSAobnJfZG1hLS0pIHsK
+IAkJZG1hX3VubWFwX3BhZ2UoZHJtLT5kZXYtPmRldiwgZG1hX2FkZHJzW25yX2RtYV0sIFBBR0Vf
+U0laRSwKIAkJCQlETUFfQklESVJFQ1RJT05BTCk7CiAJfQotCS8qCi0JICogRklYTUUgb3B0aW1p
+emF0aW9uOiB1cGRhdGUgR1BVIHBhZ2UgdGFibGUgdG8gcG9pbnQgdG8gbmV3bHkgbWlncmF0ZWQK
+LQkgKiBtZW1vcnkuCi0JICovCiAJbWlncmF0ZV92bWFfZmluYWxpemUoYXJncyk7CiB9CiAKQEAg
+LTYzMiw3ICs2MzcsOCBAQCBub3V2ZWF1X2RtZW1fbWlncmF0ZV92bWEoc3RydWN0IG5vdXZlYXVf
+ZHJtICpkcm0sCiAJCS52bWEJCT0gdm1hLAogCQkuc3RhcnQJCT0gc3RhcnQsCiAJfTsKLQl1bnNp
+Z25lZCBsb25nIGMsIGk7CisJdW5zaWduZWQgbG9uZyBpOworCXU2NCAqcGZuczsKIAlpbnQgcmV0
+ID0gLUVOT01FTTsKIAogCWFyZ3Muc3JjID0ga2NhbGxvYyhtYXgsIHNpemVvZigqYXJncy5zcmMp
+LCBHRlBfS0VSTkVMKTsKQEAgLTY0NiwxOSArNjUyLDI1IEBAIG5vdXZlYXVfZG1lbV9taWdyYXRl
+X3ZtYShzdHJ1Y3Qgbm91dmVhdV9kcm0gKmRybSwKIAlpZiAoIWRtYV9hZGRycykKIAkJZ290byBv
+dXRfZnJlZV9kc3Q7CiAKLQlmb3IgKGkgPSAwOyBpIDwgbnBhZ2VzOyBpICs9IGMpIHsKLQkJYyA9
+IG1pbihTR19NQVhfU0lOR0xFX0FMTE9DLCBucGFnZXMpOwotCQlhcmdzLmVuZCA9IHN0YXJ0ICsg
+KGMgPDwgUEFHRV9TSElGVCk7CisJcGZucyA9IG5vdXZlYXVfcGZuc19hbGxvYyhtYXgpOworCWlm
+ICghcGZucykKKwkJZ290byBvdXRfZnJlZV9kbWE7CisKKwlmb3IgKGkgPSAwOyBpIDwgbnBhZ2Vz
+OyBpICs9IG1heCkgeworCQlhcmdzLmVuZCA9IHN0YXJ0ICsgKG1heCA8PCBQQUdFX1NISUZUKTsK
+IAkJcmV0ID0gbWlncmF0ZV92bWFfc2V0dXAoJmFyZ3MpOwogCQlpZiAocmV0KQotCQkJZ290byBv
+dXRfZnJlZV9kbWE7CisJCQlnb3RvIG91dF9mcmVlX3BmbnM7CiAKIAkJaWYgKGFyZ3MuY3BhZ2Vz
+KQotCQkJbm91dmVhdV9kbWVtX21pZ3JhdGVfY2h1bmsoZHJtLCAmYXJncywgZG1hX2FkZHJzKTsK
+KwkJCW5vdXZlYXVfZG1lbV9taWdyYXRlX2NodW5rKGRybSwgJmFyZ3MsIGRtYV9hZGRycywKKwkJ
+CQkJCSAgIHBmbnMpOwogCQlhcmdzLnN0YXJ0ID0gYXJncy5lbmQ7CiAJfQogCiAJcmV0ID0gMDsK
+K291dF9mcmVlX3BmbnM6CisJbm91dmVhdV9wZm5zX2ZyZWUocGZucyk7CiBvdXRfZnJlZV9kbWE6
+CiAJa2ZyZWUoZG1hX2FkZHJzKTsKIG91dF9mcmVlX2RzdDoKZGlmZiAtLWdpdCBhL2RyaXZlcnMv
+Z3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfc3ZtLmMgYi9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9u
+b3V2ZWF1X3N2bS5jCmluZGV4IGRmOWJmMWZkMWJjMC4uOGM2Mjk5MThhM2M2IDEwMDY0NAotLS0g
+YS9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X3N2bS5jCisrKyBiL2RyaXZlcnMvZ3B1
+L2RybS9ub3V2ZWF1L25vdXZlYXVfc3ZtLmMKQEAgLTcwLDYgKzcwLDEyIEBAIHN0cnVjdCBub3V2
+ZWF1X3N2bSB7CiAjZGVmaW5lIFNWTV9EQkcocyxmLGEuLi4pIE5WX0RFQlVHKChzKS0+ZHJtLCAi
+c3ZtOiAiZiJcbiIsICMjYSkKICNkZWZpbmUgU1ZNX0VSUihzLGYsYS4uLikgTlZfV0FSTigocykt
+PmRybSwgInN2bTogImYiXG4iLCAjI2EpCiAKK3N0cnVjdCBub3V2ZWF1X3Bmbm1hcF9hcmdzIHsK
+KwlzdHJ1Y3QgbnZpZl9pb2N0bF92MCBpOworCXN0cnVjdCBudmlmX2lvY3RsX210aGRfdjAgbTsK
+KwlzdHJ1Y3QgbnZpZl92bW1fcGZubWFwX3YwIHA7Cit9OworCiBzdHJ1Y3Qgbm91dmVhdV9pdm1t
+IHsKIAlzdHJ1Y3Qgbm91dmVhdV9zdm1tICpzdm1tOwogCXU2NCBpbnN0OwpAQCAtNzgyLDYgKzc4
+OCw4NSBAQCBub3V2ZWF1X3N2bV9mYXVsdChzdHJ1Y3QgbnZpZl9ub3RpZnkgKm5vdGlmeSkKIAly
+ZXR1cm4gTlZJRl9OT1RJRllfS0VFUDsKIH0KIAorc3RhdGljIGlubGluZSBzdHJ1Y3Qgbm91dmVh
+dV9wZm5tYXBfYXJncyAqCitub3V2ZWF1X3BmbnNfdG9fYXJncyh2b2lkICpwZm5zKQoreworCXN0
+cnVjdCBudmlmX3ZtbV9wZm5tYXBfdjAgKnAgPQorCQljb250YWluZXJfb2YocGZucywgc3RydWN0
+IG52aWZfdm1tX3Bmbm1hcF92MCwgcGh5cyk7CisKKwlyZXR1cm4gY29udGFpbmVyX29mKHAsIHN0
+cnVjdCBub3V2ZWF1X3Bmbm1hcF9hcmdzLCBwKTsKK30KKwordTY0ICoKK25vdXZlYXVfcGZuc19h
+bGxvYyh1bnNpZ25lZCBsb25nIG5wYWdlcykKK3sKKwlzdHJ1Y3Qgbm91dmVhdV9wZm5tYXBfYXJn
+cyAqYXJnczsKKworCWFyZ3MgPSBremFsbG9jKHN0cnVjdF9zaXplKGFyZ3MsIHAucGh5cywgbnBh
+Z2VzKSwgR0ZQX0tFUk5FTCk7CisJaWYgKCFhcmdzKQorCQlyZXR1cm4gTlVMTDsKKworCWFyZ3Mt
+PmkudHlwZSA9IE5WSUZfSU9DVExfVjBfTVRIRDsKKwlhcmdzLT5tLm1ldGhvZCA9IE5WSUZfVk1N
+X1YwX1BGTk1BUDsKKwlhcmdzLT5wLnBhZ2UgPSBQQUdFX1NISUZUOworCisJcmV0dXJuIGFyZ3Mt
+PnAucGh5czsKK30KKwordm9pZAorbm91dmVhdV9wZm5zX2ZyZWUodTY0ICpwZm5zKQoreworCXN0
+cnVjdCBub3V2ZWF1X3Bmbm1hcF9hcmdzICphcmdzID0gbm91dmVhdV9wZm5zX3RvX2FyZ3MocGZu
+cyk7CisKKwlrZnJlZShhcmdzKTsKK30KKworc3RhdGljIHN0cnVjdCBub3V2ZWF1X3N2bW0gKgor
+bm91dmVhdV9maW5kX3N2bW0oc3RydWN0IG5vdXZlYXVfc3ZtICpzdm0sIHN0cnVjdCBtbV9zdHJ1
+Y3QgKm1tKQoreworCXN0cnVjdCBub3V2ZWF1X2l2bW0gKml2bW07CisKKwlsaXN0X2Zvcl9lYWNo
+X2VudHJ5KGl2bW0sICZzdm0tPmluc3QsIGhlYWQpIHsKKwkJaWYgKGl2bW0tPnN2bW0tPm5vdGlm
+aWVyLm1tID09IG1tKQorCQkJcmV0dXJuIGl2bW0tPnN2bW07CisJfQorCXJldHVybiBOVUxMOwor
+fQorCit2b2lkCitub3V2ZWF1X3BmbnNfbWFwKHN0cnVjdCBub3V2ZWF1X2RybSAqZHJtLCBzdHJ1
+Y3QgbW1fc3RydWN0ICptbSwKKwkJIHVuc2lnbmVkIGxvbmcgYWRkciwgdTY0ICpwZm5zLCB1bnNp
+Z25lZCBsb25nIG5wYWdlcykKK3sKKwlzdHJ1Y3Qgbm91dmVhdV9zdm0gKnN2bSA9IGRybS0+c3Zt
+OworCXN0cnVjdCBub3V2ZWF1X3N2bW0gKnN2bW07CisJc3RydWN0IG5vdXZlYXVfcGZubWFwX2Fy
+Z3MgKmFyZ3M7CisJaW50IHJldDsKKworCWlmICghc3ZtKQorCQlyZXR1cm47CisKKwltdXRleF9s
+b2NrKCZzdm0tPm11dGV4KTsKKwlzdm1tID0gbm91dmVhdV9maW5kX3N2bW0oc3ZtLCBtbSk7CisJ
+aWYgKCFzdm1tKSB7CisJCW11dGV4X3VubG9jaygmc3ZtLT5tdXRleCk7CisJCXJldHVybjsKKwl9
+CisJbXV0ZXhfdW5sb2NrKCZzdm0tPm11dGV4KTsKKworCWFyZ3MgPSBub3V2ZWF1X3BmbnNfdG9f
+YXJncyhwZm5zKTsKKwlhcmdzLT5wLmFkZHIgPSBhZGRyOworCWFyZ3MtPnAuc2l6ZSA9IG5wYWdl
+cyA8PCBQQUdFX1NISUZUOworCisJbXV0ZXhfbG9jaygmc3ZtbS0+bXV0ZXgpOworCisJc3ZtbS0+
+dm1tLT52bW0ub2JqZWN0LmNsaWVudC0+c3VwZXIgPSB0cnVlOworCXJldCA9IG52aWZfb2JqZWN0
+X2lvY3RsKCZzdm1tLT52bW0tPnZtbS5vYmplY3QsIGFyZ3MsIHNpemVvZigqYXJncykgKworCQkJ
+CW5wYWdlcyAqIHNpemVvZihhcmdzLT5wLnBoeXNbMF0pLCBOVUxMKTsKKwlzdm1tLT52bW0tPnZt
+bS5vYmplY3QuY2xpZW50LT5zdXBlciA9IGZhbHNlOworCisJbXV0ZXhfdW5sb2NrKCZzdm1tLT5t
+dXRleCk7Cit9CisKIHN0YXRpYyB2b2lkCiBub3V2ZWF1X3N2bV9mYXVsdF9idWZmZXJfZmluaShz
+dHJ1Y3Qgbm91dmVhdV9zdm0gKnN2bSwgaW50IGlkKQogewpkaWZmIC0tZ2l0IGEvZHJpdmVycy9n
+cHUvZHJtL25vdXZlYXUvbm91dmVhdV9zdm0uaCBiL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25v
+dXZlYXVfc3ZtLmgKaW5kZXggZTgzOWQ4MTg5NDYxLi4wNjQ5ZjhkNTg3YTggMTAwNjQ0Ci0tLSBh
+L2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfc3ZtLmgKKysrIGIvZHJpdmVycy9ncHUv
+ZHJtL25vdXZlYXUvbm91dmVhdV9zdm0uaApAQCAtMTgsNiArMTgsMTEgQEAgdm9pZCBub3V2ZWF1
+X3N2bW1fZmluaShzdHJ1Y3Qgbm91dmVhdV9zdm1tICoqKTsKIGludCBub3V2ZWF1X3N2bW1fam9p
+bihzdHJ1Y3Qgbm91dmVhdV9zdm1tICosIHU2NCBpbnN0KTsKIHZvaWQgbm91dmVhdV9zdm1tX3Bh
+cnQoc3RydWN0IG5vdXZlYXVfc3ZtbSAqLCB1NjQgaW5zdCk7CiBpbnQgbm91dmVhdV9zdm1tX2Jp
+bmQoc3RydWN0IGRybV9kZXZpY2UgKiwgdm9pZCAqLCBzdHJ1Y3QgZHJtX2ZpbGUgKik7CisKK3U2
+NCAqbm91dmVhdV9wZm5zX2FsbG9jKHVuc2lnbmVkIGxvbmcgbnBhZ2VzKTsKK3ZvaWQgbm91dmVh
+dV9wZm5zX2ZyZWUodTY0ICpwZm5zKTsKK3ZvaWQgbm91dmVhdV9wZm5zX21hcChzdHJ1Y3Qgbm91
+dmVhdV9kcm0gKmRybSwgc3RydWN0IG1tX3N0cnVjdCAqbW0sCisJCSAgICAgIHVuc2lnbmVkIGxv
+bmcgYWRkciwgdTY0ICpwZm5zLCB1bnNpZ25lZCBsb25nIG5wYWdlcyk7CiAjZWxzZSAvKiBJU19F
+TkFCTEVEKENPTkZJR19EUk1fTk9VVkVBVV9TVk0pICovCiBzdGF0aWMgaW5saW5lIHZvaWQgbm91
+dmVhdV9zdm1faW5pdChzdHJ1Y3Qgbm91dmVhdV9kcm0gKmRybSkge30KIHN0YXRpYyBpbmxpbmUg
+dm9pZCBub3V2ZWF1X3N2bV9maW5pKHN0cnVjdCBub3V2ZWF1X2RybSAqZHJtKSB7fQotLSAKMi4y
+MC4xCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpOb3V2
+ZWF1IG1haWxpbmcgbGlzdApOb3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xp
+c3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL25vdXZlYXUK
