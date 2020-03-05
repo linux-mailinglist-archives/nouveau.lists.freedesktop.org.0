@@ -2,70 +2,41 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0BE4517ADEB
-	for <lists+nouveau@lfdr.de>; Thu,  5 Mar 2020 19:14:01 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C7B0D17AE13
+	for <lists+nouveau@lfdr.de>; Thu,  5 Mar 2020 19:29:54 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 42EEA6E366;
-	Thu,  5 Mar 2020 18:13:54 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D302C6EBFA;
+	Thu,  5 Mar 2020 18:29:49 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [207.211.31.120])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8D7616E366
- for <nouveau@lists.freedesktop.org>; Thu,  5 Mar 2020 18:13:52 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1583432031;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=HuMESBJWe38jYi16HvIP1cqqRhUUWga6fVgi2gwWClQ=;
- b=GP4jfqgsXSSi8tmBP/HuQGsXt4RzgqTja8qwIxfkIrMnt0jePaG6L2FroOcaqJZj8i+gXC
- FFDFdCx1XwlJcd+HIDiiu6t1A8F/QlPGV2jdq3Nwgf7k7AEOJ2VYk+t/JYPVT71RPHgrCq
- 1o3ms79CO830+tB5nbzeUxAMR5sB7Yk=
-Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com
- [209.85.222.200]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-305-oUc9IJIaO22A2GEiRfMIvA-1; Thu, 05 Mar 2020 13:13:46 -0500
-X-MC-Unique: oUc9IJIaO22A2GEiRfMIvA-1
-Received: by mail-qk1-f200.google.com with SMTP id w2so4391691qka.4
- for <nouveau@lists.freedesktop.org>; Thu, 05 Mar 2020 10:13:46 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
- :references:organization:user-agent:mime-version
- :content-transfer-encoding;
- bh=CISWnYCTgIHs8Q99tWvsNfg16hI8DJbFk1pD+36Cny4=;
- b=K+EHkkAKWISsP+PTJuiadd7K0QfxgzdhXOHqywuZ85bf9lJq/G3Vw3irvuduCopNu5
- KUTa4FFdIgoziZBwdlKBrcMBfXafrRBtT79CUjCd2EvmEXnoo/dwJiRcDrHLCnJFc8Jh
- OY5OFtiXvHfgYhuwRCccOFqkOQn0co71+LhCR3XsezZ+umMQG+cgfZrximrhwkOMvS6O
- H/Ob29+ffvIj5Cq5bXYNGShx6WpGs/lfZAOGigmpEcoAODndcX+HynCP6pg/DZPh/BkL
- /EF7M9kD01SrsDKIyT0wKp40yOwMf87LLblvCRoWu0pBiAaVhqT5A7omgXyCeINceAqU
- 6x0Q==
-X-Gm-Message-State: ANhLgQ0FE/Bp856jCNDGwGPOe6pT2Y6MK5LtY9n8Jb+hqoFWcK7i1ixA
- m5OAVN7A+XyZZEyqUYAMuXirJzA8KmksDGBzg+xCAWOITJfUbmOdPGPOt8XFq4BdNkOVEmhc9Ip
- xhZN/ORiozJrQV7v08WEmOUAs0A==
-X-Received: by 2002:a37:e47:: with SMTP id 68mr8996562qko.17.1583432026343;
- Thu, 05 Mar 2020 10:13:46 -0800 (PST)
-X-Google-Smtp-Source: ADFU+vu9Di0TJjle9QFCxhPtgKkfebQZ/w1X7INadpj/G0J6OCnioF3WigU5h2qVIMfKm/UJg8NJJg==
-X-Received: by 2002:a37:e47:: with SMTP id 68mr8996532qko.17.1583432026089;
- Thu, 05 Mar 2020 10:13:46 -0800 (PST)
-Received: from Ruby ([172.58.220.228])
- by smtp.gmail.com with ESMTPSA id z19sm2921705qts.86.2020.03.05.10.13.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 05 Mar 2020 10:13:45 -0800 (PST)
-Message-ID: <73f52c392431cd21a80a118dd2fd1986e2c535df.camel@redhat.com>
-From: Lyude Paul <lyude@redhat.com>
-To: Ville =?ISO-8859-1?Q?Syrj=E4l=E4?= <ville.syrjala@linux.intel.com>
-Date: Thu, 05 Mar 2020 13:13:36 -0500
-In-Reply-To: <20200305131119.GJ13686@intel.com>
+Received: from mga05.intel.com (mga05.intel.com [192.55.52.43])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5DFC26EBF6;
+ Thu,  5 Mar 2020 18:29:48 +0000 (UTC)
+X-Amp-Result: UNKNOWN
+X-Amp-Original-Verdict: FILE UNKNOWN
+X-Amp-File-Uploaded: False
+Received: from orsmga006.jf.intel.com ([10.7.209.51])
+ by fmsmga105.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+ 05 Mar 2020 10:29:47 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.70,518,1574150400"; d="scan'208";a="244358107"
+Received: from stinkbox.fi.intel.com (HELO stinkbox) ([10.237.72.174])
+ by orsmga006.jf.intel.com with SMTP; 05 Mar 2020 10:29:43 -0800
+Received: by stinkbox (sSMTP sendmail emulation);
+ Thu, 05 Mar 2020 20:29:42 +0200
+Date: Thu, 5 Mar 2020 20:29:42 +0200
+From: Ville =?iso-8859-1?Q?Syrj=E4l=E4?= <ville.syrjala@linux.intel.com>
+To: Lyude Paul <lyude@redhat.com>
+Message-ID: <20200305182942.GP13686@intel.com>
 References: <20200304223614.312023-1-lyude@redhat.com>
  <20200304223614.312023-3-lyude@redhat.com>
  <20200305131119.GJ13686@intel.com>
-Organization: Red Hat
-User-Agent: Evolution 3.34.4 (3.34.4-1.fc31)
+ <73f52c392431cd21a80a118dd2fd1986e2c535df.camel@redhat.com>
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
+Content-Disposition: inline
+In-Reply-To: <73f52c392431cd21a80a118dd2fd1986e2c535df.camel@redhat.com>
+X-Patchwork-Hint: comment
+User-Agent: Mutt/1.10.1 (2018-07-13)
 Subject: Re: [Nouveau] [PATCH 2/3] drm/dp_mst: Don't show connectors as
  connected before probing available PBN
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -84,80 +55,141 @@ Cc: Sean Paul <seanpaul@google.com>, David Airlie <airlied@linux.ie>,
  amd-gfx@lists.freedesktop.org, Hans de Goede <hdegoede@redhat.com>,
  dri-devel@lists.freedesktop.org, Alex Deucher <alexander.deucher@amd.com>,
  Mikita Lipski <mikita.lipski@amd.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-T24gVGh1LCAyMDIwLTAzLTA1IGF0IDE1OjExICswMjAwLCBWaWxsZSBTeXJqw6Rsw6Qgd3JvdGU6
-Cj4gT24gV2VkLCBNYXIgMDQsIDIwMjAgYXQgMDU6MzY6MTJQTSAtMDUwMCwgTHl1ZGUgUGF1bCB3
-cm90ZToKPiA+IEl0J3MgbmV4dCB0byBpbXBvc3NpYmxlIGZvciB1cyB0byBkbyBjb25uZWN0b3Ig
-cHJvYmluZyBvbiB0b3BvbG9naWVzCj4gPiB3aXRob3V0IG9jY2FzaW9uYWxseSByYWNpbmcgd2l0
-aCB1c2Vyc3BhY2UsIHNpbmNlIGNyZWF0aW5nIGEgY29ubmVjdG9yCj4gPiBpdHNlbGYgY2F1c2Vz
-IGEgaG90cGx1ZyBldmVudCB3aGljaCB3ZSBoYXZlIHRvIHNlbmQgYmVmb3JlIHByb2JpbmcgdGhl
-Cj4gPiBhdmFpbGFibGUgUEJOIG9mIGEgY29ubmVjdG9yLiBFdmVuIGlmIHdlIGRpZG4ndCBoYXZl
-IHRoaXMgaG90cGx1ZyBldmVudAo+ID4gc2VudCwgdGhlcmUncyBzdGlsbCBhbHdheXMgYSBjaGFu
-Y2UgdGhhdCB1c2Vyc3BhY2Ugc3RhcnRlZCBwcm9iaW5nCj4gPiBjb25uZWN0b3JzIGJlZm9yZSB3
-ZSBmaW5pc2hlZCBwcm9iaW5nIHRoZSB0b3BvbG9neS4KPiA+IAo+ID4gVGhpcyBjYW4gYmUgYSBw
-cm9ibGVtIHdoZW4gdmFsaWRhdGluZyBhIG5ldyBNU1Qgc3RhdGUgc2luY2UgdGhlCj4gPiBjb25u
-ZWN0b3Igd2lsbCBiZSBzaG93biBhcyBjb25uZWN0ZWQgYnJpZWZseSwgYnV0IHdpdGhvdXQgYW55
-IGF2YWlsYWJsZQo+ID4gUEJOIC0gY2F1c2luZyBhbnkgYXRvbWljIHN0YXRlIHdoaWNoIHdvdWxk
-IGVuYWJsZSBzYWlkIGNvbm5lY3RvciB0byBmYWlsCj4gPiB3aXRoIC1FTk9TUEMuIFNvLCBsZXQn
-cyBzaW1wbHkgd29ya2Fyb3VuZCB0aGlzIGJ5IHRlbGxpbmcgdXNlcnNwYWNlIG5ldwo+ID4gTVNU
-IGNvbm5lY3RvcnMgYXJlIGRpc2Nvbm5lY3RlZCB1bnRpbCB3ZSd2ZSBmaW5pc2hlZCBwcm9iaW5n
-IHRoZWlyIFBCTi4KPiA+IFNpbmNlIHdlIGFsd2F5cyBzZW5kIGEgaG90cGx1ZyBldmVudCBhdCB0
-aGUgZW5kIG9mIHRoZSBsaW5rIGFkZHJlc3MKPiA+IHByb2JpbmcgcHJvY2VzcywgdXNlcnNwYWNl
-IHdpbGwgc3RpbGwga25vdyB0byByZXByb2JlIHRoZSBjb25uZWN0b3Igd2hlbgo+ID4gd2UncmUg
-cmVhZHkuCj4gPiAKPiA+IFNpZ25lZC1vZmYtYnk6IEx5dWRlIFBhdWwgPGx5dWRlQHJlZGhhdC5j
-b20+Cj4gPiBGaXhlczogY2Q4MmQ4MmNiYzA0ICgiZHJtL2RwX21zdDogQWRkIGJyYW5jaCBiYW5k
-d2lkdGggdmFsaWRhdGlvbiB0byBNU1QKPiA+IGF0b21pYyBjaGVjayIpCj4gPiBDYzogTWlraXRh
-IExpcHNraSA8bWlraXRhLmxpcHNraUBhbWQuY29tPgo+ID4gQ2M6IEFsZXggRGV1Y2hlciA8YWxl
-eGFuZGVyLmRldWNoZXJAYW1kLmNvbT4KPiA+IENjOiBTZWFuIFBhdWwgPHNlYW5wYXVsQGdvb2ds
-ZS5jb20+Cj4gPiBDYzogSGFucyBkZSBHb2VkZSA8aGRlZ29lZGVAcmVkaGF0LmNvbT4KPiA+IC0t
-LQo+ID4gIGRyaXZlcnMvZ3B1L2RybS9kcm1fZHBfbXN0X3RvcG9sb2d5LmMgfCAxMyArKysrKysr
-KysrKysrCj4gPiAgMSBmaWxlIGNoYW5nZWQsIDEzIGluc2VydGlvbnMoKykKPiA+IAo+ID4gZGlm
-ZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9kcm1fZHBfbXN0X3RvcG9sb2d5LmMKPiA+IGIvZHJp
-dmVycy9ncHUvZHJtL2RybV9kcF9tc3RfdG9wb2xvZ3kuYwo+ID4gaW5kZXggMjA3ZWVmMDhkMTJj
-Li43YjBmZjBjZmY5NTQgMTAwNjQ0Cj4gPiAtLS0gYS9kcml2ZXJzL2dwdS9kcm0vZHJtX2RwX21z
-dF90b3BvbG9neS5jCj4gPiArKysgYi9kcml2ZXJzL2dwdS9kcm0vZHJtX2RwX21zdF90b3BvbG9n
-eS5jCj4gPiBAQCAtNDAzMyw2ICs0MDMzLDE5IEBAIGRybV9kcF9tc3RfZGV0ZWN0X3BvcnQoc3Ry
-dWN0IGRybV9jb25uZWN0b3IKPiA+ICpjb25uZWN0b3IsCj4gPiAgCQkJcmV0ID0gY29ubmVjdG9y
-X3N0YXR1c19jb25uZWN0ZWQ7Cj4gPiAgCQlicmVhazsKPiA+ICAJfQo+ID4gKwo+ID4gKwkvKiBX
-ZSBkb24ndCB3YW50IHRvIHRlbGwgdXNlcnNwYWNlIHRoZSBwb3J0IGlzIGFjdHVhbGx5IHBsdWdn
-ZWQgaW50bwo+ID4gKwkgKiBhbnl0aGluZyB1bnRpbCB3ZSd2ZSBmaW5pc2hlZCBwcm9iaW5nIGl0
-J3MgYXZhaWxhYmxlX3Bibiwgb3RoZXJ3aXNlCj4gCj4gIml0cyIKPiAKPiBXaHkgaXMgdGhlIGNv
-bm5lY3RvciBldmVuIHJlZ2lzdGVyZWQgYmVmb3JlIHdlJ3ZlIGZpbmlzaGVkIHRoZSBwcm9iZT8K
-PiAKT29wcywgSSdtIG5vdCBzdXJlIGhvdyBJIGRpZCB0aGlzIGJ5IGFjY2lkZW50IGJ1dCB0aGUg
-ZXhwbGFuYXRpb24gSSBnYXZlIGluCnRoZSBjb21taXQgbWVzc2FnZSB3YXMgdWgsIGNvbXBsZXRl
-bHkgd3JvbmcuIEkgbXVzdCBoYXZlIGZvcmdvdHRlbiB0aGF0IEkgbWFkZQpzdXJlIHdlIGRpZG4n
-dCBleHBvc2UgY29ubmVjdG9ycyBiZWZvcmUgcHJvYmluZyB0aGVpciBQQk4gYmFjayB3aGVuIEkg
-c3RhcnRlZApteSBNU1QgY2xlYW51cC4uLi4KClNvOiBkZXNwaXRlIHdoYXQgSSBzYWlkIGJlZm9y
-ZSBpdCdzIG5vdCBhY3R1YWxseSB3aGVuIG5ldyBjb25uZWN0b3JzIGFyZQpjcmVhdGVkLCBpdCdz
-IHdoZW4gZG93bnN0cmVhbSBob3RwbHVncyBoYXBwZW4gd2hpY2ggbWVhbnMgdGhhdCB0aGUgY29u
-ZW5jdG9yJ3MKYWx3YXlzIGdvaW5nIHRvIGJlIHRoZXJlIGJlZm9yZSB3ZSBwcm9iZSB0aGUgYXZh
-aWxhYmxlX3Bibi4gSSBkaWQganVzdCBub3RpY2UKdGhvdWdoIHRoYXQgd2Ugc2VuZCBhIGhvdHBs
-dWcgb24gY29ubmVjdGlvbiBzdGF0dXMgbm90aWZpY2F0aW9ucyBldmVuIGJlZm9yZQp3ZSd2ZSBm
-aW5pc2hlZCB0aGUgUEJOIHByb2JlLCBzbyBJIG1pZ2h0IGJlIGFibGUgdG8gaW1wcm92ZSBvbiB0
-aGF0IGFzIHdlbGwuCldlIHN0aWxsIGRlZmluaXRlbHkgd2FudCB0byByZXBvcnQgdGhlIGNvbm5l
-Y3RvciBhcyBkaXNjb25uZWN0ZWQgYmVmb3JlIHdlCmhhdmUgdGhlIGF2YWlsYWJsZSBQQk4gdGhv
-dWdoLCBpbiBjYXNlIGFub3RoZXIgcHJvYmUgd2FzIGFscmVhZHkgZ29pbmcgYmVmb3JlCndlIGdv
-dCB0aGUgY29ubmVjdGlvbiBzdGF0dXMgbm90aWZpY2F0aW9uLgoKSSdsbCBtYWtlIHN1cmUgdG8g
-Zml4dXAgdGhlIGV4cGxhbmF0aW9uIGluIHRoZSBjb21taXQgbWVzc2FnZSBvbiB0aGUgbmV4dApy
-ZXNwaW4KCj4gPiArCSAqIHVzZXJzcGFjZSB3aWxsIHNlZSByYWN5IGF0b21pYyBjaGVjayBmYWls
-dXJlcwo+ID4gKwkgKgo+ID4gKwkgKiBTaW5jZSB3ZSBhbHdheXMgc2VuZCBhIGhvdHBsdWcgYXQg
-dGhlIGVuZCBvZiBwcm9iaW5nIHRvcG9sb2d5Cj4gPiArCSAqIHN0YXRlLCB3ZSBjYW4ganVzdCBs
-ZXQgdXNlcnNwYWNlIHJlcHJvYmUgdGhpcyBjb25uZWN0b3IgbGF0ZXIuCj4gPiArCSAqLwo+ID4g
-KwlpZiAocmV0ID09IGNvbm5lY3Rvcl9zdGF0dXNfY29ubmVjdGVkICYmICFwb3J0LT5hdmFpbGFi
-bGVfcGJuKSB7Cj4gPiArCQlEUk1fREVCVUdfS01TKCJbQ09OTkVDVE9SOiVkOiVzXSBub3QgcmVh
-ZHkgeWV0IChQQk4gbm90Cj4gPiBwcm9iZWQpXG4iLAo+ID4gKwkJCSAgICAgIGNvbm5lY3Rvci0+
-YmFzZS5pZCwgY29ubmVjdG9yLT5uYW1lKTsKPiA+ICsJCXJldCA9IGNvbm5lY3Rvcl9zdGF0dXNf
-ZGlzY29ubmVjdGVkOwo+ID4gKwl9Cj4gPiAgb3V0Ogo+ID4gIAlkcm1fZHBfbXN0X3RvcG9sb2d5
-X3B1dF9wb3J0KHBvcnQpOwo+ID4gIAlyZXR1cm4gcmV0Owo+ID4gLS0gCj4gPiAyLjI0LjEKPiA+
-IAo+ID4gX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KPiA+
-IGRyaS1kZXZlbCBtYWlsaW5nIGxpc3QKPiA+IGRyaS1kZXZlbEBsaXN0cy5mcmVlZGVza3RvcC5v
-cmcKPiA+IGh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vZHJp
-LWRldmVsCi0tIApDaGVlcnMsCglMeXVkZSBQYXVsIChzaGUvaGVyKQoJQXNzb2NpYXRlIFNvZnR3
-YXJlIEVuZ2luZWVyIGF0IFJlZCBIYXQKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fCk5vdXZlYXUgbWFpbGluZyBsaXN0Ck5vdXZlYXVAbGlzdHMuZnJlZWRl
-c2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8v
-bm91dmVhdQo=
+On Thu, Mar 05, 2020 at 01:13:36PM -0500, Lyude Paul wrote:
+> On Thu, 2020-03-05 at 15:11 +0200, Ville Syrj=E4l=E4 wrote:
+> > On Wed, Mar 04, 2020 at 05:36:12PM -0500, Lyude Paul wrote:
+> > > It's next to impossible for us to do connector probing on topologies
+> > > without occasionally racing with userspace, since creating a connector
+> > > itself causes a hotplug event which we have to send before probing the
+> > > available PBN of a connector. Even if we didn't have this hotplug eve=
+nt
+> > > sent, there's still always a chance that userspace started probing
+> > > connectors before we finished probing the topology.
+> > > =
+
+> > > This can be a problem when validating a new MST state since the
+> > > connector will be shown as connected briefly, but without any availab=
+le
+> > > PBN - causing any atomic state which would enable said connector to f=
+ail
+> > > with -ENOSPC. So, let's simply workaround this by telling userspace n=
+ew
+> > > MST connectors are disconnected until we've finished probing their PB=
+N.
+> > > Since we always send a hotplug event at the end of the link address
+> > > probing process, userspace will still know to reprobe the connector w=
+hen
+> > > we're ready.
+> > > =
+
+> > > Signed-off-by: Lyude Paul <lyude@redhat.com>
+> > > Fixes: cd82d82cbc04 ("drm/dp_mst: Add branch bandwidth validation to =
+MST
+> > > atomic check")
+> > > Cc: Mikita Lipski <mikita.lipski@amd.com>
+> > > Cc: Alex Deucher <alexander.deucher@amd.com>
+> > > Cc: Sean Paul <seanpaul@google.com>
+> > > Cc: Hans de Goede <hdegoede@redhat.com>
+> > > ---
+> > >  drivers/gpu/drm/drm_dp_mst_topology.c | 13 +++++++++++++
+> > >  1 file changed, 13 insertions(+)
+> > > =
+
+> > > diff --git a/drivers/gpu/drm/drm_dp_mst_topology.c
+> > > b/drivers/gpu/drm/drm_dp_mst_topology.c
+> > > index 207eef08d12c..7b0ff0cff954 100644
+> > > --- a/drivers/gpu/drm/drm_dp_mst_topology.c
+> > > +++ b/drivers/gpu/drm/drm_dp_mst_topology.c
+> > > @@ -4033,6 +4033,19 @@ drm_dp_mst_detect_port(struct drm_connector
+> > > *connector,
+> > >  			ret =3D connector_status_connected;
+> > >  		break;
+> > >  	}
+> > > +
+> > > +	/* We don't want to tell userspace the port is actually plugged into
+> > > +	 * anything until we've finished probing it's available_pbn, otherw=
+ise
+> > =
+
+> > "its"
+> > =
+
+> > Why is the connector even registered before we've finished the probe?
+> > =
+
+> Oops, I'm not sure how I did this by accident but the explanation I gave =
+in
+> the commit message was uh, completely wrong. I must have forgotten that I=
+ made
+> sure we didn't expose connectors before probing their PBN back when I sta=
+rted
+> my MST cleanup....
+> =
+
+> So: despite what I said before it's not actually when new connectors are
+> created, it's when downstream hotplugs happen which means that the conenc=
+tor's
+> always going to be there before we probe the available_pbn.
+
+Not sure I understand. You're saying this is going to change for already
+existing connectors when something else gets plugged in, and either we
+zero it out during the probe or it always was zero to begin with for
+whatever reason?
+
+> I did just notice
+> though that we send a hotplug on connection status notifications even bef=
+ore
+> we've finished the PBN probe, so I might be able to improve on that as we=
+ll.
+> We still definitely want to report the connector as disconnected before we
+> have the available PBN though, in case another probe was already going be=
+fore
+> we got the connection status notification.
+> =
+
+> I'll make sure to fixup the explanation in the commit message on the next
+> respin
+> =
+
+> > > +	 * userspace will see racy atomic check failures
+> > > +	 *
+> > > +	 * Since we always send a hotplug at the end of probing topology
+> > > +	 * state, we can just let userspace reprobe this connector later.
+> > > +	 */
+> > > +	if (ret =3D=3D connector_status_connected && !port->available_pbn) {
+> > > +		DRM_DEBUG_KMS("[CONNECTOR:%d:%s] not ready yet (PBN not
+> > > probed)\n",
+> > > +			      connector->base.id, connector->name);
+> > > +		ret =3D connector_status_disconnected;
+> > > +	}
+> > >  out:
+> > >  	drm_dp_mst_topology_put_port(port);
+> > >  	return ret;
+> > > -- =
+
+> > > 2.24.1
+> > > =
+
+> > > _______________________________________________
+> > > dri-devel mailing list
+> > > dri-devel@lists.freedesktop.org
+> > > https://lists.freedesktop.org/mailman/listinfo/dri-devel
+> -- =
+
+> Cheers,
+> 	Lyude Paul (she/her)
+> 	Associate Software Engineer at Red Hat
+
+-- =
+
+Ville Syrj=E4l=E4
+Intel
+_______________________________________________
+Nouveau mailing list
+Nouveau@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/nouveau
