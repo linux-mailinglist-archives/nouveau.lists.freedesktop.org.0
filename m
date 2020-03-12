@@ -2,32 +2,20 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id A66B019758C
-	for <lists+nouveau@lfdr.de>; Mon, 30 Mar 2020 09:22:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 50427197586
+	for <lists+nouveau@lfdr.de>; Mon, 30 Mar 2020 09:22:33 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5CEE36E1D2;
-	Mon, 30 Mar 2020 07:22:28 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9113B6E10E;
+	Mon, 30 Mar 2020 07:22:23 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 429 seconds by postgrey-1.36 at gabe;
- Thu, 12 Mar 2020 08:08:48 UTC
-Received: from lb2-smtp-cloud9.xs4all.net (lb2-smtp-cloud9.xs4all.net
- [194.109.24.26])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6E5D96EA6B
- for <nouveau@lists.freedesktop.org>; Thu, 12 Mar 2020 08:08:48 +0000 (UTC)
-Received: from [192.168.2.10] ([46.9.234.233])
- by smtp-cloud9.xs4all.net with ESMTPA
- id CImQjXGct9Im2CImTjipFx; Thu, 12 Mar 2020 09:01:37 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=s1;
- t=1584000098; bh=rlvXrsquCgOAoL6m3j4naIDiZk45jPg5qzfaHkH6ylc=;
- h=Subject:To:From:Message-ID:Date:MIME-Version:Content-Type:From:
- Subject;
- b=S5pQfgbOLIHhQdw0W7sV5AZx/O5rbzeyPt7bFpTNkwgO8Qy0BKq+Rvjmju5L2B424
- ts5RJaST/5DSO90woF88XEKoVSWzdXA1+cYgXtZ9lrnSZ/voNQNCc/kNcDWB/9eH8q
- oukXvG+APHr07xXyoiRVnfNAIu0NoRyJO4gRl7kMox10FOdeAVa4C86hGVXEgWIL1z
- DHpeiiUb+PUHWBRHnftozp83wtSCPlDu/KR0wA5Tus7873ErMhZjEh0V/cX/LLr9QJ
- GcvLzWg4JtL3YxsnzXI28YMgDuIhwtNvDRGPXfnFqtov7CBrtU3S5QfdwsKM1K25I6
- WU1k8NIIoVM6w==
+Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D9FB16E13B;
+ Thu, 12 Mar 2020 10:49:15 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+ by mx2.suse.de (Postfix) with ESMTP id 62A77B1EC;
+ Thu, 12 Mar 2020 10:49:11 +0000 (UTC)
 To: Krzysztof Kozlowski <krzk@kernel.org>, Richard Henderson
  <rth@twiddle.net>, Ivan Kokshaysky <ink@jurassic.park.msu.ru>,
  Matt Turner <mattst88@gmail.com>, Alexey Brodkin <abrodkin@synopsys.com>,
@@ -56,33 +44,42 @@ To: Krzysztof Kozlowski <krzk@kernel.org>, Richard Henderson
  linux-ntb@googlegroups.com, virtualization@lists.linux-foundation.org,
  linux-arch@vger.kernel.org
 References: <20200219175007.13627-1-krzk@kernel.org>
- <20200219175007.13627-9-krzk@kernel.org>
-From: Hans Verkuil <hverkuil@xs4all.nl>
-Message-ID: <1c4a11b5-5ca6-7555-de3c-ff30f707fac7@xs4all.nl>
-Date: Thu, 12 Mar 2020 09:01:22 +0100
+ <20200219175007.13627-7-krzk@kernel.org>
+From: Thomas Zimmermann <tzimmermann@suse.de>
+Autocrypt: addr=tzimmermann@suse.de; keydata=
+ mQENBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
+ XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
+ BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
+ hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
+ 9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
+ AAG0J1Rob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPokBVAQTAQgAPhYh
+ BHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJbOdLgAhsDBQkDwmcABQsJCAcCBhUKCQgLAgQWAgMB
+ Ah4BAheAAAoJEGgNwR1TC3ojR80H/jH+vYavwQ+TvO8ksXL9JQWc3IFSiGpuSVXLCdg62AmR
+ irxW+qCwNncNQyb9rd30gzdectSkPWL3KSqEResBe24IbA5/jSkPweJasgXtfhuyoeCJ6PXo
+ clQQGKIoFIAEv1s8l0ggPZswvCinegl1diyJXUXmdEJRTWYAtxn/atut1o6Giv6D2qmYbXN7
+ mneMC5MzlLaJKUtoH7U/IjVw1sx2qtxAZGKVm4RZxPnMCp9E1MAr5t4dP5gJCIiqsdrVqI6i
+ KupZstMxstPU//azmz7ZWWxT0JzgJqZSvPYx/SATeexTYBP47YFyri4jnsty2ErS91E6H8os
+ Bv6pnSn7eAq5AQ0EWznS4AEIAMYmP4M/V+T5RY5at/g7rUdNsLhWv1APYrh9RQefODYHrNRH
+ UE9eosYbT6XMryR9hT8XlGOYRwKWwiQBoWSDiTMo/Xi29jUnn4BXfI2px2DTXwc22LKtLAgT
+ RjP+qbU63Y0xnQN29UGDbYgyyK51DW3H0If2a3JNsheAAK+Xc9baj0LGIc8T9uiEWHBnCH+R
+ dhgATnWWGKdDegUR5BkDfDg5O/FISymJBHx2Dyoklv5g4BzkgqTqwmaYzsl8UxZKvbaxq0zb
+ ehDda8lvhFXodNFMAgTLJlLuDYOGLK2AwbrS3Sp0AEbkpdJBb44qVlGm5bApZouHeJ/+n+7r
+ 12+lqdsAEQEAAYkBPAQYAQgAJhYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJbOdLgAhsMBQkD
+ wmcAAAoJEGgNwR1TC3ojpfcIAInwP5OlcEKokTnHCiDTz4Ony4GnHRP2fXATQZCKxmu4AJY2
+ h9ifw9Nf2TjCZ6AMvC3thAN0rFDj55N9l4s1CpaDo4J+0fkrHuyNacnT206CeJV1E7NYntxU
+ n+LSiRrOdywn6erjxRi9EYTVLCHcDhBEjKmFZfg4AM4GZMWX1lg0+eHbd5oL1as28WvvI/uI
+ aMyV8RbyXot1r/8QLlWldU3NrTF5p7TMU2y3ZH2mf5suSKHAMtbE4jKJ8ZHFOo3GhLgjVrBW
+ HE9JXO08xKkgD+w6v83+nomsEuf6C6LYrqY/tsZvyEX6zN8CtirPdPWu/VXNRYAl/lat7lSI
+ 3H26qrE=
+Message-ID: <90baef2d-25fe-fac4-6a7e-b103b4b6721e@suse.de>
+Date: Thu, 12 Mar 2020 11:49:05 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.5.0
 MIME-Version: 1.0
-In-Reply-To: <20200219175007.13627-9-krzk@kernel.org>
-Content-Language: en-US
-X-CMAE-Envelope: MS4wfB1zxMJIE7wElbGm4sdMecyYLJ6LdsDMDpZDeSQuVKwPm0HLBt9h+mOdrGXFuIDkCI9Ox7ukCv0Xr+wsEhOQPNuuqPOa2tbCK6oF1PNdZVqk6thKvC3h
- xE4aE9bNSUWOFhWxTazaeGPVr5hr0AhveAgdpPWZHpjhg5PxgtKgtRwcEM0X31YjusYjKeuEG9QF/4JOHzjohAIjiR+oAI0nyED+Jez9yI4FW1ZB3LXkp8TH
- 7MMndY8iJadjMhsV5+oGTHeP7z8vzm/dZU83psQzhxRsPonohHX17/JsKF2l5MFAT9+97UKYOiKAsfrv1Cpys4Ae5wkTvdw4qsE49ssk4hjAoyha0QB9BVju
- 9SGy1FrSenK0frRjbC8NaYY9ZERWNSiNH5LA36WXT5yWf3v+Qcv3MkgEimaOp41P2nlVLuOjtsbM7Oc0IE2oIVVfFA700ZJiP3znlyaVddewRuZDpRVP7LaM
- BmiWSHGXgw8YtQmC7z4+FTtlDdPcaOnURURbGtwGqrG9ypYOfWaczdFyon9cFrdpqrNkvqRjWmqFa6YgsB57xqLqvFfcZaXIx/5GPRUQudUCvZPJzisakVQc
- uttKYb/aM3WYuhJM4Wb1Pv6BrMYMIVXGCFsOBd7W/xp0N3iMBGSYj0Aa0rPNR8hHdzbHBC2fjWlNKKBiBqoznNqCGZ0CiVQoEM+QtyRRgiYnx6PeAm5PLOc4
- VNFQmhkOpnD9IFKzOg7MDbXsSwg+OAG64qEuG/VscrSiDVQ1yjv5knp7CxhKGvYM4OpGHYT1Er7Bdx2FCmXu/yAwSbBDRagCD0kotDKUph18wrkxxeFljDJA
- LSc1aSxY7WzE0MoB4x1WWy+jz94FDlyhtSMwiZ6y0dJP3+c2+Q5En242uHE069S9l+7oW8v5MGbWOStqt5f3vSjCb7LIzWN87JmuP89GFWwWLJsughS7GMyf
- 9DHMMrFLvERXtynUPrxsXWOFJFYcfPWtUSuDRlT6lyW4OqviXxQxmuwWWPzBiEuN74qNtI+js8zLo4yvgjsgXCeSGNoTx+kuEqyjk5W1UzIpidGK0CRrnVbE
- 6hD9Y/vETMZdaCRGTPOlU05njcJF+46w8BJ3SNj0Py3qBk1dX7c6nBfbFypmWYBFmuncdfgfV+GvZgph5pgPHOoQxVCf/tLCrfA6lP3T+1yMX4df+BQFRKLS
- O4WmDF2MxF8KloewGsYz/rsmgB25E6V0YSDc8EvmqseT2P6A01f6bsdZt1AJnufocp+H44s+qhBR6buNUUMphP9KyIyYuNbtmFvkGTyK649jUP2q8Nik1rK1
- 3AqiAYrtsks7Dqmq5Qj7chR5DBva/WjXbTAi9lRBeyrc1LiDTAHtFBMmOGm8QJ0PstgU+Qss/H31YuyO+vowQc/YkfqDiEmsIU7MZy0525QlKJCDuomrR9k/
- pt0L69OpaODhDI2GKeTabUJfloUo1rGwDFifFZ3GiczPZsdGrTGULzWF8ZqXdk44Vxmf+o40QJa4goBPwv+YDuim0xPrbohAaaGJnTcviLLAbx0Be2IOpJK7
- 066IFrJvKfz7/Wp2S67JJX5FtbO7VF+IrVN/N63uvfJb+FM6hLMjwGqczE7h5AhCTMRfIsHhAU9mTIYVyLN+UBlZ3WL3ahk0SjumGQqE2df8rbpt41Yx3WFA
- IW77guEXBH/AFWkGJEIg2a3N91fXva0TdPJAF0YzlkCOnwCmb9/Naw==
-X-Mailman-Approved-At: Mon, 30 Mar 2020 07:22:21 +0000
-Subject: Re: [Nouveau] [RESEND PATCH v2 8/9] media: fsl-viu: Constify
- ioreadX() iomem argument (as in generic implementation)
+In-Reply-To: <20200219175007.13627-7-krzk@kernel.org>
+X-Mailman-Approved-At: Mon, 30 Mar 2020 07:22:22 +0000
+Subject: Re: [Nouveau] [RESEND PATCH v2 6/9] drm/mgag200: Constify ioreadX()
+ iomem argument (as in generic implementation)
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -94,47 +91,152 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============0173615068=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 2/19/20 6:50 PM, Krzysztof Kozlowski wrote:
-> The ioreadX() helpers have inconsistent interface.  On some architectures
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--===============0173615068==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="8zb502i0uNK5UHJJl43MN65Z2VSqAtFfM"
+
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--8zb502i0uNK5UHJJl43MN65Z2VSqAtFfM
+Content-Type: multipart/mixed; boundary="UnbV06xuRFGsh6csSeVcRA5al48ja8xJK";
+ protected-headers="v1"
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: Krzysztof Kozlowski <krzk@kernel.org>, Richard Henderson
+ <rth@twiddle.net>, Ivan Kokshaysky <ink@jurassic.park.msu.ru>,
+ Matt Turner <mattst88@gmail.com>, Alexey Brodkin <abrodkin@synopsys.com>,
+ Vineet Gupta <vgupta@synopsys.com>,
+ "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
+ Helge Deller <deller@gmx.de>,
+ Benjamin Herrenschmidt <benh@kernel.crashing.org>,
+ Paul Mackerras <paulus@samba.org>, Michael Ellerman <mpe@ellerman.id.au>,
+ Yoshinori Sato <ysato@users.sourceforge.jp>, Rich Felker <dalias@libc.org>,
+ Dave Airlie <airlied@redhat.com>, David Airlie <airlied@linux.ie>,
+ Daniel Vetter <daniel@ffwll.ch>, Ben Skeggs <bskeggs@redhat.com>,
+ Mauro Carvalho Chehab <mchehab@kernel.org>, Jiri Slaby
+ <jirislaby@gmail.com>, Nick Kossifidis <mickflemm@gmail.com>,
+ Luis Chamberlain <mcgrof@kernel.org>, Kalle Valo <kvalo@codeaurora.org>,
+ "David S. Miller" <davem@davemloft.net>, Dave Jiang <dave.jiang@intel.com>,
+ Jon Mason <jdmason@kudzu.us>, Allen Hubbe <allenbh@gmail.com>,
+ "Michael S. Tsirkin" <mst@redhat.com>, Jason Wang <jasowang@redhat.com>,
+ Arnd Bergmann <arnd@arndb.de>, Geert Uytterhoeven <geert+renesas@glider.be>,
+ Andrew Morton <akpm@linux-foundation.org>,
+ Thomas Gleixner <tglx@linutronix.de>, linux-alpha@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-snps-arc@lists.infradead.org,
+ linux-parisc@vger.kernel.org, linuxppc-dev@lists.ozlabs.org,
+ linux-sh@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org, linux-media@vger.kernel.org,
+ linux-wireless@vger.kernel.org, netdev@vger.kernel.org,
+ linux-ntb@googlegroups.com, virtualization@lists.linux-foundation.org,
+ linux-arch@vger.kernel.org
+Message-ID: <90baef2d-25fe-fac4-6a7e-b103b4b6721e@suse.de>
+Subject: Re: [RESEND PATCH v2 6/9] drm/mgag200: Constify ioreadX() iomem
+ argument (as in generic implementation)
+References: <20200219175007.13627-1-krzk@kernel.org>
+ <20200219175007.13627-7-krzk@kernel.org>
+In-Reply-To: <20200219175007.13627-7-krzk@kernel.org>
+
+--UnbV06xuRFGsh6csSeVcRA5al48ja8xJK
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
+
+Hi Krzysztof,
+
+I just received a resend email from 3 weeks ago :/
+
+Do you want me to merge the mgag200 patch into drm-misc-next?
+
+Best regards
+Thomas
+
+Am 19.02.20 um 18:50 schrieb Krzysztof Kozlowski:
+> The ioreadX() helpers have inconsistent interface.  On some architectur=
+es
 > void *__iomem address argument is a pointer to const, on some not.
-> 
-> Implementations of ioreadX() do not modify the memory under the address
+>=20
+> Implementations of ioreadX() do not modify the memory under the address=
+
 > so they can be converted to a "const" version for const-safety and
 > consistency among architectures.
-> 
+>=20
 > Signed-off-by: Krzysztof Kozlowski <krzk@kernel.org>
-
-Acked-by: Hans Verkuil <hverkuil-cisco@xs4all.nl>
-
-Regards,
-
-	Hans
-
+> Reviewed-by: Thomas Zimmermann <tzimmermann@suse.de>
+>=20
 > ---
->  drivers/media/platform/fsl-viu.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/drivers/media/platform/fsl-viu.c b/drivers/media/platform/fsl-viu.c
-> index 81a8faedbba6..991d9dc82749 100644
-> --- a/drivers/media/platform/fsl-viu.c
-> +++ b/drivers/media/platform/fsl-viu.c
-> @@ -34,7 +34,7 @@
->  /* Allow building this driver with COMPILE_TEST */
->  #if !defined(CONFIG_PPC) && !defined(CONFIG_MICROBLAZE)
->  #define out_be32(v, a)	iowrite32be(a, (void __iomem *)v)
-> -#define in_be32(a)	ioread32be((void __iomem *)a)
-> +#define in_be32(a)	ioread32be((const void __iomem *)a)
->  #endif
->  
->  #define BUFFER_TIMEOUT		msecs_to_jiffies(500)  /* 0.5 seconds */
-> 
+>=20
+> Changes since v1:
+> 1. Add Thomas' review.
+> ---
+>  drivers/gpu/drm/mgag200/mgag200_drv.h | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>=20
+> diff --git a/drivers/gpu/drm/mgag200/mgag200_drv.h b/drivers/gpu/drm/mg=
+ag200/mgag200_drv.h
+> index aa32aad222c2..6512b3af4fb7 100644
+> --- a/drivers/gpu/drm/mgag200/mgag200_drv.h
+> +++ b/drivers/gpu/drm/mgag200/mgag200_drv.h
+> @@ -34,9 +34,9 @@
+> =20
+>  #define MGAG200FB_CONN_LIMIT 1
+> =20
+> -#define RREG8(reg) ioread8(((void __iomem *)mdev->rmmio) + (reg))
+> +#define RREG8(reg) ioread8(((const void __iomem *)mdev->rmmio) + (reg)=
+)
+>  #define WREG8(reg, v) iowrite8(v, ((void __iomem *)mdev->rmmio) + (reg=
+))
+> -#define RREG32(reg) ioread32(((void __iomem *)mdev->rmmio) + (reg))
+> +#define RREG32(reg) ioread32(((const void __iomem *)mdev->rmmio) + (re=
+g))
+>  #define WREG32(reg, v) iowrite32(v, ((void __iomem *)mdev->rmmio) + (r=
+eg))
+> =20
+>  #define ATTR_INDEX 0x1fc0
+>=20
+
+--=20
+Thomas Zimmermann
+Graphics Driver Developer
+SUSE Software Solutions Germany GmbH
+Maxfeldstr. 5, 90409 N=C3=BCrnberg, Germany
+(HRB 36809, AG N=C3=BCrnberg)
+Gesch=C3=A4ftsf=C3=BChrer: Felix Imend=C3=B6rffer
+
+
+--UnbV06xuRFGsh6csSeVcRA5al48ja8xJK--
+
+--8zb502i0uNK5UHJJl43MN65Z2VSqAtFfM
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEchf7rIzpz2NEoWjlaA3BHVMLeiMFAl5qE6QACgkQaA3BHVML
+eiOp7Af/Z24gM/vp7wuoDOu1s9VJhDHNRqfYcrpjv+SeE5E7jsj4gBCwwLJxuyKf
+5DIzeOH97Mrv5fgfIx97Af8C372d1sRW46TwvSXFm8ywyTvigM4cWdRapf9cXozZ
+AiQUCqkrkGEL6FhofMuHqZ2arL+6NooRluvXmoeX9bXA+itrwOhU4YhoIUwTJnUc
+7UrcNFXhCKIZrEGfkHGZrnbC/Lr9g+tBLcEcQJf69SUMc56aboUZf47aOcpw67lj
+3TpHOqEJwqnxnQlKSO0cL4BgwEzZWt3ahVqFdDlM+QfSlJO65N7Y6s8CismBxubN
+bGiOW37w7Bmi4mVHO5RWa3uelcwjoA==
+=D9Sa
+-----END PGP SIGNATURE-----
+
+--8zb502i0uNK5UHJJl43MN65Z2VSqAtFfM--
+
+--===============0173615068==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/nouveau
+
+--===============0173615068==--
