@@ -2,60 +2,60 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 51F311874ED
-	for <lists+nouveau@lfdr.de>; Mon, 16 Mar 2020 22:43:21 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D35A11875C8
+	for <lists+nouveau@lfdr.de>; Mon, 16 Mar 2020 23:50:00 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6A6CD6E21C;
-	Mon, 16 Mar 2020 21:43:18 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id F27676E4DE;
+	Mon, 16 Mar 2020 22:49:55 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from hqnvemgate24.nvidia.com (hqnvemgate24.nvidia.com
- [216.228.121.143])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3F6026E047;
- Mon, 16 Mar 2020 21:43:17 +0000 (UTC)
-Received: from hqpgpgate102.nvidia.com (Not Verified[216.228.121.13]) by
- hqnvemgate24.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
- id <B5e6ff2940000>; Mon, 16 Mar 2020 14:41:40 -0700
+Received: from hqnvemgate26.nvidia.com (hqnvemgate26.nvidia.com
+ [216.228.121.65])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6B3A96E4AD;
+ Mon, 16 Mar 2020 22:49:54 +0000 (UTC)
+Received: from hqpgpgate101.nvidia.com (Not Verified[216.228.121.13]) by
+ hqnvemgate26.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
+ id <B5e7002840000>; Mon, 16 Mar 2020 15:49:40 -0700
 Received: from hqmail.nvidia.com ([172.20.161.6])
- by hqpgpgate102.nvidia.com (PGP Universal service);
- Mon, 16 Mar 2020 14:43:16 -0700
+ by hqpgpgate101.nvidia.com (PGP Universal service);
+ Mon, 16 Mar 2020 15:49:53 -0700
 X-PGP-Universal: processed;
- by hqpgpgate102.nvidia.com on Mon, 16 Mar 2020 14:43:16 -0700
-Received: from rcampbell-dev.nvidia.com (10.124.1.5) by HQMAIL107.nvidia.com
- (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Mon, 16 Mar
- 2020 21:43:16 +0000
+ by hqpgpgate101.nvidia.com on Mon, 16 Mar 2020 15:49:53 -0700
+Received: from rcampbell-dev.nvidia.com (172.20.13.39) by HQMAIL107.nvidia.com
+ (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3;
+ Mon, 16 Mar 2020 22:49:53 +0000
 To: Christoph Hellwig <hch@lst.de>, Jason Gunthorpe <jgg@ziepe.ca>, Dan
  Williams <dan.j.williams@intel.com>, Bharata B Rao <bharata@linux.ibm.com>,
  =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>, Ben Skeggs
  <bskeggs@redhat.com>
 References: <20200316193216.920734-1-hch@lst.de>
- <20200316193216.920734-3-hch@lst.de>
-X-Nvconfidentiality: public
+ <20200316193216.920734-4-hch@lst.de>
 From: Ralph Campbell <rcampbell@nvidia.com>
-Message-ID: <6a110540-f954-9f0f-e785-7365135d2934@nvidia.com>
-Date: Mon, 16 Mar 2020 14:43:13 -0700
+X-Nvconfidentiality: public
+Message-ID: <7256f88d-809e-4aba-3c46-a223bd8cc521@nvidia.com>
+Date: Mon, 16 Mar 2020 15:49:51 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.2.2
 MIME-Version: 1.0
-In-Reply-To: <20200316193216.920734-3-hch@lst.de>
-X-Originating-IP: [10.124.1.5]
-X-ClientProxiedBy: HQMAIL101.nvidia.com (172.20.187.10) To
+In-Reply-To: <20200316193216.920734-4-hch@lst.de>
+X-Originating-IP: [172.20.13.39]
+X-ClientProxiedBy: HQMAIL107.nvidia.com (172.20.187.13) To
  HQMAIL107.nvidia.com (172.20.187.13)
 Content-Language: en-US
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
- t=1584394901; bh=5gIAZIz0tOHrgzJUJPnm6MszxAlVRJp8lo1DHWwjOqY=;
- h=X-PGP-Universal:Subject:To:CC:References:X-Nvconfidentiality:From:
+ t=1584398981; bh=oG5i8KvHP2KqdDOupGJpRLxJXWPBlanwwOgf7UiJKpE=;
+ h=X-PGP-Universal:Subject:To:CC:References:From:X-Nvconfidentiality:
  Message-ID:Date:User-Agent:MIME-Version:In-Reply-To:
  X-Originating-IP:X-ClientProxiedBy:Content-Type:Content-Language:
  Content-Transfer-Encoding;
- b=ROf8sz5I27AjSUkrFgjyEn1H5McZp5h0B2fxBONbGiYRWlNipqDBZIR19jzh7OCzU
- LwCxryI8Gk7Vy8mZlgvJ/i43dEWhCVipx01YAqktTJVMwXXxq9huN0ibvtHZ0NrPf/
- zF/GFDubfASot9xAAOFSbZUAWcuZrH1Yzp9/zc/icrtO8XBJeHbOdzmpIYVa4b4fmk
- 5wmWE+8sBlPe6ft5PztnCns6d16mTSEGRPudndjL0+qpr2MhHH8dWljtmWE2E7nbdT
- XDF4fGtdwVxXlwQX9lU2xoXn+VHsOc3M0mLeRPdOXH+PGlzepZkvNJgSXdig3TLKOU
- LvHvMf9e22XSw==
-Subject: Re: [Nouveau] [PATCH 2/4] mm: handle multiple owners of device
- private pages in migrate_vma
+ b=PlqSDbyIWCbLrywgaJA997o0baZh6temen1qXRdzzgbf4K7NCVhC7VFhz1pnxfLfc
+ GxRnH8DKp2Ou1HkyQmC9jpiDiB4tBeLDO8AOboiiZeiCo73Y7QHxFxMCWgOnj253hs
+ hFCvfy3W9VbyJU0yVforn/4ZtC2PW2DHsjhV83KOZr5v+MjUGtRW0qVJjFx98TV+5I
+ CE9SWzJR2UuxnBUdK8sGKpfEyWGZF7wA/68BcH/rZDP/Wk6ZSvYv04F3PwmtXluyEw
+ tBwk0L6Q6+3V9Z+bMXqVU9Yzy27Hjwrc6CzyUGoSwMqLp/kvQ4ZZstSyAj8cFNoRfV
+ fsYton1k9l/4w==
+Subject: Re: [Nouveau] [PATCH 3/4] mm: simplify device private page handling
+ in hmm_range_fault
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -77,120 +77,147 @@ Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
 On 3/16/20 12:32 PM, Christoph Hellwig wrote:
-> Add a new src_owner field to struct migrate_vma.  If the field is set,
-> only device private pages with page->pgmap->owner equal to that field
-> are migrated.  If the field is not set only "normal" pages are migrated.
+> Remove the code to fault device private pages back into system memory
+> that has never been used by any driver.  Also replace the usage of the
+> HMM_PFN_DEVICE_PRIVATE flag in the pfns array with a simple
+> is_device_private_page check in nouveau.
 > 
 > Signed-off-by: Christoph Hellwig <hch@lst.de>
-> Fixes: df6ad69838fc ("mm/device-public-memory: device memory cache coherent with CPU")
 
-When migrating to device private memory, setting the src_owner lets the caller
-know about source pages that are already migrated and skips pages migrated to a
-different device similar to pages swapped out an actual swap device.
-But, it prevents normal pages from being migrated to device private memory.
-It can still be useful for the driver to know that a page is owned by a
-different device if it has a device to device way of migrating data.
-nouveau_dmem_migrate_vma() isn't setting args.src_owner so only normal pages
-will be migrated which I guess is OK for now since nouveau doesn't handle
-direct GPU to GPU migration currently.
+Getting rid of HMM_PFN_DEVICE_PRIVATE seems reasonable to me since a driver can
+look at the struct page but what if a driver needs to fault in a page from
+another device's private memory? Should it call handle_mm_fault()?
 
-When migrating device private memory to system memory due to a CPU fault,
-the source page should be the device's device private struct page so if it
-isn't, then it does make sense to not migrate whatever normal page is there.
-nouveau_dmem_migrate_to_ram() sets src_owner so this case looks OK.
-
-Just had to think this through.
-Reviewed-by: Ralph Campbell <rcampbell@nvidia.com>
 
 > ---
->   arch/powerpc/kvm/book3s_hv_uvmem.c     | 1 +
->   drivers/gpu/drm/nouveau/nouveau_dmem.c | 1 +
->   include/linux/migrate.h                | 8 ++++++++
->   mm/migrate.c                           | 9 ++++++---
->   4 files changed, 16 insertions(+), 3 deletions(-)
+>   drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c |  1 -
+>   drivers/gpu/drm/nouveau/nouveau_dmem.c  |  5 +++--
+>   drivers/gpu/drm/nouveau/nouveau_svm.c   |  1 -
+>   include/linux/hmm.h                     |  2 --
+>   mm/hmm.c                                | 25 +++++--------------------
+>   5 files changed, 8 insertions(+), 26 deletions(-)
 > 
-> diff --git a/arch/powerpc/kvm/book3s_hv_uvmem.c b/arch/powerpc/kvm/book3s_hv_uvmem.c
-> index 67fefb03b9b7..f44f6b27950f 100644
-> --- a/arch/powerpc/kvm/book3s_hv_uvmem.c
-> +++ b/arch/powerpc/kvm/book3s_hv_uvmem.c
-> @@ -563,6 +563,7 @@ kvmppc_svm_page_out(struct vm_area_struct *vma, unsigned long start,
->   	mig.end = end;
->   	mig.src = &src_pfn;
->   	mig.dst = &dst_pfn;
-> +	mig.src_owner = &kvmppc_uvmem_pgmap;
->   
->   	mutex_lock(&kvm->arch.uvmem_lock);
->   	/* The requested page is already paged-out, nothing to do */
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_dmem.c b/drivers/gpu/drm/nouveau/nouveau_dmem.c
-> index a4682272586e..0e36345d395c 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_dmem.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_dmem.c
-> @@ -176,6 +176,7 @@ static vm_fault_t nouveau_dmem_migrate_to_ram(struct vm_fault *vmf)
->   		.end		= vmf->address + PAGE_SIZE,
->   		.src		= &src,
->   		.dst		= &dst,
-> +		.src_owner	= drm->dev,
->   	};
->   
->   	/*
-> diff --git a/include/linux/migrate.h b/include/linux/migrate.h
-> index 72120061b7d4..3e546cbf03dd 100644
-> --- a/include/linux/migrate.h
-> +++ b/include/linux/migrate.h
-> @@ -196,6 +196,14 @@ struct migrate_vma {
->   	unsigned long		npages;
->   	unsigned long		start;
->   	unsigned long		end;
-> +
-> +	/*
-> +	 * Set to the owner value also stored in page->pgmap->owner for
-> +	 * migrating out of device private memory.  If set only device
-> +	 * private pages with this owner are migrated.  If not set
-> +	 * device private pages are not migrated at all.
-> +	 */
-> +	void			*src_owner;
+> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c
+> index dee446278417..90821ce5e6ca 100644
+> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c
+> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c
+> @@ -776,7 +776,6 @@ struct amdgpu_ttm_tt {
+>   static const uint64_t hmm_range_flags[HMM_PFN_FLAG_MAX] = {
+>   	(1 << 0), /* HMM_PFN_VALID */
+>   	(1 << 1), /* HMM_PFN_WRITE */
+> -	0 /* HMM_PFN_DEVICE_PRIVATE */
 >   };
 >   
->   int migrate_vma_setup(struct migrate_vma *args);
-> diff --git a/mm/migrate.c b/mm/migrate.c
-> index b1092876e537..7605d2c23433 100644
-> --- a/mm/migrate.c
-> +++ b/mm/migrate.c
-> @@ -2241,7 +2241,7 @@ static int migrate_vma_collect_pmd(pmd_t *pmdp,
->   	arch_enter_lazy_mmu_mode();
+>   static const uint64_t hmm_range_values[HMM_PFN_VALUE_MAX] = {
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_dmem.c b/drivers/gpu/drm/nouveau/nouveau_dmem.c
+> index 0e36345d395c..edfd0805fba4 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_dmem.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_dmem.c
+> @@ -28,6 +28,7 @@
 >   
->   	for (; addr < end; addr += PAGE_SIZE, ptep++) {
-> -		unsigned long mpfn, pfn;
-> +		unsigned long mpfn = 0, pfn;
->   		struct page *page;
->   		swp_entry_t entry;
->   		pte_t pte;
-> @@ -2255,8 +2255,6 @@ static int migrate_vma_collect_pmd(pmd_t *pmdp,
+>   #include <nvif/class.h>
+>   #include <nvif/object.h>
+> +#include <nvif/if000c.h>
+>   #include <nvif/if500b.h>
+>   #include <nvif/if900b.h>
+>   
+> @@ -692,9 +693,8 @@ nouveau_dmem_convert_pfn(struct nouveau_drm *drm,
+>   		if (page == NULL)
+>   			continue;
+>   
+> -		if (!(range->pfns[i] & range->flags[HMM_PFN_DEVICE_PRIVATE])) {
+> +		if (!is_device_private_page(page))
+>   			continue;
+> -		}
+>   
+>   		if (!nouveau_dmem_page(drm, page)) {
+>   			WARN(1, "Some unknown device memory !\n");
+> @@ -705,5 +705,6 @@ nouveau_dmem_convert_pfn(struct nouveau_drm *drm,
+>   		addr = nouveau_dmem_page_addr(page);
+>   		range->pfns[i] &= ((1UL << range->pfn_shift) - 1);
+>   		range->pfns[i] |= (addr >> PAGE_SHIFT) << range->pfn_shift;
+> +		range->pfns[i] |= NVIF_VMM_PFNMAP_V0_VRAM;
+>   	}
+>   }
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_svm.c b/drivers/gpu/drm/nouveau/nouveau_svm.c
+> index df9bf1fd1bc0..39c731a99937 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_svm.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_svm.c
+> @@ -367,7 +367,6 @@ static const u64
+>   nouveau_svm_pfn_flags[HMM_PFN_FLAG_MAX] = {
+>   	[HMM_PFN_VALID         ] = NVIF_VMM_PFNMAP_V0_V,
+>   	[HMM_PFN_WRITE         ] = NVIF_VMM_PFNMAP_V0_W,
+> -	[HMM_PFN_DEVICE_PRIVATE] = NVIF_VMM_PFNMAP_V0_VRAM,
+>   };
+>   
+>   static const u64
+> diff --git a/include/linux/hmm.h b/include/linux/hmm.h
+> index 4bf8d6997b12..5e6034f105c3 100644
+> --- a/include/linux/hmm.h
+> +++ b/include/linux/hmm.h
+> @@ -74,7 +74,6 @@
+>    * Flags:
+>    * HMM_PFN_VALID: pfn is valid. It has, at least, read permission.
+>    * HMM_PFN_WRITE: CPU page table has write permission set
+> - * HMM_PFN_DEVICE_PRIVATE: private device memory (ZONE_DEVICE)
+>    *
+>    * The driver provides a flags array for mapping page protections to device
+>    * PTE bits. If the driver valid bit for an entry is bit 3,
+> @@ -86,7 +85,6 @@
+>   enum hmm_pfn_flag_e {
+>   	HMM_PFN_VALID = 0,
+>   	HMM_PFN_WRITE,
+> -	HMM_PFN_DEVICE_PRIVATE,
+>   	HMM_PFN_FLAG_MAX
+>   };
+>   
+> diff --git a/mm/hmm.c b/mm/hmm.c
+> index 180e398170b0..cfad65f6a67b 100644
+> --- a/mm/hmm.c
+> +++ b/mm/hmm.c
+> @@ -118,15 +118,6 @@ static inline void hmm_pte_need_fault(const struct hmm_vma_walk *hmm_vma_walk,
+>   	/* We aren't ask to do anything ... */
+>   	if (!(pfns & range->flags[HMM_PFN_VALID]))
+>   		return;
+> -	/* If this is device memory then only fault if explicitly requested */
+> -	if ((cpu_flags & range->flags[HMM_PFN_DEVICE_PRIVATE])) {
+> -		/* Do we fault on device memory ? */
+> -		if (pfns & range->flags[HMM_PFN_DEVICE_PRIVATE]) {
+> -			*write_fault = pfns & range->flags[HMM_PFN_WRITE];
+> -			*fault = true;
+> -		}
+> -		return;
+> -	}
+>   
+>   	/* If CPU page table is not valid then we need to fault */
+>   	*fault = !(cpu_flags & range->flags[HMM_PFN_VALID]);
+> @@ -260,21 +251,15 @@ static int hmm_vma_handle_pte(struct mm_walk *walk, unsigned long addr,
+>   		swp_entry_t entry = pte_to_swp_entry(pte);
+>   
+>   		/*
+> -		 * This is a special swap entry, ignore migration, use
+> -		 * device and report anything else as error.
+> +		 * Never fault in device private pages pages, but just report
+> +		 * the PFN even if not present.
+>   		 */
+>   		if (is_device_private_entry(entry)) {
+> -			cpu_flags = range->flags[HMM_PFN_VALID] |
+> -				range->flags[HMM_PFN_DEVICE_PRIVATE];
+> -			cpu_flags |= is_write_device_private_entry(entry) ?
+> -				range->flags[HMM_PFN_WRITE] : 0;
+> -			hmm_pte_need_fault(hmm_vma_walk, orig_pfn, cpu_flags,
+> -					   &fault, &write_fault);
+> -			if (fault || write_fault)
+> -				goto fault;
+>   			*pfn = hmm_device_entry_from_pfn(range,
+>   					    swp_offset(entry));
+> -			*pfn |= cpu_flags;
+> +			*pfn |= range->flags[HMM_PFN_VALID];
+> +			if (is_write_device_private_entry(entry))
+> +				*pfn |= range->flags[HMM_PFN_WRITE];
+>   			return 0;
 >   		}
 >   
->   		if (!pte_present(pte)) {
-> -			mpfn = 0;
-> -
->   			/*
->   			 * Only care about unaddressable device page special
->   			 * page table entry. Other special swap entries are not
-> @@ -2267,11 +2265,16 @@ static int migrate_vma_collect_pmd(pmd_t *pmdp,
->   				goto next;
->   
->   			page = device_private_entry_to_page(entry);
-> +			if (page->pgmap->owner != migrate->src_owner)
-> +				goto next;
-> +
->   			mpfn = migrate_pfn(page_to_pfn(page)) |
->   					MIGRATE_PFN_MIGRATE;
->   			if (is_write_device_private_entry(entry))
->   				mpfn |= MIGRATE_PFN_WRITE;
->   		} else {
-> +			if (migrate->src_owner)
-> +				goto next;
->   			pfn = pte_pfn(pte);
->   			if (is_zero_pfn(pfn)) {
->   				mpfn = MIGRATE_PFN_MIGRATE;
 > 
 _______________________________________________
 Nouveau mailing list
