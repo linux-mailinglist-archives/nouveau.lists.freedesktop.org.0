@@ -1,40 +1,45 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 689E9189587
-	for <lists+nouveau@lfdr.de>; Wed, 18 Mar 2020 07:03:04 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6F7E6189602
+	for <lists+nouveau@lfdr.de>; Wed, 18 Mar 2020 07:51:24 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 61F596E869;
-	Wed, 18 Mar 2020 06:02:58 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 18EDF89A76;
+	Wed, 18 Mar 2020 06:51:22 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 623116E1C0;
- Wed, 18 Mar 2020 06:02:57 +0000 (UTC)
-Received: from localhost (83-86-89-107.cable.dynamic.v4.ziggo.nl
- [83.86.89.107])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 7D12920663;
- Wed, 18 Mar 2020 06:02:56 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1584511376;
- bh=rrtQ7bSEmpqBZhNRWvjkSCXBWymjQBTAn4TLG3GnOZE=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=c0lVSe2EwSW1Aav+XG39anTMGM7F1meUK3FdwawjmTFjZlQyGLrGK9qqCHfcsct4T
- 3lqrOWxqsAmxx40aM1cDyecMhZgbnZ5k5wj0V2uti4WJBtkKnM+UmoPt5KL77JlLLt
- y0o1GB0j+wSmprz+VHDU0o9yNTp6+PQkVm/JqTU4=
-Date: Wed, 18 Mar 2020 07:02:54 +0100
-From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-To: Lyude Paul <lyude@redhat.com>
-Message-ID: <20200318060254.GB1594891@kroah.com>
-References: <20200318004159.235623-1-lyude@redhat.com>
- <20200318004159.235623-10-lyude@redhat.com>
+Received: from bombadil.infradead.org (bombadil.infradead.org
+ [IPv6:2607:7c80:54:e::133])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2F49989A76;
+ Wed, 18 Mar 2020 06:51:21 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=bombadil.20170209; h=In-Reply-To:Content-Type:MIME-Version
+ :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description;
+ bh=HU3OpK2WrMDnYBFQ0mcXfjSZpfmRV36qu/4VljNG5ig=; b=UUXNx2bLZbq9R2xgMp9+ZXf/X4
+ 5Y+ZcxwA5J8Qu83bkUjfw6NDUo/6/Ee3tU+fekoobfS2QyzjaXVBj8QWHxwtVFruT9IJTVY3d/VAa
+ TyrHpyWfCH2IpQqZOCOSO98nIjaGm9Mvx4p1pt4dHj3G742mLzfMeEGXUHGbR8n1bptovK2IXCRGE
+ iYOSzb0xzMa2LFb6S0N4C7H3GWyk5G+gH/YNhpDN1xbjAvlSRYTgBvqgUTf8Aj/hajO3Jm4Fueu8e
+ Lt4wQNZht/RT3UAH1cIoXhHVTHkFWmFXlOXBDJA0Vx6M2C85qYjQg8HMb3bfsyEimY+kNbe7CQ+3G
+ JJ3JhzlA==;
+Received: from hch by bombadil.infradead.org with local (Exim 4.92.3 #3 (Red
+ Hat Linux)) id 1jESXv-00059Q-PA; Wed, 18 Mar 2020 06:51:19 +0000
+Date: Tue, 17 Mar 2020 23:51:19 -0700
+From: Christoph Hellwig <hch@infradead.org>
+To: Mikel Rychliski <mikel@mikelr.com>
+Message-ID: <20200318065119.GA14425@infradead.org>
+References: <20200313222258.15659-1-mikel@mikelr.com>
+ <20200313222258.15659-3-mikel@mikelr.com>
+ <20200317144731.GG23471@infradead.org>
+ <49518530.5kixuQOrMm@glidewell>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200318004159.235623-10-lyude@redhat.com>
-Subject: Re: [Nouveau] [PATCH 9/9] drm/nouveau/kms/nvd9-: Add CRC support
+In-Reply-To: <49518530.5kixuQOrMm@glidewell>
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
+ bombadil.infradead.org. See http://www.infradead.org/rpr.html
+Subject: Re: [Nouveau] [PATCH RESEND v2 2/2] PCI: Use ioremap(),
+ not phys_to_virt() for platform ROM
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -46,42 +51,28 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Kate Stewart <kstewart@linuxfoundation.org>,
- Jani Nikula <jani.nikula@intel.com>,
- Ville =?iso-8859-1?Q?Syrj=E4l=E4?= <ville.syrjala@linux.intel.com>,
- David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- Takashi Iwai <tiwai@suse.de>, Sean Paul <seanpaul@chromium.org>,
- Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>,
- Pankaj Bharadiya <pankaj.laxminarayan.bharadiya@intel.com>,
- Alex Deucher <alexander.deucher@amd.com>, Sam Ravnborg <sam@ravnborg.org>
+Cc: "David \(ChunMing\) Zhou" <David1.Zhou@amd.com>, linux-pci@vger.kernel.org,
+ Matthew Garrett <matthewgarrett@google.com>, amd-gfx@lists.freedesktop.org,
+ Christoph Hellwig <hch@infradead.org>, Bjorn Helgaas <bhelgaas@google.com>,
+ Ben Skeggs <bskeggs@redhat.com>, nouveau@lists.freedesktop.org,
+ Alex Deucher <alexander.deucher@amd.com>,
+ Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, Mar 17, 2020 at 08:41:06PM -0400, Lyude Paul wrote:
-> +	root = debugfs_create_dir("nv_crc", crtc->debugfs_entry);
-> +	if (IS_ERR(root))
-> +		return PTR_ERR(root);
+On Tue, Mar 17, 2020 at 09:34:33PM -0400, Mikel Rychliski wrote:
+> I think the direct access to pdev->rom you suggest makes sense, especially 
+> because users of the pci_platform_rom() are exposed to the fact that it just 
+> calls ioremap().
+> 
+> I decided against wrapping the iounmap() with a pci_unmap_platform_rom(), but 
+> I didn't apply the same consideration to the existing function.
+> 
+> How about something like this (with pci_platform_rom() removed)?
 
-No need to check this, just take the return value and move on.
-
-> +
-> +	dent = debugfs_create_file("flip_threshold", 0644, root, head,
-> +				   &nv50_crc_flip_threshold_fops);
-> +	if (IS_ERR(dent))
-> +		return PTR_ERR(dent);
-
-No need to check this either, in fact this test is incorrect :(
-
-Just make the call, and move on.  See the loads of debugfs cleanups I
-have been doing for examples.
-
-thanks,
-
-greg k-h
+That looks sensible to me.
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
