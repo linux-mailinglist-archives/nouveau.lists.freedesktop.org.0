@@ -2,65 +2,64 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 303C4189D3C
-	for <lists+nouveau@lfdr.de>; Wed, 18 Mar 2020 14:47:06 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6E33318A9C3
+	for <lists+nouveau@lfdr.de>; Thu, 19 Mar 2020 01:28:56 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0D2F56E8EE;
-	Wed, 18 Mar 2020 13:47:04 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6C1E26E9A2;
+	Thu, 19 Mar 2020 00:28:53 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wr1-x441.google.com (mail-wr1-x441.google.com
- [IPv6:2a00:1450:4864:20::441])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 31CB46E8EE
- for <nouveau@lists.freedesktop.org>; Wed, 18 Mar 2020 13:47:03 +0000 (UTC)
-Received: by mail-wr1-x441.google.com with SMTP id a25so30499527wrd.0
- for <nouveau@lists.freedesktop.org>; Wed, 18 Mar 2020 06:47:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
- h=date:from:to:cc:subject:message-id:mail-followup-to:references
- :mime-version:content-disposition:content-transfer-encoding
- :in-reply-to; bh=Jgk73bst/CV0aKd8AXZSx5lKu+2oD2+raaZ8aSYRU3Y=;
- b=if+rfFwgKJlHBxHYcWGa9fyQ6RS7E/uddTEJGLpqvRqsA5k/Lm2YFZeJJges/EGbOQ
- KuRx55U+lLmy/PwaeXoaJeLgcOyw/wWAsJ/ceNk1NqlF3M85Rqn5jc7niF7jZIOtGqNy
- kBvZqV4ac73PHHuQMGXxmYyb797Qb6U3Lczbc=
+Received: from mail-qv1-xf41.google.com (mail-qv1-xf41.google.com
+ [IPv6:2607:f8b0:4864:20::f41])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id AD7376E9A2
+ for <nouveau@lists.freedesktop.org>; Thu, 19 Mar 2020 00:28:51 +0000 (UTC)
+Received: by mail-qv1-xf41.google.com with SMTP id a10so113523qvq.8
+ for <nouveau@lists.freedesktop.org>; Wed, 18 Mar 2020 17:28:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ziepe.ca; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to:user-agent;
+ bh=DIzPGl46tibPTC4Nr1Fne3idEkZVxe0vRVzC9BmYyk8=;
+ b=a9OAhtzpaqy8M7ZOiBkM5EuSVHd4yNecpRtC8dRP+l2pPqyfnSd8K92zu0TfGABk1Q
+ hYEfZ+7acI2k/zKRdQldlZU6QmFtX2HRogB/BKnbdEtsKAhQeU6fd+MnUlz8ghM8TEw4
+ 4FSfDydFj/Zz5Td34FIN8pCf7ZG9IBYZHl9AGTNXWI1pvNTxE9cBf86JQxD+vBXs5Fu+
+ P3YN0S0cijWwxtWJa0nTOxVZ/FIsv/TFStTBQI0wKucqAubr3tyWjsrl2pHJSEDRw/1M
+ 2hLIJPL3HFVUmwFiwQrI21J4bRRmujEiUZiEYQWN4CJhod6KqfASdjQsItMOv/RwHOO/
+ 50tA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id
- :mail-followup-to:references:mime-version:content-disposition
- :content-transfer-encoding:in-reply-to;
- bh=Jgk73bst/CV0aKd8AXZSx5lKu+2oD2+raaZ8aSYRU3Y=;
- b=k6ydYXwmT269IaXCnu0Ud4bkS6fzzz1TlJRBMNPMQML057IUb64KQKFhHt3h9s6hQE
- PZHmXLJ7YdeEkzv8jmpFoQO+izihUYW+wEbt0G4MDcjr5aA5nTV6PW4KcQINjB/+Shtj
- 55i60P3WTaEdNpuu7UjO35DOutsJiIX22WsuqPx2J5lydq8eSjndds9cwdD23JS4FESO
- s3JiV/XFg0Qq4RL8hzdUqBbn3hPOizo1ir4212u6ytSMx2N1j91F6qWprL3M2VitjtN8
- AZHzORkZo4mzXmCamiU6I625nnSBgzmDUmIsGXXGNwYzN+bIQGssslWmdfEUA/2I5ge+
- VjZg==
-X-Gm-Message-State: ANhLgQ1ZhardQedRLMYf1bDBgT9tCgBJv5qtYyFBtlGT3C2Q6WT8Nybp
- xdY/qwEdP2ngO/DwO3QIEAwjqQ==
-X-Google-Smtp-Source: ADFU+vuSiDrxguzDE4YfNXHEJi5wzEswqlT3sXLcP5L8aPhOk/LNLz00f0V/UmpjtEhK0n+G54hPaA==
-X-Received: by 2002:a5d:4ac2:: with SMTP id y2mr5830973wrs.263.1584539220517; 
- Wed, 18 Mar 2020 06:47:00 -0700 (PDT)
-Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
- by smtp.gmail.com with ESMTPSA id x6sm9393174wrm.29.2020.03.18.06.46.59
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Mar 2020 06:46:59 -0700 (PDT)
-Date: Wed, 18 Mar 2020 14:46:57 +0100
-From: Daniel Vetter <daniel@ffwll.ch>
-To: Lyude Paul <lyude@redhat.com>
-Message-ID: <20200318134657.GV2363188@phenom.ffwll.local>
-Mail-Followup-To: Lyude Paul <lyude@redhat.com>,
- nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- Ville =?iso-8859-1?Q?Syrj=E4l=E4?= <ville.syrjala@linux.intel.com>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>,
- Thomas Zimmermann <tzimmermann@suse.de>,
- David Airlie <airlied@linux.ie>, linux-kernel@vger.kernel.org
-References: <20200318004159.235623-1-lyude@redhat.com>
- <20200318004159.235623-2-lyude@redhat.com>
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to:user-agent;
+ bh=DIzPGl46tibPTC4Nr1Fne3idEkZVxe0vRVzC9BmYyk8=;
+ b=UHVjopM4vZMfSa+H1IkXPd/6O0dvSxC2s7lP1eEPHwR/6QIR1t1ab1N6q/6IYKA9Tk
+ mv2Uy/uR9pbsM8scxx2FD7xw1Gc9yI1BPaDu7M4PXox3gxJSdvSo5ZTXlQ0doUoQpbq9
+ Lk72tMfs1pC+X1u9bvoSZ8iJuq4MaAnqeQxEaR7uFVSiYLBB1+eSd3kB4dwqm+pwEjYZ
+ mj7Z9IyZlWz5XIBV6TGTVqeehKyWrLQOWdTIqxrLQKj+IT53T8I3E7zQiH/5JK1f71CN
+ T3ESf+H7NGmrVzVk6gfxWXNtjU2JPp/TAnwYPBed43CwEfLyGg4gjIUhpwkCj15Ay+qy
+ FMRA==
+X-Gm-Message-State: ANhLgQ2aRCdUep+5uCw9sRlxG1YDaH5rdHAe1gE8y1mJJuGQOwOU9N9l
+ Ee5eMQvLlFH02FoG3moVNii01g==
+X-Google-Smtp-Source: ADFU+vvSjLkx34MB68Vj6dW6PS73cWO5A0gn+n/cmS/y+KLQ6+BjGr0q6lYXU7A7Xm/H0ApV84kRRw==
+X-Received: by 2002:a0c:e7c3:: with SMTP id c3mr620345qvo.62.1584577730703;
+ Wed, 18 Mar 2020 17:28:50 -0700 (PDT)
+Received: from ziepe.ca
+ (hlfxns017vw-142-68-57-212.dhcp-dynamic.fibreop.ns.bellaliant.net.
+ [142.68.57.212])
+ by smtp.gmail.com with ESMTPSA id u123sm433965qkf.77.2020.03.18.17.28.50
+ (version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+ Wed, 18 Mar 2020 17:28:50 -0700 (PDT)
+Received: from jgg by mlx.ziepe.ca with local (Exim 4.90_1)
+ (envelope-from <jgg@ziepe.ca>)
+ id 1jEj3J-000273-Ln; Wed, 18 Mar 2020 21:28:49 -0300
+Date: Wed, 18 Mar 2020 21:28:49 -0300
+From: Jason Gunthorpe <jgg@ziepe.ca>
+To: Christoph Hellwig <hch@lst.de>
+Message-ID: <20200319002849.GG20941@ziepe.ca>
+References: <20200316193216.920734-1-hch@lst.de>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200318004159.235623-2-lyude@redhat.com>
-X-Operating-System: Linux phenom 5.3.0-3-amd64 
-Subject: Re: [Nouveau] [PATCH 1/9] drm/vblank: Add vblank works
+In-Reply-To: <20200316193216.920734-1-hch@lst.de>
+User-Agent: Mutt/1.9.4 (2018-02-28)
+Subject: Re: [Nouveau] ensure device private pages have an owner v2
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -72,522 +71,38 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Daniel Vetter <daniel@ffwll.ch>, David Airlie <airlied@linux.ie>,
- nouveau@lists.freedesktop.org,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- linux-kernel@vger.kernel.org, Maxime Ripard <mripard@kernel.org>,
- dri-devel@lists.freedesktop.org,
- Ville =?iso-8859-1?Q?Syrj=E4l=E4?= <ville.syrjala@linux.intel.com>
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Cc: amd-gfx@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, kvm-ppc@vger.kernel.org,
+ Bharata B Rao <bharata@linux.ibm.com>, linux-mm@kvack.org,
+ Ben Skeggs <bskeggs@redhat.com>, Dan Williams <dan.j.williams@intel.com>,
+ Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, Mar 17, 2020 at 08:40:58PM -0400, Lyude Paul wrote:
-> From: Ville Syrj=E4l=E4 <ville.syrjala@linux.intel.com>
-> =
+On Mon, Mar 16, 2020 at 08:32:12PM +0100, Christoph Hellwig wrote:
+> When acting on device private mappings a driver needs to know if the
+> device (or other entity in case of kvmppc) actually owns this private
+> mapping.  This series adds an owner field and converts the migrate_vma
+> code over to check it.  I looked into doing the same for
+> hmm_range_fault, but as far as I can tell that code has never been
+> wired up to actually work for device private memory, so instead of
+> trying to fix some unused code the second patch just remove the code.
+> We can add it back once we have a working and fully tested code, and
+> then should pass the expected owner in the hmm_range structure.
+> 
+> Changes since v1:
+>  - split out the pgmap->owner addition into a separate patch
+>  - check pgmap->owner is set for device private mappings
+>  - rename the dev_private_owner field in struct migrate_vma to src_owner
+>  - refuse to migrate private pages if src_owner is not set
+>  - keep the non-fault device private handling in hmm_range_fault
 
-> Add some kind of vblank workers. The interface is similar to regular
-> delayed works, and also allows for re-scheduling.
-> =
+I'm happy enough to take this, did you have plans for a v3?
 
-> Whatever hardware programming we do in the work must be fast
-> (must at least complete during the vblank, sometimes during
-> the first few scanlines of vblank), so we'll fire up a per-crtc
-> high priority thread for this.
-> =
-
-> [based off patches from Ville Syrj=E4l=E4 <ville.syrjala@linux.intel.com>,
-> change below to signoff later]
-> =
-
-> Cc: Ville Syrj=E4l=E4 <ville.syrjala@linux.intel.com>
-> Signed-off-by: Lyude Paul <lyude@redhat.com>
-
-Hm not really sold on the idea that we have should reinvent our own worker
-infrastructure here. Imo a vblank_work should look like a delayed work,
-i.e. using struct work_struct as the base class, and wrapping the vblank
-thing around it (instead of the timer). That alos would allow drivers to
-schedule works on their own work queues, allowing for easier flushing and
-all that stuff.
-
-Also if we do this I think we should try to follow the delayed work abi as
-closely as possible (e.g. INIT_VBLANK_WORK, queue_vblank_work,
-mod_vblank_work, ...). Delayed workers (whether timer or vblank) have a
-bunch of edges cases where consistently would be really great to avoid
-surprises and bugs.
--Daniel
-
-> ---
->  drivers/gpu/drm/drm_vblank.c | 322 +++++++++++++++++++++++++++++++++++
->  include/drm/drm_vblank.h     |  34 ++++
->  2 files changed, 356 insertions(+)
-> =
-
-> diff --git a/drivers/gpu/drm/drm_vblank.c b/drivers/gpu/drm/drm_vblank.c
-> index da7b0b0c1090..06c796b6c381 100644
-> --- a/drivers/gpu/drm/drm_vblank.c
-> +++ b/drivers/gpu/drm/drm_vblank.c
-> @@ -25,7 +25,9 @@
->   */
->  =
-
->  #include <linux/export.h>
-> +#include <linux/kthread.h>
->  #include <linux/moduleparam.h>
-> +#include <uapi/linux/sched/types.h>
->  =
-
->  #include <drm/drm_crtc.h>
->  #include <drm/drm_drv.h>
-> @@ -91,6 +93,7 @@
->  static bool
->  drm_get_last_vbltimestamp(struct drm_device *dev, unsigned int pipe,
->  			  ktime_t *tvblank, bool in_vblank_irq);
-> +static int drm_vblank_get(struct drm_device *dev, unsigned int pipe);
->  =
-
->  static unsigned int drm_timestamp_precision =3D 20;  /* Default to 20 us=
-ecs. */
->  =
-
-> @@ -440,6 +443,9 @@ void drm_vblank_cleanup(struct drm_device *dev)
->  			drm_core_check_feature(dev, DRIVER_MODESET));
->  =
-
->  		del_timer_sync(&vblank->disable_timer);
-> +
-> +		wake_up_all(&vblank->vblank_work.work_wait);
-> +		kthread_stop(vblank->vblank_work.thread);
->  	}
->  =
-
->  	kfree(dev->vblank);
-> @@ -447,6 +453,108 @@ void drm_vblank_cleanup(struct drm_device *dev)
->  	dev->num_crtcs =3D 0;
->  }
->  =
-
-> +static int vblank_work_thread(void *data)
-> +{
-> +	struct drm_vblank_crtc *vblank =3D data;
-> +
-> +	while (!kthread_should_stop()) {
-> +		struct drm_vblank_work *work, *next;
-> +		LIST_HEAD(list);
-> +		u64 count;
-> +		int ret;
-> +
-> +		spin_lock_irq(&vblank->dev->event_lock);
-> +
-> +		ret =3D wait_event_interruptible_lock_irq(vblank->queue,
-> +							kthread_should_stop() ||
-> +							!list_empty(&vblank->vblank_work.work_list),
-> +							vblank->dev->event_lock);
-> +
-> +		WARN_ON(ret && !kthread_should_stop() &&
-> +			list_empty(&vblank->vblank_work.irq_list) &&
-> +			list_empty(&vblank->vblank_work.work_list));
-> +
-> +		list_for_each_entry_safe(work, next,
-> +					 &vblank->vblank_work.work_list,
-> +					 list) {
-> +			list_move_tail(&work->list, &list);
-> +			work->state =3D DRM_VBL_WORK_RUNNING;
-> +		}
-> +
-> +		spin_unlock_irq(&vblank->dev->event_lock);
-> +
-> +		if (list_empty(&list))
-> +			continue;
-> +
-> +		count =3D atomic64_read(&vblank->count);
-> +		list_for_each_entry(work, &list, list)
-> +			work->func(work, count);
-> +
-> +		spin_lock_irq(&vblank->dev->event_lock);
-> +
-> +		list_for_each_entry_safe(work, next, &list, list) {
-> +			if (work->reschedule) {
-> +				list_move_tail(&work->list,
-> +					       &vblank->vblank_work.irq_list);
-> +				drm_vblank_get(vblank->dev, vblank->pipe);
-> +				work->reschedule =3D false;
-> +				work->state =3D DRM_VBL_WORK_WAITING;
-> +			} else {
-> +				list_del_init(&work->list);
-> +				work->cancel =3D false;
-> +				work->state =3D DRM_VBL_WORK_IDLE;
-> +			}
-> +		}
-> +
-> +		spin_unlock_irq(&vblank->dev->event_lock);
-> +
-> +		wake_up_all(&vblank->vblank_work.work_wait);
-> +	}
-> +
-> +	return 0;
-> +}
-> +
-> +static void vblank_work_init(struct drm_vblank_crtc *vblank)
-> +{
-> +	struct sched_param param =3D {
-> +		.sched_priority =3D MAX_RT_PRIO - 1,
-> +	};
-> +	int ret;
-> +
-> +	INIT_LIST_HEAD(&vblank->vblank_work.irq_list);
-> +	INIT_LIST_HEAD(&vblank->vblank_work.work_list);
-> +	init_waitqueue_head(&vblank->vblank_work.work_wait);
-> +
-> +	vblank->vblank_work.thread =3D
-> +		kthread_run(vblank_work_thread, vblank, "card %d crtc %d",
-> +			    vblank->dev->primary->index, vblank->pipe);
-> +
-> +	ret =3D sched_setscheduler(vblank->vblank_work.thread,
-> +				 SCHED_FIFO, &param);
-> +	WARN_ON(ret);
-> +}
-> +
-> +/**
-> + * drm_vblank_work_init - initialize a vblank work item
-> + * @work: vblank work item
-> + * @crtc: CRTC whose vblank will trigger the work execution
-> + * @func: work function to be executed
-> + *
-> + * Initialize a vblank work item for a specific crtc.
-> + */
-> +void drm_vblank_work_init(struct drm_vblank_work *work, struct drm_crtc =
-*crtc,
-> +			  void (*func)(struct drm_vblank_work *work, u64 count))
-> +{
-> +	struct drm_device *dev =3D crtc->dev;
-> +	struct drm_vblank_crtc *vblank =3D &dev->vblank[drm_crtc_index(crtc)];
-> +
-> +	work->vblank =3D vblank;
-> +	work->state =3D DRM_VBL_WORK_IDLE;
-> +	work->func =3D func;
-> +	INIT_LIST_HEAD(&work->list);
-> +}
-> +EXPORT_SYMBOL(drm_vblank_work_init);
-> +
->  /**
->   * drm_vblank_init - initialize vblank support
->   * @dev: DRM device
-> @@ -481,6 +589,8 @@ int drm_vblank_init(struct drm_device *dev, unsigned =
-int num_crtcs)
->  		init_waitqueue_head(&vblank->queue);
->  		timer_setup(&vblank->disable_timer, vblank_disable_fn, 0);
->  		seqlock_init(&vblank->seqlock);
-> +
-> +		vblank_work_init(vblank);
->  	}
->  =
-
->  	DRM_INFO("Supports vblank timestamp caching Rev 2 (21.10.2013).\n");
-> @@ -1825,6 +1935,22 @@ static void drm_handle_vblank_events(struct drm_de=
-vice *dev, unsigned int pipe)
->  	trace_drm_vblank_event(pipe, seq, now, high_prec);
->  }
->  =
-
-> +static void drm_handle_vblank_works(struct drm_vblank_crtc *vblank)
-> +{
-> +	struct drm_vblank_work *work, *next;
-> +	u64 count =3D atomic64_read(&vblank->count);
-> +
-> +	list_for_each_entry_safe(work, next, &vblank->vblank_work.irq_list,
-> +				 list) {
-> +		if (!vblank_passed(count, work->count))
-> +			continue;
-> +
-> +		drm_vblank_put(vblank->dev, vblank->pipe);
-> +		list_move_tail(&work->list, &vblank->vblank_work.work_list);
-> +		work->state =3D DRM_VBL_WORK_SCHEDULED;
-> +	}
-> +}
-> +
->  /**
->   * drm_handle_vblank - handle a vblank event
->   * @dev: DRM device
-> @@ -1866,6 +1992,7 @@ bool drm_handle_vblank(struct drm_device *dev, unsi=
-gned int pipe)
->  =
-
->  	spin_unlock(&dev->vblank_time_lock);
->  =
-
-> +	drm_handle_vblank_works(vblank);
->  	wake_up(&vblank->queue);
->  =
-
->  	/* With instant-off, we defer disabling the interrupt until after
-> @@ -2076,3 +2203,198 @@ int drm_crtc_queue_sequence_ioctl(struct drm_devi=
-ce *dev, void *data,
->  	kfree(e);
->  	return ret;
->  }
-> +
-> +/**
-> + * drm_vblank_work_schedule - schedule a vblank work
-> + * @work: vblank work to schedule
-> + * @count: target vblank count
-> + * @nextonmiss: defer until the next vblank if target vblank was missed
-> + *
-> + * Schedule @work for execution once the crtc vblank count reaches @coun=
-t.
-> + *
-> + * If the crtc vblank count has already reached @count and @nextonmiss is
-> + * %false the work starts to execute immediately.
-> + *
-> + * If the crtc vblank count has already reached @count and @nextonmiss is
-> + * %true the work is deferred until the next vblank (as if @count has be=
-en
-> + * specified as crtc vblank count + 1).
-> + *
-> + * If @work is already scheduled, this function will reschedule said work
-> + * using the new @count.
-> + *
-> + * Returns:
-> + * 0 on success, error code on failure.
-> + */
-> +int drm_vblank_work_schedule(struct drm_vblank_work *work,
-> +			     u64 count, bool nextonmiss)
-> +{
-> +	struct drm_vblank_crtc *vblank =3D work->vblank;
-> +	unsigned long irqflags;
-> +	u64 cur_vbl;
-> +	int ret =3D 0;
-> +	bool rescheduling =3D false;
-> +	bool passed;
-> +
-> +	spin_lock_irqsave(&vblank->dev->event_lock, irqflags);
-> +
-> +	if (work->cancel)
-> +		goto out;
-> +
-> +	if (work->state =3D=3D DRM_VBL_WORK_RUNNING) {
-> +		work->reschedule =3D true;
-> +		work->count =3D count;
-> +		goto out;
-> +	} else if (work->state !=3D DRM_VBL_WORK_IDLE) {
-> +		if (work->count =3D=3D count)
-> +			goto out;
-> +		rescheduling =3D true;
-> +	}
-> +
-> +	if (work->state !=3D DRM_VBL_WORK_WAITING) {
-> +		ret =3D drm_vblank_get(vblank->dev, vblank->pipe);
-> +		if (ret)
-> +			goto out;
-> +	}
-> +
-> +	work->count =3D count;
-> +
-> +	cur_vbl =3D atomic64_read(&vblank->count);
-> +	passed =3D vblank_passed(cur_vbl, count);
-> +	if (passed)
-> +		DRM_ERROR("crtc %d vblank %llu already passed (current %llu)\n",
-> +			  vblank->pipe, count, cur_vbl);
-> +
-> +	if (!nextonmiss && passed) {
-> +		drm_vblank_put(vblank->dev, vblank->pipe);
-> +		if (rescheduling)
-> +			list_move_tail(&work->list,
-> +				       &vblank->vblank_work.work_list);
-> +		else
-> +			list_add_tail(&work->list,
-> +				      &vblank->vblank_work.work_list);
-> +		work->state =3D DRM_VBL_WORK_SCHEDULED;
-> +		wake_up_all(&vblank->queue);
-> +	} else {
-> +		if (rescheduling)
-> +			list_move_tail(&work->list,
-> +				       &vblank->vblank_work.irq_list);
-> +		else
-> +			list_add_tail(&work->list,
-> +				      &vblank->vblank_work.irq_list);
-> +		work->state =3D DRM_VBL_WORK_WAITING;
-> +	}
-> +
-> + out:
-> +	spin_unlock_irqrestore(&vblank->dev->event_lock, irqflags);
-> +
-> +	return ret;
-> +}
-> +EXPORT_SYMBOL(drm_vblank_work_schedule);
-> +
-> +static bool vblank_work_cancel(struct drm_vblank_work *work)
-> +{
-> +	struct drm_vblank_crtc *vblank =3D work->vblank;
-> +
-> +	switch (work->state) {
-> +	case DRM_VBL_WORK_RUNNING:
-> +		work->cancel =3D true;
-> +		work->reschedule =3D false;
-> +		/* fall through */
-> +	default:
-> +	case DRM_VBL_WORK_IDLE:
-> +		return false;
-> +	case DRM_VBL_WORK_WAITING:
-> +		drm_vblank_put(vblank->dev, vblank->pipe);
-> +		/* fall through */
-> +	case DRM_VBL_WORK_SCHEDULED:
-> +		list_del_init(&work->list);
-> +		work->state =3D DRM_VBL_WORK_IDLE;
-> +		return true;
-> +	}
-> +}
-> +
-> +/**
-> + * drm_vblank_work_cancel - cancel a vblank work
-> + * @work: vblank work to cancel
-> + *
-> + * Cancel an already scheduled vblank work.
-> + *
-> + * On return @work may still be executing, unless the return
-> + * value is %true.
-> + *
-> + * Returns:
-> + * True if the work was cancelled before it started to excute, false oth=
-erwise.
-> + */
-> +bool drm_vblank_work_cancel(struct drm_vblank_work *work)
-> +{
-> +	struct drm_vblank_crtc *vblank =3D work->vblank;
-> +	bool cancelled;
-> +
-> +	spin_lock_irq(&vblank->dev->event_lock);
-> +
-> +	cancelled =3D vblank_work_cancel(work);
-> +
-> +	spin_unlock_irq(&vblank->dev->event_lock);
-> +
-> +	return cancelled;
-> +}
-> +EXPORT_SYMBOL(drm_vblank_work_cancel);
-> +
-> +/**
-> + * drm_vblank_work_cancel_sync - cancel a vblank work and wait for it to=
- finish executing
-> + * @work: vblank work to cancel
-> + *
-> + * Cancel an already scheduled vblank work and wait for its
-> + * execution to finish.
-> + *
-> + * On return @work is no longer guaraneed to be executing.
-> + *
-> + * Returns:
-> + * True if the work was cancelled before it started to excute, false oth=
-erwise.
-> + */
-> +bool drm_vblank_work_cancel_sync(struct drm_vblank_work *work)
-> +{
-> +	struct drm_vblank_crtc *vblank =3D work->vblank;
-> +	bool cancelled;
-> +	long ret;
-> +
-> +	spin_lock_irq(&vblank->dev->event_lock);
-> +
-> +	cancelled =3D vblank_work_cancel(work);
-> +
-> +	ret =3D wait_event_lock_irq_timeout(vblank->vblank_work.work_wait,
-> +					  work->state =3D=3D DRM_VBL_WORK_IDLE,
-> +					  vblank->dev->event_lock,
-> +					  10 * HZ);
-> +
-> +	spin_unlock_irq(&vblank->dev->event_lock);
-> +
-> +	WARN(!ret, "crtc %d vblank work timed out\n", vblank->pipe);
-> +
-> +	return cancelled;
-> +}
-> +EXPORT_SYMBOL(drm_vblank_work_cancel_sync);
-> +
-> +/**
-> + * drm_vblank_work_flush - wait for a scheduled vblank work to finish ex=
-cuting
-> + * @work: vblank work to flush
-> + *
-> + * Wait until @work has finished executing.
-> + */
-> +void drm_vblank_work_flush(struct drm_vblank_work *work)
-> +{
-> +	struct drm_vblank_crtc *vblank =3D work->vblank;
-> +	long ret;
-> +
-> +	spin_lock_irq(&vblank->dev->event_lock);
-> +
-> +	ret =3D wait_event_lock_irq_timeout(vblank->vblank_work.work_wait,
-> +					  work->state =3D=3D DRM_VBL_WORK_IDLE,
-> +					  vblank->dev->event_lock,
-> +					  10 * HZ);
-> +
-> +	spin_unlock_irq(&vblank->dev->event_lock);
-> +
-> +	WARN(!ret, "crtc %d vblank work timed out\n", vblank->pipe);
-> +}
-> +EXPORT_SYMBOL(drm_vblank_work_flush);
-> diff --git a/include/drm/drm_vblank.h b/include/drm/drm_vblank.h
-> index dd9f5b9e56e4..ac9130f419af 100644
-> --- a/include/drm/drm_vblank.h
-> +++ b/include/drm/drm_vblank.h
-> @@ -203,8 +203,42 @@ struct drm_vblank_crtc {
->  	 * disabling functions multiple times.
->  	 */
->  	bool enabled;
-> +
-> +	struct {
-> +		struct task_struct *thread;
-> +		struct list_head irq_list, work_list;
-> +		wait_queue_head_t work_wait;
-> +	} vblank_work;
-> +};
-> +
-> +struct drm_vblank_work {
-> +	u64 count;
-> +	struct drm_vblank_crtc *vblank;
-> +	void (*func)(struct drm_vblank_work *work, u64 count);
-> +	struct list_head list;
-> +	enum {
-> +		DRM_VBL_WORK_IDLE,
-> +		DRM_VBL_WORK_WAITING,
-> +		DRM_VBL_WORK_SCHEDULED,
-> +		DRM_VBL_WORK_RUNNING,
-> +	} state;
-> +	bool cancel : 1;
-> +	bool reschedule : 1;
->  };
->  =
-
-> +int drm_vblank_work_schedule(struct drm_vblank_work *work,
-> +			     u64 count, bool nextonmiss);
-> +void drm_vblank_work_init(struct drm_vblank_work *work, struct drm_crtc =
-*crtc,
-> +			  void (*func)(struct drm_vblank_work *work, u64 count));
-> +bool drm_vblank_work_cancel(struct drm_vblank_work *work);
-> +bool drm_vblank_work_cancel_sync(struct drm_vblank_work *work);
-> +void drm_vblank_work_flush(struct drm_vblank_work *work);
-> +
-> +static inline bool drm_vblank_work_pending(struct drm_vblank_work *work)
-> +{
-> +	return work->state !=3D DRM_VBL_WORK_IDLE;
-> +}
-> +
->  int drm_vblank_init(struct drm_device *dev, unsigned int num_crtcs);
->  bool drm_dev_has_vblank(const struct drm_device *dev);
->  u64 drm_crtc_vblank_count(struct drm_crtc *crtc);
-> -- =
-
-> 2.24.1
-> =
-
-
--- =
-
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
+Thanks,
+Jason
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
