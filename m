@@ -2,39 +2,65 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id BC383191827
-	for <lists+nouveau@lfdr.de>; Tue, 24 Mar 2020 18:51:04 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 37C36191B02
+	for <lists+nouveau@lfdr.de>; Tue, 24 Mar 2020 21:30:13 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 22A036E506;
-	Tue, 24 Mar 2020 17:50:58 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 397A76E130;
+	Tue, 24 Mar 2020 20:30:11 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by gabe.freedesktop.org (Postfix) with ESMTPS id DEA746E4FF;
- Tue, 24 Mar 2020 17:50:56 +0000 (UTC)
-Received: from localhost (mobile-166-175-186-165.mycingular.net
- [166.175.186.165])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 5B93C206F6;
- Tue, 24 Mar 2020 17:50:56 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1585072256;
- bh=CCEABUBAN9MRCpgZksVbrjdDahiV/d+RR5NEsl42kLY=;
- h=Date:From:To:Cc:Subject:In-Reply-To:From;
- b=oTKbBiukjqGnd1ubSkTzU8ZLakbO+PNdBHpsd8jDmeekp1cwfiFnpXrA2nBak0QkQ
- 9mCR81onE5mAvc0ko9+NVjWOYqRzaqDEoNZa9+n+ap7j4FuFUn2oQ2X8zJ2+5Dxm4T
- vFbo7RkPWVrOqpmSMGot0Yf4DD1FBSBxWL6lhhsE=
-Date: Tue, 24 Mar 2020 12:50:54 -0500
-From: Bjorn Helgaas <helgaas@kernel.org>
-To: Karol Herbst <kherbst@redhat.com>
-Message-ID: <20200324175054.GA23029@google.com>
+Received: from us-smtp-delivery-74.mimecast.com
+ (us-smtp-delivery-74.mimecast.com [216.205.24.74])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D444F6E08C
+ for <nouveau@lists.freedesktop.org>; Tue, 24 Mar 2020 20:30:09 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1585081808;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=R3FRaJvnoJNWr7h0WLXOGgUNbqyEESZJdl+OTw2Vbe8=;
+ b=gZVfcUhpTmXTCxjYxkvKrLQj04Gm8UnYntEf8EiJAVtX4ve5qx02c8+oC5xwYQhKn9CUO3
+ eVeIuJdvfrVIragAnydixvD5U9J9zt9vtu93WgeVEUFayJN2CKcpa4Cof29MAbfTUtDK8f
+ YCumEDedEC36iAWa1J3RJhM5aWTvunU=
+Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
+ [209.85.221.69]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-171-5IhBupsHP_C_-9bVQnf0QQ-1; Tue, 24 Mar 2020 16:30:03 -0400
+X-MC-Unique: 5IhBupsHP_C_-9bVQnf0QQ-1
+Received: by mail-wr1-f69.google.com with SMTP id l17so5485wro.3
+ for <nouveau@lists.freedesktop.org>; Tue, 24 Mar 2020 13:30:03 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=oqlWAFHesN/RHI+MMNc8I7K/onEOpyLu9QGbne4wi5Y=;
+ b=deEjd1ICDfiC05noJ/PyVt4+Cuq/WnXNOPkO6RtXb+RqwTwWIA5Ja+esQyhk8zE+l6
+ r2gD/YIbV85ScDtJFKA0UGZ3NOktPNW4+pa2uAp1zPsoLs7KHTp6LPCWd4FW6vpurUCd
+ F/+YFdPbsh2PinPap0xXqqmrNeW3uiNpKcCotiCX+uoDJp6HXb1GdexfIYMmd9Yw6BoS
+ xlwtiWZ7QDNeFirst5+g0m2fAdqVxcBphLPRZLM9PR52LY3cJQx9Lslo6xZFwbGqxT4f
+ wOc4wllfmZ47JVtpw7axDocek+apHdZR2192J3oGFoB2m4Nbp13M6cyCk6n6ZjGF3PhJ
+ Is7Q==
+X-Gm-Message-State: ANhLgQ1ndXzY/dAbVi/nOoO318BD6wFYYDXksfi32jFQdLNrICOMwLBu
+ DZZoonErEH1Ry9hVIncW8AcM0oRpWImzgrNNqqoCzvwjxEUEvFlq3ezSM0HcYjW4LKKP+qgla1K
+ Xny5VgCKHzsIeQZyst9zbn9g6zA==
+X-Received: by 2002:a1c:6885:: with SMTP id d127mr7753881wmc.33.1585081800471; 
+ Tue, 24 Mar 2020 13:30:00 -0700 (PDT)
+X-Google-Smtp-Source: ADFU+vvIY5CA/8Fe50Ih+Aod7V43o1+7JOiD1nO06uMbkDwbr1OCRti+bQ3gJPU5pQHHiCISFfOB/g==
+X-Received: by 2002:a1c:6885:: with SMTP id d127mr7753841wmc.33.1585081800140; 
+ Tue, 24 Mar 2020 13:30:00 -0700 (PDT)
+Received: from kherbst.pingu.com ([2a02:8308:b0be:6900:482c:9537:40:83ba])
+ by smtp.gmail.com with ESMTPSA id k204sm5982051wma.17.2020.03.24.13.29.58
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 24 Mar 2020 13:29:59 -0700 (PDT)
+From: Karol Herbst <kherbst@redhat.com>
+To: linux-kernel@vger.kernel.org
+Date: Tue, 24 Mar 2020 21:29:23 +0100
+Message-Id: <20200324202923.64625-1-kherbst@redhat.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <CACO55ttvb5uC37ORiLuVBidhfSn-+WSReJ+aCfWR3k-fLtPBnA@mail.gmail.com>
-User-Agent: Mutt/1.12.2 (2019-09-21)
-Subject: Re: [Nouveau] [PATCH v7] pci: prevent putting nvidia GPUs into
- lower device states on certain intel bridges
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Subject: [Nouveau] [PATCH v8] pci: prevent putting nvidia GPUs into lower
+ device states on certain intel bridges
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -46,66 +72,115 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Linux PM <linux-pm@vger.kernel.org>, Linux PCI <linux-pci@vger.kernel.org>,
+Cc: linux-pm@vger.kernel.org, linux-pci@vger.kernel.org,
  Mika Westerberg <mika.westerberg@intel.com>,
- "Rafael J . Wysocki" <rjw@rjwysocki.net>, LKML <linux-kernel@vger.kernel.org>,
- dri-devel <dri-devel@lists.freedesktop.org>,
- nouveau <nouveau@lists.freedesktop.org>,
- Mika Westerberg <mika.westerberg@linux.intel.com>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+ "Rafael J . Wysocki" <rjw@rjwysocki.net>, dri-devel@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org, Bjorn Helgaas <bhelgaas@google.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, Mar 24, 2020 at 06:31:08PM +0100, Karol Herbst wrote:
-> On Sat, Mar 21, 2020 at 2:02 AM Karol Herbst <kherbst@redhat.com> wrote:
-> >
-> > On Fri, Mar 20, 2020 at 11:19 PM Bjorn Helgaas <helgaas@kernel.org> wrote:
-> > >
-> > > On Tue, Mar 10, 2020 at 08:26:27PM +0100, Karol Herbst wrote:
-> > > > Fixes the infamous 'runtime PM' bug many users are facing on Laptops with
-> > > > Nvidia Pascal GPUs by skipping said PCI power state changes on the GPU.
-> > > >
-> > > > Depending on the used kernel there might be messages like those in demsg:
-> > > >
-> > > > "nouveau 0000:01:00.0: Refused to change power state, currently in D3"
-> > > > "nouveau 0000:01:00.0: can't change power state from D3cold to D0 (config
-> > > > space inaccessible)"
-> > > > followed by backtraces of kernel crashes or timeouts within nouveau.
-> > > >
-> > > > It's still unkown why this issue exists, but this is a reliable workaround
-> > > > and solves a very annoying issue for user having to choose between a
-> > > > crashing kernel or higher power consumption of their Laptops.
-> > >
-> > > Thanks for the bugzilla link.  The bugzilla mentions lots of mailing
-> > > list discussion.  Can you include links to some of that?
-> > >
-> > > IIUC this basically just turns off PCI power management for the GPU.
-> > > Can you do that with something like the following?  I don't know
-> > > anything about DRM, so I don't know where you could save the pm_cap,
-> > > but I'm sure the driver could keep it somewhere.
-> > >
-> >
-> > Sure this would work? From a quick look over the pci code, it looks
-> > like a of code would be skipped we really need, like the platform code
-> > to turn off the GPU via ACPI. But I could also remember incorrectly on
-> > how all of that worked again. I can of course try and see what the
-> > effect of this patch would be. And would the parent bus even go into
-> > D3hot if it knows one of its children is still at D0? Because that's
-> > what the result of that would be as well, no? And I know that if the
-> > bus stays in D0, that it has a negative impact on power consumption.
-> >
-> > Anyway, I will try that out, I am just not seeing how that would help.
-> 
-> so it seems like that has worked unless I screwed up locally. Will do
-> some proper testing and then I think we won't need to go through the
-> pci tree anymore as no changes are required there with that.
-
-Hehe, looks like our responses crossed in the mail :)  I hope further
-testing is still positive; let me know if not.
-
-Bjorn
-_______________________________________________
-Nouveau mailing list
-Nouveau@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/nouveau
+Rml4ZXMgdGhlIGluZmFtb3VzICdydW50aW1lIFBNJyBidWcgbWFueSB1c2VycyBhcmUgZmFjaW5n
+IG9uIExhcHRvcHMgd2l0aApOdmlkaWEgUGFzY2FsIEdQVXMgYnkgc2tpcHBpbmcgc2FpZCBQQ0kg
+cG93ZXIgc3RhdGUgY2hhbmdlcyBvbiB0aGUgR1BVLgoKRGVwZW5kaW5nIG9uIHRoZSB1c2VkIGtl
+cm5lbCB0aGVyZSBtaWdodCBiZSBtZXNzYWdlcyBsaWtlIHRob3NlIGluIGRlbXNnOgoKIm5vdXZl
+YXUgMDAwMDowMTowMC4wOiBSZWZ1c2VkIHRvIGNoYW5nZSBwb3dlciBzdGF0ZSwgY3VycmVudGx5
+IGluIEQzIgoibm91dmVhdSAwMDAwOjAxOjAwLjA6IGNhbid0IGNoYW5nZSBwb3dlciBzdGF0ZSBm
+cm9tIEQzY29sZCB0byBEMCAoY29uZmlnCnNwYWNlIGluYWNjZXNzaWJsZSkiCmZvbGxvd2VkIGJ5
+IGJhY2t0cmFjZXMgb2Yga2VybmVsIGNyYXNoZXMgb3IgdGltZW91dHMgd2l0aGluIG5vdXZlYXUu
+CgpJdCdzIHN0aWxsIHVua293biB3aHkgdGhpcyBpc3N1ZSBleGlzdHMsIGJ1dCB0aGlzIGlzIGEg
+cmVsaWFibGUgd29ya2Fyb3VuZAphbmQgc29sdmVzIGEgdmVyeSBhbm5veWluZyBpc3N1ZSBmb3Ig
+dXNlciBoYXZpbmcgdG8gY2hvb3NlIGJldHdlZW4gYQpjcmFzaGluZyBrZXJuZWwgb3IgaGlnaGVy
+IHBvd2VyIGNvbnN1bXB0aW9uIG9mIHRoZWlyIExhcHRvcHMuCgpTaWduZWQtb2ZmLWJ5OiBLYXJv
+bCBIZXJic3QgPGtoZXJic3RAcmVkaGF0LmNvbT4KQ2M6IEJqb3JuIEhlbGdhYXMgPGJoZWxnYWFz
+QGdvb2dsZS5jb20+CkNjOiBMeXVkZSBQYXVsIDxseXVkZUByZWRoYXQuY29tPgpDYzogUmFmYWVs
+IEouIFd5c29ja2kgPHJqd0Byand5c29ja2kubmV0PgpDYzogTWlrYSBXZXN0ZXJiZXJnIDxtaWth
+Lndlc3RlcmJlcmdAaW50ZWwuY29tPgpDYzogbGludXgtcGNpQHZnZXIua2VybmVsLm9yZwpDYzog
+bGludXgtcG1Admdlci5rZXJuZWwub3JnCkNjOiBkcmktZGV2ZWxAbGlzdHMuZnJlZWRlc2t0b3Au
+b3JnCkNjOiBub3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpCdWd6aWxsYTogaHR0cHM6Ly9i
+dWd6aWxsYS5rZXJuZWwub3JnL3Nob3dfYnVnLmNnaT9pZD0yMDU2MjMKLS0tCnYyOiBjb252ZXJ0
+IHRvIHBjaV9kZXYgcXVpcmsKICAgIHB1dCBhIHByb3BlciB0ZWNobmljYWwgZXhwbGFuYXRpb24g
+b2YgdGhlIGlzc3VlIGFzIGEgaW4tY29kZSBjb21tZW50CnYzOiBkaXNhYmxlIGl0IG9ubHkgZm9y
+IGNlcnRhaW4gY29tYmluYXRpb25zIG9mIGludGVsIGFuZCBudmlkaWEgaGFyZHdhcmUKdjQ6IHNp
+bXBsaWZ5IHF1aXJrIGJ5IHNldHRpbmcgZmxhZyBvbiB0aGUgR1BVIGl0c2VsZgp2NTogcmVzdHJ1
+Y3R1cmUgcXVpcmsgdG8gbWFrZSBpdCBlYXNpZXIgdG8gYWRkIG5ldyBJRHMKICAgIGZpeCB3aGl0
+ZXNwYWNlIGlzc3VlcwogICAgZml4IHBvdGVudGlhbCBOVUxMIHBvaW50ZXIgYWNjZXNzCiAgICB1
+cGRhdGUgdGhlIHF1aXJrIGRvY3VtZW50YXRpb24KdjY6IG1vdmUgcXVpcmsgaW50byBub3V2ZWF1
+CnY3OiBmaXggdHlwb3MgYW5kIGNvbW1pdCBtZXNzYWdlCnY4OiByZXNldCB0aGUgcG1fY2FwIGZp
+ZWxkIHRvIGdldCByaWQgb2YgY2hhbmdlcyBpbiBwY2kgY29yZSAodGhhbmtzIHRvCiAgICBCam9y
+biBmb3IgdGhpcyBpZGVhKQoKIGRyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfZHJtLmMg
+fCA2MyArKysrKysrKysrKysrKysrKysrKysrKysrKysKIGRyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1
+L25vdXZlYXVfZHJ2LmggfCAgMiArCiAyIGZpbGVzIGNoYW5nZWQsIDY1IGluc2VydGlvbnMoKykK
+CmRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2RybS5jIGIvZHJp
+dmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9kcm0uYwppbmRleCAyY2Q4Mzg0OTYwMGYuLmIx
+YmVlZDQwZTc0NiAxMDA2NDQKLS0tIGEvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9k
+cm0uYworKysgYi9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2RybS5jCkBAIC02MTgs
+NiArNjE4LDY0IEBAIG5vdXZlYXVfZHJtX2RldmljZV9maW5pKHN0cnVjdCBkcm1fZGV2aWNlICpk
+ZXYpCiAJa2ZyZWUoZHJtKTsKIH0KIAorLyoKKyAqIE9uIHNvbWUgSW50ZWwgUENJZSBicmlkZ2Ug
+Y29udHJvbGxlcnMgZG9pbmcgYQorICogRDAgLT4gRDNob3QgLT4gRDNjb2xkIC0+IEQwIHNlcXVl
+bmNlIGNhdXNlcyBOdmlkaWEgR1BVcyB0byBub3QgcmVhcHBlYXIuCisgKiBTa2lwcGluZyB0aGUg
+aW50ZXJtZWRpYXRlIEQzaG90IHN0ZXAgc2VlbXMgdG8gbWFrZSBpdCB3b3JrIGFnYWluLiBUaGlz
+IGlzCisgKiBwcm9iYWJseSBjYXVzZWQgYnkgbm90IG1lZXRpbmcgdGhlIGV4cGVjdGF0aW9uIHRo
+ZSBpbnZvbHZlZCBBTUwgY29kZSBoYXMKKyAqIHdoZW4gdGhlIEdQVSBpcyBwdXQgaW50byBEM2hv
+dCBzdGF0ZSBiZWZvcmUgaW52b2tpbmcgaXQuCisgKgorICogVGhpcyBsZWFkcyB0byB2YXJpb3Vz
+IG1hbmlmZXN0YXRpb25zIG9mIHRoaXMgaXNzdWU6CisgKiAgLSBBTUwgY29kZSBleGVjdXRpb24g
+dG8gcG93ZXIgb24gdGhlIEdQVSBoaXRzIGFuIGluZmluaXRlIGxvb3AgKGFzIHRoZQorICogICAg
+Y29kZSB3YWl0cyBvbiBkZXZpY2UgbWVtb3J5IHRvIGNoYW5nZSkuCisgKiAgLSBrZXJuZWwgY3Jh
+c2hlcywgYXMgYWxsIFBDSSByZWFkcyByZXR1cm4gLTEsIHdoaWNoIG1vc3QgY29kZSBpc24ndCBh
+YmxlCisgKiAgICB0byBoYW5kbGUgd2VsbCBlbm91Z2guCisgKgorICogSW4gYWxsIGNhc2VzIGRt
+ZXNnIHdpbGwgY29udGFpbiBhdCBsZWFzdCBvbmUgbGluZSBsaWtlIHRoaXM6CisgKiAnbm91dmVh
+dSAwMDAwOjAxOjAwLjA6IFJlZnVzZWQgdG8gY2hhbmdlIHBvd2VyIHN0YXRlLCBjdXJyZW50bHkg
+aW4gRDMnCisgKiBmb2xsb3dlZCBieSBhIGxvdCBvZiBub3V2ZWF1IHRpbWVvdXRzLgorICoKKyAq
+IEluIHRoZSBcX1NCLlBDSTAuUEVHMC5QRzAwLl9PRkYgY29kZSBkZWVwZXIgZG93biB3cml0ZXMg
+Yml0IDB4ODAgdG8gdGhlIG5vdAorICogZG9jdW1lbnRlZCBQQ0kgY29uZmlnIHNwYWNlIHJlZ2lz
+dGVyIDB4MjQ4IG9mIHRoZSBJbnRlbCBQQ0llIGJyaWRnZQorICogY29udHJvbGxlciAoMHgxOTAx
+KSBpbiBvcmRlciB0byBjaGFuZ2UgdGhlIHN0YXRlIG9mIHRoZSBQQ0llIGxpbmsgYmV0d2Vlbgor
+ICogdGhlIFBDSWUgcG9ydCBhbmQgdGhlIEdQVS4gVGhlcmUgYXJlIGFsdGVybmF0aXZlIGNvZGUg
+cGF0aHMgdXNpbmcgb3RoZXIKKyAqIHJlZ2lzdGVycywgd2hpY2ggc2VlbSB0byB3b3JrIGZpbmUg
+KGV4ZWN1dGVkIHByZSBXaW5kb3dzIDgpOgorICogIC0gMHhiYyBiaXQgMHgyMCAocHVibGljbHkg
+YXZhaWxhYmxlIGRvY3VtZW50YXRpb24gY2xhaW1zICdyZXNlcnZlZCcpCisgKiAgLSAweGIwIGJp
+dCAweDEwIChsaW5rIGRpc2FibGUpCisgKiBDaGFuZ2luZyB0aGUgY29uZGl0aW9ucyBpbnNpZGUg
+dGhlIGZpcm13YXJlIGJ5IHBva2luZyBpbnRvIHRoZSByZWxldmFudAorICogYWRkcmVzc2VzIGRv
+ZXMgcmVzb2x2ZSB0aGUgaXNzdWUsIGJ1dCBpdCBzZWVtZWQgdG8gYmUgQUNQSSBwcml2YXRlIG1l
+bW9yeQorICogYW5kIG5vdCBhbnkgZGV2aWNlIGFjY2Vzc2libGUgbWVtb3J5IGF0IGFsbCwgc28g
+dGhlcmUgaXMgbm8gcG9ydGFibGUgd2F5IG9mCisgKiBjaGFuZ2luZyB0aGUgY29uZGl0aW9ucy4K
+KyAqIE9uIGEgWFBTIDk1NjAgdGhhdCBtZWFucyBiaXRzIFswLDNdIG9uIFxDUEVYIG5lZWQgdG8g
+YmUgY2xlYXJlZC4KKyAqCisgKiBUaGUgb25seSBzeXN0ZW1zIHdoZXJlIHRoaXMgYmVoYXZpb3Ig
+Y2FuIGJlIHNlZW4gYXJlIGh5YnJpZCBncmFwaGljcyBsYXB0b3BzCisgKiB3aXRoIGEgc2Vjb25k
+YXJ5IE52aWRpYSBNYXh3ZWxsLCBQYXNjYWwgb3IgVHVyaW5nIEdQVS4gSXQncyB1bmNsZWFyIHdo
+ZXRoZXIKKyAqIHRoaXMgaXNzdWUgb25seSBvY2N1cnMgaW4gY29tYmluYXRpb24gd2l0aCBsaXN0
+ZWQgSW50ZWwgUENJZSBicmlkZ2UKKyAqIGNvbnRyb2xsZXJzIGFuZCB0aGUgbWVudGlvbmVkIEdQ
+VXMgb3Igb3RoZXIgZGV2aWNlcyBhcyB3ZWxsLgorICoKKyAqIGRvY3VtZW50YXRpb24gb24gdGhl
+IFBDSWUgYnJpZGdlIGNvbnRyb2xsZXIgY2FuIGJlIGZvdW5kIGluIHRoZQorICogIjd0aCBHZW5l
+cmF0aW9uIEludGVswq4gUHJvY2Vzc29yIEZhbWlsaWVzIGZvciBIIFBsYXRmb3JtcyBEYXRhc2hl
+ZXQgVm9sdW1lIDIiCisgKiBTZWN0aW9uICIxMiBQQ0kgRXhwcmVzcyogQ29udHJvbGxlciAoeDE2
+KSBSZWdpc3RlcnMiCisgKi8KKworc3RhdGljIHZvaWQgcXVpcmtfYnJva2VuX252X3J1bnBtKHN0
+cnVjdCBwY2lfZGV2ICpwZGV2KQoreworCXN0cnVjdCBkcm1fZGV2aWNlICpkZXYgPSBwY2lfZ2V0
+X2RydmRhdGEocGRldik7CisJc3RydWN0IG5vdXZlYXVfZHJtICpkcm0gPSBub3V2ZWF1X2RybShk
+ZXYpOworCXN0cnVjdCBwY2lfZGV2ICpicmlkZ2UgPSBwY2lfdXBzdHJlYW1fYnJpZGdlKHBkZXYp
+OworCisJaWYgKCFicmlkZ2UgfHwgYnJpZGdlLT52ZW5kb3IgIT0gUENJX1ZFTkRPUl9JRF9JTlRF
+TCkKKwkJcmV0dXJuOworCisJc3dpdGNoIChicmlkZ2UtPmRldmljZSkgeworCWNhc2UgMHgxOTAx
+OgorCQlkcm0tPm9sZF9wbV9jYXAgPSBwZGV2LT5wbV9jYXA7CisJCXBkZXYtPnBtX2NhcCA9IDA7
+CisJCU5WX0lORk8oZHJtLCAiRGlzYWJsaW5nIFBDSSBwb3dlciBtYW5hZ2VtZW50IHRvIGF2b2lk
+IGJ1Z1xuIik7CisJCWJyZWFrOworCX0KK30KKwogc3RhdGljIGludCBub3V2ZWF1X2RybV9wcm9i
+ZShzdHJ1Y3QgcGNpX2RldiAqcGRldiwKIAkJCSAgICAgY29uc3Qgc3RydWN0IHBjaV9kZXZpY2Vf
+aWQgKnBlbnQpCiB7CkBAIC02OTksNiArNzU3LDcgQEAgc3RhdGljIGludCBub3V2ZWF1X2RybV9w
+cm9iZShzdHJ1Y3QgcGNpX2RldiAqcGRldiwKIAlpZiAocmV0KQogCQlnb3RvIGZhaWxfZHJtX2Rl
+dl9pbml0OwogCisJcXVpcmtfYnJva2VuX252X3J1bnBtKHBkZXYpOwogCXJldHVybiAwOwogCiBm
+YWlsX2RybV9kZXZfaW5pdDoKQEAgLTczNiw3ICs3OTUsMTEgQEAgc3RhdGljIHZvaWQKIG5vdXZl
+YXVfZHJtX3JlbW92ZShzdHJ1Y3QgcGNpX2RldiAqcGRldikKIHsKIAlzdHJ1Y3QgZHJtX2Rldmlj
+ZSAqZGV2ID0gcGNpX2dldF9kcnZkYXRhKHBkZXYpOworCXN0cnVjdCBub3V2ZWF1X2RybSAqZHJt
+ID0gbm91dmVhdV9kcm0oZGV2KTsKIAorCS8qIHJldmVydCBvdXIgd29ya2Fyb3VuZCAqLworCWlm
+IChkcm0tPm9sZF9wbV9jYXApCisJCXBkZXYtPnBtX2NhcCA9IGRybS0+b2xkX3BtX2NhcDsKIAlu
+b3V2ZWF1X2RybV9kZXZpY2VfcmVtb3ZlKGRldik7CiB9CiAKZGlmZiAtLWdpdCBhL2RyaXZlcnMv
+Z3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfZHJ2LmggYi9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9u
+b3V2ZWF1X2Rydi5oCmluZGV4IDcwZjM0Y2FjYzU1Mi4uODEwNGUzODA2NDk5IDEwMDY0NAotLS0g
+YS9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2Rydi5oCisrKyBiL2RyaXZlcnMvZ3B1
+L2RybS9ub3V2ZWF1L25vdXZlYXVfZHJ2LmgKQEAgLTEzOCw2ICsxMzgsOCBAQCBzdHJ1Y3Qgbm91
+dmVhdV9kcm0gewogCiAJc3RydWN0IGxpc3RfaGVhZCBjbGllbnRzOwogCisJdTggb2xkX3BtX2Nh
+cDsKKwogCXN0cnVjdCB7CiAJCXN0cnVjdCBhZ3BfYnJpZGdlX2RhdGEgKmJyaWRnZTsKIAkJdTMy
+IGJhc2U7Ci0tIAoyLjI1LjEKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fCk5vdXZlYXUgbWFpbGluZyBsaXN0Ck5vdXZlYXVAbGlzdHMuZnJlZWRlc2t0b3Au
+b3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vbm91dmVh
+dQo=
