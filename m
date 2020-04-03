@@ -1,36 +1,45 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id E754119DDF6
-	for <lists+nouveau@lfdr.de>; Fri,  3 Apr 2020 20:31:14 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id BE67019DE88
+	for <lists+nouveau@lfdr.de>; Fri,  3 Apr 2020 21:24:33 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C672F6EC62;
-	Fri,  3 Apr 2020 18:31:10 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9AB9B6E972;
+	Fri,  3 Apr 2020 19:24:30 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ua1-f41.google.com (mail-ua1-f41.google.com
- [209.85.222.41])
- by gabe.freedesktop.org (Postfix) with ESMTPS id AFD006EC62
- for <nouveau@lists.freedesktop.org>; Fri,  3 Apr 2020 18:31:09 +0000 (UTC)
-Received: by mail-ua1-f41.google.com with SMTP id y17so3075762uap.13
- for <nouveau@lists.freedesktop.org>; Fri, 03 Apr 2020 11:31:09 -0700 (PDT)
+Received: from mail-io1-xd30.google.com (mail-io1-xd30.google.com
+ [IPv6:2607:f8b0:4864:20::d30])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8E1866E972
+ for <nouveau@lists.freedesktop.org>; Fri,  3 Apr 2020 19:24:29 +0000 (UTC)
+Received: by mail-io1-xd30.google.com with SMTP id b12so8742241ion.8
+ for <nouveau@lists.freedesktop.org>; Fri, 03 Apr 2020 12:24:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=jnRbA/qfAuZrNiKW7PlDbNmNmhxrDXj54QKlbM9Oqfw=;
+ b=d7VkOY2deeUHkwdplgi5lQCHavHOBxfkJAwy4crlz4R1CcXyyHPCn6Yqr+IkjBUrbJ
+ TO2upVzWHTNOm0jIIjWUV8GLcDj/k6uw7MVTA8nA9zFiyK+2bWvTddpqnFWVqHfuVGoJ
+ 5mPfwbbDbR9fDOF6xGah/iC6MTzdUIHr2GMQmotSLj2zqjXvQnk5E6cYtMI8LZmBOxGD
+ p/NzW+M02I1ozJ/fxOEqtsJ3SKTk9rheEZgzLUp0HNo5+/wG8qKtfqA4h8EOGGJnz44d
+ nItwxxtRQ7rmLYJtlbKR/nGSgZoL6/5nhR/7hSEOAC5I4rqqAAxJbuRNeK065RrkFVpS
+ Zp1A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=t/+tAvhZPkT3NQBErD+YA01dd+S7RaKEZEbNC2XphuM=;
- b=mjsasdgC3wcdepIY7IQgPs2prihvAh8X/ejnuCOcnp89VOT3/4NG2NmX9/9/dOx0Xx
- rnKOcbJoDJuXa1/ZzfRfkOqiacbDKIirAxhLLN/U4qtenP4ZZecPGkSXChiF+2SnW4Zf
- qCLBZIiUTVoMY/k390P1S6s5gZm77X/JLzeQcGHBvjFfhzW/zo5uWY6s8dD3eIZDi5rO
- Jo/QmB68RTXonDb20nz3bPCmfvLfEi0QbVbL4yHdBp+C8kKYhy8iYfqKHmf7xvsXWgQt
- FRe3fnHz2rGvkzK4d7+T7jmb5K5bwYZ33H2QPNOu/6aq1nJFwSHwjNwAXJMe/HGx+db3
- YM0Q==
-X-Gm-Message-State: AGi0PuYiv5n4F0FzYy4mJHev/Bo+wCBzSp4O5WXmG937CIIEaZ8cT8ve
- h90O3WiwCE5ssoGTCuK4eNrum5Wqd+jXBxkMWBo=
-X-Google-Smtp-Source: APiQypJiTag/VKFeJYh64r/Qfk3aoztunfqXQSq/NTW4O6p1gtfjHh67vLpjBVv0Hu6nZXFmXAYfl4xbMWaIlRTVKU0=
-X-Received: by 2002:ab0:768b:: with SMTP id v11mr7352210uaq.109.1585938668214; 
- Fri, 03 Apr 2020 11:31:08 -0700 (PDT)
+ :message-id:subject:to:cc;
+ bh=jnRbA/qfAuZrNiKW7PlDbNmNmhxrDXj54QKlbM9Oqfw=;
+ b=XjPT6yYGIBt24SntPWMdvXItACyV6CXP1rHP2cvPktpP3l51ZAoVb4kX5KmVlMe5NA
+ 2ZirUDilcf3xj+bsPim/F8iVjmXhf5rufcJ09Un7pH6AIsYh/ViC+K103jtNS2DEX5ne
+ PdeAV8qThqJny5kH/goPp5PRyc60u5bHo6Xdv2VmQNJUy4VbyZ2ofbRVdgmn6IpFoodF
+ jeuNY5VLXevipo1f0B+AhCfT+wdLUxrfTj6mS9PZLn5g8+on8JJCid8lL7pw7aFrc1my
+ Wx+6La3vxL8HeK2u+S0TbBhUUKqd8k4hX5OING4UVWKJN2m7n8NFhESkJ62MjamS9uqt
+ dQ8w==
+X-Gm-Message-State: AGi0PuaanBrrW2KVCOQ5V2Asod/uIGetv+4l3+7OihXycmSKb5ENfl0L
+ 6bfLJtDSwg1rtIY/625NGOvxgLySvdqU9KUn2qg=
+X-Google-Smtp-Source: APiQypIsEcnt7WhgbLb1UnP0hJFxH2K4F1u/DZj8zVJQrtDFzsuGNdl3JJoa//pjVgV64FrBImP7WH6EFEs1RlthxkM=
+X-Received: by 2002:a02:b783:: with SMTP id f3mr9873509jam.4.1585941868678;
+ Fri, 03 Apr 2020 12:24:28 -0700 (PDT)
 MIME-Version: 1.0
 References: <CAOkhzLWMB8rr0x4KKfqruCcTLVq4dH6nZ365auMqA1arZ57J7g@mail.gmail.com>
  <CAOkhzLVvmoB0TgS4bioP4PnxwmnT_+h0LbCya2=KkcHu1UT_Zw@mail.gmail.com>
@@ -38,11 +47,12 @@ References: <CAOkhzLWMB8rr0x4KKfqruCcTLVq4dH6nZ365auMqA1arZ57J7g@mail.gmail.com>
  <CAOkhzLU+buL3J3XUbzC6JUAfbnMR-27qwS3Vm7ofrAPPCipXuw@mail.gmail.com>
  <CAKb7UvhvBG49P7t6XD==26q70YywmhUHvP=hW=wj8mT6V0gpHA@mail.gmail.com>
  <CAOkhzLW42a66wNL7Pz8+d+yO_oyZZJBEps=8WPHaXXFjb54dTQ@mail.gmail.com>
-In-Reply-To: <CAOkhzLW42a66wNL7Pz8+d+yO_oyZZJBEps=8WPHaXXFjb54dTQ@mail.gmail.com>
-From: Ilia Mirkin <imirkin@alum.mit.edu>
-Date: Fri, 3 Apr 2020 14:30:56 -0400
-Message-ID: <CAKb7Uvh=44_S_EAfma+JX9j_igaE3CSWws_TUqLWwJ50zcmA9Q@mail.gmail.com>
-To: Zeno Davatz <zdavatz@gmail.com>
+ <CAKb7Uvh=44_S_EAfma+JX9j_igaE3CSWws_TUqLWwJ50zcmA9Q@mail.gmail.com>
+In-Reply-To: <CAKb7Uvh=44_S_EAfma+JX9j_igaE3CSWws_TUqLWwJ50zcmA9Q@mail.gmail.com>
+From: Zeno Davatz <zdavatz@gmail.com>
+Date: Fri, 3 Apr 2020 21:24:17 +0200
+Message-ID: <CAOkhzLVGsOyKsf=Lm69UMGutWv-yZVFqZ=Yi61HDHCUCAwchoQ@mail.gmail.com>
+To: Ilia Mirkin <imirkin@alum.mit.edu>
 Subject: Re: [Nouveau] acr: failed to load firmware with Kernel 5.6. Kernel
  5.5 works just fine.
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -58,44 +68,32 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
 Cc: nouveau <nouveau@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>,
  "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-T24gRnJpLCBBcHIgMywgMjAyMCBhdCAxOjU5IFBNIFplbm8gRGF2YXR6IDx6ZGF2YXR6QGdtYWls
-LmNvbT4gd3JvdGU6Cj4KPiBPbiBGcmksIEFwciAzLCAyMDIwIGF0IDc6MjMgUE0gSWxpYSBNaXJr
-aW4gPGltaXJraW5AYWx1bS5taXQuZWR1PiB3cm90ZToKPiA+Cj4gPiBPbiBGcmksIEFwciAzLCAy
-MDIwIGF0IDE6MjEgUE0gWmVubyBEYXZhdHogPHpkYXZhdHpAZ21haWwuY29tPiB3cm90ZToKPiA+
-ID4KPiA+ID4gT24gRnJpLCBBcHIgMywgMjAyMCBhdCA2OjU5IFBNIElsaWEgTWlya2luIDxpbWly
-a2luQGFsdW0ubWl0LmVkdT4gd3JvdGU6Cj4gPiA+ID4KPiA+ID4gPiBCZW4gLS0gcHJvYmFibHkg
-dGhlIEFDUiBjaGFuZ2VzIGluIDUuNiBkb24ndCBmYWxsIGJhY2sgbmljZWx5IGFueW1vcmUKPiA+
-ID4gPiB3aGVuIHRoZXJlJ3Mgbm8gZmlybXdhcmU/IFRoZSBsb2FkIHNob3VsZG4ndCBiZSBmYWls
-ZWQsIGp1c3QgR1IKPiA+ID4gPiBkaXNhYmxlZC4uLgo+ID4gPiA+Cj4gPiA+ID4gWmVubyAtLSBp
-ZiB5b3UgZ3JhYiBsaW51eC1maXJtd2FyZSwgaXQgc2hvdWxkIGJlIGFsbCBiZXR0ZXIuIE5vdCBz
-dXJlCj4gPiA+ID4gaWYgeW91J3JlIG1pc3NpbmcgaXQgb24gcHVycG9zZSBvciBieSBhY2NpZGVu
-dC4KPiA+ID4KPiA+ID4gVGhhbmsgeW91LCBJbGlhCj4gPiA+Cj4gPiA+IEkgd2lsbCB0cnkgdGhh
-dCBvbiBteSBHZW50b28vRnVudG9vIG1hY2hpbmUgbm93LiBTbyBmYXIgbGludXgtZmlybXdhcmUK
-PiA+ID4gd2FzIG5vdCBuZWVkZWQgd2l0aCBLZXJuZWwgNS41LCBzbyBpdCB3YXMgbm90IGluc3Rh
-bGxlZCBvbiBteSBtYWNoaW5lLgo+ID4KPiA+IEl0IHdhcyBuZWVkZWQgb24gNS41IGFzIHdlbGwu
-IEl0J3MganVzdCB0aGF0IGl0IGZlbGwgYmFjayBncmFjZWZ1bGx5Cj4gPiB3aXRob3V0IGZpcm13
-YXJlLCBhbmQgeW91IGRpZG4ndCBnZXQgYW55IGFjY2VsZXJhdGlvbiBmZWF0dXJlcy4KPgo+IERv
-IEkgbmVlZCBhbnkgb2YgdGhlc2UgZW5hYmxlZCBmb3IgbGludXgtZmlybXdhcmUgdG8gbG9hZCBw
-cm9wZXJseSBpbgo+IEtlcm5lbCA1LjY/Cj4KPiAgLSotIEZpcm13YXJlIGxvYWRpbmcgZmFjaWxp
-dHkKPiAgIOKUgiDilIIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICgpICAg
-IEJ1aWxkIG5hbWVkIGZpcm13YXJlCj4gYmxvYnMgaW50byB0aGUga2VybmVsIGJpbmFyeQo+ICAg
-4pSCIOKUgiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgWyBdICAgRW5hYmxl
-IHRoZSBmaXJtd2FyZQo+IHN5c2ZzIGZhbGxiYWNrIG1lY2hhbmlzbQo+ICAg4pSCIOKUgiAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgWyBdICAgRW5hYmxlIGNvbXByZXNzZWQK
-PiBmaXJtd2FyZSBzdXBwb3J0CgpEZXBlbmRzIG9uIGRpc3RybyBzcGVjaWZpY3MuIEFsc28gdGhl
-IGZpcm13YXJlIGhhcyB0byBiZSBhdmFpbGFibGUgYXQKdGhlIHRpbWUgdGhhdCBub3V2ZWF1IGxv
-YWRzLiBUaGUgY29yb2xsYXJ5IHRvIHRoaXMgaXM6CgpJZiBpdCdzIGJ1aWx0IGludG8gdGhlIGtl
-cm5lbCwgdGhlbiB0aGUgZmlybXdhcmUgbXVzdCBhbHNvIGJlIGluY2x1ZGVkCmluIHRoZSBrZXJu
-ZWwgKHNpbmNlIHRoaXMgaGFwcGVucyBiZWZvcmUgYW55IEZTIHN0dWZmKQpJZiBpdCdzIGxvYWRl
-ZCBhcyBhIG1vZHVsZSBmcm9tIGluaXRyZCwgdGhlbiBpbml0cmQgbXVzdCBjb250YWluIHRoZSBm
-aXJtd2FyZQoKSWYgeW91IG5lZWQgaGVscCBpbmNsdWRpbmcgZmlybXdhcmUgaW4gdGhlIHJpZ2h0
-IHBsYWNlLCBhIGRpc3RybwpzdXBwb3J0IGNoYW5uZWwgaXMgcHJvYmFibHkgeW91ciBiZXN0IHNo
-b3QuCgpDaGVlcnMsCgogIC1pbGlhCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fCk5vdXZlYXUgbWFpbGluZyBsaXN0Ck5vdXZlYXVAbGlzdHMuZnJlZWRlc2t0
-b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vbm91
-dmVhdQo=
+On Fri, Apr 3, 2020 at 8:31 PM Ilia Mirkin <imirkin@alum.mit.edu> wrote:
+
+> Depends on distro specifics. Also the firmware has to be available at
+> the time that nouveau loads. The corollary to this is:
+>
+> If it's built into the kernel, then the firmware must also be included
+> in the kernel (since this happens before any FS stuff)
+> If it's loaded as a module from initrd, then initrd must contain the firmware
+>
+> If you need help including firmware in the right place, a distro
+> support channel is probably your best shot.
+
+Ok, thank you. So far no luck on the end.
+
+https://wiki.gentoo.org/wiki/Linux_firmware
+
+Please let me know if the fallback version comes back to life.
+
+best
+Zeno
+_______________________________________________
+Nouveau mailing list
+Nouveau@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/nouveau
