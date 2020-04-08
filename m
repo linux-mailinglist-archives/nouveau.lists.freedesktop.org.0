@@ -2,40 +2,60 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 906EE1B8360
-	for <lists+nouveau@lfdr.de>; Sat, 25 Apr 2020 04:52:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 51D4E1B8350
+	for <lists+nouveau@lfdr.de>; Sat, 25 Apr 2020 04:52:11 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id EDCFB6EBA1;
-	Sat, 25 Apr 2020 02:52:03 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 83BDC6EB8E;
+	Sat, 25 Apr 2020 02:52:00 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 281A66E52A;
- Tue,  7 Apr 2020 06:54:25 +0000 (UTC)
-IronPort-SDR: yY3zMEWbzwuRi25DP9CS+PhpWGsiZsxihMMOF8aqf37SiBOEdxS2ylfEfQ9Gimqs5zpiWr9OZ2
- fvPSYKRQSDvA==
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from fmsmga005.fm.intel.com ([10.253.24.32])
- by fmsmga101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 06 Apr 2020 23:54:25 -0700
-IronPort-SDR: CrMKRxuu6g6MjmvzmJF0uKWhTqlgmU/XRW2Wg/rpQoXaqnsqfz7xem2jXjUZRZUPJFcPJK3Kfa
- ktk6yopR3IoA==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.72,353,1580803200"; d="scan'208";a="451114728"
-Received: from unknown (HELO jeevan-desktop.iind.intel.com) ([10.223.74.85])
- by fmsmga005.fm.intel.com with ESMTP; 06 Apr 2020 23:54:22 -0700
-From: Jeevan B <jeevan.b@intel.com>
-To: dri-devel@lists.freedesktop.org,
-	intel-gfx@lists.freedesktop.org
-Date: Tue,  7 Apr 2020 12:20:05 +0530
-Message-Id: <1586242207-23214-3-git-send-email-jeevan.b@intel.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1586242207-23214-1-git-send-email-jeevan.b@intel.com>
-References: <1586242207-23214-1-git-send-email-jeevan.b@intel.com>
+Received: from mail-ot1-x342.google.com (mail-ot1-x342.google.com
+ [IPv6:2607:f8b0:4864:20::342])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 879216EAFF
+ for <nouveau@lists.freedesktop.org>; Wed,  8 Apr 2020 20:53:53 +0000 (UTC)
+Received: by mail-ot1-x342.google.com with SMTP id q2so5486088otk.7
+ for <nouveau@lists.freedesktop.org>; Wed, 08 Apr 2020 13:53:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=jfXAIkbDtUGinj6WrImltHTYGnIkr+5/g1NS9il9oS8=;
+ b=XW2/PvNiCbDbqg1qIEUP+SDZWS/QDrIwGgt7a80/JPCdaxiv0JOddv/AJg1D2Jwos2
+ qdPYcnWODW60kfp6dyQiLT23lE9iB1XhdjIS36/PtR4emONAsdoFsr32yqSX11Gh8JQu
+ BnWjS5bja9nEDuC7kjQU8zveJsQ99ZVtk6dManvqOQu4qSZW6yuxK90d47w0GfeeUD8K
+ 8GYrZvdU1jWD9d06NTj/hAT0MDXBsQ2+lIAUlOnyv0wnYoONhmlrp/GwZ7TCbrc6twGi
+ vB5jmbnJgic6i6JgF4msOlzJSk9YU1qrig1rpY7Xj75Ua9ea4pBDP2RxblT+BVUcby7c
+ cRBA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=jfXAIkbDtUGinj6WrImltHTYGnIkr+5/g1NS9il9oS8=;
+ b=NmD+HDjkpkh1QkbG1KxcfRwShCxiI3X4VZPQb8aeRicH7Pqth568hHE6GMD8ptYzmY
+ JCXjX8/xQPgNeff6EQe6e4kbZtocTSclgDzaBLxjnPBFiTcT3CKgDhlcIRu8uN8nftn+
+ q8lpn1fsHe6btZxPFGdlM6Vbgf7A2kXPvUHVqpp8RZu535bkRntXYtCSmrUWPxb8AJTl
+ pLG6EQtsk0JGWgL0pMIw2aFufY/UZf3qjKN9E9fnd0u7l+o+GbrBmjQfmq2TQWu0+X0z
+ xVeVHcVTrvjofxFRSwLsSlshXNvTqcnmEcv2cmzsDU/G0y1J70JjTZLqJXbjSWA1lYqy
+ k8TA==
+X-Gm-Message-State: AGi0PuaA2+O2Y84Tycmook7olhCEGSPm+iXOTUTKi6cSPugkbdsOo45S
+ JATvxtnWwbm8YR/QwOQpe+8=
+X-Google-Smtp-Source: APiQypKeT8Ad8HdctOjnsH1U3qP029nJsaCkUq0Ua1Ksvg/VeivD8Z6SfY8CTSNFBeiOEkTiPiObsg==
+X-Received: by 2002:a9d:6452:: with SMTP id m18mr7180137otl.51.1586379232632; 
+ Wed, 08 Apr 2020 13:53:52 -0700 (PDT)
+Received: from localhost.localdomain ([2604:1380:4111:8b00::3])
+ by smtp.gmail.com with ESMTPSA id m15sm2055883otp.11.2020.04.08.13.53.51
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 08 Apr 2020 13:53:52 -0700 (PDT)
+From: Nathan Chancellor <natechancellor@gmail.com>
+To: Steven Rostedt <rostedt@goodmis.org>,
+	Ingo Molnar <mingo@kernel.org>
+Date: Wed,  8 Apr 2020 13:53:23 -0700
+Message-Id: <20200408205323.44490-1-natechancellor@gmail.com>
+X-Mailer: git-send-email 2.26.0
+MIME-Version: 1.0
+X-Patchwork-Bot: notify
 X-Mailman-Approved-At: Sat, 25 Apr 2020 02:51:59 +0000
-Subject: [Nouveau] [PATCH 3/5] drm/nouveau: utilize subconnector property
- for DP
+Subject: [Nouveau] [PATCH] x86: mmiotrace: Use cpumask_available for
+ cpumask_var_t variables
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -47,107 +67,65 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: jani.nikula@intel.com, nouveau@lists.freedesktop.org,
- Oleg Vasilev <oleg.vasilev@intel.com>, Jeevan B <jeevan.b@intel.com>,
- uma.shankar@intel.com, Ben Skeggs <bskeggs@redhat.com>,
- ville.syrjala@linux.intel.com
-MIME-Version: 1.0
+Cc: nouveau@lists.freedesktop.org, x86@kernel.org, linux-kernel@vger.kernel.org,
+ clang-built-linux@googlegroups.com, Pekka Paalanen <ppaalanen@gmail.com>,
+ Sedat Dilek <sedat.dilek@gmail.com>,
+ Nathan Chancellor <natechancellor@gmail.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-From: Oleg Vasilev <oleg.vasilev@intel.com>
+When building with Clang + -Wtautological-compare and
+CONFIG_CPUMASK_OFFSTACK unset:
 
-Since DP-specific information is stored in driver's structures, every
-driver needs to implement subconnector property by itself.
+arch/x86/mm/mmio-mod.c:375:6: warning: comparison of array 'downed_cpus'
+equal to a null pointer is always false [-Wtautological-pointer-compare]
+        if (downed_cpus == NULL &&
+            ^~~~~~~~~~~    ~~~~
+arch/x86/mm/mmio-mod.c:405:6: warning: comparison of array 'downed_cpus'
+equal to a null pointer is always false [-Wtautological-pointer-compare]
+        if (downed_cpus == NULL || cpumask_weight(downed_cpus) == 0)
+            ^~~~~~~~~~~    ~~~~
+2 warnings generated.
 
-v2: rebase
+Commit f7e30f01a9e2 ("cpumask: Add helper cpumask_available()") added
+cpumask_available to fix warnings of this nature. Use that here so that
+clang does not warn regardless of CONFIG_CPUMASK_OFFSTACK's value.
 
-Cc: Ben Skeggs <bskeggs@redhat.com>
-Cc: nouveau@lists.freedesktop.org
-Signed-off-by: Jeevan B <jeevan.b@intel.com>
-Signed-off-by: Oleg Vasilev <oleg.vasilev@intel.com>
-Reviewed-by: Emil Velikov <emil.velikov@collabora.com>
-Link: https://patchwork.freedesktop.org/patch/msgid/20190829114854.1539-5-oleg.vasilev@intel.com
+Link: https://github.com/ClangBuiltLinux/linux/issues/982
+Reported-by: Sedat Dilek <sedat.dilek@gmail.com>
+Signed-off-by: Nathan Chancellor <natechancellor@gmail.com>
 ---
- drivers/gpu/drm/nouveau/nouveau_connector.c | 13 +++++++++++++
- drivers/gpu/drm/nouveau/nouveau_dp.c        |  9 +++++++++
- drivers/gpu/drm/nouveau/nouveau_encoder.h   |  1 +
- 3 files changed, 23 insertions(+)
+ arch/x86/mm/mmio-mod.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_connector.c b/drivers/gpu/drm/nouveau/nouveau_connector.c
-index 9a9a7f5..6464e48 100644
---- a/drivers/gpu/drm/nouveau/nouveau_connector.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_connector.c
-@@ -648,6 +648,17 @@ nouveau_connector_detect(struct drm_connector *connector, bool force)
- 	pm_runtime_mark_last_busy(dev->dev);
- 	pm_runtime_put_autosuspend(dev->dev);
+diff --git a/arch/x86/mm/mmio-mod.c b/arch/x86/mm/mmio-mod.c
+index 109325d77b3e..43fd19b3f118 100644
+--- a/arch/x86/mm/mmio-mod.c
++++ b/arch/x86/mm/mmio-mod.c
+@@ -372,7 +372,7 @@ static void enter_uniprocessor(void)
+ 	int cpu;
+ 	int err;
  
-+	if (connector->connector_type == DRM_MODE_CONNECTOR_DisplayPort ||
-+	    connector->connector_type == DRM_MODE_CONNECTOR_eDP) {
-+		enum drm_mode_subconnector subconnector = DRM_MODE_SUBCONNECTOR_Unknown;
-+
-+		if (conn_status == connector_status_connected && nv_encoder)
-+			subconnector = nv_encoder->dp.subconnector;
-+		drm_object_property_set_value(&connector->base,
-+			connector->dev->mode_config.dp_subconnector_property,
-+			subconnector);
-+	}
-+
- 	return conn_status;
- }
+-	if (downed_cpus == NULL &&
++	if (!cpumask_available(downed_cpus) &&
+ 	    !alloc_cpumask_var(&downed_cpus, GFP_KERNEL)) {
+ 		pr_notice("Failed to allocate mask\n");
+ 		goto out;
+@@ -402,7 +402,7 @@ static void leave_uniprocessor(void)
+ 	int cpu;
+ 	int err;
  
-@@ -1373,6 +1384,8 @@ nouveau_connector_create(struct drm_device *dev,
- 			kfree(nv_connector);
- 			return ERR_PTR(ret);
- 		}
-+
-+		drm_mode_add_dp_subconnector_property(connector);
- 		funcs = &nouveau_connector_funcs;
- 		break;
- 	default:
-diff --git a/drivers/gpu/drm/nouveau/nouveau_dp.c b/drivers/gpu/drm/nouveau/nouveau_dp.c
-index 2674f15..85eac85 100644
---- a/drivers/gpu/drm/nouveau/nouveau_dp.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_dp.c
-@@ -62,6 +62,7 @@ nouveau_dp_detect(struct nouveau_encoder *nv_encoder)
- 	struct nouveau_drm *drm = nouveau_drm(dev);
- 	struct nvkm_i2c_aux *aux;
- 	u8 dpcd[8];
-+	u8 port_cap[DP_MAX_DOWNSTREAM_PORTS] = {};
- 	int ret;
- 
- 	aux = nv_encoder->aux;
-@@ -72,6 +73,14 @@ nouveau_dp_detect(struct nouveau_encoder *nv_encoder)
- 	if (ret)
- 		return ret;
- 
-+	if (dpcd[DP_DPCD_REV] > 0x10) {
-+		ret = nvkm_rdaux(aux, DP_DOWNSTREAM_PORT_0,
-+				 port_cap, DP_MAX_DOWNSTREAM_PORTS);
-+		if (ret)
-+			memset(port_cap, 0, DP_MAX_DOWNSTREAM_PORTS);
-+	}
-+	nv_encoder->dp.subconnector = drm_dp_subconnector_type(dpcd, port_cap);
-+
- 	nv_encoder->dp.link_bw = 27000 * dpcd[1];
- 	nv_encoder->dp.link_nr = dpcd[2] & DP_MAX_LANE_COUNT_MASK;
- 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_encoder.h b/drivers/gpu/drm/nouveau/nouveau_encoder.h
-index 3517f92..e17971a 100644
---- a/drivers/gpu/drm/nouveau/nouveau_encoder.h
-+++ b/drivers/gpu/drm/nouveau/nouveau_encoder.h
-@@ -63,6 +63,7 @@ struct nouveau_encoder {
- 			struct nv50_mstm *mstm;
- 			int link_nr;
- 			int link_bw;
-+			enum drm_mode_subconnector subconnector;
- 		} dp;
- 	};
- 
+-	if (downed_cpus == NULL || cpumask_weight(downed_cpus) == 0)
++	if (!cpumask_available(downed_cpus) || cpumask_weight(downed_cpus) == 0)
+ 		return;
+ 	pr_notice("Re-enabling CPUs...\n");
+ 	for_each_cpu(cpu, downed_cpus) {
+
+base-commit: ae46d2aa6a7fbe8ca0946f24b061b6ccdc6c3f25
 -- 
-2.7.4
+2.26.0
 
 _______________________________________________
 Nouveau mailing list
