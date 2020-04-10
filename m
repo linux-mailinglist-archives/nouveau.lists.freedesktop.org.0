@@ -1,57 +1,56 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id E97E71B835A
-	for <lists+nouveau@lfdr.de>; Sat, 25 Apr 2020 04:52:19 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1DD261A49AC
+	for <lists+nouveau@lfdr.de>; Fri, 10 Apr 2020 20:06:53 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4C7446EB97;
-	Sat, 25 Apr 2020 02:52:03 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8BF766ED35;
+	Fri, 10 Apr 2020 18:06:51 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wm1-x342.google.com (mail-wm1-x342.google.com
- [IPv6:2a00:1450:4864:20::342])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7961B8984D
- for <nouveau@lists.freedesktop.org>; Wed,  8 Apr 2020 21:37:01 +0000 (UTC)
-Received: by mail-wm1-x342.google.com with SMTP id c195so1057028wme.1
- for <nouveau@lists.freedesktop.org>; Wed, 08 Apr 2020 14:37:01 -0700 (PDT)
+Received: from mail-vs1-xe42.google.com (mail-vs1-xe42.google.com
+ [IPv6:2607:f8b0:4864:20::e42])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C73B16ED35
+ for <nouveau@lists.freedesktop.org>; Fri, 10 Apr 2020 18:06:50 +0000 (UTC)
+Received: by mail-vs1-xe42.google.com with SMTP id z63so1766717vsz.2
+ for <nouveau@lists.freedesktop.org>; Fri, 10 Apr 2020 11:06:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:reply-to:from:date:message-id
- :subject:to:cc;
- bh=q4sLyktfrOExuEZEYqjNYRWtmjYeOihRLdSqSzM0jBQ=;
- b=Hco7MSfhBD/kWrXXtSZaT1Uq3HYjzmA4BWBwNBTzpupRmSLiC2ehWSbJaPcx3LKRRE
- CQqagdrVOrJ/io0IH4/tm+to4FWYgZe/eGUtOcscYiApxnKXriXLXv38HTjEeEg/PCPa
- 7jH3H1kS+tK3/P0PTvbiMQjfiXJAXQqygCxS1+ZIWRhUZOifADjfUPbjizrY86rqz0tb
- +M0lWtS/+Szy0sKswMs5UQEYcEWqLtVp3Vh2Ihc3s//nQfufc7sK+LtMin3WlJxTAeFy
- /ApET9dWMGVw+ovEvY5VB98kZNucRGPdwWZYkGZcPszR413B2k6Vw0JUiCaVw+zujUxK
- x0cg==
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=cmPTjnAaysD8WGjZ88zA0PcV7rqglJUjOE6eeCL6Rps=;
+ b=oxJdv9GEMP9GauH8zsbw3xwVl8fVDsgr1FmXlkMat49aoeES0SV3iF+Z1PT/dS4gK/
+ 4mjBGggftzjSH7YjgkCHdcr0saNNxpZdbUS+B28YMteVXMZ0KCs76mBGXLe9AuTdIvEN
+ sIuWFY/IZBv8CUhbTXzwrKObMtToHsJf9uCyMaexuoDV/uPuu1kYYBlY5uuwGCCrsjvE
+ ciYJCOjwtYaE1aMYqAII7ye2QNuARYuAYTaGW/we8rAUC51yrV6CfMPmux4L1cYWAbg7
+ E1qr7cgLBaYku/Qdgs9qSD5i7368BK7W9dAQ4RR0PYIfZ3WsUfkLYnBmHYyum4yKK4wh
+ fNhg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:reply-to
- :from:date:message-id:subject:to:cc;
- bh=q4sLyktfrOExuEZEYqjNYRWtmjYeOihRLdSqSzM0jBQ=;
- b=tvWtDyOJutsgle+ECoB2VzIc/7XnGOeG3j7+oQYPKAwg2pyY+iTk50wZVz/JdeaIqy
- ytImJjoIXHl4Q+8kPS30THMmuI+qNivv9oF13ES+8tftEDjAgZk8hRJ372q7aQ9Z/anZ
- kiRvxNphlBsy9M6GbN6+SkNC1LdZzfFvWuXzqm2yJWh/0E2UC2aqUn+NtAO+VsYI2kWn
- KfSaUyANAoRztf/kFeG9PS2fcdkYmBO7i7IUhGdFRTlh6v81oG106C6+tT7JZueuRUl8
- iu6qcklgtl3egjLFtOEnn5dL6AdwmaIGKLuY5rRU7awtXIvteH5lArMjrsXCOwDEZUeb
- FbxQ==
-X-Gm-Message-State: AGi0PuZNMpe7VjE3FwzHEkYtzFefwY/Pdfix8rlcOzZB3pjeARfylvOx
- PSU/28lLrNPdP3+0U+U6nO/0kMLGvXR1i9HyBxU=
-X-Google-Smtp-Source: APiQypKkyO/X4F3zpkuwxZGJdH1jCd8hOH5NdPfJtHGzrLYyMWWO6zubYykoEYC7/vylnfuleQnGTAC7qDAAd4gYDiA=
-X-Received: by 2002:a7b:cb86:: with SMTP id m6mr6258988wmi.64.1586381820060;
- Wed, 08 Apr 2020 14:37:00 -0700 (PDT)
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=cmPTjnAaysD8WGjZ88zA0PcV7rqglJUjOE6eeCL6Rps=;
+ b=KSXs8MdTQ1cvRrDgsQbuOKJkuivZz/t4obcCVvWPhmX0DTWxShQL8rO40tBQ/FxdoD
+ iIVVQ1MQw74fZQEbGtyIGrS5XDbLMH3hsUqvktq8VewwCfQV8kCJ7QFijPrT57EzaO/T
+ j3rZZg+LmOCf40mqw9CjLACk0+U23oFi7rba6UDEDzAGBPMQdP3/y+OGKiuxbWyvXKHC
+ t7fiu0sAZF1YY8Y4eIyZVaXpeT4JIRtU1b2IYgZfDCTg7cwtrFBUNFpiisynXINRThgi
+ ci/kCoB5Hr6Sgx8ZvLBBT+8TxVaLnpikkYVrp/+NuHayIU54bkxzX0KsktAMQpzK0dXT
+ FsVg==
+X-Gm-Message-State: AGi0Pua9ChNyy84WEYg/KuFJsE4KPkeklgrbUIjrQ96xp/j/1CgzPIwq
+ d3vJKL7h7SAEnusDiJal6S3YJhS7yau/tldmzcZQXVhVWuI=
+X-Google-Smtp-Source: APiQypLZot3v0hZMQ1o4i+YG/VeU+W8MGoMYYUnDsFzH6W0FCTOGXmrVcv51N3VjtVapvgqCcwwmMhiE9ts1QE6NtMM=
+X-Received: by 2002:a67:10c6:: with SMTP id 189mr4997432vsq.130.1586542009732; 
+ Fri, 10 Apr 2020 11:06:49 -0700 (PDT)
 MIME-Version: 1.0
-References: <20200408205323.44490-1-natechancellor@gmail.com>
- <CA+icZUUTEEZww3qT0jfFP0ZgUPXoF1_uOHMT4ZecrQxumE1Zmg@mail.gmail.com>
-In-Reply-To: <CA+icZUUTEEZww3qT0jfFP0ZgUPXoF1_uOHMT4ZecrQxumE1Zmg@mail.gmail.com>
-From: Sedat Dilek <sedat.dilek@gmail.com>
-Date: Wed, 8 Apr 2020 23:36:47 +0200
-Message-ID: <CA+icZUWq=_qjvAf40PqQAj3tQ0WAZ2QAR9hojTuYqZH_=RWd_w@mail.gmail.com>
-To: Nathan Chancellor <natechancellor@gmail.com>
-X-Mailman-Approved-At: Sat, 25 Apr 2020 02:51:59 +0000
-Subject: Re: [Nouveau] [PATCH] x86: mmiotrace: Use cpumask_available for
- cpumask_var_t variables
+References: <CAMix8LH00FU9VmT1uGXhTN+PiCM+i8J1uk=Ps-Fdy9jXmN3TVQ@mail.gmail.com>
+ <CAKb7UvjALZp1mYwxkTeU=HLCwDt42ztFasRDv3YM0WHyNPKGNQ@mail.gmail.com>
+In-Reply-To: <CAKb7UvjALZp1mYwxkTeU=HLCwDt42ztFasRDv3YM0WHyNPKGNQ@mail.gmail.com>
+From: =?UTF-8?Q?Jes=C3=BAs_J=2E_Guerrero_Botella?=
+ <jesus.guerrero.botella@gmail.com>
+Date: Fri, 10 Apr 2020 20:06:38 +0200
+Message-ID: <CAMix8LE797N0NczzW10yj409QQTujre43=rR307W7un6SG+R0w@mail.gmail.com>
+To: Ilia Mirkin <imirkin@alum.mit.edu>
+Subject: Re: [Nouveau] Status of GF108GLM [NVS 5200M]
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,89 +62,64 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Reply-To: sedat.dilek@gmail.com
-Cc: nouveau@lists.freedesktop.org, x86@kernel.org, linux-kernel@vger.kernel.org,
- Steven Rostedt <rostedt@goodmis.org>,
- Clang-Built-Linux ML <clang-built-linux@googlegroups.com>,
- Pekka Paalanen <ppaalanen@gmail.com>, Ingo Molnar <mingo@kernel.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: nouveau <nouveau@lists.freedesktop.org>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, Apr 8, 2020 at 11:12 PM Sedat Dilek <sedat.dilek@gmail.com> wrote:
->
-> On Wed, Apr 8, 2020 at 10:53 PM Nathan Chancellor
-> <natechancellor@gmail.com> wrote:
-> >
-> > When building with Clang + -Wtautological-compare and
-> > CONFIG_CPUMASK_OFFSTACK unset:
-> >
->
-> Hi Nathan,
->
-> thanks for the quick patch.
->
-> I can confirm I have no CONFIG_CPUMASK_OFFSTACK set.
->
-
-Feel free to add appropriate credits:
-
-   Tested-by: Sedat Dilek <sedat.dilek@gmail.com>
-
-Regards,
-- Sedat -
-
->
-> > arch/x86/mm/mmio-mod.c:375:6: warning: comparison of array 'downed_cpus'
-> > equal to a null pointer is always false [-Wtautological-pointer-compare]
-> >         if (downed_cpus == NULL &&
-> >             ^~~~~~~~~~~    ~~~~
-> > arch/x86/mm/mmio-mod.c:405:6: warning: comparison of array 'downed_cpus'
-> > equal to a null pointer is always false [-Wtautological-pointer-compare]
-> >         if (downed_cpus == NULL || cpumask_weight(downed_cpus) == 0)
-> >             ^~~~~~~~~~~    ~~~~
-> > 2 warnings generated.
-> >
-> > Commit f7e30f01a9e2 ("cpumask: Add helper cpumask_available()") added
-> > cpumask_available to fix warnings of this nature. Use that here so that
-> > clang does not warn regardless of CONFIG_CPUMASK_OFFSTACK's value.
-> >
-> > Link: https://github.com/ClangBuiltLinux/linux/issues/982
-> > Reported-by: Sedat Dilek <sedat.dilek@gmail.com>
-> > Signed-off-by: Nathan Chancellor <natechancellor@gmail.com>
-> > ---
-> >  arch/x86/mm/mmio-mod.c | 4 ++--
-> >  1 file changed, 2 insertions(+), 2 deletions(-)
-> >
-> > diff --git a/arch/x86/mm/mmio-mod.c b/arch/x86/mm/mmio-mod.c
-> > index 109325d77b3e..43fd19b3f118 100644
-> > --- a/arch/x86/mm/mmio-mod.c
-> > +++ b/arch/x86/mm/mmio-mod.c
-> > @@ -372,7 +372,7 @@ static void enter_uniprocessor(void)
-> >         int cpu;
-> >         int err;
-> >
-> > -       if (downed_cpus == NULL &&
-> > +       if (!cpumask_available(downed_cpus) &&
-> >             !alloc_cpumask_var(&downed_cpus, GFP_KERNEL)) {
-> >                 pr_notice("Failed to allocate mask\n");
-> >                 goto out;
-> > @@ -402,7 +402,7 @@ static void leave_uniprocessor(void)
-> >         int cpu;
-> >         int err;
-> >
-> > -       if (downed_cpus == NULL || cpumask_weight(downed_cpus) == 0)
-> > +       if (!cpumask_available(downed_cpus) || cpumask_weight(downed_cpus) == 0)
-> >                 return;
-> >         pr_notice("Re-enabling CPUs...\n");
-> >         for_each_cpu(cpu, downed_cpus) {
-> >
-> > base-commit: ae46d2aa6a7fbe8ca0946f24b061b6ccdc6c3f25
-> > --
-> > 2.26.0
-> >
-_______________________________________________
-Nouveau mailing list
-Nouveau@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/nouveau
+SGksIElsaWEuCgpTb3JyeSBmb3Igc3VjaCBhIGJpZyBkZWxheSBpbiBhbnN3ZXJpbmcuIFJlYWwg
+bGlmZSBhbmQgdGhhdCBzdHVmZi4uLgoKSSBhbSBhIG5ld2NvbWVyIHNvLCBwbGVhc2UsIGlmIEkg
+ZG8gc29tZXRoaW5nIHdyb25nIHJlZ2FyZGluZyBteQpxdW90aW5nIHN0eWxlIG9yIHdoYXRldmVy
+LCBqdXN0IGxldCBtZSBrbm93IGFuZCBJJ2xsIHF1aWNrbHkgaW1wcm92ZS4gOikKCkVsIGx1bi4s
+IDMwIG1hci4gMjAyMCBhIGxhcyAxMzozOCwgSWxpYSBNaXJraW4KKDxpbWlya2luQGFsdW0ubWl0
+LmVkdT4pIGVzY3JpYmnDszoKPgo+IFllcywgR0YxMDggaXMgRmVybWkgKEYgPSBGZXJtaSkuIFJl
+Y2xvY2tpbmcgaXMgY3VycmVudGx5IG5vdCBhdmFpbGFibGUKPiBmb3IgdGhhdCBnZW5lcmF0aW9u
+LCB1bmZvcnR1bmF0ZWx5LiBZb3Ugc2hvdWxkIGJlIGFibGUgdG8gb3RoZXJ3aXNlCj4gdXNlIHlv
+dXIgR1BVIGp1c3QgZmluZSwgYnV0IEknbSBndWVzc2luZyBpdCdsbCBjb21lIHVwIGluIHRoZSAi
+MDciCj4gc3RhdGUgd2hlbiBpdCBwb3dlcnMgb24gKGluIHRoZSBzdGF0ZSBhcy1pcyBpdCBhcHBl
+YXJzIHBvd2VyZWQgb2ZmLAo+IHdoaWNoIGl0IHdpbGwgZG8gYXV0b21hdGljYWxseSB3aGVuIG5v
+dCBpbiB1c2UpLCB3aGljaCBhcyB5b3UgY2FuIHNlZQo+IGlzIGEgZnJhY3Rpb24gb2YgdGhlIHRv
+dGFsIEdQVSBhdmFpbGFibGUgcGVyZi4KClllcywgaXQgY29tZXMgdXAgaW4gMDcgd2hlbiBJIGxh
+dW5jaCwgbGV0J3Mgc2F5IGdseGdlYXJzIGluIERSSV9QUklNRT0xLgpJdCBwZXJmb3JtcyBzaW1p
+bGFybHkgdG8gdGhlIGludGVsIGNoaXAsIG9yIG1heWJlIGEgYml0IHdvcnNlLgpGb3IgdGhlIHJl
+c3QsIHllcywgaXQgbW9zdGx5IHdvcmtzLiBCdXQgaXQncyBubyBnb29kIG9mIGNvdXJzZS4KCgo+
+IFRoZXJlJ3MgYSB2ZXJ5IGV4cGVyaW1lbnRhbCBicmFuY2ggdGhhdCBkb2VzIGVuYWJsZSByZWNs
+b2NraW5nIGZvcgo+IEZlcm1pIGF0IGh0dHBzOi8vZ2l0aHViLmNvbS9za2VnZ3NiL25vdXZlYXUv
+Y29tbWl0cy9kZXZlbC1jbGsgLgo+IEhvd2V2ZXIgSSBiZWxpZXZlIGl0IHdhcyBvbmx5IHRlc3Rl
+ZCB3aXRoIGEgc2luZ2xlIEdQVSwgYW5kIG15IHRlc3RpbmcKPiB3aXRoIGFuIGlkZW50aWNhbCBz
+dWNoIEdQVSB3YXMgbmVnYXRpdmUuIE9uIHRoZSBvdGhlciBoYW5kLCB5b3UgZG9uJ3QKPiBoYXZl
+IGEgZGlzcGxheSBoYW5naW5nIG9mZiB0aGUgY2FyZCwgd2hpY2ggZ3JlYXRseSBpbmNyZWFzZXMg
+Y2hhbmNlcwo+IG9mIHN1Y2Nlc3MuIEZlZWwgZnJlZSB0byBqb2luICNub3V2ZWF1IG9uIGlyYy5m
+cmVlbm9kZS5uZXQgaWYgeW91IHBsYW4KPiBvbiBleHBsb3JpbmcgdGhpcy4KCkkgZmV0Y2hlZCB0
+aGF0IGFuZCB0cmllZCB0byBjb21waWxlIGl0LiBGaXJzdCBmYWlsZWQgYmVjYXVzZSBvZiBtaXNz
+aW5nIGVudnlhcywKd2hpY2ggSSBjb21waWxlZCBhbmQgaW5zdGFsbGVkLiBUaGVuIGZhaWxlZCB3
+aXRoIHNvbWUgdW5kZWZpbmVkIHN5bWJvbCBraW5kCm9mIGVycm9yIHdoaWNoIHJpZ2h0IG5vdyBJ
+IGRvbid0IGhhdmUgdGhlIHRpbWUgdG8gZGlhZ25vc2UuCgpJZiBJIGNhbiBnZXQgdGhpcyB0byBj
+b21waWxlIEknbGwgZ2V0IGJhY2sgdG8gdGhpcyB0aHJlYWQuIEFueSByZWNvbW1lbmRhdGlvbnMK
+b24ga2VybmVsIHZlcnNpb24sIGNvbXBpbGVyIG9yIHdoYXRldmVyIG1pZ2h0IHdvcmsgYmV0dGVy
+IGZvciB0aGF0IGJyYW5jaAppcyB3ZWxjb21lIHRob3VnaC4KCiAgQ0NMRCAgICAgYmluL252X3Jk
+MTYKICBDQ0xEICAgICBiaW4vbnZfd3MzMgogIENDTEQgICAgIGJpbi9udl9yaTA4CiAgQ0NMRCAg
+ICAgYmluL252X3dpMzIKICBDQ0xEICAgICBiaW4vbnZfd2kxNgogIENDTEQgICAgIGJpbi9udl9p
+bml0CiAgQ0NMRCAgICAgYmluL252X3dzMTYKICBDQ0xEICAgICBiaW4vbnZfcmkxNgogIENDTEQg
+ICAgIGJpbi9udl9yZDMyCiAgQ0NMRCAgICAgYmluL252X3JkMDgKICBDQ0xEICAgICBiaW4vbnZf
+cnMwOAogIENDTEQgICAgIGJpbi9udl9ydjMyCiAgQ0NMRCAgICAgYmluL252X3BlcmZtb24KYmlu
+L252X3BlcmZtb24uYzogRW4gbGEgZnVuY2nDs24g4oCYdWlfcGVyZm1vbl9xdWVyeV9zaWduYWxz
+4oCZOgpiaW4vbnZfcGVyZm1vbi5jOjMxNjo0MDogYXZpc286IGVsIGFyZ3VtZW50byBkZSDigJhz
+aXplb2bigJkgZW4gbGEgbGxhbWFkYQrigJhzdHJuY3B54oCZIGVzIGxhIG1pc21hIGV4cHJlc2nD
+s24gcXVlIGVsIG9yaWdlbjsgwr9wcmV0ZW5kw61hIHVzYXIgZWwKdGFtYcOxbyBkZWwgZGVzdGlu
+bz8gWy1Xc2l6ZW9mLXBvaW50ZXItbWVtYWNjZXNzXQogICAgc3RybmNweShzaWctPm5hbWUsIGFy
+Z3MubmFtZSwgc2l6ZW9mKGFyZ3MubmFtZSkpOwogICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgXgogIENDTEQgICAgIGJpbi9udl9ydjA4CiAgQ0NMRCAgICAgYmluL252X3Jz
+MzIKICBDQ0xEICAgICBiaW4vbnZfd3YwOAogIENDTEQgICAgIGJpbi9udl93djE2CiAgQ0NMRCAg
+ICAgYmluL252X3dmMTYKICBDQ0xEICAgICBiaW4vbnZfd2kwOAogIENDTEQgICAgIGJpbi9udl9y
+ZjE2Ci91c3IvbGliL2djYy94ODZfNjQtcGMtbGludXgtZ251LzguMy4wLy4uLy4uLy4uLy4uL3g4
+Nl82NC1wYy1saW51eC1nbnUvYmluL2xkOgovdG1wL2NjWUp2eTdnLm86IHVuZGVmaW5lZCByZWZl
+cmVuY2UgdG8gc3ltYm9sICdrZXlwYWQnCi91c3IvbGliL2djYy94ODZfNjQtcGMtbGludXgtZ251
+LzguMy4wLy4uLy4uLy4uLy4uL3g4Nl82NC1wYy1saW51eC1nbnUvYmluL2xkOgovbGliNjQvbGli
+dGluZm8uc28uNjogZXJyb3IgYWwgYcOxYWRpciBzw61tYm9sb3M6IERTTyBmYWx0YW50ZSBkZXNk
+ZQpsw61uZWEgZGUgb3JkZW4KY29sbGVjdDI6IGVycm9yOiBsZCBkZXZvbHZpw7MgZWwgZXN0YWRv
+IGRlIHNhbGlkYSAxCgotLSAKSmVzw7pzIEd1ZXJyZXJvIEJvdGVsbGEKX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBtYWlsaW5nIGxpc3QKTm91
+dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcv
+bWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1Cg==
