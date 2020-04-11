@@ -2,41 +2,41 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6C2E81A551C
-	for <lists+nouveau@lfdr.de>; Sun, 12 Apr 2020 01:09:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2EBBC1A5591
+	for <lists+nouveau@lfdr.de>; Sun, 12 Apr 2020 01:12:02 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 463C16E290;
-	Sat, 11 Apr 2020 23:09:36 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 66B2D6E20C;
+	Sat, 11 Apr 2020 23:11:59 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1A3356E290;
- Sat, 11 Apr 2020 23:09:35 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A2D326E071;
+ Sat, 11 Apr 2020 23:11:58 +0000 (UTC)
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id F41D6216FD;
- Sat, 11 Apr 2020 23:09:33 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 8351C2173E;
+ Sat, 11 Apr 2020 23:11:57 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1586646575;
- bh=QBecWT10Dqsz7Rx4C+yjn7Qrk9Syifw08hMzeIoP64o=;
+ s=default; t=1586646718;
+ bh=9AgB5xU8/OmGvwSeCAS7bDIEocxLDpLkEL0FnpXfADc=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=N1e/mt3+pXxSOGC1U7h2sOFxfkBDYCeNUIueNXd2u7YPSIowhTL6V97BhZNyPKzLi
- Wi8vgzeB9jOaLnGrG6oEOZYWtUu1U2XZ17SNzrWeU8GP/WDk9OA7VZa9dIlJx1hB0m
- iv9gDxQgBT0/zr94mtO/wnA43Gb+6CmJthVfxWyw=
+ b=R+F9mD/qczaZGiS1T5/esUPAS0+EewNPwc9mJxY9dvLwr4Wgd5c+HTGIp3jJVp/QJ
+ fMZ47FmwDl0TUOwGDICVps4WGJUdsf7QQ7SVdBgSXdtSXNfD4x/6FvQnkzOVDdPXev
+ 2f40oxhthB+CTQYkL/N7CZNLXS0lTs+LcC+WUslE=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Sat, 11 Apr 2020 19:07:06 -0400
-Message-Id: <20200411230706.23855-121-sashal@kernel.org>
+Date: Sat, 11 Apr 2020 19:09:43 -0400
+Message-Id: <20200411230943.24951-108-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200411230706.23855-1-sashal@kernel.org>
-References: <20200411230706.23855-1-sashal@kernel.org>
+In-Reply-To: <20200411230943.24951-1-sashal@kernel.org>
+References: <20200411230943.24951-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
-Subject: [Nouveau] [PATCH AUTOSEL 5.5 121/121] PCI: Use ioremap(),
+Subject: [Nouveau] [PATCH AUTOSEL 5.4 108/108] PCI: Use ioremap(),
  not phys_to_virt() for platform ROM
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -282,10 +282,10 @@ index 137bf0cee897c..8fc9a4e911e3a 100644
 -}
 -EXPORT_SYMBOL(pci_platform_rom);
 diff --git a/include/linux/pci.h b/include/linux/pci.h
-index 930fab2930736..73d97d12c9b11 100644
+index f39f22f9ee474..e92bd9b32f369 100644
 --- a/include/linux/pci.h
 +++ b/include/linux/pci.h
-@@ -1213,7 +1213,6 @@ int pci_enable_rom(struct pci_dev *pdev);
+@@ -1216,7 +1216,6 @@ int pci_enable_rom(struct pci_dev *pdev);
  void pci_disable_rom(struct pci_dev *pdev);
  void __iomem __must_check *pci_map_rom(struct pci_dev *pdev, size_t *size);
  void pci_unmap_rom(struct pci_dev *pdev, void __iomem *rom);
