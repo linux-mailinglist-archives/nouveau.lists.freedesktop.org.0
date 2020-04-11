@@ -1,42 +1,42 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4BB6A1A5473
-	for <lists+nouveau@lfdr.de>; Sun, 12 Apr 2020 01:06:58 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6C2E81A551C
+	for <lists+nouveau@lfdr.de>; Sun, 12 Apr 2020 01:09:38 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6A5DA6E122;
-	Sat, 11 Apr 2020 23:06:56 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 463C16E290;
+	Sat, 11 Apr 2020 23:09:36 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 2EBDD6E040;
- Sat, 11 Apr 2020 23:06:55 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1A3356E290;
+ Sat, 11 Apr 2020 23:09:35 +0000 (UTC)
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 0BE8A20708;
- Sat, 11 Apr 2020 23:06:53 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id F41D6216FD;
+ Sat, 11 Apr 2020 23:09:33 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1586646415;
- bh=QMpWSEYlbZIG32XtIUzNXua+eaJnZCj/Xx6VQhjziUA=;
+ s=default; t=1586646575;
+ bh=QBecWT10Dqsz7Rx4C+yjn7Qrk9Syifw08hMzeIoP64o=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=Lxp1UIHKdO6wNUYJcEtkyRFpm4L+oYIb3TZlZvkVrXjPuMZJv5ku+eTMSiD9Odu5q
- Hk1sEIYJStmqC/LdG+T6rWjjtkpOqi9aBHNnxKtOYzp85f/ycKryYTaP82HyUZfOXa
- uEpedw8WEK5a1Dfd8mDhnMjD10WMTvuLdd761wWA=
+ b=N1e/mt3+pXxSOGC1U7h2sOFxfkBDYCeNUIueNXd2u7YPSIowhTL6V97BhZNyPKzLi
+ Wi8vgzeB9jOaLnGrG6oEOZYWtUu1U2XZ17SNzrWeU8GP/WDk9OA7VZa9dIlJx1hB0m
+ iv9gDxQgBT0/zr94mtO/wnA43Gb+6CmJthVfxWyw=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Sat, 11 Apr 2020 19:03:46 -0400
-Message-Id: <20200411230347.22371-149-sashal@kernel.org>
+Date: Sat, 11 Apr 2020 19:07:06 -0400
+Message-Id: <20200411230706.23855-121-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200411230347.22371-1-sashal@kernel.org>
-References: <20200411230347.22371-1-sashal@kernel.org>
+In-Reply-To: <20200411230706.23855-1-sashal@kernel.org>
+References: <20200411230706.23855-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
-Subject: [Nouveau] [PATCH AUTOSEL 5.6 149/149] PCI: Use ioremap(),
+Subject: [Nouveau] [PATCH AUTOSEL 5.5 121/121] PCI: Use ioremap(),
  not phys_to_virt() for platform ROM
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -208,7 +208,7 @@ index 9b91da09dc5f8..8d9812a51ef63 100644
  	.rw = true,
  };
 diff --git a/drivers/gpu/drm/radeon/radeon_bios.c b/drivers/gpu/drm/radeon/radeon_bios.c
-index c42f73fad3e31..bb29cf02974d1 100644
+index 4d1490fbb0750..756a50e8aff20 100644
 --- a/drivers/gpu/drm/radeon/radeon_bios.c
 +++ b/drivers/gpu/drm/radeon/radeon_bios.c
 @@ -108,25 +108,33 @@ static bool radeon_read_bios(struct radeon_device *rdev)
@@ -282,10 +282,10 @@ index 137bf0cee897c..8fc9a4e911e3a 100644
 -}
 -EXPORT_SYMBOL(pci_platform_rom);
 diff --git a/include/linux/pci.h b/include/linux/pci.h
-index 3840a541a9de5..7268dcf1f23e9 100644
+index 930fab2930736..73d97d12c9b11 100644
 --- a/include/linux/pci.h
 +++ b/include/linux/pci.h
-@@ -1214,7 +1214,6 @@ int pci_enable_rom(struct pci_dev *pdev);
+@@ -1213,7 +1213,6 @@ int pci_enable_rom(struct pci_dev *pdev);
  void pci_disable_rom(struct pci_dev *pdev);
  void __iomem __must_check *pci_map_rom(struct pci_dev *pdev, size_t *size);
  void pci_unmap_rom(struct pci_dev *pdev, void __iomem *rom);
