@@ -1,17 +1,17 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 26FD31AE64C
-	for <lists+nouveau@lfdr.de>; Fri, 17 Apr 2020 21:53:11 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 50BA01AE64D
+	for <lists+nouveau@lfdr.de>; Fri, 17 Apr 2020 21:53:12 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 190426E99C;
-	Fri, 17 Apr 2020 19:53:07 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 90B2D6E9AC;
+	Fri, 17 Apr 2020 19:53:08 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
  [205.139.110.61])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 2DCD66E99C
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 846E26E9D0
  for <nouveau@lists.freedesktop.org>; Fri, 17 Apr 2020 19:53:06 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
  s=mimecast20190719; t=1587153185;
@@ -19,35 +19,35 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=i80sITLz+oOVttfOMtjBIkDo3ypFSAfdKikT8dtYqxA=;
- b=ImrvG5waxxV7M5SPdrqbGIK88Prm25iXukbASqFG4U0piFnKC5L/yKKhG10XMiEpmeqMZ2
- Wnhx6veQgRzPOe4VkZjVCr7u5LScbkI5iP8iDuJtZDJW7o73zZpp6yoz3ta5J6mFSdwgoS
- SnQ+PkonLUvkj8mV+Why+RNveMiBzIM=
+ bh=2elcLHWPVJXy8SxNBzmLGlZJQTwXnnb6bVebe6HAH9I=;
+ b=dPhG1amQ0XstdfcQ9GEKGTzwT8dAh8Ym3z4seupoaeT1jR2G3Hmr5QhMfRO410NBeO3fsf
+ bzsM94+XjCs59OoJxqz4h9hGQE2pMpXoNZloq91FSibQCPPirp3q/XMXQkTDAspd7qs2y5
+ WYONWZS3TBzn58DXbXzWMK6tXUu3cxk=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-482-AwdWQmzXOUqk4s9ZpTlpBQ-1; Fri, 17 Apr 2020 15:53:03 -0400
-X-MC-Unique: AwdWQmzXOUqk4s9ZpTlpBQ-1
+ us-mta-486-x2kNXAMPN_6FVt8N3OAZvA-1; Fri, 17 Apr 2020 15:53:03 -0400
+X-MC-Unique: x2kNXAMPN_6FVt8N3OAZvA-1
 Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
  [10.5.11.23])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 7980E8018A5
- for <nouveau@lists.freedesktop.org>; Fri, 17 Apr 2020 19:53:02 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 1E8C818B9F94
+ for <nouveau@lists.freedesktop.org>; Fri, 17 Apr 2020 19:53:03 +0000 (UTC)
 Received: from Ruby.redhat.com (ovpn-114-140.rdu2.redhat.com [10.10.114.140])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 12DBE196AE;
- Fri, 17 Apr 2020 19:53:01 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id A58181A269;
+ Fri, 17 Apr 2020 19:53:02 +0000 (UTC)
 From: Lyude <lyude@redhat.com>
 To: nouveau@lists.freedesktop.org
-Date: Fri, 17 Apr 2020 15:52:56 -0400
-Message-Id: <20200417195258.40054-4-lyude@redhat.com>
+Date: Fri, 17 Apr 2020 15:52:57 -0400
+Message-Id: <20200417195258.40054-5-lyude@redhat.com>
 In-Reply-To: <20200417195258.40054-1-lyude@redhat.com>
 References: <20200417195258.40054-1-lyude@redhat.com>
 MIME-Version: 1.0
 X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Subject: [Nouveau] [PATCH i-g-t v2 3/5] lib/igt_debugfs: Add
- igt_debugfs_pipe_dir()
+Subject: [Nouveau] [PATCH i-g-t v2 4/5] lib/igt_kms: Hook up connector
+ dithering prop
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -66,66 +66,66 @@ Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 From: Lyude Paul <lyude@redhat.com>
 
-Like igt_debugfs_connector_dir(), but for pipes instead.
+Nvidia display hardware provides a set of flexible dithering options for
+CRTCs. This dithering is actually noticeable in the CRC output for all
+available tap points, and can be seen as CRC values for identical frames
+cycling between either 2 or 4 values repeatedly (each one of these
+values is a different dithering phase applied to the source output). Of
+course, this is very likely to break tests using CRC readback since we
+don't expect the CRC to change if the source content hasn't changed.
+
+So, hook up support for configuring the dithering property and reset it
+to off from igt_display_reset() when applicable.
 
 Signed-off-by: Lyude Paul <lyude@redhat.com>
 ---
- lib/igt_debugfs.c | 29 +++++++++++++++++++++++++++++
- lib/igt_debugfs.h |  1 +
- 2 files changed, 30 insertions(+)
+ lib/igt_kms.c | 6 ++++++
+ lib/igt_kms.h | 1 +
+ 2 files changed, 7 insertions(+)
 
-diff --git a/lib/igt_debugfs.c b/lib/igt_debugfs.c
-index bf6be552..3c3b11e1 100644
---- a/lib/igt_debugfs.c
-+++ b/lib/igt_debugfs.c
-@@ -260,6 +260,35 @@ int igt_debugfs_connector_dir(int device, char *conn_name, int mode)
- 	return ret;
+diff --git a/lib/igt_kms.c b/lib/igt_kms.c
+index e9621e7e..d45adfaf 100644
+--- a/lib/igt_kms.c
++++ b/lib/igt_kms.c
+@@ -421,6 +421,7 @@ const char * const igt_connector_prop_names[IGT_NUM_CONNECTOR_PROPS] = {
+ 	[IGT_CONNECTOR_LINK_STATUS] = "link-status",
+ 	[IGT_CONNECTOR_MAX_BPC] = "max bpc",
+ 	[IGT_CONNECTOR_HDR_OUTPUT_METADATA] = "HDR_OUTPUT_METADATA",
++	[IGT_CONNECTOR_DITHERING_MODE] = "dithering mode",
+ };
+ 
+ /*
+@@ -1802,6 +1803,10 @@ static void igt_output_reset(igt_output_t *output)
+ 	if (igt_output_has_prop(output, IGT_CONNECTOR_HDR_OUTPUT_METADATA))
+ 		igt_output_set_prop_value(output,
+ 					  IGT_CONNECTOR_HDR_OUTPUT_METADATA, 0);
++
++	if (igt_output_has_prop(output, IGT_CONNECTOR_DITHERING_MODE))
++		igt_output_set_prop_enum(output, IGT_CONNECTOR_DITHERING_MODE,
++					 "off");
  }
  
-+/**
-+ * igt_debugfs_pipe_dir:
-+ * @device: fd of the device
-+ * @pipe: index of pipe
-+ * @mode: mode bits as used by open()
-+ *
-+ * This opens the debugfs directory corresponding to the pipe index on the
-+ * device for use with igt_sysfs_get() and related functions.
-+ *
-+ * Returns:
-+ * The directory fd, or -1 on failure.
-+ */
-+int igt_debugfs_pipe_dir(int device, int pipe, int mode)
-+{
-+	char buf[128];
-+	int dir, ret;
-+
-+	dir = igt_debugfs_dir(device);
-+	if (dir < 0)
-+		return dir;
-+
-+	snprintf(buf, sizeof(buf), "crtc-%d", pipe);
-+	ret = openat(dir, buf, mode);
-+
-+	close(dir);
-+
-+	return ret;
-+}
-+
  /**
-  * igt_debugfs_open:
-  * @filename: name of the debugfs node to open
-diff --git a/lib/igt_debugfs.h b/lib/igt_debugfs.h
-index 7d1a6175..15741a40 100644
---- a/lib/igt_debugfs.h
-+++ b/lib/igt_debugfs.h
-@@ -36,6 +36,7 @@ char *igt_debugfs_path(int device, char *path, int pathlen);
+@@ -1816,6 +1821,7 @@ static void igt_output_reset(igt_output_t *output)
+  * - %IGT_CONNECTOR_BROADCAST_RGB (if applicable)
+  *   %IGT_CONNECTOR_CONTENT_PROTECTION (if applicable)
+  *   %IGT_CONNECTOR_HDR_OUTPUT_METADATA (if applicable)
++ * - %IGT_CONNECTOR_DITHERING_MODE (if applicable)
+  * - igt_output_override_mode() to default.
+  *
+  * For pipes:
+diff --git a/lib/igt_kms.h b/lib/igt_kms.h
+index adca59ac..4899e765 100644
+--- a/lib/igt_kms.h
++++ b/lib/igt_kms.h
+@@ -127,6 +127,7 @@ enum igt_atomic_connector_properties {
+        IGT_CONNECTOR_LINK_STATUS,
+        IGT_CONNECTOR_MAX_BPC,
+        IGT_CONNECTOR_HDR_OUTPUT_METADATA,
++       IGT_CONNECTOR_DITHERING_MODE,
+        IGT_NUM_CONNECTOR_PROPS
+ };
  
- int igt_debugfs_dir(int device);
- int igt_debugfs_connector_dir(int device, char *conn_name, int mode);
-+int igt_debugfs_pipe_dir(int device, int pipe, int mode);
- 
- int igt_debugfs_open(int fd, const char *filename, int mode);
- void __igt_debugfs_read(int fd, const char *filename, char *buf, int size);
 -- 
 2.25.1
 
