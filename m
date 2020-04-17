@@ -1,49 +1,53 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 82AD41AE64A
-	for <lists+nouveau@lfdr.de>; Fri, 17 Apr 2020 21:53:08 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9F5CD1AE649
+	for <lists+nouveau@lfdr.de>; Fri, 17 Apr 2020 21:53:07 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 052306E97B;
-	Fri, 17 Apr 2020 19:53:06 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E64906E145;
+	Fri, 17 Apr 2020 19:53:05 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
  [205.139.110.120])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 245436E145
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A30D96E145
  for <nouveau@lists.freedesktop.org>; Fri, 17 Apr 2020 19:53:04 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
  s=mimecast20190719; t=1587153183;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=Y5DzuQrMM492eRzZL0zqmpoSbOJbzG0ymLDx+mfuJcA=;
- b=cv7gPcBX3+FefFNDoUce97FNtfBw25/o6aItDiD2nwMZa1NfQXn/WGg/eWaAuf+69iXWUq
- 5DEF/XP43EW8ttThFhQXuIslyssadPrWcRuYfG3KuWUpEQTEm/rEoecTcy5j8PN5DG/knY
- ymPJc1N7Q0nsCkXJf3Pi/0gWDiI2rro=
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=we1bkTXKdVvFDsiBSVsCtHCZt4XHKKHILKX4dg9mrXw=;
+ b=M27BkmTQXwSKlCLrxHD/hHasvHzC+Iyz+PjiwP2vhc4NxaucIxt/BlCctZVvgdaKImtAMU
+ +HRg/bKbAaO09juf0ykvc7DHYvezRV59NAOD1o3yicez9p1yL/1LyqelwdfI8/UBxiB8Tg
+ r9BYuGfPtXEJZWMewrfv0kotdHLxcy0=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-158-rmV7ComjO8qbbzZzSQvaBg-1; Fri, 17 Apr 2020 15:53:01 -0400
-X-MC-Unique: rmV7ComjO8qbbzZzSQvaBg-1
+ us-mta-416-q7vwjX7cM1O4-FBzCy6EfA-1; Fri, 17 Apr 2020 15:53:02 -0400
+X-MC-Unique: q7vwjX7cM1O4-FBzCy6EfA-1
 Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
  [10.5.11.23])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id A4BAA18B9FAB
- for <nouveau@lists.freedesktop.org>; Fri, 17 Apr 2020 19:53:00 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 459CF1005510
+ for <nouveau@lists.freedesktop.org>; Fri, 17 Apr 2020 19:53:01 +0000 (UTC)
 Received: from Ruby.redhat.com (ovpn-114-140.rdu2.redhat.com [10.10.114.140])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 398D919C4F;
+ by smtp.corp.redhat.com (Postfix) with ESMTP id CEBF3196AE;
  Fri, 17 Apr 2020 19:53:00 +0000 (UTC)
 From: Lyude <lyude@redhat.com>
 To: nouveau@lists.freedesktop.org
-Date: Fri, 17 Apr 2020 15:52:53 -0400
-Message-Id: <20200417195258.40054-1-lyude@redhat.com>
+Date: Fri, 17 Apr 2020 15:52:54 -0400
+Message-Id: <20200417195258.40054-2-lyude@redhat.com>
+In-Reply-To: <20200417195258.40054-1-lyude@redhat.com>
+References: <20200417195258.40054-1-lyude@redhat.com>
 MIME-Version: 1.0
 X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Subject: [Nouveau] [PATCH i-g-t v2 0/5] Add nouveau-crc tests
+Subject: [Nouveau] [PATCH i-g-t v2 1/5] lib/igt_core: Fix igt_assert_fd()
+ documentation
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -62,39 +66,29 @@ Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 From: Lyude Paul <lyude@redhat.com>
 
-(Just forwarding this to nouveau's ml, since I completely forgot to
-before)
+As Petri Latvala pointed out, some of the documentation in this macro is
+mistakenly copied from the other igt_assert*() macros. Let's fix that.
 
-Nouveau has finally gotten CRC support, hooray! Well, it's under review
-at least:
+Signed-off-by: Lyude Paul <lyude@redhat.com>
+---
+ lib/igt_core.h | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-https://patchwork.freedesktop.org/series/74804/
-(it has a cover letter, but nouveau's mailing list configuration has
-blocked the email so I'm waiting for a moderator to fix that)
-
-So, this series adds the relevant tests for it since nvidia's CRC
-implementation has some rather interesting design choices that needed to
-be worked around.
-
-Lyude Paul (5):
-  lib/igt_core: Fix igt_assert_fd() documentation
-  lib/igt_core: Add igt_require_fd()
-  lib/igt_debugfs: Add igt_debugfs_pipe_dir()
-  lib/igt_kms: Hook up connector dithering prop
-  tests: Add nouveau-crc tests
-
- lib/drmtest.c       |  10 ++
- lib/drmtest.h       |   2 +
- lib/igt_core.h      |  16 +-
- lib/igt_debugfs.c   |  29 ++++
- lib/igt_debugfs.h   |   1 +
- lib/igt_kms.c       |   6 +
- lib/igt_kms.h       |   1 +
- tests/meson.build   |   1 +
- tests/nouveau_crc.c | 396 ++++++++++++++++++++++++++++++++++++++++++++
- 9 files changed, 460 insertions(+), 2 deletions(-)
- create mode 100644 tests/nouveau_crc.c
-
+diff --git a/lib/igt_core.h b/lib/igt_core.h
+index b97fa2fa..3f69b072 100644
+--- a/lib/igt_core.h
++++ b/lib/igt_core.h
+@@ -966,8 +966,8 @@ void igt_describe_f(const char *fmt, ...);
+  *
+  * Fails (sub-) test if the given file descriptor is invalid.
+  *
+- * Like igt_assert(), but displays the values being compared on failure instead
+- * of simply printing the stringified expression.
++ * Like igt_assert(), but displays the stringified identifier that was supposed
++ * to contain a valid fd on failure.
+  */
+ #define igt_assert_fd(fd) \
+ 	igt_assert_f(fd >= 0, "file descriptor " #fd " failed\n");
 -- 
 2.25.1
 
