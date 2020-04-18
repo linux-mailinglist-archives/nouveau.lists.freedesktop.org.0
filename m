@@ -2,41 +2,41 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 72CDF1AECF4
-	for <lists+nouveau@lfdr.de>; Sat, 18 Apr 2020 15:49:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9DCDE1AEDCF
+	for <lists+nouveau@lfdr.de>; Sat, 18 Apr 2020 16:09:53 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id DA4C56EC8C;
-	Sat, 18 Apr 2020 13:48:59 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E866D6EC92;
+	Sat, 18 Apr 2020 14:09:51 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1EBDA6EC88;
- Sat, 18 Apr 2020 13:48:59 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 667966EC8F;
+ Sat, 18 Apr 2020 14:09:51 +0000 (UTC)
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id ACB9A2054F;
- Sat, 18 Apr 2020 13:48:57 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 090F722264;
+ Sat, 18 Apr 2020 14:09:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1587217739;
- bh=uzrTWlHs53ZPHHMtK8nctjkf4SsWJpLaX73oQPd1U6o=;
+ s=default; t=1587218991;
+ bh=+J1rnpev1mWG2DjbDUlUXV/sV3CYW4t3iOt9gosTfsA=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=Y4Ok04IdqQ0hlRDG5OHcpxTkvEg/pI/warQbgYdvoVDyI/mZDggTlpu8+32clArnE
- JR3CZZ9xbTr7XZ+I07qf1d+WR8OEVkby4qPz1e0n5nFgh1XQBMrO07rwpHjZaDXBrF
- VKkro/z5TFSkNMMeXBJL4tiPbKcfFEoPvMDaRPVI=
+ b=Wv2GtNodjhZm3Fwe99Saj4vESyde3uAKIE7+DxAd70KViU97O6AD/3IW21ZhzPfXo
+ ns4Hltrnv+6aPg19gpjKMlILg3uI9KLWS3ZtjQ2jozcMIHNOf0q1tpeOeEyR+VL+/o
+ zpQM7vN8C/tuUIq3y1qZLSNs8RbCAki/yQzGss0k=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Sat, 18 Apr 2020 09:47:36 -0400
-Message-Id: <20200418134815.6519-34-sashal@kernel.org>
+Date: Sat, 18 Apr 2020 10:08:27 -0400
+Message-Id: <20200418140910.8280-32-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200418134815.6519-1-sashal@kernel.org>
-References: <20200418134815.6519-1-sashal@kernel.org>
+In-Reply-To: <20200418140910.8280-1-sashal@kernel.org>
+References: <20200418140910.8280-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
-Subject: [Nouveau] [PATCH AUTOSEL 5.6 34/73] drm/nouveau: workaround runpm
+Subject: [Nouveau] [PATCH AUTOSEL 5.5 32/75] drm/nouveau: workaround runpm
  fail by disabling PCI power management on certain intel bridges
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -85,8 +85,8 @@ ZXJuZWwub3JnPgotLS0KIGRyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfZHJtLmMgfCA2
 MyArKysrKysrKysrKysrKysrKysrKysrKysrKysKIGRyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25v
 dXZlYXVfZHJ2LmggfCAgMiArCiAyIGZpbGVzIGNoYW5nZWQsIDY1IGluc2VydGlvbnMoKykKCmRp
 ZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2RybS5jIGIvZHJpdmVy
-cy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9kcm0uYwppbmRleCBiNjVhZTgxN2VhYmY1Li4yZDRj
-ODk5ZTFmOGI5IDEwMDY0NAotLS0gYS9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2Ry
+cy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9kcm0uYwppbmRleCAyY2Q4Mzg0OTYwMGYzLi5iMWJl
+ZWQ0MGU3NDZhIDEwMDY0NAotLS0gYS9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2Ry
 bS5jCisrKyBiL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfZHJtLmMKQEAgLTYxOCw2
 ICs2MTgsNjQgQEAgbm91dmVhdV9kcm1fZGV2aWNlX2Zpbmkoc3RydWN0IGRybV9kZXZpY2UgKmRl
 dikKIAlrZnJlZShkcm0pOwogfQogCisvKgorICogT24gc29tZSBJbnRlbCBQQ0llIGJyaWRnZSBj
@@ -140,19 +140,19 @@ KHN0cnVjdCBwY2lfZGV2ICpwZGV2LAogCQkJICAgICBjb25zdCBzdHJ1Y3QgcGNpX2RldmljZV9p
 ZCAqcGVudCkKIHsKQEAgLTY5OSw2ICs3NTcsNyBAQCBzdGF0aWMgaW50IG5vdXZlYXVfZHJtX3By
 b2JlKHN0cnVjdCBwY2lfZGV2ICpwZGV2LAogCWlmIChyZXQpCiAJCWdvdG8gZmFpbF9kcm1fZGV2
 X2luaXQ7CiAKKwlxdWlya19icm9rZW5fbnZfcnVucG0ocGRldik7CiAJcmV0dXJuIDA7CiAKIGZh
-aWxfZHJtX2Rldl9pbml0OgpAQCAtNzM0LDcgKzc5MywxMSBAQCBzdGF0aWMgdm9pZAogbm91dmVh
+aWxfZHJtX2Rldl9pbml0OgpAQCAtNzM2LDcgKzc5NSwxMSBAQCBzdGF0aWMgdm9pZAogbm91dmVh
 dV9kcm1fcmVtb3ZlKHN0cnVjdCBwY2lfZGV2ICpwZGV2KQogewogCXN0cnVjdCBkcm1fZGV2aWNl
 ICpkZXYgPSBwY2lfZ2V0X2RydmRhdGEocGRldik7CisJc3RydWN0IG5vdXZlYXVfZHJtICpkcm0g
 PSBub3V2ZWF1X2RybShkZXYpOwogCisJLyogcmV2ZXJ0IG91ciB3b3JrYXJvdW5kICovCisJaWYg
 KGRybS0+b2xkX3BtX2NhcCkKKwkJcGRldi0+cG1fY2FwID0gZHJtLT5vbGRfcG1fY2FwOwogCW5v
-dXZlYXVfZHJtX2RldmljZV9yZW1vdmUoZGV2KTsKIAlwY2lfZGlzYWJsZV9kZXZpY2UocGRldik7
-CiB9CmRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2Rydi5oIGIv
-ZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9kcnYuaAppbmRleCBjMmMzMzJmYmRlOTc5
-Li4yYTY1MTk3Mzc4MDBjIDEwMDY0NAotLS0gYS9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2
-ZWF1X2Rydi5oCisrKyBiL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfZHJ2LmgKQEAg
-LTE0MCw2ICsxNDAsOCBAQCBzdHJ1Y3Qgbm91dmVhdV9kcm0gewogCiAJc3RydWN0IGxpc3RfaGVh
-ZCBjbGllbnRzOwogCisJdTggb2xkX3BtX2NhcDsKKwogCXN0cnVjdCB7CiAJCXN0cnVjdCBhZ3Bf
-YnJpZGdlX2RhdGEgKmJyaWRnZTsKIAkJdTMyIGJhc2U7Ci0tIAoyLjIwLjEKCl9fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCk5vdXZlYXUgbWFpbGluZyBsaXN0
-Ck5vdXZlYXVAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Au
-b3JnL21haWxtYW4vbGlzdGluZm8vbm91dmVhdQo=
+dXZlYXVfZHJtX2RldmljZV9yZW1vdmUoZGV2KTsKIH0KIApkaWZmIC0tZ2l0IGEvZHJpdmVycy9n
+cHUvZHJtL25vdXZlYXUvbm91dmVhdV9kcnYuaCBiL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25v
+dXZlYXVfZHJ2LmgKaW5kZXggNzBmMzRjYWNjNTUyYy4uODEwNGUzODA2NDk5ZCAxMDA2NDQKLS0t
+IGEvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9kcnYuaAorKysgYi9kcml2ZXJzL2dw
+dS9kcm0vbm91dmVhdS9ub3V2ZWF1X2Rydi5oCkBAIC0xMzgsNiArMTM4LDggQEAgc3RydWN0IG5v
+dXZlYXVfZHJtIHsKIAogCXN0cnVjdCBsaXN0X2hlYWQgY2xpZW50czsKIAorCXU4IG9sZF9wbV9j
+YXA7CisKIAlzdHJ1Y3QgewogCQlzdHJ1Y3QgYWdwX2JyaWRnZV9kYXRhICpicmlkZ2U7CiAJCXUz
+MiBiYXNlOwotLSAKMi4yMC4xCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fXwpOb3V2ZWF1IG1haWxpbmcgbGlzdApOb3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9w
+Lm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL25vdXZl
+YXUK
