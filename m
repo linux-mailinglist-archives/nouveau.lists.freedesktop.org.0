@@ -2,41 +2,41 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9DCDE1AEDCF
-	for <lists+nouveau@lfdr.de>; Sat, 18 Apr 2020 16:09:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D84F41AEEEF
+	for <lists+nouveau@lfdr.de>; Sat, 18 Apr 2020 16:41:31 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E866D6EC92;
-	Sat, 18 Apr 2020 14:09:51 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D9A5C6EC9D;
+	Sat, 18 Apr 2020 14:41:27 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 667966EC8F;
- Sat, 18 Apr 2020 14:09:51 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9060D899B0;
+ Sat, 18 Apr 2020 14:41:26 +0000 (UTC)
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 090F722264;
- Sat, 18 Apr 2020 14:09:49 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 26E2222244;
+ Sat, 18 Apr 2020 14:41:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1587218991;
+ s=default; t=1587220886;
  bh=+J1rnpev1mWG2DjbDUlUXV/sV3CYW4t3iOt9gosTfsA=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=Wv2GtNodjhZm3Fwe99Saj4vESyde3uAKIE7+DxAd70KViU97O6AD/3IW21ZhzPfXo
- ns4Hltrnv+6aPg19gpjKMlILg3uI9KLWS3ZtjQ2jozcMIHNOf0q1tpeOeEyR+VL+/o
- zpQM7vN8C/tuUIq3y1qZLSNs8RbCAki/yQzGss0k=
+ b=HzkVAYVHyEjxHHN7InZPFuDhOKPqz3D5WC3LYA3ErKCETDSIy7qJ+/06YRTeYXHXZ
+ SPXpsHieXdGpDTF5I7r+y8bnotPQ9UKA0JLPyl7AbqjeTa0dxIeL+Cl6l7X4uV3vj6
+ 7VqAfRWEvsA0LzFfRXVXazhOHOZ03fPf3Oif/168=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Sat, 18 Apr 2020 10:08:27 -0400
-Message-Id: <20200418140910.8280-32-sashal@kernel.org>
+Date: Sat, 18 Apr 2020 10:39:59 -0400
+Message-Id: <20200418144047.9013-30-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200418140910.8280-1-sashal@kernel.org>
-References: <20200418140910.8280-1-sashal@kernel.org>
+In-Reply-To: <20200418144047.9013-1-sashal@kernel.org>
+References: <20200418144047.9013-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
-Subject: [Nouveau] [PATCH AUTOSEL 5.5 32/75] drm/nouveau: workaround runpm
+Subject: [Nouveau] [PATCH AUTOSEL 5.4 30/78] drm/nouveau: workaround runpm
  fail by disabling PCI power management on certain intel bridges
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
