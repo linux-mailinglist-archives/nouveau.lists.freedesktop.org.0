@@ -1,56 +1,38 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2C30B1B835F
-	for <lists+nouveau@lfdr.de>; Sat, 25 Apr 2020 04:52:23 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7DF741B835E
+	for <lists+nouveau@lfdr.de>; Sat, 25 Apr 2020 04:52:22 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id EFE136EBA2;
+	by gabe.freedesktop.org (Postfix) with ESMTP id C1C686EBA0;
 	Sat, 25 Apr 2020 02:52:03 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-yb1-xb43.google.com (mail-yb1-xb43.google.com
- [IPv6:2607:f8b0:4864:20::b43])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 25A086E288;
- Mon, 20 Apr 2020 23:19:52 +0000 (UTC)
-Received: by mail-yb1-xb43.google.com with SMTP id b17so6198713ybq.13;
- Mon, 20 Apr 2020 16:19:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=Ya7uPvz33k/Th0rFLYZRsOz9/2PUgpVSR6JbNYzn6GM=;
- b=ej6B8RV6ya2ZJBQQJntXMJUFXJE8+aV+G1o5ioTh/RHRkcfhHTwsaW+D4xfUqHodYk
- /auAau/cK5vj3MnL2O2LBcq6AfpOIhimpAJjXIMm/qeR20gFcmHKJ9hZqQ8Dz3lFr2b4
- Hjl4fThhii55qtQuEVj15ofas/xStHKxjXImBXkpZpmszWhI2H4of/0fwLXosY4mw7RR
- Ro6HXYradnxMnuDMfAoobzenOcHA5JrZSsxvchk5tgXFFymCbtHuq5Nqyw2LNRZIO1mL
- pSDYATkJLdXZ5zi2mT4H0tRIya6CTgg9Ao7Ym55+TGWrT8b2gt9cAsytpM/WEroXsRBO
- Mosw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=Ya7uPvz33k/Th0rFLYZRsOz9/2PUgpVSR6JbNYzn6GM=;
- b=n+6LKyVn5t4fVmBs/hpWQUltMC3qFV9RhwW5Pwt1Be3dMyfCBoKdPta5Hc4R6gcSli
- KEanUtEW19TS8+OXJvUM801gx9TYLsvf/18MjCpWXynNcnmI3knrhBHqkn8IO2OkSJpd
- 76Z9D2Iimt3f/EGW4vSxDYTNc0BELz8vzES2Kurq5NchtcsCL6XpZ92vPKhMNhk+O9S2
- +dxyfZWks2KOmK7tLfYwVdY4qdaEQjhMmaIzGO0F7Byds4jJozgxD85L4jY/nEx3rcXs
- tzkbiAmgWjSJ6JMqD6luSTEqhQeZWZwHt7oxujbtI6I4pfuXmUnlA4dIAQHuxsWA1TBX
- 7xtg==
-X-Gm-Message-State: AGi0PuaPS7GYHQ+aJ0cG3zX4Rw8q01waz32ls7cSf8ef+ubig/C+OuE8
- roryd39ARDEfNyX09wkQO6DEHoxwj/uwYAscgkA=
-X-Google-Smtp-Source: APiQypKza0fwVPVxFR5MdqPuNVTaaebdpuiZ+G8iyVCfL23ES5mQHCTrrzb0ymiDhrHAq6J+sngc7XaB/esudjqPt9M=
-X-Received: by 2002:a25:12c1:: with SMTP id 184mr13309861ybs.162.1587424791265; 
- Mon, 20 Apr 2020 16:19:51 -0700 (PDT)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by gabe.freedesktop.org (Postfix) with ESMTP id BED3E6E287
+ for <nouveau@lists.freedesktop.org>; Mon, 20 Apr 2020 23:27:45 +0000 (UTC)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 3DF641FB;
+ Mon, 20 Apr 2020 16:27:45 -0700 (PDT)
+Received: from [192.168.0.129] (unknown [172.31.20.19])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 6918F3F73D;
+ Mon, 20 Apr 2020 16:27:39 -0700 (PDT)
+From: Anshuman Khandual <anshuman.khandual@arm.com>
+To: Will Deacon <will@kernel.org>
+References: <1584680057-13753-1-git-send-email-anshuman.khandual@arm.com>
+ <1584680057-13753-3-git-send-email-anshuman.khandual@arm.com>
+ <20200420210354.GD29998@willie-the-truck>
+Message-ID: <78fee884-78fc-6102-1a37-12106dc21336@arm.com>
+Date: Tue, 21 Apr 2020 04:57:26 +0530
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+ Thunderbird/52.9.1
 MIME-Version: 1.0
-References: <20200417194145.36350-1-lyude@redhat.com>
-In-Reply-To: <20200417194145.36350-1-lyude@redhat.com>
-From: Ben Skeggs <skeggsb@gmail.com>
-Date: Tue, 21 Apr 2020 09:19:40 +1000
-Message-ID: <CACAvsv7i+f1EnOB6HngisnexVc2jVVyJqfQk4kRk63uxuTG18w@mail.gmail.com>
-To: Lyude Paul <lyude@redhat.com>
+In-Reply-To: <20200420210354.GD29998@willie-the-truck>
+Content-Language: en-US
 X-Mailman-Approved-At: Sat, 25 Apr 2020 02:51:59 +0000
-Subject: Re: [Nouveau] [RFC v3 00/11] drm/nouveau: Introduce CRC support for
- gf119+
+Subject: Re: [Nouveau] [PATCH 2/2] mm/thp: Rename pmd_mknotpresent() as
+ pmd_mknotvalid()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -62,97 +44,57 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Kate Stewart <kstewart@linuxfoundation.org>,
- David Airlie <airlied@linux.ie>, ML nouveau <nouveau@lists.freedesktop.org>,
- ML dri-devel <dri-devel@lists.freedesktop.org>,
- Gerd Hoffmann <kraxel@redhat.com>, Sam Ravnborg <sam@ravnborg.org>,
- "Peter Zijlstra \(Intel\)" <peterz@infradead.org>,
- Ben Dooks <ben.dooks@codethink.co.uk>, Ben Skeggs <bskeggs@redhat.com>,
- Liang Chen <cl@rock-chips.com>, Petr Mladek <pmladek@suse.com>,
- Jani Nikula <jani.nikula@intel.com>, Johannes Weiner <hannes@cmpxchg.org>,
- Peteris Rudzusiks <peteris.rudzusiks@gmail.com>, Tejun Heo <tj@kernel.org>,
- Sean Paul <seanpaul@chromium.org>, Thomas Gleixner <tglx@linutronix.de>,
- Suren Baghdasaryan <surenb@google.com>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- LKML <linux-kernel@vger.kernel.org>,
- =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
- Pankaj Bharadiya <pankaj.laxminarayan.bharadiya@intel.com>,
- Alex Deucher <alexander.deucher@amd.com>,
- Andrew Morton <akpm@linux-foundation.org>,
- Nicholas Kazlauskas <nicholas.kazlauskas@amd.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: x86@kernel.org, Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
+ linux-kernel@vger.kernel.org, Peter Zijlstra <peterz@infradead.org>,
+ Catalin Marinas <catalin.marinas@arm.com>, "H. Peter Anvin" <hpa@zytor.com>,
+ Russell King <linux@armlinux.org.uk>, Steven Rostedt <rostedt@goodmis.org>,
+ linux-mips@vger.kernel.org, linux-mm@kvack.org, Ingo Molnar <mingo@redhat.com>,
+ Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>,
+ Andy Lutomirski <luto@kernel.org>, Vineet Gupta <vgupta@synopsys.com>,
+ nouveau@lists.freedesktop.org, Thomas Gleixner <tglx@linutronix.de>,
+ linux-snps-arc@lists.infradead.org, Andrew Morton <akpm@linux-foundation.org>,
+ linux-arm-kernel@lists.infradead.org
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-T24gU2F0LCAxOCBBcHIgMjAyMCBhdCAwNTo0MiwgTHl1ZGUgUGF1bCA8bHl1ZGVAcmVkaGF0LmNv
-bT4gd3JvdGU6Cj4KPiBOdmlkaWEgcmVsZWFzZWQgc29tZSBkb2N1bWVudGF0aW9uIG9uIGhvdyBD
-UkMgc3VwcG9ydCB3b3JrcyBvbiB0aGVpcgo+IEdQVXMsIGhvb3JheSEKPgo+IFNvOiB0aGlzIHBh
-dGNoIHNlcmllcyBpbXBsZW1lbnRzIHNhaWQgQ1JDIHN1cHBvcnQgaW4gbm91dmVhdSwgYWxvbmcg
-d2l0aAo+IGFkZGluZyBzb21lIHNwZWNpYWwgZGVidWdmcyBpbnRlcmZhY2VzIGZvciBzb21lIHJl
-bGV2YW50IGlndC1ncHUtdG9vbHMKPiB0ZXN0cyB0aGF0IHdlJ2xsIGJlIHNlbmRpbmcgaW4ganVz
-dCBhIHNob3J0IGJpdC4KPgo+IFRoaXMgYWRkaXRpb25hbGx5IGFkZHMgYSBmZWF0dXJlIHRoYXQg
-VmlsbGUgU3lyasOkbMOkIGNhbWUgdXAgd2l0aDogdmJsYW5rCj4gd29ya3MuIEJhc2ljYWxseSwg
-dGhpcyBpcyBqdXN0IGEgZ2VuZXJpYyBEUk0gaW50ZXJmYWNlIHRoYXQgYWxsb3dzIGZvcgo+IHNj
-aGVkdWxpbmcgaGlnaC1wcmlvcml0eSB3b3JrZXJzIHRoYXQgc3RhcnQgb24gYSBnaXZlbiB2Ymxh
-bmsgaW50ZXJydXB0Lgo+IE5vdGUgdGhhdCB3aGlsZSB3ZSdyZSBjdXJyZW50bHkgb25seSB1c2lu
-ZyB0aGlzIGluIG5vdXZlYXUsIEludGVsIGhhcwo+IHBsYW5zIHRvIHVzZSB0aGlzIGZvciBpOTE1
-IGFzIHdlbGwgKGhlbmNlIHdoeSB0aGV5IGNhbWUgdXAgd2l0aCBpdCEpLgo+Cj4gQW5kIGZpbmFs
-bHk6IGluIG9yZGVyIHRvIGltcGxlbWVudCB0aGUgbGFzdCBmZWF0dXJlLCB3ZSBleHBvc2Ugc29t
-ZSBuZXcKPiBmdW5jdGlvbnMgaW4gdGhlIGtlcm5lbCdzIGt0aHJlYWRfd29ya2VyIGluZnJhc3Ry
-dWN0dXJlIHNvIHRoYXQgd2UgY2FuCj4gZGUtY29tcGxpY2F0ZSBvdXIgaW1wbGVtZW50YXRpb24g
-b2YgdGhpcy4KPgo+IEFueXdheS13ZWxjb21lIHRvIHRoZSBmdXR1cmUhIDopClRoZSBOb3V2ZWF1
-IGJpdHMgbG9vayBhbHJpZ2h0IHRvIG1lLCBJJ2xsIHRha2UgdGhlbSBvbmNlIHRoZSBwYXRjaGVz
-Cml0IGRlcGVuZHMgb24gaGF2ZSBiZWVuIGFja2VkLgoKQmVuLgoKPgo+IE1ham9yIGNoYW5nZXMg
-c2luY2UgdjI6Cj4gKiBVc2Uga3RocmVhZF93b3JrZXIgaW5zdGVhZCBvZiBrdGhyZWFkZCBmb3Ig
-dmJsYW5rIHdvcmtlcnMKPiAqIERvbid0IGNoZWNrIGRlYnVnZnMgcmV0dXJuIHZhbHVlcwo+Cj4g
-THl1ZGUgUGF1bCAoMTEpOgo+ICAgZHJtL3ZibGFuazogUmVnaXN0ZXIgZHJtbSBjbGVhbnVwIGFj
-dGlvbiBvbmNlIHBlciBkcm1fdmJsYW5rX2NydGMKPiAgIGt0aHJlYWQ6IEludHJvZHVjZSBfX2t0
-aHJlYWRfcXVldWVfd29yaygpCj4gICBkcm0vdmJsYW5rOiBBZGQgdmJsYW5rIHdvcmtzCj4gICBk
-cm0vbm91dmVhdS9rbXMvbnY1MC06IFVucm9sbCBlcnJvciBjbGVhbnVwIGluIG52NTBfaGVhZF9j
-cmVhdGUoKQo+ICAgZHJtL25vdXZlYXUva21zL252MTQwLTogRG9uJ3QgbW9kaWZ5IGRlcHRoIGlu
-IHN0YXRlIGR1cmluZyBhdG9taWMKPiAgICAgY29tbWl0Cj4gICBkcm0vbm91dmVhdS9rbXMvbnY1
-MC06IEZpeCBkaXNhYmxpbmcgZGl0aGVyaW5nCj4gICBkcm0vbm91dmVhdS9rbXMvbnY1MC06IHMv
-aGFybS9hcm1oL2cKPiAgIGRybS9ub3V2ZWF1L2ttcy9udjE0MC06IFRyYWNrIHduZHcgbWFwcGlu
-Z3MgaW4gbnY1MF9oZWFkX2F0b20KPiAgIGRybS9ub3V2ZWF1L2ttcy9udjUwLTogRXhwb3NlIG52
-NTBfb3V0cF9hdG9tIGluIGRpc3AuaAo+ICAgZHJtL25vdXZlYXUva21zL252NTAtOiBNb3ZlIGhh
-cmQtY29kZWQgb2JqZWN0IGhhbmRsZXMgaW50byBoZWFkZXIKPiAgIGRybS9ub3V2ZWF1L2ttcy9u
-dmQ5LTogQWRkIENSQyBzdXBwb3J0Cj4KPiAgZHJpdmVycy9ncHUvZHJtL2RybV92YmxhbmsuYyAg
-ICAgICAgICAgICAgICB8IDMxNCArKysrKysrKy0KPiAgZHJpdmVycy9ncHUvZHJtL25vdXZlYXUv
-ZGlzcG52MDQvY3J0Yy5jICAgICB8ICAyNSArLQo+ICBkcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9k
-aXNwbnY1MC9LYnVpbGQgICAgIHwgICA0ICsKPiAgZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvZGlz
-cG52NTAvYXRvbS5oICAgICB8ICAyMSArCj4gIGRyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L2Rpc3Bu
-djUwL2NvcmUuaCAgICAgfCAgIDQgKwo+ICBkcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9kaXNwbnY1
-MC9jb3JlOTA3ZC5jIHwgICAzICsKPiAgZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvZGlzcG52NTAv
-Y29yZTkxN2QuYyB8ICAgMyArCj4gIGRyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L2Rpc3BudjUwL2Nv
-cmVjMzdkLmMgfCAgIDMgKwo+ICBkcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9kaXNwbnY1MC9jb3Jl
-YzU3ZC5jIHwgICAzICsKPiAgZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvZGlzcG52NTAvY3JjLmMg
-ICAgICB8IDcxNSArKysrKysrKysrKysrKysrKysrKwo+ICBkcml2ZXJzL2dwdS9kcm0vbm91dmVh
-dS9kaXNwbnY1MC9jcmMuaCAgICAgIHwgMTI1ICsrKysKPiAgZHJpdmVycy9ncHUvZHJtL25vdXZl
-YXUvZGlzcG52NTAvY3JjOTA3ZC5jICB8IDEzOSArKysrCj4gIGRyaXZlcnMvZ3B1L2RybS9ub3V2
-ZWF1L2Rpc3BudjUwL2NyY2MzN2QuYyAgfCAxNTMgKysrKysKPiAgZHJpdmVycy9ncHUvZHJtL25v
-dXZlYXUvZGlzcG52NTAvZGlzcC5jICAgICB8ICA2NSArLQo+ICBkcml2ZXJzL2dwdS9kcm0vbm91
-dmVhdS9kaXNwbnY1MC9kaXNwLmggICAgIHwgIDI0ICsKPiAgZHJpdmVycy9ncHUvZHJtL25vdXZl
-YXUvZGlzcG52NTAvaGFuZGxlcy5oICB8ICAxNiArCj4gIGRyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1
-L2Rpc3BudjUwL2hlYWQuYyAgICAgfCAxNDIgKysrLQo+ICBkcml2ZXJzL2dwdS9kcm0vbm91dmVh
-dS9kaXNwbnY1MC9oZWFkLmggICAgIHwgIDEzICstCj4gIGRyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1
-L2Rpc3BudjUwL2hlYWQ5MDdkLmMgfCAgMTQgKy0KPiAgZHJpdmVycy9ncHUvZHJtL25vdXZlYXUv
-ZGlzcG52NTAvaGVhZGMzN2QuYyB8ICAyNyArLQo+ICBkcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9k
-aXNwbnY1MC9oZWFkYzU3ZC5jIHwgIDIwICstCj4gIGRyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L2Rp
-c3BudjUwL3duZHcuYyAgICAgfCAgMTUgKy0KPiAgZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91
-dmVhdV9kaXNwbGF5LmMgICB8ICA2MCArLQo+ICBpbmNsdWRlL2RybS9kcm1fdmJsYW5rLmggICAg
-ICAgICAgICAgICAgICAgIHwgIDMxICsKPiAgaW5jbHVkZS9saW51eC9rdGhyZWFkLmggICAgICAg
-ICAgICAgICAgICAgICB8ICAgMyArCj4gIGtlcm5lbC9rdGhyZWFkLmMgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgfCAgMzQgKy0KPiAgMjYgZmlsZXMgY2hhbmdlZCwgMTgzMSBpbnNlcnRpb25z
-KCspLCAxNDUgZGVsZXRpb25zKC0pCj4gIGNyZWF0ZSBtb2RlIDEwMDY0NCBkcml2ZXJzL2dwdS9k
-cm0vbm91dmVhdS9kaXNwbnY1MC9jcmMuYwo+ICBjcmVhdGUgbW9kZSAxMDA2NDQgZHJpdmVycy9n
-cHUvZHJtL25vdXZlYXUvZGlzcG52NTAvY3JjLmgKPiAgY3JlYXRlIG1vZGUgMTAwNjQ0IGRyaXZl
-cnMvZ3B1L2RybS9ub3V2ZWF1L2Rpc3BudjUwL2NyYzkwN2QuYwo+ICBjcmVhdGUgbW9kZSAxMDA2
-NDQgZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvZGlzcG52NTAvY3JjYzM3ZC5jCj4gIGNyZWF0ZSBt
-b2RlIDEwMDY0NCBkcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9kaXNwbnY1MC9oYW5kbGVzLmgKPgo+
-IC0tCj4gMi4yNS4xCj4KPiBfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fXwo+IGRyaS1kZXZlbCBtYWlsaW5nIGxpc3QKPiBkcmktZGV2ZWxAbGlzdHMuZnJlZWRl
-c2t0b3Aub3JnCj4gaHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5m
-by9kcmktZGV2ZWwKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X18KTm91dmVhdSBtYWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0
-cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1Cg==
+
+
+On 04/21/2020 02:33 AM, Will Deacon wrote:
+> On Fri, Mar 20, 2020 at 10:24:17AM +0530, Anshuman Khandual wrote:
+>> pmd_present() is expected to test positive after pmdp_mknotpresent() as the
+>> PMD entry still points to a valid huge page in memory. pmdp_mknotpresent()
+>> implies that given PMD entry is just invalidated from MMU perspective while
+>> still holding on to pmd_page() referred valid huge page thus also clearing
+>> pmd_present() test. This creates the following situation which is counter
+>> intuitive.
+>>
+>> [pmd_present(pmd_mknotpresent(pmd)) = true]
+>>
+>> This renames pmd_mknotpresent() as pmd_mknotvalid() reflecting the helper's
+>> functionality more accurately while changing the above mentioned situation
+>> as follows. This does not create any functional change.
+>>
+>> [pmd_present(pmd_mknotvalid(pmd)) = true]
+>>
+>> This is not applicable for platforms that define own pmdp_invalidate() via
+>> __HAVE_ARCH_PMDP_INVALIDATE. Suggestion for renaming came during a previous
+>> discussion here.
+> 
+> Bikeshed alert: maybe pmd_mkinvalid() would be better, given that this is
+> a one-trick pony for pmdp_invalidate()?
+
+I had thought about making it pmd_mkinvalid() earlier. But as we were replacing
+pmd_mknotpresent(), hence went with similar pattern pmd_mknotvalid() which was
+originally suggested by Catalin. There is an existing pte_mknotpresent() in arc
+platform as well. I dont have a very strong opinion either way, will be happy
+to rename. But then still wondering if we really need to.
+
+> 
+> Will
+> 
+_______________________________________________
+Nouveau mailing list
+Nouveau@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/nouveau
