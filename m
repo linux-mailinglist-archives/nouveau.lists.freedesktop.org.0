@@ -2,45 +2,41 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id E8A501B05AA
-	for <lists+nouveau@lfdr.de>; Mon, 20 Apr 2020 11:30:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 455181B8363
+	for <lists+nouveau@lfdr.de>; Sat, 25 Apr 2020 04:52:25 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3C7056E49F;
-	Mon, 20 Apr 2020 09:30:00 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C1A486EBA3;
+	Sat, 25 Apr 2020 02:52:09 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mga18.intel.com (mga18.intel.com [134.134.136.126])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4DDF26E49B;
- Mon, 20 Apr 2020 09:29:58 +0000 (UTC)
-IronPort-SDR: tWXh+8U4apE4OYdET+QftwzpbrwPucMSS5Uez4AM5U/qObO28JcbVq/1GREV3SOD70ie5Dvbwe
- +cM4OpEJTgVw==
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from orsmga007.jf.intel.com ([10.7.209.58])
- by orsmga106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 20 Apr 2020 02:29:57 -0700
-IronPort-SDR: H+A5gk2s8+YErp09kCUYEKDhHK56klRVJHvigzlps9Kwuo6wc3MDqxeJRXFuAdBwgFzshKJBUC
- nF/3uU/vhr4w==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.72,406,1580803200"; d="scan'208";a="243753086"
-Received: from thrakatuluk.fi.intel.com (HELO thrakatuluk) ([10.237.68.154])
- by orsmga007.jf.intel.com with ESMTP; 20 Apr 2020 02:29:56 -0700
-Received: from platvala by thrakatuluk with local (Exim 4.92)
- (envelope-from <petri.latvala@intel.com>)
- id 1jQSkV-0001Q2-PK; Mon, 20 Apr 2020 12:29:55 +0300
-Date: Mon, 20 Apr 2020 12:29:55 +0300
-From: Petri Latvala <petri.latvala@intel.com>
-To: Lyude <lyude@redhat.com>
-Message-ID: <20200420092955.GX9497@platvala-desk.ger.corp.intel.com>
-References: <20200417211025.109574-1-lyude@redhat.com>
- <20200417211025.109574-3-lyude@redhat.com>
+Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id BCCAA6E279
+ for <nouveau@lists.freedesktop.org>; Mon, 20 Apr 2020 21:04:01 +0000 (UTC)
+Received: from willie-the-truck (236.31.169.217.in-addr.arpa [217.169.31.236])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 5C73920724;
+ Mon, 20 Apr 2020 21:03:58 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1587416641;
+ bh=B6tu4PQYxSMIHwT8IIW2BqLBbquTlTHzD+k7VKRWKiY=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=KLGeSVsaKscXEomFaxLVk4/08pxBFxLmWwvvp/xVS1rq81o2K8P2Bnl1v4kjl/sb2
+ XFU86f/Aa7FwnQNCuJpc1uYdan2zLkqza8h9twbemUXWVnnZf6ZvW2IinHp4Lp24AC
+ ML8bBjhsBDp85WIi7Pe/U+i6OaK7Z5IAiZJu87jg=
+Date: Mon, 20 Apr 2020 22:03:55 +0100
+From: Will Deacon <will@kernel.org>
+To: Anshuman Khandual <anshuman.khandual@arm.com>
+Message-ID: <20200420210354.GD29998@willie-the-truck>
+References: <1584680057-13753-1-git-send-email-anshuman.khandual@arm.com>
+ <1584680057-13753-3-git-send-email-anshuman.khandual@arm.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200417211025.109574-3-lyude@redhat.com>
-X-Patchwork-Hint: comment
+In-Reply-To: <1584680057-13753-3-git-send-email-anshuman.khandual@arm.com>
 User-Agent: Mutt/1.10.1 (2018-07-13)
-Subject: Re: [Nouveau] [igt-dev] [PATCH i-g-t v3 2/5] lib/igt_core: Add
- igt_require_fd()
+X-Mailman-Approved-At: Sat, 25 Apr 2020 02:51:58 +0000
+Subject: Re: [Nouveau] [PATCH 2/2] mm/thp: Rename pmd_mknotpresent() as
+ pmd_mknotvalid()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -52,61 +48,45 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: igt-dev@lists.freedesktop.org, nouveau@lists.freedesktop.org
+Cc: x86@kernel.org, Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
+ linux-kernel@vger.kernel.org, Peter Zijlstra <peterz@infradead.org>,
+ Catalin Marinas <catalin.marinas@arm.com>, "H. Peter Anvin" <hpa@zytor.com>,
+ Russell King <linux@armlinux.org.uk>, Steven Rostedt <rostedt@goodmis.org>,
+ linux-mips@vger.kernel.org, linux-mm@kvack.org, Ingo Molnar <mingo@redhat.com>,
+ Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>,
+ Andy Lutomirski <luto@kernel.org>, Vineet Gupta <vgupta@synopsys.com>,
+ nouveau@lists.freedesktop.org, Thomas Gleixner <tglx@linutronix.de>,
+ linux-snps-arc@lists.infradead.org, Andrew Morton <akpm@linux-foundation.org>,
+ linux-arm-kernel@lists.infradead.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, Apr 17, 2020 at 05:10:22PM -0400, Lyude wrote:
-> From: Lyude Paul <lyude@redhat.com>
+On Fri, Mar 20, 2020 at 10:24:17AM +0530, Anshuman Khandual wrote:
+> pmd_present() is expected to test positive after pmdp_mknotpresent() as the
+> PMD entry still points to a valid huge page in memory. pmdp_mknotpresent()
+> implies that given PMD entry is just invalidated from MMU perspective while
+> still holding on to pmd_page() referred valid huge page thus also clearing
+> pmd_present() test. This creates the following situation which is counter
+> intuitive.
 > 
-> Like igt_assert_fd(), but using igt_require() instead
+> [pmd_present(pmd_mknotpresent(pmd)) = true]
 > 
-> Changes since v1:
-> * Fix documentation error in igt_require_fd() - Petri Latvala
+> This renames pmd_mknotpresent() as pmd_mknotvalid() reflecting the helper's
+> functionality more accurately while changing the above mentioned situation
+> as follows. This does not create any functional change.
 > 
-> Signed-off-by: Lyude Paul <lyude@redhat.com>
-
-
-Reviewed-by: Petri Latvala <petri.latvala@intel.com>
-
-
-
-> ---
->  lib/igt_core.h | 12 ++++++++++++
->  1 file changed, 12 insertions(+)
+> [pmd_present(pmd_mknotvalid(pmd)) = true]
 > 
-> diff --git a/lib/igt_core.h b/lib/igt_core.h
-> index 3f69b072..8f68b2dd 100644
-> --- a/lib/igt_core.h
-> +++ b/lib/igt_core.h
-> @@ -1021,6 +1021,18 @@ void igt_describe_f(const char *fmt, ...);
->  	else igt_debug("Test requirement passed: %s\n", #expr); \
->  } while (0)
->  
-> +/**
-> + * igt_require_fd:
-> + * @fd: file descriptor
-> + *
-> + * Skips (sub-) test if the given file descriptor is invalid.
-> + *
-> + * Like igt_require(), but displays the stringified identifier that was supposed
-> + * to contain a valid fd on failure.
-> + */
-> +#define igt_require_fd(fd) \
-> +	igt_require_f(fd >= 0, "file descriptor " #fd " failed\n");
-> +
->  /**
->   * igt_skip_on_f:
->   * @expr: condition to test
-> -- 
-> 2.25.1
-> 
-> _______________________________________________
-> igt-dev mailing list
-> igt-dev@lists.freedesktop.org
-> https://lists.freedesktop.org/mailman/listinfo/igt-dev
+> This is not applicable for platforms that define own pmdp_invalidate() via
+> __HAVE_ARCH_PMDP_INVALIDATE. Suggestion for renaming came during a previous
+> discussion here.
+
+Bikeshed alert: maybe pmd_mkinvalid() would be better, given that this is
+a one-trick pony for pmdp_invalidate()?
+
+Will
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
