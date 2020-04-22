@@ -2,30 +2,40 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 84E671B371A
-	for <lists+nouveau@lfdr.de>; Wed, 22 Apr 2020 08:03:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8E21F1B3E15
+	for <lists+nouveau@lfdr.de>; Wed, 22 Apr 2020 12:25:27 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 19A276E836;
-	Wed, 22 Apr 2020 06:03:35 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id AA07D6E109;
+	Wed, 22 Apr 2020 10:25:24 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from verein.lst.de (verein.lst.de [213.95.11.211])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 337046E4E8;
- Wed, 22 Apr 2020 06:03:33 +0000 (UTC)
-Received: by verein.lst.de (Postfix, from userid 2407)
- id F3FEA68C7B; Wed, 22 Apr 2020 08:03:29 +0200 (CEST)
-Date: Wed, 22 Apr 2020 08:03:29 +0200
-From: Christoph Hellwig <hch@lst.de>
-To: Jason Gunthorpe <jgg@ziepe.ca>
-Message-ID: <20200422060329.GD22366@lst.de>
-References: <0-v1-4eb72686de3c+5062-hmm_no_flags_jgg@mellanox.com>
- <5-v1-4eb72686de3c+5062-hmm_no_flags_jgg@mellanox.com>
+Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9438689F24;
+ Wed, 22 Apr 2020 10:25:23 +0000 (UTC)
+Received: from localhost (83-86-89-107.cable.dynamic.v4.ziggo.nl
+ [83.86.89.107])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id E97482071E;
+ Wed, 22 Apr 2020 10:25:22 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1587551123;
+ bh=uzrTWlHs53ZPHHMtK8nctjkf4SsWJpLaX73oQPd1U6o=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=FKO36OlYPqqPun1A4G0pY3KrD9niXvdFtqnoh7OXVD8EGRZdTOLWXUX3oEIpWBt/i
+ aUm9Dq6t/52WkWcNZ6bTtQVJXYgDYCFcdxnSO7nqLnqw7bODGGG8BbfCiyKT7NWE5F
+ DvUwvrDEeeorIdnASWGM/VPqmX5LugdOHssyFPBc=
+From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+To: linux-kernel@vger.kernel.org
+Date: Wed, 22 Apr 2020 11:57:15 +0200
+Message-Id: <20200422095100.404318585@linuxfoundation.org>
+X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20200422095047.669225321@linuxfoundation.org>
+References: <20200422095047.669225321@linuxfoundation.org>
+User-Agent: quilt/0.66
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <5-v1-4eb72686de3c+5062-hmm_no_flags_jgg@mellanox.com>
-User-Agent: Mutt/1.5.17 (2007-11-01)
-Subject: Re: [Nouveau] [PATCH hmm 5/5] mm/hmm: remove the customizable pfn
- format from hmm_range_fault
+Subject: [Nouveau] [PATCH 5.6 108/166] drm/nouveau: workaround runpm fail by
+ disabling PCI power management on certain intel bridges
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -37,93 +47,111 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: "David \(ChunMing\) Zhou" <David1.Zhou@amd.com>,
- Ralph Campbell <rcampbell@nvidia.com>, dri-devel@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, amd-gfx@lists.freedesktop.org,
- Christoph Hellwig <hch@lst.de>, linux-mm@kvack.org,
- Ben Skeggs <bskeggs@redhat.com>, nouveau@lists.freedesktop.org,
- Alex Deucher <alexander.deucher@amd.com>, "Kuehling,
- Felix" <Felix.Kuehling@amd.com>,
- Niranjana Vishwanathapura <niranjana.vishwanathapura@intel.com>,
- intel-gfx@lists.freedesktop.org,
- Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: Sasha Levin <sashal@kernel.org>, nouveau@lists.freedesktop.org,
+ linux-pm@vger.kernel.org, Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Mika Westerberg <mika.westerberg@intel.com>,
+ "Rafael J. Wysocki" <rjw@rjwysocki.net>, stable@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, linux-pci@vger.kernel.org,
+ Bjorn Helgaas <bhelgaas@google.com>, Ben Skeggs <bskeggs@redhat.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-
-
-On Tue, Apr 21, 2020 at 09:21:46PM -0300, Jason Gunthorpe wrote:
-> +void nouveau_hmm_convert_pfn(struct nouveau_drm *drm, struct hmm_range *range,
-> +			     u64 *ioctl_addr)
->  {
->  	unsigned long i, npages;
->  
-> +	/*
-> +	 * The ioctl_addr prepared here is passed through nvif_object_ioctl()
-> +	 * to an eventual DMA map on some call chain like:
-> +	 *    nouveau_svm_fault():
-> +	 *      args.i.m.method = NVIF_VMM_V0_PFNMAP
-> +	 *      nouveau_range_fault()
-> +	 *       nvif_object_ioctl()
-> +	 *        client->driver->ioctl()
-> +	 *           struct nvif_driver nvif_driver_nvkm:
-> +	 *             .ioctl = nvkm_client_ioctl
-> +	 *            nvkm_ioctl()
-> +	 *             nvkm_ioctl_path()
-> +	 *               nvkm_ioctl_v0[type].func(..)
-> +	 *               nvkm_ioctl_mthd()
-> +	 *                nvkm_object_mthd()
-> +	 *                   struct nvkm_object_func nvkm_uvmm:
-> +	 *                     .mthd = nvkm_uvmm_mthd
-> +	 *                    nvkm_uvmm_mthd()
-> +	 *                     nvkm_uvmm_mthd_pfnmap()
-> +	 *                      nvkm_vmm_pfn_map()
-> +	 *                       nvkm_vmm_ptes_get_map()
-> +	 *                        func == gp100_vmm_pgt_pfn
-> +	 *                         struct nvkm_vmm_desc_func gp100_vmm_desc_spt:
-> +	 *                           .pfn = gp100_vmm_pgt_pfn
-> +	 *                          nvkm_vmm_iter()
-> +	 *                           REF_PTES == func == gp100_vmm_pgt_pfn()
-> +	 *			      dma_map_page()
-> +	 *
-> +	 * This is all just encoding the internal hmm reprensetation into a
-> +	 * different nouveau internal representation.
-> +	 */
-
-Nice callchain from hell..  Unfortunately such "code listings" tend to
-get out of date very quickly, so I'm not sure it is worth keeping in
-the code.  What would be really worthile is consolidating the two
-different sets of defines (NVIF_VMM_PFNMAP_V0_ vs NVKM_VMM_PFN_)
-to make the code a little easier to follow.
-
->  	npages = (range->end - range->start) >> PAGE_SHIFT;
->  	for (i = 0; i < npages; ++i) {
->  		struct page *page;
->  
-> +		if (!(range->hmm_pfns[i] & HMM_PFN_VALID)) {
-> +			ioctl_addr[i] = 0;
->  			continue;
-> +		}
-
-Can't we rely on the caller pre-zeroing the array?
-
-> +		page = hmm_pfn_to_page(range->hmm_pfns[i]);
-> +		if (is_device_private_page(page))
-> +			ioctl_addr[i] = nouveau_dmem_page_addr(page) |
-> +					NVIF_VMM_PFNMAP_V0_V |
-> +					NVIF_VMM_PFNMAP_V0_VRAM;
-> +		else
-> +			ioctl_addr[i] = page_to_phys(page) |
-> +					NVIF_VMM_PFNMAP_V0_V |
-> +					NVIF_VMM_PFNMAP_V0_HOST;
-> +		if (range->hmm_pfns[i] & HMM_PFN_WRITE)
-> +			ioctl_addr[i] |= NVIF_VMM_PFNMAP_V0_W;
-
-Now that this routine isn't really device memory specific any more, I
-wonder if it should move to nouveau_svm.c.
-_______________________________________________
-Nouveau mailing list
-Nouveau@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/nouveau
+RnJvbTogS2Fyb2wgSGVyYnN0IDxraGVyYnN0QHJlZGhhdC5jb20+CgpbIFVwc3RyZWFtIGNvbW1p
+dCA0MzRmZGI1MTUxM2JmMzA1N2FjMTQ0ZDE1MmU2ZjJmMmI1MDllODU3IF0KCkZpeGVzIHRoZSBp
+bmZhbW91cyAncnVudGltZSBQTScgYnVnIG1hbnkgdXNlcnMgYXJlIGZhY2luZyBvbiBMYXB0b3Bz
+IHdpdGgKTnZpZGlhIFBhc2NhbCBHUFVzIGJ5IHNraXBwaW5nIHNhaWQgUENJIHBvd2VyIHN0YXRl
+IGNoYW5nZXMgb24gdGhlIEdQVS4KCkRlcGVuZGluZyBvbiB0aGUgdXNlZCBrZXJuZWwgdGhlcmUg
+bWlnaHQgYmUgbWVzc2FnZXMgbGlrZSB0aG9zZSBpbiBkZW1zZzoKCiJub3V2ZWF1IDAwMDA6MDE6
+MDAuMDogUmVmdXNlZCB0byBjaGFuZ2UgcG93ZXIgc3RhdGUsIGN1cnJlbnRseSBpbiBEMyIKIm5v
+dXZlYXUgMDAwMDowMTowMC4wOiBjYW4ndCBjaGFuZ2UgcG93ZXIgc3RhdGUgZnJvbSBEM2NvbGQg
+dG8gRDAgKGNvbmZpZwpzcGFjZSBpbmFjY2Vzc2libGUpIgpmb2xsb3dlZCBieSBiYWNrdHJhY2Vz
+IG9mIGtlcm5lbCBjcmFzaGVzIG9yIHRpbWVvdXRzIHdpdGhpbiBub3V2ZWF1LgoKSXQncyBzdGls
+bCB1bmtvd24gd2h5IHRoaXMgaXNzdWUgZXhpc3RzLCBidXQgdGhpcyBpcyBhIHJlbGlhYmxlIHdv
+cmthcm91bmQKYW5kIHNvbHZlcyBhIHZlcnkgYW5ub3lpbmcgaXNzdWUgZm9yIHVzZXIgaGF2aW5n
+IHRvIGNob29zZSBiZXR3ZWVuIGEKY3Jhc2hpbmcga2VybmVsIG9yIGhpZ2hlciBwb3dlciBjb25z
+dW1wdGlvbiBvZiB0aGVpciBMYXB0b3BzLgoKU2lnbmVkLW9mZi1ieTogS2Fyb2wgSGVyYnN0IDxr
+aGVyYnN0QHJlZGhhdC5jb20+CkNjOiBCam9ybiBIZWxnYWFzIDxiaGVsZ2Fhc0Bnb29nbGUuY29t
+PgpDYzogTHl1ZGUgUGF1bCA8bHl1ZGVAcmVkaGF0LmNvbT4KQ2M6IFJhZmFlbCBKLiBXeXNvY2tp
+IDxyandAcmp3eXNvY2tpLm5ldD4KQ2M6IE1pa2EgV2VzdGVyYmVyZyA8bWlrYS53ZXN0ZXJiZXJn
+QGludGVsLmNvbT4KQ2M6IGxpbnV4LXBjaUB2Z2VyLmtlcm5lbC5vcmcKQ2M6IGxpbnV4LXBtQHZn
+ZXIua2VybmVsLm9yZwpDYzogZHJpLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpDYzogbm91
+dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKQnVnemlsbGE6IGh0dHBzOi8vYnVnemlsbGEua2Vy
+bmVsLm9yZy9zaG93X2J1Zy5jZ2k/aWQ9MjA1NjIzClNpZ25lZC1vZmYtYnk6IEJlbiBTa2VnZ3Mg
+PGJza2VnZ3NAcmVkaGF0LmNvbT4KU2lnbmVkLW9mZi1ieTogU2FzaGEgTGV2aW4gPHNhc2hhbEBr
+ZXJuZWwub3JnPgotLS0KIGRyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfZHJtLmMgfCA2
+MyArKysrKysrKysrKysrKysrKysrKysrKysrKysKIGRyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25v
+dXZlYXVfZHJ2LmggfCAgMiArCiAyIGZpbGVzIGNoYW5nZWQsIDY1IGluc2VydGlvbnMoKykKCmRp
+ZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2RybS5jIGIvZHJpdmVy
+cy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9kcm0uYwppbmRleCBiNjVhZTgxN2VhYmY1Li4yZDRj
+ODk5ZTFmOGI5IDEwMDY0NAotLS0gYS9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2Ry
+bS5jCisrKyBiL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfZHJtLmMKQEAgLTYxOCw2
+ICs2MTgsNjQgQEAgbm91dmVhdV9kcm1fZGV2aWNlX2Zpbmkoc3RydWN0IGRybV9kZXZpY2UgKmRl
+dikKIAlrZnJlZShkcm0pOwogfQogCisvKgorICogT24gc29tZSBJbnRlbCBQQ0llIGJyaWRnZSBj
+b250cm9sbGVycyBkb2luZyBhCisgKiBEMCAtPiBEM2hvdCAtPiBEM2NvbGQgLT4gRDAgc2VxdWVu
+Y2UgY2F1c2VzIE52aWRpYSBHUFVzIHRvIG5vdCByZWFwcGVhci4KKyAqIFNraXBwaW5nIHRoZSBp
+bnRlcm1lZGlhdGUgRDNob3Qgc3RlcCBzZWVtcyB0byBtYWtlIGl0IHdvcmsgYWdhaW4uIFRoaXMg
+aXMKKyAqIHByb2JhYmx5IGNhdXNlZCBieSBub3QgbWVldGluZyB0aGUgZXhwZWN0YXRpb24gdGhl
+IGludm9sdmVkIEFNTCBjb2RlIGhhcworICogd2hlbiB0aGUgR1BVIGlzIHB1dCBpbnRvIEQzaG90
+IHN0YXRlIGJlZm9yZSBpbnZva2luZyBpdC4KKyAqCisgKiBUaGlzIGxlYWRzIHRvIHZhcmlvdXMg
+bWFuaWZlc3RhdGlvbnMgb2YgdGhpcyBpc3N1ZToKKyAqICAtIEFNTCBjb2RlIGV4ZWN1dGlvbiB0
+byBwb3dlciBvbiB0aGUgR1BVIGhpdHMgYW4gaW5maW5pdGUgbG9vcCAoYXMgdGhlCisgKiAgICBj
+b2RlIHdhaXRzIG9uIGRldmljZSBtZW1vcnkgdG8gY2hhbmdlKS4KKyAqICAtIGtlcm5lbCBjcmFz
+aGVzLCBhcyBhbGwgUENJIHJlYWRzIHJldHVybiAtMSwgd2hpY2ggbW9zdCBjb2RlIGlzbid0IGFi
+bGUKKyAqICAgIHRvIGhhbmRsZSB3ZWxsIGVub3VnaC4KKyAqCisgKiBJbiBhbGwgY2FzZXMgZG1l
+c2cgd2lsbCBjb250YWluIGF0IGxlYXN0IG9uZSBsaW5lIGxpa2UgdGhpczoKKyAqICdub3V2ZWF1
+IDAwMDA6MDE6MDAuMDogUmVmdXNlZCB0byBjaGFuZ2UgcG93ZXIgc3RhdGUsIGN1cnJlbnRseSBp
+biBEMycKKyAqIGZvbGxvd2VkIGJ5IGEgbG90IG9mIG5vdXZlYXUgdGltZW91dHMuCisgKgorICog
+SW4gdGhlIFxfU0IuUENJMC5QRUcwLlBHMDAuX09GRiBjb2RlIGRlZXBlciBkb3duIHdyaXRlcyBi
+aXQgMHg4MCB0byB0aGUgbm90CisgKiBkb2N1bWVudGVkIFBDSSBjb25maWcgc3BhY2UgcmVnaXN0
+ZXIgMHgyNDggb2YgdGhlIEludGVsIFBDSWUgYnJpZGdlCisgKiBjb250cm9sbGVyICgweDE5MDEp
+IGluIG9yZGVyIHRvIGNoYW5nZSB0aGUgc3RhdGUgb2YgdGhlIFBDSWUgbGluayBiZXR3ZWVuCisg
+KiB0aGUgUENJZSBwb3J0IGFuZCB0aGUgR1BVLiBUaGVyZSBhcmUgYWx0ZXJuYXRpdmUgY29kZSBw
+YXRocyB1c2luZyBvdGhlcgorICogcmVnaXN0ZXJzLCB3aGljaCBzZWVtIHRvIHdvcmsgZmluZSAo
+ZXhlY3V0ZWQgcHJlIFdpbmRvd3MgOCk6CisgKiAgLSAweGJjIGJpdCAweDIwIChwdWJsaWNseSBh
+dmFpbGFibGUgZG9jdW1lbnRhdGlvbiBjbGFpbXMgJ3Jlc2VydmVkJykKKyAqICAtIDB4YjAgYml0
+IDB4MTAgKGxpbmsgZGlzYWJsZSkKKyAqIENoYW5naW5nIHRoZSBjb25kaXRpb25zIGluc2lkZSB0
+aGUgZmlybXdhcmUgYnkgcG9raW5nIGludG8gdGhlIHJlbGV2YW50CisgKiBhZGRyZXNzZXMgZG9l
+cyByZXNvbHZlIHRoZSBpc3N1ZSwgYnV0IGl0IHNlZW1lZCB0byBiZSBBQ1BJIHByaXZhdGUgbWVt
+b3J5CisgKiBhbmQgbm90IGFueSBkZXZpY2UgYWNjZXNzaWJsZSBtZW1vcnkgYXQgYWxsLCBzbyB0
+aGVyZSBpcyBubyBwb3J0YWJsZSB3YXkgb2YKKyAqIGNoYW5naW5nIHRoZSBjb25kaXRpb25zLgor
+ICogT24gYSBYUFMgOTU2MCB0aGF0IG1lYW5zIGJpdHMgWzAsM10gb24gXENQRVggbmVlZCB0byBi
+ZSBjbGVhcmVkLgorICoKKyAqIFRoZSBvbmx5IHN5c3RlbXMgd2hlcmUgdGhpcyBiZWhhdmlvciBj
+YW4gYmUgc2VlbiBhcmUgaHlicmlkIGdyYXBoaWNzIGxhcHRvcHMKKyAqIHdpdGggYSBzZWNvbmRh
+cnkgTnZpZGlhIE1heHdlbGwsIFBhc2NhbCBvciBUdXJpbmcgR1BVLiBJdCdzIHVuY2xlYXIgd2hl
+dGhlcgorICogdGhpcyBpc3N1ZSBvbmx5IG9jY3VycyBpbiBjb21iaW5hdGlvbiB3aXRoIGxpc3Rl
+ZCBJbnRlbCBQQ0llIGJyaWRnZQorICogY29udHJvbGxlcnMgYW5kIHRoZSBtZW50aW9uZWQgR1BV
+cyBvciBvdGhlciBkZXZpY2VzIGFzIHdlbGwuCisgKgorICogZG9jdW1lbnRhdGlvbiBvbiB0aGUg
+UENJZSBicmlkZ2UgY29udHJvbGxlciBjYW4gYmUgZm91bmQgaW4gdGhlCisgKiAiN3RoIEdlbmVy
+YXRpb24gSW50ZWzCriBQcm9jZXNzb3IgRmFtaWxpZXMgZm9yIEggUGxhdGZvcm1zIERhdGFzaGVl
+dCBWb2x1bWUgMiIKKyAqIFNlY3Rpb24gIjEyIFBDSSBFeHByZXNzKiBDb250cm9sbGVyICh4MTYp
+IFJlZ2lzdGVycyIKKyAqLworCitzdGF0aWMgdm9pZCBxdWlya19icm9rZW5fbnZfcnVucG0oc3Ry
+dWN0IHBjaV9kZXYgKnBkZXYpCit7CisJc3RydWN0IGRybV9kZXZpY2UgKmRldiA9IHBjaV9nZXRf
+ZHJ2ZGF0YShwZGV2KTsKKwlzdHJ1Y3Qgbm91dmVhdV9kcm0gKmRybSA9IG5vdXZlYXVfZHJtKGRl
+dik7CisJc3RydWN0IHBjaV9kZXYgKmJyaWRnZSA9IHBjaV91cHN0cmVhbV9icmlkZ2UocGRldik7
+CisKKwlpZiAoIWJyaWRnZSB8fCBicmlkZ2UtPnZlbmRvciAhPSBQQ0lfVkVORE9SX0lEX0lOVEVM
+KQorCQlyZXR1cm47CisKKwlzd2l0Y2ggKGJyaWRnZS0+ZGV2aWNlKSB7CisJY2FzZSAweDE5MDE6
+CisJCWRybS0+b2xkX3BtX2NhcCA9IHBkZXYtPnBtX2NhcDsKKwkJcGRldi0+cG1fY2FwID0gMDsK
+KwkJTlZfSU5GTyhkcm0sICJEaXNhYmxpbmcgUENJIHBvd2VyIG1hbmFnZW1lbnQgdG8gYXZvaWQg
+YnVnXG4iKTsKKwkJYnJlYWs7CisJfQorfQorCiBzdGF0aWMgaW50IG5vdXZlYXVfZHJtX3Byb2Jl
+KHN0cnVjdCBwY2lfZGV2ICpwZGV2LAogCQkJICAgICBjb25zdCBzdHJ1Y3QgcGNpX2RldmljZV9p
+ZCAqcGVudCkKIHsKQEAgLTY5OSw2ICs3NTcsNyBAQCBzdGF0aWMgaW50IG5vdXZlYXVfZHJtX3By
+b2JlKHN0cnVjdCBwY2lfZGV2ICpwZGV2LAogCWlmIChyZXQpCiAJCWdvdG8gZmFpbF9kcm1fZGV2
+X2luaXQ7CiAKKwlxdWlya19icm9rZW5fbnZfcnVucG0ocGRldik7CiAJcmV0dXJuIDA7CiAKIGZh
+aWxfZHJtX2Rldl9pbml0OgpAQCAtNzM0LDcgKzc5MywxMSBAQCBzdGF0aWMgdm9pZAogbm91dmVh
+dV9kcm1fcmVtb3ZlKHN0cnVjdCBwY2lfZGV2ICpwZGV2KQogewogCXN0cnVjdCBkcm1fZGV2aWNl
+ICpkZXYgPSBwY2lfZ2V0X2RydmRhdGEocGRldik7CisJc3RydWN0IG5vdXZlYXVfZHJtICpkcm0g
+PSBub3V2ZWF1X2RybShkZXYpOwogCisJLyogcmV2ZXJ0IG91ciB3b3JrYXJvdW5kICovCisJaWYg
+KGRybS0+b2xkX3BtX2NhcCkKKwkJcGRldi0+cG1fY2FwID0gZHJtLT5vbGRfcG1fY2FwOwogCW5v
+dXZlYXVfZHJtX2RldmljZV9yZW1vdmUoZGV2KTsKIAlwY2lfZGlzYWJsZV9kZXZpY2UocGRldik7
+CiB9CmRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2Rydi5oIGIv
+ZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9kcnYuaAppbmRleCBjMmMzMzJmYmRlOTc5
+Li4yYTY1MTk3Mzc4MDBjIDEwMDY0NAotLS0gYS9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2
+ZWF1X2Rydi5oCisrKyBiL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfZHJ2LmgKQEAg
+LTE0MCw2ICsxNDAsOCBAQCBzdHJ1Y3Qgbm91dmVhdV9kcm0gewogCiAJc3RydWN0IGxpc3RfaGVh
+ZCBjbGllbnRzOwogCisJdTggb2xkX3BtX2NhcDsKKwogCXN0cnVjdCB7CiAJCXN0cnVjdCBhZ3Bf
+YnJpZGdlX2RhdGEgKmJyaWRnZTsKIAkJdTMyIGJhc2U7Ci0tIAoyLjIwLjEKCgoKX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBtYWlsaW5nIGxp
+c3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVza3Rv
+cC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1Cg==
