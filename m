@@ -2,58 +2,31 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2F58E1B4D0D
-	for <lists+nouveau@lfdr.de>; Wed, 22 Apr 2020 21:09:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EC85B1B5495
+	for <lists+nouveau@lfdr.de>; Thu, 23 Apr 2020 08:10:32 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1F1336E409;
-	Wed, 22 Apr 2020 19:09:13 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7E69F6E13A;
+	Thu, 23 Apr 2020 06:10:29 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from hqnvemgate24.nvidia.com (hqnvemgate24.nvidia.com
- [216.228.121.143])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 20CC36E0D9;
- Wed, 22 Apr 2020 19:09:11 +0000 (UTC)
-Received: from hqpgpgate102.nvidia.com (Not Verified[216.228.121.13]) by
- hqnvemgate24.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
- id <B5ea095e20001>; Wed, 22 Apr 2020 12:07:14 -0700
-Received: from hqmail.nvidia.com ([172.20.161.6])
- by hqpgpgate102.nvidia.com (PGP Universal service);
- Wed, 22 Apr 2020 12:09:10 -0700
-X-PGP-Universal: processed;
- by hqpgpgate102.nvidia.com on Wed, 22 Apr 2020 12:09:10 -0700
-Received: from DRHQMAIL107.nvidia.com (10.27.9.16) by HQMAIL105.nvidia.com
- (172.20.187.12) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Wed, 22 Apr
- 2020 19:09:10 +0000
-Received: from rcampbell-dev.nvidia.com (172.20.13.39) by
- DRHQMAIL107.nvidia.com (10.27.9.16) with Microsoft SMTP Server (TLS) id
- 15.0.1473.3; Wed, 22 Apr 2020 19:09:09 +0000
-To: Jason Gunthorpe <jgg@ziepe.ca>, <linux-mm@kvack.org>
+Received: from verein.lst.de (verein.lst.de [213.95.11.211])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 75C8F6E135;
+ Thu, 23 Apr 2020 06:10:28 +0000 (UTC)
+Received: by verein.lst.de (Postfix, from userid 2407)
+ id B47E6227A81; Thu, 23 Apr 2020 08:10:23 +0200 (CEST)
+Date: Thu, 23 Apr 2020 08:10:23 +0200
+From: Christoph Hellwig <hch@lst.de>
+To: Jason Gunthorpe <jgg@ziepe.ca>
+Message-ID: <20200423061023.GA9856@lst.de>
 References: <0-v1-4eb72686de3c+5062-hmm_no_flags_jgg@mellanox.com>
-X-Nvconfidentiality: public
-From: Ralph Campbell <rcampbell@nvidia.com>
-Message-ID: <17ce2fdc-4f9f-7772-c10c-6f339a4183e8@nvidia.com>
-Date: Wed, 22 Apr 2020 12:09:09 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.2.2
+ <5-v1-4eb72686de3c+5062-hmm_no_flags_jgg@mellanox.com>
+ <20200422060329.GD22366@lst.de> <20200422123911.GV26002@ziepe.ca>
 MIME-Version: 1.0
-In-Reply-To: <0-v1-4eb72686de3c+5062-hmm_no_flags_jgg@mellanox.com>
-X-Originating-IP: [172.20.13.39]
-X-ClientProxiedBy: HQMAIL107.nvidia.com (172.20.187.13) To
- DRHQMAIL107.nvidia.com (10.27.9.16)
-Content-Language: en-US
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
- t=1587582434; bh=Ibr26mSSlFN5k8tPbVlsbPzYkk2ONJQVn8RAtNIyK9E=;
- h=X-PGP-Universal:Subject:To:CC:References:X-Nvconfidentiality:From:
- Message-ID:Date:User-Agent:MIME-Version:In-Reply-To:
- X-Originating-IP:X-ClientProxiedBy:Content-Type:Content-Language:
- Content-Transfer-Encoding;
- b=SYRCFRSghsuA1oPUGpaSrThd5bs4yjq3+gWlxe7OKwNdoqB2UOa004VsS8/Lr697y
- CWlieyjD7XPQ253DIjhDdL01VtVsGtzGEvoQqDO6lPiZ5CYv0eWmptUvjs6CnBqvRa
- 4hoTO4QeEmS2vafuYzVQSMQMrQxnk3yoAyIRHCI99P9Mgj2uvXuKNUDzqFBGyVCZml
- JGQm9m8ACFaaebFyqUIUXiOiwj4oGw/DQEJJc0XtF3If903YGzmV0z3IE+sqd6zM9+
- KnxSL5/RF+iYX9gU+gjf3WtClWhx9GpAdGYAifxagOljqMjx/EX9krpg30i0tS21KU
- UXh/u9XgjPkgw==
-Subject: Re: [Nouveau] [PATCH hmm 0/5] Adjust hmm_range_fault() API
+Content-Disposition: inline
+In-Reply-To: <20200422123911.GV26002@ziepe.ca>
+User-Agent: Mutt/1.5.17 (2007-11-01)
+Subject: Re: [Nouveau] [PATCH hmm 5/5] mm/hmm: remove the customizable pfn
+ format from hmm_range_fault
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -66,33 +39,61 @@ List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
 Cc: "David \(ChunMing\) Zhou" <David1.Zhou@amd.com>,
- amd-gfx@lists.freedesktop.org, "Kuehling, Felix" <Felix.Kuehling@amd.com>,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- Christoph Hellwig <hch@lst.de>, Ben Skeggs <bskeggs@redhat.com>,
+ Ralph Campbell <rcampbell@nvidia.com>, dri-devel@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, amd-gfx@lists.freedesktop.org,
+ Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+ linux-mm@kvack.org, Ben Skeggs <bskeggs@redhat.com>,
  nouveau@lists.freedesktop.org, Alex Deucher <alexander.deucher@amd.com>,
+ "Kuehling, Felix" <Felix.Kuehling@amd.com>,
  Niranjana Vishwanathapura <niranjana.vishwanathapura@intel.com>,
- intel-gfx@lists.freedesktop.org,
- =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
+ intel-gfx@lists.freedesktop.org, Christoph Hellwig <hch@lst.de>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+On Wed, Apr 22, 2020 at 09:39:11AM -0300, Jason Gunthorpe wrote:
+> > Nice callchain from hell..  Unfortunately such "code listings" tend to
+> > get out of date very quickly, so I'm not sure it is worth keeping in
+> > the code.  What would be really worthile is consolidating the two
+> > different sets of defines (NVIF_VMM_PFNMAP_V0_ vs NVKM_VMM_PFN_)
+> > to make the code a little easier to follow.
+> 
+> I was mainly concerned that this function is using hmm properly,
+> becuase it sure looks like it is just forming the CPU physical address
+> into a HW specific data. But it turns out it is just an internal data
+> for some other code and the dma_map is impossibly far away
+> 
+> It took forever to find, I figured I'd leave a hint for the next poor
+> soul that has to look at this.. 
+> 
+> Also, I think it shows there is no 'performance' argument here, if
+> this path needs more performance the above should be cleaned
+> before we abuse hmm_range_fault.
+> 
+> Put it in the commit message instead?
 
-On 4/21/20 5:21 PM, Jason Gunthorpe wrote:
-> From: Jason Gunthorpe <jgg@mellanox.com>
-> 
-> The API is a bit complicated for the uses we actually have, and
-> disucssions for simplifying have come up a number of times.
-> 
-> This small series removes the customizable pfn format and simplifies the
-> return code of hmm_range_fault()
-> 
-> All the drivers are adjusted to process in the simplified format.
-> I would appreciated tested-by's for the two drivers, thanks!
+Yes, the graph itself sounds reasonable for the commit log as a point
+of time information.
 
-For nouveau you can add:
-Tested-by: Ralph Campbell <rcampbell@nvidia.com>
+> > >  	npages = (range->end - range->start) >> PAGE_SHIFT;
+> > >  	for (i = 0; i < npages; ++i) {
+> > >  		struct page *page;
+> > >  
+> > > +		if (!(range->hmm_pfns[i] & HMM_PFN_VALID)) {
+> > > +			ioctl_addr[i] = 0;
+> > >  			continue;
+> > > +		}
+> > 
+> > Can't we rely on the caller pre-zeroing the array?
+> 
+> This ends up as args.phys in nouveau_svm_fault - I didn't see a
+> zeroing?
+> 
+> I think it makes sense that this routine fully sets the output array
+> and does not assume pre-initialize
+
+Ok.
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
