@@ -1,90 +1,59 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 50F691B5B35
-	for <lists+nouveau@lfdr.de>; Thu, 23 Apr 2020 14:17:54 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8B2AD1B63D4
+	for <lists+nouveau@lfdr.de>; Thu, 23 Apr 2020 20:32:40 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B801C6E4F9;
-	Thu, 23 Apr 2020 12:17:52 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E14EA6E998;
+	Thu, 23 Apr 2020 18:32:38 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from EUR02-AM5-obe.outbound.protection.outlook.com
- (mail-eopbgr00059.outbound.protection.outlook.com [40.107.0.59])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 077B56E4F9
- for <nouveau@lists.freedesktop.org>; Thu, 23 Apr 2020 12:17:50 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=ZZyzi8DbZ/lmaXK6ktO1nN31p9AIqehJgUcTlnkqXuYzyNh6GrrA+qA/bqrpeyIwl7zfsXsYdbBZoMneAWlYxiLJMlZMr/YDeKXMQp2gW48TaM71aRJ4l3gnOSrEuBCXaZoooa01M1RhCKrtjr1Vh17ovdtFfuLVNAAaMg8kyC1O0KPlTAxfCpHMsSyxZGk1fr7VzRRmwnIfIGDDBNxOszEErJ96U1/+oIRcZpF2okeIfzO1AoqeqtJASSZfLXWF9n+ATyeybG7oPTPgCapKZZzj8JkR5hGUK7s7K/86yRo25D9UKOSXakeL2lJL/pSlA1o8B49lDEL2xF8CAT4GfQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Dn9F7R44nUz7GwWrSJ44IU/Wi0zqqn0xJLxFv3gGq58=;
- b=KsKopDRx2w/e2Zywc7tn/nJj/zYDILciyTba9RYCG1ibyzfUoZ25ou02BZLBD8JV/4SLyOa4V7RDGIpYYBX+tV9t/A2Oy69/5+l/4E+gzr9DAy81YEpyDZM7DLBaH4BvW0t+lLe4cCSMB8KKxVslgdqxYIkulHg5ijQYzdCSwxoSOYZqB2UURbt6qEAIn0oqRP0cpX9iCKZVP2z3nzD7V10wvNFXPGqqm/Fe0OQPmyT52xfWs0WPQtyx1BYCPdu89VC6ec6kMzAOEHcufMQNfE1gSMSVtffqTjlzLDbABWFc5gZWYSrMFYwpZUkKMne+e272oA8ZN/cusvGVRTUZbA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=mellanox.com; dmarc=pass action=none header.from=mellanox.com;
- dkim=pass header.d=mellanox.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Mellanox.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Dn9F7R44nUz7GwWrSJ44IU/Wi0zqqn0xJLxFv3gGq58=;
- b=iV19hIxO+ni/ri6/2+HJwDF9t2E3G6hsbGFL4AIs7IflQ3rr0sVIOoZrwF5PYinOkiM67rJJG1f0ehKymIuSOSP8XHMs2nXCuj6qDkibhytZXwS2xvJhZqkTf6r31MI+E5jNqvzuyq9dBdvLsUL6KuARvypMN7354yv650jJJrY=
-Authentication-Results: spf=none (sender IP is )
- smtp.mailfrom=jgg@mellanox.com; 
-Received: from VI1PR05MB4141.eurprd05.prod.outlook.com (2603:10a6:803:44::15)
- by VI1PR05MB5309.eurprd05.prod.outlook.com (2603:10a6:803:b0::16)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2921.29; Thu, 23 Apr
- 2020 12:17:48 +0000
-Received: from VI1PR05MB4141.eurprd05.prod.outlook.com
- ([fe80::a47b:e3cd:7d6d:5d4e]) by VI1PR05MB4141.eurprd05.prod.outlook.com
- ([fe80::a47b:e3cd:7d6d:5d4e%6]) with mapi id 15.20.2921.030; Thu, 23 Apr 2020
- 12:17:48 +0000
-Date: Thu, 23 Apr 2020 09:17:44 -0300
-From: Jason Gunthorpe <jgg@mellanox.com>
-To: Ralph Campbell <rcampbell@nvidia.com>
-Message-ID: <20200423121744.GY11945@mellanox.com>
+Received: from hqnvemgate24.nvidia.com (hqnvemgate24.nvidia.com
+ [216.228.121.143])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id F13D76E998
+ for <nouveau@lists.freedesktop.org>; Thu, 23 Apr 2020 18:32:37 +0000 (UTC)
+Received: from hqpgpgate101.nvidia.com (Not Verified[216.228.121.13]) by
+ hqnvemgate24.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
+ id <B5ea1ded00001>; Thu, 23 Apr 2020 11:30:40 -0700
+Received: from hqmail.nvidia.com ([172.20.161.6])
+ by hqpgpgate101.nvidia.com (PGP Universal service);
+ Thu, 23 Apr 2020 11:32:37 -0700
+X-PGP-Universal: processed;
+ by hqpgpgate101.nvidia.com on Thu, 23 Apr 2020 11:32:37 -0700
+Received: from DRHQMAIL107.nvidia.com (10.27.9.16) by HQMAIL111.nvidia.com
+ (172.20.187.18) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Thu, 23 Apr
+ 2020 18:32:37 +0000
+Received: from rcampbell-dev.nvidia.com (10.124.1.5) by DRHQMAIL107.nvidia.com
+ (10.27.9.16) with Microsoft SMTP Server (TLS) id 15.0.1473.3;
+ Thu, 23 Apr 2020 18:32:31 +0000
+To: Jason Gunthorpe <jgg@mellanox.com>
 References: <20200421231107.30958-1-rcampbell@nvidia.com>
-Content-Disposition: inline
-In-Reply-To: <20200421231107.30958-1-rcampbell@nvidia.com>
-User-Agent: Mutt/1.9.4 (2018-02-28)
-X-ClientProxiedBy: MN2PR05CA0040.namprd05.prod.outlook.com
- (2603:10b6:208:236::9) To VI1PR05MB4141.eurprd05.prod.outlook.com
- (2603:10a6:803:44::15)
+ <20200423121744.GY11945@mellanox.com>
+X-Nvconfidentiality: public
+From: Ralph Campbell <rcampbell@nvidia.com>
+Message-ID: <a4a405d7-c136-b479-2bbe-5a2304f59c99@nvidia.com>
+Date: Thu, 23 Apr 2020 11:32:31 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.2.2
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from mlx.ziepe.ca (142.68.57.212) by
- MN2PR05CA0040.namprd05.prod.outlook.com (2603:10b6:208:236::9) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.2958.7 via Frontend Transport; Thu, 23 Apr 2020 12:17:48 +0000
-Received: from jgg by mlx.ziepe.ca with local (Exim 4.90_1)	(envelope-from
- <jgg@mellanox.com>)	id 1jRanY-0000Yz-Mh; Thu, 23 Apr 2020 09:17:44 -0300
-X-Originating-IP: [142.68.57.212]
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-HT: Tenant
-X-MS-Office365-Filtering-Correlation-Id: eeadbf96-dc79-4c79-8fe0-08d7e780561d
-X-MS-TrafficTypeDiagnostic: VI1PR05MB5309:
-X-Microsoft-Antispam-PRVS: <VI1PR05MB5309B847A35EA2EEC76F2366CFD30@VI1PR05MB5309.eurprd05.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:8882;
-X-Forefront-PRVS: 03827AF76E
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:VI1PR05MB4141.eurprd05.prod.outlook.com; PTR:; CAT:NONE;
- SFTY:;
- SFS:(10009020)(4636009)(39860400002)(396003)(376002)(366004)(136003)(346002)(478600001)(2616005)(36756003)(26005)(6916009)(54906003)(316002)(9746002)(8936002)(52116002)(33656002)(9786002)(1076003)(4326008)(186003)(8676002)(2906002)(86362001)(66556008)(66946007)(81156014)(4744005)(66476007)(5660300002)(24400500001);
- DIR:OUT; SFP:1101; 
-Received-SPF: None (protection.outlook.com: mellanox.com does not designate
- permitted sender hosts)
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: aKcP5yubRMascTm+4jBG2c1VCBne/enCht7uTYQn5/Sv029hAR12RbpL93sx6qRxjdItreNysQW1MfkUsSatUfKSP+PWMgeNTXuc7YQ6oe5cLWHx5twxvEGAKARpeG2rHTPqeulMO6/N/jNShCpo9vgeYcvEyXZEFiUD6oB0ImqmeGvY7s3wT/gBtKMjTQ+ap6+YARkyyNT8cmEmosanmJfD6dv1BjJnni/iJXliAzmzV/2Bz8IpA/DuMJ5KlvnQNRyS2KuFdWbPPij+0hb/qjso6trEnQDLCwI+vAO1cfy0fMALVaCuazdgYXaNdn5xGcPIQanUTMu4qj/Bh0tn5kb/tiiNthpx6E1dCSAdNTJGFUBb9YnfUVXF/xmRbuVkAOPWsnbVhFbj/L6aDXLSlXN61UZ/vQ4PiEHDydsQPc31fehPn5GUAooEJx9+10r0fcazIhjEI/bKEfAjbagPmHUalgj8yAw2ujm+yQZKN/JvH7JA3gOt0qHUXGTdsG6h
-X-MS-Exchange-AntiSpam-MessageData: lvOkdB4WXtBGXgfBQVAHdAWyjTKJed3l/FQfOnEGDwXrjbkx+KtG4e+gxLO91YuSM08pmM/EoZ+2anRmdof74fN0ygvsZ8bQyOp/3ZxngIUiqdLvKqAaa7vmGiX/h6qJdLcEgGcUvNjuxxwxmUR9SA==
-X-OriginatorOrg: Mellanox.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: eeadbf96-dc79-4c79-8fe0-08d7e780561d
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Apr 2020 12:17:48.4621 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: a652971c-7d2e-4d9b-a6a4-d149256f461b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: WKL/A2P4WVUBu71hpNLnkmFrKlUM36EzPzX/hP3/YA5tuTlTYnQtFRLIn6GL7cp/mavcWkWj3bycvUguVQGeLw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR05MB5309
+In-Reply-To: <20200423121744.GY11945@mellanox.com>
+X-Originating-IP: [10.124.1.5]
+X-ClientProxiedBy: HQMAIL101.nvidia.com (172.20.187.10) To
+ DRHQMAIL107.nvidia.com (10.27.9.16)
+Content-Language: en-US
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
+ t=1587666640; bh=G+nUmnRcJ5ydh6Fqsxvex5y164yAqJgOdeSWpoSvEso=;
+ h=X-PGP-Universal:Subject:To:CC:References:X-Nvconfidentiality:From:
+ Message-ID:Date:User-Agent:MIME-Version:In-Reply-To:
+ X-Originating-IP:X-ClientProxiedBy:Content-Type:Content-Language:
+ Content-Transfer-Encoding;
+ b=HvIBjsiN8WsVxIg/1f+qlmPDtr3fRvI0oZ5uaHP5qXZw0HG9CI+njrtxsYGY/1yBS
+ gNZgb8LHMvioY5p19Rd2AaNkmFIC3MzXPIu+svmr/faDMM3L1luHXfeYHjBBJaqPMV
+ ips0u32xtmp29/wFUIzqCilWvdIVZRHX6BKXfw4BNV4T+tIyKdNZ+TeRakfTQXbxvY
+ JJLVVpYIXpf5CHB0xN4aob7nw72twxqb9HclE4yz67VxVgGB5KaANTiHlY1M1Ly6gH
+ h63Sm5raZ5X3QJk1IhCnHLSjLeUKbj+VOPo512LIQSA2jT16TBSCoAPBeC8YXvtVLt
+ yKzfd0z5K1BGg==
 Subject: Re: [Nouveau] [PATCH] nouveau/hmm: fix nouveau_dmem_chunk
  allocations
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -101,32 +70,39 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Cc: linux-rdma@vger.kernel.org, nouveau@lists.freedesktop.org,
  linux-kernel@vger.kernel.org, Ben Skeggs <bskeggs@redhat.com>,
  Christoph Hellwig <hch@lst.de>
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, Apr 21, 2020 at 04:11:07PM -0700, Ralph Campbell wrote:
-> In nouveau_dmem_init(), a number of struct nouveau_dmem_chunk are allocated
-> and put on the dmem->chunk_empty list. Then in nouveau_dmem_pages_alloc(),
-> a nouveau_dmem_chunk is removed from the list and GPU memory is allocated.
-> However, the nouveau_dmem_chunk is never removed from the chunk_empty
-> list nor placed on the chunk_free or chunk_full lists. This results
-> in only one chunk ever being actually used (2MB) and quickly leads to
-> migration to device private memory failures.
-> 
-> Fix this by having just one list of free device private pages and if no
-> pages are free, allocate a chunk of device private pages and GPU memory.
-> 
-> Signed-off-by: Ralph Campbell <rcampbell@nvidia.com>
-> ---
->  drivers/gpu/drm/nouveau/nouveau_dmem.c | 304 +++++++++----------------
->  1 file changed, 112 insertions(+), 192 deletions(-)
 
-Does this generate any conflicts with my series to rework
-hmm_range_fault?
+On 4/23/20 5:17 AM, Jason Gunthorpe wrote:
+> On Tue, Apr 21, 2020 at 04:11:07PM -0700, Ralph Campbell wrote:
+>> In nouveau_dmem_init(), a number of struct nouveau_dmem_chunk are allocated
+>> and put on the dmem->chunk_empty list. Then in nouveau_dmem_pages_alloc(),
+>> a nouveau_dmem_chunk is removed from the list and GPU memory is allocated.
+>> However, the nouveau_dmem_chunk is never removed from the chunk_empty
+>> list nor placed on the chunk_free or chunk_full lists. This results
+>> in only one chunk ever being actually used (2MB) and quickly leads to
+>> migration to device private memory failures.
+>>
+>> Fix this by having just one list of free device private pages and if no
+>> pages are free, allocate a chunk of device private pages and GPU memory.
+>>
+>> Signed-off-by: Ralph Campbell <rcampbell@nvidia.com>
+>> ---
+>>   drivers/gpu/drm/nouveau/nouveau_dmem.c | 304 +++++++++----------------
+>>   1 file changed, 112 insertions(+), 192 deletions(-)
+> 
+> Does this generate any conflicts with my series to rework
+> hmm_range_fault?
+> 
+> Jason
 
-Jason
+I based it on top of your series and the patch that Ben already has queued
+("nouveau/hmm: map pages after migration") so it shouldn't have any conflicts.
+
+I guess I should have mentioned that in a cover letter.
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
