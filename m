@@ -2,53 +2,43 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7FECE1BEEF1
-	for <lists+nouveau@lfdr.de>; Thu, 30 Apr 2020 06:13:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B05C51BEEF4
+	for <lists+nouveau@lfdr.de>; Thu, 30 Apr 2020 06:15:43 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 566B16EB30;
-	Thu, 30 Apr 2020 04:13:48 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 026486EB3A;
+	Thu, 30 Apr 2020 04:15:41 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-yb1-xb43.google.com (mail-yb1-xb43.google.com
- [IPv6:2607:f8b0:4864:20::b43])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0E6176EB30;
- Thu, 30 Apr 2020 04:13:48 +0000 (UTC)
-Received: by mail-yb1-xb43.google.com with SMTP id t18so2497298ybp.2;
- Wed, 29 Apr 2020 21:13:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=nCPU1gorl1WvKPs1iOzqt5NnAoZZ0QjF1DsfHjpy8kM=;
- b=Ii1k25Ep82LJUh9M/ERKSLRZZMHzCZJcAt1rSs48NIWvUSPIXd3KhGWlVDHwrm5Huf
- DZ3WA2/yrmDAKjQVyP7BVi/sT24Qys5QhodRggUD/ZFgNVQ+9SuBtohrETk5cm1T2k07
- bwu9aGGLxLtJt7z9Q5kECnBm4yy1dQppTyeJbcIAPnvqj7oX3AF36w737sJV9FJdNkUk
- u9WorZUm7UmGWo2Vp6eoWQH+zM3looOdqR2BUBjj935PPz+gcOTehJxmrKIV0BFnIb/6
- voEB5HXLF96MrHmV+MtIVLoT/M+A1//If9kYfDokBjfBacPK31PLHp/C72neuG2ioqlv
- m9Jg==
+Received: from mail-vs1-f44.google.com (mail-vs1-f44.google.com
+ [209.85.217.44])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A94A26EB3A
+ for <nouveau@lists.freedesktop.org>; Thu, 30 Apr 2020 04:15:40 +0000 (UTC)
+Received: by mail-vs1-f44.google.com with SMTP id l25so2938264vso.6
+ for <nouveau@lists.freedesktop.org>; Wed, 29 Apr 2020 21:15:40 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=nCPU1gorl1WvKPs1iOzqt5NnAoZZ0QjF1DsfHjpy8kM=;
- b=kfMv+n+Zy9RBu6pTgWrt8LJLjx+qvMMGydbRhdB/I0SGA2odwml/7qd19cb3HSHpsI
- v7WuknwnCxjBdJrglphhbFPOi8dZ2XPoSU89q99Hdv1TkVnpdXfxQ0ALH77jdvwOFpNP
- DcuAgfo48y/pq+lnzsLMWNWpRtRlyRQG+zQFVmWnNEd0tNXwKSjf8r7ljRsASGAHFVXd
- Ttas5fwqgKfn/hiP+S8mnLkiH+xNcNde9wgvyYHTXPKQZRIy9of+n3+2y9gQhincpVa0
- qg7VhU3qgtxR/yTvYL95DNov70zDA5wU1/DJ7c0+bBtJs6vIFr1Vxq4lCzBeSIf7qrrM
- 0UrQ==
-X-Gm-Message-State: AGi0PuYHCR37rAZoELFMhEoDR3wOi+volIc2WVnCIucvUGx5aQTY69ru
- sj9ySdPWO1LHxWFOQMV/xMcokjgvlFhqUXrGyrQ=
-X-Google-Smtp-Source: APiQypJ+S/o2UH998viYT0pSpKOLZuxf89e5j2PIAZQncI/FHYU5+W9PA0cNSif2Ta7PceldqOcWJlZm7TxLCyUqKLc=
-X-Received: by 2002:a25:8b02:: with SMTP id i2mr2565409ybl.283.1588220027294; 
- Wed, 29 Apr 2020 21:13:47 -0700 (PDT)
+ bh=bYwjuQDXeTiagLf9gQ+UdpaFBbTgS7NlqjgQ5NlRXVU=;
+ b=rjyTtvciVN80vWYJPXX4sQEUhv4u20n0njXay5IDe6IphCD3DT/i2raeU4hnrYgluD
+ +4j1YoVdKhRvGrOUQE1kNAbFIeC9xZ+BwUvJETNMripWHXtatIqVyrGtVUsVBAhFaFn2
+ GU6MfV82YGLsURFax+nGT++TKEDRcbH9hkUH9qr2XTGHRsnVxLRp8qUcI5eU3qShGBx/
+ U4oM5WU0fMOdIwIyJZuCfdeUPIKwbKiF2iL/8RMXozhHHiryQnQLE/wCSGpa1Jz+57nx
+ gVkzligmX/Ech8iBXm8w0SYTk1nd6FTTn0WEsgC1OTluEC7sz5MW3Juwuhsw+MJtP4gT
+ e8Kg==
+X-Gm-Message-State: AGi0PubyCi7dZ4tzE4dOh8dYwDO67oac2AEC5XUvh359a0dO25gmqKCk
+ c3tw/NuG4LD40WW7izgpRcDMLwiuzhShaBjxvL0=
+X-Google-Smtp-Source: APiQypJxVhrqeeS9xG8C8mYI2CxlkKlm8BwVzWy4m4WA23mb0TjwqwaGKILmZO4Q/YC0iiMIW5AcnSZfkcb9/6J2vao=
+X-Received: by 2002:a67:6955:: with SMTP id e82mr1476914vsc.18.1588220139817; 
+ Wed, 29 Apr 2020 21:15:39 -0700 (PDT)
 MIME-Version: 1.0
-References: <20200416075428.25521-1-tiwai@suse.de>
-In-Reply-To: <20200416075428.25521-1-tiwai@suse.de>
-From: Ben Skeggs <skeggsb@gmail.com>
-Date: Thu, 30 Apr 2020 14:13:36 +1000
-Message-ID: <CACAvsv7pZX+h_JqWeu=0yK1u2nwzDGODKWpHarzB-80u89JLZg@mail.gmail.com>
-To: Takashi Iwai <tiwai@suse.de>
-Subject: Re: [Nouveau] [PATCH] drm/nouveau: Fix regression by audio
- component transition
+References: <20200401185621.GA24692@avx2>
+In-Reply-To: <20200401185621.GA24692@avx2>
+From: Ilia Mirkin <imirkin@alum.mit.edu>
+Date: Thu, 30 Apr 2020 00:15:28 -0400
+Message-ID: <CAKb7UvhLF7Qdx7W_0Ft4G8NujW6XbELcCP09DSkubj_duBXVkg@mail.gmail.com>
+To: Alexey Dobriyan <adobriyan@gmail.com>
+Subject: Re: [Nouveau] gp104: regression on Linux 5.6
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,101 +50,49 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: ML nouveau <nouveau@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>,
- ML dri-devel <dri-devel@lists.freedesktop.org>,
- LKML <linux-kernel@vger.kernel.org>
+Cc: nouveau <nouveau@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Good catch!  The OR is definitely a far better choice than the head
-here, as it's what we use to select the GPU-side HDA registers too.
+Hi Alexey,
 
-Merged.
+On Fri, Apr 24, 2020 at 10:52 PM Alexey Dobriyan <adobriyan@gmail.com> wrote:
+>
+> gp104 refuses to switch to "graphic" mode and show anything past
+> this line:
+>
+>         fb0: switching to nouveaufb from EFI VGA
+>
+> Machine is fine, as it I can press Ctrl+Alt+Delete and reboot it
+> normally.
+>
+> 5.5 is OK. 5.6 is broken.
 
-On Thu, 16 Apr 2020 at 17:54, Takashi Iwai <tiwai@suse.de> wrote:
+I've heard some issues relating to missing firmware lately. It should
+work fine without firmware, but perhaps that got broken. Can you log
+into the machine and check dmesg to see what's there? My guess is that
+nouveau takes over from efifb, and then fails to load at some point in
+the middle.
+
+> Bisecting is kinda painful with miscompilation and init/main.c breakage.
 >
-> Since the commit 742db30c4ee6 ("drm/nouveau: Add HD-audio component
-> notifier support"), the nouveau driver notifies and pokes the HD-audio
-> HPD and ELD via audio component, but this seems broken.  The culprit
-> is the naive assumption that crtc->index corresponds to the HDA pin.
-> Actually this rather corresponds to the MST dev_id (alias "pipe" in
-> the audio component framework) while the actual port number is given
-> from the output ior id number.
+> BTW do I need all those megabytes of firmware?
 >
-> This patch corrects the assignment of port and dev_id arguments in the
-> audio component ops to recover from the HDMI/DP audio regression.
->
-> Fixes: 742db30c4ee6 ("drm/nouveau: Add HD-audio component notifier support")
-> BugLink: https://bugzilla.kernel.org/show_bug.cgi?id=207223
-> Cc: <stable@vger.kernel.org>
-> Signed-off-by: Takashi Iwai <tiwai@suse.de>
-> ---
->  drivers/gpu/drm/nouveau/dispnv50/disp.c | 16 ++++++++++------
->  1 file changed, 10 insertions(+), 6 deletions(-)
->
-> diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.c b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-> index a3dc2ba19fb2..3a9fd565079d 100644
-> --- a/drivers/gpu/drm/nouveau/dispnv50/disp.c
-> +++ b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-> @@ -481,15 +481,16 @@ nv50_dac_create(struct drm_connector *connector, struct dcb_output *dcbe)
->   * audio component binding for ELD notification
->   */
->  static void
-> -nv50_audio_component_eld_notify(struct drm_audio_component *acomp, int port)
-> +nv50_audio_component_eld_notify(struct drm_audio_component *acomp, int port,
-> +                               int dev_id)
->  {
->         if (acomp && acomp->audio_ops && acomp->audio_ops->pin_eld_notify)
->                 acomp->audio_ops->pin_eld_notify(acomp->audio_ops->audio_ptr,
-> -                                                port, -1);
-> +                                                port, dev_id);
->  }
->
->  static int
-> -nv50_audio_component_get_eld(struct device *kdev, int port, int pipe,
-> +nv50_audio_component_get_eld(struct device *kdev, int port, int dev_id,
->                              bool *enabled, unsigned char *buf, int max_bytes)
->  {
->         struct drm_device *drm_dev = dev_get_drvdata(kdev);
-> @@ -505,7 +506,8 @@ nv50_audio_component_get_eld(struct device *kdev, int port, int pipe,
->                 nv_encoder = nouveau_encoder(encoder);
->                 nv_connector = nouveau_encoder_connector_get(nv_encoder);
->                 nv_crtc = nouveau_crtc(encoder->crtc);
-> -               if (!nv_connector || !nv_crtc || nv_crtc->index != port)
-> +               if (!nv_connector || !nv_crtc || nv_encoder->or != port ||
-> +                   nv_crtc->index != dev_id)
->                         continue;
->                 *enabled = drm_detect_monitor_audio(nv_connector->edid);
->                 if (*enabled) {
-> @@ -599,7 +601,8 @@ nv50_audio_disable(struct drm_encoder *encoder, struct nouveau_crtc *nv_crtc)
->
->         nvif_mthd(&disp->disp->object, 0, &args, sizeof(args));
->
-> -       nv50_audio_component_eld_notify(drm->audio.component, nv_crtc->index);
-> +       nv50_audio_component_eld_notify(drm->audio.component, nv_encoder->or,
-> +                                       nv_crtc->index);
->  }
->
->  static void
-> @@ -633,7 +636,8 @@ nv50_audio_enable(struct drm_encoder *encoder, struct drm_display_mode *mode)
->         nvif_mthd(&disp->disp->object, 0, &args,
->                   sizeof(args.base) + drm_eld_size(args.data));
->
-> -       nv50_audio_component_eld_notify(drm->audio.component, nv_crtc->index);
-> +       nv50_audio_component_eld_notify(drm->audio.component, nv_encoder->or,
-> +                                       nv_crtc->index);
->  }
->
->  /******************************************************************************
-> --
-> 2.16.4
->
-> _______________________________________________
-> Nouveau mailing list
-> Nouveau@lists.freedesktop.org
-> https://lists.freedesktop.org/mailman/listinfo/nouveau
+> [    0.923273] fb0: switching to nouveaufb from EFI VGA
+> [    0.923440] nouveau 0000:02:00.0: NVIDIA GP104 (134000a1)
+> [    1.026681] nouveau 0000:02:00.0: bios: version 86.04.1e.00.01
+> [    1.026930] nouveau 0000:02:00.0: gr: failed to load firmware "gr/sw_nonctx"
+> [    1.026934] nouveau 0000:02:00.0: gr: failed to load gr/sw_nonctx
+
+This is necessary to provide any sort of acceleration. Otherwise this
+is just a dumb scanout engine. You only need the firmware for your
+chipset, not all of it.
+
+Cheers,
+
+  -ilia
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
