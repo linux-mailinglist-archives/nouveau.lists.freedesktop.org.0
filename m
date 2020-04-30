@@ -2,46 +2,54 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id B4FA71BF833
-	for <lists+nouveau@lfdr.de>; Thu, 30 Apr 2020 14:28:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1067D1C07AE
+	for <lists+nouveau@lfdr.de>; Thu, 30 Apr 2020 22:19:01 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 709586E0D0;
-	Thu, 30 Apr 2020 12:28:03 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 07B886E440;
+	Thu, 30 Apr 2020 20:18:59 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-vs1-f68.google.com (mail-vs1-f68.google.com
- [209.85.217.68])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 458FB6E0D0
- for <nouveau@lists.freedesktop.org>; Thu, 30 Apr 2020 12:28:02 +0000 (UTC)
-Received: by mail-vs1-f68.google.com with SMTP id x136so3684483vsx.2
- for <nouveau@lists.freedesktop.org>; Thu, 30 Apr 2020 05:28:02 -0700 (PDT)
+Received: from mail-pf1-x442.google.com (mail-pf1-x442.google.com
+ [IPv6:2607:f8b0:4864:20::442])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 607686E43D;
+ Thu, 30 Apr 2020 20:18:57 +0000 (UTC)
+Received: by mail-pf1-x442.google.com with SMTP id 18so421512pfx.6;
+ Thu, 30 Apr 2020 13:18:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=from:to:cc:subject:date:message-id;
+ bh=c6sNQQbXXpU5p2FuijRbtB6WLWnnDlNaexeMBmOH9os=;
+ b=AMJF0mMZCNk2Aie4LhGSvy4Yz8R7SHPXqoWRRSAOz3mGEvgEKilOJKxXS8id9b2bLa
+ 2TyI2vxvVgmfLzZzo8yTylejyILFUMIFiNpKAwEkh6axdilQdDkAym/zL0CQ+2qToaHn
+ jWW6pZ6IKhzrPaHUBgDNIUwUXRUUprx17V4yYEY+N7nMd3q0kpczZIhDXs75wgAdroEz
+ mv1MzrdBgMJb6BO2IaCTX99B60dnOEuJRnkas1LLa4xluStvlTqZHJik6SDh/mHJONZY
+ q9whWQRov+7VO3rosvRJji6yxbZPfqnNSzh6agjnYFJuxq8gNzk8rxi1GRWU4vW/Z+8d
+ EYhw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=81zS4oAHqiY8vvWwXKbw/c7oE5WS+UtsvfRGD7CCPhY=;
- b=p04Gq6rY/vi8+N64CKa6j+sIPIfueVlGZtJ3iTSZrK4aQwHWkhxkgJ5EWw5dFDEzlQ
- oLGHhu6NrcIXKeN9uxb/vWH/cyugogAzjE9oW2gVLSTZfjqlCe7W4Al5GbXJJNZMpVWe
- VWeyNuE8Z8938XrxH2LLVE1S+w0etL+6/TLrT3erHNcwTk7CWQtcjEMI1Hm2ecSYwUtd
- nqq3TQH7cqAgsHbVBQW81m2sE1AR+zmslI2rpIKi1ioPitqUEMWfruMfnFOFqbS85V4X
- loGZ3P+/QdRQ/gUQoPPZ76uDw8Rq2cey2AqaOGLFr6lah1NK280Yy8XYJP2e/YNLG5oP
- eNxA==
-X-Gm-Message-State: AGi0PuYrEwzl7Vat0AdpPJfl8BVk3IjZpAXQyPXxZfXp/VccfuypMevg
- A/kBoULENiZVU5aA2D6zdLWYOOqYh9yqPzs5BQs=
-X-Google-Smtp-Source: APiQypLePTmmwU5IS4Fr37Yw+l8xIPII+EttuDwgOaAgcgLPif2xXhNipLVqQsgNz5t55VLO7j+TafNa226NaQvyKWo=
-X-Received: by 2002:a05:6102:409:: with SMTP id
- d9mr2713684vsq.220.1588249681352; 
- Thu, 30 Apr 2020 05:28:01 -0700 (PDT)
-MIME-Version: 1.0
-References: <20200401185621.GA24692@avx2>
- <CAKb7UvhLF7Qdx7W_0Ft4G8NujW6XbELcCP09DSkubj_duBXVkg@mail.gmail.com>
- <20200430073243.GA8620@avx2>
-In-Reply-To: <20200430073243.GA8620@avx2>
-From: Ilia Mirkin <imirkin@alum.mit.edu>
-Date: Thu, 30 Apr 2020 08:27:50 -0400
-Message-ID: <CAKb7UvjP5NfMjvBqydQ3Q53OsLT_eQX3F+s1E4Ornr1LrG6b=Q@mail.gmail.com>
-To: Alexey Dobriyan <adobriyan@gmail.com>
-Subject: Re: [Nouveau] gp104: regression on Linux 5.6
+ h=x-gm-message-state:from:to:cc:subject:date:message-id;
+ bh=c6sNQQbXXpU5p2FuijRbtB6WLWnnDlNaexeMBmOH9os=;
+ b=srtvIZsvWmB1N6QunXAk3YgE1puoYvfT08SGtfySg1kPqXN4zPOgbT7x8CRDIPQ2PI
+ 0qtKprNQOdg+PLb97yrodDpeyo9/sAwMEoXD7mL+PuVx9VrP7pYG6YgNZSyDq2ak5WHj
+ wkxUgbO8jixeFKLVZBgLUDJW/OFuEH3olkEcN3kgRJnCI9QdeN4Ag/IA8hPpEUlX8icz
+ meOIAhCDufnfEamzFYbG3d5HrbHsdwfCz3Zs2bm5IIARsU9FVkF1Wsw0nnkTVUcCVgA5
+ 1biky9Y8dwDqj5XD1qYY7eP3llu+kOP14XZBe4flYUlf9DbMiiSjTWZ/kogd4oMeorPB
+ 2LAw==
+X-Gm-Message-State: AGi0PuYPE3PGtt7oEUjE1wDBuDqBs9Yvk49JObPVs7sLf26m2bydbkr4
+ m3DL5371UuK8umflSax8wD3HOTZsEDQ=
+X-Google-Smtp-Source: APiQypKPGdVlOsYhKcq1mKI7cuDudA78+0Dqfc8fvIvzCBbopM81voaAfO9uBe+SDndiAY1gpae/Sg==
+X-Received: by 2002:a63:5907:: with SMTP id n7mr652937pgb.439.1588277936882;
+ Thu, 30 Apr 2020 13:18:56 -0700 (PDT)
+Received: from jordon-HP-15-Notebook-PC.domain.name ([122.167.43.171])
+ by smtp.gmail.com with ESMTPSA id 14sm523310pjd.36.2020.04.30.13.18.52
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Thu, 30 Apr 2020 13:18:55 -0700 (PDT)
+From: Souptick Joarder <jrdr.linux@gmail.com>
+To: bskeggs@redhat.com, airlied@linux.ie, daniel@ffwll.ch, tzimmermann@suse.de,
+ alexander.deucher@amd.com, lyude@redhat.com, sam@ravnborg.org
+Date: Fri,  1 May 2020 01:56:53 +0530
+Message-Id: <1588278413-21682-1-git-send-email-jrdr.linux@gmail.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [Nouveau] [PATCH] drm/nouveau/dispnv04: Remove dead code
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -53,48 +61,76 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau <nouveau@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>
+Cc: nouveau@lists.freedesktop.org, inux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, Souptick Joarder <jrdr.linux@gmail.com>
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, Apr 30, 2020 at 3:32 AM Alexey Dobriyan <adobriyan@gmail.com> wrote:
->
-> On Thu, Apr 30, 2020 at 12:15:28AM -0400, Ilia Mirkin wrote:
-> > Hi Alexey,
-> >
-> > On Fri, Apr 24, 2020 at 10:52 PM Alexey Dobriyan <adobriyan@gmail.com> wrote:
-> > >
-> > > gp104 refuses to switch to "graphic" mode and show anything past
-> > > this line:
-> > >
-> > >         fb0: switching to nouveaufb from EFI VGA
-> > >
-> > > Machine is fine, as it I can press Ctrl+Alt+Delete and reboot it
-> > > normally.
-> > >
-> > > 5.5 is OK. 5.6 is broken.
-> >
-> > I've heard some issues relating to missing firmware lately. It should
-> > work fine without firmware, but perhaps that got broken. Can you log
-> > into the machine and check dmesg to see what's there? My guess is that
-> > nouveau takes over from efifb, and then fails to load at some point in
-> > the middle.
->
-> I've fixed the issue by including all firmware until "failed to load"
-> messages disappeared. X works and fbconsole on VT1-VT6 works too.
->
-> CONFIG_EXTRA_FIRMWARE="nvidia/gp104/gr/sw_nonctx.bin nvidia/gp104/gr/sw_ctx.bin nvidia/gp104/gr/sw_bundle_init.bin nvidia/gp104/gr/sw_method_init.bin nvidia/gp104/gr/fecs_bl.bin nvidia/gp104/gr/fecs_inst.bin nvidia/gp104/gr/fecs_data.bin nvidia/gp104/gr/fecs_sig.bin nvidia/gp104/gr/gpccs_bl.bin nvidia/gp104/gr/gpccs_inst.bin nvidia/gp104/gr/gpccs_data.bin nvidia/gp104/gr/gpccs_sig.bin nvidia/gp104/sec2/image.bin nvidia/gp104/sec2/desc.bin nvidia/gp104/sec2/sig.bin nvidia/gp104/acr/ucode_load.bin nvidia/gp104/acr/ucode_unload.bin nvidia/gp104/acr/bl.bin nvidia/gp104/acr/unload_bl.bin nvidia/gp104/nvdec/scrubber.bin"
+These are dead code since 3.10. If there is no plan to use
+it further, these can be removed forever.
 
-Ben -- another report of firmware-less load being broken on v5.6.
+Signed-off-by: Souptick Joarder <jrdr.linux@gmail.com>
+---
+ drivers/gpu/drm/nouveau/dispnv04/crtc.c | 28 ----------------------------
+ 1 file changed, 28 deletions(-)
 
-Alexey -- If you compile nouveau as a module, then these can live on
-your filesystem or initrd, depending on your boot process.
+diff --git a/drivers/gpu/drm/nouveau/dispnv04/crtc.c b/drivers/gpu/drm/nouveau/dispnv04/crtc.c
+index 1f08de4..ad0ef7d 100644
+--- a/drivers/gpu/drm/nouveau/dispnv04/crtc.c
++++ b/drivers/gpu/drm/nouveau/dispnv04/crtc.c
+@@ -269,31 +269,11 @@ static void nv_crtc_calc_state_ext(struct drm_crtc *crtc, struct drm_display_mod
+ 		horizStart = horizTotal - 5;
+ 		horizEnd = horizTotal - 2;
+ 		horizBlankEnd = horizTotal + 4;
+-#if 0
+-		if (dev->overlayAdaptor && drm->client.device.info.family >= NV_DEVICE_INFO_V0_CELSIUS)
+-			/* This reportedly works around some video overlay bandwidth problems */
+-			horizTotal += 2;
+-#endif
+ 	}
+ 
+ 	if (mode->flags & DRM_MODE_FLAG_INTERLACE)
+ 		vertTotal |= 1;
+ 
+-#if 0
+-	ErrorF("horizDisplay: 0x%X \n", horizDisplay);
+-	ErrorF("horizStart: 0x%X \n", horizStart);
+-	ErrorF("horizEnd: 0x%X \n", horizEnd);
+-	ErrorF("horizTotal: 0x%X \n", horizTotal);
+-	ErrorF("horizBlankStart: 0x%X \n", horizBlankStart);
+-	ErrorF("horizBlankEnd: 0x%X \n", horizBlankEnd);
+-	ErrorF("vertDisplay: 0x%X \n", vertDisplay);
+-	ErrorF("vertStart: 0x%X \n", vertStart);
+-	ErrorF("vertEnd: 0x%X \n", vertEnd);
+-	ErrorF("vertTotal: 0x%X \n", vertTotal);
+-	ErrorF("vertBlankStart: 0x%X \n", vertBlankStart);
+-	ErrorF("vertBlankEnd: 0x%X \n", vertBlankEnd);
+-#endif
+-
+ 	/*
+ 	* compute correct Hsync & Vsync polarity
+ 	*/
+@@ -492,14 +472,6 @@ static void nv_crtc_calc_state_ext(struct drm_crtc *crtc, struct drm_display_mod
+ 	/* Except for rare conditions I2C is enabled on the primary crtc */
+ 	if (nv_crtc->index == 0)
+ 		regp->crtc_eng_ctrl |= NV_CRTC_FSEL_I2C;
+-#if 0
+-	/* Set overlay to desired crtc. */
+-	if (dev->overlayAdaptor) {
+-		NVPortPrivPtr pPriv = GET_OVERLAY_PRIVATE(dev);
+-		if (pPriv->overlayCRTC == nv_crtc->index)
+-			regp->crtc_eng_ctrl |= NV_CRTC_FSEL_OVERLAY;
+-	}
+-#endif
+ 
+ 	/* ADDRESS_SPACE_PNVM is the same as setting HCUR_ASI */
+ 	regp->cursor_cfg = NV_PCRTC_CURSOR_CONFIG_CUR_LINES_64 |
+-- 
+1.9.1
 
-Cheers,
-
-  -ilia
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
