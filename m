@@ -1,68 +1,54 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 43CD61BEC20
-	for <lists+nouveau@lfdr.de>; Thu, 30 Apr 2020 00:41:34 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 89E291BEEC8
+	for <lists+nouveau@lfdr.de>; Thu, 30 Apr 2020 05:58:46 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 774446EB11;
-	Wed, 29 Apr 2020 22:41:31 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 774D86EA7C;
+	Thu, 30 Apr 2020 03:58:43 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-qk1-x744.google.com (mail-qk1-x744.google.com
- [IPv6:2607:f8b0:4864:20::744])
- by gabe.freedesktop.org (Postfix) with ESMTPS id EC3DF6EB11
- for <nouveau@lists.freedesktop.org>; Wed, 29 Apr 2020 22:41:29 +0000 (UTC)
-Received: by mail-qk1-x744.google.com with SMTP id s9so1130935qkm.6
- for <nouveau@lists.freedesktop.org>; Wed, 29 Apr 2020 15:41:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ziepe.ca; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to:user-agent;
- bh=yBgZcrV4iWdwc8bXr1UgNLaniSphIyQASgPqncouw5A=;
- b=f12ZywN6K7/T0vh/KFA3gH3gfK1sZ3o1eqim7onv3KljZBN4EOi4bv6G5V+XbG4ut1
- QQLVUyAfs4arAjqaqFVeMkgjxNn40gaGCjoQ7o0T29H6bsy2WzWeCqi+bO3ZRddrrCIx
- ZpoSV5qQBQZnrndmt08qcR/DcYoVpUDmC5hY7V0oWPPMSFSPw5y5/KRbFoEpmjdnydS9
- baSt1dM3SYcyQ1N3yyIRPCOPHVdxSN8akC48vdq9aPEUZEPCm7Q2lckDBnXUDRGzXwp2
- 4bh9Wy/0+rhTYdXvbRRxtmS5bIVA54WQzEwFvGgqOS4DEMnxOYBSpNngwveCYRtgj0jf
- jg8A==
+Received: from mail-yb1-xb43.google.com (mail-yb1-xb43.google.com
+ [IPv6:2607:f8b0:4864:20::b43])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1C9AA6E125;
+ Thu, 30 Apr 2020 03:58:42 +0000 (UTC)
+Received: by mail-yb1-xb43.google.com with SMTP id l5so2473105ybf.5;
+ Wed, 29 Apr 2020 20:58:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=FIwWvB1bcjrgfWAykQ5flP8M3l3Y++aqvhNqkjaW3S0=;
+ b=UV5kIo0TX3CL2ps98HTMoWP2CHG35rrpWPzCa2GHvD4ZHX0OROJ+ZjBaoaQ03y2wfE
+ ICe259ObbpcaEUu36lI9FuwzwFuVVkbL+AuQVVaeCubRw0OGxf6acQJ2+nD0TjKLr2n7
+ Y+T10Oyh7V7GrEG5fKI7fGvHkI+eJrcmjpUg4xGXlbTN9CDCOw3/Jw6mKQiagFzCaBN8
+ Rpk3VMXlOK4uZuj4N6d1RQSsHjaUt/Imi3vC3hSBMlojJJgjQQCSBcKXeFPfcvNSxIva
+ P0FklL5JIkB6IhEZNE+XfaA8yiyATrbEqZzPhqp/vIy2u2PGTq8JJTNn9yay5+aL3ksm
+ 9JLA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to:user-agent;
- bh=yBgZcrV4iWdwc8bXr1UgNLaniSphIyQASgPqncouw5A=;
- b=aRkjYqLKanBn23ujJ1QkMku+5a4EQzJ8uf7lrMVXN45uHKdSGzSCuH1q+PlRGyph5f
- aNqwOW39S2zCM9s9XTA4pbKOHT1KBJQ/dzmKryNVn6gDDnX11soX27dVRjdBrC3+ygk7
- acII7vxPG27mpYUH6JIW2s6eRZ3ArwrfRyGeiHWGyHew7C9e1WsQIw+TWPqwYaX9RxdA
- sOUul8qg8DbXvwrldZWq951EMPLXuF1blo5OLsNXqeK/ii3xjG37+BBSCa/st5RMrWW1
- AkJv/iQAEh+rWL6NRkiJ7vHWfdX22sWfjhg7s3h59KHKqRnTJF+HsDM6czCooeOkxLRD
- L3yQ==
-X-Gm-Message-State: AGi0PuZAbNmQxDYIlOkODFG3YKkh6lR+Ecu00/EVvJWKZXpGyPsKXQ+k
- WMX2bpPB00LhSiYEfhPCdE1qkA==
-X-Google-Smtp-Source: APiQypLKqND0JKjNOfB6OKttFWw4PueCh+kW/uTm/J+/8LnYtWQ1Yu18biU6LtzJiRmM87wUIsCivg==
-X-Received: by 2002:a05:620a:1305:: with SMTP id
- o5mr811497qkj.222.1588200089029; 
- Wed, 29 Apr 2020 15:41:29 -0700 (PDT)
-Received: from ziepe.ca
- (hlfxns017vw-142-68-57-212.dhcp-dynamic.fibreop.ns.bellaliant.net.
- [142.68.57.212])
- by smtp.gmail.com with ESMTPSA id v27sm551028qtb.35.2020.04.29.15.41.28
- (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
- Wed, 29 Apr 2020 15:41:28 -0700 (PDT)
-Received: from jgg by mlx.ziepe.ca with local (Exim 4.90_1)
- (envelope-from <jgg@ziepe.ca>)
- id 1jTvOR-0000GO-Rd; Wed, 29 Apr 2020 19:41:27 -0300
-Date: Wed, 29 Apr 2020 19:41:27 -0300
-From: Jason Gunthorpe <jgg@ziepe.ca>
-To: Felix Kuehling <felix.kuehling@amd.com>
-Message-ID: <20200429224127.GB3824@ziepe.ca>
-References: <5-v1-4eb72686de3c+5062-hmm_no_flags_jgg@mellanox.com>
- <ec276ac2-a346-5728-4ac6-9c9bd9ffcd41@amd.com>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=FIwWvB1bcjrgfWAykQ5flP8M3l3Y++aqvhNqkjaW3S0=;
+ b=CvRW+tnMNXhS13ILd3OlwVMaF/1mPi80zeIK9+UmdRJ1yzbVjXBLltBOgKbE/b50gg
+ 327Or6ERwlNKD3zCtwrH1EJmD7OZv1gfJO56AVjv8eVuFq9cLdpMBVnDlWmX2YkCw6LU
+ cD4tgL8iSP1vdFkWLdl06/nDoOqTYi5h5X9aP+fy7IchWyrDjyk+PLYbax0GEQXcOk3R
+ a2KKs6obTCHY5z1DI+GNye/wItsur4ix5SuyKWNA1YxdKM9vFT4zNqxqf0VstoOEHN+C
+ zvMceUGM1TaztnckA4SaURI0ZXqAjW/ycxeh2np6gSKN04Onk2Z5ivsdK0Sk0BETM24Z
+ xjRg==
+X-Gm-Message-State: AGi0PubuNQpUkSHpQ/do69PBbmwUTU66S2P0V3fnt/+jiEejMiJXm1Af
+ 02QkOKQYuJLSmR3zCtAU7qruUL/R2rooi/9Ptrw=
+X-Google-Smtp-Source: APiQypIAwfcTkBjD11IKPHp/L8eLblpfs6T06DURXindp+KMXfmopDU1wbJDpZp657G9gL+SloE/f2+ROCQSt7U6bVU=
+X-Received: by 2002:a25:12c1:: with SMTP id 184mr2644186ybs.162.1588219121198; 
+ Wed, 29 Apr 2020 20:58:41 -0700 (PDT)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <ec276ac2-a346-5728-4ac6-9c9bd9ffcd41@amd.com>
-User-Agent: Mutt/1.9.4 (2018-02-28)
-Subject: Re: [Nouveau] [PATCH hmm 5/5] mm/hmm: remove the customizable pfn
- format from hmm_range_fault
+References: <1587472651-105308-1-git-send-email-zou_wei@huawei.com>
+In-Reply-To: <1587472651-105308-1-git-send-email-zou_wei@huawei.com>
+From: Ben Skeggs <skeggsb@gmail.com>
+Date: Thu, 30 Apr 2020 13:58:30 +1000
+Message-ID: <CACAvsv5qXhLkspF0==z36xY1R1Uv=-XUHEwnH52GDurivbF5Tw@mail.gmail.com>
+To: Zou Wei <zou_wei@huawei.com>
+Subject: Re: [Nouveau] [PATCH -next] drm/nouveau/acr: Use kmemdup instead of
+ kmalloc and memcpy
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -74,63 +60,72 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: "Yang, Philip" <Philip.Yang@amd.com>, Ralph Campbell <rcampbell@nvidia.com>,
- "David \(ChunMing\) Zhou" <David1.Zhou@amd.com>,
- dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- amd-gfx@lists.freedesktop.org, Christoph Hellwig <hch@lst.de>,
- linux-mm@kvack.org, Ben Skeggs <bskeggs@redhat.com>,
- nouveau@lists.freedesktop.org, Alex Deucher <alexander.deucher@amd.com>,
- Niranjana Vishwanathapura <niranjana.vishwanathapura@intel.com>,
- intel-gfx@lists.freedesktop.org,
- Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>
+Cc: Dave Airlie <airlied@linux.ie>, ML nouveau <nouveau@lists.freedesktop.org>,
+ LKML <linux-kernel@vger.kernel.org>,
+ ML dri-devel <dri-devel@lists.freedesktop.org>,
+ Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, Apr 22, 2020 at 01:52:32PM -0400, Felix Kuehling wrote:
-> [+Philip Yang]
-> 
-> Am 2020-04-21 um 8:21 p.m. schrieb Jason Gunthorpe:
-> > From: Jason Gunthorpe <jgg@mellanox.com>
-> >
-> > Presumably the intent here was that hmm_range_fault() could put the data
-> > into some HW specific format and thus avoid some work. However, nothing
-> > actually does that, and it isn't clear how anything actually could do that
-> > as hmm_range_fault() provides CPU addresses which must be DMA mapped.
-> >
-> > Perhaps there is some special HW that does not need DMA mapping, but we
-> > don't have any examples of this, and the theoretical performance win of
-> > avoiding an extra scan over the pfns array doesn't seem worth the
-> > complexity. Plus pfns needs to be scanned anyhow to sort out any
-> > DEVICE_PRIVATE pages.
-> >
-> > This version replaces the uint64_t with an usigned long containing a pfn
-> > and fix flags. On input flags is filled with the HMM_PFN_REQ_* values, on
-> > successful output it is filled with HMM_PFN_* values, describing the state
-> > of the pages.
-> >
-> > amdgpu is simple to convert, it doesn't use snapshot and doesn't use
-> > per-page flags.
-> >
-> > nouveau uses only 16 hmm_pte entries at most (ie fits in a few cache
-> > lines), and it sweeps over its pfns array a couple of times anyhow.
-> >
-> > Signed-off-by: Jason Gunthorpe <jgg@mellanox.com>
-> > Signed-off-by: Christoph Hellwig <hch@lst.de>
-> 
-> Hi Jason,
-> 
-> I pointed out a typo in the documentation inline. Other than that, the
-> series is
-> 
-> Acked-by: Felix Kuehling <Felix.Kuehling@amd.com>
-> 
-> I'll try to build it and run some basic tests later.
+Thanks!
 
-Got it, thanks! Let me know if there are problems
-
-Jason
+On Wed, 22 Apr 2020 at 16:56, Zou Wei <zou_wei@huawei.com> wrote:
+>
+> Fixes coccicheck warning:
+>
+> drivers/gpu/drm/nouveau/nvkm/subdev/acr/hsfw.c:103:23-30: WARNING opportunity for kmemdup
+> drivers/gpu/drm/nouveau/nvkm/subdev/acr/hsfw.c:113:22-29: WARNING opportunity for kmemdup
+>
+> Fixes: 22dcda45a3d1 ("drm/nouveau/acr: implement new subdev to replace "secure boot"")
+> Reported-by: Hulk Robot <hulkci@huawei.com>
+> Signed-off-by: Zou Wei <zou_wei@huawei.com>
+> ---
+>  drivers/gpu/drm/nouveau/nvkm/subdev/acr/hsfw.c | 12 ++++--------
+>  1 file changed, 4 insertions(+), 8 deletions(-)
+>
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/acr/hsfw.c b/drivers/gpu/drm/nouveau/nvkm/subdev/acr/hsfw.c
+> index aecce2d..667fa01 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/acr/hsfw.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/acr/hsfw.c
+> @@ -100,25 +100,21 @@ nvkm_acr_hsfw_load_image(struct nvkm_acr *acr, const char *name, int ver,
+>         hsfw->data_size = lhdr->data_size;
+>
+>         hsfw->sig.prod.size = fwhdr->sig_prod_size;
+> -       hsfw->sig.prod.data = kmalloc(hsfw->sig.prod.size, GFP_KERNEL);
+> +       hsfw->sig.prod.data = kmemdup(fw->data + fwhdr->sig_prod_offset + sig,
+> +                                     hsfw->sig.prod.size, GFP_KERNEL);
+>         if (!hsfw->sig.prod.data) {
+>                 ret = -ENOMEM;
+>                 goto done;
+>         }
+>
+> -       memcpy(hsfw->sig.prod.data, fw->data + fwhdr->sig_prod_offset + sig,
+> -              hsfw->sig.prod.size);
+> -
+>         hsfw->sig.dbg.size = fwhdr->sig_dbg_size;
+> -       hsfw->sig.dbg.data = kmalloc(hsfw->sig.dbg.size, GFP_KERNEL);
+> +       hsfw->sig.dbg.data = kmemdup(fw->data + fwhdr->sig_dbg_offset + sig,
+> +                                    hsfw->sig.dbg.size, GFP_KERNEL);
+>         if (!hsfw->sig.dbg.data) {
+>                 ret = -ENOMEM;
+>                 goto done;
+>         }
+>
+> -       memcpy(hsfw->sig.dbg.data, fw->data + fwhdr->sig_dbg_offset + sig,
+> -              hsfw->sig.dbg.size);
+> -
+>         hsfw->sig.patch_loc = loc;
+>  done:
+>         nvkm_firmware_put(fw);
+> --
+> 2.6.2
+>
+> _______________________________________________
+> dri-devel mailing list
+> dri-devel@lists.freedesktop.org
+> https://lists.freedesktop.org/mailman/listinfo/dri-devel
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
