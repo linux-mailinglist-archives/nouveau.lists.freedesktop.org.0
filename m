@@ -2,53 +2,52 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id BAC561BEED1
-	for <lists+nouveau@lfdr.de>; Thu, 30 Apr 2020 05:59:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9CD081BEEDA
+	for <lists+nouveau@lfdr.de>; Thu, 30 Apr 2020 06:01:07 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 36F866EA84;
-	Thu, 30 Apr 2020 03:59:53 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id ABC4F6EB28;
+	Thu, 30 Apr 2020 04:01:05 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-yb1-xb43.google.com (mail-yb1-xb43.google.com
- [IPv6:2607:f8b0:4864:20::b43])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D165F6E125;
- Thu, 30 Apr 2020 03:59:50 +0000 (UTC)
-Received: by mail-yb1-xb43.google.com with SMTP id t18so2483258ybp.2;
- Wed, 29 Apr 2020 20:59:50 -0700 (PDT)
+Received: from mail-yb1-xb44.google.com (mail-yb1-xb44.google.com
+ [IPv6:2607:f8b0:4864:20::b44])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 41E0A6EA80;
+ Thu, 30 Apr 2020 04:01:04 +0000 (UTC)
+Received: by mail-yb1-xb44.google.com with SMTP id a7so2479290ybs.4;
+ Wed, 29 Apr 2020 21:01:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=UVqognKQgntjVBKfSDEux+9/gcTYWUYxOHYZrNrsat0=;
- b=rkZ25Oks3o/VpyiWfkX3rZpnI3vPGF94ioT0xhki2b45X5ITlx6+yeuOIhWuYqUXxZ
- 7L6+p/dLdoG2j3g5Ai9sAitGD169VlugxcSxdNL505Sh4Uu5USTkRTIF7nbkxTd+Xi7k
- uBnlT3HVPTH2Kh2Pn0N1NK2TES9rq4eF8T6HCxpsYK8DpRTuPJ/5dFoXDr9KKEDa4b4J
- YWTfwZ88NBLqN6jnhffMLn6OpZpK0mSm4DMIfFiojx7JDO7wN+SqbAEGdiAZGoXzn8mB
- bjs0HcoC++cwG3g+ZF/IdDpcTk9PE8S8HP85HoaUeMJTwXNrK6BoxOX3bcTXSYPyi4LZ
- RmcA==
+ :cc; bh=Uigr/Bk3pctYSK4o6DhYhTgwopWjtqRs7LnV/grgN5Y=;
+ b=HlDSU8FWDhsYKPb5rwVsizFvS0q7cSdPJi1n92iA/wCG7sSfUBU2q4+Gba+vBukyz1
+ 5AcwvpIE3pCO81NypD9yqFzt7k2reoGPoGd9VmFZcUhxmioRZqCH2vmwxwgI+EQbDZxZ
+ T/kn1ukQ8MxQFvoFumY4DgOVM94yR11F92ZGgUE1r+0BB4TIMrKcHIQz6yT0agLOuOZI
+ BSfUZ5J1JOrZo5xXTNi+ZNc3xIM/a4K11SBPao6N1rfPmS5UFIL8SifVl2atYw6WGZdH
+ XSDvD13TGin2Z0pELvo1Dh7YsYiOHT0ZTfe23XEMgYZA7Ea9Rak2+hzhafFmh68qn3/T
+ X26A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=UVqognKQgntjVBKfSDEux+9/gcTYWUYxOHYZrNrsat0=;
- b=tkXpA5DZnuiCXiHkkAmbikLB/nBA7lkLLUwkfvG0QnI1M9fAgDhNSUHkO5j8pdZ9DU
- NokeLrmaUALM/g7NIx9/hDDWLXpO9tgiPYWrocUNH/DEkKjCr/AElYOCfJVJQN1M4y+B
- dfMzZJSN//ijdQDGI+s2UOk/MHPtAqdpBytkOG2XSb02r+I6OEuS5HXACI4NcS7F1IsG
- jQ+8qtHEhhL8+UWCNCfcMua18wlaegRygGx97R+KgWMZMm5qhtThmcPIu4Bzl8//FUcm
- c7GWskqZzGTAzsH21g7CcZw44oA3GdvFefXaijePZToAPd/TWWQjDbsqW1QfdmR6Ayfq
- Xbmw==
-X-Gm-Message-State: AGi0PuZL93zQs5Zku6897fTSFn/rhf7o/zVPM3qgGB33thbtsgJ2JG14
- t5YvEKn1OMxZwrt8PPZrsezos505BoqcP9Q2piw=
-X-Google-Smtp-Source: APiQypKveNXxdXNF772LwVNMcSObYZ5pPt8kLYm89iTMNGQ5UrY0MiR1zMFeudwvyX0KOQuRHTxlUcanm+VQVwRvkeA=
-X-Received: by 2002:a25:bccb:: with SMTP id l11mr2366341ybm.435.1588219190036; 
- Wed, 29 Apr 2020 20:59:50 -0700 (PDT)
+ bh=Uigr/Bk3pctYSK4o6DhYhTgwopWjtqRs7LnV/grgN5Y=;
+ b=kMjR+6VU5f3GYNrm1KtuH3+//YSjJ190GSmXbxrO/HVUMs2uzqc9YOzCcl7ZrSEUDg
+ xX1COnLZMJCBOlOb9mJyRvX3v58K8Qu38GDyfj86WbLz3dThRbbJnfIqYs1ZtFs8rat3
+ zjHA8pCAI3DxhEthnv1RJZgul0ZTfj1hU9YiXu8F9xjXwle2Rl5cbE5VryPY9iNRyxxh
+ n3EBlN8VMoRlmpR/SvU1014GX+4K1xOibkU+IsihINmwMxVhAtsMVFSXzRuUsUjXj/LO
+ o/uTrT8Y76S8/9xZ/2bw8Hxy0PazCA5Kblw1rUHhrISoqC29qQWssyzrG9oG13LOuVsp
+ oo+Q==
+X-Gm-Message-State: AGi0Pubug1O9GP7ixPmWx89WlD+3rXg0vWQsxqQ4SY/t0KoqLjdahlgm
+ ej9EXVUuQVBZCBT22IAnymIR1l1YQpEP4E+c9ZuyZdZe
+X-Google-Smtp-Source: APiQypI9ba6qHe3Ig0YTY62gqUCQsREqs/dCO0PphyN68mxloPgpa8vB4qbheHh55vuRJHLEqys/+MA6c+26curgDho=
+X-Received: by 2002:a25:6b46:: with SMTP id o6mr2462578ybm.147.1588219263490; 
+ Wed, 29 Apr 2020 21:01:03 -0700 (PDT)
 MIME-Version: 1.0
-References: <20200423062358.1810-1-kai.heng.feng@canonical.com>
-In-Reply-To: <20200423062358.1810-1-kai.heng.feng@canonical.com>
+References: <20200424073601.143549-1-zhengbin13@huawei.com>
+In-Reply-To: <20200424073601.143549-1-zhengbin13@huawei.com>
 From: Ben Skeggs <skeggsb@gmail.com>
-Date: Thu, 30 Apr 2020 13:59:39 +1000
-Message-ID: <CACAvsv6XmvsnRz7=Brd0dMBfh7FqGA0X_6rz=tTt9M_ess9Lvw@mail.gmail.com>
-To: Kai-Heng Feng <kai.heng.feng@canonical.com>
-Subject: Re: [Nouveau] [PATCH 1/1] drm/nouveau: Use generic helper to check
- _PR3 presence
+Date: Thu, 30 Apr 2020 14:00:52 +1000
+Message-ID: <CACAvsv4P8UWPTeRqTX1=3utdaPud_H01ANdTb567WiFLJB84pA@mail.gmail.com>
+To: Zheng Bin <zhengbin13@huawei.com>
+Subject: Re: [Nouveau] [PATCH] drm/nouveau/mmu: Remove unneeded semicolon
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,11 +59,9 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>,
- "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
- <nouveau@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>,
- "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
- <dri-devel@lists.freedesktop.org>, open list <linux-kernel@vger.kernel.org>
+Cc: Dave Airlie <airlied@linux.ie>, ML nouveau <nouveau@lists.freedesktop.org>,
+ ML dri-devel <dri-devel@lists.freedesktop.org>,
+ Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
@@ -72,102 +69,53 @@ Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 Thanks!
 
-On Thu, 23 Apr 2020 at 17:37, Kai-Heng Feng <kai.heng.feng@canonical.com> wrote:
+On Fri, 24 Apr 2020 at 17:29, Zheng Bin <zhengbin13@huawei.com> wrote:
 >
-> Replace nouveau_pr3_present() in favor of a more generic one,
-> pci_pr3_present().
+> Fixes coccicheck warning:
 >
-> Also the presence of upstream bridge _PR3 doesn't need to go hand in
-> hand with device's _DSM, so check _PR3 before _DSM.
+> drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.h:307:2-3: Unneeded semicolon
+> drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c:583:2-3: Unneeded semicolon
 >
-> Signed-off-by: Kai-Heng Feng <kai.heng.feng@canonical.com>
+> Reported-by: Hulk Robot <hulkci@huawei.com>
+> Signed-off-by: Zheng Bin <zhengbin13@huawei.com>
 > ---
->  drivers/gpu/drm/nouveau/nouveau_acpi.c | 44 ++++++--------------------
->  1 file changed, 10 insertions(+), 34 deletions(-)
+>  drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c | 2 +-
+>  drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.h | 2 +-
+>  2 files changed, 2 insertions(+), 2 deletions(-)
 >
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_acpi.c b/drivers/gpu/drm/nouveau/nouveau_acpi.c
-> index fe3a10255c36..b84dff1b0f28 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_acpi.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_acpi.c
-> @@ -212,37 +212,6 @@ static const struct vga_switcheroo_handler nouveau_dsm_handler = {
->         .get_client_id = nouveau_dsm_get_client_id,
->  };
->
-> -/*
-> - * Firmware supporting Windows 8 or later do not use _DSM to put the device into
-> - * D3cold, they instead rely on disabling power resources on the parent.
-> - */
-> -static bool nouveau_pr3_present(struct pci_dev *pdev)
-> -{
-> -       struct pci_dev *parent_pdev = pci_upstream_bridge(pdev);
-> -       struct acpi_device *parent_adev;
-> -
-> -       if (!parent_pdev)
-> -               return false;
-> -
-> -       if (!parent_pdev->bridge_d3) {
-> -               /*
-> -                * Parent PCI bridge is currently not power managed.
-> -                * Since userspace can change these afterwards to be on
-> -                * the safe side we stick with _DSM and prevent usage of
-> -                * _PR3 from the bridge.
-> -                */
-> -               pci_d3cold_disable(pdev);
-> -               return false;
-> -       }
-> -
-> -       parent_adev = ACPI_COMPANION(&parent_pdev->dev);
-> -       if (!parent_adev)
-> -               return false;
-> -
-> -       return parent_adev->power.flags.power_resources &&
-> -               acpi_has_method(parent_adev->handle, "_PR3");
-> -}
-> -
->  static void nouveau_dsm_pci_probe(struct pci_dev *pdev, acpi_handle *dhandle_out,
->                                   bool *has_mux, bool *has_opt,
->                                   bool *has_opt_flags, bool *has_pr3)
-> @@ -250,6 +219,16 @@ static void nouveau_dsm_pci_probe(struct pci_dev *pdev, acpi_handle *dhandle_out
->         acpi_handle dhandle;
->         bool supports_mux;
->         int optimus_funcs;
-> +       struct pci_dev *parent_pdev;
-> +
-> +       *has_pr3 = false;
-> +       parent_pdev = pci_upstream_bridge(pdev);
-> +       if (parent_pdev) {
-> +               if (parent_pdev->bridge_d3)
-> +                       *has_pr3 = pci_pr3_present(parent_pdev);
-> +               else
-> +                       pci_d3cold_disable(pdev);
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c
+> index 41640e0584ac..199f94e15c5f 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c
+> @@ -580,7 +580,7 @@ nvkm_vmm_iter(struct nvkm_vmm *vmm, const struct nvkm_vmm_page *page,
+>                                 it.pte[it.lvl]++;
+>                         }
+>                 }
+> -       };
 > +       }
 >
->         dhandle = ACPI_HANDLE(&pdev->dev);
->         if (!dhandle)
-> @@ -270,7 +249,6 @@ static void nouveau_dsm_pci_probe(struct pci_dev *pdev, acpi_handle *dhandle_out
->         *has_mux = supports_mux;
->         *has_opt = !!optimus_funcs;
->         *has_opt_flags = optimus_funcs & (1 << NOUVEAU_DSM_OPTIMUS_FLAGS);
-> -       *has_pr3 = false;
->
->         if (optimus_funcs) {
->                 uint32_t result;
-> @@ -280,8 +258,6 @@ static void nouveau_dsm_pci_probe(struct pci_dev *pdev, acpi_handle *dhandle_out
->                          (result & OPTIMUS_ENABLED) ? "enabled" : "disabled",
->                          (result & OPTIMUS_DYNAMIC_PWR_CAP) ? "dynamic power, " : "",
->                          (result & OPTIMUS_HDA_CODEC_MASK) ? "hda bios codec supported" : "");
-> -
-> -               *has_pr3 = nouveau_pr3_present(pdev);
->         }
->  }
+>         nvkm_vmm_flush(&it);
+>         return ~0ULL;
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.h b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.h
+> index 5e55ecbd8005..d3f8f916d0db 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.h
+> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.h
+> @@ -304,7 +304,7 @@ int tu102_vmm_new(struct nvkm_mmu *, bool, u64, u64, void *, u32,
+>                 FILL(VMM, PT, PTEI, _ptes, MAP, _addr);                        \
+>                 PTEI += _ptes;                                                 \
+>                 PTEN -= _ptes;                                                 \
+> -       };                                                                     \
+> +       }                                                                      \
+>         nvkm_done((PT)->memory);                                               \
+>  } while(0)
 >
 > --
-> 2.17.1
+> 2.26.0.106.g9fadedd
 >
 > _______________________________________________
-> dri-devel mailing list
-> dri-devel@lists.freedesktop.org
-> https://lists.freedesktop.org/mailman/listinfo/dri-devel
+> Nouveau mailing list
+> Nouveau@lists.freedesktop.org
+> https://lists.freedesktop.org/mailman/listinfo/nouveau
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
