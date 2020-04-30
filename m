@@ -2,58 +2,45 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id A48BD1BF185
-	for <lists+nouveau@lfdr.de>; Thu, 30 Apr 2020 09:33:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B4FA71BF833
+	for <lists+nouveau@lfdr.de>; Thu, 30 Apr 2020 14:28:05 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id DB40A6EB70;
-	Thu, 30 Apr 2020 07:33:11 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 709586E0D0;
+	Thu, 30 Apr 2020 12:28:03 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0A0D06EB61
- for <nouveau@lists.freedesktop.org>; Thu, 30 Apr 2020 07:32:47 +0000 (UTC)
-Received: by mail-wm1-x334.google.com with SMTP id k12so665199wmj.3
- for <nouveau@lists.freedesktop.org>; Thu, 30 Apr 2020 00:32:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to;
- bh=gGe2NHAnpLJewKteOaS5mIF6HhRadzzMbfDOZ6+dAOw=;
- b=b3k5rUoiVpT7ABTgx6u0RB2BLs/zLwpU+JlsHl9Tk+YqoFkhUD2Mcq17MY85HRPv9H
- DnV2nX9ZP83aEqtmwiHMW8yZQ6ZahmCASTtRtH+MqJo1LDUzLNP+2KONDx8FVOuNBhiT
- 0kZ3D0782ODL2NEydO5VCtNsj3CJrxOgYMs1DEudMdFDnKYt86DnyPF2nYFiXxuyZyAY
- PWLQlxumNYUsTLAzBuE/DIN8L1kMiVcAE2vCfxXEDgaiDxx/1VAlKq2AX1jpZf7hm81m
- /LycvrFlvxbgLm9bmshq22JMR3iIpreu9mhOlYyVH9doCRZRDCk3VKXSMIcNU23q7dqG
- v0fg==
+Received: from mail-vs1-f68.google.com (mail-vs1-f68.google.com
+ [209.85.217.68])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 458FB6E0D0
+ for <nouveau@lists.freedesktop.org>; Thu, 30 Apr 2020 12:28:02 +0000 (UTC)
+Received: by mail-vs1-f68.google.com with SMTP id x136so3684483vsx.2
+ for <nouveau@lists.freedesktop.org>; Thu, 30 Apr 2020 05:28:02 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=gGe2NHAnpLJewKteOaS5mIF6HhRadzzMbfDOZ6+dAOw=;
- b=TXkhQffcqiEIX43gV4jM5tXxuCx71eorQFFXh9mJnCuTXQBQLzhgZqNv0ac7XApQfg
- SQVff0QbiX7MxGQnMTw/6FZaUkssjCZHOJLrf5HiUMt3qrLjuiMl9dWZ0BnwS92XrZek
- wmJos2oW6A5KqOWhhT9QKoT4y8KB02ktLVG6MvxBu2t4v0fneLM7Vr/6AsR0M75AEbHe
- jy3/sFQUmTyNtnoRxyzjtZPYrhxv8/xbNGKJRboSfyb7yboY+vcTVH3RJaeachv0Lldz
- Sgnf5aUiAsUHnBlz1z0QWIHf8oXxOo7jzgGEjn4K/tNKQ9lPXy5OiHtm1DSChUlZJG+q
- 0Hhg==
-X-Gm-Message-State: AGi0PuY4BchzsY0/gTPY+dUjda40DZQ8s8pTMteka2hMIC/D0DDLYlcT
- rNCfO4VTnzXdB1bDEujuIg==
-X-Google-Smtp-Source: APiQypLiLg52SoQdbxplASaKUTg1M7ZjIWjBAY6MRMGrx3bUv+ERCFRK1wT1hDA0Dukws2DbZF/XJA==
-X-Received: by 2002:a1c:4603:: with SMTP id t3mr1403779wma.103.1588231965611; 
- Thu, 30 Apr 2020 00:32:45 -0700 (PDT)
-Received: from avx2 ([46.53.252.178])
- by smtp.gmail.com with ESMTPSA id t2sm11101621wmt.15.2020.04.30.00.32.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 30 Apr 2020 00:32:44 -0700 (PDT)
-Date: Thu, 30 Apr 2020 10:32:43 +0300
-From: Alexey Dobriyan <adobriyan@gmail.com>
-To: Ilia Mirkin <imirkin@alum.mit.edu>
-Message-ID: <20200430073243.GA8620@avx2>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=81zS4oAHqiY8vvWwXKbw/c7oE5WS+UtsvfRGD7CCPhY=;
+ b=p04Gq6rY/vi8+N64CKa6j+sIPIfueVlGZtJ3iTSZrK4aQwHWkhxkgJ5EWw5dFDEzlQ
+ oLGHhu6NrcIXKeN9uxb/vWH/cyugogAzjE9oW2gVLSTZfjqlCe7W4Al5GbXJJNZMpVWe
+ VWeyNuE8Z8938XrxH2LLVE1S+w0etL+6/TLrT3erHNcwTk7CWQtcjEMI1Hm2ecSYwUtd
+ nqq3TQH7cqAgsHbVBQW81m2sE1AR+zmslI2rpIKi1ioPitqUEMWfruMfnFOFqbS85V4X
+ loGZ3P+/QdRQ/gUQoPPZ76uDw8Rq2cey2AqaOGLFr6lah1NK280Yy8XYJP2e/YNLG5oP
+ eNxA==
+X-Gm-Message-State: AGi0PuYrEwzl7Vat0AdpPJfl8BVk3IjZpAXQyPXxZfXp/VccfuypMevg
+ A/kBoULENiZVU5aA2D6zdLWYOOqYh9yqPzs5BQs=
+X-Google-Smtp-Source: APiQypLePTmmwU5IS4Fr37Yw+l8xIPII+EttuDwgOaAgcgLPif2xXhNipLVqQsgNz5t55VLO7j+TafNa226NaQvyKWo=
+X-Received: by 2002:a05:6102:409:: with SMTP id
+ d9mr2713684vsq.220.1588249681352; 
+ Thu, 30 Apr 2020 05:28:01 -0700 (PDT)
+MIME-Version: 1.0
 References: <20200401185621.GA24692@avx2>
  <CAKb7UvhLF7Qdx7W_0Ft4G8NujW6XbELcCP09DSkubj_duBXVkg@mail.gmail.com>
-MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <CAKb7UvhLF7Qdx7W_0Ft4G8NujW6XbELcCP09DSkubj_duBXVkg@mail.gmail.com>
+ <20200430073243.GA8620@avx2>
+In-Reply-To: <20200430073243.GA8620@avx2>
+From: Ilia Mirkin <imirkin@alum.mit.edu>
+Date: Thu, 30 Apr 2020 08:27:50 -0400
+Message-ID: <CAKb7UvjP5NfMjvBqydQ3Q53OsLT_eQX3F+s1E4Ornr1LrG6b=Q@mail.gmail.com>
+To: Alexey Dobriyan <adobriyan@gmail.com>
 Subject: Re: [Nouveau] gp104: regression on Linux 5.6
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -72,47 +59,42 @@ Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, Apr 30, 2020 at 12:15:28AM -0400, Ilia Mirkin wrote:
-> Hi Alexey,
-> 
-> On Fri, Apr 24, 2020 at 10:52 PM Alexey Dobriyan <adobriyan@gmail.com> wrote:
+On Thu, Apr 30, 2020 at 3:32 AM Alexey Dobriyan <adobriyan@gmail.com> wrote:
+>
+> On Thu, Apr 30, 2020 at 12:15:28AM -0400, Ilia Mirkin wrote:
+> > Hi Alexey,
 > >
-> > gp104 refuses to switch to "graphic" mode and show anything past
-> > this line:
+> > On Fri, Apr 24, 2020 at 10:52 PM Alexey Dobriyan <adobriyan@gmail.com> wrote:
+> > >
+> > > gp104 refuses to switch to "graphic" mode and show anything past
+> > > this line:
+> > >
+> > >         fb0: switching to nouveaufb from EFI VGA
+> > >
+> > > Machine is fine, as it I can press Ctrl+Alt+Delete and reboot it
+> > > normally.
+> > >
+> > > 5.5 is OK. 5.6 is broken.
 > >
-> >         fb0: switching to nouveaufb from EFI VGA
-> >
-> > Machine is fine, as it I can press Ctrl+Alt+Delete and reboot it
-> > normally.
-> >
-> > 5.5 is OK. 5.6 is broken.
-> 
-> I've heard some issues relating to missing firmware lately. It should
-> work fine without firmware, but perhaps that got broken. Can you log
-> into the machine and check dmesg to see what's there? My guess is that
-> nouveau takes over from efifb, and then fails to load at some point in
-> the middle.
+> > I've heard some issues relating to missing firmware lately. It should
+> > work fine without firmware, but perhaps that got broken. Can you log
+> > into the machine and check dmesg to see what's there? My guess is that
+> > nouveau takes over from efifb, and then fails to load at some point in
+> > the middle.
+>
+> I've fixed the issue by including all firmware until "failed to load"
+> messages disappeared. X works and fbconsole on VT1-VT6 works too.
+>
+> CONFIG_EXTRA_FIRMWARE="nvidia/gp104/gr/sw_nonctx.bin nvidia/gp104/gr/sw_ctx.bin nvidia/gp104/gr/sw_bundle_init.bin nvidia/gp104/gr/sw_method_init.bin nvidia/gp104/gr/fecs_bl.bin nvidia/gp104/gr/fecs_inst.bin nvidia/gp104/gr/fecs_data.bin nvidia/gp104/gr/fecs_sig.bin nvidia/gp104/gr/gpccs_bl.bin nvidia/gp104/gr/gpccs_inst.bin nvidia/gp104/gr/gpccs_data.bin nvidia/gp104/gr/gpccs_sig.bin nvidia/gp104/sec2/image.bin nvidia/gp104/sec2/desc.bin nvidia/gp104/sec2/sig.bin nvidia/gp104/acr/ucode_load.bin nvidia/gp104/acr/ucode_unload.bin nvidia/gp104/acr/bl.bin nvidia/gp104/acr/unload_bl.bin nvidia/gp104/nvdec/scrubber.bin"
 
-I've fixed the issue by including all firmware until "failed to load"
-messages disappeared. X works and fbconsole on VT1-VT6 works too.
+Ben -- another report of firmware-less load being broken on v5.6.
 
-CONFIG_EXTRA_FIRMWARE="nvidia/gp104/gr/sw_nonctx.bin nvidia/gp104/gr/sw_ctx.bin nvidia/gp104/gr/sw_bundle_init.bin nvidia/gp104/gr/sw_method_init.bin nvidia/gp104/gr/fecs_bl.bin nvidia/gp104/gr/fecs_inst.bin nvidia/gp104/gr/fecs_data.bin nvidia/gp104/gr/fecs_sig.bin nvidia/gp104/gr/gpccs_bl.bin nvidia/gp104/gr/gpccs_inst.bin nvidia/gp104/gr/gpccs_data.bin nvidia/gp104/gr/gpccs_sig.bin nvidia/gp104/sec2/image.bin nvidia/gp104/sec2/desc.bin nvidia/gp104/sec2/sig.bin nvidia/gp104/acr/ucode_load.bin nvidia/gp104/acr/ucode_unload.bin nvidia/gp104/acr/bl.bin nvidia/gp104/acr/unload_bl.bin nvidia/gp104/nvdec/scrubber.bin"
+Alexey -- If you compile nouveau as a module, then these can live on
+your filesystem or initrd, depending on your boot process.
 
-> > Bisecting is kinda painful with miscompilation and init/main.c breakage.
-> >
-> > BTW do I need all those megabytes of firmware?
-> >
-> > [    0.923273] fb0: switching to nouveaufb from EFI VGA
-> > [    0.923440] nouveau 0000:02:00.0: NVIDIA GP104 (134000a1)
-> > [    1.026681] nouveau 0000:02:00.0: bios: version 86.04.1e.00.01
-> > [    1.026930] nouveau 0000:02:00.0: gr: failed to load firmware "gr/sw_nonctx"
-> > [    1.026934] nouveau 0000:02:00.0: gr: failed to load gr/sw_nonctx
-> 
-> This is necessary to provide any sort of acceleration. Otherwise this
-> is just a dumb scanout engine. You only need the firmware for your
-> chipset, not all of it.
+Cheers,
 
-OK, thanks!
+  -ilia
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
