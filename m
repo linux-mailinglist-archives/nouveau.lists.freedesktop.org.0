@@ -1,62 +1,35 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 88D431F6357
-	for <lists+nouveau@lfdr.de>; Thu, 11 Jun 2020 10:12:28 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 66C1D1F8546
+	for <lists+nouveau@lfdr.de>; Sat, 13 Jun 2020 22:54:09 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 77E926E8B2;
-	Thu, 11 Jun 2020 08:12:25 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 785486E46F;
+	Sat, 13 Jun 2020 20:53:58 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-io1-xd33.google.com (mail-io1-xd33.google.com
- [IPv6:2607:f8b0:4864:20::d33])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 435C16E038
- for <nouveau@lists.freedesktop.org>; Thu, 11 Jun 2020 08:12:24 +0000 (UTC)
-Received: by mail-io1-xd33.google.com with SMTP id o5so5324670iow.8
- for <nouveau@lists.freedesktop.org>; Thu, 11 Jun 2020 01:12:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=fDfa4+jXZ9ulsLY5WKCYieKo7asoV0jE5raIUBCwu3E=;
- b=m5t8Bz4MRofIIRs+WrQSDZwHw0H8/wYC4xq3slGdkV36tKpMJRV8d4jBMWxYlu0xam
- Ew9Q/3I8xsNpANdA98LfZi8rRQT1T21dZHmNMrbMBq7w/1Jd6hRdkxZoFrREF58OZJWN
- mY6aaa+mGIOOAUaYvPu6RLE0blvu0gyvwBFcSMc4K1fAMgflbpTgSech0O7FrJTOwaLh
- InL3AZDhHRqH4a9xfaQbOffx4L+rG6/U7BHt24X7JyhfcJhCzlEj/QV1ei016lhUvhHb
- yC5DqTaAhmr1r+TKRVwsJErZDYG4FLItUX1dY9+vLcv3Bm/qsbB/N+Zul0tgE/yqQ/AI
- wI1Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=fDfa4+jXZ9ulsLY5WKCYieKo7asoV0jE5raIUBCwu3E=;
- b=HmcI8YcsvQA1xV2sviRASsELwbMjSDuGLyggf4Fcfz0/Kvgb2h5SYWwz7pLe4VkdKs
- bTIjV7EGIBDTDvuV1wgpXA+jU3OkBkoVWkmLHX4K5yujC4T720WF6BWB9MVV9es3I1hP
- 6cyzE6qz2BMNu/RRzP1oskje3mZFUUTpeK5nFQ/qFapOt/Ammx9olaN1xIz07eiIj7aZ
- 3AZ3PG2hphNmKxA4up/Zp09cagsCC2CV2t8WMzkpmb53a2AqD8IyqmEL4/yNXIBmDBRt
- YgethokbUtkyTq80hesi5lSqHW2PGlIlNHBtDBrNpOd/a0oYY+Y5HHkJ+AVfLjvzNAF/
- J9XA==
-X-Gm-Message-State: AOAM533lWm6Is+0PFaaSM3Ewfonzc4/y56GG21hoMDdUuLQOrlhJlxPN
- c1MyLlj0OfRZRIfVlcMsOguptOyz/JGnYZifmpQvdjJGOUU=
-X-Google-Smtp-Source: ABdhPJzAm3bBTmpi7aZrgpXDcEocIqrcqoYVsUlHQV9H2bX+oYHTvbEmauteQggXeMYqpnl5AOcXAfJyXfILIAFIuDQ=
-X-Received: by 2002:a05:6602:15c8:: with SMTP id
- f8mr7249309iow.183.1591863143330; 
- Thu, 11 Jun 2020 01:12:23 -0700 (PDT)
+Received: from huawei.com (szxga04-in.huawei.com [45.249.212.190])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C9BE26E395;
+ Mon,  4 May 2020 11:33:27 +0000 (UTC)
+Received: from DGGEMS408-HUB.china.huawei.com (unknown [172.30.72.58])
+ by Forcepoint Email with ESMTP id 4B935F381415832D31C8;
+ Mon,  4 May 2020 19:33:26 +0800 (CST)
+Received: from huawei.com (10.175.124.28) by DGGEMS408-HUB.china.huawei.com
+ (10.3.19.208) with Microsoft SMTP Server id 14.3.487.0; Mon, 4 May 2020
+ 19:33:17 +0800
+From: Jason Yan <yanaijie@huawei.com>
+To: <bskeggs@redhat.com>, <airlied@linux.ie>, <daniel@ffwll.ch>,
+ <dri-devel@lists.freedesktop.org>, <nouveau@lists.freedesktop.org>,
+ <linux-kernel@vger.kernel.org>
+Date: Mon, 4 May 2020 19:32:40 +0800
+Message-ID: <20200504113240.40683-1-yanaijie@huawei.com>
+X-Mailer: git-send-email 2.21.1
 MIME-Version: 1.0
-References: <CAOkhzLUrNYk6JKTbTQuFkfuGKxGvW9XVq6+p9igsBgX1-e9Cxg@mail.gmail.com>
- <CAKb7Uvg0W_1qUjf3G4JrCb2oJgkwz4G5T6PwkyeL-rZEp4UnTw@mail.gmail.com>
- <CAOkhzLV+suVNAoyiaHKOkbwP-KKgTLEa7S8kp8+GSTLm_-wWFw@mail.gmail.com>
- <CAKb7UvgWMsLSHCayzdY7UYMVTjN3OHbH2WhKd-BP46K=r4Ra8A@mail.gmail.com>
- <CAOkhzLXZVNdpgwV=iiO0TEvLp3Hx28Zk8iYzwy5BvJ1pWi4QxQ@mail.gmail.com>
- <CAKb7UviB22HxSJ6j4ts=fU=J24Hh69NCBw4uHC5vsi902Pp6bA@mail.gmail.com>
- <CAOkhzLUQXAB1-=2VasSeJC9-LDgsd0Sk-pJY2LBbHaLqpcBeLg@mail.gmail.com>
-In-Reply-To: <CAOkhzLUQXAB1-=2VasSeJC9-LDgsd0Sk-pJY2LBbHaLqpcBeLg@mail.gmail.com>
-From: Zeno Davatz <zdavatz@gmail.com>
-Date: Thu, 11 Jun 2020 10:12:12 +0200
-Message-ID: <CAOkhzLUrm6bS1ejmBdCOmU4G7O=t0XU_0PqYPx4AssGm5z1uCw@mail.gmail.com>
-To: nouveau <nouveau@lists.freedesktop.org>, 
- "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>
-Subject: [Nouveau] Kernel 5.7.0, nouveau 1.0.15-r1, sudo lshw -C display,
- *-display UNCLAIMED
+X-Originating-IP: [10.175.124.28]
+X-CFilter-Loop: Reflected
+X-Mailman-Approved-At: Sat, 13 Jun 2020 20:53:54 +0000
+Subject: [Nouveau] [PATCH] drm/nouveau/mmu: remove unneeded semicolon
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,42 +41,54 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Ben Skeggs <bskeggs@redhat.com>
+Cc: Jason Yan <yanaijie@huawei.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi
+Fix the following coccicheck warning:
 
-With Kernel 5.7.0, nouveau drivers 1.0.15-r1
+drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.h:307:2-3: Unneeded
+semicolon
+drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c:583:2-3: Unneeded
+semicolon
 
-sudo `lshw -C display`
+Signed-off-by: Jason Yan <yanaijie@huawei.com>
+---
+ drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c | 2 +-
+ drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.h | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-will show me:
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c
+index 41640e0584ac..199f94e15c5f 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c
+@@ -580,7 +580,7 @@ nvkm_vmm_iter(struct nvkm_vmm *vmm, const struct nvkm_vmm_page *page,
+ 				it.pte[it.lvl]++;
+ 			}
+ 		}
+-	};
++	}
+ 
+ 	nvkm_vmm_flush(&it);
+ 	return ~0ULL;
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.h b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.h
+index 5e55ecbd8005..d3f8f916d0db 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.h
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.h
+@@ -304,7 +304,7 @@ int tu102_vmm_new(struct nvkm_mmu *, bool, u64, u64, void *, u32,
+ 		FILL(VMM, PT, PTEI, _ptes, MAP, _addr);                        \
+ 		PTEI += _ptes;                                                 \
+ 		PTEN -= _ptes;                                                 \
+-	};                                                                     \
++	}                                                                      \
+ 	nvkm_done((PT)->memory);                                               \
+ } while(0)
+ 
+-- 
+2.21.1
 
- *-display UNCLAIMED
-
-Also `xrandr -q` will not work:
-
-xrandr: Failed to get size of gamma for output default
-Screen 0: minimum 1680 x 1050, current 1680 x 1050, maximum 1680 x 1050
-default connected primary 1680x1050+0+0 0mm x 0mm
-   1680x1050      0.00*
-
-So I can not start up my second monitor with this command:
-
-xrandr --output DVI-D-1 --auto --output DP-1 --auto --left-of DVI-D-1
-
-This used to work with Kernel 5.5.
-
-It was "completely broken" in 5.6 and with 5.7 my first display is
-back, but not my second.
-
-I am on Gentoo Linux. Please CC for replies.
-
-Best
-Zeno
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
