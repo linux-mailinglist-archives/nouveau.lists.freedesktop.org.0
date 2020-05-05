@@ -2,57 +2,56 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id BDBD61C4B86
-	for <lists+nouveau@lfdr.de>; Tue,  5 May 2020 03:30:07 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E5E591C4CBD
+	for <lists+nouveau@lfdr.de>; Tue,  5 May 2020 05:47:04 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id CD6576E030;
-	Tue,  5 May 2020 01:30:03 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 504916E119;
+	Tue,  5 May 2020 03:47:02 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from hqnvemgate24.nvidia.com (hqnvemgate24.nvidia.com
- [216.228.121.143])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6B1FD6E030;
- Tue,  5 May 2020 01:30:02 +0000 (UTC)
-Received: from hqpgpgate102.nvidia.com (Not Verified[216.228.121.13]) by
- hqnvemgate24.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
- id <B5eb0c1190000>; Mon, 04 May 2020 18:27:53 -0700
-Received: from hqmail.nvidia.com ([172.20.161.6])
- by hqpgpgate102.nvidia.com (PGP Universal service);
- Mon, 04 May 2020 18:30:01 -0700
-X-PGP-Universal: processed;
- by hqpgpgate102.nvidia.com on Mon, 04 May 2020 18:30:01 -0700
-Received: from [10.2.56.198] (172.20.13.39) by HQMAIL107.nvidia.com
- (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Tue, 5 May
- 2020 01:30:01 +0000
-To: Jason Gunthorpe <jgg@ziepe.ca>, <linux-mm@kvack.org>, Ralph Campbell
- <rcampbell@nvidia.com>
-References: <5-v2-b4e84f444c7d+24f57-hmm_no_flags_jgg@mellanox.com>
-X-Nvconfidentiality: public
-From: John Hubbard <jhubbard@nvidia.com>
-Message-ID: <c0d02b98-c356-60b1-6043-5b8d1a9be19a@nvidia.com>
-Date: Mon, 4 May 2020 18:30:00 -0700
+X-Greylist: delayed 450 seconds by postgrey-1.36 at gabe;
+ Tue, 05 May 2020 03:47:01 UTC
+Received: from p3nlsmtpcp01-04.prod.phx3.secureserver.net
+ (p3nlsmtpcp01-04.prod.phx3.secureserver.net [184.168.200.145])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7E1DA6E119
+ for <nouveau@lists.freedesktop.org>; Tue,  5 May 2020 03:47:01 +0000 (UTC)
+Received: from p3plcpnl0564.prod.phx3.secureserver.net ([50.62.176.91])
+ by : HOSTING RELAY : with ESMTP
+ id VoPdjnuMmNyMyVoPdjAQ1r; Mon, 04 May 2020 20:38:29 -0700
+X-CMAE-Analysis: v=2.3 cv=BvLjPrf5 c=1 sm=1 tr=0
+ a=enoWsqFKhXaBs5BDtsbzsA==:117 a=vzojZ+xi7nkP3DSvfKPyiQ==:17
+ a=9+rZDBEiDlHhcck0kWbJtElFXBc=:19 a=IkcTkHD0fZMA:10 a=sTwFKg_x9MkA:10
+ a=XtLQB4djo7otXyptofcA:9 a=QEXdDO2ut3YA:10
+X-SECURESERVER-ACCT: a1@tripolho.com
+Received: from ool-45758b00.dyn.optonline.net ([69.117.139.0]:50328
+ helo=[192.168.62.65])
+ by p3plcpnl0564.prod.phx3.secureserver.net with esmtpsa
+ (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.92)
+ (envelope-from <22t@tripolho.com>) id 1jVoPd-000j7P-GT
+ for nouveau@lists.freedesktop.org; Mon, 04 May 2020 20:38:29 -0700
+From: Alberto Sentieri <22t@tripolho.com>
+To: nouveau@lists.freedesktop.org
+Message-ID: <46ba2ff8-c8cf-0f72-62d0-b17178b0f2ac@tripolho.com>
+Date: Mon, 4 May 2020 23:38:23 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.7.0
 MIME-Version: 1.0
-In-Reply-To: <5-v2-b4e84f444c7d+24f57-hmm_no_flags_jgg@mellanox.com>
-X-Originating-IP: [172.20.13.39]
-X-ClientProxiedBy: HQMAIL107.nvidia.com (172.20.187.13) To
- HQMAIL107.nvidia.com (172.20.187.13)
 Content-Language: en-US
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
- t=1588642074; bh=0RmV3sG8w7ohZ9OHDH/pFQovyGtqFiweq5osGERvRpo=;
- h=X-PGP-Universal:Subject:To:CC:References:X-Nvconfidentiality:From:
- Message-ID:Date:User-Agent:MIME-Version:In-Reply-To:
- X-Originating-IP:X-ClientProxiedBy:Content-Type:Content-Language:
- Content-Transfer-Encoding;
- b=eOY1+0+N16Z8aXdaiKYs4SjvO5ciGMllXCnn4JHvxrMNegzH6IgzBrgMQ6KLknx+2
- NW61WlLixaCXwpAX66FkMFk33D1AZxP9m+6e4xhyt3iViJHKiqZE0yxobywOngahYp
- Oa4t4//YPZ9FBYbFVnWJS7FFUuGNZMQcvthU8XFKEm+qluSRkODN/sHHCRiJUh5bGf
- BKKLGG2OcIR8QibGldQa4e9evirUYK9GxZAkXDoSgZQj+ERLHJV3M/7/AZZ0+IMwVQ
- /QA2kar4rqltVlXZDL6gLT9+eQ5GwMKMARyXGnZEQoIO2rCTlEo8sgwnQQ5HXAkQnM
- O4nW+Hut9230g==
-Subject: Re: [Nouveau] [PATCH hmm v2 5/5] mm/hmm: remove the customizable
- pfn format from hmm_range_fault
+X-AntiAbuse: This header was added to track abuse,
+ please include it with any abuse report
+X-AntiAbuse: Primary Hostname - p3plcpnl0564.prod.phx3.secureserver.net
+X-AntiAbuse: Original Domain - lists.freedesktop.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - tripolho.com
+X-Get-Message-Sender-Via: p3plcpnl0564.prod.phx3.secureserver.net: authenticated_id:
+ a1@tripolho.com
+X-Authenticated-Sender: p3plcpnl0564.prod.phx3.secureserver.net: a1@tripolho.com
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-CMAE-Envelope: MS4wfFwm+BO5bdgUsrZnmBIxi9PXqzWJyj4iuEfvU7X8Jd+FGjq5qPoC/pmX2HNm8bkgRo2pKCnWJ5fnM0+Ge5qKhV4pCsQh9gktGBR3eh7grkp27+tNmxx7
+ GSpYblc+WzBud7Ksd4gZL91xr0UQvmjRABKjaVd7KG6i7Z8JSkccIFkn8K697aWMXcc43V2f1GHPxR7XtAPSyEvNs7AFTSkPcds=
+Subject: [Nouveau] problems with NVS310
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -64,264 +63,109 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: "David \(ChunMing\) Zhou" <David1.Zhou@amd.com>,
- amd-gfx@lists.freedesktop.org, "Yang, Philip" <Philip.Yang@amd.com>,
- nouveau@lists.freedesktop.org, Felix Kuehling <Felix.Kuehling@amd.com>,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- Christoph Hellwig <hch@lst.de>, Ben Skeggs <bskeggs@redhat.com>,
- Alex Deucher <alexander.deucher@amd.com>,
- Niranjana Vishwanathapura <niranjana.vishwanathapura@intel.com>,
- intel-gfx@lists.freedesktop.org,
- =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 2020-05-01 11:20, Jason Gunthorpe wrote:
-> From: Jason Gunthorpe <jgg@mellanox.com>
-> 
-> Presumably the intent here was that hmm_range_fault() could put the data
-> into some HW specific format and thus avoid some work. However, nothing
-> actually does that, and it isn't clear how anything actually could do that
-> as hmm_range_fault() provides CPU addresses which must be DMA mapped.
-> 
-> Perhaps there is some special HW that does not need DMA mapping, but we
-> don't have any examples of this, and the theoretical performance win of
-> avoiding an extra scan over the pfns array doesn't seem worth the
-> complexity. Plus pfns needs to be scanned anyhow to sort out any
-> DEVICE_PRIVATE pages.
-> 
-> This version replaces the uint64_t with an usigned long containing a pfn
-> and fixed flags. On input flags is filled with the HMM_PFN_REQ_* values,
-> on successful output it is filled with HMM_PFN_* values, describing the
-> state of the pages.
-> 
-
-Just some minor stuff below. I wasn't able to spot any errors in the code,
-though, so these are just documentation nits.
-
-
-...
-
-> 
-> diff --git a/Documentation/vm/hmm.rst b/Documentation/vm/hmm.rst
-> index 9924f2caa0184c..c9f2329113a47f 100644
-> --- a/Documentation/vm/hmm.rst
-> +++ b/Documentation/vm/hmm.rst
-> @@ -185,9 +185,6 @@ The usage pattern is::
->         range.start = ...;
->         range.end = ...;
->         range.pfns = ...;
-
-That should be:
-
-           range.hmm_pfns = ...;
-
-
-> -      range.flags = ...;
-> -      range.values = ...;
-> -      range.pfn_shift = ...;
->   
->         if (!mmget_not_zero(interval_sub->notifier.mm))
->             return -EFAULT;
-> @@ -229,15 +226,10 @@ The hmm_range struct has 2 fields, default_flags and pfn_flags_mask, that specif
->   fault or snapshot policy for the whole range instead of having to set them
->   for each entry in the pfns array.
->   
-> -For instance, if the device flags for range.flags are::
-> +For instance if the device driver wants pages for a range with at least read
-> +permission, it sets::
->   
-> -    range.flags[HMM_PFN_VALID] = (1 << 63);
-> -    range.flags[HMM_PFN_WRITE] = (1 << 62);
-> -
-> -and the device driver wants pages for a range with at least read permission,
-> -it sets::
-> -
-> -    range->default_flags = (1 << 63);
-> +    range->default_flags = HMM_PFN_REQ_FAULT;
->       range->pfn_flags_mask = 0;
->   
->   and calls hmm_range_fault() as described above. This will fill fault all pages
-> @@ -246,18 +238,18 @@ in the range with at least read permission.
->   Now let's say the driver wants to do the same except for one page in the range for
->   which it wants to have write permission. Now driver set::
->   
-> -    range->default_flags = (1 << 63);
-> -    range->pfn_flags_mask = (1 << 62);
-> -    range->pfns[index_of_write] = (1 << 62);
-> +    range->default_flags = HMM_PFN_REQ_FAULT;
-> +    range->pfn_flags_mask = HMM_PFN_REQ_WRITE;
-> +    range->pfns[index_of_write] = HMM_PFN_REQ_WRITE;
-
-
-All these choices for _WRITE behavior make it slightly confusing. I mean, it's
-better than it was, but there are default flags, a mask, and an index as well,
-and it looks like maybe we have a little more power and flexibility than
-desirable? Nouveau for example is now just setting the mask only:
-
-// nouveau_range_fault():
-     .pfn_flags_mask = HMM_PFN_REQ_FAULT | HMM_PFN_REQ_WRITE,
-     (.default_flags is not set, so is zero)
-
-Maybe the example should do what Nouveau is doing? And/or do we want to get rid
-of either .default_flags or .pfn_flags_mask?
-
-...
-
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_svm.c b/drivers/gpu/drm/nouveau/nouveau_svm.c
-> index cf0d9bd61bebf9..99697df28bfe12 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_svm.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_svm.c
-
-...
-
-> @@ -518,9 +506,45 @@ static const struct mmu_interval_notifier_ops nouveau_svm_mni_ops = {
->   	.invalidate = nouveau_svm_range_invalidate,
->   };
->   
-> +static void nouveau_hmm_convert_pfn(struct nouveau_drm *drm,
-> +				    struct hmm_range *range, u64 *ioctl_addr)
-> +{
-> +	unsigned long i, npages;
-> +
-> +	/*
-> +	 * The ioctl_addr prepared here is passed through nvif_object_ioctl()
-> +	 * to an eventual DMA map in something like gp100_vmm_pgt_pfn()
-> +	 *
-> +	 * This is all just encoding the internal hmm reprensetation into a
-
-"representation"
-
-...
-
-> @@ -542,12 +564,15 @@ static int nouveau_range_fault(struct nouveau_svmm *svmm,
->   			return -EBUSY;
->   
->   		range.notifier_seq = mmu_interval_read_begin(range.notifier);
-> -		range.default_flags = 0;
-> -		range.pfn_flags_mask = -1UL;
->   		down_read(&mm->mmap_sem);
->   		ret = hmm_range_fault(&range);
->   		up_read(&mm->mmap_sem);
->   		if (ret) {
-> +			/*
-> +			 * FIXME: the input PFN_REQ flags are destroyed on
-> +			 * -EBUSY, we need to regenerate them, also for the
-> +			 * other continue below
-> +			 */
-
-
-How serious is this FIXME? It seems like we could get stuck in a loop here,
-if we're not issuing a new REQ, right?
-
-
->   			if (ret == -EBUSY)
->   				continue;
->   			return ret;
-> @@ -562,7 +587,7 @@ static int nouveau_range_fault(struct nouveau_svmm *svmm,
->   		break;
->   	}
->   
-> -	nouveau_dmem_convert_pfn(drm, &range);
-> +	nouveau_hmm_convert_pfn(drm, &range, ioctl_addr);
->   
->   	svmm->vmm->vmm.object.client->super = true;
->   	ret = nvif_object_ioctl(&svmm->vmm->vmm.object, data, size, NULL);
-> @@ -589,6 +614,7 @@ nouveau_svm_fault(struct nvif_notify *notify)
->   		} i;
->   		u64 phys[16];
->   	} args;
-> +	unsigned long hmm_pfns[ARRAY_SIZE(args.phys)];
-
-
-Is there a risk of blowing up the stack here?
-
-...
-
-> --- a/include/linux/hmm.h
-> +++ b/include/linux/hmm.h
-> @@ -19,45 +19,45 @@
->   #include <linux/mmu_notifier.h>
->   
->   /*
-> - * hmm_pfn_flag_e - HMM flag enums
-> + * On output:
-> + * 0             - The page is faultable and a future call with
-> + *                 HMM_PFN_REQ_FAULT could succeed.
-> + * HMM_PFN_VALID - the pfn field points to a valid PFN. This PFN is at
-> + *                 least readable. If dev_private_owner is !NULL then this could
-> + *                 point at a DEVICE_PRIVATE page.
-> + * HMM_PFN_WRITE - if the page memory can be written to (requires HMM_PFN_VALID)
-> + * HMM_PFN_ERROR - accessing the pfn is impossible and the device should
-> + *                 fail. ie poisoned memory, special pages, no vma, etc
->    *
-> - * Flags:
-> - * HMM_PFN_VALID: pfn is valid. It has, at least, read permission.
-> - * HMM_PFN_WRITE: CPU page table has write permission set
-> - *
-> - * The driver provides a flags array for mapping page protections to device
-> - * PTE bits. If the driver valid bit for an entry is bit 3,
-> - * i.e., (entry & (1 << 3)), then the driver must provide
-> - * an array in hmm_range.flags with hmm_range.flags[HMM_PFN_VALID] == 1 << 3.
-> - * Same logic apply to all flags. This is the same idea as vm_page_prot in vma
-> - * except that this is per device driver rather than per architecture.
-> + * On input:
-> + * 0                 - Return the current state of the page, do not fault it.
-> + * HMM_PFN_REQ_FAULT - The output must have HMM_PFN_VALID or hmm_range_fault()
-> + *                     will fail
-> + * HMM_PFN_REQ_WRITE - The output must have HMM_PFN_WRITE or hmm_range_fault()
-> + *                     will fail. Must be combined with HMM_PFN_REQ_FAULT.
->    */
-> -enum hmm_pfn_flag_e {
-> -	HMM_PFN_VALID = 0,
-> -	HMM_PFN_WRITE,
-> -	HMM_PFN_FLAG_MAX
-> +enum hmm_pfn_flags {
-
-Let's add:
-
-         /* Output flags: */
-
-> +	HMM_PFN_VALID = 1UL << (BITS_PER_LONG - 1),
-> +	HMM_PFN_WRITE = 1UL << (BITS_PER_LONG - 2),
-> +	HMM_PFN_ERROR = 1UL << (BITS_PER_LONG - 3),
-> +
-
-         /* Input flags: */
-
-...
-
-> @@ -174,44 +162,44 @@ static int hmm_vma_walk_hole(unsigned long addr, unsigned long end,
->   	}
->   	if (required_fault)
->   		return hmm_vma_fault(addr, end, required_fault, walk);
-> -	return hmm_pfns_fill(addr, end, range, HMM_PFN_NONE);
-> +	return hmm_pfns_fill(addr, end, range, 0);
->   }
->   
-> -static inline uint64_t pmd_to_hmm_pfn_flags(struct hmm_range *range, pmd_t pmd)
-> +static inline unsigned long pmd_to_hmm_pfn_flags(struct hmm_range *range,
-> +						 pmd_t pmd)
->   {
->   	if (pmd_protnone(pmd))
->   		return 0;
-> -	return pmd_write(pmd) ? range->flags[HMM_PFN_VALID] |
-> -				range->flags[HMM_PFN_WRITE] :
-> -				range->flags[HMM_PFN_VALID];
-> +	return pmd_write(pmd) ? (HMM_PFN_VALID | HMM_PFN_WRITE) : HMM_PFN_VALID;
-
-
-I always found the previous range->flags[...] approach hard to remember, so it's
-nice to see a simpler version now.
-
-
-thanks,
--- 
-John Hubbard
-NVIDIA
-_______________________________________________
-Nouveau mailing list
-Nouveau@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/nouveau
+SSBoYXZlIGEgTnZpZGlhIE5WUzMxMCBpbnN0YWxsZWQgaW4gbXkgTGludXggY29tcHV0ZXIgZm9y
+IGEgZmV3IHllYXJzLiAKSXQgd29ya3Mgd2VsbCB3aXRoIHRoZSBOdmlkaWEgZHJpdmVyLCBhbmQg
+bm90IHNvIHdlbGwgd2l0aCB0aGUgTGludXggCm5vdXZlYXUgZHJpdmVyLiBUaGUgTnZpZGlhIE5W
+UzMxMCBoYXMgbmV2ZXIgd29ya2VkIHdlbGwgd2l0aCBMaW51eC4gSW4gCnRoZSBiZWdpbm5pbmcg
+KG1hbnkgeWVhcnMgYWdvKSBJIGRlY2lkZWQgdG8gaW5zdGFsbCBOdmlkaWEgcHJvcHJpZXRhcnkg
+CmRyaXZlcnMsIGJ1dCBldmVyeSBrZXJuZWwgdXBncmFkZSB3b3VsZCByZXF1aXJlIGFuIGFkZGl0
+aW9uYWwgZWZmb3J0IHRvIApoYXZlIHRoZSBkcml2ZXIgd29ya2luZy4gVGhhdCB3YXMgZW5vdWdo
+IGZvciBtZSB0byB0cnkgdGhlIHN0YW5kYXJkIApub24tcHJvcHJpZXRhcnkgZHJpdmVyIGFnYWlu
+LgoKTGF0ZWx5LCB3aXRoIERlYmlhbiBzdHJldGNoIChhbmQgTWF0ZSksIHRoaW5ncyBnb3Qgc29y
+dCBvZiBzdGFibGUgd2l0aCAKdGhlIG5vdXZlYXUgZHJpdmVyLCBhbmQgSSB3YXMgZ2V0dGluZyBv
+bmUgZnJvemVuIHNjcmVlbiBldmVyeSBmZXcgCm1vbnRocywgd2hpY2ggd2FzIGtpbmQgb2YgYWNj
+ZXB0YWJsZS4gQSBjb3VwbGUgb2Ygd2Vla3MgYWdvIEkgdXBncmFkZSB0byAKRGViaWFuIGJ1c3Rl
+ciAoR05PTUUzKSBhbmQgdGhlIG5pZ2h0bWFyZSBpcyBiYWNrOiBJIGdldCBhIGZyb3plbiBzY3Jl
+ZW4gCmF0IGxlYXMgb25jZSBhIGRheS4gQSBzaW1wbGUgRjExIHByZXNzZWQgb24gRmlyZWZveCBj
+b3VsZCBjYXVzZSB0aGUgCmZyZWV6ZSwgYnV0IHRoZXJlIG90aGVyIHRoaW5ncywgd2hpY2ggSSBj
+b3VsZCBub3QgZGV0ZXJtaW5lLCB0aGF0IGFsc28gCmNhdXNlIHRoZSBmcmVlemUuIFRoZSBmcmVl
+emUgaXMgb25seSBhIGdyYXBoaWMgZnJlZXplLCBJIG1lYW4sIEkgY2FuIHNzaCAKaW50byB0aGUg
+bWFjaGluZSBmcm9tIG15IGxhcHRvcCwgc3RvcCBhbGwgc2VydmljZXMgYW5kIHNodXQgaXQgZG93
+biwgb3IgCnJlc3RhcnQgaXQuIEJ1dCBJIGNvdWxkIG5vdCBmaWd1cmUgb3V0IGEgd2F5IG9mIHJl
+c3RhcnRpbmcgdGhlIHZpZGVvIAp3aXRob3V0IGEgcmVib290LiBBbmQgZXZlcnkgZnJlZXplIHVz
+dWFsbHkgbWVhbnMgbG9zaW5nIHNvbWV0aGluZywgYW5kIApsb3NpbmcgbWFueSBtaW51dGVzLgoK
+QW55IHN1Z2dlc3Rpb25zPwoKSGVyZSBpcyBkbWVzZyBpbiBvbmUgb2YgdGhlIGZyZWV6ZXM6Cgpb
+MjM2NjQuNjM5MTg2XSBXQVJOSU5HOiBDUFU6IDMgUElEOiA3MjIzIGF0IApkcml2ZXJzL2dwdS9k
+cm0vbm91dmVhdS9pbmNsdWRlL252a20vc3ViZGV2L2kyYy5oOjE3MiAKaW5pdF9yZGF1eHIrMHhm
+NC8weDEzMCBbbm91dmVhdV0KWzIzNjY0LjYzOTE4N10gTW9kdWxlcyBsaW5rZWQgaW46IG5mbmV0
+bGluayBjZmc4MDIxMSBmdXNlIHJmY29tbSBhcmM0IAptZDQgc2hhNTEyX3Nzc2UzIHNoYTUxMl9n
+ZW5lcmljIG5sc191dGY4IGNpZnMgY2NtIGRuc19yZXNvbHZlciBmc2NhY2hlIAo4MDIxcSBnYXJw
+IG1ycCBicmlkZ2Ugc3RwIGxsYyB2Ym94bmV0YWRwKE9FKSB2Ym94bmV0Zmx0KE9FKSB2Ym94ZHJ2
+KE9FKSAKY21hYyBibmVwIGludGVsX3JhcGwgc25kX2hkYV9jb2RlY19oZG1pIGJ0dXNiIGJ0cnRs
+IGJ0YmNtIAp4ODZfcGtnX3RlbXBfdGhlcm1hbCBidGludGVsIGludGVsX3Bvd2VyY2xhbXAgYmx1
+ZXRvb3RoIG5sc19hc2NpaSAKbmxzX2NwNDM3IGNvcmV0ZW1wIHZmYXQgZmF0IGt2bV9pbnRlbCBq
+aXR0ZXJlbnRyb3B5X3JuZyBrdm0gCnNuZF9oZGFfY29kZWNfcmVhbHRlayBzbmRfaGRhX2NvZGVj
+X2dlbmVyaWMgZHJiZyBpcnFieXBhc3MgCmNyY3QxMGRpZl9wY2xtdWwgYW5zaV9jcHJuZyBjcmMz
+Ml9wY2xtdWwgc25kX2hkYV9pbnRlbCAKZ2hhc2hfY2xtdWxuaV9pbnRlbCBqb3lkZXYgZWNkaF9n
+ZW5lcmljIHNuZF9oZGFfY29kZWMgaW50ZWxfY3N0YXRlIApzbmRfaGRhX2NvcmUgZWZpX3BzdG9y
+ZSBzbmRfaHdkZXAgc25kX3BjbSBlZWVwY193bWkgYXN1c193bWkgc25kX3RpbWVyIAppbnRlbF91
+bmNvcmUgbWVpX21lIHBjY19jcHVmcmVxIHNuZCBzcGFyc2Vfa2V5bWFwIGlUQ09fd2R0IG1laSAK
+aW50ZWxfcmFwbF9wZXJmIHJma2lsbCBlZml2YXJzIHdtaV9ibW9mIHBjc3BrciBzb3VuZGNvcmUg
+c2cgCmlUQ09fdmVuZG9yX3N1cHBvcnQgZXZkZXYgZmlyZXdpcmVfc2JwMgpbMjM2NjQuNjM5MjA3
+XcKgIHBhcnBvcnRfcGMgcHBkZXYgbHAgcGFycG9ydCBlZml2YXJmcyBpcF90YWJsZXMgeF90YWJs
+ZXMgCmF1dG9mczQgZXh0NCBjcmMxNiBtYmNhY2hlIGpiZDIgY3JjMzJjX2dlbmVyaWMgZnNjcnlw
+dG8gZWNiIApoaWRfbG9naXRlY2hfaGlkcHAgaGlkX2xvZ2l0ZWNoX2RqIGhpZF9nZW5lcmljIHVz
+YmhpZCBoaWQgc3JfbW9kIGNkcm9tIApzZF9tb2Qgbm91dmVhdSBjcmMzMmNfaW50ZWwgdmlkZW8g
+aTJjX2FsZ29fYml0IG14bV93bWkgeGhjaV9wY2kgdHRtIGFoY2kgCnhoY2lfaGNkIGxpYmFoY2kg
+ZHJtX2ttc19oZWxwZXIgZWhjaV9wY2kgYWVzbmlfaW50ZWwgZWhjaV9oY2QgbGliYXRhIAphZXNf
+eDg2XzY0IGRybSBjcnlwdG9fc2ltZCB1c2Jjb3JlIGNyeXB0ZCBlMTAwMGUgZ2x1ZV9oZWxwZXIg
+c2NzaV9tb2QgCmZpcmV3aXJlX29oY2kgaTJjX2k4MDEgZmlyZXdpcmVfY29yZSBscGNfaWNoIG1m
+ZF9jb3JlIGNyY19pdHVfdCAKdXNiX2NvbW1vbiB3bWkgYnV0dG9uClsyMzY2NC42MzkyMjRdIENQ
+VTogMyBQSUQ6IDcyMjMgQ29tbToga3dvcmtlci91MjQ6MSBUYWludGVkOiBHwqDCoMKgwqDCoMKg
+wqDCoMKgwqAgCk9FwqDCoMKgwqAgNC4xOS4wLTgtYW1kNjQgIzEgRGViaWFuIDQuMTkuOTgtMStk
+ZWIxMHUxClsyMzY2NC42MzkyMjVdIEhhcmR3YXJlIG5hbWU6IFN5c3RlbSBtYW51ZmFjdHVyZXIg
+U3lzdGVtIFByb2R1Y3QgCk5hbWUvUDlYNzksIEJJT1MgNDUwMiAxMC8xNS8yMDEzClsyMzY2NC42
+MzkyNTRdIFdvcmtxdWV1ZTogbnZrbS1kaXNwIGdmMTE5X2Rpc3Bfc3VwZXIgW25vdXZlYXVdClsy
+MzY2NC42MzkyNzVdIFJJUDogMDAxMDppbml0X3JkYXV4cisweGY0LzB4MTMwIFtub3V2ZWF1XQpb
+MjM2NjQuNjM5Mjc2XSBDb2RlOiBlMSA0OCA4OSBlZiBiYSAwOSAwMCAwMCAwMCBiZSAwMSAwMCAw
+MCAwMCBlOCBlMyA5YyAKMDMgMDAgODUgYzAgNzUgMjcgODAgN2MgMjQgMGYgMDEgNzQgMGUgNDgg
+YzcgYzcgMTAgYmYgOGUgYzAgZTggN2EgYjkgYjggCmRjIDwwZj4gMGIgNDggODkgZWYgZTggMTIg
+OWEgMDMgMDAgMGYgYjYgNDQgMjQgMGUgZTkgMzkgZmYgZmYgZmYgNDggODkKWzIzNjY0LjYzOTI3
+N10gUlNQOiAwMDE4OmZmZmZhNTM0ODNhZGZjMDggRUZMQUdTOiAwMDAxMDI0NgpbMjM2NjQuNjM5
+Mjc5XSBSQVg6IDAwMDAwMDAwMDAwMDAwMjQgUkJYOiBmZmZmYTUzNDgzYWRmYzkwIFJDWDogCjAw
+MDAwMDAwMDAwMDAwMDAKWzIzNjY0LjYzOTI4MF0gUkRYOiAwMDAwMDAwMDAwMDAwMDAwIFJTSTog
+ZmZmZjlhMmJmZjhkNjZiOCBSREk6IApmZmZmOWEyYmZmOGQ2NmI4ClsyMzY2NC42MzkyODFdIFJC
+UDogZmZmZjlhMmJmYjg2ZTgwMCBSMDg6IDAwMDAwMDAwMDAwMDA1NzEgUjA5OiAKMDAwMDAwMDAw
+MDAwMDAwNwpbMjM2NjQuNjM5MjgyXSBSMTA6IDAwMDAwMDAwMDAwMDAwMDAgUjExOiBmZmZmZmZm
+ZjllN2Y0NmVkIFIxMjogCjAwMDAwMDAwMDAwMDAxMDIKWzIzNjY0LjYzOTI4M10gUjEzOiBmZmZm
+OWEyYmZiYmIzYjAwIFIxNDogMDAwMDAwMDAwMDAwMDAyMCBSMTU6IAowMDAwMDAwMDAwMDAwMGRm
+ClsyMzY2NC42MzkyODRdIEZTOsKgIDAwMDAwMDAwMDAwMDAwMDAoMDAwMCkgR1M6ZmZmZjlhMmJm
+ZjhjMDAwMCgwMDAwKSAKa25sR1M6MDAwMDAwMDAwMDAwMDAwMApbMjM2NjQuNjM5Mjg1XSBDUzrC
+oCAwMDEwIERTOiAwMDAwIEVTOiAwMDAwIENSMDogMDAwMDAwMDA4MDA1MDAzMwpbMjM2NjQuNjM5
+Mjg2XSBDUjI6IDAwMDA3ZjlhY2FhNDUyYzQgQ1IzOiAwMDAwMDAwNjMzZTBhMDAyIENSNDogCjAw
+MDAwMDAwMDAwNjA2ZTAKWzIzNjY0LjYzOTI4N10gQ2FsbCBUcmFjZToKWzIzNjY0LjYzOTMxMF3C
+oCBpbml0X2F1eGNoKzB4ZjYvMHgxODAgW25vdXZlYXVdClsyMzY2NC42MzkzMzFdwqAgbnZiaW9z
+X2V4ZWMrMHg0NS8weGQwIFtub3V2ZWF1XQpbMjM2NjQuNjM5MzU5XcKgIG52a21fZHBfdHJhaW5f
+aW5pdCsweDEyZS8weDE3MCBbbm91dmVhdV0KWzIzNjY0LjYzOTM4Nl3CoCBudmttX2RwX2FjcXVp
+cmUrMHgxYTYvMHhjYjAgW25vdXZlYXVdClsyMzY2NC42MzkzOTBdwqAgPyB1cGRhdGVfYmxvY2tl
+ZF9hdmVyYWdlcysweDc3Yi8weDk1MApbMjM2NjQuNjM5Mzk0XcKgID8gX19zd2l0Y2hfdG9fYXNt
+KzB4NDEvMHg3MApbMjM2NjQuNjM5Mzk1XcKgID8gX19zd2l0Y2hfdG9fYXNtKzB4NDEvMHg3MApb
+MjM2NjQuNjM5Mzk3XcKgID8gc3lzY2FsbF9yZXR1cm5fdmlhX3N5c3JldCsweDE0LzB4ODMKWzIz
+NjY0LjYzOTM5OV3CoCA/IF9fc3dpdGNoX3RvX2FzbSsweDM1LzB4NzAKWzIzNjY0LjYzOTQwMF3C
+oCA/IF9fc3dpdGNoX3RvX2FzbSsweDQxLzB4NzAKWzIzNjY0LjYzOTQwMl3CoCA/IF9fc3dpdGNo
+X3RvX2FzbSsweDM1LzB4NzAKWzIzNjY0LjYzOTQwNF3CoCA/IF9fc3dpdGNoX3RvX2FzbSsweDQx
+LzB4NzAKWzIzNjY0LjYzOTQwNV3CoCA/IF9fc3dpdGNoX3RvX2FzbSsweDM1LzB4NzAKWzIzNjY0
+LjYzOTQwN13CoCA/IF9fc3dpdGNoX3RvX2FzbSsweDQxLzB4NzAKWzIzNjY0LjYzOTQwOV3CoCA/
+IF9fc3dpdGNoX3RvX2FzbSsweDM1LzB4NzAKWzIzNjY0LjYzOTQxMF3CoCA/IF9fc3dpdGNoX3Rv
+X2FzbSsweDQxLzB4NzAKWzIzNjY0LjYzOTQxMl3CoCA/IF9fc3dpdGNoX3RvX2FzbSsweDM1LzB4
+NzAKWzIzNjY0LjYzOTQxNF3CoCA/IF9fc3dpdGNoX3RvX2FzbSsweDQxLzB4NzAKWzIzNjY0LjYz
+OTQ0MF3CoCBudjUwX2Rpc3Bfc3VwZXJfMl8yKzB4NzAvMHg0YTAgW25vdXZlYXVdClsyMzY2NC42
+Mzk0NDNdwqAgPyBfX3N3aXRjaF90b19hc20rMHgzNS8weDcwClsyMzY2NC42Mzk0NDRdwqAgPyBf
+X3N3aXRjaF90b19hc20rMHg0MS8weDcwClsyMzY2NC42Mzk0NDZdwqAgPyBfX3N3aXRjaF90b19h
+c20rMHgzNS8weDcwClsyMzY2NC42Mzk0NDhdwqAgPyBfX3N3aXRjaF90b19hc20rMHg0MS8weDcw
+ClsyMzY2NC42Mzk0NDldwqAgPyBfX3N3aXRjaF90b19hc20rMHgzNS8weDcwClsyMzY2NC42Mzk0
+NTFdwqAgPyBfX3N3aXRjaF90b19hc20rMHg0MS8weDcwClsyMzY2NC42Mzk0NzddwqAgZ2YxMTlf
+ZGlzcF9zdXBlcisweDE3ZS8weDJkMCBbbm91dmVhdV0KWzIzNjY0LjYzOTQ4MF3CoCBwcm9jZXNz
+X29uZV93b3JrKzB4MWE3LzB4M2EwClsyMzY2NC42Mzk0ODJdwqAgd29ya2VyX3RocmVhZCsweDMw
+LzB4MzkwClsyMzY2NC42Mzk0ODRdwqAgPyBjcmVhdGVfd29ya2VyKzB4MWEwLzB4MWEwClsyMzY2
+NC42Mzk0ODZdwqAga3RocmVhZCsweDExMi8weDEzMApbMjM2NjQuNjM5NDg3XcKgID8ga3RocmVh
+ZF9iaW5kKzB4MzAvMHgzMApbMjM2NjQuNjM5NDg5XcKgIHJldF9mcm9tX2ZvcmsrMHgzNS8weDQw
+ClsyMzY2NC42Mzk0OTFdIC0tLVsgZW5kIHRyYWNlIDQ0OTI5MjZmMzE3MzcyYmMgXS0tLQoKCl9f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCk5vdXZlYXUgbWFp
+bGluZyBsaXN0Ck5vdXZlYXVAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJl
+ZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vbm91dmVhdQo=
