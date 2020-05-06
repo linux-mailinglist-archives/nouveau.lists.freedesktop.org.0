@@ -1,48 +1,51 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3AA1F1C5E58
-	for <lists+nouveau@lfdr.de>; Tue,  5 May 2020 19:06:47 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id E80611C7231
+	for <lists+nouveau@lfdr.de>; Wed,  6 May 2020 15:53:57 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 52C1B6E7E6;
-	Tue,  5 May 2020 17:06:45 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9E6516E880;
+	Wed,  6 May 2020 13:53:55 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ua1-f50.google.com (mail-ua1-f50.google.com
- [209.85.222.50])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 500CE6E7F1
- for <nouveau@lists.freedesktop.org>; Tue,  5 May 2020 17:06:44 +0000 (UTC)
-Received: by mail-ua1-f50.google.com with SMTP id m9so684629uaq.12
- for <nouveau@lists.freedesktop.org>; Tue, 05 May 2020 10:06:44 -0700 (PDT)
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2E06B6E880
+ for <nouveau@lists.freedesktop.org>; Wed,  6 May 2020 13:53:54 +0000 (UTC)
+Received: by mail-ed1-x536.google.com with SMTP id k22so1974553eds.6
+ for <nouveau@lists.freedesktop.org>; Wed, 06 May 2020 06:53:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:from:date:message-id:subject:to;
+ bh=RRRprd47NXuTMwbDTaoNV6BVlO9LcOxIortX2tBbYmI=;
+ b=tSuI85LqDY1i4pNiAFLgiyXworUzqdLB+dkNZ94dLTP8JINASI+lK2IcDAUSbN6/5n
+ h7EJBZxzrqxwvoy9wECTgC9v8aDhvcXq4Ob+dZ6BoG3vGRKZBpzwwVTMSm26os8ttt0y
+ 3TfqOZwBPVGsZdRi9AKCcN1DcNOF0fR/yTdBoghvJkz+xJcX0fWi3SJdKSxyZCu8rqhV
+ RJ2UPgMMjcRD8ItyRdRR0xZn5sUGXEGh/FlVJYu8UD4g4gFC5BF5jbXCR2BPSfQpB32Q
+ R9kCk+qLpW5TQtMBf1nKOOpyQ/EDYE5hdV5GmvTMg3XdWq44HdSrzzgvSlbZ028VMzNd
+ 1ifQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=zZm72PBJuM81Xr74xOJYH5AUQAZmLQ9fUXabQljcKtU=;
- b=NEetz8uuEdHpm7LM+PHGEm2lia9VqbIr9QW1LXwKh7fXPIGjdTs+58BNk0G9gRys1r
- 7lc/3YN9xHUNXuuzHGlPKzwQX2Y9KZUQfrP5ln1We1eGJGzfHItoIJiy6sCom90bThjU
- Qt6yqKKAX8FUw3zDS+/7NFdKlUta0qFzZMKiOhwvpw8VGSUjXrVi7Ch8lZWJHKRCVd50
- i7ITzemzboq8Nhj6llAMSTjLmRbKb8Xyu0+NinVqmvf93nVT5olMDwCxO2FvIMWFz6U4
- Y4aXYvmqyibZF2JssPdrciirrj/6covlikDe96IUmKJp9bUJY8gTn2TSXqrRZetz8L8m
- rCSA==
-X-Gm-Message-State: AGi0PubAZFWBjsMvc3pSdsksaK0IGpH7+1mrHSlG8Xd44dpAbJd2GjzH
- tOVAzig6grByQTOTqMzMvE6JpYHlqxNj/hiMx0f1O/b7
-X-Google-Smtp-Source: APiQypI/X4dy8GrX5Sb776qJRLQTBn1TuxzXwFiIwIDiNRj8L+EeZLLybyVLYnvL4EFoo2uRaGaZJTv6VVBAPAIu4aw=
-X-Received: by 2002:ab0:5944:: with SMTP id o4mr3477973uad.98.1588698403269;
- Tue, 05 May 2020 10:06:43 -0700 (PDT)
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=RRRprd47NXuTMwbDTaoNV6BVlO9LcOxIortX2tBbYmI=;
+ b=OcL2+sj5BgDp/qnYV2IUZiXgdxxpPGxTPQoBSg+uAlyQTGjdvmaBTAZv+xOCHqJfSU
+ ACB/Lr+p+qElGXvelng1lWYQbG+pTDm94KvfZBhrLmEvNZZvrGJdCyQgmqMJWmcG866Y
+ XrtmrlCXHfpBPXVyuJYzlgX9TCCsDJ1W8g0KpOFzOXJZAbzJIK1fQ8vPBxjv7hqJmEs/
+ oy5qyzpPyf0uQsBlgLuXs6iPX9XGMmiCpzxkbELECzLEtfY4XHgbe7nlNGL8gsbnc2FK
+ R7qiqmVA7tj5293fcRUIkTg3eDcpRA1+3yDHwq1Ghfe3A0UAuoFb4aJ9ghHmC5TCBouf
+ UXYA==
+X-Gm-Message-State: AGi0PuaWo3Y+a/8uLujke6ck6vZGs5mS3cdVhKU77c4Pri9WWjdlwLA2
+ QZN7WiiUv4jfguoYQzk/DEPmsc94MUt7t0eIoXiXLHMTqHI=
+X-Google-Smtp-Source: APiQypK5HJonIeCEkTIl4EgI4FK3nb1gaKXk9DK+2PMtAyflsIxq3Kpm8T+6RE6+zT26mdq5AFAD/+mNPI1XksVMhbI=
+X-Received: by 2002:a05:6402:752:: with SMTP id
+ p18mr7211916edy.261.1588773232573; 
+ Wed, 06 May 2020 06:53:52 -0700 (PDT)
 MIME-Version: 1.0
-References: <46ba2ff8-c8cf-0f72-62d0-b17178b0f2ac@tripolho.com>
- <CAKb7UvguvnBnauKhcc4CPoZE=vRzj46JWKQDND=MBJZ89p13vg@mail.gmail.com>
- <a6346e40-a4ed-0d59-47c9-3afea2dd7274@tripolho.com>
- <CAKb7Uvjt77zM0ATjwCNcCAh46+kj8HkOAinuN8vdUACKcPPGjg@mail.gmail.com>
- <ff90c308-a015-0dff-debc-40d618d9a579@tripolho.com>
-In-Reply-To: <ff90c308-a015-0dff-debc-40d618d9a579@tripolho.com>
-From: Ilia Mirkin <imirkin@alum.mit.edu>
-Date: Tue, 5 May 2020 13:06:32 -0400
-Message-ID: <CAKb7UvgxQichqLT2RmWUHJgO3DOm3ctxrNZx-GjchNiMvwxwfA@mail.gmail.com>
-To: Alberto Sentieri <22t@tripolho.com>
-Subject: Re: [Nouveau] problems with NVS310
+From: =?UTF-8?B?TWlsYW4gQnXFoWth?= <milan.buska@gmail.com>
+Date: Wed, 6 May 2020 15:53:26 +0200
+Message-ID: <CAFCWPP+WKRhhXG3CRfqRztWbFJwUqeeY6tiip4fT9gwtyjKNwQ@mail.gmail.com>
+To: nouveau@lists.freedesktop.org
+Subject: [Nouveau] GeForce(R) GT 710 1GB PCIE x 1 on arm64
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -54,54 +57,74 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau <nouveau@lists.freedesktop.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============1848318347=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Oh right. Wayland. Not sure how one gets the EDID out there...
+--===============1848318347==
+Content-Type: multipart/alternative; boundary="0000000000002802dd05a4fb1899"
 
-On Tue, May 5, 2020 at 12:50 PM Alberto Sentieri <22t@tripolho.com> wrote:
->
-> I guess the DVI adapter is passive.
->
-> $ xrandr --props
-> Screen 0: minimum 320 x 200, current 4480 x 1440, maximum 8192 x 8192
-> XWAYLAND1 connected 1920x1080+0+0 (normal left inverted right x axis y
-> axis) 510mm x 290mm
->      non-desktop: 0
->          supported: 0, 1
->     1920x1080     59.96*+
-> XWAYLAND4 connected 2560x1440+1920+0 (normal left inverted right x axis
-> y axis) 600mm x 340mm
->      non-desktop: 0
->          supported: 0, 1
->     2560x1440     59.91*+
->
-> On 5/5/20 11:17 AM, Ilia Mirkin wrote:
-> > On Tue, May 5, 2020 at 11:02 AM Alberto Sentieri <22t@tripolho.com> wrote:
-> >> I have two monitors connected to the PC. One is an AOC 23" (1920 x 1080)
-> >> and the other is a BenQ 27" (2560 x 1440). Nothing special about them.
-> >> BenQ has a display port and the AOC uses some sort of DVI adapter.
-> > Do you know if the DVI adapter is active or passive? (If you include
-> > the EDID, that should become apparent. It should be visible in "xrandr
-> > --props")
-> >
-> >> I have this event many times and I captured dmesg twice. At least at one
-> >> time I captured dmesg my computer was under high load: it had about 15
-> >> to 20 windows opened (spreadsheets, Thunderbird, Firefox, virtual
-> >> machines under virtual box), there was a lot of disk activity and I was
-> >> as trying to capture a screenshot from Firefox using the screenshot
-> >> tool. I could not make everything fit into one screen, so I hit F11
-> >> (while in Firefox), captured what I needed (now it fit), and when I
-> >> pressed F11 again to make Firefox come back to a regular window, it
-> >> locked: I could not move the mouse and caps lock led was frozen.
-> > Hm, moving between full screen/not is at least a page-flip if wayland
-> > is being used. I guess it's plausible.
-> >
-> >    -ilia
+--0000000000002802dd05a4fb1899
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+Hi to all.
+I'm experimenting with running a
+https://www.zotac.com/us/product/graphics_card/geforce%C2%AE-gt-710-1gb-pci=
+e-x-1
+card on an Nvidia Jetson TX2 arm64 device.
+Possible?
+Linux kernel aarch64 5.6.10.
+Because Nvidia did not list drivers for this architecture, I'm
+experimenting with a nouveau driver.
+The Jetson TX2 has a default driver for the host1x framebuffer for output
+from the board via HDMI.
+I changed the video kernel parameter to nouveau. Booting the system OK only
+there is no output on the monitor.
+The device can only be controlled via the serial console.
+Can anyone advise me where to start setting up - (if something needs to be
+set up)
+
+Greeting
+
+Milan Bu=C5=A1ka
+
+--=20
+
+Remember, no question is too stupid and no problem too small
+       -- We've all been beginners
+
+--0000000000002802dd05a4fb1899
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Hi to all.<br>I&#39;m experimenting with running a <a href=
+=3D"https://www.zotac.com/us/product/graphics_card/geforce%C2%AE-gt-710-1gb=
+-pcie-x-1">https://www.zotac.com/us/product/graphics_card/geforce%C2%AE-gt-=
+710-1gb-pcie-x-1</a> card on an Nvidia Jetson TX2 arm64 device.<br>Possible=
+?<br>Linux kernel aarch64 5.6.10.<br>Because Nvidia did not list drivers fo=
+r this architecture, I&#39;m experimenting with a nouveau driver.<br>The Je=
+tson TX2 has a default driver for the host1x framebuffer for output from th=
+e board via HDMI.<br>I changed the video kernel parameter to nouveau. Booti=
+ng the system OK only there is no output on the monitor.<br>The device can =
+only be controlled via the serial console.<br>Can anyone advise me where to=
+ start setting up - (if something needs to be set up)<br><br>Greeting<br><b=
+r>Milan Bu=C5=A1ka<br clear=3D"all"><div><br></div>-- <br><div dir=3D"ltr" =
+class=3D"gmail_signature" data-smartmail=3D"gmail_signature">=C2=A0 =C2=A0 =
+=C2=A0<br>Remember, no question is too stupid and no problem too small<br>=
+=C2=A0 =C2=A0 =C2=A0 =C2=A0-- We&#39;ve all been beginners</div></div>
+
+--0000000000002802dd05a4fb1899--
+
+--===============1848318347==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/nouveau
+
+--===============1848318347==--
