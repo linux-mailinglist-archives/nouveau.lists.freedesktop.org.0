@@ -1,51 +1,45 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id E80611C7231
-	for <lists+nouveau@lfdr.de>; Wed,  6 May 2020 15:53:57 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 181001C7255
+	for <lists+nouveau@lfdr.de>; Wed,  6 May 2020 16:00:38 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9E6516E880;
-	Wed,  6 May 2020 13:53:55 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 77B326E87F;
+	Wed,  6 May 2020 14:00:36 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 2E06B6E880
- for <nouveau@lists.freedesktop.org>; Wed,  6 May 2020 13:53:54 +0000 (UTC)
-Received: by mail-ed1-x536.google.com with SMTP id k22so1974553eds.6
- for <nouveau@lists.freedesktop.org>; Wed, 06 May 2020 06:53:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:from:date:message-id:subject:to;
- bh=RRRprd47NXuTMwbDTaoNV6BVlO9LcOxIortX2tBbYmI=;
- b=tSuI85LqDY1i4pNiAFLgiyXworUzqdLB+dkNZ94dLTP8JINASI+lK2IcDAUSbN6/5n
- h7EJBZxzrqxwvoy9wECTgC9v8aDhvcXq4Ob+dZ6BoG3vGRKZBpzwwVTMSm26os8ttt0y
- 3TfqOZwBPVGsZdRi9AKCcN1DcNOF0fR/yTdBoghvJkz+xJcX0fWi3SJdKSxyZCu8rqhV
- RJ2UPgMMjcRD8ItyRdRR0xZn5sUGXEGh/FlVJYu8UD4g4gFC5BF5jbXCR2BPSfQpB32Q
- R9kCk+qLpW5TQtMBf1nKOOpyQ/EDYE5hdV5GmvTMg3XdWq44HdSrzzgvSlbZ028VMzNd
- 1ifQ==
+Received: from mail-vs1-f51.google.com (mail-vs1-f51.google.com
+ [209.85.217.51])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 877466E883
+ for <nouveau@lists.freedesktop.org>; Wed,  6 May 2020 14:00:35 +0000 (UTC)
+Received: by mail-vs1-f51.google.com with SMTP id m24so1028309vsq.10
+ for <nouveau@lists.freedesktop.org>; Wed, 06 May 2020 07:00:35 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=RRRprd47NXuTMwbDTaoNV6BVlO9LcOxIortX2tBbYmI=;
- b=OcL2+sj5BgDp/qnYV2IUZiXgdxxpPGxTPQoBSg+uAlyQTGjdvmaBTAZv+xOCHqJfSU
- ACB/Lr+p+qElGXvelng1lWYQbG+pTDm94KvfZBhrLmEvNZZvrGJdCyQgmqMJWmcG866Y
- XrtmrlCXHfpBPXVyuJYzlgX9TCCsDJ1W8g0KpOFzOXJZAbzJIK1fQ8vPBxjv7hqJmEs/
- oy5qyzpPyf0uQsBlgLuXs6iPX9XGMmiCpzxkbELECzLEtfY4XHgbe7nlNGL8gsbnc2FK
- R7qiqmVA7tj5293fcRUIkTg3eDcpRA1+3yDHwq1Ghfe3A0UAuoFb4aJ9ghHmC5TCBouf
- UXYA==
-X-Gm-Message-State: AGi0PuaWo3Y+a/8uLujke6ck6vZGs5mS3cdVhKU77c4Pri9WWjdlwLA2
- QZN7WiiUv4jfguoYQzk/DEPmsc94MUt7t0eIoXiXLHMTqHI=
-X-Google-Smtp-Source: APiQypK5HJonIeCEkTIl4EgI4FK3nb1gaKXk9DK+2PMtAyflsIxq3Kpm8T+6RE6+zT26mdq5AFAD/+mNPI1XksVMhbI=
-X-Received: by 2002:a05:6402:752:: with SMTP id
- p18mr7211916edy.261.1588773232573; 
- Wed, 06 May 2020 06:53:52 -0700 (PDT)
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=o0Nh0rZkLa1KJDM+ia+w25xnHIEfYX6auQsqaJ4ScVg=;
+ b=O+R3PP31zAuqWwgyqwaQw6U+DZCDkM4SN2MblBVgOq0MjsjQYkp2oLDwqQLLNgMzRc
+ /08u1tLW2bVcn5EupC/gHu+DJKWDdF5wxLt82FZveqXIVleN3/4bLANBSKWIX8Es5gLs
+ KPHqGBmOtMnv67IcY3lh7HASBqXpNEWTua9Xc3XuHRBGlN3jEKdMQYOdKWtQ4vvRfWcL
+ vNT+Mk61h7AJj3aFf6X2h6uyAfbEdUoG6iYmzu1uxZr0tyoYdSZhBpWRpD6V7kExCvlm
+ XIUYy96TyL+rAwSq5ViWabgHyXtwyuF51LuiDd6p2C41ES2hVmFBzrzVO6mJwKoMhgMp
+ Bs3g==
+X-Gm-Message-State: AGi0Pub3G3oTw5cbd0iuqcOAbNaScuOmmt0WJceVcllN3LoAIgtpsRon
+ /PKEkHXVjlMxMyvQo0pPyxf9xeiuMZKkSatE6Gc=
+X-Google-Smtp-Source: APiQypIEWeuMVLraVSVRlsGEOxn2KpGMipZ6VKz5E9d+xyGwXRVBxDJl4+2kWMZkNc91XaxlRd3jSV28mNoiub67wxI=
+X-Received: by 2002:a05:6102:409:: with SMTP id
+ d9mr7101484vsq.220.1588773634270; 
+ Wed, 06 May 2020 07:00:34 -0700 (PDT)
 MIME-Version: 1.0
-From: =?UTF-8?B?TWlsYW4gQnXFoWth?= <milan.buska@gmail.com>
-Date: Wed, 6 May 2020 15:53:26 +0200
-Message-ID: <CAFCWPP+WKRhhXG3CRfqRztWbFJwUqeeY6tiip4fT9gwtyjKNwQ@mail.gmail.com>
-To: nouveau@lists.freedesktop.org
-Subject: [Nouveau] GeForce(R) GT 710 1GB PCIE x 1 on arm64
+References: <CAFCWPP+WKRhhXG3CRfqRztWbFJwUqeeY6tiip4fT9gwtyjKNwQ@mail.gmail.com>
+In-Reply-To: <CAFCWPP+WKRhhXG3CRfqRztWbFJwUqeeY6tiip4fT9gwtyjKNwQ@mail.gmail.com>
+From: Ilia Mirkin <imirkin@alum.mit.edu>
+Date: Wed, 6 May 2020 10:00:22 -0400
+Message-ID: <CAKb7UvhNDFKHkOV8p0v8cVHf7cMadNLVKi0iD_mCZnH_j5=2OA@mail.gmail.com>
+To: =?UTF-8?B?TWlsYW4gQnXFoWth?= <milan.buska@gmail.com>
+Subject: Re: [Nouveau] GeForce(R) GT 710 1GB PCIE x 1 on arm64
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,74 +51,37 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1848318347=="
+Cc: nouveau <nouveau@lists.freedesktop.org>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
---===============1848318347==
-Content-Type: multipart/alternative; boundary="0000000000002802dd05a4fb1899"
-
---0000000000002802dd05a4fb1899
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-Hi to all.
-I'm experimenting with running a
-https://www.zotac.com/us/product/graphics_card/geforce%C2%AE-gt-710-1gb-pci=
-e-x-1
-card on an Nvidia Jetson TX2 arm64 device.
-Possible?
-Linux kernel aarch64 5.6.10.
-Because Nvidia did not list drivers for this architecture, I'm
-experimenting with a nouveau driver.
-The Jetson TX2 has a default driver for the host1x framebuffer for output
-from the board via HDMI.
-I changed the video kernel parameter to nouveau. Booting the system OK only
-there is no output on the monitor.
-The device can only be controlled via the serial console.
-Can anyone advise me where to start setting up - (if something needs to be
-set up)
-
-Greeting
-
-Milan Bu=C5=A1ka
-
---=20
-
-Remember, no question is too stupid and no problem too small
-       -- We've all been beginners
-
---0000000000002802dd05a4fb1899
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Hi to all.<br>I&#39;m experimenting with running a <a href=
-=3D"https://www.zotac.com/us/product/graphics_card/geforce%C2%AE-gt-710-1gb=
--pcie-x-1">https://www.zotac.com/us/product/graphics_card/geforce%C2%AE-gt-=
-710-1gb-pcie-x-1</a> card on an Nvidia Jetson TX2 arm64 device.<br>Possible=
-?<br>Linux kernel aarch64 5.6.10.<br>Because Nvidia did not list drivers fo=
-r this architecture, I&#39;m experimenting with a nouveau driver.<br>The Je=
-tson TX2 has a default driver for the host1x framebuffer for output from th=
-e board via HDMI.<br>I changed the video kernel parameter to nouveau. Booti=
-ng the system OK only there is no output on the monitor.<br>The device can =
-only be controlled via the serial console.<br>Can anyone advise me where to=
- start setting up - (if something needs to be set up)<br><br>Greeting<br><b=
-r>Milan Bu=C5=A1ka<br clear=3D"all"><div><br></div>-- <br><div dir=3D"ltr" =
-class=3D"gmail_signature" data-smartmail=3D"gmail_signature">=C2=A0 =C2=A0 =
-=C2=A0<br>Remember, no question is too stupid and no problem too small<br>=
-=C2=A0 =C2=A0 =C2=A0 =C2=A0-- We&#39;ve all been beginners</div></div>
-
---0000000000002802dd05a4fb1899--
-
---===============1848318347==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
-_______________________________________________
-Nouveau mailing list
-Nouveau@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/nouveau
-
---===============1848318347==--
+SW4gZ2VuZXJhbCBpdCBzaG91bGQgYmUgcG9zc2libGUuIElmIHlvdSdyZSBoYXZpbmcgaXNzdWVz
+LCBwbGVhc2UgaW5jbHVkZSBkbWVzZy4KCk9uZSBpc3N1ZSB0aGF0IGhhcyBjb21lIHVwIGlzIHRo
+YXQgdGhlIFBDSWUgY29udHJvbGxlcnMgb24gc3VjaCBib2FyZHMKaGF2ZSB2ZXJ5IG5hcnJvdyBt
+ZW1vcnkgd2luZG93cywgbm90IGVub3VnaCB0byBtYXAgY2VydGFpbiAocmVxdWlyZWQpCkJBUnMg
+b2YgTlZJRElBIEdQVXMgKG9yIG90aGVyIEdQVXMsIEknZCBleHBlY3QpLiBUaGlzIGNvbWVzIHVw
+IGluCmRtZXNnIHdpdGggUENJLXJlbGF0ZWQgZXJyb3JzLgoKQ2hlZXJzLAoKICAtaWxpYQoKT24g
+V2VkLCBNYXkgNiwgMjAyMCBhdCA5OjUzIEFNIE1pbGFuIEJ1xaFrYSA8bWlsYW4uYnVza2FAZ21h
+aWwuY29tPiB3cm90ZToKPgo+IEhpIHRvIGFsbC4KPiBJJ20gZXhwZXJpbWVudGluZyB3aXRoIHJ1
+bm5pbmcgYSBodHRwczovL3d3dy56b3RhYy5jb20vdXMvcHJvZHVjdC9ncmFwaGljc19jYXJkL2dl
+Zm9yY2UlQzIlQUUtZ3QtNzEwLTFnYi1wY2llLXgtMSBjYXJkIG9uIGFuIE52aWRpYSBKZXRzb24g
+VFgyIGFybTY0IGRldmljZS4KPiBQb3NzaWJsZT8KPiBMaW51eCBrZXJuZWwgYWFyY2g2NCA1LjYu
+MTAuCj4gQmVjYXVzZSBOdmlkaWEgZGlkIG5vdCBsaXN0IGRyaXZlcnMgZm9yIHRoaXMgYXJjaGl0
+ZWN0dXJlLCBJJ20gZXhwZXJpbWVudGluZyB3aXRoIGEgbm91dmVhdSBkcml2ZXIuCj4gVGhlIEpl
+dHNvbiBUWDIgaGFzIGEgZGVmYXVsdCBkcml2ZXIgZm9yIHRoZSBob3N0MXggZnJhbWVidWZmZXIg
+Zm9yIG91dHB1dCBmcm9tIHRoZSBib2FyZCB2aWEgSERNSS4KPiBJIGNoYW5nZWQgdGhlIHZpZGVv
+IGtlcm5lbCBwYXJhbWV0ZXIgdG8gbm91dmVhdS4gQm9vdGluZyB0aGUgc3lzdGVtIE9LIG9ubHkg
+dGhlcmUgaXMgbm8gb3V0cHV0IG9uIHRoZSBtb25pdG9yLgo+IFRoZSBkZXZpY2UgY2FuIG9ubHkg
+YmUgY29udHJvbGxlZCB2aWEgdGhlIHNlcmlhbCBjb25zb2xlLgo+IENhbiBhbnlvbmUgYWR2aXNl
+IG1lIHdoZXJlIHRvIHN0YXJ0IHNldHRpbmcgdXAgLSAoaWYgc29tZXRoaW5nIG5lZWRzIHRvIGJl
+IHNldCB1cCkKPgo+IEdyZWV0aW5nCj4KPiBNaWxhbiBCdcWha2EKPgo+IC0tCj4KPiBSZW1lbWJl
+ciwgbm8gcXVlc3Rpb24gaXMgdG9vIHN0dXBpZCBhbmQgbm8gcHJvYmxlbSB0b28gc21hbGwKPiAg
+ICAgICAgLS0gV2UndmUgYWxsIGJlZW4gYmVnaW5uZXJzCj4gX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX18KPiBOb3V2ZWF1IG1haWxpbmcgbGlzdAo+IE5vdXZl
+YXVAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCj4gaHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcv
+bWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fCk5vdXZlYXUgbWFpbGluZyBsaXN0Ck5vdXZlYXVAbGlzdHMuZnJlZWRl
+c2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8v
+bm91dmVhdQo=
