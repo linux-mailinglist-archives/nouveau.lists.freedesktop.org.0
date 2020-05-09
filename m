@@ -1,53 +1,42 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B29A81CB95B
-	for <lists+nouveau@lfdr.de>; Fri,  8 May 2020 22:59:22 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 76C6E1CBCE4
+	for <lists+nouveau@lfdr.de>; Sat,  9 May 2020 05:17:30 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 783B96EB6E;
-	Fri,  8 May 2020 20:59:16 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E7E466E2CF;
+	Sat,  9 May 2020 03:17:28 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-oi1-x242.google.com (mail-oi1-x242.google.com
- [IPv6:2607:f8b0:4864:20::242])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4395B6EB6B
- for <nouveau@lists.freedesktop.org>; Fri,  8 May 2020 20:59:15 +0000 (UTC)
-Received: by mail-oi1-x242.google.com with SMTP id k133so9423614oih.12
- for <nouveau@lists.freedesktop.org>; Fri, 08 May 2020 13:59:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=JvQWomvjxRLudQWRCaB9megG2fXdC0dsqrE9wIO6QIg=;
- b=UzoCHcnW0VeddBNAXca5ePUWKDqO4F5IKcddt+7x2DPPr5wW20lpdInECrtT3H1iq4
- KchnkNi2mevHqKxSjitcQY6w/pz2vX/CqsvJ0y4w1UezxkAI4Gy4SCZS2mGwDFDEL33p
- 9ej4GLctnLkeHfH7cseZZkPYJS/WcYjvU2k8c=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=JvQWomvjxRLudQWRCaB9megG2fXdC0dsqrE9wIO6QIg=;
- b=YPWscPYBybhVBigJnopJhGeEpPyt5Kdg9fjtWtaqVJZ7cFbQOXOq/CMfhr7H7PTA1b
- vD65ucXyvrs0Lke80uZvVoG/F0I2yUP7W4WV1RBwoGXB6gPvGRTl9NHHe2PBB3a5UxXA
- D0l7mqFRpFkKwVtF+ZyjXrbIsFG2402v2CNJfsBpc10pbW4B6tWY55tO9CN+6AlqOmOX
- 1SI1aAqXTEsVie+MHGrS207AUiSl5Xgl1HiPZ3/+NPsRec1eo8kkebkVJ4p5cP5Jcly6
- hTJBnDgnKw164Sthw4n0bQIzDzlmW9ttEvyBu9hwdzfrLBtQhgvHdJryq5+USGj+uNLU
- W4FA==
-X-Gm-Message-State: AGi0PuaNOnU1Fkme4XtNvRIZTfbNuqo/qKlJxNetRpqoLaLTqkkNvPK7
- E0nKL5Weh+ibg9DkrgMjpBJZgetruydJdazseCMjSg==
-X-Google-Smtp-Source: APiQypLAu0p1Krm7EdSF7szPOyo3xTBi08s9nDniaTs/XUU/hUlKs8JR8+zGu/R5I2zr21JRDg9KubXRs4AnLxBrUgg=
-X-Received: by 2002:aca:2113:: with SMTP id 19mr3361674oiz.128.1588971554521; 
- Fri, 08 May 2020 13:59:14 -0700 (PDT)
+Received: from bombadil.infradead.org (bombadil.infradead.org
+ [IPv6:2607:7c80:54:e::133])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A00736E2CF
+ for <nouveau@lists.freedesktop.org>; Sat,  9 May 2020 03:17:28 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=bombadil.20170209; h=In-Reply-To:Content-Type:MIME-Version
+ :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description;
+ bh=lyg8KFPxTn0tWshWc1x4r9ezlzCrdRUk1alOb1U8QOk=; b=mjzVRHGSFUzWCtzv5ct3WCVzIJ
+ ctNdyru+3tw2Jx6byTHTJQdaLOT6wypRAwM0vM2BA4uTaZtqgBMteST/YjZJAGCjBwcYThXJPE7/x
+ yKqdUpYrah7TLL+CgNUvGMi7er7Ds8YVx/LcngEtraSyPD7EPowngkYGh2oEmoNlgi8apHTbQjn/V
+ buoEqQ4HLNZNOjPcy+7VUaM1SwZI2P+rqXh0qrcN0izk711h14xjyY8hAK7g2BXziyMosb87vaZUW
+ IzKvDkrSzkQsUUdLQZC3Zpq8nEMRjyBLe+cpQChBogC+1GMjV2EmiLtnG0vtSzWy/cSY+ZO6ik0mL
+ /JrDhQLw==;
+Received: from willy by bombadil.infradead.org with local (Exim 4.92.3 #3 (Red
+ Hat Linux)) id 1jXFzS-0001xm-Dk; Sat, 09 May 2020 03:17:26 +0000
+Date: Fri, 8 May 2020 20:17:26 -0700
+From: Matthew Wilcox <willy@infradead.org>
+To: Ralph Campbell <rcampbell@nvidia.com>
+Message-ID: <20200509031726.GT16070@bombadil.infradead.org>
+References: <20200508192009.15302-1-rcampbell@nvidia.com>
+ <20200508195910.GR16070@bombadil.infradead.org>
+ <72422dca-e025-002a-4748-addfb392ffc4@nvidia.com>
 MIME-Version: 1.0
-References: <20200508204751.155488-1-lyude@redhat.com>
- <20200508204751.155488-4-lyude@redhat.com>
-In-Reply-To: <20200508204751.155488-4-lyude@redhat.com>
-From: Daniel Vetter <daniel@ffwll.ch>
-Date: Fri, 8 May 2020 22:59:03 +0200
-Message-ID: <CAKMK7uGEssowz-9jX1LP4=eRNTuxN_k4MLfrGqG3szjQE=Gonw@mail.gmail.com>
-To: Lyude Paul <lyude@redhat.com>
-Subject: Re: [Nouveau] [RFC v4 03/12] drm/vblank: Register drmm cleanup
- action once per drm_vblank_crtc
+Content-Disposition: inline
+In-Reply-To: <72422dca-e025-002a-4748-addfb392ffc4@nvidia.com>
+Subject: Re: [Nouveau] [PATCH 0/6] nouveau/hmm: add support for mapping
+ large pages
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,77 +48,49 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>,
- Nouveau Dev <nouveau@lists.freedesktop.org>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- dri-devel <dri-devel@lists.freedesktop.org>,
- Maxime Ripard <mripard@kernel.org>,
- =?UTF-8?B?VmlsbGUgU3lyasOkbMOk?= <ville.syrjala@linux.intel.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: linux-rdma@vger.kernel.org, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, linux-mm@kvack.org,
+ Jason Gunthorpe <jgg@mellanox.com>, Ben Skeggs <bskeggs@redhat.com>,
+ linux-kselftest@vger.kernel.org, Andrew Morton <akpm@linux-foundation.org>,
+ Shuah Khan <shuah@kernel.org>, Christoph Hellwig <hch@lst.de>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-T24gRnJpLCBNYXkgOCwgMjAyMCBhdCAxMDo0OCBQTSBMeXVkZSBQYXVsIDxseXVkZUByZWRoYXQu
-Y29tPiB3cm90ZToKPgo+IFNpbmNlIHdlJ2xsIGJlIGFsbG9jYXRpbmcgcmVzb3VyY2VzIGZvciBr
-dGhyZWFkX2NyZWF0ZV93b3JrZXIoKSBpbiB0aGUKPiBuZXh0IGNvbW1pdCAod2hpY2ggY291bGQg
-ZmFpbCBhbmQgcmVxdWlyZSB1cyB0byBjbGVhbiB1cCB0aGUgbWVzcyksCj4gbGV0J3Mgc2ltcGxp
-ZnkgdGhlIGNsZWFudXAgcHJvY2VzcyBhIGJpdCBieSByZWdpc3RlcmluZyBhCj4gZHJtX3ZibGFu
-a19pbml0X3JlbGVhc2UoKSBhY3Rpb24gZm9yIGVhY2ggZHJtX3ZibGFua19jcnRjIHNvIHRoZXkn
-cmUKPiBzdGlsbCBjbGVhbmVkIHVwIGlmIHdlIGZhaWwgdG8gaW5pdGlhbGl6ZSBvbmUgb2YgdGhl
-bS4KPgo+IENoYW5nZXMgc2luY2UgdjM6Cj4gKiBVc2UgZHJtbV9hZGRfYWN0aW9uX29yX3Jlc2V0
-KCkgLSBEYW5pZWwgVmV0dGVyCj4KPiBDYzogRGFuaWVsIFZldHRlciA8ZGFuaWVsQGZmd2xsLmNo
-Pgo+IENjOiBWaWxsZSBTeXJqw6Rsw6QgPHZpbGxlLnN5cmphbGFAbGludXguaW50ZWwuY29tPgo+
-IENjOiBkcmktZGV2ZWxAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCj4gQ2M6IG5vdXZlYXVAbGlzdHMu
-ZnJlZWRlc2t0b3Aub3JnCj4gU2lnbmVkLW9mZi1ieTogTHl1ZGUgUGF1bCA8bHl1ZGVAcmVkaGF0
-LmNvbT4KClJldmlld2VkLWJ5OiBEYW5pZWwgVmV0dGVyIDxkYW5pZWwudmV0dGVyQGZmd2xsLmNo
-PgoKSSB0aGluayB0aGUgb3RoZXIgcGF0Y2hlcyBuZWVkIGEgYnJhaW4gdGhhdCdzIGxlc3MgaW4g
-dy9lIG1vZGUgOi0pCgpDaGVlcnMsIERhbmllbAoKPiAtLS0KPiAgZHJpdmVycy9ncHUvZHJtL2Ry
-bV92YmxhbmsuYyB8IDIzICsrKysrKysrKystLS0tLS0tLS0tLS0tCj4gIDEgZmlsZSBjaGFuZ2Vk
-LCAxMCBpbnNlcnRpb25zKCspLCAxMyBkZWxldGlvbnMoLSkKPgo+IGRpZmYgLS1naXQgYS9kcml2
-ZXJzL2dwdS9kcm0vZHJtX3ZibGFuay5jIGIvZHJpdmVycy9ncHUvZHJtL2RybV92YmxhbmsuYwo+
-IGluZGV4IDc1OGJmNzRlMWNhYi4uYTRhOTAxMzU4NGUyIDEwMDY0NAo+IC0tLSBhL2RyaXZlcnMv
-Z3B1L2RybS9kcm1fdmJsYW5rLmMKPiArKysgYi9kcml2ZXJzL2dwdS9kcm0vZHJtX3ZibGFuay5j
-Cj4gQEAgLTQ5MSwxNiArNDkxLDEyIEBAIHN0YXRpYyB2b2lkIHZibGFua19kaXNhYmxlX2ZuKHN0
-cnVjdCB0aW1lcl9saXN0ICp0KQo+Cj4gIHN0YXRpYyB2b2lkIGRybV92YmxhbmtfaW5pdF9yZWxl
-YXNlKHN0cnVjdCBkcm1fZGV2aWNlICpkZXYsIHZvaWQgKnB0cikKPiAgewo+IC0gICAgICAgdW5z
-aWduZWQgaW50IHBpcGU7Cj4gLQo+IC0gICAgICAgZm9yIChwaXBlID0gMDsgcGlwZSA8IGRldi0+
-bnVtX2NydGNzOyBwaXBlKyspIHsKPiAtICAgICAgICAgICAgICAgc3RydWN0IGRybV92Ymxhbmtf
-Y3J0YyAqdmJsYW5rID0gJmRldi0+dmJsYW5rW3BpcGVdOwo+ICsgICAgICAgc3RydWN0IGRybV92
-YmxhbmtfY3J0YyAqdmJsYW5rID0gcHRyOwo+Cj4gLSAgICAgICAgICAgICAgIFdBUk5fT04oUkVB
-RF9PTkNFKHZibGFuay0+ZW5hYmxlZCkgJiYKPiAtICAgICAgICAgICAgICAgICAgICAgICBkcm1f
-Y29yZV9jaGVja19mZWF0dXJlKGRldiwgRFJJVkVSX01PREVTRVQpKTsKPiArICAgICAgIFdBUk5f
-T04oUkVBRF9PTkNFKHZibGFuay0+ZW5hYmxlZCkgJiYKPiArICAgICAgICAgICAgICAgZHJtX2Nv
-cmVfY2hlY2tfZmVhdHVyZShkZXYsIERSSVZFUl9NT0RFU0VUKSk7Cj4KPiAtICAgICAgICAgICAg
-ICAgZGVsX3RpbWVyX3N5bmMoJnZibGFuay0+ZGlzYWJsZV90aW1lcik7Cj4gLSAgICAgICB9Cj4g
-KyAgICAgICBkZWxfdGltZXJfc3luYygmdmJsYW5rLT5kaXNhYmxlX3RpbWVyKTsKPiAgfQo+Cj4g
-IC8qKgo+IEBAIC01MTAsNyArNTA2LDcgQEAgc3RhdGljIHZvaWQgZHJtX3ZibGFua19pbml0X3Jl
-bGVhc2Uoc3RydWN0IGRybV9kZXZpY2UgKmRldiwgdm9pZCAqcHRyKQo+ICAgKgo+ICAgKiBUaGlz
-IGZ1bmN0aW9uIGluaXRpYWxpemVzIHZibGFuayBzdXBwb3J0IGZvciBAbnVtX2NydGNzIGRpc3Bs
-YXkgcGlwZWxpbmVzLgo+ICAgKiBDbGVhbnVwIGlzIGhhbmRsZWQgYXV0b21hdGljYWxseSB0aHJv
-dWdoIGEgY2xlYW51cCBmdW5jdGlvbiBhZGRlZCB3aXRoCj4gLSAqIGRybW1fYWRkX2FjdGlvbigp
-Lgo+ICsgKiBkcm1tX2FkZF9hY3Rpb25fb3JfcmVzZXQoKS4KPiAgICoKPiAgICogUmV0dXJuczoK
-PiAgICogWmVybyBvbiBzdWNjZXNzIG9yIGEgbmVnYXRpdmUgZXJyb3IgY29kZSBvbiBmYWlsdXJl
-Lgo+IEBAIC01MjksMTAgKzUyNSw2IEBAIGludCBkcm1fdmJsYW5rX2luaXQoc3RydWN0IGRybV9k
-ZXZpY2UgKmRldiwgdW5zaWduZWQgaW50IG51bV9jcnRjcykKPgo+ICAgICAgICAgZGV2LT5udW1f
-Y3J0Y3MgPSBudW1fY3J0Y3M7Cj4KPiAtICAgICAgIHJldCA9IGRybW1fYWRkX2FjdGlvbihkZXYs
-IGRybV92YmxhbmtfaW5pdF9yZWxlYXNlLCBOVUxMKTsKPiAtICAgICAgIGlmIChyZXQpCj4gLSAg
-ICAgICAgICAgICAgIHJldHVybiByZXQ7Cj4gLQo+ICAgICAgICAgZm9yIChpID0gMDsgaSA8IG51
-bV9jcnRjczsgaSsrKSB7Cj4gICAgICAgICAgICAgICAgIHN0cnVjdCBkcm1fdmJsYW5rX2NydGMg
-KnZibGFuayA9ICZkZXYtPnZibGFua1tpXTsKPgo+IEBAIC01NDEsNiArNTMzLDExIEBAIGludCBk
-cm1fdmJsYW5rX2luaXQoc3RydWN0IGRybV9kZXZpY2UgKmRldiwgdW5zaWduZWQgaW50IG51bV9j
-cnRjcykKPiAgICAgICAgICAgICAgICAgaW5pdF93YWl0cXVldWVfaGVhZCgmdmJsYW5rLT5xdWV1
-ZSk7Cj4gICAgICAgICAgICAgICAgIHRpbWVyX3NldHVwKCZ2YmxhbmstPmRpc2FibGVfdGltZXIs
-IHZibGFua19kaXNhYmxlX2ZuLCAwKTsKPiAgICAgICAgICAgICAgICAgc2VxbG9ja19pbml0KCZ2
-YmxhbmstPnNlcWxvY2spOwo+ICsKPiArICAgICAgICAgICAgICAgcmV0ID0gZHJtbV9hZGRfYWN0
-aW9uX29yX3Jlc2V0KGRldiwgZHJtX3ZibGFua19pbml0X3JlbGVhc2UsCj4gKyAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB2YmxhbmspOwo+ICsgICAgICAgICAg
-ICAgICBpZiAocmV0KQo+ICsgICAgICAgICAgICAgICAgICAgICAgIHJldHVybiByZXQ7Cj4gICAg
-ICAgICB9Cj4KPiAgICAgICAgIERSTV9JTkZPKCJTdXBwb3J0cyB2YmxhbmsgdGltZXN0YW1wIGNh
-Y2hpbmcgUmV2IDIgKDIxLjEwLjIwMTMpLlxuIik7Cj4gLS0KPiAyLjI1LjQKPgoKCi0tIApEYW5p
-ZWwgVmV0dGVyClNvZnR3YXJlIEVuZ2luZWVyLCBJbnRlbCBDb3Jwb3JhdGlvbgorNDEgKDApIDc5
-IDM2NSA1NyA0OCAtIGh0dHA6Ly9ibG9nLmZmd2xsLmNoCl9fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fCk5vdXZlYXUgbWFpbGluZyBsaXN0Ck5vdXZlYXVAbGlz
-dHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4v
-bGlzdGluZm8vbm91dmVhdQo=
+On Fri, May 08, 2020 at 01:17:55PM -0700, Ralph Campbell wrote:
+> On 5/8/20 12:59 PM, Matthew Wilcox wrote:
+> > On Fri, May 08, 2020 at 12:20:03PM -0700, Ralph Campbell wrote:
+> > > hmm_range_fault() returns an array of page frame numbers and flags for
+> > > how the pages are mapped in the requested process' page tables. The PFN
+> > > can be used to get the struct page with hmm_pfn_to_page() and the page size
+> > > order can be determined with compound_order(page) but if the page is larger
+> > > than order 0 (PAGE_SIZE), there is no indication that the page is mapped
+> > > using a larger page size. To be fully general, hmm_range_fault() would need
+> > > to return the mapping size to handle cases like a 1GB compound page being
+> > > mapped with 2MB PMD entries. However, the most common case is the mapping
+> > > size the same as the underlying compound page size.
+> > > This series adds a new output flag to indicate this so that callers know it
+> > > is safe to use a large device page table mapping if one is available.
+> > > Nouveau and the HMM tests are updated to use the new flag.
+> > 
+> > This explanation doesn't make any sense.  It doesn't matter how somebody
+> > else has it mapped; if it's a PMD-sized page, you can map it with a
+> > 2MB mapping.
+> 
+> Sure, the I/O will work OK, but is it safe?
+> Copy on write isn't an issue? splitting a PMD in one process due to
+> mprotect of a shared page will cause other process' page tables to be split
+> the same way?
+
+Are you saying that if you call this function on an address range of a
+process which has done COW of a single page in the middle of a THP,
+you want to return with this flag clear, but if the THP is still intact,
+you want to set this flag?
+
+> Recall that these are system memory pages that could be THPs, shmem, hugetlbfs,
+> mmap shared file pages, etc.
+_______________________________________________
+Nouveau mailing list
+Nouveau@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/nouveau
