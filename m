@@ -1,57 +1,48 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4C69D1CE63F
-	for <lists+nouveau@lfdr.de>; Mon, 11 May 2020 23:02:23 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 442221CE84C
+	for <lists+nouveau@lfdr.de>; Tue, 12 May 2020 00:42:26 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3A19E6E5AB;
-	Mon, 11 May 2020 21:02:19 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C872C6E5BD;
+	Mon, 11 May 2020 22:42:23 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ua1-x941.google.com (mail-ua1-x941.google.com
- [IPv6:2607:f8b0:4864:20::941])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A72FF6E58E;
- Mon, 11 May 2020 21:02:17 +0000 (UTC)
-Received: by mail-ua1-x941.google.com with SMTP id b6so3960140uak.6;
- Mon, 11 May 2020 14:02:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=z3JlndbJIncW08qmOfGBaq3R0FENbnKFJehfSnITyNw=;
- b=SUHL7qp1pbk7JM4pChdgjwjMNuA8qsecmUvlG3hT48L5yjZ31BBtqKrJTBL2PgSHmg
- S+KD3oBAs/g59ErtVu55q3eVcCPymZoo2Tu/f0NAhrakr9k0NPfDYUyS32l+LRB4bAQv
- bZD/ZBwOrOzmWPlPL9yXzrxMkqtBCeU8CYk+6NWts7xAIQ+SYMNT+sTwXzd4OymZtew6
- 2E9F5B1PNlSIbC1SBb9deRHmaNLPSyJ9Zayhfe9smMH+Y5Z+ASiWY8TygyQWvgI+FHFZ
- OZwYpQdMNSqO1whRO72KzylH2+E4fbYbCqE98txuHwI1bqG4hjwyW6Di47stBayaaGNs
- 1rGA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=z3JlndbJIncW08qmOfGBaq3R0FENbnKFJehfSnITyNw=;
- b=H8TcQNIgI/TPPonf/1Ldh6xRTfny5ca4i6wR14DYBTw9iEylbbXFeJHdKMdGmoRB5f
- L+ZDcF310KFVES+/LDs/+7eWWfj+MfyjtwFaTdbN8UA6QrYQOtpsDT3sPFMCMZu2Go/v
- rgEqFDP+5o7ZVLAO/ctMGfM4T73cZTprgKMqa2GXmm6fKu2VtSYaPtuVMJv6gSkk1PNa
- +BLOL2CCT7sXwe9+8SozE17xnF2jdnPJHy/MqqAmwOoanarsjjnR7USQ2/etBjRxqqit
- Beu5MqJZTSxJ/ne7B4e+ug0zmoFx7JRbAC5vNMfJg/ppqv8s6taAdpb/ZH6hPvsjeCR8
- 89jA==
-X-Gm-Message-State: AGi0PuZyftrboS8bFVe52YDImffNtQV6aBlEKR+LyjMgWIhOoZDqLZz7
- JUToiFUckVeODzI+OCRDfiYCjejFMB4SfUufBWgWMw==
-X-Google-Smtp-Source: APiQypKfjvtdLvMKynxJTrybjpR6RRbbiVJJED8LWaVxrKVy7TEzcgcHBBN8FfkRJrafFMae+hIbDYIODo9vaYO584k=
-X-Received: by 2002:ab0:770b:: with SMTP id z11mr13168553uaq.64.1589230936657; 
- Mon, 11 May 2020 14:02:16 -0700 (PDT)
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
+ [207.211.31.81])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id CA1136E5BF
+ for <nouveau@lists.freedesktop.org>; Mon, 11 May 2020 22:42:22 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1589236941;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=5AW1tPrIf1NH23mBvqTHaK47Gct2K80GUJUWM/a2mOg=;
+ b=d9zhqa5CM9mYwpZb3WK9JxT58CX8qMTaNKbAlN0YENVVpbJ/HRGw3ySuqT2CSwWQz3UivF
+ QBSlMy2n1p5aHIZfDHvKdJ1XoYucRzkKc+6Y08WD++h+6SqNg706EdmWIWA7aMfW8DX7x1
+ EfK8Ec+OHaRBL17MvjCSeji7cqMr4as=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-411-72MkkdwwNAqOVOmAuvb87w-1; Mon, 11 May 2020 18:42:18 -0400
+X-MC-Unique: 72MkkdwwNAqOVOmAuvb87w-1
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
+ [10.5.11.13])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id C02E5A0BD7;
+ Mon, 11 May 2020 22:42:15 +0000 (UTC)
+Received: from Whitewolf.redhat.com (ovpn-117-238.rdu2.redhat.com
+ [10.10.117.238])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id C29DE77F2E;
+ Mon, 11 May 2020 22:42:13 +0000 (UTC)
+From: Lyude Paul <lyude@redhat.com>
+To: nouveau@lists.freedesktop.org
+Date: Mon, 11 May 2020 18:41:22 -0400
+Message-Id: <20200511224148.598468-1-lyude@redhat.com>
 MIME-Version: 1.0
-References: <20200511171722.96576-1-christian.koenig@amd.com>
- <1815605280.20200511161440@sympatico.ca>
- <CADnq5_MYPcAoWzCcBkJAkd858gCVbJpCJobiwH_BBbwgEdx5rA@mail.gmail.com>
- <CAPM=9tysbcgQ-KR8+icQ=3e6+SECxkwHdVpP8=w0Pmh9ML_+Lw@mail.gmail.com>
-In-Reply-To: <CAPM=9tysbcgQ-KR8+icQ=3e6+SECxkwHdVpP8=w0Pmh9ML_+Lw@mail.gmail.com>
-From: Emil Velikov <emil.l.velikov@gmail.com>
-Date: Mon, 11 May 2020 21:59:38 +0100
-Message-ID: <CACvgo50j-AC9LpR9oN065g4EmBVF3EYLNRe2sxfD99JFCE2Nxw@mail.gmail.com>
-To: Dave Airlie <airlied@gmail.com>
-Subject: Re: [Nouveau] [RFC] Remove AGP support from Radeon/Nouveau/TTM
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
+Subject: [Nouveau] [PATCH v3 0/5] drm/nouveau: DP interlace fixes
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,76 +54,65 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Alex Deucher <alexdeucher@gmail.com>,
- =?UTF-8?Q?Christian_K=C3=B6nig?= <ckoenig.leichtzumerken@gmail.com>,
- amd-gfx list <amd-gfx@lists.freedesktop.org>,
- Maling list - DRI developers <dri-devel@lists.freedesktop.org>,
- nouveau <nouveau@lists.freedesktop.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: Jani Nikula <jani.nikula@intel.com>, David Airlie <airlied@linux.ie>,
+ Pankaj Bharadiya <pankaj.laxminarayan.bharadiya@intel.com>,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ Takashi Iwai <tiwai@suse.de>, Sean Paul <seanpaul@chromium.org>,
+ Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>,
+ Alex Deucher <alexander.deucher@amd.com>,
+ =?UTF-8?q?Ville=20Syrj=C3=A4l=C3=A4?= <ville.syrjala@linux.intel.com>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-T24gTW9uLCAxMSBNYXkgMjAyMCBhdCAyMTo0MywgRGF2ZSBBaXJsaWUgPGFpcmxpZWRAZ21haWwu
-Y29tPiB3cm90ZToKPgo+IE9uIFR1ZSwgMTIgTWF5IDIwMjAgYXQgMDY6MjgsIEFsZXggRGV1Y2hl
-ciA8YWxleGRldWNoZXJAZ21haWwuY29tPiB3cm90ZToKPiA+Cj4gPiBPbiBNb24sIE1heSAxMSwg
-MjAyMCBhdCA0OjIyIFBNIEFsIER1bnNtdWlyIDxhbC5kdW5zbXVpckBzeW1wYXRpY28uY2E+IHdy
-b3RlOgo+ID4gPgo+ID4gPiBPbiBNb25kYXksIE1heSAxMSwgMjAyMCwgMToxNzoxOSBQTSwgIkNo
-cmlzdGlhbiBLw7ZuaWciIHdyb3RlOgo+ID4gPiA+IEhpIGd1eXMsCj4gPiA+Cj4gPiA+ID4gV2Vs
-bCBsZXQncyBmYWNlIGl0IEFHUCBpcyBhIHRvdGFsIGhlYWRhY2hlIHRvIG1haW50YWluIGFuZCBk
-ZWFkIGZvciBhdCBsZWFzdCAxMCsgeWVhcnMuCj4gPiA+Cj4gPiA+ID4gV2UgaGF2ZSBhIGxvdCBv
-ZiB4ODYgc3BlY2lmaWMgc3R1ZmYgaW4gdGhlIGFyY2hpdGVjdHVyZSBpbmRlcGVuZGVudAo+ID4g
-PiA+IGdyYXBoaWNzIG1lbW9yeSBtYW5hZ2VtZW50IHRvIGdldCB0aGUgY2FjaGluZyByaWdodCwg
-YWJ1c2luZyB0aGUgRE1BCj4gPiA+ID4gQVBJIG9uIG11bHRpcGxlIG9jY2FzaW9ucywgbmVlZCB0
-byBkaXN0aW5jdCBiZXR3ZWVuIEFHUCBhbmQgZHJpdmVyIHNwZWNpZmljIHBhZ2UgdGFibGVzIGV0
-YyBldGMuLi4KPiA+ID4KPiA+ID4gPiBTbyB0aGUgaWRlYSBoZXJlIGlzIHRvIGp1c3QgZ28gYWhl
-YWQgYW5kIHJlbW92ZSB0aGUgc3VwcG9ydCBmcm9tCj4gPiA+ID4gUmFkZW9uIGFuZCBOb3V2ZWF1
-IGFuZCB0aGVuIGRyb3AgdGhlIG5lY2Vzc2FyeSBjb2RlIGZyb20gVFRNLgo+ID4gPgo+ID4gPiA+
-IEZvciBSYWRlb24gdGhpcyBtZWFucyB0aGF0IHdlIGp1c3Qgc3dpdGNoIG92ZXIgdG8gdGhlIGRy
-aXZlcgo+ID4gPiA+IHNwZWNpZmljIHBhZ2UgdGFibGVzIGFuZCBldmVyeXRoaW5nIHNob3VsZCBt
-b3JlIG9yIGxlc3MgY29udGludWUgdG8gd29yay4KPiA+ID4KPiA+ID4gPiBGb3IgTm91dmVhdSBJ
-J20gbm90IDEwMCUgc3VyZSwgYnV0IGZyb20gdGhlIGNvZGUgaXQgb2YgaGFuZCBsb29rcwo+ID4g
-PiA+IGxpa2Ugd2UgY2FuIGRvIGl0IHNpbWlsYXIgdG8gUmFkZW9uLgo+ID4gPgo+ID4gPiA+IFBs
-ZWFzZSBjb21tZW50IHdoYXQgeW91IHRoaW5rIGFib3V0IHRoaXMuCj4gPiA+Cj4gPiA+ID4gUmVn
-YXJkcywKPiA+ID4gPiBDaHJpc3RpYW4uCj4gPiA+Cj4gPiA+IENocmlzdGlhbiwKPiA+ID4KPiA+
-ID4gSSB3b3VsZCByZXNwZWN0ZnVsbHkgYXNrIHRoYXQgdGhpcyBjaGFuZ2UgYmUgcmVqZWN0ZWQu
-Cj4gPiA+Cj4gPiA+IEknbSAgY3VycmVudGx5ICBhbiAgZW5kIHVzZXIgb24gYm90aCBJbnRlbCAo
-MzItYml0IGFuZCA2NC1iaXQpIGFuZCBQUEMKPiA+ID4gKE1hY3MsIElCTSBQb3dlciAtIEJFIGFu
-ZCBMRSkuCj4gPiA+Cj4gPiA+IExpbnV4IGlzIG5vdCBqdXN0IHVzZWQgZm9yIG1vZGVybiBoYXJk
-d2FyZS4gVGhlcmUgaXMgYWxzbyBhIHN1YnNldCBvZgo+ID4gPiB0aGUgdXNlciBiYXNlIHRoYXQg
-dXNlcyBpdCBmb3Igd2hhdCBpcyBvZnRlbiB0ZXJtZWQgcmV0cm8tY29tcHV0aW5nLgo+ID4gPiBO
-byBpdCdzIG5vdCBjb21tZXJjaWFsIHVzYWdlLCBidXQgbm8gb25lIGNhbiBzZXJpb3VzbHkgY2xh
-aW0gdGhhdCB0aGF0Cj4gPiA+IExpbnV4IGlzIGZvciBidXNpbmVzcyBvbmx5Lgo+ID4gPgo+ID4g
-PiBPZnRlbiB0aGUgb2xkIGhhcmR3YXJlIGlzIGJ1aWx0IGZhciBiYXR0ZXIgdGhhbiB0aGUgbW9k
-ZXJuIGp1bmssIGFuZAo+ID4gPiB3aWxsIGNvbnRpbnVlIHRvIHJ1biBmb3IgeWVhcnMgdG8gY29t
-ZS4gVGhpcyBncm91cCBvZiBmb2xrcyBlaXRoZXIgaGFzCj4gPiA+IGV4aXN0aW5nIGhhcmR3YXJl
-IHRoZXkgd2lzaCB0byBjb250aW51ZSB0byB1c2UsIG9yIGFyZSBhY3F1aXJpbmcgdGhlCj4gPiA+
-IHNhbWUgYmVjYXVzZSB0aGV5IGFyZSB0aXJlZCBvZiBnZW5lcmljIGxvY2tlZC1kb3duIGhhcmR3
-YXJlLgo+ID4gPgo+ID4gPiBBIHNpZ25pZmljYW50IHBlcmNlbnRhZ2Ugb2YgdGhlIHZpZGVvIGhh
-cmR3YXJlIHRoYXQgZmFsbHMgaW4gdGhlIHJldHJvCj4gPiA+IGNhdGVnb3J5IHVzZXMgdGhlIEFH
-UCB2aWRlbyBidXMuIFJlbW92aW5nIHRoYXQgc3VwcG9ydCBmb3IgdGhvc2UgY2FzZXMKPiA+ID4g
-d2hlcmUgaXQgd29ya3Mgd291bGQgc2V2ZXJlbHkgbGltaXQgcGVyZm9ybWFuY2UgYW5kIGluIHNv
-bWUgY2FzZXMKPiA+ID4gZnVuY3Rpb25hbGl0eS4gVGhpcyBjYW4gbWVhbiB0aGUgZGlmZmVyZW5j
-ZSBiZXR3ZWVuIGJlaW5nIGFibGUgdG8gcnVuCj4gPiA+IGFuIGFwcGxpY2F0aW9uLCBvciBoYXZp
-bmcgaXQgZmFpbC4KPiA+ID4KPiA+Cj4gPiBOb3RlIHRoZXJlIGlzIG5vIGxvc3Mgb2YgZnVuY3Rp
-b25hbGl0eSBoZXJlLCBhdCBsZWFzdCBvbiByYWRlb24KPiA+IGhhcmR3YXJlLiAgSXQganVzdCBj
-b21lcyBkb3duIHRvIHdoaWNoIE1NVSBnZXRzIHVzZWQgZm9yIGFjY2VzcyB0bwo+ID4gc3lzdGVt
-IG1lbW9yeSwgdGhlIEFHUCBNTVUgb24gdGhlIGNoaXBzZXQgb3IgdGhlIE1NVSBidWlsdCBpbnRv
-IHRoZQo+ID4gR1BVLiAgT24gcG93ZXJwYyBoYXJkd2FyZSwgQUdQIGhhcyBiZWVuIHBhcnRpY3Vs
-YXJseSB1bnN0YWJsZSwgYW5kIEFHUAo+ID4gaGFzIGJlZW4gZGlzYWJsZWQgYnkgZGVmYXVsdCBv
-biByYWRlb24gb24gcG93ZXJwYyBmb3IgeWVhcnMgbm93LiAgSW4KPiA+IGZhY3QsIHRoaXMgd2ls
-bCBwcm9iYWJseSBtYWtlIG9sZGVyIGhhcmR3YXJlIG1vcmUgcmVsaWFibGUgYXMgaXQgdGFrZXMK
-PiA+IEFHUCBvdXQgb2YgdGhlIGVxdWF0aW9uLgo+ID4KPgo+IEZyb20gbWVtb3J5IHRoZXJlIGlz
-IHF1aXRlIGEgbG9zcyBpbiBzcGVlZCB0aG91Z2gsIGxpa2UgcHJldHR5IHNldmVyZS4KPgo+IFRo
-ZSByYWRlb24gUENJIEdBUlQgaGFzIGEgc2luZ2xlIHNsb3QgVExCLCBpZiBtZW1vcnkgc2VydmVz
-Lgo+Cj4gSSB0aGluayB0aGlzIGlzIGdvaW5nIHRvIGJlIGEgaGFyZCBzZWxsIGF0IHRoaXMgc3Rh
-Z2UsIEknbSBndWVzc2luZwo+IHVzZXJzIHdpbGwgY3Jhd2wgb3V0IG9mIHRoZSB3b29kd29yaywg
-SSdtIHN1cmUgd2l0aCAyIGhvdXJzIGFmdGVyIEknbQo+IGFibGUgdG8gYWNjZXNzIHRoZSBvZmZp
-Y2UsIEkgY2FuIGJvb3QgdGhlIDg2NSBBR1AgYm94IHdpdGggYW4gcnYzNTAgaW4KPiBpdCBvbiBh
-IG1vZGVybiBkaXN0cm8uCj4KSSBoYXZlIGEgc3lzdGVtIHdpdGggbmZvcmNlMiBtb3RoZXJib2Fy
-ZCBhbmQgTnZpZGlhIGZ4NTUwMCBHUFUuIEkKY291bGQgZHVzdCBpdCBvZmYgYW5kIHNvbWUgcXVp
-Y2sgcGVyZm9ybWFuY2UgdGVzdHMgb3ZlciB0aGUgd2Vla2VuZC4KClVubGVzcyBzb21lb25lIGJl
-YXRzIG1lIHRvIGl0LCBvZiBjb3Vyc2UgOi0pCgotRW1pbApfX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fXwpOb3V2ZWF1IG1haWxpbmcgbGlzdApOb3V2ZWF1QGxp
-c3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFu
-L2xpc3RpbmZvL25vdXZlYXUK
+Currently, nouveau doesn't actually bother to try probing whether or not
+it can actually handle interlaced modes over DisplayPort. As a result,
+on volta and later we'll end up trying to set an interlaced mode even
+when it's not supported and cause the front end for the display engine
+to hang.
+
+So, let's teach nouveau to reject interlaced modes on hardware that
+can't actually handle it. Additionally for MST, since we accomplish this
+by simply reusing more of the SST mode validation we also get (some)
+basic bw validation for modes we detect on MST connectors completely for
+free.
+
+Lyude Paul (5):
+  drm/nouveau/kms/nv50-: Initialize core channel in
+    nouveau_display_create()
+  drm/nouveau/kms/nv50-: Probe SOR and PIOR caps for DP interlacing
+    support
+  drm/nouveau/kms/gv100-: Add support for interlaced modes
+  drm/nouveau/kms/nv50-: Move 8BPC limit for MST into
+    nv50_mstc_get_modes()
+  drm/nouveau/kms/nv50-: Share DP SST mode_valid() handling with MST
+
+ drivers/gpu/drm/nouveau/dispnv50/core.h     |  7 +++
+ drivers/gpu/drm/nouveau/dispnv50/core507d.c | 15 ++++++
+ drivers/gpu/drm/nouveau/dispnv50/core827d.c |  1 +
+ drivers/gpu/drm/nouveau/dispnv50/core907d.c |  1 +
+ drivers/gpu/drm/nouveau/dispnv50/core917d.c |  1 +
+ drivers/gpu/drm/nouveau/dispnv50/corec37d.c | 26 +++++++++
+ drivers/gpu/drm/nouveau/dispnv50/corec57d.c |  1 +
+ drivers/gpu/drm/nouveau/dispnv50/disp.c     | 58 +++++++++++++++------
+ drivers/gpu/drm/nouveau/dispnv50/disp.h     |  1 +
+ drivers/gpu/drm/nouveau/dispnv50/headc37d.c |  5 +-
+ drivers/gpu/drm/nouveau/dispnv50/headc57d.c |  5 +-
+ drivers/gpu/drm/nouveau/dispnv50/pior507d.c |  8 +++
+ drivers/gpu/drm/nouveau/dispnv50/sor507d.c  |  7 +++
+ drivers/gpu/drm/nouveau/dispnv50/sor907d.c  | 11 ++++
+ drivers/gpu/drm/nouveau/dispnv50/sorc37d.c  |  9 ++++
+ drivers/gpu/drm/nouveau/nouveau_connector.c | 48 +++++++++++------
+ drivers/gpu/drm/nouveau/nouveau_connector.h |  5 ++
+ drivers/gpu/drm/nouveau/nouveau_dp.c        | 31 +++++++++++
+ drivers/gpu/drm/nouveau/nouveau_encoder.h   |  8 +++
+ 19 files changed, 213 insertions(+), 35 deletions(-)
+
+-- 
+2.26.2
+
+_______________________________________________
+Nouveau mailing list
+Nouveau@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/nouveau
