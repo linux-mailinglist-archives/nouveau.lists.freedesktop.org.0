@@ -1,61 +1,52 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D8D1C1CDE09
-	for <lists+nouveau@lfdr.de>; Mon, 11 May 2020 17:02:58 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id BA0B51CDE0E
+	for <lists+nouveau@lfdr.de>; Mon, 11 May 2020 17:03:14 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 06A666E4AE;
-	Mon, 11 May 2020 15:02:57 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6E61F6E4B3;
+	Mon, 11 May 2020 15:03:12 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-qv1-xf33.google.com (mail-qv1-xf33.google.com
- [IPv6:2607:f8b0:4864:20::f33])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 44AD46E488;
- Mon, 11 May 2020 15:02:56 +0000 (UTC)
-Received: by mail-qv1-xf33.google.com with SMTP id d1so140946qvl.6;
- Mon, 11 May 2020 08:02:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=sender:date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to;
- bh=J4uyWElSmmKaxd8Y7Hrt+yky6sisNiPUP3S3AyJYIE0=;
- b=TZ+MqzO4CQm/iAe5QqQybTl13BatZPT3cFASk8rIjwM92U6gr98iCpw6vh07s1Ogfj
- fnGdSk4VjTlUrMQgIhe0+aeZ5fHt0z4IdiAisI3XRA7gz+eaSYKtbpAZy4CayagjESqN
- iQSgzY3AOwyofH+xAZtSEGG0GYdWCVDnPU7705kMQN54DY1a/BhXVZUiPSFYSXJOJ1Og
- 2f4ULbIBLnkP30TE6MBuUgrPNG0bBTy2hUgym3U3S3IvysQcdx4iH73NDwO9dG4QhDWx
- 3B2lwLZDBboZR9drD783OFzUpIocAckq+bE/0TBXbbbYGbrO1Ikp+gMwXv/ERTRcCN+b
- NEEg==
+Received: from mail-oi1-x231.google.com (mail-oi1-x231.google.com
+ [IPv6:2607:f8b0:4864:20::231])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1FFC96E4B1
+ for <nouveau@lists.freedesktop.org>; Mon, 11 May 2020 15:03:11 +0000 (UTC)
+Received: by mail-oi1-x231.google.com with SMTP id x7so14433241oic.3
+ for <nouveau@lists.freedesktop.org>; Mon, 11 May 2020 08:03:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=7qV0qj2vY3QMnSRpzrXrBmdMrKIn2fose2w49TIcUwA=;
+ b=a72v2AhlK0RMWvywkFLjZmfhzZvIhJmPEoTvBRAk/SnK/GdMXVYpYNlhlUjfan9HTI
+ AYtNSsKZ6jFvdDP3utjWR5R1FanExkscDVG4oyyb4sjLyrHCghImpPzcEV6eLXWps7gE
+ LW8KG+jisGg9a8JULKt2vAZ1gfNW/YVyhRCxg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:sender:date:from:to:cc:subject:message-id
- :references:mime-version:content-disposition:in-reply-to;
- bh=J4uyWElSmmKaxd8Y7Hrt+yky6sisNiPUP3S3AyJYIE0=;
- b=hm8Z0iOVWXyUsrz7SO2TxlXL/JSAaHlE/b43DNvQ0eUC3sLcPkGyyRc3mSopZCxtdn
- aNErApb7wZq/aKCay/WYJJSo+rqo26Vu0seJKMSARlYaIM15fLcfC+nu7nsWplHe39qS
- DJoTDVSesqXtSR3dDEhamKnWsuIbIYrhgid3bMQ0IzKOdlV31SE5ayCNCsJO9z5/T7Gj
- ze0dIEuKIM2FRT7Np/9qEoG/KYNjUDiz3XFaA0na6VY3SFw5oV+BkY2L8gDvc/uTQN62
- ei743Zro3dRD17qmOUKVtn0zkOAP+ClLEj4nUfuu35ikCj5O58/tTbB0wtndK6+Qwbfe
- H6yQ==
-X-Gm-Message-State: AGi0Pub70wRHgvdWwkAqwzi4yBK8DZUQJkiQ47US4AsU6WVbtIPdmnQj
- cwGT/KM1frc9CJQd+ckRbMc=
-X-Google-Smtp-Source: APiQypLnPvgBUeyGBOEkrNHpMwu92fvMkq0NiRki3v6tGAI0dxnyEUhKlNYCkFNryl2NQrnC8dSGGg==
-X-Received: by 2002:ad4:45a7:: with SMTP id y7mr6051944qvu.184.1589209374213; 
- Mon, 11 May 2020 08:02:54 -0700 (PDT)
-Received: from localhost ([199.96.181.106])
- by smtp.gmail.com with ESMTPSA id m6sm1054576qkc.4.2020.05.11.08.02.52
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 11 May 2020 08:02:53 -0700 (PDT)
-Date: Mon, 11 May 2020 11:02:51 -0400
-From: Tejun Heo <tj@kernel.org>
-To: Lyude Paul <lyude@redhat.com>
-Message-ID: <20200511150251.GE16815@mtj.duckdns.org>
-References: <20200508204751.155488-1-lyude@redhat.com>
- <20200508204751.155488-3-lyude@redhat.com>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=7qV0qj2vY3QMnSRpzrXrBmdMrKIn2fose2w49TIcUwA=;
+ b=jea3JtF7Qs3DVITwKwpWM++1JGXmp5MGpq7EXYE8NLc6ygABowkkOuv5NzpzNM2QLR
+ PtKR21kDH0UZaPzA987x1GOwbKPljBV4QzssH5qtxfo2WWxtZ21ZxnwLfH4aQpfKlVjI
+ 92jw1WNk00BqvYKhvpd+TvPgGDLtJ4tqWKph0WfpzoSTAVI8zapvGZ9tgReK8O3K8KdP
+ v9mDwTKzDxQBz29cXfBVvmm8JIKUsZHPflhdHi04hAm45zJoUabPUPIuSK0tmhJlVPZQ
+ A/YigwLI2i6foZg+IvFbMuTVZgO1mFnkC7OHEzXanakJrKvMb53VhdwVnKtxAzSgkbL3
+ p1Ow==
+X-Gm-Message-State: AGi0PuY1SC+16Io9ZMYIm+pV6EO+1jq8eLg9bkNM/WggEwYjkCAvzabY
+ olUScfN4OW6PsHHlE/6qWCbagVu9iC67wfr9FI9JNA==
+X-Google-Smtp-Source: APiQypJyBxpFVBJJmxojQB9sRbIOUW8mGmPu1/0vDgQqL0jXLAatzNPx3bnAkXEfHiEEDH2+PiwShECoXmBHDelm2zs=
+X-Received: by 2002:aca:52d5:: with SMTP id g204mr19998120oib.14.1589209389691; 
+ Mon, 11 May 2020 08:03:09 -0700 (PDT)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20200508204751.155488-3-lyude@redhat.com>
-Subject: Re: [Nouveau] [RFC v4 02/12] kthread: Add
- kthread_(un)block_work_queuing() and kthread_work_queuable()
+References: <20200508204751.155488-1-lyude@redhat.com>
+ <20200508204751.155488-2-lyude@redhat.com>
+ <20200511144935.GD16815@mtj.duckdns.org>
+In-Reply-To: <20200511144935.GD16815@mtj.duckdns.org>
+From: Daniel Vetter <daniel@ffwll.ch>
+Date: Mon, 11 May 2020 17:02:58 +0200
+Message-ID: <CAKMK7uFDp_9SWUtMOfKaSLu3FNq5w=HWDo9FOeRsD204eR327g@mail.gmail.com>
+To: Tejun Heo <tj@kernel.org>
+Subject: Re: [Nouveau] [RFC v4 01/12] kthread: Add kthread_queue_flush_work()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,62 +58,57 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Petr Mladek <pmladek@suse.com>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- Ben Dooks <ben.dooks@codethink.co.uk>, Liang Chen <cl@rock-chips.com>,
- Daniel Vetter <daniel@ffwll.ch>, Johannes Weiner <hannes@cmpxchg.org>,
- Andrew Morton <akpm@linux-foundation.org>,
+Cc: Petr Mladek <pmladek@suse.com>, Nouveau Dev <nouveau@lists.freedesktop.org>,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ dri-devel <dri-devel@lists.freedesktop.org>,
+ Ben Dooks <ben.dooks@codethink.co.uk>,
+ "Steven Rostedt \(VMware\)" <rostedt@goodmis.org>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Andrew Morton <akpm@linux-foundation.org>, Liang Chen <cl@rock-chips.com>,
  Suren Baghdasaryan <surenb@google.com>, Thomas Gleixner <tglx@linutronix.de>,
- Ville =?iso-8859-1?Q?Syrj=E4l=E4?= <ville.syrjala@linux.intel.com>
+ =?UTF-8?B?VmlsbGUgU3lyasOkbMOk?= <ville.syrjala@linux.intel.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, May 08, 2020 at 04:46:52PM -0400, Lyude Paul wrote:
-> Add some simple wrappers around incrementing/decrementing
-> kthread_work.cancelling under lock, along with checking whether queuing
-> is currently allowed on a given kthread_work, which we'll use want to
-> implement work cancelling with DRM's vblank work helpers.
+On Mon, May 11, 2020 at 4:49 PM Tejun Heo <tj@kernel.org> wrote:
+>
+> Hello,
+>
+> On Fri, May 08, 2020 at 04:46:51PM -0400, Lyude Paul wrote:
+> > +bool kthread_queue_flush_work(struct kthread_work *work,
+> > +                           struct kthread_flush_work *fwork);
+> > +void __kthread_flush_work_fn(struct kthread_work *work);
+>
+> As an exposed interface, this doesn't seem great. What the user wants to say
+> is "wait for the current instance of this guy" and the interface is asking
+> them to queue an extra work item whose queueing return state should be
+> checked and depending on that result wait on its internal completion.
+>
+> I'm skeptical this is a good idea in general given that unless you define
+> "this instance" at the time of queueing the work item which is being
+> waited-upon, there's no way to guarantee that the instance you're queueing
+> the flush work item on is the instance you want unless the queuer is holding
+> external synchronization which prevents the instance from running. That's a
+> really confusing semantics to expose in the interface.
+>
+> What the above means is that the ordering that you want is only defined
+> through your own locking and that maybe suggests that the sequencing should
+> be implemented on that side too. It may be a bit more code but a sequence
+> counter + wait queue might be the better solution here.
 
-Am I correct in assuming that what you want is "cancel this and block
-further queueing until the state is cleared"? I agree that'd be something
-really useful to have. That said, There are a few areas that I think can be
-improved upon:
-
-* It'd be better if we separate this state into its own thing rather than
-  mixing with canceling state which has potential to make things really
-  confusing. It doesn't have to be a separate field unless you want disable
-  depth for work item disable (and I don't think you do). It can just be a
-  high bit in the same field but I think the two states should be separate
-  one way or the other.
-
-* I'm always a bit skeptical about state querying interfaces which aren't
-  synchronized to anything. They're useful in many cases but also prone to
-  being misused. If you absoultely have to have them, can you please add
-  explicit comment explaining the lack of synchronization around it - ie.
-  unless you're the one setting and clearing the flag and queueing the task,
-  it isn't synchronized against anything.
-
-* In the same vein, I'm not too sure about stand-alone block interface.
-  Unless I'm the sole queuer or there are further locking around queueing,
-  what good does setting blocking do? There's no way to guarantee that the
-  flag is seen by someone else trying to queue it and trying to flush the
-  work item after queueing doesn't help either. The only way to make that
-  interface meaningful is doing it together with cancel - so, you say "block
-  further queueing and cancel / flush whatever is in flight or queued",
-  which actually gives you a useful invariant.
-
-* A simliar argument can be made about unblock too although that's an a lot
-  more relaxed situation in that unblocking and queueing oneself always
-  works and that the user might not care which future instance of queueing
-  will start succeeding.
-
-Thanks.
-
+Aside from this, flush_$stuff interfaces are very easy to deadlock.
+That's why e.g. flush_work() for normal workqueues has lockdep
+annotations (lockdep doesn't see through wait/wake_up dependencies
+without some help because cross-release didn't land for real). So I
+think if we need something like this, it needs to be a lot more
+explicit, and come with the right lockdep annotations.
+-Daniel
 -- 
-tejun
+Daniel Vetter
+Software Engineer, Intel Corporation
++41 (0) 79 365 57 48 - http://blog.ffwll.ch
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
