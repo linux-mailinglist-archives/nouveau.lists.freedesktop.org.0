@@ -2,38 +2,66 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id BF58C1CC5B3
-	for <lists+nouveau@lfdr.de>; Sun, 10 May 2020 02:16:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D021F1CDBC5
+	for <lists+nouveau@lfdr.de>; Mon, 11 May 2020 15:49:58 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3A81B89A4E;
-	Sun, 10 May 2020 00:16:16 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4E1836E47A;
+	Mon, 11 May 2020 13:49:57 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7F89E8970B;
- Sun, 10 May 2020 00:16:14 +0000 (UTC)
-Received: from localhost.localdomain (c-73-231-172-41.hsd1.ca.comcast.net
- [73.231.172.41])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 924AF20735;
- Sun, 10 May 2020 00:16:13 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1589069774;
- bh=rcEsrsDljCvjlGQcVUHPCm18WB0VkP4lxtaiG5DbAyw=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=W/CJP4rfOuAYUekGlno04mT1Bs4lSQLdciQD+tx1rHltWBYBtvFb+B4LUrQlbHjBw
- UW04g6EtzWPm5sfdxjNzKUcndsgGiQnoKqJbwTmr1gRmhfy5sziX1U8aQ0QHjqGc6a
- IYL4qvBvGH/VJgSMEmkxSCU36sL9Vj/k7/fB2KjE=
-Date: Sat, 9 May 2020 17:16:12 -0700
-From: Andrew Morton <akpm@linux-foundation.org>
-To: Jason Gunthorpe <jgg@ziepe.ca>
-Message-Id: <20200509171612.94ee332ad4f494521d911ac0@linux-foundation.org>
-In-Reply-To: <1-v2-b4e84f444c7d+24f57-hmm_no_flags_jgg@mellanox.com>
+Received: from mail-qk1-x743.google.com (mail-qk1-x743.google.com
+ [IPv6:2607:f8b0:4864:20::743])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9AC8B6E483
+ for <nouveau@lists.freedesktop.org>; Mon, 11 May 2020 13:49:56 +0000 (UTC)
+Received: by mail-qk1-x743.google.com with SMTP id c64so9706882qkf.12
+ for <nouveau@lists.freedesktop.org>; Mon, 11 May 2020 06:49:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ziepe.ca; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to:user-agent;
+ bh=4rPpMLzUp9bspNeARk829RL9zhdg6LdCbnWGM4mXn5M=;
+ b=fTLHNSaidCTBTVafRZ88/JPpZndAW4JKAiqp+xUjmlcGq11JBx+zkoc/gLYyuRZMpU
+ 8huyG7Lesc6lj13AkjhSbtSdyaW0HhfFpl0iYlVpDT1IiP7SHlaVI+MZSY7RwrTYhtBq
+ RQNBgrM8IvriB2Mvvs4e8HQwdfhdtIbJbykV3RNu3vDxx3lnpyWu6MdARnOn+R62z8Jc
+ KN8rcWegPekMEUZip8kruV0JwYQbPzQPKIlrCHz/KHExck9xbphKWhwcVarhbGi64Uoa
+ alGo+ohiWuSyQC8pRj3oZO/AC0G930Xueg4XAOk+AAPwsMsi4evR7ZHEiIxrpqeKQKyH
+ 7Trg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to:user-agent;
+ bh=4rPpMLzUp9bspNeARk829RL9zhdg6LdCbnWGM4mXn5M=;
+ b=pi9HWKYTAqJnhbN4BXZWcOrhBPjZJrZlXgT0+Rj3wLq5d+IV5+S1mnhcnoWtFvFj7s
+ vHfwT9st84axLKuo3iKGDd9iSnXMkWO6jmO9GAS1hn8UE4Lw2L0Qh54P3cLKYei7zyio
+ qVMC2INPCbURSb32t28H/CwZ+FUm6U4dgIZBuWs6trqlRDqbxKVGft/GOiNAcQzR8hP9
+ 8naTMRYBTCGa09jlksvEzg+EZVX7CUshxl8i4SBme9YtZ4p80YWnbQBmAnd18BuX8Mpc
+ 49cb+rgYuygbtPSkuJrFCm3skA4UplRV9bX3/wIYbJJJD1Gr3N/fibrEjwecOj0nr7Wp
+ M/uA==
+X-Gm-Message-State: AGi0PuaF+1t8+4pMu5mlBpgFG5shaG4vzZFfUVnlajN6OmQ7NwWnonD5
+ 3S2Zu59Cq1W1gpytIWqmiGGUYQ==
+X-Google-Smtp-Source: APiQypJNAQ0/U/AQ7HD5Ea1GoiCuDrCNke0sGrNZi0ZXjdmU+vdOsV+r7iIZyEfm/aW74L1CSMAM/Q==
+X-Received: by 2002:a05:620a:2019:: with SMTP id
+ c25mr15376455qka.320.1589204995576; 
+ Mon, 11 May 2020 06:49:55 -0700 (PDT)
+Received: from ziepe.ca
+ (hlfxns017vw-142-68-57-212.dhcp-dynamic.fibreop.ns.bellaliant.net.
+ [142.68.57.212])
+ by smtp.gmail.com with ESMTPSA id i10sm1542178qkk.128.2020.05.11.06.49.54
+ (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
+ Mon, 11 May 2020 06:49:55 -0700 (PDT)
+Received: from jgg by mlx.ziepe.ca with local (Exim 4.90_1)
+ (envelope-from <jgg@ziepe.ca>)
+ id 1jY8oc-0005UB-FF; Mon, 11 May 2020 10:49:54 -0300
+Date: Mon, 11 May 2020 10:49:54 -0300
+From: Jason Gunthorpe <jgg@ziepe.ca>
+To: Andrew Morton <akpm@linux-foundation.org>
+Message-ID: <20200511134954.GS26002@ziepe.ca>
 References: <0-v2-b4e84f444c7d+24f57-hmm_no_flags_jgg@mellanox.com>
  <1-v2-b4e84f444c7d+24f57-hmm_no_flags_jgg@mellanox.com>
-X-Mailer: Sylpheed 3.5.1 (GTK+ 2.24.31; x86_64-pc-linux-gnu)
-Mime-Version: 1.0
+ <20200509171612.94ee332ad4f494521d911ac0@linux-foundation.org>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <20200509171612.94ee332ad4f494521d911ac0@linux-foundation.org>
+User-Agent: Mutt/1.9.4 (2018-02-28)
 Subject: Re: [Nouveau] [PATCH hmm v2 1/5] mm/hmm: make CONFIG_DEVICE_PRIVATE
  into a select
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -56,53 +84,50 @@ Cc: "David \(ChunMing\) Zhou" <David1.Zhou@amd.com>,
  Felix Kuehling <Felix.Kuehling@amd.com>,
  Niranjana Vishwanathapura <niranjana.vishwanathapura@intel.com>,
  intel-gfx@lists.freedesktop.org,
- Christian =?ISO-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
+ Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri,  1 May 2020 15:20:44 -0300 Jason Gunthorpe <jgg@ziepe.ca> wrote:
-
-> From: Jason Gunthorpe <jgg@mellanox.com>
+On Sat, May 09, 2020 at 05:16:12PM -0700, Andrew Morton wrote:
+> On Fri,  1 May 2020 15:20:44 -0300 Jason Gunthorpe <jgg@ziepe.ca> wrote:
 > 
-> There is no reason for a user to select this or not directly - it should
-> be selected by drivers that are going to use the feature, similar to how
-> CONFIG_HMM_MIRROR works.
+> > From: Jason Gunthorpe <jgg@mellanox.com>
+> > 
+> > There is no reason for a user to select this or not directly - it should
+> > be selected by drivers that are going to use the feature, similar to how
+> > CONFIG_HMM_MIRROR works.
+> > 
+> > Currently all drivers provide a feature kconfig that will disable use of
+> > DEVICE_PRIVATE in that driver, allowing users to avoid enabling this if
+> > they don't want the overhead.
+> > 
 > 
-> Currently all drivers provide a feature kconfig that will disable use of
-> DEVICE_PRIVATE in that driver, allowing users to avoid enabling this if
-> they don't want the overhead.
+> I'm not too sure what's going on here, but i386 allmodconfig broke.
 > 
+> kernel/resource.c: In function '__request_free_mem_region':
+> kernel/resource.c:1653:28: error: 'PA_SECTION_SHIFT' undeclared (first use in this function); did you mean 'SECTIONS_PGSHIFT'?
+>   size = ALIGN(size, 1UL << PA_SECTION_SHIFT);
+> 
+> because in current mainline, allmodconfig produces
+> CONFIG_DEVICE_PRIVATE=n but in current linux-next, allmodconfig
+> produces CONFIG_DEVICE_PRIVATE=y.  But CONFIG_SPARSEMEM=n so the build
+> breaks.
 
-I'm not too sure what's going on here, but i386 allmodconfig broke.
+I think Arnd identified this, let us just revet the patch that caused
+it.
 
-kernel/resource.c: In function '__request_free_mem_region':
-kernel/resource.c:1653:28: error: 'PA_SECTION_SHIFT' undeclared (first use in this function); did you mean 'SECTIONS_PGSHIFT'?
-  size = ALIGN(size, 1UL << PA_SECTION_SHIFT);
+> Bisection fingers this commit, but reverting it doesn't seem to fix
+> things.  Could you take a look please?
 
-because in current mainline, allmodconfig produces
-CONFIG_DEVICE_PRIVATE=n but in current linux-next, allmodconfig
-produces CONFIG_DEVICE_PRIVATE=y.  But CONFIG_SPARSEMEM=n so the build
-breaks.
+There is a latter patch adding a 'select DEVICE_PRIVATE' so reverting
+this needs to swap that to 'depends on'.
 
-Bisection fingers this commit, but reverting it doesn't seem to fix
-things.  Could you take a look please?
+I've done both and updated git
 
-I'm seeing this from menuconfig:
-
-WARNING: unmet direct dependencies detected for DEVICE_PRIVATE
-  Depends on [n]: ZONE_DEVICE [=n]
-  Selected by [m]:
-  - DRM_NOUVEAU_SVM [=y] && HAS_IOMEM [=y] && DRM_NOUVEAU [=m] && MMU [=y] && STAGING [=y]
-  - TEST_HMM [=m] && RUNTIME_TESTING_MENU [=y] && TRANSPARENT_HUGEPAGE [=y]
-
-`select' rather sucks this way - easy to break dependencies.  Quite a
-number of years ago the Kconfig gurus were saying "avoid", but I don't
-recall the details.
-
-
-
+Regards,
+Jason
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
