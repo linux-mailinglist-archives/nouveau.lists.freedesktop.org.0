@@ -2,64 +2,44 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7D8C21F8548
-	for <lists+nouveau@lfdr.de>; Sat, 13 Jun 2020 22:54:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 119C01F8540
+	for <lists+nouveau@lfdr.de>; Sat, 13 Jun 2020 22:54:00 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id CC8B96E45F;
-	Sat, 13 Jun 2020 20:54:01 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3B06A6E452;
+	Sat, 13 Jun 2020 20:53:55 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 2864 seconds by postgrey-1.36 at gabe;
- Sat, 09 May 2020 11:57:41 UTC
-Received: from omr1.cc.vt.edu (omr1.cc.ipv6.vt.edu
- [IPv6:2607:b400:92:8300:0:c6:2117:b0e])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 55DC289F4F
- for <nouveau@lists.freedesktop.org>; Sat,  9 May 2020 11:57:41 +0000 (UTC)
-Received: from mr5.cc.vt.edu (mr5.cc.vt.edu
- [IPv6:2607:b400:92:8400:0:72:232:758b])
- by omr1.cc.vt.edu (8.14.4/8.14.4) with ESMTP id 049B9ugJ017497
- for <nouveau@lists.freedesktop.org>; Sat, 9 May 2020 07:09:56 -0400
-Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com
- [209.85.160.198])
- by mr5.cc.vt.edu (8.14.7/8.14.7) with ESMTP id 049B9pLA019641
- for <nouveau@lists.freedesktop.org>; Sat, 9 May 2020 07:09:56 -0400
-Received: by mail-qt1-f198.google.com with SMTP id n22so5011127qtp.15
- for <nouveau@lists.freedesktop.org>; Sat, 09 May 2020 04:09:56 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:sender:from:to:cc:subject:mime-version
- :content-transfer-encoding:date:message-id;
- bh=vIjUaVr8lXgICZvNCCHOLX8uh9Z0/aUAOCq842hnMgE=;
- b=V9HKjsQSQQimbkk42P84XiQn/xcJXe8s3sp3ie9uUs4fOvni2tUwDMeKQOUqbycPhJ
- DnIwnioAX1o6fISjsTysoKjLkkDyfwhw7uWg8vcIjDhzsN22oDKxdgYfh1hg4qIdEioz
- IVG0VrvGp8twOwrPpMOoqG5Ks9QUMaFuJcugDYBk0FE4bQouq4RabHf2PecIWzbN2/M6
- 7UK/q/GeKOmbo1JUld/Vb9TtVMxK7WVYcVZ+kfPL4LDMSXaHGKI7+YwvfofywFlm2gvC
- iPYW4tcJvpr+CxK/QE8UnSLp4yZvWI2AHaynzXLEbNEMGiXYptoyVwPdgusrgVMmoX+L
- xVyQ==
-X-Gm-Message-State: AGi0PuZljFFib9gaw2CnRtqwAdHjWcgNoBIry4S9rfUnCng2rDGr9ftH
- sliB4yHC22LA+VQT4WmQ4hR15SMaMBOivGw9lC4OuvrgARuxNQvseaAdnMGh+1bd9LKNIT5Trvy
- qZq8wLkS16lawTlZcgKHSAO0cSbpHSGq5swWW
-X-Received: by 2002:a37:7786:: with SMTP id s128mr7164215qkc.497.1589022590816; 
- Sat, 09 May 2020 04:09:50 -0700 (PDT)
-X-Google-Smtp-Source: APiQypLc8IvWBaSGDhyMTl5B9gxpmnXDY7zrvRffUZM1qewb4/r7Sxa5/smmEBjIDGRf7TUUf6kwyw==
-X-Received: by 2002:a37:7786:: with SMTP id s128mr7164185qkc.497.1589022590368; 
- Sat, 09 May 2020 04:09:50 -0700 (PDT)
-Received: from turing-police ([2601:5c0:c001:c9e1::359])
- by smtp.gmail.com with ESMTPSA id 10sm4316594qtp.4.2020.05.09.04.09.48
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 09 May 2020 04:09:49 -0700 (PDT)
-From: "Valdis =?utf-8?Q?Kl=c4=93tnieks?=" <valdis.kletnieks@vt.edu>
-X-Google-Original-From: "Valdis =?utf-8?Q?Kl=c4=93tnieks?="
- <Valdis.Kletnieks@vt.edu>
-X-Mailer: exmh version 2.9.0 11/07/2018 with nmh-1.7+dev
-To: Ben Skeggs <bskeggs@redhat.com>, David Airlie <airlied@linux.ie>,
- Christoph Hellwig <hch@lst.de>
-Mime-Version: 1.0
-Date: Sat, 09 May 2020 07:09:48 -0400
-Message-ID: <17362.1589022588@turing-police>
+X-Greylist: delayed 484 seconds by postgrey-1.36 at gabe;
+ Mon, 11 May 2020 20:22:49 UTC
+Received: from torfep04.bell.net (simcoe209srvr.owm.bell.net [184.150.200.209])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 537006E56D;
+ Mon, 11 May 2020 20:22:49 +0000 (UTC)
+Received: from bell.net torfep02 184.150.200.158 by torfep02.bell.net
+ with ESMTP
+ id <20200511201443.FSAV30085.torfep02.bell.net@torspm01.bell.net>;
+ Mon, 11 May 2020 16:14:43 -0400
+Received: from [192.168.1.208] (really [70.49.140.223])
+ by torspm01.bell.net with ESMTP
+ id <20200511201442.CKYX29322.torspm01.bell.net@[192.168.1.208]>;
+ Mon, 11 May 2020 16:14:42 -0400
+Date: Mon, 11 May 2020 16:14:40 -0400
+From: Al Dunsmuir <al.dunsmuir@sympatico.ca>
+Message-ID: <1815605280.20200511161440@sympatico.ca>
+To: =?windows-1250?Q?Christian_K=F6nig?= <ckoenig.leichtzumerken@gmail.com>, 
+ dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org, 
+ nouveau@lists.freedesktop.org
+In-Reply-To: <20200511171722.96576-1-christian.koenig@amd.com>
+References: <20200511171722.96576-1-christian.koenig@amd.com>
+MIME-Version: 1.0
+X-CM-Analysis: v=2.3 cv=KfusTjQD c=1 sm=1 tr=0 a=nyNe8J8XL+yB5u22Hc0alw==:117
+ a=nyNe8J8XL+yB5u22Hc0alw==:17 a=E5nwcu9QDW8A:10 a=sTwFKg_x9MkA:10
+ a=DziIhFR-Z5z0ICe3fxgA:9 a=JGxRANio5w40qwYj:21 a=ohBUF8MfRNpXJLC_:21
+ a=udTvpura_4gA:10
+X-CM-Envelope: MS4wfDQf9RWIz/QqDHli9RW6oH76wLhgYeWwG1+ErTNbuScjmeeLlZp3qRD8eUt2V5KU4Ah85rBWBIojybqgP/DicxAtXYeE7GJPUWHL13x6E0ufPyU4xgL1
+ Wneuh+5prvcTenjiM/1PzBg5+/y6UHR5F75YFTizYGX/z8bDZ9ymPsD96n/NiJoXih8+QmY4A6X9sMuOoQ+IrPFGlhddFP43n3fNlDJPjELkJvUPpFIZLGql
+ LV0KxwWj+qcdGGT9Xd3Ph54IERwyWKx8EklJ/MxWiRsW15Af6jVOjwt2KeERaJDG
 X-Mailman-Approved-At: Sat, 13 Jun 2020 20:53:54 +0000
-Subject: [Nouveau] linux-next 20200508 - build failure in kernel/resource.c
- w/ SPARSEMEM=n
+Subject: Re: [Nouveau] [RFC] Remove AGP support from Radeon/Nouveau/TTM
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,162 +51,93 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org
-Content-Type: multipart/mixed; boundary="===============0126067196=="
+Content-Type: text/plain; charset="cp1250"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
---===============0126067196==
-Content-Type: multipart/signed; boundary="==_Exmh_1589022587_4501P";
-	 micalg=pgp-sha1; protocol="application/pgp-signature"
-Content-Transfer-Encoding: 7bit
-
---==_Exmh_1589022587_4501P
-Content-Type: text/plain; charset=us-ascii
-
-So I did a 'make allmodconfig' and then a 'make' on an RPi4 ARM box, and it
-decided that CONFIG_SPARSEMEM=n was OK (so an include of linux/mmzone.h doesn't
-define some needed values).
-
-The offending code in resource.c is wrapped in a #ifdef CONFIG_DEVICE_PRIVATE,
-which throws a whinge during 'make menuconfig' or 'make allmodconfig':
-
-WARNING: unmet direct dependencies detected for DEVICE_PRIVATE
-  Depends on [n]: ZONE_DEVICE [=n]
-  Selected by [m]:
-  - DRM_NOUVEAU_SVM [=y] && HAS_IOMEM [=y] && DRM_NOUVEAU [=m] && MMU [=y] && STAGING [=y]
-
-after which I end up with CONFIG_DEVICE_PRIVATE=y in the .config file.
-
-make menuconfig tells me:
-Symbol: ZONE_DEVICE [=n]
-   Type  : bool
-   Defined at mm/Kconfig:779
-     Prompt: Device memory (pmem, HMM, etc...) hotplug support
-     Depends on: MEMORY_HOTPLUG [=n] && MEMORY_HOTREMOVE [=n] && SPARSEMEM_VMEMMAP [=n] && ARCH_HAS_PTE_DEVMAP [=n]
-     Location:
-   (1) -> Memory Management options
-   Selects: XARRAY_MULTI [=n]
-
-Pretty obviously a Kconfig whoops, but I have no idea what the proper Kconfig
-fix is for this..
-
-May be related to:
-
-commit 0092908d16c604b8207c2141ec64b0fa4473bb03
-Author: Christoph Hellwig <hch@lst.de>
-Date:   Wed Jun 26 14:27:06 2019 +0200
-
-    mm: factor out a devm_request_free_mem_region helper
-
-which added the #ifdef CONFIG_DEVICE_PRIVATE code in question, except that's a
-pretty old commit...  The only thing I'm sure of is that DEVICE_PRIVATE=y and
-SPARSEMEM=n blows up. :)
-
-  CC      kernel/resource.o
-In file included from ./include/linux/cache.h:5,
-                 from ./include/linux/printk.h:9,
-                 from ./include/linux/kernel.h:15,
-                 from ./include/asm-generic/bug.h:19,
-                 from ./arch/arm/include/asm/bug.h:60,
-                 from ./include/linux/bug.h:5,
-                 from ./include/linux/mmdebug.h:5,
-                 from ./include/linux/gfp.h:5,
-                 from ./include/linux/slab.h:15,
-                 from kernel/resource.c:17:
-kernel/resource.c: In function '__request_free_mem_region':
-kernel/resource.c:1653:28: error: 'PA_SECTION_SHIFT' undeclared (first use in this function); did you mean 'SECTION_SHIFT'?
-  size = ALIGN(size, 1UL << PA_SECTION_SHIFT);
-                            ^~~~~~~~~~~~~~~~
-./include/uapi/linux/kernel.h:11:47: note: in definition of macro '__ALIGN_KERNEL_MASK'
- #define __ALIGN_KERNEL_MASK(x, mask) (((x) + (mask)) & ~(mask))
-                                               ^~~~
-./include/linux/kernel.h:33:22: note: in expansion of macro '__ALIGN_KERNEL'
- #define ALIGN(x, a)  __ALIGN_KERNEL((x), (a))
-                      ^~~~~~~~~~~~~~
-kernel/resource.c:1653:9: note: in expansion of macro 'ALIGN'
-  size = ALIGN(size, 1UL << PA_SECTION_SHIFT);
-         ^~~~~
-kernel/resource.c:1653:28: note: each undeclared identifier is reported only once for each function it appears in
-  size = ALIGN(size, 1UL << PA_SECTION_SHIFT);
-                            ^~~~~~~~~~~~~~~~
-./include/uapi/linux/kernel.h:11:47: note: in definition of macro '__ALIGN_KERNEL_MASK'
- #define __ALIGN_KERNEL_MASK(x, mask) (((x) + (mask)) & ~(mask))
-                                               ^~~~
-./include/linux/kernel.h:33:22: note: in expansion of macro '__ALIGN_KERNEL'
- #define ALIGN(x, a)  __ALIGN_KERNEL((x), (a))
-                      ^~~~~~~~~~~~~~
-kernel/resource.c:1653:9: note: in expansion of macro 'ALIGN'
-  size = ALIGN(size, 1UL << PA_SECTION_SHIFT);
-         ^~~~~
-In file included from ./include/asm-generic/bug.h:19,
-                 from ./arch/arm/include/asm/bug.h:60,
-                 from ./include/linux/bug.h:5,
-                 from ./include/linux/mmdebug.h:5,
-                 from ./include/linux/gfp.h:5,
-                 from ./include/linux/slab.h:15,
-                 from kernel/resource.c:17:
-kernel/resource.c:1654:48: error: 'MAX_PHYSMEM_BITS' undeclared (first use in this function); did you mean 'MAX_UINSN_BYTES'?
-  end = min_t(unsigned long, base->end, (1UL << MAX_PHYSMEM_BITS) - 1);
-                                                ^~~~~~~~~~~~~~~~
-./include/linux/kernel.h:848:40: note: in definition of macro '__typecheck'
-   (!!(sizeof((typeof(x) *)1 == (typeof(y) *)1)))
-                                        ^
-./include/linux/kernel.h:872:24: note: in expansion of macro '__safe_cmp'
-  __builtin_choose_expr(__safe_cmp(x, y), \
-                        ^~~~~~~~~~
-./include/linux/kernel.h:940:27: note: in expansion of macro '__careful_cmp'
- #define min_t(type, x, y) __careful_cmp((type)(x), (type)(y), <)
-                           ^~~~~~~~~~~~~
-kernel/resource.c:1654:8: note: in expansion of macro 'min_t'
-  end = min_t(unsigned long, base->end, (1UL << MAX_PHYSMEM_BITS) - 1);
-        ^~~~~
-./include/linux/kernel.h:872:2: error: first argument to '__builtin_choose_expr' not a constant
-  __builtin_choose_expr(__safe_cmp(x, y), \
-  ^~~~~~~~~~~~~~~~~~~~~
-./include/linux/kernel.h:940:27: note: in expansion of macro '__careful_cmp'
- #define min_t(type, x, y) __careful_cmp((type)(x), (type)(y), <)
-                           ^~~~~~~~~~~~~
-kernel/resource.c:1654:8: note: in expansion of macro 'min_t'
-  end = min_t(unsigned long, base->end, (1UL << MAX_PHYSMEM_BITS) - 1);
-        ^~~~~
-make[1]: *** [scripts/Makefile.build:273: kernel/resource.o] Error 1
-make: *** [Makefile:1726: kernel] Error 2
-
-
---==_Exmh_1589022587_4501P
-Content-Type: application/pgp-signature
-
------BEGIN PGP SIGNATURE-----
-Comment: Exmh version 2.9.0 11/07/2018
-
-iQIVAwUBXraPewdmEQWDXROgAQJVZQ//ZMYAfRDOaGeRcZmhKpgaMq3MR3P7L5Aa
-w4TzHp31ZVyuGt7Tb9o7WZRYlgPHPQoBqWUbI0ZL5Ev80E//7g+fXQqxrPtpUGGR
-LAyOaQ/adybmzSTW79V1Yf2tTIfBwqRQ/WnYQkXl3azERaU62sAGETWoFyVfAspo
-kEBKh07eWfhTk2e0Gh2BQzNw0215kh9pyEhnkDizYkUe9yx/wMBSwrBpO6s3xTCx
-/qJmwzs8VvXE482CAL5qcyzZAr+A8cnWhIzi9tLQHT2hDu+LSY2jENHpvY18fUMr
-nRZtx4oNwz6rW7s7CQMX0QB/yo1ZIahJzGbzOM7Pm+fcMR+uj6THFRj4sElu/bqY
-u/d+dDYj1x7GbBenCiK06lGLHnM0RThzLSKQblGCy93B9hQSJFx5vtmxH/asb7uU
-qUh0F12kGZ9iVBQkEhhcxMtf8mGOAIdGZtqf+wvG1vPIWywf4V0pIIOW4gEk3/RP
-KFlM0/GqulJzCvM1I1t5vufM19vJxcz5W20HldN1y1+zyWL6vw7KpUesHp2342oj
-uRij4XiNEgI5W+dyb5XSJIwvIlTBuKu6JC4dAU19vAbN9sY8Ot5fMmwp6Z8gLX1k
-c0PMIOewx6jKfsg6vJQEV/zy9SMaMM7Tp9ePDkzyAyXYDLzVRhUSCg2HuIeVCHRt
-6xH7VQNFUvg=
-=t/Th
------END PGP SIGNATURE-----
-
---==_Exmh_1589022587_4501P--
-
---===============0126067196==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
-_______________________________________________
-Nouveau mailing list
-Nouveau@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/nouveau
-
---===============0126067196==--
+T24gTW9uZGF5LCBNYXkgMTEsIDIwMjAsIDE6MTc6MTkgUE0sICJDaHJpc3RpYW4gS/ZuaWciIHdy
+b3RlOgo+IEhpIGd1eXMsCgo+IFdlbGwgbGV0J3MgZmFjZSBpdCBBR1AgaXMgYSB0b3RhbCBoZWFk
+YWNoZSB0byBtYWludGFpbiBhbmQgZGVhZCBmb3IgYXQgbGVhc3QgMTArIHllYXJzLgoKPiBXZSBo
+YXZlIGEgbG90IG9mIHg4NiBzcGVjaWZpYyBzdHVmZiBpbiB0aGUgYXJjaGl0ZWN0dXJlIGluZGVw
+ZW5kZW50Cj4gZ3JhcGhpY3MgbWVtb3J5IG1hbmFnZW1lbnQgdG8gZ2V0IHRoZSBjYWNoaW5nIHJp
+Z2h0LCBhYnVzaW5nIHRoZSBETUEKPiBBUEkgb24gbXVsdGlwbGUgb2NjYXNpb25zLCBuZWVkIHRv
+IGRpc3RpbmN0IGJldHdlZW4gQUdQIGFuZCBkcml2ZXIgc3BlY2lmaWMgcGFnZSB0YWJsZXMgZXRj
+IGV0Yy4uLgoKPiBTbyB0aGUgaWRlYSBoZXJlIGlzIHRvIGp1c3QgZ28gYWhlYWQgYW5kIHJlbW92
+ZSB0aGUgc3VwcG9ydCBmcm9tCj4gUmFkZW9uIGFuZCBOb3V2ZWF1IGFuZCB0aGVuIGRyb3AgdGhl
+IG5lY2Vzc2FyeSBjb2RlIGZyb20gVFRNLgoKPiBGb3IgUmFkZW9uIHRoaXMgbWVhbnMgdGhhdCB3
+ZSBqdXN0IHN3aXRjaCBvdmVyIHRvIHRoZSBkcml2ZXIKPiBzcGVjaWZpYyBwYWdlIHRhYmxlcyBh
+bmQgZXZlcnl0aGluZyBzaG91bGQgbW9yZSBvciBsZXNzIGNvbnRpbnVlIHRvIHdvcmsuCgo+IEZv
+ciBOb3V2ZWF1IEknbSBub3QgMTAwJSBzdXJlLCBidXQgZnJvbSB0aGUgY29kZSBpdCBvZiBoYW5k
+IGxvb2tzCj4gbGlrZSB3ZSBjYW4gZG8gaXQgc2ltaWxhciB0byBSYWRlb24uCgo+IFBsZWFzZSBj
+b21tZW50IHdoYXQgeW91IHRoaW5rIGFib3V0IHRoaXMuCgo+IFJlZ2FyZHMsCj4gQ2hyaXN0aWFu
+LgoKQ2hyaXN0aWFuLAoKSSB3b3VsZCByZXNwZWN0ZnVsbHkgYXNrIHRoYXQgdGhpcyBjaGFuZ2Ug
+YmUgcmVqZWN0ZWQuCgpJJ20gIGN1cnJlbnRseSAgYW4gIGVuZCB1c2VyIG9uIGJvdGggSW50ZWwg
+KDMyLWJpdCBhbmQgNjQtYml0KSBhbmQgUFBDCihNYWNzLCBJQk0gUG93ZXIgLSBCRSBhbmQgTEUp
+LgoKTGludXggaXMgbm90IGp1c3QgdXNlZCBmb3IgbW9kZXJuIGhhcmR3YXJlLiBUaGVyZSBpcyBh
+bHNvIGEgc3Vic2V0IG9mCnRoZSB1c2VyIGJhc2UgdGhhdCB1c2VzIGl0IGZvciB3aGF0IGlzIG9m
+dGVuIHRlcm1lZCByZXRyby1jb21wdXRpbmcuCk5vIGl0J3Mgbm90IGNvbW1lcmNpYWwgdXNhZ2Us
+IGJ1dCBubyBvbmUgY2FuIHNlcmlvdXNseSBjbGFpbSB0aGF0IHRoYXQKTGludXggaXMgZm9yIGJ1
+c2luZXNzIG9ubHkuCgpPZnRlbiB0aGUgb2xkIGhhcmR3YXJlIGlzIGJ1aWx0IGZhciBiYXR0ZXIg
+dGhhbiB0aGUgbW9kZXJuIGp1bmssIGFuZAp3aWxsIGNvbnRpbnVlIHRvIHJ1biBmb3IgeWVhcnMg
+dG8gY29tZS4gVGhpcyBncm91cCBvZiBmb2xrcyBlaXRoZXIgaGFzCmV4aXN0aW5nIGhhcmR3YXJl
+IHRoZXkgd2lzaCB0byBjb250aW51ZSB0byB1c2UsIG9yIGFyZSBhY3F1aXJpbmcgdGhlCnNhbWUg
+YmVjYXVzZSB0aGV5IGFyZSB0aXJlZCBvZiBnZW5lcmljIGxvY2tlZC1kb3duIGhhcmR3YXJlLgoK
+QSBzaWduaWZpY2FudCBwZXJjZW50YWdlIG9mIHRoZSB2aWRlbyBoYXJkd2FyZSB0aGF0IGZhbGxz
+IGluIHRoZSByZXRybwpjYXRlZ29yeSB1c2VzIHRoZSBBR1AgdmlkZW8gYnVzLiBSZW1vdmluZyB0
+aGF0IHN1cHBvcnQgZm9yIHRob3NlIGNhc2VzCndoZXJlIGl0IHdvcmtzIHdvdWxkIHNldmVyZWx5
+IGxpbWl0IHBlcmZvcm1hbmNlIGFuZCBpbiBzb21lIGNhc2VzCmZ1bmN0aW9uYWxpdHkuIFRoaXMg
+Y2FuIG1lYW4gdGhlIGRpZmZlcmVuY2UgYmV0d2VlbiBiZWluZyBhYmxlIHRvIHJ1bgphbiBhcHBs
+aWNhdGlvbiwgb3IgaGF2aW5nIGl0IGZhaWwuCgpUaGVyZSBhcmUgbXVsdGlwbGUgYWN0aXZlIExp
+bnV4IGRpc3RyaWJ1dGlvbnMgZm9yIFBQQyBNYWNzLiBNYW55IGZvbGtzCmFyZSBtb3ZpbmcgZnJv
+bSBydW5uaW5nIGFuIG9yaWdpbmFsIE1hYyBPUyBYIGJlY2F1c2Ugb2YgdGhlIHJlY2VudAptaWdy
+YXRpb24gb2YgbW9zdCBXZWIgc2VydmljZXMgdG8gbmV3IGVuY3J5cHRpb24gcHJvdG9jb2xzIChU
+TFMgMS4yLApTU0wsIGV0Yy4pIHdoaWNoIGNhbiBub3QgYmUgcHJhY3RpY2FsbHkgc3VwcG9ydGVk
+IGJ5IGJyb3dzZXJzIG9uIHRoYXQKT1MgLSBldmVuIHRoZSBvcGVuIHNvdXJjZSBvbmVzLiBMaW51
+eCBvbiB0aGF0IHNhbWUgaGFyZHdhcmUgcHJvdmlkZXMKdGhlIG9wcG9ydHVuaXR5IHRvIHdvcmsg
+b25saW5lIHdpdGggY3VycmVudCBwcm90b2NvbHMgYW5kIGVuc3VyZSB0aGF0CnRoZXkgYXJlIHJl
+YXNvbmFibHkgc2VjdXJlLgoKQW5vdGhlciBncm91cCB0aGF0IGZpdHMgaW4gdGhlIHJldHJvIGNh
+dGVnb3J5IGlzIHRob3NlIGZvbGtzIHdpdGgKb2xkZXIgUEMgaGFyZHdhcmUgd2hvIGFyZSBub3Qg
+bWlncmF0aW5nIHRvIHRoZSBsYXRlc3QgTWljcm9zb2Z0IE9TLApidXQgaW5zdGVhZCB3YW50IHRv
+IG1vdmUgdG8gTGludXguCgpTb21lIGZvbGtzIHN1Z2dlc3QgdGhlIHJldHJvIGZvbGtzIHVzZSBh
+biBvbGRlciB1bm1haW50YWluZWQgTGludXgKdmVyc2lvbi4gVGhhdCdzIGp1c3Qgbm90IGFwcHJv
+cHJpYXRlIG5vciByZWFzb25hYmxlLCBhZ2FpbiBmcm9tIGVpdGhlcgphIHNlY3VyaXR5IGFuZCBw
+cm90b2NvbCBwb2ludCBvZiB2aWV3LgoKTXlzZWxmPyBJJ20gYSBmdWxsLXRpbWUgQyBwcm9ncmFt
+bWVyIGFuZCBFbGVjdHJpY2FsIEVuZ2luZWVyLiBNeQpjdXJyZW50IHdvcmsgcHJvamVjdCBpcyBh
+Ym91dCA0MDBLTE9DLiBJJ3ZlIGRvbmUgc29tZSB3b3JrIG9uIFBDIGFuZAplbWJlZGRlZCB2aWRl
+byBoYXJkd2FyZSBhbmQgc29mdHdhcmUgaW4gdGhlIHBhc3QuCgpNeSBhaW0gaXMgdG8gc3RhcnQg
+b3V0IGJ5IGhlbHBpbmcgdG8gdGVzdCB0aGUgdmlkZW8gZHJpdmVycyAob24gYm90aApQQyBhbmQg
+TUFDIGhhcmR3YXJlKSwgYW5kIGFzIEkgZ2FpbiBtb3JlIGtub3dsZWRnZSBiZWNvbWUgcGFydCBv
+ZiB0aGUKZWZmb3J0IHRvIGJyaW5nIHRoZSBkcml2ZXJzIHRvIHRoZSBvbGRlciBoYXJkd2FyZSBp
+bnRvIGEgYmV0dGVyIGZvcm0KKGluIGtlcm5lbCBkcml2ZXJzIFZTIHVzZXItc3BhY2UpLgoKT3Zl
+ciB0aGUgbGFzdCBmZXcgeWVhcnMgSSBoYXZlIGJlZW4gY29sbGVjdGluZyBhIHNpZ25pZmljYW50
+ICh+NDApCm51bWJlciBvZiB2aWRlbyBjYXJkcyBvZiB2YXJpb3VzIGZsYXZvcnMuIFNvbWUgUENJ
+LCBidXQgdGhlIG1ham9yaXR5CmV2ZW5seSBkaXZpZGVkIGJldHdlZW4gQUdQIGFuZCBQQ0ktWC4g
+TW9zdCBhcmUgQVRJL1JhZGVvbiAoTWFjaDY0Kwp0aHJvdWdoIFI3KSB3aXRoIHNvbWUgTnZpZGlh
+LCBNYXRyb3ggYW5kIGEgZmV3IG90aGVycyAoQ2hyb21lIGFuZCBldmVuCmEgTnVtYmVyIE5pbmUp
+LiBJIHRyeSB0byBoYXZlIGJvdGggUEMgYW5kIE1hYyB2YXJpYW50cyBvZiB0aGUgc2FtZQpjYXJk
+IHdoZXJlLWV2ZXIgcG9zc2libGUgdG8gbWFrZSBjb21wYXJpc29ucyBhY3Jvc3MgYXJjaGl0ZWN0
+dXJlcwplYXNpZXIuIFRoaXMgeWVhciBJIGhhdmUgYWNxdWlyZWQgc29tZSBvZiB0aGUgbGFzdCBT
+YXBwaGlyZSBSYWRlb24gQUdQCmNhcmRzIChIRDN4eHgsIEhENHh4eCkuIEknbSBhIGZyZXF1ZW50
+IGZseWVyIG9uIGVCYXkgYW5kIEtpamlqaS4KCkkndmUgZ290IGxvdHMgb2YgTWFjcyAoUENJLCBB
+R1AgYW5kIFBDSS1YKSBhbmQgYSBudW1iZXIgb2YgZnVsbCBQQwpzeXN0ZW1zLiBJJ20gc2V0dGlu
+ZyB1cCBhIG51bWJlciBvZiBkZWRpY2F0ZWQgdGVzdCBiZW5jaCByaWdzIChhbmQKZnVsbCBzeXN0
+ZW1zKSBzcGVjaWZpY2FsbHkgZm9yIHRoZSB2aWRlbyB0ZXN0aW5nLiBNb3N0IGFyZSBBTUQgNjQt
+Yml0CmNhcGFibGUsIGJ1dCBhbHNvIEludGVsLiBGaW5hbGx5LCB0aGVyZSBhcmUgYSBmZXcgZW1i
+ZWRkZWQgc3lzdGVtcwooQU1EIGFuZCBhIEMzKS4KCkZyb20gdGhlIHByb2dyYW1taW5nIHNpZGUs
+IEFtYXpvbiBoYXMgYmVlbiBhIGdvb2Qgc291cmNlIG9uIG9sZGVyCmVkaXRpb25zIG9mIGNvbXB1
+dGVyIGdyYXBoaWNzIGJvb2tzLCB3aGljaCBzaG91bGQgcHJvdmlkZSBiYWNrZ3JvdW5kCmtub3ds
+ZWRnZSB0byBoZWxwIG1lIGluIG15IGpvdXJuZXkuCgpPbmUgZ2xpdGNoIGlzIHRoYXQgSSdtIHBh
+cnR3YXkgdGhyb3VnaCBleWUgc3VyZ2VyeSAoY29ybmVhICsgY2F0YXJhY3RzKSwKYW5kIG15IGZp
+bmFsIG9wZXJhdGlvbiBpcyBoZWxkIHVwIGR1ZSB0byBDT1ZJRC0xOS4gIEFmdGVyIHRoaW5ncyBn
+ZXQKYmFjayB0byBtb3JlIG9mIGEgbm9ybWFsIHN0YXRlIGFuZCB0aGF0IGNhbiBiZSBjb21wbGV0
+ZWQsIG15IHByb2dyZXNzCnNob3VsZCBiZSBhIGxvdCBzbW9vdGhlci4KCkkgaG9wZSB0aGlzIHB1
+dHMgYW5vdGhlciBwcm9zcGVjdGl2ZSBvbiB5b3VyIHN1Z2dlc3RlZCBjaGFuZ2UsIGZyb20gYQpM
+aW51eCBlbnRodXNpYXN0IGFuZCBwcm9ncmFtbWVyIHdob3NlIHVzYWdlIHNldCBpcyBmYXIgZGlm
+ZmVyZW50IGZyb20KeW91ciBvd24uIEZvciB0aGF0IGdyb3VwIG9mIExpbnV4IHVzZXJzLCBJIGFz
+ayB0aGF0IHlvdSBOT1QgZ28gYWhlYWQKd2l0aCB0aGlzIGNoYW5nZSBhcyBpdCB3b3VsZCBiZSBm
+YXIgbW9yZSBpbXBhY3RmdWwgdG8gdGhhdCBncm91cHMgdGhhbgp5b3UgbWlnaHQgdGhpbmsuCgpS
+ZXNwZWN0ZnVsbHksCkFsIER1bnNtdWlyCgpBbAoKX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBtYWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5m
+cmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0
+aW5mby9ub3V2ZWF1Cg==
