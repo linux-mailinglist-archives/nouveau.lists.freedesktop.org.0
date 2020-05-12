@@ -1,68 +1,45 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0ABE51CEEE0
-	for <lists+nouveau@lfdr.de>; Tue, 12 May 2020 10:11:56 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 430011CEEEF
+	for <lists+nouveau@lfdr.de>; Tue, 12 May 2020 10:16:45 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B450F6E867;
-	Tue, 12 May 2020 08:11:48 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6E36C6E86F;
+	Tue, 12 May 2020 08:16:42 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
- by gabe.freedesktop.org (Postfix) with ESMTPS id DF6F36E865;
- Tue, 12 May 2020 08:11:46 +0000 (UTC)
-Received: by mail-wm1-x32a.google.com with SMTP id w19so7436407wmc.1;
- Tue, 12 May 2020 01:11:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=reply-to:subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-transfer-encoding:content-language;
- bh=qF7Shrx1TQyNZee+zwTlCbN+EEOjMmwCAV1oyGKvE1o=;
- b=KJgtVvUP/hMvgrFxSXS18lilSrg04fBPYEG3mf2tp0iZAEeyvf1OBhq5IKOQkv900m
- KLaIe4rhLllaawMidYSOUIfxCTfT9Pfoqwp+OqpRMiNfAXgbSTQcJpCCscJ81Riminkw
- f5zItlr6dbqOwPz3/podY0Kku4rTC9qErZM0TVSGMoUve0GOSIk+557FQolQQKQI/9Ku
- 7DRZ3PTq4M4DRXCZGqHWpbjXJecPW2+OeW1nxLkodAFI7msc0N5u5GdI+3dxdJZslO+B
- MkAbtt8nuaibytUEWXO12j+EBbgZIupamz8Hl+4OwK+W0xZrbuir9NJGN+p/grodvndR
- 0xzg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:reply-to:subject:to:cc:references:from
- :message-id:date:user-agent:mime-version:in-reply-to
- :content-transfer-encoding:content-language;
- bh=qF7Shrx1TQyNZee+zwTlCbN+EEOjMmwCAV1oyGKvE1o=;
- b=I6duEg3QTw4aJTk3nprvhuyY0aAXVdR9//Iv8SPy2KmBc8w3j80fYmogbVnn2Yr7tT
- Sj034zkraWADXZ/UF4iZff+WyM1KnVEKpqGkMX/EkLRuWm6V0IYHVYfH/zOAhROHBsNL
- v7zZdC0RhIwltrR6rMlJ8xuv6b+shlPPEsw9tWCaa4lYuuGXzAIHrtOmmzPgYZ3Wq5qp
- 1BYpEpZ9elFudclBf512K+CNpVgIIaoh/IqfOZQ1Caqcq/D9JyVR+QsTqSwPu3ifbjou
- qgaxPP4454IQ3rHd97iHMZs5F+9dkFDBeJta8hQy7c2i4wRSGy73kh/ICeXHjWqsKuNF
- zHfA==
-X-Gm-Message-State: AGi0Pub16Q6MJ04jD8viD/uYCHpTjqRK9hmlBmuuaGAoiQj8eEhIMbgJ
- JevHD4k0M7AsmAs3A1KRwBdt/d52
-X-Google-Smtp-Source: APiQypJK4KFbzAbpXsacXsh8WrIZpsdiMI3gZucK8r4OSRLQc3MHwOKQwD4YN5tn3TMFp4AXSbfC0w==
-X-Received: by 2002:a1c:f712:: with SMTP id v18mr16471174wmh.27.1589271105126; 
- Tue, 12 May 2020 01:11:45 -0700 (PDT)
-Received: from ?IPv6:2a02:908:1252:fb60:be8a:bd56:1f94:86e7?
- ([2a02:908:1252:fb60:be8a:bd56:1f94:86e7])
- by smtp.gmail.com with ESMTPSA id 77sm22108480wrc.6.2020.05.12.01.11.43
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Tue, 12 May 2020 01:11:44 -0700 (PDT)
-To: Al Dunsmuir <al.dunsmuir@sympatico.ca>, Dave Airlie <airlied@gmail.com>,
- Alex Deucher <alexdeucher@gmail.com>
+Received: from netline-mail3.netline.ch (mail.netline.ch [148.251.143.178])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 969F76E86F;
+ Tue, 12 May 2020 08:16:41 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by netline-mail3.netline.ch (Postfix) with ESMTP id EFFF42A6046;
+ Tue, 12 May 2020 10:16:40 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at netline-mail3.netline.ch
+Received: from netline-mail3.netline.ch ([127.0.0.1])
+ by localhost (netline-mail3.netline.ch [127.0.0.1]) (amavisd-new, port 10024)
+ with LMTP id tQpXDyvWFP9w; Tue, 12 May 2020 10:16:40 +0200 (CEST)
+Received: from thor (252.80.76.83.dynamic.wline.res.cust.swisscom.ch
+ [83.76.80.252])
+ by netline-mail3.netline.ch (Postfix) with ESMTPSA id AE06A2A6042;
+ Tue, 12 May 2020 10:16:40 +0200 (CEST)
+Received: from localhost ([::1]) by thor with esmtp (Exim 4.93)
+ (envelope-from <michel@daenzer.net>)
+ id 1jYQ5g-000hcP-8a; Tue, 12 May 2020 10:16:40 +0200
+To: Alex Deucher <alexdeucher@gmail.com>,
+ =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>
 References: <20200511171722.96576-1-christian.koenig@amd.com>
- <1815605280.20200511161440@sympatico.ca>
- <CADnq5_MYPcAoWzCcBkJAkd858gCVbJpCJobiwH_BBbwgEdx5rA@mail.gmail.com>
- <CAPM=9tysbcgQ-KR8+icQ=3e6+SECxkwHdVpP8=w0Pmh9ML_+Lw@mail.gmail.com>
- <1266714942.20200511165648@sympatico.ca>
-From: =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>
-Message-ID: <7a506bb2-1bde-ebde-9bf1-bc115b99e873@gmail.com>
-Date: Tue, 12 May 2020 10:11:42 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.9.0
+ <20200511171722.96576-2-christian.koenig@amd.com>
+ <CADnq5_MyO_L+1w69qDLzhg34W6Qer-uSRR2tb7-2uXLC_6PXSg@mail.gmail.com>
+From: =?UTF-8?Q?Michel_D=c3=a4nzer?= <michel@daenzer.net>
+Message-ID: <ba0b1ab7-3078-a6f2-41cd-326ca21ee99f@daenzer.net>
+Date: Tue, 12 May 2020 10:16:40 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.8.0
 MIME-Version: 1.0
-In-Reply-To: <1266714942.20200511165648@sympatico.ca>
-Content-Language: en-US
-Subject: Re: [Nouveau] [RFC] Remove AGP support from Radeon/Nouveau/TTM
+In-Reply-To: <CADnq5_MyO_L+1w69qDLzhg34W6Qer-uSRR2tb7-2uXLC_6PXSg@mail.gmail.com>
+Content-Language: en-CA
+Subject: Re: [Nouveau] [PATCH 1/3] drm/radeon: remove AGP support
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -74,66 +51,32 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Reply-To: christian.koenig@amd.com
 Cc: nouveau <nouveau@lists.freedesktop.org>,
  Maling list - DRI developers <dri-devel@lists.freedesktop.org>,
  amd-gfx list <amd-gfx@lists.freedesktop.org>
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Am 11.05.20 um 22:56 schrieb Al Dunsmuir:
-> Hello Dave,
->
-> On Monday, May 11, 2020, 4:43:01 PM, Dave Airlie wrote:
->> On Tue, 12 May 2020 at 06:28, Alex Deucher <alexdeucher@gmail.com> wrote:
->>> [SNIP]
->> Maybe we can find some way to compartmentalise AGP further?
->> Dave.
-> Significantly   reduced  caching  on memory accesses definitely sounds
-> like something that would be noticeable and objectionable.
->
-> I would speculate that this would also vary a lot across chipsets,
-> depending on the capabilities of the PCI MMU vs the AGP MMU.
->
-> In the end, it may be best to leave things as is, or as Dave suggested
-> try to keep AGP in the picture.
-
-The problem is that AGP was never really supported/implemented that well 
-in the first place.
-
-The fact that the core linux kernel and the DMA API doesn't support 
-uncached memory and we had to change the caching attributes of pages 
-under the hood has resulted in a huge number of problems over the years.
-
-Keeping it as it is is also not a really doable option because TTM 
-already has major problems keeping up with the requirements for modern 
-hardware, see my presentation here as well: 
-https://fosdem.org/2020/schedule/event/ttm/
-
-Redesigning the old AGP support into something which isn't so ugly and 
-doesn't blocks the new requirements has the huge risk of breaking things 
-even harder, e.g. black screen instead of just reduced performance.
-
-So removing/disabling AGP by default still sounds like the best option 
-to me for end users.
-
-> Nothing is ever simple, is it?
-
-At least not with AGP, no :) It has been a total beast to support and 
-keep working.
-
-Do I get this right that I can ping you to test things?
-
-Thanks for the feedback,
-Christian.
-
-> Al
->
->
-
-_______________________________________________
-Nouveau mailing list
-Nouveau@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/nouveau
+T24gMjAyMC0wNS0xMSAxMDoxMiBwLm0uLCBBbGV4IERldWNoZXIgd3JvdGU6Cj4gT24gTW9uLCBN
+YXkgMTEsIDIwMjAgYXQgMToxNyBQTSBDaHJpc3RpYW4gS8O2bmlnCj4gPGNrb2VuaWcubGVpY2h0
+enVtZXJrZW5AZ21haWwuY29tPiB3cm90ZToKPj4KPj4gQUdQIGlzIGRlcHJlY2F0ZWQgZm9yIDEw
+KyB5ZWFycyBub3cgYW5kIG5vdCB1c2VkIGFueSBtb3JlIG9uIG1vZGVybiBoYXJkd2FyZS4KPj4K
+Pj4gT2xkIGhhcmR3YXJlIHNob3VsZCBjb250aW51ZSB0byB3b3JrIGluIFBDSSBtb2RlLgo+IAo+
+IE1pZ2h0IHdhbnQgdG8gY2xhcmlmeSB0aGF0IHRoZXJlIGlzIG5vIGxvc3Mgb2YgZnVuY3Rpb25h
+bGl0eSBoZXJlLgo+IFNvbWV0aGluZyBsaWtlOgo+IAo+ICJUaGVyZSBpcyBubyBsb3NzIG9mIGZ1
+bmN0aW9uYWxpdHkgaGVyZS4gIEdQVXMgd2lsbCBjb250aW51ZSB0bwo+IGZ1bmN0aW9uLiAgVGhp
+cyBqdXN0IGRyb3BzIHRoZSB1c2Ugb2YgdGhlIEFHUCBNTVUgaW4gdGhlIGNoaXBzZXQgaW4KPiBm
+YXZvciBvZiB0aGUgTU1VIG9uIHRoZSBkZXZpY2Ugd2hpY2ggaGFzIHByb3ZlbiB0byBiZSBtdWNo
+IG1vcmUKPiByZWxpYWJsZS4gIER1ZSB0byBpdHMgdW5yZWxpYWJpbGl0eSwgQUdQIHN1cHBvcnQg
+aGFzIGJlZW4gZGlzYWJsZWQgb24KPiBQb3dlclBDIGZvciB5ZWFycyBhbHJlYWR5IHNvIHRoZXJl
+IGlzIG5vIGNoYW5nZSBvbiBQb3dlclBDLiIKClRoZXJlJ3MgYSBkaWZmZXJlbmNlIGJldHdlZW4g
+c29tZXRoaW5nIGJlaW5nIGRpc2FibGVkIGJ5IGRlZmF1bHQgb3Igbm90CmJlaW5nIGF2YWlsYWJs
+ZSBhdCBhbGwuIFdlIG1heSBkZWNpZGUgaXQncyB3b3J0aCBpdCBhbnl3YXksIGJ1dCBsZXQncyBk
+bwppdCBiYXNlZCBvbiBmYWN0cy4KCgotLSAKRWFydGhsaW5nIE1pY2hlbCBEw6RuemVyICAgICAg
+ICAgICAgICAgfCAgICAgICAgICAgICAgIGh0dHBzOi8vcmVkaGF0LmNvbQpMaWJyZSBzb2Z0d2Fy
+ZSBlbnRodXNpYXN0ICAgICAgICAgICAgIHwgICAgICAgICAgICAgTWVzYSBhbmQgWCBkZXZlbG9w
+ZXIKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVh
+dSBtYWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0
+cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1Cg==
