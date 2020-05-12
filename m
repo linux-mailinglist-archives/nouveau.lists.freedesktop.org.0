@@ -1,56 +1,68 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 49CD81CEA89
-	for <lists+nouveau@lfdr.de>; Tue, 12 May 2020 04:10:18 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0ABE51CEEE0
+	for <lists+nouveau@lfdr.de>; Tue, 12 May 2020 10:11:56 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A03026E064;
-	Tue, 12 May 2020 02:10:16 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B450F6E867;
+	Tue, 12 May 2020 08:11:48 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-yb1-xb44.google.com (mail-yb1-xb44.google.com
- [IPv6:2607:f8b0:4864:20::b44])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3EDD56E064;
- Tue, 12 May 2020 02:10:15 +0000 (UTC)
-Received: by mail-yb1-xb44.google.com with SMTP id o134so512730ybg.2;
- Mon, 11 May 2020 19:10:15 -0700 (PDT)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id DF6F36E865;
+ Tue, 12 May 2020 08:11:46 +0000 (UTC)
+Received: by mail-wm1-x32a.google.com with SMTP id w19so7436407wmc.1;
+ Tue, 12 May 2020 01:11:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=zcq/C2mPvyaxNF2lVsVAAK7HuZoD0vL2Lekk73ttM9c=;
- b=QTUTR10HRSLC/TmGuicNIvhxEmKHNlDigJZyRKIMl5gsEAteM0iWF2eGAR9PHoTKdk
- At3sV9vTEbhZ8oRwK/8/kCkUgmTNEE1Repq8YEpp93GaLiWSyTmfOzhDkJz0KlCT55JN
- bsVpDPvwP32JFAJl9iu8vSl5V6tSmUurImMPDwvROdzbHw9ELGxiq0ZF6ucA3herDxcs
- WdOWxLlkcB3zq4eaI1iWNmf3/S2ZT5nUyhO59z7zVvp+IXyTabwffYP4Zt6ZelvPvVIe
- nqaNU/M2Q7apIJRecgFESPxwZzKAh4utAi8TGLCalSX5LLlpvewah/jzj4b6sJ0yGDs6
- ucuA==
+ h=reply-to:subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-transfer-encoding:content-language;
+ bh=qF7Shrx1TQyNZee+zwTlCbN+EEOjMmwCAV1oyGKvE1o=;
+ b=KJgtVvUP/hMvgrFxSXS18lilSrg04fBPYEG3mf2tp0iZAEeyvf1OBhq5IKOQkv900m
+ KLaIe4rhLllaawMidYSOUIfxCTfT9Pfoqwp+OqpRMiNfAXgbSTQcJpCCscJ81Riminkw
+ f5zItlr6dbqOwPz3/podY0Kku4rTC9qErZM0TVSGMoUve0GOSIk+557FQolQQKQI/9Ku
+ 7DRZ3PTq4M4DRXCZGqHWpbjXJecPW2+OeW1nxLkodAFI7msc0N5u5GdI+3dxdJZslO+B
+ MkAbtt8nuaibytUEWXO12j+EBbgZIupamz8Hl+4OwK+W0xZrbuir9NJGN+p/grodvndR
+ 0xzg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=zcq/C2mPvyaxNF2lVsVAAK7HuZoD0vL2Lekk73ttM9c=;
- b=WeqUBeh2veTI4ta0mcaq/OxRV5CmeCC5LvLpcNsdA6RiiCMwAQce8nw+KBk0xXnf6K
- cCsAmQ8YQ7ZtaI5xT5iriUh1kwXWqiK3Y2uh9rgrhSG/YEViUusQ9ij4FLpyKaZCE5us
- v5UAbdrWpIJRFwAGArce0l4CeNh/BrauSpxKRYAuT6AX0DkOvERR+XtW9D8UdC14usz9
- 7Ji9tzXabDPi4eFYoOOOtjuyla4cMRFQM6Z1JFHWDF8wPho1HUVYr+iHo+beOrnHkZjF
- r3XSVM5P3P6AFSFpQOIg6x86fSiTSHn7uGSC/4bOlyZmGXftbj+4Bxc+/qdz5MFyiWFo
- f4fg==
-X-Gm-Message-State: AGi0PuYau8qHFj8ya0t3ZBmLvMw4mO5s4G5k5FJB5KMiWAoBTGWgpf8N
- xOYhJk8BS0Lq8W5yFOAom0VAQJKBPvdLa4T3AzY=
-X-Google-Smtp-Source: APiQypJrvsmTHW860BhtnJ2gO7lfm9Dv5dNGo6aH4Lk4s07qsm3DIExyEcz8w8paVk2wwZrwAOzwCSLAi48y0m9hQv8=
-X-Received: by 2002:a25:9d82:: with SMTP id v2mr29859246ybp.268.1589249414325; 
- Mon, 11 May 2020 19:10:14 -0700 (PDT)
+ h=x-gm-message-state:reply-to:subject:to:cc:references:from
+ :message-id:date:user-agent:mime-version:in-reply-to
+ :content-transfer-encoding:content-language;
+ bh=qF7Shrx1TQyNZee+zwTlCbN+EEOjMmwCAV1oyGKvE1o=;
+ b=I6duEg3QTw4aJTk3nprvhuyY0aAXVdR9//Iv8SPy2KmBc8w3j80fYmogbVnn2Yr7tT
+ Sj034zkraWADXZ/UF4iZff+WyM1KnVEKpqGkMX/EkLRuWm6V0IYHVYfH/zOAhROHBsNL
+ v7zZdC0RhIwltrR6rMlJ8xuv6b+shlPPEsw9tWCaa4lYuuGXzAIHrtOmmzPgYZ3Wq5qp
+ 1BYpEpZ9elFudclBf512K+CNpVgIIaoh/IqfOZQ1Caqcq/D9JyVR+QsTqSwPu3ifbjou
+ qgaxPP4454IQ3rHd97iHMZs5F+9dkFDBeJta8hQy7c2i4wRSGy73kh/ICeXHjWqsKuNF
+ zHfA==
+X-Gm-Message-State: AGi0Pub16Q6MJ04jD8viD/uYCHpTjqRK9hmlBmuuaGAoiQj8eEhIMbgJ
+ JevHD4k0M7AsmAs3A1KRwBdt/d52
+X-Google-Smtp-Source: APiQypJK4KFbzAbpXsacXsh8WrIZpsdiMI3gZucK8r4OSRLQc3MHwOKQwD4YN5tn3TMFp4AXSbfC0w==
+X-Received: by 2002:a1c:f712:: with SMTP id v18mr16471174wmh.27.1589271105126; 
+ Tue, 12 May 2020 01:11:45 -0700 (PDT)
+Received: from ?IPv6:2a02:908:1252:fb60:be8a:bd56:1f94:86e7?
+ ([2a02:908:1252:fb60:be8a:bd56:1f94:86e7])
+ by smtp.gmail.com with ESMTPSA id 77sm22108480wrc.6.2020.05.12.01.11.43
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Tue, 12 May 2020 01:11:44 -0700 (PDT)
+To: Al Dunsmuir <al.dunsmuir@sympatico.ca>, Dave Airlie <airlied@gmail.com>,
+ Alex Deucher <alexdeucher@gmail.com>
+References: <20200511171722.96576-1-christian.koenig@amd.com>
+ <1815605280.20200511161440@sympatico.ca>
+ <CADnq5_MYPcAoWzCcBkJAkd858gCVbJpCJobiwH_BBbwgEdx5rA@mail.gmail.com>
+ <CAPM=9tysbcgQ-KR8+icQ=3e6+SECxkwHdVpP8=w0Pmh9ML_+Lw@mail.gmail.com>
+ <1266714942.20200511165648@sympatico.ca>
+From: =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>
+Message-ID: <7a506bb2-1bde-ebde-9bf1-bc115b99e873@gmail.com>
+Date: Tue, 12 May 2020 10:11:42 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.9.0
 MIME-Version: 1.0
-References: <20200511224148.598468-1-lyude@redhat.com>
- <20200511224148.598468-4-lyude@redhat.com>
- <CAKb7UvjQfw9UvxCdcu1k3t0dnq7PdQJrw5CtWhB42=uiW9-4dA@mail.gmail.com>
-In-Reply-To: <CAKb7UvjQfw9UvxCdcu1k3t0dnq7PdQJrw5CtWhB42=uiW9-4dA@mail.gmail.com>
-From: Ben Skeggs <skeggsb@gmail.com>
-Date: Tue, 12 May 2020 12:10:03 +1000
-Message-ID: <CACAvsv7V4wHhCKVaA7F-GiF-cN21E-z82JBp=pnePgWj-Kcq0A@mail.gmail.com>
-To: Ilia Mirkin <imirkin@alum.mit.edu>
-Subject: Re: [Nouveau] [PATCH v3 3/5] drm/nouveau/kms/gv100-: Add support
- for interlaced modes
+In-Reply-To: <1266714942.20200511165648@sympatico.ca>
+Content-Language: en-US
+Subject: Re: [Nouveau] [RFC] Remove AGP support from Radeon/Nouveau/TTM
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -62,41 +74,65 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, nouveau <nouveau@lists.freedesktop.org>,
- LKML <linux-kernel@vger.kernel.org>,
- dri-devel <dri-devel@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>
-Content-Type: text/plain; charset="us-ascii"
+Reply-To: christian.koenig@amd.com
+Cc: nouveau <nouveau@lists.freedesktop.org>,
+ Maling list - DRI developers <dri-devel@lists.freedesktop.org>,
+ amd-gfx list <amd-gfx@lists.freedesktop.org>
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, 12 May 2020 at 09:06, Ilia Mirkin <imirkin@alum.mit.edu> wrote:
+Am 11.05.20 um 22:56 schrieb Al Dunsmuir:
+> Hello Dave,
 >
-> On Mon, May 11, 2020 at 6:42 PM Lyude Paul <lyude@redhat.com> wrote:
-> > diff --git a/drivers/gpu/drm/nouveau/nouveau_connector.c b/drivers/gpu/drm/nouveau/nouveau_connector.c
-> > index 43bcbb6d73c4..6dae00da5d7e 100644
-> > --- a/drivers/gpu/drm/nouveau/nouveau_connector.c
-> > +++ b/drivers/gpu/drm/nouveau/nouveau_connector.c
-> > @@ -1065,7 +1065,7 @@ nouveau_connector_mode_valid(struct drm_connector *connector,
-> >                 return get_slave_funcs(encoder)->mode_valid(encoder, mode);
-> >         case DCB_OUTPUT_DP:
-> >                 if (mode->flags & DRM_MODE_FLAG_INTERLACE &&
-> > -                   !nv_encoder->dp.caps.interlace)
-> > +                   !nv_encoder->caps.dp_interlace)
-> >                         return MODE_NO_INTERLACE;
-> >
-> >                 max_clock  = nv_encoder->dp.link_nr;
+> On Monday, May 11, 2020, 4:43:01 PM, Dave Airlie wrote:
+>> On Tue, 12 May 2020 at 06:28, Alex Deucher <alexdeucher@gmail.com> wrote:
+>>> [SNIP]
+>> Maybe we can find some way to compartmentalise AGP further?
+>> Dave.
+> Significantly   reduced  caching  on memory accesses definitely sounds
+> like something that would be noticeable and objectionable.
 >
-> You probably meant for this hunk to go into an earlier patch.
-I fixed this and merged the series.
+> I would speculate that this would also vary a lot across chipsets,
+> depending on the capabilities of the PCI MMU vs the AGP MMU.
+>
+> In the end, it may be best to leave things as is, or as Dave suggested
+> try to keep AGP in the picture.
 
-Ben.
+The problem is that AGP was never really supported/implemented that well 
+in the first place.
+
+The fact that the core linux kernel and the DMA API doesn't support 
+uncached memory and we had to change the caching attributes of pages 
+under the hood has resulted in a huge number of problems over the years.
+
+Keeping it as it is is also not a really doable option because TTM 
+already has major problems keeping up with the requirements for modern 
+hardware, see my presentation here as well: 
+https://fosdem.org/2020/schedule/event/ttm/
+
+Redesigning the old AGP support into something which isn't so ugly and 
+doesn't blocks the new requirements has the huge risk of breaking things 
+even harder, e.g. black screen instead of just reduced performance.
+
+So removing/disabling AGP by default still sounds like the best option 
+to me for end users.
+
+> Nothing is ever simple, is it?
+
+At least not with AGP, no :) It has been a total beast to support and 
+keep working.
+
+Do I get this right that I can ping you to test things?
+
+Thanks for the feedback,
+Christian.
+
+> Al
 >
->   -ilia
-> _______________________________________________
-> dri-devel mailing list
-> dri-devel@lists.freedesktop.org
-> https://lists.freedesktop.org/mailman/listinfo/dri-devel
+>
+
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
