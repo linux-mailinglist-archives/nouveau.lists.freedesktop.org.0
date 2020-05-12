@@ -1,57 +1,56 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 88C131CFE06
-	for <lists+nouveau@lfdr.de>; Tue, 12 May 2020 21:10:47 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 19E1A1CFEAA
+	for <lists+nouveau@lfdr.de>; Tue, 12 May 2020 21:47:53 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 17FEC6E96D;
-	Tue, 12 May 2020 19:10:40 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id DC0886E976;
+	Tue, 12 May 2020 19:47:43 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
- by gabe.freedesktop.org (Postfix) with ESMTPS id CA2876E1EE;
- Tue, 12 May 2020 19:10:38 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 21EB8AC4A;
- Tue, 12 May 2020 19:10:40 +0000 (UTC)
-To: Alex Deucher <alexdeucher@gmail.com>
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [IPv6:2a00:1450:4864:20::430])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9C3B86E974;
+ Tue, 12 May 2020 19:47:42 +0000 (UTC)
+Received: by mail-wr1-x430.google.com with SMTP id s8so17294530wrt.9;
+ Tue, 12 May 2020 12:47:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=dd0BoQQcVd3JAqASsVl46XVVHdqwDdYiTKGonzKkGOk=;
+ b=CAcM0vt2HFUKLub3JzJtkPMilAkvS9eq4aN+xvgC86MNF3vYcfANxquul1iCLidaZh
+ aEypTUzMN3+yYCrotIDPDlcV80LwRn305PBxZPgarwvpXmtEMiREMHK8sKLM+R23MNuQ
+ R2msLgtuoGxdJPC1zC6vKHxDgXBvEqq9LN42iwgzDHXk58J2qc2Cr89xXNDwdjJwU4JT
+ aUARkIRYcMmzDaQuEeuNSXnJVX+tGvP4H/kdnMiSpdq4ePMVRm45Sj+DltMsJkmWHO9M
+ cU/KO/RFwJ7kkI15vox5HaIlDfrcMjchChTegpp/S9LFLLPOsvmSjq/8wDTmM9vYB47Q
+ +kGw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=dd0BoQQcVd3JAqASsVl46XVVHdqwDdYiTKGonzKkGOk=;
+ b=SJe+6EuPqzK3RjYUgLlmpQnbr1j36QabXoRNJOGB1Pt5TH3pPuXGDLYIr62nxLO8Uk
+ NHDCXKfiOfoufEi3qYEdhCvSWAyK7iHv7KQGpZ4VJSMjcswwnpo1ZNQaNNJ9+h6MWG2g
+ uWQ0CYvnTz8MrLziyv9sOnDLp9oxTdSoH6itxt7REriAG896DkZ+8PoCnBya9c1Hf//2
+ WMYCrfHUpYGn8fWEHVlorJlKV+sPqNk2fdIu5ur8yVhPJMJzgFHn6B3HCAXRjzsNqduC
+ HyVUUcsEPk+JM2EyAm0twCDBII1iXpu1lbtoiuX/fBr7zu2H1bH7mwEJuJANn+Bk0RQF
+ dDCg==
+X-Gm-Message-State: AGi0PuacXRKFlaRRG8vlj3Xz86drisQ9HWZxyxxvFGmmV/KkGUiTmfuV
+ 6ova43AIPb/UeoPDWpqDZFIzOGbJoG2JKV+TKKg=
+X-Google-Smtp-Source: APiQypJnpJ6wxfDNaMTKVmQBb0Cll1FSnt1k5QvFF99QvOcXkCdQOx1oO+m6ND12UPeTHDUBg/EGIi+s/8LafwC0ljo=
+X-Received: by 2002:a5d:4389:: with SMTP id i9mr27527291wrq.374.1589312861325; 
+ Tue, 12 May 2020 12:47:41 -0700 (PDT)
+MIME-Version: 1.0
 References: <20200511171722.96576-1-christian.koenig@amd.com>
  <1f7b3774-8724-7653-3481-9429ae991acc@suse.de>
  <CADnq5_OnoH3YhhEjD7eOrBPPqxQZ+S1cKWRBaUMVnA0V=E0i+Q@mail.gmail.com>
-From: Thomas Zimmermann <tzimmermann@suse.de>
-Autocrypt: addr=tzimmermann@suse.de; keydata=
- mQENBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
- XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
- BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
- hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
- 9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
- AAG0J1Rob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPokBVAQTAQgAPhYh
- BHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJbOdLgAhsDBQkDwmcABQsJCAcCBhUKCQgLAgQWAgMB
- Ah4BAheAAAoJEGgNwR1TC3ojR80H/jH+vYavwQ+TvO8ksXL9JQWc3IFSiGpuSVXLCdg62AmR
- irxW+qCwNncNQyb9rd30gzdectSkPWL3KSqEResBe24IbA5/jSkPweJasgXtfhuyoeCJ6PXo
- clQQGKIoFIAEv1s8l0ggPZswvCinegl1diyJXUXmdEJRTWYAtxn/atut1o6Giv6D2qmYbXN7
- mneMC5MzlLaJKUtoH7U/IjVw1sx2qtxAZGKVm4RZxPnMCp9E1MAr5t4dP5gJCIiqsdrVqI6i
- KupZstMxstPU//azmz7ZWWxT0JzgJqZSvPYx/SATeexTYBP47YFyri4jnsty2ErS91E6H8os
- Bv6pnSn7eAq5AQ0EWznS4AEIAMYmP4M/V+T5RY5at/g7rUdNsLhWv1APYrh9RQefODYHrNRH
- UE9eosYbT6XMryR9hT8XlGOYRwKWwiQBoWSDiTMo/Xi29jUnn4BXfI2px2DTXwc22LKtLAgT
- RjP+qbU63Y0xnQN29UGDbYgyyK51DW3H0If2a3JNsheAAK+Xc9baj0LGIc8T9uiEWHBnCH+R
- dhgATnWWGKdDegUR5BkDfDg5O/FISymJBHx2Dyoklv5g4BzkgqTqwmaYzsl8UxZKvbaxq0zb
- ehDda8lvhFXodNFMAgTLJlLuDYOGLK2AwbrS3Sp0AEbkpdJBb44qVlGm5bApZouHeJ/+n+7r
- 12+lqdsAEQEAAYkBPAQYAQgAJhYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJbOdLgAhsMBQkD
- wmcAAAoJEGgNwR1TC3ojpfcIAInwP5OlcEKokTnHCiDTz4Ony4GnHRP2fXATQZCKxmu4AJY2
- h9ifw9Nf2TjCZ6AMvC3thAN0rFDj55N9l4s1CpaDo4J+0fkrHuyNacnT206CeJV1E7NYntxU
- n+LSiRrOdywn6erjxRi9EYTVLCHcDhBEjKmFZfg4AM4GZMWX1lg0+eHbd5oL1as28WvvI/uI
- aMyV8RbyXot1r/8QLlWldU3NrTF5p7TMU2y3ZH2mf5suSKHAMtbE4jKJ8ZHFOo3GhLgjVrBW
- HE9JXO08xKkgD+w6v83+nomsEuf6C6LYrqY/tsZvyEX6zN8CtirPdPWu/VXNRYAl/lat7lSI
- 3H26qrE=
-Message-ID: <1706b8de-bf4a-e9e1-2163-e782d1c2cc19@suse.de>
-Date: Tue, 12 May 2020 21:10:33 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.8.0
-MIME-Version: 1.0
-In-Reply-To: <CADnq5_OnoH3YhhEjD7eOrBPPqxQZ+S1cKWRBaUMVnA0V=E0i+Q@mail.gmail.com>
+ <1706b8de-bf4a-e9e1-2163-e782d1c2cc19@suse.de>
+In-Reply-To: <1706b8de-bf4a-e9e1-2163-e782d1c2cc19@suse.de>
+From: Alex Deucher <alexdeucher@gmail.com>
+Date: Tue, 12 May 2020 15:47:30 -0400
+Message-ID: <CADnq5_P6sWt=0zkRm6ySmOb1zr-7VTwLwx+ecEKg-ntJTRfY5A@mail.gmail.com>
+To: Thomas Zimmermann <tzimmermann@suse.de>
 Subject: Re: [Nouveau] [RFC] Remove AGP support from Radeon/Nouveau/TTM
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -64,163 +63,67 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>,
+Cc: =?UTF-8?Q?Christian_K=C3=B6nig?= <ckoenig.leichtzumerken@gmail.com>,
  amd-gfx list <amd-gfx@lists.freedesktop.org>,
  Maling list - DRI developers <dri-devel@lists.freedesktop.org>,
  nouveau <nouveau@lists.freedesktop.org>
-Content-Type: multipart/mixed; boundary="===============1694908877=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============1694908877==
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="Vmmmv1n9OLJKVsFf1F1O9GzQ6b413Fnph"
-
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---Vmmmv1n9OLJKVsFf1F1O9GzQ6b413Fnph
-Content-Type: multipart/mixed; boundary="PQzEX6CqGcJoIxw1Y5dt8OA6spM7RpE55";
- protected-headers="v1"
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: Alex Deucher <alexdeucher@gmail.com>
-Cc: =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>,
- Maling list - DRI developers <dri-devel@lists.freedesktop.org>,
- amd-gfx list <amd-gfx@lists.freedesktop.org>,
- nouveau <nouveau@lists.freedesktop.org>
-Message-ID: <1706b8de-bf4a-e9e1-2163-e782d1c2cc19@suse.de>
-Subject: Re: [Nouveau] [RFC] Remove AGP support from Radeon/Nouveau/TTM
-References: <20200511171722.96576-1-christian.koenig@amd.com>
- <1f7b3774-8724-7653-3481-9429ae991acc@suse.de>
- <CADnq5_OnoH3YhhEjD7eOrBPPqxQZ+S1cKWRBaUMVnA0V=E0i+Q@mail.gmail.com>
-In-Reply-To: <CADnq5_OnoH3YhhEjD7eOrBPPqxQZ+S1cKWRBaUMVnA0V=E0i+Q@mail.gmail.com>
-
---PQzEX6CqGcJoIxw1Y5dt8OA6spM7RpE55
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
-
-Hi Alex
-
-Am 12.05.20 um 20:32 schrieb Alex Deucher:
-> On Tue, May 12, 2020 at 2:29 PM Thomas Zimmermann <tzimmermann@suse.de>=
- wrote:
->>
->> Hi
->>
->> Am 11.05.20 um 19:17 schrieb Christian K=C3=B6nig:
->>> Hi guys,
->>>
->>> Well let's face it AGP is a total headache to maintain and dead for a=
-t least 10+ years.
->>>
->>> We have a lot of x86 specific stuff in the architecture independent g=
-raphics memory management to get the caching right, abusing the DMA API o=
-n multiple occasions, need to distinct between AGP and driver specific pa=
-ge tables etc etc...
->>>
->>> So the idea here is to just go ahead and remove the support from Rade=
-on and Nouveau and then drop the necessary code from TTM.
->>>
->>> For Radeon this means that we just switch over to the driver specific=
- page tables and everything should more or less continue to work.
->>>
->>> For Nouveau I'm not 100% sure, but from the code it of hand looks lik=
-e we can do it similar to Radeon.
->>>
->>> Please comment what you think about this.
->>
->> There's some AGP support code in the DRM core. Can some of that declar=
-ed
->> as legacy?
->>
->> Specifically, what about these AGP-related ioctl calls? Can they be
->> declared as legacy? It would appear to me that KMS-based drivers don't=
-
->> have to manage AGP by themselves. (?)
->=20
-> The old drm core AGP code is mainly (only?) for the non-KMS drivers.
-> E.g., mach64, r128, sis, savage, etc.
-
-Exactly my point. There's one drm_agp_init() call left in radeon. The
-rest of the AGP code is apparently for legacy non-KMS drivers. Should
-the related ioctl calls be declared as legacy (i.e., listed with
-DRM_LEGACY_IOCTL_DEF instead of DRM_IOCTL_DEF)? If so, much of the AGP
-core code could probably be moved behind CONFIG_DRM_LEGACY as well.
-
-Best regards
-Thomas
-
->=20
-> Alex
->=20
->>
->> Best regards
->> Thomas
->>
->>>
->>> Regards,
->>> Christian.
->>>
->>>
->>> _______________________________________________
->>> Nouveau mailing list
->>> Nouveau@lists.freedesktop.org
->>> https://lists.freedesktop.org/mailman/listinfo/nouveau
->>>
->>
->> --
->> Thomas Zimmermann
->> Graphics Driver Developer
->> SUSE Software Solutions Germany GmbH
->> Maxfeldstr. 5, 90409 N=C3=BCrnberg, Germany
->> (HRB 36809, AG N=C3=BCrnberg)
->> Gesch=C3=A4ftsf=C3=BChrer: Felix Imend=C3=B6rffer
->>
->> _______________________________________________
->> amd-gfx mailing list
->> amd-gfx@lists.freedesktop.org
->> https://lists.freedesktop.org/mailman/listinfo/amd-gfx
-
---=20
-Thomas Zimmermann
-Graphics Driver Developer
-SUSE Software Solutions Germany GmbH
-Maxfeldstr. 5, 90409 N=C3=BCrnberg, Germany
-(HRB 36809, AG N=C3=BCrnberg)
-Gesch=C3=A4ftsf=C3=BChrer: Felix Imend=C3=B6rffer
-
-
---PQzEX6CqGcJoIxw1Y5dt8OA6spM7RpE55--
-
---Vmmmv1n9OLJKVsFf1F1O9GzQ6b413Fnph
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEchf7rIzpz2NEoWjlaA3BHVMLeiMFAl669KkACgkQaA3BHVML
-eiMySggAwTliMh1nnsIQnm4GXtUXKTQb49mfHeGpaXDg/qoU7bzcohlwa/xoFXc/
-lYVjt6Q9rl/1cr8bnE0hv5ZSI+abQbXqVfMIcxX4eVq+5TB3nMVDGULR+dZwXwh9
-CPGMDNvPNgS8kjCq77G8s1pm1QQvbMa+GxQNBMxhe3lL0fcXSvgdUfXKnAs2mXnV
-MWzM92vov0JU2VHaBhCLrBk2Gqi5fy9dEDbRDXLjyqXHxdohEF4adQz42KAjGt3h
-jpeeQPIs+1IsN/NUtsBey5cGbCfGhFW+ucd/nPsIPZW9qzoTIQA49YQ7eM7qYUio
-81gjdvToEeM+D2kmmrbnH03aOdx/Jw==
-=1KwA
------END PGP SIGNATURE-----
-
---Vmmmv1n9OLJKVsFf1F1O9GzQ6b413Fnph--
-
---===============1694908877==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
-_______________________________________________
-Nouveau mailing list
-Nouveau@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/nouveau
-
---===============1694908877==--
+T24gVHVlLCBNYXkgMTIsIDIwMjAgYXQgMzoxMCBQTSBUaG9tYXMgWmltbWVybWFubiA8dHppbW1l
+cm1hbm5Ac3VzZS5kZT4gd3JvdGU6Cj4KPiBIaSBBbGV4Cj4KPiBBbSAxMi4wNS4yMCB1bSAyMDoz
+MiBzY2hyaWViIEFsZXggRGV1Y2hlcjoKPiA+IE9uIFR1ZSwgTWF5IDEyLCAyMDIwIGF0IDI6Mjkg
+UE0gVGhvbWFzIFppbW1lcm1hbm4gPHR6aW1tZXJtYW5uQHN1c2UuZGU+IHdyb3RlOgo+ID4+Cj4g
+Pj4gSGkKPiA+Pgo+ID4+IEFtIDExLjA1LjIwIHVtIDE5OjE3IHNjaHJpZWIgQ2hyaXN0aWFuIEvD
+tm5pZzoKPiA+Pj4gSGkgZ3V5cywKPiA+Pj4KPiA+Pj4gV2VsbCBsZXQncyBmYWNlIGl0IEFHUCBp
+cyBhIHRvdGFsIGhlYWRhY2hlIHRvIG1haW50YWluIGFuZCBkZWFkIGZvciBhdCBsZWFzdCAxMCsg
+eWVhcnMuCj4gPj4+Cj4gPj4+IFdlIGhhdmUgYSBsb3Qgb2YgeDg2IHNwZWNpZmljIHN0dWZmIGlu
+IHRoZSBhcmNoaXRlY3R1cmUgaW5kZXBlbmRlbnQgZ3JhcGhpY3MgbWVtb3J5IG1hbmFnZW1lbnQg
+dG8gZ2V0IHRoZSBjYWNoaW5nIHJpZ2h0LCBhYnVzaW5nIHRoZSBETUEgQVBJIG9uIG11bHRpcGxl
+IG9jY2FzaW9ucywgbmVlZCB0byBkaXN0aW5jdCBiZXR3ZWVuIEFHUCBhbmQgZHJpdmVyIHNwZWNp
+ZmljIHBhZ2UgdGFibGVzIGV0YyBldGMuLi4KPiA+Pj4KPiA+Pj4gU28gdGhlIGlkZWEgaGVyZSBp
+cyB0byBqdXN0IGdvIGFoZWFkIGFuZCByZW1vdmUgdGhlIHN1cHBvcnQgZnJvbSBSYWRlb24gYW5k
+IE5vdXZlYXUgYW5kIHRoZW4gZHJvcCB0aGUgbmVjZXNzYXJ5IGNvZGUgZnJvbSBUVE0uCj4gPj4+
+Cj4gPj4+IEZvciBSYWRlb24gdGhpcyBtZWFucyB0aGF0IHdlIGp1c3Qgc3dpdGNoIG92ZXIgdG8g
+dGhlIGRyaXZlciBzcGVjaWZpYyBwYWdlIHRhYmxlcyBhbmQgZXZlcnl0aGluZyBzaG91bGQgbW9y
+ZSBvciBsZXNzIGNvbnRpbnVlIHRvIHdvcmsuCj4gPj4+Cj4gPj4+IEZvciBOb3V2ZWF1IEknbSBu
+b3QgMTAwJSBzdXJlLCBidXQgZnJvbSB0aGUgY29kZSBpdCBvZiBoYW5kIGxvb2tzIGxpa2Ugd2Ug
+Y2FuIGRvIGl0IHNpbWlsYXIgdG8gUmFkZW9uLgo+ID4+Pgo+ID4+PiBQbGVhc2UgY29tbWVudCB3
+aGF0IHlvdSB0aGluayBhYm91dCB0aGlzLgo+ID4+Cj4gPj4gVGhlcmUncyBzb21lIEFHUCBzdXBw
+b3J0IGNvZGUgaW4gdGhlIERSTSBjb3JlLiBDYW4gc29tZSBvZiB0aGF0IGRlY2xhcmVkCj4gPj4g
+YXMgbGVnYWN5Pwo+ID4+Cj4gPj4gU3BlY2lmaWNhbGx5LCB3aGF0IGFib3V0IHRoZXNlIEFHUC1y
+ZWxhdGVkIGlvY3RsIGNhbGxzPyBDYW4gdGhleSBiZQo+ID4+IGRlY2xhcmVkIGFzIGxlZ2FjeT8g
+SXQgd291bGQgYXBwZWFyIHRvIG1lIHRoYXQgS01TLWJhc2VkIGRyaXZlcnMgZG9uJ3QKPiA+PiBo
+YXZlIHRvIG1hbmFnZSBBR1AgYnkgdGhlbXNlbHZlcy4gKD8pCj4gPgo+ID4gVGhlIG9sZCBkcm0g
+Y29yZSBBR1AgY29kZSBpcyBtYWlubHkgKG9ubHk/KSBmb3IgdGhlIG5vbi1LTVMgZHJpdmVycy4K
+PiA+IEUuZy4sIG1hY2g2NCwgcjEyOCwgc2lzLCBzYXZhZ2UsIGV0Yy4KPgo+IEV4YWN0bHkgbXkg
+cG9pbnQuIFRoZXJlJ3Mgb25lIGRybV9hZ3BfaW5pdCgpIGNhbGwgbGVmdCBpbiByYWRlb24uIFRo
+ZQo+IHJlc3Qgb2YgdGhlIEFHUCBjb2RlIGlzIGFwcGFyZW50bHkgZm9yIGxlZ2FjeSBub24tS01T
+IGRyaXZlcnMuIFNob3VsZAo+IHRoZSByZWxhdGVkIGlvY3RsIGNhbGxzIGJlIGRlY2xhcmVkIGFz
+IGxlZ2FjeSAoaS5lLiwgbGlzdGVkIHdpdGgKPiBEUk1fTEVHQUNZX0lPQ1RMX0RFRiBpbnN0ZWFk
+IG9mIERSTV9JT0NUTF9ERUYpPyBJZiBzbywgbXVjaCBvZiB0aGUgQUdQCj4gY29yZSBjb2RlIGNv
+dWxkIHByb2JhYmx5IGJlIG1vdmVkIGJlaGluZCBDT05GSUdfRFJNX0xFR0FDWSBhcyB3ZWxsLgoK
+QWgsIEkgZm9yZ290IGFib3V0IGRybV9hZ3BfaW5pdCgpLiAgSSB3YXMganVzdCB0aGlua2luZyB0
+aGUgb3RoZXIgQUdQCnN0dWZmLiAgWWVhaCwgSSB0aGluayB3ZSBjb3VsZCBtYWtlIGl0IGxlZ2Fj
+eS4KCkFsZXgKCgo+Cj4gQmVzdCByZWdhcmRzCj4gVGhvbWFzCj4KPiA+Cj4gPiBBbGV4Cj4gPgo+
+ID4+Cj4gPj4gQmVzdCByZWdhcmRzCj4gPj4gVGhvbWFzCj4gPj4KPiA+Pj4KPiA+Pj4gUmVnYXJk
+cywKPiA+Pj4gQ2hyaXN0aWFuLgo+ID4+Pgo+ID4+Pgo+ID4+PiBfX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fXwo+ID4+PiBOb3V2ZWF1IG1haWxpbmcgbGlzdAo+
+ID4+PiBOb3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwo+ID4+PiBodHRwczovL2xpc3RzLmZy
+ZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL25vdXZlYXUKPiA+Pj4KPiA+Pgo+ID4+IC0t
+Cj4gPj4gVGhvbWFzIFppbW1lcm1hbm4KPiA+PiBHcmFwaGljcyBEcml2ZXIgRGV2ZWxvcGVyCj4g
+Pj4gU1VTRSBTb2Z0d2FyZSBTb2x1dGlvbnMgR2VybWFueSBHbWJICj4gPj4gTWF4ZmVsZHN0ci4g
+NSwgOTA0MDkgTsO8cm5iZXJnLCBHZXJtYW55Cj4gPj4gKEhSQiAzNjgwOSwgQUcgTsO8cm5iZXJn
+KQo+ID4+IEdlc2Now6RmdHNmw7xocmVyOiBGZWxpeCBJbWVuZMO2cmZmZXIKPiA+Pgo+ID4+IF9f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCj4gPj4gYW1kLWdm
+eCBtYWlsaW5nIGxpc3QKPiA+PiBhbWQtZ2Z4QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwo+ID4+IGh0
+dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vYW1kLWdmeAo+Cj4g
+LS0KPiBUaG9tYXMgWmltbWVybWFubgo+IEdyYXBoaWNzIERyaXZlciBEZXZlbG9wZXIKPiBTVVNF
+IFNvZnR3YXJlIFNvbHV0aW9ucyBHZXJtYW55IEdtYkgKPiBNYXhmZWxkc3RyLiA1LCA5MDQwOSBO
+w7xybmJlcmcsIEdlcm1hbnkKPiAoSFJCIDM2ODA5LCBBRyBOw7xybmJlcmcpCj4gR2VzY2jDpGZ0
+c2bDvGhyZXI6IEZlbGl4IEltZW5kw7ZyZmZlcgo+Cl9fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fCk5vdXZlYXUgbWFpbGluZyBsaXN0Ck5vdXZlYXVAbGlzdHMu
+ZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlz
+dGluZm8vbm91dmVhdQo=
