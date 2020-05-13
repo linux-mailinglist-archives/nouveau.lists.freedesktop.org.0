@@ -2,42 +2,46 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6E7781F8554
-	for <lists+nouveau@lfdr.de>; Sat, 13 Jun 2020 22:54:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F31BB1F8552
+	for <lists+nouveau@lfdr.de>; Sat, 13 Jun 2020 22:54:20 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2857F6E492;
-	Sat, 13 Jun 2020 20:54:08 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7C7566E48C;
+	Sat, 13 Jun 2020 20:54:07 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mtlfep02.bell.net (belmont80srvr.owm.bell.net [184.150.200.80])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C951589DBA;
- Mon, 11 May 2020 20:56:51 +0000 (UTC)
-Received: from bell.net mtlfep02 184.150.200.30 by mtlfep02.bell.net with ESMTP
- id <20200511205650.TLGP3628.mtlfep02.bell.net@mtlspm01.bell.net>;
- Mon, 11 May 2020 16:56:50 -0400
-Received: from [192.168.1.208] (really [70.49.140.223])
- by mtlspm01.bell.net with ESMTP
- id <20200511205650.JAUU130487.mtlspm01.bell.net@[192.168.1.208]>;
- Mon, 11 May 2020 16:56:50 -0400
-Date: Mon, 11 May 2020 16:56:48 -0400
-From: Al Dunsmuir <al.dunsmuir@sympatico.ca>
-Message-ID: <1266714942.20200511165648@sympatico.ca>
-To: Dave Airlie <airlied@gmail.com>, Alex Deucher <alexdeucher@gmail.com>
-In-Reply-To: <CAPM=9tysbcgQ-KR8+icQ=3e6+SECxkwHdVpP8=w0Pmh9ML_+Lw@mail.gmail.com>
-References: <20200511171722.96576-1-christian.koenig@amd.com> 
- <1815605280.20200511161440@sympatico.ca>
- <CADnq5_MYPcAoWzCcBkJAkd858gCVbJpCJobiwH_BBbwgEdx5rA@mail.gmail.com>
- <CAPM=9tysbcgQ-KR8+icQ=3e6+SECxkwHdVpP8=w0Pmh9ML_+Lw@mail.gmail.com>
+Received: from mail-ej1-f68.google.com (mail-ej1-f68.google.com
+ [209.85.218.68])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0FE236E9A5;
+ Wed, 13 May 2020 11:55:29 +0000 (UTC)
+Received: by mail-ej1-f68.google.com with SMTP id e2so13926449eje.13;
+ Wed, 13 May 2020 04:55:28 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=dwSZ/cYngXQKvlWb23OdV+haQ9k3VXAPp4SIUIXgqs4=;
+ b=Yzt9tfQVrHVU8vHLbysGEiBP86H2+TFsxNCxUcnlmaAEBug2z43dp5YxMyPiZRPN5o
+ jYmrE8TEvs9i8eaNJgmB2Cjbk1IwfrfuGMiUpOgaCiWtBpsI32ybD9conp9LKd4c8WPw
+ kFCkCVx+IBtQyEKmsLDpmLH4z3031+ZOQGDzAN7HZtv7p6cjumqRhMHCEu3jWWB/WCZr
+ ZyFkoNntF0KUfLhcis7qOYwVWP9x7hdhcsuTUQtG7kPeAe0PbKqhqWqNqqWS30TvrBm2
+ C6tJNefDnNJyWhc3W9BXOvM3O3j7QJuCcUzLBG//qgxYDU8D+Tk8Y/I7++QlXxZollfX
+ Degg==
+X-Gm-Message-State: AOAM533JAyHRbv39lgpjt4dAzFkxPduex7EhAy/GxyRbbJkcYchDF2TU
+ FjF+SWOJlvg43GIzyM0CN7FMbhuhHEy9PJcZeD8=
+X-Google-Smtp-Source: ABdhPJyAC9MguPRNIE2BUEDngfEtSDBisoQg6ROhdksLfyStEEGl+xyUoRGQpBhEbNs34bQoBmVc5TiVBpoX7QOKifw=
+X-Received: by 2002:a17:906:4d0d:: with SMTP id
+ r13mr9935228eju.282.1589370927429; 
+ Wed, 13 May 2020 04:55:27 -0700 (PDT)
 MIME-Version: 1.0
-X-CM-Analysis: v=2.3 cv=I5Mbu+og c=1 sm=1 tr=0 a=nyNe8J8XL+yB5u22Hc0alw==:117
- a=nyNe8J8XL+yB5u22Hc0alw==:17 a=IkcTkHD0fZMA:10 a=sTwFKg_x9MkA:10
- a=pGLkceISAAAA:8 a=k_m-kdumAAAA:8 a=MKYSiYnM_ShKeF4uUZ4A:9 a=QEXdDO2ut3YA:10
- a=2aFmp3DG3lfw9CblUY6y:22
-X-CM-Envelope: MS4wfIx70+UzrDIciCO0zrkfyt17Douf6fJwd69A/rgJ6esorF4fGqIvCGHQ7lKO4EppqyAUqESAU0JrhzQkfEaoFNXBJbn6aHQ+q3EsRzWGoBosFMY7v9gA
- UEAE/d0KHpQ5x+bxf5cuuFcBs8sWBH+nJDG34jHF52xVwwXHFMDt0SVuzk+yirLlwNeet9xFomoR3UM5Raf6Havft3P2YUekwWG8ucHMhnv5/nE2W8M/LLsy
- h+4rmFRXszaR/A5CnoukTR2o8ctzLgV9uH9EhAqDexdfc61dQvwUM4BptH9FjWlL
+References: <20200513110313.12979-1-christian.koenig@amd.com>
+ <20200513110313.12979-2-christian.koenig@amd.com>
+In-Reply-To: <20200513110313.12979-2-christian.koenig@amd.com>
+From: Mathieu Malaterre <malat@debian.org>
+Date: Wed, 13 May 2020 13:55:15 +0200
+Message-ID: <CA+7wUszB45OzgyTUM-04QZKAVbRU6aMnPmLzupPAU5Ej_XnwGw@mail.gmail.com>
+To: =?UTF-8?Q?Christian_K=C3=B6nig?= <ckoenig.leichtzumerken@gmail.com>
 X-Mailman-Approved-At: Sat, 13 Jun 2020 20:53:54 +0000
-Subject: Re: [Nouveau] [RFC] Remove AGP support from Radeon/Nouveau/TTM
+Subject: Re: [Nouveau] [PATCH 1/2] drm/radeon: disable AGP by default
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -49,57 +53,31 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: =?utf-8?Q?Christian_K=C3=B6nig?= <ckoenig.leichtzumerken@gmail.com>,
- Maling list - DRI developers <dri-devel@lists.freedesktop.org>,
- amd-gfx list <amd-gfx@lists.freedesktop.org>,
- nouveau <nouveau@lists.freedesktop.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: nouveau@lists.freedesktop.org,
+ PowerPC List Debian <debian-powerpc@lists.debian.org>,
+ amd-gfx@lists.freedesktop.org, dri-devel <dri-devel@lists.freedesktop.org>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hello Dave,
-
-On Monday, May 11, 2020, 4:43:01 PM, Dave Airlie wrote:
-> On Tue, 12 May 2020 at 06:28, Alex Deucher <alexdeucher@gmail.com> wrote:
->>
->> On Mon, May 11, 2020 at 4:22 PM Al Dunsmuir <al.dunsmuir@sympatico.ca> wrote:
->> Note there is no loss of functionality here, at least on radeon
->> hardware.  It just comes down to which MMU gets used for access to
->> system memory, the AGP MMU on the chipset or the MMU built into the
->> GPU.  On powerpc hardware, AGP has been particularly unstable, and AGP
->> has been disabled by default on radeon on powerpc for years now.  In
->> fact, this will probably make older hardware more reliable as it takes
->> AGP out of the equation.
->>
-
-> From memory there is quite a loss in speed though, like pretty severe.
-
-> The radeon PCI GART has a single slot TLB, if memory serves.
-
-> I think this is going to be a hard sell at this stage, I'm guessing
-> users will crawl out of the woodwork, I'm sure with 2 hours after I'm
-> able to access the office, I can boot the 865 AGP box with an rv350 in
-> it on a modern distro.
-
-> Maybe we can find some way to compartmentalise AGP further?
-
-> Dave.
-
-Significantly   reduced  caching  on memory accesses definitely sounds
-like something that would be noticeable and objectionable.
-
-I would speculate that this would also vary a lot across chipsets,
-depending on the capabilities of the PCI MMU vs the AGP MMU.
-
-In the end, it may be best to leave things as is, or as Dave suggested
-try to keep AGP in the picture.  
-
-Nothing is ever simple, is it?
-Al
-
-
-_______________________________________________
-Nouveau mailing list
-Nouveau@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/nouveau
+T24gV2VkLCBNYXkgMTMsIDIwMjAgYXQgMToyMSBQTSBDaHJpc3RpYW4gS8O2bmlnCjxja29lbmln
+LmxlaWNodHp1bWVya2VuQGdtYWlsLmNvbT4gd3JvdGU6Cj4KPiBBbHdheXMgdXNlIHRoZSBQQ0kg
+R0FSVCBpbnN0ZWFkLgoKUmV2aWV3ZWQtYnk6IE1hdGhpZXUgTWFsYXRlcnJlIDxtYWxhdEBkZWJp
+YW4ub3JnPgoKPiBTaWduZWQtb2ZmLWJ5OiBDaHJpc3RpYW4gS8O2bmlnIDxjaHJpc3RpYW4ua29l
+bmlnQGFtZC5jb20+Cj4gLS0tCj4gIGRyaXZlcnMvZ3B1L2RybS9yYWRlb24vcmFkZW9uX2Rydi5j
+IHwgNSAtLS0tLQo+ICAxIGZpbGUgY2hhbmdlZCwgNSBkZWxldGlvbnMoLSkKPgo+IGRpZmYgLS1n
+aXQgYS9kcml2ZXJzL2dwdS9kcm0vcmFkZW9uL3JhZGVvbl9kcnYuYyBiL2RyaXZlcnMvZ3B1L2Ry
+bS9yYWRlb24vcmFkZW9uX2Rydi5jCj4gaW5kZXggYmJiMDg4M2U4Y2U2Li5hNzFmMTMxMTZkNmIg
+MTAwNjQ0Cj4gLS0tIGEvZHJpdmVycy9ncHUvZHJtL3JhZGVvbi9yYWRlb25fZHJ2LmMKPiArKysg
+Yi9kcml2ZXJzL2dwdS9kcm0vcmFkZW9uL3JhZGVvbl9kcnYuYwo+IEBAIC0xNzEsMTIgKzE3MSw3
+IEBAIGludCByYWRlb25fbm9fd2I7Cj4gIGludCByYWRlb25fbW9kZXNldCA9IC0xOwo+ICBpbnQg
+cmFkZW9uX2R5bmNsa3MgPSAtMTsKPiAgaW50IHJhZGVvbl9yNHh4X2F0b20gPSAwOwo+IC0jaWZk
+ZWYgX19wb3dlcnBjX18KPiAtLyogRGVmYXVsdCB0byBQQ0kgb24gUG93ZXJQQyAoZmRvICM5NTAx
+NykgKi8KPiAgaW50IHJhZGVvbl9hZ3Btb2RlID0gLTE7Cj4gLSNlbHNlCj4gLWludCByYWRlb25f
+YWdwbW9kZSA9IDA7Cj4gLSNlbmRpZgo+ICBpbnQgcmFkZW9uX3ZyYW1fbGltaXQgPSAwOwo+ICBp
+bnQgcmFkZW9uX2dhcnRfc2l6ZSA9IC0xOyAvKiBhdXRvICovCj4gIGludCByYWRlb25fYmVuY2ht
+YXJraW5nID0gMDsKPiAtLQo+IDIuMTcuMQo+CgoKLS0gCk1hdGhpZXUKX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBtYWlsaW5nIGxpc3QKTm91
+dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcv
+bWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1Cg==
