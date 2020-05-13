@@ -2,61 +2,58 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id CC0A21D107C
-	for <lists+nouveau@lfdr.de>; Wed, 13 May 2020 13:03:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 34A161D12CB
+	for <lists+nouveau@lfdr.de>; Wed, 13 May 2020 14:34:44 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9301D6EA14;
-	Wed, 13 May 2020 11:03:21 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7D49A6EA1E;
+	Wed, 13 May 2020 12:34:41 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wr1-x444.google.com (mail-wr1-x444.google.com
- [IPv6:2a00:1450:4864:20::444])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 72E796EA0A;
- Wed, 13 May 2020 11:03:19 +0000 (UTC)
-Received: by mail-wr1-x444.google.com with SMTP id j5so20362697wrq.2;
- Wed, 13 May 2020 04:03:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:subject:date:message-id:in-reply-to:references:mime-version
- :content-transfer-encoding;
- bh=flrIWlcxo+T8QU048u531Ya+sOmNNhchsukJ+2ShIJU=;
- b=aXZUZKwZNa3YCQi0RIK08waBtzu+AAObk2k4mO/F26ojslPgVFfLgtfzTCbYXHP39J
- 9/altfk2CJtbq6SXr5YG3QE4yItUM4AZkJba0mOUFzB4zgs8xC7K2dXOi55kpq8b+KEt
- uTOAL2LpfFv4MUIg0LYw9Kt51HeqdxC55o6qITYXonYCHKgDDTCzRB+91iGxOZDCcxP7
- aeyrnQ0pWS1EBiAJQaIwHxNWdpYebINTfbaYMzgZhpAjGrsbxdoIvr8AN4ztZ0WQYYDd
- v3fZvJA/fkkZoG0BDWor1F2XRXecZ/lFYzyJ6RstCQAlY+K7NOTMxA+F2hLYllmbQ1WQ
- z30A==
+Received: from mail-wr1-x442.google.com (mail-wr1-x442.google.com
+ [IPv6:2a00:1450:4864:20::442])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0020D6EA1E
+ for <nouveau@lists.freedesktop.org>; Wed, 13 May 2020 12:34:39 +0000 (UTC)
+Received: by mail-wr1-x442.google.com with SMTP id v12so20639662wrp.12
+ for <nouveau@lists.freedesktop.org>; Wed, 13 May 2020 05:34:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:content-transfer-encoding:in-reply-to;
+ bh=bEX+Dy76wk6MJ05sE+aY81SiTFw/uayHur8lf84+t6o=;
+ b=SfG8FJJlHMf3v8XsRfWNfYt3BDsaM6CNEruWuFmK8Ykxbq6w/aNZ/qlH5VUhDYllv8
+ YxZMy0gzplatGsVoZVH2lhpsoCnZm9yUCykfIEveZoDWQRGDX8OjeQEKPgLu+qoXApq9
+ zKuxZ1ND3iGlvO7bo/LJ2Pcz5LPmt75ritTQg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=flrIWlcxo+T8QU048u531Ya+sOmNNhchsukJ+2ShIJU=;
- b=nONqR6boayrNIdugTmgyCnvt2wkOirGG9GRY/oL1LK33NxjNnsxi51KUvzp8j50ljU
- emstt9/x2K79k5HAxIwDdqVSq79c5sKmFkH9McsV8Jl35RNkHxVsABlhhms4eRRAxBeP
- KpyaL0DGqDYT4Uk+Bk6Fcku5fhemLfegT0Fr74/pDFoH83g12go++77FVnHbELDzGTqH
- J3DpB+/053WUNo3D7yIHFyzqiOfN1uRQUY6wspyjpaf/yvfxe5BNP/gasroPQj/6S5pE
- SDZp2BT0hkHeFeo2zuagI1W8Lu7WCo22fzcd7ywdR+Rw1ysQNVJ/cYmRjTQbIH/GIppu
- kESg==
-X-Gm-Message-State: AGi0PuasZkruMb8tcy+Inv/jLUICczw1eyfh3UviiMNoXYTxxjyqTj53
- bmu7YNG+83HbGknuabsLKZk7f3uZ
-X-Google-Smtp-Source: APiQypKeSrbLr6df3BCWccVKlw6qQ+obtyhTbTgr6Xgls7jLE8wudyvHn/KTQKlekk0qxVjWPC+6NQ==
-X-Received: by 2002:adf:d841:: with SMTP id k1mr29785341wrl.129.1589367797713; 
- Wed, 13 May 2020 04:03:17 -0700 (PDT)
-Received: from abel.fritz.box ([2a02:908:1252:fb60:78fa:bd2b:6c37:2c35])
- by smtp.gmail.com with ESMTPSA id z3sm27806975wrm.81.2020.05.13.04.03.17
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:content-transfer-encoding
+ :in-reply-to;
+ bh=bEX+Dy76wk6MJ05sE+aY81SiTFw/uayHur8lf84+t6o=;
+ b=J8S2WDBfxRKSwG1hiN8yppvHuOmHydyN+5wkSm7GYEkdLCy57qKU3e11bdHSNq9dk7
+ vGkDz/8QjX35B5yQ1enJjKiAD6YPl33QMUGZG9cW1ptH5w0nCXdxseLmIQnMEzSbOoAR
+ 5FKv0uHvuj2lzskU86Sa7WkCcGWlZUVkISf4vN/X2pcEuetirEtXtp+mI4MgrHtQ3Ax7
+ u+++tIVa5hg9L1pIBfskmz1QnhdZNmrtK1TkMk8Bmea5yGaRlTt5ZgkOtChqdujTfo8m
+ 9i3sIElZnY1a0ydNSZxMERe+lVzAY++Crtpe6TpESKLM3dxocplu7ys2gnZ4ExyZ91M7
+ 04dg==
+X-Gm-Message-State: AGi0PubLg/kNh9aSROX10VTX7v/C0l1XXJG9Agdg2PC93s1Lt4SGG/T4
+ WE2u6BEvydw5SSngUCu/GuZd6A==
+X-Google-Smtp-Source: APiQypJg9PVNoAyzNeAU7ZIgLaEps3Qzrt2Gzg7xDthV08vUz5bjFUj4AP7mWHRz0bgW+tBkaOZtdw==
+X-Received: by 2002:a5d:5490:: with SMTP id h16mr30358270wrv.250.1589373278635; 
+ Wed, 13 May 2020 05:34:38 -0700 (PDT)
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
+ by smtp.gmail.com with ESMTPSA id a13sm26803059wrv.67.2020.05.13.05.34.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 13 May 2020 04:03:17 -0700 (PDT)
-From: "=?UTF-8?q?Christian=20K=C3=B6nig?=" <ckoenig.leichtzumerken@gmail.com>
-X-Google-Original-From: =?UTF-8?q?Christian=20K=C3=B6nig?=
- <christian.koenig@amd.com>
-To: dri-devel@lists.freedesktop.org, debian-powerpc@lists.debian.org,
- amd-gfx@lists.freedesktop.org, nouveau@lists.freedesktop.org
-Date: Wed, 13 May 2020 13:03:13 +0200
-Message-Id: <20200513110313.12979-3-christian.koenig@amd.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200513110313.12979-1-christian.koenig@amd.com>
+ Wed, 13 May 2020 05:34:37 -0700 (PDT)
+Date: Wed, 13 May 2020 14:34:35 +0200
+From: Daniel Vetter <daniel@ffwll.ch>
+To: Christian =?iso-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>
+Message-ID: <20200513123435.GJ206103@phenom.ffwll.local>
 References: <20200513110313.12979-1-christian.koenig@amd.com>
+ <20200513110313.12979-3-christian.koenig@amd.com>
 MIME-Version: 1.0
-Subject: [Nouveau] [PATCH 2/2] drm/ttm: deprecate AGP support
+Content-Disposition: inline
+In-Reply-To: <20200513110313.12979-3-christian.koenig@amd.com>
+X-Operating-System: Linux phenom 5.6.0-1-amd64 
+Subject: Re: [Nouveau] [PATCH 2/2] drm/ttm: deprecate AGP support
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,132 +65,262 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: nouveau@lists.freedesktop.org, debian-powerpc@lists.debian.org,
+ amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-RXZlbiB3aGVuIGNvcmUgQUdQIHN1cHBvcnQgaXMgY29tcGlsZWQgaW4gUmFkZW9uIGFuZApOb3V2
-ZWF1IGNhbiBhbHNvIHdvcmsgd2l0aCB0aGUgUENJIEdBUlQuCgpUaGUgQUdQIHN1cHBvcnQgd2Fz
-IG5vdG9yaW91cyB1bnN0YWJsZSBhbmQgaGFyZCB0bwptYWludGFpbiwgc28gZGVwcmVjYXRlIGl0
-IGZvciBub3cgYW5kIG9ubHkgZW5hYmxlIGl0IGlmCnRoZXJlIGlzIGEgZ29vZCByZWFzb24gdG8g
-ZG8gc28uCgpTaWduZWQtb2ZmLWJ5OiBDaHJpc3RpYW4gS8O2bmlnIDxjaHJpc3RpYW4ua29lbmln
-QGFtZC5jb20+Ci0tLQogZHJpdmVycy9ncHUvZHJtL0tjb25maWcgICAgICAgICAgICAgICAgICAg
-ICAgIHwgIDggKysrKysrKysKIGRyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfYm8uYyAg
-ICAgICAgICB8ICA4ICsrKystLS0tCiBkcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9udmttL3N1YmRl
-di9wY2kvYWdwLmggfCAgMiArLQogZHJpdmVycy9ncHUvZHJtL3JhZGVvbi9yYWRlb25fYWdwLmMg
-ICAgICAgICAgIHwgIDggKysrKy0tLS0KIGRyaXZlcnMvZ3B1L2RybS9yYWRlb24vcmFkZW9uX3R0
-bS5jICAgICAgICAgICB8IDEwICsrKysrLS0tLS0KIGRyaXZlcnMvZ3B1L2RybS90dG0vTWFrZWZp
-bGUgICAgICAgICAgICAgICAgICB8ICAyICstCiA2IGZpbGVzIGNoYW5nZWQsIDIzIGluc2VydGlv
-bnMoKyksIDE1IGRlbGV0aW9ucygtKQoKZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9LY29u
-ZmlnIGIvZHJpdmVycy9ncHUvZHJtL0tjb25maWcKaW5kZXggNGY0ZTdmYTAwMWMxLi41MmQ4MzQz
-MDM3NjYgMTAwNjQ0Ci0tLSBhL2RyaXZlcnMvZ3B1L2RybS9LY29uZmlnCisrKyBiL2RyaXZlcnMv
-Z3B1L2RybS9LY29uZmlnCkBAIC0xODIsNiArMTgyLDE0IEBAIGNvbmZpZyBEUk1fVFRNCiAJICBH
-UFUgbWVtb3J5IHR5cGVzLiBXaWxsIGJlIGVuYWJsZWQgYXV0b21hdGljYWxseSBpZiBhIGRldmlj
-ZSBkcml2ZXIKIAkgIHVzZXMgaXQuCiAKK2NvbmZpZyBEUk1fVFRNX0FHUAorCWJvb2wgIlRUTSBB
-R1AgR0FSVCBzdXBwb3J0IChkZXByZWNhdGVkKSIKKwlkZXBlbmRzIG9uIERSTV9UVE0gJiYgQUdQ
-CisJZGVmYXVsdCBuCisJaGVscAorCSAgRW5hYmxlcyBkZXByZWNhdGVkIEFHUCBHQVJUIHN1cHBv
-cnQgaW4gVFRNLgorCSAgTGVzcyByZWxpYWJsZSB0aGFuIFBDSSBHQVJULCBidXQgZmFzdGVyIGlu
-IHNvbWUgY2FzZXMuCisKIGNvbmZpZyBEUk1fVFRNX0RNQV9QQUdFX1BPT0wKIAlib29sCiAJZGVw
-ZW5kcyBvbiBEUk1fVFRNICYmIChTV0lPVExCIHx8IElOVEVMX0lPTU1VKQpkaWZmIC0tZ2l0IGEv
-ZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9iby5jIGIvZHJpdmVycy9ncHUvZHJtL25v
-dXZlYXUvbm91dmVhdV9iby5jCmluZGV4IGM0MGYxMjdkZTNkMC4uYzczZDRhZTQ4ZjVjIDEwMDY0
-NAotLS0gYS9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2JvLmMKKysrIGIvZHJpdmVy
-cy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9iby5jCkBAIC02MzUsNyArNjM1LDcgQEAgbm91dmVh
-dV9ib193cjMyKHN0cnVjdCBub3V2ZWF1X2JvICpudmJvLCB1bnNpZ25lZCBpbmRleCwgdTMyIHZh
-bCkKIHN0YXRpYyBzdHJ1Y3QgdHRtX3R0ICoKIG5vdXZlYXVfdHRtX3R0X2NyZWF0ZShzdHJ1Y3Qg
-dHRtX2J1ZmZlcl9vYmplY3QgKmJvLCB1aW50MzJfdCBwYWdlX2ZsYWdzKQogewotI2lmIElTX0VO
-QUJMRUQoQ09ORklHX0FHUCkKKyNpZiBJU19FTkFCTEVEKENPTkZJR19EUk1fVFRNX0FHUCkKIAlz
-dHJ1Y3Qgbm91dmVhdV9kcm0gKmRybSA9IG5vdXZlYXVfYmRldihiby0+YmRldik7CiAKIAlpZiAo
-ZHJtLT5hZ3AuYnJpZGdlKSB7CkBAIC0xNDQ4LDcgKzE0NDgsNyBAQCBub3V2ZWF1X3R0bV9pb19t
-ZW1fcmVzZXJ2ZShzdHJ1Y3QgdHRtX2JvX2RldmljZSAqYmRldiwgc3RydWN0IHR0bV9tZW1fcmVn
-ICpyZWcpCiAJCS8qIFN5c3RlbSBtZW1vcnkgKi8KIAkJcmV0dXJuIDA7CiAJY2FzZSBUVE1fUExf
-VFQ6Ci0jaWYgSVNfRU5BQkxFRChDT05GSUdfQUdQKQorI2lmIElTX0VOQUJMRUQoQ09ORklHX0RS
-TV9UVE1fQUdQKQogCQlpZiAoZHJtLT5hZ3AuYnJpZGdlKSB7CiAJCQlyZWctPmJ1cy5vZmZzZXQg
-PSByZWctPnN0YXJ0IDw8IFBBR0VfU0hJRlQ7CiAJCQlyZWctPmJ1cy5iYXNlID0gZHJtLT5hZ3Au
-YmFzZTsKQEAgLTE2MDMsNyArMTYwMyw3IEBAIG5vdXZlYXVfdHRtX3R0X3BvcHVsYXRlKHN0cnVj
-dCB0dG1fdHQgKnR0bSwgc3RydWN0IHR0bV9vcGVyYXRpb25fY3R4ICpjdHgpCiAJZHJtID0gbm91
-dmVhdV9iZGV2KHR0bS0+YmRldik7CiAJZGV2ID0gZHJtLT5kZXYtPmRldjsKIAotI2lmIElTX0VO
-QUJMRUQoQ09ORklHX0FHUCkKKyNpZiBJU19FTkFCTEVEKENPTkZJR19EUk1fVFRNX0FHUCkKIAlp
-ZiAoZHJtLT5hZ3AuYnJpZGdlKSB7CiAJCXJldHVybiB0dG1fYWdwX3R0X3BvcHVsYXRlKHR0bSwg
-Y3R4KTsKIAl9CkBAIC0xNjU2LDcgKzE2NTYsNyBAQCBub3V2ZWF1X3R0bV90dF91bnBvcHVsYXRl
-KHN0cnVjdCB0dG1fdHQgKnR0bSkKIAlkcm0gPSBub3V2ZWF1X2JkZXYodHRtLT5iZGV2KTsKIAlk
-ZXYgPSBkcm0tPmRldi0+ZGV2OwogCi0jaWYgSVNfRU5BQkxFRChDT05GSUdfQUdQKQorI2lmIElT
-X0VOQUJMRUQoQ09ORklHX0RSTV9UVE1fQUdQKQogCWlmIChkcm0tPmFncC5icmlkZ2UpIHsKIAkJ
-dHRtX2FncF90dF91bnBvcHVsYXRlKHR0bSk7CiAJCXJldHVybjsKZGlmZiAtLWdpdCBhL2RyaXZl
-cnMvZ3B1L2RybS9ub3V2ZWF1L252a20vc3ViZGV2L3BjaS9hZ3AuaCBiL2RyaXZlcnMvZ3B1L2Ry
-bS9ub3V2ZWF1L252a20vc3ViZGV2L3BjaS9hZ3AuaAppbmRleCBhZDRkMzYyMWQwMmIuLmQ1NzI1
-MjhkYTg1MiAxMDA2NDQKLS0tIGEvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbnZrbS9zdWJkZXYv
-cGNpL2FncC5oCisrKyBiL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L252a20vc3ViZGV2L3BjaS9h
-Z3AuaApAQCAtMSw2ICsxLDYgQEAKIC8qIFNQRFgtTGljZW5zZS1JZGVudGlmaWVyOiBNSVQgKi8K
-ICNpbmNsdWRlICJwcml2LmgiCi0jaWYgZGVmaW5lZChDT05GSUdfQUdQKSB8fCAoZGVmaW5lZChD
-T05GSUdfQUdQX01PRFVMRSkgJiYgZGVmaW5lZChNT0RVTEUpKQorI2lmIGRlZmluZWQoQ09ORklH
-X0RSTV9UVE1fQUdQKQogI2lmbmRlZiBfX05WS01fUENJX0FHUF9IX18KICNkZWZpbmUgX19OVktN
-X1BDSV9BR1BfSF9fCiAKZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9yYWRlb24vcmFkZW9u
-X2FncC5jIGIvZHJpdmVycy9ncHUvZHJtL3JhZGVvbi9yYWRlb25fYWdwLmMKaW5kZXggMGFjYTdi
-ZGY1NGM3Li4yOTRkMTkzMDE3MDggMTAwNjQ0Ci0tLSBhL2RyaXZlcnMvZ3B1L2RybS9yYWRlb24v
-cmFkZW9uX2FncC5jCisrKyBiL2RyaXZlcnMvZ3B1L2RybS9yYWRlb24vcmFkZW9uX2FncC5jCkBA
-IC0zMyw3ICszMyw3IEBACiAKICNpbmNsdWRlICJyYWRlb24uaCIKIAotI2lmIElTX0VOQUJMRUQo
-Q09ORklHX0FHUCkKKyNpZiBJU19FTkFCTEVEKENPTkZJR19EUk1fVFRNX0FHUCkKIAogc3RydWN0
-IHJhZGVvbl9hZ3Btb2RlX3F1aXJrIHsKIAl1MzIgaG9zdGJyaWRnZV92ZW5kb3I7CkBAIC0xMzEs
-NyArMTMxLDcgQEAgc3RhdGljIHN0cnVjdCByYWRlb25fYWdwbW9kZV9xdWlyayByYWRlb25fYWdw
-bW9kZV9xdWlya19saXN0W10gPSB7CiAKIGludCByYWRlb25fYWdwX2luaXQoc3RydWN0IHJhZGVv
-bl9kZXZpY2UgKnJkZXYpCiB7Ci0jaWYgSVNfRU5BQkxFRChDT05GSUdfQUdQKQorI2lmIElTX0VO
-QUJMRUQoQ09ORklHX0RSTV9UVE1fQUdQKQogCXN0cnVjdCByYWRlb25fYWdwbW9kZV9xdWlyayAq
-cCA9IHJhZGVvbl9hZ3Btb2RlX3F1aXJrX2xpc3Q7CiAJc3RydWN0IGRybV9hZ3BfbW9kZSBtb2Rl
-OwogCXN0cnVjdCBkcm1fYWdwX2luZm8gaW5mbzsKQEAgLTI2NSw3ICsyNjUsNyBAQCBpbnQgcmFk
-ZW9uX2FncF9pbml0KHN0cnVjdCByYWRlb25fZGV2aWNlICpyZGV2KQogCiB2b2lkIHJhZGVvbl9h
-Z3BfcmVzdW1lKHN0cnVjdCByYWRlb25fZGV2aWNlICpyZGV2KQogewotI2lmIElTX0VOQUJMRUQo
-Q09ORklHX0FHUCkKKyNpZiBJU19FTkFCTEVEKENPTkZJR19EUk1fVFRNX0FHUCkKIAlpbnQgcjsK
-IAlpZiAocmRldi0+ZmxhZ3MgJiBSQURFT05fSVNfQUdQKSB7CiAJCXIgPSByYWRlb25fYWdwX2lu
-aXQocmRldik7CkBAIC0yNzcsNyArMjc3LDcgQEAgdm9pZCByYWRlb25fYWdwX3Jlc3VtZShzdHJ1
-Y3QgcmFkZW9uX2RldmljZSAqcmRldikKIAogdm9pZCByYWRlb25fYWdwX2Zpbmkoc3RydWN0IHJh
-ZGVvbl9kZXZpY2UgKnJkZXYpCiB7Ci0jaWYgSVNfRU5BQkxFRChDT05GSUdfQUdQKQorI2lmIElT
-X0VOQUJMRUQoQ09ORklHX0RSTV9UVE1fQUdQKQogCWlmIChyZGV2LT5kZGV2LT5hZ3AgJiYgcmRl
-di0+ZGRldi0+YWdwLT5hY3F1aXJlZCkgewogCQlkcm1fYWdwX3JlbGVhc2UocmRldi0+ZGRldik7
-CiAJfQpkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL3JhZGVvbi9yYWRlb25fdHRtLmMgYi9k
-cml2ZXJzL2dwdS9kcm0vcmFkZW9uL3JhZGVvbl90dG0uYwppbmRleCA1ZDUwYzllZGJlODAuLjRm
-OWM0ZTVmODI2MyAxMDA2NDQKLS0tIGEvZHJpdmVycy9ncHUvZHJtL3JhZGVvbi9yYWRlb25fdHRt
-LmMKKysrIGIvZHJpdmVycy9ncHUvZHJtL3JhZGVvbi9yYWRlb25fdHRtLmMKQEAgLTg2LDcgKzg2
-LDcgQEAgc3RhdGljIGludCByYWRlb25faW5pdF9tZW1fdHlwZShzdHJ1Y3QgdHRtX2JvX2Rldmlj
-ZSAqYmRldiwgdWludDMyX3QgdHlwZSwKIAkJbWFuLT5hdmFpbGFibGVfY2FjaGluZyA9IFRUTV9Q
-TF9NQVNLX0NBQ0hJTkc7CiAJCW1hbi0+ZGVmYXVsdF9jYWNoaW5nID0gVFRNX1BMX0ZMQUdfQ0FD
-SEVEOwogCQltYW4tPmZsYWdzID0gVFRNX01FTVRZUEVfRkxBR19NQVBQQUJMRSB8IFRUTV9NRU1U
-WVBFX0ZMQUdfQ01BOwotI2lmIElTX0VOQUJMRUQoQ09ORklHX0FHUCkKKyNpZiBJU19FTkFCTEVE
-KENPTkZJR19EUk1fVFRNX0FHUCkKIAkJaWYgKHJkZXYtPmZsYWdzICYgUkFERU9OX0lTX0FHUCkg
-ewogCQkJaWYgKCFyZGV2LT5kZGV2LT5hZ3ApIHsKIAkJCQlEUk1fRVJST1IoIkFHUCBpcyBub3Qg
-ZW5hYmxlZCBmb3IgbWVtb3J5IHR5cGUgJXVcbiIsCkBAIC00MTEsNyArNDExLDcgQEAgc3RhdGlj
-IGludCByYWRlb25fdHRtX2lvX21lbV9yZXNlcnZlKHN0cnVjdCB0dG1fYm9fZGV2aWNlICpiZGV2
-LCBzdHJ1Y3QgdHRtX21lbV8KIAkJLyogc3lzdGVtIG1lbW9yeSAqLwogCQlyZXR1cm4gMDsKIAlj
-YXNlIFRUTV9QTF9UVDoKLSNpZiBJU19FTkFCTEVEKENPTkZJR19BR1ApCisjaWYgSVNfRU5BQkxF
-RChDT05GSUdfRFJNX1RUTV9BR1ApCiAJCWlmIChyZGV2LT5mbGFncyAmIFJBREVPTl9JU19BR1Ap
-IHsKIAkJCS8qIFJBREVPTl9JU19BR1AgaXMgc2V0IG9ubHkgaWYgQUdQIGlzIGFjdGl2ZSAqLwog
-CQkJbWVtLT5idXMub2Zmc2V0ID0gbWVtLT5zdGFydCA8PCBQQUdFX1NISUZUOwpAQCAtNjMxLDcg
-KzYzMSw3IEBAIHN0YXRpYyBzdHJ1Y3QgdHRtX3R0ICpyYWRlb25fdHRtX3R0X2NyZWF0ZShzdHJ1
-Y3QgdHRtX2J1ZmZlcl9vYmplY3QgKmJvLAogCXN0cnVjdCByYWRlb25fdHRtX3R0ICpndHQ7CiAK
-IAlyZGV2ID0gcmFkZW9uX2dldF9yZGV2KGJvLT5iZGV2KTsKLSNpZiBJU19FTkFCTEVEKENPTkZJ
-R19BR1ApCisjaWYgSVNfRU5BQkxFRChDT05GSUdfRFJNX1RUTV9BR1ApCiAJaWYgKHJkZXYtPmZs
-YWdzICYgUkFERU9OX0lTX0FHUCkgewogCQlyZXR1cm4gdHRtX2FncF90dF9jcmVhdGUoYm8sIHJk
-ZXYtPmRkZXYtPmFncC0+YnJpZGdlLAogCQkJCQkgcGFnZV9mbGFncyk7CkBAIC02ODMsNyArNjgz
-LDcgQEAgc3RhdGljIGludCByYWRlb25fdHRtX3R0X3BvcHVsYXRlKHN0cnVjdCB0dG1fdHQgKnR0
-bSwKIAl9CiAKIAlyZGV2ID0gcmFkZW9uX2dldF9yZGV2KHR0bS0+YmRldik7Ci0jaWYgSVNfRU5B
-QkxFRChDT05GSUdfQUdQKQorI2lmIElTX0VOQUJMRUQoQ09ORklHX0RSTV9UVE1fQUdQKQogCWlm
-IChyZGV2LT5mbGFncyAmIFJBREVPTl9JU19BR1ApIHsKIAkJcmV0dXJuIHR0bV9hZ3BfdHRfcG9w
-dWxhdGUodHRtLCBjdHgpOwogCX0KQEAgLTcxNCw3ICs3MTQsNyBAQCBzdGF0aWMgdm9pZCByYWRl
-b25fdHRtX3R0X3VucG9wdWxhdGUoc3RydWN0IHR0bV90dCAqdHRtKQogCQlyZXR1cm47CiAKIAly
-ZGV2ID0gcmFkZW9uX2dldF9yZGV2KHR0bS0+YmRldik7Ci0jaWYgSVNfRU5BQkxFRChDT05GSUdf
-QUdQKQorI2lmIElTX0VOQUJMRUQoQ09ORklHX0RSTV9UVE1fQUdQKQogCWlmIChyZGV2LT5mbGFn
-cyAmIFJBREVPTl9JU19BR1ApIHsKIAkJdHRtX2FncF90dF91bnBvcHVsYXRlKHR0bSk7CiAJCXJl
-dHVybjsKZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS90dG0vTWFrZWZpbGUgYi9kcml2ZXJz
-L2dwdS9kcm0vdHRtL01ha2VmaWxlCmluZGV4IGNhZWEyYTA5OTQ5Ni4uYWE3NzJiMTk4MDEyIDEw
-MDY0NAotLS0gYS9kcml2ZXJzL2dwdS9kcm0vdHRtL01ha2VmaWxlCisrKyBiL2RyaXZlcnMvZ3B1
-L2RybS90dG0vTWFrZWZpbGUKQEAgLTUsNyArNSw3IEBACiB0dG0teSA6PSB0dG1fbWVtb3J5Lm8g
-dHRtX3R0Lm8gdHRtX2JvLm8gXAogCXR0bV9ib191dGlsLm8gdHRtX2JvX3ZtLm8gdHRtX21vZHVs
-ZS5vIFwKIAl0dG1fZXhlY2J1Zl91dGlsLm8gdHRtX3BhZ2VfYWxsb2MubyB0dG1fYm9fbWFuYWdl
-ci5vCi10dG0tJChDT05GSUdfQUdQKSArPSB0dG1fYWdwX2JhY2tlbmQubwordHRtLSQoQ09ORklH
-X0RSTV9UVE1fQUdQKSArPSB0dG1fYWdwX2JhY2tlbmQubwogdHRtLSQoQ09ORklHX0RSTV9UVE1f
-RE1BX1BBR0VfUE9PTCkgKz0gdHRtX3BhZ2VfYWxsb2NfZG1hLm8KIAogb2JqLSQoQ09ORklHX0RS
-TV9UVE0pICs9IHR0bS5vCi0tIAoyLjE3LjEKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fCk5vdXZlYXUgbWFpbGluZyBsaXN0Ck5vdXZlYXVAbGlzdHMuZnJl
-ZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGlu
-Zm8vbm91dmVhdQo=
+On Wed, May 13, 2020 at 01:03:13PM +0200, Christian K=F6nig wrote:
+> Even when core AGP support is compiled in Radeon and
+> Nouveau can also work with the PCI GART.
+> =
+
+> The AGP support was notorious unstable and hard to
+> maintain, so deprecate it for now and only enable it if
+> there is a good reason to do so.
+> =
+
+> Signed-off-by: Christian K=F6nig <christian.koenig@amd.com>
+
+So a lot more work, and more risk (but hey it's agp, how busted can it
+get) could be to demidlayer this. I.e. a small set of helpers to create a
+TTM_PL_TT manager, backed by agp. With zero agp code remaining in ttm
+itself, and all the ttm agp code moved out to a ttm-agp-helper.ko module
+that drivers would call.
+
+But again a lot of work, so really only an option if we can't sunset agp
+directly.
+-Daniel
+
+> ---
+>  drivers/gpu/drm/Kconfig                       |  8 ++++++++
+>  drivers/gpu/drm/nouveau/nouveau_bo.c          |  8 ++++----
+>  drivers/gpu/drm/nouveau/nvkm/subdev/pci/agp.h |  2 +-
+>  drivers/gpu/drm/radeon/radeon_agp.c           |  8 ++++----
+>  drivers/gpu/drm/radeon/radeon_ttm.c           | 10 +++++-----
+>  drivers/gpu/drm/ttm/Makefile                  |  2 +-
+>  6 files changed, 23 insertions(+), 15 deletions(-)
+> =
+
+> diff --git a/drivers/gpu/drm/Kconfig b/drivers/gpu/drm/Kconfig
+> index 4f4e7fa001c1..52d834303766 100644
+> --- a/drivers/gpu/drm/Kconfig
+> +++ b/drivers/gpu/drm/Kconfig
+> @@ -182,6 +182,14 @@ config DRM_TTM
+>  	  GPU memory types. Will be enabled automatically if a device driver
+>  	  uses it.
+>  =
+
+> +config DRM_TTM_AGP
+> +	bool "TTM AGP GART support (deprecated)"
+> +	depends on DRM_TTM && AGP
+> +	default n
+> +	help
+> +	  Enables deprecated AGP GART support in TTM.
+> +	  Less reliable than PCI GART, but faster in some cases.
+> +
+>  config DRM_TTM_DMA_PAGE_POOL
+>  	bool
+>  	depends on DRM_TTM && (SWIOTLB || INTEL_IOMMU)
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_bo.c b/drivers/gpu/drm/nouve=
+au/nouveau_bo.c
+> index c40f127de3d0..c73d4ae48f5c 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_bo.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_bo.c
+> @@ -635,7 +635,7 @@ nouveau_bo_wr32(struct nouveau_bo *nvbo, unsigned ind=
+ex, u32 val)
+>  static struct ttm_tt *
+>  nouveau_ttm_tt_create(struct ttm_buffer_object *bo, uint32_t page_flags)
+>  {
+> -#if IS_ENABLED(CONFIG_AGP)
+> +#if IS_ENABLED(CONFIG_DRM_TTM_AGP)
+>  	struct nouveau_drm *drm =3D nouveau_bdev(bo->bdev);
+>  =
+
+>  	if (drm->agp.bridge) {
+> @@ -1448,7 +1448,7 @@ nouveau_ttm_io_mem_reserve(struct ttm_bo_device *bd=
+ev, struct ttm_mem_reg *reg)
+>  		/* System memory */
+>  		return 0;
+>  	case TTM_PL_TT:
+> -#if IS_ENABLED(CONFIG_AGP)
+> +#if IS_ENABLED(CONFIG_DRM_TTM_AGP)
+>  		if (drm->agp.bridge) {
+>  			reg->bus.offset =3D reg->start << PAGE_SHIFT;
+>  			reg->bus.base =3D drm->agp.base;
+> @@ -1603,7 +1603,7 @@ nouveau_ttm_tt_populate(struct ttm_tt *ttm, struct =
+ttm_operation_ctx *ctx)
+>  	drm =3D nouveau_bdev(ttm->bdev);
+>  	dev =3D drm->dev->dev;
+>  =
+
+> -#if IS_ENABLED(CONFIG_AGP)
+> +#if IS_ENABLED(CONFIG_DRM_TTM_AGP)
+>  	if (drm->agp.bridge) {
+>  		return ttm_agp_tt_populate(ttm, ctx);
+>  	}
+> @@ -1656,7 +1656,7 @@ nouveau_ttm_tt_unpopulate(struct ttm_tt *ttm)
+>  	drm =3D nouveau_bdev(ttm->bdev);
+>  	dev =3D drm->dev->dev;
+>  =
+
+> -#if IS_ENABLED(CONFIG_AGP)
+> +#if IS_ENABLED(CONFIG_DRM_TTM_AGP)
+>  	if (drm->agp.bridge) {
+>  		ttm_agp_tt_unpopulate(ttm);
+>  		return;
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/pci/agp.h b/drivers/gpu/=
+drm/nouveau/nvkm/subdev/pci/agp.h
+> index ad4d3621d02b..d572528da852 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/pci/agp.h
+> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/pci/agp.h
+> @@ -1,6 +1,6 @@
+>  /* SPDX-License-Identifier: MIT */
+>  #include "priv.h"
+> -#if defined(CONFIG_AGP) || (defined(CONFIG_AGP_MODULE) && defined(MODULE=
+))
+> +#if defined(CONFIG_DRM_TTM_AGP)
+>  #ifndef __NVKM_PCI_AGP_H__
+>  #define __NVKM_PCI_AGP_H__
+>  =
+
+> diff --git a/drivers/gpu/drm/radeon/radeon_agp.c b/drivers/gpu/drm/radeon=
+/radeon_agp.c
+> index 0aca7bdf54c7..294d19301708 100644
+> --- a/drivers/gpu/drm/radeon/radeon_agp.c
+> +++ b/drivers/gpu/drm/radeon/radeon_agp.c
+> @@ -33,7 +33,7 @@
+>  =
+
+>  #include "radeon.h"
+>  =
+
+> -#if IS_ENABLED(CONFIG_AGP)
+> +#if IS_ENABLED(CONFIG_DRM_TTM_AGP)
+>  =
+
+>  struct radeon_agpmode_quirk {
+>  	u32 hostbridge_vendor;
+> @@ -131,7 +131,7 @@ static struct radeon_agpmode_quirk radeon_agpmode_qui=
+rk_list[] =3D {
+>  =
+
+>  int radeon_agp_init(struct radeon_device *rdev)
+>  {
+> -#if IS_ENABLED(CONFIG_AGP)
+> +#if IS_ENABLED(CONFIG_DRM_TTM_AGP)
+>  	struct radeon_agpmode_quirk *p =3D radeon_agpmode_quirk_list;
+>  	struct drm_agp_mode mode;
+>  	struct drm_agp_info info;
+> @@ -265,7 +265,7 @@ int radeon_agp_init(struct radeon_device *rdev)
+>  =
+
+>  void radeon_agp_resume(struct radeon_device *rdev)
+>  {
+> -#if IS_ENABLED(CONFIG_AGP)
+> +#if IS_ENABLED(CONFIG_DRM_TTM_AGP)
+>  	int r;
+>  	if (rdev->flags & RADEON_IS_AGP) {
+>  		r =3D radeon_agp_init(rdev);
+> @@ -277,7 +277,7 @@ void radeon_agp_resume(struct radeon_device *rdev)
+>  =
+
+>  void radeon_agp_fini(struct radeon_device *rdev)
+>  {
+> -#if IS_ENABLED(CONFIG_AGP)
+> +#if IS_ENABLED(CONFIG_DRM_TTM_AGP)
+>  	if (rdev->ddev->agp && rdev->ddev->agp->acquired) {
+>  		drm_agp_release(rdev->ddev);
+>  	}
+> diff --git a/drivers/gpu/drm/radeon/radeon_ttm.c b/drivers/gpu/drm/radeon=
+/radeon_ttm.c
+> index 5d50c9edbe80..4f9c4e5f8263 100644
+> --- a/drivers/gpu/drm/radeon/radeon_ttm.c
+> +++ b/drivers/gpu/drm/radeon/radeon_ttm.c
+> @@ -86,7 +86,7 @@ static int radeon_init_mem_type(struct ttm_bo_device *b=
+dev, uint32_t type,
+>  		man->available_caching =3D TTM_PL_MASK_CACHING;
+>  		man->default_caching =3D TTM_PL_FLAG_CACHED;
+>  		man->flags =3D TTM_MEMTYPE_FLAG_MAPPABLE | TTM_MEMTYPE_FLAG_CMA;
+> -#if IS_ENABLED(CONFIG_AGP)
+> +#if IS_ENABLED(CONFIG_DRM_TTM_AGP)
+>  		if (rdev->flags & RADEON_IS_AGP) {
+>  			if (!rdev->ddev->agp) {
+>  				DRM_ERROR("AGP is not enabled for memory type %u\n",
+> @@ -411,7 +411,7 @@ static int radeon_ttm_io_mem_reserve(struct ttm_bo_de=
+vice *bdev, struct ttm_mem_
+>  		/* system memory */
+>  		return 0;
+>  	case TTM_PL_TT:
+> -#if IS_ENABLED(CONFIG_AGP)
+> +#if IS_ENABLED(CONFIG_DRM_TTM_AGP)
+>  		if (rdev->flags & RADEON_IS_AGP) {
+>  			/* RADEON_IS_AGP is set only if AGP is active */
+>  			mem->bus.offset =3D mem->start << PAGE_SHIFT;
+> @@ -631,7 +631,7 @@ static struct ttm_tt *radeon_ttm_tt_create(struct ttm=
+_buffer_object *bo,
+>  	struct radeon_ttm_tt *gtt;
+>  =
+
+>  	rdev =3D radeon_get_rdev(bo->bdev);
+> -#if IS_ENABLED(CONFIG_AGP)
+> +#if IS_ENABLED(CONFIG_DRM_TTM_AGP)
+>  	if (rdev->flags & RADEON_IS_AGP) {
+>  		return ttm_agp_tt_create(bo, rdev->ddev->agp->bridge,
+>  					 page_flags);
+> @@ -683,7 +683,7 @@ static int radeon_ttm_tt_populate(struct ttm_tt *ttm,
+>  	}
+>  =
+
+>  	rdev =3D radeon_get_rdev(ttm->bdev);
+> -#if IS_ENABLED(CONFIG_AGP)
+> +#if IS_ENABLED(CONFIG_DRM_TTM_AGP)
+>  	if (rdev->flags & RADEON_IS_AGP) {
+>  		return ttm_agp_tt_populate(ttm, ctx);
+>  	}
+> @@ -714,7 +714,7 @@ static void radeon_ttm_tt_unpopulate(struct ttm_tt *t=
+tm)
+>  		return;
+>  =
+
+>  	rdev =3D radeon_get_rdev(ttm->bdev);
+> -#if IS_ENABLED(CONFIG_AGP)
+> +#if IS_ENABLED(CONFIG_DRM_TTM_AGP)
+>  	if (rdev->flags & RADEON_IS_AGP) {
+>  		ttm_agp_tt_unpopulate(ttm);
+>  		return;
+> diff --git a/drivers/gpu/drm/ttm/Makefile b/drivers/gpu/drm/ttm/Makefile
+> index caea2a099496..aa772b198012 100644
+> --- a/drivers/gpu/drm/ttm/Makefile
+> +++ b/drivers/gpu/drm/ttm/Makefile
+> @@ -5,7 +5,7 @@
+>  ttm-y :=3D ttm_memory.o ttm_tt.o ttm_bo.o \
+>  	ttm_bo_util.o ttm_bo_vm.o ttm_module.o \
+>  	ttm_execbuf_util.o ttm_page_alloc.o ttm_bo_manager.o
+> -ttm-$(CONFIG_AGP) +=3D ttm_agp_backend.o
+> +ttm-$(CONFIG_DRM_TTM_AGP) +=3D ttm_agp_backend.o
+>  ttm-$(CONFIG_DRM_TTM_DMA_PAGE_POOL) +=3D ttm_page_alloc_dma.o
+>  =
+
+>  obj-$(CONFIG_DRM_TTM) +=3D ttm.o
+> -- =
+
+> 2.17.1
+> =
+
+> _______________________________________________
+> dri-devel mailing list
+> dri-devel@lists.freedesktop.org
+> https://lists.freedesktop.org/mailman/listinfo/dri-devel
+
+-- =
+
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
+_______________________________________________
+Nouveau mailing list
+Nouveau@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/nouveau
