@@ -2,46 +2,65 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id F31BB1F8552
-	for <lists+nouveau@lfdr.de>; Sat, 13 Jun 2020 22:54:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EA7B11F854D
+	for <lists+nouveau@lfdr.de>; Sat, 13 Jun 2020 22:54:16 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7C7566E48C;
-	Sat, 13 Jun 2020 20:54:07 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 707966E487;
+	Sat, 13 Jun 2020 20:54:02 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ej1-f68.google.com (mail-ej1-f68.google.com
- [209.85.218.68])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0FE236E9A5;
- Wed, 13 May 2020 11:55:29 +0000 (UTC)
-Received: by mail-ej1-f68.google.com with SMTP id e2so13926449eje.13;
- Wed, 13 May 2020 04:55:28 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=dwSZ/cYngXQKvlWb23OdV+haQ9k3VXAPp4SIUIXgqs4=;
- b=Yzt9tfQVrHVU8vHLbysGEiBP86H2+TFsxNCxUcnlmaAEBug2z43dp5YxMyPiZRPN5o
- jYmrE8TEvs9i8eaNJgmB2Cjbk1IwfrfuGMiUpOgaCiWtBpsI32ybD9conp9LKd4c8WPw
- kFCkCVx+IBtQyEKmsLDpmLH4z3031+ZOQGDzAN7HZtv7p6cjumqRhMHCEu3jWWB/WCZr
- ZyFkoNntF0KUfLhcis7qOYwVWP9x7hdhcsuTUQtG7kPeAe0PbKqhqWqNqqWS30TvrBm2
- C6tJNefDnNJyWhc3W9BXOvM3O3j7QJuCcUzLBG//qgxYDU8D+Tk8Y/I7++QlXxZollfX
- Degg==
-X-Gm-Message-State: AOAM533JAyHRbv39lgpjt4dAzFkxPduex7EhAy/GxyRbbJkcYchDF2TU
- FjF+SWOJlvg43GIzyM0CN7FMbhuhHEy9PJcZeD8=
-X-Google-Smtp-Source: ABdhPJyAC9MguPRNIE2BUEDngfEtSDBisoQg6ROhdksLfyStEEGl+xyUoRGQpBhEbNs34bQoBmVc5TiVBpoX7QOKifw=
-X-Received: by 2002:a17:906:4d0d:: with SMTP id
- r13mr9935228eju.282.1589370927429; 
- Wed, 13 May 2020 04:55:27 -0700 (PDT)
+Received: from mga05.intel.com (mga05.intel.com [192.55.52.43])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2855E6ECB2;
+ Fri, 15 May 2020 14:15:21 +0000 (UTC)
+IronPort-SDR: UG6p7PsUknkABRbwbnrzbZWRSSJw/NFP6d9ox2OAjQT3928uSIem6emtg2ypdWXYZw0AeAFBXY
+ N5unSe71Q88w==
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from fmsmga007.fm.intel.com ([10.253.24.52])
+ by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 15 May 2020 07:15:18 -0700
+IronPort-SDR: 48D8D6N9ITJ1eakIQgSIO1hwzcC1TUMSkWaxxUqccg2fR2o9qv+mtbdlOzwHvDnYskMOhjBmm9
+ Yad1wTimal7A==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.73,395,1583222400"; d="scan'208";a="252388052"
+Received: from irsmsx154.ger.corp.intel.com ([163.33.192.96])
+ by fmsmga007.fm.intel.com with ESMTP; 15 May 2020 07:15:11 -0700
+Received: from irsmsx602.ger.corp.intel.com (163.33.146.8) by
+ IRSMSX154.ger.corp.intel.com (163.33.192.96) with Microsoft SMTP Server (TLS)
+ id 14.3.439.0; Fri, 15 May 2020 15:15:10 +0100
+Received: from irsmsx601.ger.corp.intel.com (163.33.146.7) by
+ irsmsx602.ger.corp.intel.com (163.33.146.8) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.1713.5; Fri, 15 May 2020 15:15:10 +0100
+Received: from irsmsx601.ger.corp.intel.com ([163.33.146.7]) by
+ irsmsx601.ger.corp.intel.com ([163.33.146.7]) with mapi id 15.01.1713.004;
+ Fri, 15 May 2020 15:15:10 +0100
+From: "Szwichtenberg, Radoslaw" <radoslaw.szwichtenberg@intel.com>
+To: "events@lists.x.org" <events@lists.x.org>,
+ "xorg-devel@lists.freedesktop.org" <xorg-devel@lists.freedesktop.org>,
+ "wayland-devel@lists.freedesktop.org" <wayland-devel@lists.freedesktop.org>,
+ "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
+ "mesa-dev@lists.freedesktop.org" <mesa-dev@lists.freedesktop.org>,
+ "amd-gfx@lists.freedesktop.org" <amd-gfx@lists.freedesktop.org>,
+ "etnaviv@lists.freedesktop.org" <etnaviv@lists.freedesktop.org>,
+ "freedreno@lists.freedesktop.org" <freedreno@lists.freedesktop.org>,
+ "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
+ "intel-gfx@lists.freedesktop.org" <intel-gfx@lists.freedesktop.org>
+Thread-Topic: XDC 2020: Registration & Call for Proposals now open!
+Thread-Index: AdYqwkf6xuypRettR8CslFMm+spI/w==
+Date: Fri, 15 May 2020 14:15:10 +0000
+Message-ID: <9a4392829de747a9a752a5b13f31f90b@intel.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+dlp-version: 11.2.0.6
+dlp-product: dlpe-windows
+dlp-reaction: no-action
+x-originating-ip: [163.33.253.164]
 MIME-Version: 1.0
-References: <20200513110313.12979-1-christian.koenig@amd.com>
- <20200513110313.12979-2-christian.koenig@amd.com>
-In-Reply-To: <20200513110313.12979-2-christian.koenig@amd.com>
-From: Mathieu Malaterre <malat@debian.org>
-Date: Wed, 13 May 2020 13:55:15 +0200
-Message-ID: <CA+7wUszB45OzgyTUM-04QZKAVbRU6aMnPmLzupPAU5Ej_XnwGw@mail.gmail.com>
-To: =?UTF-8?Q?Christian_K=C3=B6nig?= <ckoenig.leichtzumerken@gmail.com>
 X-Mailman-Approved-At: Sat, 13 Jun 2020 20:53:54 +0000
-Subject: Re: [Nouveau] [PATCH 1/2] drm/radeon: disable AGP by default
+Subject: [Nouveau] XDC 2020: Registration & Call for Proposals now open!
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -53,31 +72,85 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org,
- PowerPC List Debian <debian-powerpc@lists.debian.org>,
- amd-gfx@lists.freedesktop.org, dri-devel <dri-devel@lists.freedesktop.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: "board@foundation.x.org" <board@foundation.x.org>
+Content-Type: text/plain; charset="iso-8859-2"
+Content-Transfer-Encoding: quoted-printable
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-T24gV2VkLCBNYXkgMTMsIDIwMjAgYXQgMToyMSBQTSBDaHJpc3RpYW4gS8O2bmlnCjxja29lbmln
-LmxlaWNodHp1bWVya2VuQGdtYWlsLmNvbT4gd3JvdGU6Cj4KPiBBbHdheXMgdXNlIHRoZSBQQ0kg
-R0FSVCBpbnN0ZWFkLgoKUmV2aWV3ZWQtYnk6IE1hdGhpZXUgTWFsYXRlcnJlIDxtYWxhdEBkZWJp
-YW4ub3JnPgoKPiBTaWduZWQtb2ZmLWJ5OiBDaHJpc3RpYW4gS8O2bmlnIDxjaHJpc3RpYW4ua29l
-bmlnQGFtZC5jb20+Cj4gLS0tCj4gIGRyaXZlcnMvZ3B1L2RybS9yYWRlb24vcmFkZW9uX2Rydi5j
-IHwgNSAtLS0tLQo+ICAxIGZpbGUgY2hhbmdlZCwgNSBkZWxldGlvbnMoLSkKPgo+IGRpZmYgLS1n
-aXQgYS9kcml2ZXJzL2dwdS9kcm0vcmFkZW9uL3JhZGVvbl9kcnYuYyBiL2RyaXZlcnMvZ3B1L2Ry
-bS9yYWRlb24vcmFkZW9uX2Rydi5jCj4gaW5kZXggYmJiMDg4M2U4Y2U2Li5hNzFmMTMxMTZkNmIg
-MTAwNjQ0Cj4gLS0tIGEvZHJpdmVycy9ncHUvZHJtL3JhZGVvbi9yYWRlb25fZHJ2LmMKPiArKysg
-Yi9kcml2ZXJzL2dwdS9kcm0vcmFkZW9uL3JhZGVvbl9kcnYuYwo+IEBAIC0xNzEsMTIgKzE3MSw3
-IEBAIGludCByYWRlb25fbm9fd2I7Cj4gIGludCByYWRlb25fbW9kZXNldCA9IC0xOwo+ICBpbnQg
-cmFkZW9uX2R5bmNsa3MgPSAtMTsKPiAgaW50IHJhZGVvbl9yNHh4X2F0b20gPSAwOwo+IC0jaWZk
-ZWYgX19wb3dlcnBjX18KPiAtLyogRGVmYXVsdCB0byBQQ0kgb24gUG93ZXJQQyAoZmRvICM5NTAx
-NykgKi8KPiAgaW50IHJhZGVvbl9hZ3Btb2RlID0gLTE7Cj4gLSNlbHNlCj4gLWludCByYWRlb25f
-YWdwbW9kZSA9IDA7Cj4gLSNlbmRpZgo+ICBpbnQgcmFkZW9uX3ZyYW1fbGltaXQgPSAwOwo+ICBp
-bnQgcmFkZW9uX2dhcnRfc2l6ZSA9IC0xOyAvKiBhdXRvICovCj4gIGludCByYWRlb25fYmVuY2ht
-YXJraW5nID0gMDsKPiAtLQo+IDIuMTcuMQo+CgoKLS0gCk1hdGhpZXUKX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBtYWlsaW5nIGxpc3QKTm91
-dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcv
-bWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1Cg==
+Hello!
+
+Registration & Call for Proposals are now open for XDC 2020, which will
+take place at the Gda=F1sk University of Technology in Gda=F1sk, Poland on =
+September 16-18, 2020.
+
+Thanks to LWN.net for hosting the website again this year!
+
+    https://xdc2020.x.org
+    =
+
+As usual, the conference is free of charge and open to the general public. =
+If you plan on attending, please make sure to register as early as possible=
+! However, don't book any travel or hotel until the organization decides if=
+ we keep the conference as it is or there is any change. Please read this m=
+essage on the website for more information:
+
+https://xdc2020.x.org/event/9/page/78-covid-19
+
+In order to register as attendee, you will therefore need to register via t=
+he XDC
+website. However, as XDC is sharing the same Indico infrastructure as
+LPC, if you previously registered on the LPC website
+(linuxplumbersconference.org) or on the XDC 2019 website (xdc2019.x.org), t=
+hen you already have an active account
+and can use the same username & password to login!
+
+    https://xdc2020.x.org/event/9/registrations/7/
+
+In addition to registration, the CfP is now open for talks, workshops
+and demos at XDC 2020. While any serious proposal will be gratefully
+considered, topics of interest to X.Org and freedesktop.org developers
+are encouraged. The program focus is on new development, ongoing
+challenges and anything else that will spark discussions among
+attendees in the hallway track.
+
+We are open to talks across all layers of the graphics stack, from the
+kernel to desktop environments / graphical applications and about how
+to make things better for the developers who build them. Head to the
+CfP page to learn more: =
+
+
+    https://xdc2020.x.org/event/9/abstracts/
+
+The deadline for submissions is Sunday, 5 July 2020.
+
+Notice that the event may end up being postponed, converted to a fully onli=
+ne conference, or even a hybrid one (physical event + some remote talks). I=
+t depends on how COVID-19 situation evolves in the different countries and =
+the restrictions we will have at that time.
+Also, some people may decide to skip the physical conference to avoid any r=
+isk of infection. Because of that, please indicate in your talk submission =
+if you prefer to give a remote talk in the case that XDC keeps being a phys=
+ical event this year. Similarly, if you think that your talk makes no sense=
+ if XDC ends up being a fully-virtual conference, please indicate that in t=
+he notes of the talk submission.
+
+If COVID-19 situation allows it, we are looking forward to seeing you in Gd=
+a=F1sk! If you have any questions, please send me an email to radoslaw.szwi=
+chtenberg@intel.com,  adding on CC the X.org board (board at foundation.x.o=
+rg).
+
+And don't forget, you can follow us on Twitter for all the latest
+updates and to stay connected:
+
+    https://twitter.com/xdc2020
+
+Best,
+
+Radek
+
+
+_______________________________________________
+Nouveau mailing list
+Nouveau@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/nouveau
