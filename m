@@ -2,59 +2,46 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8D6231D7412
-	for <lists+nouveau@lfdr.de>; Mon, 18 May 2020 11:31:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 61AB81D7B66
+	for <lists+nouveau@lfdr.de>; Mon, 18 May 2020 16:39:03 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D0E6489580;
-	Mon, 18 May 2020 09:31:21 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id BD0E36E175;
+	Mon, 18 May 2020 14:39:01 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-oi1-x243.google.com (mail-oi1-x243.google.com
- [IPv6:2607:f8b0:4864:20::243])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D1D4F89580
- for <nouveau@lists.freedesktop.org>; Mon, 18 May 2020 09:31:19 +0000 (UTC)
-Received: by mail-oi1-x243.google.com with SMTP id w4so4549603oia.1
- for <nouveau@lists.freedesktop.org>; Mon, 18 May 2020 02:31:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to;
- bh=O6tYQNQfN78A6bzbWtio5TYkldgCYo0BB7b2XSCJBMk=;
- b=T1TMree/1YLPWrkoq6Z8petN+kO36f1BK6/qBviVqTSj9mMWyqRORWclISpps35h+/
- IHe9pE5b/ZaRNkXr0REpmeeIDYWGMV93n/BLobJQoC1iLbLzsbwnHUCiyVsiIGI+CtL9
- KOalfjWxuoYgUhalQOGVHrfPz4xk0ToUQg0YMjUzVzyHlGT+5v6A+LNVcaCo5bcRX/8O
- HTbJTb+WrRhkreT8gS2wx9VuY2dYFxjMiqUP//uChmfa99BM8Orc4a+a7RxNP5/3ypuu
- WyJNHUsDXlYGIVcpZN+0Ysny7s1mHbOIAI7i9c98HVoCJnS2ru6+zQzdG+yXrhHRGPgh
- DreQ==
+Received: from mail-vs1-f67.google.com (mail-vs1-f67.google.com
+ [209.85.217.67])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id AE5AA6E175
+ for <nouveau@lists.freedesktop.org>; Mon, 18 May 2020 14:38:59 +0000 (UTC)
+Received: by mail-vs1-f67.google.com with SMTP id u2so1930709vsi.13
+ for <nouveau@lists.freedesktop.org>; Mon, 18 May 2020 07:38:59 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=O6tYQNQfN78A6bzbWtio5TYkldgCYo0BB7b2XSCJBMk=;
- b=NO9dFFCvBkUdyA5qHpOamnnNmIT5SQtteOwFSe3BBTxVTGy27QaUAGseXT76cp0gul
- yCJ+no0l6crQGz62PkXDXoQ7yY5sp8xgklw7IYe80WB9uJi3D2S/UDzMeUxN41Jn6QuP
- XkGoJOcbA+EPT08P0Ljovr9x2VGDLEd29cDlixH3teKeGbTUZa8Rmd9Ij9CCbAoRWgn8
- MzRlMuShVfx7YWgL8zX0bDSBK4wVQbvn8lMqyKcLhkxVdYZfmYwbbjY4ksgkMXr3NyUD
- qFWvsa96ciQ1Px+7wieH/v3fqre6iR9YrNcYai/G6F0K99Du/YIRRTRh9asEm9pSLZvs
- t37Q==
-X-Gm-Message-State: AOAM533ZrPv5DKgSzrGXb4jC4/Da9dHFQJkYou1j7JAnaC+j6B/t0wYw
- E+KgVWXCkzF9fq94+kvTy1M=
-X-Google-Smtp-Source: ABdhPJzKm7BZT5vgWhPubWJimcr9S3wPHuSJt7UgfTouHp6vSHFYodla2PbiA01meAkR+JRV9bEvoA==
-X-Received: by 2002:aca:f551:: with SMTP id t78mr10568633oih.24.1589794279115; 
- Mon, 18 May 2020 02:31:19 -0700 (PDT)
-Received: from ubuntu-s3-xlarge-x86 ([2604:1380:4111:8b00::1])
- by smtp.gmail.com with ESMTPSA id s69sm2810432otb.4.2020.05.18.02.31.18
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 18 May 2020 02:31:18 -0700 (PDT)
-Date: Mon, 18 May 2020 02:31:17 -0700
-From: Nathan Chancellor <natechancellor@gmail.com>
-To: Steven Rostedt <rostedt@goodmis.org>, Ingo Molnar <mingo@kernel.org>
-Message-ID: <20200518093117.GA719849@ubuntu-s3-xlarge-x86>
-References: <20200408205323.44490-1-natechancellor@gmail.com>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=6PHsyiX2wIA52iUNWvF3mV6BDx7AaZSZlrn7Yo7PpJw=;
+ b=mGDm4kdWYikB+L+xjzgpP3bZbTvblbsmVrsiN68hQe196iNB4Z/r7UQMJP4bfvDavh
+ tmQqqyZwKiuOJAJ0Fy4luyYB8rD/yfnrzMOMkl8uVkPhqDC4OI857dJpSPB3y7NbMNqr
+ 5yHYixDg4vRAMyTz3qjpf2XC8lIdpwTn6n2GQqXgVU62y4VbGbwWgc0ELpVKBflp47t7
+ UdMxGlRmpHeR8asB89RGm6flz89L0EWmmdD6Xs0b4VdbBR0IbFZqxH3ibKVPn+YSsJ9Z
+ 9gVLHeIFtw4+u18vhCXBDvgLt7TmcARfGO6pTYfLs37TYrXGfSHUB3A2Z5z8cjrR76Jg
+ hEPw==
+X-Gm-Message-State: AOAM531x02j9seb00OkVnbnTAWHTbNBwj5uaMTXAwmISa4bXG351vHBr
+ H09cSKQBQEEqUdFL35KUQWkBgAsDr/3dFl+A5X/LN0Hp+8E=
+X-Google-Smtp-Source: ABdhPJy4nH4kCJ+eh0MoeiAEyGUYtPMHoJPykeg9bdCYF5poJDC3DAPeE+y7kmEbcDDbqg93FgKPbZNwASctuE0fjLM=
+X-Received: by 2002:a67:df02:: with SMTP id s2mr3462486vsk.210.1589812738720; 
+ Mon, 18 May 2020 07:38:58 -0700 (PDT)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20200408205323.44490-1-natechancellor@gmail.com>
-Subject: Re: [Nouveau] [PATCH] x86: mmiotrace: Use cpumask_available for
- cpumask_var_t variables
+References: <20200517220524.4036334-1-emil.l.velikov@gmail.com>
+ <20200517220524.4036334-2-emil.l.velikov@gmail.com>
+ <87d071aedu.fsf@mpe.ellerman.id.au> <87v9ktpd4v.fsf@igel.home>
+In-Reply-To: <87v9ktpd4v.fsf@igel.home>
+From: Ilia Mirkin <imirkin@alum.mit.edu>
+Date: Mon, 18 May 2020 10:38:47 -0400
+Message-ID: <CAKb7UvgBhvE-dEfva+n5SUTJ4CZT2KKkno=SVb9Jx5KBbZWR+A@mail.gmail.com>
+To: Andreas Schwab <schwab@linux-m68k.org>
+Subject: Re: [Nouveau] [PATCH v2 2/2] powerpc/configs: replace deprecated
+ riva/nvidia with nouveau
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -66,71 +53,92 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, x86@kernel.org, linux-kernel@vger.kernel.org,
- clang-built-linux@googlegroups.com, Pekka Paalanen <ppaalanen@gmail.com>,
- Sedat Dilek <sedat.dilek@gmail.com>
+Cc: nouveau <nouveau@lists.freedesktop.org>,
+ Emil Velikov <emil.l.velikov@gmail.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, Apr 08, 2020 at 01:53:23PM -0700, Nathan Chancellor wrote:
-> When building with Clang + -Wtautological-compare and
-> CONFIG_CPUMASK_OFFSTACK unset:
-> 
-> arch/x86/mm/mmio-mod.c:375:6: warning: comparison of array 'downed_cpus'
-> equal to a null pointer is always false [-Wtautological-pointer-compare]
->         if (downed_cpus == NULL &&
->             ^~~~~~~~~~~    ~~~~
-> arch/x86/mm/mmio-mod.c:405:6: warning: comparison of array 'downed_cpus'
-> equal to a null pointer is always false [-Wtautological-pointer-compare]
->         if (downed_cpus == NULL || cpumask_weight(downed_cpus) == 0)
->             ^~~~~~~~~~~    ~~~~
-> 2 warnings generated.
-> 
-> Commit f7e30f01a9e2 ("cpumask: Add helper cpumask_available()") added
-> cpumask_available to fix warnings of this nature. Use that here so that
-> clang does not warn regardless of CONFIG_CPUMASK_OFFSTACK's value.
-> 
-> Link: https://github.com/ClangBuiltLinux/linux/issues/982
-> Reported-by: Sedat Dilek <sedat.dilek@gmail.com>
-> Signed-off-by: Nathan Chancellor <natechancellor@gmail.com>
-> ---
->  arch/x86/mm/mmio-mod.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/arch/x86/mm/mmio-mod.c b/arch/x86/mm/mmio-mod.c
-> index 109325d77b3e..43fd19b3f118 100644
-> --- a/arch/x86/mm/mmio-mod.c
-> +++ b/arch/x86/mm/mmio-mod.c
-> @@ -372,7 +372,7 @@ static void enter_uniprocessor(void)
->  	int cpu;
->  	int err;
->  
-> -	if (downed_cpus == NULL &&
-> +	if (!cpumask_available(downed_cpus) &&
->  	    !alloc_cpumask_var(&downed_cpus, GFP_KERNEL)) {
->  		pr_notice("Failed to allocate mask\n");
->  		goto out;
-> @@ -402,7 +402,7 @@ static void leave_uniprocessor(void)
->  	int cpu;
->  	int err;
->  
-> -	if (downed_cpus == NULL || cpumask_weight(downed_cpus) == 0)
-> +	if (!cpumask_available(downed_cpus) || cpumask_weight(downed_cpus) == 0)
->  		return;
->  	pr_notice("Re-enabling CPUs...\n");
->  	for_each_cpu(cpu, downed_cpus) {
-> 
-> base-commit: ae46d2aa6a7fbe8ca0946f24b061b6ccdc6c3f25
-> -- 
-> 2.26.0
-> 
+Hi Andreas,
 
-Gentle ping for acceptance, I am not sure who should take this.
+On Mon, May 18, 2020 at 9:56 AM Andreas Schwab <schwab@linux-m68k.org> wrote:
+>
+> On Mai 18 2020, Michael Ellerman wrote:
+>
+> > The old drivers may be crufty but they presumably have been tested by
+> > people and at least somewhat work.
+>
+> I can confirm that the nvidia fbdev driver is working perfectly fine.
+>
+> > I gave it a quick spin on a G5 I have access to and dmesg has a bunch of
+> > errors in it (see below). I can't actually tell if the display is
+> > working because the machine is remote, and I can't go and check it at
+> > the moment because the office is closed.
+>
+> The nouveau driver is completely borked.
+>
+> [    2.299204] nouveau 0000:f0:10.0: NVIDIA NV34 (034100a2)
+> [    2.363100] nouveau 0000:f0:10.0: bios: version 04.34.20.19.00
+> [    2.363273] nouveau 0000:f0:10.0: bios: OOB 1 00000962 00000962
+> [    2.363323] nouveau 0000:f0:10.0: bios: OOB 1 00000966 00000966
+> [    2.363332] nouveau 0000:f0:10.0: bios: OOB 1 00000963 00000963
+> [    2.363341] nouveau 0000:f0:10.0: bios: OOB 1 00000964 00000964
+> [    2.363387] nouveau 0000:f0:10.0: bios: OOB 1 0000096a 0000096a
+> [    2.363396] nouveau 0000:f0:10.0: bios: OOB 1 00000967 00000967
+> [    2.363405] nouveau 0000:f0:10.0: bios: OOB 1 00000968 00000968
+> [    2.363453] nouveau 0000:f0:10.0: bios: OOB 1 0000096e 0000096e
+> [    2.363462] nouveau 0000:f0:10.0: bios: OOB 1 0000096b 0000096b
+> [    2.363471] nouveau 0000:f0:10.0: bios: OOB 1 0000096c 0000096c
+> [    2.363516] nouveau 0000:f0:10.0: bios: OOB 1 00000972 00000972
+> [    2.363526] nouveau 0000:f0:10.0: bios: OOB 1 0000096f 0000096f
+> [    2.363534] nouveau 0000:f0:10.0: bios: OOB 1 00000970 00000970
+> [    2.363580] nouveau 0000:f0:10.0: bios: OOB 1 00000976 00000976
+> [    2.363589] nouveau 0000:f0:10.0: bios: OOB 1 00000973 00000973
+> [    2.363597] nouveau 0000:f0:10.0: bios: OOB 1 00000974 00000974
+> [    2.363643] nouveau 0000:f0:10.0: bios: OOB 1 0000097a 0000097a
+> [    2.363652] nouveau 0000:f0:10.0: bios: OOB 1 00000977 00000977
+> [    2.363661] nouveau 0000:f0:10.0: bios: OOB 1 00000978 00000978
+> [    2.363709] nouveau 0000:f0:10.0: bios: OOB 1 0000097e 0000097e
+> [    2.363718] nouveau 0000:f0:10.0: bios: OOB 1 0000097b 0000097b
+> [    2.363727] nouveau 0000:f0:10.0: bios: OOB 1 0000097c 0000097c
+> [    2.363772] nouveau 0000:f0:10.0: bios: OOB 1 00000982 00000982
+> [    2.363781] nouveau 0000:f0:10.0: bios: OOB 1 0000097f 0000097f
+> [    2.363790] nouveau 0000:f0:10.0: bios: OOB 1 00000980 00000980
+> [    2.363836] nouveau 0000:f0:10.0: bios: OOB 1 00000986 00000986
+> [    2.363845] nouveau 0000:f0:10.0: bios: OOB 1 00000983 00000983
+> [    2.363854] nouveau 0000:f0:10.0: bios: OOB 1 00000984 00000984
+> [    2.363900] nouveau 0000:f0:10.0: bios: OOB 1 0000098a 0000098a
+> [    2.363909] nouveau 0000:f0:10.0: bios: OOB 1 00000987 00000987
+> [    2.363918] nouveau 0000:f0:10.0: bios: OOB 1 00000988 00000988
+> [    2.363965] nouveau 0000:f0:10.0: bios: OOB 1 0000098e 0000098e
+> [    2.363974] nouveau 0000:f0:10.0: bios: OOB 1 0000098b 0000098b
+> [    2.363983] nouveau 0000:f0:10.0: bios: OOB 1 0000098c 0000098c
+> [    2.364029] nouveau 0000:f0:10.0: bios: OOB 1 00000992 00000992
+> [    2.364038] nouveau 0000:f0:10.0: bios: OOB 1 0000098f 0000098f
+> [    2.364047] nouveau 0000:f0:10.0: bios: OOB 1 00000990 00000990
+> [    2.364383] nouveau 0000:f0:10.0: gpio: GPU is missing power, check its power cables.  Boot with nouveau.config=NvPowerChecks=0 to disable.
+> [    2.364402] nouveau 0000:f0:10.0: gpio: init failed, -22
+> [    2.364431] nouveau 0000:f0:10.0: init failed with -22
+> [    2.364438] nouveau: DRM-master:00000000:00000080: init failed with -22
+> [    2.364450] nouveau 0000:f0:10.0: DRM-master: Device allocation failed: -22
+> [    2.365268] nouveau: probe of 0000:f0:10.0 failed with error -22
 
-Cheers,
-Nathan
+If you're interested in providing some further info, could you attach
+your VBIOS? I did, at one point, a long time ago, get a NV34 G5
+PowerMac7,3 working fine with nouveau. I'm curious if something in
+your VBIOS is different, or if the logic has regressed. (It would have
+been working in 4.4 or so.)
+
+You can find the VBIOS in of, it's called "NVDA,BMP", should be
+accessible in procfs or sysfs somewhere, but not 100% sure where.
+(From an old guide,
+/proc/device-tree/pci@f0000000/NVDA,Parent@10/NVDA,BMP seems to be it,
+possibly with some local adjustments.)
+
+Thanks,
+
+  -ilia
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
