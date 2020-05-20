@@ -2,54 +2,89 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 540E71DBCFB
-	for <lists+nouveau@lfdr.de>; Wed, 20 May 2020 20:37:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E2F461DBDC7
+	for <lists+nouveau@lfdr.de>; Wed, 20 May 2020 21:20:59 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6620F6E885;
-	Wed, 20 May 2020 18:37:02 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 52EF36E888;
+	Wed, 20 May 2020 19:20:58 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from hqnvemgate25.nvidia.com (hqnvemgate25.nvidia.com
- [216.228.121.64])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 2086F6E885
- for <nouveau@lists.freedesktop.org>; Wed, 20 May 2020 18:37:02 +0000 (UTC)
-Received: from hqpgpgate101.nvidia.com (Not Verified[216.228.121.13]) by
- hqnvemgate25.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
- id <B5ec5787e0001>; Wed, 20 May 2020 11:35:42 -0700
-Received: from hqmail.nvidia.com ([172.20.161.6])
- by hqpgpgate101.nvidia.com (PGP Universal service);
- Wed, 20 May 2020 11:37:01 -0700
-X-PGP-Universal: processed;
- by hqpgpgate101.nvidia.com on Wed, 20 May 2020 11:37:01 -0700
-Received: from HQMAIL105.nvidia.com (172.20.187.12) by HQMAIL111.nvidia.com
- (172.20.187.18) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Wed, 20 May
- 2020 18:36:58 +0000
-Received: from hqnvemgw03.nvidia.com (10.124.88.68) by HQMAIL105.nvidia.com
- (172.20.187.12) with Microsoft SMTP Server (TLS) id 15.0.1473.3 via Frontend
- Transport; Wed, 20 May 2020 18:36:58 +0000
-Received: from rcampbell-dev.nvidia.com (Not Verified[10.110.48.66]) by
- hqnvemgw03.nvidia.com with Trustwave SEG (v7, 5, 8, 10121)
- id <B5ec578c90005>; Wed, 20 May 2020 11:36:57 -0700
-From: Ralph Campbell <rcampbell@nvidia.com>
-To: <nouveau@lists.freedesktop.org>, <linux-rdma@vger.kernel.org>,
- <linux-kernel@vger.kernel.org>
-Date: Wed, 20 May 2020 11:36:52 -0700
-Message-ID: <20200520183652.21633-1-rcampbell@nvidia.com>
-X-Mailer: git-send-email 2.20.1
+Received: from EUR01-VE1-obe.outbound.protection.outlook.com
+ (mail-eopbgr140054.outbound.protection.outlook.com [40.107.14.54])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9032B6E888
+ for <nouveau@lists.freedesktop.org>; Wed, 20 May 2020 19:20:56 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=jNSDtEy+lwS4BNMNJXsQp2nc6tPyCV1X2C6Rno3KSi01O8KLd575mwbUOn8htMaSWl0Pe3RBAgGyPv6+O0BP2btGcSlgXDBTJLB2tUaWZQakvIgIzEDGHboZLIh7SGiYlNS/qYHuphe5jfouTm9yrqVaCHOwVU/S0I6oWMIp4ACY9MXDIZUglvCHfEuHS/4u1ym1v+gB+JC80GINNwl75GK2Ri6HkGyP3U3ghssXPeGesFdq8dH1NknzB2mrvwdwGV+zi0JF+dSHb1sing8amRsl40ls+tUawxc89+o6UAaeGdr22Xfe3hHPztXoDX3yDguw9XFuRH7SFo42x78P9w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=DpHga1b9hlnqaD9DdxXUavNSazqvvE8Js34+GDqtxoU=;
+ b=lpUupBj3+IIyaXoHGz2Jqfy3KfoX2+ou4C4oRwrMaOg1f38C6hfNgynWWXthBQ2b0jkrXWqcPQYkOrapN29QN8auN5gYJaASZqeBySD5juagcIqoMEmuAz9xBsKGP0F3EpfoJMYT5S7r3CaGqaLbIOabLH1XWDuN94y7SnynQiZsW8weBOgqTE8pAXoyqfHkwmKm6PNhjD1wNkCJ8iwZm2dCOpgWXHaqs+j/kT4ptIiyG3i/1GkCDmuBYYrCVggA1mMn7bo0Wdwj78W3qdftvtKbXpprnmSum8/+Xmocipwd8jrukdYEGmaRKQiQygJcGX65EAekqZMmbfUwURq9Qw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=mellanox.com; dmarc=pass action=none header.from=mellanox.com;
+ dkim=pass header.d=mellanox.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Mellanox.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=DpHga1b9hlnqaD9DdxXUavNSazqvvE8Js34+GDqtxoU=;
+ b=dn7zeTdtjLGf619P56Lo01Dq4h0+M/SHLEmx0BIWfjrmwt/P71ppYOkS1Z88QRC9EV9a68D6+3HQCvZlo2aI7aFxqfvcP12Ye5lnaNK3cre0P1EjKuBYSJnimt10QuyJ0hfXppGwFezhoROZZoz0TA3IGLTS26LCfSQpcz6osLo=
+Authentication-Results: nvidia.com; dkim=none (message not signed)
+ header.d=none;nvidia.com; dmarc=none action=none header.from=mellanox.com;
+Received: from VI1PR05MB4141.eurprd05.prod.outlook.com (2603:10a6:803:44::15)
+ by VI1PR05MB7149.eurprd05.prod.outlook.com (2603:10a6:800:18a::15)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3000.26; Wed, 20 May
+ 2020 19:20:52 +0000
+Received: from VI1PR05MB4141.eurprd05.prod.outlook.com
+ ([fe80::848b:fcd0:efe3:189e]) by VI1PR05MB4141.eurprd05.prod.outlook.com
+ ([fe80::848b:fcd0:efe3:189e%7]) with mapi id 15.20.3000.034; Wed, 20 May 2020
+ 19:20:52 +0000
+Date: Wed, 20 May 2020 16:20:45 -0300
+From: Jason Gunthorpe <jgg@mellanox.com>
+To: Ralph Campbell <rcampbell@nvidia.com>
+Message-ID: <20200520192045.GH24561@mellanox.com>
+References: <20200520183652.21633-1-rcampbell@nvidia.com>
+Content-Disposition: inline
+In-Reply-To: <20200520183652.21633-1-rcampbell@nvidia.com>
+User-Agent: Mutt/1.9.4 (2018-02-28)
+X-ClientProxiedBy: MN2PR15CA0063.namprd15.prod.outlook.com
+ (2603:10b6:208:237::32) To VI1PR05MB4141.eurprd05.prod.outlook.com
+ (2603:10a6:803:44::15)
 MIME-Version: 1.0
-X-NVConfidentiality: public
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
- t=1589999742; bh=qnRRPm8US23d/hFk1NYbhQ7k/2eulBbsURi/MjGsi3Q=;
- h=X-PGP-Universal:From:To:CC:Subject:Date:Message-ID:X-Mailer:
- MIME-Version:X-NVConfidentiality:Content-Transfer-Encoding:
- Content-Type;
- b=P6YVFEYpA241+7WHmIB7wmBoS+Y2AIkvac9gi6/5dug0MvAFiHSAmAbj/yM4zbrK4
- I7H7eoCVLxoKOeEZ6DmCDPV0/Gycuai/nF72W9V+Ts1W1zwiqaiVZA6qBToKYvXGfP
- t7gZlJafbWJgkgkj6x+jteZSD7orpinSfLRfm3HeI/QjyS3X6XuilImjWLvcS63BHh
- IOUKKa43+VYpxsVMrVNHibTQ6UP9fGpYauRIycYpWnDhUeeycyAD615NOh3Zt9+xlf
- 2J3ofDPoxn130Q/HwgWQOMxNBjlWwgzpzsw5edXKvRoMIW8EVZnkCdcBkXNz4o9bGV
- MANaeyPAkhiaQ==
-Subject: [Nouveau] [PATCH] nouveau/hmm: fix migrate zero page to GPU
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from mlx.ziepe.ca (193.47.165.251) by
+ MN2PR15CA0063.namprd15.prod.outlook.com (2603:10b6:208:237::32) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3021.23 via Frontend
+ Transport; Wed, 20 May 2020 19:20:52 +0000
+Received: from jgg by mlx.ziepe.ca with local (Exim 4.90_1)	(envelope-from
+ <jgg@mellanox.com>)	id 1jbUGj-0002WS-9P; Wed, 20 May 2020 16:20:45 -0300
+X-Originating-IP: [193.47.165.251]
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-HT: Tenant
+X-MS-Office365-Filtering-Correlation-Id: c6bf6bce-6380-475d-2153-08d7fcf2e927
+X-MS-TrafficTypeDiagnostic: VI1PR05MB7149:
+X-Microsoft-Antispam-PRVS: <VI1PR05MB7149C0DCDB79701BBAB0F37FCFB60@VI1PR05MB7149.eurprd05.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:6108;
+X-Forefront-PRVS: 04097B7F7F
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: jsLVu38Mawskz1eDLCTC4CXWBBl3mwLHVUb4gGZIeWFzYFCyvB85PTJJ5bs7MToDm8GMnRfvYu49S1VXSc44DOj3S7wuY8Wa138NdBBcQTsSsqoe7YpO5q/QKkrf58Cig9ftxQ89FCNgeZ8PYbvQWckcHuFFj6lCNw1mH0DB13K+8cSXdPxotqSntpdFLaSBjAmvJmwjzRdCY7LODMGvHIj3QAhLMp1y2HZbEBwBpoe6r6M/e9PgToZNcv0oAKHwIBjhmUZtRPIgQOTvDfOorZQXoOK9tBtvQZsj9Hi64eN8Amk7CBTtAdbiQv778kiwKgE8PEnuaDBXc4oE6nxuz0vssaiGDTUbDGFnPGDRS4pNQiBN5xQNftajVuZRS9WrKgRwAHNwXTgJTZ5H1Qe1tYpnSLzG1VR6752aKtv7gqrFvJGXPjUN6ueppVlGzat5PcBjADYWxDryxtSjym9MxTsxtW5QXh51b2cdiuCG6RX98zzqRpfy8kKhsTVUWMc+RGhBhibpkoIZNO0+9tiRTKwpZNkFc4V/3lUzfufXi/+LWyovhvpzD7cf3X5w5Z0VfZtJEhLTD4xcQOrOQjNbqA==
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:VI1PR05MB4141.eurprd05.prod.outlook.com; PTR:; CAT:NONE;
+ SFTY:;
+ SFS:(4636009)(376002)(346002)(396003)(366004)(39860400002)(136003)(8936002)(5660300002)(186003)(8676002)(9746002)(2906002)(9786002)(2616005)(66946007)(66476007)(66556008)(6916009)(86362001)(478600001)(966005)(52116002)(316002)(54906003)(4326008)(33656002)(1076003)(26005)(36756003)(24400500001);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData: CJgYeE4MCcSUXPQaI6vSlUHHUc7I050YaHiXbbJSLftohbcWvPObBmII6tlqvy6jMEJZIhSnIw0rscpMYbnQeo0fOMH+4GCHjrTmWSOIeNAngg4wcCBfwaUnV7ACQKXzSC38M+sBtwJFoHXrhfCQEDyLU50bqNMVWj/lYLSoS3VVXaMq+6f8BSzpi5ntUTy3oCbS/CJnhQT2p6zdOtBnf69UdjfRUK0Oe933wIbkgcAqkPwa0q+Jcg2PR1zABYYDpxlk3H4aREilhOnqf83kKj7OcW8KtGImokNhFEzP19ebBIXU1TgoEjofji3dki1NfZoDv+HwAcjCVzF07Bgxcok9CAbqaQKoidyQPF+Zj+sQKEFVZ0BxCyij+jB4zZDaUe44H0S1PzDaHAPyShKDgJZ+KW7hc2xCTOUnMAK3mpUqxtd5/0cHrFVtmu5bwAhT8QHZ/QvwaFV9RH1agF3gmaXRih71DiE2/AzfaEGHLR+/U4+G/4zBOFYVtDw6NAvY
+X-OriginatorOrg: Mellanox.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: c6bf6bce-6380-475d-2153-08d7fcf2e927
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 May 2020 19:20:52.4243 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: a652971c-7d2e-4d9b-a6a4-d149256f461b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: FMCDGT9dbnds2JBarraEuGLr6+ndcY1FCJyDXzfsT5N11XVCFbRRKeyrGKY4g0dBPnlUG4eDNwVRw4h3h8GloA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR05MB7149
+Subject: Re: [Nouveau] [PATCH] nouveau/hmm: fix migrate zero page to GPU
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,164 +96,35 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Ralph Campbell <rcampbell@nvidia.com>, Jason Gunthorpe <jgg@mellanox.com>,
- Ben Skeggs <bskeggs@redhat.com>, Christoph Hellwig <hch@lst.de>
+Cc: linux-rdma@vger.kernel.org, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, Ben Skeggs <bskeggs@redhat.com>,
+ Christoph Hellwig <hch@lst.de>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-When calling OpenCL clEnqueueSVMMigrateMem() on a region of memory that
-is backed by pte_none() or zero pages, migrate_vma_setup() will fill the
-source PFN array with an entry indicating the source page is zero.
-Use this to optimize migration to device private memory by allocating
-GPU memory and zero filling it instead of failing to migrate the page.
+On Wed, May 20, 2020 at 11:36:52AM -0700, Ralph Campbell wrote:
+> When calling OpenCL clEnqueueSVMMigrateMem() on a region of memory that
+> is backed by pte_none() or zero pages, migrate_vma_setup() will fill the
+> source PFN array with an entry indicating the source page is zero.
+> Use this to optimize migration to device private memory by allocating
+> GPU memory and zero filling it instead of failing to migrate the page.
+> 
+> Signed-off-by: Ralph Campbell <rcampbell@nvidia.com>
+> 
+> This patch applies cleanly to Jason's Gunthorpe's hmm tree plus two
+> patches I posted earlier. The first is queued in Ben Skegg's nouveau
+> tree and the second is still pending review/not queued.
+> [1] ("nouveau/hmm: map pages after migration")
+> https://lore.kernel.org/linux-mm/20200304001339.8248-5-rcampbell@nvidia.com/
+> [2] ("nouveau/hmm: fix nouveau_dmem_chunk allocations")
+> https://lore.kernel.org/lkml/20200421231107.30958-1-rcampbell@nvidia.com/
 
-Signed-off-by: Ralph Campbell <rcampbell@nvidia.com>
----
+It would be best if it goes through Ben's tree if it doesn't have
+conflicts with the hunks I have in the hmm tree.. Is it the case?
 
-This patch applies cleanly to Jason's Gunthorpe's hmm tree plus two
-patches I posted earlier. The first is queued in Ben Skegg's nouveau
-tree and the second is still pending review/not queued.
-[1] ("nouveau/hmm: map pages after migration")
-https://lore.kernel.org/linux-mm/20200304001339.8248-5-rcampbell@nvidia.com/
-[2] ("nouveau/hmm: fix nouveau_dmem_chunk allocations")
-https://lore.kernel.org/lkml/20200421231107.30958-1-rcampbell@nvidia.com/
-
- drivers/gpu/drm/nouveau/nouveau_dmem.c | 75 ++++++++++++++++++++++----
- 1 file changed, 66 insertions(+), 9 deletions(-)
-
-diff --git a/drivers/gpu/drm/nouveau/nouveau_dmem.c b/drivers/gpu/drm/nouveau/nouveau_dmem.c
-index cbc71567f9a5..e5c230d9ae24 100644
---- a/drivers/gpu/drm/nouveau/nouveau_dmem.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_dmem.c
-@@ -56,6 +56,8 @@ enum nouveau_aper {
- typedef int (*nouveau_migrate_copy_t)(struct nouveau_drm *drm, u64 npages,
- 				      enum nouveau_aper, u64 dst_addr,
- 				      enum nouveau_aper, u64 src_addr);
-+typedef int (*nouveau_clear_page_t)(struct nouveau_drm *drm, u32 length,
-+				      enum nouveau_aper, u64 dst_addr);
- 
- struct nouveau_dmem_chunk {
- 	struct list_head list;
-@@ -67,6 +69,7 @@ struct nouveau_dmem_chunk {
- 
- struct nouveau_dmem_migrate {
- 	nouveau_migrate_copy_t copy_func;
-+	nouveau_clear_page_t clear_func;
- 	struct nouveau_channel *chan;
- };
- 
-@@ -436,6 +439,52 @@ nvc0b5_migrate_copy(struct nouveau_drm *drm, u64 npages,
- 	return 0;
- }
- 
-+static int
-+nvc0b5_migrate_clear(struct nouveau_drm *drm, u32 length,
-+		     enum nouveau_aper dst_aper, u64 dst_addr)
-+{
-+	struct nouveau_channel *chan = drm->dmem->migrate.chan;
-+	u32 launch_dma = (1 << 10) /* REMAP_ENABLE_TRUE */ |
-+			 (1 << 8) /* DST_MEMORY_LAYOUT_PITCH. */ |
-+			 (1 << 7) /* SRC_MEMORY_LAYOUT_PITCH. */ |
-+			 (1 << 2) /* FLUSH_ENABLE_TRUE. */ |
-+			 (2 << 0) /* DATA_TRANSFER_TYPE_NON_PIPELINED. */;
-+	u32 remap = (4 <<  0) /* DST_X_CONST_A */ |
-+		    (5 <<  4) /* DST_Y_CONST_B */ |
-+		    (3 << 16) /* COMPONENT_SIZE_FOUR */ |
-+		    (1 << 24) /* NUM_DST_COMPONENTS_TWO */;
-+	int ret;
-+
-+	ret = RING_SPACE(chan, 12);
-+	if (ret)
-+		return ret;
-+
-+	switch (dst_aper) {
-+	case NOUVEAU_APER_VRAM:
-+		BEGIN_IMC0(chan, NvSubCopy, 0x0264, 0);
-+			break;
-+	case NOUVEAU_APER_HOST:
-+		BEGIN_IMC0(chan, NvSubCopy, 0x0264, 1);
-+		break;
-+	default:
-+		return -EINVAL;
-+	}
-+	launch_dma |= 0x00002000; /* DST_TYPE_PHYSICAL. */
-+
-+	BEGIN_NVC0(chan, NvSubCopy, 0x0700, 3);
-+	OUT_RING(chan, 0);
-+	OUT_RING(chan, 0);
-+	OUT_RING(chan, remap);
-+	BEGIN_NVC0(chan, NvSubCopy, 0x0408, 2);
-+	OUT_RING(chan, upper_32_bits(dst_addr));
-+	OUT_RING(chan, lower_32_bits(dst_addr));
-+	BEGIN_NVC0(chan, NvSubCopy, 0x0418, 1);
-+	OUT_RING(chan, length >> 3);
-+	BEGIN_NVC0(chan, NvSubCopy, 0x0300, 1);
-+	OUT_RING(chan, launch_dma);
-+	return 0;
-+}
-+
- static int
- nouveau_dmem_migrate_init(struct nouveau_drm *drm)
- {
-@@ -445,6 +494,7 @@ nouveau_dmem_migrate_init(struct nouveau_drm *drm)
- 	case  VOLTA_DMA_COPY_A:
- 	case TURING_DMA_COPY_A:
- 		drm->dmem->migrate.copy_func = nvc0b5_migrate_copy;
-+		drm->dmem->migrate.clear_func = nvc0b5_migrate_clear;
- 		drm->dmem->migrate.chan = drm->ttm.chan;
- 		return 0;
- 	default:
-@@ -487,21 +537,28 @@ static unsigned long nouveau_dmem_migrate_copy_one(struct nouveau_drm *drm,
- 	unsigned long paddr;
- 
- 	spage = migrate_pfn_to_page(src);
--	if (!spage || !(src & MIGRATE_PFN_MIGRATE))
-+	if (!(src & MIGRATE_PFN_MIGRATE))
- 		goto out;
- 
- 	dpage = nouveau_dmem_page_alloc_locked(drm);
- 	if (!dpage)
- 		goto out;
- 
--	*dma_addr = dma_map_page(dev, spage, 0, PAGE_SIZE, DMA_BIDIRECTIONAL);
--	if (dma_mapping_error(dev, *dma_addr))
--		goto out_free_page;
--
- 	paddr = nouveau_dmem_page_addr(dpage);
--	if (drm->dmem->migrate.copy_func(drm, 1, NOUVEAU_APER_VRAM,
--			paddr, NOUVEAU_APER_HOST, *dma_addr))
--		goto out_dma_unmap;
-+	if (spage) {
-+		*dma_addr = dma_map_page(dev, spage, 0, page_size(spage),
-+					 DMA_BIDIRECTIONAL);
-+		if (dma_mapping_error(dev, *dma_addr))
-+			goto out_free_page;
-+		if (drm->dmem->migrate.copy_func(drm, page_size(spage),
-+			NOUVEAU_APER_VRAM, paddr, NOUVEAU_APER_HOST, *dma_addr))
-+			goto out_dma_unmap;
-+	} else {
-+		*dma_addr = DMA_MAPPING_ERROR;
-+		if (drm->dmem->migrate.clear_func(drm, page_size(dpage),
-+			NOUVEAU_APER_VRAM, paddr))
-+			goto out_free_page;
-+	}
- 
- 	*pfn = NVIF_VMM_PFNMAP_V0_V | NVIF_VMM_PFNMAP_V0_VRAM |
- 		((paddr >> PAGE_SHIFT) << NVIF_VMM_PFNMAP_V0_ADDR_SHIFT);
-@@ -528,7 +585,7 @@ static void nouveau_dmem_migrate_chunk(struct nouveau_drm *drm,
- 	for (i = 0; addr < args->end; i++) {
- 		args->dst[i] = nouveau_dmem_migrate_copy_one(drm, args->src[i],
- 				dma_addrs + nr_dma, pfns + i);
--		if (args->dst[i])
-+		if (!dma_mapping_error(drm->dev->dev, dma_addrs[nr_dma]))
- 			nr_dma++;
- 		addr += PAGE_SIZE;
- 	}
--- 
-2.20.1
-
+Jason
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
