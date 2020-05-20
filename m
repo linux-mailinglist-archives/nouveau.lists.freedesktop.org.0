@@ -2,45 +2,54 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6EBE41DB940
-	for <lists+nouveau@lfdr.de>; Wed, 20 May 2020 18:25:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 540E71DBCFB
+	for <lists+nouveau@lfdr.de>; Wed, 20 May 2020 20:37:05 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 11FFD6E194;
-	Wed, 20 May 2020 16:25:48 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6620F6E885;
+	Wed, 20 May 2020 18:37:02 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from netline-mail3.netline.ch (mail.netline.ch [148.251.143.178])
- by gabe.freedesktop.org (Postfix) with ESMTP id CD63C6E194;
- Wed, 20 May 2020 16:25:46 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by netline-mail3.netline.ch (Postfix) with ESMTP id CD3B32A6048;
- Wed, 20 May 2020 18:25:45 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at netline-mail3.netline.ch
-Received: from netline-mail3.netline.ch ([127.0.0.1])
- by localhost (netline-mail3.netline.ch [127.0.0.1]) (amavisd-new, port 10024)
- with LMTP id fKgcnsgcu5hV; Wed, 20 May 2020 18:25:45 +0200 (CEST)
-Received: from thor (252.80.76.83.dynamic.wline.res.cust.swisscom.ch
- [83.76.80.252])
- by netline-mail3.netline.ch (Postfix) with ESMTPSA id 573902A6046;
- Wed, 20 May 2020 18:25:45 +0200 (CEST)
-Received: from localhost ([::1]) by thor with esmtp (Exim 4.93)
- (envelope-from <michel@daenzer.net>)
- id 1jbRXM-000Ydc-T3; Wed, 20 May 2020 18:25:44 +0200
-To: =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>,
- amd-gfx@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- Alex Deucher <alexander.deucher@amd.com>
-References: <20200513110313.12979-1-christian.koenig@amd.com>
- <9d784383-905e-59af-b17c-923c92474ece@gmail.com>
-From: =?UTF-8?Q?Michel_D=c3=a4nzer?= <michel@daenzer.net>
-Message-ID: <ea2dfaaa-a7ca-5e4a-9264-0a82f1d5ea9b@daenzer.net>
-Date: Wed, 20 May 2020 18:25:44 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.8.0
+Received: from hqnvemgate25.nvidia.com (hqnvemgate25.nvidia.com
+ [216.228.121.64])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2086F6E885
+ for <nouveau@lists.freedesktop.org>; Wed, 20 May 2020 18:37:02 +0000 (UTC)
+Received: from hqpgpgate101.nvidia.com (Not Verified[216.228.121.13]) by
+ hqnvemgate25.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
+ id <B5ec5787e0001>; Wed, 20 May 2020 11:35:42 -0700
+Received: from hqmail.nvidia.com ([172.20.161.6])
+ by hqpgpgate101.nvidia.com (PGP Universal service);
+ Wed, 20 May 2020 11:37:01 -0700
+X-PGP-Universal: processed;
+ by hqpgpgate101.nvidia.com on Wed, 20 May 2020 11:37:01 -0700
+Received: from HQMAIL105.nvidia.com (172.20.187.12) by HQMAIL111.nvidia.com
+ (172.20.187.18) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Wed, 20 May
+ 2020 18:36:58 +0000
+Received: from hqnvemgw03.nvidia.com (10.124.88.68) by HQMAIL105.nvidia.com
+ (172.20.187.12) with Microsoft SMTP Server (TLS) id 15.0.1473.3 via Frontend
+ Transport; Wed, 20 May 2020 18:36:58 +0000
+Received: from rcampbell-dev.nvidia.com (Not Verified[10.110.48.66]) by
+ hqnvemgw03.nvidia.com with Trustwave SEG (v7, 5, 8, 10121)
+ id <B5ec578c90005>; Wed, 20 May 2020 11:36:57 -0700
+From: Ralph Campbell <rcampbell@nvidia.com>
+To: <nouveau@lists.freedesktop.org>, <linux-rdma@vger.kernel.org>,
+ <linux-kernel@vger.kernel.org>
+Date: Wed, 20 May 2020 11:36:52 -0700
+Message-ID: <20200520183652.21633-1-rcampbell@nvidia.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-In-Reply-To: <9d784383-905e-59af-b17c-923c92474ece@gmail.com>
-Content-Language: en-CA
-Subject: Re: [Nouveau] [RFC] Deprecate AGP GART support for
- Radeon/Nouveau/TTM
+X-NVConfidentiality: public
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
+ t=1589999742; bh=qnRRPm8US23d/hFk1NYbhQ7k/2eulBbsURi/MjGsi3Q=;
+ h=X-PGP-Universal:From:To:CC:Subject:Date:Message-ID:X-Mailer:
+ MIME-Version:X-NVConfidentiality:Content-Transfer-Encoding:
+ Content-Type;
+ b=P6YVFEYpA241+7WHmIB7wmBoS+Y2AIkvac9gi6/5dug0MvAFiHSAmAbj/yM4zbrK4
+ I7H7eoCVLxoKOeEZ6DmCDPV0/Gycuai/nF72W9V+Ts1W1zwiqaiVZA6qBToKYvXGfP
+ t7gZlJafbWJgkgkj6x+jteZSD7orpinSfLRfm3HeI/QjyS3X6XuilImjWLvcS63BHh
+ IOUKKa43+VYpxsVMrVNHibTQ6UP9fGpYauRIycYpWnDhUeeycyAD615NOh3Zt9+xlf
+ 2J3ofDPoxn130Q/HwgWQOMxNBjlWwgzpzsw5edXKvRoMIW8EVZnkCdcBkXNz4o9bGV
+ MANaeyPAkhiaQ==
+Subject: [Nouveau] [PATCH] nouveau/hmm: fix migrate zero page to GPU
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -52,45 +61,165 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: debian-powerpc@lists.debian.org, dri-devel@lists.freedesktop.org
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: Ralph Campbell <rcampbell@nvidia.com>, Jason Gunthorpe <jgg@mellanox.com>,
+ Ben Skeggs <bskeggs@redhat.com>, Christoph Hellwig <hch@lst.de>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-T24gMjAyMC0wNS0yMCA0OjQzIHAubS4sIENocmlzdGlhbiBLw7ZuaWcgd3JvdGU6Cj4gQW0gMTMu
-MDUuMjAgdW0gMTM6MDMgc2NocmllYiBDaHJpc3RpYW4gS8O2bmlnOgo+PiBVbmZvcnR1bmF0ZWx5
-IEFHUCBpcyBzdGlsbCB0byB3aWRlbHkgdXNlZCBhcyB3ZSBjb3VsZCBqdXN0IGRyb3AKPj4gc3Vw
-cG9ydCBmb3IgdXNpbmcgaXRzIEdBUlQuCj4+Cj4+IE5vdCB1c2luZyB0aGUgQUdQIEdBUlQgYWxz
-byBkb2Vzbid0IG1lYW4gYSBsb3NzIGluIGZ1bmN0aW9uYWxpdHkgc2luY2UKPj4gZHJpdmVycyB3
-aWxsIGp1c3QgZmFsbGJhY2sgdG8gdGhlIGRyaXZlciBzcGVjaWZpYyBQQ0kgR0FSVC4KPj4KPj4g
-Rm9yIG5vdyBqdXN0IGRlcHJlY2F0ZSB0aGUgY29kZSBhbmQgZG9uJ3QgZW5hYmxlIHRoZSBBR1Ag
-R0FSVCBpbiBUVE0KPj4gZXZlbiB3aGVuIGdlbmVyYWwgQUdQIHN1cHBvcnQgaXMgYXZhaWxhYmxl
-Lgo+IAo+IFNvIEkndmUgdXNlZCBhbiBhbmNpZW50IHN5c3RlbSAoMzJiaXQpIHRvIHNldHVwIGEg
-dGVzdCBib3ggZm9yIHRoaXMuCj4gCj4gCj4gVGhlIGZpcnN0IEdQVSBJIGNvdWxkIHRlc3QgaXMg
-YW4gUlYyODAgKFJhZGVvbiA5MjAwIFBSTykgd2hpY2ggaXMgZWFzaWx5Cj4gMTUgeWVhcnMgb2xk
-Lgo+IAo+IFdoYXQgaGFwcGVucyBpbiBBR1AgbW9kZSBpcyB0aGF0IGdseGdlYXJzIHNob3dzIGFy
-dGlmYWN0cyBkdXJpbmcKPiByZW5kZXJpbmcgb24gdGhpcyBzeXN0ZW0uCj4gCj4gSW4gUENJIG1v
-ZGUgdGhvc2UgcmVuZGVyaW5nIGFydGlmYWN0cyBhcmUgZ29uZSBhbmQgZ2x4Z2VhcnMgc2VlbXMg
-dG8KPiBkcmF3IGV2ZXJ5dGhpbmcgY29ycmVjdGx5IG5vdy4KPiAKPiBQZXJmb3JtYW5jZSBpcyBv
-YnZpb3VzbHkgbm90IGNvbXBhcmFibGUsIGNhdXNlIGluIEFHUCB3ZSBkb24ndCByZW5kZXIKPiBh
-bGwgdHJpYW5nbGVzIGNvcnJlY3RseS4KPiAKPiAKPiBUaGUgc2Vjb25kIEdQVSBJIGNvdWxkIHRl
-c3QgaXMgYW4gUlY2MzAgUFJPIChSYWRlb24gSEQgMjYwMCBQUk8gQUdQKQo+IHdoaWNoIGlzIG1v
-cmUgdGhhbiAxMCB5ZWFycyBvbGQuCj4gCj4gQXMgZmFyIGFzIEkgY2FuIHRlbGwgdGhpcyBvbmUg
-d29ya3MgaW4gYm90aCBBR1AgYW5kIFBDSWUgbW9kZSBwZXJmZWN0bHkKPiBmaW5lLgo+IAo+IFNp
-bmNlIHRoaXMgaXMgb25seSBhIDMyYml0IHN5c3RlbSBJIGNvdWxkbid0IHJlYWxseSB0ZXN0IGFu
-eSBPcGVuR0wgZ2FtZQo+IHRoYXQgd2VsbC4KPiAKPiBCdXQgZm9yIGdseGdlYXJzIHN3aXRjaGlu
-ZyBmcm9tIEFHUCB0byBQQ0llIG1vZGUgc2VlbXMgdG8gcmVzdWx0IGluIGEKPiByb3VnaGx5IDUl
-IHBlcmZvcm1hbmNlIGRyb3AuCj4gCj4gVGhlIHN1cnByaXNpbmcgcmVhc29uIGZvciB0aGlzIGlz
-IG5vdCB0aGUgYmV0dGVyIFRMQiBwZXJmb3JtYW5jZSwgYnV0Cj4gdGhlIGxhY2sgb2YgVVNXQyBz
-dXBwb3J0IGZvciB0aGUgUENJZSBHQVJUIGluIHJhZGVvbi4KCkkgc3VzcGVjdCB0aGUgbWFpbiBy
-ZWFzb24gaXQncyBvbmx5IDUlIGlzIHRoYXQgUENJZSBHQVJUIHBhZ2UgdGFibGVzIGFyZQpzdG9y
-ZWQgaW4gVlJBTSwgc28gdGhleSBkb24ndCBuZWVkIHRvIGJlIGZldGNoZWQgYWNyb3NzIHRoZSBQ
-Q0llIGxpbmsKKGFuZCBwcmVzdW1hYmx5IGl0IGhhcyBtb3JlIHRoYW4gb25lIFRMQiBlbnRyeSBh
-cyB3ZWxsKS4gVGhlIGRpZmZlcmVuY2UKaXMgbXVjaCBiaWdnZXIgd2l0aCBuYXRpdmUgQUdQIEFT
-SUNzIHdpdGggUENJIEdBUlQuCgoKLS0gCkVhcnRobGluZyBNaWNoZWwgRMOkbnplciAgICAgICAg
-ICAgICAgIHwgICAgICAgICAgICAgICBodHRwczovL3JlZGhhdC5jb20KTGlicmUgc29mdHdhcmUg
-ZW50aHVzaWFzdCAgICAgICAgICAgICB8ICAgICAgICAgICAgIE1lc2EgYW5kIFggZGV2ZWxvcGVy
-Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCk5vdXZlYXUg
-bWFpbGluZyBsaXN0Ck5vdXZlYXVAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMu
-ZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vbm91dmVhdQo=
+When calling OpenCL clEnqueueSVMMigrateMem() on a region of memory that
+is backed by pte_none() or zero pages, migrate_vma_setup() will fill the
+source PFN array with an entry indicating the source page is zero.
+Use this to optimize migration to device private memory by allocating
+GPU memory and zero filling it instead of failing to migrate the page.
+
+Signed-off-by: Ralph Campbell <rcampbell@nvidia.com>
+---
+
+This patch applies cleanly to Jason's Gunthorpe's hmm tree plus two
+patches I posted earlier. The first is queued in Ben Skegg's nouveau
+tree and the second is still pending review/not queued.
+[1] ("nouveau/hmm: map pages after migration")
+https://lore.kernel.org/linux-mm/20200304001339.8248-5-rcampbell@nvidia.com/
+[2] ("nouveau/hmm: fix nouveau_dmem_chunk allocations")
+https://lore.kernel.org/lkml/20200421231107.30958-1-rcampbell@nvidia.com/
+
+ drivers/gpu/drm/nouveau/nouveau_dmem.c | 75 ++++++++++++++++++++++----
+ 1 file changed, 66 insertions(+), 9 deletions(-)
+
+diff --git a/drivers/gpu/drm/nouveau/nouveau_dmem.c b/drivers/gpu/drm/nouveau/nouveau_dmem.c
+index cbc71567f9a5..e5c230d9ae24 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_dmem.c
++++ b/drivers/gpu/drm/nouveau/nouveau_dmem.c
+@@ -56,6 +56,8 @@ enum nouveau_aper {
+ typedef int (*nouveau_migrate_copy_t)(struct nouveau_drm *drm, u64 npages,
+ 				      enum nouveau_aper, u64 dst_addr,
+ 				      enum nouveau_aper, u64 src_addr);
++typedef int (*nouveau_clear_page_t)(struct nouveau_drm *drm, u32 length,
++				      enum nouveau_aper, u64 dst_addr);
+ 
+ struct nouveau_dmem_chunk {
+ 	struct list_head list;
+@@ -67,6 +69,7 @@ struct nouveau_dmem_chunk {
+ 
+ struct nouveau_dmem_migrate {
+ 	nouveau_migrate_copy_t copy_func;
++	nouveau_clear_page_t clear_func;
+ 	struct nouveau_channel *chan;
+ };
+ 
+@@ -436,6 +439,52 @@ nvc0b5_migrate_copy(struct nouveau_drm *drm, u64 npages,
+ 	return 0;
+ }
+ 
++static int
++nvc0b5_migrate_clear(struct nouveau_drm *drm, u32 length,
++		     enum nouveau_aper dst_aper, u64 dst_addr)
++{
++	struct nouveau_channel *chan = drm->dmem->migrate.chan;
++	u32 launch_dma = (1 << 10) /* REMAP_ENABLE_TRUE */ |
++			 (1 << 8) /* DST_MEMORY_LAYOUT_PITCH. */ |
++			 (1 << 7) /* SRC_MEMORY_LAYOUT_PITCH. */ |
++			 (1 << 2) /* FLUSH_ENABLE_TRUE. */ |
++			 (2 << 0) /* DATA_TRANSFER_TYPE_NON_PIPELINED. */;
++	u32 remap = (4 <<  0) /* DST_X_CONST_A */ |
++		    (5 <<  4) /* DST_Y_CONST_B */ |
++		    (3 << 16) /* COMPONENT_SIZE_FOUR */ |
++		    (1 << 24) /* NUM_DST_COMPONENTS_TWO */;
++	int ret;
++
++	ret = RING_SPACE(chan, 12);
++	if (ret)
++		return ret;
++
++	switch (dst_aper) {
++	case NOUVEAU_APER_VRAM:
++		BEGIN_IMC0(chan, NvSubCopy, 0x0264, 0);
++			break;
++	case NOUVEAU_APER_HOST:
++		BEGIN_IMC0(chan, NvSubCopy, 0x0264, 1);
++		break;
++	default:
++		return -EINVAL;
++	}
++	launch_dma |= 0x00002000; /* DST_TYPE_PHYSICAL. */
++
++	BEGIN_NVC0(chan, NvSubCopy, 0x0700, 3);
++	OUT_RING(chan, 0);
++	OUT_RING(chan, 0);
++	OUT_RING(chan, remap);
++	BEGIN_NVC0(chan, NvSubCopy, 0x0408, 2);
++	OUT_RING(chan, upper_32_bits(dst_addr));
++	OUT_RING(chan, lower_32_bits(dst_addr));
++	BEGIN_NVC0(chan, NvSubCopy, 0x0418, 1);
++	OUT_RING(chan, length >> 3);
++	BEGIN_NVC0(chan, NvSubCopy, 0x0300, 1);
++	OUT_RING(chan, launch_dma);
++	return 0;
++}
++
+ static int
+ nouveau_dmem_migrate_init(struct nouveau_drm *drm)
+ {
+@@ -445,6 +494,7 @@ nouveau_dmem_migrate_init(struct nouveau_drm *drm)
+ 	case  VOLTA_DMA_COPY_A:
+ 	case TURING_DMA_COPY_A:
+ 		drm->dmem->migrate.copy_func = nvc0b5_migrate_copy;
++		drm->dmem->migrate.clear_func = nvc0b5_migrate_clear;
+ 		drm->dmem->migrate.chan = drm->ttm.chan;
+ 		return 0;
+ 	default:
+@@ -487,21 +537,28 @@ static unsigned long nouveau_dmem_migrate_copy_one(struct nouveau_drm *drm,
+ 	unsigned long paddr;
+ 
+ 	spage = migrate_pfn_to_page(src);
+-	if (!spage || !(src & MIGRATE_PFN_MIGRATE))
++	if (!(src & MIGRATE_PFN_MIGRATE))
+ 		goto out;
+ 
+ 	dpage = nouveau_dmem_page_alloc_locked(drm);
+ 	if (!dpage)
+ 		goto out;
+ 
+-	*dma_addr = dma_map_page(dev, spage, 0, PAGE_SIZE, DMA_BIDIRECTIONAL);
+-	if (dma_mapping_error(dev, *dma_addr))
+-		goto out_free_page;
+-
+ 	paddr = nouveau_dmem_page_addr(dpage);
+-	if (drm->dmem->migrate.copy_func(drm, 1, NOUVEAU_APER_VRAM,
+-			paddr, NOUVEAU_APER_HOST, *dma_addr))
+-		goto out_dma_unmap;
++	if (spage) {
++		*dma_addr = dma_map_page(dev, spage, 0, page_size(spage),
++					 DMA_BIDIRECTIONAL);
++		if (dma_mapping_error(dev, *dma_addr))
++			goto out_free_page;
++		if (drm->dmem->migrate.copy_func(drm, page_size(spage),
++			NOUVEAU_APER_VRAM, paddr, NOUVEAU_APER_HOST, *dma_addr))
++			goto out_dma_unmap;
++	} else {
++		*dma_addr = DMA_MAPPING_ERROR;
++		if (drm->dmem->migrate.clear_func(drm, page_size(dpage),
++			NOUVEAU_APER_VRAM, paddr))
++			goto out_free_page;
++	}
+ 
+ 	*pfn = NVIF_VMM_PFNMAP_V0_V | NVIF_VMM_PFNMAP_V0_VRAM |
+ 		((paddr >> PAGE_SHIFT) << NVIF_VMM_PFNMAP_V0_ADDR_SHIFT);
+@@ -528,7 +585,7 @@ static void nouveau_dmem_migrate_chunk(struct nouveau_drm *drm,
+ 	for (i = 0; addr < args->end; i++) {
+ 		args->dst[i] = nouveau_dmem_migrate_copy_one(drm, args->src[i],
+ 				dma_addrs + nr_dma, pfns + i);
+-		if (args->dst[i])
++		if (!dma_mapping_error(drm->dev->dev, dma_addrs[nr_dma]))
+ 			nr_dma++;
+ 		addr += PAGE_SIZE;
+ 	}
+-- 
+2.20.1
+
+_______________________________________________
+Nouveau mailing list
+Nouveau@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/nouveau
