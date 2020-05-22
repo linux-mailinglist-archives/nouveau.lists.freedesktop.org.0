@@ -2,54 +2,67 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8CD371DDC4A
-	for <lists+nouveau@lfdr.de>; Fri, 22 May 2020 02:47:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 424441DE49D
+	for <lists+nouveau@lfdr.de>; Fri, 22 May 2020 12:40:13 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1DF276E28A;
-	Fri, 22 May 2020 00:47:46 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 70F4D6E9BA;
+	Fri, 22 May 2020 10:40:10 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-yb1-xb42.google.com (mail-yb1-xb42.google.com
- [IPv6:2607:f8b0:4864:20::b42])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E30BB6E28A
- for <nouveau@lists.freedesktop.org>; Fri, 22 May 2020 00:47:44 +0000 (UTC)
-Received: by mail-yb1-xb42.google.com with SMTP id c2so3767562ybi.7
- for <nouveau@lists.freedesktop.org>; Thu, 21 May 2020 17:47:44 -0700 (PDT)
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [IPv6:2a00:1450:4864:20::62b])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id CF0986E9BA;
+ Fri, 22 May 2020 10:40:09 +0000 (UTC)
+Received: by mail-ej1-x62b.google.com with SMTP id j21so12479508ejy.1;
+ Fri, 22 May 2020 03:40:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=o1achSWEeCebePnmfJCefzRB6hhApcsEC43Uj0PfEdo=;
- b=WsGRWs81ne4GiEIj2AuIqikvp+lAWF+9c6fBO/yPPFiOxIHXJ/DrPBIMsGpTFaITpu
- 9i9UhHdmI5Avjonw3yqrBGbpCzvnrNWyoWx8wJl5tCPlriDkngednvKIudKH2d+WfEQw
- h55ECOkkfEaKHhzsJVUDKS8uWQ4x4Js4Qwy1kvRuhBvMr2bYe9N168YuA0OuiyR28BGT
- mG4pSBmtdc24n52sGqwScHBmyYhwYqVrp16anD7tQUJb178QRxctfifFkBt/dgG8F+5f
- 837fbBybst4L3Xxia67k5YB+sNG2kr+a7vmpGCs+Xw/FAV0rtV7r4hiPw3ZsgNa8UeKP
- VvpA==
+ h=reply-to:subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-transfer-encoding:content-language;
+ bh=TYcDv5vIBw6ya7Ut1f794E52nl6X9yRKNiq2adVnOx8=;
+ b=UAhIRTANXcE313UyA5JQ4miAQk2o05HqRii5VRnb/Kx6Z8NMwgJu4gODrOVh0/fRHi
+ IfhY73LkEqaEfuO/b49HBpYZcWXntIHjTkZjFKzsSDGzsDe3kX4LFpM67iuZP3LVjbDC
+ 4aMltvsHT+kdY0sx7cq/l22jKESV5WLhwW1x6PNngbWZZGyWmAOW3t0OHuirKuARApt6
+ FqWgZqsw7Aw1wrZOugSC47Bc9GCWmtUvFruQ9Wj7nz3NFwe5zI3WdMY6AKL0X/Y879iW
+ 5qoIcPjMNQIGTp+eJPWcHAIFv7ijOulYJlGCCFOvtxgk28VL33AhgrK2SfKrUkUv9Dui
+ HO7w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=o1achSWEeCebePnmfJCefzRB6hhApcsEC43Uj0PfEdo=;
- b=RJIWor+hH0j0Sg7yrsOP1ViIPHY59JilZuTranV+dwv7AaSiPrjuKgUz/TDALypIrm
- /bkzOsNRjumQmLGJrWrMX9vl1C9G222Qp7yUL7eBur6Ng7bc+3WdqtKrWNZCTyV+9CId
- s+LA/O1niJss29Qi2qPf5yoKqdDCZIP0FZcIva+stHO7ys9Rf2jYSUYC4GMuv23QcTYO
- xoQPcY6MewJR70hpMo/KO7ux1ZfqIMm0o1v//EWr/cCB+g7TiA8h2kbq8ng9OVqG+fkJ
- AWW75vWKSrhX0S+m3CpIfNGTZNWCIezwjNfo9iOEX5UNyZcnfn6ZzVYjpS1i7Nv7qDyX
- KNeg==
-X-Gm-Message-State: AOAM532rG3O/hPOVpCjcqux6T5n/Vd8YNc2qYU6YNmb5+mT92zQFz39T
- TEZQHU/g+FsjPqk50xssOesjf9JaNid+p30yWlk=
-X-Google-Smtp-Source: ABdhPJzz46XpCwc5jovLm8lmHQ+AD9jyCkktAnl9vTJWUtMKYfZSqeYdgJlRvpqDlK57+i71ZO4Zm6KzcwysMIEomd0=
-X-Received: by 2002:a25:9d82:: with SMTP id v2mr19502909ybp.268.1590108463933; 
- Thu, 21 May 2020 17:47:43 -0700 (PDT)
+ h=x-gm-message-state:reply-to:subject:to:cc:references:from
+ :message-id:date:user-agent:mime-version:in-reply-to
+ :content-transfer-encoding:content-language;
+ bh=TYcDv5vIBw6ya7Ut1f794E52nl6X9yRKNiq2adVnOx8=;
+ b=IJdP/rMLu+SA7nk9XSKdq9CRqdlVbRCx0++2r36Nx/y9XvvTfJQZYbhzrSjWcFAuQd
+ aU9sFum8EJZCppHFDjQXwoUvibJv6V3RVlXosrfqEZ9LaKeaRlma3u68oXwmodHDJqxo
+ +EhM6LJhb3KS09R4VMy/b8GDg7QUMVfzx3PonF9itY6mqOmfV52pSy1Bz7bnCTnBiaA1
+ wmVnPJO7TLmnD4vZzGy0/hcvuKhKATKMluer5VebRCM9YcHNqDvsk7/NxIOFuaz3DcmY
+ hYSb1sG38f7wseCDeBy/soHS7efipDNKorv5xiRQjuHePIy106EWsxWUfG/X/VTQQet6
+ k70w==
+X-Gm-Message-State: AOAM532y9BrgKPrTrC4+XK3fHuAARfaVrOKFQUQP362pbb++cQjdZQnB
+ a0GniPM6F6a61FQ8/W5YGX0khvyA
+X-Google-Smtp-Source: ABdhPJxHtE4KJPqzO9Lc0q5UUIbrtk+yBBPBSCLMPtlSplSq0cLdvbHcPvyGSaJwnNGkUdD8ox2lmw==
+X-Received: by 2002:a17:906:3041:: with SMTP id d1mr7666526ejd.7.1590144008390; 
+ Fri, 22 May 2020 03:40:08 -0700 (PDT)
+Received: from ?IPv6:2a02:908:1252:fb60:be8a:bd56:1f94:86e7?
+ ([2a02:908:1252:fb60:be8a:bd56:1f94:86e7])
+ by smtp.gmail.com with ESMTPSA id w12sm6916357edj.22.2020.05.22.03.40.06
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Fri, 22 May 2020 03:40:07 -0700 (PDT)
+To: =?UTF-8?Q?Michel_D=c3=a4nzer?= <michel@daenzer.net>,
+ amd-gfx@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ Alex Deucher <alexander.deucher@amd.com>
+References: <20200513110313.12979-1-christian.koenig@amd.com>
+ <9d784383-905e-59af-b17c-923c92474ece@gmail.com>
+ <ea2dfaaa-a7ca-5e4a-9264-0a82f1d5ea9b@daenzer.net>
+From: =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>
+Message-ID: <39241451-b25e-759f-6d52-455d806add09@gmail.com>
+Date: Fri, 22 May 2020 12:40:05 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.9.0
 MIME-Version: 1.0
-References: <20200520183652.21633-1-rcampbell@nvidia.com>
- <20200520192045.GH24561@mellanox.com>
- <0ef69e08-7f5d-7a3d-c657-55b3a8df1dfe@nvidia.com>
-In-Reply-To: <0ef69e08-7f5d-7a3d-c657-55b3a8df1dfe@nvidia.com>
-From: Ben Skeggs <skeggsb@gmail.com>
-Date: Fri, 22 May 2020 10:47:32 +1000
-Message-ID: <CACAvsv6TYCaChfsp4LNcVUZ6b0f6F5vDiKqfpzRTVRnRM7373g@mail.gmail.com>
-To: Ralph Campbell <rcampbell@nvidia.com>
-Subject: Re: [Nouveau] [PATCH] nouveau/hmm: fix migrate zero page to GPU
+In-Reply-To: <ea2dfaaa-a7ca-5e4a-9264-0a82f1d5ea9b@daenzer.net>
+Content-Language: en-US
+Subject: Re: [Nouveau] [RFC] Deprecate AGP GART support for
+ Radeon/Nouveau/TTM
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,54 +74,50 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: linux-rdma@vger.kernel.org, ML nouveau <nouveau@lists.freedesktop.org>,
- LKML <linux-kernel@vger.kernel.org>, Jason Gunthorpe <jgg@mellanox.com>,
- Ben Skeggs <bskeggs@redhat.com>, Christoph Hellwig <hch@lst.de>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Reply-To: christian.koenig@amd.com
+Cc: debian-powerpc@lists.debian.org, dri-devel@lists.freedesktop.org
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, 21 May 2020 at 07:05, Ralph Campbell <rcampbell@nvidia.com> wrote:
->
->
-> On 5/20/20 12:20 PM, Jason Gunthorpe wrote:
-> > On Wed, May 20, 2020 at 11:36:52AM -0700, Ralph Campbell wrote:
-> >> When calling OpenCL clEnqueueSVMMigrateMem() on a region of memory that
-> >> is backed by pte_none() or zero pages, migrate_vma_setup() will fill the
-> >> source PFN array with an entry indicating the source page is zero.
-> >> Use this to optimize migration to device private memory by allocating
-> >> GPU memory and zero filling it instead of failing to migrate the page.
-> >>
-> >> Signed-off-by: Ralph Campbell <rcampbell@nvidia.com>
-> >>
-> >> This patch applies cleanly to Jason's Gunthorpe's hmm tree plus two
-> >> patches I posted earlier. The first is queued in Ben Skegg's nouveau
-> >> tree and the second is still pending review/not queued.
-> >> [1] ("nouveau/hmm: map pages after migration")
-> >> https://lore.kernel.org/linux-mm/20200304001339.8248-5-rcampbell@nvidia.com/
-> >> [2] ("nouveau/hmm: fix nouveau_dmem_chunk allocations")
-> >> https://lore.kernel.org/lkml/20200421231107.30958-1-rcampbell@nvidia.com/
-> >
-> > It would be best if it goes through Ben's tree if it doesn't have
-> > conflicts with the hunks I have in the hmm tree.. Is it the case?
-> >
-> > Jason
->
-> I think there might be some merge conflicts even though it is semantically
-> independent of the other changes. I guess since we are at 5.7-rc6 and not
-> far from the merge window, I can rebase after 5.8-rc1 and resend.
-> I posted this mostly to get some review and as a "heads up" of the issue.
-Both look alright to me, and apply cleanly on top of my tree already,
-so I've got them locally.
-
-Ben.
-
-> _______________________________________________
-> Nouveau mailing list
-> Nouveau@lists.freedesktop.org
-> https://lists.freedesktop.org/mailman/listinfo/nouveau
-_______________________________________________
-Nouveau mailing list
-Nouveau@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/nouveau
+QW0gMjAuMDUuMjAgdW0gMTg6MjUgc2NocmllYiBNaWNoZWwgRMOkbnplcjoKPiBPbiAyMDIwLTA1
+LTIwIDQ6NDMgcC5tLiwgQ2hyaXN0aWFuIEvDtm5pZyB3cm90ZToKPj4gQW0gMTMuMDUuMjAgdW0g
+MTM6MDMgc2NocmllYiBDaHJpc3RpYW4gS8O2bmlnOgo+Pj4gVW5mb3J0dW5hdGVseSBBR1AgaXMg
+c3RpbGwgdG8gd2lkZWx5IHVzZWQgYXMgd2UgY291bGQganVzdCBkcm9wCj4+PiBzdXBwb3J0IGZv
+ciB1c2luZyBpdHMgR0FSVC4KPj4+Cj4+PiBOb3QgdXNpbmcgdGhlIEFHUCBHQVJUIGFsc28gZG9l
+c24ndCBtZWFuIGEgbG9zcyBpbiBmdW5jdGlvbmFsaXR5IHNpbmNlCj4+PiBkcml2ZXJzIHdpbGwg
+anVzdCBmYWxsYmFjayB0byB0aGUgZHJpdmVyIHNwZWNpZmljIFBDSSBHQVJULgo+Pj4KPj4+IEZv
+ciBub3cganVzdCBkZXByZWNhdGUgdGhlIGNvZGUgYW5kIGRvbid0IGVuYWJsZSB0aGUgQUdQIEdB
+UlQgaW4gVFRNCj4+PiBldmVuIHdoZW4gZ2VuZXJhbCBBR1Agc3VwcG9ydCBpcyBhdmFpbGFibGUu
+Cj4+IFNvIEkndmUgdXNlZCBhbiBhbmNpZW50IHN5c3RlbSAoMzJiaXQpIHRvIHNldHVwIGEgdGVz
+dCBib3ggZm9yIHRoaXMuCj4+Cj4+Cj4+IFRoZSBmaXJzdCBHUFUgSSBjb3VsZCB0ZXN0IGlzIGFu
+IFJWMjgwIChSYWRlb24gOTIwMCBQUk8pIHdoaWNoIGlzIGVhc2lseQo+PiAxNSB5ZWFycyBvbGQu
+Cj4+Cj4+IFdoYXQgaGFwcGVucyBpbiBBR1AgbW9kZSBpcyB0aGF0IGdseGdlYXJzIHNob3dzIGFy
+dGlmYWN0cyBkdXJpbmcKPj4gcmVuZGVyaW5nIG9uIHRoaXMgc3lzdGVtLgo+Pgo+PiBJbiBQQ0kg
+bW9kZSB0aG9zZSByZW5kZXJpbmcgYXJ0aWZhY3RzIGFyZSBnb25lIGFuZCBnbHhnZWFycyBzZWVt
+cyB0bwo+PiBkcmF3IGV2ZXJ5dGhpbmcgY29ycmVjdGx5IG5vdy4KPj4KPj4gUGVyZm9ybWFuY2Ug
+aXMgb2J2aW91c2x5IG5vdCBjb21wYXJhYmxlLCBjYXVzZSBpbiBBR1Agd2UgZG9uJ3QgcmVuZGVy
+Cj4+IGFsbCB0cmlhbmdsZXMgY29ycmVjdGx5Lgo+Pgo+Pgo+PiBUaGUgc2Vjb25kIEdQVSBJIGNv
+dWxkIHRlc3QgaXMgYW4gUlY2MzAgUFJPIChSYWRlb24gSEQgMjYwMCBQUk8gQUdQKQo+PiB3aGlj
+aCBpcyBtb3JlIHRoYW4gMTAgeWVhcnMgb2xkLgo+Pgo+PiBBcyBmYXIgYXMgSSBjYW4gdGVsbCB0
+aGlzIG9uZSB3b3JrcyBpbiBib3RoIEFHUCBhbmQgUENJZSBtb2RlIHBlcmZlY3RseQo+PiBmaW5l
+Lgo+Pgo+PiBTaW5jZSB0aGlzIGlzIG9ubHkgYSAzMmJpdCBzeXN0ZW0gSSBjb3VsZG4ndCByZWFs
+bHkgdGVzdCBhbnkgT3BlbkdMIGdhbWUKPj4gdGhhdCB3ZWxsLgo+Pgo+PiBCdXQgZm9yIGdseGdl
+YXJzIHN3aXRjaGluZyBmcm9tIEFHUCB0byBQQ0llIG1vZGUgc2VlbXMgdG8gcmVzdWx0IGluIGEK
+Pj4gcm91Z2hseSA1JSBwZXJmb3JtYW5jZSBkcm9wLgo+Pgo+PiBUaGUgc3VycHJpc2luZyByZWFz
+b24gZm9yIHRoaXMgaXMgbm90IHRoZSBiZXR0ZXIgVExCIHBlcmZvcm1hbmNlLCBidXQKPj4gdGhl
+IGxhY2sgb2YgVVNXQyBzdXBwb3J0IGZvciB0aGUgUENJZSBHQVJUIGluIHJhZGVvbi4KPiBJIHN1
+c3BlY3QgdGhlIG1haW4gcmVhc29uIGl0J3Mgb25seSA1JSBpcyB0aGF0IFBDSWUgR0FSVCBwYWdl
+IHRhYmxlcyBhcmUKPiBzdG9yZWQgaW4gVlJBTSwgc28gdGhleSBkb24ndCBuZWVkIHRvIGJlIGZl
+dGNoZWQgYWNyb3NzIHRoZSBQQ0llIGxpbmsKPiAoYW5kIHByZXN1bWFibHkgaXQgaGFzIG1vcmUg
+dGhhbiBvbmUgVExCIGVudHJ5IGFzIHdlbGwpLiBUaGUgZGlmZmVyZW5jZQo+IGlzIG11Y2ggYmln
+Z2VyIHdpdGggbmF0aXZlIEFHUCBBU0lDcyB3aXRoIFBDSSBHQVJULgoKRG8geW91IGhhdmUgc29t
+ZSBoYXJkd2FyZSB5b3UgY291bGQgZ2l2ZSB0aGF0IGEgdHJ5IG9uPwoKSSBtZWFuIHRoZSBmaXJz
+dCBjYXJkIEkgcHV0IGludG8gdGhlIHN5c3RlbSBvYnZpb3VzbHkgb25seSB3b3JrZWQgCmNvcnJl
+Y3RseSB3aXRoIEFHUCBkaXNhYmxlZC4KCldoaWxlIEkgYWdyZWUgdGhhdCBpdCBtZWFucyBhIHBl
+cmZvcm1hbmNlIHJlZ3Jlc3Npb24sIHRoaXMgaXMgYSByYXRoZXIgCmhpZ2ggbW90aXZhdGlvbiB0
+byBnbyBhaGVhZCB3aXRoIGF0IGxlYXN0IHRoZSBmaXJzdCBwYXRjaC4KCkNocmlzdGlhbi4KX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBtYWls
+aW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5mcmVl
+ZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1Cg==
