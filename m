@@ -1,59 +1,66 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B86C51DE973
-	for <lists+nouveau@lfdr.de>; Fri, 22 May 2020 16:47:09 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 392AF1E0FA4
+	for <lists+nouveau@lfdr.de>; Mon, 25 May 2020 15:41:25 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D1FC06EA02;
-	Fri, 22 May 2020 14:47:03 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 41B8E88E07;
+	Mon, 25 May 2020 13:41:22 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
- [IPv6:2a00:1450:4864:20::434])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9E53F6E9F9;
- Fri, 22 May 2020 14:47:02 +0000 (UTC)
-Received: by mail-wr1-x434.google.com with SMTP id c3so6179762wru.12;
- Fri, 22 May 2020 07:47:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=FJLUjBuFGBG9K6nNrkEm7oIIr33fE1bvy0GPNpUlYiA=;
- b=LkAodB6uqnzUVqkofGVTcncGAHkjfH+tGR+BUicspSJGHkkiBeZZcZKtUcKHS/NDQy
- f+ALuUQxUIyH5lUTCaAZMIhp71CzzbeYECtJ10PaeRCvUX8rwiNvMIeIA2UAC3rLHmPB
- ZRCNhYOuaK0ugqNszE6lzzfMlv4dfpgAGsNQQzomEE1vlAD1s5i5ZeFgp3V07QgqWS+L
- eDTRlpwuu8G81H/Y2K8aGM0NPgyFqGEkRShXrUlxo59OZEgesUlynVHXmmOQDFTxufES
- 0Db6fhJhsvOUvuMMBzejregAMWGJIWM9pLuNr/FKrfHY0wZUWjVob5Q/JvxaTlX13HsF
- Frug==
+Received: from mail-qk1-x742.google.com (mail-qk1-x742.google.com
+ [IPv6:2607:f8b0:4864:20::742])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9814188E07
+ for <nouveau@lists.freedesktop.org>; Mon, 25 May 2020 13:41:20 +0000 (UTC)
+Received: by mail-qk1-x742.google.com with SMTP id b6so17418907qkh.11
+ for <nouveau@lists.freedesktop.org>; Mon, 25 May 2020 06:41:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ziepe.ca; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to:user-agent;
+ bh=gPDO3X5exveNuQB33sqGwYFDtLpn1MHpqh7qgx9Ds0U=;
+ b=YWisdnilIhfDrM+E+SxMXaOOM3S8J0owofy6L63tPMKNlQpTOnDBXaJIGIpfLVuv8e
+ RPwFtQIUH3v7EOrCTGWLmLB0H7YbUEomLIfmYte8O6ZPx64QjusgkIxmiTn0/Veefq7M
+ pGEt8yH0t/vwgIpSl+RtDysE0yr6nJS4JK3YSde04NTeyPjZmiEOJpHUKytYk9YebMaP
+ ZBwTqRWOlcbPbyxbCtPg/99VSLhwlIy3blfpxEsFWPNLZqUxUrAIQcRPOOcELjbAp/DY
+ UMb0QDSHWVMTyUFW5IIroZvxqvroUZ4aOu//kLYALqNBVGf71IaS4QGAehurQ0LEWc+H
+ VK9Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=FJLUjBuFGBG9K6nNrkEm7oIIr33fE1bvy0GPNpUlYiA=;
- b=Mj6tDtUBQ2C7F70ri2RwrmFT5sh3AsUW9Kbaf1nwZb/EkkTyyQK9YcLKnJ5xzoYjdc
- prfDlFPuACTHQgK0Y5xt3DjK/lcMjxwJpTZXijeqdE7aDR7IfHgyoMFogBQefCrqXcLS
- Gr/oU8/ruKIO5l2kDADyQybxmw/qE5vKj5U+NtzqcPqhJELvpN1dPemqg8oX8pVgBkZx
- x6ZVh9NWZjslh2p8suuRqeWhWsbO0E42cVz/fRU9KQeaMp4tkgH+2xm5Fzsj3LKvpMnS
- gqeBp/vyNdnwQ0rLWddl0Y2B1RgG4pUKwTNQt8P7f4grbnZGve9yNSiRgXQZ/qxCzIYb
- dAaQ==
-X-Gm-Message-State: AOAM531D6DBsbZ4nZxcXg+BqyfpV+pay9JoE0RfxRdNwZRBH/2Cf/0tL
- E32QB2FaJBep1IKj7P8DwNhditDIfucJYLHkvgZLiw==
-X-Google-Smtp-Source: ABdhPJwZ0Iv4BZM0I8hDBBtF89c0VMMfI+eFiTVnQNDBpzDF1oEwZIeqT+IC3dwns8jbTGf8E8nfKrpKragTMn0LlbE=
-X-Received: by 2002:a05:6000:14b:: with SMTP id
- r11mr3980382wrx.124.1590158821059; 
- Fri, 22 May 2020 07:47:01 -0700 (PDT)
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to:user-agent;
+ bh=gPDO3X5exveNuQB33sqGwYFDtLpn1MHpqh7qgx9Ds0U=;
+ b=BkH+GO/s/GObGc+uq4uTBTy/ACHPiw2DDbtB9BHDsWUVqHLAme7qD/UgeQHzj++094
+ fjHO6vYjvVDoHLWfJh38658VVrkScyDFrJB24pT7fqj8sVuz0g0FZQ2Yf7ijG4HBJ2xe
+ Pj+/hTJ/WdkHn2+eUE1h4q31t6q+sXa8yQKP0jiWTwExmOo3yr/6kCF+5iBixVanGurL
+ WCK+Qljg5Nkc8XWmtPcLOhc88RPEMOVA0V+p13YniZMdVEv/dehbmGtmTLqevtUtHGMS
+ JZbBAWqx/q8hgZF2u6zcROzw1QWLyFBAEzUvRbNK25SfXp0z5YU2RWzBq0/HIVAGmU/3
+ LbrQ==
+X-Gm-Message-State: AOAM533A50Ty+YdQph/T/J2zZ8qDEbUh6Zr+CrT5dM1ZRFtX80wkQ9dY
+ JIZp3TTgSGaTBwVWPqJZ3SUdeg==
+X-Google-Smtp-Source: ABdhPJztwwj2Lmnes/knDFhWm/x9ekYq2TGHNL3KtgNw4hZnEPBap7aZFzv7gZ3WmAGU8iH6kzNbLg==
+X-Received: by 2002:a37:2dc4:: with SMTP id t187mr3763851qkh.166.1590414079640; 
+ Mon, 25 May 2020 06:41:19 -0700 (PDT)
+Received: from ziepe.ca
+ (hlfxns017vw-156-34-48-30.dhcp-dynamic.fibreop.ns.bellaliant.net.
+ [156.34.48.30])
+ by smtp.gmail.com with ESMTPSA id r15sm2718512qtt.42.2020.05.25.06.41.19
+ (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
+ Mon, 25 May 2020 06:41:19 -0700 (PDT)
+Received: from jgg by mlx.ziepe.ca with local (Exim 4.90_1)
+ (envelope-from <jgg@ziepe.ca>)
+ id 1jdDLy-0000hA-Jv; Mon, 25 May 2020 10:41:18 -0300
+Date: Mon, 25 May 2020 10:41:18 -0300
+From: Jason Gunthorpe <jgg@ziepe.ca>
+To: Ralph Campbell <rcampbell@nvidia.com>
+Message-ID: <20200525134118.GA2536@ziepe.ca>
+References: <20200508192009.15302-1-rcampbell@nvidia.com>
 MIME-Version: 1.0
-References: <20200513110313.12979-1-christian.koenig@amd.com>
- <9d784383-905e-59af-b17c-923c92474ece@gmail.com>
- <CADnq5_PxUD546E852r918xEc=MddzArLDciBKtJRpuoiC4e-qQ@mail.gmail.com>
- <9e87c7db-3129-42fb-e1b3-0b8dfe3bca8f@gmail.com>
-In-Reply-To: <9e87c7db-3129-42fb-e1b3-0b8dfe3bca8f@gmail.com>
-From: Alex Deucher <alexdeucher@gmail.com>
-Date: Fri, 22 May 2020 10:46:50 -0400
-Message-ID: <CADnq5_PeGnkDoHdpPL6uK_hgih6aNsjYrVaiiDYjD0T43udgGw@mail.gmail.com>
-To: Christian Koenig <christian.koenig@amd.com>
-Subject: Re: [Nouveau] [RFC] Deprecate AGP GART support for
- Radeon/Nouveau/TTM
+Content-Disposition: inline
+In-Reply-To: <20200508192009.15302-1-rcampbell@nvidia.com>
+User-Agent: Mutt/1.9.4 (2018-02-28)
+Subject: Re: [Nouveau] [PATCH 0/6] nouveau/hmm: add support for mapping
+ large pages
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -65,67 +72,45 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Alex Deucher <alexander.deucher@amd.com>,
- nouveau <nouveau@lists.freedesktop.org>, debian-powerpc@lists.debian.org,
- amd-gfx list <amd-gfx@lists.freedesktop.org>,
- Maling list - DRI developers <dri-devel@lists.freedesktop.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: linux-rdma@vger.kernel.org, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, linux-mm@kvack.org,
+ Ben Skeggs <bskeggs@redhat.com>, linux-kselftest@vger.kernel.org,
+ Shuah Khan <shuah@linuxfoundation.org>,
+ Andrew Morton <akpm@linux-foundation.org>, Christoph Hellwig <hch@lst.de>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-T24gRnJpLCBNYXkgMjIsIDIwMjAgYXQgNjo0MSBBTSBDaHJpc3RpYW4gS8O2bmlnCjxja29lbmln
-LmxlaWNodHp1bWVya2VuQGdtYWlsLmNvbT4gd3JvdGU6Cj4KPiBBbSAyMC4wNS4yMCB1bSAxODox
-OCBzY2hyaWViIEFsZXggRGV1Y2hlcjoKPiA+IE9uIFdlZCwgTWF5IDIwLCAyMDIwIGF0IDEwOjQz
-IEFNIENocmlzdGlhbiBLw7ZuaWcKPiA+IDxja29lbmlnLmxlaWNodHp1bWVya2VuQGdtYWlsLmNv
-bT4gd3JvdGU6Cj4gPj4gQW0gMTMuMDUuMjAgdW0gMTM6MDMgc2NocmllYiBDaHJpc3RpYW4gS8O2
-bmlnOgo+ID4+PiBVbmZvcnR1bmF0ZWx5IEFHUCBpcyBzdGlsbCB0byB3aWRlbHkgdXNlZCBhcyB3
-ZSBjb3VsZCBqdXN0IGRyb3Agc3VwcG9ydCBmb3IgdXNpbmcgaXRzIEdBUlQuCj4gPj4+Cj4gPj4+
-IE5vdCB1c2luZyB0aGUgQUdQIEdBUlQgYWxzbyBkb2Vzbid0IG1lYW4gYSBsb3NzIGluIGZ1bmN0
-aW9uYWxpdHkgc2luY2UgZHJpdmVycyB3aWxsIGp1c3QgZmFsbGJhY2sgdG8gdGhlIGRyaXZlciBz
-cGVjaWZpYyBQQ0kgR0FSVC4KPiA+Pj4KPiA+Pj4gRm9yIG5vdyBqdXN0IGRlcHJlY2F0ZSB0aGUg
-Y29kZSBhbmQgZG9uJ3QgZW5hYmxlIHRoZSBBR1AgR0FSVCBpbiBUVE0gZXZlbiB3aGVuIGdlbmVy
-YWwgQUdQIHN1cHBvcnQgaXMgYXZhaWxhYmxlLgo+ID4+IFNvIEkndmUgdXNlZCBhbiBhbmNpZW50
-IHN5c3RlbSAoMzJiaXQpIHRvIHNldHVwIGEgdGVzdCBib3ggZm9yIHRoaXMuCj4gPj4KPiA+Pgo+
-ID4+IFRoZSBmaXJzdCBHUFUgSSBjb3VsZCB0ZXN0IGlzIGFuIFJWMjgwIChSYWRlb24gOTIwMCBQ
-Uk8pIHdoaWNoIGlzIGVhc2lseQo+ID4+IDE1IHllYXJzIG9sZC4KPiA+Pgo+ID4+IFdoYXQgaGFw
-cGVucyBpbiBBR1AgbW9kZSBpcyB0aGF0IGdseGdlYXJzIHNob3dzIGFydGlmYWN0cyBkdXJpbmcK
-PiA+PiByZW5kZXJpbmcgb24gdGhpcyBzeXN0ZW0uCj4gPj4KPiA+PiBJbiBQQ0kgbW9kZSB0aG9z
-ZSByZW5kZXJpbmcgYXJ0aWZhY3RzIGFyZSBnb25lIGFuZCBnbHhnZWFycyBzZWVtcyB0bwo+ID4+
-IGRyYXcgZXZlcnl0aGluZyBjb3JyZWN0bHkgbm93Lgo+ID4+Cj4gPj4gUGVyZm9ybWFuY2UgaXMg
-b2J2aW91c2x5IG5vdCBjb21wYXJhYmxlLCBjYXVzZSBpbiBBR1Agd2UgZG9uJ3QgcmVuZGVyCj4g
-Pj4gYWxsIHRyaWFuZ2xlcyBjb3JyZWN0bHkuCj4gPj4KPiA+Pgo+ID4+IFRoZSBzZWNvbmQgR1BV
-IEkgY291bGQgdGVzdCBpcyBhbiBSVjYzMCBQUk8gKFJhZGVvbiBIRCAyNjAwIFBSTyBBR1ApCj4g
-Pj4gd2hpY2ggaXMgbW9yZSB0aGFuIDEwIHllYXJzIG9sZC4KPiA+Pgo+ID4+IEFzIGZhciBhcyBJ
-IGNhbiB0ZWxsIHRoaXMgb25lIHdvcmtzIGluIGJvdGggQUdQIGFuZCBQQ0llIG1vZGUgcGVyZmVj
-dGx5Cj4gPj4gZmluZS4KPiA+Pgo+ID4+IFNpbmNlIHRoaXMgaXMgb25seSBhIDMyYml0IHN5c3Rl
-bSBJIGNvdWxkbid0IHJlYWxseSB0ZXN0IGFueSBPcGVuR0wgZ2FtZQo+ID4+IHRoYXQgd2VsbC4K
-PiA+Pgo+ID4+IEJ1dCBmb3IgZ2x4Z2VhcnMgc3dpdGNoaW5nIGZyb20gQUdQIHRvIFBDSWUgbW9k
-ZSBzZWVtcyB0byByZXN1bHQgaW4gYQo+ID4+IHJvdWdobHkgNSUgcGVyZm9ybWFuY2UgZHJvcC4K
-PiA+Pgo+ID4+IFRoZSBzdXJwcmlzaW5nIHJlYXNvbiBmb3IgdGhpcyBpcyBub3QgdGhlIGJldHRl
-ciBUTEIgcGVyZm9ybWFuY2UsIGJ1dAo+ID4+IHRoZSBsYWNrIG9mIFVTV0Mgc3VwcG9ydCBmb3Ig
-dGhlIFBDSWUgR0FSVCBpbiByYWRlb24uCj4gPj4KPiA+Pgo+ID4+IFNvIGlmIGFueWJvZHkgd2Fu
-dHMgdG8gZ2V0IGhpcyBoYW5kcyBkaXJ0eSBhbmQgc3F1ZWV6ZSBhIGJpdCBtb3JlCj4gPj4gcGVy
-Zm9ybWFuY2Ugb3V0IG9mIHRoZSBvbGQgaGFyZHdhcmUsIHBvcnRpbmcgVVNXQyBmcm9tIGFtZGdw
-dSB0byByYWRlb24KPiA+PiBzaG91bGRuJ3QgYmUgdG8gbXVjaCBvZiBhIHByb2JsZW0uCj4gPiBX
-ZSBkbyBzdXBwb3J0IFVTV0Mgb24gcmFkZW9uLCBhbHRob3VnaCBJIHRoaW5rIHdlIGhhZCBzZXBh
-cmF0ZSBmbGFncwo+ID4gZm9yIGNhY2hlZCBhbmQgV0MuICBUaGF0IHNhaWQgd2UgaGFkIGEgbG90
-IG9mIHByb2JsZW1zIHdpdGggV0Mgb24gMzIKPiA+IGJpdCAoc2VlIHJhZGVvbl9ib19jcmVhdGUo
-KSkuICBUaGUgb3RoZXIgcHJvYmxlbSBpcyB0aGF0LCBhdCBsZWFzdCBvbgo+ID4gdGhlIHJlYWxs
-eSBvbGQgcmFkZW9ucywgdGhlIFBDSSBnYXJ0IGRpZG4ndCBzdXBwb3J0IHNub29wZWQgYW5kCj4g
-PiB1bnNub29wZWQuICBJdCB3YXMgYWx3YXlzIHNub29wZWQuICBJdCB3YXNuJ3QgdW50aWwgcGNp
-ZSB0aGF0IHRoZSBnYXJ0Cj4gPiBodyBnb3Qgc3VwcG9ydCBmb3IgYm90aC4gIEZvciBBR1AsIHRo
-ZSBleHBlY3RhdGlvbiB3YXMgdGhhdCBBR1AKPiA+IHByb3ZpZGVkIHRoZSB1bmNhY2hlZCBtZW1v
-cnkuCj4KPiBPaCwgaW5kZWVkLiBJIGRpZG4ndCByZW1lbWJlcmVkIHRoYXQuCj4KPiBJbnRlcmVz
-dGluZyBpcyB0aGF0IGluIHRoaXMgY2FzZSBJIGhhdmUgbm8gaWRlYSB3aGVyZSB0aGUgcGVyZm9y
-bWFuY2UKPiBkaWZmZXJlbmNlIGlzIGNvbWluZyBmcm9tLgo+Cj4gPgo+ID4+Cj4gPj4gU3VtbWlu
-ZyBpdCB1cCBJJ20gc3RpbGwgbGVhbmluZyB0b3dhcmRzIGRpc2FibGluZyBBR1AgY29tcGxldGVs
-eSBieQo+ID4+IGRlZmF1bHQgZm9yIHJhZGVvbiBhbmQgZGVwcmVjYXRlIGl0IGluIFRUTSBhcyB3
-ZWxsLgo+ID4+Cj4gPj4gVGhvdWdodHM/IEVzcGVjaWFsbHkgQWxleCB3aGF0IGRvIHlvdSB0aGlu
-ay4KPiA+IFdvcmtzIGZvciBtZS4KPgo+IEkgd2lsbCB0YWtlIHRoYXQgYXMgYW4gcmIgYW5kIGNv
-bW1pdCBhdCBsZWFzdCB0aGUgZmlyc3QgcGF0Y2guCgpZZWFoLCBSZXZpZXdlZC1ieTogQWxleCBE
-ZXVjaGVyIDxhbGV4YW5kZXIuZGV1Y2hlckBhbWQuY29tPgoKPgo+IFRoYW5rcywKPiBDaHJpc3Rp
-YW4uCj4KPiA+Cj4gPiBBbGV4Cj4KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX18KTm91dmVhdSBtYWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3Rv
-cC5vcmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2
-ZWF1Cg==
+On Fri, May 08, 2020 at 12:20:03PM -0700, Ralph Campbell wrote:
+> hmm_range_fault() returns an array of page frame numbers and flags for
+> how the pages are mapped in the requested process' page tables. The PFN
+> can be used to get the struct page with hmm_pfn_to_page() and the page size
+> order can be determined with compound_order(page) but if the page is larger
+> than order 0 (PAGE_SIZE), there is no indication that the page is mapped
+> using a larger page size. To be fully general, hmm_range_fault() would need
+> to return the mapping size to handle cases like a 1GB compound page being
+> mapped with 2MB PMD entries. However, the most common case is the mapping
+> size the same as the underlying compound page size.
+> This series adds a new output flag to indicate this so that callers know it
+> is safe to use a large device page table mapping if one is available.
+> Nouveau and the HMM tests are updated to use the new flag.
+> 
+> Note that this series depends on a patch queued in Ben Skeggs' nouveau
+> tree ("nouveau/hmm: map pages after migration") and the patches queued
+> in Jason's HMM tree.
+> There is also a patch outstanding ("nouveau/hmm: fix nouveau_dmem_chunk
+> allocations") that is independent of the above and could be applied
+> before or after.
+
+Did Christoph and Matt's remarks get addressed here?
+
+I think ODP could use something like this, currently it checks every
+page to get back to the huge page size and this flag would optimze
+that
+
+Jason
+_______________________________________________
+Nouveau mailing list
+Nouveau@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/nouveau
