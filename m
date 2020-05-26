@@ -2,46 +2,55 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9A4561F854A
-	for <lists+nouveau@lfdr.de>; Sat, 13 Jun 2020 22:54:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7A6881F8545
+	for <lists+nouveau@lfdr.de>; Sat, 13 Jun 2020 22:54:07 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D6ED96E46D;
-	Sat, 13 Jun 2020 20:54:01 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0BB726E466;
+	Sat, 13 Jun 2020 20:53:58 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from zju.edu.cn (mail.zju.edu.cn [61.164.42.155])
- by gabe.freedesktop.org (Postfix) with ESMTP id F1F2789F97;
- Wed, 20 May 2020 10:48:31 +0000 (UTC)
-Received: from localhost.localdomain (unknown [222.205.77.158])
- by mail-app3 (Coremail) with SMTP id cC_KCgCXOQTYCsVeqwPgAA--.5693S4;
- Wed, 20 May 2020 18:47:56 +0800 (CST)
-From: Dinghao Liu <dinghao.liu@zju.edu.cn>
-To: dinghao.liu@zju.edu.cn,
-	kjlu@umn.edu
-Date: Wed, 20 May 2020 18:47:48 +0800
-Message-Id: <20200520104750.21335-1-dinghao.liu@zju.edu.cn>
-X-Mailer: git-send-email 2.17.1
-X-CM-TRANSID: cC_KCgCXOQTYCsVeqwPgAA--.5693S4
-X-Coremail-Antispam: 1UD129KBjvdXoWrKrWrZF15CFyUGr4xXF1UKFg_yoWDurXE9r
- 4kua12gr4YkrZ2qw47Cw4rZryI9ws8u3WxXr10qrySy3y7Awn8WryUGwn5Zr43Wa4xXryq
- yFZ8WFyUArWI9jkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
- 9fnUUIcSsGvfJTRUUUbT8Fc2x0x2IEx4CE42xK8VAvwI8IcIk0rVWrJVCq3wAFIxvE14AK
- wVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK021l84ACjcxK6xIIjxv20x
- vE14v26w1j6s0DM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4UJVWxJr1l84ACjcxK6I8E
- 87Iv67AKxVW0oVCq3wA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_GcCE3s1le2I262IYc4CY6c
- 8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2Ix0cI8IcVAFwI0_JrI_
- JrylYx0Ex4A2jsIE14v26r4j6F4UMcvjeVCFs4IE7xkEbVWUJVW8JwACjcxG0xvY0x0EwI
- xGrwACjI8F5VA0II8E6IAqYI8I648v4I1lFIxGxcIEc7CjxVA2Y2ka0xkIwI1lc2xSY4AK
- 67AK6r4DMxAIw28IcxkI7VAKI48JMxAIw28IcVCjz48v1sIEY20_GFWkJr1UJwCFx2IqxV
- CFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v26r1j6r18MI8I3I0E7480Y4vE14v26r10
- 6r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxV
- WUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Gr0_Cr1lIxAIcVCF04k26cxKx2IYs7xG
- 6rWUJVWrZr1UMIIF0xvEx4A2jsIE14v26r4j6F4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr
- 1j6F4UJbIYCTnIWIevJa73UjIFyTuYvjfUOlkVUUUUU
-X-CM-SenderInfo: qrrzjiaqtzq6lmxovvfxof0/
+Received: from hqnvemgate24.nvidia.com (hqnvemgate24.nvidia.com
+ [216.228.121.143])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 28BA889C9A
+ for <nouveau@lists.freedesktop.org>; Tue, 26 May 2020 22:29:42 +0000 (UTC)
+Received: from hqpgpgate101.nvidia.com (Not Verified[216.228.121.13]) by
+ hqnvemgate24.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
+ id <B5ecd97fc0001>; Tue, 26 May 2020 15:28:12 -0700
+Received: from hqmail.nvidia.com ([172.20.161.6])
+ by hqpgpgate101.nvidia.com (PGP Universal service);
+ Tue, 26 May 2020 15:29:41 -0700
+X-PGP-Universal: processed;
+ by hqpgpgate101.nvidia.com on Tue, 26 May 2020 15:29:41 -0700
+Received: from [10.2.171.79] (10.124.1.5) by HQMAIL107.nvidia.com
+ (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Tue, 26 May
+ 2020 22:29:36 +0000
+From: Zi Yan <ziy@nvidia.com>
+To: Ralph Campbell <rcampbell@nvidia.com>
+Date: Tue, 26 May 2020 18:29:34 -0400
+X-Mailer: MailMate (1.13.1r5685)
+Message-ID: <B0BF5621-FEF9-446C-AAD9-81EFA1416EB1@nvidia.com>
+In-Reply-To: <1ec0511f-e6eb-3e11-ad6d-ad4e5b107464@nvidia.com>
+References: <20200508192009.15302-1-rcampbell@nvidia.com>
+ <20200508192009.15302-5-rcampbell@nvidia.com> <20200508195129.GA19740@lst.de>
+ <1ec0511f-e6eb-3e11-ad6d-ad4e5b107464@nvidia.com>
+MIME-Version: 1.0
+X-Originating-IP: [10.124.1.5]
+X-ClientProxiedBy: HQMAIL101.nvidia.com (172.20.187.10) To
+ HQMAIL107.nvidia.com (172.20.187.13)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
+ t=1590532092; bh=cwtuAIOq+85ZyiwcNHD3iSzFYHUjU2pYVvKab5S4Qb8=;
+ h=X-PGP-Universal:From:To:CC:Subject:Date:X-Mailer:Message-ID:
+ In-Reply-To:References:MIME-Version:X-Originating-IP:
+ X-ClientProxiedBy:Content-Type;
+ b=OJ4yu8141xYfTos05JStvkCXdsYzpSd0C8gJhS4DYokuTujNxJRM/AzYDbvvN2/Fx
+ EJJXr3Ns5xanby9PR2ZxO8jI1rf5Gva/sivcLkLdx32TNggJOswgyx/hDR8ErNr8ip
+ /rjWMzOVsngLZ4eAkJAl0u/brqBX7PpcR5oU5G2vFMR1uqh+IY47scqn3LWtFnL9ng
+ wXGhk9k1xgHsZTzzZ9DB/SrwYmUYX8m5q01lF6IgmjFa+t2sR5kI3kqneBCEG9PYZx
+ wFmtQu2AkihWQfZB/HlrB/gPFg0Bp10HUSMKw9+qHvpRMZjTIXiIspuuSWvRc9j0nI
+ GXPq2w9P3Rs9A==
 X-Mailman-Approved-At: Sat, 13 Jun 2020 20:53:54 +0000
-Subject: [Nouveau] [PATCH] drm/nouveau/dispnv50: fix runtime pm imbalance on
- error
+Subject: Re: [Nouveau] [PATCH 4/6] mm/hmm: add output flag for compound page
+ mapping
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -53,47 +62,112 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>,
- Pankaj Bharadiya <pankaj.laxminarayan.bharadiya@intel.com>,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- Takashi Iwai <tiwai@suse.de>, Sean Paul <seanpaul@chromium.org>,
- Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>,
- nouveau@lists.freedesktop.org, Alex Deucher <alexander.deucher@amd.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: linux-rdma@vger.kernel.org, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, willy@infradead.org, linux-mm@kvack.org, Jason
+ Gunthorpe <jgg@mellanox.com>, Ben Skeggs <bskeggs@redhat.com>,
+ linux-kselftest@vger.kernel.org, Andrew Morton <akpm@linux-foundation.org>,
+ Shuah Khan <shuah@kernel.org>, Christoph Hellwig <hch@lst.de>
+Content-Type: multipart/mixed; boundary="===============1398492703=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-pm_runtime_get_sync() increments the runtime PM usage counter even
-the call returns an error code. Thus a pairing decrement is needed
-on the error handling path to keep the counter balanced.
+--===============1398492703==
+Content-Type: multipart/signed;
+	boundary="=_MailMate_4B5C64C4-2994-4ABE-B17A-646474CC0806_=";
+	micalg=pgp-sha512; protocol="application/pgp-signature"
 
-Signed-off-by: Dinghao Liu <dinghao.liu@zju.edu.cn>
----
- drivers/gpu/drm/nouveau/dispnv50/disp.c | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+--=_MailMate_4B5C64C4-2994-4ABE-B17A-646474CC0806_=
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.c b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-index 6be9df1820c5..e670756664ff 100644
---- a/drivers/gpu/drm/nouveau/dispnv50/disp.c
-+++ b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-@@ -1123,8 +1123,10 @@ nv50_mstc_detect(struct drm_connector *connector,
- 		return connector_status_disconnected;
- 
- 	ret = pm_runtime_get_sync(connector->dev->dev);
--	if (ret < 0 && ret != -EACCES)
-+	if (ret < 0 && ret != -EACCES) {
-+		pm_runtime_put_autosuspend(connector->dev->dev);
- 		return connector_status_disconnected;
-+	}
- 
- 	ret = drm_dp_mst_detect_port(connector, ctx, mstc->port->mgr,
- 				     mstc->port);
--- 
-2.17.1
+On 8 May 2020, at 16:06, Ralph Campbell wrote:
+
+> On 5/8/20 12:51 PM, Christoph Hellwig wrote:
+>> On Fri, May 08, 2020 at 12:20:07PM -0700, Ralph Campbell wrote:
+>>> hmm_range_fault() returns an array of page frame numbers and flags fo=
+r
+>>> how the pages are mapped in the requested process' page tables. The P=
+FN
+>>> can be used to get the struct page with hmm_pfn_to_page() and the pag=
+e size
+>>> order can be determined with compound_order(page) but if the page is =
+larger
+>>> than order 0 (PAGE_SIZE), there is no indication that the page is map=
+ped
+>>> using a larger page size. To be fully general, hmm_range_fault() woul=
+d need
+>>> to return the mapping size to handle cases like a 1GB compound page b=
+eing
+>>> mapped with 2MB PMD entries. However, the most common case is the map=
+ping
+>>> size the same as the underlying compound page size.
+>>> Add a new output flag to indicate this so that callers know it is saf=
+e to
+>>> use a large device page table mapping if one is available.
+>>
+>> Why do you need the flag?  The caller should be able to just use
+>> page_size() (or willys new thp_size helper).
+>>
+>
+> The question is whether or not a large page can be mapped with smaller
+> page table entries with different permissions. If one process has a 2MB=
+
+> page mapped with 4K PTEs with different read/write permissions, I don't=
+ think
+> it would be OK for a device to map the whole 2MB with write access enab=
+led.
+> The flag is supposed to indicate that the whole page can be mapped by t=
+he
+> device with the indicated read/write permissions.
+
+If hmm_range_fault() only walks one VMA at a time, you would not have thi=
+s permission
+issue, right? Since all pages from one VMA should have the same permissio=
+n.
+But it seems that hmm_range_fault() deals with pages across multiple VMAs=
+=2E
+Maybe we should make hmm_range_fault() bail out early when it encounters
+a VMA with a different permission than the existing ones?
+
+
+=E2=80=94
+Best Regards,
+Yan Zi
+
+--=_MailMate_4B5C64C4-2994-4ABE-B17A-646474CC0806_=
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQJDBAEBCgAtFiEEh7yFAW3gwjwQ4C9anbJR82th+ooFAl7NmE8PHHppeUBudmlk
+aWEuY29tAAoJEJ2yUfNrYfqKjycP/3XJhZ/XUzVmTxYQ6iRjWJrpB2rP0Qm21PvT
+aJJd4WglE/dotbUGatNjl86bKqfhWVyQSbwPFnsc94YTkkAazZh8FspW6mV2WdQ+
+1itzDfkls+hAAXuJcWOOnw23UY5+y8Hy/tfsrqr0sP6UNvJ3wuyXDMBmbQVSyvur
+Aa6SAZNJv7LG1YdCJfCI3X92aSziGBd7s3/1Kz2AUagsvP20T4jygQo+6lgepNzy
+hEdUKBstpN1T3sRVom1n4BYJK+kDrRVfiYdCFrhJ9ZTIu3K9snEWrsMRSnx7wSX2
+dxSZwVx+dqOokDM5DhYZWyif1X0/JZzq7v0P4BNuUJkpXZrCutqQP6nvGxsR+QVX
+5GgkLzeUOUqnFJvljtiSkwjUPRblljGFo9WDGEnrVNTDG7uZf56Qz6SdQPwLR9GK
+Vsk8saRYhZ6YHPE8QtuByliBhzzZfIUK7oafU8e/1QEo/0zFdL+QEbfUR61/nHpK
+WkHcnZRxJ5EGmfGGk4dYq+soIl+0g3oMWIDQ2QFMA1RPf3pzOR595P5ldo6KgPSo
+N+euHyai7HSurTxdE4JgN27uM9/d9yq0X3uQGwW/a/Fq3EhiAiUJnfd4s375Wd2y
+qcsaP5rxatQo0EeVnGs2vwXgG3f3vFYVhs4FRRogl5EEQE36Y81uLm+pZmjoKfyf
+eGcZSDTZ
+=zDv+
+-----END PGP SIGNATURE-----
+
+--=_MailMate_4B5C64C4-2994-4ABE-B17A-646474CC0806_=--
+
+--===============1398492703==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/nouveau
+
+--===============1398492703==--
