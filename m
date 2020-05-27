@@ -2,59 +2,45 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id E57951E32DD
-	for <lists+nouveau@lfdr.de>; Wed, 27 May 2020 00:47:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 976101E4412
+	for <lists+nouveau@lfdr.de>; Wed, 27 May 2020 15:43:04 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5189C6E23F;
-	Tue, 26 May 2020 22:47:44 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1CBE0896E5;
+	Wed, 27 May 2020 13:43:03 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from hqnvemgate24.nvidia.com (hqnvemgate24.nvidia.com
- [216.228.121.143])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5F7E76E23F
- for <nouveau@lists.freedesktop.org>; Tue, 26 May 2020 22:47:42 +0000 (UTC)
-Received: from hqpgpgate102.nvidia.com (Not Verified[216.228.121.13]) by
- hqnvemgate24.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
- id <B5ecd9c340000>; Tue, 26 May 2020 15:46:12 -0700
-Received: from hqmail.nvidia.com ([172.20.161.6])
- by hqpgpgate102.nvidia.com (PGP Universal service);
- Tue, 26 May 2020 15:47:41 -0700
-X-PGP-Universal: processed;
- by hqpgpgate102.nvidia.com on Tue, 26 May 2020 15:47:41 -0700
-Received: from rcampbell-dev.nvidia.com (172.20.13.39) by HQMAIL107.nvidia.com
- (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3;
- Tue, 26 May 2020 22:47:40 +0000
-To: Zi Yan <ziy@nvidia.com>
-References: <20200508192009.15302-1-rcampbell@nvidia.com>
- <20200508192009.15302-5-rcampbell@nvidia.com> <20200508195129.GA19740@lst.de>
- <1ec0511f-e6eb-3e11-ad6d-ad4e5b107464@nvidia.com>
- <B0BF5621-FEF9-446C-AAD9-81EFA1416EB1@nvidia.com>
-X-Nvconfidentiality: public
-From: Ralph Campbell <rcampbell@nvidia.com>
-Message-ID: <59a26e8b-0f1a-a1f6-9dc7-ebfecdd58688@nvidia.com>
-Date: Tue, 26 May 2020 15:47:40 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.2.2
+Received: from mout.kundenserver.de (mout.kundenserver.de [212.227.126.130])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8707289688;
+ Wed, 27 May 2020 13:43:01 +0000 (UTC)
+Received: from threadripper.lan ([149.172.98.151]) by mrelayeu.kundenserver.de
+ (mreue011 [212.227.15.129]) with ESMTPA (Nemesis) id
+ 1N3bjH-1ivhXw2f9X-010grN; Wed, 27 May 2020 15:42:55 +0200
+From: Arnd Bergmann <arnd@arndb.de>
+To: Ben Skeggs <bskeggs@redhat.com>, David Airlie <airlied@linux.ie>,
+ Daniel Vetter <daniel@ffwll.ch>
+Date: Wed, 27 May 2020 15:42:23 +0200
+Message-Id: <20200527134254.854672-1-arnd@arndb.de>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
-In-Reply-To: <B0BF5621-FEF9-446C-AAD9-81EFA1416EB1@nvidia.com>
-X-Originating-IP: [172.20.13.39]
-X-ClientProxiedBy: HQMAIL107.nvidia.com (172.20.187.13) To
- HQMAIL107.nvidia.com (172.20.187.13)
-Content-Language: en-US
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
- t=1590533173; bh=+36whnaOYxldGP/1VJJUddYVqVP/b5RjR/9a+iGhq/o=;
- h=X-PGP-Universal:Subject:To:CC:References:X-Nvconfidentiality:From:
- Message-ID:Date:User-Agent:MIME-Version:In-Reply-To:
- X-Originating-IP:X-ClientProxiedBy:Content-Type:Content-Language:
- Content-Transfer-Encoding;
- b=gThcUaXmi1xIuydbeU1Cauoj9YX2H27S3ySJ16Y6ABClxMf/EhE/KT2+OD5wLnTm8
- JZ7kNUBN9oN882P4KPtYejqNC7H/gDtgiFgQsr28tur2Bnn5RT0teXPaLyuFaz50kp
- N1B5nXoL/WKya4YdrmfQqffCy63rRQ5WVyWLyJ/z11Cc0zenur1/6WFNE2HEhHWbCL
- DcS/X0JgcG0rhk95gdYzUn+cm0cZ6rk2kEvhcxwkbUxpfZEvnp8KTS/DZXV0FESqBw
- //AHB+qfmd/hqVeQ9IGyhJrYMkT13+KpBrO/vB/KX3tjYJcBeIq2xhVcyJ79hUKzz9
- STujSFGO6nl5g==
-Subject: Re: [Nouveau] [PATCH 4/6] mm/hmm: add output flag for compound page
- mapping
+X-Provags-ID: V03:K1:UwRS52SKomS1dGxg/Cr8izduWX8ZD4LmV2z+vHIfJD0wpmnsWtB
+ QsS+qAKdfR75PBtRiCiim1nlfytCKTLhu6JCbh4PrnV+FnERUpJOUQRYyQq4RJp3C9DiNIG
+ 0xVNyeytj45f/FlCXkUhpuZF3JKkcmVsifwuOG52sLtCSYd5ofSlkPSaA8yVL02/yhRHvp5
+ BNBjDEjhB8nkcGG87ChpQ==
+X-Spam-Flag: NO
+X-UI-Out-Filterresults: notjunk:1;V03:K0:sZgzWgmPFv0=:z9Y1bGS9xTuXxA3csoNcb1
+ UZYKzg8vEU0M/l7zTe/VPttt95Av/k+Yn3Q41pSeJcoDFb4gSzkWi9fOLhOZjjGHkOngTp2fQ
+ NUt+G+8tVnTxUc7wH5ZxMhEciPR3RYCdNj9JAYH3Lo029bfAxiP5M1XMbPB8hecIiFDE5qh1x
+ qX4A/NCKQ62qjL8GSFCtI4jaeFzxkD4Mt+WgS5TG8RW7qRmdUZq7+apRDedRVIxUr58XA3L0y
+ 8YZEzAR2nRfFGEgEGdVVaYEyjE+mdbPfeVQ0Hdzy/OvS6XXiy/wI9+SVnL6T76Qf6RUmM5wU2
+ Vsycwf9eT9Yud5Qs0UL4MMs0cku4A88vyFFDoh5UG/D7rxBiYRapgml5ng77WQ1QERcmZUx+s
+ KpS7DtQaVaq8ZffeajcOz2xzFgdbiCa2RYEzZs0bKoH6CB1yOjjNWg9DfESeZ8XgsL9razQEx
+ h90Bo5yR/JzCwf4bRtQFKQ1ejV4vw8GMycx1xX9ehMX7W1hqa4HWCSo4P/iLEWMPlGU9EITcD
+ HNIjyH5VHvidwy83N9lxY4PUmvlPYXUXcSy3N1zgzpO/pTZzJ+y6IxMpxCpcwNvjlnF//qEvr
+ 747xwiisizEF+y+hTyBY10KDkxab0p7xor48HZ+5yZHP/sXer85v75hEVgZH3Rom6ykdGDeZ+
+ EdXThkeQRUyiKh2u+IJIIRibInnf1NMjhBuZgTioJXngiNdzomYSmmvaIcXC2PqqO8jKopUfU
+ KZKDByehOUjtvpO6Ev5i0Hg9ZV7G90Au1WN00d+bbW+HZc9Sy9rHhbSlo5hojoyiUe/Rf9N+Q
+ J8N30rKh6plh6ZN/IZ+e+3SdoyfSH1XWuriqB1MdUfNDLSw2VI=
+Subject: [Nouveau] [PATCH] nouveau: add fbdev dependency
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -66,59 +52,61 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: linux-rdma@vger.kernel.org, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, willy@infradead.org, linux-mm@kvack.org, Jason
- Gunthorpe <jgg@mellanox.com>, Ben Skeggs <bskeggs@redhat.com>,
- linux-kselftest@vger.kernel.org, Andrew Morton <akpm@linux-foundation.org>,
- Shuah Khan <shuah@kernel.org>, Christoph Hellwig <hch@lst.de>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ Arnd Bergmann <arnd@arndb.de>, linux-kernel@vger.kernel.org
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Ck9uIDUvMjYvMjAgMzoyOSBQTSwgWmkgWWFuIHdyb3RlOgo+IE9uIDggTWF5IDIwMjAsIGF0IDE2
-OjA2LCBSYWxwaCBDYW1wYmVsbCB3cm90ZToKPiAKPj4gT24gNS84LzIwIDEyOjUxIFBNLCBDaHJp
-c3RvcGggSGVsbHdpZyB3cm90ZToKPj4+IE9uIEZyaSwgTWF5IDA4LCAyMDIwIGF0IDEyOjIwOjA3
-UE0gLTA3MDAsIFJhbHBoIENhbXBiZWxsIHdyb3RlOgo+Pj4+IGhtbV9yYW5nZV9mYXVsdCgpIHJl
-dHVybnMgYW4gYXJyYXkgb2YgcGFnZSBmcmFtZSBudW1iZXJzIGFuZCBmbGFncyBmb3IKPj4+PiBo
-b3cgdGhlIHBhZ2VzIGFyZSBtYXBwZWQgaW4gdGhlIHJlcXVlc3RlZCBwcm9jZXNzJyBwYWdlIHRh
-Ymxlcy4gVGhlIFBGTgo+Pj4+IGNhbiBiZSB1c2VkIHRvIGdldCB0aGUgc3RydWN0IHBhZ2Ugd2l0
-aCBobW1fcGZuX3RvX3BhZ2UoKSBhbmQgdGhlIHBhZ2Ugc2l6ZQo+Pj4+IG9yZGVyIGNhbiBiZSBk
-ZXRlcm1pbmVkIHdpdGggY29tcG91bmRfb3JkZXIocGFnZSkgYnV0IGlmIHRoZSBwYWdlIGlzIGxh
-cmdlcgo+Pj4+IHRoYW4gb3JkZXIgMCAoUEFHRV9TSVpFKSwgdGhlcmUgaXMgbm8gaW5kaWNhdGlv
-biB0aGF0IHRoZSBwYWdlIGlzIG1hcHBlZAo+Pj4+IHVzaW5nIGEgbGFyZ2VyIHBhZ2Ugc2l6ZS4g
-VG8gYmUgZnVsbHkgZ2VuZXJhbCwgaG1tX3JhbmdlX2ZhdWx0KCkgd291bGQgbmVlZAo+Pj4+IHRv
-IHJldHVybiB0aGUgbWFwcGluZyBzaXplIHRvIGhhbmRsZSBjYXNlcyBsaWtlIGEgMUdCIGNvbXBv
-dW5kIHBhZ2UgYmVpbmcKPj4+PiBtYXBwZWQgd2l0aCAyTUIgUE1EIGVudHJpZXMuIEhvd2V2ZXIs
-IHRoZSBtb3N0IGNvbW1vbiBjYXNlIGlzIHRoZSBtYXBwaW5nCj4+Pj4gc2l6ZSB0aGUgc2FtZSBh
-cyB0aGUgdW5kZXJseWluZyBjb21wb3VuZCBwYWdlIHNpemUuCj4+Pj4gQWRkIGEgbmV3IG91dHB1
-dCBmbGFnIHRvIGluZGljYXRlIHRoaXMgc28gdGhhdCBjYWxsZXJzIGtub3cgaXQgaXMgc2FmZSB0
-bwo+Pj4+IHVzZSBhIGxhcmdlIGRldmljZSBwYWdlIHRhYmxlIG1hcHBpbmcgaWYgb25lIGlzIGF2
-YWlsYWJsZS4KPj4+Cj4+PiBXaHkgZG8geW91IG5lZWQgdGhlIGZsYWc/ICBUaGUgY2FsbGVyIHNo
-b3VsZCBiZSBhYmxlIHRvIGp1c3QgdXNlCj4+PiBwYWdlX3NpemUoKSAob3Igd2lsbHlzIG5ldyB0
-aHBfc2l6ZSBoZWxwZXIpLgo+Pj4KPj4KPj4gVGhlIHF1ZXN0aW9uIGlzIHdoZXRoZXIgb3Igbm90
-IGEgbGFyZ2UgcGFnZSBjYW4gYmUgbWFwcGVkIHdpdGggc21hbGxlcgo+PiBwYWdlIHRhYmxlIGVu
-dHJpZXMgd2l0aCBkaWZmZXJlbnQgcGVybWlzc2lvbnMuIElmIG9uZSBwcm9jZXNzIGhhcyBhIDJN
-Qgo+PiBwYWdlIG1hcHBlZCB3aXRoIDRLIFBURXMgd2l0aCBkaWZmZXJlbnQgcmVhZC93cml0ZSBw
-ZXJtaXNzaW9ucywgSSBkb24ndCB0aGluawo+PiBpdCB3b3VsZCBiZSBPSyBmb3IgYSBkZXZpY2Ug
-dG8gbWFwIHRoZSB3aG9sZSAyTUIgd2l0aCB3cml0ZSBhY2Nlc3MgZW5hYmxlZC4KPj4gVGhlIGZs
-YWcgaXMgc3VwcG9zZWQgdG8gaW5kaWNhdGUgdGhhdCB0aGUgd2hvbGUgcGFnZSBjYW4gYmUgbWFw
-cGVkIGJ5IHRoZQo+PiBkZXZpY2Ugd2l0aCB0aGUgaW5kaWNhdGVkIHJlYWQvd3JpdGUgcGVybWlz
-c2lvbnMuCj4gCj4gSWYgaG1tX3JhbmdlX2ZhdWx0KCkgb25seSB3YWxrcyBvbmUgVk1BIGF0IGEg
-dGltZSwgeW91IHdvdWxkIG5vdCBoYXZlIHRoaXMgcGVybWlzc2lvbgo+IGlzc3VlLCByaWdodD8g
-U2luY2UgYWxsIHBhZ2VzIGZyb20gb25lIFZNQSBzaG91bGQgaGF2ZSB0aGUgc2FtZSBwZXJtaXNz
-aW9uLgo+IEJ1dCBpdCBzZWVtcyB0aGF0IGhtbV9yYW5nZV9mYXVsdCgpIGRlYWxzIHdpdGggcGFn
-ZXMgYWNyb3NzIG11bHRpcGxlIFZNQXMuCj4gTWF5YmUgd2Ugc2hvdWxkIG1ha2UgaG1tX3Jhbmdl
-X2ZhdWx0KCkgYmFpbCBvdXQgZWFybHkgd2hlbiBpdCBlbmNvdW50ZXJzCj4gYSBWTUEgd2l0aCBh
-IGRpZmZlcmVudCBwZXJtaXNzaW9uIHRoYW4gdGhlIGV4aXN0aW5nIG9uZXM/Cj4gCj4gCj4g4oCU
-Cj4gQmVzdCBSZWdhcmRzLAo+IFlhbiBaaQoKSSBkb24ndCB0aGluayBzby4gVGhlIFZNQSBtaWdo
-dCBoYXZlIHJlYWQvd3JpdGUgcGVybWlzc2lvbiBidXQgdGhlIHBhZ2UgdGFibGUgbWlnaHQKaGF2
-ZSByZWFkLW9ubHkgcGVybWlzc2lvbiBpbiBvcmRlciB0byB0cmlnZ2VyIGEgZmF1bHQgZm9yIGNv
-cHktb24td3JpdGUuIE9yIHRoZQpQVEUgbWlnaHQgYmUgcmVhZC1vbmx5IG9yIGludmFsaWQgdG8g
-dHJpZ2dlciBmYXVsdHMgZm9yIGFyY2hpdGVjdHVyZXMgdGhhdCBkb24ndApoYXZlIGhhcmR3YXJl
-IHVwZGF0ZWQgYWNjZXNzZWQgYml0cyBhbmQgYXJlIHVzaW5nIHRoZSBtaW5vciBmYXVsdHMgdG8g
-dXBkYXRlIExSVS4KVGhlIGdvYWwgaXMgdGhhdCB0aGUgTU0gY29yZSBzZWUgdGhlIHNhbWUgZmF1
-bHRzIHdoZXRoZXIgdGhlIEhNTSBkZXZpY2UgYWNjZXNzZXMKbWVtb3J5IG9yIGEgQ1BVIHRocmVh
-ZC4KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVh
-dSBtYWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0
-cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1Cg==
+Calling directly into the fbdev stack only works when the
+fbdev layer is built into the kernel as well, or both are
+loadable modules:
+
+drivers/gpu/drm/nouveau/nouveau_drm.o: in function `nouveau_drm_probe':
+nouveau_drm.c:(.text+0x1f90): undefined reference to `remove_conflicting_pci_framebuffers'
+
+The change seems to have been intentional, so add an explicit
+dependency here but allow it to still be compiled if FBDEV
+is completely disabled.
+
+Fixes: 2dd4d163cd9c ("drm/nouveau: remove open-coded version of remove_conflicting_pci_framebuffers()")
+Signed-off-by: Arnd Bergmann <arnd@arndb.de>
+---
+ drivers/gpu/drm/nouveau/Kconfig       | 1 +
+ drivers/gpu/drm/nouveau/nouveau_drm.c | 3 ++-
+ 2 files changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/gpu/drm/nouveau/Kconfig b/drivers/gpu/drm/nouveau/Kconfig
+index 980ed09bd7f6..8c640f003358 100644
+--- a/drivers/gpu/drm/nouveau/Kconfig
++++ b/drivers/gpu/drm/nouveau/Kconfig
+@@ -18,6 +18,7 @@ config DRM_NOUVEAU
+ 	select THERMAL if ACPI && X86
+ 	select ACPI_VIDEO if ACPI && X86
+ 	select SND_HDA_COMPONENT if SND_HDA_CORE
++	depends on FBDEV || !FBDEV
+ 	help
+ 	  Choose this option for open-source NVIDIA support.
+ 
+diff --git a/drivers/gpu/drm/nouveau/nouveau_drm.c b/drivers/gpu/drm/nouveau/nouveau_drm.c
+index eb10c80ed853..e8560444ab57 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_drm.c
++++ b/drivers/gpu/drm/nouveau/nouveau_drm.c
+@@ -697,7 +697,8 @@ static int nouveau_drm_probe(struct pci_dev *pdev,
+ 	nvkm_device_del(&device);
+ 
+ 	/* Remove conflicting drivers (vesafb, efifb etc). */
+-	ret = remove_conflicting_pci_framebuffers(pdev, "nouveaufb");
++	if (IS_ENABLED(CONFIG_FBDEV))
++		ret = remove_conflicting_pci_framebuffers(pdev, "nouveaufb");
+ 	if (ret)
+ 		return ret;
+ 
+-- 
+2.26.2
+
+_______________________________________________
+Nouveau mailing list
+Nouveau@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/nouveau
