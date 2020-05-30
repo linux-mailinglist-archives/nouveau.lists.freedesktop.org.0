@@ -1,69 +1,65 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 49EAF1E8BE0
-	for <lists+nouveau@lfdr.de>; Sat, 30 May 2020 01:24:56 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 05EFB1E92E9
+	for <lists+nouveau@lfdr.de>; Sat, 30 May 2020 19:32:40 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0944A6E987;
-	Fri, 29 May 2020 23:24:54 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 29C956E091;
+	Sat, 30 May 2020 17:32:37 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-qk1-x744.google.com (mail-qk1-x744.google.com
- [IPv6:2607:f8b0:4864:20::744])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1C0E96E987
- for <nouveau@lists.freedesktop.org>; Fri, 29 May 2020 23:24:52 +0000 (UTC)
-Received: by mail-qk1-x744.google.com with SMTP id b27so3868186qka.4
- for <nouveau@lists.freedesktop.org>; Fri, 29 May 2020 16:24:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ziepe.ca; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to:user-agent;
- bh=NGBn/AuzNZpYdh5SlPF2DkI93ztTCm2iyZ9aPkUohiY=;
- b=IKwS+7d7WuYKZu+Q4GbtHw2D0LkjSL5A7lbo392iOd2v43Z52P0dFEEYFCiMEnQ/56
- qHXRFTF3iYnEeR12Gy6AN1N5Ko5uNF6SGa8LgjOUNf8ofjtnodQ2Wa/NwtsqJSS9TAys
- Gg2F/FQkn7AKIU6PXRK/IbsFEIAuxiMa6Q3VFGdqW0PKTMO71Ulqc96eqRatHrZT+job
- CmB7I7tKfzmPXdiHFwtNNVdIZthAMoYLj8buxmbD42FxW/NSzvPxiyagJjl2OyvsdhpD
- S5MOG5N3YQf1bbr8iJo0die/KuV0BMoW3Ysy/3VNSMrpD8wNAee0a8qz06MN/4Fpt6fO
- lZZg==
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
+ [205.139.110.61])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A484E6E091
+ for <nouveau@lists.freedesktop.org>; Sat, 30 May 2020 17:32:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1590859954;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=1fUDRXVXbMWbtFQ+fM9X972f32lpNONh63/dks+4SvE=;
+ b=V/FrxvCdZMDIrACFAGI9CFGzq2CeDu5DmHKkE+vAaMHfFol+LQfXHk7aDaD64xLhmNRaeN
+ jciqsrlT3l6q938G3Rc8fC1gMrEvJCFtA7rHiRzpHd2zL5sXbadTsKchXngnixKeqXnWwZ
+ sSxjruzsIZZU/zBzuO8ZoAvxsWAD5Uo=
+Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com
+ [209.85.160.197]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-218-tW13Y-vNMQ6A7tjYuUeIfw-1; Sat, 30 May 2020 13:32:28 -0400
+X-MC-Unique: tW13Y-vNMQ6A7tjYuUeIfw-1
+Received: by mail-qt1-f197.google.com with SMTP id 19so5956040qtp.8
+ for <nouveau@lists.freedesktop.org>; Sat, 30 May 2020 10:32:28 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to:user-agent;
- bh=NGBn/AuzNZpYdh5SlPF2DkI93ztTCm2iyZ9aPkUohiY=;
- b=AR3Dcuj+/AgY82XblRTPYm2o8ZB/l64/LqzVe3lHsjayfNSOal0j/ma9SPjiNMRocX
- xR2UgxDqyf17Luo/vhVEqsj97NJMaHRQF5lRbftazy3iWqPfYPwv57hczhffD6YzbCFv
- 88sR5mwpChbG9SK7GNrd8McX2lSw4aS6EbvnSwdZJ4rjCCC4w+xzX9qTasfj3AjhdMDn
- GVITgoAjDkYcw7V8fuactx8ID9gGzC8Bd9Fwvx4BtTqApDx/RxR7GMzDLvOkFVnN4/M0
- //fYjnWB+cjxSqfxVmnGkcj3hxSC/6wGV2ymJPu94Y/+5zFTKfSL+I6Me/0mKcZqFAIF
- NV4g==
-X-Gm-Message-State: AOAM531a4NUgi2KbOVUrDjkDsd/ny97SO6csJrFoi4CL/Y8JN7MkE2vB
- 15TP1OyeS3Y6MDs9ktkkzXv3ctsxcdA=
-X-Google-Smtp-Source: ABdhPJzKrllspgHFufnfAlSPKJ28Ce9a8Ik5xQzMRPQlXECpMQP4AXzw/tDE7D+9+tIgrQIxQDZLBQ==
-X-Received: by 2002:a05:620a:102c:: with SMTP id
- a12mr10189193qkk.214.1590794691029; 
- Fri, 29 May 2020 16:24:51 -0700 (PDT)
-Received: from ziepe.ca
- (hlfxns017vw-156-34-48-30.dhcp-dynamic.fibreop.ns.bellaliant.net.
- [156.34.48.30])
- by smtp.gmail.com with ESMTPSA id h19sm3668912qkl.49.2020.05.29.16.24.50
- (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
- Fri, 29 May 2020 16:24:50 -0700 (PDT)
-Received: from jgg by mlx.ziepe.ca with local (Exim 4.90_1)
- (envelope-from <jgg@ziepe.ca>)
- id 1jeoMr-0000gH-PQ; Fri, 29 May 2020 20:24:49 -0300
-Date: Fri, 29 May 2020 20:24:49 -0300
-From: Jason Gunthorpe <jgg@ziepe.ca>
-To: Ralph Campbell <rcampbell@nvidia.com>
-Message-ID: <20200529232449.GC21651@ziepe.ca>
-References: <20200508192009.15302-1-rcampbell@nvidia.com>
- <20200525134118.GA2536@ziepe.ca>
- <4743ec6e-a5a0-16ac-a1b8-992f851515f0@nvidia.com>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=1fUDRXVXbMWbtFQ+fM9X972f32lpNONh63/dks+4SvE=;
+ b=TKDrTGljIRWoo7YM5DGDlUksj9A0y8wU6+ucC2eJ4rsZmL1g/pnLtIO5+zCfGAcW0A
+ 4XwzAhIHl36HggbdcGAWGul7LTEr7wFXkGMDDkHCQPVyR9CdBFJEPzNJkjESgALKnTVv
+ kAf/LCMQKysnx3eUhXx57X7efRLsIOMENCXSJPW/Y6Y7YjPMMrQ9atQ/P47XOxMbDnng
+ ceF5lfnXOpIKzds2T++Fc6VAgDjNPLpRFOnWvLn/RcBpsO8mJ+z/DFxB76uqKJ/oy4up
+ rtX7OrS1ddbEppLHWECkuOQkBkhxwfrUPLJwucBMJ7sEE1ZPWsBS+CJVHuy7ANHXN8DE
+ M1Bw==
+X-Gm-Message-State: AOAM532K9xOSsWPjP9CWgfNB4mKX+hhpKQvrU0VMPRXvXSkzXfb0uBS3
+ OVB8EzW1OQwhMMquz7fgz02r0fDoX14Wg21LYukEAKlrjAYFo+J6dCcOOZwAGSkZStnK+OAnvYr
+ I9I9rbe6XUhHJNa36HUnUMSTmNcOxttRESVwLiEPi6A==
+X-Received: by 2002:a37:a147:: with SMTP id k68mr13080088qke.62.1590859947799; 
+ Sat, 30 May 2020 10:32:27 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJxrX50jzX6LdOVf7QKbCuZfjigYZSNDBuY8NIeHFPNdmgcXbjyHLQbc2Jh1wOqsUOdwm247ZIXCuPL5R/IMN7Q=
+X-Received: by 2002:a37:a147:: with SMTP id k68mr13080064qke.62.1590859947439; 
+ Sat, 30 May 2020 10:32:27 -0700 (PDT)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <4743ec6e-a5a0-16ac-a1b8-992f851515f0@nvidia.com>
-User-Agent: Mutt/1.9.4 (2018-02-28)
-Subject: Re: [Nouveau] [PATCH 0/6] nouveau/hmm: add support for mapping
- large pages
+References: <20200529180315.GA18804@merlins.org>
+ <CAKb7Uvhw2EYo1RR-=NGgLO3CU9QTRWchcAw1injffybZbJ-zOA@mail.gmail.com>
+ <20200529194605.GB18804@merlins.org>
+In-Reply-To: <20200529194605.GB18804@merlins.org>
+From: Karol Herbst <kherbst@redhat.com>
+Date: Sat, 30 May 2020 19:32:16 +0200
+Message-ID: <CACO55tsvY0t_z986VVoYCvxuBASdZ+rQcDtZ_dAtQR60NLmQQw@mail.gmail.com>
+To: Marc MERLIN <marc_nouveau@merlins.org>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Subject: Re: [Nouveau] 5.5 kernel: using nouveau or something else just long
+ enough to turn off Quadro RTX 4000 Mobile for hybrid graphics?
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -75,60 +71,68 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: linux-rdma@vger.kernel.org, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, linux-mm@kvack.org,
- Ben Skeggs <bskeggs@redhat.com>, linux-kselftest@vger.kernel.org,
- Shuah Khan <shuah@linuxfoundation.org>,
- Andrew Morton <akpm@linux-foundation.org>, Christoph Hellwig <hch@lst.de>
+Cc: nouveau <nouveau@lists.freedesktop.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, May 26, 2020 at 10:32:48AM -0700, Ralph Campbell wrote:
-> 
-> On 5/25/20 6:41 AM, Jason Gunthorpe wrote:
-> > On Fri, May 08, 2020 at 12:20:03PM -0700, Ralph Campbell wrote:
-> > > hmm_range_fault() returns an array of page frame numbers and flags for
-> > > how the pages are mapped in the requested process' page tables. The PFN
-> > > can be used to get the struct page with hmm_pfn_to_page() and the page size
-> > > order can be determined with compound_order(page) but if the page is larger
-> > > than order 0 (PAGE_SIZE), there is no indication that the page is mapped
-> > > using a larger page size. To be fully general, hmm_range_fault() would need
-> > > to return the mapping size to handle cases like a 1GB compound page being
-> > > mapped with 2MB PMD entries. However, the most common case is the mapping
-> > > size the same as the underlying compound page size.
-> > > This series adds a new output flag to indicate this so that callers know it
-> > > is safe to use a large device page table mapping if one is available.
-> > > Nouveau and the HMM tests are updated to use the new flag.
-> > > 
-> > > Note that this series depends on a patch queued in Ben Skeggs' nouveau
-> > > tree ("nouveau/hmm: map pages after migration") and the patches queued
-> > > in Jason's HMM tree.
-> > > There is also a patch outstanding ("nouveau/hmm: fix nouveau_dmem_chunk
-> > > allocations") that is independent of the above and could be applied
-> > > before or after.
-> > 
-> > Did Christoph and Matt's remarks get addressed here?
-> 
-> Both questioned the need to add the HMM_PFN_COMPOUND flag to the
-> hmm_range_fault() output array saying that the PFN can be used to get the
-> struct page pointer and the page can be examined to determine the page size.
-> My response is that while is true, it is also important that the device only
-> access the same parts of a large page that the process/cpu has access to.
-> There are places where a large page is mapped with smaller page table entries
-> when a page is shared by multiple processes.
-> After I explained this, I haven't seen any further comments from Christoph
-> and Matt. I'm still looking for reviews, acks, or suggested changes.
+On Fri, May 29, 2020 at 9:48 PM Marc MERLIN <marc_nouveau@merlins.org> wrote:
+>
+> On Fri, May 29, 2020 at 02:53:51PM -0400, Ilia Mirkin wrote:
+> > > moving to new window moves the mouse, but not windows get displayed.
+> >
+> > Do you see anything in dmesg after this is set up? I'd expect some
+> > errors about timeouts or something else.
+>
+> Nothing other than what I pasted.
+>
+> > Which kernel are you using? There have been some turing-specific fixes recently.
+>
+> 5.5.11. I can put 5.6 if needed.
+>
 
-Okay, well, we reached the merge window, so since there may be some
-conflicts repost again in three weeks.
+please do. 5.5 is EOL and 5.4 and 5.6 got the runpm fixes in recent releases.
 
-It would be more compelling if there was some performance data if it
-is much of a win vs the 'compute large page' algorithm something like
-ODP uses.
+> > Also note that TLP has a problem where it forces the audio
+> > sub-function to always-on which prevents the GPU from suspending.
+>
+> Ah, thanks for that.
+> I have
+> #RUNTIME_PM_DRIVER_BLACKLIST="amdgpu mei_me nouveau nvidia pcieport radeon"
+>
+> sauron:~$ lspci |grep -i nvidia
+> 01:00.0 VGA compatible controller: NVIDIA Corporation TU104GLM [Quadro RTX 4000 Mobile / Max-Q] (rev a1)
+> 01:00.1 Audio device: NVIDIA Corporation TU104 HD Audio Controller (rev a1)
+> 01:00.2 USB controller: NVIDIA Corporation TU104 USB 3.1 Host Controller (rev a1)
+> 01:00.3 Serial bus controller [0c80]: NVIDIA Corporation TU104 USB Type-C UCSI Controller (rev a1)
+>
+> So you're saying that I need to blacklist 01:00.1 and without that it hangs
+> when suspending the powered off nvidia chip, which is what I'm experiencing
+> as a hang when I unplug power?
+>
 
-Jason
+no. It forces the audio device to be always on when on AC. there are
+some sound power settings.
+
+SOUND_POWER_SAVE_CONTROLLER=Y
+SOUND_POWER_SAVE_ON_AC=1
+SOUND_POWER_SAVE_ON_BAT=1
+
+need to be set.
+
+> Thanks,
+> Marc
+> --
+> "A mouse is a device used to point at the xterm you want to type in" - A.S.R.
+>
+> Home page: http://marc.merlins.org/
+> _______________________________________________
+> Nouveau mailing list
+> Nouveau@lists.freedesktop.org
+> https://lists.freedesktop.org/mailman/listinfo/nouveau
+>
+
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
