@@ -1,30 +1,30 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8592F1E9637
-	for <lists+nouveau@lfdr.de>; Sun, 31 May 2020 10:08:58 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1B0EE1E965D
+	for <lists+nouveau@lfdr.de>; Sun, 31 May 2020 10:38:27 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A0FAA89EA9;
-	Sun, 31 May 2020 08:08:56 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 419C66E095;
+	Sun, 31 May 2020 08:38:25 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 315 seconds by postgrey-1.36 at gabe;
- Sun, 31 May 2020 08:08:54 UTC
 Received: from mout.web.de (mout.web.de [217.72.192.78])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 01FEE89EA9
- for <nouveau@lists.freedesktop.org>; Sun, 31 May 2020 08:08:54 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2C7086E095;
+ Sun, 31 May 2020 08:38:22 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=web.de;
- s=dbaedf251592; t=1590912533;
- bh=q/tORPlp0EWYnt9tH2UDu/psahHRfi5vrlOUO7gRk6A=;
- h=X-UI-Sender-Class:To:Cc:Subject:From:Date;
- b=o8ILRHuEn1QtfUtbg0jvtwotasUDeMilMkjWT4W+NbAMDT4A8S1v3+cKYVIVmnBq9
- Ew1jriuGOFql4xCZbHqig6bs8ViYOntg3Ud7/bt1NcEJ1+LA18JN6RpLJ179oOyjwQ
- /bu+yGzw23aaqM1o8KEifFcLETRImALkhjVwc6g4=
+ s=dbaedf251592; t=1590914285;
+ bh=qcluvF288V7xnocU4TEm/CGh6CM8v94eGnBDCTNmS30=;
+ h=X-UI-Sender-Class:Subject:Cc:References:To:From:Date:In-Reply-To;
+ b=MM4UEzDmv1DUpgN4HkOL3CqwDEK3KekI0UOCgfc4U9m+BbosKoT3sjEwVjPcfUeCm
+ 6Xe7gmUZbOInY0WctGkk57WRfoxc0yFhyZbRTPeK1U5CdiqkYpotIkHSGGDRpID7cD
+ /xKSt0qql62kz9vxCPs7rjX1Sg31B2BOVrSnLZ34=
 X-UI-Sender-Class: c548c8c5-30a9-4db5-a2e7-cb6cb037b8f9
-Received: from [192.168.1.2] ([93.131.19.10]) by smtp.web.de (mrweb102
- [213.165.67.124]) with ESMTPSA (Nemesis) id 0MEEeC-1jltac1Wum-00FUaX; Sun, 31
- May 2020 10:03:22 +0200
+Received: from [192.168.1.2] ([93.131.19.10]) by smtp.web.de (mrweb101
+ [213.165.67.124]) with ESMTPSA (Nemesis) id 0MQedF-1jZQIa14UX-00U2i2; Sun, 31
+ May 2020 10:38:05 +0200
+References: <dd729c13-fbc8-22e7-7d8e-e3e126f66943@web.de>
+ <40d8fb01.db721.17269d3d620.Coremail.dinghao.liu@zju.edu.cn>
 To: Dinghao Liu <dinghao.liu@zju.edu.cn>, dri-devel@lists.freedesktop.org,
  nouveau@lists.freedesktop.org
 From: Markus Elfring <Markus.Elfring@web.de>
@@ -71,37 +71,38 @@ Autocrypt: addr=Markus.Elfring@web.de; prefer-encrypt=mutual; keydata=
  Z/wsLiWTgKlih2QYULvW61XU+mWsK8+ZlYUrRMpkauN4CJ5yTpvp+Orcz5KixHQmc5tbkLWf
  x0n1QFc1xxJhbzN+r9djSGGN/5IBDfUqSANC8cWzHpWaHmSuU3JSAMB/N+yQjIad2ztTckZY
  pwT6oxng29LzZspTYUEzMz3wK2jQHw+U66qBFk8whA7B2uAU1QdGyPgahLYSOa4XAEGb6wbI FEE=
-Message-ID: <dd729c13-fbc8-22e7-7d8e-e3e126f66943@web.de>
-Date: Sun, 31 May 2020 10:03:19 +0200
+Message-ID: <74977dc6-7ace-6ef7-4fcd-3f6c89a3eb5f@web.de>
+Date: Sun, 31 May 2020 10:38:03 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.8.1
 MIME-Version: 1.0
+In-Reply-To: <40d8fb01.db721.17269d3d620.Coremail.dinghao.liu@zju.edu.cn>
 Content-Language: en-GB
-X-Provags-ID: V03:K1:MNpT3jpEJ7iDEs22X5lh4tM5OD6V+jbje/KJ0Az3/6eS/4fsxvM
- IRHXN0vVlVmychsnkc3b7CWsN1UEopW8QPW+Ko2KCdTz/if7eLBLiu08FiSKuHVpZquCI0e
- 3e6ZNQTnzxt9CUdA46i1b7AOXhON6TLVskEmk12jWS+fnRoddyHWfAAmg9/I6nIXm2/QYqc
- YMhizRSW6Hn973BPyk8JA==
+X-Provags-ID: V03:K1:y1LJYPs1Iq18L+/DAFeD2LDUvWpuxmckDphyA08FWMyUA+fuBN9
+ K5qx6q+Olg7M0ajYWgZMW5z2kJ+Cuo5G6ugqlorglO7y9ivn8A/0/npYd4Hn8rgZp1/cVXK
+ OfQZsRYZz9FsiV6zPCRFEdbqaMe/S+jRgt7iiQYuvx+4puln7sSZie6KghoFicBxiRUOj7h
+ cvpbKyhLklnhABV1Zwv9A==
 X-Spam-Flag: NO
-X-UI-Out-Filterresults: notjunk:1;V03:K0:fltNbU3GYqY=:rgK/mJNgJAUm73/35Tw0Mv
- L6qn6Ew1mqNniZglY2NNEQBuu55FGRBGw20YThkZYJISYa/RHrxmxLvXR01nIQwCpE7LbTYUE
- Uoq7dSncXzWCB1PNFgGnNUPpzzSFrJ6jJSAA5SSQ8m4NbA75S4NbrTnh/x/erEVO09AXZ+0qF
- JXS2r1o34PfmCiyAgWiSD/xoutHhzY900TwH7hBGNf/K7vE/96DkeQ37/T6WgwlsvHOkoi1P4
- K4OUBdaSNwXzu7PCUcBeGsnHDc5ln20R6NIdTq2OiRRl1tAxEPBn26Ls/TKqjpnZf3J/zhQSk
- uCWEg2u1eXKqHiwzeeuQoFYZapyn4ZIHHaLbjQVtHz1dO/iJp5SKVrXiEbXyRZYLGR2zwRRwC
- 7Urj4trzlOxYJwhH2xkdP5qe7Y1m4+BOvTAmQ6u7ADMZOQHGjE7Gvc6eGH4dQwpkj0iam5hjs
- nznjwl1zJRlDetYKkD4+5RZNpws7wfQTgO88xfMalZ8lPrn8tlY3466OW0Dy/pItYi/G5rJhS
- l0GyuEb7C4UIsTrUQpGZZDXD1iI0q+xoz69iWbLPWbkpxaqAF+nsszTUFoCdTWDCGyoIqInH0
- eHUA6N0wp70ZqFyW5UEXKXpSsF3alPHgUVUL4eH0EmSu8M/omKYFd52zEr0UarJ4LpGwzXdbn
- 26GFaGjRiN9k1NpXMcmBQHLEjgZvQVsg8NN1R0r0X1jURvbKpkU7Ti4Wgj6CDIsk0MHUqDhvS
- 9/2AKwWmy03DUJobrKaz9o1eB1LjfRczNq/vq1+PI2gGUCsHFJPTDBblVPsxQwsC3s7EV4YPY
- NGd3lD52Xna67xLunQsNB4c0IutZqg+zJ/8SZTfLEeOsJbNlc6VMbtBnqJNZk+T1+HDr3EOdE
- YIalesXFUPsliIua5iFsUeU4fVflC1V9VIthE3vIIus+D4p6lZx++JvbyWkycz8tYWpGhuogK
- R+7pqzXomgmjk9qAKML7KesE1/nyBU6U5CGxQkrh4FSu1BRl/pZVeHNNAYtK+zyQscxc3guEY
- 7SLPSeHP+KwJSk+yaAqyrN3wR8jFjtkk0wYDwUF4CcwZn0L04ldhe1c50pJy6CfxUEbnYMnaJ
- sev8Sjh9+YV7p4Paw+SVXlyUfaga+sRenPXk1xpSCirHxOJINIOMiBoblYxamx5tpu4gX4oQ1
- jO9QHwfs73dLNQCtT7OBaGZsnR7rd5HdsHqDz3yhuaEdmxPy960hlifR3nQ0KbTeDL/jq9aYm
- yj+ODpZnAg4g1eb/F
-Subject: Re: [Nouveau] [PATCH] drm/nouveau/clk/gm20b: Fix memory leak in
+X-UI-Out-Filterresults: notjunk:1;V03:K0:LNBjC4PMbDs=:zUez5xyZYSjv/YGQOBDmCg
+ mIq/MNdx+X19JCc4kZvcoEdy2DGLFDd4HXBJiAIMS5tvhTCUCe6j3C9mLMZJ4moPPdmUnWRLe
+ m0jjRcE3DSWIGhE/gt5Oi4BQf55QVU0UYH1d22R5OZNN9tSZQebYe1r86G9DLbnN8n/rWev1w
+ 9ucfnYUsGkeDX/++7mplW0K8LVulTqJmEhReWvwMG+YhIVkPupkEZmB+hk2M7uNU9wZ4zGEy7
+ TZ8mDbHco5JERAPsGA2U7bkkmcmx1a25bSk5MMmvaEfUXgxZkTildRaS/H5n8LmPll5GyCOLL
+ 0X9j8BbgcTDvzJ+HqTZ5T3MOQYLHWpMi5wEzNi02vavWy0ODFNVUdtw4ylccLiSXvbL7wtG/Y
+ y68VZStMDNntaEvMdF/VvZgv5mBliW6qaoN/lvp4cVV2vJel/MlHT+vlricD4a1g55QIS8yX6
+ Ry8FBPZJHZ9FsnvQYUtJwdVeNPbAKn8H9Vb9leGLneUA6Rj9VmgeGlQfHb1FHRzZFER+L41y0
+ 6LVDyUfyEVmlYD5TQP4W+1s+sUMr91lgLRcwVHX4wofKPr8/ssTTb3WVwL0CLUf6CRjblDtzW
+ puOLouLIln9nJkvWDihpsCBUX8K0QgsN86o+jeoLdylLEczMqr7gSubtrK3TOdWUpPjsqfgC0
+ 4Y+gBpSfzQ4AeuWmKBCaNgK7RYFOfuxlJWcwz0ywDhrLhtGyPnZEVxueRqRhwh0gPq5bIu0lt
+ z25aWqlMHfKgc1/GvcAGYfUdn6ZK8YMPY14HIeZ5U8R9SNm7TxcUntM+idcHlH8AGDTgcq5EF
+ Jko3fV3mxKdjIkATgQQVOz1FU9Iqymj2IeBg+zj2metYHCXgiy3g5okutYJJe449hM3SxJVmd
+ ezIy1MQePb9oGqFgLmEpiO7Bv2p7WbYSwTbGAxtOugTCJ1zm474xrw3xydvMw8B9IugR/ddSO
+ ii3F0AjaPCADmqJWJm0y/RXfuQDF72PLImd988hy18mlAisscP7Q1FyNxDWhysYXKMWce9C0b
+ ZMr0hASueX9vn/R2uV5+vzCNPPdu68rqw7fIy67NVcPB4+EB7cqBh0/f4m7qcL9I6d8e06+BU
+ TM7xMMO/5ddqm/m6uBXyIdYONNEq6R9EI6IriOOtFsfuaXaTskmhih/0IIp0He2lTBu+4HAwB
+ CFfxKVYjxUSk6NrYEmm2bkOlS0mFENQcSZxc3PVheySViiADJg8iYNbQy45bo/5tz1Zqa6hH1
+ X15vPxMJke/IekFMR
+Subject: Re: [Nouveau] drm/nouveau/clk/gm20b: Fix memory leak in
  gm20b_clk_new()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -117,20 +118,24 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Cc: David Airlie <airlied@linux.ie>, Kangjie Lu <kjlu@umn.edu>,
  kernel-janitors@vger.kernel.org, linux-kernel@vger.kernel.org,
  Ben Skeggs <bskeggs@redhat.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-PiBXaGVuIGdrMjBhX2Nsa19jdG9yKCkgcmV0dXJucyBhbiBlcnJvciBjb2RlLCBwb2ludGVyICJj
-bGsiCj4gc2hvdWxkIGJlIHJlbGVhc2VkLgoKU3VjaCBhbiBpbmZvcm1hdGlvbiBpcyByZWFzb25h
-YmxlLgoKCj4gSXQncyB0aGUgc2FtZSB3aGVuIGdtMjBiX2Nsa19uZXcoKSByZXR1cm5zIGZyb20g
-ZWxzZXdoZXJlIGZvbGxvd2luZyB0aGlzIGNhbGwuCgpJIHN1Z2dlc3QgdG8gcmVjb25zaWRlciB0
-aGUgaW50ZXJwcmV0YXRpb24gb2YgdGhlIHNvZnR3YXJlIHNpdHVhdGlvbiBvbmNlIG1vcmUuCkNh
-biBpdCBiZSB0aGF0IHRoZSBhbGxvY2F0ZWQgY2xvY2sgb2JqZWN0IHNob3VsZCBiZSBrZXB0IHVz
-YWJsZSBldmVuIGFmdGVyCmEgc3VjY2Vzc2Z1bCByZXR1cm4gZnJvbSB0aGlzIGZ1bmN0aW9uPwoK
-CldvdWxkIHlvdSBsaWtlIHRvIGFkZCB0aGUgdGFnIOKAnEZpeGVz4oCdIHRvIHRoZSBjb21taXQg
-bWVzc2FnZT8KClJlZ2FyZHMsCk1hcmt1cwpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fXwpOb3V2ZWF1IG1haWxpbmcgbGlzdApOb3V2ZWF1QGxpc3RzLmZyZWVk
-ZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZv
-L25vdXZlYXUK
+> It's possible that we expect an usable clk pointer, though I could not find
+> the exact usage yet.
+
+I am curious if another developer would like to add helpful background information.
+
+
+> For security, I will release this pointer only on error paths in this function.
+
+Do you tend to release objects (which are referenced by pointers)?
+
+Regards,
+Markus
+_______________________________________________
+Nouveau mailing list
+Nouveau@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/nouveau
