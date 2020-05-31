@@ -2,29 +2,33 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1B0EE1E965D
-	for <lists+nouveau@lfdr.de>; Sun, 31 May 2020 10:38:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E93651E9674
+	for <lists+nouveau@lfdr.de>; Sun, 31 May 2020 11:05:54 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 419C66E095;
-	Sun, 31 May 2020 08:38:25 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B74476E0BC;
+	Sun, 31 May 2020 09:05:51 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mout.web.de (mout.web.de [217.72.192.78])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 2C7086E095;
- Sun, 31 May 2020 08:38:22 +0000 (UTC)
+X-Greylist: delayed 314 seconds by postgrey-1.36 at gabe;
+ Sun, 31 May 2020 09:05:50 UTC
+Received: from mout.web.de (mout.web.de [212.227.17.11])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9A6006E0BC
+ for <nouveau@lists.freedesktop.org>; Sun, 31 May 2020 09:05:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=web.de;
- s=dbaedf251592; t=1590914285;
- bh=qcluvF288V7xnocU4TEm/CGh6CM8v94eGnBDCTNmS30=;
+ s=dbaedf251592; t=1590915948;
+ bh=fhkDwnu7+vDhSS/yeEIy2SkfDALNJ8pN4WSpeV4qi9E=;
  h=X-UI-Sender-Class:Subject:Cc:References:To:From:Date:In-Reply-To;
- b=MM4UEzDmv1DUpgN4HkOL3CqwDEK3KekI0UOCgfc4U9m+BbosKoT3sjEwVjPcfUeCm
- 6Xe7gmUZbOInY0WctGkk57WRfoxc0yFhyZbRTPeK1U5CdiqkYpotIkHSGGDRpID7cD
- /xKSt0qql62kz9vxCPs7rjX1Sg31B2BOVrSnLZ34=
+ b=ROPYQre3GpB5WuNDNSEzxIUJJXHbN4CHk/TpO502x5GDXmeYVys3Wi3rbquc6eVQ1
+ c1NoKU56zNjjfwTBGpOB8dbY0SrS5YKqd47oiZB4qfPDRjoULZE7BaNYkfiLSoGIbQ
+ Ilasst2inAJllWIGXSlqCpx5wRRvKADM2g5gVQI0=
 X-UI-Sender-Class: c548c8c5-30a9-4db5-a2e7-cb6cb037b8f9
-Received: from [192.168.1.2] ([93.131.19.10]) by smtp.web.de (mrweb101
- [213.165.67.124]) with ESMTPSA (Nemesis) id 0MQedF-1jZQIa14UX-00U2i2; Sun, 31
- May 2020 10:38:05 +0200
+Received: from [192.168.1.2] ([93.131.19.10]) by smtp.web.de (mrweb106
+ [213.165.67.124]) with ESMTPSA (Nemesis) id 1M9ZeA-1jc0Rc1aIm-005hgd; Sun, 31
+ May 2020 11:00:20 +0200
 References: <dd729c13-fbc8-22e7-7d8e-e3e126f66943@web.de>
  <40d8fb01.db721.17269d3d620.Coremail.dinghao.liu@zju.edu.cn>
+ <74977dc6-7ace-6ef7-4fcd-3f6c89a3eb5f@web.de>
+ <286858ff.db7e3.17269ee5f3f.Coremail.dinghao.liu@zju.edu.cn>
 To: Dinghao Liu <dinghao.liu@zju.edu.cn>, dri-devel@lists.freedesktop.org,
  nouveau@lists.freedesktop.org
 From: Markus Elfring <Markus.Elfring@web.de>
@@ -71,37 +75,37 @@ Autocrypt: addr=Markus.Elfring@web.de; prefer-encrypt=mutual; keydata=
  Z/wsLiWTgKlih2QYULvW61XU+mWsK8+ZlYUrRMpkauN4CJ5yTpvp+Orcz5KixHQmc5tbkLWf
  x0n1QFc1xxJhbzN+r9djSGGN/5IBDfUqSANC8cWzHpWaHmSuU3JSAMB/N+yQjIad2ztTckZY
  pwT6oxng29LzZspTYUEzMz3wK2jQHw+U66qBFk8whA7B2uAU1QdGyPgahLYSOa4XAEGb6wbI FEE=
-Message-ID: <74977dc6-7ace-6ef7-4fcd-3f6c89a3eb5f@web.de>
-Date: Sun, 31 May 2020 10:38:03 +0200
+Message-ID: <5a073b2b-5102-adec-84dd-b62dc48c7451@web.de>
+Date: Sun, 31 May 2020 11:00:17 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.8.1
 MIME-Version: 1.0
-In-Reply-To: <40d8fb01.db721.17269d3d620.Coremail.dinghao.liu@zju.edu.cn>
+In-Reply-To: <286858ff.db7e3.17269ee5f3f.Coremail.dinghao.liu@zju.edu.cn>
 Content-Language: en-GB
-X-Provags-ID: V03:K1:y1LJYPs1Iq18L+/DAFeD2LDUvWpuxmckDphyA08FWMyUA+fuBN9
- K5qx6q+Olg7M0ajYWgZMW5z2kJ+Cuo5G6ugqlorglO7y9ivn8A/0/npYd4Hn8rgZp1/cVXK
- OfQZsRYZz9FsiV6zPCRFEdbqaMe/S+jRgt7iiQYuvx+4puln7sSZie6KghoFicBxiRUOj7h
- cvpbKyhLklnhABV1Zwv9A==
+X-Provags-ID: V03:K1:aMG7zfaQUOqYEZ66qdQxluuIw7Wk0OYJrIJYOR4VtwX2r98+AZ2
+ PhXDVDOZe9RKOlSpvcfqxPl+wvZejkmIHnHXl+zkyHoivrI+5s2A500f1lj9/Dp1WJKTbk9
+ iJ8VXImG6oUmWaTMDLQyA0iLjXQnB5agX97ByXp1vvfN35cRurJRhmIaYYCoZ4Lkvz89Nqh
+ F+0ES7Dd5voZ4tZxvnrtQ==
 X-Spam-Flag: NO
-X-UI-Out-Filterresults: notjunk:1;V03:K0:LNBjC4PMbDs=:zUez5xyZYSjv/YGQOBDmCg
- mIq/MNdx+X19JCc4kZvcoEdy2DGLFDd4HXBJiAIMS5tvhTCUCe6j3C9mLMZJ4moPPdmUnWRLe
- m0jjRcE3DSWIGhE/gt5Oi4BQf55QVU0UYH1d22R5OZNN9tSZQebYe1r86G9DLbnN8n/rWev1w
- 9ucfnYUsGkeDX/++7mplW0K8LVulTqJmEhReWvwMG+YhIVkPupkEZmB+hk2M7uNU9wZ4zGEy7
- TZ8mDbHco5JERAPsGA2U7bkkmcmx1a25bSk5MMmvaEfUXgxZkTildRaS/H5n8LmPll5GyCOLL
- 0X9j8BbgcTDvzJ+HqTZ5T3MOQYLHWpMi5wEzNi02vavWy0ODFNVUdtw4ylccLiSXvbL7wtG/Y
- y68VZStMDNntaEvMdF/VvZgv5mBliW6qaoN/lvp4cVV2vJel/MlHT+vlricD4a1g55QIS8yX6
- Ry8FBPZJHZ9FsnvQYUtJwdVeNPbAKn8H9Vb9leGLneUA6Rj9VmgeGlQfHb1FHRzZFER+L41y0
- 6LVDyUfyEVmlYD5TQP4W+1s+sUMr91lgLRcwVHX4wofKPr8/ssTTb3WVwL0CLUf6CRjblDtzW
- puOLouLIln9nJkvWDihpsCBUX8K0QgsN86o+jeoLdylLEczMqr7gSubtrK3TOdWUpPjsqfgC0
- 4Y+gBpSfzQ4AeuWmKBCaNgK7RYFOfuxlJWcwz0ywDhrLhtGyPnZEVxueRqRhwh0gPq5bIu0lt
- z25aWqlMHfKgc1/GvcAGYfUdn6ZK8YMPY14HIeZ5U8R9SNm7TxcUntM+idcHlH8AGDTgcq5EF
- Jko3fV3mxKdjIkATgQQVOz1FU9Iqymj2IeBg+zj2metYHCXgiy3g5okutYJJe449hM3SxJVmd
- ezIy1MQePb9oGqFgLmEpiO7Bv2p7WbYSwTbGAxtOugTCJ1zm474xrw3xydvMw8B9IugR/ddSO
- ii3F0AjaPCADmqJWJm0y/RXfuQDF72PLImd988hy18mlAisscP7Q1FyNxDWhysYXKMWce9C0b
- ZMr0hASueX9vn/R2uV5+vzCNPPdu68rqw7fIy67NVcPB4+EB7cqBh0/f4m7qcL9I6d8e06+BU
- TM7xMMO/5ddqm/m6uBXyIdYONNEq6R9EI6IriOOtFsfuaXaTskmhih/0IIp0He2lTBu+4HAwB
- CFfxKVYjxUSk6NrYEmm2bkOlS0mFENQcSZxc3PVheySViiADJg8iYNbQy45bo/5tz1Zqa6hH1
- X15vPxMJke/IekFMR
+X-UI-Out-Filterresults: notjunk:1;V03:K0:dJL2yd9aBpo=:jqFfuiaNwvaE2Ms5b2eQow
+ LwNdiMaaR/i/yy1uAx8mk7B7pLH3fsp4xcjZGbY7kloz1V9Ui2wEQJuZfqiSvNZSXnypnswIC
+ JA8HdXEe7MjZjgdRcHzvOFe+YI7IE4vpCPkFX/OE8Oorf/XLA3bBbH+AUFTzAHjNu4Fstk2PF
+ Sn+BM/e4XYekRiNmUYwjqb//JPfwgXQ/jJ1plOxNJuJp5u2iRQ5sRZR+kRmu2elFL+5mUTQ5V
+ qZZjs+pHekeAII7xywXn9JEWNGgVIqwTKSvGa7LhhWWTi6UewJ1umiTX51gMgr/mKmuKzBE+/
+ saUyzzqdYAtEGTLbrB/+t3h5jV6JDAShWSqh8Oq8MYMfpp+lpNEfhu1sqJa+syvU6o3qkir6U
+ YEJa8TCDVSyS4tD209wv9HiCZIMbUY3jxGctKRUsd+gA1JP8dZd82f8AQzXCJJ0pOw6nDK84n
+ vyYS8HCkUUCW3RwCgFuGfNiTFtv/qclJypuBmh+V8ZvPpUsc/Lb4KlFGxp7jN2FSq7Cyct4Ii
+ NGAjsku85Jk0Zo9c4IgYjo+k0hBUqcbQxyo72b+RE7dg7bjo1fjQXvyIQxV0bSh7xa3hA8pnG
+ nuea/RWknipIRMSZP23nVhVs0jrJKjN3nTOA8mrPYsizIthlWlMaD7hjJguhhlvWZ1XDaQWoM
+ h9SO3DJtm9d4CjVVmszHhb8pTyNuF/54kRl1DwpQnEhH6BtPYoS/cavp+q+AC5QvxTMibMwBj
+ dsOH462EvqFpSqNSSAAyrznn7+DhZNUa9hFBZww8zYqqi4ygrKkT4ery6fHBqK0jnuowjUcQv
+ LuHXA4dS38HvcVRWkaNPiKtFZjIK4c4z9aJwjAj360F90JK3kIPS3AHSF1b6/NpMmPDxeiaj4
+ czh/CZQ2+RgCfpXAZwCHS8YLLCs6i4P6qU1MWhK7l/Nfv+WW1cGLyW2kiDq5rCRX6SmVmtDOc
+ 6M3gIbEsSMGqZiiHq4eepnbHhf8s2O+paGNLSfnk5J56opehP/gBHwlp1yHi7xohf7xvxcJtk
+ rjynllodPWLPFHIfqCm+A7KuzK9QIu26bY+tKpVRWsrzjWwq9qwdAp0xadnTMcr/ybxfOgex9
+ CaNWAYTS9cCdQgpkJdenAxqV9O1KgosBcRMvWZCDwm+CGQKeisL7FlytUAO/hxQ91IfmVKpWP
+ F1qpOMbJ0OHeU62KcJU0fqVC++N3i840b02ohA+zeDPT5CdAD+TGf6OcyZ+pEa0bE3MuiuFGL
+ gSLYqkUL9vIzawlRw
 Subject: Re: [Nouveau] drm/nouveau/clk/gm20b: Fix memory leak in
  gm20b_clk_new()
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -123,15 +127,11 @@ Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-> It's possible that we expect an usable clk pointer, though I could not find
-> the exact usage yet.
+> I just found that clk is referenced by pclk in this function. When clk is freed,
+> pclk will be allocated in gm20b_clk_new_speedo0(). Thus we should not release clk
+> in this function and there is no bug here.
 
-I am curious if another developer would like to add helpful background information.
-
-
-> For security, I will release this pointer only on error paths in this function.
-
-Do you tend to release objects (which are referenced by pointers)?
+Can there be a need to release a clock object after a failed gk20a_clk_ctor() call?
 
 Regards,
 Markus
