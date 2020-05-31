@@ -1,36 +1,36 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id CB1331E96A8
-	for <lists+nouveau@lfdr.de>; Sun, 31 May 2020 11:51:22 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id B2A441E9770
+	for <lists+nouveau@lfdr.de>; Sun, 31 May 2020 14:14:32 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 32F7B6E105;
-	Sun, 31 May 2020 09:51:21 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id DCA616E103;
+	Sun, 31 May 2020 12:14:30 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mout.web.de (mout.web.de [217.72.192.78])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E522D6E105;
- Sun, 31 May 2020 09:51:19 +0000 (UTC)
+Received: from mout.web.de (mout.web.de [212.227.17.11])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7F5486E103;
+ Sun, 31 May 2020 12:14:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=web.de;
- s=dbaedf251592; t=1590918663;
- bh=S5j/Sm8NnP1xV65eR+sEb2cXuO8q6nCGXukhuHwjBaA=;
- h=X-UI-Sender-Class:Subject:Cc:References:To:From:Date:In-Reply-To;
- b=r3PZjfP5an+D9LTPapg94SwJDWvtMYEMrbheICsajtbRqjX1bf6kvcPGWrd6X6Ho7
- /StqgfCBz0KktO/Ri37vwdWX5FwU/plJKbuz9sqCNk1pcx0QIouzGGdzqwdn/1cCaY
- XGx/5ROHzo350Su+oGkt9CJ7ENRJYZAyyUp7L8MM=
+ s=dbaedf251592; t=1590927250;
+ bh=ZDHIA/BSR3jEXEx/A3Hngit9dmMCk8T17SSyAhSeeEo=;
+ h=X-UI-Sender-Class:Subject:Cc:References:From:To:Date:In-Reply-To;
+ b=BxBoC5zyscLogezPCphXI2X9wyyIRFx0lDKbgODKO7dvwprsOBkYSm/uUq5nfAyXw
+ ECgjpXtxXGIvwgWj1Gie0bAcCe0KzrVGZq9vTDIVQukghjmvjHSY68RnPhmDe5cNCD
+ n4HN1xO03sY2frokDGZXBPtnNskWEb9HVEJGJQAg=
 X-UI-Sender-Class: c548c8c5-30a9-4db5-a2e7-cb6cb037b8f9
-Received: from [192.168.1.2] ([93.131.19.10]) by smtp.web.de (mrweb105
- [213.165.67.124]) with ESMTPSA (Nemesis) id 1N947J-1itDqy2d1j-01642W; Sun, 31
- May 2020 11:51:03 +0200
+Received: from [192.168.1.2] ([93.131.19.10]) by smtp.web.de (mrweb102
+ [213.165.67.124]) with ESMTPSA (Nemesis) id 0Lhvlm-1j9tei2WcE-00nBSA; Sun, 31
+ May 2020 14:14:10 +0200
 References: <dd729c13-fbc8-22e7-7d8e-e3e126f66943@web.de>
  <40d8fb01.db721.17269d3d620.Coremail.dinghao.liu@zju.edu.cn>
  <74977dc6-7ace-6ef7-4fcd-3f6c89a3eb5f@web.de>
  <286858ff.db7e3.17269ee5f3f.Coremail.dinghao.liu@zju.edu.cn>
  <5a073b2b-5102-adec-84dd-b62dc48c7451@web.de>
  <1c5b64dc.db888.1726a03b710.Coremail.dinghao.liu@zju.edu.cn>
-To: Dinghao Liu <dinghao.liu@zju.edu.cn>, dri-devel@lists.freedesktop.org,
- nouveau@lists.freedesktop.org
+ <d05224e4-d682-de3e-928f-5af7b8597a8d@web.de>
+ <599cd7d4.dbaba.1726a53da96.Coremail.dinghao.liu@zju.edu.cn>
 From: Markus Elfring <Markus.Elfring@web.de>
 Autocrypt: addr=Markus.Elfring@web.de; prefer-encrypt=mutual; keydata=
  mQINBFg2+xABEADBJW2hoUoFXVFWTeKbqqif8VjszdMkriilx90WB5c0ddWQX14h6w5bT/A8
@@ -75,39 +75,41 @@ Autocrypt: addr=Markus.Elfring@web.de; prefer-encrypt=mutual; keydata=
  Z/wsLiWTgKlih2QYULvW61XU+mWsK8+ZlYUrRMpkauN4CJ5yTpvp+Orcz5KixHQmc5tbkLWf
  x0n1QFc1xxJhbzN+r9djSGGN/5IBDfUqSANC8cWzHpWaHmSuU3JSAMB/N+yQjIad2ztTckZY
  pwT6oxng29LzZspTYUEzMz3wK2jQHw+U66qBFk8whA7B2uAU1QdGyPgahLYSOa4XAEGb6wbI FEE=
-Message-ID: <d05224e4-d682-de3e-928f-5af7b8597a8d@web.de>
-Date: Sun, 31 May 2020 11:51:00 +0200
+To: Dinghao Liu <dinghao.liu@zju.edu.cn>, dri-devel@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org
+Message-ID: <f02d4f00-965a-12d0-d306-a943e2551184@web.de>
+Date: Sun, 31 May 2020 14:14:05 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.8.1
 MIME-Version: 1.0
-In-Reply-To: <1c5b64dc.db888.1726a03b710.Coremail.dinghao.liu@zju.edu.cn>
+In-Reply-To: <599cd7d4.dbaba.1726a53da96.Coremail.dinghao.liu@zju.edu.cn>
 Content-Language: en-GB
-X-Provags-ID: V03:K1:/ee/2WhjWj59Unuy9PwSUsZvLgkFxcD8y/bK90J4pFqMch/Fw0E
- wmrtpOU/JWrcPUdZFgZDZiD3H0YhCfiqds8/Yr3FtejBatagCIDKjIADBEdV0Uezvh3wkSf
- wtA89S6KLwwmgnwKVvXl9QhrYfiueQaYtqkRPU/7j4AGS8cgp2Dxgr5OF/Ax5enPPXFwf/E
- 273r5oFNzEEu/DlkH9G9A==
+X-Provags-ID: V03:K1:/NrRDvnkXic8H3z+KiXbt4LBZ+9MfyLsOwHzaCjgokctMMkwO+y
+ c78PnYKZ2QR68cAYOOEE4bQ+BBeRgnsAoP2g0fouMOdW6Ia2bAT1YsUUC4v024+lmAsrLzx
+ Ao3P7Bv81ZAbWHpqxfmvrWVIj44xntibCwo21H78Z25C5F2CyOjAV/SEcs6MUu7S/cQfbqt
+ JxIsNlWNrsnbMrOqD+3Ww==
 X-Spam-Flag: NO
-X-UI-Out-Filterresults: notjunk:1;V03:K0:1VtH0CB2aE8=:dQ7GG2NgZOrjkVDiT/vHIp
- kD4hq7fpX/FVlE5HV1KPEUseF4UOVt6eybrYDm7xAYgU+yyOXwyoQavg0F+1jqgabUezGzARR
- D3AcpRbQw0gG97HHAVKVsaBLCPE74U+GAt38Ob44uNLkR0+GrS2GKQO6nqJ+EvvsTOADRBzAi
- u0zTnzDxpAupRJKJgotwMEorVscW5ZOCGlbMB+lBSjf2Yf0WXC4wo0Vq+qTRhmuIvIVHXJRz0
- QNrs0VME/pamFgHfjZPRI5mCFOwVau1ePwtKPHhs6N+yZ5P5DEgEzIjEfh3XUG4Y1OXxRANNn
- L/oEmlaku9fRXLJARBdGqU7tBmNaivB14g6iYNCzydmctij9IQKqpnOOsaW8zh7CCLIjdJDcZ
- dEEXgQyIl5noH14gsOcmD5MTuJ46/OsvB7F+P7BVHAlbrvhCji6UXmhUJFbqnqgVQImkwGfhW
- X6FfO4isFuPRLvBfsknFK16NtetXoWJPTzaSj5x/5Ab/CByO16J/bHR4ZhCqlxqvHM6XS82Fg
- UGEi/F11Owdj+/E6t7gDVaZ8cRSyvdjUKD6zrgk7ujue+6ZzmCKpAQp8ZmD/kILlo8EEg65vU
- TGc6T8eOE5rFBVFRvtQNAv/+tiECbmszo0X29H8fg/pwtRD1sHtF36v3Trn6loo5+P4tODbc7
- NwljP1i2pU8t3cBMPaK2qOzcvENgVukJRjOuD1lSJ5s/k5wS8pB/jpt5ZSVtUgRqdHd3SUAFn
- wDINAtnx1MM3g5lauYwEa2spcyQG3pUA2LwWThzzQwUhVKxehj9HLlGJPy6XR63gvhU+D6y/F
- yHCZSJ7QD+FYwOx1+FLnYiMSwVRzzo+rTYWLVRC4bDeoME/xLS3tqUtrv8eVwnyMTgPzyH38U
- +pNsPjpx8xA4nApbq6fzVknXUkDABzYzX/sNllBnyo40tojT0Li4+Q2O9l8NpUYPj6OccvLOR
- T5mJVTmM9cQGEABqJJJ+/SVJBA6r6vCSuKa1qzB55tFSUGvc54+SJ6VPQdsYA3Nf3KG16VOCv
- YTSLZMdCpyUYD2M53Nok1Ie64AWCpZRto/t6HH1ePEw8/Jh0Zc2Ez3ID6/78C+RgWzOTvYsDn
- OkbdKkz2di/R8nXghjx0/TvuvUYGsnEzbnNu6i8UwNKFVultcuWivmKkIrT14M7MvI/5BJ2ju
- Sp6GDCsp5B91hfeL8UH/btQP57DSGnZANZ1jbe4ANki685f2nKlvgFUaGkbOUnQ0amcWy9OSA
- HAIrQI2M1z1x/i105
-Subject: Re: [Nouveau] drm/nouveau/clk/gm20b: Fix memory leak in
- gm20b_clk_new()
+X-UI-Out-Filterresults: notjunk:1;V03:K0:teDT0+N85sU=:pYFiIDHjMdxSPQ4JtXbvnU
+ 9qHXGmZnbI4HDebFPSIt4Fdf6QgA5nIc3HCaUxvwR6gO0m9qXzNU0ns1ejS2may7W8epgcjcT
+ 2djkAG+4joy3x5+J6d2JA22DntCxMRfxtlOhzsbRLqWLpgTwvmZkb3T2d8F4XwO+E8UEa1M+I
+ VSamEviIN1XSfod8XVqgLF6Tyw01PzJuP5U8PY2QoEYTA1PyhbsCjzCEe/0J5QIYKrWcnjt8Q
+ im3YxkRKYWlO3NEy7Az1vgt0rtjlyBSFqNmO5Bqq1vwPL+PX6rjZ7hf90MSSi9LTXk5r6l9U2
+ qj4YOSyX5C1tAAn6vm4Z1/AHguq0eZZpZYsjxSwjQKtzIhSI1E2eGrHFkFBMQlAQl3TQYWN5g
+ BHHRnaXXiph9EKTRBqBK9BcWmrCbA91Tkd3Bhdw2uqZFVEvfSiiVIVNyMOua2QfxbfMv4dlfN
+ fwqqK8myWBopnveQjLQlVyNKUgKx6RsCnBOLwVWpXhBYMpfgH3oaC+gmidUfmQk/4wV+hy9lT
+ Inpga5cJ5Khrth3aNd00UAx9GNeXPAPjTE2jS15phkCfSZrzGlzTGIewnaxd0NReQpVKHwPWb
+ nfRx4O3XML3zjE/Mfn8ZWAcBAu+48tgGj91G/CdtVWOFqXdgsGvcxRPZ6eyrbd0CLn3VEmGnH
+ rLKPMKqBeOKoSz8v44GnQGpeMhWn/TzFSI+/hWcbg0yxzfBpzMtisbkusIcG2JLNVeBih2GY3
+ pbnTcOF84EsZNesmWV0Hfh0rtzmg2ZJ5JlIKBAVwlwdFYTelqJ3CY49rCzdou+V4HV9Azw7lc
+ KqBgzsQwGI4sixFgWho6I0h8x7DRbF0KL2s36qsrrv6UzOGUKuNK77rf2K3rMRHZnkBG3fj6d
+ z/REKsHJq3f4xEUR5vtmbwNlSlwIvrt7vAyBO+lotTboLh8NUXOng6Ot0Atloc1fYZ8QYC/Cn
+ 3z6eI3WSvS7uyj5Hejb8fbvRBWwMDoDVy+2lxNKdRRgAhBeX+/arEEcg9FHcoiu94VJoG0y7E
+ oW0XS6BWf/cXNRS0tpr2LaDbQYIZKWNrRo0nubCPGiuoU0cTog+kgie2zJLvy0eW4OT4xOcVl
+ 9/tjPLZYZ7vAwmk8q4uWKjxDOfp/JKEr/VMYiyHA0Z2sJ+Q6TWIDRjOrvXaBa0zEkSsdMHysF
+ gjw+1eayhYqfPaxEGMNs7JZJxlFQbkHDkgYRByZ/MqVYIuOm8OQvVQ2++YjzKXJMsrV//MgO3
+ gjx0jZyaCCtmpD4BK
+Subject: Re: [Nouveau] drm/nouveau/clk/gm20b: Fix memory leaks after failed
+ gk20a_clk_ctor() calls
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -127,11 +129,17 @@ Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-> If gk20a_clk_ctor() never returns such an error code,
-> we may need not to release this clock object.
+> In this case, maybe we should check the return value of
+> gk20a_clk_ctor() and release clk if it returns -ENOMEM.
 
-Would you like to achieve complete exception handling
-also for this function implementation?
+All error situations (including failed memory allocations) can matter here.
+
+
+> And many other functions also have the same issue
+> (e.g. gm20b_clk_new_speedo0).
+
+I recommend to increase the error detection and improve the desired
+exception handling accordingly.
 
 Regards,
 Markus
