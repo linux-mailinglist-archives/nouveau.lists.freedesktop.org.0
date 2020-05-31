@@ -1,39 +1,41 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 86F001F8555
-	for <lists+nouveau@lfdr.de>; Sat, 13 Jun 2020 22:54:23 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id A7BCF1F8542
+	for <lists+nouveau@lfdr.de>; Sat, 13 Jun 2020 22:54:03 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A73E96E49A;
-	Sat, 13 Jun 2020 20:54:08 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 83F056E45D;
+	Sat, 13 Jun 2020 20:53:55 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from zju.edu.cn (spam.zju.edu.cn [61.164.42.155])
- by gabe.freedesktop.org (Postfix) with ESMTP id CB69C8912C;
- Sun, 31 May 2020 09:15:32 +0000 (UTC)
-Received: by ajax-webmail-mail-app4 (Coremail) ; Sun, 31 May 2020 17:15:27
+Received: from zju.edu.cn (mail.zju.edu.cn [61.164.42.155])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 301AA89D9B;
+ Sun, 31 May 2020 10:43:03 +0000 (UTC)
+Received: by ajax-webmail-mail-app4 (Coremail) ; Sun, 31 May 2020 18:42:59
  +0800 (GMT+08:00)
 X-Originating-IP: [10.192.85.18]
-Date: Sun, 31 May 2020 17:15:27 +0800 (GMT+08:00)
+Date: Sun, 31 May 2020 18:42:59 +0800 (GMT+08:00)
 X-CM-HeaderCharset: UTF-8
 From: dinghao.liu@zju.edu.cn
 To: "Markus Elfring" <Markus.Elfring@web.de>
 X-Priority: 3
 X-Mailer: Coremail Webmail Server Version XT5.0.10 build 20190906(84e8bf8f)
  Copyright (c) 2002-2020 www.mailtech.cn zju.edu.cn
-In-Reply-To: <5a073b2b-5102-adec-84dd-b62dc48c7451@web.de>
+In-Reply-To: <d05224e4-d682-de3e-928f-5af7b8597a8d@web.de>
 References: <dd729c13-fbc8-22e7-7d8e-e3e126f66943@web.de>
  <40d8fb01.db721.17269d3d620.Coremail.dinghao.liu@zju.edu.cn>
  <74977dc6-7ace-6ef7-4fcd-3f6c89a3eb5f@web.de>
  <286858ff.db7e3.17269ee5f3f.Coremail.dinghao.liu@zju.edu.cn>
  <5a073b2b-5102-adec-84dd-b62dc48c7451@web.de>
+ <1c5b64dc.db888.1726a03b710.Coremail.dinghao.liu@zju.edu.cn>
+ <d05224e4-d682-de3e-928f-5af7b8597a8d@web.de>
 MIME-Version: 1.0
-Message-ID: <1c5b64dc.db888.1726a03b710.Coremail.dinghao.liu@zju.edu.cn>
+Message-ID: <599cd7d4.dbaba.1726a53da96.Coremail.dinghao.liu@zju.edu.cn>
 X-Coremail-Locale: zh_CN
-X-CM-TRANSID: cS_KCgC3WeSvddNeYbtjAA--.9579W
-X-CM-SenderInfo: qrrzjiaqtzq6lmxovvfxof0/1tbiAggRBlZdtOY77QABsT
-X-Coremail-Antispam: 1Ur529EdanIXcx71UUUUU7IcSsGvfJTRUUUbLIS07vEb7Iv0x
+X-CM-TRANSID: cS_KCgDn7wczitNeallkAA--.10192W
+X-CM-SenderInfo: qrrzjiaqtzq6lmxovvfxof0/1tbiAg4RBlZdtOY+wQABs8
+X-Coremail-Antispam: 1Ur529EdanIXcx71UUUUU7IcSsGvfJTRUUUbL0S07vEb7Iv0x
  C_Cr1lV2xY67kC6x804xWlV2xY67CY07I20VC2zVCF04k26cxKx2IYs7xG6rWj6s0DMIAI
  bVAFxVCF77xC64kEw24lV2xY67C26IkvcIIF6IxKo4kEV4ylV2xY628lY4IE4IxF12IF4w
  CS07vE84x0c7CEj48ve4kI8wCS07vE84ACjcxK6xIIjxv20xvE14v26w1j6s0DMIAIbVA2
@@ -45,9 +47,9 @@ X-Coremail-Antispam: 1Ur529EdanIXcx71UUUUU7IcSsGvfJTRUUUbLIS07vEb7Iv0x
  Av8VW8uw4UJr1UMIAIbVCF72vE77IF4wCS07vE4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lV2xY
  6I8I3I0E5I8CrVAFwI0_Jr0_Jr4lV2xY6I8I3I0E7480Y4vE14v26r106r1rMIAIbVC2zV
  AF1VAY17CE14v26r1q6r43MIAIbVCI42IY6xIIjxv20xvE14v26r1j6r1xMIAIbVCI42IY
- 6xIIjxv20xvEc7CjxVAFwI0_Jr0_Gr1lV2xY6IIF0xvE42xK8VAvwI8IcIk0rVWrJr0_WF
- yUJwCS07vEIxAIcVC2z280aVAFwI0_Jr0_Gr1lV2xY6IIF0xvEx4A2jsIEc7CjxVAFwI0_
- Gr0_Gr1UYxBIdaVFxhVjvjDU=
+ 6xIIjxv20xvEc7CjxVAFwI0_Jr0_Gr1lV2xY6IIF0xvE42xK8VAvwI8IcIk0rVWrZr1j6s
+ 0DMIAIbVCI42IY6I8E87Iv67AKxVWUJVW8JwCS07vEIxAIcVC2z280aVCY1x0267AKxVW8
+ JVW8JrUvcSsGvfC2KfnxnUU==
 X-Mailman-Approved-At: Sat, 13 Jun 2020 20:53:54 +0000
 Subject: Re: [Nouveau] drm/nouveau/clk/gm20b: Fix memory leak in
  gm20b_clk_new()
@@ -71,17 +73,26 @@ Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-> > I just found that clk is referenced by pclk in this function. When clk is freed,
-> > pclk will be allocated in gm20b_clk_new_speedo0(). Thus we should not release clk
-> > in this function and there is no bug here.
+> > If gk20a_clk_ctor() never returns such an error code,
+> > we may need not to release this clock object.
 > 
-> Can there be a need to release a clock object after a failed gk20a_clk_ctor() call?
+> Would you like to achieve complete exception handling
+> also for this function implementation?
 > 
 
-I think this mainly depends on pclk pointer. It seems that the caller of 
-gm20b_clk_new() always expects pclk to be allocated unless it returns -ENOMEM,
-which means kzalloc() failed. If gk20a_clk_ctor() never returns such an error 
-code, we may need not to release this clock object.
+It seems that it's possible to get -ENOMEM from gk20a_clk_ctor().
+The call chain is as follows:
+gk20a_clk_ctor() <- nvkm_clk_ctor() <- nvkm_notify_init()
+
+When nvkm_notify_init() returns -ENOMEM, all of its callers (and 
+callers of callers) will be influenced if there is a failed
+kzalloc inside which. 
+
+In this case, maybe we should check the return value of 
+gk20a_clk_ctor() and release clk if it returns -ENOMEM. 
+And many other functions also have the same issue (e.g.,
+gm20b_clk_new_speedo0). Do you have any idea about this 
+problem?
 
 Regards,
 Dinghao
