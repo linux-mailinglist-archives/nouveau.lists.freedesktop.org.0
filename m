@@ -1,58 +1,53 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id A7BCF1F8542
-	for <lists+nouveau@lfdr.de>; Sat, 13 Jun 2020 22:54:03 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 536DB1F8558
+	for <lists+nouveau@lfdr.de>; Sat, 13 Jun 2020 22:54:25 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 83F056E45D;
-	Sat, 13 Jun 2020 20:53:55 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9A9FD6E49B;
+	Sat, 13 Jun 2020 20:54:10 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from zju.edu.cn (mail.zju.edu.cn [61.164.42.155])
- by gabe.freedesktop.org (Postfix) with ESMTP id 301AA89D9B;
- Sun, 31 May 2020 10:43:03 +0000 (UTC)
-Received: by ajax-webmail-mail-app4 (Coremail) ; Sun, 31 May 2020 18:42:59
+ by gabe.freedesktop.org (Postfix) with ESMTP id D24CB89DFD;
+ Mon,  1 Jun 2020 03:26:58 +0000 (UTC)
+Received: by ajax-webmail-mail-app4 (Coremail) ; Mon, 1 Jun 2020 11:26:51
  +0800 (GMT+08:00)
-X-Originating-IP: [10.192.85.18]
-Date: Sun, 31 May 2020 18:42:59 +0800 (GMT+08:00)
+X-Originating-IP: [222.205.72.4]
+Date: Mon, 1 Jun 2020 11:26:51 +0800 (GMT+08:00)
 X-CM-HeaderCharset: UTF-8
 From: dinghao.liu@zju.edu.cn
-To: "Markus Elfring" <Markus.Elfring@web.de>
+To: "Ben Skeggs" <skeggsb@gmail.com>
 X-Priority: 3
 X-Mailer: Coremail Webmail Server Version XT5.0.10 build 20190906(84e8bf8f)
  Copyright (c) 2002-2020 www.mailtech.cn zju.edu.cn
-In-Reply-To: <d05224e4-d682-de3e-928f-5af7b8597a8d@web.de>
-References: <dd729c13-fbc8-22e7-7d8e-e3e126f66943@web.de>
- <40d8fb01.db721.17269d3d620.Coremail.dinghao.liu@zju.edu.cn>
- <74977dc6-7ace-6ef7-4fcd-3f6c89a3eb5f@web.de>
- <286858ff.db7e3.17269ee5f3f.Coremail.dinghao.liu@zju.edu.cn>
- <5a073b2b-5102-adec-84dd-b62dc48c7451@web.de>
- <1c5b64dc.db888.1726a03b710.Coremail.dinghao.liu@zju.edu.cn>
- <d05224e4-d682-de3e-928f-5af7b8597a8d@web.de>
+In-Reply-To: <CACAvsv73wZK_pKk4TDHaTeBUqxYHvK0KhLQBgPC8Be_VviY2jg@mail.gmail.com>
+References: <20200529080042.6082-1-dinghao.liu@zju.edu.cn>
+ <CACAvsv73wZK_pKk4TDHaTeBUqxYHvK0KhLQBgPC8Be_VviY2jg@mail.gmail.com>
 MIME-Version: 1.0
-Message-ID: <599cd7d4.dbaba.1726a53da96.Coremail.dinghao.liu@zju.edu.cn>
+Message-ID: <6a65a5b1.dd4b7.1726deaea0a.Coremail.dinghao.liu@zju.edu.cn>
 X-Coremail-Locale: zh_CN
-X-CM-TRANSID: cS_KCgDn7wczitNeallkAA--.10192W
-X-CM-SenderInfo: qrrzjiaqtzq6lmxovvfxof0/1tbiAg4RBlZdtOY+wQABs8
-X-Coremail-Antispam: 1Ur529EdanIXcx71UUUUU7IcSsGvfJTRUUUbL0S07vEb7Iv0x
+X-CM-TRANSID: cS_KCgAXblB7ddRewnRrAA--.6592W
+X-CM-SenderInfo: qrrzjiaqtzq6lmxovvfxof0/1tbiAgYSBlZdtOZhVAABs9
+X-Coremail-Antispam: 1Ur529EdanIXcx71UUUUU7IcSsGvfJTRUUUbGCS07vEb7Iv0x
  C_Cr1lV2xY67kC6x804xWlV2xY67CY07I20VC2zVCF04k26cxKx2IYs7xG6rWj6s0DMIAI
  bVAFxVCF77xC64kEw24lV2xY67C26IkvcIIF6IxKo4kEV4ylV2xY628lY4IE4IxF12IF4w
  CS07vE84x0c7CEj48ve4kI8wCS07vE84ACjcxK6xIIjxv20xvE14v26w1j6s0DMIAIbVA2
- z4x0Y4vE2Ix0cI8IcVCY1x0267AKxVW8Jr0_Cr1UMIAIbVA2z4x0Y4vEx4A2jsIE14v26r
- xl6s0DMIAIbVA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_GcCE3s1lV2xY62AIxVAIcxkEcVAq
- 07x20xvEncxIr21lV2xY6c02F40EFcxC0VAKzVAqx4xG6I80ewCS07vEYx0E2Ix0cI8IcV
- AFwI0_Jr0_Jr4lV2xY6cIj6I8E87Iv67AKxVWUJVW8JwCS07vEOx8S6xCaFVCjc4AY6r1j
- 6r4UMIAIbVCjxxvEw4WlV2xY6xkI7II2jI8vz4vEwIxGrwCS07vE42xK82IY6x8ErcxFaV
- Av8VW8uw4UJr1UMIAIbVCF72vE77IF4wCS07vE4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lV2xY
- 6I8I3I0E5I8CrVAFwI0_Jr0_Jr4lV2xY6I8I3I0E7480Y4vE14v26r106r1rMIAIbVC2zV
- AF1VAY17CE14v26r1q6r43MIAIbVCI42IY6xIIjxv20xvE14v26r1j6r1xMIAIbVCI42IY
- 6xIIjxv20xvEc7CjxVAFwI0_Jr0_Gr1lV2xY6IIF0xvE42xK8VAvwI8IcIk0rVWrZr1j6s
- 0DMIAIbVCI42IY6I8E87Iv67AKxVWUJVW8JwCS07vEIxAIcVC2z280aVCY1x0267AKxVW8
- JVW8JrUvcSsGvfC2KfnxnUU==
+ z4x0Y4vE2Ix0cI8IcVCY1x0267AKxVWxJr0_GcWlV2xY628EF7xvwVC2z280aVAFwI0_Gc
+ CE3s1lV2xY628EF7xvwVC2z280aVCY1x0267AKxVW0oVCq3wCS07vEe2I262IYc4CY6c8I
+ j28IcVAaY2xG8wCS07vE5I8CrVACY4xI64kE6c02F40Ex7xfMIAIbVAv7VC0I7IYx2IY67
+ AKxVWUJVWUGwCS07vEYx0Ex4A2jsIE14v26r1j6r4UMIAIbVAm72CE4IkC6x0Yz7v_Jr0_
+ Gr1lV2xY6x02cVAKzwCS07vEc2xSY4AK67AK6r48MIAIbVCY0x0Ix7I2Y4AK64vIr41lV2
+ xY6xAIw28IcVCjz48v1sIEY20_GFWkJr1UJwCS07vE4x8a6x804xWlV2xY6xC20s026xCa
+ FVCjc4AY6r1j6r4UMIAIbVC20s026c02F40E14v26r1j6r18MIAIbVC20s026x8GjcxK67
+ AKxVWUGVWUWwCS07vEx4CE17CEb7AF67AKxVWUtVW8ZwCS07vEIxAIcVC0I7IYx2IY67AK
+ xVWUJVWUCwCS07vEIxAIcVC0I7IYx2IY6xkF7I0E14v26r1j6r4UMIAIbVCI42IY6xAIw2
+ 0EY4v20xvaj40_WFyUJVCq3wCS07vEIxAIcVC2z280aVAFwI0_Jr0_Gr1lV2xY6IIF0xvE
+ x4A2jsIEc7CjxVAFwI0_Jr0_GrUvcSsGvfC2KfnxnUU==
 X-Mailman-Approved-At: Sat, 13 Jun 2020 20:53:54 +0000
-Subject: Re: [Nouveau] drm/nouveau/clk/gm20b: Fix memory leak in
- gm20b_clk_new()
+Subject: Re: [Nouveau] [PATCH] drm/nouveau/clk/gm20b: Fix memory leak in
+ gm20b_clk_new
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -64,35 +59,37 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
- kernel-janitors@vger.kernel.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>,
- Kangjie Lu <kjlu@umn.edu>
+Cc: David Airlie <airlied@linux.ie>, ML nouveau <nouveau@lists.freedesktop.org>,
+ kjlu@umn.edu, LKML <linux-kernel@vger.kernel.org>,
+ ML dri-devel <dri-devel@lists.freedesktop.org>, Markus.Elfring@web.de,
+ Ben Skeggs <bskeggs@redhat.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-> > If gk20a_clk_ctor() never returns such an error code,
-> > we may need not to release this clock object.
+
+Hi Ben,
+
+> > When gk20a_clk_ctor() returns an error code, pointer "clk"
+> > should be released. It's the same when gm20b_clk_new()
+> > returns from elsewhere following this call.
+> This shouldn't be necessary.  If a subdev constructor fails, and
+> returns a pointer, the core will call the destructor to clean things
+> up.
 > 
-> Would you like to achieve complete exception handling
-> also for this function implementation?
-> 
 
-It seems that it's possible to get -ENOMEM from gk20a_clk_ctor().
-The call chain is as follows:
-gk20a_clk_ctor() <- nvkm_clk_ctor() <- nvkm_notify_init()
+I'm not familiar with the behavior of the caller of gm20b_clk_new(). 
+If the subdev constructor fails, the core will check the pointer
+(here is "pclk"), then it's ok and there is no bug (Do you mean 
+this?). If the core executes error handling code only according to 
+the error code, there may be a memory leak bug (the caller cannot 
+know if -ENOMEM comes from the failure of kzalloc or gk20a_clk_ctor). 
+If the core always calls the destructor as long as the constructor 
+fails (even if the kzalloc fails), we may have a double free bug. 
 
-When nvkm_notify_init() returns -ENOMEM, all of its callers (and 
-callers of callers) will be influenced if there is a failed
-kzalloc inside which. 
-
-In this case, maybe we should check the return value of 
-gk20a_clk_ctor() and release clk if it returns -ENOMEM. 
-And many other functions also have the same issue (e.g.,
-gm20b_clk_new_speedo0). Do you have any idea about this 
-problem?
+Would you like to give a more detailed explanation about the behavior
+of the core? 
 
 Regards,
 Dinghao
