@@ -2,56 +2,72 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4F4D31E9C1C
-	for <lists+nouveau@lfdr.de>; Mon,  1 Jun 2020 05:42:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B98DA1EB9A5
+	for <lists+nouveau@lfdr.de>; Tue,  2 Jun 2020 12:32:19 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8314089E9E;
-	Mon,  1 Jun 2020 03:42:00 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0469E6E39C;
+	Tue,  2 Jun 2020 10:32:17 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-yb1-xb43.google.com (mail-yb1-xb43.google.com
- [IPv6:2607:f8b0:4864:20::b43])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0359689E9E;
- Mon,  1 Jun 2020 03:41:59 +0000 (UTC)
-Received: by mail-yb1-xb43.google.com with SMTP id p123so4502746yba.6;
- Sun, 31 May 2020 20:41:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=vYmBlz5UTewvMo6VU7zofeZb2KwsJcE+c5rzEdcDxAs=;
- b=TNGRzCS1pVr/YFvfdNCKPdt1UNOXloplCFlL8JiwhG880Op453GRDwDjrwSB17N5rY
- SL0Bq08xdeW+wGuyQmAnUPJe8/z16qEGO9oG5PcSqKySJyqiuWCQUQPePgg2qAT6OjDd
- FmCwqnWlAiWIxcCev45E1PDw3lzSgsI7pTf9qoCqRDpDVY7H7XHP+r9RISD3aeRIILQ+
- 2s45+RwemqIAmA3Rdxr285xYiKGYuASRCgKh66HZ4y9ucVd79na1q1eU+myW85sl5NGL
- USY/cGKx15a6PlPLklngEWs1ynzK5GbJhi1wj7A15z2UgfF6ZYbo9ciC2cZHIz7c8tL1
- uClQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=vYmBlz5UTewvMo6VU7zofeZb2KwsJcE+c5rzEdcDxAs=;
- b=CIkFD1O/o3jsHIv2oOmAt0zuzA80eN6siCYsV6OiJI1i0sqiTTNaNBNjYTNYlc6yMt
- d5Hytg5a27eNDRTULLNkYrMy0BITzzoNTXC7Umak/EB7MyDTQhXcuwSsLFpu/wyFRrGc
- VdVtEq2anm+9hZ6TNVPvCvziLN9YoTq298BHfrmiXswD8V7T1QZLmwJHAfOAzOehaktT
- W+Bs9LCmnW9IrS6k4emPQCwGAnxk6JNf+o8PcW3P4gAF8V6Gz47FOrd/KHFbuZkZCk76
- s7o/5sBml86ICgoYhuzcpfIleCUKbOzwIko/gewJjTDBcTXj7qlKuswQGdNdcE/a/cp+
- UL2g==
-X-Gm-Message-State: AOAM5330OvdD3CnEED6XkMYRpWKQM7KmlnT/zPz6KRCd9uHRhx+xYrGm
- p1REgxbeNf2xS8tjDkiWVIjTp6Qao+xw2ixuKsJwsxFTui4=
-X-Google-Smtp-Source: ABdhPJySmAErk26rEvDftoaHaCg1eBbzZB3s3cyagkr2yK8Ypc9yi/+QiwUHA42lTGn9VL0ushxpCL1O8VZURDrHLm4=
-X-Received: by 2002:a25:8b02:: with SMTP id i2mr30981552ybl.283.1590982919170; 
- Sun, 31 May 2020 20:41:59 -0700 (PDT)
-MIME-Version: 1.0
-References: <20200529080042.6082-1-dinghao.liu@zju.edu.cn>
- <CACAvsv73wZK_pKk4TDHaTeBUqxYHvK0KhLQBgPC8Be_VviY2jg@mail.gmail.com>
- <6a65a5b1.dd4b7.1726deaea0a.Coremail.dinghao.liu@zju.edu.cn>
- <CACAvsv5kcUC_kOfMPxqY-irSAexmhm=WKO8Vk=wTZWdsbaartw@mail.gmail.com>
-In-Reply-To: <CACAvsv5kcUC_kOfMPxqY-irSAexmhm=WKO8Vk=wTZWdsbaartw@mail.gmail.com>
-From: Ben Skeggs <skeggsb@gmail.com>
-Date: Mon, 1 Jun 2020 13:41:48 +1000
-Message-ID: <CACAvsv5t2gWDae_8b0-fH9e8fzgmxfiUtZTPeFuhmKXDFAmvGw@mail.gmail.com>
+Received: from aserp2120.oracle.com (aserp2120.oracle.com [141.146.126.78])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id F24846E39C;
+ Tue,  2 Jun 2020 10:32:15 +0000 (UTC)
+Received: from pps.filterd (aserp2120.oracle.com [127.0.0.1])
+ by aserp2120.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 052AQPsS161329;
+ Tue, 2 Jun 2020 10:32:14 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
+ h=date : from : to : cc
+ : subject : message-id : references : mime-version : content-type :
+ in-reply-to; s=corp-2020-01-29;
+ bh=nDMPewNMKfSEphkehcq+BGbu6hcDY1Vw1SfPE7BSfck=;
+ b=cCOwWciB3RszRZ9Lm7e48dp8OLXiynhd7A+/Ou/uyja32Y3I3cYWHXptA5ETIgDjT4ZK
+ crwtgkGAqGhiSXcdhNPC6ZdfFXrAPK/m5lmkspxFpupDRISzUh4T01TzVUxXiAYoL+rw
+ 4tLgiOTeZZ5kze5DR6UfIKl1zIyTV65ZE33mTuybwiB+yNgAkan/FRSwkri78+75gpp8
+ X+FCzeB55axPKLDzj55ShuAqUl4guLhm3qJbQ6rSsCxbc4e36j/MUnnpmPP8bIjbCzQ2
+ ssavq4vaEZhtAswuo6AoH0gxL7gh3VVs0B7v59U/RTlaXWR/axGIzkYFHopNlwVkII8P Gw== 
+Received: from aserp3030.oracle.com (aserp3030.oracle.com [141.146.126.71])
+ by aserp2120.oracle.com with ESMTP id 31bfem38yf-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 02 Jun 2020 10:32:13 +0000
+Received: from pps.filterd (aserp3030.oracle.com [127.0.0.1])
+ by aserp3030.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 052ARNn5095797;
+ Tue, 2 Jun 2020 10:30:13 GMT
+Received: from aserv0122.oracle.com (aserv0122.oracle.com [141.146.126.236])
+ by aserp3030.oracle.com with ESMTP id 31c12nxedk-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Tue, 02 Jun 2020 10:30:13 +0000
+Received: from abhmp0019.oracle.com (abhmp0019.oracle.com [141.146.116.25])
+ by aserv0122.oracle.com (8.14.4/8.14.4) with ESMTP id 052AU3Fe004507;
+ Tue, 2 Jun 2020 10:30:05 GMT
+Received: from kadam (/41.57.98.10) by default (Oracle Beehive Gateway v4.0)
+ with ESMTP ; Tue, 02 Jun 2020 03:30:02 -0700
+Date: Tue, 2 Jun 2020 13:29:55 +0300
+From: Dan Carpenter <dan.carpenter@oracle.com>
 To: dinghao.liu@zju.edu.cn
+Message-ID: <20200602102955.GZ30374@kadam>
+References: <dd729c13-fbc8-22e7-7d8e-e3e126f66943@web.de>
+ <40d8fb01.db721.17269d3d620.Coremail.dinghao.liu@zju.edu.cn>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <40d8fb01.db721.17269d3d620.Coremail.dinghao.liu@zju.edu.cn>
+User-Agent: Mutt/1.9.4 (2018-02-28)
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9639
+ signatures=668686
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 mlxscore=0
+ phishscore=0 malwarescore=0
+ adultscore=0 suspectscore=29 spamscore=0 bulkscore=0 mlxlogscore=878
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2004280000
+ definitions=main-2006020071
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9639
+ signatures=668686
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 malwarescore=0
+ suspectscore=29
+ mlxlogscore=932 priorityscore=1501 bulkscore=0 phishscore=0 clxscore=1011
+ impostorscore=0 adultscore=0 spamscore=0 mlxscore=0 lowpriorityscore=0
+ cotscore=-2147483648 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2004280000 definitions=main-2006020071
 Subject: Re: [Nouveau] [PATCH] drm/nouveau/clk/gm20b: Fix memory leak in
- gm20b_clk_new
+ gm20b_clk_new()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,55 +79,20 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, ML nouveau <nouveau@lists.freedesktop.org>,
- kjlu@umn.edu, LKML <linux-kernel@vger.kernel.org>,
- ML dri-devel <dri-devel@lists.freedesktop.org>, Markus.Elfring@web.de,
- Ben Skeggs <bskeggs@redhat.com>
+Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
+ kernel-janitors@vger.kernel.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, Markus Elfring <Markus.Elfring@web.de>,
+ Ben Skeggs <bskeggs@redhat.com>, Kangjie Lu <kjlu@umn.edu>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Mon, 1 Jun 2020 at 13:37, Ben Skeggs <skeggsb@gmail.com> wrote:
->
-> On Mon, 1 Jun 2020 at 13:27, <dinghao.liu@zju.edu.cn> wrote:
-> >
-> >
-> > Hi Ben,
-> >
-> > > > When gk20a_clk_ctor() returns an error code, pointer "clk"
-> > > > should be released. It's the same when gm20b_clk_new()
-> > > > returns from elsewhere following this call.
-> > > This shouldn't be necessary.  If a subdev constructor fails, and
-> > > returns a pointer, the core will call the destructor to clean things
-> > > up.
-> > >
-> >
-> > I'm not familiar with the behavior of the caller of gm20b_clk_new().
-> > If the subdev constructor fails, the core will check the pointer
-> > (here is "pclk"), then it's ok and there is no bug (Do you mean
-> > this?). If the core executes error handling code only according to
-> > the error code, there may be a memory leak bug (the caller cannot
-> > know if -ENOMEM comes from the failure of kzalloc or gk20a_clk_ctor).
-> > If the core always calls the destructor as long as the constructor
-> > fails (even if the kzalloc fails), we may have a double free bug.
-> >
-> > Would you like to give a more detailed explanation about the behavior
-> > of the core?
-> If there's *any* error, it'll check the pointer, if it's non-NULL,
-> it'll call the destructor.  If kzalloc() fails, the pointer will be
-> NULL, there's no double-free bug.  *every* subdev is written this way
-> to avoid duplicating cleanup logic.
-Actually, gm20b_clk_new_speedo0() may have a bug here if kzalloc()
-fails as it doesn't overwrite the previous pointer from
-gm20b_clk_new().  That whole ctor() sequence is written a little
-strangely.
+The original patch was basically fine.  Just add a Fixes tag and resend.
 
->
-> Ben.
-> >
-> > Regards,
-> > Dinghao
+regards,
+dan carpenter
+
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
