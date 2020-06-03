@@ -1,77 +1,115 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 323241EBF5F
-	for <lists+nouveau@lfdr.de>; Tue,  2 Jun 2020 17:51:51 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 440AF1EC89A
+	for <lists+nouveau@lfdr.de>; Wed,  3 Jun 2020 07:10:44 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 562706E42A;
-	Tue,  2 Jun 2020 15:51:49 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C961B6E4B6;
+	Wed,  3 Jun 2020 05:10:40 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 753 seconds by postgrey-1.36 at gabe;
- Tue, 02 Jun 2020 15:51:48 UTC
-Received: from userp2120.oracle.com (userp2120.oracle.com [156.151.31.85])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 08E876E42A
- for <nouveau@lists.freedesktop.org>; Tue,  2 Jun 2020 15:51:47 +0000 (UTC)
-Received: from pps.filterd (userp2120.oracle.com [127.0.0.1])
- by userp2120.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 052FW32Q105146;
- Tue, 2 Jun 2020 15:39:14 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
- h=date : from : to : cc
- : subject : message-id : references : mime-version : content-type :
- in-reply-to; s=corp-2020-01-29;
- bh=DSbMhSk8SwxhpgAbU8esEvoZolFH3pziYxtelXV4q54=;
- b=zMUNe/3wVc2t0iNS0FHrcOZneeoox1E76XhWQ0SxVThFK9zD02pbVo+mIylWmRF/7lx3
- Ct3IhpYmvEK7KhiAgJVShmkgJVkE9fldJVQHVuE6shhBGucp5ZQXksuGU37sBloc4h7w
- 3yYyq63lrrQOuQ7yA74jSpzQUv5lIFOec4j3db9mOqPJKKLNXAY16LqI6FtAvqjJ2Pu0
- Ryt/cdtemq7uKVKpj4vOa6b47tQPWR1n7A2PbS2Us1tVJU/BemmCP3U5St/wJksnZBkV
- FpalnxmW4FTe2nfXybQAN/qHdTs956D1ant0TZROQAaEGxxJkF/7Q1J8IZGXBmfTAtOM ig== 
-Received: from userp3020.oracle.com (userp3020.oracle.com [156.151.31.79])
- by userp2120.oracle.com with ESMTP id 31dkruhrxp-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 02 Jun 2020 15:39:14 +0000
-Received: from pps.filterd (userp3020.oracle.com [127.0.0.1])
- by userp3020.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 052FY0Fc104603;
- Tue, 2 Jun 2020 15:39:14 GMT
-Received: from userv0122.oracle.com (userv0122.oracle.com [156.151.31.75])
- by userp3020.oracle.com with ESMTP id 31dju1phrx-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 02 Jun 2020 15:39:14 +0000
-Received: from abhmp0010.oracle.com (abhmp0010.oracle.com [141.146.116.16])
- by userv0122.oracle.com (8.14.4/8.14.4) with ESMTP id 052Fd8SF030859;
- Tue, 2 Jun 2020 15:39:08 GMT
-Received: from kadam (/41.57.98.10) by default (Oracle Beehive Gateway v4.0)
- with ESMTP ; Tue, 02 Jun 2020 08:39:08 -0700
-Date: Tue, 2 Jun 2020 18:39:00 +0300
-From: Dan Carpenter <dan.carpenter@oracle.com>
-To: Markus Elfring <Markus.Elfring@web.de>
-Message-ID: <20200602153900.GW22511@kadam>
+X-Greylist: delayed 323 seconds by postgrey-1.36 at gabe;
+ Wed, 03 Jun 2020 05:10:38 UTC
+Received: from mout.web.de (mout.web.de [212.227.15.4])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id EAD0A6E4B6
+ for <nouveau@lists.freedesktop.org>; Wed,  3 Jun 2020 05:10:38 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=web.de;
+ s=dbaedf251592; t=1591161035;
+ bh=EBSTXtu1ei7txhmEeQVcUPxSCEHlwUnoocCsxoIbpao=;
+ h=X-UI-Sender-Class:Subject:To:Cc:References:From:Date:In-Reply-To;
+ b=l1/uhoRR42whWVbLRIgXnYqMIXOaZLXEroWdf2p0RYIbSz5YoayfdXWrqsphqsshs
+ vH4n0pEGr7uo6kQWEZLGCsprxIIJlhSzgs8atggHWs2//3Um+IZvIRPbE8s4fIsA7m
+ KsLoppBdwF+3glljdz1XsvLLtPnBYviOI4bWyDx0=
+X-UI-Sender-Class: c548c8c5-30a9-4db5-a2e7-cb6cb037b8f9
+Received: from [192.168.1.2] ([93.131.82.231]) by smtp.web.de (mrweb005
+ [213.165.67.108]) with ESMTPSA (Nemesis) id 1MumNL-1iove91CyJ-00rm2g; Wed, 03
+ Jun 2020 07:04:46 +0200
+To: Dinghao Liu <dinghao.liu@zju.edu.cn>,
+ Dan Carpenter <dan.carpenter@oracle.com>, dri-devel@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org
 References: <dd729c13-fbc8-22e7-7d8e-e3e126f66943@web.de>
  <40d8fb01.db721.17269d3d620.Coremail.dinghao.liu@zju.edu.cn>
- <20200602102955.GZ30374@kadam>
- <65e3d2b7-b0ad-f387-b8fe-d83ea816a0f6@web.de>
+ <20200602102955.GZ30374@kadam> <65e3d2b7-b0ad-f387-b8fe-d83ea816a0f6@web.de>
+ <20200602153900.GW22511@kadam>
+ <5d580094.f274c.17277fc124e.Coremail.dinghao.liu@zju.edu.cn>
+From: Markus Elfring <Markus.Elfring@web.de>
+Autocrypt: addr=Markus.Elfring@web.de; prefer-encrypt=mutual; keydata=
+ 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 FEE=
+Message-ID: <75a33776-cd69-edba-8d20-ffcf99ca1879@web.de>
+Date: Wed, 3 Jun 2020 07:04:37 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.8.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <65e3d2b7-b0ad-f387-b8fe-d83ea816a0f6@web.de>
-User-Agent: Mutt/1.9.4 (2018-02-28)
-X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9640
- signatures=668686
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
- mlxlogscore=999
- phishscore=0 malwarescore=0 mlxscore=0 adultscore=0 bulkscore=0
- suspectscore=18 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2004280000 definitions=main-2006020111
-X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9640
- signatures=668686
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
- priorityscore=1501
- mlxscore=0 lowpriorityscore=0 suspectscore=18 malwarescore=0 clxscore=1015
- adultscore=0 mlxlogscore=999 cotscore=-2147483648 phishscore=0 bulkscore=0
- impostorscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2004280000 definitions=main-2006020111
-Subject: Re: [Nouveau] [PATCH] drm/nouveau/clk/gm20b: Fix memory leak in
- gm20b_clk_new()
+In-Reply-To: <5d580094.f274c.17277fc124e.Coremail.dinghao.liu@zju.edu.cn>
+Content-Language: en-GB
+X-Provags-ID: V03:K1:HBphbPr3xWqK/Noy1A3QhHsm7WTySxNbm5b0+Lz/09Uxie+7c74
+ 08LVOOCIidrsRqtFHthQf8yJLXYQE6of6jPr0+jOjYLfXIisO1I5FNUnF+AwEOcB00d4fyf
+ htrEcuVkeXjxl1ISV917SvJ6ASBw6Htsnlbxi8/JtkRRX3PHOiLdTuq7ppZ6U8rFzG2dGzZ
+ 6iXA5Sv/6Iq9uCLZLOMSQ==
+X-Spam-Flag: NO
+X-UI-Out-Filterresults: notjunk:1;V03:K0:TGSdMuzKUT0=:T3KBgDNr/qgQ8sEM27u/Zt
+ nK3bbWQMJ7H0UPvl54Lspp3GxGwhxfAKNtsv1BO7WJkJc8BjEJM5V9xp/nzBRq6zktpxplOUd
+ SUzoyTRi32dlCg3ray0CmVCRxaE6CVojRO+K9+Y7kpkiS2Tdvch5u1zW78vZ2uZKTxno20mCs
+ q9NxCwA3GXfeEzn0AyADEFqbYu7Wud/zGffod81xS5JjyQXLWk8qM472aj8c4YW54RoPkp4iZ
+ +L4y4sn2Z8rZeenPmdE15bvwMnm/+sdMT752lbtBdDELX8q8X5sZDKIHNW70uUbcXzLRwKfyb
+ TNenPdmUPRdTytX/FPIX7NkAWQlV1PJIqav3G8Ep25S7VGhtUlXXR+oMs9kJ1GS6Nf62PBXyu
+ StTeCb9xcUkEm8Lo5m+XYEQQptDjb5z0bT9H0HHRJ4UgJKi+fk2zRnjhyIVkS8trYDEXNLkpH
+ k/iY6uD2MjEkyO1SkSTEHWlhZzCNUVLT/AGmiuIkMbLPpaOuxGgewwI5+yIXPd/bivzeUIXS1
+ Vf1tw4GX0l17X/RZvyLQ1Sbs2fIl8h1WyaFBhQxMKFfhpfTct+0W0eNdp4uWpgCqiwd7OR6Rm
+ zEw6XE/xA0fOSthVmmJR5jIMA7U8jboL5SydMygKMnb82V6r1hjuuPI8KHGTcvbS/tK1lxo8h
+ zLbyKTG8BjeK114Gb7iN8dyxLbOTPQlvXaveUKGFyTX8eWo8W1x+1QUxZqDH7Ok5deevssnsJ
+ 4p8GbE5BXZKZm3wou+EJsb/UgkgcxYlUjW3gv3FMWXwFMAqGrP9iFXRzu+1Ha9ZCm1nH7edSS
+ Dsl8AKxsmPEwPYaZq4DXY37Rzr/61yFUIuK7t9fWQ8EK9vCrh6xoH7jME2isarDFoVgANCR9c
+ MXHGluf6ZCHyScuw3l8yAfK0vh1VMXcE6s1Zoaa9ZNr54+l8qstfnasMJNiL2xzsVIyNEyZCz
+ qdm7OaigJuOkI+PdRp4VfMXVvTlhObS4rISF46Duj3pHXGOoVvMzg7V6vU8xULFp3B28nc679
+ LJUE3TXaDUFCgf+M/STHk7JcoS2Ng8FPfFWjaZMokv0OvRu7oGkGVsR2/DA6uAALkoeQN+TxC
+ 4RATzEY0cAc3mN5fmFPVpOTHrA6RDT30/WIBdNkE8DiZDGrSPhJzhl2WFQFL+atk6PZdj6AJn
+ Z/W7BOC7FFCyzO4gvJYtuvrQsayoukchEeoTQxiFJCjXB6fkPpwCBL6cSMRPxpAVLvslRGYKt
+ nQrA370O6CD7Phsla
+Subject: Re: [Nouveau] drm/nouveau/clk/gm20b: Understanding challenges
+ around gm20b_clk_new()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -83,30 +121,23 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
+Cc: David Airlie <airlied@linux.ie>, Kangjie Lu <kjlu@umn.edu>,
  kernel-janitors@vger.kernel.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>,
- Dinghao Liu <dinghao.liu@zju.edu.cn>, Kangjie Lu <kjlu@umn.edu>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+ Ben Skeggs <bskeggs@redhat.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, Jun 02, 2020 at 01:10:34PM +0200, Markus Elfring wrote:
-> > The original patch was basically fine.
-> 
-> I propose to reconsider the interpretation of the software situation once more.
-> 
-> * Should the allocated clock object be kept usable even after
->   a successful return from this function?
-
-Heh.  You're right.  The patch is freeing "clk" on the success path so
-that doesn't work.
-
-regards,
-dan carpenter
-
-_______________________________________________
-Nouveau mailing list
-Nouveau@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/nouveau
+PiBCZW4gaGFzIGV4cGxhaW5lZCB0aGlzIHByb2JsZW06Cj4gaHR0cHM6Ly9sb3JlLmtlcm5lbC5v
+cmcvcGF0Y2h3b3JrL3BhdGNoLzEyNDk1OTIvCj4gU2luY2UgdGhlIGNhbGxlciB3aWxsIGNoZWNr
+ICJwY2xrIiBvbiBmYWlsdXJlLCB3ZSBkb24ndCBuZWVkIHRvIGZyZWUKPiAiY2xrIiBpbiBnbTIw
+Yl9jbGtfbmV3KCkgYW5kIEkgdGhpbmsgdGhpcyBwYXRjaCBpcyBubyBsb25nZXIgbmVlZGVkLgoK
+KiBJIGFtIGN1cmlvdXMgaWYgaXQgY2FuIGJlY29tZSBlYXNpZXIgdG8gc2VlIHRoZSByZWxhdGlv
+bnNoaXBzIGZvcgogIHRoZXNlIHZhcmlhYmxlcyBhY2NvcmRpbmcgdG8gbWVudGlvbmVkIOKAnGRl
+c3RydWN0b3LigJ0gY2FsbHMuCgoqIERpZCB5b3Ugbm90aWNlIG9wcG9ydHVuaXRpZXMgdG8gaW1w
+cm92ZSBzb3VyY2UgY29kZSBhbmFseXNpcwogIChvciBzb2Z0d2FyZSBkb2N1bWVudGF0aW9uKSBh
+Y2NvcmRpbmdseT8KClJlZ2FyZHMsCk1hcmt1cwpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fXwpOb3V2ZWF1IG1haWxpbmcgbGlzdApOb3V2ZWF1QGxpc3RzLmZy
+ZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3Rp
+bmZvL25vdXZlYXUK
