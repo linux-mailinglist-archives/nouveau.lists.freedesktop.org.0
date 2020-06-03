@@ -1,58 +1,54 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8AE351ED1F8
-	for <lists+nouveau@lfdr.de>; Wed,  3 Jun 2020 16:20:13 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9A1B01ED39B
+	for <lists+nouveau@lfdr.de>; Wed,  3 Jun 2020 17:43:01 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 46B4189C21;
-	Wed,  3 Jun 2020 14:20:11 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 09CCD89895;
+	Wed,  3 Jun 2020 15:42:59 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ej1-x643.google.com (mail-ej1-x643.google.com
- [IPv6:2a00:1450:4864:20::643])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0548289C08;
- Wed,  3 Jun 2020 14:20:10 +0000 (UTC)
-Received: by mail-ej1-x643.google.com with SMTP id gl26so2340953ejb.11;
- Wed, 03 Jun 2020 07:20:09 -0700 (PDT)
+Received: from mail-vs1-xe42.google.com (mail-vs1-xe42.google.com
+ [IPv6:2607:f8b0:4864:20::e42])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6277289895;
+ Wed,  3 Jun 2020 15:42:58 +0000 (UTC)
+Received: by mail-vs1-xe42.google.com with SMTP id g129so1668794vsc.4;
+ Wed, 03 Jun 2020 08:42:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=brk2U8DSU4E7P9UsEsDcp0iVP2I5n96xwIrVhsO2D0U=;
- b=O3Hc7B/C+hhE0kIURHDPGIQom3B8NcaK2/PBXIHdaKszf4Shr2XwE/CY7e3K3X9un7
- bunwidpWUmEKcYQ1+DyovPB6Ss6ilCeqcQ08x4EQjzR8XyyYqwz/Ka4UKJQ4lUHrSSpM
- UHfXsDtK5Y4CtSSURVBI0x02U4AdOU02Bj41bKnGK2vTB7kQSZrGcKnOXatYMQolqilO
- xCyzgl8avJ0ILIK67XyJppKrJbmKdazxxb4M4E2N8uaImFg6Kt99NQStQGn4TxJzFZ+C
- FfnCUK9sHHPZOOE2xvN8K1wDNSa9YBLZfhshse7L2EPgQe3TPqAv5IxCBdCNgm3h27yd
- 7q0w==
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=+v4mUPWrEgtC6NRHUyR/xEDnM6YAcz7lXyI+WN23E04=;
+ b=khLffvfzVOTkhZTg4LH+qEdUt73iWPRnL9GaoDNme5UbPkDVXCY5TqrzYGvhtcIoga
+ cKEaaSukhEUrbDyPveKQNibicwL0vJI1sqkVdxs+iz+nSTyId8VO4WYcHwUJu5wOeIi/
+ c8UVYg5uRcelc59CHgFsp5wPS5Q4t3aG+dXUOm+3JKQc8ZGIcJo8eQdYnFtyvqSvpMEc
+ meiMqZLRqBZt5tPR/mAcgTkKvrNnL5gDlBwx4LvepacSHca14xeZxhAEHEdGCnw9Qc55
+ +RLa6I2bbLDEWBZwsIct44sDCTTKbj2jrpCrRX4C1mOSEsPSDJUbuZV5LROQ/IcLK7Om
+ Sp+Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=brk2U8DSU4E7P9UsEsDcp0iVP2I5n96xwIrVhsO2D0U=;
- b=KhUmJAXhOTtnx7oDumvWbH64haDgXtDgI6px5vhhQs8aDhVe0pBcCwIhAxR1iCsO71
- IX/FlpEwlDhnAy8yAzDNNGsi5h0a6fouFoXIkKn6O/2MRPSaJSnEQ7AuoDvKV9cmGjiI
- gL7kcLq9RdGNEolGO6GeR6fs9KF186VNG7zPqzksE4j1AIHfosD1CGLqXPQV/Q7n+UfH
- MxI+bEGV62gJABHmlq8ZPbuSLKjN4p+8dPu7Uzu6wkqtnXnNHHCKTsk52ZdR6qOSce8e
- rKA77cTDPyI9WsIxdNfOe5zmpJDh0W2+8jamIouKolfHu71i1TM3+NtSsq5imfmK593t
- 1DYg==
-X-Gm-Message-State: AOAM531xWmDr9sxYo3KF8g2gZmkcorKUvoK6L3tW2MjnsGSgRwJ1V0Gy
- 3SsxLFKnyZ92257xgrGbxlI=
-X-Google-Smtp-Source: ABdhPJybWenTiub6eisJLN+mdRwASGIKTFULXH9VQVTeL1bG9nxCvoga0C3ZtE7cqaD3yXClqEsFtQ==
-X-Received: by 2002:a17:906:3289:: with SMTP id
- 9mr6777119ejw.316.1591194007599; 
- Wed, 03 Jun 2020 07:20:07 -0700 (PDT)
-Received: from localhost (pd9e51079.dip0.t-ipconnect.de. [217.229.16.121])
- by smtp.gmail.com with ESMTPSA id qp16sm1181788ejb.64.2020.06.03.07.20.06
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 03 Jun 2020 07:20:06 -0700 (PDT)
-From: Thierry Reding <thierry.reding@gmail.com>
-To: Ben Skeggs <bskeggs@redhat.com>
-Date: Wed,  3 Jun 2020 16:20:02 +0200
-Message-Id: <20200603142002.3776672-1-thierry.reding@gmail.com>
-X-Mailer: git-send-email 2.24.1
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=+v4mUPWrEgtC6NRHUyR/xEDnM6YAcz7lXyI+WN23E04=;
+ b=BvoIIVmLfzuFRJfYnjV+J8JQqO9A47VABYC3itwsvjTmsuF16z+h/OhN8ohStog+6F
+ Iah5TkSHsTvgwwOr3qOoDuOfMm7Ixvlxymsii7uNrtskYrmRmCRRMIiknjyHe0iNF8sM
+ fqIJbUGogfAXIilEcrCTsWa4TgVGEtYEuz3482S5cdR/OWVjM6uniz86d1jPzhH4M+xr
+ /jGq7KcD72qWnbnDKEcZgYKbcvrdEk32krg2dC1BbQ29IyjjcnghY5yCL+nFTyV5lLfg
+ OUil78tXiANQkBPlcffc771m+DKofbPZn+qG91zxZSuS9nTqCIX4xFqTOec4u6uoFuqI
+ X3rQ==
+X-Gm-Message-State: AOAM53158Zuue3W8NwLQIuW38CccK3nZyeqL85C8VKcerej8kphkaj+h
+ J471Z9BQi6sUEe503MRmK/IS6FB4Kg700cc/z3E=
+X-Google-Smtp-Source: ABdhPJw5n02lpBHKugUxtKm8DveNj4ZSMg6h12mYs3x3BR4r2dCSxt3GQS8NEU5HWJZuWnL499Nz8JoOwcgIKa+ySt4=
+X-Received: by 2002:a05:6102:22ec:: with SMTP id
+ b12mr18862vsh.138.1591198977515; 
+ Wed, 03 Jun 2020 08:42:57 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [Nouveau] [PATCH] drm/nouveau: gr/gk20a: Use firmware version 0
+References: <20200603142002.3776672-1-thierry.reding@gmail.com>
+In-Reply-To: <20200603142002.3776672-1-thierry.reding@gmail.com>
+From: Emil Velikov <emil.l.velikov@gmail.com>
+Date: Wed, 3 Jun 2020 16:39:37 +0100
+Message-ID: <CACvgo529m+fub=ZddGkjRXEY-7i3rRUs0EssYGf+DJgkcDm3Zg@mail.gmail.com>
+To: Thierry Reding <thierry.reding@gmail.com>
+Subject: Re: [Nouveau] [PATCH] drm/nouveau: gr/gk20a: Use firmware version 0
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -64,40 +60,29 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: linux-tegra@vger.kernel.org, nouveau@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org
+Cc: linux-tegra@vger.kernel.org, ML nouveau <nouveau@lists.freedesktop.org>,
+ Ben Skeggs <bskeggs@redhat.com>,
+ ML dri-devel <dri-devel@lists.freedesktop.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-From: Thierry Reding <treding@nvidia.com>
+On Wed, 3 Jun 2020 at 15:20, Thierry Reding <thierry.reding@gmail.com> wrote:
+>
+> From: Thierry Reding <treding@nvidia.com>
+>
+> Tegra firmware doesn't actually use any version numbers and passing -1
+> causes the existing firmware binaries not to be found. Use version 0 to
+> find the correct files.
+>
+> Signed-off-by: Thierry Reding <treding@nvidia.com>
 
-Tegra firmware doesn't actually use any version numbers and passing -1
-causes the existing firmware binaries not to be found. Use version 0 to
-find the correct files.
+Fixes: ef16dc278ec2 ("drm/nouveau/gr/gf100-: select implementation
+based on available FW")
+Reviewed-by: Emil Velikov <emil.l.velikov@gmail.com>
 
-Signed-off-by: Thierry Reding <treding@nvidia.com>
----
- drivers/gpu/drm/nouveau/nvkm/engine/gr/gk20a.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/gr/gk20a.c b/drivers/gpu/drm/nouveau/nvkm/engine/gr/gk20a.c
-index ec330d791d15..e56880f3e3bd 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/gr/gk20a.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/gr/gk20a.c
-@@ -352,7 +352,7 @@ gk20a_gr_load(struct gf100_gr *gr, int ver, const struct gf100_gr_fwif *fwif)
- 
- static const struct gf100_gr_fwif
- gk20a_gr_fwif[] = {
--	{ -1, gk20a_gr_load, &gk20a_gr },
-+	{ 0, gk20a_gr_load, &gk20a_gr },
- 	{}
- };
- 
--- 
-2.24.1
-
+-Emil
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
