@@ -2,51 +2,51 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id CE25B1EE741
-	for <lists+nouveau@lfdr.de>; Thu,  4 Jun 2020 17:04:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 67E8D1EE77B
+	for <lists+nouveau@lfdr.de>; Thu,  4 Jun 2020 17:16:04 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4C90F6E402;
-	Thu,  4 Jun 2020 15:04:21 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B23376E400;
+	Thu,  4 Jun 2020 15:16:01 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-il1-x134.google.com (mail-il1-x134.google.com
- [IPv6:2607:f8b0:4864:20::134])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0A6F16E402
- for <nouveau@lists.freedesktop.org>; Thu,  4 Jun 2020 15:04:20 +0000 (UTC)
-Received: by mail-il1-x134.google.com with SMTP id l6so6405163ilo.2
- for <nouveau@lists.freedesktop.org>; Thu, 04 Jun 2020 08:04:20 -0700 (PDT)
+Received: from mail-il1-x12b.google.com (mail-il1-x12b.google.com
+ [IPv6:2607:f8b0:4864:20::12b])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5CD216E400
+ for <nouveau@lists.freedesktop.org>; Thu,  4 Jun 2020 15:16:00 +0000 (UTC)
+Received: by mail-il1-x12b.google.com with SMTP id v11so6437442ilh.1
+ for <nouveau@lists.freedesktop.org>; Thu, 04 Jun 2020 08:16:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=LngI92jGD0QZdOy6kZ5Tmr8Ff0OC1yZ/CGxWbpFolT8=;
- b=YS3aEKbVTKZDkSKeh0CX/xm9WTtmNACYiPRBDIeMX8MelYg3aX/45//1Qy2UGnptab
- HlDNcZDnEbu32YZJJzWL5dHsFExuLJ6QQXKHK/5CtyP7ni3GXKgW3rpT1OnZ7TUGRL5h
- Xe9aS9spm60GdmUKA8LQUdUQ8xYTDsLj3POVE73X/gaDiKwayQDq99kONQCIiGZiG7Wa
- 1T0yp8LKAw1SVLuUYzn/kdUKksA4cOWp2yumBT9I7G6gtZ0h+sN5IPXuUy1c6iAFlDK4
- n/po9Icft2JhR0xk4cRTX9IL/GiBq/GEhDSQfMtNwdpoi5nsxMRVO/qn4QQcKqvDs9Vi
- HJeA==
+ :cc; bh=AHhQRFD5dXLk3tEs66mKWpDieuiW+fGGAlwHvRQW7yM=;
+ b=XAh/zEHbGqVyZrM2oX8y+oTOMy45mOF1/MZlf3g1SNEcYwSLiz31nwMYMImLTU7hHQ
+ ArnxLj+f5CKk2sTOGxe8pE6IGwURQxx7curAh3RrVHQzE1TWJoYHifXv3rwQXMECnyoB
+ CysC0s0Eu0EOYgd3Vi+N94qBkjR9+3tmM5MmfgYAS3jdyyVPLTKSPCPDqzLK4nPF0bHw
+ /BN4WVQHL4IxVc9t4s+AuDg7TbyASMZIwZlOTRZSbghBIzbj1+NtC3xaXsf8XG33YcGY
+ 8KKKCrJMRdeofjD11fzx2DG+1DmXBsV2T3BTBDBNF45Uj9ccecJ7Xjad9AzY5WgJ+rEt
+ oWkw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=LngI92jGD0QZdOy6kZ5Tmr8Ff0OC1yZ/CGxWbpFolT8=;
- b=ZnbxEtmk7LXhhlwOmnuL6eElMtT7lp8tmkAOrk3JuQ5X5JnkWHEtZpmWl105ZaA44n
- 6JsySwm58J3+h7izJGjzBDkhBCBXg+yo6+Fgvm3p1C1+odJhQqFeIT6u7+05hB99wBck
- CDFyOKYIAO6nvRwx9GSPdMKmXIVwQo1pxKZ0gPdiJMEqOebyY6ggzzf8k+ww8IHYrqtq
- UoOcoL7zjBG92/pbV+rAzsr8+xDK3962FjgHgjF9sv/JVleAOpvAo/4i31hutAtHvR4+
- ROJTFVJ1q0+jxBnMUtYsLi1r74GE853d8ij3sFIa0a6e8GlBaIvBnFX3dmSlZmXA3JJu
- 7Qcg==
-X-Gm-Message-State: AOAM532NFc7Wr0IKU0Gh9eRYGUNwjv17drvPnAA1FLNp2b0nRPTMLjOW
- 7GaUNAdCFSKTFUYBy4I0Jtv7yjPCkCrDGXBbJ40=
-X-Google-Smtp-Source: ABdhPJxE7Q4CFY/nkL5GSgsZYUCp7qF3I5XISpdtC4b0hk26y/JG0p0u7xwfc0+jU6YiyLx+h6E7Hh12eKUHWQBcnsA=
-X-Received: by 2002:a92:db0b:: with SMTP id b11mr4267453iln.90.1591283059306; 
- Thu, 04 Jun 2020 08:04:19 -0700 (PDT)
+ bh=AHhQRFD5dXLk3tEs66mKWpDieuiW+fGGAlwHvRQW7yM=;
+ b=SU3YKour4KnXYUrORHO0iUZQKstvXwxAS9JCv25PcDTv5LCtlzxci55dbrg9gDdPhO
+ cPqt1ySHlqb3hAf+E95JGk3I/SU3eUEBxxrJytrvOIc2UzSuMxwxI/oWbRQNvc0eSLJD
+ I+DnH/gs2xSWzvvgeu2y+L4dPpNnAziwcBDzDP3yjegI1uIkM+YVf2DaS8KNxnZ46+2D
+ YpY5OGiSlZD8UZ/La7ExwaKBOB4ihzmmPeiPnwYzJ0ZuuU5qmvevNDI/1tU5jtvQC9G5
+ cVYrXKU6lqs7FcOLqD36v7ZWSnrjTKAuBpC4LgqRzcjSjmwDjuGKs9c/ahQt9kPzs3kU
+ 5qpQ==
+X-Gm-Message-State: AOAM532G1nqrqxPDepCs5dtY6GSlPTkfH9DMM35BmIT8KB3KETI4oA7N
+ iOqhyFbWRFfaktOqbjLk8jFHVfbtP+aCtYdDLeKDgftcS8c=
+X-Google-Smtp-Source: ABdhPJzkVPqhXVmoY1skaPXsZIWDQ+EAQ6FvWbKKIu+LD3tCklbO+QT85Ay4tm7zgFdr+vudymZBkXSCuIvaqLUtsjs=
+X-Received: by 2002:a92:af44:: with SMTP id n65mr4152893ili.61.1591283759746; 
+ Thu, 04 Jun 2020 08:15:59 -0700 (PDT)
 MIME-Version: 1.0
 References: <CAOkhzLUrNYk6JKTbTQuFkfuGKxGvW9XVq6+p9igsBgX1-e9Cxg@mail.gmail.com>
  <CAKb7Uvg0W_1qUjf3G4JrCb2oJgkwz4G5T6PwkyeL-rZEp4UnTw@mail.gmail.com>
 In-Reply-To: <CAKb7Uvg0W_1qUjf3G4JrCb2oJgkwz4G5T6PwkyeL-rZEp4UnTw@mail.gmail.com>
 From: Zeno Davatz <zdavatz@gmail.com>
-Date: Thu, 4 Jun 2020 17:04:08 +0200
-Message-ID: <CAOkhzLXifEA2NvtDPFNsvH3bSDiH7ZLk0iRr2AkDDa6fO=fVfQ@mail.gmail.com>
+Date: Thu, 4 Jun 2020 17:15:48 +0200
+Message-ID: <CAOkhzLV+suVNAoyiaHKOkbwP-KKgTLEa7S8kp8+GSTLm_-wWFw@mail.gmail.com>
 To: Ilia Mirkin <imirkin@alum.mit.edu>
 Subject: Re: [Nouveau] NVIDIA GP107 (137000a1) - acr: failed to load firmware
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -67,11 +67,8 @@ Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Dear Ilia
-
-Thank you for your reply.
-
 On Thu, Jun 4, 2020 at 4:36 PM Ilia Mirkin <imirkin@alum.mit.edu> wrote:
+>
 > Starting with kernel 5.6, loading nouveau without firmware (for GPUs
 > where it is required, such as yours) got broken.
 >
@@ -79,7 +76,17 @@ On Thu, Jun 4, 2020 at 4:36 PM Ilia Mirkin <imirkin@alum.mit.edu> wrote:
 >
 > The firmware needs to be available to the kernel at the time of nouveau loading.
 
-How can I tell the kernel to load the firmware?
+Ok, I am now trying this:
+
+/usr/src/linux> grep FIRMWARE /usr/src/linux/.config
+CONFIG_FIRMWARE_MEMMAP=y
+# CONFIG_GOOGLE_FIRMWARE is not set
+CONFIG_PREVENT_FIRMWARE_BUILD=y
+CONFIG_EXTRA_FIRMWARE="nvidia/gp107/gr/sw_nonctx.bin"
+# CONFIG_CYPRESS_FIRMWARE is not set
+# CONFIG_DRM_LOAD_EDID_FIRMWARE is not set
+# CONFIG_FIRMWARE_EDID is not set
+# CONFIG_TEST_FIRMWARE is not set
 
 Best
 Zeno
