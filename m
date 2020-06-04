@@ -2,52 +2,44 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 67E8D1EE77B
-	for <lists+nouveau@lfdr.de>; Thu,  4 Jun 2020 17:16:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1AA841EE7B3
+	for <lists+nouveau@lfdr.de>; Thu,  4 Jun 2020 17:26:00 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B23376E400;
-	Thu,  4 Jun 2020 15:16:01 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8B5EC6E44D;
+	Thu,  4 Jun 2020 15:25:58 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-il1-x12b.google.com (mail-il1-x12b.google.com
- [IPv6:2607:f8b0:4864:20::12b])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5CD216E400
- for <nouveau@lists.freedesktop.org>; Thu,  4 Jun 2020 15:16:00 +0000 (UTC)
-Received: by mail-il1-x12b.google.com with SMTP id v11so6437442ilh.1
- for <nouveau@lists.freedesktop.org>; Thu, 04 Jun 2020 08:16:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=AHhQRFD5dXLk3tEs66mKWpDieuiW+fGGAlwHvRQW7yM=;
- b=XAh/zEHbGqVyZrM2oX8y+oTOMy45mOF1/MZlf3g1SNEcYwSLiz31nwMYMImLTU7hHQ
- ArnxLj+f5CKk2sTOGxe8pE6IGwURQxx7curAh3RrVHQzE1TWJoYHifXv3rwQXMECnyoB
- CysC0s0Eu0EOYgd3Vi+N94qBkjR9+3tmM5MmfgYAS3jdyyVPLTKSPCPDqzLK4nPF0bHw
- /BN4WVQHL4IxVc9t4s+AuDg7TbyASMZIwZlOTRZSbghBIzbj1+NtC3xaXsf8XG33YcGY
- 8KKKCrJMRdeofjD11fzx2DG+1DmXBsV2T3BTBDBNF45Uj9ccecJ7Xjad9AzY5WgJ+rEt
- oWkw==
+Received: from mail-vs1-f65.google.com (mail-vs1-f65.google.com
+ [209.85.217.65])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8FCAF6E44D
+ for <nouveau@lists.freedesktop.org>; Thu,  4 Jun 2020 15:25:56 +0000 (UTC)
+Received: by mail-vs1-f65.google.com with SMTP id y123so3757503vsb.6
+ for <nouveau@lists.freedesktop.org>; Thu, 04 Jun 2020 08:25:56 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=AHhQRFD5dXLk3tEs66mKWpDieuiW+fGGAlwHvRQW7yM=;
- b=SU3YKour4KnXYUrORHO0iUZQKstvXwxAS9JCv25PcDTv5LCtlzxci55dbrg9gDdPhO
- cPqt1ySHlqb3hAf+E95JGk3I/SU3eUEBxxrJytrvOIc2UzSuMxwxI/oWbRQNvc0eSLJD
- I+DnH/gs2xSWzvvgeu2y+L4dPpNnAziwcBDzDP3yjegI1uIkM+YVf2DaS8KNxnZ46+2D
- YpY5OGiSlZD8UZ/La7ExwaKBOB4ihzmmPeiPnwYzJ0ZuuU5qmvevNDI/1tU5jtvQC9G5
- cVYrXKU6lqs7FcOLqD36v7ZWSnrjTKAuBpC4LgqRzcjSjmwDjuGKs9c/ahQt9kPzs3kU
- 5qpQ==
-X-Gm-Message-State: AOAM532G1nqrqxPDepCs5dtY6GSlPTkfH9DMM35BmIT8KB3KETI4oA7N
- iOqhyFbWRFfaktOqbjLk8jFHVfbtP+aCtYdDLeKDgftcS8c=
-X-Google-Smtp-Source: ABdhPJzkVPqhXVmoY1skaPXsZIWDQ+EAQ6FvWbKKIu+LD3tCklbO+QT85Ay4tm7zgFdr+vudymZBkXSCuIvaqLUtsjs=
-X-Received: by 2002:a92:af44:: with SMTP id n65mr4152893ili.61.1591283759746; 
- Thu, 04 Jun 2020 08:15:59 -0700 (PDT)
+ bh=wQu5VmRSYNeWuQ8i5tUUigorDKnoUd980cUZ+cjZTb4=;
+ b=LEcv4r1yiQE2VqQirg9PihTJPiczTA880bZXyJcyC4EQmBLexnt8jaW+ZMTa09dTXi
+ 1wzdcgDackkM2nU6oEU+tqDpaimSpsbrESRe+NDBD6bTsZUkrSzKLhwiSsTLxtkuw/7+
+ kpi2TjnPOvxylQYBQ8FQRrULLWt+rwT1WQiTT1Be6UxWVkDFxzZrhpFrKvHp9mdnueO3
+ SG2qSPg2fk/A0MRfxA9W2WG3a2ioOcGONaD3H6MrrTmtG2xZ//G7d/Z+Km6K39IOb/Ja
+ rVXdUERS6un5Ws8rNjzgDeXEHzGzA4ty4CYI/7KZF1JmDVCozBlq5iYvBbD1b2k0GVrC
+ V58Q==
+X-Gm-Message-State: AOAM532lZyIQtoYmyTtTGY6g5dW27ye+VDBFGGIoSZM98POxO+KPheoz
+ oVfoG/btYeMQJOLU45RKmMl+ELILaGVdSW6KlVE=
+X-Google-Smtp-Source: ABdhPJwqO+g81Sm7vWEc4Yket9tjpOnJckjtQCHgAFqLxf9gmX/lI345OEc23j2K4BGT9dlXl7YO1du334sGMfNmZ+A=
+X-Received: by 2002:a67:8846:: with SMTP id k67mr3801972vsd.210.1591284355742; 
+ Thu, 04 Jun 2020 08:25:55 -0700 (PDT)
 MIME-Version: 1.0
 References: <CAOkhzLUrNYk6JKTbTQuFkfuGKxGvW9XVq6+p9igsBgX1-e9Cxg@mail.gmail.com>
  <CAKb7Uvg0W_1qUjf3G4JrCb2oJgkwz4G5T6PwkyeL-rZEp4UnTw@mail.gmail.com>
-In-Reply-To: <CAKb7Uvg0W_1qUjf3G4JrCb2oJgkwz4G5T6PwkyeL-rZEp4UnTw@mail.gmail.com>
-From: Zeno Davatz <zdavatz@gmail.com>
-Date: Thu, 4 Jun 2020 17:15:48 +0200
-Message-ID: <CAOkhzLV+suVNAoyiaHKOkbwP-KKgTLEa7S8kp8+GSTLm_-wWFw@mail.gmail.com>
-To: Ilia Mirkin <imirkin@alum.mit.edu>
+ <CAOkhzLV+suVNAoyiaHKOkbwP-KKgTLEa7S8kp8+GSTLm_-wWFw@mail.gmail.com>
+In-Reply-To: <CAOkhzLV+suVNAoyiaHKOkbwP-KKgTLEa7S8kp8+GSTLm_-wWFw@mail.gmail.com>
+From: Ilia Mirkin <imirkin@alum.mit.edu>
+Date: Thu, 4 Jun 2020 11:25:44 -0400
+Message-ID: <CAKb7UvgWMsLSHCayzdY7UYMVTjN3OHbH2WhKd-BP46K=r4Ra8A@mail.gmail.com>
+To: Zeno Davatz <zdavatz@gmail.com>
 Subject: Re: [Nouveau] NVIDIA GP107 (137000a1) - acr: failed to load firmware
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -67,29 +59,40 @@ Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, Jun 4, 2020 at 4:36 PM Ilia Mirkin <imirkin@alum.mit.edu> wrote:
+On Thu, Jun 4, 2020 at 11:16 AM Zeno Davatz <zdavatz@gmail.com> wrote:
 >
-> Starting with kernel 5.6, loading nouveau without firmware (for GPUs
-> where it is required, such as yours) got broken.
+> On Thu, Jun 4, 2020 at 4:36 PM Ilia Mirkin <imirkin@alum.mit.edu> wrote:
+> >
+> > Starting with kernel 5.6, loading nouveau without firmware (for GPUs
+> > where it is required, such as yours) got broken.
+> >
+> > You are loading nouveau without firmware, so it fails.
+> >
+> > The firmware needs to be available to the kernel at the time of nouveau loading.
 >
-> You are loading nouveau without firmware, so it fails.
+> Ok, I am now trying this:
 >
-> The firmware needs to be available to the kernel at the time of nouveau loading.
+> /usr/src/linux> grep FIRMWARE /usr/src/linux/.config
+> CONFIG_FIRMWARE_MEMMAP=y
+> # CONFIG_GOOGLE_FIRMWARE is not set
+> CONFIG_PREVENT_FIRMWARE_BUILD=y
+> CONFIG_EXTRA_FIRMWARE="nvidia/gp107/gr/sw_nonctx.bin"
+> # CONFIG_CYPRESS_FIRMWARE is not set
+> # CONFIG_DRM_LOAD_EDID_FIRMWARE is not set
+> # CONFIG_FIRMWARE_EDID is not set
+> # CONFIG_TEST_FIRMWARE is not set
 
-Ok, I am now trying this:
+There's a lot more firmware files than that ... everything in the
+gp107 directory. Also this would only be necessary if nouveau is built
+into the kernel. The files just have to be available whenever nouveau
+is loaded -- if it's built in, that means the firmware has to be baked
+into the kernel too. If it's loaded from initrd, that means the
+firmware has to be in initrd. If it's loaded after boot, then the
+firmware has to be available after boot.
 
-/usr/src/linux> grep FIRMWARE /usr/src/linux/.config
-CONFIG_FIRMWARE_MEMMAP=y
-# CONFIG_GOOGLE_FIRMWARE is not set
-CONFIG_PREVENT_FIRMWARE_BUILD=y
-CONFIG_EXTRA_FIRMWARE="nvidia/gp107/gr/sw_nonctx.bin"
-# CONFIG_CYPRESS_FIRMWARE is not set
-# CONFIG_DRM_LOAD_EDID_FIRMWARE is not set
-# CONFIG_FIRMWARE_EDID is not set
-# CONFIG_TEST_FIRMWARE is not set
+Cheers,
 
-Best
-Zeno
+  -ilia
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
