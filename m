@@ -1,45 +1,45 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 154BA1EE87E
-	for <lists+nouveau@lfdr.de>; Thu,  4 Jun 2020 18:23:15 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id CC2421F13FA
+	for <lists+nouveau@lfdr.de>; Mon,  8 Jun 2020 09:52:41 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 912776E50C;
-	Thu,  4 Jun 2020 16:23:13 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8B6CB6E0EF;
+	Mon,  8 Jun 2020 07:52:39 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-il1-x12e.google.com (mail-il1-x12e.google.com
- [IPv6:2607:f8b0:4864:20::12e])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 93D2E6E50C
- for <nouveau@lists.freedesktop.org>; Thu,  4 Jun 2020 16:23:12 +0000 (UTC)
-Received: by mail-il1-x12e.google.com with SMTP id 9so6610451ilg.12
- for <nouveau@lists.freedesktop.org>; Thu, 04 Jun 2020 09:23:12 -0700 (PDT)
+Received: from mail-il1-x132.google.com (mail-il1-x132.google.com
+ [IPv6:2607:f8b0:4864:20::132])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id DCA3D6E0EF
+ for <nouveau@lists.freedesktop.org>; Mon,  8 Jun 2020 07:52:37 +0000 (UTC)
+Received: by mail-il1-x132.google.com with SMTP id h3so15789498ilh.13
+ for <nouveau@lists.freedesktop.org>; Mon, 08 Jun 2020 00:52:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=n/GRXkiutQ0OiMBz/RDf/VErChPNVnMHFHfioHFyETw=;
- b=VdaSh4TffgpMA22mnujk+jfEP9ISHVNNmKYoHTDHZjOYV9dkuA6O8hcaYaRAQt2Dwn
- n3bEn0gpLoOO64aRDk19rC2g5dDxkBGA+YtzmCN3HWyyK5cRl53nOB+1rIAA+X86OZFz
- wgLWDODj1HuoZTrOFidSdu3/MSBPaocv/mnV7UuhWLREHXjGGF1d0hUFgIcn+XvyEkR7
- eKWYCclOtQMHG9oFEcEzJjuI37WFgVdVIWpSuraW034yLL9n2hugtahUIxblLG675MzG
- pGfsVTH2NHLAkPYaW2TLCxW7ZRTRBV1TFPkqXRtXkh77FOjUPWM6Y+hLpSO/kPxCMT+1
- HWbQ==
+ :cc; bh=WV7BGV6+mEZwraMDjdp2nR5SYEH9cq5Koj6bSPDzdFg=;
+ b=iiDQkzO51Ud8doQx/Fvh2frErrXLmcQWVjwu4YrZ9CdsCem3uJBtlf0qS6ZgGxg6il
+ hpclaZv49UZ7Pmh1g/QoVFpBj1RwKms62u9Jam9CCMfYI4Ioo4T1qjzFYaTzuVuR3Kq3
+ 2YQglGzdTR1gFim4n2GLGNuhF30EPKuTm7dD76Ner6RGMNYPfv0PaMhm6X0tN88Cn8RN
+ O1E8Jts4ICVCMSq86MRU942h2PwipxwDNA6tAwGs5y0243Z6YfSpavFKT/jOmeerlrEZ
+ DoxzTu25LqTY6rSjPuB66MA3GM5MdbaaMkK8xcUta4aBv89kNNnUgvugET8DbmzsImT0
+ QHBA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=n/GRXkiutQ0OiMBz/RDf/VErChPNVnMHFHfioHFyETw=;
- b=jLXcBnwnwxQV8Ufrgv2bqdTajCgB7z4KFKW8FufZJyj7Mups2GJgYD3P2WsWIEVjYp
- JaOSmlbC5Y85BBAayVIW8k0fPNJwTAUBWTGGrkGQgOuN4IahNLvV316neonXVyEFV0Xr
- lPlH0ELlI6JByFfGSfDd9AKhZXtfGXImJf/QwmpXtiwtaBcDXI1DISgOC6pSuJCKvE0A
- LpRGcA1yqGI+85Yro5WhLy8cnItAzzZMpx5IjYde6dBnCCigELcG48fgkya6ZFM+ozUh
- Dtw/LIKSVDkIW4U9FVDOcQSNEvU5xvkYVFzWx2Vi3aoH0igkM4woyZld8bojQDDa7XOU
- Io/Q==
-X-Gm-Message-State: AOAM531B1Iy7aGreZDV7e4+iMYSnvfrAxLOhP5aelec3xQgxscGeIY6R
- 5Xdq74QVNY6u1HaVZCsNWRjjU0zFEwHiJj859zQ=
-X-Google-Smtp-Source: ABdhPJwRIle7DTqSdHm9ye9kZyCUQC5nRCg5793eo+4tSVcfiLbB9sQMEQBVf+pKMyeDaTgXCOiWtoQQTM3gR1AcbaY=
-X-Received: by 2002:a92:db0b:: with SMTP id b11mr4584771iln.90.1591287791978; 
- Thu, 04 Jun 2020 09:23:11 -0700 (PDT)
+ bh=WV7BGV6+mEZwraMDjdp2nR5SYEH9cq5Koj6bSPDzdFg=;
+ b=J+iNl4jSUKvxnYKZXIfexLjt9miWkOG3s9nVQnt57rV8u4kCw8xb8EdrZ5KjuJ4YWz
+ pz4H2hzqt22HvC9hIAqEZuoS9md7THwRKg20HyqUjW1JV7dA7z+U89StzYiL0g8KScSC
+ MVetCEwGjCPE3cApA82aaZATjpWKz+wA5gY62REsHiYnNnWnUMpck4TitSOe0NVSbmam
+ 7586vKXXKCdOt4wNEFwvqbHY2ucoLwGJgbs31KtfIFI+wdCBRgEuvIwBjguKqzy6TG4A
+ etDM8u0zYvBlfAfZJflKVLM3q56URIGgfT8nxKIJW9xU8HCGKTvxfxHfC5J8rNnQTkaI
+ NsRA==
+X-Gm-Message-State: AOAM5325DDleoQ+UkBa6YFqNxHrSMT+jrvQRmE0fEIdtq1gu7hDWc61H
+ W8fyzZ70DhP225ItTBVE3TWR7boF9WqOTfya3OQ=
+X-Google-Smtp-Source: ABdhPJz6HjW2AjMShnUHb5sUGouse+q5w4H3QF05k31/UU5NL88h0qkyrEVgMXxUvTa1t/7MDpYLI7cZU0Ra8tqVWrs=
+X-Received: by 2002:a92:af44:: with SMTP id n65mr19226418ili.61.1591602757110; 
+ Mon, 08 Jun 2020 00:52:37 -0700 (PDT)
 MIME-Version: 1.0
 References: <CAOkhzLUrNYk6JKTbTQuFkfuGKxGvW9XVq6+p9igsBgX1-e9Cxg@mail.gmail.com>
  <CAKb7Uvg0W_1qUjf3G4JrCb2oJgkwz4G5T6PwkyeL-rZEp4UnTw@mail.gmail.com>
@@ -49,10 +49,10 @@ References: <CAOkhzLUrNYk6JKTbTQuFkfuGKxGvW9XVq6+p9igsBgX1-e9Cxg@mail.gmail.com>
  <CAKb7UviB22HxSJ6j4ts=fU=J24Hh69NCBw4uHC5vsi902Pp6bA@mail.gmail.com>
 In-Reply-To: <CAKb7UviB22HxSJ6j4ts=fU=J24Hh69NCBw4uHC5vsi902Pp6bA@mail.gmail.com>
 From: Zeno Davatz <zdavatz@gmail.com>
-Date: Thu, 4 Jun 2020 18:23:00 +0200
-Message-ID: <CAOkhzLV3zpzh4dKOxYUT6a_-kQQyxBxexY0MML4t4LZLK8dOpw@mail.gmail.com>
+Date: Mon, 8 Jun 2020 09:52:25 +0200
+Message-ID: <CAOkhzLUQXAB1-=2VasSeJC9-LDgsd0Sk-pJY2LBbHaLqpcBeLg@mail.gmail.com>
 To: Ilia Mirkin <imirkin@alum.mit.edu>
-Subject: Re: [Nouveau] NVIDIA GP107 (137000a1) - acr: failed to load firmware
+Subject: [Nouveau] xrandr: Failed to get size of gamma for output default
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,18 +71,37 @@ Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+Dear Ilia
+
 On Thu, Jun 4, 2020 at 6:13 PM Ilia Mirkin <imirkin@alum.mit.edu> wrote:
 
 > Not sure why you bother asking questions when you're just going to
 > dump nouveau anyways. This is the second time I've answered your
 > questions on this very topic, I think it'll be the last too.
 
-Actually, what I will try next is emerging
-"x11-drivers/xf86-video-nouveau" Version-1.0.15-r1. It that works for
-Nvidia, I guess it will also work for Nouveau. ;)
+I tried again and removed the Nvidia-Drivers with
 
-I would have preferred to have it all in the Kernel but that does not
-seem possible.
+sudo emerge -C x11-drivers/nvidia-drivers
+
+and installed
+
+sudo emerge x11-drivers/xf86-video-nouveau
+
+this works with Kernel 5.7.0!
+
+~> inxi -G
+Graphics:  Device-1: NVIDIA GP107 driver: N/A
+           Display: server: X.Org 1.20.5 driver: nouveau,vesa
+unloaded: modesetting resolution: 1680x1050~N/A
+           OpenGL: renderer: Rasterizer v: 2.1 Mesa 19.1.4
+
+but now xrandr no longer works.
+
+~> xrandr -q
+
+Screen 0: minimum 1680 x 1050, current 1680 x 1050, maximum 1680 x 1050
+default connected 1680x1050+0+0 0mm x 0mm
+   1680x1050      0.00*
 
 Best
 Zeno
