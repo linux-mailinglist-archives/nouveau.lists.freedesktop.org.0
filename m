@@ -2,59 +2,61 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id E30EC1F2138
-	for <lists+nouveau@lfdr.de>; Mon,  8 Jun 2020 23:06:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 88D431F6357
+	for <lists+nouveau@lfdr.de>; Thu, 11 Jun 2020 10:12:28 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3D3DD6E9A2;
-	Mon,  8 Jun 2020 21:06:17 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 77E926E8B2;
+	Thu, 11 Jun 2020 08:12:25 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-qv1-xf2f.google.com (mail-qv1-xf2f.google.com
- [IPv6:2607:f8b0:4864:20::f2f])
- by gabe.freedesktop.org (Postfix) with ESMTPS id CFD106E9A1
- for <nouveau@lists.freedesktop.org>; Mon,  8 Jun 2020 21:06:15 +0000 (UTC)
-Received: by mail-qv1-xf2f.google.com with SMTP id x16so3374633qvr.3
- for <nouveau@lists.freedesktop.org>; Mon, 08 Jun 2020 14:06:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=poorly.run; s=google;
- h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=SAppPpa1LXhRlJGmkA2/z+Dr2Wp9y7xO4XPUfiSSbTI=;
- b=FMdXk7UIUD9h9hT2JCBx99SKW/dMCL5oH3fDczKvZ0nzxJQrfAN4X0iurpbXSHL0nS
- vtHXNxa8Be7Fxib+5od2v/PxcoayfScIZqjyQl/yjwxJ9PkA/0B4wQiRQpczNpaUiAYY
- pFEXQwulQWsI4A6igvEmvn+1UwZlTuaUu4ez8Y+Dm1BEc9QgugJNxa1gjtz2ZPkSMOh2
- SOsHwX4iMZOuJDf4x/YDHgyOKbQGBk15e72L6xiLe7qzsecxotKnXEsLA0zoxCl1ZeOo
- ytval+8WAOnSkZZD+ibMaX53Sjqq+ydt5GhwtbG9krZcZ8r7VC8nzxEC1XWKRdMKUxZz
- LMfg==
+Received: from mail-io1-xd33.google.com (mail-io1-xd33.google.com
+ [IPv6:2607:f8b0:4864:20::d33])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 435C16E038
+ for <nouveau@lists.freedesktop.org>; Thu, 11 Jun 2020 08:12:24 +0000 (UTC)
+Received: by mail-io1-xd33.google.com with SMTP id o5so5324670iow.8
+ for <nouveau@lists.freedesktop.org>; Thu, 11 Jun 2020 01:12:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=fDfa4+jXZ9ulsLY5WKCYieKo7asoV0jE5raIUBCwu3E=;
+ b=m5t8Bz4MRofIIRs+WrQSDZwHw0H8/wYC4xq3slGdkV36tKpMJRV8d4jBMWxYlu0xam
+ Ew9Q/3I8xsNpANdA98LfZi8rRQT1T21dZHmNMrbMBq7w/1Jd6hRdkxZoFrREF58OZJWN
+ mY6aaa+mGIOOAUaYvPu6RLE0blvu0gyvwBFcSMc4K1fAMgflbpTgSech0O7FrJTOwaLh
+ InL3AZDhHRqH4a9xfaQbOffx4L+rG6/U7BHt24X7JyhfcJhCzlEj/QV1ei016lhUvhHb
+ yC5DqTaAhmr1r+TKRVwsJErZDYG4FLItUX1dY9+vLcv3Bm/qsbB/N+Zul0tgE/yqQ/AI
+ wI1Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references;
- bh=SAppPpa1LXhRlJGmkA2/z+Dr2Wp9y7xO4XPUfiSSbTI=;
- b=GQbTmM30hH+J2zQKcxPhYR0b+sM/56aZML64oPPB79lRurH3Q3XQ8HUqoW7u+tltok
- fOTnqxj2poKRY+3ysnK2rPaSiNDU/W9MFuXfeYTams8UO29YiiJNfq1OmoPk5Z1iILwZ
- 7OvSY0qzQE3DmOUrFBfmVjQnfXcu/YGywKe1Kux6roBCk+QU7nlmymBuV+I6egxQOPoG
- o1+2EZZkoNJDrB2s6ZjZjCRDlPTsYLEzwzBHhHBSqpOvblFkXQd5SmYXHXKgH8N92Koy
- jk22pAnMZ7+ipbh1aoMqiMw3agNDfawPTY3Ps8r1S6xygLes8wdQ11lSCqGm59EIGLpS
- 3r8A==
-X-Gm-Message-State: AOAM532gGIEFZ5vT3BDZvbS6XU8Js8bp+1ICA3gfcm47FQYnehZ1Rz/N
- G9yVQx5BeXneCCG4AojV0tprUA==
-X-Google-Smtp-Source: ABdhPJwheOYqcswFZ16457m3Bo6nUhBN7dUfynfSbEg06VTr1WbBj6rbjgGaKPPvPZdbWDJYmkTPvg==
-X-Received: by 2002:a05:6214:589:: with SMTP id
- bx9mr622046qvb.127.1591650374964; 
- Mon, 08 Jun 2020 14:06:14 -0700 (PDT)
-Received: from localhost (mobile-166-173-249-24.mycingular.net.
- [166.173.249.24])
- by smtp.gmail.com with ESMTPSA id 126sm8226977qkj.89.2020.06.08.14.06.14
- (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
- Mon, 08 Jun 2020 14:06:14 -0700 (PDT)
-From: Sean Paul <sean@poorly.run>
-To: dri-devel@lists.freedesktop.org
-Date: Mon,  8 Jun 2020 17:04:58 -0400
-Message-Id: <20200608210505.48519-9-sean@poorly.run>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200608210505.48519-1-sean@poorly.run>
-References: <20200608210505.48519-1-sean@poorly.run>
-Subject: [Nouveau] [PATCH v5 08/13] drm/nouveau: Change debug checks to
- specifically target syslog
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=fDfa4+jXZ9ulsLY5WKCYieKo7asoV0jE5raIUBCwu3E=;
+ b=HmcI8YcsvQA1xV2sviRASsELwbMjSDuGLyggf4Fcfz0/Kvgb2h5SYWwz7pLe4VkdKs
+ bTIjV7EGIBDTDvuV1wgpXA+jU3OkBkoVWkmLHX4K5yujC4T720WF6BWB9MVV9es3I1hP
+ 6cyzE6qz2BMNu/RRzP1oskje3mZFUUTpeK5nFQ/qFapOt/Ammx9olaN1xIz07eiIj7aZ
+ 3AZ3PG2hphNmKxA4up/Zp09cagsCC2CV2t8WMzkpmb53a2AqD8IyqmEL4/yNXIBmDBRt
+ YgethokbUtkyTq80hesi5lSqHW2PGlIlNHBtDBrNpOd/a0oYY+Y5HHkJ+AVfLjvzNAF/
+ J9XA==
+X-Gm-Message-State: AOAM533lWm6Is+0PFaaSM3Ewfonzc4/y56GG21hoMDdUuLQOrlhJlxPN
+ c1MyLlj0OfRZRIfVlcMsOguptOyz/JGnYZifmpQvdjJGOUU=
+X-Google-Smtp-Source: ABdhPJzAm3bBTmpi7aZrgpXDcEocIqrcqoYVsUlHQV9H2bX+oYHTvbEmauteQggXeMYqpnl5AOcXAfJyXfILIAFIuDQ=
+X-Received: by 2002:a05:6602:15c8:: with SMTP id
+ f8mr7249309iow.183.1591863143330; 
+ Thu, 11 Jun 2020 01:12:23 -0700 (PDT)
+MIME-Version: 1.0
+References: <CAOkhzLUrNYk6JKTbTQuFkfuGKxGvW9XVq6+p9igsBgX1-e9Cxg@mail.gmail.com>
+ <CAKb7Uvg0W_1qUjf3G4JrCb2oJgkwz4G5T6PwkyeL-rZEp4UnTw@mail.gmail.com>
+ <CAOkhzLV+suVNAoyiaHKOkbwP-KKgTLEa7S8kp8+GSTLm_-wWFw@mail.gmail.com>
+ <CAKb7UvgWMsLSHCayzdY7UYMVTjN3OHbH2WhKd-BP46K=r4Ra8A@mail.gmail.com>
+ <CAOkhzLXZVNdpgwV=iiO0TEvLp3Hx28Zk8iYzwy5BvJ1pWi4QxQ@mail.gmail.com>
+ <CAKb7UviB22HxSJ6j4ts=fU=J24Hh69NCBw4uHC5vsi902Pp6bA@mail.gmail.com>
+ <CAOkhzLUQXAB1-=2VasSeJC9-LDgsd0Sk-pJY2LBbHaLqpcBeLg@mail.gmail.com>
+In-Reply-To: <CAOkhzLUQXAB1-=2VasSeJC9-LDgsd0Sk-pJY2LBbHaLqpcBeLg@mail.gmail.com>
+From: Zeno Davatz <zdavatz@gmail.com>
+Date: Thu, 11 Jun 2020 10:12:12 +0200
+Message-ID: <CAOkhzLUrm6bS1ejmBdCOmU4G7O=t0XU_0PqYPx4AssGm5z1uCw@mail.gmail.com>
+To: nouveau <nouveau@lists.freedesktop.org>, 
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>
+Subject: [Nouveau] Kernel 5.7.0, nouveau 1.0.15-r1, sudo lshw -C display,
+ *-display UNCLAIMED
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -66,73 +68,42 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Daniel Vetter <daniel@ffwll.ch>, David Airlie <airlied@linux.ie>,
- maarten.lankhorst@linux.intel.com, mripard@kernel.org, ppaalanen@gmail.com,
- Sean Paul <seanpaul@chromium.org>, Ben Skeggs <bskeggs@redhat.com>,
- nouveau@lists.freedesktop.org
-MIME-Version: 1.0
+Cc: Ben Skeggs <bskeggs@redhat.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-From: Sean Paul <seanpaul@chromium.org>
+Hi
 
-Since the logs protected by these checks specifically target syslog,
-use the new drm_debug_syslog_enabled() call to avoid triggering
-these prints when only trace is enabled.
+With Kernel 5.7.0, nouveau drivers 1.0.15-r1
 
-Signed-off-by: Sean Paul <seanpaul@chromium.org>
+sudo `lshw -C display`
 
-Changes in v5:
--Added to the set
----
- drivers/gpu/drm/nouveau/dispnv50/disp.h | 4 ++--
- drivers/gpu/drm/nouveau/nouveau_drv.h   | 4 ++--
- 2 files changed, 4 insertions(+), 4 deletions(-)
+will show me:
 
-diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.h b/drivers/gpu/drm/nouveau/dispnv50/disp.h
-index 696e70a6b98b..d60602db2cf0 100644
---- a/drivers/gpu/drm/nouveau/dispnv50/disp.h
-+++ b/drivers/gpu/drm/nouveau/dispnv50/disp.h
-@@ -85,14 +85,14 @@ extern const u64 wndwc57e_modifiers[];
- 
- #define evo_mthd(p, m, s) do {						\
- 	const u32 _m = (m), _s = (s);					\
--	if (drm_debug_enabled(DRM_UT_KMS))				\
-+	if (drm_debug_syslog_enabled(DRM_UT_KMS))				\
- 		pr_err("%04x %d %s\n", _m, _s, __func__);		\
- 	*((p)++) = ((_s << 18) | _m);					\
- } while(0)
- 
- #define evo_data(p, d) do {						\
- 	const u32 _d = (d);						\
--	if (drm_debug_enabled(DRM_UT_KMS))				\
-+	if (drm_debug_syslog_enabled(DRM_UT_KMS))				\
- 		pr_err("\t%08x\n", _d);					\
- 	*((p)++) = _d;							\
- } while(0)
-diff --git a/drivers/gpu/drm/nouveau/nouveau_drv.h b/drivers/gpu/drm/nouveau/nouveau_drv.h
-index 2a6519737800..b916d1f456cd 100644
---- a/drivers/gpu/drm/nouveau/nouveau_drv.h
-+++ b/drivers/gpu/drm/nouveau/nouveau_drv.h
-@@ -257,11 +257,11 @@ void nouveau_drm_device_remove(struct drm_device *dev);
- #define NV_INFO(drm,f,a...) NV_PRINTK(info, &(drm)->client, f, ##a)
- 
- #define NV_DEBUG(drm,f,a...) do {                                              \
--	if (drm_debug_enabled(DRM_UT_DRIVER))                                  \
-+	if (drm_debug_syslog_enabled(DRM_UT_DRIVER))                                  \
- 		NV_PRINTK(info, &(drm)->client, f, ##a);                       \
- } while(0)
- #define NV_ATOMIC(drm,f,a...) do {                                             \
--	if (drm_debug_enabled(DRM_UT_ATOMIC))                                  \
-+	if (drm_debug_syslog_enabled(DRM_UT_ATOMIC))                                  \
- 		NV_PRINTK(info, &(drm)->client, f, ##a);                       \
- } while(0)
- 
--- 
-Sean Paul, Software Engineer, Google / Chromium OS
+ *-display UNCLAIMED
 
+Also `xrandr -q` will not work:
+
+xrandr: Failed to get size of gamma for output default
+Screen 0: minimum 1680 x 1050, current 1680 x 1050, maximum 1680 x 1050
+default connected primary 1680x1050+0+0 0mm x 0mm
+   1680x1050      0.00*
+
+So I can not start up my second monitor with this command:
+
+xrandr --output DVI-D-1 --auto --output DP-1 --auto --left-of DVI-D-1
+
+This used to work with Kernel 5.5.
+
+It was "completely broken" in 5.6 and with 5.7 my first display is
+back, but not my second.
+
+I am on Gentoo Linux. Please CC for replies.
+
+Best
+Zeno
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
