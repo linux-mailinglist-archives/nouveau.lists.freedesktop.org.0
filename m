@@ -1,89 +1,77 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 602002036F6
-	for <lists+nouveau@lfdr.de>; Mon, 22 Jun 2020 14:39:58 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7002E203A59
+	for <lists+nouveau@lfdr.de>; Mon, 22 Jun 2020 17:10:01 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id CE54F6E526;
-	Mon, 22 Jun 2020 12:39:55 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id BE6036E81F;
+	Mon, 22 Jun 2020 15:09:59 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from EUR04-VI1-obe.outbound.protection.outlook.com
- (mail-eopbgr80055.outbound.protection.outlook.com [40.107.8.55])
- by gabe.freedesktop.org (Postfix) with ESMTPS id CBFAD6E526
- for <nouveau@lists.freedesktop.org>; Mon, 22 Jun 2020 12:39:53 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=AP0fIm8eIL6gBjbXpBT2M1dc0zOUDdqi8tBmcGBJTKOM4RJxGyEPdmBL+X8ODzJdV3IShu1wH2GgrOM7zPAtUkL/yfDw7DowuheyVpF6ZeHt1C0IU/ryN4xtOK3zVZFCUnKuG0tRBPhl3ni7DyWBD956kVif0EjzOt2pd8z+PlbzKjhwbVdvAF3SKqaWBk7TRQpUlIO+paxcErBmxQEVkLKZbIFMEnXiriihLcpIO1cTOIZZo1wkDXmMvG4OW0xNlwxvfvtL+QijZZT7OS+ZImMURBM1d72iDH6r8+Dyl9rsvuMcn0LsZC29KtmyH8T4ypBqsTDrbfMBw4JnSOb9JA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=p1K3W9D2CAIdaMZ2eJJRaCFYV5/wZE+UtaAcLp9SRgs=;
- b=T9EEnKTezHSS1HLgHSzQnTrwJhI/gEafwyffNFvEAgSn9xwFfnZotJ4xXxmnlVs52qH/eqlIsBUA4H1b2zuaoeTP0CPayKTRQPNnayHPbY0ZfwIM2JufHbIm9cEfp49wM+6vvFDXO6SZIhMrjPrp+Kidfdx/TAKJGzVCtEx6NHgq+UwCOJExkxsuBB/D7scTcz5WQpEB2+i8wS0Jfi7UZyFr94z5eU3Wnh4mEVNZLeS6cl565jUpI1gBbthcyfZSKMV2a/qWzkA8gWq2CXjhmWPmfn4NyLJEyJDRFBW29hKH3cP33NSXc8sziB0pQFnS3UyJ3KevnZgmLvZDRwQjAg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=mellanox.com; dmarc=pass action=none header.from=mellanox.com;
- dkim=pass header.d=mellanox.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Mellanox.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=p1K3W9D2CAIdaMZ2eJJRaCFYV5/wZE+UtaAcLp9SRgs=;
- b=pOaARyiZTEmm72NN0IdoN3cfSQp5FIJ1SGJv/d1SRevkRsh8Ni070O+5nwkdvkwM3QaQQvL1lBP5bV5fdjyIpyBKTp7FmyRAMWVoO1PJCT3vtwDIeVFglUivOZfKxmV/QoJa0ziSvdRBFQOGEH1bJKVoLtJmJ4Kiztp99sUMldM=
-Authentication-Results: nvidia.com; dkim=none (message not signed)
- header.d=none;nvidia.com; dmarc=none action=none header.from=mellanox.com;
-Received: from VI1PR05MB4141.eurprd05.prod.outlook.com (2603:10a6:803:44::15)
- by VI1PR05MB4702.eurprd05.prod.outlook.com (2603:10a6:802:5b::16)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3109.25; Mon, 22 Jun
- 2020 12:39:50 +0000
-Received: from VI1PR05MB4141.eurprd05.prod.outlook.com
- ([fe80::848b:fcd0:efe3:189e]) by VI1PR05MB4141.eurprd05.prod.outlook.com
- ([fe80::848b:fcd0:efe3:189e%7]) with mapi id 15.20.3109.027; Mon, 22 Jun 2020
- 12:39:50 +0000
-Date: Mon, 22 Jun 2020 09:39:47 -0300
-From: Jason Gunthorpe <jgg@mellanox.com>
-To: Ralph Campbell <rcampbell@nvidia.com>
-Message-ID: <20200622123947.GC2590509@mellanox.com>
-References: <20200619215649.32297-1-rcampbell@nvidia.com>
-Content-Disposition: inline
-In-Reply-To: <20200619215649.32297-1-rcampbell@nvidia.com>
-X-ClientProxiedBy: BL0PR01CA0031.prod.exchangelabs.com (2603:10b6:208:71::44)
- To VI1PR05MB4141.eurprd05.prod.outlook.com
- (2603:10a6:803:44::15)
+Received: from mta-p5.oit.umn.edu (mta-p5.oit.umn.edu [134.84.196.205])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5DEB289F63
+ for <nouveau@lists.freedesktop.org>; Sun, 14 Jun 2020 01:31:15 +0000 (UTC)
+Received: from localhost (unknown [127.0.0.1])
+ by mta-p5.oit.umn.edu (Postfix) with ESMTP id 49kxXM5thXz9vHdS
+ for <nouveau@lists.freedesktop.org>; Sun, 14 Jun 2020 01:22:27 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at umn.edu
+Received: from mta-p5.oit.umn.edu ([127.0.0.1])
+ by localhost (mta-p5.oit.umn.edu [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id sZCOanFW6HcG for <nouveau@lists.freedesktop.org>;
+ Sat, 13 Jun 2020 20:22:27 -0500 (CDT)
+Received: from mail-io1-f70.google.com (mail-io1-f70.google.com
+ [209.85.166.70])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (No client certificate requested)
+ by mta-p5.oit.umn.edu (Postfix) with ESMTPS id 49kxXM4GLyz9vHdB
+ for <nouveau@lists.freedesktop.org>; Sat, 13 Jun 2020 20:22:26 -0500 (CDT)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mta-p5.oit.umn.edu 49kxXM4GLyz9vHdB
+DKIM-Filter: OpenDKIM Filter v2.11.0 mta-p5.oit.umn.edu 49kxXM4GLyz9vHdB
+Received: by mail-io1-f70.google.com with SMTP id c5so8843661iok.18
+ for <nouveau@lists.freedesktop.org>; Sat, 13 Jun 2020 18:22:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=umn.edu; s=google;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=hWaD4fQyHbWq3bbusGJa3obvcK40dmIFPt4HBS/vC+8=;
+ b=dnGgxZhWilGEvZAkDKg8+Db3hNX1+NOCy/4oK32fpCcuIBiSCLn37R9dMCTvR5yOnN
+ m9KEtdopyhDK6ah8M4C/7Ae9EnXaPpr7b6yJHQL8m/jac7VXpHQVtKYFn8bmbq9lSJro
+ ABG7Whrj7bznZW+sAz3bnIzAN9MG0WAH84cqBVbc+2zq+fJd22+zK1m/hZozqp6+NbrO
+ +6OwzFLwRZau6lJ11+eb9xfW5Ew88zoMf1Wlg/Gw79N1J7+tFJJ6PK4TcLjrugCBhiro
+ AgHbHwNXra0eLZ2T1ZjYU+QKKaraFrGqUywmBUY+NPz1nwRsriTRIle/R+A6z7qIMd3d
+ FvMw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=hWaD4fQyHbWq3bbusGJa3obvcK40dmIFPt4HBS/vC+8=;
+ b=JCPTdxgrcUDWvUfF/9icKz2QFpO30WK+eViKexjuZ+G2wdn6rqiyAmgz5WBIJ5jkz+
+ pVOTCJUTVr76Jzu+KIaoJuU3kP9xPEBQjOL4OBMcwa+xHv03Dn3NT6JBF4wIUFJ0DgtS
+ lWQFieNHEJVoDzNcZy07VCpioOg3ezjOznqmY9ZeB9EHQHWFAe8VwOM0VIVFnOXnLwZN
+ QU8cp8gG1DfQA7/gBfKN0zlg5aTty5q4ZmA23Z2zfe2Qbel7KhN4dgoaqBycCjKjSIDK
+ lCFwIquDDLbvj8Y/qlEmGYxlkXROM5vMDOsh3HqOmX24akai9AfKViEodQonDe/Pwukn
+ JCvQ==
+X-Gm-Message-State: AOAM532zahmrSh9x33L62TYREaH0O/F/IIA47islrsgOrW/barX6z2Pj
+ f8wkkuZdah9h3o0uG3EhoAUrbhiwZPShVsl0TT+u3164hrbUqsYuVT7PaCrrtTTvD6vy8PtAlIy
+ fsLm7mKZzieYaJPHytL74ZPov9nwqIQ==
+X-Received: by 2002:a5e:dd07:: with SMTP id t7mr21202637iop.21.1592097746389; 
+ Sat, 13 Jun 2020 18:22:26 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJxG9/5j6jwcpTDWma6pdM8Bkh2xp31WtVsWXYi2gCUmVJhMzt5E2i8yikc3nH8lOVjzJe+aTg==
+X-Received: by 2002:a5e:dd07:: with SMTP id t7mr21202621iop.21.1592097746172; 
+ Sat, 13 Jun 2020 18:22:26 -0700 (PDT)
+Received: from syssec1.cs.umn.edu ([2607:ea00:101:3c74:d65:8ac4:1b02:86ac])
+ by smtp.gmail.com with ESMTPSA id j63sm5760966ilg.50.2020.06.13.18.22.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 13 Jun 2020 18:22:25 -0700 (PDT)
+From: Aditya Pakki <pakki001@umn.edu>
+To: pakki001@umn.edu
+Date: Sat, 13 Jun 2020 20:22:23 -0500
+Message-Id: <20200614012223.121019-1-pakki001@umn.edu>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from mlx.ziepe.ca (156.34.48.30) by
- BL0PR01CA0031.prod.exchangelabs.com (2603:10b6:208:71::44) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.3109.22 via Frontend Transport; Mon, 22 Jun 2020 12:39:50 +0000
-Received: from jgg by mlx with local (Exim 4.93)	(envelope-from
- <jgg@mellanox.com>)	id 1jnLjn-00Bt6R-52; Mon, 22 Jun 2020 09:39:47 -0300
-X-Originating-IP: [156.34.48.30]
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-HT: Tenant
-X-MS-Office365-Filtering-Correlation-Id: 751cebd9-7b35-46be-0431-08d816a95b0a
-X-MS-TrafficTypeDiagnostic: VI1PR05MB4702:
-X-Microsoft-Antispam-PRVS: <VI1PR05MB470271E4FEB6E385D7F352E4CF970@VI1PR05MB4702.eurprd05.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:8882;
-X-Forefront-PRVS: 0442E569BC
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: pMHw3hZKMymfaINzJj5CBQbB3lHLKD46VbCUtqy53Q69xeSoFrISsbudZYm57hKL9HTQ2aqcIF/xfOa/FUUzMRf1xqfNVpWhzzFzCC8Y3H8SKYuYThujhsTqUEbMAsyApFS0NAqn27AEC9b/g1IxXXtQ8MsiWJ8BrhtJhZ/WFz3vmNXBPmvidh4CmFzVmjzXhuighDOD15Fj6fiPd9zWPx3ekdsBnzLBPW7p/aZiCYNJWwMnXFrRMkShLdH5alaODiJ9a3i6xajnJzKgxdzxP1hqDSYpCpnXRRDjTHMexH5qIlPaTJdu8JFhRosCuiIOysewn81ExFVDOQA9JUhkJw==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:VI1PR05MB4141.eurprd05.prod.outlook.com; PTR:; CAT:NONE;
- SFTY:;
- SFS:(4636009)(136003)(346002)(366004)(376002)(396003)(39860400002)(8936002)(6916009)(186003)(26005)(1076003)(316002)(426003)(4326008)(8676002)(54906003)(83380400001)(2906002)(33656002)(5660300002)(9746002)(9786002)(36756003)(86362001)(2616005)(66476007)(66946007)(66556008)(478600001)(7416002);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData: tLNNxONQZO6jW+hpHfyZgIH4ekJEEY76iBbMYz/8FNO3wxQPzfWFq3Odq7G4TWT6ABx+FHBvHZwmz8kx3UjhKDksB7vj94wbWU+LQDYv0V5WvLaMkJQsXGFSj3jgmu7hDEXxHrbgpdUW5i93VB3NguMA1Oa4MKTWBVD8jNQNkdG3X/X8EP3XTWb4LgFI58kENa4x4U6n/zUmPWQvERH971WippoG425mD9tdpWq4Qo5C3n5urcpRbQurRf2Sj1MURdQfEwb10irvDYfWPCdshUbE3q6gLfPsJrOHez+yAa4MJ2J3wTZBNXjbbdvV/0zycr4BL5Drtu25Dx62pSSuqMnOC39+AVXTYMPIlqTdkuT+pmNmjbuAPnAiPG6ouIWKI/Ngt/m+ZDclKT1Zw5GJ0DOW66kV5Uiu8BuQzWygmNy016o7AQ8Gjy9qcA6Ud3PA39PjkQc+DEXPdvBkHvPXO5OWwC/i8tM0ja7JpaZPGP8=
-X-OriginatorOrg: Mellanox.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 751cebd9-7b35-46be-0431-08d816a95b0a
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Jun 2020 12:39:50.8090 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: a652971c-7d2e-4d9b-a6a4-d149256f461b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: NLiVITWOJzttNzWnX+aFlNoYNmvhsxk0rQ5aLv4lUo/rd3WlD+tL/RYu4y/qiU7gmFVLwyBOB+qC4ZS5L4BP1Q==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR05MB4702
-Subject: Re: [Nouveau] [PATCH 00/16] mm/hmm/nouveau: THP mapping and
- migration
+X-Mailman-Approved-At: Mon, 22 Jun 2020 15:09:59 +0000
+Subject: [Nouveau] [PATCH] drm/nouveau: Fix reference count leak in
+ nouveau_connector_detect
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -95,54 +83,43 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: linux-rdma@vger.kernel.org, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, linux-mm@kvack.org,
- Ben Skeggs <bskeggs@redhat.com>, linux-kselftest@vger.kernel.org,
- Andrew Morton <akpm@linux-foundation.org>, Shuah Khan <shuah@kernel.org>,
- Christoph Hellwig <hch@lst.de>
+Cc: wu000273@umn.edu, David Airlie <airlied@linux.ie>,
+ nouveau@lists.freedesktop.org, kjlu@umn.edu, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>,
+ Daniel Vetter <daniel@ffwll.ch>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, Jun 19, 2020 at 02:56:33PM -0700, Ralph Campbell wrote:
-> These patches apply to linux-5.8.0-rc1. Patches 1-3 should probably go
-> into 5.8, the others can be queued for 5.9. Patches 4-6 improve the HMM
-> self tests. Patch 7-8 prepare nouveau for the meat of this series which
-> adds support and testing for compound page mapping of system memory
-> (patches 9-11) and compound page migration to device private memory
-> (patches 12-16). Since these changes are split across mm core, nouveau,
-> and testing, I'm guessing Jason Gunthorpe's HMM tree would be appropriate.
+nouveau_connector_detect() calls pm_runtime_get_sync and in turn
+increments the reference count. In case of failure, decrement the
+ref count before returning the error.
 
-You need to break this up into parts that go where they need to
-go. Nouveau rc changes should go to DRM or some series needs to
-explain the linkage
+Signed-off-by: Aditya Pakki <pakki001@umn.edu>
+---
+ drivers/gpu/drm/nouveau/nouveau_connector.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-> Ralph Campbell (16):
->   mm: fix migrate_vma_setup() src_owner and normal pages
->   nouveau: fix migrate page regression
->   nouveau: fix mixed normal and device private page migration
->   mm/hmm: fix test timeout on slower machines
->   mm/hmm/test: remove redundant page table invalidate
->   mm/hmm: test mixed normal and device private migrations
->   nouveau: make nvkm_vmm_ctor() and nvkm_mmu_ptp_get() static
->   nouveau/hmm: fault one page at a time
->   mm/hmm: add output flag for compound page mapping
->   nouveau/hmm: support mapping large sysmem pages
->   hmm: add tests for HMM_PFN_COMPOUND flag
->   mm/hmm: optimize migrate_vma_setup() for holes
+diff --git a/drivers/gpu/drm/nouveau/nouveau_connector.c b/drivers/gpu/drm/nouveau/nouveau_connector.c
+index 1b383ae0248f..ef8ddbe44581 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_connector.c
++++ b/drivers/gpu/drm/nouveau/nouveau_connector.c
+@@ -572,8 +572,10 @@ nouveau_connector_detect(struct drm_connector *connector, bool force)
+ 		pm_runtime_get_noresume(dev->dev);
+ 	} else {
+ 		ret = pm_runtime_get_sync(dev->dev);
+-		if (ret < 0 && ret != -EACCES)
++		if (ret < 0 && ret != -EACCES) {
++			pm_runtime_put_autosuspend(dev->dev);
+ 			return conn_status;
++		}
+ 	}
+ 
+ 	nv_encoder = nouveau_connector_ddc_detect(connector);
+-- 
+2.25.1
 
-Order things so it is hmm, test, noeveau
-
->   mm: support THP migration to device private memory
->   mm/thp: add THP allocation helper
->   mm/hmm/test: add self tests for THP migration
->   nouveau: support THP migration to private memory
-
-This is another series, you should split it even if it has to go
-through the hmm tree
-
-Jason
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
