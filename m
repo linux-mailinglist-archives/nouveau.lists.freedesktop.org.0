@@ -1,56 +1,54 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 71A7B1F8550
-	for <lists+nouveau@lfdr.de>; Sat, 13 Jun 2020 22:54:19 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 882A41FA888
+	for <lists+nouveau@lfdr.de>; Tue, 16 Jun 2020 08:12:03 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 49B346E486;
-	Sat, 13 Jun 2020 20:54:05 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A03526E5D1;
+	Tue, 16 Jun 2020 06:12:00 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from zju.edu.cn (spam.zju.edu.cn [61.164.42.155])
- by gabe.freedesktop.org (Postfix) with ESMTP id 3605E6E4AE;
- Wed,  3 Jun 2020 02:21:53 +0000 (UTC)
-Received: by ajax-webmail-mail-app2 (Coremail) ; Wed, 3 Jun 2020 10:21:47
- +0800 (GMT+08:00)
-X-Originating-IP: [222.205.72.4]
-Date: Wed, 3 Jun 2020 10:21:47 +0800 (GMT+08:00)
-X-CM-HeaderCharset: UTF-8
-From: dinghao.liu@zju.edu.cn
-To: "Dan Carpenter" <dan.carpenter@oracle.com>
-X-Priority: 3
-X-Mailer: Coremail Webmail Server Version XT5.0.10 build 20190906(84e8bf8f)
- Copyright (c) 2002-2020 www.mailtech.cn zju.edu.cn
-In-Reply-To: <20200602153900.GW22511@kadam>
-References: <dd729c13-fbc8-22e7-7d8e-e3e126f66943@web.de>
- <40d8fb01.db721.17269d3d620.Coremail.dinghao.liu@zju.edu.cn>
- <20200602102955.GZ30374@kadam>
- <65e3d2b7-b0ad-f387-b8fe-d83ea816a0f6@web.de>
- <20200602153900.GW22511@kadam>
+Received: from mail-yb1-xb41.google.com (mail-yb1-xb41.google.com
+ [IPv6:2607:f8b0:4864:20::b41])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 62B026E5D1;
+ Tue, 16 Jun 2020 06:11:59 +0000 (UTC)
+Received: by mail-yb1-xb41.google.com with SMTP id d13so10244607ybk.8;
+ Mon, 15 Jun 2020 23:11:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=lE4bGstBoggLPhv8uJAg4uGkYb5Z9vSRwF4L3Jje+wo=;
+ b=MPYFbGpJdUMvtwjGmaIwzG3Iyrhfrd6AwKB1GEr0bqXVBhjaR2bczI97dfYYU+Qrd+
+ RsnLtRSc/fJZeNSSmiNzKxBIkV9szGBKwiV4Ub74araqyuNEZBaSMhD2ec8JG2hUHYmp
+ l/A0szY/4npdYOTqOj5E/WvTCjD6ZOvlDxdQyw2p39LrF33PYe+Y2Q+dvxVG2evXgdAw
+ kMvfkDHgVRDWLMC0/lzGX8RFpZs04so3LLuRk2kYLCt6p8rF+Sfi2n12PKKvQ40Gd4KZ
+ jllSxNBKYcH7FwKpG5Cnoulc/mPNInARGsRbMM5kFE0VKOzIcMl3KDYIhx65MHiP3BzW
+ wfMg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=lE4bGstBoggLPhv8uJAg4uGkYb5Z9vSRwF4L3Jje+wo=;
+ b=sgUaHDQbmVBM1H6EYZ7THWl20BkIzVBc9MaOLcb+FimiStrjYmTXECwV7Pd8aV2XTi
+ sbguZa5B8GdVK6uf8Sbz3Ahp7gORGeg+l82467KA9n5UVyKjKMT+KWPibj9im4lY4E0h
+ oSyz9nHQBJd5ARv5Y2hF1G7GZRXXN6hnNS3KyEBykgOGksaZO1XMKGpBoMR2LROpE3u/
+ 2zE3KhbkoBVSEsriSmi4U53afbPHhYLYqUZ7M5u1Vkfwiha0aUZnU89VwMJDrs/comAG
+ /+dJvMxZ7Cef0XdAYTrV7bJj8hAvKGfAuFGqaGs6BMPctZ8H938auMKTHlgTYSw9AxeK
+ DgJw==
+X-Gm-Message-State: AOAM530OAdshhHGnV0QuW6jCUiCW+45fm3rqarrI0P4KYbfcVUBjYhKz
+ lzMTTKkDnRU7xagJYzvXdZzOlLMpJwPKvEYmSJE=
+X-Google-Smtp-Source: ABdhPJzm7pCxfaqFQPtBekETYsKJpbYXHIQaJTYd2Y2htl0fodkpebMxxspxfSmn7vXOgp5JviDezUE2Iu1FpMnkCnQ=
+X-Received: by 2002:a25:7b41:: with SMTP id w62mr1627864ybc.435.1592287918528; 
+ Mon, 15 Jun 2020 23:11:58 -0700 (PDT)
 MIME-Version: 1.0
-Message-ID: <5d580094.f274c.17277fc124e.Coremail.dinghao.liu@zju.edu.cn>
-X-Coremail-Locale: zh_CN
-X-CM-TRANSID: by_KCgDnX5c8Cddeg0ppAA--.16819W
-X-CM-SenderInfo: qrrzjiaqtzq6lmxovvfxof0/1tbiAgkABlZdtOb8QgABsr
-X-Coremail-Antispam: 1Ur529EdanIXcx71UUUUU7IcSsGvfJTRUUUbGvS07vEb7Iv0x
- C_Cr1lV2xY67kC6x804xWlV2xY67CY07I20VC2zVCF04k26cxKx2IYs7xG6rWj6s0DMIAI
- bVAFxVCF77xC64kEw24lV2xY67C26IkvcIIF6IxKo4kEV4ylV2xY628lY4IE4IxF12IF4w
- CS07vE84x0c7CEj48ve4kI8wCS07vE84ACjcxK6xIIjxv20xvE14v26w1j6s0DMIAIbVA2
- z4x0Y4vE2Ix0cI8IcVCY1x0267AKxVW0oVCq3wCS07vE84ACjcxK6I8E87Iv67AKxVW0oV
- Cq3wCS07vE84ACjcxK6I8E87Iv6xkF7I0E14v26rxl6s0DMIAIbVAS0I0E0xvYzxvE52x0
- 82IY62kv0487MIAIbVAqx4xG64xvF2IEw4CE5I8CrVC2j2WlV2xY6cIj6xIIjxv20xvE14
- v26r1j6r18MIAIbVAv7VC2z280aVAFwI0_Jr0_Gr1lV2xY6cvjeVCFs4IE7xkEbVWUJVW8
- JwCS07vE7I0Y64k_MIAIbVCY02Avz4vE14v_Gr1lV2xY6xkI7II2jI8vz4vEwIxGrwCS07
- vE42xK82IY6x8ErcxFaVAv8VW8uw4UJr1UMIAIbVCF72vE77IF4wCS07vE4I8I3I0E4IkC
- 6x0Yz7v_Jr0_Gr1lV2xY6I8I3I0E5I8CrVAFwI0_Jr0_Jr4lV2xY6I8I3I0E7480Y4vE14
- v26r106r1rMIAIbVC2zVAF1VAY17CE14v26r1q6r43MIAIbVCI42IY6xIIjxv20xvE14v2
- 6r1j6r1xMIAIbVCI42IY6xIIjxv20xvEc7CjxVAFwI0_Jr0_Gr1lV2xY6IIF0xvE42xK8V
- AvwI8IcIk0rVWrZr1j6s0DMIAIbVCI42IY6I8E87Iv67AKxVWUJVW8JwCS07vEIxAIcVC2
- z280aVCY1x0267AKxVWUJVW8JbIYCTnIWIevJa73U
-X-Mailman-Approved-At: Sat, 13 Jun 2020 20:53:54 +0000
-Subject: Re: [Nouveau] [PATCH] drm/nouveau/clk/gm20b: Fix memory leak in
- gm20b_clk_new()
+References: <20200614014838.123171-1-pakki001@umn.edu>
+In-Reply-To: <20200614014838.123171-1-pakki001@umn.edu>
+From: Ben Skeggs <skeggsb@gmail.com>
+Date: Tue, 16 Jun 2020 16:11:47 +1000
+Message-ID: <CACAvsv7FMUMpZToCQK4QtnaB5muyjk1MW5KOpyrGVtatM-gmsA@mail.gmail.com>
+To: Aditya Pakki <pakki001@umn.edu>
+Subject: Re: [Nouveau] [PATCH] drm/noveau: fix reference count leak in
+ nouveau_debugfs_strap_peek
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -62,35 +60,56 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
- kernel-janitors@vger.kernel.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, Markus Elfring <Markus.Elfring@web.de>,
- Ben Skeggs <bskeggs@redhat.com>, Kangjie Lu <kjlu@umn.edu>
+Cc: David Airlie <airlied@linux.ie>, ML nouveau <nouveau@lists.freedesktop.org>,
+ kjlu@umn.edu, LKML <linux-kernel@vger.kernel.org>,
+ ML dri-devel <dri-devel@lists.freedesktop.org>,
+ Ben Skeggs <bskeggs@redhat.com>, wu000273@umn.edu
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+Thanks,
 
-> On Tue, Jun 02, 2020 at 01:10:34PM +0200, Markus Elfring wrote:
-> > > The original patch was basically fine.
-> > 
-> > I propose to reconsider the interpretation of the software situation once more.
-> > 
-> > * Should the allocated clock object be kept usable even after
-> >   a successful return from this function?
-> 
-> Heh.  You're right.  The patch is freeing "clk" on the success path so
-> that doesn't work.
-> 
+I've grabbed this, and the others of the same sort you sent out at the
+same time.
 
-Ben has explained this problem:
-https://lore.kernel.org/patchwork/patch/1249592/
-Since the caller will check "pclk" on failure, we don't need to free
-"clk" in gm20b_clk_new() and I think this patch is no longer needed.
+Ben.
 
-Regards,
-Dinghao
+On Mon, 15 Jun 2020 at 17:29, Aditya Pakki <pakki001@umn.edu> wrote:
+>
+> nouveau_debugfs_strap_peek() calls pm_runtime_get_sync() that
+> increments the reference count. In case of failure, decrement the
+> ref count before returning the error.
+>
+> Signed-off-by: Aditya Pakki <pakki001@umn.edu>
+> ---
+>  drivers/gpu/drm/nouveau/nouveau_debugfs.c | 4 +++-
+>  1 file changed, 3 insertions(+), 1 deletion(-)
+>
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_debugfs.c b/drivers/gpu/drm/nouveau/nouveau_debugfs.c
+> index 63b5c8cf9ae4..8f63cda3db17 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_debugfs.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_debugfs.c
+> @@ -54,8 +54,10 @@ nouveau_debugfs_strap_peek(struct seq_file *m, void *data)
+>         int ret;
+>
+>         ret = pm_runtime_get_sync(drm->dev->dev);
+> -       if (ret < 0 && ret != -EACCES)
+> +       if (ret < 0 && ret != -EACCES) {
+> +               pm_runtime_put_autosuspend(drm->dev->dev);
+>                 return ret;
+> +       }
+>
+>         seq_printf(m, "0x%08x\n",
+>                    nvif_rd32(&drm->client.device.object, 0x101000));
+> --
+> 2.25.1
+>
+> _______________________________________________
+> dri-devel mailing list
+> dri-devel@lists.freedesktop.org
+> https://lists.freedesktop.org/mailman/listinfo/dri-devel
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
