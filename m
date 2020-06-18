@@ -2,53 +2,42 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 882A41FA888
-	for <lists+nouveau@lfdr.de>; Tue, 16 Jun 2020 08:12:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7BB101FDB10
+	for <lists+nouveau@lfdr.de>; Thu, 18 Jun 2020 03:10:07 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A03526E5D1;
-	Tue, 16 Jun 2020 06:12:00 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9B42D6E393;
+	Thu, 18 Jun 2020 01:10:05 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-yb1-xb41.google.com (mail-yb1-xb41.google.com
- [IPv6:2607:f8b0:4864:20::b41])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 62B026E5D1;
- Tue, 16 Jun 2020 06:11:59 +0000 (UTC)
-Received: by mail-yb1-xb41.google.com with SMTP id d13so10244607ybk.8;
- Mon, 15 Jun 2020 23:11:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=lE4bGstBoggLPhv8uJAg4uGkYb5Z9vSRwF4L3Jje+wo=;
- b=MPYFbGpJdUMvtwjGmaIwzG3Iyrhfrd6AwKB1GEr0bqXVBhjaR2bczI97dfYYU+Qrd+
- RsnLtRSc/fJZeNSSmiNzKxBIkV9szGBKwiV4Ub74araqyuNEZBaSMhD2ec8JG2hUHYmp
- l/A0szY/4npdYOTqOj5E/WvTCjD6ZOvlDxdQyw2p39LrF33PYe+Y2Q+dvxVG2evXgdAw
- kMvfkDHgVRDWLMC0/lzGX8RFpZs04so3LLuRk2kYLCt6p8rF+Sfi2n12PKKvQ40Gd4KZ
- jllSxNBKYcH7FwKpG5Cnoulc/mPNInARGsRbMM5kFE0VKOzIcMl3KDYIhx65MHiP3BzW
- wfMg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=lE4bGstBoggLPhv8uJAg4uGkYb5Z9vSRwF4L3Jje+wo=;
- b=sgUaHDQbmVBM1H6EYZ7THWl20BkIzVBc9MaOLcb+FimiStrjYmTXECwV7Pd8aV2XTi
- sbguZa5B8GdVK6uf8Sbz3Ahp7gORGeg+l82467KA9n5UVyKjKMT+KWPibj9im4lY4E0h
- oSyz9nHQBJd5ARv5Y2hF1G7GZRXXN6hnNS3KyEBykgOGksaZO1XMKGpBoMR2LROpE3u/
- 2zE3KhbkoBVSEsriSmi4U53afbPHhYLYqUZ7M5u1Vkfwiha0aUZnU89VwMJDrs/comAG
- /+dJvMxZ7Cef0XdAYTrV7bJj8hAvKGfAuFGqaGs6BMPctZ8H938auMKTHlgTYSw9AxeK
- DgJw==
-X-Gm-Message-State: AOAM530OAdshhHGnV0QuW6jCUiCW+45fm3rqarrI0P4KYbfcVUBjYhKz
- lzMTTKkDnRU7xagJYzvXdZzOlLMpJwPKvEYmSJE=
-X-Google-Smtp-Source: ABdhPJzm7pCxfaqFQPtBekETYsKJpbYXHIQaJTYd2Y2htl0fodkpebMxxspxfSmn7vXOgp5JviDezUE2Iu1FpMnkCnQ=
-X-Received: by 2002:a25:7b41:: with SMTP id w62mr1627864ybc.435.1592287918528; 
- Mon, 15 Jun 2020 23:11:58 -0700 (PDT)
+Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8BB696E393;
+ Thu, 18 Jun 2020 01:10:04 +0000 (UTC)
+Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
+ [73.47.72.35])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 8087D21D7F;
+ Thu, 18 Jun 2020 01:10:03 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1592442604;
+ bh=1p00aoausvI7CY8T2tlD9dohrS4bq5WWZoQAj/k6VEw=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=VgZruJbuUf1v7aC5/in1H7GvAUil4+TwMhg9Aalc7yKAomlRqL4BC0uv5QLB/KI15
+ 1wrcTyWzAin/gGk6ZMAc2AYZpNxAwVqJOVSCLLZclXK3dt3HxNph9hWT3LzIFm3+Xa
+ jyIcoWhwXPBSUYahiDmHsR82nc9hQEl0dv5z8rAU=
+From: Sasha Levin <sashal@kernel.org>
+To: linux-kernel@vger.kernel.org,
+	stable@vger.kernel.org
+Date: Wed, 17 Jun 2020 21:03:07 -0400
+Message-Id: <20200618010805.600873-90-sashal@kernel.org>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20200618010805.600873-1-sashal@kernel.org>
+References: <20200618010805.600873-1-sashal@kernel.org>
 MIME-Version: 1.0
-References: <20200614014838.123171-1-pakki001@umn.edu>
-In-Reply-To: <20200614014838.123171-1-pakki001@umn.edu>
-From: Ben Skeggs <skeggsb@gmail.com>
-Date: Tue, 16 Jun 2020 16:11:47 +1000
-Message-ID: <CACAvsv7FMUMpZToCQK4QtnaB5muyjk1MW5KOpyrGVtatM-gmsA@mail.gmail.com>
-To: Aditya Pakki <pakki001@umn.edu>
-Subject: Re: [Nouveau] [PATCH] drm/noveau: fix reference count leak in
- nouveau_debugfs_strap_peek
+X-stable: review
+X-Patchwork-Hint: Ignore
+Subject: [Nouveau] [PATCH AUTOSEL 5.7 090/388] drm/nouveau: gr/gk20a: Use
+ firmware version 0
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,56 +49,47 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, ML nouveau <nouveau@lists.freedesktop.org>,
- kjlu@umn.edu, LKML <linux-kernel@vger.kernel.org>,
- ML dri-devel <dri-devel@lists.freedesktop.org>,
- Ben Skeggs <bskeggs@redhat.com>, wu000273@umn.edu
+Cc: Sasha Levin <sashal@kernel.org>, nouveau@lists.freedesktop.org,
+ Emil Velikov <emil.l.velikov@gmail.com>, dri-devel@lists.freedesktop.org,
+ Ben Skeggs <bskeggs@redhat.com>, Thierry Reding <treding@nvidia.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Thanks,
+From: Thierry Reding <treding@nvidia.com>
 
-I've grabbed this, and the others of the same sort you sent out at the
-same time.
+[ Upstream commit 21454fe697fde188ad6fb541f94b9838fa73ab38 ]
 
-Ben.
+Tegra firmware doesn't actually use any version numbers and passing -1
+causes the existing firmware binaries not to be found. Use version 0 to
+find the correct files.
 
-On Mon, 15 Jun 2020 at 17:29, Aditya Pakki <pakki001@umn.edu> wrote:
->
-> nouveau_debugfs_strap_peek() calls pm_runtime_get_sync() that
-> increments the reference count. In case of failure, decrement the
-> ref count before returning the error.
->
-> Signed-off-by: Aditya Pakki <pakki001@umn.edu>
-> ---
->  drivers/gpu/drm/nouveau/nouveau_debugfs.c | 4 +++-
->  1 file changed, 3 insertions(+), 1 deletion(-)
->
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_debugfs.c b/drivers/gpu/drm/nouveau/nouveau_debugfs.c
-> index 63b5c8cf9ae4..8f63cda3db17 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_debugfs.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_debugfs.c
-> @@ -54,8 +54,10 @@ nouveau_debugfs_strap_peek(struct seq_file *m, void *data)
->         int ret;
->
->         ret = pm_runtime_get_sync(drm->dev->dev);
-> -       if (ret < 0 && ret != -EACCES)
-> +       if (ret < 0 && ret != -EACCES) {
-> +               pm_runtime_put_autosuspend(drm->dev->dev);
->                 return ret;
-> +       }
->
->         seq_printf(m, "0x%08x\n",
->                    nvif_rd32(&drm->client.device.object, 0x101000));
-> --
-> 2.25.1
->
-> _______________________________________________
-> dri-devel mailing list
-> dri-devel@lists.freedesktop.org
-> https://lists.freedesktop.org/mailman/listinfo/dri-devel
+Fixes: ef16dc278ec2 ("drm/nouveau/gr/gf100-: select implementation based on available FW")
+Signed-off-by: Thierry Reding <treding@nvidia.com>
+Reviewed-by: Emil Velikov <emil.l.velikov@gmail.com>
+Signed-off-by: Ben Skeggs <bskeggs@redhat.com>
+Signed-off-by: Sasha Levin <sashal@kernel.org>
+---
+ drivers/gpu/drm/nouveau/nvkm/engine/gr/gk20a.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/gr/gk20a.c b/drivers/gpu/drm/nouveau/nvkm/engine/gr/gk20a.c
+index 4209b24a46d7..bf6b65257852 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/gr/gk20a.c
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/gr/gk20a.c
+@@ -341,7 +341,7 @@ gk20a_gr_load(struct gf100_gr *gr, int ver, const struct gf100_gr_fwif *fwif)
+ 
+ static const struct gf100_gr_fwif
+ gk20a_gr_fwif[] = {
+-	{ -1, gk20a_gr_load, &gk20a_gr },
++	{ 0, gk20a_gr_load, &gk20a_gr },
+ 	{}
+ };
+ 
+-- 
+2.25.1
+
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
