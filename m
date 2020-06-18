@@ -2,41 +2,41 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 99B4D1FDBC9
-	for <lists+nouveau@lfdr.de>; Thu, 18 Jun 2020 03:14:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 541161FDC9E
+	for <lists+nouveau@lfdr.de>; Thu, 18 Jun 2020 03:21:14 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4AB1C6EA33;
-	Thu, 18 Jun 2020 01:14:53 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 24FDC6EA48;
+	Thu, 18 Jun 2020 01:21:11 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D2AE56E219;
- Thu, 18 Jun 2020 01:14:51 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 61A1E6EA3E;
+ Thu, 18 Jun 2020 01:21:09 +0000 (UTC)
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 0EDD821D7B;
- Thu, 18 Jun 2020 01:14:50 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 94DF621D79;
+ Thu, 18 Jun 2020 01:21:08 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1592442891;
+ s=default; t=1592443269;
  bh=mIJ1TUXp7dszAtRrMyJYmXKkKV2repG8ZIcsS6zctIo=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=DTWvIGZS2MrSC/X735ehRXNLIFjta010kH1iqXTcfcAa+a1r8PrJAHl67pd6KKcit
- ei2LC2C/0TcGnR7ZroLmOJh5QlZVzTE72K3wbtFQ3CxbusFsxRXAz9Ro5dGjR28V7m
- rT+MVcTWdQXzFd8QKrfgKRyVE55duCm4cU/+H1fY=
+ b=uPR9mbNwFyTmtfOJJlhCfO/texBAKbGnoJqJxPDQc+274JU/iJmxluVvUPvP3Fosb
+ kac4bE1BuM/LL+FDJ+4VatzcriMrGtzai80ggg+OXmpwm/3P3IBRM1noN7FnxhMPOH
+ iDdgtEgqlLvRP6Exd88vNKSXpzKAyHA6/WeV/e1s=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Wed, 17 Jun 2020 21:06:51 -0400
-Message-Id: <20200618010805.600873-314-sashal@kernel.org>
+Date: Wed, 17 Jun 2020 21:15:40 -0400
+Message-Id: <20200618011631.604574-215-sashal@kernel.org>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20200618010805.600873-1-sashal@kernel.org>
-References: <20200618010805.600873-1-sashal@kernel.org>
+In-Reply-To: <20200618011631.604574-1-sashal@kernel.org>
+References: <20200618011631.604574-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
-Subject: [Nouveau] [PATCH AUTOSEL 5.7 314/388] drm/nouveau/disp/gm200-: fix
+Subject: [Nouveau] [PATCH AUTOSEL 5.4 215/266] drm/nouveau/disp/gm200-: fix
  NV_PDISP_SOR_HDMI2_CTRL(n) selection
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
