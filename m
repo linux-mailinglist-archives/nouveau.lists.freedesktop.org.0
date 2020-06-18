@@ -2,42 +2,72 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 541161FDC9E
-	for <lists+nouveau@lfdr.de>; Thu, 18 Jun 2020 03:21:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1A7951FF66B
+	for <lists+nouveau@lfdr.de>; Thu, 18 Jun 2020 17:18:35 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 24FDC6EA48;
-	Thu, 18 Jun 2020 01:21:11 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B27EA6EB4D;
+	Thu, 18 Jun 2020 15:18:32 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 61A1E6EA3E;
- Thu, 18 Jun 2020 01:21:09 +0000 (UTC)
-Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
- [73.47.72.35])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 94DF621D79;
- Thu, 18 Jun 2020 01:21:08 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1592443269;
- bh=mIJ1TUXp7dszAtRrMyJYmXKkKV2repG8ZIcsS6zctIo=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=uPR9mbNwFyTmtfOJJlhCfO/texBAKbGnoJqJxPDQc+274JU/iJmxluVvUPvP3Fosb
- kac4bE1BuM/LL+FDJ+4VatzcriMrGtzai80ggg+OXmpwm/3P3IBRM1noN7FnxhMPOH
- iDdgtEgqlLvRP6Exd88vNKSXpzKAyHA6/WeV/e1s=
-From: Sasha Levin <sashal@kernel.org>
-To: linux-kernel@vger.kernel.org,
-	stable@vger.kernel.org
-Date: Wed, 17 Jun 2020 21:15:40 -0400
-Message-Id: <20200618011631.604574-215-sashal@kernel.org>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20200618011631.604574-1-sashal@kernel.org>
-References: <20200618011631.604574-1-sashal@kernel.org>
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
+ [207.211.31.81])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 806166EB40
+ for <nouveau@lists.freedesktop.org>; Thu, 18 Jun 2020 15:18:31 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1592493510;
+ h=from:from:reply-to:reply-to:subject:subject:date:date:
+ message-id:message-id:to:to:cc:cc:mime-version:mime-version:
+ content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=rQYmuQ6MgsURSBqJgRafWuUZH2kgHeoFm2q5Vrdf7kM=;
+ b=V+OrRKM0fAX5wBvC9GSolRA0oS8Frr8GVadEOw5//oMSmyX/dx/BlVfJbLbORrfHzNTqvT
+ nh0N6Cm1TAmWjZYYgPu8oTsBQPESbKewPyEmxrMKYRWhkN9PuGrkxHNmJ4NJVaZ2/INSrb
+ DJR/WkDG9aF9zlatEUZJEkBSHbjucvY=
+Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com
+ [209.85.222.198]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-403-dDlqq3pBONCbjesFsCi3XA-1; Thu, 18 Jun 2020 11:18:28 -0400
+X-MC-Unique: dDlqq3pBONCbjesFsCi3XA-1
+Received: by mail-qk1-f198.google.com with SMTP id w14so4744721qkb.0
+ for <nouveau@lists.freedesktop.org>; Thu, 18 Jun 2020 08:18:28 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:message-id:subject:from:reply-to:to:cc:date
+ :in-reply-to:references:organization:user-agent:mime-version
+ :content-transfer-encoding;
+ bh=rQYmuQ6MgsURSBqJgRafWuUZH2kgHeoFm2q5Vrdf7kM=;
+ b=iAAa3C8Zu6v+vYxBvQ+umTd1DbYZbkfSANkCVYTZZ1qOZB/SQmfA8Ozj2ohDZyxjkA
+ nUqN4Qu5pr/Q/nZcuW3rOkwYrw+MylBWFRbW0HZpL6Lpar6R0qpuaQRcmojIVF/FIH83
+ Q+ZVNf3OQjydf0iaoDQpe3ZBNfg7eNArC88XzucKH3b2uKWTUMc27Lr3Hzku2r1ZQAKA
+ ug5OQ5bvSCPNkkGW06YijmysmPsGxCxD1RtwyOs7Sq/bGt9ePzTnbqeceeo4DTiuimLY
+ dCan8lyWB/kSe1bfZK/EStstzXjDdJ9PmPtAdUQQkJjexWDiq9+SWYJxCcWMAeTGgwoE
+ 0qEw==
+X-Gm-Message-State: AOAM531YAYWjHV0fa/jGRo6mKHS+TOGSf+wkWQXYEWk4I7Z//TUQWyFT
+ 6cnEXOGgPNcQ7wVma2yRVtX6ztKf7dcGOHf0wn3eW94Y6gZS0oaCsFlPIHqnZYFZGeJ8LVUT+nD
+ umoR2+CWsYbgO809cSaGzj03UsA==
+X-Received: by 2002:ac8:23fb:: with SMTP id r56mr4946251qtr.197.1592493508007; 
+ Thu, 18 Jun 2020 08:18:28 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJyLgX4Z87MobK3H78vsTvXLd+/eu1CkxpTofEBBUyoXsAsemLOYYh7GV5x0KAA4BnDYUAMf5w==
+X-Received: by 2002:ac8:23fb:: with SMTP id r56mr4946222qtr.197.1592493507790; 
+ Thu, 18 Jun 2020 08:18:27 -0700 (PDT)
+Received: from Whitewolf.lyude.net
+ (static-173-76-190-23.bstnma.ftas.verizon.net. [173.76.190.23])
+ by smtp.gmail.com with ESMTPSA id c2sm3131786qkl.58.2020.06.18.08.18.26
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 18 Jun 2020 08:18:26 -0700 (PDT)
+Message-ID: <0b1c1a07b6589e91701a1815400a56b66c5f480d.camel@redhat.com>
+From: Lyude Paul <lyude@redhat.com>
+To: Aditya Pakki <pakki001@umn.edu>
+Date: Thu, 18 Jun 2020 11:18:25 -0400
+In-Reply-To: <20200614012920.121567-1-pakki001@umn.edu>
+References: <20200614012920.121567-1-pakki001@umn.edu>
+Organization: Red Hat
+User-Agent: Evolution 3.36.2 (3.36.2-1.fc32)
 MIME-Version: 1.0
-X-stable: review
-X-Patchwork-Hint: Ignore
-Subject: [Nouveau] [PATCH AUTOSEL 5.4 215/266] drm/nouveau/disp/gm200-: fix
- NV_PDISP_SOR_HDMI2_CTRL(n) selection
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Subject: Re: [Nouveau] [PATCH] drm/noveau: fix reference count leak in
+ nv50_disp_atomic_commit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -49,47 +79,50 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Sasha Levin <sashal@kernel.org>, nouveau@lists.freedesktop.org,
- Ben Skeggs <bskeggs@redhat.com>, dri-devel@lists.freedesktop.org
+Reply-To: lyude@redhat.com
+Cc: wu000273@umn.edu, David Airlie <airlied@linux.ie>,
+ Pankaj Bharadiya <pankaj.laxminarayan.bharadiya@intel.com>, kjlu@umn.edu,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ Takashi Iwai <tiwai@suse.de>, Ben Skeggs <bskeggs@redhat.com>,
+ Daniel Vetter <daniel@ffwll.ch>, nouveau@lists.freedesktop.org,
+ Alex Deucher <alexander.deucher@amd.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-From: Ben Skeggs <bskeggs@redhat.com>
+On Sat, 2020-06-13 at 20:29 -0500, Aditya Pakki wrote:
+> nv50_disp_atomic_commit() calls calls pm_runtime_get_sync and in turn
+> increments the reference count. In case of failure, decrement the
+> ref count before returning the error.
+> 
+> Signed-off-by: Aditya Pakki <pakki001@umn.edu>
+> ---
+>  drivers/gpu/drm/nouveau/dispnv50/disp.c | 4 +++-
+>  1 file changed, 3 insertions(+), 1 deletion(-)
+> 
+> diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.c
+> b/drivers/gpu/drm/nouveau/dispnv50/disp.c
+> index d472942102f5..b4039907f0d6 100644
+> --- a/drivers/gpu/drm/nouveau/dispnv50/disp.c
+> +++ b/drivers/gpu/drm/nouveau/dispnv50/disp.c
+> @@ -2157,8 +2157,10 @@ nv50_disp_atomic_commit(struct drm_device *dev,
+>  	int ret, i;
+>  
+>  	ret = pm_runtime_get_sync(dev->dev);
+> -	if (ret < 0 && ret != -EACCES)
+> +	if (ret < 0 && ret != -EACCES) {
+> +		pm_runtime_put_autosuspend(dev->dev);
 
-[ Upstream commit a1ef8bad506e4ffa0c57ac5f8cb99ab5cbc3b1fc ]
+s/noveau/nouveau/ in the commit title, but other than that:
 
-This is a SOR register, and not indexed by the bound head.
+Reviewed-by: Lyude Paul <lyude@redhat.com>
 
-Fixes display not coming up on high-bandwidth HDMI displays under a
-number of configurations.
-
-Signed-off-by: Ben Skeggs <bskeggs@redhat.com>
-Signed-off-by: Sasha Levin <sashal@kernel.org>
----
- drivers/gpu/drm/nouveau/nvkm/engine/disp/hdmigm200.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/hdmigm200.c b/drivers/gpu/drm/nouveau/nvkm/engine/disp/hdmigm200.c
-index 9b16a08eb4d9..bf6d41fb0c9f 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/hdmigm200.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/hdmigm200.c
-@@ -27,10 +27,10 @@ void
- gm200_hdmi_scdc(struct nvkm_ior *ior, int head, u8 scdc)
- {
- 	struct nvkm_device *device = ior->disp->engine.subdev.device;
--	const u32 hoff = head * 0x800;
-+	const u32 soff = nv50_ior_base(ior);
- 	const u32 ctrl = scdc & 0x3;
- 
--	nvkm_mask(device, 0x61c5bc + hoff, 0x00000003, ctrl);
-+	nvkm_mask(device, 0x61c5bc + soff, 0x00000003, ctrl);
- 
- 	ior->tmds.high_speed = !!(scdc & 0x2);
- }
--- 
-2.25.1
+>  		return ret;
+> +	}
+>  
+>  	ret = drm_atomic_helper_setup_commit(state, nonblock);
+>  	if (ret)
 
 _______________________________________________
 Nouveau mailing list
