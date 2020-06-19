@@ -1,59 +1,58 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 92D60201D6E
-	for <lists+nouveau@lfdr.de>; Fri, 19 Jun 2020 23:57:23 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2538E201D75
+	for <lists+nouveau@lfdr.de>; Fri, 19 Jun 2020 23:57:28 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 71B146ECC2;
-	Fri, 19 Jun 2020 21:57:09 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E0F806ECCE;
+	Fri, 19 Jun 2020 21:57:12 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from hqnvemgate24.nvidia.com (hqnvemgate24.nvidia.com
  [216.228.121.143])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C414C6EC32
- for <nouveau@lists.freedesktop.org>; Fri, 19 Jun 2020 21:57:07 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4DA7A6EC32
+ for <nouveau@lists.freedesktop.org>; Fri, 19 Jun 2020 21:57:08 +0000 (UTC)
 Received: from hqpgpgate102.nvidia.com (Not Verified[216.228.121.13]) by
  hqnvemgate24.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
- id <B5eed344d0004>; Fri, 19 Jun 2020 14:55:25 -0700
+ id <B5eed344e0005>; Fri, 19 Jun 2020 14:55:26 -0700
 Received: from hqmail.nvidia.com ([172.20.161.6])
  by hqpgpgate102.nvidia.com (PGP Universal service);
  Fri, 19 Jun 2020 14:57:07 -0700
 X-PGP-Universal: processed;
  by hqpgpgate102.nvidia.com on Fri, 19 Jun 2020 14:57:07 -0700
-Received: from HQMAIL109.nvidia.com (172.20.187.15) by HQMAIL107.nvidia.com
- (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Fri, 19 Jun
+Received: from HQMAIL107.nvidia.com (172.20.187.13) by HQMAIL101.nvidia.com
+ (172.20.187.10) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Fri, 19 Jun
  2020 21:56:59 +0000
-Received: from hqnvemgw03.nvidia.com (10.124.88.68) by HQMAIL109.nvidia.com
- (172.20.187.15) with Microsoft SMTP Server (TLS) id 15.0.1473.3 via Frontend
+Received: from hqnvemgw03.nvidia.com (10.124.88.68) by HQMAIL107.nvidia.com
+ (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3 via Frontend
  Transport; Fri, 19 Jun 2020 21:56:59 +0000
 Received: from rcampbell-dev.nvidia.com (Not Verified[10.110.48.66]) by
  hqnvemgw03.nvidia.com with Trustwave SEG (v7, 5, 8, 10121)
- id <B5eed34ab0007>; Fri, 19 Jun 2020 14:56:59 -0700
+ id <B5eed34ab0008>; Fri, 19 Jun 2020 14:56:59 -0700
 From: Ralph Campbell <rcampbell@nvidia.com>
 To: <nouveau@lists.freedesktop.org>, <linux-rdma@vger.kernel.org>,
  <linux-mm@kvack.org>, <linux-kselftest@vger.kernel.org>,
  <linux-kernel@vger.kernel.org>
-Date: Fri, 19 Jun 2020 14:56:40 -0700
-Message-ID: <20200619215649.32297-8-rcampbell@nvidia.com>
+Date: Fri, 19 Jun 2020 14:56:41 -0700
+Message-ID: <20200619215649.32297-9-rcampbell@nvidia.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200619215649.32297-1-rcampbell@nvidia.com>
 References: <20200619215649.32297-1-rcampbell@nvidia.com>
 MIME-Version: 1.0
 X-NVConfidentiality: public
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
- t=1592603726; bh=vetzRo7qSf24kubQfQzsa30v77hzL/+08nUTQBbHTVs=;
+ t=1592603726; bh=2WyHYZcAAd5j4j8YMKEb9Xnebvu/ReeLnPA7IJpaPHY=;
  h=X-PGP-Universal:From:To:CC:Subject:Date:Message-ID:X-Mailer:
  In-Reply-To:References:MIME-Version:X-NVConfidentiality:
  Content-Transfer-Encoding:Content-Type;
- b=UfBNFDTqpG5MyhwNmVPckGozBY3eduVobrHTvFSHzyUchJXE1jzsUsYTg1hoTlaD4
- N6TVbW7Af+vTudjECcSaQxhxJPLtNw4+ZiAg/PPCbkOQiS514ZRZ2razSWXAUkUMwR
- eNgTs0O5k5RMgLDUldfjkfu5SrgXXsfmJeacD0HguVM5WDuny80+PFyCItFqfCXd2H
- Xx58fJdk9X3nC/mvvgX/jExp7MX02zjIFarAcORC7FxHstDGD3N0zkazDkZUmEZVwU
- nb702At2tthf3I9JHJNghdj/tbARcCKKALlaoPvHKSGMUYbSsnmyrNrzG0VXTcmIJs
- 68rQdoK4If0Nw==
-Subject: [Nouveau] [PATCH 07/16] nouveau: make nvkm_vmm_ctor() and
- nvkm_mmu_ptp_get() static
+ b=bG2exhFLi/dhXnVxKtb+vVw4hJm4sYRUISOowNkQuaGJWCJ82ZMVo3X3X1S3I7CdF
+ Ds6XPFozTL4ERi92mIco97nEN83xqmi3Ou9oz3AzwbZa+TRQEinefMqFqZmfWeqbd7
+ htretrj9PAc0QqV8mWmF8TuY1w/lnSVhTS9OEZOkBJN0tvrm1lbz0NbrpS3T+BbgpD
+ zqMM2gEGnSi92uDArOQ/lOTJoRnwLl+uCy3MSWAoXledxm6rnKNWKRUdfw9nSzORi9
+ 5fPaVBl//wJYVNhsDgNIsSFyyDtQEP/RUKC4TJYAKcrTjpItK9qkP04981cHD4nQeR
+ 6Fws/WMRVkaog==
+Subject: [Nouveau] [PATCH 08/16] nouveau/hmm: fault one page at a time
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -73,56 +72,300 @@ Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-The functions nvkm_vmm_ctor() and nvkm_mmu_ptp_get() are not called outside
-of the file defining them so make them static.
+The SVM page fault handler groups faults into a range of contiguous
+virtual addresses and requests hmm_range_fault() to populate and
+return the page frame number of system memory mapped by the CPU.
+In preparation for supporting large pages to be mapped by the GPU,
+process faults one page at a time. In addition, use the hmm_range
+default_flags to fix a corner case where the input hmm_pfns array
+is not reinitialized after hmm_range_fault() returns -EBUSY and must
+be called again.
 
 Signed-off-by: Ralph Campbell <rcampbell@nvidia.com>
 ---
- drivers/gpu/drm/nouveau/nvkm/subdev/mmu/base.c | 2 +-
- drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c  | 2 +-
- drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.h  | 3 ---
- 3 files changed, 2 insertions(+), 5 deletions(-)
+ drivers/gpu/drm/nouveau/nouveau_svm.c | 199 +++++++++-----------------
+ 1 file changed, 66 insertions(+), 133 deletions(-)
 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/base.c b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/base.c
-index ee11ccaf0563..de91e9a26172 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/base.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/base.c
-@@ -61,7 +61,7 @@ nvkm_mmu_ptp_put(struct nvkm_mmu *mmu, bool force, struct nvkm_mmu_pt *pt)
- 	kfree(pt);
- }
- 
--struct nvkm_mmu_pt *
-+static struct nvkm_mmu_pt *
- nvkm_mmu_ptp_get(struct nvkm_mmu *mmu, u32 size, bool zero)
+diff --git a/drivers/gpu/drm/nouveau/nouveau_svm.c b/drivers/gpu/drm/nouveau/nouveau_svm.c
+index ba9f9359c30e..665dede69bd1 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_svm.c
++++ b/drivers/gpu/drm/nouveau/nouveau_svm.c
+@@ -516,7 +516,7 @@ static const struct mmu_interval_notifier_ops nouveau_svm_mni_ops = {
+ static void nouveau_hmm_convert_pfn(struct nouveau_drm *drm,
+ 				    struct hmm_range *range, u64 *ioctl_addr)
  {
- 	struct nvkm_mmu_pt *pt;
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c
-index 199f94e15c5f..67b00dcef4b8 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c
-@@ -1030,7 +1030,7 @@ nvkm_vmm_ctor_managed(struct nvkm_vmm *vmm, u64 addr, u64 size)
- 	return 0;
+-	unsigned long i, npages;
++	struct page *page;
+ 
+ 	/*
+ 	 * The ioctl_addr prepared here is passed through nvif_object_ioctl()
+@@ -525,42 +525,38 @@ static void nouveau_hmm_convert_pfn(struct nouveau_drm *drm,
+ 	 * This is all just encoding the internal hmm representation into a
+ 	 * different nouveau internal representation.
+ 	 */
+-	npages = (range->end - range->start) >> PAGE_SHIFT;
+-	for (i = 0; i < npages; ++i) {
+-		struct page *page;
+-
+-		if (!(range->hmm_pfns[i] & HMM_PFN_VALID)) {
+-			ioctl_addr[i] = 0;
+-			continue;
+-		}
+-
+-		page = hmm_pfn_to_page(range->hmm_pfns[i]);
+-		if (is_device_private_page(page))
+-			ioctl_addr[i] = nouveau_dmem_page_addr(page) |
+-					NVIF_VMM_PFNMAP_V0_V |
+-					NVIF_VMM_PFNMAP_V0_VRAM;
+-		else
+-			ioctl_addr[i] = page_to_phys(page) |
+-					NVIF_VMM_PFNMAP_V0_V |
+-					NVIF_VMM_PFNMAP_V0_HOST;
+-		if (range->hmm_pfns[i] & HMM_PFN_WRITE)
+-			ioctl_addr[i] |= NVIF_VMM_PFNMAP_V0_W;
++	if (!(range->hmm_pfns[0] & HMM_PFN_VALID)) {
++		ioctl_addr[0] = 0;
++		return;
+ 	}
++
++	page = hmm_pfn_to_page(range->hmm_pfns[0]);
++	if (is_device_private_page(page))
++		ioctl_addr[0] = nouveau_dmem_page_addr(page) |
++				NVIF_VMM_PFNMAP_V0_V |
++				NVIF_VMM_PFNMAP_V0_VRAM;
++	else
++		ioctl_addr[0] = page_to_phys(page) |
++				NVIF_VMM_PFNMAP_V0_V |
++				NVIF_VMM_PFNMAP_V0_HOST;
++	if (range->hmm_pfns[0] & HMM_PFN_WRITE)
++		ioctl_addr[0] |= NVIF_VMM_PFNMAP_V0_W;
  }
  
--int
-+static int
- nvkm_vmm_ctor(const struct nvkm_vmm_func *func, struct nvkm_mmu *mmu,
- 	      u32 pd_header, bool managed, u64 addr, u64 size,
- 	      struct lock_class_key *key, const char *name,
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.h b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.h
-index d3f8f916d0db..a2b179568970 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.h
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.h
-@@ -163,9 +163,6 @@ int nvkm_vmm_new_(const struct nvkm_vmm_func *, struct nvkm_mmu *,
- 		  u32 pd_header, bool managed, u64 addr, u64 size,
- 		  struct lock_class_key *, const char *name,
- 		  struct nvkm_vmm **);
--int nvkm_vmm_ctor(const struct nvkm_vmm_func *, struct nvkm_mmu *,
--		  u32 pd_header, bool managed, u64 addr, u64 size,
--		  struct lock_class_key *, const char *name, struct nvkm_vmm *);
- struct nvkm_vma *nvkm_vmm_node_search(struct nvkm_vmm *, u64 addr);
- struct nvkm_vma *nvkm_vmm_node_split(struct nvkm_vmm *, struct nvkm_vma *,
- 				     u64 addr, u64 size);
+ static int nouveau_range_fault(struct nouveau_svmm *svmm,
+ 			       struct nouveau_drm *drm, void *data, u32 size,
+-			       unsigned long hmm_pfns[], u64 *ioctl_addr,
++			       u64 *ioctl_addr, unsigned long hmm_flags,
+ 			       struct svm_notifier *notifier)
+ {
+ 	unsigned long timeout =
+ 		jiffies + msecs_to_jiffies(HMM_RANGE_DEFAULT_TIMEOUT);
+ 	/* Have HMM fault pages within the fault window to the GPU. */
++	unsigned long hmm_pfns[1];
+ 	struct hmm_range range = {
+ 		.notifier = &notifier->notifier,
+ 		.start = notifier->notifier.interval_tree.start,
+ 		.end = notifier->notifier.interval_tree.last + 1,
+-		.pfn_flags_mask = HMM_PFN_REQ_FAULT | HMM_PFN_REQ_WRITE,
++		.default_flags = hmm_flags,
+ 		.hmm_pfns = hmm_pfns,
+ 	};
+ 	struct mm_struct *mm = notifier->notifier.mm;
+@@ -575,11 +571,6 @@ static int nouveau_range_fault(struct nouveau_svmm *svmm,
+ 		ret = hmm_range_fault(&range);
+ 		mmap_read_unlock(mm);
+ 		if (ret) {
+-			/*
+-			 * FIXME: the input PFN_REQ flags are destroyed on
+-			 * -EBUSY, we need to regenerate them, also for the
+-			 * other continue below
+-			 */
+ 			if (ret == -EBUSY)
+ 				continue;
+ 			return ret;
+@@ -614,17 +605,12 @@ nouveau_svm_fault(struct nvif_notify *notify)
+ 	struct nvif_object *device = &svm->drm->client.device.object;
+ 	struct nouveau_svmm *svmm;
+ 	struct {
+-		struct {
+-			struct nvif_ioctl_v0 i;
+-			struct nvif_ioctl_mthd_v0 m;
+-			struct nvif_vmm_pfnmap_v0 p;
+-		} i;
+-		u64 phys[16];
++		struct nouveau_pfnmap_args i;
++		u64 phys[1];
+ 	} args;
+-	unsigned long hmm_pfns[ARRAY_SIZE(args.phys)];
+-	struct vm_area_struct *vma;
++	unsigned long hmm_flags;
+ 	u64 inst, start, limit;
+-	int fi, fn, pi, fill;
++	int fi, fn;
+ 	int replay = 0, ret;
+ 
+ 	/* Parse available fault buffer entries into a cache, and update
+@@ -691,66 +677,53 @@ nouveau_svm_fault(struct nvif_notify *notify)
+ 		 * window into a single update.
+ 		 */
+ 		start = buffer->fault[fi]->addr;
+-		limit = start + (ARRAY_SIZE(args.phys) << PAGE_SHIFT);
++		limit = start + PAGE_SIZE;
+ 		if (start < svmm->unmanaged.limit)
+ 			limit = min_t(u64, limit, svmm->unmanaged.start);
+-		SVMM_DBG(svmm, "wndw %016llx-%016llx", start, limit);
+ 
+-		mm = svmm->notifier.mm;
+-		if (!mmget_not_zero(mm)) {
+-			nouveau_svm_fault_cancel_fault(svm, buffer->fault[fi]);
+-			continue;
+-		}
+-
+-		/* Intersect fault window with the CPU VMA, cancelling
+-		 * the fault if the address is invalid.
++		/*
++		 * Prepare the GPU-side update of all pages within the
++		 * fault window, determining required pages and access
++		 * permissions based on pending faults.
+ 		 */
+-		mmap_read_lock(mm);
+-		vma = find_vma_intersection(mm, start, limit);
+-		if (!vma) {
+-			SVMM_ERR(svmm, "wndw %016llx-%016llx", start, limit);
+-			mmap_read_unlock(mm);
+-			mmput(mm);
+-			nouveau_svm_fault_cancel_fault(svm, buffer->fault[fi]);
+-			continue;
++		args.i.p.addr = start;
++		args.i.p.page = PAGE_SHIFT;
++		args.i.p.size = PAGE_SIZE;
++		/*
++		 * Determine required permissions based on GPU fault
++		 * access flags.
++		 * XXX: atomic?
++		 */
++		switch (buffer->fault[fi]->access) {
++		case 0: /* READ. */
++			hmm_flags = HMM_PFN_REQ_FAULT;
++			break;
++		case 3: /* PREFETCH. */
++			hmm_flags = 0;
++			break;
++		default:
++			hmm_flags = HMM_PFN_REQ_FAULT | HMM_PFN_REQ_WRITE;
++			break;
+ 		}
+-		start = max_t(u64, start, vma->vm_start);
+-		limit = min_t(u64, limit, vma->vm_end);
+-		mmap_read_unlock(mm);
+-		SVMM_DBG(svmm, "wndw %016llx-%016llx", start, limit);
+ 
+-		if (buffer->fault[fi]->addr != start) {
+-			SVMM_ERR(svmm, "addr %016llx", buffer->fault[fi]->addr);
+-			mmput(mm);
++		mm = svmm->notifier.mm;
++		if (!mmget_not_zero(mm)) {
+ 			nouveau_svm_fault_cancel_fault(svm, buffer->fault[fi]);
+ 			continue;
+ 		}
+ 
+-		/* Prepare the GPU-side update of all pages within the
+-		 * fault window, determining required pages and access
+-		 * permissions based on pending faults.
+-		 */
+-		args.i.p.page = PAGE_SHIFT;
+-		args.i.p.addr = start;
+-		for (fn = fi, pi = 0;;) {
+-			/* Determine required permissions based on GPU fault
+-			 * access flags.
+-			 *XXX: atomic?
+-			 */
+-			switch (buffer->fault[fn]->access) {
+-			case 0: /* READ. */
+-				hmm_pfns[pi++] = HMM_PFN_REQ_FAULT;
+-				break;
+-			case 3: /* PREFETCH. */
+-				hmm_pfns[pi++] = 0;
+-				break;
+-			default:
+-				hmm_pfns[pi++] = HMM_PFN_REQ_FAULT |
+-						 HMM_PFN_REQ_WRITE;
+-				break;
+-			}
+-			args.i.p.size = pi << PAGE_SHIFT;
++		notifier.svmm = svmm;
++		ret = mmu_interval_notifier_insert(&notifier.notifier, mm,
++						   args.i.p.addr, args.i.p.size,
++						   &nouveau_svm_mni_ops);
++		if (!ret) {
++			ret = nouveau_range_fault(svmm, svm->drm, &args,
++				sizeof(args), args.phys, hmm_flags, &notifier);
++			mmu_interval_notifier_remove(&notifier.notifier);
++		}
++		mmput(mm);
+ 
++		for (fn = fi; ++fn < buffer->fault_nr; ) {
+ 			/* It's okay to skip over duplicate addresses from the
+ 			 * same SVMM as faults are ordered by access type such
+ 			 * that only the first one needs to be handled.
+@@ -758,61 +731,21 @@ nouveau_svm_fault(struct nvif_notify *notify)
+ 			 * ie. WRITE faults appear first, thus any handling of
+ 			 * pending READ faults will already be satisfied.
+ 			 */
+-			while (++fn < buffer->fault_nr &&
+-			       buffer->fault[fn]->svmm == svmm &&
+-			       buffer->fault[fn    ]->addr ==
+-			       buffer->fault[fn - 1]->addr);
+-
+-			/* If the next fault is outside the window, or all GPU
+-			 * faults have been dealt with, we're done here.
+-			 */
+-			if (fn >= buffer->fault_nr ||
+-			    buffer->fault[fn]->svmm != svmm ||
++			if (buffer->fault[fn]->svmm != svmm ||
+ 			    buffer->fault[fn]->addr >= limit)
+ 				break;
+-
+-			/* Fill in the gap between this fault and the next. */
+-			fill = (buffer->fault[fn    ]->addr -
+-				buffer->fault[fn - 1]->addr) >> PAGE_SHIFT;
+-			while (--fill)
+-				hmm_pfns[pi++] = 0;
+ 		}
+ 
+-		SVMM_DBG(svmm, "wndw %016llx-%016llx covering %d fault(s)",
+-			 args.i.p.addr,
+-			 args.i.p.addr + args.i.p.size, fn - fi);
+-
+-		notifier.svmm = svmm;
+-		ret = mmu_interval_notifier_insert(&notifier.notifier,
+-						   svmm->notifier.mm,
+-						   args.i.p.addr, args.i.p.size,
+-						   &nouveau_svm_mni_ops);
+-		if (!ret) {
+-			ret = nouveau_range_fault(
+-				svmm, svm->drm, &args,
+-				sizeof(args.i) + pi * sizeof(args.phys[0]),
+-				hmm_pfns, args.phys, &notifier);
+-			mmu_interval_notifier_remove(&notifier.notifier);
+-		}
+-		mmput(mm);
++		/* If handling failed completely, cancel all faults. */
++		if (ret) {
++			while (fi < fn) {
++				struct nouveau_svm_fault *fault =
++					buffer->fault[fi++];
+ 
+-		/* Cancel any faults in the window whose pages didn't manage
+-		 * to keep their valid bit, or stay writeable when required.
+-		 *
+-		 * If handling failed completely, cancel all faults.
+-		 */
+-		while (fi < fn) {
+-			struct nouveau_svm_fault *fault = buffer->fault[fi++];
+-			pi = (fault->addr - args.i.p.addr) >> PAGE_SHIFT;
+-			if (ret ||
+-			     !(args.phys[pi] & NVIF_VMM_PFNMAP_V0_V) ||
+-			    (!(args.phys[pi] & NVIF_VMM_PFNMAP_V0_W) &&
+-			     fault->access != 0 && fault->access != 3)) {
+ 				nouveau_svm_fault_cancel_fault(svm, fault);
+-				continue;
+ 			}
++		} else
+ 			replay++;
+-		}
+ 	}
+ 
+ 	/* Issue fault replay to the GPU. */
 -- 
 2.20.1
 
