@@ -2,62 +2,57 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 18A5D203C3A
-	for <lists+nouveau@lfdr.de>; Mon, 22 Jun 2020 18:08:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 768B2203D48
+	for <lists+nouveau@lfdr.de>; Mon, 22 Jun 2020 18:59:04 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 804D76E855;
-	Mon, 22 Jun 2020 16:08:44 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E3F0F89B96;
+	Mon, 22 Jun 2020 16:59:02 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from filter01asd2-vif3.se.isp-net.nl
- (filter01asd2-vif3.se.isp-net.nl [82.215.18.104])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B63F66E855
- for <nouveau@lists.freedesktop.org>; Mon, 22 Jun 2020 16:08:43 +0000 (UTC)
-Received: from smtp01.zonnet.isp-net.nl ([217.149.195.12])
- by filter01asd2.se.isp-net.nl with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92)
- (envelope-from <jjhdiederen@zonnet.nl>)
- id 1jnOzv-0002eW-IY; Mon, 22 Jun 2020 18:08:41 +0200
-Received: from roundcube (webmail03.zonnet.isp-net.nl [217.149.195.10])
- (Authenticated sender: jjhdiederen)
- by smtp01.zonnet.isp-net.nl (Postfix) with ESMTPA id CAB5B210DE;
- Mon, 22 Jun 2020 18:08:38 +0200 (CEST)
+Received: from hqnvemgate26.nvidia.com (hqnvemgate26.nvidia.com
+ [216.228.121.65])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A81D789B96
+ for <nouveau@lists.freedesktop.org>; Mon, 22 Jun 2020 16:59:01 +0000 (UTC)
+Received: from hqpgpgate101.nvidia.com (Not Verified[216.228.121.13]) by
+ hqnvemgate26.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
+ id <B5ef0e3480000>; Mon, 22 Jun 2020 09:58:48 -0700
+Received: from hqmail.nvidia.com ([172.20.161.6])
+ by hqpgpgate101.nvidia.com (PGP Universal service);
+ Mon, 22 Jun 2020 09:59:01 -0700
+X-PGP-Universal: processed;
+ by hqpgpgate101.nvidia.com on Mon, 22 Jun 2020 09:59:01 -0700
+Received: from rcampbell-dev.nvidia.com (10.124.1.5) by HQMAIL107.nvidia.com
+ (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Mon, 22 Jun
+ 2020 16:58:54 +0000
+To: Jason Gunthorpe <jgg@mellanox.com>
+References: <20200619215649.32297-1-rcampbell@nvidia.com>
+ <20200622123947.GC2590509@mellanox.com>
+X-Nvconfidentiality: public
+From: Ralph Campbell <rcampbell@nvidia.com>
+Message-ID: <05bcdcd7-d17b-9092-1a9c-759fb0eab728@nvidia.com>
+Date: Mon, 22 Jun 2020 09:58:54 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.2.2
 MIME-Version: 1.0
-Date: Mon, 22 Jun 2020 18:08:38 +0200
-From: Jeroen Diederen <jjhdiederen@zonnet.nl>
-To: Ilia Mirkin <imirkin@alum.mit.edu>
-In-Reply-To: <CAKb7UvidTyx6+yQbJ-sy=yh9YqrMQ0=gh6a0WHmqS94VvZSUPQ@mail.gmail.com>
-References: <abb79c7114a58cf5b31542009531897c@zonnet.nl>
- <CAKb7UvidTyx6+yQbJ-sy=yh9YqrMQ0=gh6a0WHmqS94VvZSUPQ@mail.gmail.com>
-Message-ID: <45fa1029cf5f0610e4a3e1d65bb26b32@zonnet.nl>
-X-Sender: jjhdiederen@zonnet.nl
-User-Agent: Roundcube Webmail/1.3.9
-X-Originating-IP: 217.149.195.12
-X-SpamExperts-Domain: zonnet.nl
-X-SpamExperts-Username: 217.149.195.12
-Authentication-Results: se.isp-net.nl;
- auth=pass smtp.auth=217.149.195.12@zonnet.nl
-X-SpamExperts-Outgoing-Class: ham
-X-SpamExperts-Outgoing-Evidence: Combined (0.03)
-X-Recommended-Action: accept
-X-Filter-ID: Mvzo4OR0dZXEDF/gcnlw0f6LF1GdvkEexklpcFpSF5apSDasLI4SayDByyq9LIhVbpZ1q5HXaP5C
- hdgvEvaAVUTNWdUk1Ol2OGx3IfrIJKyP9eGNFz9TW9u+Jt8z2T3Ku5se/blNASm5b8HeWDvys6XR
- YZQxrmou6NLq1+4mP1IIiSK1+OndoICHCLqvAlonBP7yI+rqem1U0vJTYcAY8cnyv2Ulo9BtsMM6
- wMQRQboEybI1sOftHmSKUCHCvcq0TzZjnkrrL1mACMw/UF0G0V/RKjiWqmC6Vi1UgXMG7ngUOled
- bu+r9+W9cDXvzL3S/mvUeDTVOHKHbXPr2qKLF8eBp/liKy/06jed5mMB0LQ+AwMXi+OSqQVvJeAt
- QeT9Q5MeWyHYFcw5tP/0jE4kl+nE6wHyAbSyVXutrqMjgFKWCIh6nwoBuMKwN8OP5EE2CsQxwPST
- fSeJOF2atdSUJGUqMyL1jn5vJcvCViG/hk8VJxfkLc5E0+9+7b1MR7he6+MR9Nol7RZuMNLAjhWw
- OH8CTlQwpHklpufi6pZ4ylXWRHXvEHpBLVtVHkwhaj7h6j3a1v9dg8utFXxc3VLreFoTbxWjWWGS
- VjIBIuoUBQ7XzXmHaN80JC+nfH561Te/6BtpbmdpMLvM58ZB4GVvZfvg7iEFLP+SSY+Av5+AiC5U
- 8JvSPiVdU2r8nJ8SSdXlAkgLaBDHypM8oS2ytZStGn6UJnnG3krVDynmGeBgSGS2c0kl3EtmKpV5
- 7kfRGd8VTEes0erzd/oemg8HByBjC/fQsJMjVuaCfq+S2F3DJOIRFZ4oobg8BBg3Jq+ntzj0INBJ
- O3+z2Zjz6X3wO67EB6jNTB9xtx4iHxGcpBpLDc58mAK8cc+HwSOazJD1iokr3eqQ7+boO17uS4/R
- quqLU3LYM3A6BXfvel8OEFDbU52zWvJnwRDILff73k2iqjfNzh2G7psk592IIfs9c5j9arRHhmeT
- BRqfadfBt6tkFj7YnfVcxkQa/KnWVdMRwDtiK057higznT4lSarD2MMiC9WHQ5qV2aubghe6zCmb
- Qb86aG8aakh0G/5VOXdzJ6s5ZAp92xiIzKXhTIwb/KSCogvevAJcMeWV55CJ4JlL/7cxL7hrJSk6
- 0SF3F6RYOYr2
-X-Report-Abuse-To: spam@master01nm.se.isp-net.nl
-Subject: Re: [Nouveau] nouveau on G5 Macs
+In-Reply-To: <20200622123947.GC2590509@mellanox.com>
+X-Originating-IP: [10.124.1.5]
+X-ClientProxiedBy: HQMAIL101.nvidia.com (172.20.187.10) To
+ HQMAIL107.nvidia.com (172.20.187.13)
+Content-Language: en-US
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
+ t=1592845128; bh=17rmJOZx2NuUvyVDIKMt8wguy1oUyTRKNcnhF9ewJgU=;
+ h=X-PGP-Universal:Subject:To:CC:References:X-Nvconfidentiality:From:
+ Message-ID:Date:User-Agent:MIME-Version:In-Reply-To:
+ X-Originating-IP:X-ClientProxiedBy:Content-Type:Content-Language:
+ Content-Transfer-Encoding;
+ b=rwo9R4gFj7zEIuYXLuR8sMIDq669bABVnTdSwAYO0cdeo2tW8lCTawdU2ufryO5gF
+ TihfxNdj7WV0NLbF2cwCoY+9bQwqoKgpyRQZbZDBnr8oRJto2vtsDB8nq3YKnbCXjK
+ S/uT/aAPAzmPVQU3ymyYvZSxHqUFtJxS3GDJvYhevPLnQs68Nm7fcnzgheqizzkEKG
+ 6aC/rTKNMF2zZNlj8LJaUFNmhRIkIEe5FrlRhUYZ+1anzI+NOgdtFQf5t2jPzzFcOB
+ R1Z68hKNEXvJIC2clDRCVFbEeB2PSf95gbtf8ZlCxVHaGZSk2HTN7djCwV/nWvvK6u
+ W8sju/hNTpTkQ==
+Subject: Re: [Nouveau] [PATCH 00/16] mm/hmm/nouveau: THP mapping and
+ migration
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,55 +64,60 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau <nouveau@lists.freedesktop.org>
+Cc: linux-rdma@vger.kernel.org, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, linux-mm@kvack.org,
+ Ben Skeggs <bskeggs@redhat.com>, linux-kselftest@vger.kernel.org,
+ Andrew Morton <akpm@linux-foundation.org>, Shuah Khan <shuah@kernel.org>,
+ Christoph Hellwig <hch@lst.de>
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi Ilia,
 
-I experience screen tearing for both 64k and 4k page size.
-My iMac G5 has an nVidia Geforce FX 5200 Ultra GPU.
+On 6/22/20 5:39 AM, Jason Gunthorpe wrote:
+> On Fri, Jun 19, 2020 at 02:56:33PM -0700, Ralph Campbell wrote:
+>> These patches apply to linux-5.8.0-rc1. Patches 1-3 should probably go
+>> into 5.8, the others can be queued for 5.9. Patches 4-6 improve the HMM
+>> self tests. Patch 7-8 prepare nouveau for the meat of this series which
+>> adds support and testing for compound page mapping of system memory
+>> (patches 9-11) and compound page migration to device private memory
+>> (patches 12-16). Since these changes are split across mm core, nouveau,
+>> and testing, I'm guessing Jason Gunthorpe's HMM tree would be appropriate.
+> 
+> You need to break this up into parts that go where they need to
+> go. Nouveau rc changes should go to DRM or some series needs to
+> explain the linkage
+> 
+>> Ralph Campbell (16):
+>>    mm: fix migrate_vma_setup() src_owner and normal pages
+>>    nouveau: fix migrate page regression
+>>    nouveau: fix mixed normal and device private page migration
+>>    mm/hmm: fix test timeout on slower machines
+>>    mm/hmm/test: remove redundant page table invalidate
+>>    mm/hmm: test mixed normal and device private migrations
+>>    nouveau: make nvkm_vmm_ctor() and nvkm_mmu_ptp_get() static
+>>    nouveau/hmm: fault one page at a time
+>>    mm/hmm: add output flag for compound page mapping
+>>    nouveau/hmm: support mapping large sysmem pages
+>>    hmm: add tests for HMM_PFN_COMPOUND flag
+>>    mm/hmm: optimize migrate_vma_setup() for holes
+> 
+> Order things so it is hmm, test, noeveau
+> 
+>>    mm: support THP migration to device private memory
+>>    mm/thp: add THP allocation helper
+>>    mm/hmm/test: add self tests for THP migration
+>>    nouveau: support THP migration to private memory
+> 
+> This is another series, you should split it even if it has to go
+> through the hmm tree
+> 
+> Jason
 
-Regards,
-Jeroen
+Thanks. I thought there was probably a better way to submit this but
+I posted everything so people could see how it all fit together.
 
-  Ilia Mirkin schreef op 2020-06-22 17:25:
-> Which GPU do you have? The NV40 AGP board (GeForce 6800) works
-> particularly poorly. However as long as you go with 4k pages (and
-> there's no real benefit to 64k pages for most applications), basic
-> things should work. I wouldn't recommend using a GL-based compositor
-> though.
-> 
-> Which distortion are you talking about?
-> 
-> Cheers,
-> 
->   -ilia
-> 
-> On Mon, Jun 22, 2020 at 11:10 AM Jeroen Diederen 
-> <jjhdiederen@zonnet.nl> wrote:
->> 
->> Hi all,
->> 
->> I have been trying to solve nouveau issues on my iMac G5 for ages. As
->> far as I can understand it, there is a problem with nouveau and page
->> size mapping. I tried both 64K and 4K page size kernels and the the
->> result is always distorted video.
->> There is an old To-Do list, which says "fix the page size mapping
->> problem on G5/64 bit for exposing fifo regs" on
->> https://nouveau.freedesktop.org/wiki/ToDo/.
->> 
->> Is there any chance that this bug will be fixed ? I am not a 
->> programmer,
->> so I can't be of any help.
->> 
->> Jeroen Diederen
->> _______________________________________________
->> Nouveau mailing list
->> Nouveau@lists.freedesktop.org
->> https://lists.freedesktop.org/mailman/listinfo/nouveau
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
