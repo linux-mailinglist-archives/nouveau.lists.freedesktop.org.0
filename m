@@ -2,65 +2,58 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id A6509203F66
-	for <lists+nouveau@lfdr.de>; Mon, 22 Jun 2020 20:45:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7009520408D
+	for <lists+nouveau@lfdr.de>; Mon, 22 Jun 2020 21:36:24 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C96356E8B2;
-	Mon, 22 Jun 2020 18:45:15 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C68E86E143;
+	Mon, 22 Jun 2020 19:36:21 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from filter01nm-vif3.se.isp-net.nl (filter01nm-vif3.se.isp-net.nl
- [82.215.18.9])
- by gabe.freedesktop.org (Postfix) with ESMTPS id BE4A16E8B2
- for <nouveau@lists.freedesktop.org>; Mon, 22 Jun 2020 18:45:14 +0000 (UTC)
-Received: from smtp01.zonnet.isp-net.nl ([217.149.195.12])
- by filter01nm.se.isp-net.nl with esmtps
- (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92)
- (envelope-from <jjhdiederen@zonnet.nl>)
- id 1jnRRP-0000y7-QB; Mon, 22 Jun 2020 20:45:13 +0200
-Received: from roundcube (webmail03.zonnet.isp-net.nl [217.149.195.10])
- (Authenticated sender: jjhdiederen)
- by smtp01.zonnet.isp-net.nl (Postfix) with ESMTPA id 45616210E8;
- Mon, 22 Jun 2020 20:45:10 +0200 (CEST)
+Received: from hqnvemgate26.nvidia.com (hqnvemgate26.nvidia.com
+ [216.228.121.65])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2515E6E056
+ for <nouveau@lists.freedesktop.org>; Mon, 22 Jun 2020 19:36:20 +0000 (UTC)
+Received: from hqpgpgate101.nvidia.com (Not Verified[216.228.121.13]) by
+ hqnvemgate26.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
+ id <B5ef108270000>; Mon, 22 Jun 2020 12:36:07 -0700
+Received: from hqmail.nvidia.com ([172.20.161.6])
+ by hqpgpgate101.nvidia.com (PGP Universal service);
+ Mon, 22 Jun 2020 12:36:19 -0700
+X-PGP-Universal: processed;
+ by hqpgpgate101.nvidia.com on Mon, 22 Jun 2020 12:36:19 -0700
+Received: from rcampbell-dev.nvidia.com (10.124.1.5) by HQMAIL107.nvidia.com
+ (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Mon, 22 Jun
+ 2020 19:36:13 +0000
+To: Zi Yan <ziy@nvidia.com>
+References: <20200619215649.32297-1-rcampbell@nvidia.com>
+ <20200619215649.32297-14-rcampbell@nvidia.com>
+ <F1872509-3B1F-4A8A-BFF5-E4D44E451920@nvidia.com>
+From: Ralph Campbell <rcampbell@nvidia.com>
+X-Nvconfidentiality: public
+Message-ID: <b6eed976-c515-72d6-a7be-2296cab8f0d4@nvidia.com>
+Date: Mon, 22 Jun 2020 12:36:13 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.2.2
 MIME-Version: 1.0
-Date: Mon, 22 Jun 2020 20:45:10 +0200
-From: Jeroen Diederen <jjhdiederen@zonnet.nl>
-To: Ilia Mirkin <imirkin@alum.mit.edu>
-In-Reply-To: <CAKb7Uvjh6eRpGTEuTcOHrESe9b3Zf-qMoyZBBQMcQVhwmVCQXg@mail.gmail.com>
-References: <abb79c7114a58cf5b31542009531897c@zonnet.nl>
- <CAKb7UvidTyx6+yQbJ-sy=yh9YqrMQ0=gh6a0WHmqS94VvZSUPQ@mail.gmail.com>
- <45fa1029cf5f0610e4a3e1d65bb26b32@zonnet.nl>
- <CAKb7UviLWdO6Tm2ya7XFSGVLex_3rduM6Mxj-DFx-CZ+mksnoQ@mail.gmail.com>
- <6791f595dde33af22ef22165bcc643da@zonnet.nl>
- <CAKb7Uvjh6eRpGTEuTcOHrESe9b3Zf-qMoyZBBQMcQVhwmVCQXg@mail.gmail.com>
-Message-ID: <2487a3fea31084683f2ae5b4b044ce24@zonnet.nl>
-X-Sender: jjhdiederen@zonnet.nl
-User-Agent: Roundcube Webmail/1.3.9
-X-Originating-IP: 217.149.195.12
-X-SpamExperts-Domain: zonnet.nl
-X-SpamExperts-Username: 217.149.195.12
-Authentication-Results: se.isp-net.nl;
- auth=pass smtp.auth=217.149.195.12@zonnet.nl
-X-SpamExperts-Outgoing-Class: ham
-X-SpamExperts-Outgoing-Evidence: Combined (0.06)
-X-Recommended-Action: accept
-X-Filter-ID: Mvzo4OR0dZXEDF/gcnlw0f6LF1GdvkEexklpcFpSF5apSDasLI4SayDByyq9LIhVorQ/nuCV0hRl
- CpCZXiLuSUTNWdUk1Ol2OGx3IfrIJKyP9eGNFz9TW9u+Jt8z2T3Ku5se/blNASm5b8HeWDvys6XR
- YZQxrmou6NLq1+4mP1IIiSK1+OndoICHCLqvAlonBP7yI+rqem1U0vJTYcAY8YQwqwvoK/JD/U0z
- Hr2F9KMEybI1sOftHmSKUCHCvcq0TzZjnkrrL1mACMw/UF0G0V/RKjiWqmC6Vi1UgXMG7ngUOled
- bu+r9+W9cDXvzL3S7Dg9elpePv2xEEErBdrvnGvfAPllJ3YdM9ixxrKuYCdNxaypTbp28NxghjNo
- pU/Oaqj4KISIRSJ5MfjE8OaunZEyYYf7TmlI3iEcqXK4A61ChHMQHCMEWTX9HEhwSP4/MSl+mev0
- M9cO0xP2892D0f1vGs+oFsetd7z62kYIphyzRu9XsALc0Y4fkqZLUhxXi2+ZrpvcQF0mktyij7U2
- V1mYqffhoXnZj6JC/A974b0O3b4FxtST7HIdO8DRlV5pSS/+Eq9W1Ne6bh1TgoOk8CjnSpaOixcY
- U6peM+R49yXm+ifPs2yIXVaS7j1CpD4sbMC/K6klzbRMjzrXH/SDfWiH1Wgh6RAenBR+licROGbR
- bL3XEliUM9W1ZU04ovLnwi5FRJMEzAJRlt0fWJ8WszvoneYamto5b4GQAI+GTjJXowrwswz4+8bs
- wNusDSzXHG971kKzKZS34Z+yCQ5bVSz3XgtqLDENrnN+u7byfLqgZZAS9m5ZAKg1qGreZOdF9IP+
- yzYJsLYmJ+6/9gBPvABAjEnKdWzW+F3p1pUhf5xQWieK01OBEUFBjx1xlIOBfVrQw/ik1GmQWr3x
- iU7EK1FfEoXm0/FPF8PR0w363lnIDcXy6rgl7s7LXJlobqWDnZ0am9RvkISTKpGN4QIbOj1kMcZY
- 3r4uvsbY2LkaCy40NNvNfQ7HmekZAHkDEtV8ELH1utqYxpVVHJUK1MCC1wGyAMas+HCc9VkJt8qX
- JFmN6oO4CfHUSlMQ8/zY1Kg2ePQ44lqMDpyryPGheI8wLgY2GlHJUyuLXDtGnG9KEyM=
-X-Report-Abuse-To: spam@master01nm.se.isp-net.nl
-Subject: Re: [Nouveau] nouveau on G5 Macs
+In-Reply-To: <F1872509-3B1F-4A8A-BFF5-E4D44E451920@nvidia.com>
+X-Originating-IP: [10.124.1.5]
+X-ClientProxiedBy: HQMAIL101.nvidia.com (172.20.187.10) To
+ HQMAIL107.nvidia.com (172.20.187.13)
+Content-Language: en-US
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
+ t=1592854567; bh=k92wmBgrGAE346s5tJGKtF1T6WINWYI3KFBqOeO8Nlw=;
+ h=X-PGP-Universal:Subject:To:CC:References:From:X-Nvconfidentiality:
+ Message-ID:Date:User-Agent:MIME-Version:In-Reply-To:
+ X-Originating-IP:X-ClientProxiedBy:Content-Type:Content-Language:
+ Content-Transfer-Encoding;
+ b=XbZZVsKWFDMXu+mngjFYiRn2RbQAIcVJJlSDUvc/OgLFsfWagoAzSycdRPS23bc+u
+ 90cSRi4HCzcajweccikNKZxCcES+coy0DPkVoindh/tvK5sDM3W7s35U+bSdDmOWtG
+ NUmEHT+sZ8dRU9gRd8hVyhwMbe/dIXf2MJIlLzMb+79CGSPHSCVdY6IelcEL8R0Ul/
+ 1aGjl+A5NgFU9OVnK42g+u+Gq29eihRRkGlXbO5YE/gN3yzCqijZe0sHWBN0hzB/DP
+ vJiXwvziXSBB31zCiRD/2WvlgYOdEZlyYGFb33xirIoc2J6wqlsqpKxoo0L7oCqA7S
+ hPj1k8FBFDMWg==
+Subject: Re: [Nouveau] [PATCH 13/16] mm: support THP migration to device
+ private memory
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -72,85 +65,109 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau <nouveau@lists.freedesktop.org>
+Cc: linux-rdma@vger.kernel.org, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, linux-mm@kvack.org, Jason
+ Gunthorpe <jgg@mellanox.com>, Ben Skeggs <bskeggs@redhat.com>,
+ linux-kselftest@vger.kernel.org, Andrew Morton <akpm@linux-foundation.org>,
+ Shuah Khan <shuah@kernel.org>, Christoph Hellwig <hch@lst.de>
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-I see libwayland packages installed.
 
-Ilia Mirkin schreef op 2020-06-22 20:18:
-> OK. That's not tearing. That's like a bad pitch on an image.
-> (Presumably you only find the second image, IMG_1968.jpg,
-> problematic?)
+On 6/21/20 4:20 PM, Zi Yan wrote:
+> On 19 Jun 2020, at 17:56, Ralph Campbell wrote:
 > 
-> I'm guessing you're using a GL-based compositor, which I fully expect
-> to work poorly. Please try a non-compositing or XRender-based
-> compositing environment.
+>> Support transparent huge page migration to ZONE_DEVICE private memory.
+>> A new flag (MIGRATE_PFN_COMPOUND) is added to the input PFN array to
+>> indicate the huge page was fully mapped by the CPU.
+>> Export prep_compound_page() so that device drivers can create huge
+>> device private pages after calling memremap_pages().
+>>
+>> Signed-off-by: Ralph Campbell <rcampbell@nvidia.com>
+>> ---
+>>   include/linux/migrate.h |   1 +
+>>   include/linux/mm.h      |   1 +
+>>   mm/huge_memory.c        |  30 ++++--
+>>   mm/internal.h           |   1 -
+>>   mm/memory.c             |  10 +-
+>>   mm/memremap.c           |   9 +-
+>>   mm/migrate.c            | 226 ++++++++++++++++++++++++++++++++--------
+>>   mm/page_alloc.c         |   1 +
+>>   8 files changed, 226 insertions(+), 53 deletions(-)
+>>
+>> diff --git a/include/linux/migrate.h b/include/linux/migrate.h
+>> index 3e546cbf03dd..f6a64965c8bd 100644
+>> --- a/include/linux/migrate.h
+>> +++ b/include/linux/migrate.h
+>> @@ -166,6 +166,7 @@ static inline int migrate_misplaced_transhuge_page(struct mm_struct *mm,
+>>   #define MIGRATE_PFN_MIGRATE	(1UL << 1)
+>>   #define MIGRATE_PFN_LOCKED	(1UL << 2)
+>>   #define MIGRATE_PFN_WRITE	(1UL << 3)
+>> +#define MIGRATE_PFN_COMPOUND	(1UL << 4)
+>>   #define MIGRATE_PFN_SHIFT	6
+>>
+>>   static inline struct page *migrate_pfn_to_page(unsigned long mpfn)
+>> diff --git a/include/linux/mm.h b/include/linux/mm.h
+>> index dc7b87310c10..020b9dd3cddb 100644
+>> --- a/include/linux/mm.h
+>> +++ b/include/linux/mm.h
+>> @@ -932,6 +932,7 @@ static inline unsigned int page_shift(struct page *page)
+>>   }
+>>
+>>   void free_compound_page(struct page *page);
+>> +void prep_compound_page(struct page *page, unsigned int order);
+>>
+>>   #ifdef CONFIG_MMU
+>>   /*
+>> diff --git a/mm/huge_memory.c b/mm/huge_memory.c
+>> index 78c84bee7e29..25d95f7b1e98 100644
+>> --- a/mm/huge_memory.c
+>> +++ b/mm/huge_memory.c
+>> @@ -1663,23 +1663,35 @@ int zap_huge_pmd(struct mmu_gather *tlb, struct vm_area_struct *vma,
+>>   	} else {
+>>   		struct page *page = NULL;
+>>   		int flush_needed = 1;
+>> +		bool is_anon = false;
+>>
+>>   		if (pmd_present(orig_pmd)) {
+>>   			page = pmd_page(orig_pmd);
+>> +			is_anon = PageAnon(page);
+>>   			page_remove_rmap(page, true);
+>>   			VM_BUG_ON_PAGE(page_mapcount(page) < 0, page);
+>>   			VM_BUG_ON_PAGE(!PageHead(page), page);
+>>   		} else if (thp_migration_supported()) {
+>>   			swp_entry_t entry;
+>>
+>> -			VM_BUG_ON(!is_pmd_migration_entry(orig_pmd));
+>>   			entry = pmd_to_swp_entry(orig_pmd);
+>> -			page = pfn_to_page(swp_offset(entry));
+>> +			if (is_device_private_entry(entry)) {
+>> +				page = device_private_entry_to_page(entry);
+>> +				is_anon = PageAnon(page);
+>> +				page_remove_rmap(page, true);
+>> +				VM_BUG_ON_PAGE(page_mapcount(page) < 0, page);
+>> +				VM_BUG_ON_PAGE(!PageHead(page), page);
+>> +				put_page(page);
 > 
-> Cheers,
-> 
->   -ilia
-> 
-> On Mon, Jun 22, 2020 at 2:15 PM Jeroen Diederen <jjhdiederen@zonnet.nl> 
-> wrote:
->> 
->> This is with 64k page size.
->> 
->> 
->> 
->> Ilia Mirkin schreef op 2020-06-22 19:27:
->> > I suspect screen tearing (as it's usually defined) is to be expected.
->> > Can you take a photo of what you're seeing, since I'm suspecting it's
->> > more than regular screen tearing?
->> >
->> > On Mon, Jun 22, 2020 at 12:08 PM Jeroen Diederen
->> > <jjhdiederen@zonnet.nl> wrote:
->> >>
->> >> Hi Ilia,
->> >>
->> >> I experience screen tearing for both 64k and 4k page size.
->> >> My iMac G5 has an nVidia Geforce FX 5200 Ultra GPU.
->> >>
->> >> Regards,
->> >> Jeroen
->> >>
->> >>   Ilia Mirkin schreef op 2020-06-22 17:25:
->> >> > Which GPU do you have? The NV40 AGP board (GeForce 6800) works
->> >> > particularly poorly. However as long as you go with 4k pages (and
->> >> > there's no real benefit to 64k pages for most applications), basic
->> >> > things should work. I wouldn't recommend using a GL-based compositor
->> >> > though.
->> >> >
->> >> > Which distortion are you talking about?
->> >> >
->> >> > Cheers,
->> >> >
->> >> >   -ilia
->> >> >
->> >> > On Mon, Jun 22, 2020 at 11:10 AM Jeroen Diederen
->> >> > <jjhdiederen@zonnet.nl> wrote:
->> >> >>
->> >> >> Hi all,
->> >> >>
->> >> >> I have been trying to solve nouveau issues on my iMac G5 for ages. As
->> >> >> far as I can understand it, there is a problem with nouveau and page
->> >> >> size mapping. I tried both 64K and 4K page size kernels and the the
->> >> >> result is always distorted video.
->> >> >> There is an old To-Do list, which says "fix the page size mapping
->> >> >> problem on G5/64 bit for exposing fifo regs" on
->> >> >> https://nouveau.freedesktop.org/wiki/ToDo/.
->> >> >>
->> >> >> Is there any chance that this bug will be fixed ? I am not a
->> >> >> programmer,
->> >> >> so I can't be of any help.
->> >> >>
->> >> >> Jeroen Diederen
->> >> >> _______________________________________________
->> >> >> Nouveau mailing list
->> >> >> Nouveau@lists.freedesktop.org
->> >> >> https://lists.freedesktop.org/mailman/listinfo/nouveau
+> Why do you hide this code behind thp_migration_supported()? It seems that you just need
+> pmd swap entry not pmd migration entry. Also the condition is not consistent with the code
+> in __handle_mm_fault(), in which you handle is_device_private_entry() directly without
+> checking thp_migration_support().
+
+Good point, I think "else if (thp_migration_supported())" should be
+"else if (is_pmd_migration_entry(orig_pmd))" since if the PMD *is*
+a device private or migration entry, then it should be handled and the
+VM_BUG_ON() should be that thp_migration_supported() is true
+(or maybe remove the VM_BUG_ON?).
+
+> Do we need to support split_huge_pmd() if a page is migrated to device? Any new code
+> needed in split_huge_pmd()?
+
+I was thinking that any CPU usage of the device private page would cause it to be
+migrated back to system memory as a whole PMD/PUD page but I'll double check.
+At least there should be a check that the page isn't a device private page.
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
