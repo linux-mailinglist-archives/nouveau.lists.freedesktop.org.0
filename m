@@ -1,53 +1,89 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id F360A202DD7
-	for <lists+nouveau@lfdr.de>; Mon, 22 Jun 2020 02:16:30 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 602002036F6
+	for <lists+nouveau@lfdr.de>; Mon, 22 Jun 2020 14:39:58 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4C9086E46E;
-	Mon, 22 Jun 2020 00:16:28 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id CE54F6E526;
+	Mon, 22 Jun 2020 12:39:55 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from hqnvemgate25.nvidia.com (hqnvemgate25.nvidia.com
- [216.228.121.64])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0B5ED6E46E
- for <nouveau@lists.freedesktop.org>; Mon, 22 Jun 2020 00:16:27 +0000 (UTC)
-Received: from hqpgpgate102.nvidia.com (Not Verified[216.228.121.13]) by
- hqnvemgate25.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
- id <B5eeff82e0000>; Sun, 21 Jun 2020 17:15:42 -0700
-Received: from hqmail.nvidia.com ([172.20.161.6])
- by hqpgpgate102.nvidia.com (PGP Universal service);
- Sun, 21 Jun 2020 17:16:26 -0700
-X-PGP-Universal: processed;
- by hqpgpgate102.nvidia.com on Sun, 21 Jun 2020 17:16:26 -0700
-Received: from [10.2.167.171] (10.124.1.5) by HQMAIL107.nvidia.com
- (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Mon, 22 Jun
- 2020 00:16:18 +0000
-From: Zi Yan <ziy@nvidia.com>
+Received: from EUR04-VI1-obe.outbound.protection.outlook.com
+ (mail-eopbgr80055.outbound.protection.outlook.com [40.107.8.55])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id CBFAD6E526
+ for <nouveau@lists.freedesktop.org>; Mon, 22 Jun 2020 12:39:53 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=AP0fIm8eIL6gBjbXpBT2M1dc0zOUDdqi8tBmcGBJTKOM4RJxGyEPdmBL+X8ODzJdV3IShu1wH2GgrOM7zPAtUkL/yfDw7DowuheyVpF6ZeHt1C0IU/ryN4xtOK3zVZFCUnKuG0tRBPhl3ni7DyWBD956kVif0EjzOt2pd8z+PlbzKjhwbVdvAF3SKqaWBk7TRQpUlIO+paxcErBmxQEVkLKZbIFMEnXiriihLcpIO1cTOIZZo1wkDXmMvG4OW0xNlwxvfvtL+QijZZT7OS+ZImMURBM1d72iDH6r8+Dyl9rsvuMcn0LsZC29KtmyH8T4ypBqsTDrbfMBw4JnSOb9JA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=p1K3W9D2CAIdaMZ2eJJRaCFYV5/wZE+UtaAcLp9SRgs=;
+ b=T9EEnKTezHSS1HLgHSzQnTrwJhI/gEafwyffNFvEAgSn9xwFfnZotJ4xXxmnlVs52qH/eqlIsBUA4H1b2zuaoeTP0CPayKTRQPNnayHPbY0ZfwIM2JufHbIm9cEfp49wM+6vvFDXO6SZIhMrjPrp+Kidfdx/TAKJGzVCtEx6NHgq+UwCOJExkxsuBB/D7scTcz5WQpEB2+i8wS0Jfi7UZyFr94z5eU3Wnh4mEVNZLeS6cl565jUpI1gBbthcyfZSKMV2a/qWzkA8gWq2CXjhmWPmfn4NyLJEyJDRFBW29hKH3cP33NSXc8sziB0pQFnS3UyJ3KevnZgmLvZDRwQjAg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=mellanox.com; dmarc=pass action=none header.from=mellanox.com;
+ dkim=pass header.d=mellanox.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Mellanox.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=p1K3W9D2CAIdaMZ2eJJRaCFYV5/wZE+UtaAcLp9SRgs=;
+ b=pOaARyiZTEmm72NN0IdoN3cfSQp5FIJ1SGJv/d1SRevkRsh8Ni070O+5nwkdvkwM3QaQQvL1lBP5bV5fdjyIpyBKTp7FmyRAMWVoO1PJCT3vtwDIeVFglUivOZfKxmV/QoJa0ziSvdRBFQOGEH1bJKVoLtJmJ4Kiztp99sUMldM=
+Authentication-Results: nvidia.com; dkim=none (message not signed)
+ header.d=none;nvidia.com; dmarc=none action=none header.from=mellanox.com;
+Received: from VI1PR05MB4141.eurprd05.prod.outlook.com (2603:10a6:803:44::15)
+ by VI1PR05MB4702.eurprd05.prod.outlook.com (2603:10a6:802:5b::16)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3109.25; Mon, 22 Jun
+ 2020 12:39:50 +0000
+Received: from VI1PR05MB4141.eurprd05.prod.outlook.com
+ ([fe80::848b:fcd0:efe3:189e]) by VI1PR05MB4141.eurprd05.prod.outlook.com
+ ([fe80::848b:fcd0:efe3:189e%7]) with mapi id 15.20.3109.027; Mon, 22 Jun 2020
+ 12:39:50 +0000
+Date: Mon, 22 Jun 2020 09:39:47 -0300
+From: Jason Gunthorpe <jgg@mellanox.com>
 To: Ralph Campbell <rcampbell@nvidia.com>
-Date: Sun, 21 Jun 2020 20:15:45 -0400
-X-Mailer: MailMate (1.13.1r5690)
-Message-ID: <9948121A-CA52-494F-9B68-6C0089E15057@nvidia.com>
-In-Reply-To: <20200619215649.32297-15-rcampbell@nvidia.com>
+Message-ID: <20200622123947.GC2590509@mellanox.com>
 References: <20200619215649.32297-1-rcampbell@nvidia.com>
- <20200619215649.32297-15-rcampbell@nvidia.com>
+Content-Disposition: inline
+In-Reply-To: <20200619215649.32297-1-rcampbell@nvidia.com>
+X-ClientProxiedBy: BL0PR01CA0031.prod.exchangelabs.com (2603:10b6:208:71::44)
+ To VI1PR05MB4141.eurprd05.prod.outlook.com
+ (2603:10a6:803:44::15)
 MIME-Version: 1.0
-X-Originating-IP: [10.124.1.5]
-X-ClientProxiedBy: HQMAIL105.nvidia.com (172.20.187.12) To
- HQMAIL107.nvidia.com (172.20.187.13)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
- t=1592784942; bh=Lr8iQ6hREjxuIrrKajV9oQHe0CBRPThD6DDsvzRvG88=;
- h=X-PGP-Universal:From:To:CC:Subject:Date:X-Mailer:Message-ID:
- In-Reply-To:References:MIME-Version:X-Originating-IP:
- X-ClientProxiedBy:Content-Type;
- b=kcNK9B7kDcnIj5KTg2K7ZI3H/ITfv/fVhMe6LNHevMFvtR9mrnxySOqp8KItN6/zU
- uPApsdYyrDEwN9Sdw+J33HBTV6bTaWPReJ7agzPv3XDX1T3jara8+nBSWZCN3Xs7W2
- w26R03Vzir/ckhxS6NkSV4lYEZkuiT4PraqoF+zbtY2f8cnFY7xck3U/xS2wTQsoEZ
- VGQ+i5dfa1qqKFIOZDjoZYuzcOi7z9Tk4SO2qk9YdVUMv5BKQgjNTYfecpvQMIL/kK
- jJPBH28+w+yCFuzHuNrpJZ/vXnn6QNbuqrckX3VMU2Nebqjmp4mgfMcMgRZJfotG4G
- rMSkddnkNVykw==
-Subject: Re: [Nouveau] [PATCH 14/16] mm/thp: add THP allocation helper
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from mlx.ziepe.ca (156.34.48.30) by
+ BL0PR01CA0031.prod.exchangelabs.com (2603:10b6:208:71::44) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.3109.22 via Frontend Transport; Mon, 22 Jun 2020 12:39:50 +0000
+Received: from jgg by mlx with local (Exim 4.93)	(envelope-from
+ <jgg@mellanox.com>)	id 1jnLjn-00Bt6R-52; Mon, 22 Jun 2020 09:39:47 -0300
+X-Originating-IP: [156.34.48.30]
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-HT: Tenant
+X-MS-Office365-Filtering-Correlation-Id: 751cebd9-7b35-46be-0431-08d816a95b0a
+X-MS-TrafficTypeDiagnostic: VI1PR05MB4702:
+X-Microsoft-Antispam-PRVS: <VI1PR05MB470271E4FEB6E385D7F352E4CF970@VI1PR05MB4702.eurprd05.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:8882;
+X-Forefront-PRVS: 0442E569BC
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: pMHw3hZKMymfaINzJj5CBQbB3lHLKD46VbCUtqy53Q69xeSoFrISsbudZYm57hKL9HTQ2aqcIF/xfOa/FUUzMRf1xqfNVpWhzzFzCC8Y3H8SKYuYThujhsTqUEbMAsyApFS0NAqn27AEC9b/g1IxXXtQ8MsiWJ8BrhtJhZ/WFz3vmNXBPmvidh4CmFzVmjzXhuighDOD15Fj6fiPd9zWPx3ekdsBnzLBPW7p/aZiCYNJWwMnXFrRMkShLdH5alaODiJ9a3i6xajnJzKgxdzxP1hqDSYpCpnXRRDjTHMexH5qIlPaTJdu8JFhRosCuiIOysewn81ExFVDOQA9JUhkJw==
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:VI1PR05MB4141.eurprd05.prod.outlook.com; PTR:; CAT:NONE;
+ SFTY:;
+ SFS:(4636009)(136003)(346002)(366004)(376002)(396003)(39860400002)(8936002)(6916009)(186003)(26005)(1076003)(316002)(426003)(4326008)(8676002)(54906003)(83380400001)(2906002)(33656002)(5660300002)(9746002)(9786002)(36756003)(86362001)(2616005)(66476007)(66946007)(66556008)(478600001)(7416002);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData: tLNNxONQZO6jW+hpHfyZgIH4ekJEEY76iBbMYz/8FNO3wxQPzfWFq3Odq7G4TWT6ABx+FHBvHZwmz8kx3UjhKDksB7vj94wbWU+LQDYv0V5WvLaMkJQsXGFSj3jgmu7hDEXxHrbgpdUW5i93VB3NguMA1Oa4MKTWBVD8jNQNkdG3X/X8EP3XTWb4LgFI58kENa4x4U6n/zUmPWQvERH971WippoG425mD9tdpWq4Qo5C3n5urcpRbQurRf2Sj1MURdQfEwb10irvDYfWPCdshUbE3q6gLfPsJrOHez+yAa4MJ2J3wTZBNXjbbdvV/0zycr4BL5Drtu25Dx62pSSuqMnOC39+AVXTYMPIlqTdkuT+pmNmjbuAPnAiPG6ouIWKI/Ngt/m+ZDclKT1Zw5GJ0DOW66kV5Uiu8BuQzWygmNy016o7AQ8Gjy9qcA6Ud3PA39PjkQc+DEXPdvBkHvPXO5OWwC/i8tM0ja7JpaZPGP8=
+X-OriginatorOrg: Mellanox.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 751cebd9-7b35-46be-0431-08d816a95b0a
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Jun 2020 12:39:50.8090 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: a652971c-7d2e-4d9b-a6a4-d149256f461b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: NLiVITWOJzttNzWnX+aFlNoYNmvhsxk0rQ5aLv4lUo/rd3WlD+tL/RYu4y/qiU7gmFVLwyBOB+qC4ZS5L4BP1Q==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR05MB4702
+Subject: Re: [Nouveau] [PATCH 00/16] mm/hmm/nouveau: THP mapping and
+ migration
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,138 +96,54 @@ List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
 Cc: linux-rdma@vger.kernel.org, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, linux-mm@kvack.org, Jason
- Gunthorpe <jgg@mellanox.com>, Ben Skeggs <bskeggs@redhat.com>,
- linux-kselftest@vger.kernel.org, Andrew Morton <akpm@linux-foundation.org>,
- Shuah Khan <shuah@kernel.org>, Christoph Hellwig <hch@lst.de>
-Content-Type: multipart/mixed; boundary="===============1416556052=="
+ linux-kernel@vger.kernel.org, linux-mm@kvack.org,
+ Ben Skeggs <bskeggs@redhat.com>, linux-kselftest@vger.kernel.org,
+ Andrew Morton <akpm@linux-foundation.org>, Shuah Khan <shuah@kernel.org>,
+ Christoph Hellwig <hch@lst.de>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
---===============1416556052==
-Content-Type: multipart/signed;
-	boundary="=_MailMate_4C36EFB0-847C-4A5D-A41C-B10AE0145101_=";
-	micalg=pgp-sha1; protocol="application/pgp-signature"
+On Fri, Jun 19, 2020 at 02:56:33PM -0700, Ralph Campbell wrote:
+> These patches apply to linux-5.8.0-rc1. Patches 1-3 should probably go
+> into 5.8, the others can be queued for 5.9. Patches 4-6 improve the HMM
+> self tests. Patch 7-8 prepare nouveau for the meat of this series which
+> adds support and testing for compound page mapping of system memory
+> (patches 9-11) and compound page migration to device private memory
+> (patches 12-16). Since these changes are split across mm core, nouveau,
+> and testing, I'm guessing Jason Gunthorpe's HMM tree would be appropriate.
 
---=_MailMate_4C36EFB0-847C-4A5D-A41C-B10AE0145101_=
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+You need to break this up into parts that go where they need to
+go. Nouveau rc changes should go to DRM or some series needs to
+explain the linkage
 
-On 19 Jun 2020, at 17:56, Ralph Campbell wrote:
+> Ralph Campbell (16):
+>   mm: fix migrate_vma_setup() src_owner and normal pages
+>   nouveau: fix migrate page regression
+>   nouveau: fix mixed normal and device private page migration
+>   mm/hmm: fix test timeout on slower machines
+>   mm/hmm/test: remove redundant page table invalidate
+>   mm/hmm: test mixed normal and device private migrations
+>   nouveau: make nvkm_vmm_ctor() and nvkm_mmu_ptp_get() static
+>   nouveau/hmm: fault one page at a time
+>   mm/hmm: add output flag for compound page mapping
+>   nouveau/hmm: support mapping large sysmem pages
+>   hmm: add tests for HMM_PFN_COMPOUND flag
+>   mm/hmm: optimize migrate_vma_setup() for holes
 
-> Transparent huge page allocation policy is controlled by several sysfs
-> variables. Rather than expose these to each device driver that needs to=
+Order things so it is hmm, test, noeveau
 
-> allocate THPs, provide a helper function.
->
-> Signed-off-by: Ralph Campbell <rcampbell@nvidia.com>
-> ---
->  include/linux/gfp.h | 10 ++++++++++
->  mm/huge_memory.c    | 16 ++++++++++++++++
->  2 files changed, 26 insertions(+)
->
-> diff --git a/include/linux/gfp.h b/include/linux/gfp.h
-> index 67a0774e080b..1c7d968a27d3 100644
-> --- a/include/linux/gfp.h
-> +++ b/include/linux/gfp.h
-> @@ -562,6 +562,16 @@ extern struct page *alloc_pages_vma(gfp_t gfp_mask=
-, int order,
->  	alloc_pages_vma(gfp_mask, 0, vma, addr, numa_node_id(), false)
->  #define alloc_page_vma_node(gfp_mask, vma, addr, node)		\
->  	alloc_pages_vma(gfp_mask, 0, vma, addr, node, false)
-> +#ifdef CONFIG_ARCH_ENABLE_THP_MIGRATION
-> +extern struct page *alloc_transhugepage(struct vm_area_struct *vma,
-> +					unsigned long addr);
-> +#else
-> +static inline struct page *alloc_transhugepage(struct vm_area_struct *=
-vma,
-> +						unsigned long addr)
-> +{
-> +	return NULL;
-> +}
-> +#endif
->
->  extern unsigned long __get_free_pages(gfp_t gfp_mask, unsigned int ord=
-er);
->  extern unsigned long get_zeroed_page(gfp_t gfp_mask);
-> diff --git a/mm/huge_memory.c b/mm/huge_memory.c
-> index 25d95f7b1e98..f749633ed350 100644
-> --- a/mm/huge_memory.c
-> +++ b/mm/huge_memory.c
-> @@ -775,6 +775,22 @@ vm_fault_t do_huge_pmd_anonymous_page(struct vm_fa=
-ult *vmf)
->  	return __do_huge_pmd_anonymous_page(vmf, page, gfp);
->  }
->
-> +#ifdef CONFIG_ARCH_ENABLE_THP_MIGRATION
-> +struct page *alloc_transhugepage(struct vm_area_struct *vma,
-> +				 unsigned long haddr)
-> +{
-> +	gfp_t gfp;
-> +	struct page *page;
-> +
-> +	gfp =3D alloc_hugepage_direct_gfpmask(vma);
-> +	page =3D alloc_hugepage_vma(gfp, vma, haddr, HPAGE_PMD_ORDER);
-> +	if (page)
-> +		prep_transhuge_page(page);
-> +	return page;
-> +}
-> +EXPORT_SYMBOL_GPL(alloc_transhugepage);
-> +#endif
-> +
->  static void insert_pfn_pmd(struct vm_area_struct *vma, unsigned long a=
-ddr,
->  		pmd_t *pmd, pfn_t pfn, pgprot_t prot, bool write,
->  		pgtable_t pgtable)
-> -- =
+>   mm: support THP migration to device private memory
+>   mm/thp: add THP allocation helper
+>   mm/hmm/test: add self tests for THP migration
+>   nouveau: support THP migration to private memory
 
-> 2.20.1
+This is another series, you should split it even if it has to go
+through the hmm tree
 
-Why use CONFIG_ARCH_ENABLE_THP_MIGRATION to guard THP allocator helper?
-Shouldn=E2=80=99t CONFIG_TRANSPARENT_HUGEPAGE be used? Also the helper st=
-ill allocates
-a THP even if transparent_hugepage_enabled(vma) is false, which is wrong,=
- right?
-
-
---
-Best Regards,
-Yan Zi
-
---=_MailMate_4C36EFB0-847C-4A5D-A41C-B10AE0145101_=
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQJDBAEBAgAtFiEEh7yFAW3gwjwQ4C9anbJR82th+ooFAl7v+DEPHHppeUBudmlk
-aWEuY29tAAoJEJ2yUfNrYfqKQCQP/R4abSW0mnepE+hQxnoAry2FCsgoq4kfwbLS
-z61PThcPrmTTEvbT9kRmqtarVtKhK1u0NxFkzhBYEZA4jfrs9JOufIXWBdhEEI+L
-Lp0xXMwc4qEugDb2whgdiTWIWfwhDqzYExaaZMuWlpr2H9Uw+qEENzlBvTBnd2Xa
-4cj2nAipD6ggJ4qz/h7pt+2JTNKhNBirkfXqYjoXeWZpj/N0AfUs8IziaHyOwqxZ
-1p2KvBeqsOB5M67Mr6TVzOHh1EZEbN7VMRHbXEgw6mBt179v67IGmP129Xp/zzFh
-U0KDQiMGUh7rt8rScMpv9v9xbvTXA5Ztpe/ExGARRK9cmOWOr3UHK2fDLwl3WSTl
-IN7swIwEBTpKPSWpCEi0f4fiQOqOk9PuexRM6ZxI5W/GYPKR99Fn7cHEMjgESOw1
-fKCXPMXx95DDabWoRdMmTPEKkReI8k/RWSJhBq5mIUH8kHNilWgbPhUH/l7pbgMB
-W636ZixfVK0q7F95lwwU+fEH5BTfMwwk/usVT0ugRoTsiAFOFEZ3GXi6W8mmp8fo
-6oaOysR1M3K01IXl8RRlDrWqK3oPsv2MnNTH2adPCxKKXU8PSRgs9Zcc7d9EIIO1
-I7bnvmSZ7pTWK0RaHfv/yIbcfqpyyUt9wJy9kc83VXknBsOjJs9QtOBchjzpBWq1
-q2tbBUmt
-=CvYf
------END PGP SIGNATURE-----
-
---=_MailMate_4C36EFB0-847C-4A5D-A41C-B10AE0145101_=--
-
---===============1416556052==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
+Jason
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/nouveau
-
---===============1416556052==--
