@@ -2,52 +2,66 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id E53872044C3
-	for <lists+nouveau@lfdr.de>; Tue, 23 Jun 2020 01:48:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4D6432044F6
+	for <lists+nouveau@lfdr.de>; Tue, 23 Jun 2020 02:05:53 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id DB88E6E931;
-	Mon, 22 Jun 2020 23:48:11 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0E67E6E935;
+	Tue, 23 Jun 2020 00:05:50 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [IPv6:2a00:1450:4864:20::636])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 089E76E931;
- Mon, 22 Jun 2020 23:48:10 +0000 (UTC)
-Received: by mail-ej1-x636.google.com with SMTP id ga4so6190747ejb.11;
- Mon, 22 Jun 2020 16:48:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:from:date:message-id:subject:to;
- bh=1Ei5EFb83ZRTk7RRE9ddzMkWkL8bjizPYUGj8oBnkJ0=;
- b=S5nrwd4xJkOQrfJ288XBDZMJOVRqnjOeIOyW3vHprKkpgzUQ5RfagkHU0D9FBdehKa
- 3lvfRQMn3nqaWQ9DzIM6QGHySUnEsWSZNrJr/VU8qqaOoQ85evpn89nyInyL5BNeUaBT
- LaTzCZO2iNCi94Rd06KiIhoothpHzGh8HHU/8+VoWgDMVhgNN7qh+SMTzs9abORUqj3F
- uq5OMMcbNkP//6wUitfYTeAFfLYOnO1Rudk90MGn9Oyk0BBYJ/01O8/aymdQIjOQhhE3
- FNxlCudBJTgPi3ZZOv9PHDGfPUY56Y9hTGN22/4AfqS8J8+O5Xm608f8m0S/ev+jMqR0
- PO7w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=1Ei5EFb83ZRTk7RRE9ddzMkWkL8bjizPYUGj8oBnkJ0=;
- b=S8Mm1H6tnr6CsU/BOtTGcW0EbW5c7m5aJhIl/8txT/vhRWnxNq4bP5IiGeHH/C8+MM
- yPoMpb9DFFo/1ip7mazLoT8nmUqklmJKxB98A1lrmwQJ7GeASld/efX5+/5yzUVZG78H
- zN3vVUoS1zNma16GBMRzIdHRG0rMuJo3doN0DXzPWC4FF7RPkU4z7ZqgMKfur31c4Ngu
- dbaQeSYPXXLbFsYugMgoHLD6KknvOZ48qi5qken0BT8aBUmfa3gnClQ+WtRIKE+LUZ9i
- w2o1M4q008xplyCCFS8yZ+c1r8saCUXObYQPQL1Sj2PKtCd+JRtnYFM4YB0mJ42FezEi
- Xl3g==
-X-Gm-Message-State: AOAM532Slu6yWwoNbm9kCeffS6ZLK88Bbvm43TRNEZ5FpJQUlMb4w9qM
- dGcKaqwn/ebBmzFwmkpfMJUGyaqncKh0mUGxiGe2ajTWiXc=
-X-Google-Smtp-Source: ABdhPJxui+/e+ejrbxJH+iIDV6DwzB67kK+hi2we+XySxQDjG4zf6jPg54+irzPyB4Cjj82AMbVNGPoGXg0ruO1ek1w=
-X-Received: by 2002:a17:906:60cb:: with SMTP id
- f11mr14987419ejk.159.1592869688404; 
- Mon, 22 Jun 2020 16:48:08 -0700 (PDT)
+Received: from hqnvemgate24.nvidia.com (hqnvemgate24.nvidia.com
+ [216.228.121.143])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 92BF26E935
+ for <nouveau@lists.freedesktop.org>; Tue, 23 Jun 2020 00:05:48 +0000 (UTC)
+Received: from hqpgpgate101.nvidia.com (Not Verified[216.228.121.13]) by
+ hqnvemgate24.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
+ id <B5ef147010000>; Mon, 22 Jun 2020 17:04:17 -0700
+Received: from hqmail.nvidia.com ([172.20.161.6])
+ by hqpgpgate101.nvidia.com (PGP Universal service);
+ Mon, 22 Jun 2020 17:05:48 -0700
+X-PGP-Universal: processed;
+ by hqpgpgate101.nvidia.com on Mon, 22 Jun 2020 17:05:48 -0700
+Received: from rcampbell-dev.nvidia.com (10.124.1.5) by HQMAIL107.nvidia.com
+ (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Tue, 23 Jun
+ 2020 00:05:37 +0000
+To: Yang Shi <shy828301@gmail.com>, John Hubbard <jhubbard@nvidia.com>
+References: <20200619215649.32297-1-rcampbell@nvidia.com>
+ <20200619215649.32297-14-rcampbell@nvidia.com>
+ <F1872509-3B1F-4A8A-BFF5-E4D44E451920@nvidia.com>
+ <b6eed976-c515-72d6-a7be-2296cab8f0d4@nvidia.com>
+ <C7BEB563-3698-442C-A188-1B66CBE4CF63@nvidia.com>
+ <a5f502f8-70cd-014b-8066-bbaeb8024a29@nvidia.com>
+ <4C364E23-0716-4D59-85A1-0C293B86BC2C@nvidia.com>
+ <CAHbLzkqe50+KUsRH92O4Be2PjuwAYGw9nK+d-73syxi2Xnf9-Q@mail.gmail.com>
+ <CAHbLzko=BqtPhxgf7f1bKKqoQxK9XCCPdp4YdL80K_uXFfcETQ@mail.gmail.com>
+ <fa056e5e-ca87-aef1-e66e-58e8ebe5403e@nvidia.com>
+ <CAHbLzkrR4-s+ye1F3XDV_0q+iyZOcyMQNHTggDY3Mn_e2yOZ7g@mail.gmail.com>
+From: Ralph Campbell <rcampbell@nvidia.com>
+X-Nvconfidentiality: public
+Message-ID: <a778dcec-045b-85c0-2dd3-ac700e4208c5@nvidia.com>
+Date: Mon, 22 Jun 2020 17:05:37 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.2.2
 MIME-Version: 1.0
-From: Rhys Kidd <rhyskidd@gmail.com>
-Date: Tue, 23 Jun 2020 09:47:57 +1000
-Message-ID: <CA+iOQUHn1x8HQ1+_QrSb9wEiH8m2G7mmd2Q3V4Gz6WAPnp8TWw@mail.gmail.com>
-To: nouveau <nouveau@lists.freedesktop.org>, 
- dri-devel <dri-devel@lists.freedesktop.org>
-Subject: [Nouveau] valgrind-mmt: rebased against latest upstream valgrind
- release v3.16.1
+In-Reply-To: <CAHbLzkrR4-s+ye1F3XDV_0q+iyZOcyMQNHTggDY3Mn_e2yOZ7g@mail.gmail.com>
+X-Originating-IP: [10.124.1.5]
+X-ClientProxiedBy: HQMAIL101.nvidia.com (172.20.187.10) To
+ HQMAIL107.nvidia.com (172.20.187.13)
+Content-Language: en-US
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
+ t=1592870657; bh=IA8mI4tfaBJxUgdhsoSHZFGwUF4W2ZhqAAMGQmxEIl4=;
+ h=X-PGP-Universal:Subject:To:CC:References:From:X-Nvconfidentiality:
+ Message-ID:Date:User-Agent:MIME-Version:In-Reply-To:
+ X-Originating-IP:X-ClientProxiedBy:Content-Type:Content-Language:
+ Content-Transfer-Encoding;
+ b=kDjjdpQVEXSCa1TVNS3nDCYjLWqibG2+YvLVRnC85jVyJRI0lg4KOgtV0fUM/zHvp
+ bq08OhMU+8HtsZ6x5EHNuV5kWKgkKvyMV44et2nJplHf4YHhvPhTvGQIJaWerpC+41
+ Pi+C8uPb0TwrAYswxeDcJPhcnMrLV0NKq+CxnXHpFddgrZLWeqnYpMUCwB8InfL+BN
+ Umrl89mxiAYNClyOq3gkal3n2pTblO/PWBKSv4a/Kn7WhQXRu94BIoWa1SnHXUVtKm
+ z2JVcvaD2FgztdxtTabvzfJkNS2Ydd4NtjBRcKnwPDX8CXt5Jtxz/Z61zoCZ5G4HBJ
+ duaFbikzI4X0Q==
+Subject: Re: [Nouveau] [PATCH 13/16] mm: support THP migration to device
+ private memory
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,83 +73,83 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============2146040201=="
+Cc: Zi Yan <ziy@nvidia.com>, linux-rdma@vger.kernel.org,
+ nouveau@lists.freedesktop.org,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ Linux MM <linux-mm@kvack.org>, Jason Gunthorpe <jgg@mellanox.com>,
+ Ben Skeggs <bskeggs@redhat.com>, linux-kselftest@vger.kernel.org, "Huang,
+ Ying" <ying.huang@intel.com>, Andrew Morton <akpm@linux-foundation.org>,
+ Shuah Khan <shuah@kernel.org>, Christoph Hellwig <hch@lst.de>
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
---===============2146040201==
-Content-Type: multipart/alternative; boundary="000000000000f36d6405a8b4df77"
-
---000000000000f36d6405a8b4df77
-Content-Type: text/plain; charset="UTF-8"
-
-As an update to the nouveau development community, the downstream fork of
-Valgrind with a mmap tracing tool ("mmt") we maintain has been rebased
-against the latest upstream release of Valgrind, v3.16.1
-
-Code branch: https://github.com/envytools/valgrind/tree/mmt-3.16.1
-
-Features of upstream Valgrind 3.16.x:
-https://www.valgrind.org/docs/manual/dist.news.html
-
-In selected highlights, the benefits of tracking the latest version of
-Valgrind is added support for AArch64 v8.1 and reduced memcheck false
-positive rate on highly optimised code. There are, as ever, many smaller
-refinements and bug fixes. v3.16.1 includes two bugs fixed after 3.16.0 was
-frozen. As our downstream valgrind-mmt was last released against v3.14, we
-also get the benefit of all bug fixes and features since then, including
-that the RDRAND and F16C insn set extensions are now supported.
-
-For anyone unfamiliar with valgrind-mmt, it is a userspace mmio tracer that
-assists nouveau reverse engineering efforts by tracing the commands sent to
-the card. There is an accompanying demmt tool within the enytools repo to
-better understand these trace logs.
-
-I would like to thank all the other nouveau developers who have worked on
-mmt over many years, including specifically airlied, mslusarz and kherbst.
-
-Best,
-Rhys
-
---000000000000f36d6405a8b4df77
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div>As an update to the nouveau development community, th=
-e downstream fork of Valgrind with a mmap tracing tool (&quot;mmt&quot;) we=
- maintain has been rebased against the latest upstream release of Valgrind,=
- v3.16.1</div><div><br></div><div>Code branch: <a href=3D"https://github.co=
-m/envytools/valgrind/tree/mmt-3.16.1">https://github.com/envytools/valgrind=
-/tree/mmt-3.16.1</a></div><div><br></div><div>Features of upstream Valgrind=
- 3.16.x: <a href=3D"https://www.valgrind.org/docs/manual/dist.news.html">ht=
-tps://www.valgrind.org/docs/manual/dist.news.html</a></div><div><br></div><=
-div>In selected highlights, the benefits of tracking the latest version of =
-Valgrind is added support for AArch64
-    v8.1 and reduced memcheck false positive rate on highly optimised code.
-    There are, as ever, many smaller refinements and bug fixes. v3.16.1 inc=
-ludes two bugs fixed after 3.16.0 was frozen. As our downstream valgrind-mm=
-t was last released against v3.14, we also get the benefit of all bug fixes=
- and features since then, including that the=C2=A0RDRAND=C2=A0and=C2=A0F16C=
-=C2=A0insn=C2=A0set=C2=A0extensions=C2=A0are=C2=A0now=C2=A0supported.</div>=
-<div><br></div><div>For anyone unfamiliar with valgrind-mmt, it is a usersp=
-ace mmio tracer that assists nouveau reverse engineering efforts by tracing=
- the commands sent to the card. There is an accompanying demmt tool within =
-the enytools repo to better understand these trace logs.<br></div><div><br>=
-</div><div>I would like to thank all the other nouveau developers who have =
-worked on mmt over many years, including specifically airlied, mslusarz and=
- kherbst.</div><div><br></div><div>Best,</div><div>Rhys<br></div></div>
-
---000000000000f36d6405a8b4df77--
-
---===============2146040201==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
-_______________________________________________
-Nouveau mailing list
-Nouveau@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/nouveau
-
---===============2146040201==--
+Ck9uIDYvMjIvMjAgNDo1NCBQTSwgWWFuZyBTaGkgd3JvdGU6Cj4gT24gTW9uLCBKdW4gMjIsIDIw
+MjAgYXQgNDowMiBQTSBKb2huIEh1YmJhcmQgPGpodWJiYXJkQG52aWRpYS5jb20+IHdyb3RlOgo+
+Pgo+PiBPbiAyMDIwLTA2LTIyIDE1OjMzLCBZYW5nIFNoaSB3cm90ZToKPj4+IE9uIE1vbiwgSnVu
+IDIyLCAyMDIwIGF0IDM6MzAgUE0gWWFuZyBTaGkgPHNoeTgyODMwMUBnbWFpbC5jb20+IHdyb3Rl
+Ogo+Pj4+IE9uIE1vbiwgSnVuIDIyLCAyMDIwIGF0IDI6NTMgUE0gWmkgWWFuIDx6aXlAbnZpZGlh
+LmNvbT4gd3JvdGU6Cj4+Pj4+IE9uIDIyIEp1biAyMDIwLCBhdCAxNzozMSwgUmFscGggQ2FtcGJl
+bGwgd3JvdGU6Cj4+Pj4+PiBPbiA2LzIyLzIwIDE6MTAgUE0sIFppIFlhbiB3cm90ZToKPj4+Pj4+
+PiBPbiAyMiBKdW4gMjAyMCwgYXQgMTU6MzYsIFJhbHBoIENhbXBiZWxsIHdyb3RlOgo+Pj4+Pj4+
+PiBPbiA2LzIxLzIwIDQ6MjAgUE0sIFppIFlhbiB3cm90ZToKPj4+Pj4+Pj4+IE9uIDE5IEp1biAy
+MDIwLCBhdCAxNzo1NiwgUmFscGggQ2FtcGJlbGwgd3JvdGU6Cj4+IC4uLgo+Pj4+PiBZaW5nKGNj
+4oCZZCkgZGV2ZWxvcGVkIHRoZSBjb2RlIHRvIHN3YXBvdXQgYW5kIHN3YXBpbiBUSFAgaW4gb25l
+IHBpZWNlOiBodHRwczovL2xvcmUua2VybmVsLm9yZy9saW51eC1tbS8yMDE4MTIwNzA1NDEyMi4y
+NzgyMi0xLXlpbmcuaHVhbmdAaW50ZWwuY29tLy4KPj4+Pj4gSSBhbSBub3Qgc3VyZSB3aGV0aGVy
+IHRoZSBwYXRjaHNldCBtYWtlcyBpbnRvIG1haW5zdHJlYW0gb3Igbm90LiBJdCBjb3VsZCBiZSBh
+IGdvb2QgdGVjaG5pY2FsIHJlZmVyZW5jZQo+Pj4+PiBmb3Igc3dhcHBpbmcgaW4gZGV2aWNlIHBy
+aXZhdGUgcGFnZXMsIGFsdGhvdWdoIHN3YXBwaW5nIGluIHBhZ2VzIGZyb20gZGlzayBhbmQgZnJv
+bSBkZXZpY2UgcHJpdmF0ZQo+Pj4+PiBtZW1vcnkgYXJlIHR3byBkaWZmZXJlbnQgc2NlbmFyaW9z
+Lgo+Pj4+Pgo+Pj4+PiBTaW5jZSB0aGUgZGV2aWNlIHByaXZhdGUgbWVtb3J5IHN3YXBpbiBpbXBh
+Y3RzIGNvcmUgbW0gcGVyZm9ybWFuY2UsIHdlIG1pZ2h0IHdhbnQgdG8gZGlzY3VzcyB5b3VyIHBh
+dGNoZXMKPj4+Pj4gd2l0aCBtb3JlIHBlb3BsZSwgbGlrZSB0aGUgb25lcyBmcm9tIFlpbmfigJlz
+IHBhdGNoc2V0LCBpbiB0aGUgbmV4dCB2ZXJzaW9uLgo+Pj4+Cj4+Pj4gSSBiZWxpZXZlIFlpbmcg
+d2lsbCBnaXZlIHlvdSBtb3JlIGluc2lnaHRzIGFib3V0IGhvdyBUSFAgc3dhcCB3b3Jrcy4KPj4+
+Pgo+Pj4+IEJ1dCwgSU1ITyBkZXZpY2UgbWVtb3J5IG1pZ3JhdGlvbiAobWlncmF0ZSB0byBzeXN0
+ZW0gbWVtb3J5KSBzZWVtcwo+Pj4+IGxpa2UgVEhQIENvVyBtb3JlIHRoYW4gc3dhcC4KPj4KPj4K
+Pj4gQSBmaW5lIHBvaW50OiBvdmVyYWxsLCB0aGUgZGVzaXJlZCBiZWhhdmlvciBpcyAibWlncmF0
+ZSIsIG5vdCBDb1cuCj4+IFRoYXQncyBpbXBvcnRhbnQuIE1pZ3JhdGUgbWVhbnMgdGhhdCB5b3Ug
+ZG9uJ3QgbGVhdmUgYSBwYWdlIGJlaGluZCwgZXZlbgo+PiBhIHJlYWQtb25seSBvbmUuIEFuZCB0
+aGF0J3MgZXhhY3RseSBob3cgZGV2aWNlIHByaXZhdGUgbWlncmF0aW9uIGlzCj4+IHNwZWNpZmll
+ZC4KPj4KPj4gV2Ugc2hvdWxkIHRyeSB0byBhdm9pZCBhbnkgZXJvc2lvbiBvZiBjbGFyaXR5IGhl
+cmUuIEV2ZW4gaWYgc29tZWhvdwo+PiAocmVhbGx5PykgdGhlIHVuZGVybHlpbmcgaW1wbGVtZW50
+YXRpb24gY2FsbHMgdGhpcyBUSFAgQ29XLCB0aGUgYWN0dWFsCj4+IGdvYWwgaXMgdG8gbWlncmF0
+ZSBwYWdlcyBvdmVyIHRvIHRoZSBkZXZpY2UgKGFuZCBiYWNrKS4KPj4KPj4KPj4+Pgo+Pj4+IFdo
+ZW4gbWlncmF0aW5nIGluOgo+Pj4KPj4+IFNvcnJ5IGZvciBteSBmYXQgZmluZ2VyLCBoaXQgc2Vu
+dCBidXR0b24gaW5hZHZlcnRlbnRseSwgbGV0IG1lIGZpbmlzaCBoZXJlLgo+Pj4KPj4+IFdoZW4g
+bWlncmF0aW5nIGluOgo+Pj4KPj4+ICAgICAgICAgICAtIGlmIFRIUCBpcyBlbmFibGVkOiBhbGxv
+Y2F0ZSBUSFAsIGJ1dCBuZWVkIGhhbmRsZSBhbGxvY2F0aW9uCj4+PiBmYWlsdXJlIGJ5IGZhbGxp
+bmcgYmFjayB0byBiYXNlIHBhZ2UKPj4+ICAgICAgICAgICAtIGlmIFRIUCBpcyBkaXNhYmxlZDog
+ZmFsbGJhY2sgdG8gYmFzZSBwYWdlCj4+Pgo+Pgo+PiBPSywgYnV0ICphbGwqIHBhZ2UgZW50cmll
+cyAoYmFzZSBhbmQgaHVnZS9sYXJnZSBwYWdlcykgbmVlZCB0byBiZSBjbGVhcmVkLAo+PiB3aGVu
+IG1pZ3JhdGluZyB0byBkZXZpY2UgbWVtb3J5LCB1bmxlc3MgSSdtIHJlYWxseSBjb25mdXNlZCBo
+ZXJlLgo+PiBTbzogbm90IENvVy4KPiAKPiBJIHJlYWxpemVkIHRoZSBjb21tZW50IGNhdXNlZCBt
+b3JlIGNvbmZ1c2lvbi4gSSBhcG9sb2dpemUgZm9yIHRoZQo+IGNvbmZ1c2lvbi4gWWVzLCB0aGUg
+dHJpZ2dlciBjb25kaXRpb24gZm9yIHN3YXAvbWlncmF0aW9uIGFuZCBDb1cgYXJlCj4gZGVmaW5p
+dGVseSBkaWZmZXJlbnQuIEhlcmUgSSBtZWFuIHRoZSBmYXVsdCBoYW5kbGluZyBwYXJ0IG9mIG1p
+Z3JhdGluZwo+IGludG8gc3lzdGVtIG1lbW9yeS4KPiAKPiBTd2FwLWluIGp1c3QgbmVlZHMgdG8g
+aGFuZGxlIHRoZSBiYXNlIHBhZ2UgY2FzZSBzaW5jZSBUSFAgc3dhcGluIGlzCj4gbm90IHN1cHBv
+cnRlZCBpbiB1cHN0cmVhbSB5ZXQgYW5kIHRoZSBQTUQgaXMgc3BsaXQgaW4gc3dhcC1vdXQgcGhh
+c2UKPiAoc2VlIHNocmlua19wYWdlX2xpc3QpLgo+IAo+IFRoZSBwYXRjaCBhZGRzIFRIUCBtaWdy
+YXRpb24gc3VwcG9ydCB0byBkZXZpY2UgbWVtb3J5LCBidXQgeW91IG5lZWQgdG8KPiBoYW5kbGUg
+bWlncmF0ZSBpbiAoYmFjayB0byBzeXN0ZW0gbWVtb3J5KSBjYXNlIGNvcnJlY3RseS4gVGhlIGZh
+dWx0Cj4gaGFuZGxpbmcgc2hvdWxkIGxvb2sgbGlrZSBUSFAgQ29XIGZhdWx0IGhhbmRsaW5nIGJl
+aGF2aW9yIChiZWZvcmUKPiA1LjgpOgo+ICAgICAgLSBpZiBUSFAgaXMgZW5hYmxlZDogYWxsb2Nh
+dGUgVEhQLCBmYWxsYmFjayBpZiBhbGxvY2F0aW9uIGlzIGZhaWxlZAo+ICAgICAgLSBpZiBUSFAg
+aXMgZGlzYWJsZWQ6IGZhbGxiYWNrIHRvIGJhc2UgcGFnZQo+IAo+IFN3YXAgZmF1bHQgaGFuZGxp
+bmcgZG9lc24ndCBsb29rIGxpa2UgdGhlIGFib3ZlLiBTbywgSSBzYWlkIGl0IHNlZW1zCj4gbGlr
+ZSBtb3JlIFRIUCBDb1cgKGZhdWx0IGhhbmRsaW5nIHBhcnQgb25seSBiZWZvcmUgNS44KS4gSSBo
+b3BlIEkKPiBhcnRpY3VsYXRlIG15IG1pbmQuCj4gCj4gSG93ZXZlciwgSSBkaWRuJ3Qgc2VlIHN1
+Y2ggZmFsbGJhY2sgaXMgaGFuZGxlZC4gSXQgbG9va3MgaWYgVEhQCj4gYWxsb2NhdGlvbiBpcyBm
+YWlsZWQsIGl0IGp1c3QgcmV0dXJucyBTSUdCVVM7IGFuZCBubyBjaGVjayBhYm91dCBUSFAKPiBz
+dGF0dXMgaWYgSSByZWFkIHRoZSBwYXRjaGVzIGNvcnJlY3RseS4gVGhlIFRIUCBtaWdodCBiZSBk
+aXNhYmxlZCBmb3IKPiB0aGUgc3BlY2lmaWMgdm1hIG9yIHN5c3RlbSB3aWRlIGJlZm9yZSBtaWdy
+YXRpbmcgZnJvbSBkZXZpY2UgbWVtb3J5Cj4gYmFjayB0byBzeXN0ZW0gbWVtb3J5LgoKWW91IGFy
+ZSBjb3JyZWN0LCB0aGUgcGF0Y2ggd2Fzbid0IGhhbmRsaW5nIHRoZSBmYWxsYmFjayBjYXNlLgpJ
+J2xsIGFkZCB0aGF0IGluIHRoZSBuZXh0IHZlcnNpb24uCgo+Pgo+PiB0aGFua3MsCj4+IC0tCj4+
+IEpvaG4gSHViYmFyZAo+PiBOVklESUEKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX18KTm91dmVhdSBtYWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVz
+a3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9u
+b3V2ZWF1Cg==
