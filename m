@@ -2,45 +2,57 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1FD58207074
-	for <lists+nouveau@lfdr.de>; Wed, 24 Jun 2020 11:53:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6FEB4207B39
+	for <lists+nouveau@lfdr.de>; Wed, 24 Jun 2020 20:11:08 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2EC916EAC0;
-	Wed, 24 Jun 2020 09:53:37 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1D1166E323;
+	Wed, 24 Jun 2020 18:11:05 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ej1-f45.google.com (mail-ej1-f45.google.com
- [209.85.218.45])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A5F356EAC0
- for <nouveau@lists.freedesktop.org>; Wed, 24 Jun 2020 09:53:36 +0000 (UTC)
-Received: by mail-ej1-f45.google.com with SMTP id w6so1822728ejq.6
- for <nouveau@lists.freedesktop.org>; Wed, 24 Jun 2020 02:53:36 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=QSQCh3HE24N9RvzQyHV7808rdGVyY0Pj4nDg3e+Qg3g=;
- b=fEDZRxZprCHmbJVCqIgps+JcKh07mQNuczw3WeyKKoVjAaGWRR3qVh8Dhx++bAJvg/
- YJeQIG8+l1wNsNTVe3F5iIVsTh9LWN7vFUxJxR7Z/Tym0UKMlpxjQKMmKR6wPFf7KIuS
- KECJ1xDsrAXokdGsiRbKsIisGuS/n+BkAl9MSv3H+uXt+flued/+H+dkkB0r0a9y8TUQ
- l6YiPH5FVDKOTQuE3tljkOmMGwnb3cr5m52hrMkW0xX7PfbIjE7iRHta3vUJrXr+DClL
- 1ymkrSfJfDZ4M7+qB2HAU498GtzpTnvQ+w7hs8ft8DHTdJon1nJxBb9DWTY8gL0lUuAz
- riIg==
-X-Gm-Message-State: AOAM530M3XLxcyp3yw2bYuFLGtTMss7070XXvoXauZ8zDE9x46HA3trz
- WhhIZllR+E6Q+MAqBWQ1nbhpLfEvPAQfLagRYXBh6g==
-X-Google-Smtp-Source: ABdhPJwkLNsaJPXmaK50CtKRIDJSMlVvXAKNkfDbRxUJTgyeK62cMc+ojnpcl95B0kigYjeip4q+izvr/ygSysoHLks=
-X-Received: by 2002:a17:907:11c2:: with SMTP id
- va2mr24686834ejb.98.1592992415168; 
- Wed, 24 Jun 2020 02:53:35 -0700 (PDT)
+Received: from hqnvemgate25.nvidia.com (hqnvemgate25.nvidia.com
+ [216.228.121.64])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7B25D6E323
+ for <nouveau@lists.freedesktop.org>; Wed, 24 Jun 2020 18:11:04 +0000 (UTC)
+Received: from hqpgpgate102.nvidia.com (Not Verified[216.228.121.13]) by
+ hqnvemgate25.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
+ id <B5ef397090001>; Wed, 24 Jun 2020 11:10:18 -0700
+Received: from hqmail.nvidia.com ([172.20.161.6])
+ by hqpgpgate102.nvidia.com (PGP Universal service);
+ Wed, 24 Jun 2020 11:11:04 -0700
+X-PGP-Universal: processed;
+ by hqpgpgate102.nvidia.com on Wed, 24 Jun 2020 11:11:04 -0700
+Received: from rcampbell-dev.nvidia.com (172.20.13.39) by HQMAIL107.nvidia.com
+ (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3;
+ Wed, 24 Jun 2020 18:10:55 +0000
+To: Christoph Hellwig <hch@lst.de>
+References: <20200622233854.10889-1-rcampbell@nvidia.com>
+ <20200622233854.10889-3-rcampbell@nvidia.com> <20200624072355.GB18609@lst.de>
+From: Ralph Campbell <rcampbell@nvidia.com>
+X-Nvconfidentiality: public
+Message-ID: <330f6a82-d01d-db97-1dec-69346f41e707@nvidia.com>
+Date: Wed, 24 Jun 2020 11:10:55 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.2.2
 MIME-Version: 1.0
-References: <CA+7wUswEqHJmmLx+bD4qeLnOEWdhxAK2mt-OXL37-e9NKCuBmQ@mail.gmail.com>
- <CAKb7UvhzgbjGjKzCETzLGJFR_H4+CUak88ZuNKK=dKqMoker4g@mail.gmail.com>
-In-Reply-To: <CAKb7UvhzgbjGjKzCETzLGJFR_H4+CUak88ZuNKK=dKqMoker4g@mail.gmail.com>
-From: Mathieu Malaterre <malat@debian.org>
-Date: Wed, 24 Jun 2020 11:53:24 +0200
-Message-ID: <CA+7wUsxhEz_xdVo2S33Ozf-wQ7Z5PDLk6sq0kbaJC0Oy-K-XJA@mail.gmail.com>
-To: Ilia Mirkin <imirkin@alum.mit.edu>
-Subject: Re: [Nouveau] Remove debug info from nouveau driver
+In-Reply-To: <20200624072355.GB18609@lst.de>
+X-Originating-IP: [172.20.13.39]
+X-ClientProxiedBy: HQMAIL107.nvidia.com (172.20.187.13) To
+ HQMAIL107.nvidia.com (172.20.187.13)
+Content-Language: en-US
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
+ t=1593022218; bh=v8AB7qsvs43N+0jRYQSXO+VJlE9cLuPEgWDCbTOxaBo=;
+ h=X-PGP-Universal:Subject:To:CC:References:From:X-Nvconfidentiality:
+ Message-ID:Date:User-Agent:MIME-Version:In-Reply-To:
+ X-Originating-IP:X-ClientProxiedBy:Content-Type:Content-Language:
+ Content-Transfer-Encoding;
+ b=XcF7e2eY9wqoGbIb+q0hlnCZ/aWuEywTrNd+N4L4Essfz340HGSxkpc1ljpr1gpus
+ TYusA4foHTlYUOOM+r3sBtmdh2VuFUmY7hnTMDJNrmr3mnqALg8aLc8pJyTq45agq8
+ 5QrKwM8xhvnHbGxx04z9MkU7Xn4z3SXmz1aaJE1z32/i9rO2QKJIrORoCdYqlGH+lH
+ cHqn3pJe9GeBfSvOF90XWpUVGlpbDnaH4+a3Q5X7ERDb+ifB4Uj4MvTfp+c7qr+iHg
+ etCGbdCdeUxoxmbOhGldwfksGpVUYMYARU3/e4z3Pxsj0lPCf7h/FKIjwmB9rzxKSj
+ Pz9HFIyT0NVzQ==
+Subject: Re: [Nouveau] [RESEND PATCH 2/3] nouveau: fix mixed normal and
+ device private page migration
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -52,58 +64,48 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau <nouveau@lists.freedesktop.org>
-Content-Type: text/plain; charset="us-ascii"
+Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org, Jason
+ Gunthorpe <jgg@mellanox.com>, Ben Skeggs <bskeggs@redhat.com>
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Much better now. thanks !
 
-On Tue, Jun 23, 2020 at 5:11 PM Ilia Mirkin <imirkin@alum.mit.edu> wrote:
->
-> You probably have drm.debug set to something.
->
-> On Tue, Jun 23, 2020 at 4:42 AM Mathieu Malaterre <malat@debian.org> wrote:
-> >
-> > Hi there,
-> >
-> > I am gettings tons of messages in dmesg output such as:
-> >
-> > [...]
-> > [ 2419.238990] [drm:drm_mode_addfb2 [drm]] [FB:65]
-> > [ 2419.243388] 00a0 2 base507c_ntfy_set
-> > [ 2419.243391] 00000060
-> > [ 2419.243391] f0000000
-> > [ 2419.243393] 0084 1 base827c_image_set
-> > [ 2419.243394] 00000010
-> > [ 2419.243395] 00c0 1 base827c_image_set
-> > [ 2419.243395] fb00007a
-> > [ 2419.243396] 0110 2 base827c_image_set
-> > [ 2419.243397] 00000000
-> > [ 2419.243398] 00000000
-> > [ 2419.243399] 0800 5 base827c_image_set
-> > [ 2419.243399] 0007ce00
-> > [ 2419.243400] 00000000
-> > [ 2419.243400] 04380780
-> > [ 2419.243401] 00007804
-> > [ 2419.243402] 0000cf00
-> > [ 2419.243408] 0080 1 base507c_update
-> > [ 2419.243409] 00000000
-> > [...]
-> >
-> > Does anyone know how to remove those extra debug info from nouveau driver ?
-> >
-> > For reference:
-> >
-> > # cat /sys/module/nouveau/parameters/debug
-> > (null)
-> >
-> > Thanks much
-> > _______________________________________________
-> > Nouveau mailing list
-> > Nouveau@lists.freedesktop.org
-> > https://lists.freedesktop.org/mailman/listinfo/nouveau
+On 6/24/20 12:23 AM, Christoph Hellwig wrote:
+> On Mon, Jun 22, 2020 at 04:38:53PM -0700, Ralph Campbell wrote:
+>> The OpenCL function clEnqueueSVMMigrateMem(), without any flags, will
+>> migrate memory in the given address range to device private memory. The
+>> source pages might already have been migrated to device private memory.
+>> In that case, the source struct page is not checked to see if it is
+>> a device private page and incorrectly computes the GPU's physical
+>> address of local memory leading to data corruption.
+>> Fix this by checking the source struct page and computing the correct
+>> physical address.
+> 
+> I'm really worried about all this delicate code to fix the mixed
+> ranges.  Can't we make it clear at the migrate_vma_* level if we want
+> to migrate from or two device private memory, and then skip all the work
+> for regions of memory that already are in the right place?  This might be
+> a little more work initially, but I think it leads to a much better
+> API.
+> 
+
+The current code does encode the direction with src_owner != NULL meaning
+device private to system memory and src_owner == NULL meaning system
+memory to device private memory. This patch would obviously defeat that
+so perhaps a flag could be added to the struct migrate_vma to indicate the
+direction but I'm unclear how that makes things less delicate.
+Can you expand on what you are worried about?
+
+The issue with invalidations might be better addressed by letting the device
+driver handle device private page TLB invalidations when migrating to
+system memory and changing migrate_vma_setup() to only invalidate CPU
+TLB entries for normal pages being migrated to device private memory.
+If a page isn't migrating, it seems inefficient to invalidate those TLB
+entries.
+
+Any other suggestions?
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
