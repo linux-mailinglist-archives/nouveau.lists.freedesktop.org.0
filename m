@@ -1,89 +1,55 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 87A4720B77E
-	for <lists+nouveau@lfdr.de>; Fri, 26 Jun 2020 19:44:52 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9A0A220B7CE
+	for <lists+nouveau@lfdr.de>; Fri, 26 Jun 2020 20:05:25 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id F20806ECF0;
-	Fri, 26 Jun 2020 17:44:50 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C2A8A6ECF6;
+	Fri, 26 Jun 2020 18:05:22 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from EUR04-DB3-obe.outbound.protection.outlook.com
- (mail-eopbgr60088.outbound.protection.outlook.com [40.107.6.88])
- by gabe.freedesktop.org (Postfix) with ESMTPS id BB4116ECEF
- for <nouveau@lists.freedesktop.org>; Fri, 26 Jun 2020 17:44:49 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Pd2vW1v2CeqWRS/sjYHbisep2dsmDD5zvJ9H06O103omsLz/JVTmgA1uZZdyKhRh/0M8Wxt2AXz3srEaJKKSADN3xw8EXUlLjdnoQv3yljSdHNjdjtymxklfqid5tSWI1rE4rYuJMBnVMuWzVgHvppBPTVJoDmvoaWaubtKD+1IMF+aJDzP4ts4zV/moIO3gKMxBhHMuzfHblwx1OCsK3csQ+3Wbo3xpOy9THFCN8Ud5Oh5d923p4BGyajFPc3ifCEE7GodXIRbJonAPNJ08tXGj+QZ4ewEk/fHQkUDtOiq94u3bFG5PHmKGa9osa5V0Nq7iOEubKMTSgfnMk4LiSw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=EuWF8a09+r4aAsqWSVkHcJffIDItDtF1j9oUEd4gm3w=;
- b=j4ri6y0j4m77Pl7DnKanUgHTi0tppvZpqdO/9XEDs0cipLjR1HUN0ROjtgjYSeWh/ReZJKgvAmEvocLO7ANImkbGkGJXGajyJgU3mQoAVH+oB3GsoOjQTNOEP/Y8xsierq0NvvTYFFTTR6Xt3HzdqB24TjCXnSr2JDQWgulPSJnbJpUXT5SiuZ6YCNn9dHjZMwG/zIkNIio60nZM7sumhwdwHfAFuwQ9nh0yb7I0LhyV56gjjnRWhHf6NIk3SCDJQR3oKlX81mXWL0uMny8lQNAwJnPsUHQhEwz4LAvPQFgED9PKeLkaR40gNLxG0w5AJGnX9rIJIcN9yYBTtkHm4g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=mellanox.com; dmarc=pass action=none header.from=mellanox.com;
- dkim=pass header.d=mellanox.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Mellanox.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=EuWF8a09+r4aAsqWSVkHcJffIDItDtF1j9oUEd4gm3w=;
- b=SjlIfH1D3ki4WK8jNOyJS0SXHFum4ni8X8YOjIpNg3PbK7sYbjv4qi+eKNLh83OhlF2d+xfD8REaeZMlO3kxlqdMgK2whB4R1VYVDP/AYdzz5rXrtpfw73Tewm0Obzn9gsi6S4NzcbDf+AaWuYQx2w2R+IWZXrGi4aqJjvi5ur4=
-Authentication-Results: nvidia.com; dkim=none (message not signed)
- header.d=none;nvidia.com; dmarc=none action=none header.from=mellanox.com;
-Received: from VI1PR05MB4141.eurprd05.prod.outlook.com (2603:10a6:803:44::15)
- by VI1PR0502MB3952.eurprd05.prod.outlook.com (2603:10a6:803:23::28)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3131.24; Fri, 26 Jun
- 2020 17:44:46 +0000
-Received: from VI1PR05MB4141.eurprd05.prod.outlook.com
- ([fe80::848b:fcd0:efe3:189e]) by VI1PR05MB4141.eurprd05.prod.outlook.com
- ([fe80::848b:fcd0:efe3:189e%7]) with mapi id 15.20.3131.020; Fri, 26 Jun 2020
- 17:44:46 +0000
-Date: Fri, 26 Jun 2020 14:44:37 -0300
-From: Jason Gunthorpe <jgg@mellanox.com>
-To: Ralph Campbell <rcampbell@nvidia.com>
-Message-ID: <20200626174437.GD23821@mellanox.com>
+Received: from hqnvemgate24.nvidia.com (hqnvemgate24.nvidia.com
+ [216.228.121.143])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 15E5F6ECF6
+ for <nouveau@lists.freedesktop.org>; Fri, 26 Jun 2020 18:05:22 +0000 (UTC)
+Received: from hqpgpgate101.nvidia.com (Not Verified[216.228.121.13]) by
+ hqnvemgate24.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
+ id <B5ef638820000>; Fri, 26 Jun 2020 11:03:46 -0700
+Received: from hqmail.nvidia.com ([172.20.161.6])
+ by hqpgpgate101.nvidia.com (PGP Universal service);
+ Fri, 26 Jun 2020 11:05:21 -0700
+X-PGP-Universal: processed;
+ by hqpgpgate101.nvidia.com on Fri, 26 Jun 2020 11:05:21 -0700
+Received: from [10.2.63.78] (172.20.13.39) by HQMAIL107.nvidia.com
+ (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Fri, 26 Jun
+ 2020 18:05:15 +0000
+To: Ralph Campbell <rcampbell@nvidia.com>, <nouveau@lists.freedesktop.org>,
+ <linux-kernel@vger.kernel.org>
 References: <20200626172626.19207-1-rcampbell@nvidia.com>
-Content-Disposition: inline
-In-Reply-To: <20200626172626.19207-1-rcampbell@nvidia.com>
-X-ClientProxiedBy: YT1PR01CA0130.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b01:2f::9) To VI1PR05MB4141.eurprd05.prod.outlook.com
- (2603:10a6:803:44::15)
+From: John Hubbard <jhubbard@nvidia.com>
+Message-ID: <1c004a46-c818-7d4c-254a-60b5c932d67b@nvidia.com>
+Date: Fri, 26 Jun 2020 11:05:14 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.9.0
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from mlx.ziepe.ca (206.223.160.26) by
- YT1PR01CA0130.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2f::9) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.3131.20 via Frontend Transport; Fri, 26 Jun 2020 17:44:46 +0000
-Received: from jgg by mlx with local (Exim 4.93)	(envelope-from
- <jgg@mellanox.com>)	id 1josOz-000CDi-47; Fri, 26 Jun 2020 14:44:37 -0300
-X-Originating-IP: [206.223.160.26]
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-HT: Tenant
-X-MS-Office365-Filtering-Correlation-Id: cc045b89-bd08-49fc-2aca-08d819f89da6
-X-MS-TrafficTypeDiagnostic: VI1PR0502MB3952:
-X-Microsoft-Antispam-PRVS: <VI1PR0502MB3952F617D08583C8F582CE1ACF930@VI1PR0502MB3952.eurprd05.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:5516;
-X-Forefront-PRVS: 0446F0FCE1
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: wbTkcA26ThGsRJQ9327uechon7CeRXEwoB3Hc1QRa36Xu9pHzIEA6tLN6FdD9TvM4QPIh0yfSmVlxUFrV7t+I7Ijdng5MyaMFnJxubKFU5faE0+Aa8/cIl32toGrqWWqLZuPPYeUf5O+Er2/3XVQRcyAcKtlAOzBQ+IIQ2JqW8DVqAP3VRBsDEyqu00YlcwaWaB3iaSyYBBr+/4MjS45OzYyfoGcLVCgvVEWePMq0pt3DVZMWwDf1JgqLDOrK7d06HYnm6TPeUzXnRGitX9u9zjKUvnBCCeTTHlwewdEPBaLD3EugYDMhOoAO1FpMPBnd/bBA2qxtWSP0Fa293z2sQ==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:VI1PR05MB4141.eurprd05.prod.outlook.com; PTR:; CAT:NONE;
- SFTY:;
- SFS:(4636009)(396003)(136003)(39860400002)(376002)(366004)(346002)(1076003)(33656002)(5660300002)(186003)(8936002)(316002)(54906003)(426003)(9746002)(9786002)(8676002)(83380400001)(36756003)(2616005)(4326008)(478600001)(2906002)(6916009)(26005)(86362001)(66556008)(66476007)(66946007)(4744005);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData: 1IRK14b/81P07ItXzkHWDjvy0M4n9WE2rA0W3BzR9P4dvUJnV6vDdaYNLp/OXtkBaXUmWJr+Ko4w+AFIMjd2TNJc5BCChttBN1oqSLi5dJfE3sSKrYhKnjcR1W5daqvPdiuo32mrv+gREEcX9/xRzxnoyXCkAtSAr2ZzsEtkzMltvqbXCXZ5N4bsLSW+xruP/cAvsFMkedteJLoERhAgQf7hXXIJSojsGhqR1kN4IjXS4UwLuzBRJTfIZYXizRm8DinI9OFltmeNPO9YDlk7oD3jvPoxsxw/gz/3dhBNKzkZRvsYI+sHGm7SfCJAlj7u/u9tsXMNrljo3iYrIDVyv2TdyPTTx/nQOpi7mx0sil/i30DtxpWDBegYE0a/YxLIptNT3Z9satL9BRnez3QuJsQ0duItsD8LEfN/PlEgMh5h2Aq9TJQPl5rUskPyEDeslcolSTPeCozKVvEx8DuWJRrney2/sB0NRk9STPdBBKxGeDC0ePQIU5hKGNs40u0B
-X-OriginatorOrg: Mellanox.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: cc045b89-bd08-49fc-2aca-08d819f89da6
-X-MS-Exchange-CrossTenant-AuthSource: VI1PR05MB4141.eurprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Jun 2020 17:44:46.1721 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: a652971c-7d2e-4d9b-a6a4-d149256f461b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: K8SSWib8rQjBSX8t3SD2c7YaAgPxLpiVxDrYR2p3EnT37TMMJltiJkomkryi1hDaqQjCFfiJfw5tArQm23igew==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR0502MB3952
+In-Reply-To: <20200626172626.19207-1-rcampbell@nvidia.com>
+X-Originating-IP: [172.20.13.39]
+X-ClientProxiedBy: HQMAIL107.nvidia.com (172.20.187.13) To
+ HQMAIL107.nvidia.com (172.20.187.13)
+Content-Language: en-US
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
+ t=1593194626; bh=lF0NHlRJ9U5vcuOjDQlU6SK5ZMyTZW7c0DGF0OGH/Zk=;
+ h=X-PGP-Universal:Subject:To:CC:References:From:Message-ID:Date:
+ User-Agent:MIME-Version:In-Reply-To:X-Originating-IP:
+ X-ClientProxiedBy:Content-Type:Content-Language:
+ Content-Transfer-Encoding;
+ b=O4G6ngbUXmHGYZJL6ExQnArGPrlPdsrAjxo5lkbj+eLe08fYepTn8r9vQoNZFLSQd
+ tv7Xiga8xgokzgyUttBf7ANP38MJDOqIIquNceGCrqlJppE5O7QnyKU/h+PI+sHZfb
+ wQCUGSQD5jXGIelJeYWbtHBcN40BXMlhqdWCEcTRZ+u4mZWtRSrvrHusGqdm+AzsaD
+ 0diHZdIFG1biwKMPJUgt9e1tZRExfHvuM2E5oxfq+wUQAGqCxnmUcwysBpP+2i02cS
+ CjkxFAH0CHBFN04jAhAUKeoUqN6PCj8HAKk0j7m7vjvVLUgNxM+PNCZHFfIT+1zS2O
+ O1ZMCjb6/0arA==
 Subject: Re: [Nouveau] [PATCH] nouveau: fix page fault on device private
  memory
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -97,14 +63,14 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- Ben Skeggs <bskeggs@redhat.com>, Christoph Hellwig <hch@lst.de>
-Content-Type: text/plain; charset="us-ascii"
+Cc: Jason Gunthorpe <jgg@mellanox.com>, Christoph Hellwig <hch@lst.de>,
+ Ben Skeggs <bskeggs@redhat.com>
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, Jun 26, 2020 at 10:26:26AM -0700, Ralph Campbell wrote:
+On 2020-06-26 10:26, Ralph Campbell wrote:
 > If system memory is migrated to device private memory and no GPU MMU
 > page table entry exists, the GPU will fault and call hmm_range_fault()
 > to get the PFN for the page. Since the .dev_private_owner pointer in
@@ -120,11 +86,31 @@ On Fri, Jun 26, 2020 at 10:26:26AM -0700, Ralph Campbell wrote:
 > It doesn't depend on any of the other nouveau/HMM changes I have
 > recently posted.
 
-Makes sense to me
+Maybe cc stable, seeing as how the problem affect Linux 5.7?
 
-Reviewed-by: Jason Gunthorpe <jgg@mellanox.com>
+thanks,
+-- 
+John Hubbard
+NVIDIA
 
-Jason
+> 
+>   drivers/gpu/drm/nouveau/nouveau_svm.c | 1 +
+>   1 file changed, 1 insertion(+)
+> 
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_svm.c b/drivers/gpu/drm/nouveau/nouveau_svm.c
+> index ba9f9359c30e..6586d9d39874 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_svm.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_svm.c
+> @@ -562,6 +562,7 @@ static int nouveau_range_fault(struct nouveau_svmm *svmm,
+>   		.end = notifier->notifier.interval_tree.last + 1,
+>   		.pfn_flags_mask = HMM_PFN_REQ_FAULT | HMM_PFN_REQ_WRITE,
+>   		.hmm_pfns = hmm_pfns,
+> +		.dev_private_owner = drm->dev,
+>   	};
+>   	struct mm_struct *mm = notifier->notifier.mm;
+>   	int ret;
+> 
+
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
