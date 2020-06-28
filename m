@@ -2,52 +2,53 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 44BCC20C3D6
-	for <lists+nouveau@lfdr.de>; Sat, 27 Jun 2020 21:47:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4554420CAFA
+	for <lists+nouveau@lfdr.de>; Mon, 29 Jun 2020 00:40:40 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id F2A4F6E2F2;
-	Sat, 27 Jun 2020 19:47:42 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 074A789F06;
+	Sun, 28 Jun 2020 22:40:37 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [207.211.31.120])
- by gabe.freedesktop.org (Postfix) with ESMTPS id CC94F6E2F2
- for <nouveau@lists.freedesktop.org>; Sat, 27 Jun 2020 19:47:41 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1593287260;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=fwHk9F+HeAzoYFM4mU6fsjxTvM5rQ7or6pCg3O1yFT0=;
- b=isW7Y60tbog7cdgw2d1VWRBM37Mb7xf7kkYusREPBsCA+7E67T1oRReNWB3JdNnFf5c/gJ
- RsL3cQSjoPKxM77+0SG+bsEH23ejZtwHKidJvmpVpUkj88Ur12dLxi+iApgbIjW6K8fagI
- AVPFLWRkAResAOoF8P5BPtg6JvBYsQs=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-391-Uc_l8AOhOaewCnKIeHi4LA-1; Sat, 27 Jun 2020 15:47:38 -0400
-X-MC-Unique: Uc_l8AOhOaewCnKIeHi4LA-1
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
- [10.5.11.11])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id B09B91800D4A;
- Sat, 27 Jun 2020 19:47:35 +0000 (UTC)
-Received: from Whitewolf.redhat.com (ovpn-112-223.rdu2.redhat.com
- [10.10.112.223])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 1DD6B79309;
- Sat, 27 Jun 2020 19:47:34 +0000 (UTC)
-From: Lyude Paul <lyude@redhat.com>
-To: dri-devel@lists.freedesktop.org,
-	nouveau@lists.freedesktop.org
-Date: Sat, 27 Jun 2020 15:46:56 -0400
-Message-Id: <20200627194657.156514-9-lyude@redhat.com>
-In-Reply-To: <20200627194657.156514-1-lyude@redhat.com>
-References: <20200627194657.156514-1-lyude@redhat.com>
+Received: from mail-yb1-xb42.google.com (mail-yb1-xb42.google.com
+ [IPv6:2607:f8b0:4864:20::b42])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6824F89F06
+ for <nouveau@lists.freedesktop.org>; Sun, 28 Jun 2020 22:40:35 +0000 (UTC)
+Received: by mail-yb1-xb42.google.com with SMTP id j202so7523485ybg.6
+ for <nouveau@lists.freedesktop.org>; Sun, 28 Jun 2020 15:40:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=coaSMhmb1rnGuqJBzIF97ldJoVfPljIOjdLaUOmjyJU=;
+ b=irANrFIsBhZkj09kMLPwMz4+kSpIlnGrWyjCx0QAgZwuR1Lt2hBaViB4sqhQWEkjmc
+ to9bNMUOJaHScT32FQF2VQCKXShlls5UIKSD0/r08xQHQ5kIucQnMwBLd1T7/1u61Zl+
+ oGDKVtQy4lXc3/UxXGQYAT1A4/+lTP7nu7g6587ApeIQsGNfrNVbAD7KISx8OHyXiU6o
+ unC/9xddYs0w4QTonNhyZ8qO0+rz2aPoTS82DRk/FQJ3T5mqV61YrPlSvzojOKygrK+g
+ 0rGEe4OuAffa6wwcfv+Szhno3tlM7U0SKu+cSQaFL7t4FBGZfyMLgHZP7q9QuaUJZnge
+ 9PxQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=coaSMhmb1rnGuqJBzIF97ldJoVfPljIOjdLaUOmjyJU=;
+ b=Gbaemfv0P+dciVzkhlPoYmx+KvB6Refi4L/kjTisMwoqBdhM+HbKA5QTrEVc0X7Qo+
+ D3qXAFqGA3gJLxOBGa4C5ZlzslFR/9wxWwg51ZGQtK8W8K5cfnY3n+K7IPe/GCovZ7+O
+ IIGKr3pLt5mh7UArFCwOlksKD3/rKnvoiTsDBCTkun3YITkfs9HwJ1utIOxpjdkVOiwn
+ wcWG/v6HUF+DG6W1Qi2mlXHMNM1LuIvbkMpBi64HgVVCkVm05z91cOTRzIDXasrlu7EL
+ GTGEumZ1l09rQaOS4BCHXfZpskaHatuAQZcBHA5j/I+WP//YNmE9ARJAHbf9//QoWXoV
+ iiPA==
+X-Gm-Message-State: AOAM533Ihbs4hg4G990QflL9XIRsX9UZuj3aHmLxToUezp/pQ7oEXHzo
+ xaeR+eIllpXyCEz7yH8X0WmdsujgQZWbysSmAG4=
+X-Google-Smtp-Source: ABdhPJxSEYgMgAKzF/ouhNsjt/4IssbdrLDq/6F8NVGeqgsOR9G06asdGgffL8B0zUIg0uAFhbXmTg+dZ0D6lZ/pJs0=
+X-Received: by 2002:a25:b992:: with SMTP id r18mr21123478ybg.283.1593384034471; 
+ Sun, 28 Jun 2020 15:40:34 -0700 (PDT)
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
-Subject: [Nouveau] [RFC v8 8/9] drm/nouveau/kms/nv50-: Move hard-coded
- object handles into header
+References: <20200626210337.20089-1-rcampbell@nvidia.com>
+In-Reply-To: <20200626210337.20089-1-rcampbell@nvidia.com>
+From: Ben Skeggs <skeggsb@gmail.com>
+Date: Mon, 29 Jun 2020 08:40:22 +1000
+Message-ID: <CACAvsv4Oho1pKzPU7er2Sed5qyy0d2JZKsNoHvrZhvhtBygPjg@mail.gmail.com>
+To: Ralph Campbell <rcampbell@nvidia.com>
+Subject: Re: [Nouveau] [PATCH v2] nouveau: fix page fault on device private
+ memory
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,117 +60,64 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>,
- Pankaj Bharadiya <pankaj.laxminarayan.bharadiya@intel.com>,
- open list <linux-kernel@vger.kernel.org>, Takashi Iwai <tiwai@suse.de>,
- Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>,
- Alex Deucher <alexander.deucher@amd.com>,
- Mikita Lipski <mikita.lipski@amd.com>,
- =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>
+Cc: ML nouveau <nouveau@lists.freedesktop.org>,
+ LKML <linux-kernel@vger.kernel.org>, stable@vger.kernel.org,
+ Jason Gunthorpe <jgg@mellanox.com>, Ben Skeggs <bskeggs@redhat.com>,
+ Christoph Hellwig <hch@lst.de>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-While most of the functionality on Nvidia GPUs doesn't require using an
-explicit handle instead of the main VRAM handle + offset, there are a
-couple of places that do require explicit handles, such as CRC
-functionality. Since this means we're about to add another
-nouveau-chosen handle, let's just go ahead and move any hard-coded
-handles into a single header. This is just to keep things slightly
-organized, and to make it a little bit easier if we need to add more
-handles in the future.
+On Sat, 27 Jun 2020 at 07:04, Ralph Campbell <rcampbell@nvidia.com> wrote:
+>
+> If system memory is migrated to device private memory and no GPU MMU
+> page table entry exists, the GPU will fault and call hmm_range_fault()
+> to get the PFN for the page. Since the .dev_private_owner pointer in
+> struct hmm_range is not set, hmm_range_fault returns an error which
+> results in the GPU program stopping with a fatal fault.
+> Fix this by setting .dev_private_owner appropriately.
+>
+> Fixes: 08ddddda667b ("mm/hmm: check the device private page owner in hmm_range_fault()")
+> Cc: stable@vger.kernel.org
+> Signed-off-by: Ralph Campbell <rcampbell@nvidia.com>
+> Reviewed-by: Jason Gunthorpe <jgg@mellanox.com>
+> ---
+>
+> This is based on Linux-5.8.0-rc2 and is for Ben Skeggs nouveau tree.
+> It doesn't depend on any of the other nouveau/HMM changes I have
+> recently posted.
+>
+> Resending to include stable@vger.org and adding Jason's reviewed-by.
+Thanks Ralph,
 
-This patch should contain no functional changes.
+I've got the patch locally, and will push it out later on today.
 
-Changes since v3:
-* Correct SPDX license identifier (checkpatch)
+Ben.
 
-Signed-off-by: Lyude Paul <lyude@redhat.com>
----
- drivers/gpu/drm/nouveau/dispnv50/disp.c    |  7 +++++--
- drivers/gpu/drm/nouveau/dispnv50/handles.h | 15 +++++++++++++++
- drivers/gpu/drm/nouveau/dispnv50/wndw.c    |  3 ++-
- 3 files changed, 22 insertions(+), 3 deletions(-)
- create mode 100644 drivers/gpu/drm/nouveau/dispnv50/handles.h
-
-diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.c b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-index 090882794f7d6..bf7ba1e1c0f74 100644
---- a/drivers/gpu/drm/nouveau/dispnv50/disp.c
-+++ b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-@@ -26,6 +26,7 @@
- #include "core.h"
- #include "head.h"
- #include "wndw.h"
-+#include "handles.h"
- 
- #include <linux/dma-mapping.h>
- #include <linux/hdmi.h>
-@@ -154,7 +155,8 @@ nv50_dmac_create(struct nvif_device *device, struct nvif_object *disp,
- 	if (!syncbuf)
- 		return 0;
- 
--	ret = nvif_object_init(&dmac->base.user, 0xf0000000, NV_DMA_IN_MEMORY,
-+	ret = nvif_object_init(&dmac->base.user, NV50_DISP_HANDLE_SYNCBUF,
-+			       NV_DMA_IN_MEMORY,
- 			       &(struct nv_dma_v0) {
- 					.target = NV_DMA_V0_TARGET_VRAM,
- 					.access = NV_DMA_V0_ACCESS_RDWR,
-@@ -165,7 +167,8 @@ nv50_dmac_create(struct nvif_device *device, struct nvif_object *disp,
- 	if (ret)
- 		return ret;
- 
--	ret = nvif_object_init(&dmac->base.user, 0xf0000001, NV_DMA_IN_MEMORY,
-+	ret = nvif_object_init(&dmac->base.user, NV50_DISP_HANDLE_VRAM,
-+			       NV_DMA_IN_MEMORY,
- 			       &(struct nv_dma_v0) {
- 					.target = NV_DMA_V0_TARGET_VRAM,
- 					.access = NV_DMA_V0_ACCESS_RDWR,
-diff --git a/drivers/gpu/drm/nouveau/dispnv50/handles.h b/drivers/gpu/drm/nouveau/dispnv50/handles.h
-new file mode 100644
-index 0000000000000..d1beeb9a444db
---- /dev/null
-+++ b/drivers/gpu/drm/nouveau/dispnv50/handles.h
-@@ -0,0 +1,15 @@
-+// SPDX-License-Identifier: MIT
-+#ifndef __NV50_KMS_HANDLES_H__
-+#define __NV50_KMS_HANDLES_H__
-+
-+/*
-+ * Various hard-coded object handles that nouveau uses. These are made-up by
-+ * nouveau developers, not Nvidia. The only significance of the handles chosen
-+ * is that they must all be unique.
-+ */
-+#define NV50_DISP_HANDLE_SYNCBUF                                        0xf0000000
-+#define NV50_DISP_HANDLE_VRAM                                           0xf0000001
-+
-+#define NV50_DISP_HANDLE_WNDW_CTX(kind)                        (0xfb000000 | kind)
-+
-+#endif /* !__NV50_KMS_HANDLES_H__ */
-diff --git a/drivers/gpu/drm/nouveau/dispnv50/wndw.c b/drivers/gpu/drm/nouveau/dispnv50/wndw.c
-index 720fe75de1859..293ccfdba17ef 100644
---- a/drivers/gpu/drm/nouveau/dispnv50/wndw.c
-+++ b/drivers/gpu/drm/nouveau/dispnv50/wndw.c
-@@ -21,6 +21,7 @@
-  */
- #include "wndw.h"
- #include "wimm.h"
-+#include "handles.h"
- 
- #include <nvif/class.h>
- #include <nvif/cl0002.h>
-@@ -59,7 +60,7 @@ nv50_wndw_ctxdma_new(struct nv50_wndw *wndw, struct drm_framebuffer *fb)
- 	int ret;
- 
- 	nouveau_framebuffer_get_layout(fb, &unused, &kind);
--	handle = 0xfb000000 | kind;
-+	handle = NV50_DISP_HANDLE_WNDW_CTX(kind);
- 
- 	list_for_each_entry(ctxdma, &wndw->ctxdma.list, head) {
- 		if (ctxdma->object.handle == handle)
--- 
-2.26.2
-
+>
+>  drivers/gpu/drm/nouveau/nouveau_svm.c | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_svm.c b/drivers/gpu/drm/nouveau/nouveau_svm.c
+> index ba9f9359c30e..6586d9d39874 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_svm.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_svm.c
+> @@ -562,6 +562,7 @@ static int nouveau_range_fault(struct nouveau_svmm *svmm,
+>                 .end = notifier->notifier.interval_tree.last + 1,
+>                 .pfn_flags_mask = HMM_PFN_REQ_FAULT | HMM_PFN_REQ_WRITE,
+>                 .hmm_pfns = hmm_pfns,
+> +               .dev_private_owner = drm->dev,
+>         };
+>         struct mm_struct *mm = notifier->notifier.mm;
+>         int ret;
+> --
+> 2.20.1
+>
+> _______________________________________________
+> Nouveau mailing list
+> Nouveau@lists.freedesktop.org
+> https://lists.freedesktop.org/mailman/listinfo/nouveau
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
