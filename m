@@ -2,48 +2,56 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9018E20E891
-	for <lists+nouveau@lfdr.de>; Tue, 30 Jun 2020 00:37:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4EF2E20FD2C
+	for <lists+nouveau@lfdr.de>; Tue, 30 Jun 2020 21:58:24 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7B1EF89F77;
-	Mon, 29 Jun 2020 22:37:02 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 2441289B3B;
+	Tue, 30 Jun 2020 19:58:17 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
- [205.139.110.61])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 93B9289F77
- for <nouveau@lists.freedesktop.org>; Mon, 29 Jun 2020 22:37:01 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1593470220;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=9m6zuAeqT4SD33nA6uDyI5NcN7BCoefMwz83aNaP6HY=;
- b=InFnvT1pZf6T1HHmcVCL3GcNuttWMP6FEfZ2e4z7M5Y+dwPlD0b1EQQX1mV//NSluZVgNo
- IFzPzV+cMRphzJgtZGiUi8K8zT73LSOP9JQtbzu4eppTj5cvN48Ir3tGBksoYjez6i0Oi8
- IthrhhTZFxZWg18BfrLLxqcNej+lotY=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-284-b5_L5QDSPFqC7ZLuTssy6A-1; Mon, 29 Jun 2020 18:36:57 -0400
-X-MC-Unique: b5_L5QDSPFqC7ZLuTssy6A-1
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
- [10.5.11.14])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 0BFD6800D5C;
- Mon, 29 Jun 2020 22:36:55 +0000 (UTC)
-Received: from Whitewolf.redhat.com (ovpn-119-84.rdu2.redhat.com
- [10.10.119.84])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 4E12F5D9D7;
- Mon, 29 Jun 2020 22:36:52 +0000 (UTC)
-From: Lyude Paul <lyude@redhat.com>
-To: nouveau@lists.freedesktop.org
-Date: Mon, 29 Jun 2020 18:36:25 -0400
-Message-Id: <20200629223635.103804-1-lyude@redhat.com>
+Received: from hqnvemgate26.nvidia.com (hqnvemgate26.nvidia.com
+ [216.228.121.65])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id DB06C89B05
+ for <nouveau@lists.freedesktop.org>; Tue, 30 Jun 2020 19:58:15 +0000 (UTC)
+Received: from hqpgpgate102.nvidia.com (Not Verified[216.228.121.13]) by
+ hqnvemgate26.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
+ id <B5efb994a0001>; Tue, 30 Jun 2020 12:58:02 -0700
+Received: from hqmail.nvidia.com ([172.20.161.6])
+ by hqpgpgate102.nvidia.com (PGP Universal service);
+ Tue, 30 Jun 2020 12:58:15 -0700
+X-PGP-Universal: processed;
+ by hqpgpgate102.nvidia.com on Tue, 30 Jun 2020 12:58:15 -0700
+Received: from HQMAIL101.nvidia.com (172.20.187.10) by HQMAIL107.nvidia.com
+ (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Tue, 30 Jun
+ 2020 19:58:07 +0000
+Received: from hqnvemgw03.nvidia.com (10.124.88.68) by HQMAIL101.nvidia.com
+ (172.20.187.10) with Microsoft SMTP Server (TLS) id 15.0.1473.3 via Frontend
+ Transport; Tue, 30 Jun 2020 19:58:07 +0000
+Received: from rcampbell-dev.nvidia.com (Not Verified[10.110.48.66]) by
+ hqnvemgw03.nvidia.com with Trustwave SEG (v7, 5, 8, 10121)
+ id <B5efb994f0001>; Tue, 30 Jun 2020 12:58:07 -0700
+From: Ralph Campbell <rcampbell@nvidia.com>
+To: <linux-rdma@vger.kernel.org>, <linux-mm@kvack.org>,
+ <nouveau@lists.freedesktop.org>, <linux-kselftest@vger.kernel.org>,
+ <linux-kernel@vger.kernel.org>
+Date: Tue, 30 Jun 2020 12:57:32 -0700
+Message-ID: <20200630195737.8667-1-rcampbell@nvidia.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
-Subject: [Nouveau] [PATCH] drm/nouveau/kms/nvd9-: Fix disabling CRCs
- alongside OR reprogramming
+X-NVConfidentiality: public
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
+ t=1593547082; bh=98oQk6P7sljyBfLagdhiCZSymARD8p0G5MvhlqPtOuI=;
+ h=X-PGP-Universal:From:To:CC:Subject:Date:Message-ID:X-Mailer:
+ MIME-Version:X-NVConfidentiality:Content-Transfer-Encoding:
+ Content-Type;
+ b=hrPV+ZVB0MZZj74Ygk9F8iCc0v3Ioc8Uq7yJvHmvkGMSxfeHrott/ebMNWV4E7Klo
+ nLVevppXcSr0gOa5ghpgHjZ8BJU4dDL3JwmCywTJnxCxOMybTJGN0SeL8TgySRz8ul
+ nehOkehgeVx8Vuk9OiHHmgSVrnjZAMyAtj22W2kYZqu5vs3MD5ul5+gjpsOzhsSsP2
+ gEATZDFV1CIoaMm4QkC+mpxV7nJ8AfWtL7W4ZvPMzIxL5erMUDv7XSpU3DjbKz8MaI
+ UGOphT1of9WD75YdGWOGdl7PvAelFIGQULYku2dA5/navSm3JyRTpJqQydqajcILqm
+ 3HihpKmAGLvdw==
+Subject: [Nouveau] [PATCH v2 0/5] mm/hmm/nouveau: add PMD system memory
+ mapping
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -55,323 +63,53 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>,
- Pankaj Bharadiya <pankaj.laxminarayan.bharadiya@intel.com>,
- open list <linux-kernel@vger.kernel.org>,
- "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
- <dri-devel@lists.freedesktop.org>, Takashi Iwai <tiwai@suse.de>,
- Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>,
- Alex Deucher <alexander.deucher@amd.com>,
- Mikita Lipski <mikita.lipski@amd.com>
+Cc: Ralph Campbell <rcampbell@nvidia.com>, Jason Gunthorpe <jgg@mellanox.com>,
+ Ben Skeggs <bskeggs@redhat.com>, Andrew
+ Morton <akpm@linux-foundation.org>, Shuah Khan <shuah@kernel.org>,
+ Christoph Hellwig <hch@lst.de>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-While I had thought I'd tested this before, it looks like this one issue
-slipped by my original CRC patches. Basically, there seem to be a few
-rules we need to follow when sending CRC commands to the display
-controller:
+The goal for this series is to introduce the hmm_range_fault() output
+array flags HMM_PFN_PMD and HMM_PFN_PUD. This allows a device driver to
+know that a given 4K PFN is actually mapped by the CPU using either a
+PMD sized or PUD sized CPU page table entry and therefore the device
+driver can safely map system memory using larger device MMU PTEs.
+The series is based on 5.8.0-rc3 and is intended for Jason Gunthorpe's
+hmm tree. These were originally part of a larger series:
+https://lore.kernel.org/linux-mm/20200619215649.32297-1-rcampbell@nvidia.com/
 
-* CRCs cannot be both disabled and enabled for a single head in the same
-  flush
-* If a head with CRC reporting enabled switches from one OR to another,
-  there must be a flush before the OR is re-enabled regardless of the
-  final state of CRC reporting.
+Changes in v2:
+Make the hmm_range_fault() API changes into a separate series and add
+  two output flags for PMD/PUD instead of a single compund page flag as
+  suggested by Jason Gunthorpe.
+Make the nouveau page table changes a separate patch as suggested by
+  Ben Skeggs.
+Only add support for 2MB nouveau mappings initially since changing the
+1:1 CPU/GPU page table size assumptions requires a bigger set of changes.
+Rebase to 5.8.0-rc3.
 
-So, split nv50_crc_atomic_prepare_notifier_contexts() into two
-functions:
-* nv_crc_atomic_release_notifier_contexts() - checks whether the CRC
-  notifier contexts were released successfully after the first flush
-* nv_crc_atomic_init_notifier_contexts() - prepares any CRC notifier
-  contexts for use before enabling reporting
+Ralph Campbell (5):
+  nouveau/hmm: fault one page at a time
+  mm/hmm: add output flags for PMD/PUD page mapping
+  nouveau: fix mapping 2MB sysmem pages
+  nouveau/hmm: support mapping large sysmem pages
+  hmm: add tests for HMM_PFN_PMD flag
 
-Additionally, in order to force a flush when we re-assign ORs with heads
-that have CRCs enabled we split our atomic check function into two:
+ drivers/gpu/drm/nouveau/nouveau_svm.c         | 238 ++++++++----------
+ drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.c |   5 +-
+ .../drm/nouveau/nvkm/subdev/mmu/vmmgp100.c    |  82 ++++++
+ include/linux/hmm.h                           |  11 +-
+ lib/test_hmm.c                                |   4 +
+ lib/test_hmm_uapi.h                           |   4 +
+ mm/hmm.c                                      |  13 +-
+ tools/testing/selftests/vm/hmm-tests.c        |  76 ++++++
+ 8 files changed, 290 insertions(+), 143 deletions(-)
 
-* nv50_crc_atomic_check_head() - called from our heads' atomic checks,
-  determines whether a state needs to set or clear CRC reporting
-* nv50_crc_atomic_check_outp() - called at the end of the atomic check
-  after all ORs have been added to the atomic state, and sets
-  nv50_atom->flush_disable if needed
-
-Signed-off-by: Lyude Paul <lyude@redhat.com>
----
- drivers/gpu/drm/nouveau/dispnv50/crc.c  | 107 ++++++++++++++++--------
- drivers/gpu/drm/nouveau/dispnv50/crc.h  |  18 ++--
- drivers/gpu/drm/nouveau/dispnv50/disp.c |  13 ++-
- drivers/gpu/drm/nouveau/dispnv50/head.c |   2 +-
- 4 files changed, 97 insertions(+), 43 deletions(-)
-
-diff --git a/drivers/gpu/drm/nouveau/dispnv50/crc.c b/drivers/gpu/drm/nouveau/dispnv50/crc.c
-index 0b18d9e3a2b96..f17fb6d56757a 100644
---- a/drivers/gpu/drm/nouveau/dispnv50/crc.c
-+++ b/drivers/gpu/drm/nouveau/dispnv50/crc.c
-@@ -261,7 +261,29 @@ void nv50_crc_atomic_stop_reporting(struct drm_atomic_state *state)
- 	}
- }
- 
--void nv50_crc_atomic_prepare_notifier_contexts(struct drm_atomic_state *state)
-+void nv50_crc_atomic_init_notifier_contexts(struct drm_atomic_state *state)
-+{
-+	struct drm_crtc_state *new_crtc_state;
-+	struct drm_crtc *crtc;
-+	int i;
-+
-+	for_each_new_crtc_in_state(state, crtc, new_crtc_state, i) {
-+		struct nv50_head *head = nv50_head(crtc);
-+		struct nv50_head_atom *asyh = nv50_head_atom(new_crtc_state);
-+		struct nv50_crc *crc = &head->crc;
-+		int i;
-+
-+		if (!asyh->set.crc)
-+			continue;
-+
-+		crc->entry_idx = 0;
-+		crc->ctx_changed = false;
-+		for (i = 0; i < ARRAY_SIZE(crc->ctx); i++)
-+			nv50_crc_reset_ctx(&crc->ctx[i]);
-+	}
-+}
-+
-+void nv50_crc_atomic_release_notifier_contexts(struct drm_atomic_state *state)
- {
- 	const struct nv50_crc_func *func =
- 		nv50_disp(state->dev)->core->func->crc;
-@@ -274,22 +296,15 @@ void nv50_crc_atomic_prepare_notifier_contexts(struct drm_atomic_state *state)
- 		struct nv50_head_atom *asyh = nv50_head_atom(new_crtc_state);
- 		struct nv50_crc *crc = &head->crc;
- 		struct nv50_crc_notifier_ctx *ctx = &crc->ctx[crc->ctx_idx];
--		int i;
- 
--		if (asyh->clr.crc && asyh->crc.src) {
--			if (crc->ctx_changed) {
--				nv50_crc_wait_ctx_finished(head, func, ctx);
--				ctx = &crc->ctx[crc->ctx_idx ^ 1];
--			}
--			nv50_crc_wait_ctx_finished(head, func, ctx);
--		}
-+		if (!asyh->clr.crc)
-+			continue;
- 
--		if (asyh->set.crc) {
--			crc->entry_idx = 0;
--			crc->ctx_changed = false;
--			for (i = 0; i < ARRAY_SIZE(crc->ctx); i++)
--				nv50_crc_reset_ctx(&crc->ctx[i]);
-+		if (crc->ctx_changed) {
-+			nv50_crc_wait_ctx_finished(head, func, ctx);
-+			ctx = &crc->ctx[crc->ctx_idx ^ 1];
- 		}
-+		nv50_crc_wait_ctx_finished(head, func, ctx);
- 	}
- }
- 
-@@ -325,16 +340,13 @@ void nv50_crc_atomic_start_reporting(struct drm_atomic_state *state)
- 	}
- }
- 
--int nv50_crc_atomic_check(struct nv50_head *head,
--			  struct nv50_head_atom *asyh,
--			  struct nv50_head_atom *armh)
-+int nv50_crc_atomic_check_head(struct nv50_head *head,
-+			       struct nv50_head_atom *asyh,
-+			       struct nv50_head_atom *armh)
- {
--	struct drm_atomic_state *state = asyh->state.state;
-+	struct nv50_atom *atom = nv50_atom(asyh->state.state);
- 	struct drm_device *dev = head->base.base.dev;
--	struct nv50_atom *atom = nv50_atom(state);
- 	struct nv50_disp *disp = nv50_disp(dev);
--	struct drm_encoder *encoder;
--	struct nv50_outp_atom *outp_atom;
- 	bool changed = armh->crc.src != asyh->crc.src;
- 
- 	if (!armh->crc.src && !asyh->crc.src) {
-@@ -373,27 +385,52 @@ int nv50_crc_atomic_check(struct nv50_head *head,
- 			asyh->set.or |= armh->or.crc_raster !=
- 					asyh->or.crc_raster;
- 
-+		if (asyh->clr.crc && asyh->set.crc)
-+			atom->flush_disable = true;
-+	} else {
-+		asyh->set.crc = false;
-+		asyh->clr.crc = false;
-+	}
-+
-+	return 0;
-+}
-+
-+void nv50_crc_atomic_check_outp(struct nv50_atom *atom)
-+{
-+	struct drm_crtc *crtc;
-+	struct drm_crtc_state *old_crtc_state, *new_crtc_state;
-+	int i;
-+
-+	if (atom->flush_disable)
-+		return;
-+
-+	for_each_oldnew_crtc_in_state(&atom->state, crtc, old_crtc_state,
-+				      new_crtc_state, i) {
-+		struct nv50_head_atom *armh = nv50_head_atom(old_crtc_state);
-+		struct nv50_head_atom *asyh = nv50_head_atom(new_crtc_state);
-+		struct nv50_outp_atom *outp_atom;
-+		struct nouveau_encoder *outp =
-+			nv50_real_outp(nv50_head_atom_get_encoder(armh));
-+		struct drm_encoder *encoder = &outp->base.base;
-+
-+		if (!asyh->clr.crc)
-+			continue;
-+
- 		/*
--		 * If we're reprogramming our OR, we need to flush the CRC
--		 * disable first
-+		 * Re-programming ORs can't be done in the same flush as
-+		 * disabling CRCs
- 		 */
--		if (asyh->clr.crc) {
--			encoder = nv50_head_atom_get_encoder(armh);
--
--			list_for_each_entry(outp_atom, &atom->outp, head) {
--				if (outp_atom->encoder == encoder) {
--					if (outp_atom->set.mask)
--						atom->flush_disable = true;
-+		list_for_each_entry(outp_atom, &atom->outp, head) {
-+			if (outp_atom->encoder == encoder) {
-+				if (outp_atom->set.mask) {
-+					atom->flush_disable = true;
-+					return;
-+				} else {
- 					break;
- 				}
- 			}
- 		}
--	} else {
--		asyh->set.crc = false;
--		asyh->clr.crc = false;
- 	}
--
--	return 0;
- }
- 
- static enum nv50_crc_source_type
-diff --git a/drivers/gpu/drm/nouveau/dispnv50/crc.h b/drivers/gpu/drm/nouveau/dispnv50/crc.h
-index 2d588bb7f65a6..6b5a478f113c4 100644
---- a/drivers/gpu/drm/nouveau/dispnv50/crc.h
-+++ b/drivers/gpu/drm/nouveau/dispnv50/crc.h
-@@ -10,6 +10,7 @@
- #include <nvkm/subdev/bios.h>
- #include "nouveau_encoder.h"
- 
-+struct nv50_atom;
- struct nv50_disp;
- struct nv50_head;
- 
-@@ -82,10 +83,12 @@ int nv50_crc_verify_source(struct drm_crtc *, const char *, size_t *);
- const char *const *nv50_crc_get_sources(struct drm_crtc *, size_t *);
- int nv50_crc_set_source(struct drm_crtc *, const char *);
- 
--int nv50_crc_atomic_check(struct nv50_head *, struct nv50_head_atom *,
--			  struct nv50_head_atom *);
-+int nv50_crc_atomic_check_head(struct nv50_head *, struct nv50_head_atom *,
-+			       struct nv50_head_atom *);
-+void nv50_crc_atomic_check_outp(struct nv50_atom *atom);
- void nv50_crc_atomic_stop_reporting(struct drm_atomic_state *);
--void nv50_crc_atomic_prepare_notifier_contexts(struct drm_atomic_state *);
-+void nv50_crc_atomic_init_notifier_contexts(struct drm_atomic_state *);
-+void nv50_crc_atomic_release_notifier_contexts(struct drm_atomic_state *);
- void nv50_crc_atomic_start_reporting(struct drm_atomic_state *);
- void nv50_crc_atomic_set(struct nv50_head *, struct nv50_head_atom *);
- void nv50_crc_atomic_clr(struct nv50_head *);
-@@ -108,12 +111,15 @@ static inline void
- nv50_crc_handle_vblank(struct nv50_head *head) { return 0; }
- 
- static inline int
--nv50_crc_atomic_check(struct nv50_head *, struct nv50_head_atom *,
--		      struct nv50_head_atom *) {}
-+nv50_crc_atomic_check_head(struct nv50_head *, struct nv50_head_atom *,
-+			   struct nv50_head_atom *) {}
-+static inline void nv50_crc_atomic_check_outp(struct nv50_atom *atom) {}
- static inline void
- nv50_crc_atomic_stop_reporting(struct drm_atomic_state *) {}
- static inline void
--nv50_crc_atomic_prepare_notifier_contexts(struct drm_atomic_state *) {}
-+nv50_crc_atomic_init_notifier_contexts(struct drm_atomic_state *) {}
-+static inline void
-+nv50_crc_atomic_release_notifier_contexts(struct drm_atomic_state *) {}
- static inline void
- nv50_crc_atomic_start_reporting(struct drm_atomic_state *) {}
- static inline void
-diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.c b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-index 9cb06d6d6c3fb..cd71b9876c8ae 100644
---- a/drivers/gpu/drm/nouveau/dispnv50/disp.c
-+++ b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-@@ -1943,6 +1943,7 @@ nv50_disp_atomic_commit_tail(struct drm_atomic_state *state)
- 	struct nv50_outp_atom *outp, *outt;
- 	u32 interlock[NV50_DISP_INTERLOCK__SIZE] = {};
- 	int i;
-+	bool flushed = false;
- 
- 	NV_ATOMIC(drm, "commit %d %d\n", atom->lock_core, atom->flush_disable);
- 	nv50_crc_atomic_stop_reporting(state);
-@@ -2003,6 +2004,8 @@ nv50_disp_atomic_commit_tail(struct drm_atomic_state *state)
- 				nv50_disp_atomic_commit_wndw(state, interlock);
- 				nv50_disp_atomic_commit_core(state, interlock);
- 				memset(interlock, 0x00, sizeof(interlock));
-+
-+				flushed = true;
- 			}
- 		}
- 	}
-@@ -2013,10 +2016,14 @@ nv50_disp_atomic_commit_tail(struct drm_atomic_state *state)
- 			nv50_disp_atomic_commit_wndw(state, interlock);
- 			nv50_disp_atomic_commit_core(state, interlock);
- 			memset(interlock, 0x00, sizeof(interlock));
-+
-+			flushed = true;
- 		}
- 	}
- 
--	nv50_crc_atomic_prepare_notifier_contexts(state);
-+	if (flushed)
-+		nv50_crc_atomic_release_notifier_contexts(state);
-+	nv50_crc_atomic_init_notifier_contexts(state);
- 
- 	/* Update output path(s). */
- 	list_for_each_entry_safe(outp, outt, &atom->outp, head) {
-@@ -2132,6 +2139,8 @@ nv50_disp_atomic_commit_tail(struct drm_atomic_state *state)
- 	}
- 
- 	nv50_crc_atomic_start_reporting(state);
-+	if (!flushed)
-+		nv50_crc_atomic_release_notifier_contexts(state);
- 	drm_atomic_helper_commit_hw_done(state);
- 	drm_atomic_helper_cleanup_planes(dev, state);
- 	drm_atomic_helper_commit_cleanup_done(state);
-@@ -2338,6 +2347,8 @@ nv50_disp_atomic_check(struct drm_device *dev, struct drm_atomic_state *state)
- 	if (ret)
- 		return ret;
- 
-+	nv50_crc_atomic_check_outp(atom);
-+
- 	return 0;
- }
- 
-diff --git a/drivers/gpu/drm/nouveau/dispnv50/head.c b/drivers/gpu/drm/nouveau/dispnv50/head.c
-index ea3088a47065e..9a10ec267d1fa 100644
---- a/drivers/gpu/drm/nouveau/dispnv50/head.c
-+++ b/drivers/gpu/drm/nouveau/dispnv50/head.c
-@@ -414,7 +414,7 @@ nv50_head_atomic_check(struct drm_crtc *crtc, struct drm_crtc_state *state)
- 		asyh->set.curs = asyh->curs.visible;
- 	}
- 
--	ret = nv50_crc_atomic_check(head, asyh, armh);
-+	ret = nv50_crc_atomic_check_head(head, asyh, armh);
- 	if (ret)
- 		return ret;
- 
 -- 
-2.26.2
+2.20.1
 
 _______________________________________________
 Nouveau mailing list
