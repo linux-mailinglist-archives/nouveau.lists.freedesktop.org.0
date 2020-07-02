@@ -1,58 +1,69 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0942921165A
-	for <lists+nouveau@lfdr.de>; Thu,  2 Jul 2020 00:54:20 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id D59B9212BFD
+	for <lists+nouveau@lfdr.de>; Thu,  2 Jul 2020 20:16:32 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 98C426EA10;
-	Wed,  1 Jul 2020 22:54:17 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 57FDB6E199;
+	Thu,  2 Jul 2020 18:16:31 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from hqnvemgate24.nvidia.com (hqnvemgate24.nvidia.com
- [216.228.121.143])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 994676EA11
- for <nouveau@lists.freedesktop.org>; Wed,  1 Jul 2020 22:54:16 +0000 (UTC)
-Received: from hqpgpgate102.nvidia.com (Not Verified[216.228.121.13]) by
- hqnvemgate24.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
- id <B5efd13b40000>; Wed, 01 Jul 2020 15:52:36 -0700
-Received: from hqmail.nvidia.com ([172.20.161.6])
- by hqpgpgate102.nvidia.com (PGP Universal service);
- Wed, 01 Jul 2020 15:54:16 -0700
-X-PGP-Universal: processed;
- by hqpgpgate102.nvidia.com on Wed, 01 Jul 2020 15:54:16 -0700
-Received: from HQMAIL105.nvidia.com (172.20.187.12) by HQMAIL111.nvidia.com
- (172.20.187.18) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Wed, 1 Jul
- 2020 22:54:06 +0000
-Received: from rnnvemgw01.nvidia.com (10.128.109.123) by HQMAIL105.nvidia.com
- (172.20.187.12) with Microsoft SMTP Server (TLS) id 15.0.1473.3 via
- Frontend Transport; Wed, 1 Jul 2020 22:54:06 +0000
-Received: from rcampbell-dev.nvidia.com (Not Verified[10.110.48.66]) by
- rnnvemgw01.nvidia.com with Trustwave SEG (v7, 5, 8, 10121)
- id <B5efd140d0004>; Wed, 01 Jul 2020 15:54:06 -0700
-From: Ralph Campbell <rcampbell@nvidia.com>
-To: <linux-rdma@vger.kernel.org>, <linux-mm@kvack.org>,
- <nouveau@lists.freedesktop.org>, <linux-kselftest@vger.kernel.org>,
- <linux-kernel@vger.kernel.org>
-Date: Wed, 1 Jul 2020 15:53:52 -0700
-Message-ID: <20200701225352.9649-6-rcampbell@nvidia.com>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200701225352.9649-1-rcampbell@nvidia.com>
-References: <20200701225352.9649-1-rcampbell@nvidia.com>
+Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
+ [205.139.110.120])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6493F6E199
+ for <nouveau@lists.freedesktop.org>; Thu,  2 Jul 2020 18:16:30 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1593713789;
+ h=from:from:reply-to:reply-to:subject:subject:date:date:
+ message-id:message-id:to:to:cc:cc:mime-version:mime-version:
+ content-type:content-type: content-transfer-encoding:content-transfer-encoding;
+ bh=CysWFQlB8amaDV/zf/6K2RwGGTlIHdfqtQ/vGdNKzx0=;
+ b=cT8j/MXR/2AOXG0Laorl2WntJ5SrNfmPnR39Dp9gH/i9gnXbYXOHFNfFM73lf5GXg4G3XE
+ 0k3/pFTEgwoDdNyFln/ugIjgYI1plKwJFQeju4OoGta0zFokkRPJd6VisGYdj2NnShlDu6
+ wO1jc+qxVDq8P5+5SqPYltKp6yToUzc=
+Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com
+ [209.85.222.197]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-468--2RT4tykOqe3VwVeKQCiPQ-1; Thu, 02 Jul 2020 14:16:13 -0400
+X-MC-Unique: -2RT4tykOqe3VwVeKQCiPQ-1
+Received: by mail-qk1-f197.google.com with SMTP id 13so8140129qkk.10
+ for <nouveau@lists.freedesktop.org>; Thu, 02 Jul 2020 11:16:13 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:message-id:subject:from:reply-to:to:cc:date
+ :organization:user-agent:mime-version:content-transfer-encoding;
+ bh=CysWFQlB8amaDV/zf/6K2RwGGTlIHdfqtQ/vGdNKzx0=;
+ b=IzqsCRfsSgOU1VdDUhXYhBzSLZ3a2AleTtXUJNcaxvesY7PDAmhU/xvlSFTRP+rCVd
+ JG6JLOrgfEp+SQmRIFDCj7n+cHCandBh9eeMLOdwKWTvU5MMQt9PDeVapBF0HYZwpvDc
+ ErnLNtYWyBIoazb6KRkYh3O97TCuLICDNwMkWSEGbpmYa02+uCTt+Ndfx81exfVDh13V
+ fa5UcpJPgdsPlEQeoLHb0s8TPm1N7uORNsTdVmFZ0yq+BWBhqbVZ2keG/15SK92DDPEJ
+ C7KKkOXNxRELpBdu2PKEDkjw/sTeP6MCDJU278WbryYq2oInwKB2iwMoznQoNLGg15lN
+ eWvA==
+X-Gm-Message-State: AOAM531QjFnl9fqOB7B2uImEKms7/lIdyqBIXFE9B+MDwBOO5IQV+IpQ
+ wMwiaIuVuuiESCKrkFRSMNNxG1D0T08b05MxOzuW5X3SXsz6kJVqN6ASKPtPIkKIXBCIjb4KZ/r
+ P6/tptZD22DgJ4NGQ4IYT312RbA==
+X-Received: by 2002:aed:22ef:: with SMTP id q44mr31046773qtc.333.1593713773168; 
+ Thu, 02 Jul 2020 11:16:13 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJzXyOxeQA+Kem4gTuH5iyHRViygW5BAtNuoVYcOw8/m6yJYu4IP877jS4GUpAL4QU1OmN+obg==
+X-Received: by 2002:aed:22ef:: with SMTP id q44mr31046749qtc.333.1593713772864; 
+ Thu, 02 Jul 2020 11:16:12 -0700 (PDT)
+Received: from Whitewolf.lyude.net
+ (pool-108-49-102-102.bstnma.fios.verizon.net. [108.49.102.102])
+ by smtp.gmail.com with ESMTPSA id c25sm1510750qka.63.2020.07.02.11.16.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 02 Jul 2020 11:16:12 -0700 (PDT)
+Message-ID: <5fcb1490dd12b0e2da3fbb34e5431ab3ce162839.camel@redhat.com>
+From: Lyude Paul <lyude@redhat.com>
+To: IGT development <igt-dev@lists.freedesktop.org>
+Date: Thu, 02 Jul 2020 14:16:11 -0400
+Organization: Red Hat
+User-Agent: Evolution 3.36.3 (3.36.3-1.fc32)
 MIME-Version: 1.0
-X-NVConfidentiality: public
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
- t=1593643956; bh=UL+bKmwqRdPEbqM2DAzkFsHMUp8NkFT28XTM8su6HPs=;
- h=X-PGP-Universal:From:To:CC:Subject:Date:Message-ID:X-Mailer:
- In-Reply-To:References:MIME-Version:X-NVConfidentiality:
- Content-Transfer-Encoding:Content-Type;
- b=iCjwNcVg7bkn/my+AxsLEl8MhQESiDTQPBs3PLFh2F40Nc/cXrK8c3tmadkRomcIE
- D7ltu2olJDS9P8HASUKewPs5SBsFA3PYTp+DT616AuomF7Tx//09pTgE8yZzFdryYk
- aqdkso4Rl3YUGTzj4Ndf4FgBDAQKqsABk5Knpg6FBb0YYhNcucpJ16wHePWDwEotOo
- ZIW0XTifi4pkKuin//VSry09hlWEmzt/cLQoUXFAoOO8k9RvvxHz6pMFNaJPe9jQxP
- biTGEKAZPI7nrxeCVsnNCO09M5GT+FLtSrHKxx0dGNGIKjuISD7RNk0P0952GHn5nM
- dxedWuEOm5DbQ==
-Subject: [Nouveau] [PATCH v3 5/5] hmm: add tests for hmm_pfn_to_map_order()
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=lyude@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Subject: [Nouveau] Getting reviews for nouveau contributions in igt?
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -64,151 +75,46 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Ralph Campbell <rcampbell@nvidia.com>, Jason Gunthorpe <jgg@mellanox.com>,
- Ben Skeggs <bskeggs@redhat.com>, Andrew
- Morton <akpm@linux-foundation.org>, Shuah Khan <shuah@kernel.org>,
- Christoph Hellwig <hch@lst.de>
+Reply-To: lyude@redhat.com
+Cc: nouveau <nouveau@lists.freedesktop.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Add a sanity test for hmm_range_fault() returning the page mapping size
-order.
+Hi! I haven't had much luck asking around in IRC, so I figured this would be the
+next place to start. As many of you know I've been working on getting nouveau
+into good shape with igt-gpu-tools, now that we've finally finished implementing
+CRC support thannks to nvidia's help. I should note that the patches for this
+have been accepted into nouveau, Ben's just working on rebasing them on top of
+some of the display refactoring + other stuff he's been working on. So they
+should appear in drm-tip in the near future, but they're still available on
+patchwork for anyone who wants to try them:
 
-Signed-off-by: Ralph Campbell <rcampbell@nvidia.com>
----
- lib/test_hmm.c                         |  4 ++
- lib/test_hmm_uapi.h                    |  4 ++
- tools/testing/selftests/vm/hmm-tests.c | 76 ++++++++++++++++++++++++++
- 3 files changed, 84 insertions(+)
+   https://patchwork.freedesktop.org/series/78803/
+(also needs https://patchwork.freedesktop.org/series/78915/ )
 
-diff --git a/lib/test_hmm.c b/lib/test_hmm.c
-index a2a82262b97b..9aa577afc269 100644
---- a/lib/test_hmm.c
-+++ b/lib/test_hmm.c
-@@ -766,6 +766,10 @@ static void dmirror_mkentry(struct dmirror *dmirror, struct hmm_range *range,
- 		*perm |= HMM_DMIRROR_PROT_WRITE;
- 	else
- 		*perm |= HMM_DMIRROR_PROT_READ;
-+	if (hmm_pfn_to_map_order(entry) + PAGE_SHIFT == PMD_SHIFT)
-+		*perm |= HMM_DMIRROR_PROT_PMD;
-+	else if (hmm_pfn_to_map_order(entry) + PAGE_SHIFT == PUD_SHIFT)
-+		*perm |= HMM_DMIRROR_PROT_PUD;
- }
- 
- static bool dmirror_snapshot_invalidate(struct mmu_interval_notifier *mni,
-diff --git a/lib/test_hmm_uapi.h b/lib/test_hmm_uapi.h
-index 67b3b2e6ff5d..670b4ef2a5b6 100644
---- a/lib/test_hmm_uapi.h
-+++ b/lib/test_hmm_uapi.h
-@@ -40,6 +40,8 @@ struct hmm_dmirror_cmd {
-  * HMM_DMIRROR_PROT_NONE: unpopulated PTE or PTE with no access
-  * HMM_DMIRROR_PROT_READ: read-only PTE
-  * HMM_DMIRROR_PROT_WRITE: read/write PTE
-+ * HMM_DMIRROR_PROT_PMD: PMD sized page is fully mapped by same permissions
-+ * HMM_DMIRROR_PROT_PUD: PUD sized page is fully mapped by same permissions
-  * HMM_DMIRROR_PROT_ZERO: special read-only zero page
-  * HMM_DMIRROR_PROT_DEV_PRIVATE_LOCAL: Migrated device private page on the
-  *					device the ioctl() is made
-@@ -51,6 +53,8 @@ enum {
- 	HMM_DMIRROR_PROT_NONE			= 0x00,
- 	HMM_DMIRROR_PROT_READ			= 0x01,
- 	HMM_DMIRROR_PROT_WRITE			= 0x02,
-+	HMM_DMIRROR_PROT_PMD			= 0x04,
-+	HMM_DMIRROR_PROT_PUD			= 0x08,
- 	HMM_DMIRROR_PROT_ZERO			= 0x10,
- 	HMM_DMIRROR_PROT_DEV_PRIVATE_LOCAL	= 0x20,
- 	HMM_DMIRROR_PROT_DEV_PRIVATE_REMOTE	= 0x30,
-diff --git a/tools/testing/selftests/vm/hmm-tests.c b/tools/testing/selftests/vm/hmm-tests.c
-index 79db22604019..b533dd08da1d 100644
---- a/tools/testing/selftests/vm/hmm-tests.c
-+++ b/tools/testing/selftests/vm/hmm-tests.c
-@@ -1291,6 +1291,82 @@ TEST_F(hmm2, snapshot)
- 	hmm_buffer_free(buffer);
- }
- 
-+/*
-+ * Test the hmm_range_fault() HMM_PFN_PMD flag for large pages that
-+ * should be mapped by a large page table entry.
-+ */
-+TEST_F(hmm, compound)
-+{
-+	struct hmm_buffer *buffer;
-+	unsigned long npages;
-+	unsigned long size;
-+	int *ptr;
-+	unsigned char *m;
-+	int ret;
-+	long pagesizes[4];
-+	int n, idx;
-+	unsigned long i;
-+
-+	/* Skip test if we can't allocate a hugetlbfs page. */
-+
-+	n = gethugepagesizes(pagesizes, 4);
-+	if (n <= 0)
-+		return;
-+	for (idx = 0; --n > 0; ) {
-+		if (pagesizes[n] < pagesizes[idx])
-+			idx = n;
-+	}
-+	size = ALIGN(TWOMEG, pagesizes[idx]);
-+	npages = size >> self->page_shift;
-+
-+	buffer = malloc(sizeof(*buffer));
-+	ASSERT_NE(buffer, NULL);
-+
-+	buffer->ptr = get_hugepage_region(size, GHR_STRICT);
-+	if (buffer->ptr == NULL) {
-+		free(buffer);
-+		return;
-+	}
-+
-+	buffer->size = size;
-+	buffer->mirror = malloc(npages);
-+	ASSERT_NE(buffer->mirror, NULL);
-+
-+	/* Initialize the pages the device will snapshot in buffer->ptr. */
-+	for (i = 0, ptr = buffer->ptr; i < size / sizeof(*ptr); ++i)
-+		ptr[i] = i;
-+
-+	/* Simulate a device snapshotting CPU pagetables. */
-+	ret = hmm_dmirror_cmd(self->fd, HMM_DMIRROR_SNAPSHOT, buffer, npages);
-+	ASSERT_EQ(ret, 0);
-+	ASSERT_EQ(buffer->cpages, npages);
-+
-+	/* Check what the device saw. */
-+	m = buffer->mirror;
-+	for (i = 0; i < npages; ++i)
-+		ASSERT_EQ(m[i], HMM_DMIRROR_PROT_WRITE |
-+				HMM_DMIRROR_PROT_PMD);
-+
-+	/* Make the region read-only. */
-+	ret = mprotect(buffer->ptr, size, PROT_READ);
-+	ASSERT_EQ(ret, 0);
-+
-+	/* Simulate a device snapshotting CPU pagetables. */
-+	ret = hmm_dmirror_cmd(self->fd, HMM_DMIRROR_SNAPSHOT, buffer, npages);
-+	ASSERT_EQ(ret, 0);
-+	ASSERT_EQ(buffer->cpages, npages);
-+
-+	/* Check what the device saw. */
-+	m = buffer->mirror;
-+	for (i = 0; i < npages; ++i)
-+		ASSERT_EQ(m[i], HMM_DMIRROR_PROT_READ |
-+				HMM_DMIRROR_PROT_PMD);
-+
-+	free_hugepage_region(buffer->ptr);
-+	buffer->ptr = NULL;
-+	hmm_buffer_free(buffer);
-+}
-+
- /*
-  * Test two devices reading the same memory (double mapped).
-  */
--- 
-2.20.1
+ANYWAY-the first question I had was whether anyone on here would be willing to
+help me with getting acks and/or reviews for some of the nouveau-related igt
+patches I've sent upstream? One of the patch series adds some nouveau-specific
+CRC tests:
+
+   https://patchwork.freedesktop.org/series/74811/
+
+The others add some missing bits to some basic kms tests that I noticed while
+doing CRC bringup:
+
+   https://patchwork.freedesktop.org/series/74806/ - fixes false-positives in
+   kms_plane plane-position-hole tests
+
+   https://patchwork.freedesktop.org/series/74808/ - adds a test to
+   kms_pipe_crc_basic to exercise disabling CRC capture on a pipe immediately
+   after said pipe being disabled.
+
+The second question that I had is in the future, for adding nouveau-specific
+tests is it acceptable for me to just get reviews from other nouveau developers
+or should I be trying to pull people in from this mailing list from outside the
+project?
 
 _______________________________________________
 Nouveau mailing list
