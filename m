@@ -1,33 +1,45 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6DCA8214AFA
-	for <lists+nouveau@lfdr.de>; Sun,  5 Jul 2020 09:41:31 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9A323214DFE
+	for <lists+nouveau@lfdr.de>; Sun,  5 Jul 2020 18:35:35 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D41526EBF6;
-	Sun,  5 Jul 2020 07:41:28 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 2160D89861;
+	Sun,  5 Jul 2020 16:35:32 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 433 seconds by postgrey-1.36 at gabe;
- Sun, 05 Jul 2020 07:41:28 UTC
-Received: from ec2.michaelkloos.com (ec2.michaelkloos.com
- [IPv6:2600:1f16:4be:b100:c339:bb54:64d2:a5b9])
- by gabe.freedesktop.org (Postfix) with ESMTP id 4B2186EBF6
- for <nouveau@lists.freedesktop.org>; Sun,  5 Jul 2020 07:41:28 +0000 (UTC)
-Received: from qpc.home.michaelkloos.com
- (cpe-173-88-115-50.columbus.res.rr.com [173.88.115.50])
- by ec2.michaelkloos.com (Postfix) with ESMTPSA id 59E2C8575FA
- for <nouveau@lists.freedesktop.org>; Sun,  5 Jul 2020 07:34:12 +0000 (UTC)
-To: nouveau@lists.freedesktop.org
-From: "Michael T. Kloos" <michael@michaelkloos.com>
-Message-ID: <8e6b4c97-41fa-ffaa-3580-1eee8d7d54f3@michaelkloos.com>
-Date: Sun, 5 Jul 2020 03:34:11 -0400
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.9.0
+Received: from mail-vs1-f49.google.com (mail-vs1-f49.google.com
+ [209.85.217.49])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A84F589861
+ for <nouveau@lists.freedesktop.org>; Sun,  5 Jul 2020 16:35:30 +0000 (UTC)
+Received: by mail-vs1-f49.google.com with SMTP id s20so12021467vsq.5
+ for <nouveau@lists.freedesktop.org>; Sun, 05 Jul 2020 09:35:30 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=f0/BjR2NeZY54eG5HClH3zjfWNDKpB15ekPPvr9Ks5g=;
+ b=TSsFO9hXNL0ssJClkSEDOXxniArHvee/B4b56C7xHYnXZ5HVMPgE/wjRJxnEFSdEXO
+ UnaBEpmNMq1Etp9m0T16m9e5s+yaDUri+uctyNzuttsNvL6iYCWAeKUIOQUn77bYSVMc
+ 38zTHUxZQQ77j8pmDI3zQTCdJv383DzbXUbXZqNdYrMMkCQrZXvmXzGseeQrn0O4JQ7J
+ 0AzagGouPFWZ04NcR8aX6gF0+/UM8IdVADcgBQfJB5RulPUfK2Q6nlAG4oU7dheuP3jy
+ 1uySo+tai19W6Bz0eYuln5QsW/vW7IC/Q9d1T2FjCPKIecgItPjzgm1OKfPtrh//E5pu
+ VYvA==
+X-Gm-Message-State: AOAM5327LxsbhQaedr/vZmLSh0oG/rGjzzKNrT4tnZDCM22nrSU7VA1f
+ lq/Q0Geb44GhXOrnmmyQkaIsQ/Ff0GMj578BWQVh3TmZ
+X-Google-Smtp-Source: ABdhPJx4edvz6WTwOE4OYXOBiDbyy7Usf1kY6jfctXLKJ1M+TA2w0h05U5MYs0MX3ixL3EHYukAiAJaWJiCkbwFzNA8=
+X-Received: by 2002:a05:6102:99:: with SMTP id
+ t25mr12892377vsp.210.1593966929650; 
+ Sun, 05 Jul 2020 09:35:29 -0700 (PDT)
 MIME-Version: 1.0
-Content-Language: en-US
-Subject: [Nouveau] Framebuffer double buffering (via FBIOPAN_DISPLAY)
+References: <8e6b4c97-41fa-ffaa-3580-1eee8d7d54f3@michaelkloos.com>
+In-Reply-To: <8e6b4c97-41fa-ffaa-3580-1eee8d7d54f3@michaelkloos.com>
+From: Ilia Mirkin <imirkin@alum.mit.edu>
+Date: Sun, 5 Jul 2020 12:35:18 -0400
+Message-ID: <CAKb7UvjHqAtH4+R70VbpE-dXe3y0=ZWdvRdWpQC1m-gK=NxoDw@mail.gmail.com>
+To: "Michael T. Kloos" <michael@michaelkloos.com>
+Subject: Re: [Nouveau] Framebuffer double buffering (via FBIOPAN_DISPLAY)
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -39,62 +51,30 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0359960058=="
+Cc: nouveau <nouveau@lists.freedesktop.org>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-This is a multi-part message in MIME format.
---===============0359960058==
-Content-Type: multipart/alternative;
- boundary="------------FDE9095653B137677652E801"
-Content-Language: en-US
+Are you setting the overallocation to 200?
 
-This is a multi-part message in MIME format.
---------------FDE9095653B137677652E801
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
-
-Does NOUVEAU support mmaping a double-sized Framebuffer?
-When attempting to run, where fd refers to "/dev/fb0":
-
-mmap(ptr, screensize * 2, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
-
-I get back an invalid argument error.  This doesn't happen if I only
-request a single screensize.  Is this a limitation of the driver?
-
-
---------------FDE9095653B137677652E801
-Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: 7bit
-
-<html>
-  <head>
-
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  </head>
-  <body>
-    <pre>Does NOUVEAU support mmaping a double-sized Framebuffer?
-When attempting to run, where fd refers to "/dev/fb0":
-
-mmap(ptr, screensize * 2, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
-
-I get back an invalid argument error.  This doesn't happen if I only 
-request a single screensize.  Is this a limitation of the driver?
-</pre>
-  </body>
-</html>
-
---------------FDE9095653B137677652E801--
-
---===============0359960058==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
+On Sun, Jul 5, 2020 at 3:41 AM Michael T. Kloos
+<michael@michaelkloos.com> wrote:
+>
+> Does NOUVEAU support mmaping a double-sized Framebuffer?
+> When attempting to run, where fd refers to "/dev/fb0":
+>
+> mmap(ptr, screensize * 2, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
+>
+> I get back an invalid argument error.  This doesn't happen if I only
+> request a single screensize.  Is this a limitation of the driver?
+>
+> _______________________________________________
+> Nouveau mailing list
+> Nouveau@lists.freedesktop.org
+> https://lists.freedesktop.org/mailman/listinfo/nouveau
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/nouveau
-
---===============0359960058==--
