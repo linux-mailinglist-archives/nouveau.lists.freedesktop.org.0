@@ -1,52 +1,77 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 12D3D217D95
-	for <lists+nouveau@lfdr.de>; Wed,  8 Jul 2020 05:33:17 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 82B3621895F
+	for <lists+nouveau@lfdr.de>; Wed,  8 Jul 2020 15:42:46 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7B41389864;
-	Wed,  8 Jul 2020 03:33:15 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E22916E113;
+	Wed,  8 Jul 2020 13:42:43 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 359 seconds by postgrey-1.36 at gabe;
- Wed, 08 Jul 2020 03:33:14 UTC
-Received: from smtprelay.hostedemail.com (smtprelay0150.hostedemail.com
- [216.40.44.150])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D17A389864
- for <nouveau@lists.freedesktop.org>; Wed,  8 Jul 2020 03:33:14 +0000 (UTC)
-Received: from smtprelay.hostedemail.com (10.5.19.251.rfc1918.com
- [10.5.19.251])
- by smtpgrave01.hostedemail.com (Postfix) with ESMTP id EFFA01801E687
- for <nouveau@lists.freedesktop.org>; Wed,  8 Jul 2020 03:27:15 +0000 (UTC)
-Received: from filter.hostedemail.com (clb03-v110.bra.tucows.net
- [216.40.38.60])
- by smtprelay04.hostedemail.com (Postfix) with ESMTP id AF53C180A7FE1;
- Wed,  8 Jul 2020 03:27:14 +0000 (UTC)
-X-Session-Marker: 6A6F6540706572636865732E636F6D
-X-Spam-Summary: 2, 0, 0, , d41d8cd98f00b204, joe@perches.com, ,
- RULES_HIT:41:355:379:599:800:960:968:973:988:989:1260:1277:1311:1313:1314:1345:1359:1437:1515:1516:1518:1534:1540:1593:1594:1711:1730:1747:1777:1792:2393:2553:2559:2562:2828:3138:3139:3140:3141:3142:3352:3622:3865:3866:3868:3870:3871:3872:3873:4321:4605:5007:7903:9040:10004:10400:10848:11026:11232:11657:11658:11914:12043:12297:12438:12679:12740:12760:12895:13069:13311:13357:13439:14181:14659:14721:21080:21451:21627:21990:30054:30090:30091,
- 0, RBL:none, CacheIP:none, Bayesian:0.5, 0.5, 0.5, Netcheck:none,
- DomainCache:0, MSF:not bulk, SPF:, MSBL:0, DNSBL:none, Custom_rules:0:0:0,
- LFtime:1, LUA_SUMMARY:none
-X-HE-Tag: scent31_0601c2926eb9
-X-Filterd-Recvd-Size: 1944
-Received: from XPS-9350.home (unknown [47.151.133.149])
- (Authenticated sender: joe@perches.com)
- by omf06.hostedemail.com (Postfix) with ESMTPA;
- Wed,  8 Jul 2020 03:27:13 +0000 (UTC)
-Message-ID: <1c37340fba4afb910a37cae43182f6c48302fa28.camel@perches.com>
-From: Joe Perches <joe@perches.com>
-To: Ben Skeggs <skeggsb@gmail.com>, "Gustavo A. R. Silva"
- <gustavoars@kernel.org>
-Date: Tue, 07 Jul 2020 20:27:12 -0700
-In-Reply-To: <CACAvsv4ahps=4gWwGXwvHFZOTBg1ubW86t3++dN4fAJ6JsBhDw@mail.gmail.com>
-References: <20200707173628.GA29695@embeddedor>
- <CACAvsv4ahps=4gWwGXwvHFZOTBg1ubW86t3++dN4fAJ6JsBhDw@mail.gmail.com>
-User-Agent: Evolution 3.36.3-0ubuntu1 
+X-Greylist: delayed 1463 seconds by postgrey-1.36 at gabe;
+ Wed, 08 Jul 2020 13:42:43 UTC
+Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com
+ [148.163.156.1])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1FE2F6E113
+ for <nouveau@lists.freedesktop.org>; Wed,  8 Jul 2020 13:42:42 +0000 (UTC)
+Received: from pps.filterd (m0187473.ppops.net [127.0.0.1])
+ by mx0a-001b2d01.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
+ 068D2RCA106547; Wed, 8 Jul 2020 09:18:17 -0400
+Received: from pps.reinject (localhost [127.0.0.1])
+ by mx0a-001b2d01.pphosted.com with ESMTP id 325dxe9ryn-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 08 Jul 2020 09:18:16 -0400
+Received: from m0187473.ppops.net (m0187473.ppops.net [127.0.0.1])
+ by pps.reinject (8.16.0.36/8.16.0.36) with SMTP id 068D34YN107846;
+ Wed, 8 Jul 2020 09:18:15 -0400
+Received: from ppma05fra.de.ibm.com (6c.4a.5195.ip4.static.sl-reverse.com
+ [149.81.74.108])
+ by mx0a-001b2d01.pphosted.com with ESMTP id 325dxe9rvk-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 08 Jul 2020 09:18:14 -0400
+Received: from pps.filterd (ppma05fra.de.ibm.com [127.0.0.1])
+ by ppma05fra.de.ibm.com (8.16.0.42/8.16.0.42) with SMTP id 068DHqDE031516;
+ Wed, 8 Jul 2020 13:18:10 GMT
+Received: from b06cxnps3075.portsmouth.uk.ibm.com
+ (d06relay10.portsmouth.uk.ibm.com [9.149.109.195])
+ by ppma05fra.de.ibm.com with ESMTP id 3251w8gbx9-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 08 Jul 2020 13:18:09 +0000
+Received: from d06av24.portsmouth.uk.ibm.com (mk.ibm.com [9.149.105.60])
+ by b06cxnps3075.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
+ 068DI7C955836784
+ (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 8 Jul 2020 13:18:07 GMT
+Received: from d06av24.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id AFF504204C;
+ Wed,  8 Jul 2020 13:18:07 +0000 (GMT)
+Received: from d06av24.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 5F63642042;
+ Wed,  8 Jul 2020 13:18:05 +0000 (GMT)
+Received: from in.ibm.com (unknown [9.85.75.251])
+ by d06av24.portsmouth.uk.ibm.com (Postfix) with ESMTPS;
+ Wed,  8 Jul 2020 13:18:05 +0000 (GMT)
+Date: Wed, 8 Jul 2020 18:48:03 +0530
+From: Bharata B Rao <bharata@linux.ibm.com>
+To: Ralph Campbell <rcampbell@nvidia.com>
+Message-ID: <20200708131803.GB7902@in.ibm.com>
+References: <20200706222347.32290-1-rcampbell@nvidia.com>
 MIME-Version: 1.0
-Subject: Re: [Nouveau] [PATCH][next] drm/nouveau: Use fallthrough
- pseudo-keyword
+Content-Disposition: inline
+In-Reply-To: <20200706222347.32290-1-rcampbell@nvidia.com>
+X-TM-AS-GCONF: 00
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235, 18.0.687
+ definitions=2020-07-08_11:2020-07-08,
+ 2020-07-08 signatures=0
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ spamscore=0 malwarescore=0
+ mlxlogscore=999 lowpriorityscore=0 cotscore=-2147483648 mlxscore=0
+ phishscore=0 clxscore=1011 adultscore=0 priorityscore=1501 bulkscore=0
+ impostorscore=0 suspectscore=1 classifier=spam adjust=0 reason=mlx
+ scancount=1 engine=8.12.0-2004280000 definitions=main-2007080091
+Subject: Re: [Nouveau] [PATCH 0/5] mm/migrate: avoid device private
+ invalidations
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,36 +83,45 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, ML nouveau <nouveau@lists.freedesktop.org>,
- LKML <linux-kernel@vger.kernel.org>,
- ML dri-devel <dri-devel@lists.freedesktop.org>,
- Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>
+Reply-To: bharata@linux.ibm.com
+Cc: linux-rdma@vger.kernel.org, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, kvm-ppc@vger.kernel.org, linux-mm@kvack.org,
+ Jason Gunthorpe <jgg@mellanox.com>, Ben Skeggs <bskeggs@redhat.com>,
+ linux-kselftest@vger.kernel.org, Andrew Morton <akpm@linux-foundation.org>,
+ Shuah Khan <shuah@kernel.org>, Christoph Hellwig <hch@lst.de>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, 2020-07-08 at 13:22 +1000, Ben Skeggs wrote:
-> On Wed, 8 Jul 2020 at 03:31, Gustavo A. R. Silva <gustavoars@kernel.org> wrote:
-> > Replace the existing /* fall through */ comments and its variants with
-> > the new pseudo-keyword macro fallthrough[1]. Also, remove unnecessary
-> > fall-through markings when it is the case.
-> I really like this!  I was not a fan of explicitly marking those with comments.
-> 
-> Thank you, taken in my tree.
-[]
-> > diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.c b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-[]
-> > @@ -932,7 +932,7 @@ nv50_dp_bpc_to_depth(unsigned int bpc)
-> >         switch (bpc) {
-> >         case  6: return 0x2;
-> >         case  8: return 0x5;
-> > -       case 10: /* fall-through */
-> > +       case 10: fallthrough;
+On Mon, Jul 06, 2020 at 03:23:42PM -0700, Ralph Campbell wrote:
+> The goal for this series is to avoid device private memory TLB
+> invalidations when migrating a range of addresses from system
+> memory to device private memory and some of those pages have already
+> been migrated. The approach taken is to introduce a new mmu notifier
+> invalidation event type and use that in the device driver to skip
+> invalidation callbacks from migrate_vma_setup(). The device driver is
+> also then expected to handle device MMU invalidations as part of the
+> migrate_vma_setup(), migrate_vma_pages(), migrate_vma_finalize() process.
+> Note that this is opt-in. A device driver can simply invalidate its MMU
+> in the mmu notifier callback and not handle MMU invalidations in the
+> migration sequence.
 
-IMO: this comment/fallthrough should be removed instead.
+In the kvmppc secure guest usecase,
 
+1. We ensure that we don't issue migrate_vma() calls for pages that have
+already been migrated to the device side (which is actually secure memory
+for us that is managed by Ultravisor firmware)
 
+2. The page table mappings on the device side (secure memory) are managed
+transparent to the kernel by the Ultravisor firmware.
+
+Hence I assume that no specific action would be required by the kvmppc
+usecase due to this patchset. In fact, we never registered for this
+mmu notifier events.
+
+Regards,
+Bharata.
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
