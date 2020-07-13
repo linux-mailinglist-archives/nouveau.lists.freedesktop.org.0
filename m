@@ -2,89 +2,56 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 71A8221D383
-	for <lists+nouveau@lfdr.de>; Mon, 13 Jul 2020 12:07:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E6C2621DE6F
+	for <lists+nouveau@lfdr.de>; Mon, 13 Jul 2020 19:22:10 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0E5DD6E4E3;
-	Mon, 13 Jul 2020 10:07:22 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 182F16E52F;
+	Mon, 13 Jul 2020 17:22:08 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from fanzine.igalia.com (fanzine.igalia.com [178.60.130.6])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C1B4A6E4C7;
- Mon, 13 Jul 2020 10:07:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
- s=20170329; 
- h=Content-Type:In-Reply-To:MIME-Version:Date:Message-ID:References:Cc:To:From:Subject;
- bh=JZOuSD4EiO7fWCKh3z/N1zuMk68R4LzqrZnzoTcJ1qI=; 
- b=RCnYewjgYG8J1Lkwo3IcwcDo23mMiUsOpE16nt/iCX2V5NlZoiGliIZjBP88fL0sYwQce3D5XismNum1FVQHcLRFeA/H37cyHluZGmC5S0uOcKD2uQ80nw4Rk/1EAQwyX1JSlQIfjag1V6BkugXNvnNke4r7Z7TTBehOdtvrt/dIGSXqA4fHtXCO3l5HMd0oo7Hyp+KO3UqYReAxgWqrGsXDerZo1zn3wcANjEew1iSlGBQv2xQJlK1fhJpGs0esXw78daHBs3X31vNtp9lHsVakQSx5Wcmrykt/Uvv0L8yefKLMNLC2aCPbrgbK8t7W2YY0yv4HN4fUcDAGoBbcWg==;
-Received: from 11.red-79-157-245.dynamicip.rima-tde.net ([79.157.245.11]
- helo=[192.168.2.252]) by fanzine.igalia.com with esmtpsa 
- (Cipher TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim)
- id 1juvMh-00051a-Pg; Mon, 13 Jul 2020 12:07:15 +0200
-From: =?UTF-8?Q?Samuel_Iglesias_Gons=c3=a1lvez?= <siglesias@igalia.com>
-To: "Szwichtenberg, Radoslaw" <radoslaw.szwichtenberg@intel.com>,
- "events@lists.x.org" <events@lists.x.org>,
- "xorg-devel@lists.freedesktop.org" <xorg-devel@lists.freedesktop.org>,
- "wayland-devel@lists.freedesktop.org" <wayland-devel@lists.freedesktop.org>,
- "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
- "mesa-dev@lists.freedesktop.org" <mesa-dev@lists.freedesktop.org>,
- "amd-gfx@lists.freedesktop.org" <amd-gfx@lists.freedesktop.org>,
- "etnaviv@lists.freedesktop.org" <etnaviv@lists.freedesktop.org>,
- "freedreno@lists.freedesktop.org" <freedreno@lists.freedesktop.org>,
- "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
- "intel-gfx@lists.freedesktop.org" <intel-gfx@lists.freedesktop.org>
-References: <4e5319c905109f9fe4ca48dee0e89d83ec73f2da.camel@igalia.com>
-Autocrypt: addr=siglesias@igalia.com; keydata=
- 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
- zYa9Fv+6Emblbj8n
-Message-ID: <0bc2d249-d7cf-6819-0c0c-cb1f1b02040c@igalia.com>
-Date: Mon, 13 Jul 2020 12:07:05 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+Received: from hqnvemgate25.nvidia.com (hqnvemgate25.nvidia.com
+ [216.228.121.64])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5C35B6E52F
+ for <nouveau@lists.freedesktop.org>; Mon, 13 Jul 2020 17:22:07 +0000 (UTC)
+Received: from hqpgpgate101.nvidia.com (Not Verified[216.228.121.13]) by
+ hqnvemgate25.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
+ id <B5f0c98050002>; Mon, 13 Jul 2020 10:21:09 -0700
+Received: from hqmail.nvidia.com ([172.20.161.6])
+ by hqpgpgate101.nvidia.com (PGP Universal service);
+ Mon, 13 Jul 2020 10:22:07 -0700
+X-PGP-Universal: processed;
+ by hqpgpgate101.nvidia.com on Mon, 13 Jul 2020 10:22:07 -0700
+Received: from HQMAIL101.nvidia.com (172.20.187.10) by HQMAIL111.nvidia.com
+ (172.20.187.18) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Mon, 13 Jul
+ 2020 17:21:59 +0000
+Received: from rnnvemgw01.nvidia.com (10.128.109.123) by HQMAIL101.nvidia.com
+ (172.20.187.10) with Microsoft SMTP Server (TLS) id 15.0.1473.3 via
+ Frontend Transport; Mon, 13 Jul 2020 17:21:58 +0000
+Received: from rcampbell-dev.nvidia.com (Not Verified[10.110.48.66]) by
+ rnnvemgw01.nvidia.com with Trustwave SEG (v7, 5, 8, 10121)
+ id <B5f0c98360001>; Mon, 13 Jul 2020 10:21:58 -0700
+From: Ralph Campbell <rcampbell@nvidia.com>
+To: <linux-rdma@vger.kernel.org>, <linux-mm@kvack.org>,
+ <nouveau@lists.freedesktop.org>, <kvm-ppc@vger.kernel.org>,
+ <linux-kselftest@vger.kernel.org>, <linux-kernel@vger.kernel.org>
+Date: Mon, 13 Jul 2020 10:21:44 -0700
+Message-ID: <20200713172149.2310-1-rcampbell@nvidia.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-In-Reply-To: <4e5319c905109f9fe4ca48dee0e89d83ec73f2da.camel@igalia.com>
-Subject: Re: [Nouveau] [Mesa-dev] [XDC 2020] Virtual conference + Call for
- Proposals extended 2 weeks more
+X-NVConfidentiality: public
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
+ t=1594660869; bh=5i6MV2A7BbbUmWCEieFN/sAj7Mt92VZyVtIABtiqqhI=;
+ h=X-PGP-Universal:From:To:CC:Subject:Date:Message-ID:X-Mailer:
+ MIME-Version:X-NVConfidentiality:Content-Transfer-Encoding:
+ Content-Type;
+ b=S9Srg5FV2+5NPoiew/+hOS5KMNb8dFviiWPao2+p2Ju/zDqV/LiBwF7jMuhMCy+Uc
+ vyAUDnXqWRiOCZ+CbT276SESkRonomfHiLgBbPR9IqtD3J/qYs0hiaSBfMvPGCSDFs
+ iOoQ8SN1Ojl+DPkcBsHzXLtWPvP04BDrHw1AeFXip8lsjV6s5NRlkaSRPBOB0U+sZD
+ M5Xahv4Y9eXcv+UfN2KgairH7lKJH0NaD+nhB3E2OKM2SrQLW0SItS1nfh2pi5++3b
+ Sdqq7YNWAZjd+lI+yWDcrPVKy5xpAxf7Ft8BbpAeArRd4Cu4W4lNlsEEd0y+ePj3Bt
+ RuxeEs7N6FHFw==
+Subject: [Nouveau] [PATCH v2 0/5] mm/migrate: avoid device private
+ invalidations
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -96,157 +63,64 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: "board@foundation.x.org" <board@foundation.x.org>
-Content-Type: multipart/mixed; boundary="===============0365792041=="
+Cc: Ralph
+ Campbell <rcampbell@nvidia.com>, Bharata B Rao <bharata@linux.ibm.com>,
+ Jason Gunthorpe <jgg@mellanox.com>, Ben Skeggs <bskeggs@redhat.com>, Andrew
+ Morton <akpm@linux-foundation.org>, Shuah Khan <shuah@kernel.org>,
+ Christoph Hellwig <hch@lst.de>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============0365792041==
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="1Xaw9TNIvKS9xp6Z5YYdCKKr7YHrSB12F"
+The goal for this series is to avoid device private memory TLB
+invalidations when migrating a range of addresses from system
+memory to device private memory and some of those pages have already
+been migrated. The approach taken is to introduce a new mmu notifier
+invalidation event type and use that in the device driver to skip
+invalidation callbacks from migrate_vma_setup(). The device driver is
+also then expected to handle device MMU invalidations as part of the
+migrate_vma_setup(), migrate_vma_pages(), migrate_vma_finalize() process.
+Note that this is opt-in. A device driver can simply invalidate its MMU
+in the mmu notifier callback and not handle MMU invalidations in the
+migration sequence.
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---1Xaw9TNIvKS9xp6Z5YYdCKKr7YHrSB12F
-Content-Type: multipart/mixed; boundary="O4jwaVymWbMOnhrKp225g1RAWJY02Hozf"
+This series is based on Jason Gunthorpe's HMM tree (linux-5.8.0-rc4).
 
---O4jwaVymWbMOnhrKp225g1RAWJY02Hozf
-Content-Type: multipart/alternative;
- boundary="------------0E1F6047D2595ED66823B8E8"
-Content-Language: en-US
+Also, this replaces the need for the following two patches I sent:
+("mm: fix migrate_vma_setup() src_owner and normal pages")
+https://lore.kernel.org/linux-mm/20200622222008.9971-1-rcampbell@nvidia.com
+("nouveau: fix mixed normal and device private page migration")
+https://lore.kernel.org/lkml/20200622233854.10889-3-rcampbell@nvidia.com
 
-This is a multi-part message in MIME format.
---------------0E1F6047D2595ED66823B8E8
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Changes in v2:
+Rebase to Jason Gunthorpe's HMM tree.
+Added reviewed-by from Bharata B Rao.
+Rename the mmu_notifier_range::data field to migrate_pgmap_owner as
+  suggested by Jason Gunthorpe.
 
-On 7/3/20 4:41 PM, Samuel Iglesias Gons=C3=A1lvez wrote:
-> Hi,
->
-> In the last meeting, X.Org Foundation board has decided that XDC 2020
-> will be a virtual conference, given the uncertain COVID-19 situation in=
+Ralph Campbell (5):
+  nouveau: fix storing invalid ptes
+  mm/migrate: add a direction parameter to migrate_vma
+  mm/notifier: add migration invalidation type
+  nouveau/svm: use the new migration invalidation
+  mm/hmm/test: use the new migration invalidation
 
-> Europe by September, including the possibility of a second wave,
-> outbreaks and travel restrictions, either in Poland or in other
-> countries.
->
-> XDC 2020 organization team agrees on this decision and it volunteered
-> to organize our first virtual XDC!
->
-> We would like to announce as well that the new CFP deadline is Sunday
-> July 19th 2020. Don't forget to submit your talk, demo and workshop
-> proposals!
+ arch/powerpc/kvm/book3s_hv_uvmem.c            |  2 ++
+ drivers/gpu/drm/nouveau/nouveau_dmem.c        | 13 ++++++--
+ drivers/gpu/drm/nouveau/nouveau_svm.c         | 10 +++++-
+ drivers/gpu/drm/nouveau/nouveau_svm.h         |  1 +
+ .../drm/nouveau/nvkm/subdev/mmu/vmmgp100.c    | 13 +++++---
+ include/linux/migrate.h                       | 12 +++++--
+ include/linux/mmu_notifier.h                  |  7 ++++
+ lib/test_hmm.c                                | 33 +++++++++++--------
+ mm/migrate.c                                  | 13 ++++++--
+ 9 files changed, 77 insertions(+), 27 deletions(-)
 
-Last week to submit your proposals! ;-)
-
-Sam
-
-> Thanks,
->
-> Sam
->
-> _______________________________________________
-> mesa-dev mailing list
-> mesa-dev@lists.freedesktop.org
-> https://lists.freedesktop.org/mailman/listinfo/mesa-dev
-
---------------0E1F6047D2595ED66823B8E8
-Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-
-<html>
-  <head>
-    <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3DUTF=
--8">
-  </head>
-  <body>
-    <div class=3D"moz-cite-prefix">On 7/3/20 4:41 PM, Samuel Iglesias
-      Gons=C3=A1lvez wrote:<br>
-    </div>
-    <blockquote type=3D"cite"
-      cite=3D"mid:4e5319c905109f9fe4ca48dee0e89d83ec73f2da.camel@igalia.c=
-om">
-      <pre class=3D"moz-quote-pre" wrap=3D"">Hi,
-
-In the last meeting, X.Org Foundation board has decided that XDC 2020
-will be a virtual conference, given the uncertain COVID-19 situation in
-Europe by September, including the possibility of a second wave,
-outbreaks and travel restrictions, either in Poland or in other
-countries.
-
-XDC 2020 organization team agrees on this decision and it volunteered
-to organize our first virtual XDC!
-
-We would like to announce as well that the new CFP deadline is Sunday
-July 19th 2020. Don't forget to submit your talk, demo and workshop
-proposals!
-</pre>
-    </blockquote>
-    <p>Last week to submit your proposals! ;-)<br>
-    </p>
-    <p>Sam<br>
-    </p>
-    <blockquote type=3D"cite"
-      cite=3D"mid:4e5319c905109f9fe4ca48dee0e89d83ec73f2da.camel@igalia.c=
-om">
-      <pre class=3D"moz-quote-pre" wrap=3D"">
-Thanks,
-
-Sam
-</pre>
-      <br>
-      <fieldset class=3D"mimeAttachmentHeader"></fieldset>
-      <pre class=3D"moz-quote-pre" wrap=3D"">____________________________=
-___________________
-mesa-dev mailing list
-<a class=3D"moz-txt-link-abbreviated" href=3D"mailto:mesa-dev@lists.freed=
-esktop.org">mesa-dev@lists.freedesktop.org</a>
-<a class=3D"moz-txt-link-freetext" href=3D"https://lists.freedesktop.org/=
-mailman/listinfo/mesa-dev">https://lists.freedesktop.org/mailman/listinfo=
-/mesa-dev</a>
-</pre>
-    </blockquote>
-  </body>
-</html>
-
---------------0E1F6047D2595ED66823B8E8--
-
---O4jwaVymWbMOnhrKp225g1RAWJY02Hozf--
-
---1Xaw9TNIvKS9xp6Z5YYdCKKr7YHrSB12F
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEEQP+ZAvaXWkfuKXiEf/S6MvF9w0MFAl8MMkkACgkQf/S6MvF9
-w0Nwng/+Mapk81SDKXwU4vBcf8dCW/JC9XvNff1GohCulHno6JAm9mnL1W1wNt12
-eJ6Oyle4gzNPIYggc9AVvTTU6abEMeqg2pF7qdSXpsiSF015BR7eagqKrNt/RRRf
-LMA474Ygi5jwaBMZjEHMiQnAQ92KLY9NqjnnND6Jwp3MbX34gTA9amxP1S89gF2o
-CACoWo2kWipkayM6F+55N2ZWBUyKkLgrMturvj6E3KR9xd4c9tcVoTIaBXF1/Zql
-ePUK4eQAT9+rkI43ldHj8Rh6eDaJzl8AhnlkiDhfNsf+2N702JxlfUsvLzA6HCp8
-/Q6Ix7PQRVcMzI7eOG66fA6AZnqrpnzPLHzbOBfzIjAMoNPt418+Yp9sHlgRQBRO
-7CQ62lMn4LON5LVkhAlx+Ae9pgQjC+hVcDzcrJywbbwaGEXsgUMxsOPrbueE9AMN
-ql2mpOwBpOzZyJC2q5opmPbaydunn5IQ6Y8hk96kp+re0NPtv0TMOWotM2JHf8zU
-lUklwgUUMytystTEiYPomxckshgiWj++uivQGm8xKNlbS6rk5vbO+ETvaiqecjFa
-RmccLtFR9zrQZ8PyDoa78yXZpiINDSZ5hU0c+61eEFaKBMdgzgZQ7HwcTLE/J60w
-X3XEGcN0mAxfuB73Gk3krZY41yPNH+pR92jK3uDvRszBW5Wtt9o=
-=3AME
------END PGP SIGNATURE-----
-
---1Xaw9TNIvKS9xp6Z5YYdCKKr7YHrSB12F--
-
---===============0365792041==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+-- 
+2.20.1
 
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/nouveau
-
---===============0365792041==--
