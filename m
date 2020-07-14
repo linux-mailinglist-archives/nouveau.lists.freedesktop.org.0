@@ -2,58 +2,42 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9302321DE71
-	for <lists+nouveau@lfdr.de>; Mon, 13 Jul 2020 19:22:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0C89D21F43E
+	for <lists+nouveau@lfdr.de>; Tue, 14 Jul 2020 16:39:11 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 808116E53C;
-	Mon, 13 Jul 2020 17:22:10 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8E8656E97E;
+	Tue, 14 Jul 2020 14:39:09 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from hqnvemgate25.nvidia.com (hqnvemgate25.nvidia.com
- [216.228.121.64])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5CD126E530
- for <nouveau@lists.freedesktop.org>; Mon, 13 Jul 2020 17:22:09 +0000 (UTC)
-Received: from hqpgpgate101.nvidia.com (Not Verified[216.228.121.13]) by
- hqnvemgate25.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
- id <B5f0c98070003>; Mon, 13 Jul 2020 10:21:11 -0700
-Received: from hqmail.nvidia.com ([172.20.161.6])
- by hqpgpgate101.nvidia.com (PGP Universal service);
- Mon, 13 Jul 2020 10:22:09 -0700
-X-PGP-Universal: processed;
- by hqpgpgate101.nvidia.com on Mon, 13 Jul 2020 10:22:09 -0700
-Received: from HQMAIL105.nvidia.com (172.20.187.12) by HQMAIL101.nvidia.com
- (172.20.187.10) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Mon, 13 Jul
- 2020 17:22:01 +0000
-Received: from rnnvemgw01.nvidia.com (10.128.109.123) by HQMAIL105.nvidia.com
- (172.20.187.12) with Microsoft SMTP Server (TLS) id 15.0.1473.3 via
- Frontend Transport; Mon, 13 Jul 2020 17:22:01 +0000
-Received: from rcampbell-dev.nvidia.com (Not Verified[10.110.48.66]) by
- rnnvemgw01.nvidia.com with Trustwave SEG (v7, 5, 8, 10121)
- id <B5f0c9838000b>; Mon, 13 Jul 2020 10:22:01 -0700
-From: Ralph Campbell <rcampbell@nvidia.com>
-To: <linux-rdma@vger.kernel.org>, <linux-mm@kvack.org>,
- <nouveau@lists.freedesktop.org>, <kvm-ppc@vger.kernel.org>,
- <linux-kselftest@vger.kernel.org>, <linux-kernel@vger.kernel.org>
-Date: Mon, 13 Jul 2020 10:21:49 -0700
-Message-ID: <20200713172149.2310-6-rcampbell@nvidia.com>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200713172149.2310-1-rcampbell@nvidia.com>
-References: <20200713172149.2310-1-rcampbell@nvidia.com>
+Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B272F6E97E;
+ Tue, 14 Jul 2020 14:39:08 +0000 (UTC)
+Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
+ [73.47.72.35])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id D767922516;
+ Tue, 14 Jul 2020 14:39:07 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1594737548;
+ bh=Nq5QR3iG8Cr3ox2BQ3/zYb67ZQcxz9425Pv2U2LcgGI=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=yw7A1xLMEtduFoQkeAHyD7T3+SgC1og07jfms3foe82i5WOa8mfB2C5+v4DEGqvQV
+ uBhzNe1WtyZiuUq6hTUKjGtsqQ/9COxT4xKWjh7fXOxGhv15sLXzSYMdQquU3d/lEM
+ RIRF2JyizVJawhzcpWuQOrniGWvLXsvivR2HsTzw=
+From: Sasha Levin <sashal@kernel.org>
+To: linux-kernel@vger.kernel.org,
+	stable@vger.kernel.org
+Date: Tue, 14 Jul 2020 10:38:45 -0400
+Message-Id: <20200714143849.4035283-15-sashal@kernel.org>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20200714143849.4035283-1-sashal@kernel.org>
+References: <20200714143849.4035283-1-sashal@kernel.org>
 MIME-Version: 1.0
-X-NVConfidentiality: public
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
- t=1594660871; bh=9IIuPtj59etQET6XQzw0bMUB+2aW73xZLXgD2GoJ4ec=;
- h=X-PGP-Universal:From:To:CC:Subject:Date:Message-ID:X-Mailer:
- In-Reply-To:References:MIME-Version:X-NVConfidentiality:
- Content-Transfer-Encoding:Content-Type;
- b=kh5nU6VW9tnNBPWQqX71XltgDPOm1zkutww5LVlecYz2mLPH3oKZQAyW9rtckV084
- qA1j9je3ucjTMg/3t65OpqoSFb5gMN4jmqzKD42GuPNEs1G4YgCDOkkrVQtdgjZRre
- 6uM4nqv054kJDrfvRKpXWXXsogMFOt60pn+J/0flBYkKdrUhqY5R2u/GJgC5xzHB0U
- uH5Z5o/w88n9kL/iYoCi5c+dDF9nQ4dewS4qX4Kp64hVGj0rUzSdc/XBEFSXf3SHje
- gleJnXunyobNzEN0wJ56h2idOoaAwZwcp8yrAr5JcWrnTZODtIqB66AFFVLXruI0m9
- thlDkRVOTEATg==
-Subject: [Nouveau] [PATCH v2 5/5] mm/hmm/test: use the new migration
- invalidation
+X-stable: review
+X-Patchwork-Hint: Ignore
+Subject: [Nouveau] [PATCH AUTOSEL 5.7 15/19] drm/nouveau/i2c/g94-: increase
+ NV_PMGR_DP_AUXCTL_TRANSACTREQ timeout
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -65,107 +49,63 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Ralph
- Campbell <rcampbell@nvidia.com>, Bharata B Rao <bharata@linux.ibm.com>,
- Jason Gunthorpe <jgg@mellanox.com>, Ben Skeggs <bskeggs@redhat.com>, Andrew
- Morton <akpm@linux-foundation.org>, Shuah Khan <shuah@kernel.org>,
- Christoph Hellwig <hch@lst.de>
+Cc: Sasha Levin <sashal@kernel.org>, nouveau@lists.freedesktop.org,
+ Ben Skeggs <bskeggs@redhat.com>, dri-devel@lists.freedesktop.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Use the new MMU_NOTIFY_MIGRATE event to skip MMU invalidations of device
-private memory and handle the invalidation in the driver as part of
-migrating device private memory.
+From: Ben Skeggs <bskeggs@redhat.com>
 
-Signed-off-by: Ralph Campbell <rcampbell@nvidia.com>
+[ Upstream commit 0156e76d388310a490aeb0f2fbb5b284ded3aecc ]
+
+Tegra TRM says worst-case reply time is 1216us, and this should fix some
+spurious timeouts that have been popping up.
+
+Signed-off-by: Ben Skeggs <bskeggs@redhat.com>
+Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- lib/test_hmm.c | 31 ++++++++++++++++++-------------
- 1 file changed, 18 insertions(+), 13 deletions(-)
+ drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxg94.c   | 4 ++--
+ drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxgm200.c | 4 ++--
+ 2 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/lib/test_hmm.c b/lib/test_hmm.c
-index 1bd60cfb5a25..77875fc4e7c1 100644
---- a/lib/test_hmm.c
-+++ b/lib/test_hmm.c
-@@ -214,6 +214,14 @@ static bool dmirror_interval_invalidate(struct mmu_interval_notifier *mni,
- {
- 	struct dmirror *dmirror = container_of(mni, struct dmirror, notifier);
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxg94.c b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxg94.c
+index c8ab1b5741a3e..db7769cb33eba 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxg94.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxg94.c
+@@ -118,10 +118,10 @@ g94_i2c_aux_xfer(struct nvkm_i2c_aux *obj, bool retry,
+ 		if (retries)
+ 			udelay(400);
  
-+	/*
-+	 * Ignore invalidation callbacks for device private pages since
-+	 * the invalidation is handled as part of the migration process.
-+	 */
-+	if (range->event == MMU_NOTIFY_MIGRATE &&
-+	    range->migrate_pgmap_owner == dmirror->mdevice)
-+		return true;
-+
- 	if (mmu_notifier_range_blockable(range))
- 		mutex_lock(&dmirror->mutex);
- 	else if (!mutex_trylock(&dmirror->mutex))
-@@ -702,7 +710,7 @@ static int dmirror_migrate(struct dmirror *dmirror,
- 		args.dst = dst_pfns;
- 		args.start = addr;
- 		args.end = next;
--		args.src_owner = NULL;
-+		args.src_owner = dmirror->mdevice;
- 		args.dir = MIGRATE_VMA_FROM_SYSTEM;
- 		ret = migrate_vma_setup(&args);
- 		if (ret)
-@@ -992,7 +1000,7 @@ static void dmirror_devmem_free(struct page *page)
- }
+-		/* transaction request, wait up to 1ms for it to complete */
++		/* transaction request, wait up to 2ms for it to complete */
+ 		nvkm_wr32(device, 0x00e4e4 + base, 0x00010000 | ctrl);
  
- static vm_fault_t dmirror_devmem_fault_alloc_and_copy(struct migrate_vma *args,
--						struct dmirror_device *mdevice)
-+						      struct dmirror *dmirror)
- {
- 	const unsigned long *src = args->src;
- 	unsigned long *dst = args->dst;
-@@ -1014,6 +1022,7 @@ static vm_fault_t dmirror_devmem_fault_alloc_and_copy(struct migrate_vma *args,
- 			continue;
+-		timeout = 1000;
++		timeout = 2000;
+ 		do {
+ 			ctrl = nvkm_rd32(device, 0x00e4e4 + base);
+ 			udelay(1);
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxgm200.c b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxgm200.c
+index 7ef60895f43a7..edb6148cbca04 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxgm200.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/i2c/auxgm200.c
+@@ -118,10 +118,10 @@ gm200_i2c_aux_xfer(struct nvkm_i2c_aux *obj, bool retry,
+ 		if (retries)
+ 			udelay(400);
  
- 		lock_page(dpage);
-+		xa_erase(&dmirror->pt, addr >> PAGE_SHIFT);
- 		copy_highpage(dpage, spage);
- 		*dst = migrate_pfn(page_to_pfn(dpage)) | MIGRATE_PFN_LOCKED;
- 		if (*src & MIGRATE_PFN_WRITE)
-@@ -1022,15 +1031,6 @@ static vm_fault_t dmirror_devmem_fault_alloc_and_copy(struct migrate_vma *args,
- 	return 0;
- }
+-		/* transaction request, wait up to 1ms for it to complete */
++		/* transaction request, wait up to 2ms for it to complete */
+ 		nvkm_wr32(device, 0x00d954 + base, 0x00010000 | ctrl);
  
--static void dmirror_devmem_fault_finalize_and_map(struct migrate_vma *args,
--						  struct dmirror *dmirror)
--{
--	/* Invalidate the device's page table mapping. */
--	mutex_lock(&dmirror->mutex);
--	dmirror_do_update(dmirror, args->start, args->end);
--	mutex_unlock(&dmirror->mutex);
--}
--
- static vm_fault_t dmirror_devmem_fault(struct vm_fault *vmf)
- {
- 	struct migrate_vma args;
-@@ -1060,11 +1060,16 @@ static vm_fault_t dmirror_devmem_fault(struct vm_fault *vmf)
- 	if (migrate_vma_setup(&args))
- 		return VM_FAULT_SIGBUS;
- 
--	ret = dmirror_devmem_fault_alloc_and_copy(&args, dmirror->mdevice);
-+	ret = dmirror_devmem_fault_alloc_and_copy(&args, dmirror);
- 	if (ret)
- 		return ret;
- 	migrate_vma_pages(&args);
--	dmirror_devmem_fault_finalize_and_map(&args, dmirror);
-+	/*
-+	 * No device finalize step is needed since
-+	 * dmirror_devmem_fault_alloc_and_copy() will have already
-+	 * invalidated the device page table. We could reinstate device MMU
-+	 * entries for pages that didn't migrate but that should be rare.
-+	 */
- 	migrate_vma_finalize(&args);
- 	return 0;
- }
+-		timeout = 1000;
++		timeout = 2000;
+ 		do {
+ 			ctrl = nvkm_rd32(device, 0x00d954 + base);
+ 			udelay(1);
 -- 
-2.20.1
+2.25.1
 
 _______________________________________________
 Nouveau mailing list
