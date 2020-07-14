@@ -1,42 +1,42 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0C89D21F43E
-	for <lists+nouveau@lfdr.de>; Tue, 14 Jul 2020 16:39:11 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 48A9D21F443
+	for <lists+nouveau@lfdr.de>; Tue, 14 Jul 2020 16:39:35 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8E8656E97E;
-	Tue, 14 Jul 2020 14:39:09 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8DE916E984;
+	Tue, 14 Jul 2020 14:39:33 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B272F6E97E;
- Tue, 14 Jul 2020 14:39:08 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1F51A6E97F;
+ Tue, 14 Jul 2020 14:39:32 +0000 (UTC)
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id D767922516;
- Tue, 14 Jul 2020 14:39:07 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 4B162222C8;
+ Tue, 14 Jul 2020 14:39:31 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1594737548;
+ s=default; t=1594737572;
  bh=Nq5QR3iG8Cr3ox2BQ3/zYb67ZQcxz9425Pv2U2LcgGI=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=yw7A1xLMEtduFoQkeAHyD7T3+SgC1og07jfms3foe82i5WOa8mfB2C5+v4DEGqvQV
- uBhzNe1WtyZiuUq6hTUKjGtsqQ/9COxT4xKWjh7fXOxGhv15sLXzSYMdQquU3d/lEM
- RIRF2JyizVJawhzcpWuQOrniGWvLXsvivR2HsTzw=
+ b=ayRFSJYWOYI443MUQXOBaMibukoWV7MpHTtw3+QI/gbipVehVv2TLgi5gM8w9kYbl
+ NbNDzSlzA18C8f1QE3MTqhT8AzOB//k61583/fRL3FJdVoDCkJMrOukRo+ycqVpN3v
+ bLHsqiTfRhf9SJqHZDWxmq+n+OI2JLMS8CwhkbiI=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Tue, 14 Jul 2020 10:38:45 -0400
-Message-Id: <20200714143849.4035283-15-sashal@kernel.org>
+Date: Tue, 14 Jul 2020 10:39:10 -0400
+Message-Id: <20200714143914.4035489-14-sashal@kernel.org>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20200714143849.4035283-1-sashal@kernel.org>
-References: <20200714143849.4035283-1-sashal@kernel.org>
+In-Reply-To: <20200714143914.4035489-1-sashal@kernel.org>
+References: <20200714143914.4035489-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
-Subject: [Nouveau] [PATCH AUTOSEL 5.7 15/19] drm/nouveau/i2c/g94-: increase
+Subject: [Nouveau] [PATCH AUTOSEL 5.4 14/18] drm/nouveau/i2c/g94-: increase
  NV_PMGR_DP_AUXCTL_TRANSACTREQ timeout
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
