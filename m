@@ -2,129 +2,33 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id C02C522A96C
-	for <lists+nouveau@lfdr.de>; Thu, 23 Jul 2020 09:17:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8FB3922A967
+	for <lists+nouveau@lfdr.de>; Thu, 23 Jul 2020 09:17:39 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C312E6E845;
-	Thu, 23 Jul 2020 07:17:32 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 021EF6E83F;
+	Thu, 23 Jul 2020 07:17:30 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 304 seconds by postgrey-1.36 at gabe;
- Fri, 10 Jul 2020 19:51:56 UTC
-Received: from nat-hk.nvidia.com (nat-hk.nvidia.com [203.18.50.4])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6AF556ED00
- for <nouveau@lists.freedesktop.org>; Fri, 10 Jul 2020 19:51:56 +0000 (UTC)
-Received: from hkpgpgate101.nvidia.com (Not Verified[10.18.92.100]) by
- nat-hk.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
- id <B5f08c5a90001>; Sat, 11 Jul 2020 03:46:49 +0800
-Received: from HKMAIL103.nvidia.com ([10.18.16.12])
- by hkpgpgate101.nvidia.com (PGP Universal service);
- Fri, 10 Jul 2020 12:46:49 -0700
-X-PGP-Universal: processed;
- by hkpgpgate101.nvidia.com on Fri, 10 Jul 2020 12:46:49 -0700
-Received: from HKMAIL101.nvidia.com (10.18.16.10) by HKMAIL103.nvidia.com
- (10.18.16.12) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Fri, 10 Jul
- 2020 19:46:49 +0000
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com (104.47.58.107)
- by HKMAIL101.nvidia.com (10.18.16.10) with Microsoft SMTP Server (TLS) id
- 15.0.1473.3 via Frontend Transport; Fri, 10 Jul 2020 19:46:49 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=WhtFuL/eDFdu539TWWzQXczpvdqh1d5USJRaHEpCaRQjGGYTloN633WXjL6IMEI4CMw4pOmEzlBJnefDZkkksfFjSBAwZo1tHs+IiAM0hdv8lWMUCqwxf6MDjLbaQGMZFl5HD+j/eBUbkaAmwli/YYaASj6hzmrLR1FUycQRXaGpeOzrY5KmsH7m3iI+b0PV2+dPd8XxtvuHFdIZBR1FcchGE7UNXsabV1taWGpmbDHVjdKElvLYHGe2Rm+ahvlJtCUlhCpGiXqjtHmQ13ijD2KrutJSGQQkO8HerrsG5iYge34mkJ6oQX438qsSRef7XZy1S0oJYKeKx3Bc6tbBpA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=gucwkIyCDXSu0JYyH7fyHyQvwX/jC87Co5KXwFQFprQ=;
- b=fQNGRjcxdTghhLaZ2HG/2VxIfDTWur1PnY2+KIwtB53Hg5OxVQO9lHsiA19/2p73IItRWedQeH7ASJgaklycmIQ0yESqgmqJ7ghKXXelTm1JeK5EtQqzXbQQylrDy1/2njeHhpEJP8xQa9Eyks9EgoePiXqmfXsA7pVsf+ep1PMlAP2B1O1Xc5x0jQ5MrYoAOVHrR/DmLAnrq1DiUahIKVqDndyyf1pwqS9CmZrnICf/+06mWBGqG4rrkGSQQrJQl2OWcj7jCRNLkguVnpvZ7n9P/pL0iFy6i6NFuTLRj8OJaRI+zUcrH7QzEbNymndNljLcwxaIw5px5Z3Gzw2cWw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-Authentication-Results: nvidia.com; dkim=none (message not signed)
- header.d=none;nvidia.com; dmarc=none action=none header.from=nvidia.com;
-Received: from DM6PR12MB3834.namprd12.prod.outlook.com (2603:10b6:5:14a::12)
- by DM6PR12MB3513.namprd12.prod.outlook.com (2603:10b6:5:18a::21) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3153.28; Fri, 10 Jul
- 2020 19:46:46 +0000
-Received: from DM6PR12MB3834.namprd12.prod.outlook.com
- ([fe80::1d53:7cb4:c3d7:2b54]) by DM6PR12MB3834.namprd12.prod.outlook.com
- ([fe80::1d53:7cb4:c3d7:2b54%6]) with mapi id 15.20.3174.023; Fri, 10 Jul 2020
- 19:46:46 +0000
-Date: Fri, 10 Jul 2020 16:39:39 -0300
-From: Jason Gunthorpe <jgg@nvidia.com>
-To: Ralph Campbell <rcampbell@nvidia.com>
-Message-ID: <20200710193939.GA2129070@nvidia.com>
-References: <20200706222347.32290-1-rcampbell@nvidia.com>
- <20200706222347.32290-4-rcampbell@nvidia.com>
-Content-Disposition: inline
-In-Reply-To: <20200706222347.32290-4-rcampbell@nvidia.com>
-X-ClientProxiedBy: MN2PR01CA0050.prod.exchangelabs.com (2603:10b6:208:23f::19)
- To DM6PR12MB3834.namprd12.prod.outlook.com
- (2603:10b6:5:14a::12)
+Received: from huawei.com (szxga06-in.huawei.com [45.249.212.32])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 22F416EA74;
+ Wed, 15 Jul 2020 09:27:24 +0000 (UTC)
+Received: from DGGEMS411-HUB.china.huawei.com (unknown [172.30.72.58])
+ by Forcepoint Email with ESMTP id 4C18AC02F39D6E97CE62;
+ Wed, 15 Jul 2020 17:27:20 +0800 (CST)
+Received: from localhost.localdomain.localdomain (10.175.113.25) by
+ DGGEMS411-HUB.china.huawei.com (10.3.19.211) with Microsoft SMTP Server id
+ 14.3.487.0; Wed, 15 Jul 2020 17:27:14 +0800
+From: Jing Xiangfeng <jingxiangfeng@huawei.com>
+To: <bskeggs@redhat.com>, <airlied@linux.ie>, <daniel@ffwll.ch>
+Date: Wed, 15 Jul 2020 17:30:26 +0800
+Message-ID: <20200715093026.156142-1-jingxiangfeng@huawei.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from mlx.ziepe.ca (156.34.48.30) by
- MN2PR01CA0050.prod.exchangelabs.com (2603:10b6:208:23f::19) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.3174.21 via Frontend Transport; Fri, 10 Jul 2020 19:46:46 +0000
-Received: from jgg by mlx with local (Exim 4.93)	(envelope-from
- <jgg@nvidia.com>)	id 1jtyrz-008w3l-9i; Fri, 10 Jul 2020 16:39:39 -0300
-X-Originating-IP: [156.34.48.30]
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 447da61e-e281-45e4-795c-08d82509fa80
-X-MS-TrafficTypeDiagnostic: DM6PR12MB3513:
-X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: <DM6PR12MB3513D79D91250B7BF05F574CC2650@DM6PR12MB3513.namprd12.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:4714;
-X-Forefront-PRVS: 046060344D
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 72DVomoZXYAFEx9df9CWCBMiQUGi+zQYLI6Oz1gY3UFMHDspyLHJXvvk46dCiQrz3EBEQ90PQpvXCgO3Urdcq8VG0PhrXj9CkIIRsraNLJfb3rz3DFqRUweyL7WWdBF6wwBksaQQ2NuWXCUM2M+UnU93oLWSNQgbvxPhyF9/tUxNYVAhWQnbssQtu4noyzmG2QYel1JmdYlKYKiLtxJRN4/5l16ReLviBVIH7UwJGPe7QR82jlAS1BW5CZYEcBGeOfoZKeQcH2lPbjXfIKy8+m37hOvy4z13qvfX/8p6bizoO4Rqf+NmmOVGElDroS6UzxiFRbU57MCuYoFft2b32A==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DM6PR12MB3834.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFTY:;
- SFS:(4636009)(376002)(39860400002)(396003)(346002)(136003)(366004)(83380400001)(2906002)(4326008)(1076003)(33656002)(316002)(66556008)(66476007)(54906003)(66946007)(5660300002)(37006003)(186003)(6862004)(26005)(9786002)(9746002)(478600001)(7416002)(8936002)(8676002)(36756003)(2616005)(426003)(6636002)(86362001);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData: QRKCsBNsZB/WaEPiyRj/hLbOxKlruZ0Ln+l9TvVj2Zid8qcDmDUH0mmEJht1fBu0iUbHkFoIAJJXyIhshzLjtm6+P9o4H9ofq5HfowDHDp4Spo0q/oHdPTDgZzRNYvPicjQf+yFrBlDy3IPnP607v71bR9Sj0xRK4ggMk9JkUW3i8C9CCGLjy0ednDFctetjGLsm0TvR+PY2xomL6FQ3XHGpp7M53q8ngrX3ATMZUKCxorEZytIO+hVuYbAyR7CoqF5NGZ4isSkhz6hF0SDeJQvPagH2nlqm5fgIzlQSwn5JYRc9KsbGw+DoYKcP86P+nwIEbsBw0vMD+msq5W2u12FuCDiSXvpeZ+9NBXS0p/IJsqr6bfZAvLFBbVyuEgjxWLa2dgmUefcIAL4b3PqRiyzLbjtsqAPFy75PfgIM4yvxxHo42qcqoOK8chi8QNyU5yX8EAMbh3QuBX0FvT37hFDG7YqD87vpzVutOCqkxIc=
-X-MS-Exchange-CrossTenant-Network-Message-Id: 447da61e-e281-45e4-795c-08d82509fa80
-X-MS-Exchange-CrossTenant-AuthSource: DM6PR12MB3834.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jul 2020 19:46:46.3160 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: HqLHHSB48fwLvB+on+tdn+7acp53ZJdwQ5wzP7iHOBfnZeXUFGV1bHxUJ+EGKgZl
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB3513
-X-OriginatorOrg: Nvidia.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
- t=1594410409; bh=gucwkIyCDXSu0JYyH7fyHyQvwX/jC87Co5KXwFQFprQ=;
- h=X-PGP-Universal:ARC-Seal:ARC-Message-Signature:
- ARC-Authentication-Results:Authentication-Results:Date:From:To:CC:
- Subject:Message-ID:References:Content-Type:Content-Disposition:
- In-Reply-To:X-ClientProxiedBy:MIME-Version:
- X-MS-Exchange-MessageSentRepresentingType:X-Originating-IP:
- X-MS-PublicTrafficType:X-MS-Office365-Filtering-Correlation-Id:
- X-MS-TrafficTypeDiagnostic:X-MS-Exchange-Transport-Forked:
- X-Microsoft-Antispam-PRVS:X-MS-Oob-TLC-OOBClassifiers:
- X-Forefront-PRVS:X-MS-Exchange-SenderADCheck:X-Microsoft-Antispam:
- X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
- X-MS-Exchange-AntiSpam-MessageData:
- X-MS-Exchange-CrossTenant-Network-Message-Id:
- X-MS-Exchange-CrossTenant-AuthSource:
- X-MS-Exchange-CrossTenant-AuthAs:
- X-MS-Exchange-CrossTenant-OriginalArrivalTime:
- X-MS-Exchange-CrossTenant-FromEntityHeader:
- X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
- X-MS-Exchange-CrossTenant-UserPrincipalName:
- X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-OriginatorOrg;
- b=k2XWTDeT0LOaHg9fhgse4ppB2GkIgdGak5lf6v00KqGegXT5WQmuwo4gf4UWPeF0f
- N8ppOPHMePputfzjOqGblonB+e6r0myoyBMYRg5+fi6owMiCWeRT4RH0pv5448XkQ0
- nUnRV606oddNuu3LjCN0Q2MMXD7WiuvXJ3y7au7dhG3OfCwbh0cg+68RF155CuHnTN
- ZMtNc71M43S7cULQaJoDw+RDhbacpdvgWVdWguCsp71yLUgfylkCLQl8SeKySNBxuZ
- qtC7YYdVexCadRNL0Q1/4EO+DyA6Pyb+xYlp3xMkkE0j2YcBvlXZUuwZQJZUK30LTZ
- e2JXr3Bn1fC0w==
+X-Originating-IP: [10.175.113.25]
+X-CFilter-Loop: Reflected
 X-Mailman-Approved-At: Thu, 23 Jul 2020 07:17:29 +0000
-Subject: Re: [Nouveau] [PATCH 3/5] mm/notifier: add migration invalidation
- type
+Subject: [Nouveau] [PATCH] drm/nouveau: add the missed kfree() for
+ nouveau_bo_alloc()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -136,75 +40,40 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: linux-rdma@vger.kernel.org, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, kvm-ppc@vger.kernel.org,
- Bharata B Rao <bharata@linux.ibm.com>, linux-mm@kvack.org,
- Ben Skeggs <bskeggs@redhat.com>, linux-kselftest@vger.kernel.org,
- Andrew Morton <akpm@linux-foundation.org>, Shuah Khan <shuah@kernel.org>,
- Christoph Hellwig <hch@lst.de>
+Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, jingxiangfeng@huawei.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Mon, Jul 06, 2020 at 03:23:45PM -0700, Ralph Campbell wrote:
-> Currently migrate_vma_setup() calls mmu_notifier_invalidate_range_start()
-> which flushes all device private page mappings whether or not a page
-> is being migrated to/from device private memory. In order to not disrupt
-> device mappings that are not being migrated, shift the responsibility
-> for clearing device private mappings to the device driver and leave
-> CPU page table unmapping handled by migrate_vma_setup(). To support
-> this, the caller of migrate_vma_setup() should always set struct
-> migrate_vma::src_owner to a non NULL value that matches the device
-> private page->pgmap->owner. This value is then passed to the struct
-> mmu_notifier_range with a new event type which the driver's invalidation
-> function can use to avoid device MMU invalidations.
-> 
-> Signed-off-by: Ralph Campbell <rcampbell@nvidia.com>
->  include/linux/mmu_notifier.h | 7 +++++++
->  mm/migrate.c                 | 8 +++++++-
->  2 files changed, 14 insertions(+), 1 deletion(-)
-> 
-> diff --git a/include/linux/mmu_notifier.h b/include/linux/mmu_notifier.h
-> index fc68f3570e19..bd0b34dbe4de 100644
-> +++ b/include/linux/mmu_notifier.h
-> @@ -38,6 +38,10 @@ struct mmu_interval_notifier;
->   *
->   * @MMU_NOTIFY_RELEASE: used during mmu_interval_notifier invalidate to signal
->   * that the mm refcount is zero and the range is no longer accessible.
-> + *
-> + * @MMU_NOTIFY_MIGRATE: used during migrate_vma_collect() invalidate to signal
-> + * a device driver to possibly ignore the invalidation if the src_own
-> + * field matches.
->   */
->  enum mmu_notifier_event {
->  	MMU_NOTIFY_UNMAP = 0,
-> @@ -46,6 +50,7 @@ enum mmu_notifier_event {
->  	MMU_NOTIFY_PROTECTION_PAGE,
->  	MMU_NOTIFY_SOFT_DIRTY,
->  	MMU_NOTIFY_RELEASE,
-> +	MMU_NOTIFY_MIGRATE,
->  };
->  
->  #define MMU_NOTIFIER_RANGE_BLOCKABLE (1 << 0)
-> @@ -264,6 +269,7 @@ struct mmu_notifier_range {
->  	unsigned long end;
->  	unsigned flags;
->  	enum mmu_notifier_event event;
-> +	void *data;
->  };
+nouveau_bo_alloc() misses to call kfree() in an error path. Add the
+missed function call to fix it.
 
-This generic member usually ends up a bit ugly, can we do a tagged
-union instead?
+Signed-off-by: Jing Xiangfeng <jingxiangfeng@huawei.com>
+---
+ drivers/gpu/drm/nouveau/nouveau_bo.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-union
-{
-     void *migrate_pgmap_owner;
-};
+diff --git a/drivers/gpu/drm/nouveau/nouveau_bo.c b/drivers/gpu/drm/nouveau/nouveau_bo.c
+index c40f127de3d0..abd80b1a6de3 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_bo.c
++++ b/drivers/gpu/drm/nouveau/nouveau_bo.c
+@@ -276,8 +276,10 @@ nouveau_bo_alloc(struct nouveau_cli *cli, u64 *size, int *align, u32 flags,
+ 			break;
+ 	}
+ 
+-	if (WARN_ON(pi < 0))
++	if (WARN_ON(pi < 0)) {
++		kfree(nvbo);
+ 		return ERR_PTR(-EINVAL);
++	}
+ 
+ 	/* Disable compression if suitable settings couldn't be found. */
+ 	if (nvbo->comp && !vmm->page[pi].comp) {
+-- 
+2.17.1
 
-and probably drop the union until we actually need two things here.
-
-Jason
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
