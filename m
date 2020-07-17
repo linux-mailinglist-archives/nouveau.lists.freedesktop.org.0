@@ -1,62 +1,39 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 901792244A0
-	for <lists+nouveau@lfdr.de>; Fri, 17 Jul 2020 21:52:20 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1217C224683
+	for <lists+nouveau@lfdr.de>; Sat, 18 Jul 2020 00:59:18 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D67FA6E8B0;
-	Fri, 17 Jul 2020 19:52:17 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B91396E11C;
+	Fri, 17 Jul 2020 22:59:12 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from youngberry.canonical.com (youngberry.canonical.com
- [91.189.89.112])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3CCEC6E8BA
- for <nouveau@lists.freedesktop.org>; Fri, 17 Jul 2020 19:52:17 +0000 (UTC)
-Received: from mail-pj1-f69.google.com ([209.85.216.69])
- by youngberry.canonical.com with esmtps
- (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.86_2)
- (envelope-from <alex.hung@canonical.com>) id 1jwWP1-0005bs-Su
- for nouveau@lists.freedesktop.org; Fri, 17 Jul 2020 19:52:16 +0000
-Received: by mail-pj1-f69.google.com with SMTP id h93so8512390pjb.2
- for <nouveau@lists.freedesktop.org>; Fri, 17 Jul 2020 12:52:15 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=CAr/PZNCVVXHi2XM5sV5Vjv9LxoATUMG734KVRfdoVY=;
- b=HmRggxCfkYglF+MMcIj+egspFev2gIZTzzQbog2ukPweqttx2VfqL7NH0rSt7kkw/z
- dY9FV6NlN3Zm+JooV/dFE8JXqYqV1RIMv7EHHzi5C3EquT987y0P6YgU2aZv4xqxqKfl
- NHlXku1fudpEiXOzzK+l2ih6Fkx1oWMXdZZ9Jh1I2Ir4iBB9r+3+dY7uA6cBWEwI6SZL
- aILc9vky1rx7k6b0oPmmwvlrbMEPkw+HBZLBm9LBKX7sOhWSM0hdhH1dbf9I9BN9zRWt
- dsT0WKH6I5bfPFdzqBWMsK16tgl324M2N3v8yIfzkabXX9nwnB3fig9aKBmalVlbNahF
- foSA==
-X-Gm-Message-State: AOAM530nv173+srHBw+NcAtYYjrzkj/tZxCKLh7kPH9WaV8aCDSE8iaB
- Y6BYYk5XCkxIyAtSkdyKl6kjp0Ba/CXJzZ/HavqVmxY5ipAxczGuW4i+uNEqubXSDdMwpydqaRk
- UQc8nn1QbmXorMUxAL7rxLdTPz1P55G7n+MTOBuPRBjk=
-X-Received: by 2002:aa7:948c:: with SMTP id z12mr9462517pfk.47.1595015534158; 
- Fri, 17 Jul 2020 12:52:14 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJzF78FcXCHrTAzm5SmDiVs60gWF5qYGsvPUKF/R7mEJtjZqtf1yjMbW37ZZ3kS+Mkgqg35euA==
-X-Received: by 2002:aa7:948c:: with SMTP id z12mr9462501pfk.47.1595015533842; 
- Fri, 17 Jul 2020 12:52:13 -0700 (PDT)
-Received: from [192.168.0.119] (d66-222-144-129.abhsia.telus.net.
- [66.222.144.129])
- by smtp.gmail.com with ESMTPSA id o23sm8923638pfd.126.2020.07.17.12.52.12
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 17 Jul 2020 12:52:13 -0700 (PDT)
-To: Karol Herbst <kherbst@redhat.com>, linux-acpi@vger.kernel.org
-References: <20200717190547.648604-1-kherbst@redhat.com>
-From: Alex Hung <alex.hung@canonical.com>
-Message-ID: <e7a8cb3a-e9f8-b78a-93f0-c09e5eb5ed10@canonical.com>
-Date: Fri, 17 Jul 2020 13:52:12 -0600
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2253D6E03C;
+ Fri, 17 Jul 2020 22:59:11 +0000 (UTC)
+Received: from localhost (mobile-166-175-191-139.mycingular.net
+ [166.175.191.139])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 807BA2070E;
+ Fri, 17 Jul 2020 22:59:10 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1595026750;
+ bh=Si2p19g5Q2ejNUok1Tpdxy2XoGYOEq8JYIYD2SrPf2o=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:From;
+ b=Xa78DP6cTPQwIDB+zLOdMNLq6OUmpcDgXzo1DstH7/SEVTcIQwQCOAlIZy0/xo/s8
+ WBsx7J7oBz8CAbGzB8qdJpOvBHGz/VNXFoeGmZq1s19GHQWZ3XrtSI2slMBi3OFVJy
+ qEeUZaUUB6aFmqcwWeU3nuixS2elvzP7gtDjMtfA=
+Date: Fri, 17 Jul 2020 17:59:09 -0500
+From: Bjorn Helgaas <helgaas@kernel.org>
+To: Sasha Levin <sashal@kernel.org>
+Message-ID: <20200717225909.GA784064@bjorn-Precision-5520>
 MIME-Version: 1.0
-In-Reply-To: <20200717190547.648604-1-kherbst@redhat.com>
-Content-Language: en-US
-Subject: Re: [Nouveau] [PATCH] RFC: ACPI / OSI: remove workarounds for
- hybrid graphics laptops
+Content-Disposition: inline
+In-Reply-To: <20200717144318.GP2722994@sasha-vm>
+Subject: Re: [Nouveau] nouveau regression with 5.7 caused by "PCI/PM: Assume
+ ports without DLL Link Active train links in 100 ms"
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,94 +45,90 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, "Rafael J. Wysocki" <rjw@rjwysocki.net>,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- Len Brown <lenb@kernel.org>
+Cc: Patrick Volkerding <volkerdi@gmail.com>,
+ Linux PCI <linux-pci@vger.kernel.org>, LKML <linux-kernel@vger.kernel.org>,
+ dri-devel <dri-devel@lists.freedesktop.org>,
+ Kai-Heng Feng <kai.heng.feng@canonical.com>, Ben Skeggs <bskeggs@redhat.com>,
+ nouveau <nouveau@lists.freedesktop.org>, Bjorn Helgaas <bhelgaas@google.com>,
+ stable@vger.kernel.org, Mika Westerberg <mika.westerberg@linux.intel.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 2020-07-17 1:05 p.m., Karol Herbst wrote:
-> It's hard to figure out what systems are actually affected and right now I
-> don't see a good way of removing those...
+On Fri, Jul 17, 2020 at 10:43:18AM -0400, Sasha Levin wrote:
+> On Fri, Jul 17, 2020 at 02:43:52AM +0200, Karol Herbst wrote:
+> > On Fri, Jul 17, 2020 at 1:54 AM Bjorn Helgaas <helgaas@kernel.org> wrote:
+> > > On Fri, Jul 17, 2020 at 12:10:39AM +0200, Karol Herbst wrote:
+> > > > On Tue, Jul 7, 2020 at 9:30 PM Karol Herbst <kherbst@redhat.com> wrote:
+> > > > >
+> > > > > Hi everybody,
+> > > > >
+> > > > > with the mentioned commit Nouveau isn't able to load firmware onto the
+> > > > > GPU on one of my systems here. Even though the issue doesn't always
+> > > > > happen I am quite confident this is the commit breaking it.
+> > > > >
+> > > > > I am still digging into the issue and trying to figure out what
+> > > > > exactly breaks, but it shows up in different ways. Either we are not
+> > > > > able to boot the engines on the GPU or the GPU becomes unresponsive.
+> > > > > Btw, this is also a system where our runtime power management issue
+> > > > > shows up, so maybe there is indeed something funky with the bridge
+> > > > > controller.
+> > > > >
+> > > > > Just pinging you in case you have an idea on how this could break Nouveau
+> > > > >
+> > > > > most of the times it shows up like this:
+> > > > > nouveau 0000:01:00.0: acr: AHESASC binary failed
+> > > > >
+> > > > > Sometimes it works at boot and fails at runtime resuming with random
+> > > > > faults. So I will be investigating a bit more, but yeah... I am super
+> > > > > sure the commit triggered this issue, no idea if it actually causes
+> > > > > it.
+> > > >
+> > > > so yeah.. I reverted that locally and never ran into issues again.
+> > > > Still valid on latest 5.7. So can we get this reverted or properly
+> > > > fixed? This breaks runtime pm for us on at least some hardware.
+> > > 
+> > > Yeah, that stinks.  We had another similar report from Patrick:
+> > > 
+> > >   https://lore.kernel.org/r/CAErSpo5sTeK_my1dEhWp7aHD0xOp87+oHYWkTjbL7ALgDbXo-Q@mail.gmail.com
+> > > 
+> > > Apparently the problem is ec411e02b7a2 ("PCI/PM: Assume ports without
+> > > DLL Link Active train links in 100 ms"), which Patrick found was
+> > > backported to v5.4.49 as 828b192c57e8, and you found was backported to
+> > > v5.7.6 as afaff825e3a4.
+> > > 
+> > > Oddly, Patrick reported that v5.7.7 worked correctly, even though it
+> > > still contains afaff825e3a4.
+> > > 
+> > > I guess in the absence of any other clues we'll have to revert it.
+> > > I hate to do that because that means we'll have slow resume of
+> > > Thunderbolt-connected devices again, but that's better than having
+> > > GPUs completely broken.
+> > > 
+> > > Could you and Patrick open bugzilla.kernel.org reports, attach dmesg
+> > > logs and "sudo lspci -vv" output, and add the URLs to Kai-Heng's
+> > > original report at https://bugzilla.kernel.org/show_bug.cgi?id=206837
+> > > and to this thread?
+> > > 
+> > > There must be a way to fix the slow resume problem without breaking
+> > > the GPUs.
+> > > 
+> > 
+> > I wouldn't be surprised if this is related to the Intel bridge we
+> > check against for Nouveau.. I still have to check on another laptop
+> > with the same bridge our workaround was required as well but wouldn't
+> > be surprised if it shows the same problem. Will get you the
+> > information from both systems tomorrow then.
 > 
-> But I'd like to see thos getting removed and drivers fixed instead (which
-> happened at least for nouveau).
-> 
-> And as mentioned before, I prefer people working on fixing issues instead
-> of spending time to add firmware level workarounds which are hard to know
-> to which systems they apply to, hard to remove and basically a big huge
-> pain to work with.> In the end I have no idea how to even figure out what systems are affected
-> and which not by this, so I have no idea how to even verify we can safely
-> remove this (which just means those are impossible to remove unless we risk
-> breaking systems, which again makes those supper annoying to deal with).
-> 
-> Also from the comments it's hard to get what those bits really do. Are they
-> just preventing runtime pm or do the devices are powered down when booting?
-> I am sure it's the former, still...
-> 
-> Please, don't do this again.
-> 
-> For now, those workaround prevent power savings on systems those workaround
-> applies to, which might be any so those should get removed asap and if
-> new issues arrise removing those please do a proper bug report and we can
-> look into it and come up with a proper fix (and keep this patch out until
-> we resolve all of those).
-> 
-> Signed-off-by: Karol Herbst <kherbst@redhat.com>
-> CC: Alex Hung <alex.hung@canonical.com>
-> CC: "Rafael J. Wysocki" <rjw@rjwysocki.net>
-> CC: Len Brown <lenb@kernel.org>
-> CC: Lyude Paul <lyude@redhat.com>
-> CC: linux-kernel@vger.kernel.org
-> CC: dri-devel@lists.freedesktop.org
-> CC: nouveau@lists.freedesktop.org
-> ---
->  drivers/acpi/osi.c | 24 ------------------------
->  1 file changed, 24 deletions(-)
-> 
-> diff --git a/drivers/acpi/osi.c b/drivers/acpi/osi.c
-> index 9f68538091384..d4405e1ca9b97 100644
-> --- a/drivers/acpi/osi.c
-> +++ b/drivers/acpi/osi.c
-> @@ -44,30 +44,6 @@ osi_setup_entries[OSI_STRING_ENTRIES_MAX] __initdata = {
->  	{"Processor Device", true},
->  	{"3.0 _SCP Extensions", true},
->  	{"Processor Aggregator Device", true},
-> -	/*
-> -	 * Linux-Dell-Video is used by BIOS to disable RTD3 for NVidia graphics
-> -	 * cards as RTD3 is not supported by drivers now.  Systems with NVidia
-> -	 * cards will hang without RTD3 disabled.
-> -	 *
-> -	 * Once NVidia drivers officially support RTD3, this _OSI strings can
-> -	 * be removed if both new and old graphics cards are supported.
-> -	 */
-> -	{"Linux-Dell-Video", true},
-> -	/*
-> -	 * Linux-Lenovo-NV-HDMI-Audio is used by BIOS to power on NVidia's HDMI
-> -	 * audio device which is turned off for power-saving in Windows OS.
-> -	 * This power management feature observed on some Lenovo Thinkpad
-> -	 * systems which will not be able to output audio via HDMI without
-> -	 * a BIOS workaround.
-> -	 */
-> -	{"Linux-Lenovo-NV-HDMI-Audio", true},
-> -	/*
-> -	 * Linux-HPI-Hybrid-Graphics is used by BIOS to enable dGPU to
-> -	 * output video directly to external monitors on HP Inc. mobile
-> -	 * workstations as Nvidia and AMD VGA drivers provide limited
-> -	 * hybrid graphics supports.
-> -	 */
-> -	{"Linux-HPI-Hybrid-Graphics", true},
->  };
->  
->  static u32 acpi_osi_handler(acpi_string interface, u32 supported)
-> 
+> I take it that ec411e02b7a2 will be reverted upstream?
 
-The changes were discussed and tested a while ago, and no crashes were
-observed. Thanks for solving PM issues in nouveau.
+Yes, unless we have a better fix soon.  I applied the revert to my
+for-linus branch, so it will appear in -next soon.  I think it's a
+little late to get it in -rc5, so I'll probably ask Linus to pull it
+next week for -rc6.
 
-Acked-by: Alex Hung <alex.hung@canonical.com>
+Bjorn
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
