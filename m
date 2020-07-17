@@ -2,40 +2,53 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 12418223E71
-	for <lists+nouveau@lfdr.de>; Fri, 17 Jul 2020 16:43:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 56CBE224396
+	for <lists+nouveau@lfdr.de>; Fri, 17 Jul 2020 20:58:35 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id CB3576EDDC;
-	Fri, 17 Jul 2020 14:43:20 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 89D856E114;
+	Fri, 17 Jul 2020 18:58:32 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A8BF96E228;
- Fri, 17 Jul 2020 14:43:19 +0000 (UTC)
-Received: from localhost (c-73-47-72-35.hsd1.nh.comcast.net [73.47.72.35])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 41B7E22B4D;
- Fri, 17 Jul 2020 14:43:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1594996999;
- bh=kfIT860OGYjpsG+nnhvbf8g/TLaZHhOpaJXIoOPMX4k=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=CtmQXYemaxq5EZM3qammzH9eXI+H3tIAZbwTf1FIOvkKux2il9kBx8+m0GP3sZGVJ
- yiyiFCcl0C04iZ8omtucXb3T4HxWEcBwG9Vq94CCPlfzmb8UATfR9ys9FrqWQCz0aP
- tdactR5dpsJmLPN0Y4uFVqZbHsv8hZ4i3nc6+Sgk=
-Date: Fri, 17 Jul 2020 10:43:18 -0400
-From: Sasha Levin <sashal@kernel.org>
-To: Karol Herbst <kherbst@redhat.com>
-Message-ID: <20200717144318.GP2722994@sasha-vm>
-References: <CACO55tuA+XMgv=GREf178NzTLTHri4kyD5mJjKuDpKxExauvVg@mail.gmail.com>
- <20200716235440.GA675421@bjorn-Precision-5520>
- <CACO55tuVJHjEbsW657ToczN++_iehXA8pimPAkzc=NOnx4Ztnw@mail.gmail.com>
+Received: from hqnvemgate26.nvidia.com (hqnvemgate26.nvidia.com
+ [216.228.121.65])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C7AF36E0D9;
+ Fri, 17 Jul 2020 18:58:30 +0000 (UTC)
+Received: from hqpgpgate101.nvidia.com (Not Verified[216.228.121.13]) by
+ hqnvemgate26.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
+ id <B5f11f4c90000>; Fri, 17 Jul 2020 11:58:17 -0700
+Received: from hqmail.nvidia.com ([172.20.161.6])
+ by hqpgpgate101.nvidia.com (PGP Universal service);
+ Fri, 17 Jul 2020 11:58:30 -0700
+X-PGP-Universal: processed;
+ by hqpgpgate101.nvidia.com on Fri, 17 Jul 2020 11:58:30 -0700
+Received: from HQMAIL111.nvidia.com (172.20.187.18) by HQMAIL107.nvidia.com
+ (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Fri, 17 Jul
+ 2020 18:58:30 +0000
+Received: from rnnvemgw01.nvidia.com (10.128.109.123) by HQMAIL111.nvidia.com
+ (172.20.187.18) with Microsoft SMTP Server (TLS) id 15.0.1473.3 via
+ Frontend Transport; Fri, 17 Jul 2020 18:58:29 +0000
+Received: from jajones-aftershock.nvidia.com (Not Verified[172.20.40.74]) by
+ rnnvemgw01.nvidia.com with Trustwave SEG (v7, 5, 8, 10121)
+ id <B5f11f4d50000>; Fri, 17 Jul 2020 11:58:29 -0700
+From: James Jones <jajones@nvidia.com>
+To: Dave Airlie <airlied@gmail.com>, Daniel Vetter <daniel.vetter@ffwll.ch>,
+ Ben Skeggs <bskeggs@redhat.com>, "Kirill A . Shutemov" <kirill@shutemov.name>
+Date: Fri, 17 Jul 2020 11:57:57 -0700
+Message-ID: <20200717185757.2786-1-jajones@nvidia.com>
+X-Mailer: git-send-email 2.17.1
+X-NVConfidentiality: public
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <CACO55tuVJHjEbsW657ToczN++_iehXA8pimPAkzc=NOnx4Ztnw@mail.gmail.com>
-Subject: Re: [Nouveau] nouveau regression with 5.7 caused by "PCI/PM: Assume
- ports without DLL Link Active train links in 100 ms"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
+ t=1595012297; bh=2t0eesWzsoG2op7SkfO1G02lUoOtw11S4/Ld+ehKJYQ=;
+ h=X-PGP-Universal:From:To:CC:Subject:Date:Message-ID:X-Mailer:
+ X-NVConfidentiality:MIME-Version:Content-Type;
+ b=doFMCg1/00YZnQgvEuVxVzhSBKGZktD0kOL0oo/A20RSEBmw9hN7gSzNZhhMILBmq
+ T9cvtm507ZRi42WLIDmd76mqiU0GZmToLYC2X3rnT033BCWd1ZWJ9PX1vWH0h2f7iK
+ FSyjcUidJrirG0suqMIN1dLeeqWJl/ZoSkMyJRnTdD22gpfW63YAiy5OOKzC9ppy5O
+ Ut1S1ub8CRwtyEdZCQPr/RdgBtiPj99nt+ZAgvZZZP9H9AFto8DRBe0fGaMOgoVdjn
+ CE79+lJegCD8YCDGic+xgzlhU0LrIx2BuNMEqDlUpp+h9VzV4oCMHSupVSeTkZ0pPm
+ WCVfpH/IZ6eaw==
+Subject: [Nouveau] [PATCH] drm/nouveau: Accept 'legacy' format modifiers
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -47,91 +60,83 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Patrick Volkerding <volkerdi@gmail.com>,
- Linux PCI <linux-pci@vger.kernel.org>, LKML <linux-kernel@vger.kernel.org>,
- dri-devel <dri-devel@lists.freedesktop.org>,
- Kai-Heng Feng <kai.heng.feng@canonical.com>,
- Bjorn Helgaas <helgaas@kernel.org>, Ben Skeggs <bskeggs@redhat.com>,
- nouveau <nouveau@lists.freedesktop.org>, Bjorn Helgaas <bhelgaas@google.com>,
- stable@vger.kernel.org, Mika Westerberg <mika.westerberg@linux.intel.com>
+Cc: Nouveau <nouveau@lists.freedesktop.org>,
+ dri-devel <dri-devel@lists.freedesktop.org>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, Jul 17, 2020 at 02:43:52AM +0200, Karol Herbst wrote:
->On Fri, Jul 17, 2020 at 1:54 AM Bjorn Helgaas <helgaas@kernel.org> wrote:
->>
->> [+cc Sasha -- stable kernel regression]
->> [+cc Patrick, Kai-Heng, LKML]
->>
->> On Fri, Jul 17, 2020 at 12:10:39AM +0200, Karol Herbst wrote:
->> > On Tue, Jul 7, 2020 at 9:30 PM Karol Herbst <kherbst@redhat.com> wrote:
->> > >
->> > > Hi everybody,
->> > >
->> > > with the mentioned commit Nouveau isn't able to load firmware onto the
->> > > GPU on one of my systems here. Even though the issue doesn't always
->> > > happen I am quite confident this is the commit breaking it.
->> > >
->> > > I am still digging into the issue and trying to figure out what
->> > > exactly breaks, but it shows up in different ways. Either we are not
->> > > able to boot the engines on the GPU or the GPU becomes unresponsive.
->> > > Btw, this is also a system where our runtime power management issue
->> > > shows up, so maybe there is indeed something funky with the bridge
->> > > controller.
->> > >
->> > > Just pinging you in case you have an idea on how this could break Nouveau
->> > >
->> > > most of the times it shows up like this:
->> > > nouveau 0000:01:00.0: acr: AHESASC binary failed
->> > >
->> > > Sometimes it works at boot and fails at runtime resuming with random
->> > > faults. So I will be investigating a bit more, but yeah... I am super
->> > > sure the commit triggered this issue, no idea if it actually causes
->> > > it.
->> >
->> > so yeah.. I reverted that locally and never ran into issues again.
->> > Still valid on latest 5.7. So can we get this reverted or properly
->> > fixed? This breaks runtime pm for us on at least some hardware.
->>
->> Yeah, that stinks.  We had another similar report from Patrick:
->>
->>   https://lore.kernel.org/r/CAErSpo5sTeK_my1dEhWp7aHD0xOp87+oHYWkTjbL7ALgDbXo-Q@mail.gmail.com
->>
->> Apparently the problem is ec411e02b7a2 ("PCI/PM: Assume ports without
->> DLL Link Active train links in 100 ms"), which Patrick found was
->> backported to v5.4.49 as 828b192c57e8, and you found was backported to
->> v5.7.6 as afaff825e3a4.
->>
->> Oddly, Patrick reported that v5.7.7 worked correctly, even though it
->> still contains afaff825e3a4.
->>
->> I guess in the absence of any other clues we'll have to revert it.
->> I hate to do that because that means we'll have slow resume of
->> Thunderbolt-connected devices again, but that's better than having
->> GPUs completely broken.
->>
->> Could you and Patrick open bugzilla.kernel.org reports, attach dmesg
->> logs and "sudo lspci -vv" output, and add the URLs to Kai-Heng's
->> original report at https://bugzilla.kernel.org/show_bug.cgi?id=206837
->> and to this thread?
->>
->> There must be a way to fix the slow resume problem without breaking
->> the GPUs.
->>
->
->I wouldn't be surprised if this is related to the Intel bridge we
->check against for Nouveau.. I still have to check on another laptop
->with the same bridge our workaround was required as well but wouldn't
->be surprised if it shows the same problem. Will get you the
->information from both systems tomorrow then.
+Accept the DRM_FORMAT_MOD_NVIDIA_16BX2_BLOCK()
+family of modifiers to handle broken userspace
+Xorg modesetting and Mesa drivers.
 
-I take it that ec411e02b7a2 will be reverted upstream?
+Tested with Xorg 1.20 modesetting driver,
+weston@c46c70dac84a4b3030cd05b380f9f410536690fc,
+gnome & KDE wayland desktops from Ubuntu 18.04,
+and sway 1.5
 
+Signed-off-by: James Jones <jajones@nvidia.com>
+---
+ drivers/gpu/drm/nouveau/nouveau_display.c | 26 +++++++++++++++++++++--
+ 1 file changed, 24 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/gpu/drm/nouveau/nouveau_display.c b/drivers/gpu/drm/nouveau/nouveau_display.c
+index 496c4621cc78..31543086254b 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_display.c
++++ b/drivers/gpu/drm/nouveau/nouveau_display.c
+@@ -191,8 +191,14 @@ nouveau_decode_mod(struct nouveau_drm *drm,
+ 		   uint32_t *tile_mode,
+ 		   uint8_t *kind)
+ {
++	struct nouveau_display *disp = nouveau_display(drm->dev);
+ 	BUG_ON(!tile_mode || !kind);
+ 
++	if ((modifier & (0xffull << 12)) == 0ull) {
++		/* Legacy modifier.  Translate to this device's 'kind.' */
++		modifier |= disp->format_modifiers[0] & (0xffull << 12);
++	}
++
+ 	if (modifier == DRM_FORMAT_MOD_LINEAR) {
+ 		/* tile_mode will not be used in this case */
+ 		*tile_mode = 0;
+@@ -227,6 +233,16 @@ nouveau_framebuffer_get_layout(struct drm_framebuffer *fb,
+ 	}
+ }
+ 
++static const u64 legacy_modifiers[] = {
++	DRM_FORMAT_MOD_NVIDIA_16BX2_BLOCK(0),
++	DRM_FORMAT_MOD_NVIDIA_16BX2_BLOCK(1),
++	DRM_FORMAT_MOD_NVIDIA_16BX2_BLOCK(2),
++	DRM_FORMAT_MOD_NVIDIA_16BX2_BLOCK(3),
++	DRM_FORMAT_MOD_NVIDIA_16BX2_BLOCK(4),
++	DRM_FORMAT_MOD_NVIDIA_16BX2_BLOCK(5),
++	DRM_FORMAT_MOD_INVALID
++};
++
+ static int
+ nouveau_validate_decode_mod(struct nouveau_drm *drm,
+ 			    uint64_t modifier,
+@@ -247,8 +263,14 @@ nouveau_validate_decode_mod(struct nouveau_drm *drm,
+ 	     (disp->format_modifiers[mod] != modifier);
+ 	     mod++);
+ 
+-	if (disp->format_modifiers[mod] == DRM_FORMAT_MOD_INVALID)
+-		return -EINVAL;
++	if (disp->format_modifiers[mod] == DRM_FORMAT_MOD_INVALID) {
++		for (mod = 0;
++		     (legacy_modifiers[mod] != DRM_FORMAT_MOD_INVALID) &&
++		     (legacy_modifiers[mod] != modifier);
++		     mod++);
++		if (legacy_modifiers[mod] == DRM_FORMAT_MOD_INVALID)
++			return -EINVAL;
++	}
+ 
+ 	nouveau_decode_mod(drm, modifier, tile_mode, kind);
+ 
 -- 
-Thanks,
-Sasha
+2.17.1
+
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
