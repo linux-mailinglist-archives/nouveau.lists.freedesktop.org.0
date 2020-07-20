@@ -1,64 +1,90 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id A0C3F22554B
-	for <lists+nouveau@lfdr.de>; Mon, 20 Jul 2020 03:19:00 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6A03B2258D1
+	for <lists+nouveau@lfdr.de>; Mon, 20 Jul 2020 09:41:24 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0813289FD3;
-	Mon, 20 Jul 2020 01:18:59 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 33F616E178;
+	Mon, 20 Jul 2020 07:41:20 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from youngberry.canonical.com (youngberry.canonical.com
- [91.189.89.112])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7CB1C89FD9
- for <nouveau@lists.freedesktop.org>; Mon, 20 Jul 2020 01:18:57 +0000 (UTC)
-Received: from mail-pf1-f199.google.com ([209.85.210.199])
- by youngberry.canonical.com with esmtps
- (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.86_2)
- (envelope-from <alex.hung@canonical.com>) id 1jxKSG-00036M-39
- for nouveau@lists.freedesktop.org; Mon, 20 Jul 2020 01:18:56 +0000
-Received: by mail-pf1-f199.google.com with SMTP id a8so11608824pff.3
- for <nouveau@lists.freedesktop.org>; Sun, 19 Jul 2020 18:18:56 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=dTQyUG61kX2XCwIUiPSY5cCF6yJekK9Ymo10gmabLSw=;
- b=KVeLysOJASgC9rl9OfJg1lV+OZKalqsnJ2yyUPwCBKYfejUNL3lQW08N5M3BmAM0SN
- zgm0+DBzWkWzkhEfULEbiGV6FPHhiY59wr4TejOPIVNPAVlDK4v+scbasL3/a9Yci3Zo
- r4D5d0D9XFZb/SVhP5qGFROC/YnLa6pQ+4bc6FOO4jQybOE1FY2aLOVoYGK21GBpUT/2
- ao52+jdpQu7WbSdekfXymooVRJd4j9m5/LY6vAGOOO2GppIRx4iZdQPNE91k/hyAZSLX
- M+aiOjZ0DCGV8njD73DWl1r6G8YqJ1P8HNyl5WsfqVp12smHSYru93+4bcDQqHMIqq0f
- g4CA==
-X-Gm-Message-State: AOAM533oHftd+f0Ypc4tp6+rKUYBQx1pcOxyi4pwwmT8j6+kfP6cRn0F
- 00cRbK14JWaHUa6QXXv7/mElG68BkxcCDAxEOCmgnSiF+4mbSDp3Fx4/j6//XbGTP1Z4vuO6Z7r
- RLpkMn74a0PV8ukOWfukquhAmyYFOARXv2SrsIegEoG8=
-X-Received: by 2002:a65:490d:: with SMTP id p13mr16441331pgs.183.1595207934351; 
- Sun, 19 Jul 2020 18:18:54 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJwudbwMDOJLkji0WfrSzxkPuyTod60uCI/xIM8pY05aS+io4K0fWco4Zfmkc0P1TnvefU0aMw==
-X-Received: by 2002:a65:490d:: with SMTP id p13mr16441307pgs.183.1595207933994; 
- Sun, 19 Jul 2020 18:18:53 -0700 (PDT)
-Received: from [192.168.0.119] (d66-222-144-129.abhsia.telus.net.
- [66.222.144.129])
- by smtp.gmail.com with ESMTPSA id 15sm10012333pjs.8.2020.07.19.18.18.52
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 19 Jul 2020 18:18:53 -0700 (PDT)
-To: Karol Herbst <kherbst@redhat.com>
-References: <20200717190547.648604-1-kherbst@redhat.com>
- <e7a8cb3a-e9f8-b78a-93f0-c09e5eb5ed10@canonical.com>
- <CACO55tvLCrqeV8MsVDbTaWP2EPAeZtfU08Kb2fVGCD6X+g3-rg@mail.gmail.com>
-From: Alex Hung <alex.hung@canonical.com>
-Message-ID: <8ad1866d-eb61-a30c-5875-5ffbfd2e17e1@canonical.com>
-Date: Sun, 19 Jul 2020 19:18:52 -0600
+Received: from fanzine.igalia.com (fanzine.igalia.com [178.60.130.6])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E5F5B6E178;
+ Mon, 20 Jul 2020 07:41:18 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
+ s=20170329; 
+ h=Content-Type:In-Reply-To:MIME-Version:Date:Message-ID:References:Cc:To:From:Subject;
+ bh=zKloZSiobw3jlXQasA0k5/s1eYMAWFXIkqzzZ8euj/s=; 
+ b=QcrjeJXwuSPmu9x821YGFGbULY9Z/k1kL9nFrjryLU2K1nzPb3IgvMbRwoHytfaOZfmDTM6utBIAma4jKs7Dk6LRVoCHr+Is3JaCr6sIeehquMnw/yk3ezfIo/3vupqj4V/1pnJWxhbHj5r/wVVvbk/MI00pPG5KK4AMw9yXGS1Kkp189UmA/V/HVOdxiaqheH0Ahv9v9ek6DHZyCNEVvqf04fqTv+KhrQXGmZfRWbJIm6iTNFoP33OuKssy+Ej9LkijNF8T4WxZJWZCVXAo10mrcb4QW3lWX4Dlhwn0sL7gyUvAeR2Qa9tH4A4qEO3AFvlXC41nNzKe8ladbozSqw==;
+Received: from 11.red-79-157-245.dynamicip.rima-tde.net ([79.157.245.11]
+ helo=[192.168.2.252]) by fanzine.igalia.com with esmtpsa 
+ (Cipher TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim)
+ id 1jxQQF-0005um-Ez; Mon, 20 Jul 2020 09:41:15 +0200
+From: =?UTF-8?Q?Samuel_Iglesias_Gons=c3=a1lvez?= <siglesias@igalia.com>
+To: "Szwichtenberg, Radoslaw" <radoslaw.szwichtenberg@intel.com>,
+ "events@lists.x.org" <events@lists.x.org>,
+ "xorg-devel@lists.freedesktop.org" <xorg-devel@lists.freedesktop.org>,
+ "wayland-devel@lists.freedesktop.org" <wayland-devel@lists.freedesktop.org>,
+ "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
+ "mesa-dev@lists.freedesktop.org" <mesa-dev@lists.freedesktop.org>,
+ "amd-gfx@lists.freedesktop.org" <amd-gfx@lists.freedesktop.org>,
+ "etnaviv@lists.freedesktop.org" <etnaviv@lists.freedesktop.org>,
+ "freedreno@lists.freedesktop.org" <freedreno@lists.freedesktop.org>,
+ "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
+ "intel-gfx@lists.freedesktop.org" <intel-gfx@lists.freedesktop.org>
+References: <4e5319c905109f9fe4ca48dee0e89d83ec73f2da.camel@igalia.com>
+Autocrypt: addr=siglesias@igalia.com; keydata=
+ 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
+ zYa9Fv+6Emblbj8n
+Message-ID: <b7a10661-2e4d-4462-98f6-de13226eeccc@igalia.com>
+Date: Mon, 20 Jul 2020 09:41:05 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <CACO55tvLCrqeV8MsVDbTaWP2EPAeZtfU08Kb2fVGCD6X+g3-rg@mail.gmail.com>
-Content-Language: en-US
-Subject: Re: [Nouveau] [PATCH] RFC: ACPI / OSI: remove workarounds for
- hybrid graphics laptops
+In-Reply-To: <4e5319c905109f9fe4ca48dee0e89d83ec73f2da.camel@igalia.com>
+Subject: Re: [Nouveau] [Mesa-dev] [XDC 2020] Virtual conference + Call for
+ Proposals extended 2 weeks more
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,116 +96,108 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau <nouveau@lists.freedesktop.org>,
- "Rafael J. Wysocki" <rjw@rjwysocki.net>, LKML <linux-kernel@vger.kernel.org>,
- dri-devel <dri-devel@lists.freedesktop.org>,
- Linux ACPI Mailing List <linux-acpi@vger.kernel.org>,
- Len Brown <lenb@kernel.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: "board@foundation.x.org" <board@foundation.x.org>
+Content-Type: multipart/mixed; boundary="===============1103243883=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 2020-07-19 1:50 p.m., Karol Herbst wrote:
-> On Fri, Jul 17, 2020 at 9:52 PM Alex Hung <alex.hung@canonical.com> wrote:
->>
->> On 2020-07-17 1:05 p.m., Karol Herbst wrote:
->>> It's hard to figure out what systems are actually affected and right now I
->>> don't see a good way of removing those...
->>>
->>> But I'd like to see thos getting removed and drivers fixed instead (which
->>> happened at least for nouveau).
->>>
->>> And as mentioned before, I prefer people working on fixing issues instead
->>> of spending time to add firmware level workarounds which are hard to know
->>> to which systems they apply to, hard to remove and basically a big huge
->>> pain to work with.> In the end I have no idea how to even figure out what systems are affected
->>> and which not by this, so I have no idea how to even verify we can safely
->>> remove this (which just means those are impossible to remove unless we risk
->>> breaking systems, which again makes those supper annoying to deal with).
->>>
->>> Also from the comments it's hard to get what those bits really do. Are they
->>> just preventing runtime pm or do the devices are powered down when booting?
->>> I am sure it's the former, still...
->>>
->>> Please, don't do this again.
->>>
->>> For now, those workaround prevent power savings on systems those workaround
->>> applies to, which might be any so those should get removed asap and if
->>> new issues arrise removing those please do a proper bug report and we can
->>> look into it and come up with a proper fix (and keep this patch out until
->>> we resolve all of those).
->>>
->>> Signed-off-by: Karol Herbst <kherbst@redhat.com>
->>> CC: Alex Hung <alex.hung@canonical.com>
->>> CC: "Rafael J. Wysocki" <rjw@rjwysocki.net>
->>> CC: Len Brown <lenb@kernel.org>
->>> CC: Lyude Paul <lyude@redhat.com>
->>> CC: linux-kernel@vger.kernel.org
->>> CC: dri-devel@lists.freedesktop.org
->>> CC: nouveau@lists.freedesktop.org
->>> ---
->>>  drivers/acpi/osi.c | 24 ------------------------
->>>  1 file changed, 24 deletions(-)
->>>
->>> diff --git a/drivers/acpi/osi.c b/drivers/acpi/osi.c
->>> index 9f68538091384..d4405e1ca9b97 100644
->>> --- a/drivers/acpi/osi.c
->>> +++ b/drivers/acpi/osi.c
->>> @@ -44,30 +44,6 @@ osi_setup_entries[OSI_STRING_ENTRIES_MAX] __initdata = {
->>>       {"Processor Device", true},
->>>       {"3.0 _SCP Extensions", true},
->>>       {"Processor Aggregator Device", true},
->>> -     /*
->>> -      * Linux-Dell-Video is used by BIOS to disable RTD3 for NVidia graphics
->>> -      * cards as RTD3 is not supported by drivers now.  Systems with NVidia
->>> -      * cards will hang without RTD3 disabled.
->>> -      *
->>> -      * Once NVidia drivers officially support RTD3, this _OSI strings can
->>> -      * be removed if both new and old graphics cards are supported.
->>> -      */
->>> -     {"Linux-Dell-Video", true},
->>> -     /*
->>> -      * Linux-Lenovo-NV-HDMI-Audio is used by BIOS to power on NVidia's HDMI
->>> -      * audio device which is turned off for power-saving in Windows OS.
->>> -      * This power management feature observed on some Lenovo Thinkpad
->>> -      * systems which will not be able to output audio via HDMI without
->>> -      * a BIOS workaround.
->>> -      */
->>> -     {"Linux-Lenovo-NV-HDMI-Audio", true},
->>> -     /*
->>> -      * Linux-HPI-Hybrid-Graphics is used by BIOS to enable dGPU to
->>> -      * output video directly to external monitors on HP Inc. mobile
->>> -      * workstations as Nvidia and AMD VGA drivers provide limited
->>> -      * hybrid graphics supports.
->>> -      */
->>> -     {"Linux-HPI-Hybrid-Graphics", true},
->>>  };
->>>
->>>  static u32 acpi_osi_handler(acpi_string interface, u32 supported)
->>>
->>
->> The changes were discussed and tested a while ago, and no crashes were
->> observed. Thanks for solving PM issues in nouveau.
->>
->> Acked-by: Alex Hung <alex.hung@canonical.com>
->>
-> 
-> By any chance, do you have a list of systems implementing those workarounds?
-> 
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--===============1103243883==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="ZQoaTBgo848hWk0E0C9NphXkPLcGLe8RU"
 
-I don't keep a list but the workaround, in theory, should only apply to
-the systems with the specific nvidia hardware.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--ZQoaTBgo848hWk0E0C9NphXkPLcGLe8RU
+Content-Type: multipart/mixed; boundary="mwiVjPF7I377Vg5TCaroOAumpIL9da1EC"
 
-I reminded OEMs and ODMs that these _OSI strings were temporary
-solutions, and highlighted we were going to remove them after our
-discussion last year. If they were paying attentions recent systems
-shouldn't have these _OSI strings.
+--mwiVjPF7I377Vg5TCaroOAumpIL9da1EC
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
 
--- 
-Cheers,
-Alex Hung
+
+
+On 7/3/20 4:41 PM, Samuel Iglesias Gons=C3=A1lvez wrote:
+> Hi,
+>=20
+> In the last meeting, X.Org Foundation board has decided that XDC 2020
+> will be a virtual conference, given the uncertain COVID-19 situation in=
+
+> Europe by September, including the possibility of a second wave,
+> outbreaks and travel restrictions, either in Poland or in other
+> countries.
+>=20
+> XDC 2020 organization team agrees on this decision and it volunteered
+> to organize our first virtual XDC!
+>=20
+> We would like to announce as well that the new CFP deadline is Sunday
+> July 19th 2020. Don't forget to submit your talk, demo and workshop
+> proposals!
+>=20
+
+As approved in last board's meeting [0], CfP is extended until two weeks
+before the conference, or until we fill all the slots (whichever happens
+first). Please submit your talk proposals early!
+
+Last two years we had lots of talks about new and fresh development and
+we prioritized those over other kind of talks, as they had more
+potential for discussions and hallway track. However, this year that
+doesn't make too much sense, so we encourage our community to submit any
+talk related to open-source graphics stack, including those that focus
+on project status updates.
+
+Sam
+
+[0] https://www.x.org/wiki/BoardOfDirectors/MeetingSummaries/2020/07-16/
+
+> Thanks,
+>=20
+> Sam
+>=20
+>=20
+> _______________________________________________
+> mesa-dev mailing list
+> mesa-dev@lists.freedesktop.org
+> https://lists.freedesktop.org/mailman/listinfo/mesa-dev
+>=20
+
+
+--mwiVjPF7I377Vg5TCaroOAumpIL9da1EC--
+
+--ZQoaTBgo848hWk0E0C9NphXkPLcGLe8RU
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEEQP+ZAvaXWkfuKXiEf/S6MvF9w0MFAl8VSpEACgkQf/S6MvF9
+w0OoXQ//aV7u8Q3LO6+yzmhnP5Mr4K/j16dVyjxaUd6+kf95xT2ng9ivvEWqguHh
+XOeRPW6Mbs4hfW2SpUfeeKZtjRxEQ/G6H2wqVE7ZQR5UQfO0XwuTRJjuFeOSbqj9
+lrNvUh7eoZWPlQUEgjOpGMJJrJpI6lE9ibT3JP7HFS0ejmohiu5A5R+DKR5yLfX6
+VhbWmHe5xpiXZ2+Dwhhu0oJ+Mm+4qSftAuPRqrad15isfrVbJc763t+XoV+KyjJV
+P3RUlCSNgN6OwUukOMrAy7rgEQlExJkFU08t6wvQ755PvAyd7oU98hqSdl/uwc5D
+pqhnctVV+xbfHjL4OF9WYlykCNFYV13iQIJ5SCLLBb1ZNNTfcFzr2QjzFn50JA+C
+c4Ccli2RfoyumQjc9h0ucW4wiQraSrJPWydGK7YsXuzo8Fx9E5ib0aHC0khqR8gy
+2NLa9VkAm4pskRQdKtE3YLykpittd4ixjiMtsD8TeQXskLgzfRERwyO2tuJ6QR0A
+RdcnZuMDJRV7M32t7IcDhwrqwJubO36/bOOR9il7dfQ75vU6r2kGD2nHA+lBMZdZ
+ZBTEHIn/kMEZImLvb5SC0VQEKcXKy2FRv0QajJYzfuMlLEvZZHEX9Su2mYf5d0Z6
+jdGoRSuBydp+CuCLCCSk8OT9hhov8rZ5JvqPpxfB6jzcjmxBaI8=
+=UDoL
+-----END PGP SIGNATURE-----
+
+--ZQoaTBgo848hWk0E0C9NphXkPLcGLe8RU--
+
+--===============1103243883==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/nouveau
+
+--===============1103243883==--
