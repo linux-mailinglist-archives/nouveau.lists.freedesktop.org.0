@@ -1,63 +1,127 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id A6DBC22A966
-	for <lists+nouveau@lfdr.de>; Thu, 23 Jul 2020 09:17:37 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8D73422A976
+	for <lists+nouveau@lfdr.de>; Thu, 23 Jul 2020 09:17:51 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id CF5996E83E;
-	Thu, 23 Jul 2020 07:17:30 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D18E56E84F;
+	Thu, 23 Jul 2020 07:17:33 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-lj1-x241.google.com (mail-lj1-x241.google.com
- [IPv6:2a00:1450:4864:20::241])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 58D796E1B8
- for <nouveau@lists.freedesktop.org>; Fri, 17 Jul 2020 21:30:33 +0000 (UTC)
-Received: by mail-lj1-x241.google.com with SMTP id h22so14227380lji.9
- for <nouveau@lists.freedesktop.org>; Fri, 17 Jul 2020 14:30:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=shutemov-name.20150623.gappssmtp.com; s=20150623;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to;
- bh=tcwoPeZcUmmZK55W/4y74kWGLw1PTNzkeVRBgCwcmFs=;
- b=jsCwnicEIjKcX0BlOO4SSBC01sjaGh9hsow8FGe2PHaZQQ1RQQEpoaOfyawAGJk2P7
- pqU59+YUleCrZhy2J+o3fWYw0fLstHNlUh+j7NA5bP+41mF2FkMbX/BkvRESX9JpyqRT
- Bxg8RB+9X0IFMoOOUzUEtuYglex9gaFD0+5SB+9yNhq23EHgkOvjOxjhTys6t48ioap+
- yh+gl3RIRiFTvIFq/in8n33ri6Ui15SUuw6wc3DtjxIILiAa3UQExlwgTnUSiLcy+NYO
- u2pqjlKe6QE1kksoZ3qYTQWiJLSdQLiMhzNNYIpS/nTX0II4WCoA4q6HiRdpokOXqYgV
- mImA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=tcwoPeZcUmmZK55W/4y74kWGLw1PTNzkeVRBgCwcmFs=;
- b=gT4B/DqGljx89TSoml23s5CjcKaYiXsEVOTmrGPbFB6YXgyWilYBOF61rPDD+wxLQ7
- ccMElHoNxlP1eL/ep7tYb1A+YkdXYSUX5YJVXxQyZKaELf95jvVYEUUH/3e6fRxi245Y
- h/A64HZVNJSU+JQdt7TzBK03qMBTjoinYcWRHdA/Doei6tcKFJzD4+xv9liJ1C6AFlrX
- lWiCCY9ORX1JiwkdLLAtJUF5IBWXrIvXZomFLp8n8XpkR5hITQWo386uVoCSozIQKJSO
- sEfdZPyMiwfPtkV9aFTjKwuhrhTwBwCrxIG3JPn/8DFvAbTNQgFs+L1DyvVovsu4GTwu
- tCtw==
-X-Gm-Message-State: AOAM533K65UcpGi1BGIG6kyHhvQTfpLkc4zN5TURj0fehjBkjp9vWRB0
- jHnSuNbuUIrpchbkQvTOU1WKUg==
-X-Google-Smtp-Source: ABdhPJzLYaBuywYktzKyT3d3L8nNk3BLkUvnFZ0Ezs1FOfyo79yp3odlXmEzukOR29ixImYnN724Ew==
-X-Received: by 2002:a2e:b702:: with SMTP id j2mr4960261ljo.354.1595021431429; 
- Fri, 17 Jul 2020 14:30:31 -0700 (PDT)
-Received: from box.localdomain ([86.57.175.117])
- by smtp.gmail.com with ESMTPSA id y24sm2091249lfy.49.2020.07.17.14.30.30
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 17 Jul 2020 14:30:30 -0700 (PDT)
-Received: by box.localdomain (Postfix, from userid 1000)
- id A444C1021DF; Sat, 18 Jul 2020 00:30:26 +0300 (+03)
-Date: Sat, 18 Jul 2020 00:30:26 +0300
-From: "Kirill A. Shutemov" <kirill@shutemov.name>
-To: James Jones <jajones@nvidia.com>
-Message-ID: <20200717213026.eisp7qaf4ckskemx@box>
-References: <20200717185757.2786-1-jajones@nvidia.com>
-MIME-Version: 1.0
+Received: from nat-hk.nvidia.com (nat-hk.nvidia.com [203.18.50.4])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id BCD8889D8A
+ for <nouveau@lists.freedesktop.org>; Mon, 20 Jul 2020 18:36:49 +0000 (UTC)
+Received: from hkpgpgate102.nvidia.com (Not Verified[10.18.92.77]) by
+ nat-hk.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
+ id <B5f15e43f0000>; Tue, 21 Jul 2020 02:36:47 +0800
+Received: from HKMAIL102.nvidia.com ([10.18.16.11])
+ by hkpgpgate102.nvidia.com (PGP Universal service);
+ Mon, 20 Jul 2020 11:36:47 -0700
+X-PGP-Universal: processed;
+ by hkpgpgate102.nvidia.com on Mon, 20 Jul 2020 11:36:47 -0700
+Received: from HKMAIL102.nvidia.com (10.18.16.11) by HKMAIL102.nvidia.com
+ (10.18.16.11) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Mon, 20 Jul
+ 2020 18:36:47 +0000
+Received: from NAM11-CO1-obe.outbound.protection.outlook.com (104.47.56.171)
+ by HKMAIL102.nvidia.com (10.18.16.11) with Microsoft SMTP Server (TLS) id
+ 15.0.1473.3 via Frontend Transport; Mon, 20 Jul 2020 18:36:47 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=nY8/sjq9c9J8KbuHCvZOw2MHWSJEs/rvmrLFS9UAjyU0h5rWGqtM+P6kQfcrsgLXDK13kbliL9201NfCFr7ZY/qXy6/+UhY38MXU3LrA2Ojyhlag8O3JHokd6MALba/0kWfr13A97U5H84zMlNfrM5mojRevuaMgs3wKeTYx6Cb5eJnMZoZs8mfJV/o2qLtQSGJpvrHeQauxeUR8tI1x/TJAcax/3jK/QM6szmWWxe8BPJzomalqEV4uONLzE8rh/IIIEfsQ+uYAMu+MBIy+ep9bjDze80LNBrAuObV7tB5iK4FgBzBDoeLxJd/RVjsEn66jziNXksMd97DUX/Zv4w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=iRJMNpLw9h0OX+dwUH71xKj7w54MkBUWfISG60qBweI=;
+ b=EgUlD6hJEZwHxv1Vrd4Egka+gmXgNTgQy0Bov2cyHUeprEbDA3O/5fHNZrf68/avKdCnqL6PnfFWQX+WZexMsp6Gsia+zRr4GmxlCaqXs0JaSa34IA2Vu/Hvbe61IHaAYIZ7XeBNJ2Z5ZhVesyRkctMfBjK7H+cdh+45gHhvG/RII8s0oUPbmz1OQZzKVZl/TnknJcv9XCRw0UzQUGRo2Qual3equfmT7pW87SYKNp0417whG0fCH6nSTJkw5I+Yvvv0wE4FSSkAfXDuw9bfKeVdp1prMVtjvMpYsdSRPF1zRLQAlDmfqBBBmIarvJgNPOJ/v3XaB+H9xVpXUNbEkg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+Authentication-Results: nvidia.com; dkim=none (message not signed)
+ header.d=none;nvidia.com; dmarc=none action=none header.from=nvidia.com;
+Received: from DM6PR12MB3834.namprd12.prod.outlook.com (2603:10b6:5:14a::12)
+ by DM6PR12MB4500.namprd12.prod.outlook.com (2603:10b6:5:28f::13) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3195.25; Mon, 20 Jul
+ 2020 18:36:45 +0000
+Received: from DM6PR12MB3834.namprd12.prod.outlook.com
+ ([fe80::1d53:7cb4:c3d7:2b54]) by DM6PR12MB3834.namprd12.prod.outlook.com
+ ([fe80::1d53:7cb4:c3d7:2b54%6]) with mapi id 15.20.3195.025; Mon, 20 Jul 2020
+ 18:36:45 +0000
+Date: Mon, 20 Jul 2020 15:36:43 -0300
+From: Jason Gunthorpe <jgg@nvidia.com>
+To: Ralph Campbell <rcampbell@nvidia.com>
+Message-ID: <20200720183643.GA3028737@nvidia.com>
+References: <20200713172149.2310-1-rcampbell@nvidia.com>
+ <20200713172149.2310-3-rcampbell@nvidia.com>
 Content-Disposition: inline
-In-Reply-To: <20200717185757.2786-1-jajones@nvidia.com>
+In-Reply-To: <20200713172149.2310-3-rcampbell@nvidia.com>
+X-ClientProxiedBy: MN2PR05CA0009.namprd05.prod.outlook.com
+ (2603:10b6:208:c0::22) To DM6PR12MB3834.namprd12.prod.outlook.com
+ (2603:10b6:5:14a::12)
+MIME-Version: 1.0
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from mlx.ziepe.ca (156.34.48.30) by
+ MN2PR05CA0009.namprd05.prod.outlook.com (2603:10b6:208:c0::22) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.3216.14 via Frontend Transport; Mon, 20 Jul 2020 18:36:44 +0000
+Received: from jgg by mlx with local (Exim 4.94)	(envelope-from
+ <jgg@nvidia.com>)	id 1jxaeZ-00CiAW-3f; Mon, 20 Jul 2020 15:36:43 -0300
+X-Originating-IP: [156.34.48.30]
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: c808207f-a1af-4cf4-510b-08d82cdbda24
+X-MS-TrafficTypeDiagnostic: DM6PR12MB4500:
+X-MS-Exchange-Transport-Forked: True
+X-Microsoft-Antispam-PRVS: <DM6PR12MB450021D2A4FAE4168D3A7B19C27B0@DM6PR12MB4500.namprd12.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:4941;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: Xgt2rZXayLO6UrkgewBx1TR9+l+I2PISPyZyIPvTuwEgYCdH8MDjv5q+dY1SsV5nICCABnIcvdffPuK8RJbnu8Eg4Tgyq+DA+i98xbmTQKp3mHIHnZm0ijE7PJ/kKx1Q2vPuGyjYYRezrD/Wj4IKDdHUHio9NhIkx/7RBr3xcJ1pSq+dPQMQQ3gsqsY7WkJLKSQ/jFNzSDoE1Hp1mH6SXWnyz0eF/9NgoHDwGwX1QQZdK1gPUmubmDdeZVsYEzJmyHXwhFHsvUHu38Hb919gU4i6ED1Ze0PFUhObuSA6heSxLTB42V/prP4Q8mGO1ytS
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DM6PR12MB3834.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFTY:;
+ SFS:(4636009)(39860400002)(136003)(366004)(376002)(396003)(346002)(66476007)(86362001)(66946007)(478600001)(426003)(26005)(8676002)(8936002)(1076003)(7416002)(66556008)(4326008)(6636002)(83380400001)(36756003)(37006003)(5660300002)(316002)(6862004)(2616005)(33656002)(2906002)(9786002)(54906003)(186003)(9746002);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData: Ciy3jYTXftI+6cFABjqu4GWifZFfJxyZPIuoKpLxL/mYixyr5856X/EG/8odG5Y32iPTZqfmZydiY9uD5JkCZeVu8DvW9fALWmGqz2HEhAmIxCkMd9VPkBBLd6kYsp10/aam7zV2NTXOeQGrTbQtFcEc13Voqw7mSFsCx3mW3V4bhTBRG26K+ysagWKzWVvDR+TOFR60VC9CoqsHTheBuZJtQi6UN0J/jyXefca9mQuqaosmlaVfQcf9coe8DMlHJ7TH6qqOvVq8L9WufqN81SlG3eoe4IEBTiJ276Z7dZJb6vmwHkwrKseKgjtQPSXoFEOlp2uN5UcJAITwNT/8IfuawSfBUAkH4wQOzdZK35mZ7TTd35C4wvrAiKZ4HNN0k20bNQsTu3Nx9lU2LU04OY7CtGV3jRcbe/97+tEoBRDJ3e2n8UjP00eIePrMcasOJqsb2Ni1KjJHmZMeXl+7f12dH4YLGpYOc23+1VJuwuk=
+X-MS-Exchange-CrossTenant-Network-Message-Id: c808207f-a1af-4cf4-510b-08d82cdbda24
+X-MS-Exchange-CrossTenant-AuthSource: DM6PR12MB3834.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Jul 2020 18:36:45.0634 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: S0NeGE4Aqqjmhdr4cAGLvEVnsm9qsLhU6gFOgW21ylE5/0lFvOwHFmSH8q/0gpbi
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4500
+X-OriginatorOrg: Nvidia.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
+ t=1595270207; bh=iRJMNpLw9h0OX+dwUH71xKj7w54MkBUWfISG60qBweI=;
+ h=X-PGP-Universal:ARC-Seal:ARC-Message-Signature:
+ ARC-Authentication-Results:Authentication-Results:Date:From:To:CC:
+ Subject:Message-ID:References:Content-Type:Content-Disposition:
+ In-Reply-To:X-ClientProxiedBy:MIME-Version:
+ X-MS-Exchange-MessageSentRepresentingType:X-Originating-IP:
+ X-MS-PublicTrafficType:X-MS-Office365-Filtering-Correlation-Id:
+ X-MS-TrafficTypeDiagnostic:X-MS-Exchange-Transport-Forked:
+ X-Microsoft-Antispam-PRVS:X-MS-Oob-TLC-OOBClassifiers:
+ X-MS-Exchange-SenderADCheck:X-Microsoft-Antispam:
+ X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
+ X-MS-Exchange-AntiSpam-MessageData:
+ X-MS-Exchange-CrossTenant-Network-Message-Id:
+ X-MS-Exchange-CrossTenant-AuthSource:
+ X-MS-Exchange-CrossTenant-AuthAs:
+ X-MS-Exchange-CrossTenant-OriginalArrivalTime:
+ X-MS-Exchange-CrossTenant-FromEntityHeader:
+ X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
+ X-MS-Exchange-CrossTenant-UserPrincipalName:
+ X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-OriginatorOrg;
+ b=T6tcbHgYb6OfYKE8kuO+G3hA7tPnEnYgCWyNxzDwmVjCv+PrPkFcDiYy8U3OR9W46
+ 6R54uQMFIv0Q+CYVbjNMWxOHZSPwM3N/uHKnGmmVlIgKP6AIlVI5Rl9efogOgemh9N
+ c/OatjkYkf/NYN51WYidvl3lOJ5QLMMpRp7WYbMWcRh2N32hiKWzTn1lCzFZtgSjN9
+ SNTwzaxPbJxlaPWbcC2nkKoimyPixEQvgl3CNLsZweU669H64bKGru3yPblzcQJXLK
+ dKl9CY5dHjFpqKhhnxYXcir0m0/qSkfm7A173VOFQxkr1BVcjgpHq/vYar0tIdE7sz
+ RyotlBAPn/mOQ==
 X-Mailman-Approved-At: Thu, 23 Jul 2020 07:17:29 +0000
-Subject: Re: [Nouveau] [PATCH] drm/nouveau: Accept 'legacy' format modifiers
+Subject: Re: [Nouveau] [PATCH v2 2/5] mm/migrate: add a direction parameter
+ to migrate_vma
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,186 +133,90 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Ben Skeggs <bskeggs@redhat.com>,
- dri-devel <dri-devel@lists.freedesktop.org>,
- Nouveau <nouveau@lists.freedesktop.org>
+Cc: linux-rdma@vger.kernel.org, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, kvm-ppc@vger.kernel.org,
+ Bharata B Rao <bharata@linux.ibm.com>, linux-mm@kvack.org,
+ Ben Skeggs <bskeggs@redhat.com>, linux-kselftest@vger.kernel.org,
+ Andrew Morton <akpm@linux-foundation.org>, Shuah Khan <shuah@kernel.org>,
+ Christoph Hellwig <hch@lst.de>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, Jul 17, 2020 at 11:57:57AM -0700, James Jones wrote:
-> Accept the DRM_FORMAT_MOD_NVIDIA_16BX2_BLOCK()
-> family of modifiers to handle broken userspace
-> Xorg modesetting and Mesa drivers.
+On Mon, Jul 13, 2020 at 10:21:46AM -0700, Ralph Campbell wrote:
+> The src_owner field in struct migrate_vma is being used for two purposes,
+> it implies the direction of the migration and it identifies device private
+> pages owned by the caller. Split this into separate parameters so the
+> src_owner field can be used just to identify device private pages owned
+> by the caller of migrate_vma_setup().
 > 
-> Tested with Xorg 1.20 modesetting driver,
-> weston@c46c70dac84a4b3030cd05b380f9f410536690fc,
-> gnome & KDE wayland desktops from Ubuntu 18.04,
-> and sway 1.5
+> Signed-off-by: Ralph Campbell <rcampbell@nvidia.com>
+> Reviewed-by: Bharata B Rao <bharata@linux.ibm.com>
+>  arch/powerpc/kvm/book3s_hv_uvmem.c     |  2 ++
+>  drivers/gpu/drm/nouveau/nouveau_dmem.c |  2 ++
+>  include/linux/migrate.h                | 12 +++++++++---
+>  lib/test_hmm.c                         |  2 ++
+>  mm/migrate.c                           |  5 +++--
+>  5 files changed, 18 insertions(+), 5 deletions(-)
 > 
-> Signed-off-by: James Jones <jajones@nvidia.com>
+> diff --git a/arch/powerpc/kvm/book3s_hv_uvmem.c b/arch/powerpc/kvm/book3s_hv_uvmem.c
+> index 09d8119024db..acbf14cd2d72 100644
+> +++ b/arch/powerpc/kvm/book3s_hv_uvmem.c
+> @@ -400,6 +400,7 @@ kvmppc_svm_page_in(struct vm_area_struct *vma, unsigned long start,
+>  	mig.end = end;
+>  	mig.src = &src_pfn;
+>  	mig.dst = &dst_pfn;
+> +	mig.dir = MIGRATE_VMA_FROM_SYSTEM;
+>  
+>  	/*
+>  	 * We come here with mmap_lock write lock held just for
+> @@ -578,6 +579,7 @@ kvmppc_svm_page_out(struct vm_area_struct *vma, unsigned long start,
+>  	mig.src = &src_pfn;
+>  	mig.dst = &dst_pfn;
+>  	mig.src_owner = &kvmppc_uvmem_pgmap;
+> +	mig.dir = MIGRATE_VMA_FROM_DEVICE_PRIVATE;
+>  
+>  	mutex_lock(&kvm->arch.uvmem_lock);
+>  	/* The requested page is already paged-out, nothing to do */
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_dmem.c b/drivers/gpu/drm/nouveau/nouveau_dmem.c
+> index e5c230d9ae24..e5c83b8ee82e 100644
+> +++ b/drivers/gpu/drm/nouveau/nouveau_dmem.c
+> @@ -183,6 +183,7 @@ static vm_fault_t nouveau_dmem_migrate_to_ram(struct vm_fault *vmf)
+>  		.src		= &src,
+>  		.dst		= &dst,
+>  		.src_owner	= drm->dev,
+> +		.dir		= MIGRATE_VMA_FROM_DEVICE_PRIVATE,
+>  	};
+>  
+>  	/*
+> @@ -615,6 +616,7 @@ nouveau_dmem_migrate_vma(struct nouveau_drm *drm,
+>  	struct migrate_vma args = {
+>  		.vma		= vma,
+>  		.start		= start,
+> +		.dir		= MIGRATE_VMA_FROM_SYSTEM,
+>  	};
+>  	unsigned long i;
+>  	u64 *pfns;
+> diff --git a/include/linux/migrate.h b/include/linux/migrate.h
+> index 3e546cbf03dd..620f2235d7d4 100644
+> +++ b/include/linux/migrate.h
+> @@ -180,6 +180,11 @@ static inline unsigned long migrate_pfn(unsigned long pfn)
+>  	return (pfn << MIGRATE_PFN_SHIFT) | MIGRATE_PFN_VALID;
+>  }
+>  
+> +enum migrate_vma_direction {
+> +	MIGRATE_VMA_FROM_SYSTEM,
+> +	MIGRATE_VMA_FROM_DEVICE_PRIVATE,
+> +};
 
-I tried and it crashes. Not sure if it's related.
+I would have guessed this is more natural as _FROM_DEVICE_ and
+TO_DEVICE_ ?
 
-[drm:drm_ioctl] pid=3327, dev=0xe200, auth=1, NOUVEAU_GEM_PUSHBUF
-[drm:vblank_disable_fn] disabling vblank on crtc 0
-[drm:drm_ioctl] pid=3351, dev=0xe200, auth=1, NOUVEAU_GEM_PUSHBUF
-[drm:drm_ioctl] pid=3351, dev=0xe200, auth=1, NOUVEAU_GEM_CPU_PREP
-[drm:drm_ioctl] pid=3351, dev=0xe200, auth=1, NOUVEAU_GEM_PUSHBUF
-[drm:drm_ioctl] pid=3351, dev=0xe200, auth=1, NOUVEAU_GEM_PUSHBUF
-BUG: unable to handle page fault for address: 00000000ffff059c
-#PF: supervisor read access in kernel mode
-#PF: error_code(0x0000) - not-present page
-PGD 0 P4D 0
-Oops: 0000 [#1] PREEMPT SMP PTI
-CPU: 13 PID: 3351 Comm: alacritty Tainted: G          I       5.8.0-rc5-00191-g086f86c033f9 #53
-Hardware name: Gigabyte Technology Co., Ltd. X299 AORUS Gaming 3 Pro/X299 AORUS Gaming 3 Pro-CF, BIOS F5d 11/28/2019
-RIP: 0010:kmem_cache_alloc_trace (/home/kas/linux/torvalds/mm/slub.c:272 /home/kas/linux/torvalds/mm/slub.c:278 /home/kas/linux/torvalds/mm/slub.c:292 /home/kas/linux/torvalds/mm/slub.c:2791 /home/kas/linux/torvalds/mm/slub.c:2832 /home/kas/linux/torvalds/mm/slub.c:2849) 
-Code: 8b 51 08 48 89 c8 65 48 03 05 d4 0e ca 70 48 8b 70 08 48 39 f2 75 e7 4c 8b 38 4d 85 ff 0f 84 8f 01 00 00 8b 45 20 48 8b 7d 00 <49> 8b 1c 07 40 f6 c7 0f 0f 85 95 01 00 00 48 8d 8a 80 00 00 00 4c
-All code
-========
-   0:	8b 51 08             	mov    0x8(%rcx),%edx
-   3:	48 89 c8             	mov    %rcx,%rax
-   6:	65 48 03 05 d4 0e ca 	add    %gs:0x70ca0ed4(%rip),%rax        # 0x70ca0ee2
-   d:	70 
-   e:	48 8b 70 08          	mov    0x8(%rax),%rsi
-  12:	48 39 f2             	cmp    %rsi,%rdx
-  15:	75 e7                	jne    0xfffffffffffffffe
-  17:	4c 8b 38             	mov    (%rax),%r15
-  1a:	4d 85 ff             	test   %r15,%r15
-  1d:	0f 84 8f 01 00 00    	je     0x1b2
-  23:	8b 45 20             	mov    0x20(%rbp),%eax
-  26:	48 8b 7d 00          	mov    0x0(%rbp),%rdi
-  2a:*	49 8b 1c 07          	mov    (%r15,%rax,1),%rbx		<-- trapping instruction
-  2e:	40 f6 c7 0f          	test   $0xf,%dil
-  32:	0f 85 95 01 00 00    	jne    0x1cd
-  38:	48 8d 8a 80 00 00 00 	lea    0x80(%rdx),%rcx
-  3f:	4c                   	rex.WR
+All the callers of this API are device drivers managing their
+DEVICE_PRIVATE, right?
 
-Code starting with the faulting instruction
-===========================================
-   0:	49 8b 1c 07          	mov    (%r15,%rax,1),%rbx
-   4:	40 f6 c7 0f          	test   $0xf,%dil
-   8:	0f 85 95 01 00 00    	jne    0x1a3
-   e:	48 8d 8a 80 00 00 00 	lea    0x80(%rdx),%rcx
-  15:	4c                   	rex.WR
-RSP: 0018:ffffa8a381bcfba0 EFLAGS: 00010206
-RAX: 0000000000000030 RBX: ffff9c0b15e05e00 RCX: 000000000003fe50
-RDX: 000000000000fc8d RSI: 000000000000fc8d RDI: 000000000003fe50
-RBP: ffff9c0b18407840 R08: 0000000000000000 R09: 0000000000000001
-R10: ffff9c0b06c28000 R11: 0000000000000001 R12: 0000000000000dc0
-[drm:drm_ioctl] pid=3327, dev=0xe200, auth=1, DRM_IOCTL_CRTC_GET_SEQUENCE
-R13: 0000000000000060 R14: ffffffff8fa35a47 R15: 00000000ffff056c
-FS:  00007fbe7a8e3900(0000) GS:ffff9c0b1f880000(0000) knlGS:0000000000000000
-CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-CR2: 00000000ffff059c CR3: 000000103c7fe004 CR4: 00000000003606e0
-DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
-DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
-Call Trace:
-nouveau_fence_new (/home/kas/linux/torvalds/include/linux/slab.h:555 /home/kas/linux/torvalds/include/linux/slab.h:669 /home/kas/linux/torvalds/drivers/gpu/drm/nouveau/nouveau_fence.c:423) 
-[drm:drm_vblank_enable] enabling vblank on crtc 0, ret: 0
-nouveau_gem_ioctl_pushbuf (/home/kas/linux/torvalds/drivers/gpu/drm/nouveau/nouveau_gem.c:852) 
-[drm:drm_ioctl] pid=3327, dev=0xe200, auth=1, DRM_IOCTL_CRTC_QUEUE_SEQUENCE
-? nouveau_gem_ioctl_new (/home/kas/linux/torvalds/drivers/gpu/drm/nouveau/nouveau_gem.c:680) 
-? drm_ioctl_kernel (/home/kas/linux/torvalds/drivers/gpu/drm/drm_ioctl.c:793) 
-? nouveau_gem_ioctl_new (/home/kas/linux/torvalds/drivers/gpu/drm/nouveau/nouveau_gem.c:680) 
-drm_ioctl_kernel (/home/kas/linux/torvalds/drivers/gpu/drm/drm_ioctl.c:793) 
-drm_ioctl (/home/kas/linux/torvalds/drivers/gpu/drm/drm_ioctl.c:888) 
-? nouveau_gem_ioctl_new (/home/kas/linux/torvalds/drivers/gpu/drm/nouveau/nouveau_gem.c:680) 
-? _raw_spin_unlock_irqrestore (/home/kas/linux/torvalds/arch/x86/include/asm/irqflags.h:41 /home/kas/linux/torvalds/arch/x86/include/asm/irqflags.h:84 /home/kas/linux/torvalds/include/linux/spinlock_api_smp.h:160 /home/kas/linux/torvalds/kernel/locking/spinlock.c:191) 
-? lockdep_hardirqs_on (/home/kas/linux/torvalds/kernel/locking/lockdep.c:3727 (discriminator 3)) 
-? _raw_spin_unlock_irqrestore (/home/kas/linux/torvalds/arch/x86/include/asm/preempt.h:102 /home/kas/linux/torvalds/include/linux/spinlock_api_smp.h:161 /home/kas/linux/torvalds/kernel/locking/spinlock.c:191) 
-nouveau_drm_ioctl (/home/kas/linux/torvalds/drivers/gpu/drm/nouveau/nouveau_drm.c:1120) 
-ksys_ioctl (/home/kas/linux/torvalds/fs/ioctl.c:48 /home/kas/linux/torvalds/fs/ioctl.c:753) 
-__x64_sys_ioctl (/home/kas/linux/torvalds/fs/ioctl.c:762 /home/kas/linux/torvalds/fs/ioctl.c:760 /home/kas/linux/torvalds/fs/ioctl.c:760) 
-do_syscall_64 (/home/kas/linux/torvalds/arch/x86/entry/common.c:384) 
-entry_SYSCALL_64_after_hwframe (/home/kas/linux/torvalds/arch/x86/entry/entry_64.S:124) 
-RIP: 0033:0x7fbe7ab9cd37
-Code: Bad RIP value.
-
-Code starting with the faulting instruction
-===========================================
-RSP: 002b:00007fff4c0cf0e8 EFLAGS: 00000246 ORIG_RAX: 0000000000000010
-RAX: ffffffffffffffda RBX: 00007fff4c0cf150 RCX: 00007fbe7ab9cd37
-RDX: 00007fff4c0cf150 RSI: 00000000c0406481 RDI: 0000000000000009
-RBP: 00000000c0406481 R08: 000055db823225e8 R09: 000055db8231b5e8
-R10: 00007fbe79ce0920 R11: 0000000000000246 R12: 000055db823115e0
-R13: 0000000000000009 R14: 000055db8230ffc0 R15: 000055db8230f380
-Modules linked in:
-CR2: 00000000ffff059c
----[ end trace 9db4c132a431e9c9 ]---
-RIP: 0010:kmem_cache_alloc_trace (/home/kas/linux/torvalds/mm/slub.c:272 /home/kas/linux/torvalds/mm/slub.c:278 /home/kas/linux/torvalds/mm/slub.c:292 /home/kas/linux/torvalds/mm/slub.c:2791 /home/kas/linux/torvalds/mm/slub.c:2832 /home/kas/linux/torvalds/mm/slub.c:2849) 
-Code: 8b 51 08 48 89 c8 65 48 03 05 d4 0e ca 70 48 8b 70 08 48 39 f2 75 e7 4c 8b 38 4d 85 ff 0f 84 8f 01 00 00 8b 45 20 48 8b 7d 00 <49> 8b 1c 07 40 f6 c7 0f 0f 85 95 01 00 00 48 8d 8a 80 00 00 00 4c
-All code
-========
-   0:	8b 51 08             	mov    0x8(%rcx),%edx
-   3:	48 89 c8             	mov    %rcx,%rax
-   6:	65 48 03 05 d4 0e ca 	add    %gs:0x70ca0ed4(%rip),%rax        # 0x70ca0ee2
-   d:	70 
-   e:	48 8b 70 08          	mov    0x8(%rax),%rsi
-  12:	48 39 f2             	cmp    %rsi,%rdx
-  15:	75 e7                	jne    0xfffffffffffffffe
-  17:	4c 8b 38             	mov    (%rax),%r15
-  1a:	4d 85 ff             	test   %r15,%r15
-  1d:	0f 84 8f 01 00 00    	je     0x1b2
-  23:	8b 45 20             	mov    0x20(%rbp),%eax
-  26:	48 8b 7d 00          	mov    0x0(%rbp),%rdi
-  2a:*	49 8b 1c 07          	mov    (%r15,%rax,1),%rbx		<-- trapping instruction
-  2e:	40 f6 c7 0f          	test   $0xf,%dil
-  32:	0f 85 95 01 00 00    	jne    0x1cd
-  38:	48 8d 8a 80 00 00 00 	lea    0x80(%rdx),%rcx
-  3f:	4c                   	rex.WR
-
-Code starting with the faulting instruction
-===========================================
-   0:	49 8b 1c 07          	mov    (%r15,%rax,1),%rbx
-   4:	40 f6 c7 0f          	test   $0xf,%dil
-   8:	0f 85 95 01 00 00    	jne    0x1a3
-   e:	48 8d 8a 80 00 00 00 	lea    0x80(%rdx),%rcx
-  15:	4c                   	rex.WR
-RSP: 0018:ffffa8a381bcfba0 EFLAGS: 00010206
-RAX: 0000000000000030 RBX: ffff9c0b15e05e00 RCX: 000000000003fe50
-RDX: 000000000000fc8d RSI: 000000000000fc8d RDI: 000000000003fe50
-RBP: ffff9c0b18407840 R08: 0000000000000000 R09: 0000000000000001
-R10: ffff9c0b06c28000 R11: 0000000000000001 R12: 0000000000000dc0
-R13: 0000000000000060 R14: ffffffff8fa35a47 R15: 00000000ffff056c
-FS:  00007fbe7a8e3900(0000) GS:ffff9c0b1f880000(0000) knlGS:0000000000000000
-CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-CR2: 00000000ffff059c CR3: 000000103c7fe004 CR4: 00000000003606e0
-DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
-DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
-BUG: sleeping function called from invalid context at include/linux/percpu-rwsem.h:49
-in_atomic(): 0, irqs_disabled(): 1, non_block: 0, pid: 3351, name: alacritty
-INFO: lockdep is turned off.
-irq event stamp: 302346
-hardirqs last enabled at (302345): kfree_call_rcu (/home/kas/linux/torvalds/arch/x86/include/asm/irqflags.h:41 (discriminator 2) /home/kas/linux/torvalds/arch/x86/include/asm/irqflags.h:84 (discriminator 2) /home/kas/linux/torvalds/kernel/rcu/tree.c:3287 (discriminator 2)) 
-hardirqs last disabled at (302346): idtentry_enter_cond_rcu (/home/kas/linux/torvalds/arch/x86/entry/common.c:652) 
-softirqs last enabled at (302186): __do_softirq (/home/kas/linux/torvalds/arch/x86/include/asm/preempt.h:26 /home/kas/linux/torvalds/kernel/softirq.c:320) 
-softirqs last disabled at (302175): asm_call_on_stack (/home/kas/linux/torvalds/arch/x86/entry/entry_64.S:719) 
-CPU: 13 PID: 3351 Comm: alacritty Tainted: G      D   I       5.8.0-rc5-00191-g086f86c033f9 #53
-Hardware name: Gigabyte Technology Co., Ltd. X299 AORUS Gaming 3 Pro/X299 AORUS Gaming 3 Pro-CF, BIOS F5d 11/28/2019
-Call Trace:
-dump_stack (/home/kas/linux/torvalds/lib/dump_stack.c:120) 
-___might_sleep.cold (/home/kas/linux/torvalds/kernel/sched/core.c:6900) 
-exit_signals (/home/kas/linux/torvalds/include/linux/percpu-rwsem.h:51 /home/kas/linux/torvalds/include/linux/cgroup-defs.h:733 /home/kas/linux/torvalds/kernel/signal.c:2828) 
-do_exit (/home/kas/linux/torvalds/kernel/exit.c:764) 
-? ksys_ioctl (/home/kas/linux/torvalds/fs/ioctl.c:48 /home/kas/linux/torvalds/fs/ioctl.c:753) 
-rewind_stack_do_exit (/home/kas/linux/torvalds/arch/x86/entry/thunk_64.S:40) 
-RIP: 0033:0x7fbe7ab9cd37
-Code: Bad RIP value.
-
-Code starting with the faulting instruction
-===========================================
-RSP: 002b:00007fff4c0cf0e8 EFLAGS: 00000246 ORIG_RAX: 0000000000000010
-RAX: ffffffffffffffda RBX: 00007fff4c0cf150 RCX: 00007fbe7ab9cd37
-RDX: 00007fff4c0cf150 RSI: 00000000c0406481 RDI: 0000000000000009
-RBP: 00000000c0406481 R08: 000055db823225e8 R09: 000055db8231b5e8
-R10: 00007fbe79ce0920 R11: 0000000000000246 R12: 000055db823115e0
-R13: 0000000000000009 R14: 000055db8230ffc0 R15: 000055db8230f380
-
--- 
- Kirill A. Shutemov
+Jason
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
