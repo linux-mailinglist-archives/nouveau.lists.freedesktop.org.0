@@ -2,65 +2,90 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 08781225C80
-	for <lists+nouveau@lfdr.de>; Mon, 20 Jul 2020 12:17:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4D124226E6D
+	for <lists+nouveau@lfdr.de>; Mon, 20 Jul 2020 20:40:32 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id ACBC96E30D;
-	Mon, 20 Jul 2020 10:17:20 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E25E78923A;
+	Mon, 20 Jul 2020 18:40:29 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [205.139.110.120])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 101986E30D
- for <nouveau@lists.freedesktop.org>; Mon, 20 Jul 2020 10:17:18 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1595240238;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=Y99N3HO5g+WhE1TjJOE+/XsdF+y0jzvQOLZP2UKx7lM=;
- b=iXxDLnkZWChRvva/7YuPqORJIjrqT1VvDGWZzrPclxf50Us4k7Ho/ySbPY+VNOvCWBn0Wt
- byEtF/NtpIXXSp0+nTKMXhtMetuI9m3acrf604y9TUElAHmHnWttUFo19fzoitV+G+pSjZ
- NyVo1VLNlkLMCMMzbDSA2aqnVfAT7Rw=
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com
- [209.85.222.198]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-192-bLMzxerxOgyLOB0mAuAJdw-1; Mon, 20 Jul 2020 06:17:16 -0400
-X-MC-Unique: bLMzxerxOgyLOB0mAuAJdw-1
-Received: by mail-qk1-f198.google.com with SMTP id i3so11133043qkf.0
- for <nouveau@lists.freedesktop.org>; Mon, 20 Jul 2020 03:17:16 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=Y99N3HO5g+WhE1TjJOE+/XsdF+y0jzvQOLZP2UKx7lM=;
- b=KSzgllXpov42/QcN9mEsQjn0OX/JyWI+xe43jG+z8GiaVNodSW08uoX5DmADUb+7fb
- pXxwUB4NklYaocmTrEzXFETojLc/JBt+VoTm49xW/BsVfortBic/aMvgxFflXbAIEDJI
- aBXGUuQdvVvDth1NCqYZeYVqzSKSXeT/6uRtYFFP4zM4am+cfmsX7/n2empjb9z1kvxM
- B2A0zowa73OWdpwzXgt2o4qAH6gY7KFC5f+3jieEYocxKsMNQToSyaC0wbTHZyPBQa6i
- 4lciNQqfpfJmGoRt2CEnt0IMChyADWTySlIBoY+Mlsgf4TroP8ANc8TA/TPtZXvfSQ15
- mMFQ==
-X-Gm-Message-State: AOAM531w13ij0erIFp+eJzoEp2pVlYk/gjMjrkLvGCxao1hISZRJAs+B
- mA1DZZGAHFeJigHV0FZQz2MmkeE4O2BB9aZaxag50BAlZGj+Wn/Tv7ydOOgAKwbNNMF0ZRBBHPZ
- hrRhKEhM4XPejzEpWPI54fIW+rD9wyzseOvJJfKfFcw==
-X-Received: by 2002:ac8:4250:: with SMTP id r16mr23291261qtm.378.1595240235927; 
- Mon, 20 Jul 2020 03:17:15 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJz6eRppsUdj+OcqUxbAewN8h1jl91t7/Dlnn5nvDs66q2TQMR7droK4ih5j7ccrpQu6tl74/h+hoe4dHN1Cets=
-X-Received: by 2002:ac8:4250:: with SMTP id r16mr23291239qtm.378.1595240235652; 
- Mon, 20 Jul 2020 03:17:15 -0700 (PDT)
+Received: from EUR04-HE1-obe.outbound.protection.outlook.com
+ (mail-eopbgr70077.outbound.protection.outlook.com [40.107.7.77])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0A6DE8923A
+ for <nouveau@lists.freedesktop.org>; Mon, 20 Jul 2020 18:40:28 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=TxRpbaa2GqJvMF97PiL9CfA/CHfmqksF9zuJxHyArhv1PtDGDCndiMJVhW7/2ckvoJ501KXGqyv7nvWSDUx6/v0BYcRy1/iB1q8nZDNvNqvEPg77rUqGbrrkD26WvAwzm+YKZO5sU3//gmSmc04iEBl9p6lud/HBDBPotsOMkmRQxLHjcja++t5F5IfsYzfjp7+etWLZ+4RRO+gCX0HuRJn0BYJmZqhm5dL7rS88I+faYIIzENAsJG3hLFYbj4TH3d6a0ItxY5ChNIDXHVw7y+ESbnrsKzcu7QROwLsmqQgMX4B71W0kKT9iHD3zdm/snEtNwcG7AnPq5YqM1VyLCQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=npWLCLv/r6IgBRYyM/CL6ujudwIX7pp4cvV158l6ikk=;
+ b=Xi7q/KQFH5tkjHU5hPArUQslEzznxySEcEvtX3+ncLiBjqoPzKiUHD289SUJ75c/NLjAfwauApdbSHTcVVsbbV8O/J30JYsx1AuYpvAKsgVaTqzKYkZEVf5KZL/W6dVh36HHRqytaSq1mB/eDy8ZvgnnzlD63Lo8Wu9Xcmq4SXY+ceQNGfxtjXiULksjRgcwDyle/YpDjwM4f7wI+BFWlqLHaBqq/VXN2SvN1R5NM1NXEHqxW9lmgxa4jc4f2bLvoV3cEmNGkE9ZJKcvyK57cL3X1qHazLNoUvibm2V74GmoYMjIus1C/yanPy8wBAnfDcHaD3vAB8LGPWqFj94zuw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=mellanox.com; dmarc=pass action=none header.from=mellanox.com;
+ dkim=pass header.d=mellanox.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Mellanox.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=npWLCLv/r6IgBRYyM/CL6ujudwIX7pp4cvV158l6ikk=;
+ b=WsgWAICM/6SMvMlJxSYRUC42u6uB+iq7gPw18bIB4OZy/j1znUE3tZ9l0nrSr1Bek7Vg7LBdBumaaEm4WQGpw40UvuFjpK2moOGZ0ltbbBAFm6Hu1N1O6ktGH+1Tk+r9tK2OM7f8uxq1dBG/SX1eQ0cPdx693XP3w9Zg7M6dcRw=
+Authentication-Results: nvidia.com; dkim=none (message not signed)
+ header.d=none;nvidia.com; dmarc=none action=none header.from=mellanox.com;
+Received: from VI1PR05MB4141.eurprd05.prod.outlook.com (2603:10a6:803:44::15)
+ by VI1PR05MB6143.eurprd05.prod.outlook.com (2603:10a6:803:ed::25)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3195.23; Mon, 20 Jul
+ 2020 18:40:24 +0000
+Received: from VI1PR05MB4141.eurprd05.prod.outlook.com
+ ([fe80::252e:52c7:170b:35d]) by VI1PR05MB4141.eurprd05.prod.outlook.com
+ ([fe80::252e:52c7:170b:35d%5]) with mapi id 15.20.3195.025; Mon, 20 Jul 2020
+ 18:40:24 +0000
+Date: Mon, 20 Jul 2020 15:40:20 -0300
+From: Jason Gunthorpe <jgg@mellanox.com>
+To: Ralph Campbell <rcampbell@nvidia.com>
+Message-ID: <20200720184020.GS2021248@mellanox.com>
+References: <20200713172149.2310-1-rcampbell@nvidia.com>
+ <20200713172149.2310-4-rcampbell@nvidia.com>
+Content-Disposition: inline
+In-Reply-To: <20200713172149.2310-4-rcampbell@nvidia.com>
+X-ClientProxiedBy: BL0PR02CA0010.namprd02.prod.outlook.com
+ (2603:10b6:207:3c::23) To VI1PR05MB4141.eurprd05.prod.outlook.com
+ (2603:10a6:803:44::15)
 MIME-Version: 1.0
-References: <20200717190547.648604-1-kherbst@redhat.com>
- <e7a8cb3a-e9f8-b78a-93f0-c09e5eb5ed10@canonical.com>
- <CACO55tvLCrqeV8MsVDbTaWP2EPAeZtfU08Kb2fVGCD6X+g3-rg@mail.gmail.com>
- <8ad1866d-eb61-a30c-5875-5ffbfd2e17e1@canonical.com>
-In-Reply-To: <8ad1866d-eb61-a30c-5875-5ffbfd2e17e1@canonical.com>
-From: Karol Herbst <kherbst@redhat.com>
-Date: Mon, 20 Jul 2020 12:17:04 +0200
-Message-ID: <CACO55ttJRpjZVSATSYo8bL_BStGACMO76kO8pZ5W+2vp6Ni6xA@mail.gmail.com>
-To: Alex Hung <alex.hung@canonical.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Subject: Re: [Nouveau] [PATCH] RFC: ACPI / OSI: remove workarounds for
- hybrid graphics laptops
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from mlx.ziepe.ca (156.34.48.30) by
+ BL0PR02CA0010.namprd02.prod.outlook.com (2603:10b6:207:3c::23) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.3195.19 via Frontend Transport; Mon, 20 Jul 2020 18:40:24 +0000
+Received: from jgg by mlx with local (Exim 4.94)	(envelope-from
+ <jgg@mellanox.com>)	id 1jxai4-00CiFI-K5; Mon, 20 Jul 2020 15:40:20 -0300
+X-Originating-IP: [156.34.48.30]
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-HT: Tenant
+X-MS-Office365-Filtering-Correlation-Id: 92c303b8-c85d-4ba3-a5f3-08d82cdc5d56
+X-MS-TrafficTypeDiagnostic: VI1PR05MB6143:
+X-Microsoft-Antispam-PRVS: <VI1PR05MB6143FCE5995166741DA1C983CF7B0@VI1PR05MB6143.eurprd05.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:7691;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: zBCYsUaeVOm0QrH/Y3PseZ+10cLYXOcbqvbTX5EZ8bR9sODEbzYcaOjsZUwvoMQSR05klVSiYXJQ3IMDMN+ZIiOMCcY19YX7+ZMqlnNfxu6B7Nul3p0XS/KhoK+v74ERQJkl0pnVMUAXWQt6/Rxm7oYEJlhoBgXH3v+wNvV/fhyDV0mcV8GLVUzEcTaJXKW7dQ9bqzWbsvAfseeu8CWFteteGSSqJHO648yK8dh7BAEWxjbVCA0GqG8ySTawadFnS2iGn/lSzRWyNCkXZ7becAJWvO3SXEllz3asgl8PlVAKXiePmXcWgpx2ypx3dHaoLR3G4EE0ywDCMx5qZIoWXw==
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:VI1PR05MB4141.eurprd05.prod.outlook.com; PTR:; CAT:NONE;
+ SFTY:;
+ SFS:(4636009)(366004)(136003)(39860400002)(346002)(376002)(396003)(2616005)(426003)(86362001)(4326008)(36756003)(66556008)(1076003)(7416002)(66476007)(66946007)(186003)(8936002)(26005)(316002)(9746002)(8676002)(2906002)(33656002)(6916009)(478600001)(5660300002)(9786002)(54906003)(83380400001);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData: WkkM8ahQ828K78k4gLxlcnpSQQxy0nmdFrhKS5xoMJNrYNNYVGaZv8GBD8B2B0cMENiR+1w+8U0DVraY9BTqjtINrGHHf9oKnfYxHrl/gGLl3o0n6wmi/gnNgmWw1VgMYcHBmj9VmxF77/kOaUBg04Z3nVhF+Dsd4D9AOi6yYK2Qf9zdTf0BBevXBsU4KlqBITGeQQm6Jms0mNFDT6xuOCxLu3jkV7oFfbNZEMbrtWWnCj2XQ/xC5FY4vY4AAWTzzpSxcevZ+tzP5qC2IeamkbHdp0RDxbE9JQqX985O8szLKJPfC+2SjfFF+5CrwVlnnV2KfDAEK+LTx0/+de2yetMx6dm3GDkrriyr+M2pZc89pt20bUpwCGsSr5ss8VhsHBUx8PP+vO1/xMZZVyr5sq88Wo6mOaXSGK+hSy0gm4KB+VTFMkmMkNr7SDvBKhJTiPPexZebjQUu9gGJ4gMzRUUh8V31HYKCYtp+xm/2NIo=
+X-OriginatorOrg: Mellanox.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 92c303b8-c85d-4ba3-a5f3-08d82cdc5d56
+X-MS-Exchange-CrossTenant-AuthSource: VI1PR05MB4141.eurprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Jul 2020 18:40:24.5380 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: a652971c-7d2e-4d9b-a6a4-d149256f461b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: UjDU8XZID2ZkY9KchkhTfbNRpeYoC398mUAyhX5h9QzaM9141xI3vVk0CabRT0uiP7V/ZI4se3s+JF+11jBCkA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR05MB6143
+Subject: Re: [Nouveau] [PATCH v2 3/5] mm/notifier: add migration
+ invalidation type
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -72,125 +97,108 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau <nouveau@lists.freedesktop.org>,
- "Rafael J. Wysocki" <rjw@rjwysocki.net>, LKML <linux-kernel@vger.kernel.org>,
- dri-devel <dri-devel@lists.freedesktop.org>,
- Linux ACPI Mailing List <linux-acpi@vger.kernel.org>,
- Len Brown <lenb@kernel.org>
+Cc: linux-rdma@vger.kernel.org, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, kvm-ppc@vger.kernel.org,
+ Bharata B Rao <bharata@linux.ibm.com>, linux-mm@kvack.org,
+ Ben Skeggs <bskeggs@redhat.com>, linux-kselftest@vger.kernel.org,
+ Andrew Morton <akpm@linux-foundation.org>, Shuah Khan <shuah@kernel.org>,
+ Christoph Hellwig <hch@lst.de>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Mon, Jul 20, 2020 at 3:19 AM Alex Hung <alex.hung@canonical.com> wrote:
->
-> On 2020-07-19 1:50 p.m., Karol Herbst wrote:
-> > On Fri, Jul 17, 2020 at 9:52 PM Alex Hung <alex.hung@canonical.com> wrote:
-> >>
-> >> On 2020-07-17 1:05 p.m., Karol Herbst wrote:
-> >>> It's hard to figure out what systems are actually affected and right now I
-> >>> don't see a good way of removing those...
-> >>>
-> >>> But I'd like to see thos getting removed and drivers fixed instead (which
-> >>> happened at least for nouveau).
-> >>>
-> >>> And as mentioned before, I prefer people working on fixing issues instead
-> >>> of spending time to add firmware level workarounds which are hard to know
-> >>> to which systems they apply to, hard to remove and basically a big huge
-> >>> pain to work with.> In the end I have no idea how to even figure out what systems are affected
-> >>> and which not by this, so I have no idea how to even verify we can safely
-> >>> remove this (which just means those are impossible to remove unless we risk
-> >>> breaking systems, which again makes those supper annoying to deal with).
-> >>>
-> >>> Also from the comments it's hard to get what those bits really do. Are they
-> >>> just preventing runtime pm or do the devices are powered down when booting?
-> >>> I am sure it's the former, still...
-> >>>
-> >>> Please, don't do this again.
-> >>>
-> >>> For now, those workaround prevent power savings on systems those workaround
-> >>> applies to, which might be any so those should get removed asap and if
-> >>> new issues arrise removing those please do a proper bug report and we can
-> >>> look into it and come up with a proper fix (and keep this patch out until
-> >>> we resolve all of those).
-> >>>
-> >>> Signed-off-by: Karol Herbst <kherbst@redhat.com>
-> >>> CC: Alex Hung <alex.hung@canonical.com>
-> >>> CC: "Rafael J. Wysocki" <rjw@rjwysocki.net>
-> >>> CC: Len Brown <lenb@kernel.org>
-> >>> CC: Lyude Paul <lyude@redhat.com>
-> >>> CC: linux-kernel@vger.kernel.org
-> >>> CC: dri-devel@lists.freedesktop.org
-> >>> CC: nouveau@lists.freedesktop.org
-> >>> ---
-> >>>  drivers/acpi/osi.c | 24 ------------------------
-> >>>  1 file changed, 24 deletions(-)
-> >>>
-> >>> diff --git a/drivers/acpi/osi.c b/drivers/acpi/osi.c
-> >>> index 9f68538091384..d4405e1ca9b97 100644
-> >>> --- a/drivers/acpi/osi.c
-> >>> +++ b/drivers/acpi/osi.c
-> >>> @@ -44,30 +44,6 @@ osi_setup_entries[OSI_STRING_ENTRIES_MAX] __initdata = {
-> >>>       {"Processor Device", true},
-> >>>       {"3.0 _SCP Extensions", true},
-> >>>       {"Processor Aggregator Device", true},
-> >>> -     /*
-> >>> -      * Linux-Dell-Video is used by BIOS to disable RTD3 for NVidia graphics
-> >>> -      * cards as RTD3 is not supported by drivers now.  Systems with NVidia
-> >>> -      * cards will hang without RTD3 disabled.
-> >>> -      *
-> >>> -      * Once NVidia drivers officially support RTD3, this _OSI strings can
-> >>> -      * be removed if both new and old graphics cards are supported.
-> >>> -      */
-> >>> -     {"Linux-Dell-Video", true},
-> >>> -     /*
-> >>> -      * Linux-Lenovo-NV-HDMI-Audio is used by BIOS to power on NVidia's HDMI
-> >>> -      * audio device which is turned off for power-saving in Windows OS.
-> >>> -      * This power management feature observed on some Lenovo Thinkpad
-> >>> -      * systems which will not be able to output audio via HDMI without
-> >>> -      * a BIOS workaround.
-> >>> -      */
-> >>> -     {"Linux-Lenovo-NV-HDMI-Audio", true},
-> >>> -     /*
-> >>> -      * Linux-HPI-Hybrid-Graphics is used by BIOS to enable dGPU to
-> >>> -      * output video directly to external monitors on HP Inc. mobile
-> >>> -      * workstations as Nvidia and AMD VGA drivers provide limited
-> >>> -      * hybrid graphics supports.
-> >>> -      */
-> >>> -     {"Linux-HPI-Hybrid-Graphics", true},
-> >>>  };
-> >>>
-> >>>  static u32 acpi_osi_handler(acpi_string interface, u32 supported)
-> >>>
-> >>
-> >> The changes were discussed and tested a while ago, and no crashes were
-> >> observed. Thanks for solving PM issues in nouveau.
-> >>
-> >> Acked-by: Alex Hung <alex.hung@canonical.com>
-> >>
-> >
-> > By any chance, do you have a list of systems implementing those workarounds?
-> >
->
-> I don't keep a list but the workaround, in theory, should only apply to
-> the systems with the specific nvidia hardware.
->
-> I reminded OEMs and ODMs that these _OSI strings were temporary
-> solutions, and highlighted we were going to remove them after our
-> discussion last year. If they were paying attentions recent systems
-> shouldn't have these _OSI strings.
->
+On Mon, Jul 13, 2020 at 10:21:47AM -0700, Ralph Campbell wrote:
+> Currently migrate_vma_setup() calls mmu_notifier_invalidate_range_start()
+> which flushes all device private page mappings whether or not a page
+> is being migrated to/from device private memory. In order to not disrupt
+> device mappings that are not being migrated, shift the responsibility
+> for clearing device private mappings to the device driver and leave
+> CPU page table unmapping handled by migrate_vma_setup(). To support
+> this, the caller of migrate_vma_setup() should always set struct
+> migrate_vma::src_owner to a non NULL value that matches the device
+> private page->pgmap->owner. This value is then passed to the struct
+> mmu_notifier_range with a new event type which the driver's invalidation
+> function can use to avoid device MMU invalidations.
+> 
+> Signed-off-by: Ralph Campbell <rcampbell@nvidia.com>
+>  include/linux/mmu_notifier.h | 7 +++++++
+>  mm/migrate.c                 | 8 +++++++-
+>  2 files changed, 14 insertions(+), 1 deletion(-)
+> 
+> diff --git a/include/linux/mmu_notifier.h b/include/linux/mmu_notifier.h
+> index fc68f3570e19..1921fcf6be5b 100644
+> +++ b/include/linux/mmu_notifier.h
+> @@ -38,6 +38,10 @@ struct mmu_interval_notifier;
+>   *
+>   * @MMU_NOTIFY_RELEASE: used during mmu_interval_notifier invalidate to signal
+>   * that the mm refcount is zero and the range is no longer accessible.
+> + *
+> + * @MMU_NOTIFY_MIGRATE: used during migrate_vma_collect() invalidate to signal
+> + * a device driver to possibly ignore the invalidation if the
+> + * migrate_pgmap_owner field matches the driver's device private pgmap owner.
+>   */
+>  enum mmu_notifier_event {
+>  	MMU_NOTIFY_UNMAP = 0,
+> @@ -46,6 +50,7 @@ enum mmu_notifier_event {
+>  	MMU_NOTIFY_PROTECTION_PAGE,
+>  	MMU_NOTIFY_SOFT_DIRTY,
+>  	MMU_NOTIFY_RELEASE,
+> +	MMU_NOTIFY_MIGRATE,
+>  };
+>  
+>  #define MMU_NOTIFIER_RANGE_BLOCKABLE (1 << 0)
+> @@ -264,6 +269,7 @@ struct mmu_notifier_range {
+>  	unsigned long end;
+>  	unsigned flags;
+>  	enum mmu_notifier_event event;
+> +	void *migrate_pgmap_owner;
+>  };
+>  
+>  static inline int mm_has_notifiers(struct mm_struct *mm)
+> @@ -513,6 +519,7 @@ static inline void mmu_notifier_range_init(struct mmu_notifier_range *range,
+>  	range->start = start;
+>  	range->end = end;
+>  	range->flags = flags;
+> +	range->migrate_pgmap_owner = NULL;
+>  }
+>  
+>  #define ptep_clear_flush_young_notify(__vma, __address, __ptep)		\
+> diff --git a/mm/migrate.c b/mm/migrate.c
+> index 2bbc5c4c672e..9b3dcb81be5f 100644
+> +++ b/mm/migrate.c
+> @@ -2391,8 +2391,14 @@ static void migrate_vma_collect(struct migrate_vma *migrate)
+>  {
+>  	struct mmu_notifier_range range;
+>  
+> -	mmu_notifier_range_init(&range, MMU_NOTIFY_CLEAR, 0, NULL,
+> +	/*
+> +	 * Note that the src_owner is passed to the mmu notifier callback so
+> +	 * that the registered device driver can skip invalidating device
+> +	 * private page mappings that won't be migrated.
+> +	 */
+> +	mmu_notifier_range_init(&range, MMU_NOTIFY_MIGRATE, 0, migrate->vma,
+>  			migrate->vma->vm_mm, migrate->start, migrate->end);
 
-Right.. but I am actually wondering because I never saw those strings
-in the wild or not on the Dell and Lenovo systems I was testing on. So
-I think we might want to ask the vendors themselves and verify on
-those systems.
+So the idea is that src_owner is always set to the pgmap owner when
+working with DEVICE_PRIVATE?
 
-> --
-> Cheers,
-> Alex Hung
->
+But then the comment in the prior patch should be fixed:
 
+@@ -199,11 +204,12 @@  struct migrate_vma {
+ 
+ 	/*
+ 	 * Set to the owner value also stored in page->pgmap->owner for
++	 * migrating device private memory. The direction also needs to
++	 * be set to MIGRATE_VMA_FROM_DEVICE_PRIVATE.
+
+To say the caller must always provide src_owner.
+
+And that field should probably be renamed at this point, as there is
+nothing "src" about it. It is just the pgmap_owner of the
+DEVICE_PRIVATE pages the TO/FROM DEVICE migration is working on.
+
+Jason
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
