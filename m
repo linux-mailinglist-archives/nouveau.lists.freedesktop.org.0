@@ -2,51 +2,63 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 98852225449
-	for <lists+nouveau@lfdr.de>; Sun, 19 Jul 2020 23:29:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A0C3F22554B
+	for <lists+nouveau@lfdr.de>; Mon, 20 Jul 2020 03:19:00 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C38DF6E177;
-	Sun, 19 Jul 2020 21:29:04 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0813289FD3;
+	Mon, 20 Jul 2020 01:18:59 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-oo1-xc43.google.com (mail-oo1-xc43.google.com
- [IPv6:2607:f8b0:4864:20::c43])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 24A066E172
- for <nouveau@lists.freedesktop.org>; Sun, 19 Jul 2020 21:29:03 +0000 (UTC)
-Received: by mail-oo1-xc43.google.com with SMTP id y9so2810083oot.9
- for <nouveau@lists.freedesktop.org>; Sun, 19 Jul 2020 14:29:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=6TpyyzhZ8psE8pd2+bNUPTCvIN+XJE2xc6LtU/y3YpU=;
- b=j/deQFoM6v3m86N1zMHx4LFn+XlVMAjz/nNql9VF8JrUPH2HrV5VGQIxU3zYE8pWcJ
- IFJD9B79N1aEFuVstXN4N6GyYjPrUufmk5mtzdWjPNAqqp5bRL0u23avDNqFs95s9MzZ
- yi2jtMQiQ2lKi9UMojDcF9gU9UhxWnADkpqBM=
+Received: from youngberry.canonical.com (youngberry.canonical.com
+ [91.189.89.112])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7CB1C89FD9
+ for <nouveau@lists.freedesktop.org>; Mon, 20 Jul 2020 01:18:57 +0000 (UTC)
+Received: from mail-pf1-f199.google.com ([209.85.210.199])
+ by youngberry.canonical.com with esmtps
+ (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.86_2)
+ (envelope-from <alex.hung@canonical.com>) id 1jxKSG-00036M-39
+ for nouveau@lists.freedesktop.org; Mon, 20 Jul 2020 01:18:56 +0000
+Received: by mail-pf1-f199.google.com with SMTP id a8so11608824pff.3
+ for <nouveau@lists.freedesktop.org>; Sun, 19 Jul 2020 18:18:56 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=6TpyyzhZ8psE8pd2+bNUPTCvIN+XJE2xc6LtU/y3YpU=;
- b=Nt/wEaEEtckaFRsVIw8jUSwuMivkyyXjmtytACM9VsQQUohPBxKNm0/mz2lx9/Mr/Q
- w+e5ZAz5l50MsVTUrpL5PguypCqgyKsFmQxxT3y0C2fFJy9hld5IhDPHTKAqJW4zBaLx
- jJc7g8xSHw7ltjObRLPXXlNBaM0NoVSlm7m7KMFvBC+Cs16RwCcau5flYD4B+cyu8+le
- 1GKeyv9lfjuNCD8FZQse2p6ONa/IE4CDCwu0ZoWUlxeS8JfHoH8YIQPg2K//dguVcew1
- qwv5ksfucjs9oOx9FpolUaldHrg8zPyJAUol8bbXQ59fNIs9yKZWtLn2Us3UiORtXwhf
- TErA==
-X-Gm-Message-State: AOAM533kY2P57HCdR3W4LLjFDhxJFAlN3TdGPaYq4DT3XR4WXGl3qmHK
- 80hOZ+wP7k7l/SGPYhxe87zjtgmqeXMTV7yigwzwNw==
-X-Google-Smtp-Source: ABdhPJxwXm1uomZ8b7Jb0vvqsM2QkgiPgNQZ+kT6yvMQJxVdIzyG3qvEC2B4KO+ZwPfxEt+YFyjFTt7A5C92owDBIsI=
-X-Received: by 2002:a4a:a685:: with SMTP id f5mr6913138oom.85.1595194142398;
- Sun, 19 Jul 2020 14:29:02 -0700 (PDT)
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=dTQyUG61kX2XCwIUiPSY5cCF6yJekK9Ymo10gmabLSw=;
+ b=KVeLysOJASgC9rl9OfJg1lV+OZKalqsnJ2yyUPwCBKYfejUNL3lQW08N5M3BmAM0SN
+ zgm0+DBzWkWzkhEfULEbiGV6FPHhiY59wr4TejOPIVNPAVlDK4v+scbasL3/a9Yci3Zo
+ r4D5d0D9XFZb/SVhP5qGFROC/YnLa6pQ+4bc6FOO4jQybOE1FY2aLOVoYGK21GBpUT/2
+ ao52+jdpQu7WbSdekfXymooVRJd4j9m5/LY6vAGOOO2GppIRx4iZdQPNE91k/hyAZSLX
+ M+aiOjZ0DCGV8njD73DWl1r6G8YqJ1P8HNyl5WsfqVp12smHSYru93+4bcDQqHMIqq0f
+ g4CA==
+X-Gm-Message-State: AOAM533oHftd+f0Ypc4tp6+rKUYBQx1pcOxyi4pwwmT8j6+kfP6cRn0F
+ 00cRbK14JWaHUa6QXXv7/mElG68BkxcCDAxEOCmgnSiF+4mbSDp3Fx4/j6//XbGTP1Z4vuO6Z7r
+ RLpkMn74a0PV8ukOWfukquhAmyYFOARXv2SrsIegEoG8=
+X-Received: by 2002:a65:490d:: with SMTP id p13mr16441331pgs.183.1595207934351; 
+ Sun, 19 Jul 2020 18:18:54 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJwudbwMDOJLkji0WfrSzxkPuyTod60uCI/xIM8pY05aS+io4K0fWco4Zfmkc0P1TnvefU0aMw==
+X-Received: by 2002:a65:490d:: with SMTP id p13mr16441307pgs.183.1595207933994; 
+ Sun, 19 Jul 2020 18:18:53 -0700 (PDT)
+Received: from [192.168.0.119] (d66-222-144-129.abhsia.telus.net.
+ [66.222.144.129])
+ by smtp.gmail.com with ESMTPSA id 15sm10012333pjs.8.2020.07.19.18.18.52
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 19 Jul 2020 18:18:53 -0700 (PDT)
+To: Karol Herbst <kherbst@redhat.com>
+References: <20200717190547.648604-1-kherbst@redhat.com>
+ <e7a8cb3a-e9f8-b78a-93f0-c09e5eb5ed10@canonical.com>
+ <CACO55tvLCrqeV8MsVDbTaWP2EPAeZtfU08Kb2fVGCD6X+g3-rg@mail.gmail.com>
+From: Alex Hung <alex.hung@canonical.com>
+Message-ID: <8ad1866d-eb61-a30c-5875-5ffbfd2e17e1@canonical.com>
+Date: Sun, 19 Jul 2020 19:18:52 -0600
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-References: <20200717185757.2786-1-jajones@nvidia.com>
- <20200717194751.GS3278063@phenom.ffwll.local>
- <279b4b06-3f1e-9a5d-6bd8-c2518629bee1@nvidia.com>
-In-Reply-To: <279b4b06-3f1e-9a5d-6bd8-c2518629bee1@nvidia.com>
-From: Daniel Vetter <daniel@ffwll.ch>
-Date: Sun, 19 Jul 2020 23:28:51 +0200
-Message-ID: <CAKMK7uH-5m64_oukqxo1VDjpPxvcmhE-v-aLZTKQyfA2Ti5s1Q@mail.gmail.com>
-To: James Jones <jajones@nvidia.com>
-Subject: Re: [Nouveau] [PATCH] drm/nouveau: Accept 'legacy' format modifiers
+In-Reply-To: <CACO55tvLCrqeV8MsVDbTaWP2EPAeZtfU08Kb2fVGCD6X+g3-rg@mail.gmail.com>
+Content-Language: en-US
+Subject: Re: [Nouveau] [PATCH] RFC: ACPI / OSI: remove workarounds for
+ hybrid graphics laptops
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,148 +70,115 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Nouveau <nouveau@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>,
+Cc: nouveau <nouveau@lists.freedesktop.org>,
+ "Rafael J. Wysocki" <rjw@rjwysocki.net>, LKML <linux-kernel@vger.kernel.org>,
  dri-devel <dri-devel@lists.freedesktop.org>,
- "Kirill A . Shutemov" <kirill@shutemov.name>
+ Linux ACPI Mailing List <linux-acpi@vger.kernel.org>,
+ Len Brown <lenb@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Sat, Jul 18, 2020 at 5:43 AM James Jones <jajones@nvidia.com> wrote:
->
-> On 7/17/20 12:47 PM, Daniel Vetter wrote:
-> > On Fri, Jul 17, 2020 at 11:57:57AM -0700, James Jones wrote:
-> >> Accept the DRM_FORMAT_MOD_NVIDIA_16BX2_BLOCK()
-> >> family of modifiers to handle broken userspace
-> >> Xorg modesetting and Mesa drivers.
-> >>
-> >> Tested with Xorg 1.20 modesetting driver,
-> >> weston@c46c70dac84a4b3030cd05b380f9f410536690fc,
-> >> gnome & KDE wayland desktops from Ubuntu 18.04,
-> >> and sway 1.5
-> >
-> > Just bikeshed, but maybe a few more words on what exactly is broken and
-> > how this works around it. Specifically why we only accept these, but don't
-> > advertise them.
->
-> Added quite a few words.
->
-> >>
-> >> Signed-off-by: James Jones <jajones@nvidia.com>
-> >
-> > Needs Fixes: line here. Also nice to mention the bug reporter/link.
->
-> Done in v2.
->
-> >> ---
-> >>   drivers/gpu/drm/nouveau/nouveau_display.c | 26 +++++++++++++++++++++--
-> >>   1 file changed, 24 insertions(+), 2 deletions(-)
-> >>
-> >> diff --git a/drivers/gpu/drm/nouveau/nouveau_display.c b/drivers/gpu/drm/nouveau/nouveau_display.c
-> >> index 496c4621cc78..31543086254b 100644
-> >> --- a/drivers/gpu/drm/nouveau/nouveau_display.c
-> >> +++ b/drivers/gpu/drm/nouveau/nouveau_display.c
-> >> @@ -191,8 +191,14 @@ nouveau_decode_mod(struct nouveau_drm *drm,
-> >>                 uint32_t *tile_mode,
-> >>                 uint8_t *kind)
-> >>   {
-> >> +    struct nouveau_display *disp = nouveau_display(drm->dev);
-> >>      BUG_ON(!tile_mode || !kind);
-> >>
-> >> +    if ((modifier & (0xffull << 12)) == 0ull) {
-> >> +            /* Legacy modifier.  Translate to this device's 'kind.' */
-> >> +            modifier |= disp->format_modifiers[0] & (0xffull << 12);
-> >> +    }
-> >
-> > Hm I tried to understand what this magic does by looking at drm_fourcc.h,
-> > but the drm_fourcc_canonicalize_nvidia_format_mod() in there implements
-> > something else. Is that function wrong, or should we use it here instead?
-> >
->  > Or is there something else going on entirely?
->
-> This may be slightly clearer with the expanded change description:
->
-> Canonicalize assumes the old modifiers are only used by certain Tegra
-> revisions, because the Mesa patches were supposed to land and obliterate
-> all uses beyond that.  That assumption means it can assume the specific
-> page kind (0xfe) used by the display-engine-compatible layout on those
-> specific devices.  There is no way to generally canonicalize a legacy
-> modifier without referencing a specific device type, as is indirectly
-> done here.
->
-> This code does a limited device-specific canonicalization: It
-> substitutes the display-appropriate page kind used by this specific
-> device, ensuring we derive this correct page kind later in the function.
->   I iterated on the best way to accomplish this a few times, and this
-> was the least-invasive thing I came up with, but it does require a
-> pretty thorough understanding of the NVIDIA modifier macros.
->
-> Thanks for the quick review.
+On 2020-07-19 1:50 p.m., Karol Herbst wrote:
+> On Fri, Jul 17, 2020 at 9:52 PM Alex Hung <alex.hung@canonical.com> wrote:
+>>
+>> On 2020-07-17 1:05 p.m., Karol Herbst wrote:
+>>> It's hard to figure out what systems are actually affected and right now I
+>>> don't see a good way of removing those...
+>>>
+>>> But I'd like to see thos getting removed and drivers fixed instead (which
+>>> happened at least for nouveau).
+>>>
+>>> And as mentioned before, I prefer people working on fixing issues instead
+>>> of spending time to add firmware level workarounds which are hard to know
+>>> to which systems they apply to, hard to remove and basically a big huge
+>>> pain to work with.> In the end I have no idea how to even figure out what systems are affected
+>>> and which not by this, so I have no idea how to even verify we can safely
+>>> remove this (which just means those are impossible to remove unless we risk
+>>> breaking systems, which again makes those supper annoying to deal with).
+>>>
+>>> Also from the comments it's hard to get what those bits really do. Are they
+>>> just preventing runtime pm or do the devices are powered down when booting?
+>>> I am sure it's the former, still...
+>>>
+>>> Please, don't do this again.
+>>>
+>>> For now, those workaround prevent power savings on systems those workaround
+>>> applies to, which might be any so those should get removed asap and if
+>>> new issues arrise removing those please do a proper bug report and we can
+>>> look into it and come up with a proper fix (and keep this patch out until
+>>> we resolve all of those).
+>>>
+>>> Signed-off-by: Karol Herbst <kherbst@redhat.com>
+>>> CC: Alex Hung <alex.hung@canonical.com>
+>>> CC: "Rafael J. Wysocki" <rjw@rjwysocki.net>
+>>> CC: Len Brown <lenb@kernel.org>
+>>> CC: Lyude Paul <lyude@redhat.com>
+>>> CC: linux-kernel@vger.kernel.org
+>>> CC: dri-devel@lists.freedesktop.org
+>>> CC: nouveau@lists.freedesktop.org
+>>> ---
+>>>  drivers/acpi/osi.c | 24 ------------------------
+>>>  1 file changed, 24 deletions(-)
+>>>
+>>> diff --git a/drivers/acpi/osi.c b/drivers/acpi/osi.c
+>>> index 9f68538091384..d4405e1ca9b97 100644
+>>> --- a/drivers/acpi/osi.c
+>>> +++ b/drivers/acpi/osi.c
+>>> @@ -44,30 +44,6 @@ osi_setup_entries[OSI_STRING_ENTRIES_MAX] __initdata = {
+>>>       {"Processor Device", true},
+>>>       {"3.0 _SCP Extensions", true},
+>>>       {"Processor Aggregator Device", true},
+>>> -     /*
+>>> -      * Linux-Dell-Video is used by BIOS to disable RTD3 for NVidia graphics
+>>> -      * cards as RTD3 is not supported by drivers now.  Systems with NVidia
+>>> -      * cards will hang without RTD3 disabled.
+>>> -      *
+>>> -      * Once NVidia drivers officially support RTD3, this _OSI strings can
+>>> -      * be removed if both new and old graphics cards are supported.
+>>> -      */
+>>> -     {"Linux-Dell-Video", true},
+>>> -     /*
+>>> -      * Linux-Lenovo-NV-HDMI-Audio is used by BIOS to power on NVidia's HDMI
+>>> -      * audio device which is turned off for power-saving in Windows OS.
+>>> -      * This power management feature observed on some Lenovo Thinkpad
+>>> -      * systems which will not be able to output audio via HDMI without
+>>> -      * a BIOS workaround.
+>>> -      */
+>>> -     {"Linux-Lenovo-NV-HDMI-Audio", true},
+>>> -     /*
+>>> -      * Linux-HPI-Hybrid-Graphics is used by BIOS to enable dGPU to
+>>> -      * output video directly to external monitors on HP Inc. mobile
+>>> -      * workstations as Nvidia and AMD VGA drivers provide limited
+>>> -      * hybrid graphics supports.
+>>> -      */
+>>> -     {"Linux-HPI-Hybrid-Graphics", true},
+>>>  };
+>>>
+>>>  static u32 acpi_osi_handler(acpi_string interface, u32 supported)
+>>>
+>>
+>> The changes were discussed and tested a while ago, and no crashes were
+>> observed. Thanks for solving PM issues in nouveau.
+>>
+>> Acked-by: Alex Hung <alex.hung@canonical.com>
+>>
+> 
+> By any chance, do you have a list of systems implementing those workarounds?
+> 
 
-Ah yes this makes a ton more sense with your explanation of what's all
-going on. Thanks for all the explaining, but probably better if
-someone with real nouveau clues takes a look too. Fwiw (i.e. not much)
+I don't keep a list but the workaround, in theory, should only apply to
+the systems with the specific nvidia hardware.
 
-Acked-by: Daniel Vetter <daniel.vetter@ffwll.ch>
-
-Cheers, Daniel
-
->
-> -James
->
-> >
-> > Cheers, Daniel
-> >
-> >> +
-> >>      if (modifier == DRM_FORMAT_MOD_LINEAR) {
-> >>              /* tile_mode will not be used in this case */
-> >>              *tile_mode = 0;
-> >> @@ -227,6 +233,16 @@ nouveau_framebuffer_get_layout(struct drm_framebuffer *fb,
-> >>      }
-> >>   }
-> >>
-> >> +static const u64 legacy_modifiers[] = {
-> >> +    DRM_FORMAT_MOD_NVIDIA_16BX2_BLOCK(0),
-> >> +    DRM_FORMAT_MOD_NVIDIA_16BX2_BLOCK(1),
-> >> +    DRM_FORMAT_MOD_NVIDIA_16BX2_BLOCK(2),
-> >> +    DRM_FORMAT_MOD_NVIDIA_16BX2_BLOCK(3),
-> >> +    DRM_FORMAT_MOD_NVIDIA_16BX2_BLOCK(4),
-> >> +    DRM_FORMAT_MOD_NVIDIA_16BX2_BLOCK(5),
-> >> +    DRM_FORMAT_MOD_INVALID
-> >> +};
-> >> +
-> >>   static int
-> >>   nouveau_validate_decode_mod(struct nouveau_drm *drm,
-> >>                          uint64_t modifier,
-> >> @@ -247,8 +263,14 @@ nouveau_validate_decode_mod(struct nouveau_drm *drm,
-> >>           (disp->format_modifiers[mod] != modifier);
-> >>           mod++);
-> >>
-> >> -    if (disp->format_modifiers[mod] == DRM_FORMAT_MOD_INVALID)
-> >> -            return -EINVAL;
-> >> +    if (disp->format_modifiers[mod] == DRM_FORMAT_MOD_INVALID) {
-> >> +            for (mod = 0;
-> >> +                 (legacy_modifiers[mod] != DRM_FORMAT_MOD_INVALID) &&
-> >> +                 (legacy_modifiers[mod] != modifier);
-> >> +                 mod++);
-> >> +            if (legacy_modifiers[mod] == DRM_FORMAT_MOD_INVALID)
-> >> +                    return -EINVAL;
-> >> +    }
-> >>
-> >>      nouveau_decode_mod(drm, modifier, tile_mode, kind);
-> >>
-> >> --
-> >> 2.17.1
-> >>
-> >
-
-
+I reminded OEMs and ODMs that these _OSI strings were temporary
+solutions, and highlighted we were going to remove them after our
+discussion last year. If they were paying attentions recent systems
+shouldn't have these _OSI strings.
 
 -- 
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
+Cheers,
+Alex Hung
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
