@@ -1,61 +1,48 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D6412226FF3
-	for <lists+nouveau@lfdr.de>; Mon, 20 Jul 2020 22:49:14 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7F99C227016
+	for <lists+nouveau@lfdr.de>; Mon, 20 Jul 2020 22:57:26 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id DCF1289EB4;
-	Mon, 20 Jul 2020 20:49:12 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 309C689F06;
+	Mon, 20 Jul 2020 20:57:23 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from hqnvemgate26.nvidia.com (hqnvemgate26.nvidia.com
- [216.228.121.65])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0947789E36
- for <nouveau@lists.freedesktop.org>; Mon, 20 Jul 2020 20:49:10 +0000 (UTC)
-Received: from hqpgpgate101.nvidia.com (Not Verified[216.228.121.13]) by
- hqnvemgate26.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
- id <B5f16033a0000>; Mon, 20 Jul 2020 13:48:58 -0700
-Received: from hqmail.nvidia.com ([172.20.161.6])
- by hqpgpgate101.nvidia.com (PGP Universal service);
- Mon, 20 Jul 2020 13:49:10 -0700
-X-PGP-Universal: processed;
- by hqpgpgate101.nvidia.com on Mon, 20 Jul 2020 13:49:10 -0700
-Received: from rcampbell-dev.nvidia.com (10.124.1.5) by HQMAIL107.nvidia.com
- (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Mon, 20 Jul
- 2020 20:49:10 +0000
-To: Jason Gunthorpe <jgg@nvidia.com>
-References: <20200713172149.2310-1-rcampbell@nvidia.com>
- <20200713172149.2310-3-rcampbell@nvidia.com>
- <20200720183643.GA3028737@nvidia.com>
- <2e775a5d-9d62-de52-6799-3bbb09c88c5a@nvidia.com>
- <20200720195943.GH2021234@nvidia.com>
-From: Ralph Campbell <rcampbell@nvidia.com>
-X-Nvconfidentiality: public
-Message-ID: <fdfde6a0-f2bf-c0b2-0283-c882aa755292@nvidia.com>
-Date: Mon, 20 Jul 2020 13:49:09 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.2.2
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
+ [205.139.110.61])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4BFC989F06
+ for <nouveau@lists.freedesktop.org>; Mon, 20 Jul 2020 20:57:22 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1595278641;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=epckH3RTrZi5cYmGZDu/11K+cHm6x4vqJk8JLUqbk84=;
+ b=OySoCssiNUJN2lokcX4uw+3ffBDRlYscWutpVvIIuFfY3Ft75kvY6dyi7WJh96Gg4AmYK5
+ Dvp78Kwy8UD2MvR8AhEXPydZk0RUWU/As/cpPCDv1Pr0Kx31l/bqDVx3Gpa1b4Dbc9Puhv
+ gGvzd9eThM3jlwSKwlI5/FBRoS2UZgs=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-32-09bg8cUrNASZmwx-EKBX9g-1; Mon, 20 Jul 2020 16:57:19 -0400
+X-MC-Unique: 09bg8cUrNASZmwx-EKBX9g-1
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
+ [10.5.11.13])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id EB984107ACCA;
+ Mon, 20 Jul 2020 20:57:17 +0000 (UTC)
+Received: from Ruby.redhat.com (ovpn-120-196.rdu2.redhat.com [10.10.120.196])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 1109076216;
+ Mon, 20 Jul 2020 20:57:16 +0000 (UTC)
+From: Lyude Paul <lyude@redhat.com>
+To: nouveau@lists.freedesktop.org
+Date: Mon, 20 Jul 2020 16:56:56 -0400
+Message-Id: <20200720205659.296879-1-lyude@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <20200720195943.GH2021234@nvidia.com>
-X-Originating-IP: [10.124.1.5]
-X-ClientProxiedBy: HQMAIL101.nvidia.com (172.20.187.10) To
- HQMAIL107.nvidia.com (172.20.187.13)
-Content-Language: en-US
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
- t=1595278138; bh=Ccj/+mKAxu8hTLWfU4Ue43iWGdFGZ2AWQABgAkqwS5c=;
- h=X-PGP-Universal:Subject:To:CC:References:From:X-Nvconfidentiality:
- Message-ID:Date:User-Agent:MIME-Version:In-Reply-To:
- X-Originating-IP:X-ClientProxiedBy:Content-Type:Content-Language:
- Content-Transfer-Encoding;
- b=VcLaCG1jeJ3grIAQ6dNREngT9LTn9RlNSSs2PV9xB2FKhVBQ9sSCMPElcq6X8bk+g
- BffYfWyypukyPqCEivuSYDvDbuieMzbmOD4tLYnkHSGC+/8Eo7xnq/qABwzVunk2E6
- uuRVRSaBj5I2QN265J3jgZcvbPEcUO9iGyrjO1Dmiosny1t4HQJP2yT8VtJhLO0nNd
- d2SZ6bBN3ywT4vnkEiIQBekg3S0vniVavcHfZrE0YcmAZXB+VncPBE1u5hMqQT3tC2
- V47tjJs5XwPa9/MN0I8bxqzoDxEte6LZmbM+QXwVdqRgI+PVl2LkjNrZZ7TGxvNp+b
- GRhbS0bjKKnhw==
-Subject: Re: [Nouveau] [PATCH v2 2/5] mm/migrate: add a direction parameter
- to migrate_vma
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
+Subject: [Nouveau] [PATCH] drm/nouveau/kms/nv50-: Fix CRC-related compile
+ errors with debugfs disabled
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,66 +54,133 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: linux-rdma@vger.kernel.org, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, kvm-ppc@vger.kernel.org,
- Bharata B Rao <bharata@linux.ibm.com>, linux-mm@kvack.org,
- Ben Skeggs <bskeggs@redhat.com>, linux-kselftest@vger.kernel.org,
- Andrew Morton <akpm@linux-foundation.org>, Shuah Khan <shuah@kernel.org>,
- Christoph Hellwig <hch@lst.de>
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
+Cc: kernel test robot <lkp@intel.com>, David Airlie <airlied@linux.ie>,
+ open list <linux-kernel@vger.kernel.org>,
+ "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
+ <dri-devel@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>,
+ Daniel Vetter <daniel@ffwll.ch>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-
-On 7/20/20 12:59 PM, Jason Gunthorpe wrote:
-> On Mon, Jul 20, 2020 at 12:54:53PM -0700, Ralph Campbell wrote:
->>>> diff --git a/include/linux/migrate.h b/include/linux/migrate.h
->>>> index 3e546cbf03dd..620f2235d7d4 100644
->>>> +++ b/include/linux/migrate.h
->>>> @@ -180,6 +180,11 @@ static inline unsigned long migrate_pfn(unsigned long pfn)
->>>>    	return (pfn << MIGRATE_PFN_SHIFT) | MIGRATE_PFN_VALID;
->>>>    }
->>>> +enum migrate_vma_direction {
->>>> +	MIGRATE_VMA_FROM_SYSTEM,
->>>> +	MIGRATE_VMA_FROM_DEVICE_PRIVATE,
->>>> +};
->>>
->>> I would have guessed this is more natural as _FROM_DEVICE_ and
->>> TO_DEVICE_ ?
->>
->> The caller controls where the destination memory is allocated so it isn't
->> necessarily device private memory, it could be from system to system.
->> The use case for system to system memory migration is for hardware
->> like ARM SMMU or PCIe ATS where a single set of page tables is shared by
->> the device and a CPU process over a coherent system memory bus.
->> Also many integrated GPUs in SOCs fall into this category too.
-> 
-> Maybe just TO/FROM_DEIVCE then? Even though the memory is not
-> DEVICE_PRIVATE it is still device owned pages right?
-> 
->> So to me, it makes more sense to specify the direction based on the
->> source location.
-> 
-> It feels strange because the driver doesn't always know or control the
-> source?
-> 
-> Jason
-> 
-
-The driver can't really know where the source is currently located because the
-API is designed to not initially hold the page locks, migrate_vma_setup() only knows
-the source once it holds the page table locks and isolates/locks the pages being
-migrated. The direction and pgmap_owner are supposed to filter which pages
-the caller is interested in migrating.
-Perhaps the direction should instead be a flags field with separate bits for
-system memory and device private memory selecting source candidates for
-migration. I can imagine use cases for all 4 combinations of
-d->d, d->s, s->d, and s->s being valid.
-
-I didn't really think a direction was needed, this was something that
-Christoph Hellwig seemed to think made the API safer.
-_______________________________________________
-Nouveau mailing list
-Nouveau@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/nouveau
+TG9va3MgbGlrZSBJIG1hZGUgdGhlIG1pc3Rha2Ugb2YgZm9yZ2V0dGluZyB0byBjaGVjayB3aGV0
+aGVyIG9yIG5vdCB0aGlzCndvdWxkIGJ1aWxkIHdpdGhvdXQgQ09ORklHX0RFQlVHX0ZTLCBhcyB0
+aGUgS2J1aWxkIGJvdCByZXBvcnRlZCBzb21lCmlzc3VlcyBidWlsZGluZyB3aXRoIHRlZ3JhX2Rl
+ZmNvbmZpZzoKCkluIGZpbGUgaW5jbHVkZWQgZnJvbSBkcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9u
+b3V2ZWF1X2Rpc3BsYXkuYzo0NzoKLi9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9kaXNwbnY1MC9j
+cmMuaDogSW4gZnVuY3Rpb24K4oCYbnY1MF9oZWFkX2NyY19sYXRlX3JlZ2lzdGVy4oCZOgouL2Ry
+aXZlcnMvZ3B1L2RybS9ub3V2ZWF1L2Rpc3BudjUwL2NyYy5oOjEwNjo0NzogZXJyb3I6IHBhcmFt
+ZXRlciBuYW1lCm9taXR0ZWQKICAxMDYgfCBzdGF0aWMgaW5saW5lIGludCBudjUwX2hlYWRfY3Jj
+X2xhdGVfcmVnaXN0ZXIoc3RydWN0IG52NTBfaGVhZCAqKSB7fQogICAgICB8ICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBefn5+fn5+fn5+fn5+fn5+fn4KLi9k
+cml2ZXJzL2dwdS9kcm0vbm91dmVhdS9kaXNwbnY1MC9jcmMuaDoxMDY6NTQ6IHdhcm5pbmc6IG5v
+IHJldHVybgpzdGF0ZW1lbnQgaW4gZnVuY3Rpb24gcmV0dXJuaW5nIG5vbi12b2lkIFstV3JldHVy
+bi10eXBlXQogIDEwNiB8IHN0YXRpYyBpbmxpbmUgaW50IG52NTBfaGVhZF9jcmNfbGF0ZV9yZWdp
+c3RlcihzdHJ1Y3QgbnY1MF9oZWFkICopIHt9CiAgICAgIHwgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBefn5+fn5+fn4KLi9kcml2ZXJzL2dwdS9k
+cm0vbm91dmVhdS9kaXNwbnY1MC9jcmMuaDogSW4gZnVuY3Rpb24K4oCYbnY1MF9jcmNfaGFuZGxl
+X3ZibGFua+KAmToKLi9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9kaXNwbnY1MC9jcmMuaDoxMDg6
+NTc6IHdhcm5pbmc6IOKAmHJldHVybuKAmSB3aXRoCmEgdmFsdWUsIGluIGZ1bmN0aW9uIHJldHVy
+bmluZyB2b2lkIFstV3JldHVybi10eXBlXQogIDEwOCB8IG52NTBfY3JjX2hhbmRsZV92Ymxhbmso
+c3RydWN0IG52NTBfaGVhZCAqaGVhZCkgeyByZXR1cm4gMDsgfQogICAgICB8ICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXgouL2RyaXZlcnMv
+Z3B1L2RybS9ub3V2ZWF1L2Rpc3BudjUwL2NyYy5oOjEwODoxOiBub3RlOiBkZWNsYXJlZCBoZXJl
+CiAgMTA4IHwgbnY1MF9jcmNfaGFuZGxlX3ZibGFuayhzdHJ1Y3QgbnY1MF9oZWFkICpoZWFkKSB7
+IHJldHVybiAwOyB9CiAgICAgIHwgXn5+fn5+fn5+fn5+fn5+fn5+fn5+fgouL2RyaXZlcnMvZ3B1
+L2RybS9ub3V2ZWF1L2Rpc3BudjUwL2NyYy5oOiBJbiBmdW5jdGlvbgrigJhudjUwX2NyY19hdG9t
+aWNfY2hlY2vigJk6Ci4vZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvZGlzcG52NTAvY3JjLmg6MTEx
+OjIzOiBlcnJvcjogcGFyYW1ldGVyIG5hbWUKb21pdHRlZAogIDExMSB8IG52NTBfY3JjX2F0b21p
+Y19jaGVjayhzdHJ1Y3QgbnY1MF9oZWFkICosIHN0cnVjdCBudjUwX2hlYWRfYXRvbSAqLAogICAg
+ICB8ICAgICAgICAgICAgICAgICAgICAgICBefn5+fn5+fn5+fn5+fn5+fn4KLi9kcml2ZXJzL2dw
+dS9kcm0vbm91dmVhdS9kaXNwbnY1MC9jcmMuaDoxMTE6NDM6IGVycm9yOiBwYXJhbWV0ZXIgbmFt
+ZQpvbWl0dGVkCiAgMTExIHwgbnY1MF9jcmNfYXRvbWljX2NoZWNrKHN0cnVjdCBudjUwX2hlYWQg
+Kiwgc3RydWN0IG52NTBfaGVhZF9hdG9tICosCiAgICAgIHwgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgXn5+fn5+fn5+fn5+fn5+fn5+fn5+fn4KLi9kcml2ZXJzL2dw
+dS9kcm0vbm91dmVhdS9kaXNwbnY1MC9jcmMuaDoxMTI6OTogZXJyb3I6IHBhcmFtZXRlciBuYW1l
+Cm9taXR0ZWQKICAxMTIgfCAgICAgICAgIHN0cnVjdCBudjUwX2hlYWRfYXRvbSAqKSB7fQogICAg
+ICB8ICAgICAgICAgXn5+fn5+fn5+fn5+fn5+fn5+fn5+fn4KLi9kcml2ZXJzL2dwdS9kcm0vbm91
+dmVhdS9kaXNwbnY1MC9jcmMuaDoxMTI6MTY6IHdhcm5pbmc6IG5vIHJldHVybgpzdGF0ZW1lbnQg
+aW4gZnVuY3Rpb24gcmV0dXJuaW5nIG5vbi12b2lkIFstV3JldHVybi10eXBlXQogIDExMiB8ICAg
+ICAgICAgc3RydWN0IG52NTBfaGVhZF9hdG9tICopIHt9CiAgICAgIHwgICAgICAgICAgICAgICAg
+Xn5+fn5+fn5+fn5+fn4KLi9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9kaXNwbnY1MC9jcmMuaDog
+SW4gZnVuY3Rpb24K4oCYbnY1MF9jcmNfYXRvbWljX3N0b3BfcmVwb3J0aW5n4oCZOgouL2RyaXZl
+cnMvZ3B1L2RybS9ub3V2ZWF1L2Rpc3BudjUwL2NyYy5oOjExNDozMjogZXJyb3I6IHBhcmFtZXRl
+ciBuYW1lCm9taXR0ZWQKICAxMTQgfCBudjUwX2NyY19hdG9taWNfc3RvcF9yZXBvcnRpbmcoc3Ry
+dWN0IGRybV9hdG9taWNfc3RhdGUgKikge30KICAgICAgfCAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgXn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fgouL2RyaXZlcnMvZ3B1L2RybS9ub3V2
+ZWF1L2Rpc3BudjUwL2NyYy5oOiBJbiBmdW5jdGlvbgrigJhudjUwX2NyY19hdG9taWNfcHJlcGFy
+ZV9ub3RpZmllcl9jb250ZXh0c+KAmToKLi9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9kaXNwbnY1
+MC9jcmMuaDoxMTY6NDM6IGVycm9yOiBwYXJhbWV0ZXIgbmFtZQpvbWl0dGVkCiAgMTE2IHwgbnY1
+MF9jcmNfYXRvbWljX3ByZXBhcmVfbm90aWZpZXJfY29udGV4dHMoc3RydWN0IGRybV9hdG9taWNf
+c3RhdGUgKikge30KICAgICAgfCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICBefn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+Ci4vZHJpdmVycy9ncHUvZHJtL25vdXZlYXUv
+ZGlzcG52NTAvY3JjLmg6IEluIGZ1bmN0aW9uCuKAmG52NTBfY3JjX2F0b21pY19zdGFydF9yZXBv
+cnRpbmfigJk6Ci4vZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvZGlzcG52NTAvY3JjLmg6MTE4OjMz
+OiBlcnJvcjogcGFyYW1ldGVyIG5hbWUKb21pdHRlZAogIDExOCB8IG52NTBfY3JjX2F0b21pY19z
+dGFydF9yZXBvcnRpbmcoc3RydWN0IGRybV9hdG9taWNfc3RhdGUgKikge30KICAgICAgfCAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgIF5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn4KLi9k
+cml2ZXJzL2dwdS9kcm0vbm91dmVhdS9kaXNwbnY1MC9jcmMuaDogSW4gZnVuY3Rpb24K4oCYbnY1
+MF9jcmNfYXRvbWljX3NldOKAmToKLi9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9kaXNwbnY1MC9j
+cmMuaDoxMjA6MjE6IGVycm9yOiBwYXJhbWV0ZXIgbmFtZQpvbWl0dGVkCiAgMTIwIHwgbnY1MF9j
+cmNfYXRvbWljX3NldChzdHJ1Y3QgbnY1MF9oZWFkICosIHN0cnVjdCBudjUwX2hlYWRfYXRvbSAq
+KSB7fQogICAgICB8ICAgICAgICAgICAgICAgICAgICAgXn5+fn5+fn5+fn5+fn5+fn5+Ci4vZHJp
+dmVycy9ncHUvZHJtL25vdXZlYXUvZGlzcG52NTAvY3JjLmg6MTIwOjQxOiBlcnJvcjogcGFyYW1l
+dGVyIG5hbWUKb21pdHRlZAogIDEyMCB8IG52NTBfY3JjX2F0b21pY19zZXQoc3RydWN0IG52NTBf
+aGVhZCAqLCBzdHJ1Y3QgbnY1MF9oZWFkX2F0b20gKikge30KICAgICAgfCAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgXn5+fn5+fn5+fn5+fn5+fn5+fn5+fn4KLi9kcml2
+ZXJzL2dwdS9kcm0vbm91dmVhdS9kaXNwbnY1MC9jcmMuaDogSW4gZnVuY3Rpb24K4oCYbnY1MF9j
+cmNfYXRvbWljX2NscuKAmToKLi9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9kaXNwbnY1MC9jcmMu
+aDoxMjI6MjE6IGVycm9yOiBwYXJhbWV0ZXIgbmFtZQpvbWl0dGVkCiAgMTIyIHwgbnY1MF9jcmNf
+YXRvbWljX2NscihzdHJ1Y3QgbnY1MF9oZWFkICopIHt9CiAgICAgIHwgICAgICAgICAgICAgICAg
+ICAgICBefn5+fn5+fn5+fn5+fn5+fn4KZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9k
+aXNwbGF5LmM6IEluIGZ1bmN0aW9uCuKAmG5vdXZlYXVfZnJhbWVidWZmZXJfbmV34oCZOgpkcml2
+ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2Rpc3BsYXkuYzoyODY6MTU6IHdhcm5pbmc6IHZh
+cmlhYmxlCuKAmHdpZHRo4oCZIHNldCBidXQgbm90IHVzZWQgWy1XdW51c2VkLWJ1dC1zZXQtdmFy
+aWFibGVdCiAgMjg2IHwgIHVuc2lnbmVkIGludCB3aWR0aCwgaGVpZ2h0LCBpOwogICAgICB8ICAg
+ICAgICAgICAgICAgXn5+fn4KClNvLCBmaXggdGhlIGlubGluZSBmdW5jdGlvbiBkZWNsYXJhdGlv
+bnMgd2UgdXNlIGluCmRybS9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9kaXNwbnY1MC9jcmMuaCB3
+aGVuIENPTkZJR19ERUJVR19GUyBpcwplbmFibGVkLgoKRml4ZXM6IDEyODg1ZWNiZmU2MiAoImRy
+bS9ub3V2ZWF1L2ttcy9udmQ5LTogQWRkIENSQyBzdXBwb3J0IikKUmVwb3J0ZWQtYnk6IGtlcm5l
+bCB0ZXN0IHJvYm90IDxsa3BAaW50ZWwuY29tPgpTaWduZWQtb2ZmLWJ5OiBMeXVkZSBQYXVsIDxs
+eXVkZUByZWRoYXQuY29tPgotLS0KIGRyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L2Rpc3BudjUwL2Ny
+Yy5oIHwgMjMgKysrKysrKysrKysrLS0tLS0tLS0tLS0KIDEgZmlsZSBjaGFuZ2VkLCAxMiBpbnNl
+cnRpb25zKCspLCAxMSBkZWxldGlvbnMoLSkKCmRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0v
+bm91dmVhdS9kaXNwbnY1MC9jcmMuaCBiL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L2Rpc3BudjUw
+L2NyYy5oCmluZGV4IDRiYzU5ZTc3OTMxNTEuLjkyZGYwODQ0OTJhOGMgMTAwNjQ0Ci0tLSBhL2Ry
+aXZlcnMvZ3B1L2RybS9ub3V2ZWF1L2Rpc3BudjUwL2NyYy5oCisrKyBiL2RyaXZlcnMvZ3B1L2Ry
+bS9ub3V2ZWF1L2Rpc3BudjUwL2NyYy5oCkBAIC0xMDYsMjYgKzEwNiwyNyBAQCBzdHJ1Y3QgbnY1
+MF9jcmNfYXRvbSB7fTsKICNkZWZpbmUgbnY1MF9jcmNfc2V0X3NvdXJjZSBOVUxMCiAKIHN0YXRp
+YyBpbmxpbmUgdm9pZCBudjUwX2NyY19pbml0KHN0cnVjdCBkcm1fZGV2aWNlICpkZXYpIHt9Ci1z
+dGF0aWMgaW5saW5lIGludCBudjUwX2hlYWRfY3JjX2xhdGVfcmVnaXN0ZXIoc3RydWN0IG52NTBf
+aGVhZCAqKSB7fQotc3RhdGljIGlubGluZSB2b2lkCi1udjUwX2NyY19oYW5kbGVfdmJsYW5rKHN0
+cnVjdCBudjUwX2hlYWQgKmhlYWQpIHsgcmV0dXJuIDA7IH0KK3N0YXRpYyBpbmxpbmUgaW50Citu
+djUwX2hlYWRfY3JjX2xhdGVfcmVnaXN0ZXIoc3RydWN0IG52NTBfaGVhZCAqaGVhZCkgeyByZXR1
+cm4gMDsgfQorc3RhdGljIGlubGluZSB2b2lkIG52NTBfY3JjX2hhbmRsZV92Ymxhbmsoc3RydWN0
+IG52NTBfaGVhZCAqaGVhZCkge30KIAogc3RhdGljIGlubGluZSBpbnQKLW52NTBfY3JjX2F0b21p
+Y19jaGVja19oZWFkKHN0cnVjdCBudjUwX2hlYWQgKiwgc3RydWN0IG52NTBfaGVhZF9hdG9tICos
+Ci0JCQkgICBzdHJ1Y3QgbnY1MF9oZWFkX2F0b20gKikge30KK252NTBfY3JjX2F0b21pY19jaGVj
+a19oZWFkKHN0cnVjdCBudjUwX2hlYWQgKmhlYWQsCisJCQkgICBzdHJ1Y3QgbnY1MF9oZWFkX2F0
+b20gKmFzeWgsCisJCQkgICBzdHJ1Y3QgbnY1MF9oZWFkX2F0b20gKmFybWgpIHsgcmV0dXJuIDA7
+IH0KIHN0YXRpYyBpbmxpbmUgdm9pZCBudjUwX2NyY19hdG9taWNfY2hlY2tfb3V0cChzdHJ1Y3Qg
+bnY1MF9hdG9tICphdG9tKSB7fQogc3RhdGljIGlubGluZSB2b2lkCi1udjUwX2NyY19hdG9taWNf
+c3RvcF9yZXBvcnRpbmcoc3RydWN0IGRybV9hdG9taWNfc3RhdGUgKikge30KK252NTBfY3JjX2F0
+b21pY19zdG9wX3JlcG9ydGluZyhzdHJ1Y3QgZHJtX2F0b21pY19zdGF0ZSAqc3RhdGUpIHt9CiBz
+dGF0aWMgaW5saW5lIHZvaWQKLW52NTBfY3JjX2F0b21pY19pbml0X25vdGlmaWVyX2NvbnRleHRz
+KHN0cnVjdCBkcm1fYXRvbWljX3N0YXRlICopIHt9CitudjUwX2NyY19hdG9taWNfaW5pdF9ub3Rp
+Zmllcl9jb250ZXh0cyhzdHJ1Y3QgZHJtX2F0b21pY19zdGF0ZSAqc3RhdGUpIHt9CiBzdGF0aWMg
+aW5saW5lIHZvaWQKLW52NTBfY3JjX2F0b21pY19yZWxlYXNlX25vdGlmaWVyX2NvbnRleHRzKHN0
+cnVjdCBkcm1fYXRvbWljX3N0YXRlICopIHt9CitudjUwX2NyY19hdG9taWNfcmVsZWFzZV9ub3Rp
+Zmllcl9jb250ZXh0cyhzdHJ1Y3QgZHJtX2F0b21pY19zdGF0ZSAqc3RhdGUpIHt9CiBzdGF0aWMg
+aW5saW5lIHZvaWQKLW52NTBfY3JjX2F0b21pY19zdGFydF9yZXBvcnRpbmcoc3RydWN0IGRybV9h
+dG9taWNfc3RhdGUgKikge30KK252NTBfY3JjX2F0b21pY19zdGFydF9yZXBvcnRpbmcoc3RydWN0
+IGRybV9hdG9taWNfc3RhdGUgKnN0YXRlKSB7fQogc3RhdGljIGlubGluZSB2b2lkCi1udjUwX2Ny
+Y19hdG9taWNfc2V0KHN0cnVjdCBudjUwX2hlYWQgKiwgc3RydWN0IG52NTBfaGVhZF9hdG9tICop
+IHt9CitudjUwX2NyY19hdG9taWNfc2V0KHN0cnVjdCBudjUwX2hlYWQgKmhlYWQsIHN0cnVjdCBu
+djUwX2hlYWRfYXRvbSAqc3RhdGUpIHt9CiBzdGF0aWMgaW5saW5lIHZvaWQKLW52NTBfY3JjX2F0
+b21pY19jbHIoc3RydWN0IG52NTBfaGVhZCAqKSB7fQorbnY1MF9jcmNfYXRvbWljX2NscihzdHJ1
+Y3QgbnY1MF9oZWFkICpoZWFkKSB7fQogCiAjZW5kaWYgLyogSVNfRU5BQkxFRChDT05GSUdfREVC
+VUdfRlMpICovCiAjZW5kaWYgLyogIV9fTlY1MF9DUkNfSF9fICovCi0tIAoyLjI2LjIKCl9fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCk5vdXZlYXUgbWFpbGlu
+ZyBsaXN0Ck5vdXZlYXVAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRl
+c2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vbm91dmVhdQo=
