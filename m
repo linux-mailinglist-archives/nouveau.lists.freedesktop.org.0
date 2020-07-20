@@ -2,101 +2,103 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 15DF622A968
-	for <lists+nouveau@lfdr.de>; Thu, 23 Jul 2020 09:17:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DF8EC22A975
+	for <lists+nouveau@lfdr.de>; Thu, 23 Jul 2020 09:17:50 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 72CB86E841;
-	Thu, 23 Jul 2020 07:17:31 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id AD9366E84E;
+	Thu, 23 Jul 2020 07:17:33 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from hqnvemgate25.nvidia.com (hqnvemgate25.nvidia.com
- [216.228.121.64])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C5A8C89DE1
- for <nouveau@lists.freedesktop.org>; Mon, 20 Jul 2020 19:59:45 +0000 (UTC)
-Received: from hqpgpgate101.nvidia.com (Not Verified[216.228.121.13]) by
- hqnvemgate25.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
- id <B5f15f7740000>; Mon, 20 Jul 2020 12:58:44 -0700
-Received: from hqmail.nvidia.com ([172.20.161.6])
- by hqpgpgate101.nvidia.com (PGP Universal service);
- Mon, 20 Jul 2020 12:59:45 -0700
+Received: from nat-hk.nvidia.com (nat-hk.nvidia.com [203.18.50.4])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3400F89D5C
+ for <nouveau@lists.freedesktop.org>; Mon, 20 Jul 2020 23:16:42 +0000 (UTC)
+Received: from hkpgpgate102.nvidia.com (Not Verified[10.18.92.9]) by
+ nat-hk.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
+ id <B5f1625d60000>; Tue, 21 Jul 2020 07:16:38 +0800
+Received: from HKMAIL102.nvidia.com ([10.18.16.11])
+ by hkpgpgate102.nvidia.com (PGP Universal service);
+ Mon, 20 Jul 2020 16:16:38 -0700
 X-PGP-Universal: processed;
- by hqpgpgate101.nvidia.com on Mon, 20 Jul 2020 12:59:45 -0700
-Received: from HQMAIL111.nvidia.com (172.20.187.18) by HQMAIL105.nvidia.com
- (172.20.187.12) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Mon, 20 Jul
- 2020 19:59:45 +0000
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com (104.47.55.106)
- by HQMAIL111.nvidia.com (172.20.187.18) with Microsoft SMTP Server (TLS) id
- 15.0.1473.3 via Frontend Transport; Mon, 20 Jul 2020 19:59:45 +0000
+ by hkpgpgate102.nvidia.com on Mon, 20 Jul 2020 16:16:38 -0700
+Received: from HKMAIL101.nvidia.com (10.18.16.10) by HKMAIL102.nvidia.com
+ (10.18.16.11) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Mon, 20 Jul
+ 2020 23:16:38 +0000
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com (104.47.58.100)
+ by HKMAIL101.nvidia.com (10.18.16.10) with Microsoft SMTP Server (TLS) id
+ 15.0.1473.3 via Frontend Transport; Mon, 20 Jul 2020 23:16:38 +0000
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=fd+pYszM1SyD1KVg66iRCKyN7LG9O98q7U6BLmC+BFS7q3P0Osbez1ntIqKun2RAWejjzNv1EZynU/vja03ZS43YJv79rARGYL1nCSPMkWbmPQgYLcMGV4kwDAOEgOr+RDgYd901y+1i8/AIKdsUmMMqo9e2zA7YrfH/IaIWrpVe//00zUN2SCo8DjUdcFDiUcP5QricvFZD2BSu0oASc0n2NV4l2FI08CekVquo1KD0+nac8hbcxpngykzmaR4DFjK95BXzQaT35C2KgCRrBDSKwrByZUrcnJu2V9WK4+IC3//oBtqhGYsFkpZANlhWU6t8nllS8pCiXT+OgxvqhA==
+ b=DCoUoqegydEjQPyoEXbE2vGgNAd+b89o005xLH6jT+BeEYfXfLQ+fZ6sJ0tcSHxOCT/4WbP/jYRfaWDsRMDetDAK/w9JW8AzhVJuwtC3jSuH79dc1drxplHxephvhwmM8cjIpTys2EpQvO92ZZSp9IXVq17Pu3S4QCLyawJPV3oTeiQmWoH0VofHR2TF7eNkxVF7UlH52IICDZKJtcz5fG9aKEM5HYrmkuqeOcKXjlG3ev6QGgx9f2LhNu7j/RTbuFBMmEuJIcuZClxPxGvW8ZmnKjl0EismFUVMxByP1Ag4HbRtGJsvgkal+C88ms7lRPPrmp7p8Ha+ZVf4eLOitQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=aUfd7wccwejYJaa940EGkBKcxqqS4gjNNqXzTfJ0aQQ=;
- b=kLy1zykvoUAL/97vZ2wKldWACDkCDGJvrKHeZGVpnuaVI4ZLAB4LhG1XQUeRX1igM3mS0fkEcRfQPJFxCQmvD2lF0NnFM6wVFC95F4R/C0JuwDnN/McZ8x9ryjGHMr0j9eJChlmY5DdC6acA586inOBx0I8y70ZwFv4WUQD2M9w8kKynRFVv1JePHMNTiuq3eq71B991XU0bztpaMjEpAJjKj7ID9fNoSiU3LyANlvi2pOkhfInocziFhY1kU4X30juFJ75HnLtxo72Ib6h+i7zu7ChoHmaQHXsWXi0WdK604+yAeFLDzUUFQw8qOz82Nw1ehDo4SsJvAeKj4d1J+g==
+ bh=l9YsPERfWdF/nbq0WcQoLchDX/Y65JmOVza5hA+QpB0=;
+ b=iAHcDGb0ZxLR6BMwJXvF02fuWLXg+By7QU1LcdcSFMLYVdON4ZBu8sUMU+LPbAXxkyvfKoqzTg3+E0UyOdVeIgvPWxIYznn67MsYKX+x628XKMy2vPKsN4W8WD21TQFhZGvylgnK17y8hHlwIPJz8gDcfk7PuIj9NS4Coo1zd5LoGPElheyI+W2cYlr39YB9vWPXUKLDce3cqQI+b6BmVcI0k2OYpLaw8N1Tqxdoi39MKfg7c+QtbZcrAjKkBNLA35HaXAFHZ3i3brCeOpvsqBOG2OI2nEfsqbgUz+Jep5947rEDWs5DiOcoCyqjpKa7yQpm/nRKTUgZgIUlBRw8PQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
  dkim=pass header.d=nvidia.com; arc=none
 Authentication-Results: nvidia.com; dkim=none (message not signed)
  header.d=none;nvidia.com; dmarc=none action=none header.from=nvidia.com;
 Received: from DM6PR12MB3834.namprd12.prod.outlook.com (2603:10b6:5:14a::12)
- by DM6PR12MB4250.namprd12.prod.outlook.com (2603:10b6:5:21a::9) with
+ by DM6PR12MB3116.namprd12.prod.outlook.com (2603:10b6:5:38::12) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3195.17; Mon, 20 Jul
- 2020 19:59:44 +0000
+ 2020 23:16:35 +0000
 Received: from DM6PR12MB3834.namprd12.prod.outlook.com
  ([fe80::1d53:7cb4:c3d7:2b54]) by DM6PR12MB3834.namprd12.prod.outlook.com
  ([fe80::1d53:7cb4:c3d7:2b54%6]) with mapi id 15.20.3195.025; Mon, 20 Jul 2020
- 19:59:44 +0000
-Date: Mon, 20 Jul 2020 16:59:43 -0300
+ 23:16:35 +0000
+Date: Mon, 20 Jul 2020 20:16:33 -0300
 From: Jason Gunthorpe <jgg@nvidia.com>
 To: Ralph Campbell <rcampbell@nvidia.com>
-Message-ID: <20200720195943.GH2021234@nvidia.com>
+Message-ID: <20200720231633.GI2021234@nvidia.com>
 References: <20200713172149.2310-1-rcampbell@nvidia.com>
  <20200713172149.2310-3-rcampbell@nvidia.com>
  <20200720183643.GA3028737@nvidia.com>
  <2e775a5d-9d62-de52-6799-3bbb09c88c5a@nvidia.com>
+ <20200720195943.GH2021234@nvidia.com>
+ <fdfde6a0-f2bf-c0b2-0283-c882aa755292@nvidia.com>
 Content-Disposition: inline
-In-Reply-To: <2e775a5d-9d62-de52-6799-3bbb09c88c5a@nvidia.com>
-X-ClientProxiedBy: BL0PR02CA0067.namprd02.prod.outlook.com
- (2603:10b6:207:3d::44) To DM6PR12MB3834.namprd12.prod.outlook.com
+In-Reply-To: <fdfde6a0-f2bf-c0b2-0283-c882aa755292@nvidia.com>
+X-ClientProxiedBy: MN2PR03CA0012.namprd03.prod.outlook.com
+ (2603:10b6:208:23a::17) To DM6PR12MB3834.namprd12.prod.outlook.com
  (2603:10b6:5:14a::12)
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 Received: from mlx.ziepe.ca (156.34.48.30) by
- BL0PR02CA0067.namprd02.prod.outlook.com (2603:10b6:207:3d::44) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.3195.18 via Frontend Transport; Mon, 20 Jul 2020 19:59:44 +0000
+ MN2PR03CA0012.namprd03.prod.outlook.com (2603:10b6:208:23a::17) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3195.17 via Frontend
+ Transport; Mon, 20 Jul 2020 23:16:34 +0000
 Received: from jgg by mlx with local (Exim 4.94)	(envelope-from
- <jgg@nvidia.com>)	id 1jxbwt-00Cr1V-3u; Mon, 20 Jul 2020 16:59:43 -0300
+ <jgg@nvidia.com>)	id 1jxf1N-00Cvqs-N4; Mon, 20 Jul 2020 20:16:33 -0300
 X-Originating-IP: [156.34.48.30]
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 7e3258b9-331d-4ff3-9b25-08d82ce77263
-X-MS-TrafficTypeDiagnostic: DM6PR12MB4250:
+X-MS-Office365-Filtering-Correlation-Id: 4834a13b-0763-4ea0-e80e-08d82d02f235
+X-MS-TrafficTypeDiagnostic: DM6PR12MB3116:
 X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: <DM6PR12MB4250493765A3BDDFB00838A8C27B0@DM6PR12MB4250.namprd12.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:9508;
+X-Microsoft-Antispam-PRVS: <DM6PR12MB311690C831D918EB185B363EC27B0@DM6PR12MB3116.namprd12.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:4303;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 8hk4Aule/HPc12q4amoN2kZekyryMSW2AGeDdCwiWjkyha6st9khTKJqvYSYwlQP8xhO3chfcnS4xutUFKZMrI4XWZX2kQIZEzpm5+ucFWmM/De4d2Bn/r19c3efYNROSh/kGEYRTd6tRd9mcLTxBZ7sMfN1BWVMOJckebelH9Ni2A8KBgKvYVNqwm4EUTQM2y6rCsYVyHL8MY2td/msXkMXH4hQ/dSid3H26uQf3/GEqU2U+uaKQzejCZm0rj7dk+o6lVgKIGHAlkm5Qikmjey3miOEYzC547nQos9yS2PZDOV34WrNuZwGKGFwhwgX
+X-Microsoft-Antispam-Message-Info: x1vdsr0Q8fmfyeG6Qr5xFJ847lTRIr1DpfMfQnCj+LmeniURZYRjJHNbLhc6dsuE5v8Ls7xMG/pAFrFAD52IZdIFH27Joivn5utBeXbiTWMfY0iNdrFxwEoSdlgMdVQoJGr0xzyf8e7/HpdCU9jq3B9+Zj/nf13jdtQK69s/IlIyib3pdeFm9oT+bFLqAN1fWkO8kIHyhF19mVo626dzr4WEl7YDampQPFnIMDZ5Youiy5KjXyP3rv4EPAwhVmPf/L4MlzeLh2hhlwNOqR9EaXoIAt7QrNRLQEJq8oLiOO3cH6Uev7HZ8ZriJv0rutVR
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:DM6PR12MB3834.namprd12.prod.outlook.com; PTR:; CAT:NONE;
  SFTY:;
- SFS:(4636009)(136003)(366004)(346002)(376002)(396003)(39860400002)(36756003)(6862004)(6636002)(316002)(8936002)(426003)(186003)(2906002)(86362001)(37006003)(26005)(54906003)(2616005)(8676002)(478600001)(9786002)(1076003)(9746002)(66946007)(66556008)(66476007)(5660300002)(7416002)(33656002)(4326008);
+ SFS:(4636009)(39860400002)(136003)(366004)(396003)(376002)(346002)(6862004)(5660300002)(53546011)(66946007)(8936002)(66556008)(66476007)(426003)(8676002)(4326008)(36756003)(2906002)(83380400001)(2616005)(316002)(37006003)(6636002)(7416002)(54906003)(478600001)(186003)(1076003)(86362001)(9746002)(9786002)(26005)(33656002);
  DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData: 72/lgBbYtJgjUZm0U2QfLOGFGNWjX0VN4gVOxJnmd3Uab+xPLrzaggf7BjqASMijplUPvQYxSL8sbYZu8CYjN6HtLBgbxillRIl8osvjM4ObAqOSsORGnKOjPTrvFLaR+w2c3yJgfqNF+bvfmnnuUJfug6wn+Q1nrTaQvOS5R3o6ATxCftRPeAwU85WBHOU2iaPZDZot2tZDjsvwVXhFN5SSlOZ1Tzdx0DsOtxKWZ1Z7u7ENw0pjbt+EzR7wZFklxtHieC0+5SRlPycmZukE6HiwdCAQxcp4WCtaXodojLqTlU9759HZk0f+xQIY2zcJ1IMa/p/crh1hLDIsc6c27anVY6GeKyv5iFeGotG0qO4613fx8fqpgA0uHpGWCB0pI56X9vZcqwcTZV9U4wVWBjo9o7o5SwwreDlogXOM/bFc0GvnjolBQ4ExnysC6D0bVy9mDGdiowzcSXc4RKMU5IMtw7hSBUUPDUi4s4VW+0I=
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7e3258b9-331d-4ff3-9b25-08d82ce77263
+X-MS-Exchange-AntiSpam-MessageData: tVqQxieM0fDVK4DPnAxAHf1QcCA4z9m9W0Sppr0hGem5arVxrqiyUHp5jIyZesdKD8Vx5ZSHfehtpdATVZq0vLfFwBx2hplbdeYcoDiY1RBYvJiqcOjkvEabTlRmvZHECQKGix9SIisrFs+TmUOIV983pxs96tuoEBpAp7i1nmuPRnJtwgaWhw6NWLrXodnmu9jNq9YEypGmakzkCB3KB+/fFQzREYCeujN619xUMKfjZ3Xw3sKm+W4zzlxwA2wVOwTH2eDVu+fx5TADYoG2tTKLz4f1RZ1DW3UWyIG+kZetzzRehdXS5/MZKHYrPf7sZitqzHx8DD/x/lTmA2OQ0vHKWJ71tr5Fm5PKXUOoMVQMrsYsq5BCMAubzkmVwrKRTAhgExKIvxq7I+mqXZBM2nO3QlG3Np162ycAScNjHxPJgjS5ozQP57CMkmh+upgLTCgfTZ3prABi6wm/8IDo2elau7LzHbNvW0UnA8WhD0I=
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4834a13b-0763-4ea0-e80e-08d82d02f235
 X-MS-Exchange-CrossTenant-AuthSource: DM6PR12MB3834.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Jul 2020 19:59:44.2502 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Jul 2020 23:16:35.3146 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: +SOLb5YH5JLqEY5pOSrM25fE+NqC1Hpj3/F59/b+Tr39EVZZEDnsRaQ+ZNVLyBJo
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4250
+X-MS-Exchange-CrossTenant-UserPrincipalName: RQzMkKTH5jCxNqKMbV4jagMqTkm27z0xpJ9dQDXEAoi3kI9J29ZNfiGthw1jDU3J
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB3116
 X-OriginatorOrg: Nvidia.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
- t=1595275124; bh=aUfd7wccwejYJaa940EGkBKcxqqS4gjNNqXzTfJ0aQQ=;
+ t=1595286998; bh=l9YsPERfWdF/nbq0WcQoLchDX/Y65JmOVza5hA+QpB0=;
  h=X-PGP-Universal:ARC-Seal:ARC-Message-Signature:
  ARC-Authentication-Results:Authentication-Results:Date:From:To:CC:
  Subject:Message-ID:References:Content-Type:Content-Disposition:
@@ -116,12 +118,12 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
  X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
  X-MS-Exchange-CrossTenant-UserPrincipalName:
  X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-OriginatorOrg;
- b=nzqkYCKtHjTHne6jj7lFexU4PmgOLhFKL7GbbU5W0M2gCXopYj6+eAF+ZuflVLdtX
- uGN26L5rFInXFM1ieErFfujPCaVtktnd9imY2ZGKSxGdbtroAGCeIn/byTzII6NkWr
- h4svGPTB96A4U0BzGtFCNR2rqMGcfOv9CSpXV1Swi92+MZUwO62CkASDpAgClTcQAT
- Z6P5pILgKfrx60hK3UeovqpBPq8jKm0vnMlK5CG31+mMdmw9oNv5CzSydHzMViwE5m
- 2ZPQ0Nt52aPCpWoRvNxoac9slHSRR1RljyUZu8oKYG4KgCjPmk+RBy6GJbZwgq0PqH
- BfcPisnnJWBJQ==
+ b=NvGAOEXLF5Fo8nGP1vF5ypMJLmSXtXJxBtweEcANVnbCsNK91CDC3Ummnk6v/tzH9
+ aBoXuMl1T0ygtIH+NA8x+xsLJWtQqSwP04+m3g8I5YMClFnyzW1ch+lU7yd4YC8+jf
+ nP5S12gV7IQigjHMymTyuQ6kJoQMcMkBdE9MssRYEOCsgk5aXpgOGYAj+7SFWTtEmu
+ UJmm0UvqBx/4f6EgszAedF3GUdEKbOz8Pmxom8UQN4wlVRJocTYB7Q9+t/M8BU50E2
+ 01S58TXDId7ZE0H3a2U7NfduR9KQl6n2bO6WPi6ImoYXBMA8EqfM9wLEoM6KM+86bj
+ tOoToq6jhTfrA==
 X-Mailman-Approved-At: Thu, 23 Jul 2020 07:17:29 +0000
 Subject: Re: [Nouveau] [PATCH v2 2/5] mm/migrate: add a direction parameter
  to migrate_vma
@@ -147,36 +149,64 @@ Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Mon, Jul 20, 2020 at 12:54:53PM -0700, Ralph Campbell wrote:
-> > > diff --git a/include/linux/migrate.h b/include/linux/migrate.h
-> > > index 3e546cbf03dd..620f2235d7d4 100644
-> > > +++ b/include/linux/migrate.h
-> > > @@ -180,6 +180,11 @@ static inline unsigned long migrate_pfn(unsigned long pfn)
-> > >   	return (pfn << MIGRATE_PFN_SHIFT) | MIGRATE_PFN_VALID;
-> > >   }
-> > > +enum migrate_vma_direction {
-> > > +	MIGRATE_VMA_FROM_SYSTEM,
-> > > +	MIGRATE_VMA_FROM_DEVICE_PRIVATE,
-> > > +};
-> > 
-> > I would have guessed this is more natural as _FROM_DEVICE_ and
-> > TO_DEVICE_ ?
+On Mon, Jul 20, 2020 at 01:49:09PM -0700, Ralph Campbell wrote:
 > 
-> The caller controls where the destination memory is allocated so it isn't
-> necessarily device private memory, it could be from system to system.
-> The use case for system to system memory migration is for hardware
-> like ARM SMMU or PCIe ATS where a single set of page tables is shared by
-> the device and a CPU process over a coherent system memory bus.
-> Also many integrated GPUs in SOCs fall into this category too.
+> On 7/20/20 12:59 PM, Jason Gunthorpe wrote:
+> > On Mon, Jul 20, 2020 at 12:54:53PM -0700, Ralph Campbell wrote:
+> > > > > diff --git a/include/linux/migrate.h b/include/linux/migrate.h
+> > > > > index 3e546cbf03dd..620f2235d7d4 100644
+> > > > > +++ b/include/linux/migrate.h
+> > > > > @@ -180,6 +180,11 @@ static inline unsigned long migrate_pfn(unsigned long pfn)
+> > > > >    	return (pfn << MIGRATE_PFN_SHIFT) | MIGRATE_PFN_VALID;
+> > > > >    }
+> > > > > +enum migrate_vma_direction {
+> > > > > +	MIGRATE_VMA_FROM_SYSTEM,
+> > > > > +	MIGRATE_VMA_FROM_DEVICE_PRIVATE,
+> > > > > +};
+> > > > 
+> > > > I would have guessed this is more natural as _FROM_DEVICE_ and
+> > > > TO_DEVICE_ ?
+> > > 
+> > > The caller controls where the destination memory is allocated so it isn't
+> > > necessarily device private memory, it could be from system to system.
+> > > The use case for system to system memory migration is for hardware
+> > > like ARM SMMU or PCIe ATS where a single set of page tables is shared by
+> > > the device and a CPU process over a coherent system memory bus.
+> > > Also many integrated GPUs in SOCs fall into this category too.
+> > 
+> > Maybe just TO/FROM_DEIVCE then? Even though the memory is not
+> > DEVICE_PRIVATE it is still device owned pages right?
+> > 
+> > > So to me, it makes more sense to specify the direction based on the
+> > > source location.
+> > 
+> > It feels strange because the driver doesn't always know or control the
+> > source?
+> 
+> The driver can't really know where the source is currently located because the
+> API is designed to not initially hold the page locks, migrate_vma_setup() only knows
+> the source once it holds the page table locks and isolates/locks the pages being
+> migrated. The direction and pgmap_owner are supposed to filter which pages
+> the caller is interested in migrating.
+> Perhaps the direction should instead be a flags field with separate bits for
+> system memory and device private memory selecting source candidates for
+> migration. I can imagine use cases for all 4 combinations of
+> d->d, d->s, s->d, and s->s being valid.
+> 
+> I didn't really think a direction was needed, this was something that
+> Christoph Hellwig seemed to think made the API safer.
 
-Maybe just TO/FROM_DEIVCE then? Even though the memory is not
-DEVICE_PRIVATE it is still device owned pages right?
+If it is a filter then just using those names would make sense
 
-> So to me, it makes more sense to specify the direction based on the
-> source location.
+MIGRATE_VMA_SELECT_SYSTEM
+MIGRATE_VMA_SELECT_DEVICE_PRIVATE
 
-It feels strange because the driver doesn't always know or control the
-source?
+SYSTEM feels like the wrong name too, doesn't linux have a formal name
+for RAM struct pages?
+
+In your future coherent design how would the migrate select 'device'
+pages that are fully coherent? Are they still zone something pages
+that are OK for CPU usage?
 
 Jason
 _______________________________________________
