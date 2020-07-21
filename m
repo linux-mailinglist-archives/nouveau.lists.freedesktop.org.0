@@ -2,131 +2,88 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id DF8EC22A975
-	for <lists+nouveau@lfdr.de>; Thu, 23 Jul 2020 09:17:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BEEAD22A969
+	for <lists+nouveau@lfdr.de>; Thu, 23 Jul 2020 09:17:42 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id AD9366E84E;
-	Thu, 23 Jul 2020 07:17:33 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 54BD06E834;
+	Thu, 23 Jul 2020 07:17:32 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from nat-hk.nvidia.com (nat-hk.nvidia.com [203.18.50.4])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3400F89D5C
- for <nouveau@lists.freedesktop.org>; Mon, 20 Jul 2020 23:16:42 +0000 (UTC)
-Received: from hkpgpgate102.nvidia.com (Not Verified[10.18.92.9]) by
- nat-hk.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
- id <B5f1625d60000>; Tue, 21 Jul 2020 07:16:38 +0800
-Received: from HKMAIL102.nvidia.com ([10.18.16.11])
- by hkpgpgate102.nvidia.com (PGP Universal service);
- Mon, 20 Jul 2020 16:16:38 -0700
-X-PGP-Universal: processed;
- by hkpgpgate102.nvidia.com on Mon, 20 Jul 2020 16:16:38 -0700
-Received: from HKMAIL101.nvidia.com (10.18.16.10) by HKMAIL102.nvidia.com
- (10.18.16.11) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Mon, 20 Jul
- 2020 23:16:38 +0000
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com (104.47.58.100)
- by HKMAIL101.nvidia.com (10.18.16.10) with Microsoft SMTP Server (TLS) id
- 15.0.1473.3 via Frontend Transport; Mon, 20 Jul 2020 23:16:38 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=DCoUoqegydEjQPyoEXbE2vGgNAd+b89o005xLH6jT+BeEYfXfLQ+fZ6sJ0tcSHxOCT/4WbP/jYRfaWDsRMDetDAK/w9JW8AzhVJuwtC3jSuH79dc1drxplHxephvhwmM8cjIpTys2EpQvO92ZZSp9IXVq17Pu3S4QCLyawJPV3oTeiQmWoH0VofHR2TF7eNkxVF7UlH52IICDZKJtcz5fG9aKEM5HYrmkuqeOcKXjlG3ev6QGgx9f2LhNu7j/RTbuFBMmEuJIcuZClxPxGvW8ZmnKjl0EismFUVMxByP1Ag4HbRtGJsvgkal+C88ms7lRPPrmp7p8Ha+ZVf4eLOitQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=l9YsPERfWdF/nbq0WcQoLchDX/Y65JmOVza5hA+QpB0=;
- b=iAHcDGb0ZxLR6BMwJXvF02fuWLXg+By7QU1LcdcSFMLYVdON4ZBu8sUMU+LPbAXxkyvfKoqzTg3+E0UyOdVeIgvPWxIYznn67MsYKX+x628XKMy2vPKsN4W8WD21TQFhZGvylgnK17y8hHlwIPJz8gDcfk7PuIj9NS4Coo1zd5LoGPElheyI+W2cYlr39YB9vWPXUKLDce3cqQI+b6BmVcI0k2OYpLaw8N1Tqxdoi39MKfg7c+QtbZcrAjKkBNLA35HaXAFHZ3i3brCeOpvsqBOG2OI2nEfsqbgUz+Jep5947rEDWs5DiOcoCyqjpKa7yQpm/nRKTUgZgIUlBRw8PQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-Authentication-Results: nvidia.com; dkim=none (message not signed)
- header.d=none;nvidia.com; dmarc=none action=none header.from=nvidia.com;
-Received: from DM6PR12MB3834.namprd12.prod.outlook.com (2603:10b6:5:14a::12)
- by DM6PR12MB3116.namprd12.prod.outlook.com (2603:10b6:5:38::12) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3195.17; Mon, 20 Jul
- 2020 23:16:35 +0000
-Received: from DM6PR12MB3834.namprd12.prod.outlook.com
- ([fe80::1d53:7cb4:c3d7:2b54]) by DM6PR12MB3834.namprd12.prod.outlook.com
- ([fe80::1d53:7cb4:c3d7:2b54%6]) with mapi id 15.20.3195.025; Mon, 20 Jul 2020
- 23:16:35 +0000
-Date: Mon, 20 Jul 2020 20:16:33 -0300
-From: Jason Gunthorpe <jgg@nvidia.com>
-To: Ralph Campbell <rcampbell@nvidia.com>
-Message-ID: <20200720231633.GI2021234@nvidia.com>
-References: <20200713172149.2310-1-rcampbell@nvidia.com>
- <20200713172149.2310-3-rcampbell@nvidia.com>
- <20200720183643.GA3028737@nvidia.com>
- <2e775a5d-9d62-de52-6799-3bbb09c88c5a@nvidia.com>
- <20200720195943.GH2021234@nvidia.com>
- <fdfde6a0-f2bf-c0b2-0283-c882aa755292@nvidia.com>
-Content-Disposition: inline
-In-Reply-To: <fdfde6a0-f2bf-c0b2-0283-c882aa755292@nvidia.com>
-X-ClientProxiedBy: MN2PR03CA0012.namprd03.prod.outlook.com
- (2603:10b6:208:23a::17) To DM6PR12MB3834.namprd12.prod.outlook.com
- (2603:10b6:5:14a::12)
+Received: from mail-io1-xd31.google.com (mail-io1-xd31.google.com
+ [IPv6:2607:f8b0:4864:20::d31])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C2DE16E040;
+ Tue, 21 Jul 2020 18:36:58 +0000 (UTC)
+Received: by mail-io1-xd31.google.com with SMTP id e64so22497292iof.12;
+ Tue, 21 Jul 2020 11:36:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=subject:to:cc:references:from:autocrypt:message-id:date:user-agent
+ :mime-version:in-reply-to:content-transfer-encoding:content-language;
+ bh=DKoqtLlCZ3xb5WBePvpj1u1JNUm5TcuvXGpT5UK2G08=;
+ b=OGNxulUtSF4ynIewzetTCPyyWNFlPsCe/npBc9CT8DR+dc8tQKgB+dM+rrnpvXoDnE
+ tAKKO+yh/JDOdiRKRHmCjV3Q39ZDOOhUCo7ugO+S10btdbBXNVF0i6tLFrk3MEdc2xuv
+ L4S5PHK7EZFjh710wkrvs4I/7qx7H+/0EvGfSNLXx7IsOtlcvEplkKFtx9K8wieQA31F
+ aRQ0QITJHNeV72WeeVcCRdy4jYTWS4aovMQYVlv5Hwh24KwYjBug493ROJpaXi2IN5Hb
+ qc+3pSeZUR5+9uFQQsOTcYn8FWvhe6vFahthIufPxCPhaPbONEMAhhc7zmrWEF4LGs06
+ k+Rg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:subject:to:cc:references:from:autocrypt
+ :message-id:date:user-agent:mime-version:in-reply-to
+ :content-transfer-encoding:content-language;
+ bh=DKoqtLlCZ3xb5WBePvpj1u1JNUm5TcuvXGpT5UK2G08=;
+ b=izOCQDv07GdaGpAgrZmt4vAC5RHjONWmI9WrL/UiVUg4UHnFJ6TNQCdV1yDcx6aUi4
+ yHOmtLqurW/ZHxmsYnM8vWXNXnXWO6BrxO2yCMB8ovwJYtxeGJnVHtqLa5Te3wXWC9gX
+ nwT6z4ZfwU43Y9PlxHQLDemFEHa4AsXGV6wBPeiCblOsQ/NvZ3kCTZcYHN39jEE21y3d
+ 31tRSBLZn/6u6eP5HX6zoaWzGyA3BeY2dLk5MBHwypieYkJZdVtOW3/7OIm2vmjWax1x
+ yj7a0Vr8C1DaAl5GVUhorw2gTMqyB0xwLx/T4E5no5GeakMZcYizypftXzT91vCTVl8G
+ SI9g==
+X-Gm-Message-State: AOAM531jaM7Aa/k07vWjnDNpOI9YtUGcFdCIWZspOzT4Z9VKhssNLHxa
+ k81Uxr1+Wi83OAISGwOq6pw=
+X-Google-Smtp-Source: ABdhPJyjm3x7B2weH8RJQpPYu2oZG841KdnHRI51EDjG4coHaalocFrLEryqkmen2USsZ0klb87UgA==
+X-Received: by 2002:a6b:b555:: with SMTP id e82mr28464431iof.56.1595356617867; 
+ Tue, 21 Jul 2020 11:36:57 -0700 (PDT)
+Received: from hive64.slackware.lan (SEB-ai06-18-141.wcta.net. [64.110.18.141])
+ by smtp.gmail.com with ESMTPSA id u3sm10795893iol.41.2020.07.21.11.36.56
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 21 Jul 2020 11:36:57 -0700 (PDT)
+To: Mika Westerberg <mika.westerberg@linux.intel.com>,
+ Lyude Paul <lyude@redhat.com>
+References: <CACO55tuA+XMgv=GREf178NzTLTHri4kyD5mJjKuDpKxExauvVg@mail.gmail.com>
+ <20200716235440.GA675421@bjorn-Precision-5520>
+ <CACO55tuVJHjEbsW657ToczN++_iehXA8pimPAkzc=NOnx4Ztnw@mail.gmail.com>
+ <CACO55tso5SVipAR=AZfqhp6GGkKO9angv6f+nd61wvgAJtrOKg@mail.gmail.com>
+ <20200721122247.GI5180@lahna.fi.intel.com>
+ <f951fba07ca7fa2fdfd590cd5023d1b31f515fa2.camel@redhat.com>
+ <20200721152737.GS5180@lahna.fi.intel.com>
+From: Patrick Volkerding <volkerdi@gmail.com>
+Autocrypt: addr=volkerdi@gmail.com; prefer-encrypt=mutual; keydata=
+ mQGiBD5dIFQRBADB31WinbXdaGk/8RNkpnZclu1w3Xmd5ItACDLB2FhOhArw35EAMOYzxI0g
+ RtDNWN4pn9n74q4HbFzyRWElThWRtBTYLEpImzrk7HYVCjMxjw5A0fTr88aiHOth5aS0vPAo
+ q+3TYn6JDSipf2bR03G2JVwgj3Iu066pX4naivNm8wCgldHGF3y9vT3UPYh3QFgEUlCalt0D
+ /3n6NopRYy0hMN6BPu+NarXwv6NQ9g0GV5FNjEErigkrD/htqCyWAUl8zyCKKUFZZx4UGBRZ
+ 5guCdNzwgYH3yn3aVMhJYQ6tcSlLsj3fJIz4LAZ3+rI77rbn7gHHdp7CSAuV+QHv3aNanUD/
+ KGz5SPSvF4w+5qRM4PfPNT1hLMV8BACzxiyX7vzeE4ZxNYvcuCtv0mvEHl9yD66NFA35RvXa
+ O0QiRVYeoUa5JOQZgwq+fIB0zgsEYDhXFkC1hM/QL4NccMRk8C09nFn4eiz4dAEnwKt4rLCJ
+ KhkLl1DWTSoXHe/dOXaLnFyLzB1J8hEYmUvw3SwPt//wMqDiVBLeZfFcdLQwU2xhY2t3YXJl
+ IExpbnV4IFByb2plY3QgPHNlY3VyaXR5QHNsYWNrd2FyZS5jb20+iF8EExECAB8ECwcDAgMV
+ AgMDFgIBAh4BAheABQJQPlypBQlBo7MrAAoJEGpEY8BAECIzjOwAn3vptb6K1v2wLI9eVlnC
+ dx4m1btpAJ9sFt4KwJrEdiO5wFC4xe9G4eZl4rkBDQQ+XSBVEAQA3VYlpPyRKdOKoM6t1SwN
+ G0YgVFSvxy/eiratBf7misDBsJeH86Pf8H9OfVHOcqscLiC+iqvDgqeTUX9vASjlnvcoS/3H
+ 5TDPlxiifIDggqd2euNtJ8+lyXRBV6yPsBIA6zki9cR4zphe48hKpSsDfj7uL5sfyc2UmKKb
+ oSu3x7cAAwUD/1jmoLQs9bItbTosoy+5+Uzrl0ShRlv+iZV8RPzAMFuRJNxUJkUmmThowtXR
+ aPKFI9AVd+pP44aAJ+zxCPtS2isiW20AxubJoBPpXcVatJWi4sG+TM5Z5VRoLg7tIDNVWsyH
+ GXPAhIG2Y8Z1kyWwb4P8A/W2b1ZCqS7Fx4yEhTikiEwEGBECAAwFAlA+XL8FCUGjs2IACgkQ
+ akRjwEAQIjMsbQCgk59KFTbTlZfJ6FoZjjEmK3/xGR4AniYT+EdSdvEyRtZYkqWzp1ayvO1b
+Message-ID: <d3253a47-09ff-8bc7-3ca1-a80bdc09d1c2@gmail.com>
+Date: Tue, 21 Jul 2020 13:37:12 -0500
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from mlx.ziepe.ca (156.34.48.30) by
- MN2PR03CA0012.namprd03.prod.outlook.com (2603:10b6:208:23a::17) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3195.17 via Frontend
- Transport; Mon, 20 Jul 2020 23:16:34 +0000
-Received: from jgg by mlx with local (Exim 4.94)	(envelope-from
- <jgg@nvidia.com>)	id 1jxf1N-00Cvqs-N4; Mon, 20 Jul 2020 20:16:33 -0300
-X-Originating-IP: [156.34.48.30]
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 4834a13b-0763-4ea0-e80e-08d82d02f235
-X-MS-TrafficTypeDiagnostic: DM6PR12MB3116:
-X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: <DM6PR12MB311690C831D918EB185B363EC27B0@DM6PR12MB3116.namprd12.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:4303;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: x1vdsr0Q8fmfyeG6Qr5xFJ847lTRIr1DpfMfQnCj+LmeniURZYRjJHNbLhc6dsuE5v8Ls7xMG/pAFrFAD52IZdIFH27Joivn5utBeXbiTWMfY0iNdrFxwEoSdlgMdVQoJGr0xzyf8e7/HpdCU9jq3B9+Zj/nf13jdtQK69s/IlIyib3pdeFm9oT+bFLqAN1fWkO8kIHyhF19mVo626dzr4WEl7YDampQPFnIMDZ5Youiy5KjXyP3rv4EPAwhVmPf/L4MlzeLh2hhlwNOqR9EaXoIAt7QrNRLQEJq8oLiOO3cH6Uev7HZ8ZriJv0rutVR
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DM6PR12MB3834.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFTY:;
- SFS:(4636009)(39860400002)(136003)(366004)(396003)(376002)(346002)(6862004)(5660300002)(53546011)(66946007)(8936002)(66556008)(66476007)(426003)(8676002)(4326008)(36756003)(2906002)(83380400001)(2616005)(316002)(37006003)(6636002)(7416002)(54906003)(478600001)(186003)(1076003)(86362001)(9746002)(9786002)(26005)(33656002);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData: tVqQxieM0fDVK4DPnAxAHf1QcCA4z9m9W0Sppr0hGem5arVxrqiyUHp5jIyZesdKD8Vx5ZSHfehtpdATVZq0vLfFwBx2hplbdeYcoDiY1RBYvJiqcOjkvEabTlRmvZHECQKGix9SIisrFs+TmUOIV983pxs96tuoEBpAp7i1nmuPRnJtwgaWhw6NWLrXodnmu9jNq9YEypGmakzkCB3KB+/fFQzREYCeujN619xUMKfjZ3Xw3sKm+W4zzlxwA2wVOwTH2eDVu+fx5TADYoG2tTKLz4f1RZ1DW3UWyIG+kZetzzRehdXS5/MZKHYrPf7sZitqzHx8DD/x/lTmA2OQ0vHKWJ71tr5Fm5PKXUOoMVQMrsYsq5BCMAubzkmVwrKRTAhgExKIvxq7I+mqXZBM2nO3QlG3Np162ycAScNjHxPJgjS5ozQP57CMkmh+upgLTCgfTZ3prABi6wm/8IDo2elau7LzHbNvW0UnA8WhD0I=
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4834a13b-0763-4ea0-e80e-08d82d02f235
-X-MS-Exchange-CrossTenant-AuthSource: DM6PR12MB3834.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Jul 2020 23:16:35.3146 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: RQzMkKTH5jCxNqKMbV4jagMqTkm27z0xpJ9dQDXEAoi3kI9J29ZNfiGthw1jDU3J
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB3116
-X-OriginatorOrg: Nvidia.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
- t=1595286998; bh=l9YsPERfWdF/nbq0WcQoLchDX/Y65JmOVza5hA+QpB0=;
- h=X-PGP-Universal:ARC-Seal:ARC-Message-Signature:
- ARC-Authentication-Results:Authentication-Results:Date:From:To:CC:
- Subject:Message-ID:References:Content-Type:Content-Disposition:
- In-Reply-To:X-ClientProxiedBy:MIME-Version:
- X-MS-Exchange-MessageSentRepresentingType:X-Originating-IP:
- X-MS-PublicTrafficType:X-MS-Office365-Filtering-Correlation-Id:
- X-MS-TrafficTypeDiagnostic:X-MS-Exchange-Transport-Forked:
- X-Microsoft-Antispam-PRVS:X-MS-Oob-TLC-OOBClassifiers:
- X-MS-Exchange-SenderADCheck:X-Microsoft-Antispam:
- X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
- X-MS-Exchange-AntiSpam-MessageData:
- X-MS-Exchange-CrossTenant-Network-Message-Id:
- X-MS-Exchange-CrossTenant-AuthSource:
- X-MS-Exchange-CrossTenant-AuthAs:
- X-MS-Exchange-CrossTenant-OriginalArrivalTime:
- X-MS-Exchange-CrossTenant-FromEntityHeader:
- X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
- X-MS-Exchange-CrossTenant-UserPrincipalName:
- X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-OriginatorOrg;
- b=NvGAOEXLF5Fo8nGP1vF5ypMJLmSXtXJxBtweEcANVnbCsNK91CDC3Ummnk6v/tzH9
- aBoXuMl1T0ygtIH+NA8x+xsLJWtQqSwP04+m3g8I5YMClFnyzW1ch+lU7yd4YC8+jf
- nP5S12gV7IQigjHMymTyuQ6kJoQMcMkBdE9MssRYEOCsgk5aXpgOGYAj+7SFWTtEmu
- UJmm0UvqBx/4f6EgszAedF3GUdEKbOz8Pmxom8UQN4wlVRJocTYB7Q9+t/M8BU50E2
- 01S58TXDId7ZE0H3a2U7NfduR9KQl6n2bO6WPi6ImoYXBMA8EqfM9wLEoM6KM+86bj
- tOoToq6jhTfrA==
+In-Reply-To: <20200721152737.GS5180@lahna.fi.intel.com>
+Content-Language: en-US
 X-Mailman-Approved-At: Thu, 23 Jul 2020 07:17:29 +0000
-Subject: Re: [Nouveau] [PATCH v2 2/5] mm/migrate: add a direction parameter
- to migrate_vma
+Subject: Re: [Nouveau] nouveau regression with 5.7 caused by "PCI/PM: Assume
+ ports without DLL Link Active train links in 100 ms"
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -138,77 +95,40 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: linux-rdma@vger.kernel.org, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, kvm-ppc@vger.kernel.org,
- Bharata B Rao <bharata@linux.ibm.com>, linux-mm@kvack.org,
- Ben Skeggs <bskeggs@redhat.com>, linux-kselftest@vger.kernel.org,
- Andrew Morton <akpm@linux-foundation.org>, Shuah Khan <shuah@kernel.org>,
- Christoph Hellwig <hch@lst.de>
+Cc: Sasha Levin <sashal@kernel.org>, Linux PCI <linux-pci@vger.kernel.org>,
+ LKML <linux-kernel@vger.kernel.org>,
+ dri-devel <dri-devel@lists.freedesktop.org>,
+ Kai-Heng Feng <kai.heng.feng@canonical.com>,
+ Bjorn Helgaas <helgaas@kernel.org>, Ben Skeggs <bskeggs@redhat.com>,
+ nouveau <nouveau@lists.freedesktop.org>, Bjorn Helgaas <bhelgaas@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Mon, Jul 20, 2020 at 01:49:09PM -0700, Ralph Campbell wrote:
-> 
-> On 7/20/20 12:59 PM, Jason Gunthorpe wrote:
-> > On Mon, Jul 20, 2020 at 12:54:53PM -0700, Ralph Campbell wrote:
-> > > > > diff --git a/include/linux/migrate.h b/include/linux/migrate.h
-> > > > > index 3e546cbf03dd..620f2235d7d4 100644
-> > > > > +++ b/include/linux/migrate.h
-> > > > > @@ -180,6 +180,11 @@ static inline unsigned long migrate_pfn(unsigned long pfn)
-> > > > >    	return (pfn << MIGRATE_PFN_SHIFT) | MIGRATE_PFN_VALID;
-> > > > >    }
-> > > > > +enum migrate_vma_direction {
-> > > > > +	MIGRATE_VMA_FROM_SYSTEM,
-> > > > > +	MIGRATE_VMA_FROM_DEVICE_PRIVATE,
-> > > > > +};
-> > > > 
-> > > > I would have guessed this is more natural as _FROM_DEVICE_ and
-> > > > TO_DEVICE_ ?
-> > > 
-> > > The caller controls where the destination memory is allocated so it isn't
-> > > necessarily device private memory, it could be from system to system.
-> > > The use case for system to system memory migration is for hardware
-> > > like ARM SMMU or PCIe ATS where a single set of page tables is shared by
-> > > the device and a CPU process over a coherent system memory bus.
-> > > Also many integrated GPUs in SOCs fall into this category too.
-> > 
-> > Maybe just TO/FROM_DEIVCE then? Even though the memory is not
-> > DEVICE_PRIVATE it is still device owned pages right?
-> > 
-> > > So to me, it makes more sense to specify the direction based on the
-> > > source location.
-> > 
-> > It feels strange because the driver doesn't always know or control the
-> > source?
-> 
-> The driver can't really know where the source is currently located because the
-> API is designed to not initially hold the page locks, migrate_vma_setup() only knows
-> the source once it holds the page table locks and isolates/locks the pages being
-> migrated. The direction and pgmap_owner are supposed to filter which pages
-> the caller is interested in migrating.
-> Perhaps the direction should instead be a flags field with separate bits for
-> system memory and device private memory selecting source candidates for
-> migration. I can imagine use cases for all 4 combinations of
-> d->d, d->s, s->d, and s->s being valid.
-> 
-> I didn't really think a direction was needed, this was something that
-> Christoph Hellwig seemed to think made the API safer.
+On 7/21/20 10:27 AM, Mika Westerberg wrote:
+> On Tue, Jul 21, 2020 at 11:01:55AM -0400, Lyude Paul wrote:
+>> Sure thing. Also, feel free to let me know if you'd like access to one of the
+>> systems we saw breaking with this patch - I'm fairly sure I've got one of them
+>> locally at my apartment and don't mind setting up AMT/KVM/SSH
+> Probably no need for remote access (thanks for the offer, though). I
+> attached a test patch to the bug report:
+>
+>   https://bugzilla.kernel.org/show_bug.cgi?id=208597
+>
+> that tries to work it around (based on the ->pm_cap == 0). I wonder if
+> anyone would have time to try it out.
 
-If it is a filter then just using those names would make sense
 
-MIGRATE_VMA_SELECT_SYSTEM
-MIGRATE_VMA_SELECT_DEVICE_PRIVATE
+Hi Mika,
 
-SYSTEM feels like the wrong name too, doesn't linux have a formal name
-for RAM struct pages?
+I can confirm that this patch applied to 5.4.52 fixes the issue with
+hybrid graphics on the Thinkpad X1 Extreme gen2.
 
-In your future coherent design how would the migrate select 'device'
-pages that are fully coherent? Are they still zone something pages
-that are OK for CPU usage?
+Thanks,
 
-Jason
+Pat
+
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
