@@ -2,58 +2,47 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 156A622B96C
-	for <lists+nouveau@lfdr.de>; Fri, 24 Jul 2020 00:30:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5369222B96D
+	for <lists+nouveau@lfdr.de>; Fri, 24 Jul 2020 00:30:59 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6D31F6E487;
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9AC026E2D8;
 	Thu, 23 Jul 2020 22:30:52 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from hqnvemgate24.nvidia.com (hqnvemgate24.nvidia.com
- [216.228.121.143])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 243BA6E487
+Received: from hqnvemgate25.nvidia.com (hqnvemgate25.nvidia.com
+ [216.228.121.64])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8C7C16E512
  for <nouveau@lists.freedesktop.org>; Thu, 23 Jul 2020 22:30:51 +0000 (UTC)
-Received: from hqpgpgate101.nvidia.com (Not Verified[216.228.121.13]) by
- hqnvemgate24.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
- id <B5f1a0f200000>; Thu, 23 Jul 2020 15:28:48 -0700
+Received: from hqpgpgate102.nvidia.com (Not Verified[216.228.121.13]) by
+ hqnvemgate25.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
+ id <B5f1a0f5c0000>; Thu, 23 Jul 2020 15:29:48 -0700
 Received: from hqmail.nvidia.com ([172.20.161.6])
- by hqpgpgate101.nvidia.com (PGP Universal service);
- Thu, 23 Jul 2020 15:30:50 -0700
+ by hqpgpgate102.nvidia.com (PGP Universal service);
+ Thu, 23 Jul 2020 15:30:51 -0700
 X-PGP-Universal: processed;
- by hqpgpgate101.nvidia.com on Thu, 23 Jul 2020 15:30:50 -0700
-Received: from HQMAIL105.nvidia.com (172.20.187.12) by HQMAIL109.nvidia.com
- (172.20.187.15) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Thu, 23 Jul
+ by hqpgpgate102.nvidia.com on Thu, 23 Jul 2020 15:30:51 -0700
+Received: from HQMAIL111.nvidia.com (172.20.187.18) by HQMAIL101.nvidia.com
+ (172.20.187.10) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Thu, 23 Jul
  2020 22:30:42 +0000
-Received: from rnnvemgw01.nvidia.com (10.128.109.123) by HQMAIL105.nvidia.com
- (172.20.187.12) with Microsoft SMTP Server (TLS) id 15.0.1473.3 via
+Received: from rnnvemgw01.nvidia.com (10.128.109.123) by HQMAIL111.nvidia.com
+ (172.20.187.18) with Microsoft SMTP Server (TLS) id 15.0.1473.3 via
  Frontend Transport; Thu, 23 Jul 2020 22:30:42 +0000
 Received: from rcampbell-dev.nvidia.com (Not Verified[10.110.48.66]) by
  rnnvemgw01.nvidia.com with Trustwave SEG (v7, 5, 8, 10121)
- id <B5f1a0f910002>; Thu, 23 Jul 2020 15:30:41 -0700
+ id <B5f1a0f910004>; Thu, 23 Jul 2020 15:30:42 -0700
 From: Ralph Campbell <rcampbell@nvidia.com>
 To: <linux-rdma@vger.kernel.org>, <linux-mm@kvack.org>,
  <nouveau@lists.freedesktop.org>, <kvm-ppc@vger.kernel.org>,
  <linux-kselftest@vger.kernel.org>, <linux-kernel@vger.kernel.org>
-Date: Thu, 23 Jul 2020 15:30:03 -0700
-Message-ID: <20200723223004.9586-6-rcampbell@nvidia.com>
+Date: Thu, 23 Jul 2020 15:30:04 -0700
+Message-ID: <20200723223004.9586-7-rcampbell@nvidia.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200723223004.9586-1-rcampbell@nvidia.com>
 References: <20200723223004.9586-1-rcampbell@nvidia.com>
 MIME-Version: 1.0
 X-NVConfidentiality: public
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
- t=1595543328; bh=BeVUOTJgQepW+LMWyDGWqpRY0jrU7O9ftBuhCh+HHBg=;
- h=X-PGP-Universal:From:To:CC:Subject:Date:Message-ID:X-Mailer:
- In-Reply-To:References:MIME-Version:X-NVConfidentiality:
- Content-Transfer-Encoding:Content-Type;
- b=c5NVsiziP4cirzdcWC6K4LcVP4KSZN9WPHjiDB+wb369XeSgW+x0ffbg5/GsZEdHZ
- VNlqkYRVXriPkI7ArKZLO64O9s9bii6xIeiWVSn4lGPyTmw4PRgI+Gtqh+QLzLZuZj
- YWQRDbCiFOqf/ouBw74NnHOkciuxCGS3m1CrofSqd3zATJF3aqCFPcZZXNR6CqiIZz
- KekhEI0xT5i1MApDLFN41+rGbDo1hdbh0//Zubm+a3DuFfV5TO6Xv8RGAzhZEjAhEO
- j5W7XxfbfN+/isxrdbiUbqx1idn5RUo2XnM3MonM0s/2zPxlLTN2gpqZZau7Ejo0tO
- MGzZ+BIT5US8A==
-Subject: [Nouveau] [PATCH v4 5/6] mm/hmm/test: use the new migration
- invalidation
+Subject: [Nouveau] [PATCH v4 6/6] mm/migrate: remove range invalidation in
+ migrate_vma_pages()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -75,131 +64,75 @@ Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Use the new MMU_NOTIFY_MIGRATE event to skip MMU invalidations of device
-private memory and handle the invalidation in the driver as part of
-migrating device private memory.
+When migrating the special zero page, migrate_vma_pages() calls
+mmu_notifier_invalidate_range_start() before replacing the zero page
+PFN in the CPU page tables. This is unnecessary since the range was
+invalidated in migrate_vma_setup() and the page table entry is checked
+to be sure it hasn't changed between migrate_vma_setup() and
+migrate_vma_pages(). Therefore, remove the redundant invalidation.
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
+	t95543388; bh=Y8qnSzc0udfc4m+P6cziRmRJk5XEGcgDU5ImloLrCuE=;
+	h=X-PGP-Universal:From:To:CC:Subject:Date:Message-ID:X-Mailer:
+	 In-Reply-To:References:MIME-Version:X-NVConfidentiality:
+	 Content-Transfer-Encoding:Content-Type;
+	b=rIyLVqKU1Kxf67Qz9TIZ2f1lAaP7YxvFgCZR8v0Vw1fwq7aUbMbgfzcF0bd6+XzG6
+	 ZHtBRMp/Zu/ZLGRxP6lBqZo4wHMHbuW3fXOvPCrYTD5YsCCLv+Ao4RmreWyec2wBTk
+	 uBo3ZylCHJ0ckD85BcjQQxpXyY99cBsvIomZw9wzg6QGm7Ksbq6d+UKSkb0L04d6v8
+	 fiRvvLNq3kCbPzrifaBTj3klQcVcKXz34km0XUoRQlSaftlq4BJWopBPX8U7gQtstO
+	 OvA7Al9t87sCpKjSnqjE7N1jThU0KzjPrCxJiEHq/0Vf4sqeUA42bOkc+bk/CV1ZSF
+	 n9jm36j4kRTUg=
 
 Signed-off-by: Ralph Campbell <rcampbell@nvidia.com>
 ---
- lib/test_hmm.c                         | 30 +++++++++++++++-----------
- tools/testing/selftests/vm/hmm-tests.c | 18 ++++++++++++----
- 2 files changed, 31 insertions(+), 17 deletions(-)
+ mm/migrate.c | 20 --------------------
+ 1 file changed, 20 deletions(-)
 
-diff --git a/lib/test_hmm.c b/lib/test_hmm.c
-index e78a1414f58e..e7dc3de355b7 100644
---- a/lib/test_hmm.c
-+++ b/lib/test_hmm.c
-@@ -214,6 +214,14 @@ static bool dmirror_interval_invalidate(struct mmu_interval_notifier *mni,
+diff --git a/mm/migrate.c b/mm/migrate.c
+index 96e1f41a991e..36076ba2f51a 100644
+--- a/mm/migrate.c
++++ b/mm/migrate.c
+@@ -2877,9 +2877,7 @@ void migrate_vma_pages(struct migrate_vma *migrate)
  {
- 	struct dmirror *dmirror = container_of(mni, struct dmirror, notifier);
+ 	const unsigned long npages = migrate->npages;
+ 	const unsigned long start = migrate->start;
+-	struct mmu_notifier_range range;
+ 	unsigned long addr, i;
+-	bool notified = false;
  
-+	/*
-+	 * Ignore invalidation callbacks for device private pages since
-+	 * the invalidation is handled as part of the migration process.
-+	 */
-+	if (range->event == MMU_NOTIFY_MIGRATE &&
-+	    range->migrate_pgmap_owner == dmirror->mdevice)
-+		return true;
-+
- 	if (mmu_notifier_range_blockable(range))
- 		mutex_lock(&dmirror->mutex);
- 	else if (!mutex_trylock(&dmirror->mutex))
-@@ -693,7 +701,7 @@ static int dmirror_migrate(struct dmirror *dmirror,
- 		args.dst = dst_pfns;
- 		args.start = addr;
- 		args.end = next;
--		args.pgmap_owner = NULL;
-+		args.pgmap_owner = dmirror->mdevice;
- 		args.flags = MIGRATE_VMA_SELECT_SYSTEM;
- 		ret = migrate_vma_setup(&args);
- 		if (ret)
-@@ -983,7 +991,7 @@ static void dmirror_devmem_free(struct page *page)
- }
- 
- static vm_fault_t dmirror_devmem_fault_alloc_and_copy(struct migrate_vma *args,
--						struct dmirror_device *mdevice)
-+						      struct dmirror *dmirror)
- {
- 	const unsigned long *src = args->src;
- 	unsigned long *dst = args->dst;
-@@ -1005,6 +1013,7 @@ static vm_fault_t dmirror_devmem_fault_alloc_and_copy(struct migrate_vma *args,
- 			continue;
- 
- 		lock_page(dpage);
-+		xa_erase(&dmirror->pt, addr >> PAGE_SHIFT);
- 		copy_highpage(dpage, spage);
- 		*dst = migrate_pfn(page_to_pfn(dpage)) | MIGRATE_PFN_LOCKED;
- 		if (*src & MIGRATE_PFN_WRITE)
-@@ -1013,15 +1022,6 @@ static vm_fault_t dmirror_devmem_fault_alloc_and_copy(struct migrate_vma *args,
- 	return 0;
- }
- 
--static void dmirror_devmem_fault_finalize_and_map(struct migrate_vma *args,
--						  struct dmirror *dmirror)
--{
--	/* Invalidate the device's page table mapping. */
--	mutex_lock(&dmirror->mutex);
--	dmirror_do_update(dmirror, args->start, args->end);
--	mutex_unlock(&dmirror->mutex);
--}
+ 	for (i = 0, addr = start; i < npages; addr += PAGE_SIZE, i++) {
+ 		struct page *newpage = migrate_pfn_to_page(migrate->dst[i]);
+@@ -2895,16 +2893,6 @@ void migrate_vma_pages(struct migrate_vma *migrate)
+ 		if (!page) {
+ 			if (!(migrate->src[i] & MIGRATE_PFN_MIGRATE))
+ 				continue;
+-			if (!notified) {
+-				notified = true;
 -
- static vm_fault_t dmirror_devmem_fault(struct vm_fault *vmf)
- {
- 	struct migrate_vma args;
-@@ -1051,11 +1051,15 @@ static vm_fault_t dmirror_devmem_fault(struct vm_fault *vmf)
- 	if (migrate_vma_setup(&args))
- 		return VM_FAULT_SIGBUS;
- 
--	ret = dmirror_devmem_fault_alloc_and_copy(&args, dmirror->mdevice);
-+	ret = dmirror_devmem_fault_alloc_and_copy(&args, dmirror);
- 	if (ret)
- 		return ret;
- 	migrate_vma_pages(&args);
--	dmirror_devmem_fault_finalize_and_map(&args, dmirror);
-+	/*
-+	 * No device finalize step is needed since
-+	 * dmirror_devmem_fault_alloc_and_copy() will have already
-+	 * invalidated the device page table.
-+	 */
- 	migrate_vma_finalize(&args);
- 	return 0;
+-				mmu_notifier_range_init(&range,
+-							MMU_NOTIFY_CLEAR, 0,
+-							NULL,
+-							migrate->vma->vm_mm,
+-							addr, migrate->end);
+-				mmu_notifier_invalidate_range_start(&range);
+-			}
+ 			migrate_vma_insert_page(migrate, addr, newpage,
+ 						&migrate->src[i],
+ 						&migrate->dst[i]);
+@@ -2937,14 +2925,6 @@ void migrate_vma_pages(struct migrate_vma *migrate)
+ 		if (r != MIGRATEPAGE_SUCCESS)
+ 			migrate->src[i] &= ~MIGRATE_PFN_MIGRATE;
+ 	}
+-
+-	/*
+-	 * No need to double call mmu_notifier->invalidate_range() callback as
+-	 * the above ptep_clear_flush_notify() inside migrate_vma_insert_page()
+-	 * did already call it.
+-	 */
+-	if (notified)
+-		mmu_notifier_invalidate_range_only_end(&range);
  }
-diff --git a/tools/testing/selftests/vm/hmm-tests.c b/tools/testing/selftests/vm/hmm-tests.c
-index b533dd08da1d..91d38a29956b 100644
---- a/tools/testing/selftests/vm/hmm-tests.c
-+++ b/tools/testing/selftests/vm/hmm-tests.c
-@@ -881,8 +881,9 @@ TEST_F(hmm, migrate)
- }
+ EXPORT_SYMBOL(migrate_vma_pages);
  
- /*
-- * Migrate anonymous memory to device private memory and fault it back to system
-- * memory.
-+ * Migrate anonymous memory to device private memory and fault some of it back
-+ * to system memory, then try migrating the resulting mix of system and device
-+ * private memory to the device.
-  */
- TEST_F(hmm, migrate_fault)
- {
-@@ -924,8 +925,17 @@ TEST_F(hmm, migrate_fault)
- 	for (i = 0, ptr = buffer->mirror; i < size / sizeof(*ptr); ++i)
- 		ASSERT_EQ(ptr[i], i);
- 
--	/* Fault pages back to system memory and check them. */
--	for (i = 0, ptr = buffer->ptr; i < size / sizeof(*ptr); ++i)
-+	/* Fault half the pages back to system memory and check them. */
-+	for (i = 0, ptr = buffer->ptr; i < size / (2 * sizeof(*ptr)); ++i)
-+		ASSERT_EQ(ptr[i], i);
-+
-+	/* Migrate memory to the device again. */
-+	ret = hmm_dmirror_cmd(self->fd, HMM_DMIRROR_MIGRATE, buffer, npages);
-+	ASSERT_EQ(ret, 0);
-+	ASSERT_EQ(buffer->cpages, npages);
-+
-+	/* Check what the device read. */
-+	for (i = 0, ptr = buffer->mirror; i < size / sizeof(*ptr); ++i)
- 		ASSERT_EQ(ptr[i], i);
- 
- 	hmm_buffer_free(buffer);
 -- 
 2.20.1
 
