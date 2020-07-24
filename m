@@ -2,47 +2,53 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5369222B96D
-	for <lists+nouveau@lfdr.de>; Fri, 24 Jul 2020 00:30:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4A59622BCB7
+	for <lists+nouveau@lfdr.de>; Fri, 24 Jul 2020 06:06:41 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9AC026E2D8;
-	Thu, 23 Jul 2020 22:30:52 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 778146E48C;
+	Fri, 24 Jul 2020 04:06:37 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from hqnvemgate25.nvidia.com (hqnvemgate25.nvidia.com
- [216.228.121.64])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8C7C16E512
- for <nouveau@lists.freedesktop.org>; Thu, 23 Jul 2020 22:30:51 +0000 (UTC)
-Received: from hqpgpgate102.nvidia.com (Not Verified[216.228.121.13]) by
- hqnvemgate25.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
- id <B5f1a0f5c0000>; Thu, 23 Jul 2020 15:29:48 -0700
-Received: from hqmail.nvidia.com ([172.20.161.6])
- by hqpgpgate102.nvidia.com (PGP Universal service);
- Thu, 23 Jul 2020 15:30:51 -0700
-X-PGP-Universal: processed;
- by hqpgpgate102.nvidia.com on Thu, 23 Jul 2020 15:30:51 -0700
-Received: from HQMAIL111.nvidia.com (172.20.187.18) by HQMAIL101.nvidia.com
- (172.20.187.10) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Thu, 23 Jul
- 2020 22:30:42 +0000
-Received: from rnnvemgw01.nvidia.com (10.128.109.123) by HQMAIL111.nvidia.com
- (172.20.187.18) with Microsoft SMTP Server (TLS) id 15.0.1473.3 via
- Frontend Transport; Thu, 23 Jul 2020 22:30:42 +0000
-Received: from rcampbell-dev.nvidia.com (Not Verified[10.110.48.66]) by
- rnnvemgw01.nvidia.com with Trustwave SEG (v7, 5, 8, 10121)
- id <B5f1a0f910004>; Thu, 23 Jul 2020 15:30:42 -0700
-From: Ralph Campbell <rcampbell@nvidia.com>
-To: <linux-rdma@vger.kernel.org>, <linux-mm@kvack.org>,
- <nouveau@lists.freedesktop.org>, <kvm-ppc@vger.kernel.org>,
- <linux-kselftest@vger.kernel.org>, <linux-kernel@vger.kernel.org>
-Date: Thu, 23 Jul 2020 15:30:04 -0700
-Message-ID: <20200723223004.9586-7-rcampbell@nvidia.com>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200723223004.9586-1-rcampbell@nvidia.com>
-References: <20200723223004.9586-1-rcampbell@nvidia.com>
+Received: from mail-yb1-xb42.google.com (mail-yb1-xb42.google.com
+ [IPv6:2607:f8b0:4864:20::b42])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 10FE56E48C;
+ Fri, 24 Jul 2020 04:06:36 +0000 (UTC)
+Received: by mail-yb1-xb42.google.com with SMTP id x9so4004173ybd.4;
+ Thu, 23 Jul 2020 21:06:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=FMi2ZZ+NdpJJAU9E2QYvkgkKvGnLkZj8QP+4FOG0DcM=;
+ b=ClUOVyifk6lzelGKJgVbaiRlNdrJFOn0+lW65SYxxEYVyZ9QzjArnN+4GnBg/Lx9sE
+ LA3Me0kFLEbrgMHXKB8U1P+aljrjmvoHlUtGwl1XOe9O0u96bZOlaVM/m1B8c9F5jlqq
+ 24eB9CsxwnVW4QXrlZzu57s5mxAnS7edjHLtvlAdFOh+EbVB1pKVQSnOl/h4kaPgilmb
+ HAtZ0SYWTpzrBly+u2akz266TjDvYP0PuCpKkE9FNekmIdEUJsspTbYYqYcEUEHS23V9
+ dtnQl+M5BYPdOrrsoeeP5QBH8LNzOK/S7jQOfnNcMkxzv8K/0+Sk+yKp0iZxvS0UqVJA
+ Ji3g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=FMi2ZZ+NdpJJAU9E2QYvkgkKvGnLkZj8QP+4FOG0DcM=;
+ b=Kcl9ixh+vKcBaKBHeuyMECLHYPLhpSEEn5qfPPQpTO5H3rJRcNviMkL79qRqjQ1nmJ
+ kO82ly4txsWPOIFnrcf1abxySmX084c2iFSHoWknEyWGea+Vf2jJVGkJ5YeWZUuJjczc
+ HSEk+8DlACIHoNTbaVXBwvyLLUMTAq/ALlh1ARGxs5odZQRHOZiLSDLuwi5Im4vRwd8Y
+ 1U4Z4HWfbbBgcMqg7AM8z15gPIDcg4p55uvSZsgy5LSHbB4b6ZcamCOwI8Hvu+emgTxo
+ UEjuisKDhqN8DBTwpPqhM9GL0USlyFoLX6T3rOssExN/qk4Bz6dEhZXAoSR477HMuBrH
+ 2QDw==
+X-Gm-Message-State: AOAM530Wg9awtwDPxzx1cgnveuDczlDHBDuVp0X7YMpmDUvYsEWG68b1
+ 2bwohExV6mlMEPtHdVefDKkKdrOxCs+brc+DtDg=
+X-Google-Smtp-Source: ABdhPJxRC0DLtfqtfjDzauZzULj91DPQTZNooTf47lzz2rGnMYe46xbhdWUDHKWprnZ6rciPRzha4XNNNcsJaOtbGfU=
+X-Received: by 2002:a25:4d41:: with SMTP id a62mr13327085ybb.83.1595563595210; 
+ Thu, 23 Jul 2020 21:06:35 -0700 (PDT)
 MIME-Version: 1.0
-X-NVConfidentiality: public
-Subject: [Nouveau] [PATCH v4 6/6] mm/migrate: remove range invalidation in
- migrate_vma_pages()
+References: <20200718033352.1810-1-jajones@nvidia.com>
+In-Reply-To: <20200718033352.1810-1-jajones@nvidia.com>
+From: Ben Skeggs <skeggsb@gmail.com>
+Date: Fri, 24 Jul 2020 14:06:23 +1000
+Message-ID: <CACAvsv6a6Td=igGXwrpPUASMfYPCH9VvWdEY6PBaY+0cybJNxA@mail.gmail.com>
+To: James Jones <jajones@nvidia.com>
+Subject: Re: [Nouveau] [PATCH v2] drm/nouveau: Accept 'legacy' format
+ modifiers
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -54,88 +60,128 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Ralph
- Campbell <rcampbell@nvidia.com>, Bharata B Rao <bharata@linux.ibm.com>,
- Jason Gunthorpe <jgg@mellanox.com>, Ben Skeggs <bskeggs@redhat.com>, Andrew
- Morton <akpm@linux-foundation.org>, Shuah Khan <shuah@kernel.org>,
- Christoph Hellwig <hch@lst.de>
+Cc: Nouveau <nouveau@lists.freedesktop.org>,
+ dri-devel <dri-devel@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>,
+ "Kirill A . Shutemov" <kirill@shutemov.name>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-When migrating the special zero page, migrate_vma_pages() calls
-mmu_notifier_invalidate_range_start() before replacing the zero page
-PFN in the CPU page tables. This is unnecessary since the range was
-invalidated in migrate_vma_setup() and the page table entry is checked
-to be sure it hasn't changed between migrate_vma_setup() and
-migrate_vma_pages(). Therefore, remove the redundant invalidation.
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
-	t95543388; bh=Y8qnSzc0udfc4m+P6cziRmRJk5XEGcgDU5ImloLrCuE=;
-	h=X-PGP-Universal:From:To:CC:Subject:Date:Message-ID:X-Mailer:
-	 In-Reply-To:References:MIME-Version:X-NVConfidentiality:
-	 Content-Transfer-Encoding:Content-Type;
-	b=rIyLVqKU1Kxf67Qz9TIZ2f1lAaP7YxvFgCZR8v0Vw1fwq7aUbMbgfzcF0bd6+XzG6
-	 ZHtBRMp/Zu/ZLGRxP6lBqZo4wHMHbuW3fXOvPCrYTD5YsCCLv+Ao4RmreWyec2wBTk
-	 uBo3ZylCHJ0ckD85BcjQQxpXyY99cBsvIomZw9wzg6QGm7Ksbq6d+UKSkb0L04d6v8
-	 fiRvvLNq3kCbPzrifaBTj3klQcVcKXz34km0XUoRQlSaftlq4BJWopBPX8U7gQtstO
-	 OvA7Al9t87sCpKjSnqjE7N1jThU0KzjPrCxJiEHq/0Vf4sqeUA42bOkc+bk/CV1ZSF
-	 n9jm36j4kRTUg=
+On Sat, 18 Jul 2020 at 13:34, James Jones <jajones@nvidia.com> wrote:
+>
+> Accept the DRM_FORMAT_MOD_NVIDIA_16BX2_BLOCK()
+> family of modifiers to handle broken userspace
+> Xorg modesetting and Mesa drivers. Existing Mesa
+> drivers are still aware of only these older
+> format modifiers which do not differentiate
+> between different variations of the block linear
+> layout. When the format modifier support flag was
+> flipped in the nouveau kernel driver, the X.org
+> modesetting driver began attempting to use its
+> format modifier-enabled framebuffer path. Because
+> the set of format modifiers advertised by the
+> kernel prior to this change do not intersect with
+> the set of format modifiers advertised by Mesa,
+> allocating GBM buffers using format modifiers
+> fails and the modesetting driver falls back to
+> non-modifier allocation. However, it still later
+> queries the modifier of the GBM buffer when
+> creating its DRM-KMS framebuffer object, receives
+> the old-format modifier from Mesa, and attempts
+> to create a framebuffer with it. Since the kernel
+> is still not aware of these formats, this fails.
+>
+> Userspace should not be attempting to query format
+> modifiers of GBM buffers allocated with a non-
+> format-modifier-aware allocation path, but to
+> avoid breaking existing userspace behavior, this
+> change accepts the old-style format modifiers when
+> creating framebuffers and applying them to planes
+> by translating them to the equivalent new-style
+> modifier. To accomplish this, some layout
+> parameters must be assumed to match properties of
+> the device targeted by the relevant ioctls. To
+> avoid perpetuating misuse of the old-style
+> modifiers, this change does not advertise support
+> for them. Doing so would imply compatibility
+> between devices with incompatible memory layouts.
+>
+> Tested with Xorg 1.20 modesetting driver,
+> weston@c46c70dac84a4b3030cd05b380f9f410536690fc,
+> gnome & KDE wayland desktops from Ubuntu 18.04,
+> and sway 1.5
+>
+> Reported-by: Kirill A. Shutemov <kirill@shutemov.name>
+> Fixes: fa4f4c213f5f ("drm/nouveau/kms: Support NVIDIA format modifiers")
+> Link: https://lkml.org/lkml/2020/6/30/1251
+> Signed-off-by: James Jones <jajones@nvidia.com>
+> ---
+>  drivers/gpu/drm/nouveau/nouveau_display.c | 26 +++++++++++++++++++++--
+>  1 file changed, 24 insertions(+), 2 deletions(-)
+>
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_display.c b/drivers/gpu/drm/nouveau/nouveau_display.c
+> index 496c4621cc78..31543086254b 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_display.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_display.c
+> @@ -191,8 +191,14 @@ nouveau_decode_mod(struct nouveau_drm *drm,
+>                    uint32_t *tile_mode,
+>                    uint8_t *kind)
+>  {
+> +       struct nouveau_display *disp = nouveau_display(drm->dev);
+>         BUG_ON(!tile_mode || !kind);
+>
+> +       if ((modifier & (0xffull << 12)) == 0ull) {
+> +               /* Legacy modifier.  Translate to this device's 'kind.' */
+> +               modifier |= disp->format_modifiers[0] & (0xffull << 12);
+> +       }
+I believe this should be moved into the != MOD_LINEAR case.
 
-Signed-off-by: Ralph Campbell <rcampbell@nvidia.com>
----
- mm/migrate.c | 20 --------------------
- 1 file changed, 20 deletions(-)
-
-diff --git a/mm/migrate.c b/mm/migrate.c
-index 96e1f41a991e..36076ba2f51a 100644
---- a/mm/migrate.c
-+++ b/mm/migrate.c
-@@ -2877,9 +2877,7 @@ void migrate_vma_pages(struct migrate_vma *migrate)
- {
- 	const unsigned long npages = migrate->npages;
- 	const unsigned long start = migrate->start;
--	struct mmu_notifier_range range;
- 	unsigned long addr, i;
--	bool notified = false;
- 
- 	for (i = 0, addr = start; i < npages; addr += PAGE_SIZE, i++) {
- 		struct page *newpage = migrate_pfn_to_page(migrate->dst[i]);
-@@ -2895,16 +2893,6 @@ void migrate_vma_pages(struct migrate_vma *migrate)
- 		if (!page) {
- 			if (!(migrate->src[i] & MIGRATE_PFN_MIGRATE))
- 				continue;
--			if (!notified) {
--				notified = true;
--
--				mmu_notifier_range_init(&range,
--							MMU_NOTIFY_CLEAR, 0,
--							NULL,
--							migrate->vma->vm_mm,
--							addr, migrate->end);
--				mmu_notifier_invalidate_range_start(&range);
--			}
- 			migrate_vma_insert_page(migrate, addr, newpage,
- 						&migrate->src[i],
- 						&migrate->dst[i]);
-@@ -2937,14 +2925,6 @@ void migrate_vma_pages(struct migrate_vma *migrate)
- 		if (r != MIGRATEPAGE_SUCCESS)
- 			migrate->src[i] &= ~MIGRATE_PFN_MIGRATE;
- 	}
--
--	/*
--	 * No need to double call mmu_notifier->invalidate_range() callback as
--	 * the above ptep_clear_flush_notify() inside migrate_vma_insert_page()
--	 * did already call it.
--	 */
--	if (notified)
--		mmu_notifier_invalidate_range_only_end(&range);
- }
- EXPORT_SYMBOL(migrate_vma_pages);
- 
--- 
-2.20.1
-
+> +
+>         if (modifier == DRM_FORMAT_MOD_LINEAR) {
+>                 /* tile_mode will not be used in this case */
+>                 *tile_mode = 0;
+> @@ -227,6 +233,16 @@ nouveau_framebuffer_get_layout(struct drm_framebuffer *fb,
+>         }
+>  }
+>
+> +static const u64 legacy_modifiers[] = {
+> +       DRM_FORMAT_MOD_NVIDIA_16BX2_BLOCK(0),
+> +       DRM_FORMAT_MOD_NVIDIA_16BX2_BLOCK(1),
+> +       DRM_FORMAT_MOD_NVIDIA_16BX2_BLOCK(2),
+> +       DRM_FORMAT_MOD_NVIDIA_16BX2_BLOCK(3),
+> +       DRM_FORMAT_MOD_NVIDIA_16BX2_BLOCK(4),
+> +       DRM_FORMAT_MOD_NVIDIA_16BX2_BLOCK(5),
+> +       DRM_FORMAT_MOD_INVALID
+> +};
+> +
+>  static int
+>  nouveau_validate_decode_mod(struct nouveau_drm *drm,
+>                             uint64_t modifier,
+> @@ -247,8 +263,14 @@ nouveau_validate_decode_mod(struct nouveau_drm *drm,
+>              (disp->format_modifiers[mod] != modifier);
+>              mod++);
+>
+> -       if (disp->format_modifiers[mod] == DRM_FORMAT_MOD_INVALID)
+> -               return -EINVAL;
+> +       if (disp->format_modifiers[mod] == DRM_FORMAT_MOD_INVALID) {
+> +               for (mod = 0;
+> +                    (legacy_modifiers[mod] != DRM_FORMAT_MOD_INVALID) &&
+> +                    (legacy_modifiers[mod] != modifier);
+> +                    mod++);
+> +               if (legacy_modifiers[mod] == DRM_FORMAT_MOD_INVALID)
+> +                       return -EINVAL;
+> +       }
+>
+>         nouveau_decode_mod(drm, modifier, tile_mode, kind);
+>
+> --
+> 2.17.1
+>
+> _______________________________________________
+> Nouveau mailing list
+> Nouveau@lists.freedesktop.org
+> https://lists.freedesktop.org/mailman/listinfo/nouveau
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
