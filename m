@@ -2,53 +2,52 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4A59622BCB7
-	for <lists+nouveau@lfdr.de>; Fri, 24 Jul 2020 06:06:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 51F8422C2A9
+	for <lists+nouveau@lfdr.de>; Fri, 24 Jul 2020 11:57:59 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 778146E48C;
-	Fri, 24 Jul 2020 04:06:37 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7472E6E500;
+	Fri, 24 Jul 2020 09:57:57 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-yb1-xb42.google.com (mail-yb1-xb42.google.com
- [IPv6:2607:f8b0:4864:20::b42])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 10FE56E48C;
- Fri, 24 Jul 2020 04:06:36 +0000 (UTC)
-Received: by mail-yb1-xb42.google.com with SMTP id x9so4004173ybd.4;
- Thu, 23 Jul 2020 21:06:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=FMi2ZZ+NdpJJAU9E2QYvkgkKvGnLkZj8QP+4FOG0DcM=;
- b=ClUOVyifk6lzelGKJgVbaiRlNdrJFOn0+lW65SYxxEYVyZ9QzjArnN+4GnBg/Lx9sE
- LA3Me0kFLEbrgMHXKB8U1P+aljrjmvoHlUtGwl1XOe9O0u96bZOlaVM/m1B8c9F5jlqq
- 24eB9CsxwnVW4QXrlZzu57s5mxAnS7edjHLtvlAdFOh+EbVB1pKVQSnOl/h4kaPgilmb
- HAtZ0SYWTpzrBly+u2akz266TjDvYP0PuCpKkE9FNekmIdEUJsspTbYYqYcEUEHS23V9
- dtnQl+M5BYPdOrrsoeeP5QBH8LNzOK/S7jQOfnNcMkxzv8K/0+Sk+yKp0iZxvS0UqVJA
- Ji3g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=FMi2ZZ+NdpJJAU9E2QYvkgkKvGnLkZj8QP+4FOG0DcM=;
- b=Kcl9ixh+vKcBaKBHeuyMECLHYPLhpSEEn5qfPPQpTO5H3rJRcNviMkL79qRqjQ1nmJ
- kO82ly4txsWPOIFnrcf1abxySmX084c2iFSHoWknEyWGea+Vf2jJVGkJ5YeWZUuJjczc
- HSEk+8DlACIHoNTbaVXBwvyLLUMTAq/ALlh1ARGxs5odZQRHOZiLSDLuwi5Im4vRwd8Y
- 1U4Z4HWfbbBgcMqg7AM8z15gPIDcg4p55uvSZsgy5LSHbB4b6ZcamCOwI8Hvu+emgTxo
- UEjuisKDhqN8DBTwpPqhM9GL0USlyFoLX6T3rOssExN/qk4Bz6dEhZXAoSR477HMuBrH
- 2QDw==
-X-Gm-Message-State: AOAM530Wg9awtwDPxzx1cgnveuDczlDHBDuVp0X7YMpmDUvYsEWG68b1
- 2bwohExV6mlMEPtHdVefDKkKdrOxCs+brc+DtDg=
-X-Google-Smtp-Source: ABdhPJxRC0DLtfqtfjDzauZzULj91DPQTZNooTf47lzz2rGnMYe46xbhdWUDHKWprnZ6rciPRzha4XNNNcsJaOtbGfU=
-X-Received: by 2002:a25:4d41:: with SMTP id a62mr13327085ybb.83.1595563595210; 
- Thu, 23 Jul 2020 21:06:35 -0700 (PDT)
+Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D25986E500;
+ Fri, 24 Jul 2020 09:57:55 +0000 (UTC)
+IronPort-SDR: 5i+8zyrsbix6xIvikOVr7t6sJAxRhTbp1mG8EmsI6YBAB0CNptzCnjifNtibjeOLob6Mw/8cIj
+ 3sMjY0Qs1i3g==
+X-IronPort-AV: E=McAfee;i="6000,8403,9691"; a="149874097"
+X-IronPort-AV: E=Sophos;i="5.75,390,1589266800"; d="scan'208";a="149874097"
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+ by fmsmga103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 24 Jul 2020 02:57:55 -0700
+IronPort-SDR: cS6AjwGmqe1CzASREo9m3bSD0i7nq6nx2NdTBrfCiDcatBkQp2JO/2N1o/OCEYIcYy8doDCyNu
+ L5Yqc3r1+Ymg==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.75,390,1589266800"; d="scan'208";a="393270148"
+Received: from lahna.fi.intel.com (HELO lahna) ([10.237.72.163])
+ by fmsmga001.fm.intel.com with SMTP; 24 Jul 2020 02:57:51 -0700
+Received: by lahna (sSMTP sendmail emulation); Fri, 24 Jul 2020 12:57:51 +0300
+Date: Fri, 24 Jul 2020 12:57:51 +0300
+From: Mika Westerberg <mika.westerberg@linux.intel.com>
+To: Karol Herbst <kherbst@redhat.com>
+Message-ID: <20200724095751.GU1375436@lahna.fi.intel.com>
+References: <CACO55tuA+XMgv=GREf178NzTLTHri4kyD5mJjKuDpKxExauvVg@mail.gmail.com>
+ <20200716235440.GA675421@bjorn-Precision-5520>
+ <CACO55tuVJHjEbsW657ToczN++_iehXA8pimPAkzc=NOnx4Ztnw@mail.gmail.com>
+ <CACO55tso5SVipAR=AZfqhp6GGkKO9angv6f+nd61wvgAJtrOKg@mail.gmail.com>
+ <20200721122247.GI5180@lahna.fi.intel.com>
+ <f951fba07ca7fa2fdfd590cd5023d1b31f515fa2.camel@redhat.com>
+ <20200721152737.GS5180@lahna.fi.intel.com>
+ <d3253a47-09ff-8bc7-3ca1-a80bdc09d1c2@gmail.com>
+ <20200722092507.GC5180@lahna.fi.intel.com>
+ <CACO55tsv63VP93F7xJ3nfZ7SkOk0c6WkgvuP+8fY14gypmn4Fg@mail.gmail.com>
 MIME-Version: 1.0
-References: <20200718033352.1810-1-jajones@nvidia.com>
-In-Reply-To: <20200718033352.1810-1-jajones@nvidia.com>
-From: Ben Skeggs <skeggsb@gmail.com>
-Date: Fri, 24 Jul 2020 14:06:23 +1000
-Message-ID: <CACAvsv6a6Td=igGXwrpPUASMfYPCH9VvWdEY6PBaY+0cybJNxA@mail.gmail.com>
-To: James Jones <jajones@nvidia.com>
-Subject: Re: [Nouveau] [PATCH v2] drm/nouveau: Accept 'legacy' format
- modifiers
+Content-Disposition: inline
+In-Reply-To: <CACO55tsv63VP93F7xJ3nfZ7SkOk0c6WkgvuP+8fY14gypmn4Fg@mail.gmail.com>
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
+Subject: Re: [Nouveau] nouveau regression with 5.7 caused by "PCI/PM: Assume
+ ports without DLL Link Active train links in 100 ms"
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,128 +59,54 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Nouveau <nouveau@lists.freedesktop.org>,
- dri-devel <dri-devel@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>,
- "Kirill A . Shutemov" <kirill@shutemov.name>
+Cc: Sasha Levin <sashal@kernel.org>, Patrick Volkerding <volkerdi@gmail.com>,
+ Linux PCI <linux-pci@vger.kernel.org>, LKML <linux-kernel@vger.kernel.org>,
+ dri-devel <dri-devel@lists.freedesktop.org>,
+ Kai-Heng Feng <kai.heng.feng@canonical.com>,
+ Bjorn Helgaas <helgaas@kernel.org>, Ben Skeggs <bskeggs@redhat.com>,
+ nouveau <nouveau@lists.freedesktop.org>, Bjorn Helgaas <bhelgaas@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Sat, 18 Jul 2020 at 13:34, James Jones <jajones@nvidia.com> wrote:
->
-> Accept the DRM_FORMAT_MOD_NVIDIA_16BX2_BLOCK()
-> family of modifiers to handle broken userspace
-> Xorg modesetting and Mesa drivers. Existing Mesa
-> drivers are still aware of only these older
-> format modifiers which do not differentiate
-> between different variations of the block linear
-> layout. When the format modifier support flag was
-> flipped in the nouveau kernel driver, the X.org
-> modesetting driver began attempting to use its
-> format modifier-enabled framebuffer path. Because
-> the set of format modifiers advertised by the
-> kernel prior to this change do not intersect with
-> the set of format modifiers advertised by Mesa,
-> allocating GBM buffers using format modifiers
-> fails and the modesetting driver falls back to
-> non-modifier allocation. However, it still later
-> queries the modifier of the GBM buffer when
-> creating its DRM-KMS framebuffer object, receives
-> the old-format modifier from Mesa, and attempts
-> to create a framebuffer with it. Since the kernel
-> is still not aware of these formats, this fails.
->
-> Userspace should not be attempting to query format
-> modifiers of GBM buffers allocated with a non-
-> format-modifier-aware allocation path, but to
-> avoid breaking existing userspace behavior, this
-> change accepts the old-style format modifiers when
-> creating framebuffers and applying them to planes
-> by translating them to the equivalent new-style
-> modifier. To accomplish this, some layout
-> parameters must be assumed to match properties of
-> the device targeted by the relevant ioctls. To
-> avoid perpetuating misuse of the old-style
-> modifiers, this change does not advertise support
-> for them. Doing so would imply compatibility
-> between devices with incompatible memory layouts.
->
-> Tested with Xorg 1.20 modesetting driver,
-> weston@c46c70dac84a4b3030cd05b380f9f410536690fc,
-> gnome & KDE wayland desktops from Ubuntu 18.04,
-> and sway 1.5
->
-> Reported-by: Kirill A. Shutemov <kirill@shutemov.name>
-> Fixes: fa4f4c213f5f ("drm/nouveau/kms: Support NVIDIA format modifiers")
-> Link: https://lkml.org/lkml/2020/6/30/1251
-> Signed-off-by: James Jones <jajones@nvidia.com>
-> ---
->  drivers/gpu/drm/nouveau/nouveau_display.c | 26 +++++++++++++++++++++--
->  1 file changed, 24 insertions(+), 2 deletions(-)
->
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_display.c b/drivers/gpu/drm/nouveau/nouveau_display.c
-> index 496c4621cc78..31543086254b 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_display.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_display.c
-> @@ -191,8 +191,14 @@ nouveau_decode_mod(struct nouveau_drm *drm,
->                    uint32_t *tile_mode,
->                    uint8_t *kind)
->  {
-> +       struct nouveau_display *disp = nouveau_display(drm->dev);
->         BUG_ON(!tile_mode || !kind);
->
-> +       if ((modifier & (0xffull << 12)) == 0ull) {
-> +               /* Legacy modifier.  Translate to this device's 'kind.' */
-> +               modifier |= disp->format_modifiers[0] & (0xffull << 12);
-> +       }
-I believe this should be moved into the != MOD_LINEAR case.
+On Thu, Jul 23, 2020 at 10:30:58PM +0200, Karol Herbst wrote:
+> On Wed, Jul 22, 2020 at 11:25 AM Mika Westerberg
+> <mika.westerberg@linux.intel.com> wrote:
+> >
+> > On Tue, Jul 21, 2020 at 01:37:12PM -0500, Patrick Volkerding wrote:
+> > > On 7/21/20 10:27 AM, Mika Westerberg wrote:
+> > > > On Tue, Jul 21, 2020 at 11:01:55AM -0400, Lyude Paul wrote:
+> > > >> Sure thing. Also, feel free to let me know if you'd like access to one of the
+> > > >> systems we saw breaking with this patch - I'm fairly sure I've got one of them
+> > > >> locally at my apartment and don't mind setting up AMT/KVM/SSH
+> > > > Probably no need for remote access (thanks for the offer, though). I
+> > > > attached a test patch to the bug report:
+> > > >
+> > > >   https://bugzilla.kernel.org/show_bug.cgi?id=208597
+> > > >
+> > > > that tries to work it around (based on the ->pm_cap == 0). I wonder if
+> > > > anyone would have time to try it out.
+> > >
+> > >
+> > > Hi Mika,
+> > >
+> > > I can confirm that this patch applied to 5.4.52 fixes the issue with
+> > > hybrid graphics on the Thinkpad X1 Extreme gen2.
+> >
+> > Great, thanks for testing!
+> >
+> 
+> yeah, works on the P1G2 as well.
 
-> +
->         if (modifier == DRM_FORMAT_MOD_LINEAR) {
->                 /* tile_mode will not be used in this case */
->                 *tile_mode = 0;
-> @@ -227,6 +233,16 @@ nouveau_framebuffer_get_layout(struct drm_framebuffer *fb,
->         }
->  }
->
-> +static const u64 legacy_modifiers[] = {
-> +       DRM_FORMAT_MOD_NVIDIA_16BX2_BLOCK(0),
-> +       DRM_FORMAT_MOD_NVIDIA_16BX2_BLOCK(1),
-> +       DRM_FORMAT_MOD_NVIDIA_16BX2_BLOCK(2),
-> +       DRM_FORMAT_MOD_NVIDIA_16BX2_BLOCK(3),
-> +       DRM_FORMAT_MOD_NVIDIA_16BX2_BLOCK(4),
-> +       DRM_FORMAT_MOD_NVIDIA_16BX2_BLOCK(5),
-> +       DRM_FORMAT_MOD_INVALID
-> +};
-> +
->  static int
->  nouveau_validate_decode_mod(struct nouveau_drm *drm,
->                             uint64_t modifier,
-> @@ -247,8 +263,14 @@ nouveau_validate_decode_mod(struct nouveau_drm *drm,
->              (disp->format_modifiers[mod] != modifier);
->              mod++);
->
-> -       if (disp->format_modifiers[mod] == DRM_FORMAT_MOD_INVALID)
-> -               return -EINVAL;
-> +       if (disp->format_modifiers[mod] == DRM_FORMAT_MOD_INVALID) {
-> +               for (mod = 0;
-> +                    (legacy_modifiers[mod] != DRM_FORMAT_MOD_INVALID) &&
-> +                    (legacy_modifiers[mod] != modifier);
-> +                    mod++);
-> +               if (legacy_modifiers[mod] == DRM_FORMAT_MOD_INVALID)
-> +                       return -EINVAL;
-> +       }
->
->         nouveau_decode_mod(drm, modifier, tile_mode, kind);
->
-> --
-> 2.17.1
->
-> _______________________________________________
-> Nouveau mailing list
-> Nouveau@lists.freedesktop.org
-> https://lists.freedesktop.org/mailman/listinfo/nouveau
+Thanks for testing!
+
+Since we have the revert queued for this release cycle, I think I will
+send an updated version of "PCI/PM: Assume ports without DLL Link Active
+train links in 100 ms" after v5.9-rc1 is released that has this
+workaround in place.
+
+(I'm continuing my vacation so will be offline next week).
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
