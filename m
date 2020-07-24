@@ -1,51 +1,37 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 51F8422C2A9
-	for <lists+nouveau@lfdr.de>; Fri, 24 Jul 2020 11:57:59 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5F41A22C826
+	for <lists+nouveau@lfdr.de>; Fri, 24 Jul 2020 16:35:54 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7472E6E500;
-	Fri, 24 Jul 2020 09:57:57 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B29226E0C4;
+	Fri, 24 Jul 2020 14:35:52 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D25986E500;
- Fri, 24 Jul 2020 09:57:55 +0000 (UTC)
-IronPort-SDR: 5i+8zyrsbix6xIvikOVr7t6sJAxRhTbp1mG8EmsI6YBAB0CNptzCnjifNtibjeOLob6Mw/8cIj
- 3sMjY0Qs1i3g==
-X-IronPort-AV: E=McAfee;i="6000,8403,9691"; a="149874097"
-X-IronPort-AV: E=Sophos;i="5.75,390,1589266800"; d="scan'208";a="149874097"
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
- by fmsmga103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 24 Jul 2020 02:57:55 -0700
-IronPort-SDR: cS6AjwGmqe1CzASREo9m3bSD0i7nq6nx2NdTBrfCiDcatBkQp2JO/2N1o/OCEYIcYy8doDCyNu
- L5Yqc3r1+Ymg==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.75,390,1589266800"; d="scan'208";a="393270148"
-Received: from lahna.fi.intel.com (HELO lahna) ([10.237.72.163])
- by fmsmga001.fm.intel.com with SMTP; 24 Jul 2020 02:57:51 -0700
-Received: by lahna (sSMTP sendmail emulation); Fri, 24 Jul 2020 12:57:51 +0300
-Date: Fri, 24 Jul 2020 12:57:51 +0300
-From: Mika Westerberg <mika.westerberg@linux.intel.com>
-To: Karol Herbst <kherbst@redhat.com>
-Message-ID: <20200724095751.GU1375436@lahna.fi.intel.com>
-References: <CACO55tuA+XMgv=GREf178NzTLTHri4kyD5mJjKuDpKxExauvVg@mail.gmail.com>
- <20200716235440.GA675421@bjorn-Precision-5520>
- <CACO55tuVJHjEbsW657ToczN++_iehXA8pimPAkzc=NOnx4Ztnw@mail.gmail.com>
- <CACO55tso5SVipAR=AZfqhp6GGkKO9angv6f+nd61wvgAJtrOKg@mail.gmail.com>
- <20200721122247.GI5180@lahna.fi.intel.com>
- <f951fba07ca7fa2fdfd590cd5023d1b31f515fa2.camel@redhat.com>
- <20200721152737.GS5180@lahna.fi.intel.com>
- <d3253a47-09ff-8bc7-3ca1-a80bdc09d1c2@gmail.com>
- <20200722092507.GC5180@lahna.fi.intel.com>
- <CACO55tsv63VP93F7xJ3nfZ7SkOk0c6WkgvuP+8fY14gypmn4Fg@mail.gmail.com>
+Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 79C756E0C4;
+ Fri, 24 Jul 2020 14:35:51 +0000 (UTC)
+Received: from localhost (mobile-166-175-191-139.mycingular.net
+ [166.175.191.139])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 0B3082065C;
+ Fri, 24 Jul 2020 14:35:50 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1595601351;
+ bh=L7/MwNAWCUFGl5PPjS4I/NXskBIhuh/a8szTHPAtB2o=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:From;
+ b=evvrI1BGgtE+SPkmfhvSpzy6GLmEfaY0aSMDB9mfPSAxpEbjPPEZaef/LG/UBN+r1
+ 8qLDaag77ZA8ppddFZbsFWU7TXPA2EdzAelblCXO2loDBPVbtbbAnfR+RcaRNO4wO2
+ xle9Sz+cT1LnAaOZqG37Pb02PUlPprfbBv/AHLf4=
+Date: Fri, 24 Jul 2020 09:35:49 -0500
+From: Bjorn Helgaas <helgaas@kernel.org>
+To: Mika Westerberg <mika.westerberg@linux.intel.com>
+Message-ID: <20200724143549.GA1516749@bjorn-Precision-5520>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <CACO55tsv63VP93F7xJ3nfZ7SkOk0c6WkgvuP+8fY14gypmn4Fg@mail.gmail.com>
-Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
+In-Reply-To: <20200724095751.GU1375436@lahna.fi.intel.com>
 Subject: Re: [Nouveau] nouveau regression with 5.7 caused by "PCI/PM: Assume
  ports without DLL Link Active train links in 100 ms"
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -62,51 +48,52 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Cc: Sasha Levin <sashal@kernel.org>, Patrick Volkerding <volkerdi@gmail.com>,
  Linux PCI <linux-pci@vger.kernel.org>, LKML <linux-kernel@vger.kernel.org>,
  dri-devel <dri-devel@lists.freedesktop.org>,
- Kai-Heng Feng <kai.heng.feng@canonical.com>,
- Bjorn Helgaas <helgaas@kernel.org>, Ben Skeggs <bskeggs@redhat.com>,
+ Kai-Heng Feng <kai.heng.feng@canonical.com>, Ben Skeggs <bskeggs@redhat.com>,
  nouveau <nouveau@lists.freedesktop.org>, Bjorn Helgaas <bhelgaas@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, Jul 23, 2020 at 10:30:58PM +0200, Karol Herbst wrote:
-> On Wed, Jul 22, 2020 at 11:25 AM Mika Westerberg
-> <mika.westerberg@linux.intel.com> wrote:
-> >
-> > On Tue, Jul 21, 2020 at 01:37:12PM -0500, Patrick Volkerding wrote:
-> > > On 7/21/20 10:27 AM, Mika Westerberg wrote:
-> > > > On Tue, Jul 21, 2020 at 11:01:55AM -0400, Lyude Paul wrote:
-> > > >> Sure thing. Also, feel free to let me know if you'd like access to one of the
-> > > >> systems we saw breaking with this patch - I'm fairly sure I've got one of them
-> > > >> locally at my apartment and don't mind setting up AMT/KVM/SSH
-> > > > Probably no need for remote access (thanks for the offer, though). I
-> > > > attached a test patch to the bug report:
+On Fri, Jul 24, 2020 at 12:57:51PM +0300, Mika Westerberg wrote:
+> On Thu, Jul 23, 2020 at 10:30:58PM +0200, Karol Herbst wrote:
+> > On Wed, Jul 22, 2020 at 11:25 AM Mika Westerberg
+> > <mika.westerberg@linux.intel.com> wrote:
+> > >
+> > > On Tue, Jul 21, 2020 at 01:37:12PM -0500, Patrick Volkerding wrote:
+> > > > On 7/21/20 10:27 AM, Mika Westerberg wrote:
+> > > > > On Tue, Jul 21, 2020 at 11:01:55AM -0400, Lyude Paul wrote:
+> > > > >> Sure thing. Also, feel free to let me know if you'd like access to one of the
+> > > > >> systems we saw breaking with this patch - I'm fairly sure I've got one of them
+> > > > >> locally at my apartment and don't mind setting up AMT/KVM/SSH
+> > > > > Probably no need for remote access (thanks for the offer, though). I
+> > > > > attached a test patch to the bug report:
+> > > > >
+> > > > >   https://bugzilla.kernel.org/show_bug.cgi?id=208597
+> > > > >
+> > > > > that tries to work it around (based on the ->pm_cap == 0). I wonder if
+> > > > > anyone would have time to try it out.
 > > > >
-> > > >   https://bugzilla.kernel.org/show_bug.cgi?id=208597
 > > > >
-> > > > that tries to work it around (based on the ->pm_cap == 0). I wonder if
-> > > > anyone would have time to try it out.
+> > > > Hi Mika,
+> > > >
+> > > > I can confirm that this patch applied to 5.4.52 fixes the issue with
+> > > > hybrid graphics on the Thinkpad X1 Extreme gen2.
 > > >
-> > >
-> > > Hi Mika,
-> > >
-> > > I can confirm that this patch applied to 5.4.52 fixes the issue with
-> > > hybrid graphics on the Thinkpad X1 Extreme gen2.
-> >
-> > Great, thanks for testing!
-> >
+> > > Great, thanks for testing!
+> > 
+> > yeah, works on the P1G2 as well.
 > 
-> yeah, works on the P1G2 as well.
+> Thanks for testing!
+> 
+> Since we have the revert queued for this release cycle, I think I will
+> send an updated version of "PCI/PM: Assume ports without DLL Link Active
+> train links in 100 ms" after v5.9-rc1 is released that has this
+> workaround in place.
+> 
+> (I'm continuing my vacation so will be offline next week).
 
-Thanks for testing!
-
-Since we have the revert queued for this release cycle, I think I will
-send an updated version of "PCI/PM: Assume ports without DLL Link Active
-train links in 100 ms" after v5.9-rc1 is released that has this
-workaround in place.
-
-(I'm continuing my vacation so will be offline next week).
+Sounds fine, sorry for interrupting your vacation!
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
