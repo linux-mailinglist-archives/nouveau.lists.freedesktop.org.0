@@ -2,20 +2,20 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 330AC23F890
-	for <lists+nouveau@lfdr.de>; Sat,  8 Aug 2020 21:18:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8651423F893
+	for <lists+nouveau@lfdr.de>; Sat,  8 Aug 2020 21:18:41 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 842DE6E233;
-	Sat,  8 Aug 2020 19:18:34 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 187696E23F;
+	Sat,  8 Aug 2020 19:18:35 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from hqnvemgate26.nvidia.com (hqnvemgate26.nvidia.com
  [216.228.121.65])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 2A6BB89119;
- Mon, 27 Jul 2020 20:52:43 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id CACD889119;
+ Mon, 27 Jul 2020 20:52:42 +0000 (UTC)
 Received: from hqpgpgate102.nvidia.com (Not Verified[216.228.121.13]) by
  hqnvemgate26.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
- id <B5f1f3e8d0003>; Mon, 27 Jul 2020 13:52:29 -0700
+ id <B5f1f3e8d0000>; Mon, 27 Jul 2020 13:52:29 -0700
 Received: from hqmail.nvidia.com ([172.20.161.6])
  by hqpgpgate102.nvidia.com (PGP Universal service);
  Mon, 27 Jul 2020 13:52:42 -0700
@@ -23,15 +23,15 @@ X-PGP-Universal: processed;
  by hqpgpgate102.nvidia.com on Mon, 27 Jul 2020 13:52:42 -0700
 Received: from lenny.nvidia.com (10.124.1.5) by HQMAIL107.nvidia.com
  (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Mon, 27 Jul
- 2020 20:52:33 +0000
+ 2020 20:52:34 +0000
 From: Daniel Dadap <ddadap@nvidia.com>
 To: <dri-devel@lists.freedesktop.com>, <intel-gfx@lists.freedesktop.com>,
  <nouveau@lists.freedesktop.org>, <amd-gfx@lists.freedesktop.org>,
  <jani.nikula@linux.intel.com>, <joonas.lahtinen@linux.intel.com>,
  <rodrigo.vivi@intel.com>, <bskeggs@redhat.com>, <alexander.deucher@amd.com>,
  <christian.koenig@amd.com>, <david1.zhou@amd.com>
-Date: Mon, 27 Jul 2020 15:53:55 -0500
-Message-ID: <20200727205357.27839-3-ddadap@nvidia.com>
+Date: Mon, 27 Jul 2020 15:53:56 -0500
+Message-ID: <20200727205357.27839-4-ddadap@nvidia.com>
 X-Mailer: git-send-email 2.18.4
 In-Reply-To: <20200727205357.27839-1-ddadap@nvidia.com>
 References: <20200727205357.27839-1-ddadap@nvidia.com>
@@ -41,18 +41,18 @@ X-Originating-IP: [10.124.1.5]
 X-ClientProxiedBy: HQMAIL111.nvidia.com (172.20.187.18) To
  HQMAIL107.nvidia.com (172.20.187.13)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
- t=1595883149; bh=6112sgWeMAs/YtO1LuYVyMrkQ1gQZQQGcuWyG0BjPeo=;
+ t=1595883149; bh=/1Icu6fjR+iI8CSFVfmU4f6xx1YggBq2vYaWxHEwEJ4=;
  h=X-PGP-Universal:From:To:CC:Subject:Date:Message-ID:X-Mailer:
  In-Reply-To:References:X-NVConfidentiality:MIME-Version:
  X-Originating-IP:X-ClientProxiedBy:Content-Type;
- b=DDdpQXv8DFsmbyh3uvm8tz/xeI92g02LktCpwJan9YabdldNSqdNERzGo8pO7wrq7
- /AJapgdxklSfGF1Ira6RUPo5kVvkZPdeUV0HqonOILVr418xMFkUxpR0AgQCaMCY1F
- 0SRnSbi6NkRx4HrOibRyFSorchYltOSGMggfj5tcmCxWcC5L0G+/ZT7bBCSKVJ4YRL
- +HDs5ESPGSVfsmfpYWYPfk0t+Q0Eaj5CvHv+5GR3affREjhCgilOc7jgLJtQmVdRvQ
- Wm6pGzNI7Ptt6S3ekS5aPD1sPG7yKNlK9MzqcfUJikV9oAfuKiUtz9L1QHY2oRXZaX
- 1PzWOWdStjLuA==
+ b=hEj6TUwyxmp9rAY1xQyRC9V6oXc+JCw+ztaKWLFdio2uPMR7K/ke+R8q4UJLRqk7W
+ rL5If68e12Mbo08kpPlgzAbhgz3CvSqx0lWB70WpItsiT8bCg+XJtqIVE9L3Q15vwv
+ 35bHHxvX/oNr5NxaWCsdFRmhV5WmGZG1XK99odgWnl65wvLYcOPv4F1ovNtMAgUg7q
+ 3BYDpCj2MNafil37VmQgTevWOOz6ev1efBGf6UUh//ZkbecKaYVBdTdlDJzpG7zLqC
+ Y4RAKfBsZAQUwLktHYFGUUwWNWKCqVZnAchLqIvlguW3jyp+c4hmf86X3OL/omBtDS
+ 3tUkcsfnquTxQ==
 X-Mailman-Approved-At: Sat, 08 Aug 2020 19:18:33 +0000
-Subject: [Nouveau] [PATCH 2/4] i915: fall back to ACPI EDID retrieval
+Subject: [Nouveau] [PATCH 3/4] nouveau: fall back to ACPI EDID retrieval
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -76,52 +76,26 @@ paths is unsuccessful.
 
 Signed-off-by: Daniel Dadap <ddadap@nvidia.com>
 ---
- drivers/gpu/drm/i915/display/intel_dp.c   | 8 +++++++-
- drivers/gpu/drm/i915/display/intel_lvds.c | 4 ++++
- 2 files changed, 11 insertions(+), 1 deletion(-)
+ drivers/gpu/drm/nouveau/nouveau_connector.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/drivers/gpu/drm/i915/display/intel_dp.c b/drivers/gpu/drm/i915/display/intel_dp.c
-index 804b1d966f66..ff402cef8183 100644
---- a/drivers/gpu/drm/i915/display/intel_dp.c
-+++ b/drivers/gpu/drm/i915/display/intel_dp.c
-@@ -5657,6 +5657,7 @@ static struct edid *
- intel_dp_get_edid(struct intel_dp *intel_dp)
- {
- 	struct intel_connector *intel_connector = intel_dp->attached_connector;
-+	struct edid *edid;
+diff --git a/drivers/gpu/drm/nouveau/nouveau_connector.c b/drivers/gpu/drm/nouveau/nouveau_connector.c
+index 9a9a7f5003d3..95836a02a06b 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_connector.c
++++ b/drivers/gpu/drm/nouveau/nouveau_connector.c
+@@ -581,6 +581,12 @@ nouveau_connector_detect(struct drm_connector *connector, bool force)
+ 		else
+ 			nv_connector->edid = drm_get_edid(connector, i2c);
  
- 	/* use cached edid if we have one */
- 	if (intel_connector->edid) {
-@@ -5666,8 +5667,13 @@ intel_dp_get_edid(struct intel_dp *intel_dp)
- 
- 		return drm_edid_duplicate(intel_connector->edid);
- 	} else
--		return drm_get_edid(&intel_connector->base,
-+		edid = drm_get_edid(&intel_connector->base,
- 				    &intel_dp->aux.ddc);
++		if (!nv_connector->edid &&
++			(nv_connector->type == DCB_CONNECTOR_LVDS ||
++			nv_connector->type == DCB_CONNECTOR_eDP)) {
++			nv_connector->edid = drm_get_edid_acpi();
++		}
 +
-+	if (!edid && intel_dp_is_edp(intel_dp))
-+		edid = drm_get_edid_acpi();
-+
-+	return edid;
- }
- 
- static void
-diff --git a/drivers/gpu/drm/i915/display/intel_lvds.c b/drivers/gpu/drm/i915/display/intel_lvds.c
-index 9a067effcfa0..811eea3f5d9f 100644
---- a/drivers/gpu/drm/i915/display/intel_lvds.c
-+++ b/drivers/gpu/drm/i915/display/intel_lvds.c
-@@ -946,6 +946,10 @@ void intel_lvds_init(struct drm_i915_private *dev_priv)
- 	else
- 		edid = drm_get_edid(connector,
- 				    intel_gmbus_get_adapter(dev_priv, pin));
-+
-+	if (!edid)
-+		edid = drm_get_edid_acpi();
-+
- 	if (edid) {
- 		if (drm_add_edid_modes(connector, edid)) {
- 			drm_connector_update_edid_property(connector,
+ 		drm_connector_update_edid_property(connector,
+ 							nv_connector->edid);
+ 		if (!nv_connector->edid) {
 -- 
 2.18.4
 
