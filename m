@@ -1,72 +1,58 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 00B2722F6FB
-	for <lists+nouveau@lfdr.de>; Mon, 27 Jul 2020 19:48:36 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6645122F874
+	for <lists+nouveau@lfdr.de>; Mon, 27 Jul 2020 20:51:13 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3527689B20;
-	Mon, 27 Jul 2020 17:48:30 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8CE22899F0;
+	Mon, 27 Jul 2020 18:51:07 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
- [205.139.110.61])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1358F89AF3
- for <nouveau@lists.freedesktop.org>; Mon, 27 Jul 2020 17:48:27 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1595872106;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=OvywyydKtvU7UWO2R7W9XiQvniUsbDBtaqqTLrDrpqU=;
- b=U32wSmSZ3S/95iMM54bSy/zqguHs5Gdx5m/3MaAMBZojYCrCw3p7K58ug4afPSs4tqEjAQ
- MCNskQtZEOI3V3aIgatENcGhm1cFzUYLY78KyCdy+LOMK49/YzggXUm20HlMWNJJ1RODTh
- 6iZdWX+99akRZGzeblwNHXGCcgR+2q0=
-Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com
- [209.85.222.199]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-278-0KfDXi-JNKuAvoRtRRTnlg-1; Mon, 27 Jul 2020 13:48:22 -0400
-X-MC-Unique: 0KfDXi-JNKuAvoRtRRTnlg-1
-Received: by mail-qk1-f199.google.com with SMTP id g4so2133719qki.8
- for <nouveau@lists.freedesktop.org>; Mon, 27 Jul 2020 10:48:22 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
- :references:organization:user-agent:mime-version
- :content-transfer-encoding;
- bh=OvywyydKtvU7UWO2R7W9XiQvniUsbDBtaqqTLrDrpqU=;
- b=IYLnznEXe6nSK2uokKRdzY29FW+cjRqF+CKjO9FDZaHmkrxyXc3/TCk462JBs3hcrT
- Wvm+iJ+wjgSyn2IHDgbNDAnJR5i3usO3j4dMTR6DU3v3slWsW+BYk+1Dokbb/bKrw7rd
- WuDFXTUo0kZs4/rKJJwhGgq7VB1OSbTE/3mk3Rq9NeTJ/URY76kFECJnIQT38HGZYuJc
- 4tK0PqMDQ5hbBVLRbCg6l2wWusdHz6jIPE1jrEGNNINFffwDEPsG+grB1sotwaXBEhOE
- SShT6a7xwLzyfrlOnQbUh8CnvQRkuZR6jtbIcbLDjJ6EX+3efTRnG14+VMEc4WXE+Jg5
- Oweg==
-X-Gm-Message-State: AOAM5301Nn0IrjJoOzr1Mpvtct89DhBGgYPPodIYSEHiMhSdahVbys+a
- +COwRi5UiV+xxDda930fUc9yWHyHD4BqZADSb6uwLgEUjNGeoIfBe8lvDnDioAtNX5Abd3zfeRK
- 9AxFYvoZmEhVpzO4W9uIfEiQpXA==
-X-Received: by 2002:ac8:3772:: with SMTP id p47mr22041841qtb.355.1595872101647; 
- Mon, 27 Jul 2020 10:48:21 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJwxAlqzrvxdidWWYd7oWy2hAuX08PzCqqlLmZCnl/DeCg+vSX3fT2kkWs8kyW0q41M/xVmDwA==
-X-Received: by 2002:ac8:3772:: with SMTP id p47mr22041806qtb.355.1595872101165; 
- Mon, 27 Jul 2020 10:48:21 -0700 (PDT)
-Received: from Ruby.lyude.net (pool-108-49-102-102.bstnma.fios.verizon.net.
- [108.49.102.102])
- by smtp.gmail.com with ESMTPSA id h13sm109535qtu.7.2020.07.27.10.48.19
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 Jul 2020 10:48:20 -0700 (PDT)
-Message-ID: <27ca01615cf456b08762003192d825a0f558d86e.camel@redhat.com>
-From: Lyude Paul <lyude@redhat.com>
-To: Peng Wu <wupeng58@huawei.com>, bskeggs@redhat.com, airlied@linux.ie, 
- daniel@ffwll.ch, airlied@gmail.com
-Date: Mon, 27 Jul 2020 13:48:19 -0400
-In-Reply-To: <1595822418-34124-1-git-send-email-wupeng58@huawei.com>
-References: <1595822418-34124-1-git-send-email-wupeng58@huawei.com>
-Organization: Red Hat
-User-Agent: Evolution 3.36.4 (3.36.4-1.fc32)
+Received: from hqnvemgate25.nvidia.com (hqnvemgate25.nvidia.com
+ [216.228.121.64])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5E270899C4;
+ Mon, 27 Jul 2020 18:51:05 +0000 (UTC)
+Received: from hqpgpgate101.nvidia.com (Not Verified[216.228.121.13]) by
+ hqnvemgate25.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
+ id <B5f1f21ec0000>; Mon, 27 Jul 2020 11:50:20 -0700
+Received: from hqmail.nvidia.com ([172.20.161.6])
+ by hqpgpgate101.nvidia.com (PGP Universal service);
+ Mon, 27 Jul 2020 11:51:04 -0700
+X-PGP-Universal: processed;
+ by hqpgpgate101.nvidia.com on Mon, 27 Jul 2020 11:51:04 -0700
+Received: from [172.20.40.79] (10.124.1.5) by HQMAIL107.nvidia.com
+ (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Mon, 27 Jul
+ 2020 18:51:04 +0000
+To: Ben Skeggs <skeggsb@gmail.com>
+References: <20200718033352.1810-1-jajones@nvidia.com>
+ <CACAvsv6a6Td=igGXwrpPUASMfYPCH9VvWdEY6PBaY+0cybJNxA@mail.gmail.com>
+X-Nvconfidentiality: public
+From: James Jones <jajones@nvidia.com>
+Message-ID: <561f3a10-82af-cff5-b771-2e56b6eb973a@nvidia.com>
+Date: Mon, 27 Jul 2020 11:51:04 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Subject: Re: [Nouveau] [PATCH -next] crc:Fix build errors
+In-Reply-To: <CACAvsv6a6Td=igGXwrpPUASMfYPCH9VvWdEY6PBaY+0cybJNxA@mail.gmail.com>
+X-Originating-IP: [10.124.1.5]
+X-ClientProxiedBy: HQMAIL101.nvidia.com (172.20.187.10) To
+ HQMAIL107.nvidia.com (172.20.187.13)
+Content-Language: en-US
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
+ t=1595875820; bh=7rubpag/+ge6m/px/IFHOXfbfDbUjH+NNfPAemKNo88=;
+ h=X-PGP-Universal:Subject:To:CC:References:X-Nvconfidentiality:From:
+ Message-ID:Date:User-Agent:MIME-Version:In-Reply-To:
+ X-Originating-IP:X-ClientProxiedBy:Content-Type:Content-Language:
+ Content-Transfer-Encoding;
+ b=g7bjJ/EXWfnTrKwSfYIPsdKpYdHPAETkwViJuakGXD0FKFznluced5zr0wQkJIyVn
+ e9ExkhLzK2zI+vaMc1KVcm7LnGbPRIsCaxFwVzkYE+/bIUzNl2u9fo+bNhYBpYLijm
+ J+a9cYt5UQZ8Uz/hj46nykP/0l3VWuSosoe4YnJqbiUTEiLAPBYkp2Fu3sxLPuWOvu
+ I87n9PNd1YyQU+QKoQCV/Qpw0WHnNxMY0HWNcgymSc+OQwMpZXInX9wzjVi3sd5W2J
+ cqs3xTyZzpMYehrr68936hP7RX7h+nY33PmwceGU04zjMG7BhV8iH8WDV0G37sqGYF
+ KJ4/GLa+RutIw==
+Subject: Re: [Nouveau] [PATCH v2] drm/nouveau: Accept 'legacy' format
+ modifiers
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -78,148 +64,136 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: Nouveau <nouveau@lists.freedesktop.org>,
+ dri-devel <dri-devel@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>,
+ "Kirill A . Shutemov" <kirill@shutemov.name>
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-SGksIEkgYWN0dWFsbHkgYWxyZWFkeSBzZW50IGEgcGF0Y2ggZm9yIHRoaXM6CgpodHRwczovL3Bh
-dGNod29yay5mcmVlZGVza3RvcC5vcmcvcGF0Y2gvMzc4MjAyLwoKSSdtIGd1ZXNzaW5nIGl0IGhh
-c24ndCBnb3R0ZW4gcGlja2VkIHVwIHVwc3RyZWFtIHlldD8KCk9uIE1vbiwgMjAyMC0wNy0yNyBh
-dCAxMjowMCArMDgwMCwgUGVuZyBXdSB3cm90ZToKPiBJZiBDT05GSUdfRFJNX05PVVZFQVU9eSx0
-aGUgZm9sbG93aW5nIGVycm9ycwo+IGFyZSBzZWVuIHdoaWxlIGJ1aWxkaW5nIGNyYy5oLgo+IAo+
-IEluIGZpbGUgaW5jbHVkZWQgZnJvbQo+IC9zY3JhdGNoL2xpbnV4L2RyaXZlcnMvZ3B1L2RybS9u
-b3V2ZWF1L25vdXZlYXVfZGlzcGxheS5jOjQ3Ogo+IC9zY3JhdGNoL2xpbnV4L2RyaXZlcnMvZ3B1
-L2RybS9ub3V2ZWF1L2Rpc3BudjUwL2NyYy5oOiBJbiBmdW5jdGlvbgo+IOKAmG52NTBfaGVhZF9j
-cmNfbGF0ZV9yZWdpc3RlcuKAmToKPiAvc2NyYXRjaC9saW51eC9kcml2ZXJzL2dwdS9kcm0vbm91
-dmVhdS9kaXNwbnY1MC9jcmMuaDoxMDk6NDc6IGVycm9yOgo+IHBhcmFtZXRlciBuYW1lIG9taXR0
-ZWQKPiAgc3RhdGljIGlubGluZSBpbnQgbnY1MF9oZWFkX2NyY19sYXRlX3JlZ2lzdGVyKHN0cnVj
-dCBudjUwX2hlYWQgKikge30KPiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgIF5+fn5+fn5+fn5+fn5+fn5+fgo+IC9zY3JhdGNoL2xpbnV4L2RyaXZlcnMvZ3B1
-L2RybS9ub3V2ZWF1L2Rpc3BudjUwL2NyYy5oOjEwOTo1NDogd2FybmluZzogbm8KPiByZXR1cm4g
-c3RhdGVtZW50IGluIGZ1bmN0aW9uIHJldHVybmluZyBub24tdm9pZCBbLVdyZXR1cm4tdHlwZV0K
-PiAgc3RhdGljIGlubGluZSBpbnQgbnY1MF9oZWFkX2NyY19sYXRlX3JlZ2lzdGVyKHN0cnVjdCBu
-djUwX2hlYWQgKikge30KPiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICBefn5+fn5+fn4KPiAvc2NyYXRjaC9saW51eC9kcml2ZXJzL2dwdS9kcm0v
-bm91dmVhdS9kaXNwbnY1MC9jcmMuaDogSW4gZnVuY3Rpb24KPiDigJhudjUwX2NyY19oYW5kbGVf
-dmJsYW5r4oCZOgo+IC9zY3JhdGNoL2xpbnV4L2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L2Rpc3Bu
-djUwL2NyYy5oOjExMTo1Nzogd2FybmluZzoKPiDigJhyZXR1cm7igJkgd2l0aCBhIHZhbHVlLCBp
-biBmdW5jdGlvbiByZXR1cm5pbmcgdm9pZAo+ICBudjUwX2NyY19oYW5kbGVfdmJsYW5rKHN0cnVj
-dCBudjUwX2hlYWQgKmhlYWQpIHsgcmV0dXJuIDA7IH0KPiAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBeCj4gL3NjcmF0Y2gvbGludXgvZHJp
-dmVycy9ncHUvZHJtL25vdXZlYXUvZGlzcG52NTAvY3JjLmg6MTExOjE6IG5vdGU6IGRlY2xhcmVk
-Cj4gaGVyZQo+ICBudjUwX2NyY19oYW5kbGVfdmJsYW5rKHN0cnVjdCBudjUwX2hlYWQgKmhlYWQp
-IHsgcmV0dXJuIDA7IH0KPiAgXn5+fn5+fn5+fn5+fn5+fn5+fn5+fgo+IC9zY3JhdGNoL2xpbnV4
-L2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L2Rpc3BudjUwL2NyYy5oOiBJbiBmdW5jdGlvbgo+IOKA
-mG52NTBfY3JjX2F0b21pY19jaGVja19oZWFk4oCZOgo+IC9zY3JhdGNoL2xpbnV4L2RyaXZlcnMv
-Z3B1L2RybS9ub3V2ZWF1L2Rpc3BudjUwL2NyYy5oOjExNDoyODogZXJyb3I6Cj4gcGFyYW1ldGVy
-IG5hbWUgb21pdHRlZAo+ICBudjUwX2NyY19hdG9taWNfY2hlY2tfaGVhZChzdHJ1Y3QgbnY1MF9o
-ZWFkICosIHN0cnVjdCBudjUwX2hlYWRfYXRvbSAqLAo+ICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICBefn5+fn5+fn5+fn5+fn5+fn4KPiAvc2NyYXRjaC9saW51eC9kcml2ZXJzL2dwdS9kcm0v
-bm91dmVhdS9kaXNwbnY1MC9jcmMuaDoxMTQ6NDg6IGVycm9yOgo+IHBhcmFtZXRlciBuYW1lIG9t
-aXR0ZWQKPiAgbnY1MF9jcmNfYXRvbWljX2NoZWNrX2hlYWQoc3RydWN0IG52NTBfaGVhZCAqLCBz
-dHJ1Y3QgbnY1MF9oZWFkX2F0b20gKiwKPiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICBefn5+fn5+fn5+fn5+fn5+fn5+fn5+fgo+IC9zY3JhdGNoL2xpbnV4
-L2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L2Rpc3BudjUwL2NyYy5oOjExNTo3OiBlcnJvcjoKPiBw
-YXJhbWV0ZXIgbmFtZSBvbWl0dGVkCj4gICAgICAgIHN0cnVjdCBudjUwX2hlYWRfYXRvbSAqKSB7
-fQo+ICAgICAgICBefn5+fn5+fn5+fn5+fn5+fn5+fn5+fgo+IC9zY3JhdGNoL2xpbnV4L2RyaXZl
-cnMvZ3B1L2RybS9ub3V2ZWF1L2Rpc3BudjUwL2NyYy5oOjExNToxNDogd2FybmluZzogbm8KPiBy
-ZXR1cm4gc3RhdGVtZW50IGluIGZ1bmN0aW9uIHJldHVybmluZyBub24tdm9pZCBbLVdyZXR1cm4t
-dHlwZV0KPiAgICAgICAgc3RydWN0IG52NTBfaGVhZF9hdG9tICopIHt9Cj4gICAgICAgICAgICAg
-ICBefn5+fn5+fn5+fn5+fgo+IC9zY3JhdGNoL2xpbnV4L2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1
-L2Rpc3BudjUwL2NyYy5oOiBJbiBmdW5jdGlvbgo+IOKAmG52NTBfY3JjX2F0b21pY19zdG9wX3Jl
-cG9ydGluZ+KAmToKPiAvc2NyYXRjaC9saW51eC9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9kaXNw
-bnY1MC9jcmMuaDoxMTg6MzI6IGVycm9yOgo+IHBhcmFtZXRlciBuYW1lIG9taXR0ZWQKPiAgbnY1
-MF9jcmNfYXRvbWljX3N0b3BfcmVwb3J0aW5nKHN0cnVjdCBkcm1fYXRvbWljX3N0YXRlICopIHt9
-Cj4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBefn5+fn5+fn5+fn5+fn5+fn5+fn5+
-fn5+Cj4gL3NjcmF0Y2gvbGludXgvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvZGlzcG52NTAvY3Jj
-Lmg6IEluIGZ1bmN0aW9uCj4g4oCYbnY1MF9jcmNfYXRvbWljX2luaXRfbm90aWZpZXJfY29udGV4
-dHPigJk6Cj4gL3NjcmF0Y2gvbGludXgvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvZGlzcG52NTAv
-Y3JjLmg6MTIwOjQwOiBlcnJvcjoKPiBwYXJhbWV0ZXIgbmFtZSBvbWl0dGVkCj4gIG52NTBfY3Jj
-X2F0b21pY19pbml0X25vdGlmaWVyX2NvbnRleHRzKHN0cnVjdCBkcm1fYXRvbWljX3N0YXRlICop
-IHt9Cj4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIF5+fn5+fn5+fn5+
-fn5+fn5+fn5+fn5+fn4KPiAvc2NyYXRjaC9saW51eC9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9k
-aXNwbnY1MC9jcmMuaDogSW4gZnVuY3Rpb24KPiDigJhudjUwX2NyY19hdG9taWNfcmVsZWFzZV9u
-b3RpZmllcl9jb250ZXh0c+KAmToKPiAvc2NyYXRjaC9saW51eC9kcml2ZXJzL2dwdS9kcm0vbm91
-dmVhdS9kaXNwbnY1MC9jcmMuaDoxMjI6NDM6IGVycm9yOgo+IHBhcmFtZXRlciBuYW1lIG9taXR0
-ZWQKPiAKPiBTaWduZWQtb2ZmLWJ5OiBQZW5nIFd1IDx3dXBlbmc1OEBodWF3ZWkuY29tPgo+IC0t
-LQo+ICBkcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9kaXNwbnY1MC9jcmMuaCB8IDQ0ICsrKysrKysr
-KysrKysrKysrLS0tLS0tLS0tLS0tCj4gLS0tLS0KPiAgMSBmaWxlIGNoYW5nZWQsIDIyIGluc2Vy
-dGlvbnMoKyksIDIyIGRlbGV0aW9ucygtKQo+IAo+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9k
-cm0vbm91dmVhdS9kaXNwbnY1MC9jcmMuaAo+IGIvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvZGlz
-cG52NTAvY3JjLmgKPiBpbmRleCA0YmM1OWU3Li4zZGExNmNkIDEwMDY0NAo+IC0tLSBhL2RyaXZl
-cnMvZ3B1L2RybS9ub3V2ZWF1L2Rpc3BudjUwL2NyYy5oCj4gKysrIGIvZHJpdmVycy9ncHUvZHJt
-L25vdXZlYXUvZGlzcG52NTAvY3JjLmgKPiBAQCAtNzYsMjIgKzc2LDIyIEBAIHN0cnVjdCBudjUw
-X2NyYyB7Cj4gIH07Cj4gIAo+ICB2b2lkIG52NTBfY3JjX2luaXQoc3RydWN0IGRybV9kZXZpY2Ug
-KmRldik7Cj4gLWludCBudjUwX2hlYWRfY3JjX2xhdGVfcmVnaXN0ZXIoc3RydWN0IG52NTBfaGVh
-ZCAqKTsKPiAraW50IG52NTBfaGVhZF9jcmNfbGF0ZV9yZWdpc3RlcihzdHJ1Y3QgbnY1MF9oZWFk
-ICpoZWFkKTsKPiAgdm9pZCBudjUwX2NyY19oYW5kbGVfdmJsYW5rKHN0cnVjdCBudjUwX2hlYWQg
-KmhlYWQpOwo+ICAKPiAtaW50IG52NTBfY3JjX3ZlcmlmeV9zb3VyY2Uoc3RydWN0IGRybV9jcnRj
-ICosIGNvbnN0IGNoYXIgKiwgc2l6ZV90ICopOwo+IC1jb25zdCBjaGFyICpjb25zdCAqbnY1MF9j
-cmNfZ2V0X3NvdXJjZXMoc3RydWN0IGRybV9jcnRjICosIHNpemVfdCAqKTsKPiAtaW50IG52NTBf
-Y3JjX3NldF9zb3VyY2Uoc3RydWN0IGRybV9jcnRjICosIGNvbnN0IGNoYXIgKik7Cj4gK2ludCBu
-djUwX2NyY192ZXJpZnlfc291cmNlKHN0cnVjdCBkcm1fY3J0YyAqY3J0YywgY29uc3QgY2hhciAq
-c291cmNlX25hbWUsCj4gc2l6ZV90ICp2YWx1ZXNfY250KTsKPiArY29uc3QgY2hhciAqY29uc3Qg
-Km52NTBfY3JjX2dldF9zb3VyY2VzKHN0cnVjdCBkcm1fY3J0YyAqY3J0Yywgc2l6ZV90Cj4gKmNv
-dW50KTsKPiAraW50IG52NTBfY3JjX3NldF9zb3VyY2Uoc3RydWN0IGRybV9jcnRjICpjcnRjLCBj
-b25zdCBjaGFyICpzb3VyY2Vfc3RyKTsKPiAgCj4gLWludCBudjUwX2NyY19hdG9taWNfY2hlY2tf
-aGVhZChzdHJ1Y3QgbnY1MF9oZWFkICosIHN0cnVjdCBudjUwX2hlYWRfYXRvbSAqLAo+IC0JCQkg
-ICAgICAgc3RydWN0IG52NTBfaGVhZF9hdG9tICopOwo+ICtpbnQgbnY1MF9jcmNfYXRvbWljX2No
-ZWNrX2hlYWQoc3RydWN0IG52NTBfaGVhZCAqaGVhZCwgc3RydWN0Cj4gbnY1MF9oZWFkX2F0b20g
-KmFzeWgsCj4gKwkJCSAgICAgICBzdHJ1Y3QgbnY1MF9oZWFkX2F0b20gKmFybWgpOwo+ICB2b2lk
-IG52NTBfY3JjX2F0b21pY19jaGVja19vdXRwKHN0cnVjdCBudjUwX2F0b20gKmF0b20pOwo+IC12
-b2lkIG52NTBfY3JjX2F0b21pY19zdG9wX3JlcG9ydGluZyhzdHJ1Y3QgZHJtX2F0b21pY19zdGF0
-ZSAqKTsKPiAtdm9pZCBudjUwX2NyY19hdG9taWNfaW5pdF9ub3RpZmllcl9jb250ZXh0cyhzdHJ1
-Y3QgZHJtX2F0b21pY19zdGF0ZSAqKTsKPiAtdm9pZCBudjUwX2NyY19hdG9taWNfcmVsZWFzZV9u
-b3RpZmllcl9jb250ZXh0cyhzdHJ1Y3QgZHJtX2F0b21pY19zdGF0ZSAqKTsKPiAtdm9pZCBudjUw
-X2NyY19hdG9taWNfc3RhcnRfcmVwb3J0aW5nKHN0cnVjdCBkcm1fYXRvbWljX3N0YXRlICopOwo+
-IC12b2lkIG52NTBfY3JjX2F0b21pY19zZXQoc3RydWN0IG52NTBfaGVhZCAqLCBzdHJ1Y3QgbnY1
-MF9oZWFkX2F0b20gKik7Cj4gLXZvaWQgbnY1MF9jcmNfYXRvbWljX2NscihzdHJ1Y3QgbnY1MF9o
-ZWFkICopOwo+ICt2b2lkIG52NTBfY3JjX2F0b21pY19zdG9wX3JlcG9ydGluZyhzdHJ1Y3QgZHJt
-X2F0b21pY19zdGF0ZSAqc3RhdGUpOwo+ICt2b2lkIG52NTBfY3JjX2F0b21pY19pbml0X25vdGlm
-aWVyX2NvbnRleHRzKHN0cnVjdCBkcm1fYXRvbWljX3N0YXRlCj4gKnN0YXRlKTsKPiArdm9pZCBu
-djUwX2NyY19hdG9taWNfcmVsZWFzZV9ub3RpZmllcl9jb250ZXh0cyhzdHJ1Y3QgZHJtX2F0b21p
-Y19zdGF0ZQo+ICpzdGF0ZSk7Cj4gK3ZvaWQgbnY1MF9jcmNfYXRvbWljX3N0YXJ0X3JlcG9ydGlu
-ZyhzdHJ1Y3QgZHJtX2F0b21pY19zdGF0ZSAqc3RhdGUpOwo+ICt2b2lkIG52NTBfY3JjX2F0b21p
-Y19zZXQoc3RydWN0IG52NTBfaGVhZCAqaGVhZCwgc3RydWN0IG52NTBfaGVhZF9hdG9tCj4gKmFz
-eWgpOwo+ICt2b2lkIG52NTBfY3JjX2F0b21pY19jbHIoc3RydWN0IG52NTBfaGVhZCAqaGVhZCk7
-Cj4gIAo+ICBleHRlcm4gY29uc3Qgc3RydWN0IG52NTBfY3JjX2Z1bmMgY3JjOTA3ZDsKPiAgZXh0
-ZXJuIGNvbnN0IHN0cnVjdCBudjUwX2NyY19mdW5jIGNyY2MzN2Q7Cj4gQEAgLTEwNiwyNiArMTA2
-LDI2IEBAIHN0cnVjdCBudjUwX2NyY19hdG9tIHt9Owo+ICAjZGVmaW5lIG52NTBfY3JjX3NldF9z
-b3VyY2UgTlVMTAo+ICAKPiAgc3RhdGljIGlubGluZSB2b2lkIG52NTBfY3JjX2luaXQoc3RydWN0
-IGRybV9kZXZpY2UgKmRldikge30KPiAtc3RhdGljIGlubGluZSBpbnQgbnY1MF9oZWFkX2NyY19s
-YXRlX3JlZ2lzdGVyKHN0cnVjdCBudjUwX2hlYWQgKikge30KPiArc3RhdGljIGlubGluZSBpbnQg
-bnY1MF9oZWFkX2NyY19sYXRlX3JlZ2lzdGVyKHN0cnVjdCBudjUwX2hlYWQgKmhlYWQpIHsKPiBy
-ZXR1cm4gMDsgfQo+ICBzdGF0aWMgaW5saW5lIHZvaWQKPiAtbnY1MF9jcmNfaGFuZGxlX3ZibGFu
-ayhzdHJ1Y3QgbnY1MF9oZWFkICpoZWFkKSB7IHJldHVybiAwOyB9Cj4gK252NTBfY3JjX2hhbmRs
-ZV92Ymxhbmsoc3RydWN0IG52NTBfaGVhZCAqaGVhZCkge30KPiAgCj4gIHN0YXRpYyBpbmxpbmUg
-aW50Cj4gLW52NTBfY3JjX2F0b21pY19jaGVja19oZWFkKHN0cnVjdCBudjUwX2hlYWQgKiwgc3Ry
-dWN0IG52NTBfaGVhZF9hdG9tICosCj4gLQkJCSAgIHN0cnVjdCBudjUwX2hlYWRfYXRvbSAqKSB7
-fQo+ICtudjUwX2NyY19hdG9taWNfY2hlY2tfaGVhZChzdHJ1Y3QgbnY1MF9oZWFkICpoZWFkLCBz
-dHJ1Y3QgbnY1MF9oZWFkX2F0b20KPiAqYXN5aCwKPiArCQkJICAgc3RydWN0IG52NTBfaGVhZF9h
-dG9tICphcm1oKSB7IHJldHVybiAwOyB9Cj4gIHN0YXRpYyBpbmxpbmUgdm9pZCBudjUwX2NyY19h
-dG9taWNfY2hlY2tfb3V0cChzdHJ1Y3QgbnY1MF9hdG9tICphdG9tKSB7fQo+ICBzdGF0aWMgaW5s
-aW5lIHZvaWQKPiAtbnY1MF9jcmNfYXRvbWljX3N0b3BfcmVwb3J0aW5nKHN0cnVjdCBkcm1fYXRv
-bWljX3N0YXRlICopIHt9Cj4gK252NTBfY3JjX2F0b21pY19zdG9wX3JlcG9ydGluZyhzdHJ1Y3Qg
-ZHJtX2F0b21pY19zdGF0ZSAqc3RhdGUpIHt9Cj4gIHN0YXRpYyBpbmxpbmUgdm9pZAo+IC1udjUw
-X2NyY19hdG9taWNfaW5pdF9ub3RpZmllcl9jb250ZXh0cyhzdHJ1Y3QgZHJtX2F0b21pY19zdGF0
-ZSAqKSB7fQo+ICtudjUwX2NyY19hdG9taWNfaW5pdF9ub3RpZmllcl9jb250ZXh0cyhzdHJ1Y3Qg
-ZHJtX2F0b21pY19zdGF0ZSAqc3RhdGUpIHt9Cj4gIHN0YXRpYyBpbmxpbmUgdm9pZAo+IC1udjUw
-X2NyY19hdG9taWNfcmVsZWFzZV9ub3RpZmllcl9jb250ZXh0cyhzdHJ1Y3QgZHJtX2F0b21pY19z
-dGF0ZSAqKSB7fQo+ICtudjUwX2NyY19hdG9taWNfcmVsZWFzZV9ub3RpZmllcl9jb250ZXh0cyhz
-dHJ1Y3QgZHJtX2F0b21pY19zdGF0ZSAqc3RhdGUpCj4ge30KPiAgc3RhdGljIGlubGluZSB2b2lk
-Cj4gLW52NTBfY3JjX2F0b21pY19zdGFydF9yZXBvcnRpbmcoc3RydWN0IGRybV9hdG9taWNfc3Rh
-dGUgKikge30KPiArbnY1MF9jcmNfYXRvbWljX3N0YXJ0X3JlcG9ydGluZyhzdHJ1Y3QgZHJtX2F0
-b21pY19zdGF0ZSAqc3RhdGUpIHt9Cj4gIHN0YXRpYyBpbmxpbmUgdm9pZAo+IC1udjUwX2NyY19h
-dG9taWNfc2V0KHN0cnVjdCBudjUwX2hlYWQgKiwgc3RydWN0IG52NTBfaGVhZF9hdG9tICopIHt9
-Cj4gK252NTBfY3JjX2F0b21pY19zZXQoc3RydWN0IG52NTBfaGVhZCAqaGVhZCwgc3RydWN0IG52
-NTBfaGVhZF9hdG9tICphc3loKSB7fQo+ICBzdGF0aWMgaW5saW5lIHZvaWQKPiAtbnY1MF9jcmNf
-YXRvbWljX2NscihzdHJ1Y3QgbnY1MF9oZWFkICopIHt9Cj4gK252NTBfY3JjX2F0b21pY19jbHIo
-c3RydWN0IG52NTBfaGVhZCAqaGVhZCkge30KPiAgCj4gICNlbmRpZiAvKiBJU19FTkFCTEVEKENP
-TkZJR19ERUJVR19GUykgKi8KPiAgI2VuZGlmIC8qICFfX05WNTBfQ1JDX0hfXyAqLwotLSAKQ2hl
-ZXJzLAoJTHl1ZGUgUGF1bCAoc2hlL2hlcikKCVNvZnR3YXJlIEVuZ2luZWVyIGF0IFJlZCBIYXQK
-Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCk5vdXZlYXUg
-bWFpbGluZyBsaXN0Ck5vdXZlYXVAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMu
-ZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vbm91dmVhdQo=
+On 7/23/20 9:06 PM, Ben Skeggs wrote:
+> On Sat, 18 Jul 2020 at 13:34, James Jones <jajones@nvidia.com> wrote:
+>>
+>> Accept the DRM_FORMAT_MOD_NVIDIA_16BX2_BLOCK()
+>> family of modifiers to handle broken userspace
+>> Xorg modesetting and Mesa drivers. Existing Mesa
+>> drivers are still aware of only these older
+>> format modifiers which do not differentiate
+>> between different variations of the block linear
+>> layout. When the format modifier support flag was
+>> flipped in the nouveau kernel driver, the X.org
+>> modesetting driver began attempting to use its
+>> format modifier-enabled framebuffer path. Because
+>> the set of format modifiers advertised by the
+>> kernel prior to this change do not intersect with
+>> the set of format modifiers advertised by Mesa,
+>> allocating GBM buffers using format modifiers
+>> fails and the modesetting driver falls back to
+>> non-modifier allocation. However, it still later
+>> queries the modifier of the GBM buffer when
+>> creating its DRM-KMS framebuffer object, receives
+>> the old-format modifier from Mesa, and attempts
+>> to create a framebuffer with it. Since the kernel
+>> is still not aware of these formats, this fails.
+>>
+>> Userspace should not be attempting to query format
+>> modifiers of GBM buffers allocated with a non-
+>> format-modifier-aware allocation path, but to
+>> avoid breaking existing userspace behavior, this
+>> change accepts the old-style format modifiers when
+>> creating framebuffers and applying them to planes
+>> by translating them to the equivalent new-style
+>> modifier. To accomplish this, some layout
+>> parameters must be assumed to match properties of
+>> the device targeted by the relevant ioctls. To
+>> avoid perpetuating misuse of the old-style
+>> modifiers, this change does not advertise support
+>> for them. Doing so would imply compatibility
+>> between devices with incompatible memory layouts.
+>>
+>> Tested with Xorg 1.20 modesetting driver,
+>> weston@c46c70dac84a4b3030cd05b380f9f410536690fc,
+>> gnome & KDE wayland desktops from Ubuntu 18.04,
+>> and sway 1.5
+>>
+>> Reported-by: Kirill A. Shutemov <kirill@shutemov.name>
+>> Fixes: fa4f4c213f5f ("drm/nouveau/kms: Support NVIDIA format modifiers")
+>> Link: https://lkml.org/lkml/2020/6/30/1251
+>> Signed-off-by: James Jones <jajones@nvidia.com>
+>> ---
+>>   drivers/gpu/drm/nouveau/nouveau_display.c | 26 +++++++++++++++++++++--
+>>   1 file changed, 24 insertions(+), 2 deletions(-)
+>>
+>> diff --git a/drivers/gpu/drm/nouveau/nouveau_display.c b/drivers/gpu/drm/nouveau/nouveau_display.c
+>> index 496c4621cc78..31543086254b 100644
+>> --- a/drivers/gpu/drm/nouveau/nouveau_display.c
+>> +++ b/drivers/gpu/drm/nouveau/nouveau_display.c
+>> @@ -191,8 +191,14 @@ nouveau_decode_mod(struct nouveau_drm *drm,
+>>                     uint32_t *tile_mode,
+>>                     uint8_t *kind)
+>>   {
+>> +       struct nouveau_display *disp = nouveau_display(drm->dev);
+>>          BUG_ON(!tile_mode || !kind);
+>>
+>> +       if ((modifier & (0xffull << 12)) == 0ull) {
+>> +               /* Legacy modifier.  Translate to this device's 'kind.' */
+>> +               modifier |= disp->format_modifiers[0] & (0xffull << 12);
+>> +       }
+> I believe this should be moved into the != MOD_LINEAR case.
+
+Yes, of course, thanks.  I need to re-evaluate my testing yet again to 
+make sure I hit that case too.  Preparing a v3...
+
+Thanks,
+-James
+
+>> +
+>>          if (modifier == DRM_FORMAT_MOD_LINEAR) {
+>>                  /* tile_mode will not be used in this case */
+>>                  *tile_mode = 0;
+>> @@ -227,6 +233,16 @@ nouveau_framebuffer_get_layout(struct drm_framebuffer *fb,
+>>          }
+>>   }
+>>
+>> +static const u64 legacy_modifiers[] = {
+>> +       DRM_FORMAT_MOD_NVIDIA_16BX2_BLOCK(0),
+>> +       DRM_FORMAT_MOD_NVIDIA_16BX2_BLOCK(1),
+>> +       DRM_FORMAT_MOD_NVIDIA_16BX2_BLOCK(2),
+>> +       DRM_FORMAT_MOD_NVIDIA_16BX2_BLOCK(3),
+>> +       DRM_FORMAT_MOD_NVIDIA_16BX2_BLOCK(4),
+>> +       DRM_FORMAT_MOD_NVIDIA_16BX2_BLOCK(5),
+>> +       DRM_FORMAT_MOD_INVALID
+>> +};
+>> +
+>>   static int
+>>   nouveau_validate_decode_mod(struct nouveau_drm *drm,
+>>                              uint64_t modifier,
+>> @@ -247,8 +263,14 @@ nouveau_validate_decode_mod(struct nouveau_drm *drm,
+>>               (disp->format_modifiers[mod] != modifier);
+>>               mod++);
+>>
+>> -       if (disp->format_modifiers[mod] == DRM_FORMAT_MOD_INVALID)
+>> -               return -EINVAL;
+>> +       if (disp->format_modifiers[mod] == DRM_FORMAT_MOD_INVALID) {
+>> +               for (mod = 0;
+>> +                    (legacy_modifiers[mod] != DRM_FORMAT_MOD_INVALID) &&
+>> +                    (legacy_modifiers[mod] != modifier);
+>> +                    mod++);
+>> +               if (legacy_modifiers[mod] == DRM_FORMAT_MOD_INVALID)
+>> +                       return -EINVAL;
+>> +       }
+>>
+>>          nouveau_decode_mod(drm, modifier, tile_mode, kind);
+>>
+>> --
+>> 2.17.1
+>>
+>> _______________________________________________
+>> Nouveau mailing list
+>> Nouveau@lists.freedesktop.org
+>> https://lists.freedesktop.org/mailman/listinfo/nouveau
+_______________________________________________
+Nouveau mailing list
+Nouveau@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/nouveau
