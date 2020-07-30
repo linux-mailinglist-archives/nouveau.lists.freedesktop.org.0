@@ -2,60 +2,61 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id E2455233A45
-	for <lists+nouveau@lfdr.de>; Thu, 30 Jul 2020 23:06:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9B417233B31
+	for <lists+nouveau@lfdr.de>; Fri, 31 Jul 2020 00:19:40 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4D0DC6E40B;
-	Thu, 30 Jul 2020 21:06:37 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 543966E4D0;
+	Thu, 30 Jul 2020 22:19:37 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from hqnvemgate26.nvidia.com (hqnvemgate26.nvidia.com
- [216.228.121.65])
- by gabe.freedesktop.org (Postfix) with ESMTPS id AAA446E40B;
- Thu, 30 Jul 2020 21:06:36 +0000 (UTC)
-Received: from hqpgpgate101.nvidia.com (Not Verified[216.228.121.13]) by
- hqnvemgate26.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
- id <B5f23364e0001>; Thu, 30 Jul 2020 14:06:23 -0700
-Received: from hqmail.nvidia.com ([172.20.161.6])
- by hqpgpgate101.nvidia.com (PGP Universal service);
- Thu, 30 Jul 2020 14:06:36 -0700
-X-PGP-Universal: processed;
- by hqpgpgate101.nvidia.com on Thu, 30 Jul 2020 14:06:36 -0700
-Received: from [172.20.40.56] (10.124.1.5) by HQMAIL107.nvidia.com
- (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Thu, 30 Jul
- 2020 21:06:35 +0000
-To: "Kirill A. Shutemov" <kirill@shutemov.name>, Ben Skeggs <skeggsb@gmail.com>
-References: <20200718033352.1810-1-jajones@nvidia.com>
- <CACAvsv6a6Td=igGXwrpPUASMfYPCH9VvWdEY6PBaY+0cybJNxA@mail.gmail.com>
- <561f3a10-82af-cff5-b771-2e56b6eb973a@nvidia.com>
- <CAPM=9twQfg6QiiL2fn=qaBRrWCsnoByoch+1vAN94ZwqzYDFxg@mail.gmail.com>
- <CACAvsv6_h95a-Gpd-=YxW0d8CoOHvO2OLCsoDpJvUx=MWzdFzw@mail.gmail.com>
- <20200729144746.jwyhwnp2fwat34hc@box>
-X-Nvconfidentiality: public
-From: James Jones <jajones@nvidia.com>
-Message-ID: <c3e344e0-931f-81e0-44cc-c72f7bae73a1@nvidia.com>
-Date: Thu, 30 Jul 2020 14:06:31 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+Received: from mail-lj1-x241.google.com (mail-lj1-x241.google.com
+ [IPv6:2a00:1450:4864:20::241])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 575AA6E4CF
+ for <nouveau@lists.freedesktop.org>; Thu, 30 Jul 2020 22:19:36 +0000 (UTC)
+Received: by mail-lj1-x241.google.com with SMTP id v12so209239ljc.10
+ for <nouveau@lists.freedesktop.org>; Thu, 30 Jul 2020 15:19:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=shutemov-name.20150623.gappssmtp.com; s=20150623;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to;
+ bh=STwaQ5Ntxsqp6QopFuNsUtbtwpBpMRacm9NK7jlSzDs=;
+ b=BMlzv3WPfLQlK0qRWi0Uzt5hMl4vmln1jBZRjdpUk+TB5GTnnVQv3TQ0BDx7GNx74n
+ vY1QafdI3+B47V6sJYg4MlL8z1xv/D8H/Ro+BJokbFpqcZvKNUHhgkTViIP5Sj6g04ac
+ LNAY+BTu2+4uTtR24BL/au6vOi6h3BIelCQcCzPhkiQn5tzBW2ZpneSKeDD5j/d2jxd5
+ ZWFF6QHf2PWuL0vFkTxb12Qsfhs69A+Ip3dHAphiThHY1jzIk7fJWb20QmdO4u8u2Fpb
+ v722Oo4ii3oaqQ9SBLy/0ttEHBxBoRWUl0tjMYJLFPWxngKxYpWG2w9Bpzx3fkZUjFG2
+ 6Z+A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=STwaQ5Ntxsqp6QopFuNsUtbtwpBpMRacm9NK7jlSzDs=;
+ b=sHdqX3LWZWVaVjD/I1osdTY55x8Vw+CKDPy8kN/GVUT+K3sEVKGRV6BPREiqMUKFQx
+ TRjHBo7XopHYxrv0zWDaANqFj/kilZXs4w06MMVQqxbSYwQl043ZROKG/fJqA5EmWSFb
+ zYm1n+zFcfk6ffcVWBolbdqMsvn1xzQDrCiqRVU647oAsmwgXzsy7qlahBVRdG/9d/Wr
+ qQ0AxuLtn9fbf2bG0MYej9iSTLuLVa9AT4o84CBA64Dfr4DL8yzDdnbPhztOFyizsDAm
+ dud7SMsz8SQpySFOLfnmyVbsv8IgWQhzgPAwP09bmZVd6cxwNFYhkOnt66rE2RPXUC9x
+ tsFg==
+X-Gm-Message-State: AOAM533opyGuC7XEReJkxJHFgjiiff1PUXvjGGsC45BWmb43XdSkI5O8
+ VzL9iVGa49tT9XSDFCWs8RxOEg==
+X-Google-Smtp-Source: ABdhPJwwh8VRiV1Iw4Di5s5loy/Yk1hZar+Rf/448yHssNkobl2yrf2gztJQLwI8N40LTl7kLR8lJA==
+X-Received: by 2002:a2e:7d0b:: with SMTP id y11mr559809ljc.134.1596147574606; 
+ Thu, 30 Jul 2020 15:19:34 -0700 (PDT)
+Received: from box.localdomain ([86.57.175.117])
+ by smtp.gmail.com with ESMTPSA id h5sm1473132lfm.70.2020.07.30.15.19.32
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 30 Jul 2020 15:19:32 -0700 (PDT)
+Received: by box.localdomain (Postfix, from userid 1000)
+ id 9C04E1021DB; Fri, 31 Jul 2020 01:19:37 +0300 (+03)
+Date: Fri, 31 Jul 2020 01:19:37 +0300
+From: "Kirill A. Shutemov" <kirill@shutemov.name>
+To: James Jones <jajones@nvidia.com>
+Message-ID: <20200730221937.kcy7synseuedn6qf@box>
+References: <20200730172617.4158-1-jajones@nvidia.com>
 MIME-Version: 1.0
-In-Reply-To: <20200729144746.jwyhwnp2fwat34hc@box>
-X-Originating-IP: [10.124.1.5]
-X-ClientProxiedBy: HQMAIL105.nvidia.com (172.20.187.12) To
- HQMAIL107.nvidia.com (172.20.187.13)
-Content-Language: en-US
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
- t=1596143183; bh=RbpUwALqT5o19ACZYw6UwNFHAe1UP3Je8wcDj7LABbs=;
- h=X-PGP-Universal:Subject:To:CC:References:X-Nvconfidentiality:From:
- Message-ID:Date:User-Agent:MIME-Version:In-Reply-To:
- X-Originating-IP:X-ClientProxiedBy:Content-Type:Content-Language:
- Content-Transfer-Encoding;
- b=ry/F8FREytolSXw7WFHbIAiZhA03BD7GpPoKbszXPmYcwX2o15jO53OByxYv4Qgbq
- vJS2uLsW8YQEV85N3LfrRMfz4OAD7Q+Y7A4Yhp4CGK4iYolC6I060mvmYHiln/qy8r
- 9sFs1rzclt/74FHjtpqR+gtPO9/lGqG3jB6/cBkzC+lORLZv4vFuk7JU24nVV067IA
- 81pTV6eaVLE9+AtBKXaEl0SSnnfIlr9J+USTKHm9EPHqAV+BxnO1xpBf4rgr1WY4HK
- +x+t1AYdkIJzGLW55VID4fzr/b9IFRzveMYSKsCPqH3ReLDD14Ng4qecANMPLm1j/U
- V2b8Zm6K1pNUw==
-Subject: Re: [Nouveau] [PATCH v2] drm/nouveau: Accept 'legacy' format
+Content-Disposition: inline
+In-Reply-To: <20200730172617.4158-1-jajones@nvidia.com>
+Subject: Re: [Nouveau] [PATCH v3] drm/nouveau: Accept 'legacy' format
  modifiers
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -71,107 +72,88 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Cc: Ben Skeggs <bskeggs@redhat.com>,
  dri-devel <dri-devel@lists.freedesktop.org>,
  Nouveau <nouveau@lists.freedesktop.org>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 7/29/20 7:47 AM, Kirill A. Shutemov wrote:
-> On Wed, Jul 29, 2020 at 01:40:13PM +1000, Ben Skeggs wrote:
->> On Wed, 29 Jul 2020 at 12:48, Dave Airlie <airlied@gmail.com> wrote:
->>>
->>> On Tue, 28 Jul 2020 at 04:51, James Jones <jajones@nvidia.com> wrote:
->>>>
->>>> On 7/23/20 9:06 PM, Ben Skeggs wrote:
->>>>> On Sat, 18 Jul 2020 at 13:34, James Jones <jajones@nvidia.com> wrote:
->>>>>>
->>>>>> Accept the DRM_FORMAT_MOD_NVIDIA_16BX2_BLOCK()
->>>>>> family of modifiers to handle broken userspace
->>>>>> Xorg modesetting and Mesa drivers. Existing Mesa
->>>>>> drivers are still aware of only these older
->>>>>> format modifiers which do not differentiate
->>>>>> between different variations of the block linear
->>>>>> layout. When the format modifier support flag was
->>>>>> flipped in the nouveau kernel driver, the X.org
->>>>>> modesetting driver began attempting to use its
->>>>>> format modifier-enabled framebuffer path. Because
->>>>>> the set of format modifiers advertised by the
->>>>>> kernel prior to this change do not intersect with
->>>>>> the set of format modifiers advertised by Mesa,
->>>>>> allocating GBM buffers using format modifiers
->>>>>> fails and the modesetting driver falls back to
->>>>>> non-modifier allocation. However, it still later
->>>>>> queries the modifier of the GBM buffer when
->>>>>> creating its DRM-KMS framebuffer object, receives
->>>>>> the old-format modifier from Mesa, and attempts
->>>>>> to create a framebuffer with it. Since the kernel
->>>>>> is still not aware of these formats, this fails.
->>>>>>
->>>>>> Userspace should not be attempting to query format
->>>>>> modifiers of GBM buffers allocated with a non-
->>>>>> format-modifier-aware allocation path, but to
->>>>>> avoid breaking existing userspace behavior, this
->>>>>> change accepts the old-style format modifiers when
->>>>>> creating framebuffers and applying them to planes
->>>>>> by translating them to the equivalent new-style
->>>>>> modifier. To accomplish this, some layout
->>>>>> parameters must be assumed to match properties of
->>>>>> the device targeted by the relevant ioctls. To
->>>>>> avoid perpetuating misuse of the old-style
->>>>>> modifiers, this change does not advertise support
->>>>>> for them. Doing so would imply compatibility
->>>>>> between devices with incompatible memory layouts.
->>>>>>
->>>>>> Tested with Xorg 1.20 modesetting driver,
->>>>>> weston@c46c70dac84a4b3030cd05b380f9f410536690fc,
->>>>>> gnome & KDE wayland desktops from Ubuntu 18.04,
->>>>>> and sway 1.5
->>>>>>
->>>>>> Reported-by: Kirill A. Shutemov <kirill@shutemov.name>
->>>>>> Fixes: fa4f4c213f5f ("drm/nouveau/kms: Support NVIDIA format modifiers")
->>>>>> Link: https://lkml.org/lkml/2020/6/30/1251
->>>>>> Signed-off-by: James Jones <jajones@nvidia.com>
->>>>>> ---
->>>>>>    drivers/gpu/drm/nouveau/nouveau_display.c | 26 +++++++++++++++++++++--
->>>>>>    1 file changed, 24 insertions(+), 2 deletions(-)
->>>>>>
->>>>>> diff --git a/drivers/gpu/drm/nouveau/nouveau_display.c b/drivers/gpu/drm/nouveau/nouveau_display.c
->>>>>> index 496c4621cc78..31543086254b 100644
->>>>>> --- a/drivers/gpu/drm/nouveau/nouveau_display.c
->>>>>> +++ b/drivers/gpu/drm/nouveau/nouveau_display.c
->>>>>> @@ -191,8 +191,14 @@ nouveau_decode_mod(struct nouveau_drm *drm,
->>>>>>                      uint32_t *tile_mode,
->>>>>>                      uint8_t *kind)
->>>>>>    {
->>>>>> +       struct nouveau_display *disp = nouveau_display(drm->dev);
->>>>>>           BUG_ON(!tile_mode || !kind);
->>>>>>
->>>>>> +       if ((modifier & (0xffull << 12)) == 0ull) {
->>>>>> +               /* Legacy modifier.  Translate to this device's 'kind.' */
->>>>>> +               modifier |= disp->format_modifiers[0] & (0xffull << 12);
->>>>>> +       }
->>>>> I believe this should be moved into the != MOD_LINEAR case.
->>>>
->>>> Yes, of course, thanks.  I need to re-evaluate my testing yet again to
->>>> make sure I hit that case too.  Preparing a v3...
->>>
->>> Going to need something here in the next day, two max.
->>>
->>> Linus may wait for another week, but it's not guaranteed.
->> I tested a whole bunch of GPUs before sending nouveau's -next tree,
->> and with the change I suggested to this patch + the other stuff I sent
->> through -fixes already, things seemed to be in OK shape.
+On Thu, Jul 30, 2020 at 10:26:17AM -0700, James Jones wrote:
+> Accept the DRM_FORMAT_MOD_NVIDIA_16BX2_BLOCK()
+> family of modifiers to handle broken userspace
+> Xorg modesetting and Mesa drivers. Existing Mesa
+> drivers are still aware of only these older
+> format modifiers which do not differentiate
+> between different variations of the block linear
+> layout. When the format modifier support flag was
+> flipped in the nouveau kernel driver, the X.org
+> modesetting driver began attempting to use its
+> format modifier-enabled framebuffer path. Because
+> the set of format modifiers advertised by the
+> kernel prior to this change do not intersect with
+> the set of format modifiers advertised by Mesa,
+> allocating GBM buffers using format modifiers
+> fails and the modesetting driver falls back to
+> non-modifier allocation. However, it still later
+> queries the modifier of the GBM buffer when
+> creating its DRM-KMS framebuffer object, receives
+> the old-format modifier from Mesa, and attempts
+> to create a framebuffer with it. Since the kernel
+> is still not aware of these formats, this fails.
 > 
-> JFYI, the adjusted (moved into != MOD_LINEAR case) patch works fine for me
-> on top of drm-fixes-2020-07-29.
+> Userspace should not be attempting to query format
+> modifiers of GBM buffers allocated with a non-
+> format-modifier-aware allocation path, but to
+> avoid breaking existing userspace behavior, this
+> change accepts the old-style format modifiers when
+> creating framebuffers and applying them to planes
+> by translating them to the equivalent new-style
+> modifier. To accomplish this, some layout
+> parameters must be assumed to match properties of
+> the device targeted by the relevant ioctls. To
+> avoid perpetuating misuse of the old-style
+> modifiers, this change does not advertise support
+> for them. Doing so would imply compatibility
+> between devices with incompatible memory layouts.
+> 
+> Tested with Xorg 1.20 modesetting driver,
+> weston@c46c70dac84a4b3030cd05b380f9f410536690fc,
+> gnome & KDE wayland desktops from Ubuntu 18.04,
+> kmscube hacked to use linear mod, and sway 1.5
+> 
+> Reported-by: Kirill A. Shutemov <kirill@shutemov.name>
+> Fixes: fa4f4c213f5f ("drm/nouveau/kms: Support NVIDIA format modifiers")
+> Link: https://lkml.org/lkml/2020/6/30/1251
+> Signed-off-by: James Jones <jajones@nvidia.com>
+> ---
+>  drivers/gpu/drm/nouveau/nouveau_display.c | 26 +++++++++++++++++++++--
+>  1 file changed, 24 insertions(+), 2 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_display.c b/drivers/gpu/drm/nouveau/nouveau_display.c
+> index 496c4621cc78..31543086254b 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_display.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_display.c
+> @@ -191,8 +191,14 @@ nouveau_decode_mod(struct nouveau_drm *drm,
+>  		   uint32_t *tile_mode,
+>  		   uint8_t *kind)
+>  {
+> +	struct nouveau_display *disp = nouveau_display(drm->dev);
+>  	BUG_ON(!tile_mode || !kind);
+>  
+> +	if ((modifier & (0xffull << 12)) == 0ull) {
+> +		/* Legacy modifier.  Translate to this device's 'kind.' */
+> +		modifier |= disp->format_modifiers[0] & (0xffull << 12);
+> +	}
+> +
+>  	if (modifier == DRM_FORMAT_MOD_LINEAR) {
+>  		/* tile_mode will not be used in this case */
+>  		*tile_mode = 0;
 
-Sorry again for the delays (life is terrible lately), but the signed-off 
-version with Ben's suggestion went out this morning, and I specifically 
-tested linear modifiers in addition to retesting all the other test 
-cases mentioned in the patch.
+Em. I thought Ben's suggestion was to move it under != MOD_LINEAR. I don't
+see it here.
 
-Thanks,
--James
+
+-- 
+ Kirill A. Shutemov
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
