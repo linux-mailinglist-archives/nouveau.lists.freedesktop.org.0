@@ -1,57 +1,67 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D00A7233C59
-	for <lists+nouveau@lfdr.de>; Fri, 31 Jul 2020 01:59:20 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2E307234B7F
+	for <lists+nouveau@lfdr.de>; Fri, 31 Jul 2020 21:15:48 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 32CB66E97A;
-	Thu, 30 Jul 2020 23:59:19 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id ADC3A6EB3F;
+	Fri, 31 Jul 2020 19:15:46 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from hqnvemgate25.nvidia.com (hqnvemgate25.nvidia.com
- [216.228.121.64])
- by gabe.freedesktop.org (Postfix) with ESMTPS id EA2496E97A;
- Thu, 30 Jul 2020 23:59:17 +0000 (UTC)
-Received: from hqpgpgate101.nvidia.com (Not Verified[216.228.121.13]) by
- hqnvemgate25.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
- id <B5f235ea70000>; Thu, 30 Jul 2020 16:58:31 -0700
-Received: from hqmail.nvidia.com ([172.20.161.6])
- by hqpgpgate101.nvidia.com (PGP Universal service);
- Thu, 30 Jul 2020 16:59:17 -0700
-X-PGP-Universal: processed;
- by hqpgpgate101.nvidia.com on Thu, 30 Jul 2020 16:59:17 -0700
-Received: from [172.20.40.56] (10.124.1.5) by HQMAIL107.nvidia.com
- (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Thu, 30 Jul
- 2020 23:59:16 +0000
-To: "Kirill A. Shutemov" <kirill@shutemov.name>
-References: <20200730172617.4158-1-jajones@nvidia.com>
- <20200730221937.kcy7synseuedn6qf@box>
-From: James Jones <jajones@nvidia.com>
-Message-ID: <2a50af62-51c6-6da6-e14e-7c1da80bf47e@nvidia.com>
-Date: Thu, 30 Jul 2020 16:59:12 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+Received: from mail-qt1-x844.google.com (mail-qt1-x844.google.com
+ [IPv6:2607:f8b0:4864:20::844])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E54C16EB3F
+ for <nouveau@lists.freedesktop.org>; Fri, 31 Jul 2020 19:15:45 +0000 (UTC)
+Received: by mail-qt1-x844.google.com with SMTP id s16so23776876qtn.7
+ for <nouveau@lists.freedesktop.org>; Fri, 31 Jul 2020 12:15:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ziepe.ca; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to;
+ bh=Fq0Y+W4Lgf9ZSs2fq5dZEqY/mzSGk+8POFJ4bFdvCDk=;
+ b=G/VpxuJUEys50kS6M4S8wb2H1SZFH9TAe6PT9j9DjWLTOfJB5PNMU67K3dsNbEqa/T
+ f/t/ak0QhLCebd7u7VQEHzvhQW9JdWn6Q0zDWLUeVDy3t8XfK0bgdcd4pK6d11b8hDOJ
+ awmYIM72dgL0i2V7jQWPII+xmQ6s7xdvCa7yHe3VPproYPZLgxU/trvWLMs7TJ1a17zM
+ hkxnvRS2KHmbgVl2ohPFNxuIcOG5Hy4m6X5ZU/L5bcHwUkvXjAenwqP7ddqeXsdvNx8d
+ 7a/WH0YQE0MirCzNS6Fv+Fw+tL8mCVhiagDDtra7MILsPqqCdx7raAC9vGeT/LHU24gG
+ VvfA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=Fq0Y+W4Lgf9ZSs2fq5dZEqY/mzSGk+8POFJ4bFdvCDk=;
+ b=qbWBFnwuecPSh2zm5LSGRYZMfb71PRnNhL7p8A+VIl2fc9V7sX+etMO41iX8g+LY8M
+ BYfXr+3b1UOThlgJh2nCCRq6imqMoxhEsNtVzazMmKPqXBqdQo9YBJ+W/xCuGNk0dtNg
+ 3VNbXkdCIwMirGyc2e7gPEGbLeRrRI4xxXAaD62Dw1h5YRL3SWy2kADRY8zhHJ0E29V+
+ 8MD284s0T1EcOSAoPsPsyEg+oFYehGCaO38o6n4LQkA1wf9rUrlkS4xybUminK31wOfb
+ rYPbkevUXjdICBXEqt1VAzvQEyV3GpntZIux/jOaXjL/eafD/JVGtb+yVP26HZOp6rbS
+ m+kQ==
+X-Gm-Message-State: AOAM532JmasKVpvuvMXP/vuvGdP3nECvNkDSD9/3b40EwvM6fbGW0HaU
+ BWCJH+r7iTZnsau45A7rX5WF9Q==
+X-Google-Smtp-Source: ABdhPJy80fPm/ep3Y4AxQL+NAp4HUm3l9/dB0ABYDlNS+XUMwzmiJ6PHh20/a5m/KIRuQsM16pnQBA==
+X-Received: by 2002:aed:3361:: with SMTP id u88mr5258595qtd.79.1596222944775; 
+ Fri, 31 Jul 2020 12:15:44 -0700 (PDT)
+Received: from ziepe.ca
+ (hlfxns017vw-156-34-48-30.dhcp-dynamic.fibreop.ns.bellaliant.net.
+ [156.34.48.30])
+ by smtp.gmail.com with ESMTPSA id q2sm10160900qtl.64.2020.07.31.12.15.43
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 31 Jul 2020 12:15:44 -0700 (PDT)
+Received: from jgg by mlx with local (Exim 4.94) (envelope-from <jgg@ziepe.ca>)
+ id 1k1aVL-002Bep-EX; Fri, 31 Jul 2020 16:15:43 -0300
+Date: Fri, 31 Jul 2020 16:15:43 -0300
+From: Jason Gunthorpe <jgg@ziepe.ca>
+To: Ralph Campbell <rcampbell@nvidia.com>
+Message-ID: <20200731191543.GJ24045@ziepe.ca>
+References: <20200723223004.9586-1-rcampbell@nvidia.com>
+ <20200723223004.9586-7-rcampbell@nvidia.com>
+ <20200728191940.GB159104@nvidia.com>
+ <7f947311-0034-9148-1dca-fb9b9a10abc4@nvidia.com>
 MIME-Version: 1.0
-In-Reply-To: <20200730221937.kcy7synseuedn6qf@box>
-X-Originating-IP: [10.124.1.5]
-X-ClientProxiedBy: HQMAIL111.nvidia.com (172.20.187.18) To
- HQMAIL107.nvidia.com (172.20.187.13)
-Content-Language: en-US
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
- t=1596153511; bh=Z+sBrbUNSH9qO+Hz3gqi4MOEb4zm35ucgzAdAaH1mzg=;
- h=X-PGP-Universal:Subject:To:CC:References:From:Message-ID:Date:
- User-Agent:MIME-Version:In-Reply-To:X-Originating-IP:
- X-ClientProxiedBy:Content-Type:Content-Language:
- Content-Transfer-Encoding;
- b=RZnwRDqNYgU5v+18QThKCwixdJT8F/+PDJ5R2aVmeT8xdtqgdqlARNzlOhCUycLcP
- bUtZClpKlYyRs/1RuWcuot3M3fJdxiVCV2r319Yvzs5cZyiDCx/kZ9n7Vd7canrsgh
- kjdJ0d1q2hJUycD/1mehJXSCZPLPZHDPeQgLvuV6Q71isgeUZuTqUSvY5NnWPJKJiL
- lYUncKgBYi+cEuGG4AlfN4LwxktvpTVyRgN079sT3RRoFdDXBYmEDINtfb6AfeTc+4
- r4G4QK08Q1ugsrIszRWzIUyPr9rsCxzIHXuhE7MZV62ZIwdtjrEqlcinD6fvoPL93T
- Aqdtymsr2/dHw==
-Subject: Re: [Nouveau] [PATCH v3] drm/nouveau: Accept 'legacy' format
- modifiers
+Content-Disposition: inline
+In-Reply-To: <7f947311-0034-9148-1dca-fb9b9a10abc4@nvidia.com>
+Subject: Re: [Nouveau] [PATCH v4 6/6] mm/migrate: remove range invalidation
+ in migrate_vma_pages()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,94 +73,95 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Ben Skeggs <bskeggs@redhat.com>,
- dri-devel <dri-devel@lists.freedesktop.org>,
- Nouveau <nouveau@lists.freedesktop.org>
+Cc: linux-rdma@vger.kernel.org, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, kvm-ppc@vger.kernel.org,
+ Bharata B Rao <bharata@linux.ibm.com>, linux-mm@kvack.org,
+ Ben Skeggs <bskeggs@redhat.com>, linux-kselftest@vger.kernel.org,
+ Andrew Morton <akpm@linux-foundation.org>, Shuah Khan <shuah@kernel.org>,
+ Christoph Hellwig <hch@lst.de>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 7/30/20 3:19 PM, Kirill A. Shutemov wrote:
-> On Thu, Jul 30, 2020 at 10:26:17AM -0700, James Jones wrote:
->> Accept the DRM_FORMAT_MOD_NVIDIA_16BX2_BLOCK()
->> family of modifiers to handle broken userspace
->> Xorg modesetting and Mesa drivers. Existing Mesa
->> drivers are still aware of only these older
->> format modifiers which do not differentiate
->> between different variations of the block linear
->> layout. When the format modifier support flag was
->> flipped in the nouveau kernel driver, the X.org
->> modesetting driver began attempting to use its
->> format modifier-enabled framebuffer path. Because
->> the set of format modifiers advertised by the
->> kernel prior to this change do not intersect with
->> the set of format modifiers advertised by Mesa,
->> allocating GBM buffers using format modifiers
->> fails and the modesetting driver falls back to
->> non-modifier allocation. However, it still later
->> queries the modifier of the GBM buffer when
->> creating its DRM-KMS framebuffer object, receives
->> the old-format modifier from Mesa, and attempts
->> to create a framebuffer with it. Since the kernel
->> is still not aware of these formats, this fails.
->>
->> Userspace should not be attempting to query format
->> modifiers of GBM buffers allocated with a non-
->> format-modifier-aware allocation path, but to
->> avoid breaking existing userspace behavior, this
->> change accepts the old-style format modifiers when
->> creating framebuffers and applying them to planes
->> by translating them to the equivalent new-style
->> modifier. To accomplish this, some layout
->> parameters must be assumed to match properties of
->> the device targeted by the relevant ioctls. To
->> avoid perpetuating misuse of the old-style
->> modifiers, this change does not advertise support
->> for them. Doing so would imply compatibility
->> between devices with incompatible memory layouts.
->>
->> Tested with Xorg 1.20 modesetting driver,
->> weston@c46c70dac84a4b3030cd05b380f9f410536690fc,
->> gnome & KDE wayland desktops from Ubuntu 18.04,
->> kmscube hacked to use linear mod, and sway 1.5
->>
->> Reported-by: Kirill A. Shutemov <kirill@shutemov.name>
->> Fixes: fa4f4c213f5f ("drm/nouveau/kms: Support NVIDIA format modifiers")
->> Link: https://lkml.org/lkml/2020/6/30/1251
->> Signed-off-by: James Jones <jajones@nvidia.com>
->> ---
->>   drivers/gpu/drm/nouveau/nouveau_display.c | 26 +++++++++++++++++++++--
->>   1 file changed, 24 insertions(+), 2 deletions(-)
->>
->> diff --git a/drivers/gpu/drm/nouveau/nouveau_display.c b/drivers/gpu/drm/nouveau/nouveau_display.c
->> index 496c4621cc78..31543086254b 100644
->> --- a/drivers/gpu/drm/nouveau/nouveau_display.c
->> +++ b/drivers/gpu/drm/nouveau/nouveau_display.c
->> @@ -191,8 +191,14 @@ nouveau_decode_mod(struct nouveau_drm *drm,
->>   		   uint32_t *tile_mode,
->>   		   uint8_t *kind)
->>   {
->> +	struct nouveau_display *disp = nouveau_display(drm->dev);
->>   	BUG_ON(!tile_mode || !kind);
->>   
->> +	if ((modifier & (0xffull << 12)) == 0ull) {
->> +		/* Legacy modifier.  Translate to this device's 'kind.' */
->> +		modifier |= disp->format_modifiers[0] & (0xffull << 12);
->> +	}
->> +
->>   	if (modifier == DRM_FORMAT_MOD_LINEAR) {
->>   		/* tile_mode will not be used in this case */
->>   		*tile_mode = 0;
+On Tue, Jul 28, 2020 at 03:04:07PM -0700, Ralph Campbell wrote:
 > 
-> Em. I thought Ben's suggestion was to move it under != MOD_LINEAR. I don't
-> see it here.
+> On 7/28/20 12:19 PM, Jason Gunthorpe wrote:
+> > On Thu, Jul 23, 2020 at 03:30:04PM -0700, Ralph Campbell wrote:
+> > > When migrating the special zero page, migrate_vma_pages() calls
+> > > mmu_notifier_invalidate_range_start() before replacing the zero page
+> > > PFN in the CPU page tables. This is unnecessary since the range was
+> > > invalidated in migrate_vma_setup() and the page table entry is checked
+> > > to be sure it hasn't changed between migrate_vma_setup() and
+> > > migrate_vma_pages(). Therefore, remove the redundant invalidation.
+> > 
+> > I don't follow this logic, the purpose of the invalidation is also to
+> > clear out anything that may be mirroring this VA, and "the page hasn't
+> > changed" doesn't seem to rule out that case?
+> > 
+> > I'm also not sure I follow where the zero page came from?
+> 
+> The zero page comes from an anonymous private VMA that is read-only
+> and the user level CPU process tries to read the page data (or any
+> other read page fault).
+> 
+> > Jason
+> > 
+> 
+> The overall migration process is:
+> 
+> mmap_read_lock()
+> 
+> migrate_vma_setup()
+>       // invalidates range, locks/isolates pages, puts migration entry in page table
+> 
+> <driver allocates destination pages and copies source to dest>
+> 
+> migrate_vma_pages()
+>       // moves source struct page info to destination struct page info.
+>       // clears migration flag for pages that can't be migrated.
+> 
+> <driver updates device page tables for pages still migrating, rollback pages not migrating>
+> 
+> migrate_vma_finalize()
+>       // replaces migration page table entry with destination page PFN.
+> 
+> mmap_read_unlock()
+> 
+> Since the address range is invalidated in the migrate_vma_setup() stage,
+> and the page is isolated from the LRU cache, locked, unmapped, and the page table
+> holds a migration entry (so the page can't be faulted and the CPU page table set
+> valid again), and there are no extra page references (pins), the page
+> "should not be modified".
 
-Yes, it looks like I forgot to commit before generating the patch.  v4 sent.
+That is the physical page though, it doesn't prove nobody else is
+reading the PTE.
+ 
+> For pte_none()/is_zero_pfn() entries, migrate_vma_setup() leaves the
+> pte_none()/is_zero_pfn() entry in place but does still call
+> mmu_notifier_invalidate_range_start() for the whole range being migrated.
 
-Thanks,
--James
+Ok..
 
+> In the migrate_vma_pages() step, the pte page table is locked and the
+> pte entry checked to be sure it is still pte_none/is_zero_pfn(). If not,
+> the new page isn't inserted. If it is still none/zero, the new device private
+> struct page is inserted into the page table, replacing the pte_none()/is_zero_pfn()
+> page table entry. The secondary MMUs were already invalidated in the migrate_vma_setup()
+> step and a pte_none() or zero page can't be modified so the only invalidation needed
+> is the CPU TLB(s) for clearing the special zero page PTE entry.
+
+No, the secondary MMU was invalidated but the invalidation start/end
+range was exited. That means a secondary MMU is immeidately able to
+reload the zero page into its MMU cache.
+
+When this code replaces the PTE that has a zero page it also has to
+invalidate again so that secondary MMU's are guaranteed to pick up the
+new PTE value.
+
+So, I still don't understand how this is safe?
+
+Jason
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
