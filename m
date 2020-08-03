@@ -2,62 +2,43 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 41A0223A2D8
-	for <lists+nouveau@lfdr.de>; Mon,  3 Aug 2020 12:42:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 12E9523A33D
+	for <lists+nouveau@lfdr.de>; Mon,  3 Aug 2020 13:22:44 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A2EAA6E249;
-	Mon,  3 Aug 2020 10:42:53 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C85E46E11A;
+	Mon,  3 Aug 2020 11:22:41 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [205.139.110.120])
- by gabe.freedesktop.org (Postfix) with ESMTPS id EB9816E248
- for <nouveau@lists.freedesktop.org>; Mon,  3 Aug 2020 10:42:51 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1596451370;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=+bnr20DWse3hnxM4IaXhaBpbW0TWRM0m+ZB+3jgFT9M=;
- b=Jql41LA/T+7xRkneNAvrYMDAo9fj0IZRyuGNgCdeqAHroUVXyfatCTiWXHnWZID2VD1KHP
- wodJGdviVl0BcRU2pMzff3jcM6DIy+R2Z051DKZLoyd3PZCr1Qf1cRHPv0zOcydPztesB0
- SsrzocXpBoHQy4Gy+b7zjYLpn6odheY=
-Received: from mail-qv1-f70.google.com (mail-qv1-f70.google.com
- [209.85.219.70]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-234-dwlPfxhYNx2sIJmSav7oaA-1; Mon, 03 Aug 2020 06:42:47 -0400
-X-MC-Unique: dwlPfxhYNx2sIJmSav7oaA-1
-Received: by mail-qv1-f70.google.com with SMTP id l10so15442984qvw.22
- for <nouveau@lists.freedesktop.org>; Mon, 03 Aug 2020 03:42:46 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=+bnr20DWse3hnxM4IaXhaBpbW0TWRM0m+ZB+3jgFT9M=;
- b=t+QKi3ZZOaRffxAeTa/RQtcBNEpk7JsL33aZtHkHgtAof3ZjpZgPAT58YE4+RmjnGO
- 4JZ0S/LESbANQID2fTU04hWwLFbiJ5UqJE1S6I8sDVpOv+5YmggxbNyQPboUDNjDtgp2
- lHaj+SBooV+9UBABFjdrupbtN5z9frpzKDTwYizRcGSFI25WXgsI00MTnul0k/lwL6I4
- SYvk8kMVouNehaqsj09+oe8L24Svqv9HAFctBkWF9naXEsI92FCUc7UzTdmV8FXp1a1e
- +Q61PKAEECS+LLDnge0HiM5y6Pgm8yPJgOBMkGxaOPqc+YgPWf8zfXvgW1IdWe1FgDIE
- +73g==
-X-Gm-Message-State: AOAM5325rI/ZbMq3Ri6T8WOPIAmuEFnlBx06VwVNTld9AkwjCjcGOtu2
- u7UGVXp8NzkH0PDj9SM285IeeTOQfi8wxAh6etVwXIJKsQ7jqpwijFfedClgrC9BD2QSA4BsIfX
- FPvZtowmwgBlb+r6BkyvLC4SdIJf8/3S3xoCgHn/cog==
-X-Received: by 2002:a37:90e:: with SMTP id 14mr15896184qkj.102.1596451365673; 
- Mon, 03 Aug 2020 03:42:45 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJzhxbdP+GWP4eAMFRYsKdTR78UMQm0cR2+UBqbqAyJHGCbvlFNyBXYetm44K0qZipDzP6iTc6iemkg+iwFYP3s=
-X-Received: by 2002:a37:90e:: with SMTP id 14mr15896161qkj.102.1596451365347; 
- Mon, 03 Aug 2020 03:42:45 -0700 (PDT)
+Received: from mga17.intel.com (mga17.intel.com [192.55.52.151])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0D8BB6E11A;
+ Mon,  3 Aug 2020 11:22:39 +0000 (UTC)
+IronPort-SDR: ER62CD0G/ZnQleT5mxNrR+j9jggTLEyfMZyN66QdEmcQNTBrOATz/VIEFnpSj1soxoWsHZXe4x
+ i5fQk77QVA0g==
+X-IronPort-AV: E=McAfee;i="6000,8403,9701"; a="132141217"
+X-IronPort-AV: E=Sophos;i="5.75,429,1589266800"; d="scan'208";a="132141217"
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from orsmga007.jf.intel.com ([10.7.209.58])
+ by fmsmga107.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 03 Aug 2020 04:22:39 -0700
+IronPort-SDR: zd2GDu6ioj2xMQsk6W93hfl/90HuulrIaLTlPZ5gCdBQOLmL+O9jPauybMvBeRtqLQ1mM0+pvF
+ LLXs3JDXq9NA==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.75,429,1589266800"; d="scan'208";a="331859687"
+Received: from unknown (HELO [10.252.62.131]) ([10.252.62.131])
+ by orsmga007.jf.intel.com with ESMTP; 03 Aug 2020 04:22:37 -0700
+To: Daniel Vetter <daniel.vetter@ffwll.ch>,
+ DRI Development <dri-devel@lists.freedesktop.org>
+References: <20200802181849.1586281-1-daniel.vetter@ffwll.ch>
+From: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>
+Message-ID: <579702ca-4b4e-0b05-1b93-25b99554d464@linux.intel.com>
+Date: Mon, 3 Aug 2020 13:22:36 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-References: <20200803034827.100685-1-jingxiangfeng@huawei.com>
-In-Reply-To: <20200803034827.100685-1-jingxiangfeng@huawei.com>
-From: Karol Herbst <kherbst@redhat.com>
-Date: Mon, 3 Aug 2020 12:42:34 +0200
-Message-ID: <CACO55tsFuRmHac1_7KdebdrgGk=bAh2_aAUB302PH9rSSxdsjQ@mail.gmail.com>
-To: Jing Xiangfeng <jingxiangfeng@huawei.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Subject: Re: [Nouveau] [PATCH] drm/nouveau/acr: fix a coding style in
- nvkm_acr_lsfw_load_bl_inst_data_sig()
+In-Reply-To: <20200802181849.1586281-1-daniel.vetter@ffwll.ch>
+Content-Language: en-US
+Subject: Re: [Nouveau] [PATCH] drm/nouveau: Drop mutex_lock_nested for atomic
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,50 +50,69 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, nouveau <nouveau@lists.freedesktop.org>,
- LKML <linux-kernel@vger.kernel.org>,
- dri-devel <dri-devel@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>,
- Daniel Vetter <daniel@ffwll.ch>
+Cc: nouveau@lists.freedesktop.org, Daniel Vetter <daniel.vetter@intel.com>,
+ Ben Skeggs <bskeggs@redhat.com>, Maarten Lankhorst <m.b.lankhorst@gmail.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Reviewed-by: Karol Herbst <kherbst@redhat.com>
-
-On Mon, Aug 3, 2020 at 5:46 AM Jing Xiangfeng <jingxiangfeng@huawei.com> wrote:
+Op 02-08-2020 om 20:18 schreef Daniel Vetter:
+> Purely conjecture, but I think the original locking inversion with the
+> legacy page flip code between flipping and ttm's bo move function
+> shoudn't exist anymore with atomic: With atomic the bo pinning and
+> actual modeset commit is completely separated in the code patsh.
 >
-> This patch performs the following changes:
-> 1. remove a redundant parentheses around the  nvkm_acr_lsfw_add() calls
-> 2. do assignment before this if condition, it is more readable
+> This annotation was originally added in
 >
-> Signed-off-by: Jing Xiangfeng <jingxiangfeng@huawei.com>
+> commit 060810d7abaabcab282e062c595871d661561400
+> Author: Ben Skeggs <bskeggs@redhat.com>
+> Date:   Mon Jul 8 14:15:51 2013 +1000
+>
+>     drm/nouveau: fix locking issues in page flipping paths
+>
+> due to
+>
+> commit b580c9e2b7ba5030a795aa2fb73b796523d65a78
+> Author: Maarten Lankhorst <m.b.lankhorst@gmail.com>
+> Date:   Thu Jun 27 13:48:18 2013 +0200
+>
+>     drm/nouveau: make flipping lockdep safe
+>
+> Signed-off-by: Daniel Vetter <daniel.vetter@intel.com>
+> Cc: Maarten Lankhorst <m.b.lankhorst@gmail.com>
+> Cc: Ben Skeggs <bskeggs@redhat.com>
+> Cc: Dave Airlie <airlied@gmail.com>
+> Cc: nouveau@lists.freedesktop.org
 > ---
->  drivers/gpu/drm/nouveau/nvkm/subdev/acr/lsfw.c | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
+> I might be totally wrong, so this definitely needs testing :-)
 >
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/acr/lsfw.c b/drivers/gpu/drm/nouveau/nvkm/subdev/acr/lsfw.c
-> index 07d1830126ab..5f6006418472 100644
-> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/acr/lsfw.c
-> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/acr/lsfw.c
-> @@ -191,7 +191,8 @@ nvkm_acr_lsfw_load_bl_inst_data_sig(struct nvkm_subdev *subdev,
->         u32 *bldata;
->         int ret;
+> Cheers, Daniel
+> ---
+>  drivers/gpu/drm/nouveau/nouveau_bo.c | 6 +++++-
+>  1 file changed, 5 insertions(+), 1 deletion(-)
 >
-> -       if (IS_ERR((lsfw = nvkm_acr_lsfw_add(func, acr, falcon, id))))
-> +       lsfw = nvkm_acr_lsfw_add(func, acr, falcon, id);
-> +       if (IS_ERR(lsfw))
->                 return PTR_ERR(lsfw);
->
->         ret = nvkm_firmware_load_name(subdev, path, "bl", ver, &bl);
-> --
-> 2.17.1
->
-> _______________________________________________
-> Nouveau mailing list
-> Nouveau@lists.freedesktop.org
-> https://lists.freedesktop.org/mailman/listinfo/nouveau
->
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_bo.c b/drivers/gpu/drm/nouveau/nouveau_bo.c
+> index 7806278dce57..a7b2a9bb0ffe 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_bo.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_bo.c
+> @@ -776,7 +776,11 @@ nouveau_bo_move_m2mf(struct ttm_buffer_object *bo, int evict, bool intr,
+>  			return ret;
+>  	}
+>  
+> -	mutex_lock_nested(&cli->mutex, SINGLE_DEPTH_NESTING);
+> +	if (drm_drv_uses_atomic_modeset(drm->dev))
+> +		mutex_lock(&cli->mutex);
+> +	else
+> +		mutex_lock_nested(&cli->mutex, SINGLE_DEPTH_NESTING);
+> +
+>  	ret = nouveau_fence_sync(nouveau_bo(bo), chan, true, intr);
+>  	if (ret == 0) {
+>  		ret = drm->ttm.move(chan, bo, &bo->mem, new_reg);
+
+Well if you're certain it works now. :)
+
+Reviewed-by: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>
 
 _______________________________________________
 Nouveau mailing list
