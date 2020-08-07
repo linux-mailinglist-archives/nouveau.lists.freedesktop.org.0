@@ -2,62 +2,48 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id E1B7823ED52
-	for <lists+nouveau@lfdr.de>; Fri,  7 Aug 2020 14:28:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A636E23F471
+	for <lists+nouveau@lfdr.de>; Fri,  7 Aug 2020 23:34:29 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7A92C6E0F0;
-	Fri,  7 Aug 2020 12:28:36 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4FE4F6EA4F;
+	Fri,  7 Aug 2020 21:34:24 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D27F56E0F0;
- Fri,  7 Aug 2020 12:28:35 +0000 (UTC)
-IronPort-SDR: oI2Y6ETGcr2n/CL5tkowwYt2k6dGBoRPnPOEh4y9+f3LACxf1QCZSrVCg9Nh0ItbKul194kyxO
- ytdoT6kviZ1w==
-X-IronPort-AV: E=McAfee;i="6000,8403,9705"; a="152297311"
-X-IronPort-AV: E=Sophos;i="5.75,445,1589266800"; d="scan'208";a="152297311"
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from orsmga005.jf.intel.com ([10.7.209.41])
- by fmsmga103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 07 Aug 2020 05:28:35 -0700
-IronPort-SDR: IKrIvkFBBo5FW3TnZubxXc1BEUMh6OF08yD1bXTLgTIuXe+t5mlea+FyakuKMWG4ClUoOHWGGx
- Wqd/NdbQnT7w==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.75,445,1589266800"; d="scan'208";a="468214228"
-Received: from orsmsx602.amr.corp.intel.com ([10.22.229.15])
- by orsmga005.jf.intel.com with ESMTP; 07 Aug 2020 05:28:34 -0700
-Received: from orsmsx601.amr.corp.intel.com (10.22.229.14) by
- ORSMSX602.amr.corp.intel.com (10.22.229.15) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.1713.5; Fri, 7 Aug 2020 05:28:34 -0700
-Received: from orsmsx113.amr.corp.intel.com (10.22.240.9) by
- orsmsx601.amr.corp.intel.com (10.22.229.14) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.1.1713.5
- via Frontend Transport; Fri, 7 Aug 2020 05:28:34 -0700
-Received: from orsmsx163.amr.corp.intel.com ([169.254.9.31]) by
- ORSMSX113.amr.corp.intel.com ([169.254.9.62]) with mapi id 14.03.0439.000;
- Fri, 7 Aug 2020 05:28:34 -0700
-From: "Vivi, Rodrigo" <rodrigo.vivi@intel.com>
-To: Dave Airlie <airlied@gmail.com>
-Thread-Topic: [Nouveau] [PATCH] drm/nouveau: missing cases of rename
- ttm_mem_reg to ttm_resource.
-Thread-Index: AQHWbG/DY4vW/hCDoUKQoWwMuz7n2Kksg2mAgACFlgA=
-Date: Fri, 7 Aug 2020 12:28:33 +0000
-Message-ID: <816C5382-21E4-4E7A-9ADB-4D18F19E85B4@intel.com>
-References: <20200807011517.2814096-1-rodrigo.vivi@intel.com>
- <CAPM=9txAFXQoRcD-uw3nNUKDg+QrOgdafC6J401Da5ax=1US2w@mail.gmail.com>
- <CAPM=9txoPFXo=+sRV1UanY9iBUkCcuTu62Hz4X0C1iEG=qZCuA@mail.gmail.com>
-In-Reply-To: <CAPM=9txoPFXo=+sRV1UanY9iBUkCcuTu62Hz4X0C1iEG=qZCuA@mail.gmail.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.212.251.152]
-Content-ID: <582C618166D9614E922242CCF3152AD5@intel.com>
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
+ [207.211.31.81])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D4E016EA4F
+ for <nouveau@lists.freedesktop.org>; Fri,  7 Aug 2020 21:34:22 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1596836061;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=o2fOsP31iqD+NVP7vZuFT60+fYRTZ6+2U2X/HkQb/bM=;
+ b=c30UM2s21nb+svVzp/ayFphmIIj9mu96XWPUYC8WivHZpJRnth1I+GrPLcMjzvJMxfJxzD
+ MFRy/YHVSJ6t5t36BIP0J+L6IeAwJw92ZVdCcX7YvAriChd8E0XMfTWhCAFEZN1fnmr76w
+ 4W+DU5aL8WqxFudsT9KVsr6cJ1nJWYk=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-107-ayioxAteOTi6apMmkRxoNA-1; Fri, 07 Aug 2020 17:34:18 -0400
+X-MC-Unique: ayioxAteOTi6apMmkRxoNA-1
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
+ [10.5.11.23])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id CAC151923763;
+ Fri,  7 Aug 2020 21:34:14 +0000 (UTC)
+Received: from Whitewolf.redhat.com (ovpn-119-194.rdu2.redhat.com
+ [10.10.119.194])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id CB5B5108BC;
+ Fri,  7 Aug 2020 21:34:10 +0000 (UTC)
+From: Lyude Paul <lyude@redhat.com>
+To: nouveau@lists.freedesktop.org
+Date: Fri,  7 Aug 2020 17:34:03 -0400
+Message-Id: <20200807213405.442877-1-lyude@redhat.com>
 MIME-Version: 1.0
-Subject: Re: [Nouveau] [PATCH] drm/nouveau: missing cases of rename
- ttm_mem_reg to ttm_resource.
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
+Subject: [Nouveau] [PATCH v2 1/2] drm/nouveau/kms/nv50-: Program notifier
+ offset before requesting disp caps
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,35 +55,82 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau <nouveau@lists.freedesktop.org>,
- dri-devel <dri-devel@lists.freedesktop.org>
+Cc: David Airlie <airlied@linux.ie>,
+ "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
+ <dri-devel@lists.freedesktop.org>, open list <linux-kernel@vger.kernel.org>,
+ stable@vger.kernel.org, Ben Skeggs <bskeggs@redhat.com>,
+ Daniel Vetter <daniel@ffwll.ch>,
+ =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
+ Nirmoy Das <nirmoy.aiemd@gmail.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+Not entirely sure why this never came up when I originally tested this
+(maybe some BIOSes already have this setup?) but the ->caps_init vfunc
+appears to cause the display engine to throw an exception on driver
+init, at least on my ThinkPad P72:
 
+nouveau 0000:01:00.0: disp: chid 0 mthd 008c data 00000000 0000508c 0000102b
 
-> On Aug 6, 2020, at 9:30 PM, Dave Airlie <airlied@gmail.com> wrote:
-> 
-> On Fri, 7 Aug 2020 at 14:03, Dave Airlie <airlied@gmail.com> wrote:
->> 
->> On Fri, 7 Aug 2020 at 11:13, Rodrigo Vivi <rodrigo.vivi@intel.com> wrote:
->>> 
->>> From: Rodrigo Vivi <rodrigo.vivi@gmail.com>
->>> 
->>> These are missed cases that I just identified with allyesconfig build.
->>> 
->> 
->> Is this against drm-tip? it's a merge problem, that I thought I'd
->> already addressed, but tip seems to have lost it.
-> 
-> I think I've fixed drm-tip rebuilds now.
+This is magic nvidia speak for "You need to have the DMA notifier offset
+programmed before you can call NV507D_GET_CAPABILITIES." So, let's fix
+this by doing that, and also perform an update afterwards to prevent
+racing with the GPU when reading capabilities.
 
-perfect, thanks!
+Changes since v1:
+* Don't just program the DMA notifier offset, make sure to actually
+  perform an update
 
-> 
-> Dave.
+Signed-off-by: Lyude Paul <lyude@redhat.com>
+Fixes: 4a2cb4181b07 ("drm/nouveau/kms/nv50-: Probe SOR and PIOR caps for DP interlacing support")
+Cc: <stable@vger.kernel.org> # v5.8+
+---
+ drivers/gpu/drm/nouveau/dispnv50/core507d.c | 22 +++++++++++++++++++--
+ 1 file changed, 20 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/gpu/drm/nouveau/dispnv50/core507d.c b/drivers/gpu/drm/nouveau/dispnv50/core507d.c
+index ad1f09a143aa4..fc4bf9ca59f85 100644
+--- a/drivers/gpu/drm/nouveau/dispnv50/core507d.c
++++ b/drivers/gpu/drm/nouveau/dispnv50/core507d.c
+@@ -77,14 +77,32 @@ core507d_ntfy_init(struct nouveau_bo *bo, u32 offset)
+ int
+ core507d_caps_init(struct nouveau_drm *drm, struct nv50_disp *disp)
+ {
++	struct nv50_core *core = disp->core;
+ 	struct nvif_push *push = disp->core->chan.push;
++	u32 interlock[NV50_DISP_INTERLOCK__SIZE] = {0};
+ 	int ret;
+ 
+-	if ((ret = PUSH_WAIT(push, 2)))
++	core->func->ntfy_init(disp->sync, NV50_DISP_CORE_NTFY);
++
++	if ((ret = PUSH_WAIT(push, 4)))
+ 		return ret;
+ 
++	PUSH_MTHD(push, NV507D, SET_NOTIFIER_CONTROL,
++		  NVDEF(NV507D, SET_NOTIFIER_CONTROL, MODE, WRITE) |
++		  NVVAL(NV507D, SET_NOTIFIER_CONTROL, OFFSET, NV50_DISP_CORE_NTFY >> 2) |
++		  NVDEF(NV507D, SET_NOTIFIER_CONTROL, NOTIFY, ENABLE));
+ 	PUSH_MTHD(push, NV507D, GET_CAPABILITIES, 0x00000000);
+-	return PUSH_KICK(push);
++
++	ret = PUSH_KICK(push);
++	if (ret)
++		return ret;
++
++	core->func->update(core, interlock, false);
++	if (core->func->ntfy_wait_done(disp->sync, NV50_DISP_CORE_NTFY,
++				       core->chan.base.device))
++		NV_ERROR(drm, "core notifier timeout\n");
++
++	return 0;
+ }
+ 
+ int
+-- 
+2.26.2
 
 _______________________________________________
 Nouveau mailing list
