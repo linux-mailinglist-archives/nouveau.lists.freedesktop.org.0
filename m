@@ -1,63 +1,39 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8433023F895
-	for <lists+nouveau@lfdr.de>; Sat,  8 Aug 2020 21:18:43 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id CA35423F94E
+	for <lists+nouveau@lfdr.de>; Sun,  9 Aug 2020 00:21:11 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id F17D26E241;
-	Sat,  8 Aug 2020 19:18:36 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7907E6E29B;
+	Sat,  8 Aug 2020 22:21:07 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from hqnvemgate24.nvidia.com (hqnvemgate24.nvidia.com
- [216.228.121.143])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C7E476E241;
- Tue, 28 Jul 2020 18:43:11 +0000 (UTC)
-Received: from hqpgpgate101.nvidia.com (Not Verified[216.228.121.13]) by
- hqnvemgate24.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
- id <B5f2071640000>; Tue, 28 Jul 2020 11:41:40 -0700
-Received: from hqmail.nvidia.com ([172.20.161.6])
- by hqpgpgate101.nvidia.com (PGP Universal service);
- Tue, 28 Jul 2020 11:43:11 -0700
-X-PGP-Universal: processed;
- by hqpgpgate101.nvidia.com on Tue, 28 Jul 2020 11:43:11 -0700
-Received: from [172.20.40.94] (10.124.1.5) by HQMAIL107.nvidia.com
- (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Tue, 28 Jul
- 2020 18:43:05 +0000
-To: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
- <dri-devel@lists.freedesktop.com>, <intel-gfx@lists.freedesktop.com>,
- <nouveau@lists.freedesktop.org>, <amd-gfx@lists.freedesktop.org>,
- <jani.nikula@linux.intel.com>, <joonas.lahtinen@linux.intel.com>,
- <rodrigo.vivi@intel.com>, <bskeggs@redhat.com>, <alexander.deucher@amd.com>,
- <david1.zhou@amd.com>
+X-Greylist: delayed 589 seconds by postgrey-1.36 at gabe;
+ Sat, 08 Aug 2020 22:21:06 UTC
+Received: from bmailout3.hostsharing.net (bmailout3.hostsharing.net
+ [IPv6:2a01:4f8:150:2161:1:b009:f23e:0])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 38D846E291;
+ Sat,  8 Aug 2020 22:21:06 +0000 (UTC)
+Received: from h08.hostsharing.net (h08.hostsharing.net [83.223.95.28])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (Client CN "*.hostsharing.net",
+ Issuer "COMODO RSA Domain Validation Secure Server CA" (not verified))
+ by bmailout3.hostsharing.net (Postfix) with ESMTPS id 57C8F105E958C;
+ Sun,  9 Aug 2020 00:11:15 +0200 (CEST)
+Received: by h08.hostsharing.net (Postfix, from userid 100393)
+ id EBFAD448C31; Sun,  9 Aug 2020 00:11:14 +0200 (CEST)
+Date: Sun, 9 Aug 2020 00:11:14 +0200
+From: Lukas Wunner <lukas@wunner.de>
+To: Daniel Dadap <ddadap@nvidia.com>
+Message-ID: <20200808221114.5rfnys76ozoj62wv@wunner.de>
 References: <20200727205357.27839-1-ddadap@nvidia.com>
- <20200727205357.27839-5-ddadap@nvidia.com>
- <3c355e4d-b9ff-66b7-e9e3-86027deeba6d@amd.com>
-From: Daniel Dadap <ddadap@nvidia.com>
-Message-ID: <4101c4a9-d97d-ee99-8c67-b8f92fcb4bfa@nvidia.com>
-Date: Tue, 28 Jul 2020 13:44:42 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.7.0
+ <20200727205357.27839-2-ddadap@nvidia.com>
 MIME-Version: 1.0
-In-Reply-To: <3c355e4d-b9ff-66b7-e9e3-86027deeba6d@amd.com>
-X-Originating-IP: [10.124.1.5]
-X-ClientProxiedBy: HQMAIL105.nvidia.com (172.20.187.12) To
- HQMAIL107.nvidia.com (172.20.187.13)
-Content-Language: en-US
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
- t=1595961700; bh=w5wA9DxednAyQ77Vd7csvDd3uO1uwD2I0XlWLCG8d+8=;
- h=X-PGP-Universal:Subject:To:References:From:Message-ID:Date:
- User-Agent:MIME-Version:In-Reply-To:X-Originating-IP:
- X-ClientProxiedBy:Content-Type:Content-Transfer-Encoding:
- Content-Language;
- b=SNkBXL9ij/D7dTOdE+gBDkLNbGuk6CWLrHggrbpfmk7+PqP22Llkg0IGP23fwRJw9
- 2ZiOjRJTb+0Io/jBPddVNtXx4e0EW4jyTWmZfjYND8hvLNodILqWRKpirCG+92l1Na
- Rm+aQnBtvbxFZzawxhCIiEYAcVG1PqkqpAPldWvTUUeoyOVPZYEtQS35J6VOxflwHD
- NI0F+pezUhUnsXs+vbEQOZbgeGRbqD7dkqWZX7skGalOxrXe5T0iAU6MB1VqjaUclK
- F2RC4C5AJTSqJoq+0jBaDa+S0VYmgzw9ncFPXAGBShvHJwIO7hYVhw7/LwZBsqYP34
- aJe9XkXleWKYQ==
-X-Mailman-Approved-At: Sat, 08 Aug 2020 19:18:33 +0000
-Subject: Re: [Nouveau] [PATCH 4/4] radeon: fall back to ACPI EDID retrieval
+Content-Disposition: inline
+In-Reply-To: <20200727205357.27839-2-ddadap@nvidia.com>
+User-Agent: NeoMutt/20170113 (1.7.2)
+Subject: Re: [Nouveau] [PATCH 1/4] drm: retrieve EDID via ACPI _DDC method
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,75 +45,95 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Cc: david1.zhou@amd.com, nouveau@lists.freedesktop.org,
+ joonas.lahtinen@linux.intel.com, jani.nikula@linux.intel.com,
+ intel-gfx@lists.freedesktop.com, dri-devel@lists.freedesktop.com,
+ amd-gfx@lists.freedesktop.org, rodrigo.vivi@intel.com,
+ alexander.deucher@amd.com, christian.koenig@amd.com, bskeggs@redhat.com
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-T24gNy8yOC8yMCAxOjUwIEFNLCBDaHJpc3RpYW4gS8O2bmlnIHdyb3RlOgo+Cj4gQW0gMjcuMDcu
-MjAgdW0gMjI6NTMgc2NocmllYiBEYW5pZWwgRGFkYXA6Cj4+IEZhbGwgYmFjayB0byByZXRyaWV2
-aW5nIHRoZSBFRElEIHZpYSB0aGUgQUNQSSBfRERDIG1ldGhvZCwgd2hlbiBwcmVzZW50Cj4+IGZv
-ciBub3RlYm9vayBpbnRlcm5hbCBwYW5lbHMsIHdoZW4gcmV0cmlldmluZyBCSU9TLWVtYmVkZGVk
-IEVESURzLgo+Pgo+PiBTaWduZWQtb2ZmLWJ5OiBEYW5pZWwgRGFkYXAgPGRkYWRhcEBudmlkaWEu
-Y29tPgo+PiAtLS0KPj4gwqAgZHJpdmVycy9ncHUvZHJtL3JhZGVvbi9yYWRlb25fY29tYmlvcy5j
-IHwgNiArKystLS0KPj4gwqAgMSBmaWxlIGNoYW5nZWQsIDMgaW5zZXJ0aW9ucygrKSwgMyBkZWxl
-dGlvbnMoLSkKPj4KPj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9yYWRlb24vcmFkZW9u
-X2NvbWJpb3MuYyAKPj4gYi9kcml2ZXJzL2dwdS9kcm0vcmFkZW9uL3JhZGVvbl9jb21iaW9zLmMK
-Pj4gaW5kZXggYzNlNDljOTczODEyLi5kZTgwMWQ5ZmNhNTQgMTAwNjQ0Cj4+IC0tLSBhL2RyaXZl
-cnMvZ3B1L2RybS9yYWRlb24vcmFkZW9uX2NvbWJpb3MuYwo+PiArKysgYi9kcml2ZXJzL2dwdS9k
-cm0vcmFkZW9uL3JhZGVvbl9jb21iaW9zLmMKPj4gQEAgLTQwMSw5ICs0MDEsOCBAQCBib29sIHJh
-ZGVvbl9jb21iaW9zX2NoZWNrX2hhcmRjb2RlZF9lZGlkKHN0cnVjdCAKPj4gcmFkZW9uX2Rldmlj
-ZSAqcmRldikKPj4gwqAgc3RydWN0IGVkaWQgKgo+PiDCoCByYWRlb25fYmlvc19nZXRfaGFyZGNv
-ZGVkX2VkaWQoc3RydWN0IHJhZGVvbl9kZXZpY2UgKnJkZXYpCj4+IMKgIHsKPj4gLcKgwqDCoMKg
-IHN0cnVjdCBlZGlkICplZGlkOwo+PiAtCj4+IMKgwqDCoMKgwqAgaWYgKHJkZXYtPm1vZGVfaW5m
-by5iaW9zX2hhcmRjb2RlZF9lZGlkKSB7Cj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgc3Ry
-dWN0IGVkaWQgKmVkaWQ7Cj4KPiBUaGF0J3MgYW4gdW5yZWxhdGVkIGFuIGluY29ycmVjdCBzdHls
-ZSBjaGFuZ2UuIFlvdSBuZWVkIGEgYmxhbmsgbGluZQo+IGFmdGVyIGRlY2xhcmF0aW9uLgoKCkFo
-LCB5ZXMsIHRoYXQgZG9lc24ndCByZWFsbHkgbmVlZCB0byBiZSBjaGFuZ2VkLiBJJ2xsIHJlbW92
-ZSBpdCBmcm9tIAp0aGlzIHBhdGNoLiBXb3VsZCBhIHNlcGFyYXRlIHBhdGNoIHRvIGNoYW5nZSB0
-aGUgc2NvcGUgb2YgdGhhdCAKZGVjbGFyYXRpb24gKHdpdGggYSBibGFuayBsaW5lIGFmdGVyKSBi
-ZSB3ZWxjb21lLCBvciBzaG91bGQgSSBqdXN0IGxlYXZlIAppdCBhbG9uZT8KCgo+Cj4+IMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgIGVkaWQgPSAKPj4ga21hbGxvYyhyZGV2LT5tb2RlX2luZm8u
-Ymlvc19oYXJkY29kZWRfZWRpZF9zaXplLCBHRlBfS0VSTkVMKTsKPj4gwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqAgaWYgKGVkaWQpIHsKPj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgIG1lbWNweSgodW5zaWduZWQgY2hhciAqKWVkaWQsCj4+IEBAIC00MTIsNyAr
-NDExLDggQEAgcmFkZW9uX2Jpb3NfZ2V0X2hhcmRjb2RlZF9lZGlkKHN0cnVjdCAKPj4gcmFkZW9u
-X2RldmljZSAqcmRldikKPj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgIHJldHVybiBlZGlkOwo+PiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB9Cj4+IMKgwqDC
-oMKgwqAgfQo+PiAtwqDCoMKgwqAgcmV0dXJuIE5VTEw7Cj4+ICsKPj4gK8KgwqDCoMKgIHJldHVy
-biBkcm1fZ2V0X2VkaWRfYWNwaSgpOwo+Cj4gSW4gZ2VuZXJhbCBhIGdvb2QgaWRlYSwgYnV0IEkn
-bSB3b25kZXJpbmcgaWYgd2Ugc2hvdWxkIHJlYWxseSBkbyB0aGlzIHNvCj4gdW5jb25kaXRpb25h
-bGx5IGhlcmUuCj4KCkknbSBub3QgcGVyc29uYWxseSBhd2FyZSBvZiBhbnkgQU1EIG5vdGVib29r
-IGRlc2lnbnMgdGhhdCByZXF1aXJlIHRoZSAKQUNQSSBfRERDIEVESUQgcmV0cmlldmFsLiBJJ3Zl
-IG9ubHkgc2VlbiBpdCBvbiBOVklESUErSW50ZWwgaHlicmlkIApzeXN0ZW1zIGFuZCBvbiBhIHNt
-YWxsIG51bWJlciBvZiBOVklESUEgZGlzY3JldGUtb25seSBzeXN0ZW1zLiBJIGp1c3QgCmZpZ3Vy
-ZWQgSSdkIHVwZGF0ZSB0aGUgcmFkZW9uIERSTS1LTVMgZHJpdmVyIHdoaWxlIHVwZGF0aW5nIGk5
-MTUgYW5kIApOb3V2ZWF1LCBmb3IgY29tcGxldGVuZXNzLCBhcyBpdCBjb3VsZCBiZSBoZWxwZnVs
-IHNob3VsZCBzdWNoIGEgZGVzaWduIApleGlzdC4gQXMgZm9yIHdoZXRoZXIgdGhlcmUgc2hvdWxk
-IGJlIHNvbWUgY29uZGl0aW9uIGFyb3VuZCB0aGlzLCBJIApzdXBwb3NlIHRoYXQncyByZWFzb25h
-YmxlLCBidXQgSSdtIG5vdCByZWFsbHkgc3VyZSB3aGF0IHdvdWxkIG1ha2Ugc2Vuc2UgCmFzIGEg
-Y29uZGl0aW9uLiBBcyBpdCBzdGFuZHMsIGRybV9lZGlkX2FjcGkoKSBvbmx5IHJldHVybnMgYSB2
-YWx1ZSBpZiBhdCAKbGVhc3Qgb25lIG9mIHRoZSBWR0Egb3IgM0QgY29udHJvbGxlcnMgb24gdGhl
-IHN5c3RlbSBwcm92aWRlcyBhbiBBQ1BJIApfRERDIG1ldGhvZCwgYW5kIGlmIHRoYXQgQUNQSSBt
-ZXRob2Qgc3VjY2Vzc2Z1bGx5IHJldHVybnMgYW4gRURJRC4KCk9uIHRoZSBjYWxsZXIncyBlbmQs
-IGl0J3MgY3VycmVudGx5IHBhcnQgb2YgdGhlIHBhdGggd2hlcmUgdGhlIHJhZGVvbiAKZHJpdmVy
-IGlzIGFscmVhZHkgdHJ5aW5nIHRvIGZhbGwgYmFjayB0byBhIGhhcmRjb2RlZCBFRElEIHByb3Zp
-ZGVkIGJ5IAp0aGUgc3lzdGVtLiBQZXJoYXBzIGluc3RlYWQgaWYgd2UgY2FsbCBpdCB3aXRoaW4g
-dGhlIExWRFMgfHwgZURQIApjb25kaXRpb24gaGVyZSwgaW5zdGVhZD8KCgogwqDCoMKgwqDCoMKg
-wqAgaWYgKHJkZXYtPmlzX2F0b21fYmlvcykgewogwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCAvKiBz
-b21lIGxhcHRvcHMgcHJvdmlkZSBhIGhhcmRjb2RlZCBlZGlkIGluIHJvbSBmb3IgTENEcyAqLwog
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBpZiAoKChjb25uZWN0b3ItPmNvbm5lY3Rvcl90eXBlID09
-IERSTV9NT0RFX0NPTk5FQ1RPUl9MVkRTKSB8fAogwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqAgKGNvbm5lY3Rvci0+Y29ubmVjdG9yX3R5cGUgPT0gRFJNX01PREVfQ09OTkVDVE9SX2VE
-UCkpKQogwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHJhZGVvbl9jb25uZWN0b3ItPmVk
-aWQgPSAKcmFkZW9uX2Jpb3NfZ2V0X2hhcmRjb2RlZF9lZGlkKHJkZXYpOwogwqDCoMKgwqDCoMKg
-wqAgfSBlbHNlIHsKIMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgLyogc29tZSBzZXJ2ZXJzIHByb3Zp
-ZGUgYSBoYXJkY29kZWQgZWRpZCBpbiByb20gZm9yIEtWTXMgKi8KIMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqAgcmFkZW9uX2Nvbm5lY3Rvci0+ZWRpZCA9IHJhZGVvbl9iaW9zX2dldF9oYXJkY29kZWRf
-ZWRpZChyZGV2KTsKfQoKVGhhdCB3b3VsZCBiZSBtb3JlIGluIGxpbmUgd2l0aCB0aGUgY2hhbmdl
-cyBpbiB0aGlzIHBhdGNoc2V0IGZvciBpOTE1IAphbmQgbm91dmVhdS4KCgo+IFJlZ2FyZHMsCj4g
-Q2hyaXN0aWFuLgo+Cj4+IMKgIH0KPj4KPj4gwqAgc3RhdGljIHN0cnVjdCByYWRlb25faTJjX2J1
-c19yZWMgY29tYmlvc19zZXR1cF9pMmNfYnVzKHN0cnVjdCAKPj4gcmFkZW9uX2RldmljZSAqcmRl
-diwKPgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpOb3V2
-ZWF1IG1haWxpbmcgbGlzdApOb3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xp
-c3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL25vdXZlYXUK
+On Mon, Jul 27, 2020 at 03:53:54PM -0500, Daniel Dadap wrote:
+> --- a/drivers/gpu/drm/drm_edid.c
+> +++ b/drivers/gpu/drm/drm_edid.c
+> @@ -34,6 +34,7 @@
+>  #include <linux/module.h>
+>  #include <linux/slab.h>
+>  #include <linux/vga_switcheroo.h>
+> +#include <linux/pci.h>
+
+Nit: Alphabetic ordering.
+
+> +static u64 *get_dod_entries(acpi_handle handle, int *count)
+> +{
+> +	acpi_status status;
+> +	struct acpi_buffer buf = { ACPI_ALLOCATE_BUFFER, NULL };
+> +	union acpi_object *dod;
+> +	int i;
+> +	u64 *ret = NULL;
+
+Nits: Reverse christmas tree.
+"ret" is a poor name, I'd suggest "entries" or something like that.
+The spec says that _DOD is a list of 32-bit values, not 64-bit.
+
+> +	status = acpi_evaluate_object(handle, "_DOD", NULL, &buf);
+> +
+> +	if (ACPI_FAILURE(status))
+> +		return NULL;
+
+Nit: No blank line between function invocation and error check.
+
+> +	dod = buf.pointer;
+> +
+> +	if (dod == NULL || dod->type != ACPI_TYPE_PACKAGE)
+> +		goto done;
+
+Same.
+
+> +	ret = kmalloc_array(dod->package.count, sizeof(*ret), GFP_KERNEL);
+> +	if (ret == NULL)
+> +		goto done;
+
+Nit: Usually we use "if (!ret)" or "if (ret)".
+
+> +	list_for_each_safe(node, next, &device->children) {
+
+No, that's not safe because the ACPI namespace may change concurrently,
+e.g. because a DSDT patch is applied by the user via sysfs.
+Use acpi_walk_namespace() with a depth of 1 instead.
+
+> +		for (i = 0; i < num_dod_entries; i++) {
+> +			if (adr == dod_entries[i]) {
+> +				ret = do_acpi_ddc(child->handle);
+> +
+> +				if (ret != NULL)
+> +					goto done;
+
+I guess ideally we'd want to correlate the display objects with
+drm_connectors or at least constrain the search to Display Type
+"Internal/Integrated Digital Flat Panel" instead of picking the
+first EDID found.  Otherwise we might erroneously use the DDC
+for an externally attached display.
+
+> +struct edid *drm_get_edid_acpi(void)
+> +{
+> +#if defined(CONFIG_ACPI) && defined(CONFIG_PCI)
+
+No, put an empty inline stub in the header file instead of using #ifdef, see:
+
+https://www.kernel.org/doc/html/latest/process/coding-style.html#conditional-compilation
+
+Patches 2, 3 and 4 need a "drm/" prefix in the Subject, e.g.
+"drm/i915: ".
+
+Please cc all ACPI-related patches to linux-acpi.
+
+Thanks,
+
+Lukas
+_______________________________________________
+Nouveau mailing list
+Nouveau@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/nouveau
