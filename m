@@ -2,41 +2,41 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id ED7FD240DE5
-	for <lists+nouveau@lfdr.de>; Mon, 10 Aug 2020 21:12:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7D0AF240E55
+	for <lists+nouveau@lfdr.de>; Mon, 10 Aug 2020 21:13:22 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A55166E23B;
-	Mon, 10 Aug 2020 19:12:19 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9B3226E435;
+	Mon, 10 Aug 2020 19:13:20 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 251046E21C;
- Mon, 10 Aug 2020 19:12:18 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 30E196E434;
+ Mon, 10 Aug 2020 19:13:19 +0000 (UTC)
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 0EF6321775;
- Mon, 10 Aug 2020 19:12:16 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 310CF2224D;
+ Mon, 10 Aug 2020 19:13:18 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1597086737;
- bh=OVDkHsSG07NKTNVnTJzwLv0lVIcR7G7fqta95REk53A=;
+ s=default; t=1597086799;
+ bh=Lku+gDRWSUsZj4toPjdUE+w1MoKn2apFGGxz/rj4Xkw=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=ygUXxq27cIaStgwdALlaJ6++6uunEmURmyIGt0g426ni7Ceg/2/al8xfYdvGJGXfy
- BALEn+laeLGKoX8+bhvy1zHxru8tVKL6bWbfk8vBs43hwDJTEEJauPosfd0kiWbeGP
- 1rkyHN0uj5pDjUQhInUkQR0r5jKgZSbnIRDPgdzE=
+ b=Z6N28B/aJv3u3xxkxMiV/9Xqxa4hKK352yeDEYIo94eemHxUeI26rPad3j9Tba/w0
+ FymVwD/GkvTePmWzUpUPUsa368T3vchts5qDmPyk4odC81HpbilmQczvcUgZbDVpXE
+ BmaRTm7XimxnPMzkCcnOdTwzI2cucxnjhMd9w4ZY=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Mon, 10 Aug 2020 15:11:25 -0400
-Message-Id: <20200810191153.3794446-17-sashal@kernel.org>
+Date: Mon, 10 Aug 2020 15:12:41 -0400
+Message-Id: <20200810191259.3794858-13-sashal@kernel.org>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20200810191153.3794446-1-sashal@kernel.org>
-References: <20200810191153.3794446-1-sashal@kernel.org>
+In-Reply-To: <20200810191259.3794858-1-sashal@kernel.org>
+References: <20200810191259.3794858-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
-Subject: [Nouveau] [PATCH AUTOSEL 5.4 17/45] drm/nouveau: fix multiple
+Subject: [Nouveau] [PATCH AUTOSEL 4.19 13/31] drm/nouveau: fix multiple
  instances of reference count leaks
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -74,10 +74,10 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  2 files changed, 9 insertions(+), 3 deletions(-)
 
 diff --git a/drivers/gpu/drm/nouveau/nouveau_drm.c b/drivers/gpu/drm/nouveau/nouveau_drm.c
-index b1beed40e746a..5347e5bdee8cc 100644
+index 2b7a54cc3c9ef..81999bed1e4a5 100644
 --- a/drivers/gpu/drm/nouveau/nouveau_drm.c
 +++ b/drivers/gpu/drm/nouveau/nouveau_drm.c
-@@ -1052,8 +1052,10 @@ nouveau_drm_open(struct drm_device *dev, struct drm_file *fpriv)
+@@ -899,8 +899,10 @@ nouveau_drm_open(struct drm_device *dev, struct drm_file *fpriv)
  
  	/* need to bring up power immediately if opening device */
  	ret = pm_runtime_get_sync(dev->dev);
@@ -89,7 +89,7 @@ index b1beed40e746a..5347e5bdee8cc 100644
  
  	get_task_comm(tmpname, current);
  	snprintf(name, sizeof(name), "%s[%d]", tmpname, pid_nr(fpriv->pid));
-@@ -1135,8 +1137,10 @@ nouveau_drm_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
+@@ -980,8 +982,10 @@ nouveau_drm_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
  	long ret;
  
  	ret = pm_runtime_get_sync(dev->dev);
@@ -102,10 +102,10 @@ index b1beed40e746a..5347e5bdee8cc 100644
  	switch (_IOC_NR(cmd) - DRM_COMMAND_BASE) {
  	case DRM_NOUVEAU_NVIF:
 diff --git a/drivers/gpu/drm/nouveau/nouveau_gem.c b/drivers/gpu/drm/nouveau/nouveau_gem.c
-index 1324c19f4e5cf..fbfe254227740 100644
+index b56524d343c3e..791f970714ed6 100644
 --- a/drivers/gpu/drm/nouveau/nouveau_gem.c
 +++ b/drivers/gpu/drm/nouveau/nouveau_gem.c
-@@ -45,8 +45,10 @@ nouveau_gem_object_del(struct drm_gem_object *gem)
+@@ -46,8 +46,10 @@ nouveau_gem_object_del(struct drm_gem_object *gem)
  	int ret;
  
  	ret = pm_runtime_get_sync(dev);
