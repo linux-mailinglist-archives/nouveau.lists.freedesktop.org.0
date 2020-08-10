@@ -1,43 +1,43 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 95857240D89
-	for <lists+nouveau@lfdr.de>; Mon, 10 Aug 2020 21:09:35 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id C083E240DB9
+	for <lists+nouveau@lfdr.de>; Mon, 10 Aug 2020 21:10:53 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id F173889D87;
-	Mon, 10 Aug 2020 19:09:32 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1417789F43;
+	Mon, 10 Aug 2020 19:10:52 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 83CF689C93;
- Mon, 10 Aug 2020 19:09:31 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id F345A89F43;
+ Mon, 10 Aug 2020 19:10:50 +0000 (UTC)
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 90E252078D;
- Mon, 10 Aug 2020 19:09:30 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 0253A207FF;
+ Mon, 10 Aug 2020 19:10:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1597086571;
- bh=JqWjv8wRp7OfV56EpWs4WVdnBiJF6+GRBXmrIPRdz20=;
+ s=default; t=1597086650;
+ bh=Z6K4uvy4C7W23CznrC/gasZ1erGhoQ4x23h6wbcUX98=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=y7QUlIn7/UCho3uZJxCTwXodNhV3VtPpTEwb8R79MwnS+O9IGSDlkYMYntxDZi2Yv
- JlCCYu6BDc/7t/vYPP9fOheEKaJibWRxFub4jluWU/7aeDTxOjbEVVgjgBGTXvuWuq
- KLGk7WckemLk/a5SYYGV9+uSOOphrzdr79T+fu0U=
+ b=SZv2fHr4LqkyO49K/1D8bIvl8sdooHDKT/HdFinIRBIpg6tkPxKLNsv30ZSRNv4OJ
+ 04VX8Dv0uEw4XwLh7LxZioZa5tacLG5PQ3YHEp04RJcolfjHpPmHr4LeVcKf2vdV8d
+ tXRpb+C2//XOevd/8UdGzPfEZaMRR2u43nrZHQLY=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Mon, 10 Aug 2020 15:08:18 -0400
-Message-Id: <20200810190859.3793319-23-sashal@kernel.org>
+Date: Mon, 10 Aug 2020 15:09:44 -0400
+Message-Id: <20200810191028.3793884-16-sashal@kernel.org>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20200810190859.3793319-1-sashal@kernel.org>
-References: <20200810190859.3793319-1-sashal@kernel.org>
+In-Reply-To: <20200810191028.3793884-1-sashal@kernel.org>
+References: <20200810191028.3793884-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
-Subject: [Nouveau] [PATCH AUTOSEL 5.8 23/64] drm/nouveau: fix multiple
- instances of reference count leaks
+Subject: [Nouveau] [PATCH AUTOSEL 5.7 16/60] drm/nouveau/kms/nv50-: Fix
+ disabling dithering
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -50,73 +50,68 @@ List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
 Cc: Sasha Levin <sashal@kernel.org>, nouveau@lists.freedesktop.org,
- Ben Skeggs <bskeggs@redhat.com>, dri-devel@lists.freedesktop.org,
- Aditya Pakki <pakki001@umn.edu>
+ dri-devel@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-From: Aditya Pakki <pakki001@umn.edu>
+From: Lyude Paul <lyude@redhat.com>
 
-[ Upstream commit 659fb5f154c3434c90a34586f3b7aa1c39cf6062 ]
+[ Upstream commit fb2420b701edbf96c2b6d557f0139902f455dc2b ]
 
-On calling pm_runtime_get_sync() the reference count of the device
-is incremented. In case of failure, decrement the
-ref count before returning the error.
+While we expose the ability to turn off hardware dithering for nouveau,
+we actually make the mistake of turning it on anyway, due to
+dithering_depth containing a non-zero value if our dithering depth isn't
+also set to 6 bpc.
 
-Signed-off-by: Aditya Pakki <pakki001@umn.edu>
-Signed-off-by: Ben Skeggs <bskeggs@redhat.com>
+So, fix it by never enabling dithering when it's disabled.
+
+Signed-off-by: Lyude Paul <lyude@redhat.com>
+Reviewed-by: Ben Skeggs <bskeggs@redhat.com>
+Acked-by: Dave Airlie <airlied@gmail.com>
+Link: https://patchwork.freedesktop.org/patch/msgid/20200627194657.156514-6-lyude@redhat.com
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- drivers/gpu/drm/nouveau/nouveau_drm.c | 8 ++++++--
- drivers/gpu/drm/nouveau/nouveau_gem.c | 4 +++-
- 2 files changed, 9 insertions(+), 3 deletions(-)
+ drivers/gpu/drm/nouveau/dispnv50/head.c | 24 +++++++++++++-----------
+ 1 file changed, 13 insertions(+), 11 deletions(-)
 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_drm.c b/drivers/gpu/drm/nouveau/nouveau_drm.c
-index ac93d12201dc0..880d962c1b19a 100644
---- a/drivers/gpu/drm/nouveau/nouveau_drm.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_drm.c
-@@ -1026,8 +1026,10 @@ nouveau_drm_open(struct drm_device *dev, struct drm_file *fpriv)
+diff --git a/drivers/gpu/drm/nouveau/dispnv50/head.c b/drivers/gpu/drm/nouveau/dispnv50/head.c
+index 8f6455697ba72..ed6819519f6d8 100644
+--- a/drivers/gpu/drm/nouveau/dispnv50/head.c
++++ b/drivers/gpu/drm/nouveau/dispnv50/head.c
+@@ -84,18 +84,20 @@ nv50_head_atomic_check_dither(struct nv50_head_atom *armh,
+ {
+ 	u32 mode = 0x00;
  
- 	/* need to bring up power immediately if opening device */
- 	ret = pm_runtime_get_sync(dev->dev);
--	if (ret < 0 && ret != -EACCES)
-+	if (ret < 0 && ret != -EACCES) {
-+		pm_runtime_put_autosuspend(dev->dev);
- 		return ret;
-+	}
+-	if (asyc->dither.mode == DITHERING_MODE_AUTO) {
+-		if (asyh->base.depth > asyh->or.bpc * 3)
+-			mode = DITHERING_MODE_DYNAMIC2X2;
+-	} else {
+-		mode = asyc->dither.mode;
+-	}
++	if (asyc->dither.mode) {
++		if (asyc->dither.mode == DITHERING_MODE_AUTO) {
++			if (asyh->base.depth > asyh->or.bpc * 3)
++				mode = DITHERING_MODE_DYNAMIC2X2;
++		} else {
++			mode = asyc->dither.mode;
++		}
  
- 	get_task_comm(tmpname, current);
- 	snprintf(name, sizeof(name), "%s[%d]", tmpname, pid_nr(fpriv->pid));
-@@ -1109,8 +1111,10 @@ nouveau_drm_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
- 	long ret;
+-	if (asyc->dither.depth == DITHERING_DEPTH_AUTO) {
+-		if (asyh->or.bpc >= 8)
+-			mode |= DITHERING_DEPTH_8BPC;
+-	} else {
+-		mode |= asyc->dither.depth;
++		if (asyc->dither.depth == DITHERING_DEPTH_AUTO) {
++			if (asyh->or.bpc >= 8)
++				mode |= DITHERING_DEPTH_8BPC;
++		} else {
++			mode |= asyc->dither.depth;
++		}
+ 	}
  
- 	ret = pm_runtime_get_sync(dev->dev);
--	if (ret < 0 && ret != -EACCES)
-+	if (ret < 0 && ret != -EACCES) {
-+		pm_runtime_put_autosuspend(dev->dev);
- 		return ret;
-+	}
- 
- 	switch (_IOC_NR(cmd) - DRM_COMMAND_BASE) {
- 	case DRM_NOUVEAU_NVIF:
-diff --git a/drivers/gpu/drm/nouveau/nouveau_gem.c b/drivers/gpu/drm/nouveau/nouveau_gem.c
-index 4c3f131ad31da..c5ee5b7364a09 100644
---- a/drivers/gpu/drm/nouveau/nouveau_gem.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_gem.c
-@@ -45,8 +45,10 @@ nouveau_gem_object_del(struct drm_gem_object *gem)
- 	int ret;
- 
- 	ret = pm_runtime_get_sync(dev);
--	if (WARN_ON(ret < 0 && ret != -EACCES))
-+	if (WARN_ON(ret < 0 && ret != -EACCES)) {
-+		pm_runtime_put_autosuspend(dev);
- 		return;
-+	}
- 
- 	if (gem->import_attach)
- 		drm_prime_gem_destroy(gem, nvbo->bo.sg);
+ 	asyh->dither.enable = mode;
 -- 
 2.25.1
 
