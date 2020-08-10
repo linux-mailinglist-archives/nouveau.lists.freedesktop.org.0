@@ -2,50 +2,52 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2C00424123A
-	for <lists+nouveau@lfdr.de>; Mon, 10 Aug 2020 23:18:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DA99D2413B3
+	for <lists+nouveau@lfdr.de>; Tue, 11 Aug 2020 01:24:07 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E2A756E047;
-	Mon, 10 Aug 2020 21:18:53 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 098AB6E489;
+	Mon, 10 Aug 2020 23:24:05 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
- [207.211.31.81])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3537789F92
- for <nouveau@lists.freedesktop.org>; Mon, 10 Aug 2020 21:18:52 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1597094331;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=kW9eqzFeo7XlW3/tLhwNHZrS1FoKXiUbx92pJ7Yvqb0=;
- b=O1cvZF9iM/tjZtsfmxcg1lYqqsuZhFeR/32cBg0JubyfySqTp11TlY20yinXqzgEyyAqGY
- dCKl+naqJIcAncQhxFDQCHFIm3RSgHFTXcZXPcuAE3oUsPaUcIUzfqXQkhURY+W58XYZNz
- 9PG+6vC9RzTy1TvtWfWp7o8MI4W/k90=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-57-WAWVdh2YMMe-UXPgslRwkg-1; Mon, 10 Aug 2020 17:18:49 -0400
-X-MC-Unique: WAWVdh2YMMe-UXPgslRwkg-1
-Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
- [10.5.11.13])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 8A22A1009600;
- Mon, 10 Aug 2020 21:18:47 +0000 (UTC)
-Received: from Ruby.redhat.com (ovpn-114-28.rdu2.redhat.com [10.10.114.28])
- by smtp.corp.redhat.com (Postfix) with ESMTP id C232979CF3;
- Mon, 10 Aug 2020 21:18:46 +0000 (UTC)
-From: Lyude Paul <lyude@redhat.com>
-To: nouveau@lists.freedesktop.org
-Date: Mon, 10 Aug 2020 17:18:38 -0400
-Message-Id: <20200810211838.37862-3-lyude@redhat.com>
-In-Reply-To: <20200810211838.37862-1-lyude@redhat.com>
-References: <20200810211838.37862-1-lyude@redhat.com>
+Received: from mail-yb1-xb44.google.com (mail-yb1-xb44.google.com
+ [IPv6:2607:f8b0:4864:20::b44])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7703F6E489
+ for <nouveau@lists.freedesktop.org>; Mon, 10 Aug 2020 23:24:03 +0000 (UTC)
+Received: by mail-yb1-xb44.google.com with SMTP id e14so6052717ybf.4
+ for <nouveau@lists.freedesktop.org>; Mon, 10 Aug 2020 16:24:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=sHTMWOQMQqVC1YkPXrIWKp9zMBZW3dKlWCxNHjwNeMs=;
+ b=O21fmGXiWJQ4wEa1deika1eZk7y16byz3JuOGdM1yfDI/4TDk5jXyA5O+sTwNi/67J
+ R4FeLqs2M9H+gu5DHZ/TTB8FY04ZvbsNSrHugX4Ed5zMg5TnrAFUP2KtiZahVW5RjCKF
+ JOBfhOaKUwEXut1AdylFqLIcEACGiUJ74rKNXjeFuhfOAdeb6dZUi5g2Xo6+cw8V/xjK
+ d7zJrambKzTdkH4J7fwwpKVD123x3iHlJ/yB1wqttMhbI8ft9Tf2i0TG9eHAfsxHN1ED
+ yB+LvnSTrbttuXUg0MFHZFcXzIh703gXnco7qovItMeHN1nMy5zIPuEkwLmXCGloRr3K
+ dA2g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=sHTMWOQMQqVC1YkPXrIWKp9zMBZW3dKlWCxNHjwNeMs=;
+ b=nW4Uxx+inUgL0752drvkWWR6fEhKvJzOpZ6NTuzGW7YXr3xm2suYGHgbPbV4xzegUR
+ mVuSEcbJp8dfHKIj2h0DVXGO8qKBbuatYM0YvrTKefcorlEn8lIm/Jfx5WAbfkeTbXC/
+ g1qSXoYGjnVJ88qukeDQ3QKV8/lyzBKbcWG9+VO8shC/wWwOnSzecAw26nxE+IhlZ5RO
+ gAeNXIpcwuZfP9b13jP6C5Ao7mLbaXVdoaa5aReW9hipzSO0Ir2C3ybMf1z8nsrMQB+U
+ Y0TKpo9jiEjE0VjreXm0bSmSkDBCjy5eIDTxELsxqaBniww6qKsWEEcQ+xi+DA70UNX9
+ PLJw==
+X-Gm-Message-State: AOAM5333iUDOYBXWEgT5KTRfxIa1RhiZMpYOmfiZ6V5pVgRSLONvgK2U
+ zecBLhtJKNUfQaahfqLjpWem5KkcwZvUXR72vXw=
+X-Google-Smtp-Source: ABdhPJyRcBbTAZztXNFV722dmW0WK6qqo+aL4JdsYOTcfzPt5oD2ld8xIvZekP+gLf6XWpuO0YhmA+EVEu4WGzswxkw=
+X-Received: by 2002:a25:cf08:: with SMTP id f8mr42123105ybg.435.1597101842729; 
+ Mon, 10 Aug 2020 16:24:02 -0700 (PDT)
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
-Subject: [Nouveau] [PATCH 2/2] drm/nouveau/kms/nv50-: Don't call
- HEAD_SET_CRC_CONTROL in head907d_mode()
+References: <20200810211838.37862-1-lyude@redhat.com>
+In-Reply-To: <20200810211838.37862-1-lyude@redhat.com>
+From: Ben Skeggs <skeggsb@gmail.com>
+Date: Tue, 11 Aug 2020 09:23:51 +1000
+Message-ID: <CACAvsv5WW=gZ0HjMg1GWz6Y59rUzE0qmrr2FSPcES33tx81iKw@mail.gmail.com>
+To: Lyude Paul <lyude@redhat.com>
+Subject: Re: [Nouveau] [PATCH 0/2] drm/nouveau: Small CRC fixes for 5.9
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,59 +59,42 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>,
- "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
- <dri-devel@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>,
- Daniel Vetter <daniel@ffwll.ch>, open list <linux-kernel@vger.kernel.org>
+Cc: ML nouveau <nouveau@lists.freedesktop.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-This was a mistake that was present before, but never got noticed until
-we converted over to using nvidia's class headers for display
-programming. Luckily though it never caused any problems, since we
-always end up calling crc907d_set_src() after head907d_mode().
+On Tue, 11 Aug 2020 at 07:18, Lyude Paul <lyude@redhat.com> wrote:
+>
+> Just two CRC related fixes for the new CRC functionality in 5.9. One of
+> these unbreaks CRC reporting on volta+, which accidentally got broken
+> when converting over to nvidia's class headers. The other simply removes
+> an unneeded CRC method call that's been hiding in head907d_mode() for
+> quite a while now.
+>
+> Lyude Paul (2):
+>   drm/nouveau/kms/nv140-: Include correct push header in crcc37d.c
+Got them both.  I already had this first one in my tree, but your
+description was better, so I took yours.
 
-So, let's get rid of this.
+Thanks,
+Ben.
 
-Signed-off-by: Lyude Paul <lyude@redhat.com>
----
- drivers/gpu/drm/nouveau/dispnv50/head907d.c | 11 ++---------
- 1 file changed, 2 insertions(+), 9 deletions(-)
-
-diff --git a/drivers/gpu/drm/nouveau/dispnv50/head907d.c b/drivers/gpu/drm/nouveau/dispnv50/head907d.c
-index 8f860e9c52247..85648d790743f 100644
---- a/drivers/gpu/drm/nouveau/dispnv50/head907d.c
-+++ b/drivers/gpu/drm/nouveau/dispnv50/head907d.c
-@@ -322,7 +322,7 @@ head907d_mode(struct nv50_head *head, struct nv50_head_atom *asyh)
- 	const int i = head->base.index;
- 	int ret;
- 
--	if ((ret = PUSH_WAIT(push, 14)))
-+	if ((ret = PUSH_WAIT(push, 13)))
- 		return ret;
- 
- 	PUSH_MTHD(push, NV907D, HEAD_SET_OVERSCAN_COLOR(i),
-@@ -353,14 +353,7 @@ head907d_mode(struct nv50_head *head, struct nv50_head_atom *asyh)
- 	PUSH_MTHD(push, NV907D, HEAD_SET_DEFAULT_BASE_COLOR(i),
- 		  NVVAL(NV907D, HEAD_SET_DEFAULT_BASE_COLOR, RED, 0) |
- 		  NVVAL(NV907D, HEAD_SET_DEFAULT_BASE_COLOR, GREEN, 0) |
--		  NVVAL(NV907D, HEAD_SET_DEFAULT_BASE_COLOR, BLUE, 0),
--
--				HEAD_SET_CRC_CONTROL(i),
--		  NVDEF(NV907D, HEAD_SET_CRC_CONTROL, CONTROLLING_CHANNEL, CORE) |
--		  NVDEF(NV907D, HEAD_SET_CRC_CONTROL, EXPECT_BUFFER_COLLAPSE, FALSE) |
--		  NVDEF(NV907D, HEAD_SET_CRC_CONTROL, TIMESTAMP_MODE, FALSE) |
--		  NVDEF(NV907D, HEAD_SET_CRC_CONTROL, PRIMARY_OUTPUT, NONE) |
--		  NVDEF(NV907D, HEAD_SET_CRC_CONTROL, SECONDARY_OUTPUT, NONE));
-+		  NVVAL(NV907D, HEAD_SET_DEFAULT_BASE_COLOR, BLUE, 0));
- 
- 	PUSH_MTHD(push, NV907D, HEAD_SET_PIXEL_CLOCK_FREQUENCY(i),
- 		  NVVAL(NV907D, HEAD_SET_PIXEL_CLOCK_FREQUENCY, HERTZ, m->clock * 1000) |
--- 
-2.26.2
-
+>   drm/nouveau/kms/nv50-: Don't call HEAD_SET_CRC_CONTROL in
+>     head907d_mode()
+>
+>  drivers/gpu/drm/nouveau/dispnv50/crcc37d.c  |  2 +-
+>  drivers/gpu/drm/nouveau/dispnv50/head907d.c | 11 ++---------
+>  2 files changed, 3 insertions(+), 10 deletions(-)
+>
+> --
+> 2.26.2
+>
+> _______________________________________________
+> Nouveau mailing list
+> Nouveau@lists.freedesktop.org
+> https://lists.freedesktop.org/mailman/listinfo/nouveau
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
