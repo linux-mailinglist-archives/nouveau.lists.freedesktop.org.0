@@ -1,43 +1,51 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1B9C9240E95
-	for <lists+nouveau@lfdr.de>; Mon, 10 Aug 2020 21:14:57 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 95908241235
+	for <lists+nouveau@lfdr.de>; Mon, 10 Aug 2020 23:18:50 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5C32B6E461;
-	Mon, 10 Aug 2020 19:14:54 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id BFAD489E1B;
+	Mon, 10 Aug 2020 21:18:47 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by gabe.freedesktop.org (Postfix) with ESMTPS id CD9526E45D;
- Mon, 10 Aug 2020 19:14:53 +0000 (UTC)
-Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
- [73.47.72.35])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
+ [205.139.110.120])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5645789E1B
+ for <nouveau@lists.freedesktop.org>; Mon, 10 Aug 2020 21:18:45 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1597094324;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=T9Uxrd9ooj3MtmaPo8dy4lq/HM/vrp+JdTA0Rj+wgAo=;
+ b=eiQg2wUDScbeBXX253VMu8kFMX7ArWceJjJwmCWkHFWQArr98q31O+QN5uDC7PX90PkAiL
+ WkXIrnWAiisRGsXBuYfYFJ0ZH8CrEYTkZlH5u58CdGi70GumdTHktNvsYmCT1cYQP1xMmT
+ IkjF5azdncIQA84TSj4Hsv/lGUWCuJQ=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-282-C_ICWSSZOw6R5wUVUymfxw-1; Mon, 10 Aug 2020 17:18:42 -0400
+X-MC-Unique: C_ICWSSZOw6R5wUVUymfxw-1
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
+ [10.5.11.13])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id AEE2D22CAF;
- Mon, 10 Aug 2020 19:14:52 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1597086893;
- bh=IdDf2kmFCiCQlkr/H7Pdocwg/VRbq2e14AGXX+tSwAk=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=wNL1hyFu507UJtsXe5+C+1lijbs3UFboHYoKNp+xyqpZf5jNxWu6S5/QFRD6gOfqM
- pJpIKkog0vu3niv33NLlHVQ/6zYlDTZbEEAcAyJMoNawv1L8wo10hx6k/acv4MM/3W
- p4yEFkTfYPrDj+GW3yW5adLLAuNqhrYu/LqVZD8Y=
-From: Sasha Levin <sashal@kernel.org>
-To: linux-kernel@vger.kernel.org,
-	stable@vger.kernel.org
-Date: Mon, 10 Aug 2020 15:14:33 -0400
-Message-Id: <20200810191443.3795581-6-sashal@kernel.org>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20200810191443.3795581-1-sashal@kernel.org>
-References: <20200810191443.3795581-1-sashal@kernel.org>
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 6871F1009442
+ for <nouveau@lists.freedesktop.org>; Mon, 10 Aug 2020 21:18:41 +0000 (UTC)
+Received: from Ruby.redhat.com (ovpn-114-28.rdu2.redhat.com [10.10.114.28])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 1E78879CF3;
+ Mon, 10 Aug 2020 21:18:41 +0000 (UTC)
+From: Lyude Paul <lyude@redhat.com>
+To: nouveau@lists.freedesktop.org
+Date: Mon, 10 Aug 2020 17:18:36 -0400
+Message-Id: <20200810211838.37862-1-lyude@redhat.com>
 MIME-Version: 1.0
-X-stable: review
-X-Patchwork-Hint: Ignore
-Subject: [Nouveau] [PATCH AUTOSEL 4.4 06/16] drm/nouveau: fix multiple
- instances of reference count leaks
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=lyude@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Subject: [Nouveau] [PATCH 0/2] drm/nouveau: Small CRC fixes for 5.9
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -49,76 +57,28 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Sasha Levin <sashal@kernel.org>, nouveau@lists.freedesktop.org,
- Ben Skeggs <bskeggs@redhat.com>, dri-devel@lists.freedesktop.org,
- Aditya Pakki <pakki001@umn.edu>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-From: Aditya Pakki <pakki001@umn.edu>
+Just two CRC related fixes for the new CRC functionality in 5.9. One of
+these unbreaks CRC reporting on volta+, which accidentally got broken
+when converting over to nvidia's class headers. The other simply removes
+an unneeded CRC method call that's been hiding in head907d_mode() for
+quite a while now.
 
-[ Upstream commit 659fb5f154c3434c90a34586f3b7aa1c39cf6062 ]
+Lyude Paul (2):
+  drm/nouveau/kms/nv140-: Include correct push header in crcc37d.c
+  drm/nouveau/kms/nv50-: Don't call HEAD_SET_CRC_CONTROL in
+    head907d_mode()
 
-On calling pm_runtime_get_sync() the reference count of the device
-is incremented. In case of failure, decrement the
-ref count before returning the error.
+ drivers/gpu/drm/nouveau/dispnv50/crcc37d.c  |  2 +-
+ drivers/gpu/drm/nouveau/dispnv50/head907d.c | 11 ++---------
+ 2 files changed, 3 insertions(+), 10 deletions(-)
 
-Signed-off-by: Aditya Pakki <pakki001@umn.edu>
-Signed-off-by: Ben Skeggs <bskeggs@redhat.com>
-Signed-off-by: Sasha Levin <sashal@kernel.org>
----
- drivers/gpu/drm/nouveau/nouveau_drm.c | 8 ++++++--
- drivers/gpu/drm/nouveau/nouveau_gem.c | 4 +++-
- 2 files changed, 9 insertions(+), 3 deletions(-)
-
-diff --git a/drivers/gpu/drm/nouveau/nouveau_drm.c b/drivers/gpu/drm/nouveau/nouveau_drm.c
-index 91a61d2cca889..a90840e391100 100644
---- a/drivers/gpu/drm/nouveau/nouveau_drm.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_drm.c
-@@ -805,8 +805,10 @@ nouveau_drm_open(struct drm_device *dev, struct drm_file *fpriv)
- 
- 	/* need to bring up power immediately if opening device */
- 	ret = pm_runtime_get_sync(dev->dev);
--	if (ret < 0 && ret != -EACCES)
-+	if (ret < 0 && ret != -EACCES) {
-+		pm_runtime_put_autosuspend(dev->dev);
- 		return ret;
-+	}
- 
- 	get_task_comm(tmpname, current);
- 	snprintf(name, sizeof(name), "%s[%d]", tmpname, pid_nr(fpriv->pid));
-@@ -894,8 +896,10 @@ nouveau_drm_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
- 	long ret;
- 
- 	ret = pm_runtime_get_sync(dev->dev);
--	if (ret < 0 && ret != -EACCES)
-+	if (ret < 0 && ret != -EACCES) {
-+		pm_runtime_put_autosuspend(dev->dev);
- 		return ret;
-+	}
- 
- 	switch (_IOC_NR(cmd) - DRM_COMMAND_BASE) {
- 	case DRM_NOUVEAU_NVIF:
-diff --git a/drivers/gpu/drm/nouveau/nouveau_gem.c b/drivers/gpu/drm/nouveau/nouveau_gem.c
-index ae560f5977fca..e5db2a385cb65 100644
---- a/drivers/gpu/drm/nouveau/nouveau_gem.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_gem.c
-@@ -42,8 +42,10 @@ nouveau_gem_object_del(struct drm_gem_object *gem)
- 	int ret;
- 
- 	ret = pm_runtime_get_sync(dev);
--	if (WARN_ON(ret < 0 && ret != -EACCES))
-+	if (WARN_ON(ret < 0 && ret != -EACCES)) {
-+		pm_runtime_put_autosuspend(dev);
- 		return;
-+	}
- 
- 	if (gem->import_attach)
- 		drm_prime_gem_destroy(gem, nvbo->bo.sg);
 -- 
-2.25.1
+2.26.2
 
 _______________________________________________
 Nouveau mailing list
