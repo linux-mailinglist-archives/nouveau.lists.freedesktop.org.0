@@ -1,43 +1,43 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4F6D6240D80
-	for <lists+nouveau@lfdr.de>; Mon, 10 Aug 2020 21:09:26 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id B3EDB240D88
+	for <lists+nouveau@lfdr.de>; Mon, 10 Aug 2020 21:09:34 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id BF75B89C6B;
-	Mon, 10 Aug 2020 19:09:24 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 180CD89C94;
+	Mon, 10 Aug 2020 19:09:32 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 73D7589C6B;
- Mon, 10 Aug 2020 19:09:23 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 38F9F89C93;
+ Mon, 10 Aug 2020 19:09:30 +0000 (UTC)
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 4372B22B49;
- Mon, 10 Aug 2020 19:09:22 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 4437621775;
+ Mon, 10 Aug 2020 19:09:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1597086563;
- bh=Z6K4uvy4C7W23CznrC/gasZ1erGhoQ4x23h6wbcUX98=;
+ s=default; t=1597086570;
+ bh=BrABa+6qOOgqvVrjvoKRwBnCfdX4u+XGCktszvNKWsw=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=Jf7Q2dzHhdFCZMsThE3Y6aMHd55nuHrVl7QGk3+1ljqgoahosDQm1TmnF8F7wiXvN
- Nmmda7Djm+Ag2vL7gAOuNc2xerryx0Jf7DRe5O3Li7FGNkL5aLpcC5QNcj/y2lziDp
- boNLtoefnWVmw+0WBeG2xWU2HsM7rr7e7fWoTRMU=
+ b=fxgW1PVzWrIpJanrh+dCXqM23nwvpbHwsnyM6BdzRPd3iYnhsCcJ+3IjJLiclqrdH
+ r6GOD3XOD9mtuOhQzbK8i0eo3pAW4+MMOGH8B6ShduvOZDKXio2/56X6UhYWa4CS1S
+ H+/xXl1zCOAsfMBvGSFfB1MEO0zwcBhd+CDFs6tQ=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Mon, 10 Aug 2020 15:08:12 -0400
-Message-Id: <20200810190859.3793319-17-sashal@kernel.org>
+Date: Mon, 10 Aug 2020 15:08:17 -0400
+Message-Id: <20200810190859.3793319-22-sashal@kernel.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20200810190859.3793319-1-sashal@kernel.org>
 References: <20200810190859.3793319-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
-Subject: [Nouveau] [PATCH AUTOSEL 5.8 17/64] drm/nouveau/kms/nv50-: Fix
- disabling dithering
+Subject: [Nouveau] [PATCH AUTOSEL 5.8 22/64] drm/nouveau: fix reference
+ count leak in nouveau_debugfs_strap_peek
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -50,68 +50,44 @@ List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
 Cc: Sasha Levin <sashal@kernel.org>, nouveau@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>
+ Ben Skeggs <bskeggs@redhat.com>, dri-devel@lists.freedesktop.org,
+ Aditya Pakki <pakki001@umn.edu>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-From: Lyude Paul <lyude@redhat.com>
+From: Aditya Pakki <pakki001@umn.edu>
 
-[ Upstream commit fb2420b701edbf96c2b6d557f0139902f455dc2b ]
+[ Upstream commit 8f29432417b11039ef960ab18987c7d61b2b5396 ]
 
-While we expose the ability to turn off hardware dithering for nouveau,
-we actually make the mistake of turning it on anyway, due to
-dithering_depth containing a non-zero value if our dithering depth isn't
-also set to 6 bpc.
+nouveau_debugfs_strap_peek() calls pm_runtime_get_sync() that
+increments the reference count. In case of failure, decrement the
+ref count before returning the error.
 
-So, fix it by never enabling dithering when it's disabled.
-
-Signed-off-by: Lyude Paul <lyude@redhat.com>
-Reviewed-by: Ben Skeggs <bskeggs@redhat.com>
-Acked-by: Dave Airlie <airlied@gmail.com>
-Link: https://patchwork.freedesktop.org/patch/msgid/20200627194657.156514-6-lyude@redhat.com
+Signed-off-by: Aditya Pakki <pakki001@umn.edu>
+Signed-off-by: Ben Skeggs <bskeggs@redhat.com>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- drivers/gpu/drm/nouveau/dispnv50/head.c | 24 +++++++++++++-----------
- 1 file changed, 13 insertions(+), 11 deletions(-)
+ drivers/gpu/drm/nouveau/nouveau_debugfs.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/gpu/drm/nouveau/dispnv50/head.c b/drivers/gpu/drm/nouveau/dispnv50/head.c
-index 8f6455697ba72..ed6819519f6d8 100644
---- a/drivers/gpu/drm/nouveau/dispnv50/head.c
-+++ b/drivers/gpu/drm/nouveau/dispnv50/head.c
-@@ -84,18 +84,20 @@ nv50_head_atomic_check_dither(struct nv50_head_atom *armh,
- {
- 	u32 mode = 0x00;
+diff --git a/drivers/gpu/drm/nouveau/nouveau_debugfs.c b/drivers/gpu/drm/nouveau/nouveau_debugfs.c
+index 63b5c8cf9ae43..8f63cda3db178 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_debugfs.c
++++ b/drivers/gpu/drm/nouveau/nouveau_debugfs.c
+@@ -54,8 +54,10 @@ nouveau_debugfs_strap_peek(struct seq_file *m, void *data)
+ 	int ret;
  
--	if (asyc->dither.mode == DITHERING_MODE_AUTO) {
--		if (asyh->base.depth > asyh->or.bpc * 3)
--			mode = DITHERING_MODE_DYNAMIC2X2;
--	} else {
--		mode = asyc->dither.mode;
--	}
-+	if (asyc->dither.mode) {
-+		if (asyc->dither.mode == DITHERING_MODE_AUTO) {
-+			if (asyh->base.depth > asyh->or.bpc * 3)
-+				mode = DITHERING_MODE_DYNAMIC2X2;
-+		} else {
-+			mode = asyc->dither.mode;
-+		}
+ 	ret = pm_runtime_get_sync(drm->dev->dev);
+-	if (ret < 0 && ret != -EACCES)
++	if (ret < 0 && ret != -EACCES) {
++		pm_runtime_put_autosuspend(drm->dev->dev);
+ 		return ret;
++	}
  
--	if (asyc->dither.depth == DITHERING_DEPTH_AUTO) {
--		if (asyh->or.bpc >= 8)
--			mode |= DITHERING_DEPTH_8BPC;
--	} else {
--		mode |= asyc->dither.depth;
-+		if (asyc->dither.depth == DITHERING_DEPTH_AUTO) {
-+			if (asyh->or.bpc >= 8)
-+				mode |= DITHERING_DEPTH_8BPC;
-+		} else {
-+			mode |= asyc->dither.depth;
-+		}
- 	}
- 
- 	asyh->dither.enable = mode;
+ 	seq_printf(m, "0x%08x\n",
+ 		   nvif_rd32(&drm->client.device.object, 0x101000));
 -- 
 2.25.1
 
