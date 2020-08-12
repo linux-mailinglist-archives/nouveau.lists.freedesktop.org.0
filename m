@@ -2,51 +2,54 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2B953242278
-	for <lists+nouveau@lfdr.de>; Wed, 12 Aug 2020 00:27:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4B0EC242301
+	for <lists+nouveau@lfdr.de>; Wed, 12 Aug 2020 02:10:34 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A513C6E0DE;
-	Tue, 11 Aug 2020 22:27:09 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E3F046E870;
+	Wed, 12 Aug 2020 00:10:26 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [207.211.31.120])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 220A26E83F
- for <nouveau@lists.freedesktop.org>; Tue, 11 Aug 2020 20:08:05 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1597176484;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=KqhBXCumi4qWOpmIMiKm16RbwLTfS/Vf/isHIApMj10=;
- b=ayXGLra9A7LT8G8NItKmg0rirETE4GJvMxL/bDIbrYErwei34DnxGjrqpRKdHcG2HOXUsk
- WEEgL6KLlQByTJTgW3CEqmW4Do/Np61HRcLe2cWWk60CpSTFodUfiIh3LX5c7O8Ql8QzF8
- e4QjKqpqHlfSK7xmCdGdAm6Bbtjw5e0=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-391-kJ7RVk11MoG43LRpPRgoIw-1; Tue, 11 Aug 2020 16:06:58 -0400
-X-MC-Unique: kJ7RVk11MoG43LRpPRgoIw-1
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
- [10.5.11.14])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id ED2D1800479;
- Tue, 11 Aug 2020 20:06:55 +0000 (UTC)
-Received: from Ruby.redhat.com (ovpn-119-184.rdu2.redhat.com [10.10.119.184])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 9EA945D9D7;
- Tue, 11 Aug 2020 20:06:52 +0000 (UTC)
-From: Lyude Paul <lyude@redhat.com>
-To: nouveau@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org
-Date: Tue, 11 Aug 2020 16:04:56 -0400
-Message-Id: <20200811200457.134743-20-lyude@redhat.com>
-In-Reply-To: <20200811200457.134743-1-lyude@redhat.com>
-References: <20200811200457.134743-1-lyude@redhat.com>
+Received: from mail-yb1-xb33.google.com (mail-yb1-xb33.google.com
+ [IPv6:2607:f8b0:4864:20::b33])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C28016E86D;
+ Wed, 12 Aug 2020 00:10:24 +0000 (UTC)
+Received: by mail-yb1-xb33.google.com with SMTP id i10so383984ybt.11;
+ Tue, 11 Aug 2020 17:10:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=8uOzj1voyuCKHRpxgq/4pDKuyjBgBLo5ZiC1tPpLll8=;
+ b=PfUxsu28J+k0tt2T60XuyfbMtFAitx9KdbRdPbiTevfHT9OuvszkOVp6HdNs4S0oHc
+ p6R5vS0fipF5cik14YFkQatdJ1zII7ViQJiLPTdNtuo80Ih5Oxj+nSWE7sn54rW9HK/x
+ H4oaP9zlZcL4EHAtrwmBJi6nrIqDYFWLD2Lez2KE9v4SgN/T0FWwAslu/rEqoaO1A97F
+ qRxcJfRsR14jofd7sYxL1YPYdlkYmYnyJD36utn+DAb5JYRb5jumHg9FEWV0Ov+00n9a
+ u/m6wYzHQp36O9NWnduDy7Y9apuqjWNkQ0iYWnts9RdUdvShjYPt7qOnRkdPfxdaUHIV
+ Cmnw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=8uOzj1voyuCKHRpxgq/4pDKuyjBgBLo5ZiC1tPpLll8=;
+ b=dM7HoQrP9L51+Ngpc1/2n+a3mc1E9j9Gd+ldFPnub74hTYJBJ2zduIytcCPMDOo6Mw
+ +U7e3KtjKbwRQXNcJyG3S2NtRftgi159ExaNmhIy2lRnteglKiaSpUwlLqViJZdtaKOc
+ pg8y/YgIpQCT7niU2l3hWgxmw+q1i2HLMcRgrHNV237BaeU6NhaawVD5+8BtnK43EQkF
+ 7LpXhI84JRLdsBXwZWNoxlR9rtBc204h+bh5fOC503vKn7nqO2fLyngBFjJf/1WAzuNZ
+ jcrJKQCJLMo70VEB3MF7zxE2nHjTIZfPX5tmrERoBl6F6cfcgaKdMtkKfkGxuRQgfOVt
+ kguw==
+X-Gm-Message-State: AOAM530eqYmjXzeBxtQzG9VlQ3qGsQsiZkmPPgWfnFsEpHuW0xQbxaAY
+ fraALJdTEt8ArY6N6VLQwLy7mWOFlOa2rdsdr2o=
+X-Google-Smtp-Source: ABdhPJywz5Q/451nmNo3nqmKYvaDye1yBXeQ45F23UMljvWfQL6O7dMrT8GiEhMPtmxrhdR1cSHpFuq3PI9yzuM0z1Q=
+X-Received: by 2002:a25:2e12:: with SMTP id u18mr48009916ybu.200.1597191023984; 
+ Tue, 11 Aug 2020 17:10:23 -0700 (PDT)
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
-X-Mailman-Approved-At: Tue, 11 Aug 2020 22:27:08 +0000
-Subject: [Nouveau] [RFC 19/20] drm/i915/dp: Extract drm_dp_read_dpcd_caps()
+References: <20200811200457.134743-1-lyude@redhat.com>
+ <20200811200457.134743-2-lyude@redhat.com>
+In-Reply-To: <20200811200457.134743-2-lyude@redhat.com>
+From: Ben Skeggs <skeggsb@gmail.com>
+Date: Wed, 12 Aug 2020 10:10:13 +1000
+Message-ID: <CACAvsv5FnVom3Od=EfZO3Y1WhCXDhBvCSNwFx8bc_BNg75iL4g@mail.gmail.com>
+To: Lyude Paul <lyude@redhat.com>
+Subject: Re: [Nouveau] [RFC 01/20] drm/nouveau/kms: Fix some indenting in
+ nouveau_dp_detect()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,258 +61,59 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Juha-Pekka Heikkila <juhapekka.heikkila@gmail.com>,
- David Airlie <airlied@linux.ie>, Lucas De Marchi <lucas.demarchi@intel.com>,
- Imre Deak <imre.deak@intel.com>,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+Cc: David Airlie <airlied@linux.ie>, ML nouveau <nouveau@lists.freedesktop.org>,
+ intel-gfx <intel-gfx@lists.freedesktop.org>,
  open list <linux-kernel@vger.kernel.org>,
- Jani Nikula <jani.nikula@linux.intel.com>,
- Gwan-gyeong Mun <gwan-gyeong.mun@intel.com>,
- Manasi Navare <manasi.d.navare@intel.com>, Uma Shankar <uma.shankar@intel.com>,
- Maxime Ripard <mripard@kernel.org>, Daniel Vetter <daniel@ffwll.ch>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>,
- =?UTF-8?q?Jos=C3=A9=20Roberto=20de=20Souza?= <jose.souza@intel.com>,
- Ramalingam C <ramalingam.c@intel.com>, Animesh Manna <animesh.manna@intel.com>,
- =?UTF-8?q?Ville=20Syrj=C3=A4l=C3=A4?= <ville.syrjala@linux.intel.com>,
- Wambui Karuga <wambui.karugax@gmail.com>
+ ML dri-devel <dri-devel@lists.freedesktop.org>,
+ Ben Skeggs <bskeggs@redhat.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Since DP 1.3, it's been possible for DP receivers to specify an
-additional set of DPCD capabilities, which can take precedence over the
-capabilities reported at DP_DPCD_REV.
+On Wed, 12 Aug 2020 at 06:05, Lyude Paul <lyude@redhat.com> wrote:
+>
+> Signed-off-by: Lyude Paul <lyude@redhat.com>
+Reviewed-by: Ben Skeggs <bskeggs@redhat.com>
 
-Basically any device supporting DP is going to need to read these in an
-identical manner, in particular nouveau, so let's go ahead and just move
-this code out of i915 into a shared DRM DP helper that we can use in
-other drivers.
-
-Signed-off-by: Lyude Paul <lyude@redhat.com>
----
- drivers/gpu/drm/drm_dp_helper.c             | 76 +++++++++++++++++++++
- drivers/gpu/drm/i915/display/intel_dp.c     | 60 +---------------
- drivers/gpu/drm/i915/display/intel_dp.h     |  1 -
- drivers/gpu/drm/i915/display/intel_lspcon.c |  2 +-
- include/drm/drm_dp_helper.h                 |  3 +
- 5 files changed, 82 insertions(+), 60 deletions(-)
-
-diff --git a/drivers/gpu/drm/drm_dp_helper.c b/drivers/gpu/drm/drm_dp_helper.c
-index 0ff2959c8f8e8..f9445915c6c26 100644
---- a/drivers/gpu/drm/drm_dp_helper.c
-+++ b/drivers/gpu/drm/drm_dp_helper.c
-@@ -423,6 +423,82 @@ bool drm_dp_send_real_edid_checksum(struct drm_dp_aux *aux,
- }
- EXPORT_SYMBOL(drm_dp_send_real_edid_checksum);
- 
-+static int drm_dp_read_extended_dpcd_caps(struct drm_dp_aux *aux,
-+					  u8 dpcd[DP_RECEIVER_CAP_SIZE])
-+{
-+	u8 dpcd_ext[6];
-+	int ret;
-+
-+	/*
-+	 * Prior to DP1.3 the bit represented by
-+	 * DP_EXTENDED_RECEIVER_CAP_FIELD_PRESENT was reserved.
-+	 * If it is set DP_DPCD_REV at 0000h could be at a value less than
-+	 * the true capability of the panel. The only way to check is to
-+	 * then compare 0000h and 2200h.
-+	 */
-+	if (!(dpcd[DP_TRAINING_AUX_RD_INTERVAL] &
-+	      DP_EXTENDED_RECEIVER_CAP_FIELD_PRESENT))
-+		return 0;
-+
-+	ret = drm_dp_dpcd_read(aux, DP_DP13_DPCD_REV, &dpcd_ext,
-+			       sizeof(dpcd_ext));
-+	if (ret != sizeof(dpcd_ext))
-+		return -EIO;
-+
-+	if (dpcd[DP_DPCD_REV] > dpcd_ext[DP_DPCD_REV]) {
-+		DRM_DEBUG_KMS("%s: Extended DPCD rev less than base DPCD rev (%d > %d)\n",
-+			      aux->name, dpcd[DP_DPCD_REV],
-+			      dpcd_ext[DP_DPCD_REV]);
-+		return 0;
-+	}
-+
-+	if (!memcmp(dpcd, dpcd_ext, sizeof(dpcd_ext)))
-+		return 0;
-+
-+	DRM_DEBUG_KMS("%s: Base DPCD: %*ph\n",
-+		      aux->name, DP_RECEIVER_CAP_SIZE, dpcd);
-+
-+	memcpy(dpcd, dpcd_ext, sizeof(dpcd_ext));
-+
-+	return 0;
-+}
-+
-+/**
-+ * drm_dp_read_dpcd_caps() - read DPCD caps and extended DPCD caps if
-+ * available
-+ * @aux: DisplayPort AUX channel
-+ * @dpcd: Buffer to store the resulting DPCD in
-+ *
-+ * Attempts to read the base DPCD caps for @aux. Additionally, this function
-+ * checks for and reads the extended DPRX caps (%DP_DP13_DPCD_REV) if
-+ * present.
-+ *
-+ * Returns: %0 if the DPCD was read successfully, negative error code
-+ * otherwise.
-+ */
-+int drm_dp_read_dpcd_caps(struct drm_dp_aux *aux,
-+			  u8 dpcd[DP_RECEIVER_CAP_SIZE])
-+{
-+	int ret;
-+
-+	ret = drm_dp_dpcd_read(aux, DP_DPCD_REV, dpcd, DP_RECEIVER_CAP_SIZE);
-+	if (ret != DP_RECEIVER_CAP_SIZE || dpcd[DP_DPCD_REV] == 0)
-+		return -EIO;
-+
-+	ret = drm_dp_read_extended_dpcd_caps(aux, dpcd);
-+	if (ret < 0)
-+		return ret;
-+
-+	DRM_DEBUG_KMS("%s: DPCD: %*ph\n",
-+		      aux->name, DP_RECEIVER_CAP_SIZE, dpcd);
-+
-+	if (dpcd[DP_DPCD_REV] == 0)
-+		ret = -EIO;
-+
-+	return ret;
-+}
-+EXPORT_SYMBOL(drm_dp_read_dpcd_caps);
-+
- /**
-  * drm_dp_downstream_read_info() - read DPCD downstream port info if available
-  * @aux: DisplayPort AUX channel
-diff --git a/drivers/gpu/drm/i915/display/intel_dp.c b/drivers/gpu/drm/i915/display/intel_dp.c
-index e343965a483df..230aa0360dc61 100644
---- a/drivers/gpu/drm/i915/display/intel_dp.c
-+++ b/drivers/gpu/drm/i915/display/intel_dp.c
-@@ -4449,62 +4449,6 @@ intel_dp_link_down(struct intel_encoder *encoder,
- 	}
- }
- 
--static void
--intel_dp_extended_receiver_capabilities(struct intel_dp *intel_dp)
--{
--	struct drm_i915_private *i915 = dp_to_i915(intel_dp);
--	u8 dpcd_ext[6];
--
--	/*
--	 * Prior to DP1.3 the bit represented by
--	 * DP_EXTENDED_RECEIVER_CAP_FIELD_PRESENT was reserved.
--	 * if it is set DP_DPCD_REV at 0000h could be at a value less than
--	 * the true capability of the panel. The only way to check is to
--	 * then compare 0000h and 2200h.
--	 */
--	if (!(intel_dp->dpcd[DP_TRAINING_AUX_RD_INTERVAL] &
--	      DP_EXTENDED_RECEIVER_CAP_FIELD_PRESENT))
--		return;
--
--	if (drm_dp_dpcd_read(&intel_dp->aux, DP_DP13_DPCD_REV,
--			     &dpcd_ext, sizeof(dpcd_ext)) != sizeof(dpcd_ext)) {
--		drm_err(&i915->drm,
--			"DPCD failed read at extended capabilities\n");
--		return;
--	}
--
--	if (intel_dp->dpcd[DP_DPCD_REV] > dpcd_ext[DP_DPCD_REV]) {
--		drm_dbg_kms(&i915->drm,
--			    "DPCD extended DPCD rev less than base DPCD rev\n");
--		return;
--	}
--
--	if (!memcmp(intel_dp->dpcd, dpcd_ext, sizeof(dpcd_ext)))
--		return;
--
--	drm_dbg_kms(&i915->drm, "Base DPCD: %*ph\n",
--		    (int)sizeof(intel_dp->dpcd), intel_dp->dpcd);
--
--	memcpy(intel_dp->dpcd, dpcd_ext, sizeof(dpcd_ext));
--}
--
--bool
--intel_dp_read_dpcd(struct intel_dp *intel_dp)
--{
--	struct drm_i915_private *i915 = dp_to_i915(intel_dp);
--
--	if (drm_dp_dpcd_read(&intel_dp->aux, 0x000, intel_dp->dpcd,
--			     sizeof(intel_dp->dpcd)) < 0)
--		return false; /* aux transfer failed */
--
--	intel_dp_extended_receiver_capabilities(intel_dp);
--
--	drm_dbg_kms(&i915->drm, "DPCD: %*ph\n", (int)sizeof(intel_dp->dpcd),
--		    intel_dp->dpcd);
--
--	return intel_dp->dpcd[DP_DPCD_REV] != 0;
--}
--
- bool intel_dp_get_colorimetry_status(struct intel_dp *intel_dp)
- {
- 	u8 dprx = 0;
-@@ -4563,7 +4507,7 @@ intel_edp_init_dpcd(struct intel_dp *intel_dp)
- 	/* this function is meant to be called only once */
- 	drm_WARN_ON(&dev_priv->drm, intel_dp->dpcd[DP_DPCD_REV] != 0);
- 
--	if (!intel_dp_read_dpcd(intel_dp))
-+	if (drm_dp_read_dpcd_caps(&intel_dp->aux, intel_dp->dpcd) != 0)
- 		return false;
- 
- 	drm_dp_read_desc(&intel_dp->aux, &intel_dp->desc,
-@@ -4650,7 +4594,7 @@ intel_dp_get_dpcd(struct intel_dp *intel_dp)
- {
- 	int ret;
- 
--	if (!intel_dp_read_dpcd(intel_dp))
-+	if (drm_dp_read_dpcd_caps(&intel_dp->aux, intel_dp->dpcd))
- 		return false;
- 
- 	/*
-diff --git a/drivers/gpu/drm/i915/display/intel_dp.h b/drivers/gpu/drm/i915/display/intel_dp.h
-index b901ab850cbd9..0a3af3410d52e 100644
---- a/drivers/gpu/drm/i915/display/intel_dp.h
-+++ b/drivers/gpu/drm/i915/display/intel_dp.h
-@@ -99,7 +99,6 @@ bool intel_dp_source_supports_hbr3(struct intel_dp *intel_dp);
- bool
- intel_dp_get_link_status(struct intel_dp *intel_dp, u8 *link_status);
- 
--bool intel_dp_read_dpcd(struct intel_dp *intel_dp);
- bool intel_dp_get_colorimetry_status(struct intel_dp *intel_dp);
- int intel_dp_link_required(int pixel_clock, int bpp);
- int intel_dp_max_data_rate(int max_link_clock, int max_lanes);
-diff --git a/drivers/gpu/drm/i915/display/intel_lspcon.c b/drivers/gpu/drm/i915/display/intel_lspcon.c
-index b781bf4696443..dc1b35559afdf 100644
---- a/drivers/gpu/drm/i915/display/intel_lspcon.c
-+++ b/drivers/gpu/drm/i915/display/intel_lspcon.c
-@@ -571,7 +571,7 @@ bool lspcon_init(struct intel_digital_port *dig_port)
- 		return false;
- 	}
- 
--	if (!intel_dp_read_dpcd(dp)) {
-+	if (drm_dp_read_dpcd_caps(&dp->aux, dp->dpcd) != 0) {
- 		DRM_ERROR("LSPCON DPCD read failed\n");
- 		return false;
- 	}
-diff --git a/include/drm/drm_dp_helper.h b/include/drm/drm_dp_helper.h
-index 0c141fc81aaa8..11649e93e5bb6 100644
---- a/include/drm/drm_dp_helper.h
-+++ b/include/drm/drm_dp_helper.h
-@@ -1607,6 +1607,9 @@ static inline ssize_t drm_dp_dpcd_writeb(struct drm_dp_aux *aux,
- 	return drm_dp_dpcd_write(aux, offset, &value, 1);
- }
- 
-+int drm_dp_read_dpcd_caps(struct drm_dp_aux *aux,
-+			  u8 dpcd[DP_RECEIVER_CAP_SIZE]);
-+
- int drm_dp_dpcd_read_link_status(struct drm_dp_aux *aux,
- 				 u8 status[DP_LINK_STATUS_SIZE]);
- 
--- 
-2.26.2
-
+> ---
+>  drivers/gpu/drm/nouveau/nouveau_dp.c | 8 ++++----
+>  1 file changed, 4 insertions(+), 4 deletions(-)
+>
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_dp.c b/drivers/gpu/drm/nouveau/nouveau_dp.c
+> index 8a0f7994e1aeb..ee778ddc95fae 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_dp.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_dp.c
+> @@ -76,10 +76,10 @@ nouveau_dp_detect(struct nouveau_encoder *nv_encoder)
+>         nv_encoder->dp.link_nr = dpcd[2] & DP_MAX_LANE_COUNT_MASK;
+>
+>         NV_DEBUG(drm, "display: %dx%d dpcd 0x%02x\n",
+> -                    nv_encoder->dp.link_nr, nv_encoder->dp.link_bw, dpcd[0]);
+> +                nv_encoder->dp.link_nr, nv_encoder->dp.link_bw, dpcd[0]);
+>         NV_DEBUG(drm, "encoder: %dx%d\n",
+> -                    nv_encoder->dcb->dpconf.link_nr,
+> -                    nv_encoder->dcb->dpconf.link_bw);
+> +                nv_encoder->dcb->dpconf.link_nr,
+> +                nv_encoder->dcb->dpconf.link_bw);
+>
+>         if (nv_encoder->dcb->dpconf.link_nr < nv_encoder->dp.link_nr)
+>                 nv_encoder->dp.link_nr = nv_encoder->dcb->dpconf.link_nr;
+> @@ -87,7 +87,7 @@ nouveau_dp_detect(struct nouveau_encoder *nv_encoder)
+>                 nv_encoder->dp.link_bw = nv_encoder->dcb->dpconf.link_bw;
+>
+>         NV_DEBUG(drm, "maximum: %dx%d\n",
+> -                    nv_encoder->dp.link_nr, nv_encoder->dp.link_bw);
+> +                nv_encoder->dp.link_nr, nv_encoder->dp.link_bw);
+>
+>         nouveau_dp_probe_oui(dev, aux, dpcd);
+>
+> --
+> 2.26.2
+>
+> _______________________________________________
+> dri-devel mailing list
+> dri-devel@lists.freedesktop.org
+> https://lists.freedesktop.org/mailman/listinfo/dri-devel
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
