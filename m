@@ -2,117 +2,148 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id E0C2E243BD6
-	for <lists+nouveau@lfdr.de>; Thu, 13 Aug 2020 16:48:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A7EC0243BE0
+	for <lists+nouveau@lfdr.de>; Thu, 13 Aug 2020 16:48:38 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 793866EA35;
-	Thu, 13 Aug 2020 14:48:12 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 61CF36EA28;
+	Thu, 13 Aug 2020 14:48:11 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam11on2044.outbound.protection.outlook.com [40.107.223.44])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 840FB6E9B8;
- Thu, 13 Aug 2020 10:47:25 +0000 (UTC)
+X-Greylist: delayed 9446 seconds by postgrey-1.36 at gabe;
+ Thu, 13 Aug 2020 13:57:46 UTC
+Received: from mx0a-0039f301.pphosted.com (mx0a-0039f301.pphosted.com
+ [148.163.133.242])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A16976EA00;
+ Thu, 13 Aug 2020 13:57:46 +0000 (UTC)
+Received: from pps.filterd (m0174676.ppops.net [127.0.0.1])
+ by mx0a-0039f301.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
+ 07DBAhIo032308; Thu, 13 Aug 2020 11:19:48 GMT
+Received: from eur01-ve1-obe.outbound.protection.outlook.com
+ (mail-ve1eur01lp2050.outbound.protection.outlook.com [104.47.1.50])
+ by mx0a-0039f301.pphosted.com with ESMTP id 32vyhf16ah-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Thu, 13 Aug 2020 11:19:48 +0000
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=gdj0grcaIIecbwllRgGWhUlIlUjv13/R78NNehk1PCGSsCQxqbj1TEw/ObrGIlzPLZlHEa8MW9w8nM+cCCDqPSRSB2pJRJMCH4O7SIql6Zp+4jzn0Y2Wpbee3EAZ+UjfLr4d20vCKEOYNHdqr3RHAH/paiq2ULNhCz6XBz47drGw/KOjZELlxt1X/HMxH2pcou/rV7i9j7+tdmXyKuBAlx+OnAXDQa5T/i6+kv6uCEnLu84Dkq5h2SDShJ+r/okDG3ZhOlnSec+RSd2IRvfHaqKElC6pIqiJOptijkAE9+JU3nFhMXDHjYd7FuOqWPoU+h/7+eOvNsCqYH3IGAdLSQ==
+ b=Ytoj84cGx07WDOAYCzIkNgAt5bJioV7W5YtrVQQAS/+DhksIreP6wUY2d7IxNw3e1dabLKO/joyhyWebgFQqE7U8FYMt8ZYhPnCqjE5ZIzWeJKfvh6OOtWmbCaoocBhxVDJghXveZhwrRLWUgpYJoUeJivPrrUx1cDSfoZ1X4Jed6KVCVnEtCywv0EJXptrjjIlxNbLZDgnkBtcViT9MIz5xfnuKWrBu18bowc9xWX03oicTJdWZ/BnK5NGg1irxdBljvs2qWsyrCW6lxrzabvSp8t9NDmP8axaAZebkUB8HE2VdtkyqacdQWdZWmR0DlAoyL5JuHkuQCowNN55twA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=mBd8DQ/bfMAfOk7SWaHtrVKCOWBNjh1g7eNQlYG5zBI=;
- b=m0mI5rL95cXVyf+YuiVP6uYt4JKxjzgIRb9eHS4uuatdO9Q+MpZ1jnbikskRCmLuQnsbjpZbVSZbP55ZGrIH815TeGvjc1N3TxH75MLzOpdKS2+y6zc0AN9m68k1TuMlVwZYKVIzEHcWqzTdpTKIwj8+6ds5poscou9r+oyfFdszFW0rdLaZu78yV9GaTurbZiyYgNPe9tN6lE6ruoBH2F23N1mJhINEKG4E2oMADFCHRHabvGM2X7LogU41tyVK1+z1VWZZPwQSNA71APVJJERLCMbkgqLl/9z5r8pPZxx7at9K0H/F0ddwEmoPUjjfUnbKiD8c6FL+o+ouKR1Ptw==
+ bh=fc8o5Gg9pCw3D3wzThNao2OARb2LAoDAO0TM8iReMrs=;
+ b=FA7ZbC6kciQiDieES6zzXHbSBfxZUGb12XnTnuuuSTbWoHlcbY/pT+hwappdevHvqexWw/Bz8Q3o54YGu+tjl6vRVDeK78eNIKpH5yzt/n7WIoLrFXY4aV0JyWHJkdIoz2BQUJsh3tZzWwZ6bc5eQ+LCtWLgiIAm3lqIfD+rBIgFimrNgU9NILIddLJaOJBvfokjHR1rH9cCNDsdKqUQUYGUg4ozdb6KGT2+pO9RFz+mujUN/Rw1GEbte2Iy5nbG5oAd2Rp4R307KczLAP1co92UuESu2fqk5bXsxRQesZhQvPXAEpxgYTIwo/PJxqc4eIXw8dhpotVco9zVWZbrpg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amdcloud.onmicrosoft.com; s=selector2-amdcloud-onmicrosoft-com;
+ smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
+ dkim=pass header.d=epam.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=mBd8DQ/bfMAfOk7SWaHtrVKCOWBNjh1g7eNQlYG5zBI=;
- b=14JkI7HQW+JlY8Q+sZRyDe6ABruAgDWZ5LTJYOZ9kJKX8wlLmed5jAiW0nGCFnWvB3FlXBuxLmm4WgdEUsySPGmhJQ1I1e+q5Hm6trYDBAlVAP7MvqhVObtGGELyvGUOxuSeAYUAf29UdkkGwqDSz4oxlZWP6TPQZNYTHSFkm0Y=
-Authentication-Results: lists.xenproject.org; dkim=none (message not signed)
- header.d=none;lists.xenproject.org; dmarc=none action=none
- header.from=amd.com;
-Received: from MN2PR12MB3775.namprd12.prod.outlook.com (2603:10b6:208:159::19)
- by MN2PR12MB3999.namprd12.prod.outlook.com (2603:10b6:208:158::27)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3283.15; Thu, 13 Aug
- 2020 10:47:20 +0000
-Received: from MN2PR12MB3775.namprd12.prod.outlook.com
- ([fe80::a16e:8812:b4c0:918d]) by MN2PR12MB3775.namprd12.prod.outlook.com
- ([fe80::a16e:8812:b4c0:918d%6]) with mapi id 15.20.3283.015; Thu, 13 Aug 2020
- 10:47:20 +0000
-To: Thomas Zimmermann <tzimmermann@suse.de>, alexander.deucher@amd.com,
- airlied@linux.ie, daniel@ffwll.ch, linux@armlinux.org.uk,
- maarten.lankhorst@linux.intel.com, mripard@kernel.org,
- l.stach@pengutronix.de, christian.gmeiner@gmail.com, inki.dae@samsung.com,
- jy0922.shim@samsung.com, sw0312.kim@samsung.com, kyungmin.park@samsung.com,
- kgene@kernel.org, krzk@kernel.org, patrik.r.jakobsson@gmail.com,
- jani.nikula@linux.intel.com, joonas.lahtinen@linux.intel.com,
- rodrigo.vivi@intel.com, chunkuang.hu@kernel.org, p.zabel@pengutronix.de,
- matthias.bgg@gmail.com, robdclark@gmail.com, sean@poorly.run,
- bskeggs@redhat.com, tomi.valkeinen@ti.com, eric@anholt.net,
- hjc@rock-chips.com, heiko@sntech.de, thierry.reding@gmail.com,
- jonathanh@nvidia.com, rodrigosiqueiramelo@gmail.com,
- hamohammed.sa@gmail.com, oleksandr_andrushchenko@epam.com,
- hyun.kwon@xilinx.com, laurent.pinchart@ideasonboard.com,
- michal.simek@xilinx.com, sumit.semwal@linaro.org, evan.quan@amd.com,
- Hawking.Zhang@amd.com, tianci.yin@amd.com, marek.olsak@amd.com,
- hdegoede@redhat.com, andrey.grodzovsky@amd.com, Felix.Kuehling@amd.com,
- xinhui.pan@amd.com, aaron.liu@amd.com, nirmoy.das@amd.com,
- chris@chris-wilson.co.uk, matthew.auld@intel.com,
- abdiel.janulgue@linux.intel.com, tvrtko.ursulin@linux.intel.com,
- andi.shyti@intel.com, sam@ravnborg.org, miaoqinglang@huawei.com,
- emil.velikov@collabora.com
-References: <20200813083644.31711-1-tzimmermann@suse.de>
- <20200813083644.31711-13-tzimmermann@suse.de>
- <fb070238-b6ca-8e31-e559-51eda489915e@amd.com>
- <5372b2ef-b7cf-f4e9-9199-6dee5bf6696f@suse.de>
-From: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
-Message-ID: <f6792a90-6dfb-5806-47b2-3208a85ec79b@amd.com>
-Date: Thu, 13 Aug 2020 12:47:04 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
-In-Reply-To: <5372b2ef-b7cf-f4e9-9199-6dee5bf6696f@suse.de>
-Content-Language: en-US
-X-ClientProxiedBy: AM4PR0101CA0067.eurprd01.prod.exchangelabs.com
- (2603:10a6:200:41::35) To MN2PR12MB3775.namprd12.prod.outlook.com
- (2603:10b6:208:159::19)
-MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [IPv6:2a02:908:1252:fb60:be8a:bd56:1f94:86e7]
- (2a02:908:1252:fb60:be8a:bd56:1f94:86e7) by
- AM4PR0101CA0067.eurprd01.prod.exchangelabs.com (2603:10a6:200:41::35) with
+ bh=fc8o5Gg9pCw3D3wzThNao2OARb2LAoDAO0TM8iReMrs=;
+ b=w0RBY+eABwbLn3WzOKHTQ+/6O47gVx9rhalSLNXWETvTcqRI0v/DAlgzUBuGpVyIziCE00oFTPjIM/iudEjyjQVk+XvLxQ8tI2UJ5bJ0CSCE5TLL7VWkb4nKcKqCVaUImcwC5/+COKOhReKDCguIyo1dXrlnKyPnLBzbzwEGVBF74jfS8ALEQu9QqmcwTjtmInyu8pDWb/LtEDVmpxcJlsOJI60844+BquPe/P2FPh9BUJGiy1dA6ylKrn30TvBeZ+1hIcjNPxuHT4KWjo5Nk4+ACUgIdU5r3kpetdSHTZvtESHa48wY8dYQLaaop8HgjQTTD4jLAVU3rXpLMWUvLg==
+Received: from AM7PR03MB6325.eurprd03.prod.outlook.com (2603:10a6:20b:13c::18)
+ by AM6PR03MB4294.eurprd03.prod.outlook.com (2603:10a6:20b:4::29) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3283.15 via Frontend
- Transport; Thu, 13 Aug 2020 10:47:08 +0000
-X-Originating-IP: [2a02:908:1252:fb60:be8a:bd56:1f94:86e7]
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-HT: Tenant
-X-MS-Office365-Filtering-Correlation-Id: ab994f1c-ee35-497a-985d-08d83f764080
-X-MS-TrafficTypeDiagnostic: MN2PR12MB3999:
-X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: <MN2PR12MB399990A8E65661C03D1DA2FB83430@MN2PR12MB3999.namprd12.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:2276;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: huQnBvIEPPPlt5fmax/wAQd/SeYGnhqX13yrHJLiFk8oUlakhZe8r0BQKN4W96V2DdBw4LE2bTjkTGxojJRyIMsw+W6aXafEZyjBZNXU33xX9ERj022oRKls3pfgb0YAbm1c49/ZQ0YlOWB8WjiSWaFGjX7ycnH4P9mmMqgAmhTl3PiYkA3k0K9afZBJTtkuyHqFIucUAc4Ik2c4pxobGpvHIkvv+pam2jnJGHF2eN5lmmptzNgqnUiPvzqHFbCA7zR7so5ucIt+vIwOvr/b2eNoTPHtuV3BTF8v1g0NtwwwO1j7C+wdo9IfThB8cfQHCDsp0sK1B54lvCFLLEXXD7ANUkwpaZMiAMNtfOMIvp7tn6cWfxcRz2amMKj4bzQv8TQbFCXsOnq3xrwyWMuNbw==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:MN2PR12MB3775.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(4636009)(366004)(4326008)(186003)(66574015)(8936002)(6486002)(31696002)(2616005)(83380400001)(7406005)(7366002)(2906002)(6666004)(66946007)(66476007)(31686004)(498600001)(52116002)(36756003)(16526019)(5660300002)(8676002)(1191002)(66556008)(7416002)(86362001)(921003)(43740500002);
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3283.18; Thu, 13 Aug
+ 2020 11:19:44 +0000
+Received: from AM7PR03MB6325.eurprd03.prod.outlook.com
+ ([fe80::1c2:462c:58b8:7ee9]) by AM7PR03MB6325.eurprd03.prod.outlook.com
+ ([fe80::1c2:462c:58b8:7ee9%7]) with mapi id 15.20.3283.018; Thu, 13 Aug 2020
+ 11:19:44 +0000
+From: Oleksandr Andrushchenko <Oleksandr_Andrushchenko@epam.com>
+To: Thomas Zimmermann <tzimmermann@suse.de>, "alexander.deucher@amd.com"
+ <alexander.deucher@amd.com>, "christian.koenig@amd.com"
+ <christian.koenig@amd.com>, "airlied@linux.ie" <airlied@linux.ie>,
+ "daniel@ffwll.ch" <daniel@ffwll.ch>, "linux@armlinux.org.uk"
+ <linux@armlinux.org.uk>, "maarten.lankhorst@linux.intel.com"
+ <maarten.lankhorst@linux.intel.com>, "mripard@kernel.org"
+ <mripard@kernel.org>, "l.stach@pengutronix.de" <l.stach@pengutronix.de>,
+ "christian.gmeiner@gmail.com" <christian.gmeiner@gmail.com>,
+ "inki.dae@samsung.com" <inki.dae@samsung.com>, "jy0922.shim@samsung.com"
+ <jy0922.shim@samsung.com>,
+ "sw0312.kim@samsung.com" <sw0312.kim@samsung.com>,
+ "kyungmin.park@samsung.com" <kyungmin.park@samsung.com>, "kgene@kernel.org"
+ <kgene@kernel.org>, "krzk@kernel.org" <krzk@kernel.org>,
+ "patrik.r.jakobsson@gmail.com" <patrik.r.jakobsson@gmail.com>,
+ "jani.nikula@linux.intel.com" <jani.nikula@linux.intel.com>,
+ "joonas.lahtinen@linux.intel.com" <joonas.lahtinen@linux.intel.com>,
+ "rodrigo.vivi@intel.com" <rodrigo.vivi@intel.com>,
+ "chunkuang.hu@kernel.org" <chunkuang.hu@kernel.org>,
+ "p.zabel@pengutronix.de" <p.zabel@pengutronix.de>,
+ "matthias.bgg@gmail.com" <matthias.bgg@gmail.com>, "robdclark@gmail.com"
+ <robdclark@gmail.com>, "sean@poorly.run" <sean@poorly.run>,
+ "bskeggs@redhat.com" <bskeggs@redhat.com>, "tomi.valkeinen@ti.com"
+ <tomi.valkeinen@ti.com>, "eric@anholt.net" <eric@anholt.net>,
+ "hjc@rock-chips.com" <hjc@rock-chips.com>, "heiko@sntech.de"
+ <heiko@sntech.de>, "thierry.reding@gmail.com" <thierry.reding@gmail.com>,
+ "jonathanh@nvidia.com" <jonathanh@nvidia.com>,
+ "rodrigosiqueiramelo@gmail.com" <rodrigosiqueiramelo@gmail.com>,
+ "hamohammed.sa@gmail.com" <hamohammed.sa@gmail.com>, "hyun.kwon@xilinx.com"
+ <hyun.kwon@xilinx.com>, "laurent.pinchart@ideasonboard.com"
+ <laurent.pinchart@ideasonboard.com>, "michal.simek@xilinx.com"
+ <michal.simek@xilinx.com>, "sumit.semwal@linaro.org"
+ <sumit.semwal@linaro.org>, "evan.quan@amd.com" <evan.quan@amd.com>,
+ "Hawking.Zhang@amd.com" <Hawking.Zhang@amd.com>, "tianci.yin@amd.com"
+ <tianci.yin@amd.com>, "marek.olsak@amd.com" <marek.olsak@amd.com>,
+ "hdegoede@redhat.com" <hdegoede@redhat.com>, "andrey.grodzovsky@amd.com"
+ <andrey.grodzovsky@amd.com>, "Felix.Kuehling@amd.com"
+ <Felix.Kuehling@amd.com>, "xinhui.pan@amd.com" <xinhui.pan@amd.com>,
+ "aaron.liu@amd.com" <aaron.liu@amd.com>, "nirmoy.das@amd.com"
+ <nirmoy.das@amd.com>,
+ "chris@chris-wilson.co.uk" <chris@chris-wilson.co.uk>,
+ "matthew.auld@intel.com" <matthew.auld@intel.com>,
+ "abdiel.janulgue@linux.intel.com" <abdiel.janulgue@linux.intel.com>,
+ "tvrtko.ursulin@linux.intel.com" <tvrtko.ursulin@linux.intel.com>,
+ "andi.shyti@intel.com" <andi.shyti@intel.com>, "sam@ravnborg.org"
+ <sam@ravnborg.org>, "miaoqinglang@huawei.com" <miaoqinglang@huawei.com>,
+ "emil.velikov@collabora.com" <emil.velikov@collabora.com>
+Thread-Topic: [PATCH 18/20] drm/xen: Introduce GEM object functions
+Thread-Index: AQHWcUzwRlAvqlodBUmjrM9igZrPiqk15K+A
+Date: Thu, 13 Aug 2020 11:19:44 +0000
+Message-ID: <1fe5f918-2445-d2e6-a501-881e70929404@epam.com>
+References: <20200813083644.31711-1-tzimmermann@suse.de>
+ <20200813083644.31711-19-tzimmermann@suse.de>
+In-Reply-To: <20200813083644.31711-19-tzimmermann@suse.de>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: suse.de; dkim=none (message not signed)
+ header.d=none;suse.de; dmarc=none action=none header.from=epam.com;
+x-originating-ip: [185.199.97.5]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: 98c2df7f-79af-4148-ee6b-08d83f7ac817
+x-ms-traffictypediagnostic: AM6PR03MB4294:
+x-microsoft-antispam-prvs: <AM6PR03MB42948483A47DA7E7FF20A061E7430@AM6PR03MB4294.eurprd03.prod.outlook.com>
+x-ms-oob-tlc-oobclassifiers: OLM:2201;
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: 9OuhwFxQyiR1r6WZCNoxvlXl+F4BeIHs0Lj7XIYCOMfjlBUvc5wx2AH3cjVee20NCw2z2cPzZ66ecnTR62GJzmNWY8h8LSmhhC/EsaiBe0DBD2OfrRcKJAT4hamZv2xqu3XMDY6/N716vxoQ8fp7BqbbQbIDCLa6KvKOARS0o2KWYxXwggf2rh3Z4TMmiBtUgvIk8eryhP305FHCtCAkHlKgq8qasIbIPBMwIY3hW23rQo+9HVzXRQQYsnqfTqyMMVE2X6wNsxG5m6ioY6ZblXGROvXJZlZX1Zm5fQD2yiFyx/T9McHKZt6C1RvPJcolYPLatWRukLV4k9PA/9VbSZwEpt3OcTTDIS93rscyCcpYbHBB+xFV1WyOX/f4hJur
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AM7PR03MB6325.eurprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(4636009)(39860400002)(136003)(366004)(346002)(376002)(396003)(4326008)(76116006)(7406005)(316002)(7416002)(6512007)(54906003)(7366002)(66946007)(110136005)(478600001)(6506007)(53546011)(64756008)(86362001)(66476007)(2906002)(8676002)(66446008)(66556008)(71200400001)(8936002)(6486002)(31696002)(26005)(5660300002)(1191002)(186003)(31686004)(83380400001)(36756003)(2616005)(921003);
  DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData: C7QVq5xWUUnSFRVFtIbelIBtkBVKbqpntqzuFq5dEbyvSaYRcg+GBGhHRsxIgue0QMNrl1uJV5CcmD837zdQRab3IRuDubWfQ3/QZznZzLXxacrP2lTu1hU2s8t32abKfhjESUMVwbDcATpwOmyZ7spUXO10HzPAkFGZpsHQCUYURYRAAG/pIvpgdBqqfSsTXKh/wFEzjQTILBopcbQo2GqQzAUVFA2UoDSGiLOkJ0P4J8BxAbUyedvqDAv0cJbY8u2O722MLR+P79HBRVJolucyqafW4MdALOmuYxqzwCUmqvYCVpdYgh9HRJpelIGWRhlFMfgO/zNGou/9LLNYUySHyj4d2NNPR3ZUxpOLquMetAVZI8mj/xHjwlbotMVAYapLpBAt95kXTgIoXpnfIKZTxiW2UWKcNe7WNWr91LXXho1J04nmKoZOJEpL52zLtEjuMVG6zs9TJES8NTq4puJHHfubXqYDXguKTx2pRK5OuH0USeg1px5onCQkwz+s+TD6wL7nH26aiYNDPMoAmXuKiml9cBzT1PURepTBxTCKpfBNF1PDGYdocBnZwZhBPhqm/52ZuxfsTWK+GE5+CdVzWiEDC1Qa4nCleMfeeN1RuQXAaNo12cbp9efAYUTl+4VayxoqNSN1MxEdeir839f9yqTbKzjxocKbYUl9FFeJRpJIpO7fpFymBG7kaVQO7CzyLshxgK5dZh94rEZ1OQ==
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: ab994f1c-ee35-497a-985d-08d83f764080
-X-MS-Exchange-CrossTenant-AuthSource: MN2PR12MB3775.namprd12.prod.outlook.com
+x-ms-exchange-antispam-messagedata: RE/ytRISihDqVWLNAbZa6AMa6DykADf3L3prJiKeO9tLqyEL6pS7z6d7YS/5xwHDeDnKCuUMAUmNfHTLmpHstKw4/sCkLIAw55CLJasWUweCRGjRetUQX23J26TgBD/3q2hA+QG2a44++Ls8adHHKalvWZWDn281MI14G54ooFjzYTb1CoYbryKGXOxahysDtcfCSiaMSrC6WABHJkkf6gYfccHAzJMIiaMW9sYyJRML3v9o4BkX9/DtM5QFLa2ZCOQeqKWhPY9jcLPYo8K/HC7vabBlWXoXJmrw4avg7Gdr9wagIg3ESoB/dKSGWQOT3cM+HB5sLxxHaiuv16rgMNbqMTNhYQvuGVWu6Yg+sJOvNxDbEStBRe/tuvuBnI7ozGt+r2+JNK5UywIbuXtD12UAOe+aM5uJxsOoXGefBlaXFbgRH9WdPmrjtIS2HphZvjKFIPRlY9RScte8D1bScGUcLYqflfIw+LQ0S8AGQ9LoOQM8dKyWpHwc7GO+AbyLxT1ZmLLBeJ+I5PMqJc0k95MxFi4ueOcymKFCKNtfckT5jweqr2mtlrsTaEmc5dzsPQVDY42C+4nZspiabPTq7k3I0wzwW9xn6wWhbuLhoh+xI97P9riZFZygqwzUUj254yzRx2ZF3X1qCi5s/u/zlA==
+x-ms-exchange-transport-forked: True
+Content-ID: <73B83228210C8B4092A3A2E420A1C72C@eurprd03.prod.outlook.com>
+MIME-Version: 1.0
+X-OriginatorOrg: epam.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Aug 2020 10:47:19.7753 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: s63P4Wxp/CKackyV6vflQiOjfqlpzMa8Br1qIsa/tN6WAbx9naWAPaCCXvsETFkD
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB3999
+X-MS-Exchange-CrossTenant-AuthSource: AM7PR03MB6325.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 98c2df7f-79af-4148-ee6b-08d83f7ac817
+X-MS-Exchange-CrossTenant-originalarrivaltime: 13 Aug 2020 11:19:44.5649 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: Uf3Ju+H72OtC//NmTqgcZeFyfKALyi2YcwCTi756Jif6gg6QmkKzaeMSl8qoWK868gGdtmA2N9qB0vAvmyjlq1MS3Eh0vEaiNq869roKrHvQDdr2jkXV8UZTYjjxWvux
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM6PR03MB4294
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235, 18.0.687
+ definitions=2020-08-13_10:2020-08-13,
+ 2020-08-13 signatures=0
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ lowpriorityscore=0
+ malwarescore=0 phishscore=0 clxscore=1011 bulkscore=0 impostorscore=0
+ suspectscore=0 spamscore=0 mlxscore=0 mlxlogscore=999 priorityscore=1501
+ adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2006250000 definitions=main-2008130085
 X-Mailman-Approved-At: Thu, 13 Aug 2020 14:48:08 +0000
-Subject: Re: [Nouveau] [PATCH 12/20] drm/radeon: Introduce GEM object
- functions
+Subject: Re: [Nouveau] [PATCH 18/20] drm/xen: Introduce GEM object functions
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -124,147 +155,135 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: linux-samsung-soc@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- intel-gfx@lists.freedesktop.org, etnaviv@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, linux-rockchip@lists.infradead.org,
- linux-mediatek@lists.infradead.org, amd-gfx@lists.freedesktop.org,
- nouveau@lists.freedesktop.org, linux-tegra@vger.kernel.org,
- xen-devel@lists.xenproject.org, freedreno@lists.freedesktop.org,
- linux-arm-kernel@lists.infradead.org
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Cc: "linux-samsung-soc@vger.kernel.org" <linux-samsung-soc@vger.kernel.org>,
+ "linux-arm-msm@vger.kernel.org" <linux-arm-msm@vger.kernel.org>,
+ "intel-gfx@lists.freedesktop.org" <intel-gfx@lists.freedesktop.org>,
+ "etnaviv@lists.freedesktop.org" <etnaviv@lists.freedesktop.org>,
+ "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
+ "linux-rockchip@lists.infradead.org" <linux-rockchip@lists.infradead.org>,
+ "linux-mediatek@lists.infradead.org" <linux-mediatek@lists.infradead.org>,
+ "amd-gfx@lists.freedesktop.org" <amd-gfx@lists.freedesktop.org>,
+ "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
+ "linux-tegra@vger.kernel.org" <linux-tegra@vger.kernel.org>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ "freedreno@lists.freedesktop.org" <freedreno@lists.freedesktop.org>,
+ "linux-arm-kernel@lists.infradead.org" <linux-arm-kernel@lists.infradead.org>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-QW0gMTMuMDguMjAgdW0gMTI6NDEgc2NocmllYiBUaG9tYXMgWmltbWVybWFubjoKPiBIaQo+Cj4g
-QW0gMTMuMDguMjAgdW0gMTI6MjQgc2NocmllYiBDaHJpc3RpYW4gS8O2bmlnOgo+PiBBbSAxMy4w
-OC4yMCB1bSAxMDozNiBzY2hyaWViIFRob21hcyBaaW1tZXJtYW5uOgo+Pj4gR0VNIG9iamVjdCBm
-dW5jdGlvbnMgZGVwcmVjYXRlIHNldmVyYWwgc2ltaWxhciBjYWxsYmFjayBpbnRlcmZhY2VzIGlu
-Cj4+PiBzdHJ1Y3QgZHJtX2RyaXZlci4gVGhpcyBwYXRjaCByZXBsYWNlcyB0aGUgcGVyLWRyaXZl
-ciBjYWxsYmFja3Mgd2l0aAo+Pj4gcGVyLWluc3RhbmNlIGNhbGxiYWNrcyBpbiByYWRlb24uCj4+
-Pgo+Pj4gU2lnbmVkLW9mZi1ieTogVGhvbWFzIFppbW1lcm1hbm4gPHR6aW1tZXJtYW5uQHN1c2Uu
-ZGU+Cj4+PiAtLS0KPj4+ICDCoCBkcml2ZXJzL2dwdS9kcm0vcmFkZW9uL3JhZGVvbl9kcnYuY8Kg
-wqDCoCB8IDIzICstLS0tLS0tLS0tLS0tLS0tLS0tLS0tCj4+PiAgwqAgZHJpdmVycy9ncHUvZHJt
-L3JhZGVvbi9yYWRlb25fb2JqZWN0LmMgfCAyNiArKysrKysrKysrKysrKysrKysrKysrKysrKwo+
-Pj4gIMKgIDIgZmlsZXMgY2hhbmdlZCwgMjcgaW5zZXJ0aW9ucygrKSwgMjIgZGVsZXRpb25zKC0p
-Cj4+Pgo+Pj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9yYWRlb24vcmFkZW9uX2Rydi5j
-Cj4+PiBiL2RyaXZlcnMvZ3B1L2RybS9yYWRlb24vcmFkZW9uX2Rydi5jCj4+PiBpbmRleCA0Y2Qz
-MDYxM2ZhMWQuLjY1MDYxYzk0OWFlZSAxMDA2NDQKPj4+IC0tLSBhL2RyaXZlcnMvZ3B1L2RybS9y
-YWRlb24vcmFkZW9uX2Rydi5jCj4+PiArKysgYi9kcml2ZXJzL2dwdS9kcm0vcmFkZW9uL3JhZGVv
-bl9kcnYuYwo+Pj4gQEAgLTEyNCwxMyArMTI0LDYgQEAgdm9pZCByYWRlb25fZHJpdmVyX2lycV9w
-cmVpbnN0YWxsX2ttcyhzdHJ1Y3QKPj4+IGRybV9kZXZpY2UgKmRldik7Cj4+PiAgwqAgaW50IHJh
-ZGVvbl9kcml2ZXJfaXJxX3Bvc3RpbnN0YWxsX2ttcyhzdHJ1Y3QgZHJtX2RldmljZSAqZGV2KTsK
-Pj4+ICDCoCB2b2lkIHJhZGVvbl9kcml2ZXJfaXJxX3VuaW5zdGFsbF9rbXMoc3RydWN0IGRybV9k
-ZXZpY2UgKmRldik7Cj4+PiAgwqAgaXJxcmV0dXJuX3QgcmFkZW9uX2RyaXZlcl9pcnFfaGFuZGxl
-cl9rbXMoaW50IGlycSwgdm9pZCAqYXJnKTsKPj4+IC12b2lkIHJhZGVvbl9nZW1fb2JqZWN0X2Zy
-ZWUoc3RydWN0IGRybV9nZW1fb2JqZWN0ICpvYmopOwo+Pj4gLWludCByYWRlb25fZ2VtX29iamVj
-dF9vcGVuKHN0cnVjdCBkcm1fZ2VtX29iamVjdCAqb2JqLAo+Pj4gLcKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoCBzdHJ1Y3QgZHJtX2ZpbGUgKmZpbGVfcHJpdik7Cj4+PiAtdm9pZCByYWRl
-b25fZ2VtX29iamVjdF9jbG9zZShzdHJ1Y3QgZHJtX2dlbV9vYmplY3QgKm9iaiwKPj4+IC3CoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgc3RydWN0IGRybV9maWxlICpmaWxlX3ByaXYpOwo+
-Pj4gLXN0cnVjdCBkbWFfYnVmICpyYWRlb25fZ2VtX3ByaW1lX2V4cG9ydChzdHJ1Y3QgZHJtX2dl
-bV9vYmplY3QgKmdvYmosCj4+PiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqAgaW50IGZsYWdzKTsKPj4+ICDCoCBleHRlcm4gaW50IHJhZGVvbl9nZXRfY3J0Y19zY2Fub3V0
-cG9zKHN0cnVjdCBkcm1fZGV2aWNlICpkZXYsCj4+PiB1bnNpZ25lZCBpbnQgY3J0YywKPj4+ICDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHVuc2lnbmVkIGlu
-dCBmbGFncywgaW50ICp2cG9zLCBpbnQgKmhwb3MsCj4+PiAgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBrdGltZV90ICpzdGltZSwga3RpbWVfdCAqZXRpbWUs
-Cj4+PiBAQCAtMTQ1LDE0ICsxMzgsOSBAQCBpbnQgcmFkZW9uX21vZGVfZHVtYl9tbWFwKHN0cnVj
-dCBkcm1fZmlsZSAqZmlscCwKPj4+ICDCoCBpbnQgcmFkZW9uX21vZGVfZHVtYl9jcmVhdGUoc3Ry
-dWN0IGRybV9maWxlICpmaWxlX3ByaXYsCj4+PiAgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoCBzdHJ1Y3QgZHJtX2RldmljZSAqZGV2LAo+Pj4gIMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqAgc3RydWN0IGRybV9tb2RlX2NyZWF0ZV9kdW1iICphcmdzKTsKPj4+IC1z
-dHJ1Y3Qgc2dfdGFibGUgKnJhZGVvbl9nZW1fcHJpbWVfZ2V0X3NnX3RhYmxlKHN0cnVjdCBkcm1f
-Z2VtX29iamVjdAo+Pj4gKm9iaik7Cj4+PiAgwqAgc3RydWN0IGRybV9nZW1fb2JqZWN0ICpyYWRl
-b25fZ2VtX3ByaW1lX2ltcG9ydF9zZ190YWJsZShzdHJ1Y3QKPj4+IGRybV9kZXZpY2UgKmRldiwK
-Pj4+ICDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgIHN0cnVjdCBkbWFfYnVmX2F0dGFjaG1lbnQgKiwKPj4+ICDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHN0cnVjdCBzZ190YWJs
-ZSAqc2cpOwo+Pj4gLWludCByYWRlb25fZ2VtX3ByaW1lX3BpbihzdHJ1Y3QgZHJtX2dlbV9vYmpl
-Y3QgKm9iaik7Cj4+PiAtdm9pZCByYWRlb25fZ2VtX3ByaW1lX3VucGluKHN0cnVjdCBkcm1fZ2Vt
-X29iamVjdCAqb2JqKTsKPj4+IC12b2lkICpyYWRlb25fZ2VtX3ByaW1lX3ZtYXAoc3RydWN0IGRy
-bV9nZW1fb2JqZWN0ICpvYmopOwo+Pj4gLXZvaWQgcmFkZW9uX2dlbV9wcmltZV92dW5tYXAoc3Ry
-dWN0IGRybV9nZW1fb2JqZWN0ICpvYmosIHZvaWQgKnZhZGRyKTsKPj4+ICDCoCDCoCAvKiBhdHB4
-IGhhbmRsZXIgKi8KPj4+ICDCoCAjaWYgZGVmaW5lZChDT05GSUdfVkdBX1NXSVRDSEVST08pCj4+
-PiBAQCAtNTUwLDcgKzUzOCw3IEBAIGxvbmcgcmFkZW9uX2RybV9pb2N0bChzdHJ1Y3QgZmlsZSAq
-ZmlscCwKPj4+ICDCoMKgwqDCoMKgIH0KPj4+ICDCoCDCoMKgwqDCoMKgIHJldCA9IGRybV9pb2N0
-bChmaWxwLCBjbWQsIGFyZyk7Cj4+PiAtCj4+PiArCj4+PiAgwqDCoMKgwqDCoCBwbV9ydW50aW1l
-X21hcmtfbGFzdF9idXN5KGRldi0+ZGV2KTsKPj4+ICDCoMKgwqDCoMKgIHBtX3J1bnRpbWVfcHV0
-X2F1dG9zdXNwZW5kKGRldi0+ZGV2KTsKPj4+ICDCoMKgwqDCoMKgIHJldHVybiByZXQ7Cj4+PiBA
-QCAtNjA5LDIyICs1OTcsMTMgQEAgc3RhdGljIHN0cnVjdCBkcm1fZHJpdmVyIGttc19kcml2ZXIg
-PSB7Cj4+PiAgwqDCoMKgwqDCoCAuaXJxX3VuaW5zdGFsbCA9IHJhZGVvbl9kcml2ZXJfaXJxX3Vu
-aW5zdGFsbF9rbXMsCj4+PiAgwqDCoMKgwqDCoCAuaXJxX2hhbmRsZXIgPSByYWRlb25fZHJpdmVy
-X2lycV9oYW5kbGVyX2ttcywKPj4+ICDCoMKgwqDCoMKgIC5pb2N0bHMgPSByYWRlb25faW9jdGxz
-X2ttcywKPj4+IC3CoMKgwqAgLmdlbV9mcmVlX29iamVjdF91bmxvY2tlZCA9IHJhZGVvbl9nZW1f
-b2JqZWN0X2ZyZWUsCj4+PiAtwqDCoMKgIC5nZW1fb3Blbl9vYmplY3QgPSByYWRlb25fZ2VtX29i
-amVjdF9vcGVuLAo+Pj4gLcKgwqDCoCAuZ2VtX2Nsb3NlX29iamVjdCA9IHJhZGVvbl9nZW1fb2Jq
-ZWN0X2Nsb3NlLAo+Pj4gIMKgwqDCoMKgwqAgLmR1bWJfY3JlYXRlID0gcmFkZW9uX21vZGVfZHVt
-Yl9jcmVhdGUsCj4+PiAgwqDCoMKgwqDCoCAuZHVtYl9tYXBfb2Zmc2V0ID0gcmFkZW9uX21vZGVf
-ZHVtYl9tbWFwLAo+Pj4gIMKgwqDCoMKgwqAgLmZvcHMgPSAmcmFkZW9uX2RyaXZlcl9rbXNfZm9w
-cywKPj4+ICDCoCDCoMKgwqDCoMKgIC5wcmltZV9oYW5kbGVfdG9fZmQgPSBkcm1fZ2VtX3ByaW1l
-X2hhbmRsZV90b19mZCwKPj4+ICDCoMKgwqDCoMKgIC5wcmltZV9mZF90b19oYW5kbGUgPSBkcm1f
-Z2VtX3ByaW1lX2ZkX3RvX2hhbmRsZSwKPj4+IC3CoMKgwqAgLmdlbV9wcmltZV9leHBvcnQgPSBy
-YWRlb25fZ2VtX3ByaW1lX2V4cG9ydCwKPj4+IC3CoMKgwqAgLmdlbV9wcmltZV9waW4gPSByYWRl
-b25fZ2VtX3ByaW1lX3BpbiwKPj4+IC3CoMKgwqAgLmdlbV9wcmltZV91bnBpbiA9IHJhZGVvbl9n
-ZW1fcHJpbWVfdW5waW4sCj4+PiAtwqDCoMKgIC5nZW1fcHJpbWVfZ2V0X3NnX3RhYmxlID0gcmFk
-ZW9uX2dlbV9wcmltZV9nZXRfc2dfdGFibGUsCj4+PiAgwqDCoMKgwqDCoCAuZ2VtX3ByaW1lX2lt
-cG9ydF9zZ190YWJsZSA9IHJhZGVvbl9nZW1fcHJpbWVfaW1wb3J0X3NnX3RhYmxlLAo+Pj4gLcKg
-wqDCoCAuZ2VtX3ByaW1lX3ZtYXAgPSByYWRlb25fZ2VtX3ByaW1lX3ZtYXAsCj4+PiAtwqDCoMKg
-IC5nZW1fcHJpbWVfdnVubWFwID0gcmFkZW9uX2dlbV9wcmltZV92dW5tYXAsCj4+PiAgwqAgwqDC
-oMKgwqDCoCAubmFtZSA9IERSSVZFUl9OQU1FLAo+Pj4gIMKgwqDCoMKgwqAgLmRlc2MgPSBEUklW
-RVJfREVTQywKPj4+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0vcmFkZW9uL3JhZGVvbl9v
-YmplY3QuYwo+Pj4gYi9kcml2ZXJzL2dwdS9kcm0vcmFkZW9uL3JhZGVvbl9vYmplY3QuYwo+Pj4g
-aW5kZXggYmI3NTgyYWZkODAzLi44ODIzOTBlMTVkZmUgMTAwNjQ0Cj4+PiAtLS0gYS9kcml2ZXJz
-L2dwdS9kcm0vcmFkZW9uL3JhZGVvbl9vYmplY3QuYwo+Pj4gKysrIGIvZHJpdmVycy9ncHUvZHJt
-L3JhZGVvbi9yYWRlb25fb2JqZWN0LmMKPj4+IEBAIC00NSw2ICs0NSwxOSBAQCBpbnQgcmFkZW9u
-X3R0bV9pbml0KHN0cnVjdCByYWRlb25fZGV2aWNlICpyZGV2KTsKPj4+ICDCoCB2b2lkIHJhZGVv
-bl90dG1fZmluaShzdHJ1Y3QgcmFkZW9uX2RldmljZSAqcmRldik7Cj4+PiAgwqAgc3RhdGljIHZv
-aWQgcmFkZW9uX2JvX2NsZWFyX3N1cmZhY2VfcmVnKHN0cnVjdCByYWRlb25fYm8gKmJvKTsKPj4+
-ICDCoCArdm9pZCByYWRlb25fZ2VtX29iamVjdF9mcmVlKHN0cnVjdCBkcm1fZ2VtX29iamVjdCAq
-b2JqKTsKPj4+ICtpbnQgcmFkZW9uX2dlbV9vYmplY3Rfb3BlbihzdHJ1Y3QgZHJtX2dlbV9vYmpl
-Y3QgKm9iaiwKPj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgc3RydWN0IGRybV9m
-aWxlICpmaWxlX3ByaXYpOwo+Pj4gK3ZvaWQgcmFkZW9uX2dlbV9vYmplY3RfY2xvc2Uoc3RydWN0
-IGRybV9nZW1fb2JqZWN0ICpvYmosCj4+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-IHN0cnVjdCBkcm1fZmlsZSAqZmlsZV9wcml2KTsKPj4+ICtzdHJ1Y3QgZG1hX2J1ZiAqcmFkZW9u
-X2dlbV9wcmltZV9leHBvcnQoc3RydWN0IGRybV9nZW1fb2JqZWN0ICpnb2JqLAo+Pj4gK8KgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGludCBmbGFncyk7Cj4+PiArc3RydWN0
-IHNnX3RhYmxlICpyYWRlb25fZ2VtX3ByaW1lX2dldF9zZ190YWJsZShzdHJ1Y3QgZHJtX2dlbV9v
-YmplY3QKPj4+ICpvYmopOwo+Pj4gK2ludCByYWRlb25fZ2VtX3ByaW1lX3BpbihzdHJ1Y3QgZHJt
-X2dlbV9vYmplY3QgKm9iaik7Cj4+PiArdm9pZCByYWRlb25fZ2VtX3ByaW1lX3VucGluKHN0cnVj
-dCBkcm1fZ2VtX29iamVjdCAqb2JqKTsKPj4+ICt2b2lkICpyYWRlb25fZ2VtX3ByaW1lX3ZtYXAo
-c3RydWN0IGRybV9nZW1fb2JqZWN0ICpvYmopOwo+Pj4gK3ZvaWQgcmFkZW9uX2dlbV9wcmltZV92
-dW5tYXAoc3RydWN0IGRybV9nZW1fb2JqZWN0ICpvYmosIHZvaWQgKnZhZGRyKTsKPj4+ICsKPj4+
-ICDCoCAvKgo+Pj4gIMKgwqAgKiBUbyBleGNsdWRlIG11dHVhbCBCTyBhY2Nlc3Mgd2UgcmVseSBv
-biBib19yZXNlcnZlIGV4Y2x1c2lvbiwgYXMgYWxsCj4+PiAgwqDCoCAqIGZ1bmN0aW9uIGFyZSBj
-YWxsaW5nIGl0Lgo+Pj4gQEAgLTE4MCw2ICsxOTMsMTggQEAgdm9pZCByYWRlb25fdHRtX3BsYWNl
-bWVudF9mcm9tX2RvbWFpbihzdHJ1Y3QKPj4+IHJhZGVvbl9ibyAqcmJvLCB1MzIgZG9tYWluKQo+
-Pj4gIMKgwqDCoMKgwqAgfQo+Pj4gIMKgIH0KPj4+ICDCoCArc3RhdGljIGNvbnN0IHN0cnVjdCBk
-cm1fZ2VtX29iamVjdF9mdW5jcyByYWRlb25fZ2VtX29iamVjdF9mdW5jcyA9IHsKPj4+ICvCoMKg
-wqAgLmZyZWUgPSByYWRlb25fZ2VtX29iamVjdF9mcmVlLAo+Pj4gK8KgwqDCoCAub3BlbiA9IHJh
-ZGVvbl9nZW1fb2JqZWN0X29wZW4sCj4+PiArwqDCoMKgIC5jbG9zZSA9IHJhZGVvbl9nZW1fb2Jq
-ZWN0X2Nsb3NlLAo+Pj4gK8KgwqDCoCAuZXhwb3J0ID0gcmFkZW9uX2dlbV9wcmltZV9leHBvcnQs
-Cj4+PiArwqDCoMKgIC5waW4gPSByYWRlb25fZ2VtX3ByaW1lX3BpbiwKPj4+ICvCoMKgwqAgLnVu
-cGluID0gcmFkZW9uX2dlbV9wcmltZV91bnBpbiwKPj4+ICvCoMKgwqAgLmdldF9zZ190YWJsZSA9
-IHJhZGVvbl9nZW1fcHJpbWVfZ2V0X3NnX3RhYmxlLAo+Pj4gK8KgwqDCoCAudm1hcCA9IHJhZGVv
-bl9nZW1fcHJpbWVfdm1hcCwKPj4+ICvCoMKgwqAgLnZ1bm1hcCA9IHJhZGVvbl9nZW1fcHJpbWVf
-dnVubWFwLAo+Pj4gK307Cj4+PiArCj4+IFNhbWUgY29tbWVudCBhcyBmb3IgYW1kZ3B1LCBwbGVh
-c2UgcHV0IHRoYXQgaW50byByYWRlb25fZ2VtLmMgaW5zdGVhZC4KPiBUaGVyZSdzIG5vIGdvb2Qg
-aGVhZGVyIGZpbGUgdG8gcHV0IHRoZSBkZWNsYXJhdGlvbnMsIHJpZ2h0PyBJJ20gYXNraW5nCj4g
-YmVjYXVzZSBjaGVja3BhdGNoIHdhcm5zIGFib3V0IGRlY2xhcmF0aW9ucyBpbiB0aGUgc291cmNl
-IGZpbGVzLgoKWWVzLCB0aGF0IGlzIGtpbmQgb2YgYSBtZXNzIGJlY2F1c2UgcmFkZW9uIHVzZWQg
-dG8gc3VwcG9ydCBib3RoIEtNUyBhbmQgVU1TLgoKVGhhbmtzIGZvciBjbGVhbmluZyB0aGlzIHVw
-LApDaHJpc3RpYW4uCgo+Cj4gQmVzdCByZWdhcmRzCj4gVGhvbWFzCj4KPj4gQ2hyaXN0aWFuLgo+
-Pgo+Pj4gIMKgIGludCByYWRlb25fYm9fY3JlYXRlKHN0cnVjdCByYWRlb25fZGV2aWNlICpyZGV2
-LAo+Pj4gIMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgdW5zaWduZWQgbG9uZyBzaXplLCBp
-bnQgYnl0ZV9hbGlnbiwgYm9vbCBrZXJuZWwsCj4+PiAgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoCB1MzIgZG9tYWluLCB1MzIgZmxhZ3MsIHN0cnVjdCBzZ190YWJsZSAqc2csCj4+PiBAQCAt
-MjA5LDYgKzIzNCw3IEBAIGludCByYWRlb25fYm9fY3JlYXRlKHN0cnVjdCByYWRlb25fZGV2aWNl
-ICpyZGV2LAo+Pj4gIMKgwqDCoMKgwqAgYm8gPSBremFsbG9jKHNpemVvZihzdHJ1Y3QgcmFkZW9u
-X2JvKSwgR0ZQX0tFUk5FTCk7Cj4+PiAgwqDCoMKgwqDCoCBpZiAoYm8gPT0gTlVMTCkKPj4+ICDC
-oMKgwqDCoMKgwqDCoMKgwqAgcmV0dXJuIC1FTk9NRU07Cj4+PiArwqDCoMKgIGJvLT50Ym8uYmFz
-ZS5mdW5jcyA9ICZyYWRlb25fZ2VtX29iamVjdF9mdW5jczsKPj4+ICDCoMKgwqDCoMKgIGRybV9n
-ZW1fcHJpdmF0ZV9vYmplY3RfaW5pdChyZGV2LT5kZGV2LCAmYm8tPnRiby5iYXNlLCBzaXplKTsK
-Pj4+ICDCoMKgwqDCoMKgIGJvLT5yZGV2ID0gcmRldjsKPj4+ICDCoMKgwqDCoMKgIGJvLT5zdXJm
-YWNlX3JlZyA9IC0xOwoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX18KTm91dmVhdSBtYWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcK
-aHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1Cg==
+Hi,
+
+On 8/13/20 11:36 AM, Thomas Zimmermann wrote:
+> GEM object functions deprecate several similar callback interfaces in
+> struct drm_driver. This patch replaces the per-driver callbacks with
+> per-instance callbacks in xen. The only exception is gem_prime_mmap,
+> which is non-trivial to convert.
+>
+> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+> ---
+>   drivers/gpu/drm/xen/xen_drm_front.c     | 12 +-----------
+>   drivers/gpu/drm/xen/xen_drm_front.h     |  2 ++
+>   drivers/gpu/drm/xen/xen_drm_front_gem.c | 15 +++++++++++++++
+>   3 files changed, 18 insertions(+), 11 deletions(-)
+>
+> diff --git a/drivers/gpu/drm/xen/xen_drm_front.c b/drivers/gpu/drm/xen/xen_drm_front.c
+> index 3e660fb111b3..bd9af1875af1 100644
+> --- a/drivers/gpu/drm/xen/xen_drm_front.c
+> +++ b/drivers/gpu/drm/xen/xen_drm_front.c
+> @@ -433,7 +433,7 @@ static int xen_drm_drv_dumb_create(struct drm_file *filp,
+>   	return ret;
+>   }
+>   
+> -static void xen_drm_drv_free_object_unlocked(struct drm_gem_object *obj)
+> +void xen_drm_drv_free_object_unlocked(struct drm_gem_object *obj)
+
+Can we please have naming consistent and name it as
+
+xen_drm_front_drv_free_object_unlocked or any other name if this seems to be too long,
+
+but starting with xen_drm_front_ as the rest of exported functions?
+
+With this,
+
+Acked-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
+
+Thank you,
+
+Oleksandr
+
+>   {
+>   	struct xen_drm_front_drm_info *drm_info = obj->dev->dev_private;
+>   	int idx;
+> @@ -481,22 +481,12 @@ static const struct file_operations xen_drm_dev_fops = {
+>   	.mmap           = xen_drm_front_gem_mmap,
+>   };
+>   
+> -static const struct vm_operations_struct xen_drm_drv_vm_ops = {
+> -	.open           = drm_gem_vm_open,
+> -	.close          = drm_gem_vm_close,
+> -};
+> -
+>   static struct drm_driver xen_drm_driver = {
+>   	.driver_features           = DRIVER_GEM | DRIVER_MODESET | DRIVER_ATOMIC,
+>   	.release                   = xen_drm_drv_release,
+> -	.gem_vm_ops                = &xen_drm_drv_vm_ops,
+> -	.gem_free_object_unlocked  = xen_drm_drv_free_object_unlocked,
+>   	.prime_handle_to_fd        = drm_gem_prime_handle_to_fd,
+>   	.prime_fd_to_handle        = drm_gem_prime_fd_to_handle,
+>   	.gem_prime_import_sg_table = xen_drm_front_gem_import_sg_table,
+> -	.gem_prime_get_sg_table    = xen_drm_front_gem_get_sg_table,
+> -	.gem_prime_vmap            = xen_drm_front_gem_prime_vmap,
+> -	.gem_prime_vunmap          = xen_drm_front_gem_prime_vunmap,
+>   	.gem_prime_mmap            = xen_drm_front_gem_prime_mmap,
+>   	.dumb_create               = xen_drm_drv_dumb_create,
+>   	.fops                      = &xen_drm_dev_fops,
+> diff --git a/drivers/gpu/drm/xen/xen_drm_front.h b/drivers/gpu/drm/xen/xen_drm_front.h
+> index f92c258350ca..93e60c1db550 100644
+> --- a/drivers/gpu/drm/xen/xen_drm_front.h
+> +++ b/drivers/gpu/drm/xen/xen_drm_front.h
+> @@ -160,4 +160,6 @@ int xen_drm_front_page_flip(struct xen_drm_front_info *front_info,
+>   void xen_drm_front_on_frame_done(struct xen_drm_front_info *front_info,
+>   				 int conn_idx, u64 fb_cookie);
+>   
+> +void xen_drm_drv_free_object_unlocked(struct drm_gem_object *obj);
+> +
+>   #endif /* __XEN_DRM_FRONT_H_ */
+> diff --git a/drivers/gpu/drm/xen/xen_drm_front_gem.c b/drivers/gpu/drm/xen/xen_drm_front_gem.c
+> index f0b85e094111..7b315c08bcfc 100644
+> --- a/drivers/gpu/drm/xen/xen_drm_front_gem.c
+> +++ b/drivers/gpu/drm/xen/xen_drm_front_gem.c
+> @@ -56,6 +56,19 @@ static void gem_free_pages_array(struct xen_gem_object *xen_obj)
+>   	xen_obj->pages = NULL;
+>   }
+>   
+> +static const struct vm_operations_struct xen_drm_drv_vm_ops = {
+> +	.open           = drm_gem_vm_open,
+> +	.close          = drm_gem_vm_close,
+> +};
+> +
+> +static const struct drm_gem_object_funcs xen_drm_front_gem_object_funcs = {
+> +	.free = xen_drm_drv_free_object_unlocked,
+> +	.get_sg_table = xen_drm_front_gem_get_sg_table,
+> +	.vmap = xen_drm_front_gem_prime_vmap,
+> +	.vunmap = xen_drm_front_gem_prime_vunmap,
+> +	.vm_ops = &xen_drm_drv_vm_ops,
+> +};
+> +
+>   static struct xen_gem_object *gem_create_obj(struct drm_device *dev,
+>   					     size_t size)
+>   {
+> @@ -66,6 +79,8 @@ static struct xen_gem_object *gem_create_obj(struct drm_device *dev,
+>   	if (!xen_obj)
+>   		return ERR_PTR(-ENOMEM);
+>   
+> +	xen_obj->base.funcs = &xen_drm_front_gem_object_funcs;
+> +
+>   	ret = drm_gem_object_init(dev, &xen_obj->base, size);
+>   	if (ret < 0) {
+>   		kfree(xen_obj);
+_______________________________________________
+Nouveau mailing list
+Nouveau@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/nouveau
