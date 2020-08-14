@@ -1,44 +1,110 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 34F57244177
-	for <lists+nouveau@lfdr.de>; Fri, 14 Aug 2020 00:48:07 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2E351244541
+	for <lists+nouveau@lfdr.de>; Fri, 14 Aug 2020 09:10:06 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 670296EA94;
-	Thu, 13 Aug 2020 22:48:04 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 412826EB16;
+	Fri, 14 Aug 2020 07:10:04 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-vs1-f65.google.com (mail-vs1-f65.google.com
- [209.85.217.65])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 08A826EA94
- for <nouveau@lists.freedesktop.org>; Thu, 13 Aug 2020 22:48:03 +0000 (UTC)
-Received: by mail-vs1-f65.google.com with SMTP id k25so3749772vsm.11
- for <nouveau@lists.freedesktop.org>; Thu, 13 Aug 2020 15:48:02 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=0ZC58Tt0+bLIgD1ikYwON9al1MdcVqJZUrY0qb4gXvM=;
- b=VnlAMr7kF+SGbENh66xs52FOwSqoC8iFDOWSme+FI/0X/7bbnxhr+WcrVNdIWAkBLL
- 2pUjIAoBBjqe9FZTFGGg+8i8lYmHEuKOSdNBX0+g8lomAIj/c7dyh7AxjPCqMfokq2T+
- SDF/7jyUFwMYgdZqthdiNWJwE/cV6RQNaimIVKB36Wbc9b+WlGjPE+h8Lc+HJOggatCu
- MGs4tja+N44obKO6djVqDRQ/es6iyNinie2ymoBIRI6QlrkMygqbBzhYorV78zixirHL
- vi25FqPQ2dsVZPvgezLP27+QjmnPUm8/F7dE3XejLBGrM8Ynm26PWGagxy7uSUWXYKhE
- DwSA==
-X-Gm-Message-State: AOAM5307t4A8jymc4Iblg1chF1CLCFunoHZGMkLlQgkyzFAc0+Nh7g/H
- gWLZVEM8Xzzu3dUca6MnUHFYwTNwwR4EVfuoEHY=
-X-Google-Smtp-Source: ABdhPJzIewcQR+sUTt++K+pmVEwrV8xxgHycXvoCcq01TXsIQvCbaYyNLcgVdqovGR479x5d7CkrD0mLZl0PTkAD8VE=
-X-Received: by 2002:a67:ef81:: with SMTP id r1mr5480670vsp.37.1597358882084;
- Thu, 13 Aug 2020 15:48:02 -0700 (PDT)
+Received: from mout.web.de (mout.web.de [212.227.15.14])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 61E676EB16;
+ Fri, 14 Aug 2020 07:10:02 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=web.de;
+ s=dbaedf251592; t=1597388990;
+ bh=J1q2Qp41HcRDr7a6XQFVgKBApuGBGV9J/SihM4iSybc=;
+ h=X-UI-Sender-Class:Subject:To:Cc:References:From:Date:In-Reply-To;
+ b=SZq4Jh+EtSN7Dbk1gx7vd5EzNFsvBlBbW6rYLXeUqvZOJYs1g3WB+IW83T0bcKm1x
+ c0Eef3/a8yjTgXI79XXxt3amIQbbsj3I8BmIwYqTPledvOu2WWBYh1DWvMePk2HdYf
+ wSiKJE+s4TMXt2zIVBYglo+nCE3Q08IeZ8w7yVvU=
+X-UI-Sender-Class: c548c8c5-30a9-4db5-a2e7-cb6cb037b8f9
+Received: from [192.168.1.2] ([93.135.130.210]) by smtp.web.de (mrweb003
+ [213.165.67.108]) with ESMTPSA (Nemesis) id 0MbhSP-1kNKRP0spJ-00J3ks; Fri, 14
+ Aug 2020 09:09:50 +0200
+To: kernel test robot <lkp@intel.com>, nouveau@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>,
+ Daniel Vetter <daniel@ffwll.ch>, David Airlie <airlied@linux.ie>
+References: <12ebdcbe-8a8a-958a-af05-a0593d9756b2@web.de>
+ <202008132104.mkULNh4R%lkp@intel.com>
+From: Markus Elfring <Markus.Elfring@web.de>
+Autocrypt: addr=Markus.Elfring@web.de; prefer-encrypt=mutual; keydata=
+ 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 FEE=
+Message-ID: <f11df9ce-c49a-e172-47dd-5a0ab202ae81@web.de>
+Date: Fri, 14 Aug 2020 09:09:34 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.11.0
 MIME-Version: 1.0
-References: <202008140136.33013.randrianasulu@gmail.com>
-In-Reply-To: <202008140136.33013.randrianasulu@gmail.com>
-From: Ilia Mirkin <imirkin@alum.mit.edu>
-Date: Thu, 13 Aug 2020 18:47:50 -0400
-Message-ID: <CAKb7UvjFzbjWOLhC+pQ-G5fUCt_HAYw0xvtabQVKn1apx3mWPw@mail.gmail.com>
-To: Andrew Randrianasulu <randrianasulu@gmail.com>
-Subject: Re: [Nouveau] Accumulating CPU load from Xorg process with DRI3
+In-Reply-To: <202008132104.mkULNh4R%lkp@intel.com>
+Content-Language: en-GB
+X-Provags-ID: V03:K1:dctFnXBnt8RMhxQUmv0FANMgLopssJLXMyutFv11AXonup3eZwQ
+ Jj3xRm1SXf+ex7F2wA4kEw0tebSh/KkGTI/SoZTDhnJSs7eX/ckBGjojbqaIUcfeS0RxHmS
+ GRkEyQIbBZD/zd9dWjsi7anLJ29EL2zvETbhE/J0WZk9YZvSz1AhClvb5InF6p9m3+kMjpH
+ jqH5DY6Wi15ONbRZJBt2Q==
+X-Spam-Flag: NO
+X-UI-Out-Filterresults: notjunk:1;V03:K0:CZqrR76Tjr8=:MmtTgLIUvEIud2G7p+OelX
+ QAnBDis46b/9p+wVr64ilt6gFATHxpCRsDeYF6TyqGQ4yYEl4MlxYX3Sfn83ysauhPincREJl
+ YNBYse44bnWF/39GbXy2J/8FkWIQWGDVD8gFfuyt2QUgIoUr5Us/3WUoaGM9c4TLmPiR7fwSf
+ cOiSm+K2DEYRXmUlFmBIvNOubxDny3vKVQXoAhgZis+niA+cYFmPYaDT1Z8+y0damL1Lr6e3w
+ DFr6ukvCmnrPj9AfC2BRWkq1unqKrLSp9+qdYUgYz+zgnSM9NlRwIfPd3H/jRDOhLxr6KocGM
+ OQ4ev5mbky+GFyIkSvnkvmPZcl8WTREhlI+qsL3XB+bT/J82fY2PcDG/0hBAWhVJ3Ih/fBiOk
+ HLhDgy2jhq3z8li60W2pq1oELdF6lcUiT5/v33ysi8L3y6p2wMMsAPa6Yf+sKTbLCIbpiDrT1
+ 6T9ughssHMwPTdpgUZgTfRm6uMDVVVKLYIV4CytJinj5l5uD9oscmk8Ouyy/BexXgV+LjdxLO
+ CiiYzpn7WR8fMUgntE36+3VM8Txq9m3vIHM6chVwiwlGWtOMrnclsFZn9aXdeOUasqWGWoG94
+ fFdawxk5EiDGDn5gOwyHgC6jkAHwLrJTVCMwsOZpzPYxXC2iKelQWti+eimaAxDIYzsVYpWhy
+ HZiTIvbuJWggD5r44m6xCK6GLjElApw58kr7PsrKG41Q+xKn1D2xPIw0djmRYfV2af1k2pgcJ
+ Ne8EUaSDHbcAsLKZ5Ml/BoczmeSVeRUMwGUBHRj7eV1KvbCJlsIU0UAJl3AZUeKqmNXyXjKI1
+ GjvwTCtMzhqwevJctUTpVV+yc+i0Yy32BtSImwQy/WKV7SkiJrbDfo7lemy0edhHekCwLWqK1
+ qzMBOjrXkQlbU7IFDearBw+ORphjJVDOgnIdjFYT4OJdc/5UJGscfjL3k4A8C1SOA+28W5hFJ
+ ZT2cBFdj8/FNYhdwTK67ho0LO6+CiQZk6r9/Xs+HDygMp1rMOAun46aK/Zmp3MhFM41mf91bv
+ KyYS8aTfZyHy1WA904/hJ421/5R3+8t/WVlRj+rRtGinlKiPjoP0o0y7iJDNQpUjNgg9Vhinw
+ iwjjx2WetzT5mC92keEDwNbwh6nXK5SeIlNq6gNVO6PIo/IR4pdAjcNTEse7q4pnChheQjQK6
+ sQOYUKip39NeesnV6LprW6OcvPMJXDBkurVlNo+8FRRq8/ruLb26XG0ZUmuNp68m14u+3NDR0
+ hKr6zwFztK6OfLqcglGX4exFtOGIu6PdqjdaP9g==
+Subject: [Nouveau] [PATCH v2] drm/nouveau/gem: Use vmemdup_user() rather
+ than duplicating its implementation
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -50,120 +116,65 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau <nouveau@lists.freedesktop.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: kbuild-all@lists.01.org, kernel-janitors@vger.kernel.org,
+ LKML <linux-kernel@vger.kernel.org>, Denis Efremov <efremov@linux.com>,
+ Julia Lawall <Julia.Lawall@lip6.fr>, Coccinelle <cocci@systeme.lip6.fr>
+Content-Type: text/plain; charset="windows-1252"
+Content-Transfer-Encoding: quoted-printable
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-I'm aware of this issue, and am experiencing it myself.
+From: Markus Elfring <elfring@users.sourceforge.net>
+Date: Fri, 14 Aug 2020 08:56:54 +0200
 
-The issue is that drmmode_event_handler takes up more and more CPU
-time. It seems like some events are being "left behind". I haven't had
-time to debug it further yet though.
+* Reuse existing functionality from vmemdup_user() instead of keeping
+  duplicate source code.
 
-I also have DRI3 enabled, but only very rarely do I make use of my
-secondary GPUs, and I'm pretty sure I've seen the problem happen
-without any PRIME usage.
+  Generated by: scripts/coccinelle/api/memdup_user.cocci
 
-Cheers,
+* See also:
+  [PATCH] drm/nouveau/gem: fix err_cast.cocci warnings
 
-  -ilia
+* Simplify this function implementation further by omitting the local
+  variable =93mem=94 and extra error handling here.
 
-On Thu, Aug 13, 2020 at 6:45 PM Andrew Randrianasulu
-<randrianasulu@gmail.com> wrote:
->
-> I observed this bug for quite some time, but so far I workarounded it
-> with just setting DRI2 (default) in xorg.conf.d/20-nouveau.conf
->
-> Now with two GPU i iwsh to use DRI3, so right now it set up like this:
->
-> cat /etc/X11/xorg.conf.d/20-nouveau.conf
-> Section "Device"
->     Identifier "Card0"
->     Driver "nouveau"
->     Option "PageFlip" "1"
->     #Option "AccelMethod" "glamor"
->     Option       "DRI"           "3"
->
-> But just after two hours of uptime X already eating some CPU:
->
->
-> op - 01:30:49 up  2:45,  1 user,  load average: 1,12, 0,93, 0,84
-> Tasks: 210 total,   1 running, 209 sleeping,   0 stopped,   0 zombie
-> %Cpu(s): 12,1 us,  3,9 sy,  0,0 ni, 81,7 id,  0,7 wa,  0,0 hi,  1,6 si,  0,0 st
-> MiB Mem :  11875,3 total,   6416,4 free,   1634,8 used,   3824,1 buff/cache
-> MiB Swap:   1145,0 total,   1145,0 free,      0,0 used.   9969,7 avail Mem
->
->   PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
->  1198 root      20   0  146160  78828  28160 S  35,8   0,6  30:41.37 Xorg
->  1285 guest     20   0   59776  17332  13756 S  11,6   0,1  16:12.83 xmms
->  4006 guest     20   0 1743952 919312 120628 S  10,9   7,6  20:51.01 seamonkey
->  1278 guest     20   0  101508  48528  30496 S   3,0   0,4   4:03.21 ktorrent
->  1274 guest     20   0   43368  31784  23684 S   2,0   0,3   0:29.43 konsole
->  1259 guest     20   0   43092  28232  23640 S   1,3   0,2   0:21.53 kicker
->  1255 guest     20   0    6560   4160   2720 S   1,0   0,0   1:00.90 kompmgr
->  1293 guest     20   0   40164  21328  18636 S   1,0   0,2   1:30.50 gkrellm
->  1254 guest     20   0   31616  21832  18944 S   0,7   0,2   0:06.49 kwin
->
-> in ~1 day it will eat full core from my AMD FX-4300 and X will become sluggish ...
->
-> I tried to trace it with operf 1.2.0:
->
-> operf --pid 1198
->
-> operf: Press Ctl-c or 'kill -SIGINT 7787' to stop profiling
-> operf: Profiler started
-> ^C
-> Profiling done.
->
-> root@slax:~# opreport
-> Using /root/oprofile_data/samples/ for samples directory.
-> CPU: AMD64 family15h, speed 3800 MHz (estimated)
-> Counted CPU_CLK_UNHALTED events (CPU Clocks not Halted) with a unit mask of 0x00 (No unit mask) count 100000
-> CPU_CLK_UNHALT...|
->   samples|      %|
-> ------------------
->     78166 100.000 Xorg
->         CPU_CLK_UNHALT...|
->           samples|      %|
->         ------------------
->             62905 80.4762 nouveau_drv.so
->              5648  7.2256 kallsyms
->              4186  5.3553 Xorg
->              1419  1.8154 libpixman-1.so.0.38.0
->              1038  1.3279 nouveau
->               687  0.8789 libc-2.30.so
->               632  0.8085 libexa.so
->               510  0.6525 libdrm_nouveau.so.2.0.0
->               402  0.5143 libfb.so
->               259  0.3313 drm
->               230  0.2942 ttm
->               108  0.1382 libpthread-2.30.so
->                47  0.0601 libdrm.so.2.4.0
->                34  0.0435 [vdso] (tgid:1198 range:0xf7fbf000-0xf7fbffff)
->                27  0.0345 evdev_drv.so
->                 7  0.0090 snd_hda_codec
->                 5  0.0064 r8169
->                 5  0.0064 snd_pcm
->                 5  0.0064 libXfont2.so.2.0.0
->                 3  0.0038 snd_aloop
->                 3  0.0038 libglx.so
->                 2  0.0026 kvm
->                 2  0.0026 snd_timer
->                 1  0.0013 snd_hda_core
->                 1  0.0013 snd_hda_intel
->
-> so, nouveau_drv itself is major CPU eater ....
->
-> I'll try to rebuild it with debug symbols enabled, and hopefully it will be enough
-> for at least seeing who eats all those cycles ....
->
-> Sorry for so many emails, just i keep discovering new bugs as I try new things!
-> _______________________________________________
-> Nouveau mailing list
-> Nouveau@lists.freedesktop.org
-> https://lists.freedesktop.org/mailman/listinfo/nouveau
+Reported-by: kernel test robot <lkp@intel.com>
+Signed-off-by: Markus Elfring <elfring@users.sourceforge.net>
+---
+ drivers/gpu/drm/nouveau/nouveau_gem.c | 13 +------------
+ 1 file changed, 1 insertion(+), 12 deletions(-)
+
+diff --git a/drivers/gpu/drm/nouveau/nouveau_gem.c b/drivers/gpu/drm/nouvea=
+u/nouveau_gem.c
+index 81f111ad3f4f..536ad5e2cbe6 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_gem.c
++++ b/drivers/gpu/drm/nouveau/nouveau_gem.c
+@@ -583,21 +583,10 @@ u_free(void *addr)
+ static inline void *
+ u_memcpya(uint64_t user, unsigned nmemb, unsigned size)
+ {
+-	void *mem;
+ 	void __user *userptr =3D (void __force __user *)(uintptr_t)user;
+
+ 	size *=3D nmemb;
+-
+-	mem =3D kvmalloc(size, GFP_KERNEL);
+-	if (!mem)
+-		return ERR_PTR(-ENOMEM);
+-
+-	if (copy_from_user(mem, userptr, size)) {
+-		u_free(mem);
+-		return ERR_PTR(-EFAULT);
+-	}
+-
+-	return mem;
++	return vmemdup_user(userptr, size);
+ }
+
+ static int
+--
+2.28.0
+
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
