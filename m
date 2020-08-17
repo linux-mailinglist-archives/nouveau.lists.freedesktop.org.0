@@ -2,42 +2,61 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id E63DE245BCD
-	for <lists+nouveau@lfdr.de>; Mon, 17 Aug 2020 07:09:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D92C7245C07
+	for <lists+nouveau@lfdr.de>; Mon, 17 Aug 2020 07:45:36 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A21AC6E43C;
-	Mon, 17 Aug 2020 05:09:51 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id DCBEE6E056;
+	Mon, 17 Aug 2020 05:45:33 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-vk1-f169.google.com (mail-vk1-f169.google.com
- [209.85.221.169])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 089FD6E43C
- for <nouveau@lists.freedesktop.org>; Mon, 17 Aug 2020 05:09:49 +0000 (UTC)
-Received: by mail-vk1-f169.google.com with SMTP id l184so3260022vki.10
- for <nouveau@lists.freedesktop.org>; Sun, 16 Aug 2020 22:09:49 -0700 (PDT)
+Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
+ [IPv6:2a00:1450:4864:20::131])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 06BEB6E056
+ for <nouveau@lists.freedesktop.org>; Mon, 17 Aug 2020 05:45:32 +0000 (UTC)
+Received: by mail-lf1-x131.google.com with SMTP id c15so7741952lfi.3
+ for <nouveau@lists.freedesktop.org>; Sun, 16 Aug 2020 22:45:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=from:to:subject:date:user-agent:references:in-reply-to:mime-version
+ :content-transfer-encoding:content-disposition:message-id;
+ bh=qYaWXOoz1ds3bBooGk98lnq92wy+XDaEC0urFF7/Dho=;
+ b=kPSWu3OPJa7ctOuN07zapB37UfwcNrpUprO/d+r67o/P+6Jf2/FFvcGQIOGS25Xwdk
+ bKw0L521zyj43jLAflc6IkKjiFlvE4d+Hik6Ehr9U3c21xdEOn84tbdVQCodfsuJrnFZ
+ n0k/rT6SEprhyJayQnBCQz2mXdDlbLcwbKXoxRRmWFaQf012YjfyVj+S3FHtNc24/azV
+ 5qdo2hYhr5TE5SyrcJv7OKZVEfMHC8LIvSbZHdQPRjb+6Jo6YreCzKznExEiw//n/uxt
+ U2HVej20vlZcd1/6zpcv2AxSxxCqd6re5jjEif559dqFKXhcVTUi39n+7TF/mbEsKkAr
+ 7JNw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=+JtSAtBNlNDgPhlBtkMq7DoIBb8kmXdOKnD/kir+FuY=;
- b=PIKh062LlFjRjPgjjb3VSD9N3q3H2X7xZCNfPIxPGxarzvonc8xbS+0ywBx/zsJ9Vc
- KdJtWHiIaBjmkTot2ISzlOkz+stn/t/t1kbiXvrs7X5+55vYqGBdulJ5ifsVrKmYSbzb
- nmoYAeNHVhmYhhMU3oxzx+7A/TJEDjtlNQlBPXyjPb3v18wQ7Pwv7qediLWTGtqn3AA3
- B5Qy2ry0ENzXt5r/t7Mi6vvsVR9BYQorCrdsgEV1rGsOpanJ1nL/IcCr0j88WvB6muQx
- pZmmY9hnTTFDJhWwKRysJiBttTCPiq953bmhkFiBn1UmN/XYHB1CF/zGixwr42sniB6D
- T8qg==
-X-Gm-Message-State: AOAM533dE9et7+jWkL5Lg0md+Z7Rg5qHtHHgPnFf6Y4ZYNDy5W89sN4v
- qSHshbPEN1YGMmQ0x2MLjSKLxUZH4ZGUxvNMjXM=
-X-Google-Smtp-Source: ABdhPJwyTmcP5LGtdITJR4yJax+LO7npk3IvHPbQngo37rLynrza5G15+ZpS6QNJdLx15Femni26Lgi0tw+bi3CCMYI=
-X-Received: by 2002:ac5:cb7c:: with SMTP id l28mr6878755vkn.94.1597640988877; 
- Sun, 16 Aug 2020 22:09:48 -0700 (PDT)
-MIME-Version: 1.0
+ h=x-gm-message-state:from:to:subject:date:user-agent:references
+ :in-reply-to:mime-version:content-transfer-encoding
+ :content-disposition:message-id;
+ bh=qYaWXOoz1ds3bBooGk98lnq92wy+XDaEC0urFF7/Dho=;
+ b=oI6goNRmI/IaNR9jen5a58aeXGhoc6LKp/bAD1F6H8HXsRoT/SlS2+CYeIbQNturOX
+ NsbQZ4MXLKStkR3U+mNX3mJhRggmYpstSqLDhxdlBxBEirguCFgk65OImjt3xOuzwe/L
+ UDiZPcuy6xEsevrAHZ+csFxy7b3nphhe+8q6qB85mKx2tv5vIcXF9vkCCahmOa7Z3I0w
+ VC/+7r8++c1m7qjFmJsdHFvx/P6WgeuSnhpFTomwC08jDvsTLPhwOjzG6sEmx9dBxKw8
+ eAWuJ9YoCPsh0LNiww2qAHNUhwN7JFBIH8xfireZTtJyw8hUbOCTSXhk3Dt2fkpWpYh3
+ zbrQ==
+X-Gm-Message-State: AOAM530BrpMqALUdpLhbReoKgs6GZ9yNFl8Qu50KdblxgWji0j7kgMX3
+ u4pgeBDkLg8ib4Iyhc+cbw8=
+X-Google-Smtp-Source: ABdhPJxSSjmXXk3J5Nf7z1AB0CrAsGNPFGhYZIdcOyLUGLQUBSl4lwBnPr8fkxW5HyR/28ITW14FiA==
+X-Received: by 2002:a19:4809:: with SMTP id v9mr6677024lfa.201.1597643130185; 
+ Sun, 16 Aug 2020 22:45:30 -0700 (PDT)
+Received: from [192.168.1.100] ([176.116.252.109])
+ by smtp.gmail.com with ESMTPSA id k4sm4638702ljc.50.2020.08.16.22.45.28
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Sun, 16 Aug 2020 22:45:29 -0700 (PDT)
+From: Andrew Randrianasulu <randrianasulu@gmail.com>
+To: Ilia Mirkin <imirkin@alum.mit.edu>,
+ nouveau@lists.freedesktop.org
+Date: Mon, 17 Aug 2020 08:35:59 +0300
+User-Agent: KMail/1.9.10
 References: <202008170742.42032.randrianasulu@gmail.com>
-In-Reply-To: <202008170742.42032.randrianasulu@gmail.com>
-From: Ilia Mirkin <imirkin@alum.mit.edu>
-Date: Mon, 17 Aug 2020 01:09:37 -0400
-Message-ID: <CAKb7UvghBJ46xD9u6MJEFvmbMYgZziq5sLQyRhZxVkVxcHZJqw@mail.gmail.com>
-To: Andrew Randrianasulu <randrianasulu@gmail.com>
+ <CAKb7UvghBJ46xD9u6MJEFvmbMYgZziq5sLQyRhZxVkVxcHZJqw@mail.gmail.com>
+In-Reply-To: <CAKb7UvghBJ46xD9u6MJEFvmbMYgZziq5sLQyRhZxVkVxcHZJqw@mail.gmail.com>
+MIME-Version: 1.0
+Content-Disposition: inline
+Message-Id: <202008170835.59585.randrianasulu@gmail.com>
 Subject: Re: [Nouveau] qemu -display sdl,gl=on also eats CPU
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -50,99 +69,97 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau <nouveau@lists.freedesktop.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-The DDX eating CPU isn't intrinsically bad. Did you check where perf
-says the CPU time is going? Could be doing copies/etc.
-
-On Mon, Aug 17, 2020 at 12:52 AM Andrew Randrianasulu
-<randrianasulu@gmail.com> wrote:
->
-> I was testing Ilia's patches for ddx, and while they definitely helped for Xorg itself,
-> qemu still eats a lot of CPU if launched like this
->
-> qemu-system-x86_64 -cdrom ~/Downloads/ISO/slax-English-US-7.0.8-x86_64.iso -m 1G -display sdl,gl=on -enable-kvm
->
-> and left for few hours.
->
-> top - 07:38:01 up 18:05,  2 users,  load average: 2,00, 1,89, 1,83
-> Tasks: 224 total,   3 running, 221 sleeping,   0 stopped,   0 zombie
-> %Cpu(s): 40,6 us,  6,1 sy,  0,3 ni, 49,2 id,  0,8 wa,  0,0 hi,  2,9 si,  0,0 st
-> MiB Mem :  11875,3 total,   3535,7 free,   3339,3 used,   5000,3 buff/cache
-> MiB Swap:   1145,0 total,   1131,2 free,     13,8 used.   4874,7 avail Mem
->
->   PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
->  6215 guest     20   0 1455160 951768  45560 R  99,3   7,8 710:44.44 qemu-system-x86
-> 12655 guest     20   0 2459848   1,5g 126708 R  59,1  12,6 217:53.21 seamonkey
->  1991 root      20   0  178112 109500  28840 S  20,9   0,9 187:20.05 Xorg
->  2068 guest     20   0  104932  51660  30764 S   5,6   0,4  54:08.99 ktorrent
->  6031 root      20   0       0      0      0 I   2,0   0,0   0:20.24 kworker/0:3-events
->  3697 guest     20   0  382432  20308  13696 S   1,7   0,2  91:38.13 xmms
->  2064 guest     20   0   55868  37048  23976 S   1,3   0,3   2:38.47 konsole
->  2319 guest     20   0   40160  21248  18548 S   1,3   0,2  12:36.63 gkrellm
->  5853 root      20   0       0      0      0 I   0,7   0,0   0:07.21 kworker/2:2-events
->
-> opreport after  operf --pid 6215 said:
->
-> opreport
-> Using /home/guest/botva/src/xf86-video-nouveau/oprofile_data/samples/ for samples directory.
-> CPU: AMD64 family15h, speed 3800 MHz (estimated)
-> Counted CPU_CLK_UNHALTED events (CPU Clocks not Halted) with a unit mask of 0x00 (No unit mask) count 100000
-> CPU_CLK_UNHALT...|
->   samples|      %|
-> ------------------
->    260163 100.000 qemu-system-x86_64
->         CPU_CLK_UNHALT...|
->           samples|      %|
->         ------------------
->            144120 55.3960 nouveau_dri.so
->             87990 33.8211 libdrm_nouveau.so.2.0.0
->             11783  4.5291 libpixman-1.so.0.38.0
->              7884  3.0304 kallsyms
->              5310  2.0410 libc-2.30.so
->               689  0.2648 ld-2.30.so
->               519  0.1995 nouveau
->               501  0.1926 qemu-system-x86_64
->               456  0.1753 ttm
->               239  0.0919 kvm
->               211  0.0811 kvm_amd
->                81  0.0311 libpthread-2.30.so
->                76  0.0292 drm
->                49  0.0188 libSDL2-2.0.so.0.12.0
->                43  0.0165 libxcb.so.1.1.0
->                36  0.0138 libGL.so.1.2.0
->                31  0.0119 libX11.so.6.3.0
->                24  0.0092 snd_pcm
->                23  0.0088 snd_hda_codec
->                20  0.0077 libglib-2.0.so.0.5800.1
->                11  0.0042 snd_timer
->                 9  0.0035 libglapi.so.0.0.0
->                 8  0.0031 libdrm.so.2.4.0
->                 7  0.0027 snd_aloop
->                 7  0.0027 snd_hda_intel
->                 7  0.0027 libxshmfence.so.1.0.0
->                 7  0.0027 libgcc_s.so.1
->                 5  0.0019 [vdso] (tgid:6215 range:0xf7f9f000-0xf7f9ffff)
->                 5  0.0019 snd_hda_core
->                 4  0.0015 r8169
->                 3  0.0012 libahci
->                 2 7.7e-04 ohci_hcd
->                 2 7.7e-04 libxcb-present.so.0.0.0
->                 1 3.8e-04 libatomic.so.1.1.0
->
-> so, may be similar fix needed for mesa, too?
->
-> ow, I started it in ddx src directory :} need to cleanup there. But at least data is 100
->
-> _______________________________________________
-> Nouveau mailing list
-> Nouveau@lists.freedesktop.org
-> https://lists.freedesktop.org/mailman/listinfo/nouveau
-_______________________________________________
-Nouveau mailing list
-Nouveau@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/nouveau
+0JIg0YHQvtC+0LHRidC10L3QuNC4INC+0YIgTW9uZGF5IDE3IEF1Z3VzdCAyMDIwIDA4OjA5OjM3
+INCy0Ysg0L3QsNC/0LjRgdCw0LvQuDoKPiBUaGUgRERYIGVhdGluZyBDUFUgaXNuJ3QgaW50cmlu
+c2ljYWxseSBiYWQuIERpZCB5b3UgY2hlY2sgd2hlcmUgcGVyZgo+IHNheXMgdGhlIENQVSB0aW1l
+IGlzIGdvaW5nPyBDb3VsZCBiZSBkb2luZyBjb3BpZXMvZXRjLgoKSSB0aGluayBYb3JnIGVuZGVk
+IHVwIGVhdGluZyB+MTMlIENQVSAgYWZ0ZXIgSSBxdWl0IG1vc3QgcHJvZ3JhbXMsIGJ1dCBpdCAK
+d2FzIGRlZmluaXRlbHkgYmV0dGVyIHRoYW4gbXVjaCBoaWdoZXIgQ1BVIHVzYWdlIGJlZm9yZSB5
+b3VyIHBhdGNoZXMuCgpJIHNhdyBubyBhZGRpdGlvbmFsIGRlYnVnIG1lc3NhZ2VzIGluIFggbG9n
+LCBzbyBwcm9iYWJseSB5b3UgY292ZXJlZCAKbXkgc3BlY2lmaWMgY2FzZSB3ZWxsLgoKcWVtdSB3
+YXMgZWF0aW5nIENQVSBpbiAgbm91dmVhdV9kcmkuc28vbGliZHJtX25vdXZlYXUuc28uMi4wLjAs
+CnNvIEkgc3VzcGVjdGVkIHNvbWV0aGluZyBsaWtlICd0b28gbWFueSBlcnJvciByZXBvcnRzIGZy
+b20gdmJsYW5rcycgCm1heSBoYXBwZW4gdGhlcmUsIHRvby4KClVuZm9ydHVuYXRlbHksIG15IHN0
+YW5kYXJkIGJ1aWxkIGNvbW1hbmQgZm9yIG1lc2EgaW5jbHVkZWQgLS1zdHJpcCwKc28gb3ByZXBv
+cnQgLWMgd2FzIG5vdCBnaXZpbmcgYW55IGFkZGl0aW9uYWwgZGV0YWlscyAuLi4KCkkganVzdCBy
+ZWNvbXBpbGVkIEREWCBhZ2FpbiB3aXRoIGlmIDAnZWQgZGVidWcgbWVzc2FnZSwgd2lsbCBzZWUg
+aG93IAppdCB3b3JrcyBhbG9uZSwgYW5kIHRoZW4gcmV0cnkgbWVzYSBidWlsZC9xZW11IGxvbmct
+dXB0aW1lIHRlc3RpbmcgLi4uCgo+IAo+IE9uIE1vbiwgQXVnIDE3LCAyMDIwIGF0IDEyOjUyIEFN
+IEFuZHJldyBSYW5kcmlhbmFzdWx1Cj4gPHJhbmRyaWFuYXN1bHVAZ21haWwuY29tPiB3cm90ZToK
+PiA+Cj4gPiBJIHdhcyB0ZXN0aW5nIElsaWEncyBwYXRjaGVzIGZvciBkZHgsIGFuZCB3aGlsZSB0
+aGV5IGRlZmluaXRlbHkgaGVscGVkIGZvciBYb3JnIGl0c2VsZiwKPiA+IHFlbXUgc3RpbGwgZWF0
+cyBhIGxvdCBvZiBDUFUgaWYgbGF1bmNoZWQgbGlrZSB0aGlzCj4gPgo+ID4gcWVtdS1zeXN0ZW0t
+eDg2XzY0IC1jZHJvbSB+L0Rvd25sb2Fkcy9JU08vc2xheC1FbmdsaXNoLVVTLTcuMC44LXg4Nl82
+NC5pc28gLW0gMUcgLWRpc3BsYXkgc2RsLGdsPW9uIC1lbmFibGUta3ZtCj4gPgo+ID4gYW5kIGxl
+ZnQgZm9yIGZldyBob3Vycy4KPiA+Cj4gPiB0b3AgLSAwNzozODowMSB1cCAxODowNSwgIDIgdXNl
+cnMsICBsb2FkIGF2ZXJhZ2U6IDIsMDAsIDEsODksIDEsODMKPiA+IFRhc2tzOiAyMjQgdG90YWws
+ICAgMyBydW5uaW5nLCAyMjEgc2xlZXBpbmcsICAgMCBzdG9wcGVkLCAgIDAgem9tYmllCj4gPiAl
+Q3B1KHMpOiA0MCw2IHVzLCAgNiwxIHN5LCAgMCwzIG5pLCA0OSwyIGlkLCAgMCw4IHdhLCAgMCww
+IGhpLCAgMiw5IHNpLCAgMCwwIHN0Cj4gPiBNaUIgTWVtIDogIDExODc1LDMgdG90YWwsICAgMzUz
+NSw3IGZyZWUsICAgMzMzOSwzIHVzZWQsICAgNTAwMCwzIGJ1ZmYvY2FjaGUKPiA+IE1pQiBTd2Fw
+OiAgIDExNDUsMCB0b3RhbCwgICAxMTMxLDIgZnJlZSwgICAgIDEzLDggdXNlZC4gICA0ODc0LDcg
+YXZhaWwgTWVtCj4gPgo+ID4gICBQSUQgVVNFUiAgICAgIFBSICBOSSAgICBWSVJUICAgIFJFUyAg
+ICBTSFIgUyAgJUNQVSAgJU1FTSAgICAgVElNRSsgQ09NTUFORAo+ID4gIDYyMTUgZ3Vlc3QgICAg
+IDIwICAgMCAxNDU1MTYwIDk1MTc2OCAgNDU1NjAgUiAgOTksMyAgIDcsOCA3MTA6NDQuNDQgcWVt
+dS1zeXN0ZW0teDg2Cj4gPiAxMjY1NSBndWVzdCAgICAgMjAgICAwIDI0NTk4NDggICAxLDVnIDEy
+NjcwOCBSICA1OSwxICAxMiw2IDIxNzo1My4yMSBzZWFtb25rZXkKPiA+ICAxOTkxIHJvb3QgICAg
+ICAyMCAgIDAgIDE3ODExMiAxMDk1MDAgIDI4ODQwIFMgIDIwLDkgICAwLDkgMTg3OjIwLjA1IFhv
+cmcKPiA+ICAyMDY4IGd1ZXN0ICAgICAyMCAgIDAgIDEwNDkzMiAgNTE2NjAgIDMwNzY0IFMgICA1
+LDYgICAwLDQgIDU0OjA4Ljk5IGt0b3JyZW50Cj4gPiAgNjAzMSByb290ICAgICAgMjAgICAwICAg
+ICAgIDAgICAgICAwICAgICAgMCBJICAgMiwwICAgMCwwICAgMDoyMC4yNCBrd29ya2VyLzA6My1l
+dmVudHMKPiA+ICAzNjk3IGd1ZXN0ICAgICAyMCAgIDAgIDM4MjQzMiAgMjAzMDggIDEzNjk2IFMg
+ICAxLDcgICAwLDIgIDkxOjM4LjEzIHhtbXMKPiA+ICAyMDY0IGd1ZXN0ICAgICAyMCAgIDAgICA1
+NTg2OCAgMzcwNDggIDIzOTc2IFMgICAxLDMgICAwLDMgICAyOjM4LjQ3IGtvbnNvbGUKPiA+ICAy
+MzE5IGd1ZXN0ICAgICAyMCAgIDAgICA0MDE2MCAgMjEyNDggIDE4NTQ4IFMgICAxLDMgICAwLDIg
+IDEyOjM2LjYzIGdrcmVsbG0KPiA+ICA1ODUzIHJvb3QgICAgICAyMCAgIDAgICAgICAgMCAgICAg
+IDAgICAgICAwIEkgICAwLDcgICAwLDAgICAwOjA3LjIxIGt3b3JrZXIvMjoyLWV2ZW50cwo+ID4K
+PiA+IG9wcmVwb3J0IGFmdGVyICBvcGVyZiAtLXBpZCA2MjE1IHNhaWQ6Cj4gPgo+ID4gb3ByZXBv
+cnQKPiA+IFVzaW5nIC9ob21lL2d1ZXN0L2JvdHZhL3NyYy94Zjg2LXZpZGVvLW5vdXZlYXUvb3By
+b2ZpbGVfZGF0YS9zYW1wbGVzLyBmb3Igc2FtcGxlcyBkaXJlY3RvcnkuCj4gPiBDUFU6IEFNRDY0
+IGZhbWlseTE1aCwgc3BlZWQgMzgwMCBNSHogKGVzdGltYXRlZCkKPiA+IENvdW50ZWQgQ1BVX0NM
+S19VTkhBTFRFRCBldmVudHMgKENQVSBDbG9ja3Mgbm90IEhhbHRlZCkgd2l0aCBhIHVuaXQgbWFz
+ayBvZiAweDAwIChObyB1bml0IG1hc2spIGNvdW50IDEwMDAwMAo+ID4gQ1BVX0NMS19VTkhBTFQu
+Li58Cj4gPiAgIHNhbXBsZXN8ICAgICAgJXwKPiA+IC0tLS0tLS0tLS0tLS0tLS0tLQo+ID4gICAg
+MjYwMTYzIDEwMC4wMDAgcWVtdS1zeXN0ZW0teDg2XzY0Cj4gPiAgICAgICAgIENQVV9DTEtfVU5I
+QUxULi4ufAo+ID4gICAgICAgICAgIHNhbXBsZXN8ICAgICAgJXwKPiA+ICAgICAgICAgLS0tLS0t
+LS0tLS0tLS0tLS0tCj4gPiAgICAgICAgICAgIDE0NDEyMCA1NS4zOTYwIG5vdXZlYXVfZHJpLnNv
+Cj4gPiAgICAgICAgICAgICA4Nzk5MCAzMy44MjExIGxpYmRybV9ub3V2ZWF1LnNvLjIuMC4wCj4g
+PiAgICAgICAgICAgICAxMTc4MyAgNC41MjkxIGxpYnBpeG1hbi0xLnNvLjAuMzguMAo+ID4gICAg
+ICAgICAgICAgIDc4ODQgIDMuMDMwNCBrYWxsc3ltcwo+ID4gICAgICAgICAgICAgIDUzMTAgIDIu
+MDQxMCBsaWJjLTIuMzAuc28KPiA+ICAgICAgICAgICAgICAgNjg5ICAwLjI2NDggbGQtMi4zMC5z
+bwo+ID4gICAgICAgICAgICAgICA1MTkgIDAuMTk5NSBub3V2ZWF1Cj4gPiAgICAgICAgICAgICAg
+IDUwMSAgMC4xOTI2IHFlbXUtc3lzdGVtLXg4Nl82NAo+ID4gICAgICAgICAgICAgICA0NTYgIDAu
+MTc1MyB0dG0KPiA+ICAgICAgICAgICAgICAgMjM5ICAwLjA5MTkga3ZtCj4gPiAgICAgICAgICAg
+ICAgIDIxMSAgMC4wODExIGt2bV9hbWQKPiA+ICAgICAgICAgICAgICAgIDgxICAwLjAzMTEgbGli
+cHRocmVhZC0yLjMwLnNvCj4gPiAgICAgICAgICAgICAgICA3NiAgMC4wMjkyIGRybQo+ID4gICAg
+ICAgICAgICAgICAgNDkgIDAuMDE4OCBsaWJTREwyLTIuMC5zby4wLjEyLjAKPiA+ICAgICAgICAg
+ICAgICAgIDQzICAwLjAxNjUgbGlieGNiLnNvLjEuMS4wCj4gPiAgICAgICAgICAgICAgICAzNiAg
+MC4wMTM4IGxpYkdMLnNvLjEuMi4wCj4gPiAgICAgICAgICAgICAgICAzMSAgMC4wMTE5IGxpYlgx
+MS5zby42LjMuMAo+ID4gICAgICAgICAgICAgICAgMjQgIDAuMDA5MiBzbmRfcGNtCj4gPiAgICAg
+ICAgICAgICAgICAyMyAgMC4wMDg4IHNuZF9oZGFfY29kZWMKPiA+ICAgICAgICAgICAgICAgIDIw
+ICAwLjAwNzcgbGliZ2xpYi0yLjAuc28uMC41ODAwLjEKPiA+ICAgICAgICAgICAgICAgIDExICAw
+LjAwNDIgc25kX3RpbWVyCj4gPiAgICAgICAgICAgICAgICAgOSAgMC4wMDM1IGxpYmdsYXBpLnNv
+LjAuMC4wCj4gPiAgICAgICAgICAgICAgICAgOCAgMC4wMDMxIGxpYmRybS5zby4yLjQuMAo+ID4g
+ICAgICAgICAgICAgICAgIDcgIDAuMDAyNyBzbmRfYWxvb3AKPiA+ICAgICAgICAgICAgICAgICA3
+ICAwLjAwMjcgc25kX2hkYV9pbnRlbAo+ID4gICAgICAgICAgICAgICAgIDcgIDAuMDAyNyBsaWJ4
+c2htZmVuY2Uuc28uMS4wLjAKPiA+ICAgICAgICAgICAgICAgICA3ICAwLjAwMjcgbGliZ2NjX3Mu
+c28uMQo+ID4gICAgICAgICAgICAgICAgIDUgIDAuMDAxOSBbdmRzb10gKHRnaWQ6NjIxNSByYW5n
+ZToweGY3ZjlmMDAwLTB4ZjdmOWZmZmYpCj4gPiAgICAgICAgICAgICAgICAgNSAgMC4wMDE5IHNu
+ZF9oZGFfY29yZQo+ID4gICAgICAgICAgICAgICAgIDQgIDAuMDAxNSByODE2OQo+ID4gICAgICAg
+ICAgICAgICAgIDMgIDAuMDAxMiBsaWJhaGNpCj4gPiAgICAgICAgICAgICAgICAgMiA3LjdlLTA0
+IG9oY2lfaGNkCj4gPiAgICAgICAgICAgICAgICAgMiA3LjdlLTA0IGxpYnhjYi1wcmVzZW50LnNv
+LjAuMC4wCj4gPiAgICAgICAgICAgICAgICAgMSAzLjhlLTA0IGxpYmF0b21pYy5zby4xLjEuMAo+
+ID4KPiA+IHNvLCBtYXkgYmUgc2ltaWxhciBmaXggbmVlZGVkIGZvciBtZXNhLCB0b28/Cj4gPgo+
+ID4gb3csIEkgc3RhcnRlZCBpdCBpbiBkZHggc3JjIGRpcmVjdG9yeSA6fSBuZWVkIHRvIGNsZWFu
+dXAgdGhlcmUuIEJ1dCBhdCBsZWFzdCBkYXRhIGlzIDEwMAo+ID4KPiA+IF9fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCj4gPiBOb3V2ZWF1IG1haWxpbmcgbGlz
+dAo+ID4gTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKPiA+IGh0dHBzOi8vbGlzdHMuZnJl
+ZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vbm91dmVhdQo+IAoKCl9fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCk5vdXZlYXUgbWFpbGluZyBsaXN0Ck5v
+dXZlYXVAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3Jn
+L21haWxtYW4vbGlzdGluZm8vbm91dmVhdQo=
