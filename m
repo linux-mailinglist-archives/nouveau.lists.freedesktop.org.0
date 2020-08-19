@@ -1,63 +1,64 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id CDFEA24A25F
-	for <lists+nouveau@lfdr.de>; Wed, 19 Aug 2020 17:04:12 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 98BCB24A296
+	for <lists+nouveau@lfdr.de>; Wed, 19 Aug 2020 17:16:04 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D5D126E3AA;
-	Wed, 19 Aug 2020 15:04:06 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D428389D6C;
+	Wed, 19 Aug 2020 15:16:00 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-qv1-xf41.google.com (mail-qv1-xf41.google.com
- [IPv6:2607:f8b0:4864:20::f41])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 678496E17C
- for <nouveau@lists.freedesktop.org>; Wed, 19 Aug 2020 15:04:05 +0000 (UTC)
-Received: by mail-qv1-xf41.google.com with SMTP id s15so11393995qvv.7
- for <nouveau@lists.freedesktop.org>; Wed, 19 Aug 2020 08:04:05 -0700 (PDT)
+Received: from mail-qk1-x743.google.com (mail-qk1-x743.google.com
+ [IPv6:2607:f8b0:4864:20::743])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 045C789D6C
+ for <nouveau@lists.freedesktop.org>; Wed, 19 Aug 2020 15:16:00 +0000 (UTC)
+Received: by mail-qk1-x743.google.com with SMTP id d14so21884507qke.13
+ for <nouveau@lists.freedesktop.org>; Wed, 19 Aug 2020 08:15:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=poorly.run; s=google;
  h=date:from:to:cc:subject:message-id:references:mime-version
  :content-disposition:in-reply-to:user-agent;
- bh=vzojOIjXWxLiO6TIP3hVvjZj3nBXkO4u+Tv0gqgyYy4=;
- b=bF4X2rLiQ6gYsVqzGCpAtaMbPgC9tg9k7pWmdfdP7jhYjOW2lKP3GTqUtVfsNaZd8d
- +tqW/r6n8N1HbXApppScuxmidM2ViNHo/ZeAXiHiaLoQy3WPkXNNO7mPSQVydyqLXIuW
- XnpqxpmORbSAJVeFgOj201zzexuifWp1jNNvr321eHINNv2s3M1eX+wmoZA2L7kR6V6M
- SIW/RrePFN/BaiNWuUtMLtaEBR3/6yBkaBbGlru0XyWD9BdZxfHPGCoKhFB/ej+cb6+M
- vFTlEJzSyW8pN3j8a3+0/RXeGMps73CZtPy4yrelYf1bea10mWj7LectS+ERxQyNF0Kb
- +k1Q==
+ bh=s64SZVe7q9SvLIi8k1Cji0BZ0MflkhzrqfKJ2a3sRpg=;
+ b=Vgif463L2ffkT4NOJY+9PBmSSrRy9LCbqF+LNimo+7nBOn6WBPAYE3UgRiCrDzfyNV
+ eVlFvMRApjqgxTNePMfMNHdYG9rjw2XMSgvPkG/tMVVqzNdTpkXMclH/ihWBe69q/TEL
+ U0ZsuYSdq78NWI9RS4/ZUW9dhxrY5XdF65i5UxnZL0dL4a2LPp0+ovR/Qn6gg1wRxJz4
+ eYPaC8qf6WA0gC6MAIYCkFxmd4ijGKm/jsY+xB16giCBh2k66Fhxbu0o2DUxPN9BLjgf
+ 4RozUtuW4wVqQiohX2o/CXwWDpOf1i1wFaIwT1vAZTbxaG1NmR+SYcpzURASENbtEmqs
+ XR3Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to:user-agent;
- bh=vzojOIjXWxLiO6TIP3hVvjZj3nBXkO4u+Tv0gqgyYy4=;
- b=UnaZANWQzmv3/LsJgZYrZQ1pPZ8NAMax5itMcu0+ES+Ixbxfb5GLkuZJjx1w9pgJmI
- Zpywv1M9FR9ejnhB1fsyZGrSZ+eGgWD3UY9CxcOKpqS1RlRty2H9b4wfhzwD/k5fw0Zd
- 3EacM8GHD5sg8PUxkN72c5dCM8Eq8DdbMtgodLgdnSJFB/vHpBCSj4ZouQDcWyf2EPSA
- Z12QeSVWQi/oTEX98wx8ZDiOarlCVceYi/ZVGAJmZjfx4BxahWAVcvm23x13KsZFFq+n
- UGige4C+RkjFHj+2ziA8XCZLVqJK3G/8nO+nyObu1NXFCuHyedjwl/gUXSOp4AfXH+ZF
- 3hJw==
-X-Gm-Message-State: AOAM532PQcgCq2nCj3akGreyJWY+iYEtMtChX3ZtFTIsxHnudQQwI9VO
- CaehPcUJ7DwbCmLr6P1bOriXQw==
-X-Google-Smtp-Source: ABdhPJwgu8q8F0w+plBznp44QJ9D3FkKDpwk9b2oLbAg5Cc6+iUfzHSItu7Rm2kLrjAYixGSkmEQNw==
-X-Received: by 2002:ad4:46ad:: with SMTP id
- br13mr24285816qvb.234.1597849444454; 
- Wed, 19 Aug 2020 08:04:04 -0700 (PDT)
+ bh=s64SZVe7q9SvLIi8k1Cji0BZ0MflkhzrqfKJ2a3sRpg=;
+ b=ZjbCt23gYXFBUjrvio/up/ynY8m0HD4WJai7jSVBiG8B/PsBrYSKz9tH52PsZvLSzF
+ mS3mEiXCNukaCmo45A4ZW8n54a9Nc1azRT+5W22osbl6/o8wUCtPGYMx/bFZLh3kdfJr
+ Gj5fNNhb7BSOHvPo9JPFYiwzyGSBBCIakf3qxYHWQb9BQ2Obj5UMAkdubvboOF8SkKGz
+ v/SEPn21BR3vdpYEPAdumxYfwdtB5Jj49jAWoBM3HPnrNKdqP9OPWi5TPyan8OVmiIH0
+ mwgLG8uvGWRjT9/FjBK4HIiiOopL1KCIKyo8LTdE1RI1pXOygcimmCUuHipbLRJ2PdzS
+ dG2w==
+X-Gm-Message-State: AOAM531dpk52+ihtQvOvLMKPvECrfqnL/0EL/DKKRtwdaBqIgIJBFX+d
+ cx2oqqh4W2Lf36+AEMGlq4W+SA==
+X-Google-Smtp-Source: ABdhPJyhydHGXzZYDXTO3g4OpZt3nkuQBZ0wa69OQW6jpGvDpmsGIKkpgaTLTCym7+el9w11N2VezQ==
+X-Received: by 2002:a37:9ccf:: with SMTP id
+ f198mr22392707qke.168.1597850159056; 
+ Wed, 19 Aug 2020 08:15:59 -0700 (PDT)
 Received: from localhost (mobile-166-177-185-175.mycingular.net.
  [166.177.185.175])
- by smtp.gmail.com with ESMTPSA id s56sm25374308qtk.72.2020.08.19.08.04.03
+ by smtp.gmail.com with ESMTPSA id u21sm22277690qkk.1.2020.08.19.08.15.58
  (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
- Wed, 19 Aug 2020 08:04:03 -0700 (PDT)
-Date: Wed, 19 Aug 2020 11:03:59 -0400
+ Wed, 19 Aug 2020 08:15:58 -0700 (PDT)
+Date: Wed, 19 Aug 2020 11:15:53 -0400
 From: Sean Paul <sean@poorly.run>
 To: Lyude Paul <lyude@redhat.com>
-Message-ID: <20200819150359.GA46474@art_vandelay>
+Message-ID: <20200819151547.GB46474@art_vandelay>
 References: <20200811200457.134743-1-lyude@redhat.com>
- <20200811200457.134743-10-lyude@redhat.com>
+ <20200811200457.134743-14-lyude@redhat.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200811200457.134743-10-lyude@redhat.com>
+In-Reply-To: <20200811200457.134743-14-lyude@redhat.com>
 User-Agent: Mutt/1.9.4 (2018-02-28)
-Subject: Re: [Nouveau] [RFC 09/20] drm/i915/dp: Extract drm_dp_has_mst()
+Subject: Re: [Nouveau] [RFC 13/20] drm/i915/dp: Extract
+ drm_dp_downstream_read_info()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -82,93 +83,117 @@ Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, Aug 11, 2020 at 04:04:46PM -0400, Lyude Paul wrote:
-> Just a tiny drive-by cleanup, we can consolidate i915's code for
-> checking for MST support into a helper to be shared across drivers.
+On Tue, Aug 11, 2020 at 04:04:50PM -0400, Lyude Paul wrote:
+> We're going to be doing the same probing process in nouveau for
+> determining downstream DP port capabilities, so let's deduplicate the
+> work by moving i915's code for handling this into a shared helper:
+> drm_dp_downstream_read_info().
 > 
-
-Reviewed-by: Sean Paul <sean@poorly.run>
-
+> Note that when we do this, we also do make some functional changes while
+> we're at it:
+> * We always clear the downstream port info before trying to read it,
+>   just to make things easier for the caller
+> * We skip reading downstream port info if the DPCD indicates that we
+>   don't support downstream port info
+> * We only read as many bytes as needed for the reported number of
+>   downstream ports, no sense in reading the whole thing every time
+> 
 > Signed-off-by: Lyude Paul <lyude@redhat.com>
 > ---
->  drivers/gpu/drm/i915/display/intel_dp.c | 18 ++----------------
->  include/drm/drm_dp_mst_helper.h         | 22 ++++++++++++++++++++++
->  2 files changed, 24 insertions(+), 16 deletions(-)
+>  drivers/gpu/drm/drm_dp_helper.c         | 32 +++++++++++++++++++++++++
+>  drivers/gpu/drm/i915/display/intel_dp.c | 14 ++---------
+>  include/drm/drm_dp_helper.h             |  3 +++
+>  3 files changed, 37 insertions(+), 12 deletions(-)
 > 
-> diff --git a/drivers/gpu/drm/i915/display/intel_dp.c b/drivers/gpu/drm/i915/display/intel_dp.c
-> index 79c27f91f42c0..1e29d3a012856 100644
-> --- a/drivers/gpu/drm/i915/display/intel_dp.c
-> +++ b/drivers/gpu/drm/i915/display/intel_dp.c
-> @@ -4699,20 +4699,6 @@ intel_dp_get_dpcd(struct intel_dp *intel_dp)
->  	return true;
+> diff --git a/drivers/gpu/drm/drm_dp_helper.c b/drivers/gpu/drm/drm_dp_helper.c
+> index 4c21cf69dad5a..9703b33599c3b 100644
+> --- a/drivers/gpu/drm/drm_dp_helper.c
+> +++ b/drivers/gpu/drm/drm_dp_helper.c
+> @@ -423,6 +423,38 @@ bool drm_dp_send_real_edid_checksum(struct drm_dp_aux *aux,
 >  }
->  
-> -static bool
-> -intel_dp_sink_can_mst(struct intel_dp *intel_dp)
-> -{
-> -	u8 mstm_cap;
-> -
-> -	if (intel_dp->dpcd[DP_DPCD_REV] < 0x12)
-> -		return false;
-> -
-> -	if (drm_dp_dpcd_readb(&intel_dp->aux, DP_MSTM_CAP, &mstm_cap) != 1)
-> -		return false;
-> -
-> -	return mstm_cap & DP_MST_CAP;
-> -}
-> -
->  static bool
->  intel_dp_can_mst(struct intel_dp *intel_dp)
->  {
-> @@ -4720,7 +4706,7 @@ intel_dp_can_mst(struct intel_dp *intel_dp)
->  
->  	return i915->params.enable_dp_mst &&
->  		intel_dp->can_mst &&
-> -		intel_dp_sink_can_mst(intel_dp);
-> +		drm_dp_has_mst(&intel_dp->aux, intel_dp->dpcd);
->  }
->  
->  static void
-> @@ -4729,7 +4715,7 @@ intel_dp_configure_mst(struct intel_dp *intel_dp)
->  	struct drm_i915_private *i915 = dp_to_i915(intel_dp);
->  	struct intel_encoder *encoder =
->  		&dp_to_dig_port(intel_dp)->base;
-> -	bool sink_can_mst = intel_dp_sink_can_mst(intel_dp);
-> +	bool sink_can_mst = drm_dp_has_mst(&intel_dp->aux, intel_dp->dpcd);
->  
->  	drm_dbg_kms(&i915->drm,
->  		    "[ENCODER:%d:%s] MST support: port: %s, sink: %s, modparam: %s\n",
-> diff --git a/include/drm/drm_dp_mst_helper.h b/include/drm/drm_dp_mst_helper.h
-> index 8b9eb4db3381c..2d8983a713e8c 100644
-> --- a/include/drm/drm_dp_mst_helper.h
-> +++ b/include/drm/drm_dp_mst_helper.h
-> @@ -911,4 +911,26 @@ __drm_dp_mst_state_iter_get(struct drm_atomic_state *state,
->  	for ((__i) = 0; (__i) < (__state)->num_private_objs; (__i)++) \
->  		for_each_if(__drm_dp_mst_state_iter_get((__state), &(mgr), NULL, &(new_state), (__i)))
+>  EXPORT_SYMBOL(drm_dp_send_real_edid_checksum);
 >  
 > +/**
-> + * drm_dp_has_mst() - check whether or not a sink supports MST
-> + * @aux: The DP AUX channel to use
-> + * @dpcd: A cached copy of the DPCD capabilities for this sink
+> + * drm_dp_downstream_read_info() - read DPCD downstream port info if available
+> + * @aux: DisplayPort AUX channel
+> + * @dpcd: A cached copy of the port's DPCD
+> + * @downstream_ports: buffer to store the downstream port info in
 > + *
-> + * Returns: %True if the sink supports MST, %false otherwise
+> + * Returns: 0 if either the downstream port info was read successfully or
+> + * there was no downstream info to read, or a negative error code otherwise.
 > + */
-> +static inline bool
-> +drm_dp_has_mst(struct drm_dp_aux *aux,
-> +	       const u8 dpcd[DP_RECEIVER_CAP_SIZE])
+> +int drm_dp_downstream_read_info(struct drm_dp_aux *aux,
+> +				const u8 dpcd[DP_RECEIVER_CAP_SIZE],
+> +				u8 downstream_ports[DP_MAX_DOWNSTREAM_PORTS])
 > +{
-> +	u8 mstm_cap;
+> +	int ret;
+> +	u8 len;
 > +
-> +	if (dpcd[DP_DPCD_REV] < DP_DPCD_REV_12)
-> +		return false;
+> +	memset(downstream_ports, 0, DP_MAX_DOWNSTREAM_PORTS);
 > +
-> +	if (drm_dp_dpcd_readb(aux, DP_MSTM_CAP, &mstm_cap) != 1)
-> +		return false;
+> +	/* No downstream info to read */
+> +	if (!drm_dp_is_branch(dpcd) ||
+> +	    dpcd[DP_DPCD_REV] < DP_DPCD_REV_10 ||
+> +	    !(dpcd[DP_DOWNSTREAMPORT_PRESENT] & DP_DWN_STRM_PORT_PRESENT))
+> +		return 0;
 > +
-> +	return !!(mstm_cap & DP_MST_CAP);
+> +	len = (dpcd[DP_DOWN_STREAM_PORT_COUNT] & DP_PORT_COUNT_MASK) * 4;
+
+I'm having a hard time rationalizing DP_MAX_DOWNSTREAM_PORTS being 16, but only
+having 4 ports worth of data in the DP_DOWNSTREAM_PORT_* registers. Do you know
+what's supposed to happen if dpcd[DP_DOWN_STREAM_PORT_COUNT] is > 4?
+
+Sean
+
+> +	ret = drm_dp_dpcd_read(aux, DP_DOWNSTREAM_PORT_0, downstream_ports,
+> +			       len);
+> +
+> +	return ret == len ? 0 : -EIO;
 > +}
+> +EXPORT_SYMBOL(drm_dp_downstream_read_info);
 > +
->  #endif
+>  /**
+>   * drm_dp_downstream_max_clock() - extract branch device max
+>   *                                 pixel rate for legacy VGA
+> diff --git a/drivers/gpu/drm/i915/display/intel_dp.c b/drivers/gpu/drm/i915/display/intel_dp.c
+> index 1e29d3a012856..984e49194ca31 100644
+> --- a/drivers/gpu/drm/i915/display/intel_dp.c
+> +++ b/drivers/gpu/drm/i915/display/intel_dp.c
+> @@ -4685,18 +4685,8 @@ intel_dp_get_dpcd(struct intel_dp *intel_dp)
+>  			return false;
+>  	}
+>  
+> -	if (!drm_dp_is_branch(intel_dp->dpcd))
+> -		return true; /* native DP sink */
+> -
+> -	if (intel_dp->dpcd[DP_DPCD_REV] == 0x10)
+> -		return true; /* no per-port downstream info */
+> -
+> -	if (drm_dp_dpcd_read(&intel_dp->aux, DP_DOWNSTREAM_PORT_0,
+> -			     intel_dp->downstream_ports,
+> -			     DP_MAX_DOWNSTREAM_PORTS) < 0)
+> -		return false; /* downstream port status fetch failed */
+> -
+> -	return true;
+> +	return drm_dp_downstream_read_info(&intel_dp->aux, intel_dp->dpcd,
+> +					   intel_dp->downstream_ports) == 0;
+>  }
+>  
+>  static bool
+> diff --git a/include/drm/drm_dp_helper.h b/include/drm/drm_dp_helper.h
+> index 5c28199248626..1349f16564ace 100644
+> --- a/include/drm/drm_dp_helper.h
+> +++ b/include/drm/drm_dp_helper.h
+> @@ -1613,6 +1613,9 @@ int drm_dp_dpcd_read_link_status(struct drm_dp_aux *aux,
+>  bool drm_dp_send_real_edid_checksum(struct drm_dp_aux *aux,
+>  				    u8 real_edid_checksum);
+>  
+> +int drm_dp_downstream_read_info(struct drm_dp_aux *aux,
+> +				const u8 dpcd[DP_RECEIVER_CAP_SIZE],
+> +				u8 downstream_ports[DP_MAX_DOWNSTREAM_PORTS]);
+>  int drm_dp_downstream_max_clock(const u8 dpcd[DP_RECEIVER_CAP_SIZE],
+>  				const u8 port_cap[4]);
+>  int drm_dp_downstream_max_bpc(const u8 dpcd[DP_RECEIVER_CAP_SIZE],
 > -- 
 > 2.26.2
 > 
