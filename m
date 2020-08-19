@@ -1,67 +1,66 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3641224A182
-	for <lists+nouveau@lfdr.de>; Wed, 19 Aug 2020 16:17:15 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9AE0224A1AE
+	for <lists+nouveau@lfdr.de>; Wed, 19 Aug 2020 16:24:45 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id F3C996E3FB;
-	Wed, 19 Aug 2020 14:17:12 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D9D0E6E400;
+	Wed, 19 Aug 2020 14:24:42 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ej1-x641.google.com (mail-ej1-x641.google.com
- [IPv6:2a00:1450:4864:20::641])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 975606E3A6
- for <nouveau@lists.freedesktop.org>; Wed, 19 Aug 2020 14:12:12 +0000 (UTC)
-Received: by mail-ej1-x641.google.com with SMTP id c16so26449691ejx.12
- for <nouveau@lists.freedesktop.org>; Wed, 19 Aug 2020 07:12:12 -0700 (PDT)
+Received: from mail-ed1-x542.google.com (mail-ed1-x542.google.com
+ [IPv6:2a00:1450:4864:20::542])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 502AE6E400
+ for <nouveau@lists.freedesktop.org>; Wed, 19 Aug 2020 14:22:50 +0000 (UTC)
+Received: by mail-ed1-x542.google.com with SMTP id di22so18227668edb.12
+ for <nouveau@lists.freedesktop.org>; Wed, 19 Aug 2020 07:22:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=/Js4y14Ghs6Bq4zdQYDVHKruVAGVzHlKISQN4bMebSg=;
- b=dV/u8lgzRJf9R13RTyQNVA0z7K0gpop908KdbH7mh1lom7wOwawyDuMH4lJJUnAt3N
- ER1Hz91rD7vCxhZyzb6LHpsKYbaB2LKK6Ns95j0nfjmJX5hZXauljIjL3//YJqgWaxRv
- 97QHf+SgHVXKKphnPxr8+LnwmzFET6Ce2ARqc=
+ :cc; bh=uEY7dk9y/9x4HcaWjwFAfwvm+T0doGz7atsT11F+few=;
+ b=MwoQKU4RRVGBwswghQT2kEA4PWtzNJ9PP0GlvGH+VtAzrSvBnEW2dUpr0fs6tqB36t
+ NEatNz3nTo9Srl8JZAX9oVp9pc5TQLgcK+vTRNeNePaaHI1s5H4G84GiGqxdAJ9X51ZU
+ 9RjLZl32ILMLyADH9W9JtyN4rfe/+nXKgJFvs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=/Js4y14Ghs6Bq4zdQYDVHKruVAGVzHlKISQN4bMebSg=;
- b=imcroKek5zk/LnD+Os60q3P0bPLZRVBFxGqOQgXXnJUdttqzwhkK3WX8vtMXM3t/xW
- u+ww8edSCFzD5kkOpyL6kG+mWtCWfFTsAxvJIATg7W4RzdV5CSZLHxuR2tjmv74OQN3J
- hBynAsR7aTok8XWZ/rXg1+domwCB9nDcMa7eRoRt+KObhubfpISi8RMhp88HMwICttzr
- 4MOgUL4n7FUVMhb+fg7hLmrNlsSe6+mt2KE/W+N1kFMsl0NcT6r1vlFCxM7WZpYTw1LG
- 8fJY2j04TKdHpJ3vPEKw/EtigBAriuBNX3HT+eerq1BTVmMbtM4UiwWa5whihbdvzb7H
- J6wQ==
-X-Gm-Message-State: AOAM533yaNeL7inm6L3wGqcIrrBcJY6UJp8W/XfjITKq6cZUm5AUWDH6
- QiDSDX7Hmp93jEQmeQ8NoNgXtSApoYi4kw==
-X-Google-Smtp-Source: ABdhPJx6WuTFMcRBU1Vu3xEq8sn3zsrIC2P3x8+THT7VH2OaQJ04QMGvSdbDr5f6+/o6zEUydzWkjA==
-X-Received: by 2002:a17:906:824d:: with SMTP id
- f13mr26342978ejx.190.1597846330886; 
- Wed, 19 Aug 2020 07:12:10 -0700 (PDT)
-Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com.
- [209.85.221.54])
- by smtp.gmail.com with ESMTPSA id a18sm18872450ejt.69.2020.08.19.07.12.09
+ bh=uEY7dk9y/9x4HcaWjwFAfwvm+T0doGz7atsT11F+few=;
+ b=O+ChD1A3pQHsNllrkS+YB5wmED8yhJYoHcqRJ9MZZTRUrLtFz6iwvBXLLgSnI1xQ7f
+ bv542vBFhSf9hveDTsji2YhNnSyhVQcj3xscPJul8oz3+JqR4rY7gsAm1PknJtSBqJhI
+ h31L4GK58m1yO7JwFFb2G6+95fXyVAwlEHy7JnMq3oa9ojvxPtVYvI4pO7S4wKZ4TEv+
+ Eq0Pxj1NrL7ngv96S+n9WW9YZ8bD7pVGzl4EbJ1QOyD8DK7K/lQoyXFIBizSN3yfOK8k
+ 4NwxaWCA4SZZWuiW/zJNhmkgvsIjEXbkPh+j8Tx8FwS2nxYcig4X2mUQYGtAdjrehyLH
+ eFFw==
+X-Gm-Message-State: AOAM531cmYcFZNcV2Vcdt3fIYWGLgIvEZpv8ebZhvmYOAglybH6dobjY
+ pCmxDS6F1Tbr9ux9oyso17lxFdri4TPR8Q==
+X-Google-Smtp-Source: ABdhPJy0ZD/RLu2kHwL4+OusQNXwLP039sdTsGftqGRpudkcCIbdduw9tQosPGkT/da6/fSSRmixiw==
+X-Received: by 2002:a50:cc92:: with SMTP id q18mr16220145edi.159.1597846968568; 
+ Wed, 19 Aug 2020 07:22:48 -0700 (PDT)
+Received: from mail-wr1-f52.google.com (mail-wr1-f52.google.com.
+ [209.85.221.52])
+ by smtp.gmail.com with ESMTPSA id w9sm18936206ejk.62.2020.08.19.07.22.46
  for <nouveau@lists.freedesktop.org>
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 19 Aug 2020 07:12:09 -0700 (PDT)
-Received: by mail-wr1-f54.google.com with SMTP id l2so21678353wrc.7
- for <nouveau@lists.freedesktop.org>; Wed, 19 Aug 2020 07:12:09 -0700 (PDT)
-X-Received: by 2002:adf:ec4f:: with SMTP id w15mr24104550wrn.385.1597846328915; 
- Wed, 19 Aug 2020 07:12:08 -0700 (PDT)
+ Wed, 19 Aug 2020 07:22:47 -0700 (PDT)
+Received: by mail-wr1-f52.google.com with SMTP id a5so21739037wrm.6
+ for <nouveau@lists.freedesktop.org>; Wed, 19 Aug 2020 07:22:46 -0700 (PDT)
+X-Received: by 2002:adf:ec45:: with SMTP id w5mr25495420wrn.415.1597846966201; 
+ Wed, 19 Aug 2020 07:22:46 -0700 (PDT)
 MIME-Version: 1.0
 References: <20200819065555.1802761-1-hch@lst.de>
  <20200819065555.1802761-6-hch@lst.de>
  <CAAFQd5COLxjydDYrfx47ht8tj-aNPiaVnC+WyQA7nvpW4gs=ww@mail.gmail.com>
  <62e4f4fc-c8a5-3ee8-c576-fe7178cb4356@arm.com>
  <CAAFQd5AcCTDguB2C9KyDiutXWoEvBL8tL7+a==Uo8vj_8CLOJw@mail.gmail.com>
- <20200819135738.GB17098@lst.de>
-In-Reply-To: <20200819135738.GB17098@lst.de>
+ <2b32f1d8-16f7-3352-40a5-420993d52fb5@arm.com>
+In-Reply-To: <2b32f1d8-16f7-3352-40a5-420993d52fb5@arm.com>
 From: Tomasz Figa <tfiga@chromium.org>
-Date: Wed, 19 Aug 2020 16:11:52 +0200
-X-Gmail-Original-Message-ID: <CAAFQd5BvpzJTycFvjntmX9W_d879hHFX+rJ8W9EK6+6cqFaVMA@mail.gmail.com>
-Message-ID: <CAAFQd5BvpzJTycFvjntmX9W_d879hHFX+rJ8W9EK6+6cqFaVMA@mail.gmail.com>
-To: Christoph Hellwig <hch@lst.de>
-X-Mailman-Approved-At: Wed, 19 Aug 2020 14:17:10 +0000
+Date: Wed, 19 Aug 2020 16:22:29 +0200
+X-Gmail-Original-Message-ID: <CAAFQd5DrEq7UVi_aH=-DO4xYC3SbjJ3m1aQSbt=8THL-W+orMQ@mail.gmail.com>
+Message-ID: <CAAFQd5DrEq7UVi_aH=-DO4xYC3SbjJ3m1aQSbt=8THL-W+orMQ@mail.gmail.com>
+To: Robin Murphy <robin.murphy@arm.com>
+X-Mailman-Approved-At: Wed, 19 Aug 2020 14:24:42 +0000
 Subject: Re: [Nouveau] [PATCH 05/28] media/v4l2: remove
  V4L2-FLAG-MEMORY-NON-CONSISTENT
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -80,7 +79,8 @@ Cc: alsa-devel@alsa-project.org, linux-ia64@vger.kernel.org,
  nouveau@lists.freedesktop.org, linux-nvme@lists.infradead.org,
  linux-mips@vger.kernel.org,
  "James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>,
- linux-mm@kvack.org, Marek Szyprowski <m.szyprowski@samsung.com>,
+ linux-mm@kvack.org, Christoph Hellwig <hch@lst.de>,
+ Marek Szyprowski <m.szyprowski@samsung.com>,
  linux-samsung-soc <linux-samsung-soc@vger.kernel.org>,
  Joonyoung Shim <jy0922.shim@samsung.com>, linux-scsi@vger.kernel.org,
  Joerg Roedel <joro@8bytes.org>,
@@ -94,55 +94,120 @@ Cc: alsa-devel@alsa-project.org, linux-ia64@vger.kernel.org,
  Thomas Bogendoerfer <tsbogend@alpha.franken.de>, linux-parisc@vger.kernel.org,
  netdev@vger.kernel.org, Seung-Woo Kim <sw0312.kim@samsung.com>,
  Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- Kyungmin Park <kyungmin.park@samsung.com>, Robin Murphy <robin.murphy@arm.com>
+ Kyungmin Park <kyungmin.park@samsung.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, Aug 19, 2020 at 3:57 PM Christoph Hellwig <hch@lst.de> wrote:
+On Wed, Aug 19, 2020 at 4:07 PM Robin Murphy <robin.murphy@arm.com> wrote:
 >
-> On Wed, Aug 19, 2020 at 02:49:01PM +0200, Tomasz Figa wrote:
+> On 2020-08-19 13:49, Tomasz Figa wrote:
+> > On Wed, Aug 19, 2020 at 1:51 PM Robin Murphy <robin.murphy@arm.com> wrote:
+> >>
+> >> Hi Tomasz,
+> >>
+> >> On 2020-08-19 12:16, Tomasz Figa wrote:
+> >>> Hi Christoph,
+> >>>
+> >>> On Wed, Aug 19, 2020 at 8:56 AM Christoph Hellwig <hch@lst.de> wrote:
+> >>>>
+> >>>> The V4L2-FLAG-MEMORY-NON-CONSISTENT flag is entirely unused,
+> >>>
+> >>> Could you explain what makes you think it's unused? It's a feature of
+> >>> the UAPI generally supported by the videobuf2 framework and relied on
+> >>> by Chromium OS to get any kind of reasonable performance when
+> >>> accessing V4L2 buffers in the userspace.
+> >>>
+> >>>> and causes
+> >>>> weird gymanstics with the DMA_ATTR_NON_CONSISTENT flag, which is
+> >>>> unimplemented except on PARISC and some MIPS configs, and about to be
+> >>>> removed.
+> >>>
+> >>> It is implemented by the generic DMA mapping layer [1], which is used
+> >>> by a number of architectures including ARM64 and supposed to be used
+> >>> by new architectures going forward.
+> >>
+> >> AFAICS all that V4L2_FLAG_MEMORY_NON_CONSISTENT does is end up
+> >> controling whether DMA_ATTR_NON_CONSISTENT is added to vb2_queue::dma_attrs.
+> >>
+> >> Please can you point to where DMA_ATTR_NON_CONSISTENT does anything at
+> >> all on arm64?
+> >>
+> >
 > > With the default config it doesn't, but with
 > > CONFIG_DMA_NONCOHERENT_CACHE_SYNC enabled it makes dma_pgprot() keep
 > > the pgprot value as is, without enforcing coherence attributes.
 >
-> Which isn't selected on arm64, and that is for a good reason.
+> How active are the PA-RISC and MIPS ports of Chromium OS?
+
+Not active. We enable CONFIG_DMA_NONCOHERENT_CACHE_SYNC for ARM64,
+given the directions received back in April when discussing the
+noncoherent memory functionality on the mailing list in the thread I
+pointed out in my previous message and no clarification on why it is
+disabled for ARM64 in upstream, despite making several attempts to get
+some.
+
 >
+> Hacking CONFIG_DMA_NONCOHERENT_CACHE_SYNC into an architecture that
+> doesn't provide dma_cache_sync() is wrong, since at worst it may break
+> other drivers. If downstream is wildly misusing an API then so be it,
+> but it's hardly a strong basis for an upstream argument.
+
+I guess it means that we're wildly misusing the API, but it still does
+work. Could you explain how it could break other drivers?
+
+>
+> >> Also, I posit that videobuf2 is not actually relying on
+> >> DMA_ATTR_NON_CONSISTENT anyway, since it's clearly not using it properly:
+> >>
+> >> "By using this API, you are guaranteeing to the platform
+> >> that you have all the correct and necessary sync points for this memory
+> >> in the driver should it choose to return non-consistent memory."
+> >>
+> >> $ git grep dma_cache_sync drivers/media
+> >> $
+> >
 > > AFAIK dma_cache_sync() isn't the only way to perform the cache
-> > synchronization.
+> > synchronization. The earlier patch series that I reviewed relied on
+> > dma_get_sgtable() and then dma_sync_sg_*() (which existed in the
+> > vb2-dc since forever [1]). However, it looks like with the final code
+> > the sgtable isn't acquired and the synchronization isn't happening, so
+> > you have a point.
 >
-> Yes, it is the only documented way to do it.  And if you read the whole
-> series instead of screaming you'd see that it provides a proper way
-> to deal with non-coherent memory which will also work with arm64.
-> instead of screaming
+> Using the streaming sync calls on coherent allocations has also always
+> been wrong per the API, regardless of the bodies of code that have
+> happened to get away with it for so long.
 >
-
-I'm sorry if I have offended you in any way, but would also appreciate
-it if a less aggressive tone was directed towards me as well.
-
-I have valid reasons to object to this patch, as stated in my previous
-emails. The fact that the original feature has problems is of course
-another story and, as I mentioned too, I'm willing to look into fixing
-them.
-
-I'm of course happy to review the rest of the series and even more
-happy to help migrating this code to whatever is added there, as long
-as the functionality is preserved.
-
-> > By the way, as a videobuf2 reviewer, I'd appreciate being CC'd on any
-> > series related to the subsystem-facing DMA API changes, since
-> > videobuf2 is one of the biggest users of it.
+> > FWIW, I asked back in time what the plan is for non-coherent
+> > allocations and it seemed like DMA_ATTR_NON_CONSISTENT and
+> > dma_sync_*() was supposed to be the right thing to go with. [2] The
+> > same thread also explains why dma_alloc_pages() isn't suitable for the
+> > users of dma_alloc_attrs() and DMA_ATTR_NON_CONSISTENT.
 >
-> The cc list is too long - I cc lists and key maintainers.  As a reviewer
-> should should watch your subsystems lists closely.
+> AFAICS even back then Christoph was implying getting rid of
+> NON_CONSISTENT and *replacing* it with something streaming-API-based -
 
-Well, I guess we can disagree on this, because there is no clear
-policy. I'm listed in the MAINTAINERS file for the subsystem and I
-believe the purpose of the file is to list the people to CC on
-relevant patches. We're all overloaded with work and having to look
-through the huge volume of mailing lists like linux-media doesn't help
-and thus I'd still appreciate being added on CC.
+That's not how I read his reply from the thread I pointed to, but that
+might of course be my misunderstanding.
+
+> i.e. this series - not encouraging mixing the existing APIs. It doesn't
+> seem impossible to implement a remapping version of this new
+> dma_alloc_pages() for IOMMU-backed ops if it's really warranted
+> (although at that point it seems like "non-coherent" vb2-dc starts to
+> have significant conceptual overlap with vb2-sg).
+
+No, there is no overlap between vb2-dc and vb2-sg. They differ on
+another level - the former is to be used by devices without
+scatter-gather or internal mapping capabilities and gives the driver a
+single DMA address for the whole buffer, regardless of whether it's
+IOVA-contiguous (for devices behind an IOMMU) or physically contiguous
+(for the others), while the latter gives the driver an sgtable, which
+of course may be DMA-contiguous internally, but doesn't have to and
+usually isn't. This model makes it possible to hide the SoC
+implementation details from particular drivers, since those are very
+often reused on many SoCs which differ in the availability of IOMMU,
+DMA addressing restrictions and so on.
 
 Best regards,
 Tomasz
