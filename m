@@ -1,63 +1,77 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id E489124A315
-	for <lists+nouveau@lfdr.de>; Wed, 19 Aug 2020 17:29:20 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6363424A4E6
+	for <lists+nouveau@lfdr.de>; Wed, 19 Aug 2020 19:29:10 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 20DF66E483;
-	Wed, 19 Aug 2020 15:29:18 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 100A86E58B;
+	Wed, 19 Aug 2020 17:29:07 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-qv1-xf41.google.com (mail-qv1-xf41.google.com
- [IPv6:2607:f8b0:4864:20::f41])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 494086E46C
- for <nouveau@lists.freedesktop.org>; Wed, 19 Aug 2020 15:29:17 +0000 (UTC)
-Received: by mail-qv1-xf41.google.com with SMTP id r19so11416348qvw.11
- for <nouveau@lists.freedesktop.org>; Wed, 19 Aug 2020 08:29:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=poorly.run; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to:user-agent;
- bh=JQQjyzH42+NC39XApcYZGEZ0FS1brQBGuBw1l1VaGpE=;
- b=KPnpdewWWrntfbDkrHQKlIaN6Vfj3yI6Zv02G0Jjm64j2CHKKic3s84zf6tiWndCUi
- 0tb7s6BxUHR/bnQq1JRTUz/f19bY3/1qNWV4CnTKzSBmFq3eAuraxG1IEAqrPfAYVC+X
- bX/TaH3KXEpuZMB3zIOawc9eVN1uCl85igrlzmaP1TG9bvonWz5s4nEQuTX+8NA06faU
- cKmOvYZc8ox385XhWJCcV1yxjdKwvYJvl4RFuljLgikgoP2dSD5jn5xLa3GkdkWxMI8w
- 16U2fwhvcca2rc7T5LAhu+VUqWQqUy5DcMloIgt9XQoVUBsUQGmpkSLhW7/oAoHEFVDu
- W6lw==
+Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
+ [207.211.31.120])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9C80B6E174
+ for <nouveau@lists.freedesktop.org>; Wed, 19 Aug 2020 17:29:06 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1597858145;
+ h=from:from:reply-to:reply-to:subject:subject:date:date:
+ message-id:message-id:to:to:cc:cc:mime-version:mime-version:
+ content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=2KvgaCYohQhokdvpsCdvRkGWCDtbthJZmZ4XIsksp3I=;
+ b=J00KvQn00MPEtzdrtj7AbZEbs7JaRg0tmxNmvBqyhf57Pfr8dEpxpSc/HGGHkWHS4/ZMXs
+ sQgzwVBcX/oSsTJFQevTWL5KfQJk4e0vohmBf8TTqmKr3pkEDe6GsFhcMPAYvhZdQS5wll
+ 2g7PIb8n6yYBImSBAagZ7YcBeFwznag=
+Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com
+ [209.85.160.198]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-233-YrXuknmXNlONLEDrrbt0Wg-1; Wed, 19 Aug 2020 13:29:00 -0400
+X-MC-Unique: YrXuknmXNlONLEDrrbt0Wg-1
+Received: by mail-qt1-f198.google.com with SMTP id r9so17205518qtp.7
+ for <nouveau@lists.freedesktop.org>; Wed, 19 Aug 2020 10:29:00 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to:user-agent;
- bh=JQQjyzH42+NC39XApcYZGEZ0FS1brQBGuBw1l1VaGpE=;
- b=dNokq9EFdb1+/9aYRkYjwlYcXvrSgdpasgclpAquQRgH0rrt9T/gZhbsL38YRDXerp
- F2IRViF02vIUXcPWJvOT1sJ+yS8GB7wqj5ETUNaAcZduN4/U7RLvETAYoQS/i4M/AREA
- gmWqR1WIiiMv3geIvIaDR4oJZc1TE+QRXc6O+g+UwVRXJ3smQQ7hecRkILbZOeKXAOtl
- U5t7LaP+9BYs+Q/sVCI7sDQFlc4OaU4Lkqss/BglmXEapG+gSUEBxNAYRF0vpE+nmodh
- Jj3SGlqDPSZ95bzlHDemCe6KdfKs8z5TBLzV/fWmKaZgsAGi3Dv8mIotGsCIREgw5ZNV
- b7xw==
-X-Gm-Message-State: AOAM530AFBkoXH1rODKAZByf8NCpU/KmJKGsiHJEguSQhn5FR5DlWPCm
- TCaVF+t5/psJQ/4H7ooY98Rbsw==
-X-Google-Smtp-Source: ABdhPJyUflRKSbZVkflpzoIR4wWnDkDCoAJZOvFOqoqGLwo5VzXLHUtEJBP/fHO9V7UW/6DcjpKnsg==
-X-Received: by 2002:a0c:d981:: with SMTP id y1mr24864637qvj.124.1597850956436; 
- Wed, 19 Aug 2020 08:29:16 -0700 (PDT)
-Received: from localhost (mobile-166-177-185-175.mycingular.net.
- [166.177.185.175])
- by smtp.gmail.com with ESMTPSA id o25sm23855350qkm.42.2020.08.19.08.29.15
- (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
- Wed, 19 Aug 2020 08:29:15 -0700 (PDT)
-Date: Wed, 19 Aug 2020 11:29:14 -0400
-From: Sean Paul <sean@poorly.run>
-To: Lyude Paul <lyude@redhat.com>
-Message-ID: <20200819152914.GE46474@art_vandelay>
+ h=x-gm-message-state:message-id:subject:from:reply-to:to:cc:date
+ :in-reply-to:references:organization:user-agent:mime-version
+ :content-transfer-encoding;
+ bh=2KvgaCYohQhokdvpsCdvRkGWCDtbthJZmZ4XIsksp3I=;
+ b=aqXl84l9+CU7eNJn70HCNDk81ErjyARsggSP6LEoO9czxDbSKjZOdsVv54DlxJ+x0p
+ Cs3Z5eKINK19OsR0i6ltHHJJBSkc6tPnXDPPSPar8te5Gs5rnhkpx6sxy1qZHlfJ5GCP
+ zkehc6TPzPtS/RzUl5NLX29mPvz7gObgChk11d/sUeXbQOwVLT8Jf29i0ngztEsKZA9U
+ lxYREj4B7BLu0CtVuWg1sFYsP8BXwxKLQs688Xna3zGPwNUhydW42eyX8Eq8jcZ+l9Mc
+ sKHWEFfXPRy5x72ky6XO3iRzoKXTn4+t1OVkb0YZsrOyzMTOwOPJOURCdPQuhy0RBRIL
+ I+vw==
+X-Gm-Message-State: AOAM5328A2bx0wN1eknVSqeI0Bm1rVFqbDDgNEMf9E/bAiBVfJjt6IeF
+ q9g32DUtDyI+K8DjdS+YcAkiFpLke8Go4yUehYga8xRJR+GEj8FGQzZmcujzPnwFabbVMPpW6zz
+ dW2+zXt2+WIDZqgQivtZ7ZEvxdg==
+X-Received: by 2002:aed:2f44:: with SMTP id l62mr22414139qtd.207.1597858140093; 
+ Wed, 19 Aug 2020 10:29:00 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJxIqzNjwxOOu6zLyJjLqOnz+3XI2ZOYHaFSMcNnljH/NqEhnUQEvbxwdlKjcIiBIoyuwTy9hw==
+X-Received: by 2002:aed:2f44:: with SMTP id l62mr22414117qtd.207.1597858139794; 
+ Wed, 19 Aug 2020 10:28:59 -0700 (PDT)
+Received: from Whitewolf.lyude.net
+ (pool-108-49-102-102.bstnma.fios.verizon.net. [108.49.102.102])
+ by smtp.gmail.com with ESMTPSA id t8sm28688880qtc.50.2020.08.19.10.28.58
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 19 Aug 2020 10:28:58 -0700 (PDT)
+Message-ID: <e949791af3a41321c10bec8b862914e3c9952f4f.camel@redhat.com>
+From: Lyude Paul <lyude@redhat.com>
+To: Sean Paul <sean@poorly.run>
+Date: Wed, 19 Aug 2020 13:28:57 -0400
+In-Reply-To: <20200819151547.GB46474@art_vandelay>
 References: <20200811200457.134743-1-lyude@redhat.com>
- <20200811200457.134743-20-lyude@redhat.com>
+ <20200811200457.134743-14-lyude@redhat.com>
+ <20200819151547.GB46474@art_vandelay>
+Organization: Red Hat
+User-Agent: Evolution 3.36.5 (3.36.5-1.fc32)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20200811200457.134743-20-lyude@redhat.com>
-User-Agent: Mutt/1.9.4 (2018-02-28)
-Subject: Re: [Nouveau] [RFC 19/20] drm/i915/dp: Extract
- drm_dp_read_dpcd_caps()
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=lyude@redhat.com
+X-Mimecast-Spam-Score: 0.002
+X-Mimecast-Originator: redhat.com
+Subject: Re: [Nouveau] [RFC 13/20] drm/i915/dp: Extract
+ drm_dp_downstream_read_info()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,272 +83,138 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Juha-Pekka Heikkila <juhapekka.heikkila@gmail.com>,
- David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
+Reply-To: lyude@redhat.com
+Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
  intel-gfx@lists.freedesktop.org, Lucas De Marchi <lucas.demarchi@intel.com>,
  open list <linux-kernel@vger.kernel.org>, dri-devel@lists.freedesktop.org,
  Gwan-gyeong Mun <gwan-gyeong.mun@intel.com>,
  Manasi Navare <manasi.d.navare@intel.com>, Uma Shankar <uma.shankar@intel.com>,
- =?iso-8859-1?Q?Jos=E9?= Roberto de Souza <jose.souza@intel.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>, Animesh Manna <animesh.manna@intel.com>,
+ =?ISO-8859-1?Q?Jos=E9?= Roberto de Souza <jose.souza@intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>,
  Wambui Karuga <wambui.karugax@gmail.com>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, Aug 11, 2020 at 04:04:56PM -0400, Lyude Paul wrote:
-> Since DP 1.3, it's been possible for DP receivers to specify an
-> additional set of DPCD capabilities, which can take precedence over the
-> capabilities reported at DP_DPCD_REV.
-> 
-> Basically any device supporting DP is going to need to read these in an
-> identical manner, in particular nouveau, so let's go ahead and just move
-> this code out of i915 into a shared DRM DP helper that we can use in
-> other drivers.
-> 
-> Signed-off-by: Lyude Paul <lyude@redhat.com>
-> ---
->  drivers/gpu/drm/drm_dp_helper.c             | 76 +++++++++++++++++++++
->  drivers/gpu/drm/i915/display/intel_dp.c     | 60 +---------------
->  drivers/gpu/drm/i915/display/intel_dp.h     |  1 -
->  drivers/gpu/drm/i915/display/intel_lspcon.c |  2 +-
->  include/drm/drm_dp_helper.h                 |  3 +
->  5 files changed, 82 insertions(+), 60 deletions(-)
-> 
-> diff --git a/drivers/gpu/drm/drm_dp_helper.c b/drivers/gpu/drm/drm_dp_helper.c
-> index 0ff2959c8f8e8..f9445915c6c26 100644
-> --- a/drivers/gpu/drm/drm_dp_helper.c
-> +++ b/drivers/gpu/drm/drm_dp_helper.c
-> @@ -423,6 +423,82 @@ bool drm_dp_send_real_edid_checksum(struct drm_dp_aux *aux,
->  }
->  EXPORT_SYMBOL(drm_dp_send_real_edid_checksum);
->  
-> +static int drm_dp_read_extended_dpcd_caps(struct drm_dp_aux *aux,
-> +					  u8 dpcd[DP_RECEIVER_CAP_SIZE])
-> +{
-> +	u8 dpcd_ext[6];
-> +	int ret;
-> +
-> +	/*
-> +	 * Prior to DP1.3 the bit represented by
-> +	 * DP_EXTENDED_RECEIVER_CAP_FIELD_PRESENT was reserved.
-> +	 * If it is set DP_DPCD_REV at 0000h could be at a value less than
-> +	 * the true capability of the panel. The only way to check is to
-> +	 * then compare 0000h and 2200h.
-> +	 */
-> +	if (!(dpcd[DP_TRAINING_AUX_RD_INTERVAL] &
-> +	      DP_EXTENDED_RECEIVER_CAP_FIELD_PRESENT))
-> +		return 0;
-> +
-> +	ret = drm_dp_dpcd_read(aux, DP_DP13_DPCD_REV, &dpcd_ext,
-> +			       sizeof(dpcd_ext));
-> +	if (ret != sizeof(dpcd_ext))
-> +		return -EIO;
-> +
-> +	if (dpcd[DP_DPCD_REV] > dpcd_ext[DP_DPCD_REV]) {
-> +		DRM_DEBUG_KMS("%s: Extended DPCD rev less than base DPCD rev (%d > %d)\n",
-> +			      aux->name, dpcd[DP_DPCD_REV],
-> +			      dpcd_ext[DP_DPCD_REV]);
-
-Might be a good opportunity to convert all of these to drm_dbg_dp()?
-
-> +		return 0;
-> +	}
-> +
-> +	if (!memcmp(dpcd, dpcd_ext, sizeof(dpcd_ext)))
-> +		return 0;
-> +
-> +	DRM_DEBUG_KMS("%s: Base DPCD: %*ph\n",
-> +		      aux->name, DP_RECEIVER_CAP_SIZE, dpcd);
-> +
-> +	memcpy(dpcd, dpcd_ext, sizeof(dpcd_ext));
-> +
-> +	return 0;
-> +}
-> +
-> +/**
-> + * drm_dp_read_dpcd_caps() - read DPCD caps and extended DPCD caps if
-> + * available
-> + * @aux: DisplayPort AUX channel
-> + * @dpcd: Buffer to store the resulting DPCD in
-> + *
-> + * Attempts to read the base DPCD caps for @aux. Additionally, this function
-> + * checks for and reads the extended DPRX caps (%DP_DP13_DPCD_REV) if
-> + * present.
-> + *
-> + * Returns: %0 if the DPCD was read successfully, negative error code
-> + * otherwise.
-> + */
-> +int drm_dp_read_dpcd_caps(struct drm_dp_aux *aux,
-> +			  u8 dpcd[DP_RECEIVER_CAP_SIZE])
-> +{
-> +	int ret;
-> +
-> +	ret = drm_dp_dpcd_read(aux, DP_DPCD_REV, dpcd, DP_RECEIVER_CAP_SIZE);
-> +	if (ret != DP_RECEIVER_CAP_SIZE || dpcd[DP_DPCD_REV] == 0)
-> +		return -EIO;
-> +
-> +	ret = drm_dp_read_extended_dpcd_caps(aux, dpcd);
-> +	if (ret < 0)
-> +		return ret;
-
-I wonder if we should just go with the "regular" dpcd caps we just read in this
-case?
-
-Regardless of my nits,
-
-Reviewed-by: Sean Paul <sean@poorly.run>
-
-> +
-> +	DRM_DEBUG_KMS("%s: DPCD: %*ph\n",
-> +		      aux->name, DP_RECEIVER_CAP_SIZE, dpcd);
-> +
-> +	if (dpcd[DP_DPCD_REV] == 0)
-> +		ret = -EIO;
-> +
-> +	return ret;
-> +}
-> +EXPORT_SYMBOL(drm_dp_read_dpcd_caps);
-> +
->  /**
->   * drm_dp_downstream_read_info() - read DPCD downstream port info if available
->   * @aux: DisplayPort AUX channel
-> diff --git a/drivers/gpu/drm/i915/display/intel_dp.c b/drivers/gpu/drm/i915/display/intel_dp.c
-> index e343965a483df..230aa0360dc61 100644
-> --- a/drivers/gpu/drm/i915/display/intel_dp.c
-> +++ b/drivers/gpu/drm/i915/display/intel_dp.c
-> @@ -4449,62 +4449,6 @@ intel_dp_link_down(struct intel_encoder *encoder,
->  	}
->  }
->  
-> -static void
-> -intel_dp_extended_receiver_capabilities(struct intel_dp *intel_dp)
-> -{
-> -	struct drm_i915_private *i915 = dp_to_i915(intel_dp);
-> -	u8 dpcd_ext[6];
-> -
-> -	/*
-> -	 * Prior to DP1.3 the bit represented by
-> -	 * DP_EXTENDED_RECEIVER_CAP_FIELD_PRESENT was reserved.
-> -	 * if it is set DP_DPCD_REV at 0000h could be at a value less than
-> -	 * the true capability of the panel. The only way to check is to
-> -	 * then compare 0000h and 2200h.
-> -	 */
-> -	if (!(intel_dp->dpcd[DP_TRAINING_AUX_RD_INTERVAL] &
-> -	      DP_EXTENDED_RECEIVER_CAP_FIELD_PRESENT))
-> -		return;
-> -
-> -	if (drm_dp_dpcd_read(&intel_dp->aux, DP_DP13_DPCD_REV,
-> -			     &dpcd_ext, sizeof(dpcd_ext)) != sizeof(dpcd_ext)) {
-> -		drm_err(&i915->drm,
-> -			"DPCD failed read at extended capabilities\n");
-> -		return;
-> -	}
-> -
-> -	if (intel_dp->dpcd[DP_DPCD_REV] > dpcd_ext[DP_DPCD_REV]) {
-> -		drm_dbg_kms(&i915->drm,
-> -			    "DPCD extended DPCD rev less than base DPCD rev\n");
-> -		return;
-> -	}
-> -
-> -	if (!memcmp(intel_dp->dpcd, dpcd_ext, sizeof(dpcd_ext)))
-> -		return;
-> -
-> -	drm_dbg_kms(&i915->drm, "Base DPCD: %*ph\n",
-> -		    (int)sizeof(intel_dp->dpcd), intel_dp->dpcd);
-> -
-> -	memcpy(intel_dp->dpcd, dpcd_ext, sizeof(dpcd_ext));
-> -}
-> -
-> -bool
-> -intel_dp_read_dpcd(struct intel_dp *intel_dp)
-> -{
-> -	struct drm_i915_private *i915 = dp_to_i915(intel_dp);
-> -
-> -	if (drm_dp_dpcd_read(&intel_dp->aux, 0x000, intel_dp->dpcd,
-> -			     sizeof(intel_dp->dpcd)) < 0)
-> -		return false; /* aux transfer failed */
-> -
-> -	intel_dp_extended_receiver_capabilities(intel_dp);
-> -
-> -	drm_dbg_kms(&i915->drm, "DPCD: %*ph\n", (int)sizeof(intel_dp->dpcd),
-> -		    intel_dp->dpcd);
-> -
-> -	return intel_dp->dpcd[DP_DPCD_REV] != 0;
-> -}
-> -
->  bool intel_dp_get_colorimetry_status(struct intel_dp *intel_dp)
->  {
->  	u8 dprx = 0;
-> @@ -4563,7 +4507,7 @@ intel_edp_init_dpcd(struct intel_dp *intel_dp)
->  	/* this function is meant to be called only once */
->  	drm_WARN_ON(&dev_priv->drm, intel_dp->dpcd[DP_DPCD_REV] != 0);
->  
-> -	if (!intel_dp_read_dpcd(intel_dp))
-> +	if (drm_dp_read_dpcd_caps(&intel_dp->aux, intel_dp->dpcd) != 0)
->  		return false;
->  
->  	drm_dp_read_desc(&intel_dp->aux, &intel_dp->desc,
-> @@ -4650,7 +4594,7 @@ intel_dp_get_dpcd(struct intel_dp *intel_dp)
->  {
->  	int ret;
->  
-> -	if (!intel_dp_read_dpcd(intel_dp))
-> +	if (drm_dp_read_dpcd_caps(&intel_dp->aux, intel_dp->dpcd))
->  		return false;
->  
->  	/*
-> diff --git a/drivers/gpu/drm/i915/display/intel_dp.h b/drivers/gpu/drm/i915/display/intel_dp.h
-> index b901ab850cbd9..0a3af3410d52e 100644
-> --- a/drivers/gpu/drm/i915/display/intel_dp.h
-> +++ b/drivers/gpu/drm/i915/display/intel_dp.h
-> @@ -99,7 +99,6 @@ bool intel_dp_source_supports_hbr3(struct intel_dp *intel_dp);
->  bool
->  intel_dp_get_link_status(struct intel_dp *intel_dp, u8 *link_status);
->  
-> -bool intel_dp_read_dpcd(struct intel_dp *intel_dp);
->  bool intel_dp_get_colorimetry_status(struct intel_dp *intel_dp);
->  int intel_dp_link_required(int pixel_clock, int bpp);
->  int intel_dp_max_data_rate(int max_link_clock, int max_lanes);
-> diff --git a/drivers/gpu/drm/i915/display/intel_lspcon.c b/drivers/gpu/drm/i915/display/intel_lspcon.c
-> index b781bf4696443..dc1b35559afdf 100644
-> --- a/drivers/gpu/drm/i915/display/intel_lspcon.c
-> +++ b/drivers/gpu/drm/i915/display/intel_lspcon.c
-> @@ -571,7 +571,7 @@ bool lspcon_init(struct intel_digital_port *dig_port)
->  		return false;
->  	}
->  
-> -	if (!intel_dp_read_dpcd(dp)) {
-> +	if (drm_dp_read_dpcd_caps(&dp->aux, dp->dpcd) != 0) {
->  		DRM_ERROR("LSPCON DPCD read failed\n");
->  		return false;
->  	}
-> diff --git a/include/drm/drm_dp_helper.h b/include/drm/drm_dp_helper.h
-> index 0c141fc81aaa8..11649e93e5bb6 100644
-> --- a/include/drm/drm_dp_helper.h
-> +++ b/include/drm/drm_dp_helper.h
-> @@ -1607,6 +1607,9 @@ static inline ssize_t drm_dp_dpcd_writeb(struct drm_dp_aux *aux,
->  	return drm_dp_dpcd_write(aux, offset, &value, 1);
->  }
->  
-> +int drm_dp_read_dpcd_caps(struct drm_dp_aux *aux,
-> +			  u8 dpcd[DP_RECEIVER_CAP_SIZE]);
-> +
->  int drm_dp_dpcd_read_link_status(struct drm_dp_aux *aux,
->  				 u8 status[DP_LINK_STATUS_SIZE]);
->  
-> -- 
-> 2.26.2
-> 
-> _______________________________________________
-> dri-devel mailing list
-> dri-devel@lists.freedesktop.org
-> https://lists.freedesktop.org/mailman/listinfo/dri-devel
-
--- 
-Sean Paul, Software Engineer, Google / Chromium OS
-_______________________________________________
-Nouveau mailing list
-Nouveau@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/nouveau
+T24gV2VkLCAyMDIwLTA4LTE5IGF0IDExOjE1IC0wNDAwLCBTZWFuIFBhdWwgd3JvdGU6Cj4gT24g
+VHVlLCBBdWcgMTEsIDIwMjAgYXQgMDQ6MDQ6NTBQTSAtMDQwMCwgTHl1ZGUgUGF1bCB3cm90ZToK
+PiA+IFdlJ3JlIGdvaW5nIHRvIGJlIGRvaW5nIHRoZSBzYW1lIHByb2JpbmcgcHJvY2VzcyBpbiBu
+b3V2ZWF1IGZvcgo+ID4gZGV0ZXJtaW5pbmcgZG93bnN0cmVhbSBEUCBwb3J0IGNhcGFiaWxpdGll
+cywgc28gbGV0J3MgZGVkdXBsaWNhdGUgdGhlCj4gPiB3b3JrIGJ5IG1vdmluZyBpOTE1J3MgY29k
+ZSBmb3IgaGFuZGxpbmcgdGhpcyBpbnRvIGEgc2hhcmVkIGhlbHBlcjoKPiA+IGRybV9kcF9kb3du
+c3RyZWFtX3JlYWRfaW5mbygpLgo+ID4gCj4gPiBOb3RlIHRoYXQgd2hlbiB3ZSBkbyB0aGlzLCB3
+ZSBhbHNvIGRvIG1ha2Ugc29tZSBmdW5jdGlvbmFsIGNoYW5nZXMgd2hpbGUKPiA+IHdlJ3JlIGF0
+IGl0Ogo+ID4gKiBXZSBhbHdheXMgY2xlYXIgdGhlIGRvd25zdHJlYW0gcG9ydCBpbmZvIGJlZm9y
+ZSB0cnlpbmcgdG8gcmVhZCBpdCwKPiA+ICAganVzdCB0byBtYWtlIHRoaW5ncyBlYXNpZXIgZm9y
+IHRoZSBjYWxsZXIKPiA+ICogV2Ugc2tpcCByZWFkaW5nIGRvd25zdHJlYW0gcG9ydCBpbmZvIGlm
+IHRoZSBEUENEIGluZGljYXRlcyB0aGF0IHdlCj4gPiAgIGRvbid0IHN1cHBvcnQgZG93bnN0cmVh
+bSBwb3J0IGluZm8KPiA+ICogV2Ugb25seSByZWFkIGFzIG1hbnkgYnl0ZXMgYXMgbmVlZGVkIGZv
+ciB0aGUgcmVwb3J0ZWQgbnVtYmVyIG9mCj4gPiAgIGRvd25zdHJlYW0gcG9ydHMsIG5vIHNlbnNl
+IGluIHJlYWRpbmcgdGhlIHdob2xlIHRoaW5nIGV2ZXJ5IHRpbWUKPiA+IAo+ID4gU2lnbmVkLW9m
+Zi1ieTogTHl1ZGUgUGF1bCA8bHl1ZGVAcmVkaGF0LmNvbT4KPiA+IC0tLQo+ID4gIGRyaXZlcnMv
+Z3B1L2RybS9kcm1fZHBfaGVscGVyLmMgICAgICAgICB8IDMyICsrKysrKysrKysrKysrKysrKysr
+KysrKysKPiA+ICBkcml2ZXJzL2dwdS9kcm0vaTkxNS9kaXNwbGF5L2ludGVsX2RwLmMgfCAxNCAr
+Ky0tLS0tLS0tLQo+ID4gIGluY2x1ZGUvZHJtL2RybV9kcF9oZWxwZXIuaCAgICAgICAgICAgICB8
+ICAzICsrKwo+ID4gIDMgZmlsZXMgY2hhbmdlZCwgMzcgaW5zZXJ0aW9ucygrKSwgMTIgZGVsZXRp
+b25zKC0pCj4gPiAKPiA+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0vZHJtX2RwX2hlbHBl
+ci5jCj4gPiBiL2RyaXZlcnMvZ3B1L2RybS9kcm1fZHBfaGVscGVyLmMKPiA+IGluZGV4IDRjMjFj
+ZjY5ZGFkNWEuLjk3MDNiMzM1OTljM2IgMTAwNjQ0Cj4gPiAtLS0gYS9kcml2ZXJzL2dwdS9kcm0v
+ZHJtX2RwX2hlbHBlci5jCj4gPiArKysgYi9kcml2ZXJzL2dwdS9kcm0vZHJtX2RwX2hlbHBlci5j
+Cj4gPiBAQCAtNDIzLDYgKzQyMywzOCBAQCBib29sIGRybV9kcF9zZW5kX3JlYWxfZWRpZF9jaGVj
+a3N1bShzdHJ1Y3QgZHJtX2RwX2F1eAo+ID4gKmF1eCwKPiA+ICB9Cj4gPiAgRVhQT1JUX1NZTUJP
+TChkcm1fZHBfc2VuZF9yZWFsX2VkaWRfY2hlY2tzdW0pOwo+ID4gIAo+ID4gKy8qKgo+ID4gKyAq
+IGRybV9kcF9kb3duc3RyZWFtX3JlYWRfaW5mbygpIC0gcmVhZCBEUENEIGRvd25zdHJlYW0gcG9y
+dCBpbmZvIGlmCj4gPiBhdmFpbGFibGUKPiA+ICsgKiBAYXV4OiBEaXNwbGF5UG9ydCBBVVggY2hh
+bm5lbAo+ID4gKyAqIEBkcGNkOiBBIGNhY2hlZCBjb3B5IG9mIHRoZSBwb3J0J3MgRFBDRAo+ID4g
+KyAqIEBkb3duc3RyZWFtX3BvcnRzOiBidWZmZXIgdG8gc3RvcmUgdGhlIGRvd25zdHJlYW0gcG9y
+dCBpbmZvIGluCj4gPiArICoKPiA+ICsgKiBSZXR1cm5zOiAwIGlmIGVpdGhlciB0aGUgZG93bnN0
+cmVhbSBwb3J0IGluZm8gd2FzIHJlYWQgc3VjY2Vzc2Z1bGx5IG9yCj4gPiArICogdGhlcmUgd2Fz
+IG5vIGRvd25zdHJlYW0gaW5mbyB0byByZWFkLCBvciBhIG5lZ2F0aXZlIGVycm9yIGNvZGUKPiA+
+IG90aGVyd2lzZS4KPiA+ICsgKi8KPiA+ICtpbnQgZHJtX2RwX2Rvd25zdHJlYW1fcmVhZF9pbmZv
+KHN0cnVjdCBkcm1fZHBfYXV4ICphdXgsCj4gPiArCQkJCWNvbnN0IHU4IGRwY2RbRFBfUkVDRUlW
+RVJfQ0FQX1NJWkVdLAo+ID4gKwkJCQl1OCBkb3duc3RyZWFtX3BvcnRzW0RQX01BWF9ET1dOU1RS
+RUFNX1BPUlRTXSkKPiA+ICt7Cj4gPiArCWludCByZXQ7Cj4gPiArCXU4IGxlbjsKPiA+ICsKPiA+
+ICsJbWVtc2V0KGRvd25zdHJlYW1fcG9ydHMsIDAsIERQX01BWF9ET1dOU1RSRUFNX1BPUlRTKTsK
+PiA+ICsKPiA+ICsJLyogTm8gZG93bnN0cmVhbSBpbmZvIHRvIHJlYWQgKi8KPiA+ICsJaWYgKCFk
+cm1fZHBfaXNfYnJhbmNoKGRwY2QpIHx8Cj4gPiArCSAgICBkcGNkW0RQX0RQQ0RfUkVWXSA8IERQ
+X0RQQ0RfUkVWXzEwIHx8Cj4gPiArCSAgICAhKGRwY2RbRFBfRE9XTlNUUkVBTVBPUlRfUFJFU0VO
+VF0gJiBEUF9EV05fU1RSTV9QT1JUX1BSRVNFTlQpKQo+ID4gKwkJcmV0dXJuIDA7Cj4gPiArCj4g
+PiArCWxlbiA9IChkcGNkW0RQX0RPV05fU1RSRUFNX1BPUlRfQ09VTlRdICYgRFBfUE9SVF9DT1VO
+VF9NQVNLKSAqIDQ7Cj4gCj4gSSdtIGhhdmluZyBhIGhhcmQgdGltZSByYXRpb25hbGl6aW5nIERQ
+X01BWF9ET1dOU1RSRUFNX1BPUlRTIGJlaW5nIDE2LCBidXQKPiBvbmx5Cj4gaGF2aW5nIDQgcG9y
+dHMgd29ydGggb2YgZGF0YSBpbiB0aGUgRFBfRE9XTlNUUkVBTV9QT1JUXyogcmVnaXN0ZXJzLiBE
+byB5b3UKPiBrbm93Cj4gd2hhdCdzIHN1cHBvc2VkIHRvIGhhcHBlbiBpZiBkcGNkW0RQX0RPV05f
+U1RSRUFNX1BPUlRfQ09VTlRdIGlzID4gND8KCkkgdGhvdWdodCBJIGhhZCBhZGRyZXNzZWQgdGhp
+cyBiaXQgYnV0IEkgZ3Vlc3MgSSBtaXNzZWQgc29tZSBwYXJ0cyBoZXJlLgoKU287IHRoZXJlJ3Mg
+YWN0dWFsbHkgdHdvIGRpZmZlcmVudCBwb3NzaWJsZSBsZW5ndGhzIGZvciBob3cgbG9uZyBlYWNo
+IGRvd25zdHJlYW0KcG9ydCdzIGNhcGFiaWxpdGllcyBjYW4gYmU6IDEgYnl0ZSBsb25nIChpZiBE
+RVRBSUxFRF9DQVBfSU5GT19BVkFJTEFCTEUgaW4gdGhlCkRPV05fU1RSRUFNX1BPUlRfUFJFU0VO
+VCBpcyAwLCBlLmcuIDAwNWggYml0IDQpLCBhbmQgNCBieXRlcyBsb25nIGlmIHRoYXQgYml0IGlz
+CjEuIFdoYXQncyB1bmZvcnR1bmF0ZWx5IG5vdCBhcyBjbGVhciwgaXMgd2hldGhlciBvciBub3Qg
+MSBieXRlIGxvbmcgY2FwIGZpZWxkcwptZWFuICJlYWNoIHBvcnQgaGFzIGZvdXIgYnl0ZXMsIGJ1
+dCBvbmx5IG9uZSBieXRlIGlzIHVzZWQiIG9yICJlYWNoIHBvcnQgdHJ1bHkKb25seSBoYXMgb25l
+IGJ5dGUiLiBUaGUgRFAgc3BlYyBzYXlzOgoKICAgREZQWF9DQVAKICAgMSBieXRlL0RGUAogICBY
+ID0gREZQIG51bWJlci4gUG9ydF94IGNhcGFiaWxpdHkgaXMgc3RvcmVkIGF0IHRoZSBERlAgbnVt
+YmVy4oCZcyBhZGRyZXNzIHBsdXMKICAgODBoCgpXaGljaCBhdCBmaXJzdCBzZWVtcyB0byBpbXBs
+eSB0aGF0IGVhY2ggY2FwIGlzIGF0IDgwICsgWCwgZS5nLiBvbmx5IG9uZSBieXRlCmxvbmcuIEhv
+d2V2ZXIsIHRoZSBleHBsYW5hdGlvbiBmb3Igd2hlbiBERVRBSUxFRF9DQVBfSU5GT19BVkFJTEFC
+TEUgPT0gMSBzYXlzCmFsbW9zdCB0aGUgc2FtZSB0aGluZzoKCiAgIERGUFhfQ0FQCiAgIFggPSBE
+RlAgbnVtYmVyLiBQb3J0X3ggY2FwYWJpbGl0eSBpcyBzdG9yZWQgYXQgdGhlIERGUCBudW1iZXLi
+gJlzIGFkZHJlc3MgcGx1cwogICA4MGguCgpBbHRob3VnaCByaWdodCBhYm92ZSB0aGF0IHVubGlr
+ZSB0aGUgcHJldmlvdXMgc2VjdGlvbiwgdGhleSBtZW50aW9uIHRoYXQgREZQMApnb2VzIGZyb20g
+ODAtODMsIERGUDEgODQtODcsIGV0Yy4uLgoKTm90IGVudGlyZWx5IHN1cmUgd2hhdCB0byB0aGlu
+ayBoZXJlIHNpbmNlIEkgZG9uJ3QgcmVhbGx5IGhhdmUgYW55IGRldmljZXMgKG5vcgpkbyBJIHRo
+aW5rIEkndmUgZXZlciBzZWVuIGFueSkgdGhhdCBoYXZlIG1vcmUgdGhlbiBvbmUgREZQLiBBcyB3
+ZWxsLCBmb3IgdGhlCmNhc2Ugd2hlcmUgd2UgaGF2ZSBtdWx0aXBsZSBERlBzICh3aGljaCBhY2Nv
+cmRpbmcgdG8gdGhlIHNwZWMgYXBwZWFycyB0byBvbmx5IGJlCnNvbWV0aGluZyB3ZSBuZWVkIHRv
+IHdvcnJ5IGFib3V0IGZvciBTU1QpIHRoZXkncmUgbm90IHJlYWxseSBleHBsaWNpdCBvbiBob3cg
+dG8KY29tYmluZSB0aGUgZG93bnN0cmVhbSBjYXBhYmlsaXRpZXMgZnJvbSBlYWNoIERGUC4gTXkg
+Z3Vlc3MgaXMgbWF5YmUgeW91CmRldGVybWluZSB0aGUgbWF4IGRvd25zdHJlYW0gY2xvY2sgYW5k
+IGJwcCBmcm9tIHRoZSBsb3dlc3QgY2xvY2sgbGltaXRzCmFkdmVydGlzZWQgYWNyb3NzIGVhY2gg
+cG9ydD8KKGlmIHlvdSBoYXZlIGEgRFAgZGV2aWNlIHdpdGggbXVsdGlwbGUgREZQcyBhbmQgY2Fu
+IHRlc3QgdGhpcywgdGhhdCB3b3VsZCByb2NrCjopLCBidXQgSSBoYXZlIGEgZmVlbGluZyB5b3Ug
+cHJvYmFibHkgZG9uJ3QgaGF2ZSBvbmUgZWl0aGVyKQo+IAo+IFNlYW4KPiAKPiA+ICsJcmV0ID0g
+ZHJtX2RwX2RwY2RfcmVhZChhdXgsIERQX0RPV05TVFJFQU1fUE9SVF8wLCBkb3duc3RyZWFtX3Bv
+cnRzLAo+ID4gKwkJCSAgICAgICBsZW4pOwo+ID4gKwo+ID4gKwlyZXR1cm4gcmV0ID09IGxlbiA/
+IDAgOiAtRUlPOwo+ID4gK30KPiA+ICtFWFBPUlRfU1lNQk9MKGRybV9kcF9kb3duc3RyZWFtX3Jl
+YWRfaW5mbyk7Cj4gPiArCj4gPiAgLyoqCj4gPiAgICogZHJtX2RwX2Rvd25zdHJlYW1fbWF4X2Ns
+b2NrKCkgLSBleHRyYWN0IGJyYW5jaCBkZXZpY2UgbWF4Cj4gPiAgICogICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICBwaXhlbCByYXRlIGZvciBsZWdhY3kgVkdBCj4gPiBkaWZmIC0tZ2l0
+IGEvZHJpdmVycy9ncHUvZHJtL2k5MTUvZGlzcGxheS9pbnRlbF9kcC5jCj4gPiBiL2RyaXZlcnMv
+Z3B1L2RybS9pOTE1L2Rpc3BsYXkvaW50ZWxfZHAuYwo+ID4gaW5kZXggMWUyOWQzYTAxMjg1Ni4u
+OTg0ZTQ5MTk0Y2EzMSAxMDA2NDQKPiA+IC0tLSBhL2RyaXZlcnMvZ3B1L2RybS9pOTE1L2Rpc3Bs
+YXkvaW50ZWxfZHAuYwo+ID4gKysrIGIvZHJpdmVycy9ncHUvZHJtL2k5MTUvZGlzcGxheS9pbnRl
+bF9kcC5jCj4gPiBAQCAtNDY4NSwxOCArNDY4NSw4IEBAIGludGVsX2RwX2dldF9kcGNkKHN0cnVj
+dCBpbnRlbF9kcCAqaW50ZWxfZHApCj4gPiAgCQkJcmV0dXJuIGZhbHNlOwo+ID4gIAl9Cj4gPiAg
+Cj4gPiAtCWlmICghZHJtX2RwX2lzX2JyYW5jaChpbnRlbF9kcC0+ZHBjZCkpCj4gPiAtCQlyZXR1
+cm4gdHJ1ZTsgLyogbmF0aXZlIERQIHNpbmsgKi8KPiA+IC0KPiA+IC0JaWYgKGludGVsX2RwLT5k
+cGNkW0RQX0RQQ0RfUkVWXSA9PSAweDEwKQo+ID4gLQkJcmV0dXJuIHRydWU7IC8qIG5vIHBlci1w
+b3J0IGRvd25zdHJlYW0gaW5mbyAqLwo+ID4gLQo+ID4gLQlpZiAoZHJtX2RwX2RwY2RfcmVhZCgm
+aW50ZWxfZHAtPmF1eCwgRFBfRE9XTlNUUkVBTV9QT1JUXzAsCj4gPiAtCQkJICAgICBpbnRlbF9k
+cC0+ZG93bnN0cmVhbV9wb3J0cywKPiA+IC0JCQkgICAgIERQX01BWF9ET1dOU1RSRUFNX1BPUlRT
+KSA8IDApCj4gPiAtCQlyZXR1cm4gZmFsc2U7IC8qIGRvd25zdHJlYW0gcG9ydCBzdGF0dXMgZmV0
+Y2ggZmFpbGVkICovCj4gPiAtCj4gPiAtCXJldHVybiB0cnVlOwo+ID4gKwlyZXR1cm4gZHJtX2Rw
+X2Rvd25zdHJlYW1fcmVhZF9pbmZvKCZpbnRlbF9kcC0+YXV4LCBpbnRlbF9kcC0+ZHBjZCwKPiA+
+ICsJCQkJCSAgIGludGVsX2RwLT5kb3duc3RyZWFtX3BvcnRzKSA9PSAwOwo+ID4gIH0KPiA+ICAK
+PiA+ICBzdGF0aWMgYm9vbAo+ID4gZGlmZiAtLWdpdCBhL2luY2x1ZGUvZHJtL2RybV9kcF9oZWxw
+ZXIuaCBiL2luY2x1ZGUvZHJtL2RybV9kcF9oZWxwZXIuaAo+ID4gaW5kZXggNWMyODE5OTI0ODYy
+Ni4uMTM0OWYxNjU2NGFjZSAxMDA2NDQKPiA+IC0tLSBhL2luY2x1ZGUvZHJtL2RybV9kcF9oZWxw
+ZXIuaAo+ID4gKysrIGIvaW5jbHVkZS9kcm0vZHJtX2RwX2hlbHBlci5oCj4gPiBAQCAtMTYxMyw2
+ICsxNjEzLDkgQEAgaW50IGRybV9kcF9kcGNkX3JlYWRfbGlua19zdGF0dXMoc3RydWN0IGRybV9k
+cF9hdXgKPiA+ICphdXgsCj4gPiAgYm9vbCBkcm1fZHBfc2VuZF9yZWFsX2VkaWRfY2hlY2tzdW0o
+c3RydWN0IGRybV9kcF9hdXggKmF1eCwKPiA+ICAJCQkJICAgIHU4IHJlYWxfZWRpZF9jaGVja3N1
+bSk7Cj4gPiAgCj4gPiAraW50IGRybV9kcF9kb3duc3RyZWFtX3JlYWRfaW5mbyhzdHJ1Y3QgZHJt
+X2RwX2F1eCAqYXV4LAo+ID4gKwkJCQljb25zdCB1OCBkcGNkW0RQX1JFQ0VJVkVSX0NBUF9TSVpF
+XSwKPiA+ICsJCQkJdTggZG93bnN0cmVhbV9wb3J0c1tEUF9NQVhfRE9XTlNUUkVBTV9QT1JUU10p
+Owo+ID4gIGludCBkcm1fZHBfZG93bnN0cmVhbV9tYXhfY2xvY2soY29uc3QgdTggZHBjZFtEUF9S
+RUNFSVZFUl9DQVBfU0laRV0sCj4gPiAgCQkJCWNvbnN0IHU4IHBvcnRfY2FwWzRdKTsKPiA+ICBp
+bnQgZHJtX2RwX2Rvd25zdHJlYW1fbWF4X2JwYyhjb25zdCB1OCBkcGNkW0RQX1JFQ0VJVkVSX0NB
+UF9TSVpFXSwKPiA+IC0tIAo+ID4gMi4yNi4yCj4gPiAKPiA+IF9fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fCj4gPiBkcmktZGV2ZWwgbWFpbGluZyBsaXN0Cj4g
+PiBkcmktZGV2ZWxAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCj4gPiBodHRwczovL2xpc3RzLmZyZWVk
+ZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL2RyaS1kZXZlbAotLSAKU2luY2VyZWx5LAogICAg
+ICBMeXVkZSBQYXVsIChzaGUvaGVyKQogICAgICBTb2Z0d2FyZSBFbmdpbmVlciBhdCBSZWQgSGF0
+CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpOb3V2ZWF1
+IG1haWxpbmcgbGlzdApOb3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3Rz
+LmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL25vdXZlYXUK
