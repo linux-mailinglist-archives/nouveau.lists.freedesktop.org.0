@@ -2,64 +2,62 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 01DA124A294
-	for <lists+nouveau@lfdr.de>; Wed, 19 Aug 2020 17:13:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CDFEA24A25F
+	for <lists+nouveau@lfdr.de>; Wed, 19 Aug 2020 17:04:12 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 652EC6E40D;
-	Wed, 19 Aug 2020 15:13:32 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D5D126E3AA;
+	Wed, 19 Aug 2020 15:04:06 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ej1-x642.google.com (mail-ej1-x642.google.com
- [IPv6:2a00:1450:4864:20::642])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E478F6E40D
- for <nouveau@lists.freedesktop.org>; Wed, 19 Aug 2020 15:11:56 +0000 (UTC)
-Received: by mail-ej1-x642.google.com with SMTP id d6so26722478ejr.5
- for <nouveau@lists.freedesktop.org>; Wed, 19 Aug 2020 08:11:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=gblnYCzc62i56nCc5LRWss+Qf5wc+kIzyZ60hUww65Y=;
- b=CmFRV9MF78Io9lyU3ZTHQoxCUWL8rgrVpgpqOj4nEXWpRTCd1+KGSochi2kuoVhtFt
- PQJJembCFDIORAph3WzrpDoRd2cIGJpwf9VAtP5a9ydpphhRkHDHcmKRPuhZGWASaGfl
- y6rPrnsIqK2MPfXnYUVbYzJtuDwuiigpqdGRc=
+Received: from mail-qv1-xf41.google.com (mail-qv1-xf41.google.com
+ [IPv6:2607:f8b0:4864:20::f41])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 678496E17C
+ for <nouveau@lists.freedesktop.org>; Wed, 19 Aug 2020 15:04:05 +0000 (UTC)
+Received: by mail-qv1-xf41.google.com with SMTP id s15so11393995qvv.7
+ for <nouveau@lists.freedesktop.org>; Wed, 19 Aug 2020 08:04:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=poorly.run; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to:user-agent;
+ bh=vzojOIjXWxLiO6TIP3hVvjZj3nBXkO4u+Tv0gqgyYy4=;
+ b=bF4X2rLiQ6gYsVqzGCpAtaMbPgC9tg9k7pWmdfdP7jhYjOW2lKP3GTqUtVfsNaZd8d
+ +tqW/r6n8N1HbXApppScuxmidM2ViNHo/ZeAXiHiaLoQy3WPkXNNO7mPSQVydyqLXIuW
+ XnpqxpmORbSAJVeFgOj201zzexuifWp1jNNvr321eHINNv2s3M1eX+wmoZA2L7kR6V6M
+ SIW/RrePFN/BaiNWuUtMLtaEBR3/6yBkaBbGlru0XyWD9BdZxfHPGCoKhFB/ej+cb6+M
+ vFTlEJzSyW8pN3j8a3+0/RXeGMps73CZtPy4yrelYf1bea10mWj7LectS+ERxQyNF0Kb
+ +k1Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=gblnYCzc62i56nCc5LRWss+Qf5wc+kIzyZ60hUww65Y=;
- b=KGDa/B+YIdBs98UVw0M2G8d3CATiC8/Z+np88jZo6Y7wHdd5TxthiRWAHbltrjl/g5
- TJgUcu4COcK5C86GxpfUyitfbLjncyC8sVjq11va7ZK0/hZLhkPBy7F7/60jVg6FgRmT
- bqeaoOwxS6JH7Bqxq2erEC3DqJcBlMy/YN1UuPRP3BVS33vX4DnSGT1/ERNn6AbZgRSR
- YxuQrU6Y1ZOzir5RWF36IMD4btQhc2Kzga5V9FCb9ajntWEsITnC/i0T+1TfAY/l+P2N
- D2VYDLUoumxfZXhGtAX2wZTH3s4Yy22l4aaPYYeUVsZOJrXrzAc4gWGQlr5ZMNdLjkis
- u0Mg==
-X-Gm-Message-State: AOAM531VUoQrEjYzqH16hPDpWuhpp7DeJ3uOd36Tp0IMBwoIxkr+pdh0
- otgAUd9AKRfjSuy2Lyg1aSwQ7Qh5gjgpnA==
-X-Google-Smtp-Source: ABdhPJy5UrP8cJpqqIau3XjAE77jsNWnU4ZOlHvwzEPpK/KXC1SAk4hEa6Qz+Wz9Q6dmAKUVAGquTg==
-X-Received: by 2002:a17:906:c7d3:: with SMTP id
- dc19mr25568820ejb.495.1597849915284; 
- Wed, 19 Aug 2020 08:11:55 -0700 (PDT)
-Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com.
- [209.85.128.47])
- by smtp.gmail.com with ESMTPSA id g9sm18487789ejf.101.2020.08.19.08.11.54
- for <nouveau@lists.freedesktop.org>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 19 Aug 2020 08:11:55 -0700 (PDT)
-Received: by mail-wm1-f47.google.com with SMTP id g8so2434437wmk.3
- for <nouveau@lists.freedesktop.org>; Wed, 19 Aug 2020 08:11:54 -0700 (PDT)
-X-Received: by 2002:a1c:4d12:: with SMTP id o18mr5316483wmh.55.1597849448826; 
- Wed, 19 Aug 2020 08:04:08 -0700 (PDT)
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to:user-agent;
+ bh=vzojOIjXWxLiO6TIP3hVvjZj3nBXkO4u+Tv0gqgyYy4=;
+ b=UnaZANWQzmv3/LsJgZYrZQ1pPZ8NAMax5itMcu0+ES+Ixbxfb5GLkuZJjx1w9pgJmI
+ Zpywv1M9FR9ejnhB1fsyZGrSZ+eGgWD3UY9CxcOKpqS1RlRty2H9b4wfhzwD/k5fw0Zd
+ 3EacM8GHD5sg8PUxkN72c5dCM8Eq8DdbMtgodLgdnSJFB/vHpBCSj4ZouQDcWyf2EPSA
+ Z12QeSVWQi/oTEX98wx8ZDiOarlCVceYi/ZVGAJmZjfx4BxahWAVcvm23x13KsZFFq+n
+ UGige4C+RkjFHj+2ziA8XCZLVqJK3G/8nO+nyObu1NXFCuHyedjwl/gUXSOp4AfXH+ZF
+ 3hJw==
+X-Gm-Message-State: AOAM532PQcgCq2nCj3akGreyJWY+iYEtMtChX3ZtFTIsxHnudQQwI9VO
+ CaehPcUJ7DwbCmLr6P1bOriXQw==
+X-Google-Smtp-Source: ABdhPJwgu8q8F0w+plBznp44QJ9D3FkKDpwk9b2oLbAg5Cc6+iUfzHSItu7Rm2kLrjAYixGSkmEQNw==
+X-Received: by 2002:ad4:46ad:: with SMTP id
+ br13mr24285816qvb.234.1597849444454; 
+ Wed, 19 Aug 2020 08:04:04 -0700 (PDT)
+Received: from localhost (mobile-166-177-185-175.mycingular.net.
+ [166.177.185.175])
+ by smtp.gmail.com with ESMTPSA id s56sm25374308qtk.72.2020.08.19.08.04.03
+ (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
+ Wed, 19 Aug 2020 08:04:03 -0700 (PDT)
+Date: Wed, 19 Aug 2020 11:03:59 -0400
+From: Sean Paul <sean@poorly.run>
+To: Lyude Paul <lyude@redhat.com>
+Message-ID: <20200819150359.GA46474@art_vandelay>
+References: <20200811200457.134743-1-lyude@redhat.com>
+ <20200811200457.134743-10-lyude@redhat.com>
 MIME-Version: 1.0
-References: <20200819065555.1802761-1-hch@lst.de>
- <20200819065555.1802761-20-hch@lst.de>
-In-Reply-To: <20200819065555.1802761-20-hch@lst.de>
-From: Tomasz Figa <tfiga@chromium.org>
-Date: Wed, 19 Aug 2020 17:03:52 +0200
-X-Gmail-Original-Message-ID: <CAAFQd5Bbp-eAVKS1MKS8xtrT4ZoOmBPfZyw9mys=eOmDb6r8Lw@mail.gmail.com>
-Message-ID: <CAAFQd5Bbp-eAVKS1MKS8xtrT4ZoOmBPfZyw9mys=eOmDb6r8Lw@mail.gmail.com>
-To: Christoph Hellwig <hch@lst.de>
-X-Mailman-Approved-At: Wed, 19 Aug 2020 15:13:31 +0000
-Subject: Re: [Nouveau] [PATCH 19/28] dma-mapping: replace
- DMA_ATTR_NON_CONSISTENT with dma_{alloc, free}_pages
+Content-Disposition: inline
+In-Reply-To: <20200811200457.134743-10-lyude@redhat.com>
+User-Agent: Mutt/1.9.4 (2018-02-28)
+Subject: Re: [Nouveau] [RFC 09/20] drm/i915/dp: Extract drm_dp_has_mst()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,149 +69,116 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: alsa-devel@alsa-project.org, linux-ia64@vger.kernel.org,
- Linux Doc Mailing List <linux-doc@vger.kernel.org>,
- nouveau@lists.freedesktop.org, linux-nvme@lists.infradead.org,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- "James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>,
- linux-mm@kvack.org, Marek Szyprowski <m.szyprowski@samsung.com>,
- linux-samsung-soc <linux-samsung-soc@vger.kernel.org>,
- Joonyoung Shim <jy0922.shim@samsung.com>, linux-scsi@vger.kernel.org,
- Kyungmin Park <kyungmin.park@samsung.com>, Ben Skeggs <bskeggs@redhat.com>,
- Matt Porter <mporter@kernel.crashing.org>,
- Linux Media Mailing List <linux-media@vger.kernel.org>,
- Tom Lendacky <thomas.lendacky@amd.com>, Pawel Osciak <pawel@osciak.com>,
- Mauro Carvalho Chehab <mchehab@kernel.org>,
- "list@263.net:IOMMU DRIVERS <iommu@lists.linux-foundation.org>,
- Joerg Roedel <joro@8bytes.org>, " <linux-arm-kernel@lists.infradead.org>,
- Thomas Bogendoerfer <tsbogend@alpha.franken.de>, linux-parisc@vger.kernel.org,
- netdev@vger.kernel.org, Seung-Woo Kim <sw0312.kim@samsung.com>,
- linux-mips@vger.kernel.org,
- "list@263.net:IOMMU DRIVERS <iommu@lists.linux-foundation.org>,
- Joerg Roedel <joro@8bytes.org>, " <iommu@lists.linux-foundation.org>
+Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
+ intel-gfx@lists.freedesktop.org, Lucas De Marchi <lucas.demarchi@intel.com>,
+ open list <linux-kernel@vger.kernel.org>, dri-devel@lists.freedesktop.org,
+ Gwan-gyeong Mun <gwan-gyeong.mun@intel.com>,
+ Manasi Navare <manasi.d.navare@intel.com>, Uma Shankar <uma.shankar@intel.com>,
+ =?iso-8859-1?Q?Jos=E9?= Roberto de Souza <jose.souza@intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ Wambui Karuga <wambui.karugax@gmail.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi Christoph,
+On Tue, Aug 11, 2020 at 04:04:46PM -0400, Lyude Paul wrote:
+> Just a tiny drive-by cleanup, we can consolidate i915's code for
+> checking for MST support into a helper to be shared across drivers.
+> 
 
-On Wed, Aug 19, 2020 at 8:57 AM Christoph Hellwig <hch@lst.de> wrote:
->
-> Add a new API to allocate and free pages that are guaranteed to be
-> addressable by a device, but otherwise behave like pages allocated by
-> alloc_pages.  The intended APIs to sync them for use with the device
-> and cpu are dma_sync_single_for_{device,cpu} that are also used for
-> streaming mappings.
->
-> Switch all drivers over to this new API, but keep the usage of the
-> crufty dma_cache_sync API for now, which will be cleaned up on a driver
-> by driver basis.
->
-> Signed-off-by: Christoph Hellwig <hch@lst.de>
+Reviewed-by: Sean Paul <sean@poorly.run>
+
+> Signed-off-by: Lyude Paul <lyude@redhat.com>
 > ---
->  Documentation/core-api/dma-api.rst        | 68 +++++++++++------------
->  Documentation/core-api/dma-attributes.rst |  8 ---
->  arch/alpha/kernel/pci_iommu.c             |  2 +
->  arch/arm/mm/dma-mapping-nommu.c           |  2 +
->  arch/arm/mm/dma-mapping.c                 |  4 ++
->  arch/ia64/hp/common/sba_iommu.c           |  2 +
->  arch/mips/jazz/jazzdma.c                  |  7 +--
->  arch/powerpc/kernel/dma-iommu.c           |  2 +
->  arch/powerpc/platforms/ps3/system-bus.c   |  4 ++
->  arch/powerpc/platforms/pseries/vio.c      |  2 +
->  arch/s390/pci/pci_dma.c                   |  2 +
->  arch/x86/kernel/amd_gart_64.c             |  2 +
->  drivers/iommu/dma-iommu.c                 |  2 +
->  drivers/iommu/intel/iommu.c               |  4 ++
->  drivers/net/ethernet/i825xx/lasi_82596.c  | 13 ++---
->  drivers/net/ethernet/seeq/sgiseeq.c       | 12 ++--
->  drivers/parisc/ccio-dma.c                 |  2 +
->  drivers/parisc/sba_iommu.c                |  2 +
->  drivers/scsi/53c700.c                     |  8 +--
->  drivers/scsi/sgiwd93.c                    | 12 ++--
->  drivers/xen/swiotlb-xen.c                 |  2 +
->  include/linux/dma-direct.h                |  5 ++
->  include/linux/dma-mapping.h               | 29 ++++++++--
->  include/linux/dma-noncoherent.h           |  3 -
->  kernel/dma/direct.c                       | 51 ++++++++++++++++-
->  kernel/dma/mapping.c                      | 43 +++++++++++++-
->  kernel/dma/ops_helpers.c                  | 35 ++++++++++++
->  kernel/dma/virt.c                         |  2 +
->  sound/mips/hal2.c                         | 20 +++----
->  29 files changed, 254 insertions(+), 96 deletions(-)
->
-
-Thanks for the patch. The general design looks quite nice, but please
-see my comments inline.
-
-
-> diff --git a/Documentation/core-api/dma-api.rst b/Documentation/core-api/dma-api.rst
-> index 90239348b30f6f..047fcfffa0e5cf 100644
-> --- a/Documentation/core-api/dma-api.rst
-> +++ b/Documentation/core-api/dma-api.rst
-> @@ -516,48 +516,53 @@ routines, e.g.:::
->         }
->
->
-> -Part II - Advanced dma usage
-> -----------------------------
-> +Part II - Non-coherent DMA allocations
-> +--------------------------------------
->
-> -Warning: These pieces of the DMA API should not be used in the
-> -majority of cases, since they cater for unlikely corner cases that
-> -don't belong in usual drivers.
-> +These APIs allow to allocate pages that can be used like normal pages
-> +in the kernel direct mapping, but are guaranteed to be DMA addressable.
-
-Could we elaborate a bit more on what "like normal pages in kernel
-direct mapping" mean from the driver perspective?
-
->
->  If you don't understand how cache line coherency works between a
->  processor and an I/O device, you should not be using this part of the
-> -API at all.
-> +API.
->
->  ::
->
->         void *
-> -       dma_alloc_attrs(struct device *dev, size_t size, dma_addr_t *dma_handle,
-> -                       gfp_t flag, unsigned long attrs)
-> +       dma_alloc_pages(struct device *dev, size_t size, dma_addr_t *dma_handle,
-> +                       enum dma_data_direction dir, gfp_t gfp)
+>  drivers/gpu/drm/i915/display/intel_dp.c | 18 ++----------------
+>  include/drm/drm_dp_mst_helper.h         | 22 ++++++++++++++++++++++
+>  2 files changed, 24 insertions(+), 16 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/i915/display/intel_dp.c b/drivers/gpu/drm/i915/display/intel_dp.c
+> index 79c27f91f42c0..1e29d3a012856 100644
+> --- a/drivers/gpu/drm/i915/display/intel_dp.c
+> +++ b/drivers/gpu/drm/i915/display/intel_dp.c
+> @@ -4699,20 +4699,6 @@ intel_dp_get_dpcd(struct intel_dp *intel_dp)
+>  	return true;
+>  }
+>  
+> -static bool
+> -intel_dp_sink_can_mst(struct intel_dp *intel_dp)
+> -{
+> -	u8 mstm_cap;
+> -
+> -	if (intel_dp->dpcd[DP_DPCD_REV] < 0x12)
+> -		return false;
+> -
+> -	if (drm_dp_dpcd_readb(&intel_dp->aux, DP_MSTM_CAP, &mstm_cap) != 1)
+> -		return false;
+> -
+> -	return mstm_cap & DP_MST_CAP;
+> -}
+> -
+>  static bool
+>  intel_dp_can_mst(struct intel_dp *intel_dp)
+>  {
+> @@ -4720,7 +4706,7 @@ intel_dp_can_mst(struct intel_dp *intel_dp)
+>  
+>  	return i915->params.enable_dp_mst &&
+>  		intel_dp->can_mst &&
+> -		intel_dp_sink_can_mst(intel_dp);
+> +		drm_dp_has_mst(&intel_dp->aux, intel_dp->dpcd);
+>  }
+>  
+>  static void
+> @@ -4729,7 +4715,7 @@ intel_dp_configure_mst(struct intel_dp *intel_dp)
+>  	struct drm_i915_private *i915 = dp_to_i915(intel_dp);
+>  	struct intel_encoder *encoder =
+>  		&dp_to_dig_port(intel_dp)->base;
+> -	bool sink_can_mst = intel_dp_sink_can_mst(intel_dp);
+> +	bool sink_can_mst = drm_dp_has_mst(&intel_dp->aux, intel_dp->dpcd);
+>  
+>  	drm_dbg_kms(&i915->drm,
+>  		    "[ENCODER:%d:%s] MST support: port: %s, sink: %s, modparam: %s\n",
+> diff --git a/include/drm/drm_dp_mst_helper.h b/include/drm/drm_dp_mst_helper.h
+> index 8b9eb4db3381c..2d8983a713e8c 100644
+> --- a/include/drm/drm_dp_mst_helper.h
+> +++ b/include/drm/drm_dp_mst_helper.h
+> @@ -911,4 +911,26 @@ __drm_dp_mst_state_iter_get(struct drm_atomic_state *state,
+>  	for ((__i) = 0; (__i) < (__state)->num_private_objs; (__i)++) \
+>  		for_each_if(__drm_dp_mst_state_iter_get((__state), &(mgr), NULL, &(new_state), (__i)))
+>  
+> +/**
+> + * drm_dp_has_mst() - check whether or not a sink supports MST
+> + * @aux: The DP AUX channel to use
+> + * @dpcd: A cached copy of the DPCD capabilities for this sink
+> + *
+> + * Returns: %True if the sink supports MST, %false otherwise
+> + */
+> +static inline bool
+> +drm_dp_has_mst(struct drm_dp_aux *aux,
+> +	       const u8 dpcd[DP_RECEIVER_CAP_SIZE])
+> +{
+> +	u8 mstm_cap;
 > +
-> +This routine allocates a region of <size> bytes of consistent memory.  It
-> +returns a pointer to the allocated region (in the processor's virtual address
-> +space) or NULL if the allocation failed. The returned memory is guanteed to
-> +behave like memory allocated using alloc_pages.
+> +	if (dpcd[DP_DPCD_REV] < DP_DPCD_REV_12)
+> +		return false;
+> +
+> +	if (drm_dp_dpcd_readb(aux, DP_MSTM_CAP, &mstm_cap) != 1)
+> +		return false;
+> +
+> +	return !!(mstm_cap & DP_MST_CAP);
+> +}
+> +
+>  #endif
+> -- 
+> 2.26.2
+> 
+> _______________________________________________
+> dri-devel mailing list
+> dri-devel@lists.freedesktop.org
+> https://lists.freedesktop.org/mailman/listinfo/dri-devel
 
-There is one aspect that the existing dma_alloc_attrs() handles, but
-this new function doesn't: IOMMU support. The function will always
-allocate a physically-contiguous block memory, which is a costly
-operation and not even guaranteed to succeed, even if enough free
-memory is available.
-
-Modern SoCs employ IOMMUs to avoid the need to allocate
-physically-contiguous memory and those happen to be also the devices
-that could benefit from non-coherent allocations a lot. One of the
-tasks of the DMA API was making it possible to allocate suitable
-memory for a given device, without having the driver know about the
-SoC integration details, such as the presence of an IOMMU.
-
-Today, dma_alloc_attrs() uses the .alloc callback of the dma_ops
-struct and the IOMMU-aware implementations, like the dma-iommu helpers
-[1], would allocate discontiguous pages. Therefore, while I see the
-DMA-aware page allocation functionality as a useful functionality on
-its own for scatter-gather-capable hardware, I believe it is not a
-complete replacement for dma_alloc_attrs() with the
-DMA_ATTR_NON_CONSISTENT attribute.
-
-[1] https://elixir.bootlin.com/linux/v5.9-rc1/source/drivers/iommu/dma-iommu.c#L510
-
-Best regards,
-Tomasz
+-- 
+Sean Paul, Software Engineer, Google / Chromium OS
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
