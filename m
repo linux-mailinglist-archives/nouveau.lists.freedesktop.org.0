@@ -1,66 +1,79 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 45FB524C22C
-	for <lists+nouveau@lfdr.de>; Thu, 20 Aug 2020 17:27:54 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id C3D5F24C2F0
+	for <lists+nouveau@lfdr.de>; Thu, 20 Aug 2020 18:07:57 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id CEE036E973;
-	Thu, 20 Aug 2020 15:27:48 +0000 (UTC)
-X-Original-To: Nouveau@lists.freedesktop.org
-Delivered-To: Nouveau@lists.freedesktop.org
-Received: from mail-wr1-x444.google.com (mail-wr1-x444.google.com
- [IPv6:2a00:1450:4864:20::444])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5CFCD6E971;
- Thu, 20 Aug 2020 15:27:46 +0000 (UTC)
-Received: by mail-wr1-x444.google.com with SMTP id z18so2393148wrm.12;
- Thu, 20 Aug 2020 08:27:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=subject:from:to:references:message-id:date:user-agent:mime-version
- :in-reply-to:content-transfer-encoding:content-language;
- bh=mPqlvBUfw8vukR9JWsM5IjdNZByovFmBmkj5vqYjAT4=;
- b=iwCMIYBTHjYh8sTji47kI23CRk6PCVGMCSpjOk2gndYPbnx+S1S3xkxTQCmCp8y2lI
- NNf30KYRgZoMGaC/gQiL4C1P3/opic3OUUucr4LunEqp2mKLGnZi1CtNo0zmJzDoJT8A
- g76IOIo6L3M56oaAZBP47dmXOIdQOYTFhAdLUISOWOIOb1vTNsj6ucCZIBTHplvlilTT
- S+RYrWa8FtVjkjqCxQeZGIj8OnzLikJ7H/2o6Rtcp/iwnhUiviBDhE0sK5ntb9BnSKNK
- qN+v2+tBPHCQM+Rt560ULQTZMOJpJRW7h0C83jzALLqm/ctHJ+7irZQh8nIs8d+TcFH8
- j2Hw==
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1DB8A6E39C;
+	Thu, 20 Aug 2020 16:07:55 +0000 (UTC)
+X-Original-To: nouveau@lists.freedesktop.org
+Delivered-To: nouveau@lists.freedesktop.org
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-2.mimecast.com
+ [205.139.110.61])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4F2EF6E39C
+ for <nouveau@lists.freedesktop.org>; Thu, 20 Aug 2020 16:07:53 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1597939672;
+ h=from:from:reply-to:reply-to:subject:subject:date:date:
+ message-id:message-id:to:to:cc:cc:mime-version:mime-version:
+ content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=qJ60GW5I7GDTJbBQqWE3EmOtkI5NSzudyRlj9VDcORI=;
+ b=irl+0Ae3e5VdH4D1MZqpxoKQjO1g5wfIdYglLn6YWlPRsTTZc1YLuggEdM8Z35VDBfdGVj
+ 5UtoOrKc0Bc7I0LU96Vt9MtBRR1LSMUYJyk3nHDFEF2nPqrENnBEUzutvIseY5QfqYZStB
+ /HWQlNbfxyq0NClxAZSWwJgE3KEURo0=
+Received: from mail-qv1-f69.google.com (mail-qv1-f69.google.com
+ [209.85.219.69]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-396-chjhyw_hOCegVYnStPjA0g-1; Thu, 20 Aug 2020 12:07:48 -0400
+X-MC-Unique: chjhyw_hOCegVYnStPjA0g-1
+Received: by mail-qv1-f69.google.com with SMTP id d1so1668196qvs.21
+ for <nouveau@lists.freedesktop.org>; Thu, 20 Aug 2020 09:07:48 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:from:to:references:message-id:date
- :user-agent:mime-version:in-reply-to:content-transfer-encoding
- :content-language;
- bh=mPqlvBUfw8vukR9JWsM5IjdNZByovFmBmkj5vqYjAT4=;
- b=gkncuC27tqTAajwrnCickeWnodt+VIY4BylqQs7GKLnvoKb2Qhv47iKsOExuQmU59C
- HG3LwiO2kvvjY3wenz8nOPDGDSOHSfdDXd0ReNlASK2EhMlgDBm/UYq5KqGa6wNQdq97
- hlE7t+qWdzy5dG2AQuQc3EWsOFL1xszHQaW2GiuXq3nImDddzDiTBQGgmX/2wCONPuj2
- qn7X/47VYz4dZDsg72VPGjB+la5YEFmTYiaosWyyh2k6q6xm2PImpYYLlMqC4CVbcVot
- nI3LMEJev4n/zgZKSB06JPw2Q1Tip7kQ09z6PO7B0fde433xxGFfX6qp4dWwHH9V7227
- P7MA==
-X-Gm-Message-State: AOAM533N0hHDtbL0NoFoKRcU0M4+a8/5ncN2UKRsSA2mbUtGTJThcH2m
- oU1PKkpUai5Ej1dl1X3yjDm8k5Mnd74=
-X-Google-Smtp-Source: ABdhPJy5CCW0R/gJGagL3rV1s2XsR2DcnVFV8TPe2l98gUbRRv1K3cjQi8l0yoMBv9dO0bT+c8Q2KQ==
-X-Received: by 2002:adf:f488:: with SMTP id l8mr3668734wro.123.1597937264854; 
- Thu, 20 Aug 2020 08:27:44 -0700 (PDT)
-Received: from ?IPv6:2a02:908:1252:fb60:be8a:bd56:1f94:86e7?
- ([2a02:908:1252:fb60:be8a:bd56:1f94:86e7])
- by smtp.gmail.com with ESMTPSA id y24sm4677490wmi.17.2020.08.20.08.27.43
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 20 Aug 2020 08:27:44 -0700 (PDT)
-From: =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>
-To: airlied@gmail.com, skeggsb@gmail.com, dri-devel@lists.freedesktop.org,
- Nouveau@lists.freedesktop.org
-References: <20200820152404.22774-1-christian.koenig@amd.com>
- <20200820152404.22774-2-christian.koenig@amd.com>
-Message-ID: <479d13d3-211e-7ac3-be06-4091b746f9f1@gmail.com>
-Date: Thu, 20 Aug 2020 17:27:42 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ h=x-gm-message-state:message-id:subject:from:reply-to:to:cc:date
+ :in-reply-to:references:organization:user-agent:mime-version
+ :content-transfer-encoding;
+ bh=qJ60GW5I7GDTJbBQqWE3EmOtkI5NSzudyRlj9VDcORI=;
+ b=X87DbLTPAU5eVxtqU2tWfVPo378DachD9bv6MBUYU6WrJCW7ma+hIMboqRWQ4pKpap
+ l/1sqaNuK5NVJp/0KoHAaPILE0KL4cebbTvrkDJrzeYYe3RJ7Nt25XsiGltYCgLh7M12
+ sbLWMQVcfy+esqmDYEcQSmhvsytsB0uNEHRxsWNpVX3ghkjrHNeQxIolcDKiH9FReXrB
+ kj2NkiJsPMpI+tZtfYhVHiAxDGmoHEbGJf+bmJd7iSvvHEHjQoq9LqxXcrQfEHaOmctO
+ hVOPbOqYKWEkIuArzxOnElrUx+n1Kx9mLF9YU+c48KG0l8pE/eD7ZvGMWefpi5Lj2emv
+ 4NsQ==
+X-Gm-Message-State: AOAM530Ggtk96b2fqfjM0mBOBcO0nGaJj6+ak+zhkRIcslFJiImGYxa1
+ gzMBzAcckQaN6AaNRrdypPBj/yl2uOhRocHTMPmwVi00EhkLGxDiDpUvE1eMylKgwskWbIQIU6y
+ IpL5t7BihB5o5zjH+PrtIua2lZg==
+X-Received: by 2002:a05:6214:d46:: with SMTP id
+ 6mr3708556qvr.240.1597939667847; 
+ Thu, 20 Aug 2020 09:07:47 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJyO40CKZE46leN+nONQ3YVFgRPEtJrYd3+OHw2O70kDbwE+E1FviIHr4Wm0L0PBTbbLO5psCw==
+X-Received: by 2002:a05:6214:d46:: with SMTP id
+ 6mr3708503qvr.240.1597939667342; 
+ Thu, 20 Aug 2020 09:07:47 -0700 (PDT)
+Received: from Whitewolf.lyude.net
+ (pool-108-49-102-102.bstnma.fios.verizon.net. [108.49.102.102])
+ by smtp.gmail.com with ESMTPSA id t8sm2599572qke.7.2020.08.20.09.07.45
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 20 Aug 2020 09:07:46 -0700 (PDT)
+Message-ID: <a8a6065678f7874abfde2a41ec891f31aa2a8e03.camel@redhat.com>
+From: Lyude Paul <lyude@redhat.com>
+To: Sean Paul <sean@poorly.run>
+Date: Thu, 20 Aug 2020 12:07:44 -0400
+In-Reply-To: <20200819152914.GE46474@art_vandelay>
+References: <20200811200457.134743-1-lyude@redhat.com>
+ <20200811200457.134743-20-lyude@redhat.com>
+ <20200819152914.GE46474@art_vandelay>
+Organization: Red Hat
+User-Agent: Evolution 3.36.5 (3.36.5-1.fc32)
 MIME-Version: 1.0
-In-Reply-To: <20200820152404.22774-2-christian.koenig@amd.com>
-Content-Language: en-US
-Subject: Re: [Nouveau] [PATCH 1/2] drm/ttm: fix broken merge between
- drm-next and drm-misc-next
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=lyude@redhat.com
+X-Mimecast-Spam-Score: 0.002
+X-Mimecast-Originator: redhat.com
+Subject: Re: [Nouveau] [RFC 19/20] drm/i915/dp: Extract
+ drm_dp_read_dpcd_caps()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -72,43 +85,293 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Reply-To: lyude@redhat.com
+Cc: Juha-Pekka Heikkila <juhapekka.heikkila@gmail.com>,
+ David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
+ intel-gfx@lists.freedesktop.org, Lucas De Marchi <lucas.demarchi@intel.com>,
+ open list <linux-kernel@vger.kernel.org>, dri-devel@lists.freedesktop.org,
+ Gwan-gyeong Mun <gwan-gyeong.mun@intel.com>,
+ Manasi Navare <manasi.d.navare@intel.com>, Uma Shankar <uma.shankar@intel.com>,
+ =?ISO-8859-1?Q?Jos=E9?= Roberto de Souza <jose.souza@intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>, Animesh Manna <animesh.manna@intel.com>,
+ Wambui Karuga <wambui.karugax@gmail.com>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-UGxlYXNlIGlnbm9yZSB0aGlzIG9uZSwgaXQncyB0byBob3QgaGVyZSBhbmQgSSdtIHR5cGluZyB0
-byBmYXN0IDopCgpDaHJpc3RpYW4uCgpBbSAyMC4wOC4yMCB1bSAxNzoyNCBzY2hyaWViIENocmlz
-dGlhbiBLw7ZuaWc6Cj4gZHJtLW5leHQgcmV2ZXJ0ZWQgdGhlIGNoYW5nZXMgdG8gdHRtX3R0X2Ny
-ZWF0ZSgpIHRvIGRvIHRoZQo+IE5VTEwgY2hlY2sgaW5zaWRlIHRoZSBmdW5jdGlvbiwgYnV0IGRy
-bS1taXNjLW5leHQgYWRkcyBuZXcKPiB1c2VycyBvZiB0aGlzIGFwcHJvYWNoLgo+Cj4gUmUtYXBw
-bHkgdGhlIE5VTEwgY2hlY2sgY2hhbmdlIGluc2lkZSB0aGUgZnVuY3Rpb24gdG8gZml4IHRoaXMu
-Cj4KPiBTaWduZWQtb2ZmLWJ5OiBDaHJpc3RpYW4gS8O2bmlnIDxjaHJpc3RpYW4ua29lbmlnQGFt
-ZC5jb20+Cj4gUmV2aWV3ZWQtYnk6IERhdmUgQWlybGllIDxhaXJsaWVkQHJlZGhhdC5jb20+Cj4g
-TGluazogaHR0cHM6Ly9wYXRjaHdvcmsuZnJlZWRlc2t0b3Aub3JnL3BhdGNoLzM4NjYyOC8KPiAt
-LS0KPiAgIGRyaXZlcnMvZ3B1L2RybS90dG0vdHRtX2JvLmMgfCAyICstCj4gICBkcml2ZXJzL2dw
-dS9kcm0vdHRtL3R0bV90dC5jIHwgNCArKystCj4gICAyIGZpbGVzIGNoYW5nZWQsIDQgaW5zZXJ0
-aW9ucygrKSwgMiBkZWxldGlvbnMoLSkKPgo+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0v
-dHRtL3R0bV9iby5jIGIvZHJpdmVycy9ncHUvZHJtL3R0bS90dG1fYm8uYwo+IGluZGV4IDk3YWM2
-NjJhNDdjYi4uZTM5MzFlNTE1OTA2IDEwMDY0NAo+IC0tLSBhL2RyaXZlcnMvZ3B1L2RybS90dG0v
-dHRtX2JvLmMKPiArKysgYi9kcml2ZXJzL2dwdS9kcm0vdHRtL3R0bV9iby5jCj4gQEAgLTExODAs
-NyArMTE4MCw3IEBAIGludCB0dG1fYm9fdmFsaWRhdGUoc3RydWN0IHR0bV9idWZmZXJfb2JqZWN0
-ICpibywKPiAgIAkvKgo+ICAgCSAqIFdlIG1pZ2h0IG5lZWQgdG8gYWRkIGEgVFRNLgo+ICAgCSAq
-Lwo+IC0JaWYgKGJvLT5tZW0ubWVtX3R5cGUgPT0gVFRNX1BMX1NZU1RFTSAmJiBiby0+dHRtID09
-IE5VTEwpIHsKPiArCWlmIChiby0+bWVtLm1lbV90eXBlID09IFRUTV9QTF9TWVNURU0pIHsKPiAg
-IAkJcmV0ID0gdHRtX3R0X2NyZWF0ZShibywgdHJ1ZSk7Cj4gICAJCWlmIChyZXQpCj4gICAJCQly
-ZXR1cm4gcmV0Owo+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0vdHRtL3R0bV90dC5jIGIv
-ZHJpdmVycy9ncHUvZHJtL3R0bS90dG1fdHQuYwo+IGluZGV4IDlhYTRmYmUzODZlNi4uMWNjZjFl
-ZjA1MGQ2IDEwMDY0NAo+IC0tLSBhL2RyaXZlcnMvZ3B1L2RybS90dG0vdHRtX3R0LmMKPiArKysg
-Yi9kcml2ZXJzL2dwdS9kcm0vdHRtL3R0bV90dC5jCj4gQEAgLTUwLDYgKzUwLDkgQEAgaW50IHR0
-bV90dF9jcmVhdGUoc3RydWN0IHR0bV9idWZmZXJfb2JqZWN0ICpibywgYm9vbCB6ZXJvX2FsbG9j
-KQo+ICAgCj4gICAJZG1hX3Jlc3ZfYXNzZXJ0X2hlbGQoYm8tPmJhc2UucmVzdik7Cj4gICAKPiAr
-CWlmIChiby0+dHRtKQo+ICsJCXJldHVybiAwOwo+ICsKPiAgIAlpZiAoYmRldi0+bmVlZF9kbWEz
-MikKPiAgIAkJcGFnZV9mbGFncyB8PSBUVE1fUEFHRV9GTEFHX0RNQTMyOwo+ICAgCj4gQEAgLTY3
-LDcgKzcwLDYgQEAgaW50IHR0bV90dF9jcmVhdGUoc3RydWN0IHR0bV9idWZmZXJfb2JqZWN0ICpi
-bywgYm9vbCB6ZXJvX2FsbG9jKQo+ICAgCQlwYWdlX2ZsYWdzIHw9IFRUTV9QQUdFX0ZMQUdfU0c7
-Cj4gICAJCWJyZWFrOwo+ICAgCWRlZmF1bHQ6Cj4gLQkJYm8tPnR0bSA9IE5VTEw7Cj4gICAJCXBy
-X2VycigiSWxsZWdhbCBidWZmZXIgb2JqZWN0IHR5cGVcbiIpOwo+ICAgCQlyZXR1cm4gLUVJTlZB
-TDsKPiAgIAl9CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-XwpOb3V2ZWF1IG1haWxpbmcgbGlzdApOb3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRw
-czovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL25vdXZlYXUK
+On Wed, 2020-08-19 at 11:29 -0400, Sean Paul wrote:
+> On Tue, Aug 11, 2020 at 04:04:56PM -0400, Lyude Paul wrote:
+> > Since DP 1.3, it's been possible for DP receivers to specify an
+> > additional set of DPCD capabilities, which can take precedence over the
+> > capabilities reported at DP_DPCD_REV.
+> > 
+> > Basically any device supporting DP is going to need to read these in an
+> > identical manner, in particular nouveau, so let's go ahead and just move
+> > this code out of i915 into a shared DRM DP helper that we can use in
+> > other drivers.
+> > 
+> > Signed-off-by: Lyude Paul <lyude@redhat.com>
+> > ---
+> >  drivers/gpu/drm/drm_dp_helper.c             | 76 +++++++++++++++++++++
+> >  drivers/gpu/drm/i915/display/intel_dp.c     | 60 +---------------
+> >  drivers/gpu/drm/i915/display/intel_dp.h     |  1 -
+> >  drivers/gpu/drm/i915/display/intel_lspcon.c |  2 +-
+> >  include/drm/drm_dp_helper.h                 |  3 +
+> >  5 files changed, 82 insertions(+), 60 deletions(-)
+> > 
+> > diff --git a/drivers/gpu/drm/drm_dp_helper.c
+> > b/drivers/gpu/drm/drm_dp_helper.c
+> > index 0ff2959c8f8e8..f9445915c6c26 100644
+> > --- a/drivers/gpu/drm/drm_dp_helper.c
+> > +++ b/drivers/gpu/drm/drm_dp_helper.c
+> > @@ -423,6 +423,82 @@ bool drm_dp_send_real_edid_checksum(struct drm_dp_aux
+> > *aux,
+> >  }
+> >  EXPORT_SYMBOL(drm_dp_send_real_edid_checksum);
+> >  
+> > +static int drm_dp_read_extended_dpcd_caps(struct drm_dp_aux *aux,
+> > +					  u8 dpcd[DP_RECEIVER_CAP_SIZE])
+> > +{
+> > +	u8 dpcd_ext[6];
+> > +	int ret;
+> > +
+> > +	/*
+> > +	 * Prior to DP1.3 the bit represented by
+> > +	 * DP_EXTENDED_RECEIVER_CAP_FIELD_PRESENT was reserved.
+> > +	 * If it is set DP_DPCD_REV at 0000h could be at a value less than
+> > +	 * the true capability of the panel. The only way to check is to
+> > +	 * then compare 0000h and 2200h.
+> > +	 */
+> > +	if (!(dpcd[DP_TRAINING_AUX_RD_INTERVAL] &
+> > +	      DP_EXTENDED_RECEIVER_CAP_FIELD_PRESENT))
+> > +		return 0;
+> > +
+> > +	ret = drm_dp_dpcd_read(aux, DP_DP13_DPCD_REV, &dpcd_ext,
+> > +			       sizeof(dpcd_ext));
+> > +	if (ret != sizeof(dpcd_ext))
+> > +		return -EIO;
+> > +
+> > +	if (dpcd[DP_DPCD_REV] > dpcd_ext[DP_DPCD_REV]) {
+> > +		DRM_DEBUG_KMS("%s: Extended DPCD rev less than base DPCD rev (%d
+> > > %d)\n",
+> > +			      aux->name, dpcd[DP_DPCD_REV],
+> > +			      dpcd_ext[DP_DPCD_REV]);
+> 
+> Might be a good opportunity to convert all of these to drm_dbg_dp()?
+> 
+> > +		return 0;
+> > +	}
+> > +
+> > +	if (!memcmp(dpcd, dpcd_ext, sizeof(dpcd_ext)))
+> > +		return 0;
+> > +
+> > +	DRM_DEBUG_KMS("%s: Base DPCD: %*ph\n",
+> > +		      aux->name, DP_RECEIVER_CAP_SIZE, dpcd);
+> > +
+> > +	memcpy(dpcd, dpcd_ext, sizeof(dpcd_ext));
+> > +
+> > +	return 0;
+> > +}
+> > +
+> > +/**
+> > + * drm_dp_read_dpcd_caps() - read DPCD caps and extended DPCD caps if
+> > + * available
+> > + * @aux: DisplayPort AUX channel
+> > + * @dpcd: Buffer to store the resulting DPCD in
+> > + *
+> > + * Attempts to read the base DPCD caps for @aux. Additionally, this
+> > function
+> > + * checks for and reads the extended DPRX caps (%DP_DP13_DPCD_REV) if
+> > + * present.
+> > + *
+> > + * Returns: %0 if the DPCD was read successfully, negative error code
+> > + * otherwise.
+> > + */
+> > +int drm_dp_read_dpcd_caps(struct drm_dp_aux *aux,
+> > +			  u8 dpcd[DP_RECEIVER_CAP_SIZE])
+> > +{
+> > +	int ret;
+> > +
+> > +	ret = drm_dp_dpcd_read(aux, DP_DPCD_REV, dpcd, DP_RECEIVER_CAP_SIZE);
+> > +	if (ret != DP_RECEIVER_CAP_SIZE || dpcd[DP_DPCD_REV] == 0)
+> > +		return -EIO;
+> > +
+> > +	ret = drm_dp_read_extended_dpcd_caps(aux, dpcd);
+> > +	if (ret < 0)
+> > +		return ret;
+> 
+> I wonder if we should just go with the "regular" dpcd caps we just read in
+> this
+> case?
+FWIW - we generally want to just abort on failed DPCD reads since if a device
+doesn't implement a feature like this, it'll usually read all zeroes. Failed
+DPCD reads are almost always just the result of something suddenly being
+disconnected (excluding some cases I've seen on MST, but I think those more have
+to do with us sending incorrect dpcd read/write requests...)
+
+> 
+> Regardless of my nits,
+> 
+> Reviewed-by: Sean Paul <sean@poorly.run>
+> 
+> > +
+> > +	DRM_DEBUG_KMS("%s: DPCD: %*ph\n",
+> > +		      aux->name, DP_RECEIVER_CAP_SIZE, dpcd);
+> > +
+> > +	if (dpcd[DP_DPCD_REV] == 0)
+> > +		ret = -EIO;
+> > +
+> > +	return ret;
+> > +}
+> > +EXPORT_SYMBOL(drm_dp_read_dpcd_caps);
+> > +
+> >  /**
+> >   * drm_dp_downstream_read_info() - read DPCD downstream port info if
+> > available
+> >   * @aux: DisplayPort AUX channel
+> > diff --git a/drivers/gpu/drm/i915/display/intel_dp.c
+> > b/drivers/gpu/drm/i915/display/intel_dp.c
+> > index e343965a483df..230aa0360dc61 100644
+> > --- a/drivers/gpu/drm/i915/display/intel_dp.c
+> > +++ b/drivers/gpu/drm/i915/display/intel_dp.c
+> > @@ -4449,62 +4449,6 @@ intel_dp_link_down(struct intel_encoder *encoder,
+> >  	}
+> >  }
+> >  
+> > -static void
+> > -intel_dp_extended_receiver_capabilities(struct intel_dp *intel_dp)
+> > -{
+> > -	struct drm_i915_private *i915 = dp_to_i915(intel_dp);
+> > -	u8 dpcd_ext[6];
+> > -
+> > -	/*
+> > -	 * Prior to DP1.3 the bit represented by
+> > -	 * DP_EXTENDED_RECEIVER_CAP_FIELD_PRESENT was reserved.
+> > -	 * if it is set DP_DPCD_REV at 0000h could be at a value less than
+> > -	 * the true capability of the panel. The only way to check is to
+> > -	 * then compare 0000h and 2200h.
+> > -	 */
+> > -	if (!(intel_dp->dpcd[DP_TRAINING_AUX_RD_INTERVAL] &
+> > -	      DP_EXTENDED_RECEIVER_CAP_FIELD_PRESENT))
+> > -		return;
+> > -
+> > -	if (drm_dp_dpcd_read(&intel_dp->aux, DP_DP13_DPCD_REV,
+> > -			     &dpcd_ext, sizeof(dpcd_ext)) != sizeof(dpcd_ext)) {
+> > -		drm_err(&i915->drm,
+> > -			"DPCD failed read at extended capabilities\n");
+> > -		return;
+> > -	}
+> > -
+> > -	if (intel_dp->dpcd[DP_DPCD_REV] > dpcd_ext[DP_DPCD_REV]) {
+> > -		drm_dbg_kms(&i915->drm,
+> > -			    "DPCD extended DPCD rev less than base DPCD rev\n");
+> > -		return;
+> > -	}
+> > -
+> > -	if (!memcmp(intel_dp->dpcd, dpcd_ext, sizeof(dpcd_ext)))
+> > -		return;
+> > -
+> > -	drm_dbg_kms(&i915->drm, "Base DPCD: %*ph\n",
+> > -		    (int)sizeof(intel_dp->dpcd), intel_dp->dpcd);
+> > -
+> > -	memcpy(intel_dp->dpcd, dpcd_ext, sizeof(dpcd_ext));
+> > -}
+> > -
+> > -bool
+> > -intel_dp_read_dpcd(struct intel_dp *intel_dp)
+> > -{
+> > -	struct drm_i915_private *i915 = dp_to_i915(intel_dp);
+> > -
+> > -	if (drm_dp_dpcd_read(&intel_dp->aux, 0x000, intel_dp->dpcd,
+> > -			     sizeof(intel_dp->dpcd)) < 0)
+> > -		return false; /* aux transfer failed */
+> > -
+> > -	intel_dp_extended_receiver_capabilities(intel_dp);
+> > -
+> > -	drm_dbg_kms(&i915->drm, "DPCD: %*ph\n", (int)sizeof(intel_dp->dpcd),
+> > -		    intel_dp->dpcd);
+> > -
+> > -	return intel_dp->dpcd[DP_DPCD_REV] != 0;
+> > -}
+> > -
+> >  bool intel_dp_get_colorimetry_status(struct intel_dp *intel_dp)
+> >  {
+> >  	u8 dprx = 0;
+> > @@ -4563,7 +4507,7 @@ intel_edp_init_dpcd(struct intel_dp *intel_dp)
+> >  	/* this function is meant to be called only once */
+> >  	drm_WARN_ON(&dev_priv->drm, intel_dp->dpcd[DP_DPCD_REV] != 0);
+> >  
+> > -	if (!intel_dp_read_dpcd(intel_dp))
+> > +	if (drm_dp_read_dpcd_caps(&intel_dp->aux, intel_dp->dpcd) != 0)
+> >  		return false;
+> >  
+> >  	drm_dp_read_desc(&intel_dp->aux, &intel_dp->desc,
+> > @@ -4650,7 +4594,7 @@ intel_dp_get_dpcd(struct intel_dp *intel_dp)
+> >  {
+> >  	int ret;
+> >  
+> > -	if (!intel_dp_read_dpcd(intel_dp))
+> > +	if (drm_dp_read_dpcd_caps(&intel_dp->aux, intel_dp->dpcd))
+> >  		return false;
+> >  
+> >  	/*
+> > diff --git a/drivers/gpu/drm/i915/display/intel_dp.h
+> > b/drivers/gpu/drm/i915/display/intel_dp.h
+> > index b901ab850cbd9..0a3af3410d52e 100644
+> > --- a/drivers/gpu/drm/i915/display/intel_dp.h
+> > +++ b/drivers/gpu/drm/i915/display/intel_dp.h
+> > @@ -99,7 +99,6 @@ bool intel_dp_source_supports_hbr3(struct intel_dp
+> > *intel_dp);
+> >  bool
+> >  intel_dp_get_link_status(struct intel_dp *intel_dp, u8 *link_status);
+> >  
+> > -bool intel_dp_read_dpcd(struct intel_dp *intel_dp);
+> >  bool intel_dp_get_colorimetry_status(struct intel_dp *intel_dp);
+> >  int intel_dp_link_required(int pixel_clock, int bpp);
+> >  int intel_dp_max_data_rate(int max_link_clock, int max_lanes);
+> > diff --git a/drivers/gpu/drm/i915/display/intel_lspcon.c
+> > b/drivers/gpu/drm/i915/display/intel_lspcon.c
+> > index b781bf4696443..dc1b35559afdf 100644
+> > --- a/drivers/gpu/drm/i915/display/intel_lspcon.c
+> > +++ b/drivers/gpu/drm/i915/display/intel_lspcon.c
+> > @@ -571,7 +571,7 @@ bool lspcon_init(struct intel_digital_port *dig_port)
+> >  		return false;
+> >  	}
+> >  
+> > -	if (!intel_dp_read_dpcd(dp)) {
+> > +	if (drm_dp_read_dpcd_caps(&dp->aux, dp->dpcd) != 0) {
+> >  		DRM_ERROR("LSPCON DPCD read failed\n");
+> >  		return false;
+> >  	}
+> > diff --git a/include/drm/drm_dp_helper.h b/include/drm/drm_dp_helper.h
+> > index 0c141fc81aaa8..11649e93e5bb6 100644
+> > --- a/include/drm/drm_dp_helper.h
+> > +++ b/include/drm/drm_dp_helper.h
+> > @@ -1607,6 +1607,9 @@ static inline ssize_t drm_dp_dpcd_writeb(struct
+> > drm_dp_aux *aux,
+> >  	return drm_dp_dpcd_write(aux, offset, &value, 1);
+> >  }
+> >  
+> > +int drm_dp_read_dpcd_caps(struct drm_dp_aux *aux,
+> > +			  u8 dpcd[DP_RECEIVER_CAP_SIZE]);
+> > +
+> >  int drm_dp_dpcd_read_link_status(struct drm_dp_aux *aux,
+> >  				 u8 status[DP_LINK_STATUS_SIZE]);
+> >  
+> > -- 
+> > 2.26.2
+> > 
+> > _______________________________________________
+> > dri-devel mailing list
+> > dri-devel@lists.freedesktop.org
+> > https://lists.freedesktop.org/mailman/listinfo/dri-devel
+-- 
+Sincerely,
+      Lyude Paul (she/her)
+      Software Engineer at Red Hat
+
+_______________________________________________
+Nouveau mailing list
+Nouveau@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/nouveau
