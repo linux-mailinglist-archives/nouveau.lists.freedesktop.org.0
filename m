@@ -1,69 +1,61 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6887024BBEF
-	for <lists+nouveau@lfdr.de>; Thu, 20 Aug 2020 14:36:52 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 22ED424C219
+	for <lists+nouveau@lfdr.de>; Thu, 20 Aug 2020 17:24:13 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id CFC656E334;
-	Thu, 20 Aug 2020 12:36:49 +0000 (UTC)
-X-Original-To: nouveau@lists.freedesktop.org
-Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ej1-x642.google.com (mail-ej1-x642.google.com
- [IPv6:2a00:1450:4864:20::642])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C31E96E119
- for <nouveau@lists.freedesktop.org>; Thu, 20 Aug 2020 10:24:47 +0000 (UTC)
-Received: by mail-ej1-x642.google.com with SMTP id c16so1822846ejx.12
- for <nouveau@lists.freedesktop.org>; Thu, 20 Aug 2020 03:24:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=FU3+CiJFzLHmOFDuQMwlaisWRGuHRN+5AV6txupwZrU=;
- b=QFNCCjnhRiVXX1RwHJMrjJrm3FMIDmNx/PgDGVaGoYPr2orRHBTBO48N0vE/bjgnJ+
- SYuYytDiRhiYZtZgJZ7z4/4vPKus2MwWgTKmnlMmLZQ4o8gAgDqGKHg0dO0uTStdh95b
- tHYxvzFh9iEVHBmlKA/EhqmNwNT52r2I3xUhk=
+	by gabe.freedesktop.org (Postfix) with ESMTP id 218C26E962;
+	Thu, 20 Aug 2020 15:24:09 +0000 (UTC)
+X-Original-To: Nouveau@lists.freedesktop.org
+Delivered-To: Nouveau@lists.freedesktop.org
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id EAF016E51C;
+ Thu, 20 Aug 2020 15:24:07 +0000 (UTC)
+Received: by mail-wm1-x32f.google.com with SMTP id p14so1966818wmg.1;
+ Thu, 20 Aug 2020 08:24:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=from:to:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=5oenYgVwjipRowXOxqjVtyCUoSYNlrcwj67+GMIuDko=;
+ b=MMcF+mOJYvPA8akpQ24nuA8lBBX8oTQa+MTImWvnuSGIgxSE5pkl/7lVj78wmvGkYU
+ HZ+4SMmlHfPArAwZlp+L2GhZA6O/DwFvBnSweDGjmgogoU/HHGB2sqWMqE0binWyjZcy
+ MFh9+EGU1nJXEguBk2ACIu2Xn53JD4J8c2TAJ4cXzU5yCim6aQ1Cnht4vhF7I2g0SQML
+ 7Qv7tNjOiQMeEmz09fZ4IW+WPQXjZbFIIcir+Wj74I5cpO06KC8xZhJEZhMiA3i4NGpi
+ p7Hs5Oqt5Ps4zqlLpG2mPpsIfliNdl8G50qeQ/wo7TvOzAvh2/Ie0D6zvLZ0LJLFHtTM
+ TgUA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=FU3+CiJFzLHmOFDuQMwlaisWRGuHRN+5AV6txupwZrU=;
- b=H9iR53R352XIJsoJWDYJEAYdMen2cbFEInSGndGRrMlWawYahWn9ydjhe4V2107zqW
- kawonuRYxqlcaGBSrTwKwiJhCCLEr6ulIpyZqdObhKimdmf25Tdn+AhoNLIopmItEFjt
- +Q0mMBIIsQtYOPu5VurcVZNzl1MPdMYhj58VmD4Xl4buZATgGZyKd9CgjZtwxswrxVvC
- 31LqpwZbXv36S8m3kMSvadiovhSH/cj57TcjJU2dIbisXQC3/bEo5Fehdp47P53+j54l
- EWALnY8A/vjvRmNEvPbWIqmSkAMzPXtfmrT+6uBGZysTFJySzNocohiB3Qd3XzIciFdL
- kGkA==
-X-Gm-Message-State: AOAM532FNH3R2096qkEfGcs2jb/ffAK8t4co6GTsiFVXntFxWoeN9tbO
- EejXCRGFcsZebjOehcFs2K/f7f26ZoQ1LjDv
-X-Google-Smtp-Source: ABdhPJyxfXzfXa3oIZxaM9hahQ8502UZOQslrs+ryIJNmhA5gEAVch2txqV+NGu9r9s/whNeED1oEw==
-X-Received: by 2002:a17:906:fa0b:: with SMTP id
- lo11mr2632960ejb.235.1597919086184; 
- Thu, 20 Aug 2020 03:24:46 -0700 (PDT)
-Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com.
- [209.85.221.53])
- by smtp.gmail.com with ESMTPSA id j11sm1170016ejx.0.2020.08.20.03.24.45
- for <nouveau@lists.freedesktop.org>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 20 Aug 2020 03:24:45 -0700 (PDT)
-Received: by mail-wr1-f53.google.com with SMTP id a15so1475451wrh.10
- for <nouveau@lists.freedesktop.org>; Thu, 20 Aug 2020 03:24:45 -0700 (PDT)
-X-Received: by 2002:a5d:6744:: with SMTP id l4mr2717742wrw.105.1597919084826; 
- Thu, 20 Aug 2020 03:24:44 -0700 (PDT)
+ h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=5oenYgVwjipRowXOxqjVtyCUoSYNlrcwj67+GMIuDko=;
+ b=ct9rZsimE+EmqJkRI0wEBHhoaMZgyAmhA2rxgE1VPoIt3XKFelAQZXe5KwB2uj8bgn
+ Bos90hxvpVXqfer0LVl62USLPh1QB1lPOVpjiCXV8oHB0BMOCwkIR3p7ueLAo2T69h2r
+ mhiFDg8ivGE5TVrTm3rxVhqaEt4hHzDTtmGTw4ZdLg6nznyGZrOdSknX7mGjS3Cv0ew5
+ YVo5zfvsOP/dxQXblDVU4QIh8Ae6OqM2oL1FX8JqLr2xHmuSa/LfO9wleijgHU2Ua75+
+ sW2IWWux0RFwDhH6v57uaLuY0iiPyYfHU/rx8/ikbFNTdperscfhK6KReEhdX7wneHMq
+ p9ZA==
+X-Gm-Message-State: AOAM532SZ4rJEkYnidlX5uX5Hq2AqcIW/vkHPyZ4A6kBW44F/mWFYEqR
+ qVf79KJYW0py6wXVvFpg+Xc=
+X-Google-Smtp-Source: ABdhPJyvBb+CFqX4CdBovZi/pEYpg+bK98og5+a/Qm8XiuLZzTfQanJcsTmVJ9CEI8ec/owiExAUxw==
+X-Received: by 2002:a05:600c:4152:: with SMTP id
+ h18mr3755921wmm.132.1597937046626; 
+ Thu, 20 Aug 2020 08:24:06 -0700 (PDT)
+Received: from abel.fritz.box ([2a02:908:1252:fb60:6f64:e393:bd4a:2d65])
+ by smtp.gmail.com with ESMTPSA id t189sm5320708wmf.47.2020.08.20.08.24.05
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 20 Aug 2020 08:24:06 -0700 (PDT)
+From: "=?UTF-8?q?Christian=20K=C3=B6nig?=" <ckoenig.leichtzumerken@gmail.com>
+X-Google-Original-From: =?UTF-8?q?Christian=20K=C3=B6nig?=
+ <christian.koenig@amd.com>
+To: airlied@gmail.com, skeggsb@gmail.com, dri-devel@lists.freedesktop.org,
+ Nouveau@lists.freedesktop.org
+Date: Thu, 20 Aug 2020 17:24:02 +0200
+Message-Id: <20200820152404.22774-1-christian.koenig@amd.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-References: <20200819065555.1802761-1-hch@lst.de>
- <20200819065555.1802761-6-hch@lst.de>
- <CAAFQd5COLxjydDYrfx47ht8tj-aNPiaVnC+WyQA7nvpW4gs=ww@mail.gmail.com>
- <62e4f4fc-c8a5-3ee8-c576-fe7178cb4356@arm.com>
- <CAAFQd5AcCTDguB2C9KyDiutXWoEvBL8tL7+a==Uo8vj_8CLOJw@mail.gmail.com>
- <2b32f1d8-16f7-3352-40a5-420993d52fb5@arm.com> <20200820050214.GA4815@lst.de>
-In-Reply-To: <20200820050214.GA4815@lst.de>
-From: Tomasz Figa <tfiga@chromium.org>
-Date: Thu, 20 Aug 2020 12:24:31 +0200
-X-Gmail-Original-Message-ID: <CAAFQd5AknYpP5BamC=wJkEJyO-q47V6Gc+HT65h6B+HyT+-xjQ@mail.gmail.com>
-Message-ID: <CAAFQd5AknYpP5BamC=wJkEJyO-q47V6Gc+HT65h6B+HyT+-xjQ@mail.gmail.com>
-To: Christoph Hellwig <hch@lst.de>
-X-Mailman-Approved-At: Thu, 20 Aug 2020 12:36:49 +0000
-Subject: Re: [Nouveau] [PATCH 05/28] media/v4l2: remove
- V4L2-FLAG-MEMORY-NON-CONSISTENT
+Subject: [Nouveau] Moving LRU handling into Nouveau v2
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -75,108 +67,23 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: alsa-devel@alsa-project.org, linux-ia64@vger.kernel.org,
- Linux Doc Mailing List <linux-doc@vger.kernel.org>,
- nouveau@lists.freedesktop.org, linux-nvme@lists.infradead.org,
- linux-mips@vger.kernel.org,
- "James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>,
- linux-mm@kvack.org, Marek Szyprowski <m.szyprowski@samsung.com>,
- linux-samsung-soc <linux-samsung-soc@vger.kernel.org>,
- Joonyoung Shim <jy0922.shim@samsung.com>, linux-scsi@vger.kernel.org,
- Joerg Roedel <joro@8bytes.org>,
- "list@263.net:IOMMU DRIVERS" <iommu@lists.linux-foundation.org>,
- Ben Skeggs <bskeggs@redhat.com>, Matt Porter <mporter@kernel.crashing.org>,
- Linux Media Mailing List <linux-media@vger.kernel.org>,
- Tom Lendacky <thomas.lendacky@amd.com>, Pawel Osciak <pawel@osciak.com>,
- Mauro Carvalho Chehab <mchehab@kernel.org>,
- "list@263.net:IOMMU DRIVERS <iommu@lists.linux-foundation.org>,
- Joerg Roedel <joro@8bytes.org>, " <linux-arm-kernel@lists.infradead.org>,
- Thomas Bogendoerfer <tsbogend@alpha.franken.de>, linux-parisc@vger.kernel.org,
- netdev@vger.kernel.org, Seung-Woo Kim <sw0312.kim@samsung.com>,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- Kyungmin Park <kyungmin.park@samsung.com>, Robin Murphy <robin.murphy@arm.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, Aug 20, 2020 at 7:02 AM Christoph Hellwig <hch@lst.de> wrote:
->
-> On Wed, Aug 19, 2020 at 03:07:04PM +0100, Robin Murphy wrote:
-> >> FWIW, I asked back in time what the plan is for non-coherent
-> >> allocations and it seemed like DMA_ATTR_NON_CONSISTENT and
-> >> dma_sync_*() was supposed to be the right thing to go with. [2] The
-> >> same thread also explains why dma_alloc_pages() isn't suitable for the
-> >> users of dma_alloc_attrs() and DMA_ATTR_NON_CONSISTENT.
-> >
-> > AFAICS even back then Christoph was implying getting rid of NON_CONSISTENT
-> > and *replacing* it with something streaming-API-based - i.e. this series -
-> > not encouraging mixing the existing APIs. It doesn't seem impossible to
-> > implement a remapping version of this new dma_alloc_pages() for
-> > IOMMU-backed ops if it's really warranted (although at that point it seems
-> > like "non-coherent" vb2-dc starts to have significant conceptual overlap
-> > with vb2-sg).
->
-> You can alway vmap the returned pages from dma_alloc_pages, but it will
-> make cache invalidation hell - you'll need to use
-> invalidate_kernel_vmap_range and flush_kernel_vmap_range to properly
-> handle virtually indexed caches.
->
-> Or with remapping you mean using the iommu do de-scatter/gather?
+Hi guys,
 
-Ideally, both.
+I already tried this a few month ago, but since I don't have NVidia hardware its rather hard to test for me (need to get some ordered).
 
-For remapping in the CPU sense, there are drivers which rely on a
-contiguous kernel mapping of the vb2 buffers, which was provided by
-dma_alloc_attrs(). I think they could be reworked to work on single
-pages, but that would significantly complicate the code. At the same
-time, such drivers would actually benefit from a cached mapping,
-because they often have non-bursty, random access patterns.
+Dave brought up the topic that we should probably try to move the handling into Nouveau once more, so I tried to fix the problem Ben reported and rebased on top of current drm-misc-next.
 
-Then, in the IOMMU sense, the whole idea of videobuf2-dma-contig is to
-rely on the DMA API to always provide device-contiguous memory, as
-required by the hardware which only has a single pointer and size.
+Dave can you test this? At least in theory the approach should work, but in practice there can of course be bugs.
 
->
-> You can implement that trivially implement it yourself for the iommu
-> case:
->
-> {
->         merge_boundary = dma_get_merge_boundary(dev);
->         if (!merge_boundary || merge_boundary > chunk_size - 1) {
->                 /* can't coalesce */
->                 return -EINVAL;
->         }
->
->
->         nents = DIV_ROUND_UP(total_size, chunk_size);
->         sg = sgl_alloc();
->         for_each_sgl() {
->                 sg->page = __alloc_pages(get_order(chunk_size))
->                 sg->len = chunk_size;
->         }
->         dma_map_sg(sg, DMA_ATTR_SKIP_CPU_SYNC);
->         // you are guaranteed to get a single dma_addr out
-> }
->
-> Of course this still uses the scatterlist structure with its annoying
-> mix of input and output parametes, so I'd rather not expose it as
-> an official API at the DMA layer.
+Thanks,
+Christian.
 
-The problem with the above open coded approach is that it requires
-explicit handling of the non-IOMMU and IOMMU cases and this is exactly
-what we don't want to have in vb2 and what was actually the job of the
-DMA API to hide. Is the plan to actually move the IOMMU handling out
-of the DMA API?
 
-Do you think we could instead turn it into a dma_alloc_noncoherent()
-helper, which has similar semantics as dma_alloc_attrs() and handles
-the various corner cases (e.g. invalidate_kernel_vmap_range and
-flush_kernel_vmap_range) to achieve the desired functionality without
-delegating the "hell", as you called it, to the users?
-
-Best regards,
-Tomasz
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
