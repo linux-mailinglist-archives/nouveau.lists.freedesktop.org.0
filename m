@@ -1,36 +1,33 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2F71C24AE40
-	for <lists+nouveau@lfdr.de>; Thu, 20 Aug 2020 07:05:29 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id AE8F124AE5B
+	for <lists+nouveau@lfdr.de>; Thu, 20 Aug 2020 07:19:10 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0440A6E8A0;
-	Thu, 20 Aug 2020 05:05:25 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0F1E56E8A2;
+	Thu, 20 Aug 2020 05:19:09 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from verein.lst.de (verein.lst.de [213.95.11.211])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9B4856E8A0
- for <nouveau@lists.freedesktop.org>; Thu, 20 Aug 2020 05:02:18 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0D72C6E8A2
+ for <nouveau@lists.freedesktop.org>; Thu, 20 Aug 2020 05:15:17 +0000 (UTC)
 Received: by verein.lst.de (Postfix, from userid 2407)
- id 7DCC068BEB; Thu, 20 Aug 2020 07:02:14 +0200 (CEST)
-Date: Thu, 20 Aug 2020 07:02:14 +0200
+ id A894C68BEB; Thu, 20 Aug 2020 07:15:12 +0200 (CEST)
+Date: Thu, 20 Aug 2020 07:15:12 +0200
 From: Christoph Hellwig <hch@lst.de>
-To: Robin Murphy <robin.murphy@arm.com>
-Message-ID: <20200820050214.GA4815@lst.de>
+To: Tomasz Figa <tfiga@chromium.org>
+Message-ID: <20200820051512.GA5141@lst.de>
 References: <20200819065555.1802761-1-hch@lst.de>
- <20200819065555.1802761-6-hch@lst.de>
- <CAAFQd5COLxjydDYrfx47ht8tj-aNPiaVnC+WyQA7nvpW4gs=ww@mail.gmail.com>
- <62e4f4fc-c8a5-3ee8-c576-fe7178cb4356@arm.com>
- <CAAFQd5AcCTDguB2C9KyDiutXWoEvBL8tL7+a==Uo8vj_8CLOJw@mail.gmail.com>
- <2b32f1d8-16f7-3352-40a5-420993d52fb5@arm.com>
+ <20200819065555.1802761-20-hch@lst.de>
+ <CAAFQd5Bbp-eAVKS1MKS8xtrT4ZoOmBPfZyw9mys=eOmDb6r8Lw@mail.gmail.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <2b32f1d8-16f7-3352-40a5-420993d52fb5@arm.com>
+In-Reply-To: <CAAFQd5Bbp-eAVKS1MKS8xtrT4ZoOmBPfZyw9mys=eOmDb6r8Lw@mail.gmail.com>
 User-Agent: Mutt/1.5.17 (2007-11-01)
-X-Mailman-Approved-At: Thu, 20 Aug 2020 05:05:24 +0000
-Subject: Re: [Nouveau] [PATCH 05/28] media/v4l2: remove
- V4L2-FLAG-MEMORY-NON-CONSISTENT
+X-Mailman-Approved-At: Thu, 20 Aug 2020 05:19:07 +0000
+Subject: Re: [Nouveau] [PATCH 19/28] dma-mapping: replace
+ DMA_ATTR_NON_CONSISTENT with dma_{alloc, free}_pages
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -51,68 +48,55 @@ Cc: alsa-devel@alsa-project.org, linux-ia64@vger.kernel.org,
  Marek Szyprowski <m.szyprowski@samsung.com>,
  linux-samsung-soc <linux-samsung-soc@vger.kernel.org>,
  Joonyoung Shim <jy0922.shim@samsung.com>, linux-scsi@vger.kernel.org,
- Joerg Roedel <joro@8bytes.org>,
- "list@263.net:IOMMU DRIVERS" <iommu@lists.linux-foundation.org>,
- Ben Skeggs <bskeggs@redhat.com>, Matt Porter <mporter@kernel.crashing.org>,
+ Kyungmin Park <kyungmin.park@samsung.com>, Ben Skeggs <bskeggs@redhat.com>,
+ Matt Porter <mporter@kernel.crashing.org>,
  Linux Media Mailing List <linux-media@vger.kernel.org>,
  Tom Lendacky <thomas.lendacky@amd.com>, Pawel Osciak <pawel@osciak.com>,
  Mauro Carvalho Chehab <mchehab@kernel.org>,
- linux-arm-kernel@lists.infradead.org,
+ "list@263.net:IOMMU DRIVERS <iommu@lists.linux-foundation.org>,
+ Joerg Roedel <joro@8bytes.org>, " <linux-arm-kernel@lists.infradead.org>,
  Thomas Bogendoerfer <tsbogend@alpha.franken.de>, linux-parisc@vger.kernel.org,
  netdev@vger.kernel.org, Seung-Woo Kim <sw0312.kim@samsung.com>,
  Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- Tomasz Figa <tfiga@chromium.org>, Kyungmin Park <kyungmin.park@samsung.com>
+ "list@263.net:IOMMU DRIVERS <iommu@lists.linux-foundation.org>,
+ Joerg Roedel <joro@8bytes.org>, " <iommu@lists.linux-foundation.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, Aug 19, 2020 at 03:07:04PM +0100, Robin Murphy wrote:
->> FWIW, I asked back in time what the plan is for non-coherent
->> allocations and it seemed like DMA_ATTR_NON_CONSISTENT and
->> dma_sync_*() was supposed to be the right thing to go with. [2] The
->> same thread also explains why dma_alloc_pages() isn't suitable for the
->> users of dma_alloc_attrs() and DMA_ATTR_NON_CONSISTENT.
->
-> AFAICS even back then Christoph was implying getting rid of NON_CONSISTENT 
-> and *replacing* it with something streaming-API-based - i.e. this series - 
-> not encouraging mixing the existing APIs. It doesn't seem impossible to 
-> implement a remapping version of this new dma_alloc_pages() for 
-> IOMMU-backed ops if it's really warranted (although at that point it seems 
-> like "non-coherent" vb2-dc starts to have significant conceptual overlap 
-> with vb2-sg).
+On Wed, Aug 19, 2020 at 05:03:52PM +0200, Tomasz Figa wrote:
+> >
+> > -Warning: These pieces of the DMA API should not be used in the
+> > -majority of cases, since they cater for unlikely corner cases that
+> > -don't belong in usual drivers.
+> > +These APIs allow to allocate pages that can be used like normal pages
+> > +in the kernel direct mapping, but are guaranteed to be DMA addressable.
+> 
+> Could we elaborate a bit more on what "like normal pages in kernel
+> direct mapping" mean from the driver perspective?
 
-You can alway vmap the returned pages from dma_alloc_pages, but it will
-make cache invalidation hell - you'll need to use
-invalidate_kernel_vmap_range and flush_kernel_vmap_range to properly
-handle virtually indexed caches.
+It mostly means you can call virt_to_page and then do anything you'd
+do with a page struct.  Unlike dma_alloc_attrs that just return an
+opaque virtual address that the caller is not allowed to poke into.
 
-Or with remapping you mean using the iommu do de-scatter/gather?
+> There is one aspect that the existing dma_alloc_attrs() handles, but
+> this new function doesn't: IOMMU support. The function will always
+> allocate a physically-contiguous block memory, which is a costly
+> operation and not even guaranteed to succeed, even if enough free
+> memory is available.
+> 
+> Modern SoCs employ IOMMUs to avoid the need to allocate
+> physically-contiguous memory and those happen to be also the devices
+> that could benefit from non-coherent allocations a lot. One of the
+> tasks of the DMA API was making it possible to allocate suitable
+> memory for a given device, without having the driver know about the
+> SoC integration details, such as the presence of an IOMMU.
 
-You can implement that trivially implement it yourself for the iommu
-case:
-
-{
-	merge_boundary = dma_get_merge_boundary(dev);
-	if (!merge_boundary || merge_boundary > chunk_size - 1) {
-		/* can't coalesce */
-		return -EINVAL;
-	}
-
-	
-	nents = DIV_ROUND_UP(total_size, chunk_size);
-	sg = sgl_alloc();
-	for_each_sgl() {
-		sg->page = __alloc_pages(get_order(chunk_size))
-		sg->len = chunk_size;
-	}
-	dma_map_sg(sg, DMA_ATTR_SKIP_CPU_SYNC);
-	// you are guaranteed to get a single dma_addr out
-}
-
-Of course this still uses the scatterlist structure with its annoying
-mix of input and output parametes, so I'd rather not expose it as
-an official API at the DMA layer.
+This is completely out of scope for this API exactly because it
+guarantees a page in the direct mapping.  But see my previous mail
+in reply to Robin on how you can implement the funtionality you
+want right now without any help from the dma-mapping subsystem.
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
