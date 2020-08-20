@@ -1,35 +1,33 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9C4D324C3CE
-	for <lists+nouveau@lfdr.de>; Thu, 20 Aug 2020 18:56:16 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2777124C3D1
+	for <lists+nouveau@lfdr.de>; Thu, 20 Aug 2020 18:56:20 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D85216E3E5;
-	Thu, 20 Aug 2020 16:56:13 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1F6326E98C;
+	Thu, 20 Aug 2020 16:56:17 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from verein.lst.de (verein.lst.de [213.95.11.211])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 2D5176E98A
- for <nouveau@lists.freedesktop.org>; Thu, 20 Aug 2020 16:51:17 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5C46B6E98B
+ for <nouveau@lists.freedesktop.org>; Thu, 20 Aug 2020 16:52:15 +0000 (UTC)
 Received: by verein.lst.de (Postfix, from userid 2407)
- id 01D2C68AFE; Thu, 20 Aug 2020 18:51:13 +0200 (CEST)
-Date: Thu, 20 Aug 2020 18:51:12 +0200
+ id 48F9168AFE; Thu, 20 Aug 2020 18:52:13 +0200 (CEST)
+Date: Thu, 20 Aug 2020 18:52:13 +0200
 From: Christoph Hellwig <hch@lst.de>
 To: Tomasz Figa <tfiga@chromium.org>
-Message-ID: <20200820165112.GB12693@lst.de>
+Message-ID: <20200820165213.GC12693@lst.de>
 References: <20200819065555.1802761-1-hch@lst.de>
  <20200819065555.1802761-6-hch@lst.de>
  <CAAFQd5COLxjydDYrfx47ht8tj-aNPiaVnC+WyQA7nvpW4gs=ww@mail.gmail.com>
  <62e4f4fc-c8a5-3ee8-c576-fe7178cb4356@arm.com>
  <CAAFQd5AcCTDguB2C9KyDiutXWoEvBL8tL7+a==Uo8vj_8CLOJw@mail.gmail.com>
- <20200819135738.GB17098@lst.de>
- <CAAFQd5BvpzJTycFvjntmX9W_d879hHFX+rJ8W9EK6+6cqFaVMA@mail.gmail.com>
- <20200820044533.GA4570@lst.de>
- <CAAFQd5CEsC2h-oEdZOPTkUQ4WfFL0yyYu9dE5UscEVpLyMLrCg@mail.gmail.com>
+ <2b32f1d8-16f7-3352-40a5-420993d52fb5@arm.com> <20200820050214.GA4815@lst.de>
+ <CAAFQd5AknYpP5BamC=wJkEJyO-q47V6Gc+HT65h6B+HyT+-xjQ@mail.gmail.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <CAAFQd5CEsC2h-oEdZOPTkUQ4WfFL0yyYu9dE5UscEVpLyMLrCg@mail.gmail.com>
+In-Reply-To: <CAAFQd5AknYpP5BamC=wJkEJyO-q47V6Gc+HT65h6B+HyT+-xjQ@mail.gmail.com>
 User-Agent: Mutt/1.5.17 (2007-11-01)
 X-Mailman-Approved-At: Thu, 20 Aug 2020 16:56:13 +0000
 Subject: Re: [Nouveau] [PATCH 05/28] media/v4l2: remove
@@ -71,17 +69,26 @@ Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, Aug 20, 2020 at 12:09:34PM +0200, Tomasz Figa wrote:
-> > I'm happy to Cc and active participant in the discussion.  I'm not
-> > going to add all reviewers because even with the trimmed CC list
-> > I'm already hitting the number of receipients limit on various lists.
+On Thu, Aug 20, 2020 at 12:24:31PM +0200, Tomasz Figa wrote:
+> > Of course this still uses the scatterlist structure with its annoying
+> > mix of input and output parametes, so I'd rather not expose it as
+> > an official API at the DMA layer.
 > 
-> Fair enough.
+> The problem with the above open coded approach is that it requires
+> explicit handling of the non-IOMMU and IOMMU cases and this is exactly
+> what we don't want to have in vb2 and what was actually the job of the
+> DMA API to hide. Is the plan to actually move the IOMMU handling out
+> of the DMA API?
 > 
-> We'll make your job easier and just turn my MAINTAINERS entry into a
-> maintainer. :)
+> Do you think we could instead turn it into a dma_alloc_noncoherent()
+> helper, which has similar semantics as dma_alloc_attrs() and handles
+> the various corner cases (e.g. invalidate_kernel_vmap_range and
+> flush_kernel_vmap_range) to achieve the desired functionality without
+> delegating the "hell", as you called it, to the users?
 
-Sounds like a plan.
+Yes, I guess I could do something in that direction.  At least for
+dma-iommu, which thanks to Robin should be all you'll need in the
+foreseeable future.
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
