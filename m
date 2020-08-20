@@ -1,33 +1,33 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B0BBC24AE20
-	for <lists+nouveau@lfdr.de>; Thu, 20 Aug 2020 06:54:05 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6CE8424AE21
+	for <lists+nouveau@lfdr.de>; Thu, 20 Aug 2020 06:54:07 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id EA3D46E8A1;
-	Thu, 20 Aug 2020 04:53:59 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 26CDC6E8A3;
+	Thu, 20 Aug 2020 04:54:00 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from verein.lst.de (verein.lst.de [213.95.11.211])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B3CEC6E89C
- for <nouveau@lists.freedesktop.org>; Thu, 20 Aug 2020 04:45:37 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D5A066E89D
+ for <nouveau@lists.freedesktop.org>; Thu, 20 Aug 2020 04:52:04 +0000 (UTC)
 Received: by verein.lst.de (Postfix, from userid 2407)
- id CA1C068C4E; Thu, 20 Aug 2020 06:45:33 +0200 (CEST)
-Date: Thu, 20 Aug 2020 06:45:33 +0200
+ id 690FB68BEB; Thu, 20 Aug 2020 06:52:01 +0200 (CEST)
+Date: Thu, 20 Aug 2020 06:52:01 +0200
 From: Christoph Hellwig <hch@lst.de>
 To: Tomasz Figa <tfiga@chromium.org>
-Message-ID: <20200820044533.GA4570@lst.de>
+Message-ID: <20200820045201.GB4570@lst.de>
 References: <20200819065555.1802761-1-hch@lst.de>
  <20200819065555.1802761-6-hch@lst.de>
  <CAAFQd5COLxjydDYrfx47ht8tj-aNPiaVnC+WyQA7nvpW4gs=ww@mail.gmail.com>
  <62e4f4fc-c8a5-3ee8-c576-fe7178cb4356@arm.com>
  <CAAFQd5AcCTDguB2C9KyDiutXWoEvBL8tL7+a==Uo8vj_8CLOJw@mail.gmail.com>
- <20200819135738.GB17098@lst.de>
- <CAAFQd5BvpzJTycFvjntmX9W_d879hHFX+rJ8W9EK6+6cqFaVMA@mail.gmail.com>
+ <2b32f1d8-16f7-3352-40a5-420993d52fb5@arm.com>
+ <CAAFQd5DrEq7UVi_aH=-DO4xYC3SbjJ3m1aQSbt=8THL-W+orMQ@mail.gmail.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <CAAFQd5BvpzJTycFvjntmX9W_d879hHFX+rJ8W9EK6+6cqFaVMA@mail.gmail.com>
+In-Reply-To: <CAAFQd5DrEq7UVi_aH=-DO4xYC3SbjJ3m1aQSbt=8THL-W+orMQ@mail.gmail.com>
 User-Agent: Mutt/1.5.17 (2007-11-01)
 X-Mailman-Approved-At: Thu, 20 Aug 2020 04:53:58 +0000
 Subject: Re: [Nouveau] [PATCH 05/28] media/v4l2: remove
@@ -69,24 +69,23 @@ Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, Aug 19, 2020 at 04:11:52PM +0200, Tomasz Figa wrote:
-> > > By the way, as a videobuf2 reviewer, I'd appreciate being CC'd on any
-> > > series related to the subsystem-facing DMA API changes, since
-> > > videobuf2 is one of the biggest users of it.
+On Wed, Aug 19, 2020 at 04:22:29PM +0200, Tomasz Figa wrote:
+> > > FWIW, I asked back in time what the plan is for non-coherent
+> > > allocations and it seemed like DMA_ATTR_NON_CONSISTENT and
+> > > dma_sync_*() was supposed to be the right thing to go with. [2] The
+> > > same thread also explains why dma_alloc_pages() isn't suitable for the
+> > > users of dma_alloc_attrs() and DMA_ATTR_NON_CONSISTENT.
 > >
-> > The cc list is too long - I cc lists and key maintainers.  As a reviewer
-> > should should watch your subsystems lists closely.
+> > AFAICS even back then Christoph was implying getting rid of
+> > NON_CONSISTENT and *replacing* it with something streaming-API-based -
 > 
-> Well, I guess we can disagree on this, because there is no clear
-> policy. I'm listed in the MAINTAINERS file for the subsystem and I
-> believe the purpose of the file is to list the people to CC on
-> relevant patches. We're all overloaded with work and having to look
-> through the huge volume of mailing lists like linux-media doesn't help
-> and thus I'd still appreciate being added on CC.
+> That's not how I read his reply from the thread I pointed to, but that
+> might of course be my misunderstanding.
 
-I'm happy to Cc and active participant in the discussion.  I'm not
-going to add all reviewers because even with the trimmed CC list
-I'm already hitting the number of receipients limit on various lists.
+Yes.  Without changes like in this series just calling dma_sync_single_*
+will break in various cases, e.g. because dma_alloc_attrs returns
+memory remapped in the vmalloc space, and the dma_sync_single_*
+implementation implementation can't cope with vmalloc addresses.
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
