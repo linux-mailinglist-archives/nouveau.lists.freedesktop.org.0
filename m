@@ -1,52 +1,55 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3211F2507B4
-	for <lists+nouveau@lfdr.de>; Mon, 24 Aug 2020 20:33:15 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id CFA40250BAA
+	for <lists+nouveau@lfdr.de>; Tue, 25 Aug 2020 00:29:12 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 875B36E343;
-	Mon, 24 Aug 2020 18:33:13 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 805D589935;
+	Mon, 24 Aug 2020 22:29:09 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6E2956E343
- for <nouveau@lists.freedesktop.org>; Mon, 24 Aug 2020 18:33:12 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1598293991;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=nDN8OKH/igdTXe1JZhVc/ikuMKRfmf49543jqaV4qUQ=;
- b=SpgWGZy0tgRKoq1XiRyUwdLTr7fK8nJWYpDy3k0M4dWJdc8a45Q3lnRRiGzxI4lCoE/p05
- QaTFHOrcC+chY+nY8pizhUPA0m21otrRHFNAcnh4UxDF4nmNWqXU10IwLmTJuUQtP7CkqP
- PLHvwUjjOVGCMgfQnnn9h3Ek/Uepf5E=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-111-8WE-K4HYMnGsgDHFsvC9Ng-1; Mon, 24 Aug 2020 14:33:08 -0400
-X-MC-Unique: 8WE-K4HYMnGsgDHFsvC9Ng-1
-Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
- [10.5.11.16])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 6B85081F018;
- Mon, 24 Aug 2020 18:33:06 +0000 (UTC)
-Received: from Whitewolf.redhat.com (ovpn-114-60.rdu2.redhat.com
- [10.10.114.60])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 0E1465C22A;
- Mon, 24 Aug 2020 18:33:02 +0000 (UTC)
-From: Lyude Paul <lyude@redhat.com>
-To: nouveau@lists.freedesktop.org,
-	Sasha Levin <sashal@kernel.org>
-Date: Mon, 24 Aug 2020 14:32:53 -0400
-Message-Id: <20200824183253.826343-3-lyude@redhat.com>
-In-Reply-To: <20200824183253.826343-1-lyude@redhat.com>
-References: <20200824183253.826343-1-lyude@redhat.com>
+Received: from mail-yb1-xb43.google.com (mail-yb1-xb43.google.com
+ [IPv6:2607:f8b0:4864:20::b43])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D17EC89935;
+ Mon, 24 Aug 2020 22:29:08 +0000 (UTC)
+Received: by mail-yb1-xb43.google.com with SMTP id s195so6047435ybc.8;
+ Mon, 24 Aug 2020 15:29:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=3qOJ3NzWfJ9sWmSZflRe5Z/SiLVOjHtScl8TXItrV3A=;
+ b=l+ltexb5PPukV4iJ9LAIkMPnqWOS/KfO3eQhMs5uqymC9AarAqrzL4DZ55+LKrNKSz
+ 91zotAMJ+IBsnRBYfMbQH0xs+OdbmoP1up23cYmATdKMc/zXwQSpUTTHABL/n3opXon+
+ HE/Fq/cAu5BJU4ImGNv+HhWYQNgGH+PP9yH2BMw349IfG6r3haeeQANG55nAS4FG/HeO
+ NaxgdyRtxv6hwQUz9Sr8jRak8zKTXBwlzmdT/1qpVEczfvPzB09TFH4x2FhExHHvpZLE
+ e/ucPg/YKPJOPgfgV3cqPS7dPwu7mJ7VD1kWkeGncoG7+i/tF0ozMTgIkVhXZBG13v2C
+ Zh3Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=3qOJ3NzWfJ9sWmSZflRe5Z/SiLVOjHtScl8TXItrV3A=;
+ b=cx9O4XoVmT1lIY9sNr6v6DfnLvnNo7A3w22+NSCAY8UIAXz0V8DvpsnwiJw4D5T/fR
+ mBQrN18eGk3lu5LX9Sfr8BUJIvvAQchvlWNORaoDNHsW9N0DJTBGTii6KCypJgw6GWf/
+ qFpVRF31o8ZwNxjY+j3UttrnxBirr/rM/l8Y2FSexpS/Rznej0aCOBpS5pV2ERp2Wn3W
+ kNvd/y6+4dt6PonbBF5jVE+dYzRMkw7gsRWFOkhG/lG3C0G7ARvu5ZUR8oHFvIfQMG2q
+ AI15hAVWlyx9rc4Ey/GS38aDKHkwoL8Ox15IQFm8EAehX0L7DKG5QZ6+udXvzqpMoUzj
+ THwA==
+X-Gm-Message-State: AOAM532NmZJvMLAPFxrkSahSG6H8rkdPHPVTE2klgkqXjYltxoeuiw1O
+ fjJewq6C8YEf4b4VUlWVgGfUJaCsVsoNNgOMue4=
+X-Google-Smtp-Source: ABdhPJwYgl3FJMdku6i+4HiglRO8zsQRW9BAP3I/BEAqKMIf1RRP+xNfrrsy4rPjxTHUVwO6XaFN+jSnZyngLiRiyAU=
+X-Received: by 2002:a25:8447:: with SMTP id r7mr9673141ybm.147.1598308147950; 
+ Mon, 24 Aug 2020 15:29:07 -0700 (PDT)
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
-Subject: [Nouveau] [PATCH 2/2] drm/nouveau/kms/nv50-: Log SOR/PIOR caps
+References: <20200824183253.826343-1-lyude@redhat.com>
+ <20200824183253.826343-2-lyude@redhat.com>
+In-Reply-To: <20200824183253.826343-2-lyude@redhat.com>
+From: Ben Skeggs <skeggsb@gmail.com>
+Date: Tue, 25 Aug 2020 08:28:56 +1000
+Message-ID: <CACAvsv6hymdcGkEcigL3fWACZ_1POpB+aefq9d9ChnYv_dHnVg@mail.gmail.com>
+To: Lyude Paul <lyude@redhat.com>
+Subject: Re: [Nouveau] [PATCH 1/2] drm/nouveau/kms/nv50-: Program notifier
+ offset before requesting disp caps
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,65 +61,91 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>,
- Pankaj Bharadiya <pankaj.laxminarayan.bharadiya@intel.com>,
+Cc: Sasha Levin <sashal@kernel.org>, David Airlie <airlied@linux.ie>,
+ ML nouveau <nouveau@lists.freedesktop.org>,
  open list <linux-kernel@vger.kernel.org>,
  "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
- <dri-devel@lists.freedesktop.org>, Manasi Navare <manasi.d.navare@intel.com>,
- Takashi Iwai <tiwai@suse.de>, Ben Skeggs <bskeggs@redhat.com>,
- Daniel Vetter <daniel@ffwll.ch>, Alex Deucher <alexander.deucher@amd.com>
+ <dri-devel@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>,
+ Daniel Vetter <daniel@ffwll.ch>, stable@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Since I'm almost certain I didn't get capability checking right for
-pre-volta chipsets, let's start logging any caps we find to make things
-like this obvious in the future.
+On Tue, 25 Aug 2020 at 04:33, Lyude Paul <lyude@redhat.com> wrote:
+>
+> Not entirely sure why this never came up when I originally tested this
+> (maybe some BIOSes already have this setup?) but the ->caps_init vfunc
+> appears to cause the display engine to throw an exception on driver
+> init, at least on my ThinkPad P72:
+>
+> nouveau 0000:01:00.0: disp: chid 0 mthd 008c data 00000000 0000508c 0000102b
+>
+> This is magic nvidia speak for "You need to have the DMA notifier offset
+> programmed before you can call NV507D_GET_CAPABILITIES." So, let's fix
+> this by doing that, and also perform an update afterwards to prevent
+> racing with the GPU when reading capabilities.
+>
+> Changes since v1:
+> * Don't just program the DMA notifier offset, make sure to actually
+>   perform an update
+I'm not sure there's a need to send an Update() method here, I believe
+GetCapabilities() is an action method on its own right?
 
-Signed-off-by: Lyude Paul <lyude@redhat.com>
----
- drivers/gpu/drm/nouveau/dispnv50/disp.c | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+Ben.
 
-diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.c b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-index 800b7757252e3..6210ee1c145a2 100644
---- a/drivers/gpu/drm/nouveau/dispnv50/disp.c
-+++ b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-@@ -258,6 +258,14 @@ evo_kick(u32 *push, struct nv50_dmac *evoc)
- /******************************************************************************
-  * Output path helpers
-  *****************************************************************************/
-+static void
-+nv50_outp_dump_caps(struct nouveau_drm *drm,
-+		    struct nouveau_encoder *outp)
-+{
-+	NV_DEBUG(drm, "%s caps: dp_interlace=%d\n",
-+		 outp->base.base.name, outp->caps.dp_interlace);
-+}
-+
- static void
- nv50_outp_release(struct nouveau_encoder *nv_encoder)
- {
-@@ -1715,6 +1723,7 @@ nv50_sor_create(struct drm_connector *connector, struct dcb_output *dcbe)
- 	drm_connector_attach_encoder(connector, encoder);
- 
- 	disp->core->func->sor->get_caps(disp, nv_encoder, ffs(dcbe->or) - 1);
-+	nv50_outp_dump_caps(drm, nv_encoder);
- 
- 	if (dcbe->type == DCB_OUTPUT_DP) {
- 		struct nvkm_i2c_aux *aux =
-@@ -1875,6 +1884,7 @@ nv50_pior_create(struct drm_connector *connector, struct dcb_output *dcbe)
- 	drm_connector_attach_encoder(connector, encoder);
- 
- 	disp->core->func->pior->get_caps(disp, nv_encoder, ffs(dcbe->or) - 1);
-+	nv50_outp_dump_caps(drm, nv_encoder);
- 
- 	return 0;
- }
--- 
-2.26.2
-
+>
+> Signed-off-by: Lyude Paul <lyude@redhat.com>
+> Fixes: 4a2cb4181b07 ("drm/nouveau/kms/nv50-: Probe SOR and PIOR caps for DP interlacing support")
+> Cc: <stable@vger.kernel.org> # v5.8+
+> ---
+>  drivers/gpu/drm/nouveau/dispnv50/core507d.c | 25 ++++++++++++++++-----
+>  1 file changed, 19 insertions(+), 6 deletions(-)
+>
+> diff --git a/drivers/gpu/drm/nouveau/dispnv50/core507d.c b/drivers/gpu/drm/nouveau/dispnv50/core507d.c
+> index e341f572c2696..5e86feec3b720 100644
+> --- a/drivers/gpu/drm/nouveau/dispnv50/core507d.c
+> +++ b/drivers/gpu/drm/nouveau/dispnv50/core507d.c
+> @@ -65,13 +65,26 @@ core507d_ntfy_init(struct nouveau_bo *bo, u32 offset)
+>  int
+>  core507d_caps_init(struct nouveau_drm *drm, struct nv50_disp *disp)
+>  {
+> -       u32 *push = evo_wait(&disp->core->chan, 2);
+> +       struct nv50_core *core = disp->core;
+> +       u32 interlock[NV50_DISP_INTERLOCK__SIZE] = {0};
+> +       u32 *push;
+>
+> -       if (push) {
+> -               evo_mthd(push, 0x008c, 1);
+> -               evo_data(push, 0x0);
+> -               evo_kick(push, &disp->core->chan);
+> -       }
+> +       core->func->ntfy_init(disp->sync, NV50_DISP_CORE_NTFY);
+> +
+> +       push = evo_wait(&core->chan, 4);
+> +       if (!push)
+> +               return 0;
+> +
+> +       evo_mthd(push, 0x0084, 1);
+> +       evo_data(push, 0x80000000 | NV50_DISP_CORE_NTFY);
+> +       evo_mthd(push, 0x008c, 1);
+> +       evo_data(push, 0x0);
+> +       evo_kick(push, &core->chan);
+> +
+> +       core->func->update(core, interlock, false);
+> +       if (core->func->ntfy_wait_done(disp->sync, NV50_DISP_CORE_NTFY,
+> +                                      core->chan.base.device))
+> +               NV_ERROR(drm, "core notifier timeout\n");
+>
+>         return 0;
+>  }
+> --
+> 2.26.2
+>
+> _______________________________________________
+> Nouveau mailing list
+> Nouveau@lists.freedesktop.org
+> https://lists.freedesktop.org/mailman/listinfo/nouveau
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
