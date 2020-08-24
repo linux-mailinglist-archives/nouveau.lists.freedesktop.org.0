@@ -2,54 +2,51 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id CFA40250BAA
-	for <lists+nouveau@lfdr.de>; Tue, 25 Aug 2020 00:29:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C919F2516F8
+	for <lists+nouveau@lfdr.de>; Tue, 25 Aug 2020 12:59:56 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 805D589935;
-	Mon, 24 Aug 2020 22:29:09 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0E4396E177;
+	Tue, 25 Aug 2020 10:59:55 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-yb1-xb43.google.com (mail-yb1-xb43.google.com
- [IPv6:2607:f8b0:4864:20::b43])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D17EC89935;
- Mon, 24 Aug 2020 22:29:08 +0000 (UTC)
-Received: by mail-yb1-xb43.google.com with SMTP id s195so6047435ybc.8;
- Mon, 24 Aug 2020 15:29:08 -0700 (PDT)
+Received: from mail-wr1-x443.google.com (mail-wr1-x443.google.com
+ [IPv6:2a00:1450:4864:20::443])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7510E8953E;
+ Mon, 24 Aug 2020 19:09:03 +0000 (UTC)
+Received: by mail-wr1-x443.google.com with SMTP id f7so10106605wrw.1;
+ Mon, 24 Aug 2020 12:09:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=3qOJ3NzWfJ9sWmSZflRe5Z/SiLVOjHtScl8TXItrV3A=;
- b=l+ltexb5PPukV4iJ9LAIkMPnqWOS/KfO3eQhMs5uqymC9AarAqrzL4DZ55+LKrNKSz
- 91zotAMJ+IBsnRBYfMbQH0xs+OdbmoP1up23cYmATdKMc/zXwQSpUTTHABL/n3opXon+
- HE/Fq/cAu5BJU4ImGNv+HhWYQNgGH+PP9yH2BMw349IfG6r3haeeQANG55nAS4FG/HeO
- NaxgdyRtxv6hwQUz9Sr8jRak8zKTXBwlzmdT/1qpVEczfvPzB09TFH4x2FhExHHvpZLE
- e/ucPg/YKPJOPgfgV3cqPS7dPwu7mJ7VD1kWkeGncoG7+i/tF0ozMTgIkVhXZBG13v2C
- Zh3Q==
+ h=mime-version:from:date:message-id:subject:to:cc;
+ bh=1/OwrF6O4VfIPs9S1xxSmo2BOW+0i4nsagYJC2DaJR0=;
+ b=cFWXMyWnhZK5nA5qU9KqQ9s7hjZ3hz6kAsmKD3x6qC1cRjhnC6qDyns9g2XG0PXpYZ
+ NfxulGrAmAF5NwG45URsOSf4qZX6nlueL2C1RtJYvp3d3PL5+Pr8zcIl03id53/GOLzM
+ ealXfC2ehlkCBMi0nJfjcIdc+A5swPmfwC8NswkVKAkc0ctu57maYtebzCDgwu3sqnIU
+ PmsRD/aY8njmxdznomtKxkz6sIuaAJ5/WzfwVGW38Xle0LMESS0xBV66v/+fPitw0ezX
+ Yk6tJ2C+MjbgfDJfOJT1PrdE7P3X8XhsTktsd5hEguM8V9BM+2DO2c1JnDC4VmzlwmIM
+ CVEQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=3qOJ3NzWfJ9sWmSZflRe5Z/SiLVOjHtScl8TXItrV3A=;
- b=cx9O4XoVmT1lIY9sNr6v6DfnLvnNo7A3w22+NSCAY8UIAXz0V8DvpsnwiJw4D5T/fR
- mBQrN18eGk3lu5LX9Sfr8BUJIvvAQchvlWNORaoDNHsW9N0DJTBGTii6KCypJgw6GWf/
- qFpVRF31o8ZwNxjY+j3UttrnxBirr/rM/l8Y2FSexpS/Rznej0aCOBpS5pV2ERp2Wn3W
- kNvd/y6+4dt6PonbBF5jVE+dYzRMkw7gsRWFOkhG/lG3C0G7ARvu5ZUR8oHFvIfQMG2q
- AI15hAVWlyx9rc4Ey/GS38aDKHkwoL8Ox15IQFm8EAehX0L7DKG5QZ6+udXvzqpMoUzj
- THwA==
-X-Gm-Message-State: AOAM532NmZJvMLAPFxrkSahSG6H8rkdPHPVTE2klgkqXjYltxoeuiw1O
- fjJewq6C8YEf4b4VUlWVgGfUJaCsVsoNNgOMue4=
-X-Google-Smtp-Source: ABdhPJwYgl3FJMdku6i+4HiglRO8zsQRW9BAP3I/BEAqKMIf1RRP+xNfrrsy4rPjxTHUVwO6XaFN+jSnZyngLiRiyAU=
-X-Received: by 2002:a25:8447:: with SMTP id r7mr9673141ybm.147.1598308147950; 
- Mon, 24 Aug 2020 15:29:07 -0700 (PDT)
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to:cc;
+ bh=1/OwrF6O4VfIPs9S1xxSmo2BOW+0i4nsagYJC2DaJR0=;
+ b=Lv1eTTER4arLmv5po1Q2NQi5L8E7EjtAITKSH3+PC/JaqCedpIiXw67dyeAES3Ap4H
+ 1Athu5KovUaT9fhb6t3pHulXreBp18nw6/zETjdaXzN/lhZJusbzKH5ZUoVmPawxUq/w
+ VQVBpbxrbrTDkcg5IRAwDVooXuT+ufFSCEw1lMmtk1djqcdsY0ruONxWmj8H/KV66tkW
+ 2Novvu2yNIMPdEUC0aalhDeRx2uNE2pu8wKkKRCtz3g9sUE0q9pfotWYYSquDrdRQb99
+ Uqth1zNagbRAHbwP0G6zS1IhTBJzM84XFFHB6Tt2yIPlteVGWLOs26vqUbqWWvw4I1ol
+ d+Sg==
+X-Gm-Message-State: AOAM531K/TGdrmviv7QNBP9mFRUA+KshAdZDAtt32BxAofOHGXuByfgR
+ Sn5Ocl0gC6px2rIn+Oo4lctvWBk4wD3UC25r5TdCpZtBL6udhA==
+X-Google-Smtp-Source: ABdhPJwLbaBmcJ0YU0Mm63DMRB1XUTp+nUhq0FoG7V+AI1bd+N1eoy8dCmFllCCCc33XNjvD+ws1FKPboGBlQG76Rsk=
+X-Received: by 2002:adf:e8cc:: with SMTP id k12mr7385575wrn.2.1598296142108;
+ Mon, 24 Aug 2020 12:09:02 -0700 (PDT)
 MIME-Version: 1.0
-References: <20200824183253.826343-1-lyude@redhat.com>
- <20200824183253.826343-2-lyude@redhat.com>
-In-Reply-To: <20200824183253.826343-2-lyude@redhat.com>
-From: Ben Skeggs <skeggsb@gmail.com>
-Date: Tue, 25 Aug 2020 08:28:56 +1000
-Message-ID: <CACAvsv6hymdcGkEcigL3fWACZ_1POpB+aefq9d9ChnYv_dHnVg@mail.gmail.com>
-To: Lyude Paul <lyude@redhat.com>
-Subject: Re: [Nouveau] [PATCH 1/2] drm/nouveau/kms/nv50-: Program notifier
- offset before requesting disp caps
+From: Alexander Kapshuk <alexander.kapshuk@gmail.com>
+Date: Mon, 24 Aug 2020 22:08:25 +0300
+Message-ID: <CAJ1xhMUpqtKMuGUZdComskTqd0oOKCfDuVQT3+c13u=NSJLkBw@mail.gmail.com>
+To: bskeggs@redhat.com, Dave Airlie <airlied@linux.ie>,
+ Daniel Vetter <daniel@ffwll.ch>
+X-Mailman-Approved-At: Tue, 25 Aug 2020 10:59:53 +0000
+Subject: [Nouveau] nouveau PUSHBUFFER_ERR on 5.9.0-rc2-next-20200824
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,91 +58,73 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Sasha Levin <sashal@kernel.org>, David Airlie <airlied@linux.ie>,
- ML nouveau <nouveau@lists.freedesktop.org>,
- open list <linux-kernel@vger.kernel.org>,
- "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
- <dri-devel@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>,
- Daniel Vetter <daniel@ffwll.ch>, stable@vger.kernel.org
+Cc: nouveau@lists.freedesktop.org, Linux-Next <linux-next@vger.kernel.org>,
+ linux-kernel <linux-kernel@vger.kernel.org>,
+ dri-devel <dri-devel@lists.freedesktop.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, 25 Aug 2020 at 04:33, Lyude Paul <lyude@redhat.com> wrote:
->
-> Not entirely sure why this never came up when I originally tested this
-> (maybe some BIOSes already have this setup?) but the ->caps_init vfunc
-> appears to cause the display engine to throw an exception on driver
-> init, at least on my ThinkPad P72:
->
-> nouveau 0000:01:00.0: disp: chid 0 mthd 008c data 00000000 0000508c 0000102b
->
-> This is magic nvidia speak for "You need to have the DMA notifier offset
-> programmed before you can call NV507D_GET_CAPABILITIES." So, let's fix
-> this by doing that, and also perform an update afterwards to prevent
-> racing with the GPU when reading capabilities.
->
-> Changes since v1:
-> * Don't just program the DMA notifier offset, make sure to actually
->   perform an update
-I'm not sure there's a need to send an Update() method here, I believe
-GetCapabilities() is an action method on its own right?
+Since upgrading to linux-next based on 5.9.0-rc1 and 5.9.0-rc2 I have
+had my mouse pointer disappear soon after logging in, and I have
+observed the system freezing temporarily when clicking on objects and
+when typing text.
+I have also found records of push buffer errors in dmesg output:
+[ 6625.450394] nouveau 0000:01:00.0: disp: ERROR 1 [PUSHBUFFER_ERR] 02
+[] chid 0 mthd 0000 data 00000400
 
-Ben.
+I tried setting CONFIG_NOUVEAU_DEBUG=5 (tracing) to try and collect
+further debug info, but nothing caught the eye.
 
->
-> Signed-off-by: Lyude Paul <lyude@redhat.com>
-> Fixes: 4a2cb4181b07 ("drm/nouveau/kms/nv50-: Probe SOR and PIOR caps for DP interlacing support")
-> Cc: <stable@vger.kernel.org> # v5.8+
-> ---
->  drivers/gpu/drm/nouveau/dispnv50/core507d.c | 25 ++++++++++++++++-----
->  1 file changed, 19 insertions(+), 6 deletions(-)
->
-> diff --git a/drivers/gpu/drm/nouveau/dispnv50/core507d.c b/drivers/gpu/drm/nouveau/dispnv50/core507d.c
-> index e341f572c2696..5e86feec3b720 100644
-> --- a/drivers/gpu/drm/nouveau/dispnv50/core507d.c
-> +++ b/drivers/gpu/drm/nouveau/dispnv50/core507d.c
-> @@ -65,13 +65,26 @@ core507d_ntfy_init(struct nouveau_bo *bo, u32 offset)
->  int
->  core507d_caps_init(struct nouveau_drm *drm, struct nv50_disp *disp)
->  {
-> -       u32 *push = evo_wait(&disp->core->chan, 2);
-> +       struct nv50_core *core = disp->core;
-> +       u32 interlock[NV50_DISP_INTERLOCK__SIZE] = {0};
-> +       u32 *push;
->
-> -       if (push) {
-> -               evo_mthd(push, 0x008c, 1);
-> -               evo_data(push, 0x0);
-> -               evo_kick(push, &disp->core->chan);
-> -       }
-> +       core->func->ntfy_init(disp->sync, NV50_DISP_CORE_NTFY);
-> +
-> +       push = evo_wait(&core->chan, 4);
-> +       if (!push)
-> +               return 0;
-> +
-> +       evo_mthd(push, 0x0084, 1);
-> +       evo_data(push, 0x80000000 | NV50_DISP_CORE_NTFY);
-> +       evo_mthd(push, 0x008c, 1);
-> +       evo_data(push, 0x0);
-> +       evo_kick(push, &core->chan);
-> +
-> +       core->func->update(core, interlock, false);
-> +       if (core->func->ntfy_wait_done(disp->sync, NV50_DISP_CORE_NTFY,
-> +                                      core->chan.base.device))
-> +               NV_ERROR(drm, "core notifier timeout\n");
->
->         return 0;
->  }
-> --
-> 2.26.2
->
-> _______________________________________________
-> Nouveau mailing list
-> Nouveau@lists.freedesktop.org
-> https://lists.freedesktop.org/mailman/listinfo/nouveau
+The error message in question comes from nv50_disp_intr_error in
+drivers/gpu/drm/nouveau/nvkm/engine/disp/nv50.c:613,645.
+And nv50_disp_intr_error is called from nv50_disp_intr in the
+following while block:
+drivers/gpu/drm/nouveau/nvkm/engine/disp/nv50.c:647,658
+void
+nv50_disp_intr(struct nv50_disp *disp)
+{
+        struct nvkm_device *device = disp->base.engine.subdev.device;
+        u32 intr0 = nvkm_rd32(device, 0x610020);
+        u32 intr1 = nvkm_rd32(device, 0x610024);
+
+        while (intr0 & 0x001f0000) {
+                u32 chid = __ffs(intr0 & 0x001f0000) - 16;
+                nv50_disp_intr_error(disp, chid);
+                intr0 &= ~(0x00010000 << chid);
+        }
+...
+}
+
+Could this be in any way related to this series of commits?
+commit 0a96099691c8cd1ac0744ef30b6846869dc2b566
+Author: Ben Skeggs <bskeggs@redhat.com>
+Date:   Tue Jul 21 11:34:07 2020 +1000
+
+    drm/nouveau/kms/nv50-: implement proper push buffer control logic
+
+    We had a, what was supposed to be temporary, hack in the KMS code where we'd
+    completely drain an EVO/NVD channel's push buffer when wrapping to the start
+    again, instead of treating it as a ring buffer.
+
+    Let's fix that, finally.
+
+    Signed-off-by: Ben Skeggs <bskeggs@redhat.com>
+
+Here are my GPU details:
+01:00.0 VGA compatible controller: NVIDIA Corporation GT216 [GeForce
+210] (rev a1)
+        Subsystem: Micro-Star International Co., Ltd. [MSI] Device 8a93
+        Kernel driver in use: nouveau
+
+The last linux-next kernel I built where the problem reported does not
+manifest itself is 5.8.0-rc6-next-20200720.
+
+I would appreciate being given any pointers on how to further debug this.
+Or is git bisect the only way to proceed with this?
+
+Thanks.
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
