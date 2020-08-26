@@ -1,53 +1,54 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 057652536E9
-	for <lists+nouveau@lfdr.de>; Wed, 26 Aug 2020 20:26:09 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1D39425370D
+	for <lists+nouveau@lfdr.de>; Wed, 26 Aug 2020 20:27:06 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D341F6EABD;
-	Wed, 26 Aug 2020 18:26:00 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C03906EAD5;
+	Wed, 26 Aug 2020 18:27:03 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [63.128.21.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 846096EABD
- for <nouveau@lists.freedesktop.org>; Wed, 26 Aug 2020 18:25:58 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [216.205.24.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C073B6EAC2
+ for <nouveau@lists.freedesktop.org>; Wed, 26 Aug 2020 18:26:05 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1598466357;
+ s=mimecast20190719; t=1598466364;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=SrQypXsB06I27AWFzq+unFDPT9ULdnzgHHger98409Y=;
- b=IlgQ+qq4Yo5/zGgPJDV88z5bXgxc3b2/+Ai3knU5XqpTh6EQG1KzqfuWDFMB8la7vWRk1c
- VbPoGs3TGgagHBP9N2A1FfXtcocEqc5EFjo3/xaga/gXgF4C//sCk74z8O5maBnMCY36T2
- hPgcKw3FV9IVIyqw3m8SE/FKd01ng/E=
+ bh=lVbdMjzuMT7GlfrRLZim06mhhhbx6k49tlW+apxKSCw=;
+ b=WNwyE/i81TVc5tTXEYlxRtqUIBhAwVEmb2c+Ml4LRpCzf7N97OHvFaEJpRtfgn0HYY587c
+ dScgD8kIuOSStGsZiwH+DWE0lAt2yvY1P2R3nzzs5D00VwcKFHu8D1ORl9MowvU+ztr867
+ OM/t4rWNal42MZNBVtNKBWGe+hOcrOo=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-124-EnDZQoIPNm2QBWzx8RTYXg-1; Wed, 26 Aug 2020 14:25:55 -0400
-X-MC-Unique: EnDZQoIPNm2QBWzx8RTYXg-1
+ us-mta-147-nZZa-m5xMza8AIApvW410w-1; Wed, 26 Aug 2020 14:26:00 -0400
+X-MC-Unique: nZZa-m5xMza8AIApvW410w-1
 Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
  [10.5.11.22])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id BC8AB1DDFC;
- Wed, 26 Aug 2020 18:25:53 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 1A171189E60E;
+ Wed, 26 Aug 2020 18:25:58 +0000 (UTC)
 Received: from Whitewolf.redhat.com (ovpn-119-77.rdu2.redhat.com
  [10.10.119.77])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 7E07D1002382;
- Wed, 26 Aug 2020 18:25:52 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 2BFAE10021AA;
+ Wed, 26 Aug 2020 18:25:56 +0000 (UTC)
 From: Lyude Paul <lyude@redhat.com>
 To: dri-devel@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
  nouveau@lists.freedesktop.org
-Date: Wed, 26 Aug 2020 14:24:50 -0400
-Message-Id: <20200826182456.322681-15-lyude@redhat.com>
+Date: Wed, 26 Aug 2020 14:24:51 -0400
+Message-Id: <20200826182456.322681-16-lyude@redhat.com>
 In-Reply-To: <20200826182456.322681-1-lyude@redhat.com>
 References: <20200826182456.322681-1-lyude@redhat.com>
 MIME-Version: 1.0
 X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
-Subject: [Nouveau] [PATCH v5 14/20] drm/nouveau/kms/nv50-: Use downstream DP
- clock limits for mode validation
+X-Mailman-Approved-At: Wed, 26 Aug 2020 18:27:01 +0000
+Subject: [Nouveau] [PATCH v5 15/20] drm/i915/dp: Extract
+ drm_dp_read_sink_count_cap()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,106 +60,150 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>,
- Pankaj Bharadiya <pankaj.laxminarayan.bharadiya@intel.com>,
- open list <linux-kernel@vger.kernel.org>, Takashi Iwai <tiwai@suse.de>,
- Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>,
- Alex Deucher <alexander.deucher@amd.com>
+Cc: David Airlie <airlied@linux.ie>, Lucas De Marchi <lucas.demarchi@intel.com>,
+ Imre Deak <imre.deak@intel.com>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ open list <linux-kernel@vger.kernel.org>, Maxime Ripard <mripard@kernel.org>,
+ Gwan-gyeong Mun <gwan-gyeong.mun@intel.com>,
+ Manasi Navare <manasi.d.navare@intel.com>, Uma Shankar <uma.shankar@intel.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>, Daniel Vetter <daniel@ffwll.ch>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ =?UTF-8?q?Jos=C3=A9=20Roberto=20de=20Souza?= <jose.souza@intel.com>,
+ Sean Paul <sean@poorly.run>,
+ =?UTF-8?q?Ville=20Syrj=C3=A4l=C3=A4?= <ville.syrjala@linux.intel.com>,
+ Wambui Karuga <wambui.karugax@gmail.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-This adds support for querying the maximum clock rate of a downstream
-port on a DisplayPort connection. Generally, downstream ports refer to
-active dongles which can have their own pixel clock limits.
+Since other drivers are also going to need to be aware of the sink count
+in order to do proper dongle detection, we might as well steal i915's
+DP_SINK_COUNT helpers and move them into DRM helpers so that other
+dirvers can use them as well.
 
-Note as well, we also start marking the connector as disconnected if we
-can't read the DPCD, since we wouldn't be able to do anything without
-DPCD access anyway.
+Note that this also starts using intel_dp_has_sink_count() in
+intel_dp_detect_dpcd(), which is a functional change.
+
+v5:
+* Change name from drm_dp_has_sink_count() to
+  drm_dp_read_sink_count_cap()
 
 Signed-off-by: Lyude Paul <lyude@redhat.com>
-Reviewed-by: Ben Skeggs <bskeggs@redhat.com>
+Reviewed-by: Sean Paul <sean@poorly.run>
 ---
- drivers/gpu/drm/nouveau/dispnv50/disp.c   |  3 +++
- drivers/gpu/drm/nouveau/nouveau_dp.c      | 15 +++++++++++----
- drivers/gpu/drm/nouveau/nouveau_encoder.h |  1 +
- 3 files changed, 15 insertions(+), 4 deletions(-)
+ drivers/gpu/drm/drm_dp_helper.c         | 22 ++++++++++++++++++++++
+ drivers/gpu/drm/i915/display/intel_dp.c | 21 ++++++++++++---------
+ include/drm/drm_dp_helper.h             |  8 +++++++-
+ 3 files changed, 41 insertions(+), 10 deletions(-)
 
-diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.c b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-index 8e1effb10425d..d2141ca16107b 100644
---- a/drivers/gpu/drm/nouveau/dispnv50/disp.c
-+++ b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-@@ -1258,7 +1258,10 @@ nv50_mstc_detect(struct drm_connector *connector,
+diff --git a/drivers/gpu/drm/drm_dp_helper.c b/drivers/gpu/drm/drm_dp_helper.c
+index f3643894ad951..65ff21ae0c271 100644
+--- a/drivers/gpu/drm/drm_dp_helper.c
++++ b/drivers/gpu/drm/drm_dp_helper.c
+@@ -726,6 +726,28 @@ void drm_dp_set_subconnector_property(struct drm_connector *connector,
+ }
+ EXPORT_SYMBOL(drm_dp_set_subconnector_property);
  
- 	ret = drm_dp_mst_detect_port(connector, ctx, mstc->port->mgr,
- 				     mstc->port);
-+	if (ret != connector_status_connected)
-+		goto out;
- 
-+out:
- 	pm_runtime_mark_last_busy(connector->dev->dev);
- 	pm_runtime_put_autosuspend(connector->dev->dev);
- 	return ret;
-diff --git a/drivers/gpu/drm/nouveau/nouveau_dp.c b/drivers/gpu/drm/nouveau/nouveau_dp.c
-index 005750aeb6d4f..ad852e572cfec 100644
---- a/drivers/gpu/drm/nouveau/nouveau_dp.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_dp.c
-@@ -61,6 +61,11 @@ nouveau_dp_probe_dpcd(struct nouveau_connector *nv_connector,
- 			mstm->can_mst = drm_dp_read_mst_cap(aux, dpcd);
- 	}
- 
-+	ret = drm_dp_read_downstream_info(aux, dpcd,
-+					  outp->dp.downstream_ports);
-+	if (ret < 0)
-+		return connector_status_disconnected;
++/**
++ * drm_dp_read_sink_count_cap() - Check whether a given connector has a valid sink
++ * count
++ * @connector: The DRM connector to check
++ * @dpcd: A cached copy of the connector's DPCD RX capabilities
++ * @desc: A cached copy of the connector's DP descriptor
++ *
++ * Returns: %True if the (e)DP connector has a valid sink count that should
++ * be probed, %false otherwise.
++ */
++bool drm_dp_read_sink_count_cap(struct drm_connector *connector,
++				const u8 dpcd[DP_RECEIVER_CAP_SIZE],
++				const struct drm_dp_desc *desc)
++{
++	/* Some eDP panels don't set a valid value for the sink count */
++	return connector->connector_type != DRM_MODE_CONNECTOR_eDP &&
++		dpcd[DP_DPCD_REV] >= DP_DPCD_REV_11 &&
++		dpcd[DP_DOWNSTREAMPORT_PRESENT] & DP_DWN_STRM_PORT_PRESENT &&
++		!drm_dp_has_quirk(desc, 0, DP_DPCD_QUIRK_NO_SINK_COUNT);
++}
++EXPORT_SYMBOL(drm_dp_read_sink_count_cap);
 +
- 	return connector_status_connected;
+ /*
+  * I2C-over-AUX implementation
+  */
+diff --git a/drivers/gpu/drm/i915/display/intel_dp.c b/drivers/gpu/drm/i915/display/intel_dp.c
+index 9c4b806af8c79..38318ae935f88 100644
+--- a/drivers/gpu/drm/i915/display/intel_dp.c
++++ b/drivers/gpu/drm/i915/display/intel_dp.c
+@@ -4634,6 +4634,16 @@ intel_edp_init_dpcd(struct intel_dp *intel_dp)
+ 	return true;
  }
  
-@@ -176,8 +181,6 @@ void nouveau_dp_irq(struct nouveau_drm *drm,
- /* TODO:
-  * - Use the minimum possible BPC here, once we add support for the max bpc
-  *   property.
-- * - Validate the mode against downstream port caps (see
-- *   drm_dp_downstream_max_clock())
-  * - Validate against the DP caps advertised by the GPU (we don't check these
-  *   yet)
-  */
-@@ -188,15 +191,19 @@ nv50_dp_mode_valid(struct drm_connector *connector,
- 		   unsigned *out_clock)
- {
- 	const unsigned min_clock = 25000;
--	unsigned max_clock, clock;
-+	unsigned max_clock, ds_clock, clock;
- 	enum drm_mode_status ret;
++static bool
++intel_dp_has_sink_count(struct intel_dp *intel_dp)
++{
++	if (!intel_dp->attached_connector)
++		return false;
++
++	return drm_dp_read_sink_count_cap(&intel_dp->attached_connector->base,
++					  intel_dp->dpcd,
++					  &intel_dp->desc);
++}
  
- 	if (mode->flags & DRM_MODE_FLAG_INTERLACE && !outp->caps.dp_interlace)
- 		return MODE_NO_INTERLACE;
+ static bool
+ intel_dp_get_dpcd(struct intel_dp *intel_dp)
+@@ -4653,13 +4663,7 @@ intel_dp_get_dpcd(struct intel_dp *intel_dp)
+ 		intel_dp_set_common_rates(intel_dp);
+ 	}
  
- 	max_clock = outp->dp.link_nr * outp->dp.link_bw;
--	clock = mode->clock * (connector->display_info.bpc * 3) / 10;
-+	ds_clock = drm_dp_downstream_max_clock(outp->dp.dpcd,
-+					       outp->dp.downstream_ports);
-+	if (ds_clock)
-+		max_clock = min(max_clock, ds_clock);
+-	/*
+-	 * Some eDP panels do not set a valid value for sink count, that is why
+-	 * it don't care about read it here and in intel_edp_init_dpcd().
+-	 */
+-	if (!intel_dp_is_edp(intel_dp) &&
+-	    !drm_dp_has_quirk(&intel_dp->desc, 0,
+-			      DP_DPCD_QUIRK_NO_SINK_COUNT)) {
++	if (intel_dp_has_sink_count(intel_dp)) {
+ 		u8 count;
+ 		ssize_t r;
  
-+	clock = mode->clock * (connector->display_info.bpc * 3) / 10;
- 	ret = nouveau_conn_mode_clock_valid(mode, min_clock, max_clock,
- 					    &clock);
- 	if (out_clock)
-diff --git a/drivers/gpu/drm/nouveau/nouveau_encoder.h b/drivers/gpu/drm/nouveau/nouveau_encoder.h
-index eef4643f5f982..c1924a4529a7b 100644
---- a/drivers/gpu/drm/nouveau/nouveau_encoder.h
-+++ b/drivers/gpu/drm/nouveau/nouveau_encoder.h
-@@ -72,6 +72,7 @@ struct nouveau_encoder {
- 			struct mutex hpd_irq_lock;
+@@ -5939,9 +5943,8 @@ intel_dp_detect_dpcd(struct intel_dp *intel_dp)
+ 		return connector_status_connected;
  
- 			u8 dpcd[DP_RECEIVER_CAP_SIZE];
-+			u8 downstream_ports[DP_MAX_DOWNSTREAM_PORTS];
- 			struct drm_dp_desc desc;
- 		} dp;
- 	};
+ 	/* If we're HPD-aware, SINK_COUNT changes dynamically */
+-	if (intel_dp->dpcd[DP_DPCD_REV] >= 0x11 &&
++	if (intel_dp_has_sink_count(intel_dp) &&
+ 	    intel_dp->downstream_ports[0] & DP_DS_PORT_HPD) {
+-
+ 		return intel_dp->sink_count ?
+ 		connector_status_connected : connector_status_disconnected;
+ 	}
+diff --git a/include/drm/drm_dp_helper.h b/include/drm/drm_dp_helper.h
+index b8716b200666f..4c56ce4dc54fc 100644
+--- a/include/drm/drm_dp_helper.h
++++ b/include/drm/drm_dp_helper.h
+@@ -1631,6 +1631,11 @@ void drm_dp_set_subconnector_property(struct drm_connector *connector,
+ 				      const u8 *dpcd,
+ 				      const u8 port_cap[4]);
+ 
++struct drm_dp_desc;
++bool drm_dp_read_sink_count_cap(struct drm_connector *connector,
++				const u8 dpcd[DP_RECEIVER_CAP_SIZE],
++				const struct drm_dp_desc *desc);
++
+ void drm_dp_remote_aux_init(struct drm_dp_aux *aux);
+ void drm_dp_aux_init(struct drm_dp_aux *aux);
+ int drm_dp_aux_register(struct drm_dp_aux *aux);
+@@ -1689,7 +1694,8 @@ enum drm_dp_quirk {
+ 	 * @DP_DPCD_QUIRK_NO_SINK_COUNT:
+ 	 *
+ 	 * The device does not set SINK_COUNT to a non-zero value.
+-	 * The driver should ignore SINK_COUNT during detection.
++	 * The driver should ignore SINK_COUNT during detection. Note that
++	 * drm_dp_read_sink_count_cap() automatically checks for this quirk.
+ 	 */
+ 	DP_DPCD_QUIRK_NO_SINK_COUNT,
+ 	/**
 -- 
 2.26.2
 
