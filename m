@@ -2,38 +2,38 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id BAFFD253071
-	for <lists+nouveau@lfdr.de>; Wed, 26 Aug 2020 15:53:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 59123253079
+	for <lists+nouveau@lfdr.de>; Wed, 26 Aug 2020 15:54:01 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 819FD6E384;
-	Wed, 26 Aug 2020 13:53:46 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4DD276EA8D;
+	Wed, 26 Aug 2020 13:53:58 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 258FB6E384
- for <nouveau@lists.freedesktop.org>; Wed, 26 Aug 2020 13:53:45 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5BD356EA8D
+ for <nouveau@lists.freedesktop.org>; Wed, 26 Aug 2020 13:53:56 +0000 (UTC)
 Received: from localhost (unknown [70.37.104.77])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id C461A22B40;
- Wed, 26 Aug 2020 13:53:44 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 0FF7222B49;
+ Wed, 26 Aug 2020 13:53:56 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1598450025;
+ s=default; t=1598450036;
  bh=OV4bwx36FNw2xv7P1ILL50dIdP+4ztOih/WWEpibydI=;
  h=Date:From:To:To:To:Cc:Cc:Subject:In-Reply-To:References:From;
- b=ly3Hd8o2310txaZ9qgHEuiodKbJPAje24SzRoRkLLW0ZFWwnJ09KnR18Q2BC122S/
- MB2mHByiy6xWI5XSJB7MmwmloAGRwwfsnn+PqTggswj74fJHlkyhI3rr9NvVbRorsG
- 3FSR54vMVxLqCyUhWL95wbV01iqqPH7z+K2NhF2U=
-Date: Wed, 26 Aug 2020 13:53:44 +0000
+ b=q0HHMwNiZbjG4uSe0dHHCHRVKXNaTb58Ui3GUpfSmKI9HgV1Su6I1E1Thd/hEF7Sk
+ LUm7JF5nKbyOQjewa4GO9hU483wcH5IbyC9FAcvP/n9COK1DU0AvrDZL35kqAzkabP
+ QRodIDdZPYywSAs3Zx0ZqXKoQ106KMBHYB+UuPj0=
+Date: Wed, 26 Aug 2020 13:53:55 +0000
 From: Sasha Levin <sashal@kernel.org>
 To: Sasha Levin <sashal@kernel.org>
 To: Lyude Paul <lyude@redhat.com>
 To: nouveau@lists.freedesktop.org
-In-Reply-To: <20200807213405.442877-1-lyude@redhat.com>
-References: <20200807213405.442877-1-lyude@redhat.com>
-Message-Id: <20200826135344.C461A22B40@mail.kernel.org>
-Subject: Re: [Nouveau] [PATCH v2 1/2] drm/nouveau/kms/nv50-: Program
- notifier offset before requesting disp caps
+In-Reply-To: <20200806230129.324035-1-lyude@redhat.com>
+References: <20200806230129.324035-1-lyude@redhat.com>
+Message-Id: <20200826135356.0FF7222B49@mail.kernel.org>
+Subject: Re: [Nouveau] [PATCH] drm/nouveau/kms/nv50-: Program notifier
+ offset before requesting disp caps
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
