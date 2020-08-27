@@ -1,53 +1,34 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 99CD02536FB
-	for <lists+nouveau@lfdr.de>; Wed, 26 Aug 2020 20:26:24 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 61F1F254596
+	for <lists+nouveau@lfdr.de>; Thu, 27 Aug 2020 15:01:25 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id BDF676EACB;
-	Wed, 26 Aug 2020 18:26:20 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id CF44C6E0AC;
+	Thu, 27 Aug 2020 13:01:23 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [207.211.31.120])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D777B6EACD
- for <nouveau@lists.freedesktop.org>; Wed, 26 Aug 2020 18:26:16 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1598466375;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=35rHv6yAPDZviSzUI6usWQKLdZ1pcNOajmAO8CrvWqA=;
- b=KcLe2T7VteDeI2oILsTsD5NW4KdliGzHua9r9C8lG0JRqoI5quh5qf0ZLMK58adGIbAsLs
- qPGvDPglX42bULJB/ukHREf5TDyNtfwi6e0C1YZKZPlFW/10aTZUQGFsHjeZZcLGQsg9bz
- CU7MNbg6OcjxOQ3yTMRTVbvrvpgePms=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-483-cBkSOHBkM9SG-hdG5iOtwg-1; Wed, 26 Aug 2020 14:26:14 -0400
-X-MC-Unique: cBkSOHBkM9SG-hdG5iOtwg-1
-Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
- [10.5.11.22])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id B97B5801ABA;
- Wed, 26 Aug 2020 18:26:12 +0000 (UTC)
-Received: from Whitewolf.redhat.com (ovpn-119-77.rdu2.redhat.com
- [10.10.119.77])
- by smtp.corp.redhat.com (Postfix) with ESMTP id E14A5100238C;
- Wed, 26 Aug 2020 18:26:11 +0000 (UTC)
-From: Lyude Paul <lyude@redhat.com>
-To: dri-devel@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
- nouveau@lists.freedesktop.org
-Date: Wed, 26 Aug 2020 14:24:56 -0400
-Message-Id: <20200826182456.322681-21-lyude@redhat.com>
-In-Reply-To: <20200826182456.322681-1-lyude@redhat.com>
-References: <20200826182456.322681-1-lyude@redhat.com>
+Received: from huawei.com (szxga07-in.huawei.com [45.249.212.35])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 264B86E0AC;
+ Thu, 27 Aug 2020 13:01:23 +0000 (UTC)
+Received: from DGGEMS402-HUB.china.huawei.com (unknown [172.30.72.58])
+ by Forcepoint Email with ESMTP id 5615799FE8BD911E23F4;
+ Thu, 27 Aug 2020 21:01:15 +0800 (CST)
+Received: from huawei.com (10.175.127.227) by DGGEMS402-HUB.china.huawei.com
+ (10.3.19.202) with Microsoft SMTP Server id 14.3.487.0; Thu, 27 Aug 2020
+ 21:01:06 +0800
+From: Jason Yan <yanaijie@huawei.com>
+To: <bskeggs@redhat.com>, <airlied@linux.ie>, <daniel@ffwll.ch>,
+ <jgg@ziepe.ca>, <dri-devel@lists.freedesktop.org>,
+ <nouveau@lists.freedesktop.org>, <linux-kernel@vger.kernel.org>
+Date: Thu, 27 Aug 2020 21:00:47 +0800
+Message-ID: <20200827130047.429089-1-yanaijie@huawei.com>
+X-Mailer: git-send-email 2.25.4
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
-Subject: [Nouveau] [PATCH v5 20/20] drm/nouveau/kms: Start using
- drm_dp_read_dpcd_caps()
+X-Originating-IP: [10.175.127.227]
+X-CFilter-Loop: Reflected
+Subject: [Nouveau] [PATCH] drm/nouveau/svm: remove set but not used 'ret'
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,53 +40,38 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, Ben Skeggs <bskeggs@redhat.com>,
- Daniel Vetter <daniel@ffwll.ch>, open list <linux-kernel@vger.kernel.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: Hulk Robot <hulkci@huawei.com>, Jason Yan <yanaijie@huawei.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Now that we've extracted i915's code for reading both the normal DPCD
-caps and extended DPCD caps into a shared helper, let's start using this
-in nouveau to enable us to start checking extended DPCD caps for free.
-
-Signed-off-by: Lyude Paul <lyude@redhat.com>
-Reviewed-by: Ben Skeggs <bskeggs@redhat.com>
----
- drivers/gpu/drm/nouveau/nouveau_dp.c | 14 ++++++--------
- 1 file changed, 6 insertions(+), 8 deletions(-)
-
-diff --git a/drivers/gpu/drm/nouveau/nouveau_dp.c b/drivers/gpu/drm/nouveau/nouveau_dp.c
-index 59be357b17e00..810bf69565683 100644
---- a/drivers/gpu/drm/nouveau/nouveau_dp.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_dp.c
-@@ -54,15 +54,13 @@ nouveau_dp_probe_dpcd(struct nouveau_connector *nv_connector,
- 	int ret;
- 	u8 *dpcd = outp->dp.dpcd;
- 
--	ret = drm_dp_dpcd_read(aux, DP_DPCD_REV, dpcd, DP_RECEIVER_CAP_SIZE);
--	if (ret == DP_RECEIVER_CAP_SIZE && dpcd[DP_DPCD_REV]) {
--		ret = drm_dp_read_desc(aux, &outp->dp.desc,
--				       drm_dp_is_branch(dpcd));
--		if (ret < 0)
--			goto out;
--	} else {
-+	ret = drm_dp_read_dpcd_caps(aux, dpcd);
-+	if (ret < 0)
-+		goto out;
-+
-+	ret = drm_dp_read_desc(aux, &outp->dp.desc, drm_dp_is_branch(dpcd));
-+	if (ret < 0)
- 		goto out;
--	}
- 
- 	if (nouveau_mst) {
- 		mstm = outp->dp.mstm;
--- 
-2.26.2
-
-_______________________________________________
-Nouveau mailing list
-Nouveau@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/nouveau
+VGhpcyBhZGRyZXNzZXMgdGhlIGZvbGxvd2luZyBnY2Mgd2FybmluZyB3aXRoICJtYWtlIFc9MSI6
+Cgpkcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X3N2bS5jOiBJbiBmdW5jdGlvbiDigJhu
+b3V2ZWF1X3BmbnNfbWFw4oCZOgpkcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X3N2bS5j
+OjgxODo2OiB3YXJuaW5nOiB2YXJpYWJsZSDigJhyZXTigJkgc2V0CmJ1dCBub3QgdXNlZCBbLVd1
+bnVzZWQtYnV0LXNldC12YXJpYWJsZV0KICA4MTggfCAgaW50IHJldDsKICAgICAgfCAgICAgIF5+
+fgoKUmVwb3J0ZWQtYnk6IEh1bGsgUm9ib3QgPGh1bGtjaUBodWF3ZWkuY29tPgpTaWduZWQtb2Zm
+LWJ5OiBKYXNvbiBZYW4gPHlhbmFpamllQGh1YXdlaS5jb20+Ci0tLQogZHJpdmVycy9ncHUvZHJt
+L25vdXZlYXUvbm91dmVhdV9zdm0uYyB8IDUgKystLS0KIDEgZmlsZSBjaGFuZ2VkLCAyIGluc2Vy
+dGlvbnMoKyksIDMgZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL25v
+dXZlYXUvbm91dmVhdV9zdm0uYyBiL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfc3Zt
+LmMKaW5kZXggMmRmMWMwNDYwNTU5Li43Yzk1ZmZjYmQxOGYgMTAwNjQ0Ci0tLSBhL2RyaXZlcnMv
+Z3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfc3ZtLmMKKysrIGIvZHJpdmVycy9ncHUvZHJtL25vdXZl
+YXUvbm91dmVhdV9zdm0uYwpAQCAtODE1LDcgKzgxNSw2IEBAIG5vdXZlYXVfcGZuc19tYXAoc3Ry
+dWN0IG5vdXZlYXVfc3ZtbSAqc3ZtbSwgc3RydWN0IG1tX3N0cnVjdCAqbW0sCiAJCSB1bnNpZ25l
+ZCBsb25nIGFkZHIsIHU2NCAqcGZucywgdW5zaWduZWQgbG9uZyBucGFnZXMpCiB7CiAJc3RydWN0
+IG5vdXZlYXVfcGZubWFwX2FyZ3MgKmFyZ3MgPSBub3V2ZWF1X3BmbnNfdG9fYXJncyhwZm5zKTsK
+LQlpbnQgcmV0OwogCiAJYXJncy0+cC5hZGRyID0gYWRkcjsKIAlhcmdzLT5wLnNpemUgPSBucGFn
+ZXMgPDwgUEFHRV9TSElGVDsKQEAgLTgyMyw4ICs4MjIsOCBAQCBub3V2ZWF1X3BmbnNfbWFwKHN0
+cnVjdCBub3V2ZWF1X3N2bW0gKnN2bW0sIHN0cnVjdCBtbV9zdHJ1Y3QgKm1tLAogCW11dGV4X2xv
+Y2soJnN2bW0tPm11dGV4KTsKIAogCXN2bW0tPnZtbS0+dm1tLm9iamVjdC5jbGllbnQtPnN1cGVy
+ID0gdHJ1ZTsKLQlyZXQgPSBudmlmX29iamVjdF9pb2N0bCgmc3ZtbS0+dm1tLT52bW0ub2JqZWN0
+LCBhcmdzLCBzaXplb2YoKmFyZ3MpICsKLQkJCQlucGFnZXMgKiBzaXplb2YoYXJncy0+cC5waHlz
+WzBdKSwgTlVMTCk7CisJbnZpZl9vYmplY3RfaW9jdGwoJnN2bW0tPnZtbS0+dm1tLm9iamVjdCwg
+YXJncywgc2l6ZW9mKCphcmdzKSArCisJCQkgIG5wYWdlcyAqIHNpemVvZihhcmdzLT5wLnBoeXNb
+MF0pLCBOVUxMKTsKIAlzdm1tLT52bW0tPnZtbS5vYmplY3QuY2xpZW50LT5zdXBlciA9IGZhbHNl
+OwogCiAJbXV0ZXhfdW5sb2NrKCZzdm1tLT5tdXRleCk7Ci0tIAoyLjI1LjQKCl9fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCk5vdXZlYXUgbWFpbGluZyBsaXN0
+Ck5vdXZlYXVAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Au
+b3JnL21haWxtYW4vbGlzdGluZm8vbm91dmVhdQo=
