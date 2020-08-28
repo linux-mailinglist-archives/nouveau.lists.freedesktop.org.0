@@ -1,54 +1,58 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0491A2550AF
-	for <lists+nouveau@lfdr.de>; Thu, 27 Aug 2020 23:37:54 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 86C132558AA
+	for <lists+nouveau@lfdr.de>; Fri, 28 Aug 2020 12:40:26 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0069E6E03F;
-	Thu, 27 Aug 2020 21:37:52 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D77716E480;
+	Fri, 28 Aug 2020 10:40:24 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from hqnvemgate26.nvidia.com (hqnvemgate26.nvidia.com
- [216.228.121.65])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 41A2C6E03F
- for <nouveau@lists.freedesktop.org>; Thu, 27 Aug 2020 21:37:51 +0000 (UTC)
-Received: from hqpgpgate102.nvidia.com (Not Verified[216.228.121.13]) by
- hqnvemgate26.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
- id <B5f4827a00000>; Thu, 27 Aug 2020 14:37:36 -0700
-Received: from hqmail.nvidia.com ([172.20.161.6])
- by hqpgpgate102.nvidia.com (PGP Universal service);
- Thu, 27 Aug 2020 14:37:50 -0700
-X-PGP-Universal: processed;
- by hqpgpgate102.nvidia.com on Thu, 27 Aug 2020 14:37:50 -0700
-Received: from HQMAIL101.nvidia.com (172.20.187.10) by HQMAIL101.nvidia.com
- (172.20.187.10) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Thu, 27 Aug
- 2020 21:37:50 +0000
-Received: from rnnvemgw01.nvidia.com (10.128.109.123) by HQMAIL101.nvidia.com
- (172.20.187.10) with Microsoft SMTP Server (TLS) id 15.0.1473.3 via
- Frontend Transport; Thu, 27 Aug 2020 21:37:49 +0000
-Received: from rcampbell-dev.nvidia.com (Not Verified[10.110.48.66]) by
- rnnvemgw01.nvidia.com with Trustwave SEG (v7, 5, 8, 10121)
- id <B5f4827ad0000>; Thu, 27 Aug 2020 14:37:49 -0700
-From: Ralph Campbell <rcampbell@nvidia.com>
-To: <nouveau@lists.freedesktop.org>, <linux-kernel@vger.kernel.org>
-Date: Thu, 27 Aug 2020 14:37:44 -0700
-Message-ID: <20200827213744.14074-1-rcampbell@nvidia.com>
-X-Mailer: git-send-email 2.20.1
+Received: from mail-ed1-x544.google.com (mail-ed1-x544.google.com
+ [IPv6:2a00:1450:4864:20::544])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A16676E480;
+ Fri, 28 Aug 2020 10:40:23 +0000 (UTC)
+Received: by mail-ed1-x544.google.com with SMTP id q4so731101eds.3;
+ Fri, 28 Aug 2020 03:40:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=ENswYkyFplqCehinq7Y2z75sVgQXnYT6puOqN0R0Y7o=;
+ b=g2KKVl0TPaZILqlIjvuIjbTQL7Ogvm1tljg268Wh/Uu9MvL0/rpY3KSRLPNUtmeEBJ
+ w5XdKoUUOgI/EG83DvcV54PTgfPD7InvOdziuKNbHtx2G5LB5frcduaoH68PkS6kw/pI
+ 4hEvBDJa8Cyx5V+rVIDqJ1odeSq2T96yLLGBYgfD812SY8kcT570gknfOTtHCEnZBE2r
+ y7Xw1yf5aZMV+K38yiOov70ElMxF+09rIILuPBCw7NxTsziPMNaohnRXR0pnxjdhf59D
+ vQIn7CKk20Z77MhKtlvfqLBBFeJoZcn0jXeB81iI8WcgvLxd2DjWaxxkcV4b39FKVHZK
+ eaeA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=ENswYkyFplqCehinq7Y2z75sVgQXnYT6puOqN0R0Y7o=;
+ b=gNpk3QsMcg3mcTowUKmSQFkzYuYcuci9OEEHclx5GzRgwttFOe1+ERKih36CgUWCk+
+ nEREM3hcuytMm2w6r66grdNO0+BxzZt7239kOuUpxld0KzPlwdeTp65z7lMPxbSrf16/
+ IucEGC9Gg0Y70KplYu74PLmhbmj6W4rU1cX+Br4f8NN6awPCQc8XQvPXTIOs8yMVDDeh
+ MH5owV+tvKKbVr+RB9OeFYsgBwIkVQUz0XeFwKSEEWQ1bKobQQ8hHacnRPmBtbW+S8z7
+ ZKDW47LxTkidyOWrsTw92GR/miczFVvs4Z451vi6uqxuFjo2sQyvlwCLzcp7SOVQy3kL
+ vdtg==
+X-Gm-Message-State: AOAM532WskMG+4X96AgYgl0No9XcvT4jD2S8xpB40Prc+7Yij9oDIyrU
+ kte1fW35km+s6RSO7V8XhmI=
+X-Google-Smtp-Source: ABdhPJw97mbjTAqty7lLF+w0rgNlxRnQMEc3LaIjzKeZFXqWT8sUnxBFz/NWYLVP98tFNt3rdxl/Iw==
+X-Received: by 2002:a05:6402:1f6:: with SMTP id
+ i22mr1115268edy.374.1598611222246; 
+ Fri, 28 Aug 2020 03:40:22 -0700 (PDT)
+Received: from localhost ([62.96.65.119])
+ by smtp.gmail.com with ESMTPSA id d5sm649722edk.25.2020.08.28.03.40.20
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 28 Aug 2020 03:40:21 -0700 (PDT)
+From: Thierry Reding <thierry.reding@gmail.com>
+To: Ben Skeggs <bskeggs@redhat.com>
+Date: Fri, 28 Aug 2020 12:40:10 +0200
+Message-Id: <20200828104016.1672195-1-thierry.reding@gmail.com>
+X-Mailer: git-send-email 2.28.0
 MIME-Version: 1.0
-X-NVConfidentiality: public
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
- t=1598564256; bh=XBTnhsw8aeSeeaHO8PfVUgCnUydeHCWsSW21RUvyX4Q=;
- h=X-PGP-Universal:From:To:CC:Subject:Date:Message-ID:X-Mailer:
- MIME-Version:X-NVConfidentiality:Content-Transfer-Encoding:
- Content-Type;
- b=Ptggp2jr4EwLFTIsViMB2Ms3s2SE3O5nFyqfdoMBNPbxAOfYyX/nOxJRPH6ulewi1
- yFQK8ncrrpHfNTIiMwCQoTR/wRRHAX4N68N6YxPR+yAFjryU3pPZaxMGaQ1o9U8bkA
- SslGSWTrRTCO69jAco8QPrgrfmO/wt8tSHDDujOOAgByNGy+XywtezUg67YyYDVD5z
- b6YP3HsuWXLXDDoLobjXtB+Y7ITsOW9V2dmxGqTSLFllxfBDRhRP9vNspNCiFcviZ5
- 3PZCcRF3SpICdijGLlPn+/Rq49otNpHRaTJEuUiqH+D0uryYGqLxSjFjGVdMHaRbl5
- AhJEhByBwlYKg==
-Subject: [Nouveau] [PATCH] nouveau: fix the start/end range for migration
+Subject: [Nouveau] [PATCH 0/6] drm/nouveau: Support sync FDs and sync objects
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,86 +64,59 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Ralph Campbell <rcampbell@nvidia.com>, Ben Skeggs <bskeggs@redhat.com>,
- Jason Gunthorpe <jgg@nvidia.com>, Christoph Hellwig <hch@lst.de>
+Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-The user level OpenCL code shouldn't have to align start and end
-addresses to a page boundary. That is better handled in the nouveau
-driver. The npages field is also redundant since it can be computed
-from the start and end addresses.
+From: Thierry Reding <treding@nvidia.com>
 
-Signed-off-by: Ralph Campbell <rcampbell@nvidia.com>
----
+Hi,
 
-This is for Ben Skegg's nouveau tree.
+This series implements a new IOCTL to submit push buffers that can
+optionally return a sync FD or sync object to userspace. This is useful
+in cases where userspace wants to synchronize operations between the GPU
+and another driver (such as KMS for display). Among other things this
+allows extensions such as eglDupNativeFenceFDANDROID to be implemented.
 
-I have been working with Karol Herbst on the OpenCL mesa changes for
-nouveau which will be merged upstream soon.
-With or without those changes, the user visible effect of this patch
-only extends the range by one page (round up vs. round down to page
-boundary).
+Note that patch 4 modifies the ABI introduced in patch 3 by allowing DRM
+sync objects to be passed rather than only sync FDs. It also allows any
+number of sync FDs/objects to be passed in or emitted. I think those are
+useful features, but I left them in a separate patch in case everybody
+else thinks that this won't be needed. If we decide to merge the new ABI
+then patch 4 should be squashed into patch 3.
 
- drivers/gpu/drm/nouveau/nouveau_svm.c | 17 ++++++-----------
- 1 file changed, 6 insertions(+), 11 deletions(-)
+The corresponding userspace changes can be found here:
 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_svm.c b/drivers/gpu/drm/nouveau/nouveau_svm.c
-index 2df1c0460559..888aa0908c5a 100644
---- a/drivers/gpu/drm/nouveau/nouveau_svm.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_svm.c
-@@ -105,11 +105,14 @@ nouveau_svmm_bind(struct drm_device *dev, void *data,
- 	struct nouveau_cli *cli = nouveau_cli(file_priv);
- 	struct drm_nouveau_svm_bind *args = data;
- 	unsigned target, cmd, priority;
--	unsigned long addr, end, size;
-+	unsigned long addr, end;
- 	struct mm_struct *mm;
- 
- 	args->va_start &= PAGE_MASK;
--	args->va_end &= PAGE_MASK;
-+	args->va_end = ALIGN(args->va_end, PAGE_SIZE);
-+	/* If no end address is given, assume a single page. */
-+	if (args->va_end == 0)
-+		args->va_end = args->va_start + PAGE_SIZE;
- 
- 	/* Sanity check arguments */
- 	if (args->reserved0 || args->reserved1)
-@@ -118,8 +121,6 @@ nouveau_svmm_bind(struct drm_device *dev, void *data,
- 		return -EINVAL;
- 	if (args->va_start >= args->va_end)
- 		return -EINVAL;
--	if (!args->npages)
--		return -EINVAL;
- 
- 	cmd = args->header >> NOUVEAU_SVM_BIND_COMMAND_SHIFT;
- 	cmd &= NOUVEAU_SVM_BIND_COMMAND_MASK;
-@@ -151,12 +152,6 @@ nouveau_svmm_bind(struct drm_device *dev, void *data,
- 	if (args->stride)
- 		return -EINVAL;
- 
--	size = ((unsigned long)args->npages) << PAGE_SHIFT;
--	if ((args->va_start + size) <= args->va_start)
--		return -EINVAL;
--	if ((args->va_start + size) > args->va_end)
--		return -EINVAL;
--
- 	/*
- 	 * Ok we are ask to do something sane, for now we only support migrate
- 	 * commands but we will add things like memory policy (what to do on
-@@ -171,7 +166,7 @@ nouveau_svmm_bind(struct drm_device *dev, void *data,
- 		return -EINVAL;
- 	}
- 
--	for (addr = args->va_start, end = args->va_start + size; addr < end;) {
-+	for (addr = args->va_start, end = args->va_end; addr < end;) {
- 		struct vm_area_struct *vma;
- 		unsigned long next;
- 
+  libdrm: https://gitlab.freedesktop.org/tagr/drm/-/commits/nouveau-sync-fd-v2/
+  mesa: https://gitlab.freedesktop.org/tagr/mesa/-/commits/nouveau-sync-fd/
+
+I've verified that this works with kmscube's --atomic mode and Weston.
+
+Thierry
+
+Thierry Reding (6):
+  drm/nouveau: Split nouveau_fence_sync()
+  drm/nouveau: Add nouveau_fence_ref()
+  drm/nouveau: Support fence FDs at kickoff
+  drm/nouveau: Support sync FDs and syncobjs
+  drm/nouveau: Support DMA fence arrays
+  drm/nouveau: Allow zero pushbuffer submits
+
+ drivers/gpu/drm/nouveau/dispnv04/crtc.c |   4 +-
+ drivers/gpu/drm/nouveau/nouveau_bo.c    |  38 ++-
+ drivers/gpu/drm/nouveau/nouveau_bo.h    |   2 +
+ drivers/gpu/drm/nouveau/nouveau_drm.c   |   1 +
+ drivers/gpu/drm/nouveau/nouveau_fence.c |  90 +++---
+ drivers/gpu/drm/nouveau/nouveau_fence.h |   3 +-
+ drivers/gpu/drm/nouveau/nouveau_gem.c   | 402 ++++++++++++++++++------
+ drivers/gpu/drm/nouveau/nouveau_gem.h   |   2 +
+ include/uapi/drm/nouveau_drm.h          |  23 ++
+ 9 files changed, 410 insertions(+), 155 deletions(-)
+
 -- 
-2.20.1
+2.28.0
 
 _______________________________________________
 Nouveau mailing list
