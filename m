@@ -1,55 +1,125 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5BCC4257356
-	for <lists+nouveau@lfdr.de>; Mon, 31 Aug 2020 07:36:31 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 71EE92578B5
+	for <lists+nouveau@lfdr.de>; Mon, 31 Aug 2020 13:51:26 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6BD5D89C2C;
-	Mon, 31 Aug 2020 05:36:29 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E7DE86E15A;
+	Mon, 31 Aug 2020 11:51:24 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wm1-x344.google.com (mail-wm1-x344.google.com
- [IPv6:2a00:1450:4864:20::344])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8D4F489FC3;
- Mon, 31 Aug 2020 05:33:58 +0000 (UTC)
-Received: by mail-wm1-x344.google.com with SMTP id q9so4178831wmj.2;
- Sun, 30 Aug 2020 22:33:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=ZDEON+YiSW0YCSec5Nu5L0EktnuUvNjTc14NjRB7JKE=;
- b=LPN3jT/PTqKlR2lZSgNunOp1H6kJ1/4T1MhBuqtbUeNvDSvF40OX3bDD8E3k7FqntV
- zG2B4hBde0AW65QsIHGewoTGXbr/B6uJh6iDUNCFgVpuVFOztKcS9soSx6N9iOI7lim+
- kGeQrcpaYNzAtqc5oc2EOJ/itQ//L/sEBmhWR6KMO0C1P4etBYE0zdcSrytoeJSKg5r5
- BQqOxbA26wSnVJokGLEqNVaH43jCx3tx1YCDN8NB3PffyeAkjDT8yMlTwdp/TNiUhEJb
- iK/jutqDxQnnsbbno3A5ByYPPinpzVNfB2q1qrvK4JNNM6QnprM6rcD2bM9sIyVULPga
- VPzg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=ZDEON+YiSW0YCSec5Nu5L0EktnuUvNjTc14NjRB7JKE=;
- b=rmllKAZlFzmmoiZoquAsvMKt92T7d5cYNFe1yVSbqY+PdbV7MZUbse9Zu2XEQhBy/m
- DpTCWP8VBpoHY10jLPbGo/+Up3hO4PDhw6tCP96+c+GdUb5hRUJnAsk2ILr58wKaIgq5
- g5UfEVrdo+3DWH/CkCbHBeg6smsa5xvpj+ntd9C0yYtCVcM76tp+oNFMItmZt+W9U0Qy
- YwWnQ9lsFuWV+GU4atm+I8KPamu9bCiLOOkbiNF7qNaXYdVAUwrIy4MbYlZuK8LhNgYm
- Ujwy6dPB233g8rMD4gudD+bzxEsEHRbtEMRYh5krBJY+Qur62ij7ZYK0CXCJtkXmx727
- omRA==
-X-Gm-Message-State: AOAM531bfeF0rySALXOX9+W9pTLZwanSp4mfCEaH6+8XSVagnPCg2tM1
- yRJEljHhTBWCm0vFofZabrzzDPfNFusGRJ7xP/Q=
-X-Google-Smtp-Source: ABdhPJyJjEzdp5HeU3Ef2tiRuhk4m/xlRlX3jpGxweA9NEFIkrZlBPpBBfH8HNOxR/70yJAH5exQiNVdwbcoaeL6DUU=
-X-Received: by 2002:a1c:f003:: with SMTP id a3mr88385wmb.170.1598852037062;
- Sun, 30 Aug 2020 22:33:57 -0700 (PDT)
+Received: from hqnvemgate25.nvidia.com (hqnvemgate25.nvidia.com
+ [216.228.121.64])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id DE75D6E15A
+ for <nouveau@lists.freedesktop.org>; Mon, 31 Aug 2020 11:51:23 +0000 (UTC)
+Received: from hqpgpgate102.nvidia.com (Not Verified[216.228.121.13]) by
+ hqnvemgate25.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
+ id <B5f4ce40c0000>; Mon, 31 Aug 2020 04:50:36 -0700
+Received: from hqmail.nvidia.com ([172.20.161.6])
+ by hqpgpgate102.nvidia.com (PGP Universal service);
+ Mon, 31 Aug 2020 04:51:22 -0700
+X-PGP-Universal: processed;
+ by hqpgpgate102.nvidia.com on Mon, 31 Aug 2020 04:51:22 -0700
+Received: from HQMAIL101.nvidia.com (172.20.187.10) by HQMAIL107.nvidia.com
+ (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Mon, 31 Aug
+ 2020 11:51:21 +0000
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com (104.47.55.170)
+ by HQMAIL101.nvidia.com (172.20.187.10) with Microsoft SMTP Server (TLS) id
+ 15.0.1473.3 via Frontend Transport; Mon, 31 Aug 2020 11:51:21 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=YNdpwigkA6aoNvkOfQoUNLkDna49wm/6hQBsli71/mwjfA9WtP8jo0GjiUhV0T7AWLCtaSbmkvPZj+utv0E1qagg5WoaHBP+YRfOUThdiKOfa59fIanZdIyCR91tWJOmLk89blSpIH1g2pVkBUIs2VF5tRYyJ635wx36GcfhRkQnmUXkSpUUKpM+q7f/deEGFMA1gDctH5Z4e1kXaYKkOk9o9tK82lmRnhNcKkdpY2vnuwC2FzNrmyROBsDaSZ5i4QgobJ5wrsDa/XQ2nRjprHq31MFVjdIUspGvHeL8oXc1nmhvtZcAKbjTc9JFsWxeBlQUiYJtIAMCAsBEUOvSrg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=m9bB2T6vB7oAyFV4cZFOTevntVTBdVR21sxJ63Igwwo=;
+ b=V3lT9p0Q18yauu+6eRodxctAObLnnylpPtSR1Q+yUOTi3lhuuwJcPFZJaEjAIMtMHG+o6nHAN6LFWBNHeSMWmiANykpyB4V0VCuQNEJTCJSx0fzRSLViGHHIt87xcfGadhILL6Za1isrv768Yf/NOQGnADpNpQpTaLwdRJ6b0Ln7d4KzhKvWcI8OpcGitxnfIdcFQ/ylmOe+ET6XcHVlYhuPyDfD2NwkLc4w0B0ckUQJNY7sjmufRMzPLnaFTbuI19J2NPC7eJv+L6iDvLCEPWAOeVHJTWWdAwXLN442giv7QO2arnINUZ1RNXkGK6k+QLv1ORhsbc466q8IVRrYYQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+Authentication-Results: nvidia.com; dkim=none (message not signed)
+ header.d=none;nvidia.com; dmarc=none action=none header.from=nvidia.com;
+Received: from DM6PR12MB3834.namprd12.prod.outlook.com (2603:10b6:5:14a::12)
+ by DM6PR12MB3209.namprd12.prod.outlook.com (2603:10b6:5:184::33) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3326.19; Mon, 31 Aug
+ 2020 11:51:19 +0000
+Received: from DM6PR12MB3834.namprd12.prod.outlook.com
+ ([fe80::2d79:7f96:6406:6c76]) by DM6PR12MB3834.namprd12.prod.outlook.com
+ ([fe80::2d79:7f96:6406:6c76%3]) with mapi id 15.20.3326.025; Mon, 31 Aug 2020
+ 11:51:19 +0000
+Date: Mon, 31 Aug 2020 08:51:17 -0300
+From: Jason Gunthorpe <jgg@nvidia.com>
+To: Ralph Campbell <rcampbell@nvidia.com>
+Message-ID: <20200831115117.GU1152540@nvidia.com>
+References: <20200827213744.14074-1-rcampbell@nvidia.com>
+Content-Disposition: inline
+In-Reply-To: <20200827213744.14074-1-rcampbell@nvidia.com>
+X-ClientProxiedBy: MN2PR19CA0055.namprd19.prod.outlook.com
+ (2603:10b6:208:19b::32) To DM6PR12MB3834.namprd12.prod.outlook.com
+ (2603:10b6:5:14a::12)
 MIME-Version: 1.0
-References: <CAJ1xhMUpqtKMuGUZdComskTqd0oOKCfDuVQT3+c13u=NSJLkBw@mail.gmail.com>
- <CACAvsv6zUi=3mZTg11Y_6CVYkpCSO0RY-5+GiBZz+2EXCDmD-g@mail.gmail.com>
-In-Reply-To: <CACAvsv6zUi=3mZTg11Y_6CVYkpCSO0RY-5+GiBZz+2EXCDmD-g@mail.gmail.com>
-From: Alexander Kapshuk <alexander.kapshuk@gmail.com>
-Date: Mon, 31 Aug 2020 08:33:20 +0300
-Message-ID: <CAJ1xhMVOZAM=VwtNdYmjWY9NjVOpr0JJXi0Civ5Pgb9f4og49w@mail.gmail.com>
-To: Ben Skeggs <skeggsb@gmail.com>
-X-Mailman-Approved-At: Mon, 31 Aug 2020 05:36:28 +0000
-Subject: Re: [Nouveau] nouveau PUSHBUFFER_ERR on 5.9.0-rc2-next-20200824
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from 255.255.255.255 (255.255.255.255) by
+ MN2PR19CA0055.namprd19.prod.outlook.com (2603:10b6:208:19b::32) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3326.19 via Frontend
+ Transport; Mon, 31 Aug 2020 11:51:19 +0000
+Received: from jgg by mlx with local (Exim 4.94)	(envelope-from
+ <jgg@nvidia.com>)	id 1kCiLF-002LjR-Vy; Mon, 31 Aug 2020 08:51:18 -0300
+X-Originating-IP: [156.34.48.30]
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: aec042b8-4cb3-4361-2d5a-08d84da42cd5
+X-MS-TrafficTypeDiagnostic: DM6PR12MB3209:
+X-MS-Exchange-Transport-Forked: True
+X-Microsoft-Antispam-PRVS: <DM6PR12MB32097F522E27B21FEDB01650C2510@DM6PR12MB3209.namprd12.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:8882;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: yxZdsDAmV3J+7y8DGMCUa/3KVOE/zbW55s7Op492fvR/HJKYVx0Q5N2ubXJCDDxOCp7bB0NWCy9lrHi6gWrUp4p+/rG9BHhnUmwzwfxM9WuvtOe5ZboN7oD5Q+UxrbtyQgVE48yT37nbjGkd/VI1VhAvmDCvODcpiEp6+2G1Yglt7zngpz3Vg0+97UqperUTbZgjvc+uDWvyWzjJL6wP8F+yNgYqVGwGVME8SrU+mG1OW0VWwywLiKJ07OmxxDN6mfxH+CSf7ejWa8ZXij0RAWR1KhQ+1GCfclAaHhb0wCprNZRCBumRpeZVQPfwNf5onOE8w5x33qUJUOidTqKItw==
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DM6PR12MB3834.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(4636009)(136003)(376002)(366004)(39860400002)(396003)(346002)(66946007)(37006003)(9746002)(186003)(6862004)(36756003)(4326008)(54906003)(478600001)(86362001)(9786002)(26005)(2906002)(316002)(5660300002)(6636002)(66476007)(66556008)(426003)(8676002)(1076003)(8936002)(2616005)(33656002)(83380400001);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData: zQfLcdGzZyJXITtux7csPEipo6tbnmk9fILXf5+pYf6tvJZNimYoAi8U6Gs4ZIM/Am8TmTyjYhXXriRD9hn7jV7hBYklL0hzrOFaGlbAy6XBi0KNFEl4ytuDSZlx+wocVv15/vtpy2nXkDpJxvgqs84i2GcVWKzKEPOu3V9VMrs9pYSBHCYCRJ6Tq6U2wc2AlL4e6oPa8nGUo5V/wftVo80Hp6DnEApByxE8ox8LRL+i/B4ttSoDWhtaYmM3ggGA516I0FK02PnU2Bk4cYJWlS3hYhtwwrIl9w1oUJD7dGGGuJyJ1PEvhtlh+KT0PiNL47gFr64nvI6xcOxWssDXQmaNHDaql01UfAaH3RbENr28lLt/l22sR4ULIs0XPRakyvnV11bo3tJusD5ltGKi0TEJorj89nNL9gSKcpXrZYIolqtrOBG/JsAJs1R9IeiVZkvhbCf3Kbwwv6EqN3/hnNn8CA/XrhoiNUugSyPT5/S+PXpBGvs7dQNVWP2WIOGXWl89vpMzaC2q3DyC2cqxJV8tLF3NpEJ0+L3duFrhAx6U9X1kO5iy64i5X1X00vyxJqscp3/lcj475ACBr2yX8rBVfgz4dwk0vz9Q2LfK7A1QlaQy//SZmuFgwqSjIYkIxM61wVh17jMy2DxjTF3yUQ==
+X-MS-Exchange-CrossTenant-Network-Message-Id: aec042b8-4cb3-4361-2d5a-08d84da42cd5
+X-MS-Exchange-CrossTenant-AuthSource: DM6PR12MB3834.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Aug 2020 11:51:19.8147 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: a90FM6qmxK91vwkjcTHaWld5xPQV3AIuTeHoyVJ8DfZ6FaB3RbUeUwZksVhlsCUE
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB3209
+X-OriginatorOrg: Nvidia.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
+ t=1598874636; bh=m9bB2T6vB7oAyFV4cZFOTevntVTBdVR21sxJ63Igwwo=;
+ h=X-PGP-Universal:ARC-Seal:ARC-Message-Signature:
+ ARC-Authentication-Results:Authentication-Results:Date:From:To:CC:
+ Subject:Message-ID:References:Content-Type:Content-Disposition:
+ In-Reply-To:X-ClientProxiedBy:MIME-Version:
+ X-MS-Exchange-MessageSentRepresentingType:X-Originating-IP:
+ X-MS-PublicTrafficType:X-MS-Office365-Filtering-Correlation-Id:
+ X-MS-TrafficTypeDiagnostic:X-MS-Exchange-Transport-Forked:
+ X-Microsoft-Antispam-PRVS:X-MS-Oob-TLC-OOBClassifiers:
+ X-MS-Exchange-SenderADCheck:X-Microsoft-Antispam:
+ X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
+ X-MS-Exchange-AntiSpam-MessageData:
+ X-MS-Exchange-CrossTenant-Network-Message-Id:
+ X-MS-Exchange-CrossTenant-AuthSource:
+ X-MS-Exchange-CrossTenant-AuthAs:
+ X-MS-Exchange-CrossTenant-OriginalArrivalTime:
+ X-MS-Exchange-CrossTenant-FromEntityHeader:
+ X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
+ X-MS-Exchange-CrossTenant-UserPrincipalName:
+ X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-OriginatorOrg;
+ b=lfLiMA3CiB6UStXih02Q7/sM1LzGjqSkBcC7IbuYxTNsfhzh4a18/PEqW0hmCiOOL
+ 2ApIraaB2CSwn72593RJsLQ1yAq/k2geIVXSjBdV9/uek63Wggcqvdb20KLqlvyzXR
+ hFQ/OvsOoTQkSaGkKjGTG6jcj0QZ1kEbqco3LMQA0xE4bQFs4EZtb1ufvihGr+winl
+ szUJJ34sQCWZcI7NdeK1Q+lriYYsjAGMwW1XjYK+u9sDy32eKYHt1+xXmhfzOo+XfT
+ XrmJxcdpkvNLQqPOLUf/zzNr5V/u5evTgq59UDLh1aWc9vjjrAlA60soiBhRG/NZpz
+ oV/lWvGHm0Xhw==
+Subject: Re: [Nouveau] [PATCH] nouveau: fix the start/end range for migration
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,98 +131,54 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Dave Airlie <airlied@linux.ie>, ML nouveau <nouveau@lists.freedesktop.org>,
- linux-kernel <linux-kernel@vger.kernel.org>,
- dri-devel <dri-devel@lists.freedesktop.org>,
- Linux-Next <linux-next@vger.kernel.org>, Ben Skeggs <bskeggs@redhat.com>,
- Daniel Vetter <daniel@ffwll.ch>
+Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ Ben Skeggs <bskeggs@redhat.com>, Christoph Hellwig <hch@lst.de>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Mon, Aug 31, 2020 at 7:30 AM Ben Skeggs <skeggsb@gmail.com> wrote:
->
-> On Tue, 25 Aug 2020 at 17:21, Alexander Kapshuk
-> <alexander.kapshuk@gmail.com> wrote:
-> >
-> > Since upgrading to linux-next based on 5.9.0-rc1 and 5.9.0-rc2 I have
-> > had my mouse pointer disappear soon after logging in, and I have
-> > observed the system freezing temporarily when clicking on objects and
-> > when typing text.
-> > I have also found records of push buffer errors in dmesg output:
-> > [ 6625.450394] nouveau 0000:01:00.0: disp: ERROR 1 [PUSHBUFFER_ERR] 02
-> > [] chid 0 mthd 0000 data 00000400
-> Hey,
->
-> Yeah, I'm aware of this.  Lyude and I have both seen it, but it's been
-> very painful to track down to what's actually causing it so far.  It
-> likely is the commit you mentioned that's at fault, and I'm still
-> working to find a proper solution before I revert it.
->
-> Ben.
->
-> >
-> > I tried setting CONFIG_NOUVEAU_DEBUG=5 (tracing) to try and collect
-> > further debug info, but nothing caught the eye.
-> >
-> > The error message in question comes from nv50_disp_intr_error in
-> > drivers/gpu/drm/nouveau/nvkm/engine/disp/nv50.c:613,645.
-> > And nv50_disp_intr_error is called from nv50_disp_intr in the
-> > following while block:
-> > drivers/gpu/drm/nouveau/nvkm/engine/disp/nv50.c:647,658
-> > void
-> > nv50_disp_intr(struct nv50_disp *disp)
-> > {
-> >         struct nvkm_device *device = disp->base.engine.subdev.device;
-> >         u32 intr0 = nvkm_rd32(device, 0x610020);
-> >         u32 intr1 = nvkm_rd32(device, 0x610024);
-> >
-> >         while (intr0 & 0x001f0000) {
-> >                 u32 chid = __ffs(intr0 & 0x001f0000) - 16;
-> >                 nv50_disp_intr_error(disp, chid);
-> >                 intr0 &= ~(0x00010000 << chid);
-> >         }
-> > ...
-> > }
-> >
-> > Could this be in any way related to this series of commits?
-> > commit 0a96099691c8cd1ac0744ef30b6846869dc2b566
-> > Author: Ben Skeggs <bskeggs@redhat.com>
-> > Date:   Tue Jul 21 11:34:07 2020 +1000
-> >
-> >     drm/nouveau/kms/nv50-: implement proper push buffer control logic
-> >
-> >     We had a, what was supposed to be temporary, hack in the KMS code where we'd
-> >     completely drain an EVO/NVD channel's push buffer when wrapping to the start
-> >     again, instead of treating it as a ring buffer.
-> >
-> >     Let's fix that, finally.
-> >
-> >     Signed-off-by: Ben Skeggs <bskeggs@redhat.com>
-> >
-> > Here are my GPU details:
-> > 01:00.0 VGA compatible controller: NVIDIA Corporation GT216 [GeForce
-> > 210] (rev a1)
-> >         Subsystem: Micro-Star International Co., Ltd. [MSI] Device 8a93
-> >         Kernel driver in use: nouveau
-> >
-> > The last linux-next kernel I built where the problem reported does not
-> > manifest itself is 5.8.0-rc6-next-20200720.
-> >
-> > I would appreciate being given any pointers on how to further debug this.
-> > Or is git bisect the only way to proceed with this?
-> >
-> > Thanks.
-> > _______________________________________________
-> > dri-devel mailing list
-> > dri-devel@lists.freedesktop.org
-> > https://lists.freedesktop.org/mailman/listinfo/dri-devel
+On Thu, Aug 27, 2020 at 02:37:44PM -0700, Ralph Campbell wrote:
+> The user level OpenCL code shouldn't have to align start and end
+> addresses to a page boundary. That is better handled in the nouveau
+> driver. The npages field is also redundant since it can be computed
+> from the start and end addresses.
+> 
+> Signed-off-by: Ralph Campbell <rcampbell@nvidia.com>
+> 
+> This is for Ben Skegg's nouveau tree.
+> 
+> I have been working with Karol Herbst on the OpenCL mesa changes for
+> nouveau which will be merged upstream soon.
+> With or without those changes, the user visible effect of this patch
+> only extends the range by one page (round up vs. round down to page
+> boundary).
+> 
+>  drivers/gpu/drm/nouveau/nouveau_svm.c | 17 ++++++-----------
+>  1 file changed, 6 insertions(+), 11 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_svm.c b/drivers/gpu/drm/nouveau/nouveau_svm.c
+> index 2df1c0460559..888aa0908c5a 100644
+> +++ b/drivers/gpu/drm/nouveau/nouveau_svm.c
+> @@ -105,11 +105,14 @@ nouveau_svmm_bind(struct drm_device *dev, void *data,
+>  	struct nouveau_cli *cli = nouveau_cli(file_priv);
+>  	struct drm_nouveau_svm_bind *args = data;
+>  	unsigned target, cmd, priority;
+> -	unsigned long addr, end, size;
+> +	unsigned long addr, end;
+>  	struct mm_struct *mm;
+>  
+>  	args->va_start &= PAGE_MASK;
+> -	args->va_end &= PAGE_MASK;
+> +	args->va_end = ALIGN(args->va_end, PAGE_SIZE);
+> +	/* If no end address is given, assume a single page. */
+> +	if (args->va_end == 0)
+> +		args->va_end = args->va_start + PAGE_SIZE;
 
-Thanks a lot for getting back to me about this.
-Please let me know if there's anything else I can do to help track this down.
+That is really weird, how is it useful for the kernel to map a region
+of unknown size and alignment to the GPU?
 
-Alexander.
+Jason
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
