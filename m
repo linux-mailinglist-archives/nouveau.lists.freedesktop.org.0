@@ -2,89 +2,38 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 841DD258E0B
-	for <lists+nouveau@lfdr.de>; Tue,  1 Sep 2020 14:15:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 80D11258E0A
+	for <lists+nouveau@lfdr.de>; Tue,  1 Sep 2020 14:15:01 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id BDCD96E16B;
-	Tue,  1 Sep 2020 12:14:59 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 522086E053;
+	Tue,  1 Sep 2020 12:14:58 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wr1-x441.google.com (mail-wr1-x441.google.com
- [IPv6:2a00:1450:4864:20::441])
- by gabe.freedesktop.org (Postfix) with ESMTPS id DB9D26E82A
- for <nouveau@lists.freedesktop.org>; Tue,  1 Sep 2020 07:40:47 +0000 (UTC)
-Received: by mail-wr1-x441.google.com with SMTP id z4so342826wrr.4
- for <nouveau@lists.freedesktop.org>; Tue, 01 Sep 2020 00:40:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
- h=date:from:to:cc:subject:message-id:mail-followup-to:references
- :mime-version:content-disposition:in-reply-to;
- bh=0dMDoLW4/V0CBT2qh5v4hL6ui4LKLRgE58vB9ic/W/M=;
- b=E5dZ6NznDCWIxvwwKA7tc1MIEb7ur7yXJKyAzLIRFQ0XwrMQSSFwSNiVkFhqz26CQL
- T3WZ3hmK4oUAUajJ3GKCXnJIEuemkYeQ/d6OJzuyMBHa36DsUR/ymwy6eCPbJSSJMOLv
- L100dPpY/BW79sCQrexf9ceA6WIxeIcEm402E=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id
- :mail-followup-to:references:mime-version:content-disposition
- :in-reply-to;
- bh=0dMDoLW4/V0CBT2qh5v4hL6ui4LKLRgE58vB9ic/W/M=;
- b=JUxgZ4MUfalX9lN/cOhdtxc1GXmG3QoIQiLpJ/L+RsBZaqlKkeFHXZy6SFNv6uvxH4
- vMh+U2yLPHLAQaxgxEkT68lPDwGACBR1BD2c3nenzCb+RKakxj60WhfqecPlHzaZ7FV4
- wP95a7dE8n66V4sojxcb/QWIqCVfzMKQAPqs/bim1hPaWnfpuXiEuFX5NfMFRORLnyd4
- N14ItLutpGtA6iObj3dc2O/evkKCTqkyRrYD8osRF20ICDPi+lFhzCjXjt42bF/8sU+6
- fHtp3mFl2q8k+bwfLJfLGqbWyi/UxSQqPmG8V/4MCfrphObWeVl/82PGuJb6wOnIU0z/
- 4q4g==
-X-Gm-Message-State: AOAM531NeuuLjJQBJdy6ryT5WQYuSOgphPIlffkmPHAeDX+/zYEVQ/M6
- oMlEvi74VRae7dJvCQVIBi0mag==
-X-Google-Smtp-Source: ABdhPJzCV7lPfbJCoArzY1LN2/bWPamRPE0OsWfPisRFktCHPs3u7sq0+hzW7bOAp2HrZVmyNnX6ww==
-X-Received: by 2002:adf:dfc3:: with SMTP id q3mr408886wrn.238.1598946046446;
- Tue, 01 Sep 2020 00:40:46 -0700 (PDT)
-Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
- by smtp.gmail.com with ESMTPSA id h13sm737218wrx.17.2020.09.01.00.40.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 01 Sep 2020 00:40:45 -0700 (PDT)
-Date: Tue, 1 Sep 2020 09:40:43 +0200
-From: Daniel Vetter <daniel@ffwll.ch>
-To: Gerd Hoffmann <kraxel@redhat.com>
-Message-ID: <20200901074043.GT2352366@phenom.ffwll.local>
-Mail-Followup-To: Gerd Hoffmann <kraxel@redhat.com>,
- dri-devel@lists.freedesktop.org, christian.koenig@amd.com,
- Alex Deucher <alexander.deucher@amd.com>,
- David Airlie <airlied@linux.ie>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>,
- Thomas Zimmermann <tzimmermann@suse.de>,
- Lucas Stach <l.stach@pengutronix.de>,
- Russell King <linux+etnaviv@armlinux.org.uk>,
- Christian Gmeiner <christian.gmeiner@gmail.com>,
- Rob Clark <robdclark@gmail.com>, Sean Paul <sean@poorly.run>,
- Ben Skeggs <bskeggs@redhat.com>, Sandy Huang <hjc@rock-chips.com>,
- Heiko =?iso-8859-1?Q?St=FCbner?= <heiko@sntech.de>,
- Thierry Reding <thierry.reding@gmail.com>,
- Jonathan Hunter <jonathanh@nvidia.com>,
- Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
- "open list:RADEON and AMDGPU DRM DRIVERS" <amd-gfx@lists.freedesktop.org>,
- open list <linux-kernel@vger.kernel.org>,
- "moderated list:DRM DRIVERS FOR VIVANTE GPU IP"
- <etnaviv@lists.freedesktop.org>, 
- "open list:DRM DRIVER FOR MSM ADRENO GPU" <linux-arm-msm@vger.kernel.org>,
- "open list:DRM DRIVER FOR MSM ADRENO GPU" <freedreno@lists.freedesktop.org>,
- "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
- <nouveau@lists.freedesktop.org>, 
- "moderated list:ARM/Rockchip SoC support"
- <linux-arm-kernel@lists.infradead.org>, 
- "open list:ARM/Rockchip SoC support" <linux-rockchip@lists.infradead.org>,
- "open list:DRM DRIVERS FOR NVIDIA TEGRA" <linux-tegra@vger.kernel.org>,
- "moderated list:DRM DRIVERS FOR XEN" <xen-devel@lists.xenproject.org>
-References: <20200818092017.26290-1-kraxel@redhat.com>
- <20200818092017.26290-2-kraxel@redhat.com>
+Received: from verein.lst.de (verein.lst.de [213.95.11.211])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id AF7B86E063
+ for <nouveau@lists.freedesktop.org>; Tue,  1 Sep 2020 11:06:22 +0000 (UTC)
+Received: by verein.lst.de (Postfix, from userid 2407)
+ id 508E268B05; Tue,  1 Sep 2020 13:06:18 +0200 (CEST)
+Date: Tue, 1 Sep 2020 13:06:17 +0200
+From: Christoph Hellwig <hch@lst.de>
+To: Tomasz Figa <tfiga@chromium.org>
+Message-ID: <20200901110617.GA13232@lst.de>
+References: <20200819065555.1802761-1-hch@lst.de>
+ <20200819065555.1802761-6-hch@lst.de>
+ <CAAFQd5COLxjydDYrfx47ht8tj-aNPiaVnC+WyQA7nvpW4gs=ww@mail.gmail.com>
+ <20200819135454.GA17098@lst.de>
+ <CAAFQd5BuXP7t3d-Rwft85j=KTyXq7y4s24mQxLr=VoY9krEGZw@mail.gmail.com>
+ <20200820044347.GA4533@lst.de> <20200820052004.GA5305@lst.de>
+ <CAAFQd5CFiA2WBaaPQ9ezvMjYZfNw37c42UEy9Pk7kJyCi1mLzQ@mail.gmail.com>
+ <20200820165407.GD12693@lst.de>
+ <CAAFQd5D=NzgjosB51-O_cH27a8V6CPgCfaPSfHHz7nKJPbazgg@mail.gmail.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200818092017.26290-2-kraxel@redhat.com>
-X-Operating-System: Linux phenom 5.7.0-1-amd64 
+In-Reply-To: <CAAFQd5D=NzgjosB51-O_cH27a8V6CPgCfaPSfHHz7nKJPbazgg@mail.gmail.com>
+User-Agent: Mutt/1.5.17 (2007-11-01)
 X-Mailman-Approved-At: Tue, 01 Sep 2020 12:14:57 +0000
-Subject: Re: [Nouveau] [PATCH v2 1/2] drm: allow limiting the scatter list
- size.
+Subject: Re: [Nouveau] [PATCH 05/28] media/v4l2: remove
+ V4L2-FLAG-MEMORY-NON-CONSISTENT
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -96,318 +45,48 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Heiko =?iso-8859-1?Q?St=FCbner?= <heiko@sntech.de>,
- David Airlie <airlied@linux.ie>,
- "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
- <nouveau@lists.freedesktop.org>, dri-devel@lists.freedesktop.org,
- Sandy Huang <hjc@rock-chips.com>, Thierry Reding <thierry.reding@gmail.com>,
- Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
- "open list:RADEON and AMDGPU DRM DRIVERS" <amd-gfx@lists.freedesktop.org>,
- "open list:ARM/Rockchip SoC support" <linux-rockchip@lists.infradead.org>,
- Ben Skeggs <bskeggs@redhat.com>, Russell King <linux+etnaviv@armlinux.org.uk>,
- "moderated list:DRM DRIVERS FOR XEN" <xen-devel@lists.xenproject.org>,
- Daniel Vetter <daniel@ffwll.ch>,
- "open list:DRM DRIVER FOR MSM ADRENO GPU" <linux-arm-msm@vger.kernel.org>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- "moderated list:DRM DRIVERS FOR VIVANTE GPU IP"
- <etnaviv@lists.freedesktop.org>, Maxime Ripard <mripard@kernel.org>,
- Christian Gmeiner <christian.gmeiner@gmail.com>,
- "open list:DRM DRIVERS FOR NVIDIA TEGRA" <linux-tegra@vger.kernel.org>,
- Sean Paul <sean@poorly.run>, "moderated list:ARM/Rockchip SoC support"
- <linux-arm-kernel@lists.infradead.org>,
- open list <linux-kernel@vger.kernel.org>, Rob Clark <robdclark@gmail.com>,
- Alex Deucher <alexander.deucher@amd.com>,
- "open list:DRM DRIVER FOR MSM ADRENO GPU" <freedreno@lists.freedesktop.org>,
- christian.koenig@amd.com, Lucas Stach <l.stach@pengutronix.de>
+Cc: alsa-devel@alsa-project.org, linux-ia64@vger.kernel.org,
+ Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+ nouveau@lists.freedesktop.org, linux-nvme@lists.infradead.org,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ "James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>,
+ linux-mm@kvack.org, Christoph Hellwig <hch@lst.de>,
+ linux-samsung-soc <linux-samsung-soc@vger.kernel.org>,
+ Joonyoung Shim <jy0922.shim@samsung.com>, linux-scsi@vger.kernel.org,
+ "list@263.net:IOMMU DRIVERS <iommu@lists.linux-foundation.org>,
+ Joerg Roedel <joro@8bytes.org>, " <iommu@lists.linux-foundation.org>,
+ Ben Skeggs <bskeggs@redhat.com>, Matt Porter <mporter@kernel.crashing.org>,
+ Linux Media Mailing List <linux-media@vger.kernel.org>,
+ Tom Lendacky <thomas.lendacky@amd.com>, Pawel Osciak <pawel@osciak.com>,
+ Mauro Carvalho Chehab <mchehab@kernel.org>,
+ "list@263.net:IOMMU DRIVERS <iommu@lists.linux-foundation.org>,
+ Joerg Roedel <joro@8bytes.org>, " <linux-arm-kernel@lists.infradead.org>,
+ Thomas Bogendoerfer <tsbogend@alpha.franken.de>, linux-parisc@vger.kernel.org,
+ netdev@vger.kernel.org, Seung-Woo Kim <sw0312.kim@samsung.com>,
+ linux-mips@vger.kernel.org, Kyungmin Park <kyungmin.park@samsung.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, Aug 18, 2020 at 11:20:16AM +0200, Gerd Hoffmann wrote:
-> Add max_segment argument to drm_prime_pages_to_sg().  When set pass it
-> through to the __sg_alloc_table_from_pages() call, otherwise use
-> SCATTERLIST_MAX_SEGMENT.
+On Thu, Aug 20, 2020 at 07:33:48PM +0200, Tomasz Figa wrote:
+> > It wasn't meant to be too insulting, but I found this out when trying
+> > to figure out how to just disable it.  But it also ends up using
+> > the actual dma attr flags for it's own consistency checks, so just
+> > not setting the flag did not turn out to work that easily.
+> >
 > 
-> Also add max_segment field to drm driver and pass it to
-> drm_prime_pages_to_sg() calls in drivers and helpers.
-> 
-> v2: place max_segment in drm driver not gem object.
-> 
-> Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
-> ---
->  include/drm/drm_device.h                    |  8 ++++++++
->  include/drm/drm_prime.h                     |  3 ++-
->  drivers/gpu/drm/amd/amdgpu/amdgpu_dma_buf.c |  3 ++-
->  drivers/gpu/drm/drm_gem_shmem_helper.c      |  3 ++-
->  drivers/gpu/drm/drm_prime.c                 | 10 +++++++---
->  drivers/gpu/drm/etnaviv/etnaviv_gem.c       |  3 ++-
->  drivers/gpu/drm/etnaviv/etnaviv_gem_prime.c |  3 ++-
->  drivers/gpu/drm/msm/msm_gem.c               |  3 ++-
->  drivers/gpu/drm/msm/msm_gem_prime.c         |  3 ++-
->  drivers/gpu/drm/nouveau/nouveau_prime.c     |  3 ++-
->  drivers/gpu/drm/radeon/radeon_prime.c       |  3 ++-
->  drivers/gpu/drm/rockchip/rockchip_drm_gem.c |  6 ++++--
->  drivers/gpu/drm/tegra/gem.c                 |  3 ++-
->  drivers/gpu/drm/vgem/vgem_drv.c             |  3 ++-
->  drivers/gpu/drm/xen/xen_drm_front_gem.c     |  3 ++-
->  15 files changed, 43 insertions(+), 17 deletions(-)
-> 
-> diff --git a/include/drm/drm_device.h b/include/drm/drm_device.h
-> index 0988351d743c..47cb547a8115 100644
-> --- a/include/drm/drm_device.h
-> +++ b/include/drm/drm_device.h
-> @@ -329,6 +329,14 @@ struct drm_device {
->  	 */
->  	struct drm_fb_helper *fb_helper;
->  
-> +	/**
-> +	 * @max_segment:
-> +	 *
-> +	 * Max size for scatter list segments.  When unset the default
-> +	 * (SCATTERLIST_MAX_SEGMENT) is used.
-> +	 */
-> +	size_t max_segment;
+> Yes, sadly the videobuf2 ended up becoming quite counterintuitive
+> after growing for the long years and that is reflected in the design
+> of this feature as well. I think we need to do something about it.
 
-Is there no better place for this then "at the bottom"? drm_device is a
-huge structure, piling stuff up randomly doesn't make it better :-)
+So I'm about to respin the series and wonder how we should proceed.
+I've failed to come up with a clean patch to keep the flag and make
+it a no-op.  Can you or your team give it a spin?
 
-I think ideally we'd have a gem substruct like we have on the modeset side
-at least.
--Daniel
-
-> +
->  	/* Everything below here is for legacy driver, never use! */
->  	/* private: */
->  #if IS_ENABLED(CONFIG_DRM_LEGACY)
-> diff --git a/include/drm/drm_prime.h b/include/drm/drm_prime.h
-> index 9af7422b44cf..2c3689435cb4 100644
-> --- a/include/drm/drm_prime.h
-> +++ b/include/drm/drm_prime.h
-> @@ -88,7 +88,8 @@ void drm_gem_dmabuf_vunmap(struct dma_buf *dma_buf, void *vaddr);
->  int drm_gem_prime_mmap(struct drm_gem_object *obj, struct vm_area_struct *vma);
->  int drm_gem_dmabuf_mmap(struct dma_buf *dma_buf, struct vm_area_struct *vma);
->  
-> -struct sg_table *drm_prime_pages_to_sg(struct page **pages, unsigned int nr_pages);
-> +struct sg_table *drm_prime_pages_to_sg(struct page **pages, unsigned int nr_pages,
-> +				       size_t max_segment);
->  struct dma_buf *drm_gem_prime_export(struct drm_gem_object *obj,
->  				     int flags);
->  
-> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_dma_buf.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_dma_buf.c
-> index 519ce4427fce..8f6a647757e7 100644
-> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_dma_buf.c
-> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_dma_buf.c
-> @@ -303,7 +303,8 @@ static struct sg_table *amdgpu_dma_buf_map(struct dma_buf_attachment *attach,
->  	switch (bo->tbo.mem.mem_type) {
->  	case TTM_PL_TT:
->  		sgt = drm_prime_pages_to_sg(bo->tbo.ttm->pages,
-> -					    bo->tbo.num_pages);
-> +					    bo->tbo.num_pages,
-> +					    obj->dev->max_segment);
->  		if (IS_ERR(sgt))
->  			return sgt;
->  
-> diff --git a/drivers/gpu/drm/drm_gem_shmem_helper.c b/drivers/gpu/drm/drm_gem_shmem_helper.c
-> index 4b7cfbac4daa..8f47b41b0b2f 100644
-> --- a/drivers/gpu/drm/drm_gem_shmem_helper.c
-> +++ b/drivers/gpu/drm/drm_gem_shmem_helper.c
-> @@ -656,7 +656,8 @@ struct sg_table *drm_gem_shmem_get_sg_table(struct drm_gem_object *obj)
->  
->  	WARN_ON(shmem->base.import_attach);
->  
-> -	return drm_prime_pages_to_sg(shmem->pages, obj->size >> PAGE_SHIFT);
-> +	return drm_prime_pages_to_sg(shmem->pages, obj->size >> PAGE_SHIFT,
-> +				     obj->dev->max_segment);
->  }
->  EXPORT_SYMBOL_GPL(drm_gem_shmem_get_sg_table);
->  
-> diff --git a/drivers/gpu/drm/drm_prime.c b/drivers/gpu/drm/drm_prime.c
-> index 1693aa7c14b5..27c783fd6633 100644
-> --- a/drivers/gpu/drm/drm_prime.c
-> +++ b/drivers/gpu/drm/drm_prime.c
-> @@ -802,7 +802,8 @@ static const struct dma_buf_ops drm_gem_prime_dmabuf_ops =  {
->   *
->   * This is useful for implementing &drm_gem_object_funcs.get_sg_table.
->   */
-> -struct sg_table *drm_prime_pages_to_sg(struct page **pages, unsigned int nr_pages)
-> +struct sg_table *drm_prime_pages_to_sg(struct page **pages, unsigned int nr_pages,
-> +				       size_t max_segment)
->  {
->  	struct sg_table *sg = NULL;
->  	int ret;
-> @@ -813,8 +814,11 @@ struct sg_table *drm_prime_pages_to_sg(struct page **pages, unsigned int nr_page
->  		goto out;
->  	}
->  
-> -	ret = sg_alloc_table_from_pages(sg, pages, nr_pages, 0,
-> -				nr_pages << PAGE_SHIFT, GFP_KERNEL);
-> +	if (max_segment == 0 || max_segment > SCATTERLIST_MAX_SEGMENT)
-> +		max_segment = SCATTERLIST_MAX_SEGMENT;
-> +	ret = __sg_alloc_table_from_pages(sg, pages, nr_pages, 0,
-> +					  nr_pages << PAGE_SHIFT,
-> +					  max_segment, GFP_KERNEL);
->  	if (ret)
->  		goto out;
->  
-> diff --git a/drivers/gpu/drm/etnaviv/etnaviv_gem.c b/drivers/gpu/drm/etnaviv/etnaviv_gem.c
-> index f06e19e7be04..90654246b335 100644
-> --- a/drivers/gpu/drm/etnaviv/etnaviv_gem.c
-> +++ b/drivers/gpu/drm/etnaviv/etnaviv_gem.c
-> @@ -103,7 +103,8 @@ struct page **etnaviv_gem_get_pages(struct etnaviv_gem_object *etnaviv_obj)
->  		int npages = etnaviv_obj->base.size >> PAGE_SHIFT;
->  		struct sg_table *sgt;
->  
-> -		sgt = drm_prime_pages_to_sg(etnaviv_obj->pages, npages);
-> +		sgt = drm_prime_pages_to_sg(etnaviv_obj->pages, npages,
-> +					    etnaviv_obj->base.dev->max_segment);
->  		if (IS_ERR(sgt)) {
->  			dev_err(dev->dev, "failed to allocate sgt: %ld\n",
->  				PTR_ERR(sgt));
-> diff --git a/drivers/gpu/drm/etnaviv/etnaviv_gem_prime.c b/drivers/gpu/drm/etnaviv/etnaviv_gem_prime.c
-> index 6d9e5c3c4dd5..f65be0fffb3d 100644
-> --- a/drivers/gpu/drm/etnaviv/etnaviv_gem_prime.c
-> +++ b/drivers/gpu/drm/etnaviv/etnaviv_gem_prime.c
-> @@ -19,7 +19,8 @@ struct sg_table *etnaviv_gem_prime_get_sg_table(struct drm_gem_object *obj)
->  	if (WARN_ON(!etnaviv_obj->pages))  /* should have already pinned! */
->  		return ERR_PTR(-EINVAL);
->  
-> -	return drm_prime_pages_to_sg(etnaviv_obj->pages, npages);
-> +	return drm_prime_pages_to_sg(etnaviv_obj->pages, npages,
-> +				     obj->dev->max_segment);
->  }
->  
->  void *etnaviv_gem_prime_vmap(struct drm_gem_object *obj)
-> diff --git a/drivers/gpu/drm/msm/msm_gem.c b/drivers/gpu/drm/msm/msm_gem.c
-> index b2f49152b4d4..dbf1437c3dac 100644
-> --- a/drivers/gpu/drm/msm/msm_gem.c
-> +++ b/drivers/gpu/drm/msm/msm_gem.c
-> @@ -126,7 +126,8 @@ static struct page **get_pages(struct drm_gem_object *obj)
->  
->  		msm_obj->pages = p;
->  
-> -		msm_obj->sgt = drm_prime_pages_to_sg(p, npages);
-> +		msm_obj->sgt = drm_prime_pages_to_sg(p, npages,
-> +						     obj->dev->max_segment);
->  		if (IS_ERR(msm_obj->sgt)) {
->  			void *ptr = ERR_CAST(msm_obj->sgt);
->  
-> diff --git a/drivers/gpu/drm/msm/msm_gem_prime.c b/drivers/gpu/drm/msm/msm_gem_prime.c
-> index d7c8948427fe..6337cd1f9428 100644
-> --- a/drivers/gpu/drm/msm/msm_gem_prime.c
-> +++ b/drivers/gpu/drm/msm/msm_gem_prime.c
-> @@ -19,7 +19,8 @@ struct sg_table *msm_gem_prime_get_sg_table(struct drm_gem_object *obj)
->  	if (WARN_ON(!msm_obj->pages))  /* should have already pinned! */
->  		return NULL;
->  
-> -	return drm_prime_pages_to_sg(msm_obj->pages, npages);
-> +	return drm_prime_pages_to_sg(msm_obj->pages, npages,
-> +				     obj->dev->max_segment);
->  }
->  
->  void *msm_gem_prime_vmap(struct drm_gem_object *obj)
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_prime.c b/drivers/gpu/drm/nouveau/nouveau_prime.c
-> index bae6a3eccee0..dd0ff032ae16 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_prime.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_prime.c
-> @@ -32,7 +32,8 @@ struct sg_table *nouveau_gem_prime_get_sg_table(struct drm_gem_object *obj)
->  	struct nouveau_bo *nvbo = nouveau_gem_object(obj);
->  	int npages = nvbo->bo.num_pages;
->  
-> -	return drm_prime_pages_to_sg(nvbo->bo.ttm->pages, npages);
-> +	return drm_prime_pages_to_sg(nvbo->bo.ttm->pages, npages,
-> +				     obj->dev->max_segment);
->  }
->  
->  void *nouveau_gem_prime_vmap(struct drm_gem_object *obj)
-> diff --git a/drivers/gpu/drm/radeon/radeon_prime.c b/drivers/gpu/drm/radeon/radeon_prime.c
-> index b906e8fbd5f3..61a3fe147489 100644
-> --- a/drivers/gpu/drm/radeon/radeon_prime.c
-> +++ b/drivers/gpu/drm/radeon/radeon_prime.c
-> @@ -36,7 +36,8 @@ struct sg_table *radeon_gem_prime_get_sg_table(struct drm_gem_object *obj)
->  	struct radeon_bo *bo = gem_to_radeon_bo(obj);
->  	int npages = bo->tbo.num_pages;
->  
-> -	return drm_prime_pages_to_sg(bo->tbo.ttm->pages, npages);
-> +	return drm_prime_pages_to_sg(bo->tbo.ttm->pages, npages,
-> +				     obj->dev->max_segment);
->  }
->  
->  void *radeon_gem_prime_vmap(struct drm_gem_object *obj)
-> diff --git a/drivers/gpu/drm/rockchip/rockchip_drm_gem.c b/drivers/gpu/drm/rockchip/rockchip_drm_gem.c
-> index b9275ba7c5a5..5ddb2d31a607 100644
-> --- a/drivers/gpu/drm/rockchip/rockchip_drm_gem.c
-> +++ b/drivers/gpu/drm/rockchip/rockchip_drm_gem.c
-> @@ -85,7 +85,8 @@ static int rockchip_gem_get_pages(struct rockchip_gem_object *rk_obj)
->  
->  	rk_obj->num_pages = rk_obj->base.size >> PAGE_SHIFT;
->  
-> -	rk_obj->sgt = drm_prime_pages_to_sg(rk_obj->pages, rk_obj->num_pages);
-> +	rk_obj->sgt = drm_prime_pages_to_sg(rk_obj->pages, rk_obj->num_pages,
-> +					    rk_obj->base.dev->max_segment);
->  	if (IS_ERR(rk_obj->sgt)) {
->  		ret = PTR_ERR(rk_obj->sgt);
->  		goto err_put_pages;
-> @@ -442,7 +443,8 @@ struct sg_table *rockchip_gem_prime_get_sg_table(struct drm_gem_object *obj)
->  	int ret;
->  
->  	if (rk_obj->pages)
-> -		return drm_prime_pages_to_sg(rk_obj->pages, rk_obj->num_pages);
-> +		return drm_prime_pages_to_sg(rk_obj->pages, rk_obj->num_pages,
-> +					     obj->dev->max_segment);
->  
->  	sgt = kzalloc(sizeof(*sgt), GFP_KERNEL);
->  	if (!sgt)
-> diff --git a/drivers/gpu/drm/tegra/gem.c b/drivers/gpu/drm/tegra/gem.c
-> index 723df142a981..a0abde747e95 100644
-> --- a/drivers/gpu/drm/tegra/gem.c
-> +++ b/drivers/gpu/drm/tegra/gem.c
-> @@ -284,7 +284,8 @@ static int tegra_bo_get_pages(struct drm_device *drm, struct tegra_bo *bo)
->  
->  	bo->num_pages = bo->gem.size >> PAGE_SHIFT;
->  
-> -	bo->sgt = drm_prime_pages_to_sg(bo->pages, bo->num_pages);
-> +	bo->sgt = drm_prime_pages_to_sg(bo->pages, bo->num_pages,
-> +					bo->gem.dev->max_segment);
->  	if (IS_ERR(bo->sgt)) {
->  		err = PTR_ERR(bo->sgt);
->  		goto put_pages;
-> diff --git a/drivers/gpu/drm/vgem/vgem_drv.c b/drivers/gpu/drm/vgem/vgem_drv.c
-> index 313339bbff90..045461dc6319 100644
-> --- a/drivers/gpu/drm/vgem/vgem_drv.c
-> +++ b/drivers/gpu/drm/vgem/vgem_drv.c
-> @@ -321,7 +321,8 @@ static struct sg_table *vgem_prime_get_sg_table(struct drm_gem_object *obj)
->  {
->  	struct drm_vgem_gem_object *bo = to_vgem_bo(obj);
->  
-> -	return drm_prime_pages_to_sg(bo->pages, bo->base.size >> PAGE_SHIFT);
-> +	return drm_prime_pages_to_sg(bo->pages, bo->base.size >> PAGE_SHIFT,
-> +				     obj->dev->max_segment);
->  }
->  
->  static struct drm_gem_object* vgem_prime_import(struct drm_device *dev,
-> diff --git a/drivers/gpu/drm/xen/xen_drm_front_gem.c b/drivers/gpu/drm/xen/xen_drm_front_gem.c
-> index f0b85e094111..61a8c1a9fb04 100644
-> --- a/drivers/gpu/drm/xen/xen_drm_front_gem.c
-> +++ b/drivers/gpu/drm/xen/xen_drm_front_gem.c
-> @@ -179,7 +179,8 @@ struct sg_table *xen_drm_front_gem_get_sg_table(struct drm_gem_object *gem_obj)
->  	if (!xen_obj->pages)
->  		return ERR_PTR(-ENOMEM);
->  
-> -	return drm_prime_pages_to_sg(xen_obj->pages, xen_obj->num_pages);
-> +	return drm_prime_pages_to_sg(xen_obj->pages, xen_obj->num_pages,
-> +				     gem_obj->dev->max_segment);
->  }
->  
->  struct drm_gem_object *
-> -- 
-> 2.18.4
-> 
-
--- 
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
+Also I wonder if the flag should be renamed from NON_CONSISTENT
+to NON_COHERENT - the consistent thing is a weird wart from the times
+the old PCI DMA API that is mostly gone now.
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
