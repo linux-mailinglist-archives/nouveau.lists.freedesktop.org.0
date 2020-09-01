@@ -1,43 +1,35 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 89A93259E34
-	for <lists+nouveau@lfdr.de>; Tue,  1 Sep 2020 20:38:27 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3A818259E27
+	for <lists+nouveau@lfdr.de>; Tue,  1 Sep 2020 20:38:13 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id F06456E8DC;
-	Tue,  1 Sep 2020 18:38:10 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E55CB6E8C6;
+	Tue,  1 Sep 2020 18:38:08 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from casper.infradead.org (casper.infradead.org
- [IPv6:2001:8b0:10b:1236::1])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C3C306E44B
- for <nouveau@lists.freedesktop.org>; Tue,  1 Sep 2020 15:06:27 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
- References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=TQLSoH0xPQ3SjLQOZr/hg2RXQ7cUeDg7DQ8wAuWlnPY=; b=jZd0L7aTlxDR248PzMNlW27wkh
- U5RPUon6By39MJmZf0ctObEI9pE6t9/Rga1EYLZwsrKYL9QKBtSzQY4MensUyVRxNASrX33Pl6ldS
- zbXRi9/lO7DOPWfK1zGncHVRI29r2AMThiNWFyK5BL0hKgOTicHc7ljMttBaeAT085JBU3dfIIkhB
- i2DXKzLWz59dGh9/sp69/KBXolj/SaGGtRWihBzzh4x4klX60zoq5kB/U7R9cVPhcDeNn5gerBNkJ
- glYPLWys77T11Ln0t8j7NNm/ySZOphISgDrR6WnPzsdkVah1bi4+EBuWuom6AkSHomcEJms18cORZ
- 5mRx4n8A==;
-Received: from willy by casper.infradead.org with local (Exim 4.92.3 #3 (Red
- Hat Linux)) id 1kD7r8-0008OT-59; Tue, 01 Sep 2020 15:05:54 +0000
-Date: Tue, 1 Sep 2020 16:05:54 +0100
-From: Matthew Wilcox <willy@infradead.org>
-To: James Bottomley <James.Bottomley@hansenpartnership.com>
-Message-ID: <20200901150554.GN14765@casper.infradead.org>
+Received: from elvis.franken.de (elvis.franken.de [193.175.24.41])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 22E186E442
+ for <nouveau@lists.freedesktop.org>; Tue,  1 Sep 2020 15:32:20 +0000 (UTC)
+Received: from uucp (helo=alpha)
+ by elvis.franken.de with local-bsmtp (Exim 3.36 #1)
+ id 1kD8Gf-0002rq-00; Tue, 01 Sep 2020 17:32:17 +0200
+Received: by alpha.franken.de (Postfix, from userid 1000)
+ id 92E50C0E4C; Tue,  1 Sep 2020 17:22:09 +0200 (CEST)
+Date: Tue, 1 Sep 2020 17:22:09 +0200
+From: Thomas Bogendoerfer <tsbogend@alpha.franken.de>
+To: Christoph Hellwig <hch@lst.de>
+Message-ID: <20200901152209.GA14288@alpha.franken.de>
 References: <20200819065555.1802761-1-hch@lst.de>
- <20200819065555.1802761-8-hch@lst.de>
- <1598971960.4238.5.camel@HansenPartnership.com>
+ <20200819065555.1802761-23-hch@lst.de>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <1598971960.4238.5.camel@HansenPartnership.com>
+In-Reply-To: <20200819065555.1802761-23-hch@lst.de>
+User-Agent: Mutt/1.5.23 (2014-03-12)
 X-Mailman-Approved-At: Tue, 01 Sep 2020 18:38:08 +0000
-Subject: Re: [Nouveau] [PATCH 07/28] 53c700: improve non-coherent DMA
- handling
+Subject: Re: [Nouveau] [PATCH 22/28] sgiseeq: convert from dma_cache_sync to
+ dma_sync_single_for_device
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -52,15 +44,14 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Cc: alsa-devel@alsa-project.org, linux-ia64@vger.kernel.org,
  linux-doc@vger.kernel.org, nouveau@lists.freedesktop.org,
  linux-nvme@lists.infradead.org, linux-kernel@vger.kernel.org,
- linux-mm@kvack.org, Christoph Hellwig <hch@lst.de>,
- Marek Szyprowski <m.szyprowski@samsung.com>, linux-samsung-soc@vger.kernel.org,
- Joonyoung Shim <jy0922.shim@samsung.com>, linux-scsi@vger.kernel.org,
- Kyungmin Park <kyungmin.park@samsung.com>, Ben Skeggs <bskeggs@redhat.com>,
- Matt Porter <mporter@kernel.crashing.org>, linux-media@vger.kernel.org,
- Tom Lendacky <thomas.lendacky@amd.com>, Pawel Osciak <pawel@osciak.com>,
- Mauro Carvalho Chehab <mchehab@kernel.org>,
- linux-arm-kernel@lists.infradead.org,
- Thomas Bogendoerfer <tsbogend@alpha.franken.de>, linux-parisc@vger.kernel.org,
+ "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
+ linux-mm@kvack.org, Marek Szyprowski <m.szyprowski@samsung.com>,
+ linux-samsung-soc@vger.kernel.org, Joonyoung Shim <jy0922.shim@samsung.com>,
+ linux-scsi@vger.kernel.org, Kyungmin Park <kyungmin.park@samsung.com>,
+ Ben Skeggs <bskeggs@redhat.com>, Matt Porter <mporter@kernel.crashing.org>,
+ linux-media@vger.kernel.org, Tom Lendacky <thomas.lendacky@amd.com>,
+ Pawel Osciak <pawel@osciak.com>, Mauro Carvalho Chehab <mchehab@kernel.org>,
+ linux-arm-kernel@lists.infradead.org, linux-parisc@vger.kernel.org,
  netdev@vger.kernel.org, Seung-Woo Kim <sw0312.kim@samsung.com>,
  linux-mips@vger.kernel.org, iommu@lists.linux-foundation.org
 Content-Type: text/plain; charset="us-ascii"
@@ -68,15 +59,47 @@ Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, Sep 01, 2020 at 07:52:40AM -0700, James Bottomley wrote:
-> I think this looks mostly OK, except for one misnamed parameter below. 
-> Unfortunately, the last non-coherent parisc was the 700 series and I no
-> longer own a box, so I can't test that part of it (I can fire up the
-> C360 to test it on a coherent arch).
+On Wed, Aug 19, 2020 at 08:55:49AM +0200, Christoph Hellwig wrote:
+> Use the proper modern API to transfer cache ownership for incoherent DMA.
+> 
+> Signed-off-by: Christoph Hellwig <hch@lst.de>
+> ---
+>  drivers/net/ethernet/seeq/sgiseeq.c | 12 ++++++++----
+>  1 file changed, 8 insertions(+), 4 deletions(-)
+> 
+> diff --git a/drivers/net/ethernet/seeq/sgiseeq.c b/drivers/net/ethernet/seeq/sgiseeq.c
+> index 39599bbb5d45b6..f91dae16d69a19 100644
+> --- a/drivers/net/ethernet/seeq/sgiseeq.c
+> +++ b/drivers/net/ethernet/seeq/sgiseeq.c
+> @@ -112,14 +112,18 @@ struct sgiseeq_private {
+>  
+>  static inline void dma_sync_desc_cpu(struct net_device *dev, void *addr)
+>  {
+> -	dma_cache_sync(dev->dev.parent, addr, sizeof(struct sgiseeq_rx_desc),
+> -		       DMA_FROM_DEVICE);
+> +	struct sgiseeq_private *sp = netdev_priv(dev);
+> +
+> +	dma_sync_single_for_cpu(dev->dev.parent, VIRT_TO_DMA(sp, addr),
+> +			sizeof(struct sgiseeq_rx_desc), DMA_BIDIRECTIONAL);
+>  }
+>  
+>  static inline void dma_sync_desc_dev(struct net_device *dev, void *addr)
+>  {
+> -	dma_cache_sync(dev->dev.parent, addr, sizeof(struct sgiseeq_rx_desc),
+> -		       DMA_TO_DEVICE);
+> +	struct sgiseeq_private *sp = netdev_priv(dev);
+> +
+> +	dma_sync_single_for_device(dev->dev.parent, VIRT_TO_DMA(sp, addr),
+> +			sizeof(struct sgiseeq_rx_desc), DMA_BIDIRECTIONAL);
+>  }
 
-I have a 715/50 that probably hasn't been powered on in 15 years if you
-need something that old to test on (I believe the 725/100 uses the 7100LC
-and so is coherent).  I'll need to set up a cross-compiler ...
+this breaks ethernet on IP22 completely, but I haven't figured out why, yet.
+
+Thomas.
+
+-- 
+Crap can work. Given enough thrust pigs will fly, but it's not necessarily a
+good idea.                                                [ RFC1925, 2.3 ]
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
