@@ -2,53 +2,63 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 54AA725829E
-	for <lists+nouveau@lfdr.de>; Mon, 31 Aug 2020 22:31:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 128BC2588F1
+	for <lists+nouveau@lfdr.de>; Tue,  1 Sep 2020 09:24:10 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B6C1C89061;
-	Mon, 31 Aug 2020 20:31:32 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 2C4E26E5B0;
+	Tue,  1 Sep 2020 07:24:06 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from hqnvemgate24.nvidia.com (hqnvemgate24.nvidia.com
- [216.228.121.143])
- by gabe.freedesktop.org (Postfix) with ESMTPS id DDA7F89061
- for <nouveau@lists.freedesktop.org>; Mon, 31 Aug 2020 20:31:30 +0000 (UTC)
-Received: from hqpgpgate101.nvidia.com (Not Verified[216.228.121.13]) by
- hqnvemgate24.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
- id <B5f4d5da30000>; Mon, 31 Aug 2020 13:29:23 -0700
-Received: from hqmail.nvidia.com ([172.20.161.6])
- by hqpgpgate101.nvidia.com (PGP Universal service);
- Mon, 31 Aug 2020 13:31:29 -0700
-X-PGP-Universal: processed;
- by hqpgpgate101.nvidia.com on Mon, 31 Aug 2020 13:31:29 -0700
-Received: from HQMAIL107.nvidia.com (172.20.187.13) by HQMAIL109.nvidia.com
- (172.20.187.15) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Mon, 31 Aug
- 2020 20:31:28 +0000
-Received: from rnnvemgw01.nvidia.com (10.128.109.123) by HQMAIL107.nvidia.com
- (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3 via
- Frontend Transport; Mon, 31 Aug 2020 20:31:28 +0000
-Received: from rcampbell-dev.nvidia.com (Not Verified[10.110.48.66]) by
- rnnvemgw01.nvidia.com with Trustwave SEG (v7, 5, 8, 10121)
- id <B5f4d5e200001>; Mon, 31 Aug 2020 13:31:28 -0700
-From: Ralph Campbell <rcampbell@nvidia.com>
-To: <nouveau@lists.freedesktop.org>, <linux-kernel@vger.kernel.org>
-Date: Mon, 31 Aug 2020 13:31:11 -0700
-Message-ID: <20200831203111.4940-1-rcampbell@nvidia.com>
-X-Mailer: git-send-email 2.20.1
+Received: from mga05.intel.com (mga05.intel.com [192.55.52.43])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E03D96E5A1;
+ Tue,  1 Sep 2020 07:24:04 +0000 (UTC)
+IronPort-SDR: 1aUhd0/pAnICW74Z22V/LW+aB3XtBT1Ogge5bTbZ3t4c72gzvgWDOC/LOKgBwepIizmEnPcUtD
+ D30xtjc0TSfg==
+X-IronPort-AV: E=McAfee;i="6000,8403,9730"; a="241933104"
+X-IronPort-AV: E=Sophos;i="5.76,378,1592895600"; d="scan'208";a="241933104"
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from fmsmga004.fm.intel.com ([10.253.24.48])
+ by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 01 Sep 2020 00:24:04 -0700
+IronPort-SDR: aWhZmg6OP5DahhOjE2IomRafNii35pBqe3o8jA0d8hk9kWmGYJ1jcQfwU/H5xBKIcIIKI1edS8
+ GEc6C2hw998Q==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.76,378,1592895600"; d="scan'208";a="325242108"
+Received: from fmsmsx602.amr.corp.intel.com ([10.18.126.82])
+ by fmsmga004.fm.intel.com with ESMTP; 01 Sep 2020 00:24:04 -0700
+Received: from bgsmsx601.gar.corp.intel.com (10.109.78.80) by
+ fmsmsx602.amr.corp.intel.com (10.18.126.82) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.1713.5; Tue, 1 Sep 2020 00:23:21 -0700
+Received: from kmsmsx601.gar.corp.intel.com (172.21.219.141) by
+ BGSMSX601.gar.corp.intel.com (10.109.78.80) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.1713.5; Tue, 1 Sep 2020 12:53:18 +0530
+Received: from kmsmsx601.gar.corp.intel.com ([172.21.219.141]) by
+ kmsmsx601.gar.corp.intel.com ([172.21.219.141]) with mapi id 15.01.1713.004;
+ Tue, 1 Sep 2020 15:23:18 +0800
+From: "B, Jeevan" <jeevan.b@intel.com>
+To: "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
+ "intel-gfx@lists.freedesktop.org" <intel-gfx@lists.freedesktop.org>,
+ "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>
+Thread-Topic: [v3] drm/nouveau: utilize subconnector property for DP
+Thread-Index: AQHWc5m07vIwWA6ZzUWq9Zq07STQmalTc/1Q
+Date: Tue, 1 Sep 2020 07:23:18 +0000
+Message-ID: <9054960bbd2e45129204acf5f55ed79c@intel.com>
+References: <1587732655-17544-3-git-send-email-jeevan.b@intel.com>
+ <1597560705-13897-1-git-send-email-jeevan.b@intel.com>
+In-Reply-To: <1597560705-13897-1-git-send-email-jeevan.b@intel.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+dlp-reaction: no-action
+dlp-version: 11.5.1.3
+dlp-product: dlpe-windows
+x-originating-ip: [10.223.10.1]
 MIME-Version: 1.0
-X-NVConfidentiality: public
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
- t=1598905763; bh=pZWsjSZM0QN5f+TE2diScGkjthiNwttyZzPcjsliW5Q=;
- h=X-PGP-Universal:From:To:CC:Subject:Date:Message-ID:X-Mailer:
- MIME-Version:X-NVConfidentiality:Content-Transfer-Encoding:
- Content-Type;
- b=FbVDlCGjRypJsQ8N3BF746+otYl3PQqAgWuR0TY+dk8GXTAtlWV5XefOeqCOxaoEZ
- eEZfHwpZnsUaexY5oxjWIYcDDXX19/3RS0dd1S0xtLhbRmW6makl1Time2m2F8j1l0
- k5KNNpRnM1UVeUeq3eENJFcDvAsDPGKWfWMksttbvsshQwRfsk20fExdNFlhM9/nnz
- VdY/+TbqUSw7SVYCtFfOnvCP59oM8odz7PbJtJZDeRJvRr7Pv02AWNRzmCR1YQSR2B
- TPFcE6QgyFs5bWcuW9PwrfvunCKtWxP0qVDqkE5Dwt7ujmS7cWVN7lES5TXwsErMGt
- Di9Df95W5s9qg==
-Subject: [Nouveau] [PATCH v2] nouveau: fix the start/end range for migration
+Subject: Re: [Nouveau] [v3] drm/nouveau: utilize subconnector property for DP
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,87 +70,140 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Ralph Campbell <rcampbell@nvidia.com>, Ben Skeggs <bskeggs@redhat.com>,
- Jason Gunthorpe <jgg@nvidia.com>, Christoph Hellwig <hch@lst.de>
+Cc: "Nikula, Jani" <jani.nikula@intel.com>,
+ Oleg Vasilev <oleg.vasilev@intel.com>,
+ "maarten.lankhorst@linux.intel.com" <maarten.lankhorst@linux.intel.com>,
+ "Shankar, Uma" <uma.shankar@intel.com>,
+ "bskeggs@redhat.com" <bskeggs@redhat.com>,
+ "airlied@redhat.com" <airlied@redhat.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-The user level OpenCL code shouldn't have to align start and end
-addresses to a page boundary. That is better handled in the nouveau
-driver. The npages field is also redundant since it can be computed
-from the start and end addresses.
+Hi Ben Skeggs,
 
-Signed-off-by: Ralph Campbell <rcampbell@nvidia.com>
----
+Gentle Reminder, Can you please take a look at the patch and provide your ack.  
 
-This is for Ben Skegg's nouveau tree.
+Thanks 
+Jeevan B 
 
-I have been working with Karol Herbst on the OpenCL mesa changes for
-nouveau which will be merged upstream soon.
-With or without those changes, the user visible effect of this patch
-only extends the range by one page (round up vs. round down to page
-boundary).
-
-Changes in v2:
-I changed the start/end check to require a size so start has to be less
-than end.
-
- drivers/gpu/drm/nouveau/nouveau_svm.c | 14 +++-----------
- 1 file changed, 3 insertions(+), 11 deletions(-)
-
-diff --git a/drivers/gpu/drm/nouveau/nouveau_svm.c b/drivers/gpu/drm/nouveau/nouveau_svm.c
-index 2df1c0460559..4f69e4c3dafd 100644
---- a/drivers/gpu/drm/nouveau/nouveau_svm.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_svm.c
-@@ -105,11 +105,11 @@ nouveau_svmm_bind(struct drm_device *dev, void *data,
- 	struct nouveau_cli *cli = nouveau_cli(file_priv);
- 	struct drm_nouveau_svm_bind *args = data;
- 	unsigned target, cmd, priority;
--	unsigned long addr, end, size;
-+	unsigned long addr, end;
- 	struct mm_struct *mm;
- 
- 	args->va_start &= PAGE_MASK;
--	args->va_end &= PAGE_MASK;
-+	args->va_end = ALIGN(args->va_end, PAGE_SIZE);
- 
- 	/* Sanity check arguments */
- 	if (args->reserved0 || args->reserved1)
-@@ -118,8 +118,6 @@ nouveau_svmm_bind(struct drm_device *dev, void *data,
- 		return -EINVAL;
- 	if (args->va_start >= args->va_end)
- 		return -EINVAL;
--	if (!args->npages)
--		return -EINVAL;
- 
- 	cmd = args->header >> NOUVEAU_SVM_BIND_COMMAND_SHIFT;
- 	cmd &= NOUVEAU_SVM_BIND_COMMAND_MASK;
-@@ -151,12 +149,6 @@ nouveau_svmm_bind(struct drm_device *dev, void *data,
- 	if (args->stride)
- 		return -EINVAL;
- 
--	size = ((unsigned long)args->npages) << PAGE_SHIFT;
--	if ((args->va_start + size) <= args->va_start)
--		return -EINVAL;
--	if ((args->va_start + size) > args->va_end)
--		return -EINVAL;
--
- 	/*
- 	 * Ok we are ask to do something sane, for now we only support migrate
- 	 * commands but we will add things like memory policy (what to do on
-@@ -171,7 +163,7 @@ nouveau_svmm_bind(struct drm_device *dev, void *data,
- 		return -EINVAL;
- 	}
- 
--	for (addr = args->va_start, end = args->va_start + size; addr < end;) {
-+	for (addr = args->va_start, end = args->va_end; addr < end;) {
- 		struct vm_area_struct *vma;
- 		unsigned long next;
- 
--- 
-2.20.1
+>-----Original Message-----
+>From: B, Jeevan <jeevan.b@intel.com>
+>Sent: Sunday, August 16, 2020 12:22 PM
+>To: nouveau@lists.freedesktop.org; intel-gfx@lists.freedesktop.org; dri-
+>devel@lists.freedesktop.org
+>Cc: bskeggs@redhat.com; airlied@redhat.com;
+>maarten.lankhorst@linux.intel.com; Nikula, Jani <jani.nikula@intel.com>;
+>Shankar, Uma <uma.shankar@intel.com>; Oleg Vasilev
+><oleg.vasilev@intel.com>; B, Jeevan <jeevan.b@intel.com>
+>Subject: [v3] drm/nouveau: utilize subconnector property for DP
+>
+>From: Oleg Vasilev <oleg.vasilev@intel.com>
+>
+>Since DP-specific information is stored in driver's structures, every driver
+>needs to implement subconnector property by itself.
+>
+>v2: rebase
+>
+>v3: renamed a function call
+>
+>Cc: Ben Skeggs <bskeggs@redhat.com>
+>Cc: nouveau@lists.freedesktop.org
+>Signed-off-by: Jeevan B <jeevan.b@intel.com>
+>Signed-off-by: Oleg Vasilev <oleg.vasilev@intel.com>
+>Reviewed-by: Emil Velikov <emil.velikov@collabora.com>
+>---
+> drivers/gpu/drm/nouveau/nouveau_connector.c | 13 +++++++++++++
+> drivers/gpu/drm/nouveau/nouveau_dp.c        |  9 +++++++++
+> drivers/gpu/drm/nouveau/nouveau_encoder.h   |  1 +
+> 3 files changed, 23 insertions(+)
+>
+>diff --git a/drivers/gpu/drm/nouveau/nouveau_connector.c
+>b/drivers/gpu/drm/nouveau/nouveau_connector.c
+>index 7674025..955afed 100644
+>--- a/drivers/gpu/drm/nouveau/nouveau_connector.c
+>+++ b/drivers/gpu/drm/nouveau/nouveau_connector.c
+>@@ -654,6 +654,17 @@ nouveau_connector_detect(struct drm_connector
+>*connector, bool force)
+> 	pm_runtime_mark_last_busy(dev->dev);
+> 	pm_runtime_put_autosuspend(dev->dev);
+>
+>+	if (connector->connector_type ==
+>DRM_MODE_CONNECTOR_DisplayPort ||
+>+	    connector->connector_type == DRM_MODE_CONNECTOR_eDP) {
+>+		enum drm_mode_subconnector subconnector =
+>+DRM_MODE_SUBCONNECTOR_Unknown;
+>+
+>+		if (conn_status == connector_status_connected &&
+>nv_encoder)
+>+			subconnector = nv_encoder->dp.subconnector;
+>+		drm_object_property_set_value(&connector->base,
+>+			connector->dev-
+>>mode_config.dp_subconnector_property,
+>+			subconnector);
+>+	}
+>+
+> 	return conn_status;
+> }
+>
+>@@ -1390,6 +1401,8 @@ nouveau_connector_create(struct drm_device *dev,
+> 			kfree(nv_connector);
+> 			return ERR_PTR(ret);
+> 		}
+>+
+>+
+>	drm_connector_attach_dp_subconnector_property(connector);
+> 		funcs = &nouveau_connector_funcs;
+> 		break;
+> 	default:
+>diff --git a/drivers/gpu/drm/nouveau/nouveau_dp.c
+>b/drivers/gpu/drm/nouveau/nouveau_dp.c
+>index 8a0f799..3eff884 100644
+>--- a/drivers/gpu/drm/nouveau/nouveau_dp.c
+>+++ b/drivers/gpu/drm/nouveau/nouveau_dp.c
+>@@ -62,6 +62,7 @@ nouveau_dp_detect(struct nouveau_encoder
+>*nv_encoder)
+> 	struct nouveau_drm *drm = nouveau_drm(dev);
+> 	struct nvkm_i2c_aux *aux;
+> 	u8 dpcd[8];
+>+	u8 port_cap[DP_MAX_DOWNSTREAM_PORTS] = {};
+> 	int ret;
+>
+> 	aux = nv_encoder->aux;
+>@@ -72,6 +73,14 @@ nouveau_dp_detect(struct nouveau_encoder
+>*nv_encoder)
+> 	if (ret)
+> 		return ret;
+>
+>+	if (dpcd[DP_DPCD_REV] > 0x10) {
+>+		ret = nvkm_rdaux(aux, DP_DOWNSTREAM_PORT_0,
+>+				 port_cap, DP_MAX_DOWNSTREAM_PORTS);
+>+		if (ret)
+>+			memset(port_cap, 0,
+>DP_MAX_DOWNSTREAM_PORTS);
+>+	}
+>+	nv_encoder->dp.subconnector = drm_dp_subconnector_type(dpcd,
+>+port_cap);
+>+
+> 	nv_encoder->dp.link_bw = 27000 * dpcd[1];
+> 	nv_encoder->dp.link_nr = dpcd[2] & DP_MAX_LANE_COUNT_MASK;
+>
+>diff --git a/drivers/gpu/drm/nouveau/nouveau_encoder.h
+>b/drivers/gpu/drm/nouveau/nouveau_encoder.h
+>index a72c412..49b5c10 100644
+>--- a/drivers/gpu/drm/nouveau/nouveau_encoder.h
+>+++ b/drivers/gpu/drm/nouveau/nouveau_encoder.h
+>@@ -64,6 +64,7 @@ struct nouveau_encoder {
+> 			struct nv50_mstm *mstm;
+> 			int link_nr;
+> 			int link_bw;
+>+			enum drm_mode_subconnector subconnector;
+> 		} dp;
+> 	};
+>
+>--
+>2.7.4
 
 _______________________________________________
 Nouveau mailing list
