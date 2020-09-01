@@ -2,45 +2,61 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id B3B7E258F11
-	for <lists+nouveau@lfdr.de>; Tue,  1 Sep 2020 15:29:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 487F225922F
+	for <lists+nouveau@lfdr.de>; Tue,  1 Sep 2020 17:05:49 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5028E6E0AC;
-	Tue,  1 Sep 2020 13:29:26 +0000 (UTC)
-X-Original-To: nouveau@lists.freedesktop.org
-Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-vk1-f194.google.com (mail-vk1-f194.google.com
- [209.85.221.194])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E47F36E0AC
- for <nouveau@lists.freedesktop.org>; Tue,  1 Sep 2020 13:29:24 +0000 (UTC)
-Received: by mail-vk1-f194.google.com with SMTP id q200so325845vke.6
- for <nouveau@lists.freedesktop.org>; Tue, 01 Sep 2020 06:29:24 -0700 (PDT)
+	by gabe.freedesktop.org (Postfix) with ESMTP id AB28F6E852;
+	Tue,  1 Sep 2020 15:05:47 +0000 (UTC)
+X-Original-To: Nouveau@lists.freedesktop.org
+Delivered-To: Nouveau@lists.freedesktop.org
+Received: from mail-wm1-x341.google.com (mail-wm1-x341.google.com
+ [IPv6:2a00:1450:4864:20::341])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8025D6E461;
+ Tue,  1 Sep 2020 15:05:46 +0000 (UTC)
+Received: by mail-wm1-x341.google.com with SMTP id a65so1493571wme.5;
+ Tue, 01 Sep 2020 08:05:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=from:to:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=eDT78MRZVCv7l7K+SspRYoMu/sm8Rwq6ANFU1fvaMTc=;
+ b=CpwsHI/GTkzrOumwq6yiJ/H248FGNBJtwbM4dd5mgvCaQ8k0YRhHbbW8BQpTvj4o4E
+ cl1+Q1TDRS+YkUhXE/NQZVpTjgS/E4pXYBzuVnYan3sK8N481uXCOoxZvPO+ocLi+Mye
+ xlDQOT+hoVrf2nmhr9sOeYYqfvLFe5jdSKH0qTaejGRLmWw6IBVFwa8zXmP+AT6hSaf3
+ EfYGNFsg8fPMXqFvxW/tHE7ZodOHM8Vu0rIY0X6oQJqlg2XwZpKgjUQ2wZ5QjgH/1rND
+ Xv/LT0MnfRDFCNROqZrEHINneTNLV+FW6v9LbUr2n0IDFAV6DwbxEQMJiK1sPK4+4U4O
+ jfwg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=j25Zt7siiXEa5H4E/2+/lr/+m78tLyU24Ek6qvO9+9g=;
- b=fDdpOnQRx35tXeTje+pipeDS78suhzq/YGH3ELzRyg5Lp5yf8HQNuJ/3boOLfB+QP+
- O8hiG5uDhtSyMndEzyUy1lWUR2kv0CNm+fqvYHAfkl4D/WbQIUftiSFwIhg+GdfEIotv
- 6xLBVbYyOSMBDTawTshHobcq1w+Yk2Pkuhb+01HD9OBu8pJAIbJQf6KQtXXRSEiih8S7
- MDy/d1r8QWC+LYZSAhqldztEEwYBf6MKBUB7ur99naO07mU8L52L1obzImzD/F+07SPB
- AYZfCceBeD+Y8ze1dKY+E0HJYrNTo53/Qu4ZJhiJ4i67YO67QErhZnC3PXmIDTtuY7L/
- FcnA==
-X-Gm-Message-State: AOAM533KAK6qtivo65y/26zli8/yu6ZXbg20qrHy1hsQmlNBhfzEBAW0
- dCRAmOu7H5kvoUaC17LihFZD4CcqRCY9sFcaq3I=
-X-Google-Smtp-Source: ABdhPJz+7v18dcP3rFCcxau6UCo8KrS++ygM7j81swUm6caRC6CdUa9UTAOTSucZPaWTgmI9cbozuJRrzGEQHMDaFEs=
-X-Received: by 2002:a1f:d6c4:: with SMTP id n187mr1155117vkg.65.1598966963638; 
- Tue, 01 Sep 2020 06:29:23 -0700 (PDT)
+ h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=eDT78MRZVCv7l7K+SspRYoMu/sm8Rwq6ANFU1fvaMTc=;
+ b=uTB6Zc7R6Tvs9MSzaisRudHKTyekH5uFtjkix3hNKCEZ25unp59Fq3HXwo7WSCktFx
+ fNjpwxhULRaWbCRIrKkcuxVXqrYQ425QJ+pMrKBAGnMcOsios+FCRRrwG7L9msD777lF
+ XnbVG8v3uINLu+RH1crkqutjVTkSIRFEk/6+VyX6+IUJLr8tjpbyKwqjh/Cs135pAtY8
+ tUnwnYGISgwHM7/dNRL3RTzQEyWOmAEYrhaS8hgpfZERkMZsP7CeFY9udOYIGXiajvmr
+ vR744YAKBsRa+LMwZ6LXOUc+Af9Vf1+xpN4/PN0CvzEW6b6XhkepDgZRdlqf8ykkkROo
+ XM1g==
+X-Gm-Message-State: AOAM530a2YnldjNGYQJPFlLLooVFQb1+ulSq3xIcThPOW3QOaSWefhGu
+ Ai94zAFLEtOy3jHfeaueLoQ=
+X-Google-Smtp-Source: ABdhPJzX2YCb30vgt6nY6D3X0Jq3jbsf5CKsWSkz5jW7ayObBEp64/al5OAv3d2ONzX7NCACElq0gA==
+X-Received: by 2002:a05:600c:210c:: with SMTP id
+ u12mr2373058wml.185.1598972745052; 
+ Tue, 01 Sep 2020 08:05:45 -0700 (PDT)
+Received: from abel.fritz.box ([2a02:908:1252:fb60:a794:43bf:fedf:ac6a])
+ by smtp.gmail.com with ESMTPSA id 71sm2882469wrm.23.2020.09.01.08.05.42
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 01 Sep 2020 08:05:43 -0700 (PDT)
+From: "=?UTF-8?q?Christian=20K=C3=B6nig?=" <ckoenig.leichtzumerken@gmail.com>
+X-Google-Original-From: =?UTF-8?q?Christian=20K=C3=B6nig?=
+ <christian.koenig@amd.com>
+To: airlied@gmail.com, skeggsb@gmail.com, dri-devel@lists.freedesktop.org,
+ Nouveau@lists.freedesktop.org
+Date: Tue,  1 Sep 2020 17:05:40 +0200
+Message-Id: <20200901150542.7455-1-christian.koenig@amd.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-References: <CAKiGokHoArQcnVAPs0HWzJSFXhwCSLfQAirOQ-zTq=0C-97neQ@mail.gmail.com>
- <CAKb7Uvh4cdg0=dGJqQVXx_p4O2c5BJbG3JRnjznwjsMQwc505Q@mail.gmail.com>
- <CAKiGokGj8pfm1tmH0aN7de5FVvrszAA93_e9-Zq05oqw46GnRg@mail.gmail.com>
-In-Reply-To: <CAKiGokGj8pfm1tmH0aN7de5FVvrszAA93_e9-Zq05oqw46GnRg@mail.gmail.com>
-From: Ilia Mirkin <imirkin@alum.mit.edu>
-Date: Tue, 1 Sep 2020 09:29:12 -0400
-Message-ID: <CAKb7UvhE8i9E7XxxwrpQX1rSvLHk63tFt7dyv_0XAAxu4O5=iA@mail.gmail.com>
-To: Analabha Roy <hariseldon99@gmail.com>
-Subject: Re: [Nouveau] VAAPI on GeForce GT 620M
+Subject: [Nouveau] [PATCH 1/3] drm/ttm: make sure that we always zero init
+ mem.bus v2
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -52,41 +68,37 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau <nouveau@lists.freedesktop.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, Sep 1, 2020 at 9:10 AM Analabha Roy <hariseldon99@gmail.com> wrote:
-> Any suggestions on how to trace the config issues? Do I have to debug the va_openDriver() function?
-
-My guess, without reading any code, is that DRI_PRIME isn't doing what
-you want it to, and the nouveau driver is being handed an intel
-device. This does not work well. Fixing this will require tracing
-through the va winsys code which to figure out how it invokes the
-loader.
-
-https://cgit.freedesktop.org/mesa/mesa/tree/src/gallium/frontends/va/context.c#n111
-
-For the DRM/rendernodes "platform", it will just take whatever fd it
-is given. vainfo appears to give it a fixed device:
-
-https://github.com/intel/libva-utils/blob/master/common/va_display_drm.c#L39
-
-However it looks like you can pass in --device /dev/dri/renderD129 or
-whatever the right one is, which should pass in the right render node,
-as seen here:
-
-https://github.com/intel/libva-utils/blob/master/common/va_display.c#L80
-
-Note that I've never tried this, just did a few google searches to
-find this stuff.
-
-Cheers,
-
-  -ilia
-_______________________________________________
-Nouveau mailing list
-Nouveau@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/nouveau
+V2UgYXJlIHRyeWluZyB0byByZW1vdmUgdGhlIGlvX2xydSBoYW5kbGluZyBhbmQgZGVwZW5kCm9u
+IHplcm8gaW5pdCBiYXNlLCBvZmZzZXQgYW5kIGFkZHIgaGVyZS4KCnYyOiBpbml0IGFkZHIgYXMg
+d2VsbAoKU2lnbmVkLW9mZi1ieTogQ2hyaXN0aWFuIEvDtm5pZyA8Y2hyaXN0aWFuLmtvZW5pZ0Bh
+bWQuY29tPgotLS0KIGRyaXZlcnMvZ3B1L2RybS90dG0vdHRtX2JvLmMgfCA5ICsrKysrKysrKwog
+MSBmaWxlIGNoYW5nZWQsIDkgaW5zZXJ0aW9ucygrKQoKZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1
+L2RybS90dG0vdHRtX2JvLmMgYi9kcml2ZXJzL2dwdS9kcm0vdHRtL3R0bV9iby5jCmluZGV4IGUz
+OTMxZTUxNTkwNi4uNzcyYzY0MGE2MDQ2IDEwMDY0NAotLS0gYS9kcml2ZXJzL2dwdS9kcm0vdHRt
+L3R0bV9iby5jCisrKyBiL2RyaXZlcnMvZ3B1L2RybS90dG0vdHRtX2JvLmMKQEAgLTY1MCw2ICs2
+NTAsOSBAQCBzdGF0aWMgaW50IHR0bV9ib19ldmljdChzdHJ1Y3QgdHRtX2J1ZmZlcl9vYmplY3Qg
+KmJvLAogCWV2aWN0X21lbS5tbV9ub2RlID0gTlVMTDsKIAlldmljdF9tZW0uYnVzLmlvX3Jlc2Vy
+dmVkX3ZtID0gZmFsc2U7CiAJZXZpY3RfbWVtLmJ1cy5pb19yZXNlcnZlZF9jb3VudCA9IDA7CisJ
+ZXZpY3RfbWVtLmJ1cy5iYXNlID0gMDsKKwlldmljdF9tZW0uYnVzLm9mZnNldCA9IDA7CisJZXZp
+Y3RfbWVtLmJ1cy5hZGRyID0gTlVMTDsKIAogCXJldCA9IHR0bV9ib19tZW1fc3BhY2UoYm8sICZw
+bGFjZW1lbnQsICZldmljdF9tZW0sIGN0eCk7CiAJaWYgKHJldCkgewpAQCAtMTA4NCw2ICsxMDg3
+LDkgQEAgc3RhdGljIGludCB0dG1fYm9fbW92ZV9idWZmZXIoc3RydWN0IHR0bV9idWZmZXJfb2Jq
+ZWN0ICpibywKIAltZW0ucGFnZV9hbGlnbm1lbnQgPSBiby0+bWVtLnBhZ2VfYWxpZ25tZW50Owog
+CW1lbS5idXMuaW9fcmVzZXJ2ZWRfdm0gPSBmYWxzZTsKIAltZW0uYnVzLmlvX3Jlc2VydmVkX2Nv
+dW50ID0gMDsKKwltZW0uYnVzLmJhc2UgPSAwOworCW1lbS5idXMub2Zmc2V0ID0gMDsKKwltZW0u
+YnVzLmFkZHIgPSBOVUxMOwogCW1lbS5tbV9ub2RlID0gTlVMTDsKIAogCS8qCkBAIC0xMjQzLDYg
+KzEyNDksOSBAQCBpbnQgdHRtX2JvX2luaXRfcmVzZXJ2ZWQoc3RydWN0IHR0bV9ib19kZXZpY2Ug
+KmJkZXYsCiAJYm8tPm1lbS5wYWdlX2FsaWdubWVudCA9IHBhZ2VfYWxpZ25tZW50OwogCWJvLT5t
+ZW0uYnVzLmlvX3Jlc2VydmVkX3ZtID0gZmFsc2U7CiAJYm8tPm1lbS5idXMuaW9fcmVzZXJ2ZWRf
+Y291bnQgPSAwOworCWJvLT5tZW0uYnVzLmJhc2UgPSAwOworCWJvLT5tZW0uYnVzLm9mZnNldCA9
+IDA7CisJYm8tPm1lbS5idXMuYWRkciA9IE5VTEw7CiAJYm8tPm1vdmluZyA9IE5VTEw7CiAJYm8t
+Pm1lbS5wbGFjZW1lbnQgPSAoVFRNX1BMX0ZMQUdfU1lTVEVNIHwgVFRNX1BMX0ZMQUdfQ0FDSEVE
+KTsKIAliby0+YWNjX3NpemUgPSBhY2Nfc2l6ZTsKLS0gCjIuMTcuMQoKX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBtYWlsaW5nIGxpc3QKTm91
+dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcv
+bWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1Cg==
