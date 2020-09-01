@@ -2,34 +2,33 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1421D259E30
-	for <lists+nouveau@lfdr.de>; Tue,  1 Sep 2020 20:38:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 81F91259E2B
+	for <lists+nouveau@lfdr.de>; Tue,  1 Sep 2020 20:38:21 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3A0456E8D0;
-	Tue,  1 Sep 2020 18:38:10 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D29B16E8CD;
+	Tue,  1 Sep 2020 18:38:09 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from elvis.franken.de (elvis.franken.de [193.175.24.41])
- by gabe.freedesktop.org (Postfix) with ESMTP id 5AB186E271
+ by gabe.freedesktop.org (Postfix) with ESMTP id 693F96E441
  for <nouveau@lists.freedesktop.org>; Tue,  1 Sep 2020 13:55:11 +0000 (UTC)
 Received: from uucp (helo=alpha)
  by elvis.franken.de with local-bsmtp (Exim 3.36 #1)
- id 1kD6kf-0001nf-00; Tue, 01 Sep 2020 15:55:09 +0200
+ id 1kD6kf-0001nf-01; Tue, 01 Sep 2020 15:55:09 +0200
 Received: by alpha.franken.de (Postfix, from userid 1000)
- id 202E0C0E4B; Tue,  1 Sep 2020 15:49:35 +0200 (CEST)
-Date: Tue, 1 Sep 2020 15:49:35 +0200
+ id 422A1C0E4C; Tue,  1 Sep 2020 15:49:49 +0200 (CEST)
+Date: Tue, 1 Sep 2020 15:49:49 +0200
 From: Thomas Bogendoerfer <tsbogend@alpha.franken.de>
 To: Christoph Hellwig <hch@lst.de>
-Message-ID: <20200901134935.GA11944@alpha.franken.de>
+Message-ID: <20200901134949.GB11944@alpha.franken.de>
 References: <20200819065555.1802761-1-hch@lst.de>
- <20200819065555.1802761-10-hch@lst.de>
+ <20200819065555.1802761-11-hch@lst.de>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200819065555.1802761-10-hch@lst.de>
+In-Reply-To: <20200819065555.1802761-11-hch@lst.de>
 User-Agent: Mutt/1.5.23 (2014-03-12)
 X-Mailman-Approved-At: Tue, 01 Sep 2020 18:38:08 +0000
-Subject: Re: [Nouveau] [PATCH 09/28] MIPS/jazzdma: remove the unused
- vdma_remap function
+Subject: Re: [Nouveau] [PATCH 10/28] MIPS/jazzdma: decouple from dma-direct
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,12 +58,16 @@ Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, Aug 19, 2020 at 08:55:36AM +0200, Christoph Hellwig wrote:
+On Wed, Aug 19, 2020 at 08:55:37AM +0200, Christoph Hellwig wrote:
+> The jazzdma ops implement support for a very basic IOMMU.  Thus we really
+> should not use the dma-direct code that takes physical address limits
+> into account.  This survived through the great MIPS DMA ops cleanup mostly
+> because I was lazy, but now it is time to fully split the implementations.
+> 
 > Signed-off-by: Christoph Hellwig <hch@lst.de>
 > ---
->  arch/mips/include/asm/jazzdma.h |  2 -
->  arch/mips/jazz/jazzdma.c        | 70 ---------------------------------
->  2 files changed, 72 deletions(-)
+>  arch/mips/jazz/jazzdma.c | 32 +++++++++++++++++++++-----------
+>  1 file changed, 21 insertions(+), 11 deletions(-)
 
 Acked-by: Thomas Bogendoerfer <tsbogend@alpha.franken.de>
 
