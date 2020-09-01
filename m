@@ -2,27 +2,30 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id E9F3B259E28
-	for <lists+nouveau@lfdr.de>; Tue,  1 Sep 2020 20:38:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9A4FB259E2C
+	for <lists+nouveau@lfdr.de>; Tue,  1 Sep 2020 20:38:21 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 084526E8C7;
-	Tue,  1 Sep 2020 18:38:08 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C1B9F6E8CC;
+	Tue,  1 Sep 2020 18:38:09 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
- by gabe.freedesktop.org (Postfix) with ESMTPS id BABA16E86A
- for <nouveau@lists.freedesktop.org>; Tue,  1 Sep 2020 16:29:10 +0000 (UTC)
+X-Greylist: delayed 1139 seconds by postgrey-1.36 at gabe;
+ Tue, 01 Sep 2020 16:41:43 UTC
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4DAD86E321
+ for <nouveau@lists.freedesktop.org>; Tue,  1 Sep 2020 16:41:43 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.net;
- s=badeba3b8450; t=1598977744;
- bh=VcT1PIqQZcXCFi4aQmXr+rx2ZuYJ73wnhTYMW8H7+PU=;
- h=X-UI-Sender-Class:Subject:To:Cc:References:From:Date:In-Reply-To;
- b=JOpBfRGESW9R6UatCg+kTLB96vQnFKnHhqjBExEpksrcD7TEpd3J4TfKEMCCP/9xU
- NdL0DodPpQRo/f81hHSppkn3PdTKbdpP7eCcUrQd+mhjQIOMG/MV4hQGydA6IJqX37
- QgFKPqbfp/mw6LZK4d/nYNRU9lf90X3VeRSX5w5c=
+ s=badeba3b8450; t=1598978476;
+ bh=iS+KmbY1ndEJSpXJ6ApP71r110vbaj/m88hnuZyQwTA=;
+ h=X-UI-Sender-Class:Subject:From:To:Cc:References:Date:In-Reply-To;
+ b=Ub1CAZJYKYLiobVhHR8Et1pUU6d5a0ERsK2MsY7wzhw0HjhUjXhJSc4b4w7JLVY2K
+ imx2QUOs2xWvIZbhXholxKb0puJB9y9zCeV2KFD9q6C/NjJJszwTuwNoPvI/AfTNic
+ kg6J1s8vPoCo/SATwJopqTMYp2II/N+zrO+5Tf7M=
 X-UI-Sender-Class: 01bb95c1-4bf8-414a-932a-4f6e2808ef9c
-Received: from [192.168.20.60] ([92.116.187.2]) by mail.gmx.com (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MK3W0-1jrdNg3lmA-00LUav; Tue, 01
- Sep 2020 18:22:07 +0200
+Received: from [192.168.20.60] ([92.116.187.2]) by mail.gmx.com (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MqaxO-1kzdF62DEe-00mXqh; Tue, 01
+ Sep 2020 18:41:16 +0200
+From: Helge Deller <deller@gmx.de>
 To: James Bottomley <James.Bottomley@HansenPartnership.com>,
  Matthew Wilcox <willy@infradead.org>
 References: <20200819065555.1802761-1-hch@lst.de>
@@ -30,7 +33,7 @@ References: <20200819065555.1802761-1-hch@lst.de>
  <1598971960.4238.5.camel@HansenPartnership.com>
  <20200901150554.GN14765@casper.infradead.org>
  <1598973776.4238.11.camel@HansenPartnership.com>
-From: Helge Deller <deller@gmx.de>
+ <3369218e-eea4-14e9-15f1-870269e4649d@gmx.de>
 Autocrypt: addr=deller@gmx.de; keydata=
  mQINBF3Ia3MBEAD3nmWzMgQByYAWnb9cNqspnkb2GLVKzhoH2QD4eRpyDLA/3smlClbeKkWT
  HLnjgkbPFDmcmCz5V0Wv1mKYRClAHPCIBIJgyICqqUZo2qGmKstUx3pFAiztlXBANpRECgwJ
@@ -88,37 +91,37 @@ Autocrypt: addr=deller@gmx.de; keydata=
  XzCscCr+pggvqX7kI33AQsxo1DT19sNYLU5dJ5Qxz1+zdNkB9kK9CcTVFXMYehKueBkk5MaU
  ou0ZH9LCDjtnOKxPuUWstxTXWzsinSpLDIpkP//4fN6asmPo2cSXMXE0iA5WsWAXcK8uZ4jD
  c2TFWAS8k6RLkk41ZUU8ENX8+qZx/Q==
-Message-ID: <3369218e-eea4-14e9-15f1-870269e4649d@gmx.de>
-Date: Tue, 1 Sep 2020 18:21:58 +0200
+Message-ID: <77c9b2b6-bedc-d090-8b23-6ac664df1d1f@gmx.de>
+Date: Tue, 1 Sep 2020 18:41:12 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.5.0
 MIME-Version: 1.0
-In-Reply-To: <1598973776.4238.11.camel@HansenPartnership.com>
+In-Reply-To: <3369218e-eea4-14e9-15f1-870269e4649d@gmx.de>
 Content-Language: en-US
-X-Provags-ID: V03:K1:ZB4M5bHJm2lT0eoLHk37MoNKcSKNbWnO0I+HozfOxJD3VBajWa/
- 2YmeAFUi9NWtJ+BwUk/HUg0wTP7BOmNOnQ/gn+knEGQKbwqDbO3XJTfcv99kwA2MdYWpTg/
- OELXP8GWQ4gUfymXUhK/7WblA+uNciI9f2zTsxEcsgOFoyBI0fFfIrl3FCp9IVjo9r0WPlF
- dWbroS2KiZXHO835wd86Q==
+X-Provags-ID: V03:K1:4Y8gxSC3mimemrR4PtvEKNwyw28FqcRZSkoK2gQkqvo/KOoRbTg
+ w40kQskhrNaheI6REKgULCG68Fy6MEYc0KsJy9WRPUH71+WKoerrwaE3EISLn47wt9qPakq
+ Z9gMZCEqcjMGAkwuPOCtdfBULoqR2MkqoEWEFsPLv/Ad3iHMpMr0z0ACL6exzE1IUZ+o2Jw
+ GUtUnwHdeUzKCJ46isMYw==
 X-Spam-Flag: NO
-X-UI-Out-Filterresults: notjunk:1;V03:K0:oZDHRs3+XDY=:QT8wDBla2jvwzpc3Z4mtD4
- 1KqjCFBIWn2mkcGitG1u/MQjHiu/uGVfCitiv6msSTtQZCKzSBPu/RkpqxFRTaFxiI0V9Hfxg
- ZrXT+6cJeU2r5Xjw309unXNn1/c3COkMm6w+PirEj5XYIZIyynDcmUInhKcXCaToU9K5gZqdQ
- uPHWlhx0pJlrEHbHHg4Hhn/FZwwcuHqhqgk99y9/QjvOHiKcVyZsw7q4EyYTz43G7iYhplq4U
- PJVavBAujb2CINa2cx4JUobANv+sx+VftA2z7Ryx/6gdFTEdSBUMD9U4qxnZ8VHrzsuqsRHYK
- zfALuGqgiKbmeGEzqPCsmjFHGW4FJsZM7v0YdV4rH2NQipKr5rty9MDaL7pZNcxyGQJcoUghX
- 2pJo0QZdVWuKUraGBSScCCj8g8J/XddZgVm1gYD+Q5Q2MjnSSfApvaJEnV3c+Rn+JM1j6WCTH
- Sp2VDF+gFitMuuWy8dC+zdt32k7kNEjbZFlWRQ1mk3tNR2+R1npG87Z/+qK7/+vyw11Ca/jTZ
- qDRBvTe0gZeYXGJzsqjS7mHCZ1wQTn/bEayCvCt9sIHVq+gGl9mkI4wrxxJdbUfs+nHHWka4I
- wrbcT1qWUy/93VfmlZvJk1SdxZ6Nk4evLGqICNSq6ahOqWe109C6M73/AQ2esg+pwiT+C7zUL
- ILalpyzgyZyuh+u9XbawjCn0gG/YRq4+xeBTphiz0w787j6GuYLDXrPI19ylPNJLOqmN23MbW
- FzVtSFYQv/id//4o/g/yNIblDgwMjUListQz6+k305v+oajyVwJnAlJLdhEX3yI9T0XGj0tH/
- SIvYqmRyU650tX/yHTCjMRehsq4iqtrcHWC+zm5Mq0JNrbiiq23HMnTN7f7Xeqw4oZe6y/ssj
- hvzmoq0kg4FtRg+qOBDD2b3gOtzrTeEzSXLmZR/98JsV+3CBobEfusYk0pbwooabwZbZ1JAws
- BptFC0/IZkTrqwwII+75329nDPIPVEFcswlt+nLyGulpTSxl8CBtaxsNAwyvVWF3STn3ZSw9k
- uYnsJTGhOp74uI+QecU+RKe+Lm4VALatPqAT1LTt3jyPepYkaxy+7mV7MLTQ91T4kAZq/CGBj
- IzfCwfp1jwr7oNMavdet5uE0ve6XNnYVxyC70V6opPVJyiOMK+MiVUmksuG9CEAC7MSz1r2S0
- 20+f/foE8YqLzJN3FRaRSd9CGud+SVmuN5uCQSDJtFELRtY6R7o2I7vhn5PvGO05fPhklb0Pc
- wRJagCJU4SjdFCCtl
+X-UI-Out-Filterresults: notjunk:1;V03:K0:4lG/PGFS7YQ=:rR2RWvp5WhtvYGYgat1e00
+ 0rF5u2mtUMkAk5WSd9Aa85NoBhY1TSBoWKZBCJ4rwtlnRn8wdTBwkngGfwpVVlNUoTFLjSyrV
+ dM46jjweSnPFr8XhH+kUbZi8nfv6BYzG7I3YF2PswSg74hJGslsbwd81I/cZ8KPvjSLwgvlMG
+ qic+xZolA+MdQVgJGn64EkYW1DlcXV4gMG9LXW4+9553DiKfcM+5/zwWxw0cpO6Jnoe1L7rrA
+ kOYQmwe1wTN3lP6q4Xz99dj7FqfZVVuegxF6peou2o6w+ITCPtuLm6egQPtVE3C6amruAZb29
+ glICo0l6SpftC4oBEVgkOIRfdQ2jQlwZcG9QmH3rSp9u2BHEwOTXSLJGiNFvzVoeqt4t7uyVj
+ eXAkUz9hT0d3IU2KosWY3+BLBxNPncgp0/VCs5JvwdO2SHDAByGYT2FqbPFevV9b4XMT/M5PU
+ eh/og76n7UYqpMe+mlzJq5cKbAJVu450dqW7JGEm/PibmF9c0u6QJTppVgX6yAGLFMQI5O9xU
+ 2apy5bcA5aU8jWW9cDTNCwuqkNw0U0/2WWfyQEKJTgRxKgJBU0sIEczgDpxOO5RTNcdBtGFBs
+ V8jzcgpZ5KsngR5t2lWAZMzdwZVP34TfYH1XK6c0CVgBD47Sw5eX5U1Q0rCy37oNa6YIXTE9a
+ Xp6aYP4h3KFkk0s/RoT6Ke1bjKj3Va5B9o5MciBLLx7WvEBlZXYF/EEysP4bV82Xrv5FGgcOg
+ oh52J5bfjodQ5wWNdaRK+e38oUkyRhmURb3XRxrW2fDrcBCchtAsE9mGJ6LB5fBtmYoRsJTmf
+ cXUesL8SjI8AG1F15nWfDKKjsgJI9i4Nv1rLO7jSenStdlCv9bzYkzFYplFgiJQ7cLqwWvAjc
+ 7CPUrsYcLfK4Wbdm0m/VUh6wASK8K0QNytwoXTs/ljGIIK4U52UZJrzgFAKQJhXuVubth+eZY
+ AZkmQQLpSFPMuX6IF1nH1Mc2UjtK1Cp2LEUeAnKDI1fCjiem+fClfbf2G10U0l3tob6wDRsRI
+ t7OdZsZXe0f7TM/u0vGP4R9Cwsl6Fho63YI7D5w6/u5NL5QGtBDEC95y9+G63wmiXSBcng3A4
+ 1UTqryoUHc8aKHXYqF84O5q/rWzFMRztwG8wy1uv0KBlIypD0gFTmCI+GG5eMT7pfTy4hzJ0B
+ r5KBGKxghDj+/3MGdhdvMFOuYS5qssBiWkis3r4/O5Ueg/OUyPJBrZmB18VBFEydfdyctQt6r
+ mkZNnjtzj1HuFIBiQ
 X-Mailman-Approved-At: Tue, 01 Sep 2020 18:38:08 +0000
 Subject: Re: [Nouveau] [PATCH 07/28] 53c700: improve non-coherent DMA
  handling
@@ -152,29 +155,56 @@ Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 01.09.20 17:22, James Bottomley wrote:
-> On Tue, 2020-09-01 at 16:05 +0100, Matthew Wilcox wrote:
->> On Tue, Sep 01, 2020 at 07:52:40AM -0700, James Bottomley wrote:
->>> I think this looks mostly OK, except for one misnamed parameter
->>> below. Unfortunately, the last non-coherent parisc was the 700
->>> series and I no longer own a box, so I can't test that part of it
->>> (I can fire up the C360 to test it on a coherent arch).
+On 01.09.20 18:21, Helge Deller wrote:
+> On 01.09.20 17:22, James Bottomley wrote:
+>> On Tue, 2020-09-01 at 16:05 +0100, Matthew Wilcox wrote:
+>>> On Tue, Sep 01, 2020 at 07:52:40AM -0700, James Bottomley wrote:
+>>>> I think this looks mostly OK, except for one misnamed parameter
+>>>> below. Unfortunately, the last non-coherent parisc was the 700
+>>>> series and I no longer own a box, so I can't test that part of it
+>>>> (I can fire up the C360 to test it on a coherent arch).
+>>>
+>>> I have a 715/50 that probably hasn't been powered on in 15 years if
+>>> you need something that old to test on (I believe the 725/100 uses
+>>> the 7100LC and so is coherent).  I'll need to set up a cross-compiler
+>>> ...
 >>
->> I have a 715/50 that probably hasn't been powered on in 15 years if
->> you need something that old to test on (I believe the 725/100 uses
->> the 7100LC and so is coherent).  I'll need to set up a cross-compiler
->> ...
+>> I'm not going to say no to actual testing, but it's going to be a world
+>> of pain getting something so old going.  I do have a box of older
+>> systems I keep for architectural testing that I need to rummage around
+>> in ... I just have a vague memory that my 715 actually caught fire a
+>> decade ago and had to be disposed of.
 >
-> I'm not going to say no to actual testing, but it's going to be a world
-> of pain getting something so old going.  I do have a box of older
-> systems I keep for architectural testing that I need to rummage around
-> in ... I just have a vague memory that my 715 actually caught fire a
-> decade ago and had to be disposed of.
+> I still have a zoo of machines running for such testing, including a
+> 715/64 and two 730.
+> I'm going to test this git tree on the 715/64:
+> git://git.infradead.org/users/hch/misc.git dma_alloc_pages
 
-I still have a zoo of machines running for such testing, including a
-715/64 and two 730.
-I'm going to test this git tree on the 715/64:
-git://git.infradead.org/users/hch/misc.git dma_alloc_pages
+This tree boots nicely (up to a command prompt with i82596 nic working):
+
+53c700: Version 2.8 By James.Bottomley@HansenPartnership.com
+scsi0: 53c710 rev 2
+scsi host0: LASI SCSI 53c700
+scsi 0:0:6:0: Direct-Access     QUANTUM  FIREBALL_TM3200S 300X PQ: 0 ANSI: 2
+scsi target0:0:6: Beginning Domain Validation
+scsi 0:0:6:0: tag#56 Enabling Tag Command Queuing
+scsi target0:0:6: asynchronous
+scsi target0:0:6: FAST-10 SCSI 10.0 MB/s ST (100 ns, offset 8)
+scsi target0:0:6: Domain Validation skipping write tests
+scsi target0:0:6: Ending Domain Validation
+scsi 0:0:6:1: tag#63 Disabling Tag Command Queuing
+st: Version 20160209, fixed bufsize 32768, s/g segs 256
+sd 0:0:6:0: Power-on or device reset occurred
+sd 0:0:6:0: Attached scsi generic sg0 type 0
+LASI 82596 driver - Revision: 1.30
+Found i82596 at 0xf0107000, IRQ 17
+eth0: 82596 at 0xf0107000, 08:00:09:c2:9e:60 IRQ 17.
+sd 0:0:6:0: [sda] 6281856 512-byte logical blocks: (3.22 GB/3.00 GiB)
+sd 0:0:6:0: [sda] Write Protect is off
+
+Christoph, you may add a
+Tested-by: Helge Deller <deller@gmx.de> # parisc
+to the series.
 
 Helge
 _______________________________________________
