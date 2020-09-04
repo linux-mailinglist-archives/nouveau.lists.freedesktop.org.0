@@ -1,56 +1,48 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B836B25C8C3
-	for <lists+nouveau@lfdr.de>; Thu,  3 Sep 2020 20:32:38 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7495825E2B7
+	for <lists+nouveau@lfdr.de>; Fri,  4 Sep 2020 22:28:32 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B3A876E207;
-	Thu,  3 Sep 2020 18:32:36 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 38DED6ECBF;
+	Fri,  4 Sep 2020 20:28:29 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from hqnvemgate26.nvidia.com (hqnvemgate26.nvidia.com
- [216.228.121.65])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5E0046E207
- for <nouveau@lists.freedesktop.org>; Thu,  3 Sep 2020 18:32:36 +0000 (UTC)
-Received: from hqpgpgate101.nvidia.com (Not Verified[216.228.121.13]) by
- hqnvemgate26.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
- id <B5f5136b50002>; Thu, 03 Sep 2020 11:32:21 -0700
-Received: from hqmail.nvidia.com ([172.20.161.6])
- by hqpgpgate101.nvidia.com (PGP Universal service);
- Thu, 03 Sep 2020 11:32:35 -0700
-X-PGP-Universal: processed;
- by hqpgpgate101.nvidia.com on Thu, 03 Sep 2020 11:32:35 -0700
-Received: from HQMAIL107.nvidia.com (172.20.187.13) by HQMAIL109.nvidia.com
- (172.20.187.15) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Thu, 3 Sep
- 2020 18:32:34 +0000
-Received: from hqnvemgw03.nvidia.com (10.124.88.68) by HQMAIL107.nvidia.com
- (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3 via Frontend
- Transport; Thu, 3 Sep 2020 18:32:34 +0000
-Received: from rcampbell-dev.nvidia.com (Not Verified[10.110.48.66]) by
- hqnvemgw03.nvidia.com with Trustwave SEG (v7, 5, 8, 10121)
- id <B5f5136c20001>; Thu, 03 Sep 2020 11:32:34 -0700
-From: Ralph Campbell <rcampbell@nvidia.com>
-To: <linux-mm@kvack.org>, <nouveau@lists.freedesktop.org>,
- <linux-kselftest@vger.kernel.org>, <linux-kernel@vger.kernel.org>
-Date: Thu, 3 Sep 2020 11:31:40 -0700
-Message-ID: <20200903183140.19055-1-rcampbell@nvidia.com>
-X-Mailer: git-send-email 2.20.1
+Received: from us-smtp-delivery-1.mimecast.com (us-smtp-1.mimecast.com
+ [205.139.110.61])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C24686ECBF
+ for <nouveau@lists.freedesktop.org>; Fri,  4 Sep 2020 20:28:27 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1599251306;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=BZDW8aVcR3JjlZkQLY3DvQBbkVCDbW7ARFJrRWlAmag=;
+ b=bBNihsXPRWZCoZu0ew7fp5qnkAlJSa0cOVNJq/cy77nJtAn+u4H08WwUDGxzzWw4jf9gKF
+ YvGo0ItjhAoO3K0kSCpxYE+FxrvESaiApqdWenKzJE4qQC3s95qMsVhWsscGUGdmnN/5oK
+ rVkGGoN5dnU3ZKSwrYuXhZBwQDzVdvU=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-298-tQhuWdMvPFiR8TFL_751LA-1; Fri, 04 Sep 2020 16:28:25 -0400
+X-MC-Unique: tQhuWdMvPFiR8TFL_751LA-1
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
+ [10.5.11.12])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 2E2D8420E9;
+ Fri,  4 Sep 2020 20:28:23 +0000 (UTC)
+Received: from Whitewolf.redhat.com (ovpn-118-1.rdu2.redhat.com [10.10.118.1])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 0B15060C05;
+ Fri,  4 Sep 2020 20:28:21 +0000 (UTC)
+From: Lyude Paul <lyude@redhat.com>
+To: nouveau@lists.freedesktop.org
+Date: Fri,  4 Sep 2020 16:27:58 -0400
+Message-Id: <20200904202813.1260202-1-lyude@redhat.com>
 MIME-Version: 1.0
-X-NVConfidentiality: public
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
- t=1599157941; bh=7zznCtZjQxXg4R9UxK0DP2/ItNxobmt3cvTtuXZ9tDw=;
- h=X-PGP-Universal:From:To:CC:Subject:Date:Message-ID:X-Mailer:
- MIME-Version:X-NVConfidentiality:Content-Type:
- Content-Transfer-Encoding;
- b=kQkSzzz56spCoiUMRfWZxXMXZ+w8kLW0MWfK0XIBCWkopz/baY0XkLc8Bk8PNHgiX
- 6AsHFjObxmg8rhEKKPHKu2cg1o5hsj2G4NUJr5wlWf1jlTxUyoCArFdhlo6J4wTUDA
- 8NlMBkgTKMTRkV+RdVwvJ5WPCHFQHEkNRqT9emPfLOpBvDiALNTqOqhHCSGbdAEcZc
- Qtz5NLypSNn/NpKNSgMarMK2nA5GB/fSwFnhDNO45DNLY0grwNex/ixT4tlxNwp6si
- Y1RiAjsXqNPz4ITslaueky4TELu1YTy5U7w2m3Uap/jtiNc5nAQ1V8AaaOkPboVDol
- YC7JWXLIIEkZw==
-Subject: [Nouveau] [PATCH v3] mm/thp: fix __split_huge_pmd_locked() for
- migration PMD
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
+Subject: [Nouveau] [PATCH v5 1/2] drm/nouveau/kms/nv50-: Program notifier
+ offset before requesting disp caps
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -62,113 +54,236 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Ralph Campbell <rcampbell@nvidia.com>, Zi Yan <ziy@nvidia.com>,
- Yang Shi <shy828301@gmail.com>, Alistair Popple <apopple@nvidia.com>,
- stable@vger.kernel.org, Bharata B Rao <bharata@linux.ibm.com>,
- Ben Skeggs <bskeggs@redhat.com>, Jason
- Gunthorpe <jgg@nvidia.com>, Andrew Morton <akpm@linux-foundation.org>,
- Shuah Khan <shuah@kernel.org>, Christoph Hellwig <hch@lst.de>
+Cc: David Airlie <airlied@linux.ie>,
+ "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
+ <dri-devel@lists.freedesktop.org>, open list <linux-kernel@vger.kernel.org>,
+ stable@vger.kernel.org, Ben Skeggs <bskeggs@redhat.com>,
+ Daniel Vetter <daniel@ffwll.ch>,
+ =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
+ Nirmoy Das <nirmoy.aiemd@gmail.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-A migrating transparent huge page has to already be unmapped. Otherwise,
-the page could be modified while it is being copied to a new page and
-data could be lost. The function __split_huge_pmd() checks for a PMD
-migration entry before calling __split_huge_pmd_locked() leading one to
-think that __split_huge_pmd_locked() can handle splitting a migrating PMD.
-However, the code always increments the page->_mapcount and adjusts the
-memory control group accounting assuming the page is mapped.
-Also, if the PMD entry is a migration PMD entry, the call to
-is_huge_zero_pmd(*pmd) is incorrect because it calls pmd_pfn(pmd) instead
-of migration_entry_to_pfn(pmd_to_swp_entry(pmd)).
-Fix these problems by checking for a PMD migration entry.
+Not entirely sure why this never came up when I originally tested this
+(maybe some BIOSes already have this setup?) but the ->caps_init vfunc
+appears to cause the display engine to throw an exception on driver
+init, at least on my ThinkPad P72:
 
-Fixes: 84c3fc4e9c56 ("mm: thp: check pmd migration entry in common path")
-cc: stable@vger.kernel.org # 4.14+
-Signed-off-by: Ralph Campbell <rcampbell@nvidia.com>
-Reviewed-by: Yang Shi <shy828301@gmail.com>
-Reviewed-by: Zi Yan <ziy@nvidia.com>
+nouveau 0000:01:00.0: disp: chid 0 mthd 008c data 00000000 0000508c 0000102b
+
+This is magic nvidia speak for "You need to have the DMA notifier offset
+programmed before you can call NV507D_GET_CAPABILITIES." So, let's fix
+this by doing that, and also perform an update afterwards to prevent
+racing with the GPU when reading capabilities.
+
+v2:
+* Don't just program the DMA notifier offset, make sure to actually
+  perform an update
+v3:
+* Don't call UPDATE()
+* Actually read the correct notifier fields, as apparently the
+  CAPABILITIES_DONE field lives in a different location than the main
+  NV_DISP_CORE_NOTIFIER_1 field. As well, 907d+ use a different
+  CAPABILITIES_DONE field then pre-907d cards.
+v4:
+* Don't forget to check the return value of core507d_read_caps()
+v5:
+* Get rid of NV50_DISP_CAPS_NTFY[14], use NV50_DISP_CORE_NTFY
+* Disable notifier after calling GetCapabilities()
+
+Signed-off-by: Lyude Paul <lyude@redhat.com>
+Fixes: 4a2cb4181b07 ("drm/nouveau/kms/nv50-: Probe SOR and PIOR caps for DP interlacing support")
+Cc: <stable@vger.kernel.org> # v5.8+
 ---
+ drivers/gpu/drm/nouveau/dispnv50/core.h       |  2 +
+ drivers/gpu/drm/nouveau/dispnv50/core507d.c   | 41 ++++++++++++++++++-
+ drivers/gpu/drm/nouveau/dispnv50/core907d.c   | 36 +++++++++++++++-
+ drivers/gpu/drm/nouveau/dispnv50/core917d.c   |  2 +-
+ .../drm/nouveau/include/nvhw/class/cl507d.h   |  5 ++-
+ .../drm/nouveau/include/nvhw/class/cl907d.h   |  4 ++
+ 6 files changed, 85 insertions(+), 5 deletions(-)
 
-No changes in v3 to this patch, just added reviewed-by and fixes to the
-change log and sending this as a separate patch from the rest of the
-series ("mm/hmm/nouveau: add THP migration to migrate_vma_*").
-I'll hold off resending the series without this patch unless there are
-changes needed.
-
- mm/huge_memory.c | 42 +++++++++++++++++++++++-------------------
- 1 file changed, 23 insertions(+), 19 deletions(-)
-
-diff --git a/mm/huge_memory.c b/mm/huge_memory.c
-index 2a468a4acb0a..606d712d9505 100644
---- a/mm/huge_memory.c
-+++ b/mm/huge_memory.c
-@@ -2023,7 +2023,7 @@ static void __split_huge_pmd_locked(struct vm_area_struct *vma, pmd_t *pmd,
- 		put_page(page);
- 		add_mm_counter(mm, mm_counter_file(page), -HPAGE_PMD_NR);
- 		return;
--	} else if (is_huge_zero_pmd(*pmd)) {
-+	} else if (pmd_trans_huge(*pmd) && is_huge_zero_pmd(*pmd)) {
- 		/*
- 		 * FIXME: Do we want to invalidate secondary mmu by calling
- 		 * mmu_notifier_invalidate_range() see comments below inside
-@@ -2117,30 +2117,34 @@ static void __split_huge_pmd_locked(struct vm_area_struct *vma, pmd_t *pmd,
- 		pte = pte_offset_map(&_pmd, addr);
- 		BUG_ON(!pte_none(*pte));
- 		set_pte_at(mm, addr, pte, entry);
--		atomic_inc(&page[i]._mapcount);
--		pte_unmap(pte);
--	}
--
--	/*
--	 * Set PG_double_map before dropping compound_mapcount to avoid
--	 * false-negative page_mapped().
--	 */
--	if (compound_mapcount(page) > 1 && !TestSetPageDoubleMap(page)) {
--		for (i = 0; i < HPAGE_PMD_NR; i++)
-+		if (!pmd_migration)
- 			atomic_inc(&page[i]._mapcount);
-+		pte_unmap(pte);
- 	}
+diff --git a/drivers/gpu/drm/nouveau/dispnv50/core.h b/drivers/gpu/drm/nouveau/dispnv50/core.h
+index 498622c0c670d..f75088186fba3 100644
+--- a/drivers/gpu/drm/nouveau/dispnv50/core.h
++++ b/drivers/gpu/drm/nouveau/dispnv50/core.h
+@@ -44,6 +44,7 @@ int core507d_new_(const struct nv50_core_func *, struct nouveau_drm *, s32,
+ 		  struct nv50_core **);
+ int core507d_init(struct nv50_core *);
+ void core507d_ntfy_init(struct nouveau_bo *, u32);
++int core507d_read_caps(struct nv50_disp *disp);
+ int core507d_caps_init(struct nouveau_drm *, struct nv50_disp *);
+ int core507d_ntfy_wait_done(struct nouveau_bo *, u32, struct nvif_device *);
+ int core507d_update(struct nv50_core *, u32 *, bool);
+@@ -55,6 +56,7 @@ extern const struct nv50_outp_func pior507d;
+ int core827d_new(struct nouveau_drm *, s32, struct nv50_core **);
  
--	lock_page_memcg(page);
--	if (atomic_add_negative(-1, compound_mapcount_ptr(page))) {
--		/* Last compound_mapcount is gone. */
--		__dec_lruvec_page_state(page, NR_ANON_THPS);
--		if (TestClearPageDoubleMap(page)) {
--			/* No need in mapcount reference anymore */
-+	if (!pmd_migration) {
-+		/*
-+		 * Set PG_double_map before dropping compound_mapcount to avoid
-+		 * false-negative page_mapped().
-+		 */
-+		if (compound_mapcount(page) > 1 &&
-+		    !TestSetPageDoubleMap(page)) {
- 			for (i = 0; i < HPAGE_PMD_NR; i++)
--				atomic_dec(&page[i]._mapcount);
-+				atomic_inc(&page[i]._mapcount);
-+		}
+ int core907d_new(struct nouveau_drm *, s32, struct nv50_core **);
++int core907d_caps_init(struct nouveau_drm *drm, struct nv50_disp *disp);
+ extern const struct nv50_outp_func dac907d;
+ extern const struct nv50_outp_func sor907d;
+ 
+diff --git a/drivers/gpu/drm/nouveau/dispnv50/core507d.c b/drivers/gpu/drm/nouveau/dispnv50/core507d.c
+index 248edf69e1683..e6f16a7750f07 100644
+--- a/drivers/gpu/drm/nouveau/dispnv50/core507d.c
++++ b/drivers/gpu/drm/nouveau/dispnv50/core507d.c
+@@ -78,18 +78,55 @@ core507d_ntfy_init(struct nouveau_bo *bo, u32 offset)
+ }
+ 
+ int
+-core507d_caps_init(struct nouveau_drm *drm, struct nv50_disp *disp)
++core507d_read_caps(struct nv50_disp *disp)
+ {
+ 	struct nvif_push *push = disp->core->chan.push;
+ 	int ret;
+ 
+-	if ((ret = PUSH_WAIT(push, 2)))
++	ret = PUSH_WAIT(push, 6);
++	if (ret)
+ 		return ret;
+ 
++	PUSH_MTHD(push, NV507D, SET_NOTIFIER_CONTROL,
++		  NVDEF(NV507D, SET_NOTIFIER_CONTROL, MODE, WRITE) |
++		  NVVAL(NV507D, SET_NOTIFIER_CONTROL, OFFSET, NV50_DISP_CORE_NTFY >> 2) |
++		  NVDEF(NV507D, SET_NOTIFIER_CONTROL, NOTIFY, ENABLE));
 +
-+		lock_page_memcg(page);
-+		if (atomic_add_negative(-1, compound_mapcount_ptr(page))) {
-+			/* Last compound_mapcount is gone. */
-+			__dec_lruvec_page_state(page, NR_ANON_THPS);
-+			if (TestClearPageDoubleMap(page)) {
-+				/* No need in mapcount reference anymore */
-+				for (i = 0; i < HPAGE_PMD_NR; i++)
-+					atomic_dec(&page[i]._mapcount);
-+			}
- 		}
-+		unlock_page_memcg(page);
- 	}
--	unlock_page_memcg(page);
+ 	PUSH_MTHD(push, NV507D, GET_CAPABILITIES, 0x00000000);
++
++	PUSH_MTHD(push, NV507D, SET_NOTIFIER_CONTROL,
++		  NVDEF(NV507D, SET_NOTIFIER_CONTROL, NOTIFY, DISABLE));
++
+ 	return PUSH_KICK(push);
+ }
  
- 	smp_wmb(); /* make pte visible before pmd */
- 	pmd_populate(mm, pmd, pgtable);
++int
++core507d_caps_init(struct nouveau_drm *drm, struct nv50_disp *disp)
++{
++	struct nv50_core *core = disp->core;
++	struct nouveau_bo *bo = disp->sync;
++	s64 time;
++	int ret;
++
++	NVBO_WR32(bo, NV50_DISP_CORE_NTFY, NV_DISP_CORE_NOTIFIER_1, CAPABILITIES_1,
++				     NVDEF(NV_DISP_CORE_NOTIFIER_1, CAPABILITIES_1, DONE, FALSE));
++
++	ret = core507d_read_caps(disp);
++	if (ret < 0)
++		return ret;
++
++	time = nvif_msec(core->chan.base.device, 2000ULL,
++			 if (NVBO_TD32(bo, NV50_DISP_CORE_NTFY,
++				       NV_DISP_CORE_NOTIFIER_1, CAPABILITIES_1, DONE, ==, TRUE))
++				 break;
++			 usleep_range(1, 2);
++			 );
++	if (time < 0)
++		NV_ERROR(drm, "core caps notifier timeout\n");
++
++	return 0;
++}
++
+ int
+ core507d_init(struct nv50_core *core)
+ {
+diff --git a/drivers/gpu/drm/nouveau/dispnv50/core907d.c b/drivers/gpu/drm/nouveau/dispnv50/core907d.c
+index b17c03529c784..8564d4dffaff0 100644
+--- a/drivers/gpu/drm/nouveau/dispnv50/core907d.c
++++ b/drivers/gpu/drm/nouveau/dispnv50/core907d.c
+@@ -22,11 +22,45 @@
+ #include "core.h"
+ #include "head.h"
+ 
++#include <nvif/push507c.h>
++#include <nvif/timer.h>
++
++#include <nvhw/class/cl907d.h>
++
++#include "nouveau_bo.h"
++
++int
++core907d_caps_init(struct nouveau_drm *drm, struct nv50_disp *disp)
++{
++	struct nv50_core *core = disp->core;
++	struct nouveau_bo *bo = disp->sync;
++	s64 time;
++	int ret;
++
++	NVBO_WR32(bo, NV50_DISP_CORE_NTFY, NV907D_CORE_NOTIFIER_3, CAPABILITIES_4,
++				     NVDEF(NV907D_CORE_NOTIFIER_3, CAPABILITIES_4, DONE, FALSE));
++
++	ret = core507d_read_caps(disp);
++	if (ret < 0)
++		return ret;
++
++	time = nvif_msec(core->chan.base.device, 2000ULL,
++			 if (NVBO_TD32(bo, NV50_DISP_CORE_NTFY,
++				       NV907D_CORE_NOTIFIER_3, CAPABILITIES_4, DONE, ==, TRUE))
++				 break;
++			 usleep_range(1, 2);
++			 );
++	if (time < 0)
++		NV_ERROR(drm, "core caps notifier timeout\n");
++
++	return 0;
++}
++
+ static const struct nv50_core_func
+ core907d = {
+ 	.init = core507d_init,
+ 	.ntfy_init = core507d_ntfy_init,
+-	.caps_init = core507d_caps_init,
++	.caps_init = core907d_caps_init,
+ 	.ntfy_wait_done = core507d_ntfy_wait_done,
+ 	.update = core507d_update,
+ 	.head = &head907d,
+diff --git a/drivers/gpu/drm/nouveau/dispnv50/core917d.c b/drivers/gpu/drm/nouveau/dispnv50/core917d.c
+index 66846f3720805..1cd3a2a35dfb7 100644
+--- a/drivers/gpu/drm/nouveau/dispnv50/core917d.c
++++ b/drivers/gpu/drm/nouveau/dispnv50/core917d.c
+@@ -26,7 +26,7 @@ static const struct nv50_core_func
+ core917d = {
+ 	.init = core507d_init,
+ 	.ntfy_init = core507d_ntfy_init,
+-	.caps_init = core507d_caps_init,
++	.caps_init = core907d_caps_init,
+ 	.ntfy_wait_done = core507d_ntfy_wait_done,
+ 	.update = core507d_update,
+ 	.head = &head917d,
+diff --git a/drivers/gpu/drm/nouveau/include/nvhw/class/cl507d.h b/drivers/gpu/drm/nouveau/include/nvhw/class/cl507d.h
+index 2e444bac701dd..6a463f308b64f 100644
+--- a/drivers/gpu/drm/nouveau/include/nvhw/class/cl507d.h
++++ b/drivers/gpu/drm/nouveau/include/nvhw/class/cl507d.h
+@@ -32,7 +32,10 @@
+ #define NV_DISP_CORE_NOTIFIER_1_COMPLETION_0_DONE_TRUE                               0x00000001
+ #define NV_DISP_CORE_NOTIFIER_1_COMPLETION_0_R0                                      15:1
+ #define NV_DISP_CORE_NOTIFIER_1_COMPLETION_0_TIMESTAMP                               29:16
+-
++#define NV_DISP_CORE_NOTIFIER_1_CAPABILITIES_1                                       0x00000001
++#define NV_DISP_CORE_NOTIFIER_1_CAPABILITIES_1_DONE                                  0:0
++#define NV_DISP_CORE_NOTIFIER_1_CAPABILITIES_1_DONE_FALSE                            0x00000000
++#define NV_DISP_CORE_NOTIFIER_1_CAPABILITIES_1_DONE_TRUE                             0x00000001
+ 
+ // class methods
+ #define NV507D_UPDATE                                                           (0x00000080)
+diff --git a/drivers/gpu/drm/nouveau/include/nvhw/class/cl907d.h b/drivers/gpu/drm/nouveau/include/nvhw/class/cl907d.h
+index 34bc3eafac7d1..79aff6ff31385 100644
+--- a/drivers/gpu/drm/nouveau/include/nvhw/class/cl907d.h
++++ b/drivers/gpu/drm/nouveau/include/nvhw/class/cl907d.h
+@@ -24,6 +24,10 @@
+ #ifndef _cl907d_h_
+ #define _cl907d_h_
+ 
++#define NV907D_CORE_NOTIFIER_3_CAPABILITIES_4                                       0x00000004
++#define NV907D_CORE_NOTIFIER_3_CAPABILITIES_4_DONE                                  0:0
++#define NV907D_CORE_NOTIFIER_3_CAPABILITIES_4_DONE_FALSE                            0x00000000
++#define NV907D_CORE_NOTIFIER_3_CAPABILITIES_4_DONE_TRUE                             0x00000001
+ #define NV907D_CORE_NOTIFIER_3_CAPABILITIES_CAP_SOR0_20                             0x00000014
+ #define NV907D_CORE_NOTIFIER_3_CAPABILITIES_CAP_SOR0_20_SINGLE_LVDS18               0:0
+ #define NV907D_CORE_NOTIFIER_3_CAPABILITIES_CAP_SOR0_20_SINGLE_LVDS18_FALSE         0x00000000
 -- 
-2.20.1
+2.26.2
 
 _______________________________________________
 Nouveau mailing list
