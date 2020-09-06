@@ -1,50 +1,39 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5C0E025E2BD
-	for <lists+nouveau@lfdr.de>; Fri,  4 Sep 2020 22:28:46 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 219D025EC45
+	for <lists+nouveau@lfdr.de>; Sun,  6 Sep 2020 05:16:12 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9D21B6ECC6;
-	Fri,  4 Sep 2020 20:28:43 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 573B36E3A8;
+	Sun,  6 Sep 2020 03:16:09 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [205.139.110.120])
- by gabe.freedesktop.org (Postfix) with ESMTPS id DAEE26ECC5
- for <nouveau@lists.freedesktop.org>; Fri,  4 Sep 2020 20:28:41 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1599251320;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=BWp0AAI+VZUu8qz/13ssyrVxYR5SrJ8VDuwzkJreei0=;
- b=D6pX3bOYWhbkisbpj9i7EySEbgezcqwg8vlOD/VTQcJQBTVDtoJj/ygKld2aSV/13XLuGZ
- Ye0g3RQYGdnZ6UPE+4kWfq/mNuKdb+uTTExrfe3TFpcy8B4n9mTxD8SF5E+nHwG3nQff7v
- OYAtC7KqihXD7ENhZGMzggWi0KJd8Es=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-432-4WJb22XZMNCaxKXeeacgtQ-1; Fri, 04 Sep 2020 16:28:38 -0400
-X-MC-Unique: 4WJb22XZMNCaxKXeeacgtQ-1
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
- [10.5.11.12])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 79E7F6E3A8
+ for <nouveau@lists.freedesktop.org>; Sun,  6 Sep 2020 03:16:07 +0000 (UTC)
+Received: from localhost (unknown [70.37.104.77])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 3F82610BBECF;
- Fri,  4 Sep 2020 20:28:28 +0000 (UTC)
-Received: from Whitewolf.redhat.com (ovpn-118-1.rdu2.redhat.com [10.10.118.1])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 95FE360C05;
- Fri,  4 Sep 2020 20:28:24 +0000 (UTC)
-From: Lyude Paul <lyude@redhat.com>
-To: nouveau@lists.freedesktop.org
-Date: Fri,  4 Sep 2020 16:27:59 -0400
-Message-Id: <20200904202813.1260202-2-lyude@redhat.com>
-In-Reply-To: <20200904202813.1260202-1-lyude@redhat.com>
-References: <20200904202813.1260202-1-lyude@redhat.com>
-MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
-Subject: [Nouveau] [PATCH v5 2/2] drm/nouveau/kms/nv50-: Log SOR/PIOR caps
+ by mail.kernel.org (Postfix) with ESMTPSA id 06BBD20760;
+ Sun,  6 Sep 2020 03:16:06 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1599362167;
+ bh=R2JmAvLL2xMjaqGqyoChd71ba6z4Q73x8XUK4i4hDMw=;
+ h=Date:From:To:To:To:CC:Cc:Subject:In-Reply-To:References:From;
+ b=UFo3szIJeMIVWx3o578UqnYveQKwMPVam9muT3xe3Vxz/j4UYAgTpgXsxWYg5muZv
+ MzDG9GbeVvipjPWD8ZqIVIBDLaZmDnRMa7DAFWongxJp5QUxgXTQHQaB8ku1Xq7/cu
+ HXAekEoaMR1vkDOA4SlCXAiM+F8ZNtOuYhs7XCvk=
+Date: Sun, 06 Sep 2020 03:16:06 +0000
+From: Sasha Levin <sashal@kernel.org>
+To: Sasha Levin <sashal@kernel.org>
+To: Ralph Campbell <rcampbell@nvidia.com>
+To: <linux-mm@kvack.org>, <nouveau@lists.freedesktop.org>
+In-Reply-To: <20200903183140.19055-1-rcampbell@nvidia.com>
+References: <20200903183140.19055-1-rcampbell@nvidia.com>
+Message-Id: <20200906031607.06BBD20760@mail.kernel.org>
+Subject: Re: [Nouveau] [PATCH v3] mm/thp: fix __split_huge_pmd_locked() for
+ migration PMD
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,65 +45,86 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>,
- Pankaj Bharadiya <pankaj.laxminarayan.bharadiya@intel.com>,
- open list <linux-kernel@vger.kernel.org>,
- "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
- <dri-devel@lists.freedesktop.org>, Takashi Iwai <tiwai@suse.de>,
- Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>,
- Alex Deucher <alexander.deucher@amd.com>
+Cc: stable@vger.kernel.org
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Since I'm almost certain I didn't get capability checking right for
-pre-volta chipsets, let's start logging any caps we find to make things
-like this obvious in the future.
+Hi
 
-Signed-off-by: Lyude Paul <lyude@redhat.com>
----
- drivers/gpu/drm/nouveau/dispnv50/disp.c | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+[This is an automated email]
 
-diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.c b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-index 7799530e07c1f..376add0faacc3 100644
---- a/drivers/gpu/drm/nouveau/dispnv50/disp.c
-+++ b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-@@ -303,6 +303,14 @@ nv50_dmac_create(struct nvif_device *device, struct nvif_object *disp,
- /******************************************************************************
-  * Output path helpers
-  *****************************************************************************/
-+static void
-+nv50_outp_dump_caps(struct nouveau_drm *drm,
-+		    struct nouveau_encoder *outp)
-+{
-+	NV_DEBUG(drm, "%s caps: dp_interlace=%d\n",
-+		 outp->base.base.name, outp->caps.dp_interlace);
-+}
-+
- static void
- nv50_outp_release(struct nouveau_encoder *nv_encoder)
- {
-@@ -1819,6 +1827,7 @@ nv50_sor_create(struct drm_connector *connector, struct dcb_output *dcbe)
- 	drm_connector_attach_encoder(connector, encoder);
- 
- 	disp->core->func->sor->get_caps(disp, nv_encoder, ffs(dcbe->or) - 1);
-+	nv50_outp_dump_caps(drm, nv_encoder);
- 
- 	if (dcbe->type == DCB_OUTPUT_DP) {
- 		struct nvkm_i2c_aux *aux =
-@@ -1989,6 +1998,7 @@ nv50_pior_create(struct drm_connector *connector, struct dcb_output *dcbe)
- 	drm_connector_attach_encoder(connector, encoder);
- 
- 	disp->core->func->pior->get_caps(disp, nv_encoder, ffs(dcbe->or) - 1);
-+	nv50_outp_dump_caps(drm, nv_encoder);
- 
- 	return 0;
- }
+This commit has been processed because it contains a "Fixes:" tag
+fixing commit: 84c3fc4e9c56 ("mm: thp: check pmd migration entry in common path").
+
+The bot has tested the following trees: v5.8.6, v5.4.62, v4.19.143, v4.14.196.
+
+v5.8.6: Build OK!
+v5.4.62: Failed to apply! Possible dependencies:
+    0d1c20722ab3 ("mm: memcontrol: switch to native NR_FILE_PAGES and NR_SHMEM counters")
+    3fba69a56e16 ("mm: memcontrol: drop @compound parameter from memcg charging API")
+    468c398233da ("mm: memcontrol: switch to native NR_ANON_THPS counter")
+    72981e0e7b60 ("userfaultfd: wp: add UFFDIO_COPY_MODE_WP")
+    83d116c53058 ("mm: fix double page fault on arm64 if PTE_AF is cleared")
+    85b9f46e8ea4 ("mm, thp: track fallbacks due to failed memcg charges separately")
+    92855270ff08 ("mm/memcontrol.c: cleanup some useless code")
+    be5d0a74c62d ("mm: memcontrol: switch to native NR_ANON_MAPPED counter")
+    c23a0c99793f ("mm/migrate: clean up some minor coding style")
+    dcdf11ee1441 ("mm, shmem: add vmstat for hugepage fallback")
+    f4129ea3591a ("mm: fix NUMA node file count error in replace_page_cache()")
+    ffe945e633b5 ("khugepaged: do not stop collapse if less than half PTEs are referenced")
+
+v4.19.143: Failed to apply! Possible dependencies:
+    0ac261042084 ("x86/irq/64: Init hardirq_stack_ptr during CPU hotplug")
+    0d1c20722ab3 ("mm: memcontrol: switch to native NR_FILE_PAGES and NR_SHMEM counters")
+    117ed4548541 ("x86/irq/64: Remove stack overflow debug code")
+    231c4846b106 ("x86/irq/32: Make irq stack a character array")
+    30842211506e ("x86/exceptions: Remove unused stack defines on 32bit")
+    39656e83dab9 ("mm: lift the x86_32 PAE version of gup_get_pte to common code")
+    468c398233da ("mm: memcontrol: switch to native NR_ANON_THPS counter")
+    4f44b8f0b33b ("x86/irq/64: Remove a hardcoded irq_stack_union access")
+    66c7ceb47f62 ("x86/irq/32: Handle irq stack allocation failure proper")
+    758a2e312228 ("x86/irq/64: Rename irq_stack_ptr to hardirq_stack_ptr")
+    7ac870747988 ("x86/vdso: Switch to generic vDSO implementation")
+    99cb0dbd47a1 ("mm,thp: add read-only THP support for (non-shmem) FS")
+    a754fe2b76d1 ("x86/irq/32: Rename hard/softirq_stack to hard/softirq_stack_ptr")
+    aa641c287b2f ("x86/irq/32: Define IRQ_STACK_SIZE")
+    be5d0a74c62d ("mm: memcontrol: switch to native NR_ANON_MAPPED counter")
+    df835e7083be ("x86/irq/64: Sanitize the top/bottom confusion")
+    e6401c130931 ("x86/irq/64: Split the IRQ stack into its own pages")
+
+v4.14.196: Failed to apply! Possible dependencies:
+    050e9baa9dc9 ("Kbuild: rename CC_STACKPROTECTOR[_STRONG] config variables")
+    0d1c20722ab3 ("mm: memcontrol: switch to native NR_FILE_PAGES and NR_SHMEM counters")
+    117ed4548541 ("x86/irq/64: Remove stack overflow debug code")
+    152e93af3cfe ("mm, thp: Do not make pmd/pud dirty without a reason")
+    2a61f4747eea ("stack-protector: test compiler capability in Kconfig and drop AUTO mode")
+    2b8383927525 ("Makefile: move stack-protector compiler breakage test earlier")
+    2bc2f688fdf8 ("Makefile: move stack-protector availability out of Kconfig")
+    39656e83dab9 ("mm: lift the x86_32 PAE version of gup_get_pte to common code")
+    44c6dc940b19 ("Makefile: introduce CONFIG_CC_STACKPROTECTOR_AUTO")
+    4645b9fe84bf ("mm/mmu_notifier: avoid call to invalidate_range() in range_end()")
+    468c398233da ("mm: memcontrol: switch to native NR_ANON_THPS counter")
+    59c66c5f8c4f ("mm: factor out page cache page freeing into a separate function")
+    5ecc4d852c03 ("mm: factor out checks and accounting from __delete_from_page_cache()")
+    76253fbc8fbf ("mm: move accounting updates before page_cache_tree_delete()")
+    7ac870747988 ("x86/vdso: Switch to generic vDSO implementation")
+    8373b7d9d174 ("Documentation: kconfig: add recommended way to describe compiler support")
+    99cb0dbd47a1 ("mm,thp: add read-only THP support for (non-shmem) FS")
+    be5d0a74c62d ("mm: memcontrol: switch to native NR_ANON_MAPPED counter")
+    e6401c130931 ("x86/irq/64: Split the IRQ stack into its own pages")
+    fadae2953072 ("thp: use mm_file_counter to determine update which rss counter")
+
+
+NOTE: The patch will not be queued to stable trees until it is upstream.
+
+How should we proceed with this patch?
+
 -- 
-2.26.2
-
+Thanks
+Sasha
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
