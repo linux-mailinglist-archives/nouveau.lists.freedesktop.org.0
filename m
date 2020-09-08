@@ -1,57 +1,56 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id E4C98260A64
-	for <lists+nouveau@lfdr.de>; Tue,  8 Sep 2020 07:54:39 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id B86012624C8
+	for <lists+nouveau@lfdr.de>; Wed,  9 Sep 2020 04:05:49 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 775386E15F;
-	Tue,  8 Sep 2020 05:54:38 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 316856E8F8;
+	Wed,  9 Sep 2020 02:05:41 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [207.211.31.120])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 861FC6E15D
- for <nouveau@lists.freedesktop.org>; Tue,  8 Sep 2020 05:49:15 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1599544154;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=eQK1NPwmSWOx8INcFCnwK3inQ46y12Ng6QHkYnvGe3I=;
- b=d7rHMyqTyYlVVcjqbIdrKfcJyaWiYQHSUE5x/TdbvBfpOl/jUxo7OqJ3kTJqkzZEGilUKR
- yZZS/eO4M33Qmn0zkCFsB/UqId6zLwDAyJZ6nuQrsujpF8YUTljkStVqGVSwuvu0/r6qlQ
- 2P2aCXD9mfrPXItYLXp7r8ao9hLoJeM=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-45-r-VulFGYMA-fjnnBfjljEg-1; Tue, 08 Sep 2020 01:49:07 -0400
-X-MC-Unique: r-VulFGYMA-fjnnBfjljEg-1
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
- [10.5.11.15])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id E448D425D1;
- Tue,  8 Sep 2020 05:49:02 +0000 (UTC)
-Received: from sirius.home.kraxel.org (ovpn-112-56.ams2.redhat.com
- [10.36.112.56])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 2C936811BE;
- Tue,  8 Sep 2020 05:48:58 +0000 (UTC)
-Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id 0FDF617538; Tue,  8 Sep 2020 07:48:58 +0200 (CEST)
-Date: Tue, 8 Sep 2020 07:48:58 +0200
-From: Gerd Hoffmann <kraxel@redhat.com>
-To: Daniel Vetter <daniel@ffwll.ch>
-Message-ID: <20200908054858.um34wojjv6uhi7d3@sirius.home.kraxel.org>
-References: <20200907112425.15610-1-kraxel@redhat.com>
- <20200907112425.15610-2-kraxel@redhat.com>
- <CAKMK7uGjT73rh=9iuCKAXvC_CaOuygm8PgOQgofkTgH7wRysFw@mail.gmail.com>
+X-Greylist: delayed 429 seconds by postgrey-1.36 at gabe;
+ Tue, 08 Sep 2020 08:48:40 UTC
+Received: from lb1-smtp-cloud7.xs4all.net (lb1-smtp-cloud7.xs4all.net
+ [194.109.24.24])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8E5466E194;
+ Tue,  8 Sep 2020 08:48:40 +0000 (UTC)
+Received: from cust-b5b5937f ([IPv6:fc0c:c16d:66b8:757f:c639:739b:9d66:799d])
+ by smtp-cloud7.xs4all.net with ESMTPA
+ id FZBvkWMsNMeQuFZBwkfEso; Tue, 08 Sep 2020 10:41:30 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=s1;
+ t=1599554490; bh=AQvpE90imbtcIDG4V2WxYb2iJCg77f2qjbgyPSUlRuc=;
+ h=Subject:To:From:Message-ID:Date:MIME-Version:Content-Type:From:
+ Subject;
+ b=wQHmFTHgMsA1Jy62WHxzFpV1f5P1aa6rhXG7umxaWThv8UoIZLvBI/cVyTm2RdjN5
+ USYsZoojECcbBPWeRhbjr0GuUNBGQMk44nd0O8CByqLA6pYZBlt+dBKDASBXctzMch
+ as57Zp+wsvRvvQFIAQPepjj5jPSfC968TpwvtJFmc/uwnqx+wiABRgIQu+6Kr20JCm
+ FwjlQM8SfAnTLpD47rhXDGRGgEWyBkQaKc1NzGWm+rkcEAfZuYpU7Nw/Ba+U4jS8xg
+ QhkdkekNaRB/3i9lC4omE6p6QCdoLEaWPYy6Dm8Ea0otyvi8WOXxrpEKyUt7BGJW0c
+ lx9o1h9WNwBBA==
+To: Sam McNally <sammc@chromium.org>, LKML <linux-kernel@vger.kernel.org>
+References: <20200901162133.1.I8693156f555875e5c8342e86ab37ce968dfdd277@changeid>
+ <20200901162133.4.I900b1b80709b7632a47d0ddb4cd375b4a3616c9e@changeid>
+From: Hans Verkuil <hverkuil@xs4all.nl>
+Message-ID: <2f1e64e4-bb37-0cfb-6b3b-3f51fd5faca3@xs4all.nl>
+Date: Tue, 8 Sep 2020 10:41:26 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <CAKMK7uGjT73rh=9iuCKAXvC_CaOuygm8PgOQgofkTgH7wRysFw@mail.gmail.com>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
-X-Mailman-Approved-At: Tue, 08 Sep 2020 05:54:36 +0000
-Subject: Re: [Nouveau] [PATCH v4 1/1] drm: allow limiting the scatter list
- size.
+In-Reply-To: <20200901162133.4.I900b1b80709b7632a47d0ddb4cd375b4a3616c9e@changeid>
+Content-Language: en-US
+X-CMAE-Envelope: MS4wfHz6rVM5/ECaUJ5Mt6JfyH8yYyfdOz7LyjzrGRpN5U8iJI039Wq60UxQJCQ82NhNMgJB9bQLpG24tbwI9XbmBkSFKkunPEEJscayJNaAJxeoArKYTOut
+ uPlnlCkBz3xHnsmrgSm1EbaB+j2jU1DP6KrF1DJGI8skOO8/xNnSytrGpMKOVVZSqEs59oxNTgRAP71WCFeWLOv4QFqf6jJiDv/E2vMHdJsmwlIIn/vu2Pzv
+ ClXAlwwB/bUtrBguK8ghXQ2yWwp5c+bHkaoGkSV1YYlb2BBZp0eL51+MDz2MQj5BIpyglkYhvIYWSelLQ+i5AB36nNOpG3Tt8Lg5O/wvTpFkTDD1TT+hzrNB
+ 7WdTNViEGmmJ3AzbTxKTRG5xURNFWTcKLaSJXHdotkvGYOA9x4+EiGCWWwHa1AanUOuN9G0YAJffpBrd6BJZRj1mgjaB09N11xW01TpBthJDCx7SsvsvRVn4
+ aY07xj62VhLn2RHLG3YX1rKb3zJ0zjc4aq19wIrYLf8abiZfUTT75hcfRxaVk1kPN63UdDpzKcyoasvjtmNuOIaKyLssWvoi/GPcfVHhmSk/PpPeck69fANr
+ HYZtxUVryhbu9vKE4gvYhoPnAk16u9QO9dMtIjnSJtNCBBTTwGV4EW/1AR3f23ti3HQLwiRRpDZhFaO+TFy8iLJy6BmLwthPe6gw+z7c6Mu2Poh5ehj8UuFY
+ y8khoQXwdG20S94epeVNtbelVC9D9vzUcO9RCGTZaz6iB6y+EVh5+G+SajyooLMbsfKV6LniY+npUwB+p1OtEqXJ9salkXcX1pqzwvu13N3r27A+2vCp/qon
+ wD79o3oHfehxc6cOKBz05xy5wuxdwMVSLBxtx5Dyi6pNV5pr4+METtFiobqobQ/vTboFh8PRRvRlUpUd5ktJrlANDXSNmr2OveNYb2sd1MZ8RrtT3sWxWTFF
+ AjneWsnF5xQ/6Ba2iJcZ6Ec8SV7cinwz+N7QtBSNDANeJI4RqSAXrVxRA3tQB6gNOklzXAo6ogbmPBnA7R/cW0F5+oHhDBytM+NyPc5hW71nHfIr
+X-Mailman-Approved-At: Wed, 09 Sep 2020 02:05:38 +0000
+Subject: Re: [Nouveau] [PATCH 4/5] drm_dp_cec: add plumbing in preparation
+ for MST support
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,69 +62,222 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Heiko =?utf-8?Q?St=C3=BCbner?= <heiko@sntech.de>,
- David Airlie <airlied@linux.ie>,
- "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
- <nouveau@lists.freedesktop.org>, dri-devel <dri-devel@lists.freedesktop.org>,
- Sandy Huang <hjc@rock-chips.com>, Thierry Reding <thierry.reding@gmail.com>,
- Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
- "open list:RADEON and AMDGPU DRM DRIVERS" <amd-gfx@lists.freedesktop.org>,
- "open list:ARM/Rockchip SoC support" <linux-rockchip@lists.infradead.org>,
- Ben Skeggs <bskeggs@redhat.com>, Russell King <linux+etnaviv@armlinux.org.uk>,
- "moderated list:DRM DRIVERS FOR XEN" <xen-devel@lists.xenproject.org>,
- "open list:DRM DRIVER FOR MSM ADRENO GPU" <linux-arm-msm@vger.kernel.org>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- "moderated list:DRM DRIVERS FOR VIVANTE GPU IP"
- <etnaviv@lists.freedesktop.org>, Maxime Ripard <mripard@kernel.org>,
- Christian Gmeiner <christian.gmeiner@gmail.com>,
- "open list:DRM DRIVERS FOR NVIDIA TEGRA" <linux-tegra@vger.kernel.org>,
- Sean Paul <sean@poorly.run>, "moderated list:ARM/Rockchip SoC support"
- <linux-arm-kernel@lists.infradead.org>,
- open list <linux-kernel@vger.kernel.org>, Rob Clark <robdclark@gmail.com>,
+Cc: Lucas De Marchi <lucas.demarchi@intel.com>,
+ Mikita Lipski <mikita.lipski@amd.com>, dri-devel@lists.freedesktop.org,
+ Pankaj Bharadiya <pankaj.laxminarayan.bharadiya@intel.com>,
+ David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
+ David Francis <David.Francis@amd.com>,
+ Rodrigo Siqueira <Rodrigo.Siqueira@amd.com>, amd-gfx@lists.freedesktop.org,
+ Gwan-gyeong Mun <gwan-gyeong.mun@intel.com>,
+ Manasi Navare <manasi.d.navare@intel.com>, Leo Li <sunpeng.li@amd.com>,
+ =?UTF-8?Q?Jos=c3=a9_Roberto_de_Souza?= <jose.souza@intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>,
  Alex Deucher <alexander.deucher@amd.com>,
- "open list:DRM DRIVER FOR MSM ADRENO GPU" <freedreno@lists.freedesktop.org>,
- Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>,
- Lucas Stach <l.stach@pengutronix.de>
+ =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
+ Wambui Karuga <wambui.karugax@gmail.com>, intel-gfx@lists.freedesktop.org,
+ Ben Skeggs <bskeggs@redhat.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Mon, Sep 07, 2020 at 03:53:02PM +0200, Daniel Vetter wrote:
-> On Mon, Sep 7, 2020 at 1:24 PM Gerd Hoffmann <kraxel@redhat.com> wrote:
-> >
-> > Add drm_device argument to drm_prime_pages_to_sg(), so we can
-> > call dma_max_mapping_size() to figure the segment size limit
-> > and call into __sg_alloc_table_from_pages() with the correct
-> > limit.
-> >
-> > This fixes virtio-gpu with sev.  Possibly it'll fix other bugs
-> > too given that drm seems to totaly ignore segment size limits
-> > so far ...
-> >
-> > v2: place max_segment in drm driver not gem object.
-> > v3: move max_segment next to the other gem fields.
-> > v4: just use dma_max_mapping_size().
-> >
-> > Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
+On 01/09/2020 08:22, Sam McNally wrote:
+> From: Hans Verkuil <hans.verkuil@cisco.com>
 > 
-> Uh, are you sure this works in all cases for virtio?
+> Signed-off-by: Hans Verkuil <hans.verkuil@cisco.com>
+> [sammc@chromium.org:
+>  - rebased
+>  - removed polling-related changes
+>  - moved the calls to drm_dp_cec_(un)set_edid() into the next patch
+> ]
+> Signed-off-by: Sam McNally <sammc@chromium.org>
+> ---
+> 
+>  .../display/amdgpu_dm/amdgpu_dm_mst_types.c   |  2 +-
+>  drivers/gpu/drm/drm_dp_cec.c                  | 22 ++++++++++---------
+>  drivers/gpu/drm/i915/display/intel_dp.c       |  2 +-
+>  drivers/gpu/drm/nouveau/nouveau_connector.c   |  2 +-
+>  include/drm/drm_dp_helper.h                   |  6 +++--
+>  5 files changed, 19 insertions(+), 15 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_mst_types.c b/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_mst_types.c
+> index 461fa4da0a34..6e7075893ec9 100644
+> --- a/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_mst_types.c
+> +++ b/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_mst_types.c
+> @@ -419,7 +419,7 @@ void amdgpu_dm_initialize_dp_connector(struct amdgpu_display_manager *dm,
+>  
+>  	drm_dp_aux_init(&aconnector->dm_dp_aux.aux);
+>  	drm_dp_cec_register_connector(&aconnector->dm_dp_aux.aux,
+> -				      &aconnector->base);
+> +				      &aconnector->base, false);
+>  
+>  	if (aconnector->base.connector_type == DRM_MODE_CONNECTOR_eDP)
+>  		return;
+> diff --git a/drivers/gpu/drm/drm_dp_cec.c b/drivers/gpu/drm/drm_dp_cec.c
+> index 3ab2609f9ec7..04ab7b88055c 100644
+> --- a/drivers/gpu/drm/drm_dp_cec.c
+> +++ b/drivers/gpu/drm/drm_dp_cec.c
+> @@ -14,6 +14,7 @@
+>  #include <drm/drm_connector.h>
+>  #include <drm/drm_device.h>
+>  #include <drm/drm_dp_helper.h>
+> +#include <drm/drm_dp_mst_helper.h>
+>  
+>  /*
+>   * Unfortunately it turns out that we have a chicken-and-egg situation
+> @@ -338,8 +339,6 @@ void drm_dp_cec_set_edid(struct drm_dp_aux *aux, const struct edid *edid)
+>  	if (aux->cec.adap) {
+>  		if (aux->cec.adap->capabilities == cec_caps &&
+>  		    aux->cec.adap->available_log_addrs == num_las) {
+> -			/* Unchanged, so just set the phys addr */
+> -			cec_s_phys_addr_from_edid(aux->cec.adap, edid);
+>  			goto unlock;
+>  		}
+>  		/*
+> @@ -364,15 +363,16 @@ void drm_dp_cec_set_edid(struct drm_dp_aux *aux, const struct edid *edid)
+>  	if (cec_register_adapter(aux->cec.adap, connector->dev->dev)) {
+>  		cec_delete_adapter(aux->cec.adap);
+>  		aux->cec.adap = NULL;
+> -	} else {
+> -		/*
+> -		 * Update the phys addr for the new CEC adapter. When called
+> -		 * from drm_dp_cec_register_connector() edid == NULL, so in
+> -		 * that case the phys addr is just invalidated.
+> -		 */
+> -		cec_s_phys_addr_from_edid(aux->cec.adap, edid);
+>  	}
+>  unlock:
+> +	/*
+> +	 * Update the phys addr for the new CEC adapter. When called
+> +	 * from drm_dp_cec_register_connector() edid == NULL, so in
+> +	 * that case the phys addr is just invalidated.
+> +	 */
 
-Sure, I've tested it ;)
+The comment is no longer in sync with the code: if EDID == NULL, then
+nothing is done due to the edid check in the 'if' below.
 
-> The comments I've found suggest very much not ... Or is that all very
-> old stuff only that no one cares about anymore?
+> +	if (aux->cec.adap && edid) {
 
-I think these days it is possible to override dma_ops per device, which
-in turn allows virtio to deal with the quirks without the rest of the
-kernel knowing about these details.
+I think this should just be: if (aux->cec.adap)
 
-I also think virtio-gpu can drop the virtio_has_dma_quirk() checks, just
-use the dma api path unconditionally and depend on virtio core having
-setup dma_ops in a way that it JustWorks[tm].  I'll look into that next.
+Also, the {} aren't necessary here.
 
-take care,
-  Gerd
+> +		cec_s_phys_addr_from_edid(aux->cec.adap, edid);
+> +	}
+>  	mutex_unlock(&aux->cec.lock);
+>  }
+>  EXPORT_SYMBOL(drm_dp_cec_set_edid);
+
+Frankly, the changes to this function should be dropped completely, from
+what I can see they are not necessary. It was done in my original patch
+because of the way I handled mst, but you did it differently (and I think
+better), so these changes are no longer needed.
+
+I know I am actually commenting on my old patch, but that patch was from a
+work-in-progress git branch and was never meant as a 'proper' patch.
+
+However, what complicates matters is that after digging a bit more I discovered
+that commit 732300154980 ("drm: Do not call drm_dp_cec_set_edid() while registering
+DP connectors") changed drm_dp_cec_register_connector() so that it no longer
+calls drm_dp_cec_set_edid(), but the comments there and in this function were
+not updated. It would be nice if you can add a patch fixing these outdated
+comments.
+
+Regardless of that change in commit 732300154980, the edid pointer can still be
+NULL and the existing behavior should be kept (i.e. create a CEC device, but with
+an invalid physical address since there is no EDID for some reason).
+
+Regards,
+
+	Hans
+
+> @@ -418,6 +418,7 @@ EXPORT_SYMBOL(drm_dp_cec_unset_edid);
+>   * drm_dp_cec_register_connector() - register a new connector
+>   * @aux: DisplayPort AUX channel
+>   * @connector: drm connector
+> + * @is_mst: set to true if this is an MST branch
+>   *
+>   * A new connector was registered with associated CEC adapter name and
+>   * CEC adapter parent device. After registering the name and parent
+> @@ -425,12 +426,13 @@ EXPORT_SYMBOL(drm_dp_cec_unset_edid);
+>   * CEC and to register a CEC adapter if that is the case.
+>   */
+>  void drm_dp_cec_register_connector(struct drm_dp_aux *aux,
+> -				   struct drm_connector *connector)
+> +				   struct drm_connector *connector, bool is_mst)
+>  {
+>  	WARN_ON(aux->cec.adap);
+>  	if (WARN_ON(!aux->transfer))
+>  		return;
+>  	aux->cec.connector = connector;
+> +	aux->cec.is_mst = is_mst;
+>  	INIT_DELAYED_WORK(&aux->cec.unregister_work,
+>  			  drm_dp_cec_unregister_work);
+>  }
+> diff --git a/drivers/gpu/drm/i915/display/intel_dp.c b/drivers/gpu/drm/i915/display/intel_dp.c
+> index 82b9de274f65..744cb55572f9 100644
+> --- a/drivers/gpu/drm/i915/display/intel_dp.c
+> +++ b/drivers/gpu/drm/i915/display/intel_dp.c
+> @@ -6261,7 +6261,7 @@ intel_dp_connector_register(struct drm_connector *connector)
+>  	intel_dp->aux.dev = connector->kdev;
+>  	ret = drm_dp_aux_register(&intel_dp->aux);
+>  	if (!ret)
+> -		drm_dp_cec_register_connector(&intel_dp->aux, connector);
+> +		drm_dp_cec_register_connector(&intel_dp->aux, connector, false);
+>  	return ret;
+>  }
+>  
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_connector.c b/drivers/gpu/drm/nouveau/nouveau_connector.c
+> index 49dd0cbc332f..671a70e95cd1 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_connector.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_connector.c
+> @@ -1414,7 +1414,7 @@ nouveau_connector_create(struct drm_device *dev,
+>  	switch (type) {
+>  	case DRM_MODE_CONNECTOR_DisplayPort:
+>  	case DRM_MODE_CONNECTOR_eDP:
+> -		drm_dp_cec_register_connector(&nv_connector->aux, connector);
+> +		drm_dp_cec_register_connector(&nv_connector->aux, connector, false);
+>  		break;
+>  	}
+>  
+> diff --git a/include/drm/drm_dp_helper.h b/include/drm/drm_dp_helper.h
+> index 85513eeb2196..12bca1b9512b 100644
+> --- a/include/drm/drm_dp_helper.h
+> +++ b/include/drm/drm_dp_helper.h
+> @@ -1495,12 +1495,14 @@ struct drm_connector;
+>   * @lock: mutex protecting this struct
+>   * @adap: the CEC adapter for CEC-Tunneling-over-AUX support.
+>   * @connector: the connector this CEC adapter is associated with
+> + * @is_mst: this is an MST branch
+>   * @unregister_work: unregister the CEC adapter
+>   */
+>  struct drm_dp_aux_cec {
+>  	struct mutex lock;
+>  	struct cec_adapter *adap;
+>  	struct drm_connector *connector;
+> +	bool is_mst;
+>  	struct delayed_work unregister_work;
+>  };
+>  
+> @@ -1746,7 +1748,7 @@ drm_dp_has_quirk(const struct drm_dp_desc *desc, u32 edid_quirks,
+>  #ifdef CONFIG_DRM_DP_CEC
+>  void drm_dp_cec_irq(struct drm_dp_aux *aux);
+>  void drm_dp_cec_register_connector(struct drm_dp_aux *aux,
+> -				   struct drm_connector *connector);
+> +				   struct drm_connector *connector, bool is_mst);
+>  void drm_dp_cec_unregister_connector(struct drm_dp_aux *aux);
+>  void drm_dp_cec_set_edid(struct drm_dp_aux *aux, const struct edid *edid);
+>  void drm_dp_cec_unset_edid(struct drm_dp_aux *aux);
+> @@ -1757,7 +1759,7 @@ static inline void drm_dp_cec_irq(struct drm_dp_aux *aux)
+>  
+>  static inline void
+>  drm_dp_cec_register_connector(struct drm_dp_aux *aux,
+> -			      struct drm_connector *connector)
+> +			      struct drm_connector *connector, bool is_mst)
+>  {
+>  }
+>  
+> 
 
 _______________________________________________
 Nouveau mailing list
