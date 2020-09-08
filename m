@@ -1,33 +1,27 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 42CD42607D0
-	for <lists+nouveau@lfdr.de>; Tue,  8 Sep 2020 02:51:54 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 93AC22607D1
+	for <lists+nouveau@lfdr.de>; Tue,  8 Sep 2020 02:51:56 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 57F476E0FE;
-	Tue,  8 Sep 2020 00:51:52 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 540FA6E57A;
+	Tue,  8 Sep 2020 00:51:53 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 1334 seconds by postgrey-1.36 at gabe;
- Tue, 08 Sep 2020 00:51:51 UTC
 Received: from mail1.merlins.org (magic.merlins.org [209.81.13.136])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 075D56E0FE
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0D3996E57A
  for <nouveau@lists.freedesktop.org>; Tue,  8 Sep 2020 00:51:51 +0000 (UTC)
-Received: from c-24-5-124-255.hsd1.ca.comcast.net ([24.5.124.255]:47962
+Received: from c-24-5-124-255.hsd1.ca.comcast.net ([24.5.124.255]:47940
  helo=sauron.svh.merlins.org) by mail1.merlins.org with esmtpsa 
  (Cipher TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92 #3)
- id 1kFRWS-00042o-U8 by authid <merlins.org> with srv_auth_plain
- for <nouveau@lists.freedesktop.org>; Mon, 07 Sep 2020 17:30:08 -0700
+ id 1kFRVv-0003xd-Hx by authid <merlins.org> with srv_auth_plain;
+ Mon, 07 Sep 2020 17:29:35 -0700
 Received: from merlin by sauron.svh.merlins.org with local (Exim 4.92)
- (envelope-from <merlin@merlins.org>) id 1kFRWS-0001kP-NG
- for nouveau@lists.freedesktop.org; Mon, 07 Sep 2020 17:30:08 -0700
-Resent-From: Marc MERLIN <marc@merlins.org>
-Resent-Date: Mon, 7 Sep 2020 17:30:08 -0700
-Resent-Message-ID: <20200908003008.GE20064@merlins.org>
-Resent-To: nouveau@lists.freedesktop.org
+ (envelope-from <marc@merlins.org>)
+ id 1kFRVv-0001f8-9O; Mon, 07 Sep 2020 17:29:35 -0700
 Date: Mon, 7 Sep 2020 17:29:35 -0700
-From: Marc MERLIN <marc_nouveau@merlins.org>
+From: Marc MERLIN <marc@merlins.org>
 To: Karol Herbst <kherbst@redhat.com>
 Message-ID: <20200908002935.GD20064@merlins.org>
 References: <20191004123947.11087-1-mika.westerberg@linux.intel.com>
