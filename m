@@ -2,71 +2,54 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 012BC262F7E
-	for <lists+nouveau@lfdr.de>; Wed,  9 Sep 2020 16:07:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8DDA626398B
+	for <lists+nouveau@lfdr.de>; Thu, 10 Sep 2020 03:47:44 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 866826E329;
-	Wed,  9 Sep 2020 14:07:16 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 851FB898F5;
+	Thu, 10 Sep 2020 01:47:37 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [63.128.21.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3A5986E329
- for <nouveau@lists.freedesktop.org>; Wed,  9 Sep 2020 14:07:15 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1599660434;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=AyBwbPv8eeKvlLBjOakfjoLGMVOfW6zd9C67uN/maIo=;
- b=er1aBiuUGnKzUEbJrlGyb6ga7iZ41NM5aTuJV3S4cNxhMBzaXVkM7ghiEXNuuaZNzTO20j
- EzhuehVWvPKBrHClpdLJd2p9hBzwJ7NaW5553fFqshtkbJfwNnixTgRwXF7rZevxrg9fo2
- yLjq51r3/kfwMPZtXVkxhPLAqZhRbMI=
-Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com
- [209.85.160.197]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-200-jPr_wr7BOh6AGleSivU0yw-1; Wed, 09 Sep 2020 10:07:10 -0400
-X-MC-Unique: jPr_wr7BOh6AGleSivU0yw-1
-Received: by mail-qt1-f197.google.com with SMTP id f12so1864860qtq.5
- for <nouveau@lists.freedesktop.org>; Wed, 09 Sep 2020 07:07:10 -0700 (PDT)
+Received: from mail-wr1-x443.google.com (mail-wr1-x443.google.com
+ [IPv6:2a00:1450:4864:20::443])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A47E46E9B2
+ for <nouveau@lists.freedesktop.org>; Wed,  9 Sep 2020 06:59:40 +0000 (UTC)
+Received: by mail-wr1-x443.google.com with SMTP id z1so1684761wrt.3
+ for <nouveau@lists.freedesktop.org>; Tue, 08 Sep 2020 23:59:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=v83Egdi6ND2jGynZTgCBEmNsp3MgfPzSb7smHHu8tuA=;
+ b=Jz3FyaVgs5FEK46vjzgP6Huyv3kRkIunR88mxuGaRzXWkQXzNWYvdQJ4U5w9F1LYv1
+ LaF1jHPDXugiukfpqzeP15YgBgMKHdSmii5A5k4T/M8bEh6sn83oETC0nihF03qalq8s
+ 7Cu5vrChegE2pJ7mqJjVTLoPgfQmKpll7k6Yg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=AyBwbPv8eeKvlLBjOakfjoLGMVOfW6zd9C67uN/maIo=;
- b=jOooLwwE4L/HTc8Tbdkp+C36RVjwqLN3Ydfgti66UtvMCxoWlpyWakFAKvf/2LAD+0
- GKtReECqI+iD3Ylp/sAoxMeq7utzVY95M0S++/RpsxBjZTi3AwZ07bfeDxYrvf5b/szv
- SWmTHMHkLWHQV8IMZpTS/XuVPhx42tYUDXFIhGb9r/k6cNtcX+8ZW8p58N0XYNgEfhlh
- zZDrnAXf/ZFmZmRs6y7RufXEbXBjc/gR54zDtvF2tejvXBhD9WoCeZpdYSzyJ18tC04G
- uGS3F2DLxe2SrDn1/J5eUZPYPf7zOxkfT3ee+vi2+tPvPu0G3rYuTJ7TUIqsIcVadq2s
- Ivyw==
-X-Gm-Message-State: AOAM530659DZiRGn4s6VDDxQqPUfxpKLVdZOYXsfAgCCtfp17Fx95LbE
- tpsHoZw2g6d8TiEO9xAyNEq0GxbC3CFfg8zLj2g7/ziuIMfOn2OxPbsQ9tRgaoLxr3v68HD/ozJ
- XOeQzUwJvspkb/t+XHB1xc6UanA==
-X-Received: by 2002:ad4:45a6:: with SMTP id y6mr4343660qvu.8.1599660429910;
- Wed, 09 Sep 2020 07:07:09 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJyR62IGHKCUdInJpA3KR7u+Fm1jkeugqEcJXQiLZYHdCq9aP3hWO+P2sN+mj2H1K846ayPcXg==
-X-Received: by 2002:ad4:45a6:: with SMTP id y6mr4343635qvu.8.1599660429620;
- Wed, 09 Sep 2020 07:07:09 -0700 (PDT)
-Received: from dev.jcline.org ([136.56.20.95])
- by smtp.gmail.com with ESMTPSA id d76sm2649240qkc.81.2020.09.09.07.07.08
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 09 Sep 2020 07:07:08 -0700 (PDT)
-Date: Wed, 9 Sep 2020 10:07:06 -0400
-From: Jeremy Cline <jcline@redhat.com>
-To: Karol Herbst <kherbst@redhat.com>
-Message-ID: <20200909140706.GA27322@dev.jcline.org>
-References: <20200812204952.1921587-1-jcline@redhat.com>
- <CACAvsv71oxCYB1+LCAUHD5v_NGAP-DpxPY_dPz53iw2=91KAJg@mail.gmail.com>
- <CACO55tvv6REmNzZZyyRSJyRT5z-xEf38+tk9cDnft63DX5JQUw@mail.gmail.com>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=v83Egdi6ND2jGynZTgCBEmNsp3MgfPzSb7smHHu8tuA=;
+ b=D2go1mF1vSp32/vg03lnXo38lZ7ha8RXCWbhi+cyiRVUeaV6Zx6RxBCMw1zcFzHd2q
+ 98I3EQE6ztbFB/7CKCBbKB2pzOV0cAIpxGlMDR5D6xYYEs5yQ5HP0T4QmAB9gdI52GFr
+ DJksO0FFj2vu8vqJ2QAwIuFiZcjMuCiOGPhnD9SqzLmOBxHW8LRsGthAfVM/r1rrxfbV
+ /2N4mBNFtpMnn1uLbRVeC/hJbng5Id+xZJUMhHScRYiKd4kknuJ5AQln6KxNutuYsFh6
+ OO2DP7U3ld3Cv06zF3j0ALtNsBxEMDzoiQLaN7AYobVkXmpj60cRuFOre1GbuDr/u/NB
+ sCdA==
+X-Gm-Message-State: AOAM533I1fLxQktYAW3oX6kxvFii8Fv1tPeHj+wM9DZ9eSS8oB3NU0AW
+ PcKquWcwx+38Kqv4CdJZKzsBLBZqaf5sOy1ugEU28g==
+X-Google-Smtp-Source: ABdhPJxuWAZD5tRSJGFLzpGiWfaKw/MQucLYZFZxsveXn7QPRVrRLbgClYUYbGGAYkgVue45lMCd5Bin03SDjqzJARc=
+X-Received: by 2002:a05:6000:11cd:: with SMTP id
+ i13mr2311750wrx.140.1599634778906; 
+ Tue, 08 Sep 2020 23:59:38 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <CACO55tvv6REmNzZZyyRSJyRT5z-xEf38+tk9cDnft63DX5JQUw@mail.gmail.com>
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=jcline@redhat.com
-X-Mimecast-Spam-Score: 0.001
-X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
-Subject: Re: [Nouveau] [PATCH] drm/nouveau: Add fine-grain temperature
- reporting
+References: <20200901162133.1.I8693156f555875e5c8342e86ab37ce968dfdd277@changeid>
+ <20200901162133.4.I900b1b80709b7632a47d0ddb4cd375b4a3616c9e@changeid>
+ <c5caee2875a86e68fc66c7bf2eae03393289aded.camel@redhat.com>
+In-Reply-To: <c5caee2875a86e68fc66c7bf2eae03393289aded.camel@redhat.com>
+From: Sam McNally <sammc@chromium.org>
+Date: Wed, 9 Sep 2020 16:59:01 +1000
+Message-ID: <CAJqEsoDLyuCoMQob+bk8OfnFXcqacs3Jg7Hc2ksBor9qWrnrAQ@mail.gmail.com>
+To: lyude@redhat.com
+X-Mailman-Approved-At: Thu, 10 Sep 2020 01:47:36 +0000
+Subject: Re: [Nouveau] [PATCH 4/5] drm_dp_cec: add plumbing in preparation
+ for MST support
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -78,61 +61,241 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, ML nouveau <nouveau@lists.freedesktop.org>,
- LKML <linux-kernel@vger.kernel.org>,
- ML dri-devel <dri-devel@lists.freedesktop.org>,
- Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>
+Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
+ Imre Deak <imre.deak@intel.com>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ =?UTF-8?Q?Jos=C3=A9_Roberto_de_Souza?= <jose.souza@intel.com>,
+ =?UTF-8?B?VmlsbGUgU3lyasOkbMOk?= <ville.syrjala@linux.intel.com>,
+ David Francis <David.Francis@amd.com>,
+ Rodrigo Siqueira <Rodrigo.Siqueira@amd.com>, amd-gfx@lists.freedesktop.org,
+ Hans Verkuil <hans.verkuil@cisco.com>, Ben Skeggs <bskeggs@redhat.com>,
+ Harry Wentland <harry.wentland@amd.com>,
+ Wambui Karuga <wambui.karugax@gmail.com>, Leo Li <sunpeng.li@amd.com>,
+ Lucas De Marchi <lucas.demarchi@intel.com>, intel-gfx@lists.freedesktop.org,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>,
+ Gwan-gyeong Mun <gwan-gyeong.mun@intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ Mikita Lipski <mikita.lipski@amd.com>, Matt Roper <matthew.d.roper@intel.com>,
+ Pankaj Bharadiya <pankaj.laxminarayan.bharadiya@intel.com>,
+ dri-devel@lists.freedesktop.org, LKML <linux-kernel@vger.kernel.org>,
+ Manasi Navare <manasi.d.navare@intel.com>, Daniel Vetter <daniel@ffwll.ch>,
+ Alex Deucher <alexander.deucher@amd.com>,
+ =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, Sep 09, 2020 at 10:22:14AM +0200, Karol Herbst wrote:
-> On Wed, Sep 9, 2020 at 6:06 AM Ben Skeggs <skeggsb@gmail.com> wrote:
+On Wed, 2 Sep 2020 at 04:12, Lyude Paul <lyude@redhat.com> wrote:
+>
+> Super minor nitpicks:
+>
+> On Tue, 2020-09-01 at 16:22 +1000, Sam McNally wrote:
+> > From: Hans Verkuil <hans.verkuil@cisco.com>
 > >
-> > On Thu, 13 Aug 2020 at 06:50, Jeremy Cline <jcline@redhat.com> wrote:
-> > >
-> > > Commit d32656373857 ("drm/nouveau/therm/gp100: initial implementation of
-> > > new gp1xx temperature sensor") added support for reading finer-grain
-> > > temperatures, but continued to report temperatures in 1 degree Celsius
-> > > increments via nvkm_therm_temp_get().
-> > >
-> > > Rather than altering nvkm_therm_temp_get() to report finer-grain
-> > > temperatures, which would be inconvenient for other users of the
-> > > function, a second interface has been added to line up with hwmon's
-> > > native unit of temperature.
-> > Hey Jeremy,
+> > Signed-off-by: Hans Verkuil <hans.verkuil@cisco.com>
+> > [sammc@chromium.org:
+> >  - rebased
+> >  - removed polling-related changes
+> >  - moved the calls to drm_dp_cec_(un)set_edid() into the next patch
+> > ]
+> > Signed-off-by: Sam McNally <sammc@chromium.org>
+> > ---
 > >
-> > Sorry this slipped past me until now.  I'm OK with adding support for
-> > millidegree temperature reporting, but don't think we need to keep
-> > both interfaces around and would rather see the existing code
-> > converted to return millidegrees (even on GPUs that don't support it)
-> > instead of degrees.
+> >  .../display/amdgpu_dm/amdgpu_dm_mst_types.c   |  2 +-
+> >  drivers/gpu/drm/drm_dp_cec.c                  | 22 ++++++++++---------
+> >  drivers/gpu/drm/i915/display/intel_dp.c       |  2 +-
+> >  drivers/gpu/drm/nouveau/nouveau_connector.c   |  2 +-
+> >  include/drm/drm_dp_helper.h                   |  6 +++--
+> >  5 files changed, 19 insertions(+), 15 deletions(-)
 > >
-> > Thanks!
-> > Ben.
+> > diff --git a/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_mst_types.c
+> > b/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_mst_types.c
+> > index 461fa4da0a34..6e7075893ec9 100644
+> > --- a/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_mst_types.c
+> > +++ b/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_mst_types.c
+> > @@ -419,7 +419,7 @@ void amdgpu_dm_initialize_dp_connector(struct
+> > amdgpu_display_manager *dm,
 > >
-> 
-> just a note as I was trying something like that in the past: we have a
-> lot of code which fetches the temperature and there are a lot of
-> places where we would then do a divide by 1000, so having a wrapper
-> function at least makes sense. If we want to keep the func pointers?
-> well.. I guess the increased CPU overhead wouldn't be as bad if all
-> sub classes do this static * 1000 as well either. I just think we
-> should have both interfaces in subdev/therm.h so we can just keep most
-> of the current code as is.
-> 
+> >       drm_dp_aux_init(&aconnector->dm_dp_aux.aux);
+> >       drm_dp_cec_register_connector(&aconnector->dm_dp_aux.aux,
+> > -                                   &aconnector->base);
+> > +                                   &aconnector->base, false);
+> >
+> >       if (aconnector->base.connector_type == DRM_MODE_CONNECTOR_eDP)
+> >               return;
+> > diff --git a/drivers/gpu/drm/drm_dp_cec.c b/drivers/gpu/drm/drm_dp_cec.c
+> > index 3ab2609f9ec7..04ab7b88055c 100644
+> > --- a/drivers/gpu/drm/drm_dp_cec.c
+> > +++ b/drivers/gpu/drm/drm_dp_cec.c
+> > @@ -14,6 +14,7 @@
+> >  #include <drm/drm_connector.h>
+> >  #include <drm/drm_device.h>
+> >  #include <drm/drm_dp_helper.h>
+> > +#include <drm/drm_dp_mst_helper.h>
+> >
+> >  /*
+> >   * Unfortunately it turns out that we have a chicken-and-egg situation
+> > @@ -338,8 +339,6 @@ void drm_dp_cec_set_edid(struct drm_dp_aux *aux, const
+> > struct edid *edid)
+> >       if (aux->cec.adap) {
+> >               if (aux->cec.adap->capabilities == cec_caps &&
+> >                   aux->cec.adap->available_log_addrs == num_las) {
+> > -                     /* Unchanged, so just set the phys addr */
+> > -                     cec_s_phys_addr_from_edid(aux->cec.adap, edid);
+> >                       goto unlock;
+> >               }
+>
+> May as well drop the braces here
+>
+> >               /*
+> > @@ -364,15 +363,16 @@ void drm_dp_cec_set_edid(struct drm_dp_aux *aux, const
+> > struct edid *edid)
+> >       if (cec_register_adapter(aux->cec.adap, connector->dev->dev)) {
+> >               cec_delete_adapter(aux->cec.adap);
+> >               aux->cec.adap = NULL;
+> > -     } else {
+> > -             /*
+> > -              * Update the phys addr for the new CEC adapter. When called
+> > -              * from drm_dp_cec_register_connector() edid == NULL, so in
+> > -              * that case the phys addr is just invalidated.
+> > -              */
+> > -             cec_s_phys_addr_from_edid(aux->cec.adap, edid);
+> >       }
+> >  unlock:
+> > +     /*
+> > +      * Update the phys addr for the new CEC adapter. When called
+> > +      * from drm_dp_cec_register_connector() edid == NULL, so in
+> > +      * that case the phys addr is just invalidated.
+> > +      */
+> > +     if (aux->cec.adap && edid) {
+> > +             cec_s_phys_addr_from_edid(aux->cec.adap, edid);
+> > +     }
+>
+> And here
+>
+> >       mutex_unlock(&aux->cec.lock);
+> >  }
+> >  EXPORT_SYMBOL(drm_dp_cec_set_edid);
+> > @@ -418,6 +418,7 @@ EXPORT_SYMBOL(drm_dp_cec_unset_edid);
+> >   * drm_dp_cec_register_connector() - register a new connector
+> >   * @aux: DisplayPort AUX channel
+> >   * @connector: drm connector
+> > + * @is_mst: set to true if this is an MST branch
+> >   *
+> >   * A new connector was registered with associated CEC adapter name and
+> >   * CEC adapter parent device. After registering the name and parent
+> > @@ -425,12 +426,13 @@ EXPORT_SYMBOL(drm_dp_cec_unset_edid);
+> >   * CEC and to register a CEC adapter if that is the case.
+> >   */
+> >  void drm_dp_cec_register_connector(struct drm_dp_aux *aux,
+> > -                                struct drm_connector *connector)
+> > +                                struct drm_connector *connector, bool is_mst)
+> >  {
+> >       WARN_ON(aux->cec.adap);
+> >       if (WARN_ON(!aux->transfer))
+> >               return;
+> >       aux->cec.connector = connector;
+> > +     aux->cec.is_mst = is_mst;
+>
+> Also JFYI, you can also check aux->is_remote, but maybe you've got another
+> reason for copying this here
+>
 
-Indeed. My initial plan was to change the meaning of temp_get() and
-adjust all the users, but there's around a dozen of them and based on my
-understanding of the users none of them cared much about such accuracy.
+I think this was just an artefact of this patch originally being
+written before aux->is_remote was added. Switching to it mostly
+removes the need for this patch, and leaving drm_dp_cec_set_edid()
+unchanged, as Hans suggests, removes the rest.
 
-However, I do find having one way to do things appealing, so if there's
-a strong preference for it, I'm happy to produce a somewhat more
-invasive patch where all users expect millidegrees.
+> Either way:
+>
+> Reviewed-by: Lyude Paul <lyude@redhat.com>
+>
+> ...Also, maybe this is just a coincidence - but do I know your name from
+> somewhere? Perhaps an IRC community from long ago?
+>
 
-- Jeremy
+Not that I can think of; it's probably just a coincidence.
 
+> >       INIT_DELAYED_WORK(&aux->cec.unregister_work,
+> >                         drm_dp_cec_unregister_work);
+> >  }
+> > diff --git a/drivers/gpu/drm/i915/display/intel_dp.c
+> > b/drivers/gpu/drm/i915/display/intel_dp.c
+> > index 82b9de274f65..744cb55572f9 100644
+> > --- a/drivers/gpu/drm/i915/display/intel_dp.c
+> > +++ b/drivers/gpu/drm/i915/display/intel_dp.c
+> > @@ -6261,7 +6261,7 @@ intel_dp_connector_register(struct drm_connector
+> > *connector)
+> >       intel_dp->aux.dev = connector->kdev;
+> >       ret = drm_dp_aux_register(&intel_dp->aux);
+> >       if (!ret)
+> > -             drm_dp_cec_register_connector(&intel_dp->aux, connector);
+> > +             drm_dp_cec_register_connector(&intel_dp->aux, connector, false);
+> >       return ret;
+> >  }
+> >
+> > diff --git a/drivers/gpu/drm/nouveau/nouveau_connector.c
+> > b/drivers/gpu/drm/nouveau/nouveau_connector.c
+> > index 49dd0cbc332f..671a70e95cd1 100644
+> > --- a/drivers/gpu/drm/nouveau/nouveau_connector.c
+> > +++ b/drivers/gpu/drm/nouveau/nouveau_connector.c
+> > @@ -1414,7 +1414,7 @@ nouveau_connector_create(struct drm_device *dev,
+> >       switch (type) {
+> >       case DRM_MODE_CONNECTOR_DisplayPort:
+> >       case DRM_MODE_CONNECTOR_eDP:
+> > -             drm_dp_cec_register_connector(&nv_connector->aux, connector);
+> > +             drm_dp_cec_register_connector(&nv_connector->aux, connector,
+> > false);
+> >               break;
+> >       }
+> >
+> > diff --git a/include/drm/drm_dp_helper.h b/include/drm/drm_dp_helper.h
+> > index 85513eeb2196..12bca1b9512b 100644
+> > --- a/include/drm/drm_dp_helper.h
+> > +++ b/include/drm/drm_dp_helper.h
+> > @@ -1495,12 +1495,14 @@ struct drm_connector;
+> >   * @lock: mutex protecting this struct
+> >   * @adap: the CEC adapter for CEC-Tunneling-over-AUX support.
+> >   * @connector: the connector this CEC adapter is associated with
+> > + * @is_mst: this is an MST branch
+> >   * @unregister_work: unregister the CEC adapter
+> >   */
+> >  struct drm_dp_aux_cec {
+> >       struct mutex lock;
+> >       struct cec_adapter *adap;
+> >       struct drm_connector *connector;
+> > +     bool is_mst;
+> >       struct delayed_work unregister_work;
+> >  };
+> >
+> > @@ -1746,7 +1748,7 @@ drm_dp_has_quirk(const struct drm_dp_desc *desc, u32
+> > edid_quirks,
+> >  #ifdef CONFIG_DRM_DP_CEC
+> >  void drm_dp_cec_irq(struct drm_dp_aux *aux);
+> >  void drm_dp_cec_register_connector(struct drm_dp_aux *aux,
+> > -                                struct drm_connector *connector);
+> > +                                struct drm_connector *connector, bool
+> > is_mst);
+> >  void drm_dp_cec_unregister_connector(struct drm_dp_aux *aux);
+> >  void drm_dp_cec_set_edid(struct drm_dp_aux *aux, const struct edid *edid);
+> >  void drm_dp_cec_unset_edid(struct drm_dp_aux *aux);
+> > @@ -1757,7 +1759,7 @@ static inline void drm_dp_cec_irq(struct drm_dp_aux
+> > *aux)
+> >
+> >  static inline void
+> >  drm_dp_cec_register_connector(struct drm_dp_aux *aux,
+> > -                           struct drm_connector *connector)
+> > +                           struct drm_connector *connector, bool is_mst)
+> >  {
+> >  }
+> >
+> --
+> Sincerely,
+>       Lyude Paul (she/her)
+>       Software Engineer at Red Hat
+>
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
