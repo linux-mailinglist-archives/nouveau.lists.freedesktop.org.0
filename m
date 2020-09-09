@@ -2,32 +2,58 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3B11826398C
-	for <lists+nouveau@lfdr.de>; Thu, 10 Sep 2020 03:47:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3EA0E26398F
+	for <lists+nouveau@lfdr.de>; Thu, 10 Sep 2020 03:47:49 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 87085898FA;
-	Thu, 10 Sep 2020 01:47:37 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 327D589F6F;
+	Thu, 10 Sep 2020 01:47:38 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D022E6F50A;
- Wed,  9 Sep 2020 20:56:03 +0000 (UTC)
-Received: from dhcp-10-100-145-180.wdl.wdc.com (unknown [199.255.45.60])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id A2AC920BED;
- Wed,  9 Sep 2020 20:56:00 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1599684963;
- bh=HOi/gRnNWCADuH3C2tuPouagH6ACKRSW8Me9mQGESc8=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=MIR0n2v6jYMLvL9ylCeswSmSkNjM38pD+hUWnq3QNBxdxavUAFW1nFlTLHe2pybfD
- odrRmpSK6VaBtY4y/JW5mI6voxGDP7xP7wyaKsNWcxcK7TIQVymwmw1HPj8MEaIJrr
- wYpwdfF4aTXncxhcjdHkCnRIxxiQ6/mo+8A6FHH4=
-Date: Wed, 9 Sep 2020 13:55:58 -0700
-From: Keith Busch <kbusch@kernel.org>
+Received: from mail-qk1-x741.google.com (mail-qk1-x741.google.com
+ [IPv6:2607:f8b0:4864:20::741])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9A5C66F563
+ for <nouveau@lists.freedesktop.org>; Wed,  9 Sep 2020 22:36:04 +0000 (UTC)
+Received: by mail-qk1-x741.google.com with SMTP id w186so4152298qkd.1
+ for <nouveau@lists.freedesktop.org>; Wed, 09 Sep 2020 15:36:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ziepe.ca; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to;
+ bh=c134n78aG+T1D05fG/7gwyDy+RohECK5LAEVlOiODCw=;
+ b=NyzBsT+JUu0U0kwfTlzpDClheXiWwFCChT8B3B3AnRObKvk4drNujFjFruGeHjyE5E
+ J/ekKdFGX4ZPNWUfEPhKExoK0sWWjXwST+pbBqDSQQLO3bhHO97u7XE9KwITCllyZTNP
+ KD49/yc1MfvhSPgbWZUU1AxUsv6U0vCFkivBcLxiu3ppVdmJeK1Itxs2CD5ayafEhare
+ Y4u34snA9MTl4Likr5RS+E4LR0hKde+fx41J4h2BvlUn7go15Yxb6eLzvLXVka4Mre/N
+ zumvX8Blxljzlanq14R9XGa7dbkpGn90Uvx/RhT36f5UMVOZXDvQeH4wAZB+Eu6xRGBh
+ woew==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=c134n78aG+T1D05fG/7gwyDy+RohECK5LAEVlOiODCw=;
+ b=K7+h//zB0kfTRB85vNX73OTotcy3z2hrYoAYItTsb/utIrpxLK7XbLdXQH8ipPG16Z
+ GniAIB2v5GHzJTbHuKpYcuwjVvh+ahWlWlvWXkRsMRGUt/1NK9UZJdTEhQ7W0UQDS5FS
+ WrvVQZ1Gxf7TC2cSk/RGZh6QzfOBRQ2UvXdP14ZGzMcW9ZzPIdW69gXflFaeyhfDNe4g
+ WxNdJ/R5YTCHrAr6laC1eRnQ638AnzV3Ej2tsLgsOmgRDPWD9ThcSi4SD2YenLDun925
+ GCozZNEbF8Qn6xh/TQBnIoiTiruZWPrC84FL1GRdAQviNRddIDPXmwzspXgupXMTkLaE
+ 259Q==
+X-Gm-Message-State: AOAM5304/SqdIldYQfVo5mBI9ZakwuBHwqoDiSwMv5kyd8SrbZxtb8Dt
+ ZAbp/LVU+NYeH2mvi9LQgzZGQw==
+X-Google-Smtp-Source: ABdhPJx7fgh7UgPdTXT6uFy6snoRxxciP2Hd+WS8NFMVek051RlvF5/SRN4VKGquIHZA++zqp1uC0Q==
+X-Received: by 2002:a05:620a:2225:: with SMTP id
+ n5mr5229154qkh.171.1599690963887; 
+ Wed, 09 Sep 2020 15:36:03 -0700 (PDT)
+Received: from ziepe.ca
+ (hlfxns017vw-156-34-48-30.dhcp-dynamic.fibreop.ns.bellaliant.net.
+ [156.34.48.30])
+ by smtp.gmail.com with ESMTPSA id g5sm4497430qtx.43.2020.09.09.15.36.02
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 09 Sep 2020 15:36:03 -0700 (PDT)
+Received: from jgg by mlx with local (Exim 4.94) (envelope-from <jgg@ziepe.ca>)
+ id 1kG8h8-004BIN-8t; Wed, 09 Sep 2020 19:36:02 -0300
+Date: Wed, 9 Sep 2020 19:36:02 -0300
+From: Jason Gunthorpe <jgg@ziepe.ca>
 To: Joe Perches <joe@perches.com>
-Message-ID: <20200909205558.GA3384631@dhcp-10-100-145-180.wdl.wdc.com>
+Message-ID: <20200909223602.GJ87483@ziepe.ca>
 References: <e6387578c75736d61b2fe70d9783d91329a97eb4.camel@perches.com>
 MIME-Version: 1.0
 Content-Disposition: inline
@@ -75,23 +101,32 @@ Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 On Wed, Sep 09, 2020 at 01:06:39PM -0700, Joe Perches wrote:
-> diff --git a/crypto/tcrypt.c b/crypto/tcrypt.c
-> index eea0f453cfb6..8aac5bc60f4c 100644
-> --- a/crypto/tcrypt.c
-> +++ b/crypto/tcrypt.c
-> @@ -2464,7 +2464,7 @@ static int do_test(const char *alg, u32 type, u32 mask, int m, u32 num_mb)
->  		test_hash_speed("streebog512", sec,
->  				generic_hash_speed_template);
->  		if (mode > 300 && mode < 400) break;
-> -		fallthrough;
-> +		break;
->  	case 399:
->  		break;
+> fallthrough to a separate case/default label break; isn't very readable.
+> 
+> Convert pseudo-keyword fallthrough; statements to a simple break; when
+> the next label is case or default and the only statement in the next
+> label block is break;
+> 
+> Found using:
+> 
+> $ grep-2.5.4 -rP --include=*.[ch] -n "fallthrough;(\s*(case\s+\w+|default)\s*:\s*){1,7}break;" *
+> 
+> Miscellanea:
+> 
+> o Move or coalesce a couple label blocks above a default: block.
+> 
+> Signed-off-by: Joe Perches <joe@perches.com>
+> ---
+> 
+> Compiled allyesconfig x86-64 only.
+> A few files for other arches were not compiled.
 
-Just imho, this change makes the preceding 'if' look even more
-pointless. Maybe the fallthrough was a deliberate choice? Not that my
-opinion matters here as I don't know this module, but it looked a bit
-odd to me.
+IB part looks OK, I prefer it like this
+
+You could do the same for continue as well, I saw a few of those..
+
+Thanks,
+Jason
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
