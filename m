@@ -2,94 +2,53 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4637A2624C5
-	for <lists+nouveau@lfdr.de>; Wed,  9 Sep 2020 04:05:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 84B9D26260E
+	for <lists+nouveau@lfdr.de>; Wed,  9 Sep 2020 06:06:08 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 111DE6E8F5;
-	Wed,  9 Sep 2020 02:05:40 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 120956E94F;
+	Wed,  9 Sep 2020 04:06:06 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wr1-x442.google.com (mail-wr1-x442.google.com
- [IPv6:2a00:1450:4864:20::442])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B462B6E7DD
- for <nouveau@lists.freedesktop.org>; Tue,  8 Sep 2020 11:37:17 +0000 (UTC)
-Received: by mail-wr1-x442.google.com with SMTP id o5so18702743wrn.13
- for <nouveau@lists.freedesktop.org>; Tue, 08 Sep 2020 04:37:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
- h=date:from:to:cc:subject:message-id:mail-followup-to:references
- :mime-version:content-disposition:in-reply-to;
- bh=I/sh0hf7RWpKTkHRG2sXo6X29i3mK1fyatkLVFjwPyY=;
- b=TRI4o8zL814YHGA/D/zYMJIAaCIYqFZ0mIpUDMLZUZN87cVGkWukeoAQibFqRSdTi0
- 6pbezBxBfFFSAjRUKWB8QJP5CHgs93NHYtFiS1nIDp648nb0kIv2ZVQ/RTs1fTwlNaec
- GPg0wCc5jkN3j+ma2gtmxo4nY/EYhDvIrUWKQ=
+Received: from mail-yb1-xb42.google.com (mail-yb1-xb42.google.com
+ [IPv6:2607:f8b0:4864:20::b42])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8B9896E94F;
+ Wed,  9 Sep 2020 04:06:04 +0000 (UTC)
+Received: by mail-yb1-xb42.google.com with SMTP id q3so884012ybp.7;
+ Tue, 08 Sep 2020 21:06:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=5l1eticj7qDEdDrm+OGUOAk8jXt5YDIoOSHNMBDZgrs=;
+ b=QKCBOrW+n5uJloRSW/TtfMCk2ECMuKI0/Ix/ZlH1tx5chIYiuGO+fPBqUG39J/laqA
+ tT3nj1TNAuEingDRkUbUa8yoGpLSXKacXQFIDkr4DuKukTkqc3r1tCZ6vRrhX76HFZ8R
+ GvK4q2OapZQtyohQaPR40jrK6INB98O7Nsvp0yU/p1N7Ccjky2/e8SbNvxHuNTETNvtC
+ KvuQZb/CpjTwhdYz0fuV+qXCCX/Zbbz62G6be0r39Le319Ah8pliXMsv+QYG+3PH3zJV
+ /Q9+noQh1ZjjhzE2wg2ieli4Xuu9go5nTuYyKG9ox9LELbmLhYpHIZ6J0Y6iIpvB737Z
+ dtjA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id
- :mail-followup-to:references:mime-version:content-disposition
- :in-reply-to;
- bh=I/sh0hf7RWpKTkHRG2sXo6X29i3mK1fyatkLVFjwPyY=;
- b=EARRut6sGR6B8t8gr9uT1S0zj5NHB8ewrtcF4+HdwM60vor7U3Oq4YV50KtMa32Ukm
- qXf8UokNSTJWbBMP0nR+OYjquHPW/xZTgKO0kCCj7N7cAUgWoAd7fweDH2eQD5i0F69T
- zoMacQ+pIqPJiomZrkk/SpDaYssoQSmi2fC4+4hDMIgWWP3H9ru97ZUjHSEtyzOuqn0R
- kpfOES2FA3MT4F04ITM5kYqI0sFL4OV94CvEAwCuT4EzO0Wu9nkirzt6bWUCebpfvoev
- auknhUMhxATiGG6FFcaC90aTnObagqz8QRSdCFzSLlS1WQuj68OJqd0n4f/emdt5Rn0i
- LMdg==
-X-Gm-Message-State: AOAM531cGYSdWDh5IMKrpZnlNYOLQxCt5YdYtTTusZVEGKsFoBMIw+1P
- 03mUteat6PuweC8lGu5SOm1d+g==
-X-Google-Smtp-Source: ABdhPJyF2qwliIvI/LNW3ilYwO975TKwRXyUs29RK60LvcJNYZwaiKnp5x/7ZaLEGFTKwLjPhYZ/og==
-X-Received: by 2002:adf:fd01:: with SMTP id e1mr24749831wrr.44.1599565035147; 
- Tue, 08 Sep 2020 04:37:15 -0700 (PDT)
-Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
- by smtp.gmail.com with ESMTPSA id e18sm39103291wra.36.2020.09.08.04.37.13
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 08 Sep 2020 04:37:14 -0700 (PDT)
-Date: Tue, 8 Sep 2020 13:37:12 +0200
-From: Daniel Vetter <daniel@ffwll.ch>
-To: Gerd Hoffmann <kraxel@redhat.com>
-Message-ID: <20200908113712.GL2352366@phenom.ffwll.local>
-Mail-Followup-To: Gerd Hoffmann <kraxel@redhat.com>,
- dri-devel <dri-devel@lists.freedesktop.org>,
- Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
- Alex Deucher <alexander.deucher@amd.com>,
- David Airlie <airlied@linux.ie>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>,
- Thomas Zimmermann <tzimmermann@suse.de>,
- Lucas Stach <l.stach@pengutronix.de>,
- Russell King <linux+etnaviv@armlinux.org.uk>,
- Christian Gmeiner <christian.gmeiner@gmail.com>,
- Rob Clark <robdclark@gmail.com>, Sean Paul <sean@poorly.run>,
- Ben Skeggs <bskeggs@redhat.com>, Sandy Huang <hjc@rock-chips.com>,
- Heiko =?iso-8859-1?Q?St=FCbner?= <heiko@sntech.de>,
- Thierry Reding <thierry.reding@gmail.com>,
- Jonathan Hunter <jonathanh@nvidia.com>,
- Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
- "open list:RADEON and AMDGPU DRM DRIVERS" <amd-gfx@lists.freedesktop.org>,
- open list <linux-kernel@vger.kernel.org>,
- "moderated list:DRM DRIVERS FOR VIVANTE GPU IP"
- <etnaviv@lists.freedesktop.org>, 
- "open list:DRM DRIVER FOR MSM ADRENO GPU" <linux-arm-msm@vger.kernel.org>,
- "open list:DRM DRIVER FOR MSM ADRENO GPU" <freedreno@lists.freedesktop.org>,
- "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
- <nouveau@lists.freedesktop.org>, 
- "moderated list:ARM/Rockchip SoC support"
- <linux-arm-kernel@lists.infradead.org>, 
- "open list:ARM/Rockchip SoC support" <linux-rockchip@lists.infradead.org>,
- "open list:DRM DRIVERS FOR NVIDIA TEGRA" <linux-tegra@vger.kernel.org>,
- "moderated list:DRM DRIVERS FOR XEN" <xen-devel@lists.xenproject.org>
-References: <20200907112425.15610-1-kraxel@redhat.com>
- <20200907112425.15610-2-kraxel@redhat.com>
- <CAKMK7uGjT73rh=9iuCKAXvC_CaOuygm8PgOQgofkTgH7wRysFw@mail.gmail.com>
- <20200908054858.um34wojjv6uhi7d3@sirius.home.kraxel.org>
- <20200908085544.GI2352366@phenom.ffwll.local>
- <20200908100253.b22sff23737l77bo@sirius.home.kraxel.org>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=5l1eticj7qDEdDrm+OGUOAk8jXt5YDIoOSHNMBDZgrs=;
+ b=BxJx9y/oxq3lyvvHVGIGbwtiNOS6cfxxaUzug56elQWnp7rzJ4nVzs4AOdB3iKEOJr
+ ly+zlwVaNiA0MR70vlq77yV9YM1K7XWAF40FEn0kF6x1awpfyh7PI+KlFj36F6arUk0O
+ 4ap7EsIOSQFLkX9NA5nFSINFVwdQnR42gAbSst4Thd/9bYNBza25u9aZrCCwuB5XSfcc
+ WoWYR9DjNijT+UbwM/IMyNDgG6Wjb9whHdKRgE5rlE/5yp4u+3sgjv/OnW/+B8GO3mwX
+ nScTXBh9YzYNI8Mb1efNTjRthmtJ37tDfIQCLxwYXcSjNTWjN1o83bUEI4Jb10C5gKGe
+ lA9Q==
+X-Gm-Message-State: AOAM532D6Boj5M9oRT97CBRuALIPhy2rVNioohLLIXMC3svG1CYarXI6
+ KHErajYAn4iUDKme3eZWm6MyMgZfb+A0H1FYYOI=
+X-Google-Smtp-Source: ABdhPJy9FO00MIL4D9dDFJBguiKSTl16emuFaEgF/hSBMy+cayLwOwEwIBBW7+th3r2A/O5CkHUDdgMCa8tuQni/HeE=
+X-Received: by 2002:a25:bc82:: with SMTP id e2mr2918057ybk.435.1599624363612; 
+ Tue, 08 Sep 2020 21:06:03 -0700 (PDT)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20200908100253.b22sff23737l77bo@sirius.home.kraxel.org>
-X-Operating-System: Linux phenom 5.7.0-1-amd64 
-X-Mailman-Approved-At: Wed, 09 Sep 2020 02:05:38 +0000
-Subject: Re: [Nouveau] [PATCH v4 1/1] drm: allow limiting the scatter list
- size.
+References: <20200812204952.1921587-1-jcline@redhat.com>
+In-Reply-To: <20200812204952.1921587-1-jcline@redhat.com>
+From: Ben Skeggs <skeggsb@gmail.com>
+Date: Wed, 9 Sep 2020 14:05:52 +1000
+Message-ID: <CACAvsv71oxCYB1+LCAUHD5v_NGAP-DpxPY_dPz53iw2=91KAJg@mail.gmail.com>
+To: Jeremy Cline <jcline@redhat.com>
+Subject: Re: [Nouveau] [PATCH] drm/nouveau: Add fine-grain temperature
+ reporting
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -101,74 +60,187 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Heiko =?iso-8859-1?Q?St=FCbner?= <heiko@sntech.de>,
- David Airlie <airlied@linux.ie>,
- "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
- <nouveau@lists.freedesktop.org>, dri-devel <dri-devel@lists.freedesktop.org>,
- Sandy Huang <hjc@rock-chips.com>, Thierry Reding <thierry.reding@gmail.com>,
- Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
- "open list:RADEON and AMDGPU DRM DRIVERS" <amd-gfx@lists.freedesktop.org>,
- "open list:ARM/Rockchip SoC support" <linux-rockchip@lists.infradead.org>,
- Ben Skeggs <bskeggs@redhat.com>, Russell King <linux+etnaviv@armlinux.org.uk>,
- "moderated list:DRM DRIVERS FOR XEN" <xen-devel@lists.xenproject.org>,
- "open list:DRM DRIVER FOR MSM ADRENO GPU" <linux-arm-msm@vger.kernel.org>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- "moderated list:DRM DRIVERS FOR VIVANTE GPU IP"
- <etnaviv@lists.freedesktop.org>, Maxime Ripard <mripard@kernel.org>,
- Christian Gmeiner <christian.gmeiner@gmail.com>,
- "open list:DRM DRIVERS FOR NVIDIA TEGRA" <linux-tegra@vger.kernel.org>,
- Sean Paul <sean@poorly.run>, "moderated list:ARM/Rockchip SoC support"
- <linux-arm-kernel@lists.infradead.org>,
- open list <linux-kernel@vger.kernel.org>, Rob Clark <robdclark@gmail.com>,
- Alex Deucher <alexander.deucher@amd.com>,
- "open list:DRM DRIVER FOR MSM ADRENO GPU" <freedreno@lists.freedesktop.org>,
- Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
- Lucas Stach <l.stach@pengutronix.de>
+Cc: David Airlie <airlied@linux.ie>, ML nouveau <nouveau@lists.freedesktop.org>,
+ LKML <linux-kernel@vger.kernel.org>,
+ ML dri-devel <dri-devel@lists.freedesktop.org>,
+ Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, Sep 08, 2020 at 12:02:53PM +0200, Gerd Hoffmann wrote:
-> > > > The comments I've found suggest very much not ... Or is that all very
-> > > > old stuff only that no one cares about anymore?
-> > > 
-> > > I think these days it is possible to override dma_ops per device, which
-> > > in turn allows virtio to deal with the quirks without the rest of the
-> > > kernel knowing about these details.
-> > > 
-> > > I also think virtio-gpu can drop the virtio_has_dma_quirk() checks, just
-> > > use the dma api path unconditionally and depend on virtio core having
-> > > setup dma_ops in a way that it JustWorks[tm].  I'll look into that next.
-> > 
-> > The comment above vring_use_dma_api() suggests that this has not yet
-> > happened, that's why I'm asking.
-> 
-> Hmm, wading through the code, seems it indeed happen yet, even though my
-> testing didn't show any issues.  Probably pure luck because devices and
-> cpus have the same memory view on x86.  Guess I need to try this on
-> ppc64 to see it actually failing ...
-> 
-> So dropping the virtio_has_dma_quirk() checks isn't going to fly.
-> 
-> Using dma_max_mapping_size() should be fine though.  It might use a
-> lower limit than needed for virtio, but it should not break things.
+On Thu, 13 Aug 2020 at 06:50, Jeremy Cline <jcline@redhat.com> wrote:
+>
+> Commit d32656373857 ("drm/nouveau/therm/gp100: initial implementation of
+> new gp1xx temperature sensor") added support for reading finer-grain
+> temperatures, but continued to report temperatures in 1 degree Celsius
+> increments via nvkm_therm_temp_get().
+>
+> Rather than altering nvkm_therm_temp_get() to report finer-grain
+> temperatures, which would be inconvenient for other users of the
+> function, a second interface has been added to line up with hwmon's
+> native unit of temperature.
+Hey Jeremy,
 
-Makes sense. On this patch here:
+Sorry this slipped past me until now.  I'm OK with adding support for
+millidegree temperature reporting, but don't think we need to keep
+both interfaces around and would rather see the existing code
+converted to return millidegrees (even on GPUs that don't support it)
+instead of degrees.
 
-Reviewed-by: Daniel Vetter <daniel.vetter@ffwll.ch>
+Thanks!
+Ben.
 
-And I guess would be good if virtio pushes a bit more towards using the
-dma api abstraction fully so we can get rid of these hacks. Virtio feels
-like a driver that really should be using dma-api and not dig around
-behind it because "it' makes stuff 0.5% faster" or so, since being
-virtualized it's already not the king of speed anyway :-)
-
-Cheers, Daniel
--- 
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
+>
+> Signed-off-by: Jeremy Cline <jcline@redhat.com>
+> ---
+>  .../drm/nouveau/include/nvkm/subdev/therm.h   | 18 +++++++++++++
+>  drivers/gpu/drm/nouveau/nouveau_hwmon.c       |  4 +--
+>  .../gpu/drm/nouveau/nvkm/subdev/therm/base.c  | 16 ++++++++++++
+>  .../gpu/drm/nouveau/nvkm/subdev/therm/gp100.c | 25 +++++++++++++++++--
+>  .../gpu/drm/nouveau/nvkm/subdev/therm/priv.h  |  1 +
+>  5 files changed, 60 insertions(+), 4 deletions(-)
+>
+> diff --git a/drivers/gpu/drm/nouveau/include/nvkm/subdev/therm.h b/drivers/gpu/drm/nouveau/include/nvkm/subdev/therm.h
+> index 62c34f98c930..7b9928dd001c 100644
+> --- a/drivers/gpu/drm/nouveau/include/nvkm/subdev/therm.h
+> +++ b/drivers/gpu/drm/nouveau/include/nvkm/subdev/therm.h
+> @@ -100,6 +100,24 @@ struct nvkm_therm {
+>  };
+>
+>  int nvkm_therm_temp_get(struct nvkm_therm *);
+> +
+> +/**
+> + * nvkm_therm_temp_millidegree_get() - get the temperature in millidegrees
+> + * @therm: The thermal device to read from.
+> + *
+> + * This interface reports temperatures in units of millidegree Celsius to
+> + * align with the hwmon API. Some cards may only be capable of reporting in
+> + * units of Celsius, and those that report finer grain temperatures may not be
+> + * capable of millidegree Celsius accuracy,
+> + *
+> + * For cases where millidegree temperature is too fine-grain, the
+> + * nvkm_therm_temp_get() interface reports temperatures in one degree Celsius
+> + * increments.
+> + *
+> + * Return: The temperature in millidegrees Celsius, or -ENODEV if temperature
+> + *         reporting is not supported.
+> + */
+> +int nvkm_therm_temp_millidegree_get(struct nvkm_therm *therm);
+>  int nvkm_therm_fan_sense(struct nvkm_therm *);
+>  int nvkm_therm_cstate(struct nvkm_therm *, int, int);
+>  void nvkm_therm_clkgate_init(struct nvkm_therm *,
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_hwmon.c b/drivers/gpu/drm/nouveau/nouveau_hwmon.c
+> index 1c3104d20571..e96355f93ce5 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_hwmon.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_hwmon.c
+> @@ -428,8 +428,8 @@ nouveau_temp_read(struct device *dev, u32 attr, int channel, long *val)
+>         case hwmon_temp_input:
+>                 if (drm_dev->switch_power_state != DRM_SWITCH_POWER_ON)
+>                         return -EINVAL;
+> -               ret = nvkm_therm_temp_get(therm);
+> -               *val = ret < 0 ? ret : (ret * 1000);
+> +               ret = nvkm_therm_temp_millidegree_get(therm);
+> +               *val = ret;
+>                 break;
+>         case hwmon_temp_max:
+>                 *val = therm->attr_get(therm, NVKM_THERM_ATTR_THRS_DOWN_CLK)
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/therm/base.c b/drivers/gpu/drm/nouveau/nvkm/subdev/therm/base.c
+> index 4a4d1e224126..e655b32c78b8 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/therm/base.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/therm/base.c
+> @@ -34,6 +34,22 @@ nvkm_therm_temp_get(struct nvkm_therm *therm)
+>         return -ENODEV;
+>  }
+>
+> +int
+> +nvkm_therm_temp_millidegree_get(struct nvkm_therm *therm)
+> +{
+> +       int ret = -ENODEV;
+> +
+> +       if (therm->func->temp_millidegree_get)
+> +               return therm->func->temp_millidegree_get(therm);
+> +
+> +       if (therm->func->temp_get) {
+> +               ret = therm->func->temp_get(therm);
+> +               if (ret > 0)
+> +                       ret *= 1000;
+> +       }
+> +       return ret;
+> +}
+> +
+>  static int
+>  nvkm_therm_update_trip(struct nvkm_therm *therm)
+>  {
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/therm/gp100.c b/drivers/gpu/drm/nouveau/nvkm/subdev/therm/gp100.c
+> index 9f0dea3f61dc..4c3c2895a3cb 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/therm/gp100.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/therm/gp100.c
+> @@ -24,7 +24,7 @@
+>  #include "priv.h"
+>
+>  static int
+> -gp100_temp_get(struct nvkm_therm *therm)
+> +gp100_temp_get_raw(struct nvkm_therm *therm)
+>  {
+>         struct nvkm_device *device = therm->subdev.device;
+>         struct nvkm_subdev *subdev = &therm->subdev;
+> @@ -37,14 +37,35 @@ gp100_temp_get(struct nvkm_therm *therm)
+>
+>         /* device valid */
+>         if (tsensor & 0x20000000)
+> -               return (inttemp >> 8);
+> +               return inttemp;
+>         else
+>                 return -ENODEV;
+>  }
+>
+> +static int
+> +gp100_temp_millidegree_get(struct nvkm_therm *therm)
+> +{
+> +       int raw_temp = gp100_temp_get_raw(therm);
+> +
+> +       if (raw_temp < 0)
+> +               return raw_temp;
+> +       return raw_temp * 1000 >> 8;
+> +}
+> +
+> +static int
+> +gp100_temp_get(struct nvkm_therm *therm)
+> +{
+> +       int raw_temp = gp100_temp_get_raw(therm);
+> +
+> +       if (raw_temp < 0)
+> +               return raw_temp;
+> +       return raw_temp >> 8;
+> +}
+> +
+>  static const struct nvkm_therm_func
+>  gp100_therm = {
+>         .temp_get = gp100_temp_get,
+> +       .temp_millidegree_get = gp100_temp_millidegree_get,
+>         .program_alarms = nvkm_therm_program_alarms_polling,
+>  };
+>
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/therm/priv.h b/drivers/gpu/drm/nouveau/nvkm/subdev/therm/priv.h
+> index 21659daf1864..a53068b4f0b9 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/therm/priv.h
+> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/therm/priv.h
+> @@ -92,6 +92,7 @@ struct nvkm_therm_func {
+>         int (*pwm_clock)(struct nvkm_therm *, int line);
+>
+>         int (*temp_get)(struct nvkm_therm *);
+> +       int (*temp_millidegree_get)(struct nvkm_therm *therm);
+>
+>         int (*fan_sense)(struct nvkm_therm *);
+>
+> --
+> 2.26.2
+>
+> _______________________________________________
+> Nouveau mailing list
+> Nouveau@lists.freedesktop.org
+> https://lists.freedesktop.org/mailman/listinfo/nouveau
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
