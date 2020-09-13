@@ -1,44 +1,46 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2B3A52680FD
-	for <lists+nouveau@lfdr.de>; Sun, 13 Sep 2020 21:35:34 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id BC4B626811F
+	for <lists+nouveau@lfdr.de>; Sun, 13 Sep 2020 22:15:50 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4B4C589D5E;
-	Sun, 13 Sep 2020 19:35:30 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7F7B66E17E;
+	Sun, 13 Sep 2020 20:15:47 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-vs1-f43.google.com (mail-vs1-f43.google.com
- [209.85.217.43])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1DEA789D5E
- for <nouveau@lists.freedesktop.org>; Sun, 13 Sep 2020 19:35:29 +0000 (UTC)
-Received: by mail-vs1-f43.google.com with SMTP id c127so8416143vsc.1
- for <nouveau@lists.freedesktop.org>; Sun, 13 Sep 2020 12:35:29 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=I1ieT+l3+E7gpmGkZdNwDqa6JHIGBxhW4qF68au1gfI=;
- b=O99wmrzwkVdsmWhBu2E1UMRFDJBm8EVkzDSmFsik925ZSeJAyJE0b1jF9vAldzkj8g
- IQlnlHgXquovOUczQB7YjOVknleR51m2ZZPt5gqi3ILDlRONkalMiTTuWCvxAAZaIIgw
- hdDRg4gjnNmfnqSkspxUJDwQZJramJrRL4acrgG81xDAXbr86ReZMnUbqf9eZHza6KFA
- ZIeRYWDACYJzeb2gG4jC13jOkLeo84Aupo8y6XuW+vBM7Ifa37SEGJH+49EiapdmzQIu
- vB5iwQgNG7yxYKGI4Qrdc7GSHZNlUN4sRxCM5FJZy6GQIlZ4CioxFcty6B7Y9RVNTFKc
- zr/w==
-X-Gm-Message-State: AOAM530e7OuX4r66L/DkPoNyBJxq4r4+UTfFZDP5+/FQo32EwPvVA1zp
- 2HBM5tnPPWy8IRqJwwA81ptyA0cSuMvfKcaamME=
-X-Google-Smtp-Source: ABdhPJxG3KPqraqSBQO0dPK1vk7UFZntJ5mIto2UPmyg83xirfozx55XTNmbvufZZ49GuBr6pZ7ay6ebkLP+k/g1c2I=
-X-Received: by 2002:a67:324f:: with SMTP id y76mr6211166vsy.20.1600025727826; 
- Sun, 13 Sep 2020 12:35:27 -0700 (PDT)
+Received: from mail1.merlins.org (magic.merlins.org [209.81.13.136])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B46326E17E
+ for <nouveau@lists.freedesktop.org>; Sun, 13 Sep 2020 20:15:46 +0000 (UTC)
+Received: from c-24-5-124-255.hsd1.ca.comcast.net ([24.5.124.255]:50824
+ helo=sauron.svh.merlins.org) by mail1.merlins.org with esmtpsa 
+ (Cipher TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92 #3)
+ id 1kHYPZ-0001dq-Ry by authid <merlins.org> with srv_auth_plain;
+ Sun, 13 Sep 2020 13:15:45 -0700
+Received: from merlin by sauron.svh.merlins.org with local (Exim 4.92)
+ (envelope-from <marc_nouveau@merlins.org>)
+ id 1kHYPZ-0005Gb-F0; Sun, 13 Sep 2020 13:15:45 -0700
+Date: Sun, 13 Sep 2020 13:15:45 -0700
+From: Marc MERLIN <marc_nouveau@merlins.org>
+To: Karol Herbst <kherbst@redhat.com>
+Message-ID: <20200913201545.GL2622@merlins.org>
+References: <20191004123947.11087-1-mika.westerberg@linux.intel.com>
+ <20191004123947.11087-2-mika.westerberg@linux.intel.com>
+ <20200808202202.GA12007@merlins.org>
+ <20200906181852.GC13955@merlins.org>
+ <CACO55tsodfUGVUjFw9=smFOhp_oXP8zWY_9+vL+iiPZhKJdtyg@mail.gmail.com>
+ <20200907205825.GB20064@merlins.org>
+ <CACO55ttBXKWTbxERK-aHsYQe_4=eK_WVc2+ebmCbCJJcQpFZrQ@mail.gmail.com>
+ <20200908002935.GD20064@merlins.org>
 MIME-Version: 1.0
-References: <CABB28CwNaHhCdKZio-GoGWcmTyZ-B33zwnmMmhQ9JLy8EjhC-Q@mail.gmail.com>
-In-Reply-To: <CABB28CwNaHhCdKZio-GoGWcmTyZ-B33zwnmMmhQ9JLy8EjhC-Q@mail.gmail.com>
-From: Ilia Mirkin <imirkin@alum.mit.edu>
-Date: Sun, 13 Sep 2020 15:35:16 -0400
-Message-ID: <CAKb7UvgjzfaOaHb+N-h6iRpDR5YBBRx5z88J2m5uPzNARnpiHQ@mail.gmail.com>
-To: =?UTF-8?Q?Tomasz_K=C5=82oczko?= <kloczko.tomasz@gmail.com>
-Subject: Re: [Nouveau] libva-utils test siuite is crashing in nouveau sriver
+Content-Disposition: inline
+In-Reply-To: <20200908002935.GD20064@merlins.org>
+X-Sysadmin: BOFH
+X-URL: http://marc.merlins.org/
+X-SA-Exim-Connect-IP: 24.5.124.255
+X-SA-Exim-Mail-From: marc_nouveau@merlins.org
+Subject: Re: [Nouveau] pcieport 0000:00:01.0: PME: Spurious native interrupt
+ (nvidia with nouveau and thunderbolt on thinkpad P73)
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -50,170 +52,40 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau <nouveau@lists.freedesktop.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: nouveau <nouveau@lists.freedesktop.org>,
+ LKML <linux-kernel@vger.kernel.org>, Ben Skeggs <bskeggs@redhat.com>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-V2hhdCBoYXJkd2FyZSBhcmUgeW91IHVzaW5nPwoKT24gU3VuLCBTZXAgMTMsIDIwMjAgYXQgMjox
-NCBQTSBUb21hc3ogS8WCb2N6a28gPGtsb2N6a28udG9tYXN6QGdtYWlsLmNvbT4gd3JvdGU6Cj4K
-PiBIaSwKPgo+IEknbSBoaXR0aW5nIHRoYXQgaXNzdWUgc2luY2UgTWVzYSAyMC4wLjYgYW5kIGl0
-IGlzIHByZXNlbnQgc3RpbGwgaW4gbGF0ZXN0IHZlcnNpb24gMjAuMS43Cj4KPiBgYGAKPiBbdGts
-b2N6a29AYmFycmVsIFNQRUNTXSQgY29yZWR1bXBjdGwgZ2RiIDM5MjY4NjYKPiAgICAgICAgICAg
-IFBJRDogMzkyNjg2NiAodGVzdF92YV9hcGkpCj4gICAgICAgICAgICBVSUQ6IDEwMDAgKHRrbG9j
-emtvKQo+ICAgICAgICAgICAgR0lEOiAxMDAwICh0a2xvY3prbykKPiAgICAgICAgIFNpZ25hbDog
-MTEgKFNFR1YpCj4gICAgICBUaW1lc3RhbXA6IFN1biAyMDIwLTA5LTEzIDE4OjU3OjA2IEJTVCAo
-MzJzIGFnbykKPiAgIENvbW1hbmQgTGluZTogLi90ZXN0X3ZhX2FwaQo+ICAgICBFeGVjdXRhYmxl
-OiAvaG9tZS90a2xvY3prby9ycG1idWlsZC9CVUlMRC9saWJ2YS11dGlscy0yLjkuMC90ZXN0L3Rl
-c3RfdmFfYXBpCj4gIENvbnRyb2wgR3JvdXA6IC91c2VyLnNsaWNlL3VzZXItMTAwMC5zbGljZS9z
-ZXNzaW9uLTI5Ny5zY29wZQo+ICAgICAgICAgICBVbml0OiBzZXNzaW9uLTI5Ny5zY29wZQo+ICAg
-ICAgICAgIFNsaWNlOiB1c2VyLTEwMDAuc2xpY2UKPiAgICAgICAgU2Vzc2lvbjogMjk3Cj4gICAg
-ICBPd25lciBVSUQ6IDEwMDAgKHRrbG9jemtvKQo+ICAgICAgICBCb290IElEOiBhYjlkMzUwYzYy
-M2U0MzEzYmFjYjg5MmRlNDZiODVmOQo+ICAgICBNYWNoaW5lIElEOiBkMDMzZjY2YjI0OWE0ZWMw
-OWFjZmE4MWFjMjA1NTU0Zgo+ICAgICAgIEhvc3RuYW1lOiBiYXJyZWwKPiAgICAgICAgU3RvcmFn
-ZTogL3Zhci9saWIvc3lzdGVtZC9jb3JlZHVtcC9jb3JlLnRlc3RfdmFfYXBpLjEwMDAuYWI5ZDM1
-MGM2MjNlNDMxM2JhY2I4OTJkZTQ2Yjg1ZjkuMzkyNjg2Ni4xNjAwMDE5ODI2MDAwMDAwLnpzdAo+
-ICAgICAgICBNZXNzYWdlOiBQcm9jZXNzIDM5MjY4NjYgKHRlc3RfdmFfYXBpKSBvZiB1c2VyIDEw
-MDAgZHVtcGVkIGNvcmUuCj4KPiAgICAgICAgICAgICAgICAgU3RhY2sgdHJhY2Ugb2YgdGhyZWFk
-IDM5MjY4NjY6Cj4gICAgICAgICAgICAgICAgICMwICAweDAwMDA3ZjRlMmQzZmI2ZDIgdmxWYUNy
-ZWF0ZUNvbnRleHQgKG5vdXZlYXVfZHJ2X3ZpZGVvLnNvICsgMHhiMTZkMikKPiAgICAgICAgICAg
-ICAgICAgIzEgIDB4MDAwMDdmNGUyZTMyZDBmNyB2YUNyZWF0ZUNvbnRleHQgKGxpYnZhLnNvLjIg
-KyAweDE5MGY3KQo+ICAgICAgICAgICAgICAgICAjMiAgMHgwMDAwNTViNDhkMjlhNDE5IG4vYSAo
-L2hvbWUvdGtsb2N6a28vcnBtYnVpbGQvQlVJTEQvbGlidmEtdXRpbHMtMi45LjAvdGVzdC90ZXN0
-X3ZhX2FwaSArIDB4NGU0MTkpCj4KPiBHTlUgZ2RiIChHREIpIEZlZG9yYSA5LjAuNTAuMjAxOTEx
-MTktMi5mYzMyCj4gQ29weXJpZ2h0IChDKSAyMDE5IEZyZWUgU29mdHdhcmUgRm91bmRhdGlvbiwg
-SW5jLgo+IExpY2Vuc2UgR1BMdjMrOiBHTlUgR1BMIHZlcnNpb24gMyBvciBsYXRlciA8aHR0cDov
-L2dudS5vcmcvbGljZW5zZXMvZ3BsLmh0bWw+Cj4gVGhpcyBpcyBmcmVlIHNvZnR3YXJlOiB5b3Ug
-YXJlIGZyZWUgdG8gY2hhbmdlIGFuZCByZWRpc3RyaWJ1dGUgaXQuCj4gVGhlcmUgaXMgTk8gV0FS
-UkFOVFksIHRvIHRoZSBleHRlbnQgcGVybWl0dGVkIGJ5IGxhdy4KPiBUeXBlICJzaG93IGNvcHlp
-bmciIGFuZCAic2hvdyB3YXJyYW50eSIgZm9yIGRldGFpbHMuCj4gVGhpcyBHREIgd2FzIGNvbmZp
-Z3VyZWQgYXMgIng4Nl82NC1yZWRoYXQtbGludXgtZ251Ii4KPiBUeXBlICJzaG93IGNvbmZpZ3Vy
-YXRpb24iIGZvciBjb25maWd1cmF0aW9uIGRldGFpbHMuCj4gRm9yIGJ1ZyByZXBvcnRpbmcgaW5z
-dHJ1Y3Rpb25zLCBwbGVhc2Ugc2VlOgo+IDxodHRwOi8vd3d3LmdudS5vcmcvc29mdHdhcmUvZ2Ri
-L2J1Z3MvPi4KPiBGaW5kIHRoZSBHREIgbWFudWFsIGFuZCBvdGhlciBkb2N1bWVudGF0aW9uIHJl
-c291cmNlcyBvbmxpbmUgYXQ6Cj4gICAgIDxodHRwOi8vd3d3LmdudS5vcmcvc29mdHdhcmUvZ2Ri
-L2RvY3VtZW50YXRpb24vPi4KPgo+IEZvciBoZWxwLCB0eXBlICJoZWxwIi4KPiBUeXBlICJhcHJv
-cG9zIHdvcmQiIHRvIHNlYXJjaCBmb3IgY29tbWFuZHMgcmVsYXRlZCB0byAid29yZCIuLi4KPiBS
-ZWFkaW5nIHN5bWJvbHMgZnJvbSAvaG9tZS90a2xvY3prby9ycG1idWlsZC9CVUlMRC9saWJ2YS11
-dGlscy0yLjkuMC90ZXN0L3Rlc3RfdmFfYXBpLi4uCj4gW05ldyBMV1AgMzkyNjg2Nl0KPiBbTmV3
-IExXUCAzOTI2OTAzXQo+IFtOZXcgTFdQIDM5MjY5MDZdCj4gW05ldyBMV1AgMzkyNjkwNV0KPiBb
-TmV3IExXUCAzOTI2OTA0XQo+IFtUaHJlYWQgZGVidWdnaW5nIHVzaW5nIGxpYnRocmVhZF9kYiBl
-bmFibGVkXQo+IFVzaW5nIGhvc3QgbGlidGhyZWFkX2RiIGxpYnJhcnkgIi9saWI2NC9saWJ0aHJl
-YWRfZGIuc28uMSIuCj4gQ29yZSB3YXMgZ2VuZXJhdGVkIGJ5IGAuL3Rlc3RfdmFfYXBpJy4KPiBQ
-cm9ncmFtIHRlcm1pbmF0ZWQgd2l0aCBzaWduYWwgU0lHU0VHViwgU2VnbWVudGF0aW9uIGZhdWx0
-Lgo+ICMwICB2bFZhQ3JlYXRlQ29udGV4dCAoY3R4PTxvcHRpbWl6ZWQgb3V0PiwgY29uZmlnX2lk
-PTQyOTQ5NjcyOTUsIHBpY3R1cmVfd2lkdGg9MTkyMCwgcGljdHVyZV9oZWlnaHQ9MTA4MCwgZmxh
-Zz0xLCByZW5kZXJfdGFyZ2V0cz0weDAsIG51bV9yZW5kZXJfdGFyZ2V0cz0wLCBjb250ZXh0X2lk
-PTB4NTViNDhlMzljNDU4KQo+ICAgICBhdCAuLi9zcmMvZ2FsbGl1bS9zdGF0ZV90cmFja2Vycy92
-YS9jb250ZXh0LmM6MjI5Cj4gMjI5ICAgICAuLi9zcmMvZ2FsbGl1bS9zdGF0ZV90cmFja2Vycy92
-YS9jb250ZXh0LmM6IE5vIHN1Y2ggZmlsZSBvciBkaXJlY3RvcnkuCj4gW0N1cnJlbnQgdGhyZWFk
-IGlzIDEgKFRocmVhZCAweDdmNGUyZGRiZjRjMCAoTFdQIDM5MjY4NjYpKV0KPiAgZWxmdXRpbHMt
-bGliZWxmLTAuMTgxLTIuZmMzNC54ODZfNjQgZXhwYXQtMi4yLjktMi4yLmZjMzQueDg2XzY0IGds
-aWJjLTIuMzIuOTAwMC01LmZjMzQueDg2XzY0IGdtcC02LjIuMC01LmZjMzMueDg2XzY0IGxpYlgx
-MS0xLjYuMTItMi5mYzM0Lng4Nl82NCBsaWJYMTEteGNiLTEuNi4xMi0yLmZjMzQueDg2XzY0IGxp
-YlhhdS0xLjAuOS01LmZjMzMueDg2XzY0IGxpYlhkbWNwLTEuMS4zLTUuZmMzMy54ODZfNjQgbGli
-ZHJtLTIuNC4xMDItMy5mYzM0Lng4Nl82NCBsaWJlZGl0LTMuMS0zNC4yMDE5MTIzMWN2cy5mYzM0
-Lng4Nl82NCBsaWJmZmktMy4yLjEtMi4zLmZjMzIueDg2XzY0IGxpYmdjYy0xMC4yLjEtMy5mYzM0
-Lng4Nl82NCBsaWJzdGRjKystMTAuMi4xLTMuZmMzNC54ODZfNjQgbGlidmEtMi45LjAtMi5mYzM0
-Lng4Nl82NCBsaWJ4Y2ItMS4xNC02LmZjMzQueDg2XzY0IGxpYnhtbDItMi45LjEwLTguZmMzNC54
-ODZfNjQgbGlieHNobWZlbmNlLTEuMy04LmZjMzMueDg2XzY0IGxpYnpzdGQtMS40LjUtNy5mYzM0
-Lng4Nl82NCBsbHZtLWxpYnMtMTAuMC4xLTIuMS5mYzM0Lng4Nl82NCBuY3Vyc2VzLWxpYnMtNi4y
-LTQuMjAyMDA4MTcuZmMzNC54ODZfNjQgc3NzZC1jbGllbnQtMi4zLjAtMi5mYzMzLng4Nl82NCB4
-ei1saWJzLTUuMi41LTQuZmMzMy54ODZfNjQgejMtbGlicy00LjguOC01LmZjMzMueDg2XzY0IHps
-aWItMS4yLjExLTIzLmZjMzMueDg2XzY0Cj4gKGdkYikgYnQgZnVsbAo+IE1pc3Npbmcgc2VwYXJh
-dGUgZGVidWdpbmZvcywgdXNlOiBkbmYgZGVidWdpbmZvLWluc3RhbGwjMCAgdmxWYUNyZWF0ZUNv
-bnRleHQgKGN0eD08b3B0aW1pemVkIG91dD4sIGNvbmZpZ19pZD00Mjk0OTY3Mjk1LCBwaWN0dXJl
-X3dpZHRoPTE5MjAsIHBpY3R1cmVfaGVpZ2h0PTEwODAsIGZsYWc9MSwgcmVuZGVyX3RhcmdldHM9
-MHgwLCBudW1fcmVuZGVyX3RhcmdldHM9MCwgY29udGV4dF9pZD0weDU1YjQ4ZTM5YzQ1OCkKPiAg
-ICAgYXQgLi4vc3JjL2dhbGxpdW0vc3RhdGVfdHJhY2tlcnMvdmEvY29udGV4dC5jOjIyOQo+ICAg
-ICAgICAgZHJ2ID0gMHg1NWI0OGUzOTgyODAKPiAgICAgICAgIGNvbnRleHQgPSA8b3B0aW1pemVk
-IG91dD4KPiAgICAgICAgIGNvbmZpZyA9IDB4MAo+ICAgICAgICAgaXNfdnBwID0gPG9wdGltaXpl
-ZCBvdXQ+Cj4gIzEgIDB4MDAwMDdmNGUyZTMyZDBmNyBpbiB2YUNyZWF0ZUNvbnRleHQgKCkgZnJv
-bSAvbGliNjQvbGlidmEuc28uMgo+IE5vIHN5bWJvbCB0YWJsZSBpbmZvIGF2YWlsYWJsZS4KPiAj
-MiAgMHgwMDAwNTViNDhkMjlhNDE5IGluIFZBQVBJOjpWQUFQSUZpeHR1cmU6OmRvQ3JlYXRlQ29u
-dGV4dCAodGhpcz08b3B0aW1pemVkIG91dD4sIHJlc29sdXRpb249Li4uLCBleHBlY3RhdGlvbj1A
-MHg3ZmZlYTNmNmU0Njg6IDQpIGF0IHRlc3RfdmFfYXBpX2ZpeHR1cmUuY3BwOjQzNgo+ICAgICAg
-ICAgZ3Rlc3RfYXIgPSB7c3VjY2Vzc18gPSAzMiwgbWVzc2FnZV8gPSB7cHRyXyA9IDB4ZWJlNmUx
-Y2EwODRhMjMwMH19Cj4gIzMgIDB4MDAwMDU1YjQ4ZDI5ZWQzNCBpbiBWQUFQSTo6VkFBUElDcmVh
-dGVDb250ZXh0VG9GYWlsX0NyZWF0ZUNvbnRleHRXaXRoTm9Db25maWdfVGVzdDo6VGVzdEJvZHkg
-KHRoaXM9MHg1NWI0OGUzOWM0MzApIGF0IHRlc3RfdXRpbHMuaDozNgo+IE5vIGxvY2Fscy4KPiAj
-NCAgMHgwMDAwNTViNDhkMjk2ZTIzIGluIHRlc3Rpbmc6OlRlc3Q6OlJ1biAodGhpcz0weDU1YjQ4
-ZTM5YzQzMCkgYXQgLi4vdGVzdC9ndGVzdC9zcmMvZ3Rlc3QuY2M6MjQ3NAo+ICAgICAgICAgaW1w
-bCA9IDB4NTViNDhkOTFhZjYwCj4gICAgICAgICBpbXBsID0gPG9wdGltaXplZCBvdXQ+Cj4gIzUg
-IHRlc3Rpbmc6OlRlc3Q6OlJ1biAodGhpcz0weDU1YjQ4ZTM5YzQzMCkgYXQgLi4vdGVzdC9ndGVz
-dC9zcmMvZ3Rlc3QuY2M6MjQ2NQo+ICAgICAgICAgaW1wbCA9IDxvcHRpbWl6ZWQgb3V0Pgo+ICAg
-ICAgICAgaW1wbCA9IDxvcHRpbWl6ZWQgb3V0Pgo+ICM2ICB0ZXN0aW5nOjpUZXN0SW5mbzo6UnVu
-ICh0aGlzPTB4NTViNDhkOTFmZTAwKSBhdCAuLi90ZXN0L2d0ZXN0L3NyYy9ndGVzdC5jYzoyNjU2
-Cj4gICAgICAgICBpbXBsID0gMHg1NWI0OGQ5MWFmNjAKPiAgICAgICAgIHJlcGVhdGVyID0gMHg1
-NWI0OGQ5MWFkZDAKPiAgICAgICAgIHN0YXJ0ID0gMTYwMDAxOTgyNjgxNwo+ICAgICAgICAgdGVz
-dCA9IDB4NTViNDhlMzljNDMwCj4gICAgICAgICBpbXBsID0gPG9wdGltaXplZCBvdXQ+Cj4gICAg
-ICAgICByZXBlYXRlciA9IDxvcHRpbWl6ZWQgb3V0Pgo+ICAgICAgICAgc3RhcnQgPSA8b3B0aW1p
-emVkIG91dD4KPiAgICAgICAgIHRlc3QgPSA8b3B0aW1pemVkIG91dD4KPiAjNyAgdGVzdGluZzo6
-VGVzdEluZm86OlJ1biAodGhpcz0weDU1YjQ4ZDkxZmUwMCkgYXQgLi4vdGVzdC9ndGVzdC9zcmMv
-Z3Rlc3QuY2M6MjYzMAo+ICAgICAgICAgaW1wbCA9IDxvcHRpbWl6ZWQgb3V0Pgo+ICAgICAgICAg
-cmVwZWF0ZXIgPSA8b3B0aW1pemVkIG91dD4KPiAgICAgICAgIHN0YXJ0ID0gPG9wdGltaXplZCBv
-dXQ+Cj4gICAgICAgICB0ZXN0ID0gPG9wdGltaXplZCBvdXQ+Cj4gICAgICAgICBpbXBsID0gPG9w
-dGltaXplZCBvdXQ+Cj4gICAgICAgICByZXBlYXRlciA9IDxvcHRpbWl6ZWQgb3V0Pgo+ICAgICAg
-ICAgc3RhcnQgPSA8b3B0aW1pemVkIG91dD4KPiAgICAgICAgIHRlc3QgPSA8b3B0aW1pemVkIG91
-dD4KPiAjOCAgdGVzdGluZzo6VGVzdENhc2U6OlJ1biAodGhpcz0weDU1YjQ4ZDkyMjdkMCkgYXQg
-Li4vdGVzdC9ndGVzdC9zcmMvZ3Rlc3QuY2M6Mjc3NAo+ICAgICAgICAgaSA9IDAKPiAgICAgICAg
-IGltcGwgPSAweDU1YjQ4ZDkxYWY2MAo+ICAgICAgICAgcmVwZWF0ZXIgPSAweDU1YjQ4ZDkxYWRk
-MAo+ICAgICAgICAgc3RhcnQgPSAxNjAwMDE5ODI2ODE3Cj4gICAgICAgICBpbXBsID0gPG9wdGlt
-aXplZCBvdXQ+Cj4gICAgICAgICByZXBlYXRlciA9IDxvcHRpbWl6ZWQgb3V0Pgo+ICAgICAgICAg
-c3RhcnQgPSA8b3B0aW1pemVkIG91dD4KPiAgICAgICAgIGkgPSA8b3B0aW1pemVkIG91dD4KPiAj
-OSAgdGVzdGluZzo6VGVzdENhc2U6OlJ1biAodGhpcz0weDU1YjQ4ZDkyMjdkMCkgYXQgLi4vdGVz
-dC9ndGVzdC9zcmMvZ3Rlc3QuY2M6Mjc1OQo+ICAgICAgICAgaW1wbCA9IDxvcHRpbWl6ZWQgb3V0
-Pgo+ICAgICAgICAgcmVwZWF0ZXIgPSA8b3B0aW1pemVkIG91dD4KPiAgICAgICAgIHN0YXJ0ID0g
-PG9wdGltaXplZCBvdXQ+Cj4gICAgICAgICBpbXBsID0gPG9wdGltaXplZCBvdXQ+Cj4gICAgICAg
-ICByZXBlYXRlciA9IDxvcHRpbWl6ZWQgb3V0Pgo+ICAgICAgICAgc3RhcnQgPSA8b3B0aW1pemVk
-IG91dD4KPiAgICAgICAgIGkgPSA8b3B0aW1pemVkIG91dD4KPiAjMTAgdGVzdGluZzo6aW50ZXJu
-YWw6OlVuaXRUZXN0SW1wbDo6UnVuQWxsVGVzdHMgKHRoaXM9PG9wdGltaXplZCBvdXQ+KSBhdCAu
-Li90ZXN0L2d0ZXN0L3NyYy9ndGVzdC5jYzo0NjQ5Cj4gICAgICAgICB0ZXN0X2luZGV4ID0gNAo+
-ICAgICAgICAgc3RhcnQgPSAxNjAwMDE5ODI2NDgyCj4gICAgICAgICBpID0gMAo+ICAgICAgICAg
-c2hvdWxkX3NoYXJkID0gPG9wdGltaXplZCBvdXQ+Cj4gICAgICAgICBoYXNfdGVzdHNfdG9fcnVu
-ID0gdHJ1ZQo+ICAgICAgICAgcmVwZWF0ZXIgPSAweDU1YjQ4ZDkxYWRkMAo+ICAgICAgICAgZm9y
-ZXZlciA9IDxvcHRpbWl6ZWQgb3V0Pgo+ICAgICAgICAgaW5fc3VicHJvY2Vzc19mb3JfZGVhdGhf
-dGVzdCA9IDxvcHRpbWl6ZWQgb3V0Pgo+IC0tVHlwZSA8UkVUPiBmb3IgbW9yZSwgcSB0byBxdWl0
-LCBjIHRvIGNvbnRpbnVlIHdpdGhvdXQgcGFnaW5nLS0KPiAgICAgICAgIGZhaWxlZCA9IGZhbHNl
-Cj4gICAgICAgICByZXBlYXQgPSA8b3B0aW1pemVkIG91dD4KPiAgICAgICAgIGluX3N1YnByb2Nl
-c3NfZm9yX2RlYXRoX3Rlc3QgPSA8b3B0aW1pemVkIG91dD4KPiAgICAgICAgIHNob3VsZF9zaGFy
-ZCA9IDxvcHRpbWl6ZWQgb3V0Pgo+ICAgICAgICAgaGFzX3Rlc3RzX3RvX3J1biA9IDxvcHRpbWl6
-ZWQgb3V0Pgo+ICAgICAgICAgZmFpbGVkID0gPG9wdGltaXplZCBvdXQ+Cj4gICAgICAgICByZXBl
-YXRlciA9IDxvcHRpbWl6ZWQgb3V0Pgo+ICAgICAgICAgcmVwZWF0ID0gPG9wdGltaXplZCBvdXQ+
-Cj4gICAgICAgICBmb3JldmVyID0gPG9wdGltaXplZCBvdXQ+Cj4gICAgICAgICBpID0gPG9wdGlt
-aXplZCBvdXQ+Cj4gICAgICAgICBzdGFydCA9IDxvcHRpbWl6ZWQgb3V0Pgo+ICAgICAgICAgdGVz
-dF9pbmRleCA9IDxvcHRpbWl6ZWQgb3V0Pgo+ICMxMSB0ZXN0aW5nOjppbnRlcm5hbDo6VW5pdFRl
-c3RJbXBsOjpSdW5BbGxUZXN0cyAodGhpcz08b3B0aW1pemVkIG91dD4pIGF0IC4uL3Rlc3QvZ3Rl
-c3Qvc3JjL2d0ZXN0LmNjOjQ1NTEKPiAgICAgICAgIGluX3N1YnByb2Nlc3NfZm9yX2RlYXRoX3Rl
-c3QgPSA8b3B0aW1pemVkIG91dD4KPiAgICAgICAgIHNob3VsZF9zaGFyZCA9IDxvcHRpbWl6ZWQg
-b3V0Pgo+ICAgICAgICAgaGFzX3Rlc3RzX3RvX3J1biA9IDxvcHRpbWl6ZWQgb3V0Pgo+ICAgICAg
-ICAgZmFpbGVkID0gPG9wdGltaXplZCBvdXQ+Cj4gICAgICAgICByZXBlYXRlciA9IDxvcHRpbWl6
-ZWQgb3V0Pgo+ICAgICAgICAgcmVwZWF0ID0gPG9wdGltaXplZCBvdXQ+Cj4gICAgICAgICBmb3Jl
-dmVyID0gPG9wdGltaXplZCBvdXQ+Cj4gICAgICAgICBpID0gPG9wdGltaXplZCBvdXQ+Cj4gICAg
-ICAgICBzdGFydCA9IDxvcHRpbWl6ZWQgb3V0Pgo+ICAgICAgICAgdGVzdF9pbmRleCA9IDxvcHRp
-bWl6ZWQgb3V0Pgo+ICMxMiAweDAwMDA1NWI0OGQyNjUxNzkgaW4gdGVzdGluZzo6aW50ZXJuYWw6
-OkhhbmRsZUV4Y2VwdGlvbnNJbk1ldGhvZElmU3VwcG9ydGVkPHRlc3Rpbmc6OmludGVybmFsOjpV
-bml0VGVzdEltcGwsIGJvb2w+IChsb2NhdGlvbj08c3ludGhldGljIHBvaW50ZXI+LAo+ICAgICBt
-ZXRob2Q9KGJvb2wgKHRlc3Rpbmc6OmludGVybmFsOjpVbml0VGVzdEltcGw6OiopKHRlc3Rpbmc6
-OmludGVybmFsOjpVbml0VGVzdEltcGwgKiBjb25zdCkpIDB4NTViNDhkMjk1YzIwIDx0ZXN0aW5n
-OjppbnRlcm5hbDo6VW5pdFRlc3RJbXBsOjpSdW5BbGxUZXN0cygpPiwgb2JqZWN0PTB4NTViNDhk
-OTFhZjYwKQo+ICAgICBhdCAuLi90ZXN0L2d0ZXN0L3NyYy9ndGVzdC5jYzoyNDEwCj4gTm8gbG9j
-YWxzLgo+ICMxMyB0ZXN0aW5nOjpVbml0VGVzdDo6UnVuICh0aGlzPTB4NTViNDhkMmJiMzQwIDx0
-ZXN0aW5nOjpVbml0VGVzdDo6R2V0SW5zdGFuY2UoKTo6aW5zdGFuY2U+KSBhdCAuLi90ZXN0L2d0
-ZXN0L3NyYy9ndGVzdC5jYzo0MjU3Cj4gICAgICAgICBpbl9kZWF0aF90ZXN0X2NoaWxkX3Byb2Nl
-c3MgPSA8b3B0aW1pemVkIG91dD4KPiAgICAgICAgIHByZW1hdHVyZV9leGl0X2ZpbGUgPSA8b3B0
-aW1pemVkIG91dD4KPiAgICAgICAgIGluX2RlYXRoX3Rlc3RfY2hpbGRfcHJvY2VzcyA9IDxvcHRp
-bWl6ZWQgb3V0Pgo+ICAgICAgICAgcHJlbWF0dXJlX2V4aXRfZmlsZSA9IDxvcHRpbWl6ZWQgb3V0
-Pgo+ICMxNCBSVU5fQUxMX1RFU1RTICgpIGF0IC4uL3Rlc3QvZ3Rlc3QvaW5jbHVkZS9ndGVzdC9n
-dGVzdC5oOjIyMzMKPiBObyBsb2NhbHMuCj4gIzE1IG1haW4gKGFyZ2M9PG9wdGltaXplZCBvdXQ+
-LCBhcmd2PTB4N2ZmZWEzZjZlNzk4KSBhdCB0ZXN0X21haW4uY3BwOjMxCj4gTm8gbG9jYWxzLgo+
-IChnZGIpCj4gYGBgCj4KPiBBbnkgaGVscC9oaW50cyBhYm91dCB3aGF0IEkgY2FuIGRvIHRvIGhl
-bHAgZGlhZ25vc2UgdGhhdCBpc3N1ZT8KPgo+IGtsb2N6ZWsKPiAtLQo+IFRvbWFzeiBLxYJvY3pr
-byB8IExpbmtlZEluOiBodHRwOi8vbG5rZC5pbi9GWFBXeEgKPiBfX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fXwo+IE5vdXZlYXUgbWFpbGluZyBsaXN0Cj4gTm91
-dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKPiBodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9y
-Zy9tYWlsbWFuL2xpc3RpbmZvL25vdXZlYXUKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX18KTm91dmVhdSBtYWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVl
-ZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5m
-by9ub3V2ZWF1Cg==
+On Mon, Sep 07, 2020 at 05:29:35PM -0700, Marc MERLIN wrote:
+> On Tue, Sep 08, 2020 at 01:51:19AM +0200, Karol Herbst wrote:
+> > oh, I somehow missed that "disp ctor failed" message. I think that
+> > might explain why things are a bit hanging. From the top of my head I
+> > am not sure if that's something known or something new. But just in
+> > case I CCed Lyude and Ben. And I think booting with
+> > nouveau.debug=disp=trace could already show something relevant.
+> 
+> Thanks.
+> I've added that to my boot for next time I reboot.
+> 
+> I'm moving some folks to Bcc now, and let's remove the lists other than
+> nouveau on followups (lkml and pci). I'm just putting a warning here
+> so that it shows up in other list archives and anyone finding this
+> later knows that they should look in the nouveau archives for further
+> updates/resolution.
+
+Hi, I didn't hear back on this issue. Did you need the nouveau.debug=disp=trace
+or are you already working on the "disp ctor failed" issue?
+
+Thanks
+Marc
+-- 
+"A mouse is a device used to point at the xterm you want to type in" - A.S.R.
+ 
+Home page: http://marc.merlins.org/                       | PGP 7F55D5F27AAF9D08
+_______________________________________________
+Nouveau mailing list
+Nouveau@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/nouveau
