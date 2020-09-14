@@ -1,90 +1,56 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id A59AA269AB2
-	for <lists+nouveau@lfdr.de>; Tue, 15 Sep 2020 02:50:53 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8D2BF269AB1
+	for <lists+nouveau@lfdr.de>; Tue, 15 Sep 2020 02:50:51 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id CB1DF6E828;
+	by gabe.freedesktop.org (Postfix) with ESMTP id AE54C6E151;
 	Tue, 15 Sep 2020 00:50:47 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ed1-x541.google.com (mail-ed1-x541.google.com
- [IPv6:2a00:1450:4864:20::541])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B488F6E4E8;
- Mon, 14 Sep 2020 17:51:12 +0000 (UTC)
-Received: by mail-ed1-x541.google.com with SMTP id l17so399655edq.12;
- Mon, 14 Sep 2020 10:51:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=reply-to:subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language;
- bh=cinD4tchkxocHKviw5M6liz7E8UU7FD4XovFhsNsjyI=;
- b=tqZKHKN1V6C6oQElOwFS4+jyvbLS9BzylBSbwUbd02rQ76/lT49lrc+1lA+C8DN8Dd
- Nc0GbsJCPaCOHclSGk4/rG8fGqamsaUD5D+cmba9mrjnCmyMQa6mZgYbC5c/w9kZwhfb
- aJRkSAXMinRH/3gtwBaIiUmXBpTvWVTG5r/fSBBRDxoLah5xFDDjscX2kvgZr8AfeAC0
- gMFA6X+UeLkG9NLYtld2tfKKPMYvQC8wFwsgo6QeCj/1SP2gpRaBO+qK+7RqV2MPi/tn
- AYDtIiDOG7XJrasBS+cYJnkZhddVCOd5+jF87VvJuyV9OeppL+UABQ8WQSDYD79g3mPs
- ytfQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:reply-to:subject:to:cc:references:from
- :message-id:date:user-agent:mime-version:in-reply-to
- :content-language;
- bh=cinD4tchkxocHKviw5M6liz7E8UU7FD4XovFhsNsjyI=;
- b=XzUNwjExRpWcHkXwHWNfAsvRcXiuP4E7y4VV9owD+CyqdYI+pUkjNfgjiGv8u62Her
- HHXS8d4H8wB8rWXrApK8xB3yS2gw5f0dlU87YtCDK4Co5vevxYGPVOePdDuXwX/PDPd4
- gfYsGRcwBWDJS28ezMn4okCp3LEIb912iibK68v2Cmtz3JsbLAyMUcGZDNsMFqi7zjtw
- +UfZtIf3O5AdjnTftTCan4wn+1mgWjoV4wkZuej7KOxlt6HVgfFRZrw2v1nwO3O5K/YG
- B1NQT2Uj2T8Y/TRcSzOZidMNHboGfghlInya6/+RNmal7BRep2UVtidq95VVwIVf7Nio
- RG5Q==
-X-Gm-Message-State: AOAM530GN4ze5YiijLF6SwdudN+PT6Iz+0syxbB0ys7l7qhOGW5nCTHp
- KcALNXAVnIXXZG5Zrb1cE4M=
-X-Google-Smtp-Source: ABdhPJyHIadEQ0w95cMm+XKXdD2wy6DDt/xaqpuYqbeZucK6WVOqY6RobxWEhAYoVlCs20sURxiHJg==
-X-Received: by 2002:a50:b046:: with SMTP id i64mr19248036edd.9.1600105871323; 
- Mon, 14 Sep 2020 10:51:11 -0700 (PDT)
-Received: from ?IPv6:2a02:908:1252:fb60:be8a:bd56:1f94:86e7?
- ([2a02:908:1252:fb60:be8a:bd56:1f94:86e7])
- by smtp.gmail.com with ESMTPSA id c22sm9791887edr.70.2020.09.14.10.51.08
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 14 Sep 2020 10:51:10 -0700 (PDT)
-To: Thomas Zimmermann <tzimmermann@suse.de>,
- =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
- alexander.deucher@amd.com, airlied@linux.ie, daniel@ffwll.ch,
- linux@armlinux.org.uk, maarten.lankhorst@linux.intel.com,
- mripard@kernel.org, l.stach@pengutronix.de, christian.gmeiner@gmail.com,
- inki.dae@samsung.com, jy0922.shim@samsung.com, sw0312.kim@samsung.com,
- kyungmin.park@samsung.com, kgene@kernel.org, krzk@kernel.org,
- patrik.r.jakobsson@gmail.com, jani.nikula@linux.intel.com,
- joonas.lahtinen@linux.intel.com, rodrigo.vivi@intel.com,
- chunkuang.hu@kernel.org, p.zabel@pengutronix.de, matthias.bgg@gmail.com,
- robdclark@gmail.com, sean@poorly.run, bskeggs@redhat.com,
- tomi.valkeinen@ti.com, eric@anholt.net, hjc@rock-chips.com, heiko@sntech.de,
- thierry.reding@gmail.com, jonathanh@nvidia.com,
- rodrigosiqueiramelo@gmail.com, hamohammed.sa@gmail.com,
- oleksandr_andrushchenko@epam.com, hyun.kwon@xilinx.com,
- laurent.pinchart@ideasonboard.com, michal.simek@xilinx.com,
- sumit.semwal@linaro.org, evan.quan@amd.com, Hawking.Zhang@amd.com,
- tianci.yin@amd.com, marek.olsak@amd.com, hdegoede@redhat.com,
- andrey.grodzovsky@amd.com, Felix.Kuehling@amd.com, xinhui.pan@amd.com,
- aaron.liu@amd.com, nirmoy.das@amd.com, chris@chris-wilson.co.uk,
- matthew.auld@intel.com, abdiel.janulgue@linux.intel.com,
- tvrtko.ursulin@linux.intel.com, andi.shyti@intel.com, sam@ravnborg.org,
- miaoqinglang@huawei.com, emil.velikov@collabora.com
-References: <20200813083644.31711-1-tzimmermann@suse.de>
- <20200813083644.31711-2-tzimmermann@suse.de>
- <5c1b3cab-1898-46df-2c5c-23ab6cbfbb7a@amd.com>
- <c445493b-9914-63f2-1cf2-c3c1de14e3e5@suse.de>
-From: =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>
-Message-ID: <ee7528ba-6775-53be-97fe-c8425178b491@gmail.com>
-Date: Mon, 14 Sep 2020 19:51:07 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+Received: from hqnvemgate25.nvidia.com (hqnvemgate25.nvidia.com
+ [216.228.121.64])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 765236E7FE
+ for <nouveau@lists.freedesktop.org>; Mon, 14 Sep 2020 22:45:24 +0000 (UTC)
+Received: from hqpgpgate101.nvidia.com (Not Verified[216.228.121.13]) by
+ hqnvemgate25.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
+ id <B5f5ff2540000>; Mon, 14 Sep 2020 15:44:36 -0700
+Received: from hqmail.nvidia.com ([172.20.161.6])
+ by hqpgpgate101.nvidia.com (PGP Universal service);
+ Mon, 14 Sep 2020 15:45:23 -0700
+X-PGP-Universal: processed;
+ by hqpgpgate101.nvidia.com on Mon, 14 Sep 2020 15:45:23 -0700
+Received: from HQMAIL107.nvidia.com (172.20.187.13) by HQMAIL105.nvidia.com
+ (172.20.187.12) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Mon, 14 Sep
+ 2020 22:45:18 +0000
+Received: from rnnvemgw01.nvidia.com (10.128.109.123) by HQMAIL107.nvidia.com
+ (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3 via
+ Frontend Transport; Mon, 14 Sep 2020 22:45:17 +0000
+Received: from rcampbell-dev.nvidia.com (Not Verified[10.110.48.66]) by
+ rnnvemgw01.nvidia.com with Trustwave SEG (v7, 5, 8, 10121)
+ id <B5f5ff27c000c>; Mon, 14 Sep 2020 15:45:17 -0700
+From: Ralph Campbell <rcampbell@nvidia.com>
+To: <linux-mm@kvack.org>, <kvm-ppc@vger.kernel.org>,
+ <nouveau@lists.freedesktop.org>, <linux-kernel@vger.kernel.org>
+Date: Mon, 14 Sep 2020 15:45:09 -0700
+Message-ID: <20200914224509.17699-1-rcampbell@nvidia.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-In-Reply-To: <c445493b-9914-63f2-1cf2-c3c1de14e3e5@suse.de>
-Content-Language: en-US
+X-NVConfidentiality: public
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
+ t=1600123476; bh=TrRl3azN6SwFUxcMS7ApiDfcorJzP72BM2+t30cx8kQ=;
+ h=X-PGP-Universal:From:To:CC:Subject:Date:Message-ID:X-Mailer:
+ MIME-Version:X-NVConfidentiality:Content-Transfer-Encoding:
+ Content-Type;
+ b=ZgPlVabhBfcpSWC0Ato5ShzEmDINfG8SQd16FG++OHnHkiqzL04voWUncPJBNemi3
+ U8D/i32skLIy69WQ1t3kyUgLS0MR3iURi5Xw529Gga8EjUXz+1gFXwB9pqsa0iEheo
+ WHC0hPS1mRr/GrvAjkTxEg63z4XlPb9mFdGbbtDDtC6vkywbkgWCbrJS6kSDPBCXs/
+ zd213NXd0L5RSGBqFAHxZCipVVtJlblwQspjCPnDdCAq+V0oGW3twWYQB0OZrIqgTK
+ wAaCEXxQOKm+2C0I/VS9uxIz37B+oh8O57tsIN913lh1QY3ga23liwU3IBVbhz0LdR
+ 98P1Zvo5mvWFA==
 X-Mailman-Approved-At: Tue, 15 Sep 2020 00:50:46 +0000
-Subject: Re: [Nouveau] [PATCH 01/20] drm/amdgpu: Introduce GEM object
- functions
+Subject: [Nouveau] [PATCH] mm: remove extra ZONE_DEVICE struct page refcount
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -96,299 +62,396 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Reply-To: christian.koenig@amd.com
-Cc: linux-samsung-soc@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- intel-gfx@lists.freedesktop.org, etnaviv@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, linux-rockchip@lists.infradead.org,
- linux-mediatek@lists.infradead.org, amd-gfx@lists.freedesktop.org,
- nouveau@lists.freedesktop.org, linux-tegra@vger.kernel.org,
- xen-devel@lists.xenproject.org, freedreno@lists.freedesktop.org,
- linux-arm-kernel@lists.infradead.org
-Content-Type: multipart/mixed; boundary="===============1889277046=="
+Cc: Ralph Campbell <rcampbell@nvidia.com>,
+ Yang Shi <yang.shi@linux.alibaba.com>, Zi Yan <ziy@nvidia.com>,
+ Alistair Popple <apopple@nvidia.com>, Andrew
+ Morton <akpm@linux-foundation.org>, Matthew Wilcox <willy@infradead.org>,
+ Bharata B Rao <bharata@linux.ibm.com>, Paul Mackerras <paulus@ozlabs.org>,
+ Ben Skeggs <bskeggs@redhat.com>, Jason Gunthorpe <jgg@nvidia.com>,
+ Dan Williams <dan.j.williams@intel.com>, Ira Weiny <ira.weiny@intel.com>,
+ Christoph Hellwig <hch@lst.de>,
+ "Kirill A . Shutemov" <kirill.shutemov@linux.intel.com>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-This is a multi-part message in MIME format.
---===============1889277046==
-Content-Type: multipart/alternative;
- boundary="------------29780EC5D45E17F55361B946"
-Content-Language: en-US
+ZONE_DEVICE struct pages have an extra reference count that complicates the
+code for put_page() and several places in the kernel that need to check the
+reference count to see that a page is not being used (gup, compaction,
+migration, etc.). Clean up the code so the reference count doesn't need to
+be treated specially for ZONE_DEVICE.
 
-This is a multi-part message in MIME format.
---------------29780EC5D45E17F55361B946
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-
-Am 14.09.20 um 17:05 schrieb Thomas Zimmermann:
-> Hi
->
-> Am 13.08.20 um 12:22 schrieb Christian König:
->> Am 13.08.20 um 10:36 schrieb Thomas Zimmermann:
->>> GEM object functions deprecate several similar callback interfaces in
->>> struct drm_driver. This patch replaces the per-driver callbacks with
->>> per-instance callbacks in amdgpu. The only exception is gem_prime_mmap,
->>> which is non-trivial to convert.
->>>
->>> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
->>> ---
->>>    drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c    |  6 ------
->>>    drivers/gpu/drm/amd/amdgpu/amdgpu_object.c | 12 ++++++++++++
->>>    2 files changed, 12 insertions(+), 6 deletions(-)
->>>
->>> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c
->>> b/drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c
->>> index 81a79760ca61..51525b8774c9 100644
->>> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c
->>> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c
->>> @@ -1468,19 +1468,13 @@ static struct drm_driver kms_driver = {
->>>        .lastclose = amdgpu_driver_lastclose_kms,
->>>        .irq_handler = amdgpu_irq_handler,
->>>        .ioctls = amdgpu_ioctls_kms,
->>> -    .gem_free_object_unlocked = amdgpu_gem_object_free,
->>> -    .gem_open_object = amdgpu_gem_object_open,
->>> -    .gem_close_object = amdgpu_gem_object_close,
->>>        .dumb_create = amdgpu_mode_dumb_create,
->>>        .dumb_map_offset = amdgpu_mode_dumb_mmap,
->>>        .fops = &amdgpu_driver_kms_fops,
->>>          .prime_handle_to_fd = drm_gem_prime_handle_to_fd,
->>>        .prime_fd_to_handle = drm_gem_prime_fd_to_handle,
->>> -    .gem_prime_export = amdgpu_gem_prime_export,
->>>        .gem_prime_import = amdgpu_gem_prime_import,
->>> -    .gem_prime_vmap = amdgpu_gem_prime_vmap,
->>> -    .gem_prime_vunmap = amdgpu_gem_prime_vunmap,
->>>        .gem_prime_mmap = amdgpu_gem_prime_mmap,
->>>          .name = DRIVER_NAME,
->>> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c
->>> b/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c
->>> index 43f4966331dd..ca2b79f94e99 100644
->>> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c
->>> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c
->>> @@ -36,6 +36,7 @@
->>>    #include <drm/amdgpu_drm.h>
->>>    #include <drm/drm_cache.h>
->>>    #include "amdgpu.h"
->>> +#include "amdgpu_dma_buf.h"
->>>    #include "amdgpu_trace.h"
->>>    #include "amdgpu_amdkfd.h"
->>>    @@ -510,6 +511,15 @@ bool amdgpu_bo_support_uswc(u64 bo_flags)
->>>    #endif
->>>    }
->>>    +static const struct drm_gem_object_funcs amdgpu_gem_object_funcs = {
->>> +    .free = amdgpu_gem_object_free,
->>> +    .open = amdgpu_gem_object_open,
->>> +    .close = amdgpu_gem_object_close,
->>> +    .export = amdgpu_gem_prime_export,
->>> +    .vmap = amdgpu_gem_prime_vmap,
->>> +    .vunmap = amdgpu_gem_prime_vunmap,
->>> +};
->>> +
->> Wrong file, this belongs into amdgpu_gem.c
->>
->>>    static int amdgpu_bo_do_create(struct amdgpu_device *adev,
->>>                       struct amdgpu_bo_param *bp,
->>>                       struct amdgpu_bo **bo_ptr)
->>> @@ -552,6 +562,8 @@ static int amdgpu_bo_do_create(struct
->>> amdgpu_device *adev,
->>>        bo = kzalloc(sizeof(struct amdgpu_bo), GFP_KERNEL);
->>>        if (bo == NULL)
->>>            return -ENOMEM;
->>> +
->>> +    bo->tbo.base.funcs = &amdgpu_gem_object_funcs;
->> And this should probably go into amdgpu_gem_object_create().
-> I'm trying to understand what amdgpu does.  What about all the places
-> where amdgpu calls amdgpu_bo_create() internally? Wouldn't these miss
-> the free callback for the GEM object?
-
-Those shouldn't have a GEM object in the first place.
-
-Or otherwise we would have a reference counting issue.
-
-Regards,
-Christian.
-
->
-> Best regards
-> Thomas
->
->> Apart from that looks like a good idea to me.
->>
->> Christian.
->>
->>>        drm_gem_private_object_init(adev->ddev, &bo->tbo.base, size);
->>>        INIT_LIST_HEAD(&bo->shadow_list);
->>>        bo->vm_bo = NULL;
->
-> _______________________________________________
-> amd-gfx mailing list
-> amd-gfx@lists.freedesktop.org
-> https://lists.freedesktop.org/mailman/listinfo/amd-gfx
-
-
---------------29780EC5D45E17F55361B946
-Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: 8bit
-
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  </head>
-  <body>
-    <div class="moz-cite-prefix">Am 14.09.20 um 17:05 schrieb Thomas
-      Zimmermann:<br>
-    </div>
-    <blockquote type="cite"
-      cite="mid:c445493b-9914-63f2-1cf2-c3c1de14e3e5@suse.de">
-      <pre class="moz-quote-pre" wrap="">Hi
-
-Am 13.08.20 um 12:22 schrieb Christian König:
-</pre>
-      <blockquote type="cite">
-        <pre class="moz-quote-pre" wrap="">Am 13.08.20 um 10:36 schrieb Thomas Zimmermann:
-</pre>
-        <blockquote type="cite">
-          <pre class="moz-quote-pre" wrap="">GEM object functions deprecate several similar callback interfaces in
-struct drm_driver. This patch replaces the per-driver callbacks with
-per-instance callbacks in amdgpu. The only exception is gem_prime_mmap,
-which is non-trivial to convert.
-
-Signed-off-by: Thomas Zimmermann <a class="moz-txt-link-rfc2396E" href="mailto:tzimmermann@suse.de">&lt;tzimmermann@suse.de&gt;</a>
+Signed-off-by: Ralph Campbell <rcampbell@nvidia.com>
 ---
-  drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c    |  6 ------
-  drivers/gpu/drm/amd/amdgpu/amdgpu_object.c | 12 ++++++++++++
-  2 files changed, 12 insertions(+), 6 deletions(-)
 
-diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c
-b/drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c
-index 81a79760ca61..51525b8774c9 100644
---- a/drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c
-+++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c
-@@ -1468,19 +1468,13 @@ static struct drm_driver kms_driver = {
-      .lastclose = amdgpu_driver_lastclose_kms,
-      .irq_handler = amdgpu_irq_handler,
-      .ioctls = amdgpu_ioctls_kms,
--    .gem_free_object_unlocked = amdgpu_gem_object_free,
--    .gem_open_object = amdgpu_gem_object_open,
--    .gem_close_object = amdgpu_gem_object_close,
-      .dumb_create = amdgpu_mode_dumb_create,
-      .dumb_map_offset = amdgpu_mode_dumb_mmap,
-      .fops = &amp;amdgpu_driver_kms_fops,
-        .prime_handle_to_fd = drm_gem_prime_handle_to_fd,
-      .prime_fd_to_handle = drm_gem_prime_fd_to_handle,
--    .gem_prime_export = amdgpu_gem_prime_export,
-      .gem_prime_import = amdgpu_gem_prime_import,
--    .gem_prime_vmap = amdgpu_gem_prime_vmap,
--    .gem_prime_vunmap = amdgpu_gem_prime_vunmap,
-      .gem_prime_mmap = amdgpu_gem_prime_mmap,
-        .name = DRIVER_NAME,
-diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c
-b/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c
-index 43f4966331dd..ca2b79f94e99 100644
---- a/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c
-+++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c
-@@ -36,6 +36,7 @@
-  #include &lt;drm/amdgpu_drm.h&gt;
-  #include &lt;drm/drm_cache.h&gt;
-  #include "amdgpu.h"
-+#include "amdgpu_dma_buf.h"
-  #include "amdgpu_trace.h"
-  #include "amdgpu_amdkfd.h"
-  @@ -510,6 +511,15 @@ bool amdgpu_bo_support_uswc(u64 bo_flags)
-  #endif
-  }
-  +static const struct drm_gem_object_funcs amdgpu_gem_object_funcs = {
-+    .free = amdgpu_gem_object_free,
-+    .open = amdgpu_gem_object_open,
-+    .close = amdgpu_gem_object_close,
-+    .export = amdgpu_gem_prime_export,
-+    .vmap = amdgpu_gem_prime_vmap,
-+    .vunmap = amdgpu_gem_prime_vunmap,
-+};
+Matthew Wilcox, Ira Weiny, and others have complained that ZONE_DEVICE
+struct page reference counting is ugly/broken. This is my attempt to
+fix it and it works for the HMM migration self tests.
+
+I'm only sending this out as a RFC since I'm not that familiar with the
+DAX, PMEM, XEN, and other uses of ZONE_DEVICE struct pages allocated
+with devm_memremap_pages() or memremap_pages() but my best reading of
+the code looks like it might be OK. I could use help testing these
+configurations.
+
+I have a modified THP migration patch series that applies on top of
+this one and is cleaner since I don't have to add code to handle the
++1 reference count. The link below is for the earlier v2:
+("mm/hmm/nouveau: add THP migration to migrate_vma_*")
+https://lore.kernel.org/linux-mm/20200902165830.5367-1-rcampbell@nvidia.com
+
+
+ arch/powerpc/kvm/book3s_hv_uvmem.c     |  1 -
+ drivers/gpu/drm/nouveau/nouveau_dmem.c |  1 -
+ include/linux/memremap.h               |  6 +--
+ include/linux/mm.h                     | 39 ---------------
+ lib/test_hmm.c                         |  1 -
+ mm/gup.c                               | 44 -----------------
+ mm/memremap.c                          | 20 ++++----
+ mm/migrate.c                           |  5 --
+ mm/swap.c                              | 66 +++++++++++---------------
+ 9 files changed, 41 insertions(+), 142 deletions(-)
+
+diff --git a/arch/powerpc/kvm/book3s_hv_uvmem.c b/arch/powerpc/kvm/book3s_hv_uvmem.c
+index 84e5a2dc8be5..00d97050d7ff 100644
+--- a/arch/powerpc/kvm/book3s_hv_uvmem.c
++++ b/arch/powerpc/kvm/book3s_hv_uvmem.c
+@@ -711,7 +711,6 @@ static struct page *kvmppc_uvmem_get_page(unsigned long gpa, struct kvm *kvm)
+ 
+ 	dpage = pfn_to_page(uvmem_pfn);
+ 	dpage->zone_device_data = pvt;
+-	get_page(dpage);
+ 	lock_page(dpage);
+ 	return dpage;
+ out_clear:
+diff --git a/drivers/gpu/drm/nouveau/nouveau_dmem.c b/drivers/gpu/drm/nouveau/nouveau_dmem.c
+index a13c6215bba8..2a4bbe01a455 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_dmem.c
++++ b/drivers/gpu/drm/nouveau/nouveau_dmem.c
+@@ -324,7 +324,6 @@ nouveau_dmem_page_alloc_locked(struct nouveau_drm *drm)
+ 			return NULL;
+ 	}
+ 
+-	get_page(page);
+ 	lock_page(page);
+ 	return page;
+ }
+diff --git a/include/linux/memremap.h b/include/linux/memremap.h
+index 4e9c738f4b31..7dd9802d2612 100644
+--- a/include/linux/memremap.h
++++ b/include/linux/memremap.h
+@@ -67,9 +67,9 @@ enum memory_type {
+ 
+ struct dev_pagemap_ops {
+ 	/*
+-	 * Called once the page refcount reaches 1.  (ZONE_DEVICE pages never
+-	 * reach 0 refcount unless there is a refcount bug. This allows the
+-	 * device driver to implement its own memory management.)
++	 * Called once the page refcount reaches 0. The reference count is
++	 * reset to 1 before calling page_free(). This allows the
++	 * device driver to implement its own memory management.
+ 	 */
+ 	void (*page_free)(struct page *page);
+ 
+diff --git a/include/linux/mm.h b/include/linux/mm.h
+index 517751310dd2..5a82037a4b26 100644
+--- a/include/linux/mm.h
++++ b/include/linux/mm.h
+@@ -1093,34 +1093,6 @@ static inline bool is_zone_device_page(const struct page *page)
+ #ifdef CONFIG_DEV_PAGEMAP_OPS
+ void free_devmap_managed_page(struct page *page);
+ DECLARE_STATIC_KEY_FALSE(devmap_managed_key);
+-
+-static inline bool page_is_devmap_managed(struct page *page)
+-{
+-	if (!static_branch_unlikely(&devmap_managed_key))
+-		return false;
+-	if (!is_zone_device_page(page))
+-		return false;
+-	switch (page->pgmap->type) {
+-	case MEMORY_DEVICE_PRIVATE:
+-	case MEMORY_DEVICE_FS_DAX:
+-		return true;
+-	default:
+-		break;
+-	}
+-	return false;
+-}
+-
+-void put_devmap_managed_page(struct page *page);
+-
+-#else /* CONFIG_DEV_PAGEMAP_OPS */
+-static inline bool page_is_devmap_managed(struct page *page)
+-{
+-	return false;
+-}
+-
+-static inline void put_devmap_managed_page(struct page *page)
+-{
+-}
+ #endif /* CONFIG_DEV_PAGEMAP_OPS */
+ 
+ static inline bool is_device_private_page(const struct page *page)
+@@ -1169,17 +1141,6 @@ static inline void put_page(struct page *page)
+ {
+ 	page = compound_head(page);
+ 
+-	/*
+-	 * For devmap managed pages we need to catch refcount transition from
+-	 * 2 to 1, when refcount reach one it means the page is free and we
+-	 * need to inform the device driver through callback. See
+-	 * include/linux/memremap.h and HMM for details.
+-	 */
+-	if (page_is_devmap_managed(page)) {
+-		put_devmap_managed_page(page);
+-		return;
+-	}
+-
+ 	if (put_page_testzero(page))
+ 		__put_page(page);
+ }
+diff --git a/lib/test_hmm.c b/lib/test_hmm.c
+index c8133f50160b..5410f7328577 100644
+--- a/lib/test_hmm.c
++++ b/lib/test_hmm.c
+@@ -561,7 +561,6 @@ static struct page *dmirror_devmem_alloc_page(struct dmirror_device *mdevice)
+ 	}
+ 
+ 	dpage->zone_device_data = rpage;
+-	get_page(dpage);
+ 	lock_page(dpage);
+ 	return dpage;
+ 
+diff --git a/mm/gup.c b/mm/gup.c
+index b9b1cd8bcd6a..3c54f0c190a3 100644
+--- a/mm/gup.c
++++ b/mm/gup.c
+@@ -177,41 +177,6 @@ bool __must_check try_grab_page(struct page *page, unsigned int flags)
+ 	return true;
+ }
+ 
+-#ifdef CONFIG_DEV_PAGEMAP_OPS
+-static bool __unpin_devmap_managed_user_page(struct page *page)
+-{
+-	int count, refs = 1;
+-
+-	if (!page_is_devmap_managed(page))
+-		return false;
+-
+-	if (hpage_pincount_available(page))
+-		hpage_pincount_sub(page, 1);
+-	else
+-		refs = GUP_PIN_COUNTING_BIAS;
+-
+-	count = page_ref_sub_return(page, refs);
+-
+-	mod_node_page_state(page_pgdat(page), NR_FOLL_PIN_RELEASED, 1);
+-	/*
+-	 * devmap page refcounts are 1-based, rather than 0-based: if
+-	 * refcount is 1, then the page is free and the refcount is
+-	 * stable because nobody holds a reference on the page.
+-	 */
+-	if (count == 1)
+-		free_devmap_managed_page(page);
+-	else if (!count)
+-		__put_page(page);
+-
+-	return true;
+-}
+-#else
+-static bool __unpin_devmap_managed_user_page(struct page *page)
+-{
+-	return false;
+-}
+-#endif /* CONFIG_DEV_PAGEMAP_OPS */
+-
+ /**
+  * unpin_user_page() - release a dma-pinned page
+  * @page:            pointer to page to be released
+@@ -227,15 +192,6 @@ void unpin_user_page(struct page *page)
+ 
+ 	page = compound_head(page);
+ 
+-	/*
+-	 * For devmap managed pages we need to catch refcount transition from
+-	 * GUP_PIN_COUNTING_BIAS to 1, when refcount reach one it means the
+-	 * page is free and we need to inform the device driver through
+-	 * callback. See include/linux/memremap.h and HMM for details.
+-	 */
+-	if (__unpin_devmap_managed_user_page(page))
+-		return;
+-
+ 	if (hpage_pincount_available(page))
+ 		hpage_pincount_sub(page, 1);
+ 	else
+diff --git a/mm/memremap.c b/mm/memremap.c
+index 9c951bbfee91..f09562789079 100644
+--- a/mm/memremap.c
++++ b/mm/memremap.c
+@@ -91,13 +91,6 @@ static unsigned long pfn_end(struct dev_pagemap *pgmap, int range_id)
+ 	return (range->start + range_len(range)) >> PAGE_SHIFT;
+ }
+ 
+-static unsigned long pfn_next(unsigned long pfn)
+-{
+-	if (pfn % 1024 == 0)
+-		cond_resched();
+-	return pfn + 1;
+-}
+-
+ /*
+  * This returns true if the page is reserved by ZONE_DEVICE driver.
+  */
+@@ -176,13 +169,12 @@ static void pageunmap_range(struct dev_pagemap *pgmap, int range_id)
+ 
+ void memunmap_pages(struct dev_pagemap *pgmap)
+ {
+-	unsigned long pfn;
+ 	int i;
+ 
+ 	dev_pagemap_kill(pgmap);
+ 	for (i = 0; i < pgmap->nr_range; i++)
+-		for_each_device_pfn(pfn, pgmap, i)
+-			put_page(pfn_to_page(pfn));
++		percpu_ref_put_many(pgmap->ref, pfn_end(pgmap, i) -
++						pfn_first(pgmap, i));
+ 	dev_pagemap_cleanup(pgmap);
+ 
+ 	for (i = 0; i < pgmap->nr_range; i++)
+@@ -516,6 +508,14 @@ void free_devmap_managed_page(struct page *page)
+ 
+ 	mem_cgroup_uncharge(page);
+ 
++	/*
++	 * ZONE_DEVICE drivers keep a reference to the page while it is on
++	 * the driver's free list so we reset the reference count here.
++	 * This matches the initial reference when the struct pages are
++	 * created by memremap_pages().
++	 */
++	set_page_refcounted(page);
 +
-</pre>
-        </blockquote>
-        <pre class="moz-quote-pre" wrap="">
-Wrong file, this belongs into amdgpu_gem.c
-
-</pre>
-        <blockquote type="cite">
-          <pre class="moz-quote-pre" wrap="">  static int amdgpu_bo_do_create(struct amdgpu_device *adev,
-                     struct amdgpu_bo_param *bp,
-                     struct amdgpu_bo **bo_ptr)
-@@ -552,6 +562,8 @@ static int amdgpu_bo_do_create(struct
-amdgpu_device *adev,
-      bo = kzalloc(sizeof(struct amdgpu_bo), GFP_KERNEL);
-      if (bo == NULL)
-          return -ENOMEM;
+ 	/*
+ 	 * When a device_private page is freed, the page->mapping field
+ 	 * may still contain a (stale) mapping value. For example, the
+diff --git a/mm/migrate.c b/mm/migrate.c
+index 4f89360d9e77..be1586582b52 100644
+--- a/mm/migrate.c
++++ b/mm/migrate.c
+@@ -380,11 +380,6 @@ static int expected_page_refs(struct address_space *mapping, struct page *page)
+ {
+ 	int expected_count = 1;
+ 
+-	/*
+-	 * Device private pages have an extra refcount as they are
+-	 * ZONE_DEVICE pages.
+-	 */
+-	expected_count += is_device_private_page(page);
+ 	if (mapping)
+ 		expected_count += thp_nr_pages(page) + page_has_private(page);
+ 
+diff --git a/mm/swap.c b/mm/swap.c
+index feff680d3de9..8468e72e397f 100644
+--- a/mm/swap.c
++++ b/mm/swap.c
+@@ -113,10 +113,31 @@ static void __put_compound_page(struct page *page)
+ 	destroy_compound_page(page);
+ }
+ 
++#ifdef CONFIG_DEV_PAGEMAP_OPS
++static void __put_devmap_managed_page(struct page *page)
++{
++	if (!static_branch_unlikely(&devmap_managed_key))
++		return;
 +
-+    bo-&gt;tbo.base.funcs = &amp;amdgpu_gem_object_funcs;
-</pre>
-        </blockquote>
-        <pre class="moz-quote-pre" wrap="">
-And this should probably go into amdgpu_gem_object_create().
-</pre>
-      </blockquote>
-      <pre class="moz-quote-pre" wrap="">
-I'm trying to understand what amdgpu does.  What about all the places
-where amdgpu calls amdgpu_bo_create() internally? Wouldn't these miss
-the free callback for the GEM object?</pre>
-    </blockquote>
-    <br>
-    Those shouldn't have a GEM object in the first place.<br>
-    <br>
-    Or otherwise we would have a reference counting issue.<br>
-    <br>
-    Regards,<br>
-    Christian.<br>
-    <br>
-    <blockquote type="cite"
-      cite="mid:c445493b-9914-63f2-1cf2-c3c1de14e3e5@suse.de">
-      <pre class="moz-quote-pre" wrap="">
-
-Best regards
-Thomas
-
-</pre>
-      <blockquote type="cite">
-        <pre class="moz-quote-pre" wrap="">
-Apart from that looks like a good idea to me.
-
-Christian.
-
-</pre>
-        <blockquote type="cite">
-          <pre class="moz-quote-pre" wrap="">      drm_gem_private_object_init(adev-&gt;ddev, &amp;bo-&gt;tbo.base, size);
-      INIT_LIST_HEAD(&amp;bo-&gt;shadow_list);
-      bo-&gt;vm_bo = NULL;
-</pre>
-        </blockquote>
-        <pre class="moz-quote-pre" wrap="">
-</pre>
-      </blockquote>
-      <pre class="moz-quote-pre" wrap="">
-</pre>
-      <br>
-      <fieldset class="mimeAttachmentHeader"></fieldset>
-      <pre class="moz-quote-pre" wrap="">_______________________________________________
-amd-gfx mailing list
-<a class="moz-txt-link-abbreviated" href="mailto:amd-gfx@lists.freedesktop.org">amd-gfx@lists.freedesktop.org</a>
-<a class="moz-txt-link-freetext" href="https://lists.freedesktop.org/mailman/listinfo/amd-gfx">https://lists.freedesktop.org/mailman/listinfo/amd-gfx</a>
-</pre>
-    </blockquote>
-    <br>
-  </body>
-</html>
-
---------------29780EC5D45E17F55361B946--
-
---===============1889277046==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
++	switch (page->pgmap->type) {
++	case MEMORY_DEVICE_PRIVATE:
++	case MEMORY_DEVICE_FS_DAX:
++		free_devmap_managed_page(page);
++		break;
++	default:
++		break;
++	}
++}
++#else
++static inline void __put_devmap_managed_page(struct page *page)
++{
++}
++#endif
++
+ void __put_page(struct page *page)
+ {
+ 	if (is_zone_device_page(page)) {
+-		put_dev_pagemap(page->pgmap);
++		__put_devmap_managed_page(page);
+ 
+ 		/*
+ 		 * The page belongs to the device that created pgmap. Do
+@@ -851,27 +872,19 @@ void release_pages(struct page **pages, int nr)
+ 		if (is_huge_zero_page(page))
+ 			continue;
+ 
++		page = compound_head(page);
++		if (!put_page_testzero(page))
++			continue;
++
+ 		if (is_zone_device_page(page)) {
+ 			if (locked_pgdat) {
+ 				spin_unlock_irqrestore(&locked_pgdat->lru_lock,
+ 						       flags);
+ 				locked_pgdat = NULL;
+ 			}
+-			/*
+-			 * ZONE_DEVICE pages that return 'false' from
+-			 * put_devmap_managed_page() do not require special
+-			 * processing, and instead, expect a call to
+-			 * put_page_testzero().
+-			 */
+-			if (page_is_devmap_managed(page)) {
+-				put_devmap_managed_page(page);
+-				continue;
+-			}
+-		}
+-
+-		page = compound_head(page);
+-		if (!put_page_testzero(page))
++			__put_devmap_managed_page(page);
+ 			continue;
++		}
+ 
+ 		if (PageCompound(page)) {
+ 			if (locked_pgdat) {
+@@ -1149,26 +1162,3 @@ void __init swap_setup(void)
+ 	 * _really_ don't want to cluster much more
+ 	 */
+ }
+-
+-#ifdef CONFIG_DEV_PAGEMAP_OPS
+-void put_devmap_managed_page(struct page *page)
+-{
+-	int count;
+-
+-	if (WARN_ON_ONCE(!page_is_devmap_managed(page)))
+-		return;
+-
+-	count = page_ref_dec_return(page);
+-
+-	/*
+-	 * devmap page refcounts are 1-based, rather than 0-based: if
+-	 * refcount is 1, then the page is free and the refcount is
+-	 * stable because nobody holds a reference on the page.
+-	 */
+-	if (count == 1)
+-		free_devmap_managed_page(page);
+-	else if (!count)
+-		__put_page(page);
+-}
+-EXPORT_SYMBOL(put_devmap_managed_page);
+-#endif
+-- 
+2.20.1
 
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/nouveau
-
---===============1889277046==--
