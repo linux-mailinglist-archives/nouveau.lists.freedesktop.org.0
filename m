@@ -1,74 +1,55 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6533226905E
-	for <lists+nouveau@lfdr.de>; Mon, 14 Sep 2020 17:43:55 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id D746F269982
+	for <lists+nouveau@lfdr.de>; Tue, 15 Sep 2020 01:10:54 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id DC8456E503;
-	Mon, 14 Sep 2020 15:43:43 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D38F06E05A;
+	Mon, 14 Sep 2020 23:10:51 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-lj1-x242.google.com (mail-lj1-x242.google.com
- [IPv6:2a00:1450:4864:20::242])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 73E186E4FB
- for <nouveau@lists.freedesktop.org>; Mon, 14 Sep 2020 15:34:06 +0000 (UTC)
-Received: by mail-lj1-x242.google.com with SMTP id w3so58048ljo.5
- for <nouveau@lists.freedesktop.org>; Mon, 14 Sep 2020 08:34:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=6QGIaljRH231VAywJdapvuATziOfA42BJnpSHpoIEVE=;
- b=RSn2RJzblwAHTSK+plrf24n4vXY7/p/jXtG+T94xADRsRUBY8CHEBNgnMf/kQyrnxy
- YieEPQGTw3bOqSmW8AmGOLLdGNA7YSDJLGbEMo+AGcNWh2pxH6XRgNcz8Cs5uCOpKkzC
- gQyRsPyGfUidZAcBfjITy0I3uSNrMpc1xEktaPuU1N5ohOzXYJc8kuUdIFaZ6+PLkH1j
- ej79ZdbMIfsu6iduHBqVwRFdln66PldWiNNCVGGJ8TfEu+jWybTfxA05D2VHpJvxymYA
- bWH+DdU6BYBQ8HP2CiwI9zxdkYMl9jJc8yEPZeyVx3GZKr3H03N+EEitFWK+0KohnbKI
- Gy2w==
+Received: from mail-ed1-x544.google.com (mail-ed1-x544.google.com
+ [IPv6:2a00:1450:4864:20::544])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0F40D6E05A
+ for <nouveau@lists.freedesktop.org>; Mon, 14 Sep 2020 23:10:51 +0000 (UTC)
+Received: by mail-ed1-x544.google.com with SMTP id b12so1164709edz.11
+ for <nouveau@lists.freedesktop.org>; Mon, 14 Sep 2020 16:10:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=intel-com.20150623.gappssmtp.com; s=20150623;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=R+itrPmdb1uT2Do7NFJXS/q5A1e11LUUi6cUnbB8ULo=;
+ b=OscoufG8IHAPrzgYF4fy7Cn/cK7ubF9tgWt8ZSshsxggI+VMUPvxKjh5r2Y2J5l2uh
+ UMyGvicURId/BnfvWei+UmGlQYfxb5gUlFtgYBcc/sJkxR+BZ2rRPTNZH5n/MxAVMRLN
+ CezpW17Hi9Ria77HBMgvk5dRIHYzNvD4OTOZUVYZXT31uiRdBc4PlG/C/OYuQ4Untxyu
+ kIt724BvF7EyKYooWsH51W5qekRgsO4eUc1/CVX37OQ6wcqYsq+DZM1YYO1oZVsFiCsF
+ nflntEDKVeno16Chu1iM5WP+Uts0fcm5u8ZwXwx+sYYJvRnI59vxmBtjLMtucxbocrlI
+ NYeA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=6QGIaljRH231VAywJdapvuATziOfA42BJnpSHpoIEVE=;
- b=HeYGhayP9qru5O/bobd3cnn/H0RE8hn5qQ6wcD2OV/61aZPCvHjK3lG7t5vz0mkh2C
- H4ZgOtCZ07KqKaZ28ALY/La18UeQWRYcWVaJktbEcKS2WPdjXgxfy4a/U3WZT+vEp55Z
- Xz2bcWm1ZUWa7b71mYKCKkllc8g53hUglVcrv9qH8IgmwpTe5mKNE5Hb7PMi6hhC3TAV
- jvNKDA5T0SZOVu/ibT8uJ8CLUoBlTmN9u6WG9LO0THEvM2eFdjaYM2w7qOenIQsZuApQ
- L9E+tE0OAcy2PV8esC9JoSIW3eUlYtfJFSf9ZobYCVI0H89wnlHFb2Y5c/KmFWIAM1+r
- 8URQ==
-X-Gm-Message-State: AOAM531t7PVpcIbA0DGFXrK20vXpL41LA2LvcVoCP5sWdtQHkadUuitj
- XpqRLQZzeiSn2rmnzRLUjF0=
-X-Google-Smtp-Source: ABdhPJwhd/LhTRq+JWSW5bzIk6PAoYzRDD2WFOZyHy/0zgbs8GXUoAwbOWmbxU7cQ/01j9Vl+1ORow==
-X-Received: by 2002:a05:651c:200b:: with SMTP id
- s11mr5091489ljo.196.1600097644849; 
- Mon, 14 Sep 2020 08:34:04 -0700 (PDT)
-Received: from wasted.omprussia.ru ([2a00:1fa0:44ca:acb2:3cb7:6882:b0eb:1108])
- by smtp.gmail.com with ESMTPSA id
- l129sm3367001lfd.191.2020.09.14.08.34.03
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 14 Sep 2020 08:34:04 -0700 (PDT)
-To: Christoph Hellwig <hch@lst.de>, Mauro Carvalho Chehab
- <mchehab@kernel.org>, Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
- "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
- Joonyoung Shim <jy0922.shim@samsung.com>,
- Seung-Woo Kim <sw0312.kim@samsung.com>, Ben Skeggs <bskeggs@redhat.com>,
- Marek Szyprowski <m.szyprowski@samsung.com>, Tomasz Figa
- <tfiga@chromium.org>, Matt Porter <mporter@kernel.crashing.org>,
- iommu@lists.linux-foundation.org
-References: <20200914144433.1622958-1-hch@lst.de>
- <20200914144433.1622958-4-hch@lst.de>
-From: Sergei Shtylyov <sergei.shtylyov@gmail.com>
-Message-ID: <7a1d11c2-0fc5-e110-dabe-960e516bb343@gmail.com>
-Date: Mon, 14 Sep 2020 18:34:02 +0300
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.11.0
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=R+itrPmdb1uT2Do7NFJXS/q5A1e11LUUi6cUnbB8ULo=;
+ b=n0hpSwTtV0oKeRhDUOZVJh2omYw70w3Bv8/serQtc27DZIbsGlfgbMQGieFWFqtcLT
+ ObNnKfivLAPx1H1MuZ6uGnc1GsAYza9eQ01gnZnlbN2+FEw+GD2YlJD2dxR+l+IsPNbb
+ hdUj3DpuUEYV1Q9jvXLmLLcHvU4/gPdHhFTsLjaD9Yb35QWZpT1LDSrMCzkmFy6pH4IW
+ heJjjvGwsWSlK86XTSSHnkbX0OJkRp4ySeQxVEWyvr2BdmUlZ7S9+24IAyfs49HSbwaz
+ dkdcMryL0ZY81kt/rMcoe2eKTzF+sTdR6iWr6zaN3Qcus83LYRZyU9VXR9NFPXr09cC5
+ wBBA==
+X-Gm-Message-State: AOAM532XFFPgYvdPOA446GPCcr7u7X0zNwci4lMjnsvqASn9WkOfR8RI
+ Qe/Ne5rirXwa1t0nInEbwIL/N2iuT+1qUy0+aRnPBQ==
+X-Google-Smtp-Source: ABdhPJz25sdc/c10PW3FBm8YfGcEy9UNPAY+TzoW85B7fIMK8zMcw5r6ppC0h9BjQjMtQWUZ3domYRB1253CIsTQm98=
+X-Received: by 2002:aa7:c511:: with SMTP id o17mr20039691edq.300.1600125049629; 
+ Mon, 14 Sep 2020 16:10:49 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20200914144433.1622958-4-hch@lst.de>
-Content-Language: en-US
-X-Mailman-Approved-At: Mon, 14 Sep 2020 15:43:42 +0000
-Subject: Re: [Nouveau] [PATCH 03/17] drm/exynos: stop setting
- DMA_ATTR_NON_CONSISTENT
+References: <20200914224509.17699-1-rcampbell@nvidia.com>
+In-Reply-To: <20200914224509.17699-1-rcampbell@nvidia.com>
+From: Dan Williams <dan.j.williams@intel.com>
+Date: Mon, 14 Sep 2020 16:10:38 -0700
+Message-ID: <CAPcyv4gVJuWsOtejrKvWgByq=c1niwQOZ0HHYaSo4h6vc-Xw+Q@mail.gmail.com>
+To: Ralph Campbell <rcampbell@nvidia.com>
+Subject: Re: [Nouveau] [PATCH] mm: remove extra ZONE_DEVICE struct page
+ refcount
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -80,29 +61,121 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: alsa-devel@alsa-project.org, linux-samsung-soc@vger.kernel.org,
- linux-scsi@vger.kernel.org, linux-parisc@vger.kernel.org,
- linux-doc@vger.kernel.org, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, linux-mips@vger.kernel.org, linux-mm@kvack.org,
- Stefan Richter <stefanr@s5r6.in-berlin.de>, netdev@vger.kernel.org,
- linux1394-devel@lists.sourceforge.net, linux-arm-kernel@lists.infradead.org,
- linux-media@vger.kernel.org
+Cc: Yang Shi <yang.shi@linux.alibaba.com>, Zi Yan <ziy@nvidia.com>,
+ nouveau@lists.freedesktop.org, Alistair Popple <apopple@nvidia.com>,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ Matthew Wilcox <willy@infradead.org>, Bharata B Rao <bharata@linux.ibm.com>,
+ Paul Mackerras <paulus@ozlabs.org>, Linux MM <linux-mm@kvack.org>,
+ kvm-ppc@vger.kernel.org, Jason Gunthorpe <jgg@nvidia.com>,
+ Andrew Morton <akpm@linux-foundation.org>, Ira Weiny <ira.weiny@intel.com>,
+ Christoph Hellwig <hch@lst.de>,
+ "Kirill A . Shutemov" <kirill.shutemov@linux.intel.com>,
+ Ben Skeggs <bskeggs@redhat.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 9/14/20 5:44 PM, Christoph Hellwig wrote:
+On Mon, Sep 14, 2020 at 3:45 PM Ralph Campbell <rcampbell@nvidia.com> wrote:
+>
+> ZONE_DEVICE struct pages have an extra reference count that complicates the
+> code for put_page() and several places in the kernel that need to check the
+> reference count to see that a page is not being used (gup, compaction,
+> migration, etc.). Clean up the code so the reference count doesn't need to
+> be treated specially for ZONE_DEVICE.
+>
+> Signed-off-by: Ralph Campbell <rcampbell@nvidia.com>
+> ---
+>
+> Matthew Wilcox, Ira Weiny, and others have complained that ZONE_DEVICE
+> struct page reference counting is ugly/broken. This is my attempt to
+> fix it and it works for the HMM migration self tests.
 
-> DMA_ATTR_NON_CONSISTENT is a no-op except on PARISC and some mips
-> configs, so don't set it in this ARM specific driver.
+Can you link to a technical description of what's broken? Or better
+yet, summarize that argument in the changelog?
 
-   Hm, PARICS and ARM capitalized but mips in lower case? :-)
+> I'm only sending this out as a RFC since I'm not that familiar with the
+> DAX, PMEM, XEN, and other uses of ZONE_DEVICE struct pages allocated
+> with devm_memremap_pages() or memremap_pages() but my best reading of
+> the code looks like it might be OK. I could use help testing these
+> configurations.
 
-> Signed-off-by: Christoph Hellwig <hch@lst.de>
-[...]
+Back in the 4.15 days I could not convince myself that some code paths
+blindly assumed that pages with refcount==0 were on an lru list. Since
+then, struct page has been reorganized to not collide the ->pgmap back
+pointer with the ->lru list and there have been other cleanups for
+page pinning that might make this incremental cleanup viable.
 
-MBR, Sergei
+You also need to fix up ext4_break_layouts() and
+xfs_break_dax_layouts() to expect ->_refcount is 0 instead of 1. This
+also needs some fstests exposure.
+
+> I have a modified THP migration patch series that applies on top of
+> this one and is cleaner since I don't have to add code to handle the
+> +1 reference count. The link below is for the earlier v2:
+> ("mm/hmm/nouveau: add THP migration to migrate_vma_*")
+> https://lore.kernel.org/linux-mm/20200902165830.5367-1-rcampbell@nvidia.com
+>
+>
+>  arch/powerpc/kvm/book3s_hv_uvmem.c     |  1 -
+>  drivers/gpu/drm/nouveau/nouveau_dmem.c |  1 -
+>  include/linux/memremap.h               |  6 +--
+>  include/linux/mm.h                     | 39 ---------------
+>  lib/test_hmm.c                         |  1 -
+>  mm/gup.c                               | 44 -----------------
+>  mm/memremap.c                          | 20 ++++----
+>  mm/migrate.c                           |  5 --
+>  mm/swap.c                              | 66 +++++++++++---------------
+>  9 files changed, 41 insertions(+), 142 deletions(-)
+
+This diffstat is indeed appealing.
+
+>
+> diff --git a/arch/powerpc/kvm/book3s_hv_uvmem.c b/arch/powerpc/kvm/book3s_hv_uvmem.c
+> index 84e5a2dc8be5..00d97050d7ff 100644
+> --- a/arch/powerpc/kvm/book3s_hv_uvmem.c
+> +++ b/arch/powerpc/kvm/book3s_hv_uvmem.c
+> @@ -711,7 +711,6 @@ static struct page *kvmppc_uvmem_get_page(unsigned long gpa, struct kvm *kvm)
+>
+>         dpage = pfn_to_page(uvmem_pfn);
+>         dpage->zone_device_data = pvt;
+> -       get_page(dpage);
+>         lock_page(dpage);
+>         return dpage;
+>  out_clear:
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_dmem.c b/drivers/gpu/drm/nouveau/nouveau_dmem.c
+> index a13c6215bba8..2a4bbe01a455 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_dmem.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_dmem.c
+> @@ -324,7 +324,6 @@ nouveau_dmem_page_alloc_locked(struct nouveau_drm *drm)
+>                         return NULL;
+>         }
+>
+> -       get_page(page);
+>         lock_page(page);
+>         return page;
+>  }
+> diff --git a/include/linux/memremap.h b/include/linux/memremap.h
+> index 4e9c738f4b31..7dd9802d2612 100644
+> --- a/include/linux/memremap.h
+> +++ b/include/linux/memremap.h
+> @@ -67,9 +67,9 @@ enum memory_type {
+>
+>  struct dev_pagemap_ops {
+>         /*
+> -        * Called once the page refcount reaches 1.  (ZONE_DEVICE pages never
+> -        * reach 0 refcount unless there is a refcount bug. This allows the
+> -        * device driver to implement its own memory management.)
+> +        * Called once the page refcount reaches 0. The reference count is
+> +        * reset to 1 before calling page_free(). This allows the
+> +        * device driver to implement its own memory management.
+
+I'd clarify the order events / responsibility of the common core
+page_free() and the device specific page_free(). At the same time, why
+not update drivers to expect that the page is already refcount==0 on
+entry? Seems odd to go through all this trouble to make the reference
+count appear to be zero to the wider kernel but expect that drivers
+get a fake reference on entry to their ->page_free() callbacks.
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
