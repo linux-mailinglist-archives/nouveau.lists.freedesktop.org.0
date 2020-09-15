@@ -1,51 +1,41 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0B7CA26B9FA
-	for <lists+nouveau@lfdr.de>; Wed, 16 Sep 2020 04:23:17 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 46EED26B9E5
+	for <lists+nouveau@lfdr.de>; Wed, 16 Sep 2020 04:23:05 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2A0146E985;
-	Wed, 16 Sep 2020 02:22:39 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C11E66E95D;
+	Wed, 16 Sep 2020 02:22:36 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from casper.infradead.org (casper.infradead.org
- [IPv6:2001:8b0:10b:1236::1])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 73F376E10C
- for <nouveau@lists.freedesktop.org>; Tue, 15 Sep 2020 16:33:25 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
- References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
- Content-Type:Content-ID:Content-Description;
- bh=3uuWATlux5CLwoYUg+NN5gOtHb6T7EXPohKT/lTJKJI=; b=n3p/yVJZRK+wbxyYEp8pkVnF7d
- hOOHcYTdFzo7akNyeet0DZXxccLdgZIoOr6taxspBy/6Nw2HzuudIL5cO3cux/0Ps1kPOPpCaDuiZ
- 71xYegixSYfkkcrW3QjKCgmzELBA6x8wDtzWuiR4saDycE2AC35+V5oi4+daZIEjq2ToSWnv4R9cJ
- boT1A66ZJ9G2igo0eQXvpTU9Ka7B0HiUCVukCMermJx4dV3Bpp33w8WLP0t3lZ8ajE4VQW97wGslQ
- 7cj3CUwUESH+xL2nh4b2897z9ZoRIetEyG0yjYlRcvvUAz2cF1ga1smN8Gnx/99jq8B/YKpwQ7hY/
- 2LJFzrkw==;
-Received: from 089144214092.atnat0023.highway.a1.net ([89.144.214.92]
- helo=localhost)
- by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1kIDt1-0006DO-8d; Tue, 15 Sep 2020 16:32:55 +0000
-From: Christoph Hellwig <hch@lst.de>
-To: Mauro Carvalho Chehab <mchehab@kernel.org>,
- Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
- "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
- Joonyoung Shim <jy0922.shim@samsung.com>,
- Seung-Woo Kim <sw0312.kim@samsung.com>, Ben Skeggs <bskeggs@redhat.com>,
- Marek Szyprowski <m.szyprowski@samsung.com>,
- Tomasz Figa <tfiga@chromium.org>,
- Matt Porter <mporter@kernel.crashing.org>, iommu@lists.linux-foundation.org
-Date: Tue, 15 Sep 2020 17:51:22 +0200
-Message-Id: <20200915155122.1768241-19-hch@lst.de>
-X-Mailer: git-send-email 2.28.0
-In-Reply-To: <20200915155122.1768241-1-hch@lst.de>
-References: <20200915155122.1768241-1-hch@lst.de>
+Received: from perceval.ideasonboard.com (perceval.ideasonboard.com
+ [IPv6:2001:4b98:dc2:55:216:3eff:fef7:d647])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 439396E109;
+ Tue, 15 Sep 2020 15:55:11 +0000 (UTC)
+Received: from pendragon.ideasonboard.com (62-78-145-57.bb.dnainternet.fi
+ [62.78.145.57])
+ by perceval.ideasonboard.com (Postfix) with ESMTPSA id 0FA56276;
+ Tue, 15 Sep 2020 17:54:16 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
+ s=mail; t=1600185256;
+ bh=XzPEATglwb8mJLD0DYu0V5mnVt9Rmyb4GFF3M0n1BQw=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=k/TxRWDwAUeEA/mxOqDGy3dXpqZvHw1rgu/hfc6AZ+2kJHV8nY1aZQ1niwJxXM2on
+ uMm8kF40aJQq8Y3LJa+B/xGzPCzryGwMdT5H5oWYJQ48rRZEb8n/CrAkn0VvMZEJAK
+ zd/EMFYW53+dug8ySJGu6EPKXShM0dS8ZH8bQ3S8=
+Date: Tue, 15 Sep 2020 18:53:46 +0300
+From: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+To: Thomas Zimmermann <tzimmermann@suse.de>
+Message-ID: <20200915155346.GA26029@pendragon.ideasonboard.com>
+References: <20200915145958.19993-1-tzimmermann@suse.de>
+ <20200915145958.19993-21-tzimmermann@suse.de>
 MIME-Version: 1.0
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
- casper.infradead.org. See http://www.infradead.org/rpr.html
+Content-Disposition: inline
+In-Reply-To: <20200915145958.19993-21-tzimmermann@suse.de>
 X-Mailman-Approved-At: Wed, 16 Sep 2020 02:22:34 +0000
-Subject: [Nouveau] [PATCH 18/18] firewire-ohci: use dma_alloc_pages
+Subject: Re: [Nouveau] [PATCH v2 20/21] drm/xlnx: Initialize DRM driver
+ instance with CMA helper macro
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,87 +47,92 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: alsa-devel@alsa-project.org, linux-samsung-soc@vger.kernel.org,
- linux-scsi@vger.kernel.org, linux-parisc@vger.kernel.org,
- linux-doc@vger.kernel.org, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, linux-mips@vger.kernel.org, linux-mm@kvack.org,
- Stefan Richter <stefanr@s5r6.in-berlin.de>, netdev@vger.kernel.org,
- linux1394-devel@lists.sourceforge.net, linux-arm-kernel@lists.infradead.org,
- linux-media@vger.kernel.org
+Cc: hamohammed.sa@gmail.com, heiko@sntech.de, andrey.grodzovsky@amd.com,
+ airlied@linux.ie, nouveau@lists.freedesktop.org,
+ joonas.lahtinen@linux.intel.com, dri-devel@lists.freedesktop.org,
+ michal.simek@xilinx.com, eric@anholt.net, thierry.reding@gmail.com,
+ robdclark@gmail.com, krzk@kernel.org, sam@ravnborg.org,
+ sumit.semwal@linaro.org, emil.velikov@collabora.com,
+ linux-samsung-soc@vger.kernel.org, jy0922.shim@samsung.com,
+ oleksandr_andrushchenko@epam.com, tomi.valkeinen@ti.com,
+ linux-tegra@vger.kernel.org, linux@armlinux.org.uk,
+ patrik.r.jakobsson@gmail.com, linux-rockchip@lists.infradead.org,
+ kgene@kernel.org, bskeggs@redhat.com, xen-devel@lists.xenproject.org,
+ intel-gfx@lists.freedesktop.org, matthew.auld@intel.com,
+ chunkuang.hu@kernel.org, andi.shyti@intel.com, daniel@ffwll.ch,
+ linux-arm-msm@vger.kernel.org, marek.olsak@amd.com, tianci.yin@amd.com,
+ maarten.lankhorst@linux.intel.com, etnaviv@lists.freedesktop.org,
+ jani.nikula@linux.intel.com, inki.dae@samsung.com, hdegoede@redhat.com,
+ christian.gmeiner@gmail.com, linux-mediatek@lists.infradead.org,
+ mripard@kernel.org, rodrigo.vivi@intel.com, matthias.bgg@gmail.com,
+ evan.quan@amd.com, sean@poorly.run, linux-arm-kernel@lists.infradead.org,
+ tvrtko.ursulin@linux.intel.com, amd-gfx@lists.freedesktop.org,
+ chris@chris-wilson.co.uk, hyun.kwon@xilinx.com, rodrigosiqueiramelo@gmail.com,
+ aaron.liu@amd.com, Felix.Kuehling@amd.com, xinhui.pan@amd.com,
+ sw0312.kim@samsung.com, hjc@rock-chips.com, miaoqinglang@huawei.com,
+ kyungmin.park@samsung.com, nirmoy.das@amd.com, p.zabel@pengutronix.de,
+ alexander.deucher@amd.com, Hawking.Zhang@amd.com,
+ freedreno@lists.freedesktop.org, christian.koenig@amd.com,
+ l.stach@pengutronix.de
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Use dma_alloc_pages to allocate DMAable pages instead of hoping that
-the architecture either has GFP_DMA32 or not more than 4G of memory.
+Hi Thomas,
 
-Signed-off-by: Christoph Hellwig <hch@lst.de>
----
- drivers/firewire/ohci.c | 26 +++++++++++---------------
- 1 file changed, 11 insertions(+), 15 deletions(-)
+Thank you for the patch.
 
-diff --git a/drivers/firewire/ohci.c b/drivers/firewire/ohci.c
-index 020cb15a4d8fcc..9811c40956e54d 100644
---- a/drivers/firewire/ohci.c
-+++ b/drivers/firewire/ohci.c
-@@ -674,17 +674,16 @@ static void ar_context_link_page(struct ar_context *ctx, unsigned int index)
- 
- static void ar_context_release(struct ar_context *ctx)
- {
-+	struct device *dev = ctx->ohci->card.device;
- 	unsigned int i;
- 
- 	vunmap(ctx->buffer);
- 
--	for (i = 0; i < AR_BUFFERS; i++)
--		if (ctx->pages[i]) {
--			dma_unmap_page(ctx->ohci->card.device,
--				       ar_buffer_bus(ctx, i),
--				       PAGE_SIZE, DMA_FROM_DEVICE);
--			__free_page(ctx->pages[i]);
--		}
-+	for (i = 0; i < AR_BUFFERS; i++) {
-+		if (ctx->pages[i])
-+			dma_free_pages(dev, PAGE_SIZE, ctx->pages[i],
-+				       ar_buffer_bus(ctx, i), DMA_FROM_DEVICE);
-+	}
- }
- 
- static void ar_context_abort(struct ar_context *ctx, const char *error_msg)
-@@ -970,6 +969,7 @@ static void ar_context_tasklet(unsigned long data)
- static int ar_context_init(struct ar_context *ctx, struct fw_ohci *ohci,
- 			   unsigned int descriptors_offset, u32 regs)
- {
-+	struct device *dev = ohci->card.device;
- 	unsigned int i;
- 	dma_addr_t dma_addr;
- 	struct page *pages[AR_BUFFERS + AR_WRAPAROUND_PAGES];
-@@ -980,17 +980,13 @@ static int ar_context_init(struct ar_context *ctx, struct fw_ohci *ohci,
- 	tasklet_init(&ctx->tasklet, ar_context_tasklet, (unsigned long)ctx);
- 
- 	for (i = 0; i < AR_BUFFERS; i++) {
--		ctx->pages[i] = alloc_page(GFP_KERNEL | GFP_DMA32);
-+		ctx->pages[i] = dma_alloc_pages(dev, PAGE_SIZE, &dma_addr,
-+						DMA_FROM_DEVICE, GFP_KERNEL);
- 		if (!ctx->pages[i])
- 			goto out_of_memory;
--		dma_addr = dma_map_page(ohci->card.device, ctx->pages[i],
--					0, PAGE_SIZE, DMA_FROM_DEVICE);
--		if (dma_mapping_error(ohci->card.device, dma_addr)) {
--			__free_page(ctx->pages[i]);
--			ctx->pages[i] = NULL;
--			goto out_of_memory;
--		}
- 		set_page_private(ctx->pages[i], dma_addr);
-+		dma_sync_single_for_device(dev, dma_addr, PAGE_SIZE,
-+					   DMA_FROM_DEVICE);
- 	}
- 
- 	for (i = 0; i < AR_BUFFERS; i++)
+On Tue, Sep 15, 2020 at 04:59:57PM +0200, Thomas Zimmermann wrote:
+> The xlnx driver uses CMA helpers with default callback functions.
+> Initialize the driver structure with the rsp CMA helper macro. The
+> driver is being converted to use GEM object functions as part of
+> this change.
+> 
+> Two callbacks, .dumb_destroy and .gem_prime_import, were initialized
+> to their default implementations, so they are just kept empty now.
+> 
+> v2:
+> 	* initialize with DRM_GEM_CMA_DRIVER_OPS_WITH_DUMB_CREATE (Laurent)
+> 
+> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+
+Reviewed-by: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+
+> ---
+>  drivers/gpu/drm/xlnx/zynqmp_dpsub.c | 14 +-------------
+>  1 file changed, 1 insertion(+), 13 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/xlnx/zynqmp_dpsub.c b/drivers/gpu/drm/xlnx/zynqmp_dpsub.c
+> index 8e69303aad3f..f3ffc3703a0e 100644
+> --- a/drivers/gpu/drm/xlnx/zynqmp_dpsub.c
+> +++ b/drivers/gpu/drm/xlnx/zynqmp_dpsub.c
+> @@ -80,19 +80,7 @@ static struct drm_driver zynqmp_dpsub_drm_driver = {
+>  	.driver_features		= DRIVER_MODESET | DRIVER_GEM |
+>  					  DRIVER_ATOMIC,
+>  
+> -	.prime_handle_to_fd		= drm_gem_prime_handle_to_fd,
+> -	.prime_fd_to_handle		= drm_gem_prime_fd_to_handle,
+> -	.gem_prime_export		= drm_gem_prime_export,
+> -	.gem_prime_import		= drm_gem_prime_import,
+> -	.gem_prime_get_sg_table		= drm_gem_cma_prime_get_sg_table,
+> -	.gem_prime_import_sg_table	= drm_gem_cma_prime_import_sg_table,
+> -	.gem_prime_vmap			= drm_gem_cma_prime_vmap,
+> -	.gem_prime_vunmap		= drm_gem_cma_prime_vunmap,
+> -	.gem_prime_mmap			= drm_gem_cma_prime_mmap,
+> -	.gem_free_object_unlocked	= drm_gem_cma_free_object,
+> -	.gem_vm_ops			= &drm_gem_cma_vm_ops,
+> -	.dumb_create			= zynqmp_dpsub_dumb_create,
+> -	.dumb_destroy			= drm_gem_dumb_destroy,
+> +	DRM_GEM_CMA_DRIVER_OPS_WITH_DUMB_CREATE(zynqmp_dpsub_dumb_create),
+>  
+>  	.fops				= &zynqmp_dpsub_drm_fops,
+>  
+
 -- 
-2.28.0
+Regards,
 
+Laurent Pinchart
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
