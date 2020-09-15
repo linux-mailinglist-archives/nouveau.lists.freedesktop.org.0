@@ -1,59 +1,50 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 79ECF26BA0A
-	for <lists+nouveau@lfdr.de>; Wed, 16 Sep 2020 04:23:25 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 223E326B9EC
+	for <lists+nouveau@lfdr.de>; Wed, 16 Sep 2020 04:23:09 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3465D6E955;
-	Wed, 16 Sep 2020 02:22:45 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9033A6E96C;
+	Wed, 16 Sep 2020 02:22:37 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from bedivere.hansenpartnership.com (bedivere.hansenpartnership.com
- [66.63.167.143])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4D60A89755
- for <nouveau@lists.freedesktop.org>; Tue, 15 Sep 2020 14:10:10 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by bedivere.hansenpartnership.com (Postfix) with ESMTP id 9BF068EE188;
- Tue, 15 Sep 2020 07:10:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=hansenpartnership.com;
- s=20151216; t=1600179008;
- bh=+R+IKAKZQYkLR7KIiLxpuuPm5bZnjzeal3GKWrEShUo=;
- h=Subject:From:To:Cc:Date:In-Reply-To:References:From;
- b=ZDUvluzGV6yKCC/nF9wrKzitsx/6M3Qz4Dv0CFUEt0vmhscavKWlYegA3t3D9AtoS
- cgl18SKCLQ6g+fOWhOlSE1rajdI6kKqsO/3XSzI9vcO6roMQjXQ+sBvii1pDKecG7Q
- 7/nP62+cOOfIkefYX7rGreL2C+Tu2bzmyrkPw+GQ=
-Received: from bedivere.hansenpartnership.com ([127.0.0.1])
- by localhost (bedivere.hansenpartnership.com [127.0.0.1]) (amavisd-new,
- port 10024)
- with ESMTP id o2D0dkS7cauB; Tue, 15 Sep 2020 07:10:08 -0700 (PDT)
-Received: from [153.66.254.174] (c-73-35-198-56.hsd1.wa.comcast.net
- [73.35.198.56])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by bedivere.hansenpartnership.com (Postfix) with ESMTPSA id 329868EE107;
- Tue, 15 Sep 2020 07:10:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=hansenpartnership.com;
- s=20151216; t=1600179008;
- bh=+R+IKAKZQYkLR7KIiLxpuuPm5bZnjzeal3GKWrEShUo=;
- h=Subject:From:To:Cc:Date:In-Reply-To:References:From;
- b=ZDUvluzGV6yKCC/nF9wrKzitsx/6M3Qz4Dv0CFUEt0vmhscavKWlYegA3t3D9AtoS
- cgl18SKCLQ6g+fOWhOlSE1rajdI6kKqsO/3XSzI9vcO6roMQjXQ+sBvii1pDKecG7Q
- 7/nP62+cOOfIkefYX7rGreL2C+Tu2bzmyrkPw+GQ=
-Message-ID: <1600179006.5092.6.camel@HansenPartnership.com>
-From: James Bottomley <James.Bottomley@HansenPartnership.com>
-To: Christoph Hellwig <hch@lst.de>
-Date: Tue, 15 Sep 2020 07:10:06 -0700
-In-Reply-To: <20200915062738.GA19113@lst.de>
-References: <20200914144433.1622958-1-hch@lst.de>
- <20200914144433.1622958-8-hch@lst.de>
- <1600096818.4061.7.camel@HansenPartnership.com>
- <20200915062738.GA19113@lst.de>
-X-Mailer: Evolution 3.26.6 
-Mime-Version: 1.0
+Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C7F366E353;
+ Tue, 15 Sep 2020 15:00:05 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 53093AF4E;
+ Tue, 15 Sep 2020 15:00:18 +0000 (UTC)
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: alexander.deucher@amd.com, christian.koenig@amd.com, airlied@linux.ie,
+ daniel@ffwll.ch, linux@armlinux.org.uk, maarten.lankhorst@linux.intel.com,
+ mripard@kernel.org, l.stach@pengutronix.de, christian.gmeiner@gmail.com,
+ inki.dae@samsung.com, jy0922.shim@samsung.com, sw0312.kim@samsung.com,
+ kyungmin.park@samsung.com, kgene@kernel.org, krzk@kernel.org,
+ patrik.r.jakobsson@gmail.com, jani.nikula@linux.intel.com,
+ joonas.lahtinen@linux.intel.com, rodrigo.vivi@intel.com,
+ chunkuang.hu@kernel.org, p.zabel@pengutronix.de, matthias.bgg@gmail.com,
+ robdclark@gmail.com, sean@poorly.run, bskeggs@redhat.com,
+ tomi.valkeinen@ti.com, eric@anholt.net, hjc@rock-chips.com,
+ heiko@sntech.de, thierry.reding@gmail.com, jonathanh@nvidia.com,
+ rodrigosiqueiramelo@gmail.com, hamohammed.sa@gmail.com,
+ oleksandr_andrushchenko@epam.com, hyun.kwon@xilinx.com,
+ laurent.pinchart@ideasonboard.com, michal.simek@xilinx.com,
+ sumit.semwal@linaro.org, evan.quan@amd.com, Hawking.Zhang@amd.com,
+ tianci.yin@amd.com, marek.olsak@amd.com, hdegoede@redhat.com,
+ andrey.grodzovsky@amd.com, Felix.Kuehling@amd.com, xinhui.pan@amd.com,
+ aaron.liu@amd.com, nirmoy.das@amd.com, chris@chris-wilson.co.uk,
+ matthew.auld@intel.com, tvrtko.ursulin@linux.intel.com,
+ andi.shyti@intel.com, sam@ravnborg.org, miaoqinglang@huawei.com,
+ emil.velikov@collabora.com
+Date: Tue, 15 Sep 2020 16:59:37 +0200
+Message-Id: <20200915145958.19993-1-tzimmermann@suse.de>
+X-Mailer: git-send-email 2.28.0
+MIME-Version: 1.0
 X-Mailman-Approved-At: Wed, 16 Sep 2020 02:22:34 +0000
-Subject: Re: [Nouveau] [PATCH 07/17] 53c700: improve non-coherent DMA
- handling
+Subject: [Nouveau] [PATCH v2 00/21] Convert all remaining drivers to GEM
+ object functions
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -65,38 +56,135 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: alsa-devel@alsa-project.org, linux-doc@vger.kernel.org,
- nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- linux-mm@kvack.org, linux1394-devel@lists.sourceforge.net,
- Marek Szyprowski <m.szyprowski@samsung.com>, linux-samsung-soc@vger.kernel.org,
- Joonyoung Shim <jy0922.shim@samsung.com>, linux-scsi@vger.kernel.org,
- Ben Skeggs <bskeggs@redhat.com>, Matt Porter <mporter@kernel.crashing.org>,
- linux-media@vger.kernel.org, Mauro Carvalho Chehab <mchehab@kernel.org>,
- linux-arm-kernel@lists.infradead.org,
- Thomas Bogendoerfer <tsbogend@alpha.franken.de>, linux-parisc@vger.kernel.org,
- netdev@vger.kernel.org, Seung-Woo Kim <sw0312.kim@samsung.com>,
- linux-mips@vger.kernel.org, Tomasz Figa <tfiga@chromium.org>,
- iommu@lists.linux-foundation.org, Stefan Richter <stefanr@s5r6.in-berlin.de>
+Cc: linux-samsung-soc@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ intel-gfx@lists.freedesktop.org, etnaviv@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, linux-rockchip@lists.infradead.org,
+ linux-mediatek@lists.infradead.org, amd-gfx@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org, linux-tegra@vger.kernel.org,
+ xen-devel@lists.xenproject.org, freedreno@lists.freedesktop.org,
+ linux-arm-kernel@lists.infradead.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, 2020-09-15 at 08:27 +0200, Christoph Hellwig wrote:
-> On Mon, Sep 14, 2020 at 08:20:18AM -0700, James Bottomley wrote:
-> > If you're going to change the macros from taking a device to taking
-> > a hostdata structure then the descriptive argument name needs to
-> > change ... it can't be dev anymore.  I'm happy with it simply
-> > becoming 'h' if hostdata is too long.
-> > 
-> > I already asked for this on the first go around:
-> 
-> And I did rename them, those hunks just accidentally slipped into
-> patch 12 instead of this one.  Fixed for the next versions.
+The GEM and PRIME related callbacks in struct drm_driver are deprecated in
+favor of GEM object functions in struct drm_gem_object_funcs. This patchset
+converts the remaining drivers to object functions and removes most of the
+obsolete interfaces.
 
-Ah, yes, found it ... thanks for doing that!
+Patches #1 to #16 and #18 to #19 convert DRM drivers to GEM object functions,
+one by one. Each patch moves existing callbacks from struct drm_driver to an
+instance of struct drm_gem_object_funcs, and sets these funcs when the GEM
+object is initialized. The expection is .gem_prime_mmap. There are different
+ways of how drivers implement the callback, and moving it to GEM object
+functions requires a closer review for each.
 
-James
+Patch #17 fixes virtgpu to use GEM object functions where possible. The
+driver recently introduced a function for one of the deprecated callbacks.
+
+Patch #20 converts xlnx to CMA helper macros. There's no apparent reason
+why the driver does the GEM setup on it's own. Using CMA helper macros
+adds GEM object functions implicitly.
+
+With most of the GEM and PRIME moved to GEM object functions, related code
+in struct drm_driver and in the DRM core/helpers is being removed by patch
+#21.
+
+Further testing is welcome. I tested the drivers for which I have HW
+available. These are gma500, i915, nouveau, radeon and vc4. The console,
+Weston and Xorg apparently work with the patches applied.
+
+v2:
+	* moved code in amdgpu and radeon
+	* made several functions static in various drivers
+	* updated TODO-list item
+	* fix virtgpu
+
+Thomas Zimmermann (21):
+  drm/amdgpu: Introduce GEM object functions
+  drm/armada: Introduce GEM object functions
+  drm/etnaviv: Introduce GEM object functions
+  drm/exynos: Introduce GEM object functions
+  drm/gma500: Introduce GEM object functions
+  drm/i915: Introduce GEM object functions
+  drm/mediatek: Introduce GEM object functions
+  drm/msm: Introduce GEM object funcs
+  drm/nouveau: Introduce GEM object functions
+  drm/omapdrm: Introduce GEM object functions
+  drm/pl111: Introduce GEM object functions
+  drm/radeon: Introduce GEM object functions
+  drm/rockchip: Convert to drm_gem_object_funcs
+  drm/tegra: Introduce GEM object functions
+  drm/vc4: Introduce GEM object functions
+  drm/vgem: Introduce GEM object functions
+  drm/virtgpu: Set PRIME export function in struct drm_gem_object_funcs
+  drm/vkms: Introduce GEM object functions
+  drm/xen: Introduce GEM object functions
+  drm/xlnx: Initialize DRM driver instance with CMA helper macro
+  drm: Remove obsolete GEM and PRIME callbacks from struct drm_driver
+
+ Documentation/gpu/todo.rst                    |  7 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c       |  6 --
+ drivers/gpu/drm/amd/amdgpu/amdgpu_gem.c       | 23 +++--
+ drivers/gpu/drm/amd/amdgpu/amdgpu_gem.h       |  5 --
+ drivers/gpu/drm/amd/amdgpu/amdgpu_object.c    |  1 +
+ drivers/gpu/drm/armada/armada_drv.c           |  3 -
+ drivers/gpu/drm/armada/armada_gem.c           | 12 ++-
+ drivers/gpu/drm/armada/armada_gem.h           |  2 -
+ drivers/gpu/drm/drm_gem.c                     | 35 ++------
+ drivers/gpu/drm/drm_gem_cma_helper.c          |  6 +-
+ drivers/gpu/drm/drm_prime.c                   | 17 ++--
+ drivers/gpu/drm/etnaviv/etnaviv_drv.c         | 13 ---
+ drivers/gpu/drm/etnaviv/etnaviv_drv.h         |  1 -
+ drivers/gpu/drm/etnaviv/etnaviv_gem.c         | 19 ++++-
+ drivers/gpu/drm/exynos/exynos_drm_drv.c       | 10 ---
+ drivers/gpu/drm/exynos/exynos_drm_gem.c       | 15 ++++
+ drivers/gpu/drm/gma500/framebuffer.c          |  2 +
+ drivers/gpu/drm/gma500/gem.c                  | 18 +++-
+ drivers/gpu/drm/gma500/gem.h                  |  3 +
+ drivers/gpu/drm/gma500/psb_drv.c              |  9 --
+ drivers/gpu/drm/gma500/psb_drv.h              |  2 -
+ drivers/gpu/drm/i915/gem/i915_gem_object.c    | 21 ++++-
+ drivers/gpu/drm/i915/gem/i915_gem_object.h    |  3 -
+ drivers/gpu/drm/i915/i915_drv.c               |  4 -
+ .../gpu/drm/i915/selftests/mock_gem_device.c  |  3 -
+ drivers/gpu/drm/mediatek/mtk_drm_drv.c        |  5 --
+ drivers/gpu/drm/mediatek/mtk_drm_gem.c        | 11 +++
+ drivers/gpu/drm/msm/msm_drv.c                 | 13 ---
+ drivers/gpu/drm/msm/msm_drv.h                 |  1 -
+ drivers/gpu/drm/msm/msm_gem.c                 | 19 ++++-
+ drivers/gpu/drm/nouveau/nouveau_drm.c         |  9 --
+ drivers/gpu/drm/nouveau/nouveau_gem.c         | 13 +++
+ drivers/gpu/drm/nouveau/nouveau_gem.h         |  2 +
+ drivers/gpu/drm/nouveau/nouveau_prime.c       |  2 +
+ drivers/gpu/drm/omapdrm/omap_drv.c            |  9 --
+ drivers/gpu/drm/omapdrm/omap_gem.c            | 18 +++-
+ drivers/gpu/drm/omapdrm/omap_gem.h            |  2 -
+ drivers/gpu/drm/pl111/pl111_drv.c             |  5 +-
+ drivers/gpu/drm/radeon/radeon_drv.c           | 23 +----
+ drivers/gpu/drm/radeon/radeon_gem.c           | 31 ++++++-
+ drivers/gpu/drm/rockchip/rockchip_drm_drv.c   |  5 --
+ drivers/gpu/drm/rockchip/rockchip_drm_gem.c   | 10 +++
+ drivers/gpu/drm/tegra/drm.c                   |  4 -
+ drivers/gpu/drm/tegra/gem.c                   |  8 ++
+ drivers/gpu/drm/vc4/vc4_bo.c                  | 21 ++++-
+ drivers/gpu/drm/vc4/vc4_drv.c                 | 12 ---
+ drivers/gpu/drm/vc4/vc4_drv.h                 |  1 -
+ drivers/gpu/drm/vgem/vgem_drv.c               | 21 +++--
+ drivers/gpu/drm/virtio/virtgpu_drv.c          |  1 -
+ drivers/gpu/drm/virtio/virtgpu_object.c       |  1 +
+ drivers/gpu/drm/vkms/vkms_drv.c               |  8 --
+ drivers/gpu/drm/vkms/vkms_gem.c               | 13 +++
+ drivers/gpu/drm/xen/xen_drm_front.c           | 44 ++++------
+ drivers/gpu/drm/xen/xen_drm_front.h           |  2 +
+ drivers/gpu/drm/xen/xen_drm_front_gem.c       | 15 ++++
+ drivers/gpu/drm/xlnx/zynqmp_dpsub.c           | 14 +--
+ include/drm/drm_drv.h                         | 85 +------------------
+ 57 files changed, 319 insertions(+), 349 deletions(-)
+
+--
+2.28.0
 
 _______________________________________________
 Nouveau mailing list
