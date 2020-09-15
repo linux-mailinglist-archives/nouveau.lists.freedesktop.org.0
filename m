@@ -2,44 +2,36 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id A738126B9D5
-	for <lists+nouveau@lfdr.de>; Wed, 16 Sep 2020 04:22:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5A84126B9D1
+	for <lists+nouveau@lfdr.de>; Wed, 16 Sep 2020 04:22:44 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D67D86E943;
+	by gabe.freedesktop.org (Postfix) with ESMTP id 69B676E93C;
 	Wed, 16 Sep 2020 02:22:35 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E81046E0EC;
- Tue, 15 Sep 2020 09:06:31 +0000 (UTC)
-IronPort-SDR: 6n+uNJxi/SJ/t4+NQBSYNwmnXdIHGpzdp6rl+s0LVJ9CFTmGmx0FfnhItnJB8SJbeQER++LRmE
- 3eYgsOQ7v80w==
-X-IronPort-AV: E=McAfee;i="6000,8403,9744"; a="156653621"
-X-IronPort-AV: E=Sophos;i="5.76,429,1592895600"; d="scan'208";a="156653621"
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from orsmga005.jf.intel.com ([10.7.209.41])
- by fmsmga102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 15 Sep 2020 02:06:31 -0700
-IronPort-SDR: JN6muYTQqB3wm3kCXqk1xsORqKL94poqyPOQLwwV9SSOFBG1M/RLedvNq9ruyR1KSefDfAWvPJ
- brvH/uTc728w==
-X-IronPort-AV: E=Sophos;i="5.76,429,1592895600"; d="scan'208";a="482690707"
-Received: from emoriart-mobl.ger.corp.intel.com (HELO localhost)
- ([10.252.7.208])
- by orsmga005-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 15 Sep 2020 02:06:16 -0700
-From: Jani Nikula <jani.nikula@linux.intel.com>
-To: Joe Perches <joe@perches.com>, LKML <linux-kernel@vger.kernel.org>,
- Jiri Kosina <trivial@kernel.org>
+Received: from mslow2.mail.gandi.net (mslow2.mail.gandi.net [217.70.178.242])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 235F289D40;
+ Tue, 15 Sep 2020 09:44:00 +0000 (UTC)
+Received: from relay3-d.mail.gandi.net (unknown [217.70.183.195])
+ by mslow2.mail.gandi.net (Postfix) with ESMTP id EEE033A2BC4;
+ Tue, 15 Sep 2020 09:20:01 +0000 (UTC)
+X-Originating-IP: 91.224.148.103
+Received: from xps13 (unknown [91.224.148.103])
+ (Authenticated sender: miquel.raynal@bootlin.com)
+ by relay3-d.mail.gandi.net (Postfix) with ESMTPSA id A7B9F60004;
+ Tue, 15 Sep 2020 09:19:26 +0000 (UTC)
+Date: Tue, 15 Sep 2020 11:19:25 +0200
+From: Miquel Raynal <miquel.raynal@bootlin.com>
+To: Joe Perches <joe@perches.com>
+Message-ID: <20200915111925.475dd3f1@xps13>
 In-Reply-To: <e6387578c75736d61b2fe70d9783d91329a97eb4.camel@perches.com>
-Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
 References: <e6387578c75736d61b2fe70d9783d91329a97eb4.camel@perches.com>
-Date: Tue, 15 Sep 2020 12:06:21 +0300
-Message-ID: <87d02nxvci.fsf@intel.com>
+Organization: Bootlin
+X-Mailer: Claws Mail 3.17.4 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
 X-Mailman-Approved-At: Wed, 16 Sep 2020 02:22:34 +0000
-Subject: Re: [Nouveau] [Intel-gfx] [trivial PATCH] treewide: Convert
- switch/case fallthrough; to break; 
+Subject: Re: [Nouveau] [trivial PATCH] treewide: Convert switch/case
+ fallthrough; to break; 
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,51 +51,29 @@ Cc: linux-fbdev@vger.kernel.org, oss-drivers@netronome.com,
  linux-afs@lists.infradead.org, linux-rtc@vger.kernel.org,
  linux-s390@vger.kernel.org, linux-scsi@vger.kernel.org, dccp@vger.kernel.org,
  linux-rdma@vger.kernel.org, linux-atm-general@lists.sourceforge.net,
- kvmarm@lists.cs.columbia.edu, coreteam@netfilter.org,
- intel-wired-lan@lists.osuosl.org, linux-serial@vger.kernel.org,
- linux-input@vger.kernel.org, linux-mmc@vger.kernel.org,
- Kees Cook <kees.cook@canonical.com>, linux-media@vger.kernel.org,
- linux-pm@vger.kernel.org, intel-gfx@lists.freedesktop.org,
- linux-mediatek@lists.infradead.org, linux-nvme@lists.infradead.org,
- storagedev@microchip.com, ceph-devel@vger.kernel.org,
- linux-arm-kernel@lists.infradead.org,
+ iommu@lists.linux-foundation.org, kvmarm@lists.cs.columbia.edu,
+ coreteam@netfilter.org, intel-wired-lan@lists.osuosl.org,
+ linux-serial@vger.kernel.org, linux-input@vger.kernel.org,
+ linux-mmc@vger.kernel.org, Kees Cook <kees.cook@canonical.com>,
+ linux-media@vger.kernel.org, linux-pm@vger.kernel.org,
+ intel-gfx@lists.freedesktop.org, linux-mediatek@lists.infradead.org,
+ linux-nvme@lists.infradead.org, storagedev@microchip.com,
+ ceph-devel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
  Nick Desaulniers <ndesaulniers@google.com>, linux-nfs@vger.kernel.org,
- linux-parisc@vger.kernel.org, netdev@vger.kernel.org,
- linux-usb@vger.kernel.org, linux-wireless@vger.kernel.org,
- linux-sctp@vger.kernel.org, iommu@lists.linux-foundation.org,
- netfilter-devel@vger.kernel.org, linux-crypto@vger.kernel.org,
- bpf@vger.kernel.org, linuxppc-dev@lists.ozlabs.org
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+ Jiri Kosina <trivial@kernel.org>, linux-parisc@vger.kernel.org,
+ netdev@vger.kernel.org, linux-usb@vger.kernel.org,
+ linux-wireless@vger.kernel.org, LKML <linux-kernel@vger.kernel.org>,
+ linux-sctp@vger.kernel.org, netfilter-devel@vger.kernel.org,
+ linux-crypto@vger.kernel.org, bpf@vger.kernel.org,
+ linuxppc-dev@lists.ozlabs.org
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, 09 Sep 2020, Joe Perches <joe@perches.com> wrote:
-> diff --git a/drivers/gpu/drm/i915/display/intel_sprite.c b/drivers/gpu/drm/i915/display/intel_sprite.c
-> index 5ac0dbf0e03d..35ac539cc2b1 100644
-> --- a/drivers/gpu/drm/i915/display/intel_sprite.c
-> +++ b/drivers/gpu/drm/i915/display/intel_sprite.c
-> @@ -2861,7 +2861,7 @@ static bool gen12_plane_format_mod_supported(struct drm_plane *_plane,
->  	case I915_FORMAT_MOD_Y_TILED_GEN12_MC_CCS:
->  		if (!gen12_plane_supports_mc_ccs(dev_priv, plane->id))
->  			return false;
-> -		fallthrough;
-> +		break;
->  	case DRM_FORMAT_MOD_LINEAR:
->  	case I915_FORMAT_MOD_X_TILED:
->  	case I915_FORMAT_MOD_Y_TILED:
-
-Acked-by: Jani Nikula <jani.nikula@intel.com>
-
-for merging via whichever tree seems best.
-
-BR,
-Jani.
-
-
--- 
-Jani Nikula, Intel Open Source Graphics Center
-_______________________________________________
-Nouveau mailing list
-Nouveau@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/nouveau
+SGkgSm9lLAoKRm9yIE1URDoKCj4gIGRyaXZlcnMvbXRkL25hbmQvcmF3L25hbmRzaW0uYyAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICB8ICAyICstCgpSZXZpZXdlZC1ieTogTWlxdWVsIFJheW5h
+bCA8bWlxdWVsLnJheW5hbEBib290bGluLmNvbT4KCgpUaGFua3MsCk1pcXXDqGwKX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBtYWlsaW5nIGxp
+c3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVza3Rv
+cC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1Cg==
