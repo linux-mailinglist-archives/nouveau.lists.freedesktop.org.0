@@ -1,70 +1,72 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1925B26CA1D
-	for <lists+nouveau@lfdr.de>; Wed, 16 Sep 2020 21:47:51 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id C07E526CA20
+	for <lists+nouveau@lfdr.de>; Wed, 16 Sep 2020 21:47:55 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 835DF6EADE;
-	Wed, 16 Sep 2020 19:47:44 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 969106EB13;
+	Wed, 16 Sep 2020 19:47:47 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-1.mimecast.com (us-smtp-delivery-1.mimecast.com
- [207.211.31.120])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 937826EADA
- for <nouveau@lists.freedesktop.org>; Wed, 16 Sep 2020 19:47:42 +0000 (UTC)
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [63.128.21.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B951F6EAD9
+ for <nouveau@lists.freedesktop.org>; Wed, 16 Sep 2020 19:47:45 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1600285661;
+ s=mimecast20190719; t=1600285664;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=9tkD7fLHRzfBDrWOBVG4rZwkIcJdSt6QPk/vTM/imCo=;
- b=P10fWj8ii/Esto9OKI4uUBvkt9huUivIGVxEkM13tfhoWEqPB+gDxv2/jDecpAjhlHomYo
- UwU1RbjglMnYmpT+r0fzASYVulqtkf3NjeavMpiaPm+QsMTH7EiCbUBlVP5/8shE2Hjes/
- 19f111tGtvZ5X20hLEwuul3qZx12ow8=
-Received: from mail-qv1-f70.google.com (mail-qv1-f70.google.com
- [209.85.219.70]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-519-AL2ICWlGMQKDHD8bOzXLaw-1; Wed, 16 Sep 2020 15:47:39 -0400
-X-MC-Unique: AL2ICWlGMQKDHD8bOzXLaw-1
-Received: by mail-qv1-f70.google.com with SMTP id l1so5380388qvr.0
- for <nouveau@lists.freedesktop.org>; Wed, 16 Sep 2020 12:47:39 -0700 (PDT)
+ bh=HiG3kc7gEhmO71MoPpGUZlQpCpSsiSWNhXMpznaW1Dg=;
+ b=Tf3/ilUDUk68C3gi9nt49cHFJUsRagSHxKtrpVIzZlF1WQI5WMgNFwwphBvfqZwHgjw8ba
+ C4BqTgShmzddMtVeCHNxeRlt5xkXPK4eFLJFfjIt2FkDjOxz4MUOXZCFKj9tKdM1ZQkelC
+ 0cMfWHHU16TtJDNPt7Mf8yQxYhP8wgE=
+Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com
+ [209.85.160.199]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-328-z9vXTfe4PSGU77RV4EUwPg-1; Wed, 16 Sep 2020 15:47:40 -0400
+X-MC-Unique: z9vXTfe4PSGU77RV4EUwPg-1
+Received: by mail-qt1-f199.google.com with SMTP id f5so7024440qtk.11
+ for <nouveau@lists.freedesktop.org>; Wed, 16 Sep 2020 12:47:40 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=9tkD7fLHRzfBDrWOBVG4rZwkIcJdSt6QPk/vTM/imCo=;
- b=uWJeHdAMLjpacmreXIqF55GfmUdmi2BSH3RInsqIhuVk1gFBUCujNYcjs33Af47x3H
- w0yyuifnqbl6QbySyGvQPIAbeKf6x3/4AWUWCZL+lsgexTaZc9DsNBC74iICEFYRFawE
- LJb/Z42cnj5oIcmAJT8HZsMEYzavmCWQFeRuCQy7rfpPTqNPOOizG9kCDwtnwClvY7AF
- QAO2OS8XXW+Dx0832myIWk7ja9ZQgLrgKVwsjKoGGjjYfvPxGOfG8gFsaE7tkEhRKtbs
- Jn6BL3FzZo/L6RlqeNhkEkHpcaVNli14bIDMJjCe//T4X/KE/sZ6m8t7zcyj0+E4Nm9i
- U4gQ==
-X-Gm-Message-State: AOAM531lQqRhZf3Timv7ZTPsmY5gEGTW0/LKfkuyPUMyrGu5mHdWPm2v
- 90tcFmgh4/zpUbC3yT7ueG68UVVIUPjglah2TQCWPK3jGm7z/+KSuqpPjDtK6a9yQvpzXUhKzzl
- sewuoUNcFj5XLL+heoK2ihoOtfw==
-X-Received: by 2002:a37:a514:: with SMTP id o20mr23551148qke.374.1600285658948; 
- Wed, 16 Sep 2020 12:47:38 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJxxq3px1MuOCLEAZ17g8N7rutkh9QqWBZHPIaoMca4ZxTzOIagFtyp9Bsgm4Yt1jLSoR/n1gQ==
-X-Received: by 2002:a37:a514:: with SMTP id o20mr23551136qke.374.1600285658700; 
- Wed, 16 Sep 2020 12:47:38 -0700 (PDT)
+ bh=HiG3kc7gEhmO71MoPpGUZlQpCpSsiSWNhXMpznaW1Dg=;
+ b=YLxuBvWWGMhZgiaNY4oRdirMaNxT9nUxORsw/phZ0jq2O4KRr8PU43ywLphZ+NZ1vz
+ Df6ddC2I1iFOQm7A4xKxZDXgc9C2oPrNyomhuZlaQSWjDKAc8j2sH7LPjP7KXH7NoHS+
+ dx63Wxh1ccOQGkIeA3HS8BIDI9oYLG1zvpmnAw3+wr/gI0qO73OJ1UOHc+mYQI0wALHy
+ 8Ah0mIa+gcq5Y/kAWN+7pqrkiWlRPEE/eoDVazwfUgbJS0SmMc4GRO+1kRgGPDHp5pxS
+ 9z+ZoTBJ/lp3dci16yTSkYFOYxEHHcrFUpqyxwWta8LVu9s8GwEoB/DwuQDSNznetcLJ
+ r/YA==
+X-Gm-Message-State: AOAM532Z7HFGgvirRqFcgDL2lnlcMR8Cu/N1mineGKWhzekcBt6ysq3s
+ T+xTJq3slBywa3O5Dc3XevNk1g3vlx/ZCjxjY3H1KW5RD15vaa+k/v0txpTR0Oj941IJeeMqak/
+ yFarVM97hGDCGNHVWCLm35EbNHw==
+X-Received: by 2002:a37:2715:: with SMTP id n21mr24993965qkn.401.1600285659855; 
+ Wed, 16 Sep 2020 12:47:39 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJxF4NFw/4NWNOZaig6vU4juipv+s4gA2fSrSNZS3Ijw1sEGKyDLrP+M4jHuvlRdFqDFcTb88w==
+X-Received: by 2002:a37:2715:: with SMTP id n21mr24993944qkn.401.1600285659574; 
+ Wed, 16 Sep 2020 12:47:39 -0700 (PDT)
 Received: from dev.jcline.org.com ([136.56.20.95])
- by smtp.gmail.com with ESMTPSA id g4sm18683447qth.30.2020.09.16.12.47.37
+ by smtp.gmail.com with ESMTPSA id g4sm18683447qth.30.2020.09.16.12.47.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 16 Sep 2020 12:47:37 -0700 (PDT)
+ Wed, 16 Sep 2020 12:47:39 -0700 (PDT)
 From: Jeremy Cline <jcline@redhat.com>
 To: Ben Skeggs <bskeggs@redhat.com>
-Date: Wed, 16 Sep 2020 15:47:09 -0400
-Message-Id: <20200916194711.999602-1-jcline@redhat.com>
+Date: Wed, 16 Sep 2020 15:47:10 -0400
+Message-Id: <20200916194711.999602-2-jcline@redhat.com>
 X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20200812204952.1921587-1-jcline@redhat.com>
+In-Reply-To: <20200916194711.999602-1-jcline@redhat.com>
 References: <20200812204952.1921587-1-jcline@redhat.com>
+ <20200916194711.999602-1-jcline@redhat.com>
 MIME-Version: 1.0
 Authentication-Results: relay.mimecast.com;
  auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=jcline@redhat.com
-X-Mimecast-Spam-Score: 0.0
+X-Mimecast-Spam-Score: 0.002
 X-Mimecast-Originator: redhat.com
-Subject: [Nouveau] [PATCH v2 0/2] Add fine-grain temperature reporting
+Subject: [Nouveau] [PATCH v2 1/2] drm/nouveau: return temperatures in
+ temp_get() via parameter
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -84,42 +86,346 @@ Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi folks,
+The temp_get() function currently returns negative error numbers or a
+temperature. However, the thermal sensors can (in theory) measure
+negative temperatures. Some implementations of temp_get() correctly
+clamp negative temperature readings to 0 so that users do not mistake
+them for errors, but some, like gp100_temp_get(), do not.
 
-This series adjusts the temp_get() interface in the thermal functions to
-report milli-degrees, and additionally alters the way errors are
-reported. As I went through all the users and implementations I realized
-that Pascal's temp_get() implementation didn't include turning negative
-temperatures to 0 like other implementations, so I separated error
-reporting from the temperature in the API.
+Rather than relying on implementations remembering to clamp values,
+dedicate the function return value to error codes and accept a pointer
+to an integer where the temperature reading should be stored.
 
-Couple of things I'm on the fence about here:
+Signed-off-by: Jeremy Cline <jcline@redhat.com>
+---
+ .../drm/nouveau/include/nvkm/subdev/therm.h   |  2 +-
+ drivers/gpu/drm/nouveau/nouveau_hwmon.c       | 12 ++++++------
+ .../gpu/drm/nouveau/nvkm/subdev/therm/base.c  | 19 ++++++++++++++-----
+ .../gpu/drm/nouveau/nvkm/subdev/therm/g84.c   | 11 ++++++-----
+ .../gpu/drm/nouveau/nvkm/subdev/therm/gp100.c | 11 ++++++-----
+ .../gpu/drm/nouveau/nvkm/subdev/therm/nv40.c  |  9 +++------
+ .../gpu/drm/nouveau/nvkm/subdev/therm/nv50.c  |  9 +++------
+ .../gpu/drm/nouveau/nvkm/subdev/therm/priv.h  | 17 +++++++++++++++--
+ .../gpu/drm/nouveau/nvkm/subdev/therm/temp.c  | 12 ++++++++----
+ 9 files changed, 62 insertions(+), 40 deletions(-)
 
-* I allowed the nvkm_therm_temp_get() functions to accept NULL as a way
-  to check if temperature reading is available rather than adding a
-  separate helper, but was torn about whether this is clearer than a
-  separate helper function.
-
-* I added a WARN_ON in places that previously called
-  nvkm_therm_temp_get() and didn't check the return value for an error.
-  This may not be a reasonable error handling method.
-
-Jeremy Cline (2):
-  drm/nouveau: return temperatures in temp_get() via parameter
-  drm/nouveau: Add fine-grain temperature reporting
-
- .../nouveau/include/nvkm/subdev/bios/therm.h  | 13 +++++++++
- .../drm/nouveau/include/nvkm/subdev/therm.h   | 28 ++++++++++++++++++-
- drivers/gpu/drm/nouveau/nouveau_hwmon.c       | 12 ++++----
- .../gpu/drm/nouveau/nvkm/subdev/therm/base.c  | 28 +++++++++++++++----
- .../gpu/drm/nouveau/nvkm/subdev/therm/g84.c   | 11 ++++----
- .../gpu/drm/nouveau/nvkm/subdev/therm/gp100.c | 11 ++++----
- .../gpu/drm/nouveau/nvkm/subdev/therm/nv40.c  |  9 ++----
- .../gpu/drm/nouveau/nvkm/subdev/therm/nv50.c  |  9 ++----
- .../gpu/drm/nouveau/nvkm/subdev/therm/priv.h  | 17 +++++++++--
- .../gpu/drm/nouveau/nvkm/subdev/therm/temp.c  | 12 +++++---
- 10 files changed, 110 insertions(+), 40 deletions(-)
-
+diff --git a/drivers/gpu/drm/nouveau/include/nvkm/subdev/therm.h b/drivers/gpu/drm/nouveau/include/nvkm/subdev/therm.h
+index 62c34f98c930..bfe9779216fc 100644
+--- a/drivers/gpu/drm/nouveau/include/nvkm/subdev/therm.h
++++ b/drivers/gpu/drm/nouveau/include/nvkm/subdev/therm.h
+@@ -99,7 +99,7 @@ struct nvkm_therm {
+ 	bool clkgating_enabled;
+ };
+ 
+-int nvkm_therm_temp_get(struct nvkm_therm *);
++int nvkm_therm_temp_get(struct nvkm_therm *therm, int *temp);
+ int nvkm_therm_fan_sense(struct nvkm_therm *);
+ int nvkm_therm_cstate(struct nvkm_therm *, int, int);
+ void nvkm_therm_clkgate_init(struct nvkm_therm *,
+diff --git a/drivers/gpu/drm/nouveau/nouveau_hwmon.c b/drivers/gpu/drm/nouveau/nouveau_hwmon.c
+index 1c3104d20571..aff6aa296678 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_hwmon.c
++++ b/drivers/gpu/drm/nouveau/nouveau_hwmon.c
+@@ -325,7 +325,7 @@ nouveau_temp_is_visible(const void *data, u32 attr, int channel)
+ 	struct nouveau_drm *drm = nouveau_drm((struct drm_device *)data);
+ 	struct nvkm_therm *therm = nvxx_therm(&drm->client.device);
+ 
+-	if (!therm || !therm->attr_get || nvkm_therm_temp_get(therm) < 0)
++	if (!therm || !therm->attr_get || nvkm_therm_temp_get(therm, NULL) < 0)
+ 		return 0;
+ 
+ 	switch (attr) {
+@@ -419,7 +419,7 @@ nouveau_temp_read(struct device *dev, u32 attr, int channel, long *val)
+ 	struct drm_device *drm_dev = dev_get_drvdata(dev);
+ 	struct nouveau_drm *drm = nouveau_drm(drm_dev);
+ 	struct nvkm_therm *therm = nvxx_therm(&drm->client.device);
+-	int ret;
++	int ret = 0, temp;
+ 
+ 	if (!therm || !therm->attr_get)
+ 		return -EOPNOTSUPP;
+@@ -428,8 +428,8 @@ nouveau_temp_read(struct device *dev, u32 attr, int channel, long *val)
+ 	case hwmon_temp_input:
+ 		if (drm_dev->switch_power_state != DRM_SWITCH_POWER_ON)
+ 			return -EINVAL;
+-		ret = nvkm_therm_temp_get(therm);
+-		*val = ret < 0 ? ret : (ret * 1000);
++		ret = nvkm_therm_temp_get(therm, &temp);
++		*val = temp * 1000;
+ 		break;
+ 	case hwmon_temp_max:
+ 		*val = therm->attr_get(therm, NVKM_THERM_ATTR_THRS_DOWN_CLK)
+@@ -459,7 +459,7 @@ nouveau_temp_read(struct device *dev, u32 attr, int channel, long *val)
+ 		return -EOPNOTSUPP;
+ 	}
+ 
+-	return 0;
++	return ret;
+ }
+ 
+ static int
+@@ -735,7 +735,7 @@ nouveau_hwmon_init(struct drm_device *dev)
+ 	hwmon->dev = dev;
+ 
+ 	if (therm && therm->attr_get && therm->attr_set) {
+-		if (nvkm_therm_temp_get(therm) >= 0)
++		if (nvkm_therm_temp_get(therm, NULL) >= 0)
+ 			special_groups[i++] = &temp1_auto_point_sensor_group;
+ 		if (therm->fan_get && therm->fan_get(therm) >= 0)
+ 			special_groups[i++] = &pwm_fan_sensor_group;
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/therm/base.c b/drivers/gpu/drm/nouveau/nvkm/subdev/therm/base.c
+index 4a4d1e224126..e7ffea1512e6 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/therm/base.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/therm/base.c
+@@ -27,10 +27,15 @@
+ #include <subdev/pmu.h>
+ 
+ int
+-nvkm_therm_temp_get(struct nvkm_therm *therm)
++nvkm_therm_temp_get(struct nvkm_therm *therm, int *temp)
+ {
++	int ignored_reading;
++
++	if (temp == NULL)
++		temp = &ignored_reading;
++
+ 	if (therm->func->temp_get)
+-		return therm->func->temp_get(therm);
++		return therm->func->temp_get(therm, temp);
+ 	return -ENODEV;
+ }
+ 
+@@ -40,9 +45,11 @@ nvkm_therm_update_trip(struct nvkm_therm *therm)
+ 	struct nvbios_therm_trip_point *trip = therm->fan->bios.trip,
+ 				       *cur_trip = NULL,
+ 				       *last_trip = therm->last_trip;
+-	u8  temp = therm->func->temp_get(therm);
++	int temp;
+ 	u16 duty, i;
+ 
++	WARN_ON(nvkm_therm_temp_get(therm, &temp) < 0);
++
+ 	/* look for the trip point corresponding to the current temperature */
+ 	cur_trip = NULL;
+ 	for (i = 0; i < therm->fan->bios.nr_fan_trip; i++) {
+@@ -70,9 +77,11 @@ static int
+ nvkm_therm_compute_linear_duty(struct nvkm_therm *therm, u8 linear_min_temp,
+                                u8 linear_max_temp)
+ {
+-	u8  temp = therm->func->temp_get(therm);
++	int temp;
+ 	u16 duty;
+ 
++	WARN_ON(nvkm_therm_temp_get(therm, &temp) < 0);
++
+ 	/* handle the non-linear part first */
+ 	if (temp < linear_min_temp)
+ 		return therm->fan->bios.min_duty;
+@@ -200,7 +209,7 @@ nvkm_therm_fan_mode(struct nvkm_therm *therm, int mode)
+ 	/* do not allow automatic fan management if the thermal sensor is
+ 	 * not available */
+ 	if (mode == NVKM_THERM_CTRL_AUTO &&
+-	    therm->func->temp_get(therm) < 0)
++	    nvkm_therm_temp_get(therm, NULL) < 0)
+ 		return -EINVAL;
+ 
+ 	if (therm->mode == mode)
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/therm/g84.c b/drivers/gpu/drm/nouveau/nvkm/subdev/therm/g84.c
+index 96f8da40ac82..e2f891d5c7ba 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/therm/g84.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/therm/g84.c
+@@ -27,14 +27,15 @@
+ #include <subdev/fuse.h>
+ 
+ int
+-g84_temp_get(struct nvkm_therm *therm)
++g84_temp_get(struct nvkm_therm *therm, int *temp)
+ {
+ 	struct nvkm_device *device = therm->subdev.device;
+ 
+-	if (nvkm_fuse_read(device->fuse, 0x1a8) == 1)
+-		return nvkm_rd32(device, 0x20400);
+-	else
++	if (nvkm_fuse_read(device->fuse, 0x1a8) != 1)
+ 		return -ENODEV;
++
++	*temp = nvkm_rd32(device, 0x20400);
++	return 0;
+ }
+ 
+ void
+@@ -115,7 +116,7 @@ g84_therm_threshold_hyst_emulation(struct nvkm_therm *therm,
+ 	}
+ 
+ 	/* fix the state (in case someone reprogrammed the alarms) */
+-	cur = therm->func->temp_get(therm);
++	WARN_ON(nvkm_therm_temp_get(therm, &cur) < 0);
+ 	if (new_state == NVKM_THERM_THRS_LOWER && cur > thrs->temp)
+ 		new_state = NVKM_THERM_THRS_HIGHER;
+ 	else if (new_state == NVKM_THERM_THRS_HIGHER &&
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/therm/gp100.c b/drivers/gpu/drm/nouveau/nvkm/subdev/therm/gp100.c
+index 9f0dea3f61dc..4c32e4f21bec 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/therm/gp100.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/therm/gp100.c
+@@ -24,7 +24,7 @@
+ #include "priv.h"
+ 
+ static int
+-gp100_temp_get(struct nvkm_therm *therm)
++gp100_temp_get(struct nvkm_therm *therm, int *temp)
+ {
+ 	struct nvkm_device *device = therm->subdev.device;
+ 	struct nvkm_subdev *subdev = &therm->subdev;
+@@ -35,11 +35,12 @@ gp100_temp_get(struct nvkm_therm *therm)
+ 	if (tsensor & 0x40000000)
+ 		nvkm_trace(subdev, "reading temperature from SHADOWed sensor\n");
+ 
+-	/* device valid */
+-	if (tsensor & 0x20000000)
+-		return (inttemp >> 8);
+-	else
++	/* device invalid */
++	if (!(tsensor & 0x20000000))
+ 		return -ENODEV;
++
++	*temp = inttemp >> 8;
++	return 0;
+ }
+ 
+ static const struct nvkm_therm_func
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/therm/nv40.c b/drivers/gpu/drm/nouveau/nvkm/subdev/therm/nv40.c
+index 2c92ffb5f9d0..9753ad4bee4a 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/therm/nv40.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/therm/nv40.c
+@@ -70,7 +70,7 @@ nv40_sensor_setup(struct nvkm_therm *therm)
+ }
+ 
+ static int
+-nv40_temp_get(struct nvkm_therm *therm)
++nv40_temp_get(struct nvkm_therm *therm, int *temp)
+ {
+ 	struct nvkm_device *device = therm->subdev.device;
+ 	struct nvbios_therm_sensor *sensor = &therm->bios_sensor;
+@@ -95,11 +95,8 @@ nv40_temp_get(struct nvkm_therm *therm)
+ 	core_temp = core_temp + sensor->offset_num / sensor->offset_den;
+ 	core_temp = core_temp + sensor->offset_constant - 8;
+ 
+-	/* reserve negative temperatures for errors */
+-	if (core_temp < 0)
+-		core_temp = 0;
+-
+-	return core_temp;
++	*temp = core_temp;
++	return 0;
+ }
+ 
+ static int
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/therm/nv50.c b/drivers/gpu/drm/nouveau/nvkm/subdev/therm/nv50.c
+index 9b57b433d4cf..38fa6777c129 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/therm/nv50.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/therm/nv50.c
+@@ -126,7 +126,7 @@ nv50_sensor_setup(struct nvkm_therm *therm)
+ }
+ 
+ static int
+-nv50_temp_get(struct nvkm_therm *therm)
++nv50_temp_get(struct nvkm_therm *therm, int *temp)
+ {
+ 	struct nvkm_device *device = therm->subdev.device;
+ 	struct nvbios_therm_sensor *sensor = &therm->bios_sensor;
+@@ -143,11 +143,8 @@ nv50_temp_get(struct nvkm_therm *therm)
+ 	core_temp = core_temp + sensor->offset_num / sensor->offset_den;
+ 	core_temp = core_temp + sensor->offset_constant - 8;
+ 
+-	/* reserve negative temperatures for errors */
+-	if (core_temp < 0)
+-		core_temp = 0;
+-
+-	return core_temp;
++	*temp = core_temp;
++	return 0;
+ }
+ 
+ static void
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/therm/priv.h b/drivers/gpu/drm/nouveau/nvkm/subdev/therm/priv.h
+index 21659daf1864..04607d8b1755 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/therm/priv.h
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/therm/priv.h
+@@ -91,7 +91,15 @@ struct nvkm_therm_func {
+ 	int (*pwm_set)(struct nvkm_therm *, int line, u32, u32);
+ 	int (*pwm_clock)(struct nvkm_therm *, int line);
+ 
+-	int (*temp_get)(struct nvkm_therm *);
++	/**
++	 * @temp_get: Get the temperature reading from a thermal device
++	 *
++	 * @therm: The thermal device instance.
++	 * @temp: A pointer to write the temperature reading to.
++	 *
++	 * Returns: Zero on success, or a negative error code on failure.
++	 */
++	int (*temp_get)(struct nvkm_therm *therm, int *temp);
+ 
+ 	int (*fan_sense)(struct nvkm_therm *);
+ 
+@@ -110,7 +118,12 @@ int  nv50_fan_pwm_get(struct nvkm_therm *, int, u32 *, u32 *);
+ int  nv50_fan_pwm_set(struct nvkm_therm *, int, u32, u32);
+ int  nv50_fan_pwm_clock(struct nvkm_therm *, int);
+ 
+-int  g84_temp_get(struct nvkm_therm *);
++/**
++ * g84_temp_get() - An implementation of the &struct nvkm_therm_func temp_get()
++ * @therm: The thermal device instance.
++ * @temp: A pointer to write the temperature reading to.
++ */
++int  g84_temp_get(struct nvkm_therm *therm, int *temp);
+ void g84_sensor_setup(struct nvkm_therm *);
+ void g84_therm_fini(struct nvkm_therm *);
+ 
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/therm/temp.c b/drivers/gpu/drm/nouveau/nvkm/subdev/therm/temp.c
+index ddb2b2c600ca..1e8803901abc 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/therm/temp.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/therm/temp.c
+@@ -86,7 +86,9 @@ nvkm_therm_sensor_event(struct nvkm_therm *therm, enum nvkm_therm_thrs thrs,
+ 	static const char * const thresholds[] = {
+ 		"fanboost", "downclock", "critical", "shutdown"
+ 	};
+-	int temperature = therm->func->temp_get(therm);
++	int temperature;
++
++	WARN_ON(nvkm_therm_temp_get(therm, &temperature) < 0);
+ 
+ 	if (thrs < 0 || thrs > 3)
+ 		return;
+@@ -140,7 +142,9 @@ nvkm_therm_threshold_hyst_polling(struct nvkm_therm *therm,
+ {
+ 	enum nvkm_therm_thrs_direction direction;
+ 	enum nvkm_therm_thrs_state prev_state, new_state;
+-	int temp = therm->func->temp_get(therm);
++	int temp;
++
++	WARN_ON(nvkm_therm_temp_get(therm, &temp) < 0);
+ 
+ 	prev_state = nvkm_therm_sensor_get_threshold_state(therm, thrs_name);
+ 
+@@ -185,7 +189,7 @@ alarm_timer_callback(struct nvkm_alarm *alarm)
+ 	spin_unlock_irqrestore(&therm->sensor.alarm_program_lock, flags);
+ 
+ 	/* schedule the next poll in one second */
+-	if (therm->func->temp_get(therm) >= 0)
++	if (nvkm_therm_temp_get(therm, NULL) >= 0)
+ 		nvkm_timer_alarm(tmr, 1000000000ULL, alarm);
+ }
+ 
+@@ -229,7 +233,7 @@ nvkm_therm_sensor_preinit(struct nvkm_therm *therm)
+ {
+ 	const char *sensor_avail = "yes";
+ 
+-	if (therm->func->temp_get(therm) < 0)
++	if (nvkm_therm_temp_get(therm, NULL) < 0)
+ 		sensor_avail = "no";
+ 
+ 	nvkm_debug(&therm->subdev, "internal sensor: %s\n", sensor_avail);
 -- 
 2.26.2
 
