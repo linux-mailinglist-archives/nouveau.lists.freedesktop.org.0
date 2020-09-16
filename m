@@ -2,61 +2,58 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6BA2926E797
-	for <lists+nouveau@lfdr.de>; Thu, 17 Sep 2020 23:47:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 05A4E26E7A1
+	for <lists+nouveau@lfdr.de>; Thu, 17 Sep 2020 23:47:11 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B94976E3C1;
-	Thu, 17 Sep 2020 21:46:53 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 2E47B6E3EE;
+	Thu, 17 Sep 2020 21:47:01 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wm1-x341.google.com (mail-wm1-x341.google.com
- [IPv6:2a00:1450:4864:20::341])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D48166E3A2
- for <nouveau@lists.freedesktop.org>; Wed, 16 Sep 2020 11:24:29 +0000 (UTC)
-Received: by mail-wm1-x341.google.com with SMTP id e17so2413687wme.0
- for <nouveau@lists.freedesktop.org>; Wed, 16 Sep 2020 04:24:29 -0700 (PDT)
+Received: from mail-wr1-x441.google.com (mail-wr1-x441.google.com
+ [IPv6:2a00:1450:4864:20::441])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6138A6E9A6
+ for <nouveau@lists.freedesktop.org>; Wed, 16 Sep 2020 11:31:58 +0000 (UTC)
+Received: by mail-wr1-x441.google.com with SMTP id j2so6517718wrx.7
+ for <nouveau@lists.freedesktop.org>; Wed, 16 Sep 2020 04:31:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
  h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:content-transfer-encoding:in-reply-to;
- bh=+a06VRmEudn2VQsC3iRJVsBR9BGJLaW45iWLDadZyRI=;
- b=GUr+B+EIQnykYRecoS9xztPc0/dmBYz0juGXJQ+82bnH0XOFLeyGdR7DXoJWfQI/8v
- uV6cBfGWTv8GfGsnvr2MrJOMoG5UfSEg4lIignk/xv/qBGjiERDGzKpRftrrWz5Mz7Ds
- IxCKmFcqeMxhPaSpSYh1wxMK2TNY4jkQyjW+A=
+ :content-disposition:in-reply-to;
+ bh=s0lmtJr9NtSCh2ARFa6xphTVLFrbX2QsJYq/k2jzQ5U=;
+ b=Gf8367WPeSeQPQPququqR9nmCFZMOfneoLHOSZNngAZR6FN2a/oYqM2srKfxMlffls
+ y3lwL3nsdUYo4QYi65kWsWkPt53jlGyhlIKucwEnvyHoLGlzIkdEYE798B0fVOq9JPNb
+ cBFavPvt6MU2augrp90p56CBz8CIaWxEaUJYU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:content-transfer-encoding
- :in-reply-to;
- bh=+a06VRmEudn2VQsC3iRJVsBR9BGJLaW45iWLDadZyRI=;
- b=F/62nKGVLUfM9BToAmqyXuHw3EDdJURQkZMWDqhub5VyXUlQiUCNc2g/ZJsRp+bw2U
- McjdHqt1AYxYcZRm5Ub7YHOx9QT9Bda0ptw9s0tccHEgbXyeE564QqD/6PFbhsNJ+U1A
- kK3vlTCLi1FUl5O6zD3P+1OYuumyobm0rq+eOnmwaNH3b58g0xccS8N5SkL6rHXrYqF0
- emwfnOsPa0UqdhB3XQGNytLYNR5UR8SBCq8v9C0JuFuRVMZ3fnIxBwYWR6RsW05DXpSH
- vBTIfhGh/VTsVV/2SvsdiD/ImALDXqrVJQ/CpRpyL7ugqM4mfS/DDaCsygf15iflLEaV
- dGvA==
-X-Gm-Message-State: AOAM5315v/u//4EBzTQr077BgULzYFqCqzzOyc2zyFS2Ks4/ov8bc2t6
- i3U3uTdXzJVt7dzul7X0TFqU8g==
-X-Google-Smtp-Source: ABdhPJz4UqL+lwqUdWSoHFY6s7qCiJkilQoTwwhfF2waks/JDm6PnP2Zfkj6hPwcgWm/ZWJDyyjL3w==
-X-Received: by 2002:a7b:c24a:: with SMTP id b10mr3984516wmj.149.1600255468515; 
- Wed, 16 Sep 2020 04:24:28 -0700 (PDT)
+ :mime-version:content-disposition:in-reply-to;
+ bh=s0lmtJr9NtSCh2ARFa6xphTVLFrbX2QsJYq/k2jzQ5U=;
+ b=L1TntVy9xHZIGifOMJ4JMEKE62CU7BlBOawSe1aZHDZIsezMRb/qEXl8U76IFy7BMj
+ eO1kREUPk/dp3LEQSX/ivyMz0+gTyQHnXdVUQogSwUsozibkfvj66QwlTLG9bfaL77fU
+ r/1jCUem4VLISI813BQoZSamjL0ZQ4JPJMm5J/oq4ZJ94hVKJAwrU+yDhWtT+DgvADe7
+ ZtJRIzxrvN0s88tb+bmPX6EUqmfWtStGjTRBVyUZ1KXLribVsSvs9NFIb2ynHFfhlehT
+ 4mdl8vAaTuB4AM7niZclacPP6pkEnWCCg5qqOFNHraDGFL1dTp8ECQrpD5dj3T5RXWyc
+ qt9g==
+X-Gm-Message-State: AOAM530Uxx35jpK3lXqXh2xdzqCAe2ViM7E4JXtWeb3bno0W8GpAoTAX
+ A0t0xxY3rzlB5GVEuQ40imNJqQ==
+X-Google-Smtp-Source: ABdhPJwDUHLS9jy7ETv8dWHdpP/K//iCwwECKpW/tCNWTEIypWcTfch4omPC7wkyf4knOCNGQ9EKaQ==
+X-Received: by 2002:adf:f5ce:: with SMTP id k14mr25445792wrp.286.1600255917009; 
+ Wed, 16 Sep 2020 04:31:57 -0700 (PDT)
 Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
- by smtp.gmail.com with ESMTPSA id h76sm5509546wme.10.2020.09.16.04.24.26
+ by smtp.gmail.com with ESMTPSA id u186sm4255475wmu.34.2020.09.16.04.31.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 16 Sep 2020 04:24:27 -0700 (PDT)
-Date: Wed, 16 Sep 2020 13:24:24 +0200
+ Wed, 16 Sep 2020 04:31:55 -0700 (PDT)
+Date: Wed, 16 Sep 2020 13:31:52 +0200
 From: Daniel Vetter <daniel@ffwll.ch>
 To: Thomas Zimmermann <tzimmermann@suse.de>
-Message-ID: <20200916112424.GH438822@phenom.ffwll.local>
+Message-ID: <20200916113152.GJ438822@phenom.ffwll.local>
 References: <20200915145958.19993-1-tzimmermann@suse.de>
- <20200915145958.19993-5-tzimmermann@suse.de>
- <20200916100318.GF438822@phenom.ffwll.local>
- <fb1f5992-1642-5751-5672-486b89442e1c@suse.de>
+ <20200915145958.19993-6-tzimmermann@suse.de>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <fb1f5992-1642-5751-5672-486b89442e1c@suse.de>
+In-Reply-To: <20200915145958.19993-6-tzimmermann@suse.de>
 X-Operating-System: Linux phenom 5.7.0-1-amd64 
 X-Mailman-Approved-At: Thu, 17 Sep 2020 21:46:51 +0000
-Subject: Re: [Nouveau] [PATCH v2 04/21] drm/exynos: Introduce GEM object
+Subject: Re: [Nouveau] [PATCH v2 05/21] drm/gma500: Introduce GEM object
  functions
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -69,182 +66,188 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: hamohammed.sa@gmail.com, airlied@linux.ie, nouveau@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, linux@armlinux.org.uk, matthias.bgg@gmail.com,
- thierry.reding@gmail.com, krzk@kernel.org, sam@ravnborg.org,
- emil.velikov@collabora.com, linux-samsung-soc@vger.kernel.org,
- jy0922.shim@samsung.com, oleksandr_andrushchenko@epam.com,
- michal.simek@xilinx.com, miaoqinglang@huawei.com,
- linux-rockchip@lists.infradead.org, tomi.valkeinen@ti.com, bskeggs@redhat.com,
- xen-devel@lists.xenproject.org, marek.olsak@amd.com, matthew.auld@intel.com,
- chunkuang.hu@kernel.org, andi.shyti@intel.com, linux-arm-msm@vger.kernel.org,
- intel-gfx@lists.freedesktop.org, tianci.yin@amd.com,
- etnaviv@lists.freedesktop.org, hdegoede@redhat.com,
- linux-mediatek@lists.infradead.org, rodrigo.vivi@intel.com,
- linux-tegra@vger.kernel.org, evan.quan@amd.com, sean@poorly.run,
+Cc: hamohammed.sa@gmail.com, heiko@sntech.de, andrey.grodzovsky@amd.com,
+ airlied@linux.ie, nouveau@lists.freedesktop.org,
+ joonas.lahtinen@linux.intel.com, dri-devel@lists.freedesktop.org,
+ michal.simek@xilinx.com, eric@anholt.net, thierry.reding@gmail.com,
+ robdclark@gmail.com, krzk@kernel.org, sam@ravnborg.org,
+ sumit.semwal@linaro.org, emil.velikov@collabora.com,
+ linux-samsung-soc@vger.kernel.org, jy0922.shim@samsung.com,
+ oleksandr_andrushchenko@epam.com, tomi.valkeinen@ti.com,
+ linux-tegra@vger.kernel.org, linux@armlinux.org.uk,
+ patrik.r.jakobsson@gmail.com, linux-rockchip@lists.infradead.org,
+ kgene@kernel.org, bskeggs@redhat.com, xen-devel@lists.xenproject.org,
+ miaoqinglang@huawei.com, intel-gfx@lists.freedesktop.org,
+ matthew.auld@intel.com, chunkuang.hu@kernel.org, andi.shyti@intel.com,
+ daniel@ffwll.ch, linux-arm-msm@vger.kernel.org, marek.olsak@amd.com,
+ tianci.yin@amd.com, maarten.lankhorst@linux.intel.com,
+ etnaviv@lists.freedesktop.org, jani.nikula@linux.intel.com,
+ inki.dae@samsung.com, hdegoede@redhat.com, christian.gmeiner@gmail.com,
+ linux-mediatek@lists.infradead.org, mripard@kernel.org, rodrigo.vivi@intel.com,
+ matthias.bgg@gmail.com, evan.quan@amd.com, sean@poorly.run,
  linux-arm-kernel@lists.infradead.org, tvrtko.ursulin@linux.intel.com,
- amd-gfx@lists.freedesktop.org, chris@chris-wilson.co.uk,
- rodrigosiqueiramelo@gmail.com, hyun.kwon@xilinx.com, aaron.liu@amd.com,
+ amd-gfx@lists.freedesktop.org, laurent.pinchart@ideasonboard.com,
+ hyun.kwon@xilinx.com, rodrigosiqueiramelo@gmail.com, aaron.liu@amd.com,
  Felix.Kuehling@amd.com, xinhui.pan@amd.com, sw0312.kim@samsung.com,
- hjc@rock-chips.com, kyungmin.park@samsung.com, nirmoy.das@amd.com,
- kgene@kernel.org, Daniel Vetter <daniel@ffwll.ch>, alexander.deucher@amd.com,
+ hjc@rock-chips.com, chris@chris-wilson.co.uk, kyungmin.park@samsung.com,
+ nirmoy.das@amd.com, p.zabel@pengutronix.de, alexander.deucher@amd.com,
  Hawking.Zhang@amd.com, freedreno@lists.freedesktop.org,
- christian.koenig@amd.com, laurent.pinchart@ideasonboard.com
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+ christian.koenig@amd.com, l.stach@pengutronix.de
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, Sep 16, 2020 at 12:36:28PM +0200, Thomas Zimmermann wrote:
-> Hi
-> =
+On Tue, Sep 15, 2020 at 04:59:42PM +0200, Thomas Zimmermann wrote:
+> GEM object functions deprecate several similar callback interfaces in
+> struct drm_driver. This patch replaces the per-driver callbacks with
+> per-instance callbacks in gma500.
+> 
+> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
 
-> Am 16.09.20 um 12:03 schrieb Daniel Vetter:
-> > On Tue, Sep 15, 2020 at 04:59:41PM +0200, Thomas Zimmermann wrote:
-> >> GEM object functions deprecate several similar callback interfaces in
-> >> struct drm_driver. This patch replaces the per-driver callbacks with
-> >> per-instance callbacks in exynos. The only exception is gem_prime_mmap,
-> >> which is non-trivial to convert.
-> >>
-> >> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-> >> ---
-> >>  drivers/gpu/drm/exynos/exynos_drm_drv.c | 10 ----------
-> >>  drivers/gpu/drm/exynos/exynos_drm_gem.c | 15 +++++++++++++++
-> >>  2 files changed, 15 insertions(+), 10 deletions(-)
-> >>
-> >> diff --git a/drivers/gpu/drm/exynos/exynos_drm_drv.c b/drivers/gpu/drm=
-/exynos/exynos_drm_drv.c
-> >> index dbd80f1e4c78..fe46680ca208 100644
-> >> --- a/drivers/gpu/drm/exynos/exynos_drm_drv.c
-> >> +++ b/drivers/gpu/drm/exynos/exynos_drm_drv.c
-> >> @@ -75,11 +75,6 @@ static void exynos_drm_postclose(struct drm_device =
-*dev, struct drm_file *file)
-> >>  	file->driver_priv =3D NULL;
-> >>  }
-> >>  =
+Reviewed-by: Daniel Vetter <daniel.vetter@ffwll.ch>
 
-> >> -static const struct vm_operations_struct exynos_drm_gem_vm_ops =3D {
-> >> -	.open =3D drm_gem_vm_open,
-> >> -	.close =3D drm_gem_vm_close,
-> >> -};
-> >> -
-> >>  static const struct drm_ioctl_desc exynos_ioctls[] =3D {
-> >>  	DRM_IOCTL_DEF_DRV(EXYNOS_GEM_CREATE, exynos_drm_gem_create_ioctl,
-> >>  			DRM_RENDER_ALLOW),
-> >> @@ -124,16 +119,11 @@ static struct drm_driver exynos_drm_driver =3D {
-> >>  	.open			=3D exynos_drm_open,
-> >>  	.lastclose		=3D drm_fb_helper_lastclose,
-> >>  	.postclose		=3D exynos_drm_postclose,
-> >> -	.gem_free_object_unlocked =3D exynos_drm_gem_free_object,
-> >> -	.gem_vm_ops		=3D &exynos_drm_gem_vm_ops,
-> >>  	.dumb_create		=3D exynos_drm_gem_dumb_create,
-> >>  	.prime_handle_to_fd	=3D drm_gem_prime_handle_to_fd,
-> >>  	.prime_fd_to_handle	=3D drm_gem_prime_fd_to_handle,
-> >>  	.gem_prime_import	=3D exynos_drm_gem_prime_import,
-> >> -	.gem_prime_get_sg_table	=3D exynos_drm_gem_prime_get_sg_table,
-> >>  	.gem_prime_import_sg_table	=3D exynos_drm_gem_prime_import_sg_table,
-> >> -	.gem_prime_vmap		=3D exynos_drm_gem_prime_vmap,
-> >> -	.gem_prime_vunmap	=3D exynos_drm_gem_prime_vunmap,
-> >>  	.gem_prime_mmap		=3D exynos_drm_gem_prime_mmap,
-> >>  	.ioctls			=3D exynos_ioctls,
-> >>  	.num_ioctls		=3D ARRAY_SIZE(exynos_ioctls),
-> >> diff --git a/drivers/gpu/drm/exynos/exynos_drm_gem.c b/drivers/gpu/drm=
-/exynos/exynos_drm_gem.c
-> >> index efa476858db5..69a5cf28b4ae 100644
-> >> --- a/drivers/gpu/drm/exynos/exynos_drm_gem.c
-> >> +++ b/drivers/gpu/drm/exynos/exynos_drm_gem.c
-> >> @@ -129,6 +129,19 @@ void exynos_drm_gem_destroy(struct exynos_drm_gem=
- *exynos_gem)
-> >>  	kfree(exynos_gem);
-> >>  }
-> >>  =
+> ---
+>  drivers/gpu/drm/gma500/framebuffer.c |  2 ++
+>  drivers/gpu/drm/gma500/gem.c         | 18 ++++++++++++++++--
+>  drivers/gpu/drm/gma500/gem.h         |  3 +++
+>  drivers/gpu/drm/gma500/psb_drv.c     |  9 ---------
+>  drivers/gpu/drm/gma500/psb_drv.h     |  2 --
+>  5 files changed, 21 insertions(+), 13 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/gma500/framebuffer.c b/drivers/gpu/drm/gma500/framebuffer.c
+> index 54d9876b5305..5ede24fb44ae 100644
+> --- a/drivers/gpu/drm/gma500/framebuffer.c
+> +++ b/drivers/gpu/drm/gma500/framebuffer.c
+> @@ -24,6 +24,7 @@
+>  #include <drm/drm_gem_framebuffer_helper.h>
+>  
+>  #include "framebuffer.h"
+> +#include "gem.h"
+>  #include "gtt.h"
+>  #include "psb_drv.h"
+>  #include "psb_intel_drv.h"
+> @@ -285,6 +286,7 @@ static struct gtt_range *psbfb_alloc(struct drm_device *dev, int aligned_size)
+>  	/* Begin by trying to use stolen memory backing */
+>  	backing = psb_gtt_alloc_range(dev, aligned_size, "fb", 1, PAGE_SIZE);
+>  	if (backing) {
+> +		backing->gem.funcs = &psb_gem_object_funcs;
+>  		drm_gem_private_object_init(dev, &backing->gem, aligned_size);
+>  		return backing;
+>  	}
+> diff --git a/drivers/gpu/drm/gma500/gem.c b/drivers/gpu/drm/gma500/gem.c
+> index f9c4b1d76f56..8f07de83b6fb 100644
+> --- a/drivers/gpu/drm/gma500/gem.c
+> +++ b/drivers/gpu/drm/gma500/gem.c
+> @@ -18,7 +18,9 @@
+>  
+>  #include "psb_drv.h"
+>  
+> -void psb_gem_free_object(struct drm_gem_object *obj)
+> +static vm_fault_t psb_gem_fault(struct vm_fault *vmf);
+> +
+> +static void psb_gem_free_object(struct drm_gem_object *obj)
+>  {
+>  	struct gtt_range *gtt = container_of(obj, struct gtt_range, gem);
+>  
+> @@ -36,6 +38,17 @@ int psb_gem_get_aperture(struct drm_device *dev, void *data,
+>  	return -EINVAL;
+>  }
+>  
+> +static const struct vm_operations_struct psb_gem_vm_ops = {
+> +	.fault = psb_gem_fault,
+> +	.open = drm_gem_vm_open,
+> +	.close = drm_gem_vm_close,
+> +};
+> +
+> +const struct drm_gem_object_funcs psb_gem_object_funcs = {
+> +	.free = psb_gem_free_object,
+> +	.vm_ops = &psb_gem_vm_ops,
+> +};
+> +
+>  /**
+>   *	psb_gem_create		-	create a mappable object
+>   *	@file: the DRM file of the client
+> @@ -63,6 +76,7 @@ int psb_gem_create(struct drm_file *file, struct drm_device *dev, u64 size,
+>  		dev_err(dev->dev, "no memory for %lld byte GEM object\n", size);
+>  		return -ENOSPC;
+>  	}
+> +	r->gem.funcs = &psb_gem_object_funcs;
+>  	/* Initialize the extra goodies GEM needs to do all the hard work */
+>  	if (drm_gem_object_init(dev, &r->gem, size) != 0) {
+>  		psb_gtt_free_range(dev, r);
+> @@ -123,7 +137,7 @@ int psb_gem_dumb_create(struct drm_file *file, struct drm_device *dev,
+>   *	vma->vm_private_data points to the GEM object that is backing this
+>   *	mapping.
+>   */
+> -vm_fault_t psb_gem_fault(struct vm_fault *vmf)
+> +static vm_fault_t psb_gem_fault(struct vm_fault *vmf)
+>  {
+>  	struct vm_area_struct *vma = vmf->vma;
+>  	struct drm_gem_object *obj;
+> diff --git a/drivers/gpu/drm/gma500/gem.h b/drivers/gpu/drm/gma500/gem.h
+> index 4a74dc623b6b..3741a711b9fd 100644
+> --- a/drivers/gpu/drm/gma500/gem.h
+> +++ b/drivers/gpu/drm/gma500/gem.h
+> @@ -8,6 +8,9 @@
+>  #ifndef _GEM_H
+>  #define _GEM_H
+>  
+> +extern const struct drm_gem_object_funcs psb_gem_object_funcs;
+> +
+>  extern int psb_gem_create(struct drm_file *file, struct drm_device *dev,
+>  			  u64 size, u32 *handlep, int stolen, u32 align);
+> +
+>  #endif
+> diff --git a/drivers/gpu/drm/gma500/psb_drv.c b/drivers/gpu/drm/gma500/psb_drv.c
+> index 34b4aae9a15e..b13376a6fb91 100644
+> --- a/drivers/gpu/drm/gma500/psb_drv.c
+> +++ b/drivers/gpu/drm/gma500/psb_drv.c
+> @@ -480,12 +480,6 @@ static const struct dev_pm_ops psb_pm_ops = {
+>  	.runtime_idle = psb_runtime_idle,
+>  };
+>  
+> -static const struct vm_operations_struct psb_gem_vm_ops = {
+> -	.fault = psb_gem_fault,
+> -	.open = drm_gem_vm_open,
+> -	.close = drm_gem_vm_close,
+> -};
+> -
+>  static const struct file_operations psb_gem_fops = {
+>  	.owner = THIS_MODULE,
+>  	.open = drm_open,
+> @@ -507,9 +501,6 @@ static struct drm_driver driver = {
+>  	.irq_uninstall = psb_irq_uninstall,
+>  	.irq_handler = psb_irq_handler,
+>  
+> -	.gem_free_object_unlocked = psb_gem_free_object,
+> -	.gem_vm_ops = &psb_gem_vm_ops,
+> -
+>  	.dumb_create = psb_gem_dumb_create,
+>  	.ioctls = psb_ioctls,
+>  	.fops = &psb_gem_fops,
+> diff --git a/drivers/gpu/drm/gma500/psb_drv.h b/drivers/gpu/drm/gma500/psb_drv.h
+> index 956926341316..c71a5a4e912c 100644
+> --- a/drivers/gpu/drm/gma500/psb_drv.h
+> +++ b/drivers/gpu/drm/gma500/psb_drv.h
+> @@ -735,12 +735,10 @@ extern const struct drm_connector_helper_funcs
+>  extern const struct drm_connector_funcs psb_intel_lvds_connector_funcs;
+>  
+>  /* gem.c */
+> -extern void psb_gem_free_object(struct drm_gem_object *obj);
+>  extern int psb_gem_get_aperture(struct drm_device *dev, void *data,
+>  			struct drm_file *file);
+>  extern int psb_gem_dumb_create(struct drm_file *file, struct drm_device *dev,
+>  			struct drm_mode_create_dumb *args);
+> -extern vm_fault_t psb_gem_fault(struct vm_fault *vmf);
+>  
+>  /* psb_device.c */
+>  extern const struct psb_ops psb_chip_ops;
+> -- 
+> 2.28.0
+> 
 
-> >> +static const struct vm_operations_struct exynos_drm_gem_vm_ops =3D {
-> >> +	.open =3D drm_gem_vm_open,
-> >> +	.close =3D drm_gem_vm_close,
-> >> +};
-> > =
-
-> > Hm moving the drm_gem_cma_vm_ops into drm_gem.h or so and maybe calling
-> > them drm_gem_simple_ops or so would remove a pile of these. But perhaps=
- a
-> > quick follow up series.
-> =
-
-> Good idea. Several interfaces use the term 'default' in their name, so
-> something like drm_gem_default_vm_ops seems appropriate.
-
-Default sounds like a fine naming choice too.
-
-> BTW is there a reason why we have file operations like
-> DEFINE_DRM_GEM_CMA_FOPS() in each module? It seems like this could also
-> be provided by the rsp memory-manager library.
-
-It's for the module reference counting of the underlying file. So
-file_operations need this.
--Daniel
-
-
-> =
-
-> Best regards
-> Thomas
-> =
-
-> > =
-
-> > Reviewed-by: Daniel Vetter <daniel.vetter@ffwll.ch>
-> > =
-
-> >> +
-> >> +static const struct drm_gem_object_funcs exynos_drm_gem_object_funcs =
-=3D {
-> >> +	.free =3D exynos_drm_gem_free_object,
-> >> +	.get_sg_table =3D exynos_drm_gem_prime_get_sg_table,
-> >> +	.vmap =3D exynos_drm_gem_prime_vmap,
-> >> +	.vunmap	=3D exynos_drm_gem_prime_vunmap,
-> >> +	.vm_ops =3D &exynos_drm_gem_vm_ops,
-> >> +};
-> >> +
-> >>  static struct exynos_drm_gem *exynos_drm_gem_init(struct drm_device *=
-dev,
-> >>  						  unsigned long size)
-> >>  {
-> >> @@ -143,6 +156,8 @@ static struct exynos_drm_gem *exynos_drm_gem_init(=
-struct drm_device *dev,
-> >>  	exynos_gem->size =3D size;
-> >>  	obj =3D &exynos_gem->base;
-> >>  =
-
-> >> +	obj->funcs =3D &exynos_drm_gem_object_funcs;
-> >> +
-> >>  	ret =3D drm_gem_object_init(dev, obj, size);
-> >>  	if (ret < 0) {
-> >>  		DRM_DEV_ERROR(dev->dev, "failed to initialize gem object\n");
-> >> -- =
-
-> >> 2.28.0
-> >>
-> > =
-
-> =
-
-> -- =
-
-> Thomas Zimmermann
-> Graphics Driver Developer
-> SUSE Software Solutions Germany GmbH
-> Maxfeldstr. 5, 90409 N=FCrnberg, Germany
-> (HRB 36809, AG N=FCrnberg)
-> Gesch=E4ftsf=FChrer: Felix Imend=F6rffer
-> =
-
-
-
-
-
--- =
-
+-- 
 Daniel Vetter
 Software Engineer, Intel Corporation
 http://blog.ffwll.ch
