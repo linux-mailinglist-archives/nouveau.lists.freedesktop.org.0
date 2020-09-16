@@ -1,34 +1,60 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 06BD726E79E
-	for <lists+nouveau@lfdr.de>; Thu, 17 Sep 2020 23:47:09 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id D8AC126E7A4
+	for <lists+nouveau@lfdr.de>; Thu, 17 Sep 2020 23:47:12 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 808F06E3EC;
-	Thu, 17 Sep 2020 21:46:57 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 872926E400;
+	Thu, 17 Sep 2020 21:47:01 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6A8886E144;
- Wed, 16 Sep 2020 10:36:34 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 4E411B55A;
- Wed, 16 Sep 2020 10:36:48 +0000 (UTC)
-To: Daniel Vetter <daniel@ffwll.ch>
+Received: from mail-wm1-x344.google.com (mail-wm1-x344.google.com
+ [IPv6:2a00:1450:4864:20::344])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 418146E9A9
+ for <nouveau@lists.freedesktop.org>; Wed, 16 Sep 2020 11:21:43 +0000 (UTC)
+Received: by mail-wm1-x344.google.com with SMTP id q9so2399103wmj.2
+ for <nouveau@lists.freedesktop.org>; Wed, 16 Sep 2020 04:21:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to;
+ bh=mUOAFu1Sstz+Y84HDrSYqg/SYf7AQiwgyxkdfcX2QWQ=;
+ b=dNYt3KSmP2zoajuEOcpSRwKjslSpbjWRZP10ZdmvUDBODfNwzvcZciCjx0cVSGnRP/
+ JUZRa+hP31+BJN/M1t7m9Ls/tiT5od6BnRGoXiiAJTdUcoTfR5J6SoK2kCHBNgd6JM9c
+ NsxYbB5nxATvUhunbEGd6bVQp6IDhaI5uBozM=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=mUOAFu1Sstz+Y84HDrSYqg/SYf7AQiwgyxkdfcX2QWQ=;
+ b=kub+baeJSMf/z7SQB3y+k5RJx9bNqWE/8Gj9O31LY+wo0IAMIgG68WtZRf++i7vF40
+ MbfAl1XJSqfD2cjFIXhaXsgXlfZsQTzyzTOMA5uBWY3h1J9FUqgCCfkAhzzzPsxbn7Kj
+ YzSwR1Jpbw/Pq9+eHjFIWvI2qaCG7XeyauelIeujzX78eMksDWqnN4c2OpWi4d3roL9z
+ uvf73VT3fK6OFWbRaN0zrwgO+UgIeAD5QQgvHk27wxPM5BdAVKVtz5q3gL199vSA4vnY
+ L1qwZDDz/U01pEMOV8epbXVhygnSqt0pi44ZYHPRDNlQCoWq5aVCNesK7B0LNjuGtNP0
+ LhkQ==
+X-Gm-Message-State: AOAM533X5vJRDZwhfZ3PoF1lpeJQrBXiJHFPAOw8ze3vQvRooOTq1eN6
+ 0nzqpw8j1TOoDQddQXPq5GIWKg==
+X-Google-Smtp-Source: ABdhPJxN4KFdG0OXvpCuI3UQDQSjm9d9naSAnHnzOZnbaecNO0ofucAiEdpaLFF0vBOBWzg3E9jOYA==
+X-Received: by 2002:a05:600c:414e:: with SMTP id
+ h14mr4127600wmm.2.1600255301791; 
+ Wed, 16 Sep 2020 04:21:41 -0700 (PDT)
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
+ by smtp.gmail.com with ESMTPSA id q186sm4894705wma.45.2020.09.16.04.21.38
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 16 Sep 2020 04:21:40 -0700 (PDT)
+Date: Wed, 16 Sep 2020 13:21:36 +0200
+From: Daniel Vetter <daniel@ffwll.ch>
+To: Thomas Zimmermann <tzimmermann@suse.de>
+Message-ID: <20200916112136.GG438822@phenom.ffwll.local>
 References: <20200915145958.19993-1-tzimmermann@suse.de>
- <20200915145958.19993-5-tzimmermann@suse.de>
- <20200916100318.GF438822@phenom.ffwll.local>
-From: Thomas Zimmermann <tzimmermann@suse.de>
-Message-ID: <fb1f5992-1642-5751-5672-486b89442e1c@suse.de>
-Date: Wed, 16 Sep 2020 12:36:28 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.12.0
+ <20200915145958.19993-4-tzimmermann@suse.de>
 MIME-Version: 1.0
-In-Reply-To: <20200916100318.GF438822@phenom.ffwll.local>
+Content-Disposition: inline
+In-Reply-To: <20200915145958.19993-4-tzimmermann@suse.de>
+X-Operating-System: Linux phenom 5.7.0-1-amd64 
 X-Mailman-Approved-At: Thu, 17 Sep 2020 21:46:51 +0000
-Subject: Re: [Nouveau] [PATCH v2 04/21] drm/exynos: Introduce GEM object
+Subject: Re: [Nouveau] [PATCH v2 03/21] drm/etnaviv: Introduce GEM object
  functions
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -41,231 +67,153 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: hamohammed.sa@gmail.com, airlied@linux.ie, nouveau@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, linux@armlinux.org.uk, matthias.bgg@gmail.com,
- thierry.reding@gmail.com, krzk@kernel.org, sam@ravnborg.org,
- emil.velikov@collabora.com, linux-samsung-soc@vger.kernel.org,
- jy0922.shim@samsung.com, oleksandr_andrushchenko@epam.com,
- michal.simek@xilinx.com, miaoqinglang@huawei.com,
- linux-rockchip@lists.infradead.org, tomi.valkeinen@ti.com, bskeggs@redhat.com,
- xen-devel@lists.xenproject.org, marek.olsak@amd.com, matthew.auld@intel.com,
- chunkuang.hu@kernel.org, andi.shyti@intel.com, linux-arm-msm@vger.kernel.org,
- intel-gfx@lists.freedesktop.org, tianci.yin@amd.com,
- etnaviv@lists.freedesktop.org, hdegoede@redhat.com,
- linux-mediatek@lists.infradead.org, rodrigo.vivi@intel.com,
- linux-tegra@vger.kernel.org, evan.quan@amd.com, sean@poorly.run,
- linux-arm-kernel@lists.infradead.org, tvrtko.ursulin@linux.intel.com,
- amd-gfx@lists.freedesktop.org, chris@chris-wilson.co.uk,
- rodrigosiqueiramelo@gmail.com, hyun.kwon@xilinx.com, aaron.liu@amd.com,
- Felix.Kuehling@amd.com, xinhui.pan@amd.com, sw0312.kim@samsung.com,
- hjc@rock-chips.com, kyungmin.park@samsung.com, nirmoy.das@amd.com,
- kgene@kernel.org, alexander.deucher@amd.com, Hawking.Zhang@amd.com,
- freedreno@lists.freedesktop.org, christian.koenig@amd.com,
- laurent.pinchart@ideasonboard.com
-Content-Type: multipart/mixed; boundary="===============1447263385=="
-Errors-To: nouveau-bounces@lists.freedesktop.org
-Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
-
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============1447263385==
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="VLzf65jApKkRavuxi39QvnC87GfNF3zix"
-
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---VLzf65jApKkRavuxi39QvnC87GfNF3zix
-Content-Type: multipart/mixed; boundary="dt3SkYl9e3y1MIK8AYjuI2mtP7GQiTevE";
- protected-headers="v1"
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: Daniel Vetter <daniel@ffwll.ch>
-Cc: hamohammed.sa@gmail.com, airlied@linux.ie, nouveau@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, michal.simek@xilinx.com,
- thierry.reding@gmail.com, krzk@kernel.org, sam@ravnborg.org,
- emil.velikov@collabora.com, linux-samsung-soc@vger.kernel.org,
- jy0922.shim@samsung.com, oleksandr_andrushchenko@epam.com,
- tomi.valkeinen@ti.com, linux-tegra@vger.kernel.org, linux@armlinux.org.uk,
- jonathanh@nvidia.com, linux-rockchip@lists.infradead.org, kgene@kernel.org,
- bskeggs@redhat.com, xen-devel@lists.xenproject.org, miaoqinglang@huawei.com,
- intel-gfx@lists.freedesktop.org, matthew.auld@intel.com,
- chunkuang.hu@kernel.org, andi.shyti@intel.com,
- linux-arm-msm@vger.kernel.org, marek.olsak@amd.com, tianci.yin@amd.com,
- etnaviv@lists.freedesktop.org, hdegoede@redhat.com,
- linux-mediatek@lists.infradead.org, rodrigo.vivi@intel.com,
+Cc: hamohammed.sa@gmail.com, heiko@sntech.de, andrey.grodzovsky@amd.com,
+ airlied@linux.ie, nouveau@lists.freedesktop.org,
+ joonas.lahtinen@linux.intel.com, dri-devel@lists.freedesktop.org,
+ michal.simek@xilinx.com, eric@anholt.net, thierry.reding@gmail.com,
+ robdclark@gmail.com, krzk@kernel.org, sam@ravnborg.org,
+ sumit.semwal@linaro.org, emil.velikov@collabora.com,
+ linux-samsung-soc@vger.kernel.org, jy0922.shim@samsung.com,
+ oleksandr_andrushchenko@epam.com, tomi.valkeinen@ti.com,
+ linux-tegra@vger.kernel.org, linux@armlinux.org.uk,
+ patrik.r.jakobsson@gmail.com, linux-rockchip@lists.infradead.org,
+ kgene@kernel.org, bskeggs@redhat.com, xen-devel@lists.xenproject.org,
+ miaoqinglang@huawei.com, intel-gfx@lists.freedesktop.org,
+ matthew.auld@intel.com, chunkuang.hu@kernel.org, andi.shyti@intel.com,
+ daniel@ffwll.ch, linux-arm-msm@vger.kernel.org, marek.olsak@amd.com,
+ tianci.yin@amd.com, maarten.lankhorst@linux.intel.com,
+ etnaviv@lists.freedesktop.org, jani.nikula@linux.intel.com,
+ inki.dae@samsung.com, hdegoede@redhat.com, christian.gmeiner@gmail.com,
+ linux-mediatek@lists.infradead.org, mripard@kernel.org, rodrigo.vivi@intel.com,
  matthias.bgg@gmail.com, evan.quan@amd.com, sean@poorly.run,
  linux-arm-kernel@lists.infradead.org, tvrtko.ursulin@linux.intel.com,
  amd-gfx@lists.freedesktop.org, laurent.pinchart@ideasonboard.com,
  hyun.kwon@xilinx.com, rodrigosiqueiramelo@gmail.com, aaron.liu@amd.com,
  Felix.Kuehling@amd.com, xinhui.pan@amd.com, sw0312.kim@samsung.com,
  hjc@rock-chips.com, chris@chris-wilson.co.uk, kyungmin.park@samsung.com,
- nirmoy.das@amd.com, alexander.deucher@amd.com, Hawking.Zhang@amd.com,
- freedreno@lists.freedesktop.org, christian.koenig@amd.com
-Message-ID: <fb1f5992-1642-5751-5672-486b89442e1c@suse.de>
-Subject: Re: [PATCH v2 04/21] drm/exynos: Introduce GEM object functions
-References: <20200915145958.19993-1-tzimmermann@suse.de>
- <20200915145958.19993-5-tzimmermann@suse.de>
- <20200916100318.GF438822@phenom.ffwll.local>
-In-Reply-To: <20200916100318.GF438822@phenom.ffwll.local>
-
---dt3SkYl9e3y1MIK8AYjuI2mtP7GQiTevE
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
-
-Hi
-
-Am 16.09.20 um 12:03 schrieb Daniel Vetter:
-> On Tue, Sep 15, 2020 at 04:59:41PM +0200, Thomas Zimmermann wrote:
->> GEM object functions deprecate several similar callback interfaces in
->> struct drm_driver. This patch replaces the per-driver callbacks with
->> per-instance callbacks in exynos. The only exception is gem_prime_mmap=
-,
->> which is non-trivial to convert.
->>
->> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
->> ---
->>  drivers/gpu/drm/exynos/exynos_drm_drv.c | 10 ----------
->>  drivers/gpu/drm/exynos/exynos_drm_gem.c | 15 +++++++++++++++
->>  2 files changed, 15 insertions(+), 10 deletions(-)
->>
->> diff --git a/drivers/gpu/drm/exynos/exynos_drm_drv.c b/drivers/gpu/drm=
-/exynos/exynos_drm_drv.c
->> index dbd80f1e4c78..fe46680ca208 100644
->> --- a/drivers/gpu/drm/exynos/exynos_drm_drv.c
->> +++ b/drivers/gpu/drm/exynos/exynos_drm_drv.c
->> @@ -75,11 +75,6 @@ static void exynos_drm_postclose(struct drm_device =
-*dev, struct drm_file *file)
->>  	file->driver_priv =3D NULL;
->>  }
->> =20
->> -static const struct vm_operations_struct exynos_drm_gem_vm_ops =3D {
->> -	.open =3D drm_gem_vm_open,
->> -	.close =3D drm_gem_vm_close,
->> -};
->> -
->>  static const struct drm_ioctl_desc exynos_ioctls[] =3D {
->>  	DRM_IOCTL_DEF_DRV(EXYNOS_GEM_CREATE, exynos_drm_gem_create_ioctl,
->>  			DRM_RENDER_ALLOW),
->> @@ -124,16 +119,11 @@ static struct drm_driver exynos_drm_driver =3D {=
-
->>  	.open			=3D exynos_drm_open,
->>  	.lastclose		=3D drm_fb_helper_lastclose,
->>  	.postclose		=3D exynos_drm_postclose,
->> -	.gem_free_object_unlocked =3D exynos_drm_gem_free_object,
->> -	.gem_vm_ops		=3D &exynos_drm_gem_vm_ops,
->>  	.dumb_create		=3D exynos_drm_gem_dumb_create,
->>  	.prime_handle_to_fd	=3D drm_gem_prime_handle_to_fd,
->>  	.prime_fd_to_handle	=3D drm_gem_prime_fd_to_handle,
->>  	.gem_prime_import	=3D exynos_drm_gem_prime_import,
->> -	.gem_prime_get_sg_table	=3D exynos_drm_gem_prime_get_sg_table,
->>  	.gem_prime_import_sg_table	=3D exynos_drm_gem_prime_import_sg_table,=
-
->> -	.gem_prime_vmap		=3D exynos_drm_gem_prime_vmap,
->> -	.gem_prime_vunmap	=3D exynos_drm_gem_prime_vunmap,
->>  	.gem_prime_mmap		=3D exynos_drm_gem_prime_mmap,
->>  	.ioctls			=3D exynos_ioctls,
->>  	.num_ioctls		=3D ARRAY_SIZE(exynos_ioctls),
->> diff --git a/drivers/gpu/drm/exynos/exynos_drm_gem.c b/drivers/gpu/drm=
-/exynos/exynos_drm_gem.c
->> index efa476858db5..69a5cf28b4ae 100644
->> --- a/drivers/gpu/drm/exynos/exynos_drm_gem.c
->> +++ b/drivers/gpu/drm/exynos/exynos_drm_gem.c
->> @@ -129,6 +129,19 @@ void exynos_drm_gem_destroy(struct exynos_drm_gem=
- *exynos_gem)
->>  	kfree(exynos_gem);
->>  }
->> =20
->> +static const struct vm_operations_struct exynos_drm_gem_vm_ops =3D {
->> +	.open =3D drm_gem_vm_open,
->> +	.close =3D drm_gem_vm_close,
->> +};
->=20
-> Hm moving the drm_gem_cma_vm_ops into drm_gem.h or so and maybe calling=
-
-> them drm_gem_simple_ops or so would remove a pile of these. But perhaps=
- a
-> quick follow up series.
-
-Good idea. Several interfaces use the term 'default' in their name, so
-something like drm_gem_default_vm_ops seems appropriate.
-
-BTW is there a reason why we have file operations like
-DEFINE_DRM_GEM_CMA_FOPS() in each module? It seems like this could also
-be provided by the rsp memory-manager library.
-
-Best regards
-Thomas
-
->=20
-> Reviewed-by: Daniel Vetter <daniel.vetter@ffwll.ch>
->=20
->> +
->> +static const struct drm_gem_object_funcs exynos_drm_gem_object_funcs =
-=3D {
->> +	.free =3D exynos_drm_gem_free_object,
->> +	.get_sg_table =3D exynos_drm_gem_prime_get_sg_table,
->> +	.vmap =3D exynos_drm_gem_prime_vmap,
->> +	.vunmap	=3D exynos_drm_gem_prime_vunmap,
->> +	.vm_ops =3D &exynos_drm_gem_vm_ops,
->> +};
->> +
->>  static struct exynos_drm_gem *exynos_drm_gem_init(struct drm_device *=
-dev,
->>  						  unsigned long size)
->>  {
->> @@ -143,6 +156,8 @@ static struct exynos_drm_gem *exynos_drm_gem_init(=
-struct drm_device *dev,
->>  	exynos_gem->size =3D size;
->>  	obj =3D &exynos_gem->base;
->> =20
->> +	obj->funcs =3D &exynos_drm_gem_object_funcs;
->> +
->>  	ret =3D drm_gem_object_init(dev, obj, size);
->>  	if (ret < 0) {
->>  		DRM_DEV_ERROR(dev->dev, "failed to initialize gem object\n");
->> --=20
->> 2.28.0
->>
->=20
-
---=20
-Thomas Zimmermann
-Graphics Driver Developer
-SUSE Software Solutions Germany GmbH
-Maxfeldstr. 5, 90409 N=C3=BCrnberg, Germany
-(HRB 36809, AG N=C3=BCrnberg)
-Gesch=C3=A4ftsf=C3=BChrer: Felix Imend=C3=B6rffer
-
-
---dt3SkYl9e3y1MIK8AYjuI2mtP7GQiTevE--
-
---VLzf65jApKkRavuxi39QvnC87GfNF3zix
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQFIBAEBCAAyFiEEchf7rIzpz2NEoWjlaA3BHVMLeiMFAl9h6qwUHHR6aW1tZXJt
-YW5uQHN1c2UuZGUACgkQaA3BHVMLeiPl9Qf+KR96aoWYf20LvHA3GnV4zrCawiec
-y2yduL2GYhWPOf4GMfY2D+iMsP8w0W7E25g5LPHA+Vqz5D02rDOi3daO0DrNPmW6
-693QU4qPhbQzK7Y+2jWAjMeuNnkrX+LMllUvQ1+QfapihbnvGqu9aNH3BpXfjOgt
-BoqBHPnc6jc6BCC9knI+JDmxfv+mxrkN3TVEWw78TRR8W9HubgJK3Qx5yFPb76jL
-BTd4moKQlMWspChoyM+/682BI3I/vaGbC7dL6ABTxoYc5Ub2PxY3RtaKnNPfCcpq
-dvopHHQ1YJ3wOj988DPHGprg6T0jK2zsR3M9rja76IOs/Y3rh1LWAWk2LA==
-=Gxfw
------END PGP SIGNATURE-----
-
---VLzf65jApKkRavuxi39QvnC87GfNF3zix--
-
---===============1447263385==
+ nirmoy.das@amd.com, p.zabel@pengutronix.de, alexander.deucher@amd.com,
+ Hawking.Zhang@amd.com, freedreno@lists.freedesktop.org,
+ christian.koenig@amd.com, l.stach@pengutronix.de
 Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+Errors-To: nouveau-bounces@lists.freedesktop.org
+Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+On Tue, Sep 15, 2020 at 04:59:40PM +0200, Thomas Zimmermann wrote:
+> GEM object functions deprecate several similar callback interfaces in
+> struct drm_driver. This patch replaces the per-driver callbacks with
+> per-instance callbacks in etnaviv. The only exception is gem_prime_mmap,
+> which is non-trivial to convert.
+> 
+> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+> ---
+>  drivers/gpu/drm/etnaviv/etnaviv_drv.c | 13 -------------
+>  drivers/gpu/drm/etnaviv/etnaviv_drv.h |  1 -
+>  drivers/gpu/drm/etnaviv/etnaviv_gem.c | 19 ++++++++++++++++++-
+>  3 files changed, 18 insertions(+), 15 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/etnaviv/etnaviv_drv.c b/drivers/gpu/drm/etnaviv/etnaviv_drv.c
+> index a9a3afaef9a1..aa270b79e585 100644
+> --- a/drivers/gpu/drm/etnaviv/etnaviv_drv.c
+> +++ b/drivers/gpu/drm/etnaviv/etnaviv_drv.c
+> @@ -468,12 +468,6 @@ static const struct drm_ioctl_desc etnaviv_ioctls[] = {
+>  	ETNA_IOCTL(PM_QUERY_SIG, pm_query_sig, DRM_RENDER_ALLOW),
+>  };
+>  
+> -static const struct vm_operations_struct vm_ops = {
+> -	.fault = etnaviv_gem_fault,
+> -	.open = drm_gem_vm_open,
+> -	.close = drm_gem_vm_close,
+> -};
+> -
+>  static const struct file_operations fops = {
+>  	.owner              = THIS_MODULE,
+>  	.open               = drm_open,
+> @@ -490,16 +484,9 @@ static struct drm_driver etnaviv_drm_driver = {
+>  	.driver_features    = DRIVER_GEM | DRIVER_RENDER,
+>  	.open               = etnaviv_open,
+>  	.postclose           = etnaviv_postclose,
+> -	.gem_free_object_unlocked = etnaviv_gem_free_object,
+> -	.gem_vm_ops         = &vm_ops,
+>  	.prime_handle_to_fd = drm_gem_prime_handle_to_fd,
+>  	.prime_fd_to_handle = drm_gem_prime_fd_to_handle,
+> -	.gem_prime_pin      = etnaviv_gem_prime_pin,
+> -	.gem_prime_unpin    = etnaviv_gem_prime_unpin,
+> -	.gem_prime_get_sg_table = etnaviv_gem_prime_get_sg_table,
+>  	.gem_prime_import_sg_table = etnaviv_gem_prime_import_sg_table,
+> -	.gem_prime_vmap     = etnaviv_gem_prime_vmap,
+> -	.gem_prime_vunmap   = etnaviv_gem_prime_vunmap,
+>  	.gem_prime_mmap     = etnaviv_gem_prime_mmap,
+>  #ifdef CONFIG_DEBUG_FS
+>  	.debugfs_init       = etnaviv_debugfs_init,
+> diff --git a/drivers/gpu/drm/etnaviv/etnaviv_drv.h b/drivers/gpu/drm/etnaviv/etnaviv_drv.h
+> index 4d8dc9236e5f..914f0867ff71 100644
+> --- a/drivers/gpu/drm/etnaviv/etnaviv_drv.h
+> +++ b/drivers/gpu/drm/etnaviv/etnaviv_drv.h
+> @@ -49,7 +49,6 @@ int etnaviv_ioctl_gem_submit(struct drm_device *dev, void *data,
+>  		struct drm_file *file);
+>  
+>  int etnaviv_gem_mmap(struct file *filp, struct vm_area_struct *vma);
+> -vm_fault_t etnaviv_gem_fault(struct vm_fault *vmf);
+>  int etnaviv_gem_mmap_offset(struct drm_gem_object *obj, u64 *offset);
+>  struct sg_table *etnaviv_gem_prime_get_sg_table(struct drm_gem_object *obj);
+>  void *etnaviv_gem_prime_vmap(struct drm_gem_object *obj);
+> diff --git a/drivers/gpu/drm/etnaviv/etnaviv_gem.c b/drivers/gpu/drm/etnaviv/etnaviv_gem.c
+> index ea19f1d27275..312e9d58d5a7 100644
+> --- a/drivers/gpu/drm/etnaviv/etnaviv_gem.c
+> +++ b/drivers/gpu/drm/etnaviv/etnaviv_gem.c
+> @@ -171,7 +171,7 @@ int etnaviv_gem_mmap(struct file *filp, struct vm_area_struct *vma)
+>  	return obj->ops->mmap(obj, vma);
+>  }
+>  
+> -vm_fault_t etnaviv_gem_fault(struct vm_fault *vmf)
+> +static vm_fault_t etnaviv_gem_fault(struct vm_fault *vmf)
+>  {
+>  	struct vm_area_struct *vma = vmf->vma;
+>  	struct drm_gem_object *obj = vma->vm_private_data;
+> @@ -561,6 +561,22 @@ void etnaviv_gem_obj_add(struct drm_device *dev, struct drm_gem_object *obj)
+>  	mutex_unlock(&priv->gem_lock);
+>  }
+>  
+> +static const struct vm_operations_struct vm_ops = {
+> +	.fault = etnaviv_gem_fault,
+> +	.open = drm_gem_vm_open,
+> +	.close = drm_gem_vm_close,
+> +};
+> +
+> +static const struct drm_gem_object_funcs etnaviv_gem_object_funcs = {
+> +	.free = etnaviv_gem_free_object,
+> +	.pin = etnaviv_gem_prime_pin,
+> +	.unpin = etnaviv_gem_prime_unpin,
+> +	.get_sg_table = etnaviv_gem_prime_get_sg_table,
+> +	.vmap = etnaviv_gem_prime_vmap,
+> +	.vunmap = etnaviv_gem_prime_vunmap,
+> +	.vm_ops = &vm_ops,
+> +};
+
+Reviewed-by: Daniel Vetter <daniel.vetter@ffwll.ch>
+
+> +
+>  static int etnaviv_gem_new_impl(struct drm_device *dev, u32 size, u32 flags,
+>  	const struct etnaviv_gem_ops *ops, struct drm_gem_object **obj)
+>  {
+> @@ -595,6 +611,7 @@ static int etnaviv_gem_new_impl(struct drm_device *dev, u32 size, u32 flags,
+>  	INIT_LIST_HEAD(&etnaviv_obj->vram_list);
+>  
+>  	*obj = &etnaviv_obj->base;
+> +	(*obj)->funcs = &etnaviv_gem_object_funcs;
+>  
+>  	return 0;
+>  }
+> -- 
+> 2.28.0
+> 
+
+-- 
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/nouveau
-
---===============1447263385==--
