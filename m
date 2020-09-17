@@ -1,62 +1,48 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 98E0D26E79B
-	for <lists+nouveau@lfdr.de>; Thu, 17 Sep 2020 23:47:06 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5A8FD26E794
+	for <lists+nouveau@lfdr.de>; Thu, 17 Sep 2020 23:46:59 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2EA4F6E3D6;
-	Thu, 17 Sep 2020 21:46:57 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6DB0B6E3AC;
+	Thu, 17 Sep 2020 21:46:53 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wm1-x342.google.com (mail-wm1-x342.google.com
- [IPv6:2a00:1450:4864:20::342])
- by gabe.freedesktop.org (Postfix) with ESMTPS id BDAC06E290;
- Thu, 17 Sep 2020 14:01:59 +0000 (UTC)
-Received: by mail-wm1-x342.google.com with SMTP id a9so2188261wmm.2;
- Thu, 17 Sep 2020 07:01:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to;
- bh=lBUrIOfg3+mq8ad85tbb7EImBFZIDC/tVRBXQ4hE1ik=;
- b=DNZiBZAKqypMSqQJoyD2IPrVpqiI3ikdcnRtqSUtglPbT/8APSdwaP78S9dCceWhaB
- CUFzh+i3SYFxQjgJQYQXA+eAyv74bC7KPueFL/Gfi5sPNtWoyu6oeH0LQkpIWYJSX21y
- rV7VkyxfFYten7MOhzm3Bz7i04GYai5m0PJD8/+pat7mIsmnFKD4UKKCCUMZ01zZFTbO
- PKJYwiwHEuO6KO353OHy/LaLG0eDM48NEvTlWgc4GQY7VXvipXO0S4rEEhbCyvprEr3R
- BIuNCJjy1NTGULEvR1fAoX12DfpViAnvzecyOpIl9S6AtbE1NSwC4GsSGoUx0L019NSL
- oeQQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=lBUrIOfg3+mq8ad85tbb7EImBFZIDC/tVRBXQ4hE1ik=;
- b=NbZFwZV05Gcfe6hLL6STlm/2ehiyQ6RZ9PVThNJ/uIVUFT46NvEA1aEGWhIJ+TOwpH
- NmQVlzkJvRCSwcn4J4QDhWL5hXpH1N50c7H9q56wfKvDG99XYFvsRuX290zRteKRVyHd
- zKfqDpX69CYEJA20V1DyvQgpNDQkBSfayhsmQ/oilPM5E8qxTejwY/+dMmV4U9IVOg4I
- Ohdp1/KhZYB2SdiY+ejP84C7XP87N+6uBrMKlq6EVvyUu8C9ZdqLac1Sp++9wm2WBp+v
- /9oujqCU6za1QL/zAruyTvPDJi30BltY3wtwgo19BNh7MTKNt7WVaHjC+6+Ovb8MRqqb
- Gfeg==
-X-Gm-Message-State: AOAM533AXcNXQW7ApH+6IAjksQgjdtk09Gipq/dgQ8OQ7Ii8X6T29Bbj
- Sn52e46T7ouiCjlCKAsNMaQ=
-X-Google-Smtp-Source: ABdhPJwVFsi9VyC5N2zDyjQYYSf7iQdzkgcW/plJduCk7Y3eMkitDq4/6m+bqkSKVjF1esIZWne4iA==
-X-Received: by 2002:a1c:ba0b:: with SMTP id k11mr10119624wmf.20.1600351318328; 
- Thu, 17 Sep 2020 07:01:58 -0700 (PDT)
-Received: from smtp.gmail.com (a95-92-181-29.cpe.netcabo.pt. [95.92.181.29])
- by smtp.gmail.com with ESMTPSA id z14sm37316830wrh.14.2020.09.17.07.01.54
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 17 Sep 2020 07:01:57 -0700 (PDT)
-Date: Thu, 17 Sep 2020 11:01:48 -0300
-From: Melissa Wen <melissa.srw@gmail.com>
-To: Thomas Zimmermann <tzimmermann@suse.de>
-Message-ID: <20200917140148.orpdihcctrr5upxg@smtp.gmail.com>
-References: <20200915145958.19993-1-tzimmermann@suse.de>
- <20200915145958.19993-17-tzimmermann@suse.de>
+Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4519A6EB8F;
+ Thu, 17 Sep 2020 19:40:17 +0000 (UTC)
+IronPort-SDR: EmfclliLEhn7sORiwDp6VeINqPsIpKdDQTEzGSQQ6FzkRwFq+6+mjXACQzs1HYF5bV8zSQa2I+
+ oDXYjXtpcugQ==
+X-IronPort-AV: E=McAfee;i="6000,8403,9747"; a="147468420"
+X-IronPort-AV: E=Sophos;i="5.77,271,1596524400"; d="scan'208";a="147468420"
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from orsmga005.jf.intel.com ([10.7.209.41])
+ by orsmga101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 17 Sep 2020 12:40:16 -0700
+IronPort-SDR: OJtaUmUU2VRk9KtKnU2JOdZ0Wx6lNOu+0+CFBjlBeB4odozE5Gxp9wTpGmmaUJi2k6Nfsj2iiR
+ 1ryN5FpIrCvQ==
+X-IronPort-AV: E=Sophos;i="5.77,271,1596524400"; d="scan'208";a="483882946"
+Received: from jekeller-mobl1.amr.corp.intel.com (HELO [10.212.151.155])
+ ([10.212.151.155])
+ by orsmga005-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 17 Sep 2020 12:40:13 -0700
+To: Keith Busch <kbusch@kernel.org>, Joe Perches <joe@perches.com>
+References: <e6387578c75736d61b2fe70d9783d91329a97eb4.camel@perches.com>
+ <20200909205558.GA3384631@dhcp-10-100-145-180.wdl.wdc.com>
+From: Jacob Keller <jacob.e.keller@intel.com>
+Organization: Intel Corporation
+Message-ID: <321069c8-a4c1-56ff-49fb-4c2bce1e6352@intel.com>
+Date: Thu, 17 Sep 2020 12:40:13 -0700
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.2.2
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20200915145958.19993-17-tzimmermann@suse.de>
+In-Reply-To: <20200909205558.GA3384631@dhcp-10-100-145-180.wdl.wdc.com>
+Content-Language: en-US
 X-Mailman-Approved-At: Thu, 17 Sep 2020 21:46:51 +0000
-Subject: Re: [Nouveau] [PATCH v2 16/21] drm/vgem: Introduce GEM object
- functions
+Subject: Re: [Nouveau] [trivial PATCH] treewide: Convert switch/case
+ fallthrough; to break; 
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,127 +54,58 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: hamohammed.sa@gmail.com, heiko@sntech.de, andrey.grodzovsky@amd.com,
- airlied@linux.ie, nouveau@lists.freedesktop.org,
- joonas.lahtinen@linux.intel.com, dri-devel@lists.freedesktop.org,
- michal.simek@xilinx.com, eric@anholt.net, thierry.reding@gmail.com,
- robdclark@gmail.com, krzk@kernel.org, sam@ravnborg.org,
- sumit.semwal@linaro.org, emil.velikov@collabora.com,
- linux-samsung-soc@vger.kernel.org, jy0922.shim@samsung.com,
- oleksandr_andrushchenko@epam.com, tomi.valkeinen@ti.com,
- linux-tegra@vger.kernel.org, linux@armlinux.org.uk,
- patrik.r.jakobsson@gmail.com, linux-rockchip@lists.infradead.org,
- kgene@kernel.org, bskeggs@redhat.com, xen-devel@lists.xenproject.org,
- miaoqinglang@huawei.com, intel-gfx@lists.freedesktop.org,
- matthew.auld@intel.com, chunkuang.hu@kernel.org, andi.shyti@intel.com,
- daniel@ffwll.ch, linux-arm-msm@vger.kernel.org, marek.olsak@amd.com,
- tianci.yin@amd.com, maarten.lankhorst@linux.intel.com,
- etnaviv@lists.freedesktop.org, jani.nikula@linux.intel.com,
- inki.dae@samsung.com, hdegoede@redhat.com, christian.gmeiner@gmail.com,
- linux-mediatek@lists.infradead.org, mripard@kernel.org, rodrigo.vivi@intel.com,
- matthias.bgg@gmail.com, evan.quan@amd.com, sean@poorly.run,
- linux-arm-kernel@lists.infradead.org, tvrtko.ursulin@linux.intel.com,
- amd-gfx@lists.freedesktop.org, laurent.pinchart@ideasonboard.com,
- hyun.kwon@xilinx.com, rodrigosiqueiramelo@gmail.com, aaron.liu@amd.com,
- Felix.Kuehling@amd.com, xinhui.pan@amd.com, sw0312.kim@samsung.com,
- hjc@rock-chips.com, chris@chris-wilson.co.uk, kyungmin.park@samsung.com,
- nirmoy.das@amd.com, p.zabel@pengutronix.de, alexander.deucher@amd.com,
- Hawking.Zhang@amd.com, freedreno@lists.freedesktop.org,
- christian.koenig@amd.com, l.stach@pengutronix.de
+Cc: linux-wireless@vger.kernel.org, linux-fbdev@vger.kernel.org,
+ oss-drivers@netronome.com, nouveau@lists.freedesktop.org,
+ alsa-devel <alsa-devel@alsa-project.org>, dri-devel@lists.freedesktop.org,
+ linux-mips@vger.kernel.org, linux-ide@vger.kernel.org, dm-devel@redhat.com,
+ linux-mtd@lists.infradead.org, linux-i2c@vger.kernel.org,
+ sparclinux@vger.kernel.org, kvmarm@lists.cs.columbia.edu,
+ linux-rtc@vger.kernel.org, linux-s390@vger.kernel.org,
+ linux-scsi@vger.kernel.org, dccp@vger.kernel.org, linux-rdma@vger.kernel.org,
+ linux-atm-general@lists.sourceforge.net, linux-afs@lists.infradead.org,
+ coreteam@netfilter.org, intel-wired-lan@lists.osuosl.org,
+ linux-serial@vger.kernel.org, linux-input@vger.kernel.org,
+ linux-mmc@vger.kernel.org, Kees Cook <kees.cook@canonical.com>,
+ linux-media@vger.kernel.org, linux-pm@vger.kernel.org,
+ intel-gfx@lists.freedesktop.org, linux-sctp@vger.kernel.org,
+ linux-mediatek@lists.infradead.org, linux-nvme@lists.infradead.org,
+ storagedev@microchip.com, ceph-devel@vger.kernel.org,
+ linux-arm-kernel@lists.infradead.org, linux-nfs@vger.kernel.org,
+ Jiri Kosina <trivial@kernel.org>, linux-parisc@vger.kernel.org,
+ netdev@vger.kernel.org, linux-usb@vger.kernel.org,
+ Nick Desaulniers <ndesaulniers@google.com>,
+ LKML <linux-kernel@vger.kernel.org>, iommu@lists.linux-foundation.org,
+ netfilter-devel@vger.kernel.org, linux-crypto@vger.kernel.org,
+ bpf@vger.kernel.org, linuxppc-dev@lists.ozlabs.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi Thomas,
 
-On 09/15, Thomas Zimmermann wrote:
-> GEM object functions deprecate several similar callback interfaces in
-> struct drm_driver. This patch replaces the per-driver callbacks with
-> per-instance callbacks in vgem. The only exception is gem_prime_mmap,
-> which is non-trivial to convert.
+
+On 9/9/2020 1:55 PM, Keith Busch wrote:
+> On Wed, Sep 09, 2020 at 01:06:39PM -0700, Joe Perches wrote:
+>> diff --git a/crypto/tcrypt.c b/crypto/tcrypt.c
+>> index eea0f453cfb6..8aac5bc60f4c 100644
+>> --- a/crypto/tcrypt.c
+>> +++ b/crypto/tcrypt.c
+>> @@ -2464,7 +2464,7 @@ static int do_test(const char *alg, u32 type, u32 mask, int m, u32 num_mb)
+>>  		test_hash_speed("streebog512", sec,
+>>  				generic_hash_speed_template);
+>>  		if (mode > 300 && mode < 400) break;
+>> -		fallthrough;
+>> +		break;
+>>  	case 399:
+>>  		break;
 > 
-> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-
-Thanks here again.
-
-This drv file is little tumultuous to me.
-I mean, I took a while to sort functions in my head.
-
-However, finally, I got it, and the change looks good.
-
-Reviewed-by: Melissa Wen <melissa.srw@gmail.com>
-
-> ---
->  drivers/gpu/drm/vgem/vgem_drv.c | 21 ++++++++++++++-------
->  1 file changed, 14 insertions(+), 7 deletions(-)
+> Just imho, this change makes the preceding 'if' look even more
+> pointless. Maybe the fallthrough was a deliberate choice? Not that my
+> opinion matters here as I don't know this module, but it looked a bit
+> odd to me.
 > 
-> diff --git a/drivers/gpu/drm/vgem/vgem_drv.c b/drivers/gpu/drm/vgem/vgem_drv.c
-> index cb884c890065..fa54a6d1403d 100644
-> --- a/drivers/gpu/drm/vgem/vgem_drv.c
-> +++ b/drivers/gpu/drm/vgem/vgem_drv.c
-> @@ -50,6 +50,8 @@
->  #define DRIVER_MAJOR	1
->  #define DRIVER_MINOR	0
->  
-> +static const struct drm_gem_object_funcs vgem_gem_object_funcs;
-> +
->  static struct vgem_device {
->  	struct drm_device drm;
->  	struct platform_device *platform;
-> @@ -167,6 +169,8 @@ static struct drm_vgem_gem_object *__vgem_gem_create(struct drm_device *dev,
->  	if (!obj)
->  		return ERR_PTR(-ENOMEM);
->  
-> +	obj->base.funcs = &vgem_gem_object_funcs;
-> +
->  	ret = drm_gem_object_init(dev, &obj->base, roundup(size, PAGE_SIZE));
->  	if (ret) {
->  		kfree(obj);
-> @@ -401,12 +405,20 @@ static int vgem_prime_mmap(struct drm_gem_object *obj,
->  	return 0;
->  }
->  
-> +static const struct drm_gem_object_funcs vgem_gem_object_funcs = {
-> +	.free = vgem_gem_free_object,
-> +	.pin = vgem_prime_pin,
-> +	.unpin = vgem_prime_unpin,
-> +	.get_sg_table = vgem_prime_get_sg_table,
-> +	.vmap = vgem_prime_vmap,
-> +	.vunmap = vgem_prime_vunmap,
-> +	.vm_ops = &vgem_gem_vm_ops,
-> +};
-> +
->  static struct drm_driver vgem_driver = {
->  	.driver_features		= DRIVER_GEM | DRIVER_RENDER,
->  	.open				= vgem_open,
->  	.postclose			= vgem_postclose,
-> -	.gem_free_object_unlocked	= vgem_gem_free_object,
-> -	.gem_vm_ops			= &vgem_gem_vm_ops,
->  	.ioctls				= vgem_ioctls,
->  	.num_ioctls 			= ARRAY_SIZE(vgem_ioctls),
->  	.fops				= &vgem_driver_fops,
-> @@ -415,13 +427,8 @@ static struct drm_driver vgem_driver = {
->  
->  	.prime_handle_to_fd = drm_gem_prime_handle_to_fd,
->  	.prime_fd_to_handle = drm_gem_prime_fd_to_handle,
-> -	.gem_prime_pin = vgem_prime_pin,
-> -	.gem_prime_unpin = vgem_prime_unpin,
->  	.gem_prime_import = vgem_prime_import,
->  	.gem_prime_import_sg_table = vgem_prime_import_sg_table,
-> -	.gem_prime_get_sg_table = vgem_prime_get_sg_table,
-> -	.gem_prime_vmap = vgem_prime_vmap,
-> -	.gem_prime_vunmap = vgem_prime_vunmap,
->  	.gem_prime_mmap = vgem_prime_mmap,
->  
->  	.name	= DRIVER_NAME,
-> -- 
-> 2.28.0
-> 
-> _______________________________________________
-> dri-devel mailing list
-> dri-devel@lists.freedesktop.org
-> https://lists.freedesktop.org/mailman/listinfo/dri-devel
+
+Yea this does look very odd..
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
