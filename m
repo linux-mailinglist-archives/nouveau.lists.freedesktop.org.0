@@ -1,59 +1,51 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id CA67B26CFFF
-	for <lists+nouveau@lfdr.de>; Thu, 17 Sep 2020 02:35:54 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id D822126DC9C
+	for <lists+nouveau@lfdr.de>; Thu, 17 Sep 2020 15:15:51 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4779D6EB6D;
-	Thu, 17 Sep 2020 00:35:53 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5371E6EC4A;
+	Thu, 17 Sep 2020 13:15:44 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from hqnvemgate26.nvidia.com (hqnvemgate26.nvidia.com
- [216.228.121.65])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A8FC76EB6D
- for <nouveau@lists.freedesktop.org>; Thu, 17 Sep 2020 00:35:52 +0000 (UTC)
-Received: from hqpgpgate102.nvidia.com (Not Verified[216.228.121.13]) by
- hqnvemgate26.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
- id <B5f62af5b0000>; Wed, 16 Sep 2020 17:35:39 -0700
-Received: from hqmail.nvidia.com ([172.20.161.6])
- by hqpgpgate102.nvidia.com (PGP Universal service);
- Wed, 16 Sep 2020 17:35:52 -0700
-X-PGP-Universal: processed;
- by hqpgpgate102.nvidia.com on Wed, 16 Sep 2020 17:35:52 -0700
-Received: from rcampbell-dev.nvidia.com (172.20.13.39) by HQMAIL107.nvidia.com
- (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3;
- Thu, 17 Sep 2020 00:35:49 +0000
-To: Christoph Hellwig <hch@lst.de>, Dan Williams <dan.j.williams@intel.com>
-References: <20200914224509.17699-1-rcampbell@nvidia.com>
- <CAPcyv4gVJuWsOtejrKvWgByq=c1niwQOZ0HHYaSo4h6vc-Xw+Q@mail.gmail.com>
- <20200916061054.GC7321@lst.de>
-X-Nvconfidentiality: public
-From: Ralph Campbell <rcampbell@nvidia.com>
-Message-ID: <4842558d-9626-0452-6398-c2fe39a9a31c@nvidia.com>
-Date: Wed, 16 Sep 2020 17:35:48 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.2.2
+Received: from mail-oi1-x244.google.com (mail-oi1-x244.google.com
+ [IPv6:2607:f8b0:4864:20::244])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 510676EC4A
+ for <nouveau@lists.freedesktop.org>; Thu, 17 Sep 2020 13:15:43 +0000 (UTC)
+Received: by mail-oi1-x244.google.com with SMTP id i17so2380840oig.10
+ for <nouveau@lists.freedesktop.org>; Thu, 17 Sep 2020 06:15:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=CREpsFwnlRokcG6H35zF+6z20U4xUwHGwMPLudH5dfg=;
+ b=bI0SHrfGTy54mKFtgwyUlqSlka0zevPpnUHfSMG3R2rQZyfvJsUtmN3IXigONpsweu
+ wm7O/BkIDVUZMrP6Vxji/SUBwml2V7iaz/SC8phN17s1fgTr3u2/0RHnne45eQ/r6GfD
+ gE63yEub7xahJJ82uPXAKEygc5lR89OiQG/io=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=CREpsFwnlRokcG6H35zF+6z20U4xUwHGwMPLudH5dfg=;
+ b=o79mxnt9S2E0Vskru27RwJCl+7h1ESI/Z/rWKopEe4iPejFexBd/YfsinDlopK/wYC
+ LVe2hYJrUvwEGaXLgPKXGafBfAGDwAetrlQVfoIJJQIwBebfaaVdqyYYm1adOLox6rum
+ aSRw8arLFuYLA1yKu651ZPchGQulpT+vcw5AB/gjb2u1a5AD10QWto1LCAUFf0tv6BNO
+ NMyslp74pvnVWb+pbbT3f+pr1Eewu1ZvNFOQ0sYvd3xVbaPvrIKX1Snio56rpXz1CkXx
+ iVKu3r9uFrR85/TYX9yQgve61SVt7LlLcopjWMMFnZMtdmItYz0ImZbhZJgFj2kSEt/s
+ 0NOw==
+X-Gm-Message-State: AOAM530X3s5cFNN139xwmNWW+KeaX3mMcZSLJtp0/ao0VEx8ctUax+vJ
+ d9gctKOqFJp5YNM+6neUD1Q82yAGMV/fkZUOXEXtqg==
+X-Google-Smtp-Source: ABdhPJwh/xpv4EaHS/C5Vakvo23Yj6nV8rJSwmXwV09kTIZfYvaDpiRM2cphKiJ6UXJ9r+XrmfIcegnJdbnfWcExEQg=
+X-Received: by 2002:aca:5106:: with SMTP id f6mr5888580oib.101.1600348542650; 
+ Thu, 17 Sep 2020 06:15:42 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20200916061054.GC7321@lst.de>
-X-Originating-IP: [172.20.13.39]
-X-ClientProxiedBy: HQMAIL107.nvidia.com (172.20.187.13) To
- HQMAIL107.nvidia.com (172.20.187.13)
-Content-Language: en-US
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
- t=1600302939; bh=8LDzccoActo8nWBlttLgmhuoOW1Z2c2MD7demjEypqQ=;
- h=X-PGP-Universal:Subject:To:CC:References:X-Nvconfidentiality:From:
- Message-ID:Date:User-Agent:MIME-Version:In-Reply-To:
- X-Originating-IP:X-ClientProxiedBy:Content-Type:Content-Language:
- Content-Transfer-Encoding;
- b=Q/uj+ryQtb/eBmR3IpGzH7gC57BnghlEPBnv1cfvPBKIfxMtly6SFT3dGaW7ig7v7
- IqeBEul8UUEhPQWsnDmUGbW5BOBMEwHoFyICyTqId2jjJN+DWzVTtT8r7U9JWuI3ty
- F/SQQ5yVqGc/dogmTjyTpLXc03CLbAeKQ09g6JU8uxdWledt63qLshfHBS1d0Ml6WU
- K5/fiDprqbnotHdK0rsU8Gb+3Vl7Mz8C0krvlL4Ho9I3ktE1WwCw75QLUof3DXbClB
- KZXQ7DGc/wOxKQ62l7DYgJrhRS9BOWyBN5AG8Xic+kGTxp4DZvSYeHVsLZxKc+yfw3
- AoiTmL0CKD69g==
-Subject: Re: [Nouveau] [PATCH] mm: remove extra ZONE_DEVICE struct page
- refcount
+References: <20200802181849.1586281-1-daniel.vetter@ffwll.ch>
+ <579702ca-4b4e-0b05-1b93-25b99554d464@linux.intel.com>
+In-Reply-To: <579702ca-4b4e-0b05-1b93-25b99554d464@linux.intel.com>
+From: Daniel Vetter <daniel.vetter@ffwll.ch>
+Date: Thu, 17 Sep 2020 15:15:31 +0200
+Message-ID: <CAKMK7uHbdcLMJONxR5OZXBLtm0WVxT117mBD72RDW5MRQ=ky4g@mail.gmail.com>
+To: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>
+Subject: Re: [Nouveau] [PATCH] drm/nouveau: Drop mutex_lock_nested for atomic
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -65,32 +57,84 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Yang Shi <yang.shi@linux.alibaba.com>, Zi Yan <ziy@nvidia.com>,
- nouveau@lists.freedesktop.org, Alistair Popple <apopple@nvidia.com>,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>, Matthew
- Wilcox <willy@infradead.org>, Bharata B Rao <bharata@linux.ibm.com>,
- Paul Mackerras <paulus@ozlabs.org>, Linux MM <linux-mm@kvack.org>,
- kvm-ppc@vger.kernel.org, Jason
- Gunthorpe <jgg@nvidia.com>, Andrew Morton <akpm@linux-foundation.org>,
- Ira Weiny <ira.weiny@intel.com>,
- "Kirill A . Shutemov" <kirill.shutemov@linux.intel.com>,
- Ben Skeggs <bskeggs@redhat.com>
+Cc: Maarten Lankhorst <m.b.lankhorst@gmail.com>,
+ Nouveau Dev <nouveau@lists.freedesktop.org>,
+ DRI Development <dri-devel@lists.freedesktop.org>,
+ Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel.vetter@intel.com>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+Ben, did you have a chance to look at this?
+-Daniel
 
-On 9/15/20 11:10 PM, Christoph Hellwig wrote:
-> On Mon, Sep 14, 2020 at 04:10:38PM -0700, Dan Williams wrote:
->> You also need to fix up ext4_break_layouts() and
->> xfs_break_dax_layouts() to expect ->_refcount is 0 instead of 1. This
->> also needs some fstests exposure.
-> 
-> While we're at it, can we add a wait_fsdax_unref helper macro that hides
-> the _refcount access from the file systems?
+On Mon, Aug 3, 2020 at 1:22 PM Maarten Lankhorst
+<maarten.lankhorst@linux.intel.com> wrote:
+>
+> Op 02-08-2020 om 20:18 schreef Daniel Vetter:
+> > Purely conjecture, but I think the original locking inversion with the
+> > legacy page flip code between flipping and ttm's bo move function
+> > shoudn't exist anymore with atomic: With atomic the bo pinning and
+> > actual modeset commit is completely separated in the code patsh.
+> >
+> > This annotation was originally added in
+> >
+> > commit 060810d7abaabcab282e062c595871d661561400
+> > Author: Ben Skeggs <bskeggs@redhat.com>
+> > Date:   Mon Jul 8 14:15:51 2013 +1000
+> >
+> >     drm/nouveau: fix locking issues in page flipping paths
+> >
+> > due to
+> >
+> > commit b580c9e2b7ba5030a795aa2fb73b796523d65a78
+> > Author: Maarten Lankhorst <m.b.lankhorst@gmail.com>
+> > Date:   Thu Jun 27 13:48:18 2013 +0200
+> >
+> >     drm/nouveau: make flipping lockdep safe
+> >
+> > Signed-off-by: Daniel Vetter <daniel.vetter@intel.com>
+> > Cc: Maarten Lankhorst <m.b.lankhorst@gmail.com>
+> > Cc: Ben Skeggs <bskeggs@redhat.com>
+> > Cc: Dave Airlie <airlied@gmail.com>
+> > Cc: nouveau@lists.freedesktop.org
+> > ---
+> > I might be totally wrong, so this definitely needs testing :-)
+> >
+> > Cheers, Daniel
+> > ---
+> >  drivers/gpu/drm/nouveau/nouveau_bo.c | 6 +++++-
+> >  1 file changed, 5 insertions(+), 1 deletion(-)
+> >
+> > diff --git a/drivers/gpu/drm/nouveau/nouveau_bo.c b/drivers/gpu/drm/nouveau/nouveau_bo.c
+> > index 7806278dce57..a7b2a9bb0ffe 100644
+> > --- a/drivers/gpu/drm/nouveau/nouveau_bo.c
+> > +++ b/drivers/gpu/drm/nouveau/nouveau_bo.c
+> > @@ -776,7 +776,11 @@ nouveau_bo_move_m2mf(struct ttm_buffer_object *bo, int evict, bool intr,
+> >                       return ret;
+> >       }
+> >
+> > -     mutex_lock_nested(&cli->mutex, SINGLE_DEPTH_NESTING);
+> > +     if (drm_drv_uses_atomic_modeset(drm->dev))
+> > +             mutex_lock(&cli->mutex);
+> > +     else
+> > +             mutex_lock_nested(&cli->mutex, SINGLE_DEPTH_NESTING);
+> > +
+> >       ret = nouveau_fence_sync(nouveau_bo(bo), chan, true, intr);
+> >       if (ret == 0) {
+> >               ret = drm->ttm.move(chan, bo, &bo->mem, new_reg);
+>
+> Well if you're certain it works now. :)
+>
+> Reviewed-by: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>
+>
 
-Sure. I'll add a separate patch for it in v2.
+
+-- 
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
