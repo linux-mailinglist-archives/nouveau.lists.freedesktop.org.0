@@ -2,34 +2,36 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id A9B75272F82
-	for <lists+nouveau@lfdr.de>; Mon, 21 Sep 2020 18:57:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5CBBB272F80
+	for <lists+nouveau@lfdr.de>; Mon, 21 Sep 2020 18:57:50 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8BA3A6E4F4;
-	Mon, 21 Sep 2020 16:57:49 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 789376E4F3;
+	Mon, 21 Sep 2020 16:57:48 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from huawei.com (szxga04-in.huawei.com [45.249.212.190])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8C8B16EDBC;
- Sat, 19 Sep 2020 01:35:43 +0000 (UTC)
-Received: from DGGEMS414-HUB.china.huawei.com (unknown [172.30.72.58])
- by Forcepoint Email with ESMTP id 96987FFA1B1B80233A53;
- Sat, 19 Sep 2020 09:35:41 +0800 (CST)
-Received: from ubuntu.network (10.175.138.68) by
- DGGEMS414-HUB.china.huawei.com (10.3.19.214) with Microsoft SMTP Server id
- 14.3.487.0; Sat, 19 Sep 2020 09:35:33 +0800
-From: Zheng Yongjun <zhengyongjun3@huawei.com>
-To: <airlied@linux.ie>, <daniel@ffwll.ch>, <dri-devel@lists.freedesktop.org>, 
- <nouveau@lists.freedesktop.org>, <linux-kernel@vger.kernel.org>
-Date: Sat, 19 Sep 2020 09:36:27 +0800
-Message-ID: <20200919013627.22682-1-zhengyongjun3@huawei.com>
-X-Mailer: git-send-email 2.17.1
+Received: from verein.lst.de (verein.lst.de [213.95.11.211])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8DB3389C9A
+ for <nouveau@lists.freedesktop.org>; Mon, 21 Sep 2020 06:36:33 +0000 (UTC)
+Received: by verein.lst.de (Postfix, from userid 2407)
+ id B25CE68AFE; Mon, 21 Sep 2020 08:36:28 +0200 (CEST)
+Date: Mon, 21 Sep 2020 08:36:28 +0200
+From: Christoph Hellwig <hch@lst.de>
+To: Mauro Carvalho Chehab <mchehab@kernel.org>,
+ Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
+ "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
+ Joonyoung Shim <jy0922.shim@samsung.com>,
+ Seung-Woo Kim <sw0312.kim@samsung.com>, Ben Skeggs <bskeggs@redhat.com>,
+ Marek Szyprowski <m.szyprowski@samsung.com>,
+ Tomasz Figa <tfiga@chromium.org>,
+ Matt Porter <mporter@kernel.crashing.org>, iommu@lists.linux-foundation.org
+Message-ID: <20200921063628.GB18349@lst.de>
+References: <20200915155122.1768241-1-hch@lst.de>
 MIME-Version: 1.0
-X-Originating-IP: [10.175.138.68]
-X-CFilter-Loop: Reflected
+Content-Disposition: inline
+In-Reply-To: <20200915155122.1768241-1-hch@lst.de>
+User-Agent: Mutt/1.5.17 (2007-11-01)
 X-Mailman-Approved-At: Mon, 21 Sep 2020 16:57:47 +0000
-Subject: [Nouveau] [PATCH -next] gpu: nouveau: Remove set but not used
- variable
+Subject: Re: [Nouveau] a saner API for allocating DMA addressable pages v3
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -41,65 +43,85 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Zheng Yongjun <zhengyongjun3@huawei.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: alsa-devel@alsa-project.org, linux-samsung-soc@vger.kernel.org,
+ linux-scsi@vger.kernel.org, linux-parisc@vger.kernel.org,
+ linux-doc@vger.kernel.org, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, linux-mips@vger.kernel.org, linux-mm@kvack.org,
+ Stefan Richter <stefanr@s5r6.in-berlin.de>, netdev@vger.kernel.org,
+ linux1394-devel@lists.sourceforge.net, linux-arm-kernel@lists.infradead.org,
+ linux-media@vger.kernel.org
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Rml4ZXMgZ2NjICctV3VudXNlZC1idXQtc2V0LXZhcmlhYmxlJyB3YXJuaW5nOgoKZHJpdmVycy9n
-cHUvZHJtL25vdXZlYXUvZGlzcG52NTAvZGlzcC5jOiBJbiBmdW5jdGlvbiBudjUwX21zdG1fY2xl
-YW51cDoKZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvZGlzcG52NTAvZGlzcC5jOjEzMDM6Njogd2Fy
-bmluZzogdmFyaWFibGUg4oCYcmV04oCZIHNldCBidXQgbm90IHVzZWQgWy1XdW51c2VkLWJ1dC1z
-ZXQtdmFyaWFibGVdCgpkcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9kaXNwbnY1MC9kaXNwLmM6IElu
-IGZ1bmN0aW9uIG52NTBfbXN0bV9wcmVwYXJlOgpkcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9kaXNw
-bnY1MC9kaXNwLmM6MTMyNzo2OiB3YXJuaW5nOiB2YXJpYWJsZSDigJhyZXTigJkgc2V0IGJ1dCBu
-b3QgdXNlZCBbLVd1bnVzZWQtYnV0LXNldC12YXJpYWJsZV0KCmRyaXZlcnMvZ3B1L2RybS9ub3V2
-ZWF1L25vdXZlYXVfc3ZtLmM6IEluIGZ1bmN0aW9uIG5vdXZlYXVfcGZuc19tYXA6CmRyaXZlcnMv
-Z3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfc3ZtLmM6ODE4OjY6IHdhcm5pbmc6IHZhcmlhYmxlIOKA
-mHJldOKAmSBzZXQgYnV0IG5vdCB1c2VkIFstV3VudXNlZC1idXQtc2V0LXZhcmlhYmxlXQoKdGhl
-c2UgdmFyaWFibGUgaXMgbmV2ZXIgdXNlZCwgc28gcmVtb3ZlIGl0LgoKU2lnbmVkLW9mZi1ieTog
-WmhlbmcgWW9uZ2p1biA8emhlbmd5b25nanVuM0BodWF3ZWkuY29tPgotLS0KIGRyaXZlcnMvZ3B1
-L2RybS9ub3V2ZWF1L2Rpc3BudjUwL2Rpc3AuYyB8IDkgKysrLS0tLS0tCiBkcml2ZXJzL2dwdS9k
-cm0vbm91dmVhdS9ub3V2ZWF1X3N2bS5jICAgfCAzICstLQogMiBmaWxlcyBjaGFuZ2VkLCA0IGlu
-c2VydGlvbnMoKyksIDggZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJt
-L25vdXZlYXUvZGlzcG52NTAvZGlzcC5jIGIvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvZGlzcG52
-NTAvZGlzcC5jCmluZGV4IDFlZDI0MjA3MDAwMS4uN2NiNTYxOGU0NTkyIDEwMDY0NAotLS0gYS9k
-cml2ZXJzL2dwdS9kcm0vbm91dmVhdS9kaXNwbnY1MC9kaXNwLmMKKysrIGIvZHJpdmVycy9ncHUv
-ZHJtL25vdXZlYXUvZGlzcG52NTAvZGlzcC5jCkBAIC0xMzA2LDEyICsxMzA2LDEwIEBAIG52NTBf
-bXN0bV9jbGVhbnVwKHN0cnVjdCBudjUwX21zdG0gKm1zdG0pCiB7CiAJc3RydWN0IG5vdXZlYXVf
-ZHJtICpkcm0gPSBub3V2ZWF1X2RybShtc3RtLT5vdXRwLT5iYXNlLmJhc2UuZGV2KTsKIAlzdHJ1
-Y3QgZHJtX2VuY29kZXIgKmVuY29kZXI7Ci0JaW50IHJldDsKIAogCU5WX0FUT01JQyhkcm0sICIl
-czogbXN0bSBjbGVhbnVwXG4iLCBtc3RtLT5vdXRwLT5iYXNlLmJhc2UubmFtZSk7Ci0JcmV0ID0g
-ZHJtX2RwX2NoZWNrX2FjdF9zdGF0dXMoJm1zdG0tPm1ncik7Ci0KLQlyZXQgPSBkcm1fZHBfdXBk
-YXRlX3BheWxvYWRfcGFydDIoJm1zdG0tPm1ncik7CisJZHJtX2RwX2NoZWNrX2FjdF9zdGF0dXMo
-Jm1zdG0tPm1ncik7CisJZHJtX2RwX3VwZGF0ZV9wYXlsb2FkX3BhcnQyKCZtc3RtLT5tZ3IpOwog
-CiAJZHJtX2Zvcl9lYWNoX2VuY29kZXIoZW5jb2RlciwgbXN0bS0+b3V0cC0+YmFzZS5iYXNlLmRl
-dikgewogCQlpZiAoZW5jb2Rlci0+ZW5jb2Rlcl90eXBlID09IERSTV9NT0RFX0VOQ09ERVJfRFBN
-U1QpIHsKQEAgLTEzMzAsMTAgKzEzMjgsOSBAQCBudjUwX21zdG1fcHJlcGFyZShzdHJ1Y3QgbnY1
-MF9tc3RtICptc3RtKQogewogCXN0cnVjdCBub3V2ZWF1X2RybSAqZHJtID0gbm91dmVhdV9kcm0o
-bXN0bS0+b3V0cC0+YmFzZS5iYXNlLmRldik7CiAJc3RydWN0IGRybV9lbmNvZGVyICplbmNvZGVy
-OwotCWludCByZXQ7CiAKIAlOVl9BVE9NSUMoZHJtLCAiJXM6IG1zdG0gcHJlcGFyZVxuIiwgbXN0
-bS0+b3V0cC0+YmFzZS5iYXNlLm5hbWUpOwotCXJldCA9IGRybV9kcF91cGRhdGVfcGF5bG9hZF9w
-YXJ0MSgmbXN0bS0+bWdyKTsKKwlkcm1fZHBfdXBkYXRlX3BheWxvYWRfcGFydDEoJm1zdG0tPm1n
-cik7CiAKIAlkcm1fZm9yX2VhY2hfZW5jb2RlcihlbmNvZGVyLCBtc3RtLT5vdXRwLT5iYXNlLmJh
-c2UuZGV2KSB7CiAJCWlmIChlbmNvZGVyLT5lbmNvZGVyX3R5cGUgPT0gRFJNX01PREVfRU5DT0RF
-Ul9EUE1TVCkgewpkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9z
-dm0uYyBiL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfc3ZtLmMKaW5kZXggMmRmMWMw
-NDYwNTU5Li4wMTU4M2U5OTU0YTIgMTAwNjQ0Ci0tLSBhL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1
-L25vdXZlYXVfc3ZtLmMKKysrIGIvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9zdm0u
-YwpAQCAtODE1LDcgKzgxNSw2IEBAIG5vdXZlYXVfcGZuc19tYXAoc3RydWN0IG5vdXZlYXVfc3Zt
-bSAqc3ZtbSwgc3RydWN0IG1tX3N0cnVjdCAqbW0sCiAJCSB1bnNpZ25lZCBsb25nIGFkZHIsIHU2
-NCAqcGZucywgdW5zaWduZWQgbG9uZyBucGFnZXMpCiB7CiAJc3RydWN0IG5vdXZlYXVfcGZubWFw
-X2FyZ3MgKmFyZ3MgPSBub3V2ZWF1X3BmbnNfdG9fYXJncyhwZm5zKTsKLQlpbnQgcmV0OwogCiAJ
-YXJncy0+cC5hZGRyID0gYWRkcjsKIAlhcmdzLT5wLnNpemUgPSBucGFnZXMgPDwgUEFHRV9TSElG
-VDsKQEAgLTgyMyw3ICs4MjIsNyBAQCBub3V2ZWF1X3BmbnNfbWFwKHN0cnVjdCBub3V2ZWF1X3N2
-bW0gKnN2bW0sIHN0cnVjdCBtbV9zdHJ1Y3QgKm1tLAogCW11dGV4X2xvY2soJnN2bW0tPm11dGV4
-KTsKIAogCXN2bW0tPnZtbS0+dm1tLm9iamVjdC5jbGllbnQtPnN1cGVyID0gdHJ1ZTsKLQlyZXQg
-PSBudmlmX29iamVjdF9pb2N0bCgmc3ZtbS0+dm1tLT52bW0ub2JqZWN0LCBhcmdzLCBzaXplb2Yo
-KmFyZ3MpICsKKwludmlmX29iamVjdF9pb2N0bCgmc3ZtbS0+dm1tLT52bW0ub2JqZWN0LCBhcmdz
-LCBzaXplb2YoKmFyZ3MpICsKIAkJCQlucGFnZXMgKiBzaXplb2YoYXJncy0+cC5waHlzWzBdKSwg
-TlVMTCk7CiAJc3ZtbS0+dm1tLT52bW0ub2JqZWN0LmNsaWVudC0+c3VwZXIgPSBmYWxzZTsKIAot
-LSAKMi4xNy4xCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-XwpOb3V2ZWF1IG1haWxpbmcgbGlzdApOb3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRw
-czovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL25vdXZlYXUK
+Any comments?
+
+Thomas: this should be identical to the git tree I gave you for mips
+testing, and you add your tested-by (and reviewd-by tags where
+applicable)?
+
+Helge: for parisc this should effectively be the same as the first
+version, but I've dropped the tested-by tags due to the reshuffle,
+and chance you could retest it?
+
+On Tue, Sep 15, 2020 at 05:51:04PM +0200, Christoph Hellwig wrote:
+> Hi all,
+> 
+> this series replaced the DMA_ATTR_NON_CONSISTENT flag to dma_alloc_attrs
+> with a separate new dma_alloc_pages API, which is available on all
+> platforms.  In addition to cleaning up the convoluted code path, this
+> ensures that other drivers that have asked for better support for
+> non-coherent DMA to pages with incurring bounce buffering over can finally
+> be properly supported.
+> 
+> As a follow up I plan to move the implementation of the
+> DMA_ATTR_NO_KERNEL_MAPPING flag over to this framework as well, given
+> that is also is a fundamentally non coherent allocation.  The replacement
+> for that flag would then return a struct page, as it is allowed to
+> actually return pages without a kernel mapping as the name suggested
+> (although most of the time they will actually have a kernel mapping..)
+> 
+> In addition to the conversions of the existing non-coherent DMA users,
+> I've also added a patch to convert the firewire ohci driver to use
+> the new dma_alloc_pages API.
+> 
+> The first patch is queued up for 5.9 in the media tree, but included here
+> for completeness.
+> 
+> 
+> A git tree is available here:
+> 
+>     git://git.infradead.org/users/hch/misc.git dma_alloc_pages
+> 
+> Gitweb:
+> 
+>     http://git.infradead.org/users/hch/misc.git/shortlog/refs/heads/dma_alloc_pages
+> 
+> 
+> Changes since v2:
+>  - fix up the patch reshuffle which wasn't quite correct
+>  - fix up a few commit messages
+> 
+> Changes since v1:
+>  - rebased on the latests dma-mapping tree, which merged many of the
+>    cleanups
+>  - fix an argument passing typo in 53c700, caught by sparse
+>  - rename a few macro arguments in 53c700
+>  - pass the right device to the DMA API in the lib82596 drivers
+>  - fix memory ownershiptransfers in sgiseeq
+>  - better document what a page in the direct kernel mapping means
+>  - split into dma_alloc_pages that returns a struct page and is in the
+>    direct mapping vs dma_alloc_noncoherent that can be vmapped
+>  - conver the firewire ohci driver to dma_alloc_pages
+> 
+> Diffstat:
+> _______________________________________________
+> iommu mailing list
+> iommu@lists.linux-foundation.org
+> https://lists.linuxfoundation.org/mailman/listinfo/iommu
+---end quoted text---
+_______________________________________________
+Nouveau mailing list
+Nouveau@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/nouveau
