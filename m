@@ -2,46 +2,34 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8BC00274B14
-	for <lists+nouveau@lfdr.de>; Tue, 22 Sep 2020 23:22:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3B719274E00
+	for <lists+nouveau@lfdr.de>; Wed, 23 Sep 2020 02:58:57 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B03FC6E32F;
-	Tue, 22 Sep 2020 21:22:36 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 056DD6E3D3;
+	Wed, 23 Sep 2020 00:58:51 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-vs1-f67.google.com (mail-vs1-f67.google.com
- [209.85.217.67])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 227FE6E32A;
- Tue, 22 Sep 2020 21:22:35 +0000 (UTC)
-Received: by mail-vs1-f67.google.com with SMTP id p24so6223111vsf.8;
- Tue, 22 Sep 2020 14:22:35 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=QNfsE0e5j0sjDrSbMU06dsnlI5tq+95f3KQ29B+CI20=;
- b=TbRqvGiMMpWo7o06LeSg3YlZWPZOskJgmQCmxmbZwcgkjCvAP4kl+jGFQMpaneR/80
- 15g7Y95kd/17HEMMyJXHqDup8jbeczTuNm/pk68yY10sTvtb5iqXD0WVhwWY/6uqjfHe
- VjRJmvinhwYhfEJEpFuabxhbyP9A+b7PXZA4Ho0Xdh1wMaxJA8/20EgDXol2mtj0GEsn
- NJGXSv36ZYAAX5/SWgRuc2zlAl3/Bm/X4VD2/0gHYu/lIADFOcUXL9ic+In8JrRZyAU0
- GFVTW1JTLOolXeY7YpHQy+Qya72ZEU3UJAE5SreDcUcSu5AYxuanx1/ZM6zq0fMvCTMv
- BE9g==
-X-Gm-Message-State: AOAM531YXALs+2j4eRxOieXKzdwaCwQBF7JrIHBrpKMouRxY7VJ+JS4B
- g9WIW9Wa+DuzcMFGFkLU3wmHrAsTuiu7LxQOeb4=
-X-Google-Smtp-Source: ABdhPJzNRd7B2R7QiAPHviF5QusJT5P0Eo+vC2zhxf2IS/6iuwUDz7oG9NnbchSGGWa7yTlgf9ajqRRNHPP4xJEzJMU=
-X-Received: by 2002:a67:6954:: with SMTP id e81mr5330189vsc.0.1600809754259;
- Tue, 22 Sep 2020 14:22:34 -0700 (PDT)
+Received: from elvis.franken.de (elvis.franken.de [193.175.24.41])
+ by gabe.freedesktop.org (Postfix) with ESMTP id B276C89FC9
+ for <nouveau@lists.freedesktop.org>; Tue, 22 Sep 2020 10:56:13 +0000 (UTC)
+Received: from uucp (helo=alpha)
+ by elvis.franken.de with local-bsmtp (Exim 3.36 #1)
+ id 1kKfxr-000822-00; Tue, 22 Sep 2020 12:56:03 +0200
+Received: by alpha.franken.de (Postfix, from userid 1000)
+ id AF6B3C0FE6; Tue, 22 Sep 2020 10:48:48 +0200 (CEST)
+Date: Tue, 22 Sep 2020 10:48:48 +0200
+From: Thomas Bogendoerfer <tsbogend@alpha.franken.de>
+To: Christoph Hellwig <hch@lst.de>
+Message-ID: <20200922084848.GA8477@alpha.franken.de>
+References: <20200915155122.1768241-1-hch@lst.de>
+ <20200915155122.1768241-7-hch@lst.de>
 MIME-Version: 1.0
-References: <20200922210510.156220-1-lyude@redhat.com>
- <CAKb7UvhAb0wFd9Qi1FGJ=TAYZJ9DYXL6XXMfnG49xEO=a9TuYg@mail.gmail.com>
- <7b10668ee337e531b14705ebecb1f6c1004728d6.camel@redhat.com>
-In-Reply-To: <7b10668ee337e531b14705ebecb1f6c1004728d6.camel@redhat.com>
-From: Ilia Mirkin <imirkin@alum.mit.edu>
-Date: Tue, 22 Sep 2020 17:22:23 -0400
-Message-ID: <CAKb7Uvj++15aEXiLGgSZb37wwzDSRCetVT+trP6JNwhk8n-whA@mail.gmail.com>
-To: Lyude Paul <lyude@redhat.com>
-Subject: Re: [Nouveau] [PATCH] drm/nouveau/kms/nv50-: Fix clock checking
- algorithm in nv50_dp_mode_valid()
+Content-Disposition: inline
+In-Reply-To: <20200915155122.1768241-7-hch@lst.de>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+X-Mailman-Approved-At: Wed, 23 Sep 2020 00:58:49 +0000
+Subject: Re: [Nouveau] [PATCH 06/18] lib82596: move DMA allocation into the
+ callers of i82596_probe
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -53,34 +41,39 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, nouveau <nouveau@lists.freedesktop.org>,
- open list <linux-kernel@vger.kernel.org>,
- "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
- <dri-devel@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>
+Cc: alsa-devel@alsa-project.org, linux-doc@vger.kernel.org,
+ nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
+ linux-mm@kvack.org, linux1394-devel@lists.sourceforge.net,
+ Marek Szyprowski <m.szyprowski@samsung.com>, linux-samsung-soc@vger.kernel.org,
+ Joonyoung Shim <jy0922.shim@samsung.com>, linux-scsi@vger.kernel.org,
+ Ben Skeggs <bskeggs@redhat.com>, Matt Porter <mporter@kernel.crashing.org>,
+ linux-media@vger.kernel.org, Mauro Carvalho Chehab <mchehab@kernel.org>,
+ linux-arm-kernel@lists.infradead.org, linux-parisc@vger.kernel.org,
+ netdev@vger.kernel.org, Seung-Woo Kim <sw0312.kim@samsung.com>,
+ linux-mips@vger.kernel.org, Tomasz Figa <tfiga@chromium.org>,
+ iommu@lists.linux-foundation.org, Stefan Richter <stefanr@s5r6.in-berlin.de>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, Sep 22, 2020 at 5:14 PM Lyude Paul <lyude@redhat.com> wrote:
->
-> On Tue, 2020-09-22 at 17:10 -0400, Ilia Mirkin wrote:
-> > Can we use 6bpc on arbitrary DP monitors, or is there a capability for
-> > it? Maybe only use 6bpc if display_info.bpc == 6 and otherwise use 8?
->
-> I don't think that display_info.bpc actually implies a minimum bpc, only a
-> maximum bpc iirc (Ville would know the answer to this one). The other thing to
-> note here is that we want to assume the lowest possible bpc here since we're
-> only concerned if the mode passed to ->mode_valid can be set under -any-
-> conditions (including those that require lowering the bpc beyond it's maximum
-> value), so we definitely do want to always use 6bpc here even once we get
-> support for optimizing the bpc based on the available display bandwidth.
+On Tue, Sep 15, 2020 at 05:51:10PM +0200, Christoph Hellwig wrote:
+> This allows us to get rid of the LIB82596_DMA_ATTR defined and prepare
+> for untangling the coherent vs non-coherent DMA allocation API.
+> 
+> Signed-off-by: Christoph Hellwig <hch@lst.de>
+> ---
+>  drivers/net/ethernet/i825xx/lasi_82596.c | 24 ++++++++++------
+>  drivers/net/ethernet/i825xx/lib82596.c   | 36 ++++++++----------------
+>  drivers/net/ethernet/i825xx/sni_82596.c  | 19 +++++++++----
+>  3 files changed, 40 insertions(+), 39 deletions(-)
 
-Yeah, display_info is the max bpc. But would an average monitor
-support 6bpc? And if it does, does the current link training code even
-try that when display_info.bpc != 6?
+Tested-by: Thomas Bogendoerfer <tsbogend@alpha.franken.de> (SNI part)
 
-  -ilia
+-- 
+Crap can work. Given enough thrust pigs will fly, but it's not necessarily a
+good idea.                                                [ RFC1925, 2.3 ]
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
