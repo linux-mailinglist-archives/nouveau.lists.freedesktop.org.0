@@ -1,35 +1,34 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B9F81274E05
-	for <lists+nouveau@lfdr.de>; Wed, 23 Sep 2020 02:59:03 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8B51D274E02
+	for <lists+nouveau@lfdr.de>; Wed, 23 Sep 2020 02:59:00 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id ADCEE6E3E3;
-	Wed, 23 Sep 2020 00:58:56 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 97CB86E3D6;
+	Wed, 23 Sep 2020 00:58:55 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from elvis.franken.de (elvis.franken.de [193.175.24.41])
- by gabe.freedesktop.org (Postfix) with ESMTP id B837D6E126
+ by gabe.freedesktop.org (Postfix) with ESMTP id ACA6F89B7D
  for <nouveau@lists.freedesktop.org>; Tue, 22 Sep 2020 10:56:13 +0000 (UTC)
 Received: from uucp (helo=alpha)
  by elvis.franken.de with local-bsmtp (Exim 3.36 #1)
- id 1kKfxr-000822-02; Tue, 22 Sep 2020 12:56:03 +0200
+ id 1kKfxr-000822-03; Tue, 22 Sep 2020 12:56:03 +0200
 Received: by alpha.franken.de (Postfix, from userid 1000)
- id A8294C0FFF; Tue, 22 Sep 2020 10:49:57 +0200 (CEST)
-Date: Tue, 22 Sep 2020 10:49:57 +0200
+ id 2E7F0C0FFF; Tue, 22 Sep 2020 10:50:14 +0200 (CEST)
+Date: Tue, 22 Sep 2020 10:50:14 +0200
 From: Thomas Bogendoerfer <tsbogend@alpha.franken.de>
 To: Christoph Hellwig <hch@lst.de>
-Message-ID: <20200922084957.GC8477@alpha.franken.de>
+Message-ID: <20200922085014.GD8477@alpha.franken.de>
 References: <20200915155122.1768241-1-hch@lst.de>
- <20200915155122.1768241-10-hch@lst.de>
+ <20200915155122.1768241-11-hch@lst.de>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200915155122.1768241-10-hch@lst.de>
+In-Reply-To: <20200915155122.1768241-11-hch@lst.de>
 User-Agent: Mutt/1.5.23 (2014-03-12)
 X-Mailman-Approved-At: Wed, 23 Sep 2020 00:58:49 +0000
-Subject: Re: [Nouveau] [PATCH 09/18] sgiwd93: convert to
- dma_alloc_noncoherent
+Subject: Re: [Nouveau] [PATCH 10/18] hal2: convert to dma_alloc_noncoherent
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,15 +57,15 @@ Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, Sep 15, 2020 at 05:51:13PM +0200, Christoph Hellwig wrote:
+On Tue, Sep 15, 2020 at 05:51:14PM +0200, Christoph Hellwig wrote:
 > Use the new non-coherent DMA API including proper ownership transfers.
-> This also means we can allocate the memory as DMA_TO_DEVICE instead
-> of bidirectional.
+> This also means we can allocate the buffer memory with the proper
+> direction instead of bidirectional.
 > 
 > Signed-off-by: Christoph Hellwig <hch@lst.de>
 > ---
->  drivers/scsi/sgiwd93.c | 14 +++++++-------
->  1 file changed, 7 insertions(+), 7 deletions(-)
+>  sound/mips/hal2.c | 58 ++++++++++++++++++++++-------------------------
+>  1 file changed, 27 insertions(+), 31 deletions(-)
 
 Tested-by: Thomas Bogendoerfer <tsbogend@alpha.franken.de>
 
