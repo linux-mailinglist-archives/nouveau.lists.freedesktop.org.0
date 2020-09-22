@@ -2,34 +2,33 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 72233274E08
-	for <lists+nouveau@lfdr.de>; Wed, 23 Sep 2020 02:59:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 84318274E06
+	for <lists+nouveau@lfdr.de>; Wed, 23 Sep 2020 02:59:04 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6456F6E402;
-	Wed, 23 Sep 2020 00:59:04 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 25A126E3EB;
+	Wed, 23 Sep 2020 00:58:57 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from elvis.franken.de (elvis.franken.de [193.175.24.41])
- by gabe.freedesktop.org (Postfix) with ESMTP id 5DD5589B7D
+ by gabe.freedesktop.org (Postfix) with ESMTP id A8CC289FC9
  for <nouveau@lists.freedesktop.org>; Tue, 22 Sep 2020 10:56:14 +0000 (UTC)
 Received: from uucp (helo=alpha)
  by elvis.franken.de with local-bsmtp (Exim 3.36 #1)
- id 1kKfxr-000822-05; Tue, 22 Sep 2020 12:56:03 +0200
+ id 1kKfxr-000822-06; Tue, 22 Sep 2020 12:56:03 +0200
 Received: by alpha.franken.de (Postfix, from userid 1000)
- id 1F289C0FFF; Tue, 22 Sep 2020 10:51:16 +0200 (CEST)
-Date: Tue, 22 Sep 2020 10:51:16 +0200
+ id 4F214C0FFF; Tue, 22 Sep 2020 10:51:34 +0200 (CEST)
+Date: Tue, 22 Sep 2020 10:51:34 +0200
 From: Thomas Bogendoerfer <tsbogend@alpha.franken.de>
 To: Christoph Hellwig <hch@lst.de>
-Message-ID: <20200922085116.GF8477@alpha.franken.de>
+Message-ID: <20200922085134.GG8477@alpha.franken.de>
 References: <20200915155122.1768241-1-hch@lst.de>
- <20200915155122.1768241-13-hch@lst.de>
+ <20200915155122.1768241-14-hch@lst.de>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200915155122.1768241-13-hch@lst.de>
+In-Reply-To: <20200915155122.1768241-14-hch@lst.de>
 User-Agent: Mutt/1.5.23 (2014-03-12)
 X-Mailman-Approved-At: Wed, 23 Sep 2020 00:58:49 +0000
-Subject: Re: [Nouveau] [PATCH 12/18] sgiseeq: convert to
- dma_alloc_noncoherent
+Subject: Re: [Nouveau] [PATCH 13/18] 53c700: convert to dma_alloc_noncoherent
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,18 +57,13 @@ Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, Sep 15, 2020 at 05:51:16PM +0200, Christoph Hellwig wrote:
+On Tue, Sep 15, 2020 at 05:51:17PM +0200, Christoph Hellwig wrote:
 > Use the new non-coherent DMA API including proper ownership transfers.
-> This includes adding additional calls to dma_sync_desc_dev as the
-> old syncing was rather ad-hoc.
-> 
-> Thanks to Thomas Bogendoerfer for debugging the ownership transfer
-> issues.
 > 
 > Signed-off-by: Christoph Hellwig <hch@lst.de>
 > ---
->  drivers/net/ethernet/seeq/sgiseeq.c | 28 ++++++++++++++++++----------
->  1 file changed, 18 insertions(+), 10 deletions(-)
+>  drivers/scsi/53c700.c | 20 ++++++++++++++------
+>  1 file changed, 14 insertions(+), 6 deletions(-)
 
 Tested-by: Thomas Bogendoerfer <tsbogend@alpha.franken.de>
 
