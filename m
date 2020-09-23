@@ -2,66 +2,51 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id A183B276339
-	for <lists+nouveau@lfdr.de>; Wed, 23 Sep 2020 23:37:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4323427666B
+	for <lists+nouveau@lfdr.de>; Thu, 24 Sep 2020 04:34:07 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 96F076EA05;
-	Wed, 23 Sep 2020 21:37:14 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 00C1E6EA5C;
+	Thu, 24 Sep 2020 02:34:05 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [63.128.21.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8598A6EA05
- for <nouveau@lists.freedesktop.org>; Wed, 23 Sep 2020 21:37:13 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1600897032;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=LqGH3qwcCMfMPD67hSTdgnqIJd4Qv6+l8bPu0Ejj+0w=;
- b=D4EkanMBhwowvhidlBDV0M/yasBP/g8gTOrCLmD20coPCmN1tTxZZIsWo3UsXu5TQ5h0uP
- tyVbdqK1L46NyB++hf3eO2xPhOowVgs2iuVd633FMY7prQ7+qfVFKARxeIbnB9bfG2WzQB
- DXPsrIdR7HR54WrIQPdtSFUYnUlooB8=
-Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com
- [209.85.160.198]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-12-WZfOqKCXOc6SsP5qj2DnBw-1; Wed, 23 Sep 2020 17:37:07 -0400
-X-MC-Unique: WZfOqKCXOc6SsP5qj2DnBw-1
-Received: by mail-qt1-f198.google.com with SMTP id g1so941813qtc.22
- for <nouveau@lists.freedesktop.org>; Wed, 23 Sep 2020 14:37:07 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=LqGH3qwcCMfMPD67hSTdgnqIJd4Qv6+l8bPu0Ejj+0w=;
- b=V9zjCVbRU0prsisypd+kBkh1qcQ/fHVAHi6A7oDI9ccNVMjBxj1OquZEZREpB0kdJA
- KGT+Iy8Ej2tDZjMsBimbnTYlU9d2QHSJ2q38JyWZZnOB2zylNNvTFfEsLnwGC9aBTTPw
- DIuTqJa6KHRRhfttNZnV6mRiGBrETvMfiH1cl5lG9YVqKMNoZaFZIl3WWQxdMf0FjsjI
- mf1GSAgyFy6F7ZKVUApwUU7qcog+6k6Ypk5H7cKpkM+2r49ALoJ+FwAUafAJPtaCOdQG
- q8ze4NIMSRRR7f+I+JGL72I9ed8sYKKF1J0PeE68s72Uix8YTux2g7Z8XVotTD5KBCug
- HHnA==
-X-Gm-Message-State: AOAM533aQ8ShtvI+x6he52R3jpbP3eoTU3xDAWi1XxxpYgeN6DU5tJCn
- um6wC2EIOG0PRmbxNHqpq1TnhRhHRFSCdNya6zXKWzHX/JPBALV8bHgMyXkhro2Y7SWHu/8LZFm
- kuNmpKuE/GLa++4vpm+4y9ysmmLGjGCQc+l66zyz1IQ==
-X-Received: by 2002:a37:7e42:: with SMTP id z63mr1996877qkc.62.1600897026155; 
- Wed, 23 Sep 2020 14:37:06 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJw5XUhbJ7JmZnVNq8r0FcouoHAhkXYsylpekCprrI/VwPbQ9nHEy/EcLxXBUaGRe2WKnK6I3DPy0Kwlr8Xx2ng=
-X-Received: by 2002:a37:7e42:: with SMTP id z63mr1996844qkc.62.1600897025737; 
- Wed, 23 Sep 2020 14:37:05 -0700 (PDT)
+Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3E9C26E918;
+ Wed, 23 Sep 2020 10:22:04 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id AC061B278;
+ Wed, 23 Sep 2020 10:22:39 +0000 (UTC)
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: alexander.deucher@amd.com, christian.koenig@amd.com, airlied@linux.ie,
+ daniel@ffwll.ch, linux@armlinux.org.uk, maarten.lankhorst@linux.intel.com,
+ mripard@kernel.org, l.stach@pengutronix.de, christian.gmeiner@gmail.com,
+ inki.dae@samsung.com, jy0922.shim@samsung.com, sw0312.kim@samsung.com,
+ kyungmin.park@samsung.com, kgene@kernel.org, krzk@kernel.org,
+ patrik.r.jakobsson@gmail.com, jani.nikula@linux.intel.com,
+ joonas.lahtinen@linux.intel.com, rodrigo.vivi@intel.com,
+ chunkuang.hu@kernel.org, p.zabel@pengutronix.de, matthias.bgg@gmail.com,
+ robdclark@gmail.com, sean@poorly.run, bskeggs@redhat.com,
+ tomi.valkeinen@ti.com, eric@anholt.net, hjc@rock-chips.com,
+ heiko@sntech.de, thierry.reding@gmail.com, jonathanh@nvidia.com,
+ rodrigosiqueiramelo@gmail.com, hamohammed.sa@gmail.com,
+ oleksandr_andrushchenko@epam.com, hyun.kwon@xilinx.com,
+ laurent.pinchart@ideasonboard.com, michal.simek@xilinx.com,
+ sumit.semwal@linaro.org, evan.quan@amd.com, Hawking.Zhang@amd.com,
+ tianci.yin@amd.com, marek.olsak@amd.com, hdegoede@redhat.com,
+ andrey.grodzovsky@amd.com, Felix.Kuehling@amd.com, xinhui.pan@amd.com,
+ aaron.liu@amd.com, nirmoy.das@amd.com, chris@chris-wilson.co.uk,
+ matthew.auld@intel.com, tvrtko.ursulin@linux.intel.com,
+ andi.shyti@intel.com, sam@ravnborg.org, miaoqinglang@huawei.com,
+ emil.velikov@collabora.com, laurentiu.palcu@oss.nxp.com,
+ shawnguo@kernel.org, s.hauer@pengutronix.de, kernel@pengutronix.de,
+ festevam@gmail.com, linux-imx@nxp.com
+Date: Wed, 23 Sep 2020 12:21:37 +0200
+Message-Id: <20200923102159.24084-1-tzimmermann@suse.de>
+X-Mailer: git-send-email 2.28.0
 MIME-Version: 1.0
-References: <20200911162128.405604-1-jcline@redhat.com>
- <CACO55tsspNbYBYdNH-zd_TeZo02yY9AtJot4FW8SYEZPuKjkZA@mail.gmail.com>
- <20200923203918.GA37078@xps13>
-In-Reply-To: <20200923203918.GA37078@xps13>
-From: Karol Herbst <kherbst@redhat.com>
-Date: Wed, 23 Sep 2020 23:36:54 +0200
-Message-ID: <CACO55ttM+wmbcYz6h5qeEb9_Ta=JcnRzURFYu3-9GJPMHzdFeg@mail.gmail.com>
-To: Jeremy Cline <jcline@redhat.com>
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=kherbst@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Subject: Re: [Nouveau] [RFC] Documentation: nouveau: Introduce some nouveau
- documentation
+X-Mailman-Approved-At: Thu, 24 Sep 2020 02:34:04 +0000
+Subject: [Nouveau] [PATCH v3 00/22] Convert all remaining drivers to GEM
+ object functions
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -73,231 +58,148 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, nouveau <nouveau@lists.freedesktop.org>,
- Ben Skeggs <bskeggs@redhat.com>
+Cc: linux-samsung-soc@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ intel-gfx@lists.freedesktop.org, etnaviv@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, linux-rockchip@lists.infradead.org,
+ linux-mediatek@lists.infradead.org, amd-gfx@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org, linux-tegra@vger.kernel.org,
+ xen-devel@lists.xenproject.org, freedreno@lists.freedesktop.org,
+ linux-arm-kernel@lists.infradead.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, Sep 23, 2020 at 10:39 PM Jeremy Cline <jcline@redhat.com> wrote:
->
-> On Wed, Sep 23, 2020 at 09:02:45PM +0200, Karol Herbst wrote:
-> > On Fri, Sep 11, 2020 at 6:21 PM Jeremy Cline <jcline@redhat.com> wrote:
->
-> <snip>
->
-> > yeah, I think overall this file is a good idea and being able to get a
-> > quick overview over the driver is helpful. I think if we focus on the
-> > user facing things first, like the hwmon or other things users
-> > generally interact with would be helpful. I think if we start to
-> > document areas where there are many low hanging fruits, this could
-> > help random people to start with easier tasks and get more used to the
-> > driver overall, so I'd probably ignore most of the stuff which really
-> > requires a fundamental understanding on how things work and focus more
-> > on vbios parsing (which has annoying interfaces anyway and it might
-> > make sense to make it more consistent and nicer to use) and/or simple
-> > code interfacing with the mmio space.
-> >
->
-> I'll admit to being motivated by entirely selfish reasons. I know
-> practically nothing about nouveau and I'm the type of person who likes
-> to keep notes about how things work together, both free form and
-> structured in-line docs. All that to say, I think focusing on the
-> "low-hanging fruit" stuff will be very beneficial and I'm happy to do
-> that, but I'm also interested in documenting everything else I run
-> across.
->
+The GEM and PRIME related callbacks in struct drm_driver are deprecated in
+favor of GEM object functions in struct drm_gem_object_funcs. This patchset
+converts the remaining drivers to object functions and removes most of the
+obsolete interfaces.
 
-yeah, that's fine. I was just giving a suggestion on where the initial
-focus should be on.
+Version 3 of this patchset mostly fixes drm_gem_prime_handle_to_fd and
+updates i.MX's dcss driver. The driver was missing from earlier versions
+and still needs review.
 
-> > Eg some users have problems with their fans as they are either always
-> > ramping up to max, or not running at all... GPUs temperature or power
-> > consumption is reporting incorrectly... all those things users hit
-> > regularly, but which isn't really important enough so it just falls
-> > under the table even if it gets reported.
-> >
->
-> This does bring up an interesting point about organization and target
-> audiences. Typically when I'm writing documentation I like to organize
-> things by target audiences, so we could have a layout like:
->
-> * General Introduction
->
-> * User Guide
->     - Overview of supported hardware/features/etc
+Patches #1 to #6, #8 to #17 and #19 to #20 convert DRM drivers to GEM object
+functions, one by one. Each patch moves existing callbacks from struct
+drm_driver to an instance of struct drm_gem_object_funcs, and sets these
+funcs when the GEM object is initialized. The expection is .gem_prime_mmap.
+There are different ways of how drivers implement the callback, and moving
+it to GEM object functions requires a closer review for each.
 
-That's best to document in a wiki though. And we had plans to convert
-the existing old wiki over to gitlab. And maybe It think we really
-should do that and clean it up while we work on that. It's just a huge
-project but maybe just starting with whatever you want to do would be
-fine and after a while nothing is left. Anyway, I think we should
-discuss this more openly with the others as well. i don't like the
-current wiki anyway, as only approved developers can change things and
-with a gitlab wiki we could even take MRs on stuff.
+Patch #18 fixes virtgpu to use GEM object functions where possible. The
+driver recently introduced a function for one of the deprecated callbacks.
 
->     - Installation
+Patches #7 and #20 convert i.MX's dcss and xlnx to CMA helper macros. There's
+no apparent reason why the drivers do the GEM setup on their's own. Using CMA
+helper macros adds GEM object functions implicitly.
 
-well.. I think this can be skipped ;) But still, also belongs more
-into a wiki. I think what we could cover here is to how to clean up
-remaining stuff from the blob driver as this is something which comes
-up quite a lot on IRC though.
+With most of the GEM and PRIME moved to GEM object functions, related code
+in struct drm_driver and in the DRM core/helpers is being removed by patch
+#22.
 
->     - Configuration (module parameters and such)
->     - Troubleshooting
+Further testing is welcome. I tested the drivers for which I have HW
+available. These are gma500, i915, nouveau, radeon and vc4. The console,
+Weston and Xorg apparently work with the patches applied.
 
-that would be cool to have in the wiki as well. Just collecting the
-most common issue and document it there. Especially if it is on
-gitlab, users can just do that as well :)
+v3:
+	* restore default call to drm_gem_prime_export() in
+	  drm_gem_prime_handle_to_fd()
+	* return -ENOSYS if get_sg_table is not set
+	* drop all checks for obj->funcs
+	* clean up TODO list and documentation
+v2:
+	* moved code in amdgpu and radeon
+	* made several functions static in various drivers
+	* updated TODO-list item
+	* fix virtgpu
 
->     - Getting Involved (bug reporting, running tests, etc)
+Thomas Zimmermann (22):
+  drm/amdgpu: Introduce GEM object functions
+  drm/armada: Introduce GEM object functions
+  drm/etnaviv: Introduce GEM object functions
+  drm/exynos: Introduce GEM object functions
+  drm/gma500: Introduce GEM object functions
+  drm/i915: Introduce GEM object functions
+  drm/imx/dcss: Initialize DRM driver instance with CMA helper macro
+  drm/mediatek: Introduce GEM object functions
+  drm/msm: Introduce GEM object funcs
+  drm/nouveau: Introduce GEM object functions
+  drm/omapdrm: Introduce GEM object functions
+  drm/pl111: Introduce GEM object functions
+  drm/radeon: Introduce GEM object functions
+  drm/rockchip: Convert to drm_gem_object_funcs
+  drm/tegra: Introduce GEM object functions
+  drm/vc4: Introduce GEM object functions
+  drm/vgem: Introduce GEM object functions
+  drm/virtgpu: Set PRIME export function in struct drm_gem_object_funcs
+  drm/vkms: Introduce GEM object functions
+  drm/xen: Introduce GEM object functions
+  drm/xlnx: Initialize DRM driver instance with CMA helper macro
+  drm: Remove obsolete GEM and PRIME callbacks from struct drm_driver
 
-yeah, and we have some stuff on that on the old wiki already, it's
-just very outdated and needs updating, which as said above can only be
-done by developers and developers sadly have other things to do :)
+ Documentation/gpu/drm-mm.rst                  |  4 +-
+ Documentation/gpu/todo.rst                    |  9 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c       |  6 --
+ drivers/gpu/drm/amd/amdgpu/amdgpu_gem.c       | 23 +++--
+ drivers/gpu/drm/amd/amdgpu/amdgpu_gem.h       |  5 --
+ drivers/gpu/drm/armada/armada_drv.c           |  3 -
+ drivers/gpu/drm/armada/armada_gem.c           | 12 ++-
+ drivers/gpu/drm/armada/armada_gem.h           |  2 -
+ drivers/gpu/drm/drm_gem.c                     | 53 ++++--------
+ drivers/gpu/drm/drm_gem_cma_helper.c          |  8 +-
+ drivers/gpu/drm/drm_prime.c                   | 14 +--
+ drivers/gpu/drm/etnaviv/etnaviv_drv.c         | 13 ---
+ drivers/gpu/drm/etnaviv/etnaviv_drv.h         |  1 -
+ drivers/gpu/drm/etnaviv/etnaviv_gem.c         | 19 ++++-
+ drivers/gpu/drm/exynos/exynos_drm_drv.c       | 10 ---
+ drivers/gpu/drm/exynos/exynos_drm_gem.c       | 15 ++++
+ drivers/gpu/drm/gma500/framebuffer.c          |  2 +
+ drivers/gpu/drm/gma500/gem.c                  | 18 +++-
+ drivers/gpu/drm/gma500/gem.h                  |  3 +
+ drivers/gpu/drm/gma500/psb_drv.c              |  9 --
+ drivers/gpu/drm/gma500/psb_drv.h              |  2 -
+ drivers/gpu/drm/i915/gem/i915_gem_object.c    | 21 ++++-
+ drivers/gpu/drm/i915/gem/i915_gem_object.h    |  3 -
+ drivers/gpu/drm/i915/i915_drv.c               |  4 -
+ .../gpu/drm/i915/selftests/mock_gem_device.c  |  3 -
+ drivers/gpu/drm/imx/dcss/dcss-kms.c           | 14 +--
+ drivers/gpu/drm/mediatek/mtk_drm_drv.c        |  5 --
+ drivers/gpu/drm/mediatek/mtk_drm_gem.c        | 11 +++
+ drivers/gpu/drm/msm/msm_drv.c                 | 13 ---
+ drivers/gpu/drm/msm/msm_drv.h                 |  1 -
+ drivers/gpu/drm/msm/msm_gem.c                 | 19 ++++-
+ drivers/gpu/drm/nouveau/nouveau_drm.c         |  9 --
+ drivers/gpu/drm/nouveau/nouveau_gem.c         | 13 +++
+ drivers/gpu/drm/nouveau/nouveau_gem.h         |  2 +
+ drivers/gpu/drm/nouveau/nouveau_prime.c       |  2 +
+ drivers/gpu/drm/omapdrm/omap_drv.c            |  9 --
+ drivers/gpu/drm/omapdrm/omap_gem.c            | 18 +++-
+ drivers/gpu/drm/omapdrm/omap_gem.h            |  2 -
+ drivers/gpu/drm/pl111/pl111_drv.c             |  5 +-
+ drivers/gpu/drm/radeon/radeon_drv.c           | 23 +----
+ drivers/gpu/drm/radeon/radeon_gem.c           | 31 ++++++-
+ drivers/gpu/drm/rockchip/rockchip_drm_drv.c   |  5 --
+ drivers/gpu/drm/rockchip/rockchip_drm_gem.c   | 12 ++-
+ drivers/gpu/drm/tegra/drm.c                   |  4 -
+ drivers/gpu/drm/tegra/gem.c                   |  8 ++
+ drivers/gpu/drm/vc4/vc4_bo.c                  | 21 ++++-
+ drivers/gpu/drm/vc4/vc4_drv.c                 | 12 ---
+ drivers/gpu/drm/vc4/vc4_drv.h                 |  1 -
+ drivers/gpu/drm/vgem/vgem_drv.c               | 21 +++--
+ drivers/gpu/drm/virtio/virtgpu_drv.c          |  1 -
+ drivers/gpu/drm/virtio/virtgpu_object.c       |  1 +
+ drivers/gpu/drm/vkms/vkms_drv.c               |  8 --
+ drivers/gpu/drm/vkms/vkms_gem.c               | 13 +++
+ drivers/gpu/drm/xen/xen_drm_front.c           | 44 ++++------
+ drivers/gpu/drm/xen/xen_drm_front.h           |  2 +
+ drivers/gpu/drm/xen/xen_drm_front_gem.c       | 15 ++++
+ drivers/gpu/drm/xlnx/zynqmp_dpsub.c           | 14 +--
+ include/drm/drm_drv.h                         | 85 +------------------
+ include/drm/drm_gem.h                         |  2 +-
+ 59 files changed, 333 insertions(+), 375 deletions(-)
 
->
-> * Developer Guide
->     - Architecture Overview
->     - External APIs (include/uapi/drm/nouveau_drm.h, any sysfs stuff)?
->     - Internal APIs
-
-Right, those things I'd like to see in the kernel tree actually.
-
->     - Debugging and Development Tools
->     - Contribution Guide
->
-
-Those I think belong more into the wiki again. The latter is a bit
-hard to split as there are kernel guides, but also community and
-project guides. Mesa does things differently than let's say the
-kernel. And Nouveau is still in this limbo state being on the old
-infra, but also on the new one with mesa...
-
-> I'm not sure how much stuff people want to keep on the
-> nouveau.freedesktop.org wiki vs here.
->
-
-I think the first step actually is to set up a proper nouveau project
-on gitlab for dealing with issues and the wiki. I would be fine to do
-that and we can also move the code there late. But maybe let's start
-with the wiki :)
-
-> > > diff --git a/drivers/gpu/drm/nouveau/include/nvkm/engine/disp.h b/drivers/gpu/drm/nouveau/include/nvkm/engine/disp.h
-> > > index 5a96c942d912..76b90d7ddfc6 100644
-> > > --- a/drivers/gpu/drm/nouveau/include/nvkm/engine/disp.h
-> > > +++ b/drivers/gpu/drm/nouveau/include/nvkm/engine/disp.h
-> > > @@ -1,22 +1,57 @@
-> > >  /* SPDX-License-Identifier: MIT */
-> > > +
-> > > +/**
-> > > + * DOC: Overview
-> > > + *
-> > > + * Interfaces for working with the display engine.
-> > > + */
-> > > +
-> > >  #ifndef __NVKM_DISP_H__
-> > >  #define __NVKM_DISP_H__
-> > > +
-> > > +/**
-> > > + * nvkm_disp() - Get a &struct nvkm_disp from a &struct nvkm_engine.
-> > > + *
-> > > + * @p: A &struct nvkm_engine reference.
-> > > + *
-> > > + * Return: The &struct nvkm_disp that contains the given engine.
-> > > + */
-> > >  #define nvkm_disp(p) container_of((p), struct nvkm_disp, engine)
-> > >  #include <core/engine.h>
-> > >  #include <core/event.h>
-> > >
-> > > +/**
-> > > + * struct nvkm_disp - Represents a display engine.
-> > > + *
-> > > + * This structure is for <some abstraction here>. It has <some assumptions
-> > > + * about its usage here>.
-> > > + */
-> > >  struct nvkm_disp {
-> > > +    /** @func: Chipset-specific vtable for manipulating the display. */
-> > >         const struct nvkm_disp_func *func;
-> > > +
-> > > +    /** @engine: The engine for this display. */
-> > >         struct nvkm_engine engine;
-> > >
-> > > +    /** @head: list of heads attached to this display. */
-> > >         struct list_head head;
-> > > +
-> > > +    /** @ior: List of IO resources for this display. */
-> > >         struct list_head ior;
-> > > +
-> > > +    /** @outp: List of outputs for this display. */
-> > >         struct list_head outp;
-> > > +
-> > > +    /** @conn: List of connectors for this display. */
-> > >         struct list_head conn;
-> > >
-> > > +    /** @hpd: An event that fires when something happens I guess. */
-> > >         struct nvkm_event hpd;
-> > > +
-> > > +    /** @vblank: An event that fires and has some relation to the vblank. */
-> > >         struct nvkm_event vblank;
-> > >
-> > > +    /** @client: The oproxy (?) client for this display. */
-> > >         struct nvkm_oproxy *client;
-> > >  };
-> >
-> > generally not a big fan of "int a; // a is an int" kind of
-> > documentation. But if it would specify constraints or details on how
-> > it's valid to use those fields, then it makes totally sense to add
-> > stuff.
->
-> Definitely, I think that is not particularly helpful documentation. Of
-> course, the what and why of a function parameter or struct member is
-> very likely to be more interesting than that, but it's true that every
-> once in a while that the variable name can be so clear there's not much
-> else to say.
->
-> I think it's fair to say the documentation I added for the above struct
-> is not good. I think it's also fair to say that a new-comer such as
-> myself who stumbles upon this structure has practically no chance of
-> guessing what it's all about without reading a bunch of additional code.
-> My first guess was that it represented a display I had plugged in, which
-> at this point I'm fairly confident is not at all correct. It required me
-> to look at many users of this struct along with perusing envytools
-> documentation to guess it represented a display engine.
->
-
-yeah, but given that you run into the confusion you can actually
-document this and leave a comment addressing that. So describing a
-little bit what the engine does, what are heads, iors and outputs,
-etc... I think getting the high level overview should be the focus
-atm. We can always deal with the technical details later as those are
-usually easier to get once you have a rough idea on what's going on.
-
-> It may well be I'm an exceptionally slow learner, but even short notes
-> can be extremely helpful.
->
-> >
-> > not sure if you were aware of it, but we have some documentation on
-> > the module options here:
-> > https://nouveau.freedesktop.org/wiki/KernelModuleParameters/
-> >
-> > But I think it makes sense to move it into the source code and link to
-> > the new thing from the wiki then.
-> >
->
-> Indeed, and in fact I started this documentation from the wiki, but
-> tried my best to fill in the missing parameters and config options (you
-> don't happen to know what the NvAcrWpr* config options do, do you?)
->
-
-I only know that this option specifies the version of the ACR WPR
-firmware to load, but I don't know what that actually is :)
-
-> Thanks!
->
-> - Jeremy
->
+--
+2.28.0
 
 _______________________________________________
 Nouveau mailing list
