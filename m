@@ -2,67 +2,74 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id C9BE1277800
-	for <lists+nouveau@lfdr.de>; Thu, 24 Sep 2020 19:47:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3701927785E
+	for <lists+nouveau@lfdr.de>; Thu, 24 Sep 2020 20:18:26 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3408C6E3AA;
-	Thu, 24 Sep 2020 17:47:54 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 19C266E418;
+	Thu, 24 Sep 2020 18:18:23 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [63.128.21.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 73AE16E3AA
- for <nouveau@lists.freedesktop.org>; Thu, 24 Sep 2020 17:47:52 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2FA236E418
+ for <nouveau@lists.freedesktop.org>; Thu, 24 Sep 2020 18:18:22 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1600969671;
+ s=mimecast20190719; t=1600971500;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=1MM7nh0VVsZbBK6d5EToZMjIqrbvTM176RYT5RaDTh0=;
- b=gMskE6b9sOHkMYkF3oeOI8gB08o/umAT3ZQg3eKF4fS8/B6G5ILCrSGh5UH7Q2FtQQGTk6
- y9rFbWmVN38ilYhkqo8mtjiiRQIiB5SKNQzyCeb+ifimeZNkzAkLAwmkRo0x4cYdpj5esy
- joHWDGjBMrmKrmnhX2mZWh37cQ3hCAE=
-Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com
- [209.85.160.197]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-566--IKMaBF6MEyRA6naQ2CBPg-1; Thu, 24 Sep 2020 13:47:47 -0400
-X-MC-Unique: -IKMaBF6MEyRA6naQ2CBPg-1
-Received: by mail-qt1-f197.google.com with SMTP id b18so3038142qto.4
- for <nouveau@lists.freedesktop.org>; Thu, 24 Sep 2020 10:47:47 -0700 (PDT)
+ bh=meIDjaQAKwec8mNcLrKu2HbuIhNd2I1USC7EiEVgnso=;
+ b=VELIhkR5yylufpPM8Gnt5jmOQvoVGPvc8hiqf7e4lDloPyAXLKJ1sEJCP5oekawLGqw0Hh
+ AhEFc303bWRjmLjwx28CJ8FKsnuQbcdlY0WiOq6blajuJ94VE74oplWYR1vMvIkokyj9Pk
+ tDLf2er3vP8NotyYkIG1Nll/BRf6Tck=
+Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com
+ [209.85.160.200]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-64-UJNuXVvqMB2KfLyp0jXoNA-1; Thu, 24 Sep 2020 14:18:14 -0400
+X-MC-Unique: UJNuXVvqMB2KfLyp0jXoNA-1
+Received: by mail-qt1-f200.google.com with SMTP id b54so3052163qtk.17
+ for <nouveau@lists.freedesktop.org>; Thu, 24 Sep 2020 11:18:14 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=1MM7nh0VVsZbBK6d5EToZMjIqrbvTM176RYT5RaDTh0=;
- b=UevX3+f3ygEeLOLfYODqwsHMPDgvCVhb2JnJNMfdoe3ZB75oHk4RlikiDwllQLF7cn
- G9jEjU0TNtpuDxvMnxFDjWPb/ssXBXnngETLUR/djThSrjXS66Ol1f/hWMBDcL8S/mFj
- Bdv+3FEqZqflxmx9oWY483cije1HEUxDcUuj9YX/dabnsg9mtkKDM0Cfh+WAh35qhKcS
- kd5NP+3id0SmgBm5jiEBkwIIhKoXi+MoZ9arYMhsTDKMRbeemHC0xbqADC1UATEH+dLI
- w36jsANdSRPJ7b/V6aMrE7DbX35B0M5KSKhLRwQyExv4Hi6pEF7Ahcw+b4el2OOiusOy
- Y/Uw==
-X-Gm-Message-State: AOAM532uJpmOhqKpQLOFuBrTAlgimaRUEzZgssLABAIMJ6v+N/X+UyzO
- BHETMFXQUGk1uKnaaq8yUgL9lONcYjdppmLGETuNZ+88mz5FdYcOoUrb2/sjGvzCTw5IAmgSxU1
- WgZCl7OZPTqoNJmRbEcOMsWQwsGCSUrfRSRvrKa2+qQ==
-X-Received: by 2002:a0c:d443:: with SMTP id r3mr249666qvh.17.1600969666662;
- Thu, 24 Sep 2020 10:47:46 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJxz4dy8YeDwpmfbulUjBZWem2/EzwCS+z5Jx4SiTY7BSI8gMFaX1wy3geMTqZ1TBq6KlCYPmH2wuZJ4BfMgfJs=
-X-Received: by 2002:a0c:d443:: with SMTP id r3mr249634qvh.17.1600969666198;
- Thu, 24 Sep 2020 10:47:46 -0700 (PDT)
-MIME-Version: 1.0
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=meIDjaQAKwec8mNcLrKu2HbuIhNd2I1USC7EiEVgnso=;
+ b=Xod/bpaMpBJtHFHpbkiS43bAWCOy+P3lKa0BZhTG+IUzwK0XmZMWMfWnQcPXUqT6Wn
+ kvy5fFhqO9pQz22GvWRPCUTUMtVw2d/V+0cGsI1QN94CD2YMpUyD0theS7suEw6R1Eij
+ UBeADajKx9VpLbIkwUsHeI9ka/YPW2Z6NOP/mbziJHTZd/32ERgt/10J9TV22egeHgMC
+ 8T1KtE2Ej/qPUVik9Zb2zzxyQ450dkdqohNunnImnpJsuOkOkZ/+8g+8YyX8wPh6dN5N
+ 3mZmzc56m4aF2GZLuDkfFGCpCR29q1Gww9Ccz/0Yg/AAPwOvFqpIVwhbCiOoUYgJ8lxS
+ tc7g==
+X-Gm-Message-State: AOAM531NKBT6fDf+i0XLAFeLzs5C/C5vEgVIKNyOZiIb5+wP90b4hEhH
+ NOI8FmqNL6l4RCIEpOIS15U+7j4t79R70wP5sxMEMtUKjXj/vyqhBzl0uYhYM/o9xMZz3GifvoH
+ 6fSkJWGJUxy6jzUn2U+mUch0BNg==
+X-Received: by 2002:a05:6214:12b:: with SMTP id
+ w11mr480661qvs.46.1600971493395; 
+ Thu, 24 Sep 2020 11:18:13 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJxtOgOLdWboAzPV3YibpcIYoOXxJfN4pW9LOlfjpPPayhS3MFNydYnbLmk/WE5fmrSmL0Q8nw==
+X-Received: by 2002:a05:6214:12b:: with SMTP id
+ w11mr480631qvs.46.1600971492987; 
+ Thu, 24 Sep 2020 11:18:12 -0700 (PDT)
+Received: from xps13.jcline.org ([136.56.20.95])
+ by smtp.gmail.com with ESMTPSA id e26sm173524qka.24.2020.09.24.11.18.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 24 Sep 2020 11:18:12 -0700 (PDT)
+Date: Thu, 24 Sep 2020 14:18:10 -0400
+From: Jeremy Cline <jcline@redhat.com>
+To: Karol Herbst <kherbst@redhat.com>
+Message-ID: <20200924181810.GB17438@xps13.jcline.org>
 References: <20200911162128.405604-1-jcline@redhat.com>
  <CACO55tsspNbYBYdNH-zd_TeZo02yY9AtJot4FW8SYEZPuKjkZA@mail.gmail.com>
  <20200923203918.GA37078@xps13>
  <CACO55ttM+wmbcYz6h5qeEb9_Ta=JcnRzURFYu3-9GJPMHzdFeg@mail.gmail.com>
  <20200924160255.GB12520@xps13.jcline.org>
  <CACO55tvdOWtqSLCZg+rYL--XY8sHipMTo2vDCCoJ9YD7eYhxHg@mail.gmail.com>
+MIME-Version: 1.0
 In-Reply-To: <CACO55tvdOWtqSLCZg+rYL--XY8sHipMTo2vDCCoJ9YD7eYhxHg@mail.gmail.com>
-From: Karol Herbst <kherbst@redhat.com>
-Date: Thu, 24 Sep 2020 19:47:34 +0200
-Message-ID: <CACO55tsF7kNqVmX9b-Bhs9iYHRMJQW2bgJRKdigwnRkbegMJnQ@mail.gmail.com>
-To: Jeremy Cline <jcline@redhat.com>
 Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=kherbst@redhat.com
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=jcline@redhat.com
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
+Content-Disposition: inline
 Subject: Re: [Nouveau] [RFC] Documentation: nouveau: Introduce some nouveau
  documentation
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -83,8 +90,7 @@ Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, Sep 24, 2020 at 7:26 PM Karol Herbst <kherbst@redhat.com> wrote:
->
+On Thu, Sep 24, 2020 at 07:26:01PM +0200, Karol Herbst wrote:
 > On Thu, Sep 24, 2020 at 6:03 PM Jeremy Cline <jcline@redhat.com> wrote:
 > >
 > > On Wed, Sep 23, 2020 at 11:36:54PM +0200, Karol Herbst wrote:
@@ -212,24 +218,64 @@ On Thu, Sep 24, 2020 at 7:26 PM Karol Herbst <kherbst@redhat.com> wrote:
 > > don't know if gitlab.freedesktop.org has Pages set up, though.
 > > Regardless, I'm more than happy to do that work as well.
 > >
->
+> 
 > there might be an easier way. In gitlab you can actually mirror
 > repositories. I created https://gitlab.freedesktop.org/nouveau/wiki
 > and asked Daniels to set up a mirror against the wiki git repo of the
 > same project. If we add some CI pipeline on top we could even verify
 > the proposed changes are valid. Maybe that would be good enough...
->
+> 
 > But yeah.. maybe having a simple pages site would also work.. dunno if
 > it actually makes a difference anyway, but that might be more work.
->
+> 
 
-mhh, I saw that the pages stuff is already set up, so maybe I just
-look into it next week and see what works best.
+The work is pretty minimal for what I typically do. You need a CI job to
+build the docs on merge requests and pushes, which at its most verbose
+is something like:
 
-> > [0] https://docs.gitlab.com/ee/user/project/pages/
-> >
-> > - Jeremy
-> >
+docs:
+  stage: test
+  before_script:
+    # Pin Sphinx to a particular major version
+    - python3 -m venv ~/docs-venv
+    - source ~/docs-venv/bin/activate
+    - pip install "sphinx<3"
+    - pushd path/to/docs
+  script: make SPHINXOPTS="-W" html
+  artifacts:
+    paths:
+      - path/to/docs/_build/
+  only:
+    refs:
+      - merge_requests
+      - main
+
+After that, you just deploy documentation changes to a particular branch
+updates:
+
+pages:
+  stage: deploy
+  dependencies:
+    - docs
+  script:
+    - mv path/to/docs/_build/ public/
+  artifacts:
+    paths:
+      - public
+  only:
+    refs:
+      - main
+
+And that's about it. This gives you CI that catches any incorrectly
+formatted/invalid documentation, provide reviewers with easy-to-view
+HTML versions of proposed docs in the merge request, and automatically
+deploys updates when changes are pushed to the main branch.
+
+Of course, my only real reason for preferring this approach is that I've
+done it a couple times and I'm very familiar with Sphinx. I don't have
+any objection to doing it a different way.
+
+- Jeremy
 
 _______________________________________________
 Nouveau mailing list
