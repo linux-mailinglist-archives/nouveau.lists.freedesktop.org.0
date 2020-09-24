@@ -2,53 +2,50 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 192E2276FA8
-	for <lists+nouveau@lfdr.de>; Thu, 24 Sep 2020 13:16:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8CB442771CA
+	for <lists+nouveau@lfdr.de>; Thu, 24 Sep 2020 15:06:46 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 353856E20E;
-	Thu, 24 Sep 2020 11:16:55 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 162706E40B;
+	Thu, 24 Sep 2020 13:06:44 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ot1-x341.google.com (mail-ot1-x341.google.com
- [IPv6:2607:f8b0:4864:20::341])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 062FE6E20C
- for <nouveau@lists.freedesktop.org>; Thu, 24 Sep 2020 11:16:54 +0000 (UTC)
-Received: by mail-ot1-x341.google.com with SMTP id h17so2803890otr.1
- for <nouveau@lists.freedesktop.org>; Thu, 24 Sep 2020 04:16:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=EUffDHVR2Yv6MCCT8PCpcsVqmKxjAwJSMcwmmyvnucc=;
- b=VF7T//62eV6rXVhYQn17mtsF3W0XKvPN/z5QrI+xMgYUX6byJw0pf11AOsNKqCRuTS
- IGP9jxos39i+Bo5CegbvJCCZQBy0pEzUKtr0JjejwpwaxwEhn9A6OrxtjdBrnXFdtsph
- qCCWm6psPgVDS1qmqNSSEBU+kkBRBJS0tSzJ4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=EUffDHVR2Yv6MCCT8PCpcsVqmKxjAwJSMcwmmyvnucc=;
- b=pq18XTh3EMP2sBCHotw4kZcic/Uqi3kCA+ajMtfxyVp5ws+G/WG1/nYWpuHu27jlOK
- rak5GLRLxRCxrBkJ5Fle9BUoQ1z1PwTWg3Zr/DVGQYXWJrdR9lVVVIFqPzvmBW8vsTAX
- 2MqgP6FZ7QR/T3BtfMeumWmvmO7+Hx+6m+RZGM1oTvRb90Y1h2Wr9n2N+j86qe40l5KX
- nQEPHUME1qenemlLyeZlzbvFaltsTs8lCaj0Z/bUNwh/9MVq2DOtX1zBz5+JWFhD40SC
- 4i1SvxyJn3XIwfxNv4vMSPX/aO9ShdU4sKQ5XMDEIOL30PZ9T0Gpmq2oEXDyA1iDyMcO
- OMHg==
-X-Gm-Message-State: AOAM530rhcQCpbn44VpzqLUqYQcPN5FYzVy8b3NemmCVX3uXdKSDtTf6
- +tkHt7glKcGKGYFtLl6iHpiakgLcDu5uGPor1e4XMw==
-X-Google-Smtp-Source: ABdhPJwEFjmKOPVpkpvPPLv6s6Ly5U3TjxZ7Lk3KqykuP1iMklc8VSHFYtWZTyU2/nGMhS4Oa+6LSPt4eonYgqqavfA=
-X-Received: by 2002:a05:6830:14d9:: with SMTP id
- t25mr2888208otq.188.1600946213067; 
- Thu, 24 Sep 2020 04:16:53 -0700 (PDT)
+X-Greylist: delayed 599 seconds by postgrey-1.36 at gabe;
+ Thu, 24 Sep 2020 13:06:42 UTC
+Received: from mupuf.org (mupuf.org [167.71.42.210])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 35F9F6E40B
+ for <nouveau@lists.freedesktop.org>; Thu, 24 Sep 2020 13:06:42 +0000 (UTC)
+Received: from [192.168.1.106] (unknown [89.35.197.212])
+ by Neelix.spliet.org (Postfix) with ESMTPSA id 65D8D60041
+ for <nouveau@lists.freedesktop.org>; Thu, 24 Sep 2020 13:56:33 +0100 (BST)
+DKIM-Filter: OpenDKIM Filter v2.11.0 Neelix.spliet.org 65D8D60041
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=spliet.org;
+ s=default; t=1600952193;
+ bh=cZ+nZBQegsoc0D+cmyjYFcQ8+xbOjwFx+exja4XAL3I=;
+ h=Subject:To:References:From:Date:In-Reply-To:From;
+ b=a429XuuHxSZsC+XR8OwOaf8g7xTDUP/2dAfI99/sYOAkw0IeOpNRsyvfwBbpQoEqM
+ WDP2pH6/Ecq0aicA0quA/gQRWJMbesDliECybRZgz6DS+x/yj/S2HXICs+AZIM5T3x
+ YAzzsGNIO1fnm6Bbl0KeSAqSjYKNGyVu3BIZapPQ=
+To: nouveau@lists.freedesktop.org
+References: <20200911162128.405604-1-jcline@redhat.com>
+ <CACO55tsspNbYBYdNH-zd_TeZo02yY9AtJot4FW8SYEZPuKjkZA@mail.gmail.com>
+ <20200923203918.GA37078@xps13>
+ <CACO55ttM+wmbcYz6h5qeEb9_Ta=JcnRzURFYu3-9GJPMHzdFeg@mail.gmail.com>
+From: Roy Spliet <nouveau@spliet.org>
+Message-ID: <c04d84e2-9091-a22c-c3e4-e43e4ee72057@spliet.org>
+Date: Thu, 24 Sep 2020 13:56:32 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.11.0
 MIME-Version: 1.0
-References: <20200828104016.1672195-1-thierry.reding@gmail.com>
- <20200923091853.GA1229032@ulmo> <20200923152124.GO438822@phenom.ffwll.local>
- <20200924100509.GD2483160@ulmo>
-In-Reply-To: <20200924100509.GD2483160@ulmo>
-From: Daniel Vetter <daniel@ffwll.ch>
-Date: Thu, 24 Sep 2020 13:16:42 +0200
-Message-ID: <CAKMK7uEO6jLkwiLbvW1Xz6=z+TM6ahY6TXLNNC52GGyg9r5==Q@mail.gmail.com>
-To: Thierry Reding <thierry.reding@gmail.com>
-Subject: Re: [Nouveau] [PATCH 0/6] drm/nouveau: Support sync FDs and sync
- objects
+In-Reply-To: <CACO55ttM+wmbcYz6h5qeEb9_Ta=JcnRzURFYu3-9GJPMHzdFeg@mail.gmail.com>
+Content-Language: en-US
+X-Spam-Status: No, score=-3.1 required=5.0 tests=ALL_TRUSTED,BAYES_00,
+ DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A
+ autolearn=ham autolearn_force=no version=3.4.4
+X-Spam-Checker-Version: SpamAssassin 3.4.4 (2020-01-24) on Neelix
+X-Virus-Scanned: clamav-milter 0.102.4 at Neelix
+X-Virus-Status: Clean
+Subject: Re: [Nouveau] [RFC] Documentation: nouveau: Introduce some nouveau
+ documentation
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,77 +57,255 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Nouveau Dev <nouveau@lists.freedesktop.org>,
- Ben Skeggs <bskeggs@redhat.com>, dri-devel <dri-devel@lists.freedesktop.org>
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, Sep 24, 2020 at 12:05 PM Thierry Reding
-<thierry.reding@gmail.com> wrote:
->
-> On Wed, Sep 23, 2020 at 05:21:24PM +0200, Daniel Vetter wrote:
-> > On Wed, Sep 23, 2020 at 11:18:53AM +0200, Thierry Reding wrote:
-> > > On Fri, Aug 28, 2020 at 12:40:10PM +0200, Thierry Reding wrote:
-> > > > From: Thierry Reding <treding@nvidia.com>
-> > > >
-> > > > Hi,
-> > > >
-> > > > This series implements a new IOCTL to submit push buffers that can
-> > > > optionally return a sync FD or sync object to userspace. This is useful
-> > > > in cases where userspace wants to synchronize operations between the GPU
-> > > > and another driver (such as KMS for display). Among other things this
-> > > > allows extensions such as eglDupNativeFenceFDANDROID to be implemented.
-> > > >
-> > > > Note that patch 4 modifies the ABI introduced in patch 3 by allowing DRM
-> > > > sync objects to be passed rather than only sync FDs. It also allows any
-> > > > number of sync FDs/objects to be passed in or emitted. I think those are
-> > > > useful features, but I left them in a separate patch in case everybody
-> > > > else thinks that this won't be needed. If we decide to merge the new ABI
-> > > > then patch 4 should be squashed into patch 3.
-> > > >
-> > > > The corresponding userspace changes can be found here:
-> > > >
-> > > >   libdrm: https://gitlab.freedesktop.org/tagr/drm/-/commits/nouveau-sync-fd-v2/
-> > > >   mesa: https://gitlab.freedesktop.org/tagr/mesa/-/commits/nouveau-sync-fd/
-> > > >
-> > > > I've verified that this works with kmscube's --atomic mode and Weston.
-> > >
-> > > Hi Ben,
-> > >
-> > > any thoughts on this series? I realize that this is somewhat suboptimal
-> > > because we're effectively adding a duplicate of the existing IOCTL with
-> > > only the "minor" extension of adding sync FDs/objects, but at the same
-> > > time I don't have any good ideas on what else to add to make this more
-> > > appealing or if you have any plans of your own to address this in the
-> > > future.
-> >
-> > drm core automatically zero-extends ioctl structs both ways, so if all you
-> > do is add more stuff to the top level ioctl struct at the bottom, there's
-> > no need to duplicate any code. At least as long as you guarantee that 0 ==
-> > old behaviour for both in and out parameters.
->
-> But that only works if the structure size remains fixed, right? In this
-> case, however, we have to extend the structure with additional fields,
-> so the size is going to change and therefore the IOCTL number will also
-> change.
 
-Nope, drm_ioctl() is pretty much magic, and will zero-extend size
-mismatches in both ways. Which means you can run userspace compile
-against old kernels (so user_sz > kernel_sz) and you can run old
-userspace on new kernels (so user_sz < kernel_sz) and it will all work
-correctly. No need to allocate new ioctl numbers for this case, just
-extend at the bottom. We're doing this pretty much all the time.
+Op 23-09-2020 om 22:36 schreef Karol Herbst:
+> On Wed, Sep 23, 2020 at 10:39 PM Jeremy Cline <jcline@redhat.com> wrote:
+>>
+>> On Wed, Sep 23, 2020 at 09:02:45PM +0200, Karol Herbst wrote:
+>>> On Fri, Sep 11, 2020 at 6:21 PM Jeremy Cline <jcline@redhat.com> wrote:
+>>
+>> <snip>
+>>
+>>> yeah, I think overall this file is a good idea and being able to get a
+>>> quick overview over the driver is helpful. I think if we focus on the
+>>> user facing things first, like the hwmon or other things users
+>>> generally interact with would be helpful. I think if we start to
+>>> document areas where there are many low hanging fruits, this could
+>>> help random people to start with easier tasks and get more used to the
+>>> driver overall, so I'd probably ignore most of the stuff which really
+>>> requires a fundamental understanding on how things work and focus more
+>>> on vbios parsing (which has annoying interfaces anyway and it might
+>>> make sense to make it more consistent and nicer to use) and/or simple
+>>> code interfacing with the mmio space.
+>>>
+>>
+>> I'll admit to being motivated by entirely selfish reasons. I know
+>> practically nothing about nouveau and I'm the type of person who likes
+>> to keep notes about how things work together, both free form and
+>> structured in-line docs. All that to say, I think focusing on the
+>> "low-hanging fruit" stuff will be very beneficial and I'm happy to do
+>> that, but I'm also interested in documenting everything else I run
+>> across.
+>>
+> 
+> yeah, that's fine. I was just giving a suggestion on where the initial
+> focus should be on.
+> 
+>>> Eg some users have problems with their fans as they are either always
+>>> ramping up to max, or not running at all... GPUs temperature or power
+>>> consumption is reporting incorrectly... all those things users hit
+>>> regularly, but which isn't really important enough so it just falls
+>>> under the table even if it gets reported.
+>>>
+>>
+>> This does bring up an interesting point about organization and target
+>> audiences. Typically when I'm writing documentation I like to organize
+>> things by target audiences, so we could have a layout like:
+>>
+>> * General Introduction
+>>
+>> * User Guide
+>>      - Overview of supported hardware/features/etc
+> 
+> That's best to document in a wiki though. And we had plans to convert
+> the existing old wiki over to gitlab. And maybe It think we really
+> should do that and clean it up while we work on that. It's just a huge
+> project but maybe just starting with whatever you want to do would be
+> fine and after a while nothing is left. Anyway, I think we should
+> discuss this more openly with the others as well. i don't like the
+> current wiki anyway, as only approved developers can change things and
+> with a gitlab wiki we could even take MRs on stuff.
+> 
+>>      - Installation
+> 
+> well.. I think this can be skipped ;) But still, also belongs more
+> into a wiki. I think what we could cover here is to how to clean up
+> remaining stuff from the blob driver as this is something which comes
+> up quite a lot on IRC though.
+> 
+>>      - Configuration (module parameters and such)
+>>      - Troubleshooting
+> 
+> that would be cool to have in the wiki as well. Just collecting the
+> most common issue and document it there. Especially if it is on
+> gitlab, users can just do that as well :)
+> 
+>>      - Getting Involved (bug reporting, running tests, etc)
+> 
+> yeah, and we have some stuff on that on the old wiki already, it's
+> just very outdated and needs updating, which as said above can only be
+> done by developers and developers sadly have other things to do :)
+> 
+>>
+>> * Developer Guide
+>>      - Architecture Overview
+>>      - External APIs (include/uapi/drm/nouveau_drm.h, any sysfs stuff)?
+>>      - Internal APIs
+> 
+> Right, those things I'd like to see in the kernel tree actually.
+> 
+>>      - Debugging and Development Tools
+>>      - Contribution Guide
+>>
+> 
+> Those I think belong more into the wiki again. The latter is a bit
+> hard to split as there are kernel guides, but also community and
+> project guides. Mesa does things differently than let's say the
+> kernel. And Nouveau is still in this limbo state being on the old
+> infra, but also on the new one with mesa...
+> 
+>> I'm not sure how much stuff people want to keep on the
+>> nouveau.freedesktop.org wiki vs here.
+>>
+> 
+> I think the first step actually is to set up a proper nouveau project
+> on gitlab for dealing with issues and the wiki. I would be fine to do
+> that and we can also move the code there late. But maybe let's start
+> with the wiki :)
 
-You might still want a getparam (or explicit flag, if all versions of
-that ioctl validated the flags correctly) since doing since a dummy
-pushbuf on an old kernel won't result in anything getting rejected.
--Daniel
--- 
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
+Risking to turn this into a "let's fix everything in one go" project 
+that ends up never getting finished, I just want to make sure that 
+everybody is also aware of the documentation generated from Envytools 
+[0]. Especially "architecture overview" (that is, if we're talking about 
+hardware architecture and not driver/software architecture) might be 
+better suited in envytools.
+
+As for module parameters, IMHO modinfo is supposed to be the source of 
+information. It's sadly lacking any "sub-"option inside nouveau.config 
+and nouveau.debug, which may be by design. Perhaps expanding the modinfo 
+explanations can help cover at least all the other options in a way that 
+never gets out of sync with source code.
+
+Roy
+
+[0] https://envytools.readthedocs.io/en/latest/
+
+> 
+>>>> diff --git a/drivers/gpu/drm/nouveau/include/nvkm/engine/disp.h b/drivers/gpu/drm/nouveau/include/nvkm/engine/disp.h
+>>>> index 5a96c942d912..76b90d7ddfc6 100644
+>>>> --- a/drivers/gpu/drm/nouveau/include/nvkm/engine/disp.h
+>>>> +++ b/drivers/gpu/drm/nouveau/include/nvkm/engine/disp.h
+>>>> @@ -1,22 +1,57 @@
+>>>>   /* SPDX-License-Identifier: MIT */
+>>>> +
+>>>> +/**
+>>>> + * DOC: Overview
+>>>> + *
+>>>> + * Interfaces for working with the display engine.
+>>>> + */
+>>>> +
+>>>>   #ifndef __NVKM_DISP_H__
+>>>>   #define __NVKM_DISP_H__
+>>>> +
+>>>> +/**
+>>>> + * nvkm_disp() - Get a &struct nvkm_disp from a &struct nvkm_engine.
+>>>> + *
+>>>> + * @p: A &struct nvkm_engine reference.
+>>>> + *
+>>>> + * Return: The &struct nvkm_disp that contains the given engine.
+>>>> + */
+>>>>   #define nvkm_disp(p) container_of((p), struct nvkm_disp, engine)
+>>>>   #include <core/engine.h>
+>>>>   #include <core/event.h>
+>>>>
+>>>> +/**
+>>>> + * struct nvkm_disp - Represents a display engine.
+>>>> + *
+>>>> + * This structure is for <some abstraction here>. It has <some assumptions
+>>>> + * about its usage here>.
+>>>> + */
+>>>>   struct nvkm_disp {
+>>>> +    /** @func: Chipset-specific vtable for manipulating the display. */
+>>>>          const struct nvkm_disp_func *func;
+>>>> +
+>>>> +    /** @engine: The engine for this display. */
+>>>>          struct nvkm_engine engine;
+>>>>
+>>>> +    /** @head: list of heads attached to this display. */
+>>>>          struct list_head head;
+>>>> +
+>>>> +    /** @ior: List of IO resources for this display. */
+>>>>          struct list_head ior;
+>>>> +
+>>>> +    /** @outp: List of outputs for this display. */
+>>>>          struct list_head outp;
+>>>> +
+>>>> +    /** @conn: List of connectors for this display. */
+>>>>          struct list_head conn;
+>>>>
+>>>> +    /** @hpd: An event that fires when something happens I guess. */
+>>>>          struct nvkm_event hpd;
+>>>> +
+>>>> +    /** @vblank: An event that fires and has some relation to the vblank. */
+>>>>          struct nvkm_event vblank;
+>>>>
+>>>> +    /** @client: The oproxy (?) client for this display. */
+>>>>          struct nvkm_oproxy *client;
+>>>>   };
+>>>
+>>> generally not a big fan of "int a; // a is an int" kind of
+>>> documentation. But if it would specify constraints or details on how
+>>> it's valid to use those fields, then it makes totally sense to add
+>>> stuff.
+>>
+>> Definitely, I think that is not particularly helpful documentation. Of
+>> course, the what and why of a function parameter or struct member is
+>> very likely to be more interesting than that, but it's true that every
+>> once in a while that the variable name can be so clear there's not much
+>> else to say.
+>>
+>> I think it's fair to say the documentation I added for the above struct
+>> is not good. I think it's also fair to say that a new-comer such as
+>> myself who stumbles upon this structure has practically no chance of
+>> guessing what it's all about without reading a bunch of additional code.
+>> My first guess was that it represented a display I had plugged in, which
+>> at this point I'm fairly confident is not at all correct. It required me
+>> to look at many users of this struct along with perusing envytools
+>> documentation to guess it represented a display engine.
+>>
+> 
+> yeah, but given that you run into the confusion you can actually
+> document this and leave a comment addressing that. So describing a
+> little bit what the engine does, what are heads, iors and outputs,
+> etc... I think getting the high level overview should be the focus
+> atm. We can always deal with the technical details later as those are
+> usually easier to get once you have a rough idea on what's going on.
+> 
+>> It may well be I'm an exceptionally slow learner, but even short notes
+>> can be extremely helpful.
+>>
+>>>
+>>> not sure if you were aware of it, but we have some documentation on
+>>> the module options here:
+>>> https://nouveau.freedesktop.org/wiki/KernelModuleParameters/
+>>>
+>>> But I think it makes sense to move it into the source code and link to
+>>> the new thing from the wiki then.
+>>>
+>>
+>> Indeed, and in fact I started this documentation from the wiki, but
+>> tried my best to fill in the missing parameters and config options (you
+>> don't happen to know what the NvAcrWpr* config options do, do you?)
+>>
+> 
+> I only know that this option specifies the version of the ACR WPR
+> firmware to load, but I don't know what that actually is :)
+> 
+>> Thanks!
+>>
+>> - Jeremy
+>>
+> 
+> _______________________________________________
+> Nouveau mailing list
+> Nouveau@lists.freedesktop.org
+> https://lists.freedesktop.org/mailman/listinfo/nouveau
+> 
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
