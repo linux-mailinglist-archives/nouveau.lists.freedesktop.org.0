@@ -2,43 +2,54 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9CBD427891B
-	for <lists+nouveau@lfdr.de>; Fri, 25 Sep 2020 15:13:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 721172792AB
+	for <lists+nouveau@lfdr.de>; Fri, 25 Sep 2020 22:51:49 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E89616ECDB;
-	Fri, 25 Sep 2020 13:13:33 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A50B46ED37;
+	Fri, 25 Sep 2020 20:51:45 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by gabe.freedesktop.org (Postfix) with ESMTP id 0B2A76EC91
- for <nouveau@lists.freedesktop.org>; Fri, 25 Sep 2020 11:15:42 +0000 (UTC)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 34B1D101E;
- Fri, 25 Sep 2020 04:15:42 -0700 (PDT)
-Received: from [10.57.48.76] (unknown [10.57.48.76])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 986323F70D;
- Fri, 25 Sep 2020 04:15:38 -0700 (PDT)
-To: Christoph Hellwig <hch@lst.de>, Mauro Carvalho Chehab
- <mchehab@kernel.org>, Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
- "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
- Joonyoung Shim <jy0922.shim@samsung.com>,
- Seung-Woo Kim <sw0312.kim@samsung.com>, Ben Skeggs <bskeggs@redhat.com>,
- Marek Szyprowski <m.szyprowski@samsung.com>, Tomasz Figa
- <tfiga@chromium.org>, Matt Porter <mporter@kernel.crashing.org>,
- iommu@lists.linux-foundation.org
-References: <20200915155122.1768241-1-hch@lst.de>
- <20200915155122.1768241-9-hch@lst.de>
-From: Robin Murphy <robin.murphy@arm.com>
-Message-ID: <c8ea4023-3e19-d63b-d936-46a04f502a61@arm.com>
-Date: Fri, 25 Sep 2020 12:15:37 +0100
-User-Agent: Mozilla/5.0 (Windows NT 10.0; rv:78.0) Gecko/20100101
- Thunderbird/78.2.2
+Received: from mail-ed1-x542.google.com (mail-ed1-x542.google.com
+ [IPv6:2a00:1450:4864:20::542])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id BB4B06ED37
+ for <nouveau@lists.freedesktop.org>; Fri, 25 Sep 2020 20:51:44 +0000 (UTC)
+Received: by mail-ed1-x542.google.com with SMTP id n22so3905780edt.4
+ for <nouveau@lists.freedesktop.org>; Fri, 25 Sep 2020 13:51:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=intel-com.20150623.gappssmtp.com; s=20150623;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=3mlgRZ8EIdOR1DUsE60QDF3pdVLwyWMe5uQg0KYqZh8=;
+ b=lLK1nDqkdE4kFMX940riOKRARxVPqhXy/zVsS1A2BF583+Bs6t1HB1PWpX8FT5fmMG
+ kj4laN7PoFAAtTf7nKQSfmgnZthfYdYFaYc0Bz7Y4wYumWs+ZoZt7fmJ8iqWpP6o5/sH
+ kFEKtwuYlk8CyIxak76lqkTU29ToFQ6l7KznxP19PVlyKf6+tAzcGhQhn+oCjZs+I/BG
+ hZj0p+yuyE04b9WjaCBMYkiqC6sMzMV4Oux/HTOgLFkJAvw3LNpYth20Ega3GkDNOEsf
+ zaPOXph5obEzLyOHAdc1MO70dyb/pb3ItgeObMBTO/ckPhs1YDk3R/RfTdj8iII54jF+
+ B2eA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=3mlgRZ8EIdOR1DUsE60QDF3pdVLwyWMe5uQg0KYqZh8=;
+ b=n+/d74mi6rMBqKqUOo8KY8UETxjmHooLCkmMJRhdmHVKymkKfEG9LTT2dqphQ83asC
+ u5bfjaEEegzAjJ8y55bU0uDVCZkrteF2kHHDkb8LHSnlf07xV345w4LmrJKZuTIuJ7TK
+ tBYDl73E3uQoNKJGOcthmiTEs0UXS5ug1G0hHDoUOyGhIcrj7vPxP7n43nbLNLYfCmoo
+ Qj94pQ7t0C2SOU/bqmuFCHgpupVtEhMoJNAs2gPdLieIbpunrtWq7P3Ew3BOSb4Py2KS
+ hm7yNOXnV66VznSCl032kXDRg5MEc6gFcwV5YOtnaw/BOvzBrhiifnYFWO12U3QDmkyX
+ PXiA==
+X-Gm-Message-State: AOAM532gyOvDpQZfdlCWSksEKzmLhkQb7s5Y+k7odAPBUtoJSwUJak6e
+ hysXj7SC8bjpPV7Pd9n5TsgapycrDps2Jmq73cTrRg==
+X-Google-Smtp-Source: ABdhPJw5Nq9khn3WBHc4y05yhciUUDN3DTtsOPc4oBfxkZyBg1L19vOrTNS0zLznVWAuuf5nyBS89YukU7GH7FAKcjI=
+X-Received: by 2002:aa7:d58e:: with SMTP id r14mr3532250edq.52.1601067103227; 
+ Fri, 25 Sep 2020 13:51:43 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20200915155122.1768241-9-hch@lst.de>
-Content-Language: en-GB
-X-Mailman-Approved-At: Fri, 25 Sep 2020 13:13:33 +0000
-Subject: Re: [Nouveau] [PATCH 08/18] dma-mapping: add a new
- dma_alloc_noncoherent API
+References: <20200925204442.31348-1-rcampbell@nvidia.com>
+ <20200925204442.31348-2-rcampbell@nvidia.com>
+In-Reply-To: <20200925204442.31348-2-rcampbell@nvidia.com>
+From: Dan Williams <dan.j.williams@intel.com>
+Date: Fri, 25 Sep 2020 13:51:31 -0700
+Message-ID: <CAPcyv4iOgN6nmF0N4hQGZo-DJNh3UAf1wDy1ata1Rc+RQWVH=Q@mail.gmail.com>
+To: Ralph Campbell <rcampbell@nvidia.com>
+Subject: Re: [Nouveau] [PATCH 1/2] ext4/xfs: add page refcount helper
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -50,43 +61,112 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: alsa-devel@alsa-project.org, linux-samsung-soc@vger.kernel.org,
- linux-scsi@vger.kernel.org, linux-parisc@vger.kernel.org,
- linux-doc@vger.kernel.org, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, linux-mips@vger.kernel.org, linux-mm@kvack.org,
- Stefan Richter <stefanr@s5r6.in-berlin.de>, netdev@vger.kernel.org,
- linux1394-devel@lists.sourceforge.net, linux-arm-kernel@lists.infradead.org,
- linux-media@vger.kernel.org
+Cc: Yang Shi <yang.shi@linux.alibaba.com>, Zi Yan <ziy@nvidia.com>,
+ nouveau@lists.freedesktop.org, Alistair Popple <apopple@nvidia.com>,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ Matthew Wilcox <willy@infradead.org>, Bharata B Rao <bharata@linux.ibm.com>,
+ Paul Mackerras <paulus@ozlabs.org>, Linux MM <linux-mm@kvack.org>,
+ kvm-ppc@vger.kernel.org, Jason Gunthorpe <jgg@nvidia.com>,
+ Andrew Morton <akpm@linux-foundation.org>, Ira Weiny <ira.weiny@intel.com>,
+ Christoph Hellwig <hch@lst.de>,
+ "Kirill A . Shutemov" <kirill.shutemov@linux.intel.com>,
+ Ben Skeggs <bskeggs@redhat.com>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 2020-09-15 16:51, Christoph Hellwig wrote:
-[...]
-> +These APIs allow to allocate pages in the kernel direct mapping that are
-> +guaranteed to be DMA addressable.  This means that unlike dma_alloc_coherent,
-> +virt_to_page can be called on the resulting address, and the resulting
+On Fri, Sep 25, 2020 at 1:45 PM Ralph Campbell <rcampbell@nvidia.com> wrote:
+>
+> There are several places where ZONE_DEVICE struct pages assume a reference
+> count == 1 means the page is idle and free. Instead of open coding this,
+> add a helper function to hide this detail.
+>
+> Signed-off-by: Ralph Campbell <rcampbell@nvidia.com>
+> ---
+>  fs/dax.c            | 8 ++++----
+>  fs/ext4/inode.c     | 2 +-
+>  fs/xfs/xfs_file.c   | 2 +-
+>  include/linux/dax.h | 5 +++++
+>  4 files changed, 11 insertions(+), 6 deletions(-)
+>
+> diff --git a/fs/dax.c b/fs/dax.c
+> index 994ab66a9907..8eddbcc0e149 100644
+> --- a/fs/dax.c
+> +++ b/fs/dax.c
+> @@ -358,7 +358,7 @@ static void dax_disassociate_entry(void *entry, struct address_space *mapping,
+>         for_each_mapped_pfn(entry, pfn) {
+>                 struct page *page = pfn_to_page(pfn);
+>
+> -               WARN_ON_ONCE(trunc && page_ref_count(page) > 1);
+> +               WARN_ON_ONCE(trunc && !dax_layout_is_idle_page(page));
+>                 WARN_ON_ONCE(page->mapping && page->mapping != mapping);
+>                 page->mapping = NULL;
+>                 page->index = 0;
+> @@ -372,7 +372,7 @@ static struct page *dax_busy_page(void *entry)
+>         for_each_mapped_pfn(entry, pfn) {
+>                 struct page *page = pfn_to_page(pfn);
+>
+> -               if (page_ref_count(page) > 1)
+> +               if (!dax_layout_is_idle_page(page))
+>                         return page;
+>         }
+>         return NULL;
+> @@ -560,11 +560,11 @@ static void *grab_mapping_entry(struct xa_state *xas,
+>
+>  /**
+>   * dax_layout_busy_page - find first pinned page in @mapping
+> - * @mapping: address space to scan for a page with ref count > 1
+> + * @mapping: address space to scan for a page with ref count > 0
+>   *
+>   * DAX requires ZONE_DEVICE mapped pages. These pages are never
+>   * 'onlined' to the page allocator so they are considered idle when
+> - * page->count == 1. A filesystem uses this interface to determine if
+> + * page->count == 0. A filesystem uses this interface to determine if
+>   * any page in the mapping is busy, i.e. for DMA, or other
+>   * get_user_pages() usages.
+>   *
+> diff --git a/fs/ext4/inode.c b/fs/ext4/inode.c
+> index bf596467c234..d9f8ad55523a 100644
+> --- a/fs/ext4/inode.c
+> +++ b/fs/ext4/inode.c
+> @@ -3927,7 +3927,7 @@ int ext4_break_layouts(struct inode *inode)
+>                         return 0;
+>
+>                 error = ___wait_var_event(&page->_refcount,
+> -                               atomic_read(&page->_refcount) == 1,
+> +                               dax_layout_is_idle_page(page),
+>                                 TASK_INTERRUPTIBLE, 0, 0,
+>                                 ext4_wait_dax_page(ei));
+>         } while (error == 0);
+> diff --git a/fs/xfs/xfs_file.c b/fs/xfs/xfs_file.c
+> index a29f78a663ca..29ab96541bc1 100644
+> --- a/fs/xfs/xfs_file.c
+> +++ b/fs/xfs/xfs_file.c
+> @@ -750,7 +750,7 @@ xfs_break_dax_layouts(
+>
+>         *retry = true;
+>         return ___wait_var_event(&page->_refcount,
+> -                       atomic_read(&page->_refcount) == 1, TASK_INTERRUPTIBLE,
+> +                       dax_layout_is_idle_page(page), TASK_INTERRUPTIBLE,
+>                         0, 0, xfs_wait_dax_page(inode));
+>  }
+>
+> diff --git a/include/linux/dax.h b/include/linux/dax.h
+> index 43b39ab9de1a..3f78ed78d1d6 100644
+> --- a/include/linux/dax.h
+> +++ b/include/linux/dax.h
+> @@ -238,4 +238,9 @@ static inline bool dax_mapping(struct address_space *mapping)
+>         return mapping->host && IS_DAX(mapping->host);
+>  }
+>
+> +static inline bool dax_layout_is_idle_page(struct page *page)
+> +{
+> +       return page_ref_count(page) <= 1;
 
-Nit: if we explicitly describe this as if it's a guarantee that can be 
-relied upon...
-
-> +struct page can be used for everything a struct page is suitable for.
-
-[...]
-> +This routine allocates a region of <size> bytes of consistent memory.  It
-> +returns a pointer to the allocated region (in the processor's virtual address
-> +space) or NULL if the allocation failed.  The returned memory may or may not
-> +be in the kernels direct mapping.  Drivers must not call virt_to_page on
-> +the returned memory region.
-
-...then forbid this document's target audience from relying on it, 
-something seems off. At the very least it's unhelpfully unclear :/
-
-Given patch #17, I suspect that the first paragraph is the one that's no 
-longer true.
-
-Robin.
+Why convert the check from "== 1" to "<= 1" and then back to the ==
+operator in the next patch? A refcount < 1 in this path before your
+other change is a bug.
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
