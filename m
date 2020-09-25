@@ -2,22 +2,22 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id ADD312794EC
-	for <lists+nouveau@lfdr.de>; Sat, 26 Sep 2020 01:46:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 55CE62794EE
+	for <lists+nouveau@lfdr.de>; Sat, 26 Sep 2020 01:46:24 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D0A026ED78;
-	Fri, 25 Sep 2020 23:46:16 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 21DEF6ED7D;
+	Fri, 25 Sep 2020 23:46:17 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from hqnvemgate24.nvidia.com (hqnvemgate24.nvidia.com
- [216.228.121.143])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 469736ED37
- for <nouveau@lists.freedesktop.org>; Fri, 25 Sep 2020 20:44:54 +0000 (UTC)
+Received: from hqnvemgate25.nvidia.com (hqnvemgate25.nvidia.com
+ [216.228.121.64])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7850B6ED37
+ for <nouveau@lists.freedesktop.org>; Fri, 25 Sep 2020 20:44:52 +0000 (UTC)
 Received: from hqmail.nvidia.com (Not Verified[216.228.121.13]) by
- hqnvemgate24.nvidia.com (using TLS: TLSv1.2, AES256-SHA)
- id <B5f6e56640000>; Fri, 25 Sep 2020 13:43:16 -0700
-Received: from HQMAIL111.nvidia.com (172.20.187.18) by HQMAIL107.nvidia.com
- (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Fri, 25 Sep
+ hqnvemgate25.nvidia.com (using TLS: TLSv1.2, AES256-SHA)
+ id <B5f6e56930000>; Fri, 25 Sep 2020 13:44:03 -0700
+Received: from HQMAIL111.nvidia.com (172.20.187.18) by HQMAIL111.nvidia.com
+ (172.20.187.18) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Fri, 25 Sep
  2020 20:44:48 +0000
 Received: from rcampbell-dev.nvidia.com (10.124.1.5) by mail.nvidia.com
  (172.20.187.18) with Microsoft SMTP Server id 15.0.1473.3 via Frontend
@@ -25,24 +25,26 @@ Received: from rcampbell-dev.nvidia.com (10.124.1.5) by mail.nvidia.com
 From: Ralph Campbell <rcampbell@nvidia.com>
 To: <linux-mm@kvack.org>, <kvm-ppc@vger.kernel.org>,
  <nouveau@lists.freedesktop.org>, <linux-kernel@vger.kernel.org>
-Date: Fri, 25 Sep 2020 13:44:40 -0700
-Message-ID: <20200925204442.31348-1-rcampbell@nvidia.com>
+Date: Fri, 25 Sep 2020 13:44:41 -0700
+Message-ID: <20200925204442.31348-2-rcampbell@nvidia.com>
 X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20200925204442.31348-1-rcampbell@nvidia.com>
+References: <20200925204442.31348-1-rcampbell@nvidia.com>
 MIME-Version: 1.0
 X-NVConfidentiality: public
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
- t=1601066596; bh=IIi6Sijxjm9DkdSwlUuTFLfh6/fqFTnXKxwmblAGiV8=;
- h=From:To:CC:Subject:Date:Message-ID:X-Mailer:MIME-Version:
- X-NVConfidentiality:Content-Transfer-Encoding:Content-Type;
- b=NFJ6YFkhgNIOOdMlie0VWq8+8mXjElOrB6784/lkZUqNHwZbby6427Saf3tjOwQSt
- LOhmadYzy+XQNjNAapH2D+f9sU3nLJ9dE3Hij6pantDaopl6Yem83LAWQBXECgUdLB
- ZFl0uZacEHu81yE63YccWCofRpK1FVm3+lsuOfFW8z/jrOJXZBYq9BwiEXDcdJ69UF
- Wr9fxgfqwIiD2S8rWNhXITPRiBn89uScWvQgJlEbq9LdyT5TZEiGNbfOVimrhg4+1S
- jnqGZZ9g5HHiWsiXnKNX0CpD06Y4bx6h1L16K07AVLsSHwrl45o7rNXVR5Sm/4Ui+Y
- VMq0PBuPd7ovw==
+ t=1601066643; bh=4UbYfQo9AxoYDYhHzSM52zo+QqA5U/JvLsALQgToAcw=;
+ h=From:To:CC:Subject:Date:Message-ID:X-Mailer:In-Reply-To:
+ References:MIME-Version:X-NVConfidentiality:
+ Content-Transfer-Encoding:Content-Type;
+ b=ppmFHJw0FcvTTLsqEzpQGv1+HRZOAwtVEIxm0dWqH7qfJliBWPFv0mr0+bEjH9zMw
+ 27oZK0wp+klIF1aR8bjlS0PCzsozHz0RU7MoXCOJoKJMskpwWXSYldy1pORDmvC6R6
+ nwaNeCE1ezdMPk1zip1/0XO+Y98S809xcq0vKiH1bot2OZ/NB/eLGflsWUFgvZXkC9
+ YCqnNcLDseWWA7vraoWncwMoTeSoOBhEK7AuZ8NEMrgLd7zwRTsmFjoPT1sSduX3aj
+ aJXHU048cE+Gn7/oz0w8gMVrcgsNwJMIen9Fpp2fqb9izIrKOoovFISrkv3h1lyN0d
+ xtnrv3qv5fzZg==
 X-Mailman-Approved-At: Fri, 25 Sep 2020 23:46:15 +0000
-Subject: [Nouveau] [RFC PATCH v2 0/2] mm: remove extra ZONE_DEVICE struct
- page refcount
+Subject: [Nouveau] [PATCH 1/2] ext4/xfs: add page refcount helper
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,58 +70,94 @@ Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Matthew Wilcox, Ira Weiny, and others have complained that ZONE_DEVICE
-struct page reference counting is ugly because they are "free" when the
-reference count is one instead of zero. This leads to explicit checks
-for ZONE_DEVICE pages in places like put_page(), GUP, THP splitting, and
-page migration which have to adjust the expected reference count when
-determining if the page is isolated or idle. This is my attempt to make
-ZONE_DEVICE pages be free when the reference count is zero and removing
-the special cases.
+There are several places where ZONE_DEVICE struct pages assume a reference
+count == 1 means the page is idle and free. Instead of open coding this,
+add a helper function to hide this detail.
 
-I'm only sending this out as a RFC since I'm not that familiar with the
-DAX, PMEM, XEN, and other uses of ZONE_DEVICE struct pages allocated
-with devm_memremap_pages() or memremap_pages() but my best reading of
-the code looks like it might be OK. I could use help testing these
-configurations.
-I have been able to successfully run xfstests on ext4 with the memmap
-kernel boot option to simulate pmem.
+Signed-off-by: Ralph Campbell <rcampbell@nvidia.com>
+---
+ fs/dax.c            | 8 ++++----
+ fs/ext4/inode.c     | 2 +-
+ fs/xfs/xfs_file.c   | 2 +-
+ include/linux/dax.h | 5 +++++
+ 4 files changed, 11 insertions(+), 6 deletions(-)
 
-One of the big changes in v2 is that devm_memremap_pages() and
-memremap_pages() now return the struct pages' reference count set to
-zero instead of one. Normally, get_page() will VM_BUG_ON_PAGE() if
-page->_refcount is zero. I didn't see any such warnings running the
-xfstests with dax/pmem but I'm not clear how the zero to one reference
-count is handled.
-
-Other changes in v2:
-Rebased to Linux-5.9.0-rc6 to include pmem fixes.
-I added patch 1 to introduce a page refcount helper for ext4 and xfs as
-suggested by Christoph Hellwig.
-I also applied Christoph Hellwig's other suggested changes for removing
-the devmap_managed_key, etc.
-
-Ralph Campbell (2):
-  ext4/xfs: add page refcount helper
-  mm: remove extra ZONE_DEVICE struct page refcount
-
- arch/powerpc/kvm/book3s_hv_uvmem.c     |  2 +-
- drivers/gpu/drm/nouveau/nouveau_dmem.c |  2 +-
- fs/dax.c                               |  8 +--
- fs/ext4/inode.c                        |  2 +-
- fs/xfs/xfs_file.c                      |  2 +-
- include/linux/dax.h                    |  5 ++
- include/linux/memremap.h               |  7 ++-
- include/linux/mm.h                     | 44 --------------
- lib/test_hmm.c                         |  2 +-
- mm/gup.c                               | 44 --------------
- mm/internal.h                          |  8 +++
- mm/memremap.c                          | 82 ++++++--------------------
- mm/migrate.c                           |  5 --
- mm/page_alloc.c                        |  3 +
- mm/swap.c                              | 46 +++------------
- 15 files changed, 54 insertions(+), 208 deletions(-)
-
+diff --git a/fs/dax.c b/fs/dax.c
+index 994ab66a9907..8eddbcc0e149 100644
+--- a/fs/dax.c
++++ b/fs/dax.c
+@@ -358,7 +358,7 @@ static void dax_disassociate_entry(void *entry, struct address_space *mapping,
+ 	for_each_mapped_pfn(entry, pfn) {
+ 		struct page *page = pfn_to_page(pfn);
+ 
+-		WARN_ON_ONCE(trunc && page_ref_count(page) > 1);
++		WARN_ON_ONCE(trunc && !dax_layout_is_idle_page(page));
+ 		WARN_ON_ONCE(page->mapping && page->mapping != mapping);
+ 		page->mapping = NULL;
+ 		page->index = 0;
+@@ -372,7 +372,7 @@ static struct page *dax_busy_page(void *entry)
+ 	for_each_mapped_pfn(entry, pfn) {
+ 		struct page *page = pfn_to_page(pfn);
+ 
+-		if (page_ref_count(page) > 1)
++		if (!dax_layout_is_idle_page(page))
+ 			return page;
+ 	}
+ 	return NULL;
+@@ -560,11 +560,11 @@ static void *grab_mapping_entry(struct xa_state *xas,
+ 
+ /**
+  * dax_layout_busy_page - find first pinned page in @mapping
+- * @mapping: address space to scan for a page with ref count > 1
++ * @mapping: address space to scan for a page with ref count > 0
+  *
+  * DAX requires ZONE_DEVICE mapped pages. These pages are never
+  * 'onlined' to the page allocator so they are considered idle when
+- * page->count == 1. A filesystem uses this interface to determine if
++ * page->count == 0. A filesystem uses this interface to determine if
+  * any page in the mapping is busy, i.e. for DMA, or other
+  * get_user_pages() usages.
+  *
+diff --git a/fs/ext4/inode.c b/fs/ext4/inode.c
+index bf596467c234..d9f8ad55523a 100644
+--- a/fs/ext4/inode.c
++++ b/fs/ext4/inode.c
+@@ -3927,7 +3927,7 @@ int ext4_break_layouts(struct inode *inode)
+ 			return 0;
+ 
+ 		error = ___wait_var_event(&page->_refcount,
+-				atomic_read(&page->_refcount) == 1,
++				dax_layout_is_idle_page(page),
+ 				TASK_INTERRUPTIBLE, 0, 0,
+ 				ext4_wait_dax_page(ei));
+ 	} while (error == 0);
+diff --git a/fs/xfs/xfs_file.c b/fs/xfs/xfs_file.c
+index a29f78a663ca..29ab96541bc1 100644
+--- a/fs/xfs/xfs_file.c
++++ b/fs/xfs/xfs_file.c
+@@ -750,7 +750,7 @@ xfs_break_dax_layouts(
+ 
+ 	*retry = true;
+ 	return ___wait_var_event(&page->_refcount,
+-			atomic_read(&page->_refcount) == 1, TASK_INTERRUPTIBLE,
++			dax_layout_is_idle_page(page), TASK_INTERRUPTIBLE,
+ 			0, 0, xfs_wait_dax_page(inode));
+ }
+ 
+diff --git a/include/linux/dax.h b/include/linux/dax.h
+index 43b39ab9de1a..3f78ed78d1d6 100644
+--- a/include/linux/dax.h
++++ b/include/linux/dax.h
+@@ -238,4 +238,9 @@ static inline bool dax_mapping(struct address_space *mapping)
+ 	return mapping->host && IS_DAX(mapping->host);
+ }
+ 
++static inline bool dax_layout_is_idle_page(struct page *page)
++{
++	return page_ref_count(page) <= 1;
++}
++
+ #endif
 -- 
 2.20.1
 
