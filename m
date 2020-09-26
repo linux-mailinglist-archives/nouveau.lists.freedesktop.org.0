@@ -2,48 +2,30 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5EA50279538
-	for <lists+nouveau@lfdr.de>; Sat, 26 Sep 2020 01:54:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 20BB0279B5B
+	for <lists+nouveau@lfdr.de>; Sat, 26 Sep 2020 19:26:13 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 90AAA6ED83;
-	Fri, 25 Sep 2020 23:54:02 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D11A96E213;
+	Sat, 26 Sep 2020 17:26:06 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ua1-f68.google.com (mail-ua1-f68.google.com
- [209.85.222.68])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8446E6ED80;
- Fri, 25 Sep 2020 23:54:01 +0000 (UTC)
-Received: by mail-ua1-f68.google.com with SMTP id o64so220965uao.1;
- Fri, 25 Sep 2020 16:54:01 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=k3a4T/qYjLdTTJwj1OQmoXaHAUT02pWpKA08ylkAqoE=;
- b=pZaKST1eNFt4jcmFP/Xj2Ni0tuhAp2ZmWwHuNmX9bKxuv6RCu6/69hYpJBiy7GcWOh
- N3h6y71Y1jEmSo+YUKAjPOtI4Nhs2uO7KKnaeKQOEVClHkWzmQGlQQnIeWO5GnVvgCzW
- w4Ozwrn/tnDgcOw93WcfHUxBml9D0itIFao5Wv/C9de/jwdBHOZMAEY79mo/puERtSfn
- Wj7NhXD4kDsJx7RnRKg6ouEX0wNOdyaJi7q1tQTKmcWeS3TjAXW8ojMjp692EJ14lIyy
- jTKPx0ioeW8kU729YKVFO1dWYV0LYDnDtrPUp8crCWp6zMA9zAK3IThq3EQksrdDN5jj
- RovQ==
-X-Gm-Message-State: AOAM533yoCOS0ycem1XccF6qekP3uLPcSeykGFUM/kqrnlWpr6CGEcMe
- xr0Yj/csbW1HfG3g5r38YUxjVjgp9Y23zpQC9Bo=
-X-Google-Smtp-Source: ABdhPJwPZLu2RiCnmxt1vGCrhOphqmf64XIDBpJTmDRTMaVG8mO61nql1FdhcQeKjUCxnIL8mHJNDkfziqyduuXBIFk=
-X-Received: by 2002:ab0:2741:: with SMTP id c1mr764744uap.98.1601078040403;
- Fri, 25 Sep 2020 16:54:00 -0700 (PDT)
+Received: from verein.lst.de (verein.lst.de [213.95.11.211])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8E6D06E161
+ for <nouveau@lists.freedesktop.org>; Sat, 26 Sep 2020 06:35:43 +0000 (UTC)
+Received: by verein.lst.de (Postfix, from userid 2407)
+ id 4A4B268AFE; Sat, 26 Sep 2020 08:35:40 +0200 (CEST)
+Date: Sat, 26 Sep 2020 08:35:39 +0200
+From: Christoph Hellwig <hch@lst.de>
+To: Ralph Campbell <rcampbell@nvidia.com>
+Message-ID: <20200926063539.GA3540@lst.de>
+References: <20200925204442.31348-1-rcampbell@nvidia.com>
+ <20200925204442.31348-2-rcampbell@nvidia.com>
 MIME-Version: 1.0
-References: <20200922210510.156220-1-lyude@redhat.com>
- <CAKb7UvhAb0wFd9Qi1FGJ=TAYZJ9DYXL6XXMfnG49xEO=a9TuYg@mail.gmail.com>
- <7b10668ee337e531b14705ebecb1f6c1004728d6.camel@redhat.com>
- <CAKb7Uvj++15aEXiLGgSZb37wwzDSRCetVT+trP6JNwhk8n-whA@mail.gmail.com>
- <8bd8ee03f88e7e674e0ea8c6d63d783777cfe414.camel@redhat.com>
-In-Reply-To: <8bd8ee03f88e7e674e0ea8c6d63d783777cfe414.camel@redhat.com>
-From: Ilia Mirkin <imirkin@alum.mit.edu>
-Date: Fri, 25 Sep 2020 19:53:49 -0400
-Message-ID: <CAKb7UvgL_rV73BqvVoZsagy+_+cnBios1pKazq064D51NdAuqw@mail.gmail.com>
-To: Lyude <lyude@redhat.com>
-Subject: Re: [Nouveau] [PATCH] drm/nouveau/kms/nv50-: Fix clock checking
- algorithm in nv50_dp_mode_valid()
+Content-Disposition: inline
+In-Reply-To: <20200925204442.31348-2-rcampbell@nvidia.com>
+User-Agent: Mutt/1.5.17 (2007-11-01)
+X-Mailman-Approved-At: Sat, 26 Sep 2020 17:26:05 +0000
+Subject: Re: [Nouveau] [PATCH 1/2] ext4/xfs: add page refcount helper
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -55,82 +37,45 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, nouveau <nouveau@lists.freedesktop.org>,
- open list <linux-kernel@vger.kernel.org>,
- "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
- <dri-devel@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>
+Cc: Yang Shi <yang.shi@linux.alibaba.com>, Zi Yan <ziy@nvidia.com>,
+ nouveau@lists.freedesktop.org, Alistair Popple <apopple@nvidia.com>,
+ linux-kernel@vger.kernel.org, kvm-ppc@vger.kernel.org,
+ Bharata B Rao <bharata@linux.ibm.com>, Paul Mackerras <paulus@ozlabs.org>,
+ linux-mm@kvack.org, Matthew Wilcox <willy@infradead.org>,
+ Jason Gunthorpe <jgg@nvidia.com>, Dan Williams <dan.j.williams@intel.com>,
+ Andrew Morton <akpm@linux-foundation.org>, Ira Weiny <ira.weiny@intel.com>,
+ Christoph Hellwig <hch@lst.de>,
+ "Kirill A . Shutemov" <kirill.shutemov@linux.intel.com>,
+ Ben Skeggs <bskeggs@redhat.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, Sep 25, 2020 at 6:08 PM Lyude Paul <lyude@redhat.com> wrote:
->
-> On Tue, 2020-09-22 at 17:22 -0400, Ilia Mirkin wrote:
-> > On Tue, Sep 22, 2020 at 5:14 PM Lyude Paul <lyude@redhat.com> wrote:
-> > > On Tue, 2020-09-22 at 17:10 -0400, Ilia Mirkin wrote:
-> > > > Can we use 6bpc on arbitrary DP monitors, or is there a capability for
-> > > > it? Maybe only use 6bpc if display_info.bpc == 6 and otherwise use 8?
-> > >
-> > > I don't think that display_info.bpc actually implies a minimum bpc, only a
-> > > maximum bpc iirc (Ville would know the answer to this one). The other thing
-> > > to
-> > > note here is that we want to assume the lowest possible bpc here since we're
-> > > only concerned if the mode passed to ->mode_valid can be set under -any-
-> > > conditions (including those that require lowering the bpc beyond it's
-> > > maximum
-> > > value), so we definitely do want to always use 6bpc here even once we get
-> > > support for optimizing the bpc based on the available display bandwidth.
-> >
-> > Yeah, display_info is the max bpc. But would an average monitor
-> > support 6bpc? And if it does, does the current link training code even
-> > try that when display_info.bpc != 6?
->
-> So I did confirm that 6bpc support is mandatory for DP, so yes-6 bpc will always
-> work.
->
-> But also, your second comment doesn't really apply here. So: to be clear, we're
-> not really concerned here about whether nouveau will actually use 6bpc or not.
-> In truth I'm not actually sure either if we have any code that uses 6bpc (iirc
-> we don't), since we don't current optimize bpc. I think it's very possible for
-> us to use 6bpc for eDP displays if I recall though, but I'm not sure on that.
->
-> But that's also not the point of this code. ->mode_valid() is only used in two
-> situations in DRM modesetting: when probing connector modes, and when checking
-> if a mode is valid or not during the atomic check for atomic modesetting. Its
-> purpose is only to reject display modes that are physically impossible to set in
-> hardware due to static hardware constraints. Put another way, we only check the
-> given mode against constraints which will always remain constant regardless of
-> the rest of the display state. An example of a static constraint would be the
-> max pixel clock supported by the hardware, since on sensible hardware this never
-> changes. A dynamic constraint would be something like how much bandwidth is
-> currently unused on an MST topology, since that value is entirely dependent on
-> the rest of the display state.
->
-> So - with that said, bpc is technically a dynamic constraint because while a
-> sink and source both likely have their own bpc limits, any bpc which is equal or
-> below that limit can be used depending on what the driver decides - which will
-> be based on the max_bpc property, and additionally for MST displays it will also
-> depend on the available bandwidth on the topology. The only non-dynamic thing
-> about bpc is that at a minimum, it will be 6 - so any mode that doesn't fit on
-> the link with a bpc of 6 is guaranteed to be a mode that we'll never be able to
-> set and therefore want to prune.
->
-> So, even if we're not using 6 in the majority of situations, I'm fairly
-> confident it's the right value here. It's also what i915 does as well (and they
-> previously had to fix a bug that was the result of assuming a minimum of 8bpc
-> instead of 6).
+On Fri, Sep 25, 2020 at 01:44:41PM -0700, Ralph Campbell wrote:
+>  		error = ___wait_var_event(&page->_refcount,
+> -				atomic_read(&page->_refcount) == 1,
+> +				dax_layout_is_idle_page(page),
+>  				TASK_INTERRUPTIBLE, 0, 0,
+>  				ext4_wait_dax_page(ei));
 
-Here's the situation I'm trying to avoid:
+> +++ b/fs/xfs/xfs_file.c
+> @@ -750,7 +750,7 @@ xfs_break_dax_layouts(
+>  
+>  	*retry = true;
+>  	return ___wait_var_event(&page->_refcount,
+> -			atomic_read(&page->_refcount) == 1, TASK_INTERRUPTIBLE,
+> +			dax_layout_is_idle_page(page), TASK_INTERRUPTIBLE,
+>  			0, 0, xfs_wait_dax_page(inode));
+>  }
 
-1. Mode is considered "OK" from a bandwidth perspective @6bpc
-2. Modesetting logic never tries 6bpc and the modeset fails
+I still think a litte helper macro would be nice here:
 
-As long as the two bits of logic agree on what is settable, I'm happy.
-
-Cheers,
-
-  -ilia
+#define dax_wait_page(_inode, _page, _wait_cb)				\
+  	___wait_var_event(&(_page)->_refcount,				\
+		atomic_read(&(_page)->_refcount) == 1,			\
+		TASK_INTERRUPTIBLE, dax_layout_is_idle_page(_page),	\
+		TASK_INTERRUPTIBLE, 0, 0, _wait_cb(_inode));
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
