@@ -1,64 +1,46 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0F479279B59
-	for <lists+nouveau@lfdr.de>; Sat, 26 Sep 2020 19:26:10 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2309827AE91
+	for <lists+nouveau@lfdr.de>; Mon, 28 Sep 2020 15:02:49 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2E6696E21D;
-	Sat, 26 Sep 2020 17:26:06 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 328B189E19;
+	Mon, 28 Sep 2020 13:02:42 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ed1-x542.google.com (mail-ed1-x542.google.com
- [IPv6:2a00:1450:4864:20::542])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E95E96E038
- for <nouveau@lists.freedesktop.org>; Sat, 26 Sep 2020 15:30:49 +0000 (UTC)
-Received: by mail-ed1-x542.google.com with SMTP id a12so5487498eds.13
- for <nouveau@lists.freedesktop.org>; Sat, 26 Sep 2020 08:30:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=NyijGOIcOg0IQ8xJ7tRK9WXb8VbwFr7joS3ngRxTFtY=;
- b=IgNtiCGTIRw+9Jq9+OugAEUgOtWjA8eNb9N0lGKIZhSzq8+Nq6i8p6dAPgDSw3WCu5
- 5zLCQcy1nGd484dN8MEuuVSYHqucVtHjEfU81Ws4/lYX/HOp4JbMrZzXbrOql6BtdQAy
- +hEnD/Pr6tT/viPh9YkxxEEc7eplb0NwJB92c=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=NyijGOIcOg0IQ8xJ7tRK9WXb8VbwFr7joS3ngRxTFtY=;
- b=WvYeWsOO+TvGuNKC2hhh4io4ISfG290kL2dOW/wgRyJnrJppVsS53SSpc8XEqdqz78
- pvcrVmpSDrob4/Q+3Vqdod56Onkf6dUNGIQF7EKnioAhzN6sSgf5XLzQ0UhMgtJBDssg
- lvFmTZvWuLTV0ZMNxxJeoNEqBv7dc48iW6wLVEnPa6ytSBhrTfu05vUC5uUpdxDiowqc
- QiJB6lkOaBnKlNS6Gp7ghtPt71tUkZnxPi02Ka2mVcOhfyICpxdjAiwpezPtbIooiIhD
- qZe4fYltm3/3V556S1I+bsQGbme46tU/d/0p/G3wip0hOyhVUDEoffWe5iRvYDtYphmC
- XQmw==
-X-Gm-Message-State: AOAM532dv2E9xom5c4YZQBs0A0xd6zu3xIc2Mm7W+fyPYAdYNn+KWQxY
- Mbb7ULf7HgGvlF+BEWsdK//NpS1MbHeFOp1R
-X-Google-Smtp-Source: ABdhPJyRDvqLdFKkrsAyxKhZRp+8pFuaMPHb9evNYyGqlQHk9dL20SxtMg3oDnPZ/aNgRg8r0dm94A==
-X-Received: by 2002:aa7:dcd9:: with SMTP id w25mr6781875edu.280.1601134248382; 
- Sat, 26 Sep 2020 08:30:48 -0700 (PDT)
-Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com.
- [209.85.128.42])
- by smtp.gmail.com with ESMTPSA id bx24sm4373582ejb.51.2020.09.26.08.30.48
- for <nouveau@lists.freedesktop.org>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 26 Sep 2020 08:30:48 -0700 (PDT)
-Received: by mail-wm1-f42.google.com with SMTP id e11so1434472wme.0
- for <nouveau@lists.freedesktop.org>; Sat, 26 Sep 2020 08:30:48 -0700 (PDT)
-X-Received: by 2002:a7b:c925:: with SMTP id h5mr2968012wml.28.1601133943201;
- Sat, 26 Sep 2020 08:25:43 -0700 (PDT)
+Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7307F89E0E;
+ Mon, 28 Sep 2020 13:02:40 +0000 (UTC)
+IronPort-SDR: k2GsFVEF033j6lvbStwWYZOYL5HMpEZ5B/QIbyHSmrZQiG4I5P4fKQAcDPibWrH0SgT2ts69ln
+ bcfaI5IrBCHw==
+X-IronPort-AV: E=McAfee;i="6000,8403,9757"; a="162871208"
+X-IronPort-AV: E=Sophos;i="5.77,313,1596524400"; d="scan'208";a="162871208"
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from orsmga008.jf.intel.com ([10.7.209.65])
+ by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 28 Sep 2020 06:01:45 -0700
+IronPort-SDR: 2PYb7chxyfjfrLHr1gMCoPXK20Doql8Ipysr3XEkekNBhef/3QikprX/1U1qDPFgKsaDmmqgcW
+ UeaWQB1ewDJg==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.77,313,1596524400"; d="scan'208";a="340409775"
+Received: from stinkbox.fi.intel.com (HELO stinkbox) ([10.237.72.174])
+ by orsmga008.jf.intel.com with SMTP; 28 Sep 2020 06:01:42 -0700
+Received: by stinkbox (sSMTP sendmail emulation);
+ Mon, 28 Sep 2020 16:01:41 +0300
+Date: Mon, 28 Sep 2020 16:01:41 +0300
+From: Ville =?iso-8859-1?Q?Syrj=E4l=E4?= <ville.syrjala@linux.intel.com>
+To: Lyude Paul <lyude@redhat.com>
+Message-ID: <20200928130141.GV6112@intel.com>
+References: <20200922210510.156220-1-lyude@redhat.com>
 MIME-Version: 1.0
-References: <20200915155122.1768241-1-hch@lst.de>
- <20200915155122.1768241-18-hch@lst.de>
- <20200925184622.GB3607091@chromium.org> <20200926141428.GB10379@lst.de>
-In-Reply-To: <20200926141428.GB10379@lst.de>
-From: Tomasz Figa <tfiga@chromium.org>
-Date: Sat, 26 Sep 2020 17:25:27 +0200
-X-Gmail-Original-Message-ID: <CAAFQd5CjSKswdc3qOEZy73cyYJ9kfaXsSFyxkOHA+buh-J12UA@mail.gmail.com>
-Message-ID: <CAAFQd5CjSKswdc3qOEZy73cyYJ9kfaXsSFyxkOHA+buh-J12UA@mail.gmail.com>
-To: Christoph Hellwig <hch@lst.de>
-X-Mailman-Approved-At: Sat, 26 Sep 2020 17:26:05 +0000
-Subject: Re: [Nouveau] [PATCH 17/18] dma-iommu: implement ->alloc_noncoherent
+Content-Disposition: inline
+In-Reply-To: <20200922210510.156220-1-lyude@redhat.com>
+X-Patchwork-Hint: comment
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Subject: Re: [Nouveau] [PATCH] drm/nouveau/kms/nv50-: Fix clock checking
+ algorithm in nv50_dp_mode_valid()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,79 +52,115 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: alsa-devel@alsa-project.org,
- Linux Doc Mailing List <linux-doc@vger.kernel.org>,
- nouveau@lists.freedesktop.org, linux-mips@vger.kernel.org,
- "James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>,
- linux-mm@kvack.org, linux1394-devel@lists.sourceforge.net,
- Marek Szyprowski <m.szyprowski@samsung.com>,
- linux-samsung-soc <linux-samsung-soc@vger.kernel.org>,
- Joonyoung Shim <jy0922.shim@samsung.com>, linux-scsi@vger.kernel.org,
- Ben Skeggs <bskeggs@redhat.com>, Matt Porter <mporter@kernel.crashing.org>,
- Linux Media Mailing List <linux-media@vger.kernel.org>,
- Mauro Carvalho Chehab <mchehab@kernel.org>,
- "list@263.net:IOMMU DRIVERS <iommu@lists.linux-foundation.org>,
- Joerg Roedel <joro@8bytes.org>, " <linux-arm-kernel@lists.infradead.org>,
- Thomas Bogendoerfer <tsbogend@alpha.franken.de>, linux-parisc@vger.kernel.org,
- netdev@vger.kernel.org, Seung-Woo Kim <sw0312.kim@samsung.com>,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- "list@263.net:IOMMU DRIVERS <iommu@lists.linux-foundation.org>,
- Joerg Roedel <joro@8bytes.org>, " <iommu@lists.linux-foundation.org>,
- Stefan Richter <stefanr@s5r6.in-berlin.de>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
+ open list <linux-kernel@vger.kernel.org>,
+ "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
+ <dri-devel@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>,
+ Daniel Vetter <daniel@ffwll.ch>
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Sat, Sep 26, 2020 at 4:14 PM Christoph Hellwig <hch@lst.de> wrote:
->
-> On Fri, Sep 25, 2020 at 06:46:22PM +0000, Tomasz Figa wrote:
-> > > +static void *iommu_dma_alloc_noncoherent(struct device *dev, size_t size,
-> > > +           dma_addr_t *handle, enum dma_data_direction dir, gfp_t gfp)
-> > > +{
-> > > +   if (!gfpflags_allow_blocking(gfp)) {
-> > > +           struct page *page;
-> > > +
-> > > +           page = dma_common_alloc_pages(dev, size, handle, dir, gfp);
-> > > +           if (!page)
-> > > +                   return NULL;
-> > > +           return page_address(page);
-> > > +   }
-> > > +
-> > > +   return iommu_dma_alloc_remap(dev, size, handle, gfp | __GFP_ZERO,
-> > > +                                PAGE_KERNEL, 0);
-> >
-> > iommu_dma_alloc_remap() makes use of the DMA_ATTR_ALLOC_SINGLE_PAGES attribute
-> > to optimize the allocations for devices which don't care about how contiguous
-> > the backing memory is. Do you think we could add an attrs argument to this
-> > function and pass it there?
-> >
-> > As ARM is being moved to the common iommu-dma layer as well, we'll probably
-> > make use of the argument to support the DMA_ATTR_NO_KERNEL_MAPPING attribute to
-> > conserve the vmalloc area.
->
-> We could probably at it.  However I wonder why this is something the
-> drivers should care about.  Isn't this really something that should
-> be a kernel-wide policy for a given system?
+On Tue, Sep 22, 2020 at 05:05:10PM -0400, Lyude Paul wrote:
+> While I thought I had this correct (since it actually did reject modes
+> like I expected during testing), Ville Syrjala from Intel pointed out
+> that the logic here isn't correct. max_clock refers to the max symbol
+> rate supported by the encoder, so limiting clock to ds_clock using max()
+> doesn't make sense. Additionally, we want to check against 6bpc for the
+> time being since that's the minimum possible bpc here, not the reported
+> bpc from the connector. See:
+> =
 
-There are IOMMUs out there which support huge pages and those can
-benefit *some* hardware depending on what kind of accesses they
-perform, possibly on a per-buffer basis. At the same time, order > 0
-allocations can be expensive, significantly affecting allocation
-latency, so for devices which don't care about huge pages anyone would
-prefer simple single-page allocations. Currently the drivers know the
-best on whether the hardware they drive would care. There are some
-decision factors listed in the documentation [1].
+> https://lists.freedesktop.org/archives/dri-devel/2020-September/280276.ht=
+ml
+> =
 
-I can imagine cases where drivers could not be the best to decide
-about this - for example, the workload could vary depending on the
-userspace or a product decision regarding the performance vs
-allocation latency, but we haven't seen such cases in practice yet.
+> For more info.
+> =
 
-[1] https://www.kernel.org/doc/html/latest/core-api/dma-attributes.html?highlight=dma_attr_alloc_single_pages#dma-attr-alloc-single-pages
+> So, let's rewrite this using Ville's advice.
+> =
 
-Best regards,
-Tomasz
+> Signed-off-by: Lyude Paul <lyude@redhat.com>
+> Fixes: 409d38139b42 ("drm/nouveau/kms/nv50-: Use downstream DP clock limi=
+ts for mode validation")
+> Cc: Ville Syrj=E4l=E4 <ville.syrjala@linux.intel.com>
+> Cc: Lyude Paul <lyude@redhat.com>
+> Cc: Ben Skeggs <bskeggs@redhat.com>
+> ---
+>  drivers/gpu/drm/nouveau/nouveau_dp.c | 23 +++++++++++++----------
+>  1 file changed, 13 insertions(+), 10 deletions(-)
+> =
+
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_dp.c b/drivers/gpu/drm/nouve=
+au/nouveau_dp.c
+> index 7b640e05bd4cd..24c81e423d349 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_dp.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_dp.c
+> @@ -231,23 +231,26 @@ nv50_dp_mode_valid(struct drm_connector *connector,
+>  		   const struct drm_display_mode *mode,
+>  		   unsigned *out_clock)
+>  {
+> -	const unsigned min_clock =3D 25000;
+> -	unsigned max_clock, ds_clock, clock;
+> +	const unsigned int min_clock =3D 25000;
+> +	unsigned int max_clock, ds_clock, clock;
+> +	const u8 bpp =3D 18; /* 6 bpc */
+
+AFAICS nv50_outp_atomic_check() and nv50_msto_atomic_check()
+just blindly use connector->display_info.bpc without any fallback
+logic to lower the bpc. So Ilia's concerns seem well founded.
+Without that logic I guess you should just use
+connector->display_info.bpc here as well.
+
+>  	enum drm_mode_status ret;
+>  =
+
+>  	if (mode->flags & DRM_MODE_FLAG_INTERLACE && !outp->caps.dp_interlace)
+>  		return MODE_NO_INTERLACE;
+>  =
+
+>  	max_clock =3D outp->dp.link_nr * outp->dp.link_bw;
+> -	ds_clock =3D drm_dp_downstream_max_dotclock(outp->dp.dpcd,
+> -						  outp->dp.downstream_ports);
+> -	if (ds_clock)
+> -		max_clock =3D min(max_clock, ds_clock);
+> -
+> -	clock =3D mode->clock * (connector->display_info.bpc * 3) / 10;
+> -	ret =3D nouveau_conn_mode_clock_valid(mode, min_clock, max_clock,
+> -					    &clock);
+> +	clock =3D mode->clock * bpp / 8;
+> +	if (clock > max_clock)
+> +		return MODE_CLOCK_HIGH;
+
+This stuff vs. nouveau_conn_mode_clock_valid() still seems a bit messy.
+The max_clock you pass to nouveau_conn_mode_clock_valid() is the max
+symbol clock, but nouveau_conn_mode_clock_valid() checks it against the
+dotclock. Also only nouveau_conn_mode_clock_valid() has any kind of
+stereo 3D handling, but AFAICS stereo_allowed is also set for DP?
+
+> +
+> +	ds_clock =3D drm_dp_downstream_max_dotclock(outp->dp.dpcd, outp->dp.dow=
+nstream_ports);
+> +	if (ds_clock && mode->clock > ds_clock)
+> +		return MODE_CLOCK_HIGH;
+> +
+> +	ret =3D nouveau_conn_mode_clock_valid(mode, min_clock, max_clock, &cloc=
+k);
+>  	if (out_clock)
+>  		*out_clock =3D clock;
+> +
+>  	return ret;
+>  }
+> -- =
+
+> 2.26.2
+
+-- =
+
+Ville Syrj=E4l=E4
+Intel
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
