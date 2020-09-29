@@ -1,86 +1,52 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 66B0627BB38
-	for <lists+nouveau@lfdr.de>; Tue, 29 Sep 2020 05:00:05 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4264027D1DB
+	for <lists+nouveau@lfdr.de>; Tue, 29 Sep 2020 16:52:43 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 837AE89D60;
-	Tue, 29 Sep 2020 03:00:02 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D9E2589CD5;
+	Tue, 29 Sep 2020 14:52:39 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mx0a-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com
- [148.163.158.5])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 28B4E89D60
- for <nouveau@lists.freedesktop.org>; Tue, 29 Sep 2020 03:00:01 +0000 (UTC)
-Received: from pps.filterd (m0098420.ppops.net [127.0.0.1])
- by mx0b-001b2d01.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 08T2WUxo170825; Mon, 28 Sep 2020 22:59:52 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com;
- h=date : from : to : cc :
- subject : message-id : reply-to : references : mime-version : content-type
- : in-reply-to; s=pp1; bh=5ZRM/KDpvesPWf69Rz9gnZHLps4Dc84U5HBJCv1mi6A=;
- b=Mkh8x/+u0Rgbksw7uC63ujkhldesHM6hn2XcZz8bcZoh510CmC+pzIgwgSSm5a6Ae4tQ
- bHyO8I8eDYFhKKKninC9aaN4kiRlYDJYQDFDqteltPLiEn/nOmvGEFOhUkB7PmuKzH6I
- M9Oj8DYTpDhuL32usmveCoZvifF6AjpiFKnObtTet4Z19gvWqpcibFfbLSNYAooPcuSi
- bUpjr9da/TnjQYV8Tvt2Tx8S1i+XbUGVCGMsYIPdg3w4cnlUQLh0nAgYBoVtxetlwBye
- 9RMyOdfzMeqbW46KMmeqKCIw/ZTq0rsI/8zbgWzFQ7dRbAtq2KLZsPkKwK/uxWZFhOFl oA== 
-Received: from pps.reinject (localhost [127.0.0.1])
- by mx0b-001b2d01.pphosted.com with ESMTP id 33uuk2sc84-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 28 Sep 2020 22:59:52 -0400
-Received: from m0098420.ppops.net (m0098420.ppops.net [127.0.0.1])
- by pps.reinject (8.16.0.36/8.16.0.36) with SMTP id 08T2xpXN044389;
- Mon, 28 Sep 2020 22:59:51 -0400
-Received: from ppma02fra.de.ibm.com (47.49.7a9f.ip4.static.sl-reverse.com
- [159.122.73.71])
- by mx0b-001b2d01.pphosted.com with ESMTP id 33uuk2sc7m-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 28 Sep 2020 22:59:51 -0400
-Received: from pps.filterd (ppma02fra.de.ibm.com [127.0.0.1])
- by ppma02fra.de.ibm.com (8.16.0.42/8.16.0.42) with SMTP id 08T2upkk019473;
- Tue, 29 Sep 2020 02:59:49 GMT
-Received: from b06avi18878370.portsmouth.uk.ibm.com
- (b06avi18878370.portsmouth.uk.ibm.com [9.149.26.194])
- by ppma02fra.de.ibm.com with ESMTP id 33sw981dw9-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 29 Sep 2020 02:59:49 +0000
-Received: from d06av23.portsmouth.uk.ibm.com (d06av23.portsmouth.uk.ibm.com
- [9.149.105.59])
- by b06avi18878370.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP
- id 08T2xljm26935674
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 29 Sep 2020 02:59:47 GMT
-Received: from d06av23.portsmouth.uk.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 48D80A4053;
- Tue, 29 Sep 2020 02:59:47 +0000 (GMT)
-Received: from d06av23.portsmouth.uk.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 39DE8A4040;
- Tue, 29 Sep 2020 02:59:44 +0000 (GMT)
-Received: from in.ibm.com (unknown [9.199.52.162])
- by d06av23.portsmouth.uk.ibm.com (Postfix) with ESMTPS;
- Tue, 29 Sep 2020 02:59:44 +0000 (GMT)
-Date: Tue, 29 Sep 2020 08:29:41 +0530
-From: Bharata B Rao <bharata@linux.ibm.com>
-To: Ralph Campbell <rcampbell@nvidia.com>
-Message-ID: <20200929025941.GA257792@in.ibm.com>
-References: <20200925204442.31348-1-rcampbell@nvidia.com>
- <20200925204442.31348-3-rcampbell@nvidia.com>
+Received: from mail-ot1-x342.google.com (mail-ot1-x342.google.com
+ [IPv6:2607:f8b0:4864:20::342])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5CAF489CD5
+ for <nouveau@lists.freedesktop.org>; Tue, 29 Sep 2020 14:52:38 +0000 (UTC)
+Received: by mail-ot1-x342.google.com with SMTP id g96so4668492otb.12
+ for <nouveau@lists.freedesktop.org>; Tue, 29 Sep 2020 07:52:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=rPPXygZpzq9GUSfGOTbHR/oyN1//VICOUWLY0E6v4MM=;
+ b=Ho+XxXi5ACUZ8esXVjJlwKAXFD0NTq6chJJ+WXCn4aiw6wOlh4ao4wDhWD9Rayb0+D
+ UHdFvmqKv7DokFFXkV8AlD0+fLjf4+qIGdm72NgAo7lnl7wdKWurgoUqCaaT0esLGZC0
+ mICjE2tzQ9/6KC3m/9YCvsQMQDPW1OcKg86xI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=rPPXygZpzq9GUSfGOTbHR/oyN1//VICOUWLY0E6v4MM=;
+ b=ZjWBBAiT/IrIX65dWUpsodwNpUXxu7MSf8dZRC3qOOT9eeJHD3UBHLYW98V45rNTL1
+ HmHQVfFHObG+Vl2OTZgG5+7ePtsGL9+lSN6U/JSE4zxC26O0qGVn3M21IGL4zQJ3H+Tb
+ HcYjxezn2NpOEzHaqFr6cp3HHIPh8358FdiFVN8dUk5MabxutBlAylF60bp10XtO8kOZ
+ it+7Pd3EutowhbaRfxEkeOa4i51cPZJtjU+qUEKo9LZp/qALX0zxP36NdpFdCJT80zjY
+ /W4jBTyb/gcMDqoKeViQPAomjJVbqN8WxzFumbpv8seyspvB0ZpP7Oc3/Q2HQ/ciJAVR
+ /RDQ==
+X-Gm-Message-State: AOAM5327A8hTAbUhO7vraV/4d4Fu3tSiy4gVeG5tWuHxy36UeQGwppoB
+ BoWfDzgT6AXO125wsJOL+5PXdbF2PgXFPVMVdEK2oA==
+X-Google-Smtp-Source: ABdhPJycJt2AzY8h+0ku2hXxDhhkYoHhCQavBX1f/Wk0JEvpi81QFW8kiUFC9ek5T9COAOOJ2r6yEzHjl4rNTHmhGdQ=
+X-Received: by 2002:a9d:4b99:: with SMTP id k25mr3167384otf.281.1601391157431; 
+ Tue, 29 Sep 2020 07:52:37 -0700 (PDT)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20200925204442.31348-3-rcampbell@nvidia.com>
-X-TM-AS-GCONF: 00
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235, 18.0.687
- definitions=2020-09-28_25:2020-09-28,
- 2020-09-28 signatures=0
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- mlxscore=0 adultscore=0
- bulkscore=0 clxscore=1011 malwarescore=0 phishscore=0 suspectscore=1
- priorityscore=1501 lowpriorityscore=0 impostorscore=0 spamscore=0
- mlxlogscore=999 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2006250000 definitions=main-2009290019
-Subject: Re: [Nouveau] [PATCH 2/2] mm: remove extra ZONE_DEVICE struct page
- refcount
+References: <20200802181849.1586281-1-daniel.vetter@ffwll.ch>
+ <579702ca-4b4e-0b05-1b93-25b99554d464@linux.intel.com>
+ <CAKMK7uHbdcLMJONxR5OZXBLtm0WVxT117mBD72RDW5MRQ=ky4g@mail.gmail.com>
+In-Reply-To: <CAKMK7uHbdcLMJONxR5OZXBLtm0WVxT117mBD72RDW5MRQ=ky4g@mail.gmail.com>
+From: Daniel Vetter <daniel.vetter@ffwll.ch>
+Date: Tue, 29 Sep 2020 16:52:26 +0200
+Message-ID: <CAKMK7uE89ZyvVronwpS=+ovJj_njVo3C5+GjjZp2S-Dk_7p2jg@mail.gmail.com>
+To: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>
+Subject: Re: [Nouveau] [PATCH] drm/nouveau: Drop mutex_lock_nested for atomic
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -92,63 +58,95 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Reply-To: bharata@linux.ibm.com
-Cc: Yang Shi <yang.shi@linux.alibaba.com>, Zi Yan <ziy@nvidia.com>,
- nouveau@lists.freedesktop.org, Alistair Popple <apopple@nvidia.com>,
- linux-kernel@vger.kernel.org, kvm-ppc@vger.kernel.org,
- Paul Mackerras <paulus@ozlabs.org>, linux-mm@kvack.org,
- Matthew Wilcox <willy@infradead.org>, Jason Gunthorpe <jgg@nvidia.com>,
- Dan Williams <dan.j.williams@intel.com>,
- Andrew Morton <akpm@linux-foundation.org>, Ira Weiny <ira.weiny@intel.com>,
- Christoph Hellwig <hch@lst.de>,
- "Kirill A . Shutemov" <kirill.shutemov@linux.intel.com>,
- Ben Skeggs <bskeggs@redhat.com>
+Cc: Maarten Lankhorst <m.b.lankhorst@gmail.com>,
+ Nouveau Dev <nouveau@lists.freedesktop.org>,
+ DRI Development <dri-devel@lists.freedesktop.org>,
+ Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel.vetter@intel.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, Sep 25, 2020 at 01:44:42PM -0700, Ralph Campbell wrote:
-> ZONE_DEVICE struct pages have an extra reference count that complicates the
-> code for put_page() and several places in the kernel that need to check the
-> reference count to see that a page is not being used (gup, compaction,
-> migration, etc.). Clean up the code so the reference count doesn't need to
-> be treated specially for ZONE_DEVICE.
-> 
-> Signed-off-by: Ralph Campbell <rcampbell@nvidia.com>
-> ---
->  arch/powerpc/kvm/book3s_hv_uvmem.c     |  2 +-
->  drivers/gpu/drm/nouveau/nouveau_dmem.c |  2 +-
->  include/linux/dax.h                    |  2 +-
->  include/linux/memremap.h               |  7 ++-
->  include/linux/mm.h                     | 44 --------------
->  lib/test_hmm.c                         |  2 +-
->  mm/gup.c                               | 44 --------------
->  mm/internal.h                          |  8 +++
->  mm/memremap.c                          | 82 ++++++--------------------
->  mm/migrate.c                           |  5 --
->  mm/page_alloc.c                        |  3 +
->  mm/swap.c                              | 46 +++------------
->  12 files changed, 44 insertions(+), 203 deletions(-)
-> 
-> diff --git a/arch/powerpc/kvm/book3s_hv_uvmem.c b/arch/powerpc/kvm/book3s_hv_uvmem.c
-> index 7705d5557239..e6ec98325fab 100644
-> --- a/arch/powerpc/kvm/book3s_hv_uvmem.c
-> +++ b/arch/powerpc/kvm/book3s_hv_uvmem.c
-> @@ -711,7 +711,7 @@ static struct page *kvmppc_uvmem_get_page(unsigned long gpa, struct kvm *kvm)
->  
->  	dpage = pfn_to_page(uvmem_pfn);
->  	dpage->zone_device_data = pvt;
-> -	get_page(dpage);
-> +	init_page_count(dpage);
+On Thu, Sep 17, 2020 at 3:15 PM Daniel Vetter <daniel.vetter@ffwll.ch> wrote:
+>
+> Ben, did you have a chance to look at this?
 
-The powerpc change looks good. Passes a quick sanity test of
-booting/rebooting a secure guest on Power.
+Ping
+-Daniel
 
-Tested-by: Bharata B Rao <bharata@linux.ibm.com>
+> On Mon, Aug 3, 2020 at 1:22 PM Maarten Lankhorst
+> <maarten.lankhorst@linux.intel.com> wrote:
+> >
+> > Op 02-08-2020 om 20:18 schreef Daniel Vetter:
+> > > Purely conjecture, but I think the original locking inversion with the
+> > > legacy page flip code between flipping and ttm's bo move function
+> > > shoudn't exist anymore with atomic: With atomic the bo pinning and
+> > > actual modeset commit is completely separated in the code patsh.
+> > >
+> > > This annotation was originally added in
+> > >
+> > > commit 060810d7abaabcab282e062c595871d661561400
+> > > Author: Ben Skeggs <bskeggs@redhat.com>
+> > > Date:   Mon Jul 8 14:15:51 2013 +1000
+> > >
+> > >     drm/nouveau: fix locking issues in page flipping paths
+> > >
+> > > due to
+> > >
+> > > commit b580c9e2b7ba5030a795aa2fb73b796523d65a78
+> > > Author: Maarten Lankhorst <m.b.lankhorst@gmail.com>
+> > > Date:   Thu Jun 27 13:48:18 2013 +0200
+> > >
+> > >     drm/nouveau: make flipping lockdep safe
+> > >
+> > > Signed-off-by: Daniel Vetter <daniel.vetter@intel.com>
+> > > Cc: Maarten Lankhorst <m.b.lankhorst@gmail.com>
+> > > Cc: Ben Skeggs <bskeggs@redhat.com>
+> > > Cc: Dave Airlie <airlied@gmail.com>
+> > > Cc: nouveau@lists.freedesktop.org
+> > > ---
+> > > I might be totally wrong, so this definitely needs testing :-)
+> > >
+> > > Cheers, Daniel
+> > > ---
+> > >  drivers/gpu/drm/nouveau/nouveau_bo.c | 6 +++++-
+> > >  1 file changed, 5 insertions(+), 1 deletion(-)
+> > >
+> > > diff --git a/drivers/gpu/drm/nouveau/nouveau_bo.c b/drivers/gpu/drm/nouveau/nouveau_bo.c
+> > > index 7806278dce57..a7b2a9bb0ffe 100644
+> > > --- a/drivers/gpu/drm/nouveau/nouveau_bo.c
+> > > +++ b/drivers/gpu/drm/nouveau/nouveau_bo.c
+> > > @@ -776,7 +776,11 @@ nouveau_bo_move_m2mf(struct ttm_buffer_object *bo, int evict, bool intr,
+> > >                       return ret;
+> > >       }
+> > >
+> > > -     mutex_lock_nested(&cli->mutex, SINGLE_DEPTH_NESTING);
+> > > +     if (drm_drv_uses_atomic_modeset(drm->dev))
+> > > +             mutex_lock(&cli->mutex);
+> > > +     else
+> > > +             mutex_lock_nested(&cli->mutex, SINGLE_DEPTH_NESTING);
+> > > +
+> > >       ret = nouveau_fence_sync(nouveau_bo(bo), chan, true, intr);
+> > >       if (ret == 0) {
+> > >               ret = drm->ttm.move(chan, bo, &bo->mem, new_reg);
+> >
+> > Well if you're certain it works now. :)
+> >
+> > Reviewed-by: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>
+> >
+>
+>
+> --
+> Daniel Vetter
+> Software Engineer, Intel Corporation
+> http://blog.ffwll.ch
 
-Regards,
-Bharata.
+
+
+-- 
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
