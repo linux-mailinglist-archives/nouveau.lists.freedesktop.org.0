@@ -2,16 +2,16 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id D094D27F090
-	for <lists+nouveau@lfdr.de>; Wed, 30 Sep 2020 19:32:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 086F727F091
+	for <lists+nouveau@lfdr.de>; Wed, 30 Sep 2020 19:32:15 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6CB1E6E7F5;
-	Wed, 30 Sep 2020 17:32:06 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 2A44E6E80B;
+	Wed, 30 Sep 2020 17:32:07 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 488A16E7FE
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C98A36E804
  for <nouveau@lists.freedesktop.org>; Wed, 30 Sep 2020 17:32:05 +0000 (UTC)
 Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
  s=mimecast20190719; t=1601487124;
@@ -19,27 +19,27 @@ Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=SOK3VpaLugUn8WKPb71ze/hRdmbv8ahvwqoFfQSHyyk=;
- b=O72YQkjUCpMYQLNGQvy13QciT70hIDmFJ4jwXVV/1yu3ZfSkQgPDAsCaf79UZ0p0YnSgP5
- LYyDRQ7bGb5dVWOYdNn/9o94HBODeYMVD6kFkyYlhft3evNsG3Q3SKRyPaIrHCrG9AmKeQ
- 4tWcAKv2HsEYjkuNm4yUoutsNByEGkg=
+ bh=d9CzA/MH9595AD/2ACdm207/gYYjade7gzHRLAXYlV4=;
+ b=diDpKHk7+frrWL/QmagYt77HKLsMtRmunNnMYINlrKU5Fn7I/zUtp1Kb4nFHiFSrr8i9HM
+ V1CdZ4rGyfFjek3ROpErkXrU+8wNRIxJLc7Z2hyLH24aKlmrMD7UG2vrmmD5meRr7f9fwm
+ MF0gAsex9jRI9QY5ydSFuc2T13/RMKM=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-485-_938f7FTMDC4F7D6ERLxKA-1; Wed, 30 Sep 2020 13:31:57 -0400
-X-MC-Unique: _938f7FTMDC4F7D6ERLxKA-1
+ us-mta-493-545oqoxBMfSbbucAvrrGig-1; Wed, 30 Sep 2020 13:31:57 -0400
+X-MC-Unique: 545oqoxBMfSbbucAvrrGig-1
 Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
  [10.5.11.11])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 2B086104D3E2;
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id CA9141005E67;
  Wed, 30 Sep 2020 17:31:56 +0000 (UTC)
 Received: from Ruby.redhat.com (ovpn-118-194.rdu2.redhat.com [10.10.118.194])
- by smtp.corp.redhat.com (Postfix) with ESMTP id A258678833;
- Wed, 30 Sep 2020 17:31:55 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 4F25978806;
+ Wed, 30 Sep 2020 17:31:56 +0000 (UTC)
 From: Lyude <lyude@redhat.com>
 To: igt-dev@lists.freedesktop.org
-Date: Wed, 30 Sep 2020 13:31:47 -0400
-Message-Id: <20200930173150.431995-3-lyude@redhat.com>
+Date: Wed, 30 Sep 2020 13:31:48 -0400
+Message-Id: <20200930173150.431995-4-lyude@redhat.com>
 In-Reply-To: <20200930173150.431995-1-lyude@redhat.com>
 References: <20200930173150.431995-1-lyude@redhat.com>
 MIME-Version: 1.0
@@ -48,7 +48,8 @@ Authentication-Results: relay.mimecast.com;
  auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=lyude@redhat.com
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Subject: [Nouveau] [PATCH i-g-t v5 2/5] lib/igt_core: Add igt_require_fd()
+Subject: [Nouveau] [PATCH i-g-t v5 3/5] lib/igt_debugfs: Add
+ igt_debugfs_pipe_dir()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,39 +69,62 @@ Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 From: Lyude Paul <lyude@redhat.com>
 
-Like igt_assert_fd(), but using igt_require() instead
+Like igt_debugfs_connector_dir(), but for pipes instead.
 
-Changes since v1:
-* Fix documentation error in igt_require_fd() - Petri Latvala
+Changes since v4:
+* Make igt_debugfs_pipe_dir() much smaller - jcline
+* Fixup docs - jcline
 
 Signed-off-by: Lyude Paul <lyude@redhat.com>
 ---
- lib/igt_core.h | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
+ lib/igt_debugfs.c | 21 +++++++++++++++++++++
+ lib/igt_debugfs.h |  1 +
+ 2 files changed, 22 insertions(+)
 
-diff --git a/lib/igt_core.h b/lib/igt_core.h
-index e74ede8b..5d835260 100644
---- a/lib/igt_core.h
-+++ b/lib/igt_core.h
-@@ -1021,6 +1021,18 @@ void igt_describe_f(const char *fmt, ...);
- 	else igt_debug("Test requirement passed: %s\n", #expr); \
- } while (0)
+diff --git a/lib/igt_debugfs.c b/lib/igt_debugfs.c
+index 05067078..c4dab392 100644
+--- a/lib/igt_debugfs.c
++++ b/lib/igt_debugfs.c
+@@ -260,6 +260,27 @@ int igt_debugfs_connector_dir(int device, char *conn_name, int mode)
+ 	return ret;
+ }
  
 +/**
-+ * igt_require_fd:
-+ * @fd: file descriptor
++ * igt_debugfs_pipe_dir:
++ * @device: fd of the device
++ * @pipe: index of pipe
++ * @mode: mode bits as used by open()
 + *
-+ * Skips (sub-) test if the given file descriptor is invalid.
++ * This opens the debugfs directory corresponding to the pipe index on the
++ * device for use with igt_sysfs_get() and related functions. This is just
++ * syntax sugar for igt_debugfs_open().
 + *
-+ * Like igt_require(), but displays the stringified identifier that was supposed
-+ * to contain a valid fd on failure.
++ * Returns:
++ * The directory fd, or -1 on failure.
 + */
-+#define igt_require_fd(fd) \
-+	igt_require_f(fd >= 0, "file descriptor " #fd " failed\n");
++int igt_debugfs_pipe_dir(int device, int pipe, int mode)
++{
++	char buf[128];
++
++	snprintf(buf, sizeof(buf), "crtc-%d", pipe);
++	return igt_debugfs_open(device, buf, mode);
++}
 +
  /**
-  * igt_skip_on_f:
-  * @expr: condition to test
+  * igt_debugfs_open:
+  * @filename: name of the debugfs node to open
+diff --git a/lib/igt_debugfs.h b/lib/igt_debugfs.h
+index 722c5cc3..d43ba6c6 100644
+--- a/lib/igt_debugfs.h
++++ b/lib/igt_debugfs.h
+@@ -36,6 +36,7 @@ char *igt_debugfs_path(int device, char *path, int pathlen);
+ 
+ int igt_debugfs_dir(int device);
+ int igt_debugfs_connector_dir(int device, char *conn_name, int mode);
++int igt_debugfs_pipe_dir(int device, int pipe, int mode);
+ 
+ int igt_debugfs_open(int fd, const char *filename, int mode);
+ void __igt_debugfs_read(int fd, const char *filename, char *buf, int size);
 -- 
 2.26.2
 
