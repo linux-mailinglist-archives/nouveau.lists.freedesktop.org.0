@@ -1,51 +1,56 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1B95527DC15
-	for <lists+nouveau@lfdr.de>; Wed, 30 Sep 2020 00:31:57 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8C18627DD7F
+	for <lists+nouveau@lfdr.de>; Wed, 30 Sep 2020 02:45:21 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9138A6E1F9;
-	Tue, 29 Sep 2020 22:31:55 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 051C56E03B;
+	Wed, 30 Sep 2020 00:45:19 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [63.128.21.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7678F6E1FB
- for <nouveau@lists.freedesktop.org>; Tue, 29 Sep 2020 22:31:54 +0000 (UTC)
-Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1601418713;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=N3EvNa7CARVdvxvcgx4Z06Gs+9k22STMCzS8+0wBp20=;
- b=EKpHblTleXB4ip0L+tkK/pBguSwIvOkm5TgO74rnfgZk6a7x4T5Idx99iip81wT7fM+sOU
- M8ROwQPikPnkuEESY5VHEjZV1AJTcggE6EajFw4G0VHrGpToWObvzX0WU8dKUH7lXqq/Ec
- kXoj3HrLBwsc2viRTGox3gz0PLF7I1U=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-508-wyDZfFjxNqaEGA3Qg41bcQ-1; Tue, 29 Sep 2020 18:31:45 -0400
-X-MC-Unique: wyDZfFjxNqaEGA3Qg41bcQ-1
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
- [10.5.11.15])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 93A7A186841D;
- Tue, 29 Sep 2020 22:31:44 +0000 (UTC)
-Received: from Ruby.redhat.com (ovpn-121-117.rdu2.redhat.com [10.10.121.117])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 5B75B55775;
- Tue, 29 Sep 2020 22:31:43 +0000 (UTC)
-From: Lyude Paul <lyude@redhat.com>
-To: nouveau@lists.freedesktop.org
-Date: Tue, 29 Sep 2020 18:31:32 -0400
-Message-Id: <20200929223132.333453-2-lyude@redhat.com>
-In-Reply-To: <20200929223132.333453-1-lyude@redhat.com>
-References: <20200929223132.333453-1-lyude@redhat.com>
+Received: from mail-yb1-xb44.google.com (mail-yb1-xb44.google.com
+ [IPv6:2607:f8b0:4864:20::b44])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B53D589EEB;
+ Wed, 30 Sep 2020 00:45:17 +0000 (UTC)
+Received: by mail-yb1-xb44.google.com with SMTP id s19so5066981ybc.5;
+ Tue, 29 Sep 2020 17:45:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=TCuS1SFM3rtFY9nQD9y59GPaHLOThNZLeNFklAwpXq4=;
+ b=imv8UC73+sPVgA3YQ/G1pSugmbwMVMN1p2shPAUILME7w23mDi43ewJRQ+wfVonOb/
+ ac2jlI8sgxl42kcaGl3iDBjl01KkPIEmlydLP5k/Z5v0iNMcmXRIAmmJuWtf5xhaQoKl
+ 9iwd6M1U9vouycYr7JUcZMDoyriu7sxwq3bvPFFD4L7SgNrlgmpHzDv4yqnqGXVtaRJ7
+ 9gGai26jAaZKwdgLmAhCn1g//+HyPJ/njd3yCyLzww63ZcaGC6RkVWWI5av3a1IYDmck
+ uV5k4W72osA0pilj1SAWW2OEt7fkebpatUpDZ3XQVByx+CMtvvn6RuKh3eujqK1z5xKK
+ jS1A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=TCuS1SFM3rtFY9nQD9y59GPaHLOThNZLeNFklAwpXq4=;
+ b=jd0PvfACCyuG3EjxZMAsv8eTcPmVh0WHQE6jQQaiESCocKVd35nfTe3h4EjXAk4CSu
+ WT4DOj3XcdVC+qBAt9/PwPMx7/2cluBImzMXsaUNYZxk3vzeZgVjn1LU/JVnspa0o/8l
+ LuYar9Jq6q/kbtxd2txK7zvNGp9+QVo7tnRweNwzAK7zAbGgBiHhE49BmU4gXWOq9X6/
+ +IWXYZVozcLUWehSY4gWgSOILo70Nx8ZgqJrWCQWLwMhOyFT0YNd7+GHIRkuYuhAryJG
+ 2hOs8MMXBorMpR95VXvzJARMAEY88T3Dbw8+vt8CcMqH8zggQWey+TMVuO6iHFpkjJoQ
+ e+iQ==
+X-Gm-Message-State: AOAM532n8w589kiguYADoy3Nm0PQrmQ6a1vRtlu2ERKGeu6CBGxcQ6qP
+ 7SKU1OZvHb3DhiiJ7s9FbFgbByommmI5ohbF6Qo=
+X-Google-Smtp-Source: ABdhPJzI+KPQXt9sMsNuh/RqjX4xnXDaIKJyY/MaKl76cd1ZGCSuc6U19jjx+slXvG1q8m0gx7k5NYtTrAeafBlkPYM=
+X-Received: by 2002:a25:7102:: with SMTP id m2mr14082ybc.435.1601426716825;
+ Tue, 29 Sep 2020 17:45:16 -0700 (PDT)
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
-Subject: [Nouveau] [PATCH v2 2/2] drm/nouveau/kms/nv50-: Fix clock checking
- algorithm in nv50_dp_mode_valid()
+References: <20200802181849.1586281-1-daniel.vetter@ffwll.ch>
+ <579702ca-4b4e-0b05-1b93-25b99554d464@linux.intel.com>
+ <CAKMK7uHbdcLMJONxR5OZXBLtm0WVxT117mBD72RDW5MRQ=ky4g@mail.gmail.com>
+ <CAKMK7uE89ZyvVronwpS=+ovJj_njVo3C5+GjjZp2S-Dk_7p2jg@mail.gmail.com>
+In-Reply-To: <CAKMK7uE89ZyvVronwpS=+ovJj_njVo3C5+GjjZp2S-Dk_7p2jg@mail.gmail.com>
+From: Ben Skeggs <skeggsb@gmail.com>
+Date: Wed, 30 Sep 2020 10:45:05 +1000
+Message-ID: <CACAvsv7nmpJPVnfGkRW=UECvNyjNRO0x=0VMPr0VuFBNtpk+2g@mail.gmail.com>
+To: Daniel Vetter <daniel.vetter@ffwll.ch>
+Subject: Re: [Nouveau] [PATCH] drm/nouveau: Drop mutex_lock_nested for atomic
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,71 +62,105 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
- "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
- <dri-devel@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>,
- Daniel Vetter <daniel@ffwll.ch>,
- =?UTF-8?q?Ville=20Syrj=C3=A4l=C3=A4?= <ville.syrjala@linux.intel.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: Maarten Lankhorst <m.b.lankhorst@gmail.com>,
+ Nouveau Dev <nouveau@lists.freedesktop.org>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ DRI Development <dri-devel@lists.freedesktop.org>,
+ Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel.vetter@intel.com>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-V2hpbGUgSSB0aG91Z2h0IEkgaGFkIHRoaXMgY29ycmVjdCAoc2luY2UgaXQgYWN0dWFsbHkgZGlk
-IHJlamVjdCBtb2RlcwpsaWtlIEkgZXhwZWN0ZWQgZHVyaW5nIHRlc3RpbmcpLCBWaWxsZSBTeXJq
-YWxhIGZyb20gSW50ZWwgcG9pbnRlZCBvdXQKdGhhdCB0aGUgbG9naWMgaGVyZSBpc24ndCBjb3Jy
-ZWN0LiBtYXhfY2xvY2sgcmVmZXJzIHRvIHRoZSBtYXggZGF0YSByYXRlCnN1cHBvcnRlZCBieSB0
-aGUgRFAgZW5jb2Rlci4gU28sIGxpbWl0aW5nIGl0IHRvIHRoZSBvdXRwdXQgb2YgZHNfY2xvY2sg
-KHdoaWNoCnJlZmVycyB0byB0aGUgbWF4aW11bSBkb3RjbG9jayBvZiB0aGUgZG93bnN0cmVhbSBE
-UCBkZXZpY2UpIGRvZXNuJ3QgbWFrZSBhbnkKc2Vuc2UuIEFkZGl0aW9uYWxseSwgc2luY2Ugd2Un
-cmUgdXNpbmcgdGhlIGNvbm5lY3RvcidzIGJwYyBhcyB0aGUgY2Fub25pY2FsIEJQQwp3ZSBzaG91
-bGQgdXNlIHRoaXMgaW4gbW9kZV92YWxpZCB1bnRpbCB3ZSBzdXBwb3J0IGR5bmFtaWNhbGx5IHNl
-dHRpbmcgdGhlIGJwcApiYXNlZCBvbiBiYW5kd2lkdGggY29uc3RyYWludHMuCgpodHRwczovL2xp
-c3RzLmZyZWVkZXNrdG9wLm9yZy9hcmNoaXZlcy9kcmktZGV2ZWwvMjAyMC1TZXB0ZW1iZXIvMjgw
-Mjc2Lmh0bWwKCkZvciBtb3JlIGluZm8uCgpTbywgbGV0J3MgcmV3cml0ZSB0aGlzIHVzaW5nIFZp
-bGxlJ3MgYWR2aWNlLgoKdjI6CiogVmlsbGUgcG9pbnRlZCBvdXQgSSBtaXhlZCB1cCB0aGUgZG90
-Y2xvY2sgYW5kIHRoZSBsaW5rIHJhdGUuIFNvIGZpeCB0aGF0Li4uCiogLi4uYW5kIGFsc28gcmVu
-YW1lIGFsbCB0aGUgdmFyaWFibGVzIGluIHRoaXMgZnVuY3Rpb24gdG8gYmUgbW9yZSBhcHByb3By
-aWF0ZWx5CiAgbGFiZWxlZCBzbyBJIHN0b3AgbWl4aW5nIHRoZW0gdXAuCiogUmV1c2UgdGhlIGJw
-cCBmcm9tIHRoZSBjb25uZWN0b3IgZm9yIG5vdyB1bnRpbCB3ZSBoYXZlIGR5bmFtaWMgYnBwIHNl
-bGVjdGlvbi4KKiBVc2UgdXNlIERJVl9ST1VORF9VUCBmb3IgY2FsY3VsYXRpbmcgdGhlIG1vZGUg
-cmF0ZSBsaWtlIGk5MTUgZG9lcywgd2hpY2ggd2UKICBzaG91bGQgYWxzbyBoYXZlIGJlZW4gZG9p
-bmcgZnJvbSB0aGUgc3RhcnQKClNpZ25lZC1vZmYtYnk6IEx5dWRlIFBhdWwgPGx5dWRlQHJlZGhh
-dC5jb20+CkZpeGVzOiA0MDlkMzgxMzliNDIgKCJkcm0vbm91dmVhdS9rbXMvbnY1MC06IFVzZSBk
-b3duc3RyZWFtIERQIGNsb2NrIGxpbWl0cyBmb3IgbW9kZSB2YWxpZGF0aW9uIikKQ2M6IFZpbGxl
-IFN5cmrDpGzDpCA8dmlsbGUuc3lyamFsYUBsaW51eC5pbnRlbC5jb20+CkNjOiBMeXVkZSBQYXVs
-IDxseXVkZUByZWRoYXQuY29tPgpDYzogQmVuIFNrZWdncyA8YnNrZWdnc0ByZWRoYXQuY29tPgot
-LS0KIGRyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfZHAuYyB8IDIxICsrKysrKysrKysr
-LS0tLS0tLS0tLQogMSBmaWxlIGNoYW5nZWQsIDExIGluc2VydGlvbnMoKyksIDEwIGRlbGV0aW9u
-cygtKQoKZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfZHAuYyBi
-L2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfZHAuYwppbmRleCA5M2UzNzUxYWQ3ZjEu
-LjA0MGVkODhkMzYyZCAxMDA2NDQKLS0tIGEvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVh
-dV9kcC5jCisrKyBiL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfZHAuYwpAQCAtMjMx
-LDggKzIzMSw5IEBAIG52NTBfZHBfbW9kZV92YWxpZChzdHJ1Y3QgZHJtX2Nvbm5lY3RvciAqY29u
-bmVjdG9yLAogCQkgICBjb25zdCBzdHJ1Y3QgZHJtX2Rpc3BsYXlfbW9kZSAqbW9kZSwKIAkJICAg
-dW5zaWduZWQgKm91dF9jbG9jaykKIHsKLQljb25zdCB1bnNpZ25lZCBtaW5fY2xvY2sgPSAyNTAw
-MDsKLQl1bnNpZ25lZCBtYXhfY2xvY2ssIGRzX2Nsb2NrLCBjbG9jayA9IG1vZGUtPmNsb2NrOwor
-CWNvbnN0IHVuc2lnbmVkIGludCBtaW5fY2xvY2sgPSAyNTAwMDsKKwl1bnNpZ25lZCBpbnQgbWF4
-X3JhdGUsIG1vZGVfcmF0ZSwgZHNfbWF4X2RvdGNsb2NrLCBjbG9jayA9IG1vZGUtPmNsb2NrOwor
-CWNvbnN0IHU4IGJwcCA9IGNvbm5lY3Rvci0+ZGlzcGxheV9pbmZvLmJwYyAqIDM7CiAKIAlpZiAo
-bW9kZS0+ZmxhZ3MgJiBEUk1fTU9ERV9GTEFHX0lOVEVSTEFDRSAmJiAhb3V0cC0+Y2Fwcy5kcF9p
-bnRlcmxhY2UpCiAJCXJldHVybiBNT0RFX05PX0lOVEVSTEFDRTsKQEAgLTI0MCwxNyArMjQxLDE3
-IEBAIG52NTBfZHBfbW9kZV92YWxpZChzdHJ1Y3QgZHJtX2Nvbm5lY3RvciAqY29ubmVjdG9yLAog
-CWlmICgobW9kZS0+ZmxhZ3MgJiBEUk1fTU9ERV9GTEFHXzNEX01BU0spID09IERSTV9NT0RFX0ZM
-QUdfM0RfRlJBTUVfUEFDS0lORykKIAkJY2xvY2sgKj0gMjsKIAotCW1heF9jbG9jayA9IG91dHAt
-PmRwLmxpbmtfbnIgKiBvdXRwLT5kcC5saW5rX2J3OwotCWRzX2Nsb2NrID0gZHJtX2RwX2Rvd25z
-dHJlYW1fbWF4X2RvdGNsb2NrKG91dHAtPmRwLmRwY2QsCi0JCQkJCQkgIG91dHAtPmRwLmRvd25z
-dHJlYW1fcG9ydHMpOwotCWlmIChkc19jbG9jaykKLQkJbWF4X2Nsb2NrID0gbWluKG1heF9jbG9j
-aywgZHNfY2xvY2spOworCW1heF9yYXRlID0gb3V0cC0+ZHAubGlua19uciAqIG91dHAtPmRwLmxp
-bmtfYnc7CisJbW9kZV9yYXRlID0gRElWX1JPVU5EX1VQKGNsb2NrICogYnBwLCA4KTsKKwlpZiAo
-bW9kZV9yYXRlID4gbWF4X3JhdGUpCisJCXJldHVybiBNT0RFX0NMT0NLX0hJR0g7CisKKwlkc19t
-YXhfZG90Y2xvY2sgPSBkcm1fZHBfZG93bnN0cmVhbV9tYXhfZG90Y2xvY2sob3V0cC0+ZHAuZHBj
-ZCwgb3V0cC0+ZHAuZG93bnN0cmVhbV9wb3J0cyk7CisJaWYgKGRzX21heF9kb3RjbG9jayAmJiBj
-bG9jayA+IGRzX21heF9kb3RjbG9jaykKKwkJcmV0dXJuIE1PREVfQ0xPQ0tfSElHSDsKIAotCWNs
-b2NrID0gbW9kZS0+Y2xvY2sgKiAoY29ubmVjdG9yLT5kaXNwbGF5X2luZm8uYnBjICogMykgLyAx
-MDsKIAlpZiAoY2xvY2sgPCBtaW5fY2xvY2spCiAJCXJldHVybiBNT0RFX0NMT0NLX0xPVzsKLQlp
-ZiAoY2xvY2sgPiBtYXhfY2xvY2spCi0JCXJldHVybiBNT0RFX0NMT0NLX0hJR0g7CiAKIAlpZiAo
-b3V0X2Nsb2NrKQogCQkqb3V0X2Nsb2NrID0gY2xvY2s7Ci0tIAoyLjI2LjIKCl9fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCk5vdXZlYXUgbWFpbGluZyBsaXN0
-Ck5vdXZlYXVAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Au
-b3JnL21haWxtYW4vbGlzdGluZm8vbm91dmVhdQo=
+On Wed, 30 Sep 2020 at 00:52, Daniel Vetter <daniel.vetter@ffwll.ch> wrote:
+>
+> On Thu, Sep 17, 2020 at 3:15 PM Daniel Vetter <daniel.vetter@ffwll.ch> wrote:
+> >
+> > Ben, did you have a chance to look at this?
+>
+> Ping
+> -Daniel
+>
+> > On Mon, Aug 3, 2020 at 1:22 PM Maarten Lankhorst
+> > <maarten.lankhorst@linux.intel.com> wrote:
+> > >
+> > > Op 02-08-2020 om 20:18 schreef Daniel Vetter:
+> > > > Purely conjecture, but I think the original locking inversion with the
+> > > > legacy page flip code between flipping and ttm's bo move function
+> > > > shoudn't exist anymore with atomic: With atomic the bo pinning and
+> > > > actual modeset commit is completely separated in the code patsh.
+> > > >
+> > > > This annotation was originally added in
+> > > >
+> > > > commit 060810d7abaabcab282e062c595871d661561400
+> > > > Author: Ben Skeggs <bskeggs@redhat.com>
+> > > > Date:   Mon Jul 8 14:15:51 2013 +1000
+> > > >
+> > > >     drm/nouveau: fix locking issues in page flipping paths
+> > > >
+> > > > due to
+> > > >
+> > > > commit b580c9e2b7ba5030a795aa2fb73b796523d65a78
+> > > > Author: Maarten Lankhorst <m.b.lankhorst@gmail.com>
+> > > > Date:   Thu Jun 27 13:48:18 2013 +0200
+> > > >
+> > > >     drm/nouveau: make flipping lockdep safe
+> > > >
+> > > > Signed-off-by: Daniel Vetter <daniel.vetter@intel.com>
+> > > > Cc: Maarten Lankhorst <m.b.lankhorst@gmail.com>
+> > > > Cc: Ben Skeggs <bskeggs@redhat.com>
+> > > > Cc: Dave Airlie <airlied@gmail.com>
+> > > > Cc: nouveau@lists.freedesktop.org
+> > > > ---
+> > > > I might be totally wrong, so this definitely needs testing :-)
+> > > >
+> > > > Cheers, Daniel
+> > > > ---
+> > > >  drivers/gpu/drm/nouveau/nouveau_bo.c | 6 +++++-
+> > > >  1 file changed, 5 insertions(+), 1 deletion(-)
+> > > >
+> > > > diff --git a/drivers/gpu/drm/nouveau/nouveau_bo.c b/drivers/gpu/drm/nouveau/nouveau_bo.c
+> > > > index 7806278dce57..a7b2a9bb0ffe 100644
+> > > > --- a/drivers/gpu/drm/nouveau/nouveau_bo.c
+> > > > +++ b/drivers/gpu/drm/nouveau/nouveau_bo.c
+> > > > @@ -776,7 +776,11 @@ nouveau_bo_move_m2mf(struct ttm_buffer_object *bo, int evict, bool intr,
+> > > >                       return ret;
+> > > >       }
+> > > >
+> > > > -     mutex_lock_nested(&cli->mutex, SINGLE_DEPTH_NESTING);
+> > > > +     if (drm_drv_uses_atomic_modeset(drm->dev))
+> > > > +             mutex_lock(&cli->mutex);
+> > > > +     else
+> > > > +             mutex_lock_nested(&cli->mutex, SINGLE_DEPTH_NESTING);
+> > > > +
+> > > >       ret = nouveau_fence_sync(nouveau_bo(bo), chan, true, intr);
+> > > >       if (ret == 0) {
+> > > >               ret = drm->ttm.move(chan, bo, &bo->mem, new_reg);
+> > >
+> > > Well if you're certain it works now. :)
+> > >
+> > > Reviewed-by: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>
+Acked-by: Ben Skeggs <bskeggs@redhat.com>
+
+> > >
+> >
+> >
+> > --
+> > Daniel Vetter
+> > Software Engineer, Intel Corporation
+> > http://blog.ffwll.ch
+>
+>
+>
+> --
+> Daniel Vetter
+> Software Engineer, Intel Corporation
+> http://blog.ffwll.ch
+> _______________________________________________
+> Nouveau mailing list
+> Nouveau@lists.freedesktop.org
+> https://lists.freedesktop.org/mailman/listinfo/nouveau
+_______________________________________________
+Nouveau mailing list
+Nouveau@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/nouveau
