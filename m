@@ -2,47 +2,64 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 49E9727F9A6
-	for <lists+nouveau@lfdr.de>; Thu,  1 Oct 2020 08:50:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D076E27FE8A
+	for <lists+nouveau@lfdr.de>; Thu,  1 Oct 2020 13:37:25 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 975F86E141;
-	Thu,  1 Oct 2020 06:50:07 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 411B66E89D;
+	Thu,  1 Oct 2020 11:37:19 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 859416E141;
- Thu,  1 Oct 2020 06:50:06 +0000 (UTC)
-IronPort-SDR: EW8KO9ZcDMN2XVyIWMM3fE3fCM7kSgpjGhiYHFgwD/0gfQu65Auj27kiVQ1PU3GIQWk9PYUeIV
- cyvz4j8hYuZQ==
-X-IronPort-AV: E=McAfee;i="6000,8403,9760"; a="163510493"
-X-IronPort-AV: E=Sophos;i="5.77,323,1596524400"; d="scan'208";a="163510493"
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from orsmga007.jf.intel.com ([10.7.209.58])
- by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 30 Sep 2020 23:50:04 -0700
-IronPort-SDR: gyPhCp5iBlt7Dxvdk28N2JvewNY5hl1OW6FJK3q6gvAj1L6HCTJidNK9dcuhU4RaujoWfMjoiq
- QR436YHbYkfQ==
-X-IronPort-AV: E=Sophos;i="5.77,323,1596524400"; d="scan'208";a="351844325"
-Received: from thrakatuluk.fi.intel.com (HELO thrakatuluk) ([10.237.68.154])
- by orsmga007-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 30 Sep 2020 23:50:03 -0700
-Received: from platvala by thrakatuluk with local (Exim 4.92)
- (envelope-from <petri.latvala@intel.com>)
- id 1kNsPh-0004jJ-8l; Thu, 01 Oct 2020 09:50:01 +0300
-Date: Thu, 1 Oct 2020 09:50:01 +0300
-From: Petri Latvala <petri.latvala@intel.com>
-To: Lyude <lyude@redhat.com>
-Message-ID: <20201001065001.GB7444@platvala-desk.ger.corp.intel.com>
-References: <20200930173150.431995-1-lyude@redhat.com>
- <20200930173150.431995-3-lyude@redhat.com>
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [63.128.21.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E6E216E19B
+ for <nouveau@lists.freedesktop.org>; Thu,  1 Oct 2020 11:37:17 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1601552237;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=4eXjspHxv+ABlMMFfGR7GC9CAx8SFwxNxhFzCnX2S94=;
+ b=Nlb8HKM/hPVRfqAFt+B86EWd96pO6sYKROKF2Ih23IQtD0ERr9OMUa1By9Lteb0kLY7luO
+ nXPDanZDQSuRw9cGaWViJjtxd3vD/P2eO3M6Va7EJFSUnVig6HZsGalDcogSmBuzgOfIB1
+ R1f+/8oi6dZPoM9dStF7AQpvKBFr9Ro=
+Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com
+ [209.85.222.199]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-420-K0MUIcSaNCGGpUwu0958Hw-1; Thu, 01 Oct 2020 07:37:04 -0400
+X-MC-Unique: K0MUIcSaNCGGpUwu0958Hw-1
+Received: by mail-qk1-f199.google.com with SMTP id m186so2812640qkf.12
+ for <nouveau@lists.freedesktop.org>; Thu, 01 Oct 2020 04:37:04 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=4eXjspHxv+ABlMMFfGR7GC9CAx8SFwxNxhFzCnX2S94=;
+ b=nJdfnh2It+ry0IaoHOiLxg2ueoIlgx++hYp2kHrYcccfqwFDGxHRWJBr6PbPIJ2Y4t
+ yu6fHkmS1BWV12grvQir22zZcRhpMZBGeeteBn/yG4J/osJRM0cmUvLZCYP/DhppwdCA
+ +EYlXZyuigexV5u0DUfNrXgsDhwMz2BoYqUymtLZfiGq7jpywqAOLLir42LkNUCuc5mb
+ 1ppwl/aTmoJjKr9WN5s5MNuM2L+LAi+ZPlMEO2jjhCN+yp4SzXewdSr7l0keXxlS4OyT
+ PvyCMCkZLX2Bo6kKvGGyJ9I2O2Aw6D7pOgeA5TAE/uS1cdAoC5ftYv1kw/8Sr2E5AN7l
+ 0d/A==
+X-Gm-Message-State: AOAM532M64LKwSuToEme86lym5XW22JY1E8fgmRt6kiG++HiTDHpxEHm
+ MydS4/6KKp6kdkZqsXlZyqHlK3tKmIX/blaqfSl5FPLO83/QjDUuzIHzN1FNLenLRhVsSg2Fc9d
+ 9MPH4rr24pnNq+c2m5trxEKkol/64Kauup46EYqQFKg==
+X-Received: by 2002:ac8:411c:: with SMTP id q28mr7089447qtl.254.1601552223878; 
+ Thu, 01 Oct 2020 04:37:03 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJzsKkx5koDNootQdIEJCZxyYrvPYIZj5X0DvstXn2raHaIPYrbdSVeG2Y3iLhXbvVGXMXmh2o9a+wwNYiFz1LU=
+X-Received: by 2002:ac8:411c:: with SMTP id q28mr7089424qtl.254.1601552223535; 
+ Thu, 01 Oct 2020 04:37:03 -0700 (PDT)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20200930173150.431995-3-lyude@redhat.com>
-X-Patchwork-Hint: comment
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Subject: Re: [Nouveau] [igt-dev] [PATCH i-g-t v5 2/5] lib/igt_core: Add
- igt_require_fd()
+References: <CACO55ts6hfd_v8V8_yJ45wm8MAN7TENL9pZZmijFaB3h-FrR=A@mail.gmail.com>
+In-Reply-To: <CACO55ts6hfd_v8V8_yJ45wm8MAN7TENL9pZZmijFaB3h-FrR=A@mail.gmail.com>
+From: Karol Herbst <kherbst@redhat.com>
+Date: Thu, 1 Oct 2020 13:36:52 +0200
+Message-ID: <CACO55tviMespp4FNko+2ipmx0DNx4de2WKSrmEW05EufW7P_ZA@mail.gmail.com>
+To: nouveau <nouveau@lists.freedesktop.org>, 
+ dri-devel <dri-devel@lists.freedesktop.org>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=kherbst@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Subject: Re: [Nouveau] Nouveau wiki migration
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -54,59 +71,68 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: igt-dev@lists.freedesktop.org, nouveau@lists.freedesktop.org
+Cc: Daniel Stone <daniel@fooishbar.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, Sep 30, 2020 at 01:31:47PM -0400, Lyude wrote:
-> From: Lyude Paul <lyude@redhat.com>
-> 
-> Like igt_assert_fd(), but using igt_require() instead
-> 
-> Changes since v1:
-> * Fix documentation error in igt_require_fd() - Petri Latvala
-> 
-> Signed-off-by: Lyude Paul <lyude@redhat.com>
+On Fri, Sep 25, 2020 at 11:27 PM Karol Herbst <kherbst@redhat.com> wrote:
+>
+> Hi everybody,
+>
+> I think it's time to finally move our wiki from the old infrastructure
+> over to gitlab pages.
+>
+> This comes with several benefits:
+> * full control through git over the ikiwiki pipeline (setup files,
+> plugins, system packages, ...)
+> * random users are able to create MRs against the wiki as long as they
+> are willing to create a gitlab account.
+> * possible to migrate over to a different wiki generator or mix and
+> match or whatever.
+> * no CGI stuff on the wiki as we don't use ikiwiki for the git
+> operations anymore
+>
+> To view the migrate wiki visit this URL:
+> https://nouveau.pages.freedesktop.org/wiki/
+> the gitlab project lives here: https://gitlab.freedesktop.org/nouveau/wiki
+>
+> There are a couple of changes I already made:
+> * convert the perl ikiwiki setup file to yaml:
+> https://gitlab.freedesktop.org/nouveau/wiki/-/blob/master/nouveau.yml
+> * reworked the setup file to throw out unused plugins and adjust
+> settings for gitlab
+> * enabled HTML5 (does change the style slightly, but also fixed some
+> regressions)
+> * pulled in external sources (from the fdo.org server)
+> * moved mdwn files into their own subdirectory
+>
+> For now I changed everything inside one big commit:
+> https://gitlab.freedesktop.org/nouveau/wiki/-/commit/6f2d1669884af186863718ad827f65372a0c5c43
+>
+> There are a couple of remaining issues/questions:
+> * the gitlab CI pipeline fails quite a bit, which could be annoying
+> * there is a delay between editing and changes going live (usually
+> below a minute though)
+> * should we disallow direct editing of files for project members so we
+> could CI the changes are still valid?
+>
+> Next steps:
+> * verify everything still works
+> * fix remaining issues
+> * final step: point the subdomain to the new gitlab pages URL
+>
+> If anybody else is interested in moving their wikis over, don't
+> hesitate to ask me questions or just copy whatever I did :)
 
-Reviewed-by: Petri Latvala <petri.latvala@intel.com>
+I did some further changes, like ensuring backwards compatibility to
+existing links and already started to clean up some bits, like
+removing the google translate stuff.
 
+Now I'd like to get the subdomain changed of the current wiki over to
+the gitlab stuff and wanted to ask for acks/nacks on this
 
-> ---
->  lib/igt_core.h | 12 ++++++++++++
->  1 file changed, 12 insertions(+)
-> 
-> diff --git a/lib/igt_core.h b/lib/igt_core.h
-> index e74ede8b..5d835260 100644
-> --- a/lib/igt_core.h
-> +++ b/lib/igt_core.h
-> @@ -1021,6 +1021,18 @@ void igt_describe_f(const char *fmt, ...);
->  	else igt_debug("Test requirement passed: %s\n", #expr); \
->  } while (0)
->  
-> +/**
-> + * igt_require_fd:
-> + * @fd: file descriptor
-> + *
-> + * Skips (sub-) test if the given file descriptor is invalid.
-> + *
-> + * Like igt_require(), but displays the stringified identifier that was supposed
-> + * to contain a valid fd on failure.
-> + */
-> +#define igt_require_fd(fd) \
-> +	igt_require_f(fd >= 0, "file descriptor " #fd " failed\n");
-> +
->  /**
->   * igt_skip_on_f:
->   * @expr: condition to test
-> -- 
-> 2.26.2
-> 
-> _______________________________________________
-> igt-dev mailing list
-> igt-dev@lists.freedesktop.org
-> https://lists.freedesktop.org/mailman/listinfo/igt-dev
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
