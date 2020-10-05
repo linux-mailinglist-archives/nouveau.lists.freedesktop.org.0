@@ -2,66 +2,50 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id D8EB92836F6
-	for <lists+nouveau@lfdr.de>; Mon,  5 Oct 2020 15:52:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A9CF0283C7A
+	for <lists+nouveau@lfdr.de>; Mon,  5 Oct 2020 18:29:10 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6E8FA89BF6;
-	Mon,  5 Oct 2020 13:52:39 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 39F5B89FF9;
+	Mon,  5 Oct 2020 16:29:09 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [63.128.21.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E43E689BF6
- for <nouveau@lists.freedesktop.org>; Mon,  5 Oct 2020 13:52:37 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1601905956;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=8LrvgSMEy0OW3u7P5u1NwYL6Dim/2UCsxVor06D3D0I=;
- b=LUc1Irt62wSQc59PYZdlvy5SDHbqAu5kakEHFledLE1zBAZJkiKvW6yFcaaBLbsjGk3ySQ
- 0a9K7WriUvF0ebf2quj+Rq2u7KGL6T+n7Nw9XLHWHWobh9KweQ+iNsK41nxNEnzQo+JgAh
- mojDD1NwhPF+naN26s4t4wXw3LbY+ns=
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-534-6AgqpEkNPQqPZJS04NI_QA-1; Mon, 05 Oct 2020 09:52:34 -0400
-X-MC-Unique: 6AgqpEkNPQqPZJS04NI_QA-1
-Received: by mail-wm1-f70.google.com with SMTP id u5so1736554wme.3
- for <nouveau@lists.freedesktop.org>; Mon, 05 Oct 2020 06:52:34 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=8LrvgSMEy0OW3u7P5u1NwYL6Dim/2UCsxVor06D3D0I=;
- b=WzaV3UzHYuF082elUMumnnhVD9hvzO+5pO21x4iAE0zwNwFYNwswoALEl2fi/5gaJV
- 3LwYSr1WzgFyzIMfaPH/fnBu6r2gNciZ8vk+guwWcOYviUUDglOPElrkiph8ljPwu9Cz
- 1CxuFnQWUutJLaPgOTy0GkQYSeVyU4v7tNs2U6IVP4GxhJG9EzLP4fAFbA9TFTh68ZJC
- K1S/NtJchpXBfn76ahzVPNyHf1Gh8LEYB/+YNZc34OglQwg/XvicQxK64lRBTfTdyXJf
- iEYMv1JNZI97FRs8OcXQI6pPOt2bL9E/v9nK6PE0+DiEYTuzp4Ahv8CygjhKl/HAb4n3
- QVaQ==
-X-Gm-Message-State: AOAM533BmwrHN3hWfd5EGRjClIHwvankiqXV74WBQv1+TDAK23DWW6qX
- oa3S7uHhU0328wxEydj6qCX10dHkWc3zElx+4UTacbSFhoCnpaVHIRpJ3aoxRHvRi6Xa56WvtQx
- 7I6OxSkuuONakiqTneYC3eRhD/w==
-X-Received: by 2002:a5d:55c8:: with SMTP id i8mr18052656wrw.331.1601905953296; 
- Mon, 05 Oct 2020 06:52:33 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJzsJMQPY1QDCQP/OP8alNI23ry5bX396PvBK//gJQtBh0jt7AMm8UFKheqAd8+OIyh5yTA8lQ==
-X-Received: by 2002:a5d:55c8:: with SMTP id i8mr18052629wrw.331.1601905953051; 
- Mon, 05 Oct 2020 06:52:33 -0700 (PDT)
-Received: from kherbst.pingu.com ([2a02:8308:b088:c000:2bdf:b7aa:eede:d65f])
- by smtp.gmail.com with ESMTPSA id u81sm9875433wmg.43.2020.10.05.06.52.31
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 05 Oct 2020 06:52:32 -0700 (PDT)
-From: Karol Herbst <kherbst@redhat.com>
-To: nouveau@lists.freedesktop.org
-Date: Mon,  5 Oct 2020 15:52:30 +0200
-Message-Id: <20201005135230.735914-1-kherbst@redhat.com>
-X-Mailer: git-send-email 2.26.2
+Received: from hqnvemgate25.nvidia.com (hqnvemgate25.nvidia.com
+ [216.228.121.64])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 93E7D89FF9
+ for <nouveau@lists.freedesktop.org>; Mon,  5 Oct 2020 16:29:07 +0000 (UTC)
+Received: from hqmail.nvidia.com (Not Verified[216.228.121.13]) by
+ hqnvemgate25.nvidia.com (using TLS: TLSv1.2, AES256-SHA)
+ id <B5f7b499b0001>; Mon, 05 Oct 2020 09:28:11 -0700
+Received: from rcampbell-dev.nvidia.com (172.20.13.39) by HQMAIL107.nvidia.com
+ (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3;
+ Mon, 5 Oct 2020 16:29:05 +0000
+To: Christoph Hellwig <hch@lst.de>
+References: <20201001181715.17416-1-rcampbell@nvidia.com>
+ <20201001181715.17416-2-rcampbell@nvidia.com> <20201002055627.GA8891@lst.de>
+X-Nvconfidentiality: public
+From: Ralph Campbell <rcampbell@nvidia.com>
+Message-ID: <2789432c-e3b2-e3f4-1904-c96f03ea9c2a@nvidia.com>
+Date: Mon, 5 Oct 2020 09:29:04 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.2.2
 MIME-Version: 1.0
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=kherbst@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Subject: [Nouveau] [PATCH] device: return error for unknown chipsets
+In-Reply-To: <20201002055627.GA8891@lst.de>
+Content-Language: en-US
+X-Originating-IP: [172.20.13.39]
+X-ClientProxiedBy: HQMAIL107.nvidia.com (172.20.187.13) To
+ HQMAIL107.nvidia.com (172.20.187.13)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
+ t=1601915291; bh=r9u8GXqftmRJy6EtN3cah6v+xD2lZJO4Ups13dnHtFk=;
+ h=Subject:To:CC:References:X-Nvconfidentiality:From:Message-ID:Date:
+ User-Agent:MIME-Version:In-Reply-To:Content-Type:Content-Language:
+ Content-Transfer-Encoding:X-Originating-IP:X-ClientProxiedBy;
+ b=W6dT2vN9G+XROLp0BSTe855+S4z08HJa3Gfh0W6r0EKEq7vB8Jay6CRRfwcHtuXIV
+ 2o1YotZGXN+vg+kCc/KhuaYs27wWp6YGSyLuE/N7aVfn0JPCTweWnDR/yXR2s0hvna
+ nfTBMUxKO63a04ZJvvJofytj4zqZ6oSBkQ23/cqTQazVfJBr8M3LPP22wkc4NihHJW
+ kk8qK2PQnJjcZUrZ+0aFnklh9zRZEPG5qnNhwFjAm9hk7GNvjNM7NfRsLfaJvIEP9p
+ 8vssxx+uVESJYNYHFhYea8xGw9/17BMUVyDYNLXgElPUOKCAxR75lxpOUQlst6oZf6
+ V61ahFjm77LGQ==
+Subject: Re: [Nouveau] [RFC PATCH v3 1/2] ext4/xfs: add page refcount helper
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -73,39 +57,37 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: dann frazier <dann.frazier@canonical.com>
-Content-Type: text/plain; charset="us-ascii"
+Cc: Yang Shi <yang.shi@linux.alibaba.com>, Zi Yan <ziy@nvidia.com>,
+ nouveau@lists.freedesktop.org, Alistair Popple <apopple@nvidia.com>,
+ linux-kernel@vger.kernel.org, kvm-ppc@vger.kernel.org,
+ Bharata B Rao <bharata@linux.ibm.com>, Paul Mackerras <paulus@ozlabs.org>,
+ linux-mm@kvack.org, Matthew Wilcox <willy@infradead.org>,
+ Jason Gunthorpe <jgg@nvidia.com>, Dan Williams <dan.j.williams@intel.com>,
+ Ira Weiny <ira.weiny@intel.com>, Andrew Morton <akpm@linux-foundation.org>,
+ "Kirill A . Shutemov" <kirill.shutemov@linux.intel.com>,
+ Ben Skeggs <bskeggs@redhat.com>
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Previously the code relied on device->pri to be NULL and to fail probing
-later. We really should just return an error inside nvkm_device_ctor for
-unsupported GPUs.
 
-Fixes: 24d5ff40a732 ("drm/nouveau/device: rework mmio mapping code to get rid of second map")
 
-Signed-off-by: Karol Herbst <kherbst@redhat.com>
-Cc: dann frazier <dann.frazier@canonical.com>
----
- drm/nouveau/nvkm/engine/device/base.c | 1 +
- 1 file changed, 1 insertion(+)
+On 10/1/20 10:56 PM, Christoph Hellwig wrote:
+> On Thu, Oct 01, 2020 at 11:17:14AM -0700, Ralph Campbell wrote:
+>> There are several places where ZONE_DEVICE struct pages assume a reference
+>> count == 1 means the page is idle and free. Instead of open coding this,
+>> add a helper function to hide this detail.
+>>
+>> Signed-off-by: Ralph Campbell <rcampbell@nvidia.com>
+> 
+> Looks good:
+> 
+> Reviewed-by: Christoph Hellwig <hch@lst.de>
+> 
 
-diff --git a/drm/nouveau/nvkm/engine/device/base.c b/drm/nouveau/nvkm/engine/device/base.c
-index 9f4ac2672..68d665414 100644
---- a/drm/nouveau/nvkm/engine/device/base.c
-+++ b/drm/nouveau/nvkm/engine/device/base.c
-@@ -3149,6 +3149,7 @@ nvkm_device_ctor(const struct nvkm_device_func *func,
- 		case 0x168: device->chip = &nv168_chipset; break;
- 		default:
- 			nvdev_error(device, "unknown chipset (%08x)\n", boot0);
-+			ret = -ENOSYS;
- 			goto done;
- 		}
- 
--- 
-2.26.2
-
+Thanks for the review.
+I'll resend this as an independent patch.
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
