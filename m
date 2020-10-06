@@ -1,61 +1,61 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id ACA902853B7
-	for <lists+nouveau@lfdr.de>; Tue,  6 Oct 2020 23:13:44 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9049B2853B9
+	for <lists+nouveau@lfdr.de>; Tue,  6 Oct 2020 23:13:47 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id AB6296E595;
-	Tue,  6 Oct 2020 21:13:38 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id EB2C06E59B;
+	Tue,  6 Oct 2020 21:13:44 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D3A406E06D
- for <nouveau@lists.freedesktop.org>; Tue,  6 Oct 2020 21:13:37 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8B56A6E59B
+ for <nouveau@lists.freedesktop.org>; Tue,  6 Oct 2020 21:13:43 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1602018816;
+ s=mimecast20190719; t=1602018822;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=EiXnFN0sDB+DK1lfjfH0ccnZIGKSpIKgOlbB/HcoFeE=;
- b=MXc1zjCRz91fEvNvA+XQdDtoJdAHmw1HoVT31xMpmDGrFQBUXXWCySxZP85wT7kKTMEXr8
- uj8MtPHSz8f49Nxqujk9t/yFs091C61e+KzOdrt5CtushFDPMK9iXYjRpIUs7E+2rxaNx/
- nbAfTfPYbM5kyhqA/DJ0t6YwkgsgsEQ=
-Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com
- [209.85.160.198]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-245-WBwUqZubPXqKTC-5VqX9bg-1; Tue, 06 Oct 2020 17:13:35 -0400
-X-MC-Unique: WBwUqZubPXqKTC-5VqX9bg-1
-Received: by mail-qt1-f198.google.com with SMTP id v33so4987780qtd.3
- for <nouveau@lists.freedesktop.org>; Tue, 06 Oct 2020 14:13:35 -0700 (PDT)
+ bh=jK1N+Ns8gHxjITX3lGFVc0lDqCzUWXPGCqDKwARJgz0=;
+ b=QZuyel7RmDRNO83UDYJJw9+EoLySm2Mhzbz3mro2uANpltuYGthtT08cmvGIxfn3AJJNuQ
+ qvYXuYC9fWYhGVQB27Co4HkVzxO3Ji66RrgGXAQmKS8pxs7GjudJl6N1H/H+Qd/ASDMl1Z
+ cx8e7SXluCsFs2WKs9mBx5YI3NRSI4o=
+Received: from mail-qv1-f71.google.com (mail-qv1-f71.google.com
+ [209.85.219.71]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-53-eeZdT9-UMciF6ZcOaRcRjw-1; Tue, 06 Oct 2020 17:13:36 -0400
+X-MC-Unique: eeZdT9-UMciF6ZcOaRcRjw-1
+Received: by mail-qv1-f71.google.com with SMTP id de12so201198qvb.12
+ for <nouveau@lists.freedesktop.org>; Tue, 06 Oct 2020 14:13:36 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=EiXnFN0sDB+DK1lfjfH0ccnZIGKSpIKgOlbB/HcoFeE=;
- b=ckpPGNhXa3IbQWCqsaKSScHqZ2OPPQKAX9BZ6Igwx7qQl2UFXJibK//lnpNgwAuLAh
- zoAygphMDqQQY/cHVLBR0rNrWc9KBy57bz6DWqjfLSCKk6cw0uJBy/NirJzb2LlqNRzp
- gRdwa1vzZDAJyeRulvjqJ8HglN6sVItdaIfOO4Yh5jHFYNkJR1x00YC6OOZaemSoNZ5f
- ahhGlDil2gW3EcYquzz/cRX7+UGpZBaIDYourTga2XtNiU4RkYMdBe/cg4dx9YicDI4z
- y7EGcmDIPdCjU8c33OGX/CBB5bfqGrZMJrDzVicNZcdeDNmRrNxbxBQgbMepY7x7twFF
- PKkg==
-X-Gm-Message-State: AOAM532tW0Pweu65jLIegHKsoHO4exwviBBXDNRiNpHbM/Unhn4zn5er
- tlTFuKuySTqjXd+iCfWzyzMAElA/P+i/n6yyFH5XuT7Dw931WLaqG83wExmH+hPrQ813Tf3ocPa
- NzqQdDadNSMUPdVMyoiqahiUutg==
-X-Received: by 2002:ac8:24b9:: with SMTP id s54mr241396qts.138.1602018814440; 
- Tue, 06 Oct 2020 14:13:34 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJw2v6PQQY3j7duhFWO6S0w04Va0ifWn+CncoHnMd4N9nWOR+Z+F3ba1EANXdkOb9d4D84vV7A==
-X-Received: by 2002:ac8:24b9:: with SMTP id s54mr241365qts.138.1602018814075; 
- Tue, 06 Oct 2020 14:13:34 -0700 (PDT)
+ bh=jK1N+Ns8gHxjITX3lGFVc0lDqCzUWXPGCqDKwARJgz0=;
+ b=FEYZ0EwiH3xCsQsQemVyo21l7HEyoJeqhBP5IDAuB2drz+Ur2c5eUHfGKHFIa2U/iT
+ fAWWsSW6P69hbAwQp6qAEmvXSqdh3pCYtaI7pg696dJd4K97vXounDfIxewLrFAsKMlS
+ RBWXYWScSWXj9HvLq3ffm9wUJN1yctT+seJquPYyux3mdMg3XsO87+HRikazHONohNC6
+ g4qDjzvqMQgwUlydvSpz7L4LjGPl8sRhrLNp1YYeyNeZ5WOOukC233yzCUtWjaUeKtEm
+ ZAOagzDbpPASy8AfE1lO7XlHjh5CIuqtAaHg8TdrSoq+BM3IXitzL+5J9E84pgYyapnY
+ Iu0w==
+X-Gm-Message-State: AOAM530+5190KDrLyO5We5OEtFp4DehStWxjONFjZWmKhfs2fid1nOXf
+ zKKl1yb3gD+Wd8q78cz2pPZrZE/7ixxrPCjhoiyTbYg0io0mo49xSqs7vxydIo1BxAQ3PyZl76z
+ wEyZS2PVqLkhZbGOpGI1+4y2kPw==
+X-Received: by 2002:ac8:48ca:: with SMTP id l10mr178211qtr.385.1602018815571; 
+ Tue, 06 Oct 2020 14:13:35 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJyTB7Pxzmx1zjaB82aD7e+QPzkSkBeq/X49RcavcT7MEYTHPFAp9TW4AYj2C11QFeLl5dbk3Q==
+X-Received: by 2002:ac8:48ca:: with SMTP id l10mr178192qtr.385.1602018815225; 
+ Tue, 06 Oct 2020 14:13:35 -0700 (PDT)
 Received: from xps13.jcline.org ([136.56.20.95])
- by smtp.gmail.com with ESMTPSA id h68sm3714277qkf.30.2020.10.06.14.13.33
+ by smtp.gmail.com with ESMTPSA id h68sm3714277qkf.30.2020.10.06.14.13.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 06 Oct 2020 14:13:33 -0700 (PDT)
+ Tue, 06 Oct 2020 14:13:34 -0700 (PDT)
 From: Jeremy Cline <jcline@redhat.com>
 To: Ben Skeggs <bskeggs@redhat.com>
-Date: Tue,  6 Oct 2020 17:13:12 -0400
-Message-Id: <20201006211313.49177-3-jcline@redhat.com>
+Date: Tue,  6 Oct 2020 17:13:13 -0400
+Message-Id: <20201006211313.49177-4-jcline@redhat.com>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20201006211313.49177-1-jcline@redhat.com>
 References: <20200911162128.405604-1-jcline@redhat.com>
@@ -65,8 +65,8 @@ Authentication-Results: relay.mimecast.com;
  auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=jcline@redhat.com
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Subject: [Nouveau] [RFC PATCH v2 2/3] nouveau: Add kernel-docs for module
- parameters
+Subject: [Nouveau] [RFC PATCH v2 3/3] Documentation: nouveau: Introduce some
+ nouveau documentation
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -84,212 +84,212 @@ Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-In preparation for the nouveau kernel documentation page, add some
-documentation for the supported module parameters. It would be ideal if
-the value given to MODULE_PARM_DESC could be referenced in Sphinx to
-auto-document these parameters for both readers of the kernel's Sphinx
-project and users of modinfo, but that appears to require a bit of work
-so for now this approach will do.
+Other gpu drivers have some driver-specific documentation, so it would
+nice if nouveau did as well.
+
+This adds a bare-bones ReStructured Text document with sections for
+module parameter documentation, an overview of the driver architecture,
+a section for internal and external API documentation, and a glossary
+for nouveau-specific terms.
 
 Signed-off-by: Jeremy Cline <jcline@redhat.com>
 ---
- drivers/gpu/drm/nouveau/nouveau_drm.c | 162 ++++++++++++++++++++++++++
- 1 file changed, 162 insertions(+)
+ Documentation/gpu/drivers.rst |   1 +
+ Documentation/gpu/nouveau.rst | 173 ++++++++++++++++++++++++++++++++++
+ 2 files changed, 174 insertions(+)
+ create mode 100644 Documentation/gpu/nouveau.rst
 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_drm.c b/drivers/gpu/drm/nouveau/nouveau_drm.c
-index 22d246acc5e5..8d5f17326910 100644
---- a/drivers/gpu/drm/nouveau/nouveau_drm.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_drm.c
-@@ -68,27 +68,189 @@
- #include "nouveau_svm.h"
- #include "nouveau_dmem.h"
- 
-+/**
-+ * DOC: config (string)
-+ *
-+ * A configuration string used to adjust a variety of module behaviors. The
-+ * value of this parameter should be a string of comma-separated key=value
-+ * pairs.
-+ *
-+ * values marked as integers are parsed as hex when they include a leading 0x,
-+ * octal when they include a leading 0, otherwise they are parsed as decimals.
-+ *
-+ * Supported key-value pairs include:
-+ *
-+ * * GP100MmuLayout (boolean): If false, the old pre-GP100 VMM backend is used;
-+ *   defaults to true and is only valid on NV130-NV138 chips.
-+ *
-+ * * <engine-name> (boolean): disable the given engine; all engines are enabled
-+ *   by default.
-+ *
-+ * * NvAcrWpr (integer): This configuration option is for debugging signed
-+ *   firmware blobs and is not for end users; defaults to -1
-+ *
-+ * * NvAcrWprCompare (boolean): This configuration option is for debugging
-+ *   signed firmware blobs and is not for end users; defaults to false.
-+ *
-+ * * NvAcrWprPrevAddr (integer): This configuration option is for debugging signed
-+ *   firmware blobs and is not for end users; defaults to 0.
-+ *
-+ * * NvBar2Halve (boolean): Halve the BAR2 size; defaults to false.
-+ *
-+ * * NvFanPWM (boolean): Force PWM for the fan; default is to auto-detect.
-+ *
-+ * * NvForcePost (boolean): Force the device to perform a POST; defaults to false.
-+ *
-+ * * NvGrResetWar (boolean): Reset the GR for an extended period to work around
-+ *   an issue where GR stops responding; defaults to true on certain Pascal
-+ *   boards where it is a known problem.
-+ *
-+ * * NvGrUseFW (boolean): Load firmware for PGRAPH (valid on the NVC0, NVE0,
-+ *   and NV110 families); defaults to false.
-+ *
-+ * * NvI2C (boolean): Use the nouveau-internal I2C bus driver rather than the
-+ *   I2C bit-adapters; defaults to false.
-+ *
-+ * * NvMemExec (boolean): Perform memory reclocking; defaults to true.
-+ *
-+ * * NvMSI (boolean): Use MSI interrupts; defaults to true on chipsets that
-+ *   support it..
-+ *
-+ * * NvMXMDCB (boolean): Sanitize DCB outputs from the VBIOS; defaults to true.
-+ *
-+ * * NvPCIE (boolean): Whether to use the PCI-E GART (valid on NV40 chips only);
-+ *   defaults to true.
-+ *
-+ * * NvPmShowAll (boolean): Report all perfmon signals in queries; defaults to
-+ *   false.
-+ *
-+ * * NvPmUnnamed (boolean): Use the raw signal number rather than the name in
-+ *   perfmon queries; defaults to the value of NvPmShowAll.
-+ *
-+ * * NvPmEnableGating (boolean): Enable clockgating for chipsets that support
-+ *   it; defaults to false.
-+ *
-+ * * War00C800_0 (boolean): Enables the PGOB work-around on all GK10[467]
-+ *   boards; defaults to true.
-+ *
-+ * * MmuDebugBufferSize (integer): Size of the MUU debug buffers; defaults to
-+ *   the framebuffer page size.
-+ *
-+ * * NvAGP (integer): Force a particular AGP mode (0 to disable).
-+ *
-+ * * NvChipset (integer): Override the detected chipset; useful for development.
-+ *
-+ * * NvFbBigPage (integer): Size of the framebuffer big page in bits
-+ *   (e.g. 16 means 64KiB); default is chip-dependent.
-+ *
-+ * * NvBios (string): Specify the Video BIOS source; options include:
-+ *
-+ *   * "OpenFirmware"
-+ *   * "PRAMIN"
-+ *   * "PROM"
-+ *   * "ACPI"
-+ *   * "PCIROM"
-+ *   * "PLATFORM"
-+ *   * A file name passed on to request_firmware.
-+ *
-+ * * NvBoost (integer): Specify the Boost mode for Fermi and newer. Valid
-+ *   options are:
-+ *
-+ *   * 0: base clocks (default)
-+ *   * 1: boost clocks
-+ *   * 2: max clocks
-+ *
-+ * * NvClkMode (string): Force a particular clock level on boot. This is
-+ *   equivalent to passing both ``NvClkModeAC`` and ``NvClkModeDC``.
-+ *
-+ * * NvClkModeAC (string): Force a particular clock level when plugged in to a
-+ *   power source.
-+ *
-+ * * NvClkModeDC (string): Force a particular clock level when running on
-+ *   battery.
-+ */
- MODULE_PARM_DESC(config, "option string to pass to driver core");
- static char *nouveau_config;
- module_param_named(config, nouveau_config, charp, 0400);
- 
-+/**
-+ * DOC: debug (string)
-+ *
-+ * Like the "config" parameter, this is a string of comma-separated key=values.
-+ * Valid keys include:
-+ *
-+ * * CLIENT
-+ * * <subdevice>
-+ *
-+ * The list of current sub-device and engine names is in the %nvkm_subdev_name
-+ * array and is enumerated in &enum nvkm_devidx.
-+ *
-+ * Valid values are log levels to use for messages from the given key:
-+ *
-+ * * fatal
-+ * * error
-+ * * warn
-+ * * info
-+ * * debug
-+ * * trace
-+ * * paranoia
-+ * * spam
-+ */
+diff --git a/Documentation/gpu/drivers.rst b/Documentation/gpu/drivers.rst
+index b4a0ed3ca961..783c749d12e0 100644
+--- a/Documentation/gpu/drivers.rst
++++ b/Documentation/gpu/drivers.rst
+@@ -9,6 +9,7 @@ GPU Driver Documentation
+    i915
+    mcde
+    meson
++   nouveau
+    pl111
+    tegra
+    tve200
+diff --git a/Documentation/gpu/nouveau.rst b/Documentation/gpu/nouveau.rst
+new file mode 100644
+index 000000000000..84c8d601adca
+--- /dev/null
++++ b/Documentation/gpu/nouveau.rst
+@@ -0,0 +1,173 @@
++=======
++Nouveau
++=======
++Nouveau is the free/libre driver for NVIDIA GPUs. This documentation is for the
++kernel mode-setting driver, and is meant to complement the general `nouveau`_
++documentation, which contains end user documentation and a general overview of
++the project, and `envytools`_, which covers reverse-engineering and the
++hardware architecture of the individual card families. Finally, there is
++some `NVIDIA-provided documentation`_.
 +
- MODULE_PARM_DESC(debug, "debug string to pass to driver core");
- static char *nouveau_debug;
- module_param_named(debug, nouveau_debug, charp, 0400);
- 
-+/**
-+ * DOC: noaccel (boolean)
-+ *
-+ * Set to ``1`` to disable kernel/abi16 acceleration; defaults to ``0``
-+ * (false).
-+ */
- MODULE_PARM_DESC(noaccel, "disable kernel/abi16 acceleration");
- static int nouveau_noaccel = 0;
- module_param_named(noaccel, nouveau_noaccel, int, 0400);
- 
-+/**
-+ * DOC: modeset (integer)
-+ *
-+ * Whether to enable the driver; defaults to automatically detecting whether it
-+ * should be enabled. Valid values are:
-+ *
-+ * * ``0`` - The driver is disabled
-+ * * ``1`` - The driver is enabled
-+ * * ``2`` - The driver runs in headless mode.
-+ */
- MODULE_PARM_DESC(modeset, "enable driver (default: auto, "
- 		          "0 = disabled, 1 = enabled, 2 = headless)");
- int nouveau_modeset = -1;
- module_param_named(modeset, nouveau_modeset, int, 0400);
- 
-+/**
-+ * DOC: atomic (boolean)
-+ *
-+ * Set to ``1`` to enable atomic modesetting support; defaults to ``0``
-+ * (false).
-+ */
- MODULE_PARM_DESC(atomic, "Expose atomic ioctl (default: disabled)");
- static int nouveau_atomic = 0;
- module_param_named(atomic, nouveau_atomic, int, 0400);
- 
-+/**
-+ * DOC: runpm (integer)
-+ *
-+ * Control whether or not runtime power management is used. Valid values are:
-+ *
-+ * * ``0`` - Disables runtime power management
-+ * * ``1`` - Forces runtime power management to be enabled
-+ * * ``-1`` - Enables runtime power management for Optimus-enabled hardware
-+ *   (default).
-+ *
-+ * .. warning:: Power management is a very experimental feature and is not
-+ *	expected to work. If you decided to up-clock your GPU, please
-+ *	be aware that your card may overheat. Check the temperature of your GPU
-+ *	at all times!
-+ */
- MODULE_PARM_DESC(runpm, "disable (0), force enable (1), optimus only default (-1)");
- static int nouveau_runtime_pm = -1;
- module_param_named(runpm, nouveau_runtime_pm, int, 0400);
++Issues with this driver are tracked on Nouveau's freedesktop.org `issue
++tracker`_.
++
++If you'd like to improve this documentation, great! Refer to the :doc:`Sphinx
++introduction </doc-guide/sphinx>` and :doc:`/doc-guide/kernel-doc` documents
++for details on how to do so.
++
++
++Module Parameters
++=================
++A number of module parameters are provided to tweak the behavior of the driver.
++These are provided to ease debugging issues and users that need to set a
++parameter to fix an issue they are experiencing should report this as a bug on
++the `issue tracker`_.
++
++Each parameter requires a value. These can be passed via the kernel command
++line using the format "nouveau.<parameter-name>=<value>". Boolean values should
++use 1 for true and 0 for false.
++
++.. kernel-doc:: drivers/gpu/drm/nouveau/nouveau_drm.c
++
++
++Driver Overview
++===============
++The driver is located in ``drivers/gpu/drm/nouveau/``.
++
++.. note:: The latest pending patches for nouveau are available as an
++   `out-of-tree driver <https://github.com/skeggsb/nouveau>`_.
++
++Within the driver, there are several distinct sections. The reason for this is
++that NVIDIA hardware is partitioned into "privileged" and "user" blocks. For
++more details on the particulars of NVIDIA's hardware, consult `envytools`_.
++
++The general module architecture from userspace to the hardware lay is described
++in the diagram below.
++
++.. kernel-render:: DOT
++   :alt: Nouveau Software Architecture Diagram
++   :caption: Nouveau Software Architecture Diagram
++
++   digraph "Nouveau" {
++      node [shape=box]
++      "Userspace" -> "DRM APIs"
++      "Userspace" -> "NVIF APIs"
++      "DRM APIs" -> "NVIF APIs"
++      "NVIF APIs" -> "NVKM APIs"
++      "NVKM APIs" -> "Hardware-specific Interfaces"
++   }
++
++
++NVKM
++----
++The NVidia Kernel Module (NVKM) is responsible for the low-level resource
++management of the privileged portions of the hardware. Almost all direct
++register access is performed in this layer. The functionality of the underlying
++hardware is exposed by NVKM as objects of a particular class, and in general
++these are identified with the same class IDs that NVIDIA uses.
++
++Some classes, such as :term:`channels`, have a block of registers associated with
++them that are intended to be directly accessed by an unprivileged client. NVKM
++allows objects to be "mapped" by a client to support this.
++
++The NVKM layer sits closest to the hardware and services requests issued by
++clients.
++
++
++NVIF
++----
++Atop the NVKM sits the NVidia Interface (NVIF) library, which defines a client
++interface that can be used to interact with the NVKM server. NVIF is intended
++to be usable both in the kernel and in userspace. This is accomplished with
++drivers that implement the interface defined in struct nvif_driver. Clients
++within the kernel use with an NVIF client backed with
++struct nvif_driver_nvkm.
++
++This design allows userspace direct access to the registers of :term:`channels`
++it allocates and allows it to submit work to the GPU without going through the
++kernel.
++
++
++DRM
++---
++The DRM layer of nouveau uses the NVIF to implement the interfaces of a DRM
++driver, such as modesetting, command submission to :term:`channels`
++from userspace, synchronization between userspace clients, and so on.
++
++.. note:: All interaction with the NVKM layer inside the kernel should happen
++   through NVIF.  Historically this has not been the case, so there may still
++   be legacy code that bypasses NVIF and directly calls NVKM.
++
++Nouveau's DRM driver is defined in the aptly-named nouveau_drm.c file. The
++files in the driver directory's root provide all the functionality required for
++the DRM driver. Kernel mode-setting is implemented in the dispnv* directories
++and is abstracted in the ``nouveau_display.h`` interface.
++
++For details on what is required to implement these interfaces interfaces, refer
++to the :doc:`drm-internals`, :doc:`drm-kms`, and :doc:`drm-uapi` documents.
++
++
++Public APIs
++===========
++This section covers userspace interfaces provided by nouveau. Like other DRM
++drivers, much of the interface exposed to userspace is documented in
++:doc:`drm-uapi`, but there are a few nouveau-specific interfaces.
++
++
++debugfs
++-------
++Nouveau exposes the some :doc:`DebugFS </filesystems/debugfs>` files. All files
++referenced are relative to ``dri/<card-id>``.
++
++
++crtc-N/nv_crc/flip_threshold
++~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++.. kernel-doc:: drivers/gpu/drm/nouveau/dispnv50/crc.c
++   :doc: nv_crc/flip_threshold
++
++
++Internal APIs
++=============
++The following sections document the internal interfaces and is useful only to
++nouveau developers.
++
++
++DRM
++---
++Code related to implementing the standard DRM interfaces is documented in this
++section.
++
++
++dispnv50/crc.h
++~~~~~~~~~~~~~~
++.. kernel-doc:: drivers/gpu/drm/nouveau/dispnv50/crc.h
++
++
++Glossary
++========
++There are a number of NVIDIA-specific terms in the code as well as the
++documentation.
++
++.. glossary::
++
++   EVO
++   NVD
++   EVO/NVD
++       In pre-Volta architectures, the Evolution (EVO) controller is used to
++       interact with display memory-mapped IO registers via a pushbuffer.  In
++       Volta architectures and newer, the NVDisplay controller takes the place
++       of the EVO controller, although it has slightly different semantics.
++
++   channels
++        Channels are hardware blocks that consumes methods from a
++        direct-memory-accessed command stream.
++
++   CRC notifier context
++        A shared DMA region programmed through the core :term:`EVO/NVD`
++        channel used to report frame CRCs.
++
++
++.. _nouveau: https://nouveau.freedesktop.org/
++.. _envytools: https://envytools.readthedocs.io/
++.. _issue tracker: https://gitlab.freedesktop.org/drm/nouveau/-/issues
++.. _NVIDIA-provided documentation: https://github.com/NVIDIA/open-gpu-doc
 -- 
 2.28.0
 
