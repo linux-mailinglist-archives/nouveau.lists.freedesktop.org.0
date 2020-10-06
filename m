@@ -1,56 +1,46 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4744D283E41
-	for <lists+nouveau@lfdr.de>; Mon,  5 Oct 2020 20:24:23 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 84E042848CB
+	for <lists+nouveau@lfdr.de>; Tue,  6 Oct 2020 10:48:22 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id EFFB289A4F;
-	Mon,  5 Oct 2020 18:24:20 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id AAEC889BD5;
+	Tue,  6 Oct 2020 08:48:18 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-qk1-x744.google.com (mail-qk1-x744.google.com
- [IPv6:2607:f8b0:4864:20::744])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C719789A4F
- for <nouveau@lists.freedesktop.org>; Mon,  5 Oct 2020 18:24:19 +0000 (UTC)
-Received: by mail-qk1-x744.google.com with SMTP id q63so13066587qkf.3
- for <nouveau@lists.freedesktop.org>; Mon, 05 Oct 2020 11:24:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=intel-com.20150623.gappssmtp.com; s=20150623;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=OCSLqGNh9b5YSmYsk1DlWKJeyULS7OR1a85rgALsc9w=;
- b=MCDa+1cwmN3uqvhljUtqnjRDTYQZ/bi0REuAsgRPHawGFRLu9yuU9WlllBKYKSYWoC
- COppqAsu3MTAife2gP8sPBj5BM2BbGaDJxEwZvtuafwP4a4hdfpwdn/NGDE42M6wmPYx
- w6RKz8PK1yLHK6fqWqsgZhdkxQJNKhX5RC2wxagFLtzU3TwNIOuknrBo7berTriabUSB
- qqTiGv8KasNRDd1sfsDjr2lO2IxW1f9KChgBRQcBUplHmmgGaWF66ZIebhDq1VNBfLXS
- ScC9FSdcE4fiChkQkPfTWWSWJq5i1UZonfVL4S1jsX1F1gH31b2ZbJ02j2EKwtYWInDJ
- gSCQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=OCSLqGNh9b5YSmYsk1DlWKJeyULS7OR1a85rgALsc9w=;
- b=pnB2EHhV8T+Hju6LC1/yAgWvUhAtjy6QzpzQJRf6suXr3qhv9NdRFcW3IhAEEz1UMo
- wD7sCiaYhRWlnd4Q2McDtIq0lqU+AtPBS6QUuUUcRaQi8Mpfjh64LDfVVd8wm3sUwapB
- NtXBMhWqf16bwUZ1Gc8dfo0Oa7siu7/7x2suaFIVOtEyl3/FA/LREW/54BvWg9DfVoZp
- Lt2xO4ZNBrgyHNiW5Jk90FpifmNAgaLc5///Y8FYlz4xIRQFli+JzdY502Xe36ZkAiIw
- RJCTBj1XKUYSflqQZS2QalfQQdrHRCuE5l2m6rLM0G5z7s9CqRh38vWPh3u9+rcqXAgA
- 6mBQ==
-X-Gm-Message-State: AOAM532TBlQesg4/CFYIK4DxYbcoUsNQLa+l3jshpFaMml5EcDBaXDvI
- lTLtny6Y631akl960K6KfDeTpDX77dlBUP/cyv/vWw==
-X-Google-Smtp-Source: ABdhPJxukAgIYi20kSI9kjVPF33fEc4rKpb9eQYgj02bTfT4kUplSjOE1HGcZ8LTlpn7FoBl8beo3/6xylx4QC83AAg=
-X-Received: by 2002:a05:620a:4d0:: with SMTP id
- 16mr1333224qks.200.1601922258954; 
- Mon, 05 Oct 2020 11:24:18 -0700 (PDT)
+Received: from fanzine.igalia.com (fanzine.igalia.com [178.60.130.6])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3DFB88913B;
+ Tue,  6 Oct 2020 08:48:17 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
+ s=20170329; 
+ h=MIME-Version:Content-Type:References:In-Reply-To:Date:Cc:To:From:Subject:Message-ID;
+ bh=B6IlmCjekqif+t616Ax228HYiFyy1jBul9azecGXGdU=; 
+ b=geZKcgdaXju0bL8gRGOeUyvkSMBYsw+tzWrb2nldtRplQlj96kTyLTzKGWzVLBDvg3Vv3DuvC7t3x7LRJisRpV05u2vagDLVV/Qfluc2YoeteExiYTJlj+4hJZrGk/M0km8hQ911sN1+MKqfth/5BTpVRr6yEBZgWk03/rPn9TvD895jFTHmqthkwD2t1hob4rMGgbe/sRpG0XkGXBWoLZ2WpxjFlEr2zROlcPj+IEyAvdcjTZGtn6ayTL36IlgoHwKYWcoM2sbvTgEyIs9KqAeNKU63fQOuXKJjKCVxxIFMGOdURWZ7lorJwn1O3SmT/PgAYJBnv2P4pqs4VNa8iw==;
+Received: from 11.red-79-157-245.dynamicip.rima-tde.net ([79.157.245.11]
+ helo=fourier) by fanzine.igalia.com with esmtpsa 
+ (Cipher TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim)
+ id 1kPidq-0005Cc-Uk; Tue, 06 Oct 2020 10:48:15 +0200
+Message-ID: <ee5153f7dc037ab96aff6795c5514da3fea3af94.camel@igalia.com>
+From: Samuel Iglesias =?ISO-8859-1?Q?Gons=E1lvez?= <siglesias@igalia.com>
+To: "members@x.org" <members@x.org>, "events@lists.x.org"
+ <events@lists.x.org>,  "xorg-devel@lists.freedesktop.org"
+ <xorg-devel@lists.freedesktop.org>, "wayland-devel@lists.freedesktop.org"
+ <wayland-devel@lists.freedesktop.org>, "dri-devel@lists.freedesktop.org"
+ <dri-devel@lists.freedesktop.org>, "mesa-dev@lists.freedesktop.org"
+ <mesa-dev@lists.freedesktop.org>, "amd-gfx@lists.freedesktop.org"
+ <amd-gfx@lists.freedesktop.org>, "etnaviv@lists.freedesktop.org"
+ <etnaviv@lists.freedesktop.org>, "freedreno@lists.freedesktop.org"
+ <freedreno@lists.freedesktop.org>, "nouveau@lists.freedesktop.org"
+ <nouveau@lists.freedesktop.org>, "intel-gfx@lists.freedesktop.org"
+ <intel-gfx@lists.freedesktop.org>
+Date: Tue, 06 Oct 2020 10:48:04 +0200
+In-Reply-To: <a171fea35e5dab03873876e221ab15b74ab24d62.camel@redhat.com>
+References: <a171fea35e5dab03873876e221ab15b74ab24d62.camel@redhat.com>
+User-Agent: Evolution 3.36.5 (3.36.5-1.fc32) 
 MIME-Version: 1.0
-References: <20201001181715.17416-1-rcampbell@nvidia.com>
-In-Reply-To: <20201001181715.17416-1-rcampbell@nvidia.com>
-From: Dan Williams <dan.j.williams@intel.com>
-Date: Mon, 5 Oct 2020 11:24:07 -0700
-Message-ID: <CAPcyv4gu=So5PgQU9LezhW4vUQt+paaUr1T6CAvQYjh0XzkkgQ@mail.gmail.com>
-To: Ralph Campbell <rcampbell@nvidia.com>
-Subject: Re: [Nouveau] [RFC PATCH v3 0/2] mm: remove extra ZONE_DEVICE
- struct page refcount
+Subject: Re: [Nouveau] [Freedreno] [RESEND] Requests For Proposals for
+ hosting XDC2021 are now open
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -62,69 +52,107 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Yang Shi <yang.shi@linux.alibaba.com>, Zi Yan <ziy@nvidia.com>,
- nouveau@lists.freedesktop.org, Alistair Popple <apopple@nvidia.com>,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- Matthew Wilcox <willy@infradead.org>, Bharata B Rao <bharata@linux.ibm.com>,
- Paul Mackerras <paulus@ozlabs.org>, Linux MM <linux-mm@kvack.org>,
- kvm-ppc@vger.kernel.org, Jason Gunthorpe <jgg@nvidia.com>,
- Andrew Morton <akpm@linux-foundation.org>, Ira Weiny <ira.weiny@intel.com>,
- Christoph Hellwig <hch@lst.de>,
- "Kirill A . Shutemov" <kirill.shutemov@linux.intel.com>,
- Ben Skeggs <bskeggs@redhat.com>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: "X.Org Foundation Board" <board@foundation.x.org>
+Content-Type: multipart/mixed; boundary="===============1065409116=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, Oct 1, 2020 at 11:17 AM Ralph Campbell <rcampbell@nvidia.com> wrote:
->
-> This is still an RFC because after looking at the pmem/dax code some
-> more, I realized that the ZONE_DEVICE struct pages are being inserted
-> into the process' page tables with vmf_insert_mixed() and a zero
-> refcount on the ZONE_DEVICE struct page. This is sort of OK because
-> insert_pfn() increments the reference count on the pgmap which is what
-> prevents memunmap_pages() from freeing the struct pages and it doesn't
-> check for a non-zero struct page reference count.
-> But, any calls to get_page() will hit the VM_BUG_ON_PAGE() that
-> checks for a reference count == 0.
->
-> // mmap() an ext4 file that is mounted -o dax.
-> ext4_dax_fault()
->   ext4_dax_huge_fault()
->     dax_iomap_fault(&ext4_iomap_ops)
->       dax_iomap_pte_fault()
->         ops->iomap_begin() // ext4_iomap_begin()
->           ext4_map_blocks()
->           ext4_set_iomap()
->         dax_iomap_pfn()
->         dax_insert_entry()
->         vmf_insert_mixed(pfn)
->           __vm_insert_mixed()
->             if (!IS_ENABLED(CONFIG_ARCH_HAS_PTE_SPECIAL) &&
->                 !pfn_t_devmap(pfn) && pfn_t_valid(pfn))
->               insert_page()
->                 get_page(page) // XXX would trigger VM_BUG_ON_PAGE()
->                 page_add_file_rmap()
->                 set_pte_at()
->             else
->               insert_pfn()
->                 pte_mkdevmap()
->                 set_pte_at()
->
-> Should pmem set the page reference count to one before inserting the
-> pfn into the page tables (and decrement when removing devmap PTEs)?
-> What about MEMORY_DEVICE_GENERIC and MEMORY_DEVICE_PCI_P2PDMA use cases?
-> Where should they icrement/decrement the page reference count?
-> I don't know enough about how these are used to really know what to
-> do at this point. If people want me to continue to work on this series,
-> I will need some guidance.
 
-fs/dax could take the reference when inserting, but that would mean
-that ext4 and xfs would need to go back to checking for 1 to be page
-idle. I think that's ok because the filesystem is actually not
-checking for page-idle it's checking for "get_user_pages()" idle.
+--===============1065409116==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-i8Rt81kDKlWriGrdIRjk"
+
+
+--=-i8Rt81kDKlWriGrdIRjk
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+Deadline is November 1st, just in a few weeks!
+
+Don't forget to submit your XDC 2021 proposal to board@foundation.x.org
+.
+
+Sam
+
+On Thu, 2020-09-03 at 12:16 -0400, Lyude Paul wrote:
+> (Including a bunch more emails in the To: that got missed the first
+> time)
+>=20
+> Hello everyone!
+>=20
+> The X.org board is soliciting proposals to host XDC in 2021. Since
+> XDC2020 is being held virtually this year, we've decided to host in
+> either North America or Europe. However, the board is open to other
+> locations, especially if there's an interesting co-location with
+> another
+> conference.
+>=20
+> Of course though, due to the ongoing COVID-19 pandemic it's not yet
+> clear whether or not it will be possible to host XDC2021 in person.
+> Because of this, we would like to make it clear that sponsors should
+> prepare for both the possibility of an in person conference, and the
+> possibility of a virtual conference. We will work with organizers on
+> coming up with a deadline for deciding whether or not we'll be going
+> virtual, likely sometime around July.
+>=20
+> If you're considering hosting XDC, we've assembled a wiki page with
+> what's generally expected and needed:
+>=20
+> https://www.x.org/wiki/Events/RFP/
+>=20
+> When submitting your proposal, please make sure to include at least
+> the
+> key information about the potential location in question, possible
+> dates
+> along with estimated costs. Proposals can be submitted to board at
+> foundation.x.org until the deadline of November 1st. Additionally, an
+> quirk early heads-up to the board if you're considering hosting would
+> be
+> appreciated, in case we need to adjust the schedule a bit. Also,
+> earlier
+> is better since there generally will be a bit of Q&A with organizers.
+>=20
+> And if you just have some questions about what organizing XDC
+> entails,
+> please feel free to chat with previous organizers, or someone from
+> the
+> board.
+
+--=-i8Rt81kDKlWriGrdIRjk
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEEQP+ZAvaXWkfuKXiEf/S6MvF9w0MFAl98L0QACgkQf/S6MvF9
+w0MB5Q//ZfxA9TMZbNgz2V21T4oNCgQg7w3bkzftP1l10UHVSfnpbz3mKGctMm6K
+csjdcmQgVJ6n4gs2VlDGhluukN5hMnBQPe+py1Oyu7SmBYyB6TjhjExHGnd/TX1j
+G/KqpyAnXCZOE1JzuK4u4fmLenGbzqywXgciRuWria6QxG0z06K+8yjZMMk3C1Dv
+O0dRGMt7SLzXwojjWSZQqsY50wBeafdfsP5l1encOn8/KEqSIhf2fnnrKhdt24UT
+8Sravrz1bN0MaCEVFqA51Vq5/RxgA/VY8+VVP+fXRdJdvoJzozlTr7Oj1OtIz9KC
+2aJp+BzV9zlVyPyEOe9aFJUeCUpa8PulNSi6Yuoy6l8Bbqu1KqdGC8rOT2A2eFHo
+yIxHkXDBr+PTb59k6tXzCL6usuUgNFcExnJxIjEJ1XZLscm5hq2aGb9EzeiSYPVE
+Y+W0/x5EyoIGzd1owJQM1GqrXnDqcyNiSAqi/6J7Gae8FS4k4qTg8nRu6wxzYNnt
+aJ4ZuOplyLrFAnP+Wz1b80S/i5kl6sVpopytFMp3biLTXg6z1FfnCKiF1u9SrHYM
+P7c4WS8L3aWrOLh0eZI2Q1Lfiu8EPeAWk4Dkt6gBkjdHbDmKuOZnLgm7rStu4gWm
+th2pTohkIOJtv2QRJ1ysnK5QaR1294jB+fUfLN+PultZiPunLEA=
+=4OiG
+-----END PGP SIGNATURE-----
+
+--=-i8Rt81kDKlWriGrdIRjk--
+
+
+--===============1065409116==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/nouveau
+
+--===============1065409116==--
+
