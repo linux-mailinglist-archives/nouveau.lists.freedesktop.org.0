@@ -1,56 +1,75 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6251F28C3DE
-	for <lists+nouveau@lfdr.de>; Mon, 12 Oct 2020 23:14:24 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2636B28C417
+	for <lists+nouveau@lfdr.de>; Mon, 12 Oct 2020 23:30:36 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id DA5DF89BC2;
-	Mon, 12 Oct 2020 21:14:21 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3714D6E7D7;
+	Mon, 12 Oct 2020 21:30:34 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ej1-x641.google.com (mail-ej1-x641.google.com
- [IPv6:2a00:1450:4864:20::641])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1C5798813A
- for <nouveau@lists.freedesktop.org>; Mon, 12 Oct 2020 21:14:20 +0000 (UTC)
-Received: by mail-ej1-x641.google.com with SMTP id dt13so25216784ejb.12
- for <nouveau@lists.freedesktop.org>; Mon, 12 Oct 2020 14:14:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=intel-com.20150623.gappssmtp.com; s=20150623;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=+E/x/oIv2ijFm2c9w4wv62KEKilXSc7t2Sb9ekDFptw=;
- b=Edzs632po8qKWgO3YwL1+/WtB+jp3E2Vu3gnBGR3UWRBL5wqJFRo1ZiouYvd1j7hdU
- Ixp12qDDQ78vGjE3OV/Lj7aXRatwmUPIiEL72PLClFVepJZovvzodPZGKEyxKZ9N3xzC
- /wGWB0EZXZiyIIdnohsdUSrkF2j3ljeNYyfJpgOxpuRecdCzWN9MlXi1HxwYn3AG3Y+j
- Ez7G84Q3qjBphLh3URy4AEUUlcVBgQlK2HwfEj6iwS7/1bTQlNl3JMbkVP+uoaeiZmrz
- LYmcl5Q9ho6uVvcilbmyEJCZ07yD0pc3UEOxk5BWy9nUQ1CumAEd4X0Eyuz1wzQmRqHk
- qAtQ==
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [63.128.21.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 295796E7D7
+ for <nouveau@lists.freedesktop.org>; Mon, 12 Oct 2020 21:30:32 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1602538231;
+ h=from:from:reply-to:reply-to:subject:subject:date:date:
+ message-id:message-id:to:to:cc:cc:mime-version:mime-version:
+ content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=ByWRY92fMU4wBwTlNUv/ZSHauYCNih98DAlLxy56we8=;
+ b=FLe0r+CiCWxBzbH6tx8w4PgxVFSQBZFS8rLIUttXz14hT8KKigsfYqV/AXnpGv4swFGs/w
+ nc8ZPI9s4s9UGeiMylst43Rk9dDjXf1xkl0Sb70jJh9HKIekPdOUGEYFQvwwgDBLz6ykMD
+ nttFCrE2L4uf07bZYgNfy0bqyQEOPuo=
+Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com
+ [209.85.160.199]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-146-O66w-1gPPO6SUJsBxC9QMg-1; Mon, 12 Oct 2020 17:30:29 -0400
+X-MC-Unique: O66w-1gPPO6SUJsBxC9QMg-1
+Received: by mail-qt1-f199.google.com with SMTP id d22so3135937qtn.0
+ for <nouveau@lists.freedesktop.org>; Mon, 12 Oct 2020 14:30:29 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=+E/x/oIv2ijFm2c9w4wv62KEKilXSc7t2Sb9ekDFptw=;
- b=tifOPNQKO9MfViJMGhV126zQWPrETZfbodgnVRVRorWMHtfj3jj4WWYoqt7TiV0ta6
- 9J/1NuEWT2OYfNJbiu7XMaSPPLkpb9xRbJ4yF+s/4HGqYZ+2zzpG6mJFCVBqCh95VqJJ
- 2XSZ1er+fpGKqxfPenAaXPTMuKgpu4hN3hrS7kstsSG5JwXYZjjKnMPubwUAMnLEIIbb
- 1rU6nuL3YZGfldKPr6KfWhXl1pK2mAx2ojEABJpvdI8e/Jmylqux6v3khUoWW0cW8rfx
- j2zRs1IqZ7Gycc2aeLNztW06inW/LJYV4D4tSFcTkhN6n+uWuJADBXPYu/sW6eWQMFK7
- 3mqA==
-X-Gm-Message-State: AOAM531TQIRmEStZ1QdbjxaxQpZogZr9zh+nUoAvDYwyOA06Hl/IY9Zi
- BUf62e+JvsNoEplS1W6s8KTWxJNawBh++rYooRvy9Q==
-X-Google-Smtp-Source: ABdhPJz02OtB37X1Kl6Yw4VB2J5fzc4t6W8lA+4qFWxSxgpuA/gexEv+m5h1tqboEVvNq9alpAfTRLuAH8zdbpyQqLs=
-X-Received: by 2002:a17:906:b88f:: with SMTP id
- hb15mr29759160ejb.45.1602537258704; 
- Mon, 12 Oct 2020 14:14:18 -0700 (PDT)
+ h=x-gm-message-state:message-id:subject:from:reply-to:to:cc:date
+ :in-reply-to:references:organization:user-agent:mime-version
+ :content-transfer-encoding;
+ bh=ByWRY92fMU4wBwTlNUv/ZSHauYCNih98DAlLxy56we8=;
+ b=W9EscvSWQAJ3b/6tRMp8TwoTjh4Abrixp0+J3AzLUPhCRP6sOaiWdn5emeCDBLqkNj
+ 8QWE84chODrloCByFA9egY/7x0mZGtEBMthPIxm+DR+GcwYc42VIARdYLrZYKyP7lnfs
+ aCi3nGEKxRwzVbR0pInEGDGkcBXtU67L3BZuLFH1Dx6nNIGwLzXRjXRytUMEiHrIQ9eR
+ svz6BpvHqmohN9d6ldvLlzmxgOAL2dWY19Sz84A7Pt4VGYv/pIICpUBjhWhPcJpnrV+E
+ SiVJJuUIaeevNYcpwE0zYQKQJmQVH6GFPPlynOcEhVCMTTirBHEb/buZa0WQ438uiMbl
+ A3HQ==
+X-Gm-Message-State: AOAM530UXFssJsY7FLl8Yo3C2NjqmMRhCnib+2ApOPzDo7DLF/7Fd3pE
+ 7gvGJbdNTUWk8eR691n9n3JoaHs07yH1rSreSlyYswh0hrSYlsoec2024IWCIG+USnupSPFcuh6
+ tBWctkzvhoGpb8YuR8dOILVoQMQ==
+X-Received: by 2002:ac8:688b:: with SMTP id m11mr10029822qtq.177.1602538227932; 
+ Mon, 12 Oct 2020 14:30:27 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJxoukR4gOSKG0pB8NrTDZ6vlc5dVaB6114hAedoRjjDKdoxqGAq1cbkVhXL29kXiz09KM6G1w==
+X-Received: by 2002:ac8:688b:: with SMTP id m11mr10029803qtq.177.1602538227505; 
+ Mon, 12 Oct 2020 14:30:27 -0700 (PDT)
+Received: from Whitewolf.lyude.net
+ (pool-108-49-102-102.bstnma.fios.verizon.net. [108.49.102.102])
+ by smtp.gmail.com with ESMTPSA id y125sm12791634qkb.114.2020.10.12.14.30.26
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 12 Oct 2020 14:30:26 -0700 (PDT)
+Message-ID: <842b9325bc232a1333f58788d538684f4738fc6a.camel@redhat.com>
+From: Lyude Paul <lyude@redhat.com>
+To: Alexander Kapshuk <alexander.kapshuk@gmail.com>, bskeggs@redhat.com
+Date: Mon, 12 Oct 2020 17:30:25 -0400
+In-Reply-To: <20201009181120.2360-1-alexander.kapshuk@gmail.com>
+References: <20201009181120.2360-1-alexander.kapshuk@gmail.com>
+Organization: Red Hat
+User-Agent: Evolution 3.36.5 (3.36.5-1.fc32)
 MIME-Version: 1.0
-References: <20201012174540.17328-1-rcampbell@nvidia.com>
-In-Reply-To: <20201012174540.17328-1-rcampbell@nvidia.com>
-From: Dan Williams <dan.j.williams@intel.com>
-Date: Mon, 12 Oct 2020 14:14:07 -0700
-Message-ID: <CAPcyv4ijD+=3rje1CfSG4XKuRNfuAWOui93NQV09NmBte_gc0w@mail.gmail.com>
-To: Ralph Campbell <rcampbell@nvidia.com>
-Subject: Re: [Nouveau] [PATCH v2] mm/hmm: make device private reference
- counts zero based
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=lyude@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Subject: Re: [Nouveau] [PATCH] drm/nouveau/kms: Fix NULL pointer dereference
+ in nouveau_connector_detect_depth
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -62,40 +81,285 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Yang Shi <yang.shi@linux.alibaba.com>, Zi Yan <ziy@nvidia.com>,
- nouveau@lists.freedesktop.org, Alistair Popple <apopple@nvidia.com>,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- Matthew Wilcox <willy@infradead.org>, Paul Mackerras <paulus@ozlabs.org>,
- Linux MM <linux-mm@kvack.org>, kvm-ppc@vger.kernel.org,
- Jason Gunthorpe <jgg@nvidia.com>, Andrew Morton <akpm@linux-foundation.org>,
- Ira Weiny <ira.weiny@intel.com>, Christoph Hellwig <hch@lst.de>,
- "Kirill A . Shutemov" <kirill.shutemov@linux.intel.com>,
- Ben Skeggs <bskeggs@redhat.com>
+Reply-To: lyude@redhat.com
+Cc: airlied@linux.ie, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ linux-next@vger.kernel.org, daniel@ffwll.ch
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Mon, Oct 12, 2020 at 10:46 AM Ralph Campbell <rcampbell@nvidia.com> wrote:
->
-> ZONE_DEVICE struct pages have an extra reference count that complicates the
-> code for put_page() and several places in the kernel that need to check the
-> reference count to see that a page is not being used (gup, compaction,
-> migration, etc.). Clean up the code so the reference count doesn't need to
-> be treated specially for device private pages, leaving DAX as still being
-> a special case.
+Hi! Thanks for the catch, just one comment down below
 
-Please no half-step to removing the special casing...
+On Fri, 2020-10-09 at 21:11 +0300, Alexander Kapshuk wrote:
+> This oops manifests itself on the following hardware:
+> 01:00.0 VGA compatible controller: NVIDIA Corporation G98M [GeForce G 103M]
+> (rev a1)
+> 
+> Oct 09 14:17:46 lp-sasha kernel: BUG: kernel NULL pointer dereference,
+> address: 0000000000000000
+> Oct 09 14:17:46 lp-sasha kernel: #PF: supervisor read access in kernel mode
+> Oct 09 14:17:46 lp-sasha kernel: #PF: error_code(0x0000) - not-present page
+> Oct 09 14:17:46 lp-sasha kernel: PGD 0 P4D 0
+> Oct 09 14:17:46 lp-sasha kernel: Oops: 0000 [#1] SMP PTI
+> Oct 09 14:17:46 lp-sasha kernel: CPU: 1 PID: 191 Comm: systemd-udevd Not
+> tainted 5.9.0-rc8-next-20201009 #38
+> Oct 09 14:17:46 lp-sasha kernel: Hardware name: Hewlett-Packard Compaq
+> Presario CQ61 Notebook PC/306A, BIOS F.03 03/23/2009
+> Oct 09 14:17:46 lp-sasha kernel: RIP:
+> 0010:nouveau_connector_detect_depth+0x71/0xc0 [nouveau]
+> Oct 09 14:17:46 lp-sasha kernel: Code: 0a 00 00 48 8b 49 48 c7 87 b8 00 00 00
+> 06 00 00 00 80 b9 4d 0a 00 00 00 75 1e 83 fa 41 75 05 48 85 c0 75 29 8b 81 10
+> 0d 00 00 <39> 06 7c 25 f6 81 14 0d 00 00 02 75 b7 c3 80 b9 0c 0d 00 00 00 75
+> Oct 09 14:17:46 lp-sasha kernel: RSP: 0018:ffffc9000028f8c0 EFLAGS: 00010297
+> Oct 09 14:17:46 lp-sasha kernel: RAX: 0000000000014c08 RBX: ffff8880369d4000
+> RCX: ffff8880369d3000
+> Oct 09 14:17:46 lp-sasha kernel: RDX: 0000000000000040 RSI: 0000000000000000
+> RDI: ffff8880369d4000
+> Oct 09 14:17:46 lp-sasha kernel: RBP: ffff88800601cc00 R08: ffff8880051da298
+> R09: ffffffff8226201a
+> Oct 09 14:17:46 lp-sasha kernel: R10: ffff88800469aa80 R11: ffff888004c84ff8
+> R12: 0000000000000000
+> Oct 09 14:17:46 lp-sasha kernel: R13: ffff8880051da000 R14: 0000000000002000
+> R15: 0000000000000003
+> Oct 09 14:17:46 lp-sasha kernel: FS:  00007fd0192b3440(0000)
+> GS:ffff8880bc900000(0000) knlGS:0000000000000000
+> Oct 09 14:17:46 lp-sasha kernel: CS:  0010 DS: 0000 ES: 0000 CR0:
+> 0000000080050033
+> Oct 09 14:17:46 lp-sasha kernel: CR2: 0000000000000000 CR3: 0000000004976000
+> CR4: 00000000000006e0
+> Oct 09 14:17:46 lp-sasha kernel: Call Trace:
+> Oct 09 14:17:46 lp-sasha kernel:  nouveau_connector_get_modes+0x1e6/0x240
+> [nouveau]
+> Oct 09 14:17:46 lp-sasha kernel:  ? kfree+0xb9/0x240
+> Oct 09 14:17:46 lp-sasha kernel:  ? drm_connector_list_iter_next+0x7c/0xa0
+> Oct 09 14:17:46 lp-sasha
+> kernel:  drm_helper_probe_single_connector_modes+0x1ba/0x7c0
+> Oct 09 14:17:46 lp-sasha kernel:  drm_client_modeset_probe+0x27e/0x1360
+> Oct 09 14:17:46 lp-sasha kernel:  ? nvif_object_sclass_put+0xc/0x20 [nouveau]
+> Oct 09 14:17:46 lp-sasha kernel:  ? nouveau_cli_init+0x3cc/0x440 [nouveau]
+> Oct 09 14:17:46 lp-sasha kernel:  ? ktime_get_mono_fast_ns+0x49/0xa0
+> Oct 09 14:17:46 lp-sasha kernel:  ? nouveau_drm_open+0x4e/0x180 [nouveau]
+> Oct 09 14:17:46 lp-sasha
+> kernel:  __drm_fb_helper_initial_config_and_unlock+0x3f/0x4a0
+> Oct 09 14:17:46 lp-sasha kernel:  ? drm_file_alloc+0x18f/0x260
+> Oct 09 14:17:46 lp-sasha kernel:  ? mutex_lock+0x9/0x40
+> Oct 09 14:17:46 lp-sasha kernel:  ? drm_client_init+0x110/0x160
+> Oct 09 14:17:46 lp-sasha kernel:  nouveau_fbcon_init+0x14d/0x1c0 [nouveau]
+> Oct 09 14:17:46 lp-sasha kernel:  nouveau_drm_device_init+0x1c0/0x880
+> [nouveau]
+> Oct 09 14:17:46 lp-sasha kernel:  nouveau_drm_probe+0x11a/0x1e0 [nouveau]
+> Oct 09 14:17:46 lp-sasha kernel:  pci_device_probe+0xcd/0x140
+> Oct 09 14:17:46 lp-sasha kernel:  really_probe+0xd8/0x400
+> Oct 09 14:17:46 lp-sasha kernel:  driver_probe_device+0x4a/0xa0
+> Oct 09 14:17:46 lp-sasha kernel:  device_driver_attach+0x9c/0xc0
+> Oct 09 14:17:46 lp-sasha kernel:  __driver_attach+0x6f/0x100
+> Oct 09 14:17:46 lp-sasha kernel:  ? device_driver_attach+0xc0/0xc0
+> Oct 09 14:17:46 lp-sasha kernel:  bus_for_each_dev+0x75/0xc0
+> Oct 09 14:17:46 lp-sasha kernel:  bus_add_driver+0x106/0x1c0
+> Oct 09 14:17:46 lp-sasha kernel:  driver_register+0x86/0xe0
+> Oct 09 14:17:46 lp-sasha kernel:  ? 0xffffffffa044e000
+> Oct 09 14:17:46 lp-sasha kernel:  do_one_initcall+0x48/0x1e0
+> Oct 09 14:17:46 lp-sasha kernel:  ? _cond_resched+0x11/0x60
+> Oct 09 14:17:46 lp-sasha kernel:  ? kmem_cache_alloc_trace+0x19c/0x1e0
+> Oct 09 14:17:46 lp-sasha kernel:  do_init_module+0x57/0x220
+> Oct 09 14:17:46 lp-sasha kernel:  __do_sys_finit_module+0xa0/0xe0
+> Oct 09 14:17:46 lp-sasha kernel:  do_syscall_64+0x33/0x40
+> Oct 09 14:17:46 lp-sasha kernel:  entry_SYSCALL_64_after_hwframe+0x44/0xa9
+> Oct 09 14:17:46 lp-sasha kernel: RIP: 0033:0x7fd01a060d5d
+> Oct 09 14:17:46 lp-sasha kernel: Code: 00 c3 66 2e 0f 1f 84 00 00 00 00 00 90
+> f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24
+> 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d e3 70 0c 00 f7 d8 64 89 01 48
+> Oct 09 14:17:46 lp-sasha kernel: RSP: 002b:00007ffc8ad38a98 EFLAGS: 00000246
+> ORIG_RAX: 0000000000000139
+> Oct 09 14:17:46 lp-sasha kernel: RAX: ffffffffffffffda RBX: 0000563f6e7fd530
+> RCX: 00007fd01a060d5d
+> Oct 09 14:17:46 lp-sasha kernel: RDX: 0000000000000000 RSI: 00007fd01a19f95d
+> RDI: 000000000000000f
+> Oct 09 14:17:46 lp-sasha kernel: RBP: 0000000000020000 R08: 0000000000000000
+> R09: 0000000000000007
+> Oct 09 14:17:46 lp-sasha kernel: R10: 000000000000000f R11: 0000000000000246
+> R12: 00007fd01a19f95d
+> Oct 09 14:17:46 lp-sasha kernel: R13: 0000000000000000 R14: 0000563f6e7fbc10
+> R15: 0000563f6e7fd530
+> Oct 09 14:17:46 lp-sasha kernel: Modules linked in: nouveau(+) ttm xt_string
+> xt_mark xt_LOG vgem v4l2_dv_timings uvcvideo ulpi udf ts_kmp ts_fsm ts_bm
+> snd_aloop sil164 qat_dh895xccvf nf_nat_sip nf_nat_irc nf_nat_ftp nf_nat
+> nf_log_ipv6 nf_log_ipv4 nf_log_common ltc2990 lcd intel_qat input_leds i2c_mux
+> gspca_main videobuf2_vmalloc videobuf2_memops videobuf2_v4l2 videobuf2_common
+> videodev mc drivetemp cuse fuse crc_itu_t coretemp ch7006 ath5k ath algif_hash
+> Oct 09 14:17:46 lp-sasha kernel: CR2: 0000000000000000
+> Oct 09 14:17:46 lp-sasha kernel: ---[ end trace 0ddafe218ad30017 ]---
+> Oct 09 14:17:46 lp-sasha kernel: RIP:
+> 0010:nouveau_connector_detect_depth+0x71/0xc0 [nouveau]
+> Oct 09 14:17:46 lp-sasha kernel: Code: 0a 00 00 48 8b 49 48 c7 87 b8 00 00 00
+> 06 00 00 00 80 b9 4d 0a 00 00 00 75 1e 83 fa 41 75 05 48 85 c0 75 29 8b 81 10
+> 0d 00 00 <39> 06 7c 25 f6 81 14 0d 00 00 02 75 b7 c3 80 b9 0c 0d 00 00 00 75
+> Oct 09 14:17:46 lp-sasha kernel: RSP: 0018:ffffc9000028f8c0 EFLAGS: 00010297
+> Oct 09 14:17:46 lp-sasha kernel: RAX: 0000000000014c08 RBX: ffff8880369d4000
+> RCX: ffff8880369d3000
+> Oct 09 14:17:46 lp-sasha kernel: RDX: 0000000000000040 RSI: 0000000000000000
+> RDI: ffff8880369d4000
+> Oct 09 14:17:46 lp-sasha kernel: RBP: ffff88800601cc00 R08: ffff8880051da298
+> R09: ffffffff8226201a
+> Oct 09 14:17:46 lp-sasha kernel: R10: ffff88800469aa80 R11: ffff888004c84ff8
+> R12: 0000000000000000
+> Oct 09 14:17:46 lp-sasha kernel: R13: ffff8880051da000 R14: 0000000000002000
+> R15: 0000000000000003
+> Oct 09 14:17:46 lp-sasha kernel: FS:  00007fd0192b3440(0000)
+> GS:ffff8880bc900000(0000) knlGS:0000000000000000
+> Oct 09 14:17:46 lp-sasha kernel: CS:  0010 DS: 0000 ES: 0000 CR0:
+> 0000000080050033
+> Oct 09 14:17:46 lp-sasha kernel: CR2: 0000000000000000 CR3: 0000000004976000
+> CR4: 00000000000006e0
+> 
+> The disassembly:
+> Code: 0a 00 00 48 8b 49 48 c7 87 b8 00 00 00 06 00 00 00 80 b9 4d 0a 00 00 00
+> 75 1e 83 fa 41 75 05 48 85 c0 75 29 8b 81 10 0d 00 00 <39> 06 7c 25 f6 81 14
+> 0d 00 00 02 75 b7 c3 80 b9 0c 0d 00 00 00 75
+> All code
+> ========
+>    0:   0a 00                   or     (%rax),%al
+>    2:   00 48 8b                add    %cl,-0x75(%rax)
+>    5:   49                      rex.WB
+>    6:   48 c7 87 b8 00 00 00    movq   $0x6,0xb8(%rdi)
+>    d:   06 00 00 00
+>   11:   80 b9 4d 0a 00 00 00    cmpb   $0x0,0xa4d(%rcx)
+>   18:   75 1e                   jne    0x38
+>   1a:   83 fa 41                cmp    $0x41,%edx
+>   1d:   75 05                   jne    0x24
+>   1f:   48 85 c0                test   %rax,%rax
+>   22:   75 29                   jne    0x4d
+>   24:   8b 81 10 0d 00 00       mov    0xd10(%rcx),%eax
+>   2a:*  39 06                   cmp    %eax,(%rsi)              <-- trapping
+> instruction
+>   2c:   7c 25                   jl     0x53
+>   2e:   f6 81 14 0d 00 00 02    testb  $0x2,0xd14(%rcx)
+>   35:   75 b7                   jne    0xffffffffffffffee
+>   37:   c3                      retq
+>   38:   80 b9 0c 0d 00 00 00    cmpb   $0x0,0xd0c(%rcx)
+>   3f:   75                      .byte 0x75
+> 
+> Code starting with the faulting instruction
+> ===========================================
+>    0:   39 06                   cmp    %eax,(%rsi)
+>    2:   7c 25                   jl     0x29
+>    4:   f6 81 14 0d 00 00 02    testb  $0x2,0xd14(%rcx)
+>    b:   75 b7                   jne    0xffffffffffffffc4
+>    d:   c3                      retq
+>    e:   80 b9 0c 0d 00 00 00    cmpb   $0x0,0xd0c(%rcx)
+>   15:   75                      .byte 0x75
+> 
+> objdump -SF --disassemble=nouveau_connector_detect_depth
+> [...]
+>         if (nv_connector->edid &&
+>    c85e1:       83 fa 41                cmp    $0x41,%edx
+>    c85e4:       75 05                   jne    c85eb
+> <nouveau_connector_detect_depth+0x6b> (File Offset: 0xc866b)
+>    c85e6:       48 85 c0                test   %rax,%rax
+>    c85e9:       75 29                   jne    c8614
+> <nouveau_connector_detect_depth+0x94> (File Offset: 0xc8694)
+>             nv_connector->type == DCB_CONNECTOR_LVDS_SPWG)
+>                 duallink = ((u8 *)nv_connector->edid)[121] == 2;
+>         else
+>                 duallink = mode->clock >= bios->fp.duallink_transition_clk;
+> 
+>         if ((!duallink && (bios->fp.strapless_is_24bit & 1)) ||
+>    c85eb:       8b 81 10 0d 00 00       mov    0xd10(%rcx),%eax
+>    c85f1:       39 06                   cmp    %eax,(%rsi)
+>    c85f3:       7c 25                   jl     c861a
+> <nouveau_connector_detect_depth+0x9a> (File Offset: 0xc869a)
+>             ( duallink && (bios->fp.strapless_is_24bit & 2)))
+>    c85f5:       f6 81 14 0d 00 00 02    testb  $0x2,0xd14(%rcx)
+>    c85fc:       75 b7                   jne    c85b5
+> <nouveau_connector_detect_depth+0x35> (File Offset: 0xc8635)
+>                 connector->display_info.bpc = 8;
+> [...]
+> 
+> % scripts/faddr2line /lib/modules/5.9.0-rc8-next-
+> 20201009/kernel/drivers/gpu/drm/nouveau/nouveau.ko
+> nouveau_connector_detect_depth+0x71/0xc0
+> nouveau_connector_detect_depth+0x71/0xc0:
+> nouveau_connector_detect_depth at /home/sasha/linux-
+> next/drivers/gpu/drm/nouveau/nouveau_connector.c:891
+> 
+> It is actually line 889. See the disassembly above.
+> 889                     duallink = mode->clock >= bios-
+> >fp.duallink_transition_clk;
+> 
+> The NULL pointer being dereferenced is mode.
+> 
+> Git bisect has identified the following commit as bad:
+> f28e32d3906e drm/nouveau/kms: Don't change EDID when it hasn't actually
+> changed
+> 
+> Here is the chain of events that causes the oops.
+> On entry to nouveau_connector_detect_lvds, edid is set to NULL.
+> The call to nouveau_connector_detect sets nv_connector->edid to valid
+> memory, with status being set to connector_status_connected and the flow
+> of execution branching to the out label.
+> 
+> The subsequent call to nouveau_connector_set_edid erronously clears
+> nv_connector->edid, via the local edid pointer which remains set to NULL.
+> 
+> Fix this by setting edid to the value of the just acquired
+> nv_connector->edid and call nouveau_connector_set_edid in the out label
+> only if nv_connector->edid and edid point to different memory addresses
+> thus preventing nv_connector->edid from being turned into a dangling
+> pointer.
+> 
+> Fixes: f28e32d3906e ("drm/nouveau/kms: Don't change EDID when it hasn't
+> actually changed")
+> Signed-off-by: Alexander Kapshuk <alexander.kapshuk@gmail.com>
+> ---
+>  drivers/gpu/drm/nouveau/nouveau_connector.c | 7 +++++--
+>  1 file changed, 5 insertions(+), 2 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_connector.c
+> b/drivers/gpu/drm/nouveau/nouveau_connector.c
+> index 49dd0cbc332f..a3f53d2ac86e 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_connector.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_connector.c
+> @@ -669,8 +669,10 @@ nouveau_connector_detect_lvds(struct drm_connector
+> *connector, bool force)
+>  	/* Try retrieving EDID via DDC */
+>  	if (!drm->vbios.fp_no_ddc) {
+>  		status = nouveau_connector_detect(connector, force);
+> -		if (status == connector_status_connected)
+> +		if (status == connector_status_connected) {
+> +			edid = nv_connector->edid;
+>  			goto out;
+> +		}
+>  	}
+> 
+>  	/* On some laptops (Sony, i'm looking at you) there appears to
+> @@ -720,7 +722,8 @@ nouveau_connector_detect_lvds(struct drm_connector
+> *connector, bool force)
+>  		status = connector_status_unknown;
+>  #endif
+> 
+> -	nouveau_connector_set_edid(nv_connector, edid);
+> +	if (nv_connector->edid != edid)
+> +		nouveau_connector_set_edid(nv_connector, edid);
 
-[..]
-> +void free_zone_device_page(struct page *page)
-> +{
-> +       if (!is_device_private_page(page))
->                 return;
+Could we just update nouveau_connector_set_edid() to do the (nv_connector->edid
+!= edid) check instead of open coding it here?
 
-That seems too subtle to be acceptable to me. All ZONE_DEVICE pages
-need to have the same relationship with respect to idle-ness and the
-page reference count.
+With that fixed:
+
+Reviewed-by: Lyude Paul <lyude@redhat.com>
+>  	nouveau_connector_set_encoder(connector, nv_encoder);
+>  	return status;
+>  }
+> --
+> 2.28.0
+> 
+-- 
+Sincerely,
+      Lyude Paul (she/her)
+      Software Engineer at Red Hat
+
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
