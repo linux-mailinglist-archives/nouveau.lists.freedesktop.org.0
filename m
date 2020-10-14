@@ -1,33 +1,56 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 70AA128D98A
-	for <lists+nouveau@lfdr.de>; Wed, 14 Oct 2020 07:29:21 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 564B228EC0C
+	for <lists+nouveau@lfdr.de>; Thu, 15 Oct 2020 06:23:08 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8E8E46E9D5;
-	Wed, 14 Oct 2020 05:29:17 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id CB3846E02C;
+	Thu, 15 Oct 2020 04:23:04 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from winds.org (winds.org [68.75.195.9])
- by gabe.freedesktop.org (Postfix) with ESMTP id E46716E027;
- Tue, 13 Oct 2020 23:54:19 +0000 (UTC)
-Received: by winds.org (Postfix, from userid 100)
- id 9B0A113F97CD; Tue, 13 Oct 2020 19:54:18 -0400 (EDT)
-Received: from localhost (localhost [127.0.0.1])
- by winds.org (Postfix) with ESMTP id 97C9913F9795;
- Tue, 13 Oct 2020 19:54:18 -0400 (EDT)
-Date: Tue, 13 Oct 2020 19:54:18 -0400 (EDT)
-From: Byron Stanoszek <gandalf@winds.org>
-To: Ben Skeggs <bskeggs@redhat.com>
-In-Reply-To: <alpine.LNX.2.23.451.2010130939140.14680@winds.org>
-Message-ID: <alpine.LNX.2.23.451.2010131951560.14680@winds.org>
-References: <alpine.LNX.2.23.451.2010130939140.14680@winds.org>
-User-Agent: Alpine 2.23 (LNX 451 2020-06-18)
-MIME-Version: 1.0
-X-Mailman-Approved-At: Wed, 14 Oct 2020 05:29:16 +0000
-Subject: Re: [Nouveau] Nouveau DRM failure on 5120x1440 screen with 5.8/5.9
- kernel
+Received: from mail-pl1-x644.google.com (mail-pl1-x644.google.com
+ [IPv6:2607:f8b0:4864:20::644])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 55F636EA1F
+ for <nouveau@lists.freedesktop.org>; Wed, 14 Oct 2020 07:54:39 +0000 (UTC)
+Received: by mail-pl1-x644.google.com with SMTP id 1so1347869ple.2
+ for <nouveau@lists.freedesktop.org>; Wed, 14 Oct 2020 00:54:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sslab.ics.keio.ac.jp; s=google;
+ h=from:to:cc:subject:date:message-id;
+ bh=rKoJ8K1HmS89dQcSd+qek5XQD2mS7GsLcQDZpZn8svY=;
+ b=U4iUTIxdQbehyuFrFc7WiEJXMgU4qgwSykRROhgkVSQ8nJXnnVIu+nERBK+TpjLiRD
+ FMwQW+FwFT1JcwaQtl+Fz/QaBvp8jmMtZ7ylnHbyLTEKHTc9wtkbU3mga6WkYmW8/fYf
+ hhu4vjpu74tK6F54iGiQ/E39YCMjKuZhHV1IA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id;
+ bh=rKoJ8K1HmS89dQcSd+qek5XQD2mS7GsLcQDZpZn8svY=;
+ b=iV0Gaq2Ov2sn6RAzgr8Ti04cFx/KINlYfbIQqvDzzbYtkB5IKRpq2rVnrdv4ENaHbP
+ qz6Bd+IzzNE0wLveLSDEefXuAU0cmILd2MVBay9eDqCsp9xCAjoHvYUCagg5UqMda8Mb
+ Ku8wduEWOTdzKclna84Kmj1J0Yijw1g62Bz1KFqygxeLlcAApSbRNIazAC+TuUlCVp57
+ tqRlJbt4//OHJkSOxIXlK/B7OU1vt7Qcpvj9t3GB16msgfKTyeAlVAkEIAjK7FDJSehf
+ SAjACzMr+oBHTdcejTnDM3Ev5O0KFv1OImpjzKpdP4MOVz/tV+JdwwWNa9kAsggJJxV7
+ p6Pw==
+X-Gm-Message-State: AOAM533cYVojPOlVjlD76hkIxIpWFVT5plwtSghcWeIJdkbD+gu9Vsxa
+ wUJcDamenAArVK/Stb1nIBZqPQ==
+X-Google-Smtp-Source: ABdhPJyUdVLPpvUpy5QQeSSCwMu0ll7oxBPg1VX62WnU03remZdsdlG7MQNxMpks3DmPoBF6p+L4aw==
+X-Received: by 2002:a17:902:ee83:b029:d4:bdd6:cabe with SMTP id
+ a3-20020a170902ee83b02900d4bdd6cabemr3465976pld.68.1602662078593; 
+ Wed, 14 Oct 2020 00:54:38 -0700 (PDT)
+Received: from brooklyn.i.sslab.ics.keio.ac.jp (sslab-relay.ics.keio.ac.jp.
+ [131.113.126.173])
+ by smtp.googlemail.com with ESMTPSA id x1sm2007824pjj.25.2020.10.14.00.54.36
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 14 Oct 2020 00:54:37 -0700 (PDT)
+From: Keita Suzuki <keitasuzuki.park@sslab.ics.keio.ac.jp>
+To: 
+Date: Wed, 14 Oct 2020 07:54:16 +0000
+Message-Id: <20201014075419.19974-1-keitasuzuki.park@sslab.ics.keio.ac.jp>
+X-Mailer: git-send-email 2.17.1
+X-Mailman-Approved-At: Thu, 15 Oct 2020 04:23:03 +0000
+Subject: [Nouveau] [PATCH RFC] drm/nouveau: fix memory leak in
+ nvkm_iccsense_oneinit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -39,49 +62,54 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org
+Cc: takafumi@sslab.ics.keio.ac.jp, David Airlie <airlied@linux.ie>,
+ nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>,
+ Daniel Vetter <daniel@ffwll.ch>, keitasuzuki.park@sslab.ics.keio.ac.jp
+MIME-Version: 1.0
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, 13 Oct 2020, Byron Stanoszek wrote:
+struct pw_rail_t is allocated as an array in function nvios_iccsense_parse,
+and stored to a struct member of local variable. However, the array is not
+freed when the local variable becomes invalid, and the reference is not
+passed on, leading to a memory leak.
 
-> I'm having a problem with both the 5.8 and 5.9 kernels using the nouveau DRM
-> driver. I have a laptop with a VGA card (specs below) connected to a
-> 5120x1440 screen. At boot time, the card correctly detects the screen, tries
-> to allocate fbdev fb0, then the video hangs completely for 15-30 seconds
-> until it goes blank.
+Fix this by freeing struct pw_rail_t when exiting nvkm_iccsense_oneinit.
 
-This message eventually displays after a while:
+Signed-off-by: Keita Suzuki <keitasuzuki.park@sslab.ics.keio.ac.jp>
+---
+ drivers/gpu/drm/nouveau/nvkm/subdev/iccsense/base.c | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-Workqueue: nvkm-disp nv50_disp_super
-RIP: 0010:nv50_disp_super_2_2+0x1b0/0x470
-Code: 69 00 00 48 69 c0 d3 4d 62 10 48 c1 e8 26 49 89 c5 0f b7 43 40 44 89 e9 8d 44 02 f9 0f b7 53 46 29 d0 31 d2 48 98 49 0f af c4 <48> f7 f1 48 89 c6 0f b7 43 4e 0f b7 53 4c 83 e8 19 29 d0 31 d2 48
-RSP: 0018:ffffc900005e3e08 EFLAGS: 00010206
-RAX: 0000000000000000 RBX: ffff88841b08ed20 RCX: 0000000000000000
-RDX: 0000000000000000 RSI: ffffc90003614200 RDI: ffffffff820c1140
-RBP: ffff88841b202060 R08: 0000000000000000 R09: 00000000000061ce
-R10: 0000000000000018 R11: 0000000000000018 R12: 0000000000000000
-R13: 0000000000000000 R14: ffff88841b96b800 R15: ffff88841b975000
-FS:  0000000000000000(0000) GS:ffff88841dc00000(0000) knlGS:0000000000000000
-CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-CR2: 00007f922e61e000 CR3: 000000000240a004 CR4: 00000000001706b0
-Call Trace:
-  ? nvkm_dp_disable+0x5d/0x70
-  ? nv50_disp_super+0x137/0x220
-  ? process_one_work+0x19c/0x2c0
-  ? worker_thread+0x48/0x350
-  ? process_one_work+0x2c0/0x2c0
-  ? kthread+0x129/0x150
-  ? __kthread_create_worker+0x100/0x100
-  ? ret_from_fork+0x22/0x30
----[ end trace dbb0d14fd1ddb445 ]---
-nouveau 0000:01:00.0: DRM: core notifier timeout
-
-Thanks,
-  -Byron
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/iccsense/base.c b/drivers/gpu/drm/nouveau/nvkm/subdev/iccsense/base.c
+index fecfa6afcf54..8ba8d8e3f52a 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/iccsense/base.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/iccsense/base.c
+@@ -280,8 +280,10 @@ nvkm_iccsense_oneinit(struct nvkm_subdev *subdev)
+ 			}
+ 
+ 			rail = kmalloc(sizeof(*rail), GFP_KERNEL);
+-			if (!rail)
++			if (!rail) {
++				kfree(stbl.rail);
+ 				return -ENOMEM;
++			}
+ 
+ 			rail->read = read;
+ 			rail->sensor = sensor;
+@@ -291,6 +293,7 @@ nvkm_iccsense_oneinit(struct nvkm_subdev *subdev)
+ 			list_add_tail(&rail->head, &iccsense->rails);
+ 		}
+ 	}
++	kfree(stbl.rail);
+ 	return 0;
+ }
+ 
+-- 
+2.17.1
 
 _______________________________________________
 Nouveau mailing list
