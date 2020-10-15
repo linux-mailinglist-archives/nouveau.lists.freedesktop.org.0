@@ -1,31 +1,43 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id CB6C928EDD8
-	for <lists+nouveau@lfdr.de>; Thu, 15 Oct 2020 09:44:30 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id D099D28FC89
+	for <lists+nouveau@lfdr.de>; Fri, 16 Oct 2020 05:04:01 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 904FA6EC2F;
-	Thu, 15 Oct 2020 07:44:28 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id BE0226E890;
+	Fri, 16 Oct 2020 03:03:56 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from verein.lst.de (verein.lst.de [213.95.11.211])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E22D56EC2F
- for <nouveau@lists.freedesktop.org>; Thu, 15 Oct 2020 07:44:27 +0000 (UTC)
-Received: by verein.lst.de (Postfix, from userid 2407)
- id 0DBFA68AFE; Thu, 15 Oct 2020 09:44:24 +0200 (CEST)
-Date: Thu, 15 Oct 2020 09:44:23 +0200
-From: Christoph Hellwig <hch@lst.de>
-To: Dan Williams <dan.j.williams@intel.com>
-Message-ID: <20201015074423.GC14082@lst.de>
-References: <20201012174540.17328-1-rcampbell@nvidia.com>
- <CAPcyv4ijD+=3rje1CfSG4XKuRNfuAWOui93NQV09NmBte_gc0w@mail.gmail.com>
+Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6436D6ECDB;
+ Thu, 15 Oct 2020 12:38:14 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id AB403B195;
+ Thu, 15 Oct 2020 12:38:12 +0000 (UTC)
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: maarten.lankhorst@linux.intel.com, mripard@kernel.org, airlied@linux.ie,
+ daniel@ffwll.ch, sam@ravnborg.org, alexander.deucher@amd.com,
+ christian.koenig@amd.com, kraxel@redhat.com, l.stach@pengutronix.de,
+ linux+etnaviv@armlinux.org.uk, christian.gmeiner@gmail.com,
+ inki.dae@samsung.com, jy0922.shim@samsung.com, sw0312.kim@samsung.com,
+ kyungmin.park@samsung.com, kgene@kernel.org, krzk@kernel.org,
+ yuq825@gmail.com, bskeggs@redhat.com, robh@kernel.org,
+ tomeu.vizoso@collabora.com, steven.price@arm.com,
+ alyssa.rosenzweig@collabora.com, hjc@rock-chips.com, heiko@sntech.de,
+ hdegoede@redhat.com, sean@poorly.run, eric@anholt.net,
+ oleksandr_andrushchenko@epam.com, ray.huang@amd.com,
+ sumit.semwal@linaro.org, emil.velikov@collabora.com, luben.tuikov@amd.com,
+ apaneers@amd.com, linus.walleij@linaro.org, melissa.srw@gmail.com,
+ chris@chris-wilson.co.uk, miaoqinglang@huawei.com
+Date: Thu, 15 Oct 2020 14:37:56 +0200
+Message-Id: <20201015123806.32416-1-tzimmermann@suse.de>
+X-Mailer: git-send-email 2.28.0
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <CAPcyv4ijD+=3rje1CfSG4XKuRNfuAWOui93NQV09NmBte_gc0w@mail.gmail.com>
-User-Agent: Mutt/1.5.17 (2007-11-01)
-Subject: Re: [Nouveau] [PATCH v2] mm/hmm: make device private reference
- counts zero based
+X-Mailman-Approved-At: Fri, 16 Oct 2020 03:03:56 +0000
+Subject: [Nouveau] [PATCH v4 00/10] Support GEM object mappings from I/O
+ memory
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -37,33 +49,137 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Ralph Campbell <rcampbell@nvidia.com>,
- Yang Shi <yang.shi@linux.alibaba.com>, Zi Yan <ziy@nvidia.com>,
- nouveau@lists.freedesktop.org, Alistair Popple <apopple@nvidia.com>,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- kvm-ppc@vger.kernel.org, Paul Mackerras <paulus@ozlabs.org>,
- Linux MM <linux-mm@kvack.org>, Matthew Wilcox <willy@infradead.org>,
- Jason Gunthorpe <jgg@nvidia.com>, Andrew Morton <akpm@linux-foundation.org>,
- Ira Weiny <ira.weiny@intel.com>, Christoph Hellwig <hch@lst.de>,
- "Kirill A . Shutemov" <kirill.shutemov@linux.intel.com>,
- Ben Skeggs <bskeggs@redhat.com>
+Cc: linux-samsung-soc@vger.kernel.org, lima@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org, etnaviv@lists.freedesktop.org,
+ amd-gfx@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
+ linaro-mm-sig@lists.linaro.org, linux-rockchip@lists.infradead.org,
+ dri-devel@lists.freedesktop.org, xen-devel@lists.xenproject.org,
+ spice-devel@lists.freedesktop.org, linux-arm-kernel@lists.infradead.org,
+ linux-media@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Mon, Oct 12, 2020 at 02:14:07PM -0700, Dan Williams wrote:
-> > ZONE_DEVICE struct pages have an extra reference count that complicates the
-> > code for put_page() and several places in the kernel that need to check the
-> > reference count to see that a page is not being used (gup, compaction,
-> > migration, etc.). Clean up the code so the reference count doesn't need to
-> > be treated specially for device private pages, leaving DAX as still being
-> > a special case.
-> 
-> Please no half-step to removing the special casing...
+DRM's fbdev console uses regular load and store operations to update
+framebuffer memory. The bochs driver on sparc64 requires the use of
+I/O-specific load and store operations. We have a workaround, but need
+a long-term solution to the problem.
 
-Agreed.  I really like where the refcount changes are heading, but
-I don't think this half-step is helpful.
+This patchset changes GEM's vmap/vunmap interfaces to forward pointers
+of type struct dma_buf_map and updates the generic fbdev emulation to
+use them correctly. This enables I/O-memory operations on all framebuffers
+that require and support them.
+
+Patches #1 to #4 prepare VRAM helpers and drivers.
+
+Next is the update of the GEM vmap functions. Patch #5 adds vmap and vunmap
+that is usable with TTM-based GEM drivers, and patch #6 updates GEM's
+vmap/vunmap callback to forward instances of type struct dma_buf_map. While
+the patch touches many files throughout the DRM modules, the applied changes
+are mostly trivial interface fixes. Several TTM-based GEM drivers now use
+the new vmap code. Patch #7 updates GEM's internal vmap/vunmap functions to
+forward struct dma_buf_map.
+
+With struct dma_buf_map propagated through the layers, patches #9 and #10
+convert DRM clients and generic fbdev emulation to use it. Updating the
+fbdev framebuffer will select the correct functions, either for system or
+I/O memory.
+
+v4:
+	* provide TTM vmap/vunmap plus GEM helpers and convert drivers
+	  over (Christian, Daniel)
+	* remove several empty functions
+	* more TODOs and documentation (Daniel)
+
+v3:
+	* recreate the whole patchset on top of struct dma_buf_map
+
+v2:
+	* RFC patchset
+
+Thomas Zimmermann (10):
+  drm/vram-helper: Remove invariant parameters from internal kmap
+    function
+  drm/cma-helper: Remove empty drm_gem_cma_prime_vunmap()
+  drm/etnaviv: Remove empty etnaviv_gem_prime_vunmap()
+  drm/exynos: Remove empty exynos_drm_gem_prime_{vmap,vunmap}()
+  drm/ttm: Add vmap/vunmap to TTM and TTM GEM helpers
+  drm/gem: Use struct dma_buf_map in GEM vmap ops and convert GEM
+    backends
+  drm/gem: Update internal GEM vmap/vunmap interfaces to use struct
+    dma_buf_map
+  drm/gem: Store client buffer mappings as struct dma_buf_map
+  dma-buf-map: Add memcpy and pointer-increment interfaces
+  drm/fb_helper: Support framebuffers in I/O memory
+
+ Documentation/gpu/todo.rst                  |  37 ++-
+ drivers/gpu/drm/Kconfig                     |   2 +
+ drivers/gpu/drm/amd/amdgpu/amdgpu_dma_buf.c |  36 ---
+ drivers/gpu/drm/amd/amdgpu/amdgpu_dma_buf.h |   2 -
+ drivers/gpu/drm/amd/amdgpu/amdgpu_gem.c     |   5 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_object.h  |   1 -
+ drivers/gpu/drm/ast/ast_cursor.c            |  27 ++-
+ drivers/gpu/drm/ast/ast_drv.h               |   7 +-
+ drivers/gpu/drm/bochs/bochs_kms.c           |   1 -
+ drivers/gpu/drm/drm_client.c                |  38 ++--
+ drivers/gpu/drm/drm_fb_helper.c             | 238 ++++++++++++++++++--
+ drivers/gpu/drm/drm_gem.c                   |  29 ++-
+ drivers/gpu/drm/drm_gem_cma_helper.c        |  27 +--
+ drivers/gpu/drm/drm_gem_shmem_helper.c      |  48 ++--
+ drivers/gpu/drm/drm_gem_ttm_helper.c        |  38 ++++
+ drivers/gpu/drm/drm_gem_vram_helper.c       | 117 +++++-----
+ drivers/gpu/drm/drm_internal.h              |   5 +-
+ drivers/gpu/drm/drm_prime.c                 |  14 +-
+ drivers/gpu/drm/etnaviv/etnaviv_drv.h       |   3 +-
+ drivers/gpu/drm/etnaviv/etnaviv_gem.c       |   1 -
+ drivers/gpu/drm/etnaviv/etnaviv_gem_prime.c |  12 +-
+ drivers/gpu/drm/exynos/exynos_drm_gem.c     |  12 -
+ drivers/gpu/drm/exynos/exynos_drm_gem.h     |   2 -
+ drivers/gpu/drm/lima/lima_gem.c             |   6 +-
+ drivers/gpu/drm/lima/lima_sched.c           |  11 +-
+ drivers/gpu/drm/mgag200/mgag200_mode.c      |  10 +-
+ drivers/gpu/drm/nouveau/Kconfig             |   1 +
+ drivers/gpu/drm/nouveau/nouveau_bo.h        |   2 -
+ drivers/gpu/drm/nouveau/nouveau_gem.c       |   6 +-
+ drivers/gpu/drm/nouveau/nouveau_gem.h       |   2 -
+ drivers/gpu/drm/nouveau/nouveau_prime.c     |  20 --
+ drivers/gpu/drm/panfrost/panfrost_perfcnt.c |  14 +-
+ drivers/gpu/drm/qxl/qxl_display.c           |  11 +-
+ drivers/gpu/drm/qxl/qxl_draw.c              |  14 +-
+ drivers/gpu/drm/qxl/qxl_drv.h               |  11 +-
+ drivers/gpu/drm/qxl/qxl_object.c            |  31 ++-
+ drivers/gpu/drm/qxl/qxl_object.h            |   2 +-
+ drivers/gpu/drm/qxl/qxl_prime.c             |  12 +-
+ drivers/gpu/drm/radeon/radeon.h             |   1 -
+ drivers/gpu/drm/radeon/radeon_gem.c         |   7 +-
+ drivers/gpu/drm/radeon/radeon_prime.c       |  20 --
+ drivers/gpu/drm/rockchip/rockchip_drm_gem.c |  22 +-
+ drivers/gpu/drm/rockchip/rockchip_drm_gem.h |   4 +-
+ drivers/gpu/drm/tiny/cirrus.c               |  10 +-
+ drivers/gpu/drm/tiny/gm12u320.c             |  10 +-
+ drivers/gpu/drm/ttm/ttm_bo_util.c           |  72 ++++++
+ drivers/gpu/drm/udl/udl_modeset.c           |   8 +-
+ drivers/gpu/drm/vboxvideo/vbox_mode.c       |  11 +-
+ drivers/gpu/drm/vc4/vc4_bo.c                |   7 +-
+ drivers/gpu/drm/vc4/vc4_drv.h               |   2 +-
+ drivers/gpu/drm/vgem/vgem_drv.c             |  16 +-
+ drivers/gpu/drm/xen/xen_drm_front_gem.c     |  18 +-
+ drivers/gpu/drm/xen/xen_drm_front_gem.h     |   6 +-
+ include/drm/drm_client.h                    |   7 +-
+ include/drm/drm_gem.h                       |   5 +-
+ include/drm/drm_gem_cma_helper.h            |   3 +-
+ include/drm/drm_gem_shmem_helper.h          |   4 +-
+ include/drm/drm_gem_ttm_helper.h            |   6 +
+ include/drm/drm_gem_vram_helper.h           |  14 +-
+ include/drm/drm_mode_config.h               |  12 -
+ include/drm/ttm/ttm_bo_api.h                |  28 +++
+ include/linux/dma-buf-map.h                 |  92 +++++++-
+ 62 files changed, 817 insertions(+), 423 deletions(-)
+
+-- 
+2.28.0
+
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
