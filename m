@@ -1,21 +1,21 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id C6A9E28FC99
-	for <lists+nouveau@lfdr.de>; Fri, 16 Oct 2020 05:04:17 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6907628FC95
+	for <lists+nouveau@lfdr.de>; Fri, 16 Oct 2020 05:04:15 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 36B4F6E99F;
-	Fri, 16 Oct 2020 03:04:03 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D85306E976;
+	Fri, 16 Oct 2020 03:03:57 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E1CB46ECDE;
- Thu, 15 Oct 2020 12:38:14 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7FDAB6ECDB;
+ Thu, 15 Oct 2020 12:38:15 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id A929AB186;
- Thu, 15 Oct 2020 12:38:12 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 42699B19B;
+ Thu, 15 Oct 2020 12:38:13 +0000 (UTC)
 From: Thomas Zimmermann <tzimmermann@suse.de>
 To: maarten.lankhorst@linux.intel.com, mripard@kernel.org, airlied@linux.ie,
  daniel@ffwll.ch, sam@ravnborg.org, alexander.deucher@amd.com,
@@ -31,15 +31,15 @@ To: maarten.lankhorst@linux.intel.com, mripard@kernel.org, airlied@linux.ie,
  sumit.semwal@linaro.org, emil.velikov@collabora.com, luben.tuikov@amd.com,
  apaneers@amd.com, linus.walleij@linaro.org, melissa.srw@gmail.com,
  chris@chris-wilson.co.uk, miaoqinglang@huawei.com
-Date: Thu, 15 Oct 2020 14:37:59 +0200
-Message-Id: <20201015123806.32416-4-tzimmermann@suse.de>
+Date: Thu, 15 Oct 2020 14:38:00 +0200
+Message-Id: <20201015123806.32416-5-tzimmermann@suse.de>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <20201015123806.32416-1-tzimmermann@suse.de>
 References: <20201015123806.32416-1-tzimmermann@suse.de>
 MIME-Version: 1.0
 X-Mailman-Approved-At: Fri, 16 Oct 2020 03:03:56 +0000
-Subject: [Nouveau] [PATCH v4 03/10] drm/etnaviv: Remove empty
- etnaviv_gem_prime_vunmap()
+Subject: [Nouveau] [PATCH v4 04/10] drm/exynos: Remove empty
+ exynos_drm_gem_prime_{vmap, vunmap}()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,56 +63,60 @@ Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-The function etnaviv_gem_prime_vunmap() is empty. Remove it before
-changing the interface to use struct drm_buf_map.
+The functions exynos_drm_gem_prime_{vmap,vunmap}() are empty. Remove
+them before changing the interface to use struct drm_buf_map. As a side
+effect of removing drm_gem_prime_vmap(), the error code changes from
+ENOMEM to EOPNOTSUPP.
 
 Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
 ---
- drivers/gpu/drm/etnaviv/etnaviv_drv.h       | 1 -
- drivers/gpu/drm/etnaviv/etnaviv_gem.c       | 1 -
- drivers/gpu/drm/etnaviv/etnaviv_gem_prime.c | 5 -----
- 3 files changed, 7 deletions(-)
+ drivers/gpu/drm/exynos/exynos_drm_gem.c | 12 ------------
+ drivers/gpu/drm/exynos/exynos_drm_gem.h |  2 --
+ 2 files changed, 14 deletions(-)
 
-diff --git a/drivers/gpu/drm/etnaviv/etnaviv_drv.h b/drivers/gpu/drm/etnaviv/etnaviv_drv.h
-index 914f0867ff71..9682c26d89bb 100644
---- a/drivers/gpu/drm/etnaviv/etnaviv_drv.h
-+++ b/drivers/gpu/drm/etnaviv/etnaviv_drv.h
-@@ -52,7 +52,6 @@ int etnaviv_gem_mmap(struct file *filp, struct vm_area_struct *vma);
- int etnaviv_gem_mmap_offset(struct drm_gem_object *obj, u64 *offset);
- struct sg_table *etnaviv_gem_prime_get_sg_table(struct drm_gem_object *obj);
- void *etnaviv_gem_prime_vmap(struct drm_gem_object *obj);
--void etnaviv_gem_prime_vunmap(struct drm_gem_object *obj, void *vaddr);
- int etnaviv_gem_prime_mmap(struct drm_gem_object *obj,
- 			   struct vm_area_struct *vma);
- struct drm_gem_object *etnaviv_gem_prime_import_sg_table(struct drm_device *dev,
-diff --git a/drivers/gpu/drm/etnaviv/etnaviv_gem.c b/drivers/gpu/drm/etnaviv/etnaviv_gem.c
-index 67d9a2b9ea6a..bbd235473645 100644
---- a/drivers/gpu/drm/etnaviv/etnaviv_gem.c
-+++ b/drivers/gpu/drm/etnaviv/etnaviv_gem.c
-@@ -571,7 +571,6 @@ static const struct drm_gem_object_funcs etnaviv_gem_object_funcs = {
- 	.unpin = etnaviv_gem_prime_unpin,
- 	.get_sg_table = etnaviv_gem_prime_get_sg_table,
- 	.vmap = etnaviv_gem_prime_vmap,
--	.vunmap = etnaviv_gem_prime_vunmap,
- 	.vm_ops = &vm_ops,
+diff --git a/drivers/gpu/drm/exynos/exynos_drm_gem.c b/drivers/gpu/drm/exynos/exynos_drm_gem.c
+index e7a6eb96f692..13a35623ac04 100644
+--- a/drivers/gpu/drm/exynos/exynos_drm_gem.c
++++ b/drivers/gpu/drm/exynos/exynos_drm_gem.c
+@@ -137,8 +137,6 @@ static const struct vm_operations_struct exynos_drm_gem_vm_ops = {
+ static const struct drm_gem_object_funcs exynos_drm_gem_object_funcs = {
+ 	.free = exynos_drm_gem_free_object,
+ 	.get_sg_table = exynos_drm_gem_prime_get_sg_table,
+-	.vmap = exynos_drm_gem_prime_vmap,
+-	.vunmap	= exynos_drm_gem_prime_vunmap,
+ 	.vm_ops = &exynos_drm_gem_vm_ops,
  };
  
-diff --git a/drivers/gpu/drm/etnaviv/etnaviv_gem_prime.c b/drivers/gpu/drm/etnaviv/etnaviv_gem_prime.c
-index 135fbff6fecf..a6d9932a32ae 100644
---- a/drivers/gpu/drm/etnaviv/etnaviv_gem_prime.c
-+++ b/drivers/gpu/drm/etnaviv/etnaviv_gem_prime.c
-@@ -27,11 +27,6 @@ void *etnaviv_gem_prime_vmap(struct drm_gem_object *obj)
- 	return etnaviv_gem_vmap(obj);
+@@ -471,16 +469,6 @@ exynos_drm_gem_prime_import_sg_table(struct drm_device *dev,
+ 	return &exynos_gem->base;
  }
  
--void etnaviv_gem_prime_vunmap(struct drm_gem_object *obj, void *vaddr)
+-void *exynos_drm_gem_prime_vmap(struct drm_gem_object *obj)
 -{
--	/* TODO msm_gem_vunmap() */
+-	return NULL;
 -}
 -
- int etnaviv_gem_prime_mmap(struct drm_gem_object *obj,
- 			   struct vm_area_struct *vma)
+-void exynos_drm_gem_prime_vunmap(struct drm_gem_object *obj, void *vaddr)
+-{
+-	/* Nothing to do */
+-}
+-
+ int exynos_drm_gem_prime_mmap(struct drm_gem_object *obj,
+ 			      struct vm_area_struct *vma)
  {
+diff --git a/drivers/gpu/drm/exynos/exynos_drm_gem.h b/drivers/gpu/drm/exynos/exynos_drm_gem.h
+index 74e926abeff0..a23272fb96fb 100644
+--- a/drivers/gpu/drm/exynos/exynos_drm_gem.h
++++ b/drivers/gpu/drm/exynos/exynos_drm_gem.h
+@@ -107,8 +107,6 @@ struct drm_gem_object *
+ exynos_drm_gem_prime_import_sg_table(struct drm_device *dev,
+ 				     struct dma_buf_attachment *attach,
+ 				     struct sg_table *sgt);
+-void *exynos_drm_gem_prime_vmap(struct drm_gem_object *obj);
+-void exynos_drm_gem_prime_vunmap(struct drm_gem_object *obj, void *vaddr);
+ int exynos_drm_gem_prime_mmap(struct drm_gem_object *obj,
+ 			      struct vm_area_struct *vma);
+ 
 -- 
 2.28.0
 
