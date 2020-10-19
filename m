@@ -1,53 +1,64 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id C22AB2932E2
-	for <lists+nouveau@lfdr.de>; Tue, 20 Oct 2020 03:54:54 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id D4E3A2932E1
+	for <lists+nouveau@lfdr.de>; Tue, 20 Oct 2020 03:54:52 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id CAD016F3F3;
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7A47D6EE60;
 	Tue, 20 Oct 2020 01:54:47 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pl1-x643.google.com (mail-pl1-x643.google.com
- [IPv6:2607:f8b0:4864:20::643])
- by gabe.freedesktop.org (Postfix) with ESMTPS id ACF0D6EA5B
- for <nouveau@lists.freedesktop.org>; Mon, 19 Oct 2020 19:42:27 +0000 (UTC)
-Received: by mail-pl1-x643.google.com with SMTP id bf6so330451plb.4
- for <nouveau@lists.freedesktop.org>; Mon, 19 Oct 2020 12:42:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=no6WOfZDuAXhTDfVia9Vunkz4L7BthY0F8m0jo4//vs=;
- b=vqIoQqfPtCUD7ceHGEmbvFqqUZd/9dE0IpLQQ4p4nyONBXQMSFxBG5OzgCaJfT8eu8
- Ez0DMwUntzcU9c2WJzs/WqMvxG3bzlj0mstlcz+E4fW0gt02sZNjrL1HdU6SHVwmCE5R
- WFeHYzJRJuPZspqj8YJ2wlUmUN4Mc8MNrI6kLekCJ8yejCepkvkgEUeb7TbpDze1NnEh
- TP2SjhqdakZDUedR00qYjd62k5W2m7FgfHIpcuS/rhjqMGxVL3Apppn+UDRO/ftdIfoh
- duvoKavmXDacw9mysFV+xdp1Tg4QxCPiDxNSeCeZyO+34Y2S1kYSdX61NJzSKhmGsX5T
- HLpA==
+Received: from mail-io1-xd42.google.com (mail-io1-xd42.google.com
+ [IPv6:2607:f8b0:4864:20::d42])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7827E6EB86
+ for <nouveau@lists.freedesktop.org>; Mon, 19 Oct 2020 23:05:49 +0000 (UTC)
+Received: by mail-io1-xd42.google.com with SMTP id k25so49620ioh.7
+ for <nouveau@lists.freedesktop.org>; Mon, 19 Oct 2020 16:05:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ziepe.ca; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to;
+ bh=KZcwJitFojA7RhzeD/UU8gbzehCBdvf6g5ia0ZYCrq4=;
+ b=R0THCPfeT+NjRv5n7wRuWr3+iQQVH5mYQugrcFEorv7jMlZOJpq4gWO8x2sltRZ1S3
+ 8+uXkfK+0xraFRPc7RLEyC+L1Eqn+lwfgcQ60rCu3Ir6T0iqCUlHxkXPI8IxQxljNihW
+ MxA7dERE+Fo0B6yhfEPLGm6gbjuMrGvt0ee7i4ozPAa6C0OwTV1SJBaz+sj8rzyyiIix
+ DQ1LhxNguLsVQ2r9xWcmCur9QDHoeimXQtC/UVpN+4Yl8O9ZbpYKUwlrKFZtzYHwjpgZ
+ iC+kREvCZvwgmOBCIm7DmgxG6/6ncKrp6QDCnbxkp/qIzrhuMyauJsg53LWTp//HSslk
+ z+3Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=no6WOfZDuAXhTDfVia9Vunkz4L7BthY0F8m0jo4//vs=;
- b=AvDCvgDixY52R3VyKg1W9qzBjIReWq9gayZDUqqUKpCh3ZhyLkPtMqv228vV1vCqii
- 5EfiTEn2Ee8vdIaF72qqyFxrb08mYOEtfUucqNX1gMZFXlY3Q1aAuazlwXsbiqP7qZYS
- JqKyxe4eMpSyZc1tPwsMIY7ZYWuC1elNhYqJegb8Wm9CvnHRPO4Q2zT5e3fHqlyTHyx/
- spnKqQ6J+pZhthpakhasKn0+6hNi0mtGlBUZzBtCngVcw81loCGFwhIZAhnypFEWgmWt
- fHuc05DWtu3LTrsWj1tcDqKCg8bZPfeT1CHAig0feONyJd2uuaRTtBcE/G6I/wHe8wXh
- a9uw==
-X-Gm-Message-State: AOAM532I7b1MLO8ZzhDcnQKsszal+BzlH/z8isbY8p01DaFIN7Ieo8CU
- QsvyA4VOiyfUSaB4NfwZsxbqvn3uyKEKhuYL+LftYg==
-X-Google-Smtp-Source: ABdhPJxy4K+2uRaBuhFTeTSlHPetqrP1uAAP7dKvm6UBZz10SCa23PJUxb54E5JJmlle9J/y892Qp+TTrKvO4GeNXIk=
-X-Received: by 2002:a17:90a:ee87:: with SMTP id i7mr921476pjz.25.1603136546933; 
- Mon, 19 Oct 2020 12:42:26 -0700 (PDT)
-MIME-Version: 1.0
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=KZcwJitFojA7RhzeD/UU8gbzehCBdvf6g5ia0ZYCrq4=;
+ b=lNwDbyUeXndWdl+/xy29FPJc/qdVQcL5JVfb/IYdMRkTtQUsLDu/xKpwTfQ6tIsFcS
+ Br3LWwQDm5G+nMY1gP0Ny3TcfjzGZDDEcWfZbzM9RjD5m51mvZIPtHVEBwNMR/iCijF2
+ hXAV17bI/0SoxktwJaSYUGAeHWzwD9Ql+ohl+y7e62ny4wvbKm/YRSvranxR1h49RBvh
+ /dNJePIzxNrYYPamKMHf0eiHv647m3I1i0yaNh7wWtRP4zUsfGTZ2DmB7Phy920Qeo7p
+ VeuKRJu/r96RgG9bKmc7hK4muF8v6GULvKJjYKXSnhNiqJN2iqN10+zccXrqrzrQm8R2
+ +gqw==
+X-Gm-Message-State: AOAM532Q5R9dJYrGHMsRYRe0eENRW66uRuiBURtCsqE4QpUdx+X0IYY1
+ aus3o36aaynepE5ns+hzRRN+QA==
+X-Google-Smtp-Source: ABdhPJwE/qhLAedndnNRaUrUDMs331Onaq8Iz+VDEVRJN+4h4B5ckC67pNXDnvS9MRF/DxLJjNlnIQ==
+X-Received: by 2002:a6b:5019:: with SMTP id e25mr44377iob.123.1603148748578;
+ Mon, 19 Oct 2020 16:05:48 -0700 (PDT)
+Received: from ziepe.ca
+ (hlfxns017vw-156-34-48-30.dhcp-dynamic.fibreop.ns.bellaliant.net.
+ [156.34.48.30])
+ by smtp.gmail.com with ESMTPSA id u8sm7938ilm.36.2020.10.19.16.05.47
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 19 Oct 2020 16:05:47 -0700 (PDT)
+Received: from jgg by mlx with local (Exim 4.94) (envelope-from <jgg@ziepe.ca>)
+ id 1kUeDq-002hRf-LL; Mon, 19 Oct 2020 20:05:46 -0300
+Date: Mon, 19 Oct 2020 20:05:46 -0300
+From: Jason Gunthorpe <jgg@ziepe.ca>
+To: Nick Desaulniers <ndesaulniers@google.com>
+Message-ID: <20201019230546.GH36674@ziepe.ca>
 References: <20201017160928.12698-1-trix@redhat.com>
  <20201018054332.GB593954@kroah.com>
-In-Reply-To: <20201018054332.GB593954@kroah.com>
-From: Nick Desaulniers <ndesaulniers@google.com>
-Date: Mon, 19 Oct 2020 12:42:15 -0700
-Message-ID: <CAKwvOdkR_Ttfo7_JKUiZFVqr=Uh=4b05KCPCSuzwk=zaWtA2_Q@mail.gmail.com>
-To: Tom Rix <trix@redhat.com>
+ <CAKwvOdkR_Ttfo7_JKUiZFVqr=Uh=4b05KCPCSuzwk=zaWtA2_Q@mail.gmail.com>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <CAKwvOdkR_Ttfo7_JKUiZFVqr=Uh=4b05KCPCSuzwk=zaWtA2_Q@mail.gmail.com>
 X-Mailman-Approved-At: Tue, 20 Oct 2020 01:54:46 +0000
 Subject: Re: [Nouveau] [RFC] treewide: cleanup unreachable breaks
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -64,7 +75,7 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Cc: alsa-devel@alsa-project.org,
  clang-built-linux <clang-built-linux@googlegroups.com>,
  Greg KH <gregkh@linuxfoundation.org>, linux-iio@vger.kernel.org,
- nouveau@lists.freedesktop.org, storagedev@microchip.com,
+ Tom Rix <trix@redhat.com>, storagedev@microchip.com, linux-pci@vger.kernel.org,
  dri-devel <dri-devel@lists.freedesktop.org>,
  virtualization@lists.linux-foundation.org, keyrings@vger.kernel.org,
  linux-mtd@lists.infradead.org, ath10k@lists.infradead.org,
@@ -74,7 +85,7 @@ Cc: alsa-devel@alsa-project.org,
  linux-nvdimm <linux-nvdimm@lists.01.org>,
  amd-gfx list <amd-gfx@lists.freedesktop.org>, linux-acpi@vger.kernel.org,
  intel-wired-lan@lists.osuosl.org, industrypack-devel@lists.sourceforge.net,
- linux-pci@vger.kernel.org, spice-devel@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org, spice-devel@lists.freedesktop.org,
  MPT-FusionLinux.pdl@broadcom.com, linux-media@vger.kernel.org,
  linux-serial@vger.kernel.org, linux-nfc@lists.01.org, linux-pm@vger.kernel.org,
  linux-can@vger.kernel.org, linux-block@vger.kernel.org,
@@ -94,53 +105,39 @@ Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Sat, Oct 17, 2020 at 10:43 PM Greg KH <gregkh@linuxfoundation.org> wrote:
->
-> On Sat, Oct 17, 2020 at 09:09:28AM -0700, trix@redhat.com wrote:
-> > From: Tom Rix <trix@redhat.com>
+On Mon, Oct 19, 2020 at 12:42:15PM -0700, Nick Desaulniers wrote:
+> On Sat, Oct 17, 2020 at 10:43 PM Greg KH <gregkh@linuxfoundation.org> wrote:
 > >
-> > This is a upcoming change to clean up a new warning treewide.
-> > I am wondering if the change could be one mega patch (see below) or
-> > normal patch per file about 100 patches or somewhere half way by collecting
-> > early acks.
->
-> Please break it up into one-patch-per-subsystem, like normal, and get it
-> merged that way.
->
-> Sending us a patch, without even a diffstat to review, isn't going to
-> get you very far...
+> > On Sat, Oct 17, 2020 at 09:09:28AM -0700, trix@redhat.com wrote:
+> > > From: Tom Rix <trix@redhat.com>
+> > >
+> > > This is a upcoming change to clean up a new warning treewide.
+> > > I am wondering if the change could be one mega patch (see below) or
+> > > normal patch per file about 100 patches or somewhere half way by collecting
+> > > early acks.
+> >
+> > Please break it up into one-patch-per-subsystem, like normal, and get it
+> > merged that way.
+> >
+> > Sending us a patch, without even a diffstat to review, isn't going to
+> > get you very far...
+> 
+> Tom,
+> If you're able to automate this cleanup, I suggest checking in a
+> script that can be run on a directory.  Then for each subsystem you
+> can say in your commit "I ran scripts/fix_whatever.py on this subdir."
+>  Then others can help you drive the tree wide cleanup.  Then we can
+> enable -Wunreachable-code-break either by default, or W=2 right now
+> might be a good idea.
 
-Tom,
-If you're able to automate this cleanup, I suggest checking in a
-script that can be run on a directory.  Then for each subsystem you
-can say in your commit "I ran scripts/fix_whatever.py on this subdir."
- Then others can help you drive the tree wide cleanup.  Then we can
-enable -Wunreachable-code-break either by default, or W=2 right now
-might be a good idea.
+I remember using clang-modernize in the past to fix issues very
+similar to this, if clang machinery can generate the warning, can't
+something like clang-tidy directly generate the patch?
 
-Ah, George (gbiv@, cc'ed), did an analysis recently of
-`-Wunreachable-code-loop-increment`, `-Wunreachable-code-break`, and
-`-Wunreachable-code-return` for Android userspace.  From the review:
-```
-Spoilers: of these, it seems useful to turn on
--Wunreachable-code-loop-increment and -Wunreachable-code-return by
-default for Android
-...
-While these conventions about always having break arguably became
-obsolete when we enabled -Wfallthrough, my sample turned up zero
-potential bugs caught by this warning, and we'd need to put a lot of
-effort into getting a clean tree. So this warning doesn't seem to be
-worth it.
-```
-Looks like there's an order of magnitude of `-Wunreachable-code-break`
-than the other two.
+You can send me a patch for drivers/infiniband/* as well
 
-We probably should add all 3 to W=2 builds (wrapped in cc-option).
-I've filed https://github.com/ClangBuiltLinux/linux/issues/1180 to
-follow up on.
--- 
 Thanks,
-~Nick Desaulniers
+Jason
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
