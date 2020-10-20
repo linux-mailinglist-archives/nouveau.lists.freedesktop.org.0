@@ -2,42 +2,57 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id BACB2293660
-	for <lists+nouveau@lfdr.de>; Tue, 20 Oct 2020 10:07:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9146B293816
+	for <lists+nouveau@lfdr.de>; Tue, 20 Oct 2020 11:34:46 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 55FF56E04A;
-	Tue, 20 Oct 2020 08:07:08 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 41B586E11F;
+	Tue, 20 Oct 2020 09:34:44 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-yb1-f196.google.com (mail-yb1-f196.google.com
- [209.85.219.196])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4F3626E04A;
- Tue, 20 Oct 2020 08:07:07 +0000 (UTC)
-Received: by mail-yb1-f196.google.com with SMTP id c129so1152215yba.8;
- Tue, 20 Oct 2020 01:07:07 -0700 (PDT)
+Received: from mail-lj1-x241.google.com (mail-lj1-x241.google.com
+ [IPv6:2a00:1450:4864:20::241])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id ABE106E11F
+ for <nouveau@lists.freedesktop.org>; Tue, 20 Oct 2020 09:34:43 +0000 (UTC)
+Received: by mail-lj1-x241.google.com with SMTP id a4so1268480lji.12
+ for <nouveau@lists.freedesktop.org>; Tue, 20 Oct 2020 02:34:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=date:from:to:cc:subject:message-id:in-reply-to:references
+ :mime-version; bh=Yy0e2KzQZjsdApoOL3xxTvEy01p/cHiTbfoFKLpzkLw=;
+ b=r0Gowq4KsjQc1Kw06cn0h4mKLRbV0fdyq8nSJ80Jcg3DxwL/+DhAQN69mv4fS6QDO1
+ GkdKwaMJcst0zYVXCq5AamRhDNnBtN+DtxlaDu4pLEDSUSZMcHzMfaXLplcJnhQAMTRu
+ jnVUTJIxs49m2hXQ0Qn2nmOPyeVSxmiYfn/J2DZAPJIB1MInzADoWOyaax+Ytl7rvblF
+ zMJCcj2ol7CAl+w6Pi6hGN6MSKpDrLOrPXWPs0BBN/xQaMKry2kjt7P0aIUTfzcbdbmh
+ zxvHWh4rw0GpsymQJJdcSiCGO/gmB25vfFqjxzAxHwexVEbfXjYY3DCYQmUjrVfmeYX1
+ hruw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=4I18OZGYkDfxBwkR1g7lilOU8U/ASuhheWL+dSsw1yc=;
- b=FZSI50sElEW4DLbHYyt+Kz5aX3zK6WBHACoBhhRkEaVpc9yEjhTFyVcd/frx8UJx4H
- eIm1hlZvWLkrWCH6VU5vlkRSytX0ZjFXiobZM7/CtPP7N4yggIeiwD8olWMDXZuEM+uU
- rx1pISlCO7Q5pDH4A5TrJbsd/xVmH3Xm0/prkxUgahYXftKVHgNl2grxBfWYIQNParae
- XzvYH5oLF1zOItZUct30Phb8KIWh0DqL1jcg8nA/sbiVDvw/bFBloWNq8pyPsqAnCeXr
- OsAxherC+W9R5CnUHg27aJE0U8tAWsV18Jj+yKDLzuPhWr0i/jpJhBqq1xBi+dS7brKP
- e0Ig==
-X-Gm-Message-State: AOAM530u9V203KcarWoc108LYGdlUKrKwVKdl8e1wdZTIyJmQ2W2DB8x
- uRaMuQYVg11Q9IxPaSuLAZyBTQFDeNmOI1GLshY=
-X-Google-Smtp-Source: ABdhPJw2LFjqTCfBjsZKhA1ut1K3FStWA8z/LBq+Y6Wnvym2e6AlaG+ifoVhU5GTbxOlL05P5+wG9PLixoDnYThfjd4=
-X-Received: by 2002:a25:90b:: with SMTP id 11mr2333497ybj.132.1603181226238;
- Tue, 20 Oct 2020 01:07:06 -0700 (PDT)
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:in-reply-to
+ :references:mime-version;
+ bh=Yy0e2KzQZjsdApoOL3xxTvEy01p/cHiTbfoFKLpzkLw=;
+ b=LQFkKxcjlK7BlvUn99YNFx9Qd1I4ayFey2ajmLwYc53J2LWAGSf9K+fiTRDElPFCsl
+ C8GhIUS8c5DRxsEURq1U4fdbv54E7ef42QTft5sZ1zlRBKllmEF8d1auEgPKtc0H1jF7
+ e3q49cPRxRDZyoFmd41fuhLlhtrfQqVrsm12yO1rsiPgSaqixNOM67IKjr9i/QSkRwfU
+ BLXf8o5u8G1aDhOVOUofXn4RRKtPMTbnVNr9hVnq63KJFk5f2NpXbA2Kpv8Ad7rjPPoN
+ 3BQ5MCxHXQranNeSL1iSfvFVM8mlCa9yspnuMFMH47dtAW44lTh5qK02lsw6051/WV2p
+ 7Akw==
+X-Gm-Message-State: AOAM533fZak2FgpbebOVU24jX9vnsJqbAXStq+QKnFvOpPO07FCSeuc/
+ glgM4+3wDCJcxNK7APEn3DI=
+X-Google-Smtp-Source: ABdhPJwegxqVKeKQ0SqpNnibIq8OtPU7i8FiHpkO+sBsKsGhxrJf7yoyOoA3O2/TeVLH2bdzMCrsaw==
+X-Received: by 2002:a2e:3004:: with SMTP id w4mr789169ljw.35.1603186481995;
+ Tue, 20 Oct 2020 02:34:41 -0700 (PDT)
+Received: from eldfell ([194.136.85.206])
+ by smtp.gmail.com with ESMTPSA id l8sm212200lfk.203.2020.10.20.02.34.41
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 20 Oct 2020 02:34:41 -0700 (PDT)
+Date: Tue, 20 Oct 2020 12:34:30 +0300
+From: Pekka Paalanen <ppaalanen@gmail.com>
+To: Mugilraj Dhavachelvan <dmugil2000@gmail.com>
+Message-ID: <20201020123430.44968cb4@eldfell>
+In-Reply-To: <20201020084345.96823-1-dmugil2000@gmail.com>
+References: <20201020084345.96823-1-dmugil2000@gmail.com>
+X-Mailer: Claws Mail 3.17.3 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-From: Mathieu Malaterre <malat@debian.org>
-Date: Tue, 20 Oct 2020 10:06:55 +0200
-Message-ID: <CA+7wUsyRXSJCoC-YTFM88-B+MMRSa9GThrAgRVtuOrqX8D5X9A@mail.gmail.com>
-To: Ben Skeggs <bskeggs@redhat.com>, David Airlie <airlied@linux.ie>, 
- Daniel Vetter <daniel@ffwll.ch>, dri-devel <dri-devel@lists.freedesktop.org>, 
- nouveau <nouveau@lists.freedesktop.org>, LKML <linux-kernel@vger.kernel.org>
-Subject: [Nouveau] RIP: 0010:g84_gr_tlb_flush+0x2eb/0x300 [nouveau]
+Subject: Re: [Nouveau] [PATCH] x86/mm/kmmio: correctly handle kzalloc return
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -49,142 +64,90 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: x86@kernel.org, Peter Zijlstra <peterz@infradead.org>,
+ nouveau@lists.freedesktop.org, Dave Hansen <dave.hansen@linux.intel.com>,
+ Steven Rostedt <rostedt@goodmis.org>, linux-kernel@vger.kernel.org,
+ Borislav Petkov <bp@alien8.de>, Andy Lutomirski <luto@kernel.org>,
+ "H. Peter Anvin" <hpa@zytor.com>, Thomas Gleixner <tglx@linutronix.de>,
+ Ingo Molnar <mingo@kernel.org>
+Content-Type: multipart/mixed; boundary="===============1544026980=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi there,
+--===============1544026980==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ boundary="Sig_/kNxw96BEn+M0PYEUFx6pYAH"; protocol="application/pgp-signature"
 
-Could someone please comment on the following hard-lock (*). Staring
-at the code, I see `nvkm_rd32` calls are enclosed in a timeout
-detection, except one.
+--Sig_/kNxw96BEn+M0PYEUFx6pYAH
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
 
-drivers/gpu/drm/nouveau/nvkm/engine/gr/g84.c#L171
-...
-nvkm_msec(device, 2000,
-  if (!(nvkm_rd32(device, 0x100c80) & 0x00000001))
-  break;
-);
-...
+On Tue, 20 Oct 2020 14:13:44 +0530
+Mugilraj Dhavachelvan <dmugil2000@gmail.com> wrote:
 
-Would it make sense to also enclose this in the do/while loop ?
+> Replacing return value -1 to error code
+>=20
+> Signed-off-by: Mugilraj Dhavachelvan <dmugil2000@gmail.com>
+> ---
+>  arch/x86/mm/kmmio.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+> diff --git a/arch/x86/mm/kmmio.c b/arch/x86/mm/kmmio.c
+> index be020a7bc414..15430520c232 100644
+> --- a/arch/x86/mm/kmmio.c
+> +++ b/arch/x86/mm/kmmio.c
+> @@ -386,7 +386,7 @@ static int add_kmmio_fault_page(unsigned long addr)
+> =20
+>  	f =3D kzalloc(sizeof(*f), GFP_ATOMIC);
+>  	if (!f)
+> -		return -1;
+> +		return -ENOMEN;
+> =20
+>  	f->count =3D 1;
+>  	f->addr =3D addr;
 
-Full ref:
-* https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/-/issues/536
+Hi,
 
-Thanks
+did you even build-test this?
 
-(*)
-Oct 20 08:44:13 vostrodell kernel: [55669.783436] ------------[ cut
-here ]------------
-Oct 20 08:44:13 vostrodell kernel: [55669.783446] nouveau 0000:01:00.0: timeout
-Oct 20 08:44:13 vostrodell kernel: [55669.783527] WARNING: CPU: 1 PID:
-7812 at drivers/gpu/drm/nouveau/nvkm/engine/gr/g84.c:171
-g84_gr_tlb_flush+0x2eb/0x300 [nouveau]
-Oct 20 08:44:13 vostrodell kernel: [55669.783527] Modules linked in:
-cdc_acm(OE) fuse md4 sha512_ssse3 sha512_generic cmac nls_utf8 cifs
-dns_resolver fscache libdes intel_rapl_msr intel_rapl_common
-x86_pkg_temp_thermal intel_powerclamp coretemp kvm_intel kvm ath9k
-irqbypass ath9k_common ath9k_hw crc32_pclmul ath
-snd_hda_codec_conexant ghash_clmulni_intel snd_hda_codec_generic
-snd_hda_codec_hdmi ledtrig_audio mac80211 snd_hda_intel
-snd_intel_dspcfg aesni_intel libaes crypto_simd snd_hda_codec
-snd_hda_core cryptd snd_hwdep cfg80211 glue_helper dcdbas snd_pcm rapl
-iTCO_wdt snd_timer intel_pmc_bxt mei_me intel_cstate rfkill
-iTCO_vendor_support snd intel_uncore dell_smm_hwmon mei serio_raw
-soundcore watchdog libarc4 at24 sg pcspkr evdev binfmt_misc ip_tables
-x_tables autofs4 ext4 crc16 mbcache jbd2 crc32c_generic sd_mod sr_mod
-t10_pi cdrom crc_t10dif crct10dif_generic hid_generic usbhid hid uas
-ata_generic usb_storage nouveau mxm_wmi wmi ata_piix crct10dif_pclmul
-crct10dif_common video i2c_algo_bit libata ttm crc32c_intel
-Oct 20 08:44:13 vostrodell kernel: [55669.783551]  drm_kms_helper
-psmouse scsi_mod i2c_i801 i2c_smbus cec lpc_ich ehci_pci ehci_hcd drm
-usbcore r8169 realtek libphy usb_common button [last unloaded:
-cdc_acm]
-Oct 20 08:44:13 vostrodell kernel: [55669.783558] CPU: 1 PID: 7812
-Comm: kworker/1:0 Tainted: G           OE     5.8.0-0.bpo.2-amd64 #1
-Debian 5.8.10-1~bpo10+1
-Oct 20 08:44:13 vostrodell kernel: [55669.783559] Hardware name: Dell
-Inc. Vostro 260   /0GDG8Y       , BIOS A10 02/22/2013
-Oct 20 08:44:13 vostrodell kernel: [55669.783595] Workqueue: events
-nouveau_cli_work [nouveau]
-Oct 20 08:44:13 vostrodell kernel: [55669.783631] RIP:
-0010:g84_gr_tlb_flush+0x2eb/0x300 [nouveau]
-Oct 20 08:44:13 vostrodell kernel: [55669.783633] Code: 8b 40 10 48 8b
-78 10 4c 8b 67 50 4d 85 e4 75 03 4c 8b 27 e8 87 e7 ab e7 4c 89 e2 48
-c7 c7 6c 43 63 c0 48 89 c6 e8 30 af 58 e7 <0f> 0b e9 44 ff ff ff e8 d9
-d7 cf e7 66 0f 1f 84 00 00 00 00 00 66
-Oct 20 08:44:13 vostrodell kernel: [55669.783634] RSP:
-0018:ffffae76c66db998 EFLAGS: 00010082
-Oct 20 08:44:13 vostrodell kernel: [55669.783634] RAX:
-0000000000000000 RBX: ffff9dc2450f8c00 RCX: 0000000000000027
-Oct 20 08:44:13 vostrodell kernel: [55669.783635] RDX:
-0000000000000027 RSI: ffff9dc277498ac0 RDI: ffff9dc277498ac8
-Oct 20 08:44:13 vostrodell kernel: [55669.783636] RBP:
-0000000000000000 R08: 00000000000004df R09: 0000000000000004
-Oct 20 08:44:13 vostrodell kernel: [55669.783636] R10:
-0000000000000000 R11: 0000000000000001 R12: ffff9dc26fc42290
-Oct 20 08:44:13 vostrodell kernel: [55669.783637] R13:
-000032a15d0363a0 R14: ffff9dc277560580 R15: 0000000000000001
-Oct 20 08:44:13 vostrodell kernel: [55669.783638] FS:
-0000000000000000(0000) GS:ffff9dc277480000(0000)
-knlGS:0000000000000000
-Oct 20 08:44:13 vostrodell kernel: [55669.783639] CS:  0010 DS: 0000
-ES: 0000 CR0: 0000000080050033
-Oct 20 08:44:13 vostrodell kernel: [55669.783639] CR2:
-00007f72949e5000 CR3: 000000020480a001 CR4: 00000000000606e0
-Oct 20 08:44:13 vostrodell kernel: [55669.783640] Call Trace:
-Oct 20 08:44:13 vostrodell kernel: [55669.783648]  ?
-enqueue_task_fair+0x8e/0x690
-Oct 20 08:44:13 vostrodell kernel: [55669.783683]  ?
-nv04_timer_read+0x42/0x60 [nouveau]
-Oct 20 08:44:13 vostrodell kernel: [55669.831715]
-nv50_vmm_flush+0x1f1/0x220 [nouveau]
-Oct 20 08:44:13 vostrodell kernel: [55669.831719]  ?
-refcount_dec_and_mutex_lock+0x26/0x60
-Oct 20 08:44:13 vostrodell kernel: [55669.831751]
-nvkm_vmm_iter.constprop.10+0x364/0x820 [nouveau]
-Oct 20 08:44:13 vostrodell kernel: [55669.831783]  ?
-nvkm_vmm_map_choose+0xa0/0xa0 [nouveau]
-Oct 20 08:44:13 vostrodell kernel: [55669.831815]  ?
-nv44_vmm_new+0xe0/0xe0 [nouveau]
-Oct 20 08:44:13 vostrodell kernel: [55669.831847]
-nvkm_vmm_ptes_unmap_put+0x2c/0x40 [nouveau]
-Oct 20 08:44:13 vostrodell kernel: [55669.831885]  ?
-nvkm_vmm_map_choose+0xa0/0xa0 [nouveau]
-Oct 20 08:44:13 vostrodell kernel: [55669.831922]  ?
-nv44_vmm_new+0xe0/0xe0 [nouveau]
-Oct 20 08:44:13 vostrodell kernel: [55669.831968]
-nvkm_vmm_put_locked+0x203/0x240 [nouveau]
-Oct 20 08:44:13 vostrodell kernel: [55669.832000]
-nvkm_uvmm_mthd+0x249/0x710 [nouveau]
-Oct 20 08:44:13 vostrodell kernel: [55669.832022]
-nvkm_ioctl+0xd8/0x170 [nouveau]
-Oct 20 08:44:13 vostrodell kernel: [55669.832042]
-nvif_object_mthd+0x108/0x130 [nouveau]
-Oct 20 08:44:13 vostrodell kernel: [55669.832045]  ? sched_clock+0x5/0x10
-Oct 20 08:44:13 vostrodell kernel: [55669.832048]  ? sched_clock_cpu+0xc/0xb0
-Oct 20 08:44:13 vostrodell kernel: [55669.832068]
-nvif_vmm_put+0x5c/0x80 [nouveau]
-Oct 20 08:44:13 vostrodell kernel: [55669.832101]
-nouveau_vma_del+0x78/0xc0 [nouveau]
-Oct 20 08:44:13 vostrodell kernel: [55669.832135]
-nouveau_gem_object_delete_work+0x36/0x60 [nouveau]
-Oct 20 08:44:13 vostrodell kernel: [55669.832168]
-nouveau_cli_work+0xc9/0x120 [nouveau]
-Oct 20 08:44:13 vostrodell kernel: [55669.832171]  process_one_work+0x1ad/0x370
-Oct 20 08:44:13 vostrodell kernel: [55669.832172]  ? create_worker+0x1a0/0x1a0
-Oct 20 08:44:13 vostrodell kernel: [55669.832173]  worker_thread+0x30/0x390
-Oct 20 08:44:13 vostrodell kernel: [55669.832175]  ? create_worker+0x1a0/0x1a0
-Oct 20 08:44:13 vostrodell kernel: [55669.832176]  kthread+0x116/0x130
-Oct 20 08:44:13 vostrodell kernel: [55669.832178]  ? kthread_park+0x80/0x80
-Oct 20 08:44:13 vostrodell kernel: [55669.832180]  ret_from_fork+0x22/0x30
-Oct 20 08:44:13 vostrodell kernel: [55669.832182] ---[ end trace
-1981412a7db068a0 ]---
-Oct 20 08:44:13 vostrodell kernel: [55672.342498] ------------[ cut
-here ]------------
+Why did you write this patch? What does it achieve?
+
+
+Thanks,
+pq
+
+--Sig_/kNxw96BEn+M0PYEUFx6pYAH
+Content-Type: application/pgp-signature
+Content-Description: OpenPGP digital signature
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEEJQjwWQChkWOYOIONI1/ltBGqqqcFAl+OryYACgkQI1/ltBGq
+qqeYBA//XVRjP/OgzYv+hLE7Dv4qtIQH3SuKcWS9kLcK2mVxoo12wErFrVjY+hfu
+03qjkW2k9JU6WfwlusYHHpkgW4lb1ucUeev5uZPBn8mi5mRGp79GgLDdkqUe9bZi
+dSyNNiZDYfSKDgM9E3F5wYZmEUBj83l0dIh6FTPGdO4KKW0X1tc+/FTqByGBpuH7
+tuawXLtBGIi3HG1l/VmWwVQ/X2TlqPP3EmJntjjBXvKOV/53xAZ8Z+2e2Ce/EAK3
+l+UozLCLKxEH1NmSurV4aeb/6PiZiEsitUzqiitjUQjPdnUvwWk1zUfUbBkl6zwU
+5Vdjub2eKGE2vx79eBq/mIXN9btzH7Bzd8bZPu/BDfyKO3DD1W9dOKH/o3BiXlbD
+K7fkW8o7oDf9jSIEUmm3hQNA3XkVrfWunDQ0oQPHHn2O06YD+8CCz97zlVmBBNK3
+l7JoXB3/kIBAlCSXXWSvL7AkoHJdJp+dMuK1IQycwSs3OAPBt/SiDutSjMq0veKn
+/mT2mxh0pkm7FN9hupj0G9N5+EmafdksuyWXLGSAk1Z5WTMG711xB+rMeb+E7DAd
+uQGZkFcq4j6RW1dQY4Z86mzlKDovCxL4KwMBJS0lR4Df9gBct23eQ9Z6LK34RTw1
+e0qDXwXqkpXJ44SttdB8bOm0bIpzL/CsK/wZmkTMA085/8zhTKc=
+=yGB5
+-----END PGP SIGNATURE-----
+
+--Sig_/kNxw96BEn+M0PYEUFx6pYAH--
+
+--===============1544026980==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/nouveau
+
+--===============1544026980==--
