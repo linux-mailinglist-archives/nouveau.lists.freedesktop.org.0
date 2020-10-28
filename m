@@ -1,37 +1,34 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 61BDF29D12A
-	for <lists+nouveau@lfdr.de>; Wed, 28 Oct 2020 17:56:54 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id B6CB929D18C
+	for <lists+nouveau@lfdr.de>; Wed, 28 Oct 2020 19:50:43 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 93EFD89DBD;
-	Wed, 28 Oct 2020 16:56:48 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B3E2B6E2DF;
+	Wed, 28 Oct 2020 18:50:37 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E37B289D57;
- Wed, 28 Oct 2020 16:56:46 +0000 (UTC)
-Received: from localhost (83-86-74-64.cable.dynamic.v4.ziggo.nl [83.86.74.64])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id A6323247F6;
- Wed, 28 Oct 2020 16:56:45 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1603904206;
- bh=1UbPimBuFSh1HT/2Q/S4rFlh5ySh3fARABO83TbCMe4=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=GuSfkoTiUL6cAkwxkXE3gYb0ScrQahwxAyg769N/kRJkxTRG2ikuaRrbvjbLp5+Tr
- NasvMMswwhW6L+Y/CLkmVOe9fcYNd8xHFBIPF9WlhNqLOnymdq8I/aEI2Vs8bpNZux
- A5MpmJDUbWJ/8dx3WDJe9NWWWKX9LPHlG3qGBQog=
-Date: Wed, 28 Oct 2020 17:57:37 +0100
-From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Received: from asavdk4.altibox.net (asavdk4.altibox.net [109.247.116.15])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3637D89E2B;
+ Wed, 28 Oct 2020 18:50:36 +0000 (UTC)
+Received: from ravnborg.org (unknown [188.228.123.71])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by asavdk4.altibox.net (Postfix) with ESMTPS id 21B6A80617;
+ Wed, 28 Oct 2020 19:50:30 +0100 (CET)
+Date: Wed, 28 Oct 2020 19:50:29 +0100
+From: Sam Ravnborg <sam@ravnborg.org>
 To: Daniel Vetter <daniel.vetter@ffwll.ch>
-Message-ID: <20201028165737.GB2792004@kroah.com>
+Message-ID: <20201028185029.GA683411@ravnborg.org>
 References: <20201028160600.3752105-1-daniel.vetter@ffwll.ch>
 MIME-Version: 1.0
 Content-Disposition: inline
 In-Reply-To: <20201028160600.3752105-1-daniel.vetter@ffwll.ch>
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.3 cv=fu7ymmwf c=1 sm=1 tr=0
+ a=S6zTFyMACwkrwXSdXUNehg==:117 a=S6zTFyMACwkrwXSdXUNehg==:17
+ a=kj9zAlcOel0A:10 a=kYlPfVeDKtV2c73IBp4A:9 a=CjuIK1q_8ugA:10
 Subject: Re: [Nouveau] [PATCH] fbcon: Disable accelerated scrolling
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -44,21 +41,23 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Jiri Slaby <jirislaby@kernel.org>,
- Bartlomiej Zolnierkiewicz <b.zolnierkie@samsung.com>,
+Cc: Bartlomiej Zolnierkiewicz <b.zolnierkie@samsung.com>,
  Tetsuo Handa <penguin-kernel@i-love.sakura.ne.jp>,
- nouveau@lists.freedesktop.org, "Gustavo A. R. Silva" <gustavoars@kernel.org>,
- DRI Development <dri-devel@lists.freedesktop.org>,
- Peter Rosin <peda@axentia.se>, George Kennedy <george.kennedy@oracle.com>,
- Tomi Valkeinen <tomi.valkeinen@ti.com>, Ben Skeggs <bskeggs@redhat.com>,
- Daniel Vetter <daniel.vetter@intel.com>,
- Nathan Chancellor <natechancellor@gmail.com>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
  Linus Torvalds <torvalds@linux-foundation.org>,
- Peilin Ye <yepeilin.cs@gmail.com>
+ "Gustavo A. R. Silva" <gustavoars@kernel.org>,
+ DRI Development <dri-devel@lists.freedesktop.org>,
+ Peilin Ye <yepeilin.cs@gmail.com>, George Kennedy <george.kennedy@oracle.com>,
+ Tomi Valkeinen <tomi.valkeinen@ti.com>, Ben Skeggs <bskeggs@redhat.com>,
+ nouveau@lists.freedesktop.org, Daniel Vetter <daniel.vetter@intel.com>,
+ Nathan Chancellor <natechancellor@gmail.com>,
+ Jiri Slaby <jirislaby@kernel.org>, Peter Rosin <peda@axentia.se>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
+
+Hi Daniel.
 
 On Wed, Oct 28, 2020 at 05:06:00PM +0100, Daniel Vetter wrote:
 > So ever since syzbot discovered fbcon, we have solid proof that it's
@@ -92,31 +91,72 @@ On Wed, Oct 28, 2020 at 05:06:00PM +0100, Daniel Vetter wrote:
 > redrawing when scrolling. The plan is that once this has been merged
 > for well over a year in released kernels, we can start to go around
 > and delete a lot of code.
-> 
-> Cc: Bartlomiej Zolnierkiewicz <b.zolnierkie@samsung.com>
-> Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-> Cc: Linus Torvalds <torvalds@linux-foundation.org>
-> Cc: Ben Skeggs <bskeggs@redhat.com>
-> Cc: nouveau@lists.freedesktop.org
-> Cc: Tomi Valkeinen <tomi.valkeinen@ti.com>
-> Cc: Daniel Vetter <daniel.vetter@ffwll.ch>
-> Cc: Jiri Slaby <jirislaby@kernel.org>
-> Cc: "Gustavo A. R. Silva" <gustavoars@kernel.org>
-> Cc: Tetsuo Handa <penguin-kernel@I-love.SAKURA.ne.jp>
-> Cc: Peilin Ye <yepeilin.cs@gmail.com>
-> Cc: George Kennedy <george.kennedy@oracle.com>
-> Cc: Nathan Chancellor <natechancellor@gmail.com>
-> Cc: Peter Rosin <peda@axentia.se>
-> Signed-off-by: Daniel Vetter <daniel.vetter@intel.com>
-> ---
->  drivers/video/fbdev/core/fbcon.c | 38 ++++++--------------------------
->  1 file changed, 7 insertions(+), 31 deletions(-)
 
-Nice!
+See below for a warning fix.
 
-But I'm with Sam, delete early :)
+Some figures from trying to toss accel code out from a few fbdev drivers:
 
-Reviewed-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+ drivers/video/fbdev/cirrusfb.c | 300 +----------------------------------------
+ 1 file changed, 4 insertions(+), 296 deletions(-)
+
+ drivers/video/fbdev/aty/radeon_accel.c | 174 ---------------------------------
+ drivers/video/fbdev/aty/radeon_base.c  |  43 ++------
+ drivers/video/fbdev/aty/radeon_pm.c    |   7 --
+ drivers/video/fbdev/aty/radeonfb.h     |   3 -
+ 4 files changed, 7 insertions(+), 220 deletions(-)
+
+This may open up the discussion if the right course of action would be
+to drop the drivers in favour of drm counterparts - but thats another
+story.
+
+	Sam
+
+> @@ -1961,7 +1963,6 @@ static void updatescrollmode(struct fbcon_display *p,
+>  {
+>  	struct fbcon_ops *ops = info->fbcon_par;
+>  	int fh = vc->vc_font.height;
+> -	int cap = info->flags;
+>  	u16 t = 0;
+>  	int ypan = FBCON_SWAP(ops->rotate, info->fix.ypanstep,
+>  				  info->fix.xpanstep);
+> @@ -1969,37 +1970,12 @@ static void updatescrollmode(struct fbcon_display *p,
+>  	int yres = FBCON_SWAP(ops->rotate, info->var.yres, info->var.xres);
+>  	int vyres = FBCON_SWAP(ops->rotate, info->var.yres_virtual,
+>  				   info->var.xres_virtual);
+> -	int good_pan = (cap & FBINFO_HWACCEL_YPAN) &&
+> -		divides(ypan, vc->vc_font.height) && vyres > yres;
+> -	int good_wrap = (cap & FBINFO_HWACCEL_YWRAP) &&
+> -		divides(ywrap, vc->vc_font.height) &&
+> -		divides(vc->vc_font.height, vyres) &&
+> -		divides(vc->vc_font.height, yres);
+> -	int reading_fast = cap & FBINFO_READS_FAST;
+> -	int fast_copyarea = (cap & FBINFO_HWACCEL_COPYAREA) &&
+> -		!(cap & FBINFO_HWACCEL_DISABLED);
+> -	int fast_imageblit = (cap & FBINFO_HWACCEL_IMAGEBLIT) &&
+> -		!(cap & FBINFO_HWACCEL_DISABLED);
+
+Some bot will likely tell you that this causes warnings.
+At least it did in my sparc64 build.
+
+Fix:
+
+diff --git a/drivers/video/fbdev/core/fbcon.c b/drivers/video/fbdev/core/fbcon.c
+index 398914e035e9..e8b009c621d8 100644
+--- a/drivers/video/fbdev/core/fbcon.c
++++ b/drivers/video/fbdev/core/fbcon.c
+@@ -2150,10 +2150,6 @@ static void updatescrollmode(struct fbcon_display *p,
+ {
+ 	struct fbcon_ops *ops = info->fbcon_par;
+ 	int fh = vc->vc_font.height;
+-	u16 t = 0;
+-	int ypan = FBCON_SWAP(ops->rotate, info->fix.ypanstep,
+-				  info->fix.xpanstep);
+-	int ywrap = FBCON_SWAP(ops->rotate, info->fix.ywrapstep, t);
+ 	int yres = FBCON_SWAP(ops->rotate, info->var.yres, info->var.xres);
+ 	int vyres = FBCON_SWAP(ops->rotate, info->var.yres_virtual,
+ 				   info->var.xres_virtual);
+
+
 
 _______________________________________________
 Nouveau mailing list
