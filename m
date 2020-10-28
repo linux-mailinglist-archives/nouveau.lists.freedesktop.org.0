@@ -1,35 +1,66 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8AE9329D207
-	for <lists+nouveau@lfdr.de>; Wed, 28 Oct 2020 21:15:41 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id C757029D355
+	for <lists+nouveau@lfdr.de>; Wed, 28 Oct 2020 22:43:04 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A9AC76E3CE;
-	Wed, 28 Oct 2020 20:15:39 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 22D4C6E5C0;
+	Wed, 28 Oct 2020 21:43:03 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from hosting.gsystem.sk (hosting.gsystem.sk [212.5.213.30])
- by gabe.freedesktop.org (Postfix) with ESMTP id 8D7AF6E3CE;
- Wed, 28 Oct 2020 20:15:38 +0000 (UTC)
-Received: from [192.168.0.2] (188-167-68-178.dynamic.chello.sk
- [188.167.68.178])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by hosting.gsystem.sk (Postfix) with ESMTPSA id 502DD7A00EE;
- Wed, 28 Oct 2020 21:15:37 +0100 (CET)
-From: Ondrej Zary <linux@zary.sk>
-To: Karol Herbst <kherbst@redhat.com>
-Date: Wed, 28 Oct 2020 21:15:32 +0100
-User-Agent: KMail/1.9.10
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [216.205.24.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 874696E5CD
+ for <nouveau@lists.freedesktop.org>; Wed, 28 Oct 2020 21:43:02 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1603921381;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=grsrDmScQg/7CchDudKF7+xGExagB0pI7A6n0ZS4Tvs=;
+ b=SUyGE1X3PyUn96+cLhV1kJm8OsK50lO8iLoWktCzU3ypz4UDba9Klri5ltJ5uycOD/+zC9
+ aiIFoLJZ+Pn1qc0RT9J87J+yy0QdW8kuHuCJk+ewYldbWrJcjFz7PArGpY2/ZMjo/C51i8
+ UhLTVBaueRetecjP2+YK1CU9b2a9qK8=
+Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com
+ [209.85.219.72]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-215-0LeekIcxM2-J_ZDK_GfGkg-1; Wed, 28 Oct 2020 17:42:59 -0400
+X-MC-Unique: 0LeekIcxM2-J_ZDK_GfGkg-1
+Received: by mail-qv1-f72.google.com with SMTP id v4so528909qvr.19
+ for <nouveau@lists.freedesktop.org>; Wed, 28 Oct 2020 14:42:59 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=grsrDmScQg/7CchDudKF7+xGExagB0pI7A6n0ZS4Tvs=;
+ b=Xb3CrmGiZL+U060bsC1eCfaj0rajrglkyDRKdFPaFanv6O/A2nqvWifhZGDfQ2Qiw6
+ jfdkfxI5zWREO/iUpOu30XbAF3Y8zcdQFACHHkCLBltpHvOYQnUnmhY9ry/ELWII+sN8
+ VCKaw9AT2eBqVNZHXHxNbnIuJv/godHmqILWbYpwodku0acuhGJ1ES+pRMm4lvBjK12E
+ BntJzUIUHyfY0iQ4d84xm6E2PrDHziyKN7yJdLaCchjh7puHvJAq47HCtWZwtVQWNevK
+ P7O1xC0bmIC9TQrRpsA0BrHPLl9GeMnm/f/tDWG8zOD1g77a8ege7Ov+IoziVW1CjLrN
+ XxCA==
+X-Gm-Message-State: AOAM532NS2a5EkzRCpkv7YleV9XeB92dhtRc8Bkj3KuxtNh8OiCGZyxe
+ 95gMWzOklnFPmMEUiD9uDK2bdQYMwpRg1RmgD5yk4P3Bkav0/QnXZISEcgL4+8Ytl5xlrUo43vi
+ kA4bZEpXf+6Rok8CkHeBXxtOerBCVZ8HuHKkbieOsIg==
+X-Received: by 2002:a37:8542:: with SMTP id h63mr941208qkd.102.1603921378885; 
+ Wed, 28 Oct 2020 14:42:58 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJxbl4uDNWjzMTK3+styptRLBCtkBZ2fw1p+2J0J4m60L0jC7kvcirPiI4FpA37Rxh2PKX+RSbbSACEWMb0WJsA=
+X-Received: by 2002:a37:8542:: with SMTP id h63mr941197qkd.102.1603921378676; 
+ Wed, 28 Oct 2020 14:42:58 -0700 (PDT)
+MIME-Version: 1.0
 References: <202010092326.20482.linux@zary.sk>
  <CAKb7UvggVn2c=jUNSfjf6r529n89xfNgVBpn3jnXznVh8Gs4+w@mail.gmail.com>
  <CACO55tuAxbcXbC9zrT5rs34s=5uBugkbcikORU5868ka9bHdkw@mail.gmail.com>
-In-Reply-To: <CACO55tuAxbcXbC9zrT5rs34s=5uBugkbcikORU5868ka9bHdkw@mail.gmail.com>
-X-KMail-QuotePrefix: > 
-MIME-Version: 1.0
-Content-Disposition: inline
-Message-Id: <202010282115.32811.linux@zary.sk>
+ <202010282115.32811.linux@zary.sk>
+In-Reply-To: <202010282115.32811.linux@zary.sk>
+From: Karol Herbst <kherbst@redhat.com>
+Date: Wed, 28 Oct 2020 22:42:47 +0100
+Message-ID: <CACO55tvqB0tEbHegRCn6WNdv-wzZz1+be=u5O0q9SrSj1x1tGw@mail.gmail.com>
+To: Ondrej Zary <linux@zary.sk>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=kherbst@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
 Subject: Re: [Nouveau] nouveau broken on Riva TNT2 in 5.9.0-rc8: GPU not
  supported on big-endian
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -51,50 +82,10 @@ Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Saturday 10 October 2020 02:02:42 Karol Herbst wrote:
-> On Sat, Oct 10, 2020 at 12:23 AM Ilia Mirkin <imirkin@alum.mit.edu> wrote:
-> >
-> > On Fri, Oct 9, 2020 at 5:54 PM Karol Herbst <kherbst@redhat.com> wrote:
-> > >
-> > > On Fri, Oct 9, 2020 at 11:35 PM Ondrej Zary <linux@zary.sk> wrote:
-> > > >
-> > > > Hello,
-> > > > I'm testing 5.9.0-rc8 and found that Riva TNT2 stopped working:
-> > > > [    0.000000] Linux version 5.9.0-rc8+ (zary@gsql) (gcc (Debian 8.3.0-6) 8.3.0, GNU ld (GNU Binutils for Debian) 2.31.1) #326 SMP Fri Oct 9 22:31:40 CEST 2020
-> > > > ...
-> > > > [   14.771464] nouveau 0000:01:00.0: GPU not supported on big-endian
-> > > > [   14.771782] nouveau: probe of 0000:01:00.0 failed with error -38
-> > > >
-> > > > big-endian? WTF? The machine is x86.
-> > > >
-> > >
-> > > mhh, we reworked the endianess checks a bit and apparently that broke
-> > > something... I will give it some thoughts, but could you be so kind
-> > > and create an mmiotrace under 5.9 with nouveau? You won't need to
-> > > start X or anything while doing it. Just enable the trace and modprobe
-> > > nouveau and collect the trace.
-> >
-> > Looks like nvkm_device_endianness unconditionally reads out 0x4. I
-> > don't think that reg is there pre-NV11. At least NV4, NV5, NV10 and
-> > maybe NV15 (which is logically pre-NV11) don't support big-endian
-> > mode. Not sure about NV1A, which was the IGP of the series and IIRC
-> > logically pre-NV11 as well (but clearly could only be used with x86
-> > chips, since it was part of the motherboard).
-> >
-> > Aha, it's documented in rnndb:
-> >
-> > https://github.com/envytools/envytools/blob/master/rnndb/bus/pmc.xml
-> > <reg32 offset="0x004" name="ENDIAN" variants="NV1A-"/>
-> >
-> 
-> ohh, I should have checked there.. yeah, will write a fix for it then.
-> Before my patch we just always tried to switch it, but never threw an
-> error.
+I sent a patch to the mailing list and wanted to have some review on
+that from at least Ben, but no idea if Ben already picked it and if
+it's good enough for sending it to stable yet.
 
-Any progress with the patch?
-
--- 
-Ondrej Zary
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
