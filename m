@@ -2,45 +2,42 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 787A12A5C4A
-	for <lists+nouveau@lfdr.de>; Wed,  4 Nov 2020 02:51:44 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 007552A5C30
+	for <lists+nouveau@lfdr.de>; Wed,  4 Nov 2020 02:51:25 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 424466F3AA;
-	Wed,  4 Nov 2020 01:51:15 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id CB37D6E92D;
+	Wed,  4 Nov 2020 01:51:10 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from galois.linutronix.de (Galois.linutronix.de
- [IPv6:2a0a:51c0:0:12e:550::1])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B5EA86EC8A;
- Tue,  3 Nov 2020 10:43:33 +0000 (UTC)
-Message-Id: <20201103095900.367260321@linutronix.de>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020; t=1604399649;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:  references:references;
- bh=XzZnXq40Xta6eAd8+Z4XomSn8j1A2hSECk29QnRRbws=;
- b=CdqukbVBWMYI/RONrhSGzX6/xMHlDVBTWtfJrQb8BGeECEJqjOAzrpgd/S5gcYhw2K5fbn
- Eaab3vE9c+BoonfV0tN18iO2mipbe36uJxmY7lt1Q+Y/DUZ/Lt4ranrEwz1e8nCX8rE7ib
- zUEarU65A2JKzY8kRhVSr0Mov+N333GuC6WgQoQRke1a5GsVBT4qs+q/yyCNm0M0BVOUKi
- wwWaobx9qhLoUV9tFHktWx+AG8+ArEEhZ4OLWEEinwZC+qMmqYYw2bnvpObjtaVxDm8Ir6
- h+E3LFBQps2vHJjH1B0mTeQMdmzvDlwqg7xu3fUjiEVpzfRq4Nob09i6lYhuzA==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020e; t=1604399649;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:  references:references;
- bh=XzZnXq40Xta6eAd8+Z4XomSn8j1A2hSECk29QnRRbws=;
- b=pfa+TpRfmsyoL3kfRqJUVU2S9UUvIXMBP/3UXjO0TEtWrbhDCiNU865DGow3SSMVJwemxu
- 95CKXmp2zPH8LuBg==
-Date: Tue, 03 Nov 2020 10:27:49 +0100
-From: Thomas Gleixner <tglx@linutronix.de>
-To: LKML <linux-kernel@vger.kernel.org>
-References: <20201103092712.714480842@linutronix.de>
+Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 973BF6E891;
+ Tue,  3 Nov 2020 09:30:19 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id AEF6BAF5B;
+ Tue,  3 Nov 2020 09:30:18 +0000 (UTC)
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: maarten.lankhorst@linux.intel.com, mripard@kernel.org, airlied@linux.ie,
+ daniel@ffwll.ch, sam@ravnborg.org, alexander.deucher@amd.com,
+ christian.koenig@amd.com, kraxel@redhat.com, l.stach@pengutronix.de,
+ linux+etnaviv@armlinux.org.uk, christian.gmeiner@gmail.com,
+ inki.dae@samsung.com, jy0922.shim@samsung.com, sw0312.kim@samsung.com,
+ kyungmin.park@samsung.com, kgene@kernel.org, krzk@kernel.org,
+ yuq825@gmail.com, bskeggs@redhat.com, robh@kernel.org,
+ tomeu.vizoso@collabora.com, steven.price@arm.com,
+ alyssa.rosenzweig@collabora.com, hjc@rock-chips.com, heiko@sntech.de,
+ hdegoede@redhat.com, sean@poorly.run, eric@anholt.net,
+ oleksandr_andrushchenko@epam.com, ray.huang@amd.com,
+ sumit.semwal@linaro.org, emil.velikov@collabora.com, luben.tuikov@amd.com,
+ apaneers@amd.com, linus.walleij@linaro.org, melissa.srw@gmail.com,
+ chris@chris-wilson.co.uk, miaoqinglang@huawei.com
+Date: Tue,  3 Nov 2020 10:30:05 +0100
+Message-Id: <20201103093015.1063-1-tzimmermann@suse.de>
+X-Mailer: git-send-email 2.29.0
 MIME-Version: 1.0
 X-Mailman-Approved-At: Wed, 04 Nov 2020 01:51:10 +0000
-Subject: [Nouveau] [patch V3 37/37] io-mapping: Remove
- io_mapping_map_atomic_wc()
+Subject: [Nouveau] [PATCH v7 00/10] Support GEM object mappings from I/O
+ memory
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -52,177 +49,156 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Juri Lelli <juri.lelli@redhat.com>, linux-aio@kvack.org,
- Peter Zijlstra <peterz@infradead.org>,
- Benjamin Herrenschmidt <benh@kernel.crashing.org>,
- Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
- Ben Segall <bsegall@google.com>, Chris Mason <clm@fb.com>,
- Huang Rui <ray.huang@amd.com>, Paul Mackerras <paulus@samba.org>,
- Gerd Hoffmann <kraxel@redhat.com>,
- Daniel Bristot de Oliveira <bristot@redhat.com>, sparclinux@vger.kernel.org,
- Vincent Chen <deanbo422@gmail.com>, Christoph Hellwig <hch@lst.de>,
- Vincent Guittot <vincent.guittot@linaro.org>,
- Paul McKenney <paulmck@kernel.org>, Max Filippov <jcmvbkbc@gmail.com>,
- Michael Ellerman <mpe@ellerman.id.au>, x86@kernel.org,
- Russell King <linux@armlinux.org.uk>, linux-csky@vger.kernel.org,
- Ingo Molnar <mingo@kernel.org>, David Airlie <airlied@linux.ie>,
- VMware Graphics <linux-graphics-maintainer@vmware.com>,
- Mel Gorman <mgorman@suse.de>, nouveau@lists.freedesktop.org,
- Dave Airlie <airlied@redhat.com>, linux-snps-arc@lists.infradead.org,
- Ben Skeggs <bskeggs@redhat.com>, linux-xtensa@linux-xtensa.org,
- Arnd Bergmann <arnd@arndb.de>, intel-gfx@lists.freedesktop.org,
- Roland Scheidegger <sroland@vmware.com>, Josef Bacik <josef@toxicpanda.com>,
- Steven Rostedt <rostedt@goodmis.org>,
- Linus Torvalds <torvalds@linuxfoundation.org>,
- Alexander Viro <viro@zeniv.linux.org.uk>, spice-devel@lists.freedesktop.org,
- David Sterba <dsterba@suse.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
- Dietmar Eggemann <dietmar.eggemann@arm.com>,
- linux-arm-kernel@lists.infradead.org,
- Jani Nikula <jani.nikula@linux.intel.com>, Chris Zankel <chris@zankel.net>,
- Michal Simek <monstr@monstr.eu>,
- Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
- Nick Hu <nickhu@andestech.com>, linux-mm@kvack.org,
- Vineet Gupta <vgupta@synopsys.com>, linux-mips@vger.kernel.org,
- Christian Koenig <christian.koenig@amd.com>, Benjamin LaHaise <bcrl@kvack.org>,
- Daniel Vetter <daniel@ffwll.ch>, linux-fsdevel@vger.kernel.org,
- Andrew Morton <akpm@linux-foundation.org>, linuxppc-dev@lists.ozlabs.org,
- "David S. Miller" <davem@davemloft.net>, linux-btrfs@vger.kernel.org,
- Greentime Hu <green.hu@gmail.com>
+Cc: linux-samsung-soc@vger.kernel.org, lima@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org, etnaviv@lists.freedesktop.org,
+ amd-gfx@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
+ linaro-mm-sig@lists.linaro.org, linux-rockchip@lists.infradead.org,
+ dri-devel@lists.freedesktop.org, xen-devel@lists.xenproject.org,
+ spice-devel@lists.freedesktop.org, linux-arm-kernel@lists.infradead.org,
+ linux-media@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-No more users. Get rid of it and remove the traces in documentation.
+DRM's fbdev console uses regular load and store operations to update
+framebuffer memory. The bochs driver on sparc64 requires the use of
+I/O-specific load and store operations. We have a workaround, but need
+a long-term solution to the problem.
 
-Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
----
-V3: New patch
----
- Documentation/driver-api/io-mapping.rst |   22 +++++-----------
- include/linux/io-mapping.h              |   42 +-------------------------------
- 2 files changed, 9 insertions(+), 55 deletions(-)
+This patchset changes GEM's vmap/vunmap interfaces to forward pointers
+of type struct dma_buf_map and updates the generic fbdev emulation to
+use them correctly. This enables I/O-memory operations on all framebuffers
+that require and support them.
 
---- a/Documentation/driver-api/io-mapping.rst
-+++ b/Documentation/driver-api/io-mapping.rst
-@@ -21,19 +21,15 @@ mappable, while 'size' indicates how lar
- enable. Both are in bytes.
- 
- This _wc variant provides a mapping which may only be used with
--io_mapping_map_atomic_wc(), io_mapping_map_local_wc() or
--io_mapping_map_wc().
-+io_mapping_map_local_wc() or io_mapping_map_wc().
- 
- With this mapping object, individual pages can be mapped either temporarily
- or long term, depending on the requirements. Of course, temporary maps are
--more efficient. They come in two flavours::
-+more efficient.
- 
- 	void *io_mapping_map_local_wc(struct io_mapping *mapping,
- 				      unsigned long offset)
- 
--	void *io_mapping_map_atomic_wc(struct io_mapping *mapping,
--				       unsigned long offset)
--
- 'offset' is the offset within the defined mapping region.  Accessing
- addresses beyond the region specified in the creation function yields
- undefined results. Using an offset which is not page aligned yields an
-@@ -50,9 +46,6 @@ io_mapping_map_local_wc() has a side eff
- migration to make the mapping code work. No caller can rely on this side
- effect.
- 
--io_mapping_map_atomic_wc() has the side effect of disabling preemption and
--pagefaults. Don't use in new code. Use io_mapping_map_local_wc() instead.
--
- Nested mappings need to be undone in reverse order because the mapping
- code uses a stack for keeping track of them::
- 
-@@ -65,11 +58,10 @@ Nested mappings need to be undone in rev
- The mappings are released with::
- 
- 	void io_mapping_unmap_local(void *vaddr)
--	void io_mapping_unmap_atomic(void *vaddr)
- 
--'vaddr' must be the value returned by the last io_mapping_map_local_wc() or
--io_mapping_map_atomic_wc() call. This unmaps the specified mapping and
--undoes the side effects of the mapping functions.
-+'vaddr' must be the value returned by the last io_mapping_map_local_wc()
-+call. This unmaps the specified mapping and undoes eventual side effects of
-+the mapping function.
- 
- If you need to sleep while holding a mapping, you can use the regular
- variant, although this may be significantly slower::
-@@ -77,8 +69,8 @@ If you need to sleep while holding a map
- 	void *io_mapping_map_wc(struct io_mapping *mapping,
- 				unsigned long offset)
- 
--This works like io_mapping_map_atomic/local_wc() except it has no side
--effects and the pointer is globaly visible.
-+This works like io_mapping_map_local_wc() except it has no side effects and
-+the pointer is globaly visible.
- 
- The mappings are released with::
- 
---- a/include/linux/io-mapping.h
-+++ b/include/linux/io-mapping.h
-@@ -60,28 +60,7 @@ io_mapping_fini(struct io_mapping *mappi
- 	iomap_free(mapping->base, mapping->size);
- }
- 
--/* Atomic map/unmap */
--static inline void __iomem *
--io_mapping_map_atomic_wc(struct io_mapping *mapping,
--			 unsigned long offset)
--{
--	resource_size_t phys_addr;
--
--	BUG_ON(offset >= mapping->size);
--	phys_addr = mapping->base + offset;
--	preempt_disable();
--	pagefault_disable();
--	return __iomap_local_pfn_prot(PHYS_PFN(phys_addr), mapping->prot);
--}
--
--static inline void
--io_mapping_unmap_atomic(void __iomem *vaddr)
--{
--	kunmap_local_indexed((void __force *)vaddr);
--	pagefault_enable();
--	preempt_enable();
--}
--
-+/* Temporary mappings which are only valid in the current context */
- static inline void __iomem *
- io_mapping_map_local_wc(struct io_mapping *mapping, unsigned long offset)
- {
-@@ -163,24 +142,7 @@ io_mapping_unmap(void __iomem *vaddr)
- {
- }
- 
--/* Atomic map/unmap */
--static inline void __iomem *
--io_mapping_map_atomic_wc(struct io_mapping *mapping,
--			 unsigned long offset)
--{
--	preempt_disable();
--	pagefault_disable();
--	return io_mapping_map_wc(mapping, offset, PAGE_SIZE);
--}
--
--static inline void
--io_mapping_unmap_atomic(void __iomem *vaddr)
--{
--	io_mapping_unmap(vaddr);
--	pagefault_enable();
--	preempt_enable();
--}
--
-+/* Temporary mappings which are only valid in the current context */
- static inline void __iomem *
- io_mapping_map_local_wc(struct io_mapping *mapping, unsigned long offset)
- {
+Patches #1 to #4 prepare VRAM helpers and drivers.
+
+Next is the update of the GEM vmap functions. Patch #5 adds vmap and vunmap
+that is usable with TTM-based GEM drivers, and patch #6 updates GEM's
+vmap/vunmap callback to forward instances of type struct dma_buf_map. While
+the patch touches many files throughout the DRM modules, the applied changes
+are mostly trivial interface fixes. Several TTM-based GEM drivers now use
+the new vmap code. Patch #7 updates GEM's internal vmap/vunmap functions to
+forward struct dma_buf_map.
+
+With struct dma_buf_map propagated through the layers, patches #8 to #10
+convert DRM clients and generic fbdev emulation to use it. Updating the
+fbdev framebuffer will select the correct functions, either for system or
+I/O memory.
+
+There is also a set of IGT testcases for fbdev at [1]. Reading and writting
+fbdev device files has several corner cases near the EOF that the tests cover
+as well. The original fbdev code has different semantics with the different
+implementations (sys, cfb). Patch #10 and the testcases intend to harmonize
+the behaviour and serve as a reference.
+
+v7:
+	* return number of read/written bytes in fbdev code; if any
+	* init QXL cursor from BO buffer (kernel test robot)
+	* use min_t(size_t,) (kernel test robot)
+v6:
+	* don't call page_to_phys() on fbdev framebuffers in I/O memory;
+	  warn instead (Daniel)
+v5:
+	* rebase onto latest TTM changes (Christian)
+	* support TTM premapped memory correctly (Christian)
+	* implement fb_read/fb_write internally (Sam, Daniel)
+	* cleanups
+v4:
+	* provide TTM vmap/vunmap plus GEM helpers and convert drivers
+	  over (Christian, Daniel)
+	* remove several empty functions
+	* more TODOs and documentation (Daniel)
+v3:
+	* recreate the whole patchset on top of struct dma_buf_map
+v2:
+	* RFC patchset
+
+[1] https://gitlab.freedesktop.org/tzimmermann/igt-gpu-tools/-/merge_requests/1
+
+Thomas Zimmermann (10):
+  drm/vram-helper: Remove invariant parameters from internal kmap
+    function
+  drm/cma-helper: Remove empty drm_gem_cma_prime_vunmap()
+  drm/etnaviv: Remove empty etnaviv_gem_prime_vunmap()
+  drm/exynos: Remove empty exynos_drm_gem_prime_{vmap,vunmap}()
+  drm/ttm: Add vmap/vunmap to TTM and TTM GEM helpers
+  drm/gem: Use struct dma_buf_map in GEM vmap ops and convert GEM
+    backends
+  drm/gem: Update internal GEM vmap/vunmap interfaces to use struct
+    dma_buf_map
+  drm/gem: Store client buffer mappings as struct dma_buf_map
+  dma-buf-map: Add memcpy and pointer-increment interfaces
+  drm/fb_helper: Support framebuffers in I/O memory
+
+ Documentation/gpu/todo.rst                  |  37 ++-
+ drivers/gpu/drm/Kconfig                     |   2 +
+ drivers/gpu/drm/amd/amdgpu/amdgpu_dma_buf.c |  36 ---
+ drivers/gpu/drm/amd/amdgpu/amdgpu_dma_buf.h |   2 -
+ drivers/gpu/drm/amd/amdgpu/amdgpu_gem.c     |   5 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_object.h  |   1 -
+ drivers/gpu/drm/ast/ast_cursor.c            |  27 +--
+ drivers/gpu/drm/ast/ast_drv.h               |   7 +-
+ drivers/gpu/drm/bochs/bochs_kms.c           |   1 -
+ drivers/gpu/drm/drm_client.c                |  38 +--
+ drivers/gpu/drm/drm_fb_helper.c             | 250 ++++++++++++++++++--
+ drivers/gpu/drm/drm_gem.c                   |  29 ++-
+ drivers/gpu/drm/drm_gem_cma_helper.c        |  27 +--
+ drivers/gpu/drm/drm_gem_shmem_helper.c      |  48 ++--
+ drivers/gpu/drm/drm_gem_ttm_helper.c        |  38 +++
+ drivers/gpu/drm/drm_gem_vram_helper.c       | 117 +++++----
+ drivers/gpu/drm/drm_internal.h              |   5 +-
+ drivers/gpu/drm/drm_prime.c                 |  14 +-
+ drivers/gpu/drm/etnaviv/etnaviv_drv.h       |   3 +-
+ drivers/gpu/drm/etnaviv/etnaviv_gem.c       |   1 -
+ drivers/gpu/drm/etnaviv/etnaviv_gem_prime.c |  12 +-
+ drivers/gpu/drm/exynos/exynos_drm_gem.c     |  12 -
+ drivers/gpu/drm/exynos/exynos_drm_gem.h     |   2 -
+ drivers/gpu/drm/lima/lima_gem.c             |   6 +-
+ drivers/gpu/drm/lima/lima_sched.c           |  11 +-
+ drivers/gpu/drm/mgag200/mgag200_mode.c      |  10 +-
+ drivers/gpu/drm/nouveau/Kconfig             |   1 +
+ drivers/gpu/drm/nouveau/nouveau_bo.h        |   2 -
+ drivers/gpu/drm/nouveau/nouveau_gem.c       |   6 +-
+ drivers/gpu/drm/nouveau/nouveau_gem.h       |   2 -
+ drivers/gpu/drm/nouveau/nouveau_prime.c     |  20 --
+ drivers/gpu/drm/panfrost/panfrost_perfcnt.c |  14 +-
+ drivers/gpu/drm/qxl/qxl_display.c           |  15 +-
+ drivers/gpu/drm/qxl/qxl_draw.c              |  14 +-
+ drivers/gpu/drm/qxl/qxl_drv.h               |  11 +-
+ drivers/gpu/drm/qxl/qxl_object.c            |  31 ++-
+ drivers/gpu/drm/qxl/qxl_object.h            |   2 +-
+ drivers/gpu/drm/qxl/qxl_prime.c             |  12 +-
+ drivers/gpu/drm/radeon/radeon.h             |   1 -
+ drivers/gpu/drm/radeon/radeon_gem.c         |   7 +-
+ drivers/gpu/drm/radeon/radeon_prime.c       |  20 --
+ drivers/gpu/drm/rockchip/rockchip_drm_gem.c |  22 +-
+ drivers/gpu/drm/rockchip/rockchip_drm_gem.h |   4 +-
+ drivers/gpu/drm/tiny/cirrus.c               |  10 +-
+ drivers/gpu/drm/tiny/gm12u320.c             |  10 +-
+ drivers/gpu/drm/ttm/ttm_bo_util.c           |  72 ++++++
+ drivers/gpu/drm/udl/udl_modeset.c           |   8 +-
+ drivers/gpu/drm/vboxvideo/vbox_mode.c       |  11 +-
+ drivers/gpu/drm/vc4/vc4_bo.c                |   7 +-
+ drivers/gpu/drm/vc4/vc4_drv.h               |   2 +-
+ drivers/gpu/drm/vgem/vgem_drv.c             |  16 +-
+ drivers/gpu/drm/vkms/vkms_plane.c           |  15 +-
+ drivers/gpu/drm/vkms/vkms_writeback.c       |  22 +-
+ drivers/gpu/drm/xen/xen_drm_front_gem.c     |  18 +-
+ drivers/gpu/drm/xen/xen_drm_front_gem.h     |   6 +-
+ include/drm/drm_client.h                    |   7 +-
+ include/drm/drm_gem.h                       |   5 +-
+ include/drm/drm_gem_cma_helper.h            |   3 +-
+ include/drm/drm_gem_shmem_helper.h          |   4 +-
+ include/drm/drm_gem_ttm_helper.h            |   6 +
+ include/drm/drm_gem_vram_helper.h           |  14 +-
+ include/drm/drm_mode_config.h               |  12 -
+ include/drm/ttm/ttm_bo_api.h                |  28 +++
+ include/linux/dma-buf-map.h                 |  93 +++++++-
+ 64 files changed, 856 insertions(+), 438 deletions(-)
+
+--
+2.29.0
 
 _______________________________________________
 Nouveau mailing list
