@@ -1,62 +1,45 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0ABD72A5C63
-	for <lists+nouveau@lfdr.de>; Wed,  4 Nov 2020 02:51:58 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5EAD32A5C5C
+	for <lists+nouveau@lfdr.de>; Wed,  4 Nov 2020 02:51:54 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 742556F3AE;
-	Wed,  4 Nov 2020 01:51:15 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E4A546F3A3;
+	Wed,  4 Nov 2020 01:51:14 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-lf1-x141.google.com (mail-lf1-x141.google.com
- [IPv6:2a00:1450:4864:20::141])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A30116E8DF
- for <nouveau@lists.freedesktop.org>; Tue,  3 Nov 2020 17:48:32 +0000 (UTC)
-Received: by mail-lf1-x141.google.com with SMTP id v6so23299319lfa.13
- for <nouveau@lists.freedesktop.org>; Tue, 03 Nov 2020 09:48:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linux-foundation.org; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=o0HUqTtrB0uneYNpLQNhQJ6FusME7LjWI9KZLqRyy8M=;
- b=HlBdVjW42hUSJkakIiVHCgxY07l6tlPx/MKTOg49MQqEt9fKpSl2tO6bNlSfEMf3/D
- yOb2ZUXxHpDZzPlQCZuCKgGgj4iIodCB3C8y4WCLAE53N4IY/fO4MumxqPXGllxVBzjJ
- AuMTxQdvsElAjMkZERbVlQwjny9JwixE30+4I=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=o0HUqTtrB0uneYNpLQNhQJ6FusME7LjWI9KZLqRyy8M=;
- b=O7Sr/Darqh+vDrGQOVCAKT3f1M7L4RRLaYTBow53e0aVfvyrwcOgPeiKuowqGVEeSd
- NKwyealKrvi73m4X253TMFMebUKo6KI8CxNmqu4mJ/s8NP9gYOh7q4yOYeete0h4uT/p
- Ue6dIWjlwttVF1ZmwzYS8maSSVwHdy3ax8+8x+hY+VxoO9Xm4L4gV8ppPdQ41DerpLsu
- sosJMQFacjRv/U3CPCwkC8RtbXPlXJUgVy5z242W/tFft5jgIqauS39gi+JsMHL05rNt
- 6FqTnpm7wWebBR1frGO3gDeU9a7oVLhnalXSPHilts31mZDilZzmZBquAMnAM00veFGq
- qnlw==
-X-Gm-Message-State: AOAM531K0WInTNHTKJXs/Ffn3yTBb8tf5qrwDd78T/Ky4xDjD3wb0YX0
- pLociUmdTVRd3+pFe60siPpqLUEc0Yj/RA==
-X-Google-Smtp-Source: ABdhPJxJ6wvvO3sNtnXE5t1NjidHE8nAWZo60J+IhWlJpzyhazuypVJI1pBLPBIMVYO427F8RlYeNg==
-X-Received: by 2002:a19:8745:: with SMTP id j66mr8187671lfd.189.1604425710573; 
- Tue, 03 Nov 2020 09:48:30 -0800 (PST)
-Received: from mail-lf1-f45.google.com (mail-lf1-f45.google.com.
- [209.85.167.45])
- by smtp.gmail.com with ESMTPSA id l5sm4088889lfg.146.2020.11.03.09.48.28
- for <nouveau@lists.freedesktop.org>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 03 Nov 2020 09:48:29 -0800 (PST)
-Received: by mail-lf1-f45.google.com with SMTP id 184so23345022lfd.6
- for <nouveau@lists.freedesktop.org>; Tue, 03 Nov 2020 09:48:28 -0800 (PST)
-X-Received: by 2002:a19:4815:: with SMTP id v21mr8859386lfa.603.1604425706752; 
- Tue, 03 Nov 2020 09:48:26 -0800 (PST)
-MIME-Version: 1.0
+Received: from galois.linutronix.de (Galois.linutronix.de [193.142.43.55])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A29486ECE0;
+ Tue,  3 Nov 2020 19:00:23 +0000 (UTC)
+From: Thomas Gleixner <tglx@linutronix.de>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
+ s=2020; t=1604430021;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=p7vA0Pp8Yw32NcCmeGMglrNZNTsusNNmUR0JbokXn0s=;
+ b=Wh43mnWM8kdYti+K6Ejg70IQfa+GmZ8DCSo20FQE/hkLNmxVT4iphQnlk6m40FPrmWktQO
+ 8ayXKz0ztE1cqx/iEhmcbhojQh9yCHEkFANOGr1w8fGEwrPOcrWAWxi/OenSb5evTEILWa
+ oclhRZDu2W0eltn+sc+1j25HCEzKjNSXz+4io/CbYUyMFuxTbNnNJEiCm1jMBn8PGej5s3
+ E3JpbZR0aFWpI6lV+SZv22HUNUyPWbXG8oMYz+BmJikgi+ivLhTWpXqqgXf53DcJR+Ltrn
+ dCfpJUdQQNPCTgPlSMPzbs0whzNCaCVS/fZbTm34UVovthqkFff3qyFpeY0sbA==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
+ s=2020e; t=1604430021;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=p7vA0Pp8Yw32NcCmeGMglrNZNTsusNNmUR0JbokXn0s=;
+ b=STcwQ6RaI64DeextSGHfCvrA9zLqnmZlfhd6kn3GgHfcpWRfVbJIkhHpoM7lA8B8jXR4lp
+ QBLUYE/euA+zomCg==
+To: Linus Torvalds <torvalds@linux-foundation.org>
+In-Reply-To: <CAHk-=wg2D_yjgKYkXCybD3uf0dtwYh6HxZ9BQJfV5t+EBqLGQQ@mail.gmail.com>
 References: <20201103092712.714480842@linutronix.de>
  <20201103095858.827582066@linutronix.de>
-In-Reply-To: <20201103095858.827582066@linutronix.de>
-From: Linus Torvalds <torvalds@linux-foundation.org>
-Date: Tue, 3 Nov 2020 09:48:10 -0800
-X-Gmail-Original-Message-ID: <CAHk-=wg2D_yjgKYkXCybD3uf0dtwYh6HxZ9BQJfV5t+EBqLGQQ@mail.gmail.com>
-Message-ID: <CAHk-=wg2D_yjgKYkXCybD3uf0dtwYh6HxZ9BQJfV5t+EBqLGQQ@mail.gmail.com>
-To: Thomas Gleixner <tglx@linutronix.de>
+ <CAHk-=wg2D_yjgKYkXCybD3uf0dtwYh6HxZ9BQJfV5t+EBqLGQQ@mail.gmail.com>
+Date: Tue, 03 Nov 2020 20:00:20 +0100
+Message-ID: <87y2ji1d17.fsf@nanos.tec.linutronix.de>
+MIME-Version: 1.0
 X-Mailman-Approved-At: Wed, 04 Nov 2020 01:51:10 +0000
 Subject: Re: [Nouveau] [patch V3 22/37] highmem: High implementation details
  and document API
@@ -116,57 +99,43 @@ Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, Nov 3, 2020 at 2:33 AM Thomas Gleixner <tglx@linutronix.de> wrote:
+On Tue, Nov 03 2020 at 09:48, Linus Torvalds wrote:
+> I have no complaints about the patch, but it strikes me that if people
+> want to actually have much better debug coverage, this is where it
+> should be (I like the "every other address" thing too, don't get me
+> wrong).
 >
-> +static inline void *kmap(struct page *page)
-> +{
-> +       void *addr;
-> +
-> +       might_sleep();
-> +       if (!PageHighMem(page))
-> +               addr = page_address(page);
-> +       else
-> +               addr = kmap_high(page);
-> +       kmap_flush_tlb((unsigned long)addr);
-> +       return addr;
-> +}
-> +
-> +static inline void kunmap(struct page *page)
-> +{
-> +       might_sleep();
-> +       if (!PageHighMem(page))
-> +               return;
-> +       kunmap_high(page);
-> +}
+> In particular, instead of these PageHighMem(page) tests, I think
+> something like this would be better:
+>
+>    #ifdef CONFIG_DEBUG_HIGHMEM
+>      #define page_use_kmap(page) ((page),1)
+>    #else
+>      #define page_use_kmap(page) PageHighMem(page)
+>    #endif
+>
+> adn then replace those "if (!PageHighMem(page))" tests with "if
+> (!page_use_kmap())" instead.
+>
+> IOW, in debug mode, it would _always_ remap the page, whether it's
+> highmem or not. That would really stress the highmem code and find any
+> fragilities.
 
-I have no complaints about the patch, but it strikes me that if people
-want to actually have much better debug coverage, this is where it
-should be (I like the "every other address" thing too, don't get me
-wrong).
+Yes, that makes a lot of sense. We just have to avoid that for the
+architectures with aliasing issues.
 
-In particular, instead of these PageHighMem(page) tests, I think
-something like this would be better:
+> Anyway, this is all sepatrate from the series, which still looks fine
+> to me. Just a reaction to seeing the patch, and Thomas' earlier
+> mention that the highmem debugging doesn't actually do much.
 
-   #ifdef CONFIG_DEBUG_HIGHMEM
-     #define page_use_kmap(page) ((page),1)
-   #else
-     #define page_use_kmap(page) PageHighMem(page)
-   #endif
+Right, forcing it for both kmap and kmap_local is straight forward. I'll
+cook a patch on top for that.
 
-adn then replace those "if (!PageHighMem(page))" tests with "if
-(!page_use_kmap())" instead.
+Thanks,
 
-IOW, in debug mode, it would _always_ remap the page, whether it's
-highmem or not. That would really stress the highmem code and find any
-fragilities.
+        tglx
 
-No?
 
-Anyway, this is all sepatrate from the series, which still looks fine
-to me. Just a reaction to seeing the patch, and Thomas' earlier
-mention that the highmem debugging doesn't actually do much.
-
-               Linus
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
