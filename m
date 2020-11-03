@@ -1,56 +1,44 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3DD812A5C46
-	for <lists+nouveau@lfdr.de>; Wed,  4 Nov 2020 02:51:42 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9A00C2A5C50
+	for <lists+nouveau@lfdr.de>; Wed,  4 Nov 2020 02:51:47 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 139B26F399;
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9F7C36F3A0;
 	Wed,  4 Nov 2020 01:51:14 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-qv1-xf44.google.com (mail-qv1-xf44.google.com
- [IPv6:2607:f8b0:4864:20::f44])
- by gabe.freedesktop.org (Postfix) with ESMTPS id BE2A06E863;
- Tue,  3 Nov 2020 08:43:10 +0000 (UTC)
-Received: by mail-qv1-xf44.google.com with SMTP id 63so7403146qva.7;
- Tue, 03 Nov 2020 00:43:10 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=Z0mO+fR43zuY/JcDUH+zcK6mTwVOdRn/VTkzy7OxOxc=;
- b=bDBGVNqiZ4hfl0pxKQoMYGQB+TN38zDxMh4/6H7udQXhNkSnE4vzQuyxF0Api3W8Lf
- TmKDgU0xInAAaLKtBgzGglJ6dyc1NwDXqrczSJvFEDYNOX+6BXznGV35yaCi9xvHAUgm
- O53NMILA+auRcvBSPn8f96Ci2twCw+mUuE4XocA1WJlHAqauoz5IpSrtyHgpdY3nFTyW
- 9HrlUW3hjbZzsJF1K2b1z0f9qv6wAzzvhxfhOw/krVWKZ/mKvIglDlN+L24B9v4FBREc
- zSzLFZsXPlU6cOxg39mAtUFY0vZY8pVOMS13SG16exSUibxqwLbTTV0oF3N/xcDPmxx4
- mkUA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=Z0mO+fR43zuY/JcDUH+zcK6mTwVOdRn/VTkzy7OxOxc=;
- b=Iec5lsfzYln3SNnlsaH+L4lqc6/gSq83UCUDluBAduO2N7et4GHYxdgoS58LONl6Rd
- jAKRhLPRZwrV1ipPCbZSowmTIDa/5xbTXuY8Tc11PgLxOKpIgoCB0Uf9DhXrqQ1nNYSD
- k1wMWH6aFzHipr8wdDpovG7njv23SbL4K250diSNNQlSNKAwA0/kFemUYOt9IVmO2Dn7
- KfqR0YHHRg2rOeiIfdmlkbFksMJZm57t+MAMCC9I+seUJnIDkbIxUnIZ8paxpKELHRUe
- MNci8tguYo8b95uvH21g4xMz1rng/wnASd00V2vPb96Y9AHepTO+IaBfI7gP9Ccgjeaw
- V88g==
-X-Gm-Message-State: AOAM530I11ZDfnuEh49URiE+P6oW0VzyWJOhsZ0/3Uhofb2pJHZQK1Pe
- mFuqUSFABNV7a4bst/bXFklXPdyMvJEgOSkq6LA=
-X-Google-Smtp-Source: ABdhPJyBATWNmN5SIQHZ0f2xrCgfxFjMAr3RKi3Q+RRdg71ltSdhD6ZyPWi569WiZoGR0hChV73l+dbS6g9fH64Eli4=
-X-Received: by 2002:ad4:560d:: with SMTP id ca13mr26865990qvb.2.1604392989457; 
- Tue, 03 Nov 2020 00:43:09 -0800 (PST)
+Received: from galois.linutronix.de (Galois.linutronix.de [193.142.43.55])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C98176EC7C;
+ Tue,  3 Nov 2020 10:43:31 +0000 (UTC)
+Message-Id: <20201103092712.714480842@linutronix.de>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
+ s=2020; t=1604399602;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=o0Hcy+w+YfdhRzI7mxi56wApHLzMvMt3eijNSMso0PA=;
+ b=G8VVQuzSAG/V3pki7i+aDmE0pr8JhWsV0h1Xg4lWsQluQ7DQ15Ya/IgR0Zw/NMpisVqD/W
+ J/QXEkNEe7NbJqy5Bpmqb8HIJU2Y0O9Bf3CxSUTWS6PBz1JGzlayb0IYq+e5effS3/x5UD
+ MIe/Xe/FG1i/b9FZAe9aHhyyyddX9t7dKFQEPgsOg2KREqovaLBnC0b+0gXF8QmMVtRTpz
+ P8qKTXJkFfaFevqgVNzuSzGRJDl/f8Ri4mxz/TFPyTFN4RhGaqVC7XfpgwRxpGndKVfLoD
+ i26gQR4JX8Q2WWAJMzSewtdQIauZvSoL5odzs7HswoiORYaM8qGtPEpIoF7usw==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
+ s=2020e; t=1604399602;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=o0Hcy+w+YfdhRzI7mxi56wApHLzMvMt3eijNSMso0PA=;
+ b=alxfeweVuLzYm2Bj4Ox9pc6F2AVmJk6jrW4CNT45uolk8+Mr53KYB3lrXulO39NFAKfxk9
+ Xl6j5YSOg+Mrc1BA==
+Date: Tue, 03 Nov 2020 10:27:12 +0100
+From: Thomas Gleixner <tglx@linutronix.de>
+To: LKML <linux-kernel@vger.kernel.org>
 MIME-Version: 1.0
-References: <20201013124725.2394-1-alexander.kapshuk@gmail.com>
-In-Reply-To: <20201013124725.2394-1-alexander.kapshuk@gmail.com>
-From: Alexander Kapshuk <alexander.kapshuk@gmail.com>
-Date: Tue, 3 Nov 2020 10:42:32 +0200
-Message-ID: <CAJ1xhMWXMgcLj1_ibdSG7dgh9iaMt33pOhU5Xe4jEjhz6wSGWg@mail.gmail.com>
-To: Lyude Paul <lyude@redhat.com>, Ben Skeggs <bskeggs@redhat.com>
 X-Mailman-Approved-At: Wed, 04 Nov 2020 01:51:10 +0000
-Subject: Re: [Nouveau] [PATCH v2] drm/nouveau/kms: Fix NULL pointer
- dereference in nouveau_connector_detect_depth
+Subject: [Nouveau] [patch V3 00/37] mm/highmem: Preemptible variant of
+ kmap_atomic & friends
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -62,233 +50,258 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Dave Airlie <airlied@linux.ie>, ML nouveau <nouveau@lists.freedesktop.org>,
- linux-kernel <linux-kernel@vger.kernel.org>,
- dri-devel <dri-devel@lists.freedesktop.org>,
- Linux-Next <linux-next@vger.kernel.org>, Daniel Vetter <daniel@ffwll.ch>
+Cc: Juri Lelli <juri.lelli@redhat.com>, linux-aio@kvack.org,
+ Peter Zijlstra <peterz@infradead.org>,
+ Benjamin Herrenschmidt <benh@kernel.crashing.org>,
+ Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
+ Ben Segall <bsegall@google.com>, Chris Mason <clm@fb.com>,
+ Huang Rui <ray.huang@amd.com>, Paul Mackerras <paulus@samba.org>,
+ Gerd Hoffmann <kraxel@redhat.com>,
+ Daniel Bristot de Oliveira <bristot@redhat.com>, sparclinux@vger.kernel.org,
+ Vincent Chen <deanbo422@gmail.com>, Christoph Hellwig <hch@lst.de>,
+ Vincent Guittot <vincent.guittot@linaro.org>,
+ Paul McKenney <paulmck@kernel.org>, Max Filippov <jcmvbkbc@gmail.com>,
+ Michael Ellerman <mpe@ellerman.id.au>, x86@kernel.org,
+ Russell King <linux@armlinux.org.uk>, linux-csky@vger.kernel.org,
+ Ingo Molnar <mingo@kernel.org>, David Airlie <airlied@linux.ie>,
+ VMware Graphics <linux-graphics-maintainer@vmware.com>,
+ Mel Gorman <mgorman@suse.de>, nouveau@lists.freedesktop.org,
+ Dave Airlie <airlied@redhat.com>, linux-snps-arc@lists.infradead.org,
+ Ben Skeggs <bskeggs@redhat.com>, linux-xtensa@linux-xtensa.org,
+ Arnd Bergmann <arnd@arndb.de>, intel-gfx@lists.freedesktop.org,
+ Roland Scheidegger <sroland@vmware.com>, Josef Bacik <josef@toxicpanda.com>,
+ Steven Rostedt <rostedt@goodmis.org>,
+ Linus Torvalds <torvalds@linuxfoundation.org>,
+ Alexander Viro <viro@zeniv.linux.org.uk>, spice-devel@lists.freedesktop.org,
+ David Sterba <dsterba@suse.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ Dietmar Eggemann <dietmar.eggemann@arm.com>,
+ linux-arm-kernel@lists.infradead.org,
+ Jani Nikula <jani.nikula@linux.intel.com>, Chris Zankel <chris@zankel.net>,
+ Michal Simek <monstr@monstr.eu>,
+ Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
+ Nick Hu <nickhu@andestech.com>, linux-mm@kvack.org,
+ Vineet Gupta <vgupta@synopsys.com>, linux-mips@vger.kernel.org,
+ Christian Koenig <christian.koenig@amd.com>, Benjamin LaHaise <bcrl@kvack.org>,
+ Daniel Vetter <daniel@ffwll.ch>, linux-fsdevel@vger.kernel.org,
+ Andrew Morton <akpm@linux-foundation.org>, linuxppc-dev@lists.ozlabs.org,
+ "David S. Miller" <davem@davemloft.net>, linux-btrfs@vger.kernel.org,
+ Greentime Hu <green.hu@gmail.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, Oct 13, 2020 at 3:47 PM Alexander Kapshuk
-<alexander.kapshuk@gmail.com> wrote:
->
-> This oops manifests itself on the following hardware:
-> 01:00.0 VGA compatible controller: NVIDIA Corporation G98M [GeForce G 103M] (rev a1)
->
-> Oct 09 14:17:46 lp-sasha kernel: BUG: kernel NULL pointer dereference, address: 0000000000000000
-> Oct 09 14:17:46 lp-sasha kernel: #PF: supervisor read access in kernel mode
-> Oct 09 14:17:46 lp-sasha kernel: #PF: error_code(0x0000) - not-present page
-> Oct 09 14:17:46 lp-sasha kernel: PGD 0 P4D 0
-> Oct 09 14:17:46 lp-sasha kernel: Oops: 0000 [#1] SMP PTI
-> Oct 09 14:17:46 lp-sasha kernel: CPU: 1 PID: 191 Comm: systemd-udevd Not tainted 5.9.0-rc8-next-20201009 #38
-> Oct 09 14:17:46 lp-sasha kernel: Hardware name: Hewlett-Packard Compaq Presario CQ61 Notebook PC/306A, BIOS F.03 03/23/2009
-> Oct 09 14:17:46 lp-sasha kernel: RIP: 0010:nouveau_connector_detect_depth+0x71/0xc0 [nouveau]
-> Oct 09 14:17:46 lp-sasha kernel: Code: 0a 00 00 48 8b 49 48 c7 87 b8 00 00 00 06 00 00 00 80 b9 4d 0a 00 00 00 75 1e 83 fa 41 75 05 48 85 c0 75 29 8b 81 10 0d 00 00 <39> 06 7c 25 f6 81 14 0d 00 00 02 75 b7 c3 80 b9 0c 0d 00 00 00 75
-> Oct 09 14:17:46 lp-sasha kernel: RSP: 0018:ffffc9000028f8c0 EFLAGS: 00010297
-> Oct 09 14:17:46 lp-sasha kernel: RAX: 0000000000014c08 RBX: ffff8880369d4000 RCX: ffff8880369d3000
-> Oct 09 14:17:46 lp-sasha kernel: RDX: 0000000000000040 RSI: 0000000000000000 RDI: ffff8880369d4000
-> Oct 09 14:17:46 lp-sasha kernel: RBP: ffff88800601cc00 R08: ffff8880051da298 R09: ffffffff8226201a
-> Oct 09 14:17:46 lp-sasha kernel: R10: ffff88800469aa80 R11: ffff888004c84ff8 R12: 0000000000000000
-> Oct 09 14:17:46 lp-sasha kernel: R13: ffff8880051da000 R14: 0000000000002000 R15: 0000000000000003
-> Oct 09 14:17:46 lp-sasha kernel: FS:  00007fd0192b3440(0000) GS:ffff8880bc900000(0000) knlGS:0000000000000000
-> Oct 09 14:17:46 lp-sasha kernel: CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-> Oct 09 14:17:46 lp-sasha kernel: CR2: 0000000000000000 CR3: 0000000004976000 CR4: 00000000000006e0
-> Oct 09 14:17:46 lp-sasha kernel: Call Trace:
-> Oct 09 14:17:46 lp-sasha kernel:  nouveau_connector_get_modes+0x1e6/0x240 [nouveau]
-> Oct 09 14:17:46 lp-sasha kernel:  ? kfree+0xb9/0x240
-> Oct 09 14:17:46 lp-sasha kernel:  ? drm_connector_list_iter_next+0x7c/0xa0
-> Oct 09 14:17:46 lp-sasha kernel:  drm_helper_probe_single_connector_modes+0x1ba/0x7c0
-> Oct 09 14:17:46 lp-sasha kernel:  drm_client_modeset_probe+0x27e/0x1360
-> Oct 09 14:17:46 lp-sasha kernel:  ? nvif_object_sclass_put+0xc/0x20 [nouveau]
-> Oct 09 14:17:46 lp-sasha kernel:  ? nouveau_cli_init+0x3cc/0x440 [nouveau]
-> Oct 09 14:17:46 lp-sasha kernel:  ? ktime_get_mono_fast_ns+0x49/0xa0
-> Oct 09 14:17:46 lp-sasha kernel:  ? nouveau_drm_open+0x4e/0x180 [nouveau]
-> Oct 09 14:17:46 lp-sasha kernel:  __drm_fb_helper_initial_config_and_unlock+0x3f/0x4a0
-> Oct 09 14:17:46 lp-sasha kernel:  ? drm_file_alloc+0x18f/0x260
-> Oct 09 14:17:46 lp-sasha kernel:  ? mutex_lock+0x9/0x40
-> Oct 09 14:17:46 lp-sasha kernel:  ? drm_client_init+0x110/0x160
-> Oct 09 14:17:46 lp-sasha kernel:  nouveau_fbcon_init+0x14d/0x1c0 [nouveau]
-> Oct 09 14:17:46 lp-sasha kernel:  nouveau_drm_device_init+0x1c0/0x880 [nouveau]
-> Oct 09 14:17:46 lp-sasha kernel:  nouveau_drm_probe+0x11a/0x1e0 [nouveau]
-> Oct 09 14:17:46 lp-sasha kernel:  pci_device_probe+0xcd/0x140
-> Oct 09 14:17:46 lp-sasha kernel:  really_probe+0xd8/0x400
-> Oct 09 14:17:46 lp-sasha kernel:  driver_probe_device+0x4a/0xa0
-> Oct 09 14:17:46 lp-sasha kernel:  device_driver_attach+0x9c/0xc0
-> Oct 09 14:17:46 lp-sasha kernel:  __driver_attach+0x6f/0x100
-> Oct 09 14:17:46 lp-sasha kernel:  ? device_driver_attach+0xc0/0xc0
-> Oct 09 14:17:46 lp-sasha kernel:  bus_for_each_dev+0x75/0xc0
-> Oct 09 14:17:46 lp-sasha kernel:  bus_add_driver+0x106/0x1c0
-> Oct 09 14:17:46 lp-sasha kernel:  driver_register+0x86/0xe0
-> Oct 09 14:17:46 lp-sasha kernel:  ? 0xffffffffa044e000
-> Oct 09 14:17:46 lp-sasha kernel:  do_one_initcall+0x48/0x1e0
-> Oct 09 14:17:46 lp-sasha kernel:  ? _cond_resched+0x11/0x60
-> Oct 09 14:17:46 lp-sasha kernel:  ? kmem_cache_alloc_trace+0x19c/0x1e0
-> Oct 09 14:17:46 lp-sasha kernel:  do_init_module+0x57/0x220
-> Oct 09 14:17:46 lp-sasha kernel:  __do_sys_finit_module+0xa0/0xe0
-> Oct 09 14:17:46 lp-sasha kernel:  do_syscall_64+0x33/0x40
-> Oct 09 14:17:46 lp-sasha kernel:  entry_SYSCALL_64_after_hwframe+0x44/0xa9
-> Oct 09 14:17:46 lp-sasha kernel: RIP: 0033:0x7fd01a060d5d
-> Oct 09 14:17:46 lp-sasha kernel: Code: 00 c3 66 2e 0f 1f 84 00 00 00 00 00 90 f3 0f 1e fa 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 8b 0d e3 70 0c 00 f7 d8 64 89 01 48
-> Oct 09 14:17:46 lp-sasha kernel: RSP: 002b:00007ffc8ad38a98 EFLAGS: 00000246 ORIG_RAX: 0000000000000139
-> Oct 09 14:17:46 lp-sasha kernel: RAX: ffffffffffffffda RBX: 0000563f6e7fd530 RCX: 00007fd01a060d5d
-> Oct 09 14:17:46 lp-sasha kernel: RDX: 0000000000000000 RSI: 00007fd01a19f95d RDI: 000000000000000f
-> Oct 09 14:17:46 lp-sasha kernel: RBP: 0000000000020000 R08: 0000000000000000 R09: 0000000000000007
-> Oct 09 14:17:46 lp-sasha kernel: R10: 000000000000000f R11: 0000000000000246 R12: 00007fd01a19f95d
-> Oct 09 14:17:46 lp-sasha kernel: R13: 0000000000000000 R14: 0000563f6e7fbc10 R15: 0000563f6e7fd530
-> Oct 09 14:17:46 lp-sasha kernel: Modules linked in: nouveau(+) ttm xt_string xt_mark xt_LOG vgem v4l2_dv_timings uvcvideo ulpi udf ts_kmp ts_fsm ts_bm snd_aloop sil164 qat_dh895xccvf nf_nat_sip nf_nat_irc nf_nat_ftp nf_nat nf_log_ipv6 nf_log_ipv4 nf_log_common ltc2990 lcd intel_qat input_leds i2c_mux gspca_main videobuf2_vmalloc videobuf2_memops videobuf2_v4l2 videobuf2_common videodev mc drivetemp cuse fuse crc_itu_t coretemp ch7006 ath5k ath algif_hash
-> Oct 09 14:17:46 lp-sasha kernel: CR2: 0000000000000000
-> Oct 09 14:17:46 lp-sasha kernel: ---[ end trace 0ddafe218ad30017 ]---
-> Oct 09 14:17:46 lp-sasha kernel: RIP: 0010:nouveau_connector_detect_depth+0x71/0xc0 [nouveau]
-> Oct 09 14:17:46 lp-sasha kernel: Code: 0a 00 00 48 8b 49 48 c7 87 b8 00 00 00 06 00 00 00 80 b9 4d 0a 00 00 00 75 1e 83 fa 41 75 05 48 85 c0 75 29 8b 81 10 0d 00 00 <39> 06 7c 25 f6 81 14 0d 00 00 02 75 b7 c3 80 b9 0c 0d 00 00 00 75
-> Oct 09 14:17:46 lp-sasha kernel: RSP: 0018:ffffc9000028f8c0 EFLAGS: 00010297
-> Oct 09 14:17:46 lp-sasha kernel: RAX: 0000000000014c08 RBX: ffff8880369d4000 RCX: ffff8880369d3000
-> Oct 09 14:17:46 lp-sasha kernel: RDX: 0000000000000040 RSI: 0000000000000000 RDI: ffff8880369d4000
-> Oct 09 14:17:46 lp-sasha kernel: RBP: ffff88800601cc00 R08: ffff8880051da298 R09: ffffffff8226201a
-> Oct 09 14:17:46 lp-sasha kernel: R10: ffff88800469aa80 R11: ffff888004c84ff8 R12: 0000000000000000
-> Oct 09 14:17:46 lp-sasha kernel: R13: ffff8880051da000 R14: 0000000000002000 R15: 0000000000000003
-> Oct 09 14:17:46 lp-sasha kernel: FS:  00007fd0192b3440(0000) GS:ffff8880bc900000(0000) knlGS:0000000000000000
-> Oct 09 14:17:46 lp-sasha kernel: CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-> Oct 09 14:17:46 lp-sasha kernel: CR2: 0000000000000000 CR3: 0000000004976000 CR4: 00000000000006e0
->
-> The disassembly:
-> Code: 0a 00 00 48 8b 49 48 c7 87 b8 00 00 00 06 00 00 00 80 b9 4d 0a 00 00 00 75 1e 83 fa 41 75 05 48 85 c0 75 29 8b 81 10 0d 00 00 <39> 06 7c 25 f6 81 14 0d 00 00 02 75 b7 c3 80 b9 0c 0d 00 00 00 75
-> All code
-> ========
->    0:   0a 00                   or     (%rax),%al
->    2:   00 48 8b                add    %cl,-0x75(%rax)
->    5:   49                      rex.WB
->    6:   48 c7 87 b8 00 00 00    movq   $0x6,0xb8(%rdi)
->    d:   06 00 00 00
->   11:   80 b9 4d 0a 00 00 00    cmpb   $0x0,0xa4d(%rcx)
->   18:   75 1e                   jne    0x38
->   1a:   83 fa 41                cmp    $0x41,%edx
->   1d:   75 05                   jne    0x24
->   1f:   48 85 c0                test   %rax,%rax
->   22:   75 29                   jne    0x4d
->   24:   8b 81 10 0d 00 00       mov    0xd10(%rcx),%eax
->   2a:*  39 06                   cmp    %eax,(%rsi)              <-- trapping instruction
->   2c:   7c 25                   jl     0x53
->   2e:   f6 81 14 0d 00 00 02    testb  $0x2,0xd14(%rcx)
->   35:   75 b7                   jne    0xffffffffffffffee
->   37:   c3                      retq
->   38:   80 b9 0c 0d 00 00 00    cmpb   $0x0,0xd0c(%rcx)
->   3f:   75                      .byte 0x75
->
-> Code starting with the faulting instruction
-> ===========================================
->    0:   39 06                   cmp    %eax,(%rsi)
->    2:   7c 25                   jl     0x29
->    4:   f6 81 14 0d 00 00 02    testb  $0x2,0xd14(%rcx)
->    b:   75 b7                   jne    0xffffffffffffffc4
->    d:   c3                      retq
->    e:   80 b9 0c 0d 00 00 00    cmpb   $0x0,0xd0c(%rcx)
->   15:   75                      .byte 0x75
->
-> objdump -SF --disassemble=nouveau_connector_detect_depth
-> [...]
->         if (nv_connector->edid &&
->    c85e1:       83 fa 41                cmp    $0x41,%edx
->    c85e4:       75 05                   jne    c85eb <nouveau_connector_detect_depth+0x6b> (File Offset: 0xc866b)
->    c85e6:       48 85 c0                test   %rax,%rax
->    c85e9:       75 29                   jne    c8614 <nouveau_connector_detect_depth+0x94> (File Offset: 0xc8694)
->             nv_connector->type == DCB_CONNECTOR_LVDS_SPWG)
->                 duallink = ((u8 *)nv_connector->edid)[121] == 2;
->         else
->                 duallink = mode->clock >= bios->fp.duallink_transition_clk;
->
->         if ((!duallink && (bios->fp.strapless_is_24bit & 1)) ||
->    c85eb:       8b 81 10 0d 00 00       mov    0xd10(%rcx),%eax
->    c85f1:       39 06                   cmp    %eax,(%rsi)
->    c85f3:       7c 25                   jl     c861a <nouveau_connector_detect_depth+0x9a> (File Offset: 0xc869a)
->             ( duallink && (bios->fp.strapless_is_24bit & 2)))
->    c85f5:       f6 81 14 0d 00 00 02    testb  $0x2,0xd14(%rcx)
->    c85fc:       75 b7                   jne    c85b5 <nouveau_connector_detect_depth+0x35> (File Offset: 0xc8635)
->                 connector->display_info.bpc = 8;
-> [...]
->
-> % scripts/faddr2line /lib/modules/5.9.0-rc8-next-20201009/kernel/drivers/gpu/drm/nouveau/nouveau.ko nouveau_connector_detect_depth+0x71/0xc0
-> nouveau_connector_detect_depth+0x71/0xc0:
-> nouveau_connector_detect_depth at /home/sasha/linux-next/drivers/gpu/drm/nouveau/nouveau_connector.c:891
->
-> It is actually line 889. See the disassembly below.
-> 889                     duallink = mode->clock >= bios->fp.duallink_transition_clk;
->
-> The NULL pointer being dereferenced is mode.
->
-> Git bisect has identified the following commit as bad:
-> f28e32d3906e drm/nouveau/kms: Don't change EDID when it hasn't actually changed
->
-> Here is the chain of events that causes the oops.
-> On entry to nouveau_connector_detect_lvds, edid is set to NULL.  The call
-> to nouveau_connector_detect sets nv_connector->edid to valid memory,
-> with status set to connector_status_connected and the flow of execution
-> branching to the out label.
->
-> The subsequent call to nouveau_connector_set_edid erronously clears
-> nv_connector->edid, via the local edid pointer which remains set to NULL.
->
-> Fix this by setting edid to the value of the just acquired
-> nv_connector->edid and executing the body of nouveau_connector_set_edid
-> only if nv_connector->edid and edid point to different memory addresses
-> thus preventing nv_connector->edid from being turned into a dangling
-> pointer.
->
-> Fixes: f28e32d3906e ("drm/nouveau/kms: Don't change EDID when it hasn't actually changed")
-> Signed-off-by: Alexander Kapshuk <alexander.kapshuk@gmail.com>
-> Reviewed-by: Lyude Paul <lyude@redhat.com>
-> ---
-> v2:
-> -----
-> - nouveau_connector_set_edid updated to do the (nv_connector->edid
-> != edid) check instead of open coding it in nouveau_connector_detect_lvds
-> - added Reviewed-by: from Lyude Paul
->
->  drivers/gpu/drm/nouveau/nouveau_connector.c | 14 +++++++++-----
->  1 file changed, 9 insertions(+), 5 deletions(-)
->
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_connector.c b/drivers/gpu/drm/nouveau/nouveau_connector.c
-> index 49dd0cbc332f..5eb322276be7 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_connector.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_connector.c
-> @@ -532,11 +532,13 @@ static void
->  nouveau_connector_set_edid(struct nouveau_connector *nv_connector,
->                            struct edid *edid)
->  {
-> -       struct edid *old_edid = nv_connector->edid;
-> +       if (nv_connector->edid != edid) {
-> +               struct edid *old_edid = nv_connector->edid;
->
-> -       drm_connector_update_edid_property(&nv_connector->base, edid);
-> -       kfree(old_edid);
-> -       nv_connector->edid = edid;
-> +               drm_connector_update_edid_property(&nv_connector->base, edid);
-> +               kfree(old_edid);
-> +               nv_connector->edid = edid;
-> +       }
->  }
->
->  static enum drm_connector_status
-> @@ -669,8 +671,10 @@ nouveau_connector_detect_lvds(struct drm_connector *connector, bool force)
->         /* Try retrieving EDID via DDC */
->         if (!drm->vbios.fp_no_ddc) {
->                 status = nouveau_connector_detect(connector, force);
-> -               if (status == connector_status_connected)
-> +               if (status == connector_status_connected) {
-> +                       edid = nv_connector->edid;
->                         goto out;
-> +               }
->         }
->
->         /* On some laptops (Sony, i'm looking at you) there appears to
-> --
-> 2.28.0
->
+Following up to the discussion in:
 
-Thought I'd ask about the status of this patch.
-Is there an intention to queue it up for subsequent inclusion at some stage?
-Thanks.
+  https://lore.kernel.org/r/20200914204209.256266093@linutronix.de
+
+and the second version of this:
+
+  https://lore.kernel.org/r/20201029221806.189523375@linutronix.de
+
+this series provides a preemptible variant of kmap_atomic & related
+interfaces.
+
+This is achieved by:
+
+ - Removing the RT dependency from migrate_disable/enable()
+
+ - Consolidating all kmap atomic implementations in generic code including
+   a useful version of the CONFIG_DEBUG_HIGHMEM which provides guard pages
+   between the individual maps instead of just increasing the map size.
+
+ - Switching from per CPU storage of the kmap index to a per task storage
+
+ - Adding a pteval array to the per task storage which contains the ptevals
+   of the currently active temporary kmaps
+
+ - Adding context switch code which checks whether the outgoing or the
+   incoming task has active temporary kmaps. If so, the outgoing task's
+   kmaps are removed and the incoming task's kmaps are restored.
+
+ - Adding new interfaces k[un]map_local*() which are not disabling
+   preemption and can be called from any context (except NMI).
+
+   Contrary to kmap() which provides preemptible and "persistant" mappings,
+   these interfaces are meant to replace the temporary mappings provided by
+   kmap_atomic*() today.
+
+This allows to get rid of conditional mapping choices and allows to have
+preemptible short term mappings on 64bit which are today enforced to be
+non-preemptible due to the highmem constraints. It clearly puts overhead on
+the highmem users, but highmem is slow anyway.
+
+This is not a wholesale conversion which makes kmap_atomic magically
+preemptible because there might be usage sites which rely on the implicit
+preempt disable. So this needs to be done on a case by case basis and the
+call sites converted to kmap_local().
+
+Note, that this is only tested on X86 and completely untested on all other
+architectures (at least it compiles except on csky which does not compile
+with the newest cross tools from kernel.org independent of this change).
+
+The lot is available from
+
+   git://git.kernel.org/pub/scm/linux/kernel/git/tglx/devel.git highmem
+
+It is based on Peter Zijlstras migrate disable branch which is close to be
+merged into the tip tree, but still not finalized:
+
+   git://git.kernel.org/pub/scm/linux/kernel/git/peterz/queue.git sched/migrate-disable
+
+The series has the following parts:
+
+    Patches  1 - 22: Consolidation work which is independent of the scheduler
+    	       	     changes
+
+		     79 files changed, 595 insertions(+), 1296 deletions(-)
+
+    Patch   23:      Needs to be folded back into the sched/migrate-disable
+
+    Patches 24 - 26: The preemptible kmap_local() implementation
+
+    	       	     9 files changed, 283 insertions(+), 57 deletions(-)
+
+    Patches 27 - 37: Cleanup of the less common kmap/io_map_atomic users
+
+    	       	     19 files changed, 114 insertions(+), 256 deletions(-)
+
+Vs. merging this pile:
+
+If everyone agrees, I'd like to take the first part (1-22) through tip so
+that the preemptible implementation can be sorted in tip once the scheduler
+prerequisites are there. The initial cleanups (27-37) might have to wait if
+there are conflicts vs. the drm/gpu tree. We'll see.
+
+>From what I can tell kmap_atomic() can be removed all together and
+completly replaced by kmap_local(). Most of the usage sites are trivial and
+just doing memcpy(), memset() or trivial operations on the temporarily
+mapped page. The interesting ones are those which do either conditional
+stuff or have copy_.*_user_inatomic() inside. As shown with the crash and
+drm/gpu cleanups this allows to simplify the code quite a bit.
+
+Changes vs. V2:
+
+  - Remove the migrate disable from kmap_local and only issue that when the
+    there is an actual highmem mapping. (Linus)
+  - Reordered the series so the consolidation is upfront
+  - Get rid of kmap_types.h and the associated cruft
+  - Fixup documentation and add function documentation for kmap_*
+  - Splitout the internal implementation into a seperate header
+  - More cleanups - removal of unused functions
+  - Replace a few of the less frequently used kmap_atomic and
+    io_mapping_map_atomic variants and remove those interfaces.
+
+Thanks,
+
+	tglx
+---
+ arch/alpha/include/asm/kmap_types.h                   |   15 
+ arch/arc/include/asm/kmap_types.h                     |   14 
+ arch/arm/include/asm/kmap_types.h                     |   10 
+ arch/arm/mm/highmem.c                                 |  121 -------
+ arch/ia64/include/asm/kmap_types.h                    |   13 
+ arch/microblaze/mm/highmem.c                          |   78 ----
+ arch/mips/include/asm/kmap_types.h                    |   13 
+ arch/nds32/mm/highmem.c                               |   48 --
+ arch/parisc/include/asm/kmap_types.h                  |   13 
+ arch/powerpc/include/asm/kmap_types.h                 |   13 
+ arch/powerpc/mm/highmem.c                             |   67 ----
+ arch/sh/include/asm/kmap_types.h                      |   15 
+ arch/sparc/include/asm/kmap_types.h                   |   11 
+ arch/sparc/mm/highmem.c                               |  115 -------
+ arch/um/include/asm/kmap_types.h                      |   13 
+ arch/x86/include/asm/kmap_types.h                     |   13 
+ b/Documentation/driver-api/io-mapping.rst             |   92 ++---
+ b/arch/arc/Kconfig                                    |    1 
+ b/arch/arc/include/asm/highmem.h                      |   26 +
+ b/arch/arc/mm/highmem.c                               |   54 ---
+ b/arch/arm/Kconfig                                    |    1 
+ b/arch/arm/include/asm/fixmap.h                       |    4 
+ b/arch/arm/include/asm/highmem.h                      |   33 +-
+ b/arch/arm/mm/Makefile                                |    1 
+ b/arch/arm/mm/cache-feroceon-l2.c                     |    6 
+ b/arch/arm/mm/cache-xsc3l2.c                          |    4 
+ b/arch/csky/Kconfig                                   |    1 
+ b/arch/csky/include/asm/fixmap.h                      |    4 
+ b/arch/csky/include/asm/highmem.h                     |    6 
+ b/arch/csky/mm/highmem.c                              |   75 ----
+ b/arch/microblaze/Kconfig                             |    1 
+ b/arch/microblaze/include/asm/fixmap.h                |    4 
+ b/arch/microblaze/include/asm/highmem.h               |    6 
+ b/arch/microblaze/mm/Makefile                         |    1 
+ b/arch/microblaze/mm/init.c                           |    6 
+ b/arch/mips/Kconfig                                   |    1 
+ b/arch/mips/include/asm/fixmap.h                      |    4 
+ b/arch/mips/include/asm/highmem.h                     |    6 
+ b/arch/mips/kernel/crash_dump.c                       |   42 --
+ b/arch/mips/mm/highmem.c                              |   77 ----
+ b/arch/mips/mm/init.c                                 |    4 
+ b/arch/nds32/Kconfig.cpu                              |    1 
+ b/arch/nds32/include/asm/fixmap.h                     |    4 
+ b/arch/nds32/include/asm/highmem.h                    |   22 -
+ b/arch/nds32/mm/Makefile                              |    1 
+ b/arch/openrisc/mm/init.c                             |    1 
+ b/arch/openrisc/mm/ioremap.c                          |    1 
+ b/arch/powerpc/Kconfig                                |    1 
+ b/arch/powerpc/include/asm/fixmap.h                   |    4 
+ b/arch/powerpc/include/asm/highmem.h                  |    7 
+ b/arch/powerpc/mm/Makefile                            |    1 
+ b/arch/powerpc/mm/mem.c                               |    7 
+ b/arch/sh/include/asm/fixmap.h                        |    8 
+ b/arch/sh/mm/init.c                                   |    8 
+ b/arch/sparc/Kconfig                                  |    1 
+ b/arch/sparc/include/asm/highmem.h                    |    8 
+ b/arch/sparc/include/asm/vaddrs.h                     |    4 
+ b/arch/sparc/mm/Makefile                              |    3 
+ b/arch/sparc/mm/srmmu.c                               |    2 
+ b/arch/um/include/asm/fixmap.h                        |    1 
+ b/arch/x86/Kconfig                                    |    3 
+ b/arch/x86/include/asm/fixmap.h                       |    5 
+ b/arch/x86/include/asm/highmem.h                      |   13 
+ b/arch/x86/include/asm/iomap.h                        |   13 
+ b/arch/x86/include/asm/paravirt_types.h               |    1 
+ b/arch/x86/kernel/crash_dump_32.c                     |   48 --
+ b/arch/x86/mm/highmem_32.c                            |   59 ---
+ b/arch/x86/mm/init_32.c                               |   15 
+ b/arch/x86/mm/iomap_32.c                              |   57 ---
+ b/arch/xtensa/Kconfig                                 |    1 
+ b/arch/xtensa/include/asm/fixmap.h                    |    4 
+ b/arch/xtensa/include/asm/highmem.h                   |   12 
+ b/arch/xtensa/mm/highmem.c                            |   46 --
+ b/drivers/gpu/drm/i915/gem/i915_gem_execbuffer.c      |    7 
+ b/drivers/gpu/drm/i915/i915_gem.c                     |   40 --
+ b/drivers/gpu/drm/i915/selftests/i915_gem.c           |    4 
+ b/drivers/gpu/drm/i915/selftests/i915_gem_gtt.c       |    8 
+ b/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/fbmem.h |    8 
+ b/drivers/gpu/drm/qxl/qxl_image.c                     |   18 -
+ b/drivers/gpu/drm/qxl/qxl_ioctl.c                     |   27 -
+ b/drivers/gpu/drm/qxl/qxl_object.c                    |   12 
+ b/drivers/gpu/drm/qxl/qxl_object.h                    |    4 
+ b/drivers/gpu/drm/qxl/qxl_release.c                   |    4 
+ b/drivers/gpu/drm/ttm/ttm_bo_util.c                   |   20 -
+ b/drivers/gpu/drm/vmwgfx/vmwgfx_blit.c                |   30 -
+ b/fs/aio.c                                            |    1 
+ b/fs/btrfs/ctree.h                                    |    1 
+ b/include/asm-generic/Kbuild                          |    2 
+ b/include/asm-generic/kmap_size.h                     |   12 
+ b/include/linux/highmem-internal.h                    |  210 ++++++++++++
+ b/include/linux/highmem.h                             |  294 ++++++------------
+ b/include/linux/io-mapping.h                          |   28 -
+ b/include/linux/kernel.h                              |   21 -
+ b/include/linux/preempt.h                             |   38 --
+ b/include/linux/sched.h                               |   11 
+ b/kernel/entry/common.c                               |    2 
+ b/kernel/fork.c                                       |    1 
+ b/kernel/sched/core.c                                 |   63 +++
+ b/kernel/sched/sched.h                                |    4 
+ b/lib/smp_processor_id.c                              |    2 
+ b/mm/Kconfig                                          |    3 
+ b/mm/highmem.c                                        |  255 ++++++++++++++-
+ include/asm-generic/kmap_types.h                      |   11 
+ 103 files changed, 959 insertions(+), 1576 deletions(-)
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
