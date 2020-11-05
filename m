@@ -2,52 +2,56 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 30DC22AA15E
-	for <lists+nouveau@lfdr.de>; Sat,  7 Nov 2020 00:30:41 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3BD632AA2DD
+	for <lists+nouveau@lfdr.de>; Sat,  7 Nov 2020 07:36:08 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 700676EB59;
-	Fri,  6 Nov 2020 23:30:35 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id DB31E6E118;
+	Sat,  7 Nov 2020 06:36:02 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 35E8D6EB56
- for <nouveau@lists.freedesktop.org>; Fri,  6 Nov 2020 23:30:33 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1604705432;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=Ew4rIAC9gbf7d0rKjHF4qfpwnpt8uKp6YFkSycCbhTQ=;
- b=jAsHmk8uYdkDEjocqUd6v/nP12UczhjtHu70MluMFmJRGmu2vuSoFG21MwnMHUuSinpMYU
- QeWS6nqUX2Bq7KhnLS2dv2/oyp6lVGCb2uPhSJF6SzKOUu6aT3NThY8tAQFZlkJVbsMZH2
- MP8i/DGNm9tvP7ORV5Dsnr8njAJ19OI=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-7-g3HBWZfpNrCTU2cWf8kZmg-1; Fri, 06 Nov 2020 18:30:27 -0500
-X-MC-Unique: g3HBWZfpNrCTU2cWf8kZmg-1
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
- [10.5.11.15])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 1B2FD801F9A;
- Fri,  6 Nov 2020 23:30:26 +0000 (UTC)
-Received: from Whitewolf.lyude.net (ovpn-115-78.rdu2.redhat.com [10.10.115.78])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 065F462A15;
- Fri,  6 Nov 2020 23:30:24 +0000 (UTC)
-From: Lyude Paul <lyude@redhat.com>
-To: gregkh@linuxfoundation.org, stable@vger.kernel.org,
- nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org
-Date: Fri,  6 Nov 2020 18:30:15 -0500
-Message-Id: <20201106233016.2481179-3-lyude@redhat.com>
-In-Reply-To: <20201106233016.2481179-1-lyude@redhat.com>
-References: <160459060724988@kroah.com>
- <20201106233016.2481179-1-lyude@redhat.com>
+Received: from mail-lj1-x243.google.com (mail-lj1-x243.google.com
+ [IPv6:2a00:1450:4864:20::243])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5F5F66E1D5
+ for <nouveau@lists.freedesktop.org>; Thu,  5 Nov 2020 10:08:11 +0000 (UTC)
+Received: by mail-lj1-x243.google.com with SMTP id y16so967512ljk.1
+ for <nouveau@lists.freedesktop.org>; Thu, 05 Nov 2020 02:08:11 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=eEue8Bau+pupF7CyTGHXC2yqWeY8Sj18qJXhmeK0+qY=;
+ b=rvffOctSKYH+6isvUsZ6vjuDGiRiPXrriws2tYpmxIOJoDbVaUBBLJZNLsZfPTViCm
+ OB7UJ7kJVc74V/wH1kAJWs50qUWe8BxYk+3Bh0Ntwrn4R80Kw+RHuzDoPIDkFuxVKOMP
+ awvWPavfta6vj9AUR/6i26T0t+QGvBOviGEDNRn+gsaMK+rwApX3VuBwIy6OffxGwIGI
+ Q9ElrJtiii5nM3Ug/hNAa7sMnYOfnIMkNbbQWWsd9e9E4LqYfoNACefZyIQWVQxYvven
+ erCA3D+b6EoRTgIG3bxLlMg5PeozREFm5ydwy7sAu7xfjUKeSkZzmy6N/j40DftaLQPo
+ OSmw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=eEue8Bau+pupF7CyTGHXC2yqWeY8Sj18qJXhmeK0+qY=;
+ b=dljMue8widW25zPs2rdEeGld42E8sbpwzvJTIQwvbC3tn9uMY2EKWDIVKUsh88nCKd
+ yNumFgdoCsuczqyLSD+TsCYT7IcHCcStA81d/vLTCjHun8rVZVl/75E6MkJ7/Jjdm3+5
+ MIP1TMP+QbM/NNPM9niK2gHABYa1cbEQrfMH/2uAElc75g9aWSE6GSfpLoLYNJ46dG4s
+ hW3hyQ+fZ5P5v8I4SQtbCxhvGO+J9mW7T2E6qitNU1Lz4UOxYKER+wd3nfmMXSM1Fbq5
+ hO+AgpMqH9673XCuJ6Fl7pSdzG7g4TzA/uW998GNiINxgGlES6jtGg9LvAbyAtmb/ysv
+ 1woA==
+X-Gm-Message-State: AOAM531m9UVeTc91nF/1kLv1zUO8EzuDkjBsIV3DRf8vkX6awrEX5bPR
+ gxI7Ab+5K34m9GgpvTlLlgSrrL097GH0d7L/47f/+A==
+X-Google-Smtp-Source: ABdhPJzTsAT/B7g6yG/tiOPWkhIyiq+coc///CuocOp+hPojlZHj2TddLjwWNxDtJai798d/HI10cYYk95MMhchsZzo=
+X-Received: by 2002:a05:651c:1205:: with SMTP id
+ i5mr658065lja.283.1604570889728; 
+ Thu, 05 Nov 2020 02:08:09 -0800 (PST)
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
-Subject: [Nouveau] [PATCH 2/2] drm/nouveau/kms/nv50-: Fix clock checking
- algorithm in nv50_dp_mode_valid()
+References: <20201020122046.31167-1-tzimmermann@suse.de>
+ <20201020122046.31167-10-tzimmermann@suse.de>
+In-Reply-To: <20201020122046.31167-10-tzimmermann@suse.de>
+From: Linus Walleij <linus.walleij@linaro.org>
+Date: Thu, 5 Nov 2020 11:07:59 +0100
+Message-ID: <CACRpkdbvGWKo8y323actUJn9xXmxpgDw1EKLiPH4RqB_kFx=XQ@mail.gmail.com>
+To: Thomas Zimmermann <tzimmermann@suse.de>
+X-Mailman-Approved-At: Sat, 07 Nov 2020 06:36:02 +0000
+Subject: Re: [Nouveau] [PATCH v5 09/10] dma-buf-map: Add memcpy and
+ pointer-increment interfaces
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,66 +63,94 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, Daniel Vetter <daniel@ffwll.ch>,
- Ben Skeggs <bskeggs@redhat.com>,
- =?UTF-8?q?Ville=20Syrj=C3=A4l=C3=A4?= <ville.syrjala@linux.intel.com>,
- open list <linux-kernel@vger.kernel.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: luben.tuikov@amd.com, =?UTF-8?Q?Heiko_St=C3=BCbner?= <heiko@sntech.de>,
+ Dave Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
+ "open list:DRM PANEL DRIVERS" <dri-devel@lists.freedesktop.org>,
+ Chris Wilson <chris@chris-wilson.co.uk>, melissa.srw@gmail.com,
+ Eric Anholt <eric@anholt.net>, ray.huang@amd.com,
+ Gerd Hoffmann <kraxel@redhat.com>, Sam Ravnborg <sam@ravnborg.org>,
+ Sumit Semwal <sumit.semwal@linaro.org>,
+ Emil Velikov <emil.velikov@collabora.com>, Rob Herring <robh@kernel.org>,
+ linux-samsung-soc <linux-samsung-soc@vger.kernel.org>,
+ Joonyoung Shim <jy0922.shim@samsung.com>, lima@lists.freedesktop.org,
+ Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
+ Krzysztof Kozlowski <krzk@kernel.org>, steven.price@arm.com,
+ "open list:ARM/Rockchip SoC..." <linux-rockchip@lists.infradead.org>,
+ Kukjin Kim <kgene@kernel.org>, Ben Skeggs <bskeggs@redhat.com>,
+ linux+etnaviv@armlinux.org.uk, spice-devel@lists.freedesktop.org,
+ alyssa.rosenzweig@collabora.com,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ etnaviv@lists.freedesktop.org, Maxime Ripard <mripard@kernel.org>,
+ Inki Dae <inki.dae@samsung.com>, Hans de Goede <hdegoede@redhat.com>,
+ Christian Gmeiner <christian.gmeiner@gmail.com>,
+ xen-devel@lists.xenproject.org, virtualization@lists.linux-foundation.org,
+ Sean Paul <sean@poorly.run>, apaneers@amd.com,
+ Linux ARM <linux-arm-kernel@lists.infradead.org>,
+ linaro-mm-sig@lists.linaro.org, amd-gfx@lists.freedesktop.org,
+ Tomeu Vizoso <tomeu.vizoso@collabora.com>,
+ Seung-Woo Kim <sw0312.kim@samsung.com>, Sandy Huang <hjc@rock-chips.com>,
+ Kyungmin Park <kyungmin.park@samsung.com>,
+ Qinglang Miao <miaoqinglang@huawei.com>, yuq825@gmail.com,
+ Daniel Vetter <daniel@ffwll.ch>, Alex Deucher <alexander.deucher@amd.com>,
+ Linux Media Mailing List <linux-media@vger.kernel.org>,
+ =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
+ Lucas Stach <l.stach@pengutronix.de>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-V2hpbGUgSSB0aG91Z2h0IEkgaGFkIHRoaXMgY29ycmVjdCAoc2luY2UgaXQgYWN0dWFsbHkgZGlk
-IHJlamVjdCBtb2RlcwpsaWtlIEkgZXhwZWN0ZWQgZHVyaW5nIHRlc3RpbmcpLCBWaWxsZSBTeXJq
-YWxhIGZyb20gSW50ZWwgcG9pbnRlZCBvdXQKdGhhdCB0aGUgbG9naWMgaGVyZSBpc24ndCBjb3Jy
-ZWN0LiBtYXhfY2xvY2sgcmVmZXJzIHRvIHRoZSBtYXggZGF0YSByYXRlCnN1cHBvcnRlZCBieSB0
-aGUgRFAgZW5jb2Rlci4gU28sIGxpbWl0aW5nIGl0IHRvIHRoZSBvdXRwdXQgb2YgZHNfY2xvY2sg
-KHdoaWNoCnJlZmVycyB0byB0aGUgbWF4aW11bSBkb3RjbG9jayBvZiB0aGUgZG93bnN0cmVhbSBE
-UCBkZXZpY2UpIGRvZXNuJ3QgbWFrZSBhbnkKc2Vuc2UuIEFkZGl0aW9uYWxseSwgc2luY2Ugd2Un
-cmUgdXNpbmcgdGhlIGNvbm5lY3RvcidzIGJwYyBhcyB0aGUgY2Fub25pY2FsIEJQQwp3ZSBzaG91
-bGQgdXNlIHRoaXMgaW4gbW9kZV92YWxpZCB1bnRpbCB3ZSBzdXBwb3J0IGR5bmFtaWNhbGx5IHNl
-dHRpbmcgdGhlIGJwcApiYXNlZCBvbiBiYW5kd2lkdGggY29uc3RyYWludHMuCgpodHRwczovL2xp
-c3RzLmZyZWVkZXNrdG9wLm9yZy9hcmNoaXZlcy9kcmktZGV2ZWwvMjAyMC1TZXB0ZW1iZXIvMjgw
-Mjc2Lmh0bWwKCkZvciBtb3JlIGluZm8uCgpTbywgbGV0J3MgcmV3cml0ZSB0aGlzIHVzaW5nIFZp
-bGxlJ3MgYWR2aWNlLgoKQ2hhbmdlcyBtYWRlIGZvciBzdGFibGUgYmFja3BvcnQ6CiogNS45IGRp
-ZG4ndCB1c2UgZHJtX2RwX2Rvd25zdHJlYW1fbWF4X2RvdGNsb2NrKCkgeWV0LCBzbyByZW1vdmUg
-dGhhdCAodGhlCiAgZml4IGlzIHN0aWxsIGltcG9ydGFudCByZWdhcmRsZXNzKQoKdjI6CiogVmls
-bGUgcG9pbnRlZCBvdXQgSSBtaXhlZCB1cCB0aGUgZG90Y2xvY2sgYW5kIHRoZSBsaW5rIHJhdGUu
-IFNvIGZpeCB0aGF0Li4uCiogLi4uYW5kIGFsc28gcmVuYW1lIGFsbCB0aGUgdmFyaWFibGVzIGlu
-IHRoaXMgZnVuY3Rpb24gdG8gYmUgbW9yZSBhcHByb3ByaWF0ZWx5CiAgbGFiZWxlZCBzbyBJIHN0
-b3AgbWl4aW5nIHRoZW0gdXAuCiogUmV1c2UgdGhlIGJwcCBmcm9tIHRoZSBjb25uZWN0b3IgZm9y
-IG5vdyB1bnRpbCB3ZSBoYXZlIGR5bmFtaWMgYnBwIHNlbGVjdGlvbi4KKiBVc2UgdXNlIERJVl9S
-T1VORF9VUCBmb3IgY2FsY3VsYXRpbmcgdGhlIG1vZGUgcmF0ZSBsaWtlIGk5MTUgZG9lcywgd2hp
-Y2ggd2UKICBzaG91bGQgYWxzbyBoYXZlIGJlZW4gZG9pbmcgZnJvbSB0aGUgc3RhcnQKClNpZ25l
-ZC1vZmYtYnk6IEx5dWRlIFBhdWwgPGx5dWRlQHJlZGhhdC5jb20+CkZpeGVzOiA0MDlkMzgxMzli
-NDIgKCJkcm0vbm91dmVhdS9rbXMvbnY1MC06IFVzZSBkb3duc3RyZWFtIERQIGNsb2NrIGxpbWl0
-cyBmb3IgbW9kZSB2YWxpZGF0aW9uIikKQ2M6IFZpbGxlIFN5cmrDpGzDpCA8dmlsbGUuc3lyamFs
-YUBsaW51eC5pbnRlbC5jb20+CkNjOiBMeXVkZSBQYXVsIDxseXVkZUByZWRoYXQuY29tPgpDYzog
-QmVuIFNrZWdncyA8YnNrZWdnc0ByZWRoYXQuY29tPgpTaWduZWQtb2ZmLWJ5OiBCZW4gU2tlZ2dz
-IDxic2tlZ2dzQHJlZGhhdC5jb20+Ci0tLQogZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVh
-dV9kcC5jIHwgMTIgKysrKysrKy0tLS0tCiAxIGZpbGUgY2hhbmdlZCwgNyBpbnNlcnRpb25zKCsp
-LCA1IGRlbGV0aW9ucygtKQoKZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25v
-dXZlYXVfZHAuYyBiL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfZHAuYwppbmRleCA0
-MDY4M2UxMjQ0YzNmLi45YzA2ZDFjYzQzOTA1IDEwMDY0NAotLS0gYS9kcml2ZXJzL2dwdS9kcm0v
-bm91dmVhdS9ub3V2ZWF1X2RwLmMKKysrIGIvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVh
-dV9kcC5jCkBAIC0xMTQsNyArMTE0LDggQEAgbnY1MF9kcF9tb2RlX3ZhbGlkKHN0cnVjdCBkcm1f
-Y29ubmVjdG9yICpjb25uZWN0b3IsCiAJCSAgIHVuc2lnbmVkICpvdXRfY2xvY2spCiB7CiAJY29u
-c3QgdW5zaWduZWQgbWluX2Nsb2NrID0gMjUwMDA7Ci0JdW5zaWduZWQgbWF4X2Nsb2NrLCBjbG9j
-ayA9IG1vZGUtPmNsb2NrOworCXVuc2lnbmVkIGludCBtYXhfcmF0ZSwgbW9kZV9yYXRlLCBjbG9j
-ayA9IG1vZGUtPmNsb2NrOworCWNvbnN0IHU4IGJwcCA9IGNvbm5lY3Rvci0+ZGlzcGxheV9pbmZv
-LmJwYyAqIDM7CiAKIAlpZiAobW9kZS0+ZmxhZ3MgJiBEUk1fTU9ERV9GTEFHX0lOVEVSTEFDRSAm
-JiAhb3V0cC0+Y2Fwcy5kcF9pbnRlcmxhY2UpCiAJCXJldHVybiBNT0RFX05PX0lOVEVSTEFDRTsK
-QEAgLTEyMiwxMiArMTIzLDEzIEBAIG52NTBfZHBfbW9kZV92YWxpZChzdHJ1Y3QgZHJtX2Nvbm5l
-Y3RvciAqY29ubmVjdG9yLAogCWlmICgobW9kZS0+ZmxhZ3MgJiBEUk1fTU9ERV9GTEFHXzNEX01B
-U0spID09IERSTV9NT0RFX0ZMQUdfM0RfRlJBTUVfUEFDS0lORykKIAkJY2xvY2sgKj0gMjsKIAot
-CW1heF9jbG9jayA9IG91dHAtPmRwLmxpbmtfbnIgKiBvdXRwLT5kcC5saW5rX2J3OwotCWNsb2Nr
-ID0gbW9kZS0+Y2xvY2sgKiAoY29ubmVjdG9yLT5kaXNwbGF5X2luZm8uYnBjICogMykgLyAxMDsK
-KwltYXhfcmF0ZSA9IG91dHAtPmRwLmxpbmtfbnIgKiBvdXRwLT5kcC5saW5rX2J3OworCW1vZGVf
-cmF0ZSA9IERJVl9ST1VORF9VUChjbG9jayAqIGJwcCwgOCk7CisJaWYgKG1vZGVfcmF0ZSA+IG1h
-eF9yYXRlKQorCQlyZXR1cm4gTU9ERV9DTE9DS19ISUdIOworCiAJaWYgKGNsb2NrIDwgbWluX2Ns
-b2NrKQogCQlyZXR1cm4gTU9ERV9DTE9DS19MT1c7Ci0JaWYgKGNsb2NrID4gbWF4X2Nsb2NrKQot
-CQlyZXR1cm4gTU9ERV9DTE9DS19ISUdIOwogCiAJaWYgKG91dF9jbG9jaykKIAkJKm91dF9jbG9j
-ayA9IGNsb2NrOwotLSAKMi4yOC4wCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fXwpOb3V2ZWF1IG1haWxpbmcgbGlzdApOb3V2ZWF1QGxpc3RzLmZyZWVkZXNr
-dG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL25v
-dXZlYXUK
+Overall I like this, just an inline question:
+
+On Tue, Oct 20, 2020 at 2:20 PM Thomas Zimmermann <tzimmermann@suse.de> wrote:
+
+> To do framebuffer updates, one needs memcpy from system memory and a
+> pointer-increment function. Add both interfaces with documentation.
+
+(...)
+> +/**
+> + * dma_buf_map_memcpy_to - Memcpy into dma-buf mapping
+> + * @dst:       The dma-buf mapping structure
+> + * @src:       The source buffer
+> + * @len:       The number of byte in src
+> + *
+> + * Copies data into a dma-buf mapping. The source buffer is in system
+> + * memory. Depending on the buffer's location, the helper picks the correct
+> + * method of accessing the memory.
+> + */
+> +static inline void dma_buf_map_memcpy_to(struct dma_buf_map *dst, const void *src, size_t len)
+> +{
+> +       if (dst->is_iomem)
+> +               memcpy_toio(dst->vaddr_iomem, src, len);
+> +       else
+> +               memcpy(dst->vaddr, src, len);
+> +}
+
+Are these going to be really big memcpy() operations?
+
+Some platforms have DMA offload engines that can perform memcpy(),
+drivers/dma, include/linux/dmaengine.h
+especially if the CPU doesn't really need to touch the contents
+and flush caches etc.
+An example exist in some MTD drivers that move large quantities of
+data off flash memory like this:
+drivers/mtd/nand/raw/cadence-nand-controller.c
+
+Notice that DMAengine and DMAbuf does not have much in common,
+the names can be deceiving.
+
+The value of this varies with the system architecture. It is not just
+a question about performance but also about power and the CPU
+being able to do other stuff in parallel for large transfers. So *when*
+to use this facility to accelerate memcpy() is a delicate question.
+
+What I'm after here is if these can be really big, do we want
+(in the long run, not now) open up to the idea to slot in
+hardware-accelerated memcpy() here?
+
+Yours,
+Linus Walleij
+_______________________________________________
+Nouveau mailing list
+Nouveau@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/nouveau
