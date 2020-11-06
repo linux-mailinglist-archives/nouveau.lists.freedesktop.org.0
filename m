@@ -1,23 +1,23 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id EE7BB2A90CF
-	for <lists+nouveau@lfdr.de>; Fri,  6 Nov 2020 08:56:19 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 237022A90D3
+	for <lists+nouveau@lfdr.de>; Fri,  6 Nov 2020 08:57:10 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 78BE56E2DC;
-	Fri,  6 Nov 2020 07:56:18 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9B2BC6E95B;
+	Fri,  6 Nov 2020 07:57:08 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from verein.lst.de (verein.lst.de [213.95.11.211])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9A9DD6E2DC
- for <nouveau@lists.freedesktop.org>; Fri,  6 Nov 2020 07:56:16 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id AE9196E972
+ for <nouveau@lists.freedesktop.org>; Fri,  6 Nov 2020 07:57:07 +0000 (UTC)
 Received: by verein.lst.de (Postfix, from userid 2407)
- id D368168B05; Fri,  6 Nov 2020 08:56:13 +0100 (CET)
-Date: Fri, 6 Nov 2020 08:56:13 +0100
+ id B130A68B05; Fri,  6 Nov 2020 08:57:05 +0100 (CET)
+Date: Fri, 6 Nov 2020 08:57:05 +0100
 From: Christoph Hellwig <hch@lst.de>
 To: Ralph Campbell <rcampbell@nvidia.com>
-Message-ID: <20201106075613.GB31341@lst.de>
+Message-ID: <20201106075705.GC31341@lst.de>
 References: <20201106005147.20113-1-rcampbell@nvidia.com>
  <20201106005147.20113-3-rcampbell@nvidia.com>
 MIME-Version: 1.0
@@ -50,14 +50,7 @@ Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, Nov 05, 2020 at 04:51:43PM -0800, Ralph Campbell wrote:
-> Move the definition of migrate_vma_collect_skip() to make it callable
-> by migrate_vma_collect_hole(). This helps make the next patch easier
-> to read.
-> 
-> Signed-off-by: Ralph Campbell <rcampbell@nvidia.com>
-
-Looks good,
+Looks good:
 
 Reviewed-by: Christoph Hellwig <hch@lst.de>
 _______________________________________________
