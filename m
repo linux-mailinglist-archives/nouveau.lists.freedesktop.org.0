@@ -1,52 +1,52 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 861662A9F06
-	for <lists+nouveau@lfdr.de>; Fri,  6 Nov 2020 22:26:57 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id D63692AA159
+	for <lists+nouveau@lfdr.de>; Sat,  7 Nov 2020 00:30:30 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 55D166E0E1;
-	Fri,  6 Nov 2020 21:26:54 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 48AB26EB51;
+	Fri,  6 Nov 2020 23:30:29 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from hqnvemgate25.nvidia.com (hqnvemgate25.nvidia.com
- [216.228.121.64])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7BBB26E0E1
- for <nouveau@lists.freedesktop.org>; Fri,  6 Nov 2020 21:26:53 +0000 (UTC)
-Received: from hqmail.nvidia.com (Not Verified[216.228.121.13]) by
- hqnvemgate25.nvidia.com (using TLS: TLSv1.2, AES256-SHA)
- id <B5fa5bf9a0000>; Fri, 06 Nov 2020 13:26:50 -0800
-Received: from rcampbell-dev.nvidia.com (172.20.13.39) by HQMAIL107.nvidia.com
- (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3;
- Fri, 6 Nov 2020 21:26:50 +0000
-To: Christoph Hellwig <hch@lst.de>
-References: <20201106005147.20113-1-rcampbell@nvidia.com>
- <20201106005147.20113-4-rcampbell@nvidia.com> <20201106080322.GE31341@lst.de>
-From: Ralph Campbell <rcampbell@nvidia.com>
-X-Nvconfidentiality: public
-Message-ID: <a7b8b90c-09b7-2009-0784-908b61f61ef2@nvidia.com>
-Date: Fri, 6 Nov 2020 13:26:50 -0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.2.2
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [216.205.24.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B4CA26EB51
+ for <nouveau@lists.freedesktop.org>; Fri,  6 Nov 2020 23:30:27 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1604705426;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=RqQN/DwASLSwBaj/2yQjpp86Hx5P0sidKJCWI09z4eM=;
+ b=RiEGwzgT3bcQXRQ9OM9C/Qu5YxzCjqfL/MUfwHmhAPEAj9AosXrMuIn0YJM+gomABP2Iue
+ z0P84jDUHgIvcTMrfrEnTWH+7p61T79Gk5tYwF+uhqvZJXSsgpFfV415EfdUIeCK8cKR4R
+ cNWpvVPh3Ko07zSpFsSCXe6WUW6VPY0=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-301-cF6Dcnd5Py-fvcnLLCC4_g-1; Fri, 06 Nov 2020 18:30:23 -0500
+X-MC-Unique: cF6Dcnd5Py-fvcnLLCC4_g-1
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
+ [10.5.11.15])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 338391868421;
+ Fri,  6 Nov 2020 23:30:22 +0000 (UTC)
+Received: from Whitewolf.lyude.net (ovpn-115-78.rdu2.redhat.com [10.10.115.78])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 8876162A15;
+ Fri,  6 Nov 2020 23:30:21 +0000 (UTC)
+From: Lyude Paul <lyude@redhat.com>
+To: gregkh@linuxfoundation.org, stable@vger.kernel.org,
+ nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org
+Date: Fri,  6 Nov 2020 18:30:13 -0500
+Message-Id: <20201106233016.2481179-1-lyude@redhat.com>
+In-Reply-To: <160459060724988@kroah.com>
+References: <160459060724988@kroah.com>
 MIME-Version: 1.0
-In-Reply-To: <20201106080322.GE31341@lst.de>
-Content-Language: en-US
-X-Originating-IP: [172.20.13.39]
-X-ClientProxiedBy: HQMAIL107.nvidia.com (172.20.187.13) To
- HQMAIL107.nvidia.com (172.20.187.13)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
- t=1604698011; bh=sJlHFFmh1FwR1Swhc5FD4UAS7VszQVSWU413enTyHH4=;
- h=Subject:To:CC:References:From:X-Nvconfidentiality:Message-ID:Date:
- User-Agent:MIME-Version:In-Reply-To:Content-Type:Content-Language:
- Content-Transfer-Encoding:X-Originating-IP:X-ClientProxiedBy;
- b=D+Hb3S3IoeXUGY43+BDjeVkVQHFWtOWYZpKP/V1fcty+B82xJWfBYCbrNIRLcwd1N
- xHNxqb4t8k2I+/J1kKnnLsF5xZkxtH+JOsq7sBETw85okpdAVkV2cTPaH+3yzHWUQV
- 0W2jqDyoUzaJGiP3EhfAPrA37NzlSLU284MbBQY8hK+AY5l7waP/BrPCk4U5cwfu4Q
- wclHRUc9XPKRGZCTe+xikUB3QYpdfkmjsK9FPg9F2qGpeePz9bHplQ7R35oDaNt1jg
- VQHbvDCCv9xArzhsLxgy1hTgi/8qcKTrJiwn4j7znBMrdvlFc6JKsA4ta7lEI7Yu/q
- ldJ63eePyEAMQ==
-Subject: Re: [Nouveau] [PATCH v3 3/6] mm: support THP migration to device
- private memory
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
+Subject: [Nouveau] [PATCH 0/2] drm/nouveau: Stable backport of DP clock
+ fixes for v5.9
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,32 +58,26 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Yang Shi <yang.shi@linux.alibaba.com>, Jason Gunthorpe <jgg@nvidia.com>,
- Alistair Popple <apopple@nvidia.com>, linux-kernel@vger.kernel.org,
- Bharata B Rao <bharata@linux.ibm.com>, linux-mm@kvack.org,
- Ben Skeggs <bskeggs@redhat.com>, linux-kselftest@vger.kernel.org,
- nouveau@lists.freedesktop.org, Andrew Morton <akpm@linux-foundation.org>,
- Zi Yan <ziy@nvidia.com>, Shuah Khan <shuah@kernel.org>,
- "Kirill A . Shutemov" <kirill.shutemov@linux.intel.com>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+Just a backport of the two patches for v5.9 that you'll want to apply.
+The first one was Cc'd to stable, but I forgot to Cc the second one as
+well.
 
-On 11/6/20 12:03 AM, Christoph Hellwig wrote:
-> I hate the extra pin count magic here.  IMHO we really need to finish
-> off the series to get rid of the extra references on the ZONE_DEVICE
-> pages first.
+Lyude Paul (2):
+  drm/nouveau/kms/nv50-: Get rid of bogus nouveau_conn_mode_valid()
+  drm/nouveau/kms/nv50-: Fix clock checking algorithm in
+    nv50_dp_mode_valid()
 
-First, thanks for the review comments.
+ drivers/gpu/drm/nouveau/nouveau_connector.c | 36 ++++++---------------
+ drivers/gpu/drm/nouveau/nouveau_dp.c        | 21 ++++++++----
+ 2 files changed, 24 insertions(+), 33 deletions(-)
 
-I don't like the extra refcount either, that is why I tried to fix that up
-before resending this series. However, you didn't like me just fixing the
-refcount only for device private pages and I don't know the dax/pmem code
-and peer-to-peer PCIe uses of ZONE_DEVICE pages well enough to say how
-long it will take me to fix all the use cases.
-So I wanted to make progress on the THP migration code in the mean time.
+-- 
+2.28.0
 
 _______________________________________________
 Nouveau mailing list
