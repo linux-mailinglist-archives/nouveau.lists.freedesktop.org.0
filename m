@@ -1,37 +1,32 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id C150B2AACB0
-	for <lists+nouveau@lfdr.de>; Sun,  8 Nov 2020 18:59:57 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5B5842AB354
+	for <lists+nouveau@lfdr.de>; Mon,  9 Nov 2020 10:14:27 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 31D4D895C1;
-	Sun,  8 Nov 2020 17:59:52 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id DAFE489182;
+	Mon,  9 Nov 2020 09:14:25 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from asavdk4.altibox.net (asavdk4.altibox.net [109.247.116.15])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3119C89590;
- Sun,  8 Nov 2020 17:59:50 +0000 (UTC)
-Received: from ravnborg.org (unknown [188.228.123.71])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by asavdk4.altibox.net (Postfix) with ESMTPS id 39F3B80538;
- Sun,  8 Nov 2020 18:59:47 +0100 (CET)
-Date: Sun, 8 Nov 2020 18:59:45 +0100
-From: Sam Ravnborg <sam@ravnborg.org>
-To: trix@redhat.com
-Message-ID: <20201108175945.GA1508644@ravnborg.org>
-References: <20201019163115.25814-1-trix@redhat.com>
- <20201019170641.GA963808@ravnborg.org>
+Received: from verein.lst.de (verein.lst.de [213.95.11.211])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id ACA7789182
+ for <nouveau@lists.freedesktop.org>; Mon,  9 Nov 2020 09:14:24 +0000 (UTC)
+Received: by verein.lst.de (Postfix, from userid 2407)
+ id BBE6E68B05; Mon,  9 Nov 2020 10:14:20 +0100 (CET)
+Date: Mon, 9 Nov 2020 10:14:15 +0100
+From: Christoph Hellwig <hch@lst.de>
+To: Ralph Campbell <rcampbell@nvidia.com>
+Message-ID: <20201109091415.GC28918@lst.de>
+References: <20201106005147.20113-1-rcampbell@nvidia.com>
+ <20201106005147.20113-4-rcampbell@nvidia.com> <20201106080322.GE31341@lst.de>
+ <a7b8b90c-09b7-2009-0784-908b61f61ef2@nvidia.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20201019170641.GA963808@ravnborg.org>
-X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.3 cv=VafZwmh9 c=1 sm=1 tr=0
- a=S6zTFyMACwkrwXSdXUNehg==:117 a=S6zTFyMACwkrwXSdXUNehg==:17
- a=kj9zAlcOel0A:10 a=20KFwNOVAAAA:8 a=7gkXJVJtAAAA:8
- a=fi46lLvuFyj7XQ7yi5sA:9 a=CjuIK1q_8ugA:10 a=E9Po1WZjFZOl8hwRPBS3:22
-Subject: Re: [Nouveau] [PATCH] drm: remove unneeded break
+In-Reply-To: <a7b8b90c-09b7-2009-0784-908b61f61ef2@nvidia.com>
+User-Agent: Mutt/1.5.17 (2007-11-01)
+Subject: Re: [Nouveau] [PATCH v3 3/6] mm: support THP migration to device
+ private memory
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -43,39 +38,38 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: airlied@linux.ie, nouveau@lists.freedesktop.org, gustavoars@kernel.org,
- dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- kraxel@redhat.com, airlied@redhat.com, spice-devel@lists.freedesktop.org,
- virtualization@lists.linux-foundation.org, bskeggs@redhat.com
+Cc: Yang Shi <yang.shi@linux.alibaba.com>, Jason Gunthorpe <jgg@nvidia.com>,
+ nouveau@lists.freedesktop.org, Alistair Popple <apopple@nvidia.com>,
+ linux-kernel@vger.kernel.org, Bharata B Rao <bharata@linux.ibm.com>,
+ linux-mm@kvack.org, Ben Skeggs <bskeggs@redhat.com>,
+ linux-kselftest@vger.kernel.org, Andrew Morton <akpm@linux-foundation.org>,
+ Zi Yan <ziy@nvidia.com>, Shuah Khan <shuah@kernel.org>,
+ Christoph Hellwig <hch@lst.de>,
+ "Kirill A . Shutemov" <kirill.shutemov@linux.intel.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi Tom
-On Mon, Oct 19, 2020 at 07:06:41PM +0200, Sam Ravnborg wrote:
-> Hi Tom
-> On Mon, Oct 19, 2020 at 09:31:15AM -0700, trix@redhat.com wrote:
-> > From: Tom Rix <trix@redhat.com>
-> > 
-> > A break is not needed if it is preceded by a return or break
-> > 
-> > Signed-off-by: Tom Rix <trix@redhat.com>
-> 
-> Looks good and builds with no warnings.
-> 
-> One of the diffs made me - "oh this looks wrong". But after I looked again
-> it was right and the resulting code is more readable - so good.
-> 
-> Acked-by: Sam Ravnborg <sam@ravnborg.org>
-> 
-> Was tempted to just apply to drm-misc-next but will give others the
-> opportunity to chime in.
+On Fri, Nov 06, 2020 at 01:26:50PM -0800, Ralph Campbell wrote:
+>
+> On 11/6/20 12:03 AM, Christoph Hellwig wrote:
+>> I hate the extra pin count magic here.  IMHO we really need to finish
+>> off the series to get rid of the extra references on the ZONE_DEVICE
+>> pages first.
+>
+> First, thanks for the review comments.
+>
+> I don't like the extra refcount either, that is why I tried to fix that up
+> before resending this series. However, you didn't like me just fixing the
+> refcount only for device private pages and I don't know the dax/pmem code
+> and peer-to-peer PCIe uses of ZONE_DEVICE pages well enough to say how
+> long it will take me to fix all the use cases.
+> So I wanted to make progress on the THP migration code in the mean time.
 
-Thanks.
-Now applied to drm-misc-next - will show up in -next in a week or so.
-
-	Sam
+I think P2P is pretty trivial, given that ZONE_DEVICE pages are used like
+a normal memory allocator.  DAX is the interesting case, any specific
+help that you need with that?
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
