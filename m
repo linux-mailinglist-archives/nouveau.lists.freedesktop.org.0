@@ -2,32 +2,71 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id CBDE02ACAF4
-	for <lists+nouveau@lfdr.de>; Tue, 10 Nov 2020 03:23:42 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 120502AE1DA
+	for <lists+nouveau@lfdr.de>; Tue, 10 Nov 2020 22:35:07 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2B8A78979F;
-	Tue, 10 Nov 2020 02:23:40 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 630F889BFF;
+	Tue, 10 Nov 2020 21:35:05 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A5D688986D;
- Mon,  9 Nov 2020 10:32:51 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 2DD92AF2F;
- Mon,  9 Nov 2020 10:32:50 +0000 (UTC)
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: daniel@ffwll.ch, airlied@linux.ie, chunkuang.hu@kernel.org,
- p.zabel@pengutronix.de, robdclark@gmail.com, sean@poorly.run
-Date: Mon,  9 Nov 2020 11:32:42 +0100
-Message-Id: <20201109103242.19544-3-tzimmermann@suse.de>
-X-Mailer: git-send-email 2.29.2
-In-Reply-To: <20201109103242.19544-1-tzimmermann@suse.de>
-References: <20201109103242.19544-1-tzimmermann@suse.de>
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [216.205.24.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5A4F089BFF
+ for <nouveau@lists.freedesktop.org>; Tue, 10 Nov 2020 21:35:04 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1605044102;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=Xco5MR5Qk4ViGXR8MB4YN33fpBdP7rUDXZM1fdJDUk8=;
+ b=HrjSEIgjDt+2eivgvii6+9QMM3WK5jAgqYbSb+WUZkK9Q4KnNkbgjuhptSqAJt/rTOMV/H
+ yGJZZoJLeSusOvyKxP7c7xUvA68WQMbIscI6hemhz0o34BclYe5buOIAECgRGzD4dLYaUc
+ KUK1kbsEeMmdSGCejJmVU6Elarc2zc4=
+Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com
+ [209.85.160.200]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-473-XNB8W6xTMCSN8yT5dNtc2g-1; Tue, 10 Nov 2020 16:35:00 -0500
+X-MC-Unique: XNB8W6xTMCSN8yT5dNtc2g-1
+Received: by mail-qt1-f200.google.com with SMTP id h26so5475731qtm.2
+ for <nouveau@lists.freedesktop.org>; Tue, 10 Nov 2020 13:34:59 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=Xco5MR5Qk4ViGXR8MB4YN33fpBdP7rUDXZM1fdJDUk8=;
+ b=R7Nnvkynyx7a25Gk8Y6YciiR/Tq9f96v3WslKHb8X+l6jpDCswfahh9i0Is5cIM3Re
+ Be/N8seCAlaARMDcHPISzTg1K1BoDIjOgnkbQST/ukstXAwnhS2/F9/wi4QVeqrBigGp
+ zY1HSgxSUUkcCC05ifYB7DcKEo7IHWVkb0/t/0BIyw0TJdcvP30RWtEOF0EZsp0DqpvI
+ I6UlZla5s+fDMoFTluUBjvu6/11KfqM/Lg8kV6UhAOz3LHvQ2p8ARVzJSEUnTSahg1m1
+ x4pi6I7k9SN2gm0Qtu2ndzu2asFRmiBFrwfuQxefoqj1aFWQVeg43z0GjJa6Tob/iumC
+ MGEQ==
+X-Gm-Message-State: AOAM53175F1gk053AthIdRiGj7MRbXIJp+RotSwR9BuBC0D3NT5V8Bju
+ 5r22BLHtY8BWkJKi1DieQwZuHuavb93YNazrhdZW/A+0j0F+HaIkOb8isVtbPUKqh6AH5DsCq6+
+ GGTwVwWVAnf7rZVZ2eVdjfHaCMg==
+X-Received: by 2002:a0c:b2c6:: with SMTP id d6mr22338495qvf.38.1605044099428; 
+ Tue, 10 Nov 2020 13:34:59 -0800 (PST)
+X-Google-Smtp-Source: ABdhPJw0D+HEx0un+9yFLy+7AyD44RvQuaShbmxhNf3XJhkQN8fTXGmoKcBKMCdixxjs/Z+5WBQCpQ==
+X-Received: by 2002:a0c:b2c6:: with SMTP id d6mr22338466qvf.38.1605044099083; 
+ Tue, 10 Nov 2020 13:34:59 -0800 (PST)
+Received: from xps13 ([2605:a601:a638:b301:4e7d:546f:e080:9054])
+ by smtp.gmail.com with ESMTPSA id o187sm38310qkb.120.2020.11.10.13.34.58
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 10 Nov 2020 13:34:58 -0800 (PST)
+Date: Tue, 10 Nov 2020 16:34:56 -0500
+From: Jeremy Cline <jcline@redhat.com>
+To: Karol Herbst <kherbst@redhat.com>
+Message-ID: <20201110213456.GB32222@xps13>
+References: <20201106021656.40743-1-jcline@redhat.com>
+ <20201106021656.40743-3-jcline@redhat.com>
+ <CACO55tsRGOH5rwy-40_6FY_9mGZKfkiFBoAT2jowbQYmaLGK8g@mail.gmail.com>
 MIME-Version: 1.0
-X-Mailman-Approved-At: Tue, 10 Nov 2020 02:23:39 +0000
-Subject: [Nouveau] [PATCH 2/2] drm/mediatek: Use struct dma_buf_map in GEM
- vmap ops
+In-Reply-To: <CACO55tsRGOH5rwy-40_6FY_9mGZKfkiFBoAT2jowbQYmaLGK8g@mail.gmail.com>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=jcline@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Disposition: inline
+Subject: Re: [Nouveau] [PATCH 2/3] drm/nouveau: manage nouveau_drm lifetime
+ with devres
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -39,127 +78,229 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Haneen Mohammed <hamohammed.sa@gmail.com>,
- =?UTF-8?q?Heiko=20St=C3=BCbner?= <heiko@sntech.de>,
- nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- Chris Wilson <chris@chris-wilson.co.uk>, Melissa Wen <melissa.srw@gmail.com>,
- Eric Anholt <eric@anholt.net>, Huang Rui <ray.huang@amd.com>,
- Gerd Hoffmann <kraxel@redhat.com>, Madhav Chauhan <madhav.chauhan@amd.com>,
- Sam Ravnborg <sam@ravnborg.org>, Sumit Semwal <sumit.semwal@linaro.org>,
- Emil Velikov <emil.velikov@collabora.com>, Rob Herring <robh@kernel.org>,
- xen-devel@lists.xenproject.org, lima@lists.freedesktop.org,
- Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
- linux-rockchip@lists.infradead.org, amd-gfx@lists.freedesktop.org,
- Steven Price <steven.price@arm.com>, Jason Gunthorpe <jgg@ziepe.ca>,
- Luben Tuikov <luben.tuikov@amd.com>, Ben Skeggs <bskeggs@redhat.com>,
- Russell King <linux+etnaviv@armlinux.org.uk>, Dave Airlie <airlied@redhat.com>,
- Marek Szyprowski <m.szyprowski@samsung.com>,
- Alyssa Rosenzweig <alyssa.rosenzweig@collabora.com>,
- linux-arm-msm@vger.kernel.org,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- etnaviv@lists.freedesktop.org, Maxime Ripard <mripard@kernel.org>,
- Hans de Goede <hdegoede@redhat.com>,
- Christian Gmeiner <christian.gmeiner@gmail.com>,
- spice-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
- Arunpravin <apaneers@amd.com>, linux-arm-kernel@lists.infradead.org,
- Rodrigo Siqueira <rodrigosiqueiramelo@gmail.com>,
- Tomeu Vizoso <tomeu.vizoso@collabora.com>, Sandy Huang <hjc@rock-chips.com>,
- Nirmoy Das <Nirmoy.Das@amd.com>, Qiang Yu <yuq825@gmail.com>,
- Alex Deucher <alexander.deucher@amd.com>, freedreno@lists.freedesktop.org,
- =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
- Lucas Stach <l.stach@pengutronix.de>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: David Airlie <airlied@linux.ie>, nouveau <nouveau@lists.freedesktop.org>,
+ LKML <linux-kernel@vger.kernel.org>,
+ dri-devel <dri-devel@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>,
+ Daniel Vetter <daniel@ffwll.ch>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Rml4ZXMgYSBidWlsZCBmYWlsdXJlIHdpdGggbWVkaWF0ZWsuCgpUaGlzIGNoYW5nZSB3YXMgc3Vw
-cG9zZWQgdG8gYmUgcGFydCBvZiBjb21taXQgNDlhM2Y1MWRmZWVlICgiZHJtL2dlbToKVXNlIHN0
-cnVjdCBkbWFfYnVmX21hcCBpbiBHRU0gdm1hcCBvcHMgYW5kIGNvbnZlcnQgR0VNIGJhY2tlbmRz
-IiksIGJ1dAptZWRpYXRlayB3YXMgZm9yZ290dGVuLgoKU2lnbmVkLW9mZi1ieTogVGhvbWFzIFpp
-bW1lcm1hbm4gPHR6aW1tZXJtYW5uQHN1c2UuZGU+CkZpeGVzOiA0OWEzZjUxZGZlZWUgKCJkcm0v
-Z2VtOiBVc2Ugc3RydWN0IGRtYV9idWZfbWFwIGluIEdFTSB2bWFwIG9wcyBhbmQgY29udmVydCBH
-RU0gYmFja2VuZHMiKQpDYzogVGhvbWFzIFppbW1lcm1hbm4gPHR6aW1tZXJtYW5uQHN1c2UuZGU+
-CkNjOiBDaHJpc3RpYW4gS8O2bmlnIDxjaHJpc3RpYW4ua29lbmlnQGFtZC5jb20+CkNjOiBEYXZp
-ZCBBaXJsaWUgPGFpcmxpZWRAbGludXguaWU+CkNjOiBEYW5pZWwgVmV0dGVyIDxkYW5pZWxAZmZ3
-bGwuY2g+CkNjOiBNYWFydGVuIExhbmtob3JzdCA8bWFhcnRlbi5sYW5raG9yc3RAbGludXguaW50
-ZWwuY29tPgpDYzogTWF4aW1lIFJpcGFyZCA8bXJpcGFyZEBrZXJuZWwub3JnPgpDYzogRGF2ZSBB
-aXJsaWUgPGFpcmxpZWRAcmVkaGF0LmNvbT4KQ2M6IEx1Y2FzIFN0YWNoIDxsLnN0YWNoQHBlbmd1
-dHJvbml4LmRlPgpDYzogUnVzc2VsbCBLaW5nIDxsaW51eCtldG5hdml2QGFybWxpbnV4Lm9yZy51
-az4KQ2M6IENocmlzdGlhbiBHbWVpbmVyIDxjaHJpc3RpYW4uZ21laW5lckBnbWFpbC5jb20+CkNj
-OiBRaWFuZyBZdSA8eXVxODI1QGdtYWlsLmNvbT4KQ2M6IEJlbiBTa2VnZ3MgPGJza2VnZ3NAcmVk
-aGF0LmNvbT4KQ2M6IFJvYiBIZXJyaW5nIDxyb2JoQGtlcm5lbC5vcmc+CkNjOiBUb21ldSBWaXpv
-c28gPHRvbWV1LnZpem9zb0Bjb2xsYWJvcmEuY29tPgpDYzogU3RldmVuIFByaWNlIDxzdGV2ZW4u
-cHJpY2VAYXJtLmNvbT4KQ2M6IEFseXNzYSBSb3Nlbnp3ZWlnIDxhbHlzc2Eucm9zZW56d2VpZ0Bj
-b2xsYWJvcmEuY29tPgpDYzogR2VyZCBIb2ZmbWFubiA8a3JheGVsQHJlZGhhdC5jb20+CkNjOiBB
-bGV4IERldWNoZXIgPGFsZXhhbmRlci5kZXVjaGVyQGFtZC5jb20+CkNjOiAiQ2hyaXN0aWFuIEvD
-tm5pZyIgPGNocmlzdGlhbi5rb2VuaWdAYW1kLmNvbT4KQ2M6IFNhbmR5IEh1YW5nIDxoamNAcm9j
-ay1jaGlwcy5jb20+CkNjOiAiSGVpa28gU3TDvGJuZXIiIDxoZWlrb0BzbnRlY2guZGU+CkNjOiBI
-YW5zIGRlIEdvZWRlIDxoZGVnb2VkZUByZWRoYXQuY29tPgpDYzogU2VhbiBQYXVsIDxzZWFuQHBv
-b3JseS5ydW4+CkNjOiBFcmljIEFuaG9sdCA8ZXJpY0BhbmhvbHQubmV0PgpDYzogUm9kcmlnbyBT
-aXF1ZWlyYSA8cm9kcmlnb3NpcXVlaXJhbWVsb0BnbWFpbC5jb20+CkNjOiBNZWxpc3NhIFdlbiA8
-bWVsaXNzYS5zcndAZ21haWwuY29tPgpDYzogSGFuZWVuIE1vaGFtbWVkIDxoYW1vaGFtbWVkLnNh
-QGdtYWlsLmNvbT4KQ2M6IE9sZWtzYW5kciBBbmRydXNoY2hlbmtvIDxvbGVrc2FuZHJfYW5kcnVz
-aGNoZW5rb0BlcGFtLmNvbT4KQ2M6IFN1bWl0IFNlbXdhbCA8c3VtaXQuc2Vtd2FsQGxpbmFyby5v
-cmc+CkNjOiBFbWlsIFZlbGlrb3YgPGVtaWwudmVsaWtvdkBjb2xsYWJvcmEuY29tPgpDYzogTWFy
-ZWsgU3p5cHJvd3NraSA8bS5zenlwcm93c2tpQHNhbXN1bmcuY29tPgpDYzogQXJ1bnByYXZpbiA8
-YXBhbmVlcnNAYW1kLmNvbT4KQ2M6IEh1YW5nIFJ1aSA8cmF5Lmh1YW5nQGFtZC5jb20+CkNjOiBM
-dWJlbiBUdWlrb3YgPGx1YmVuLnR1aWtvdkBhbWQuY29tPgpDYzogTWFkaGF2IENoYXVoYW4gPG1h
-ZGhhdi5jaGF1aGFuQGFtZC5jb20+CkNjOiBOaXJtb3kgRGFzIDxOaXJtb3kuRGFzQGFtZC5jb20+
-CkNjOiBKYXNvbiBHdW50aG9ycGUgPGpnZ0B6aWVwZS5jYT4KQ2M6IFNhbSBSYXZuYm9yZyA8c2Ft
-QHJhdm5ib3JnLm9yZz4KQ2M6IENocmlzIFdpbHNvbiA8Y2hyaXNAY2hyaXMtd2lsc29uLmNvLnVr
-PgpDYzogZHJpLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpDYzogZXRuYXZpdkBsaXN0cy5m
-cmVlZGVza3RvcC5vcmcKQ2M6IGxpbWFAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCkNjOiBub3V2ZWF1
-QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpDYzogdmlydHVhbGl6YXRpb25AbGlzdHMubGludXgtZm91
-bmRhdGlvbi5vcmcKQ2M6IHNwaWNlLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpDYzogYW1k
-LWdmeEBsaXN0cy5mcmVlZGVza3RvcC5vcmcKQ2M6IGxpbnV4LWFybS1rZXJuZWxAbGlzdHMuaW5m
-cmFkZWFkLm9yZwpDYzogbGludXgtcm9ja2NoaXBAbGlzdHMuaW5mcmFkZWFkLm9yZwpDYzogeGVu
-LWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCi0tLQogZHJpdmVycy9ncHUvZHJtL21lZGlhdGVr
-L210a19kcm1fZ2VtLmMgfCAyMCArKysrKysrKysrKystLS0tLS0tLQogZHJpdmVycy9ncHUvZHJt
-L21lZGlhdGVrL210a19kcm1fZ2VtLmggfCAgNCArKy0tCiAyIGZpbGVzIGNoYW5nZWQsIDE0IGlu
-c2VydGlvbnMoKyksIDEwIGRlbGV0aW9ucygtKQoKZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2Ry
-bS9tZWRpYXRlay9tdGtfZHJtX2dlbS5jIGIvZHJpdmVycy9ncHUvZHJtL21lZGlhdGVrL210a19k
-cm1fZ2VtLmMKaW5kZXggY2RkMWE2ZTYxNTY0Li4yOGEyZWUxMzM2ZWYgMTAwNjQ0Ci0tLSBhL2Ry
-aXZlcnMvZ3B1L2RybS9tZWRpYXRlay9tdGtfZHJtX2dlbS5jCisrKyBiL2RyaXZlcnMvZ3B1L2Ry
-bS9tZWRpYXRlay9tdGtfZHJtX2dlbS5jCkBAIC0yNDAsMjMgKzI0MCwyNSBAQCBzdHJ1Y3QgZHJt
-X2dlbV9vYmplY3QgKm10a19nZW1fcHJpbWVfaW1wb3J0X3NnX3RhYmxlKHN0cnVjdCBkcm1fZGV2
-aWNlICpkZXYsCiAJcmV0dXJuICZtdGtfZ2VtLT5iYXNlOwogfQogCi12b2lkICptdGtfZHJtX2dl
-bV9wcmltZV92bWFwKHN0cnVjdCBkcm1fZ2VtX29iamVjdCAqb2JqKQoraW50IG10a19kcm1fZ2Vt
-X3ByaW1lX3ZtYXAoc3RydWN0IGRybV9nZW1fb2JqZWN0ICpvYmosIHN0cnVjdCBkbWFfYnVmX21h
-cCAqbWFwKQogewogCXN0cnVjdCBtdGtfZHJtX2dlbV9vYmogKm10a19nZW0gPSB0b19tdGtfZ2Vt
-X29iaihvYmopOwotCXN0cnVjdCBzZ190YWJsZSAqc2d0OworCXN0cnVjdCBzZ190YWJsZSAqc2d0
-ID0gTlVMTDsKIAl1bnNpZ25lZCBpbnQgbnBhZ2VzOwogCiAJaWYgKG10a19nZW0tPmt2YWRkcikK
-LQkJcmV0dXJuIG10a19nZW0tPmt2YWRkcjsKKwkJZ290byBvdXQ7CiAKIAlzZ3QgPSBtdGtfZ2Vt
-X3ByaW1lX2dldF9zZ190YWJsZShvYmopOwogCWlmIChJU19FUlIoc2d0KSkKLQkJcmV0dXJuIE5V
-TEw7CisJCXJldHVybiBQVFJfRVJSKHNndCk7CiAKIAlucGFnZXMgPSBvYmotPnNpemUgPj4gUEFH
-RV9TSElGVDsKIAltdGtfZ2VtLT5wYWdlcyA9IGtjYWxsb2MobnBhZ2VzLCBzaXplb2YoKm10a19n
-ZW0tPnBhZ2VzKSwgR0ZQX0tFUk5FTCk7Ci0JaWYgKCFtdGtfZ2VtLT5wYWdlcykKLQkJZ290byBv
-dXQ7CisJaWYgKCFtdGtfZ2VtLT5wYWdlcykgeworCQlrZnJlZShzZ3QpOworCQlyZXR1cm4gLUVO
-T01FTTsKKwl9CiAKIAlkcm1fcHJpbWVfc2dfdG9fcGFnZV9hZGRyX2FycmF5cyhzZ3QsIG10a19n
-ZW0tPnBhZ2VzLCBOVUxMLCBucGFnZXMpOwogCkBAIC0yNjUsMTMgKzI2NywxNSBAQCB2b2lkICpt
-dGtfZHJtX2dlbV9wcmltZV92bWFwKHN0cnVjdCBkcm1fZ2VtX29iamVjdCAqb2JqKQogCiBvdXQ6
-CiAJa2ZyZWUoc2d0KTsKKwlkbWFfYnVmX21hcF9zZXRfdmFkZHIobWFwLCBtdGtfZ2VtLT5rdmFk
-ZHIpOwogCi0JcmV0dXJuIG10a19nZW0tPmt2YWRkcjsKKwlyZXR1cm4gMDsKIH0KIAotdm9pZCBt
-dGtfZHJtX2dlbV9wcmltZV92dW5tYXAoc3RydWN0IGRybV9nZW1fb2JqZWN0ICpvYmosIHZvaWQg
-KnZhZGRyKQordm9pZCBtdGtfZHJtX2dlbV9wcmltZV92dW5tYXAoc3RydWN0IGRybV9nZW1fb2Jq
-ZWN0ICpvYmosIHN0cnVjdCBkbWFfYnVmX21hcCAqbWFwKQogewogCXN0cnVjdCBtdGtfZHJtX2dl
-bV9vYmogKm10a19nZW0gPSB0b19tdGtfZ2VtX29iaihvYmopOworCXZvaWQgKnZhZGRyID0gbWFw
-LT52YWRkcjsKIAogCWlmICghbXRrX2dlbS0+cGFnZXMpCiAJCXJldHVybjsKZGlmZiAtLWdpdCBh
-L2RyaXZlcnMvZ3B1L2RybS9tZWRpYXRlay9tdGtfZHJtX2dlbS5oIGIvZHJpdmVycy9ncHUvZHJt
-L21lZGlhdGVrL210a19kcm1fZ2VtLmgKaW5kZXggZmY5Zjk3NmQ5ODA3Li42ZGE1Y2NiNGI5MzMg
-MTAwNjQ0Ci0tLSBhL2RyaXZlcnMvZ3B1L2RybS9tZWRpYXRlay9tdGtfZHJtX2dlbS5oCisrKyBi
-L2RyaXZlcnMvZ3B1L2RybS9tZWRpYXRlay9tdGtfZHJtX2dlbS5oCkBAIC00NSw3ICs0NSw3IEBA
-IGludCBtdGtfZHJtX2dlbV9tbWFwX2J1ZihzdHJ1Y3QgZHJtX2dlbV9vYmplY3QgKm9iaiwKIHN0
-cnVjdCBzZ190YWJsZSAqbXRrX2dlbV9wcmltZV9nZXRfc2dfdGFibGUoc3RydWN0IGRybV9nZW1f
-b2JqZWN0ICpvYmopOwogc3RydWN0IGRybV9nZW1fb2JqZWN0ICptdGtfZ2VtX3ByaW1lX2ltcG9y
-dF9zZ190YWJsZShzdHJ1Y3QgZHJtX2RldmljZSAqZGV2LAogCQkJc3RydWN0IGRtYV9idWZfYXR0
-YWNobWVudCAqYXR0YWNoLCBzdHJ1Y3Qgc2dfdGFibGUgKnNnKTsKLXZvaWQgKm10a19kcm1fZ2Vt
-X3ByaW1lX3ZtYXAoc3RydWN0IGRybV9nZW1fb2JqZWN0ICpvYmopOwotdm9pZCBtdGtfZHJtX2dl
-bV9wcmltZV92dW5tYXAoc3RydWN0IGRybV9nZW1fb2JqZWN0ICpvYmosIHZvaWQgKnZhZGRyKTsK
-K2ludCBtdGtfZHJtX2dlbV9wcmltZV92bWFwKHN0cnVjdCBkcm1fZ2VtX29iamVjdCAqb2JqLCBz
-dHJ1Y3QgZG1hX2J1Zl9tYXAgKm1hcCk7Cit2b2lkIG10a19kcm1fZ2VtX3ByaW1lX3Z1bm1hcChz
-dHJ1Y3QgZHJtX2dlbV9vYmplY3QgKm9iaiwgc3RydWN0IGRtYV9idWZfbWFwICptYXApOwogCiAj
-ZW5kaWYKLS0gCjIuMjkuMgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX18KTm91dmVhdSBtYWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5v
-cmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
-Cg==
+On Fri, Nov 06, 2020 at 02:31:44PM +0100, Karol Herbst wrote:
+> On Fri, Nov 6, 2020 at 3:17 AM Jeremy Cline <jcline@redhat.com> wrote:
+> >
+> > Make use of the devm_drm_dev_alloc() API to bind the lifetime of
+> > nouveau_drm structure to the drm_device. This is important because a
+> > reference to nouveau_drm is accessible from drm_device, which is
+> > provided to a number of DRM layer callbacks that can run after the
+> > deallocation of nouveau_drm currently occurs.
+> >
+> > Signed-off-by: Jeremy Cline <jcline@redhat.com>
+> > ---
+> >  drivers/gpu/drm/nouveau/nouveau_drm.c | 44 ++++++++++++---------------
+> >  drivers/gpu/drm/nouveau/nouveau_drv.h | 10 ++++--
+> >  2 files changed, 26 insertions(+), 28 deletions(-)
+> >
+> > diff --git a/drivers/gpu/drm/nouveau/nouveau_drm.c b/drivers/gpu/drm/nouveau/nouveau_drm.c
+> > index bc6f51bf23b7..f750c25e92f9 100644
+> > --- a/drivers/gpu/drm/nouveau/nouveau_drm.c
+> > +++ b/drivers/gpu/drm/nouveau/nouveau_drm.c
+> > @@ -30,9 +30,11 @@
+> >  #include <linux/vga_switcheroo.h>
+> >  #include <linux/mmu_notifier.h>
+> >
+> > +#include <drm/drm_drv.h>
+> >  #include <drm/drm_crtc_helper.h>
+> >  #include <drm/drm_ioctl.h>
+> >  #include <drm/drm_vblank.h>
+> > +#include <drm/drm_managed.h>
+> >
+> >  #include <core/gpuobj.h>
+> >  #include <core/option.h>
+> > @@ -532,13 +534,8 @@ nouveau_parent = {
+> >  static int
+> >  nouveau_drm_device_init(struct drm_device *dev)
+> >  {
+> > -       struct nouveau_drm *drm;
+> >         int ret;
+> > -
+> > -       if (!(drm = kzalloc(sizeof(*drm), GFP_KERNEL)))
+> > -               return -ENOMEM;
+> > -       dev->dev_private = drm;
+> > -       drm->dev = dev;
+> > +       struct nouveau_drm *drm = nouveau_drm(dev);
+> >
+> >         nvif_parent_ctor(&nouveau_parent, &drm->parent);
+> >         drm->master.base.object.parent = &drm->parent;
+> > @@ -620,7 +617,6 @@ nouveau_drm_device_init(struct drm_device *dev)
+> >         nouveau_cli_fini(&drm->master);
+> >  fail_alloc:
+> >         nvif_parent_dtor(&drm->parent);
+> > -       kfree(drm);
+> >         return ret;
+> >  }
+> >
+> > @@ -654,7 +650,6 @@ nouveau_drm_device_fini(struct drm_device *dev)
+> >         nouveau_cli_fini(&drm->client);
+> >         nouveau_cli_fini(&drm->master);
+> >         nvif_parent_dtor(&drm->parent);
+> > -       kfree(drm);
+> >  }
+> >
+> >  /*
+> > @@ -720,6 +715,7 @@ static int nouveau_drm_probe(struct pci_dev *pdev,
+> >  {
+> >         struct nvkm_device *device;
+> >         struct drm_device *drm_dev;
+> > +       struct nouveau_drm *nv_dev;
+> >         int ret;
+> >
+> >         if (vga_switcheroo_client_probe_defer(pdev))
+> > @@ -750,15 +746,16 @@ static int nouveau_drm_probe(struct pci_dev *pdev,
+> >         if (nouveau_atomic)
+> >                 driver_pci.driver_features |= DRIVER_ATOMIC;
+> >
+> > -       drm_dev = drm_dev_alloc(&driver_pci, &pdev->dev);
+> > -       if (IS_ERR(drm_dev)) {
+> > -               ret = PTR_ERR(drm_dev);
+> > +       nv_dev = devm_drm_dev_alloc(&pdev->dev, &driver_stub, typeof(*nv_dev), drm_dev);
+> > +       if (IS_ERR(nv_dev)) {
+> > +               ret = PTR_ERR(nv_dev);
+> >                 goto fail_nvkm;
+> >         }
+> > +       drm_dev = nouveau_to_drm_dev(nv_dev);
+> >
+> >         ret = pci_enable_device(pdev);
+> >         if (ret)
+> > -               goto fail_drm;
+> > +               goto fail_nvkm;
+> >
+> >         drm_dev->pdev = pdev;
+> >         pci_set_drvdata(pdev, drm_dev);
+> > @@ -778,8 +775,6 @@ static int nouveau_drm_probe(struct pci_dev *pdev,
+> >         nouveau_drm_device_fini(drm_dev);
+> >  fail_pci:
+> >         pci_disable_device(pdev);
+> > -fail_drm:
+> > -       drm_dev_put(drm_dev);
+> 
+> it sounded like that when using devm_drm_dev_alloc we still have an
+> initial refcount of 1, so at least in this regard nothing changed so I
+> am wondering why this change is necessary and if the reason is
+> unrelated it might make sense to move it into its own patch.
+> 
+
+Okay, after a more thorough investigation and testing with
+drm.debug=0x201 to trace through the allocations and de-allocations,
+everything is indeed cleaned up, both here when a fake failure is
+injected, and through the normal removal path.
+
+I believe it would be problematic if nouveau was presented the device,
+called devm_drm_dev_alloc(), failed later on in the probe, and then a
+different driver claimed the device. It looks like that's not a problem
+in practice, but I'm not familiar enough with all the layers to be 100%
+confident I'm reading everything right. As far as I can tell, amdgpu
+isn't explicitly dropping the reference either.
+
+> >  fail_nvkm:
+> >         nvkm_device_del(&device);
+> >         return ret;
+> > @@ -799,7 +794,6 @@ nouveau_drm_device_remove(struct drm_device *dev)
+> >         device = nvkm_device_find(client->device);
+> >
+> >         nouveau_drm_device_fini(dev);
+> > -       drm_dev_put(dev);
+> >         nvkm_device_del(&device);
+> >  }
+> >
+> > @@ -1285,7 +1279,8 @@ nouveau_platform_device_create(const struct nvkm_device_tegra_func *func,
+> >                                struct platform_device *pdev,
+> >                                struct nvkm_device **pdevice)
+> >  {
+> > -       struct drm_device *drm;
+> > +       struct nouveau_drm *nv_dev;
+> > +       struct drm_device *drm_dev;
+> >         int err;
+> >
+> >         err = nvkm_device_tegra_new(func, pdev, nouveau_config, nouveau_debug,
+> > @@ -1293,22 +1288,21 @@ nouveau_platform_device_create(const struct nvkm_device_tegra_func *func,
+> >         if (err)
+> >                 goto err_free;
+> >
+> > -       drm = drm_dev_alloc(&driver_platform, &pdev->dev);
+> > -       if (IS_ERR(drm)) {
+> > -               err = PTR_ERR(drm);
+> > +       nv_dev = devm_drm_dev_alloc(&pdev->dev, &driver_platform, typeof(*nv_dev), drm_dev);
+> > +       if (IS_ERR(nv_dev)) {
+> > +               err = PTR_ERR(nv_dev);
+> >                 goto err_free;
+> >         }
+> > +       drm_dev = nouveau_to_drm_dev(nv_dev);
+> >
+> > -       err = nouveau_drm_device_init(drm);
+> > +       err = nouveau_drm_device_init(drm_dev);
+> >         if (err)
+> > -               goto err_put;
+> > +               goto err_free;
+> >
+> > -       platform_set_drvdata(pdev, drm);
+> > +       platform_set_drvdata(pdev, drm_dev);
+> >
+> > -       return drm;
+> > +       return drm_dev;
+> >
+> > -err_put:
+> > -       drm_dev_put(drm);
+> >  err_free:
+> >         nvkm_device_del(pdevice);
+> >
+> > diff --git a/drivers/gpu/drm/nouveau/nouveau_drv.h b/drivers/gpu/drm/nouveau/nouveau_drv.h
+> > index 3e2920a10099..cf6c33e52a5c 100644
+> > --- a/drivers/gpu/drm/nouveau/nouveau_drv.h
+> > +++ b/drivers/gpu/drm/nouveau/nouveau_drv.h
+> > @@ -137,7 +137,11 @@ struct nouveau_drm {
+> >         struct nvif_parent parent;
+> >         struct nouveau_cli master;
+> >         struct nouveau_cli client;
+> > -       struct drm_device *dev;
+> > +
+> > +       /**
+> > +        * @drm_dev: The parent DRM device object.
+> > +        */
+> > +       struct drm_device drm_dev;
+> >
+> >         struct list_head clients;
+> >
+> > @@ -237,7 +241,7 @@ struct nouveau_drm {
+> >  static inline struct nouveau_drm *
+> >  nouveau_drm(struct drm_device *dev)
+> >  {
+> > -       return dev->dev_private;
+> > +       return container_of(dev, struct nouveau_drm, drm_dev);
+> >  }
+> >
+> >  /**
+> > @@ -251,7 +255,7 @@ nouveau_drm(struct drm_device *dev)
+> >   */
+> >  static inline struct drm_device *
+> >  nouveau_to_drm_dev(struct nouveau_drm *nv_dev) {
+> > -       return nv_dev->dev;
+> > +       return &nv_dev->drm_dev;
+> >  }
+> >
+> >  /**
+> > --
+> > 2.28.0
+> >
+> > _______________________________________________
+> > Nouveau mailing list
+> > Nouveau@lists.freedesktop.org
+> > https://lists.freedesktop.org/mailman/listinfo/nouveau
+> >
+> 
+
+_______________________________________________
+Nouveau mailing list
+Nouveau@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/nouveau
