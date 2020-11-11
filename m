@@ -1,69 +1,54 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1027C2AF75A
-	for <lists+nouveau@lfdr.de>; Wed, 11 Nov 2020 18:25:53 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id A179B2AFBB5
+	for <lists+nouveau@lfdr.de>; Thu, 12 Nov 2020 00:38:50 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 852E789E36;
-	Wed, 11 Nov 2020 17:25:51 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id BCF3889FC0;
+	Wed, 11 Nov 2020 23:38:47 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mga17.intel.com (mga17.intel.com [192.55.52.151])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 30D036E06B;
- Wed, 11 Nov 2020 16:27:05 +0000 (UTC)
-IronPort-SDR: Pw2K36XVD60EMWUcUNa4SgvZW/A23FKoSbiZn8UfzHHVlzf/XDSqBX3jX1mZ2Wa3pft2ApPa39
- I5xng8S4bKGQ==
-X-IronPort-AV: E=McAfee;i="6000,8403,9802"; a="150021556"
-X-IronPort-AV: E=Sophos;i="5.77,470,1596524400"; d="scan'208";a="150021556"
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from orsmga008.jf.intel.com ([10.7.209.65])
- by fmsmga107.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 11 Nov 2020 08:27:04 -0800
-IronPort-SDR: wEawjMLNdQih0DPn/Y2oZuuFcv8k9fEZvMgYY3MxZrBU749daBVds5HJHU77HYiKKGdr9Hoi/r
- je80tusiCogQ==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.77,470,1596524400"; d="scan'208";a="354891016"
-Received: from orsmsx606.amr.corp.intel.com ([10.22.229.19])
- by orsmga008.jf.intel.com with ESMTP; 11 Nov 2020 08:27:03 -0800
-Received: from orsmsx610.amr.corp.intel.com (10.22.229.23) by
- ORSMSX606.amr.corp.intel.com (10.22.229.19) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.1713.5; Wed, 11 Nov 2020 08:27:03 -0800
-Received: from orsmsx611.amr.corp.intel.com (10.22.229.24) by
- ORSMSX610.amr.corp.intel.com (10.22.229.23) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.1713.5; Wed, 11 Nov 2020 08:27:03 -0800
-Received: from orsmsx611.amr.corp.intel.com ([10.22.229.24]) by
- ORSMSX611.amr.corp.intel.com ([10.22.229.24]) with mapi id 15.01.1713.004;
- Wed, 11 Nov 2020 08:27:02 -0800
-From: "Ruhl, Michael J" <michael.j.ruhl@intel.com>
-To: Thomas Zimmermann <tzimmermann@suse.de>, "bskeggs@redhat.com"
- <bskeggs@redhat.com>, "airlied@linux.ie" <airlied@linux.ie>,
- "daniel@ffwll.ch" <daniel@ffwll.ch>, "christian.koenig@amd.com"
- <christian.koenig@amd.com>
-Thread-Topic: [PATCH] drm/nouveau: Fix out-of-bounds access when deferencing
- MMU type
-Thread-Index: AQHWt2aSn1GTeNlCkEeQC226gW12GqnBfJcggAHhVID//5Re4A==
-Date: Wed, 11 Nov 2020 16:27:02 +0000
-Message-ID: <b87d5a2cce4941fe86e89d97bd6b2be4@intel.com>
-References: <20201110133655.13174-1-tzimmermann@suse.de>
- <85758a6215f74917aee81b18d037fb82@intel.com>
- <f4cedda2-48f6-565c-4154-0975a2d119a0@suse.de>
-In-Reply-To: <f4cedda2-48f6-565c-4154-0975a2d119a0@suse.de>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-dlp-product: dlpe-windows
-dlp-reaction: no-action
-dlp-version: 11.5.1.3
-x-originating-ip: [10.1.200.100]
+Received: from hqnvemgate24.nvidia.com (hqnvemgate24.nvidia.com
+ [216.228.121.143])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9951689FC0
+ for <nouveau@lists.freedesktop.org>; Wed, 11 Nov 2020 23:38:46 +0000 (UTC)
+Received: from hqmail.nvidia.com (Not Verified[216.228.121.13]) by
+ hqnvemgate24.nvidia.com (using TLS: TLSv1.2, AES256-SHA)
+ id <B5fac760c0000>; Wed, 11 Nov 2020 15:38:52 -0800
+Received: from rcampbell-dev.nvidia.com (172.20.13.39) by HQMAIL107.nvidia.com
+ (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3;
+ Wed, 11 Nov 2020 23:38:42 +0000
+To: Christoph Hellwig <hch@lst.de>
+References: <20201106005147.20113-1-rcampbell@nvidia.com>
+ <20201106005147.20113-4-rcampbell@nvidia.com> <20201106080322.GE31341@lst.de>
+ <a7b8b90c-09b7-2009-0784-908b61f61ef2@nvidia.com>
+ <20201109091415.GC28918@lst.de>
+X-Nvconfidentiality: public
+From: Ralph Campbell <rcampbell@nvidia.com>
+Message-ID: <bbf1f0df-85f3-5887-050e-beb2aad750f2@nvidia.com>
+Date: Wed, 11 Nov 2020 15:38:42 -0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.2.2
 MIME-Version: 1.0
-X-Mailman-Approved-At: Wed, 11 Nov 2020 17:25:50 +0000
-Subject: Re: [Nouveau] [PATCH] drm/nouveau: Fix out-of-bounds access when
- deferencing MMU type
+In-Reply-To: <20201109091415.GC28918@lst.de>
+Content-Language: en-US
+X-Originating-IP: [172.20.13.39]
+X-ClientProxiedBy: HQMAIL107.nvidia.com (172.20.187.13) To
+ HQMAIL107.nvidia.com (172.20.187.13)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
+ t=1605137932; bh=zHO1ckq6uyaZrvKhQL36E2tHoAKHoONDfmePjxMsIDc=;
+ h=Subject:To:CC:References:X-Nvconfidentiality:From:Message-ID:Date:
+ User-Agent:MIME-Version:In-Reply-To:Content-Type:Content-Language:
+ Content-Transfer-Encoding:X-Originating-IP:X-ClientProxiedBy;
+ b=fB2B9OyXqlGPArapba0ILYThcCs0SyHunJqcEM+ML7kCb9iwxoyGsJeu6vt+yDpaX
+ EDLrUhP0JcL9WartwY8C4pKPx02qX+XGOTyoXwhPtF+4FXoOuaTPUvURVBbJq907L6
+ Ut96f1x2GhYedjA/0MDIQp3c/yWMJGzDwCI6NTpZ3Mjvt9TyMDCM5/nEeKMMm+bIGY
+ jmlBFcGsPnom85VIjGsJES2VbDtDQNOX0DQZhlVkk3giLAy6xHx+T5sHYOOIFWhiy1
+ Ubh4cpVaElGixBRH6GJgYJKZQQyPT8z/JXak+c6r2xXPxACRmVTb54/dAaBzMo6jZn
+ RDK2gI0iO/Zrg==
+Subject: Re: [Nouveau] [PATCH v3 3/6] mm: support THP migration to device
+ private memory
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -75,161 +60,126 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: "amd-gfx@lists.freedesktop.org" <amd-gfx@lists.freedesktop.org>,
- "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
- "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, Maarten
- Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>,
- "virtualization@lists.linux-foundation.org"
- <virtualization@lists.linux-foundation.org>,
- Roland Scheidegger <sroland@vmware.com>, Jason
- Gunthorpe <jgg@ziepe.ca>, Huang Rui <ray.huang@amd.com>, VMware
- Graphics <linux-graphics-maintainer@vmware.com>,
- Gerd Hoffmann <kraxel@redhat.com>,
- "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>,
- Alex Deucher <alexander.deucher@amd.com>, Dave Airlie <airlied@redhat.com>,
- Likun Gao <Likun.Gao@amd.com>, Felix Kuehling <Felix.Kuehling@amd.com>,
- Hawking Zhang <Hawking.Zhang@amd.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: Yang Shi <yang.shi@linux.alibaba.com>, Jason Gunthorpe <jgg@nvidia.com>,
+ Alistair Popple <apopple@nvidia.com>, linux-kernel@vger.kernel.org,
+ Bharata B Rao <bharata@linux.ibm.com>, linux-mm@kvack.org,
+ Ben Skeggs <bskeggs@redhat.com>, linux-kselftest@vger.kernel.org,
+ nouveau@lists.freedesktop.org, Andrew Morton <akpm@linux-foundation.org>,
+ Zi Yan <ziy@nvidia.com>, Shuah Khan <shuah@kernel.org>,
+ "Kirill A . Shutemov" <kirill.shutemov@linux.intel.com>
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Pi0tLS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0tDQo+RnJvbTogVGhvbWFzIFppbW1lcm1hbm4gPHR6
-aW1tZXJtYW5uQHN1c2UuZGU+DQo+U2VudDogV2VkbmVzZGF5LCBOb3ZlbWJlciAxMSwgMjAyMCA3
-OjA4IEFNDQo+VG86IFJ1aGwsIE1pY2hhZWwgSiA8bWljaGFlbC5qLnJ1aGxAaW50ZWwuY29tPjsg
-YnNrZWdnc0ByZWRoYXQuY29tOw0KPmFpcmxpZWRAbGludXguaWU7IGRhbmllbEBmZndsbC5jaDsg
-Y2hyaXN0aWFuLmtvZW5pZ0BhbWQuY29tDQo+Q2M6IG5vdXZlYXVAbGlzdHMuZnJlZWRlc2t0b3Au
-b3JnOyBkcmktZGV2ZWxAbGlzdHMuZnJlZWRlc2t0b3Aub3JnOw0KPk1hYXJ0ZW4gTGFua2hvcnN0
-IDxtYWFydGVuLmxhbmtob3JzdEBsaW51eC5pbnRlbC5jb20+OyBNYXhpbWUgUmlwYXJkDQo+PG1y
-aXBhcmRAa2VybmVsLm9yZz47IERhdmUgQWlybGllIDxhaXJsaWVkQHJlZGhhdC5jb20+OyBHZXJk
-IEhvZmZtYW5uDQo+PGtyYXhlbEByZWRoYXQuY29tPjsgQWxleCBEZXVjaGVyIDxhbGV4YW5kZXIu
-ZGV1Y2hlckBhbWQuY29tPjsNCj5WTXdhcmUgR3JhcGhpY3MgPGxpbnV4LWdyYXBoaWNzLW1haW50
-YWluZXJAdm13YXJlLmNvbT47IFJvbGFuZA0KPlNjaGVpZGVnZ2VyIDxzcm9sYW5kQHZtd2FyZS5j
-b20+OyBIdWFuZyBSdWkgPHJheS5odWFuZ0BhbWQuY29tPjsNCj5GZWxpeCBLdWVobGluZyA8RmVs
-aXguS3VlaGxpbmdAYW1kLmNvbT47IEhhd2tpbmcgWmhhbmcNCj48SGF3a2luZy5aaGFuZ0BhbWQu
-Y29tPjsgSmFzb24gR3VudGhvcnBlIDxqZ2dAemllcGUuY2E+OyBMaWt1biBHYW8NCj48TGlrdW4u
-R2FvQGFtZC5jb20+OyB2aXJ0dWFsaXphdGlvbkBsaXN0cy5saW51eC1mb3VuZGF0aW9uLm9yZzsg
-c3BpY2UtDQo+ZGV2ZWxAbGlzdHMuZnJlZWRlc2t0b3Aub3JnOyBhbWQtZ2Z4QGxpc3RzLmZyZWVk
-ZXNrdG9wLm9yZw0KPlN1YmplY3Q6IFJlOiBbUEFUQ0hdIGRybS9ub3V2ZWF1OiBGaXggb3V0LW9m
-LWJvdW5kcyBhY2Nlc3Mgd2hlbg0KPmRlZmVyZW5jaW5nIE1NVSB0eXBlDQo+DQo+SGkNCj4NCj5B
-bSAxMC4xMS4yMCB1bSAxNjoyNyBzY2hyaWViIFJ1aGwsIE1pY2hhZWwgSjoNCj4+DQo+Pg0KPj4+
-IC0tLS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0tDQo+Pj4gRnJvbTogVGhvbWFzIFppbW1lcm1hbm4g
-PHR6aW1tZXJtYW5uQHN1c2UuZGU+DQo+Pj4gU2VudDogVHVlc2RheSwgTm92ZW1iZXIgMTAsIDIw
-MjAgODozNyBBTQ0KPj4+IFRvOiBic2tlZ2dzQHJlZGhhdC5jb207IGFpcmxpZWRAbGludXguaWU7
-IGRhbmllbEBmZndsbC5jaDsgUnVobCwgTWljaGFlbCBKDQo+Pj4gPG1pY2hhZWwuai5ydWhsQGlu
-dGVsLmNvbT47IGNocmlzdGlhbi5rb2VuaWdAYW1kLmNvbQ0KPj4+IENjOiBub3V2ZWF1QGxpc3Rz
-LmZyZWVkZXNrdG9wLm9yZzsgZHJpLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZzsNCj5UaG9t
-YXMNCj4+PiBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPjsgTWFhcnRlbiBMYW5raG9y
-c3QNCj4+PiA8bWFhcnRlbi5sYW5raG9yc3RAbGludXguaW50ZWwuY29tPjsgTWF4aW1lIFJpcGFy
-ZA0KPj4+IDxtcmlwYXJkQGtlcm5lbC5vcmc+OyBEYXZlIEFpcmxpZSA8YWlybGllZEByZWRoYXQu
-Y29tPjsgR2VyZCBIb2ZmbWFubg0KPj4+IDxrcmF4ZWxAcmVkaGF0LmNvbT47IEFsZXggRGV1Y2hl
-ciA8YWxleGFuZGVyLmRldWNoZXJAYW1kLmNvbT47DQo+Pj4gVk13YXJlIEdyYXBoaWNzIDxsaW51
-eC1ncmFwaGljcy1tYWludGFpbmVyQHZtd2FyZS5jb20+OyBSb2xhbmQNCj4+PiBTY2hlaWRlZ2dl
-ciA8c3JvbGFuZEB2bXdhcmUuY29tPjsgSHVhbmcgUnVpIDxyYXkuaHVhbmdAYW1kLmNvbT47DQo+
-Pj4gRmVsaXggS3VlaGxpbmcgPEZlbGl4Lkt1ZWhsaW5nQGFtZC5jb20+OyBIYXdraW5nIFpoYW5n
-DQo+Pj4gPEhhd2tpbmcuWmhhbmdAYW1kLmNvbT47IEphc29uIEd1bnRob3JwZSA8amdnQHppZXBl
-LmNhPjsgTGlrdW4NCj5HYW8NCj4+PiA8TGlrdW4uR2FvQGFtZC5jb20+OyB2aXJ0dWFsaXphdGlv
-bkBsaXN0cy5saW51eC1mb3VuZGF0aW9uLm9yZzsgc3BpY2UtDQo+Pj4gZGV2ZWxAbGlzdHMuZnJl
-ZWRlc2t0b3Aub3JnOyBhbWQtZ2Z4QGxpc3RzLmZyZWVkZXNrdG9wLm9yZw0KPj4+IFN1YmplY3Q6
-IFtQQVRDSF0gZHJtL25vdXZlYXU6IEZpeCBvdXQtb2YtYm91bmRzIGFjY2VzcyB3aGVuDQo+ZGVm
-ZXJlbmNpbmcNCj4+PiBNTVUgdHlwZQ0KPj4+DQo+Pj4gVGhlIHZhbHVlIG9mIHN0cnVjdCBkcm1f
-ZGV2aWNlLnR0bS50eXBlX3ZyYW0gY2FuIGJlY29tZSAtMSBmb3INCj51bmtub3duDQo+Pj4gdHlw
-ZXMgb2YgbWVtb3J5IChzZWUgbm91dmVhdV90dG1faW5pdCgpKS4gVGhpcyBsZWFkcyB0byBhbiBv
-dXQtb2YtYm91bmRzDQo+Pj4gZXJyb3Igd2hlbiBhY2Nlc3Npbmcgc3RydWN0IG52aWZfbW11LnR5
-cGVbXToNCj4+DQo+PiBXb3VsZCB0aGlzIG1ha2UgbW9yZSBzZW5zZSB0byBqdXN0IHNldCB0aGUg
-dHlwZV92cmFtID0gMCBpbnN0ZWFkIG9mIC0xPw0KPg0KPkZyb20gd2hhdCBJIHVuZGVyc3RhbmQs
-IHRoZXNlIGluZGljZXMgcmVmZXIgdG8gYW4gaW50ZXJuYWwgdHlwZSBvZiBNTVUsDQo+cnNwIHRo
-ZSBNTVUncyBjYXBhYmlsaXRpZXMuIEhvd2V2ZXIsIG15IGhhcmR3YXJlIChwcmUtTlY1MCkgZG9l
-cyBub3QNCj5oYXZlIGFuIE1NVSBhdCBhbGwuDQoNClllYWgsIGFuZCB1cG9uIGZ1cnRoZXIgcmV2
-aWV3IEkgc2VlIHRoYXQgbXkgY29tbWVudCB3YXMgY29tcGxldGVseSB3cm9uZw0KKHZhbHVlIHZz
-LiBpbmRleCkuDQoNCkEgYmV0dGVyIHN1Z2dlc3Rpb24gd291bGQgaGF2ZSBiZWVuLCBjcmVhdGUg
-YW4gZW50cnkgaW4gdGhlIGFycmF5IHRoYXQgbWVhbnMsDQoidW5zdXBwb3J0ZWQgdHlwZSIgd2l0
-aCBhIHZhbHVlIG9mIDAsIGJ1dC4uLg0KDQo+SSBhZ3JlZSB0aGF0IGl0IHdvdWxkIGJlIG5pY2Ug
-dG8gaGF2ZSBhIGNsZWFuZXIgZGVzaWduIHRoYXQgaW5jb3Jwb3JhdGVzDQo+dGhpcyBjYXNlLCBi
-dXQgcmVzb2x2aW5nIHRoYXQgd291bGQgYXBwYXJlbnRseSByZXF1aXJlIG1vcmUgdGhhbiBhIGJ1
-Z2ZpeC4NCg0KSSBhZ3JlZS4gIFRoZSAtMSBpbmRleCBpcyBhIHNwZWNpYWwgY2FzZSBmb3IgdGhl
-IHBsYXRmb3JtIHBhdGgNCihwbGF0Zm9ybSAhPSBOVl9ERVZJQ0VfSU5GT19WMF9TT0MpLiAgVGhp
-cyBpcyBhIGZpeCBmb3IgdGhlIGlzc3VlLCBidXQgbm90DQphIGNvbXBsZXRlIHNvbHV0aW9uLg0K
-DQpJZiB5b3UgbmVlZCBpdDoNClJldmlld2VkLWJ5OiBNaWNoYWVsIEouIFJ1aGwgPG1pY2hhZWwu
-ai5ydWhsQGludGVsLmNvbT4NCg0KVGhhbmtzLA0KTWlrZQ0KDQo+QmVzdCByZWdhcmRzDQo+VGhv
-bWFzDQo+DQo+Pg0KPj4gTWlrZQ0KPj4NCj4+Pg0KPj4+ICBbICAgMTguMzA0MTE2XQ0KPj4+DQo+
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-PT0NCj4+PiA9PT09PT09DQo+Pj4gIFsgICAxOC4zMTE2NDldIEJVRzogS0FTQU46IHNsYWItb3V0
-LW9mLWJvdW5kcyBpbg0KPj4+IG5vdXZlYXVfdHRtX2lvX21lbV9yZXNlcnZlKzB4MTdhLzB4N2Uw
-IFtub3V2ZWF1XQ0KPj4+ICBbICAgMTguMzIwNDE1XSBSZWFkIG9mIHNpemUgMSBhdCBhZGRyIGZm
-ZmY4ODgxMGZmYWMxZmUgYnkgdGFzayBzeXN0ZW1kLQ0KPj4+IHVkZXZkLzM0Mg0KPj4+ICBbICAg
-MTguMzI3NjgxXQ0KPj4+ICBbICAgMTguMzI5MjA4XSBDUFU6IDEgUElEOiAzNDIgQ29tbTogc3lz
-dGVtZC11ZGV2ZCBUYWludGVkOiBHICAgICAgICAgICAgRQ0KPj4+IDUuMTAuMC1yYzItMS1kZWZh
-dWx0KyAjNTgxDQo+Pj4gIFsgICAxOC4zMzg2ODFdIEhhcmR3YXJlIG5hbWU6IERlbGwgSW5jLiBP
-cHRpUGxleCA5MDIwLzBONFlDOCwgQklPUyBBMjQNCj4+PiAxMC8yNC8yMDE4DQo+Pj4gIFsgICAx
-OC4zNDYwMzJdIENhbGwgVHJhY2U6DQo+Pj4gIFsgICAxOC4zNDg1MzZdICBkdW1wX3N0YWNrKzB4
-YWUvMHhlNQ0KPj4+ICBbICAgMTguMzUxOTE5XSAgcHJpbnRfYWRkcmVzc19kZXNjcmlwdGlvbi5j
-b25zdHByb3AuMCsweDE3LzB4ZjANCj4+PiAgWyAgIDE4LjM1Nzc4N10gID8gbm91dmVhdV90dG1f
-aW9fbWVtX3Jlc2VydmUrMHgxN2EvMHg3ZTAgW25vdXZlYXVdDQo+Pj4gIFsgICAxOC4zNjM4MThd
-ICBfX2thc2FuX3JlcG9ydC5jb2xkKzB4MjAvMHgzOA0KPj4+ICBbICAgMTguMzY4MDk5XSAgPyBu
-b3V2ZWF1X3R0bV9pb19tZW1fcmVzZXJ2ZSsweDE3YS8weDdlMCBbbm91dmVhdV0NCj4+PiAgWyAg
-IDE4LjM3NDEzM10gIGthc2FuX3JlcG9ydCsweDNhLzB4NTANCj4+PiAgWyAgIDE4LjM3Nzc4OV0g
-IG5vdXZlYXVfdHRtX2lvX21lbV9yZXNlcnZlKzB4MTdhLzB4N2UwIFtub3V2ZWF1XQ0KPj4+ICA8
-Li4uPg0KPj4+ICBbICAgMTguNzY3NjkwXSBBbGxvY2F0ZWQgYnkgdGFzayAzNDI6DQo+Pj4gIFsg
-ICAxOC43NzMwODddICBrYXNhbl9zYXZlX3N0YWNrKzB4MWIvMHg0MA0KPj4+ICBbICAgMTguNzc4
-ODkwXSAgX19rYXNhbl9rbWFsbG9jLmNvbnN0cHJvcC4wKzB4YmYvMHhkMA0KPj4+ICBbICAgMTgu
-Nzg1NjQ2XSAgX19rbWFsbG9jX3RyYWNrX2NhbGxlcisweDFiZS8weDM5MA0KPj4+ICBbICAgMTgu
-NzkyMTY1XSAga3N0cmR1cF9jb25zdCsweDQ2LzB4NzANCj4+PiAgWyAgIDE4Ljc5NzY4Nl0gIGtv
-YmplY3Rfc2V0X25hbWVfdmFyZ3MrMHgyZi8weGIwDQo+Pj4gIFsgICAxOC44MDM5OTJdICBrb2Jq
-ZWN0X2luaXRfYW5kX2FkZCsweDlkLzB4ZjANCj4+PiAgWyAgIDE4LjgxMDExN10gIHR0bV9tZW1f
-Z2xvYmFsX2luaXQrMHgxMmMvMHgyMTAgW3R0bV0NCj4+PiAgWyAgIDE4LjgxNjg1M10gIHR0bV9i
-b19nbG9iYWxfaW5pdCsweDRhLzB4MTYwIFt0dG1dDQo+Pj4gIFsgICAxOC44MjM0MjBdICB0dG1f
-Ym9fZGV2aWNlX2luaXQrMHgzOS8weDIyMCBbdHRtXQ0KPj4+ICBbICAgMTguODMwMDQ2XSAgbm91
-dmVhdV90dG1faW5pdCsweDJjMy8weDgzMCBbbm91dmVhdV0NCj4+PiAgWyAgIDE4LjgzNjkyOV0g
-IG5vdXZlYXVfZHJtX2RldmljZV9pbml0KzB4MWI0LzB4M2YwIFtub3V2ZWF1XQ0KPj4+ICA8Li4u
-Pg0KPj4+ICBbICAgMTkuMTA1MzM2XQ0KPj4+DQo+PT09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0NCj4+PiA9PT09PT09DQo+Pj4NCj4+PiBG
-aXggdGhpcyBlcnJvciwgYnkgbm90IHVzaW5nIHR5cGVfdnJhbSBhcyBhbiBpbmRleCBpZiBpdCdz
-IG5lZ2F0aXZlLg0KPj4+IEFzc3VtZSBkZWZhdWx0IHZhbHVlcyBpbnN0ZWFkLg0KPj4+DQo+Pj4g
-VGhlIGVycm9yIHdhcyBzZWVuIG9uIE52aWRpYSBHNzIgaGFyZHdhcmUuDQo+Pj4NCj4+PiBTaWdu
-ZWQtb2ZmLWJ5OiBUaG9tYXMgWmltbWVybWFubiA8dHppbW1lcm1hbm5Ac3VzZS5kZT4NCj4+PiBG
-aXhlczogMWNmNjVjNDUxODNhICgiZHJtL3R0bTogYWRkIGNhY2hpbmcgc3RhdGUgdG8gdHRtX2J1
-c19wbGFjZW1lbnQiKQ0KPj4+IENjOiBDaHJpc3RpYW4gS8O2bmlnIDxjaHJpc3RpYW4ua29lbmln
-QGFtZC5jb20+DQo+Pj4gQ2M6IE1pY2hhZWwgSi4gUnVobCA8bWljaGFlbC5qLnJ1aGxAaW50ZWwu
-Y29tPg0KPj4+IENjOiBNYWFydGVuIExhbmtob3JzdCA8bWFhcnRlbi5sYW5raG9yc3RAbGludXgu
-aW50ZWwuY29tPg0KPj4+IENjOiBNYXhpbWUgUmlwYXJkIDxtcmlwYXJkQGtlcm5lbC5vcmc+DQo+
-Pj4gQ2M6IFRob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPg0KPj4+IENjOiBE
-YXZpZCBBaXJsaWUgPGFpcmxpZWRAbGludXguaWU+DQo+Pj4gQ2M6IERhbmllbCBWZXR0ZXIgPGRh
-bmllbEBmZndsbC5jaD4NCj4+PiBDYzogQmVuIFNrZWdncyA8YnNrZWdnc0ByZWRoYXQuY29tPg0K
-Pj4+IENjOiBEYXZlIEFpcmxpZSA8YWlybGllZEByZWRoYXQuY29tPg0KPj4+IENjOiBHZXJkIEhv
-ZmZtYW5uIDxrcmF4ZWxAcmVkaGF0LmNvbT4NCj4+PiBDYzogQWxleCBEZXVjaGVyIDxhbGV4YW5k
-ZXIuZGV1Y2hlckBhbWQuY29tPg0KPj4+IENjOiAiQ2hyaXN0aWFuIEvDtm5pZyIgPGNocmlzdGlh
-bi5rb2VuaWdAYW1kLmNvbT4NCj4+PiBDYzogVk13YXJlIEdyYXBoaWNzIDxsaW51eC1ncmFwaGlj
-cy1tYWludGFpbmVyQHZtd2FyZS5jb20+DQo+Pj4gQ2M6IFJvbGFuZCBTY2hlaWRlZ2dlciA8c3Jv
-bGFuZEB2bXdhcmUuY29tPg0KPj4+IENjOiBIdWFuZyBSdWkgPHJheS5odWFuZ0BhbWQuY29tPg0K
-Pj4+IENjOiBGZWxpeCBLdWVobGluZyA8RmVsaXguS3VlaGxpbmdAYW1kLmNvbT4NCj4+PiBDYzog
-SGF3a2luZyBaaGFuZyA8SGF3a2luZy5aaGFuZ0BhbWQuY29tPg0KPj4+IENjOiBKYXNvbiBHdW50
-aG9ycGUgPGpnZ0B6aWVwZS5jYT4NCj4+PiBDYzogTGlrdW4gR2FvIDxMaWt1bi5HYW9AYW1kLmNv
-bT4NCj4+PiBDYzogZHJpLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZw0KPj4+IENjOiBub3V2
-ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZw0KPj4+IENjOiB2aXJ0dWFsaXphdGlvbkBsaXN0cy5s
-aW51eC1mb3VuZGF0aW9uLm9yZw0KPj4+IENjOiBzcGljZS1kZXZlbEBsaXN0cy5mcmVlZGVza3Rv
-cC5vcmcNCj4+PiBDYzogYW1kLWdmeEBsaXN0cy5mcmVlZGVza3RvcC5vcmcNCj4+PiAtLS0NCj4+
-PiBkcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2JvLmMgfCA1ICsrKystDQo+Pj4gMSBm
-aWxlIGNoYW5nZWQsIDQgaW5zZXJ0aW9ucygrKSwgMSBkZWxldGlvbigtKQ0KPj4+DQo+Pj4gZGlm
-ZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfYm8uYw0KPj4+IGIvZHJp
-dmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9iby5jDQo+Pj4gaW5kZXggODEzMzM3N2Q4NjVk
-Li5mZTE1Mjk5ZDQxN2UgMTAwNjQ0DQo+Pj4gLS0tIGEvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUv
-bm91dmVhdV9iby5jDQo+Pj4gKysrIGIvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9i
-by5jDQo+Pj4gQEAgLTExNDIsOSArMTE0MiwxMiBAQCBub3V2ZWF1X3R0bV9pb19tZW1fcmVzZXJ2
-ZShzdHJ1Y3QNCj4+PiB0dG1fYm9fZGV2aWNlICpiZGV2LCBzdHJ1Y3QgdHRtX3Jlc291cmNlICpy
-ZWcpDQo+Pj4gCXN0cnVjdCBudmttX2RldmljZSAqZGV2aWNlID0gbnZ4eF9kZXZpY2UoJmRybS0+
-Y2xpZW50LmRldmljZSk7DQo+Pj4gCXN0cnVjdCBub3V2ZWF1X21lbSAqbWVtID0gbm91dmVhdV9t
-ZW0ocmVnKTsNCj4+PiAJc3RydWN0IG52aWZfbW11ICptbXUgPSAmZHJtLT5jbGllbnQubW11Ow0K
-Pj4+IC0JY29uc3QgdTggdHlwZSA9IG1tdS0+dHlwZVtkcm0tPnR0bS50eXBlX3ZyYW1dLnR5cGU7
-DQo+Pj4gKwl1OCB0eXBlID0gMDsNCj4+PiAJaW50IHJldDsNCj4+Pg0KPj4+ICsJaWYgKGRybS0+
-dHRtLnR5cGVfdnJhbSA+PSAwKQ0KPj4+ICsJCXR5cGUgPSBtbXUtPnR5cGVbZHJtLT50dG0udHlw
-ZV92cmFtXS50eXBlOw0KPj4+ICsNCj4+PiAJbXV0ZXhfbG9jaygmZHJtLT50dG0uaW9fcmVzZXJ2
-ZV9tdXRleCk7DQo+Pj4gcmV0cnk6DQo+Pj4gCXN3aXRjaCAocmVnLT5tZW1fdHlwZSkgew0KPj4+
-IC0tDQo+Pj4gMi4yOS4yDQo+Pg0KPg0KPi0tDQo+VGhvbWFzIFppbW1lcm1hbm4NCj5HcmFwaGlj
-cyBEcml2ZXIgRGV2ZWxvcGVyDQo+U1VTRSBTb2Z0d2FyZSBTb2x1dGlvbnMgR2VybWFueSBHbWJI
-DQo+TWF4ZmVsZHN0ci4gNSwgOTA0MDkgTsO8cm5iZXJnLCBHZXJtYW55DQo+KEhSQiAzNjgwOSwg
-QUcgTsO8cm5iZXJnKQ0KPkdlc2Now6RmdHNmw7xocmVyOiBGZWxpeCBJbWVuZMO2cmZmZXINCl9f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCk5vdXZlYXUgbWFp
-bGluZyBsaXN0Ck5vdXZlYXVAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJl
-ZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vbm91dmVhdQo=
+
+On 11/9/20 1:14 AM, Christoph Hellwig wrote:
+> On Fri, Nov 06, 2020 at 01:26:50PM -0800, Ralph Campbell wrote:
+>>
+>> On 11/6/20 12:03 AM, Christoph Hellwig wrote:
+>>> I hate the extra pin count magic here.  IMHO we really need to finish
+>>> off the series to get rid of the extra references on the ZONE_DEVICE
+>>> pages first.
+>>
+>> First, thanks for the review comments.
+>>
+>> I don't like the extra refcount either, that is why I tried to fix that up
+>> before resending this series. However, you didn't like me just fixing the
+>> refcount only for device private pages and I don't know the dax/pmem code
+>> and peer-to-peer PCIe uses of ZONE_DEVICE pages well enough to say how
+>> long it will take me to fix all the use cases.
+>> So I wanted to make progress on the THP migration code in the mean time.
+> 
+> I think P2P is pretty trivial, given that ZONE_DEVICE pages are used like
+> a normal memory allocator.  DAX is the interesting case, any specific
+> help that you need with that?
+
+There are 4 types of ZONE_DEVICE struct pages:
+MEMORY_DEVICE_PRIVATE, MEMORY_DEVICE_FS_DAX, MEMORY_DEVICE_GENERIC, and
+MEMORY_DEVICE_PCI_P2PDMA.
+
+Currently, memremap_pages() allocates struct pages for a physical address range
+with a page_ref_count(page) of one and increments the pgmap->ref per CPU
+reference count by the number of pages created since each ZONE_DEVICE struct
+page has a pointer to the pgmap.
+
+The struct pages are not freed until memunmap_pages() is called which
+calls put_page() which calls put_dev_pagemap() which releases a reference to
+pgmap->ref. memunmap_pages() blocks waiting for pgmap->ref reference count
+to be zero. As far as I can tell, the put_page() in memunmap_pages() has to
+be the *last* put_page() (see MEMORY_DEVICE_PCI_P2PDMA).
+My RFC [1] breaks this put_page() -> put_dev_pagemap() connection so that
+the struct page reference count can go to zero and back to non-zero without
+changing the pgmap->ref reference count.
+
+Q1: Is that safe? Is there some code that depends on put_page() dropping
+the pgmap->ref reference count as part of memunmap_pages()?
+My testing of [1] seems OK but I'm sure there are lots of cases I didn't test.
+
+MEMORY_DEVICE_PCI_P2PDMA:
+Struct pages are created in pci_p2pdma_add_resource() and represent device
+memory accessible by PCIe bar address space. Memory is allocated with
+pci_alloc_p2pmem() based on a byte length but the gen_pool_alloc_owner()
+call will allocate memory in a minimum of PAGE_SIZE units.
+Reference counting is +1 per *allocation* on the pgmap->ref reference count.
+Note that this is not +1 per page which is what put_page() expects. So
+currently, a get_page()/put_page() works OK because the page reference count
+only goes 1->2 and 2->1. If it went to zero, the pgmap->ref reference count
+would be incorrect if the allocation size was greater than one page.
+
+I see pci_alloc_p2pmem() is called by nvme_alloc_sq_cmds() and
+pci_p2pmem_alloc_sgl() to create a command queue and a struct scatterlist *.
+Looks like sg_page(sg) returns the ZONE_DEVICE struct page of the scatterlist.
+There are a huge number of places sg_page() is called so it is hard to tell
+whether or not get_page()/put_page() is ever called on MEMORY_DEVICE_PCI_P2PDMA
+pages. pci_p2pmem_virt_to_bus() will return the physical address and I guess
+pfn_to_page(physaddr >> PAGE_SHIFT) could return the struct page.
+
+Since there is a clear allocation/free, pci_alloc_p2pmem() can probably be
+modified to increment/decrement the MEMORY_DEVICE_PCI_P2PDMA struct page
+reference count. Or maybe just leave it at one like it is now.
+
+MEMORY_DEVICE_GENERIC:
+Struct pages are created in dev_dax_probe() and represent non-volatile memory.
+The device can be mmap()'ed which calls dax_mmap() which sets
+vma->vm_flags | VM_HUGEPAGE.
+A CPU page fault will result in a PTE, PMD, or PUD sized page
+(but not compound) to be inserted by vmf_insert_mixed() which will call either
+insert_pfn() or insert_page().
+Neither insert_pfn() nor insert_page() increments the page reference count.
+Invalidations don't callback into the device driver so I don't see how page
+reference counts can be tracked without adding a mmu_interval_notifier.
+
+I think just leaving the page reference count at one is better than trying
+to use the mmu_interval_notifier or changing vmf_insert_mixed() and
+invalidations of pfn_t_devmap(pfn) to adjust the page reference count.
+
+MEMORY_DEVICE_PRIVATE:
+This case has the most core mm code having to specially check for
+is_device_private_page() and adjusting the expected reference count when the
+page isn't mapped by any process. There is a clear allocation and free so it
+can be changed to use a reference count of zero while free (see [2]).
+
+MEMORY_DEVICE_FS_DAX:
+Struct pages are created in pmem_attach_disk() and virtio_fs_setup_dax() with
+an initial reference count of one.
+The problem I see is that there are 3 states that are important:
+a) memory is free and not allocated to any file (page_ref_count() == 0).
+b) memory is allocated to a file and in the page cache (page_ref_count() == 1).
+c) some gup() or I/O has a reference even after calling unmap_mapping_pages()
+    (page_ref_count() > 1). ext4_break_layouts() basically waits until the
+    page_ref_count() == 1 with put_page() calling wake_up_var(&page->_refcount)
+    to wake up ext4_break_layouts().
+The current code doesn't seem to distinguish (a) and (b). If we want to use
+the 0->1 reference count to signal (c), then the page cache would have hold
+entries with a page_ref_count() == 0 which doesn't match the general page cache
+assumptions.
+
+Q2: So how should I resolve that?
+
+[1] https://lore.kernel.org/linux-mm/20201001181715.17416-1-rcampbell@nvidia.com
+[2] https://lore.kernel.org/linux-mm/20201012174540.17328-1-rcampbell@nvidia.com
+_______________________________________________
+Nouveau mailing list
+Nouveau@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/nouveau
