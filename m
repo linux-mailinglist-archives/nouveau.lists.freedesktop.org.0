@@ -2,53 +2,36 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id A179B2AFBB5
-	for <lists+nouveau@lfdr.de>; Thu, 12 Nov 2020 00:38:50 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A94262B003F
+	for <lists+nouveau@lfdr.de>; Thu, 12 Nov 2020 08:20:49 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id BCF3889FC0;
-	Wed, 11 Nov 2020 23:38:47 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 413846E141;
+	Thu, 12 Nov 2020 07:20:47 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from hqnvemgate24.nvidia.com (hqnvemgate24.nvidia.com
- [216.228.121.143])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9951689FC0
- for <nouveau@lists.freedesktop.org>; Wed, 11 Nov 2020 23:38:46 +0000 (UTC)
-Received: from hqmail.nvidia.com (Not Verified[216.228.121.13]) by
- hqnvemgate24.nvidia.com (using TLS: TLSv1.2, AES256-SHA)
- id <B5fac760c0000>; Wed, 11 Nov 2020 15:38:52 -0800
-Received: from rcampbell-dev.nvidia.com (172.20.13.39) by HQMAIL107.nvidia.com
- (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3;
- Wed, 11 Nov 2020 23:38:42 +0000
-To: Christoph Hellwig <hch@lst.de>
-References: <20201106005147.20113-1-rcampbell@nvidia.com>
- <20201106005147.20113-4-rcampbell@nvidia.com> <20201106080322.GE31341@lst.de>
- <a7b8b90c-09b7-2009-0784-908b61f61ef2@nvidia.com>
- <20201109091415.GC28918@lst.de>
-X-Nvconfidentiality: public
-From: Ralph Campbell <rcampbell@nvidia.com>
-Message-ID: <bbf1f0df-85f3-5887-050e-beb2aad750f2@nvidia.com>
-Date: Wed, 11 Nov 2020 15:38:42 -0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.2.2
+Received: from szxga05-in.huawei.com (szxga05-in.huawei.com [45.249.212.191])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 903926E046;
+ Thu, 12 Nov 2020 01:36:10 +0000 (UTC)
+Received: from DGGEMS406-HUB.china.huawei.com (unknown [172.30.72.60])
+ by szxga05-in.huawei.com (SkyGuard) with ESMTP id 4CWkhC5cwrzhkVw;
+ Thu, 12 Nov 2020 09:35:55 +0800 (CST)
+Received: from localhost.localdomain (10.69.192.56) by
+ DGGEMS406-HUB.china.huawei.com (10.3.19.206) with Microsoft SMTP Server id
+ 14.3.487.0; Thu, 12 Nov 2020 09:36:03 +0800
+From: Tian Tao <tiantao6@hisilicon.com>
+To: <bskeggs@redhat.com>, <airlied@linux.ie>, <daniel@ffwll.ch>,
+ <sumit.semwal@linaro.org>, <christian.koenig@amd.com>,
+ <dri-devel@lists.freedesktop.org>, <nouveau@lists.freedesktop.org>,
+ <linux-kernel@vger.kernel.org>, <linux-media@vger.kernel.org>,
+ <linaro-mm-sig@lists.linaro.org>
+Date: Thu, 12 Nov 2020 09:36:33 +0800
+Message-ID: <1605144993-63932-1-git-send-email-tiantao6@hisilicon.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-In-Reply-To: <20201109091415.GC28918@lst.de>
-Content-Language: en-US
-X-Originating-IP: [172.20.13.39]
-X-ClientProxiedBy: HQMAIL107.nvidia.com (172.20.187.13) To
- HQMAIL107.nvidia.com (172.20.187.13)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
- t=1605137932; bh=zHO1ckq6uyaZrvKhQL36E2tHoAKHoONDfmePjxMsIDc=;
- h=Subject:To:CC:References:X-Nvconfidentiality:From:Message-ID:Date:
- User-Agent:MIME-Version:In-Reply-To:Content-Type:Content-Language:
- Content-Transfer-Encoding:X-Originating-IP:X-ClientProxiedBy;
- b=fB2B9OyXqlGPArapba0ILYThcCs0SyHunJqcEM+ML7kCb9iwxoyGsJeu6vt+yDpaX
- EDLrUhP0JcL9WartwY8C4pKPx02qX+XGOTyoXwhPtF+4FXoOuaTPUvURVBbJq907L6
- Ut96f1x2GhYedjA/0MDIQp3c/yWMJGzDwCI6NTpZ3Mjvt9TyMDCM5/nEeKMMm+bIGY
- jmlBFcGsPnom85VIjGsJES2VbDtDQNOX0DQZhlVkk3giLAy6xHx+T5sHYOOIFWhiy1
- Ubh4cpVaElGixBRH6GJgYJKZQQyPT8z/JXak+c6r2xXPxACRmVTb54/dAaBzMo6jZn
- RDK2gI0iO/Zrg==
-Subject: Re: [Nouveau] [PATCH v3 3/6] mm: support THP migration to device
- private memory
+X-Originating-IP: [10.69.192.56]
+X-CFilter-Loop: Reflected
+X-Mailman-Approved-At: Thu, 12 Nov 2020 07:20:45 +0000
+Subject: [Nouveau] [PATCH] drm/nouveau: Use vmemdup_user()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,125 +43,43 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Yang Shi <yang.shi@linux.alibaba.com>, Jason Gunthorpe <jgg@nvidia.com>,
- Alistair Popple <apopple@nvidia.com>, linux-kernel@vger.kernel.org,
- Bharata B Rao <bharata@linux.ibm.com>, linux-mm@kvack.org,
- Ben Skeggs <bskeggs@redhat.com>, linux-kselftest@vger.kernel.org,
- nouveau@lists.freedesktop.org, Andrew Morton <akpm@linux-foundation.org>,
- Zi Yan <ziy@nvidia.com>, Shuah Khan <shuah@kernel.org>,
- "Kirill A . Shutemov" <kirill.shutemov@linux.intel.com>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+Replace alloc and copy with vmemdup_user()
 
-On 11/9/20 1:14 AM, Christoph Hellwig wrote:
-> On Fri, Nov 06, 2020 at 01:26:50PM -0800, Ralph Campbell wrote:
->>
->> On 11/6/20 12:03 AM, Christoph Hellwig wrote:
->>> I hate the extra pin count magic here.  IMHO we really need to finish
->>> off the series to get rid of the extra references on the ZONE_DEVICE
->>> pages first.
->>
->> First, thanks for the review comments.
->>
->> I don't like the extra refcount either, that is why I tried to fix that up
->> before resending this series. However, you didn't like me just fixing the
->> refcount only for device private pages and I don't know the dax/pmem code
->> and peer-to-peer PCIe uses of ZONE_DEVICE pages well enough to say how
->> long it will take me to fix all the use cases.
->> So I wanted to make progress on the THP migration code in the mean time.
-> 
-> I think P2P is pretty trivial, given that ZONE_DEVICE pages are used like
-> a normal memory allocator.  DAX is the interesting case, any specific
-> help that you need with that?
+Signed-off-by: Tian Tao <tiantao6@hisilicon.com>
+---
+ drivers/gpu/drm/nouveau/nouveau_gem.c | 11 +++--------
+ 1 file changed, 3 insertions(+), 8 deletions(-)
 
-There are 4 types of ZONE_DEVICE struct pages:
-MEMORY_DEVICE_PRIVATE, MEMORY_DEVICE_FS_DAX, MEMORY_DEVICE_GENERIC, and
-MEMORY_DEVICE_PCI_P2PDMA.
+diff --git a/drivers/gpu/drm/nouveau/nouveau_gem.c b/drivers/gpu/drm/nouveau/nouveau_gem.c
+index 787d05e..df986d9 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_gem.c
++++ b/drivers/gpu/drm/nouveau/nouveau_gem.c
+@@ -591,14 +591,9 @@ u_memcpya(uint64_t user, unsigned nmemb, unsigned size)
+ 
+ 	size *= nmemb;
+ 
+-	mem = kvmalloc(size, GFP_KERNEL);
+-	if (!mem)
+-		return ERR_PTR(-ENOMEM);
+-
+-	if (copy_from_user(mem, userptr, size)) {
+-		u_free(mem);
+-		return ERR_PTR(-EFAULT);
+-	}
++	mem = vmemdup_user(userptr, size);
++	if (IS_ERR(mem))
++		return ERR_CAST(mem);
+ 
+ 	return mem;
+ }
+-- 
+2.7.4
 
-Currently, memremap_pages() allocates struct pages for a physical address range
-with a page_ref_count(page) of one and increments the pgmap->ref per CPU
-reference count by the number of pages created since each ZONE_DEVICE struct
-page has a pointer to the pgmap.
-
-The struct pages are not freed until memunmap_pages() is called which
-calls put_page() which calls put_dev_pagemap() which releases a reference to
-pgmap->ref. memunmap_pages() blocks waiting for pgmap->ref reference count
-to be zero. As far as I can tell, the put_page() in memunmap_pages() has to
-be the *last* put_page() (see MEMORY_DEVICE_PCI_P2PDMA).
-My RFC [1] breaks this put_page() -> put_dev_pagemap() connection so that
-the struct page reference count can go to zero and back to non-zero without
-changing the pgmap->ref reference count.
-
-Q1: Is that safe? Is there some code that depends on put_page() dropping
-the pgmap->ref reference count as part of memunmap_pages()?
-My testing of [1] seems OK but I'm sure there are lots of cases I didn't test.
-
-MEMORY_DEVICE_PCI_P2PDMA:
-Struct pages are created in pci_p2pdma_add_resource() and represent device
-memory accessible by PCIe bar address space. Memory is allocated with
-pci_alloc_p2pmem() based on a byte length but the gen_pool_alloc_owner()
-call will allocate memory in a minimum of PAGE_SIZE units.
-Reference counting is +1 per *allocation* on the pgmap->ref reference count.
-Note that this is not +1 per page which is what put_page() expects. So
-currently, a get_page()/put_page() works OK because the page reference count
-only goes 1->2 and 2->1. If it went to zero, the pgmap->ref reference count
-would be incorrect if the allocation size was greater than one page.
-
-I see pci_alloc_p2pmem() is called by nvme_alloc_sq_cmds() and
-pci_p2pmem_alloc_sgl() to create a command queue and a struct scatterlist *.
-Looks like sg_page(sg) returns the ZONE_DEVICE struct page of the scatterlist.
-There are a huge number of places sg_page() is called so it is hard to tell
-whether or not get_page()/put_page() is ever called on MEMORY_DEVICE_PCI_P2PDMA
-pages. pci_p2pmem_virt_to_bus() will return the physical address and I guess
-pfn_to_page(physaddr >> PAGE_SHIFT) could return the struct page.
-
-Since there is a clear allocation/free, pci_alloc_p2pmem() can probably be
-modified to increment/decrement the MEMORY_DEVICE_PCI_P2PDMA struct page
-reference count. Or maybe just leave it at one like it is now.
-
-MEMORY_DEVICE_GENERIC:
-Struct pages are created in dev_dax_probe() and represent non-volatile memory.
-The device can be mmap()'ed which calls dax_mmap() which sets
-vma->vm_flags | VM_HUGEPAGE.
-A CPU page fault will result in a PTE, PMD, or PUD sized page
-(but not compound) to be inserted by vmf_insert_mixed() which will call either
-insert_pfn() or insert_page().
-Neither insert_pfn() nor insert_page() increments the page reference count.
-Invalidations don't callback into the device driver so I don't see how page
-reference counts can be tracked without adding a mmu_interval_notifier.
-
-I think just leaving the page reference count at one is better than trying
-to use the mmu_interval_notifier or changing vmf_insert_mixed() and
-invalidations of pfn_t_devmap(pfn) to adjust the page reference count.
-
-MEMORY_DEVICE_PRIVATE:
-This case has the most core mm code having to specially check for
-is_device_private_page() and adjusting the expected reference count when the
-page isn't mapped by any process. There is a clear allocation and free so it
-can be changed to use a reference count of zero while free (see [2]).
-
-MEMORY_DEVICE_FS_DAX:
-Struct pages are created in pmem_attach_disk() and virtio_fs_setup_dax() with
-an initial reference count of one.
-The problem I see is that there are 3 states that are important:
-a) memory is free and not allocated to any file (page_ref_count() == 0).
-b) memory is allocated to a file and in the page cache (page_ref_count() == 1).
-c) some gup() or I/O has a reference even after calling unmap_mapping_pages()
-    (page_ref_count() > 1). ext4_break_layouts() basically waits until the
-    page_ref_count() == 1 with put_page() calling wake_up_var(&page->_refcount)
-    to wake up ext4_break_layouts().
-The current code doesn't seem to distinguish (a) and (b). If we want to use
-the 0->1 reference count to signal (c), then the page cache would have hold
-entries with a page_ref_count() == 0 which doesn't match the general page cache
-assumptions.
-
-Q2: So how should I resolve that?
-
-[1] https://lore.kernel.org/linux-mm/20201001181715.17416-1-rcampbell@nvidia.com
-[2] https://lore.kernel.org/linux-mm/20201012174540.17328-1-rcampbell@nvidia.com
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
