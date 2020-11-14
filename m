@@ -1,51 +1,51 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9CFCC2B2996
-	for <lists+nouveau@lfdr.de>; Sat, 14 Nov 2020 01:14:56 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 96FCD2B2994
+	for <lists+nouveau@lfdr.de>; Sat, 14 Nov 2020 01:14:53 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1EC206E893;
-	Sat, 14 Nov 2020 00:14:54 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 609F76E88C;
+	Sat, 14 Nov 2020 00:14:50 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [63.128.21.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D2CD86E88F
- for <nouveau@lists.freedesktop.org>; Sat, 14 Nov 2020 00:14:51 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5E4916E88C
+ for <nouveau@lists.freedesktop.org>; Sat, 14 Nov 2020 00:14:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1605312890;
+ s=mimecast20190719; t=1605312888;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=pGkzEocpJQgnn92LLjUv4TE+8BenGiBZDziya3hNDas=;
- b=FdFfFfVg+Ah7AXvAEmIdxQezdZRanspzGL4huQvnV2xUWf6vRRCYUUKKYmJ/HCa89wkxew
- 8pLdFjJeWK198I27e/81g/7NwGVtKB42615vgY0afkdfS7IIzjtS6R4l8pxfmRBNzre123
- lmFwiqu8hzxp4fal5jwNyJRn/Mw2bAo=
+ bh=zX/lOizOAw84oOm8YVDOgdLRrRhztNZDoBEcaMzLu30=;
+ b=XX38uS/D/VGyxlBxnpkoifUgzemE8FE9wrsW+oU9nS5X4NpxyY+MeG72JO+CJsRQA2eF+I
+ DvGrEg+xfUQUaSf0hgTXJpiDNIJAMh/ryipNLPYaT7+1a4Pl2YpkTSNuwW+FbJ8xv3zUv8
+ JKYzLDLpgmzuILpny1ojpz4rO6994Ug=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-236-ttXDmmrMNrKf25wLPcCB6w-1; Fri, 13 Nov 2020 19:14:43 -0500
-X-MC-Unique: ttXDmmrMNrKf25wLPcCB6w-1
+ us-mta-216-_hMgUGPlN06ApkJ90zbi6g-1; Fri, 13 Nov 2020 19:14:46 -0500
+X-MC-Unique: _hMgUGPlN06ApkJ90zbi6g-1
 Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
  [10.5.11.12])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 69E01107AD64;
- Sat, 14 Nov 2020 00:14:42 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 151B91868401;
+ Sat, 14 Nov 2020 00:14:45 +0000 (UTC)
 Received: from Whitewolf.lyude.net (ovpn-115-66.rdu2.redhat.com [10.10.115.66])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 4B3A760C15;
- Sat, 14 Nov 2020 00:14:41 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id E74EE60C15;
+ Sat, 14 Nov 2020 00:14:43 +0000 (UTC)
 From: Lyude Paul <lyude@redhat.com>
 To: dri-devel@lists.freedesktop.org
-Date: Fri, 13 Nov 2020 19:14:11 -0500
-Message-Id: <20201114001417.155093-3-lyude@redhat.com>
+Date: Fri, 13 Nov 2020 19:14:12 -0500
+Message-Id: <20201114001417.155093-4-lyude@redhat.com>
 In-Reply-To: <20201114001417.155093-1-lyude@redhat.com>
 References: <20201114001417.155093-1-lyude@redhat.com>
 MIME-Version: 1.0
 X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
-Subject: [Nouveau] [PATCH 2/8] drm/nouveau/kms/nv50-: Remove
- (nv_encoder->crtc) checks in ->disable callbacks
+Subject: [Nouveau] [PATCH 3/8] drm/nouveau/kms/nv50-: Rename
+ encoder->atomic_(enable|disable) callbacks
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,85 +69,135 @@ Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Noticed these in both the disable (which we'll be getting rid of in a
-moment) and the atomic disable callbacks: both callback types check whether
-or not there's actually a CRTC assigned to the given encoder. However, as
-->atomic_disable and ->disable will never be called without a CRTC assigned
-to the given encoder there's no point in this check. So just remove it.
+No functional changes, just change the function names to match the
+callbacks they provide.
 
 Signed-off-by: Lyude Paul <lyude@redhat.com>
 ---
- drivers/gpu/drm/nouveau/dispnv50/disp.c | 37 ++++++++++++-------------
- 1 file changed, 17 insertions(+), 20 deletions(-)
+ drivers/gpu/drm/nouveau/dispnv50/disp.c | 33 ++++++++++++-------------
+ 1 file changed, 16 insertions(+), 17 deletions(-)
 
 diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.c b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-index 36d6b6093d16..073ac66b2922 100644
+index 073ac66b2922..a47be145827e 100644
 --- a/drivers/gpu/drm/nouveau/dispnv50/disp.c
 +++ b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-@@ -460,8 +460,8 @@ nv50_dac_disable(struct drm_encoder *encoder, struct drm_atomic_state *state)
+@@ -455,7 +455,7 @@ nv50_outp_get_old_connector(struct nouveau_encoder *outp,
+  * DAC
+  *****************************************************************************/
+ static void
+-nv50_dac_disable(struct drm_encoder *encoder, struct drm_atomic_state *state)
++nv50_dac_atomic_disable(struct drm_encoder *encoder, struct drm_atomic_state *state)
+ {
  	struct nouveau_encoder *nv_encoder = nouveau_encoder(encoder);
  	struct nv50_core *core = nv50_disp(encoder->dev)->core;
- 	const u32 ctrl = NVDEF(NV507D, DAC_SET_CONTROL, OWNER, NONE);
--	if (nv_encoder->crtc)
--		core->func->dac->ctrl(core, nv_encoder->or, ctrl, NULL);
-+
-+	core->func->dac->ctrl(core, nv_encoder->or, ctrl, NULL);
- 	nv_encoder->crtc = NULL;
- 	nv50_outp_release(nv_encoder);
- }
-@@ -1620,28 +1620,25 @@ nv50_sor_disable(struct drm_encoder *encoder,
- 	struct nouveau_crtc *nv_crtc = nouveau_crtc(nv_encoder->crtc);
- 	struct nouveau_connector *nv_connector =
- 		nv50_outp_get_old_connector(nv_encoder, state);
-+	struct drm_dp_aux *aux = &nv_connector->aux;
-+	u8 pwr;
- 
- 	nv_encoder->crtc = NULL;
- 
--	if (nv_crtc) {
--		struct drm_dp_aux *aux = &nv_connector->aux;
--		u8 pwr;
-+	if (nv_encoder->dcb->type == DCB_OUTPUT_DP) {
-+		int ret = drm_dp_dpcd_readb(aux, DP_SET_POWER, &pwr);
- 
--		if (nv_encoder->dcb->type == DCB_OUTPUT_DP) {
--			int ret = drm_dp_dpcd_readb(aux, DP_SET_POWER, &pwr);
--
--			if (ret == 0) {
--				pwr &= ~DP_SET_POWER_MASK;
--				pwr |=  DP_SET_POWER_D3;
--				drm_dp_dpcd_writeb(aux, DP_SET_POWER, pwr);
--			}
-+		if (ret == 0) {
-+			pwr &= ~DP_SET_POWER_MASK;
-+			pwr |=  DP_SET_POWER_D3;
-+			drm_dp_dpcd_writeb(aux, DP_SET_POWER, pwr);
- 		}
--
--		nv_encoder->update(nv_encoder, nv_crtc->index, NULL, 0, 0);
--		nv50_audio_disable(encoder, nv_crtc);
--		nv50_hdmi_disable(&nv_encoder->base.base, nv_crtc);
--		nv50_outp_release(nv_encoder);
- 	}
-+
-+	nv_encoder->update(nv_encoder, nv_crtc->index, NULL, 0, 0);
-+	nv50_audio_disable(encoder, nv_crtc);
-+	nv50_hdmi_disable(&nv_encoder->base.base, nv_crtc);
-+	nv50_outp_release(nv_encoder);
+@@ -467,7 +467,7 @@ nv50_dac_disable(struct drm_encoder *encoder, struct drm_atomic_state *state)
  }
  
  static void
-@@ -1877,8 +1874,8 @@ nv50_pior_disable(struct drm_encoder *encoder, struct drm_atomic_state *state)
+-nv50_dac_enable(struct drm_encoder *encoder, struct drm_atomic_state *state)
++nv50_dac_atomic_enable(struct drm_encoder *encoder, struct drm_atomic_state *state)
+ {
+ 	struct nouveau_encoder *nv_encoder = nouveau_encoder(encoder);
+ 	struct nouveau_crtc *nv_crtc = nouveau_crtc(encoder->crtc);
+@@ -525,8 +525,8 @@ nv50_dac_detect(struct drm_encoder *encoder, struct drm_connector *connector)
+ static const struct drm_encoder_helper_funcs
+ nv50_dac_help = {
+ 	.atomic_check = nv50_outp_atomic_check,
+-	.atomic_enable = nv50_dac_enable,
+-	.atomic_disable = nv50_dac_disable,
++	.atomic_enable = nv50_dac_atomic_enable,
++	.atomic_disable = nv50_dac_atomic_disable,
+ 	.detect = nv50_dac_detect
+ };
+ 
+@@ -1055,7 +1055,7 @@ nv50_dp_bpc_to_depth(unsigned int bpc)
+ }
+ 
+ static void
+-nv50_msto_enable(struct drm_encoder *encoder, struct drm_atomic_state *state)
++nv50_msto_atomic_enable(struct drm_encoder *encoder, struct drm_atomic_state *state)
+ {
+ 	struct nv50_head *head = nv50_head(encoder->crtc);
+ 	struct nv50_head_atom *armh = nv50_head_atom(head->base.base.state);
+@@ -1101,7 +1101,7 @@ nv50_msto_enable(struct drm_encoder *encoder, struct drm_atomic_state *state)
+ }
+ 
+ static void
+-nv50_msto_disable(struct drm_encoder *encoder, struct drm_atomic_state *state)
++nv50_msto_atomic_disable(struct drm_encoder *encoder, struct drm_atomic_state *state)
+ {
+ 	struct nv50_msto *msto = nv50_msto(encoder);
+ 	struct nv50_mstc *mstc = msto->mstc;
+@@ -1118,8 +1118,8 @@ nv50_msto_disable(struct drm_encoder *encoder, struct drm_atomic_state *state)
+ 
+ static const struct drm_encoder_helper_funcs
+ nv50_msto_help = {
+-	.atomic_disable = nv50_msto_disable,
+-	.atomic_enable = nv50_msto_enable,
++	.atomic_disable = nv50_msto_atomic_disable,
++	.atomic_enable = nv50_msto_atomic_enable,
+ 	.atomic_check = nv50_msto_atomic_check,
+ };
+ 
+@@ -1613,8 +1613,7 @@ nv50_sor_update(struct nouveau_encoder *nv_encoder, u8 head,
+ }
+ 
+ static void
+-nv50_sor_disable(struct drm_encoder *encoder,
+-		 struct drm_atomic_state *state)
++nv50_sor_atomic_disable(struct drm_encoder *encoder, struct drm_atomic_state *state)
+ {
+ 	struct nouveau_encoder *nv_encoder = nouveau_encoder(encoder);
+ 	struct nouveau_crtc *nv_crtc = nouveau_crtc(nv_encoder->crtc);
+@@ -1642,7 +1641,7 @@ nv50_sor_disable(struct drm_encoder *encoder,
+ }
+ 
+ static void
+-nv50_sor_enable(struct drm_encoder *encoder, struct drm_atomic_state *state)
++nv50_sor_atomic_enable(struct drm_encoder *encoder, struct drm_atomic_state *state)
+ {
+ 	struct nouveau_encoder *nv_encoder = nouveau_encoder(encoder);
+ 	struct nouveau_crtc *nv_crtc = nouveau_crtc(encoder->crtc);
+@@ -1747,8 +1746,8 @@ nv50_sor_enable(struct drm_encoder *encoder, struct drm_atomic_state *state)
+ static const struct drm_encoder_helper_funcs
+ nv50_sor_help = {
+ 	.atomic_check = nv50_outp_atomic_check,
+-	.atomic_enable = nv50_sor_enable,
+-	.atomic_disable = nv50_sor_disable,
++	.atomic_enable = nv50_sor_atomic_enable,
++	.atomic_disable = nv50_sor_atomic_disable,
+ };
+ 
+ static void
+@@ -1869,7 +1868,7 @@ nv50_pior_atomic_check(struct drm_encoder *encoder,
+ }
+ 
+ static void
+-nv50_pior_disable(struct drm_encoder *encoder, struct drm_atomic_state *state)
++nv50_pior_atomic_disable(struct drm_encoder *encoder, struct drm_atomic_state *state)
+ {
  	struct nouveau_encoder *nv_encoder = nouveau_encoder(encoder);
  	struct nv50_core *core = nv50_disp(encoder->dev)->core;
- 	const u32 ctrl = NVDEF(NV507D, PIOR_SET_CONTROL, OWNER, NONE);
--	if (nv_encoder->crtc)
--		core->func->pior->ctrl(core, nv_encoder->or, ctrl, NULL);
-+
-+	core->func->pior->ctrl(core, nv_encoder->or, ctrl, NULL);
- 	nv_encoder->crtc = NULL;
- 	nv50_outp_release(nv_encoder);
+@@ -1881,7 +1880,7 @@ nv50_pior_disable(struct drm_encoder *encoder, struct drm_atomic_state *state)
  }
+ 
+ static void
+-nv50_pior_enable(struct drm_encoder *encoder, struct drm_atomic_state *state)
++nv50_pior_atomic_enable(struct drm_encoder *encoder, struct drm_atomic_state *state)
+ {
+ 	struct nouveau_encoder *nv_encoder = nouveau_encoder(encoder);
+ 	struct nouveau_crtc *nv_crtc = nouveau_crtc(encoder->crtc);
+@@ -1923,8 +1922,8 @@ nv50_pior_enable(struct drm_encoder *encoder, struct drm_atomic_state *state)
+ static const struct drm_encoder_helper_funcs
+ nv50_pior_help = {
+ 	.atomic_check = nv50_pior_atomic_check,
+-	.atomic_enable = nv50_pior_enable,
+-	.atomic_disable = nv50_pior_disable,
++	.atomic_enable = nv50_pior_atomic_enable,
++	.atomic_disable = nv50_pior_atomic_disable,
+ };
+ 
+ static void
 -- 
 2.28.0
 
