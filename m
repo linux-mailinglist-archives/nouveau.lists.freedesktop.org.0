@@ -1,64 +1,48 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8C3582B6DFD
-	for <lists+nouveau@lfdr.de>; Tue, 17 Nov 2020 20:02:39 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 99C652B7E98
+	for <lists+nouveau@lfdr.de>; Wed, 18 Nov 2020 14:53:00 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4780C6E044;
-	Tue, 17 Nov 2020 19:02:37 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 13A1C6E423;
+	Wed, 18 Nov 2020 13:52:58 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wm1-x343.google.com (mail-wm1-x343.google.com
- [IPv6:2a00:1450:4864:20::343])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C0B756E044
- for <nouveau@lists.freedesktop.org>; Tue, 17 Nov 2020 19:02:35 +0000 (UTC)
-Received: by mail-wm1-x343.google.com with SMTP id c9so4306224wml.5
- for <nouveau@lists.freedesktop.org>; Tue, 17 Nov 2020 11:02:35 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
- h=date:from:to:cc:subject:message-id:mail-followup-to:references
- :mime-version:content-disposition:in-reply-to;
- bh=aB3RzbF3m+Z6/FqXxyXIhr+Vt8dqXl3DQEjdVHMAUy0=;
- b=bjFj8+TPtQ91/C4v+b7Q3YX2K36GbTX82dI9b4XJJyTVGANQGMae74PG7x4101XdKE
- YsUWmw7CIPHamCogS+tsfuM3qEL0q4Ur1cJaA/GPPBhNVajADE4yS0DE4HLaVGjSmAzC
- 3MYk/b8xWFtlxRwxIOvSUvuA385V+kiL1S4dE=
+Received: from mail-oi1-f193.google.com (mail-oi1-f193.google.com
+ [209.85.167.193])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 54DE589BA5;
+ Wed, 18 Nov 2020 09:21:22 +0000 (UTC)
+Received: by mail-oi1-f193.google.com with SMTP id s18so322613oih.1;
+ Wed, 18 Nov 2020 01:21:22 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id
- :mail-followup-to:references:mime-version:content-disposition
- :in-reply-to;
- bh=aB3RzbF3m+Z6/FqXxyXIhr+Vt8dqXl3DQEjdVHMAUy0=;
- b=T9vi+sdLsCJwlCY2uItVQQFj2p95oCGgSvRpMPhRtW2UV25dMEJloi+7mILfyLrxA2
- Ny96emBl0wXj3CMKZV4Bkwcezos1A9ESsHGoXaACdeSy3S+I7MTdnuUVpHenU1IIuODt
- S+GVALrYyuhBG1lAQBmaGyyVYhcIIYxUmQkqvhonSnlP1VMpYLkgOHSwM0Q+3n0+zU8p
- VDn6tXstXgEetYyzpWtTbRr9e/A/ha8ZXAS5V5XYLHNkptDtPVFNKs2eaQAEvlt/ciaw
- WfIBQSGH6DRnfW+NJ7XdkRC5qPVPDyyoDEH6v+UZLO/DP75ljJngu0C0SPebbAMi5mBe
- MNEA==
-X-Gm-Message-State: AOAM533rgh81S1flvtM4z6eGnqUD+mCAKcODjxLDz6g7u7EoMD8eGB7Y
- /6rD5f41F+urgyKHzndngKW7wg==
-X-Google-Smtp-Source: ABdhPJy33P35zG5c/C2euGoTdmYRuFwy2hKncNNGdVb5M/FEMoYCCXo0rdgmO/wiGFMvk6EwL//oAQ==
-X-Received: by 2002:a7b:c8c5:: with SMTP id f5mr542288wml.174.1605639754375;
- Tue, 17 Nov 2020 11:02:34 -0800 (PST)
-Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
- by smtp.gmail.com with ESMTPSA id v19sm5020653wmj.31.2020.11.17.11.02.32
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 17 Nov 2020 11:02:33 -0800 (PST)
-Date: Tue, 17 Nov 2020 20:02:31 +0100
-From: Daniel Vetter <daniel@ffwll.ch>
-To: Lee Jones <lee.jones@linaro.org>
-Message-ID: <20201117190231.GQ401619@phenom.ffwll.local>
-Mail-Followup-To: Lee Jones <lee.jones@linaro.org>,
- linux-kernel@vger.kernel.org, Ben Skeggs <bskeggs@redhat.com>,
- David Airlie <airlied@linux.ie>, dri-devel@lists.freedesktop.org,
- nouveau@lists.freedesktop.org
-References: <20201116174112.1833368-1-lee.jones@linaro.org>
- <20201116174112.1833368-22-lee.jones@linaro.org>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=rkMlGhBddK4CWlIkq4VYwxC7ANjZVCeqrUa0zy6WU0I=;
+ b=uaoUQCadTyzWP80/vAYoNJZafrq7tbmPor2qMkoaqLVmVbrom0Z6NyriBLZyTcG+eP
+ NbIedEoS6te5An81V6TXEJOPb0Xz793hbV3NsUIHBvetIjzwKcYt4kRIwW7KHP45oViJ
+ iiGnhbF9dWa0AkUsr0FBkfc0agf+NUqjDrt+scbRvGKkXt0wiK/WE07C6Ls8Yvuhyek2
+ 3bFqGS6P4Pz9rnul51tu89va456ce+moRofM7QcI6FI1GO6kTQB+NzVY3dVQmBVSTKMD
+ YGBVIOY1p1qemvowmP/YCn3N5VSqUPZf7ofiFq5hwI3IbQ5r0j19mZKDokYPimaCwQLS
+ kg0A==
+X-Gm-Message-State: AOAM5310T13j3hFbEZYbMK+rL5fDJpCi+x1/hNXc+DXFWw1Y+9WDSIYN
+ /KRrSASP/w2a0rYBxGI6ElnKYv4nUGiP+W7UBsI=
+X-Google-Smtp-Source: ABdhPJyqvIcxUrbL0AaN6gSRNz2wjNs4QkYGhaUKzlP3J9lx3udNRytqjWUm4S6ui6wFImY2T0gEVeBnLueaghIYvhM=
+X-Received: by 2002:aca:4bc3:: with SMTP id y186mr1952687oia.153.1605691281629; 
+ Wed, 18 Nov 2020 01:21:21 -0800 (PST)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20201116174112.1833368-22-lee.jones@linaro.org>
-X-Operating-System: Linux phenom 5.7.0-1-amd64 
-Subject: Re: [Nouveau] [PATCH 21/42] drm/nouveau/nvkm/core/firmware: Fix
- formatting, provide missing param description
+References: <20201029101428.4058311-1-daniel.vetter@ffwll.ch>
+ <20201029132229.4068359-1-daniel.vetter@ffwll.ch>
+ <alpine.DEB.2.22.394.2010311116530.379363@ramsan.of.borg>
+ <CAKMK7uH3SQEjhJkcMcZSW6foiDsMKS91StLYcKoyH+h1obKPCA@mail.gmail.com>
+In-Reply-To: <CAKMK7uH3SQEjhJkcMcZSW6foiDsMKS91StLYcKoyH+h1obKPCA@mail.gmail.com>
+From: Geert Uytterhoeven <geert@linux-m68k.org>
+Date: Wed, 18 Nov 2020 10:21:10 +0100
+Message-ID: <CAMuHMdWOHgysOYNXWxo6YoqjJRaqAyFrHjDEm7ARLyP=xmnN5g@mail.gmail.com>
+To: Daniel Vetter <daniel.vetter@ffwll.ch>
+X-Mailman-Approved-At: Wed, 18 Nov 2020 13:52:57 +0000
+Subject: Re: [Nouveau] [PATCH] fbcon: Disable accelerated scrolling
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,75 +54,135 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>
+Cc: Linux Fbdev development list <linux-fbdev@vger.kernel.org>,
+ Jiri Slaby <jirislaby@kernel.org>,
+ Bartlomiej Zolnierkiewicz <b.zolnierkie@samsung.com>,
+ Tetsuo Handa <penguin-kernel@i-love.sakura.ne.jp>,
+ Linus Torvalds <torvalds@linux-foundation.org>,
+ Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
+ "Gustavo A. R. Silva" <gustavoars@kernel.org>,
+ DRI Development <dri-devel@lists.freedesktop.org>,
+ Peilin Ye <yepeilin.cs@gmail.com>, George Kennedy <george.kennedy@oracle.com>,
+ Tomi Valkeinen <tomi.valkeinen@ti.com>, Ben Skeggs <bskeggs@redhat.com>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Nouveau Dev <nouveau@lists.freedesktop.org>,
+ Daniel Vetter <daniel.vetter@intel.com>,
+ Nathan Chancellor <natechancellor@gmail.com>, Sam Ravnborg <sam@ravnborg.org>,
+ Peter Rosin <peda@axentia.se>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Mon, Nov 16, 2020 at 05:40:51PM +0000, Lee Jones wrote:
-> ... and demote non-conformant kernel-doc header.
-> 
-> Fixes the following W=1 kernel build warning(s):
-> 
->  drivers/gpu/drm/nouveau/nvkm/core/firmware.c:71: warning: Function parameter or member 'subdev' not described in 'nvkm_firmware_get'
->  drivers/gpu/drm/nouveau/nvkm/core/firmware.c:71: warning: Function parameter or member 'fwname' not described in 'nvkm_firmware_get'
->  drivers/gpu/drm/nouveau/nvkm/core/firmware.c:71: warning: Function parameter or member 'ver' not described in 'nvkm_firmware_get'
->  drivers/gpu/drm/nouveau/nvkm/core/firmware.c:71: warning: Function parameter or member 'fw' not described in 'nvkm_firmware_get'
->  drivers/gpu/drm/nouveau/nvkm/core/firmware.c:106: warning: Function parameter or member 'fw' not described in 'nvkm_firmware_put'
-> 
-> Cc: Ben Skeggs <bskeggs@redhat.com>
+Hi Daniel,
 
-Ben fyi I smashed this into drm-misc-next, seemed trivial enough to not be
-a bother.
--Daniel
+Replying "early" (see below), as this was applied to
+drm-misc/for-linux-next.
 
-> Cc: David Airlie <airlied@linux.ie>
-> Cc: Daniel Vetter <daniel@ffwll.ch>
-> Cc: dri-devel@lists.freedesktop.org
-> Cc: nouveau@lists.freedesktop.org
-> Signed-off-by: Lee Jones <lee.jones@linaro.org>
-> ---
->  drivers/gpu/drm/nouveau/nvkm/core/firmware.c | 9 +++++----
->  1 file changed, 5 insertions(+), 4 deletions(-)
-> 
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/core/firmware.c b/drivers/gpu/drm/nouveau/nvkm/core/firmware.c
-> index 8b25367917ca0..ca1f8463cff51 100644
-> --- a/drivers/gpu/drm/nouveau/nvkm/core/firmware.c
-> +++ b/drivers/gpu/drm/nouveau/nvkm/core/firmware.c
-> @@ -58,9 +58,10 @@ nvkm_firmware_load_blob(const struct nvkm_subdev *subdev, const char *base,
->  
->  /**
->   * nvkm_firmware_get - load firmware from the official nvidia/chip/ directory
-> - * @subdev	subdevice that will use that firmware
-> - * @fwname	name of firmware file to load
-> - * @fw		firmware structure to load to
-> + * @subdev:	subdevice that will use that firmware
-> + * @fwname:	name of firmware file to load
-> + * @ver:	firmware version to load
-> + * @fw:		firmware structure to load to
->   *
->   * Use this function to load firmware files in the form nvidia/chip/fwname.bin.
->   * Firmware files released by NVIDIA will always follow this format.
-> @@ -98,7 +99,7 @@ nvkm_firmware_get(const struct nvkm_subdev *subdev, const char *fwname, int ver,
->  	return -ENOENT;
->  }
->  
-> -/**
-> +/*
->   * nvkm_firmware_put - release firmware loaded with nvkm_firmware_get
->   */
->  void
-> -- 
-> 2.25.1
-> 
+On Sat, Oct 31, 2020 at 3:17 PM Daniel Vetter <daniel.vetter@ffwll.ch> wrote:
+> On Sat, Oct 31, 2020 at 11:28 AM Geert Uytterhoeven
+> <geert@linux-m68k.org> wrote:
+> > On Thu, 29 Oct 2020, Daniel Vetter wrote:
+> > > So ever since syzbot discovered fbcon, we have solid proof that it's
+> > > full of bugs. And often the solution is to just delete code and remove
+> > > features, e.g.  50145474f6ef ("fbcon: remove soft scrollback code").
+> > >
+> > > Now the problem is that most modern-ish drivers really only treat
+> > > fbcon as an dumb kernel console until userspace takes over, and Oops
+> > > printer for some emergencies. Looking at drm drivers and the basic
+> > > vesa/efi fbdev drivers shows that only 3 drivers support any kind of
+> > > acceleration:
+> > >
+> > > - nouveau, seems to be enabled by default
+> > > - omapdrm, when a DMM remapper exists using remapper rewriting for
+> > >  y/xpanning
+> > > - gma500, but that is getting deleted now for the GTT remapper trick,
+> > >  and the accelerated copyarea never set the FBINFO_HWACCEL_COPYAREA
+> > >  flag, so unused (and could be deleted already I think).
+> > >
+> > > No other driver supportes accelerated fbcon. And fbcon is the only
+> > > user of this accel code (it's not exposed as uapi through ioctls),
+> > > which means we could garbage collect fairly enormous amounts of code
+> > > if we kill this.
+> >
+> > "git grep FBINFO_HWACCEL_COPYAREA" shows me there are 32 more drivers
+> > using acceleration under drivers/video/fbdev/.
+> >
+> > > Plus because syzbot only runs on virtual hardware, and none of the
+> > > drivers for that have acceleration, we'd remove a huge gap in testing.
+> > > And there's no other even remotely comprehensive testing aside from
+> > > syzbot.
+> >
+> > That sounds like a great argument to remove all hardware drivers from
+> > the kernel ;-)
+>
+> fbdev is unmaintained, has no one volunteering to put in the work (and
+> there's huge amounts of work needed), and there's no test suite. No,
+> fbtest.c doesn't can't, that's not even close. We're not going to
+> delete everything in the kernel, but slowly sunsetting stuff that's
+> just costing and not bringing in up is a good idea.
+
+The fbcon acceleration code is indeed not tested by fbset, and it is
+purely in-kernel acceleration for the console.
+
+> > Seriously, how hard can it be to add "software-accelerated" acceleration
+> > hooks to drivers/video/fbdev/vfb.c, to enable syzbot to exercise the
+> > core acceleration code paths?
+>
+> Just this one is 5 combinations, which means I'd need to convince
+> syzbot to test 5 different machine setups.
+
+Why 5 combinations?
+Enable vfb (which can be a module) and be done with it?
+
+> Plus we're still lacking a test suite, and judging from how much time
+> it took to get something basic going for kms, that's about 2 engineer
+> years of effort that no one is even close to willing to spend.
+
+Sure, writing test suites is hard, and takes time.
+
+> > > This patch here just disables the acceleration code by always
+> > > redrawing when scrolling. The plan is that once this has been merged
+> > > for well over a year in released kernels, we can start to go around
+> > > and delete a lot of code.
+> >
+> > Have you benchmarked the performance impact on traditional fbdev
+> > drivers?
+>
+> There's still some acceleration if you have an image blit engine for
+> redrawing the screen. But the complexity is contained in the old
+> drivers that no one cares about.
+>
+> For anything I have access to the difference is 0.
+
+Sure, you're doing DRM drivers ;-)
+
+> Reality is that fbdev is just there nowadays for Oops printing and
+> emergency usage, and it's plenty good enough for that. If there's
+
+That's true for systems that are supported by a DRM driver.
+
+> anyone who cares beyond that, they're most definitely not able to put
+> in time for upstream work.
+
+There exist actual products using out-of-tree fbdev drivers that never
+got the chance of being merged upstream due to the moratorium on new
+fbdev drivers.
+
+BTW, I'm trying to convert an old fbdev driver to DRM, but don't have it
+working yet. I had hoped to get something working before replying to
+this email, so I could provide more detailed feedback.
+
+Gr{oetje,eeting}s,
+
+                        Geert
 
 -- 
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
+Geert Uytterhoeven -- There's lots of Linux beyond ia32 -- geert@linux-m68k.org
+
+In personal conversations with technical people, I call myself a hacker. But
+when I'm talking to journalists I just say "programmer" or something like that.
+                                -- Linus Torvalds
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
