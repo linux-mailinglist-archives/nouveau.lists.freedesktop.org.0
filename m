@@ -1,48 +1,55 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 99C652B7E98
-	for <lists+nouveau@lfdr.de>; Wed, 18 Nov 2020 14:53:00 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4B6392BA2DA
+	for <lists+nouveau@lfdr.de>; Fri, 20 Nov 2020 08:15:23 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 13A1C6E423;
-	Wed, 18 Nov 2020 13:52:58 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A89676E876;
+	Fri, 20 Nov 2020 07:15:21 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-oi1-f193.google.com (mail-oi1-f193.google.com
- [209.85.167.193])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 54DE589BA5;
- Wed, 18 Nov 2020 09:21:22 +0000 (UTC)
-Received: by mail-oi1-f193.google.com with SMTP id s18so322613oih.1;
- Wed, 18 Nov 2020 01:21:22 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=rkMlGhBddK4CWlIkq4VYwxC7ANjZVCeqrUa0zy6WU0I=;
- b=uaoUQCadTyzWP80/vAYoNJZafrq7tbmPor2qMkoaqLVmVbrom0Z6NyriBLZyTcG+eP
- NbIedEoS6te5An81V6TXEJOPb0Xz793hbV3NsUIHBvetIjzwKcYt4kRIwW7KHP45oViJ
- iiGnhbF9dWa0AkUsr0FBkfc0agf+NUqjDrt+scbRvGKkXt0wiK/WE07C6Ls8Yvuhyek2
- 3bFqGS6P4Pz9rnul51tu89va456ce+moRofM7QcI6FI1GO6kTQB+NzVY3dVQmBVSTKMD
- YGBVIOY1p1qemvowmP/YCn3N5VSqUPZf7ofiFq5hwI3IbQ5r0j19mZKDokYPimaCwQLS
- kg0A==
-X-Gm-Message-State: AOAM5310T13j3hFbEZYbMK+rL5fDJpCi+x1/hNXc+DXFWw1Y+9WDSIYN
- /KRrSASP/w2a0rYBxGI6ElnKYv4nUGiP+W7UBsI=
-X-Google-Smtp-Source: ABdhPJyqvIcxUrbL0AaN6gSRNz2wjNs4QkYGhaUKzlP3J9lx3udNRytqjWUm4S6ui6wFImY2T0gEVeBnLueaghIYvhM=
-X-Received: by 2002:aca:4bc3:: with SMTP id y186mr1952687oia.153.1605691281629; 
- Wed, 18 Nov 2020 01:21:21 -0800 (PST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1C7586E876
+ for <nouveau@lists.freedesktop.org>; Fri, 20 Nov 2020 07:15:19 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.net;
+ s=badeba3b8450; t=1605856516;
+ bh=+LEyJWZBHwIf02qa1cs+cqkQlhMdXc7yjscoAD4xi0o=;
+ h=X-UI-Sender-Class:Subject:From:To:Cc:Date;
+ b=QHrvF8X0JKxWIyhwpzUzUtKUN2toZ2pruLpm3yhtUF3HQ8trKRaCtivgolYNieVqq
+ CWisIgjKojTA5q6PiNQ4ZprcR+LowOjHZFcsIpb1ADNSQQasZrb6/52l+ZUPOfB/bj
+ tgrW8ExOYvGETzu7R8kl3cQW9Yz/u5yYMdnhu6qM=
+X-UI-Sender-Class: 01bb95c1-4bf8-414a-932a-4f6e2808ef9c
+Received: from homer.fritz.box ([185.191.217.24]) by mail.gmx.com (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MHXFr-1kSW7W3iIz-00DV6H; Fri, 20
+ Nov 2020 08:15:15 +0100
+Message-ID: <eee10eb4ea028d4ac74939d5100ae9c4383b82da.camel@gmx.de>
+From: Mike Galbraith <efault@gmx.de>
+To: lkml <linux-kernel@vger.kernel.org>
+Date: Fri, 20 Nov 2020 08:15:15 +0100
+User-Agent: Evolution 3.34.4 
 MIME-Version: 1.0
-References: <20201029101428.4058311-1-daniel.vetter@ffwll.ch>
- <20201029132229.4068359-1-daniel.vetter@ffwll.ch>
- <alpine.DEB.2.22.394.2010311116530.379363@ramsan.of.borg>
- <CAKMK7uH3SQEjhJkcMcZSW6foiDsMKS91StLYcKoyH+h1obKPCA@mail.gmail.com>
-In-Reply-To: <CAKMK7uH3SQEjhJkcMcZSW6foiDsMKS91StLYcKoyH+h1obKPCA@mail.gmail.com>
-From: Geert Uytterhoeven <geert@linux-m68k.org>
-Date: Wed, 18 Nov 2020 10:21:10 +0100
-Message-ID: <CAMuHMdWOHgysOYNXWxo6YoqjJRaqAyFrHjDEm7ARLyP=xmnN5g@mail.gmail.com>
-To: Daniel Vetter <daniel.vetter@ffwll.ch>
-X-Mailman-Approved-At: Wed, 18 Nov 2020 13:52:57 +0000
-Subject: Re: [Nouveau] [PATCH] fbcon: Disable accelerated scrolling
+X-Provags-ID: V03:K1:aiYOCE7yOonTQvzkaLZG/yT+pmhsOWuwq57JC+KrIrlKD2D3X6M
+ g5PzUpc9DgM63193lyXhGyQpbd8b7QUU7rLuIBj2cc9ipqfa7QeTACXi6NmQNSl0FRYYUpU
+ bu7rj5cF5yZU+W9qZ7+Q9KKp5oYtVhl9srujPx2481B4sZgcxjlDuHzETAusED2bab76/sr
+ Z8BmTlGOZ0fr0ValuhwyA==
+X-Spam-Flag: NO
+X-UI-Out-Filterresults: notjunk:1;V03:K0:+VBCuNVCrXU=:/qZji59ny1UFpkeSBvoCMj
+ tud57X9VVId1+a/2vPXth3p4Zl42+UskmnsHwfttqR2RfebGN6uSfRkpMxFm3ONTl+FxsNw1F
+ Qu3leUNg+9r8JLnZm3E7gTJGHNEkpESquPwy6dbag8WB6Lfqzk8c1GmKzE8oeH6Bv80nsNt5l
+ GCiQf3l1uwEU63GB55axtmJXTjog9OIr274Dk8cfGGukDC6xDTDS12qe/xStE9wwYf1zyqEqa
+ Womnl6AeDuJaWVL3jmVfOamFHVrlQzZhBG96hs+WLQHwEP+04NMB6CsIlUYxc3LyrGAGO0f9G
+ 9k9KVpeJZ7qfmMS6/EFFXrghqa0QqvRxQemMR1Wub8DxN5wUPYI/Wz8fYJdPk7fuEm1FQ4wvr
+ wVEQpmX88Bzfplp9ALSGR3G7jtU7IiGC+qAoFuFM8C9ZwIU8IY33vf/6a0y679xVoCXKyxgdR
+ wEJszatyHXyTe47GjJu19ihoyB6z7KbLWujQpUH8k45nINDxNBvV0uKfGZT0LfjK0RRTox9Z/
+ 2SOoY1LWIeBWYjqwuv51TfcvLGOH2qkROl8DV2r9P9ebMYvMSurwu5HJz5mu025Uaa2XvLtH5
+ PSFfI+nIokTl+i35QDRHaMF+Wt6fdsOZFfsRXJIq97BLDDOrVhlblMeCMUid5fUBrgjcnjdzY
+ fj2KskYGhjg7qC6ZEcQiqPb3KgL83F+SacppjZa96XeG2OEnqcus3men25ZTN7t8BDVVn4JnC
+ GiXftTvGtOyBM09KKYzaMFX0t5m8HTT9cXHg4hJDZALL3weIwPkG88U7FYAH/OWSdw6p+37il
+ szQ7VsazrwhQOuyLLdI8V2AjzJyOGiTq9j3QdbvgXiGE35lLEhpP4AjanrVEXvIPntKSSZCsz
+ BPme47ZdBZg01Q8eR38w==
+Subject: [Nouveau] nouveau: WARNING: CPU: 0 PID: 20957 at
+ drivers/gpu/drm/nouveau/nvif/vmm.c:71
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -54,135 +61,46 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Linux Fbdev development list <linux-fbdev@vger.kernel.org>,
- Jiri Slaby <jirislaby@kernel.org>,
- Bartlomiej Zolnierkiewicz <b.zolnierkie@samsung.com>,
- Tetsuo Handa <penguin-kernel@i-love.sakura.ne.jp>,
- Linus Torvalds <torvalds@linux-foundation.org>,
- Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
- "Gustavo A. R. Silva" <gustavoars@kernel.org>,
- DRI Development <dri-devel@lists.freedesktop.org>,
- Peilin Ye <yepeilin.cs@gmail.com>, George Kennedy <george.kennedy@oracle.com>,
- Tomi Valkeinen <tomi.valkeinen@ti.com>, Ben Skeggs <bskeggs@redhat.com>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Nouveau Dev <nouveau@lists.freedesktop.org>,
- Daniel Vetter <daniel.vetter@intel.com>,
- Nathan Chancellor <natechancellor@gmail.com>, Sam Ravnborg <sam@ravnborg.org>,
- Peter Rosin <peda@axentia.se>
+Cc: nouveau <nouveau@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi Daniel,
+[15561.391527] ------------[ cut here ]------------
+[15561.391560] WARNING: CPU: 0 PID: 20957 at drivers/gpu/drm/nouveau/nvif/vmm.c:71 nvif_vmm_put+0x4a/0x50 [nouveau]
+[15561.391562] Modules linked in: nls_utf8(E) isofs(E) fuse(E) msr(E) xt_comment(E) br_netfilter(E) xt_physdev(E) nfnetlink_cthelper(E) nfnetlink(E) ebtable_filter(E) ebtables(E) af_packet(E) bridge(E) stp(E) llc(E) iscsi_ibft(E) iscsi_boot_sysfs(E) rfkill(E) xt_pkttype(E) xt_tcpudp(E) ip6t_REJECT(E) nf_reject_ipv6(E) ipt_REJECT(E) nf_reject_ipv4(E) iptable_filter(E) bpfilter(E) ip6table_mangle(E) ip_tables(E) xt_conntrack(E) nf_conntrack(E) nf_defrag_ipv6(E) nf_defrag_ipv4(E) libcrc32c(E) ip6table_filter(E) ip6_tables(E) x_tables(E) hid_logitech_hidpp(E) sr_mod(E) usblp(E) cdrom(E) hid_logitech_dj(E) joydev(E) intel_rapl_msr(E) intel_rapl_common(E) at24(E) mei_hdcp(E) iTCO_wdt(E) regmap_i2c(E) intel_pmc_bxt(E) iTCO_vendor_support(E) snd_hda_codec_realtek(E) snd_hda_codec_generic(E) ledtrig_audio(E) snd_hda_codec_hdmi(E) x86_pkg_temp_thermal(E) intel_powerclamp(E) snd_hda_intel(E) coretemp(E) snd_intel_dspcfg(E) kvm_intel(E) snd_hda_codec(E) snd_hwdep(E) snd_hda_core(E) kvm(E)
+[15561.391586]  nls_iso8859_1(E) nls_cp437(E) snd_pcm(E) irqbypass(E) crct10dif_pclmul(E) snd_timer(E) crc32_pclmul(E) r8169(E) ghash_clmulni_intel(E) snd(E) aesni_intel(E) realtek(E) crypto_simd(E) i2c_i801(E) mei_me(E) mdio_devres(E) cryptd(E) pcspkr(E) soundcore(E) i2c_smbus(E) lpc_ich(E) glue_helper(E) mfd_core(E) libphy(E) mei(E) fan(E) thermal(E) intel_smartconnect(E) nfsd(E) auth_rpcgss(E) nfs_acl(E) lockd(E) grace(E) sch_fq_codel(E) sunrpc(E) nfs_ssc(E) uas(E) usb_storage(E) hid_generic(E) usbhid(E) nouveau(E) wmi(E) i2c_algo_bit(E) drm_kms_helper(E) syscopyarea(E) sysfillrect(E) sysimgblt(E) fb_sys_fops(E) xhci_pci(E) cec(E) ahci(E) rc_core(E) ehci_pci(E) xhci_hcd(E) ttm(E) libahci(E) ehci_hcd(E) libata(E) drm(E) usbcore(E) video(E) button(E) sd_mod(E) t10_pi(E) vfat(E) fat(E) virtio_blk(E) virtio_mmio(E) virtio_ring(E) virtio(E) ext4(E) crc32c_intel(E) crc16(E) mbcache(E) jbd2(E) loop(E) sg(E) dm_multipath(E) dm_mod(E) scsi_dh_rdac(E) scsi_dh_emc(E) scsi_dh_alua(E) scsi_mod
+ (E)
+[15561.391626]  efivarfs(E) autofs4(E)
+[15561.391637] CPU: 0 PID: 20957 Comm: kworker/0:4 Kdump: loaded Tainted: G S          E     5.10.0.g9c87c9f-master #3
+[15561.391640] Hardware name: MEDION MS-7848/MS-7848, BIOS M7848W08.20C 09/23/2013
+[15561.391667] Workqueue: events nouveau_cli_work [nouveau]
+[15561.391682] RIP: 0010:nvif_vmm_put+0x4a/0x50 [nouveau]
+[15561.391684] Code: 00 00 00 48 89 e2 48 c7 04 24 00 00 00 00 48 89 44 24 08 e8 48 e7 ff ff 85 c0 75 0e 48 c7 43 08 00 00 00 00 48 83 c4 10 5b c3 <0f> 0b eb ee 66 90 0f 1f 44 00 00 53 48 83 ec 18 83 fe 01 48 8b 5c
+[15561.391686] RSP: 0000:ffff8881feca7e08 EFLAGS: 00010282
+[15561.391688] RAX: 00000000fffffffe RBX: ffff8881feca7e28 RCX: 0000000000000000
+[15561.391690] RDX: 0000000000000010 RSI: ffff8881feca7d80 RDI: ffff8881feca7e18
+[15561.391692] RBP: ffff8881feca7e50 R08: 0000000001dc5000 R09: 0000000000000000
+[15561.391693] R10: ffffffff82003de8 R11: fefefefefefefeff R12: dead000000000122
+[15561.391695] R13: dead000000000100 R14: ffff888102fa9328 R15: ffff888102fa9308
+[15561.391697] FS:  0000000000000000(0000) GS:ffff88841ec00000(0000) knlGS:0000000000000000
+[15561.391698] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[15561.391700] CR2: 00007fd692058000 CR3: 0000000003c10002 CR4: 00000000001706f0
+[15561.391701] Call Trace:
+[15561.391729]  nouveau_vma_del+0x58/0xa0 [nouveau]
+[15561.391755]  nouveau_gem_object_delete_work+0x26/0x40 [nouveau]
+[15561.391782]  nouveau_cli_work+0x76/0x120 [nouveau]
+[15561.391786]  ? __schedule+0x35c/0x770
+[15561.391790]  process_one_work+0x1f5/0x3c0
+[15561.391792]  ? process_one_work+0x3c0/0x3c0
+[15561.391794]  worker_thread+0x2d/0x3d0
+[15561.391796]  ? process_one_work+0x3c0/0x3c0
+[15561.391798]  kthread+0x117/0x130
+[15561.391800]  ? kthread_park+0x90/0x90
+[15561.391803]  ret_from_fork+0x1f/0x30
+[15561.391806] ---[ end trace 1f8ba448e97e64e0 ]---
 
-Replying "early" (see below), as this was applied to
-drm-misc/for-linux-next.
-
-On Sat, Oct 31, 2020 at 3:17 PM Daniel Vetter <daniel.vetter@ffwll.ch> wrote:
-> On Sat, Oct 31, 2020 at 11:28 AM Geert Uytterhoeven
-> <geert@linux-m68k.org> wrote:
-> > On Thu, 29 Oct 2020, Daniel Vetter wrote:
-> > > So ever since syzbot discovered fbcon, we have solid proof that it's
-> > > full of bugs. And often the solution is to just delete code and remove
-> > > features, e.g.  50145474f6ef ("fbcon: remove soft scrollback code").
-> > >
-> > > Now the problem is that most modern-ish drivers really only treat
-> > > fbcon as an dumb kernel console until userspace takes over, and Oops
-> > > printer for some emergencies. Looking at drm drivers and the basic
-> > > vesa/efi fbdev drivers shows that only 3 drivers support any kind of
-> > > acceleration:
-> > >
-> > > - nouveau, seems to be enabled by default
-> > > - omapdrm, when a DMM remapper exists using remapper rewriting for
-> > >  y/xpanning
-> > > - gma500, but that is getting deleted now for the GTT remapper trick,
-> > >  and the accelerated copyarea never set the FBINFO_HWACCEL_COPYAREA
-> > >  flag, so unused (and could be deleted already I think).
-> > >
-> > > No other driver supportes accelerated fbcon. And fbcon is the only
-> > > user of this accel code (it's not exposed as uapi through ioctls),
-> > > which means we could garbage collect fairly enormous amounts of code
-> > > if we kill this.
-> >
-> > "git grep FBINFO_HWACCEL_COPYAREA" shows me there are 32 more drivers
-> > using acceleration under drivers/video/fbdev/.
-> >
-> > > Plus because syzbot only runs on virtual hardware, and none of the
-> > > drivers for that have acceleration, we'd remove a huge gap in testing.
-> > > And there's no other even remotely comprehensive testing aside from
-> > > syzbot.
-> >
-> > That sounds like a great argument to remove all hardware drivers from
-> > the kernel ;-)
->
-> fbdev is unmaintained, has no one volunteering to put in the work (and
-> there's huge amounts of work needed), and there's no test suite. No,
-> fbtest.c doesn't can't, that's not even close. We're not going to
-> delete everything in the kernel, but slowly sunsetting stuff that's
-> just costing and not bringing in up is a good idea.
-
-The fbcon acceleration code is indeed not tested by fbset, and it is
-purely in-kernel acceleration for the console.
-
-> > Seriously, how hard can it be to add "software-accelerated" acceleration
-> > hooks to drivers/video/fbdev/vfb.c, to enable syzbot to exercise the
-> > core acceleration code paths?
->
-> Just this one is 5 combinations, which means I'd need to convince
-> syzbot to test 5 different machine setups.
-
-Why 5 combinations?
-Enable vfb (which can be a module) and be done with it?
-
-> Plus we're still lacking a test suite, and judging from how much time
-> it took to get something basic going for kms, that's about 2 engineer
-> years of effort that no one is even close to willing to spend.
-
-Sure, writing test suites is hard, and takes time.
-
-> > > This patch here just disables the acceleration code by always
-> > > redrawing when scrolling. The plan is that once this has been merged
-> > > for well over a year in released kernels, we can start to go around
-> > > and delete a lot of code.
-> >
-> > Have you benchmarked the performance impact on traditional fbdev
-> > drivers?
->
-> There's still some acceleration if you have an image blit engine for
-> redrawing the screen. But the complexity is contained in the old
-> drivers that no one cares about.
->
-> For anything I have access to the difference is 0.
-
-Sure, you're doing DRM drivers ;-)
-
-> Reality is that fbdev is just there nowadays for Oops printing and
-> emergency usage, and it's plenty good enough for that. If there's
-
-That's true for systems that are supported by a DRM driver.
-
-> anyone who cares beyond that, they're most definitely not able to put
-> in time for upstream work.
-
-There exist actual products using out-of-tree fbdev drivers that never
-got the chance of being merged upstream due to the moratorium on new
-fbdev drivers.
-
-BTW, I'm trying to convert an old fbdev driver to DRM, but don't have it
-working yet. I had hoped to get something working before replying to
-this email, so I could provide more detailed feedback.
-
-Gr{oetje,eeting}s,
-
-                        Geert
-
--- 
-Geert Uytterhoeven -- There's lots of Linux beyond ia32 -- geert@linux-m68k.org
-
-In personal conversations with technical people, I call myself a hacker. But
-when I'm talking to journalists I just say "programmer" or something like that.
-                                -- Linus Torvalds
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
