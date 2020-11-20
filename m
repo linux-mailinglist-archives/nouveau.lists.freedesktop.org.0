@@ -2,33 +2,32 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 111D12BBA8F
-	for <lists+nouveau@lfdr.de>; Sat, 21 Nov 2020 01:11:13 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B3A632BBA91
+	for <lists+nouveau@lfdr.de>; Sat, 21 Nov 2020 01:11:14 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8388A6E94D;
-	Sat, 21 Nov 2020 00:11:02 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8346F6E949;
+	Sat, 21 Nov 2020 00:11:03 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from szxga06-in.huawei.com (szxga06-in.huawei.com [45.249.212.32])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4F48689C54;
- Fri, 20 Nov 2020 06:49:34 +0000 (UTC)
-Received: from DGGEMS411-HUB.china.huawei.com (unknown [172.30.72.59])
- by szxga06-in.huawei.com (SkyGuard) with ESMTP id 4CcnG72s9HzhbVR;
- Fri, 20 Nov 2020 14:49:19 +0800 (CST)
-Received: from localhost.localdomain (10.69.192.56) by
- DGGEMS411-HUB.china.huawei.com (10.3.19.211) with Microsoft SMTP Server id
- 14.3.487.0; Fri, 20 Nov 2020 14:49:29 +0800
-From: Tian Tao <tiantao6@hisilicon.com>
-To: <bskeggs@redhat.com>, <airlied@linux.ie>, <daniel@ffwll.ch>,
- <sumit.semwal@linaro.org>, <christian.koenig@amd.com>
-Date: Fri, 20 Nov 2020 14:49:53 +0800
-Message-ID: <1605854993-50218-1-git-send-email-tiantao6@hisilicon.com>
-X-Mailer: git-send-email 2.7.4
+X-Greylist: delayed 392 seconds by postgrey-1.36 at gabe;
+ Fri, 20 Nov 2020 15:30:29 UTC
+Received: from pet8032.tnsp.org (tnsp.org
+ [IPv6:2a04:3540:1000:310:f095:b5ff:fe23:3d0e])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 00FA46E8C9;
+ Fri, 20 Nov 2020 15:30:29 +0000 (UTC)
+Received: from nmos6502.tnsp.org (91-158-253-65.elisa-laajakaista.fi
+ [91.158.253.65])
+ by pet8032.tnsp.org (Postfix) with ESMTPSA id 21D0C196A72;
+ Fri, 20 Nov 2020 17:23:51 +0200 (EET)
+From: Matti Hamalainen <ccr@tnsp.org>
+To: linux-kernel@vger.kernel.org
+Date: Fri, 20 Nov 2020 17:23:38 +0200
+Message-Id: <20201120152338.1203257-1-ccr@tnsp.org>
+X-Mailer: git-send-email 2.29.2
 MIME-Version: 1.0
-X-Originating-IP: [10.69.192.56]
-X-CFilter-Loop: Reflected
 X-Mailman-Approved-At: Sat, 21 Nov 2020 00:10:56 +0000
-Subject: [Nouveau] [PATCH] drm/ttm: remove unused varibles
+Subject: [Nouveau] [PATCH] drm/nouveau: fix relocations applying logic and a
+ double-free
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -40,33 +39,81 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: linaro-mm-sig@lists.linaro.org, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- linux-media@vger.kernel.org
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: Ben Skeggs <bskeggs@redhat.com>, dri-devel@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Zml4ZWQgdGhlIGZvbGxvd2luZyB3YXJuaW5ncwpkcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2
-ZWF1X2JvLmM6MTIyNzoxNzogd2FybmluZzogdmFyaWFibGUg4oCYZGV24oCZCnNldCBidXQgbm90
-IHVzZWQgWy1XdW51c2VkLWJ1dC1zZXQtdmFyaWFibGVdCmRyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1
-L25vdXZlYXVfYm8uYzoxMjUxOjE3OiB3YXJuaW5nOiB2YXJpYWJsZSDigJhkZXbigJkKc2V0IGJ1
-dCBub3QgdXNlZCBbLVd1bnVzZWQtYnV0LXNldC12YXJpYWJsZV0KClNpZ25lZC1vZmYtYnk6IFRp
-YW4gVGFvIDx0aWFudGFvNkBoaXNpbGljb24uY29tPgotLS0KIGRyaXZlcnMvZ3B1L2RybS9ub3V2
-ZWF1L25vdXZlYXVfYm8uYyB8IDIgLS0KIDEgZmlsZSBjaGFuZ2VkLCAyIGRlbGV0aW9ucygtKQoK
-ZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfYm8uYyBiL2RyaXZl
-cnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfYm8uYwppbmRleCA3YWE0Mjg2Li45NDY1ZjU2IDEw
-MDY0NAotLS0gYS9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2JvLmMKKysrIGIvZHJp
-dmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9iby5jCkBAIC0xMjI4LDcgKzEyMjgsNiBAQCBu
-b3V2ZWF1X3R0bV90dF9wb3B1bGF0ZShzdHJ1Y3QgdHRtX2JvX2RldmljZSAqYmRldiwKIHsKIAlz
-dHJ1Y3QgdHRtX3R0ICp0dG1fZG1hID0gKHZvaWQgKil0dG07CiAJc3RydWN0IG5vdXZlYXVfZHJt
-ICpkcm07Ci0Jc3RydWN0IGRldmljZSAqZGV2OwogCWJvb2wgc2xhdmUgPSAhISh0dG0tPnBhZ2Vf
-ZmxhZ3MgJiBUVE1fUEFHRV9GTEFHX1NHKTsKIAogCWlmICh0dG1fdHRfaXNfcG9wdWxhdGVkKHR0
-bSkpCkBAIC0xMjQyLDcgKzEyNDEsNiBAQCBub3V2ZWF1X3R0bV90dF9wb3B1bGF0ZShzdHJ1Y3Qg
-dHRtX2JvX2RldmljZSAqYmRldiwKIAl9CiAKIAlkcm0gPSBub3V2ZWF1X2JkZXYoYmRldik7Ci0J
-ZGV2ID0gZHJtLT5kZXYtPmRldjsKIAogCXJldHVybiB0dG1fcG9vbF9hbGxvYygmZHJtLT50dG0u
-YmRldi5wb29sLCB0dG0sIGN0eCk7CiB9Ci0tIAoyLjcuNAoKX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBtYWlsaW5nIGxpc3QKTm91dmVhdUBs
-aXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1h
-bi9saXN0aW5mby9ub3V2ZWF1Cg==
+Commit 03e0d26fcf79 ("drm/nouveau: slowpath for pushbuf ioctl") included
+a logic-bug which results in the relocations not actually getting
+applied at all as the call to nouveau_gem_pushbuf_reloc_apply() is
+never reached. This causes a regression with graphical corruption,
+triggered when relocations need to be done (for example after a
+suspend/resume cycle.)
+
+Fix by setting *apply_relocs value only if there were more than 0
+relocations.
+
+Additionally, the never reached code had a leftover u_free() call,
+which, after fixing the logic, now got called and resulted in a
+double-free. Fix by removing one u_free(), moving the other
+and adding check for errors.
+
+Cc: Daniel Vetter <daniel.vetter@ffwll.ch>
+Cc: Ben Skeggs <bskeggs@redhat.com>
+Cc: nouveau@lists.freedesktop.org
+Cc: dri-devel@lists.freedesktop.org
+Signed-off-by: Matti Hamalainen <ccr@tnsp.org>
+Fixes: 03e0d26fcf79 ("drm/nouveau: slowpath for pushbuf ioctl")
+Link: https://gitlab.freedesktop.org/drm/nouveau/-/issues/11
+---
+ drivers/gpu/drm/nouveau/nouveau_gem.c | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
+
+diff --git a/drivers/gpu/drm/nouveau/nouveau_gem.c b/drivers/gpu/drm/nouveau/nouveau_gem.c
+index 549bc67feabb..c2051380d18c 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_gem.c
++++ b/drivers/gpu/drm/nouveau/nouveau_gem.c
+@@ -558,8 +558,10 @@ nouveau_gem_pushbuf_validate(struct nouveau_channel *chan,
+ 			NV_PRINTK(err, cli, "validating bo list\n");
+ 		validate_fini(op, chan, NULL, NULL);
+ 		return ret;
++	} else if (ret > 0) {
++		*apply_relocs = true;
+ 	}
+-	*apply_relocs = ret;
++
+ 	return 0;
+ }
+ 
+@@ -662,7 +664,6 @@ nouveau_gem_pushbuf_reloc_apply(struct nouveau_cli *cli,
+ 		nouveau_bo_wr32(nvbo, r->reloc_bo_offset >> 2, data);
+ 	}
+ 
+-	u_free(reloc);
+ 	return ret;
+ }
+ 
+@@ -872,9 +873,10 @@ nouveau_gem_ioctl_pushbuf(struct drm_device *dev, void *data,
+ 				break;
+ 			}
+ 		}
+-		u_free(reloc);
+ 	}
+ out_prevalid:
++	if (!IS_ERR(reloc))
++		u_free(reloc);
+ 	u_free(bo);
+ 	u_free(push);
+ 
+
+base-commit: 3494d58865ad4a47611dbb427b214cc5227fa5eb
+-- 
+2.29.2
+
+_______________________________________________
+Nouveau mailing list
+Nouveau@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/nouveau
