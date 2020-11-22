@@ -2,27 +2,50 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 469CA2C1B44
-	for <lists+nouveau@lfdr.de>; Tue, 24 Nov 2020 03:08:16 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8E60A2C1B2F
+	for <lists+nouveau@lfdr.de>; Tue, 24 Nov 2020 03:07:54 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7BEC46E1A5;
-	Tue, 24 Nov 2020 02:07:59 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 510DC6E170;
+	Tue, 24 Nov 2020 02:07:50 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 482 seconds by postgrey-1.36 at gabe;
- Sun, 22 Nov 2020 23:02:53 UTC
-Received: from kvm5.telegraphics.com.au (kvm5.telegraphics.com.au
- [98.124.60.144])
- by gabe.freedesktop.org (Postfix) with ESMTP id 5E1BC897BC
- for <nouveau@lists.freedesktop.org>; Sun, 22 Nov 2020 23:02:53 +0000 (UTC)
-Received: from localhost (localhost.localdomain [127.0.0.1])
- by kvm5.telegraphics.com.au (Postfix) with ESMTP id BF98E29DB3;
- Sun, 22 Nov 2020 17:54:47 -0500 (EST)
-Date: Mon, 23 Nov 2020 09:54:48 +1100 (AEDT)
-From: Finn Thain <fthain@telegraphics.com.au>
-To: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
-In-Reply-To: <CANiq72nZrHWTA4_Msg6MP9snTyenC6-eGfD27CyfNSu7QoVZbw@mail.gmail.com>
-Message-ID: <alpine.LNX.2.23.453.2011230938390.7@nippy.intranet>
+Received: from bedivere.hansenpartnership.com (bedivere.hansenpartnership.com
+ [96.44.175.130])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 21D37892E3;
+ Sun, 22 Nov 2020 23:04:42 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by bedivere.hansenpartnership.com (Postfix) with ESMTP id 5C1741280900;
+ Sun, 22 Nov 2020 15:04:41 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=hansenpartnership.com; s=20151216; t=1606086281;
+ bh=ampKVWKUqLiKYyObj0dhEgltdPGbsuliUrstEBadWMw=;
+ h=Message-ID:Subject:From:To:Date:In-Reply-To:References:From;
+ b=WmZvrZ8SISP4O7CkmRRwRn7Ww4EqbFeoj9AudkGWHrTHPvBGVyYGXPtxxL5/3UBwZ
+ KEGMUiR7FBhAVO42W5uBkyouydambEWUMRvvMR32eyWutkJh8vdHwfKrPde3Z6lPQr
+ zwZuERjUvzNlbmlNByqn4M9h7sLDVk7BBiQeo3h4=
+Received: from bedivere.hansenpartnership.com ([127.0.0.1])
+ by localhost (bedivere.hansenpartnership.com [127.0.0.1]) (amavisd-new,
+ port 10024)
+ with ESMTP id PvG_3ynFL_Uj; Sun, 22 Nov 2020 15:04:41 -0800 (PST)
+Received: from jarvis.int.hansenpartnership.com (unknown
+ [IPv6:2601:600:8280:66d1::527])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by bedivere.hansenpartnership.com (Postfix) with ESMTPSA id 9178D12808F6;
+ Sun, 22 Nov 2020 15:04:37 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=hansenpartnership.com; s=20151216; t=1606086281;
+ bh=ampKVWKUqLiKYyObj0dhEgltdPGbsuliUrstEBadWMw=;
+ h=Message-ID:Subject:From:To:Date:In-Reply-To:References:From;
+ b=WmZvrZ8SISP4O7CkmRRwRn7Ww4EqbFeoj9AudkGWHrTHPvBGVyYGXPtxxL5/3UBwZ
+ KEGMUiR7FBhAVO42W5uBkyouydambEWUMRvvMR32eyWutkJh8vdHwfKrPde3Z6lPQr
+ zwZuERjUvzNlbmlNByqn4M9h7sLDVk7BBiQeo3h4=
+Message-ID: <c3371b7c15ed30b92e9bb8609ff65bdaa0ef61fa.camel@HansenPartnership.com>
+From: James Bottomley <James.Bottomley@HansenPartnership.com>
+To: Finn Thain <fthain@telegraphics.com.au>, Miguel Ojeda
+ <miguel.ojeda.sandonis@gmail.com>
+Date: Sun, 22 Nov 2020 15:04:36 -0800
+In-Reply-To: <alpine.LNX.2.23.453.2011230938390.7@nippy.intranet>
 References: <cover.1605896059.git.gustavoars@kernel.org>
  <20201120105344.4345c14e@kicinski-fedora-pc1c0hjn.dhcp.thefacebook.com>
  <202011201129.B13FDB3C@keescook>
@@ -30,6 +53,8 @@ References: <cover.1605896059.git.gustavoars@kernel.org>
  <202011220816.8B6591A@keescook>
  <9b57fd4914b46f38d54087d75e072d6e947cb56d.camel@HansenPartnership.com>
  <CANiq72nZrHWTA4_Msg6MP9snTyenC6-eGfD27CyfNSu7QoVZbw@mail.gmail.com>
+ <alpine.LNX.2.23.453.2011230938390.7@nippy.intranet>
+User-Agent: Evolution 3.34.4 
 MIME-Version: 1.0
 X-Mailman-Approved-At: Tue, 24 Nov 2020 02:07:49 +0000
 Subject: Re: [Nouveau] [PATCH 000/141] Fix fall-through warnings for Clang
@@ -48,16 +73,15 @@ Cc: alsa-devel@alsa-project.org, linux-atm-general@lists.sourceforge.net,
  reiserfs-devel@vger.kernel.org, linux-iio@vger.kernel.org,
  linux-wireless <linux-wireless@vger.kernel.org>, linux-fbdev@vger.kernel.org,
  dri-devel@lists.freedesktop.org, "Gustavo A. R. Silva" <gustavoars@kernel.org>,
- James Bottomley <James.Bottomley@hansenpartnership.com>,
- linux-ide@vger.kernel.org, dm-devel@redhat.com, keyrings@vger.kernel.org,
- linux-mtd@lists.infradead.org, GR-everest-linux-l2@marvell.com,
- wcn36xx@lists.infradead.org, samba-technical@lists.samba.org,
- linux-i3c@lists.infradead.org, linux1394-devel@lists.sourceforge.net,
- linux-afs@lists.infradead.org, usb-storage@lists.one-eyed-alien.net,
- drbd-dev@lists.linbit.com, devel@driverdev.osuosl.org,
- linux-cifs@vger.kernel.org, rds-devel@oss.oracle.com,
- Nick Desaulniers <ndesaulniers@google.com>, linux-scsi@vger.kernel.org,
- Nathan Chancellor <natechancellor@gmail.com>, linux-rdma@vger.kernel.org,
+ Nathan Chancellor <natechancellor@gmail.com>, linux-ide@vger.kernel.org,
+ dm-devel@redhat.com, keyrings@vger.kernel.org, linux-mtd@lists.infradead.org,
+ GR-everest-linux-l2@marvell.com, wcn36xx@lists.infradead.org,
+ samba-technical@lists.samba.org, linux-i3c@lists.infradead.org,
+ linux1394-devel@lists.sourceforge.net, linux-afs@lists.infradead.org,
+ usb-storage@lists.one-eyed-alien.net, drbd-dev@lists.linbit.com,
+ devel@driverdev.osuosl.org, linux-cifs@vger.kernel.org,
+ rds-devel@oss.oracle.com, Nick Desaulniers <ndesaulniers@google.com>,
+ linux-scsi@vger.kernel.org, linux-rdma@vger.kernel.org,
  oss-drivers@netronome.com, bridge@lists.linux-foundation.org,
  linux-security-module@vger.kernel.org, amd-gfx@lists.freedesktop.org,
  linux-stm32@st-md-mailman.stormreply.com, cluster-devel@redhat.com,
@@ -92,51 +116,24 @@ Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+On Mon, 2020-11-23 at 09:54 +1100, Finn Thain wrote:
+> But is anyone keeping score of the regressions? If unreported bugs
+> count, what about unreported regressions?
 
-On Sun, 22 Nov 2020, Miguel Ojeda wrote:
+Well, I was curious about the former (obviously no tool will tell me
+about the latter), so I asked git what patches had a fall-through
+series named in a fixes tag and these three popped out:
 
-> 
-> It isn't that much effort, isn't it? Plus we need to take into account 
-> the future mistakes that it might prevent, too.
+9cf51446e686 bpf, powerpc: Fix misuse of fallthrough in bpf_jit_comp()
+6a9dc5fd6170 lib: Revert use of fallthrough pseudo-keyword in lib/
+91dbd73a1739 mips/oprofile: Fix fallthrough placement
 
-We should also take into account optimisim about future improvements in 
-tooling.
+I don't think any of these is fixing a significant problem, but they
+did cause someone time and trouble to investigate.
 
-> So even if there were zero problems found so far, it is still a positive 
-> change.
-> 
+James
 
-It is if you want to spin it that way.
 
-> I would agree if these changes were high risk, though; but they are 
-> almost trivial.
-> 
-
-This is trivial:
-
- case 1:
-	this();
-+	fallthrough;
- case 2:
- 	that();
-
-But what we inevitably get is changes like this:
-
- case 3:
-        this();
-+       break;
- case 4:
-        hmmm();
-
-Why? Mainly to silence the compiler. Also because the patch author argued 
-successfully that they had found a theoretical bug, often in mature code.
-
-But is anyone keeping score of the regressions? If unreported bugs count, 
-what about unreported regressions?
-
-> Cheers,
-> Miguel
-> 
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
