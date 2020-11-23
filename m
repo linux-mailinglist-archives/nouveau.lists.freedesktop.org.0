@@ -1,59 +1,51 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id C39B22BC99B
-	for <lists+nouveau@lfdr.de>; Sun, 22 Nov 2020 22:46:21 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id AC66C2C0284
+	for <lists+nouveau@lfdr.de>; Mon, 23 Nov 2020 10:51:41 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 21DAD89BBE;
-	Sun, 22 Nov 2020 21:46:16 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1B188899E6;
+	Mon, 23 Nov 2020 09:51:39 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-yb1-xb2f.google.com (mail-yb1-xb2f.google.com
- [IPv6:2607:f8b0:4864:20::b2f])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7B80789BDB;
- Sun, 22 Nov 2020 20:36:10 +0000 (UTC)
-Received: by mail-yb1-xb2f.google.com with SMTP id k65so14049276ybk.5;
- Sun, 22 Nov 2020 12:36:10 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+Received: from mail-oi1-x241.google.com (mail-oi1-x241.google.com
+ [IPv6:2607:f8b0:4864:20::241])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3E81E899BE
+ for <nouveau@lists.freedesktop.org>; Mon, 23 Nov 2020 09:51:37 +0000 (UTC)
+Received: by mail-oi1-x241.google.com with SMTP id d9so19058241oib.3
+ for <nouveau@lists.freedesktop.org>; Mon, 23 Nov 2020 01:51:37 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=GG13N+h9bYKW0tA8PzZdEh0PqD5/qSPuWfMm4/MLZZE=;
- b=tX7AFJY3IoP+sTWjLWjwUeA0EiMqyjgmEMGUK52Uheybmur4GieXYHjq/4452d4+Q2
- I9IJc2W+KgP7eM5cLMrffBSaL1fq5VPLYq7a7Nqy7aqiJs+SWc7hYJy9lsWlIs20dLH2
- W28Iwaw2K1E1/9bR59jMmk/7Gq8vv14a82SqbrX8Cr26/AWqo5ergIUL6PfX6EI1DxrF
- H3tDAymEGdy6lnWgT39rAP3JOfP6UnfKa9FSSCeE7ggKiNT9+2hZ/9zdGiTOU+6HH+d5
- TmFQQAuEaRP9Z2Bh9bU0txdUhaZCbT+Ezs+qExtvq1zOJlrZzRYF6kJpZnKXIPWyTN/2
- bJqw==
+ :cc; bh=728drbmfpSOfgNwr2SHggiRFvZplFRXowT2/IwDi3MA=;
+ b=aZmfbQS5bOq7GKshLqmpzvbj9JqRIZg+SQ6+JXjk006NODOiJvOc9K0ThqI9EeJ0Ss
+ kpJ3Oixwd4FyEweXjrMI69FfahUjsSmqhl/Zka8+LwLsuPsscTUQelh8K9iGVNQHqIdA
+ 7JL/fyCgL4PV8RyQ5VxsFOKao6chb6kp6twMk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=GG13N+h9bYKW0tA8PzZdEh0PqD5/qSPuWfMm4/MLZZE=;
- b=AG3Pn6+xVQ+B6AwjXFOIx0phlIOFEUuGSuy8QmPUEzo+sS0hc2d04CD14uk5agLtos
- YGIO0Y7p5w2DuYdYvhdUKfzQ8S1fTD1vtRtsGdVj6If9Ov5QCluq2a9Q+czNGDNWgtnj
- h0f7rUxYpOVrL/kiHexlX5nqx4puQd0crsXWrEQwIMunnbNn+d8Fe5qKrpHWEbyh4FyQ
- To6vsCbElCj8fowtTeHNRriPOXtmEFB6JJrkj2EIoygxUdsJ2YCvu/RGFb/Xx0j72n8e
- oydG929oxz9KtAjeQn642HMrWFe1G8lIsV/DqkcfYXnhde7TCuF2++btE4/6NmnDIjLW
- zKzw==
-X-Gm-Message-State: AOAM530hZkYDHSHmoP7oOPCmhT8CNo9j5KceiQUemaCE/O4iA3jJ3DCE
- shs2E0DE1NdlvkuiK/3wuTfHbOd6jZUmG2RBE98=
-X-Google-Smtp-Source: ABdhPJzCLkP7XKvI+ogPcqXNjFlbBz0ulixnxLa8L+LTJiC1sb757UHHSouM0vJ9LX/4+Ocy8hzM6Anb9s4lPpy7cZY=
-X-Received: by 2002:a25:6986:: with SMTP id e128mr4956056ybc.93.1606077369721; 
- Sun, 22 Nov 2020 12:36:09 -0800 (PST)
+ bh=728drbmfpSOfgNwr2SHggiRFvZplFRXowT2/IwDi3MA=;
+ b=k24fCpncHztz4n04G0LSHdce6AbF4Uwggnrfuy59oIHfrvtcwRUnDIsWgl9Z/VXQm1
+ jmNa8IXt6SJr0/o79z8skGGPOvRO5L+wu+b7rqcQqYdlW9xXj3siLgHEcmymd7AyL6pd
+ UH2WOITT9zFL2jWRfetx0dfxGdkeurt7yE/XvqvGO0J+tjp1I7xsMCCyAV9EdKlfWhEf
+ 9+NISujSIEl/X2OInPMGISoerX6daFxF3n6MaVZIz9o0spRetz/EL2dsu1DqGUFUSMTv
+ T+S7e+4uyeUyeKzA1yFYDueXpWxR2y7hyyLP0RrC8qXpFNuhY7iCSu+lX/eqQwis33dA
+ WFig==
+X-Gm-Message-State: AOAM533znVsoQdCzVppPXb1Sr+EHZqt05PeX815Lnh/KAVQMJPcY8Trh
+ XcGT0Vb4HGB93hUvjw7WLqYQjAWnGfXhG7oo9pu7fw==
+X-Google-Smtp-Source: ABdhPJz66bLEmQYNG5dQJaXv0p24rXXX0adIcxsC4vA3n6gZsVDrskubfwiQzARt62M0gUBQfr2zgbuk5o/zH1ExS14=
+X-Received: by 2002:aca:1713:: with SMTP id j19mr13385242oii.101.1606125097243; 
+ Mon, 23 Nov 2020 01:51:37 -0800 (PST)
 MIME-Version: 1.0
-References: <cover.1605896059.git.gustavoars@kernel.org>
- <20201120105344.4345c14e@kicinski-fedora-pc1c0hjn.dhcp.thefacebook.com>
- <202011201129.B13FDB3C@keescook>
- <20201120115142.292999b2@kicinski-fedora-pc1c0hjn.dhcp.thefacebook.com>
- <202011220816.8B6591A@keescook>
- <9b57fd4914b46f38d54087d75e072d6e947cb56d.camel@HansenPartnership.com>
-In-Reply-To: <9b57fd4914b46f38d54087d75e072d6e947cb56d.camel@HansenPartnership.com>
-From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
-Date: Sun, 22 Nov 2020 21:35:58 +0100
-Message-ID: <CANiq72nZrHWTA4_Msg6MP9snTyenC6-eGfD27CyfNSu7QoVZbw@mail.gmail.com>
-To: James Bottomley <James.Bottomley@hansenpartnership.com>
-X-Mailman-Approved-At: Sun, 22 Nov 2020 21:46:13 +0000
-Subject: Re: [Nouveau] [PATCH 000/141] Fix fall-through warnings for Clang
+References: <20201120152338.1203257-1-ccr@tnsp.org>
+In-Reply-To: <20201120152338.1203257-1-ccr@tnsp.org>
+From: Daniel Vetter <daniel.vetter@ffwll.ch>
+Date: Mon, 23 Nov 2020 10:51:25 +0100
+Message-ID: <CAKMK7uGDY+aLP-yYwyW5t-usUK3XM-oU9ZLHm1_jU0BTjJUN+g@mail.gmail.com>
+To: Matti Hamalainen <ccr@tnsp.org>
+Subject: Re: [Nouveau] [PATCH] drm/nouveau: fix relocations applying logic
+ and a double-free
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -65,76 +57,100 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: alsa-devel@alsa-project.org, linux-atm-general@lists.sourceforge.net,
- reiserfs-devel@vger.kernel.org, linux-iio@vger.kernel.org,
- linux-wireless <linux-wireless@vger.kernel.org>, linux-fbdev@vger.kernel.org,
- dri-devel@lists.freedesktop.org, "Gustavo A. R. Silva" <gustavoars@kernel.org>,
- Nathan Chancellor <natechancellor@gmail.com>, linux-ide@vger.kernel.org,
- dm-devel@redhat.com, keyrings@vger.kernel.org, linux-mtd@lists.infradead.org,
- GR-everest-linux-l2@marvell.com, wcn36xx@lists.infradead.org,
- samba-technical@lists.samba.org, linux-i3c@lists.infradead.org,
- linux1394-devel@lists.sourceforge.net, linux-afs@lists.infradead.org,
- usb-storage@lists.one-eyed-alien.net, drbd-dev@lists.linbit.com,
- devel@driverdev.osuosl.org, linux-cifs@vger.kernel.org,
- rds-devel@oss.oracle.com, Nick Desaulniers <ndesaulniers@google.com>,
- linux-scsi@vger.kernel.org, linux-rdma@vger.kernel.org,
- oss-drivers@netronome.com, bridge@lists.linux-foundation.org,
- linux-security-module@vger.kernel.org, amd-gfx@lists.freedesktop.org,
- linux-stm32@st-md-mailman.stormreply.com, cluster-devel@redhat.com,
- linux-acpi@vger.kernel.org, coreteam@netfilter.org,
- intel-wired-lan@lists.osuosl.org, linux-input <linux-input@vger.kernel.org>,
- Miguel Ojeda <ojeda@kernel.org>, Jakub Kicinski <kuba@kernel.org>,
- Ext4 Developers List <linux-ext4@vger.kernel.org>,
- Linux Media Mailing List <linux-media@vger.kernel.org>,
- Kees Cook <keescook@chromium.org>, selinux@vger.kernel.org,
- linux-arm-msm@vger.kernel.org, intel-gfx@lists.freedesktop.org,
- linux-geode@lists.infradead.org, linux-can@vger.kernel.org,
- linux-block@vger.kernel.org, linux-gpio@vger.kernel.org,
- op-tee@lists.trustedfirmware.org, linux-mediatek@lists.infradead.org,
- xen-devel@lists.xenproject.org, nouveau@lists.freedesktop.org,
- linux-hams@vger.kernel.org, ceph-devel@vger.kernel.org,
- virtualization@lists.linux-foundation.org, target-devel@vger.kernel.org,
- Linux ARM <linux-arm-kernel@lists.infradead.org>, linux-hwmon@vger.kernel.org,
- linux-watchdog@vger.kernel.org, linux-nfs@vger.kernel.org,
- GR-Linux-NIC-Dev@marvell.com, tipc-discussion@lists.sourceforge.net,
- Linux-MM <linux-mm@kvack.org>, Network Development <netdev@vger.kernel.org>,
- linux-decnet-user@lists.sourceforge.net, linux-mmc@vger.kernel.org,
- linux-kernel <linux-kernel@vger.kernel.org>, linux-renesas-soc@vger.kernel.org,
- linux-sctp@vger.kernel.org, linux-usb@vger.kernel.org,
- netfilter-devel@vger.kernel.org,
- Linux Crypto Mailing List <linux-crypto@vger.kernel.org>,
- patches@opensource.cirrus.com, Joe Perches <joe@perches.com>,
- linux-integrity@vger.kernel.org,
- "maintainer:X86 ARCHITECTURE \(32-BIT AND 64-BIT\)" <x86@kernel.org>,
- linux-hardening@vger.kernel.org
+Cc: Nouveau Dev <nouveau@lists.freedesktop.org>,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ dri-devel <dri-devel@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Sun, Nov 22, 2020 at 7:22 PM James Bottomley
-<James.Bottomley@hansenpartnership.com> wrote:
+On Fri, Nov 20, 2020 at 4:23 PM Matti Hamalainen <ccr@tnsp.org> wrote:
 >
-> Well, it's a problem in an error leg, sure, but it's not a really
-> compelling reason for a 141 patch series, is it?  All that fixing this
-> error will do is get the driver to print "oh dear there's a problem"
-> under four more conditions than it previously did.
+> Commit 03e0d26fcf79 ("drm/nouveau: slowpath for pushbuf ioctl") included
+> a logic-bug which results in the relocations not actually getting
+> applied at all as the call to nouveau_gem_pushbuf_reloc_apply() is
+> never reached. This causes a regression with graphical corruption,
+> triggered when relocations need to be done (for example after a
+> suspend/resume cycle.)
 >
-> We've been at this for three years now with nearly a thousand patches,
-> firstly marking all the fall throughs with /* fall through */ and later
-> changing it to fallthrough.  At some point we do have to ask if the
-> effort is commensurate with the protection afforded.  Please tell me
-> our reward for all this effort isn't a single missing error print.
+> Fix by setting *apply_relocs value only if there were more than 0
+> relocations.
+>
+> Additionally, the never reached code had a leftover u_free() call,
+> which, after fixing the logic, now got called and resulted in a
+> double-free. Fix by removing one u_free(), moving the other
+> and adding check for errors.
+>
+> Cc: Daniel Vetter <daniel.vetter@ffwll.ch>
+> Cc: Ben Skeggs <bskeggs@redhat.com>
+> Cc: nouveau@lists.freedesktop.org
+> Cc: dri-devel@lists.freedesktop.org
+> Signed-off-by: Matti Hamalainen <ccr@tnsp.org>
+> Fixes: 03e0d26fcf79 ("drm/nouveau: slowpath for pushbuf ioctl")
+> Link: https://gitlab.freedesktop.org/drm/nouveau/-/issues/11
 
-It isn't that much effort, isn't it? Plus we need to take into account
-the future mistakes that it might prevent, too. So even if there were
-zero problems found so far, it is still a positive change.
+Link: is for the mailing list submission of the patch itself (to link
+the git log to the mailing list discussions), this should be
+References: or similar. Aside from this:
 
-I would agree if these changes were high risk, though; but they are
-almost trivial.
+Reviewed-by: Daniel Vetter <daniel.vetter@ffwll.ch>
 
-Cheers,
-Miguel
+Ben, I'm assuming you'll push this through your tree.
+-Daniel
+
+
+> ---
+>  drivers/gpu/drm/nouveau/nouveau_gem.c | 8 +++++---
+>  1 file changed, 5 insertions(+), 3 deletions(-)
+>
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_gem.c b/drivers/gpu/drm/nouveau/nouveau_gem.c
+> index 549bc67feabb..c2051380d18c 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_gem.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_gem.c
+> @@ -558,8 +558,10 @@ nouveau_gem_pushbuf_validate(struct nouveau_channel *chan,
+>                         NV_PRINTK(err, cli, "validating bo list\n");
+>                 validate_fini(op, chan, NULL, NULL);
+>                 return ret;
+> +       } else if (ret > 0) {
+> +               *apply_relocs = true;
+>         }
+> -       *apply_relocs = ret;
+> +
+>         return 0;
+>  }
+>
+> @@ -662,7 +664,6 @@ nouveau_gem_pushbuf_reloc_apply(struct nouveau_cli *cli,
+>                 nouveau_bo_wr32(nvbo, r->reloc_bo_offset >> 2, data);
+>         }
+>
+> -       u_free(reloc);
+>         return ret;
+>  }
+>
+> @@ -872,9 +873,10 @@ nouveau_gem_ioctl_pushbuf(struct drm_device *dev, void *data,
+>                                 break;
+>                         }
+>                 }
+> -               u_free(reloc);
+>         }
+>  out_prevalid:
+> +       if (!IS_ERR(reloc))
+> +               u_free(reloc);
+>         u_free(bo);
+>         u_free(push);
+>
+>
+> base-commit: 3494d58865ad4a47611dbb427b214cc5227fa5eb
+> --
+> 2.29.2
+>
+
+
+-- 
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
