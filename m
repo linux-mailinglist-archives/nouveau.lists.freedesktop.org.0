@@ -2,39 +2,45 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id AB6B42C1B43
-	for <lists+nouveau@lfdr.de>; Tue, 24 Nov 2020 03:08:15 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A53B12C1B3E
+	for <lists+nouveau@lfdr.de>; Tue, 24 Nov 2020 03:08:12 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6851F6E1A8;
-	Tue, 24 Nov 2020 02:07:58 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4ECE86E19A;
+	Tue, 24 Nov 2020 02:07:55 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from smtprelay.hostedemail.com (smtprelay0221.hostedemail.com
- [216.40.44.221])
- by gabe.freedesktop.org (Postfix) with ESMTPS id ADA046E045;
- Mon, 23 Nov 2020 16:32:56 +0000 (UTC)
-Received: from filter.hostedemail.com (clb03-v110.bra.tucows.net
- [216.40.38.60])
- by smtprelay07.hostedemail.com (Postfix) with ESMTP id A722B181D3025;
- Mon, 23 Nov 2020 16:32:53 +0000 (UTC)
-X-Session-Marker: 6A6F6540706572636865732E636F6D
-X-Spam-Summary: 50, 0, 0, , d41d8cd98f00b204, joe@perches.com, ,
- RULES_HIT:41:355:379:599:960:967:973:988:989:1260:1263:1277:1311:1313:1314:1345:1359:1437:1515:1516:1518:1535:1541:1593:1594:1711:1730:1747:1777:1792:2393:2525:2565:2682:2685:2740:2828:2859:2912:2933:2937:2939:2942:2945:2947:2951:2954:3022:3138:3139:3140:3141:3142:3353:3622:3653:3865:3866:3867:3868:3870:3871:3872:3873:3874:3934:3936:3938:3941:3944:3947:3950:3953:3956:3959:4321:5007:6119:6742:6743:7903:9025:9388:10004:10400:10848:10946:11026:11232:11658:11914:12043:12049:12297:12438:12663:12740:12760:12895:13069:13161:13172:13229:13311:13357:13439:13972:14096:14097:14181:14659:14721:14764:21080:21451:21627:21781:21788:21809:21990:30034:30041:30054:30060:30091,
- 0, RBL:none, CacheIP:none, Bayesian:0.5, 0.5, 0.5, Netcheck:none,
- DomainCache:0, MSF:not bulk, SPF:, MSBL:0, DNSBL:none, Custom_rules:0:0:0,
- LFtime:1, LUA_SUMMARY:none
-X-HE-Tag: can43_5c1502d27366
-X-Filterd-Recvd-Size: 5503
-Received: from XPS-9350.home (unknown [47.151.128.180])
- (Authenticated sender: joe@perches.com)
- by omf03.hostedemail.com (Postfix) with ESMTPA;
- Mon, 23 Nov 2020 16:32:42 +0000 (UTC)
-Message-ID: <32dc7423124b51da4e144e931bf099a368ab50a8.camel@perches.com>
-From: Joe Perches <joe@perches.com>
-To: James Bottomley <James.Bottomley@HansenPartnership.com>, Miguel Ojeda
- <miguel.ojeda.sandonis@gmail.com>
-Date: Mon, 23 Nov 2020 08:32:41 -0800
-In-Reply-To: <fc45750b6d0277c401015b7aa11e16cd15f32ab2.camel@HansenPartnership.com>
+Received: from mail-yb1-xb43.google.com (mail-yb1-xb43.google.com
+ [IPv6:2607:f8b0:4864:20::b43])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1D90D6E072;
+ Mon, 23 Nov 2020 18:56:13 +0000 (UTC)
+Received: by mail-yb1-xb43.google.com with SMTP id g15so16889343ybq.6;
+ Mon, 23 Nov 2020 10:56:13 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=KNG9rf3jiBLOHJ1Qe+5HClUHwDC8G2v5PJoNSRMQj2o=;
+ b=ZA1WcoeOdsWbRfOoumZEJTLTRH6V2Lpq2CDbZ0VVs1hbOT/vd/v8/YkJaULhb4MkV5
+ MHmDtgQZ7Y6vQOoRafNcjdab1m8jmYbh8Ox0xcyAJF866JXyArBCoNYzebFkQV1wRZF3
+ r3hM3WSnIq7Ht5VQ2PIwvurJMfamtV7PLgYZxEoHoT74qEv3IGeXPryfDRdu7AW/qetQ
+ L1ocOXaYsoIrsq1AVQ8cgaa4G2qWRkZviQ+mOBHOVW/MFUti3ALLJAr2MKUeWh+s4BW6
+ tAJsdEl41qUIuUvcW5DdLnVlmhWMC8lZFuXyyo4x1R3eX3DaWLHh1JzDrRZDt/CN6qga
+ 036w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=KNG9rf3jiBLOHJ1Qe+5HClUHwDC8G2v5PJoNSRMQj2o=;
+ b=bHzmiJh09W8JDxNkgWE08VfUooPAB0WmjpWRNr+cum/RmyLFjCLFcOyAKQhaU4ZOGT
+ gI9W17lm40hh9D+B3trKiDpuhbd+fZmhy33H8irLCoo5ROkE4N4OJhUWF9GKBreVyC1m
+ xcoDtSAS6gxujG8qdzEDdckKT+HKft5SypaO6+RDXKFt+LJIFFo1dTWj355BDmzs0zC2
+ oY6CAvL8fR7ZyabOV9tsjytPQIFrNdvxQGaNKItBL0IjlSTpCo1Zz6nTVyDFjHXhEA38
+ 1OaXpy2oRCo2Bp5hhCdjYztor5lMLBgoKggCrWg/ZcAVnpBLU7AVNx6/tpjQKl8djhS6
+ bWHw==
+X-Gm-Message-State: AOAM533L6FXfObHwNgiURa9cQASSffO5t4Wz0KeOLEkby6h57fPjVcqM
+ qvrDWRBjioTH1Jz3L9gMqsBYN+bUp2k1n+s0pJI=
+X-Google-Smtp-Source: ABdhPJyhWLCSkpSmtD0p55Cmpr9Ao1aJs0IYHWLu4Tcyj9q39OBvqgrIxMZMaEy7w1zacpD3mVr5R93EsjzwMBkGuSA=
+X-Received: by 2002:a25:df55:: with SMTP id w82mr977719ybg.135.1606157772316; 
+ Mon, 23 Nov 2020 10:56:12 -0800 (PST)
+MIME-Version: 1.0
 References: <cover.1605896059.git.gustavoars@kernel.org>
  <20201120105344.4345c14e@kicinski-fedora-pc1c0hjn.dhcp.thefacebook.com>
  <202011201129.B13FDB3C@keescook>
@@ -45,8 +51,11 @@ References: <cover.1605896059.git.gustavoars@kernel.org>
  <1c7d7fde126bc0acf825766de64bf2f9b888f216.camel@HansenPartnership.com>
  <CANiq72m22Jb5_+62NnwX8xds2iUdWDMAqD8PZw9cuxdHd95W0A@mail.gmail.com>
  <fc45750b6d0277c401015b7aa11e16cd15f32ab2.camel@HansenPartnership.com>
-User-Agent: Evolution 3.38.1-1 
-MIME-Version: 1.0
+In-Reply-To: <fc45750b6d0277c401015b7aa11e16cd15f32ab2.camel@HansenPartnership.com>
+From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
+Date: Mon, 23 Nov 2020 19:56:01 +0100
+Message-ID: <CANiq72k5tpDoDPmJ0ZWc1DGqm+81Gi-uEENAtvEs9v3SZcx6_Q@mail.gmail.com>
+To: James Bottomley <James.Bottomley@hansenpartnership.com>
 X-Mailman-Approved-At: Tue, 24 Nov 2020 02:07:49 +0000
 Subject: Re: [Nouveau] [PATCH 000/141] Fix fall-through warnings for Clang
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -98,7 +107,8 @@ Cc: alsa-devel@alsa-project.org, linux-atm-general@lists.sourceforge.net,
  linux-sctp@vger.kernel.org, linux-usb@vger.kernel.org,
  netfilter-devel@vger.kernel.org,
  Linux Crypto Mailing List <linux-crypto@vger.kernel.org>,
- patches@opensource.cirrus.com, linux-integrity@vger.kernel.org,
+ patches@opensource.cirrus.com, Joe Perches <joe@perches.com>,
+ linux-integrity@vger.kernel.org,
  "maintainer:X86 ARCHITECTURE \(32-BIT AND 64-BIT\)" <x86@kernel.org>,
  linux-hardening@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
@@ -106,46 +116,63 @@ Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Mon, 2020-11-23 at 07:58 -0800, James Bottomley wrote:
+On Mon, Nov 23, 2020 at 4:58 PM James Bottomley
+<James.Bottomley@hansenpartnership.com> wrote:
+>
+> Well, I used git.  It says that as of today in Linus' tree we have 889
+> patches related to fall throughs and the first series went in in
+> october 2017 ... ignoring a couple of outliers back to February.
+
+I can see ~10k insertions over ~1k commits and 15 years that mention a
+fallthrough in the entire repo. That is including some commits (like
+the biggest one, 960 insertions) that have nothing to do with C
+fallthrough. A single kernel release has an order of magnitude more
+changes than this...
+
+But if we do the math, for an author, at even 1 minute per line change
+and assuming nothing can be automated at all, it would take 1 month of
+work. For maintainers, a couple of trivial lines is noise compared to
+many other patches.
+
+In fact, this discussion probably took more time than the time it
+would take to review the 200 lines. :-)
+
 > We're also complaining about the inability to recruit maintainers:
-> 
+>
 > https://www.theregister.com/2020/06/30/hard_to_find_linux_maintainers_says_torvalds/
-> 
+>
 > And burn out:
-> 
+>
 > http://antirez.com/news/129
 
-https://www.wired.com/story/open-source-coders-few-tired/
+Accepting trivial and useful 1-line patches is not what makes a
+voluntary maintainer quit... Thankless work with demanding deadlines is.
+
+> The whole crux of your argument seems to be maintainers' time isn't
+> important so we should accept all trivial patches
+
+I have not said that, at all. In fact, I am a voluntary one and I
+welcome patches like this. It takes very little effort on my side to
+review and it helps the kernel overall. Paid maintainers are the ones
+that can take care of big features/reviews.
 
 > What I'm actually trying to articulate is a way of measuring value of
 > the patch vs cost ... it has nothing really to do with who foots the
 > actual bill.
 
-It's unclear how to measure value in consistency.
-
-But one way that costs can be reduced is by automation and _not_
-involving maintainers when the patch itself is provably correct.
+I understand your point, but you were the one putting it in terms of a
+junior FTE. In my view, 1 month-work (worst case) is very much worth
+removing a class of errors from a critical codebase.
 
 > One thesis I'm actually starting to formulate is that this continual
 > devaluing of maintainers is why we have so much difficulty keeping and
 > recruiting them.
 
-The linux kernel has something like 1500 different maintainers listed
-in the MAINTAINERS file.  That's not a trivial number.
+That may very well be true, but I don't feel anybody has devalued
+maintainers in this discussion.
 
-$ git grep '^M:' MAINTAINERS | sort | uniq -c | wc -l
-1543
-$ git grep '^M:' MAINTAINERS| cut -f1 -d'<' | sort | uniq -c | wc -l
-1446
-
-I think the question you are asking is about trust and how it
-effects development.
-
-And back to that wired story, the actual number of what you might
-be considering to be maintainers is likely less than 10% of the
-listed numbers above.
-
-
+Cheers,
+Miguel
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
