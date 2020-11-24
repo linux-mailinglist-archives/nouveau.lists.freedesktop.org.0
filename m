@@ -1,36 +1,63 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 56D512C7BC6
-	for <lists+nouveau@lfdr.de>; Mon, 30 Nov 2020 00:02:08 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 42A9A2C7BDC
+	for <lists+nouveau@lfdr.de>; Mon, 30 Nov 2020 00:02:32 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 300C26E222;
-	Sun, 29 Nov 2020 23:02:05 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 079536E2ED;
+	Sun, 29 Nov 2020 23:02:16 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 348 seconds by postgrey-1.36 at gabe;
- Tue, 24 Nov 2020 19:11:43 UTC
-Received: from smtp120.ord1c.emailsrvr.com (smtp120.ord1c.emailsrvr.com
- [108.166.43.120])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7B1F289F61
- for <nouveau@lists.freedesktop.org>; Tue, 24 Nov 2020 19:11:43 +0000 (UTC)
-X-Auth-ID: markh@compro.net
-Received: by smtp16.relay.ord1c.emailsrvr.com (Authenticated sender:
- markh-AT-compro.net) with ESMTPSA id 420EEC01E2; 
- Tue, 24 Nov 2020 14:05:52 -0500 (EST)
-To: nouveau@lists.freedesktop.org
-From: Mark Hounschell <markh@compro.net>
-Organization: Compro Computer Svcs.
-Message-ID: <e2fffedf-c6d6-4597-8ee2-860933b4fb6e@compro.net>
-Date: Tue, 24 Nov 2020 14:05:51 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.4.0
+Received: from mail-pg1-x543.google.com (mail-pg1-x543.google.com
+ [IPv6:2607:f8b0:4864:20::543])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 209526E02C
+ for <nouveau@lists.freedesktop.org>; Tue, 24 Nov 2020 21:25:44 +0000 (UTC)
+Received: by mail-pg1-x543.google.com with SMTP id 81so378412pgf.0
+ for <nouveau@lists.freedesktop.org>; Tue, 24 Nov 2020 13:25:44 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to;
+ bh=Hc7xHQdcWqcI1RL6yWHK3qM7+D3PcB+9wJ1f+Y4kOZ8=;
+ b=oKmDT/E0BiqfYtxGd9S8VgvaixpTRLnYMRrsUV9kaRuJo3R/5oNlOHAboaJA72rvz5
+ cPy+dYNpKpp/tW1abpWiBH/rmtZxXE/MLGj7m5uMt/n+RU1YTE1Rw6QIxNLzAajuHLbW
+ OV/WWZm28UqOigi5ggHh0BMVZishCwQGNb1Ns=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=Hc7xHQdcWqcI1RL6yWHK3qM7+D3PcB+9wJ1f+Y4kOZ8=;
+ b=ayvlSwD7rxcSfXYWAUxtRZHbRXQ22k5rGu2nP1UqYlpVzFUmxUeHMckWcEQyQ6daQ3
+ d3X9KmHj1rH1ffAl/VM/oajjc15iBAGlA0nRbgoyGEDr7pP/JeGVWffWh5QjKgdy68D4
+ +mabjDojxw15Zj6Tg6rKwlFTM0Uh7tHZIBtze2Ppcauce/Qad/2cIqktgLbCOFnNm53g
+ yPGSrS2aPCwll0SObD0QiHlVVy9f6nCIRmoEP3B+nPGs1/m0AuJjyZYlRgv0flHdsT4s
+ vFnkh8zia4EmKgrhpo8tqzg8Q9d9RYgrOKY/yW8dickS1oMw4OcjC+GD1Rg+k18GAhc/
+ y54w==
+X-Gm-Message-State: AOAM531/qbY0a/YsZ6v6V7dcUVSevYoZOnjxcjG7znJEwhoramlVmeUy
+ HkZdW9hUZQMnmPkQQikUHOfekw==
+X-Google-Smtp-Source: ABdhPJwtm7ki1o3tlMghBzBMLVUzEcZQN+PDIoPgB8WI7uCPSXlOMvf7LiH3SXaewZBRcFltugq6wg==
+X-Received: by 2002:a17:90b:3505:: with SMTP id
+ ls5mr176054pjb.55.1606253143764; 
+ Tue, 24 Nov 2020 13:25:43 -0800 (PST)
+Received: from www.outflux.net (smtp.outflux.net. [198.145.64.163])
+ by smtp.gmail.com with ESMTPSA id z68sm129381pgb.37.2020.11.24.13.25.41
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 24 Nov 2020 13:25:41 -0800 (PST)
+Date: Tue, 24 Nov 2020 13:25:40 -0800
+From: Kees Cook <keescook@chromium.org>
+To: Nick Desaulniers <ndesaulniers@google.com>
+Message-ID: <202011241324.B3439A2@keescook>
+References: <cover.1605896059.git.gustavoars@kernel.org>
+ <20201120105344.4345c14e@kicinski-fedora-pc1c0hjn.dhcp.thefacebook.com>
+ <202011201129.B13FDB3C@keescook>
+ <20201120115142.292999b2@kicinski-fedora-pc1c0hjn.dhcp.thefacebook.com>
+ <202011220816.8B6591A@keescook>
+ <CAKwvOdntVfXj2WRR5n6Kw7BfG7FdKpTeHeh5nPu5AzwVMhOHTg@mail.gmail.com>
 MIME-Version: 1.0
-Content-Language: en-US
-X-Classification-ID: 6b330c2b-6752-4bec-9c68-e7206aece57e-1-1
+Content-Disposition: inline
+In-Reply-To: <CAKwvOdntVfXj2WRR5n6Kw7BfG7FdKpTeHeh5nPu5AzwVMhOHTg@mail.gmail.com>
 X-Mailman-Approved-At: Sun, 29 Nov 2020 23:02:04 +0000
-Subject: [Nouveau] Problem with kernel 5.10-rc5
+Subject: Re: [Nouveau] [PATCH 000/141] Fix fall-through warnings for Clang
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -42,62 +69,81 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Reply-To: markh@compro.net
-Cc: Ben Skeggs <bskeggs@redhat.com>
+Cc: alsa-devel@alsa-project.org, linux-atm-general@lists.sourceforge.net,
+ reiserfs-devel@vger.kernel.org, linux-iio@vger.kernel.org,
+ linux-wireless <linux-wireless@vger.kernel.org>, linux-fbdev@vger.kernel.org,
+ dri-devel <dri-devel@lists.freedesktop.org>,
+ LKML <linux-kernel@vger.kernel.org>,
+ Nathan Chancellor <natechancellor@gmail.com>, linux-ide@vger.kernel.org,
+ dm-devel@redhat.com, keyrings@vger.kernel.org, linux-mtd@lists.infradead.org,
+ GR-everest-linux-l2@marvell.com, wcn36xx@lists.infradead.org,
+ samba-technical@lists.samba.org, linux-i3c@lists.infradead.org,
+ linux1394-devel@lists.sourceforge.net, linux-afs@lists.infradead.org,
+ usb-storage@lists.one-eyed-alien.net, drbd-dev@lists.linbit.com,
+ devel@driverdev.osuosl.org, linux-cifs@vger.kernel.org,
+ rds-devel@oss.oracle.com, linux-scsi@vger.kernel.org,
+ linux-rdma@vger.kernel.org, oss-drivers@netronome.com,
+ bridge@lists.linux-foundation.org, linux-security-module@vger.kernel.org,
+ amd-gfx list <amd-gfx@lists.freedesktop.org>,
+ linux-stm32@st-md-mailman.stormreply.com, cluster-devel@redhat.com,
+ linux-acpi@vger.kernel.org, coreteam@netfilter.org,
+ intel-wired-lan@lists.osuosl.org, linux-input@vger.kernel.org,
+ Miguel Ojeda <ojeda@kernel.org>, Jakub Kicinski <kuba@kernel.org>,
+ linux-ext4@vger.kernel.org, linux-media@vger.kernel.org,
+ linux-watchdog@vger.kernel.org, selinux@vger.kernel.org,
+ linux-arm-msm <linux-arm-msm@vger.kernel.org>, intel-gfx@lists.freedesktop.org,
+ linux-geode@lists.infradead.org, linux-can@vger.kernel.org,
+ linux-block@vger.kernel.org, linux-gpio@vger.kernel.org,
+ op-tee@lists.trustedfirmware.org, linux-mediatek@lists.infradead.org,
+ xen-devel@lists.xenproject.org, nouveau@lists.freedesktop.org,
+ linux-hams@vger.kernel.org, ceph-devel@vger.kernel.org,
+ virtualization@lists.linux-foundation.org, target-devel@vger.kernel.org,
+ Linux ARM <linux-arm-kernel@lists.infradead.org>, linux-hwmon@vger.kernel.org,
+ "maintainer:X86 ARCHITECTURE \(32-BIT AND 64-BIT\)" <x86@kernel.org>,
+ linux-nfs@vger.kernel.org, GR-Linux-NIC-Dev@marvell.com,
+ tipc-discussion@lists.sourceforge.net,
+ Linux Memory Management List <linux-mm@kvack.org>,
+ Network Development <netdev@vger.kernel.org>,
+ linux-decnet-user@lists.sourceforge.net, linux-mmc@vger.kernel.org,
+ "Gustavo A. R. Silva" <gustavoars@kernel.org>,
+ Linux-Renesas <linux-renesas-soc@vger.kernel.org>, linux-sctp@vger.kernel.org,
+ linux-usb@vger.kernel.org, netfilter-devel@vger.kernel.org,
+ "open list:HARDWARE RANDOM NUMBER GENERATOR CORE"
+ <linux-crypto@vger.kernel.org>, patches@opensource.cirrus.com,
+ Joe Perches <joe@perches.com>, linux-integrity@vger.kernel.org,
+ linux-hardening@vger.kernel.org
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-I am not subscribed to this mailing list so please CC me directly for 
-any response.
+On Mon, Nov 23, 2020 at 05:32:51PM -0800, Nick Desaulniers wrote:
+> On Sun, Nov 22, 2020 at 8:17 AM Kees Cook <keescook@chromium.org> wrote:
+> >
+> > On Fri, Nov 20, 2020 at 11:51:42AM -0800, Jakub Kicinski wrote:
+> > > If none of the 140 patches here fix a real bug, and there is no change
+> > > to machine code then it sounds to me like a W=2 kind of a warning.
+> >
+> > FWIW, this series has found at least one bug so far:
+> > https://lore.kernel.org/lkml/CAFCwf11izHF=g1mGry1fE5kvFFFrxzhPSM6qKAO8gxSp=Kr_CQ@mail.gmail.com/
+> 
+> So looks like the bulk of these are:
+> switch (x) {
+>   case 0:
+>     ++x;
+>   default:
+>     break;
+> }
+> 
+> I have a patch that fixes those up for clang:
+> https://reviews.llvm.org/D91895
 
-I'm running an older "NVIDIA Corporation G70 [GeForce 7800 GT] (rev a1)" 
-card in a newer BIOSTAR B550GTA MB. Kernel 5.10-rc5 does not work. I get 
-no virtual consoles or X screen.
+I still think this isn't right -- it's a case statement that runs off
+the end without an explicit flow control determination. I think Clang is
+right to warn for these, and GCC should also warn.
 
-I have not tried any other RC versions. Only rc5. Kernel 5.9.10 works 
-fine. I am running a SuSE Leap-15.2 system.
-
-I have another machine with an NVIDIA Corporation GT218 [GeForce 210] 
-(rev a2) that works just fine with 5.10-rc5.
-
-
-On the broken machine the screen goes blank, the leds on the front turn 
-orange as if the PC was turned off.
-
-My dmesg seems to show the cause:
-
-[    5.825702] fb0: switching to nouveaufb from VESA VGA
-[    6.242991] nouveau 0000:14:00.0: vgaarb: deactivate vga console
-[    6.243066] nouveau 0000:14:00.0: NVIDIA G70 (047200a1)
-[    6.443671] nouveau 0000:14:00.0: bios: version 05.70.02.13.7b
-[    6.443948] nouveau 0000:14:00.0: fb: 256 MiB GDDR3
-[    6.498039] nouveau 0000:14:00.0: DRM: VRAM: 250 MiB
-[    6.498041] nouveau 0000:14:00.0: DRM: GART: 512 MiB
-[    6.498044] nouveau 0000:14:00.0: DRM: TMDS table version 1.1
-[    6.498046] nouveau 0000:14:00.0: DRM: DCB version 3.0
-[    6.498049] nouveau 0000:14:00.0: DRM: DCB outp 00: 01000300 00000028
-[    6.498051] nouveau 0000:14:00.0: DRM: DCB outp 01: 03000302 00000000
-[    6.498053] nouveau 0000:14:00.0: DRM: DCB outp 02: 04011310 00000028
-[    6.498055] nouveau 0000:14:00.0: DRM: DCB outp 03: 04011312 00000000
-[    6.498057] nouveau 0000:14:00.0: DRM: DCB outp 04: 020223f1 0040c080
-[    6.498060] nouveau 0000:14:00.0: DRM: DCB conn 00: 1030
-[    6.498062] nouveau 0000:14:00.0: DRM: DCB conn 01: 2130
-[    6.498064] nouveau 0000:14:00.0: DRM: DCB conn 02: 0210
-[    6.498065] nouveau 0000:14:00.0: DRM: DCB conn 03: 0211
-[    6.498067] nouveau 0000:14:00.0: DRM: DCB conn 04: 0213
-[    6.502949] nouveau 0000:14:00.0: DRM: Setting dpms mode 3 on TV 
-encoder (output 4)
-[    6.585845] nouveau 0000:14:00.0: DRM: failed to map fb: -28
-[    6.585949] [drm] Initialized nouveau 1.3.1 20120801 for 0000:14:00.0 
-on minor 0
-
-If I can do anything else please let me know.
-
-Regards
-Mark
-
+-- 
+Kees Cook
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
