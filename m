@@ -1,26 +1,47 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8948F2C7BE0
-	for <lists+nouveau@lfdr.de>; Mon, 30 Nov 2020 00:02:34 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 880FC2C7BC8
+	for <lists+nouveau@lfdr.de>; Mon, 30 Nov 2020 00:02:13 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id EE1826E2F2;
-	Sun, 29 Nov 2020 23:02:16 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5AD336E22F;
+	Sun, 29 Nov 2020 23:02:05 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from kvm5.telegraphics.com.au (kvm5.telegraphics.com.au
- [98.124.60.144])
- by gabe.freedesktop.org (Postfix) with ESMTP id 215ED6E8F4;
- Wed, 25 Nov 2020 21:33:31 +0000 (UTC)
-Received: from localhost (localhost.localdomain [127.0.0.1])
- by kvm5.telegraphics.com.au (Postfix) with ESMTP id 9789F29FB0;
- Wed, 25 Nov 2020 16:33:24 -0500 (EST)
-Date: Thu, 26 Nov 2020 08:33:24 +1100 (AEDT)
-From: Finn Thain <fthain@telegraphics.com.au>
-To: Nick Desaulniers <ndesaulniers@google.com>
-In-Reply-To: <CAKwvOdkGBn7nuWTAqrORMeN1G+w3YwBfCqqaRD2nwvoAXKi=Aw@mail.gmail.com>
-Message-ID: <alpine.LNX.2.23.453.2011260750300.6@nippy.intranet>
+Received: from mail-pf1-x442.google.com (mail-pf1-x442.google.com
+ [IPv6:2607:f8b0:4864:20::442])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 051656EAAD
+ for <nouveau@lists.freedesktop.org>; Wed, 25 Nov 2020 22:09:20 +0000 (UTC)
+Received: by mail-pf1-x442.google.com with SMTP id y7so3622014pfq.11
+ for <nouveau@lists.freedesktop.org>; Wed, 25 Nov 2020 14:09:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=u18D3LcbSYuoMMQXGcZuOSSHQ97aqFAj6PSwZPKzyfI=;
+ b=WifNdkiftaOaD4ZZckvIqaLo1oDpErEfQOeEaPPqC9ugBqwKDiWX7cyNX9NNokqABc
+ 3rs8Xkh/xt0eSkb8xVKJLxbZ9ctD9N09POwkigNrKsLe837qPjgVNlPjii1YQ7Ys5fEN
+ J1ztqI2SdAxczb+fxW5+t1BuuInt0J3EnKhYhGXUx/Ycs4OeMqDUGayCvZ/rK/2hwzHv
+ fvNTfM4yxqfrW/W8EGBwEJD3ef8E6CIFveHPM/2Vwj3USBV6V1sXpGOaikzNc+dcQTTs
+ sQr+N2RUFmFahGpkDJgGJRdpjSZFKGXDT4Evw9946EQKZvU8LN7QRJCs+4k3wXo2GKBl
+ nncg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=u18D3LcbSYuoMMQXGcZuOSSHQ97aqFAj6PSwZPKzyfI=;
+ b=TtshPnFDfHG1V9ngpyWnGwKDb4hKWziUc6fikASqnGAcWnjQlCasuNSzGz5xzxhRHf
+ Yj4p5ADHQqXBMzibcDnw6n71yu1G7H9dGmb6sxKUoZnKO/9GBHhzKSDcLA06zpXdgDNU
+ W+Ltf56LCetI2fnt5VqfPsSfBcAALs428abujBHGC7iTBDm8oOOrhBZrMPCj/wArWwQc
+ aRrXXw/phi4jQ6L4IC37NFC6vED5DGGu8/vR/iCo54AV55wFSMXTeg3lAMqsztZt5sI+
+ dQWdATCFdcTrZgz1zYLV+SEHuDmXhn6dPh6gVLdhVEUDMOEySf0H9kNxxjbHg8NQ+GH9
+ e1aA==
+X-Gm-Message-State: AOAM530UWQqMYirwa6bdZhItIPj1c9qxFWCUDLoreCC8f3XwYXqAtGzX
+ /zlHSOSvpTqhaqNiMVVuFvw+jEOqVMmXhEiNsAxjtA==
+X-Google-Smtp-Source: ABdhPJxX4YdX/dgPSH4qNW13nZ+NPFnsWrpBgteZRS2UfRF2x25a9zmwdzqZA/h0sTtapVP+ZBS7Enbowp+5Zxn/Mxo=
+X-Received: by 2002:a17:90a:d250:: with SMTP id
+ o16mr6463569pjw.25.1606342159332; 
+ Wed, 25 Nov 2020 14:09:19 -0800 (PST)
+MIME-Version: 1.0
 References: <202011201129.B13FDB3C@keescook>
  <20201120115142.292999b2@kicinski-fedora-pc1c0hjn.dhcp.thefacebook.com>
  <202011220816.8B6591A@keescook>
@@ -34,7 +55,12 @@ References: <202011201129.B13FDB3C@keescook>
  <202011241327.BB28F12F6@keescook>
  <a841536fe65bb33f1c72ce2455a6eb47a0107565.camel@HansenPartnership.com>
  <CAKwvOdkGBn7nuWTAqrORMeN1G+w3YwBfCqqaRD2nwvoAXKi=Aw@mail.gmail.com>
-MIME-Version: 1.0
+ <20201125082405.1d8c23dc@kicinski-fedora-pc1c0hjn.dhcp.thefacebook.com>
+In-Reply-To: <20201125082405.1d8c23dc@kicinski-fedora-pc1c0hjn.dhcp.thefacebook.com>
+From: Nick Desaulniers <ndesaulniers@google.com>
+Date: Wed, 25 Nov 2020 14:09:08 -0800
+Message-ID: <CAKwvOdkWGE5qdFZUuMzcL63LDOu_iZQJOGbeBNjcPi8sJPMkag@mail.gmail.com>
+To: Jakub Kicinski <kuba@kernel.org>
 X-Mailman-Approved-At: Sun, 29 Nov 2020 23:02:04 +0000
 Subject: Re: [Nouveau] [Intel-wired-lan] [PATCH 000/141] Fix fall-through
  warnings for Clang
@@ -50,7 +76,6 @@ List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
 Cc: alsa-devel@alsa-project.org, bridge@lists.linux-foundation.org,
- target-devel@vger.kernel.org, Greg KH <gregkh@linuxfoundation.org>,
  linux-iio@vger.kernel.org, linux-wireless <linux-wireless@vger.kernel.org>,
  linux-mmc@vger.kernel.org, linux-fbdev@vger.kernel.org,
  dri-devel <dri-devel@lists.freedesktop.org>,
@@ -69,7 +94,7 @@ Cc: alsa-devel@alsa-project.org, bridge@lists.linux-foundation.org,
  linux-stm32@st-md-mailman.stormreply.com, cluster-devel@redhat.com,
  usb-storage@lists.one-eyed-alien.net, coreteam@netfilter.org,
  intel-wired-lan@lists.osuosl.org, linux-input@vger.kernel.org,
- Miguel Ojeda <ojeda@kernel.org>, Jakub Kicinski <kuba@kernel.org>,
+ Miguel Ojeda <ojeda@kernel.org>, xen-devel@lists.xenproject.org,
  linux-ext4@vger.kernel.org, virtualization@lists.linux-foundation.org,
  netfilter-devel@vger.kernel.org, linux-media@vger.kernel.org,
  Kees Cook <keescook@chromium.org>, selinux@vger.kernel.org,
@@ -77,10 +102,10 @@ Cc: alsa-devel@alsa-project.org, bridge@lists.linux-foundation.org,
  linux-sctp@vger.kernel.org, reiserfs-devel@vger.kernel.org,
  linux-geode@lists.infradead.org, linux-block@vger.kernel.org,
  linux-gpio@vger.kernel.org, op-tee@lists.trustedfirmware.org,
- linux-mediatek@lists.infradead.org, xen-devel@lists.xenproject.org,
- nouveau@lists.freedesktop.org, linux-hams@vger.kernel.org,
- Nathan Chancellor <natechancellor@gmail.com>, linux-can@vger.kernel.org,
- Linux ARM <linux-arm-kernel@lists.infradead.org>, linux-hwmon@vger.kernel.org,
+ linux-mediatek@lists.infradead.org, nouveau@lists.freedesktop.org,
+ linux-hams@vger.kernel.org, Nathan Chancellor <natechancellor@gmail.com>,
+ linux-can@vger.kernel.org, Linux ARM <linux-arm-kernel@lists.infradead.org>,
+ linux-hwmon@vger.kernel.org,
  "maintainer:X86 ARCHITECTURE \(32-BIT AND 64-BIT\)" <x86@kernel.org>,
  linux-watchdog@vger.kernel.org, GR-Linux-NIC-Dev@marvell.com,
  Linux Memory Management List <linux-mm@kvack.org>,
@@ -90,40 +115,37 @@ Cc: alsa-devel@alsa-project.org, bridge@lists.linux-foundation.org,
  Linux-Renesas <linux-renesas-soc@vger.kernel.org>,
  linux-security-module@vger.kernel.org, linux-usb@vger.kernel.org,
  tipc-discussion@lists.sourceforge.net,
- "open list:HARDWARE RANDOM NUMBER GENERATOR CORE"
- <linux-crypto@vger.kernel.org>, Jonathan Cameron <Jonathan.Cameron@huawei.com>,
- patches@opensource.cirrus.com, Joe Perches <joe@perches.com>,
- linux-integrity@vger.kernel.org, linux-nfs@vger.kernel.org,
- linux-hardening@vger.kernel.org
+ =?UTF-8?Q?open_list=3AHARDWARE_RANDOM_NUMBER_GENERATOR_CORE_=3Clinux=2Dcrypt?=
+ =?UTF-8?Q?o=40vger=2Ekernel=2Eorg=3E=2C_patches=40opensource=2Ecirrus=2Ecom=2C_linux=2Dint?=
+ =?UTF-8?Q?egrity=40vger=2Ekernel=2Eorg=2C_target=2Ddevel=40vger=2Ekernel=2Eorg=2C_linux=2D?=
+ =?UTF-8?Q?hardening=40vger=2Ekernel=2Eorg=2C_Jonathan_Cameron_=3CJonathan=2ECamero?=
+ =?UTF-8?Q?n=40huawei=2Ecom=3E=2C_Greg_KH?= <gregkh@linuxfoundation.org>,
+ Joe Perches <joe@perches.com>, linux-nfs@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, 25 Nov 2020, Nick Desaulniers wrote:
+On Wed, Nov 25, 2020 at 8:24 AM Jakub Kicinski <kuba@kernel.org> wrote:
+>
+> Applying a real patch set and then getting a few follow ups the next day
+> for trivial coding things like fallthrough missing or static missing,
+> just because I didn't have the full range of compilers to check with
+> before applying makes me feel pretty shitty, like I'm not doing a good
+> job. YMMV.
 
-> So developers and distributions using Clang can't have 
-> -Wimplicit-fallthrough enabled because GCC is less strict (which has 
-> been shown in this thread to lead to bugs)?  We'd like to have nice 
-> things too, you know.
-> 
-
-Apparently the GCC developers don't want you to have "nice things" either. 
-Do you think that the kernel should drop gcc in favour of clang?
-Or do you think that a codebase can somehow satisfy multiple checkers and 
-their divergent interpretations of the language spec?
-
-> This is not a shiny new warning; it's already on for GCC and has existed 
-> in both compilers for multiple releases.
-> 
-
-Perhaps you're referring to the compiler feature that lead to the 
-ill-fated, tree-wide /* fallthrough */ patch series.
-
-When the ink dries on the C23 language spec and the implementations figure 
-out how to interpret it then sure, enforce the warning for new code -- the 
-cost/benefit analysis is straight forward. However, the case for patching 
-existing mature code is another story.
+I understand. Everyone feels that way, except maybe Bond villains and
+robots.  My advice in that case is don't take it personally.  We're
+working with a language that's more error prone relative to others.
+While one would like to believe they are flawless, over time they
+can't beat the aggregate statistics.  A balance between Imposter
+Syndrome and Dunning Kruger is walked by all software developers, and
+the fear of making mistakes in public is one of the number one reasons
+folks don't take the plunge contributing to open source software or
+even the kernel.  My advice to them is "don't sweat the small stuff."
+-- 
+Thanks,
+~Nick Desaulniers
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
