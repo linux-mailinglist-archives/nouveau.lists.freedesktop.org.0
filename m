@@ -2,34 +2,65 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id DFC862C4AC4
-	for <lists+nouveau@lfdr.de>; Wed, 25 Nov 2020 23:21:51 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8ECEE2C4F13
+	for <lists+nouveau@lfdr.de>; Thu, 26 Nov 2020 08:05:17 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 249F06E0AF;
-	Wed, 25 Nov 2020 22:21:49 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id ECFBE6E59B;
+	Thu, 26 Nov 2020 07:05:15 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 334 seconds by postgrey-1.36 at gabe;
- Wed, 25 Nov 2020 22:21:47 UTC
-Received: from smtp89.ord1d.emailsrvr.com (smtp89.ord1d.emailsrvr.com
- [184.106.54.89])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7D6CE6E0AF
- for <nouveau@lists.freedesktop.org>; Wed, 25 Nov 2020 22:21:47 +0000 (UTC)
-X-Auth-ID: markh@compro.net
-Received: by smtp20.relay.ord1d.emailsrvr.com (Authenticated sender:
- markh-AT-compro.net) with ESMTPSA id A0422C011C; 
- Wed, 25 Nov 2020 17:16:12 -0500 (EST)
-From: Mark Hounschell <markh@compro.net>
-To: nouveau@lists.freedesktop.org
-Organization: Compro Computer Svcs.
-Message-ID: <db0e5f78-8271-24b5-62f6-5473f69ac8d6@compro.net>
-Date: Wed, 25 Nov 2020 17:16:04 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.4.0
+Received: from mail-wm1-x344.google.com (mail-wm1-x344.google.com
+ [IPv6:2a00:1450:4864:20::344])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3DAB66E59B
+ for <nouveau@lists.freedesktop.org>; Thu, 26 Nov 2020 07:05:14 +0000 (UTC)
+Received: by mail-wm1-x344.google.com with SMTP id d142so1069146wmd.4
+ for <nouveau@lists.freedesktop.org>; Wed, 25 Nov 2020 23:05:14 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
+ h=date:from:to:cc:subject:message-id:mail-followup-to:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=+ssUyDjxHgveCYHcSneSBCki2wyrxz+WJuAVHLW5ABU=;
+ b=FxTEFUH67gsaxH703aaVavAsuhSKkvo8z/ec60AFRrzZRT9zOEETlanfV195SXR3cj
+ SZRG+b59KIaQEGtefAFg4LVxVF5BIo2WhHa6aEn059GLC7SGtw2mHbdD5xY0zwHmhgE7
+ yDjD017lZTgkTZPQ3gcUXxnLcvF9Kh0BRGf5Q=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id
+ :mail-followup-to:references:mime-version:content-disposition
+ :in-reply-to;
+ bh=+ssUyDjxHgveCYHcSneSBCki2wyrxz+WJuAVHLW5ABU=;
+ b=JfPcJ923Cl0/EslZANpXrnYxtbTXfFowsgCbJ79yGdez1ar0+X7+YfyBbOgc7i9TrA
+ Ud5R6KERZqI0by7DXHeSbPMlY92XmbMn8sex2ZGpHk05gWq56Lg00gNaV5e2JrAT9y6m
+ ZwnTJr2JIWYCS3AoZptEX4J2S+YMH2O80jeT1GeXi4H8/PH0A/690ey3A0yyW1IpgzXe
+ Q9I34DHjppc9hz9pQCpRkUNPh0gf0XjzDzx1TSZkH8Gv9cz1Q0lTJ/OTwOEs1Y7RSq5Z
+ jjY0LL6bn2ebrMC2Vw0g6KYjiw77fJdNW8V5F2DTErYq30O2mr446zgYsUiklmmkgIYT
+ asgg==
+X-Gm-Message-State: AOAM530RYZ7Eh4A0johXiSkVtXQf5aTSEvrqMEnbXbug3VOjnhCRQYlk
+ f63b0xcN3H/SjW5pN6Hd0X7v0w==
+X-Google-Smtp-Source: ABdhPJzpkoO8QKPC6d3ZxgXrjJu4huFOtj4AiQ2JvXSolZ5ScNLTxBfP1RuqNtD6THSN9IgvknpK1g==
+X-Received: by 2002:a05:600c:2601:: with SMTP id
+ h1mr1626720wma.35.1606374312862; 
+ Wed, 25 Nov 2020 23:05:12 -0800 (PST)
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
+ by smtp.gmail.com with ESMTPSA id m3sm7310982wrv.6.2020.11.25.23.05.11
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 25 Nov 2020 23:05:12 -0800 (PST)
+Date: Thu, 26 Nov 2020 08:05:10 +0100
+From: Daniel Vetter <daniel@ffwll.ch>
+To: Matti Hamalainen <ccr@tnsp.org>
+Message-ID: <20201126070510.GA401619@phenom.ffwll.local>
+Mail-Followup-To: Matti Hamalainen <ccr@tnsp.org>,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ Ben Skeggs <bskeggs@redhat.com>,
+ Nouveau Dev <nouveau@lists.freedesktop.org>,
+ dri-devel <dri-devel@lists.freedesktop.org>
+References: <20201120152338.1203257-1-ccr@tnsp.org>
+ <CAKMK7uGDY+aLP-yYwyW5t-usUK3XM-oU9ZLHm1_jU0BTjJUN+g@mail.gmail.com>
 MIME-Version: 1.0
-Content-Language: en-US
-X-Classification-ID: 6151ce63-1f64-412c-a1ab-d15eb1d7dc69-1-1
-Subject: [Nouveau] [BUG][NOUVEAU] G70 broken since 5.10-rc1
+Content-Disposition: inline
+In-Reply-To: <CAKMK7uGDY+aLP-yYwyW5t-usUK3XM-oU9ZLHm1_jU0BTjJUN+g@mail.gmail.com>
+X-Operating-System: Linux phenom 5.7.0-1-amd64 
+Subject: Re: [Nouveau] [PATCH] drm/nouveau: fix relocations applying logic
+ and a double-free
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -41,67 +72,113 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Reply-To: markh@compro.net
-Cc: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
- Mark Hounschell <dmarkh@cfl.rr.com>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Cc: Nouveau Dev <nouveau@lists.freedesktop.org>,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ dri-devel <dri-devel@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-CkknbSBydW5uaW5nIGFuIG9sZGVyICJOVklESUEgQ29ycG9yYXRpb24gRzcwIFtHZUZvcmNlIDc4
-MDAgR1RdIChyZXYgYTEpIiAKY2FyZCBpbiBhIG5ld2VyIEJJT1NUQVIgQjU1MEdUQSBNQi4gS2Vy
-bmVsIDUuMTAtcmN4IGRvZXMgbm90IHdvcmsuIEkgZ2V0IApubyB2aXJ0dWFsIGNvbnNvbGVzIG9y
-IFggc2NyZWVuLgoKCk15IGRtZXNnIHNlZW1zIHRvIHNob3cgdGhlIGNhdXNlOgoKWyAgICA1Ljgy
-NTcwMl0gZmIwOiBzd2l0Y2hpbmcgdG8gbm91dmVhdWZiIGZyb20gVkVTQSBWR0EKWyAgICA2LjI0
-Mjk5MV0gbm91dmVhdSAwMDAwOjE0OjAwLjA6IHZnYWFyYjogZGVhY3RpdmF0ZSB2Z2EgY29uc29s
-ZQpbICAgIDYuMjQzMDY2XSBub3V2ZWF1IDAwMDA6MTQ6MDAuMDogTlZJRElBIEc3MCAoMDQ3MjAw
-YTEpClsgICAgNi40NDM2NzFdIG5vdXZlYXUgMDAwMDoxNDowMC4wOiBiaW9zOiB2ZXJzaW9uIDA1
-LjcwLjAyLjEzLjdiClsgICAgNi40NDM5NDhdIG5vdXZlYXUgMDAwMDoxNDowMC4wOiBmYjogMjU2
-IE1pQiBHRERSMwpbICAgIDYuNDk4MDM5XSBub3V2ZWF1IDAwMDA6MTQ6MDAuMDogRFJNOiBWUkFN
-OiAyNTAgTWlCClsgICAgNi40OTgwNDFdIG5vdXZlYXUgMDAwMDoxNDowMC4wOiBEUk06IEdBUlQ6
-IDUxMiBNaUIKWyAgICA2LjQ5ODA0NF0gbm91dmVhdSAwMDAwOjE0OjAwLjA6IERSTTogVE1EUyB0
-YWJsZSB2ZXJzaW9uIDEuMQpbICAgIDYuNDk4MDQ2XSBub3V2ZWF1IDAwMDA6MTQ6MDAuMDogRFJN
-OiBEQ0IgdmVyc2lvbiAzLjAKWyAgICA2LjQ5ODA0OV0gbm91dmVhdSAwMDAwOjE0OjAwLjA6IERS
-TTogRENCIG91dHAgMDA6IDAxMDAwMzAwIDAwMDAwMDI4ClsgICAgNi40OTgwNTFdIG5vdXZlYXUg
-MDAwMDoxNDowMC4wOiBEUk06IERDQiBvdXRwIDAxOiAwMzAwMDMwMiAwMDAwMDAwMApbICAgIDYu
-NDk4MDUzXSBub3V2ZWF1IDAwMDA6MTQ6MDAuMDogRFJNOiBEQ0Igb3V0cCAwMjogMDQwMTEzMTAg
-MDAwMDAwMjgKWyAgICA2LjQ5ODA1NV0gbm91dmVhdSAwMDAwOjE0OjAwLjA6IERSTTogRENCIG91
-dHAgMDM6IDA0MDExMzEyIDAwMDAwMDAwClsgICAgNi40OTgwNTddIG5vdXZlYXUgMDAwMDoxNDow
-MC4wOiBEUk06IERDQiBvdXRwIDA0OiAwMjAyMjNmMSAwMDQwYzA4MApbICAgIDYuNDk4MDYwXSBu
-b3V2ZWF1IDAwMDA6MTQ6MDAuMDogRFJNOiBEQ0IgY29ubiAwMDogMTAzMApbICAgIDYuNDk4MDYy
-XSBub3V2ZWF1IDAwMDA6MTQ6MDAuMDogRFJNOiBEQ0IgY29ubiAwMTogMjEzMApbICAgIDYuNDk4
-MDY0XSBub3V2ZWF1IDAwMDA6MTQ6MDAuMDogRFJNOiBEQ0IgY29ubiAwMjogMDIxMApbICAgIDYu
-NDk4MDY1XSBub3V2ZWF1IDAwMDA6MTQ6MDAuMDogRFJNOiBEQ0IgY29ubiAwMzogMDIxMQpbICAg
-IDYuNDk4MDY3XSBub3V2ZWF1IDAwMDA6MTQ6MDAuMDogRFJNOiBEQ0IgY29ubiAwNDogMDIxMwpb
-ICAgIDYuNTAyOTQ5XSBub3V2ZWF1IDAwMDA6MTQ6MDAuMDogRFJNOiBTZXR0aW5nIGRwbXMgbW9k
-ZSAzIG9uIFRWIAplbmNvZGVyIChvdXRwdXQgNCkKWyAgICA2LjU4NTg0NV0gbm91dmVhdSAwMDAw
-OjE0OjAwLjA6IERSTTogZmFpbGVkIHRvIG1hcCBmYjogLTI4ClsgICAgNi41ODU5NDldIFtkcm1d
-IEluaXRpYWxpemVkIG5vdXZlYXUgMS4zLjEgMjAxMjA4MDEgZm9yIDAwMDA6MTQ6MDAuMCAKb24g
-bWlub3IgMAoKVGhpcyBjb21taXQgY2F1c2VkIHRoZSBCVUcKCjE0MWIxNWU1OTE3NWFhMTc0Y2Ex
-Zjc1OTYxODhiZDE1YTdjYTE3YmEgaXMgdGhlIGZpcnN0IGJhZCBjb21taXQKY29tbWl0IDE0MWIx
-NWU1OTE3NWFhMTc0Y2ExZjc1OTYxODhiZDE1YTdjYTE3YmEKQXV0aG9yOiBDaHJpc3RpYW4gS8O2
-bmlnIDxjaHJpc3RpYW4ua29lbmlnQGFtZC5jb20+CkRhdGU6ICAgRnJpIEF1ZyAyMSAxNjowNjo1
-MCAyMDIwICswMjAwCgogICAgIGRybS9ub3V2ZWF1OiBtb3ZlIGlvX3Jlc2VydmVfbHJ1IGhhbmRs
-aW5nIGludG8gdGhlIGRyaXZlciB2NQoKICAgICBXaGlsZSB3b3JraW5nIG9uIFRUTSBjbGVhbnVw
-cyBJJ3ZlIGZvdW5kIHRoYXQgdGhlIGlvX3Jlc2VydmVfbHJ1IAp1c2VkIGJ5CiAgICAgTm91dmVh
-dSBpcyBhY3R1YWxseSBub3Qgd29ya2luZyBhdCBhbGwuCgogICAgIEluIGdlbmVyYWwgd2Ugc2hv
-dWxkIHJlbW92ZSBkcml2ZXIgc3BlY2lmaWMgaGFuZGxpbmcgZnJvbSB0aGUgbWVtb3J5CiAgICAg
-bWFuYWdlbWVudCwgc28gdGhpcyBwYXRjaCBtb3ZlcyB0aGUgaW9fcmVzZXJ2ZV9scnUgaGFuZGxp
-bmcgaW50byAKTm91dmVhdQogICAgIGluc3RlYWQuCgogICAgIHYyOiBkb24ndCBjYWxsIHR0bV9i
-b191bm1hcF92aXJ0dWFsIGluIG5vdXZlYXVfdHRtX2lvX21lbV9yZXNlcnZlCiAgICAgdjM6IHJl
-YmFzZWQgYW5kIHVzZSBib3RoIGJhc2UgYW5kIG9mZnNldCBpbiB0aGUgY2hlY2sKICAgICB2NDog
-Zml4IHNtYWxsIHR5cG9zIGFuZCB0ZXN0IHRoZSBwYXRjaAogICAgIHY1OiByZWJhc2VkIGFuZCBr
-ZWVwIHRoZSBtZW0uYnVzIGluaXQgaW4gVFRNLgoKICAgICBTaWduZWQtb2ZmLWJ5OiBDaHJpc3Rp
-YW4gS8O2bmlnIDxjaHJpc3RpYW4ua29lbmlnQGFtZC5jb20+CiAgICAgQWNrZWQtYnk6IERhbmll
-bCBWZXR0ZXIgPGRhbmllbC52ZXR0ZXJAZmZ3bGwuY2g+CiAgICAgUmV2aWV3ZWQtYnk6IEJlbiBT
-a2VnZ3MgPGJza2VnZ3NAcmVkaGF0LmNvbT4KICAgICBMaW5rOiBodHRwczovL3BhdGNod29yay5m
-cmVlZGVza3RvcC5vcmcvcGF0Y2gvMzg4NjQzLwoKICBkcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9u
-b3V2ZWF1X2JvLmMgIHwgMTAxIAorKysrKysrKysrKysrKysrKysrKysrKysrKystLS0tLS0tCiAg
-ZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9iby5oICB8ICAgMyArCiAgZHJpdmVycy9n
-cHUvZHJtL25vdXZlYXUvbm91dmVhdV9kcnYuaCB8ICAgMiArCiAgZHJpdmVycy9ncHUvZHJtL25v
-dXZlYXUvbm91dmVhdV90dG0uYyB8ICA0NCArKysrKysrKysrKysrKy0KICA0IGZpbGVzIGNoYW5n
-ZWQsIDEyNyBpbnNlcnRpb25zKCspLCAyMyBkZWxldGlvbnMoLSkKCgpfX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpOb3V2ZWF1IG1haWxpbmcgbGlzdApOb3V2
-ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9t
-YWlsbWFuL2xpc3RpbmZvL25vdXZlYXUK
+On Mon, Nov 23, 2020 at 10:51:25AM +0100, Daniel Vetter wrote:
+> On Fri, Nov 20, 2020 at 4:23 PM Matti Hamalainen <ccr@tnsp.org> wrote:
+> >
+> > Commit 03e0d26fcf79 ("drm/nouveau: slowpath for pushbuf ioctl") included
+> > a logic-bug which results in the relocations not actually getting
+> > applied at all as the call to nouveau_gem_pushbuf_reloc_apply() is
+> > never reached. This causes a regression with graphical corruption,
+> > triggered when relocations need to be done (for example after a
+> > suspend/resume cycle.)
+> >
+> > Fix by setting *apply_relocs value only if there were more than 0
+> > relocations.
+> >
+> > Additionally, the never reached code had a leftover u_free() call,
+> > which, after fixing the logic, now got called and resulted in a
+> > double-free. Fix by removing one u_free(), moving the other
+> > and adding check for errors.
+> >
+> > Cc: Daniel Vetter <daniel.vetter@ffwll.ch>
+> > Cc: Ben Skeggs <bskeggs@redhat.com>
+> > Cc: nouveau@lists.freedesktop.org
+> > Cc: dri-devel@lists.freedesktop.org
+> > Signed-off-by: Matti Hamalainen <ccr@tnsp.org>
+> > Fixes: 03e0d26fcf79 ("drm/nouveau: slowpath for pushbuf ioctl")
+> > Link: https://gitlab.freedesktop.org/drm/nouveau/-/issues/11
+> 
+> Link: is for the mailing list submission of the patch itself (to link
+> the git log to the mailing list discussions), this should be
+> References: or similar. Aside from this:
+> 
+> Reviewed-by: Daniel Vetter <daniel.vetter@ffwll.ch>
+> 
+> Ben, I'm assuming you'll push this through your tree.
+
+Ok Dave asked me to just push it into drm-misc-fixes.
+
+Thanks for your patch!
+-Daniel
+
+> -Daniel
+> 
+> 
+> > ---
+> >  drivers/gpu/drm/nouveau/nouveau_gem.c | 8 +++++---
+> >  1 file changed, 5 insertions(+), 3 deletions(-)
+> >
+> > diff --git a/drivers/gpu/drm/nouveau/nouveau_gem.c b/drivers/gpu/drm/nouveau/nouveau_gem.c
+> > index 549bc67feabb..c2051380d18c 100644
+> > --- a/drivers/gpu/drm/nouveau/nouveau_gem.c
+> > +++ b/drivers/gpu/drm/nouveau/nouveau_gem.c
+> > @@ -558,8 +558,10 @@ nouveau_gem_pushbuf_validate(struct nouveau_channel *chan,
+> >                         NV_PRINTK(err, cli, "validating bo list\n");
+> >                 validate_fini(op, chan, NULL, NULL);
+> >                 return ret;
+> > +       } else if (ret > 0) {
+> > +               *apply_relocs = true;
+> >         }
+> > -       *apply_relocs = ret;
+> > +
+> >         return 0;
+> >  }
+> >
+> > @@ -662,7 +664,6 @@ nouveau_gem_pushbuf_reloc_apply(struct nouveau_cli *cli,
+> >                 nouveau_bo_wr32(nvbo, r->reloc_bo_offset >> 2, data);
+> >         }
+> >
+> > -       u_free(reloc);
+> >         return ret;
+> >  }
+> >
+> > @@ -872,9 +873,10 @@ nouveau_gem_ioctl_pushbuf(struct drm_device *dev, void *data,
+> >                                 break;
+> >                         }
+> >                 }
+> > -               u_free(reloc);
+> >         }
+> >  out_prevalid:
+> > +       if (!IS_ERR(reloc))
+> > +               u_free(reloc);
+> >         u_free(bo);
+> >         u_free(push);
+> >
+> >
+> > base-commit: 3494d58865ad4a47611dbb427b214cc5227fa5eb
+> > --
+> > 2.29.2
+> >
+> 
+> 
+> -- 
+> Daniel Vetter
+> Software Engineer, Intel Corporation
+> http://blog.ffwll.ch
+
+-- 
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
+_______________________________________________
+Nouveau mailing list
+Nouveau@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/nouveau
