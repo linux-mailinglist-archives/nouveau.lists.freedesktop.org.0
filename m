@@ -2,115 +2,72 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9D7082C9FFA
-	for <lists+nouveau@lfdr.de>; Tue,  1 Dec 2020 11:41:01 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E4B5F2CA832
+	for <lists+nouveau@lfdr.de>; Tue,  1 Dec 2020 17:26:40 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D3D6689D40;
-	Tue,  1 Dec 2020 10:40:59 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A8B816E828;
+	Tue,  1 Dec 2020 16:26:33 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM11-CO1-obe.outbound.protection.outlook.com
- (mail-co1nam11on2056.outbound.protection.outlook.com [40.107.220.56])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 616F389D40;
- Tue,  1 Dec 2020 10:40:59 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=jeNaDrUANnZPOqJeUM6I0u+jNc6Zri7zOAfjA/W4Yeiw+gNmppQ5M+S6C+7jhALdgK/MPOMQDY/IlQZ/M1YNCUIDA07vQLEZYbIVJBz7G+WDx/JfHhINuhfr0bjD2UjuFyYdH/4aMyp4Znjriqh3FPeBCON9D3riwmXxTjqEqgb/7VjwoDLj+RtHyPl/Fl2fViGg7U3scEU/+tApTQ9xXr1oO6T30rBWioZ9EZa71WCdPbhLD7UiIjto08dx3DtBwb9QuEMLgW+JGT+Vdjq1Vv9QEq8rCmVDsONm7UuJDaoTDXZ7lCgY2soU5kV0x6U2WwrQiCdiYkjfloFU70GzIA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=UHsRdPxRBjysxtTWx7jFJq8hJpxJMDx1LK5hSESNTIE=;
- b=TSuyCtA8Frtvd8TYRpDQuGqR8khBvFopy4NtODDRyxfqvDaM68uFfIfMqGzZ/Ui92UPO/cX03MmPkMFilE5hxc28ZbktUG87biWEs1G1jSFU8pfuGf+JutqRrhc7bO/yIW3nFxjqWFkcZ7s5c7zNLLuf5iDP8CuqIpvoE3bhlm+TJDzRn22pTpUGxAkZD0EES90WtMFVnOhDg3Mjv6E0uE0C4wUZ/CmsNIJLrw3pQCU9fg8dp6ZtcEnNhNdWjng/7TycJKzYu1Dho+qfOqGVDPa8OkI2hBEpTSGT5oAk5fenk4hF1hK41MZ6AQvvdcsBFNn4jQFpCF/sml1RXTfzVw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amdcloud.onmicrosoft.com; s=selector2-amdcloud-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=UHsRdPxRBjysxtTWx7jFJq8hJpxJMDx1LK5hSESNTIE=;
- b=jPz42VoJizZb/Fu9pyA1WSSgSiVWcVgJLQjNeBNVLq6zQa5ORAbPOLsxTRUa4CnEu12LEyzqB92zmfvKqqgavaLYdLaqKygNSyFx2XYHlWR1+QKzpHXHNJ3z4ny0+DOXFel4dDPyNCt3DSzf3HWLyqmlFXsY3Lc9Y60dTXapkF8=
-Authentication-Results: ravnborg.org; dkim=none (message not signed)
- header.d=none;ravnborg.org; dmarc=none action=none header.from=amd.com;
-Received: from MN2PR12MB3775.namprd12.prod.outlook.com (2603:10b6:208:159::19)
- by BL0PR12MB4932.namprd12.prod.outlook.com (2603:10b6:208:1c2::13)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3611.20; Tue, 1 Dec
- 2020 10:40:58 +0000
-Received: from MN2PR12MB3775.namprd12.prod.outlook.com
- ([fe80::1ccc:8a9a:45d3:dd31]) by MN2PR12MB3775.namprd12.prod.outlook.com
- ([fe80::1ccc:8a9a:45d3:dd31%7]) with mapi id 15.20.3611.025; Tue, 1 Dec 2020
- 10:40:58 +0000
-To: Thomas Zimmermann <tzimmermann@suse.de>, airlied@linux.ie, daniel@ffwll.ch
-References: <20201201103542.2182-1-tzimmermann@suse.de>
- <20201201103542.2182-2-tzimmermann@suse.de>
-From: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
-Message-ID: <d79aa7c0-9b0b-4f1b-c4e5-54f53a8d2931@amd.com>
-Date: Tue, 1 Dec 2020 11:40:49 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
-In-Reply-To: <20201201103542.2182-2-tzimmermann@suse.de>
-Content-Language: en-US
-X-Originating-IP: [2a02:908:1252:fb60:be8a:bd56:1f94:86e7]
-X-ClientProxiedBy: AM4PR0701CA0031.eurprd07.prod.outlook.com
- (2603:10a6:200:42::41) To MN2PR12MB3775.namprd12.prod.outlook.com
- (2603:10b6:208:159::19)
+Received: from aserp2130.oracle.com (aserp2130.oracle.com [141.146.126.79])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0FFDD6E4B1
+ for <nouveau@lists.freedesktop.org>; Tue,  1 Dec 2020 05:53:14 +0000 (UTC)
+Received: from pps.filterd (aserp2130.oracle.com [127.0.0.1])
+ by aserp2130.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 0B15mv4T107359;
+ Tue, 1 Dec 2020 05:53:04 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
+ h=to : cc : subject :
+ from : message-id : references : date : in-reply-to : mime-version :
+ content-type; s=corp-2020-01-29;
+ bh=l9ihS9O8ty7fvCGsyg6t+FL2UWzq+Pp7wI7g9M3fu94=;
+ b=emDPbOhPomsDJ0NVhkgalKaWcDmTVt43uxmasZhRdsIKDAK5SyUn3ZBbDT0tfjc2Ub+G
+ pwnVB+2L6jYArSQUwoKsFjxw+gIeAIQd1agInCI9m5zu6sstYek99cFlGrF83pfAMoYp
+ 7h3VW08t/kH06cHx+UsVCvNai9zlonapT50haza8ExqU3V0ifCJ/7nW0lmA/qRSavM+P
+ eE0d7ezZdfPLepa71ISDd/u3VXj3GbiZhoaxq0dsKdiEuu46H687kMfk2k9ooRtVL0+n
+ yN1cC747fo++ObKGg9Es3E0DMkXRjQCXCIESHdIfuri0sdDNQNO6hiI2IHC3bOw+gche Nw== 
+Received: from userp3020.oracle.com (userp3020.oracle.com [156.151.31.79])
+ by aserp2130.oracle.com with ESMTP id 353c2aru93-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 01 Dec 2020 05:53:04 +0000
+Received: from pps.filterd (userp3020.oracle.com [127.0.0.1])
+ by userp3020.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 0B15oFV7104729;
+ Tue, 1 Dec 2020 05:53:03 GMT
+Received: from pps.reinject (localhost [127.0.0.1])
+ by userp3020.oracle.com with ESMTP id 3540arqfy7-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 01 Dec 2020 05:53:03 +0000
+Received: from userp3020.oracle.com (userp3020.oracle.com [127.0.0.1])
+ by pps.reinject (8.16.0.36/8.16.0.36) with SMTP id 0B15r2KY111063;
+ Tue, 1 Dec 2020 05:53:02 GMT
+Received: from userv0122.oracle.com (userv0122.oracle.com [156.151.31.75])
+ by userp3020.oracle.com with ESMTP id 3540arqfwj-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Tue, 01 Dec 2020 05:53:02 +0000
+Received: from abhmp0003.oracle.com (abhmp0003.oracle.com [141.146.116.9])
+ by userv0122.oracle.com (8.14.4/8.14.4) with ESMTP id 0B15qbsa005213;
+ Tue, 1 Dec 2020 05:52:40 GMT
+Received: from ca-mkp.ca.oracle.com (/10.159.214.123)
+ by default (Oracle Beehive Gateway v4.0)
+ with ESMTP ; Mon, 30 Nov 2020 21:52:37 -0800
+To: "Gustavo A. R. Silva" <gustavoars@kernel.org>
+From: "Martin K. Petersen" <martin.petersen@oracle.com>
+Organization: Oracle Corporation
+Message-ID: <yq1h7p6gjkk.fsf@ca-mkp.ca.oracle.com>
+References: <cover.1605896059.git.gustavoars@kernel.org>
+Date: Tue, 01 Dec 2020 00:52:27 -0500
+In-Reply-To: <cover.1605896059.git.gustavoars@kernel.org> (Gustavo
+ A. R. Silva's message of "Fri, 20 Nov 2020 12:21:39 -0600")
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [IPv6:2a02:908:1252:fb60:be8a:bd56:1f94:86e7]
- (2a02:908:1252:fb60:be8a:bd56:1f94:86e7) by
- AM4PR0701CA0031.eurprd07.prod.outlook.com (2603:10a6:200:42::41) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3632.6 via Frontend
- Transport; Tue, 1 Dec 2020 10:40:56 +0000
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-HT: Tenant
-X-MS-Office365-Filtering-Correlation-Id: 8ae82f56-5917-40bd-7cfe-08d895e59699
-X-MS-TrafficTypeDiagnostic: BL0PR12MB4932:
-X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: <BL0PR12MB4932600BC6B1FDE0F331A2FE83F40@BL0PR12MB4932.namprd12.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:3044;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 2r2D8feyOVloDbbEuIIMw6Duam8wzPp49XhX7P3NFpB6Z3QrtMeS/zylp/eKOLLA62x5TD5JiqjpwLjU+vZE22/1HBH7tvYT8Pz5him+8ZuPX5z7lny2Jm8oPGgd2GHStwAUElUUllXSqG89z1itq2cFq/MCVRgJ+XkALckUWpDWB4gZ6ps+tASlPtV2/G2RqQ7Wy1LS+1X8UfIHI9lfoWPW024g2g238nmgPDll1aBJf0/cWkqJHji5BfI69ZlxiV2CYj/nwc32wxGkXiz80L2Z3cMkB3Z1lPkwCL6yowC+VSAi+3Y8t/wMrtvfUrodObG4WstUEZiA7jJUEyMoBFvyDc4Ey3c3NZs0+nFJQl0lW5t2OgkCN4EGmLtiH02g
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:MN2PR12MB3775.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(4636009)(39860400002)(346002)(376002)(136003)(366004)(396003)(66574015)(2906002)(316002)(8936002)(54906003)(52116002)(66556008)(2616005)(66946007)(8676002)(4326008)(36756003)(186003)(83380400001)(6486002)(16526019)(7416002)(31696002)(86362001)(31686004)(5660300002)(478600001)(66476007)(6666004)(43740500002);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData: =?utf-8?B?dW1lOXZDRFVVa3ozaGdyUjZ3dGtGV1JYMXVyZkJFemRMdnpqZEN3UlU2aEto?=
- =?utf-8?B?bE5SeEYrem5WNEMyVzdVN0lLd2hNdjl4cVoyZHhUZUFHT1JwV3Rmc00veGhR?=
- =?utf-8?B?YWVjd0dzZUFkR2ttdkhuMG0vNHV3WVptRzVnUUdrd1owQ3l2bEVwZENVOWox?=
- =?utf-8?B?SkJzcXk5U1k0WVB3cDNoQjRZRCtVSit6ZEhvUnF6TUduWitIWTF5VlZpQ2hX?=
- =?utf-8?B?dVlvOUdZODBhRy9CTEkzSXVzeW1Wb0lYN0dOa0Z3ZTJKV29TeUpyU0Mram5i?=
- =?utf-8?B?TGtJY3A1MERMSWl6QzRlZVhPRUc3eGo2M0NNeFBPcFN0T2hKQUtxNG10QWo5?=
- =?utf-8?B?c0kvSHdoOHE4clQxSHVvSmZEWFlSWTFDVEtrWHR3d3FWcGhiQVE0aEpzUDlj?=
- =?utf-8?B?M25xa0ZhZjZJRU1VZVB5TVg0QXhRRit5ZjVRVHk0aFpxQmdvRWU3MHh6YmZO?=
- =?utf-8?B?ZW9zYUhwWTdBT1lpSnJ5VU0xZk5iWVBiZk1hQk5xUERQMS91VTR2SVdsZmxC?=
- =?utf-8?B?S1lhUUVLdGVjV2RQdk5CL05tYkdFT01ldHYycTBBQTJpSGxzNE9WQzRoeVhw?=
- =?utf-8?B?aVRxdG5jYWt6cVVzRVNhc0V2R01HazNnbjdnTEJjNm45Y0RONjdlUDJaTk5I?=
- =?utf-8?B?cEM2ZzdCNGNTK3dEVjhwYVBTMGVNejg5Z09qTHI3R2tTcGpLNDFXaWtyR3g4?=
- =?utf-8?B?ZFl2VWp1V1NXWUFseXRXcW9TQUdMRUlxR090aTlTUTJEbHV5ZHVnbnVoaEJr?=
- =?utf-8?B?eUZpZThWNmtIbk95Q0ZNbHFmcVlBZFY4R3dWSmFwNDVTaFFxbXFJL0lpT0Rk?=
- =?utf-8?B?cksycEhCMGVHSHJ2dkJaVEI5NmIrMU1HOTdMdEhuaXhCdC9scTMySGx1bVNv?=
- =?utf-8?B?RitVK2dCeTBTWjduWVhxcUhTc2hTRUFQMWwvdmVPNzQ1NHdnZ2RSV0JmdGVU?=
- =?utf-8?B?RG8ydGc2NXRzM3BXY3JFdzZsMVpaUXBvaDl4UHc4T2szK2xWNHlyV0pWZyty?=
- =?utf-8?B?RmN3Vm1PcXM2Qks0MUIyaGJtcTljcEs2OE9lMUlacVJXQTRrNk9zVGdTWk9r?=
- =?utf-8?B?Z2VpUGpVSjdKakpGcGtnQlJ4dVZ3MEZpbFNkaGZWc0c2anRZRkNFc3B0ZXpk?=
- =?utf-8?B?UDkzekJvb3prWGNubVRRSE1vQ1ZoMzJBMkNOaWtKYVFWWEVSTXE0bXlFRUtX?=
- =?utf-8?B?WHNVSFNzSFoxcTN0N1dHTjkxKzZtV2c1RDNoZzV1NTAzdnRwbGJ1Uy92ekd2?=
- =?utf-8?B?MjRjaGxCRFRmVktpMnFtdnNEMzAzMFF6RWYvTjJYNTZvSmpiVFFES1JkQVd5?=
- =?utf-8?B?NFdhSlJjSzJnWEc0MjFxRm5QcDRISnhxU0tYYk8ydkwzWklnWEVPWGF1R0tU?=
- =?utf-8?B?MmdDamlmajJJSWp5dElvbDd0V1Mzc2wrZGhMNktIL1p6NHM5TEI1eGtQZGdu?=
- =?utf-8?Q?N6Do7Ue5?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8ae82f56-5917-40bd-7cfe-08d895e59699
-X-MS-Exchange-CrossTenant-AuthSource: MN2PR12MB3775.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Dec 2020 10:40:58.2414 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 0Fc34EPELlxXSULHLuYDCWSamT4D9bmBwxwHq5XoJrdOBkH7qMi2uPgiM9xogCK+
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL0PR12MB4932
-Subject: Re: [Nouveau] [PATCH v2 01/20] drm/amdgpu: Fix trailing whitespaces
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9821
+ signatures=668682
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=1
+ lowpriorityscore=0
+ clxscore=1011 bulkscore=0 mlxlogscore=683 phishscore=0 malwarescore=0
+ spamscore=0 adultscore=0 mlxscore=0 priorityscore=1501 impostorscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2009150000
+ definitions=main-2012010039
+X-Mailman-Approved-At: Tue, 01 Dec 2020 16:26:32 +0000
+Subject: Re: [Nouveau] [PATCH 000/141] Fix fall-through warnings for Clang
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -122,45 +79,59 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Sam Ravnborg <sam@ravnborg.org>, nouveau@lists.freedesktop.org,
- intel-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- virtualization@lists.linux-foundation.org, amd-gfx@lists.freedesktop.org,
- Alex Deucher <alexander.deucher@amd.com>, spice-devel@lists.freedesktop.org,
- intel-gvt-dev@lists.freedesktop.org
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Cc: alsa-devel@alsa-project.org, linux-atm-general@lists.sourceforge.net,
+ reiserfs-devel@vger.kernel.org, nouveau@lists.freedesktop.org,
+ linux-iio@vger.kernel.org, linux-wireless@vger.kernel.org,
+ linux-fbdev@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ virtualization@lists.linux-foundation.org,
+ Nathan Chancellor <natechancellor@gmail.com>, linux-ide@vger.kernel.org,
+ dm-devel@redhat.com, keyrings@vger.kernel.org, linux-mtd@lists.infradead.org,
+ GR-everest-linux-l2@marvell.com, wcn36xx@lists.infradead.org,
+ samba-technical@lists.samba.org, linux-i3c@lists.infradead.org,
+ linux1394-devel@lists.sourceforge.net, linux-afs@lists.infradead.org,
+ usb-storage@lists.one-eyed-alien.net, target-devel@vger.kernel.org,
+ devel@driverdev.osuosl.org, linux-cifs@vger.kernel.org,
+ rds-devel@oss.oracle.com, Nick Desaulniers <ndesaulniers@google.com>,
+ linux-scsi@vger.kernel.org, linux-rdma@vger.kernel.org,
+ oss-drivers@netronome.com, bridge@lists.linux-foundation.org,
+ linux-security-module@vger.kernel.org, amd-gfx@lists.freedesktop.org,
+ linux-stm32@st-md-mailman.stormreply.com, cluster-devel@redhat.com,
+ linux-acpi@vger.kernel.org, coreteam@netfilter.org,
+ intel-wired-lan@lists.osuosl.org, linux-input@vger.kernel.org,
+ Miguel Ojeda <ojeda@kernel.org>, tipc-discussion@lists.sourceforge.net,
+ linux-ext4@vger.kernel.org, linux-media@vger.kernel.org,
+ linux-watchdog@vger.kernel.org, selinux@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org, intel-gfx@lists.freedesktop.org,
+ linux-geode@lists.infradead.org, linux-can@vger.kernel.org,
+ linux-block@vger.kernel.org, linux-gpio@vger.kernel.org,
+ op-tee@lists.trustedfirmware.org, linux-mediatek@lists.infradead.org,
+ xen-devel@lists.xenproject.org, drbd-dev@tron.linbit.com,
+ linux-hams@vger.kernel.org, ceph-devel@vger.kernel.org,
+ linux-arm-kernel@lists.infradead.org, linux-hwmon@vger.kernel.org,
+ x86@kernel.org, linux-nfs@vger.kernel.org, GR-Linux-NIC-Dev@marvell.com,
+ Kees Cook <keescook@chromium.org>, linux-mm@kvack.org, netdev@vger.kernel.org,
+ linux-decnet-user@lists.sourceforge.net, linux-mmc@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-renesas-soc@vger.kernel.org,
+ linux-sctp@vger.kernel.org, linux-usb@vger.kernel.org,
+ netfilter-devel@vger.kernel.org, linux-crypto@vger.kernel.org,
+ patches@opensource.cirrus.com, Joe Perches <joe@perches.com>,
+ linux-integrity@vger.kernel.org, linux-hardening@vger.kernel.org
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-UmV2aWV3ZWQtYnk6IENocmlzdGlhbiBLw7ZuaWcgPGNocmlzdGlhbi5rb2VuaWdAYW1kLmNvbT4g
-b24gcGF0Y2ggIzEgYW5kICMxNS4KCkFja2VkLWJ5OiBDaHJpc3RpYW4gS8O2bmlnIDxjaHJpc3Rp
-YW4ua29lbmlnQGFtZC5jb20+IG9uIHBhdGNoICMyIGFuZCAjMTYuCgpSZWdhcmRzLApDaHJpc3Rp
-YW4uCgpBbSAwMS4xMi4yMCB1bSAxMTozNSBzY2hyaWViIFRob21hcyBaaW1tZXJtYW5uOgo+IEFk
-aGVyZSB0byBrZXJuZWwgY29kaW5nIHN0eWxlLgo+Cj4gU2lnbmVkLW9mZi1ieTogVGhvbWFzIFpp
-bW1lcm1hbm4gPHR6aW1tZXJtYW5uQHN1c2UuZGU+Cj4gQWNrZWQtYnk6IEFsZXggRGV1Y2hlciA8
-YWxleGFuZGVyLmRldWNoZXJAYW1kLmNvbT4KPiBBY2tlZC1ieTogU2FtIFJhdm5ib3JnIDxzYW1A
-cmF2bmJvcmcub3JnPgo+IENjOiBBbGV4IERldWNoZXIgPGFsZXhhbmRlci5kZXVjaGVyQGFtZC5j
-b20+Cj4gQ2M6IENocmlzdGlhbiBLw7ZuaWcgPGNocmlzdGlhbi5rb2VuaWdAYW1kLmNvbT4KPiAt
-LS0KPiAgIGRyaXZlcnMvZ3B1L2RybS9hbWQvYW1kZ3B1L2FtZGdwdV9kZXZpY2UuYyB8IDYgKysr
-LS0tCj4gICAxIGZpbGUgY2hhbmdlZCwgMyBpbnNlcnRpb25zKCspLCAzIGRlbGV0aW9ucygtKQo+
-Cj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9hbWQvYW1kZ3B1L2FtZGdwdV9kZXZpY2Uu
-YyBiL2RyaXZlcnMvZ3B1L2RybS9hbWQvYW1kZ3B1L2FtZGdwdV9kZXZpY2UuYwo+IGluZGV4IDVm
-MzA0NDI1Yzk0OC4uZGEyM2MwZjIxMzExIDEwMDY0NAo+IC0tLSBhL2RyaXZlcnMvZ3B1L2RybS9h
-bWQvYW1kZ3B1L2FtZGdwdV9kZXZpY2UuYwo+ICsrKyBiL2RyaXZlcnMvZ3B1L2RybS9hbWQvYW1k
-Z3B1L2FtZGdwdV9kZXZpY2UuYwo+IEBAIC00OTIyLDggKzQ5MjIsOCBAQCBwY2lfZXJzX3Jlc3Vs
-dF90IGFtZGdwdV9wY2lfZXJyb3JfZGV0ZWN0ZWQoc3RydWN0IHBjaV9kZXYgKnBkZXYsIHBjaV9j
-aGFubmVsX3N0YQo+ICAgCWNhc2UgcGNpX2NoYW5uZWxfaW9fbm9ybWFsOgo+ICAgCQlyZXR1cm4g
-UENJX0VSU19SRVNVTFRfQ0FOX1JFQ09WRVI7Cj4gICAJLyogRmF0YWwgZXJyb3IsIHByZXBhcmUg
-Zm9yIHNsb3QgcmVzZXQgKi8KPiAtCWNhc2UgcGNpX2NoYW5uZWxfaW9fZnJvemVuOgkJCj4gLQkJ
-LyoJCQo+ICsJY2FzZSBwY2lfY2hhbm5lbF9pb19mcm96ZW46Cj4gKwkJLyoKPiAgIAkJICogQ2Fu
-Y2VsIGFuZCB3YWl0IGZvciBhbGwgVERScyBpbiBwcm9ncmVzcyBpZiBmYWlsaW5nIHRvCj4gICAJ
-CSAqIHNldCAgYWRldi0+aW5fZ3B1X3Jlc2V0IGluIGFtZGdwdV9kZXZpY2VfbG9ja19hZGV2Cj4g
-ICAJCSAqCj4gQEAgLTUwMTQsNyArNTAxNCw3IEBAIHBjaV9lcnNfcmVzdWx0X3QgYW1kZ3B1X3Bj
-aV9zbG90X3Jlc2V0KHN0cnVjdCBwY2lfZGV2ICpwZGV2KQo+ICAgCQlnb3RvIG91dDsKPiAgIAl9
-Cj4gICAKPiAtCWFkZXYtPmluX3BjaV9lcnJfcmVjb3ZlcnkgPSB0cnVlOwkKPiArCWFkZXYtPmlu
-X3BjaV9lcnJfcmVjb3ZlcnkgPSB0cnVlOwo+ICAgCXIgPSBhbWRncHVfZGV2aWNlX3ByZV9hc2lj
-X3Jlc2V0KGFkZXYsIE5VTEwsICZuZWVkX2Z1bGxfcmVzZXQpOwo+ICAgCWFkZXYtPmluX3BjaV9l
-cnJfcmVjb3ZlcnkgPSBmYWxzZTsKPiAgIAlpZiAocikKCl9fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fCk5vdXZlYXUgbWFpbGluZyBsaXN0Ck5vdXZlYXVAbGlz
-dHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4v
-bGlzdGluZm8vbm91dmVhdQo=
+
+Gustavo,
+
+> This series aims to fix almost all remaining fall-through warnings in
+> order to enable -Wimplicit-fallthrough for Clang.
+
+Applied 20-22,54,120-124 to 5.11/scsi-staging, thanks.
+
+-- 
+Martin K. Petersen	Oracle Linux Engineering
+_______________________________________________
+Nouveau mailing list
+Nouveau@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/nouveau
