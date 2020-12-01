@@ -2,44 +2,39 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 33F5C2C94A7
-	for <lists+nouveau@lfdr.de>; Tue,  1 Dec 2020 02:29:45 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id BF3FA2C9B16
+	for <lists+nouveau@lfdr.de>; Tue,  1 Dec 2020 10:13:15 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 19F2E89AB9;
-	Tue,  1 Dec 2020 01:29:42 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 248726E4B5;
+	Tue,  1 Dec 2020 09:13:14 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from hqnvemgate26.nvidia.com (hqnvemgate26.nvidia.com
- [216.228.121.65])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 54A0489AB9;
- Tue,  1 Dec 2020 01:29:41 +0000 (UTC)
-Received: from hqmail.nvidia.com (Not Verified[216.228.121.13]) by
- hqnvemgate26.nvidia.com (using TLS: TLSv1.2, AES256-SHA)
- id <B5fc59c830000>; Mon, 30 Nov 2020 17:29:39 -0800
-Received: from localhost (172.20.13.39) by HQMAIL107.nvidia.com
- (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Tue, 1 Dec
- 2020 01:29:38 +0000
-From: Alistair Popple <apopple@nvidia.com>
-To: <nouveau@lists.freedesktop.org>
-Date: Tue, 1 Dec 2020 12:29:36 +1100
-Message-ID: <20201201012936.9046-1-apopple@nvidia.com>
-X-Mailer: git-send-email 2.20.1
+Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6C5C86E4B5;
+ Tue,  1 Dec 2020 09:13:13 +0000 (UTC)
+Received: from localhost (83-86-74-64.cable.dynamic.v4.ziggo.nl [83.86.74.64])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 90377206C1;
+ Tue,  1 Dec 2020 09:13:12 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
+ s=korg; t=1606813993;
+ bh=a111Ub7wJNe9C9uVfTfFjTXMxlnuhYLlxNKkpR259Is=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=FrCN5FuJEJyhiD1h6U0k4ABEtOgWuqSyVN76nM8+Zo4NqiynmAdFJ2bo1bk53LgXW
+ 266yYmWB1hxHzSizLlbsyF1ndhJ24BTCPn+Ek5s23PsWCK9Z7kcNHdmk8SrcD/0ed8
+ A+UvhCMu0fQOp9h0DSwiDAzlPUf8FzYdcs4a2N2E=
+From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+To: linux-kernel@vger.kernel.org
+Date: Tue,  1 Dec 2020 09:54:04 +0100
+Message-Id: <20201201084728.710890565@linuxfoundation.org>
+X-Mailer: git-send-email 2.29.2
+In-Reply-To: <20201201084711.707195422@linuxfoundation.org>
+References: <20201201084711.707195422@linuxfoundation.org>
+User-Agent: quilt/0.66
 MIME-Version: 1.0
-X-Originating-IP: [172.20.13.39]
-X-ClientProxiedBy: HQMAIL107.nvidia.com (172.20.187.13) To
- HQMAIL107.nvidia.com (172.20.187.13)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
- t=1606786179; bh=U2FLmjEm94rPLnGodJhcYwZBdpdbhTX9UL1a65sI3bI=;
- h=From:To:CC:Subject:Date:Message-ID:X-Mailer:MIME-Version:
- Content-Transfer-Encoding:Content-Type:X-Originating-IP:
- X-ClientProxiedBy;
- b=FhgNlKphVf9oOOynU0gD9eLLDsorI+EotpUqSf8jOBf+GNKe/PnzOUBfizzEXTZ6I
- Nk2lDdBcBE7zxrOZjniP9rtuTSUCFME1er5nTEM75pUcTtcTQ3QLnqhLm2q+nsdqXN
- kF3WgO2Lohicz68fGDinflQYxSGiXwk56VWviw1uhu0Xhkmb3WKpFyyLBD/aJqBeKz
- ABVnrPp+jkKOOTGRzo36dPdcqFVHkGM5kOCbANft6wiXJiurj5C6YQ0VBGC5S5t4M1
- VHKDQEHYji1fG2224bbE6e5isZWjW4gxqO97RAZ9rGUmjL7AsUVv3P5l6Whqtf02V+
- OyIp/3rhTN6Uw==
-Subject: [Nouveau] [PATCH] drm/nouveau/svm: Only map migrating pages
+Subject: [Nouveau] [PATCH 5.9 129/152] drm/nouveau: fix relocations applying
+ logic and a double-free
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -51,61 +46,86 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: rcampbell@nvidia.com, Alistair Popple <apopple@nvidia.com>,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- bskeggs@redhat.com
+Cc: Sasha Levin <sashal@kernel.org>, nouveau@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>, stable@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Only pages which were actually migrated should be mapped on the GPU.
-migrate_vma_pages() clears MIGRATE_PFN_MIGRATE in the src_pfn array, so
-test this prior to mapping the pages on the GPU. If any pages failed to
-migrate don't install any mappings - the GPU will demand fault any as
-required.
+From: Matti Hamalainen <ccr@tnsp.org>
 
-Fixes: e3d8b0890469 ("drm/nouveau/svm: map pages after migration")
-Signed-off-by: Alistair Popple <apopple@nvidia.com>
+[ Upstream commit 2be65641642ef423f82162c3a5f28c754d1637d2 ]
+
+Commit 03e0d26fcf79 ("drm/nouveau: slowpath for pushbuf ioctl") included
+a logic-bug which results in the relocations not actually getting
+applied at all as the call to nouveau_gem_pushbuf_reloc_apply() is
+never reached. This causes a regression with graphical corruption,
+triggered when relocations need to be done (for example after a
+suspend/resume cycle.)
+
+Fix by setting *apply_relocs value only if there were more than 0
+relocations.
+
+Additionally, the never reached code had a leftover u_free() call,
+which, after fixing the logic, now got called and resulted in a
+double-free. Fix by removing one u_free(), moving the other
+and adding check for errors.
+
+Cc: Daniel Vetter <daniel.vetter@ffwll.ch>
+Cc: Ben Skeggs <bskeggs@redhat.com>
+Cc: nouveau@lists.freedesktop.org
+Cc: dri-devel@lists.freedesktop.org
+Signed-off-by: Matti Hamalainen <ccr@tnsp.org>
+Fixes: 03e0d26fcf79 ("drm/nouveau: slowpath for pushbuf ioctl")
+Signed-off-by: Daniel Vetter <daniel.vetter@ffwll.ch>
+Link: https://patchwork.freedesktop.org/patch/msgid/20201120152338.1203257-1-ccr@tnsp.org
+Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- drivers/gpu/drm/nouveau/nouveau_dmem.c | 14 ++++++++++++--
- 1 file changed, 12 insertions(+), 2 deletions(-)
+ drivers/gpu/drm/nouveau/nouveau_gem.c | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_dmem.c b/drivers/gpu/drm/nouveau/nouveau_dmem.c
-index 92987daa5e17..a2169644f114 100644
---- a/drivers/gpu/drm/nouveau/nouveau_dmem.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_dmem.c
-@@ -618,8 +618,9 @@ static void nouveau_dmem_migrate_chunk(struct nouveau_drm *drm,
- 		dma_addr_t *dma_addrs, u64 *pfns)
- {
- 	struct nouveau_fence *fence;
--	unsigned long addr = args->start, nr_dma = 0, i;
-+	unsigned long addr = args->start, nr_dma = 0, i, npages;
- 
-+	npages = (args->end - args->start) >> PAGE_SHIFT;
- 	for (i = 0; addr < args->end; i++) {
- 		args->dst[i] = nouveau_dmem_migrate_copy_one(drm, svmm,
- 				args->src[i], dma_addrs + nr_dma, pfns + i);
-@@ -631,7 +632,16 @@ static void nouveau_dmem_migrate_chunk(struct nouveau_drm *drm,
- 	nouveau_fence_new(drm->dmem->migrate.chan, false, &fence);
- 	migrate_vma_pages(args);
- 	nouveau_dmem_fence_done(&fence);
--	nouveau_pfns_map(svmm, args->vma->vm_mm, args->start, pfns, i);
+diff --git a/drivers/gpu/drm/nouveau/nouveau_gem.c b/drivers/gpu/drm/nouveau/nouveau_gem.c
+index 124d3dcc5c590..98e99aa8a547e 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_gem.c
++++ b/drivers/gpu/drm/nouveau/nouveau_gem.c
+@@ -570,8 +570,10 @@ nouveau_gem_pushbuf_validate(struct nouveau_channel *chan,
+ 			NV_PRINTK(err, cli, "validating bo list\n");
+ 		validate_fini(op, chan, NULL, NULL);
+ 		return ret;
++	} else if (ret > 0) {
++		*apply_relocs = true;
+ 	}
+-	*apply_relocs = ret;
 +
-+	for (i = 0; i < npages; i++)
-+		if (!(args->src[i] & MIGRATE_PFN_MIGRATE))
-+			break;
-+
-+	/* If all pages were migrated successfully map them on the GPU. If any
-+	 * failed just let the GPU fault to create the mapping.
-+	 */
-+	if (i == npages)
-+		nouveau_pfns_map(svmm, args->vma->vm_mm, args->start, pfns, npages);
+ 	return 0;
+ }
  
- 	while (nr_dma--) {
- 		dma_unmap_page(drm->dev->dev, dma_addrs[nr_dma], PAGE_SIZE,
+@@ -674,7 +676,6 @@ nouveau_gem_pushbuf_reloc_apply(struct nouveau_cli *cli,
+ 		nouveau_bo_wr32(nvbo, r->reloc_bo_offset >> 2, data);
+ 	}
+ 
+-	u_free(reloc);
+ 	return ret;
+ }
+ 
+@@ -884,9 +885,10 @@ out:
+ 				break;
+ 			}
+ 		}
+-		u_free(reloc);
+ 	}
+ out_prevalid:
++	if (!IS_ERR(reloc))
++		u_free(reloc);
+ 	u_free(bo);
+ 	u_free(push);
+ 
 -- 
-2.20.1
+2.27.0
+
+
 
 _______________________________________________
 Nouveau mailing list
