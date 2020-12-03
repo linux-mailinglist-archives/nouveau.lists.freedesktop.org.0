@@ -2,45 +2,65 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 25D2D2CCEAB
-	for <lists+nouveau@lfdr.de>; Thu,  3 Dec 2020 06:32:50 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 683C32CD9E6
+	for <lists+nouveau@lfdr.de>; Thu,  3 Dec 2020 16:12:35 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id BCEDB6E97A;
-	Thu,  3 Dec 2020 05:32:46 +0000 (UTC)
-X-Original-To: Nouveau@lists.freedesktop.org
-Delivered-To: Nouveau@lists.freedesktop.org
-Received: from mail-vk1-f195.google.com (mail-vk1-f195.google.com
- [209.85.221.195])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0B6786E97A;
- Thu,  3 Dec 2020 05:32:45 +0000 (UTC)
-Received: by mail-vk1-f195.google.com with SMTP id e5so143514vkd.4;
- Wed, 02 Dec 2020 21:32:45 -0800 (PST)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3B8836EB7E;
+	Thu,  3 Dec 2020 15:12:27 +0000 (UTC)
+X-Original-To: nouveau@lists.freedesktop.org
+Delivered-To: nouveau@lists.freedesktop.org
+Received: from mail-wr1-x444.google.com (mail-wr1-x444.google.com
+ [IPv6:2a00:1450:4864:20::444])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C35586EB76
+ for <nouveau@lists.freedesktop.org>; Thu,  3 Dec 2020 15:12:25 +0000 (UTC)
+Received: by mail-wr1-x444.google.com with SMTP id l1so2208410wrb.9
+ for <nouveau@lists.freedesktop.org>; Thu, 03 Dec 2020 07:12:25 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:content-transfer-encoding:in-reply-to;
+ bh=0hAERqPEvNo/njSkBdKsEcTHEsk1v0wP1n3wdDVxwRA=;
+ b=ljuNo4eEahkgNmDeKtvAvfTssZ64Q6mjpQQoXt9tARSPJ/UKDZd2tm1WXVMtlDQO6e
+ 5cXSU0rQl9crCv1/MCMNkfFuFRg1gpULaVCYZJM9zx42cElkjvLcVg65WAE1rJtPwxxv
+ KPUPBH5tzcuf7en6L4nPTg1Nwn1Xm8DQKwDVU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=wA1b9A9EUPLRGe8RJxQwQAdWvMshGblOc4esYqWRa/c=;
- b=UL4KhnAbV3OZHK3VU0YTNS8HwR8Bng7HRlvbYOTK5UIQUDLCcX6C3hKz+66RxDMcjO
- eEc57bPbRaIrC6f+tSl9P1K7VyxIaJVxF55+Zgy6FVUU1wwiEMMAc2DeWZwLwN7yeoBx
- 9Xkl6PywiyIHonuJd9Tcwz4YgE5DIZ3sd0Uo7snjYIaWGVTpYPnk0IwYAk+ysyAT1fCo
- jqR90OeU+X97e3y/ZffAEZpBsAA9HwY/xk29Q0SWEwVm+H4KEdzEcEGin26bL55Ncr79
- 7Pq+HCgAhbeqJhSCImpQ6ahucVM2q1cmuXqw0116edaODgcfw0EbINLVTGez9VDXwH+t
- gN/A==
-X-Gm-Message-State: AOAM5303UR3Emkf705oSQVb+BdBX9oS1+CxlLxYVVpBrcVsdgsSK7KEJ
- Ejz7MtA1cUhRY286nUQJ3q6dtteJR7kuxBS0TOI=
-X-Google-Smtp-Source: ABdhPJzrgCPbCkQrp1O+EjETCBTW1fcDvmIkvtDkh7hDu4X8dJI0fUOJI+akiL0Vi8enVSxXMj9nX5Pb8FzB75BXODs=
-X-Received: by 2002:ac5:c995:: with SMTP id e21mr743879vkm.5.1606973565149;
- Wed, 02 Dec 2020 21:32:45 -0800 (PST)
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:content-transfer-encoding
+ :in-reply-to;
+ bh=0hAERqPEvNo/njSkBdKsEcTHEsk1v0wP1n3wdDVxwRA=;
+ b=O08zrVdeSbH4KwFiQooAQB/wi7fljeSC0S7EUkmzSJoT1M8+t8a7jfSj+iJsd+mIUZ
+ CaiYOPoF7hrAlbeRB2vFO7oRL5IyKMqMUmW76EBVkiDcpaOu319gtK5UhUNCN5+oxRSz
+ BmJ6tJQ1GVhnGO6uoBhCp8norUP6Hz2kTIm5ZfDmfa5RgwSbz4Pk1xAKuQsPrkmdtiEE
+ bJT7Ek72GVfzVLvdm9SO5wmCOo57Y6N0FO97Uq9KHd9TNpOXa7eaS3oz+zSDuTahgdsX
+ eQgFUhAg7umY50kkx9WcQcQq5us/UYNweAnla6UOevn+kIEfW4VRga6cKwCr8Ufoc5OF
+ i2VA==
+X-Gm-Message-State: AOAM531FL6eDeazuJu64GpQRfKKflQip0y2x5XSU44eVUarYxy9aovjo
+ qj6l9thhNw47SVIhcwd/h7VUhA==
+X-Google-Smtp-Source: ABdhPJzR0mjbW0lUnsYIx2yd+IU0gKhYgWhujyXW3lp/unSp+504Q7xyi1/p6htVhQ/5dQ2lDnAy9w==
+X-Received: by 2002:adf:c648:: with SMTP id u8mr4243506wrg.215.1607008344358; 
+ Thu, 03 Dec 2020 07:12:24 -0800 (PST)
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
+ by smtp.gmail.com with ESMTPSA id u23sm1845979wmc.32.2020.12.03.07.12.22
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 03 Dec 2020 07:12:23 -0800 (PST)
+Date: Thu, 3 Dec 2020 16:12:21 +0100
+From: Daniel Vetter <daniel@ffwll.ch>
+To: Zack Rusin <zackr@vmware.com>
+Message-ID: <20201203151221.GA401619@phenom.ffwll.local>
+References: <20201124113824.19994-1-tzimmermann@suse.de>
+ <20201124113824.19994-15-tzimmermann@suse.de>
+ <31E75B1A-AAC0-49E3-985E-2DF5B59CD883@vmware.com>
+ <e8102216-edd0-bec3-79af-3925e9668e95@suse.de>
+ <d43d06e6-d13c-ef9b-b372-8d30d9494417@suse.de>
+ <FBC4840D-C1A8-4492-9E2E-D31E00B8D61A@vmware.com>
+ <CAKMK7uFaCVLu9GWR0Jkvf8iXP4RdcG3TmMsLmFVDoERBOk1ZOQ@mail.gmail.com>
+ <96A4A47D-4B6B-4038-B094-DD490B99C698@vmware.com>
 MIME-Version: 1.0
-References: <5d3e93cb-1a95-589c-71ed-2413932884d5@telusplanet.net>
- <CAPM=9tw8jSy-uapN-VY5v_+rm6awGdmMzyy_ArBUoXEPhqk9ZQ@mail.gmail.com>
-In-Reply-To: <CAPM=9tw8jSy-uapN-VY5v_+rm6awGdmMzyy_ArBUoXEPhqk9ZQ@mail.gmail.com>
-From: Ilia Mirkin <imirkin@alum.mit.edu>
-Date: Thu, 3 Dec 2020 00:32:34 -0500
-Message-ID: <CAKb7UvhUmMrFchhvp6446TNaPVMt9Xv-kUsiNrCFqx4jNuYfrA@mail.gmail.com>
-To: Dave Airlie <airlied@gmail.com>
-Subject: Re: [Nouveau] Nouveau video --- [ cut here ] ----- crash dump
- 5.10.0-rc6
+Content-Disposition: inline
+In-Reply-To: <96A4A47D-4B6B-4038-B094-DD490B99C698@vmware.com>
+X-Operating-System: Linux phenom 5.7.0-1-amd64 
+Subject: Re: [Nouveau] [PATCH 14/15] drm/vmwgfx: Remove references to struct
+ drm_device.pdev
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -52,114 +72,78 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau <Nouveau@lists.freedesktop.org>,
- dri-devel <dri-devel@lists.freedesktop.org>,
- LKML <linux-kernel@vger.kernel.org>, bob <gillb4@telusplanet.net>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: Daniel Vetter <daniel@ffwll.ch>, "airlied@linux.ie" <airlied@linux.ie>,
+ "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
+ "intel-gfx@lists.freedesktop.org" <intel-gfx@lists.freedesktop.org>,
+ Roland Scheidegger <sroland@vmware.com>,
+ "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
+ "virtualization@lists.linux-foundation.org"
+ <virtualization@lists.linux-foundation.org>,
+ "amd-gfx@lists.freedesktop.org" <amd-gfx@lists.freedesktop.org>,
+ "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>,
+ "intel-gvt-dev@lists.freedesktop.org" <intel-gvt-dev@lists.freedesktop.org>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Unfortunately this isn't a crash, but rather a warning that things are
-timing out. By the time you get this, the display is most likely hung.
-
-Was there anything before this, e.g. an error state dump perhaps?
-
-What GPU are you using, what displays, and how are they connected?
-What kind of userspace is running here? X or a Wayland compositor (or
-something else entirely)?
-
-On Thu, Dec 3, 2020 at 12:13 AM Dave Airlie <airlied@gmail.com> wrote:
->
-> cc'ing Ben + nouveau
->
-> On Thu, 3 Dec 2020 at 14:59, bob <gillb4@telusplanet.net> wrote:
-> >
-> > Hello.  I have a crash dump for:
-> >
-> > $ uname -a
-> > Linux freedom 5.10.0-rc6 #1 SMP Sun Nov 29 17:26:13 MST 2020 x86_64
-> > x86_64 x86_64 GNU/Linux
-> >
-> > Occasionally when this dumps it likes to lock up the computer, but I
-> > caught it this time.
-> >
-> > Also video likes to flicker a lot.   Nouveau has been iffy since kernel
-> > 5.8.0.
-> >
-> > This isn't the only dump, it dumped probably 50 times.  If you are
-> > really desperate for all of it,
-> >
-> > reply to me directly as I'm not on the mailing list.  Here is one of them.
-> >
-> > [39019.426580] ------------[ cut here ]------------
-> > [39019.426589] WARNING: CPU: 6 PID: 14136 at
-> > drivers/gpu/drm/nouveau/dispnv50/disp.c:211 nv50_dmac_wait+0x1e1/0x230
-> > [39019.426590] Modules linked in: mt2131 s5h1409 fuse tda8290 tuner
-> > cx25840 rt2800usb rt2x00usb rt2800lib snd_hda_codec_analog
-> > snd_hda_codec_generic ledtrig_audio rt2x00lib binfmt_misc
-> > intel_powerclamp coretemp cx23885 mac80211 tda18271 altera_stapl
-> > videobuf2_dvb m88ds3103 tveeprom cx2341x dvb_core rc_core i2c_mux
-> > snd_hda_codec_hdmi videobuf2_dma_sg videobuf2_memops videobuf2_v4l2
-> > snd_hda_intel videobuf2_common snd_intel_dspcfg kvm_intel snd_hda_codec
-> > videodev snd_hda_core kvm mc snd_hwdep snd_pcm_oss snd_mixer_oss
-> > irqbypass snd_pcm cfg80211 snd_seq_dummy snd_seq_midi snd_seq_oss
-> > snd_seq_midi_event snd_rawmidi snd_seq intel_cstate snd_seq_device
-> > serio_raw snd_timer input_leds nfsd libarc4 snd asus_atk0110 i7core_edac
-> > soundcore i5500_temp auth_rpcgss nfs_acl lockd grace sch_fq_codel sunrpc
-> > parport_pc ppdev lp parport ip_tables x_tables btrfs blake2b_generic
-> > libcrc32c xor zstd_compress raid6_pq dm_mirror dm_region_hash dm_log
-> > pata_acpi pata_marvell hid_generic usbhid hid psmouse firewire_ohci
-> > [39019.426650]  firewire_core crc_itu_t i2c_i801 ahci sky2 libahci
-> > i2c_smbus lpc_ich
-> > [39019.426658] CPU: 6 PID: 14136 Comm: kworker/u16:0 Tainted: G        W
-> > I       5.10.0-rc6 #1
-> > [39019.426659] Hardware name: System manufacturer System Product
-> > Name/P6T DELUXE, BIOS 2209    09/21/2010
-> > [39019.426662] Workqueue: events_unbound nv50_disp_atomic_commit_work
-> > [39019.426665] RIP: 0010:nv50_dmac_wait+0x1e1/0x230
-> > [39019.426667] Code: 8d 48 04 48 89 4a 68 c7 00 00 00 00 20 49 8b 46 38
-> > 41 c7 86 20 01 00 00 00 00 00 00 49 89 46 68 e8 e4 fc ff ff e9 76 fe ff
-> > ff <0f> 0b b8 92 ff ff ff e9 ed fe ff ff 49 8b be 80 00 00 00 e8 c7 fc
-> > [39019.426668] RSP: 0018:ffffb79d028ebd48 EFLAGS: 00010282
-> > [39019.426670] RAX: ffffffffffffff92 RBX: 000000000000000d RCX:
-> > 0000000000000000
-> > [39019.426671] RDX: ffffffffffffff92 RSI: ffffb79d028ebc88 RDI:
-> > ffffb79d028ebd28
-> > [39019.426671] RBP: ffffb79d028ebd48 R08: 0000000000000000 R09:
-> > ffffb79d028ebc58
-> > [39019.426672] R10: 0000000000000030 R11: 00000000000011c4 R12:
-> > 00000000fffffffb
-> > [39019.426673] R13: ffffa05fc1ebd368 R14: ffffa05fc1ebd3a8 R15:
-> > ffffa05fc2425000
-> > [39019.426675] FS:  0000000000000000(0000) GS:ffffa061f3d80000(0000)
-> > knlGS:0000000000000000
-> > [39019.426676] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-> > [39019.426677] CR2: 00007fb2d58e0000 CR3: 000000026280a000 CR4:
-> > 00000000000006e0
-> > [39019.426678] Call Trace:
-> > [39019.426685]  base827c_image_set+0x2f/0x1d0
-> > [39019.426687]  nv50_wndw_flush_set+0x89/0x1c0
-> > [39019.426688]  nv50_disp_atomic_commit_tail+0x4e7/0x7e0
-> > [39019.426693]  process_one_work+0x1d4/0x370
-> > [39019.426695]  worker_thread+0x4a/0x3b0
-> > [39019.426697]  ? process_one_work+0x370/0x370
-> > [39019.426699]  kthread+0xfe/0x140
-> > [39019.426701]  ? kthread_park+0x90/0x90
-> > [39019.426704]  ret_from_fork+0x22/0x30
-> > [39019.426706] ---[ end trace d512d675211c738c ]---
-> > [39021.426751] ------------[ cut here ]------------
-> >
-> >
-> > Thanks in advance,
-> >
-> > Bob
-> >
-> _______________________________________________
-> Nouveau mailing list
-> Nouveau@lists.freedesktop.org
-> https://lists.freedesktop.org/mailman/listinfo/nouveau
-_______________________________________________
-Nouveau mailing list
-Nouveau@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/nouveau
+T24gVGh1LCBEZWMgMDMsIDIwMjAgYXQgMDM6MDY6MjBBTSArMDAwMCwgWmFjayBSdXNpbiB3cm90
+ZToKPiAKPiAKPiA+IE9uIERlYyAyLCAyMDIwLCBhdCAxMTowMywgRGFuaWVsIFZldHRlciA8ZGFu
+aWVsQGZmd2xsLmNoPiB3cm90ZToKPiA+IAo+ID4gT24gV2VkLCBEZWMgMiwgMjAyMCBhdCA0OjM3
+IFBNIFphY2sgUnVzaW4gPHphY2tyQHZtd2FyZS5jb20+IHdyb3RlOgo+ID4+IAo+ID4+IAo+ID4+
+IAo+ID4+PiBPbiBEZWMgMiwgMjAyMCwgYXQgMDk6MjcsIFRob21hcyBaaW1tZXJtYW5uIDx0emlt
+bWVybWFubkBzdXNlLmRlPiB3cm90ZToKPiA+Pj4gCj4gPj4+IEhpCj4gPj4+IAo+ID4+PiBBbSAw
+Mi4xMi4yMCB1bSAwOTowMSBzY2hyaWViIFRob21hcyBaaW1tZXJtYW5uOgo+ID4+Pj4gSGkKPiA+
+Pj4+IEFtIDMwLjExLjIwIHVtIDIxOjU5IHNjaHJpZWIgWmFjayBSdXNpbjoKPiA+Pj4+PiAKPiA+
+Pj4+PiAKPiA+Pj4+Pj4gT24gTm92IDI0LCAyMDIwLCBhdCAwNjozOCwgVGhvbWFzIFppbW1lcm1h
+bm4gPHR6aW1tZXJtYW5uQHN1c2UuZGU+IHdyb3RlOgo+ID4+Pj4+PiAKPiA+Pj4+Pj4gVXNpbmcg
+c3RydWN0IGRybV9kZXZpY2UucGRldiBpcyBkZXByZWNhdGVkLiBDb252ZXJ0IHZtd2dmeCB0byBz
+dHJ1Y3QKPiA+Pj4+Pj4gZHJtX2RldmljZS5kZXYuIE5vIGZ1bmN0aW9uYWwgY2hhbmdlcy4KPiA+
+Pj4+Pj4gCj4gPj4+Pj4+IFNpZ25lZC1vZmYtYnk6IFRob21hcyBaaW1tZXJtYW5uIDx0emltbWVy
+bWFubkBzdXNlLmRlPgo+ID4+Pj4+PiBDYzogUm9sYW5kIFNjaGVpZGVnZ2VyIDxzcm9sYW5kQHZt
+d2FyZS5jb20+Cj4gPj4+Pj4+IC0tLQo+ID4+Pj4+PiBkcml2ZXJzL2dwdS9kcm0vdm13Z2Z4L3Zt
+d2dmeF9jbWRidWYuYyB8ICA4ICsrKystLS0tCj4gPj4+Pj4+IGRyaXZlcnMvZ3B1L2RybS92bXdn
+Zngvdm13Z2Z4X2Rydi5jICAgIHwgMjcgKysrKysrKysrKysrKy0tLS0tLS0tLS0tLS0KPiA+Pj4+
+Pj4gZHJpdmVycy9ncHUvZHJtL3Ztd2dmeC92bXdnZnhfZmIuYyAgICAgfCAgMiArLQo+ID4+Pj4+
+IAo+ID4+Pj4+IFJldmlld2VkLWJ5OiBaYWNrIFJ1c2luIDx6YWNrckB2bXdhcmUuY29tPgo+ID4+
+Pj4gQ291bGQgeW91IGFkZCB0aGlzIHBhdGNoIHRvIHRoZSB2bXdnZnggdHJlZT8KPiA+Pj4gCj4g
+Pj4+IEFNRCBkZXZzIGluZGljYXRlZCB0aGF0IHRoZXknZCBwcmVmZXIgdG8gbWVyZ2UgdGhlIHBh
+dGNoc2V0IHRyb3VnaCBkcm0tbWlzYy1uZXh0LiBJZiB5b3UncmUgT0sgd2l0aCB0aGF0LCBJJ2Qg
+bWVyZ2UgdGhlIHZtd2dmeCBwYXRjaCB0aHJvdWdoIGRybS1taXNjLW5leHQgYXMgd2VsbC4KPiA+
+PiAKPiA+PiBTb3VuZHMgZ29vZC4gSeKAmWxsIG1ha2Ugc3VyZSB0byByZWJhc2Ugb3VyIGxhdGVz
+dCBwYXRjaCBzZXQgb24gdG9wIG9mIGl0IHdoZW4gaXTigJlzIGluLiBUaGFua3MhCj4gPiAKPiA+
+IGJ0dyBpZiB5b3Ugd2FudCB0byBhdm9pZCBtdWx0aS10cmVlIGNvb3JkaW5hdGlvbiBoZWFkYWNo
+ZXMsIHdlIGNhbgo+ID4gYWxzbyBtYW5hZ2Ugdm13Z2Z4IGluIGRybS1taXNjIGFuZCBnaXZlIHlv
+dSAmIFJvbGFuZCBjb21taXQgcmlnaHRzCj4gPiB0aGVyZS4gVXAgdG8geW91LiBUaGVyZSBpcyBz
+b21lIHNjcmlwdGluZyBpbnZvbHZlZCBmb3Igbm93IChidXQgSSBob3BlCj4gPiB3aGVuZXZlciB3
+ZSBtb3ZlIHRvIGdpdGxhYiB3ZSBjb3VsZCBkbyB0aGUgY2hlY2tzIHNlcnZlci1zaWRlKToKPiAK
+PiBJ4oCZZCBiZSBoYXBweSB0byB0YWtlIHlvdSB1cCBvbiB0aGF0LiBJIHdvdWxkIGxpa2UgdG8g
+bW92ZSBhIGxvdCBtb3JlIG9mCj4gb3VyIGRldmVsb3BtZW50IGludG8gcHVibGljIHJlcG9zIGFu
+ZCByZWR1Y2luZyB0aGUgYnVyZGVuIG9mIG1haW50YWluaW5nCj4gbXVsdGlwbGUgdHJlZXMgd291
+bGQgaGVscC4gSXMgdGhlcmUgYSBsb3Qgb2YgY2hhbmdlcyB0byBkcm0gY29yZSB0aGF0Cj4gZG9l
+c27igJl0IGdvIHRocm91Z2ggZHJtLW1pc2M/IE9yIGFsdGVybmF0aXZlbHkgaXMgZHJtLW1pc2Mg
+b2Z0ZW4gcHVsbGluZwo+IGZyb20gTGludXPigJkgbWFzdGVyPyBJ4oCZbSB0cnlpbmcgdG8gZmln
+dXJlIG91dCBob3cgbXVjaCB3b3VsZCBvdXIgbmVlZCB0bwo+IHJlYmFzZS9tZXJnZSBiZSByZWR1
+Y2VkIGlmIHdlIGp1c3QgdXNlZCBkcm0tbWlzYy1uZXh0L2RybS1taXNjLWZpeGVzCj4gYmVjYXVz
+ZSB0aGF0IHdvdWxkIGFsc28gYWxsb3cgbWUgdG8gcG9pbnQgc29tZSBpbnRlcm5hbCB0ZXN0aW5n
+Cj4gaW5mcmFzdHJ1Y3R1cmUgYXQgaXQgYXMgd2VsbC4KCkkgdGhpbmsgbm93YWRheXMgcHJldHR5
+IG11Y2ggYWxsIHRoZSBjcm9zcy1kcml2ZXIgd29yayBsYW5kcyB0aHJvdWdoCmRybS1taXNjLiBF
+eGNlcHRpb24gaXMganVzdCBuZXcgc3R1ZmYgdGhhdCdzIG9ubHkgdXNlZCBieSBhIHNpbmdsZSBk
+cml2ZXIuCgpGb3IgdGVzdGluZyB0aGVyZSdzIGFsc28gZHJtLXRpcCwgd2hpY2ggdHJpZXMgdG8g
+cHVsbCBpdCBhbGwgdG9nZXRoZXIgKGJ1dAp5b3UgbWlnaHQgc3RpbGwgd2FudCB0byBwb2ludCB5
+b3VyIENJIGF0IGJyYW5jaGVzKS4KCkFsc28gbm90ZSB0aGF0IGRybS1taXNjLW5leHQgZG9lc24n
+dCBoYXZlIGEgbWVyZ2Ugd2luZG93IGZyZWV6ZSBwZXJpb2QKKHdpdGggaGF2ZSB0aGUgZHJtLW1p
+c2MtbmV4dC1maXhlcyBicmFuY2ggZHVyaW5nIHRoYXQgdGltZSBmb3IgbWVyZ2UKd2luZG93IGZp
+eGVzKSwgc28geW91IGNhbiB0cmVhdCBpdCBsaWtlIGEgbWFpbiBkZXZlbG9wbWVudCBicmFuY2gg
+bGlrZQplLmcuIGluIG1lc2EsIHdpdGggdGhlIC1maXhlcyBicmFuY2hlcyBhcyB0aGUgcmVsZWFz
+ZSBicmFuY2hlcy4gT25seQpkaWZmZXJlbmNlIGlzIHRoYXQgd2UgZG9uJ3QgY2hlcnJ5IHBpY2sg
+cGF0Y2hlcyBmcm9tIHRoZSBtYWluIGJyYW5jaCB0bwp0aGUgcmVsZWFzZSBicmFuY2hlcyAoYXQg
+bGVhc3Qgbm90IGFzIHRoZSBub3JtYWwgZmxvdykuCgpJZiB5b3UgZG8gbmVlZCBhIGJhY2ttZXJn
+ZSBmb3IgcGF0Y2hlcyBmcm9tIExpbnVzIHRvIGRybS1taXNjLW5leHQgYmVjYXVzZQpvZiBzb21l
+IGZlYXR1cmUgd29yayAob3IgY29uZmxpY3RzIHdpdGggb3RoZXIgc3R1ZmYgaW4gZ2VuZXJhbCkg
+ZHJtLW1pc2MKbWFpbnRhaW5lcnMgZG8gdGhhdC4gVXN1YWxseSBoYXBwZW5zIGV2ZXJ5IGZldyB3
+ZWVrcy4KLURhbmllbAotLSAKRGFuaWVsIFZldHRlcgpTb2Z0d2FyZSBFbmdpbmVlciwgSW50ZWwg
+Q29ycG9yYXRpb24KaHR0cDovL2Jsb2cuZmZ3bGwuY2gKX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBtYWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0
+cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9s
+aXN0aW5mby9ub3V2ZWF1Cg==
