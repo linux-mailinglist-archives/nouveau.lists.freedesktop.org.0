@@ -1,67 +1,116 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id BD93A2CDA9F
-	for <lists+nouveau@lfdr.de>; Thu,  3 Dec 2020 17:04:53 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id E25522CDA9C
+	for <lists+nouveau@lfdr.de>; Thu,  3 Dec 2020 17:04:48 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 928B689612;
-	Thu,  3 Dec 2020 16:04:48 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4921589402;
+	Thu,  3 Dec 2020 16:04:46 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 1037 seconds by postgrey-1.36 at gabe;
- Wed, 02 Dec 2020 18:18:42 UTC
-Received: from ale.deltatee.com (ale.deltatee.com [204.191.154.188])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 120ED6EA8F
- for <nouveau@lists.freedesktop.org>; Wed,  2 Dec 2020 18:18:42 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=deltatee.com; s=20200525; h=Subject:In-Reply-To:MIME-Version:Date:
- Message-ID:From:References:Cc:To:content-disposition;
- bh=PNgBCQ8XfFmn9D3DM+iYXdqG+oFaCFQKqsKGuaozXnM=; b=I/z1+NEbS5rhAEcJyNoJdYZjKX
- GF2BGYAtWOziMnVigqzE1eUHMglwIZi+OmM1AakjZs+Hsd+bzWcf+PlXB/NIrTjj2GlCUoWYRDZcR
- zPrHxLOH3/uzMbPUwi8F4aVw+xFx1S2W8X9T3V8IPnUoy56PN4haxXE8+yqphc/TCQmKcb8g8ZBDB
- dFrTJvFFcAG2SkWwRdgs6sezejN5wBuhZoRuXG/ncxXX65UP6Ef8E3zQkSlkTF4IEVKC8dcAdHVlK
- +xQADBoG7nV0lmFg7pnNxU24eHo65/Fy8AJIsfGoESJY8P6Q+68xlKurQ45l25yeVq2/CtZ28awXH
- iDej8pIw==;
-Received: from s01060023bee90a7d.cg.shawcable.net ([24.64.145.4]
- helo=[192.168.0.10])
- by ale.deltatee.com with esmtpsa (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.92) (envelope-from <logang@deltatee.com>)
- id 1kkWRD-0003mr-EY; Wed, 02 Dec 2020 11:01:12 -0700
-To: Christoph Hellwig <hch@lst.de>, Ralph Campbell <rcampbell@nvidia.com>
-References: <20201106005147.20113-1-rcampbell@nvidia.com>
- <20201106005147.20113-4-rcampbell@nvidia.com> <20201106080322.GE31341@lst.de>
- <a7b8b90c-09b7-2009-0784-908b61f61ef2@nvidia.com>
- <20201109091415.GC28918@lst.de>
- <bbf1f0df-85f3-5887-050e-beb2aad750f2@nvidia.com>
- <20201202101426.GC7597@lst.de>
-From: Logan Gunthorpe <logang@deltatee.com>
-Message-ID: <7229bb21-7bf7-4989-e7cf-210834190693@deltatee.com>
-Date: Wed, 2 Dec 2020 11:01:06 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.5.0
-MIME-Version: 1.0
-In-Reply-To: <20201202101426.GC7597@lst.de>
+Received: from NAM04-SN1-obe.outbound.protection.outlook.com
+ (mail-eopbgr700066.outbound.protection.outlook.com [40.107.70.66])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E5A216EB33;
+ Thu,  3 Dec 2020 03:06:24 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=YgAktVOpT5bXfIsjsDMC8xHrJRN6+jgnVu8c7JXOTEC4CzRdAPG3wqa2V1jKBFlJCNB5oaO3XCk/qHMq86QIRmKvOWWBUcKmSuYjeKlA7hl381fHcLHZtE+nYV860nphOx/a594SM3GIzv121rB+TxHINBZUVFC9mvD4+JkgP42v1++TZ1FKlrCwidOQkdkDKm9I4woySQccFqCmk6v+eirwVDTw7gpgzIr/H6VvMhzGPTrxqY39Atv5ZXcwK7uDXnGAnIgvcJiqWW+IHIqyg/n/qSpof2PUHQ2nyRtHnYG8hoEkiMSuHHIhjlAV4I+SlvAF2M9kkY2W8bqWh071VQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=tlk3aNS402pqOGoxmAYXOQXYoQZTmpRf4WzD6P2sWhM=;
+ b=cGF0z1Aoh/25Vonz+u+Rn4wj3/X/oGSHzk6p4C7T9W9QIbBV7BTfeIOohSrFUniE9rQd9TcC6PfmlJWHuPb4L7a7h2zOX1Hp719OYfLNTsQzCmnOSnJvkasf3wZZTBOfJCPCR/hZRyTjUcBe7veTvu+iz3V/lAvPr/xRWDGJkcUQbDGNh8sU3ODKJW3yhIbiKEk9UOpQ2ijsf/Xus02TIzeLok1t6Fx8SicI06iQifcji14uiXrubEGLXr5P7QYQRM6XQ2QIukBUEAEljEQfHQl3qCwD2qBD1R8tY3m2iN/1WX58ika3QiFYvFcQAOD2pzzWZfOZ3miB1Snihq3Wvw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=vmware.com; dmarc=pass action=none header.from=vmware.com;
+ dkim=pass header.d=vmware.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vmware.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=tlk3aNS402pqOGoxmAYXOQXYoQZTmpRf4WzD6P2sWhM=;
+ b=bx5IfV1UDVc/13j7lE0YroaM3g7jw4McvUNADoC3D6awEKBoJTfrP4haWjE0FPXmAJp9Z5BdefZtuTsJ32rZwSARrP/kCi21ADUiQEbr3mRGtpBKXg+ie0XAeohmetMmli8JbroSfNH8rlhWIK8s3CD9I9LCpuVL/O6SZDC1O74=
+Received: from BL0PR05MB5186.namprd05.prod.outlook.com (2603:10b6:208:8f::18)
+ by BL0PR05MB5345.namprd05.prod.outlook.com (2603:10b6:208:6e::33)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3632.6; Thu, 3 Dec
+ 2020 03:06:21 +0000
+Received: from BL0PR05MB5186.namprd05.prod.outlook.com
+ ([fe80::59ed:18ca:252d:72f6]) by BL0PR05MB5186.namprd05.prod.outlook.com
+ ([fe80::59ed:18ca:252d:72f6%7]) with mapi id 15.20.3654.005; Thu, 3 Dec 2020
+ 03:06:21 +0000
+From: Zack Rusin <zackr@vmware.com>
+To: Daniel Vetter <daniel@ffwll.ch>
+Thread-Topic: [PATCH 14/15] drm/vmwgfx: Remove references to struct
+ drm_device.pdev
+Thread-Index: AQHWwlaG5WlZT6CPxU6T7GsrbIaTjanhMtCAgAJLGYCAAGvzgIAAE2oAgAAHUICAALlJAA==
+Date: Thu, 3 Dec 2020 03:06:20 +0000
+Message-ID: <96A4A47D-4B6B-4038-B094-DD490B99C698@vmware.com>
+References: <20201124113824.19994-1-tzimmermann@suse.de>
+ <20201124113824.19994-15-tzimmermann@suse.de>
+ <31E75B1A-AAC0-49E3-985E-2DF5B59CD883@vmware.com>
+ <e8102216-edd0-bec3-79af-3925e9668e95@suse.de>
+ <d43d06e6-d13c-ef9b-b372-8d30d9494417@suse.de>
+ <FBC4840D-C1A8-4492-9E2E-D31E00B8D61A@vmware.com>
+ <CAKMK7uFaCVLu9GWR0Jkvf8iXP4RdcG3TmMsLmFVDoERBOk1ZOQ@mail.gmail.com>
+In-Reply-To: <CAKMK7uFaCVLu9GWR0Jkvf8iXP4RdcG3TmMsLmFVDoERBOk1ZOQ@mail.gmail.com>
+Accept-Language: en-US
 Content-Language: en-US
-X-SA-Exim-Connect-IP: 24.64.145.4
-X-SA-Exim-Rcpt-To: linux-fsdevel@vger.kernel.org, linux-nvdimm@lists.01.org,
- dan.j.williams@intel.com, akpm@linux-foundation.org, shuah@kernel.org,
- bskeggs@redhat.com, yang.shi@linux.alibaba.com,
- kirill.shutemov@linux.intel.com, ziy@nvidia.com, bharata@linux.ibm.com,
- jgg@nvidia.com, apopple@nvidia.com, jhubbard@nvidia.com, jglisse@redhat.com,
- linux-kernel@vger.kernel.org, linux-kselftest@vger.kernel.org,
- nouveau@lists.freedesktop.org, linux-mm@kvack.org, rcampbell@nvidia.com,
- hch@lst.de
-X-SA-Exim-Mail-From: logang@deltatee.com
-X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on ale.deltatee.com
-X-Spam-Level: 
-X-Spam-Status: No, score=-6.7 required=5.0 tests=ALL_TRUSTED,BAYES_00,
- MYRULES_FREE,NICE_REPLY_A autolearn=no autolearn_force=no version=3.4.2
-X-SA-Exim-Version: 4.2.1 (built Wed, 08 May 2019 21:11:16 +0000)
-X-SA-Exim-Scanned: Yes (on ale.deltatee.com)
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-mailer: Apple Mail (2.3608.120.23.2.4)
+authentication-results: ffwll.ch; dkim=none (message not signed)
+ header.d=none;ffwll.ch; dmarc=none action=none header.from=vmware.com;
+x-originating-ip: [71.175.59.246]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: b5eb206a-3316-480b-5ab7-08d897386925
+x-ms-traffictypediagnostic: BL0PR05MB5345:
+x-ms-exchange-transport-forked: True
+x-microsoft-antispam-prvs: <BL0PR05MB5345B875674D15ED83B48934CEF20@BL0PR05MB5345.namprd05.prod.outlook.com>
+x-ms-oob-tlc-oobclassifiers: OLM:10000;
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: d6mIlkZLkosupY3Y1mEGYiEn3woLGE+HJp/CCwaD8XGDACACPOaOiMTrtvhMvC/PdvmNlkjp1QxtnA+MMOi0u5kxY0meQqnlMZA8GdBRjMAOg/OaMnUa//dSnGRoHTriC/KKwA/h/9othg05lsLUXnYmPWoaP0W4mBqzd6ufSGATpw7CSa1WFCv+kEr0YxhENILa4tb/i5Q0CHKxNhI6Vyh0ejHj1KMVus9yHcizsWzovUJWw+wEEBLY5NSUGX3I598GWZQMd2zigBtVc8rtN1noZDLXXrT6I8HyndTIeQD+O8iQZyzGTT06p8HC2iIobUmJ/YKKzKxxKBh4iyl9YhQ+xaK+70h/Mvl3C75YaxZGvKhVSpDCDJAasNaIiiiG
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:BL0PR05MB5186.namprd05.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(4636009)(136003)(376002)(396003)(39860400002)(366004)(346002)(6486002)(186003)(2616005)(7416002)(33656002)(26005)(6506007)(53546011)(71200400001)(54906003)(316002)(6512007)(8676002)(6916009)(8936002)(5660300002)(66556008)(66476007)(64756008)(478600001)(4326008)(66946007)(66446008)(76116006)(86362001)(2906002)(36756003)(45980500001);
+ DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata: =?utf-8?B?Smx1Y3p5K2toU1hDenpKeHdEVXk4R3R1bklNOUt0Qm1leFNEbjRLQW9DZ2pz?=
+ =?utf-8?B?cy9WS0dHYnNOZTBDd2wvWGkvdTN1VmxCdHEzcjdBbTB0VXpKcU51Qm1ONjVG?=
+ =?utf-8?B?cGkrWmVyYWhnczR0TytLenhjV3dyWVhOZ0pqeForZTFrYUxKcmVRMlJ1a3Ev?=
+ =?utf-8?B?REo2QzRvazNMdDJBU29MQmN3V1ptTXNwbEEwK25qcGplY0FEb2pybFgwTldJ?=
+ =?utf-8?B?T3Z0VS81TGpWWm9aTUorQ3NwNklid01ZYjlBMS9kanRTanVCYW5tZ09WQ3Nu?=
+ =?utf-8?B?S3JtNkVza0FLaUNabnFqc2drMlZUYklySm5QOWx4SXM4VWZvNE5heDVxM2Vr?=
+ =?utf-8?B?M0ErNFFIQ1ZadXJ2dlMzZTlQTzBKSW9NaDJSTFZlU3gxNnU4VFRBZ3dodTNR?=
+ =?utf-8?B?L0p6K0k3dkVGK0g4MU44TVp1TlFReHRXM0pxeExabk9QMDhYVGpVWGFEdDdS?=
+ =?utf-8?B?YjhLU1N6UWVOUDdSVGtMU0tOdUJTYVFwV3k2aVNkTTA3N0UrU0xKVE96b1lr?=
+ =?utf-8?B?eTAxT3VlVzFFVFNtbmdnaWc2eTNkak1vbjB1SktXRUJhWUlKcjFIMHpoNVRi?=
+ =?utf-8?B?ajVGSHpocVVPWDNWa2QvdGRTZlh6OG1YYTltaDFBbHp4WlZEWmt6dlF3ZlF6?=
+ =?utf-8?B?STVUMDhhaWtHZUFtZS81U3BnekYrUWx4SThxeGk0ZGpKcXQ5Tnd5NTdRRU1S?=
+ =?utf-8?B?MWduc2s4aTlFSVl5NDE1M3hKZTg3bFZDVitRSGhPQ3paRHdGNkhQc2Y3Zm9S?=
+ =?utf-8?B?WXUzWUttbitYNi9SMmdHcitJNVk3WGtOc042ZVA0UXdzZWhXOVBjcnVCYSsx?=
+ =?utf-8?B?clRFUXVqb2tGV1UvVy90MlpmY0N6Yy9BZ2dlV3Q2ZkNqaHJLb3lFYzFWZmk3?=
+ =?utf-8?B?akdhbmJmZVpXT1huQ3NtVkZqSHRyajJtZzVzUzRCd25NMFpOZjhWZWVZN0hF?=
+ =?utf-8?B?aHpuUjRtS2thT25WRDVXR25CVFR4bkZHSEhLQWUwd1g2anZiTDhSTk5xZ2dJ?=
+ =?utf-8?B?WE1KTGYzZVYwTEw4R2VBWndZTlZNTHV5L1htYkVISmJUd1crcWtiaU9XMXdy?=
+ =?utf-8?B?UEEwOTdKZjZudUh1NVBhZ3ZtaG9iK25NZThWbE81S3B5VWRzenphbDhlYW41?=
+ =?utf-8?B?UXFTcWdYaGlnSzhXUWpIVVRkRVhxUEpFTnRua2V2cjBQSE9PZ1R5ZFdlUWZH?=
+ =?utf-8?B?czQ0MVVyK1d6b2ZUeHkwRjBqeklMMm1odG5aNk4vTHo3aUZxUS9lK3k2M2Zl?=
+ =?utf-8?B?NDdLeTFFMGdna0pZSW9sUmpzR3dTdStnVy80cGFEWmpOdWVGUXQ4bWlJNzU4?=
+ =?utf-8?Q?Nx1yjI3ZDuj3ZkCYVlAA5nhwxhC5UM1Ffi?=
+Content-ID: <BF2D78E3B1C3A44291981436524356FC@namprd05.prod.outlook.com>
+MIME-Version: 1.0
+X-OriginatorOrg: vmware.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: BL0PR05MB5186.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: b5eb206a-3316-480b-5ab7-08d897386925
+X-MS-Exchange-CrossTenant-originalarrivaltime: 03 Dec 2020 03:06:21.0144 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b39138ca-3cee-4b4a-a4d6-cd83d9dd62f0
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: tH3jKIo5gecr+QxTjfx4HBmgMbmyh2fSO38UHTvfAqfQn8tnYyFX9Wvz7fSPFWYR9cYWZRBr0V1js8/SYQDRRQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL0PR05MB5345
 X-Mailman-Approved-At: Thu, 03 Dec 2020 16:04:45 +0000
-Subject: Re: [Nouveau] [PATCH v3 3/6] mm: support THP migration to device
- private memory
+Subject: Re: [Nouveau] [PATCH 14/15] drm/vmwgfx: Remove references to struct
+ drm_device.pdev
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -73,55 +122,59 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Yang Shi <yang.shi@linux.alibaba.com>, Jason Gunthorpe <jgg@nvidia.com>,
- linux-nvdimm@lists.01.org, Alistair Popple <apopple@nvidia.com>,
- linux-kernel@vger.kernel.org, Bharata B Rao <bharata@linux.ibm.com>,
- linux-mm@kvack.org, Ben Skeggs <bskeggs@redhat.com>,
- linux-kselftest@vger.kernel.org, nouveau@lists.freedesktop.org,
- linux-fsdevel@vger.kernel.org, Andrew Morton <akpm@linux-foundation.org>,
- Zi Yan <ziy@nvidia.com>, Shuah Khan <shuah@kernel.org>,
- Dan Williams <dan.j.williams@intel.com>,
- "Kirill A . Shutemov" <kirill.shutemov@linux.intel.com>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: "airlied@linux.ie" <airlied@linux.ie>,
+ "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
+ "intel-gfx@lists.freedesktop.org" <intel-gfx@lists.freedesktop.org>,
+ Roland Scheidegger <sroland@vmware.com>,
+ "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
+ "virtualization@lists.linux-foundation.org"
+ <virtualization@lists.linux-foundation.org>,
+ "amd-gfx@lists.freedesktop.org" <amd-gfx@lists.freedesktop.org>,
+ "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>,
+ "intel-gvt-dev@lists.freedesktop.org" <intel-gvt-dev@lists.freedesktop.org>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-
-
-On 2020-12-02 3:14 a.m., Christoph Hellwig wrote:>>
-MEMORY_DEVICE_PCI_P2PDMA:
->> Struct pages are created in pci_p2pdma_add_resource() and represent device
->> memory accessible by PCIe bar address space. Memory is allocated with
->> pci_alloc_p2pmem() based on a byte length but the gen_pool_alloc_owner()
->> call will allocate memory in a minimum of PAGE_SIZE units.
->> Reference counting is +1 per *allocation* on the pgmap->ref reference count.
->> Note that this is not +1 per page which is what put_page() expects. So
->> currently, a get_page()/put_page() works OK because the page reference count
->> only goes 1->2 and 2->1. If it went to zero, the pgmap->ref reference count
->> would be incorrect if the allocation size was greater than one page.
->>
->> I see pci_alloc_p2pmem() is called by nvme_alloc_sq_cmds() and
->> pci_p2pmem_alloc_sgl() to create a command queue and a struct scatterlist *.
->> Looks like sg_page(sg) returns the ZONE_DEVICE struct page of the scatterlist.
->> There are a huge number of places sg_page() is called so it is hard to tell
->> whether or not get_page()/put_page() is ever called on MEMORY_DEVICE_PCI_P2PDMA
->> pages.
-> 
-> Nothing should call get_page/put_page on them, as they are not treated
-> as refcountable memory.  More importantly nothing is allowed to keep
-> a reference longer than the time of the I/O.
-
-Yes, right now this is safe, as Christoph notes there are no places
-where these should be got/put.
-
-But eventually we'll need to change how pci_alloc_p2pmem() works to take
-references on the actual pages and allow freeing individual pages,
-similar to what you suggest. This is one of the issues Jason pointed out
-in my last RFC to try to pass these pages through GUP.
-
-Logan
-_______________________________________________
-Nouveau mailing list
-Nouveau@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/nouveau
+DQoNCj4gT24gRGVjIDIsIDIwMjAsIGF0IDExOjAzLCBEYW5pZWwgVmV0dGVyIDxkYW5pZWxAZmZ3
+bGwuY2g+IHdyb3RlOg0KPiANCj4gT24gV2VkLCBEZWMgMiwgMjAyMCBhdCA0OjM3IFBNIFphY2sg
+UnVzaW4gPHphY2tyQHZtd2FyZS5jb20+IHdyb3RlOg0KPj4gDQo+PiANCj4+IA0KPj4+IE9uIERl
+YyAyLCAyMDIwLCBhdCAwOToyNywgVGhvbWFzIFppbW1lcm1hbm4gPHR6aW1tZXJtYW5uQHN1c2Uu
+ZGU+IHdyb3RlOg0KPj4+IA0KPj4+IEhpDQo+Pj4gDQo+Pj4gQW0gMDIuMTIuMjAgdW0gMDk6MDEg
+c2NocmllYiBUaG9tYXMgWmltbWVybWFubjoNCj4+Pj4gSGkNCj4+Pj4gQW0gMzAuMTEuMjAgdW0g
+MjE6NTkgc2NocmllYiBaYWNrIFJ1c2luOg0KPj4+Pj4gDQo+Pj4+PiANCj4+Pj4+PiBPbiBOb3Yg
+MjQsIDIwMjAsIGF0IDA2OjM4LCBUaG9tYXMgWmltbWVybWFubiA8dHppbW1lcm1hbm5Ac3VzZS5k
+ZT4gd3JvdGU6DQo+Pj4+Pj4gDQo+Pj4+Pj4gVXNpbmcgc3RydWN0IGRybV9kZXZpY2UucGRldiBp
+cyBkZXByZWNhdGVkLiBDb252ZXJ0IHZtd2dmeCB0byBzdHJ1Y3QNCj4+Pj4+PiBkcm1fZGV2aWNl
+LmRldi4gTm8gZnVuY3Rpb25hbCBjaGFuZ2VzLg0KPj4+Pj4+IA0KPj4+Pj4+IFNpZ25lZC1vZmYt
+Ynk6IFRob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPg0KPj4+Pj4+IENjOiBS
+b2xhbmQgU2NoZWlkZWdnZXIgPHNyb2xhbmRAdm13YXJlLmNvbT4NCj4+Pj4+PiAtLS0NCj4+Pj4+
+PiBkcml2ZXJzL2dwdS9kcm0vdm13Z2Z4L3Ztd2dmeF9jbWRidWYuYyB8ICA4ICsrKystLS0tDQo+
+Pj4+Pj4gZHJpdmVycy9ncHUvZHJtL3Ztd2dmeC92bXdnZnhfZHJ2LmMgICAgfCAyNyArKysrKysr
+KysrKysrLS0tLS0tLS0tLS0tLQ0KPj4+Pj4+IGRyaXZlcnMvZ3B1L2RybS92bXdnZngvdm13Z2Z4
+X2ZiLmMgICAgIHwgIDIgKy0NCj4+Pj4+IA0KPj4+Pj4gUmV2aWV3ZWQtYnk6IFphY2sgUnVzaW4g
+PHphY2tyQHZtd2FyZS5jb20+DQo+Pj4+IENvdWxkIHlvdSBhZGQgdGhpcyBwYXRjaCB0byB0aGUg
+dm13Z2Z4IHRyZWU/DQo+Pj4gDQo+Pj4gQU1EIGRldnMgaW5kaWNhdGVkIHRoYXQgdGhleSdkIHBy
+ZWZlciB0byBtZXJnZSB0aGUgcGF0Y2hzZXQgdHJvdWdoIGRybS1taXNjLW5leHQuIElmIHlvdSdy
+ZSBPSyB3aXRoIHRoYXQsIEknZCBtZXJnZSB0aGUgdm13Z2Z4IHBhdGNoIHRocm91Z2ggZHJtLW1p
+c2MtbmV4dCBhcyB3ZWxsLg0KPj4gDQo+PiBTb3VuZHMgZ29vZC4gSeKAmWxsIG1ha2Ugc3VyZSB0
+byByZWJhc2Ugb3VyIGxhdGVzdCBwYXRjaCBzZXQgb24gdG9wIG9mIGl0IHdoZW4gaXTigJlzIGlu
+LiBUaGFua3MhDQo+IA0KPiBidHcgaWYgeW91IHdhbnQgdG8gYXZvaWQgbXVsdGktdHJlZSBjb29y
+ZGluYXRpb24gaGVhZGFjaGVzLCB3ZSBjYW4NCj4gYWxzbyBtYW5hZ2Ugdm13Z2Z4IGluIGRybS1t
+aXNjIGFuZCBnaXZlIHlvdSAmIFJvbGFuZCBjb21taXQgcmlnaHRzDQo+IHRoZXJlLiBVcCB0byB5
+b3UuIFRoZXJlIGlzIHNvbWUgc2NyaXB0aW5nIGludm9sdmVkIGZvciBub3cgKGJ1dCBJIGhvcGUN
+Cj4gd2hlbmV2ZXIgd2UgbW92ZSB0byBnaXRsYWIgd2UgY291bGQgZG8gdGhlIGNoZWNrcyBzZXJ2
+ZXItc2lkZSk6DQoNCknigJlkIGJlIGhhcHB5IHRvIHRha2UgeW91IHVwIG9uIHRoYXQuIEkgd291
+bGQgbGlrZSB0byBtb3ZlIGEgbG90IG1vcmUgb2Ygb3VyIGRldmVsb3BtZW50IGludG8gcHVibGlj
+IHJlcG9zIGFuZCByZWR1Y2luZyB0aGUgYnVyZGVuIG9mIG1haW50YWluaW5nIG11bHRpcGxlIHRy
+ZWVzIHdvdWxkIGhlbHAuIElzIHRoZXJlIGEgbG90IG9mIGNoYW5nZXMgdG8gZHJtIGNvcmUgdGhh
+dCBkb2VzbuKAmXQgZ28gdGhyb3VnaCBkcm0tbWlzYz8gT3IgYWx0ZXJuYXRpdmVseSBpcyBkcm0t
+bWlzYyBvZnRlbiBwdWxsaW5nIGZyb20gTGludXPigJkgbWFzdGVyPyBJ4oCZbSB0cnlpbmcgdG8g
+ZmlndXJlIG91dCBob3cgbXVjaCB3b3VsZCBvdXIgbmVlZCB0byByZWJhc2UvbWVyZ2UgYmUgcmVk
+dWNlZCBpZiB3ZSBqdXN0IHVzZWQgZHJtLW1pc2MtbmV4dC9kcm0tbWlzYy1maXhlcyBiZWNhdXNl
+IHRoYXQgd291bGQgYWxzbyBhbGxvdyBtZSB0byBwb2ludCBzb21lIGludGVybmFsIHRlc3Rpbmcg
+aW5mcmFzdHJ1Y3R1cmUgYXQgaXQgYXMgd2VsbC4NCg0KegpfX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fXwpOb3V2ZWF1IG1haWxpbmcgbGlzdApOb3V2ZWF1QGxp
+c3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFu
+L2xpc3RpbmZvL25vdXZlYXUK
