@@ -2,115 +2,108 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id E25522CDA9C
-	for <lists+nouveau@lfdr.de>; Thu,  3 Dec 2020 17:04:48 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 41B322CDA98
+	for <lists+nouveau@lfdr.de>; Thu,  3 Dec 2020 17:03:15 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4921589402;
-	Thu,  3 Dec 2020 16:04:46 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B93D86EB7D;
+	Thu,  3 Dec 2020 16:03:13 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM04-SN1-obe.outbound.protection.outlook.com
- (mail-eopbgr700066.outbound.protection.outlook.com [40.107.70.66])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E5A216EB33;
- Thu,  3 Dec 2020 03:06:24 +0000 (UTC)
+Received: from EUR04-VI1-obe.outbound.protection.outlook.com
+ (mail-eopbgr80130.outbound.protection.outlook.com [40.107.8.130])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 462EA6EB7D
+ for <nouveau@lists.freedesktop.org>; Thu,  3 Dec 2020 16:03:12 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=YgAktVOpT5bXfIsjsDMC8xHrJRN6+jgnVu8c7JXOTEC4CzRdAPG3wqa2V1jKBFlJCNB5oaO3XCk/qHMq86QIRmKvOWWBUcKmSuYjeKlA7hl381fHcLHZtE+nYV860nphOx/a594SM3GIzv121rB+TxHINBZUVFC9mvD4+JkgP42v1++TZ1FKlrCwidOQkdkDKm9I4woySQccFqCmk6v+eirwVDTw7gpgzIr/H6VvMhzGPTrxqY39Atv5ZXcwK7uDXnGAnIgvcJiqWW+IHIqyg/n/qSpof2PUHQ2nyRtHnYG8hoEkiMSuHHIhjlAV4I+SlvAF2M9kkY2W8bqWh071VQ==
+ b=PNHNaiZAD80+0VnzrJZFxtLx3hT8XL7TtWqwCqWtwteKztdWXnT2IaabhzlKRlZXUaK0xw/UtuhNweGKd+c8TmiCd7YhKKsrS3G5GhDByLD37TNFWhbwBbz4Sc15e9v2dx2s2kK4bKJ0Fs93kCzeKfBw6KAB/cCAIxQB95ckOAnGGb9qnifGtLwNnoBOFXOMTFxRhC1c0fjiV0r8cCau0ZhbOg0DzNC6RZMNPn5e9HFEGhy1taLw9UYtAPXrY3fo4hI6iwmb6HYIUrbH6Juy4wSkQhetYSeA9tXFTq22yzTxlBn/vpc54ZQy0vhH2D4gJIF1cvUxwvnxejA4jmFDJA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=tlk3aNS402pqOGoxmAYXOQXYoQZTmpRf4WzD6P2sWhM=;
- b=cGF0z1Aoh/25Vonz+u+Rn4wj3/X/oGSHzk6p4C7T9W9QIbBV7BTfeIOohSrFUniE9rQd9TcC6PfmlJWHuPb4L7a7h2zOX1Hp719OYfLNTsQzCmnOSnJvkasf3wZZTBOfJCPCR/hZRyTjUcBe7veTvu+iz3V/lAvPr/xRWDGJkcUQbDGNh8sU3ODKJW3yhIbiKEk9UOpQ2ijsf/Xus02TIzeLok1t6Fx8SicI06iQifcji14uiXrubEGLXr5P7QYQRM6XQ2QIukBUEAEljEQfHQl3qCwD2qBD1R8tY3m2iN/1WX58ika3QiFYvFcQAOD2pzzWZfOZ3miB1Snihq3Wvw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=vmware.com; dmarc=pass action=none header.from=vmware.com;
- dkim=pass header.d=vmware.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vmware.com;
- s=selector2;
+ bh=hf2HPpi5SOh0S2UYNM8jlYM48qFzTVXwA5ZhM0z8cHw=;
+ b=jr0Rax7QEX2Ct/aSNB6k4CfMY7xjpv4ySLsJY+T8RtXzNob9fxOFc/OCRzRYYg7h5EG0BEtnwIvI48LTANSlww+gNdIyf1oqp49F2nr9I2Ym5v0XRu4VPOmqvDMoafNGTGAYgpdBq96XHuu8xUZut5mSNMn3xduN40xK8Z4+bf/5BJFNd6Kwq9pN4oku3ihZ5Ai+/NZfdRkv6GZKxSkkVoGGxtBks2sIDjUgfXnL5bDcrZgWIRHKAtv/FVOi3JlvNHRFlh4X2VoX7+67ufaMx3fLMDdHRgdGcQwnJ6aW4L6k1EQtnQGPZUIAuNM8iwxMnKKmMGD50ZmG8z/y8qsC+g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=permerror (sender ip
+ is 192.38.125.140)
+ smtp.rcpttodomain=lists.freedesktop.org
+ smtp.mailfrom=di.ku.dk; dmarc=fail (p=none sp=none pct=100) action=none
+ header.from=di.ku.dk; dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=di.ku.dk; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=tlk3aNS402pqOGoxmAYXOQXYoQZTmpRf4WzD6P2sWhM=;
- b=bx5IfV1UDVc/13j7lE0YroaM3g7jw4McvUNADoC3D6awEKBoJTfrP4haWjE0FPXmAJp9Z5BdefZtuTsJ32rZwSARrP/kCi21ADUiQEbr3mRGtpBKXg+ie0XAeohmetMmli8JbroSfNH8rlhWIK8s3CD9I9LCpuVL/O6SZDC1O74=
-Received: from BL0PR05MB5186.namprd05.prod.outlook.com (2603:10b6:208:8f::18)
- by BL0PR05MB5345.namprd05.prod.outlook.com (2603:10b6:208:6e::33)
+ bh=hf2HPpi5SOh0S2UYNM8jlYM48qFzTVXwA5ZhM0z8cHw=;
+ b=Q+YyPrltf5MkSchBq3iZdyHT46cnWMRU32tzyZLkEfyWE+VsYiuObqGb/h7CbG/BjD3gswo2pkNDeqbEOmGcz/3PBQEntpegoQ44Mxb3T9UM4HDA8fasfFgq3bXSxWjUyxO03iDp/jWdqCgP3BQiqKXHHRggiT1nbvtbJsUdyZ8=
+Received: from AM5PR1001CA0023.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:206:2::36)
+ by AM0PR04MB5315.eurprd04.prod.outlook.com (2603:10a6:208:c3::33)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3632.6; Thu, 3 Dec
- 2020 03:06:21 +0000
-Received: from BL0PR05MB5186.namprd05.prod.outlook.com
- ([fe80::59ed:18ca:252d:72f6]) by BL0PR05MB5186.namprd05.prod.outlook.com
- ([fe80::59ed:18ca:252d:72f6%7]) with mapi id 15.20.3654.005; Thu, 3 Dec 2020
- 03:06:21 +0000
-From: Zack Rusin <zackr@vmware.com>
-To: Daniel Vetter <daniel@ffwll.ch>
-Thread-Topic: [PATCH 14/15] drm/vmwgfx: Remove references to struct
- drm_device.pdev
-Thread-Index: AQHWwlaG5WlZT6CPxU6T7GsrbIaTjanhMtCAgAJLGYCAAGvzgIAAE2oAgAAHUICAALlJAA==
-Date: Thu, 3 Dec 2020 03:06:20 +0000
-Message-ID: <96A4A47D-4B6B-4038-B094-DD490B99C698@vmware.com>
-References: <20201124113824.19994-1-tzimmermann@suse.de>
- <20201124113824.19994-15-tzimmermann@suse.de>
- <31E75B1A-AAC0-49E3-985E-2DF5B59CD883@vmware.com>
- <e8102216-edd0-bec3-79af-3925e9668e95@suse.de>
- <d43d06e6-d13c-ef9b-b372-8d30d9494417@suse.de>
- <FBC4840D-C1A8-4492-9E2E-D31E00B8D61A@vmware.com>
- <CAKMK7uFaCVLu9GWR0Jkvf8iXP4RdcG3TmMsLmFVDoERBOk1ZOQ@mail.gmail.com>
-In-Reply-To: <CAKMK7uFaCVLu9GWR0Jkvf8iXP4RdcG3TmMsLmFVDoERBOk1ZOQ@mail.gmail.com>
-Accept-Language: en-US
-Content-Language: en-US
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3632.18; Thu, 3 Dec
+ 2020 16:03:09 +0000
+Received: from AM5EUR02FT029.eop-EUR02.prod.protection.outlook.com
+ (2603:10a6:206:2:cafe::93) by AM5PR1001CA0023.outlook.office365.com
+ (2603:10a6:206:2::36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3632.17 via Frontend
+ Transport; Thu, 3 Dec 2020 16:03:09 +0000
+X-MS-Exchange-Authentication-Results: spf=permerror (sender IP is
+ 192.38.125.140) smtp.mailfrom=di.ku.dk; lists.freedesktop.org; dkim=none
+ (message not signed) header.d=none;lists.freedesktop.org; dmarc=fail
+ action=none header.from=di.ku.dk;
+Received-SPF: PermError (protection.outlook.com: domain of di.ku.dk used an
+ invalid SPF mechanism)
+Received: from mailedg02pw.ku.dk (192.38.125.140) by
+ AM5EUR02FT029.mail.protection.outlook.com (10.152.8.161) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.3632.17 via Frontend Transport; Thu, 3 Dec 2020 16:03:09 +0000
+Received: from sepo4.ku.dk (10.78.8.10) by MAILEDG02PW.unicph.domain
+ (192.38.125.140) with Microsoft SMTP Server id 15.1.2106.2; Thu, 3 Dec 2020
+ 17:03:09 +0100
+Received: from 10.78.0.166 ([10.78.0.166])
+ by sepo4.ku.dk (JAMES SMTP Server 2.3.2-1) with SMTP ID 195;
+ Thu, 3 Dec 2020 17:03:09 +0100 (CET)
+Received: from MAILMBX06PW.unicph.domain (10.77.128.235) by
+ MAILMBX03PW.unicph.domain (10.77.0.234) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2106.2; Thu, 3 Dec 2020 17:03:08 +0100
+Received: from MAILMBX06PW.unicph.domain ([fe80::b490:978e:6124:2a5c]) by
+ MAILMBX06PW.unicph.domain ([fe80::b490:978e:6124:2a5c%6]) with mapi id
+ 15.01.2106.004; Thu, 3 Dec 2020 17:03:08 +0100
+From: Klaus Ebbe Grue <grue@di.ku.dk>
+To: Ilia Mirkin <imirkin@alum.mit.edu>
+Thread-Topic: [Nouveau] Could Fedora-5.9.9/X-server problem be a
+ Nouveau-problem?
+Thread-Index: AQHWxlD2xLL8tgVWbEyZw6VXVXLananfqVaAgAEiW7WABMHvhw==
+Date: Thu, 3 Dec 2020 16:03:08 +0000
+Message-ID: <20e4ed0a13c34dd0b3dfa41924a40fc0@di.ku.dk>
+References: <f827ab7dd91e4b1684dd818bd541272d@di.ku.dk>,
+ <CAKb7UvjiRApxVzxT=9Y26uXWB3zDMf8Nvi+eHfE0yJUMAfGLog@mail.gmail.com>,
+ <45fcac9dfcd54c20873427cc5042aeb4@di.ku.dk>
+In-Reply-To: <45fcac9dfcd54c20873427cc5042aeb4@di.ku.dk>
+Accept-Language: da-DK, en-US
+Content-Language: da-DK
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
-x-mailer: Apple Mail (2.3608.120.23.2.4)
-authentication-results: ffwll.ch; dkim=none (message not signed)
- header.d=none;ffwll.ch; dmarc=none action=none header.from=vmware.com;
-x-originating-ip: [71.175.59.246]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: b5eb206a-3316-480b-5ab7-08d897386925
-x-ms-traffictypediagnostic: BL0PR05MB5345:
-x-ms-exchange-transport-forked: True
-x-microsoft-antispam-prvs: <BL0PR05MB5345B875674D15ED83B48934CEF20@BL0PR05MB5345.namprd05.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:10000;
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: d6mIlkZLkosupY3Y1mEGYiEn3woLGE+HJp/CCwaD8XGDACACPOaOiMTrtvhMvC/PdvmNlkjp1QxtnA+MMOi0u5kxY0meQqnlMZA8GdBRjMAOg/OaMnUa//dSnGRoHTriC/KKwA/h/9othg05lsLUXnYmPWoaP0W4mBqzd6ufSGATpw7CSa1WFCv+kEr0YxhENILa4tb/i5Q0CHKxNhI6Vyh0ejHj1KMVus9yHcizsWzovUJWw+wEEBLY5NSUGX3I598GWZQMd2zigBtVc8rtN1noZDLXXrT6I8HyndTIeQD+O8iQZyzGTT06p8HC2iIobUmJ/YKKzKxxKBh4iyl9YhQ+xaK+70h/Mvl3C75YaxZGvKhVSpDCDJAasNaIiiiG
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:BL0PR05MB5186.namprd05.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(4636009)(136003)(376002)(396003)(39860400002)(366004)(346002)(6486002)(186003)(2616005)(7416002)(33656002)(26005)(6506007)(53546011)(71200400001)(54906003)(316002)(6512007)(8676002)(6916009)(8936002)(5660300002)(66556008)(66476007)(64756008)(478600001)(4326008)(66946007)(66446008)(76116006)(86362001)(2906002)(36756003)(45980500001);
- DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata: =?utf-8?B?Smx1Y3p5K2toU1hDenpKeHdEVXk4R3R1bklNOUt0Qm1leFNEbjRLQW9DZ2pz?=
- =?utf-8?B?cy9WS0dHYnNOZTBDd2wvWGkvdTN1VmxCdHEzcjdBbTB0VXpKcU51Qm1ONjVG?=
- =?utf-8?B?cGkrWmVyYWhnczR0TytLenhjV3dyWVhOZ0pqeForZTFrYUxKcmVRMlJ1a3Ev?=
- =?utf-8?B?REo2QzRvazNMdDJBU29MQmN3V1ptTXNwbEEwK25qcGplY0FEb2pybFgwTldJ?=
- =?utf-8?B?T3Z0VS81TGpWWm9aTUorQ3NwNklid01ZYjlBMS9kanRTanVCYW5tZ09WQ3Nu?=
- =?utf-8?B?S3JtNkVza0FLaUNabnFqc2drMlZUYklySm5QOWx4SXM4VWZvNE5heDVxM2Vr?=
- =?utf-8?B?M0ErNFFIQ1ZadXJ2dlMzZTlQTzBKSW9NaDJSTFZlU3gxNnU4VFRBZ3dodTNR?=
- =?utf-8?B?L0p6K0k3dkVGK0g4MU44TVp1TlFReHRXM0pxeExabk9QMDhYVGpVWGFEdDdS?=
- =?utf-8?B?YjhLU1N6UWVOUDdSVGtMU0tOdUJTYVFwV3k2aVNkTTA3N0UrU0xKVE96b1lr?=
- =?utf-8?B?eTAxT3VlVzFFVFNtbmdnaWc2eTNkak1vbjB1SktXRUJhWUlKcjFIMHpoNVRi?=
- =?utf-8?B?ajVGSHpocVVPWDNWa2QvdGRTZlh6OG1YYTltaDFBbHp4WlZEWmt6dlF3ZlF6?=
- =?utf-8?B?STVUMDhhaWtHZUFtZS81U3BnekYrUWx4SThxeGk0ZGpKcXQ5Tnd5NTdRRU1S?=
- =?utf-8?B?MWduc2s4aTlFSVl5NDE1M3hKZTg3bFZDVitRSGhPQ3paRHdGNkhQc2Y3Zm9S?=
- =?utf-8?B?WXUzWUttbitYNi9SMmdHcitJNVk3WGtOc042ZVA0UXdzZWhXOVBjcnVCYSsx?=
- =?utf-8?B?clRFUXVqb2tGV1UvVy90MlpmY0N6Yy9BZ2dlV3Q2ZkNqaHJLb3lFYzFWZmk3?=
- =?utf-8?B?akdhbmJmZVpXT1huQ3NtVkZqSHRyajJtZzVzUzRCd25NMFpOZjhWZWVZN0hF?=
- =?utf-8?B?aHpuUjRtS2thT25WRDVXR25CVFR4bkZHSEhLQWUwd1g2anZiTDhSTk5xZ2dJ?=
- =?utf-8?B?WE1KTGYzZVYwTEw4R2VBWndZTlZNTHV5L1htYkVISmJUd1crcWtiaU9XMXdy?=
- =?utf-8?B?UEEwOTdKZjZudUh1NVBhZ3ZtaG9iK25NZThWbE81S3B5VWRzenphbDhlYW41?=
- =?utf-8?B?UXFTcWdYaGlnSzhXUWpIVVRkRVhxUEpFTnRua2V2cjBQSE9PZ1R5ZFdlUWZH?=
- =?utf-8?B?czQ0MVVyK1d6b2ZUeHkwRjBqeklMMm1odG5aNk4vTHo3aUZxUS9lK3k2M2Zl?=
- =?utf-8?B?NDdLeTFFMGdna0pZSW9sUmpzR3dTdStnVy80cGFEWmpOdWVGUXQ4bWlJNzU4?=
- =?utf-8?Q?Nx1yjI3ZDuj3ZkCYVlAA5nhwxhC5UM1Ffi?=
-Content-ID: <BF2D78E3B1C3A44291981436524356FC@namprd05.prod.outlook.com>
+x-originating-ip: [10.78.8.10]
 MIME-Version: 1.0
-X-OriginatorOrg: vmware.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: BL0PR05MB5186.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b5eb206a-3316-480b-5ab7-08d897386925
-X-MS-Exchange-CrossTenant-originalarrivaltime: 03 Dec 2020 03:06:21.0144 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b39138ca-3cee-4b4a-a4d6-cd83d9dd62f0
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: tH3jKIo5gecr+QxTjfx4HBmgMbmyh2fSO38UHTvfAqfQn8tnYyFX9Wvz7fSPFWYR9cYWZRBr0V1js8/SYQDRRQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL0PR05MB5345
-X-Mailman-Approved-At: Thu, 03 Dec 2020 16:04:45 +0000
-Subject: Re: [Nouveau] [PATCH 14/15] drm/vmwgfx: Remove references to struct
- drm_device.pdev
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 91c1837d-fc37-4bb6-c5fb-08d897a4ee15
+X-MS-TrafficTypeDiagnostic: AM0PR04MB5315:
+X-Microsoft-Antispam-PRVS: <AM0PR04MB53157D6858D52D1658334857E3F20@AM0PR04MB5315.eurprd04.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:6430;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: n3ivIUYIaH0irvuBmQFTv01+Eqq+/fJ6xo6LMb7tttjCZrd4KCjgJFftxUHHI/Wu60SyY2Iag9PBJPX+F3kJyiR1kh0E8wbf/IAX2rO8BrBQiDuLzKS886ZKwZXmLxuWa8TFDghtWZBz2O+giiIWA/7cU5IHBFpM82TF/xbj3U1WzZ8Js/nuJOs+/Njb5pNPbdbb8qKhwgYK43XWZ40h3iit8L41UIlXK0zjwTuoHqesE+NdXZfHuH7f/8QPt87fiZYPonvuC6PgHxyf6S3Q56FhbS0c6I1n7CHR8LbJg9VGCN9VjRsWB8BDRXRjhyLsYXfwx57N9ISUET9cPBZkYw8TwCrB/4bnHPdU3J6H6MLSL9jiMiJSyXi0c1Krrc8+WhLHcc9zOi2z5zQBpmKbCQ==
+X-Forefront-Antispam-Report: CIP:192.38.125.140; CTRY:DK; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:mailedg02pw.ku.dk; PTR:mailedg02pw.ku.dk; CAT:NONE;
+ SFS:(4636009)(376002)(39850400004)(346002)(396003)(136003)(46966005)(7636003)(70586007)(108616005)(356005)(4326008)(24736004)(186003)(4744005)(336012)(8676002)(47076004)(2906002)(82740400003)(8936002)(6916009)(86362001)(36756003)(70206006)(7596003)(2616005)(478600001)(316002)(26005)(36906005)(82310400003)(5660300002)(83380400001)(54906003)(786003);
+ DIR:OUT; SFP:1102; 
+X-OriginatorOrg: di.ku.dk
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Dec 2020 16:03:09.6920 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 91c1837d-fc37-4bb6-c5fb-08d897a4ee15
+X-MS-Exchange-CrossTenant-Id: a3927f91-cda1-4696-af89-8c9f1ceffa91
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=a3927f91-cda1-4696-af89-8c9f1ceffa91; Ip=[192.38.125.140];
+ Helo=[mailedg02pw.ku.dk]
+X-MS-Exchange-CrossTenant-AuthSource: AM5EUR02FT029.eop-EUR02.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR04MB5315
+Subject: Re: [Nouveau] Could Fedora-5.9.9/X-server problem be a
+ Nouveau-problem?
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -122,59 +115,30 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: "airlied@linux.ie" <airlied@linux.ie>,
- "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
- "intel-gfx@lists.freedesktop.org" <intel-gfx@lists.freedesktop.org>,
- Roland Scheidegger <sroland@vmware.com>,
- "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
- "virtualization@lists.linux-foundation.org"
- <virtualization@lists.linux-foundation.org>,
- "amd-gfx@lists.freedesktop.org" <amd-gfx@lists.freedesktop.org>,
- "spice-devel@lists.freedesktop.org" <spice-devel@lists.freedesktop.org>,
- "intel-gvt-dev@lists.freedesktop.org" <intel-gvt-dev@lists.freedesktop.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-DQoNCj4gT24gRGVjIDIsIDIwMjAsIGF0IDExOjAzLCBEYW5pZWwgVmV0dGVyIDxkYW5pZWxAZmZ3
-bGwuY2g+IHdyb3RlOg0KPiANCj4gT24gV2VkLCBEZWMgMiwgMjAyMCBhdCA0OjM3IFBNIFphY2sg
-UnVzaW4gPHphY2tyQHZtd2FyZS5jb20+IHdyb3RlOg0KPj4gDQo+PiANCj4+IA0KPj4+IE9uIERl
-YyAyLCAyMDIwLCBhdCAwOToyNywgVGhvbWFzIFppbW1lcm1hbm4gPHR6aW1tZXJtYW5uQHN1c2Uu
-ZGU+IHdyb3RlOg0KPj4+IA0KPj4+IEhpDQo+Pj4gDQo+Pj4gQW0gMDIuMTIuMjAgdW0gMDk6MDEg
-c2NocmllYiBUaG9tYXMgWmltbWVybWFubjoNCj4+Pj4gSGkNCj4+Pj4gQW0gMzAuMTEuMjAgdW0g
-MjE6NTkgc2NocmllYiBaYWNrIFJ1c2luOg0KPj4+Pj4gDQo+Pj4+PiANCj4+Pj4+PiBPbiBOb3Yg
-MjQsIDIwMjAsIGF0IDA2OjM4LCBUaG9tYXMgWmltbWVybWFubiA8dHppbW1lcm1hbm5Ac3VzZS5k
-ZT4gd3JvdGU6DQo+Pj4+Pj4gDQo+Pj4+Pj4gVXNpbmcgc3RydWN0IGRybV9kZXZpY2UucGRldiBp
-cyBkZXByZWNhdGVkLiBDb252ZXJ0IHZtd2dmeCB0byBzdHJ1Y3QNCj4+Pj4+PiBkcm1fZGV2aWNl
-LmRldi4gTm8gZnVuY3Rpb25hbCBjaGFuZ2VzLg0KPj4+Pj4+IA0KPj4+Pj4+IFNpZ25lZC1vZmYt
-Ynk6IFRob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPg0KPj4+Pj4+IENjOiBS
-b2xhbmQgU2NoZWlkZWdnZXIgPHNyb2xhbmRAdm13YXJlLmNvbT4NCj4+Pj4+PiAtLS0NCj4+Pj4+
-PiBkcml2ZXJzL2dwdS9kcm0vdm13Z2Z4L3Ztd2dmeF9jbWRidWYuYyB8ICA4ICsrKystLS0tDQo+
-Pj4+Pj4gZHJpdmVycy9ncHUvZHJtL3Ztd2dmeC92bXdnZnhfZHJ2LmMgICAgfCAyNyArKysrKysr
-KysrKysrLS0tLS0tLS0tLS0tLQ0KPj4+Pj4+IGRyaXZlcnMvZ3B1L2RybS92bXdnZngvdm13Z2Z4
-X2ZiLmMgICAgIHwgIDIgKy0NCj4+Pj4+IA0KPj4+Pj4gUmV2aWV3ZWQtYnk6IFphY2sgUnVzaW4g
-PHphY2tyQHZtd2FyZS5jb20+DQo+Pj4+IENvdWxkIHlvdSBhZGQgdGhpcyBwYXRjaCB0byB0aGUg
-dm13Z2Z4IHRyZWU/DQo+Pj4gDQo+Pj4gQU1EIGRldnMgaW5kaWNhdGVkIHRoYXQgdGhleSdkIHBy
-ZWZlciB0byBtZXJnZSB0aGUgcGF0Y2hzZXQgdHJvdWdoIGRybS1taXNjLW5leHQuIElmIHlvdSdy
-ZSBPSyB3aXRoIHRoYXQsIEknZCBtZXJnZSB0aGUgdm13Z2Z4IHBhdGNoIHRocm91Z2ggZHJtLW1p
-c2MtbmV4dCBhcyB3ZWxsLg0KPj4gDQo+PiBTb3VuZHMgZ29vZC4gSeKAmWxsIG1ha2Ugc3VyZSB0
-byByZWJhc2Ugb3VyIGxhdGVzdCBwYXRjaCBzZXQgb24gdG9wIG9mIGl0IHdoZW4gaXTigJlzIGlu
-LiBUaGFua3MhDQo+IA0KPiBidHcgaWYgeW91IHdhbnQgdG8gYXZvaWQgbXVsdGktdHJlZSBjb29y
-ZGluYXRpb24gaGVhZGFjaGVzLCB3ZSBjYW4NCj4gYWxzbyBtYW5hZ2Ugdm13Z2Z4IGluIGRybS1t
-aXNjIGFuZCBnaXZlIHlvdSAmIFJvbGFuZCBjb21taXQgcmlnaHRzDQo+IHRoZXJlLiBVcCB0byB5
-b3UuIFRoZXJlIGlzIHNvbWUgc2NyaXB0aW5nIGludm9sdmVkIGZvciBub3cgKGJ1dCBJIGhvcGUN
-Cj4gd2hlbmV2ZXIgd2UgbW92ZSB0byBnaXRsYWIgd2UgY291bGQgZG8gdGhlIGNoZWNrcyBzZXJ2
-ZXItc2lkZSk6DQoNCknigJlkIGJlIGhhcHB5IHRvIHRha2UgeW91IHVwIG9uIHRoYXQuIEkgd291
-bGQgbGlrZSB0byBtb3ZlIGEgbG90IG1vcmUgb2Ygb3VyIGRldmVsb3BtZW50IGludG8gcHVibGlj
-IHJlcG9zIGFuZCByZWR1Y2luZyB0aGUgYnVyZGVuIG9mIG1haW50YWluaW5nIG11bHRpcGxlIHRy
-ZWVzIHdvdWxkIGhlbHAuIElzIHRoZXJlIGEgbG90IG9mIGNoYW5nZXMgdG8gZHJtIGNvcmUgdGhh
-dCBkb2VzbuKAmXQgZ28gdGhyb3VnaCBkcm0tbWlzYz8gT3IgYWx0ZXJuYXRpdmVseSBpcyBkcm0t
-bWlzYyBvZnRlbiBwdWxsaW5nIGZyb20gTGludXPigJkgbWFzdGVyPyBJ4oCZbSB0cnlpbmcgdG8g
-ZmlndXJlIG91dCBob3cgbXVjaCB3b3VsZCBvdXIgbmVlZCB0byByZWJhc2UvbWVyZ2UgYmUgcmVk
-dWNlZCBpZiB3ZSBqdXN0IHVzZWQgZHJtLW1pc2MtbmV4dC9kcm0tbWlzYy1maXhlcyBiZWNhdXNl
-IHRoYXQgd291bGQgYWxzbyBhbGxvdyBtZSB0byBwb2ludCBzb21lIGludGVybmFsIHRlc3Rpbmcg
-aW5mcmFzdHJ1Y3R1cmUgYXQgaXQgYXMgd2VsbC4NCg0KegpfX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fXwpOb3V2ZWF1IG1haWxpbmcgbGlzdApOb3V2ZWF1QGxp
-c3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFu
-L2xpc3RpbmZvL25vdXZlYXUK
+Hi Ilia,
+
+Just to follow up:
+
+I can work around the problem using this file:
+
+> cat /etc/X11/xorg.conf.d/90-monitor.conf
+Section "Monitor"
+        Identifier "DP-1"
+        Modeline "3840x2160" 533.25 3840 3888 3920 4000 2160 2163 2168 2222 +hsync -vsync
+        Option "PreferredMode" "3840x2160"
+EndSection
+
+So it seems that everything works except detection of the monitor.
+
+Cheers,
+Klaus
+_______________________________________________
+Nouveau mailing list
+Nouveau@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/nouveau
