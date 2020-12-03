@@ -2,67 +2,54 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id C450B2CCACF
-	for <lists+nouveau@lfdr.de>; Thu,  3 Dec 2020 01:02:50 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2D0F82CCE5D
+	for <lists+nouveau@lfdr.de>; Thu,  3 Dec 2020 06:13:57 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7FE956EB1D;
-	Thu,  3 Dec 2020 00:02:44 +0000 (UTC)
-X-Original-To: nouveau@lists.freedesktop.org
-Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 202766EB20
- for <nouveau@lists.freedesktop.org>; Thu,  3 Dec 2020 00:02:43 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1606953762;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=5DH0t8qqaEn3RqUMO5KivnbVKgQ9Z9+5Q+gHm3Vh9Tw=;
- b=G+mJBK2ibbe1/+1Xf6UC4YZYNyBA6nMAP/ryLD2N0kG8kw+iXlEch8dpjhTKPNvHWTHbys
- wCq+bAOH0Ka54i8YO3NStxGyIDhMTauk5GG2bZdiv+W+GMtr6dtW6wvtSxp1wngFS22Txk
- rCbk9Il9Q4BSbIa7L8rrXXSOQyxMWrM=
-Received: from mail-qv1-f71.google.com (mail-qv1-f71.google.com
- [209.85.219.71]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-319-Sd3e9UHoP3K0YWItVE1QOw-1; Wed, 02 Dec 2020 19:02:38 -0500
-X-MC-Unique: Sd3e9UHoP3K0YWItVE1QOw-1
-Received: by mail-qv1-f71.google.com with SMTP id ca17so262587qvb.1
- for <nouveau@lists.freedesktop.org>; Wed, 02 Dec 2020 16:02:38 -0800 (PST)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3FD056EB69;
+	Thu,  3 Dec 2020 05:13:54 +0000 (UTC)
+X-Original-To: Nouveau@lists.freedesktop.org
+Delivered-To: Nouveau@lists.freedesktop.org
+Received: from mail-ej1-x642.google.com (mail-ej1-x642.google.com
+ [IPv6:2a00:1450:4864:20::642])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3A5D96EB69;
+ Thu,  3 Dec 2020 05:13:53 +0000 (UTC)
+Received: by mail-ej1-x642.google.com with SMTP id d17so1536459ejy.9;
+ Wed, 02 Dec 2020 21:13:53 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=5WPnS5pwJlxDsHU3b2hVfaGtku031ZMmI6e07UWE01Y=;
+ b=ibtRC9iVdTrJ0NWlFpcUSgnNYsyuSv61L9Yisgywo83nDFRz53Z38Qeu+UcQYyq9sk
+ uwMx9mb5f79T16LQB/UN+wxWSZLToyAQebESHeUNB6cgEdQb53D7ccqQacHZ7WMosi4f
+ OlEenjbUv2bLAJgv+CS2GJa9nqr+N35XXPgcUmRHHkGJq9JEV+ugFmLCJ+BiEWBdCvgE
+ c8TbKt5UHY0bL8Y5EaKKqgve58V6j/MKduzxJVBjsfSzKp7wiKNNx8QjbLbiBHzkxxM4
+ +5NIH1saeKR9/lOdbtmT21O16fTJRY4/UZOq2tQrbm98v8VNv+gZg3/AUIELRqOSX6sh
+ DUxA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=5DH0t8qqaEn3RqUMO5KivnbVKgQ9Z9+5Q+gHm3Vh9Tw=;
- b=lq35TpMGVxjMFbgHoan+k6HlkN9e5GtaGxNZIskX3VxTEnGEXPoBZAiKAQNHeMD0G1
- Ns6C6rF/0CBvSkkLv/ebW49qOCZYVq/xGIt4+eRayVSW9ODmUCSW6Py1CQAILZSNVTLn
- 4WgX8584AnHoXBwfPHFA6sfvd0NbKscOs3UFPHiLX7PIIBgNNsGCJCXRg/lfeAd7vSrv
- zxKeFi8Sf9Q1bP+tx0UuBeFiWpSLu2H60bF4NM9OXs5C6mlI/zTcsFs6dAzpURicdw8M
- DXmXWXt5ermxM4oep4Wft9WI2ov6dEeuPZo+Xwt7Q1C9IG6eSSbqERk+LM2zt5w+9fOD
- jjoA==
-X-Gm-Message-State: AOAM5310bOabUqWDHp0JUOuceNR4hEs2WQzj/ef+ycP7n3QKxApMm+N6
- c5MScHL0bpieEMkxagGv3j4fUqKMMaC/KybGtlnZRae+GdpkCbNU1R7bSx9Gw00GXXrXLEp0zpe
- ZWgjwO9TCwahmG6z/IG7eZ4d0Rw==
-X-Received: by 2002:ae9:de03:: with SMTP id s3mr368149qkf.218.1606953757240;
- Wed, 02 Dec 2020 16:02:37 -0800 (PST)
-X-Google-Smtp-Source: ABdhPJxk/AL4kcxqZ1ogOOJxv1t1HGunHRRWZ5UdQ0lVVre8JW7SManmMIHEc30+Z/HknHhrJOet2A==
-X-Received: by 2002:ae9:de03:: with SMTP id s3mr368133qkf.218.1606953757014;
- Wed, 02 Dec 2020 16:02:37 -0800 (PST)
-Received: from dev.jcline.org ([2605:a601:a638:b301:9966:d978:493:6a3d])
- by smtp.gmail.com with ESMTPSA id y3sm222428qkl.110.2020.12.02.16.02.35
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 02 Dec 2020 16:02:35 -0800 (PST)
-From: Jeremy Cline <jcline@redhat.com>
-To: Ben Skeggs <bskeggs@redhat.com>
-Date: Wed,  2 Dec 2020 19:02:20 -0500
-Message-Id: <20201203000220.18238-1-jcline@redhat.com>
-X-Mailer: git-send-email 2.28.0
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=5WPnS5pwJlxDsHU3b2hVfaGtku031ZMmI6e07UWE01Y=;
+ b=Wm4DtiRwzC1ngG2Pvi1rYDfVk403KxLOfvubNk5xxlL8jH8evJsXlTnrpigXE3AQdV
+ 6t0Ere/xOXs+TmXWqbIhDS2yB6+j2XjS64lf/1Kw87PdDAYgiPeqByj3thKI3JRq5BU+
+ NetfUKqsVNQfyLi6XhT9qCpYT/WFnwyi4N6ArbqdZ4GitWsc7WqwNk3hSbEORUJlxEG3
+ A1FrBJ9PgcSOSRKvkmoYm4TmMEEYFS2Lwydj6ctyyd4/ske6vwLlY2aL4FDUSjeKKPQ5
+ XTcQObyWEXi04ynFVmtC/g9/3BgIzmIG9XBbaY4RTV4ALDjzrGQZifhn14RDRYfdm1RX
+ wnAg==
+X-Gm-Message-State: AOAM533Xe1NDoQnHHUaEx2FaVgMATHfyAEFGUgikkooyK4NYfOBuaYGR
+ G8izsLRSCQbOHf6CePiqPV/tjUmzKsPzVjSWKnk=
+X-Google-Smtp-Source: ABdhPJyryb6Q4rraQZaWkl22aCVMDALGJTStNiGZjuPvClvMQElRqxXfGTWCdrlup0D4pQSXgamrmRPLTD72X0NF6lw=
+X-Received: by 2002:a17:906:ae55:: with SMTP id
+ lf21mr1007595ejb.101.1606972431790; 
+ Wed, 02 Dec 2020 21:13:51 -0800 (PST)
 MIME-Version: 1.0
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=jcline@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Subject: [Nouveau] [PATCH] drm/nouveau: avoid a use-after-free when BO init
- fails
+References: <5d3e93cb-1a95-589c-71ed-2413932884d5@telusplanet.net>
+In-Reply-To: <5d3e93cb-1a95-589c-71ed-2413932884d5@telusplanet.net>
+From: Dave Airlie <airlied@gmail.com>
+Date: Thu, 3 Dec 2020 15:13:40 +1000
+Message-ID: <CAPM=9tw8jSy-uapN-VY5v_+rm6awGdmMzyy_ArBUoXEPhqk9ZQ@mail.gmail.com>
+To: bob <gillb4@telusplanet.net>, Ben Skeggs <skeggsb@gmail.com>
+Subject: Re: [Nouveau] Nouveau video --- [ cut here ] ----- crash dump
+ 5.10.0-rc6
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -74,47 +61,98 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- Daniel Vetter <daniel@ffwll.ch>, Thierry Reding <treding@nvidia.com>
+Cc: nouveau <Nouveau@lists.freedesktop.org>,
+ LKML <linux-kernel@vger.kernel.org>,
+ dri-devel <dri-devel@lists.freedesktop.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-nouveau_bo_init() is backed by ttm_bo_init() and ferries its return code
-back to the caller. On failures, ttm_bo_init() invokes the provided
-destructor which should de-initialize and free the memory.
+cc'ing Ben + nouveau
 
-Thus, when nouveau_bo_init() returns an error the gem object has already
-been released and the memory freed by nouveau_bo_del_ttm().
-
-Fixes: 019cbd4a4feb ("drm/nouveau: Initialize GEM object before TTM object")
-Cc: Thierry Reding <treding@nvidia.com>
-Signed-off-by: Jeremy Cline <jcline@redhat.com>
----
- drivers/gpu/drm/nouveau/nouveau_gem.c | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
-
-diff --git a/drivers/gpu/drm/nouveau/nouveau_gem.c b/drivers/gpu/drm/nouveau/nouveau_gem.c
-index 787d05eefd9c..d30157cc7169 100644
---- a/drivers/gpu/drm/nouveau/nouveau_gem.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_gem.c
-@@ -211,10 +211,8 @@ nouveau_gem_new(struct nouveau_cli *cli, u64 size, int align, uint32_t domain,
- 	}
- 
- 	ret = nouveau_bo_init(nvbo, size, align, domain, NULL, NULL);
--	if (ret) {
--		nouveau_bo_ref(NULL, &nvbo);
-+	if (ret)
- 		return ret;
--	}
- 
- 	/* we restrict allowed domains on nv50+ to only the types
- 	 * that were requested at creation time.  not possibly on
--- 
-2.28.0
-
+On Thu, 3 Dec 2020 at 14:59, bob <gillb4@telusplanet.net> wrote:
+>
+> Hello.  I have a crash dump for:
+>
+> $ uname -a
+> Linux freedom 5.10.0-rc6 #1 SMP Sun Nov 29 17:26:13 MST 2020 x86_64
+> x86_64 x86_64 GNU/Linux
+>
+> Occasionally when this dumps it likes to lock up the computer, but I
+> caught it this time.
+>
+> Also video likes to flicker a lot.   Nouveau has been iffy since kernel
+> 5.8.0.
+>
+> This isn't the only dump, it dumped probably 50 times.  If you are
+> really desperate for all of it,
+>
+> reply to me directly as I'm not on the mailing list.  Here is one of them.
+>
+> [39019.426580] ------------[ cut here ]------------
+> [39019.426589] WARNING: CPU: 6 PID: 14136 at
+> drivers/gpu/drm/nouveau/dispnv50/disp.c:211 nv50_dmac_wait+0x1e1/0x230
+> [39019.426590] Modules linked in: mt2131 s5h1409 fuse tda8290 tuner
+> cx25840 rt2800usb rt2x00usb rt2800lib snd_hda_codec_analog
+> snd_hda_codec_generic ledtrig_audio rt2x00lib binfmt_misc
+> intel_powerclamp coretemp cx23885 mac80211 tda18271 altera_stapl
+> videobuf2_dvb m88ds3103 tveeprom cx2341x dvb_core rc_core i2c_mux
+> snd_hda_codec_hdmi videobuf2_dma_sg videobuf2_memops videobuf2_v4l2
+> snd_hda_intel videobuf2_common snd_intel_dspcfg kvm_intel snd_hda_codec
+> videodev snd_hda_core kvm mc snd_hwdep snd_pcm_oss snd_mixer_oss
+> irqbypass snd_pcm cfg80211 snd_seq_dummy snd_seq_midi snd_seq_oss
+> snd_seq_midi_event snd_rawmidi snd_seq intel_cstate snd_seq_device
+> serio_raw snd_timer input_leds nfsd libarc4 snd asus_atk0110 i7core_edac
+> soundcore i5500_temp auth_rpcgss nfs_acl lockd grace sch_fq_codel sunrpc
+> parport_pc ppdev lp parport ip_tables x_tables btrfs blake2b_generic
+> libcrc32c xor zstd_compress raid6_pq dm_mirror dm_region_hash dm_log
+> pata_acpi pata_marvell hid_generic usbhid hid psmouse firewire_ohci
+> [39019.426650]  firewire_core crc_itu_t i2c_i801 ahci sky2 libahci
+> i2c_smbus lpc_ich
+> [39019.426658] CPU: 6 PID: 14136 Comm: kworker/u16:0 Tainted: G        W
+> I       5.10.0-rc6 #1
+> [39019.426659] Hardware name: System manufacturer System Product
+> Name/P6T DELUXE, BIOS 2209    09/21/2010
+> [39019.426662] Workqueue: events_unbound nv50_disp_atomic_commit_work
+> [39019.426665] RIP: 0010:nv50_dmac_wait+0x1e1/0x230
+> [39019.426667] Code: 8d 48 04 48 89 4a 68 c7 00 00 00 00 20 49 8b 46 38
+> 41 c7 86 20 01 00 00 00 00 00 00 49 89 46 68 e8 e4 fc ff ff e9 76 fe ff
+> ff <0f> 0b b8 92 ff ff ff e9 ed fe ff ff 49 8b be 80 00 00 00 e8 c7 fc
+> [39019.426668] RSP: 0018:ffffb79d028ebd48 EFLAGS: 00010282
+> [39019.426670] RAX: ffffffffffffff92 RBX: 000000000000000d RCX:
+> 0000000000000000
+> [39019.426671] RDX: ffffffffffffff92 RSI: ffffb79d028ebc88 RDI:
+> ffffb79d028ebd28
+> [39019.426671] RBP: ffffb79d028ebd48 R08: 0000000000000000 R09:
+> ffffb79d028ebc58
+> [39019.426672] R10: 0000000000000030 R11: 00000000000011c4 R12:
+> 00000000fffffffb
+> [39019.426673] R13: ffffa05fc1ebd368 R14: ffffa05fc1ebd3a8 R15:
+> ffffa05fc2425000
+> [39019.426675] FS:  0000000000000000(0000) GS:ffffa061f3d80000(0000)
+> knlGS:0000000000000000
+> [39019.426676] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+> [39019.426677] CR2: 00007fb2d58e0000 CR3: 000000026280a000 CR4:
+> 00000000000006e0
+> [39019.426678] Call Trace:
+> [39019.426685]  base827c_image_set+0x2f/0x1d0
+> [39019.426687]  nv50_wndw_flush_set+0x89/0x1c0
+> [39019.426688]  nv50_disp_atomic_commit_tail+0x4e7/0x7e0
+> [39019.426693]  process_one_work+0x1d4/0x370
+> [39019.426695]  worker_thread+0x4a/0x3b0
+> [39019.426697]  ? process_one_work+0x370/0x370
+> [39019.426699]  kthread+0xfe/0x140
+> [39019.426701]  ? kthread_park+0x90/0x90
+> [39019.426704]  ret_from_fork+0x22/0x30
+> [39019.426706] ---[ end trace d512d675211c738c ]---
+> [39021.426751] ------------[ cut here ]------------
+>
+>
+> Thanks in advance,
+>
+> Bob
+>
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
