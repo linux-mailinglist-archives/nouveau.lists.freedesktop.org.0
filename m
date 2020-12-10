@@ -2,70 +2,53 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0F8F32D4886
-	for <lists+nouveau@lfdr.de>; Wed,  9 Dec 2020 19:04:42 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 47C732D5032
+	for <lists+nouveau@lfdr.de>; Thu, 10 Dec 2020 02:22:08 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 752696EADC;
-	Wed,  9 Dec 2020 18:04:36 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B1FBF6E3D2;
+	Thu, 10 Dec 2020 01:22:04 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3C9A5892DE
- for <nouveau@lists.freedesktop.org>; Wed,  9 Dec 2020 18:04:35 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [63.128.21.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4378C6E0D6
+ for <nouveau@lists.freedesktop.org>; Thu, 10 Dec 2020 01:22:03 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1607537074;
+ s=mimecast20190719; t=1607563321;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=3PbwsGxDvfW0LbCU0yoVuxlXMfsh/ZypY1/qMHX8YuQ=;
- b=BDnRD2u9nZ3Ik4eZkfsvs2CIK/puMAkzA++xRAgFAVAnE7eNgZY+XTPeCatoj6tNtnqiCy
- rmg3HtAcivhr0pwpnlPwW9rxd/ykBLwe8gC5sB/BtdcyDnHCGyrHQ9ZAC78rO8YKxa2hB4
- Mb6STq8dVC3afJsk1iwUwmxxDX5B9zY=
-Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com
- [209.85.222.199]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-45-ygMPFSZZMHyUux-vYWoEng-1; Wed, 09 Dec 2020 13:04:30 -0500
-X-MC-Unique: ygMPFSZZMHyUux-vYWoEng-1
-Received: by mail-qk1-f199.google.com with SMTP id o25so1669965qkj.1
- for <nouveau@lists.freedesktop.org>; Wed, 09 Dec 2020 10:04:30 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=3PbwsGxDvfW0LbCU0yoVuxlXMfsh/ZypY1/qMHX8YuQ=;
- b=AqwtAFX1rxkMjnvjnwMZsuJyKI3SHWtOpaIwxqQOXciM/ewR6BKsq6ommBtm4irQFo
- IAxUpAmgA9LOVwVnvIOmOFialoE+g3iYkyT+nz/3DYULUpmq2QRoes7vde6kNBTmjfBu
- Gp3KnXO/dGMZylof7vnIFvu4mkLJjfDrW6oe6Z7DTBnTKgV72QsNB6lkT8HzF5Il3y8n
- MlGC1tBMvOqJ+hGOUVp7rq6rRr9l2ivPNK9VuoKcwsjXnPCNYQKqlH5UC1UnSCHpKmuS
- CNEw53obWkRSHkvyBWKNBGRkyXH5rMSD8M+0zgedczll9u1UIiQINq60ZmoPUuHb7Km0
- cF3w==
-X-Gm-Message-State: AOAM531LE65gVdyx6w6ETicWMhzw9+tGb3+lhzlJBstP6efPzA3nKl/B
- 9/4Q66ssUpWN9sLN0+xZz2Hlo8ZpQPXGH+SawgHDLasaKOPMCBtiBFczrR8YQHUUA49XgF0SFzW
- sVn+80ye/a9NjbWZ+ygL0rYx20w==
-X-Received: by 2002:a37:9c4a:: with SMTP id f71mr4368378qke.495.1607537069363; 
- Wed, 09 Dec 2020 10:04:29 -0800 (PST)
-X-Google-Smtp-Source: ABdhPJyr/1apxVN5Ij7nu5yhZTtXAiXkdKr8Jhpe0b4Wi6t0LUh7XItYafvrRFOt9NxrpZpRzu4ibw==
-X-Received: by 2002:a37:9c4a:: with SMTP id f71mr4368335qke.495.1607537068982; 
- Wed, 09 Dec 2020 10:04:28 -0800 (PST)
-Received: from xps13 ([2605:a601:a63a:4d01:c3c1:7008:ba35:96])
- by smtp.gmail.com with ESMTPSA id q73sm1597131qke.16.2020.12.09.10.04.27
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 09 Dec 2020 10:04:28 -0800 (PST)
-Date: Wed, 9 Dec 2020 13:04:26 -0500
-From: Jeremy Cline <jcline@redhat.com>
-To: Thomas Zimmermann <tzimmermann@suse.de>
-Message-ID: <20201209180426.GA8635@xps13>
-References: <20201201103542.2182-1-tzimmermann@suse.de>
- <20201201103542.2182-14-tzimmermann@suse.de>
+ content-transfer-encoding:content-transfer-encoding;
+ bh=tN0zz/y0V5HsRvkCFwtmm8mQA7JLdHwsw6YA+NNkPu4=;
+ b=L/17ORDX1DPIFT3MC7i8uTx9ek5hMBe8d7vo2QLh45L3r+4+zkbRnlVOBFquMUpWNVV0nm
+ 2TpewnHGK7XW4TFjc0H/bqj5p0co/BvqLa+FQOzXL0ho0BLH0vL7Tgx8z50lHWBTLeLIiB
+ 0mR/TPt9ENUUAroUVtDn2zEM7FiqDKI=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-154-AYc-ZXbJOYm1yJW8cps00A-1; Wed, 09 Dec 2020 20:21:58 -0500
+X-MC-Unique: AYc-ZXbJOYm1yJW8cps00A-1
+Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
+ [10.5.11.22])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 7C292107ACE4;
+ Thu, 10 Dec 2020 01:21:57 +0000 (UTC)
+Received: from Whitewolf.redhat.com (ovpn-113-246.rdu2.redhat.com
+ [10.10.113.246])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 8F42F100AE2F;
+ Thu, 10 Dec 2020 01:21:56 +0000 (UTC)
+From: Lyude Paul <lyude@redhat.com>
+To: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ intel-gfx@lists.freedesktop.org
+Date: Wed,  9 Dec 2020 20:21:38 -0500
+Message-Id: <20201210012143.729402-1-lyude@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <20201201103542.2182-14-tzimmermann@suse.de>
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
 Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=jcline@redhat.com
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=lyude@redhat.com
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
-Subject: Re: [Nouveau] [PATCH v2 13/20] drm/nouveau: Remove references to
- struct drm_device.pdev
+Subject: [Nouveau] [RFC 0/5] drm: Extract DPCD backlight helpers from i915,
+ add support in nouveau
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -77,420 +60,42 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: airlied@linux.ie, nouveau@lists.freedesktop.org,
- intel-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- virtualization@lists.linux-foundation.org, amd-gfx@lists.freedesktop.org,
- daniel@ffwll.ch, spice-devel@lists.freedesktop.org,
- intel-gvt-dev@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>
+Cc: Jani Nikula <jani.nikula@intel.com>, greg.depoire@gmail.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi,
+This series:
+* Cleans up i915's DPCD backlight code a little bit
+* Extracts i915's DPCD backlight code into a set of shared DRM helpers
+* Starts using those helpers in nouveau to add support to nouveau for
+  DPCD backlight control
 
-On Tue, Dec 01, 2020 at 11:35:35AM +0100, Thomas Zimmermann wrote:
-> Using struct drm_device.pdev is deprecated. Convert nouveau to struct
-> drm_device.dev. No functional changes.
-> 
-> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-> Cc: Ben Skeggs <bskeggs@redhat.com>
-> ---
->  drivers/gpu/drm/nouveau/dispnv04/arb.c      | 12 +++++++-----
->  drivers/gpu/drm/nouveau/dispnv04/disp.h     | 14 ++++++++------
->  drivers/gpu/drm/nouveau/dispnv04/hw.c       | 10 ++++++----
->  drivers/gpu/drm/nouveau/nouveau_abi16.c     |  7 ++++---
->  drivers/gpu/drm/nouveau/nouveau_acpi.c      |  2 +-
->  drivers/gpu/drm/nouveau/nouveau_bios.c      | 11 ++++++++---
->  drivers/gpu/drm/nouveau/nouveau_connector.c | 10 ++++++----
->  drivers/gpu/drm/nouveau/nouveau_drm.c       |  5 ++---
->  drivers/gpu/drm/nouveau/nouveau_fbcon.c     |  6 ++++--
->  drivers/gpu/drm/nouveau/nouveau_vga.c       | 20 ++++++++++++--------
->  10 files changed, 58 insertions(+), 39 deletions(-)
-> 
+Cc: Jani Nikula <jani.nikula@intel.com>
+Cc: Dave Airlie <airlied@gmail.com>
+Cc: greg.depoire@gmail.com
 
-I believe there's a use of drm_device.pdev in
-drivers/gpu/drm/nouveau/dispnv04/dfp.c in the
-nv04_dfp_update_backlight() function.
+Lyude Paul (5):
+  drm/nouveau/kms/nv40-/backlight: Assign prop type once
+  drm/nouveau/kms: Don't probe eDP connectors more then once
+  drm/i915/dp: Remove redundant AUX backlight frequency calculations
+  drm/dp: Extract i915's eDP backlight code into DRM helpers
+  drm/nouveau/kms/nv50-: Add basic DPCD backlight support for nouveau
 
-Other than that, this looks good to me.
+ drivers/gpu/drm/drm_dp_helper.c               | 332 ++++++++++++++++++
+ .../drm/i915/display/intel_display_types.h    |   4 +-
+ .../drm/i915/display/intel_dp_aux_backlight.c | 332 ++----------------
+ drivers/gpu/drm/nouveau/dispnv50/disp.c       |  30 +-
+ drivers/gpu/drm/nouveau/nouveau_backlight.c   | 170 +++++++--
+ drivers/gpu/drm/nouveau/nouveau_connector.c   |   6 +
+ drivers/gpu/drm/nouveau/nouveau_connector.h   |   9 +-
+ drivers/gpu/drm/nouveau/nouveau_encoder.h     |   1 +
+ include/drm/drm_dp_helper.h                   |  48 +++
+ 9 files changed, 613 insertions(+), 319 deletions(-)
 
-> diff --git a/drivers/gpu/drm/nouveau/dispnv04/arb.c b/drivers/gpu/drm/nouveau/dispnv04/arb.c
-> index 9d4a2d97507e..1d3542d6006b 100644
-> --- a/drivers/gpu/drm/nouveau/dispnv04/arb.c
-> +++ b/drivers/gpu/drm/nouveau/dispnv04/arb.c
-> @@ -200,16 +200,17 @@ nv04_update_arb(struct drm_device *dev, int VClk, int bpp,
->  	int MClk = nouveau_hw_get_clock(dev, PLL_MEMORY);
->  	int NVClk = nouveau_hw_get_clock(dev, PLL_CORE);
->  	uint32_t cfg1 = nvif_rd32(device, NV04_PFB_CFG1);
-> +	struct pci_dev *pdev = to_pci_dev(dev->dev);
->  
->  	sim_data.pclk_khz = VClk;
->  	sim_data.mclk_khz = MClk;
->  	sim_data.nvclk_khz = NVClk;
->  	sim_data.bpp = bpp;
->  	sim_data.two_heads = nv_two_heads(dev);
-> -	if ((dev->pdev->device & 0xffff) == 0x01a0 /*CHIPSET_NFORCE*/ ||
-> -	    (dev->pdev->device & 0xffff) == 0x01f0 /*CHIPSET_NFORCE2*/) {
-> +	if ((pdev->device & 0xffff) == 0x01a0 /*CHIPSET_NFORCE*/ ||
-> +	    (pdev->device & 0xffff) == 0x01f0 /*CHIPSET_NFORCE2*/) {
->  		uint32_t type;
-> -		int domain = pci_domain_nr(dev->pdev->bus);
-> +		int domain = pci_domain_nr(pdev->bus);
->  
->  		pci_read_config_dword(pci_get_domain_bus_and_slot(domain, 0, 1),
->  				      0x7c, &type);
-> @@ -251,11 +252,12 @@ void
->  nouveau_calc_arb(struct drm_device *dev, int vclk, int bpp, int *burst, int *lwm)
->  {
->  	struct nouveau_drm *drm = nouveau_drm(dev);
-> +	struct pci_dev *pdev = to_pci_dev(dev->dev);
->  
->  	if (drm->client.device.info.family < NV_DEVICE_INFO_V0_KELVIN)
->  		nv04_update_arb(dev, vclk, bpp, burst, lwm);
-> -	else if ((dev->pdev->device & 0xfff0) == 0x0240 /*CHIPSET_C51*/ ||
-> -		 (dev->pdev->device & 0xfff0) == 0x03d0 /*CHIPSET_C512*/) {
-> +	else if ((pdev->device & 0xfff0) == 0x0240 /*CHIPSET_C51*/ ||
-> +		 (pdev->device & 0xfff0) == 0x03d0 /*CHIPSET_C512*/) {
->  		*burst = 128;
->  		*lwm = 0x0480;
->  	} else
-> diff --git a/drivers/gpu/drm/nouveau/dispnv04/disp.h b/drivers/gpu/drm/nouveau/dispnv04/disp.h
-> index 5ace5e906949..f0a24126641a 100644
-> --- a/drivers/gpu/drm/nouveau/dispnv04/disp.h
-> +++ b/drivers/gpu/drm/nouveau/dispnv04/disp.h
-> @@ -130,7 +130,7 @@ static inline bool
->  nv_two_heads(struct drm_device *dev)
->  {
->  	struct nouveau_drm *drm = nouveau_drm(dev);
-> -	const int impl = dev->pdev->device & 0x0ff0;
-> +	const int impl = to_pci_dev(dev->dev)->device & 0x0ff0;
->  
->  	if (drm->client.device.info.family >= NV_DEVICE_INFO_V0_CELSIUS && impl != 0x0100 &&
->  	    impl != 0x0150 && impl != 0x01a0 && impl != 0x0200)
-> @@ -142,14 +142,14 @@ nv_two_heads(struct drm_device *dev)
->  static inline bool
->  nv_gf4_disp_arch(struct drm_device *dev)
->  {
-> -	return nv_two_heads(dev) && (dev->pdev->device & 0x0ff0) != 0x0110;
-> +	return nv_two_heads(dev) && (to_pci_dev(dev->dev)->device & 0x0ff0) != 0x0110;
->  }
->  
->  static inline bool
->  nv_two_reg_pll(struct drm_device *dev)
->  {
->  	struct nouveau_drm *drm = nouveau_drm(dev);
-> -	const int impl = dev->pdev->device & 0x0ff0;
-> +	const int impl = to_pci_dev(dev->dev)->device & 0x0ff0;
->  
->  	if (impl == 0x0310 || impl == 0x0340 || drm->client.device.info.family >= NV_DEVICE_INFO_V0_CURIE)
->  		return true;
-> @@ -160,9 +160,11 @@ static inline bool
->  nv_match_device(struct drm_device *dev, unsigned device,
->  		unsigned sub_vendor, unsigned sub_device)
->  {
-> -	return dev->pdev->device == device &&
-> -		dev->pdev->subsystem_vendor == sub_vendor &&
-> -		dev->pdev->subsystem_device == sub_device;
-> +	struct pci_dev *pdev = to_pci_dev(dev->dev);
-> +
-> +	return pdev->device == device &&
-> +		pdev->subsystem_vendor == sub_vendor &&
-> +		pdev->subsystem_device == sub_device;
->  }
->  
->  #include <subdev/bios/init.h>
-> diff --git a/drivers/gpu/drm/nouveau/dispnv04/hw.c b/drivers/gpu/drm/nouveau/dispnv04/hw.c
-> index b674d68ef28a..f7d35657aa64 100644
-> --- a/drivers/gpu/drm/nouveau/dispnv04/hw.c
-> +++ b/drivers/gpu/drm/nouveau/dispnv04/hw.c
-> @@ -214,14 +214,15 @@ nouveau_hw_pllvals_to_clk(struct nvkm_pll_vals *pv)
->  int
->  nouveau_hw_get_clock(struct drm_device *dev, enum nvbios_pll_type plltype)
->  {
-> +	struct pci_dev *pdev = to_pci_dev(dev->dev);
->  	struct nvkm_pll_vals pllvals;
->  	int ret;
->  	int domain;
->  
-> -	domain = pci_domain_nr(dev->pdev->bus);
-> +	domain = pci_domain_nr(pdev->bus);
->  
->  	if (plltype == PLL_MEMORY &&
-> -	    (dev->pdev->device & 0x0ff0) == CHIPSET_NFORCE) {
-> +	    (pdev->device & 0x0ff0) == CHIPSET_NFORCE) {
->  		uint32_t mpllP;
->  		pci_read_config_dword(pci_get_domain_bus_and_slot(domain, 0, 3),
->  				      0x6c, &mpllP);
-> @@ -232,7 +233,7 @@ nouveau_hw_get_clock(struct drm_device *dev, enum nvbios_pll_type plltype)
->  		return 400000 / mpllP;
->  	} else
->  	if (plltype == PLL_MEMORY &&
-> -	    (dev->pdev->device & 0xff0) == CHIPSET_NFORCE2) {
-> +	    (pdev->device & 0xff0) == CHIPSET_NFORCE2) {
->  		uint32_t clock;
->  
->  		pci_read_config_dword(pci_get_domain_bus_and_slot(domain, 0, 5),
-> @@ -309,6 +310,7 @@ void
->  nouveau_hw_save_vga_fonts(struct drm_device *dev, bool save)
->  {
->  	struct nouveau_drm *drm = nouveau_drm(dev);
-> +	struct pci_dev *pdev = to_pci_dev(dev->dev);
->  	uint8_t misc, gr4, gr5, gr6, seq2, seq4;
->  	bool graphicsmode;
->  	unsigned plane;
-> @@ -327,7 +329,7 @@ nouveau_hw_save_vga_fonts(struct drm_device *dev, bool save)
->  	NV_INFO(drm, "%sing VGA fonts\n", save ? "Sav" : "Restor");
->  
->  	/* map first 64KiB of VRAM, holds VGA fonts etc */
-> -	iovram = ioremap(pci_resource_start(dev->pdev, 1), 65536);
-> +	iovram = ioremap(pci_resource_start(pdev, 1), 65536);
->  	if (!iovram) {
->  		NV_ERROR(drm, "Failed to map VRAM, "
->  					"cannot save/restore VGA fonts.\n");
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_abi16.c b/drivers/gpu/drm/nouveau/nouveau_abi16.c
-> index 9a5be6f32424..f08b31d84d4d 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_abi16.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_abi16.c
-> @@ -181,6 +181,7 @@ nouveau_abi16_ioctl_getparam(ABI16_IOCTL_ARGS)
->  	struct nvif_device *device = &drm->client.device;
->  	struct nvkm_gr *gr = nvxx_gr(device);
->  	struct drm_nouveau_getparam *getparam = data;
-> +	struct pci_dev *pdev = to_pci_dev(dev->dev);
->  
->  	switch (getparam->param) {
->  	case NOUVEAU_GETPARAM_CHIPSET_ID:
-> @@ -188,13 +189,13 @@ nouveau_abi16_ioctl_getparam(ABI16_IOCTL_ARGS)
->  		break;
->  	case NOUVEAU_GETPARAM_PCI_VENDOR:
->  		if (device->info.platform != NV_DEVICE_INFO_V0_SOC)
-> -			getparam->value = dev->pdev->vendor;
-> +			getparam->value = pdev->vendor;
->  		else
->  			getparam->value = 0;
->  		break;
->  	case NOUVEAU_GETPARAM_PCI_DEVICE:
->  		if (device->info.platform != NV_DEVICE_INFO_V0_SOC)
-> -			getparam->value = dev->pdev->device;
-> +			getparam->value = pdev->device;
->  		else
->  			getparam->value = 0;
->  		break;
-> @@ -205,7 +206,7 @@ nouveau_abi16_ioctl_getparam(ABI16_IOCTL_ARGS)
->  		case NV_DEVICE_INFO_V0_PCIE: getparam->value = 2; break;
->  		case NV_DEVICE_INFO_V0_SOC : getparam->value = 3; break;
->  		case NV_DEVICE_INFO_V0_IGP :
-> -			if (!pci_is_pcie(dev->pdev))
-> +			if (!pci_is_pcie(pdev))
->  				getparam->value = 1;
->  			else
->  				getparam->value = 2;
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_acpi.c b/drivers/gpu/drm/nouveau/nouveau_acpi.c
-> index 69a84d0197d0..7c15f6448428 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_acpi.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_acpi.c
-> @@ -377,7 +377,7 @@ nouveau_acpi_edid(struct drm_device *dev, struct drm_connector *connector)
->  		return NULL;
->  	}
->  
-> -	handle = ACPI_HANDLE(&dev->pdev->dev);
-> +	handle = ACPI_HANDLE(dev->dev);
->  	if (!handle)
->  		return NULL;
->  
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_bios.c b/drivers/gpu/drm/nouveau/nouveau_bios.c
-> index d204ea8a5618..7cc683b8dc7a 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_bios.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_bios.c
-> @@ -110,6 +110,9 @@ static int call_lvds_manufacturer_script(struct drm_device *dev, struct dcb_outp
->  	struct nvbios *bios = &drm->vbios;
->  	uint8_t sub = bios->data[bios->fp.xlated_entry + script] + (bios->fp.link_c_increment && dcbent->or & DCB_OUTPUT_C ? 1 : 0);
->  	uint16_t scriptofs = ROM16(bios->data[bios->init_script_tbls_ptr + sub * 2]);
-> +#ifdef __powerpc__
-> +	struct pci_dev *pdev = to_pci_dev(dev->dev);
-> +#endif
->  
->  	if (!bios->fp.xlated_entry || !sub || !scriptofs)
->  		return -EINVAL;
-> @@ -123,8 +126,8 @@ static int call_lvds_manufacturer_script(struct drm_device *dev, struct dcb_outp
->  #ifdef __powerpc__
->  	/* Powerbook specific quirks */
->  	if (script == LVDS_RESET &&
-> -	    (dev->pdev->device == 0x0179 || dev->pdev->device == 0x0189 ||
-> -	     dev->pdev->device == 0x0329))
-> +	    (pdev->device == 0x0179 || pdev->device == 0x0189 ||
-> +	     pdev->device == 0x0329))
->  		nv_write_tmds(dev, dcbent->or, 0, 0x02, 0x72);
->  #endif
->  
-> @@ -2080,11 +2083,13 @@ nouveau_bios_init(struct drm_device *dev)
->  {
->  	struct nouveau_drm *drm = nouveau_drm(dev);
->  	struct nvbios *bios = &drm->vbios;
-> +	struct pci_dev *pdev;
->  	int ret;
->  
->  	/* only relevant for PCI devices */
-> -	if (!dev->pdev)
-> +	if (!dev_is_pci(dev->dev))
->  		return 0;
-> +	pdev = to_pci_dev(dev->dev);
->  
->  	if (!NVInitVBIOS(dev))
->  		return -ENODEV;
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_connector.c b/drivers/gpu/drm/nouveau/nouveau_connector.c
-> index 8b4b3688c7ae..14c29e68db8f 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_connector.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_connector.c
-> @@ -411,6 +411,7 @@ static struct nouveau_encoder *
->  nouveau_connector_ddc_detect(struct drm_connector *connector)
->  {
->  	struct drm_device *dev = connector->dev;
-> +	struct pci_dev *pdev = to_pci_dev(dev->dev);
->  	struct nouveau_encoder *nv_encoder = NULL, *found = NULL;
->  	struct drm_encoder *encoder;
->  	int ret;
-> @@ -438,11 +439,11 @@ nouveau_connector_ddc_detect(struct drm_connector *connector)
->  				break;
->  
->  			if (switcheroo_ddc)
-> -				vga_switcheroo_lock_ddc(dev->pdev);
-> +				vga_switcheroo_lock_ddc(pdev);
->  			if (nvkm_probe_i2c(nv_encoder->i2c, 0x50))
->  				found = nv_encoder;
->  			if (switcheroo_ddc)
-> -				vga_switcheroo_unlock_ddc(dev->pdev);
-> +				vga_switcheroo_unlock_ddc(pdev);
->  
->  			break;
->  		}
-> @@ -490,6 +491,7 @@ nouveau_connector_set_encoder(struct drm_connector *connector,
->  	struct nouveau_connector *nv_connector = nouveau_connector(connector);
->  	struct nouveau_drm *drm = nouveau_drm(connector->dev);
->  	struct drm_device *dev = connector->dev;
-> +	struct pci_dev *pdev = to_pci_dev(dev->dev);
->  
->  	if (nv_connector->detected_encoder == nv_encoder)
->  		return;
-> @@ -511,8 +513,8 @@ nouveau_connector_set_encoder(struct drm_connector *connector,
->  		connector->doublescan_allowed = true;
->  		if (drm->client.device.info.family == NV_DEVICE_INFO_V0_KELVIN ||
->  		    (drm->client.device.info.family == NV_DEVICE_INFO_V0_CELSIUS &&
-> -		     (dev->pdev->device & 0x0ff0) != 0x0100 &&
-> -		     (dev->pdev->device & 0x0ff0) != 0x0150))
-> +		     (pdev->device & 0x0ff0) != 0x0100 &&
-> +		     (pdev->device & 0x0ff0) != 0x0150))
->  			/* HW is broken */
->  			connector->interlace_allowed = false;
->  		else
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_drm.c b/drivers/gpu/drm/nouveau/nouveau_drm.c
-> index d141a5f004af..1b2169e9c295 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_drm.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_drm.c
-> @@ -115,8 +115,8 @@ nouveau_platform_name(struct platform_device *platformdev)
->  static u64
->  nouveau_name(struct drm_device *dev)
->  {
-> -	if (dev->pdev)
-> -		return nouveau_pci_name(dev->pdev);
-> +	if (dev_is_pci(dev->dev))
-> +		return nouveau_pci_name(to_pci_dev(dev->dev));
->  	else
->  		return nouveau_platform_name(to_platform_device(dev->dev));
->  }
-> @@ -760,7 +760,6 @@ static int nouveau_drm_probe(struct pci_dev *pdev,
->  	if (ret)
->  		goto fail_drm;
->  
-> -	drm_dev->pdev = pdev;
->  	pci_set_drvdata(pdev, drm_dev);
->  
->  	ret = nouveau_drm_device_init(drm_dev);
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_fbcon.c b/drivers/gpu/drm/nouveau/nouveau_fbcon.c
-> index 24ec5339efb4..4fc0fa696461 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_fbcon.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_fbcon.c
-> @@ -396,7 +396,9 @@ nouveau_fbcon_create(struct drm_fb_helper *helper,
->  	NV_INFO(drm, "allocated %dx%d fb: 0x%llx, bo %p\n",
->  		fb->width, fb->height, nvbo->offset, nvbo);
->  
-> -	vga_switcheroo_client_fb_set(dev->pdev, info);
-> +	if (dev_is_pci(dev->dev))
-> +		vga_switcheroo_client_fb_set(to_pci_dev(dev->dev), info);
-> +
->  	return 0;
->  
->  out_unlock:
-> @@ -548,7 +550,7 @@ nouveau_fbcon_init(struct drm_device *dev)
->  	int ret;
->  
->  	if (!dev->mode_config.num_crtc ||
-> -	    (dev->pdev->class >> 8) != PCI_CLASS_DISPLAY_VGA)
-> +	    (to_pci_dev(dev->dev)->class >> 8) != PCI_CLASS_DISPLAY_VGA)
->  		return 0;
->  
->  	fbcon = kzalloc(sizeof(struct nouveau_fbdev), GFP_KERNEL);
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_vga.c b/drivers/gpu/drm/nouveau/nouveau_vga.c
-> index c85dd8afa3c3..7c4b374b3eca 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_vga.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_vga.c
-> @@ -87,18 +87,20 @@ nouveau_vga_init(struct nouveau_drm *drm)
->  {
->  	struct drm_device *dev = drm->dev;
->  	bool runtime = nouveau_pmops_runtime();
-> +	struct pci_dev *pdev;
->  
->  	/* only relevant for PCI devices */
-> -	if (!dev->pdev)
-> +	if (!dev_is_pci(dev->dev))
->  		return;
-> +	pdev = to_pci_dev(dev->dev);
->  
-> -	vga_client_register(dev->pdev, dev, NULL, nouveau_vga_set_decode);
-> +	vga_client_register(pdev, dev, NULL, nouveau_vga_set_decode);
->  
->  	/* don't register Thunderbolt eGPU with vga_switcheroo */
-> -	if (pci_is_thunderbolt_attached(dev->pdev))
-> +	if (pci_is_thunderbolt_attached(pdev))
->  		return;
->  
-> -	vga_switcheroo_register_client(dev->pdev, &nouveau_switcheroo_ops, runtime);
-> +	vga_switcheroo_register_client(pdev, &nouveau_switcheroo_ops, runtime);
->  
->  	if (runtime && nouveau_is_v1_dsm() && !nouveau_is_optimus())
->  		vga_switcheroo_init_domain_pm_ops(drm->dev->dev, &drm->vga_pm_domain);
-> @@ -109,17 +111,19 @@ nouveau_vga_fini(struct nouveau_drm *drm)
->  {
->  	struct drm_device *dev = drm->dev;
->  	bool runtime = nouveau_pmops_runtime();
-> +	struct pci_dev *pdev;
->  
->  	/* only relevant for PCI devices */
-> -	if (!dev->pdev)
-> +	if (!dev_is_pci(dev->dev))
->  		return;
-> +	pdev = to_pci_dev(dev->dev);
->  
-> -	vga_client_register(dev->pdev, NULL, NULL, NULL);
-> +	vga_client_register(pdev, NULL, NULL, NULL);
->  
-> -	if (pci_is_thunderbolt_attached(dev->pdev))
-> +	if (pci_is_thunderbolt_attached(pdev))
->  		return;
->  
-> -	vga_switcheroo_unregister_client(dev->pdev);
-> +	vga_switcheroo_unregister_client(pdev);
->  	if (runtime && nouveau_is_v1_dsm() && !nouveau_is_optimus())
->  		vga_switcheroo_fini_domain_pm_ops(drm->dev->dev);
->  }
-> -- 
-> 2.29.2
-> 
-> _______________________________________________
-> intel-gvt-dev mailing list
-> intel-gvt-dev@lists.freedesktop.org
-> https://lists.freedesktop.org/mailman/listinfo/intel-gvt-dev
-> 
+-- 
+2.28.0
 
 _______________________________________________
 Nouveau mailing list
