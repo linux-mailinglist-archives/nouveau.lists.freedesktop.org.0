@@ -2,77 +2,42 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id F052C2D6440
-	for <lists+nouveau@lfdr.de>; Thu, 10 Dec 2020 18:59:50 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 30EB82D7826
+	for <lists+nouveau@lfdr.de>; Fri, 11 Dec 2020 15:46:12 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7DB3B6E952;
-	Thu, 10 Dec 2020 17:59:49 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 793B96E52F;
+	Fri, 11 Dec 2020 14:46:05 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id CAD6E6E952
- for <nouveau@lists.freedesktop.org>; Thu, 10 Dec 2020 17:59:47 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1607623186;
- h=from:from:reply-to:reply-to:subject:subject:date:date:
- message-id:message-id:to:to:cc:cc:mime-version:mime-version:
- content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=miPlyEGKFxoGa24ryNqCASQdc5deGGtvievJU2IZNcA=;
- b=BxKDikVgZbm3D+OjVbvURdNbPBl/6NmA6aDgD6tPv2pTlEf2J72cQytLZfxGNoIqrI/KxN
- CvPYFs3cT9ovbFEcArUWSz9SO8hI7qeEPahRXy8xQ5QIBeVkfKwQKXwHISpR09WxDf30Nj
- M6M+cFUcMeUwlTAp6REovEyNZcQ4UjA=
-Received: from mail-qv1-f70.google.com (mail-qv1-f70.google.com
- [209.85.219.70]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-353-l4jvL8VPOv6Gd7ndEed5Lw-1; Thu, 10 Dec 2020 12:59:45 -0500
-X-MC-Unique: l4jvL8VPOv6Gd7ndEed5Lw-1
-Received: by mail-qv1-f70.google.com with SMTP id b9so4402185qvj.6
- for <nouveau@lists.freedesktop.org>; Thu, 10 Dec 2020 09:59:45 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:message-id:subject:from:reply-to:to:cc:date
- :in-reply-to:references:organization:user-agent:mime-version
- :content-transfer-encoding;
- bh=miPlyEGKFxoGa24ryNqCASQdc5deGGtvievJU2IZNcA=;
- b=qklNfdFTHfbJMgjt9BOz/DQX4VpM3Gqc8r1HA97EgX0oOlk21BMgSBYertseIEJcGy
- pdlSVUKdXj69MwIDHpK5dnzW7qDJ/bte3Ulw9tiaWRUrJSFeNV7/DLRyTSH+j2wUGzQ3
- sQu3IFiYIfCPMDIDUTJf3F2/WqxbUx831+xbHKt0bSTwRkXQ0OToRq8zi0p2v21s7QDy
- 5KlWI8wYiheEufijE47yJjFcNFQ5pBGqs9zIicwfMTPX0y7kJ/rj1k1o60dUHk+3lZ+3
- 7aRqC7I7s/cVqau07hoFL+App9e2FOimEFx4yGAuJ9aJr6xQSwRWpDLnNhNF+0E0fHbB
- v/zA==
-X-Gm-Message-State: AOAM530Pr/Q+vkVR0w5abf58Q5i8g++P6uEvrjjlYHpdlLDVHBrBxyBw
- bK26Y69HBXt35QlMnkhNXChR39N10Pv1yhE5DtN59yd3PLpvphmf1ZGp5yc89MHfDKeHTKBGiOw
- EIlp7bgFhDpzsRfcAo5nf1uWtGQ==
-X-Received: by 2002:aed:3051:: with SMTP id 75mr10549152qte.64.1607623184868; 
- Thu, 10 Dec 2020 09:59:44 -0800 (PST)
-X-Google-Smtp-Source: ABdhPJxxejh2Gr5HYiB6KfMBmbtZVRZHA4dnV4LUHU7T3+dXsaBxb5lrxub5RIB9FoNV4l/s8tTX7w==
-X-Received: by 2002:aed:3051:: with SMTP id 75mr10549123qte.64.1607623184645; 
- Thu, 10 Dec 2020 09:59:44 -0800 (PST)
-Received: from Whitewolf.lyude.net
- (pool-108-49-102-102.bstnma.fios.verizon.net. [108.49.102.102])
- by smtp.gmail.com with ESMTPSA id z8sm3851407qti.22.2020.12.10.09.59.43
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 10 Dec 2020 09:59:43 -0800 (PST)
-Message-ID: <c4726b0adb72bbc9f740f05c22af1c6b9401a8e1.camel@redhat.com>
-From: Lyude Paul <lyude@redhat.com>
-To: Karol Herbst <kherbst@redhat.com>, linux-kernel@vger.kernel.org, 
- linux-acpi@vger.kernel.org, dri-devel@lists.freedesktop.org, 
- nouveau@lists.freedesktop.org
-Date: Thu, 10 Dec 2020 12:59:42 -0500
-In-Reply-To: <20190814213118.28473-3-kherbst@redhat.com>
-References: <20190814213118.28473-1-kherbst@redhat.com>
- <20190814213118.28473-3-kherbst@redhat.com>
-Organization: Red Hat
-User-Agent: Evolution 3.38.1 (3.38.1-1.fc33)
+Received: from mga12.intel.com (mga12.intel.com [192.55.52.136])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0C3DA6E0AF;
+ Fri, 11 Dec 2020 14:46:03 +0000 (UTC)
+IronPort-SDR: gUzMJ1LnKN8ssKYWx+83LYxJefduWlPr+GVSoQDIIxLCtriqJsYVnHXOnNobsYDOYQxTjkJE/V
+ ymI5YdR3giiQ==
+X-IronPort-AV: E=McAfee;i="6000,8403,9831"; a="153671941"
+X-IronPort-AV: E=Sophos;i="5.78,411,1599548400"; d="scan'208";a="153671941"
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+ by fmsmga106.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 11 Dec 2020 06:45:52 -0800
+IronPort-SDR: /ngbSrQ1+06qBTxvwHX9Thh+w4yDJG/z1kiOeT2okMe9ZBLH0GEj1D6wvmfD0IQxVHIA+423xX
+ GiKwfX8YMVJw==
+X-IronPort-AV: E=Sophos;i="5.78,411,1599548400"; d="scan'208";a="349481698"
+Received: from dkreft-mobl1.ger.corp.intel.com (HELO localhost)
+ ([10.249.158.206])
+ by orsmga002-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 11 Dec 2020 06:45:45 -0800
+From: Jani Nikula <jani.nikula@intel.com>
+To: Lyude Paul <lyude@redhat.com>, dri-devel@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org, intel-gfx@lists.freedesktop.org
+In-Reply-To: <20201210012143.729402-4-lyude@redhat.com>
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
+References: <20201210012143.729402-1-lyude@redhat.com>
+ <20201210012143.729402-4-lyude@redhat.com>
+Date: Fri, 11 Dec 2020 16:45:41 +0200
+Message-ID: <87eejw765m.fsf@intel.com>
 MIME-Version: 1.0
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=lyude@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Subject: Re: [Nouveau] [PATCH 2/7] Revert "ACPI / OSI: Add OEM _OSI string
- to enable NVidia HDMI audio"
+Subject: Re: [Nouveau] [RFC 3/5] drm/i915/dp: Remove redundant AUX backlight
+ frequency calculations
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -84,62 +49,175 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Reply-To: lyude@redhat.com
-Cc: Dave Airlie <airlied@redhat.com>, Alex Hung <alex.hung@canonical.com>,
- "Rafael J . Wysocki" <rafael.j.wysocki@intel.com>,
- Ben Skeggs <bskeggs@redhat.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: Juha-Pekka Heikkila <juhapekka.heikkila@gmail.com>, greg.depoire@gmail.com,
+ Imre Deak <imre.deak@intel.com>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Lucas De Marchi <lucas.demarchi@intel.com>,
+ open list <linux-kernel@vger.kernel.org>,
+ =?utf-8?Q?Jos=C3=A9?= Roberto de Souza <jose.souza@intel.com>,
+ Manasi Navare <manasi.d.navare@intel.com>, David Airlie <airlied@linux.ie>,
+ Sean Paul <seanpaul@chromium.org>, Daniel Vetter <daniel@ffwll.ch>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>, Dave Airlie <airlied@redhat.com>,
+ Ville =?utf-8?B?U3lyasOkbMOk?= <ville.syrjala@linux.intel.com>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-SGksIGJ1bXBpbmcgdGhlIGRpc2N1c3Npb24gYWdhaW4gaGVyZSBiZWNhdXNlIHdlIGp1c3QgcmFu
-IGludG8gdGhpcyBhZ2FpbiwgYXMgd2UKanVzdCBoYWQgYSBsYXB0b3AgT0VNIHRyeSB0byBmaXgg
-YW5vdGhlciBpc3N1ZSBieSBhZGRpbmcgYW4gT1NJIGNoZWNrIGZvciB0aGVzZQpzdHJpbmdzIGlu
-c3RlYWQgb2YgaGVscGluZyB1cyBmaXggdGhlIGlzc3VlIGluIG5vdXZlYXUuIE5vdGUgYXMgIHdl
-bGwgdGhlIGlzc3VlCkknbSByZWZlcnJpbmcgdG8gaXMgZW50aXJlbHkgaW5kZXBlbmRlbnQgb2Yg
-cnVudGltZSBEMywgc28gd2UganVzdCBnb3QgcnVudGltZQpEMyBicm9rZW4gYWdhaW4gYmVjYXVz
-ZSBvZiB0aGVzZSBoYWNrcy4KCldoeSBoYXNuJ3QgdGhpcyBwYXRjaCBiZWVuIGFjY2VwdGVkIGlu
-dG8gdGhlIGtlcm5lbD8gVGhlc2Ugd2VyZSBhZGRlZCB3aXRob3V0CmFueSBzb3J0IG9mIGRpc2N1
-c3Npb24gd2l0aCBub3V2ZWF1IGRldmVsb3BlcnMsIGFuZCBub3V2ZWF1IGlzIHRoZSBjYW5vbmlj
-YWwKbnZpZGlhIGRyaXZlciBpbiB0aGUgTGludXgga2VybmVsLiBUaGVzZSBzdHJpbmdzIHNob3Vs
-ZG4ndCBiZSBoZXJlIHdpdGhvdXQKZGlzY3Vzc2lvbiB3aXRoIHRoZSByZWxldmFudCBkcml2ZXIg
-bWFpbnRhaW5lcnMsIGFuZCBuZWVkIHRvIGJlIHJlbW92ZWQuCgpPbiBXZWQsIDIwMTktMDgtMTQg
-YXQgMjM6MzEgKzAyMDAsIEthcm9sIEhlcmJzdCB3cm90ZToKPiBUaGlzIHJldmVydHMgY29tbWl0
-IDg4NzUzMmNhN2NhNTlmY2YwNTQ3YTc5MjExNzU2NzkxMTI4MDMwYTMuCj4gCj4gV2UgaGF2ZSBh
-IGJldHRlciBzb2x1dGlvbiBmb3IgdGhpczogYjUxNmVhNTg2ZDcxNwo+IAo+IEFuZCBzYW1lIGFz
-IHdpdGggdGhlIGxhc3QgY29tbWl0OiAiTlZpZGlhIExpbnV4IGRyaXZlciIgdGhhdCdzIE5vdXZl
-YXUsIGFueQo+IG91dCBvZiB0cmVlIGRyaXZlciBkb2VzIF9ub3RfIG1hdHRlci4gQW5kIHdpdGgg
-Tm91dmVhdSBhbGwgb2YgdGhpcyB3b3JrcyBldmVuCj4gdGhvdWdoIGl0IHJlcXVpcmVkIGEgcHJv
-cGVyIGZpeCBmaXJzdCwgYnV0IHdlIGhhdmUgdGhhdCBub3cuCj4gCj4gU2lnbmVkLW9mZi1ieTog
-S2Fyb2wgSGVyYnN0IDxraGVyYnN0QHJlZGhhdC5jb20+Cj4gQ0M6IEFsZXggSHVuZyA8YWxleC5o
-dW5nQGNhbm9uaWNhbC5jb20+Cj4gQ0M6IFJhZmFlbCBKLiBXeXNvY2tpIDxyYWZhZWwuai53eXNv
-Y2tpQGludGVsLmNvbT4KPiBDQzogRGF2ZSBBaXJsaWUgPGFpcmxpZWRAcmVkaGF0LmNvbT4KPiBD
-QzogTHl1ZGUgUGF1bCA8bHl1ZGVAcmVkaGF0LmNvbT4KPiBDQzogQmVuIFNrZWdncyA8YnNrZWdn
-c0ByZWRoYXQuY29tPgo+IC0tLQo+IMKgZHJpdmVycy9hY3BpL29zaS5jIHwgOCAtLS0tLS0tLQo+
-IMKgMSBmaWxlIGNoYW5nZWQsIDggZGVsZXRpb25zKC0pCj4gCj4gZGlmZiAtLWdpdCBhL2RyaXZl
-cnMvYWNwaS9vc2kuYyBiL2RyaXZlcnMvYWNwaS9vc2kuYwo+IGluZGV4IDliMjBhYzRkNzlhMC4u
-NTZjYzk1YjZiNzI0IDEwMDY0NAo+IC0tLSBhL2RyaXZlcnMvYWNwaS9vc2kuYwo+ICsrKyBiL2Ry
-aXZlcnMvYWNwaS9vc2kuYwo+IEBAIC01MywxNCArNTMsNiBAQCBvc2lfc2V0dXBfZW50cmllc1tP
-U0lfU1RSSU5HX0VOVFJJRVNfTUFYXSBfX2luaXRkYXRhID0gewo+IMKgwqDCoMKgwqDCoMKgwqAg
-KiBiZSByZW1vdmVkIGlmIGJvdGggbmV3IGFuZCBvbGQgZ3JhcGhpY3MgY2FyZHMgYXJlIHN1cHBv
-cnRlZC4KPiDCoMKgwqDCoMKgwqDCoMKgICovCj4gwqDCoMKgwqDCoMKgwqDCoHsiTGludXgtRGVs
-bC1WaWRlbyIsIHRydWV9LAo+IC3CoMKgwqDCoMKgwqDCoC8qCj4gLcKgwqDCoMKgwqDCoMKgICog
-TGludXgtTGVub3ZvLU5WLUhETUktQXVkaW8gaXMgdXNlZCBieSBCSU9TIHRvIHBvd2VyIG9uIE5W
-aWRpYSdzCj4gSERNSQo+IC3CoMKgwqDCoMKgwqDCoCAqIGF1ZGlvIGRldmljZSB3aGljaCBpcyB0
-dXJuZWQgb2ZmIGZvciBwb3dlci1zYXZpbmcgaW4gV2luZG93cyBPUy4KPiAtwqDCoMKgwqDCoMKg
-wqAgKiBUaGlzIHBvd2VyIG1hbmFnZW1lbnQgZmVhdHVyZSBvYnNlcnZlZCBvbiBzb21lIExlbm92
-byBUaGlua3BhZAo+IC3CoMKgwqDCoMKgwqDCoCAqIHN5c3RlbXMgd2hpY2ggd2lsbCBub3QgYmUg
-YWJsZSB0byBvdXRwdXQgYXVkaW8gdmlhIEhETUkgd2l0aG91dAo+IC3CoMKgwqDCoMKgwqDCoCAq
-IGEgQklPUyB3b3JrYXJvdW5kLgo+IC3CoMKgwqDCoMKgwqDCoCAqLwo+IC3CoMKgwqDCoMKgwqDC
-oHsiTGludXgtTGVub3ZvLU5WLUhETUktQXVkaW8iLCB0cnVlfSwKPiDCoH07Cj4gwqAKPiDCoHN0
-YXRpYyB1MzIgYWNwaV9vc2lfaGFuZGxlcihhY3BpX3N0cmluZyBpbnRlcmZhY2UsIHUzMiBzdXBw
-b3J0ZWQpCgotLSAKU2luY2VyZWx5LAogICBMeXVkZSBQYXVsIChzaGUvaGVyKQogICBTb2Z0d2Fy
-ZSBFbmdpbmVlciBhdCBSZWQgSGF0CiAgIApOb3RlOiBJIGRlYWwgd2l0aCBhIGxvdCBvZiBlbWFp
-bHMgYW5kIGhhdmUgYSBsb3Qgb2YgYnVncyBvbiBteSBwbGF0ZS4gSWYgeW91J3ZlCmFza2VkIG1l
-IGEgcXVlc3Rpb24sIGFyZSB3YWl0aW5nIGZvciBhIHJldmlldy9tZXJnZSBvbiBhIHBhdGNoLCBl
-dGMuIGFuZCBJCmhhdmVuJ3QgcmVzcG9uZGVkIGluIGEgd2hpbGUsIHBsZWFzZSBmZWVsIGZyZWUg
-dG8gc2VuZCBtZSBhbm90aGVyIGVtYWlsIHRvIGNoZWNrCm9uIG15IHN0YXR1cy4gSSBkb24ndCBi
-aXRlIQoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91
-dmVhdSBtYWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9s
-aXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1Cg==
+On Wed, 09 Dec 2020, Lyude Paul <lyude@redhat.com> wrote:
+> Noticed this while moving all of the VESA backlight code in i915 over to
+> DRM helpers: it would appear that we calculate the frequency value we want
+> to write to DP_EDP_BACKLIGHT_FREQ_SET twice even though this value never
+> actually changes during runtime. So, let's simplify things by just caching
+> this value in intel_panel.backlight, and re-writing it as-needed.
+
+This isn't a full review, just something I spotted so far. Please see
+inline.
+
+BR,
+Jani.
+
+
+>
+> Signed-off-by: Lyude Paul <lyude@redhat.com>
+> Cc: Jani Nikula <jani.nikula@intel.com>
+> Cc: Dave Airlie <airlied@gmail.com>
+> Cc: greg.depoire@gmail.com
+> ---
+>  .../drm/i915/display/intel_display_types.h    |  1 +
+>  .../drm/i915/display/intel_dp_aux_backlight.c | 64 ++++++-------------
+>  2 files changed, 19 insertions(+), 46 deletions(-)
+>
+> diff --git a/drivers/gpu/drm/i915/display/intel_display_types.h b/drivers/gpu/drm/i915/display/intel_display_types.h
+> index 5bc5bfbc4551..133c9cb742a7 100644
+> --- a/drivers/gpu/drm/i915/display/intel_display_types.h
+> +++ b/drivers/gpu/drm/i915/display/intel_display_types.h
+> @@ -259,6 +259,7 @@ struct intel_panel {
+>  
+>  		/* DPCD backlight */
+>  		u8 pwmgen_bit_count;
+> +		u8 pwm_freq_pre_divider;
+>  
+>  		struct backlight_device *device;
+>  
+> diff --git a/drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c b/drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c
+> index 4fd536801b14..94ce5ca1affa 100644
+> --- a/drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c
+> +++ b/drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c
+> @@ -129,50 +129,6 @@ intel_dp_aux_set_backlight(const struct drm_connector_state *conn_state, u32 lev
+>  	}
+>  }
+>  
+> -/*
+> - * Set PWM Frequency divider to match desired frequency in vbt.
+> - * The PWM Frequency is calculated as 27Mhz / (F x P).
+> - * - Where F = PWM Frequency Pre-Divider value programmed by field 7:0 of the
+> - *             EDP_BACKLIGHT_FREQ_SET register (DPCD Address 00728h)
+> - * - Where P = 2^Pn, where Pn is the value programmed by field 4:0 of the
+> - *             EDP_PWMGEN_BIT_COUNT register (DPCD Address 00724h)
+> - */
+> -static bool intel_dp_aux_set_pwm_freq(struct intel_connector *connector)
+> -{
+> -	struct drm_i915_private *dev_priv = to_i915(connector->base.dev);
+> -	struct intel_dp *intel_dp = intel_attached_dp(connector);
+> -	const u8 pn = connector->panel.backlight.pwmgen_bit_count;
+> -	int freq, fxp, f, fxp_actual, fxp_min, fxp_max;
+> -
+> -	freq = dev_priv->vbt.backlight.pwm_freq_hz;
+> -	if (!freq) {
+> -		drm_dbg_kms(&dev_priv->drm,
+> -			    "Use panel default backlight frequency\n");
+> -		return false;
+> -	}
+> -
+> -	fxp = DIV_ROUND_CLOSEST(KHz(DP_EDP_BACKLIGHT_FREQ_BASE_KHZ), freq);
+> -	f = clamp(DIV_ROUND_CLOSEST(fxp, 1 << pn), 1, 255);
+> -	fxp_actual = f << pn;
+> -
+> -	/* Ensure frequency is within 25% of desired value */
+> -	fxp_min = DIV_ROUND_CLOSEST(fxp * 3, 4);
+> -	fxp_max = DIV_ROUND_CLOSEST(fxp * 5, 4);
+> -
+> -	if (fxp_min > fxp_actual || fxp_actual > fxp_max) {
+> -		drm_dbg_kms(&dev_priv->drm, "Actual frequency out of range\n");
+> -		return false;
+> -	}
+> -
+> -	if (drm_dp_dpcd_writeb(&intel_dp->aux,
+> -			       DP_EDP_BACKLIGHT_FREQ_SET, (u8) f) < 0) {
+> -		drm_dbg_kms(&dev_priv->drm,
+> -			    "Failed to write aux backlight freq\n");
+> -		return false;
+> -	}
+> -	return true;
+> -}
+> -
+>  static void intel_dp_aux_enable_backlight(const struct intel_crtc_state *crtc_state,
+>  					  const struct drm_connector_state *conn_state)
+>  {
+> @@ -213,9 +169,13 @@ static void intel_dp_aux_enable_backlight(const struct intel_crtc_state *crtc_st
+>  		break;
+>  	}
+>  
+> -	if (intel_dp->edp_dpcd[2] & DP_EDP_BACKLIGHT_FREQ_AUX_SET_CAP)
+> -		if (intel_dp_aux_set_pwm_freq(connector))
+> +	if (panel->backlight.pwm_freq_pre_divider) {
+> +		if (drm_dp_dpcd_writeb(&intel_dp->aux, DP_EDP_BACKLIGHT_FREQ_SET,
+> +				       panel->backlight.pwm_freq_pre_divider) == 1)
+>  			new_dpcd_buf |= DP_EDP_BACKLIGHT_FREQ_AUX_SET_ENABLE;
+> +		else
+> +			drm_dbg_kms(&i915->drm, "Failed to write aux backlight frequency\n");
+> +	}
+>  
+>  	if (new_dpcd_buf != dpcd_buf) {
+>  		if (drm_dp_dpcd_writeb(&intel_dp->aux,
+> @@ -236,6 +196,14 @@ static void intel_dp_aux_disable_backlight(const struct drm_connector_state *old
+>  				 false);
+>  }
+>  
+> +/*
+> + * Compute PWM frequency divider value based off the frequency provided to us by the vbt.
+> + * The PWM Frequency is calculated as 27Mhz / (F x P).
+> + * - Where F = PWM Frequency Pre-Divider value programmed by field 7:0 of the
+> + *             EDP_BACKLIGHT_FREQ_SET register (DPCD Address 00728h)
+> + * - Where P = 2^Pn, where Pn is the value programmed by field 4:0 of the
+> + *             EDP_PWMGEN_BIT_COUNT register (DPCD Address 00724h)
+> + */
+>  static u32 intel_dp_aux_calc_max_backlight(struct intel_connector *connector)
+>  {
+>  	struct drm_i915_private *i915 = to_i915(connector->base.dev);
+> @@ -287,8 +255,10 @@ static u32 intel_dp_aux_calc_max_backlight(struct intel_connector *connector)
+>  	pn_min &= DP_EDP_PWMGEN_BIT_COUNT_MASK;
+>  	pn_max &= DP_EDP_PWMGEN_BIT_COUNT_MASK;
+>  
+> +	/* Ensure frequency is within 25% of desired value */
+>  	fxp_min = DIV_ROUND_CLOSEST(fxp * 3, 4);
+>  	fxp_max = DIV_ROUND_CLOSEST(fxp * 5, 4);
+> +
+>  	if (fxp_min < (1 << pn_min) || (255 << pn_max) < fxp_max) {
+>  		drm_dbg_kms(&i915->drm,
+>  			    "VBT defined backlight frequency out of range\n");
+> @@ -309,7 +279,9 @@ static u32 intel_dp_aux_calc_max_backlight(struct intel_connector *connector)
+>  			    "Failed to write aux pwmgen bit count\n");
+>  		return max_backlight;
+>  	}
+> +
+>  	panel->backlight.pwmgen_bit_count = pn;
+> +	panel->backlight.pwm_freq_pre_divider = f;
+
+This should be wrapped in
+
+	if (intel_dp->edp_dpcd[2] & DP_EDP_BACKLIGHT_FREQ_AUX_SET_CAP)
+
+but you do it in the next patch, so this patch is a bit broken.
+
+
+>  
+>  	max_backlight = (1 << pn) - 1;
+
+-- 
+Jani Nikula, Intel Open Source Graphics Center
+_______________________________________________
+Nouveau mailing list
+Nouveau@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/nouveau
