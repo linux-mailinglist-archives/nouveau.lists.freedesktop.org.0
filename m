@@ -1,59 +1,52 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id BA7942DD99A
-	for <lists+nouveau@lfdr.de>; Thu, 17 Dec 2020 21:04:39 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id DEFC42DFC37
+	for <lists+nouveau@lfdr.de>; Mon, 21 Dec 2020 14:09:54 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0C9D089919;
-	Thu, 17 Dec 2020 20:04:37 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7284B89B0D;
+	Mon, 21 Dec 2020 13:09:52 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E677689919
- for <nouveau@lists.freedesktop.org>; Thu, 17 Dec 2020 20:04:34 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.net;
- s=badeba3b8450; t=1608235469;
- bh=FWVVbi64fhOi+6PYs3/UZsujVfskYBj31w+7wUkgL6Y=;
- h=X-UI-Sender-Class:Subject:From:To:Cc:Date:In-Reply-To:References;
- b=gDeASji/CRBScdefY3a0rDH1vf8N/M+PN6UVXnN+OXQuR0QBkgK/DfyRdSzvV+Wiz
- Euca77Kojnv+kCFykOXD1YfUYU0tFK2Uss5nM5eb6FJYG/wCS8jqOY8X+TJTl2aqag
- 6Q1Gp9ROwT9esxw01IXGNH6N8MkTf1XoTP54L+NY=
-X-UI-Sender-Class: 01bb95c1-4bf8-414a-932a-4f6e2808ef9c
-Received: from homer.fritz.box ([185.191.217.61]) by mail.gmx.com (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MowGa-1kJLrX06Va-00qRb4; Thu, 17
- Dec 2020 21:04:29 +0100
-Message-ID: <4b18e97788fdfcc59c69b0836b693e737a48c5d9.camel@gmx.de>
-From: Mike Galbraith <efault@gmx.de>
-To: David Airlie <airlied@redhat.com>
-Date: Thu, 17 Dec 2020 21:04:28 +0100
-In-Reply-To: <CAMwc25rTv0=LuAUoHqC9+Eh6rdaywwrigMza6yKbwbRiEwLZGg@mail.gmail.com>
-References: <fe612bbbeedd0ee0d03d04c7341ea62406b957c7.camel@gmx.de>
- <136aa09d13fab723e0460b73608ed3950699f2b6.camel@gmx.de>
- <CAMwc25rTv0=LuAUoHqC9+Eh6rdaywwrigMza6yKbwbRiEwLZGg@mail.gmail.com>
-User-Agent: Evolution 3.34.4 
+Received: from mail-io1-xd36.google.com (mail-io1-xd36.google.com
+ [IPv6:2607:f8b0:4864:20::d36])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D7483891D5
+ for <nouveau@lists.freedesktop.org>; Mon, 21 Dec 2020 06:15:21 +0000 (UTC)
+Received: by mail-io1-xd36.google.com with SMTP id z5so7833138iob.11
+ for <nouveau@lists.freedesktop.org>; Sun, 20 Dec 2020 22:15:21 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:from:date:message-id:subject:to;
+ bh=y5aSbAgqUHXifNTLv+q7038uWMQECH+CKBbAkMgWcc0=;
+ b=YtEi5ePT12NGCjmUIO6kQUQ7Q21wFBbXhKdiUx0FVcSKN39KC3CMmcF3k2gapcJfSm
+ cNTsK3DV0JDmaBCPG4vjOup4tV6RJDLBZUG1xwYHpITqNssV+OvboGB33vrzu+EmOsvx
+ eyvnZhz4wptbSINtXdFHVcXvNQ4yIrfZmnk351IBvpwrxjJSEiVk/YB7HGm6/M/Wp+cG
+ Yx3vMIBavO0keffwJUBDx7NXwqiKMeiYzjpnAif2IRkBOHUlGkZgNztyJgbqsW3KkEcq
+ rUWSY6NduDAKBmq10WFTfDZMdIuEkpj/gec+sLoEth/cmXNWywWCmN8MiRs6pfaPq4eH
+ NibA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=y5aSbAgqUHXifNTLv+q7038uWMQECH+CKBbAkMgWcc0=;
+ b=q/knOHiK3lCbeSWBFwJ1FEpxa780kaGS8GaAJvM/pZD8Q0AeXiJl7wgZkqK8fgrZb2
+ RuoMcouKNW//AHxGzT/XDKrMnaoDF4249KUPgfrFHbFrTH+duqn8bdBsNEYYUmjM/gU6
+ wzbYMZ9Wmztg94ORZNAxfo7ZW6wM0l1tj2pW5swSkf8fXY7EOaw2iwmFxAeCtoe9xog6
+ fP+GLb8Ia0SSsF8Bmia70gLcgOJ4rkkx6sTbKAdNAwkCuBjfKUxvc+gJq6bSmqHfw48b
+ EVqCyi5uazi/bOUJmwnFm4B8WODqwgFElsx9qfmCCTXkJFU4lWKebWHE7lADivGppBpq
+ PGkA==
+X-Gm-Message-State: AOAM533VL60HO4lLLLG1lT4BDJJFzFTla2jRzW8Lacd8EpeCQ4riVFKU
+ /QJUaZjRp09s3KgiZqSzzFEYp0SdYHjA5XpoegmQjQhsCO/Y/Q==
+X-Google-Smtp-Source: ABdhPJzP2+X+tuVnDN3+JaUWodptF1vYUkhzaysMWpt2YXUv7zHy0nmJkzRWurX/b7hO7BTP5+vvYFDXYbtsrxaHCN4=
+X-Received: by 2002:a05:6638:ccd:: with SMTP id
+ e13mr13765563jak.140.1608531320855; 
+ Sun, 20 Dec 2020 22:15:20 -0800 (PST)
 MIME-Version: 1.0
-X-Provags-ID: V03:K1:nvNRRXcRWLcJnQW+LzAEELym4xWiqFu0SMrdg2Dp6VHlyGDz7gD
- 2sXtQA2VcbxZvRFYnsFP3lZWuhZJG6Iss3VCME8pByuEJfvLI7d0Twmf7eHLPhCMhKPDeeR
- FXuOY4R0jgtu9jkMc+OXDaQZpVDoYclsjUtf20bOlyeC6Jt2cDIM/xkrpIxXrbNQAOhkXqe
- slddb/Xg4HC2Lub+xOcyA==
-X-Spam-Flag: NO
-X-UI-Out-Filterresults: notjunk:1;V03:K0:f3diTxjBeqA=:G31ad69iCsf717rBLzPT/x
- T3id+2SsBxLwJ7czjiOq+DIIHdoolUroRxJPbrigl/FPNcatQ0lAW0kSlqxRl2UB+FQmsHZhz
- 8kUOAbo42+YgI+LSENk1kvhU80cF/IsBfHGBMWKvnIgnJQ2GC9csm0Ctlv6kN9MSkui920YP4
- 0r5mLv2+74eta0uo4Gqp2c5mAWMCa+1LVoB/eL6MtjtM4VQ4WRnjX/9eKfDAPRvosN97vT6sG
- QHkLZQmIYPRp2Yz30Z/IateyLW6zGoYlqBX4tlAmyjpHvGAmZR3RO9R8GTlMLWFwbXLuIvD48
- 3ntQS2ETVcoSz0NyxjBx2/FlBd+8LG4Tx8Hb2MivdKHxM5o0niBqare5HQmkiRUbX0pVKX2bw
- FUcXlRLfattlWCAbKzdppZFkkMLLtHKrYlSna095QY2MJmxiyQwsHxU2MDuWDbzy23hoki053
- H/P+leVlH+krqxUFi+9wSPzwtuGRD83S97VofeZFkMtKtvr+zqI8lOqNgjABiXo2Xz0OEtHcY
- kI2haQi82WISHcz5qWOyhaTqYJSiSUEYCxlmaBKy2u9o/2giLBPz8w3IjK8NGS6PuGXKcAEi/
- UEdVoy77vvMxwRCLBgtCmnfuk2Qg2JgtX8Ahl1W2dnZ2hCtr6jTsIFNg2JR2DTwTLqQNDHeJP
- zRjsuMeTpz4aZ3JYvHjT6/gwvGKZsFpOq0LIhsp4m/ynjPI1By8SewYBx3kz+qgcxauoieISS
- nbmxsaAXp1x5ELyoUoTt6c2x5Txd3VTqjC77GF1niM/+w3AKNoVY2q62rI2fROGOvRVJUmlC7
- GuSEhp53jwZrfje0a19prKcWSStnrul6a39sf7rGu3XtoxbJY0xrutf4gFuRI00oQz8OaWYrx
- ZkZqurKIqno5lkUsgFKg==
-Subject: Re: [Nouveau] [bisected] Re: regression: nouveau fifo: fault 01 ==>
- channel 1: killed ==> dead desktop
+From: Nikunj goyal <nikunjgoyal31@gmail.com>
+Date: Mon, 21 Dec 2020 11:45:09 +0530
+Message-ID: <CAL_w6bPog2DavwTb08AVazC9X=VD5povvP8Xbfej9PAK5gFG0A@mail.gmail.com>
+To: nouveau@lists.freedesktop.org
+X-Mailman-Approved-At: Mon, 21 Dec 2020 13:09:51 +0000
+Subject: [Nouveau] Xorg evoc
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -65,23 +58,40 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau <nouveau@lists.freedesktop.org>,
- lkml <linux-kernel@vger.kernel.org>, Ben Skeggs <bskeggs@redhat.com>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============1828227496=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, 2020-12-18 at 05:45 +1000, David Airlie wrote:
+--===============1828227496==
+Content-Type: multipart/alternative; boundary="000000000000fd5e5b05b6f36199"
 
-> Does the attached patch help?
+--000000000000fd5e5b05b6f36199
+Content-Type: text/plain; charset="UTF-8"
 
-Yup, that seems to have done the trick.  Fast bug squashing by the drm
-guys today, two slowly bisected, two quickly squashed.
+Hi everyone,
+I was surfing the web and i came across this program endless summer of code
+by Xorg and wanted to ask if it is still active?
+Thanks
 
-	-Mike
+Regards
+Nikunj goyal
+
+--000000000000fd5e5b05b6f36199
+Content-Type: text/html; charset="UTF-8"
+
+<div dir="ltr">Hi everyone,<div>I was surfing the web and i came across this program endless summer of code by Xorg and wanted to ask if it is still active?</div><div>Thanks</div><div><br></div><div>Regards</div><div>Nikunj goyal</div></div>
+
+--000000000000fd5e5b05b6f36199--
+
+--===============1828227496==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/nouveau
+
+--===============1828227496==--
