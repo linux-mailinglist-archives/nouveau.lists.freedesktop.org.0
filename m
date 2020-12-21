@@ -2,45 +2,35 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id AA8FB2DFED2
-	for <lists+nouveau@lfdr.de>; Mon, 21 Dec 2020 18:16:16 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 77EE22DFF11
+	for <lists+nouveau@lfdr.de>; Mon, 21 Dec 2020 18:56:53 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 33BED6E49B;
-	Mon, 21 Dec 2020 17:16:14 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7C1416E4AD;
+	Mon, 21 Dec 2020 17:56:51 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from youngberry.canonical.com (youngberry.canonical.com
- [91.189.89.112])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 054586E49B
- for <nouveau@lists.freedesktop.org>; Mon, 21 Dec 2020 17:16:13 +0000 (UTC)
-Received: from mail-lf1-f70.google.com ([209.85.167.70])
- by youngberry.canonical.com with esmtps
- (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.86_2)
- (envelope-from <kai.heng.feng@canonical.com>) id 1krOn5-00031i-M1
- for nouveau@lists.freedesktop.org; Mon, 21 Dec 2020 17:16:11 +0000
-Received: by mail-lf1-f70.google.com with SMTP id m67so11484438lfd.6
- for <nouveau@lists.freedesktop.org>; Mon, 21 Dec 2020 09:16:11 -0800 (PST)
+Received: from mail-ua1-f50.google.com (mail-ua1-f50.google.com
+ [209.85.222.50])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 405AD6E4AD
+ for <nouveau@lists.freedesktop.org>; Mon, 21 Dec 2020 17:56:50 +0000 (UTC)
+Received: by mail-ua1-f50.google.com with SMTP id 73so3553115uac.8
+ for <nouveau@lists.freedesktop.org>; Mon, 21 Dec 2020 09:56:50 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=2Pz4SBTDx6BMkbLDQ5nrfRYm9x7WmPr6bGZI10+5Wso=;
- b=Nq5/2r+ONnIDbL0Ah7f6Dbr0gQDV5hKM9tZd1v9MbyfC8Xv0KBhLyhILtWewBKoN+T
- in8E9lIN7yFD8TAV2IDmz6uQHsXRgTh3gIVYC1t9lWSGTYQS6QPVmTY0CIZJI0qSig5l
- 9zLuG9u3hjGhakf+0g6KV4uUQqefoKwkXrRlpkSquZDfuTCwtOvHDhYZeMQneUG7GjwE
- icSTGCTpeuCkwWdXAoLo0iiG4Dvu1qqzqoiGBdXlirmHOpE5r8JWLps8v63VspPN1mec
- wguk4ngH0AuHS1EwlFcgjRpz2Wh8cIuEqKzBFYg/j3WVGOlRVfxpPDUvt5xPU1MIRM/b
- /rTg==
-X-Gm-Message-State: AOAM533aZRK9T4taM+zr9cyMjLDMbtocWPdyDMw0+9MAAzlkxp3gdkWW
- Q8fMHuXsusg/cPZp2UD32LACiFfXypg1/kfNqNx7NvG5lryWR3l5RkXfVql6t0S2jZ9tnX8zH4m
- SQGLlN0EsKQ4T+49EtF3tI9fOWx5uzB/speig6Eda5gzkrgbdhoztaHKiKmI=
-X-Received: by 2002:a05:651c:118b:: with SMTP id
- w11mr1574953ljo.402.1608570971159; 
- Mon, 21 Dec 2020 09:16:11 -0800 (PST)
-X-Google-Smtp-Source: ABdhPJy2YXycweLB9saylOYpQELQXyDWheqBfUKEeeBhg9fBTp5dxHBt0XV6PKI9T7tz8LDvPKU6uC6XcVCTDVBIws8=
-X-Received: by 2002:a05:651c:118b:: with SMTP id
- w11mr1574936ljo.402.1608570970912; 
- Mon, 21 Dec 2020 09:16:10 -0800 (PST)
+ bh=MrAF3XcfgmbCY17OqyOzfLrhkI98KCYJDR2DMtLfdY8=;
+ b=ZMAwZZ+YW7SRb0uh3DJpMymyB8Te66vLe7iKFF9sAht7YsKq1vadHAyc3bP+ISXI8v
+ i8qN5yM4sDL8FEfAjh0W+yqBjhNHw1EpHBgmkQwh4BcmisPKmiqVXjv6tF6bvl4/5l2m
+ h4zFvKhQEPjQ2YYvE9+tVEzwOuMMo56rYt19RpyYtiMVIRQ2t7hz6F5vRN/qHZkPQQEu
+ xwqbpszxFUbPL2j6yGSKeNt7EaxQb3cbon/TyxYc6LBkTxxcNYw5oBo3cczPKXTRaxAC
+ igGRfhx2GYluobTdZzNJ6XgHmMSAUAj0HEDSwuYXlRpM6qzSR4pO5So01zN7YFZ6LkyK
+ h4Uw==
+X-Gm-Message-State: AOAM531md2em1JL9+prGfFSCiYsTooLU/XEvwTZ7drsudWGP47ltQ09L
+ DbPoMk5T+oKC83NsQagIl1FKQZ9yypAEPNEHUF8=
+X-Google-Smtp-Source: ABdhPJzVdL7B8bTZxy+rQMk6er8L4T5ie68H4w9L1UEygB7FM35lOkrdx7hEzcfKNr2eDQb6J0Pb9eQgDYeA07DY5rA=
+X-Received: by 2002:ab0:1e4a:: with SMTP id n10mr13442742uak.98.1608573409390; 
+ Mon, 21 Dec 2020 09:56:49 -0800 (PST)
 MIME-Version: 1.0
 References: <20201214060621.1102931-1-kai.heng.feng@canonical.com>
  <20201216124726.2842197-1-kai.heng.feng@canonical.com>
@@ -52,12 +42,11 @@ References: <20201214060621.1102931-1-kai.heng.feng@canonical.com>
  <CAAd53p6MMFh=HCNF9pyrJc9hVMZWFe7_8MvBcBHVWARqHU_TTA@mail.gmail.com>
  <s5h7dpfk06y.wl-tiwai@suse.de>
  <CAAd53p53w0H6tsb4JgQtFTkYinniicTYBs2uk7tc=heP2dM_Cw@mail.gmail.com>
- <s5hft3zf6mi.wl-tiwai@suse.de>
-In-Reply-To: <s5hft3zf6mi.wl-tiwai@suse.de>
-From: Kai-Heng Feng <kai.heng.feng@canonical.com>
-Date: Tue, 22 Dec 2020 01:15:59 +0800
-Message-ID: <CAAd53p7TOBwee6dfY8uY=2P6wGJ9Uf551LVp95jLwz7SA9PWFA@mail.gmail.com>
-To: Takashi Iwai <tiwai@suse.de>
+In-Reply-To: <CAAd53p53w0H6tsb4JgQtFTkYinniicTYBs2uk7tc=heP2dM_Cw@mail.gmail.com>
+From: Ilia Mirkin <imirkin@alum.mit.edu>
+Date: Mon, 21 Dec 2020 12:56:38 -0500
+Message-ID: <CAKb7UvjWX7xbwMKtnad5EVy16nY1M-A13YJeRWyUwHzemcVswA@mail.gmail.com>
+To: Kai-Heng Feng <kai.heng.feng@canonical.com>
 Subject: Re: [Nouveau] [PATCH v2] ALSA: hda: Continue to probe when codec
  probe fails
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -72,32 +61,71 @@ List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
 Cc: "moderated list:SOUND" <alsa-devel@alsa-project.org>,
- Kai Vehmanen <kai.vehmanen@linux.intel.com>, nouveau@lists.freedesktop.org,
+ Kai Vehmanen <kai.vehmanen@linux.intel.com>, Takashi Iwai <tiwai@suse.de>,
+ nouveau <nouveau@lists.freedesktop.org>, tiwai@suse.com,
  open list <linux-kernel@vger.kernel.org>,
- Pierre-Louis Bossart <pierre-louis.bossart@linux.intel.com>, tiwai@suse.com,
- Bjorn Helgaas <bhelgaas@google.com>, Alan Stern <stern@rowland.harvard.edu>,
- Linux PCI <linux-pci@vger.kernel.org>,
- Alex Deucher <alexander.deucher@amd.com>, Jaroslav Kysela <perex@perex.cz>,
+ Pierre-Louis Bossart <pierre-louis.bossart@linux.intel.com>,
+ Alex Deucher <alexander.deucher@amd.com>,
+ Alan Stern <stern@rowland.harvard.edu>, Linux PCI <linux-pci@vger.kernel.org>,
+ Bjorn Helgaas <bhelgaas@google.com>, Jaroslav Kysela <perex@perex.cz>,
  Mike Rapoport <rppt@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, Dec 22, 2020 at 12:47 AM Takashi Iwai <tiwai@suse.de> wrote:
-[snip]
-> But what happens if you plug the HDMI cable later and want to use the
-> HDMI audio?  It won't work with your fix, right?
-
-No it won't.
-It's possible to fix from nouveau, but it's at the mercy of Nvidia to
-fix their proprietary driver, which many users use.
-
-Kai-Heng
-
+On Mon, Dec 21, 2020 at 11:33 AM Kai-Heng Feng
+<kai.heng.feng@canonical.com> wrote:
 >
+> [+Cc nouveau]
 >
-> Takashi
+> On Fri, Dec 18, 2020 at 4:06 PM Takashi Iwai <tiwai@suse.de> wrote:
+> [snip]
+> > > Quite possibly the system doesn't power up HDA controller when there's
+> > > no external monitor.
+> > > So when it's connected to external monitor, it's still needed for HDMI audio.
+> > > Let me ask the user to confirm this.
+> >
+> > Yeah, it's the basic question whether the HD-audio is supposed to work
+> > on this machine at all.  If yes, the current approach we take makes
+> > less sense - instead we should rather make the HD-audio controller
+> > working.
+>
+> Yea, confirmed that the Nvidia HDA works when HDMI is connected prior boot.
+>
+> > > > - The second problem is that pci_enable_device() ignores the error
+> > > >   returned from pci_set_power_state() if it's -EIO.  And the
+> > > >   inaccessible access error returns -EIO, although it's rather a fatal
+> > > >   problem.  So the driver believes as the PCI device gets enabled
+> > > >   properly.
+> > >
+> > > This was introduced in 2005, by Alan's 11f3859b1e85 ("[PATCH] PCI: Fix
+> > > regression in pci_enable_device_bars") to fix UHCI controller.
+> > >
+> > > >
+> > > > - The third problem is that HD-audio driver blindly believes the
+> > > >   codec_mask read from the register even if it's a read failure as I
+> > > >   already showed.
+> > >
+> > > This approach has least regression risk.
+> >
+> > Yes, but it assumes that HD-audio is really non-existent.
+>
+> I really don't know any good approach to address this.
+> On Windows, HDA PCI is "hidden" until HDMI cable is plugged, then the
+> driver will flag the magic bit to make HDA audio appear on the PCI
+> bus.
+> IIRC the current approach is to make nouveau and device link work.
+
+I don't have the full context of this discussion, but the kernel
+force-enables the HDA subfunction nowadays, irrespective of nouveau or
+nvidia or whatever:
+
+https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/pci/quirks.c?h=v5.10#n5267
+
+Cheers,
+
+  -ilia
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
