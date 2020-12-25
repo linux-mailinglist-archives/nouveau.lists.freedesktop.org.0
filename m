@@ -2,46 +2,33 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 962A12E272E
-	for <lists+nouveau@lfdr.de>; Thu, 24 Dec 2020 14:24:56 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4BE362E3284
+	for <lists+nouveau@lfdr.de>; Sun, 27 Dec 2020 20:16:24 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C825F8967A;
-	Thu, 24 Dec 2020 13:24:53 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id AA69D897E0;
+	Sun, 27 Dec 2020 19:16:20 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 414 seconds by postgrey-1.36 at gabe;
- Thu, 24 Dec 2020 13:24:51 UTC
-Received: from zju.edu.cn (mail.zju.edu.cn [61.164.42.155])
- by gabe.freedesktop.org (Postfix) with ESMTP id 818EC8930A;
- Thu, 24 Dec 2020 13:24:51 +0000 (UTC)
-Received: from localhost.localdomain (unknown [10.192.85.18])
- by mail-app2 (Coremail) with SMTP id by_KCgDn7+vqlORflDEBAA--.6180S4;
- Thu, 24 Dec 2020 21:17:33 +0800 (CST)
-From: Dinghao Liu <dinghao.liu@zju.edu.cn>
-To: dinghao.liu@zju.edu.cn,
-	kjlu@umn.edu
-Date: Thu, 24 Dec 2020 21:17:34 +0800
-Message-Id: <20201224131736.9584-1-dinghao.liu@zju.edu.cn>
-X-Mailer: git-send-email 2.17.1
-X-CM-TRANSID: by_KCgDn7+vqlORflDEBAA--.6180S4
-X-Coremail-Antispam: 1UD129KBjvJXoW7AFWfZr1DCw4DKry8GrW8Crg_yoW8Cw4UpF
- 42kFyUAry0van5J3ySyrs2k3W3u3yvqr4xWF129wnxJ3WYyr17Zr4FyF92grsIqrW7G340
- grs7GF98ZF1UG3DanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUvG1xkIjI8I6I8E6xAIw20EY4v20xvaj40_Wr0E3s1l1IIY67AE
- w4v_Jr0_Jr4l8cAvFVAK0II2c7xJM28CjxkF64kEwVA0rcxSw2x7M28EF7xvwVC0I7IYx2
- IY67AKxVWDJVCq3wA2z4x0Y4vE2Ix0cI8IcVCY1x0267AKxVWxJr0_GcWl84ACjcxK6I8E
- 87Iv67AKxVW0oVCq3wA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_GcCE3s1le2I262IYc4CY6c
- 8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2Ix0cI8IcVAFwI0_Jr0_
- Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJVW8JwACjcxG0xvY0x0EwI
- xGrwACjI8F5VA0II8E6IAqYI8I648v4I1lFIxGxcIEc7CjxVA2Y2ka0xkIwI1l42xK82IY
- c2Ij64vIr41l42xK82IY6x8ErcxFaVAv8VW8uw4UJr1UMxC20s026xCaFVCjc4AY6r1j6r
- 4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF
- 67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2I
- x0cI8IcVCY1x0267AKxVW8JVWxJwCI42IY6xAIw20EY4v20xvaj40_WFyUJVCq3wCI42IY
- 6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa
- 73UjIFyTuYvjfUoOJ5UUUUU
-X-CM-SenderInfo: qrrzjiaqtzq6lmxovvfxof0/1tbiAgYEBlZdtRrnPQAAs4
-Subject: [Nouveau] [PATCH] drm/nouveau: Fix memleak in nv50_wndw_new_
+X-Greylist: delayed 401 seconds by postgrey-1.36 at gabe;
+ Fri, 25 Dec 2020 07:40:51 UTC
+Received: from audible.transient.net (audible.transient.net [24.143.126.66])
+ by gabe.freedesktop.org (Postfix) with SMTP id 4313B89B48
+ for <nouveau@lists.freedesktop.org>; Fri, 25 Dec 2020 07:40:51 +0000 (UTC)
+Received: (qmail 28719 invoked from network); 25 Dec 2020 07:34:09 -0000
+Received: from cucamonga.audible.transient.net (192.168.2.5)
+ by canarsie.audible.transient.net with QMQP; 25 Dec 2020 07:34:09 -0000
+Received: (nullmailer pid 7394 invoked by uid 1000);
+ Fri, 25 Dec 2020 07:34:08 -0000
+Date: Fri, 25 Dec 2020 07:34:08 +0000
+From: Jamie Heilman <jamie@audible.transient.net>
+To: Ben Skeggs <bskeggs@redhat.com>, nouveau@lists.freedesktop.org
+Message-ID: <X+WV8OiQzTIfLdgW@audible.transient.net>
+Mail-Followup-To: Ben Skeggs <bskeggs@redhat.com>,
+ nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org
+MIME-Version: 1.0
+Content-Disposition: inline
+X-Mailman-Approved-At: Sun, 27 Dec 2020 19:16:19 +0000
+Subject: [Nouveau] nouveau regression post v5.8, still present in v5.10
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -53,90 +40,150 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>,
- =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>
-MIME-Version: 1.0
+Cc: linux-kernel@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-When nv50_lut_init() fails, *pwndw should be freed
-just like when drm_universal_plane_init() fails.
-It's the same for the subsequent error paths.
+Something between v5.8 and v5.9 has resulted in periodically losing video.
+Unfortunately, I can't reliably reproduce it, it seems to happen every
+once in a long while---I can go weeks without an occurance, but it
+always seems to happen after my workstation has been idle long enough
+to screen blank and put the monitor to sleep.  I'm using a single
+display (Dell 2405FPW) connected via DVI, running X (Xorg 1.20.x from
+Debian sid).  I don't really do anything fancy, xterms, a browser or
+two, play the occasional video, but like I said, I can't reliably
+reproduce this.  I've had it happen about 11 times since August.
 
-Signed-off-by: Dinghao Liu <dinghao.liu@zju.edu.cn>
----
- drivers/gpu/drm/nouveau/dispnv50/wndw.c | 22 ++++++++++++----------
- 1 file changed, 12 insertions(+), 10 deletions(-)
+lspci -vv output is:
 
-diff --git a/drivers/gpu/drm/nouveau/dispnv50/wndw.c b/drivers/gpu/drm/nouveau/dispnv50/wndw.c
-index 0356474ad6f6..47ce1df2ae5f 100644
---- a/drivers/gpu/drm/nouveau/dispnv50/wndw.c
-+++ b/drivers/gpu/drm/nouveau/dispnv50/wndw.c
-@@ -732,18 +732,15 @@ nv50_wndw_new_(const struct nv50_wndw_func *func, struct drm_device *dev,
- 				       format, nformat,
- 				       nouveau_display(dev)->format_modifiers,
- 				       type, "%s-%d", name, index);
--	if (ret) {
--		kfree(*pwndw);
--		*pwndw = NULL;
--		return ret;
--	}
-+	if (ret)
-+		goto err_free;
- 
- 	drm_plane_helper_add(&wndw->plane, &nv50_wndw_helper);
- 
- 	if (wndw->func->ilut) {
- 		ret = nv50_lut_init(disp, mmu, &wndw->ilut);
- 		if (ret)
--			return ret;
-+			goto err_free;
- 	}
- 
- 	wndw->notify.func = nv50_wndw_notify;
-@@ -752,26 +749,31 @@ nv50_wndw_new_(const struct nv50_wndw_func *func, struct drm_device *dev,
- 		ret = drm_plane_create_zpos_property(&wndw->plane,
- 				nv50_wndw_zpos_default(&wndw->plane), 0, 254);
- 		if (ret)
--			return ret;
-+			goto err_free;
- 
- 		ret = drm_plane_create_alpha_property(&wndw->plane);
- 		if (ret)
--			return ret;
-+			goto err_free;
- 
- 		ret = drm_plane_create_blend_mode_property(&wndw->plane,
- 				BIT(DRM_MODE_BLEND_PIXEL_NONE) |
- 				BIT(DRM_MODE_BLEND_PREMULTI) |
- 				BIT(DRM_MODE_BLEND_COVERAGE));
- 		if (ret)
--			return ret;
-+			goto err_free;
- 	} else {
- 		ret = drm_plane_create_zpos_immutable_property(&wndw->plane,
- 				nv50_wndw_zpos_default(&wndw->plane));
- 		if (ret)
--			return ret;
-+			goto err_free;
- 	}
- 
- 	return 0;
-+
-+err_free:
-+	kfree(*pwndw);
-+	*pwndw = NULL;
-+	return ret;
- }
- 
- int
+01:00.0 VGA compatible controller: NVIDIA Corporation G86 [Quadro NVS 290] (rev a1) (prog-if 00 [VGA controller])
+        Subsystem: NVIDIA Corporation G86 [Quadro NVS 290]
+        Control: I/O+ Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr- Stepping- SERR- FastB2B- DisINTx+
+        Status: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-
+        Latency: 0, Cache Line Size: 64 bytes
+        Interrupt: pin A routed to IRQ 28
+        Region 0: Memory at fc000000 (32-bit, non-prefetchable) [size=16M]
+        Region 1: Memory at d0000000 (64-bit, prefetchable) [size=256M]
+        Region 3: Memory at fa000000 (64-bit, non-prefetchable) [size=32M]
+        Region 5: I/O ports at dc80 [size=128]
+        Expansion ROM at 000c0000 [disabled] [size=128K]
+        Capabilities: [60] Power Management version 2
+                Flags: PMEClk- DSI- D1- D2- AuxCurrent=0mA PME(D0-,D1-,D2-,D3hot-,D3cold-)
+                Status: D0 NoSoftRst- PME-Enable- DSel=0 DScale=0 PME-
+        Capabilities: [68] MSI: Enable+ Count=1/1 Maskable- 64bit+
+                Address: 00000000fee01004  Data: 4023
+        Capabilities: [78] Express (v1) Endpoint, MSI 00
+                DevCap: MaxPayload 128 bytes, PhantFunc 0, Latency L0s <512ns, L1 <4us
+                        ExtTag+ AttnBtn- AttnInd- PwrInd- RBE+ FLReset- SlotPowerLimit 25.000W
+                DevCtl: CorrErr- NonFatalErr+ FatalErr+ UnsupReq-
+                        RlxdOrd+ ExtTag+ PhantFunc- AuxPwr- NoSnoop+
+                        MaxPayload 128 bytes, MaxReadReq 512 bytes
+                DevSta: CorrErr- NonFatalErr- FatalErr- UnsupReq- AuxPwr- TransPend-
+                LnkCap: Port #0, Speed 2.5GT/s, Width x16, ASPM L0s L1, Exit Latency L0s <512ns, L1 <4us
+                        ClockPM- Surprise- LLActRep- BwNot- ASPMOptComp-
+                LnkCtl: ASPM Disabled; RCB 64 bytes, Disabled- CommClk+
+                        ExtSynch- ClockPM- AutWidDis- BWInt- AutBWInt-
+                LnkSta: Speed 2.5GT/s (ok), Width x16 (ok)
+                        TrErr- Train- SlotClk+ DLActive- BWMgmt- ABWMgmt-
+        Capabilities: [100 v1] Virtual Channel
+                Caps:   LPEVC=0 RefClk=100ns PATEntryBits=1
+                Arb:    Fixed- WRR32- WRR64- WRR128-
+                Ctrl:   ArbSelect=Fixed
+                Status: InProgress-
+                VC0:    Caps:   PATOffset=00 MaxTimeSlots=1 RejSnoopTrans-
+                        Arb:    Fixed- WRR32- WRR64- WRR128- TWRR128- WRR256-
+                        Ctrl:   Enable+ ID=0 ArbSelect=Fixed TC/VC=01
+                        Status: NegoPending- InProgress-
+        Capabilities: [128 v1] Power Budgeting <?>
+        Capabilities: [600 v1] Vendor Specific Information: ID=0001 Rev=1 Len=024 <?>
+        Kernel driver in use: nouveau
+
+The last time this happened, this is what got logged:
+
+nouveau 0000:01:00.0: disp: ERROR 5 [INVALID_STATE] 06 [] chid 1 mthd 0080 data 00000001
+nouveau 0000:01:00.0: disp: Base 1:
+nouveau 0000:01:00.0: disp:        0084: 00000000              
+nouveau 0000:01:00.0: disp:        0088: 00000000              
+nouveau 0000:01:00.0: disp:        008c: 00000000              
+nouveau 0000:01:00.0: disp:        0090: 00000000              
+nouveau 0000:01:00.0: disp:        0094: 00000000              
+nouveau 0000:01:00.0: disp:        00a0: 00000060 -> 00000070
+nouveau 0000:01:00.0: disp:        00a4: 00000000 -> f0000000
+nouveau 0000:01:00.0: disp:        00c0: 00000000              
+nouveau 0000:01:00.0: disp:        00c4: 00000000              
+nouveau 0000:01:00.0: disp:        00c8: 00000000              
+nouveau 0000:01:00.0: disp:        00cc: 00000000              
+nouveau 0000:01:00.0: disp:        00e0: 40000000              
+nouveau 0000:01:00.0: disp:        00e4: 00000000              
+nouveau 0000:01:00.0: disp:        00e8: 00000000              
+nouveau 0000:01:00.0: disp:        00ec: 00000000              
+nouveau 0000:01:00.0: disp:        00fc: 00000000              
+nouveau 0000:01:00.0: disp:        0100: fffe0000              
+nouveau 0000:01:00.0: disp:        0104: 00000000              
+nouveau 0000:01:00.0: disp:        0110: 00000000              
+nouveau 0000:01:00.0: disp:        0114: 00000000              
+nouveau 0000:01:00.0: disp: Base 1 - Image 0:
+nouveau 0000:01:00.0: disp:        0800: 00009500              
+nouveau 0000:01:00.0: disp:        0804: 00000000              
+nouveau 0000:01:00.0: disp:        0808: 04b00780              
+nouveau 0000:01:00.0: disp:        080c: 00007804              
+nouveau 0000:01:00.0: disp:        0810: 0000cf00              
+nouveau 0000:01:00.0: disp: Base 1 - Image 1:
+nouveau 0000:01:00.0: disp:        0c00: 00009500              
+nouveau 0000:01:00.0: disp:        0c04: 00000000              
+nouveau 0000:01:00.0: disp:        0c08: 04b00780              
+nouveau 0000:01:00.0: disp:        0c0c: 00007804              
+nouveau 0000:01:00.0: disp:        0c10: 0000cf00              
+nouveau 0000:01:00.0: disp: ERROR 5 [INVALID_STATE] 06 [] chid 1 mthd 0080 data 00000001
+nouveau 0000:01:00.0: disp: Base 1:
+nouveau 0000:01:00.0: disp:        0084: 00000000              
+nouveau 0000:01:00.0: disp:        0088: 00000000              
+nouveau 0000:01:00.0: disp:        008c: 00000000              
+nouveau 0000:01:00.0: disp:        0090: 00000000              
+nouveau 0000:01:00.0: disp:        0094: 00000000              
+nouveau 0000:01:00.0: disp:        00a0: 00000060 -> 00000070
+nouveau 0000:01:00.0: disp:        00a4: 00000000 -> f0000000
+nouveau 0000:01:00.0: disp:        00c0: 00000000              
+nouveau 0000:01:00.0: disp:        00c4: 00000000              
+nouveau 0000:01:00.0: disp:        00c8: 00000000              
+nouveau 0000:01:00.0: disp:        00cc: 00000000              
+nouveau 0000:01:00.0: disp:        00e0: 40000000              
+nouveau 0000:01:00.0: disp:        00e4: 00000000              
+nouveau 0000:01:00.0: disp:        00e8: 00000000              
+nouveau 0000:01:00.0: disp:        00ec: 00000000              
+nouveau 0000:01:00.0: disp:        00fc: 00000000              
+nouveau 0000:01:00.0: disp:        0100: fffe0000              
+nouveau 0000:01:00.0: disp:        0104: 00000000              
+nouveau 0000:01:00.0: disp:        0110: 00000000              
+nouveau 0000:01:00.0: disp:        0114: 00000000              
+nouveau 0000:01:00.0: disp: Base 1 - Image 0:
+nouveau 0000:01:00.0: disp:        0800: 00009500              
+nouveau 0000:01:00.0: disp:        0804: 00000000              
+nouveau 0000:01:00.0: disp:        0808: 04b00780              
+nouveau 0000:01:00.0: disp:        080c: 00007804              
+nouveau 0000:01:00.0: disp:        0810: 0000cf00              
+nouveau 0000:01:00.0: disp: Base 1 - Image 1:
+nouveau 0000:01:00.0: disp:        0c00: 00009500              
+nouveau 0000:01:00.0: disp:        0c04: 00000000              
+nouveau 0000:01:00.0: disp:        0c08: 04b00780              
+nouveau 0000:01:00.0: disp:        0c0c: 00007804              
+nouveau 0000:01:00.0: disp:        0c10: 0000cf00              
+nouveau 0000:01:00.0: DRM: core notifier timeout
+nouveau 0000:01:00.0: DRM: base-0: timeout
+
+I've got logs of all of this, if they help I can collect them.  The
+timeout message are consistent the error messages a little less so.
+
+If there's more debugging I can do when this happens, I'd love to know
+what it is.
+
+kernel config: http://audible.transient.net/~jamie/k/nouveau.config-5.10.0
+dmesg at boot: http://audible.transient.net/~jamie/k/nouveau.dmesg
+
 -- 
-2.17.1
-
+Jamie Heilman                     http://audible.transient.net/~jamie/
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
