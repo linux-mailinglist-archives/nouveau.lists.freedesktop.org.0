@@ -2,44 +2,37 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1D43B2E3268
-	for <lists+nouveau@lfdr.de>; Sun, 27 Dec 2020 19:28:19 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 436192E71F7
+	for <lists+nouveau@lfdr.de>; Tue, 29 Dec 2020 16:52:07 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id EABDA8973E;
-	Sun, 27 Dec 2020 18:28:15 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 69BF5892FE;
+	Tue, 29 Dec 2020 15:52:04 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ua1-f42.google.com (mail-ua1-f42.google.com
- [209.85.222.42])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 529178973E
- for <nouveau@lists.freedesktop.org>; Sun, 27 Dec 2020 18:28:14 +0000 (UTC)
-Received: by mail-ua1-f42.google.com with SMTP id k47so2743454uad.1
- for <nouveau@lists.freedesktop.org>; Sun, 27 Dec 2020 10:28:14 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=CHXagY3A/DK4pEpN7boYvTeZV4qY/yf7WrSua4i2PV8=;
- b=hT2e4LNxO65Tf2NY5GFqO6kQqmvOlfJPcl64ALH8Vs4ICWIONB1dIm/7OBjPjlAin9
- MwPdABDNlc24gl4l/STm3yrA526I1BvMAa6SFQu0g8HKYFeHHFCMLglDh4dhVz3oRpWz
- y06J4eH/I3CpA0orCxRh5rLXbHlbMTmyPzsPTL11jDpVia5QczTs0njbUGjvFf61hF+S
- rMQLU3i1TIBrBC9mXvgWkT/WgDFZRYRHIyv0ci81y44DF96I2WB1raFemOdETGUc0Cx8
- Vkt4q8cXZvZ/sc8Vd1El6BOdNnkm357s/Oe//Rm8sxW4UX5SnQwtG0jSKTAd/lUy6y8g
- OhHQ==
-X-Gm-Message-State: AOAM531qdxAzorUWvzU6MVwcOOddj+pO4Cq7K/Aq/+Nx0AGxNXv3bxTm
- uU74Vu8BALQXMMFZs7/DfmtGlkBdeKue11QIToo=
-X-Google-Smtp-Source: ABdhPJz1BQy9K3ilducip6gKHDgDVrGXFEjWVw2n3lxHJwDA/WOsfUGMlfTMwsAOI7/ZySlBlBJisayfcDG/BcJU0UI=
-X-Received: by 2002:ab0:3806:: with SMTP id x6mr26004284uav.58.1609093693309; 
- Sun, 27 Dec 2020 10:28:13 -0800 (PST)
-MIME-Version: 1.0
+Received: from mail1.merlins.org (magic.merlins.org [209.81.13.136])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E229D892FE
+ for <nouveau@lists.freedesktop.org>; Tue, 29 Dec 2020 15:52:02 +0000 (UTC)
+Received: from aaubervilliers-653-1-146-240.w86-218.abo.wanadoo.fr
+ ([86.218.37.240]:44390 helo=sauron.svh.merlins.org)
+ by mail1.merlins.org with esmtpsa 
+ (Cipher TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92 #3)
+ id 1kuHI0-0000jm-Un by authid <merlins.org> with srv_auth_plain;
+ Tue, 29 Dec 2020 07:52:00 -0800
+Received: from merlin by sauron.svh.merlins.org with local (Exim 4.92)
+ (envelope-from <marc_nouveau@merlins.org>)
+ id 1kuHHz-0005Ee-LP; Tue, 29 Dec 2020 07:51:59 -0800
+Date: Tue, 29 Dec 2020 07:51:59 -0800
+From: Marc MERLIN <marc_nouveau@merlins.org>
+To: Ilia Mirkin <imirkin@alum.mit.edu>
+Message-ID: <20201229155159.GG23389@merlins.org>
 References: <20200908002935.GD20064@merlins.org>
  <20200529180315.GA18804@merlins.org>
- <20201226111209.GA2498@merlins.org>
-In-Reply-To: <20201226111209.GA2498@merlins.org>
-From: Ilia Mirkin <imirkin@alum.mit.edu>
-Date: Sun, 27 Dec 2020 13:28:02 -0500
-Message-ID: <CAKb7UvhuWdPBgqV+Nf+KJ_Eb9SOJrbTxfBwiA-7HtdurVd+LiA@mail.gmail.com>
-To: Marc MERLIN <marc_nouveau@merlins.org>
+MIME-Version: 1.0
+Content-Disposition: inline
+X-Sysadmin: BOFH
+X-URL: http://marc.merlins.org/
+X-SA-Exim-Connect-IP: 86.218.37.240
+X-SA-Exim-Mail-From: marc_nouveau@merlins.org
 Subject: Re: [Nouveau] 5.9.11 still hanging 2mn at each boot and looping on
  nvidia-gpu 0000:01:00.3: PME# enabled (Quadro RTX 4000 Mobile)
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -53,7 +46,7 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau <nouveau@lists.freedesktop.org>,
+Cc: nouveau@lists.freedesktop.org,
  Mika Westerberg <mika.westerberg@linux.intel.com>,
  LKML <linux-kernel@vger.kernel.org>, Linux PCI <linux-pci@vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
@@ -61,47 +54,74 @@ Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Sun, Dec 27, 2020 at 12:03 PM Marc MERLIN <marc_nouveau@merlins.org> wrote:
->
-> This started with 5.5 and hasn't gotten better since then, despite some reports
-> I tried to send.
->
-> As per my previous message:
-> I have a Thinkpad P70 with hybrid graphics.
-> 01:00.0 VGA compatible controller: NVIDIA Corporation GM107GLM [Quadro M600M] (rev a2)
-> that one works fine, I can use i915 for the main screen, and nouveau to
-> display on the external ports (external ports are only wired to nvidia
-> chip, so it's impossible to use them without turning the nvidia chip
-> on).
->
-> I now got a newer P73 also with the same hybrid graphics (setup as such
-> in the bios). It runs fine with i915, and I don't need to use external
-> display with nouveau for now (it almost works, but I only see the mouse
-> cursor on the external screen, no window or anything else can get
-> displayed, very weird).
-> 01:00.0 VGA compatible controller: NVIDIA Corporation TU104GLM [Quadro RTX 4000 Mobile / Max-Q] (rev a1)
+On Sat, Dec 26, 2020 at 03:12:09AM -0800, Ilia Mirkin wrote:
+> > after boot, when it gets the right trigger (not sure which ones), it
+> > loops on this evern 2 seconds, mostly forever.
+> 
+> The gpu suspends with runtime pm. And then gets woken up for some
+> reason (could be something quite silly, like lspci, or could be
+> something explicitly checking connectors, etc). Repeat.
 
-Display offload usually requires acceleration -- the copies are done
-using the DMA engine. Please make sure that you have firmware
-available (and a new enough mesa). The errors suggest that you don't
-have firmware available at the time that nouveau loads. Depending on
-your setup, that might mean the firmware has to be built into the
-kernel, or available in initramfs. (Or just regular filesystem if you
-don't use a complicated boot sequence. But many people go with distro
-defaults, which do have this complexity.)
+Ah, fair point.  Could it be powertop even?
+How would I go towards tracing that?
+Sounds like this would be a problem with all chips if userspace is able
+to wake them up every second or two with a probe. Now I wonder what
+broken userspace I have that could be doing this.
+ 
+> Display offload usually requires acceleration -- the copies are done
+> using the DMA engine. Please make sure that you have firmware
+> available (and a new enough mesa). The errors suggest that you don't
+> have firmware available at the time that nouveau loads. Depending on
+> your setup, that might mean the firmware has to be built into the
+> kernel, or available in initramfs. (Or just regular filesystem if you
+> don't use a complicated boot sequence. But many people go with distro
+> defaults, which do have this complexity.)
 
->
->
-> after boot, when it gets the right trigger (not sure which ones), it
-> loops on this evern 2 seconds, mostly forever.
+Hi Ilia, thanks for your answer.
 
-The gpu suspends with runtime pm. And then gets woken up for some
-reason (could be something quite silly, like lspci, or could be
-something explicitly checking connectors, etc). Repeat.
+Do you think that could be a reason why the boot would hang for 2 full minutes at every
+boot ever since I upgraded to 5.5?
 
-Cheers,
+Also, without wanting to sound like a full newbie, where is that
+firmware you're talking about? In my kernel source?
 
-  -ilia
+Here's what I do have:
+sauron:/usr/local/bin# dpkggrep nouveau
+libdrm-nouveau2:amd64				install
+xserver-xorg-video-nouveau			install
+
+no nouveau-firmware package in debian:
+sauron:/usr/local/bin# apt-cache search nouveau
+bumblebee - NVIDIA Optimus support for Linux
+libdrm-nouveau2 - Userspace interface to nouveau-specific kernel DRM services -- runtime
+xfonts-jmk - Jim Knoble's character-cell fonts for X
+xserver-xorg-video-nouveau - X.Org X server -- Nouveau display driver
+
+No firmware file on my disk:
+sauron:/usr/local/bin# find /lib/modules/5.9.11-amd64-preempt-sysrq-20190817/ /lib/firmware/ |grep nouveau
+/lib/modules/5.9.11-amd64-preempt-sysrq-20190817/kernel/drivers/gpu/drm/nouveau
+/lib/modules/5.9.11-amd64-preempt-sysrq-20190817/kernel/drivers/gpu/drm/nouveau/nouveau.ko
+sauron:/usr/local/bin# 
+
+The kernel module is in my initrd:
+sauron:/usr/local/bin# dd if=/boot/initrd.img-5.9.11-amd64-preempt-sysrq-20190817 bs=2966528  skip=1 | gunzip | cpio -tdv | grep nouveau
+drwxr-xr-x   1 root     root            0 Nov 30 15:40 usr/lib/modules/5.9.11-amd64-preempt-sysrq-20190817/kernel/drivers/gpu/drm/nouveau
+-rw-r--r--   1 root     root      3691385 Nov 30 15:35 usr/lib/modules/5.9.11-amd64-preempt-sysrq-20190817/kernel/drivers/gpu/drm/nouveau/nouveau.ko
+17+1 records in
+17+1 records out
+52566778 bytes (53 MB, 50 MiB) copied, 1.69708 s, 31.0 MB/s
+
+What am I supposed to do/check next?
+
+Note that ultimately I only need nouveau not to hang my boot 2mn and do
+PM so that the nvidia chip goes to sleep since I don't use it.
+
+Thanks,
+Marc
+-- 
+"A mouse is a device used to point at the xterm you want to type in" - A.S.R.
+ 
+Home page: http://marc.merlins.org/                       | PGP 7F55D5F27AAF9D08
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
