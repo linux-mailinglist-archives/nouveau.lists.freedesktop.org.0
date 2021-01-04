@@ -2,39 +2,35 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 83EC62E9734
-	for <lists+nouveau@lfdr.de>; Mon,  4 Jan 2021 15:26:58 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 558DD2E997E
+	for <lists+nouveau@lfdr.de>; Mon,  4 Jan 2021 17:01:58 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C95C289F6F;
-	Mon,  4 Jan 2021 14:26:56 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id BFCB089E1B;
+	Mon,  4 Jan 2021 16:01:56 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 15AC889F6F
- for <nouveau@lists.freedesktop.org>; Mon,  4 Jan 2021 14:26:56 +0000 (UTC)
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 6B7582242A;
- Mon,  4 Jan 2021 14:26:55 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6B4D489E1B
+ for <nouveau@lists.freedesktop.org>; Mon,  4 Jan 2021 16:01:56 +0000 (UTC)
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 9A9B9224D2;
+ Mon,  4 Jan 2021 16:01:55 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
- s=korg; t=1609770415;
- bh=e+cH+j0Nf2YyqZaMYeuaR+DwaQbucsM0W+vkMS/WZzE=;
- h=Subject:To:Cc:From:Date:From;
- b=JxTpelhU7bvCp5i8TdbZamdTMq+U0zC/FspSTjdISvxy/MHRcYCdfsd1kKyipYW/0
- il8KAmvhJG44WkdX3o9YUI7lYw86In0NyIhJZ6gBSywWJup7Uw6m/PJ3/G7tY3tWvr
- PyRKnx5UfhMp7NrT8oU44jOjCJ+y9ndOTLmbV4vk=
-To: b.zolnierkie@samsung.com, bskeggs@redhat.com, daniel.vetter@ffwll.ch,
- daniel.vetter@intel.com, george.kennedy@oracle.com, gregkh@linuxfoundation.org,
- gustavoars@kernel.org, jirislaby@kernel.org, natechancellor@gmail.com,
- nouveau@lists.freedesktop.org, peda@axentia.se,
- penguin-kernel@I-love.SAKURA.ne.jp, sam@ravnborg.org, tomi.valkeinen@ti.com,
- torvalds@linux-foundation.org, tzimmermann@suse.de, yepeilin.cs@gmail.com
-From: <gregkh@linuxfoundation.org>
-Date: Mon, 04 Jan 2021 15:28:01 +0100
-Message-ID: <1609770481573@kroah.com>
+ s=korg; t=1609776116;
+ bh=kbXVDURpVO4n7IDAFIoO6qDrcqygc9gNZYFaaVWklug=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=lFtL3uPmD4C3SQbnOdYUnfyX0j9Uj1mCQG2kUVx52i1fLst7NvanZ6bTaYaP5s6lI
+ Y72UB7CFt3DQVf+ZsDe5tWeqZaM349hJoahlxd70rax7HC9yIZdx6lIz+2Rg3MuXkH
+ 84vwWmI4FdIK9feDlx/C38m2dyrRdbgbGnyzIEHc=
+From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+To: linux-kernel@vger.kernel.org
+Date: Mon,  4 Jan 2021 16:57:21 +0100
+Message-Id: <20210104155710.187945647@linuxfoundation.org>
+X-Mailer: git-send-email 2.30.0
+In-Reply-To: <20210104155708.800470590@linuxfoundation.org>
+References: <20210104155708.800470590@linuxfoundation.org>
+User-Agent: quilt/0.66
 MIME-Version: 1.0
-X-stable: commit
-X-Patchwork-Hint: ignore 
-Subject: [Nouveau] Patch "fbcon: Disable accelerated scrolling" has been
- added to the 5.10-stable tree
+Subject: [Nouveau] [PATCH 5.10 28/63] fbcon: Disable accelerated scrolling
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -46,32 +42,20 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: stable-commits@vger.kernel.org
+Cc: George Kennedy <george.kennedy@oracle.com>, Sam Ravnborg <sam@ravnborg.org>,
+ Bartlomiej Zolnierkiewicz <b.zolnierkie@samsung.com>,
+ Tetsuo Handa <penguin-kernel@I-love.SAKURA.ne.jp>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ "Gustavo A. R. Silva" <gustavoars@kernel.org>, stable@vger.kernel.org,
+ Peter Rosin <peda@axentia.se>, Linus Torvalds <torvalds@linux-foundation.org>,
+ Tomi Valkeinen <tomi.valkeinen@ti.com>, Ben Skeggs <bskeggs@redhat.com>,
+ nouveau@lists.freedesktop.org, Daniel Vetter <daniel.vetter@intel.com>,
+ Nathan Chancellor <natechancellor@gmail.com>,
+ Jiri Slaby <jirislaby@kernel.org>, Peilin Ye <yepeilin.cs@gmail.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
-
-
-This is a note to let you know that I've just added the patch titled
-
-    fbcon: Disable accelerated scrolling
-
-to the 5.10-stable tree which can be found at:
-    http://www.kernel.org/git/?p=linux/kernel/git/stable/stable-queue.git;a=summary
-
-The filename of the patch is:
-     fbcon-disable-accelerated-scrolling.patch
-and it can be found in the queue-5.10 subdirectory.
-
-If you, or anyone else, feels it should not be added to the stable tree,
-please let <stable@vger.kernel.org> know about it.
-
-
-From 39aead8373b3c20bb5965c024dfb51a94e526151 Mon Sep 17 00:00:00 2001
-From: Daniel Vetter <daniel.vetter@ffwll.ch>
-Date: Thu, 29 Oct 2020 14:22:29 +0100
-Subject: fbcon: Disable accelerated scrolling
 
 From: Daniel Vetter <daniel.vetter@ffwll.ch>
 
@@ -258,9 +242,6 @@ Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
  #define PITCH(w) (((w) + 7) >> 3)
 
 
-Patches currently in stable-queue which might be from daniel.vetter@ffwll.ch are
-
-queue-5.10/fbcon-disable-accelerated-scrolling.patch
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
