@@ -1,39 +1,32 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 33CCA2E9F46
-	for <lists+nouveau@lfdr.de>; Mon,  4 Jan 2021 22:04:27 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 815242EB1F3
+	for <lists+nouveau@lfdr.de>; Tue,  5 Jan 2021 19:05:26 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9A57E6E055;
-	Mon,  4 Jan 2021 21:04:24 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5BEC06E060;
+	Tue,  5 Jan 2021 18:05:24 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from audible.transient.net (audible.transient.net [24.143.126.66])
- by gabe.freedesktop.org (Postfix) with SMTP id 29C216E039
- for <nouveau@lists.freedesktop.org>; Mon,  4 Jan 2021 17:43:47 +0000 (UTC)
-Received: (qmail 13789 invoked from network); 4 Jan 2021 17:43:46 -0000
-Received: from cucamonga.audible.transient.net (192.168.2.5)
- by canarsie.audible.transient.net with QMQP; 4 Jan 2021 17:43:46 -0000
-Received: (nullmailer pid 6695 invoked by uid 1000);
- Mon, 04 Jan 2021 17:43:46 -0000
-Date: Mon, 4 Jan 2021 17:43:46 +0000
-From: Jamie Heilman <jamie@audible.transient.net>
-To: Karol Herbst <kherbst@redhat.com>, Ben Skeggs <bskeggs@redhat.com>,
- LKML <linux-kernel@vger.kernel.org>, nouveau <nouveau@lists.freedesktop.org>
-Message-ID: <X/NT0iN9KlSXQJJ7@audible.transient.net>
-Mail-Followup-To: Karol Herbst <kherbst@redhat.com>,
- Ben Skeggs <bskeggs@redhat.com>,
- LKML <linux-kernel@vger.kernel.org>,
- nouveau <nouveau@lists.freedesktop.org>
-References: <X+WV8OiQzTIfLdgW@audible.transient.net>
- <CACO55tt9GbwBU6igAJ_8RjwzSZcDbu+_1wGWKiye3TosgoiHyw@mail.gmail.com>
- <X/NO9kAlCd/k8Di2@audible.transient.net>
+X-Greylist: delayed 399 seconds by postgrey-1.36 at gabe;
+ Tue, 05 Jan 2021 18:05:23 UTC
+Received: from snoopy.schmut.com (snoopy.schmut.com [185.37.248.246])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 879596E060
+ for <nouveau@lists.freedesktop.org>; Tue,  5 Jan 2021 18:05:23 +0000 (UTC)
+Received: (qmail 27942 invoked by uid 0); 5 Jan 2021 17:58:41 -0000
+Received: from unknown (HELO ?192.168.23.3?) (192.168.23.3)
+ by 192.168.7.2 with ESMTPS (TLS_AES_128_GCM_SHA256 encrypted);
+ 5 Jan 2021 17:58:41 -0000
+To: nouveau@lists.freedesktop.org
+From: Mario Theodoridis <mario@schmut.com>
+Message-ID: <0b0a39ee-a758-b127-16df-4588a6435e49@schmut.com>
+Date: Tue, 5 Jan 2021 18:58:41 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:4.7) Goanna/20201222
+ Interlink/52.9.7661
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <X/NO9kAlCd/k8Di2@audible.transient.net>
-X-Mailman-Approved-At: Mon, 04 Jan 2021 21:04:22 +0000
-Subject: Re: [Nouveau] nouveau regression post v5.8, still present in v5.10
+Content-Language: en-US
+Subject: [Nouveau] InstallNouveau question
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -45,178 +38,57 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Jamie Heilman wrote:
-> Karol Herbst wrote:
-> > do you think you'd be able to do a kernel bisect in order to pinpoint
-> > the actual commit causing it? Thanks
-> 
-> No.  I can't reproduce it reliably.  I if I could, bisection wouldn't
-> be a problem but as I can't and as it can take weeks for the problem
-> to occur there's essentially no chance.  I know it regressed roughly
-> in 5.8-rc1 only because that's what I was running when the first event
-> occured.
-
-er, 5.9.0-rc1 rather
-
-> > On Sun, Dec 27, 2020 at 8:16 PM Jamie Heilman
-> > <jamie@audible.transient.net> wrote:
-> > >
-> > > Something between v5.8 and v5.9 has resulted in periodically losing video.
-> > > Unfortunately, I can't reliably reproduce it, it seems to happen every
-> > > once in a long while---I can go weeks without an occurance, but it
-> > > always seems to happen after my workstation has been idle long enough
-> > > to screen blank and put the monitor to sleep.  I'm using a single
-> > > display (Dell 2405FPW) connected via DVI, running X (Xorg 1.20.x from
-> > > Debian sid).  I don't really do anything fancy, xterms, a browser or
-> > > two, play the occasional video, but like I said, I can't reliably
-> > > reproduce this.  I've had it happen about 11 times since August.
-> > >
-> > > lspci -vv output is:
-> > >
-> > > 01:00.0 VGA compatible controller: NVIDIA Corporation G86 [Quadro NVS 290] (rev a1) (prog-if 00 [VGA controller])
-> > >         Subsystem: NVIDIA Corporation G86 [Quadro NVS 290]
-> > >         Control: I/O+ Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr- Stepping- SERR- FastB2B- DisINTx+
-> > >         Status: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-
-> > >         Latency: 0, Cache Line Size: 64 bytes
-> > >         Interrupt: pin A routed to IRQ 28
-> > >         Region 0: Memory at fc000000 (32-bit, non-prefetchable) [size=16M]
-> > >         Region 1: Memory at d0000000 (64-bit, prefetchable) [size=256M]
-> > >         Region 3: Memory at fa000000 (64-bit, non-prefetchable) [size=32M]
-> > >         Region 5: I/O ports at dc80 [size=128]
-> > >         Expansion ROM at 000c0000 [disabled] [size=128K]
-> > >         Capabilities: [60] Power Management version 2
-> > >                 Flags: PMEClk- DSI- D1- D2- AuxCurrent=0mA PME(D0-,D1-,D2-,D3hot-,D3cold-)
-> > >                 Status: D0 NoSoftRst- PME-Enable- DSel=0 DScale=0 PME-
-> > >         Capabilities: [68] MSI: Enable+ Count=1/1 Maskable- 64bit+
-> > >                 Address: 00000000fee01004  Data: 4023
-> > >         Capabilities: [78] Express (v1) Endpoint, MSI 00
-> > >                 DevCap: MaxPayload 128 bytes, PhantFunc 0, Latency L0s <512ns, L1 <4us
-> > >                         ExtTag+ AttnBtn- AttnInd- PwrInd- RBE+ FLReset- SlotPowerLimit 25.000W
-> > >                 DevCtl: CorrErr- NonFatalErr+ FatalErr+ UnsupReq-
-> > >                         RlxdOrd+ ExtTag+ PhantFunc- AuxPwr- NoSnoop+
-> > >                         MaxPayload 128 bytes, MaxReadReq 512 bytes
-> > >                 DevSta: CorrErr- NonFatalErr- FatalErr- UnsupReq- AuxPwr- TransPend-
-> > >                 LnkCap: Port #0, Speed 2.5GT/s, Width x16, ASPM L0s L1, Exit Latency L0s <512ns, L1 <4us
-> > >                         ClockPM- Surprise- LLActRep- BwNot- ASPMOptComp-
-> > >                 LnkCtl: ASPM Disabled; RCB 64 bytes, Disabled- CommClk+
-> > >                         ExtSynch- ClockPM- AutWidDis- BWInt- AutBWInt-
-> > >                 LnkSta: Speed 2.5GT/s (ok), Width x16 (ok)
-> > >                         TrErr- Train- SlotClk+ DLActive- BWMgmt- ABWMgmt-
-> > >         Capabilities: [100 v1] Virtual Channel
-> > >                 Caps:   LPEVC=0 RefClk=100ns PATEntryBits=1
-> > >                 Arb:    Fixed- WRR32- WRR64- WRR128-
-> > >                 Ctrl:   ArbSelect=Fixed
-> > >                 Status: InProgress-
-> > >                 VC0:    Caps:   PATOffset=00 MaxTimeSlots=1 RejSnoopTrans-
-> > >                         Arb:    Fixed- WRR32- WRR64- WRR128- TWRR128- WRR256-
-> > >                         Ctrl:   Enable+ ID=0 ArbSelect=Fixed TC/VC=01
-> > >                         Status: NegoPending- InProgress-
-> > >         Capabilities: [128 v1] Power Budgeting <?>
-> > >         Capabilities: [600 v1] Vendor Specific Information: ID=0001 Rev=1 Len=024 <?>
-> > >         Kernel driver in use: nouveau
-> > >
-> > > The last time this happened, this is what got logged:
-> > >
-> > > nouveau 0000:01:00.0: disp: ERROR 5 [INVALID_STATE] 06 [] chid 1 mthd 0080 data 00000001
-> > > nouveau 0000:01:00.0: disp: Base 1:
-> > > nouveau 0000:01:00.0: disp:        0084: 00000000
-> > > nouveau 0000:01:00.0: disp:        0088: 00000000
-> > > nouveau 0000:01:00.0: disp:        008c: 00000000
-> > > nouveau 0000:01:00.0: disp:        0090: 00000000
-> > > nouveau 0000:01:00.0: disp:        0094: 00000000
-> > > nouveau 0000:01:00.0: disp:        00a0: 00000060 -> 00000070
-> > > nouveau 0000:01:00.0: disp:        00a4: 00000000 -> f0000000
-> > > nouveau 0000:01:00.0: disp:        00c0: 00000000
-> > > nouveau 0000:01:00.0: disp:        00c4: 00000000
-> > > nouveau 0000:01:00.0: disp:        00c8: 00000000
-> > > nouveau 0000:01:00.0: disp:        00cc: 00000000
-> > > nouveau 0000:01:00.0: disp:        00e0: 40000000
-> > > nouveau 0000:01:00.0: disp:        00e4: 00000000
-> > > nouveau 0000:01:00.0: disp:        00e8: 00000000
-> > > nouveau 0000:01:00.0: disp:        00ec: 00000000
-> > > nouveau 0000:01:00.0: disp:        00fc: 00000000
-> > > nouveau 0000:01:00.0: disp:        0100: fffe0000
-> > > nouveau 0000:01:00.0: disp:        0104: 00000000
-> > > nouveau 0000:01:00.0: disp:        0110: 00000000
-> > > nouveau 0000:01:00.0: disp:        0114: 00000000
-> > > nouveau 0000:01:00.0: disp: Base 1 - Image 0:
-> > > nouveau 0000:01:00.0: disp:        0800: 00009500
-> > > nouveau 0000:01:00.0: disp:        0804: 00000000
-> > > nouveau 0000:01:00.0: disp:        0808: 04b00780
-> > > nouveau 0000:01:00.0: disp:        080c: 00007804
-> > > nouveau 0000:01:00.0: disp:        0810: 0000cf00
-> > > nouveau 0000:01:00.0: disp: Base 1 - Image 1:
-> > > nouveau 0000:01:00.0: disp:        0c00: 00009500
-> > > nouveau 0000:01:00.0: disp:        0c04: 00000000
-> > > nouveau 0000:01:00.0: disp:        0c08: 04b00780
-> > > nouveau 0000:01:00.0: disp:        0c0c: 00007804
-> > > nouveau 0000:01:00.0: disp:        0c10: 0000cf00
-> > > nouveau 0000:01:00.0: disp: ERROR 5 [INVALID_STATE] 06 [] chid 1 mthd 0080 data 00000001
-> > > nouveau 0000:01:00.0: disp: Base 1:
-> > > nouveau 0000:01:00.0: disp:        0084: 00000000
-> > > nouveau 0000:01:00.0: disp:        0088: 00000000
-> > > nouveau 0000:01:00.0: disp:        008c: 00000000
-> > > nouveau 0000:01:00.0: disp:        0090: 00000000
-> > > nouveau 0000:01:00.0: disp:        0094: 00000000
-> > > nouveau 0000:01:00.0: disp:        00a0: 00000060 -> 00000070
-> > > nouveau 0000:01:00.0: disp:        00a4: 00000000 -> f0000000
-> > > nouveau 0000:01:00.0: disp:        00c0: 00000000
-> > > nouveau 0000:01:00.0: disp:        00c4: 00000000
-> > > nouveau 0000:01:00.0: disp:        00c8: 00000000
-> > > nouveau 0000:01:00.0: disp:        00cc: 00000000
-> > > nouveau 0000:01:00.0: disp:        00e0: 40000000
-> > > nouveau 0000:01:00.0: disp:        00e4: 00000000
-> > > nouveau 0000:01:00.0: disp:        00e8: 00000000
-> > > nouveau 0000:01:00.0: disp:        00ec: 00000000
-> > > nouveau 0000:01:00.0: disp:        00fc: 00000000
-> > > nouveau 0000:01:00.0: disp:        0100: fffe0000
-> > > nouveau 0000:01:00.0: disp:        0104: 00000000
-> > > nouveau 0000:01:00.0: disp:        0110: 00000000
-> > > nouveau 0000:01:00.0: disp:        0114: 00000000
-> > > nouveau 0000:01:00.0: disp: Base 1 - Image 0:
-> > > nouveau 0000:01:00.0: disp:        0800: 00009500
-> > > nouveau 0000:01:00.0: disp:        0804: 00000000
-> > > nouveau 0000:01:00.0: disp:        0808: 04b00780
-> > > nouveau 0000:01:00.0: disp:        080c: 00007804
-> > > nouveau 0000:01:00.0: disp:        0810: 0000cf00
-> > > nouveau 0000:01:00.0: disp: Base 1 - Image 1:
-> > > nouveau 0000:01:00.0: disp:        0c00: 00009500
-> > > nouveau 0000:01:00.0: disp:        0c04: 00000000
-> > > nouveau 0000:01:00.0: disp:        0c08: 04b00780
-> > > nouveau 0000:01:00.0: disp:        0c0c: 00007804
-> > > nouveau 0000:01:00.0: disp:        0c10: 0000cf00
-> > > nouveau 0000:01:00.0: DRM: core notifier timeout
-> > > nouveau 0000:01:00.0: DRM: base-0: timeout
-> > >
-> > > I've got logs of all of this, if they help I can collect them.  The
-> > > timeout message are consistent the error messages a little less so.
-> > >
-> > > If there's more debugging I can do when this happens, I'd love to know
-> > > what it is.
-> > >
-> > > kernel config: http://audible.transient.net/~jamie/k/nouveau.config-5.10.0
-> > > dmesg at boot: http://audible.transient.net/~jamie/k/nouveau.dmesg
-> > >
-> > > --
-> > > Jamie Heilman                     http://audible.transient.net/~jamie/
-> > > _______________________________________________
-> > > Nouveau mailing list
-> > > Nouveau@lists.freedesktop.org
-> > > https://lists.freedesktop.org/mailman/listinfo/nouveau
-> > >
-> > 
-> 
-> -- 
-> Jamie Heilman                     http://audible.transient.net/~jamie/
-
--- 
-Jamie Heilman                     http://audible.transient.net/~jamie/
-_______________________________________________
-Nouveau mailing list
-Nouveau@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/nouveau
+SGVsbG8gZXZlcnlvbmUsCgppIGhhdmUgcG9zdGVkIGFuIGlzc3VlIHRoYXQncyBiZWVuIHBsYWd1
+aW5nIG1lIG9uIGdpdGxhYgpodHRwczovL2dpdGxhYi5mcmVlZGVza3RvcC5vcmcvZHJtL25vdXZl
+YXUvLS9pc3N1ZXMvMzUKCkFzIGkgZGVzY3JpYmVkIHRoZXJlLCBpIGJ1aWx0IHRoZSB1c2VybGFu
+ZCBwYXJ0cyBhcyBkZXNjcmliZWQgaW4KaHR0cHM6Ly9ub3V2ZWF1LmZyZWVkZXNrdG9wLm9yZy9J
+bnN0YWxsTm91dmVhdS5odG1sCgpUaGVyZSBpIGNhbWUgdXAgd2l0aCB0aGUgZm9sbG93aW5nIG1l
+c29uIHRyYW5zbGF0aW9uIGZvciB0aGUgbWVzYSBidWlsZAoKICAgLi9hdXRvZ2VuLnNoICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgIFwKICAgICAgIC0tcHJlZml4PSROVkQgICAgICAgICAgICAg
+ICAgICAgICAgIFwKICAgICAgIC0tZW5hYmxlLXRleHR1cmUtZmxvYXQgICAgICAgICAgICAgIFwK
+ICAgICAgIC0tZW5hYmxlLWdsZXMxICAgICAgICAgICAgICAgICAgICAgIFwKICAgICAgIC0tZW5h
+YmxlLWdsZXMyICAgICAgICAgICAgICAgICAgICAgIFwKICAgICAgIC0tZW5hYmxlLWdseCAgICAg
+ICAgICAgICAgICAgICAgICAgIFwKICAgICAgIC0tZW5hYmxlLWVnbCAgICAgICAgICAgICAgICAg
+ICAgICAgIFwKICAgICAgIC0tZW5hYmxlLWdhbGxpdW0tZWdsICAgICAgICAgICAgICAgIFwKICAg
+ICAgIC0tZW5hYmxlLWdhbGxpdW0tbGx2bSAgICAgICAgICAgICAgIFwKICAgICAgIC0tZW5hYmxl
+LXNoYXJlZC1nbGFwaSAgICAgICAgICAgICAgIFwKICAgICAgIC0tZW5hYmxlLWdibSAgICAgICAg
+ICAgICAgICAgICAgICAgIFwKICAgICAgIC0tZW5hYmxlLWdseC10bHMgICAgICAgICAgICAgICAg
+ICAgIFwKICAgICAgIC0tZW5hYmxlLWRyaSAgICAgICAgICAgICAgICAgICAgICAgIFwKICAgICAg
+IC0tZW5hYmxlLW9zbWVzYSAgICAgICAgICAgICAgICAgICAgIFwKICAgICAgIC0td2l0aC1lZ2wt
+cGxhdGZvcm1zPXgxMSxkcm0gICAgICAgIFwKICAgICAgIC0td2l0aC1nYWxsaXVtLWRyaXZlcnM9
+bm91dmVhdSAgICAgIFwKICAgICAgIC0td2l0aC1kcmktZHJpdmVycz1ub3V2ZWF1ICAgICAgICAg
+IFwKICAgICAgIC0tZW5hYmxlLXZkcGF1CgpiZWNhbWUKCiAgbWVzb24gb3V0LyAtRHByZWZpeD0k
+TlZEIFwKICAgICAtRGdsZXMxPXRydWUgXAogICAgIC1EZ2xlczI9dHJ1ZSBcCiAgICAgLURnbHg9
+YXV0byBcCiAgICAgLURlZ2w9dHJ1ZSBcCiAgICAgLURzaGFyZWQtZ2xhcGk9dHJ1ZSBcCiAgICAg
+LURnYm09dHJ1ZSBcCiAgICAgLURvc21lc2E9dHJ1ZSBcCiAgICAgLURwbGF0Zm9ybXM9eDExIFwK
+ICAgICAtRGdhbGxpdW0tZHJpdmVycz1ub3V2ZWF1LHN3cmFzdCBcCiAgICAgLURkcmktZHJpdmVy
+cz1ub3V2ZWF1CgpTaW5jZSBpJ20gdG90YWxseSBuZXcgdG8gdGhpcywgYnV0IG5vdCBDIHByb2dy
+YW1taW5nLCBpJ20gd29uZGVyaW5nIAp3aGV0aGVyIHRoaXMgd2FzIGEgcmVhc29uYWJsZSB0cmFu
+c2xhdGlvbi4KQWxzbywgY291bGQgdGhlIHBhZ2UgYmUgdXBkYXRlZCB3aXRoIHRoZSBtZXNvbiBp
+bnN0cnVjdGlvbnM/CkkgY2FtZSB1cCB3aXRoIHRoZSBmb2xsb3dpbmcgcnVubmluZyB1YnVudHUt
+MTguMDQ6CgpidWlsZCBkZXBlbmRlbmNpZXMKICBzdWRvIGFwdC1nZXQgYnVpbGQtZGVwIG1lc2EK
+ICBzdWRvIGFwdC1nZXQgaW5zdGFsbCB4dXRpbHMtZGV2IHhzZXJ2ZXIteG9yZy1kZXYgbmluamEt
+YnVpbGQgXAogICBsaWJ4Y2Itc2htMC1kZXYKCm1lc2EgcmVxdWlyZXMgbWVzb24gPj0wLjUyIGJ1
+dCBiaW9uaWMgc2hpcHMgd2l0aCAwLjQ5IHNvIGlmIHlvdSBoYWQgaXQgCmluc3RhbGxlZCwgcmVt
+b3ZlIGl0IHRoZW4gaW5zdGFsbCB2aWEgcGlwMy4KCiAgc3VkbyBhcHQtZ2V0IHJlbW92ZSBtZXNv
+bgogIHN1ZG8gcGlwMyBpbnN0YWxsIG1lc29uCgpsaWJkcm0KICBnaXQgY2xvbmUgZ2l0Oi8vYW5v
+bmdpdC5mcmVlZGVza3RvcC5vcmcvbWVzYS9kcm0KICBjZCBkcm0KICBtZXNvbiBvdXQvIC1EcHJl
+Zml4PSROVkQKICBuaW5qYSAtQyBvdXQvIGluc3RhbGwKCm5vdXZlYXUgKGxlZnQgYXMgaXMpCgpN
+ZXNhCiAgZ2l0IGNsb25lIGdpdDovL2Fub25naXQuZnJlZWRlc2t0b3Aub3JnL21lc2EvbWVzYQog
+IGNkIG1lc2EKICBtZXNvbiBvdXQvIC1EcHJlZml4PSROVkQgXAogICAgIC1EZ2xlczE9dHJ1ZSBc
+CiAgICAgLURnbGVzMj10cnVlIFwKICAgICAtRGdseD1hdXRvIFwKICAgICAtRGVnbD10cnVlIFwK
+ICAgICAtRHNoYXJlZC1nbGFwaT10cnVlIFwKICAgICAtRGdibT10cnVlIFwKICAgICAtRG9zbWVz
+YT10cnVlIFwKICAgICAtRHBsYXRmb3Jtcz14MTEgXAogICAgIC1EZ2FsbGl1bS1kcml2ZXJzPW5v
+dXZlYXUsc3dyYXN0IFwKICAgICAtRGRyaS1kcml2ZXJzPW5vdXZlYXUKICBuaW5qYSAtQyBvdXQv
+IGluc3RhbGwKClZEUEFVCiAgZ2l0IGNsb25lIGdpdDovL2Fub25naXQuZnJlZWRlc2t0b3Aub3Jn
+L3ZkcGF1L2xpYnZkcGF1CiAgY2QgbGlidmRwYXUKICBtZXNvbiBvdXQvIC1EcHJlZml4PSROVkQK
+ICBuaW5qYSAtQyBvdXQvIGluc3RhbGwKCgotLSAKTWl0IGZyZXVuZGxpY2hlbiBHcsO8w59lbi9C
+ZXN0IHJlZ2FyZHMKCk1hcmlvIFRoZW9kb3JpZGlzCl9fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fCk5vdXZlYXUgbWFpbGluZyBsaXN0Ck5vdXZlYXVAbGlzdHMu
+ZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlz
+dGluZm8vbm91dmVhdQo=
