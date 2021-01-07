@@ -2,74 +2,44 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5B75F2EE833
-	for <lists+nouveau@lfdr.de>; Thu,  7 Jan 2021 23:15:58 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 502922EE9FA
+	for <lists+nouveau@lfdr.de>; Fri,  8 Jan 2021 00:52:19 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id DF7CB6E550;
-	Thu,  7 Jan 2021 22:15:56 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D04596E5A0;
+	Thu,  7 Jan 2021 23:52:17 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [63.128.21.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 42F166E550
- for <nouveau@lists.freedesktop.org>; Thu,  7 Jan 2021 22:15:55 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1610057753;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=vWNfEeqG/EeDeQjc7L584sTXc4dZpE8YBDmViLTbxac=;
- b=Nyrnw56J/LZFANN4opp8o7LHrIJOYfalC0Auf+qh6nh9XyGR6tDFXxPqH1oyYQX+0pGAWA
- NLi71ktstkm3oMg+zSrTRq3r4Ous+pMD/RAyEkqDs8u5fA/qivKhp3yMOZlFaJrMUVSEWw
- C0YZ0HosEI/zxSw/o+4brNYCg19avRc=
-Received: from mail-io1-f69.google.com (mail-io1-f69.google.com
- [209.85.166.69]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-246-BfkDPJwfO46foMiZ0Jylqg-1; Thu, 07 Jan 2021 17:15:49 -0500
-X-MC-Unique: BfkDPJwfO46foMiZ0Jylqg-1
-Received: by mail-io1-f69.google.com with SMTP id h206so6162936iof.18
- for <nouveau@lists.freedesktop.org>; Thu, 07 Jan 2021 14:15:49 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:message-id:subject:from:to:date:in-reply-to
- :references:organization:user-agent:mime-version
- :content-transfer-encoding;
- bh=vWNfEeqG/EeDeQjc7L584sTXc4dZpE8YBDmViLTbxac=;
- b=o7eunhwOPO/tY8lIiSgoSoFtKnMVmHaXxSVZEbOQmGCYbraP9Enh1PnfQwON3hyzBO
- k1/caBW7CEmXaQ4QpouX6X2C1bWuXQQrVZf7fbQv+Av1yORfA3sWITRm1PEdDHTTkrz6
- v/d9WdePMc427tknugWM4FxbFiBY7iVV0bnKv/vFdWLhs1fqAMwi9+VnsBRomNYWhyba
- maIycqHaxwXJ+neKNDH3YANdE4PhH5dm4QjJvjlkjVws710B3+gd3VYE4Q7MshbV6wSY
- WCGmcWUFWB/gQ5ok1GzASbfJ+Rgp5Z+39YJDwLK4aiPTyjYFPerfqQLSGYve5oqxwfWs
- 5HJA==
-X-Gm-Message-State: AOAM532FWBEJjjQnxnyqKdIoWeGOsCxW91WcsQeHxxvwLgNr52/iSm+0
- lCZ4lHFI0iDZ1vXpzFQG41g/JCjIhSI2DOO4aZApLnlhG6WUvgCmRlSIyunm2sh/aISQ3jgxEUS
- GlnwLiz1xLachryRqFEri+Kw2yg==
-X-Received: by 2002:a05:6e02:68b:: with SMTP id
- o11mr951404ils.237.1610057748906; 
- Thu, 07 Jan 2021 14:15:48 -0800 (PST)
-X-Google-Smtp-Source: ABdhPJyke5LZ6uOpIicElgL90JtneNQYiyRZE5irWyVpld9EVvtSJDxbrigLm9OgTEY/QAzQ2jnblg==
-X-Received: by 2002:a05:6e02:68b:: with SMTP id
- o11mr951387ils.237.1610057748721; 
- Thu, 07 Jan 2021 14:15:48 -0800 (PST)
-Received: from Ruby.lyude.net (pool-108-49-102-102.bstnma.fios.verizon.net.
- [108.49.102.102])
- by smtp.gmail.com with ESMTPSA id y5sm5374442ilh.24.2021.01.07.14.15.47
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 07 Jan 2021 14:15:48 -0800 (PST)
-Message-ID: <2a6ac3055410b13f4af69c1ccc74ab60be844c31.camel@redhat.com>
-From: Lyude Paul <lyude@redhat.com>
-To: Arsene Wald <arswald@gmail.com>, nouveau@lists.freedesktop.org
-Date: Thu, 07 Jan 2021 17:15:47 -0500
-In-Reply-To: <ec0fa756-c234-a311-11b8-b80403aa477d@gmail.com>
-References: <ec0fa756-c234-a311-11b8-b80403aa477d@gmail.com>
-Organization: Red Hat
-User-Agent: Evolution 3.38.2 (3.38.2-1.fc33)
+Received: from mail1.merlins.org (magic.merlins.org [209.81.13.136])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 34BF06E5A0
+ for <nouveau@lists.freedesktop.org>; Thu,  7 Jan 2021 23:52:17 +0000 (UTC)
+Received: from c-24-5-124-255.hsd1.ca.comcast.net ([24.5.124.255]:45860
+ helo=sauron.svh.merlins.org) by mail1.merlins.org with esmtpsa 
+ (Cipher TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92 #3)
+ id 1kxf4g-00084L-6l by authid <merlins.org> with srv_auth_plain;
+ Thu, 07 Jan 2021 15:52:14 -0800
+Received: from merlin by sauron.svh.merlins.org with local (Exim 4.92)
+ (envelope-from <marc_nouveau@merlins.org>)
+ id 1kxTnD-0000Zl-R3; Thu, 07 Jan 2021 03:49:27 -0800
+Date: Thu, 7 Jan 2021 03:49:27 -0800
+From: Marc MERLIN <marc_nouveau@merlins.org>
+To: Karol Herbst <kherbst@redhat.com>
+Message-ID: <20210107114927.GS32533@merlins.org>
+References: <20200908002935.GD20064@merlins.org>
+ <20200529180315.GA18804@merlins.org>
+ <20201229155159.GG23389@merlins.org>
+ <CAKb7UviFP_YVxC4PO7MDNnw6NDrD=3BCGF37umwAfaimjbX9Pw@mail.gmail.com>
+ <20201229174750.GI23389@merlins.org>
+ <20210104114955.GM32533@merlins.org>
+ <CACO55tsdG37YKv7FV2er4hRnXk9vmwMbPuPptA+=ZtziWXC2+g@mail.gmail.com>
 MIME-Version: 1.0
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=lyude@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Subject: Re: [Nouveau] frequent frozen desktops since upgrade to kernel 5.9
+Content-Disposition: inline
+In-Reply-To: <CACO55tsdG37YKv7FV2er4hRnXk9vmwMbPuPptA+=ZtziWXC2+g@mail.gmail.com>
+X-Sysadmin: BOFH
+X-URL: http://marc.merlins.org/
+X-SA-Exim-Connect-IP: 24.5.124.255
+X-SA-Exim-Mail-From: marc_nouveau@merlins.org
+Subject: Re: [Nouveau] 5.9.11 still hanging 2mn at each boot and looping on
+ nvidia-gpu 0000:01:00.3: PME# enabled (Quadro RTX 4000 Mobile)
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -81,104 +51,38 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: nouveau <nouveau@lists.freedesktop.org>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-T24gVGh1LCAyMDIxLTAxLTA3IGF0IDIyOjA0ICswMTAwLCBBcnNlbmUgV2FsZCB3cm90ZToKPiBJ
-J3ZlIGJlZW4gdXNpbmcgbXkgOSB5ZWFyIG9sZCBtYWNoaW5lIHdpdGhvdXQgaXNzdWVzIHVwIHRv
-IEZlZG9yYSAzMiAKPiB3aXRoIGtlcm5lbCA1LjguIFNvbWUgd2Vla3MgYWdvIEkgdXBncmFkZWQg
-dG8ga2VybmVsIDUuOS4gQWZ0ZXIgd29ya2luZyAKPiBmb3IgYSByYW5kb20gZHVyYXRpb24sIG15
-IERpc3BsYXkgYmVjb21lcyBtb3N0bHkgZnJvemVuLCBzaG93aW5nIAo+IG5vdGljZWFibGUgZmxp
-Y2tlcmluZyBhbmQgdGhlIG1vdXNlIHJlYWN0cyBleHRyZW1lbHkgc2xvd2x5IGlmIGF0IGFsbC4K
-PiBDdHJsK0FsdCt0IHN0aWxsIG9wZW5zIGEgdGVybWluYWwgYnV0IHR5cGluZyBpcyBhIHBhaW4u
-Cj4gc3NoIGZyb20gYSBkaWZmZXJlbnQgY29tcHV0ZXIgaXMgcG9zc2libGUgd2l0aCBhY2NlcHRh
-YmxlIHJlYWN0aW9uIHRpbWVzLgo+IEN0cmwrQWx0K0RlbCBsb2dzIG91dCBzZXNzaW9uLiBBIHJl
-TG9naW4gaXMgcG9zc2libGUgd2l0aCBub3JtYWwgCj4gcmVhY3Rpb24gdGltZXMsIGJ1dCBhZ2Fp
-biwgb25seSBmb3IgYW4gdW5mb3Jlc2VlYWJsZSB0aW1lIQo+IEkgdXBncmFkZWQgdG8gRjMzLCBi
-dXQgdGhlIGlzc3VlIHBlcnNpc3RlZC4gVGhlbiBJIGRpZCBhIGZyZXNoIEYzMyAKPiBpbnN0YWxs
-LCBmcm9tIHNjcmF0Y2guIFVuZm9ydHVuYXRlbHkgdGhlIHVucHJlZGljdGFibGUgZnJlZXplcyBv
-Y2N1ciBhZ2Fpbi4KPiAKPiBEdXJpbmcgYW4gdW5yZXNwb25zaXZlIHBlcmlvZCwKPiAtICJ0b3Ai
-IGNvbW1hbmQgc2hvd3MgcHJvY2VzcyAia3dvcmtlci91MzI6Mi1ldmVudHNfdW5ib3VuZCIgaGFz
-IGhpZ2ggCj4gQ1BVIHVzYWdlLgo+IC0gImVjaG8gbCA+IC9wcm9jL3N5c3JxLXRyaWdnZXIiIGZv
-bGxvd2VkIGJ5ICJkbWVzZyIgc2hvd3MgdGhlIAo+IGZvbGxvd2luZywgd2hpY2ggaGludHMgbWUg
-dG8gdGhlIG5vdXZlYXUgbW9kdWxlOgo+IAo+IFvCoCA4OTAuMjYxMTA4XSBub3V2ZWF1IDAwMDA6
-MDE6MDAuMDogRFJNOiBiYXNlLTA6IHRpbWVvdXQKPiBbwqAgODkyLjI2MTMzNV0gLS0tLS0tLS0t
-LS0tWyBjdXQgaGVyZSBdLS0tLS0tLS0tLS0tCj4gW8KgIDg5Mi4yNjEzOTJdIFdBUk5JTkc6IENQ
-VTogMSBQSUQ6IDEzMyBhdCAKPiBkcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9kaXNwbnY1MC9kaXNw
-LmM6MjExIG52NTBfZG1hY193YWl0KzB4MWJkLzB4MjEwIAo+IFtub3V2ZWF1XQo+IFvCoCA4OTIu
-MjYxMzkzXSBNb2R1bGVzIGxpbmtlZCBpbjogeHRfQ0hFQ0tTVU0geHRfTUFTUVVFUkFERSB4dF9j
-b25udHJhY2sgCj4gaXB0X1JFSkVDVCBuZl9uYXRfdGZ0cCBuZl9jb25udHJhY2tfdGZ0cCB0dW4g
-YnJpZGdlIHN0cCBsbGMgbmZ0X29ianJlZiAKPiBuZl9jb25udHJhY2tfbmV0Ymlvc19ucyBuZl9j
-b25udHJhY2tfYnJvYWRjYXN0IG5mdF9maWJfaW5ldCBuZnRfZmliX2lwdjQgCj4gbmZ0X2ZpYl9p
-cHY2IG5mdF9maWIgbmZ0X3JlamVjdF9pbmV0IG5mX3JlamVjdF9pcHY0IG5mX3JlamVjdF9pcHY2
-IAo+IG5mdF9yZWplY3QgbmZ0X2N0IG5mdF9jaGFpbl9uYXQgaXA2dGFibGVfbmF0IGlwNnRhYmxl
-X21hbmdsZSAKPiBpcDZ0YWJsZV9yYXcgaXA2dGFibGVfc2VjdXJpdHkgaXB0YWJsZV9uYXQgbmZf
-bmF0IG5mX2Nvbm50cmFjayAKPiBuZl9kZWZyYWdfaXB2NiBuZl9kZWZyYWdfaXB2NCBpcHRhYmxl
-X21hbmdsZSBpcHRhYmxlX3JhdyAKPiBpcHRhYmxlX3NlY3VyaXR5IHJma2lsbCBpcF9zZXQgbmZf
-dGFibGVzIG5mbmV0bGluayBpcDZ0YWJsZV9maWx0ZXIgCj4gaXA2X3RhYmxlcyBpcHRhYmxlX2Zp
-bHRlciB2Ym94bmV0YWRwKE9FKSB2Ym94bmV0Zmx0KE9FKSB2Ym94ZHJ2KE9FKSAKPiBzdW5ycGMg
-aW50ZWxfcG93ZXJjbGFtcCBpVENPX3dkdCBpbnRlbF9wbWNfYnh0IGNvcmV0ZW1wIAo+IGlUQ09f
-dmVuZG9yX3N1cHBvcnQgZ3Bpb19pY2gga3ZtX2ludGVsIHBwZGV2IHBrdGNkdmQga3ZtIGlycWJ5
-cGFzcyAKPiBpbnRlbF9jc3RhdGUgaW50ZWxfdW5jb3JlIHBjc3BrciBpMmNfaTgwMSBpMmNfc21i
-dXMgc25kX2hkYV9jb2RlY192aWEgCj4gc25kX2hkYV9jb2RlY19nZW5lcmljIHNuZF9oZGFfY29k
-ZWNfaGRtaSBsZWR0cmlnX2F1ZGlvIHNuZF9oZGFfaW50ZWwgCj4gcGFycG9ydF9wYyBzbmRfaW50
-ZWxfZHNwY2ZnIHBhcnBvcnQgc25kX2hkYV9jb2RlYyBscGNfaWNoIHNuZF9oZGFfY29yZSAKPiBz
-bmRfaHdkZXAgc25kX3NlcSBzbmRfc2VxX2RldmljZSBzbmRfcGNtIGFzdXNfYXRrMDExMCBzbmRf
-dGltZXIgc25kCj4gW8KgIDg5Mi4yNjE0MTRdwqAgc291bmRjb3JlIGFjcGlfY3B1ZnJlcSB6cmFt
-IGlwX3RhYmxlcyBub3V2ZWF1IHZpZGVvIAo+IG14bV93bWkgd21pIGkyY19hbGdvX2JpdCBkcm1f
-a21zX2hlbHBlciBjZWMgdHRtIGNyY3QxMGRpZl9wY2xtdWwgCj4gY3JjMzJfcGNsbXVsIGNyYzMy
-Y19pbnRlbCBkcm0gdWFzIGdoYXNoX2NsbXVsbmlfaW50ZWwgc2VyaW9fcmF3IAo+IHVzYl9zdG9y
-YWdlIHI4MTY5IGZ1c2UKPiBbwqAgODkyLjI2MTQyNF0gQ1BVOiAxIFBJRDogMTMzIENvbW06IGt3
-b3JrZXIvdTMyOjUgVGFpbnRlZDogR8KgwqDCoMKgwqDCoMKgIFcgCj4gT0XCoMKgwqDCoCA1Ljku
-MTYtMjAwLmZjMzMueDg2XzY0ICMxCj4gW8KgIDg5Mi4yNjE0MjVdIEhhcmR3YXJlIG5hbWU6IFN5
-c3RlbSBtYW51ZmFjdHVyZXIgU3lzdGVtIFByb2R1Y3QgCj4gTmFtZS9QN1A1NUQsIEJJT1MgMjEw
-McKgwqDCoCAxMC8yMC8yMDExCj4gW8KgIDg5Mi4yNjE0NThdIFdvcmtxdWV1ZTogZXZlbnRzX3Vu
-Ym91bmQgbnY1MF9kaXNwX2F0b21pY19jb21taXRfd29yayAKPiBbbm91dmVhdV0KPiBbwqAgODky
-LjI2MTQ5MV0gUklQOiAwMDEwOm52NTBfZG1hY193YWl0KzB4MWJkLzB4MjEwIFtub3V2ZWF1XQo+
-IFvCoCA4OTIuMjYxNDkzXSBDb2RlOiA4ZCA0OCAwNCA0OCA4OSA0YSA2OCBjNyAwMCAwMCAwMCAw
-MCAyMCA0OSA4YiA0NiAzOCAKPiA0MSBjNyA4NiAyMCAwMSAwMCAwMCAwMCAwMCAwMCAwMCA0OSA4
-OSA0NiA2OCBlOCAyOCBmZCBmZiBmZiBlOSA4YSBmZSBmZiAKPiBmZiA8MGY+IDBiIDQ4IDgzIGM0
-IDI4IGI4IDkyIGZmIGZmIGZmIDViIDVkIDQxIDVjIDQxIDVkIDQxIDVlIGMzIDQ5IDhiCj4gW8Kg
-IDg5Mi4yNjE0OTNdIFJTUDogMDAxODpmZmZmYjlkNzQwMmI3ZDcwIEVGTEFHUzogMDAwMTAyODIK
-PiBbwqAgODkyLjI2MTQ5NV0gUkFYOiBmZmZmZmZmZmZmZmZmZjkyIFJCWDogMDAwMDAwMDAwMDAw
-MDAwMyBSQ1g6IAo+IDAwMDAwMDAwMDAwMDAwMDAKPiBbwqAgODkyLjI2MTQ5NV0gUkRYOiBmZmZm
-ZmZmZmZmZmZmZjkyIFJTSTogZmZmZmI5ZDc0MDJiN2NiOCBSREk6IAo+IGZmZmZiOWQ3NDAyYjdk
-NTgKPiBbwqAgODkyLjI2MTQ5Nl0gUkJQOiBmZmZmYjlkNzQwMmI3ZDcwIFIwODogMDAwMDAwMDAw
-MDAwMDAwMCBSMDk6IAo+IGZmZmZiOWQ3NDAyYjdjODgKPiBbwqAgODkyLjI2MTQ5Nl0gUjEwOiAw
-MDAwMDAwMDAwMDAwMDMwIFIxMTogMDAwMDAwMDAwMDAwMDAwMiBSMTI6IAo+IDAwMDAwMDAwZmZm
-ZmZmZmIKPiBbwqAgODkyLjI2MTQ5N10gUjEzOiBmZmZmOWRiOWNmZWY0YjY4IFIxNDogZmZmZjlk
-YjljZmVmNGJhOCBSMTU6IAo+IDAwMDAwMDAwMDAwMDAwMDAKPiBbwqAgODkyLjI2MTQ5OF0gRlM6
-wqAgMDAwMDAwMDAwMDAwMDAwMCgwMDAwKSBHUzpmZmZmOWRiOWQ3YTQwMDAwKDAwMDApIAo+IGtu
-bEdTOjAwMDAwMDAwMDAwMDAwMDAKPiBbwqAgODkyLjI2MTQ5OV0gQ1M6wqAgMDAxMCBEUzogMDAw
-MCBFUzogMDAwMCBDUjA6IDAwMDAwMDAwODAwNTAwMzMKPiBbwqAgODkyLjI2MTUwMF0gQ1IyOiAw
-MDAwN2Y3M2FhNTRiMDAwIENSMzogMDAwMDAwMDE3MmEwZTAwNCBDUjQ6IAo+IDAwMDAwMDAwMDAw
-MjA2ZTAKPiBbwqAgODkyLjI2MTUwMV0gQ2FsbCBUcmFjZToKPiBbwqAgODkyLjI2MTUzOV3CoCBi
-YXNlNTA3Y19udGZ5X3NldCsweDJmLzB4OTAgW25vdXZlYXVdCj4gW8KgIDg5Mi4yNjE1NzFdwqAg
-bnY1MF93bmR3X2ZsdXNoX3NldCsweDY4LzB4MWMwIFtub3V2ZWF1XQo+IFvCoCA4OTIuMjYxNjA0
-XcKgIG52NTBfZGlzcF9hdG9taWNfY29tbWl0X3RhaWwrMHg0Y2QvMHg3OTAgW25vdXZlYXVdCj4g
-W8KgIDg5Mi4yNjE2MDldwqAgPyBfX3N3aXRjaF90bysweDdmLzB4NDcwCj4gW8KgIDg5Mi4yNjE2
-MTJdwqAgcHJvY2Vzc19vbmVfd29yaysweDFiNC8weDM3MAo+IFvCoCA4OTIuMjYxNjEzXcKgIHdv
-cmtlcl90aHJlYWQrMHg1My8weDNlMAo+IFvCoCA4OTIuMjYxNjE1XcKgID8gcHJvY2Vzc19vbmVf
-d29yaysweDM3MC8weDM3MAo+IFvCoCA4OTIuMjYxNjE2XcKgIGt0aHJlYWQrMHgxMWIvMHgxNDAK
-PiBbwqAgODkyLjI2MTYxN13CoCA/IF9fa3RocmVhZF9iaW5kX21hc2srMHg2MC8weDYwCj4gW8Kg
-IDg5Mi4yNjE2MjBdwqAgcmV0X2Zyb21fZm9yaysweDIyLzB4MzAKPiBbwqAgODkyLjI2MTYyMl0g
-LS0tWyBlbmQgdHJhY2UgYjk2YTVkOWY3ZTRlZGNjYSBdLS0tCj4gCj4gIyBsc3BjaSB8IGdyZXAg
-VkdBCj4gMDE6MDAuMCBWR0EgY29tcGF0aWJsZSBjb250cm9sbGVyOiBOVklESUEgQ29ycG9yYXRp
-b24gR0YxMDggW0dlRm9yY2UgR1QgCj4gNDMwXSAocmV2IGExKQo+ID0+IGNvbm5lY3RlZCB3aXRo
-IGR1YWwtbGluayBEVkkgdG8gYSA0SyBEaXNwbGF5ICgzODQweDIxNjAgcmVzb2x1dGlvbikKPiAK
-PiBBbHRob3VnaCBsZXNzIGZyZXF1ZW50bHksIHRoZSBzYW1lIHByb2JsZW0gYWxzbyBhcHBlYXJz
-IG9uIG15IChvbGQpIAo+IGxhcHRvcCBzaW5jZSB1cGdyYWRpbmcgdG8ga2VybmVsIDUuOSAocnVu
-bmluZyBNYW5qYXJvIHdpdGggS2VybmVsIAo+IDUuOS4xMS0zIGFuZCBnYXBoaWNzIGNhcmQ6IE5W
-SURJQSBDb3Jwb3JhdGlvbiBHOTZHTE0gW1F1YWRybyBGWCA3NzBNXSBhdCAKPiByZXNvbHV0aW9u
-IDE5MjB4MTIwMCkuCj4gCj4gQW55IGlkZWFzIGhvdyBJIGNhbiAoaGVscCB0bykgc29sdmUgdGhp
-cyBwcm9ibGVtPwoKSWYgeW91IGNvdWxkIGJpc2VjdCB3aGVyZSB0aGUgaXNzdWUgc3RhcnRlZCwg
-dGhhdCdkIGJlIGEgZ29vZCBzdGFydC4KCj4gQXJzw6huZQo+IF9fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fCj4gTm91dmVhdSBtYWlsaW5nIGxpc3QKPiBOb3V2
-ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwo+IGh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3Jn
-L21haWxtYW4vbGlzdGluZm8vbm91dmVhdQoKLS0gCkNoZWVycywKIEx5dWRlIFBhdWwgKHNoZS9o
-ZXIpCiBTb2Z0d2FyZSBFbmdpbmVlciBhdCBSZWQgSGF0CgpfX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fXwpOb3V2ZWF1IG1haWxpbmcgbGlzdApOb3V2ZWF1QGxp
-c3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFu
-L2xpc3RpbmZvL25vdXZlYXUK
+On Mon, Jan 04, 2021 at 02:28:37PM +0100, Karol Herbst wrote:
+> mhh, that PCI config stuff should really not happen all the time, but
+> it also doesn't appear to. The other thing I really don't know is, how
+> well the runpm works with tools like TLP if there isn't only an audio
+> device, but also the USB stuff and all the subdevices have to be
+> turned off all the time in order for the GPU to stay powered down.
+> 
+> The firmware stuff is also just a functional problem, so you won't get
+> display offloading, but it shouldn't drain your battery as long as
+> nothing is connected. I'd check with "grep .
+> /sys/bus/pci/devices/*/power/runtime_status" if all subdevices of the
+> GPU are powered down, and check which one gets enabled regularly or
+> something.
+
+Well, all I can say is that without the firmware, my boot hung 2mn every
+single time (I sent details in the logs upthread).
+
+The battery draw issue was inconsistent. I haven't quite found what
+triggers it yet.
+
+Marc
+-- 
+"A mouse is a device used to point at the xterm you want to type in" - A.S.R.
+ 
+Home page: http://marc.merlins.org/                       | PGP 7F55D5F27AAF9D08
+_______________________________________________
+Nouveau mailing list
+Nouveau@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/nouveau
