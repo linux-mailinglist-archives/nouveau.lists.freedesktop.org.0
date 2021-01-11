@@ -2,50 +2,49 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id A25272F09D1
-	for <lists+nouveau@lfdr.de>; Sun, 10 Jan 2021 22:19:31 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 59E5F2F1A5E
+	for <lists+nouveau@lfdr.de>; Mon, 11 Jan 2021 17:02:47 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6ADA089DB7;
-	Sun, 10 Jan 2021 21:19:26 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 724626E0F7;
+	Mon, 11 Jan 2021 16:02:44 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 498 seconds by postgrey-1.36 at gabe;
- Sun, 10 Jan 2021 12:06:59 UTC
-Received: from mo4-p02-ob.smtp.rzone.de (mo4-p02-ob.smtp.rzone.de
- [81.169.146.169])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5AC3589EEB;
- Sun, 10 Jan 2021 12:06:59 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1610280417;
- s=strato-dkim-0002; d=goldelico.com;
- h=To:References:Message-Id:Cc:Date:In-Reply-To:From:Subject:From:
- Subject:Sender;
- bh=suxnFiUZXehwYdxu3HHH3yerlSomJchhrhNdK2IYwzY=;
- b=kgjzebl1pdLpd8gwEDpD6V0AERckmwr/qqxoAMpwMgVX0Q4DpvO+VntOMRltmiQTDf
- mpBCzLfPuAk3J9C3bqVCH01CKkmDSReG+JazzEaC3vOUnfZGXdEbjle0AUpPDDj2C6oY
- DU3ZC9Ow5HnHwZzMh/+500aiAaOaYmAKG+UrVmXfpO69iZqh89Cxys2HuEoolyaQ+uCs
- nWaOP9ngk7ShCRXAfxfOnmWzsQ96R5eufk2jNuH9dEl2p5eXccnFjW1t7m+TBEUb7UQK
- W9Xq1LN84At+ImQ5P/VCbmi7XtANU1tTGaT88+PGEYzP+dqM6tXnZhVNfYsb5CSC+e7Y
- yArQ==
-X-RZG-AUTH: ":JGIXVUS7cutRB/49FwqZ7WcJeFKiMgPgp8VKxflSZ1P34KBj7wpz8NMGHPrrwDOsPyQ="
-X-RZG-CLASS-ID: mo00
-Received: from imac.fritz.box by smtp.strato.de (RZmta 47.12.1 DYNA|AUTH)
- with ESMTPSA id m056b3x0ABrBL8P
- (using TLSv1 with cipher ECDHE-RSA-AES256-SHA (curve X9_62_prime256v1 with 256
- ECDH bits, eq. 3072 bits RSA))
- (Client did not present a certificate);
- Sun, 10 Jan 2021 12:53:11 +0100 (CET)
-Mime-Version: 1.0 (Mac OS X Mail 9.3 \(3124\))
-From: "H. Nikolaus Schaller" <hns@goldelico.com>
-In-Reply-To: <DUUPMQ.U53A0W7YJPGM@crapouillou.net>
-Date: Sun, 10 Jan 2021 12:53:10 +0100
-Message-Id: <6B074439-2E91-4FCF-84C8-82AE13D8C7F0@goldelico.com>
+X-Greylist: delayed 484 seconds by postgrey-1.36 at gabe;
+ Mon, 11 Jan 2021 09:24:55 UTC
+Received: from galois.linutronix.de (Galois.linutronix.de
+ [IPv6:2a0a:51c0:0:12e:550::1])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9A0E189780;
+ Mon, 11 Jan 2021 09:24:55 +0000 (UTC)
+Date: Mon, 11 Jan 2021 10:16:46 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
+ s=2020; t=1610356608;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=LEXe/B0Q3kSQ+pyi11QVzunFEXSDJfyzRctZD/mSGwY=;
+ b=uCnnwbctZA1rQ3V0p2kZu+d3zaZFHTKUJPOo76b5D7cuxWEOXVJdpIqiLFP5aTXpvIjv9s
+ qwAvW5WhwffRTnvcztEi2+1v/oENxwE79UOubMC7jJKeubOBD6zsvQUL74GztGQIAKB8HO
+ BT4sxjhTakFs4dVqAQh6GY6Sn14JBtplCvPA2cmstH/p72FEB2TnSYVyeSL8sjTNI80v3T
+ oCsDUl6wYJXQ9QueQxoB6wuP+fNUTobWuAtyizRQCOtZthAqYs4ojlXRNfsr2J83hANEKU
+ KrLFmoV7Ai9vVG4RtXD3Lh/qUjXo6jULZnNtu/UYw3EhRXUZtNRGRg4NMuxugQ==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
+ s=2020e; t=1610356608;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=LEXe/B0Q3kSQ+pyi11QVzunFEXSDJfyzRctZD/mSGwY=;
+ b=aQ0P+BB77W0OA8uLsIQDcnYrwKkOka8jvG0VLRGl2/Wpm04Edp57/CM7syBgLiKrsJkDcC
+ 9SLKzMSTP9RzBiAw==
+From: Sebastian Andrzej Siewior <bigeasy@linutronix.de>
+To: Thomas Bogendoerfer <tsbogend@alpha.franken.de>
+Message-ID: <20210111091646.hkugbtlcced3vmno@linutronix.de>
 References: <JUTMMQ.NNFWKIUV7UUJ1@crapouillou.net>
  <20210108235805.GA17543@alpha.franken.de>
  <20210109003352.GA18102@alpha.franken.de>
- <DUUPMQ.U53A0W7YJPGM@crapouillou.net>
-To: Paul Cercueil <paul@crapouillou.net>
-X-Mailer: Apple Mail (2.3124)
-X-Mailman-Approved-At: Sun, 10 Jan 2021 21:19:25 +0000
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <20210109003352.GA18102@alpha.franken.de>
+X-Mailman-Approved-At: Mon, 11 Jan 2021 16:02:42 +0000
 Subject: Re: [Nouveau] [patch V3 13/37] mips/mm/highmem: Switch to generic
  kmap atomic
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -59,10 +58,10 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: juri.lelli@redhat.com, linux-aio@kvack.org, airlied@linux.ie,
- nouveau@lists.freedesktop.org, bigeasy@linutronix.de,
- ML dri-devel <dri-devel@lists.freedesktop.org>,
- linux-mips <linux-mips@vger.kernel.org>, bsegall@google.com, clm@fb.com,
+Cc: juri.lelli@redhat.com, linux-aio@kvack.org,
+ Paul Cercueil <paul@crapouillou.net>, airlied@linux.ie,
+ nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ linux-mips@vger.kernel.org, bsegall@google.com, jcmvbkbc@gmail.com,
  ray.huang@amd.com, paulus@samba.org, kraxel@redhat.com,
  sparclinux@vger.kernel.org, deanbo422@gmail.com, hch@lst.de,
  vincent.guittot@linaro.org, paulmck@kernel.org, mpe@ellerman.id.au,
@@ -74,74 +73,68 @@ Cc: juri.lelli@redhat.com, linux-aio@kvack.org, airlied@linux.ie,
  josef@toxicpanda.com, rostedt@goodmis.org, torvalds@linuxfoundation.org,
  green.hu@gmail.com, rodrigo.vivi@intel.com, dsterba@suse.com,
  tglx@linutronix.de, virtualization@lists.linux-foundation.org,
- dietmar.eggemann@arm.com,
- linux-arm-kernel <linux-arm-kernel@lists.infradead.org>, chris@zankel.net,
- monstr@monstr.eu, Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
- nickhu@andestech.com, jcmvbkbc@gmail.com, linuxppc-dev@lists.ozlabs.org,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ dietmar.eggemann@arm.com, linux-arm-kernel@lists.infradead.org,
+ chris@zankel.net, monstr@monstr.eu, nickhu@andestech.com, clm@fb.com,
+ linuxppc-dev@lists.ozlabs.org, linux-kernel@vger.kernel.org,
  christian.koenig@amd.com, bcrl@kvack.org, spice-devel@lists.freedesktop.org,
  vgupta@synopsys.com, linux-fsdevel@vger.kernel.org, akpm@linux-foundation.org,
  bristot@redhat.com, davem@davemloft.net, linux-btrfs@vger.kernel.org,
  viro@zeniv.linux.org.uk
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+On 2021-01-09 01:33:52 [+0100], Thomas Bogendoerfer wrote:
+> On Sat, Jan 09, 2021 at 12:58:05AM +0100, Thomas Bogendoerfer wrote:
+> > On Fri, Jan 08, 2021 at 08:20:43PM +0000, Paul Cercueil wrote:
+> > > Hi Thomas,
+> > > 
+> > > 5.11 does not boot anymore on Ingenic SoCs, I bisected it to this commit.
+> > > 
+> > > Any idea what could be happening?
+> > 
+> > not yet, kernel crash log of a Malta QEMU is below.
+> 
+> update:
+> 
+> This dirty hack lets the Malta QEMU boot again:
+> 
+> diff --git a/mm/highmem.c b/mm/highmem.c
+> index c3a9ea7875ef..190cdda1149d 100644
+> --- a/mm/highmem.c
+> +++ b/mm/highmem.c
+> @@ -515,7 +515,7 @@ void *__kmap_local_pfn_prot(unsigned long pfn, pgprot_t prot)
+>  	vaddr = __fix_to_virt(FIX_KMAP_BEGIN + idx);
+>  	BUG_ON(!pte_none(*(kmap_pte - idx)));
+>  	pteval = pfn_pte(pfn, prot);
+> -	set_pte_at(&init_mm, vaddr, kmap_pte - idx, pteval);
+> +	set_pte(kmap_pte - idx, pteval);
+>  	arch_kmap_local_post_map(vaddr, pteval);
+>  	current->kmap_ctrl.pteval[kmap_local_idx()] = pteval;
+>  	preempt_enable();
+> 
+> set_pte_at() tries to update cache and could do an kmap_atomic() there.
+So the old implementation used set_pte() while the new one uses
+set_pte_at().
 
-> Am 10.01.2021 um 12:35 schrieb Paul Cercueil <paul@crapouillou.net>:
-> =
+> Not sure, if this is allowed at this point.
+The problem is the recursion
+  kmap_atomic() -> __update_cache() -> kmap_atomic()
 
-> Hi Thomas,
-> =
+and kmap_local_idx_push() runs out if index space before stack space.
 
-> Le sam. 9 janv. 2021 =E0 1:33, Thomas Bogendoerfer <tsbogend@alpha.franke=
-n.de> a =E9crit :
->> On Sat, Jan 09, 2021 at 12:58:05AM +0100, Thomas Bogendoerfer wrote:
->>> On Fri, Jan 08, 2021 at 08:20:43PM +0000, Paul Cercueil wrote:
->>> > Hi Thomas,
->>> >
->>> > 5.11 does not boot anymore on Ingenic SoCs, I bisected it to this com=
-mit.
+I'm not sure if the __update_cache() worked for highmem. It has been
+added for that in commit
+   f4281bba81810 ("MIPS: Handle highmem pages in __update_cache")
 
-Just for completeness, I have no such problems booting CI20/jz4780 or Skyto=
-ne400/jz4730 (unpublished work) with 5.11-rc2.
-But may depend on board capabilites (ram size, memory layout or something e=
-lse).
+but it assumes that the address returned by kmap_atomic() is the same or
+related enough for flush_data_cache_page() to work.
 
->>> >
->>> > Any idea what could be happening?
->>> not yet, kernel crash log of a Malta QEMU is below.
->> update:
->> This dirty hack lets the Malta QEMU boot again:
->> diff --git a/mm/highmem.c b/mm/highmem.c
->> index c3a9ea7875ef..190cdda1149d 100644
->> --- a/mm/highmem.c
->> +++ b/mm/highmem.c
->> @@ -515,7 +515,7 @@ void *__kmap_local_pfn_prot(unsigned long pfn, pgpro=
-t_t prot)
->> 	vaddr =3D __fix_to_virt(FIX_KMAP_BEGIN + idx);
->> 	BUG_ON(!pte_none(*(kmap_pte - idx)));
->> 	pteval =3D pfn_pte(pfn, prot);
->> -	set_pte_at(&init_mm, vaddr, kmap_pte - idx, pteval);
->> +	set_pte(kmap_pte - idx, pteval);
->> 	arch_kmap_local_post_map(vaddr, pteval);
->> 	current->kmap_ctrl.pteval[kmap_local_idx()] =3D pteval;
->> 	preempt_enable();
->> set_pte_at() tries to update cache and could do an kmap_atomic() there.
->> Not sure, if this is allowed at this point.
-> =
+> Thomas.
+> 
 
-> Yes, I can confirm that your workaround works here too.
-> =
-
-> Cheers,
-> -Paul
-> =
-
-> =
-
-
+Sebastian
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
