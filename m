@@ -2,57 +2,60 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 240DC2F4EE2
-	for <lists+nouveau@lfdr.de>; Wed, 13 Jan 2021 16:37:20 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D9C992F4EE5
+	for <lists+nouveau@lfdr.de>; Wed, 13 Jan 2021 16:37:22 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A1EF56EACB;
-	Wed, 13 Jan 2021 15:37:11 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 34A256EAD2;
+	Wed, 13 Jan 2021 15:37:12 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3066589EA3
- for <nouveau@lists.freedesktop.org>; Wed, 13 Jan 2021 08:07:57 +0000 (UTC)
-Received: by mail-wm1-x335.google.com with SMTP id 3so710393wmg.4
- for <nouveau@lists.freedesktop.org>; Wed, 13 Jan 2021 00:07:57 -0800 (PST)
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C6FDA6E08E
+ for <nouveau@lists.freedesktop.org>; Wed, 13 Jan 2021 08:08:25 +0000 (UTC)
+Received: by mail-wm1-x331.google.com with SMTP id c124so682454wma.5
+ for <nouveau@lists.freedesktop.org>; Wed, 13 Jan 2021 00:08:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=ASaF2Lz+3U8HXzJJ1UEEZRzsmlvRFeoI0GvMyEKNjiw=;
- b=SE9oIA4EYZVyH214vJW9lUNt8xt0mg4yfvs0k7+q6cUe2zaF1RzK8+/cJKD9SegsjA
- MfIeGsE5eWtpV+Ft1yOBx1ncLvytspASwKDa054+4ESezgHtKKlY33fjszxOtDV164E9
- DD7vFBFer4UihawaIdx7gzqrKq0EJrYqVwNOvF9Ja1PKFOs0LTx4u4ndPxctBddVcTfq
- G/2+50UdNJtxgNWRt006OncsxJDBLr/u6Gw6vMeFTSB0lpJdhKDuaaOqT8L7kjMB7lQv
- q31KNYLF3rK6pvTpdvSAJDBEaZR4AjvWkNN668qA9uzuEDOwtjzEpkFES7qKt0jP1l7X
- Fh6Q==
+ h=from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding;
+ bh=jAO678R3RtkgY9IPzmyb5UFyGCUGLlAwXrenaR2xREY=;
+ b=n4HHJXja9efTgsY6gSGtpsDgEfkqFcI3Zk2w8ic/TG6PTg+1W5grCJIbuifEleQBPZ
+ +27CrufSyUIL17ZLNP/BTz7Z2J4H2ueddAgeLSJtVPh6AMWSPZ9wFaZSizslJYKksV6v
+ d3uWqiyUM7xUzIhGoRencnMz142jUwpfu0hfcSL3UywLJ+vBZ0NYSSP2nHBQqJbcJS8o
+ deHY7DmgUSQvCFk/Lt05jaAxGT843B4s6fy56BFPCmDYGy1FYj/cvJQ2/CHecvPP2e1Z
+ Szjpy6et/cTX4d0k69ZzZZStXiNPmrmvTi/3+5BxjaEgk/iJTz9OpeMSPJnzluieZpQN
+ gu/A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=ASaF2Lz+3U8HXzJJ1UEEZRzsmlvRFeoI0GvMyEKNjiw=;
- b=iBfjOJEldxphdopYnInN4FJjeQ7KaxZjPh1dJ8M9J3UuzjonxsKC112YbD1KBJRX0x
- qP7mjBWCP3/aMPKVUxxHwBevZSJUTc91nijUD6K0fY4HpzcpCy4LMPVy4YfV9mIDRBOz
- D925kOFCV/bbIUsxNPpQF7H4nZGn+rgMa8z8J/uixbnayJCdS733KQYqTYZk+PKfP+fl
- mCvmfm+WaY4Dg8m0BPxirdvVFPYRzV+i/9SqZQJ5ukP4Vo1Ktje5trlWek7B82JRphT+
- fKy0Mv9sLh58yzWFDx8vBIWRNmrudQMb3cLiwt3hOE3vAtLUcOw/qfZZmmOTtenBWc14
- QxKg==
-X-Gm-Message-State: AOAM531VwrO8BfhHQZ0ruvMQ898xainhlfE0eapG1uOSZPx6zsDjlXw/
- 3VexXwf94PXgPZEynSPYw/HZhg==
-X-Google-Smtp-Source: ABdhPJzpqWtD7JRoUTlxKG1Kexi900ZqPelwmJzR4MtEuvPIuECn9kkk6/wDHIjeVMBl+hAkknSDFQ==
-X-Received: by 2002:a1c:1bcd:: with SMTP id b196mr957693wmb.70.1610525275740; 
- Wed, 13 Jan 2021 00:07:55 -0800 (PST)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=jAO678R3RtkgY9IPzmyb5UFyGCUGLlAwXrenaR2xREY=;
+ b=QVEaXf3qWFkJVzjESSGBlC3Y3k/f0T2SA6u2tiCX+6M5WwEyDqneSTRoR/2sfxOrzF
+ 8Ccbl6mku06zB5MwynEzqtZF7Bxy1FHNowoPoyrNO77JSGMrNPixtryN94NtvoE53MiG
+ WpOs0ypnVhRAmxURmaBitKu4HbAMX+II20DJGXaB8dLPa3NzmuJvwS8VZHxUy85NlMFl
+ evZ4kpxmavpQkq+/tNXCdNtfwVdnEaJvVnmXyidg4UK6KxvQzMpDnMb9JV6dlJVZrfTR
+ IPZ+L0l9lYmVYU9uNXYSwfVwWaTsZYRTMWgCC4RKOGrY8lprJexfhmL8pijiQuF6HAVl
+ dBDQ==
+X-Gm-Message-State: AOAM5324+GSZ5+J4XzOyNmfZ3yQPFougsaaM7Jj9kUQDfliD0vzQ3z1g
+ yayIK64ECM47/K+yMa+wnB9CTQ==
+X-Google-Smtp-Source: ABdhPJxHNyoXPfTlp5uRri1k1i0J2v1Wg0OxRoE+fajiSX23gEvASeYjGvrRnoPRxewhB2B/Gkmfkg==
+X-Received: by 2002:a1c:7716:: with SMTP id t22mr950377wmi.126.1610525304555; 
+ Wed, 13 Jan 2021 00:08:24 -0800 (PST)
 Received: from dell.default ([91.110.221.229])
- by smtp.gmail.com with ESMTPSA id r20sm1642486wmh.15.2021.01.13.00.07.54
+ by smtp.gmail.com with ESMTPSA id r20sm1642486wmh.15.2021.01.13.00.08.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 13 Jan 2021 00:07:54 -0800 (PST)
+ Wed, 13 Jan 2021 00:08:23 -0800 (PST)
 From: Lee Jones <lee.jones@linaro.org>
 To: lee.jones@linaro.org
-Date: Wed, 13 Jan 2021 08:07:22 +0000
-Message-Id: <20210113080752.1003793-1-lee.jones@linaro.org>
+Date: Wed, 13 Jan 2021 08:07:45 +0000
+Message-Id: <20210113080752.1003793-24-lee.jones@linaro.org>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20210113080752.1003793-1-lee.jones@linaro.org>
+References: <20210113080752.1003793-1-lee.jones@linaro.org>
 MIME-Version: 1.0
 X-Mailman-Approved-At: Wed, 13 Jan 2021 15:37:10 +0000
-Subject: [Nouveau] [PATCH 00/30] [Set 13] Finally rid W=1 warnings from GPU
+Subject: [Nouveau] [PATCH 23/30] drm/nouveau/nvkm/engine/gr/gf100: Demote
+ non-conformant kernel-doc header
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -64,108 +67,45 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, Jeremy Kolb <jkolb@brandeis.edu>,
- Noah Abradjian <noah.abradjian@amd.com>, David Airlie <airlied@linux.ie>,
- Anthony Koo <Anthony.Koo@amd.com>, dri-devel@lists.freedesktop.org,
- Rodrigo Siqueira <Rodrigo.Siqueira@amd.com>, linux-kernel@vger.kernel.org,
- amd-gfx@lists.freedesktop.org, Sumit Semwal <sumit.semwal@linaro.org>,
- linaro-mm-sig@lists.linaro.org, Leo Li <sunpeng.li@amd.com>,
- Mauro Rossi <issor.oruam@gmail.com>, Ben Skeggs <bskeggs@redhat.com>,
- Daniel Vetter <daniel@ffwll.ch>, Harry Wentland <harry.wentland@amd.com>,
- Alex Deucher <alexander.deucher@amd.com>,
- Bhawanpreet Lakha <Bhawanpreet.Lakha@amd.com>,
- =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
- linux-media@vger.kernel.org
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-VGhpcyBzZXQgaXMgcGFydCBvZiBhIGxhcmdlciBlZmZvcnQgYXR0ZW1wdGluZyB0byBjbGVhbi11
-cCBXPTEKa2VybmVsIGJ1aWxkcywgd2hpY2ggYXJlIGN1cnJlbnRseSBvdmVyd2hlbG1pbmdseSBy
-aWRkbGVkIHdpdGgKbmlnZ2x5IGxpdHRsZSB3YXJuaW5ncy4KCjAgb3V0IG9mIDUwMDAgbGVmdCEK
-CkxBU1QgU0VUISAgWW91J3JlIGFsbCBjbGVhbi4gIENhbiB5b3UgYmVsaWV2ZSBpdCE/CgpMZWUg
-Sm9uZXMgKDMwKToKICBkcm0vYW1kL2Rpc3BsYXkvZGMvZGNfaGVscGVyOiBJbmNsdWRlIG91ciBv
-d24gaGVhZGVyLCBjb250YWluaW5nCiAgICBwcm90b3R5cGVzCiAgZHJtL2FtZC9pbmNsdWRlL3Jl
-bm9pcl9pcF9vZmZzZXQ6IE1hcmsgdG9wLWxldmVsIElQX0JBU0UgYXMKICAgIF9fbWF5YmVfdW51
-c2VkCiAgZHJtL2FtZC9kaXNwbGF5L2RtdWIvc3JjL2RtdWJfZGNuMzA6IEluY2x1ZGUgb3VyIG93
-biBoZWFkZXIgY29udGFpbmluZwogICAgcHJvdG90eXBlcwogIGRybS9hbWQvZGlzcGxheS9tb2R1
-bGVzL3Bvd2VyL3Bvd2VyX2hlbHBlcnM6IFN0YXRpY2lmeSBsb2NhbCBmdW5jdGlvbnMKICBkcm0v
-YW1kL2Rpc3BsYXkvbW9kdWxlcy9pbmZvX3BhY2tldC9pbmZvX3BhY2tldDogQ29ycmVjdCBrZXJu
-ZWwtZG9jCiAgICBmb3JtYXR0aW5nCiAgZHJtL2FtZC9kaXNwbGF5L2RjL2NvcmUvZGNfcmVzb3Vy
-Y2U6IFN0YXRpY2lmeSBsb2NhbCBmdW5jdGlvbnMKICBkcm0vYW1kL2Rpc3BsYXkvZGMvY29yZS9k
-Y19saW5rOiBSZW1vdmUgdW51c2VkIHZhcmlhYmxlICdzdGF0dXMnCiAgZHJtL2FtZC9kaXNwbGF5
-L2RjL2NvcmUvZGNfbGlua19kcDogU3RhdGljaWZ5IGxvY2FsIGZ1bmN0aW9uCiAgICAnbGlua1Jh
-dGVJbktIelRvTGlua1JhdGVNdWx0aXBsaWVyJwogIGRybS9hbWQvZGlzcGxheS9kYy9kY2UxMTIv
-ZGNlMTEyX3Jlc291cmNlOiBJbmNsdWRlIG91ciBvd24gaGVhZGVyIGZpbGUKICAgIGNvbnRhaW5p
-bmcgcHJvdG90eXBlcwogIGRybS9hbWQvZGlzcGxheS9kYy9jb3JlL2RjOiBTdGF0aWNpc2UgbG9j
-YWwgZnVuY3Rpb24KICAgICdhcHBseV9jdHhfaW50ZXJkZXBlbmRlbnRfbG9jaycKICBkcm0vYW1k
-L2Rpc3BsYXkvZGMvZGNlMTAwL01ha2VmaWxlOiBJZ25vcmUgLVdvdmVycmlkZS1pbml0IHdhcm5p
-bmcKICBkcm0vYW1kL2Rpc3BsYXkvZGMvZGNlMTAwL2RjZTEwMF9yZXNvdXJjZTogSW5jbHVkZSBv
-dXIgb3duIGhlYWRlcgogICAgY29udGFpbmluZyBwcm90b3R5cGVzCiAgZHJtL2FtZC9kaXNwbGF5
-L2RjL2RjZTYwL01ha2VmaWxlOiBJZ25vcmUgLVdvdmVycmlkZS1pbml0IHdhcm5pbmcKICBkcm0v
-YW1kL2Rpc3BsYXkvZGMvZGNlODAvTWFrZWZpbGU6IElnbm9yZSAtV292ZXJyaWRlLWluaXQgd2Fy
-bmluZwogIGRybS9hbWQvZGlzcGxheS9kYy9kY2U4MC9kY2U4MF9yZXNvdXJjZTogSW5jbHVkZSBv
-dXIgb3duIGhlYWRlcgogICAgY29udGFpbmluZyBwcm90b3R5cGVzCiAgZml4dXAhIGRybS9hbWQv
-ZGlzcGxheS9kYy9kY2U2MC9NYWtlZmlsZTogSWdub3JlIC1Xb3ZlcnJpZGUtaW5pdAogICAgd2Fy
-bmluZwogIGRybS9hbWQvZGlzcGxheS9kYy9kY2U2MC9kY2U2MF9yZXNvdXJjZTogSW5jbHVkZSBv
-dXIgb3duIGhlYWRlcgogICAgY29udGFpbmluZyBwcm90b3R5cGVzCiAgZHJtL2FtZC9kaXNwbGF5
-L2RjL2NvcmUvZGNfbGluazogTW92ZSBzb21lIGxvY2FsIGRhdGEgZnJvbSB0aGUgc3RhY2sKICAg
-IHRvIHRoZSBoZWFwCiAgZHJtL2FtZC9kaXNwbGF5L2RjL2NvcmUvZGNfbGlua19kcDogTWFyayAn
-cmVzdWx0X3dyaXRlX21pbl9oYmxhbmsnIGFzCiAgICBfX21heWJlX3VudXNlZAogIGRybS9hbWQv
-ZGlzcGxheS9kYy9jb3JlL2RjOiBGaXggYSBidW5jaCBvZiBkb2N1bWVudGF0aW9uIG1pc2RlbWVh
-bm91cnMKICBkcm0vYW1kL2Rpc3BsYXkvZGMvY29yZS9kY19yZXNvdXJjZTogRGVtb3RlIHNvbWUg
-a2VybmVsLWRvYyBhYnVzZXMKICBkcm0vYW1kL2Rpc3BsYXkvZGMvY29yZS9kY19saW5rOiBGaXgg
-YSBjb3VwbGUgb2YgZnVuY3Rpb24KICAgIGRvY3VtZW50YXRpb24gaXNzdWVzCiAgZHJtL25vdXZl
-YXUvbnZrbS9lbmdpbmUvZ3IvZ2YxMDA6IERlbW90ZSBub24tY29uZm9ybWFudCBrZXJuZWwtZG9j
-CiAgICBoZWFkZXIKICBkcm0vbm91dmVhdS9ub3V2ZWF1X2JvOiBSZW1vdmUgdW51c2VkIHZhcmlh
-YmxlcyAnZGV2JwogIGRybS9ub3V2ZWF1L25vdXZlYXVfZGlzcGxheTogUmVtb3ZlIHNldCBidXQg
-dW51c2VkIHZhcmlhYmxlICd3aWR0aCcKICBkcm0vbm91dmVhdS9kaXNwbnYwNC9jcnRjOiBEZW1v
-dGUgbm9uLWNvbmZvcm1pbmcga2VybmVsLWRvYyBoZWFkZXJzCiAgZHJtL25vdXZlYXUvZGlzcG52
-NTAvZGlzcDogUmVtb3ZlIHVudXNlZCB2YXJpYWJsZSAncmV0JyBmcm9tIGZ1bmN0aW9uCiAgICBy
-ZXR1cm5pbmcgdm9pZAogIGRybS9ub3V2ZWF1L2Rpc3BudjUwL2hlYWRjNTdkOiBNYWtlIGxvY2Fs
-IGZ1bmN0aW9uICdoZWFkYzU3ZF9vbHV0JwogICAgc3RhdGljCiAgZHJtL25vdXZlYXUvbnY1MF9k
-aXNwbGF5OiBSZW1vdmUgc3VwZXJmbHVvdXMgcHJvdG90eXBlIGZvciBsb2NhbAogICAgc3RhdGlj
-IGZ1bmN0aW9ucwogIGRybS9ub3V2ZWF1L2Rpc3BudjUwL2Rpc3A6IEluY2x1ZGUgaGVhZGVyIGNv
-bnRhaW5pbmcgb3VyIHByb3RvdHlwZXMKCiBkcml2ZXJzL2dwdS9kcm0vYW1kL2Rpc3BsYXkvZGMv
-Y29yZS9kYy5jICAgICAgfCAzNiArKysrKysrKystLS0tLS0tLS0tCiBkcml2ZXJzL2dwdS9kcm0v
-YW1kL2Rpc3BsYXkvZGMvY29yZS9kY19saW5rLmMgfCAzMSArKysrKysrKy0tLS0tLS0tCiAuLi4v
-Z3B1L2RybS9hbWQvZGlzcGxheS9kYy9jb3JlL2RjX2xpbmtfZHAuYyAgfCAgNCArLS0KIC4uLi9n
-cHUvZHJtL2FtZC9kaXNwbGF5L2RjL2NvcmUvZGNfcmVzb3VyY2UuYyB8IDE0ICsrKystLS0tCiBk
-cml2ZXJzL2dwdS9kcm0vYW1kL2Rpc3BsYXkvZGMvZGNfaGVscGVyLmMgICAgfCAgMSArCiAuLi4v
-Z3B1L2RybS9hbWQvZGlzcGxheS9kYy9kY2UxMDAvTWFrZWZpbGUgICAgfCAgMiArKwogLi4uL2Ft
-ZC9kaXNwbGF5L2RjL2RjZTEwMC9kY2UxMDBfcmVzb3VyY2UuYyAgIHwgIDIgKysKIC4uLi9hbWQv
-ZGlzcGxheS9kYy9kY2UxMTIvZGNlMTEyX3Jlc291cmNlLmMgICB8ICA0ICsrLQogZHJpdmVycy9n
-cHUvZHJtL2FtZC9kaXNwbGF5L2RjL2RjZTYwL01ha2VmaWxlIHwgIDIgKysKIC4uLi9kcm0vYW1k
-L2Rpc3BsYXkvZGMvZGNlNjAvZGNlNjBfcmVzb3VyY2UuYyB8ICAyICsrCiBkcml2ZXJzL2dwdS9k
-cm0vYW1kL2Rpc3BsYXkvZGMvZGNlODAvTWFrZWZpbGUgfCAgMiArKwogLi4uL2RybS9hbWQvZGlz
-cGxheS9kYy9kY2U4MC9kY2U4MF9yZXNvdXJjZS5jIHwgIDIgKysKIC4uLi9ncHUvZHJtL2FtZC9k
-aXNwbGF5L2RtdWIvc3JjL2RtdWJfZGNuMzAuYyB8ICAxICsKIC4uLi9kaXNwbGF5L21vZHVsZXMv
-aW5mb19wYWNrZXQvaW5mb19wYWNrZXQuYyB8IDEzICsrKy0tLS0KIC4uLi9hbWQvZGlzcGxheS9t
-b2R1bGVzL3Bvd2VyL3Bvd2VyX2hlbHBlcnMuYyB8ICA2ICsrLS0KIC4uLi9ncHUvZHJtL2FtZC9p
-bmNsdWRlL3Jlbm9pcl9pcF9vZmZzZXQuaCAgICB8ICAyICstCiBkcml2ZXJzL2dwdS9kcm0vbm91
-dmVhdS9kaXNwbnYwNC9jcnRjLmMgICAgICAgfCAgNCArLS0KIGRyaXZlcnMvZ3B1L2RybS9ub3V2
-ZWF1L2Rpc3BudjUwL2Rpc3AuYyAgICAgICB8ICA3ICsrLS0KIGRyaXZlcnMvZ3B1L2RybS9ub3V2
-ZWF1L2Rpc3BudjUwL2hlYWRjNTdkLmMgICB8ICAyICstCiBkcml2ZXJzL2dwdS9kcm0vbm91dmVh
-dS9ub3V2ZWF1X2JvLmMgICAgICAgICAgfCAgNCAtLS0KIGRyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1
-L25vdXZlYXVfZGlzcGxheS5jICAgICB8ICA4ICsrLS0tCiBkcml2ZXJzL2dwdS9kcm0vbm91dmVh
-dS9udjUwX2Rpc3BsYXkuaCAgICAgICAgfCAgMyAtLQogLi4uL2dwdS9kcm0vbm91dmVhdS9udmtt
-L2VuZ2luZS9nci9nZjEwMC5jICAgIHwgIDIgKy0KIDIzIGZpbGVzIGNoYW5nZWQsIDgwIGluc2Vy
-dGlvbnMoKyksIDc0IGRlbGV0aW9ucygtKQoKQ2M6IEFsZXggRGV1Y2hlciA8YWxleGFuZGVyLmRl
-dWNoZXJAYW1kLmNvbT4KQ2M6IGFtZC1nZnhAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCkNjOiBBbnRo
-b255IEtvbyA8QW50aG9ueS5Lb29AYW1kLmNvbT4KQ2M6IEJlbiBTa2VnZ3MgPGJza2VnZ3NAcmVk
-aGF0LmNvbT4KQ2M6IEJoYXdhbnByZWV0IExha2hhIDxCaGF3YW5wcmVldC5MYWtoYUBhbWQuY29t
-PgpDYzogIkNocmlzdGlhbiBLw7ZuaWciIDxjaHJpc3RpYW4ua29lbmlnQGFtZC5jb20+CkNjOiBE
-YW5pZWwgVmV0dGVyIDxkYW5pZWxAZmZ3bGwuY2g+CkNjOiBEYXZpZCBBaXJsaWUgPGFpcmxpZWRA
-bGludXguaWU+CkNjOiBkcmktZGV2ZWxAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCkNjOiBIYXJyeSBX
-ZW50bGFuZCA8aGFycnkud2VudGxhbmRAYW1kLmNvbT4KQ2M6IEplcmVteSBLb2xiIDxqa29sYkBi
-cmFuZGVpcy5lZHU+CkNjOiBMZW8gTGkgPHN1bnBlbmcubGlAYW1kLmNvbT4KQ2M6IGxpbmFyby1t
-bS1zaWdAbGlzdHMubGluYXJvLm9yZwpDYzogbGludXgtbWVkaWFAdmdlci5rZXJuZWwub3JnCkNj
-OiBMeXVkZSBQYXVsIDxseXVkZUByZWRoYXQuY29tPgpDYzogTWF1cm8gUm9zc2kgPGlzc29yLm9y
-dWFtQGdtYWlsLmNvbT4KQ2M6IE5vYWggQWJyYWRqaWFuIDxub2FoLmFicmFkamlhbkBhbWQuY29t
-PgpDYzogbm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKQ2M6IFJvZHJpZ28gU2lxdWVpcmEg
-PFJvZHJpZ28uU2lxdWVpcmFAYW1kLmNvbT4KQ2M6IFN1bWl0IFNlbXdhbCA8c3VtaXQuc2Vtd2Fs
-QGxpbmFyby5vcmc+Ci0tIAoyLjI1LjEKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fCk5vdXZlYXUgbWFpbGluZyBsaXN0Ck5vdXZlYXVAbGlzdHMuZnJlZWRl
-c2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8v
-bm91dmVhdQo=
+Fixes the following W=1 kernel build warning(s):
+
+ drivers/gpu/drm/nouveau/nvkm/engine/gr/gf100.c:992: warning: Function parameter or member 'gr' not described in 'gf100_gr_wait_idle'
+
+Cc: Ben Skeggs <bskeggs@redhat.com>
+Cc: David Airlie <airlied@linux.ie>
+Cc: Daniel Vetter <daniel@ffwll.ch>
+Cc: dri-devel@lists.freedesktop.org
+Cc: nouveau@lists.freedesktop.org
+Signed-off-by: Lee Jones <lee.jones@linaro.org>
+---
+ drivers/gpu/drm/nouveau/nvkm/engine/gr/gf100.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/gr/gf100.c b/drivers/gpu/drm/nouveau/nvkm/engine/gr/gf100.c
+index 749f73fc45a84..33541b4c01114 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/gr/gf100.c
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/gr/gf100.c
+@@ -982,7 +982,7 @@ gf100_gr_zbc_init(struct gf100_gr *gr)
+ 	}
+ }
+ 
+-/**
++/*
+  * Wait until GR goes idle. GR is considered idle if it is disabled by the
+  * MC (0x200) register, or GR is not busy and a context switch is not in
+  * progress.
+-- 
+2.25.1
+
+_______________________________________________
+Nouveau mailing list
+Nouveau@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/nouveau
