@@ -2,31 +2,32 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B14652F6D61
-	for <lists+nouveau@lfdr.de>; Thu, 14 Jan 2021 22:43:38 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A22992F6D77
+	for <lists+nouveau@lfdr.de>; Thu, 14 Jan 2021 22:50:31 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1EAFE896B0;
-	Thu, 14 Jan 2021 21:43:37 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 134D989F77;
+	Thu, 14 Jan 2021 21:50:30 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0EF8F896B0
- for <nouveau@lists.freedesktop.org>; Thu, 14 Jan 2021 21:43:36 +0000 (UTC)
-Received: from gandalf.local.home (cpe-66-24-58-225.stny.res.rr.com
- [66.24.58.225])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 1AA0923A5B;
- Thu, 14 Jan 2021 21:43:34 +0000 (UTC)
-Date: Thu, 14 Jan 2021 16:43:32 -0500
-From: Steven Rostedt <rostedt@goodmis.org>
-To: trix@redhat.com
-Message-ID: <20210114164332.5e7ed5f5@gandalf.local.home>
-In-Reply-To: <20210114212827.47584-1-trix@redhat.com>
-References: <20210114212827.47584-1-trix@redhat.com>
-X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+Received: from mslow2.mail.gandi.net (mslow2.mail.gandi.net [217.70.178.242])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9AC5389F77
+ for <nouveau@lists.freedesktop.org>; Thu, 14 Jan 2021 21:50:28 +0000 (UTC)
+Received: from relay8-d.mail.gandi.net (unknown [217.70.183.201])
+ by mslow2.mail.gandi.net (Postfix) with ESMTP id 2D25C3A6071
+ for <nouveau@lists.freedesktop.org>; Thu, 14 Jan 2021 21:44:31 +0000 (UTC)
+X-Originating-IP: 86.247.11.12
+Received: from haruko.lan (lfbn-idf2-1-654-12.w86-247.abo.wanadoo.fr
+ [86.247.11.12]) (Authenticated sender: schroder@emersion.fr)
+ by relay8-d.mail.gandi.net (Postfix) with ESMTPSA id F2F3F1BF207;
+ Thu, 14 Jan 2021 21:44:07 +0000 (UTC)
+From: Simon Ser <contact@emersion.fr>
+To: nouveau@lists.freedesktop.org
+Date: Thu, 14 Jan 2021 22:44:06 +0100
+Message-Id: <20210114214406.77976-1-contact@emersion.fr>
+X-Mailer: git-send-email 2.30.0
 MIME-Version: 1.0
-Subject: Re: [Nouveau] [PATCH v2] x86 : remove definition of DEBUG
+Subject: [Nouveau] [PATCH] drm/nouveau/dispnv50: cleanup on
+ nv50_head_atom_get failure
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -38,39 +39,44 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: x86@kernel.org, alexandre.chartre@oracle.com, paulmck@kernel.org,
- peterz@infradead.org, nouveau@lists.freedesktop.org,
- dave.hansen@linux.intel.com, linux-kernel@vger.kernel.org,
- mchehab+huawei@kernel.org, ppaalanen@gmail.com, mingo@redhat.com, bp@alien8.de,
- luto@kernel.org, hpa@zytor.com, tglx@linutronix.de, ying-tsun.huang@amd.com
+Cc: Ben Skeggs <bskeggs@redhat.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, 14 Jan 2021 13:28:27 -0800
-trix@redhat.com wrote:
+When nv50_head_atom_get fails, we need to un-do everything we've
+done so far: release the fence and unpin the BO.
 
-> diff --git a/arch/x86/mm/mmio-mod.c b/arch/x86/mm/mmio-mod.c
-> index bd7aff5c51f7..cd768dafca9e 100644
-> --- a/arch/x86/mm/mmio-mod.c
-> +++ b/arch/x86/mm/mmio-mod.c
-> @@ -10,8 +10,6 @@
->  
->  #define pr_fmt(fmt) "mmiotrace: " fmt
->  
-> -#define DEBUG 1
+Signed-off-by: Simon Ser <contact@emersion.fr>
+Cc: Ben Skeggs <bskeggs@redhat.com>
+Cc: Lyude Paul <lyude@redhat.com>
+Cc: Ilia Mirkin <imirkin@alum.mit.edu>
+---
+ drivers/gpu/drm/nouveau/dispnv50/wndw.c | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-Seems to only be used for printing the pr_debug() functions.
+diff --git a/drivers/gpu/drm/nouveau/dispnv50/wndw.c b/drivers/gpu/drm/nouveau/dispnv50/wndw.c
+index 0356474ad6f6..60aabb1bc095 100644
+--- a/drivers/gpu/drm/nouveau/dispnv50/wndw.c
++++ b/drivers/gpu/drm/nouveau/dispnv50/wndw.c
+@@ -562,8 +562,12 @@ nv50_wndw_prepare_fb(struct drm_plane *plane, struct drm_plane_state *state)
+ 
+ 	if (wndw->func->prepare) {
+ 		asyh = nv50_head_atom_get(asyw->state.state, asyw->state.crtc);
+-		if (IS_ERR(asyh))
++		if (IS_ERR(asyh)) {
++			dma_fence_put(asyw->state.fence);
++			asyw->state.fence = NULL;
++			nouveau_bo_unpin(nvbo);
+ 			return PTR_ERR(asyh);
++		}
+ 
+ 		wndw->func->prepare(wndw, asyh, asyw);
+ 	}
+-- 
+2.30.0
 
-> -
->  #include <linux/moduleparam.h>
->  #include <linux/debugfs.h>
->  #include <linux/slab.h>
-
-Acked-by: Steven Rostedt (VMware) <rostedt@goodmis.org>
-
--- Steve
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
