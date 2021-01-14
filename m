@@ -2,75 +2,73 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 10D292F52A4
-	for <lists+nouveau@lfdr.de>; Wed, 13 Jan 2021 19:48:25 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 549EB2F66DC
+	for <lists+nouveau@lfdr.de>; Thu, 14 Jan 2021 18:10:00 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C00CC6EB9D;
-	Wed, 13 Jan 2021 18:48:16 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C2E1689A57;
+	Thu, 14 Jan 2021 17:09:58 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [63.128.21.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 128976EB9D
- for <nouveau@lists.freedesktop.org>; Wed, 13 Jan 2021 18:48:15 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1610563694;
- h=from:from:reply-to:reply-to:subject:subject:date:date:
- message-id:message-id:to:to:cc:cc:mime-version:mime-version:
- content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=XCkM8tqtFmqAljGsn+lrhwLEcfZSOOvR/2PaL+unCN0=;
- b=XyzI4bB4k3SDMmN+l1RVoograne414apoNVD0sTojNQ1hTIzxOfouG/f4JHKFKyIugkmdX
- DbHqiaP4dQzW0Au0ge7iF8P87ob9saAN54MOGQQQhO+9wyMIOnCxNimITUzIkR5uD0KEX/
- 1zmUWd5+DLFio2OvVpoPS8gEuV1lfw8=
-Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com
- [209.85.160.200]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-54-X57EYbc-P62lw-bCHsR7Cw-1; Wed, 13 Jan 2021 13:48:13 -0500
-X-MC-Unique: X57EYbc-P62lw-bCHsR7Cw-1
-Received: by mail-qt1-f200.google.com with SMTP id e14so2142557qtr.8
- for <nouveau@lists.freedesktop.org>; Wed, 13 Jan 2021 10:48:13 -0800 (PST)
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C9F166E1BA
+ for <nouveau@lists.freedesktop.org>; Thu, 14 Jan 2021 10:33:54 +0000 (UTC)
+Received: by mail-wm1-x32b.google.com with SMTP id g25so5229136wmh.1
+ for <nouveau@lists.freedesktop.org>; Thu, 14 Jan 2021 02:33:54 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=date:from:to:subject:message-id:references:mime-version
+ :content-disposition:content-transfer-encoding:in-reply-to;
+ bh=yaIv+nhOILu/3I9bOPLxY99wOuAF6NciDB+QzXelzGY=;
+ b=x8ApzkDMlTt2JG1XTWJhNr1UKtQ6IFke3c3xr3SNGi+9jXp61r4rSclfE/x1ZsbC6E
+ kc3JWmQopOjyxq44LwowQmbznGUqSL8wNXevUO002EUou0BIqTw8RYLVCiGE12+CxOX/
+ fxzIAzI7B2R4ewJDEktxUkcQ9SXPjACGgvZ9SFyT7k+98Hh+k6Ffwn0+1CFwBNjXgJeC
+ HZ9wtKBjT9978oC3ER0xABCm+aUUHni1g67qqK7MQvH1V6NJJE0oBi422TUbvcXF/XDo
+ OhKFaCHNP4yp/yeXwV/H58LDpQdqoatqp/ojdlHvfoNnH0n1NERfvwFqNzaDrli1Oe+I
+ VJiQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:message-id:subject:from:reply-to:to:cc:date
- :in-reply-to:references:organization:user-agent:mime-version
- :content-transfer-encoding;
- bh=XCkM8tqtFmqAljGsn+lrhwLEcfZSOOvR/2PaL+unCN0=;
- b=R+lBVahrmtYzadkm4QfdZkq+SMEuL/JzLggVTzd7gpNM6pxkji4z4XtjwKuu1pT1Dr
- zIFi22qBs2tn4xf/lI9IL6JPQ9VE2gCTUDypULOIEhRxMnxa6deHgkKxjlx/TxFfyVwy
- s/P0FDNqpsfnY/N2b5iUfnNmdPkTixMQFBuL5z28fIAsfT/yPUS6p3H9eevu1wiOaBAJ
- b22n62RIwhLrlSm8915NJ87u8rm0SBtWyLzNVf9q2Hu7KpuRRXl+ChlwBz19nFbrxFXc
- sFru+/BqY8EGYXEnxXovQeuH6pJA/CTEi/ev/S/v0d29xJMAS+85Kx44KxRm3urVft13
- x4rQ==
-X-Gm-Message-State: AOAM532DmJ1YpRtsg8d0so4y6Pf6vYXnV/WZnt5BNiQPFmqGijXeboIz
- HUueSc5ANOAgeASIOKgmxd3TE648AxAKm3Mo5qi8bQNdX1RbBwed8Qlkb6uvJrRkIZn3tHiHzwi
- OKyDTh4+YI2Jam4MEUGgXvz9zWQ==
-X-Received: by 2002:ac8:6c4a:: with SMTP id z10mr3566594qtu.183.1610563692843; 
- Wed, 13 Jan 2021 10:48:12 -0800 (PST)
-X-Google-Smtp-Source: ABdhPJzsr8BSxKJOMODCmmzJTXvHIK23vnDy1EDAf3ht8aYtQMMUO2lCrf8B/jgZneMtm/Hs7ut10w==
-X-Received: by 2002:ac8:6c4a:: with SMTP id z10mr3566570qtu.183.1610563692657; 
- Wed, 13 Jan 2021 10:48:12 -0800 (PST)
-Received: from Whitewolf.lyude.net
- (pool-108-49-102-102.bstnma.fios.verizon.net. [108.49.102.102])
- by smtp.gmail.com with ESMTPSA id z20sm1505438qtb.31.2021.01.13.10.48.11
+ h=x-gm-message-state:date:from:to:subject:message-id:references
+ :mime-version:content-disposition:content-transfer-encoding
+ :in-reply-to;
+ bh=yaIv+nhOILu/3I9bOPLxY99wOuAF6NciDB+QzXelzGY=;
+ b=bg2aDWVOlc5o6ujLDAT9Cs7/lkHRhxGM7n4Yy23DzWTo+QSQesNo9LqhpH5lbME+SA
+ 3Pq4k55j2jOeWCZDRc6givEdKOBd+nysj6bYdFqP9GMPTOLzW4SDbDLgxyhaI7x4L0TZ
+ xhaquMqPUYN4OLQ055SPwYei9TVw4/pmdEaKAkdqiQMF6/1d4IjMR9xdZsi7WTTfktSq
+ FqNIQN/kOCCSJS7+sak2sclbuesTtoFw2SEmSYIDvsQ47JGLTg6wobrM9INVo7h5vZYU
+ 9Fr/cPptrTubxo2/iGnAVmUhYp44B2Nk1okVH+WLH1dOrlHhGjUZ1eNpBaWd76Pi5hEH
+ 4glA==
+X-Gm-Message-State: AOAM531XeVI6J518ZejUeS/LPSoy+RYa0/Pw7Qv+XW1yvsOPeJyXiZDV
+ QMdLl/j3oJwVlUeYhhfknoDr9w==
+X-Google-Smtp-Source: ABdhPJxOYTenjJAea68Lbo43i7Qv6whisJfp5qKHWu1LHfCUfeuuNEisJHD+dQOSAgNSMN4zAvV+tQ==
+X-Received: by 2002:a7b:c306:: with SMTP id k6mr3262314wmj.52.1610620433288;
+ Thu, 14 Jan 2021 02:33:53 -0800 (PST)
+Received: from dell ([91.110.221.178])
+ by smtp.gmail.com with ESMTPSA id m17sm9413232wrn.0.2021.01.14.02.33.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 13 Jan 2021 10:48:11 -0800 (PST)
-Message-ID: <a391f7b14dfede904d805a01340345deb4cf2617.camel@redhat.com>
-From: Lyude Paul <lyude@redhat.com>
-To: Lee Jones <lee.jones@linaro.org>
-Date: Wed, 13 Jan 2021 13:48:10 -0500
-In-Reply-To: <20210113080752.1003793-29-lee.jones@linaro.org>
+ Thu, 14 Jan 2021 02:33:52 -0800 (PST)
+Date: Thu, 14 Jan 2021 10:33:50 +0000
+From: Lee Jones <lee.jones@linaro.org>
+To: linux-kernel@vger.kernel.org, Alex Deucher <alexander.deucher@amd.com>,
+ amd-gfx@lists.freedesktop.org, Anthony Koo <Anthony.Koo@amd.com>,
+ Ben Skeggs <bskeggs@redhat.com>,
+ Bhawanpreet Lakha <Bhawanpreet.Lakha@amd.com>,
+ Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+ Daniel Vetter <daniel@ffwll.ch>, David Airlie <airlied@linux.ie>,
+ dri-devel@lists.freedesktop.org, Harry Wentland <harry.wentland@amd.com>,
+ Jeremy Kolb <jkolb@brandeis.edu>, Leo Li <sunpeng.li@amd.com>,
+ linaro-mm-sig@lists.linaro.org, linux-media@vger.kernel.org,
+ Lyude Paul <lyude@redhat.com>, Mauro Rossi <issor.oruam@gmail.com>,
+ Noah Abradjian <noah.abradjian@amd.com>, nouveau@lists.freedesktop.org,
+ Rodrigo Siqueira <Rodrigo.Siqueira@amd.com>,
+ Sumit Semwal <sumit.semwal@linaro.org>
+Message-ID: <20210114103350.GT3975472@dell>
 References: <20210113080752.1003793-1-lee.jones@linaro.org>
- <20210113080752.1003793-29-lee.jones@linaro.org>
-Organization: Red Hat
-User-Agent: Evolution 3.38.2 (3.38.2-1.fc33)
 MIME-Version: 1.0
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=lyude@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Subject: Re: [Nouveau] [PATCH 28/30] drm/nouveau/dispnv50/headc57d: Make
- local function 'headc57d_olut' static
+Content-Disposition: inline
+In-Reply-To: <20210113080752.1003793-1-lee.jones@linaro.org>
+X-Mailman-Approved-At: Thu, 14 Jan 2021 17:09:58 +0000
+Subject: Re: [Nouveau] [PATCH 00/30] [Set 13] Finally rid W=1 warnings from
+ GPU
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -82,43 +80,21 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Reply-To: lyude@redhat.com
-Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-UmV2aWV3ZWQtYnk6IEx5dWRlIFBhdWwgPGx5dWRlQHJlZGhhdC5jb20+CgpPbiBXZWQsIDIwMjEt
-MDEtMTMgYXQgMDg6MDcgKzAwMDAsIExlZSBKb25lcyB3cm90ZToKPiBGaXhlcyB0aGUgZm9sbG93
-aW5nIFc9MSBrZXJuZWwgYnVpbGQgd2FybmluZyhzKToKPiAKPiDCoGRyaXZlcnMvZ3B1L2RybS9u
-b3V2ZWF1L2Rpc3BudjUwL2hlYWRjNTdkLmM6MTczOjE6IHdhcm5pbmc6IG5vIHByZXZpb3VzCj4g
-cHJvdG90eXBlIGZvciDigJhoZWFkYzU3ZF9vbHV04oCZIFstV21pc3NpbmctcHJvdG90eXBlc10K
-PiAKPiBDYzogQmVuIFNrZWdncyA8YnNrZWdnc0ByZWRoYXQuY29tPgo+IENjOiBEYXZpZCBBaXJs
-aWUgPGFpcmxpZWRAbGludXguaWU+Cj4gQ2M6IERhbmllbCBWZXR0ZXIgPGRhbmllbEBmZndsbC5j
-aD4KPiBDYzogTHl1ZGUgUGF1bCA8bHl1ZGVAcmVkaGF0LmNvbT4KPiBDYzogZHJpLWRldmVsQGxp
-c3RzLmZyZWVkZXNrdG9wLm9yZwo+IENjOiBub3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwo+
-IFNpZ25lZC1vZmYtYnk6IExlZSBKb25lcyA8bGVlLmpvbmVzQGxpbmFyby5vcmc+Cj4gLS0tCj4g
-wqBkcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9kaXNwbnY1MC9oZWFkYzU3ZC5jIHwgMiArLQo+IMKg
-MSBmaWxlIGNoYW5nZWQsIDEgaW5zZXJ0aW9uKCspLCAxIGRlbGV0aW9uKC0pCj4gCj4gZGlmZiAt
-LWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L2Rpc3BudjUwL2hlYWRjNTdkLmMKPiBiL2Ry
-aXZlcnMvZ3B1L2RybS9ub3V2ZWF1L2Rpc3BudjUwL2hlYWRjNTdkLmMKPiBpbmRleCBmZDUxNTI3
-YjU2YjgzLi5iZGNmZDI0MGQ2MWM4IDEwMDY0NAo+IC0tLSBhL2RyaXZlcnMvZ3B1L2RybS9ub3V2
-ZWF1L2Rpc3BudjUwL2hlYWRjNTdkLmMKPiArKysgYi9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9k
-aXNwbnY1MC9oZWFkYzU3ZC5jCj4gQEAgLTE2OSw3ICsxNjksNyBAQCBoZWFkYzU3ZF9vbHV0X2xv
-YWQoc3RydWN0IGRybV9jb2xvcl9sdXQgKmluLCBpbnQgc2l6ZSwKPiB2b2lkIF9faW9tZW0gKm1l
-bSkKPiDCoMKgwqDCoMKgwqDCoMKgd3JpdGV3KHJlYWR3KG1lbSAtIDQpLCBtZW0gKyA0KTsKPiDC
-oH0KPiDCoAo+IC1ib29sCj4gK3N0YXRpYyBib29sCj4gwqBoZWFkYzU3ZF9vbHV0KHN0cnVjdCBu
-djUwX2hlYWQgKmhlYWQsIHN0cnVjdCBudjUwX2hlYWRfYXRvbSAqYXN5aCwgaW50IHNpemUpCj4g
-wqB7Cj4gwqDCoMKgwqDCoMKgwqDCoGlmIChzaXplICE9IDAgJiYgc2l6ZSAhPSAyNTYgJiYgc2l6
-ZSAhPSAxMDI0KQoKLS0gClNpbmNlcmVseSwKICAgTHl1ZGUgUGF1bCAoc2hlL2hlcikKICAgU29m
-dHdhcmUgRW5naW5lZXIgYXQgUmVkIEhhdAogICAKTm90ZTogSSBkZWFsIHdpdGggYSBsb3Qgb2Yg
-ZW1haWxzIGFuZCBoYXZlIGEgbG90IG9mIGJ1Z3Mgb24gbXkgcGxhdGUuIElmIHlvdSd2ZQphc2tl
-ZCBtZSBhIHF1ZXN0aW9uLCBhcmUgd2FpdGluZyBmb3IgYSByZXZpZXcvbWVyZ2Ugb24gYSBwYXRj
-aCwgZXRjLiBhbmQgSQpoYXZlbid0IHJlc3BvbmRlZCBpbiBhIHdoaWxlLCBwbGVhc2UgZmVlbCBm
-cmVlIHRvIHNlbmQgbWUgYW5vdGhlciBlbWFpbCB0byBjaGVjawpvbiBteSBzdGF0dXMuIEkgZG9u
-J3QgYml0ZSEKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-Ck5vdXZlYXUgbWFpbGluZyBsaXN0Ck5vdXZlYXVAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBz
-Oi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vbm91dmVhdQo=
+T24gV2VkLCAxMyBKYW4gMjAyMSwgTGVlIEpvbmVzIHdyb3RlOgoKPiBUaGlzIHNldCBpcyBwYXJ0
+IG9mIGEgbGFyZ2VyIGVmZm9ydCBhdHRlbXB0aW5nIHRvIGNsZWFuLXVwIFc9MQo+IGtlcm5lbCBi
+dWlsZHMsIHdoaWNoIGFyZSBjdXJyZW50bHkgb3ZlcndoZWxtaW5nbHkgcmlkZGxlZCB3aXRoCj4g
+bmlnZ2x5IGxpdHRsZSB3YXJuaW5ncy4KPiAKPiAwIG91dCBvZiA1MDAwIGxlZnQhCj4gCj4gTEFT
+VCBTRVQhICBZb3UncmUgYWxsIGNsZWFuLiAgQ2FuIHlvdSBiZWxpZXZlIGl0IT8KCkFoLCBmYWly
+IHdhcm5pbmcgZm9yIHlvdTogd2UncmUgbm90IHlldCBkb25lLgoKQXJtIGlzIGNsZWFuLiAgVGhl
+cmUgYXJlIHN0aWxsIGZpeC11cHMgcmVxdWlyZWQgZm9yIHg4NiBhbmQgUFBDLgoKSSdsbCBnZXQg
+cmlnaHQgb24gaXQuCgotLSAKTGVlIEpvbmVzIFvmnY7nkLzmlq9dClNlbmlvciBUZWNobmljYWwg
+TGVhZCAtIERldmVsb3BlciBTZXJ2aWNlcwpMaW5hcm8ub3JnIOKUgiBPcGVuIHNvdXJjZSBzb2Z0
+d2FyZSBmb3IgQXJtIFNvQ3MKRm9sbG93IExpbmFybzogRmFjZWJvb2sgfCBUd2l0dGVyIHwgQmxv
+ZwpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpOb3V2ZWF1
+IG1haWxpbmcgbGlzdApOb3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3Rz
+LmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL25vdXZlYXUK
