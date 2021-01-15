@@ -2,104 +2,40 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 357AC2F88D6
-	for <lists+nouveau@lfdr.de>; Fri, 15 Jan 2021 23:51:54 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4416B2F88D4
+	for <lists+nouveau@lfdr.de>; Fri, 15 Jan 2021 23:51:52 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 21F9C6E4D2;
-	Fri, 15 Jan 2021 22:51:42 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B95736E4C9;
+	Fri, 15 Jan 2021 22:51:41 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam10on2044.outbound.protection.outlook.com [40.107.93.44])
- by gabe.freedesktop.org (Postfix) with ESMTPS id CC3456E120;
- Fri, 15 Jan 2021 18:27:32 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=MYFGB29jpH/J1Yyv1sjHNKDkNRyrRGI0i5aH40EOI508C0MJG2HFhNS33lF8wR/WKmhGawKipl/nirqpz+FtCq9heZ2BqOh5Yg4w8jjAzxMWvW+l3fVSlPrWAZu5CNXEdJIS5hm86+nSAfGPy7eIYOGcou4u4bgNAU+ArXS47THA2U/mEFEbpJUXcWgC+pDkd4bRVQvN2Tm+5FK85Q1AFtBo9AoCX2oSI8a4DH02Q6GlsQEsoEUPETXJiPYBspodtFaW/K40OJA0TsH+aiekD8rl6Bw8UxSVd4jsOuYe3agRKJlg1g2+9u84glxDzaXAFz4ADvXch5FuMYXzKgNrbw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ldIcf+ZP5ZWB8a73lQYKgI5n6OWztdvNjYmsovlIOCs=;
- b=Y5MCJwozgC185mZwLbwMGPrOHyOiHPwuyXxPRqD6wqPD2ZeeG1xGSpRBc2XFZe9ixVRFsqLEbgrKnPrU2zeRXHLOUB2ZCzVAcjW+snmz1cMpvjIovkI/9Wx2OGeqUKWt5ia6CCJdIomPoH5f/x1W0SxjebvDFJdLgYx/FlA295iihPWwRXzQwd8+Yd6BVnzkV66P/1e6HyPmZxyHgMHHbmseCo8H67LP1FlvZHZsS/29SptxNT9cBe8hQ4qJR7atQ77hWZus+ImbDe+xMqX3GDl4hRwwZvJyvh+AsyRw49Q2CZugnh1Yu0V8HUJbzuiVlH9loNRfQOEa9AVcpeLScw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=vmware.com; dmarc=pass action=none header.from=vmware.com;
- dkim=pass header.d=vmware.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vmware.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ldIcf+ZP5ZWB8a73lQYKgI5n6OWztdvNjYmsovlIOCs=;
- b=fuWa+iKk1VaFFocwO2TeBsevsHac2IT+DIDYDjlD/KGWNzqKOaZo+ADsoVXNE/dPX7K+V6KJiM4tk9Ze8yq3ifM4PP9HUBd1Fxg5Ol1KW3D8duhtHcyiD+AWQQJqGuBVZlFqX5tEYZwj7jfmC0YcZ5LLemzfEKlOnsduIB+7Cw4=
-Received: from BL0PR05MB5186.namprd05.prod.outlook.com (2603:10b6:208:8f::18)
- by BL0PR05MB4963.namprd05.prod.outlook.com (2603:10b6:208:81::12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3763.2; Fri, 15 Jan
- 2021 18:27:15 +0000
-Received: from BL0PR05MB5186.namprd05.prod.outlook.com
- ([fe80::59ed:18ca:252d:72f6]) by BL0PR05MB5186.namprd05.prod.outlook.com
- ([fe80::59ed:18ca:252d:72f6%7]) with mapi id 15.20.3763.010; Fri, 15 Jan 2021
- 18:27:15 +0000
-From: Zack Rusin <zackr@vmware.com>
-To: Lee Jones <lee.jones@linaro.org>
-Thread-Topic: [PATCH 00/29] [Set 15] Finally rid W=1 warnings from GPU!
-Thread-Index: AQHW62p+Afh7eg9MAECAFEwSMWQpd6opAUIA
-Date: Fri, 15 Jan 2021 18:27:15 +0000
-Message-ID: <F914D9B9-6DD4-4383-9F7C-8D09FBFE96CE@vmware.com>
-References: <20210115181601.3432599-1-lee.jones@linaro.org>
-In-Reply-To: <20210115181601.3432599-1-lee.jones@linaro.org>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-mailer: Apple Mail (2.3654.40.0.2.32)
-authentication-results: linaro.org; dkim=none (message not signed)
- header.d=none;linaro.org; dmarc=none action=none header.from=vmware.com;
-x-originating-ip: [71.175.59.246]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 0c64d446-ae5f-40eb-e5b5-08d8b9832f27
-x-ms-traffictypediagnostic: BL0PR05MB4963:
-x-ld-processed: b39138ca-3cee-4b4a-a4d6-cd83d9dd62f0,ExtAddr
-x-ms-exchange-transport-forked: True
-x-microsoft-antispam-prvs: <BL0PR05MB49632CC95DC53ABA4F998F59CEA70@BL0PR05MB4963.namprd05.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:6108;
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: 55YQD4eKIG0BrVqfHEYsvlpT9AXPF4NQE5qmAs3RRe9Ejpm+oapZltMiNUHGxnN+ZhDy44ldF7uqE6wCxpV5KO/SO5cZaeyRPXTnGrNB/ll0Q6yEOJPkhIVxFjCJG4ZXceF+Nxj/s2L+Ixk/Z3gcOzG2sRISaOdl4k82XJliVUyEDg62yMIxpvUtnZ4o3tgWS8undD9vjrAXeKH9xSKJ61I+jUK3Wzqvll2cu4gOHLwRz54kn/c8kH0b0kek0s/lxZXq6wH0USNmWJfjCcly5qKbmzoPVzPSlnaXUCfLOq5aQThZ8n0L0LNgAIgaS0Dpo/v9/2ukrY9nlvPEL0t6+NMNXUurrNAkgqGBMVD0qjBc/wzdrgZOQKGmjcjBagxdoCokKodr5VpsKcxf6cbqGM6tNPToY759oiZm3fJOnw+gBB5B6Oi6JgLSc4pAVGiw
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:BL0PR05MB5186.namprd05.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(4636009)(39860400002)(366004)(396003)(346002)(376002)(136003)(2906002)(33656002)(36756003)(83380400001)(76116006)(478600001)(7416002)(6486002)(6916009)(8676002)(6512007)(8936002)(64756008)(2616005)(66446008)(71200400001)(4744005)(6506007)(4326008)(66946007)(186003)(54906003)(26005)(86362001)(53546011)(66556008)(66476007)(5660300002)(316002)(7406005)(45980500001);
- DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata: =?iso-8859-1?Q?zgyRXVh9UgWytDDFI4h3+SdRgEHw+d9OLuLLMHpjvKlr22XbD6tBg4P0VJ?=
- =?iso-8859-1?Q?MBkRg8mjRg8Fct7L/vBi8Vp3Gr5TKKaDAMMsi36wtW9XtQKlF+HH7y0KP2?=
- =?iso-8859-1?Q?9qyTkyLqdEVVvjiTv7S/W240RBKTbFrOMFtSHebz8b2+Elq38cFLR+lmAo?=
- =?iso-8859-1?Q?tjMnnBmWRvpuD7eP4tEU68waYBouWsJuhue3mgUIYOwLvX0wlWxnDpluBZ?=
- =?iso-8859-1?Q?yVjcUY7ZLP4WTfsKgs+ciELcST10DoZgCrwcohwL9CCGEDtMzAg9AL0eVW?=
- =?iso-8859-1?Q?dYc/bI2HstPQwRfei/WUvNlQmQXEOYsZkQ97sRxdelOQ3Kzx9Vj69csO3w?=
- =?iso-8859-1?Q?yOcNV13s7Yxtzw8w80q4lw7opde2+JEszf2bzt2B0veWH/jIad87+WjK6r?=
- =?iso-8859-1?Q?gN1ZyEwz5+KAuHBmFJyRIRr29qvFlagPVjwEjuUwwBQcnPgXNx7dDSkh5y?=
- =?iso-8859-1?Q?UoL0QixA5gkwtM/40BQIU7n/zXhYHIu5laGIkTzYboLuQysU8G5gMffTeT?=
- =?iso-8859-1?Q?5XWg8lqro4VUandVJ/nSqvdqZronfrPhHu3cAQibWpib51RrY0dgVQ3Fq+?=
- =?iso-8859-1?Q?r1sv4m/PNniyNKX1AFro862zN0uzFFqkYhK2W1ZjqWB4mEC/zhsltNQlAJ?=
- =?iso-8859-1?Q?TIxBU+sJvgqHUZ2d+DpQozh6ArARnjRpB/JD2eqhixYXBKKEGeXAsygSVn?=
- =?iso-8859-1?Q?J4jWTCwbMq+/QElOSWowhnnOyv9QBWDS6vkKqo+I98NFV3XtrFK/RNRJL0?=
- =?iso-8859-1?Q?ne5Ubfp6JAfigqZvlzdDQ+Garza+GvG2C7XdqCt6fAln9QLJF7hM6UNq01?=
- =?iso-8859-1?Q?1LUUGaEovr/uyZOhTG6MAti5NBaRVQMg9OVP9WvqUqFZx4tnIsPKziCPr3?=
- =?iso-8859-1?Q?njFPxnCOT75zBVdbf4nUMeOB9WfJU9F+h4mGkwVx6zP0RDnP7JgXZpYxD7?=
- =?iso-8859-1?Q?LSE0ywTmovs3VsNJ181r0kuj9aqCxwQFE7L0ZZwSmIeozxXhZtAHMJMcbn?=
- =?iso-8859-1?Q?Y38RiCXBqt5WAjhxCVwtKh1cFHOfiyBkUjJDKZ?=
-Content-ID: <F862015D1103DE4C962AE3C7312A0F78@namprd05.prod.outlook.com>
+Received: from perceval.ideasonboard.com (perceval.ideasonboard.com
+ [IPv6:2001:4b98:dc2:55:216:3eff:fef7:d647])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 398C86E49B;
+ Fri, 15 Jan 2021 20:29:21 +0000 (UTC)
+Received: from pendragon.ideasonboard.com (62-78-145-57.bb.dnainternet.fi
+ [62.78.145.57])
+ by perceval.ideasonboard.com (Postfix) with ESMTPSA id 0E61358B;
+ Fri, 15 Jan 2021 21:29:16 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
+ s=mail; t=1610742556;
+ bh=8R5qOZgwIXX9QIBlCIV/R54viYQ+tS8st/8kK+PspT4=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=rXfe/Bd4sxDcopxrQyulKr6sWDtZgNWVEUmMmsnebMU4/0jVNn/8hLQVXHqwR4Iqy
+ dmLamgDdsuehH2QKJU5DVGWdiVNzsC5Rqtv2JHOZ59k4V2CtY3G/tqo9iglvRf5/6q
+ dndbBomFsfYf9WqlpJf3+ozL6ojiJBE1hiTgHRnI=
+Date: Fri, 15 Jan 2021 22:28:59 +0200
+From: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+To: Maxime Ripard <maxime@cerno.tech>
+Message-ID: <YAH7C0EOsisHhqvR@pendragon.ideasonboard.com>
+References: <20210115125703.1315064-1-maxime@cerno.tech>
+ <20210115125703.1315064-2-maxime@cerno.tech>
 MIME-Version: 1.0
-X-OriginatorOrg: vmware.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: BL0PR05MB5186.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0c64d446-ae5f-40eb-e5b5-08d8b9832f27
-X-MS-Exchange-CrossTenant-originalarrivaltime: 15 Jan 2021 18:27:15.4804 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b39138ca-3cee-4b4a-a4d6-cd83d9dd62f0
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: kATfeq4PX77bcOBXMKLtAaRo0gl/y7g0xq21YvKoHjoROW5bBGxAIsAbAmZMfRP4WxSqU8XC68n+pfq+ESm6Xw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL0PR05MB4963
+Content-Disposition: inline
+In-Reply-To: <20210115125703.1315064-2-maxime@cerno.tech>
 X-Mailman-Approved-At: Fri, 15 Jan 2021 22:51:40 +0000
-Subject: Re: [Nouveau] [PATCH 00/29] [Set 15] Finally rid W=1 warnings from
- GPU!
+Subject: Re: [Nouveau] [PATCH 02/10] drm: Rename plane atomic_check state
+ names
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -111,52 +47,230 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Jackie Li <yaodong.li@intel.com>, David Airlie <airlied@linux.ie>,
- "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- DRI Development <dri-devel@lists.freedesktop.org>,
- Eric Anholt <eric@anholt.net>, Jesse Barnes <jesse.barnes@intel.com>,
- Tina Zhang <tina.zhang@intel.com>, Jan Safrata <jan.nikitenko@gmail.com>,
- Sumit Semwal <sumit.semwal@linaro.org>, Gareth Hughes <gareth@valinux.com>,
- Pei Zhang <pei.zhang@intel.com>,
- Patrik Jakobsson <patrik.r.jakobsson@gmail.com>,
- Rob Clark <rob.clark@linaro.org>, Min He <min.he@intel.com>,
- Linux-graphics-maintainer <Linux-graphics-maintainer@vmware.com>,
+Cc: Heiko =?utf-8?Q?St=C3=BCbner?= <heiko@sntech.de>,
+ Xinliang Liu <xinliang.liu@linaro.org>, dri-devel@lists.freedesktop.org,
+ Anitha Chrisanthus <anitha.chrisanthus@intel.com>,
+ linux-stm32@st-md-mailman.stormreply.com, Jerome Brunet <jbrunet@baylibre.com>,
+ linux-samsung-soc@vger.kernel.org, Kevin Hilman <khilman@baylibre.com>,
+ Michal Simek <michal.simek@xilinx.com>, NXP Linux Team <linux-imx@nxp.com>,
+ VMware Graphics <linux-graphics-maintainer@vmware.com>,
+ Leo Li <sunpeng.li@amd.com>, Sascha Hauer <s.hauer@pengutronix.de>,
+ Roland Scheidegger <sroland@vmware.com>, Inki Dae <inki.dae@samsung.com>,
+ Sean Paul <sean@poorly.run>, Hyun Kwon <hyun.kwon@xilinx.com>,
+ Seung-Woo Kim <sw0312.kim@samsung.com>, linux-kernel@vger.kernel.org,
+ Pengutronix Kernel Team <kernel@pengutronix.de>,
+ Alex Deucher <alexander.deucher@amd.com>, freedreno@lists.freedesktop.org,
+ David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
+ Edmund Dea <edmund.j.dea@intel.com>, virtualization@lists.linux-foundation.org,
+ Eric Anholt <eric@anholt.net>, Thierry Reding <thierry.reding@gmail.com>,
+ Daniel Vetter <daniel.vetter@intel.com>,
+ Mihail Atanassov <mihail.atanassov@arm.com>,
+ Krzysztof Kozlowski <krzk@kernel.org>, linux-rockchip@lists.infradead.org,
+ "James \(Qian\) Wang" <james.qian.wang@arm.com>,
  Ben Skeggs <bskeggs@redhat.com>, Dave Airlie <airlied@redhat.com>,
- Niu Bing <bing.niu@intel.com>, Zhi Wang <zhi.a.wang@intel.com>,
- "linux-media@vger.kernel.org" <linux-media@vger.kernel.org>,
- Kevin Tian <kevin.tian@intel.com>, jim liu <jim.liu@intel.com>,
- Roland Scheidegger <sroland@vmware.com>,
- "intel-gfx@lists.freedesktop.org" <intel-gfx@lists.freedesktop.org>,
+ Alexandre Torgue <alexandre.torgue@st.com>,
+ Martin Blumenstingl <martin.blumenstingl@googlemail.com>,
+ linux-arm-msm@vger.kernel.org, Maxime Ripard <mripard@kernel.org>,
+ John Stultz <john.stultz@linaro.org>, linux-amlogic@lists.infradead.org,
+ linux-arm-kernel@lists.infradead.org,
+ Rodrigo Siqueira <rodrigosiqueiramelo@gmail.com>,
+ Sandy Huang <hjc@rock-chips.com>, Yannick Fertre <yannick.fertre@st.com>,
+ Kyungmin Park <kyungmin.park@samsung.com>,
+ Maxime Coquelin <mcoquelin.stm32@gmail.com>,
+ Brian Starkey <brian.starkey@arm.com>,
+ Haneen Mohammed <hamohammed.sa@gmail.com>,
+ Neil Armstrong <narmstrong@baylibre.com>, Stefan Agner <stefan@agner.ch>,
+ Melissa Wen <melissa.srw@gmail.com>, linux-tegra@vger.kernel.org,
+ Gerd Hoffmann <kraxel@redhat.com>,
+ Benjamin Gaignard <benjamin.gaignard@linaro.org>,
+ Fabio Estevam <festevam@gmail.com>,
+ Xinwei Kong <kong.kongxinwei@hisilicon.com>, amd-gfx@lists.freedesktop.org,
+ Chen-Yu Tsai <wens@csie.org>, Harry Wentland <harry.wentland@amd.com>,
+ Chun-Kuang Hu <chunkuang.hu@kernel.org>, Chen Feng <puck.chen@hisilicon.com>,
+ Alison Wang <alison.wang@nxp.com>, spice-devel@lists.freedesktop.org,
+ Daniel Vetter <daniel@ffwll.ch>, Tomi Valkeinen <tomba@kernel.org>,
+ Philippe Cornu <philippe.cornu@st.com>, Vincent Abriou <vincent.abriou@st.com>,
+ Kieran Bingham <kieran.bingham+renesas@ideasonboard.com>,
+ Tian Tao <tiantao6@hisilicon.com>, Shawn Guo <shawnguo@kernel.org>,
+ Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>,
+ Liviu Dudau <liviu.dudau@arm.com>, Paul Cercueil <paul@crapouillou.net>,
+ linux-renesas-soc@vger.kernel.org, Joonyoung Shim <jy0922.shim@samsung.com>,
+ Russell King <linux@armlinux.org.uk>,
  Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Jani Nikula <jani.nikula@linux.intel.com>,
- "linaro-mm-sig@lists.linaro.org" <linaro-mm-sig@lists.linaro.org>,
- Maxime Ripard <mripard@kernel.org>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
- "intel-gvt-dev@lists.freedesktop.org" <intel-gvt-dev@lists.freedesktop.org>,
- Keith Packard <keithp@keithp.com>, Eddie Dong <eddie.dong@intel.com>,
- "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- Faith <faith@valinux.com>, Daniel Vetter <daniel@ffwll.ch>,
- Ping Gao <ping.a.gao@intel.com>,
- =?iso-8859-1?Q?Christian_K=F6nig?= <christian.koenig@amd.com>,
- Zhiyuan Lv <zhiyuan.lv@intel.com>
+ linux-mediatek@lists.infradead.org,
+ Laurentiu Palcu <laurentiu.palcu@oss.nxp.com>,
+ Matthias Brugger <matthias.bgg@gmail.com>,
+ Jernej Skrabec <jernej.skrabec@siol.net>, Rob Clark <robdclark@gmail.com>,
+ Philipp Zabel <p.zabel@pengutronix.de>, Jyri Sarha <jyri.sarha@iki.fi>,
+ Lucas Stach <l.stach@pengutronix.de>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+Hi Maxime,
 
-> On Jan 15, 2021, at 13:15, Lee Jones <lee.jones@linaro.org> wrote:
+Thank you for the patch.
+
+On Fri, Jan 15, 2021 at 01:56:54PM +0100, Maxime Ripard wrote:
+> Most drivers call the argument to the plane atomic_check hook simply
+> state, which is going to conflict with the global atomic state in a
+> later rework. Let's rename it to new_plane_state (or new_state depending
+> on the convention used in the driver).
 > 
-> This set is part of a larger effort attempting to clean-up W=1
-> kernel builds, which are currently overwhelmingly riddled with
-> niggly little warnings.
+> This was done using the coccinelle script below, and built tested:
 > 
-> Last set!  All clean after this for; Arm, Arm64, PPC, MIPS and x86.
+> @ plane_atomic_func @
+> identifier helpers;
+> identifier func;
+> @@
+> 
+>  static const struct drm_plane_helper_funcs helpers = {
+>  	.atomic_check = func,
+>  };
+> 
+> @ has_old_state @
+> identifier plane_atomic_func.func;
+> identifier plane;
+> expression e;
+> symbol old_state;
+> symbol state;
+> @@
+> 
+>  func(struct drm_plane *plane, struct drm_plane_state *state)
+>  {
+>  	...
+>  	struct drm_plane_state *old_state = e;
+>  	...
+>  }
+> 
+> @ depends on has_old_state @
+> identifier plane_atomic_func.func;
+> identifier plane;
+> symbol old_state;
+> @@
+> 
+>  func(struct drm_plane *plane,
+> -	struct drm_plane_state *state
+> +	struct drm_plane_state *new_state
+>      )
+>  {
+>  	<+...
+> -	state
+> +	new_state
+> 	...+>
+>  }
+> 
+> @ has_state @
+> identifier plane_atomic_func.func;
+> identifier plane;
+> symbol state;
+> @@
+> 
+>  func(struct drm_plane *plane, struct drm_plane_state *state)
+>  {
+>  	...
+>  }
+> 
+> @ depends on has_state @
+> identifier plane_atomic_func.func;
+> identifier plane;
+> symbol old_state;
+> @@
+> 
+>  func(struct drm_plane *plane,
+> -	struct drm_plane_state *state
+> +	struct drm_plane_state *new_plane_state
+>      )
+>  {
+>  	<+...
+> -	state
+> +	new_plane_state
+> 	...+>
+>  }
+> 
+> Signed-off-by: Maxime Ripard <maxime@cerno.tech>
+> ---
 
-Thanks! For all the vmwgfx bits:
-Reviewed-by: Zack Rusin <zackr@vmware.com>
+[...]
 
-z
+>  drivers/gpu/drm/omapdrm/omap_plane.c          | 19 +++++----
+>  drivers/gpu/drm/rcar-du/rcar_du_plane.c       |  7 ++--
+>  drivers/gpu/drm/rcar-du/rcar_du_vsp.c         |  7 ++--
+>  drivers/gpu/drm/xlnx/zynqmp_disp.c            | 10 +++--
+
+For these, with the comment below addressed,
+
+Reviewed-by: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+
+>  41 files changed, 402 insertions(+), 357 deletions(-)
+
+[snip]
+
+> diff --git a/drivers/gpu/drm/omapdrm/omap_plane.c b/drivers/gpu/drm/omapdrm/omap_plane.c
+> index 51dc24acea73..78d0eb1fd69d 100644
+> --- a/drivers/gpu/drm/omapdrm/omap_plane.c
+> +++ b/drivers/gpu/drm/omapdrm/omap_plane.c
+> @@ -99,18 +99,19 @@ static void omap_plane_atomic_disable(struct drm_plane *plane,
+>  }
+>  
+>  static int omap_plane_atomic_check(struct drm_plane *plane,
+> -				   struct drm_plane_state *state)
+> +				   struct drm_plane_state *new_plane_state)
+>  {
+>  	struct drm_crtc_state *crtc_state;
+>  
+> -	if (!state->fb)
+> +	if (!new_plane_state->fb)
+>  		return 0;
+>  
+>  	/* crtc should only be NULL when disabling (i.e., !state->fb) */
+
+s/state/new_plane_state/ here too ?
+
+> -	if (WARN_ON(!state->crtc))
+> +	if (WARN_ON(!new_plane_state->crtc))
+>  		return 0;
+>  
+> -	crtc_state = drm_atomic_get_existing_crtc_state(state->state, state->crtc);
+> +	crtc_state = drm_atomic_get_existing_crtc_state(new_plane_state->state,
+> +							new_plane_state->crtc);
+>  	/* we should have a crtc state if the plane is attached to a crtc */
+>  	if (WARN_ON(!crtc_state))
+>  		return 0;
+> @@ -118,17 +119,17 @@ static int omap_plane_atomic_check(struct drm_plane *plane,
+>  	if (!crtc_state->enable)
+>  		return 0;
+>  
+> -	if (state->crtc_x < 0 || state->crtc_y < 0)
+> +	if (new_plane_state->crtc_x < 0 || new_plane_state->crtc_y < 0)
+>  		return -EINVAL;
+>  
+> -	if (state->crtc_x + state->crtc_w > crtc_state->adjusted_mode.hdisplay)
+> +	if (new_plane_state->crtc_x + new_plane_state->crtc_w > crtc_state->adjusted_mode.hdisplay)
+
+I can't help thinking we're using too long variable names... :-(
+
+>  		return -EINVAL;
+>  
+> -	if (state->crtc_y + state->crtc_h > crtc_state->adjusted_mode.vdisplay)
+> +	if (new_plane_state->crtc_y + new_plane_state->crtc_h > crtc_state->adjusted_mode.vdisplay)
+>  		return -EINVAL;
+>  
+> -	if (state->rotation != DRM_MODE_ROTATE_0 &&
+> -	    !omap_framebuffer_supports_rotation(state->fb))
+> +	if (new_plane_state->rotation != DRM_MODE_ROTATE_0 &&
+> +	    !omap_framebuffer_supports_rotation(new_plane_state->fb))
+>  		return -EINVAL;
+>  
+>  	return 0;
+
+[...]
+
+-- 
+Regards,
+
+Laurent Pinchart
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
