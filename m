@@ -1,59 +1,62 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 12A3A2F88DB
-	for <lists+nouveau@lfdr.de>; Fri, 15 Jan 2021 23:51:58 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id B42662F88D1
+	for <lists+nouveau@lfdr.de>; Fri, 15 Jan 2021 23:51:48 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9DE4F6E4E3;
-	Fri, 15 Jan 2021 22:51:42 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 279B56E4BA;
+	Fri, 15 Jan 2021 22:51:41 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 13CF06E48D
- for <nouveau@lists.freedesktop.org>; Fri, 15 Jan 2021 18:16:07 +0000 (UTC)
-Received: by mail-wr1-x430.google.com with SMTP id a12so10185015wrv.8
- for <nouveau@lists.freedesktop.org>; Fri, 15 Jan 2021 10:16:07 -0800 (PST)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0D02D6E4E8
+ for <nouveau@lists.freedesktop.org>; Fri, 15 Jan 2021 18:16:42 +0000 (UTC)
+Received: by mail-wm1-x32a.google.com with SMTP id m187so1966031wme.2
+ for <nouveau@lists.freedesktop.org>; Fri, 15 Jan 2021 10:16:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=nN4YS0/OMIRscREPk7XlxtO6CWNaJY9AfPbSKKbsChI=;
- b=Yov0HN/yLFQWnmoRImhvbXzZ4UdmnMn+ivBL0UhYPU/9UjFg7lCj2+AfhCw9OTMtN+
- mLP4CArEMJBh6Gcvkkr7CoFY05ZcD9CHvr0ickqZYKlL/XDRoc7HijHovbddsvEUEevn
- RTw1Cslx0twXqQ6a6zqdBnsb6xXzglGDgVyGhBhtkPxXJEB967eCuntgmg3PsTAYZbp9
- VNwdt2tjhc0aOrEFFJ4l0uv/nzZKH05+Haio0IYTUGi0QPMN53p01Mh3NOIDRwxP7F2h
- MCMJnRGtYvrX6NpFG46saMNFhe49/XcQQBTeauA5640tITtVF6N8ZzHGhs7hZO6rRsNx
- +88Q==
+ h=from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding;
+ bh=o2fukyLsotnyIO21hCJ1A0IUQV1SfrYh5wzz8JhsiiM=;
+ b=gkPe4zQRnTIJ91SOxape8cRj/kO69GrgNLCMZTar3f1vt1Iv3INiFfoVT/oT69muaj
+ rHbC4MoocQB7oWOMyPqd0PhTRoQrUybhIJLleeThAjJh18c5LtKtkskEoMwL6Wuee68F
+ 689gPeMLG2RIQCe4fo9R31pkp70ba6oPxfJqOwx6qAR47rC48hB4caKDT8H94DTWCTFM
+ uxAQaIEviR4XWvzlJzuwiKcqwWIPfU3snEV7oGmY4Rjl/jAiKFLgX3o1KUw1MBF8HqeI
+ HhcEfG6nCehTgn+SEwB9xYOy+m3bHhHzLpxfoK07S+mnsD04ZA9qMElbH3zWxlJrVoLZ
+ eLDA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=nN4YS0/OMIRscREPk7XlxtO6CWNaJY9AfPbSKKbsChI=;
- b=D4n18yu+zbY3iHDl4rQbTBCn6WHoFEzPtOipaAy/P0k8RmhKomtzusIAu5MxWo3mHD
- /l/5R3CPqRZWh3+AT1Y8wfW7lufGXhipbylAbkPhaC4Y7s0g0pQU7ztYknAu016bIhuB
- +GNUn1pPSPn1o2jvKlrCosg7+DnmqM2MOIIpNK7sdlgQIcI8n1kren98Vb6l7mIhNyM/
- 9IYgTVqJnPRzebaJOFyg3q/mDXnHW6+0TjoTHz9j0ugh/5Ui4XwXVC++sAMwdsv6Yg6L
- fRFaZvY0EpORNu6LqG99aFGI2zQbNOWuZQvmtJjZEDwVBOCCYXZROKOjj+1xJFz/R79I
- 7L3w==
-X-Gm-Message-State: AOAM531xkFImjqz0qOMQbRPfLfo25H/h5RZhDIKxEuwMe/kpLpeJ8WNE
- kRsyZDGMeBHaSm2wMEQE6FMlww==
-X-Google-Smtp-Source: ABdhPJxDFeYXsvZoB4yYhaLza6IPXBYukAVHXACFFID0st7lfxFY4Rj0isZ2N0Hb6G4aN+d70zHWnA==
-X-Received: by 2002:a05:6000:1088:: with SMTP id
- y8mr10264491wrw.380.1610734565744; 
- Fri, 15 Jan 2021 10:16:05 -0800 (PST)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=o2fukyLsotnyIO21hCJ1A0IUQV1SfrYh5wzz8JhsiiM=;
+ b=a6IdBR0DJwT1TrQ3WNsF2caGyKxO4j2woEU7xrkx7t/6POr8PyYfhkJyFJnGxc3Q39
+ hpvnptARX6rBJ4E+JKWT649NU8U06C45T6UEFW3Izg3VyAXTIlJYp83eZ+rRc08uuVmV
+ +TeZLVWj/gcPl2PumqaIpSPZyeJnOqpMWOdAaQLztYq7DNmTWcx9AaRDGo1mPlaWTSkw
+ HmomlssphpsmZk4sYnMKa5coZB4snlAOqqSVP5/IdLy8IxOO1uX8kP+ZpzZnuLuzDa/y
+ I4HHpIK8qYzroQLT/UN9vq96D30+3kEqLw4wNmLndziyuZqkaS256FCCfU8enWzC1TG+
+ OPjw==
+X-Gm-Message-State: AOAM530EqUwF0CVW9CEJWaa26cZCn+h2nR+tfJvsLwdyv45pO3mXW8DP
+ wVlglI9dIEdlk3K+SIZWchxvXQ==
+X-Google-Smtp-Source: ABdhPJwzAFS7Be8VkrVoNQgvyVh8GdN8DIxgBCBCbQEv+K0i2fq9aZe2mXAbWJUOB6yMre/SnSy8Gg==
+X-Received: by 2002:a05:600c:2742:: with SMTP id
+ 2mr9826336wmw.94.1610734600647; 
+ Fri, 15 Jan 2021 10:16:40 -0800 (PST)
 Received: from dell.default ([91.110.221.158])
- by smtp.gmail.com with ESMTPSA id b133sm14405979wme.33.2021.01.15.10.16.03
+ by smtp.gmail.com with ESMTPSA id b133sm14405979wme.33.2021.01.15.10.16.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 Jan 2021 10:16:04 -0800 (PST)
+ Fri, 15 Jan 2021 10:16:40 -0800 (PST)
 From: Lee Jones <lee.jones@linaro.org>
 To: lee.jones@linaro.org
-Date: Fri, 15 Jan 2021 18:15:32 +0000
-Message-Id: <20210115181601.3432599-1-lee.jones@linaro.org>
+Date: Fri, 15 Jan 2021 18:15:57 +0000
+Message-Id: <20210115181601.3432599-26-lee.jones@linaro.org>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20210115181601.3432599-1-lee.jones@linaro.org>
+References: <20210115181601.3432599-1-lee.jones@linaro.org>
 MIME-Version: 1.0
 X-Mailman-Approved-At: Fri, 15 Jan 2021 22:51:40 +0000
-Subject: [Nouveau] [PATCH 00/29] [Set 15] Finally rid W=1 warnings from GPU!
+Subject: [Nouveau] [PATCH 25/29] drm/nouveau/nouveau_ioc32: File headers are
+ not good candidates for kernel-doc
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -65,135 +68,42 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Jackie Li <yaodong.li@intel.com>, David Airlie <airlied@linux.ie>,
- nouveau@lists.freedesktop.org,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- dri-devel@lists.freedesktop.org, Eric Anholt <eric@anholt.net>,
- Jesse Barnes <jesse.barnes@intel.com>, Tina Zhang <tina.zhang@intel.com>,
- Jan Safrata <jan.nikitenko@gmail.com>, Sumit Semwal <sumit.semwal@linaro.org>,
- Gareth Hughes <gareth@valinux.com>, Pei Zhang <pei.zhang@intel.com>,
- Patrik Jakobsson <patrik.r.jakobsson@gmail.com>,
- Rob Clark <rob.clark@linaro.org>, Min He <min.he@intel.com>,
- VMware Graphics <linux-graphics-maintainer@vmware.com>,
- Ben Skeggs <bskeggs@redhat.com>, Dave Airlie <airlied@redhat.com>,
- Niu Bing <bing.niu@intel.com>, Zhi Wang <zhi.a.wang@intel.com>,
- linux-media@vger.kernel.org, Kevin Tian <kevin.tian@intel.com>,
- jim liu <jim.liu@intel.com>, Roland Scheidegger <sroland@vmware.com>,
- intel-gfx@lists.freedesktop.org,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Jani Nikula <jani.nikula@linux.intel.com>, linaro-mm-sig@lists.linaro.org,
- Maxime Ripard <mripard@kernel.org>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
- intel-gvt-dev@lists.freedesktop.org, Keith Packard <keithp@keithp.com>,
- Eddie Dong <eddie.dong@intel.com>, linux-kernel@vger.kernel.org,
- Faith <faith@valinux.com>, Daniel Vetter <daniel@ffwll.ch>,
- Ping Gao <ping.a.gao@intel.com>,
- =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
- Zack Rusin <zackr@vmware.com>, Zhiyuan Lv <zhiyuan.lv@intel.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-VGhpcyBzZXQgaXMgcGFydCBvZiBhIGxhcmdlciBlZmZvcnQgYXR0ZW1wdGluZyB0byBjbGVhbi11
-cCBXPTEKa2VybmVsIGJ1aWxkcywgd2hpY2ggYXJlIGN1cnJlbnRseSBvdmVyd2hlbG1pbmdseSBy
-aWRkbGVkIHdpdGgKbmlnZ2x5IGxpdHRsZSB3YXJuaW5ncy4KCkxhc3Qgc2V0ISAgQWxsIGNsZWFu
-IGFmdGVyIHRoaXMgZm9yOyBBcm0sIEFybTY0LCBQUEMsIE1JUFMgYW5kIHg4Ni4KCkxlZSBKb25l
-cyAoMjkpOgogIGRybS92bXdnZngvdm13Z2Z4X2NtZGJ1ZjogRml4IG1pc25hbWluZyBvZiAnaGVh
-ZGVycycgc2hvdWxkIGJlIHBsdXJhbAogIGRybS92bXdnZngvdm13Z2Z4X2NvdGFibGU6IEZpeCBh
-IGNvdXBsZSBvZiBzaW1wbGUgZG9jdW1lbnRhdGlvbgogICAgcHJvYmxlbXMKICBkcm0vdm13Z2Z4
-L3Ztd2dmeF9zbzogQWRkIGRlc2NyaXB0aW9uIGZvciAndm13X3ZpZXcncyAncmN1JyBtZW1iZXIK
-ICBkcm0vdm13Z2Z4L3Ztd2dmeF9iaW5kaW5nOiBQcm92aWRlIHNvbWUgbWlzc2luZyBwYXJhbSBk
-ZXNjcmlwdGlvbnMgYW5kCiAgICByZW1vdmUgb3RoZXJzCiAgZHJtL3Ztd2dmeC92bXdnZnhfbXNn
-OiBGaXggbWlzc3BlbGxpbmcgb2YgJ21zZycKICBkcm0vZ21hNTAwL21tdTogQWN0dWFsbHkgcmV0
-dXJuIGFuIGVycm9yIGlmIG9uZSBvY2N1cnMKICBkcm0vdm13Z2Z4L3Ztd2dmeF9ibGl0OiBBZGQg
-ZGVzY3JpcHRpb24gZm9yICd2bXdfYm9fY3B1X2JsaXQncyAnZGlmZicKICAgIHBhcmFtCiAgZHJt
-L3Ztd2dmeC92bXdnZnhfdmFsaWRhdGlvbjogQWRkIHNvbWUgbWlzc2luZyBzdHJ1Y3QgbWVtYmVy
-L2Z1bmN0aW9uCiAgICBwYXJhbSBkZXNjcmlwdGlvbnMKICBkcm0vdm13Z2Z4L3R0bV9vYmplY3Q6
-IERlbW90ZSBoYWxmLWFzc2VkIGhlYWRlcnMgYW5kIGZpeC11cCBhbm90aGVyCiAgZHJtL3Ztd2dm
-eC92bXdnZnhfdGhwOiBBZGQgZGVzY3JpcHRpb24gZm9yICd2bXdfdGhwX21hbmFnZXIncyBtZW1i
-ZXIKICAgICdtYW5hZ2VyJwogIGRybS9nbWE1MDAvcHNiX2ludGVsX3Nkdm86IERlbW90ZSBrZXJu
-ZWwtZG9jIGFidXNlcwogIGRybS9nbWE1MDAvcHNiX2lycTogRGVtb3RlIGtlcm5lbC1kb2MgYWJ1
-c2UKICBkcm0vZHJtX2RwX2hlbHBlcjogRml4IHNwZWxsaW5nIGlzc3VlIGFuZCBhZGQgbWlzc2lu
-ZyBkZXNjcmlwdGlvbiBmb3IKICAgICdlbmFibGVfZnJsX3JlYWR5X2hwZCcKICBkcm0vZ21hNTAw
-L2Nkdl9pbnRlbF9jcnQ6IERlbW90ZSBrZXJuZWwtZG9jIGFidXNlIGluCiAgICAnY2R2X2ludGVs
-X2NydF9kZXRlY3RfaG90cGx1ZygpJ3MgaGVhZGVyCiAgZHJtL2dtYTUwMC9jZHZfaW50ZWxfZGlz
-cGxheTogRGVtb3RlIGtlcm5lbC1kb2MgYWJ1c2UgaW4KICAgICdjZHZfaW50ZWxfcGFuZWxfZml0
-dGVyX3BpcGUoKSdzIGhlYWRlcgogIGRybS9nbWE1MDAvY2R2X2ludGVsX2x2ZHM6IERlbW90ZSB1
-bndvcnRoeSBoZWFkZXJzIHRvIHN0YW5kYXJkIGJsb2NrcwogICAgYW5kIGZpeCBhbm90aGVyCiAg
-ZHJtL2dtYTUwMC9jZHZfaW50ZWxfZHA6IERlbW90ZSBvbmUgdW53b3J0aHkgaGVhZGVyIGZpeCBh
-bm90aGVyCiAgZHJtL2dtYTUwMC9vYWt0cmFpbF9sdmRzX2kyYzogUmVtb3ZlIHVudXNlZCB2YXJp
-YWJsZXMgJ3RtcCcKICBkcm0vZ21hNTAwL29ha3RyYWlsX2x2ZHM6IERlbW90ZSBvbmUgZG9jdW1l
-bnRhdGlvbiBoZWFkZXIgZml4IGFub3RoZXIKICBkcm0vZ21hNTAwL29ha3RyYWlsX2NydGM6IERl
-bW90ZSB1bndvcnRoeSBrZXJuZWwtZG9jIGhlYWRlcnMKICBkcm0vZ21hNTAwL21kZmxkX2RzaV9v
-dXRwdXQ6IERlbW90ZSBhIGNvdXBsZSBvZiBrZXJuZWwtZG9jIGZvcm1hdHRpbmcKICAgIGFidXNl
-cwogIGRybS9nbWE1MDAvbWRmbGRfaW50ZWxfZGlzcGxheTogRGVtb3RlIHRocmVlIGtlcm5lbC1k
-b2MgZm9ybWF0dGluZwogICAgYWJ1c2VzCiAgZHJtL2RybV9hZ3BzdXBwb3J0OiBTdHJpcCBvdXQg
-b2J2aW91c2x5IHdyb25nIGRlc2NyaXB0aW9ucyBhbmQgZGVtb3RlCiAgICB0byBzdGFuZGFyZCBo
-ZWFkZXJzCiAgZHJtL2k5MTUvZ3Z0L2hhbmRsZXJzOiBSZW1vdmUga2VybmVsLWRvYyBmb3JtYXR0
-aW5nIGZyb20KICAgIG5vbi1rZXJuZWwtZG9jIGhlYWRlcgogIGRybS9ub3V2ZWF1L25vdXZlYXVf
-aW9jMzI6IEZpbGUgaGVhZGVycyBhcmUgbm90IGdvb2QgY2FuZGlkYXRlcyBmb3IKICAgIGtlcm5l
-bC1kb2MKICBkcm0vbm91dmVhdS9ub3V2ZWF1X3N2bTogUmVtb3ZlIHVudXNlZCB2YXJpYWJsZSAn
-cmV0JyBmcm9tIHZvaWQKICAgIGZ1bmN0aW9uCiAgZHJtL25vdXZlYXUvbm91dmVhdV9iaW9zOiBS
-ZW1vdmUgdW51c2VkIHZhcmlhYmxlICdwZGV2JyBmcm9tCiAgICAnbm91dmVhdV9iaW9zX2luaXQo
-KScKICBkcm0vbm91dmVhdS9ub3V2ZWF1X2lvYzMyOiBEZW1vdGUga2VybmVsLWRvYyBhYnVzZSB0
-byBzdGFuZGFyZCBjb21tZW50CiAgICBibG9jawogIGRybS92bXdnZngvdHRtX29iamVjdDogUmVv
-cmRlciBoZWFkZXIgdG8gaW1tZWRpYXRlbHkgcHJlY2VkZSBpdHMKICAgIHN0cnVjdAoKIGRyaXZl
-cnMvZ3B1L2RybS9kcm1fYWdwc3VwcG9ydC5jICAgICAgICAgICAgIHwgNDYgKysrKystLS0tLS0t
-LS0tLS0tLS0KIGRyaXZlcnMvZ3B1L2RybS9kcm1fZHBfaGVscGVyLmMgICAgICAgICAgICAgIHwg
-IDMgKy0KIGRyaXZlcnMvZ3B1L2RybS9nbWE1MDAvY2R2X2ludGVsX2NydC5jICAgICAgIHwgIDIg
-Ky0KIGRyaXZlcnMvZ3B1L2RybS9nbWE1MDAvY2R2X2ludGVsX2Rpc3BsYXkuYyAgIHwgIDIgKy0K
-IGRyaXZlcnMvZ3B1L2RybS9nbWE1MDAvY2R2X2ludGVsX2RwLmMgICAgICAgIHwgIDQgKy0KIGRy
-aXZlcnMvZ3B1L2RybS9nbWE1MDAvY2R2X2ludGVsX2x2ZHMuYyAgICAgIHwgIDcgKy0tCiBkcml2
-ZXJzL2dwdS9kcm0vZ21hNTAwL21kZmxkX2RzaV9vdXRwdXQuYyAgICB8ICA0ICstCiBkcml2ZXJz
-L2dwdS9kcm0vZ21hNTAwL21kZmxkX2ludGVsX2Rpc3BsYXkuYyB8ICA2ICstLQogZHJpdmVycy9n
-cHUvZHJtL2dtYTUwMC9tbXUuYyAgICAgICAgICAgICAgICAgfCAgMiArLQogZHJpdmVycy9ncHUv
-ZHJtL2dtYTUwMC9vYWt0cmFpbF9jcnRjLmMgICAgICAgfCAgNiArLS0KIGRyaXZlcnMvZ3B1L2Ry
-bS9nbWE1MDAvb2FrdHJhaWxfbHZkcy5jICAgICAgIHwgIDMgKy0KIGRyaXZlcnMvZ3B1L2RybS9n
-bWE1MDAvb2FrdHJhaWxfbHZkc19pMmMuYyAgIHwgIDggKystLQogZHJpdmVycy9ncHUvZHJtL2dt
-YTUwMC9wc2JfaW50ZWxfc2R2by5jICAgICAgfCAgNiArLS0KIGRyaXZlcnMvZ3B1L2RybS9nbWE1
-MDAvcHNiX2lycS5jICAgICAgICAgICAgIHwgIDMgKy0KIGRyaXZlcnMvZ3B1L2RybS9pOTE1L2d2
-dC9oYW5kbGVycy5jICAgICAgICAgIHwgIDIgKy0KIGRyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25v
-dXZlYXVfYmlvcy5jICAgICAgIHwgIDIgLQogZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVh
-dV9pb2MzMi5jICAgICAgfCAgNCArLQogZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9z
-dm0uYyAgICAgICAgfCAgNSArLS0KIGRyaXZlcnMvZ3B1L2RybS92bXdnZngvdHRtX29iamVjdC5j
-ICAgICAgICAgIHwgMjUgKysrKysrLS0tLS0KIGRyaXZlcnMvZ3B1L2RybS92bXdnZngvdm13Z2Z4
-X2JpbmRpbmcuYyAgICAgIHwgIDkgKystLQogZHJpdmVycy9ncHUvZHJtL3Ztd2dmeC92bXdnZnhf
-YmxpdC5jICAgICAgICAgfCAgMSArCiBkcml2ZXJzL2dwdS9kcm0vdm13Z2Z4L3Ztd2dmeF9jbWRi
-dWYuYyAgICAgICB8ICAyICstCiBkcml2ZXJzL2dwdS9kcm0vdm13Z2Z4L3Ztd2dmeF9jb3RhYmxl
-LmMgICAgICB8ICAzICstCiBkcml2ZXJzL2dwdS9kcm0vdm13Z2Z4L3Ztd2dmeF9tc2cuYyAgICAg
-ICAgICB8ICAyICstCiBkcml2ZXJzL2dwdS9kcm0vdm13Z2Z4L3Ztd2dmeF9zby5jICAgICAgICAg
-ICB8ICAxICsKIGRyaXZlcnMvZ3B1L2RybS92bXdnZngvdm13Z2Z4X3RocC5jICAgICAgICAgIHwg
-IDEgKwogZHJpdmVycy9ncHUvZHJtL3Ztd2dmeC92bXdnZnhfdmFsaWRhdGlvbi5jICAgfCAgNSAr
-Ky0KIDI3IGZpbGVzIGNoYW5nZWQsIDc0IGluc2VydGlvbnMoKyksIDkwIGRlbGV0aW9ucygtKQoK
-Q2M6IEJlbiBTa2VnZ3MgPGJza2VnZ3NAcmVkaGF0LmNvbT4KQ2M6ICJDaHJpc3RpYW4gS8O2bmln
-IiA8Y2hyaXN0aWFuLmtvZW5pZ0BhbWQuY29tPgpDYzogRGFuaWVsIFZldHRlciA8ZGFuaWVsQGZm
-d2xsLmNoPgpDYzogRGF2ZSBBaXJsaWUgPGFpcmxpZWRAcmVkaGF0LmNvbT4KQ2M6IERhdmlkIEFp
-cmxpZSA8YWlybGllZEBsaW51eC5pZT4KQ2M6IGRyaS1kZXZlbEBsaXN0cy5mcmVlZGVza3RvcC5v
-cmcKQ2M6IEVkZGllIERvbmcgPGVkZGllLmRvbmdAaW50ZWwuY29tPgpDYzogRXJpYyBBbmhvbHQg
-PGVyaWNAYW5ob2x0Lm5ldD4KQ2M6IEZhaXRoIDxmYWl0aEB2YWxpbnV4LmNvbT4KQ2M6IEdhcmV0
-aCBIdWdoZXMgPGdhcmV0aEB2YWxpbnV4LmNvbT4KQ2M6IGludGVsLWdmeEBsaXN0cy5mcmVlZGVz
-a3RvcC5vcmcKQ2M6IGludGVsLWd2dC1kZXZAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCkNjOiBKYWNr
-aWUgTGkgPHlhb2RvbmcubGlAaW50ZWwuY29tPgpDYzogSmFuaSBOaWt1bGEgPGphbmkubmlrdWxh
-QGxpbnV4LmludGVsLmNvbT4KQ2M6IEphbiBTYWZyYXRhIDxqYW4ubmlraXRlbmtvQGdtYWlsLmNv
-bT4KQ2M6IEplc3NlIEJhcm5lcyA8amVzc2UuYmFybmVzQGludGVsLmNvbT4KQ2M6IGppbSBsaXUg
-PGppbS5saXVAaW50ZWwuY29tPgpDYzogSm9vbmFzIExhaHRpbmVuIDxqb29uYXMubGFodGluZW5A
-bGludXguaW50ZWwuY29tPgpDYzogS2VpdGggUGFja2FyZCA8a2VpdGhwQGtlaXRocC5jb20+CkNj
-OiBLZXZpbiBUaWFuIDxrZXZpbi50aWFuQGludGVsLmNvbT4KQ2M6IGxpbmFyby1tbS1zaWdAbGlz
-dHMubGluYXJvLm9yZwpDYzogbGludXgtbWVkaWFAdmdlci5rZXJuZWwub3JnCkNjOiBNYWFydGVu
-IExhbmtob3JzdCA8bWFhcnRlbi5sYW5raG9yc3RAbGludXguaW50ZWwuY29tPgpDYzogTWF4aW1l
-IFJpcGFyZCA8bXJpcGFyZEBrZXJuZWwub3JnPgpDYzogTWluIEhlIDxtaW4uaGVAaW50ZWwuY29t
-PgpDYzogTml1IEJpbmcgPGJpbmcubml1QGludGVsLmNvbT4KQ2M6IG5vdXZlYXVAbGlzdHMuZnJl
-ZWRlc2t0b3Aub3JnCkNjOiBQYXRyaWsgSmFrb2Jzc29uIDxwYXRyaWsuci5qYWtvYnNzb25AZ21h
-aWwuY29tPgpDYzogUGVpIFpoYW5nIDxwZWkuemhhbmdAaW50ZWwuY29tPgpDYzogUGluZyBHYW8g
-PHBpbmcuYS5nYW9AaW50ZWwuY29tPgpDYzogUm9iIENsYXJrIDxyb2IuY2xhcmtAbGluYXJvLm9y
-Zz4KQ2M6IFJvZHJpZ28gVml2aSA8cm9kcmlnby52aXZpQGludGVsLmNvbT4KQ2M6IFJvbGFuZCBT
-Y2hlaWRlZ2dlciA8c3JvbGFuZEB2bXdhcmUuY29tPgpDYzogU3VtaXQgU2Vtd2FsIDxzdW1pdC5z
-ZW13YWxAbGluYXJvLm9yZz4KQ2M6IFRob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNl
-LmRlPgpDYzogVGluYSBaaGFuZyA8dGluYS56aGFuZ0BpbnRlbC5jb20+CkNjOiBWTXdhcmUgR3Jh
-cGhpY3MgPGxpbnV4LWdyYXBoaWNzLW1haW50YWluZXJAdm13YXJlLmNvbT4KQ2M6IFphY2sgUnVz
-aW4gPHphY2tyQHZtd2FyZS5jb20+CkNjOiBaaGVueXUgV2FuZyA8emhlbnl1d0BsaW51eC5pbnRl
-bC5jb20+CkNjOiBaaGkgV2FuZyA8emhpLmEud2FuZ0BpbnRlbC5jb20+CkNjOiBaaGl5dWFuIEx2
-IDx6aGl5dWFuLmx2QGludGVsLmNvbT4KLS0gCjIuMjUuMQoKX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBtYWlsaW5nIGxpc3QKTm91dmVhdUBs
-aXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1h
-bi9saXN0aW5mby9ub3V2ZWF1Cg==
+Fixes the following W=1 kernel build warning(s):
+
+ drivers/gpu/drm/nouveau/nouveau_ioc32.c:2: warning: Cannot understand  * file mga_ioc32.c
+
+Cc: Ben Skeggs <bskeggs@redhat.com>
+Cc: David Airlie <airlied@linux.ie>
+Cc: Daniel Vetter <daniel@ffwll.ch>
+Cc: dri-devel@lists.freedesktop.org
+Cc: nouveau@lists.freedesktop.org
+Signed-off-by: Lee Jones <lee.jones@linaro.org>
+---
+ drivers/gpu/drm/nouveau/nouveau_ioc32.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/gpu/drm/nouveau/nouveau_ioc32.c b/drivers/gpu/drm/nouveau/nouveau_ioc32.c
+index adf01ca9e035d..8ddf9b2325a42 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_ioc32.c
++++ b/drivers/gpu/drm/nouveau/nouveau_ioc32.c
+@@ -1,4 +1,4 @@
+-/**
++/*
+  * \file mga_ioc32.c
+  *
+  * 32-bit ioctl compatibility routines for the MGA DRM.
+-- 
+2.25.1
+
+_______________________________________________
+Nouveau mailing list
+Nouveau@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/nouveau
