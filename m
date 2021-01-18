@@ -1,51 +1,96 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 781B12FA77D
-	for <lists+nouveau@lfdr.de>; Mon, 18 Jan 2021 18:28:21 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id E50412FA77B
+	for <lists+nouveau@lfdr.de>; Mon, 18 Jan 2021 18:28:16 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 436C16E497;
-	Mon, 18 Jan 2021 17:28:15 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 457896E491;
+	Mon, 18 Jan 2021 17:28:14 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ej1-f43.google.com (mail-ej1-f43.google.com
- [209.85.218.43])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 51B4D6E200
- for <nouveau@lists.freedesktop.org>; Mon, 18 Jan 2021 12:41:13 +0000 (UTC)
-Received: by mail-ej1-f43.google.com with SMTP id b5so7043044ejv.4
- for <nouveau@lists.freedesktop.org>; Mon, 18 Jan 2021 04:41:13 -0800 (PST)
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8032E6E3FC
+ for <nouveau@lists.freedesktop.org>; Mon, 18 Jan 2021 14:54:10 +0000 (UTC)
+Received: by mail-wm1-x336.google.com with SMTP id o10so57839wmc.1
+ for <nouveau@lists.freedesktop.org>; Mon, 18 Jan 2021 06:54:10 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
+ h=date:from:to:cc:subject:message-id:mail-followup-to:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=apoa+/DSSYyKEnsbh8pgyvury9C3FOAZ2Hpf78I8wmE=;
+ b=bUU0fLbW5tYVN/3qqBoHlyCYwU56Sj1vkRJd+yEsEAOmZ9r+YiDJpcqqhpVFIYjG11
+ ChK5NUpqyDh4MnapEPNYsDuZWAWR76Z/9+j6FVVzJtKzw09JfkDgfd9ostsJvQfANGv3
+ AxGl2PEThbi4a5OMR1mJ1J4y2WcWh1kIXLxPQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=p8QxakBM3iL3jzv1XYNvHv9o/QLoUGqDsP8V7yEcCCA=;
- b=VsItc0osKhunO2SmxIOQX+jGc0uyH1DGERn0qoXLNuq0yY6rYLR4RMHCfCVgkRReUV
- wkyHi6JPZE1fPXqRMgYbX/k2Je8tOP/KcHcDGvdOmAnin5ypxC7GKTv3IioSAViZfsRH
- Z2VMd6zVrFq5wGQuTUn5Gzynh0yVbFll24vAZW0eriQft2/ocmI6GygPpBaEGEanflvO
- TT9oI6HDPEKGCGJwy2567wZwnl9/KBKFQvOP3oQgCxUAqTEgrB6KVnjLN+CyDY93FeqG
- HdV92QIJxoUjWQRlz2TPAAyjmglhzcXUS0Dp5OJrd1a+jwuBU5i/Pnip9yyaJpv3eGh6
- hp3w==
-X-Gm-Message-State: AOAM531PDI7LbSLCNPIS4ZBXDk9tDXzy3SiW0UIXeJkYgdNQ5vjoJhmJ
- OijahJe9XPkEs2WaZfXH0m8PWzdoihU=
-X-Google-Smtp-Source: ABdhPJzSV6rJqzyZ5XesdUdZ2rsaij9CwC1uq9FM47J8q82QNAd6Rmwjr6ywS1u5NbA1qtBR/hf13Q==
-X-Received: by 2002:a17:906:ae4a:: with SMTP id
- lf10mr6424217ejb.480.1610973671676; 
- Mon, 18 Jan 2021 04:41:11 -0800 (PST)
-Received: from bastian-desktop.fritz.box (b2b-130-180-23-226.unitymedia.biz.
- [130.180.23.226])
- by smtp.gmail.com with ESMTPSA id y8sm8724793edd.97.2021.01.18.04.41.10
+ h=x-gm-message-state:date:from:to:cc:subject:message-id
+ :mail-followup-to:references:mime-version:content-disposition
+ :in-reply-to;
+ bh=apoa+/DSSYyKEnsbh8pgyvury9C3FOAZ2Hpf78I8wmE=;
+ b=O+hRyfIbQBhH9H/Lk9z03WRM7//dxFztL3rJ2YbxMJMLEfGiL18Unn6uhQIeOVPPkQ
+ bjUfMl+xYF9pVG66BZmlR/N6ubG656K3SFoze+vj4wIZcxsOeMIYBNwZzkeMHOUiGr84
+ msQmHjcy5m9oF1dgiEHkr8LDJUw2Gro//SA3kcGjsRXARGBYzBN1tgwBpQUplEEdFTRD
+ 0gwtSzJBMNiVemVaLqVNfMPdYMwYP62K1KMOaOwP26tZ+RbAHIXCcPW/BQuBD6ARssvT
+ SHoyLp9i9sEz57jf5H3Z8qQRfDj64dWz7uSWuVSWGRX0QAB491d/YyWp6C9Kp/+PL7jD
+ guPA==
+X-Gm-Message-State: AOAM531IeQVl1BtHcpPGAVwKpL59lEdGS7IMhoz/ikUp4QcI9iTT3kHD
+ OYVNyPlRFHl8OFR3je7ZQGya2g==
+X-Google-Smtp-Source: ABdhPJzBMfJCHA9TAhBtmzLc4Yhw8L8oJ+kX7oYiwiUeFKbdP9etKtlE4mnl65fXm5nmp+xj4jA1oQ==
+X-Received: by 2002:a7b:cbd5:: with SMTP id n21mr19693849wmi.5.1610981649008; 
+ Mon, 18 Jan 2021 06:54:09 -0800 (PST)
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
+ by smtp.gmail.com with ESMTPSA id x128sm27249271wmb.29.2021.01.18.06.54.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 18 Jan 2021 04:41:11 -0800 (PST)
-From: Bastian Beranek <bastian.beischer@rwth-aachen.de>
-To: nouveau@lists.freedesktop.org
-Date: Mon, 18 Jan 2021 13:40:48 +0100
-Message-Id: <20210118124048.8772-1-bastian.beischer@rwth-aachen.de>
-X-Mailer: git-send-email 2.30.0
+ Mon, 18 Jan 2021 06:54:08 -0800 (PST)
+Date: Mon, 18 Jan 2021 15:54:05 +0100
+From: Daniel Vetter <daniel@ffwll.ch>
+To: Zack Rusin <zackr@vmware.com>
+Message-ID: <YAWhDRkSOHbJ+2Le@phenom.ffwll.local>
+Mail-Followup-To: Zack Rusin <zackr@vmware.com>,
+ Lee Jones <lee.jones@linaro.org>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ Ben Skeggs <bskeggs@redhat.com>,
+ Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+ Dave Airlie <airlied@redhat.com>, David Airlie <airlied@linux.ie>,
+ DRI Development <dri-devel@lists.freedesktop.org>,
+ Eddie Dong <eddie.dong@intel.com>, Eric Anholt <eric@anholt.net>,
+ Faith <faith@valinux.com>, Gareth Hughes <gareth@valinux.com>,
+ "intel-gfx@lists.freedesktop.org" <intel-gfx@lists.freedesktop.org>,
+ "intel-gvt-dev@lists.freedesktop.org" <intel-gvt-dev@lists.freedesktop.org>,
+ Jackie Li <yaodong.li@intel.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>,
+ Jan Safrata <jan.nikitenko@gmail.com>,
+ Jesse Barnes <jesse.barnes@intel.com>, jim liu <jim.liu@intel.com>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Keith Packard <keithp@keithp.com>,
+ Kevin Tian <kevin.tian@intel.com>,
+ "linaro-mm-sig@lists.linaro.org" <linaro-mm-sig@lists.linaro.org>,
+ "linux-media@vger.kernel.org" <linux-media@vger.kernel.org>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Min He <min.he@intel.com>,
+ Niu Bing <bing.niu@intel.com>,
+ "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
+ Patrik Jakobsson <patrik.r.jakobsson@gmail.com>,
+ Pei Zhang <pei.zhang@intel.com>, Ping Gao <ping.a.gao@intel.com>,
+ Rob Clark <rob.clark@linaro.org>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ Roland Scheidegger <sroland@vmware.com>,
+ Sumit Semwal <sumit.semwal@linaro.org>,
+ Thomas Zimmermann <tzimmermann@suse.de>,
+ Tina Zhang <tina.zhang@intel.com>,
+ Linux-graphics-maintainer <Linux-graphics-maintainer@vmware.com>,
+ Zhenyu Wang <zhenyuw@linux.intel.com>,
+ Zhi Wang <zhi.a.wang@intel.com>, Zhiyuan Lv <zhiyuan.lv@intel.com>
+References: <20210115181601.3432599-1-lee.jones@linaro.org>
+ <F914D9B9-6DD4-4383-9F7C-8D09FBFE96CE@vmware.com>
 MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <F914D9B9-6DD4-4383-9F7C-8D09FBFE96CE@vmware.com>
+X-Operating-System: Linux phenom 5.7.0-1-amd64 
 X-Mailman-Approved-At: Mon, 18 Jan 2021 17:28:14 +0000
-Subject: [Nouveau] [PATCH] drm/gpu/nouveau/dispnv50: Restore pushing of all
- data.
+Subject: Re: [Nouveau] [PATCH 00/29] [Set 15] Finally rid W=1 warnings from
+ GPU!
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,54 +102,63 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Bastian Beranek <bastian.beischer@rwth-aachen.de>, bskeggs@redhat.com
+Cc: Jackie Li <yaodong.li@intel.com>, David Airlie <airlied@linux.ie>,
+ "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ DRI Development <dri-devel@lists.freedesktop.org>,
+ Eric Anholt <eric@anholt.net>, Jesse Barnes <jesse.barnes@intel.com>,
+ Tina Zhang <tina.zhang@intel.com>, Jan Safrata <jan.nikitenko@gmail.com>,
+ Lee Jones <lee.jones@linaro.org>, Sumit Semwal <sumit.semwal@linaro.org>,
+ Gareth Hughes <gareth@valinux.com>, Pei Zhang <pei.zhang@intel.com>,
+ Patrik Jakobsson <patrik.r.jakobsson@gmail.com>,
+ Rob Clark <rob.clark@linaro.org>, Min He <min.he@intel.com>,
+ Linux-graphics-maintainer <Linux-graphics-maintainer@vmware.com>,
+ Ben Skeggs <bskeggs@redhat.com>, Dave Airlie <airlied@redhat.com>,
+ Niu Bing <bing.niu@intel.com>, Zhi Wang <zhi.a.wang@intel.com>,
+ "linux-media@vger.kernel.org" <linux-media@vger.kernel.org>,
+ Kevin Tian <kevin.tian@intel.com>, jim liu <jim.liu@intel.com>,
+ Roland Scheidegger <sroland@vmware.com>,
+ "intel-gfx@lists.freedesktop.org" <intel-gfx@lists.freedesktop.org>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>,
+ "linaro-mm-sig@lists.linaro.org" <linaro-mm-sig@lists.linaro.org>,
+ Maxime Ripard <mripard@kernel.org>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ "intel-gvt-dev@lists.freedesktop.org" <intel-gvt-dev@lists.freedesktop.org>,
+ Keith Packard <keithp@keithp.com>, Eddie Dong <eddie.dong@intel.com>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ Faith <faith@valinux.com>, Daniel Vetter <daniel@ffwll.ch>,
+ Ping Gao <ping.a.gao@intel.com>,
+ Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+ Zhiyuan Lv <zhiyuan.lv@intel.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Commit f844eb485eb056ad3b67e49f95cbc6c685a73db4 introduced a regression for
-NV50, which lead to visual artifacts, tearing and eventual crashes.
+On Fri, Jan 15, 2021 at 06:27:15PM +0000, Zack Rusin wrote:
+> 
+> > On Jan 15, 2021, at 13:15, Lee Jones <lee.jones@linaro.org> wrote:
+> > 
+> > This set is part of a larger effort attempting to clean-up W=1
+> > kernel builds, which are currently overwhelmingly riddled with
+> > niggly little warnings.
+> > 
+> > Last set!  All clean after this for; Arm, Arm64, PPC, MIPS and x86.
+> 
+> Thanks! For all the vmwgfx bits:
+> Reviewed-by: Zack Rusin <zackr@vmware.com>
 
-In the changes of f844eb485eb056ad3b67e49f95cbc6c685a73db4 only the first line
-was correctly translated to the new NVIDIA header macros:
+Ok I merged everything except vmwgfx (that's for Zack) and i915/nouveau
+(those generally go through other trees, pls holler if they're stuck).
 
--		PUSH_NVSQ(push, NV827C, 0x0110, 0,
--					0x0114, 0);
-+		PUSH_MTHD(push, NV827C, SET_PROCESSING,
-+			  NVDEF(NV827C, SET_PROCESSING, USE_GAIN_OFS, DISABLE));
-
-The lower part ("0x0114, 0") was probably omitted by accident.
-
-This patch restores the push of the missing data and fixes the regression.
-
-Signed-off-by: Bastian Beranek <bastian.beischer@rwth-aachen.de>
-Fixes: f844eb485eb056ad3b67e49f95cbc6c685a73db4
-Link: https://gitlab.freedesktop.org/drm/nouveau/-/issues/14
----
- drivers/gpu/drm/nouveau/dispnv50/base827c.c | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
-
-diff --git a/drivers/gpu/drm/nouveau/dispnv50/base827c.c b/drivers/gpu/drm/nouveau/dispnv50/base827c.c
-index 18d34096f125..093d4ba6910e 100644
---- a/drivers/gpu/drm/nouveau/dispnv50/base827c.c
-+++ b/drivers/gpu/drm/nouveau/dispnv50/base827c.c
-@@ -49,7 +49,11 @@ base827c_image_set(struct nv50_wndw *wndw, struct nv50_wndw_atom *asyw)
- 			  NVVAL(NV827C, SET_CONVERSION, OFS, 0x64));
- 	} else {
- 		PUSH_MTHD(push, NV827C, SET_PROCESSING,
--			  NVDEF(NV827C, SET_PROCESSING, USE_GAIN_OFS, DISABLE));
-+			  NVDEF(NV827C, SET_PROCESSING, USE_GAIN_OFS, DISABLE),
-+
-+					SET_CONVERSION,
-+			  NVVAL(NV827C, SET_CONVERSION, GAIN, 0) |
-+			  NVVAL(NV827C, SET_CONVERSION, OFS, 0));
- 	}
- 
- 	PUSH_MTHD(push, NV827C, SURFACE_SET_OFFSET(0, 0), asyw->image.offset[0] >> 8,
+Note that we have some build issue on some of the configs sfr uses, so drm
+trees are still stuck on old versions in linux-next. Hopefully should get
+resolved soon, the bugfix is in some subtree I've heard.
+-Daniel
 -- 
-2.30.0
-
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
