@@ -2,52 +2,107 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D893E2FBBC1
-	for <lists+nouveau@lfdr.de>; Tue, 19 Jan 2021 16:56:40 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id DDF972FC46B
+	for <lists+nouveau@lfdr.de>; Wed, 20 Jan 2021 00:09:24 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8E3236E3E3;
-	Tue, 19 Jan 2021 15:56:38 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5A98189E14;
+	Tue, 19 Jan 2021 23:09:22 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 301 seconds by postgrey-1.36 at gabe;
- Tue, 19 Jan 2021 15:56:37 UTC
-Received: from hqnvemgate26.nvidia.com (hqnvemgate26.nvidia.com
- [216.228.121.65])
- by gabe.freedesktop.org (Postfix) with ESMTPS id AFE976E3E3;
- Tue, 19 Jan 2021 15:56:37 +0000 (UTC)
-Received: from hqmail.nvidia.com (Not Verified[216.228.121.13]) by
- hqnvemgate26.nvidia.com (using TLS: TLSv1.2, AES256-SHA)
- id <B600700080001>; Tue, 19 Jan 2021 07:51:36 -0800
-Received: from [172.20.40.72] (172.20.145.6) by HQMAIL107.nvidia.com
- (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Tue, 19 Jan
- 2021 15:51:32 +0000
-To: Lyude Paul <lyude@redhat.com>, <nouveau@lists.freedesktop.org>
-References: <20210119015415.2511028-1-lyude@redhat.com>
-X-Nvconfidentiality: public
-From: James Jones <jajones@nvidia.com>
-Message-ID: <65703839-5eca-4a82-d13a-7d1a68ec9bc2@nvidia.com>
-Date: Tue, 19 Jan 2021 07:52:48 -0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
-MIME-Version: 1.0
-In-Reply-To: <20210119015415.2511028-1-lyude@redhat.com>
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam11on2045.outbound.protection.outlook.com [40.107.223.45])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id EAA376E047;
+ Tue, 19 Jan 2021 19:27:30 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=TCBcsMMLyDSyXYYk1WTLMky1KSaE9GbN9S6/KnPJ+vMnnQEQ4kxSgZK9m//ju7gbZO0C5izOIDHFN6ENPEIko0hfT9XpYGynShOcLhGfqIdj+0s4xkirzq0m2wIGlVwkbKRUUY1cedMXJ2MuaXq9wh6t8QxzujU7ctvve7iFwUHJccrNgRWMtTLEGm97xznTQz+1bFYTQhhtmol7mXbUMg7ufvsJC/l1U2NAe5wnark5wdoFQh7LB/rsN9vzEJnL/lU2oOFnfej/sh78bgc01ZeTDg0LBo/ZOH3DF+Qm1eXfqGFXdwqThxragPkvIHZO69EANRtGGeaS8/gHP4SBew==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=tDnrtRR9j27LvMFwPIOT5Za1n2bgcmBcOE5FS0gLY2s=;
+ b=TtTZqCZFuM8WS5B8hhKnU5dOovhLocoUVWPOH388ZSKwpD+FGihvVhhAyBInAvFtROq5PTnptbWlxW8VnoDVrgSfjY9HSuWuI0jH0EsNSsycwedC+Efrzf4ee0KI1U3mQulA8faZ4NfzDlgqg0JBkW+677IgwB7+4U8bOxwD4xJb6HFBONpOnl9QTvVoG7NKiEXDzEl9GCHNUHqGyIkbpZ9rArqTibDf3x1Bza30QV8QUwOU3zaq9FVphcu+V48eK/aHdhQqCHKCfjrbxlL48FTnzpyTbhJV8cI+WkLX/fsUkgVJfj9GJWlo1pt5ugCBareFfobLEIZowFQlszRo8g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=vmware.com; dmarc=pass action=none header.from=vmware.com;
+ dkim=pass header.d=vmware.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vmware.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=tDnrtRR9j27LvMFwPIOT5Za1n2bgcmBcOE5FS0gLY2s=;
+ b=ZAl4+sQt0zar5jn5EA6g8by/J7FrZipIPisqFG9p5mZjm+7mX7PLPcskxeFoTGf3uEUFyg8GkZ0lUNF6D/YDiKiiSS0vdCq11OarVIAvbMk1TF5QL2TrlIOMXMWDrRrl1eog0aTvAo0xpl090GHHsK1YsG3swgb1aS6e1yHvZE0=
+Received: from (2603:10b6:208:8f::18) by
+ BLAPR05MB7378.namprd05.prod.outlook.com (2603:10b6:208:298::10) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3784.5; Tue, 19 Jan
+ 2021 19:27:20 +0000
+Received: from BL0PR05MB5186.namprd05.prod.outlook.com
+ ([fe80::856b:10f9:d35c:cde1]) by BL0PR05MB5186.namprd05.prod.outlook.com
+ ([fe80::856b:10f9:d35c:cde1%4]) with mapi id 15.20.3784.010; Tue, 19 Jan 2021
+ 19:27:20 +0000
+From: Zack Rusin <zackr@vmware.com>
+To: Lee Jones <lee.jones@linaro.org>
+Thread-Topic: [PATCH 00/29] [Set 15] Finally rid W=1 warnings from GPU!
+Thread-Index: AQHW62p+Afh7eg9MAECAFEwSMWQpd6opAUIAgAR7cYCAAARggIAAJLMAgAD9y4CAALfKAA==
+Date: Tue, 19 Jan 2021 19:27:20 +0000
+Message-ID: <8DE96253-47A3-4A16-9331-62F547A2CC44@vmware.com>
+References: <20210115181601.3432599-1-lee.jones@linaro.org>
+ <F914D9B9-6DD4-4383-9F7C-8D09FBFE96CE@vmware.com>
+ <YAWhDRkSOHbJ+2Le@phenom.ffwll.local> <20210118150945.GE4903@dell>
+ <YAXDgmWMR9s4OgxN@phenom.ffwll.local> <20210119082927.GJ4903@dell>
+In-Reply-To: <20210119082927.GJ4903@dell>
+Accept-Language: en-US
 Content-Language: en-US
-X-Originating-IP: [172.20.145.6]
-X-ClientProxiedBy: HQMAIL101.nvidia.com (172.20.187.10) To
- HQMAIL107.nvidia.com (172.20.187.13)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
- t=1611071496; bh=tQD7OEZUyDNkeJOYKrKuZ5zUmlJB5oM1e1SlcLNGXxA=;
- h=Subject:To:CC:References:X-Nvconfidentiality:From:Message-ID:Date:
- User-Agent:MIME-Version:In-Reply-To:Content-Type:Content-Language:
- Content-Transfer-Encoding:X-Originating-IP:X-ClientProxiedBy;
- b=As3l2i5totSVra/HUe0wHaODZ9prvkub6QNpNkm91St2BJw4yDN1lUjNgLddQaCDm
- fLVoj9J9r8eUoQv7bZLU0045kIa7bmKckF8kVXYsFmanXK6ZD0D5uNBBABdWUYgdkU
- TMUoa68zztbnafKdeRkkajZfQVPqAVdG6CAeVNRlfQ70te7D3mEC6qjkaRsfKPR7Ll
- 1VY+6nhClXQnEMNSW5sNayp0OPyOXK1jJyw4TQz5uB62oXqRDVrT5SZw1D9I0gOOAR
- DG7DSHgpuE/1L3DPujxBZzIKwtjy7mwrRtlka/+1sPdjL+fSubvSUr6r0ywSVjqTiQ
- A2CFWPTJIkuQQ==
-Subject: Re: [Nouveau] [PATCH 1/3] drivers/nouveau/kms/nv50-: Reject format
- modifiers for cursor planes
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-mailer: Apple Mail (2.3654.40.0.2.32)
+authentication-results: linaro.org; dkim=none (message not signed)
+ header.d=none;linaro.org; dmarc=none action=none header.from=vmware.com;
+x-originating-ip: [71.175.59.246]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: e9ced637-eb95-498c-2bd3-08d8bcb03d9a
+x-ms-traffictypediagnostic: BLAPR05MB7378:
+x-ld-processed: b39138ca-3cee-4b4a-a4d6-cd83d9dd62f0,ExtAddr
+x-ms-exchange-transport-forked: True
+x-microsoft-antispam-prvs: <BLAPR05MB73788F177B49E0955637FB78CEA39@BLAPR05MB7378.namprd05.prod.outlook.com>
+x-ms-oob-tlc-oobclassifiers: OLM:7691;
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: bRYJYhpc5DJU0PAvR/CYJc/A3Z44dZLyfiEWEwnq6/NSU9EBSZ+woGgB57CEs0LDKtR92/e5MHo+jIo9YnUlFwvl2w13m2tV05Y79mfOMHfvSSm/sCWr1M88edkwzmGXai8+byUsDfDgnkvFCgBXMB5ednJOzolf9cVI268x5GXR54A6oB9rO+mNoZfrDbMe9Hu8ewIagCoPyuZa4l1FigoMBYtkIkWI1Ap2Hyd6ngXy/4eSqZf0XXZTccpNtWdNFjA7uxDWTL9xe6XOysbQ/RnSy4/V8h9DC0a/LLCZ7L0JUKqCKS7FXzGCrIWtTeejZWl89FjiQWDpJM2mcYCiEJ7T+xECObkUxFKgyaNVvQ7gNKn04Js9SKUuG5iOe4Ba0kYBJMT/ez7nkjqCA0vvtsTPni5iwG8GMQfBArdTNQ1tC3rqGPr6v5/PtH5pGC+r
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:BL0PR05MB5186.namprd05.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(4636009)(136003)(376002)(39860400002)(366004)(396003)(346002)(83380400001)(76116006)(36756003)(2906002)(186003)(8936002)(4326008)(33656002)(316002)(54906003)(66476007)(64756008)(5660300002)(86362001)(66556008)(66446008)(53546011)(71200400001)(6916009)(6486002)(6512007)(66946007)(7416002)(478600001)(7406005)(8676002)(2616005)(26005)(6506007)(45980500001);
+ DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata: =?iso-8859-1?Q?TCu+QFTEdaiUDOfB2J449+fIzZVCLxcC1gW7TEWnnI96nC+wAK8CBvfSrn?=
+ =?iso-8859-1?Q?YghDRMZDhqpaTnMyzBaFahz4R8ecjYJlIB1wrYu+5Una6qdeD+aaJpeq2O?=
+ =?iso-8859-1?Q?T4NKbb7pvVYkfcITQlXStEdtl3TcA1dIFzbCfIyECs/bXQmDwDDlbWrhcP?=
+ =?iso-8859-1?Q?RM49Zz/8pCv2EJM2lJRveOf0dM+3k5eVOa79X+9QBMTFp8cR3unQdFKcg3?=
+ =?iso-8859-1?Q?SiZ2OOi9iBTSjayrIrfq5EVgtZPwQWoNQPExcnFA58qqq9gVq0QW66gH5G?=
+ =?iso-8859-1?Q?QYC5KKTknKcY1ZpdKRrAlvpv4vycllYqHxrOCGh6pXP2OSM8Y0lpIZgCV/?=
+ =?iso-8859-1?Q?n3bpdoeo5WCLR2lA2ZBbsKL5yXhK4N7dkUAzMNfL+vas4jqgvSCGcp53Xh?=
+ =?iso-8859-1?Q?8RWc7ROTC8C6Xp9tVcD4Bs6NhC6GsYwM+bOPSlS2pYIM/wAy9cIBYF6RaG?=
+ =?iso-8859-1?Q?6BSuEM1FZopsbiov2UDwDm+lwc6xkwhvj2pXbZjQZ6uGOzOlCwmPWDmEt/?=
+ =?iso-8859-1?Q?QIomay5ENR5VbaSmswwUUvZ28/1ZXqppCj5Npf0reEn4XoXADF0BvhchC9?=
+ =?iso-8859-1?Q?9qd2LQdnC9qeyete3tkKd7qLkAO71Xhnt2rJPo4M8iREwRdqYCSfRmCXw3?=
+ =?iso-8859-1?Q?GiVbiOWieH3ySMGrVLGBeDGnYeoxjygHWa2h+ZmqEW/wOdp2+8cQjqJDhK?=
+ =?iso-8859-1?Q?hEVb0BBWBZtUZrcN0XMKhsLFfwXV/DzGenUzdYPuwp3gV3ZRx1ZQGaowyW?=
+ =?iso-8859-1?Q?J7NZxq03OAmyo0xlDnm7wxMg8y3MqO4/3J8u4zt7CPmQ0vO7nbxNzZhyCN?=
+ =?iso-8859-1?Q?Kodkp07tLOmxjLOKurE+IUQPn1msAp6usoesmErCxKm5BW04FklrA7jinQ?=
+ =?iso-8859-1?Q?4/PQnhQGYzpvQUeiWz/bMLFVKlR99FC/yGP0Cb++tPOPbAPsyLunqYDCUt?=
+ =?iso-8859-1?Q?kJ5de+Vx3U6aPiUmbrsp4RumlgEwZ8tDFehpdIKVKkNR+jEA8O6aa8n6Pv?=
+ =?iso-8859-1?Q?bpWZ/hS/nwG07/7S/prnXXCjvfBPf1emVnQOWc?=
+Content-ID: <F0912769F7D8344F9F5AB490350D9FA0@namprd05.prod.outlook.com>
+MIME-Version: 1.0
+X-OriginatorOrg: vmware.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: BL0PR05MB5186.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: e9ced637-eb95-498c-2bd3-08d8bcb03d9a
+X-MS-Exchange-CrossTenant-originalarrivaltime: 19 Jan 2021 19:27:20.5425 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b39138ca-3cee-4b4a-a4d6-cd83d9dd62f0
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: Cd3qOwYBlOAK2YzeeoHw+69w0XoGXNBx38ABzKkrIGqdoa4rnHnJzE8OioYLYnvlv40+D6zj8M77tyZTLftYVQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BLAPR05MB7378
+X-Mailman-Approved-At: Tue, 19 Jan 2021 23:09:21 +0000
+Subject: Re: [Nouveau] [PATCH 00/29] [Set 15] Finally rid W=1 warnings from
+ GPU!
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,81 +114,79 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, Simon Ser <contact@emersion.fr>,
- "open list:DRM DRIVER FOR NVIDIA
- GEFORCE/QUADRO GPUS" <dri-devel@lists.freedesktop.org>,
- open list <linux-kernel@vger.kernel.org>, stable@vger.kernel.org,
- Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>,
- =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>, Nirmoy
- Das <nirmoy.aiemd@gmail.com>
+Cc: Jackie Li <yaodong.li@intel.com>, David Airlie <airlied@linux.ie>,
+ "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ DRI Development <dri-devel@lists.freedesktop.org>,
+ Eric Anholt <eric@anholt.net>, Jesse Barnes <jesse.barnes@intel.com>,
+ Tina Zhang <tina.zhang@intel.com>, Jan Safrata <jan.nikitenko@gmail.com>,
+ Sumit Semwal <sumit.semwal@linaro.org>, Gareth Hughes <gareth@valinux.com>,
+ Pei Zhang <pei.zhang@intel.com>,
+ Patrik Jakobsson <patrik.r.jakobsson@gmail.com>,
+ Rob Clark <rob.clark@linaro.org>, Min He <min.he@intel.com>,
+ Linux-graphics-maintainer <Linux-graphics-maintainer@vmware.com>,
+ Ben Skeggs <bskeggs@redhat.com>, Dave Airlie <airlied@redhat.com>,
+ Niu Bing <bing.niu@intel.com>, Zhi Wang <zhi.a.wang@intel.com>,
+ "linux-media@vger.kernel.org" <linux-media@vger.kernel.org>,
+ Kevin Tian <kevin.tian@intel.com>, jim liu <jim.liu@intel.com>,
+ Roland Scheidegger <sroland@vmware.com>,
+ "intel-gfx@lists.freedesktop.org" <intel-gfx@lists.freedesktop.org>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>,
+ "linaro-mm-sig@lists.linaro.org" <linaro-mm-sig@lists.linaro.org>,
+ Maxime Ripard <mripard@kernel.org>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ "intel-gvt-dev@lists.freedesktop.org" <intel-gvt-dev@lists.freedesktop.org>,
+ Keith Packard <keithp@keithp.com>, Eddie Dong <eddie.dong@intel.com>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ Faith <faith@valinux.com>, Ping Gao <ping.a.gao@intel.com>,
+ =?iso-8859-1?Q?Christian_K=F6nig?= <christian.koenig@amd.com>,
+ Zhiyuan Lv <zhiyuan.lv@intel.com>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Gah, yes, good catch.
 
-Reviewed-by: James Jones <jajones@nvidia.com>
 
-On 1/18/21 5:54 PM, Lyude Paul wrote:
-> Nvidia hardware doesn't actually support using tiling formats with the
-> cursor plane, only linear is allowed. In the future, we should write a
-> testcase for this.
+> On Jan 19, 2021, at 03:29, Lee Jones <lee.jones@linaro.org> wrote:
 > 
-> Fixes: c586f30bf74c ("drm/nouveau/kms: Add format mod prop to base/ovly/nvdisp")
-> Cc: James Jones <jajones@nvidia.com>
-> Cc: Martin Peres <martin.peres@free.fr>
-> Cc: Jeremy Cline <jcline@redhat.com>
-> Cc: Simon Ser <contact@emersion.fr>
-> Cc: <stable@vger.kernel.org> # v5.8+
-> Signed-off-by: Lyude Paul <lyude@redhat.com>
-> ---
->   drivers/gpu/drm/nouveau/dispnv50/wndw.c | 17 +++++++++++++----
->   1 file changed, 13 insertions(+), 4 deletions(-)
+> On Mon, 18 Jan 2021, Daniel Vetter wrote:
 > 
-> diff --git a/drivers/gpu/drm/nouveau/dispnv50/wndw.c b/drivers/gpu/drm/nouveau/dispnv50/wndw.c
-> index ce451242f79e..271de3a63f21 100644
-> --- a/drivers/gpu/drm/nouveau/dispnv50/wndw.c
-> +++ b/drivers/gpu/drm/nouveau/dispnv50/wndw.c
-> @@ -702,6 +702,11 @@ nv50_wndw_init(struct nv50_wndw *wndw)
->   	nvif_notify_get(&wndw->notify);
->   }
->   
-> +static const u64 nv50_cursor_format_modifiers[] = {
-> +	DRM_FORMAT_MOD_LINEAR,
-> +	DRM_FORMAT_MOD_INVALID,
-> +};
-> +
->   int
->   nv50_wndw_new_(const struct nv50_wndw_func *func, struct drm_device *dev,
->   	       enum drm_plane_type type, const char *name, int index,
-> @@ -713,6 +718,7 @@ nv50_wndw_new_(const struct nv50_wndw_func *func, struct drm_device *dev,
->   	struct nvif_mmu *mmu = &drm->client.mmu;
->   	struct nv50_disp *disp = nv50_disp(dev);
->   	struct nv50_wndw *wndw;
-> +	const u64 *format_modifiers;
->   	int nformat;
->   	int ret;
->   
-> @@ -728,10 +734,13 @@ nv50_wndw_new_(const struct nv50_wndw_func *func, struct drm_device *dev,
->   
->   	for (nformat = 0; format[nformat]; nformat++);
->   
-> -	ret = drm_universal_plane_init(dev, &wndw->plane, heads, &nv50_wndw,
-> -				       format, nformat,
-> -				       nouveau_display(dev)->format_modifiers,
-> -				       type, "%s-%d", name, index);
-> +	if (type == DRM_PLANE_TYPE_CURSOR)
-> +		format_modifiers = nv50_cursor_format_modifiers;
-> +	else
-> +		format_modifiers = nouveau_display(dev)->format_modifiers;
-> +
-> +	ret = drm_universal_plane_init(dev, &wndw->plane, heads, &nv50_wndw, format, nformat,
-> +				       format_modifiers, type, "%s-%d", name, index);
->   	if (ret) {
->   		kfree(*pwndw);
->   		*pwndw = NULL;
+>> On Mon, Jan 18, 2021 at 03:09:45PM +0000, Lee Jones wrote:
+>>> On Mon, 18 Jan 2021, Daniel Vetter wrote:
+>>> 
+>>>> On Fri, Jan 15, 2021 at 06:27:15PM +0000, Zack Rusin wrote:
+>>>>> 
+>>>>>> On Jan 15, 2021, at 13:15, Lee Jones <lee.jones@linaro.org> wrote:
+>>>>>> 
+>>>>>> This set is part of a larger effort attempting to clean-up W=1
+>>>>>> kernel builds, which are currently overwhelmingly riddled with
+>>>>>> niggly little warnings.
+>>>>>> 
+>>>>>> Last set!  All clean after this for; Arm, Arm64, PPC, MIPS and x86.
+>>>>> 
+>>>>> Thanks! For all the vmwgfx bits:
+>>>>> Reviewed-by: Zack Rusin <zackr@vmware.com>
+>>>> 
+>>>> Ok I merged everything except vmwgfx (that's for Zack) and i915/nouveau
+>>>> (those generally go through other trees, pls holler if they're stuck).
+>>> 
+>>> Thanks Daniel, you're a superstar!
+>>> 
+>>> So Zack will take the vmwgfx parts?  Despite providing a R-b?
+>> 
+>> I only merge stuff that's defacto abandoned already. Everything else I try
+>> to offload to whomever actually cares :-)
 > 
+> Understood.  Thanks for the explanation.
+> 
+> Hopefully Zack actually cares. :D
+
+hah, I do. I just pushed all of the changes to drm-misc-next. Let me know if I missed anything. Thanks!
+
+z
+
+
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
