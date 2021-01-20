@@ -1,39 +1,42 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8C5972FC476
-	for <lists+nouveau@lfdr.de>; Wed, 20 Jan 2021 00:09:42 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 17D542FC677
+	for <lists+nouveau@lfdr.de>; Wed, 20 Jan 2021 02:27:00 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 19EB089E2A;
-	Tue, 19 Jan 2021 23:09:41 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0A4B96E118;
+	Wed, 20 Jan 2021 01:26:53 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 534 seconds by postgrey-1.36 at gabe;
- Tue, 19 Jan 2021 22:19:59 UTC
-Received: from w1.tutanota.de (w1.tutanota.de [81.3.6.162])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 48C9B89CA0
- for <nouveau@lists.freedesktop.org>; Tue, 19 Jan 2021 22:19:59 +0000 (UTC)
-Received: from w3.tutanota.de (unknown [192.168.1.164])
- by w1.tutanota.de (Postfix) with ESMTP id 43DADFBF62C
- for <nouveau@lists.freedesktop.org>; Tue, 19 Jan 2021 22:11:02 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1611094261; 
- s=s1; d=tuta.io;
- h=From:From:To:To:Subject:Subject:Content-Description:Content-ID:Content-Type:Content-Type:Content-Transfer-Encoding:Content-Transfer-Encoding:Cc:Date:Date:In-Reply-To:MIME-Version:MIME-Version:Message-ID:Message-ID:Reply-To:References:Sender;
- bh=/NcoljhU+5MzY6+KD0msIUPEKwISOOxbNSgytocmL9I=;
- b=Bcu9i+4UaVfxWKJco135EjeQ2HWW/AjATWT9/Dk7oBFsFR0/hwczoTztiyz3i1W9
- yr+gm62zAaWS2rI9Z7ZV2e0QeGgaNCUJysBZnDknMDbeiCVZ1ue6O3tjWT8u1RtjGRq
- bg17Pdn79tJswdMK7BWYx8SZ8DQqxgJOPHbAKH6Ft4iMcxKZsIN3+IvqbbTymxd/DPW
- Q5+7NZDwdvsZMh74Zcdz3sMbBjQI14UY2KMe9E+yffwhcaBuY5knnZ7vk9QcU9fzld2
- IU0EIvhGDfNxjvU4j52Lmd0PsvKj5ayx/UMkf8bfdgb+sW/E4Bdw1+NKtlyzdzKJQhM
- e4fNjlEAXg==
-Date: Tue, 19 Jan 2021 23:11:01 +0100 (CET)
-From: stratus@tuta.io
-To: nouveau@lists.freedesktop.org
-Message-ID: <MRRgoW3--3-2@tuta.io>
+Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6531989EEB;
+ Wed, 20 Jan 2021 01:26:50 +0000 (UTC)
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 7EE572312B;
+ Wed, 20 Jan 2021 01:26:49 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1611106010;
+ bh=Xz+i1Z3mOF9fKx3oJXp8w7X6GXSJakG1pmdkXz0IVGg=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=QfUW5MlqvlD7h7N7tmN09XZfV7ktvdI8JQP3ljbzOgtO1FszBqCI5zi3I2N1wt5XK
+ eyM4F1CJypmWuYknmtLzjEZm22sv2vsb7uEmrerKEwK9Lnw7SXOXKFGkRJdwAJNWn7
+ 9QOMshPPiALwXceuS8V5yfisFS8QxlT6lXzzWT6F00HCTJQrIcitOz31HZRUnAikYc
+ d4z8OgoZAJ3NPsjApBiGQXbR9+la3NDowpzCvV9UPiTqr6khkyqti3CRCzQOnRtAA2
+ bhCL4Vy75JRH1kGOZ62l5Z14/EHUxbZ4mhbAOLGvbRjJ6C1/sthPC8tcT/IFq65U3V
+ 7Blij4NKv/AXQ==
+From: Sasha Levin <sashal@kernel.org>
+To: linux-kernel@vger.kernel.org,
+	stable@vger.kernel.org
+Date: Tue, 19 Jan 2021 20:25:53 -0500
+Message-Id: <20210120012602.769683-36-sashal@kernel.org>
+X-Mailer: git-send-email 2.27.0
+In-Reply-To: <20210120012602.769683-1-sashal@kernel.org>
+References: <20210120012602.769683-1-sashal@kernel.org>
 MIME-Version: 1.0
-X-Mailman-Approved-At: Tue, 19 Jan 2021 23:09:40 +0000
-Subject: [Nouveau] Unexpected result
+X-stable: review
+X-Patchwork-Hint: Ignore
+Subject: [Nouveau] [PATCH AUTOSEL 5.10 36/45] drm/nouveau/bios: fix issue
+ shadowing expansion ROMs
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -45,14 +48,58 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
+Cc: Sasha Levin <sashal@kernel.org>, nouveau@lists.freedesktop.org,
+ Ben Skeggs <bskeggs@redhat.com>, dri-devel@lists.freedesktop.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-BTW:
-https://bugzilla.kernel.org/show_bug.cgi?id=210333
-Best wishes, hopefully find something that works eventually.
+From: Ben Skeggs <bskeggs@redhat.com>
+
+[ Upstream commit 402a89660e9dc880710b12773076a336c9dab3d7 ]
+
+This issue has generally been covered up by the presence of additional
+expansion ROMs after the ones we're interested in, with header fetches
+of subsequent images loading enough of the ROM to hide the issue.
+
+Noticed on GA102, which lacks a type 0x70 image compared to TU102,.
+
+[  906.364197] nouveau 0000:09:00.0: bios: 00000000: type 00, 65024 bytes
+[  906.381205] nouveau 0000:09:00.0: bios: 0000fe00: type 03, 91648 bytes
+[  906.405213] nouveau 0000:09:00.0: bios: 00026400: type e0, 22016 bytes
+[  906.410984] nouveau 0000:09:00.0: bios: 0002ba00: type e0, 366080 bytes
+
+vs
+
+[   22.961901] nouveau 0000:09:00.0: bios: 00000000: type 00, 60416 bytes
+[   22.984174] nouveau 0000:09:00.0: bios: 0000ec00: type 03, 71168 bytes
+[   23.010446] nouveau 0000:09:00.0: bios: 00020200: type e0, 48128 bytes
+[   23.028220] nouveau 0000:09:00.0: bios: 0002be00: type e0, 140800 bytes
+[   23.080196] nouveau 0000:09:00.0: bios: 0004e400: type 70, 7168 bytes
+
+Signed-off-by: Ben Skeggs <bskeggs@redhat.com>
+Signed-off-by: Sasha Levin <sashal@kernel.org>
+---
+ drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadow.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadow.c b/drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadow.c
+index 7deb81b6dbac6..4b571cc6bc70f 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadow.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadow.c
+@@ -75,7 +75,7 @@ shadow_image(struct nvkm_bios *bios, int idx, u32 offset, struct shadow *mthd)
+ 	nvkm_debug(subdev, "%08x: type %02x, %d bytes\n",
+ 		   image.base, image.type, image.size);
+ 
+-	if (!shadow_fetch(bios, mthd, image.size)) {
++	if (!shadow_fetch(bios, mthd, image.base + image.size)) {
+ 		nvkm_debug(subdev, "%08x: fetch failed\n", image.base);
+ 		return 0;
+ 	}
+-- 
+2.27.0
+
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
