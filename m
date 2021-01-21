@@ -1,41 +1,68 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 241DA2FE7E5
-	for <lists+nouveau@lfdr.de>; Thu, 21 Jan 2021 11:46:20 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id C773B2FE87E
+	for <lists+nouveau@lfdr.de>; Thu, 21 Jan 2021 12:15:14 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 94BCA6E402;
-	Thu, 21 Jan 2021 10:46:18 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 332B989838;
+	Thu, 21 Jan 2021 11:15:13 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from audible.transient.net (audible.transient.net [24.143.126.66])
- by gabe.freedesktop.org (Postfix) with SMTP id 847776E49C
- for <nouveau@lists.freedesktop.org>; Thu, 21 Jan 2021 02:33:28 +0000 (UTC)
-Received: (qmail 32730 invoked from network); 21 Jan 2021 02:33:27 -0000
-Received: from cucamonga.audible.transient.net (192.168.2.5)
- by canarsie.audible.transient.net with QMQP; 21 Jan 2021 02:33:27 -0000
-Received: (nullmailer pid 23115 invoked by uid 1000);
- Thu, 21 Jan 2021 02:33:27 -0000
-Date: Thu, 21 Jan 2021 02:33:26 +0000
-From: Jamie Heilman <jamie@audible.transient.net>
-To: Karol Herbst <kherbst@redhat.com>
-Message-ID: <YAjn9jR+d2zRfNjb@audible.transient.net>
-Mail-Followup-To: Karol Herbst <kherbst@redhat.com>,
- Ben Skeggs <bskeggs@redhat.com>,
- LKML <linux-kernel@vger.kernel.org>,
- nouveau <nouveau@lists.freedesktop.org>
-References: <X+WV8OiQzTIfLdgW@audible.transient.net>
- <CACO55tt9GbwBU6igAJ_8RjwzSZcDbu+_1wGWKiye3TosgoiHyw@mail.gmail.com>
- <X/NO9kAlCd/k8Di2@audible.transient.net>
- <X/NT0iN9KlSXQJJ7@audible.transient.net>
- <X/UsBWwFR+V0hIOS@audible.transient.net>
- <CACO55ttrFCOzREQxi3+SSaCSsAP1bEUBEt78ajkRGQQU1xYxtw@mail.gmail.com>
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [63.128.21.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id EEA2289838
+ for <nouveau@lists.freedesktop.org>; Thu, 21 Jan 2021 11:15:11 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1611227710;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=vrHtnFDu1lMq2EljZmesD22bqqbPURdUzPCJKZf8hGQ=;
+ b=VCVZ9pNabo5lRen3Si9VpsRBX4/jsO6y2zPjNMA6FjSulyVvICuRBaExZHBCiSzc2L+vR3
+ I+Ampg00jjCfbD2BN/GiGZYaaPk/WTQnD0Dn79ILy+MZ8/ykmDe0320YykF2kvv4leKkjz
+ B7N4ZgQR2rmiQuD99sqTCJqBd+PQTNU=
+Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
+ [209.85.221.72]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-314-fcd9Tx-gOimBp_fBG9Ex6A-1; Thu, 21 Jan 2021 06:15:07 -0500
+X-MC-Unique: fcd9Tx-gOimBp_fBG9Ex6A-1
+Received: by mail-wr1-f72.google.com with SMTP id u3so773723wri.19
+ for <nouveau@lists.freedesktop.org>; Thu, 21 Jan 2021 03:15:07 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=vrHtnFDu1lMq2EljZmesD22bqqbPURdUzPCJKZf8hGQ=;
+ b=ISVAIPI7cSUwhgjUbg/UY/u4KoyM846OaEGD1fJYgW14/01e9T3Ox76FGOacwoSqXb
+ X6ITa8HNtGBzkMwAnuwDigOSrgGdDNYJwL9ONfVdjE73BfoJdsH9XRue9gGRfTTFtR9Z
+ 9gS94AlZvHgUKRHXkzkKLHAb5lmLl56JBx9p2dJdn4EhVFPQgnI8YIZVUBY5rEqRL2QU
+ hJ0uaZM41VL5VjsBR28vTOVSl+lnrpPgZpRHeRluSMzz74+aHxjkkkDF4usUS4j8qTYa
+ aVA8dsauX7IbHBR330t250iGyFaKQeU9kZmYhuwEw+bSRjp4GaFziJNN5tqir8FlVICO
+ DOFw==
+X-Gm-Message-State: AOAM531qTRE6XWiJfblMmbZW/JNNO5hC7+8ySfRsfUK0aclETz+ShTBR
+ QHbmTZqLq1RCP7E9twagEwujWYV2I4jokF3yQ9aL0WOBo29bLtZe7ZTeplbRTLr9b+HJ2m/UEmV
+ FluG1LjlBdiQg4x8xD94IocBPcZbP+GU/EHrV6xDVjQ==
+X-Received: by 2002:a05:600c:2351:: with SMTP id
+ 17mr2651146wmq.163.1611227706078; 
+ Thu, 21 Jan 2021 03:15:06 -0800 (PST)
+X-Google-Smtp-Source: ABdhPJy4N8SP7GcZ5vxQrjmVWxtqtU9Rch3uwQ/+AOgNcYGXaXfqbmyKUmFmk+1Ow+6Lc9ljyh2TczMH7185Kt80iPc=
+X-Received: by 2002:a05:600c:2351:: with SMTP id
+ 17mr2651136wmq.163.1611227705904; 
+ Thu, 21 Jan 2021 03:15:05 -0800 (PST)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <CACO55ttrFCOzREQxi3+SSaCSsAP1bEUBEt78ajkRGQQU1xYxtw@mail.gmail.com>
-X-Mailman-Approved-At: Thu, 21 Jan 2021 10:46:17 +0000
-Subject: Re: [Nouveau] nouveau regression post v5.8, still present in v5.10
+References: <20210118124048.8772-1-bastian.beischer@rwth-aachen.de>
+ <20210121111118.34587-1-bastian.beischer@rwth-aachen.de>
+In-Reply-To: <20210121111118.34587-1-bastian.beischer@rwth-aachen.de>
+From: Karol Herbst <kherbst@redhat.com>
+Date: Thu, 21 Jan 2021 12:14:55 +0100
+Message-ID: <CACO55tvPqCGu4TLnGfiGDs5tKdq3DwUZ5O_7EMM4A5KTJsRwCQ@mail.gmail.com>
+To: Bastian Beranek <bastian.beischer@rwth-aachen.de>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=kherbst@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Subject: Re: [Nouveau] [PATCH v2] drm/gpu/nouveau/dispnv50: Restore pushing
+ of all data.
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -47,263 +74,78 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau <nouveau@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>,
- LKML <linux-kernel@vger.kernel.org>
+Cc: nouveau <nouveau@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Karol Herbst wrote:
-> On Wed, Jan 6, 2021 at 4:25 AM Jamie Heilman
-> <jamie@audible.transient.net> wrote:
-> >
-> > Jamie Heilman wrote:
-> > > Jamie Heilman wrote:
-> > > > Karol Herbst wrote:
-> > > > > do you think you'd be able to do a kernel bisect in order to pinpoint
-> > > > > the actual commit causing it? Thanks
-> > > >
-> > > > No.  I can't reproduce it reliably.  I if I could, bisection wouldn't
-> > > > be a problem but as I can't and as it can take weeks for the problem
-> > > > to occur there's essentially no chance.  I know it regressed roughly
-> > > > in 5.8-rc1 only because that's what I was running when the first event
-> > > > occured.
-> > >
-> > > er, 5.9.0-rc1 rather
-> >
-> > Actually ... I've found a way to reproduce this in hours intead of
-> > weeks, so I think I may be able to bisect it after all, it's something
-> > of a brute force approach and its probably doing horrible things to
-> > the backlight in my poor old monitor, but just running this:
-> >
-> > #!/bin/sh
-> > sleep 5
-> > while ! dmesg | tail | grep -q nouveau
-> > do
-> >     xset dpms force off
-> >     sleep 65
-> >     xdotool mousemove 1024 1024 mousemove restore
-> >     sleep 10
-> > done
-> >
-> > Does manage to trip the issue sooner than it would otherwise happen
-> > with natural usage.  Given that this is my primary workstation and I
-> > sort of need it functional during waking hours, it'll take me a bit,
-> > but I'll update folks when I have the error more dialed in.
-> >
-> 
-> huh interesting. Kind of feels like a random thing still. But I think
-> in general you'd spend way too much time on this if you can't
-> reproduce within seconds/minutes and then it might not point out the
-> actual issue, because randomly the issue didn't appear and stuff.
-> 
-> maybe you can tune it to have shorter pauses or something? I'd really
-> try to bring down the time per cycle.
+ohh, at first I thought this was a resend, but it's in a different file :)
 
-Well I'm confident enough, at this point, to say this bisects to
-0a96099691c8 ("drm/nouveau/kms/nv50-: implement proper push buffer control logic")
+On Thu, Jan 21, 2021 at 12:11 PM Bastian Beranek
+<bastian.beischer@rwth-aachen.de> wrote:
+>
+> Commit f844eb485eb056ad3b67e49f95cbc6c685a73db4 introduced a regression for
+> NV50, which lead to visual artifacts, tearing and eventual crashes.
+>
+> In the changes of f844eb485eb056ad3b67e49f95cbc6c685a73db4 only the first line
+> was correctly translated to the new NVIDIA header macros:
+>
+> -               PUSH_NVSQ(push, NV827C, 0x0110, 0,
+> -                                       0x0114, 0);
+> +               PUSH_MTHD(push, NV827C, SET_PROCESSING,
+> +                         NVDEF(NV827C, SET_PROCESSING, USE_GAIN_OFS, DISABLE));
+>
+> The lower part ("0x0114, 0") was probably omitted by accident.
+>
+> This patch restores the push of the missing data and fixes the regression.
+>
+> Signed-off-by: Bastian Beranek <bastian.beischer@rwth-aachen.de>
+> Fixes: f844eb485eb056ad3b67e49f95cbc6c685a73db4
+> Link: https://gitlab.freedesktop.org/drm/nouveau/-/issues/14
+> ---
+>  drivers/gpu/drm/nouveau/dispnv50/base507c.c | 6 +++++-
+>  drivers/gpu/drm/nouveau/dispnv50/base827c.c | 6 +++++-
+>  2 files changed, 10 insertions(+), 2 deletions(-)
+>
+> diff --git a/drivers/gpu/drm/nouveau/dispnv50/base507c.c b/drivers/gpu/drm/nouveau/dispnv50/base507c.c
+> index 302d4e6fc52f..2d1825a5d751 100644
+> --- a/drivers/gpu/drm/nouveau/dispnv50/base507c.c
+> +++ b/drivers/gpu/drm/nouveau/dispnv50/base507c.c
+> @@ -88,7 +88,11 @@ base507c_image_set(struct nv50_wndw *wndw, struct nv50_wndw_atom *asyw)
+>                           NVVAL(NV507C, SET_CONVERSION, OFS, 0x64));
+>         } else {
+>                 PUSH_MTHD(push, NV507C, SET_PROCESSING,
+> -                         NVDEF(NV507C, SET_PROCESSING, USE_GAIN_OFS, DISABLE));
+> +                         NVDEF(NV507C, SET_PROCESSING, USE_GAIN_OFS, DISABLE)),
+> +
+> +                                       SET_CONVERSION,
+> +                         NVVAL(NV507C, SET_CONVERSION, GAIN, 0) |
+> +                         NVVAL(NV507C, SET_CONVERSION, OFS, 0));
+>         }
+>
+>         PUSH_MTHD(push, NV507C, SURFACE_SET_OFFSET(0, 0), asyw->image.offset[0] >> 8);
+> diff --git a/drivers/gpu/drm/nouveau/dispnv50/base827c.c b/drivers/gpu/drm/nouveau/dispnv50/base827c.c
+> index 18d34096f125..093d4ba6910e 100644
+> --- a/drivers/gpu/drm/nouveau/dispnv50/base827c.c
+> +++ b/drivers/gpu/drm/nouveau/dispnv50/base827c.c
+> @@ -49,7 +49,11 @@ base827c_image_set(struct nv50_wndw *wndw, struct nv50_wndw_atom *asyw)
+>                           NVVAL(NV827C, SET_CONVERSION, OFS, 0x64));
+>         } else {
+>                 PUSH_MTHD(push, NV827C, SET_PROCESSING,
+> -                         NVDEF(NV827C, SET_PROCESSING, USE_GAIN_OFS, DISABLE));
+> +                         NVDEF(NV827C, SET_PROCESSING, USE_GAIN_OFS, DISABLE),
+> +
+> +                                       SET_CONVERSION,
+> +                         NVVAL(NV827C, SET_CONVERSION, GAIN, 0) |
+> +                         NVVAL(NV827C, SET_CONVERSION, OFS, 0));
+>         }
+>
+>         PUSH_MTHD(push, NV827C, SURFACE_SET_OFFSET(0, 0), asyw->image.offset[0] >> 8,
+> --
+> 2.30.0
+>
 
-Now... I wish I could say the bisection was straightforward and
-simple, but it wasn't thanks to still not having a reproducer really
-dialed in.  The above script doesn't work unless I've got some normal
-usage around it.  It certainly triggers the issue sooner than it
-otherwise would, but by itself it isn't enough.  I modified it
-somewhat in the hopes of capturing the rough idea of how many
-itterations it would take to trigger the problem by using:
-
-#!/bin/sh
-I=0
-trap 'echo;echo $I' 0
-trap 'exit' INT
-sleep 5
-while ! dmesg | tail | grep -q nouveau
-do
-    I=$(($I + 1))
-    xset dpms force off
-    sleep 32
-    xdotool mousemove 1 12 mousemove restore
-    sleep 28
-done
-
-but ultimately that didn't really pan out the way I'd hoped.  I don't
-think the itterations have all that much to do with the condition in
-the end.  I wanted to try applying ca386aa7155a
-("drm/nouveau/kms/nv50-gp1xx: add WAR for EVO push buffer HW bug") on
-top of the first bad commit becuase I sort of felt like when I was
-running -rc versions that things got a bit less chaotic after that
-commit landed, but it was just a gut feeling and I wanted to see if I
-could support it with metrics---but no, I can't really get consistent
-metrics even without that commit so I gave up, and decided to report
-what I've got so far.
-
-
-
-> > I'm using git bisect start -- drivers/gpu/drm include/drm include/video
-> > in an effort to make this go a bit quicker, let me know if you think
-> > that's a bad idea or I should add other paths.
-> >
-> > > > > On Sun, Dec 27, 2020 at 8:16 PM Jamie Heilman
-> > > > > <jamie@audible.transient.net> wrote:
-> > > > > >
-> > > > > > Something between v5.8 and v5.9 has resulted in periodically losing video.
-> > > > > > Unfortunately, I can't reliably reproduce it, it seems to happen every
-> > > > > > once in a long while---I can go weeks without an occurance, but it
-> > > > > > always seems to happen after my workstation has been idle long enough
-> > > > > > to screen blank and put the monitor to sleep.  I'm using a single
-> > > > > > display (Dell 2405FPW) connected via DVI, running X (Xorg 1.20.x from
-> > > > > > Debian sid).  I don't really do anything fancy, xterms, a browser or
-> > > > > > two, play the occasional video, but like I said, I can't reliably
-> > > > > > reproduce this.  I've had it happen about 11 times since August.
-> > > > > >
-> > > > > > lspci -vv output is:
-> > > > > >
-> > > > > > 01:00.0 VGA compatible controller: NVIDIA Corporation G86 [Quadro NVS 290] (rev a1) (prog-if 00 [VGA controller])
-> > > > > >         Subsystem: NVIDIA Corporation G86 [Quadro NVS 290]
-> > > > > >         Control: I/O+ Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr- Stepping- SERR- FastB2B- DisINTx+
-> > > > > >         Status: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-
-> > > > > >         Latency: 0, Cache Line Size: 64 bytes
-> > > > > >         Interrupt: pin A routed to IRQ 28
-> > > > > >         Region 0: Memory at fc000000 (32-bit, non-prefetchable) [size=16M]
-> > > > > >         Region 1: Memory at d0000000 (64-bit, prefetchable) [size=256M]
-> > > > > >         Region 3: Memory at fa000000 (64-bit, non-prefetchable) [size=32M]
-> > > > > >         Region 5: I/O ports at dc80 [size=128]
-> > > > > >         Expansion ROM at 000c0000 [disabled] [size=128K]
-> > > > > >         Capabilities: [60] Power Management version 2
-> > > > > >                 Flags: PMEClk- DSI- D1- D2- AuxCurrent=0mA PME(D0-,D1-,D2-,D3hot-,D3cold-)
-> > > > > >                 Status: D0 NoSoftRst- PME-Enable- DSel=0 DScale=0 PME-
-> > > > > >         Capabilities: [68] MSI: Enable+ Count=1/1 Maskable- 64bit+
-> > > > > >                 Address: 00000000fee01004  Data: 4023
-> > > > > >         Capabilities: [78] Express (v1) Endpoint, MSI 00
-> > > > > >                 DevCap: MaxPayload 128 bytes, PhantFunc 0, Latency L0s <512ns, L1 <4us
-> > > > > >                         ExtTag+ AttnBtn- AttnInd- PwrInd- RBE+ FLReset- SlotPowerLimit 25.000W
-> > > > > >                 DevCtl: CorrErr- NonFatalErr+ FatalErr+ UnsupReq-
-> > > > > >                         RlxdOrd+ ExtTag+ PhantFunc- AuxPwr- NoSnoop+
-> > > > > >                         MaxPayload 128 bytes, MaxReadReq 512 bytes
-> > > > > >                 DevSta: CorrErr- NonFatalErr- FatalErr- UnsupReq- AuxPwr- TransPend-
-> > > > > >                 LnkCap: Port #0, Speed 2.5GT/s, Width x16, ASPM L0s L1, Exit Latency L0s <512ns, L1 <4us
-> > > > > >                         ClockPM- Surprise- LLActRep- BwNot- ASPMOptComp-
-> > > > > >                 LnkCtl: ASPM Disabled; RCB 64 bytes, Disabled- CommClk+
-> > > > > >                         ExtSynch- ClockPM- AutWidDis- BWInt- AutBWInt-
-> > > > > >                 LnkSta: Speed 2.5GT/s (ok), Width x16 (ok)
-> > > > > >                         TrErr- Train- SlotClk+ DLActive- BWMgmt- ABWMgmt-
-> > > > > >         Capabilities: [100 v1] Virtual Channel
-> > > > > >                 Caps:   LPEVC=0 RefClk=100ns PATEntryBits=1
-> > > > > >                 Arb:    Fixed- WRR32- WRR64- WRR128-
-> > > > > >                 Ctrl:   ArbSelect=Fixed
-> > > > > >                 Status: InProgress-
-> > > > > >                 VC0:    Caps:   PATOffset=00 MaxTimeSlots=1 RejSnoopTrans-
-> > > > > >                         Arb:    Fixed- WRR32- WRR64- WRR128- TWRR128- WRR256-
-> > > > > >                         Ctrl:   Enable+ ID=0 ArbSelect=Fixed TC/VC=01
-> > > > > >                         Status: NegoPending- InProgress-
-> > > > > >         Capabilities: [128 v1] Power Budgeting <?>
-> > > > > >         Capabilities: [600 v1] Vendor Specific Information: ID=0001 Rev=1 Len=024 <?>
-> > > > > >         Kernel driver in use: nouveau
-> > > > > >
-> > > > > > The last time this happened, this is what got logged:
-> > > > > >
-> > > > > > nouveau 0000:01:00.0: disp: ERROR 5 [INVALID_STATE] 06 [] chid 1 mthd 0080 data 00000001
-> > > > > > nouveau 0000:01:00.0: disp: Base 1:
-> > > > > > nouveau 0000:01:00.0: disp:        0084: 00000000
-> > > > > > nouveau 0000:01:00.0: disp:        0088: 00000000
-> > > > > > nouveau 0000:01:00.0: disp:        008c: 00000000
-> > > > > > nouveau 0000:01:00.0: disp:        0090: 00000000
-> > > > > > nouveau 0000:01:00.0: disp:        0094: 00000000
-> > > > > > nouveau 0000:01:00.0: disp:        00a0: 00000060 -> 00000070
-> > > > > > nouveau 0000:01:00.0: disp:        00a4: 00000000 -> f0000000
-> > > > > > nouveau 0000:01:00.0: disp:        00c0: 00000000
-> > > > > > nouveau 0000:01:00.0: disp:        00c4: 00000000
-> > > > > > nouveau 0000:01:00.0: disp:        00c8: 00000000
-> > > > > > nouveau 0000:01:00.0: disp:        00cc: 00000000
-> > > > > > nouveau 0000:01:00.0: disp:        00e0: 40000000
-> > > > > > nouveau 0000:01:00.0: disp:        00e4: 00000000
-> > > > > > nouveau 0000:01:00.0: disp:        00e8: 00000000
-> > > > > > nouveau 0000:01:00.0: disp:        00ec: 00000000
-> > > > > > nouveau 0000:01:00.0: disp:        00fc: 00000000
-> > > > > > nouveau 0000:01:00.0: disp:        0100: fffe0000
-> > > > > > nouveau 0000:01:00.0: disp:        0104: 00000000
-> > > > > > nouveau 0000:01:00.0: disp:        0110: 00000000
-> > > > > > nouveau 0000:01:00.0: disp:        0114: 00000000
-> > > > > > nouveau 0000:01:00.0: disp: Base 1 - Image 0:
-> > > > > > nouveau 0000:01:00.0: disp:        0800: 00009500
-> > > > > > nouveau 0000:01:00.0: disp:        0804: 00000000
-> > > > > > nouveau 0000:01:00.0: disp:        0808: 04b00780
-> > > > > > nouveau 0000:01:00.0: disp:        080c: 00007804
-> > > > > > nouveau 0000:01:00.0: disp:        0810: 0000cf00
-> > > > > > nouveau 0000:01:00.0: disp: Base 1 - Image 1:
-> > > > > > nouveau 0000:01:00.0: disp:        0c00: 00009500
-> > > > > > nouveau 0000:01:00.0: disp:        0c04: 00000000
-> > > > > > nouveau 0000:01:00.0: disp:        0c08: 04b00780
-> > > > > > nouveau 0000:01:00.0: disp:        0c0c: 00007804
-> > > > > > nouveau 0000:01:00.0: disp:        0c10: 0000cf00
-> > > > > > nouveau 0000:01:00.0: disp: ERROR 5 [INVALID_STATE] 06 [] chid 1 mthd 0080 data 00000001
-> > > > > > nouveau 0000:01:00.0: disp: Base 1:
-> > > > > > nouveau 0000:01:00.0: disp:        0084: 00000000
-> > > > > > nouveau 0000:01:00.0: disp:        0088: 00000000
-> > > > > > nouveau 0000:01:00.0: disp:        008c: 00000000
-> > > > > > nouveau 0000:01:00.0: disp:        0090: 00000000
-> > > > > > nouveau 0000:01:00.0: disp:        0094: 00000000
-> > > > > > nouveau 0000:01:00.0: disp:        00a0: 00000060 -> 00000070
-> > > > > > nouveau 0000:01:00.0: disp:        00a4: 00000000 -> f0000000
-> > > > > > nouveau 0000:01:00.0: disp:        00c0: 00000000
-> > > > > > nouveau 0000:01:00.0: disp:        00c4: 00000000
-> > > > > > nouveau 0000:01:00.0: disp:        00c8: 00000000
-> > > > > > nouveau 0000:01:00.0: disp:        00cc: 00000000
-> > > > > > nouveau 0000:01:00.0: disp:        00e0: 40000000
-> > > > > > nouveau 0000:01:00.0: disp:        00e4: 00000000
-> > > > > > nouveau 0000:01:00.0: disp:        00e8: 00000000
-> > > > > > nouveau 0000:01:00.0: disp:        00ec: 00000000
-> > > > > > nouveau 0000:01:00.0: disp:        00fc: 00000000
-> > > > > > nouveau 0000:01:00.0: disp:        0100: fffe0000
-> > > > > > nouveau 0000:01:00.0: disp:        0104: 00000000
-> > > > > > nouveau 0000:01:00.0: disp:        0110: 00000000
-> > > > > > nouveau 0000:01:00.0: disp:        0114: 00000000
-> > > > > > nouveau 0000:01:00.0: disp: Base 1 - Image 0:
-> > > > > > nouveau 0000:01:00.0: disp:        0800: 00009500
-> > > > > > nouveau 0000:01:00.0: disp:        0804: 00000000
-> > > > > > nouveau 0000:01:00.0: disp:        0808: 04b00780
-> > > > > > nouveau 0000:01:00.0: disp:        080c: 00007804
-> > > > > > nouveau 0000:01:00.0: disp:        0810: 0000cf00
-> > > > > > nouveau 0000:01:00.0: disp: Base 1 - Image 1:
-> > > > > > nouveau 0000:01:00.0: disp:        0c00: 00009500
-> > > > > > nouveau 0000:01:00.0: disp:        0c04: 00000000
-> > > > > > nouveau 0000:01:00.0: disp:        0c08: 04b00780
-> > > > > > nouveau 0000:01:00.0: disp:        0c0c: 00007804
-> > > > > > nouveau 0000:01:00.0: disp:        0c10: 0000cf00
-> > > > > > nouveau 0000:01:00.0: DRM: core notifier timeout
-> > > > > > nouveau 0000:01:00.0: DRM: base-0: timeout
-> > > > > >
-> > > > > > I've got logs of all of this, if they help I can collect them.  The
-> > > > > > timeout message are consistent the error messages a little less so.
-> > > > > >
-> > > > > > If there's more debugging I can do when this happens, I'd love to know
-> > > > > > what it is.
-> > > > > >
-> > > > > > kernel config: http://audible.transient.net/~jamie/k/nouveau.config-5.10.0
-> > > > > > dmesg at boot: http://audible.transient.net/~jamie/k/nouveau.dmesg
-> > > > > >
-> > > > > > --
-> > > > > > Jamie Heilman                     http://audible.transient.net/~jamie/
-> > > > > > _______________________________________________
-> > > > > > Nouveau mailing list
-> > > > > > Nouveau@lists.freedesktop.org
-> > > > > > https://lists.freedesktop.org/mailman/listinfo/nouveau
-> > > > > >
-> > > > >
-> > > >
-> > > > --
-> > > > Jamie Heilman                     http://audible.transient.net/~jamie/
-> > >
-> > > --
-> > > Jamie Heilman                     http://audible.transient.net/~jamie/
-> >
-> > --
-> > Jamie Heilman                     http://audible.transient.net/~jamie/
-> >
-> 
-
--- 
-Jamie Heilman                     http://audible.transient.net/~jamie/
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
