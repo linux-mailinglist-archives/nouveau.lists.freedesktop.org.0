@@ -1,36 +1,38 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8E2BC30800D
-	for <lists+nouveau@lfdr.de>; Thu, 28 Jan 2021 21:59:51 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id B3F053082C0
+	for <lists+nouveau@lfdr.de>; Fri, 29 Jan 2021 01:56:32 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 786016E218;
-	Thu, 28 Jan 2021 20:59:48 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 75B576EA66;
+	Fri, 29 Jan 2021 00:56:29 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 281B66E0F7
- for <nouveau@lists.freedesktop.org>; Thu, 28 Jan 2021 20:59:48 +0000 (UTC)
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 6875F64DDE;
- Thu, 28 Jan 2021 20:59:47 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1611867587;
- bh=I/Eo/ckFo/UmLLq/4F+ksUbGqF3NvUqqpdVR1dzGu2Y=;
- h=Date:From:To:Cc:Subject:In-Reply-To:From;
- b=lFzgJrI60IS7FZ9jt4yG9eaeDFmWJXV9IQ3UGRKicN9QWr0GKbOkcsiXIGtxXZ2J5
- bMv/PHYsZtmIe6aHHQBZC2v38jGMwjuDl1Ph55nA56rDVbvRh4caNRwpWKxls0VMp6
- FRGr1hIxzD+4PTuY37qCJqcL6EXQXN4CEZuR1Ed2rikDm/oH8ISVusYXGRXI9Ag0YB
- 57WOrCp0TYgUSWD7pDazBiDIPhrqLHvx4ojGClOhWPfe6Dxw6txQLfCwYafuvVSq5U
- zFSd/Rp3PpQUCOqa9VAsK0tr/63WOcrDzxUcxWkUn8cvhqPUMmtZTiLW3H7V6jzEG0
- A3RqGbV2JErmQ==
-Date: Thu, 28 Jan 2021 14:59:46 -0600
-From: Bjorn Helgaas <helgaas@kernel.org>
-To: Marc MERLIN <marc_nouveau@merlins.org>
-Message-ID: <20210128205946.GA27855@bjorn-Precision-5520>
+Received: from mail1.merlins.org (magic.merlins.org [209.81.13.136])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B0E006EA66
+ for <nouveau@lists.freedesktop.org>; Fri, 29 Jan 2021 00:56:27 +0000 (UTC)
+Received: from [204.250.24.206] (port=54620 helo=sauron.svh.merlins.org)
+ by mail1.merlins.org with esmtpsa 
+ (Cipher TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92 #3)
+ id 1l5I5K-0000Av-Lm by authid <merlins.org> with srv_auth_plain;
+ Thu, 28 Jan 2021 16:56:26 -0800
+Received: from merlin by sauron.svh.merlins.org with local (Exim 4.92)
+ (envelope-from <marc_nouveau@merlins.org>)
+ id 1l5I5K-0008IY-7Q; Thu, 28 Jan 2021 16:56:26 -0800
+Date: Thu, 28 Jan 2021 16:56:26 -0800
+From: Marc MERLIN <marc_nouveau@merlins.org>
+To: Bjorn Helgaas <helgaas@kernel.org>
+Message-ID: <20210129005626.GP29348@merlins.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20210127213300.GA3046575@bjorn-Precision-5520>
+In-Reply-To: <20210128205946.GA27855@bjorn-Precision-5520>
+ <20210127213300.GA3046575@bjorn-Precision-5520>
+X-Sysadmin: BOFH
+X-URL: http://marc.merlins.org/
+X-Broken-Reverse-DNS: no host name for IP address 204.250.24.206
+X-SA-Exim-Connect-IP: 204.250.24.206
+X-SA-Exim-Mail-From: marc_nouveau@merlins.org
 Subject: Re: [Nouveau] 5.9.11 still hanging 2mn at each boot and looping on
  nvidia-gpu 0000:01:00.3: PME# enabled (Quadro RTX 4000 Mobile)
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -52,27 +54,14 @@ Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, Jan 27, 2021 at 03:33:02PM -0600, Bjorn Helgaas wrote:
-> On Sat, Dec 26, 2020 at 03:12:09AM -0800, Marc MERLIN wrote:
-> > This started with 5.5 and hasn't gotten better since then, despite
-> > some reports I tried to send.
-> > 
-> > As per my previous message:
-> > I have a Thinkpad P70 with hybrid graphics.
-> > 01:00.0 VGA compatible controller: NVIDIA Corporation GM107GLM [Quadro M600M] (rev a2)
-> > that one works fine, I can use i915 for the main screen, and nouveau to
-> > display on the external ports (external ports are only wired to nvidia
-> > chip, so it's impossible to use them without turning the nvidia chip
-> > on).
-> >  
-> > I now got a newer P73 also with the same hybrid graphics (setup as such
-> > in the bios). It runs fine with i915, and I don't need to use external
-> > display with nouveau for now (it almost works, but I only see the mouse
-> > cursor on the external screen, no window or anything else can get
-> > displayed, very weird).
-> > 01:00.0 VGA compatible controller: NVIDIA Corporation TU104GLM [Quadro RTX 4000 Mobile / Max-Q] (rev a1)
-> >  
-> > 
+On Wed, Jan 27, 2021 at 03:33:00PM -0600, Bjorn Helgaas wrote:
+> Hi Marc, I appreciate your persistence on this.  I am frankly
+> surprised that you've put up with this so long.
+ 
+Well, been using linux for 27 years, but also it's not like I have much
+of a choice outside of switching to windows, as tempting as it's getting
+sometimes ;)
+
 > > after boot, when it gets the right trigger (not sure which ones), it
 > > loops on this evern 2 seconds, mostly forever.
 > > 
@@ -81,23 +70,54 @@ On Wed, Jan 27, 2021 at 03:33:02PM -0600, Bjorn Helgaas wrote:
 > IIUC there are basically two problems:
 > 
 >   1) A 2 minute delay during boot
+> Another random thought: is there any chance the boot delay could be
+> related to crypto waiting for entropy?
+
+So, the 2mn hang went away after I added the nouveau firwmare in initrd.
+The only problem is that the nouveau driver does not give a very good
+clue as to what's going on and what to do.
+For comparison the intel iwlwifi driver is very clear about firmware
+it's trying to load, if it can't and what exact firmware you need to
+find on the internet (filename)
+
 >   2) Some sort of event every 2 seconds that kills your battery life
-> 
 > Your machine doesn't sound unusual, and I haven't seen a flood of
 > similar reports, so maybe there's something unusual about your config.
 > But I really don't have any guesses for either one.
-> 
+
+Honestly, there are not too many thinpad P73 running linux out there. I
+wouldn't be surprised if it's only a handful or two.
+
 > It sounds like v5.5 worked fine and you first noticed the slow boot
 > problem in v5.8.  We *could* try to bisect it, but I know that's a lot
 > of work on your part.
-> 
+
+I've done that in the past, to be honest now that it works after I added
+the firmware that nouveau started needing, and didn't need before, the
+hang at boot is gone for sure.
+The PCI PM wakeup issues on batteries happen sometimes still, but they
+are much more rare now.
+
 > Grasping for any ideas for the boot delay; could you boot with
 > "initcall_debug" and collect your "lsmod" output?  I notice async_tx
 > in some of your logs, but I have no idea what it is.  It's from
 > crypto, so possibly somewhat unusual?
 
-Another random thought: is there any chance the boot delay could be
-related to crypto waiting for entropy?
+Is this still neeeded? I think of nouveau does a better job of helping
+the user correct the issue if firmware is missing (I think intel even
+gives a URL in printk), that would probably be what's needed for the
+most part.
+
+[   12.832547] async_tx: api initialized (async) comes from ./crypto/async_tx/async_tx.c
+
+Thanks for your answer, let me know if there is anything else useful I
+can give, I think I'm otherwise mostly ok now.
+
+Marc
+-- 
+"A mouse is a device used to point at the xterm you want to type in" - A.S.R.
+ 
+Home page: http://marc.merlins.org/                       | PGP 7F55D5F27AAF9D08
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
