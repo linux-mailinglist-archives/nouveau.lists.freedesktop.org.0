@@ -1,36 +1,39 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2DA23308F2A
-	for <lists+nouveau@lfdr.de>; Fri, 29 Jan 2021 22:20:38 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 21E7B30916F
+	for <lists+nouveau@lfdr.de>; Sat, 30 Jan 2021 03:04:16 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B63FA6EC1E;
-	Fri, 29 Jan 2021 21:20:35 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9709B6EC7E;
+	Sat, 30 Jan 2021 02:04:13 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E43DD6EC1F
- for <nouveau@lists.freedesktop.org>; Fri, 29 Jan 2021 21:20:34 +0000 (UTC)
-Received: by mail.kernel.org (Postfix) with ESMTPSA id E64D564E06;
- Fri, 29 Jan 2021 21:20:33 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1611955234;
- bh=DM5sQEzyeZQYMcv/NaSI/egJ43G1u2n09nG0uwuL3WY=;
- h=Date:From:To:Cc:Subject:In-Reply-To:From;
- b=FIDLV8XNeZ1l66lLMPHxljPeKYJ+ZTJbAuPp+NuXCBWm3PSdSnENF+nfQ0jFSkUdH
- rY4flYpfbKBikYZPqLhkf3404J5nD2SXAhD96nZIlm5iDiOvNv8/SlQyoFvmHzLR1l
- VPBDgQr7ML2hLmUydmGT1Jx3f+MK1T3M/5nDhM7WJ8WKeUihNQpsBeO4OP4pXSq5mV
- rY6d4WPHktV6s9e7rTZMmTTvsGm4b6udTJ5bvAYwWMacud25mDnrWM2FbZY/A00mSK
- Jt7HnJDWzMqr9wKnDKGe1rfJ8m6lBgerRgJkd8oC68yvvw+svAsp3MFAyRTumRUtdI
- fKnwI1mz0l4QQ==
-Date: Fri, 29 Jan 2021 15:20:32 -0600
-From: Bjorn Helgaas <helgaas@kernel.org>
-To: Marc MERLIN <marc_nouveau@merlins.org>
-Message-ID: <20210129212032.GA99457@bjorn-Precision-5520>
+Received: from mail1.merlins.org (magic.merlins.org [209.81.13.136])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 246646EC7E
+ for <nouveau@lists.freedesktop.org>; Sat, 30 Jan 2021 02:04:13 +0000 (UTC)
+Received: from [172.58.39.25] (port=59580 helo=sauron.svh.merlins.org)
+ by mail1.merlins.org with esmtpsa 
+ (Cipher TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92 #3)
+ id 1l5fcS-0005BV-1m by authid <merlins.org> with srv_auth_plain;
+ Fri, 29 Jan 2021 18:04:12 -0800
+Received: from merlin by sauron.svh.merlins.org with local (Exim 4.92)
+ (envelope-from <marc_nouveau@merlins.org>)
+ id 1l5fcR-00008T-Dt; Fri, 29 Jan 2021 18:04:11 -0800
+Date: Fri, 29 Jan 2021 18:04:11 -0800
+From: Marc MERLIN <marc_nouveau@merlins.org>
+To: Bjorn Helgaas <helgaas@kernel.org>
+Message-ID: <20210130020411.GZ29348@merlins.org>
+References: <20210129005626.GP29348@merlins.org>
+ <20210129212032.GA99457@bjorn-Precision-5520>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20210129005626.GP29348@merlins.org>
+In-Reply-To: <20210129212032.GA99457@bjorn-Precision-5520>
+X-Sysadmin: BOFH
+X-URL: http://marc.merlins.org/
+X-Broken-Reverse-DNS: no host name for IP address 172.58.39.25
+X-SA-Exim-Connect-IP: 172.58.39.25
+X-SA-Exim-Mail-From: marc_nouveau@merlins.org
 Subject: Re: [Nouveau] 5.9.11 still hanging 2mn at each boot and looping on
  nvidia-gpu 0000:01:00.3: PME# enabled (Quadro RTX 4000 Mobile)
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -52,82 +55,63 @@ Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, Jan 28, 2021 at 04:56:26PM -0800, Marc MERLIN wrote:
-> On Wed, Jan 27, 2021 at 03:33:00PM -0600, Bjorn Helgaas wrote:
-> > Hi Marc, I appreciate your persistence on this.  I am frankly
-> > surprised that you've put up with this so long.
->  
-> Well, been using linux for 27 years, but also it's not like I have much
-> of a choice outside of switching to windows, as tempting as it's getting
-> sometimes ;)
+On Fri, Jan 29, 2021 at 03:20:32PM -0600, Bjorn Helgaas wrote:
+> > For comparison the intel iwlwifi driver is very clear about firmware
+> > it's trying to load, if it can't and what exact firmware you need to
+> > find on the internet (filename)
 > 
-> > > after boot, when it gets the right trigger (not sure which ones), it
-> > > loops on this evern 2 seconds, mostly forever.
-> > > 
-> > > I'm not sure if it's nouveau's fault or the kernel's PCI PME's fault, or something else.
-> > 
-> > IIUC there are basically two problems:
-> > 
-> >   1) A 2 minute delay during boot
-> > Another random thought: is there any chance the boot delay could be
-> > related to crypto waiting for entropy?
+> I guess you're referring to this in iwl_request_firmware()?
 > 
-> So, the 2mn hang went away after I added the nouveau firwmare in initrd.
-> The only problem is that the nouveau driver does not give a very good
-> clue as to what's going on and what to do.
->
-> For comparison the intel iwlwifi driver is very clear about firmware
-> it's trying to load, if it can't and what exact firmware you need to
-> find on the internet (filename)
+>   IWL_ERR(drv, "check git://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git\n"); 
+ 
+Yes :)
 
-I guess you're referring to this in iwl_request_firmware()?
+> How can we fix this in nouveau so we don't have the debug this again?
+> I don't really know how firmware loading works, but "git grep -A5
+> request_firmware drivers/gpu/drm/nouveau/" shows that we generally
+> print something when request_firmware() fails.
 
-  IWL_ERR(drv, "check git://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git\n"); 
+Well, have a look at https://pastebin.com/dX19aCpj
+do you see any warning whatsoever?
 
-How can we fix this in nouveau so we don't have the debug this again?
-I don't really know how firmware loading works, but "git grep -A5
-request_firmware drivers/gpu/drm/nouveau/" shows that we generally
-print something when request_firmware() fails.
+> But I didn't notice those messages in your logs, so I'm probably
+> barking up the wrong tree.
 
-But I didn't notice those messages in your logs, so I'm probably
-barking up the wrong tree.
+you're not It seems that newer kernels are a bit better:
+[  189.304662] nouveau 0000:01:00.0: pmu: firmware unavailable
+[  189.312455] nouveau 0000:01:00.0: disp: destroy running...
+[  189.316552] nouveau 0000:01:00.0: disp: destroy completed in 1us
+[  189.320326] nouveau 0000:01:00.0: disp ctor failed, -12
+[  189.324214] nouveau: probe of 0000:01:00.0 failed with error -12
 
-> >   2) Some sort of event every 2 seconds that kills your battery life
-> > Your machine doesn't sound unusual, and I haven't seen a flood of
-> > similar reports, so maybe there's something unusual about your config.
-> > But I really don't have any guesses for either one.
-> 
-> Honestly, there are not too many thinpad P73 running linux out there. I
-> wouldn't be surprised if it's only a handful or two.
-> 
-> > It sounds like v5.5 worked fine and you first noticed the slow boot
-> > problem in v5.8.  We *could* try to bisect it, but I know that's a lot
-> > of work on your part.
-> 
-> I've done that in the past, to be honest now that it works after I added
-> the firmware that nouveau started needing, and didn't need before, the
-> hang at boot is gone for sure.
-> The PCI PM wakeup issues on batteries happen sometimes still, but they
-> are much more rare now.
+So, it probably got better, but that message got displayed after the 2mn
+hang that having the firmware, stops from happening.
 
-So maybe the wakeups are related to having vs not having the nouveau
-firmware?  I'm still curious about that, and it smells like a bug to
-me, but probably something to do with nouveau where I have no hope of
-debugging it.
+whichever developer with the right hardware can probably easily
+reproduce this by removing the firmware and looking at the boot
+messages.
 
-> > Grasping for any ideas for the boot delay; could you boot with
-> > "initcall_debug" and collect your "lsmod" output?  I notice async_tx
-> > in some of your logs, but I have no idea what it is.  It's from
-> > crypto, so possibly somewhat unusual?
-> 
-> Is this still neeeded? I think of nouveau does a better job of helping
-> the user correct the issue if firmware is missing (I think intel even
-> gives a URL in printk), that would probably be what's needed for the
-> most part.
+At the very least, it should print something more clear "driver will not
+function properly", and a URL to where one can get the driver, would be
+awesome.
 
-Nope, don't bother with this, thanks.
+> So maybe the wakeups are related to having vs not having the nouveau
+> firmware?  I'm still curious about that, and it smells like a bug to
+> me, but probably something to do with nouveau where I have no hope of
+> debugging it.
+ 
+Right. Honestly, given the time I've lost with this, and now that it
+seems gone with the firmware, I'm happy to leave well enough alone :)
 
-Bjorn
+I'm not sure how you are involved with the driver, but are you able to
+help improve the dmesg output?
+
+Thanks,
+Marc
+-- 
+"A mouse is a device used to point at the xterm you want to type in" - A.S.R.
+ 
+Home page: http://marc.merlins.org/                       | PGP 7F55D5F27AAF9D08
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
