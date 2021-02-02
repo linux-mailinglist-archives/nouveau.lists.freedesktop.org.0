@@ -1,42 +1,46 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 681F330C2ED
-	for <lists+nouveau@lfdr.de>; Tue,  2 Feb 2021 16:06:27 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id BD03430CD0F
+	for <lists+nouveau@lfdr.de>; Tue,  2 Feb 2021 21:30:20 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1AA886E8C4;
-	Tue,  2 Feb 2021 15:06:24 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E22876E222;
+	Tue,  2 Feb 2021 20:30:18 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 802E36E8C4;
- Tue,  2 Feb 2021 15:06:22 +0000 (UTC)
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 07DF164E58;
- Tue,  2 Feb 2021 15:06:20 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1612278381;
- bh=ZFcLfTMHJpVmW+Qgh8W6WNIdzkO2s/1s5+MiBxyEikc=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=dvKfsmm72DevtxpZbTlvzpRhq+rhv532NOAND4zSxcID1J4tpsK8Ahd0GryJ+i9dn
- 5ROSsUpLWkNKSGw3RJbpVEdEOZIgcvGwl9f34T6FZQX60biiNLusxAkUwzvJtOJXFF
- VDMy66BBnIY8LogggaQS6lsij4omJkXLM3YaJxj9w3cXQ1dEAQ5SItM15SZBJTiqU4
- cYA4F5s+2ClZFYKtqUFouFCi2bk4rWV3M+vBBystNLXpG87WhYHg7q+2XrNNW4CDVM
- o/usxuJiw7JTj494atvdTLbhmhxSTmi5FfrSwxM4Y/2yI86ZAXsqIoMRfGcuhvhhIk
- GoUO30pGPZZTA==
-From: Sasha Levin <sashal@kernel.org>
-To: linux-kernel@vger.kernel.org,
-	stable@vger.kernel.org
-Date: Tue,  2 Feb 2021 10:05:54 -0500
-Message-Id: <20210202150615.1864175-4-sashal@kernel.org>
-X-Mailer: git-send-email 2.27.0
-In-Reply-To: <20210202150615.1864175-1-sashal@kernel.org>
-References: <20210202150615.1864175-1-sashal@kernel.org>
+Received: from audible.transient.net (audible.transient.net [24.143.126.66])
+ by gabe.freedesktop.org (Postfix) with SMTP id 1CEAD8921D
+ for <nouveau@lists.freedesktop.org>; Tue,  2 Feb 2021 20:26:50 +0000 (UTC)
+Received: (qmail 31260 invoked from network); 2 Feb 2021 20:26:48 -0000
+Received: from cucamonga.audible.transient.net (192.168.2.5)
+ by canarsie.audible.transient.net with QMQP; 2 Feb 2021 20:26:48 -0000
+Received: (nullmailer pid 3418 invoked by uid 1000);
+ Tue, 02 Feb 2021 20:26:48 -0000
+Date: Tue, 2 Feb 2021 20:26:48 +0000
+From: Jamie Heilman <jamie@audible.transient.net>
+To: Karol Herbst <kherbst@redhat.com>, Ben Skeggs <bskeggs@redhat.com>,
+ LKML <linux-kernel@vger.kernel.org>, nouveau <nouveau@lists.freedesktop.org>
+Message-ID: <YBm1iJXeDvf/Z7B4@audible.transient.net>
+Mail-Followup-To: Karol Herbst <kherbst@redhat.com>,
+ Ben Skeggs <bskeggs@redhat.com>,
+ LKML <linux-kernel@vger.kernel.org>,
+ nouveau <nouveau@lists.freedesktop.org>
+References: <X+WV8OiQzTIfLdgW@audible.transient.net>
+ <CACO55tt9GbwBU6igAJ_8RjwzSZcDbu+_1wGWKiye3TosgoiHyw@mail.gmail.com>
+ <X/NO9kAlCd/k8Di2@audible.transient.net>
+ <X/NT0iN9KlSXQJJ7@audible.transient.net>
+ <X/UsBWwFR+V0hIOS@audible.transient.net>
+ <CACO55ttrFCOzREQxi3+SSaCSsAP1bEUBEt78ajkRGQQU1xYxtw@mail.gmail.com>
+ <YAjn9jR+d2zRfNjb@audible.transient.net>
+ <CACO55tu+5vv3dU3+O=DGDo9EdcyqFtpF4WR-VNj5eo89WMSfpw@mail.gmail.com>
+ <YAtMEGJxlRklqYw8@audible.transient.net>
+ <YAtxgP6YJJwcotuA@audible.transient.net>
 MIME-Version: 1.0
-X-stable: review
-X-Patchwork-Hint: Ignore
-Subject: [Nouveau] [PATCH AUTOSEL 5.10 04/25] drm/nouveau/nvif: fix method
- count when pushing an array
+Content-Disposition: inline
+In-Reply-To: <YAtxgP6YJJwcotuA@audible.transient.net>
+X-Mailman-Approved-At: Tue, 02 Feb 2021 20:30:17 +0000
+Subject: Re: [Nouveau] nouveau regression post v5.8, still present in v5.10
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -48,271 +52,76 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Sasha Levin <sashal@kernel.org>, nouveau@lists.freedesktop.org,
- Ben Skeggs <bskeggs@redhat.com>, dri-devel@lists.freedesktop.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-From: Ben Skeggs <bskeggs@redhat.com>
+Jamie Heilman wrote:
+> Jamie Heilman wrote:
+> > Karol Herbst wrote:
+> > > fyi, there is a patch which solves a maybe related issue on your GPU,
+> > > mind giving it a try before we dig further?
+> > > https://gitlab.freedesktop.org/drm/nouveau/-/issues/14#note_767791
+> > 
+> > So, I tried that.  Turns out, I can still trigger a problem.  Is it
+> > the same problem?  Maybe?  I also tried applying the patch from 
+> > 
+> > ca386aa7155a ("drm/nouveau/kms/nv50-gp1xx: add WAR for EVO push buffer HW bug")
+> > to 5.8.0-rc6-01516-g0a96099691c8 and very interestingly, it changed
+> > the mode of failure to same thing I saw with 5.10.9 patched with the patch
+> > from that bug report.  In both cases I get this in the log:
+> > 
+> > kern.err: nouveau 0000:01:00.0: Xorg[2243]: nv50cal_space: -16
+> > kern.err: nouveau 0000:01:00.0: Xorg[2243]: nv50cal_space: -16
+> > kern.err: nouveau 0000:01:00.0: Xorg[2243]: nv50cal_space: -16
+> > kern.err: nouveau 0000:01:00.0: Xorg[2243]: nv50cal_space: -16
+> > ...
+> > and so on
+> > 
+> > In one incident my monitor would't even wake up anymore after this.
+> > 
+> > 
+> > I'm trying to repo it now on an unpatched 5.8.0-rc6-01515-gae09163ac27c
+> > right now, as running glxgears does seem to help reproduce problems
+> > faster which is nice, I'm just not entirely sure it's the same set of
+> > problems; hopefully that version is free from issues, but we'll
+> > see...
+> 
+> Ugh, well I can crash 5.8.0-rc6-01515-gae09163ac27c and 5.8.18 in
+> basically the same way running glxgears and a xset dpms force off
+> loop.  So I'm starting to think it's not the same thing, and that
+> problem has been latent from before I started having periodic issues.
+> 
+> I should note that my exact testing technique for the above was to run
+> 4 copies of glxgears and the xset force dpms off loop at the same
+> time.  Really looks more like it triggers a resource starvation issue
+> maybe.  The crash is also worse, particularly if I don't do anything
+> about it right away as my workstation eventually falls off the network
+> and I'm forced to power cycle it; the crashes I was chasing after
+> wouldn't do quite that much violence, normally I could still log in,
+> rebuild a kernel, and shut things down cleanly.
+> 
+> More than one bug here I suspect.
 
-[ Upstream commit d502297008142645edf5c791af424ed321e5da84 ]
+OK, I went back and bisected again while patching known issues to get
+a better idea what was causing the problem I've been having and I'm
+confident it was the bug which Bastian Beranek's patch (now in
+mainline) addressed.  My original bisection got confused by the
+EVO push buffer HW bug which was fixed in ca386aa7155a54.  Once I
+bisected with the patch from ca386aa7155a54 applied, my bisection
+landed on f844eb485eb05 and Bastian Beranek's patch fixed that right
+up.
 
-Reported-by: Lyude Paul <lyude@redhat.com>
-Signed-off-by: Ben Skeggs <bskeggs@redhat.com>
-Signed-off-by: Sasha Levin <sashal@kernel.org>
----
- drivers/gpu/drm/nouveau/include/nvif/push.h | 216 ++++++++++----------
- 1 file changed, 108 insertions(+), 108 deletions(-)
+'course I remain mildly concerned I can crash the kernel with little
+more than glxgears and xset ... but the original stability problem I
+reported I can safely say has been fixed.  If I can figure out the
+nature of what I suspect is unrecoverable resource starvation, I'll
+start a new thread for that.
 
-diff --git a/drivers/gpu/drm/nouveau/include/nvif/push.h b/drivers/gpu/drm/nouveau/include/nvif/push.h
-index 168d7694ede5c..6d3a8a3d2087b 100644
---- a/drivers/gpu/drm/nouveau/include/nvif/push.h
-+++ b/drivers/gpu/drm/nouveau/include/nvif/push.h
-@@ -123,131 +123,131 @@ PUSH_KICK(struct nvif_push *push)
- } while(0)
- #endif
- 
--#define PUSH_1(X,f,ds,n,c,o,p,s,mA,dA) do {                            \
--	PUSH_##o##_HDR((p), s, mA, (c)+(n));                           \
--	PUSH_##f(X, (p), X##mA, 1, o, (dA), ds, "");                   \
-+#define PUSH_1(X,f,ds,n,o,p,s,mA,dA) do {                             \
-+	PUSH_##o##_HDR((p), s, mA, (ds)+(n));                         \
-+	PUSH_##f(X, (p), X##mA, 1, o, (dA), ds, "");                  \
- } while(0)
--#define PUSH_2(X,f,ds,n,c,o,p,s,mB,dB,mA,dA,a...) do {                 \
--	PUSH_ASSERT((mB) - (mA) == (1?PUSH_##o##_INC), "mthd1");       \
--	PUSH_1(X, DATA_, 1, ds, (c)+(n), o, (p), s, X##mA, (dA), ##a); \
--	PUSH_##f(X, (p), X##mB, 0, o, (dB), ds, "");                   \
-+#define PUSH_2(X,f,ds,n,o,p,s,mB,dB,mA,dA,a...) do {                  \
-+	PUSH_ASSERT((mB) - (mA) == (1?PUSH_##o##_INC), "mthd1");      \
-+	PUSH_1(X, DATA_, 1, (ds) + (n), o, (p), s, X##mA, (dA), ##a); \
-+	PUSH_##f(X, (p), X##mB, 0, o, (dB), ds, "");                  \
- } while(0)
--#define PUSH_3(X,f,ds,n,c,o,p,s,mB,dB,mA,dA,a...) do {                 \
--	PUSH_ASSERT((mB) - (mA) == (0?PUSH_##o##_INC), "mthd2");       \
--	PUSH_2(X, DATA_, 1, ds, (c)+(n), o, (p), s, X##mA, (dA), ##a); \
--	PUSH_##f(X, (p), X##mB, 0, o, (dB), ds, "");                   \
-+#define PUSH_3(X,f,ds,n,o,p,s,mB,dB,mA,dA,a...) do {                  \
-+	PUSH_ASSERT((mB) - (mA) == (0?PUSH_##o##_INC), "mthd2");      \
-+	PUSH_2(X, DATA_, 1, (ds) + (n), o, (p), s, X##mA, (dA), ##a); \
-+	PUSH_##f(X, (p), X##mB, 0, o, (dB), ds, "");                  \
- } while(0)
--#define PUSH_4(X,f,ds,n,c,o,p,s,mB,dB,mA,dA,a...) do {                 \
--	PUSH_ASSERT((mB) - (mA) == (0?PUSH_##o##_INC), "mthd3");       \
--	PUSH_3(X, DATA_, 1, ds, (c)+(n), o, (p), s, X##mA, (dA), ##a); \
--	PUSH_##f(X, (p), X##mB, 0, o, (dB), ds, "");                   \
-+#define PUSH_4(X,f,ds,n,o,p,s,mB,dB,mA,dA,a...) do {                  \
-+	PUSH_ASSERT((mB) - (mA) == (0?PUSH_##o##_INC), "mthd3");      \
-+	PUSH_3(X, DATA_, 1, (ds) + (n), o, (p), s, X##mA, (dA), ##a); \
-+	PUSH_##f(X, (p), X##mB, 0, o, (dB), ds, "");                  \
- } while(0)
--#define PUSH_5(X,f,ds,n,c,o,p,s,mB,dB,mA,dA,a...) do {                 \
--	PUSH_ASSERT((mB) - (mA) == (0?PUSH_##o##_INC), "mthd4");       \
--	PUSH_4(X, DATA_, 1, ds, (c)+(n), o, (p), s, X##mA, (dA), ##a); \
--	PUSH_##f(X, (p), X##mB, 0, o, (dB), ds, "");                   \
-+#define PUSH_5(X,f,ds,n,o,p,s,mB,dB,mA,dA,a...) do {                  \
-+	PUSH_ASSERT((mB) - (mA) == (0?PUSH_##o##_INC), "mthd4");      \
-+	PUSH_4(X, DATA_, 1, (ds) + (n), o, (p), s, X##mA, (dA), ##a); \
-+	PUSH_##f(X, (p), X##mB, 0, o, (dB), ds, "");                  \
- } while(0)
--#define PUSH_6(X,f,ds,n,c,o,p,s,mB,dB,mA,dA,a...) do {                 \
--	PUSH_ASSERT((mB) - (mA) == (0?PUSH_##o##_INC), "mthd5");       \
--	PUSH_5(X, DATA_, 1, ds, (c)+(n), o, (p), s, X##mA, (dA), ##a); \
--	PUSH_##f(X, (p), X##mB, 0, o, (dB), ds, "");                   \
-+#define PUSH_6(X,f,ds,n,o,p,s,mB,dB,mA,dA,a...) do {                  \
-+	PUSH_ASSERT((mB) - (mA) == (0?PUSH_##o##_INC), "mthd5");      \
-+	PUSH_5(X, DATA_, 1, (ds) + (n), o, (p), s, X##mA, (dA), ##a); \
-+	PUSH_##f(X, (p), X##mB, 0, o, (dB), ds, "");                  \
- } while(0)
--#define PUSH_7(X,f,ds,n,c,o,p,s,mB,dB,mA,dA,a...) do {                 \
--	PUSH_ASSERT((mB) - (mA) == (0?PUSH_##o##_INC), "mthd6");       \
--	PUSH_6(X, DATA_, 1, ds, (c)+(n), o, (p), s, X##mA, (dA), ##a); \
--	PUSH_##f(X, (p), X##mB, 0, o, (dB), ds, "");                   \
-+#define PUSH_7(X,f,ds,n,o,p,s,mB,dB,mA,dA,a...) do {                  \
-+	PUSH_ASSERT((mB) - (mA) == (0?PUSH_##o##_INC), "mthd6");      \
-+	PUSH_6(X, DATA_, 1, (ds) + (n), o, (p), s, X##mA, (dA), ##a); \
-+	PUSH_##f(X, (p), X##mB, 0, o, (dB), ds, "");                  \
- } while(0)
--#define PUSH_8(X,f,ds,n,c,o,p,s,mB,dB,mA,dA,a...) do {                 \
--	PUSH_ASSERT((mB) - (mA) == (0?PUSH_##o##_INC), "mthd7");       \
--	PUSH_7(X, DATA_, 1, ds, (c)+(n), o, (p), s, X##mA, (dA), ##a); \
--	PUSH_##f(X, (p), X##mB, 0, o, (dB), ds, "");                   \
-+#define PUSH_8(X,f,ds,n,o,p,s,mB,dB,mA,dA,a...) do {                  \
-+	PUSH_ASSERT((mB) - (mA) == (0?PUSH_##o##_INC), "mthd7");      \
-+	PUSH_7(X, DATA_, 1, (ds) + (n), o, (p), s, X##mA, (dA), ##a); \
-+	PUSH_##f(X, (p), X##mB, 0, o, (dB), ds, "");                  \
- } while(0)
--#define PUSH_9(X,f,ds,n,c,o,p,s,mB,dB,mA,dA,a...) do {                 \
--	PUSH_ASSERT((mB) - (mA) == (0?PUSH_##o##_INC), "mthd8");       \
--	PUSH_8(X, DATA_, 1, ds, (c)+(n), o, (p), s, X##mA, (dA), ##a); \
--	PUSH_##f(X, (p), X##mB, 0, o, (dB), ds, "");                   \
-+#define PUSH_9(X,f,ds,n,o,p,s,mB,dB,mA,dA,a...) do {                  \
-+	PUSH_ASSERT((mB) - (mA) == (0?PUSH_##o##_INC), "mthd8");      \
-+	PUSH_8(X, DATA_, 1, (ds) + (n), o, (p), s, X##mA, (dA), ##a); \
-+	PUSH_##f(X, (p), X##mB, 0, o, (dB), ds, "");                  \
- } while(0)
--#define PUSH_10(X,f,ds,n,c,o,p,s,mB,dB,mA,dA,a...) do {                \
--	PUSH_ASSERT((mB) - (mA) == (0?PUSH_##o##_INC), "mthd9");       \
--	PUSH_9(X, DATA_, 1, ds, (c)+(n), o, (p), s, X##mA, (dA), ##a); \
--	PUSH_##f(X, (p), X##mB, 0, o, (dB), ds, "");                   \
-+#define PUSH_10(X,f,ds,n,o,p,s,mB,dB,mA,dA,a...) do {                 \
-+	PUSH_ASSERT((mB) - (mA) == (0?PUSH_##o##_INC), "mthd9");      \
-+	PUSH_9(X, DATA_, 1, (ds) + (n), o, (p), s, X##mA, (dA), ##a); \
-+	PUSH_##f(X, (p), X##mB, 0, o, (dB), ds, "");                  \
- } while(0)
- 
--#define PUSH_1D(X,o,p,s,mA,dA)                            \
--	PUSH_1(X, DATA_, 1, 1, 0, o, (p), s, X##mA, (dA))
--#define PUSH_2D(X,o,p,s,mA,dA,mB,dB)                      \
--	PUSH_2(X, DATA_, 1, 1, 0, o, (p), s, X##mB, (dB), \
--					     X##mA, (dA))
--#define PUSH_3D(X,o,p,s,mA,dA,mB,dB,mC,dC)                \
--	PUSH_3(X, DATA_, 1, 1, 0, o, (p), s, X##mC, (dC), \
--					     X##mB, (dB), \
--					     X##mA, (dA))
--#define PUSH_4D(X,o,p,s,mA,dA,mB,dB,mC,dC,mD,dD)          \
--	PUSH_4(X, DATA_, 1, 1, 0, o, (p), s, X##mD, (dD), \
--					     X##mC, (dC), \
--					     X##mB, (dB), \
--					     X##mA, (dA))
--#define PUSH_5D(X,o,p,s,mA,dA,mB,dB,mC,dC,mD,dD,mE,dE)    \
--	PUSH_5(X, DATA_, 1, 1, 0, o, (p), s, X##mE, (dE), \
--					     X##mD, (dD), \
--					     X##mC, (dC), \
--					     X##mB, (dB), \
--					     X##mA, (dA))
-+#define PUSH_1D(X,o,p,s,mA,dA)                         \
-+	PUSH_1(X, DATA_, 1, 0, o, (p), s, X##mA, (dA))
-+#define PUSH_2D(X,o,p,s,mA,dA,mB,dB)                   \
-+	PUSH_2(X, DATA_, 1, 0, o, (p), s, X##mB, (dB), \
-+					  X##mA, (dA))
-+#define PUSH_3D(X,o,p,s,mA,dA,mB,dB,mC,dC)             \
-+	PUSH_3(X, DATA_, 1, 0, o, (p), s, X##mC, (dC), \
-+					  X##mB, (dB), \
-+					  X##mA, (dA))
-+#define PUSH_4D(X,o,p,s,mA,dA,mB,dB,mC,dC,mD,dD)       \
-+	PUSH_4(X, DATA_, 1, 0, o, (p), s, X##mD, (dD), \
-+					  X##mC, (dC), \
-+					  X##mB, (dB), \
-+					  X##mA, (dA))
-+#define PUSH_5D(X,o,p,s,mA,dA,mB,dB,mC,dC,mD,dD,mE,dE) \
-+	PUSH_5(X, DATA_, 1, 0, o, (p), s, X##mE, (dE), \
-+					  X##mD, (dD), \
-+					  X##mC, (dC), \
-+					  X##mB, (dB), \
-+					  X##mA, (dA))
- #define PUSH_6D(X,o,p,s,mA,dA,mB,dB,mC,dC,mD,dD,mE,dE,mF,dF) \
--	PUSH_6(X, DATA_, 1, 1, 0, o, (p), s, X##mF, (dF),    \
--					     X##mE, (dE),    \
--					     X##mD, (dD),    \
--					     X##mC, (dC),    \
--					     X##mB, (dB),    \
--					     X##mA, (dA))
-+	PUSH_6(X, DATA_, 1, 0, o, (p), s, X##mF, (dF),       \
-+					  X##mE, (dE),       \
-+					  X##mD, (dD),       \
-+					  X##mC, (dC),       \
-+					  X##mB, (dB),       \
-+					  X##mA, (dA))
- #define PUSH_7D(X,o,p,s,mA,dA,mB,dB,mC,dC,mD,dD,mE,dE,mF,dF,mG,dG) \
--	PUSH_7(X, DATA_, 1, 1, 0, o, (p), s, X##mG, (dG),          \
--					     X##mF, (dF),          \
--					     X##mE, (dE),          \
--					     X##mD, (dD),          \
--					     X##mC, (dC),          \
--					     X##mB, (dB),          \
--					     X##mA, (dA))
-+	PUSH_7(X, DATA_, 1, 0, o, (p), s, X##mG, (dG),             \
-+					  X##mF, (dF),             \
-+					  X##mE, (dE),             \
-+					  X##mD, (dD),             \
-+					  X##mC, (dC),             \
-+					  X##mB, (dB),             \
-+					  X##mA, (dA))
- #define PUSH_8D(X,o,p,s,mA,dA,mB,dB,mC,dC,mD,dD,mE,dE,mF,dF,mG,dG,mH,dH) \
--	PUSH_8(X, DATA_, 1, 1, 0, o, (p), s, X##mH, (dH),                \
--					     X##mG, (dG),                \
--					     X##mF, (dF),                \
--					     X##mE, (dE),                \
--					     X##mD, (dD),                \
--					     X##mC, (dC),                \
--					     X##mB, (dB),                \
--					     X##mA, (dA))
-+	PUSH_8(X, DATA_, 1, 0, o, (p), s, X##mH, (dH),                   \
-+					  X##mG, (dG),                   \
-+					  X##mF, (dF),                   \
-+					  X##mE, (dE),                   \
-+					  X##mD, (dD),                   \
-+					  X##mC, (dC),                   \
-+					  X##mB, (dB),                   \
-+					  X##mA, (dA))
- #define PUSH_9D(X,o,p,s,mA,dA,mB,dB,mC,dC,mD,dD,mE,dE,mF,dF,mG,dG,mH,dH,mI,dI) \
--	PUSH_9(X, DATA_, 1, 1, 0, o, (p), s, X##mI, (dI),                      \
--					     X##mH, (dH),                      \
--					     X##mG, (dG),                      \
--					     X##mF, (dF),                      \
--					     X##mE, (dE),                      \
--					     X##mD, (dD),                      \
--					     X##mC, (dC),                      \
--					     X##mB, (dB),                      \
--					     X##mA, (dA))
-+	PUSH_9(X, DATA_, 1, 0, o, (p), s, X##mI, (dI),                         \
-+					  X##mH, (dH),                         \
-+					  X##mG, (dG),                         \
-+					  X##mF, (dF),                         \
-+					  X##mE, (dE),                         \
-+					  X##mD, (dD),                         \
-+					  X##mC, (dC),                         \
-+					  X##mB, (dB),                         \
-+					  X##mA, (dA))
- #define PUSH_10D(X,o,p,s,mA,dA,mB,dB,mC,dC,mD,dD,mE,dE,mF,dF,mG,dG,mH,dH,mI,dI,mJ,dJ) \
--	PUSH_10(X, DATA_, 1, 1, 0, o, (p), s, X##mJ, (dJ),                            \
--					      X##mI, (dI),                            \
--					      X##mH, (dH),                            \
--					      X##mG, (dG),                            \
--					      X##mF, (dF),                            \
--					      X##mE, (dE),                            \
--					      X##mD, (dD),                            \
--					      X##mC, (dC),                            \
--					      X##mB, (dB),                            \
--					      X##mA, (dA))
-+	PUSH_10(X, DATA_, 1, 0, o, (p), s, X##mJ, (dJ),                               \
-+					   X##mI, (dI),                               \
-+					   X##mH, (dH),                               \
-+					   X##mG, (dG),                               \
-+					   X##mF, (dF),                               \
-+					   X##mE, (dE),                               \
-+					   X##mD, (dD),                               \
-+					   X##mC, (dC),                               \
-+					   X##mB, (dB),                               \
-+					   X##mA, (dA))
- 
--#define PUSH_1P(X,o,p,s,mA,dp,ds)                           \
--	PUSH_1(X, DATAp, ds, ds, 0, o, (p), s, X##mA, (dp))
--#define PUSH_2P(X,o,p,s,mA,dA,mB,dp,ds)                     \
--	PUSH_2(X, DATAp, ds, ds, 0, o, (p), s, X##mB, (dp), \
--					       X##mA, (dA))
--#define PUSH_3P(X,o,p,s,mA,dA,mB,dB,mC,dp,ds)               \
--	PUSH_3(X, DATAp, ds, ds, 0, o, (p), s, X##mC, (dp), \
--					       X##mB, (dB), \
--					       X##mA, (dA))
-+#define PUSH_1P(X,o,p,s,mA,dp,ds)                       \
-+	PUSH_1(X, DATAp, ds, 0, o, (p), s, X##mA, (dp))
-+#define PUSH_2P(X,o,p,s,mA,dA,mB,dp,ds)                 \
-+	PUSH_2(X, DATAp, ds, 0, o, (p), s, X##mB, (dp), \
-+					   X##mA, (dA))
-+#define PUSH_3P(X,o,p,s,mA,dA,mB,dB,mC,dp,ds)           \
-+	PUSH_3(X, DATAp, ds, 0, o, (p), s, X##mC, (dp), \
-+					   X##mB, (dB), \
-+					   X##mA, (dA))
- 
- #define PUSH_(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,IMPL,...) IMPL
- #define PUSH(A...) PUSH_(A, PUSH_10P, PUSH_10D,          \
+
 -- 
-2.27.0
-
+Jamie Heilman                     http://audible.transient.net/~jamie/
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
