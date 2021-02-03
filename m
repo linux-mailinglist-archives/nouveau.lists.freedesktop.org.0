@@ -2,45 +2,34 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id BD03430CD0F
-	for <lists+nouveau@lfdr.de>; Tue,  2 Feb 2021 21:30:20 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1C49830D509
+	for <lists+nouveau@lfdr.de>; Wed,  3 Feb 2021 09:20:29 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E22876E222;
-	Tue,  2 Feb 2021 20:30:18 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id DB23289F6B;
+	Wed,  3 Feb 2021 08:20:25 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from audible.transient.net (audible.transient.net [24.143.126.66])
- by gabe.freedesktop.org (Postfix) with SMTP id 1CEAD8921D
- for <nouveau@lists.freedesktop.org>; Tue,  2 Feb 2021 20:26:50 +0000 (UTC)
-Received: (qmail 31260 invoked from network); 2 Feb 2021 20:26:48 -0000
-Received: from cucamonga.audible.transient.net (192.168.2.5)
- by canarsie.audible.transient.net with QMQP; 2 Feb 2021 20:26:48 -0000
-Received: (nullmailer pid 3418 invoked by uid 1000);
- Tue, 02 Feb 2021 20:26:48 -0000
-Date: Tue, 2 Feb 2021 20:26:48 +0000
-From: Jamie Heilman <jamie@audible.transient.net>
-To: Karol Herbst <kherbst@redhat.com>, Ben Skeggs <bskeggs@redhat.com>,
- LKML <linux-kernel@vger.kernel.org>, nouveau <nouveau@lists.freedesktop.org>
-Message-ID: <YBm1iJXeDvf/Z7B4@audible.transient.net>
-Mail-Followup-To: Karol Herbst <kherbst@redhat.com>,
- Ben Skeggs <bskeggs@redhat.com>,
- LKML <linux-kernel@vger.kernel.org>,
- nouveau <nouveau@lists.freedesktop.org>
-References: <X+WV8OiQzTIfLdgW@audible.transient.net>
- <CACO55tt9GbwBU6igAJ_8RjwzSZcDbu+_1wGWKiye3TosgoiHyw@mail.gmail.com>
- <X/NO9kAlCd/k8Di2@audible.transient.net>
- <X/NT0iN9KlSXQJJ7@audible.transient.net>
- <X/UsBWwFR+V0hIOS@audible.transient.net>
- <CACO55ttrFCOzREQxi3+SSaCSsAP1bEUBEt78ajkRGQQU1xYxtw@mail.gmail.com>
- <YAjn9jR+d2zRfNjb@audible.transient.net>
- <CACO55tu+5vv3dU3+O=DGDo9EdcyqFtpF4WR-VNj5eo89WMSfpw@mail.gmail.com>
- <YAtMEGJxlRklqYw8@audible.transient.net>
- <YAtxgP6YJJwcotuA@audible.transient.net>
+Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D295D89F6B;
+ Wed,  3 Feb 2021 08:20:23 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 5AEB8AC3A;
+ Wed,  3 Feb 2021 08:20:22 +0000 (UTC)
+To: Ye Bin <yebin10@huawei.com>, bskeggs@redhat.com, airlied@linux.ie,
+ daniel@ffwll.ch, dri-devel@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org
+References: <20210123013014.3815870-1-yebin10@huawei.com>
+From: Thomas Zimmermann <tzimmermann@suse.de>
+Message-ID: <aa1dc788-bc47-ac8e-73a9-067be8b6ba7a@suse.de>
+Date: Wed, 3 Feb 2021 09:20:21 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.6.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <YAtxgP6YJJwcotuA@audible.transient.net>
-X-Mailman-Approved-At: Tue, 02 Feb 2021 20:30:17 +0000
-Subject: Re: [Nouveau] nouveau regression post v5.8, still present in v5.10
+In-Reply-To: <20210123013014.3815870-1-yebin10@huawei.com>
+Subject: Re: [Nouveau] 
+ =?utf-8?q?=5BPATCH=5D_drm/nouveau=3A_remove_set_but_no?=
+ =?utf-8?q?t_used_variable_=E2=80=98pdev=E2=80=99_in_nouveau=5Fbios=5Finit?=
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -52,77 +41,116 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: Hulk Robot <hulkci@huawei.com>
+Content-Type: multipart/mixed; boundary="===============1677760780=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Jamie Heilman wrote:
-> Jamie Heilman wrote:
-> > Karol Herbst wrote:
-> > > fyi, there is a patch which solves a maybe related issue on your GPU,
-> > > mind giving it a try before we dig further?
-> > > https://gitlab.freedesktop.org/drm/nouveau/-/issues/14#note_767791
-> > 
-> > So, I tried that.  Turns out, I can still trigger a problem.  Is it
-> > the same problem?  Maybe?  I also tried applying the patch from 
-> > 
-> > ca386aa7155a ("drm/nouveau/kms/nv50-gp1xx: add WAR for EVO push buffer HW bug")
-> > to 5.8.0-rc6-01516-g0a96099691c8 and very interestingly, it changed
-> > the mode of failure to same thing I saw with 5.10.9 patched with the patch
-> > from that bug report.  In both cases I get this in the log:
-> > 
-> > kern.err: nouveau 0000:01:00.0: Xorg[2243]: nv50cal_space: -16
-> > kern.err: nouveau 0000:01:00.0: Xorg[2243]: nv50cal_space: -16
-> > kern.err: nouveau 0000:01:00.0: Xorg[2243]: nv50cal_space: -16
-> > kern.err: nouveau 0000:01:00.0: Xorg[2243]: nv50cal_space: -16
-> > ...
-> > and so on
-> > 
-> > In one incident my monitor would't even wake up anymore after this.
-> > 
-> > 
-> > I'm trying to repo it now on an unpatched 5.8.0-rc6-01515-gae09163ac27c
-> > right now, as running glxgears does seem to help reproduce problems
-> > faster which is nice, I'm just not entirely sure it's the same set of
-> > problems; hopefully that version is free from issues, but we'll
-> > see...
-> 
-> Ugh, well I can crash 5.8.0-rc6-01515-gae09163ac27c and 5.8.18 in
-> basically the same way running glxgears and a xset dpms force off
-> loop.  So I'm starting to think it's not the same thing, and that
-> problem has been latent from before I started having periodic issues.
-> 
-> I should note that my exact testing technique for the above was to run
-> 4 copies of glxgears and the xset force dpms off loop at the same
-> time.  Really looks more like it triggers a resource starvation issue
-> maybe.  The crash is also worse, particularly if I don't do anything
-> about it right away as my workstation eventually falls off the network
-> and I'm forced to power cycle it; the crashes I was chasing after
-> wouldn't do quite that much violence, normally I could still log in,
-> rebuild a kernel, and shut things down cleanly.
-> 
-> More than one bug here I suspect.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--===============1677760780==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="rm5LD8VZtyhsfXogm2MgzIbGwK4MBB9k6"
 
-OK, I went back and bisected again while patching known issues to get
-a better idea what was causing the problem I've been having and I'm
-confident it was the bug which Bastian Beranek's patch (now in
-mainline) addressed.  My original bisection got confused by the
-EVO push buffer HW bug which was fixed in ca386aa7155a54.  Once I
-bisected with the patch from ca386aa7155a54 applied, my bisection
-landed on f844eb485eb05 and Bastian Beranek's patch fixed that right
-up.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--rm5LD8VZtyhsfXogm2MgzIbGwK4MBB9k6
+Content-Type: multipart/mixed; boundary="1CsaXThNQWcfbJMGuWTfOXIh1DkO7eibk";
+ protected-headers="v1"
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: Ye Bin <yebin10@huawei.com>, bskeggs@redhat.com, airlied@linux.ie,
+ daniel@ffwll.ch, dri-devel@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org
+Cc: Hulk Robot <hulkci@huawei.com>
+Message-ID: <aa1dc788-bc47-ac8e-73a9-067be8b6ba7a@suse.de>
+Subject: =?UTF-8?Q?Re=3a_=5bPATCH=5d_drm/nouveau=3a_remove_set_but_not_used_?=
+ =?UTF-8?Q?variable_=e2=80=98pdev=e2=80=99_in_nouveau=5fbios=5finit?=
+References: <20210123013014.3815870-1-yebin10@huawei.com>
+In-Reply-To: <20210123013014.3815870-1-yebin10@huawei.com>
 
-'course I remain mildly concerned I can crash the kernel with little
-more than glxgears and xset ... but the original stability problem I
-reported I can safely say has been fixed.  If I can figure out the
-nature of what I suspect is unrecoverable resource starvation, I'll
-start a new thread for that.
+--1CsaXThNQWcfbJMGuWTfOXIh1DkO7eibk
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
+
+Applied to drm-misc-next. Thanks for the patch!
+
+Am 23.01.21 um 02:30 schrieb Ye Bin:
+> Fix follow warning:
+> drivers/gpu/drm/nouveau/nouveau_bios.c:2086:18: warning: variable =E2=80=
+=98pdev=E2=80=99 set but not used [-Wunused-but-set-variable]
+>    struct pci_dev *pdev;
+>                    ^~~~
+>=20
+> Reported-by: Hulk Robot <hulkci@huawei.com>
+> Signed-off-by: Ye Bin <yebin10@huawei.com>
+> ---
+>   drivers/gpu/drm/nouveau/nouveau_bios.c | 2 --
+>   1 file changed, 2 deletions(-)
+>=20
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_bios.c b/drivers/gpu/drm/n=
+ouveau/nouveau_bios.c
+> index 7cc683b8dc7a..e8c445eb1100 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_bios.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_bios.c
+> @@ -2083,13 +2083,11 @@ nouveau_bios_init(struct drm_device *dev)
+>   {
+>   	struct nouveau_drm *drm =3D nouveau_drm(dev);
+>   	struct nvbios *bios =3D &drm->vbios;
+> -	struct pci_dev *pdev;
+>   	int ret;
+>  =20
+>   	/* only relevant for PCI devices */
+>   	if (!dev_is_pci(dev->dev))
+>   		return 0;
+> -	pdev =3D to_pci_dev(dev->dev);
+>  =20
+>   	if (!NVInitVBIOS(dev))
+>   		return -ENODEV;
+>=20
+
+--=20
+Thomas Zimmermann
+Graphics Driver Developer
+SUSE Software Solutions Germany GmbH
+Maxfeldstr. 5, 90409 N=C3=BCrnberg, Germany
+(HRB 36809, AG N=C3=BCrnberg)
+Gesch=C3=A4ftsf=C3=BChrer: Felix Imend=C3=B6rffer
 
 
--- 
-Jamie Heilman                     http://audible.transient.net/~jamie/
+--1CsaXThNQWcfbJMGuWTfOXIh1DkO7eibk--
+
+--rm5LD8VZtyhsfXogm2MgzIbGwK4MBB9k6
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
+
+-----BEGIN PGP SIGNATURE-----
+
+wsF5BAABCAAjFiEExndm/fpuMUdwYFFolh/E3EQov+AFAmAaXMUFAwAAAAAACgkQlh/E3EQov+D7
+ZxAAxLjMylCx6YFYx6DLkHXiemXHddeNdKImp91LogDAOIXpRgBwOi20RoRKzEHF3wuRHBr3mQbn
+FbLzxYBdu4Hc+CMSuZwLdg5GaICjhuvB6KXsZwEfpDOCpaPsduT6FKWMYCqscDY36Vb6e11mGgUd
+ua/tgcPTxJML1pV/GKYTch8rS+OJ2fUxXqRuNQTmipjaIaM8F6s4n1255kwVQCYa6aKjy0aFHm5f
+qf5Uk8XiWhSbmw5lO31+6oynLJHA4Q2BpBtPmAr4Abw9cR+UIn7MbywA+JFiYT6TV2bcWXb2uK+8
+3dRWW8SizsqQtElS7vN9PBiPcDW9YMX6fcHj8PO2Xtqw6kYlgejS0jPuPOkTtECeuKbBlGtut7r0
+7LL8uHs4fsvTGB+RmTKdEn/hI5ubHbE8R2x+EXWpNA+3ItzOlV6a75S/ShNcAVXZc3hB2KsNEnje
+GwpP+NmlJUC7BXlbuPSRlC7AZjSzxV0Ukffk7vVqzF0cVyHPwJJNzSwRU4Ct20+5d7J9+pcXrk4x
+7iACRs4e/5qkPdQYtdE0O4iwUeq9XdxDEuXWFS9e6t1SHP3hXndRfoMFNaqKNtDWGCK+hN7bhKfS
+2Bq9356np4qmoyTm9M1MS1+SsH1AB6azfqboJ7QV9KYRDYXQmBvDMeJcV2qaAxtwwWfQcp7pKNd3
+new=
+=Nb9N
+-----END PGP SIGNATURE-----
+
+--rm5LD8VZtyhsfXogm2MgzIbGwK4MBB9k6--
+
+--===============1677760780==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/nouveau
+
+--===============1677760780==--
