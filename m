@@ -2,73 +2,40 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 174A2311134
-	for <lists+nouveau@lfdr.de>; Fri,  5 Feb 2021 20:32:27 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1251C3112F6
+	for <lists+nouveau@lfdr.de>; Fri,  5 Feb 2021 22:00:55 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 188EE6E3C4;
-	Fri,  5 Feb 2021 19:32:25 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7311A6F4D5;
+	Fri,  5 Feb 2021 21:00:53 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id BA0286E092
- for <nouveau@lists.freedesktop.org>; Fri,  5 Feb 2021 19:32:23 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1612553542;
- h=from:from:reply-to:reply-to:subject:subject:date:date:
- message-id:message-id:to:to:cc:cc:mime-version:mime-version:
- content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=TybL8msyPScLSAumwyt0dZWsRIf+ERLMmEnFxnYsc/8=;
- b=KN9jBN5MjvucNwAL0Vvn+1cHKkIR6ePbwEzUYPORIVKe62vYr51pe6W+aemITm4Gn1apxZ
- a7opobmx1M4Lm4dhyyOjpVz64l4yewl39BhmwyepHb1G5OKJTRGLrrHCsT4mM7Bqh96+DT
- dzQ5obyba74qFljIFfjS/tIkz60XfS4=
-Received: from mail-qv1-f70.google.com (mail-qv1-f70.google.com
- [209.85.219.70]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-467-MJputSlmPy-FQ8eZ1aZcBg-1; Fri, 05 Feb 2021 14:32:20 -0500
-X-MC-Unique: MJputSlmPy-FQ8eZ1aZcBg-1
-Received: by mail-qv1-f70.google.com with SMTP id e10so5744264qvp.22
- for <nouveau@lists.freedesktop.org>; Fri, 05 Feb 2021 11:32:20 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:message-id:subject:from:reply-to:to:cc:date
- :in-reply-to:references:organization:user-agent:mime-version
- :content-transfer-encoding;
- bh=TybL8msyPScLSAumwyt0dZWsRIf+ERLMmEnFxnYsc/8=;
- b=hhChE7J4q03wIPHKWaznuPqJSPkPgS3n5XIHYkD3CyVLLNnkwyYoKxnedILHQYkwWR
- np/+iuhDCAXnmCsIOcXpFSoZsRnSZ97q9860/iP4VVmm1HNQmu/XMm+Z5CYbljIM4IpK
- ntfkTISfemh2xKaGJ505rvjMjQMNF1E98WW4KS9cezF4GSrNL13DU0oN8YZSs6CTdHJu
- M7iM9K6WLH3k7mYZuATyK89fy5/PJEpzzNT7A4WBq8QTQdg5jJav54UbpcJbdYva34Mi
- F4xpsIcM1vzsLGS66pSpUKi436zTDL+ytKQVb0VAOKRWIeTdWFsDjCZHKD4qx4GUVfXd
- zJ/A==
-X-Gm-Message-State: AOAM533EG9vc5VfdYAjhkmj1d5B/LmwDLJokqq72u/y/A6Qn/ZX+TKol
- i4zBhDbec5jCF+qxfw8pzQIBr4errLs/D8dqsR0GBGqr72ARx49OMRb8nv37WvzXvuiaCbMDp+K
- YTGWeFNQY2rF/p6igfhC8o5XttA==
-X-Received: by 2002:ac8:661a:: with SMTP id c26mr452425qtp.126.1612553540132; 
- Fri, 05 Feb 2021 11:32:20 -0800 (PST)
-X-Google-Smtp-Source: ABdhPJw5inQUkD+ec8xK5wNPcyLuLpef1+oi03O7wtooh00UeoN2Sc9GtxGAVJI80/z/70ojUs9OLg==
-X-Received: by 2002:ac8:661a:: with SMTP id c26mr452408qtp.126.1612553539942; 
- Fri, 05 Feb 2021 11:32:19 -0800 (PST)
-Received: from Whitewolf.lyude.net
- (pool-108-49-102-102.bstnma.fios.verizon.net. [108.49.102.102])
- by smtp.gmail.com with ESMTPSA id 16sm8774419qtp.38.2021.02.05.11.32.18
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 05 Feb 2021 11:32:19 -0800 (PST)
-Message-ID: <d7209d342c9c11b2e1cfc65e1b908669ed9866df.camel@redhat.com>
-From: Lyude Paul <lyude@redhat.com>
-To: Ilia Mirkin <imirkin@alum.mit.edu>, Simon Ser <contact@emersion.fr>
-Date: Fri, 05 Feb 2021 14:32:18 -0500
+Received: from mail-40131.protonmail.ch (mail-40131.protonmail.ch
+ [185.70.40.131])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1A8F66F4D4
+ for <nouveau@lists.freedesktop.org>; Fri,  5 Feb 2021 21:00:52 +0000 (UTC)
+Date: Fri, 05 Feb 2021 21:00:31 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=emersion.fr;
+ s=protonmail3; t=1612558850;
+ bh=eb00I4eXg81iMHdwrVyh4pRLnVJKZaQzHcrO2DkbR8k=;
+ h=Date:To:From:Cc:Reply-To:Subject:In-Reply-To:References:From;
+ b=KdwtvxR/Chmr54i8wKAvEz5NEQPysY8HIsAJcp8tGfibucH/e0zDpYrIbD5qp+jwB
+ O17QzrPDzl7eV+vzK+tNiFddT6GA/KGFNXomV2LI0HocMxB2xQa1e+Bv+kG5//Q3CW
+ iFsIodD2d9Rl7kHeuzjSegnEKSFfTfPDyT4OUbkkJJXPMuFMg7rfX7qswHkebK3SPm
+ 5sT7WWeWraXtaiIx4ItI2HhFCv7Up2ZKm/WKibKya7DtUe0lTC2r7j0MSB+wFib36C
+ GdJI4iCpQ+soTdLiHMnH5qNhEKoYzslT2QNbBXoHsm9NhmS1to3mYwYmWMDDVMVU2h
+ c6nnf5JxKAwvQ==
+To: Ilia Mirkin <imirkin@alum.mit.edu>
+From: Simon Ser <contact@emersion.fr>
+Message-ID: <0am_JysnhvIm7YsD6g25wgVXQybQLOvU_eMbqptnONhP5_Xsjd3cCrFVc8bvjOQA7a7rH_JUY9Q3nac_TmoKDGubJ9sS2rqVuT8WCX15ikc=@emersion.fr>
 In-Reply-To: <CAKb7UvgpiHY3Z3BtCW3yP2YbfTvmpYS2uvErz1SjkR07pV6DSw@mail.gmail.com>
 References: <20210205164515.4622-1-contact@emersion.fr>
  <CAKb7UvgpiHY3Z3BtCW3yP2YbfTvmpYS2uvErz1SjkR07pV6DSw@mail.gmail.com>
-Organization: Red Hat
-User-Agent: Evolution 3.38.3 (3.38.3-1.fc33)
 MIME-Version: 1.0
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=lyude@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
+X-Spam-Status: No, score=-1.2 required=10.0 tests=ALL_TRUSTED,DKIM_SIGNED,
+ DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF shortcircuit=no
+ autolearn=disabled version=3.4.4
+X-Spam-Checker-Version: SpamAssassin 3.4.4 (2020-01-24) on
+ mailout.protonmail.ch
 Subject: Re: [Nouveau] [PATCH] nouveau/dispnv50: add cursor size/pitch checks
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -81,97 +48,39 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Reply-To: lyude@redhat.com
+Reply-To: Simon Ser <contact@emersion.fr>
 Cc: nouveau <nouveau@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-T24gRnJpLCAyMDIxLTAyLTA1IGF0IDEyOjM0IC0wNTAwLCBJbGlhIE1pcmtpbiB3cm90ZToKPiBP
-biBGcmksIEZlYiA1LCAyMDIxIGF0IDExOjQ1IEFNIFNpbW9uIFNlciA8Y29udGFjdEBlbWVyc2lv
-bi5mcj4gd3JvdGU6Cj4gPiAKPiA+IFRoZSBoYXJkd2FyZSBuZWVkcyBhIEZCIHdoaWNoIGlzIHBh
-Y2tlZCBhbmQgbm90IHRvbyBsYXJnZS4gQWRkCj4gPiBjaGVja3MgdG8gbWFrZSBzdXJlIHRoaXMg
-aXMgdGhlIGNhc2UuCj4gPiAKPiA+IFdoaWxlIGF0IGl0LCBhZGQgYSBkZWJ1ZyBsb2cgZm9yIHRo
-ZSBleGlzdGluZyBjaGVjay4gVGhpcyBhbGxvd3MKPiA+IHVzZXItc3BhY2UgdG8gbW9yZSBlYXNp
-bHkgZmlndXJlIG91dCB3aHkgYSBjb25maWd1cmF0aW9uIGlzCj4gPiByZWplY3RlZC4KPiA+IAo+
-ID4gVGhpcyBjb21taXQgZGVwZW5kcyBvbiAiZHJtL25vdXZlYXUva21zL252NTAtOiBSZXBvcnQg
-bWF4IGN1cnNvcgo+ID4gc2l6ZSB0byB1c2Vyc3BhY2UiLCBvdGhlcndpc2UgbW9kZV9jb25maWcu
-Y3Vyc29yX3t3aWR0aCxoZWlnaHR9Cj4gPiBpcyB6ZXJvLgo+ID4gCj4gPiBTaWduZWQtb2ZmLWJ5
-OiBTaW1vbiBTZXIgPGNvbnRhY3RAZW1lcnNpb24uZnI+Cj4gPiBDYzogTHl1ZGUgUGF1bCA8bHl1
-ZGVAcmVkaGF0LmNvbT4KPiA+IENjOiBCZW4gU2tlZ2dzIDxic2tlZ2dzQHJlZGhhdC5jb20+Cj4g
-PiBDYzogSWxpYSBNaXJraW4gPGltaXJraW5AYWx1bS5taXQuZWR1Pgo+ID4gLS0tCj4gPiDCoGRy
-aXZlcnMvZ3B1L2RybS9ub3V2ZWF1L2Rpc3BudjUwL2N1cnM1MDdhLmMgfCAyMiArKysrKysrKysr
-KysrKysrKysrKy0KPiA+IMKgMSBmaWxlIGNoYW5nZWQsIDIxIGluc2VydGlvbnMoKyksIDEgZGVs
-ZXRpb24oLSkKPiA+IAo+ID4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L2Rp
-c3BudjUwL2N1cnM1MDdhLmMKPiA+IGIvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvZGlzcG52NTAv
-Y3VyczUwN2EuYwo+ID4gaW5kZXggNTRmYmQ2ZmU3NTFkLi45YTQwMTc1MWM1NmQgMTAwNjQ0Cj4g
-PiAtLS0gYS9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9kaXNwbnY1MC9jdXJzNTA3YS5jCj4gPiAr
-KysgYi9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9kaXNwbnY1MC9jdXJzNTA3YS5jCj4gPiBAQCAt
-OTksNiArOTksNyBAQCBjdXJzNTA3YV9hY3F1aXJlKHN0cnVjdCBudjUwX3duZHcgKnduZHcsIHN0
-cnVjdAo+ID4gbnY1MF93bmR3X2F0b20gKmFzeXcsCj4gPiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoCBzdHJ1Y3QgbnY1MF9oZWFkX2F0b20gKmFzeWgpCj4gPiDCoHsKPiA+IMKgwqDC
-oMKgwqDCoMKgIHN0cnVjdCBudjUwX2hlYWQgKmhlYWQgPSBudjUwX2hlYWQoYXN5dy0+c3RhdGUu
-Y3J0Yyk7Cj4gPiArwqDCoMKgwqDCoMKgIHN0cnVjdCBkcm1fZGV2aWNlICpkZXYgPSBoZWFkLT5i
-YXNlLmJhc2UuZGV2Owo+ID4gwqDCoMKgwqDCoMKgwqAgaW50IHJldDsKPiA+IAo+ID4gwqDCoMKg
-wqDCoMKgwqAgcmV0ID0gZHJtX2F0b21pY19oZWxwZXJfY2hlY2tfcGxhbmVfc3RhdGUoJmFzeXct
-PnN0YXRlLCAmYXN5aC0KPiA+ID5zdGF0ZSwKPiA+IEBAIC0xMDksOCArMTEwLDI3IEBAIGN1cnM1
-MDdhX2FjcXVpcmUoc3RydWN0IG52NTBfd25kdyAqd25kdywgc3RydWN0Cj4gPiBudjUwX3duZHdf
-YXRvbSAqYXN5dywKPiA+IMKgwqDCoMKgwqDCoMKgIGlmIChyZXQgfHwgIWFzeWgtPmN1cnMudmlz
-aWJsZSkKPiA+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCByZXR1cm4gcmV0Owo+ID4g
-Cj4gPiAtwqDCoMKgwqDCoMKgIGlmIChhc3l3LT5pbWFnZS53ICE9IGFzeXctPmltYWdlLmgpCj4g
-PiArwqDCoMKgwqDCoMKgIGlmIChhc3l3LT5pbWFnZS53ICE9IGFzeXctPmltYWdlLmgpIHsKPiA+
-ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGRybV9kYmdfYXRvbWljKGRldiwKPiA+ICvC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-ICJJbnZhbGlkIGN1cnNvciBpbWFnZSBzaXplOiB3aWR0aCAoJWQpIG11c3QKPiA+IG1hdGNoIGhl
-aWdodCAoJWQpIiwKPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgIGFzeXctPmltYWdlLncsIGFzeXctPmltYWdlLmgpOwo+ID4gwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHJldHVybiAtRUlOVkFMOwo+ID4gK8KgwqDCoMKg
-wqDCoCB9Cj4gPiArwqDCoMKgwqDCoMKgIGlmIChhc3l3LT5pbWFnZS53ID4gZGV2LT5tb2RlX2Nv
-bmZpZy5jdXJzb3Jfd2lkdGggfHwKPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoCBhc3l3LT5pbWFn
-ZS5oID4gZGV2LT5tb2RlX2NvbmZpZy5jdXJzb3JfaGVpZ2h0KSB7Cj4gPiArwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoCBkcm1fZGJnX2F0b21pYyhkZXYsCj4gPiArwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCAiSW52YWxpZCBjdXJz
-b3IgaW1hZ2Ugc2l6ZTogdG9vIGxhcmdlICglZHglZAo+ID4gPiAlZHglZCkiLAo+ID4gK8KgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgYXN5
-dy0+aW1hZ2UudywgYXN5dy0+aW1hZ2UuaCwKPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGRldi0+bW9kZV9jb25maWcuY3Vyc29y
-X3dpZHRoLAo+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqAgZGV2LT5tb2RlX2NvbmZpZy5jdXJzb3JfaGVpZ2h0KTsKPiA+ICvCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHJldHVybiAtRUlOVkFMOwo+ID4gK8KgwqDCoMKgwqDC
-oCB9Cj4gPiArwqDCoMKgwqDCoMKgIGlmIChhc3l3LT5pbWFnZS5waXRjaFswXSAhPSBhc3l3LT5p
-bWFnZS53ICogNCkgewo+IAo+IFJhdGhlciB0aGFuIGhhcmQtY29kaW5nIHRvIDQsIG1ha2UgdGhp
-cyBsb29rIGF0IHRoZSBmb3JtYXQgKG9yIGNwcCwKPiB3aGljaCBzaG91bGQgYmUgYXZhaWxhYmxl
-IHNvbWV3aGVyZSB0b28gSSB0aGluaykuIChZZWFoLCBjdXJyZW50bHkgd2UKPiBvbmx5IGV4cG9z
-ZSBSR0JBOCwgYnV0IHdlIHNob3VsZCBhbHNvIGJlIGRvaW5nIFJHQjVBMS4pCgpGV0lXLCByZXF1
-aXJlZCBwaXRjaCBmb3IgY3Vyc29ycyAoZnVuIGZhY3QgLSBpdCdzIGFjdHVhbGx5IGRpZmZlcmVu
-dCB0aGVuIHRoZQpwaXRjaCByZXF1aXJlbWVudHMgZm9yIGFueSBvdGhlciBraW5kIG9mIHN1cmZh
-Y2UgdXNlZCB3aXRoIGV2byEpIGluIEExRzVHNUI1IGlzCiogMiwgYW5kIHRoZSAqIDQgeW91IGhh
-dmUgaGVyZSBpcyBjb3JyZWN0IGZvciBBOFI4RzhCOC4KCkp1c3QgYSBub3RlLCBJIGRpZCBhY3R1
-YWxseSB0cnkgdG8gZW5hYmxlIFJHQjVBMSBhdCBsZWFzdCBvbiBwYXNjYWwgd2hlbiB3b3JraW5n
-Cm9uIGlndCB3aXRoIG5vdXZlYXUsIEknbSBub3Qgc3VyZSB3aHkgYnV0IHNvbWV0aGluZyBhcHBl
-YXJzIHRvIGJlIGJyb2tlbiB3aXRoCnRoYXQgKGlpcmMgdGhlIFJNIHRocm93cyBhbiBleGNlcHRp
-b24sIGFuZCB1bmZvcnR1bmF0ZWx5IEkgdGhpbmsgaXQncyBvbmUgb2YgdGhlCmZldyBleGNlcHRp
-b25zIEkgZG9uJ3QgYWN0dWFsbHkgaGF2ZSBhbnkgc2VjcmV0IGRvY3MgZm9yKSwganVzdCBjaGFu
-Z2luZyB0aGUKY3Vyc29yIGxheW91dCBpc24ndCBlbm91Z2guIE9yIG1heWJlIEkgc2NyZXdlZCBz
-b21ldGhpbmcgc2lsbHkgdXAgc29tZXdoZXJlLCBidXQKc2VlaW5nIGFzIEkgdHJpZWQgcXVpdGUg
-YSBmZXcgdGltZXMgSSdkIGhvcGUgbm90IDopLgoKQW55d2F5LCB0aGUgcmVzdCBvZiB0aGlzIGxv
-b2tzIGdyZWF0Cgo+IAo+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgZHJtX2RiZ19h
-dG9taWMoZGV2LAo+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqAgIkludmFsaWQgY3Vyc29yIGltYWdlIHBpdGNoOiBpbWFnZSBtdXN0
-IGJlCj4gPiBwYWNrZWQgKHBpdGNoID0gJWQsIHdpZHRoID0gJWQpIiwKPiA+ICvCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGFzeXctPmlt
-YWdlLnBpdGNoWzBdLCBhc3l3LT5pbWFnZS53KTsKPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgIHJldHVybiAtRUlOVkFMOwo+ID4gK8KgwqDCoMKgwqDCoCB9Cj4gPiAKPiA+IMKgwqDC
-oMKgwqDCoMKgIHJldCA9IGhlYWQtPmZ1bmMtPmN1cnNfbGF5b3V0KGhlYWQsIGFzeXcsIGFzeWgp
-Owo+IAo+IEFuZCB0aGlzIHdpbGwgZmFpbCBkdWUgdG8gdGhlIHdpZHRoL2hlaWdodCBub3QgYmVp
-bmcgc3VwcG9ydGVkLCByaWdodD8KPiAKPiDCoCAtaWxpYQo+IAoKLS0gClNpbmNlcmVseSwKICAg
-THl1ZGUgUGF1bCAoc2hlL2hlcikKICAgU29mdHdhcmUgRW5naW5lZXIgYXQgUmVkIEhhdAogICAK
-Tm90ZTogSSBkZWFsIHdpdGggYSBsb3Qgb2YgZW1haWxzIGFuZCBoYXZlIGEgbG90IG9mIGJ1Z3Mg
-b24gbXkgcGxhdGUuIElmIHlvdSd2ZQphc2tlZCBtZSBhIHF1ZXN0aW9uLCBhcmUgd2FpdGluZyBm
-b3IgYSByZXZpZXcvbWVyZ2Ugb24gYSBwYXRjaCwgZXRjLiBhbmQgSQpoYXZlbid0IHJlc3BvbmRl
-ZCBpbiBhIHdoaWxlLCBwbGVhc2UgZmVlbCBmcmVlIHRvIHNlbmQgbWUgYW5vdGhlciBlbWFpbCB0
-byBjaGVjawpvbiBteSBzdGF0dXMuIEkgZG9uJ3QgYml0ZSEKCl9fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fCk5vdXZlYXUgbWFpbGluZyBsaXN0Ck5vdXZlYXVA
-bGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxt
-YW4vbGlzdGluZm8vbm91dmVhdQo=
+On Friday, February 5th, 2021 at 6:34 PM, Ilia Mirkin <imirkin@alum.mit.edu> wrote:
+
+> > +       if (asyw->image.pitch[0] != asyw->image.w * 4) {
+>
+> Rather than hard-coding to 4, make this look at the format (or cpp,
+> which should be available somewhere too I think). (Yeah, currently we
+> only expose RGBA8, but we should also be doing RGB5A1.)
+
+Makes sense.
+
+> > +               drm_dbg_atomic(dev,
+> > +                              "Invalid cursor image pitch: image must be packed (pitch = %d, width = %d)",
+> > +                              asyw->image.pitch[0], asyw->image.w);
+> > +               return -EINVAL;
+> > +       }
+> >
+> >         ret = head->func->curs_layout(head, asyw, asyh);
+>
+> And this will fail due to the width/height not being supported, right?
+
+Oh right, this function will perform size checks, and is better than the one
+I added above because it actually checks that the combination is supported.
+Will remove the one above in v2.
+
+Thanks for the comments!
+_______________________________________________
+Nouveau mailing list
+Nouveau@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/nouveau
