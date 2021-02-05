@@ -2,29 +2,53 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 04365311585
-	for <lists+nouveau@lfdr.de>; Fri,  5 Feb 2021 23:41:49 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8B774311744
+	for <lists+nouveau@lfdr.de>; Sat,  6 Feb 2021 00:45:36 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7AEC66F51B;
-	Fri,  5 Feb 2021 22:41:47 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 823526F404;
+	Fri,  5 Feb 2021 23:45:29 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from relay5-d.mail.gandi.net (relay5-d.mail.gandi.net
- [217.70.183.197])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4EEE36F51B
- for <nouveau@lists.freedesktop.org>; Fri,  5 Feb 2021 22:41:45 +0000 (UTC)
-X-Originating-IP: 86.247.11.12
-Received: from haruko.lan (lfbn-idf2-1-654-12.w86-247.abo.wanadoo.fr
- [86.247.11.12]) (Authenticated sender: schroder@emersion.fr)
- by relay5-d.mail.gandi.net (Postfix) with ESMTPSA id 4BE3C1C000A;
- Fri,  5 Feb 2021 22:41:42 +0000 (UTC)
-From: Simon Ser <contact@emersion.fr>
-To: nouveau@lists.freedesktop.org
-Date: Fri,  5 Feb 2021 23:41:40 +0100
-Message-Id: <20210205224140.28174-1-contact@emersion.fr>
-X-Mailer: git-send-email 2.30.0
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [216.205.24.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 99FFA6F404
+ for <nouveau@lists.freedesktop.org>; Fri,  5 Feb 2021 23:45:27 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1612568726;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=iY3IjhQPYa+p63OMFoqW4AwhQgkWYCOrFg/cQCxrZBA=;
+ b=PDsYYJDPp8nK/PVl5cln++eQE416pEUBpuum7BwZ5OcU8h6pfWNCJHX/jtjAytgfdLPvZL
+ Xu/9RBTEBSIOZMxiFJe2SUjo1fWyhy2sDMGWgZXBB2pJI+yjAk2tz4Y7WIyY46qiInwo+T
+ YjTL5Pq5cKeV60s67mgGhrq41UJ7oKg=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-501-uvYRsLNKMH6Vjmtqog3o9A-1; Fri, 05 Feb 2021 18:45:22 -0500
+X-MC-Unique: uvYRsLNKMH6Vjmtqog3o9A-1
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
+ [10.5.11.23])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 7D1E210051A2;
+ Fri,  5 Feb 2021 23:45:21 +0000 (UTC)
+Received: from Whitewolf.redhat.com (ovpn-116-79.rdu2.redhat.com
+ [10.10.116.79])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 97C0219727;
+ Fri,  5 Feb 2021 23:45:20 +0000 (UTC)
+From: Lyude Paul <lyude@redhat.com>
+To: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ intel-gfx@lists.freedesktop.org
+Date: Fri,  5 Feb 2021 18:45:04 -0500
+Message-Id: <20210205234515.1216538-1-lyude@redhat.com>
 MIME-Version: 1.0
-Subject: [Nouveau] [PATCH v4] nouveau/dispnv50: add cursor pitch check
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=lyude@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Subject: [Nouveau] [RFC v3 00/10] drm: Extract DPCD backlight helpers from
+ i915, add support in nouveau
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -36,101 +60,52 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Ben Skeggs <bskeggs@redhat.com>
+Cc: Jani Nikula <jani.nikula@intel.com>, greg.depoire@gmail.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-The hardware needs a FB which is packed. Add checks to make sure
-this is the case.
+This series:
+* Cleans up i915's DPCD backlight code a little bit
+* Extracts i915's DPCD backlight code into a set of shared DRM helpers
+* Starts using those helpers in nouveau to add support to nouveau for
+  DPCD backlight control
 
-While at it, add debug logs for the existing checks. This allows
-user-space to more easily figure out why a configuration is
-rejected.
+v2 series-wide changes:
+* Rebase
+v3 series-wide changes:
+* Split up the changes to intel's backlight code into separate patches
 
-v2:
-- Use drm_format_info instead of hardcoding bytes-per-pixel (Ilia)
-- Remove unnecessary size check (Ilia)
+Cc: Jani Nikula <jani.nikula@intel.com>
+Cc: Dave Airlie <airlied@gmail.com>
+Cc: greg.depoire@gmail.com
 
-v3:
-- Add missing newlines in debug messages (Lyude)
-- Use NV_ATOMIC (Lyude)
-- Add missing debug log for invalid format (Ilia)
+Lyude Paul (10):
+  drm/nouveau/kms/nv40-/backlight: Assign prop type once
+  drm/nouveau/kms: Don't probe eDP connectors more then once
+  drm/i915/dpcd_bl: Remove redundant AUX backlight frequency
+    calculations
+  drm/i915/dpcd_bl: Handle drm_dpcd_read/write() return values correctly
+  drm/i915/dpcd_bl: Cleanup intel_dp_aux_vesa_enable_backlight() a bit
+  drm/i915/dpcd_bl: Cache some backlight capabilities in
+    intel_panel.backlight
+  drm/i915/dpcd_bl: Move VESA backlight enabling code closer together
+  drm/i915/dpcd_bl: Return early in vesa_calc_max_backlight if we can't
+    read PWMGEN_BIT_COUNT
+  drm/i915/dpcd_bl: Print return codes for VESA backlight failures
+  drm/dp: Extract i915's eDP backlight code into DRM helpers
 
-v4: add plane name in debug messages (Ilia)
+ drivers/gpu/drm/drm_dp_helper.c               | 332 ++++++++++++++++++
+ .../drm/i915/display/intel_display_types.h    |   2 +-
+ .../drm/i915/display/intel_dp_aux_backlight.c | 329 +++--------------
+ drivers/gpu/drm/nouveau/nouveau_backlight.c   |   4 +-
+ drivers/gpu/drm/nouveau/nouveau_connector.c   |   6 +
+ include/drm/drm_dp_helper.h                   |  48 +++
+ 6 files changed, 428 insertions(+), 293 deletions(-)
 
-Signed-off-by: Simon Ser <contact@emersion.fr>
-Reviewed-by: Lyude Paul <lyude@redhat.com>
-Reviewed-by: Ilia Mirkin <imirkin@alum.mit.edu>
-Cc: Ben Skeggs <bskeggs@redhat.com>
----
- drivers/gpu/drm/nouveau/dispnv50/curs507a.c | 31 +++++++++++++++++++--
- 1 file changed, 28 insertions(+), 3 deletions(-)
-
-diff --git a/drivers/gpu/drm/nouveau/dispnv50/curs507a.c b/drivers/gpu/drm/nouveau/dispnv50/curs507a.c
-index 54fbd6fe751d..9d16918f1e62 100644
---- a/drivers/gpu/drm/nouveau/dispnv50/curs507a.c
-+++ b/drivers/gpu/drm/nouveau/dispnv50/curs507a.c
-@@ -30,6 +30,7 @@
- 
- #include <drm/drm_atomic_helper.h>
- #include <drm/drm_plane_helper.h>
-+#include <drm/drm_fourcc.h>
- 
- bool
- curs507a_space(struct nv50_wndw *wndw)
-@@ -99,6 +100,8 @@ curs507a_acquire(struct nv50_wndw *wndw, struct nv50_wndw_atom *asyw,
- 		 struct nv50_head_atom *asyh)
- {
- 	struct nv50_head *head = nv50_head(asyw->state.crtc);
-+	struct nouveau_drm *drm = nouveau_drm(head->base.base.dev);
-+	struct drm_framebuffer *fb = asyw->state.fb;
- 	int ret;
- 
- 	ret = drm_atomic_helper_check_plane_state(&asyw->state, &asyh->state,
-@@ -109,14 +112,36 @@ curs507a_acquire(struct nv50_wndw *wndw, struct nv50_wndw_atom *asyw,
- 	if (ret || !asyh->curs.visible)
- 		return ret;
- 
--	if (asyw->image.w != asyw->image.h)
-+	if (asyw->image.w != asyw->image.h) {
-+		NV_ATOMIC(drm,
-+			  "%s: invalid cursor image size: width (%d) must match height (%d)\n",
-+			  wndw->plane.name, asyw->image.w, asyw->image.h);
- 		return -EINVAL;
-+	}
-+	if (asyw->image.pitch[0] != asyw->image.w * fb->format->cpp[0]) {
-+		NV_ATOMIC(drm,
-+			  "%s: invalid cursor image pitch: image must be packed (pitch = %d, width = %d)\n",
-+			  wndw->plane.name, asyw->image.pitch[0], asyw->image.w);
-+		return -EINVAL;
-+	}
- 
- 	ret = head->func->curs_layout(head, asyw, asyh);
--	if (ret)
-+	if (ret) {
-+		NV_ATOMIC(drm,
-+			  "%s: invalid cursor image size: unsupported size %dx%d\n",
-+			  wndw->plane.name, asyw->image.w, asyw->image.h);
-+		return ret;
-+	}
-+
-+	ret = head->func->curs_format(head, asyw, asyh);
-+	if (ret) {
-+		NV_ATOMIC(drm,
-+			  "%s: invalid cursor image format 0x%X\n",
-+			  wndw->plane.name, fb->format->format);
- 		return ret;
-+	}
- 
--	return head->func->curs_format(head, asyw, asyh);
-+	return 0;
- }
- 
- static const u32
 -- 
-2.30.0
+2.29.2
 
 _______________________________________________
 Nouveau mailing list
