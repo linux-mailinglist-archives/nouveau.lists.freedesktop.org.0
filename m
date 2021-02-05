@@ -1,61 +1,61 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4DE05310BA8
-	for <lists+nouveau@lfdr.de>; Fri,  5 Feb 2021 14:18:24 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id C7019310BA7
+	for <lists+nouveau@lfdr.de>; Fri,  5 Feb 2021 14:18:22 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4159D6E364;
+	by gabe.freedesktop.org (Postfix) with ESMTP id 2EB736E296;
 	Fri,  5 Feb 2021 13:18:21 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-qk1-x72e.google.com (mail-qk1-x72e.google.com
- [IPv6:2607:f8b0:4864:20::72e])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5B4586E081;
- Fri,  5 Feb 2021 13:00:34 +0000 (UTC)
-Received: by mail-qk1-x72e.google.com with SMTP id k193so6697236qke.6;
- Fri, 05 Feb 2021 05:00:34 -0800 (PST)
+Received: from mail-qk1-x72f.google.com (mail-qk1-x72f.google.com
+ [IPv6:2607:f8b0:4864:20::72f])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A97F06E29D;
+ Fri,  5 Feb 2021 13:05:16 +0000 (UTC)
+Received: by mail-qk1-x72f.google.com with SMTP id a7so6673501qkb.13;
+ Fri, 05 Feb 2021 05:05:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:cc:subject:date:message-id:mime-version
  :content-transfer-encoding;
- bh=DBV1D6Ulmmeg0XD410dqPaIFfUR1ad9jwk0fJwumF/4=;
- b=UYtLnPaRPURQD2DV0MRGsjizexD0di8ASLpoteP2KvUtIa3WtJkzw+uDkUpdlNI+kq
- +X7UpeuknA84xI9v6BUp87wROVah7IGgRlHubZk+wnFfTpzeuxiOHyKIcKsriAt1uGFH
- X4nkvLhYNqllZGeFXQReMtjWS6/L7gQMXhiQv1hKdgnLmZQLK3gjfv8V6QYbmkssXMfW
- 4MPf+vSDbkkhsG2lFij1yoIc0/7G7xHu1Qpvv/aesnC1S6l2lrcDL2gjqW4PADahL2tg
- WoBmA0kZARzwHjKyEgMMqlgLkPlihCRv9RKlQjswMZMIrXRz/qMWTXIRBrCT47kSlqjb
- 71dw==
+ bh=MHJsMavE3nujSnxW3LwxOmZw7EFguJmQU/pNqi0G+xI=;
+ b=aMDfbAIFLwP4uP1FRsZWcGK7FHIzEj8ip4FiQPK6ctpA3bml5yjPvhqvazWVsOzEBk
+ wajhqlQvaHgCFdT1nl/xpxc1mzULoGWx06Ns4RRAQBERMwtazx1KZvhWmwMk3fxPVJFP
+ kV1JMyvIV29OgJLsJ7dAiupMuu6aTScFJOondIYf/3H5mKmlAoLY++mJrVpBKJiS5s7W
+ ijKR8tTRYbft0V9oGR8zHk3ZqT3Oj4awoQIXOFd3rfp1D+5P5522+bECxacfhbhDGTM7
+ EWgpQmovHeJBnC0QPEfbg/bxOQEqXTLr5q+InvsU5BfejkczuSNrtWDraf6iM5R/+P81
+ RIug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
  :content-transfer-encoding;
- bh=DBV1D6Ulmmeg0XD410dqPaIFfUR1ad9jwk0fJwumF/4=;
- b=Qy3f52E85inltVsCXgvAW97NLVnvB6zobSq76KtmX7Npil9mJHKTXUxyP0suz5LQjo
- +ZjffHLZ0omLhsWRRDi3p5gEvb+LQjN0fFm9Ke6F+r0+ZT2r5jR0zE5Ynj61xey+PjB8
- 7DQBKiUhFEPszItEOZckjAF7CtRq8IlsGTUFCiOa7Sdojz+8+jZgtIi9U2fbxbuiTkbO
- /rEOGhk5fA7ZFsjUFu7rtD5aMUlkZdh+hM8eBbzePht7JziI3Hh2BHJm/T1DDcLOVoIL
- 9aojzwNk5kAboxhfiMTxatFSV46gdwqh4VGvUzxIg+z/yXPADsIrnWz0jNQkgOFCx+K0
- kIqA==
-X-Gm-Message-State: AOAM5319A9YCKxIRjJcc14LHDW22UOEmUOJyKcNUEsyijxGBcbM83XRs
- b+2Zwv52WUtulUspUT0nq+4=
-X-Google-Smtp-Source: ABdhPJxrie2UTeqqCE3Vg2D6+dzvEjZzeCzQ3MZFPzh0FksJ4UhzYpjj+t7cqcWPQCb8/suSjM8GHQ==
-X-Received: by 2002:a37:8cd:: with SMTP id 196mr3940194qki.434.1612530032227; 
- Fri, 05 Feb 2021 05:00:32 -0800 (PST)
+ bh=MHJsMavE3nujSnxW3LwxOmZw7EFguJmQU/pNqi0G+xI=;
+ b=PeishbIofhshrM3BngjiI7nOCJMExI3nLo1GzLcxfEFi15jrJc9g2ZGWo13RHG+QhJ
+ 7nKaaAW5FAuyPUGXfIb2NqFJuo+mifZDQMPfiZZNmNFj2raZCf8ofxfGCDQCc9/sQTKK
+ U523myirhIvRmEW1HfePe31med9KO0Su0dkGNf5Z/4pCGCmSRcsVLtMLK6NQmr1BlRtf
+ uwa3mxE9LkABZQ24Xo/83o21/n0vDC2YIrHyNiZ5lEqMZHtcNRtDsFrzXg5VcUF5xWL2
+ 6l1GqsZJrJMFlqUy/cSLKpN+mD/y9cB5hlZn+dMKeAIRA2If0RtwLQRz8fXh8wMKFFhl
+ kbKg==
+X-Gm-Message-State: AOAM533UoAB0sAz5KPbJyavxZgxSjTRJ+Ftbp9ATPcFRfiOIEkGEpL/N
+ olnq3oGk49WayNXLZa53nFY=
+X-Google-Smtp-Source: ABdhPJzESrKrwXVHsctE3NGaG/IC2lbP3Th5GQobMhswX/sILMe3FBMtg0ocebizL/CRAVGrkZXKVg==
+X-Received: by 2002:a37:9d53:: with SMTP id g80mr4055340qke.307.1612530315873; 
+ Fri, 05 Feb 2021 05:05:15 -0800 (PST)
 Received: from localhost.localdomain ([138.199.10.106])
- by smtp.gmail.com with ESMTPSA id 17sm9481367qtu.23.2021.02.05.05.00.27
+ by smtp.gmail.com with ESMTPSA id k8sm9092945qkk.79.2021.02.05.05.05.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 05 Feb 2021 05:00:31 -0800 (PST)
+ Fri, 05 Feb 2021 05:05:14 -0800 (PST)
 From: Bhaskar Chowdhury <unixbhaskar@gmail.com>
 To: bskeggs@redhat.com, airlied@linux.ie, daniel@ffwll.ch,
  dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
  linux-kernel@vger.kernel.org
-Date: Fri,  5 Feb 2021 18:30:17 +0530
-Message-Id: <20210205130017.1429442-1-unixbhaskar@gmail.com>
+Date: Fri,  5 Feb 2021 18:35:02 +0530
+Message-Id: <20210205130502.1440514-1-unixbhaskar@gmail.com>
 X-Mailer: git-send-email 2.30.0
 MIME-Version: 1.0
 X-Mailman-Approved-At: Fri, 05 Feb 2021 13:18:20 +0000
-Subject: [Nouveau] [PATCH] drivers: gpu: drm: nouveau: Change not good word
- with a good one in the file init.c
+Subject: [Nouveau] [PATCH] drivers: drm: nouveau: nvkm: Replace a word with
+ a better phonetic word in the file macros.fuc
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -75,26 +75,27 @@ Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 
 
-s/fucking/messing/
+s/fuck/heck/
+
 
 Signed-off-by: Bhaskar Chowdhury <unixbhaskar@gmail.com>
 ---
- drivers/gpu/drm/nouveau/nvkm/subdev/bios/init.c | 2 +-
+ drivers/gpu/drm/nouveau/nvkm/subdev/pmu/fuc/macros.fuc | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/bios/init.c b/drivers/gpu/drm/nouveau/nvkm/subdev/bios/init.c
-index 9de74f41dcd2..bc2a55a82171 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/bios/init.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/bios/init.c
-@@ -446,7 +446,7 @@ init_ram_restrict(struct nvbios_init *init)
- {
- 	/* This appears to be the behaviour of the VBIOS parser, and *is*
- 	 * important to cache the NV_PEXTDEV_BOOT0 on later chipsets to
--	 * avoid fucking up the memory controller (somehow) by reading it
-+	 * avoid messing up the memory controller (somehow) by reading it
- 	 * on every INIT_RAM_RESTRICT_ZM_GROUP opcode.
- 	 *
- 	 * Preserving the non-caching behaviour on earlier chipsets just
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/pmu/fuc/macros.fuc b/drivers/gpu/drm/nouveau/nvkm/subdev/pmu/fuc/macros.fuc
+index 3737bd27f74e..1407a1b16d95 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/pmu/fuc/macros.fuc
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/pmu/fuc/macros.fuc
+@@ -46,7 +46,7 @@
+ #define NV_PPWR_INTR_EN_SET_SUBINTR                                  0x00000800
+ #define NV_PPWR_INTR_EN_SET_WATCHDOG                                 0x00000002
+ #define NV_PPWR_INTR_EN_CLR                                              0x0014
+-#define NV_PPWR_INTR_EN_CLR_MASK                    /* fuck i hate envyas */ -1
++#define NV_PPWR_INTR_EN_CLR_MASK                    /* heck, i hate envyas */ -1
+ #define NV_PPWR_INTR_ROUTE                                               0x001c
+ #define NV_PPWR_TIMER_LOW                                                0x002c
+ #define NV_PPWR_WATCHDOG_TIME                                            0x0034
 --
 2.30.0
 
