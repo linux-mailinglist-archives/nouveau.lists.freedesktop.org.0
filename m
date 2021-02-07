@@ -1,46 +1,64 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 84BA631179C
-	for <lists+nouveau@lfdr.de>; Sat,  6 Feb 2021 01:07:28 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id C477C3125E2
+	for <lists+nouveau@lfdr.de>; Sun,  7 Feb 2021 17:12:15 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id DC9E86F52A;
-	Sat,  6 Feb 2021 00:07:26 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 27AD66E1B5;
+	Sun,  7 Feb 2021 16:12:14 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-vk1-f174.google.com (mail-vk1-f174.google.com
- [209.85.221.174])
- by gabe.freedesktop.org (Postfix) with ESMTPS id DB69E6F52A;
- Sat,  6 Feb 2021 00:07:25 +0000 (UTC)
-Received: by mail-vk1-f174.google.com with SMTP id a6so1861135vkb.8;
- Fri, 05 Feb 2021 16:07:25 -0800 (PST)
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id F10D16E115;
+ Sun,  7 Feb 2021 13:35:59 +0000 (UTC)
+Received: by mail-ed1-x536.google.com with SMTP id g10so15075585eds.2;
+ Sun, 07 Feb 2021 05:35:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=sender:date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to;
+ bh=L83BYNuYIJOnhINCRxAjLa/kTFEEvoMbmebEeS4RQFg=;
+ b=IScl/H3gTK1KLtuQK7+c+8iEdhKGGd0yRvw7AXptdg4XEDnuaex50cQrJ7462/ofnG
+ XSlMhidM6j9XYlynC1LBasiqlLbWLHXQYoAz4xS4Qc2vxvkcwfGCq2S6yjxpG3lXbtnZ
+ BOm3bbQRBzqg4t2bPua1PKWHdPRuhPbJYqFZz+VaQ7IaERMqVVsf7+Bs0bnBWcIlDTyv
+ 1U6ZefxdSOpZUHfxCvKLzGWyZBW5JISSB+zh5DAEknnr/GgriQCGsWk3ZAMiS7MNdd1K
+ 7cLwyRxCHz8zYVf88S0TEOMfUlFwSa+5QqEenxaPmnq0EeDLQz51+2ozSUph+CDFOOgi
+ zXow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=GWIdyaZk9/oYRcHEJ4+7tjtfndiQTrSxe6MqleW8vSk=;
- b=TjCRztY1E1JmK+EUfjwcDwHwxvF1sekqQoU85hIXotGMRKUzcEcO0YfT4RUOOD3X5o
- pHVHq5gGO5C/Y+fZ0M9TUTpWo3LRPWT8Y/9nqqkAJ+qjm1iWu5gUcnLOAy7QjCCnPDK4
- /z9bUfWFAjAHix9IMVKkKAbvzF3SeiTYt8vwA7CQ8TYv+R7UaFyfMcSg8ah5JK7kCDiA
- 4IqAXuQ3EYrUagIQL75oDcVEIzcXvSbh2MyFJjAfeR77+DutqZkNhyDSVn0g4VMwnCmM
- c/vSmNalXdylhZy+42lOkMpn6g/QyazsU3tBTltlE+x83YbyYCBATxHR24HLB+bhrzX5
- qYTw==
-X-Gm-Message-State: AOAM531VOtD2sSf59uz21NxZgkj3+4fyjvTffCkblI7v79+q2O7+TWrA
- 35w660yTs8vHwHBLnSzJ1k03e87M97nBICfI4+eACCQJZH4=
-X-Google-Smtp-Source: ABdhPJxJIgKIk10RyyaoxQblF4duLLNKgdCrZTM3t0nEtDR0HKVJ+HMhYv8hicaLUuB9Bc+5v/j665IqMkjHYeTsV0A=
-X-Received: by 2002:a1f:ae81:: with SMTP id x123mr5136104vke.1.1612570045044; 
- Fri, 05 Feb 2021 16:07:25 -0800 (PST)
+ h=x-gm-message-state:sender:date:from:to:cc:subject:message-id
+ :references:mime-version:content-disposition:in-reply-to;
+ bh=L83BYNuYIJOnhINCRxAjLa/kTFEEvoMbmebEeS4RQFg=;
+ b=Xvn/HCuSBwVT5YD49rJ8LND830bihZQczCkqU3sdDIXgQlUD+l4tvsFLduszvUjhfN
+ 2E3ZpsB5t22IdFOvYpNJcuD46f/fgllM3JWeWIITbwyFjhe4uAurbYU91WOfapvGvFQT
+ bCK0xR4dIRUb74OY9zvzhjxEUckoRO94xNaq9JVs5gFoAIE1B1oC1D6YBzr9MmRljxC9
+ vzBH/wkGSp2bYDL4IIrarTzkJncjesx81lVxcDww8a2oha33yhefqJPg/vvwXJNNQeXR
+ Te7xwEycxZTMcIgNqhsRNqjBeI2/gdaDAU2g95cvJ1GwPGhgdjlLwcP1SxAv9WAOsaRh
+ Mn/g==
+X-Gm-Message-State: AOAM531JeWRUA7h36FFlPAndGyndnTXmuvat4m6YxRUWN6TPkaFuVJEO
+ Y+hXFv++GIpPKGAk5A7gy80=
+X-Google-Smtp-Source: ABdhPJzteb1mEOb28CSVTe/sY7ZbuwCeFkU/DwAAMqFvMdkh2Q58664RoLvL17sLiHeN38JMZILrzA==
+X-Received: by 2002:a50:f987:: with SMTP id q7mr12852680edn.353.1612704958527; 
+ Sun, 07 Feb 2021 05:35:58 -0800 (PST)
+Received: from eldamar (80-218-24-251.dclient.hispeed.ch. [80.218.24.251])
+ by smtp.gmail.com with ESMTPSA id n16sm6770224ejd.116.2021.02.07.05.35.57
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 07 Feb 2021 05:35:57 -0800 (PST)
+Date: Sun, 7 Feb 2021 14:35:56 +0100
+From: Salvatore Bonaccorso <carnil@debian.org>
+To: Ben Skeggs <skeggsb@gmail.com>
+Message-ID: <YB/svI/i86T87eUR@eldamar.lan>
+References: <20200828092846.GA11454@localhost.localdomain>
+ <20201115091010.GA132466@eldamar.lan>
+ <CACO55tvwtYj0QGFy3Bk5-13bm7cjHGko3WegY1fFbtf0WckQyQ@mail.gmail.com>
+ <CACAvsv701GiR6QetL6FGUCQLVn45+1EVGTuA-6Pmw5RtwrvyRQ@mail.gmail.com>
 MIME-Version: 1.0
-References: <20210205234515.1216538-1-lyude@redhat.com>
- <20210205234515.1216538-6-lyude@redhat.com>
-In-Reply-To: <20210205234515.1216538-6-lyude@redhat.com>
-From: Ilia Mirkin <imirkin@alum.mit.edu>
-Date: Fri, 5 Feb 2021 19:07:13 -0500
-Message-ID: <CAKb7Uvhj+hMwhaNNng7yOOTSBf5gPNRT86aeXebvmPKHY1yTcw@mail.gmail.com>
-To: Lyude Paul <lyude@redhat.com>
-Subject: Re: [Nouveau] [RFC v3 05/10] drm/i915/dpcd_bl: Cleanup
- intel_dp_aux_vesa_enable_backlight() a bit
+Content-Disposition: inline
+In-Reply-To: <CACAvsv701GiR6QetL6FGUCQLVn45+1EVGTuA-6Pmw5RtwrvyRQ@mail.gmail.com>
+X-Mailman-Approved-At: Sun, 07 Feb 2021 16:12:13 +0000
+Subject: Re: [Nouveau] [PATCH] drm/nouveau: bail out of nouveau_channel_new
+ if channel init fails
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -52,79 +70,152 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, nouveau <nouveau@lists.freedesktop.org>,
- Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- open list <linux-kernel@vger.kernel.org>,
- dri-devel <dri-devel@lists.freedesktop.org>, Sean Paul <seanpaul@chromium.org>,
- Jani Nikula <jani.nikula@linux.intel.com>, Daniel Vetter <daniel@ffwll.ch>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>
+Cc: nouveau <nouveau@lists.freedesktop.org>,
+ dri-devel <dri-devel@lists.freedesktop.org>,
+ Frantisek Hrbata <frantisek@hrbata.com>, Daniel Vetter <daniel@ffwll.ch>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, Feb 5, 2021 at 6:45 PM Lyude Paul <lyude@redhat.com> wrote:
->
-> Get rid of the extraneous switch case in here, and just open code
-> edp_backlight_mode as we only ever use it once.
->
-> Signed-off-by: Lyude Paul <lyude@redhat.com>
-> ---
->  .../gpu/drm/i915/display/intel_dp_aux_backlight.c | 15 ++-------------
->  1 file changed, 2 insertions(+), 13 deletions(-)
->
-> diff --git a/drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c b/drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c
-> index c37ccc8538cb..95e3e344cf40 100644
-> --- a/drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c
-> +++ b/drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c
-> @@ -382,7 +382,7 @@ intel_dp_aux_vesa_enable_backlight(const struct intel_crtc_state *crtc_state,
->         struct intel_dp *intel_dp = intel_attached_dp(connector);
->         struct drm_i915_private *i915 = dp_to_i915(intel_dp);
->         struct intel_panel *panel = &connector->panel;
-> -       u8 dpcd_buf, new_dpcd_buf, edp_backlight_mode;
-> +       u8 dpcd_buf, new_dpcd_buf;
->         u8 pwmgen_bit_count = panel->backlight.edp.vesa.pwmgen_bit_count;
->
->         if (drm_dp_dpcd_readb(&intel_dp->aux,
-> @@ -393,12 +393,8 @@ intel_dp_aux_vesa_enable_backlight(const struct intel_crtc_state *crtc_state,
->         }
->
->         new_dpcd_buf = dpcd_buf;
-> -       edp_backlight_mode = dpcd_buf & DP_EDP_BACKLIGHT_CONTROL_MODE_MASK;
->
-> -       switch (edp_backlight_mode) {
-> -       case DP_EDP_BACKLIGHT_CONTROL_MODE_PWM:
-> -       case DP_EDP_BACKLIGHT_CONTROL_MODE_PRESET:
-> -       case DP_EDP_BACKLIGHT_CONTROL_MODE_PRODUCT:
-> +       if ((dpcd_buf & DP_EDP_BACKLIGHT_CONTROL_MODE_MASK) != DP_EDP_BACKLIGHT_CONTROL_MODE_MASK) {
+Hi Ben,
 
-You probably meant != MODE_DPCD?
+On Mon, Nov 16, 2020 at 09:04:32AM +1000, Ben Skeggs wrote:
+> On Mon, 16 Nov 2020 at 05:19, Karol Herbst <kherbst@redhat.com> wrote:
+> >
+> > On Sun, Nov 15, 2020 at 6:43 PM Salvatore Bonaccorso <carnil@debian.org> wrote:
+> > >
+> > > Hi,
+> > >
+> > > On Fri, Aug 28, 2020 at 11:28:46AM +0200, Frantisek Hrbata wrote:
+> > > > Unprivileged user can crash kernel by using DRM_IOCTL_NOUVEAU_CHANNEL_ALLOC
+> > > > ioctl. This was reported by trinity[1] fuzzer.
+> > > >
+> > > > [   71.073906] nouveau 0000:01:00.0: crashme[1329]: channel failed to initialise, -17
+> > > > [   71.081730] BUG: kernel NULL pointer dereference, address: 00000000000000a0
+> > > > [   71.088928] #PF: supervisor read access in kernel mode
+> > > > [   71.094059] #PF: error_code(0x0000) - not-present page
+> > > > [   71.099189] PGD 119590067 P4D 119590067 PUD 1054f5067 PMD 0
+> > > > [   71.104842] Oops: 0000 [#1] SMP NOPTI
+> > > > [   71.108498] CPU: 2 PID: 1329 Comm: crashme Not tainted 5.8.0-rc6+ #2
+> > > > [   71.114993] Hardware name: AMD Pike/Pike, BIOS RPK1506A 09/03/2014
+> > > > [   71.121213] RIP: 0010:nouveau_abi16_ioctl_channel_alloc+0x108/0x380 [nouveau]
+> > > > [   71.128339] Code: 48 89 9d f0 00 00 00 41 8b 4c 24 04 41 8b 14 24 45 31 c0 4c 8d 4b 10 48 89 ee 4c 89 f7 e8 10 11 00 00 85 c0 75 78 48 8b 43 10 <8b> 90 a0 00 00 00 41 89 54 24 08 80 7d 3d 05 0f 86 bb 01 00 00 41
+> > > > [   71.147074] RSP: 0018:ffffb4a1809cfd38 EFLAGS: 00010246
+> > > > [   71.152526] RAX: 0000000000000000 RBX: ffff98cedbaa1d20 RCX: 00000000000003bf
+> > > > [   71.159651] RDX: 00000000000003be RSI: 0000000000000000 RDI: 0000000000030160
+> > > > [   71.166774] RBP: ffff98cee776de00 R08: ffffdc0144198a08 R09: ffff98ceeefd4000
+> > > > [   71.173901] R10: ffff98cee7e81780 R11: 0000000000000001 R12: ffffb4a1809cfe08
+> > > > [   71.181214] R13: ffff98cee776d000 R14: ffff98cec519e000 R15: ffff98cee776def0
+> > > > [   71.188339] FS:  00007fd926250500(0000) GS:ffff98ceeac80000(0000) knlGS:0000000000000000
+> > > > [   71.196418] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+> > > > [   71.202155] CR2: 00000000000000a0 CR3: 0000000106622000 CR4: 00000000000406e0
+> > > > [   71.209297] Call Trace:
+> > > > [   71.211777]  ? nouveau_abi16_ioctl_getparam+0x1f0/0x1f0 [nouveau]
+> > > > [   71.218053]  drm_ioctl_kernel+0xac/0xf0 [drm]
+> > > > [   71.222421]  drm_ioctl+0x211/0x3c0 [drm]
+> > > > [   71.226379]  ? nouveau_abi16_ioctl_getparam+0x1f0/0x1f0 [nouveau]
+> > > > [   71.232500]  nouveau_drm_ioctl+0x57/0xb0 [nouveau]
+> > > > [   71.237285]  ksys_ioctl+0x86/0xc0
+> > > > [   71.240595]  __x64_sys_ioctl+0x16/0x20
+> > > > [   71.244340]  do_syscall_64+0x4c/0x90
+> > > > [   71.248110]  entry_SYSCALL_64_after_hwframe+0x44/0xa9
+> > > > [   71.253162] RIP: 0033:0x7fd925d4b88b
+> > > > [   71.256731] Code: Bad RIP value.
+> > > > [   71.259955] RSP: 002b:00007ffc743592d8 EFLAGS: 00000206 ORIG_RAX: 0000000000000010
+> > > > [   71.267514] RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007fd925d4b88b
+> > > > [   71.274637] RDX: 0000000000601080 RSI: 00000000c0586442 RDI: 0000000000000003
+> > > > [   71.281986] RBP: 00007ffc74359340 R08: 00007fd926016ce0 R09: 00007fd926016ce0
+> > > > [   71.289111] R10: 0000000000000003 R11: 0000000000000206 R12: 0000000000400620
+> > > > [   71.296235] R13: 00007ffc74359420 R14: 0000000000000000 R15: 0000000000000000
+> > > > [   71.303361] Modules linked in: rfkill sunrpc snd_hda_codec_realtek snd_hda_codec_generic ledtrig_audio snd_hda_intel snd_intel_dspcfg snd_hda_codec snd_hda_core edac_mce_amd snd_hwdep kvm_amd snd_seq ccp snd_seq_device snd_pcm kvm snd_timer snd irqbypass soundcore sp5100_tco pcspkr crct10dif_pclmul crc32_pclmul ghash_clmulni_intel wmi_bmof joydev i2c_piix4 fam15h_power k10temp acpi_cpufreq ip_tables xfs libcrc32c sd_mod t10_pi sg nouveau video mxm_wmi i2c_algo_bit drm_kms_helper syscopyarea sysfillrect sysimgblt fb_sys_fops ttm broadcom bcm_phy_lib ata_generic ahci drm e1000 crc32c_intel libahci serio_raw tg3 libata firewire_ohci firewire_core wmi crc_itu_t dm_mirror dm_region_hash dm_log dm_mod
+> > > > [   71.365269] CR2: 00000000000000a0
+> > > >
+> > > > simplified reproducer
+> > > > ---------------------------------8<----------------------------------------
+> > > > /*
+> > > >  * gcc -o crashme crashme.c
+> > > >  * ./crashme /dev/dri/renderD128
+> > > >  */
+> > > >
+> > > > struct drm_nouveau_channel_alloc {
+> > > >       uint32_t     fb_ctxdma_handle;
+> > > >       uint32_t     tt_ctxdma_handle;
+> > > >
+> > > >       int          channel;
+> > > >       uint32_t     pushbuf_domains;
+> > > >
+> > > >       /* Notifier memory */
+> > > >       uint32_t     notifier_handle;
+> > > >
+> > > >       /* DRM-enforced subchannel assignments */
+> > > >       struct {
+> > > >               uint32_t handle;
+> > > >               uint32_t grclass;
+> > > >       } subchan[8];
+> > > >       uint32_t nr_subchan;
+> > > > };
+> > > >
+> > > > static struct drm_nouveau_channel_alloc channel;
+> > > >
+> > > > int main(int argc, char *argv[]) {
+> > > >       int fd;
+> > > >       int rv;
+> > > >
+> > > >       if (argc != 2)
+> > > >               die("usage: %s <dev>", 0, argv[0]);
+> > > >
+> > > >       if ((fd = open(argv[1], O_RDONLY)) == -1)
+> > > >               die("open %s", errno, argv[1]);
+> > > >
+> > > >       if (ioctl(fd, DRM_IOCTL_NOUVEAU_CHANNEL_ALLOC, &channel) == -1 &&
+> > > >                       errno == EACCES)
+> > > >               die("ioctl %s", errno, argv[1]);
+> > > >
+> > > >       close(fd);
+> > > >
+> > > >       printf("PASS\n");
+> > > >
+> > > >       return 0;
+> > > > }
+> > > > ---------------------------------8<----------------------------------------
+> > > >
+> > > > [1] https://github.com/kernelslacker/trinity
+> > > >
+> > > > Fixes: eeaf06ac1a55 ("drm/nouveau/svm: initial support for shared virtual memory")
+> > > > Signed-off-by: Frantisek Hrbata <frantisek at hrbata.com>
+> > > > ---
+> > > >  drivers/gpu/drm/nouveau/nouveau_chan.c | 1 +
+> > > >  1 file changed, 1 insertion(+)
+> > > >
+> > > > diff --git a/drivers/gpu/drm/nouveau/nouveau_chan.c b/drivers/gpu/drm/nouveau/nouveau_chan.c
+> > > > index b80e4ebf1..a7a47b325 100644
+> > > > --- a/drivers/gpu/drm/nouveau/nouveau_chan.c
+> > > > +++ b/drivers/gpu/drm/nouveau/nouveau_chan.c
+> > > > @@ -533,6 +533,7 @@ nouveau_channel_new(struct nouveau_drm *drm, struct nvif_device *device,
+> > > >       if (ret) {
+> > > >               NV_PRINTK(err, cli, "channel failed to initialise, %d\n", ret);
+> > > >               nouveau_channel_del(pchan);
+> > > > +             goto done;
+> > > >       }
+> > > >
+> > > >       ret = nouveau_svmm_join((*pchan)->vmm->svmm, (*pchan)->inst);
+> > > > --
+> > > > Frantisek Hrbata
+> > >
+> > > Is this still planned to be applied? AFAICS this is the fix for
+> > > CVE-2020-25639.
+> > >
+> >
+> > If it's urgent to get it fixed, I suggest going through the Linux
+> > kernel or drm stable path. CCing dri-devel, Dave, Daniel and Ben.
+> Missed this.  I'll grab it today and send it with the next -fixes.
 
->                 new_dpcd_buf &= ~DP_EDP_BACKLIGHT_CONTROL_MODE_MASK;
->                 new_dpcd_buf |= DP_EDP_BACKLIGHT_CONTROL_MODE_DPCD;
->
-> @@ -406,13 +402,6 @@ intel_dp_aux_vesa_enable_backlight(const struct intel_crtc_state *crtc_state,
->                                        pwmgen_bit_count) != 1)
->                         drm_dbg_kms(&i915->drm,
->                                     "Failed to write aux pwmgen bit count\n");
-> -
-> -               break;
-> -
-> -       /* Do nothing when it is already DPCD mode */
-> -       case DP_EDP_BACKLIGHT_CONTROL_MODE_DPCD:
-> -       default:
-> -               break;
->         }
->
->         if (panel->backlight.edp.vesa.pwm_freq_pre_divider) {
-> --
-> 2.29.2
->
-> _______________________________________________
-> Nouveau mailing list
-> Nouveau@lists.freedesktop.org
-> https://lists.freedesktop.org/mailman/listinfo/nouveau
+Do you know, were there some problems with the patch? TTBOMK it did
+not yet appear on Linus tree.
+
+Regards,
+Salvatore
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
