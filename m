@@ -1,56 +1,52 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 428EF315846
-	for <lists+nouveau@lfdr.de>; Tue,  9 Feb 2021 22:08:43 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id D732E315873
+	for <lists+nouveau@lfdr.de>; Tue,  9 Feb 2021 22:17:51 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B67E46E0C6;
-	Tue,  9 Feb 2021 21:08:41 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id CE8236E11C;
+	Tue,  9 Feb 2021 21:17:49 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 911 seconds by postgrey-1.36 at gabe;
- Tue, 09 Feb 2021 21:08:40 UTC
-Received: from hqnvemgate25.nvidia.com (hqnvemgate25.nvidia.com
- [216.228.121.64])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4366B6E0C6
- for <nouveau@lists.freedesktop.org>; Tue,  9 Feb 2021 21:08:40 +0000 (UTC)
-Received: from hqmail.nvidia.com (Not Verified[216.228.121.13]) by
- hqnvemgate25.nvidia.com (using TLS: TLSv1.2, AES256-SHA)
- id <B6022f6480001>; Tue, 09 Feb 2021 12:53:28 -0800
-Received: from DRHQMAIL107.nvidia.com (10.27.9.16) by HQMAIL105.nvidia.com
- (172.20.187.12) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Tue, 9 Feb
- 2021 20:53:28 +0000
-Received: from [10.2.50.67] (172.20.145.6) by DRHQMAIL107.nvidia.com
- (10.27.9.16) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Tue, 9 Feb 2021
- 20:53:28 +0000
-To: Daniel Vetter <daniel@ffwll.ch>, Alistair Popple <apopple@nvidia.com>
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [216.205.24.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2D0716E102
+ for <nouveau@lists.freedesktop.org>; Tue,  9 Feb 2021 21:17:48 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1612905467;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=Uskw3PbEX7wEnO/ex/Xsz3m8Nxa2KyupOaIbM7L2BOs=;
+ b=Jy4EcRuA97v0iftf5aekJHDRm5yHj+MpmUtlbRvEScIpnWMfy0Wo8srm2ez8zqEqmoBdj2
+ r7Ljm9fDJnA5haNdOaocrjiEFjy+jJVfogk6ipOR0L2qeBbNnW1/8u1zy1oD7k1ZaBv13d
+ 9lIoIX4XGts8v5G144+PZkXr+goiHHE=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-343-k2Jf9BXbPxKvPSd8tNYV6w-1; Tue, 09 Feb 2021 16:17:45 -0500
+X-MC-Unique: k2Jf9BXbPxKvPSd8tNYV6w-1
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
+ [10.5.11.13])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id AEB8F192CC44;
+ Tue,  9 Feb 2021 21:17:42 +0000 (UTC)
+Received: from redhat.com (ovpn-115-63.rdu2.redhat.com [10.10.115.63])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id AE56A60D11;
+ Tue,  9 Feb 2021 21:17:40 +0000 (UTC)
+Date: Tue, 9 Feb 2021 16:17:38 -0500
+From: Jerome Glisse <jglisse@redhat.com>
+To: Jason Gunthorpe <jgg@ziepe.ca>
+Message-ID: <20210209211738.GA834106@redhat.com>
 References: <20210209010722.13839-1-apopple@nvidia.com>
  <CAKMK7uGwg2-DTU7Zrco=TSkcR4yTqN1AF0hvVYEAbuj4BUYi5Q@mail.gmail.com>
- <3426910.QXTomnrpqD@nvdebian>
- <CAKMK7uHp+BzHF1=JhKjv5HYm_j0SVqsGdRqjUxVFYx4GSEPucg@mail.gmail.com>
-From: John Hubbard <jhubbard@nvidia.com>
-Message-ID: <57fe0deb-8bf6-d3ee-3545-11109e946528@nvidia.com>
-Date: Tue, 9 Feb 2021 12:53:27 -0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:85.0) Gecko/20100101
- Thunderbird/85.0
+ <3426910.QXTomnrpqD@nvdebian> <20210209133520.GB4718@ziepe.ca>
 MIME-Version: 1.0
-In-Reply-To: <CAKMK7uHp+BzHF1=JhKjv5HYm_j0SVqsGdRqjUxVFYx4GSEPucg@mail.gmail.com>
-Content-Language: en-US
-X-Originating-IP: [172.20.145.6]
-X-ClientProxiedBy: HQMAIL111.nvidia.com (172.20.187.18) To
- DRHQMAIL107.nvidia.com (10.27.9.16)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
- t=1612904008; bh=efTFNdu9GY93fBrYgfGo5YB09FPO44DdmrDbf3NcmA8=;
- h=Subject:To:CC:References:From:Message-ID:Date:User-Agent:
- MIME-Version:In-Reply-To:Content-Type:Content-Language:
- Content-Transfer-Encoding:X-Originating-IP:X-ClientProxiedBy;
- b=oOacMjOb06MbLt3MklBlfJmol0WiXwI5VrJQzUPy3VIRUABA721mwmtEk5laRaFdL
- 1TgYD7us6SRaillAdI1lcgGlIdyJek1dOTFVhDnyE2O3I+0OWr72QO1zqGgtsAlgZM
- XoXWC6bFgcqLN4YfI9Hq+NhihJS47c+q+V0qXeOTEgQtEwB92yoJZn89seCqJe43ky
- ex8WisDf0I2J97YumwelfGCA2keVVdcX0KJL5u61SZMitqoPN5SG/CCVlP3I7iPS1w
- ghlzljcQ2bKvx+UVLYtlzqvILA3AlyDKepX5K4+iznmkld1sNDTuw0sGpBLV8p9rc5
- 18FHL1oWI+WFA==
+Content-Disposition: inline
+In-Reply-To: <20210209133520.GB4718@ziepe.ca>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
 Subject: Re: [Nouveau] [PATCH 0/9] Add support for SVM atomics in Nouveau
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -63,104 +59,115 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Jason Gunthorpe <jgg@ziepe.ca>, Ralph Campbell <rcampbell@nvidia.com>,
+Cc: Ralph Campbell <rcampbell@nvidia.com>,
  Linux Doc Mailing List <linux-doc@vger.kernel.org>,
  Nouveau Dev <nouveau@lists.freedesktop.org>,
  dri-devel <dri-devel@lists.freedesktop.org>,
+ Alistair Popple <apopple@nvidia.com>,
  Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
  kvm-ppc@vger.kernel.org, Linux MM <linux-mm@kvack.org>,
- Ben Skeggs <bskeggs@redhat.com>, Andrew Morton <akpm@linux-foundation.org>
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
+ Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>,
+ Andrew Morton <akpm@linux-foundation.org>
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 2/9/21 5:37 AM, Daniel Vetter wrote:
-> On Tue, Feb 9, 2021 at 1:57 PM Alistair Popple <apopple@nvidia.com> wrote:
->>
->> On Tuesday, 9 February 2021 9:27:05 PM AEDT Daniel Vetter wrote:
->>>>
->>>> Recent changes to pin_user_pages() prevent the creation of pinned pages in
->>>> ZONE_MOVABLE. This series allows pinned pages to be created in
->> ZONE_MOVABLE
->>>> as attempts to migrate may fail which would be fatal to userspace.
->>>>
->>>> In this case migration of the pinned page is unnecessary as the page can
->> be
->>>> unpinned at anytime by having the driver revoke atomic permission as it
->>>> does for the migrate_to_ram() callback. However a method of calling this
->>>> when memory needs to be moved has yet to be resolved so any discussion is
->>>> welcome.
->>>
->>> Why do we need to pin for gpu atomics? You still have the callback for
->>> cpu faults, so you
->>> can move the page as needed, and hence a long-term pin sounds like the
->>> wrong approach.
->>
->> Technically a real long term unmoveable pin isn't required, because as you say
->> the page can be moved as needed at any time. However I needed some way of
->> stopping the CPU page from being freed once the userspace mappings for it had
->> been removed. Obviously I could have just used get_page() but from the
->> perspective of page migration the result is much the same as a pin - a page
->> which can't be moved because of the extra refcount.
-> 
-> long term pin vs short term page reference aren't fully fleshed out.
-> But the rule more or less is:
-> - short term page reference: _must_ get released in finite time for
-> migration and other things, either because you have a callback, or
-> because it's just for direct I/O, which will complete. This means
-> short term pins will delay migration, but not foul it complete
+On Tue, Feb 09, 2021 at 09:35:20AM -0400, Jason Gunthorpe wrote:
+> On Tue, Feb 09, 2021 at 11:57:28PM +1100, Alistair Popple wrote:
+> > On Tuesday, 9 February 2021 9:27:05 PM AEDT Daniel Vetter wrote:
+> > > >
+> > > > Recent changes to pin_user_pages() prevent the creation of pinned p=
+ages in
+> > > > ZONE_MOVABLE. This series allows pinned pages to be created in =
 
+> > ZONE_MOVABLE
+> > > > as attempts to migrate may fail which would be fatal to userspace.
+> > > >
+> > > > In this case migration of the pinned page is unnecessary as the pag=
+e can =
 
-GPU atomic operations to sysmem are hard to categorize, because because application
-programmers could easily write programs that do a long series of atomic operations.
-Such a program would be a little weird, but it's hard to rule out.
+> > be
+> > > > unpinned at anytime by having the driver revoke atomic permission a=
+s it
+> > > > does for the migrate_to_ram() callback. However a method of calling=
+ this
+> > > > when memory needs to be moved has yet to be resolved so any discuss=
+ion is
+> > > > welcome.
+> > > =
 
+> > > Why do we need to pin for gpu atomics? You still have the callback for
+> > > cpu faults, so you
+> > > can move the page as needed, and hence a long-term pin sounds like the
+> > > wrong approach.
+> > =
 
-> 
-> - long term pin: the page cannot be moved, all migration must fail.
-> Also this will have an impact on COW behaviour for fork (but not sure
-> where those patches are, John Hubbard will know).
+> > Technically a real long term unmoveable pin isn't required, because as =
+you say =
 
+> > the page can be moved as needed at any time. However I needed some way =
+of =
 
-That would be Jason's commit 57efa1fe59576 ("mm/gup: prevent gup_fast from racing
-with COW during fork"), which is in linux-next 20201216.
+> > stopping the CPU page from being freed once the userspace mappings for =
+it had =
 
+> > been removed. =
 
-> 
-> So I think for your use case here you want a) short term page
-> reference to make sure it doesn't disappear plus b) callback to make
-> sure migrate isn't blocked.
-> 
-> Breaking ZONE_MOVEABLE with either allowing long term pins or failing
-> migrations because you don't release your short term page reference
-> isn't good.
-> 
->> The normal solution of registering an MMU notifier to unpin the page when it
->> needs to be moved also doesn't work as the CPU page tables now point to the
->> device-private page and hence the migration code won't call any invalidate
->> notifiers for the CPU page.
-> 
-> Yeah you need some other callback for migration on the page directly.
-> it's a bit awkward since there is one already for struct
-> address_space, but that's own by the address_space/page cache, not
-> HMM. So I think we need something else, maybe something for each
-> ZONE_DEVICE?
-> 
+> =
 
-This direction sounds at least...possible. Using MMU notifiers instead of pins
-is definitely appealing. I'm not quite clear on the callback idea above, but
-overall it seems like taking advantage of the ZONE_DEVICE tracking of pages
-(without having to put anything additional in each struct page), could work.
+> The issue is you took the page out of the PTE it belongs to, which
+> makes it orphaned and unlocatable by the rest of the mm?
+> =
 
-Additional notes or ideas here are definitely welcome.
+> Ideally this would leave the PTE in place so everything continues to
+> work, just disable CPU access to it.
+> =
 
+> Maybe some kind of special swap entry?
+> =
 
+> I also don't much like the use of ZONE_DEVICE here, that should only
+> be used for actual device memory, not as a temporary proxy for CPU
+> pages.. Having two struct pages refer to the same physical memory is
+> pretty ugly.
+> =
 
-thanks,
--- 
-John Hubbard
-NVIDIA
+> > The normal solution of registering an MMU notifier to unpin the page wh=
+en it =
+
+> > needs to be moved also doesn't work as the CPU page tables now point to=
+ the
+> > device-private page and hence the migration code won't call any invalid=
+ate =
+
+> > notifiers for the CPU page.
+> =
+
+> The fact the page is lost from the MM seems to be the main issue here.
+> =
+
+> > Yes, I would like to avoid the long term pin constraints as well if pos=
+sible I =
+
+> > just haven't found a solution yet. Are you suggesting it might be possi=
+ble to =
+
+> > add a callback in the page migration logic to specially deal with movin=
+g these =
+
+> > pages?
+> =
+
+> How would migration even find the page?
+
+Migration can scan memory from physical address (isolate_migratepages_range=
+())
+So the CPU mapping is not the only path to get to a page.
+
+Cheers,
+J=E9r=F4me
+
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
