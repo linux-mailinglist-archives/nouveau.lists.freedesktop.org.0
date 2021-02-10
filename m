@@ -2,62 +2,65 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 040E9316682
-	for <lists+nouveau@lfdr.de>; Wed, 10 Feb 2021 13:22:55 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id CDB0A31672E
+	for <lists+nouveau@lfdr.de>; Wed, 10 Feb 2021 13:56:41 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5CE3D6E057;
-	Wed, 10 Feb 2021 12:22:53 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E11766EC78;
+	Wed, 10 Feb 2021 12:56:38 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
- by gabe.freedesktop.org (Postfix) with ESMTPS id DA3256E057
- for <nouveau@lists.freedesktop.org>; Wed, 10 Feb 2021 12:22:50 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.net;
- s=badeba3b8450; t=1612959765;
- bh=+h8MD8271n/iybg6BuCV23jv8ZgoQb3mvg9bq6LK1Lk=;
- h=X-UI-Sender-Class:Subject:From:To:Cc:Date:In-Reply-To:References;
- b=i1Zic/gPsjIfBU5mzX4tjqqirDsdoAkJM+T93doBu+fXvTKHHxFMXdymBXVJ/qqDj
- HvnedSDGjbAeUk3gR+DoMaQ++SMb9bIBPJgQy2LozitAfnuHqKyB0gFrUtftnDi8Px
- 45Pb/JM3E9a5yTH7KUsao1uatX+C/67vSlGb5jvI=
-X-UI-Sender-Class: 01bb95c1-4bf8-414a-932a-4f6e2808ef9c
-Received: from homer.fritz.box ([185.191.218.231]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MTiPv-1lLcNd3kBZ-00U0Ug; Wed, 10
- Feb 2021 13:22:44 +0100
-Message-ID: <eeea2d002142ec7f8737b9d0fb5128b0cdb2ae58.camel@gmx.de>
-From: Mike Galbraith <efault@gmx.de>
-To: Christian =?ISO-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, lkml
- <linux-kernel@vger.kernel.org>
-Date: Wed, 10 Feb 2021 13:22:44 +0100
-In-Reply-To: <5df26bda-9ff8-168f-e5a3-0bb503ffcca9@amd.com>
-References: <1d663cd74af91e23f4f24ebbdd65ef3ba72c15fc.camel@gmx.de>
- <43924195-c4e1-fce4-5766-aaefe2d6f766@amd.com>
- <2793c200beb530ed4a8ac32c5eea0f5aaa53c7e8.camel@gmx.de>
- <bfd62492-e6a9-3899-dd7d-87b7800f45c7@amd.com>
- <41cc52bd57a466f29ea81676d42f57a7b9da7dd8.camel@gmx.de>
- <5df26bda-9ff8-168f-e5a3-0bb503ffcca9@amd.com>
-User-Agent: Evolution 3.34.4 
+Received: from mail-qk1-x734.google.com (mail-qk1-x734.google.com
+ [IPv6:2607:f8b0:4864:20::734])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 42E746EC8F
+ for <nouveau@lists.freedesktop.org>; Wed, 10 Feb 2021 12:56:37 +0000 (UTC)
+Received: by mail-qk1-x734.google.com with SMTP id o193so1432071qke.11
+ for <nouveau@lists.freedesktop.org>; Wed, 10 Feb 2021 04:56:37 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ziepe.ca; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to;
+ bh=+MVRo4/XnQIx3fd6415VPGbeWHNWjyo8mTnVMpej2lA=;
+ b=O53d2BI1j53KMGAaF6bzA0O5LOM9nvSszG+MG7vHXtJizZwpWW8S02aJyhNyL5wBFV
+ mnrjSjqLO68+sywN8hY/2H8Q4H0Bqlujxc5cNSQ3c93vkFkfN8336ieQq2/Xd43DQ1aL
+ YOcAyEETi1AONr9aaDF5ImQHc/MpJ6pnXwy8pTGJ8eFuLBgOfJUq8VwBgtsKOqasXKm6
+ QOHLwog1rbX7Xi6mNrkS5/AssX+IYssu6x3VuOj/+f9dYS/3wjog1YIcNRNZuUv+X/wz
+ b7Y8peA5t7BBpa1BNm/UzOpgs5ZkK1km/gtTeRC+QLirflyIAA6lwp2R/L7+gQnGKoH5
+ pG7w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=+MVRo4/XnQIx3fd6415VPGbeWHNWjyo8mTnVMpej2lA=;
+ b=nEXIC3AkPt0U4eYLWsbn1nAuu01xDhLTiRrsDqBawul3BAWTiZgPmLSSgwWu87pjRo
+ mcY45d7wKmA5LwcGVLbjFpwIjU0poxREJz1tHePHlMJYHcQTm1cVV9uCviNfQeWiLbtb
+ MVTl8iHZXN0wBpjspONSMD6h2WpqPVaq31Pgr8x5Mgu2y0Sz0Efea8jLR3U+L1K1YMgO
+ kXGcKxfxhxYguEgh6EbgqgCZ1XGQpwuzigOOddV1PmCOA1Hy5qfdg7rvfLvRDICG5QFp
+ g0/FdG1NXTEaNVFHBEQSSI80UwpADa8buBElIqcaVcj6SjLLjznsrXp+NJ8jXHl5bUut
+ Fb3Q==
+X-Gm-Message-State: AOAM5321NeOOUTIBOJHMK0YdbgOrwU73izssnfxpfiHCZnsMpFgM8CIo
+ xLobkNcSR4RmFeTq9VbA9vqmsg==
+X-Google-Smtp-Source: ABdhPJxjqcsRFWifv9FC85VtsN1NtJhfvFQm3LwV9wq/GU8W4tcO6YLlagLlTq+fjHi5rG8zRu4Ivw==
+X-Received: by 2002:a37:a8d6:: with SMTP id r205mr3094578qke.489.1612961796341; 
+ Wed, 10 Feb 2021 04:56:36 -0800 (PST)
+Received: from ziepe.ca
+ (hlfxns017vw-142-162-115-133.dhcp-dynamic.fibreop.ns.bellaliant.net.
+ [142.162.115.133])
+ by smtp.gmail.com with ESMTPSA id y190sm1331727qkb.133.2021.02.10.04.56.35
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 10 Feb 2021 04:56:35 -0800 (PST)
+Received: from jgg by mlx with local (Exim 4.94) (envelope-from <jgg@ziepe.ca>)
+ id 1l9p2o-005qZi-KG; Wed, 10 Feb 2021 08:56:34 -0400
+Date: Wed, 10 Feb 2021 08:56:34 -0400
+From: Jason Gunthorpe <jgg@ziepe.ca>
+To: Alistair Popple <apopple@nvidia.com>
+Message-ID: <20210210125634.GL4718@ziepe.ca>
+References: <20210209010722.13839-1-apopple@nvidia.com>
+ <20210209010722.13839-2-apopple@nvidia.com>
+ <20210209133932.GD4718@ziepe.ca> <1780857.6Ip0F2Sa4d@nvdebian>
 MIME-Version: 1.0
-X-Provags-ID: V03:K1:W4GPS80D+clxDsGdF2ikhyzexg0GvS2xkMk+USdFXQMRvvYcPII
- 95dxzYyTD0cdg8+JCGbyuX+8S2IhEm6hIHqrJB7H1WhQMjPlVYYgLdGjm1ftAPEKxwBZSsf
- XhsmN2pfACcRuqQB6ZmY3QDsDJfOdI1qu1iX99mNPtFBEl2pgxGLIzfz6AklLITr8Q9g6iL
- 9ZlUHvuBdh7ONQderi9jQ==
-X-Spam-Flag: NO
-X-UI-Out-Filterresults: notjunk:1;V03:K0:QaLTXDBf5aY=:d0+yTuFehnvZQRqe8bH9B4
- 2f0ISzh4QRpFe53GFjmqHz5gW3xtHS9FcXEubTX6ZtfBRgi65+fjJXLzXbeLEDEwH3OT+fv+s
- kWUs3aureTrlmwLpEsB5hIEoaJtDEkO+sBvr4dWwbqG81xik0RM0Tz+Snar7uvf+/SRo/Ickd
- ASIlzt9SlnIML0B5U7zC67Kg1qGsvs5RnTbQS8ufHh6k3AjYksvxbggo8iCX1bhN/6DMPMtdI
- 5LizOtEcq5URCLr2mvtFI+dFo/tdEju6RxmgW4qkv2zhBF/b5NF0ju+mHBPtBcn6DlaZoxJO0
- HXgnSSIthPfAmqFttIR/yVhJRL8hzClStxBfxYOr7hyYizPaOXjT6CRo5Vkh9bwHS8TMMkMrZ
- vasJmOy9V+WKv5IIR2ssZZRyo4IgI/j4GLSx71qxHHDGddjKf8ZO/ykPO+HILIiQ8vSKq/Fto
- bSpgNCRTs7eRvD49K3I2DwU7IqFvhorszj+c6TRwhpI/w26adGKjUG/S972wJQJ+ioKQxEcaV
- G9c2cONSyUYuYVXFCfudTceBVPPey+EiY5FEUi329M9Mzv17/1JQa60hPwkmyJOxsOEPnuvFl
- 0tei7SNSBWAfvhp8/y9r1VR/E6BqjfmI1hhdS9TsZ0OX0h8VT/z4MA7mIKCPLhZM5lgh2VPg5
- JLGe77sfB29iJOswOPYcUuZUfCZVAQUSnvfovH1juX5WAqxjKVeQofz8MXxbK2xlek04476Fy
- VwXsU2UB800pTvWE5AbRDK2DdH0AIVhyA8teApKNVp7sa9ouUPMNtFG7106/FywAnasuoIOOG
- T7TrAH8EjsbVSytMLGYY3h1RG0fEfhzLPLw/gF7ZiE4W9JLOb8m/Uwles1gFzRoc0A4fwgdqD
- KykHIrAlK9ZN/WwsZutA==
-Subject: Re: [Nouveau] drm/nouneau: 5.11 cycle regression bisected to
- 461619f5c324 "drm/nouveau: switch to new allocator"
+Content-Disposition: inline
+In-Reply-To: <1780857.6Ip0F2Sa4d@nvdebian>
+Subject: Re: [Nouveau] [PATCH 1/9] mm/migrate.c: Always allow device private
+ pages to migrate
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,28 +72,44 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>,
- Dave Airlie <airlied@redhat.com>
-Content-Type: text/plain; charset="iso-8859-15"
-Content-Transfer-Encoding: quoted-printable
+Cc: rcampbell@nvidia.com, linux-doc@vger.kernel.org,
+ nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, kvm-ppc@vger.kernel.org, linux-mm@kvack.org,
+ bskeggs@redhat.com, akpm@linux-foundation.org
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, 2021-02-10 at 12:44 +0100, Christian K=F6nig wrote:
-> Please try to add a "return NULL" at the beginning of ttm_pool_type_take(=
-).
->
-> That should effectively disable using the pool.
+On Wed, Feb 10, 2021 at 02:40:10PM +1100, Alistair Popple wrote:
+> On Wednesday, 10 February 2021 12:39:32 AM AEDT Jason Gunthorpe wrote:
+> > On Tue, Feb 09, 2021 at 12:07:14PM +1100, Alistair Popple wrote:
+> > > Device private pages are used to represent device memory that is not
+> > > directly accessible from the CPU. Extra references to a device private
+> > > page are only used to ensure the struct page itself remains valid whilst
+> > > waiting for migration entries. Therefore extra references should not
+> > > prevent device private page migration as this can lead to failures to
+> > > migrate pages back to the CPU which are fatal to the user process.
+> > 
+> > This should identify the extra references in expected_count, just
+> > disabling this protection seems unsafe, ZONE_DEVICE is not so special
+> > that the refcount means nothing
+> 
+> This is similar to what migarte_vma_check_page() does now. The issue is that a 
+> migration wait takes a reference on the device private page so you can end up 
+> with one thread stuck waiting for migration whilst the other can't migrate due 
+> to the extra refcount.
+> 
+> Given device private pages can't undergo GUP and that it's not possible to 
+> differentiate the migration wait refcount from any other refcount we assume 
+> any possible extra reference must be from migration wait.
 
-That did away with the yield looping, but it doesn't take long for the
-display to freeze.  I ssh'd in from lappy, but there was nada in dmesg.
+GUP is not the only thing that elevates the refcount, I think this is
+an unsafe assumption
 
-> Thanks for testing,
+Why is migration holding an extra refcount anyhow?
 
-Happy to.
-
-	-Mike
-
+Jason
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
