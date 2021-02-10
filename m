@@ -1,67 +1,66 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5C41A316A57
-	for <lists+nouveau@lfdr.de>; Wed, 10 Feb 2021 16:37:42 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5D439316D68
+	for <lists+nouveau@lfdr.de>; Wed, 10 Feb 2021 18:56:38 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B89AB6E08A;
-	Wed, 10 Feb 2021 15:37:40 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C2C806E2D7;
+	Wed, 10 Feb 2021 17:56:31 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 936C06E08A
- for <nouveau@lists.freedesktop.org>; Wed, 10 Feb 2021 15:37:38 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.net;
- s=badeba3b8450; t=1612971451;
- bh=Hllj1DRNwjrXF8TexXE/667+oel02VEv40oXa17WoMk=;
- h=X-UI-Sender-Class:Subject:From:To:Cc:Date:In-Reply-To:References;
- b=X/GFyAc8KOZacpnYN/SErXN2vQes3suqXLrPYczfWN1axw77x5h45pXJO+Bowa2X/
- plD3NKhYUxzZIilPlnG4bb6EjDKVLjvQZATXZNQ+aOpmqyfK/WRR4EVxk8xMraulsT
- ky1a4DQV/Wxo5r+SC0AQUnpxJRdTt4L0RVR3o+QE=
-X-UI-Sender-Class: 01bb95c1-4bf8-414a-932a-4f6e2808ef9c
-Received: from homer.fritz.box ([185.191.218.231]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MWzfv-1lOrBq0Gwj-00XJj6; Wed, 10
- Feb 2021 16:37:31 +0100
-Message-ID: <8a321728c08d548c5bb1b2c4f79e937e1575376b.camel@gmx.de>
-From: Mike Galbraith <efault@gmx.de>
-To: Christian =?ISO-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, lkml
- <linux-kernel@vger.kernel.org>
-Date: Wed, 10 Feb 2021 16:37:30 +0100
-In-Reply-To: <b72ee235-2a79-bf88-a220-6e34d30a4bbe@amd.com>
-References: <1d663cd74af91e23f4f24ebbdd65ef3ba72c15fc.camel@gmx.de>
- <43924195-c4e1-fce4-5766-aaefe2d6f766@amd.com>
- <2793c200beb530ed4a8ac32c5eea0f5aaa53c7e8.camel@gmx.de>
- <bfd62492-e6a9-3899-dd7d-87b7800f45c7@amd.com>
- <41cc52bd57a466f29ea81676d42f57a7b9da7dd8.camel@gmx.de>
- <5df26bda-9ff8-168f-e5a3-0bb503ffcca9@amd.com>
- <eeea2d002142ec7f8737b9d0fb5128b0cdb2ae58.camel@gmx.de>
- <468ec16b-d716-5bd4-db2b-fb79e6c72a4f@amd.com>
- <6b2fa70c333d49dee64fa3c96cd7b7c99e8a6e9b.camel@gmx.de>
- <b72ee235-2a79-bf88-a220-6e34d30a4bbe@amd.com>
-User-Agent: Evolution 3.34.4 
+Received: from mail-qt1-x82a.google.com (mail-qt1-x82a.google.com
+ [IPv6:2607:f8b0:4864:20::82a])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 946B56E06E
+ for <nouveau@lists.freedesktop.org>; Wed, 10 Feb 2021 17:56:29 +0000 (UTC)
+Received: by mail-qt1-x82a.google.com with SMTP id n28so2129849qtv.12
+ for <nouveau@lists.freedesktop.org>; Wed, 10 Feb 2021 09:56:29 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ziepe.ca; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to;
+ bh=RUQ3IiEy3EeRQSWZTl5rkIVfBMl0Yr+7rUwczbTqPUI=;
+ b=a+PshXZQLSQ7/K/9jegFaNYC0vZtmSYFRP1bDA8dbf8/musoPpHsw5fl3p1ROGJKfd
+ BIwN8dEMPEjoYVb1yDkSYhphTXpCL9gSnrGEzHWvQCXWv29Ejjq92mz5G3Dg0KmE0XCX
+ FeeRFLPtrUqSk8F0amJkbyHTGLQm8PvYyk+6v0OxaHba2MdI5fI0N/d0XsEh6GVU5emG
+ /0vg6Fo5+WSy7jh21z0QKnlqdDB/yryAPmpCWW8UUSaCKsVbVpQw7LWKFor1C0y7OngB
+ hQc5Rc67W3FeJVpxVwzluKmOqtnpGTOUR0RUS2WW2uLURW1Ug+7jhSO51GMEDjEjkQEH
+ Fj+Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=RUQ3IiEy3EeRQSWZTl5rkIVfBMl0Yr+7rUwczbTqPUI=;
+ b=GeWWANrgVsChHDt+GlqCMpS29Ac7bFB8PPOSj1xIRhNuhvAnO9jJRbkaa2SxCUcAlS
+ 45p9H0sVoY3HawH3nkeAkgp82IoNfVlLpI7i4z+8FTCUF7w388tPRiD0weAHr3oX3u//
+ ui+LtClwPy9h5A/siOZHH9QxO8BsABETLokW838Lij8Avf+BWewoOImQDqQBnFEJEn0K
+ scEaDzVVz/zE7N2hF3T127N0W0jgHaGV381yv8qOFDgK2IaU1p9B4ilHK1tHByxzIgYa
+ aZAXbkXrIFM0GBqoNC+hvLdsGBmfON8JZ4fwaRt9EA9v0Y34Aa+kCwEH5g/Mk4ZhWbC5
+ 0iyQ==
+X-Gm-Message-State: AOAM532VrEMsBwlsM1s4oL5rS665EUqq+GYbzDgth0zhJ7f9QWaQOkEU
+ GLQEC9B+dRsVuEIVie+Uw0aDtQ==
+X-Google-Smtp-Source: ABdhPJwWEC9HwbcTz58sdbmUTleaPOjsDExx3u3MJe7UYTKAqinGSmHRrRGSIqyVmc4V1t6YgU/4OQ==
+X-Received: by 2002:ac8:d03:: with SMTP id q3mr3814296qti.19.1612979788592;
+ Wed, 10 Feb 2021 09:56:28 -0800 (PST)
+Received: from ziepe.ca
+ (hlfxns017vw-142-162-115-133.dhcp-dynamic.fibreop.ns.bellaliant.net.
+ [142.162.115.133])
+ by smtp.gmail.com with ESMTPSA id a25sm1697115qtw.87.2021.02.10.09.56.27
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 10 Feb 2021 09:56:27 -0800 (PST)
+Received: from jgg by mlx with local (Exim 4.94) (envelope-from <jgg@ziepe.ca>)
+ id 1l9tj0-00686U-SC; Wed, 10 Feb 2021 13:56:26 -0400
+Date: Wed, 10 Feb 2021 13:56:26 -0400
+From: Jason Gunthorpe <jgg@ziepe.ca>
+To: Jerome Glisse <jglisse@redhat.com>
+Message-ID: <20210210175626.GN4718@ziepe.ca>
+References: <20210209010722.13839-1-apopple@nvidia.com>
+ <CAKMK7uGwg2-DTU7Zrco=TSkcR4yTqN1AF0hvVYEAbuj4BUYi5Q@mail.gmail.com>
+ <3426910.QXTomnrpqD@nvdebian> <20210209133520.GB4718@ziepe.ca>
+ <20210209211738.GA834106@redhat.com>
 MIME-Version: 1.0
-X-Provags-ID: V03:K1:tbjD5h4wV7EjHFbCG94/RpyvAGkt05mKTTlJGV5/EorX1khwymM
- XcoIw7XCaLoCP+g8Jd/vfCVsT/WMyIW5k91YTHVQjG+IQGo9Y5u2DOkoYMLuY70nfPjhgyR
- tAj2d/Ero3mUIL2zqbTZQvtYGOq2GDW+mWTBD455B7yH8+zFgdD7nKbpm711j6ujIcMjLjL
- bVumuslfkZmJNQVI798cQ==
-X-Spam-Flag: NO
-X-UI-Out-Filterresults: notjunk:1;V03:K0:q0HxthXMSIk=:zhyKYY3jKykY/H5tlUZzJO
- SAJ8z+G67DIYmk5GorUWX7ceIHeUUGKZ0b1BvcsYKsPc/okiMzS1OXkc2JTc/nBxkwIZJ/EXp
- EeMJPchpvXAC7F6Y2o36+tguZ+fOWrM5bNGdj9UjrxyzRi6V2XONtvOwp5rNc6jD8R2pHjdAX
- i/CU4z8NboL63KKvQIfwO+sjD4fo4G0xIeaV2kkUGWP8u5RjjSqFl2oLUGn28JIBVYI8oEOR6
- dphINeFOMMW2GxgtFi8mOBRQfCxQh/PNiqz1+bSsry6qh8jKEAzTjtxV9citDw7bjQGObOOm0
- /xuz1IMDp/79lb80WkjbQ7gFx6k7C205h/HumnX+TuIZ6WD53QVEpxDM6nvoT19fKn/70QO/A
- lNT/DzMXQEPrQ/CNBXSD3qMDqjefC9h+7doom2U/GJX/EnSU9nOJAZDTD1ad+qguyQQzuaXg1
- 8XZ/6d0EJC/CXDKylexJb7bci58L6QxqdZa9jfOq2mBQMjDqn/DYvHt/Ki4cahIYuKiF2El3r
- aNvGDAIuWhz6tUUi4ri7PhMq8RarjJ1YKFpPx/gsSoMthQ3vdmEXbFxf7kveWaFYSit4tqVg0
- 0PvHzg5aRGWfvcUiOxGmP93rqmUSjB0JeuvSvbqb6MmfV8rZXA21WyzQ0Ibe0QWFY/FI1m9mV
- KS+qcyf7Rwrvw4LX6TrLKY2W6Ewkkx7WGjkiwpyBQt73f4HQf0Ie0Lg8JLvhk8OzjdPC3nguH
- rXqi7Cqh5+aactWJeKBN+jyvC6GLehuhpl0HuAmhg47ByeZukquizNuNxET4RvXfG7dsCXUOR
- hKxJCNRPuoScD0CeB5PHTufDNEtPkD0C6RgON840RTNTbevMht9uLT3KHbP4REZ2AFUY326QF
- q5Lj0h1WnJqDGR9pp/Ug==
-Subject: Re: [Nouveau] drm/nouneau: 5.11 cycle regression bisected to
- 461619f5c324 "drm/nouveau: switch to new allocator"
+Content-Disposition: inline
+In-Reply-To: <20210209211738.GA834106@redhat.com>
+Subject: Re: [Nouveau] [PATCH 0/9] Add support for SVM atomics in Nouveau
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -73,21 +72,38 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>,
- Dave Airlie <airlied@redhat.com>
-Content-Type: text/plain; charset="iso-8859-15"
-Content-Transfer-Encoding: quoted-printable
+Cc: Ralph Campbell <rcampbell@nvidia.com>,
+ Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+ Nouveau Dev <nouveau@lists.freedesktop.org>,
+ dri-devel <dri-devel@lists.freedesktop.org>,
+ Alistair Popple <apopple@nvidia.com>,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ kvm-ppc@vger.kernel.org, Linux MM <linux-mm@kvack.org>,
+ Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>,
+ Andrew Morton <akpm@linux-foundation.org>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, 2021-02-10 at 16:34 +0100, Christian K=F6nig wrote:
-> Any objections that I add a Reported-and-tested-by: Mike Galbraith
-> <efault@gmx.de> ?
+On Tue, Feb 09, 2021 at 04:17:38PM -0500, Jerome Glisse wrote:
 
-Fine by me.
+> > > Yes, I would like to avoid the long term pin constraints as well if possible I
+> > > just haven't found a solution yet. Are you suggesting it might be possible to 
+> > > add a callback in the page migration logic to specially deal with moving these 
+> > > pages?
+> > 
+> > How would migration even find the page?
+> 
+> Migration can scan memory from physical address (isolate_migratepages_range())
+> So the CPU mapping is not the only path to get to a page.
 
-	-Mike
+I mean find out that the page is now owned by the GPU driver to tell
+it that it needs to migrate that reference. Normally that would go
+through the VMA to the mmu notifier, but with the page removed from
+the normal VMA it can't get to a mmu notifier or the GPU driver.
 
+Jason
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
