@@ -1,34 +1,81 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 94E1E31C191
-	for <lists+nouveau@lfdr.de>; Mon, 15 Feb 2021 19:34:26 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 79A0131C2F4
+	for <lists+nouveau@lfdr.de>; Mon, 15 Feb 2021 21:26:16 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 383486E903;
-	Mon, 15 Feb 2021 18:34:21 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id DC1C86E092;
+	Mon, 15 Feb 2021 20:26:12 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9C0AA6E908;
- Mon, 15 Feb 2021 18:34:19 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 0CFF6AD2B;
- Mon, 15 Feb 2021 18:34:18 +0000 (UTC)
-To: lyude@redhat.com, dri-devel@lists.freedesktop.org,
- nouveau@lists.freedesktop.org, intel-gfx@lists.freedesktop.org
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [63.128.21.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id EF80D6E092
+ for <nouveau@lists.freedesktop.org>; Mon, 15 Feb 2021 20:26:11 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1613420770;
+ h=from:from:reply-to:reply-to:subject:subject:date:date:
+ message-id:message-id:to:to:cc:cc:mime-version:mime-version:
+ content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=mougp0sAtPmxQGSvFs3epYQHyrhiajQ5hG2k0E1p4o0=;
+ b=Xj9ESxNNd4HSFkkZKWrV/fL6kLKeYL7u1aCQuAnMGra3sAAi16t2VMv66kudy6m3FVIqBV
+ IR99HFrHsZ+8/626FUCC/q/Ksz4qv2potEiP+hpqkHEnt0scfmCy6gFMHSkAX2dEJWekjv
+ sVKpzsQaOYfR9qIPe+ogIhItTGsl7o0=
+Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com
+ [209.85.219.72]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-140-YVmiqX0EPAiarePRNv90Pg-1; Mon, 15 Feb 2021 15:26:05 -0500
+X-MC-Unique: YVmiqX0EPAiarePRNv90Pg-1
+Received: by mail-qv1-f72.google.com with SMTP id d26so6054235qve.7
+ for <nouveau@lists.freedesktop.org>; Mon, 15 Feb 2021 12:26:05 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:message-id:subject:from:reply-to:to:cc:date
+ :in-reply-to:references:organization:user-agent:mime-version
+ :content-transfer-encoding;
+ bh=mougp0sAtPmxQGSvFs3epYQHyrhiajQ5hG2k0E1p4o0=;
+ b=j10YawJ3Y3HaLiyM02TF2Fdt2hyJqzNZGNk6YA6YzPwLRMbb9OqFOwE4PqmGqNBYdT
+ /VFGGZXlpmgGGYeqDBLh76qeFRvaJa7b8lGAk0NhMjD+PFphLixNBZcB1tOOhOELymdM
+ Sp3nazpCeR8xjqf4I12fwkHhWugUxkGulHNkhkH4xQILLq/p3dAvRRocGj2jD7Pczmue
+ aRoIqohJCgw08bXN7b5geCcurlVatIBEDe89eFNqCgdLeQSGZPlSiKZ6MXJ/DN+fsHw0
+ RNQkK44uKmP/ejuN9V5rk5qm1fTjJjwszBPypudK7kL+bdTs9C9k+mBHQAOcHUkkfRpY
+ zzmg==
+X-Gm-Message-State: AOAM532UuwTjxq6kF6g412L83hnxWcJvHRl55C1thQtQJiCed+ISBRfj
+ /YpvThL//Yip6W4InGxLafDtCAiSIR5mhjEke/imb4Q9yfrxAJdN6MERg7rNeE38KjOhUEHFoDc
+ 8aePDDY51i1F6SkgKfEQnhIvH5g==
+X-Received: by 2002:a05:620a:3d1:: with SMTP id
+ r17mr13788253qkm.256.1613420764424; 
+ Mon, 15 Feb 2021 12:26:04 -0800 (PST)
+X-Google-Smtp-Source: ABdhPJyYvC07dIn6447qzLGKRIcBldU3tFx7E1hDgLxJqXBfgX4J0imfSk0nsPlDMvhwl4O89zHy4A==
+X-Received: by 2002:a05:620a:3d1:: with SMTP id
+ r17mr13788205qkm.256.1613420763909; 
+ Mon, 15 Feb 2021 12:26:03 -0800 (PST)
+Received: from Whitewolf.lyude.net
+ (pool-108-49-102-102.bstnma.fios.verizon.net. [108.49.102.102])
+ by smtp.gmail.com with ESMTPSA id z28sm8349195qkj.72.2021.02.15.12.26.02
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 15 Feb 2021 12:26:03 -0800 (PST)
+Message-ID: <c7b44ae7659d2c871407f483a53378acfa6b3c0d.camel@redhat.com>
+From: Lyude Paul <lyude@redhat.com>
+To: Thomas Zimmermann <tzimmermann@suse.de>,
+ dri-devel@lists.freedesktop.org,  nouveau@lists.freedesktop.org,
+ intel-gfx@lists.freedesktop.org
+Date: Mon, 15 Feb 2021 15:26:01 -0500
+In-Reply-To: <5a67ffa9-ad7f-3682-8d7d-a669e4d0d7c6@suse.de>
 References: <20210205234515.1216538-1-lyude@redhat.com>
  <20210205234515.1216538-11-lyude@redhat.com>
  <edfff017-ce20-86fb-19c7-46092d89b1e8@suse.de>
  <055a9b6c92abb349127e48c02e12ad75a1df0211.camel@redhat.com>
-From: Thomas Zimmermann <tzimmermann@suse.de>
-Message-ID: <5a67ffa9-ad7f-3682-8d7d-a669e4d0d7c6@suse.de>
-Date: Mon, 15 Feb 2021 19:34:15 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.7.0
+ <5a67ffa9-ad7f-3682-8d7d-a669e4d0d7c6@suse.de>
+Organization: Red Hat
+User-Agent: Evolution 3.38.3 (3.38.3-1.fc33)
 MIME-Version: 1.0
-In-Reply-To: <055a9b6c92abb349127e48c02e12ad75a1df0211.camel@redhat.com>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=lyude@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
 Subject: Re: [Nouveau] [RFC v3 10/10] drm/dp: Extract i915's eDP backlight
  code into DRM helpers
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -42,6 +89,7 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
+Reply-To: lyude@redhat.com
 Cc: greg.depoire@gmail.com, Anshuman Gupta <anshuman.gupta@intel.com>,
  David Airlie <airlied@linux.ie>, Lucas De Marchi <lucas.demarchi@intel.com>,
  open list <linux-kernel@vger.kernel.org>,
@@ -49,1490 +97,815 @@ Cc: greg.depoire@gmail.com, Anshuman Gupta <anshuman.gupta@intel.com>,
  Manasi Navare <manasi.d.navare@intel.com>, Jani Nikula <jani.nikula@intel.com>,
  Uma Shankar <uma.shankar@intel.com>, Sean Paul <seanpaul@chromium.org>,
  Rodrigo Vivi <rodrigo.vivi@intel.com>, Dave Airlie <airlied@redhat.com>
-Content-Type: multipart/mixed; boundary="===============1508710784=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============1508710784==
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="WljjKDOOHX1q2wVRRvyv3yldHk7GaVSXm"
-
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---WljjKDOOHX1q2wVRRvyv3yldHk7GaVSXm
-Content-Type: multipart/mixed; boundary="emWjQ3rBGNgK7wliVmGNAiffMImS2HWE6";
- protected-headers="v1"
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: lyude@redhat.com, dri-devel@lists.freedesktop.org,
- nouveau@lists.freedesktop.org, intel-gfx@lists.freedesktop.org
-Cc: greg.depoire@gmail.com, Jani Nikula <jani.nikula@intel.com>,
- Anshuman Gupta <anshuman.gupta@intel.com>,
- Lucas De Marchi <lucas.demarchi@intel.com>,
- open list <linux-kernel@vger.kernel.org>,
- Gwan-gyeong Mun <gwan-gyeong.mun@intel.com>,
- Manasi Navare <manasi.d.navare@intel.com>, David Airlie <airlied@linux.ie>,
- Uma Shankar <uma.shankar@intel.com>, Sean Paul <seanpaul@chromium.org>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>, Dave Airlie <airlied@redhat.com>
-Message-ID: <5a67ffa9-ad7f-3682-8d7d-a669e4d0d7c6@suse.de>
-Subject: Re: [RFC v3 10/10] drm/dp: Extract i915's eDP backlight code into DRM
- helpers
-References: <20210205234515.1216538-1-lyude@redhat.com>
- <20210205234515.1216538-11-lyude@redhat.com>
- <edfff017-ce20-86fb-19c7-46092d89b1e8@suse.de>
- <055a9b6c92abb349127e48c02e12ad75a1df0211.camel@redhat.com>
-In-Reply-To: <055a9b6c92abb349127e48c02e12ad75a1df0211.camel@redhat.com>
-
---emWjQ3rBGNgK7wliVmGNAiffMImS2HWE6
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
-
-Hi
-
-Am 09.02.21 um 00:03 schrieb Lyude Paul:
->>
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0} else {
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0buf[0] =3D level;
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0}
->>> +
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0ret =3D drm_dp_dpcd_write(=
-aux, DP_EDP_BACKLIGHT_BRIGHTNESS_MSB, buf,
->>> sizeof(buf));
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (ret !=3D sizeof(buf)) =
-{
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0DRM_ERROR("%s: Failed to write aux backlight level: =
-%d\n",
->>> aux->name, ret);
->>
->> Since you're adding this code, you should probably convert to drm_err(=
-)
->> helpers as well. Here and elsewhere.
->=20
-> this is next up on my todo list JFYI-I don't do it right now because th=
-ere isn't
-> actually any backpointer to the drm driver (and you can't just use the =
-parent of
-> the aux device, since that technically doesn't need to be the drm drive=
-r).
->=20
-> I'd add it in this series, but that's going to involve updating functio=
-ns across
-> the tree like drm_dp_aux_init() so I'd like to do it in a different pat=
-ch series
-
-Ok, sure. Makes sense.
-
-Best regards
-Thomas
-
->=20
->>
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0return ret < 0 ? ret : -EIO;
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0}
->>> +
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0return 0;
->>> +}
->>> +EXPORT_SYMBOL(drm_edp_backlight_set_level);
->>> +
->>> +static int
->>> +drm_edp_backlight_set_enable(struct drm_dp_aux *aux, const struct
->>> drm_edp_backlight_info *bl,
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0 bool enable)
->>> +{
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0int ret;
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0u8 buf;
->>> +
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0/* The panel uses somethin=
-g other then DPCD for enabling it's
->>> backlight */
->>
->> 'its'
->>
->> Best regards
->> Thomas
->>
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (!bl->aux_enable)
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0return 0;
->>> +
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0ret =3D drm_dp_dpcd_readb(=
-aux, DP_EDP_DISPLAY_CONTROL_REGISTER, &buf);
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (ret !=3D 1) {
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0DRM_ERROR("%s: Failed to read eDP display control re=
-gister:
->>> %d\n", aux->name, ret);
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0return ret < 0 ? ret : -EIO;
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0}
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (enable)
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0buf |=3D DP_EDP_BACKLIGHT_ENABLE;
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0else
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0buf &=3D ~DP_EDP_BACKLIGHT_ENABLE;
->>> +
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0ret =3D drm_dp_dpcd_writeb=
-(aux, DP_EDP_DISPLAY_CONTROL_REGISTER, buf);
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (ret !=3D 1) {
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0DRM_ERROR("%s: Failed to write eDP display control r=
-egister:
->>> %d\n", aux->name, ret);
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0return ret < 0 ? ret : -EIO;
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0}
->>> +
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0return 0;
->>> +}
->>> +
->>> +/**
->>> + * drm_edp_backlight_enable() - Enable an eDP panel's backlight usin=
-g DPCD
->>> + * @aux: The DP AUX channel to use
->>> + * @bl: Backlight capability info from drm_edp_backlight_init()
->>> + * @level: The initial backlight level to set via AUX, if there is o=
-ne
->>> + *
->>> + * This function handles enabling DPCD backlight controls on a panel=
- over
->>> DPCD, while additionally
->>> + * restoring any important backlight state such as the given backlig=
-ht
->>> level, the brightness byte
->>> + * count, backlight frequency, etc.
->>> + *
->>> + * Note that certain panels, while supporting brightness level contr=
-ols
->>> over DPCD, may not support
->>> + * having their backlights enabled via the standard
->>> %DP_EDP_DISPLAY_CONTROL_REGISTER. On such panels
->>> + * &drm_edp_backlight_info.aux_enable will be set to %false, this fu=
-nction
->>> will skip the step of
->>> + * programming the %DP_EDP_DISPLAY_CONTROL_REGISTER, and the driver =
-must
->>> perform the required
->>> + * implementation specific step for enabling the backlight after cal=
-ling
->>> this function.
->>> + *
->>> + * Returns: %0 on success, negative error code on failure.
->>> + */
->>> +int drm_edp_backlight_enable(struct drm_dp_aux *aux, const struct
->>> drm_edp_backlight_info *bl,
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0 const u16 level)
->>> +{
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0int ret;
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0u8 dpcd_buf, new_dpcd_buf;=
-
->>> +
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0ret =3D drm_dp_dpcd_readb(=
-aux, DP_EDP_BACKLIGHT_MODE_SET_REGISTER,
->>> &dpcd_buf);
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (ret !=3D 1) {
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0DRM_DEBUG_KMS("%s: Failed to read backlight mode: %d=
-\n",
->>> aux->name, ret);
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0return ret < 0 ? ret : -EIO;
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0}
->>> +
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0new_dpcd_buf =3D dpcd_buf;=
-
->>> +
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if ((dpcd_buf & DP_EDP_BAC=
-KLIGHT_CONTROL_MODE_MASK) !=3D
->>> DP_EDP_BACKLIGHT_CONTROL_MODE_DPCD) {
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0new_dpcd_buf &=3D ~DP_EDP_BACKLIGHT_CONTROL_MODE_MAS=
-K;
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0new_dpcd_buf |=3D DP_EDP_BACKLIGHT_CONTROL_MODE_DPCD=
-;
->>> +
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0ret =3D drm_dp_dpcd_writeb(aux, DP_EDP_PWMGEN_BIT_CO=
-UNT, bl-
->>>> pwmgen_bit_count);
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0if (ret !=3D 1)
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0DRM_=
-DEBUG_KMS("%s: Failed to write aux pwmgen bit
->>> count: %d\n",
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =
-aux->name, ret);
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0}
->>> +
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (bl->pwm_freq_pre_divid=
-er) {
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0ret =3D drm_dp_dpcd_writeb(aux, DP_EDP_BACKLIGHT_FRE=
-Q_SET, bl-
->>>> pwm_freq_pre_divider);
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0if (ret !=3D 1)
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0DRM_=
-DEBUG_KMS("%s: Failed to write aux backlight
->>> frequency: %d\n",
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =
-aux->name, ret);
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0else
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0new_=
-dpcd_buf |=3D
->>> DP_EDP_BACKLIGHT_FREQ_AUX_SET_ENABLE;
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0}
->>> +
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (new_dpcd_buf !=3D dpcd=
-_buf) {
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0ret =3D drm_dp_dpcd_writeb(aux,
->>> DP_EDP_BACKLIGHT_MODE_SET_REGISTER, new_dpcd_buf);
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0if (ret !=3D 1) {
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0DRM_=
-DEBUG_KMS("%s: Failed to write aux backlight
->>> mode: %d\n",
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =
-aux->name, ret);
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0retu=
-rn ret < 0 ? ret : -EIO;
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0}
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0}
->>> +
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0ret =3D drm_edp_backlight_=
-set_level(aux, bl, level);
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (ret < 0)
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0return ret;
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0ret =3D drm_edp_backlight_=
-set_enable(aux, bl, true);
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (ret < 0)
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0return ret;
->>> +
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0return 0;
->>> +}
->>> +EXPORT_SYMBOL(drm_edp_backlight_enable);
->>> +
->>> +/**
->>> + * drm_edp_backlight_disable() - Disable an eDP backlight using DPCD=
-, if
->>> supported
->>> + * @aux: The DP AUX channel to use
->>> + * @bl: Backlight capability info from drm_edp_backlight_init()
->>> + *
->>> + * This function handles disabling DPCD backlight controls on a pane=
-l over
->>> AUX. Note that some
->>> + * panels have backlights that are enabled/disabled by other means, =
-despite
->>> having their brightness
->>> + * values controlled through DPCD. On such panels
->>> &drm_edp_backlight_info.aux_enable will be set to
->>> + * %false, this function will become a no-op (and we will skip updat=
-ing
->>> + * %DP_EDP_DISPLAY_CONTROL_REGISTER), and the driver must take care =
-to
->>> perform it's own
->>> + * implementation specific step for disabling the backlight.
->>> + *
->>> + * Returns: %0 on success or no-op, negative error code on failure.
->>> + */
->>> +int drm_edp_backlight_disable(struct drm_dp_aux *aux, const struct
->>> drm_edp_backlight_info *bl)
->>> +{
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0int ret;
->>> +
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0ret =3D drm_edp_backlight_=
-set_enable(aux, bl, false);
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (ret < 0)
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0return ret;
->>> +
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0return 0;
->>> +}
->>> +EXPORT_SYMBOL(drm_edp_backlight_disable);
->>> +
->>> +static inline int
->>> +drm_edp_backlight_probe_max(struct drm_dp_aux *aux, struct
->>> drm_edp_backlight_info *bl,
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0 u16 driver_pwm_freq_hz, const u8
->>> edp_dpcd[EDP_DISPLAY_CTL_CAP_SIZE])
->>> +{
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0int fxp, fxp_min, fxp_max,=
- fxp_actual, f =3D 1;
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0int ret;
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0u8 pn, pn_min, pn_max;
->>> +
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0ret =3D drm_dp_dpcd_readb(=
-aux, DP_EDP_PWMGEN_BIT_COUNT, &pn);
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (ret !=3D 1) {
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0DRM_DEBUG_KMS("%s: Failed to read pwmgen bit count c=
-ap:
->>> %d\n", aux->name, ret);
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0return -ENODEV;
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0}
->>> +
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0pn &=3D DP_EDP_PWMGEN_BIT_=
-COUNT_MASK;
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0bl->max =3D (1 << pn) - 1;=
-
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (!driver_pwm_freq_hz)
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0return 0;
->>> +
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0/*
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * Set PWM Frequency divid=
-er to match desired frequency provided by
->>> the driver.
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * The PWM Frequency is ca=
-lculated as 27Mhz / (F x P).
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * - Where F =3D PWM Frequ=
-ency Pre-Divider value programmed by field
->>> 7:0 of the
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 *=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 EDP_BACKLIGHT_FREQ_SET r=
-egister (DPCD Address 00728h)
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * - Where P =3D 2^Pn, whe=
-re Pn is the value programmed by field 4:0
->>> of the
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 *=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 EDP_PWMGEN_BIT_COUNT reg=
-ister (DPCD Address 00724h)
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 */
->>> +
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0/* Find desired value of (=
-F x P)
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * Note that, if F x P is =
-out of supported range, the maximum value
->>> or minimum value will
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * applied automatically. =
-So no need to check that.
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 */
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0fxp =3D DIV_ROUND_CLOSEST(=
-1000 * DP_EDP_BACKLIGHT_FREQ_BASE_KHZ,
->>> driver_pwm_freq_hz);
->>> +
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0/* Use highest possible va=
-lue of Pn for more granularity of
->>> brightness adjustment while
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * satifying the condition=
-s below.
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * - Pn is in the range of=
- Pn_min and Pn_max
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * - F is in the range of =
-1 and 255
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * - FxP is within 25% of =
-desired value.
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 *=C2=A0=C2=A0 Note: 25% i=
-s arbitrary value and may need some tweak.
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 */
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0ret =3D drm_dp_dpcd_readb(=
-aux, DP_EDP_PWMGEN_BIT_COUNT_CAP_MIN,
->>> &pn_min);
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (ret !=3D 1) {
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0DRM_DEBUG_KMS("%s: Failed to read pwmgen bit count c=
-ap min:
->>> %d\n", aux->name, ret);
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0return 0;
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0}
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0ret =3D drm_dp_dpcd_readb(=
-aux, DP_EDP_PWMGEN_BIT_COUNT_CAP_MAX,
->>> &pn_max);
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (ret !=3D 1) {
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0DRM_DEBUG_KMS("%s: Failed to read pwmgen bit count c=
-ap max:
->>> %d\n", aux->name, ret);
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0return 0;
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0}
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0pn_min &=3D DP_EDP_PWMGEN_=
-BIT_COUNT_MASK;
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0pn_max &=3D DP_EDP_PWMGEN_=
-BIT_COUNT_MASK;
->>> +
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0/* Ensure frequency is wit=
-hin 25% of desired value */
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0fxp_min =3D DIV_ROUND_CLOS=
-EST(fxp * 3, 4);
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0fxp_max =3D DIV_ROUND_CLOS=
-EST(fxp * 5, 4);
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (fxp_min < (1 << pn_min=
-) || (255 << pn_max) < fxp_max) {
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0DRM_DEBUG_KMS("%s: Driver defined backlight frequenc=
-y (%d)
->>> out of range\n",
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0 aux->name, driver_pwm_freq_hz);
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0return 0;
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0}
->>> +
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0for (pn =3D pn_max; pn >=3D=
- pn_min; pn--) {
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0f =3D clamp(DIV_ROUND_CLOSEST(fxp, 1 << pn), 1, 255)=
-;
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0fxp_actual =3D f << pn;
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0if (fxp_min <=3D fxp_actual && fxp_actual <=3D fxp_m=
-ax)
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0brea=
-k;
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0}
->>> +
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0ret =3D drm_dp_dpcd_writeb=
-(aux, DP_EDP_PWMGEN_BIT_COUNT, pn);
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (ret !=3D 1) {
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0DRM_DEBUG_KMS("%s: Failed to write aux pwmgen bit co=
-unt:
->>> %d\n", aux->name, ret);
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0return 0;
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0}
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0bl->pwmgen_bit_count =3D p=
-n;
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0bl->max =3D (1 << pn) - 1;=
-
->>> +
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (edp_dpcd[2] & DP_EDP_B=
-ACKLIGHT_FREQ_AUX_SET_CAP) {
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0bl->pwm_freq_pre_divider =3D f;
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0DRM_DEBUG_KMS("%s: Using backlight frequency from dr=
-iver
->>> (%dHz)\n",
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0 aux->name, driver_pwm_freq_hz);
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0}
->>> +
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0return 0;
->>> +}
->>> +
->>> +static inline int
->>> +drm_edp_backlight_probe_level(struct drm_dp_aux *aux, struct
->>> drm_edp_backlight_info *bl,
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0 u8 *current_mode)
->>> +{
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0int ret;
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0u8 buf[2];
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0u8 mode_reg;
->>> +
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0ret =3D drm_dp_dpcd_readb(=
-aux, DP_EDP_BACKLIGHT_MODE_SET_REGISTER,
->>> &mode_reg);
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (ret !=3D 1) {
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0DRM_DEBUG_KMS("%s: Failed to read backlight mode: %d=
-\n",
->>> aux->name, ret);
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0return ret < 0 ? ret : -EIO;
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0}
->>> +
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0*current_mode =3D (mode_re=
-g & DP_EDP_BACKLIGHT_CONTROL_MODE_MASK);
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (*current_mode =3D=3D D=
-P_EDP_BACKLIGHT_CONTROL_MODE_DPCD) {
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0int size =3D 1 + bl->lsb_reg_used;
->>> +
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0ret =3D drm_dp_dpcd_read(aux, DP_EDP_BACKLIGHT_BRIGH=
-TNESS_MSB,
->>> buf, size);
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0if (ret !=3D size) {
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0DRM_=
-DEBUG_KMS("%s: Failed to read backlight level:
->>> %d\n", aux->name, ret);
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0retu=
-rn ret < 0 ? ret : -EIO;
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0}
->>> +
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0if (bl->lsb_reg_used)
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0retu=
-rn (buf[0] << 8) | buf[1];
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0else
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0retu=
-rn buf[0];
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0}
->>> +
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0/*
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * If we're not in DPCD co=
-ntrol mode yet, the programmed brightness
->>> value is meaningless and
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * the driver should assum=
-e max brightness
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 */
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0return bl->max;
->>> +}
->>> +
->>> +/**
->>> + * drm_edp_backlight_init() - Probe a display panel's TCON using the=
-
->>> standard VESA eDP backlight
->>> + * interface.
->>> + * @aux: The DP aux device to use for probing
->>> + * @bl: The &drm_edp_backlight_info struct to fill out with informat=
-ion on
->>> the backlight
->>> + * @driver_pwm_freq_hz: Optional PWM frequency from the driver in hz=
-
->>> + * @edp_dpcd: A cached copy of the eDP DPCD
->>> + * @current_level: Where to store the probed brightness level
->>> + * @current_mode: Where to store the currently set backlight control=
- mode
->>> + *
->>> + * Initializes a &drm_edp_backlight_info struct by probing @aux for =
-it's
->>> backlight capabilities,
->>> + * along with also probing the current and maximum supported brightn=
-ess
->>> levels.
->>> + *
->>> + * If @driver_pwm_freq_hz is non-zero, this will be used as the back=
-light
->>> frequency. Otherwise, the
->>> + * default frequency from the panel is used.
->>> + *
->>> + * Returns: %0 on success, negative error code on failure.
->>> + */
->>> +int
->>> +drm_edp_backlight_init(struct drm_dp_aux *aux, struct
->>> drm_edp_backlight_info *bl,
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 u16 driver_pwm_=
-freq_hz, const u8
->>> edp_dpcd[EDP_DISPLAY_CTL_CAP_SIZE],
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 u16 *current_le=
-vel, u8 *current_mode)
->>> +{
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0int ret;
->>> +
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (edp_dpcd[1] & DP_EDP_B=
-ACKLIGHT_AUX_ENABLE_CAP)
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0bl->aux_enable =3D true;
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (edp_dpcd[2] & DP_EDP_B=
-ACKLIGHT_BRIGHTNESS_BYTE_COUNT)
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0bl->lsb_reg_used =3D true;
->>> +
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0ret =3D drm_edp_backlight_=
-probe_max(aux, bl, driver_pwm_freq_hz,
->>> edp_dpcd);
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (ret < 0)
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0return ret;
->>> +
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0ret =3D drm_edp_backlight_=
-probe_level(aux, bl, current_mode);
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (ret < 0)
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0return ret;
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0*current_level =3D ret;
->>> +
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0DRM_DEBUG_KMS("%s: Found b=
-acklight level=3D%d/%d
->>> pwm_freq_pre_divider=3D%d mode=3D%x\n",
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 aux->name, *current_l=
-evel, bl->max, bl-
->>>> pwm_freq_pre_divider, *current_mode);
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0DRM_DEBUG_KMS("%s: Backlig=
-ht caps: pwmgen_bit_count=3D%d
->>> lsb_reg_used=3D%d aux_enable=3D%d\n",
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 aux->name, bl->pwmgen=
-_bit_count, bl->lsb_reg_used, bl-
->>>> aux_enable);
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0return 0;
->>> +}
->>> +EXPORT_SYMBOL(drm_edp_backlight_init);
->>> diff --git a/drivers/gpu/drm/i915/display/intel_display_types.h
->>> b/drivers/gpu/drm/i915/display/intel_display_types.h
->>> index 16824eb3ef93..03051ab75d30 100644
->>> --- a/drivers/gpu/drm/i915/display/intel_display_types.h
->>> +++ b/drivers/gpu/drm/i915/display/intel_display_types.h
->>> @@ -263,10 +263,7 @@ struct intel_panel {
->>>  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0/* DPCD backlight */
->>>  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0union {
->>>  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-struct {
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0u8 pwmgen_bit_count;
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0u8 pwm_freq_pre_divider;
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0bool lsb_reg_used;
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0bool aux_enable;
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0struct drm_edp_backlight_info i=
-nfo;
->>>  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-} vesa;
->>>  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-struct {
->>>  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0bool sdr_uses_aux;
->>> diff --git a/drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c
->>> b/drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c
->>> index 813f6c553156..286eb337448e 100644
->>> --- a/drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c
->>> +++ b/drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c
->>> @@ -270,114 +270,19 @@ intel_dp_aux_hdr_setup_backlight(struct
->>> intel_connector *connector, enum pipe pi
->>>  =C2=A0 }
->>>   =20
->>>  =C2=A0 /* VESA backlight callbacks */
->>> -static bool intel_dp_aux_vesa_backlight_dpcd_mode(struct intel_conne=
-ctor
->>> *connector)
->>> -{
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0struct intel_dp *intel_dp =
-=3D intel_attached_dp(connector);
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0struct drm_i915_private *i=
-915 =3D dp_to_i915(intel_dp);
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0int ret;
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0u8 mode_reg;
->>> -
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0ret =3D drm_dp_dpcd_readb(=
-&intel_dp->aux,
->>> DP_EDP_BACKLIGHT_MODE_SET_REGISTER, &mode_reg);
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (ret !=3D 1) {
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0drm_dbg_kms(&i915->drm, "Failed to read backlight mo=
-de:
->>> %d\n", ret);
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0return false;
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0}
->>> -
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0return (mode_reg & DP_EDP_=
-BACKLIGHT_CONTROL_MODE_MASK) =3D=3D
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0 DP_EDP_BACKLIGHT_CONTROL_MODE_DPCD;
->>> -}
->>> -
->>> -/*
->>> - * Read the current backlight value from DPCD register(s) based
->>> - * on if 8-bit(MSB) or 16-bit(MSB and LSB) values are supported
->>> - */
->>>  =C2=A0 static u32 intel_dp_aux_vesa_get_backlight(struct intel_conne=
-ctor
->>> *connector, enum pipe unused)
->>>  =C2=A0 {
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0struct intel_dp *intel_dp =
-=3D intel_attached_dp(connector);
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0struct drm_i915_private *i=
-915 =3D dp_to_i915(intel_dp);
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0int ret;
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0u8 read_val[2] =3D { 0x0 }=
-;
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0u16 level =3D 0;
->>> -
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0/*
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * If we're not in DPCD co=
-ntrol mode yet, the programmed brightness
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * value is meaningless an=
-d we should assume max brightness
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 */
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (!intel_dp_aux_vesa_bac=
-klight_dpcd_mode(connector))
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0return connector->panel.backlight.max;
->>> -
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0ret =3D drm_dp_dpcd_read(&=
-intel_dp->aux,
->>> DP_EDP_BACKLIGHT_BRIGHTNESS_MSB, &read_val,
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 sizeof(read_val));
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (ret !=3D sizeof(read_v=
-al)) {
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0drm_dbg_kms(&i915->drm, "Failed to read brightness l=
-evel:
->>> %d\n", ret);
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0return 0;
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0}
->>> -
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (connector->panel.backl=
-ight.edp.vesa.lsb_reg_used)
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0level =3D (read_val[0] << 8 | read_val[1]);
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0else
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0level =3D read_val[0];
->>> -
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0return level;
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0return connector->panel.ba=
-cklight.level;
->>>  =C2=A0 }
->>>   =20
->>> -/*
->>> - * Sends the current backlight level over the aux channel, checking =
-if its
->>> using
->>> - * 8-bit or 16 bit value (MSB and LSB)
->>> - */
->>>  =C2=A0 static void
->>> -intel_dp_aux_vesa_set_backlight(const struct drm_connector_state
->>> *conn_state,
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0u32 level)
->>> +intel_dp_aux_vesa_set_backlight(const struct drm_connector_state
->>> *conn_state, u32 level)
->>>  =C2=A0 {
->>>  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0struct intel_connect=
-or *connector =3D to_intel_connector(conn_state-
->>>> connector);
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0struct intel_dp *intel_dp =
-=3D intel_attached_dp(connector);
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0struct drm_i915_private *i=
-915 =3D dp_to_i915(intel_dp);
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0int ret;
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0u8 vals[2] =3D { 0x0 };
->>> -
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0/* Write the MSB and/or LS=
-B */
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (connector->panel.backl=
-ight.edp.vesa.lsb_reg_used) {
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0vals[0] =3D (level & 0xFF00) >> 8;
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0vals[1] =3D (level & 0xFF);
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0} else {
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0vals[0] =3D level;
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0}
->>> -
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0ret =3D drm_dp_dpcd_write(=
-&intel_dp->aux,
->>> DP_EDP_BACKLIGHT_BRIGHTNESS_MSB, vals,
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0sizeof(vals));
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (ret !=3D sizeof(vals))=
- {
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0drm_dbg_kms(&i915->drm, "Failed to write aux backlig=
-ht
->>> level: %d\n", ret);
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0return;
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0}
->>> -}
->>> -
->>> -static void set_vesa_backlight_enable(struct intel_connector *connec=
-tor,
->>> bool enable)
->>> -{
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0struct intel_dp *intel_dp =
-=3D intel_attached_dp(connector);
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0struct drm_i915_private *i=
-915 =3D dp_to_i915(intel_dp);
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0int ret;
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0u8 reg_val =3D 0;
->>> -
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0/* Early return when displ=
-ay use other mechanism to enable
->>> backlight. */
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (!connector->panel.back=
-light.edp.vesa.aux_enable)
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0return;
->>> -
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0ret =3D drm_dp_dpcd_readb(=
-&intel_dp->aux,
->>> DP_EDP_DISPLAY_CONTROL_REGISTER, &reg_val);
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (ret !=3D 1) {
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0drm_dbg_kms(&i915->drm, "Failed to read eDP display =
-control
->>> register: %d\n", ret);
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0return;
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0}
->>> -
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (enable)
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0reg_val |=3D DP_EDP_BACKLIGHT_ENABLE;
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0else
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0reg_val &=3D ~(DP_EDP_BACKLIGHT_ENABLE);
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0struct intel_panel *panel =
-=3D &connector->panel;
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0struct intel_dp *intel_dp =
-=3D enc_to_intel_dp(connector->encoder);
->>>   =20
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0ret =3D drm_dp_dpcd_writeb=
-(&intel_dp->aux,
->>> DP_EDP_DISPLAY_CONTROL_REGISTER, reg_val);
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (ret !=3D 1) {
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0drm_dbg_kms(&i915->drm, "Failed to %s aux backlight:=
- %d\n",
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0 enable ? "enable" : "disable", ret);
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0}
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0drm_edp_backlight_set_leve=
-l(&intel_dp->aux, &panel-
->>>> backlight.edp.vesa.info, level);
->>>  =C2=A0 }
->>>   =20
->>>  =C2=A0 static void
->>> @@ -385,170 +290,46 @@ intel_dp_aux_vesa_enable_backlight(const struc=
-t
->>> intel_crtc_state *crtc_state,
->>>  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 const struct=
- drm_connector_state
->>> *conn_state, u32 level)
->>>  =C2=A0 {
->>>  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0struct intel_connect=
-or *connector =3D to_intel_connector(conn_state-
->>>> connector);
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0struct intel_dp *intel_dp =
-=3D intel_attached_dp(connector);
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0struct drm_i915_private *i=
-915 =3D dp_to_i915(intel_dp);
->>>  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0struct intel_panel *=
-panel =3D &connector->panel;
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0int ret;
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0u8 dpcd_buf, new_dpcd_buf;=
-
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0u8 pwmgen_bit_count =3D pa=
-nel->backlight.edp.vesa.pwmgen_bit_count;
->>> -
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0ret =3D drm_dp_dpcd_readb(=
-&intel_dp->aux,
->>> DP_EDP_BACKLIGHT_MODE_SET_REGISTER, &dpcd_buf);
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (ret !=3D 1) {
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0drm_dbg_kms(&i915->drm, "Failed to read backlight mo=
-de:
->>> %d\n", ret);
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0return;
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0}
->>> -
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0new_dpcd_buf =3D dpcd_buf;=
-
->>> -
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if ((dpcd_buf & DP_EDP_BAC=
-KLIGHT_CONTROL_MODE_MASK) !=3D
->>> DP_EDP_BACKLIGHT_CONTROL_MODE_MASK) {
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0new_dpcd_buf &=3D ~DP_EDP_BACKLIGHT_CONTROL_MODE_MAS=
-K;
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0new_dpcd_buf |=3D DP_EDP_BACKLIGHT_CONTROL_MODE_DPCD=
-;
->>> -
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0ret =3D drm_dp_dpcd_writeb(&intel_dp->aux,
->>> DP_EDP_PWMGEN_BIT_COUNT, pwmgen_bit_count);
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0if (ret !=3D 1)
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0drm_=
-dbg_kms(&i915->drm, "Failed to write aux pwmgen
->>> bit count: %d\n", ret);
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0}
->>> -
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (panel->backlight.edp.v=
-esa.pwm_freq_pre_divider) {
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0ret =3D drm_dp_dpcd_writeb(&intel_dp->aux,
->>> DP_EDP_BACKLIGHT_FREQ_SET,
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0 panel-
->>>> backlight.edp.vesa.pwm_freq_pre_divider);
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0if (ret =3D=3D 1)
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0new_=
-dpcd_buf |=3D
->>> DP_EDP_BACKLIGHT_FREQ_AUX_SET_ENABLE;
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0else
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0drm_=
-dbg_kms(&i915->drm, "Failed to write aux
->>> backlight frequency: %d\n",
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ret);
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0}
->>> -
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (new_dpcd_buf !=3D dpcd=
-_buf) {
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0ret =3D drm_dp_dpcd_writeb(&intel_dp->aux,
->>> DP_EDP_BACKLIGHT_MODE_SET_REGISTER,
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0 new_dpcd_buf);
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0if (ret !=3D 1)
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0drm_=
-dbg_kms(&i915->drm, "Failed to write aux
->>> backlight mode: %d\n", ret);
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0}
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0struct intel_dp *intel_dp =
-=3D enc_to_intel_dp(connector->encoder);
->>>   =20
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0intel_dp_aux_vesa_set_back=
-light(conn_state, level);
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0set_vesa_backlight_enable(=
-connector, true);
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0drm_edp_backlight_enable(&=
-intel_dp->aux, &panel-
->>>> backlight.edp.vesa.info, level);
->>>  =C2=A0 }
->>>   =20
->>>  =C2=A0 static void intel_dp_aux_vesa_disable_backlight(const struct
->>> drm_connector_state *old_conn_state,
->>>  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0u32 =
-level)
->>>  =C2=A0 {
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0set_vesa_backlight_enable(=
-to_intel_connector(old_conn_state-
->>>> connector), false);
->>> -}
->>> -
->>> -/*
->>> - * Compute PWM frequency divider value based off the frequency provi=
-ded to
->>> us by the vbt.
->>> - * The PWM Frequency is calculated as 27Mhz / (F x P).
->>> - * - Where F =3D PWM Frequency Pre-Divider value programmed by field=
- 7:0 of
->>> the
->>> - *=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0 EDP_BACKLIGHT_FREQ_SET register (DPCD Address 00728h)
->>> - * - Where P =3D 2^Pn, where Pn is the value programmed by field 4:0=
- of the
->>> - *=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0 EDP_PWMGEN_BIT_COUNT register (DPCD Address 00724h)
->>> - */
->>> -static u32 intel_dp_aux_vesa_calc_max_backlight(struct intel_connect=
-or
->>> *connector)
->>> -{
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0struct drm_i915_private *i=
-915 =3D to_i915(connector->base.dev);
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0struct intel_dp *intel_dp =
-=3D intel_attached_dp(connector);
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0struct intel_connector *co=
-nnector =3D
->>> to_intel_connector(old_conn_state->connector);
->>>  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0struct intel_panel *=
-panel =3D &connector->panel;
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0u32 max_backlight =3D 0;
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0int ret, freq, fxp, fxp_mi=
-n, fxp_max, fxp_actual, f =3D 1;
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0u8 pn, pn_min, pn_max;
->>> -
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0ret =3D drm_dp_dpcd_readb(=
-&intel_dp->aux, DP_EDP_PWMGEN_BIT_COUNT,
->>> &pn);
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (ret !=3D 1) {
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0drm_dbg_kms(&i915->drm, "Failed to read pwmgen bit c=
-ount
->>> cap: %d\n", ret);
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0return 0;
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0}
->>> -
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0pn &=3D DP_EDP_PWMGEN_BIT_=
-COUNT_MASK;
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0max_backlight =3D (1 << pn=
-) - 1;
->>> -
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0/* Find desired value of (=
-F x P)
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * Note that, if F x P is =
-out of supported range, the maximum value
->>> or
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * minimum value will appl=
-ied automatically. So no need to check
->>> that.
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 */
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0freq =3D i915->vbt.backlig=
-ht.pwm_freq_hz;
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0drm_dbg_kms(&i915->drm, "V=
-BT defined backlight frequency %u Hz\n",
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 freq);
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (!freq) {
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0drm_dbg_kms(&i915->drm,
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0 "Use panel default backlight frequency\n");
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0return max_backlight;
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0}
->>> -
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0fxp =3D DIV_ROUND_CLOSEST(=
-KHz(DP_EDP_BACKLIGHT_FREQ_BASE_KHZ), freq);
->>> -
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0/* Use highest possible va=
-lue of Pn for more granularity of
->>> brightness
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * adjustment while satify=
-ing the conditions below.
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * - Pn is in the range of=
- Pn_min and Pn_max
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * - F is in the range of =
-1 and 255
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * - FxP is within 25% of =
-desired value.
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 *=C2=A0=C2=A0 Note: 25% i=
-s arbitrary value and may need some tweak.
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 */
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0ret =3D drm_dp_dpcd_readb(=
-&intel_dp->aux,
->>> DP_EDP_PWMGEN_BIT_COUNT_CAP_MIN, &pn_min);
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (ret !=3D 1) {
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0drm_dbg_kms(&i915->drm, "Failed to read pwmgen bit c=
-ount cap
->>> min: %d\n", ret);
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0return max_backlight;
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0}
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0ret =3D drm_dp_dpcd_readb(=
-&intel_dp->aux,
->>> DP_EDP_PWMGEN_BIT_COUNT_CAP_MAX, &pn_max);
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (ret !=3D 1) {
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0drm_dbg_kms(&i915->drm, "Failed to read pwmgen bit c=
-ount cap
->>> max: %d\n", ret);
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0return max_backlight;
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0}
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0pn_min &=3D DP_EDP_PWMGEN_=
-BIT_COUNT_MASK;
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0pn_max &=3D DP_EDP_PWMGEN_=
-BIT_COUNT_MASK;
->>> -
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0/* Ensure frequency is wit=
-hin 25% of desired value */
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0fxp_min =3D DIV_ROUND_CLOS=
-EST(fxp * 3, 4);
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0fxp_max =3D DIV_ROUND_CLOS=
-EST(fxp * 5, 4);
->>> -
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (fxp_min < (1 << pn_min=
-) || (255 << pn_max) < fxp_max) {
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0drm_dbg_kms(&i915->drm,
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0 "VBT defined backlight frequency out of
->>> range\n");
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0return max_backlight;
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0}
->>> -
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0for (pn =3D pn_max; pn >=3D=
- pn_min; pn--) {
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0f =3D clamp(DIV_ROUND_CLOSEST(fxp, 1 << pn), 1, 255)=
-;
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0fxp_actual =3D f << pn;
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0if (fxp_min <=3D fxp_actual && fxp_actual <=3D fxp_m=
-ax)
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0brea=
-k;
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0}
->>> -
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0drm_dbg_kms(&i915->drm, "U=
-sing eDP pwmgen bit count of %d\n", pn);
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0ret =3D drm_dp_dpcd_writeb=
-(&intel_dp->aux, DP_EDP_PWMGEN_BIT_COUNT,
->>> pn);
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (ret !=3D 1) {
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0drm_dbg_kms(&i915->drm, "Failed to write aux pwmgen =
-bit
->>> count: %d\n", ret);
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0return max_backlight;
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0}
->>> -
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0panel->backlight.edp.vesa.=
-pwmgen_bit_count =3D pn;
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (intel_dp->edp_dpcd[2] =
-& DP_EDP_BACKLIGHT_FREQ_AUX_SET_CAP)
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0panel->backlight.edp.vesa.pwm_freq_pre_divider =3D f=
-;
->>> -
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0max_backlight =3D (1 << pn=
-) - 1;
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0struct intel_dp *intel_dp =
-=3D enc_to_intel_dp(connector->encoder);
->>>   =20
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0return max_backlight;
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0drm_edp_backlight_disable(=
-&intel_dp->aux, &panel-
->>>> backlight.edp.vesa.info);
->>>  =C2=A0 }
->>>   =20
->>> -static int intel_dp_aux_vesa_setup_backlight(struct intel_connector
->>> *connector,
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 enum pipe pipe)
->>> +static int intel_dp_aux_vesa_setup_backlight(struct intel_connector
->>> *connector, enum pipe pipe)
->>>  =C2=A0 {
->>>  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0struct intel_dp *int=
-el_dp =3D intel_attached_dp(connector);
->>>  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0struct intel_panel *=
-panel =3D &connector->panel;
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0struct drm_i915_private *i=
-915 =3D dp_to_i915(intel_dp);
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0u16 current_level;
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0u8 current_mode;
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0int ret;
->>>   =20
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (intel_dp->edp_dpcd[1] =
-& DP_EDP_BACKLIGHT_AUX_ENABLE_CAP)
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0panel->backlight.edp.vesa.aux_enable =3D true;
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (intel_dp->edp_dpcd[2] =
-& DP_EDP_BACKLIGHT_BRIGHTNESS_BYTE_COUNT)
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0panel->backlight.edp.vesa.lsb_reg_used =3D true;
->>> -
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0panel->backlight.max =3D
->>> intel_dp_aux_vesa_calc_max_backlight(connector);
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (!panel->backlight.max)=
-
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0return -ENODEV;
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0ret =3D drm_edp_backlight_=
-init(&intel_dp->aux, &panel-
->>>> backlight.edp.vesa.info,
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 i915->=
-vbt.backlight.pwm_freq_hz,
->>> intel_dp->edp_dpcd,
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 &curre=
-nt_level, &current_mode);
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (ret < 0)
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0return ret;
->>>   =20
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0panel->backlight.max =3D p=
-anel->backlight.edp.vesa.info.max;
->>>  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0panel->backlight.min=
- =3D 0;
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0panel->backlight.level =3D=
- intel_dp_aux_vesa_get_backlight(connector,
->>> pipe);
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0panel->backlight.enabled =3D=
-
->>> intel_dp_aux_vesa_backlight_dpcd_mode(connector) &&
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 panel->backlight.l=
-evel !=3D 0;
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (current_mode =3D=3D DP=
-_EDP_BACKLIGHT_CONTROL_MODE_DPCD) {
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0panel->backlight.level =3D current_level;
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0panel->backlight.enabled =3D panel->backlight.level =
-!=3D 0;
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0} else {
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0panel->backlight.level =3D panel->backlight.max;
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0panel->backlight.enabled =3D false;
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0}
->>>   =20
->>>  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0return 0;
->>>  =C2=A0 }
->>> @@ -559,16 +340,12 @@ intel_dp_aux_supports_vesa_backlight(struct
->>> intel_connector *connector)
->>>  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0struct intel_dp *int=
-el_dp =3D intel_attached_dp(connector);
->>>  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0struct drm_i915_priv=
-ate *i915 =3D dp_to_i915(intel_dp);
->>>   =20
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0/* Check the eDP Display c=
-ontrol capabilities registers to determine
->>> if
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * the panel can support b=
-acklight control over the aux channel.
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 *
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * TODO: We currently only=
- support AUX only backlight
->>> configurations, not backlights which
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0/* TODO: We currently only=
- support AUX only backlight
->>> configurations, not backlights which
->>>  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * require a mix of =
-PWM and AUX controls to work. In the mean time,
->>> these machines typically
->>>  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * work just fine us=
-ing normal PWM controls anyway.
->>>  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 */
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if (intel_dp->edp_dpcd[1] =
-& DP_EDP_TCON_BACKLIGHT_ADJUSTMENT_CAP &&
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (intel_=
-dp->edp_dpcd[1] & DP_EDP_BACKLIGHT_AUX_ENABLE_CAP) &&
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (intel_=
-dp->edp_dpcd[2] &
->>> DP_EDP_BACKLIGHT_BRIGHTNESS_AUX_SET_CAP)) {
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0if ((intel_dp->edp_dpcd[1]=
- & DP_EDP_BACKLIGHT_AUX_ENABLE_CAP) &&
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 drm_edp=
-_backlight_supported(intel_dp->edp_dpcd)) {
->>>  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0drm_dbg_kms(&i915->drm, "AUX Backlight Control=
-
->>> Supported!\n");
->>>  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0return true;
->>>  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0}
->>> diff --git a/include/drm/drm_dp_helper.h b/include/drm/drm_dp_helper.=
-h
->>> index edffd1dcca3e..1eca0b42fc45 100644
->>> --- a/include/drm/drm_dp_helper.h
->>> +++ b/include/drm/drm_dp_helper.h
->>> @@ -1790,6 +1790,24 @@ drm_dp_sink_can_do_video_without_timing_msa(co=
-nst u8
->>> dpcd[DP_RECEIVER_CAP_SIZE])
->>>  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0DP_MSA_TIMING_PAR_IGNORED;
->>>  =C2=A0 }
->>>   =20
->>> +/**
->>> + * drm_edp_backlight_supported() - Check an eDP DPCD for VESA backli=
-ght
->>> support
->>> + * @edp_dpcd: The DPCD to check
->>> + *
->>> + * Note that currently this function will return %false for panels w=
-hich
->>> support various DPCD
->>> + * backlight features but which require the brightness be set throug=
-h PWM,
->>> and don't support setting
->>> + * the brightness level via the DPCD. This is a TODO.
->>> + *
->>> + * Returns: %True if @edp_dpcd indicates that VESA backlight control=
-s are
->>> supported, %false
->>> + * otherwise
->>> + */
->>> +static inline bool
->>> +drm_edp_backlight_supported(const u8 edp_dpcd[EDP_DISPLAY_CTL_CAP_SI=
-ZE])
->>> +{
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0return (edp_dpcd[1] & DP_E=
-DP_TCON_BACKLIGHT_ADJUSTMENT_CAP) &&
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0(edp_dpcd[2] & DP_EDP_BACKLIGHT_BRIGHTNESS_AUX_SET_C=
-AP);
->>> +}
->>> +
->>>  =C2=A0 /*
->>>  =C2=A0=C2=A0 * DisplayPort AUX channel
->>>  =C2=A0=C2=A0 */
->>> @@ -2089,6 +2107,36 @@ drm_dp_has_quirk(const struct drm_dp_desc *des=
-c, enum
->>> drm_dp_quirk quirk)
->>>  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0return desc->quirks =
-& BIT(quirk);
->>>  =C2=A0 }
->>>   =20
->>> +/**
->>> + * struct drm_edp_backlight_info - Probed eDP backlight info struct
->>> + * @pwmgen_bit_count: The pwmgen bit count
->>> + * @pwm_freq_pre_divider: The PWM frequency pre-divider value being =
-used
->>> for this backlight, if any
->>> + * @max: The maximum backlight level that may be set
->>> + * @lsb_reg_used: Do we also write values to the
->>> DP_EDP_BACKLIGHT_BRIGHTNESS_LSB register?
->>> + * @aux_enable: Does the panel support the AUX enable cap?
->>> + *
->>> + * This structure contains various data about an eDP backlight, whic=
-h can
->>> be populated by using
->>> + * drm_edp_backlight_init().
->>> + */
->>> +struct drm_edp_backlight_info {
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0u8 pwmgen_bit_count;
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0u8 pwm_freq_pre_divider;
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0u16 max;
->>> +
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0bool lsb_reg_used : 1;
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0bool aux_enable : 1;
->>> +};
->>> +
->>> +int
->>> +drm_edp_backlight_init(struct drm_dp_aux *aux, struct
->>> drm_edp_backlight_info *bl,
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 u16 driver_pwm_=
-freq_hz, const u8
->>> edp_dpcd[EDP_DISPLAY_CTL_CAP_SIZE],
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 u16 *current_le=
-vel, u8 *current_mode);
->>> +int drm_edp_backlight_set_level(struct drm_dp_aux *aux, const struct=
-
->>> drm_edp_backlight_info *bl,
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0u16 level);
->>> +int drm_edp_backlight_enable(struct drm_dp_aux *aux, const struct
->>> drm_edp_backlight_info *bl,
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0 u16 level);
->>> +int drm_edp_backlight_disable(struct drm_dp_aux *aux, const struct
->>> drm_edp_backlight_info *bl);
->>> +
->>>  =C2=A0 #ifdef CONFIG_DRM_DP_CEC
->>>  =C2=A0 void drm_dp_cec_irq(struct drm_dp_aux *aux);
->>>  =C2=A0 void drm_dp_cec_register_connector(struct drm_dp_aux *aux,
->>>
->>
->=20
-
---=20
-Thomas Zimmermann
-Graphics Driver Developer
-SUSE Software Solutions Germany GmbH
-Maxfeldstr. 5, 90409 N=C3=BCrnberg, Germany
-(HRB 36809, AG N=C3=BCrnberg)
-Gesch=C3=A4ftsf=C3=BChrer: Felix Imend=C3=B6rffer
-
-
---emWjQ3rBGNgK7wliVmGNAiffMImS2HWE6--
-
---WljjKDOOHX1q2wVRRvyv3yldHk7GaVSXm
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature"
-
------BEGIN PGP SIGNATURE-----
-
-wsF5BAABCAAjFiEExndm/fpuMUdwYFFolh/E3EQov+AFAmAqvqgFAwAAAAAACgkQlh/E3EQov+Bn
-txAAiX9UmAzgyUdy3QuB3duMRks6L0WFAPr4Menz6rf3IzcSsymztJFl7TFisCle/zu8RSVRGeIv
-ZOw3G9FgEP9x0wQ5QFAVwUXbomjpnWxHUChyWQgCtrDXj+/7fNu9DaY6M5tEG8youNKZ4ZEBAxQM
-Uaxh/7k9WqcDAM0kn6r8UtIpkfPA4dxFRmR/vFWpYXluQef4Cdbvif9uHRJF6JluddvSEkI0Tpo6
-x8PSPihiMXrgGpS4Spq6PcmBF0AB3FGzp1sg2a33xJI7kdyBbqnMJj+IVqNSXm95pWUoM+pKjGWZ
-ewcMH6uhW2O5JyNG1yRfr42jmCsJyk8nyr+1Hs+NGH6u9jClkJKTf5aUhHDLE9soY2yNqylMsFo0
-w0hAbLElIeuOnpET2YpDv29OENDamQVJrXq4bBtP+JFjkU6LnTGY+vnKgfRs+pYwamDZ2GnuSMb+
-NOtDreuYo3fwc0KOWhaiDci8+vZsO0UpxA6deuXxTAUIyoOw82HrnDsNIpBEea/EyASC8H0e7TiI
-I/H4AZ5HexxBIZpxB7FZAQ8XcTndNS4QBPjRfLyypP0heiiT/dQDNJ8PizXMvepPQPQww6pLh/RS
-RTGn+1ws/2OH0SzahvpUuOIL6So7Pzf4SgaRwA+x8C1djIMlrY+fA3TPBMcGWcLKpz3S2XPAV4wH
-iZ0=
-=8dJc
------END PGP SIGNATURE-----
-
---WljjKDOOHX1q2wVRRvyv3yldHk7GaVSXm--
-
---===============1508710784==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
-_______________________________________________
-Nouveau mailing list
-Nouveau@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/nouveau
-
---===============1508710784==--
+T24gTW9uLCAyMDIxLTAyLTE1IGF0IDE5OjM0ICswMTAwLCBUaG9tYXMgWmltbWVybWFubiB3cm90
+ZToKPiBIaQo+IAo+IEFtIDA5LjAyLjIxIHVtIDAwOjAzIHNjaHJpZWIgTHl1ZGUgUGF1bDoKPiA+
+ID4gCj4gPiA+ID4gK8KgwqDCoMKgwqDCoMKgfSBlbHNlIHsKPiA+ID4gPiArwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgYnVmWzBdID0gbGV2ZWw7Cj4gPiA+ID4gK8KgwqDCoMKgwqDCoMKg
+fQo+ID4gPiA+ICsKPiA+ID4gPiArwqDCoMKgwqDCoMKgwqByZXQgPSBkcm1fZHBfZHBjZF93cml0
+ZShhdXgsIERQX0VEUF9CQUNLTElHSFRfQlJJR0hUTkVTU19NU0IsCj4gPiA+ID4gYnVmLAo+ID4g
+PiA+IHNpemVvZihidWYpKTsKPiA+ID4gPiArwqDCoMKgwqDCoMKgwqBpZiAocmV0ICE9IHNpemVv
+ZihidWYpKSB7Cj4gPiA+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoERSTV9FUlJP
+UigiJXM6IEZhaWxlZCB0byB3cml0ZSBhdXggYmFja2xpZ2h0IGxldmVsOgo+ID4gPiA+ICVkXG4i
+LAo+ID4gPiA+IGF1eC0+bmFtZSwgcmV0KTsKPiA+ID4gCj4gPiA+IFNpbmNlIHlvdSdyZSBhZGRp
+bmcgdGhpcyBjb2RlLCB5b3Ugc2hvdWxkIHByb2JhYmx5IGNvbnZlcnQgdG8gZHJtX2VycigpCj4g
+PiA+IGhlbHBlcnMgYXMgd2VsbC4gSGVyZSBhbmQgZWxzZXdoZXJlLgo+ID4gCj4gPiB0aGlzIGlz
+IG5leHQgdXAgb24gbXkgdG9kbyBsaXN0IEpGWUktSSBkb24ndCBkbyBpdCByaWdodCBub3cgYmVj
+YXVzZSB0aGVyZQo+ID4gaXNuJ3QKPiA+IGFjdHVhbGx5IGFueSBiYWNrcG9pbnRlciB0byB0aGUg
+ZHJtIGRyaXZlciAoYW5kIHlvdSBjYW4ndCBqdXN0IHVzZSB0aGUKPiA+IHBhcmVudCBvZgo+ID4g
+dGhlIGF1eCBkZXZpY2UsIHNpbmNlIHRoYXQgdGVjaG5pY2FsbHkgZG9lc24ndCBuZWVkIHRvIGJl
+IHRoZSBkcm0gZHJpdmVyKS4KPiA+IAo+ID4gSSdkIGFkZCBpdCBpbiB0aGlzIHNlcmllcywgYnV0
+IHRoYXQncyBnb2luZyB0byBpbnZvbHZlIHVwZGF0aW5nIGZ1bmN0aW9ucwo+ID4gYWNyb3NzCj4g
+PiB0aGUgdHJlZSBsaWtlIGRybV9kcF9hdXhfaW5pdCgpIHNvIEknZCBsaWtlIHRvIGRvIGl0IGlu
+IGEgZGlmZmVyZW50IHBhdGNoCj4gPiBzZXJpZXMKPiAKPiBPaywgc3VyZS4gTWFrZXMgc2Vuc2Uu
+CgpJJ20gYWN0dWFsbHkgcHJvYmFibHkganVzdCBnb2luZyB0byBkbyBpdCBhbnl3YXksIHNpbmNl
+IGl0IHNlZW1zIGxpa2UgYSB3YW50IG9mCmZvbGtzIHJlYWxseSB3YW50IHRvIGtlZXAgdGhlIGRy
+bV9kYmdfKigpIHByaW50cyBhcm91bmQKPiAKPiBCZXN0IHJlZ2FyZHMKPiBUaG9tYXMKPiAKPiA+
+IAo+ID4gPiAKPiA+ID4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgcmV0dXJuIHJl
+dCA8IDAgPyByZXQgOiAtRUlPOwo+ID4gPiA+ICvCoMKgwqDCoMKgwqDCoH0KPiA+ID4gPiArCj4g
+PiA+ID4gK8KgwqDCoMKgwqDCoMKgcmV0dXJuIDA7Cj4gPiA+ID4gK30KPiA+ID4gPiArRVhQT1JU
+X1NZTUJPTChkcm1fZWRwX2JhY2tsaWdodF9zZXRfbGV2ZWwpOwo+ID4gPiA+ICsKPiA+ID4gPiAr
+c3RhdGljIGludAo+ID4gPiA+ICtkcm1fZWRwX2JhY2tsaWdodF9zZXRfZW5hYmxlKHN0cnVjdCBk
+cm1fZHBfYXV4ICphdXgsIGNvbnN0IHN0cnVjdAo+ID4gPiA+IGRybV9lZHBfYmFja2xpZ2h0X2lu
+Zm8gKmJsLAo+ID4gPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqAgYm9vbCBlbmFibGUpCj4gPiA+ID4gK3sKPiA+ID4gPiArwqDCoMKgwqDC
+oMKgwqBpbnQgcmV0Owo+ID4gPiA+ICvCoMKgwqDCoMKgwqDCoHU4IGJ1ZjsKPiA+ID4gPiArCj4g
+PiA+ID4gK8KgwqDCoMKgwqDCoMKgLyogVGhlIHBhbmVsIHVzZXMgc29tZXRoaW5nIG90aGVyIHRo
+ZW4gRFBDRCBmb3IgZW5hYmxpbmcgaXQncwo+ID4gPiA+IGJhY2tsaWdodCAqLwo+ID4gPiAKPiA+
+ID4gJ2l0cycKPiA+ID4gCj4gPiA+IEJlc3QgcmVnYXJkcwo+ID4gPiBUaG9tYXMKPiA+ID4gCj4g
+PiA+ID4gK8KgwqDCoMKgwqDCoMKgaWYgKCFibC0+YXV4X2VuYWJsZSkKPiA+ID4gPiArwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgcmV0dXJuIDA7Cj4gPiA+ID4gKwo+ID4gPiA+ICvCoMKg
+wqDCoMKgwqDCoHJldCA9IGRybV9kcF9kcGNkX3JlYWRiKGF1eCwgRFBfRURQX0RJU1BMQVlfQ09O
+VFJPTF9SRUdJU1RFUiwKPiA+ID4gPiAmYnVmKTsKPiA+ID4gPiArwqDCoMKgwqDCoMKgwqBpZiAo
+cmV0ICE9IDEpIHsKPiA+ID4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgRFJNX0VS
+Uk9SKCIlczogRmFpbGVkIHRvIHJlYWQgZURQIGRpc3BsYXkgY29udHJvbAo+ID4gPiA+IHJlZ2lz
+dGVyOgo+ID4gPiA+ICVkXG4iLCBhdXgtPm5hbWUsIHJldCk7Cj4gPiA+ID4gK8KgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoHJldHVybiByZXQgPCAwID8gcmV0IDogLUVJTzsKPiA+ID4gPiAr
+wqDCoMKgwqDCoMKgwqB9Cj4gPiA+ID4gK8KgwqDCoMKgwqDCoMKgaWYgKGVuYWJsZSkKPiA+ID4g
+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgYnVmIHw9IERQX0VEUF9CQUNLTElHSFRf
+RU5BQkxFOwo+ID4gPiA+ICvCoMKgwqDCoMKgwqDCoGVsc2UKPiA+ID4gPiArwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgYnVmICY9IH5EUF9FRFBfQkFDS0xJR0hUX0VOQUJMRTsKPiA+ID4g
+PiArCj4gPiA+ID4gK8KgwqDCoMKgwqDCoMKgcmV0ID0gZHJtX2RwX2RwY2Rfd3JpdGViKGF1eCwg
+RFBfRURQX0RJU1BMQVlfQ09OVFJPTF9SRUdJU1RFUiwKPiA+ID4gPiBidWYpOwo+ID4gPiA+ICvC
+oMKgwqDCoMKgwqDCoGlmIChyZXQgIT0gMSkgewo+ID4gPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqBEUk1fRVJST1IoIiVzOiBGYWlsZWQgdG8gd3JpdGUgZURQIGRpc3BsYXkgY29u
+dHJvbAo+ID4gPiA+IHJlZ2lzdGVyOgo+ID4gPiA+ICVkXG4iLCBhdXgtPm5hbWUsIHJldCk7Cj4g
+PiA+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoHJldHVybiByZXQgPCAwID8gcmV0
+IDogLUVJTzsKPiA+ID4gPiArwqDCoMKgwqDCoMKgwqB9Cj4gPiA+ID4gKwo+ID4gPiA+ICvCoMKg
+wqDCoMKgwqDCoHJldHVybiAwOwo+ID4gPiA+ICt9Cj4gPiA+ID4gKwo+ID4gPiA+ICsvKioKPiA+
+ID4gPiArICogZHJtX2VkcF9iYWNrbGlnaHRfZW5hYmxlKCkgLSBFbmFibGUgYW4gZURQIHBhbmVs
+J3MgYmFja2xpZ2h0IHVzaW5nCj4gPiA+ID4gRFBDRAo+ID4gPiA+ICsgKiBAYXV4OiBUaGUgRFAg
+QVVYIGNoYW5uZWwgdG8gdXNlCj4gPiA+ID4gKyAqIEBibDogQmFja2xpZ2h0IGNhcGFiaWxpdHkg
+aW5mbyBmcm9tIGRybV9lZHBfYmFja2xpZ2h0X2luaXQoKQo+ID4gPiA+ICsgKiBAbGV2ZWw6IFRo
+ZSBpbml0aWFsIGJhY2tsaWdodCBsZXZlbCB0byBzZXQgdmlhIEFVWCwgaWYgdGhlcmUgaXMgb25l
+Cj4gPiA+ID4gKyAqCj4gPiA+ID4gKyAqIFRoaXMgZnVuY3Rpb24gaGFuZGxlcyBlbmFibGluZyBE
+UENEIGJhY2tsaWdodCBjb250cm9scyBvbiBhIHBhbmVsCj4gPiA+ID4gb3Zlcgo+ID4gPiA+IERQ
+Q0QsIHdoaWxlIGFkZGl0aW9uYWxseQo+ID4gPiA+ICsgKiByZXN0b3JpbmcgYW55IGltcG9ydGFu
+dCBiYWNrbGlnaHQgc3RhdGUgc3VjaCBhcyB0aGUgZ2l2ZW4gYmFja2xpZ2h0Cj4gPiA+ID4gbGV2
+ZWwsIHRoZSBicmlnaHRuZXNzIGJ5dGUKPiA+ID4gPiArICogY291bnQsIGJhY2tsaWdodCBmcmVx
+dWVuY3ksIGV0Yy4KPiA+ID4gPiArICoKPiA+ID4gPiArICogTm90ZSB0aGF0IGNlcnRhaW4gcGFu
+ZWxzLCB3aGlsZSBzdXBwb3J0aW5nIGJyaWdodG5lc3MgbGV2ZWwgY29udHJvbHMKPiA+ID4gPiBv
+dmVyIERQQ0QsIG1heSBub3Qgc3VwcG9ydAo+ID4gPiA+ICsgKiBoYXZpbmcgdGhlaXIgYmFja2xp
+Z2h0cyBlbmFibGVkIHZpYSB0aGUgc3RhbmRhcmQKPiA+ID4gPiAlRFBfRURQX0RJU1BMQVlfQ09O
+VFJPTF9SRUdJU1RFUi4gT24gc3VjaCBwYW5lbHMKPiA+ID4gPiArICogJmRybV9lZHBfYmFja2xp
+Z2h0X2luZm8uYXV4X2VuYWJsZSB3aWxsIGJlIHNldCB0byAlZmFsc2UsIHRoaXMKPiA+ID4gPiBm
+dW5jdGlvbgo+ID4gPiA+IHdpbGwgc2tpcCB0aGUgc3RlcCBvZgo+ID4gPiA+ICsgKiBwcm9ncmFt
+bWluZyB0aGUgJURQX0VEUF9ESVNQTEFZX0NPTlRST0xfUkVHSVNURVIsIGFuZCB0aGUgZHJpdmVy
+Cj4gPiA+ID4gbXVzdAo+ID4gPiA+IHBlcmZvcm0gdGhlIHJlcXVpcmVkCj4gPiA+ID4gKyAqIGlt
+cGxlbWVudGF0aW9uIHNwZWNpZmljIHN0ZXAgZm9yIGVuYWJsaW5nIHRoZSBiYWNrbGlnaHQgYWZ0
+ZXIKPiA+ID4gPiBjYWxsaW5nCj4gPiA+ID4gdGhpcyBmdW5jdGlvbi4KPiA+ID4gPiArICoKPiA+
+ID4gPiArICogUmV0dXJuczogJTAgb24gc3VjY2VzcywgbmVnYXRpdmUgZXJyb3IgY29kZSBvbiBm
+YWlsdXJlLgo+ID4gPiA+ICsgKi8KPiA+ID4gPiAraW50IGRybV9lZHBfYmFja2xpZ2h0X2VuYWJs
+ZShzdHJ1Y3QgZHJtX2RwX2F1eCAqYXV4LCBjb25zdCBzdHJ1Y3QKPiA+ID4gPiBkcm1fZWRwX2Jh
+Y2tsaWdodF9pbmZvICpibCwKPiA+ID4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGNvbnN0IHUxNiBsZXZlbCkKPiA+ID4gPiArewo+ID4g
+PiA+ICvCoMKgwqDCoMKgwqDCoGludCByZXQ7Cj4gPiA+ID4gK8KgwqDCoMKgwqDCoMKgdTggZHBj
+ZF9idWYsIG5ld19kcGNkX2J1ZjsKPiA+ID4gPiArCj4gPiA+ID4gK8KgwqDCoMKgwqDCoMKgcmV0
+ID0gZHJtX2RwX2RwY2RfcmVhZGIoYXV4LCBEUF9FRFBfQkFDS0xJR0hUX01PREVfU0VUX1JFR0lT
+VEVSLAo+ID4gPiA+ICZkcGNkX2J1Zik7Cj4gPiA+ID4gK8KgwqDCoMKgwqDCoMKgaWYgKHJldCAh
+PSAxKSB7Cj4gPiA+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoERSTV9ERUJVR19L
+TVMoIiVzOiBGYWlsZWQgdG8gcmVhZCBiYWNrbGlnaHQgbW9kZTogJWRcbiIsCj4gPiA+ID4gYXV4
+LT5uYW1lLCByZXQpOwo+ID4gPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqByZXR1
+cm4gcmV0IDwgMCA/IHJldCA6IC1FSU87Cj4gPiA+ID4gK8KgwqDCoMKgwqDCoMKgfQo+ID4gPiA+
+ICsKPiA+ID4gPiArwqDCoMKgwqDCoMKgwqBuZXdfZHBjZF9idWYgPSBkcGNkX2J1ZjsKPiA+ID4g
+PiArCj4gPiA+ID4gK8KgwqDCoMKgwqDCoMKgaWYgKChkcGNkX2J1ZiAmIERQX0VEUF9CQUNLTElH
+SFRfQ09OVFJPTF9NT0RFX01BU0spICE9Cj4gPiA+ID4gRFBfRURQX0JBQ0tMSUdIVF9DT05UUk9M
+X01PREVfRFBDRCkgewo+ID4gPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBuZXdf
+ZHBjZF9idWYgJj0gfkRQX0VEUF9CQUNLTElHSFRfQ09OVFJPTF9NT0RFX01BU0s7Cj4gPiA+ID4g
+K8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoG5ld19kcGNkX2J1ZiB8PSBEUF9FRFBfQkFD
+S0xJR0hUX0NPTlRST0xfTU9ERV9EUENEOwo+ID4gPiA+ICsKPiA+ID4gPiArwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgcmV0ID0gZHJtX2RwX2RwY2Rfd3JpdGViKGF1eCwgRFBfRURQX1BX
+TUdFTl9CSVRfQ09VTlQsCj4gPiA+ID4gYmwtCj4gPiA+ID4gPiBwd21nZW5fYml0X2NvdW50KTsK
+PiA+ID4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgaWYgKHJldCAhPSAxKQo+ID4g
+PiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgRFJNX0RF
+QlVHX0tNUygiJXM6IEZhaWxlZCB0byB3cml0ZSBhdXggcHdtZ2VuCj4gPiA+ID4gYml0Cj4gPiA+
+ID4gY291bnQ6ICVkXG4iLAo+ID4gPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgYXV4LT5uYW1lLCByZXQp
+Owo+ID4gPiA+ICvCoMKgwqDCoMKgwqDCoH0KPiA+ID4gPiArCj4gPiA+ID4gK8KgwqDCoMKgwqDC
+oMKgaWYgKGJsLT5wd21fZnJlcV9wcmVfZGl2aWRlcikgewo+ID4gPiA+ICvCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqByZXQgPSBkcm1fZHBfZHBjZF93cml0ZWIoYXV4LCBEUF9FRFBfQkFD
+S0xJR0hUX0ZSRVFfU0VULAo+ID4gPiA+IGJsLQo+ID4gPiA+ID4gcHdtX2ZyZXFfcHJlX2Rpdmlk
+ZXIpOwo+ID4gPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBpZiAocmV0ICE9IDEp
+Cj4gPiA+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBE
+Uk1fREVCVUdfS01TKCIlczogRmFpbGVkIHRvIHdyaXRlIGF1eCBiYWNrbGlnaHQKPiA+ID4gPiBm
+cmVxdWVuY3k6ICVkXG4iLAo+ID4gPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgYXV4LT5uYW1lLCByZXQp
+Owo+ID4gPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBlbHNlCj4gPiA+ID4gK8Kg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBuZXdfZHBjZF9idWYg
+fD0KPiA+ID4gPiBEUF9FRFBfQkFDS0xJR0hUX0ZSRVFfQVVYX1NFVF9FTkFCTEU7Cj4gPiA+ID4g
+K8KgwqDCoMKgwqDCoMKgfQo+ID4gPiA+ICsKPiA+ID4gPiArwqDCoMKgwqDCoMKgwqBpZiAobmV3
+X2RwY2RfYnVmICE9IGRwY2RfYnVmKSB7Cj4gPiA+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoHJldCA9IGRybV9kcF9kcGNkX3dyaXRlYihhdXgsCj4gPiA+ID4gRFBfRURQX0JBQ0tM
+SUdIVF9NT0RFX1NFVF9SRUdJU1RFUiwgbmV3X2RwY2RfYnVmKTsKPiA+ID4gPiArwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgaWYgKHJldCAhPSAxKSB7Cj4gPiA+ID4gK8KgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBEUk1fREVCVUdfS01TKCIlczogRmFp
+bGVkIHRvIHdyaXRlIGF1eCBiYWNrbGlnaHQKPiA+ID4gPiBtb2RlOiAlZFxuIiwKPiA+ID4gPiAr
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgIGF1eC0+bmFtZSwgcmV0KTsKPiA+ID4gPiArwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoHJldHVybiByZXQgPCAwID8gcmV0IDogLUVJ
+TzsKPiA+ID4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgfQo+ID4gPiA+ICvCoMKg
+wqDCoMKgwqDCoH0KPiA+ID4gPiArCj4gPiA+ID4gK8KgwqDCoMKgwqDCoMKgcmV0ID0gZHJtX2Vk
+cF9iYWNrbGlnaHRfc2V0X2xldmVsKGF1eCwgYmwsIGxldmVsKTsKPiA+ID4gPiArwqDCoMKgwqDC
+oMKgwqBpZiAocmV0IDwgMCkKPiA+ID4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+cmV0dXJuIHJldDsKPiA+ID4gPiArwqDCoMKgwqDCoMKgwqByZXQgPSBkcm1fZWRwX2JhY2tsaWdo
+dF9zZXRfZW5hYmxlKGF1eCwgYmwsIHRydWUpOwo+ID4gPiA+ICvCoMKgwqDCoMKgwqDCoGlmIChy
+ZXQgPCAwKQo+ID4gPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqByZXR1cm4gcmV0
+Owo+ID4gPiA+ICsKPiA+ID4gPiArwqDCoMKgwqDCoMKgwqByZXR1cm4gMDsKPiA+ID4gPiArfQo+
+ID4gPiA+ICtFWFBPUlRfU1lNQk9MKGRybV9lZHBfYmFja2xpZ2h0X2VuYWJsZSk7Cj4gPiA+ID4g
+Kwo+ID4gPiA+ICsvKioKPiA+ID4gPiArICogZHJtX2VkcF9iYWNrbGlnaHRfZGlzYWJsZSgpIC0g
+RGlzYWJsZSBhbiBlRFAgYmFja2xpZ2h0IHVzaW5nIERQQ0QsCj4gPiA+ID4gaWYKPiA+ID4gPiBz
+dXBwb3J0ZWQKPiA+ID4gPiArICogQGF1eDogVGhlIERQIEFVWCBjaGFubmVsIHRvIHVzZQo+ID4g
+PiA+ICsgKiBAYmw6IEJhY2tsaWdodCBjYXBhYmlsaXR5IGluZm8gZnJvbSBkcm1fZWRwX2JhY2ts
+aWdodF9pbml0KCkKPiA+ID4gPiArICoKPiA+ID4gPiArICogVGhpcyBmdW5jdGlvbiBoYW5kbGVz
+IGRpc2FibGluZyBEUENEIGJhY2tsaWdodCBjb250cm9scyBvbiBhIHBhbmVsCj4gPiA+ID4gb3Zl
+cgo+ID4gPiA+IEFVWC4gTm90ZSB0aGF0IHNvbWUKPiA+ID4gPiArICogcGFuZWxzIGhhdmUgYmFj
+a2xpZ2h0cyB0aGF0IGFyZSBlbmFibGVkL2Rpc2FibGVkIGJ5IG90aGVyIG1lYW5zLAo+ID4gPiA+
+IGRlc3BpdGUKPiA+ID4gPiBoYXZpbmcgdGhlaXIgYnJpZ2h0bmVzcwo+ID4gPiA+ICsgKiB2YWx1
+ZXMgY29udHJvbGxlZCB0aHJvdWdoIERQQ0QuIE9uIHN1Y2ggcGFuZWxzCj4gPiA+ID4gJmRybV9l
+ZHBfYmFja2xpZ2h0X2luZm8uYXV4X2VuYWJsZSB3aWxsIGJlIHNldCB0bwo+ID4gPiA+ICsgKiAl
+ZmFsc2UsIHRoaXMgZnVuY3Rpb24gd2lsbCBiZWNvbWUgYSBuby1vcCAoYW5kIHdlIHdpbGwgc2tp
+cCB1cGRhdGluZwo+ID4gPiA+ICsgKiAlRFBfRURQX0RJU1BMQVlfQ09OVFJPTF9SRUdJU1RFUiks
+IGFuZCB0aGUgZHJpdmVyIG11c3QgdGFrZSBjYXJlIHRvCj4gPiA+ID4gcGVyZm9ybSBpdCdzIG93
+bgo+ID4gPiA+ICsgKiBpbXBsZW1lbnRhdGlvbiBzcGVjaWZpYyBzdGVwIGZvciBkaXNhYmxpbmcg
+dGhlIGJhY2tsaWdodC4KPiA+ID4gPiArICoKPiA+ID4gPiArICogUmV0dXJuczogJTAgb24gc3Vj
+Y2VzcyBvciBuby1vcCwgbmVnYXRpdmUgZXJyb3IgY29kZSBvbiBmYWlsdXJlLgo+ID4gPiA+ICsg
+Ki8KPiA+ID4gPiAraW50IGRybV9lZHBfYmFja2xpZ2h0X2Rpc2FibGUoc3RydWN0IGRybV9kcF9h
+dXggKmF1eCwgY29uc3Qgc3RydWN0Cj4gPiA+ID4gZHJtX2VkcF9iYWNrbGlnaHRfaW5mbyAqYmwp
+Cj4gPiA+ID4gK3sKPiA+ID4gPiArwqDCoMKgwqDCoMKgwqBpbnQgcmV0Owo+ID4gPiA+ICsKPiA+
+ID4gPiArwqDCoMKgwqDCoMKgwqByZXQgPSBkcm1fZWRwX2JhY2tsaWdodF9zZXRfZW5hYmxlKGF1
+eCwgYmwsIGZhbHNlKTsKPiA+ID4gPiArwqDCoMKgwqDCoMKgwqBpZiAocmV0IDwgMCkKPiA+ID4g
+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgcmV0dXJuIHJldDsKPiA+ID4gPiArCj4g
+PiA+ID4gK8KgwqDCoMKgwqDCoMKgcmV0dXJuIDA7Cj4gPiA+ID4gK30KPiA+ID4gPiArRVhQT1JU
+X1NZTUJPTChkcm1fZWRwX2JhY2tsaWdodF9kaXNhYmxlKTsKPiA+ID4gPiArCj4gPiA+ID4gK3N0
+YXRpYyBpbmxpbmUgaW50Cj4gPiA+ID4gK2RybV9lZHBfYmFja2xpZ2h0X3Byb2JlX21heChzdHJ1
+Y3QgZHJtX2RwX2F1eCAqYXV4LCBzdHJ1Y3QKPiA+ID4gPiBkcm1fZWRwX2JhY2tsaWdodF9pbmZv
+ICpibCwKPiA+ID4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoCB1MTYgZHJpdmVyX3B3bV9mcmVxX2h6LCBjb25zdCB1OAo+ID4gPiA+IGVkcF9k
+cGNkW0VEUF9ESVNQTEFZX0NUTF9DQVBfU0laRV0pCj4gPiA+ID4gK3sKPiA+ID4gPiArwqDCoMKg
+wqDCoMKgwqBpbnQgZnhwLCBmeHBfbWluLCBmeHBfbWF4LCBmeHBfYWN0dWFsLCBmID0gMTsKPiA+
+ID4gPiArwqDCoMKgwqDCoMKgwqBpbnQgcmV0Owo+ID4gPiA+ICvCoMKgwqDCoMKgwqDCoHU4IHBu
+LCBwbl9taW4sIHBuX21heDsKPiA+ID4gPiArCj4gPiA+ID4gK8KgwqDCoMKgwqDCoMKgcmV0ID0g
+ZHJtX2RwX2RwY2RfcmVhZGIoYXV4LCBEUF9FRFBfUFdNR0VOX0JJVF9DT1VOVCwgJnBuKTsKPiA+
+ID4gPiArwqDCoMKgwqDCoMKgwqBpZiAocmV0ICE9IDEpIHsKPiA+ID4gPiArwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgRFJNX0RFQlVHX0tNUygiJXM6IEZhaWxlZCB0byByZWFkIHB3bWdl
+biBiaXQgY291bnQgY2FwOgo+ID4gPiA+ICVkXG4iLCBhdXgtPm5hbWUsIHJldCk7Cj4gPiA+ID4g
+K8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoHJldHVybiAtRU5PREVWOwo+ID4gPiA+ICvC
+oMKgwqDCoMKgwqDCoH0KPiA+ID4gPiArCj4gPiA+ID4gK8KgwqDCoMKgwqDCoMKgcG4gJj0gRFBf
+RURQX1BXTUdFTl9CSVRfQ09VTlRfTUFTSzsKPiA+ID4gPiArwqDCoMKgwqDCoMKgwqBibC0+bWF4
+ID0gKDEgPDwgcG4pIC0gMTsKPiA+ID4gPiArwqDCoMKgwqDCoMKgwqBpZiAoIWRyaXZlcl9wd21f
+ZnJlcV9oeikKPiA+ID4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgcmV0dXJuIDA7
+Cj4gPiA+ID4gKwo+ID4gPiA+ICvCoMKgwqDCoMKgwqDCoC8qCj4gPiA+ID4gK8KgwqDCoMKgwqDC
+oMKgICogU2V0IFBXTSBGcmVxdWVuY3kgZGl2aWRlciB0byBtYXRjaCBkZXNpcmVkIGZyZXF1ZW5j
+eSBwcm92aWRlZAo+ID4gPiA+IGJ5Cj4gPiA+ID4gdGhlIGRyaXZlci4KPiA+ID4gPiArwqDCoMKg
+wqDCoMKgwqAgKiBUaGUgUFdNIEZyZXF1ZW5jeSBpcyBjYWxjdWxhdGVkIGFzIDI3TWh6IC8gKEYg
+eCBQKS4KPiA+ID4gPiArwqDCoMKgwqDCoMKgwqAgKiAtIFdoZXJlIEYgPSBQV00gRnJlcXVlbmN5
+IFByZS1EaXZpZGVyIHZhbHVlIHByb2dyYW1tZWQgYnkKPiA+ID4gPiBmaWVsZAo+ID4gPiA+IDc6
+MCBvZiB0aGUKPiA+ID4gPiArwqDCoMKgwqDCoMKgwqAgKsKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oCBFRFBfQkFDS0xJR0hUX0ZSRVFfU0VUIHJlZ2lzdGVyIChEUENEIEFkZHJlc3MKPiA+ID4gPiAw
+MDcyOGgpCj4gPiA+ID4gK8KgwqDCoMKgwqDCoMKgICogLSBXaGVyZSBQID0gMl5Qbiwgd2hlcmUg
+UG4gaXMgdGhlIHZhbHVlIHByb2dyYW1tZWQgYnkgZmllbGQKPiA+ID4gPiA0OjAKPiA+ID4gPiBv
+ZiB0aGUKPiA+ID4gPiArwqDCoMKgwqDCoMKgwqAgKsKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBF
+RFBfUFdNR0VOX0JJVF9DT1VOVCByZWdpc3RlciAoRFBDRCBBZGRyZXNzCj4gPiA+ID4gMDA3MjRo
+KQo+ID4gPiA+ICvCoMKgwqDCoMKgwqDCoCAqLwo+ID4gPiA+ICsKPiA+ID4gPiArwqDCoMKgwqDC
+oMKgwqAvKiBGaW5kIGRlc2lyZWQgdmFsdWUgb2YgKEYgeCBQKQo+ID4gPiA+ICvCoMKgwqDCoMKg
+wqDCoCAqIE5vdGUgdGhhdCwgaWYgRiB4IFAgaXMgb3V0IG9mIHN1cHBvcnRlZCByYW5nZSwgdGhl
+IG1heGltdW0KPiA+ID4gPiB2YWx1ZQo+ID4gPiA+IG9yIG1pbmltdW0gdmFsdWUgd2lsbAo+ID4g
+PiA+ICvCoMKgwqDCoMKgwqDCoCAqIGFwcGxpZWQgYXV0b21hdGljYWxseS4gU28gbm8gbmVlZCB0
+byBjaGVjayB0aGF0Lgo+ID4gPiA+ICvCoMKgwqDCoMKgwqDCoCAqLwo+ID4gPiA+ICvCoMKgwqDC
+oMKgwqDCoGZ4cCA9IERJVl9ST1VORF9DTE9TRVNUKDEwMDAgKiBEUF9FRFBfQkFDS0xJR0hUX0ZS
+RVFfQkFTRV9LSFosCj4gPiA+ID4gZHJpdmVyX3B3bV9mcmVxX2h6KTsKPiA+ID4gPiArCj4gPiA+
+ID4gK8KgwqDCoMKgwqDCoMKgLyogVXNlIGhpZ2hlc3QgcG9zc2libGUgdmFsdWUgb2YgUG4gZm9y
+IG1vcmUgZ3JhbnVsYXJpdHkgb2YKPiA+ID4gPiBicmlnaHRuZXNzIGFkanVzdG1lbnQgd2hpbGUK
+PiA+ID4gPiArwqDCoMKgwqDCoMKgwqAgKiBzYXRpZnlpbmcgdGhlIGNvbmRpdGlvbnMgYmVsb3cu
+Cj4gPiA+ID4gK8KgwqDCoMKgwqDCoMKgICogLSBQbiBpcyBpbiB0aGUgcmFuZ2Ugb2YgUG5fbWlu
+IGFuZCBQbl9tYXgKPiA+ID4gPiArwqDCoMKgwqDCoMKgwqAgKiAtIEYgaXMgaW4gdGhlIHJhbmdl
+IG9mIDEgYW5kIDI1NQo+ID4gPiA+ICvCoMKgwqDCoMKgwqDCoCAqIC0gRnhQIGlzIHdpdGhpbiAy
+NSUgb2YgZGVzaXJlZCB2YWx1ZS4KPiA+ID4gPiArwqDCoMKgwqDCoMKgwqAgKsKgwqAgTm90ZTog
+MjUlIGlzIGFyYml0cmFyeSB2YWx1ZSBhbmQgbWF5IG5lZWQgc29tZSB0d2Vhay4KPiA+ID4gPiAr
+wqDCoMKgwqDCoMKgwqAgKi8KPiA+ID4gPiArwqDCoMKgwqDCoMKgwqByZXQgPSBkcm1fZHBfZHBj
+ZF9yZWFkYihhdXgsIERQX0VEUF9QV01HRU5fQklUX0NPVU5UX0NBUF9NSU4sCj4gPiA+ID4gJnBu
+X21pbik7Cj4gPiA+ID4gK8KgwqDCoMKgwqDCoMKgaWYgKHJldCAhPSAxKSB7Cj4gPiA+ID4gK8Kg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoERSTV9ERUJVR19LTVMoIiVzOiBGYWlsZWQgdG8g
+cmVhZCBwd21nZW4gYml0IGNvdW50IGNhcAo+ID4gPiA+IG1pbjoKPiA+ID4gPiAlZFxuIiwgYXV4
+LT5uYW1lLCByZXQpOwo+ID4gPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqByZXR1
+cm4gMDsKPiA+ID4gPiArwqDCoMKgwqDCoMKgwqB9Cj4gPiA+ID4gK8KgwqDCoMKgwqDCoMKgcmV0
+ID0gZHJtX2RwX2RwY2RfcmVhZGIoYXV4LCBEUF9FRFBfUFdNR0VOX0JJVF9DT1VOVF9DQVBfTUFY
+LAo+ID4gPiA+ICZwbl9tYXgpOwo+ID4gPiA+ICvCoMKgwqDCoMKgwqDCoGlmIChyZXQgIT0gMSkg
+ewo+ID4gPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBEUk1fREVCVUdfS01TKCIl
+czogRmFpbGVkIHRvIHJlYWQgcHdtZ2VuIGJpdCBjb3VudCBjYXAKPiA+ID4gPiBtYXg6Cj4gPiA+
+ID4gJWRcbiIsIGF1eC0+bmFtZSwgcmV0KTsKPiA+ID4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgcmV0dXJuIDA7Cj4gPiA+ID4gK8KgwqDCoMKgwqDCoMKgfQo+ID4gPiA+ICvCoMKg
+wqDCoMKgwqDCoHBuX21pbiAmPSBEUF9FRFBfUFdNR0VOX0JJVF9DT1VOVF9NQVNLOwo+ID4gPiA+
+ICvCoMKgwqDCoMKgwqDCoHBuX21heCAmPSBEUF9FRFBfUFdNR0VOX0JJVF9DT1VOVF9NQVNLOwo+
+ID4gPiA+ICsKPiA+ID4gPiArwqDCoMKgwqDCoMKgwqAvKiBFbnN1cmUgZnJlcXVlbmN5IGlzIHdp
+dGhpbiAyNSUgb2YgZGVzaXJlZCB2YWx1ZSAqLwo+ID4gPiA+ICvCoMKgwqDCoMKgwqDCoGZ4cF9t
+aW4gPSBESVZfUk9VTkRfQ0xPU0VTVChmeHAgKiAzLCA0KTsKPiA+ID4gPiArwqDCoMKgwqDCoMKg
+wqBmeHBfbWF4ID0gRElWX1JPVU5EX0NMT1NFU1QoZnhwICogNSwgNCk7Cj4gPiA+ID4gK8KgwqDC
+oMKgwqDCoMKgaWYgKGZ4cF9taW4gPCAoMSA8PCBwbl9taW4pIHx8ICgyNTUgPDwgcG5fbWF4KSA8
+IGZ4cF9tYXgpIHsKPiA+ID4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgRFJNX0RF
+QlVHX0tNUygiJXM6IERyaXZlciBkZWZpbmVkIGJhY2tsaWdodCBmcmVxdWVuY3kKPiA+ID4gPiAo
+JWQpCj4gPiA+ID4gb3V0IG9mIHJhbmdlXG4iLAo+ID4gPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBhdXgtPm5hbWUsIGRyaXZlcl9w
+d21fZnJlcV9oeik7Cj4gPiA+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoHJldHVy
+biAwOwo+ID4gPiA+ICvCoMKgwqDCoMKgwqDCoH0KPiA+ID4gPiArCj4gPiA+ID4gK8KgwqDCoMKg
+wqDCoMKgZm9yIChwbiA9IHBuX21heDsgcG4gPj0gcG5fbWluOyBwbi0tKSB7Cj4gPiA+ID4gK8Kg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoGYgPSBjbGFtcChESVZfUk9VTkRfQ0xPU0VTVChm
+eHAsIDEgPDwgcG4pLCAxLCAyNTUpOwo+ID4gPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqBmeHBfYWN0dWFsID0gZiA8PCBwbjsKPiA+ID4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgaWYgKGZ4cF9taW4gPD0gZnhwX2FjdHVhbCAmJiBmeHBfYWN0dWFsIDw9IGZ4cF9t
+YXgpCj4gPiA+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqBicmVhazsKPiA+ID4gPiArwqDCoMKgwqDCoMKgwqB9Cj4gPiA+ID4gKwo+ID4gPiA+ICvCoMKg
+wqDCoMKgwqDCoHJldCA9IGRybV9kcF9kcGNkX3dyaXRlYihhdXgsIERQX0VEUF9QV01HRU5fQklU
+X0NPVU5ULCBwbik7Cj4gPiA+ID4gK8KgwqDCoMKgwqDCoMKgaWYgKHJldCAhPSAxKSB7Cj4gPiA+
+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoERSTV9ERUJVR19LTVMoIiVzOiBGYWls
+ZWQgdG8gd3JpdGUgYXV4IHB3bWdlbiBiaXQgY291bnQ6Cj4gPiA+ID4gJWRcbiIsIGF1eC0+bmFt
+ZSwgcmV0KTsKPiA+ID4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgcmV0dXJuIDA7
+Cj4gPiA+ID4gK8KgwqDCoMKgwqDCoMKgfQo+ID4gPiA+ICvCoMKgwqDCoMKgwqDCoGJsLT5wd21n
+ZW5fYml0X2NvdW50ID0gcG47Cj4gPiA+ID4gK8KgwqDCoMKgwqDCoMKgYmwtPm1heCA9ICgxIDw8
+IHBuKSAtIDE7Cj4gPiA+ID4gKwo+ID4gPiA+ICvCoMKgwqDCoMKgwqDCoGlmIChlZHBfZHBjZFsy
+XSAmIERQX0VEUF9CQUNLTElHSFRfRlJFUV9BVVhfU0VUX0NBUCkgewo+ID4gPiA+ICvCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBibC0+cHdtX2ZyZXFfcHJlX2RpdmlkZXIgPSBmOwo+ID4g
+PiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBEUk1fREVCVUdfS01TKCIlczogVXNp
+bmcgYmFja2xpZ2h0IGZyZXF1ZW5jeSBmcm9tIGRyaXZlcgo+ID4gPiA+ICglZEh6KVxuIiwKPiA+
+ID4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqAgYXV4LT5uYW1lLCBkcml2ZXJfcHdtX2ZyZXFfaHopOwo+ID4gPiA+ICvCoMKgwqDCoMKg
+wqDCoH0KPiA+ID4gPiArCj4gPiA+ID4gK8KgwqDCoMKgwqDCoMKgcmV0dXJuIDA7Cj4gPiA+ID4g
+K30KPiA+ID4gPiArCj4gPiA+ID4gK3N0YXRpYyBpbmxpbmUgaW50Cj4gPiA+ID4gK2RybV9lZHBf
+YmFja2xpZ2h0X3Byb2JlX2xldmVsKHN0cnVjdCBkcm1fZHBfYXV4ICphdXgsIHN0cnVjdAo+ID4g
+PiA+IGRybV9lZHBfYmFja2xpZ2h0X2luZm8gKmJsLAo+ID4gPiA+ICvCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB1OCAqY3VycmVudF9tb2Rl
+KQo+ID4gPiA+ICt7Cj4gPiA+ID4gK8KgwqDCoMKgwqDCoMKgaW50IHJldDsKPiA+ID4gPiArwqDC
+oMKgwqDCoMKgwqB1OCBidWZbMl07Cj4gPiA+ID4gK8KgwqDCoMKgwqDCoMKgdTggbW9kZV9yZWc7
+Cj4gPiA+ID4gKwo+ID4gPiA+ICvCoMKgwqDCoMKgwqDCoHJldCA9IGRybV9kcF9kcGNkX3JlYWRi
+KGF1eCwgRFBfRURQX0JBQ0tMSUdIVF9NT0RFX1NFVF9SRUdJU1RFUiwKPiA+ID4gPiAmbW9kZV9y
+ZWcpOwo+ID4gPiA+ICvCoMKgwqDCoMKgwqDCoGlmIChyZXQgIT0gMSkgewo+ID4gPiA+ICvCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBEUk1fREVCVUdfS01TKCIlczogRmFpbGVkIHRvIHJl
+YWQgYmFja2xpZ2h0IG1vZGU6ICVkXG4iLAo+ID4gPiA+IGF1eC0+bmFtZSwgcmV0KTsKPiA+ID4g
+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgcmV0dXJuIHJldCA8IDAgPyByZXQgOiAt
+RUlPOwo+ID4gPiA+ICvCoMKgwqDCoMKgwqDCoH0KPiA+ID4gPiArCj4gPiA+ID4gK8KgwqDCoMKg
+wqDCoMKgKmN1cnJlbnRfbW9kZSA9IChtb2RlX3JlZyAmIERQX0VEUF9CQUNLTElHSFRfQ09OVFJP
+TF9NT0RFX01BU0spOwo+ID4gPiA+ICvCoMKgwqDCoMKgwqDCoGlmICgqY3VycmVudF9tb2RlID09
+IERQX0VEUF9CQUNLTElHSFRfQ09OVFJPTF9NT0RFX0RQQ0QpIHsKPiA+ID4gPiArwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgaW50IHNpemUgPSAxICsgYmwtPmxzYl9yZWdfdXNlZDsKPiA+
+ID4gPiArCj4gPiA+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoHJldCA9IGRybV9k
+cF9kcGNkX3JlYWQoYXV4LAo+ID4gPiA+IERQX0VEUF9CQUNLTElHSFRfQlJJR0hUTkVTU19NU0Is
+Cj4gPiA+ID4gYnVmLCBzaXplKTsKPiA+ID4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgaWYgKHJldCAhPSBzaXplKSB7Cj4gPiA+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqBEUk1fREVCVUdfS01TKCIlczogRmFpbGVkIHRvIHJlYWQgYmFj
+a2xpZ2h0Cj4gPiA+ID4gbGV2ZWw6Cj4gPiA+ID4gJWRcbiIsIGF1eC0+bmFtZSwgcmV0KTsKPiA+
+ID4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoHJldHVy
+biByZXQgPCAwID8gcmV0IDogLUVJTzsKPiA+ID4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgfQo+ID4gPiA+ICsKPiA+ID4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+aWYgKGJsLT5sc2JfcmVnX3VzZWQpCj4gPiA+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqByZXR1cm4gKGJ1ZlswXSA8PCA4KSB8IGJ1ZlsxXTsKPiA+ID4g
+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgZWxzZQo+ID4gPiA+ICvCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgcmV0dXJuIGJ1ZlswXTsKPiA+ID4g
+PiArwqDCoMKgwqDCoMKgwqB9Cj4gPiA+ID4gKwo+ID4gPiA+ICvCoMKgwqDCoMKgwqDCoC8qCj4g
+PiA+ID4gK8KgwqDCoMKgwqDCoMKgICogSWYgd2UncmUgbm90IGluIERQQ0QgY29udHJvbCBtb2Rl
+IHlldCwgdGhlIHByb2dyYW1tZWQKPiA+ID4gPiBicmlnaHRuZXNzCj4gPiA+ID4gdmFsdWUgaXMg
+bWVhbmluZ2xlc3MgYW5kCj4gPiA+ID4gK8KgwqDCoMKgwqDCoMKgICogdGhlIGRyaXZlciBzaG91
+bGQgYXNzdW1lIG1heCBicmlnaHRuZXNzCj4gPiA+ID4gK8KgwqDCoMKgwqDCoMKgICovCj4gPiA+
+ID4gK8KgwqDCoMKgwqDCoMKgcmV0dXJuIGJsLT5tYXg7Cj4gPiA+ID4gK30KPiA+ID4gPiArCj4g
+PiA+ID4gKy8qKgo+ID4gPiA+ICsgKiBkcm1fZWRwX2JhY2tsaWdodF9pbml0KCkgLSBQcm9iZSBh
+IGRpc3BsYXkgcGFuZWwncyBUQ09OIHVzaW5nIHRoZQo+ID4gPiA+IHN0YW5kYXJkIFZFU0EgZURQ
+IGJhY2tsaWdodAo+ID4gPiA+ICsgKiBpbnRlcmZhY2UuCj4gPiA+ID4gKyAqIEBhdXg6IFRoZSBE
+UCBhdXggZGV2aWNlIHRvIHVzZSBmb3IgcHJvYmluZwo+ID4gPiA+ICsgKiBAYmw6IFRoZSAmZHJt
+X2VkcF9iYWNrbGlnaHRfaW5mbyBzdHJ1Y3QgdG8gZmlsbCBvdXQgd2l0aCBpbmZvcm1hdGlvbgo+
+ID4gPiA+IG9uCj4gPiA+ID4gdGhlIGJhY2tsaWdodAo+ID4gPiA+ICsgKiBAZHJpdmVyX3B3bV9m
+cmVxX2h6OiBPcHRpb25hbCBQV00gZnJlcXVlbmN5IGZyb20gdGhlIGRyaXZlciBpbiBoego+ID4g
+PiA+ICsgKiBAZWRwX2RwY2Q6IEEgY2FjaGVkIGNvcHkgb2YgdGhlIGVEUCBEUENECj4gPiA+ID4g
+KyAqIEBjdXJyZW50X2xldmVsOiBXaGVyZSB0byBzdG9yZSB0aGUgcHJvYmVkIGJyaWdodG5lc3Mg
+bGV2ZWwKPiA+ID4gPiArICogQGN1cnJlbnRfbW9kZTogV2hlcmUgdG8gc3RvcmUgdGhlIGN1cnJl
+bnRseSBzZXQgYmFja2xpZ2h0IGNvbnRyb2wKPiA+ID4gPiBtb2RlCj4gPiA+ID4gKyAqCj4gPiA+
+ID4gKyAqIEluaXRpYWxpemVzIGEgJmRybV9lZHBfYmFja2xpZ2h0X2luZm8gc3RydWN0IGJ5IHBy
+b2JpbmcgQGF1eCBmb3IKPiA+ID4gPiBpdCdzCj4gPiA+ID4gYmFja2xpZ2h0IGNhcGFiaWxpdGll
+cywKPiA+ID4gPiArICogYWxvbmcgd2l0aCBhbHNvIHByb2JpbmcgdGhlIGN1cnJlbnQgYW5kIG1h
+eGltdW0gc3VwcG9ydGVkIGJyaWdodG5lc3MKPiA+ID4gPiBsZXZlbHMuCj4gPiA+ID4gKyAqCj4g
+PiA+ID4gKyAqIElmIEBkcml2ZXJfcHdtX2ZyZXFfaHogaXMgbm9uLXplcm8sIHRoaXMgd2lsbCBi
+ZSB1c2VkIGFzIHRoZQo+ID4gPiA+IGJhY2tsaWdodAo+ID4gPiA+IGZyZXF1ZW5jeS4gT3RoZXJ3
+aXNlLCB0aGUKPiA+ID4gPiArICogZGVmYXVsdCBmcmVxdWVuY3kgZnJvbSB0aGUgcGFuZWwgaXMg
+dXNlZC4KPiA+ID4gPiArICoKPiA+ID4gPiArICogUmV0dXJuczogJTAgb24gc3VjY2VzcywgbmVn
+YXRpdmUgZXJyb3IgY29kZSBvbiBmYWlsdXJlLgo+ID4gPiA+ICsgKi8KPiA+ID4gPiAraW50Cj4g
+PiA+ID4gK2RybV9lZHBfYmFja2xpZ2h0X2luaXQoc3RydWN0IGRybV9kcF9hdXggKmF1eCwgc3Ry
+dWN0Cj4gPiA+ID4gZHJtX2VkcF9iYWNrbGlnaHRfaW5mbyAqYmwsCj4gPiA+ID4gK8KgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB1MTYgZHJpdmVyX3B3bV9mcmVxX2h6
+LCBjb25zdCB1OAo+ID4gPiA+IGVkcF9kcGNkW0VEUF9ESVNQTEFZX0NUTF9DQVBfU0laRV0sCj4g
+PiA+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB1MTYgKmN1
+cnJlbnRfbGV2ZWwsIHU4ICpjdXJyZW50X21vZGUpCj4gPiA+ID4gK3sKPiA+ID4gPiArwqDCoMKg
+wqDCoMKgwqBpbnQgcmV0Owo+ID4gPiA+ICsKPiA+ID4gPiArwqDCoMKgwqDCoMKgwqBpZiAoZWRw
+X2RwY2RbMV0gJiBEUF9FRFBfQkFDS0xJR0hUX0FVWF9FTkFCTEVfQ0FQKQo+ID4gPiA+ICvCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBibC0+YXV4X2VuYWJsZSA9IHRydWU7Cj4gPiA+ID4g
+K8KgwqDCoMKgwqDCoMKgaWYgKGVkcF9kcGNkWzJdICYgRFBfRURQX0JBQ0tMSUdIVF9CUklHSFRO
+RVNTX0JZVEVfQ09VTlQpCj4gPiA+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoGJs
+LT5sc2JfcmVnX3VzZWQgPSB0cnVlOwo+ID4gPiA+ICsKPiA+ID4gPiArwqDCoMKgwqDCoMKgwqBy
+ZXQgPSBkcm1fZWRwX2JhY2tsaWdodF9wcm9iZV9tYXgoYXV4LCBibCwgZHJpdmVyX3B3bV9mcmVx
+X2h6LAo+ID4gPiA+IGVkcF9kcGNkKTsKPiA+ID4gPiArwqDCoMKgwqDCoMKgwqBpZiAocmV0IDwg
+MCkKPiA+ID4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgcmV0dXJuIHJldDsKPiA+
+ID4gPiArCj4gPiA+ID4gK8KgwqDCoMKgwqDCoMKgcmV0ID0gZHJtX2VkcF9iYWNrbGlnaHRfcHJv
+YmVfbGV2ZWwoYXV4LCBibCwgY3VycmVudF9tb2RlKTsKPiA+ID4gPiArwqDCoMKgwqDCoMKgwqBp
+ZiAocmV0IDwgMCkKPiA+ID4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgcmV0dXJu
+IHJldDsKPiA+ID4gPiArwqDCoMKgwqDCoMKgwqAqY3VycmVudF9sZXZlbCA9IHJldDsKPiA+ID4g
+PiArCj4gPiA+ID4gK8KgwqDCoMKgwqDCoMKgRFJNX0RFQlVHX0tNUygiJXM6IEZvdW5kIGJhY2ts
+aWdodCBsZXZlbD0lZC8lZAo+ID4gPiA+IHB3bV9mcmVxX3ByZV9kaXZpZGVyPSVkIG1vZGU9JXhc
+biIsCj4gPiA+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgYXV4
+LT5uYW1lLCAqY3VycmVudF9sZXZlbCwgYmwtPm1heCwgYmwtCj4gPiA+ID4gPiBwd21fZnJlcV9w
+cmVfZGl2aWRlciwgKmN1cnJlbnRfbW9kZSk7Cj4gPiA+ID4gK8KgwqDCoMKgwqDCoMKgRFJNX0RF
+QlVHX0tNUygiJXM6IEJhY2tsaWdodCBjYXBzOiBwd21nZW5fYml0X2NvdW50PSVkCj4gPiA+ID4g
+bHNiX3JlZ191c2VkPSVkIGF1eF9lbmFibGU9JWRcbiIsCj4gPiA+ID4gK8KgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgYXV4LT5uYW1lLCBibC0+cHdtZ2VuX2JpdF9jb3Vu
+dCwgYmwtPmxzYl9yZWdfdXNlZCwKPiA+ID4gPiBibC0KPiA+ID4gPiA+IGF1eF9lbmFibGUpOwo+
+ID4gPiA+ICvCoMKgwqDCoMKgwqDCoHJldHVybiAwOwo+ID4gPiA+ICt9Cj4gPiA+ID4gK0VYUE9S
+VF9TWU1CT0woZHJtX2VkcF9iYWNrbGlnaHRfaW5pdCk7Cj4gPiA+ID4gZGlmZiAtLWdpdCBhL2Ry
+aXZlcnMvZ3B1L2RybS9pOTE1L2Rpc3BsYXkvaW50ZWxfZGlzcGxheV90eXBlcy5oCj4gPiA+ID4g
+Yi9kcml2ZXJzL2dwdS9kcm0vaTkxNS9kaXNwbGF5L2ludGVsX2Rpc3BsYXlfdHlwZXMuaAo+ID4g
+PiA+IGluZGV4IDE2ODI0ZWIzZWY5My4uMDMwNTFhYjc1ZDMwIDEwMDY0NAo+ID4gPiA+IC0tLSBh
+L2RyaXZlcnMvZ3B1L2RybS9pOTE1L2Rpc3BsYXkvaW50ZWxfZGlzcGxheV90eXBlcy5oCj4gPiA+
+ID4gKysrIGIvZHJpdmVycy9ncHUvZHJtL2k5MTUvZGlzcGxheS9pbnRlbF9kaXNwbGF5X3R5cGVz
+LmgKPiA+ID4gPiBAQCAtMjYzLDEwICsyNjMsNyBAQCBzdHJ1Y3QgaW50ZWxfcGFuZWwgewo+ID4g
+PiA+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAvKiBEUENEIGJhY2tsaWdodCAq
+Lwo+ID4gPiA+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqB1bmlvbiB7Cj4gPiA+
+ID4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBzdHJ1
+Y3Qgewo+ID4gPiA+IC3CoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoHU4IHB3bWdlbl9iaXRfY291bnQ7Cj4gPiA+ID4gLcKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgdTgg
+cHdtX2ZyZXFfcHJlX2RpdmlkZXI7Cj4gPiA+ID4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgYm9vbCBsc2JfcmVnX3VzZWQ7Cj4g
+PiA+ID4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgYm9vbCBhdXhfZW5hYmxlOwo+ID4gPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoHN0cnVjdCBkcm1fZWRw
+X2JhY2tsaWdodF9pbmZvIGluZm87Cj4gPiA+ID4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqB9IHZlc2E7Cj4gPiA+ID4gwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBzdHJ1Y3Qgewo+ID4gPiA+IMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oGJvb2wgc2RyX3VzZXNfYXV4Owo+ID4gPiA+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0v
+aTkxNS9kaXNwbGF5L2ludGVsX2RwX2F1eF9iYWNrbGlnaHQuYwo+ID4gPiA+IGIvZHJpdmVycy9n
+cHUvZHJtL2k5MTUvZGlzcGxheS9pbnRlbF9kcF9hdXhfYmFja2xpZ2h0LmMKPiA+ID4gPiBpbmRl
+eCA4MTNmNmM1NTMxNTYuLjI4NmViMzM3NDQ4ZSAxMDA2NDQKPiA+ID4gPiAtLS0gYS9kcml2ZXJz
+L2dwdS9kcm0vaTkxNS9kaXNwbGF5L2ludGVsX2RwX2F1eF9iYWNrbGlnaHQuYwo+ID4gPiA+ICsr
+KyBiL2RyaXZlcnMvZ3B1L2RybS9pOTE1L2Rpc3BsYXkvaW50ZWxfZHBfYXV4X2JhY2tsaWdodC5j
+Cj4gPiA+ID4gQEAgLTI3MCwxMTQgKzI3MCwxOSBAQCBpbnRlbF9kcF9hdXhfaGRyX3NldHVwX2Jh
+Y2tsaWdodChzdHJ1Y3QKPiA+ID4gPiBpbnRlbF9jb25uZWN0b3IgKmNvbm5lY3RvciwgZW51bSBw
+aXBlIHBpCj4gPiA+ID4gwqDCoCB9Cj4gPiA+ID4gwqDCoCAKPiA+ID4gPiDCoMKgIC8qIFZFU0Eg
+YmFja2xpZ2h0IGNhbGxiYWNrcyAqLwo+ID4gPiA+IC1zdGF0aWMgYm9vbCBpbnRlbF9kcF9hdXhf
+dmVzYV9iYWNrbGlnaHRfZHBjZF9tb2RlKHN0cnVjdAo+ID4gPiA+IGludGVsX2Nvbm5lY3Rvcgo+
+ID4gPiA+ICpjb25uZWN0b3IpCj4gPiA+ID4gLXsKPiA+ID4gPiAtwqDCoMKgwqDCoMKgwqBzdHJ1
+Y3QgaW50ZWxfZHAgKmludGVsX2RwID0gaW50ZWxfYXR0YWNoZWRfZHAoY29ubmVjdG9yKTsKPiA+
+ID4gPiAtwqDCoMKgwqDCoMKgwqBzdHJ1Y3QgZHJtX2k5MTVfcHJpdmF0ZSAqaTkxNSA9IGRwX3Rv
+X2k5MTUoaW50ZWxfZHApOwo+ID4gPiA+IC3CoMKgwqDCoMKgwqDCoGludCByZXQ7Cj4gPiA+ID4g
+LcKgwqDCoMKgwqDCoMKgdTggbW9kZV9yZWc7Cj4gPiA+ID4gLQo+ID4gPiA+IC3CoMKgwqDCoMKg
+wqDCoHJldCA9IGRybV9kcF9kcGNkX3JlYWRiKCZpbnRlbF9kcC0+YXV4LAo+ID4gPiA+IERQX0VE
+UF9CQUNLTElHSFRfTU9ERV9TRVRfUkVHSVNURVIsICZtb2RlX3JlZyk7Cj4gPiA+ID4gLcKgwqDC
+oMKgwqDCoMKgaWYgKHJldCAhPSAxKSB7Cj4gPiA+ID4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoGRybV9kYmdfa21zKCZpOTE1LT5kcm0sICJGYWlsZWQgdG8gcmVhZCBiYWNrbGlnaHQg
+bW9kZToKPiA+ID4gPiAlZFxuIiwgcmV0KTsKPiA+ID4gPiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgcmV0dXJuIGZhbHNlOwo+ID4gPiA+IC3CoMKgwqDCoMKgwqDCoH0KPiA+ID4gPiAt
+Cj4gPiA+ID4gLcKgwqDCoMKgwqDCoMKgcmV0dXJuIChtb2RlX3JlZyAmIERQX0VEUF9CQUNLTElH
+SFRfQ09OVFJPTF9NT0RFX01BU0spID09Cj4gPiA+ID4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgIERQX0VEUF9CQUNLTElHSFRfQ09OVFJPTF9NT0RFX0RQQ0Q7Cj4gPiA+ID4gLX0KPiA+ID4g
+PiAtCj4gPiA+ID4gLS8qCj4gPiA+ID4gLSAqIFJlYWQgdGhlIGN1cnJlbnQgYmFja2xpZ2h0IHZh
+bHVlIGZyb20gRFBDRCByZWdpc3RlcihzKSBiYXNlZAo+ID4gPiA+IC0gKiBvbiBpZiA4LWJpdChN
+U0IpIG9yIDE2LWJpdChNU0IgYW5kIExTQikgdmFsdWVzIGFyZSBzdXBwb3J0ZWQKPiA+ID4gPiAt
+ICovCj4gPiA+ID4gwqDCoCBzdGF0aWMgdTMyIGludGVsX2RwX2F1eF92ZXNhX2dldF9iYWNrbGln
+aHQoc3RydWN0IGludGVsX2Nvbm5lY3Rvcgo+ID4gPiA+ICpjb25uZWN0b3IsIGVudW0gcGlwZSB1
+bnVzZWQpCj4gPiA+ID4gwqDCoCB7Cj4gPiA+ID4gLcKgwqDCoMKgwqDCoMKgc3RydWN0IGludGVs
+X2RwICppbnRlbF9kcCA9IGludGVsX2F0dGFjaGVkX2RwKGNvbm5lY3Rvcik7Cj4gPiA+ID4gLcKg
+wqDCoMKgwqDCoMKgc3RydWN0IGRybV9pOTE1X3ByaXZhdGUgKmk5MTUgPSBkcF90b19pOTE1KGlu
+dGVsX2RwKTsKPiA+ID4gPiAtwqDCoMKgwqDCoMKgwqBpbnQgcmV0Owo+ID4gPiA+IC3CoMKgwqDC
+oMKgwqDCoHU4IHJlYWRfdmFsWzJdID0geyAweDAgfTsKPiA+ID4gPiAtwqDCoMKgwqDCoMKgwqB1
+MTYgbGV2ZWwgPSAwOwo+ID4gPiA+IC0KPiA+ID4gPiAtwqDCoMKgwqDCoMKgwqAvKgo+ID4gPiA+
+IC3CoMKgwqDCoMKgwqDCoCAqIElmIHdlJ3JlIG5vdCBpbiBEUENEIGNvbnRyb2wgbW9kZSB5ZXQs
+IHRoZSBwcm9ncmFtbWVkCj4gPiA+ID4gYnJpZ2h0bmVzcwo+ID4gPiA+IC3CoMKgwqDCoMKgwqDC
+oCAqIHZhbHVlIGlzIG1lYW5pbmdsZXNzIGFuZCB3ZSBzaG91bGQgYXNzdW1lIG1heCBicmlnaHRu
+ZXNzCj4gPiA+ID4gLcKgwqDCoMKgwqDCoMKgICovCj4gPiA+ID4gLcKgwqDCoMKgwqDCoMKgaWYg
+KCFpbnRlbF9kcF9hdXhfdmVzYV9iYWNrbGlnaHRfZHBjZF9tb2RlKGNvbm5lY3RvcikpCj4gPiA+
+ID4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoHJldHVybiBjb25uZWN0b3ItPnBhbmVs
+LmJhY2tsaWdodC5tYXg7Cj4gPiA+ID4gLQo+ID4gPiA+IC3CoMKgwqDCoMKgwqDCoHJldCA9IGRy
+bV9kcF9kcGNkX3JlYWQoJmludGVsX2RwLT5hdXgsCj4gPiA+ID4gRFBfRURQX0JBQ0tMSUdIVF9C
+UklHSFRORVNTX01TQiwgJnJlYWRfdmFsLAo+ID4gPiA+IC3CoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHNpemVvZihyZWFkX3ZhbCkpOwo+
+ID4gPiA+IC3CoMKgwqDCoMKgwqDCoGlmIChyZXQgIT0gc2l6ZW9mKHJlYWRfdmFsKSkgewo+ID4g
+PiA+IC3CoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBkcm1fZGJnX2ttcygmaTkxNS0+ZHJt
+LCAiRmFpbGVkIHRvIHJlYWQgYnJpZ2h0bmVzcwo+ID4gPiA+IGxldmVsOgo+ID4gPiA+ICVkXG4i
+LCByZXQpOwo+ID4gPiA+IC3CoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqByZXR1cm4gMDsK
+PiA+ID4gPiAtwqDCoMKgwqDCoMKgwqB9Cj4gPiA+ID4gLQo+ID4gPiA+IC3CoMKgwqDCoMKgwqDC
+oGlmIChjb25uZWN0b3ItPnBhbmVsLmJhY2tsaWdodC5lZHAudmVzYS5sc2JfcmVnX3VzZWQpCj4g
+PiA+ID4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoGxldmVsID0gKHJlYWRfdmFsWzBd
+IDw8IDggfCByZWFkX3ZhbFsxXSk7Cj4gPiA+ID4gLcKgwqDCoMKgwqDCoMKgZWxzZQo+ID4gPiA+
+IC3CoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBsZXZlbCA9IHJlYWRfdmFsWzBdOwo+ID4g
+PiA+IC0KPiA+ID4gPiAtwqDCoMKgwqDCoMKgwqByZXR1cm4gbGV2ZWw7Cj4gPiA+ID4gK8KgwqDC
+oMKgwqDCoMKgcmV0dXJuIGNvbm5lY3Rvci0+cGFuZWwuYmFja2xpZ2h0LmxldmVsOwo+ID4gPiA+
+IMKgwqAgfQo+ID4gPiA+IMKgwqAgCj4gPiA+ID4gLS8qCj4gPiA+ID4gLSAqIFNlbmRzIHRoZSBj
+dXJyZW50IGJhY2tsaWdodCBsZXZlbCBvdmVyIHRoZSBhdXggY2hhbm5lbCwgY2hlY2tpbmcgaWYK
+PiA+ID4gPiBpdHMKPiA+ID4gPiB1c2luZwo+ID4gPiA+IC0gKiA4LWJpdCBvciAxNiBiaXQgdmFs
+dWUgKE1TQiBhbmQgTFNCKQo+ID4gPiA+IC0gKi8KPiA+ID4gPiDCoMKgIHN0YXRpYyB2b2lkCj4g
+PiA+ID4gLWludGVsX2RwX2F1eF92ZXNhX3NldF9iYWNrbGlnaHQoY29uc3Qgc3RydWN0IGRybV9j
+b25uZWN0b3Jfc3RhdGUKPiA+ID4gPiAqY29ubl9zdGF0ZSwKPiA+ID4gPiAtwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqB1MzIgbGV2
+ZWwpCj4gPiA+ID4gK2ludGVsX2RwX2F1eF92ZXNhX3NldF9iYWNrbGlnaHQoY29uc3Qgc3RydWN0
+IGRybV9jb25uZWN0b3Jfc3RhdGUKPiA+ID4gPiAqY29ubl9zdGF0ZSwgdTMyIGxldmVsKQo+ID4g
+PiA+IMKgwqAgewo+ID4gPiA+IMKgwqDCoMKgwqDCoMKgwqDCoHN0cnVjdCBpbnRlbF9jb25uZWN0
+b3IgKmNvbm5lY3RvciA9Cj4gPiA+ID4gdG9faW50ZWxfY29ubmVjdG9yKGNvbm5fc3RhdGUtCj4g
+PiA+ID4gPiBjb25uZWN0b3IpOwo+ID4gPiA+IC3CoMKgwqDCoMKgwqDCoHN0cnVjdCBpbnRlbF9k
+cCAqaW50ZWxfZHAgPSBpbnRlbF9hdHRhY2hlZF9kcChjb25uZWN0b3IpOwo+ID4gPiA+IC3CoMKg
+wqDCoMKgwqDCoHN0cnVjdCBkcm1faTkxNV9wcml2YXRlICppOTE1ID0gZHBfdG9faTkxNShpbnRl
+bF9kcCk7Cj4gPiA+ID4gLcKgwqDCoMKgwqDCoMKgaW50IHJldDsKPiA+ID4gPiAtwqDCoMKgwqDC
+oMKgwqB1OCB2YWxzWzJdID0geyAweDAgfTsKPiA+ID4gPiAtCj4gPiA+ID4gLcKgwqDCoMKgwqDC
+oMKgLyogV3JpdGUgdGhlIE1TQiBhbmQvb3IgTFNCICovCj4gPiA+ID4gLcKgwqDCoMKgwqDCoMKg
+aWYgKGNvbm5lY3Rvci0+cGFuZWwuYmFja2xpZ2h0LmVkcC52ZXNhLmxzYl9yZWdfdXNlZCkgewo+
+ID4gPiA+IC3CoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqB2YWxzWzBdID0gKGxldmVsICYg
+MHhGRjAwKSA+PiA4Owo+ID4gPiA+IC3CoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqB2YWxz
+WzFdID0gKGxldmVsICYgMHhGRik7Cj4gPiA+ID4gLcKgwqDCoMKgwqDCoMKgfSBlbHNlIHsKPiA+
+ID4gPiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgdmFsc1swXSA9IGxldmVsOwo+ID4g
+PiA+IC3CoMKgwqDCoMKgwqDCoH0KPiA+ID4gPiAtCj4gPiA+ID4gLcKgwqDCoMKgwqDCoMKgcmV0
+ID0gZHJtX2RwX2RwY2Rfd3JpdGUoJmludGVsX2RwLT5hdXgsCj4gPiA+ID4gRFBfRURQX0JBQ0tM
+SUdIVF9CUklHSFRORVNTX01TQiwgdmFscywKPiA+ID4gPiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBzaXplb2YodmFscykpOwo+
+ID4gPiA+IC3CoMKgwqDCoMKgwqDCoGlmIChyZXQgIT0gc2l6ZW9mKHZhbHMpKSB7Cj4gPiA+ID4g
+LcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoGRybV9kYmdfa21zKCZpOTE1LT5kcm0sICJG
+YWlsZWQgdG8gd3JpdGUgYXV4IGJhY2tsaWdodAo+ID4gPiA+IGxldmVsOiAlZFxuIiwgcmV0KTsK
+PiA+ID4gPiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgcmV0dXJuOwo+ID4gPiA+IC3C
+oMKgwqDCoMKgwqDCoH0KPiA+ID4gPiAtfQo+ID4gPiA+IC0KPiA+ID4gPiAtc3RhdGljIHZvaWQg
+c2V0X3Zlc2FfYmFja2xpZ2h0X2VuYWJsZShzdHJ1Y3QgaW50ZWxfY29ubmVjdG9yCj4gPiA+ID4g
+KmNvbm5lY3RvciwKPiA+ID4gPiBib29sIGVuYWJsZSkKPiA+ID4gPiAtewo+ID4gPiA+IC3CoMKg
+wqDCoMKgwqDCoHN0cnVjdCBpbnRlbF9kcCAqaW50ZWxfZHAgPSBpbnRlbF9hdHRhY2hlZF9kcChj
+b25uZWN0b3IpOwo+ID4gPiA+IC3CoMKgwqDCoMKgwqDCoHN0cnVjdCBkcm1faTkxNV9wcml2YXRl
+ICppOTE1ID0gZHBfdG9faTkxNShpbnRlbF9kcCk7Cj4gPiA+ID4gLcKgwqDCoMKgwqDCoMKgaW50
+IHJldDsKPiA+ID4gPiAtwqDCoMKgwqDCoMKgwqB1OCByZWdfdmFsID0gMDsKPiA+ID4gPiAtCj4g
+PiA+ID4gLcKgwqDCoMKgwqDCoMKgLyogRWFybHkgcmV0dXJuIHdoZW4gZGlzcGxheSB1c2Ugb3Ro
+ZXIgbWVjaGFuaXNtIHRvIGVuYWJsZQo+ID4gPiA+IGJhY2tsaWdodC4gKi8KPiA+ID4gPiAtwqDC
+oMKgwqDCoMKgwqBpZiAoIWNvbm5lY3Rvci0+cGFuZWwuYmFja2xpZ2h0LmVkcC52ZXNhLmF1eF9l
+bmFibGUpCj4gPiA+ID4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoHJldHVybjsKPiA+
+ID4gPiAtCj4gPiA+ID4gLcKgwqDCoMKgwqDCoMKgcmV0ID0gZHJtX2RwX2RwY2RfcmVhZGIoJmlu
+dGVsX2RwLT5hdXgsCj4gPiA+ID4gRFBfRURQX0RJU1BMQVlfQ09OVFJPTF9SRUdJU1RFUiwgJnJl
+Z192YWwpOwo+ID4gPiA+IC3CoMKgwqDCoMKgwqDCoGlmIChyZXQgIT0gMSkgewo+ID4gPiA+IC3C
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBkcm1fZGJnX2ttcygmaTkxNS0+ZHJtLCAiRmFp
+bGVkIHRvIHJlYWQgZURQIGRpc3BsYXkKPiA+ID4gPiBjb250cm9sCj4gPiA+ID4gcmVnaXN0ZXI6
+ICVkXG4iLCByZXQpOwo+ID4gPiA+IC3CoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqByZXR1
+cm47Cj4gPiA+ID4gLcKgwqDCoMKgwqDCoMKgfQo+ID4gPiA+IC0KPiA+ID4gPiAtwqDCoMKgwqDC
+oMKgwqBpZiAoZW5hYmxlKQo+ID4gPiA+IC3CoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBy
+ZWdfdmFsIHw9IERQX0VEUF9CQUNLTElHSFRfRU5BQkxFOwo+ID4gPiA+IC3CoMKgwqDCoMKgwqDC
+oGVsc2UKPiA+ID4gPiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgcmVnX3ZhbCAmPSB+
+KERQX0VEUF9CQUNLTElHSFRfRU5BQkxFKTsKPiA+ID4gPiArwqDCoMKgwqDCoMKgwqBzdHJ1Y3Qg
+aW50ZWxfcGFuZWwgKnBhbmVsID0gJmNvbm5lY3Rvci0+cGFuZWw7Cj4gPiA+ID4gK8KgwqDCoMKg
+wqDCoMKgc3RydWN0IGludGVsX2RwICppbnRlbF9kcCA9IGVuY190b19pbnRlbF9kcChjb25uZWN0
+b3ItPmVuY29kZXIpOwo+ID4gPiA+IMKgwqAgCj4gPiA+ID4gLcKgwqDCoMKgwqDCoMKgcmV0ID0g
+ZHJtX2RwX2RwY2Rfd3JpdGViKCZpbnRlbF9kcC0+YXV4LAo+ID4gPiA+IERQX0VEUF9ESVNQTEFZ
+X0NPTlRST0xfUkVHSVNURVIsIHJlZ192YWwpOwo+ID4gPiA+IC3CoMKgwqDCoMKgwqDCoGlmIChy
+ZXQgIT0gMSkgewo+ID4gPiA+IC3CoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBkcm1fZGJn
+X2ttcygmaTkxNS0+ZHJtLCAiRmFpbGVkIHRvICVzIGF1eCBiYWNrbGlnaHQ6Cj4gPiA+ID4gJWRc
+biIsCj4gPiA+ID4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqAgZW5hYmxlID8gImVuYWJsZSIgOiAiZGlzYWJsZSIsIHJldCk7Cj4gPiA+ID4gLcKg
+wqDCoMKgwqDCoMKgfQo+ID4gPiA+ICvCoMKgwqDCoMKgwqDCoGRybV9lZHBfYmFja2xpZ2h0X3Nl
+dF9sZXZlbCgmaW50ZWxfZHAtPmF1eCwgJnBhbmVsLQo+ID4gPiA+ID4gYmFja2xpZ2h0LmVkcC52
+ZXNhLmluZm8sIGxldmVsKTsKPiA+ID4gPiDCoMKgIH0KPiA+ID4gPiDCoMKgIAo+ID4gPiA+IMKg
+wqAgc3RhdGljIHZvaWQKPiA+ID4gPiBAQCAtMzg1LDE3MCArMjkwLDQ2IEBAIGludGVsX2RwX2F1
+eF92ZXNhX2VuYWJsZV9iYWNrbGlnaHQoY29uc3Qgc3RydWN0Cj4gPiA+ID4gaW50ZWxfY3J0Y19z
+dGF0ZSAqY3J0Y19zdGF0ZSwKPiA+ID4gPiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGNvbnN0IHN0cnVjdCBkcm1f
+Y29ubmVjdG9yX3N0YXRlCj4gPiA+ID4gKmNvbm5fc3RhdGUsIHUzMiBsZXZlbCkKPiA+ID4gPiDC
+oMKgIHsKPiA+ID4gPiDCoMKgwqDCoMKgwqDCoMKgwqBzdHJ1Y3QgaW50ZWxfY29ubmVjdG9yICpj
+b25uZWN0b3IgPQo+ID4gPiA+IHRvX2ludGVsX2Nvbm5lY3Rvcihjb25uX3N0YXRlLQo+ID4gPiA+
+ID4gY29ubmVjdG9yKTsKPiA+ID4gPiAtwqDCoMKgwqDCoMKgwqBzdHJ1Y3QgaW50ZWxfZHAgKmlu
+dGVsX2RwID0gaW50ZWxfYXR0YWNoZWRfZHAoY29ubmVjdG9yKTsKPiA+ID4gPiAtwqDCoMKgwqDC
+oMKgwqBzdHJ1Y3QgZHJtX2k5MTVfcHJpdmF0ZSAqaTkxNSA9IGRwX3RvX2k5MTUoaW50ZWxfZHAp
+Owo+ID4gPiA+IMKgwqDCoMKgwqDCoMKgwqDCoHN0cnVjdCBpbnRlbF9wYW5lbCAqcGFuZWwgPSAm
+Y29ubmVjdG9yLT5wYW5lbDsKPiA+ID4gPiAtwqDCoMKgwqDCoMKgwqBpbnQgcmV0Owo+ID4gPiA+
+IC3CoMKgwqDCoMKgwqDCoHU4IGRwY2RfYnVmLCBuZXdfZHBjZF9idWY7Cj4gPiA+ID4gLcKgwqDC
+oMKgwqDCoMKgdTggcHdtZ2VuX2JpdF9jb3VudCA9IHBhbmVsLQo+ID4gPiA+ID5iYWNrbGlnaHQu
+ZWRwLnZlc2EucHdtZ2VuX2JpdF9jb3VudDsKPiA+ID4gPiAtCj4gPiA+ID4gLcKgwqDCoMKgwqDC
+oMKgcmV0ID0gZHJtX2RwX2RwY2RfcmVhZGIoJmludGVsX2RwLT5hdXgsCj4gPiA+ID4gRFBfRURQ
+X0JBQ0tMSUdIVF9NT0RFX1NFVF9SRUdJU1RFUiwgJmRwY2RfYnVmKTsKPiA+ID4gPiAtwqDCoMKg
+wqDCoMKgwqBpZiAocmV0ICE9IDEpIHsKPiA+ID4gPiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgZHJtX2RiZ19rbXMoJmk5MTUtPmRybSwgIkZhaWxlZCB0byByZWFkIGJhY2tsaWdodCBt
+b2RlOgo+ID4gPiA+ICVkXG4iLCByZXQpOwo+ID4gPiA+IC3CoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqByZXR1cm47Cj4gPiA+ID4gLcKgwqDCoMKgwqDCoMKgfQo+ID4gPiA+IC0KPiA+ID4g
+PiAtwqDCoMKgwqDCoMKgwqBuZXdfZHBjZF9idWYgPSBkcGNkX2J1ZjsKPiA+ID4gPiAtCj4gPiA+
+ID4gLcKgwqDCoMKgwqDCoMKgaWYgKChkcGNkX2J1ZiAmIERQX0VEUF9CQUNLTElHSFRfQ09OVFJP
+TF9NT0RFX01BU0spICE9Cj4gPiA+ID4gRFBfRURQX0JBQ0tMSUdIVF9DT05UUk9MX01PREVfTUFT
+Sykgewo+ID4gPiA+IC3CoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBuZXdfZHBjZF9idWYg
+Jj0gfkRQX0VEUF9CQUNLTElHSFRfQ09OVFJPTF9NT0RFX01BU0s7Cj4gPiA+ID4gLcKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoG5ld19kcGNkX2J1ZiB8PSBEUF9FRFBfQkFDS0xJR0hUX0NP
+TlRST0xfTU9ERV9EUENEOwo+ID4gPiA+IC0KPiA+ID4gPiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgcmV0ID0gZHJtX2RwX2RwY2Rfd3JpdGViKCZpbnRlbF9kcC0+YXV4LAo+ID4gPiA+
+IERQX0VEUF9QV01HRU5fQklUX0NPVU5ULCBwd21nZW5fYml0X2NvdW50KTsKPiA+ID4gPiAtwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgaWYgKHJldCAhPSAxKQo+ID4gPiA+IC3CoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgZHJtX2RiZ19rbXMoJmk5MTUt
+PmRybSwgIkZhaWxlZCB0byB3cml0ZSBhdXgKPiA+ID4gPiBwd21nZW4KPiA+ID4gPiBiaXQgY291
+bnQ6ICVkXG4iLCByZXQpOwo+ID4gPiA+IC3CoMKgwqDCoMKgwqDCoH0KPiA+ID4gPiAtCj4gPiA+
+ID4gLcKgwqDCoMKgwqDCoMKgaWYgKHBhbmVsLT5iYWNrbGlnaHQuZWRwLnZlc2EucHdtX2ZyZXFf
+cHJlX2RpdmlkZXIpIHsKPiA+ID4gPiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgcmV0
+ID0gZHJtX2RwX2RwY2Rfd3JpdGViKCZpbnRlbF9kcC0+YXV4LAo+ID4gPiA+IERQX0VEUF9CQUNL
+TElHSFRfRlJFUV9TRVQsCj4gPiA+ID4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBwYW5lbC0KPiA+
+ID4gPiA+IGJhY2tsaWdodC5lZHAudmVzYS5wd21fZnJlcV9wcmVfZGl2aWRlcik7Cj4gPiA+ID4g
+LcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoGlmIChyZXQgPT0gMSkKPiA+ID4gPiAtwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoG5ld19kcGNkX2J1ZiB8
+PQo+ID4gPiA+IERQX0VEUF9CQUNLTElHSFRfRlJFUV9BVVhfU0VUX0VOQUJMRTsKPiA+ID4gPiAt
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgZWxzZQo+ID4gPiA+IC3CoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgZHJtX2RiZ19rbXMoJmk5MTUtPmRybSwg
+IkZhaWxlZCB0byB3cml0ZSBhdXgKPiA+ID4gPiBiYWNrbGlnaHQgZnJlcXVlbmN5OiAlZFxuIiwK
+PiA+ID4gPiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqAgcmV0KTsKPiA+ID4gPiAtwqDCoMKgwqDCoMKgwqB9Cj4gPiA+
+ID4gLQo+ID4gPiA+IC3CoMKgwqDCoMKgwqDCoGlmIChuZXdfZHBjZF9idWYgIT0gZHBjZF9idWYp
+IHsKPiA+ID4gPiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgcmV0ID0gZHJtX2RwX2Rw
+Y2Rfd3JpdGViKCZpbnRlbF9kcC0+YXV4LAo+ID4gPiA+IERQX0VEUF9CQUNLTElHSFRfTU9ERV9T
+RVRfUkVHSVNURVIsCj4gPiA+ID4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBuZXdfZHBjZF9idWYp
+Owo+ID4gPiA+IC3CoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBpZiAocmV0ICE9IDEpCj4g
+PiA+ID4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBkcm1f
+ZGJnX2ttcygmaTkxNS0+ZHJtLCAiRmFpbGVkIHRvIHdyaXRlIGF1eAo+ID4gPiA+IGJhY2tsaWdo
+dCBtb2RlOiAlZFxuIiwgcmV0KTsKPiA+ID4gPiAtwqDCoMKgwqDCoMKgwqB9Cj4gPiA+ID4gK8Kg
+wqDCoMKgwqDCoMKgc3RydWN0IGludGVsX2RwICppbnRlbF9kcCA9IGVuY190b19pbnRlbF9kcChj
+b25uZWN0b3ItPmVuY29kZXIpOwo+ID4gPiA+IMKgwqAgCj4gPiA+ID4gLcKgwqDCoMKgwqDCoMKg
+aW50ZWxfZHBfYXV4X3Zlc2Ffc2V0X2JhY2tsaWdodChjb25uX3N0YXRlLCBsZXZlbCk7Cj4gPiA+
+ID4gLcKgwqDCoMKgwqDCoMKgc2V0X3Zlc2FfYmFja2xpZ2h0X2VuYWJsZShjb25uZWN0b3IsIHRy
+dWUpOwo+ID4gPiA+ICvCoMKgwqDCoMKgwqDCoGRybV9lZHBfYmFja2xpZ2h0X2VuYWJsZSgmaW50
+ZWxfZHAtPmF1eCwgJnBhbmVsLQo+ID4gPiA+ID4gYmFja2xpZ2h0LmVkcC52ZXNhLmluZm8sIGxl
+dmVsKTsKPiA+ID4gPiDCoMKgIH0KPiA+ID4gPiDCoMKgIAo+ID4gPiA+IMKgwqAgc3RhdGljIHZv
+aWQgaW50ZWxfZHBfYXV4X3Zlc2FfZGlzYWJsZV9iYWNrbGlnaHQoY29uc3Qgc3RydWN0Cj4gPiA+
+ID4gZHJtX2Nvbm5lY3Rvcl9zdGF0ZSAqb2xkX2Nvbm5fc3RhdGUsCj4gPiA+ID4gwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqB1MzIgbGV2ZWwpCj4gPiA+ID4gwqDCoCB7
+Cj4gPiA+ID4gLcKgwqDCoMKgwqDCoMKgc2V0X3Zlc2FfYmFja2xpZ2h0X2VuYWJsZSh0b19pbnRl
+bF9jb25uZWN0b3Iob2xkX2Nvbm5fc3RhdGUtCj4gPiA+ID4gPiBjb25uZWN0b3IpLCBmYWxzZSk7
+Cj4gPiA+ID4gLX0KPiA+ID4gPiAtCj4gPiA+ID4gLS8qCj4gPiA+ID4gLSAqIENvbXB1dGUgUFdN
+IGZyZXF1ZW5jeSBkaXZpZGVyIHZhbHVlIGJhc2VkIG9mZiB0aGUgZnJlcXVlbmN5IHByb3ZpZGVk
+Cj4gPiA+ID4gdG8KPiA+ID4gPiB1cyBieSB0aGUgdmJ0Lgo+ID4gPiA+IC0gKiBUaGUgUFdNIEZy
+ZXF1ZW5jeSBpcyBjYWxjdWxhdGVkIGFzIDI3TWh6IC8gKEYgeCBQKS4KPiA+ID4gPiAtICogLSBX
+aGVyZSBGID0gUFdNIEZyZXF1ZW5jeSBQcmUtRGl2aWRlciB2YWx1ZSBwcm9ncmFtbWVkIGJ5IGZp
+ZWxkIDc6MAo+ID4gPiA+IG9mCj4gPiA+ID4gdGhlCj4gPiA+ID4gLSAqwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgIEVEUF9CQUNLTElHSFRfRlJFUV9TRVQgcmVnaXN0ZXIgKERQQ0QgQWRkcmVzcyAw
+MDcyOGgpCj4gPiA+ID4gLSAqIC0gV2hlcmUgUCA9IDJeUG4sIHdoZXJlIFBuIGlzIHRoZSB2YWx1
+ZSBwcm9ncmFtbWVkIGJ5IGZpZWxkIDQ6MCBvZgo+ID4gPiA+IHRoZQo+ID4gPiA+IC0gKsKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoCBFRFBfUFdNR0VOX0JJVF9DT1VOVCByZWdpc3RlciAoRFBDRCBB
+ZGRyZXNzIDAwNzI0aCkKPiA+ID4gPiAtICovCj4gPiA+ID4gLXN0YXRpYyB1MzIgaW50ZWxfZHBf
+YXV4X3Zlc2FfY2FsY19tYXhfYmFja2xpZ2h0KHN0cnVjdCBpbnRlbF9jb25uZWN0b3IKPiA+ID4g
+PiAqY29ubmVjdG9yKQo+ID4gPiA+IC17Cj4gPiA+ID4gLcKgwqDCoMKgwqDCoMKgc3RydWN0IGRy
+bV9pOTE1X3ByaXZhdGUgKmk5MTUgPSB0b19pOTE1KGNvbm5lY3Rvci0+YmFzZS5kZXYpOwo+ID4g
+PiA+IC3CoMKgwqDCoMKgwqDCoHN0cnVjdCBpbnRlbF9kcCAqaW50ZWxfZHAgPSBpbnRlbF9hdHRh
+Y2hlZF9kcChjb25uZWN0b3IpOwo+ID4gPiA+ICvCoMKgwqDCoMKgwqDCoHN0cnVjdCBpbnRlbF9j
+b25uZWN0b3IgKmNvbm5lY3RvciA9Cj4gPiA+ID4gdG9faW50ZWxfY29ubmVjdG9yKG9sZF9jb25u
+X3N0YXRlLT5jb25uZWN0b3IpOwo+ID4gPiA+IMKgwqDCoMKgwqDCoMKgwqDCoHN0cnVjdCBpbnRl
+bF9wYW5lbCAqcGFuZWwgPSAmY29ubmVjdG9yLT5wYW5lbDsKPiA+ID4gPiAtwqDCoMKgwqDCoMKg
+wqB1MzIgbWF4X2JhY2tsaWdodCA9IDA7Cj4gPiA+ID4gLcKgwqDCoMKgwqDCoMKgaW50IHJldCwg
+ZnJlcSwgZnhwLCBmeHBfbWluLCBmeHBfbWF4LCBmeHBfYWN0dWFsLCBmID0gMTsKPiA+ID4gPiAt
+wqDCoMKgwqDCoMKgwqB1OCBwbiwgcG5fbWluLCBwbl9tYXg7Cj4gPiA+ID4gLQo+ID4gPiA+IC3C
+oMKgwqDCoMKgwqDCoHJldCA9IGRybV9kcF9kcGNkX3JlYWRiKCZpbnRlbF9kcC0+YXV4LCBEUF9F
+RFBfUFdNR0VOX0JJVF9DT1VOVCwKPiA+ID4gPiAmcG4pOwo+ID4gPiA+IC3CoMKgwqDCoMKgwqDC
+oGlmIChyZXQgIT0gMSkgewo+ID4gPiA+IC3CoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBk
+cm1fZGJnX2ttcygmaTkxNS0+ZHJtLCAiRmFpbGVkIHRvIHJlYWQgcHdtZ2VuIGJpdCBjb3VudAo+
+ID4gPiA+IGNhcDogJWRcbiIsIHJldCk7Cj4gPiA+ID4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoHJldHVybiAwOwo+ID4gPiA+IC3CoMKgwqDCoMKgwqDCoH0KPiA+ID4gPiAtCj4gPiA+
+ID4gLcKgwqDCoMKgwqDCoMKgcG4gJj0gRFBfRURQX1BXTUdFTl9CSVRfQ09VTlRfTUFTSzsKPiA+
+ID4gPiAtwqDCoMKgwqDCoMKgwqBtYXhfYmFja2xpZ2h0ID0gKDEgPDwgcG4pIC0gMTsKPiA+ID4g
+PiAtCj4gPiA+ID4gLcKgwqDCoMKgwqDCoMKgLyogRmluZCBkZXNpcmVkIHZhbHVlIG9mIChGIHgg
+UCkKPiA+ID4gPiAtwqDCoMKgwqDCoMKgwqAgKiBOb3RlIHRoYXQsIGlmIEYgeCBQIGlzIG91dCBv
+ZiBzdXBwb3J0ZWQgcmFuZ2UsIHRoZSBtYXhpbXVtCj4gPiA+ID4gdmFsdWUKPiA+ID4gPiBvcgo+
+ID4gPiA+IC3CoMKgwqDCoMKgwqDCoCAqIG1pbmltdW0gdmFsdWUgd2lsbCBhcHBsaWVkIGF1dG9t
+YXRpY2FsbHkuIFNvIG5vIG5lZWQgdG8gY2hlY2sKPiA+ID4gPiB0aGF0Lgo+ID4gPiA+IC3CoMKg
+wqDCoMKgwqDCoCAqLwo+ID4gPiA+IC3CoMKgwqDCoMKgwqDCoGZyZXEgPSBpOTE1LT52YnQuYmFj
+a2xpZ2h0LnB3bV9mcmVxX2h6Owo+ID4gPiA+IC3CoMKgwqDCoMKgwqDCoGRybV9kYmdfa21zKCZp
+OTE1LT5kcm0sICJWQlQgZGVmaW5lZCBiYWNrbGlnaHQgZnJlcXVlbmN5ICV1Cj4gPiA+ID4gSHpc
+biIsCj4gPiA+ID4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBmcmVxKTsK
+PiA+ID4gPiAtwqDCoMKgwqDCoMKgwqBpZiAoIWZyZXEpIHsKPiA+ID4gPiAtwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgZHJtX2RiZ19rbXMoJmk5MTUtPmRybSwKPiA+ID4gPiAtwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCAiVXNlIHBhbmVs
+IGRlZmF1bHQgYmFja2xpZ2h0IGZyZXF1ZW5jeVxuIik7Cj4gPiA+ID4gLcKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoHJldHVybiBtYXhfYmFja2xpZ2h0Owo+ID4gPiA+IC3CoMKgwqDCoMKg
+wqDCoH0KPiA+ID4gPiAtCj4gPiA+ID4gLcKgwqDCoMKgwqDCoMKgZnhwID0gRElWX1JPVU5EX0NM
+T1NFU1QoS0h6KERQX0VEUF9CQUNLTElHSFRfRlJFUV9CQVNFX0tIWiksCj4gPiA+ID4gZnJlcSk7
+Cj4gPiA+ID4gLQo+ID4gPiA+IC3CoMKgwqDCoMKgwqDCoC8qIFVzZSBoaWdoZXN0IHBvc3NpYmxl
+IHZhbHVlIG9mIFBuIGZvciBtb3JlIGdyYW51bGFyaXR5IG9mCj4gPiA+ID4gYnJpZ2h0bmVzcwo+
+ID4gPiA+IC3CoMKgwqDCoMKgwqDCoCAqIGFkanVzdG1lbnQgd2hpbGUgc2F0aWZ5aW5nIHRoZSBj
+b25kaXRpb25zIGJlbG93Lgo+ID4gPiA+IC3CoMKgwqDCoMKgwqDCoCAqIC0gUG4gaXMgaW4gdGhl
+IHJhbmdlIG9mIFBuX21pbiBhbmQgUG5fbWF4Cj4gPiA+ID4gLcKgwqDCoMKgwqDCoMKgICogLSBG
+IGlzIGluIHRoZSByYW5nZSBvZiAxIGFuZCAyNTUKPiA+ID4gPiAtwqDCoMKgwqDCoMKgwqAgKiAt
+IEZ4UCBpcyB3aXRoaW4gMjUlIG9mIGRlc2lyZWQgdmFsdWUuCj4gPiA+ID4gLcKgwqDCoMKgwqDC
+oMKgICrCoMKgIE5vdGU6IDI1JSBpcyBhcmJpdHJhcnkgdmFsdWUgYW5kIG1heSBuZWVkIHNvbWUg
+dHdlYWsuCj4gPiA+ID4gLcKgwqDCoMKgwqDCoMKgICovCj4gPiA+ID4gLcKgwqDCoMKgwqDCoMKg
+cmV0ID0gZHJtX2RwX2RwY2RfcmVhZGIoJmludGVsX2RwLT5hdXgsCj4gPiA+ID4gRFBfRURQX1BX
+TUdFTl9CSVRfQ09VTlRfQ0FQX01JTiwgJnBuX21pbik7Cj4gPiA+ID4gLcKgwqDCoMKgwqDCoMKg
+aWYgKHJldCAhPSAxKSB7Cj4gPiA+ID4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoGRy
+bV9kYmdfa21zKCZpOTE1LT5kcm0sICJGYWlsZWQgdG8gcmVhZCBwd21nZW4gYml0IGNvdW50Cj4g
+PiA+ID4gY2FwCj4gPiA+ID4gbWluOiAlZFxuIiwgcmV0KTsKPiA+ID4gPiAtwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgcmV0dXJuIG1heF9iYWNrbGlnaHQ7Cj4gPiA+ID4gLcKgwqDCoMKg
+wqDCoMKgfQo+ID4gPiA+IC3CoMKgwqDCoMKgwqDCoHJldCA9IGRybV9kcF9kcGNkX3JlYWRiKCZp
+bnRlbF9kcC0+YXV4LAo+ID4gPiA+IERQX0VEUF9QV01HRU5fQklUX0NPVU5UX0NBUF9NQVgsICZw
+bl9tYXgpOwo+ID4gPiA+IC3CoMKgwqDCoMKgwqDCoGlmIChyZXQgIT0gMSkgewo+ID4gPiA+IC3C
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBkcm1fZGJnX2ttcygmaTkxNS0+ZHJtLCAiRmFp
+bGVkIHRvIHJlYWQgcHdtZ2VuIGJpdCBjb3VudAo+ID4gPiA+IGNhcAo+ID4gPiA+IG1heDogJWRc
+biIsIHJldCk7Cj4gPiA+ID4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoHJldHVybiBt
+YXhfYmFja2xpZ2h0Owo+ID4gPiA+IC3CoMKgwqDCoMKgwqDCoH0KPiA+ID4gPiAtwqDCoMKgwqDC
+oMKgwqBwbl9taW4gJj0gRFBfRURQX1BXTUdFTl9CSVRfQ09VTlRfTUFTSzsKPiA+ID4gPiAtwqDC
+oMKgwqDCoMKgwqBwbl9tYXggJj0gRFBfRURQX1BXTUdFTl9CSVRfQ09VTlRfTUFTSzsKPiA+ID4g
+PiAtCj4gPiA+ID4gLcKgwqDCoMKgwqDCoMKgLyogRW5zdXJlIGZyZXF1ZW5jeSBpcyB3aXRoaW4g
+MjUlIG9mIGRlc2lyZWQgdmFsdWUgKi8KPiA+ID4gPiAtwqDCoMKgwqDCoMKgwqBmeHBfbWluID0g
+RElWX1JPVU5EX0NMT1NFU1QoZnhwICogMywgNCk7Cj4gPiA+ID4gLcKgwqDCoMKgwqDCoMKgZnhw
+X21heCA9IERJVl9ST1VORF9DTE9TRVNUKGZ4cCAqIDUsIDQpOwo+ID4gPiA+IC0KPiA+ID4gPiAt
+wqDCoMKgwqDCoMKgwqBpZiAoZnhwX21pbiA8ICgxIDw8IHBuX21pbikgfHwgKDI1NSA8PCBwbl9t
+YXgpIDwgZnhwX21heCkgewo+ID4gPiA+IC3CoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBk
+cm1fZGJnX2ttcygmaTkxNS0+ZHJtLAo+ID4gPiA+IC3CoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgICJWQlQgZGVmaW5lZCBiYWNrbGlnaHQgZnJlcXVl
+bmN5IG91dCBvZgo+ID4gPiA+IHJhbmdlXG4iKTsKPiA+ID4gPiAtwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgcmV0dXJuIG1heF9iYWNrbGlnaHQ7Cj4gPiA+ID4gLcKgwqDCoMKgwqDCoMKg
+fQo+ID4gPiA+IC0KPiA+ID4gPiAtwqDCoMKgwqDCoMKgwqBmb3IgKHBuID0gcG5fbWF4OyBwbiA+
+PSBwbl9taW47IHBuLS0pIHsKPiA+ID4gPiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+ZiA9IGNsYW1wKERJVl9ST1VORF9DTE9TRVNUKGZ4cCwgMSA8PCBwbiksIDEsIDI1NSk7Cj4gPiA+
+ID4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoGZ4cF9hY3R1YWwgPSBmIDw8IHBuOwo+
+ID4gPiA+IC3CoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBpZiAoZnhwX21pbiA8PSBmeHBf
+YWN0dWFsICYmIGZ4cF9hY3R1YWwgPD0gZnhwX21heCkKPiA+ID4gPiAtwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoGJyZWFrOwo+ID4gPiA+IC3CoMKgwqDCoMKg
+wqDCoH0KPiA+ID4gPiAtCj4gPiA+ID4gLcKgwqDCoMKgwqDCoMKgZHJtX2RiZ19rbXMoJmk5MTUt
+PmRybSwgIlVzaW5nIGVEUCBwd21nZW4gYml0IGNvdW50IG9mICVkXG4iLAo+ID4gPiA+IHBuKTsK
+PiA+ID4gPiAtwqDCoMKgwqDCoMKgwqByZXQgPSBkcm1fZHBfZHBjZF93cml0ZWIoJmludGVsX2Rw
+LT5hdXgsCj4gPiA+ID4gRFBfRURQX1BXTUdFTl9CSVRfQ09VTlQsCj4gPiA+ID4gcG4pOwo+ID4g
+PiA+IC3CoMKgwqDCoMKgwqDCoGlmIChyZXQgIT0gMSkgewo+ID4gPiA+IC3CoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqBkcm1fZGJnX2ttcygmaTkxNS0+ZHJtLCAiRmFpbGVkIHRvIHdyaXRl
+IGF1eCBwd21nZW4gYml0Cj4gPiA+ID4gY291bnQ6ICVkXG4iLCByZXQpOwo+ID4gPiA+IC3CoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqByZXR1cm4gbWF4X2JhY2tsaWdodDsKPiA+ID4gPiAt
+wqDCoMKgwqDCoMKgwqB9Cj4gPiA+ID4gLQo+ID4gPiA+IC3CoMKgwqDCoMKgwqDCoHBhbmVsLT5i
+YWNrbGlnaHQuZWRwLnZlc2EucHdtZ2VuX2JpdF9jb3VudCA9IHBuOwo+ID4gPiA+IC3CoMKgwqDC
+oMKgwqDCoGlmIChpbnRlbF9kcC0+ZWRwX2RwY2RbMl0gJiBEUF9FRFBfQkFDS0xJR0hUX0ZSRVFf
+QVVYX1NFVF9DQVApCj4gPiA+ID4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoHBhbmVs
+LT5iYWNrbGlnaHQuZWRwLnZlc2EucHdtX2ZyZXFfcHJlX2RpdmlkZXIgPSBmOwo+ID4gPiA+IC0K
+PiA+ID4gPiAtwqDCoMKgwqDCoMKgwqBtYXhfYmFja2xpZ2h0ID0gKDEgPDwgcG4pIC0gMTsKPiA+
+ID4gPiArwqDCoMKgwqDCoMKgwqBzdHJ1Y3QgaW50ZWxfZHAgKmludGVsX2RwID0gZW5jX3RvX2lu
+dGVsX2RwKGNvbm5lY3Rvci0+ZW5jb2Rlcik7Cj4gPiA+ID4gwqDCoCAKPiA+ID4gPiAtwqDCoMKg
+wqDCoMKgwqByZXR1cm4gbWF4X2JhY2tsaWdodDsKPiA+ID4gPiArwqDCoMKgwqDCoMKgwqBkcm1f
+ZWRwX2JhY2tsaWdodF9kaXNhYmxlKCZpbnRlbF9kcC0+YXV4LCAmcGFuZWwtCj4gPiA+ID4gPiBi
+YWNrbGlnaHQuZWRwLnZlc2EuaW5mbyk7Cj4gPiA+ID4gwqDCoCB9Cj4gPiA+ID4gwqDCoCAKPiA+
+ID4gPiAtc3RhdGljIGludCBpbnRlbF9kcF9hdXhfdmVzYV9zZXR1cF9iYWNrbGlnaHQoc3RydWN0
+IGludGVsX2Nvbm5lY3Rvcgo+ID4gPiA+ICpjb25uZWN0b3IsCj4gPiA+ID4gLcKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgIGVudW0gcGlwZSBwaXBlKQo+ID4gPiA+ICtzdGF0aWMgaW50IGlu
+dGVsX2RwX2F1eF92ZXNhX3NldHVwX2JhY2tsaWdodChzdHJ1Y3QgaW50ZWxfY29ubmVjdG9yCj4g
+PiA+ID4gKmNvbm5lY3RvciwgZW51bSBwaXBlIHBpcGUpCj4gPiA+ID4gwqDCoCB7Cj4gPiA+ID4g
+wqDCoMKgwqDCoMKgwqDCoMKgc3RydWN0IGludGVsX2RwICppbnRlbF9kcCA9IGludGVsX2F0dGFj
+aGVkX2RwKGNvbm5lY3Rvcik7Cj4gPiA+ID4gwqDCoMKgwqDCoMKgwqDCoMKgc3RydWN0IGludGVs
+X3BhbmVsICpwYW5lbCA9ICZjb25uZWN0b3ItPnBhbmVsOwo+ID4gPiA+ICvCoMKgwqDCoMKgwqDC
+oHN0cnVjdCBkcm1faTkxNV9wcml2YXRlICppOTE1ID0gZHBfdG9faTkxNShpbnRlbF9kcCk7Cj4g
+PiA+ID4gK8KgwqDCoMKgwqDCoMKgdTE2IGN1cnJlbnRfbGV2ZWw7Cj4gPiA+ID4gK8KgwqDCoMKg
+wqDCoMKgdTggY3VycmVudF9tb2RlOwo+ID4gPiA+ICvCoMKgwqDCoMKgwqDCoGludCByZXQ7Cj4g
+PiA+ID4gwqDCoCAKPiA+ID4gPiAtwqDCoMKgwqDCoMKgwqBpZiAoaW50ZWxfZHAtPmVkcF9kcGNk
+WzFdICYgRFBfRURQX0JBQ0tMSUdIVF9BVVhfRU5BQkxFX0NBUCkKPiA+ID4gPiAtwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgcGFuZWwtPmJhY2tsaWdodC5lZHAudmVzYS5hdXhfZW5hYmxl
+ID0gdHJ1ZTsKPiA+ID4gPiAtwqDCoMKgwqDCoMKgwqBpZiAoaW50ZWxfZHAtPmVkcF9kcGNkWzJd
+ICYKPiA+ID4gPiBEUF9FRFBfQkFDS0xJR0hUX0JSSUdIVE5FU1NfQllURV9DT1VOVCkKPiA+ID4g
+PiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgcGFuZWwtPmJhY2tsaWdodC5lZHAudmVz
+YS5sc2JfcmVnX3VzZWQgPSB0cnVlOwo+ID4gPiA+IC0KPiA+ID4gPiAtwqDCoMKgwqDCoMKgwqBw
+YW5lbC0+YmFja2xpZ2h0Lm1heCA9Cj4gPiA+ID4gaW50ZWxfZHBfYXV4X3Zlc2FfY2FsY19tYXhf
+YmFja2xpZ2h0KGNvbm5lY3Rvcik7Cj4gPiA+ID4gLcKgwqDCoMKgwqDCoMKgaWYgKCFwYW5lbC0+
+YmFja2xpZ2h0Lm1heCkKPiA+ID4gPiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgcmV0
+dXJuIC1FTk9ERVY7Cj4gPiA+ID4gK8KgwqDCoMKgwqDCoMKgcmV0ID0gZHJtX2VkcF9iYWNrbGln
+aHRfaW5pdCgmaW50ZWxfZHAtPmF1eCwgJnBhbmVsLQo+ID4gPiA+ID4gYmFja2xpZ2h0LmVkcC52
+ZXNhLmluZm8sCj4gPiA+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgaTkxNS0+dmJ0LmJhY2tsaWdodC5wd21f
+ZnJlcV9oeiwKPiA+ID4gPiBpbnRlbF9kcC0+ZWRwX2RwY2QsCj4gPiA+ID4gK8KgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqAgJmN1cnJlbnRfbGV2ZWwsICZjdXJyZW50X21vZGUpOwo+ID4gPiA+ICvCoMKgwqDCoMKgwqDC
+oGlmIChyZXQgPCAwKQo+ID4gPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqByZXR1
+cm4gcmV0Owo+ID4gPiA+IMKgwqAgCj4gPiA+ID4gK8KgwqDCoMKgwqDCoMKgcGFuZWwtPmJhY2ts
+aWdodC5tYXggPSBwYW5lbC0+YmFja2xpZ2h0LmVkcC52ZXNhLmluZm8ubWF4Owo+ID4gPiA+IMKg
+wqDCoMKgwqDCoMKgwqDCoHBhbmVsLT5iYWNrbGlnaHQubWluID0gMDsKPiA+ID4gPiAtwqDCoMKg
+wqDCoMKgwqBwYW5lbC0+YmFja2xpZ2h0LmxldmVsID0KPiA+ID4gPiBpbnRlbF9kcF9hdXhfdmVz
+YV9nZXRfYmFja2xpZ2h0KGNvbm5lY3RvciwKPiA+ID4gPiBwaXBlKTsKPiA+ID4gPiAtwqDCoMKg
+wqDCoMKgwqBwYW5lbC0+YmFja2xpZ2h0LmVuYWJsZWQgPQo+ID4gPiA+IGludGVsX2RwX2F1eF92
+ZXNhX2JhY2tsaWdodF9kcGNkX21vZGUoY29ubmVjdG9yKSAmJgo+ID4gPiA+IC3CoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAg
+cGFuZWwtPmJhY2tsaWdodC5sZXZlbCAhPSAwOwo+ID4gPiA+ICvCoMKgwqDCoMKgwqDCoGlmIChj
+dXJyZW50X21vZGUgPT0gRFBfRURQX0JBQ0tMSUdIVF9DT05UUk9MX01PREVfRFBDRCkgewo+ID4g
+PiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBwYW5lbC0+YmFja2xpZ2h0LmxldmVs
+ID0gY3VycmVudF9sZXZlbDsKPiA+ID4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+cGFuZWwtPmJhY2tsaWdodC5lbmFibGVkID0gcGFuZWwtPmJhY2tsaWdodC5sZXZlbCAhPSAwOwo+
+ID4gPiA+ICvCoMKgwqDCoMKgwqDCoH0gZWxzZSB7Cj4gPiA+ID4gK8KgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoHBhbmVsLT5iYWNrbGlnaHQubGV2ZWwgPSBwYW5lbC0+YmFja2xpZ2h0Lm1h
+eDsKPiA+ID4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgcGFuZWwtPmJhY2tsaWdo
+dC5lbmFibGVkID0gZmFsc2U7Cj4gPiA+ID4gK8KgwqDCoMKgwqDCoMKgfQo+ID4gPiA+IMKgwqAg
+Cj4gPiA+ID4gwqDCoMKgwqDCoMKgwqDCoMKgcmV0dXJuIDA7Cj4gPiA+ID4gwqDCoCB9Cj4gPiA+
+ID4gQEAgLTU1OSwxNiArMzQwLDEyIEBAIGludGVsX2RwX2F1eF9zdXBwb3J0c192ZXNhX2JhY2ts
+aWdodChzdHJ1Y3QKPiA+ID4gPiBpbnRlbF9jb25uZWN0b3IgKmNvbm5lY3RvcikKPiA+ID4gPiDC
+oMKgwqDCoMKgwqDCoMKgwqBzdHJ1Y3QgaW50ZWxfZHAgKmludGVsX2RwID0gaW50ZWxfYXR0YWNo
+ZWRfZHAoY29ubmVjdG9yKTsKPiA+ID4gPiDCoMKgwqDCoMKgwqDCoMKgwqBzdHJ1Y3QgZHJtX2k5
+MTVfcHJpdmF0ZSAqaTkxNSA9IGRwX3RvX2k5MTUoaW50ZWxfZHApOwo+ID4gPiA+IMKgwqAgCj4g
+PiA+ID4gLcKgwqDCoMKgwqDCoMKgLyogQ2hlY2sgdGhlIGVEUCBEaXNwbGF5IGNvbnRyb2wgY2Fw
+YWJpbGl0aWVzIHJlZ2lzdGVycyB0bwo+ID4gPiA+IGRldGVybWluZQo+ID4gPiA+IGlmCj4gPiA+
+ID4gLcKgwqDCoMKgwqDCoMKgICogdGhlIHBhbmVsIGNhbiBzdXBwb3J0IGJhY2tsaWdodCBjb250
+cm9sIG92ZXIgdGhlIGF1eCBjaGFubmVsLgo+ID4gPiA+IC3CoMKgwqDCoMKgwqDCoCAqCj4gPiA+
+ID4gLcKgwqDCoMKgwqDCoMKgICogVE9ETzogV2UgY3VycmVudGx5IG9ubHkgc3VwcG9ydCBBVVgg
+b25seSBiYWNrbGlnaHQKPiA+ID4gPiBjb25maWd1cmF0aW9ucywgbm90IGJhY2tsaWdodHMgd2hp
+Y2gKPiA+ID4gPiArwqDCoMKgwqDCoMKgwqAvKiBUT0RPOiBXZSBjdXJyZW50bHkgb25seSBzdXBw
+b3J0IEFVWCBvbmx5IGJhY2tsaWdodAo+ID4gPiA+IGNvbmZpZ3VyYXRpb25zLCBub3QgYmFja2xp
+Z2h0cyB3aGljaAo+ID4gPiA+IMKgwqDCoMKgwqDCoMKgwqDCoCAqIHJlcXVpcmUgYSBtaXggb2Yg
+UFdNIGFuZCBBVVggY29udHJvbHMgdG8gd29yay4gSW4gdGhlIG1lYW4KPiA+ID4gPiB0aW1lLAo+
+ID4gPiA+IHRoZXNlIG1hY2hpbmVzIHR5cGljYWxseQo+ID4gPiA+IMKgwqDCoMKgwqDCoMKgwqDC
+oCAqIHdvcmsganVzdCBmaW5lIHVzaW5nIG5vcm1hbCBQV00gY29udHJvbHMgYW55d2F5Lgo+ID4g
+PiA+IMKgwqDCoMKgwqDCoMKgwqDCoCAqLwo+ID4gPiA+IC3CoMKgwqDCoMKgwqDCoGlmIChpbnRl
+bF9kcC0+ZWRwX2RwY2RbMV0gJiBEUF9FRFBfVENPTl9CQUNLTElHSFRfQURKVVNUTUVOVF9DQVAK
+PiA+ID4gPiAmJgo+ID4gPiA+IC3CoMKgwqDCoMKgwqDCoMKgwqDCoCAoaW50ZWxfZHAtPmVkcF9k
+cGNkWzFdICYgRFBfRURQX0JBQ0tMSUdIVF9BVVhfRU5BQkxFX0NBUCkgJiYKPiA+ID4gPiAtwqDC
+oMKgwqDCoMKgwqDCoMKgwqAgKGludGVsX2RwLT5lZHBfZHBjZFsyXSAmCj4gPiA+ID4gRFBfRURQ
+X0JBQ0tMSUdIVF9CUklHSFRORVNTX0FVWF9TRVRfQ0FQKSkgewo+ID4gPiA+ICvCoMKgwqDCoMKg
+wqDCoGlmICgoaW50ZWxfZHAtPmVkcF9kcGNkWzFdICYgRFBfRURQX0JBQ0tMSUdIVF9BVVhfRU5B
+QkxFX0NBUCkgJiYKPiA+ID4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqAgZHJtX2VkcF9iYWNrbGln
+aHRfc3VwcG9ydGVkKGludGVsX2RwLT5lZHBfZHBjZCkpIHsKPiA+ID4gPiDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgZHJtX2RiZ19rbXMoJmk5MTUtPmRybSwgIkFVWCBCYWNrbGln
+aHQgQ29udHJvbAo+ID4gPiA+IFN1cHBvcnRlZCFcbiIpOwo+ID4gPiA+IMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqByZXR1cm4gdHJ1ZTsKPiA+ID4gPiDCoMKgwqDCoMKgwqDCoMKg
+wqB9Cj4gPiA+ID4gZGlmZiAtLWdpdCBhL2luY2x1ZGUvZHJtL2RybV9kcF9oZWxwZXIuaCBiL2lu
+Y2x1ZGUvZHJtL2RybV9kcF9oZWxwZXIuaAo+ID4gPiA+IGluZGV4IGVkZmZkMWRjY2EzZS4uMWVj
+YTBiNDJmYzQ1IDEwMDY0NAo+ID4gPiA+IC0tLSBhL2luY2x1ZGUvZHJtL2RybV9kcF9oZWxwZXIu
+aAo+ID4gPiA+ICsrKyBiL2luY2x1ZGUvZHJtL2RybV9kcF9oZWxwZXIuaAo+ID4gPiA+IEBAIC0x
+NzkwLDYgKzE3OTAsMjQgQEAgZHJtX2RwX3NpbmtfY2FuX2RvX3ZpZGVvX3dpdGhvdXRfdGltaW5n
+X21zYShjb25zdAo+ID4gPiA+IHU4Cj4gPiA+ID4gZHBjZFtEUF9SRUNFSVZFUl9DQVBfU0laRV0p
+Cj4gPiA+ID4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoERQX01TQV9USU1JTkdf
+UEFSX0lHTk9SRUQ7Cj4gPiA+ID4gwqDCoCB9Cj4gPiA+ID4gwqDCoCAKPiA+ID4gPiArLyoqCj4g
+PiA+ID4gKyAqIGRybV9lZHBfYmFja2xpZ2h0X3N1cHBvcnRlZCgpIC0gQ2hlY2sgYW4gZURQIERQ
+Q0QgZm9yIFZFU0EgYmFja2xpZ2h0Cj4gPiA+ID4gc3VwcG9ydAo+ID4gPiA+ICsgKiBAZWRwX2Rw
+Y2Q6IFRoZSBEUENEIHRvIGNoZWNrCj4gPiA+ID4gKyAqCj4gPiA+ID4gKyAqIE5vdGUgdGhhdCBj
+dXJyZW50bHkgdGhpcyBmdW5jdGlvbiB3aWxsIHJldHVybiAlZmFsc2UgZm9yIHBhbmVscwo+ID4g
+PiA+IHdoaWNoCj4gPiA+ID4gc3VwcG9ydCB2YXJpb3VzIERQQ0QKPiA+ID4gPiArICogYmFja2xp
+Z2h0IGZlYXR1cmVzIGJ1dCB3aGljaCByZXF1aXJlIHRoZSBicmlnaHRuZXNzIGJlIHNldCB0aHJv
+dWdoCj4gPiA+ID4gUFdNLAo+ID4gPiA+IGFuZCBkb24ndCBzdXBwb3J0IHNldHRpbmcKPiA+ID4g
+PiArICogdGhlIGJyaWdodG5lc3MgbGV2ZWwgdmlhIHRoZSBEUENELiBUaGlzIGlzIGEgVE9ETy4K
+PiA+ID4gPiArICoKPiA+ID4gPiArICogUmV0dXJuczogJVRydWUgaWYgQGVkcF9kcGNkIGluZGlj
+YXRlcyB0aGF0IFZFU0EgYmFja2xpZ2h0IGNvbnRyb2xzCj4gPiA+ID4gYXJlCj4gPiA+ID4gc3Vw
+cG9ydGVkLCAlZmFsc2UKPiA+ID4gPiArICogb3RoZXJ3aXNlCj4gPiA+ID4gKyAqLwo+ID4gPiA+
+ICtzdGF0aWMgaW5saW5lIGJvb2wKPiA+ID4gPiArZHJtX2VkcF9iYWNrbGlnaHRfc3VwcG9ydGVk
+KGNvbnN0IHU4Cj4gPiA+ID4gZWRwX2RwY2RbRURQX0RJU1BMQVlfQ1RMX0NBUF9TSVpFXSkKPiA+
+ID4gPiArewo+ID4gPiA+ICvCoMKgwqDCoMKgwqDCoHJldHVybiAoZWRwX2RwY2RbMV0gJiBEUF9F
+RFBfVENPTl9CQUNLTElHSFRfQURKVVNUTUVOVF9DQVApICYmCj4gPiA+ID4gK8KgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoChlZHBfZHBjZFsyXSAmIERQX0VEUF9CQUNLTElHSFRfQlJJR0hU
+TkVTU19BVVhfU0VUX0NBUCk7Cj4gPiA+ID4gK30KPiA+ID4gPiArCj4gPiA+ID4gwqDCoCAvKgo+
+ID4gPiA+IMKgwqDCoCAqIERpc3BsYXlQb3J0IEFVWCBjaGFubmVsCj4gPiA+ID4gwqDCoMKgICov
+Cj4gPiA+ID4gQEAgLTIwODksNiArMjEwNywzNiBAQCBkcm1fZHBfaGFzX3F1aXJrKGNvbnN0IHN0
+cnVjdCBkcm1fZHBfZGVzYyAqZGVzYywKPiA+ID4gPiBlbnVtCj4gPiA+ID4gZHJtX2RwX3F1aXJr
+IHF1aXJrKQo+ID4gPiA+IMKgwqDCoMKgwqDCoMKgwqDCoHJldHVybiBkZXNjLT5xdWlya3MgJiBC
+SVQocXVpcmspOwo+ID4gPiA+IMKgwqAgfQo+ID4gPiA+IMKgwqAgCj4gPiA+ID4gKy8qKgo+ID4g
+PiA+ICsgKiBzdHJ1Y3QgZHJtX2VkcF9iYWNrbGlnaHRfaW5mbyAtIFByb2JlZCBlRFAgYmFja2xp
+Z2h0IGluZm8gc3RydWN0Cj4gPiA+ID4gKyAqIEBwd21nZW5fYml0X2NvdW50OiBUaGUgcHdtZ2Vu
+IGJpdCBjb3VudAo+ID4gPiA+ICsgKiBAcHdtX2ZyZXFfcHJlX2RpdmlkZXI6IFRoZSBQV00gZnJl
+cXVlbmN5IHByZS1kaXZpZGVyIHZhbHVlIGJlaW5nCj4gPiA+ID4gdXNlZAo+ID4gPiA+IGZvciB0
+aGlzIGJhY2tsaWdodCwgaWYgYW55Cj4gPiA+ID4gKyAqIEBtYXg6IFRoZSBtYXhpbXVtIGJhY2ts
+aWdodCBsZXZlbCB0aGF0IG1heSBiZSBzZXQKPiA+ID4gPiArICogQGxzYl9yZWdfdXNlZDogRG8g
+d2UgYWxzbyB3cml0ZSB2YWx1ZXMgdG8gdGhlCj4gPiA+ID4gRFBfRURQX0JBQ0tMSUdIVF9CUklH
+SFRORVNTX0xTQiByZWdpc3Rlcj8KPiA+ID4gPiArICogQGF1eF9lbmFibGU6IERvZXMgdGhlIHBh
+bmVsIHN1cHBvcnQgdGhlIEFVWCBlbmFibGUgY2FwPwo+ID4gPiA+ICsgKgo+ID4gPiA+ICsgKiBU
+aGlzIHN0cnVjdHVyZSBjb250YWlucyB2YXJpb3VzIGRhdGEgYWJvdXQgYW4gZURQIGJhY2tsaWdo
+dCwgd2hpY2gKPiA+ID4gPiBjYW4KPiA+ID4gPiBiZSBwb3B1bGF0ZWQgYnkgdXNpbmcKPiA+ID4g
+PiArICogZHJtX2VkcF9iYWNrbGlnaHRfaW5pdCgpLgo+ID4gPiA+ICsgKi8KPiA+ID4gPiArc3Ry
+dWN0IGRybV9lZHBfYmFja2xpZ2h0X2luZm8gewo+ID4gPiA+ICvCoMKgwqDCoMKgwqDCoHU4IHB3
+bWdlbl9iaXRfY291bnQ7Cj4gPiA+ID4gK8KgwqDCoMKgwqDCoMKgdTggcHdtX2ZyZXFfcHJlX2Rp
+dmlkZXI7Cj4gPiA+ID4gK8KgwqDCoMKgwqDCoMKgdTE2IG1heDsKPiA+ID4gPiArCj4gPiA+ID4g
+K8KgwqDCoMKgwqDCoMKgYm9vbCBsc2JfcmVnX3VzZWQgOiAxOwo+ID4gPiA+ICvCoMKgwqDCoMKg
+wqDCoGJvb2wgYXV4X2VuYWJsZSA6IDE7Cj4gPiA+ID4gK307Cj4gPiA+ID4gKwo+ID4gPiA+ICtp
+bnQKPiA+ID4gPiArZHJtX2VkcF9iYWNrbGlnaHRfaW5pdChzdHJ1Y3QgZHJtX2RwX2F1eCAqYXV4
+LCBzdHJ1Y3QKPiA+ID4gPiBkcm1fZWRwX2JhY2tsaWdodF9pbmZvICpibCwKPiA+ID4gPiArwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHUxNiBkcml2ZXJfcHdtX2Zy
+ZXFfaHosIGNvbnN0IHU4Cj4gPiA+ID4gZWRwX2RwY2RbRURQX0RJU1BMQVlfQ1RMX0NBUF9TSVpF
+XSwKPiA+ID4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHUx
+NiAqY3VycmVudF9sZXZlbCwgdTggKmN1cnJlbnRfbW9kZSk7Cj4gPiA+ID4gK2ludCBkcm1fZWRw
+X2JhY2tsaWdodF9zZXRfbGV2ZWwoc3RydWN0IGRybV9kcF9hdXggKmF1eCwgY29uc3Qgc3RydWN0
+Cj4gPiA+ID4gZHJtX2VkcF9iYWNrbGlnaHRfaW5mbyAqYmwsCj4gPiA+ID4gK8KgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgdTE2IGxl
+dmVsKTsKPiA+ID4gPiAraW50IGRybV9lZHBfYmFja2xpZ2h0X2VuYWJsZShzdHJ1Y3QgZHJtX2Rw
+X2F1eCAqYXV4LCBjb25zdCBzdHJ1Y3QKPiA+ID4gPiBkcm1fZWRwX2JhY2tsaWdodF9pbmZvICpi
+bCwKPiA+ID4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgIHUxNiBsZXZlbCk7Cj4gPiA+ID4gK2ludCBkcm1fZWRwX2JhY2tsaWdodF9kaXNh
+YmxlKHN0cnVjdCBkcm1fZHBfYXV4ICphdXgsIGNvbnN0IHN0cnVjdAo+ID4gPiA+IGRybV9lZHBf
+YmFja2xpZ2h0X2luZm8gKmJsKTsKPiA+ID4gPiArCj4gPiA+ID4gwqDCoCAjaWZkZWYgQ09ORklH
+X0RSTV9EUF9DRUMKPiA+ID4gPiDCoMKgIHZvaWQgZHJtX2RwX2NlY19pcnEoc3RydWN0IGRybV9k
+cF9hdXggKmF1eCk7Cj4gPiA+ID4gwqDCoCB2b2lkIGRybV9kcF9jZWNfcmVnaXN0ZXJfY29ubmVj
+dG9yKHN0cnVjdCBkcm1fZHBfYXV4ICphdXgsCj4gPiA+ID4gCj4gPiA+IAo+ID4gCj4gCgotLSAK
+U2luY2VyZWx5LAogICBMeXVkZSBQYXVsIChzaGUvaGVyKQogICBTb2Z0d2FyZSBFbmdpbmVlciBh
+dCBSZWQgSGF0CiAgIApOb3RlOiBJIGRlYWwgd2l0aCBhIGxvdCBvZiBlbWFpbHMgYW5kIGhhdmUg
+YSBsb3Qgb2YgYnVncyBvbiBteSBwbGF0ZS4gSWYgeW91J3ZlCmFza2VkIG1lIGEgcXVlc3Rpb24s
+IGFyZSB3YWl0aW5nIGZvciBhIHJldmlldy9tZXJnZSBvbiBhIHBhdGNoLCBldGMuIGFuZCBJCmhh
+dmVuJ3QgcmVzcG9uZGVkIGluIGEgd2hpbGUsIHBsZWFzZSBmZWVsIGZyZWUgdG8gc2VuZCBtZSBh
+bm90aGVyIGVtYWlsIHRvIGNoZWNrCm9uIG15IHN0YXR1cy4gSSBkb24ndCBiaXRlIQoKX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBtYWlsaW5n
+IGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVz
+a3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1Cg==
