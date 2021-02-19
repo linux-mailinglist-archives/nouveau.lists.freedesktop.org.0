@@ -2,46 +2,45 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2A88A31EB88
-	for <lists+nouveau@lfdr.de>; Thu, 18 Feb 2021 16:32:04 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E942A31F3CE
+	for <lists+nouveau@lfdr.de>; Fri, 19 Feb 2021 03:08:09 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0189C6EA39;
-	Thu, 18 Feb 2021 15:32:00 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1C20F6EA79;
+	Fri, 19 Feb 2021 02:08:04 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
- by gabe.freedesktop.org (Postfix) with ESMTPS id DECB46EA3C;
- Thu, 18 Feb 2021 15:31:57 +0000 (UTC)
-IronPort-SDR: ZTWLO+t/eLzImkiRj+9FEAZkJDfRXxe69DLT1Vx194Jrty7zyesMvcXiJgM2/Mq/mCC8OloVEZ
- l/9yVGDSAneA==
-X-IronPort-AV: E=McAfee;i="6000,8403,9898"; a="183657409"
-X-IronPort-AV: E=Sophos;i="5.81,187,1610438400"; d="scan'208";a="183657409"
-Received: from fmsmga008.fm.intel.com ([10.253.24.58])
- by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 18 Feb 2021 07:31:56 -0800
-IronPort-SDR: OouBEYarPuLAOdmgvJYlFPhxnKNIZH9nHQGGiQmc7dbK12MVbrWm8kF8ENYlPbTu8HmlXwGg1r
- AZ2p00thMFwg==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.81,187,1610438400"; d="scan'208";a="385998262"
-Received: from stinkbox.fi.intel.com (HELO stinkbox) ([10.237.72.171])
- by fmsmga008.fm.intel.com with SMTP; 18 Feb 2021 07:31:51 -0800
-Received: by stinkbox (sSMTP sendmail emulation);
- Thu, 18 Feb 2021 17:31:51 +0200
-Date: Thu, 18 Feb 2021 17:31:51 +0200
-From: Ville =?iso-8859-1?Q?Syrj=E4l=E4?= <ville.syrjala@linux.intel.com>
-To: Jani Nikula <jani.nikula@intel.com>
-Message-ID: <YC6IZ+BUcA5uDCej@intel.com>
-References: <20210208233902.1289693-1-lyude@redhat.com>
- <20210208233902.1289693-11-lyude@redhat.com>
- <20210211041540.GI82362@intel.com>
- <355ce12ec69a9b5f20b4a856a40c8abf413be5c0.camel@redhat.com>
- <87mtw1ai4m.fsf@intel.com>
+Received: from hqnvemgate24.nvidia.com (hqnvemgate24.nvidia.com
+ [216.228.121.143])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 77C336E0FC;
+ Fri, 19 Feb 2021 02:08:02 +0000 (UTC)
+Received: from hqmail.nvidia.com (Not Verified[216.228.121.13]) by
+ hqnvemgate24.nvidia.com (using TLS: TLSv1.2, AES256-SHA)
+ id <B602f1d810001>; Thu, 18 Feb 2021 18:08:01 -0800
+Received: from localhost (172.20.145.6) by HQMAIL107.nvidia.com
+ (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1497.2; Fri, 19 Feb
+ 2021 02:08:00 +0000
+From: Alistair Popple <apopple@nvidia.com>
+To: <linux-mm@kvack.org>, <nouveau@lists.freedesktop.org>,
+ <bskeggs@redhat.com>, <akpm@linux-foundation.org>
+Date: Fri, 19 Feb 2021 13:07:46 +1100
+Message-ID: <20210219020750.16444-1-apopple@nvidia.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <87mtw1ai4m.fsf@intel.com>
-X-Patchwork-Hint: comment
-Subject: Re: [Nouveau] [Intel-gfx] [RFC v4 10/11] drm/dp: Extract i915's eDP
- backlight code into DRM helpers
+X-Originating-IP: [172.20.145.6]
+X-ClientProxiedBy: HQMAIL107.nvidia.com (172.20.187.13) To
+ HQMAIL107.nvidia.com (172.20.187.13)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
+ t=1613700481; bh=5OrVHikvQYHHvCBqjLvpLd1/wujsuMHrn59MGSbB4U8=;
+ h=From:To:CC:Subject:Date:Message-ID:X-Mailer:MIME-Version:
+ Content-Transfer-Encoding:Content-Type:X-Originating-IP:
+ X-ClientProxiedBy;
+ b=QZzxAptqC9yZxIAmGC2CizywepnAeNH/FXMAYREg1kl+419LRnhO3RfNIiaasjLzo
+ MO+T4y29Md6+e0pm4fwbXJK56zd8AMa2CyyTRErWST1mEqte8lG5RaO1z3SYnJFCD2
+ NiTwdbUCKd/kgxKQCjVw2/feRuvtspwv/3FP8HanEccPirZrj1ZywaKo9YQ8BpETqx
+ 7dRc+hE5QM9my9gMF8BF9U4nzS1xSVOzQbZxk3LClRf7rgTUrFBPGn2nLe/P0dvDt/
+ AQMp4reYdQg+ijQ0rSvtLGabW/vzVVprXlxQ55azJ+3knwPbhz9J4rMJVDMBZyy20t
+ wjVSt58ckMImg==
+Subject: [Nouveau] [PATCH v2 0/4] Add support for SVM atomics in Nouveau
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -53,33 +52,76 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
- intel-gfx@lists.freedesktop.org, Lucas De Marchi <lucas.demarchi@intel.com>,
- open list <linux-kernel@vger.kernel.org>, dri-devel@lists.freedesktop.org,
- greg.depoire@gmail.com, Sean Paul <seanpaul@chromium.org>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>, Dave Airlie <airlied@redhat.com>
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Cc: rcampbell@nvidia.com, daniel@ffwll.ch, linux-doc@vger.kernel.org,
+ Alistair Popple <apopple@nvidia.com>, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, hch@infradead.org, kvm-ppc@vger.kernel.org,
+ jgg@nvidia.com
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, Feb 18, 2021 at 10:35:05AM +0200, Jani Nikula wrote:
-> On Fri, 12 Feb 2021, Lyude Paul <lyude@redhat.com> wrote:
-> > I think it wouldn't be a bad idea to just address this with a followup =
-series
-> > instead and use the old DRM_DEBUG_* macros in the mean time.
-> =
+This is the second version of a series to add support to Nouveau for atomic
+memory operations on OpenCL shared virtual memory (SVM) regions. This is
+achieved using the atomic PTE bits on the GPU to only permit atomic
+operations to system memory when a page is not mapped in userspace on the
+CPU. The previous version of this series used an unmap and pin page
+migration, however this resulted in problems with ZONE_MOVABLE and other
+issues so this series uses a different approach.
 
-> aux->dev is there, could also use dev_dbg et al. in the mean time. They
-> handle NULL dev gracefully too if the driver didn't set that.
+Instead exclusive device access is implemented by adding a new swap entry
+type (SWAP_DEVICE_EXCLUSIVE) which is similar to a migration entry. The
+main difference is that on fault the original entry is immediately restored
+by the fault handler instead of waiting.
 
-Last I looked aux->dev was random. Some drivers point it at the
-connector vs. some at the the pci/platform device.
+Restoring the entry triggers calls to MMU notifers which allows a device
+driver to revoke the atomic access permission from the GPU prior to the CPU
+finalising the entry.
 
--- =
+Patch 1 contains the bulk of the memory management changes required to
+implement the new entry type.
 
-Ville Syrj=E4l=E4
-Intel
+Patch 2 contains some additions to the HMM selftests to ensure everything
+works as expected.
+
+Patch 3 was posted previously and has not changed.
+
+Patch 4 is similar to what was posted previously but updated to use the new
+swap entries instread of migration.
+
+This has been tested using the latest upstream Mesa userspace with a simple
+OpenCL test program which checks the results of atomic GPU operations on a
+SVM buffer whilst also writing to the same buffer from the CPU.
+
+Alistair Popple (4):
+  hmm: Device exclusive memory access
+  hmm: Selftests for exclusive device memory
+  nouveau/svm: Refactor nouveau_range_fault
+  nouveau/svm: Implement atomic SVM access
+
+ Documentation/vm/hmm.rst                      |  15 ++
+ drivers/gpu/drm/nouveau/include/nvif/if000c.h |   1 +
+ drivers/gpu/drm/nouveau/nouveau_svm.c         | 118 +++++++---
+ drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.h |   1 +
+ .../drm/nouveau/nvkm/subdev/mmu/vmmgp100.c    |   6 +
+ fs/proc/task_mmu.c                            |   7 +
+ include/linux/hmm.h                           |   4 +
+ include/linux/rmap.h                          |   1 +
+ include/linux/swap.h                          |  10 +-
+ include/linux/swapops.h                       |  32 +++
+ lib/test_hmm.c                                | 124 ++++++++++
+ lib/test_hmm_uapi.h                           |   2 +
+ mm/hmm.c                                      | 206 ++++++++++++++++
+ mm/memory.c                                   |  34 ++-
+ mm/mprotect.c                                 |   7 +
+ mm/page_vma_mapped.c                          |  14 +-
+ mm/rmap.c                                     |  29 ++-
+ tools/testing/selftests/vm/hmm-tests.c        | 219 ++++++++++++++++++
+ 18 files changed, 792 insertions(+), 38 deletions(-)
+
+-- 
+2.20.1
+
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
