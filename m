@@ -2,152 +2,56 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 825FD3200F5
-	for <lists+nouveau@lfdr.de>; Fri, 19 Feb 2021 22:57:19 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A35703200B4
+	for <lists+nouveau@lfdr.de>; Fri, 19 Feb 2021 22:55:15 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id EA5BA6E0CE;
-	Fri, 19 Feb 2021 21:57:17 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id DD73E6EC63;
+	Fri, 19 Feb 2021 21:55:06 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from userp2130.oracle.com (userp2130.oracle.com [156.151.31.86])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E8B956EC0D;
- Fri, 19 Feb 2021 20:33:23 +0000 (UTC)
-Received: from pps.filterd (userp2130.oracle.com [127.0.0.1])
- by userp2130.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 11JKT68O184358;
- Fri, 19 Feb 2021 20:32:26 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
- h=date : from : to : cc
- : subject : message-id : references : content-type : in-reply-to :
- mime-version; s=corp-2020-01-29;
- bh=Q+tlPGJKqF6UYVHJtf4RiU4j3D0HGkZd1GdqLyhGl5k=;
- b=OUnX7abV7Zl+u6KIti9+pbFfcT8EvxiyocwczAX0CXSRN86hcLIM6VwLU3654x/i28Z+
- 3pSPYNElBGBgxhm1F+DZ2L2IZNG/+wtb6C89OpKs1ZpYVrw29cpL8uUfqbPfGIAkPMGe
- ahyW6qfPTtx6uDTss0Dc0nPtD8x40Ro+xSRxK1BE2z+fsl6D3kdHk6aX4I8zg+BBEFkl
- pbM0GElbZhULPCH8rNgBnFdzffC4q4B9F84TxSvJG/1eLxDmm/oiulbvjcce/he7qvTM
- CyAem6teIK5wc2P1vvIz9Jl0RRnmO16Wz+E+rPPghfZABFAxtq9xQVs7KsFK148ojUf1 DQ== 
-Received: from userp3030.oracle.com (userp3030.oracle.com [156.151.31.80])
- by userp2130.oracle.com with ESMTP id 36p66rarke-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Fri, 19 Feb 2021 20:32:26 +0000
-Received: from pps.filterd (userp3030.oracle.com [127.0.0.1])
- by userp3030.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 11JKUHor088829;
- Fri, 19 Feb 2021 20:32:26 GMT
-Received: from nam04-mw2-obe.outbound.protection.outlook.com
- (mail-mw2nam08lp2173.outbound.protection.outlook.com [104.47.73.173])
- by userp3030.oracle.com with ESMTP id 36prq2bevu-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Fri, 19 Feb 2021 20:32:25 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=cilLbaU5P1EZKHhQFZ/tXoZgv5UWAMFelQ7A/weacmzr72UFTnUSEeSa9kbGIBPRfw+6dJkNoCJu/MPdyLRkSaeodwlghJ3gpIx2a5Q6Yps8t9IsmyODpIogyhDzB2KcPigx1t/PLQjQ0aY9BV2YOwMmp9HQ6YsPHvYjtLbQFQ3feLnZ8Oq18m9XCdU7miOfErH1S1+Jiupd7/6I3LF/Tx21dshT7ObtSCxkmD0/yYxFZyIp1NJMRAOd6BN9oqOUdO0mN+Lf41BrXyMtnu4Z4QuZg7LYxa9iIoc+Ik+Te2TTm46doh2faynP3k5BQa8PFLS3OG4xcS3kzxunHTzp5w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Q+tlPGJKqF6UYVHJtf4RiU4j3D0HGkZd1GdqLyhGl5k=;
- b=Ld4ESsnTlUH2IkkNza53+IbGAgGHaPJeYH9fktWs41vjynoJKfwrL6UESpbkf32rqtcpn2ZLZgTE1Af7r5IglEeGhNRYYhj+VtX7jZ6PJSJ+lACZVLEP6W0LpvNQV6UOa7W12GukpzMz7BYCboUt91Mf6IH25VTO5W1bRfMgPbAAnq0urCVvyYOflMsJ2eeiFpcSRVqzoUW9HtR7q90JyioiJiXgZ+KaeRf44blAJAaWy3Qgplp2I/z7msFr/Ofgri3wWlCOFIydrFoNl8pAhTvCCkFrLRLOmI7FVQAMSzAFbg++ouoLQMvdZGofr5TVDmhRCPi94+/Udr7rf/s4hQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oracle.com; dmarc=pass action=none header.from=oracle.com;
- dkim=pass header.d=oracle.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Q+tlPGJKqF6UYVHJtf4RiU4j3D0HGkZd1GdqLyhGl5k=;
- b=F+sfZVS3Rip00Puw598dxvLwI0SZH9jdU6wPTnP4wU6cp305cuTuHpI9o/LXTC/M9CZjn8s/xz/OpZheMhlUPtP4H0Fji8o+DsqZtfMW5l3bnrdlJo5BHx4TYawG8khET8l1kZ1xquvYuXEYmes0eLUgl8wWIcDLt2iR8Rsjews=
-Authentication-Results: lst.de; dkim=none (message not signed)
- header.d=none;lst.de; dmarc=none action=none header.from=oracle.com;
-Received: from BYAPR10MB2999.namprd10.prod.outlook.com (2603:10b6:a03:85::27)
- by SJ0PR10MB4509.namprd10.prod.outlook.com (2603:10b6:a03:2d9::5)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3846.41; Fri, 19 Feb
- 2021 20:32:23 +0000
-Received: from BYAPR10MB2999.namprd10.prod.outlook.com
- ([fe80::e180:1ba2:d87:456]) by BYAPR10MB2999.namprd10.prod.outlook.com
- ([fe80::e180:1ba2:d87:456%4]) with mapi id 15.20.3846.039; Fri, 19 Feb 2021
- 20:32:23 +0000
-Date: Fri, 19 Feb 2021 15:32:15 -0500
-From: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
-To: Christoph Hellwig <hch@lst.de>,
- Boris Ostrovsky <boris.ostrovsky@oracle.com>, jgross@suse.com
-Message-ID: <YDAgT2ZIdncNwNlf@Konrads-MacBook-Pro.local>
-References: <20210203233709.19819-1-dongli.zhang@oracle.com>
- <20210203233709.19819-6-dongli.zhang@oracle.com>
- <20210204084023.GA32328@lst.de> <20210207155601.GA25111@lst.de>
-Content-Disposition: inline
-In-Reply-To: <20210207155601.GA25111@lst.de>
-X-Originating-IP: [209.6.208.110]
-X-ClientProxiedBy: BY3PR05CA0044.namprd05.prod.outlook.com
- (2603:10b6:a03:39b::19) To BYAPR10MB2999.namprd10.prod.outlook.com
- (2603:10b6:a03:85::27)
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [63.128.21.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B95686EC42
+ for <nouveau@lists.freedesktop.org>; Fri, 19 Feb 2021 21:55:02 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1613771701;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=ydQt9bOzXrkqFFLyK4f02Flw50Vo0F3loXTZ4Nkq7DU=;
+ b=K+PhpbbeZMyXNGPb45yot7r1Y9ZFlNeryP77QxFPwJHf5i8ZzbC+rULiEuiR+/FqoAFllu
+ HCrDqn+KFa7ipUqzrAI6QnYz6gDHWy9eKkYlfxBDd4JG/w1Z8keeV2M+5tyIvYDPocJ+JN
+ f5B+asnhubfe5fe6/tIru7iHtl9S6zI=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-42-cRo0MMBqPaCksACQFnTo6A-1; Fri, 19 Feb 2021 16:53:54 -0500
+X-MC-Unique: cRo0MMBqPaCksACQFnTo6A-1
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
+ [10.5.11.13])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 469FA107ACED;
+ Fri, 19 Feb 2021 21:53:43 +0000 (UTC)
+Received: from Whitewolf.redhat.com (ovpn-118-5.rdu2.redhat.com [10.10.118.5])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 163C16EF55;
+ Fri, 19 Feb 2021 21:53:42 +0000 (UTC)
+From: Lyude Paul <lyude@redhat.com>
+To: intel-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ amd-gfx@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ =?UTF-8?q?Ville=20Syrj=C3=A4l=C3=A4?= <ville.syrjala@linux.intel.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ Thomas Zimmermann <tzimmermann@suse.de>
+Date: Fri, 19 Feb 2021 16:52:56 -0500
+Message-Id: <20210219215326.2227596-1-lyude@redhat.com>
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from Konrads-MacBook-Pro.local (209.6.208.110) by
- BY3PR05CA0044.namprd05.prod.outlook.com (2603:10b6:a03:39b::19) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3890.11 via Frontend
- Transport; Fri, 19 Feb 2021 20:32:18 +0000
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 02501154-d7eb-497a-1b24-08d8d5157639
-X-MS-TrafficTypeDiagnostic: SJ0PR10MB4509:
-X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: <SJ0PR10MB45090C51834820E7AEC49FF889849@SJ0PR10MB4509.namprd10.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:9508;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: Q3AKZuSZrPy0l4j4hWsGLN91LmBcmN6L9XURIPwwIX8OLjOW8X9ie9CdRLsIHYJ5S6uVl+O5krhJr4Ar14pPq0XLUXmnKkh/l23ObS2ne6YtXZP5gqz28uvkQBwX5Zsu8irHIUN8Y0shwtWJwdxIck0IxATrWeTvTMLpmNK3zp0wCJQQrlzTVBblVvH/s80GXOqbqqHAeQ5LMgWUJJt2shu6IF17ZowjSiv/yIEhl8ZYRsl0QyRaecku/1me5R6pV5iBb8vtvhglxjEeK9/huSAOTuNNo0Jg66noqDxWOWSl9eKKbIVvqaQlcOKDjTo5IDw0U73GgVT6PE//t34detm1NixfMcgu4+mLfUlwTy/IVfr80V/rFdnsNbiJc872pu9T9e68wX6aO3WaX64AuXjDfkQR/dBhQFnNv2yqam314cWubFUl3Z5jFyzsox8mv6mMyMiFm8mk5DZNdtuwCOjglNRN2aWGVYiAtLu2sPfiihTzfjT+zBK/H4JAq0nADkKVcU4422BUXu6BmTZZ2A==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:BYAPR10MB2999.namprd10.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(346002)(396003)(376002)(366004)(136003)(39860400002)(7416002)(7406005)(4326008)(6666004)(9686003)(186003)(478600001)(2906002)(6506007)(66556008)(8936002)(66946007)(66476007)(55016002)(52116002)(86362001)(26005)(5660300002)(110136005)(7696005)(956004)(16526019)(8676002)(316002);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData: =?us-ascii?Q?GVVmae2fpuGK2oJ5KRrSOfjoBXyS2Pg6fOS1yhTmwR5t21OZNx0gNSxNnwKz?=
- =?us-ascii?Q?xCZljSlABLs9fpLftdNzoQBBKHLxdGxuEqJURx3md2LOtjv8DvcpOEwS7Q/U?=
- =?us-ascii?Q?8tNziK8wPFcFNYllZ5wYBi5Tne09kfBsc/Qy6PJ4kTG70juZ77SCL9eRg6q0?=
- =?us-ascii?Q?hbwlFxCdnfJVsSYzFar/IaHe0nPmcL/UtUMo0ZxfsID9Sm0pfo1GrB0KUtM5?=
- =?us-ascii?Q?5Iu4vSFMArDie4dIURUlmsm472x2phgzCgacrW1Rd6EpII9py2v1wI8ws1dp?=
- =?us-ascii?Q?3ba6tem8ZSHhemhUOCqTT0M0NEacqGBSiYkuaD9M0stR4FooFNNN/WyaIbtr?=
- =?us-ascii?Q?RFcI8MRHtwAzAPDdYYBW4B8DSy6FJdsJQ0wfNnZXsAmVj+Zx7JdA8So3zMib?=
- =?us-ascii?Q?UtOERUWChlHlXkBq/N89p2QxI0G6ndF94I7oVRxP5OG3Jbw90SC1ZEDMwbEd?=
- =?us-ascii?Q?yTyNyjMgIy+Jy4E4WrohdQka34alXB3bH8VBYPOk7P4tKVCE8IPSYrted8u5?=
- =?us-ascii?Q?0/+gQsoQI4lwU8NRhaxqf/rQsfxuD+qaBkLeZngBAyP9+KAvwloFwo7+JzBM?=
- =?us-ascii?Q?DgYRycv5ljXceUTn9N9xoVaJlEBvAd/GrDrTCG9QNB6xMbuj2fy+MmXwihjB?=
- =?us-ascii?Q?RVGL+zIxlahMqr8Z2XtrRzl7GQpb96dEXZ7TCEs7T6Vme/l/10JdQYrTdeXy?=
- =?us-ascii?Q?VaAsOVS2CByBrRKHTt1OnvBJQhE5cyZtLKb7Vj/Sij7WmI24f7etqZ4YgfAV?=
- =?us-ascii?Q?Wr6QBu0lJYKikAYevHB8+M/1uRpqCgVh29xywXbN92Aq417HHsByqyVvGNJG?=
- =?us-ascii?Q?qHrY5UtscdVwfe6fncSsNVDqQ60o5Wr3PGIoCsniWYd6D1S/mUb5qdd4R/r4?=
- =?us-ascii?Q?sgT/6px9QpnG5eP9oWkDBrAvKO0hLG1XCajoe/C5EG7r/y0uPZazA/Uyd0Lk?=
- =?us-ascii?Q?KwRc+iSav/ptjm/cghiR+oeiEwTGZJFXEKUbkuRDprEYLJyJCEWgKvBUpBJ3?=
- =?us-ascii?Q?/NXgvB/mC1eufG7Ai7wm0w6BdW4uhqp9+qqXfzFv949sEqQSwhcGf1kaeFey?=
- =?us-ascii?Q?66b9XwnvB8+DmmIDIIPuXCHdn82G/nHoPSHOGrIjiso8Q1THv5yWuiKrcuWu?=
- =?us-ascii?Q?yB1EpvfnFmlQVs+ERIOHkrS8P8I6NSVSE5ys7G2Achogq6KDl/VB9qA6vvct?=
- =?us-ascii?Q?fgV5PzU2YGckjxjud0bZ9FsU5uzM9eJ2wz8Nnne8eM3Cuam4HmU0LwYf5Ssq?=
- =?us-ascii?Q?9ky1JFpa55/sKnGKlAcLx+88xBVHdaj5R22181NygkreA0I/8KjiFwBDRfKC?=
- =?us-ascii?Q?0ppzetP+TZkgHVuGsp0JnRaX?=
-X-OriginatorOrg: oracle.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 02501154-d7eb-497a-1b24-08d8d5157639
-X-MS-Exchange-CrossTenant-AuthSource: BYAPR10MB2999.namprd10.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Feb 2021 20:32:23.1896 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: oVdORDfZ29f7RAUpUN8XHDQ0O+4tk/o7h5eZ4IZtxStx6v91wvjKmdTWWJmN34CKJjicL60LgzclWhVJE0D7zg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR10MB4509
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=9900
- signatures=668683
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 bulkscore=0
- mlxlogscore=938
- phishscore=0 adultscore=0 mlxscore=0 suspectscore=0 malwarescore=0
- spamscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2009150000 definitions=main-2102190164
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=9900
- signatures=668683
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0
- lowpriorityscore=0 suspectscore=0
- impostorscore=0 priorityscore=1501 clxscore=1015 spamscore=0 mlxscore=0
- phishscore=0 malwarescore=0 bulkscore=0 adultscore=0 mlxlogscore=999
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2009150000
- definitions=main-2102190164
-X-Mailman-Approved-At: Fri, 19 Feb 2021 21:57:17 +0000
-Subject: Re: [Nouveau] [PATCH RFC v1 5/6] xen-swiotlb: convert variables to
- arrays
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=lyude@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Subject: [Nouveau] [PATCH 00/30] drm: Use new DRM printk funcs (like
+ drm_dbg_*()) in DP helpers
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -159,75 +63,110 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: ulf.hansson@linaro.org, airlied@linux.ie, benh@kernel.crashing.org,
- joonas.lahtinen@linux.intel.com, dri-devel@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, paulus@samba.org, hpa@zytor.com,
- mingo@kernel.org, m.szyprowski@samsung.com, sstabellini@kernel.org,
- adrian.hunter@intel.com, Dongli Zhang <dongli.zhang@oracle.com>,
- x86@kernel.org, joe.jin@oracle.com, peterz@infradead.org, mingo@redhat.com,
- bskeggs@redhat.com, linux-pci@vger.kernel.org, xen-devel@lists.xenproject.org,
- matthew.auld@intel.com, thomas.lendacky@amd.com,
- intel-gfx@lists.freedesktop.org, jani.nikula@linux.intel.com, bp@alien8.de,
- rodrigo.vivi@intel.com, bhelgaas@google.com, boris.ostrovsky@oracle.com,
- chris@chris-wilson.co.uk, jgross@suse.com, tsbogend@alpha.franken.de,
- nouveau@lists.freedesktop.org, robin.murphy@arm.com, linux-mmc@vger.kernel.org,
- linux-mips@vger.kernel.org, iommu@lists.linux-foundation.org,
- tglx@linutronix.de, bauerman@linux.ibm.com, daniel@ffwll.ch,
- mpe@ellerman.id.au, akpm@linux-foundation.org, linuxppc-dev@lists.ozlabs.org,
- rppt@kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Sun, Feb 07, 2021 at 04:56:01PM +0100, Christoph Hellwig wrote:
-> On Thu, Feb 04, 2021 at 09:40:23AM +0100, Christoph Hellwig wrote:
-> > So one thing that has been on my mind for a while:  I'd really like
-> > to kill the separate dma ops in Xen swiotlb.  If we compare xen-swiotlb
-> > to swiotlb the main difference seems to be:
-> > 
-> >  - additional reasons to bounce I/O vs the plain DMA capable
-> >  - the possibility to do a hypercall on arm/arm64
-> >  - an extra translation layer before doing the phys_to_dma and vice
-> >    versa
-> >  - an special memory allocator
-> > 
-> > I wonder if inbetween a few jump labels or other no overhead enablement
-> > options and possibly better use of the dma_range_map we could kill
-> > off most of swiotlb-xen instead of maintaining all this code duplication?
-> 
-> So I looked at this a bit more.
-> 
-> For x86 with XENFEAT_auto_translated_physmap (how common is that?)
+Since it's been asked quite a few times on some of the various DP
+related patch series I've submitted to use the new DRM printk helpers,
+and it technically wasn't really trivial to do this before due to the
+lack of a consistent way to find a drm_device for an AUX channel, this
+patch series aims to address this. In this series we:
 
-Juergen, Boris please correct me if I am wrong, but that XENFEAT_auto_translated_physmap
-only works for PVH guests?
+* Clean-up potentially erroneous usages of drm_dp_aux_init() and
+  drm_dp_aux_register() so that actual AUX registration doesn't happen
+  until we have an associated DRM device
+* Clean-up any obvious errors in drivers we find along the way
+* Add a backpointer to the respective drm_device for an AUX channel in
+  drm_dp_aux.drm_dev, and hook it up in every driver with an AUX channel
+  across the tree
+* Add a new ratelimited print helper we'll need for converting the DP
+  helpers over to using the new DRM printk helpers
+* Fix any inconsistencies with logging in drm_dp_helper.c so we always
+  have the aux channel name printed
+* Prepare the various DP helpers so they can find the correct drm_device
+  to use for logging
+* And finally, convert all of the DP helpers over to using drm_dbg_*()
+  and drm_err().
 
-> pfn_to_gfn is a nop, so plain phys_to_dma/dma_to_phys do work as-is.
-> 
-> xen_arch_need_swiotlb always returns true for x86, and
-> range_straddles_page_boundary should never be true for the
-> XENFEAT_auto_translated_physmap case.
+Lyude Paul (30):
+  drm/dp: Rewrap kdocs for struct drm_dp_aux
+  drm/dp: Fixup kernel docs for struct drm_dp_aux
+  drm/tegra: Don't register DP AUX channels before connectors
+  drm/bridge/tc358767: Don't register DP AUX channel until bridge is
+    attached
+  drm/bridge/cdns-mhdp8546: Register DP aux channel with userspace
+  drm/bridge/ti-sn65dsi86: (Un)register aux device on bridge
+    attach/detach
+  drm/bridge/analogix/anx78xx: Add missing drm_dp_aux_unregister() call
+  drm/bridge/analogix/anx78xx: Setup encoder before registering
+    connector
+  drm/bridge/analogix/anx78xx: Cleanup on error in
+    anx78xx_bridge_attach()
+  drm/bridge/analogix/anx6345: Add missing drm_dp_aux_unregister() call
+  drm/bridge/analogix/anx6345: Don't link encoder until after connector
+    registration
+  drm/bridge/analogix/anx6345: Cleanup on errors in
+    anx6345_bridge_attach()
+  drm/bridge/analogix/dp_core: Unregister DP AUX channel on error in
+    analogix_dp_probe()
+  drm/nouveau/kms/nv50-: Move AUX adapter reg to connector late
+    register/early unregister
+  drm/dp: Add backpointer to drm_device in drm_dp_aux
+  drm/dp: Rewrap drm_dp_aux_register()/drm_dp_aux_init() kdocs
+  drm/dp: Clarify DP AUX registration time
+  drm/print: Fixup DRM_DEBUG_KMS_RATELIMITED()
+  drm/dp: Pass drm_dp_aux to drm_dp_link_train_clock_recovery_delay()
+  drm/dp: Pass drm_dp_aux to drm_dp*_link_train_channel_eq_delay()
+  drm/dp: Always print aux channel name in logs
+  drm/dp_dual_mode: Pass drm_device to drm_dp_dual_mode_detect()
+  drm/dp_dual_mode: Pass drm_device to
+    drm_dp_dual_mode_set_tmds_output()
+  drm/dp_dual_mode: Pass drm_device to drm_dp_dual_mode_max_tmds_clock()
+  drm/dp_dual_mode: Pass drm_device to
+    drm_dp_dual_mode_get_tmds_output()
+  drm/dp_dual_mode: Pass drm_device to drm_lspcon_(get|set)_mode()
+  drm/dp_mst: Pass drm_dp_mst_topology_mgr to drm_dp_get_vc_payload_bw()
+  drm/dp: Convert drm_dp_helper.c to using drm_err/drm_dbg_*()
+  drm/dp_dual_mode: Convert drm_dp_dual_mode_helper.c to using
+    drm_err/drm_dbg_kms()
+  drm/dp_mst: Convert drm_dp_mst_topology.c to drm_err()/drm_dbg*()
 
-Correct. The kernel should have no clue of what the real MFNs are
-for PFNs.
-> 
-> So as far as I can tell the mapping fast path for the
-> XENFEAT_auto_translated_physmap can be trivially reused from swiotlb.
-> 
-> That leaves us with the next more complicated case, x86 or fully cache
-> coherent arm{,64} without XENFEAT_auto_translated_physmap.  In that case
-> we need to patch in a phys_to_dma/dma_to_phys that performs the MFN
-> lookup, which could be done using alternatives or jump labels.
-> I think if that is done right we should also be able to let that cover
-> the foreign pages in is_xen_swiotlb_buffer/is_swiotlb_buffer, but
-> in that worst case that would need another alternative / jump label.
-> 
-> For non-coherent arm{,64} we'd also need to use alternatives or jump
-> labels to for the cache maintainance ops, but that isn't a hard problem
-> either.
-> 
-> 
+ drivers/gpu/drm/amd/amdgpu/atombios_dp.c      |   5 +-
+ .../display/amdgpu_dm/amdgpu_dm_mst_types.c   |   1 +
+ .../drm/bridge/analogix/analogix-anx6345.c    |  28 +-
+ .../drm/bridge/analogix/analogix-anx78xx.c    |  28 +-
+ .../drm/bridge/analogix/analogix_dp_core.c    |   2 +
+ .../drm/bridge/cadence/cdns-mhdp8546-core.c   |  12 +-
+ drivers/gpu/drm/bridge/tc358767.c             |  21 +-
+ drivers/gpu/drm/bridge/ti-sn65dsi86.c         |  19 +-
+ drivers/gpu/drm/drm_dp_aux_dev.c              |   6 +
+ drivers/gpu/drm/drm_dp_dual_mode_helper.c     |  68 ++--
+ drivers/gpu/drm/drm_dp_helper.c               | 175 ++++----
+ drivers/gpu/drm/drm_dp_mst_topology.c         | 377 +++++++++---------
+ drivers/gpu/drm/i915/display/intel_dp_aux.c   |   1 +
+ .../drm/i915/display/intel_dp_link_training.c |   6 +-
+ drivers/gpu/drm/i915/display/intel_dp_mst.c   |   3 +-
+ drivers/gpu/drm/i915/display/intel_hdmi.c     |   7 +-
+ drivers/gpu/drm/i915/display/intel_lspcon.c   |  17 +-
+ drivers/gpu/drm/msm/dp/dp_ctrl.c              |   6 +-
+ drivers/gpu/drm/msm/edp/edp.h                 |   3 +-
+ drivers/gpu/drm/msm/edp/edp_aux.c             |   5 +-
+ drivers/gpu/drm/msm/edp/edp_ctrl.c            |   8 +-
+ drivers/gpu/drm/nouveau/nouveau_connector.c   |  27 +-
+ drivers/gpu/drm/radeon/atombios_dp.c          |   5 +-
+ drivers/gpu/drm/tegra/dpaux.c                 |  12 +-
+ drivers/gpu/drm/xlnx/zynqmp_dp.c              |   5 +-
+ include/drm/drm_dp_dual_mode_helper.h         |  14 +-
+ include/drm/drm_dp_helper.h                   |  59 +--
+ include/drm/drm_dp_mst_helper.h               |   3 +-
+ include/drm/drm_print.h                       |  20 +-
+ 29 files changed, 537 insertions(+), 406 deletions(-)
+
+-- 
+2.29.2
+
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
