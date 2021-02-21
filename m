@@ -1,40 +1,40 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 720B9320C71
-	for <lists+nouveau@lfdr.de>; Sun, 21 Feb 2021 19:12:32 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3E869320C85
+	for <lists+nouveau@lfdr.de>; Sun, 21 Feb 2021 19:22:47 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0D1176E420;
-	Sun, 21 Feb 2021 18:12:25 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4120C6E426;
+	Sun, 21 Feb 2021 18:22:45 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from perceval.ideasonboard.com (perceval.ideasonboard.com
- [IPv6:2001:4b98:dc2:55:216:3eff:fef7:d647])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 77F686E1A5;
- Sun, 21 Feb 2021 18:12:23 +0000 (UTC)
+ [213.167.242.64])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 115536E3D0;
+ Sun, 21 Feb 2021 18:22:44 +0000 (UTC)
 Received: from pendragon.ideasonboard.com (62-78-145-57.bb.dnainternet.fi
  [62.78.145.57])
- by perceval.ideasonboard.com (Postfix) with ESMTPSA id 30AE7EF;
- Sun, 21 Feb 2021 19:12:18 +0100 (CET)
+ by perceval.ideasonboard.com (Postfix) with ESMTPSA id 6ADAE8B6;
+ Sun, 21 Feb 2021 19:22:42 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
- s=mail; t=1613931138;
- bh=xdfpZVs5pD00qCgiYjQiBk3+yzMOzjLRl/tciOa0xRQ=;
+ s=mail; t=1613931762;
+ bh=ELeo/YYr7PiQSGC65qRaVofy0coNywtyWv2mSUttBog=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=dTBeVr1+HpMUqB10851acTLvDXgWnvg35PoUyXXimlsR+ONaWYnKSLLayt0vIArsm
- OMbmMeU70R2HpI1VzO23H0aXXbXOi8/nhoFQVfHnVtISrITADRv5Qq7LiHqpQhNVp0
- KzbpxsFJiiX05pQYTfrYgWyO186dgpxVREIUYacc=
-Date: Sun, 21 Feb 2021 20:11:51 +0200
+ b=IW3KOdfSne7xsixiEObAy92RTmpb6KGm8IQFmq5BSjMcqjXShAeMHE0zekRl17t/z
+ 1hP97UYars/z/70NecAZAdflxHEABTAiJel2ACipeOimF5y1ADfyaRpajJ0F7iNcap
+ U+glr/SmuYripVN318IWH3C9WeLJlhiENLeCqnwE=
+Date: Sun, 21 Feb 2021 20:22:16 +0200
 From: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
 To: Lyude Paul <lyude@redhat.com>
-Message-ID: <YDKiZ0LYPWq0dsFt@pendragon.ideasonboard.com>
+Message-ID: <YDKk2C+UAXR/sIOG@pendragon.ideasonboard.com>
 References: <20210219215326.2227596-1-lyude@redhat.com>
- <20210219215326.2227596-7-lyude@redhat.com>
+ <20210219215326.2227596-20-lyude@redhat.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20210219215326.2227596-7-lyude@redhat.com>
-Subject: Re: [Nouveau] [PATCH 06/30] drm/bridge/ti-sn65dsi86: (Un)register
- aux device on bridge attach/detach
+In-Reply-To: <20210219215326.2227596-20-lyude@redhat.com>
+Subject: Re: [Nouveau] [PATCH 19/30] drm/dp: Pass drm_dp_aux to
+ drm_dp_link_train_clock_recovery_delay()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -46,14 +46,32 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Jernej Skrabec <jernej.skrabec@siol.net>, dri-devel@lists.freedesktop.org,
- Neil Armstrong <narmstrong@baylibre.com>, David Airlie <airlied@linux.ie>,
- nouveau@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
- Jonas Karlman <jonas@kwiboo.se>, open list <linux-kernel@vger.kernel.org>,
- Jani Nikula <jani.nikula@linux.intel.com>, Andrzej Hajda <a.hajda@samsung.com>,
- amd-gfx@lists.freedesktop.org, Rodrigo Vivi <rodrigo.vivi@intel.com>,
- Daniel Vetter <daniel@ffwll.ch>,
- Ville =?utf-8?B?U3lyasOkbMOk?= <ville.syrjala@linux.intel.com>
+Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
+ Imre Deak <imre.deak@intel.com>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Oleg Vasilev <oleg.vasilev@intel.com>, dri-devel@lists.freedesktop.org,
+ Lee Jones <lee.jones@linaro.org>,
+ Ville =?utf-8?B?U3lyasOkbMOk?= <ville.syrjala@linux.intel.com>,
+ Emil Velikov <emil.velikov@collabora.com>,
+ Michal Simek <michal.simek@xilinx.com>, amd-gfx@lists.freedesktop.org,
+ Luben Tuikov <luben.tuikov@amd.com>,
+ Chandan Uddaraju <chandanu@codeaurora.org>, Daniel Vetter <daniel@ffwll.ch>,
+ "open list:DRM DRIVER FOR MSM ADRENO GPU" <linux-arm-msm@vger.kernel.org>,
+ intel-gfx@lists.freedesktop.org,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Stephen Boyd <swboyd@chromium.org>,
+ Kuogee Hsieh <khsieh@codeaurora.org>,
+ Jani Nikula <jani.nikula@linux.intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ =?utf-8?B?Sm9zw6k=?= Roberto de Souza <jose.souza@intel.com>,
+ Sean Paul <sean@poorly.run>,
+ "moderated list:ARM/ZYNQ ARCHITECTURE" <linux-arm-kernel@lists.infradead.org>,
+ Tanmay Shah <tanmay@codeaurora.org>, Hyun Kwon <hyun.kwon@xilinx.com>,
+ open list <linux-kernel@vger.kernel.org>,
+ Manasi Navare <manasi.d.navare@intel.com>, Rob Clark <robdclark@gmail.com>,
+ Alex Deucher <alexander.deucher@amd.com>,
+ "open list:DRM DRIVER FOR MSM ADRENO GPU" <freedreno@lists.freedesktop.org>,
+ Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
@@ -63,79 +81,139 @@ Hi Lyude,
 
 Thank you for the patch.
 
-On Fri, Feb 19, 2021 at 04:53:02PM -0500, Lyude Paul wrote:
-> Since we're about to add a back-pointer to drm_dev in drm_dp_aux, let's
-> move the AUX adapter registration to the first point where we know which
-> DRM device we'll be working with - when the drm_bridge is attached.
-> Likewise, we unregister the AUX adapter on bridge detachment by adding a
-> ti_sn_bridge_detach() callback.
+On Fri, Feb 19, 2021 at 04:53:15PM -0500, Lyude Paul wrote:
+> So that we can start using drm_dbg_*() in
+> drm_dp_link_train_clock_recovery_delay().
 > 
 > Signed-off-by: Lyude Paul <lyude@redhat.com>
 
 Reviewed-by: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
 
 > ---
->  drivers/gpu/drm/bridge/ti-sn65dsi86.c | 18 ++++++++++++++++--
->  1 file changed, 16 insertions(+), 2 deletions(-)
+>  drivers/gpu/drm/amd/amdgpu/atombios_dp.c              | 2 +-
+>  drivers/gpu/drm/drm_dp_helper.c                       | 3 ++-
+>  drivers/gpu/drm/i915/display/intel_dp_link_training.c | 2 +-
+>  drivers/gpu/drm/msm/dp/dp_ctrl.c                      | 2 +-
+>  drivers/gpu/drm/msm/edp/edp_ctrl.c                    | 2 +-
+>  drivers/gpu/drm/radeon/atombios_dp.c                  | 2 +-
+>  drivers/gpu/drm/xlnx/zynqmp_dp.c                      | 2 +-
+>  include/drm/drm_dp_helper.h                           | 4 +++-
+>  8 files changed, 11 insertions(+), 8 deletions(-)
 > 
-> diff --git a/drivers/gpu/drm/bridge/ti-sn65dsi86.c b/drivers/gpu/drm/bridge/ti-sn65dsi86.c
-> index f27306c51e4d..88df4dd0f39d 100644
-> --- a/drivers/gpu/drm/bridge/ti-sn65dsi86.c
-> +++ b/drivers/gpu/drm/bridge/ti-sn65dsi86.c
-> @@ -362,12 +362,18 @@ static int ti_sn_bridge_attach(struct drm_bridge *bridge,
->  		return -EINVAL;
->  	}
+> diff --git a/drivers/gpu/drm/amd/amdgpu/atombios_dp.c b/drivers/gpu/drm/amd/amdgpu/atombios_dp.c
+> index 6d35da65e09f..4468f9d6b4dd 100644
+> --- a/drivers/gpu/drm/amd/amdgpu/atombios_dp.c
+> +++ b/drivers/gpu/drm/amd/amdgpu/atombios_dp.c
+> @@ -611,7 +611,7 @@ amdgpu_atombios_dp_link_train_cr(struct amdgpu_atombios_dp_link_train_info *dp_i
+>  	dp_info->tries = 0;
+>  	voltage = 0xff;
+>  	while (1) {
+> -		drm_dp_link_train_clock_recovery_delay(dp_info->dpcd);
+> +		drm_dp_link_train_clock_recovery_delay(dp_info->aux, dp_info->dpcd);
 >  
-> +	ret = drm_dp_aux_register(&pdata->aux);
-> +	if (ret < 0) {
-> +		drm_err(bridge->dev, "Failed to register DP AUX channel: %d\n", ret);
-> +		return ret;
-> +	}
-> +
->  	ret = drm_connector_init(bridge->dev, &pdata->connector,
->  				 &ti_sn_bridge_connector_funcs,
->  				 DRM_MODE_CONNECTOR_eDP);
->  	if (ret) {
->  		DRM_ERROR("Failed to initialize connector with drm\n");
-> -		return ret;
-> +		goto err_conn_init;
->  	}
->  
->  	drm_connector_helper_add(&pdata->connector,
-> @@ -424,9 +430,16 @@ static int ti_sn_bridge_attach(struct drm_bridge *bridge,
->  	mipi_dsi_device_unregister(dsi);
->  err_dsi_host:
->  	drm_connector_cleanup(&pdata->connector);
-> +err_conn_init:
-> +	drm_dp_aux_unregister(&pdata->aux);
->  	return ret;
+>  		if (drm_dp_dpcd_read_link_status(dp_info->aux,
+>  						 dp_info->link_status) <= 0) {
+> diff --git a/drivers/gpu/drm/drm_dp_helper.c b/drivers/gpu/drm/drm_dp_helper.c
+> index 194e0c273809..ce08eb3bface 100644
+> --- a/drivers/gpu/drm/drm_dp_helper.c
+> +++ b/drivers/gpu/drm/drm_dp_helper.c
+> @@ -132,7 +132,8 @@ u8 drm_dp_get_adjust_request_post_cursor(const u8 link_status[DP_LINK_STATUS_SIZ
 >  }
+>  EXPORT_SYMBOL(drm_dp_get_adjust_request_post_cursor);
 >  
-> +static void ti_sn_bridge_detach(struct drm_bridge *bridge)
-> +{
-> +	drm_dp_aux_unregister(&bridge_to_ti_sn_bridge(bridge)->aux);
-> +}
-> +
->  static void ti_sn_bridge_disable(struct drm_bridge *bridge)
+> -void drm_dp_link_train_clock_recovery_delay(const u8 dpcd[DP_RECEIVER_CAP_SIZE])
+> +void drm_dp_link_train_clock_recovery_delay(const struct drm_dp_aux *aux,
+> +					    const u8 dpcd[DP_RECEIVER_CAP_SIZE])
 >  {
->  	struct ti_sn_bridge *pdata = bridge_to_ti_sn_bridge(bridge);
-> @@ -863,6 +876,7 @@ static void ti_sn_bridge_post_disable(struct drm_bridge *bridge)
+>  	unsigned long rd_interval = dpcd[DP_TRAINING_AUX_RD_INTERVAL] &
+>  					 DP_TRAINING_AUX_RD_MASK;
+> diff --git a/drivers/gpu/drm/i915/display/intel_dp_link_training.c b/drivers/gpu/drm/i915/display/intel_dp_link_training.c
+> index 892d7db7d94f..222073d46bdb 100644
+> --- a/drivers/gpu/drm/i915/display/intel_dp_link_training.c
+> +++ b/drivers/gpu/drm/i915/display/intel_dp_link_training.c
+> @@ -441,7 +441,7 @@ static void intel_dp_link_training_clock_recovery_delay(struct intel_dp *intel_d
+>  							enum drm_dp_phy dp_phy)
+>  {
+>  	if (dp_phy == DP_PHY_DPRX)
+> -		drm_dp_link_train_clock_recovery_delay(intel_dp->dpcd);
+> +		drm_dp_link_train_clock_recovery_delay(&intel_dp->aux, intel_dp->dpcd);
+>  	else
+>  		drm_dp_lttpr_link_train_clock_recovery_delay();
+>  }
+> diff --git a/drivers/gpu/drm/msm/dp/dp_ctrl.c b/drivers/gpu/drm/msm/dp/dp_ctrl.c
+> index 36b39c381b3f..2501a6b326a3 100644
+> --- a/drivers/gpu/drm/msm/dp/dp_ctrl.c
+> +++ b/drivers/gpu/drm/msm/dp/dp_ctrl.c
+> @@ -1103,7 +1103,7 @@ static int dp_ctrl_link_train_1(struct dp_ctrl_private *ctrl,
+>  	tries = 0;
+>  	old_v_level = ctrl->link->phy_params.v_level;
+>  	for (tries = 0; tries < maximum_retries; tries++) {
+> -		drm_dp_link_train_clock_recovery_delay(ctrl->panel->dpcd);
+> +		drm_dp_link_train_clock_recovery_delay(ctrl->aux, ctrl->panel->dpcd);
 >  
->  static const struct drm_bridge_funcs ti_sn_bridge_funcs = {
->  	.attach = ti_sn_bridge_attach,
-> +	.detach = ti_sn_bridge_detach,
->  	.pre_enable = ti_sn_bridge_pre_enable,
->  	.enable = ti_sn_bridge_enable,
->  	.disable = ti_sn_bridge_disable,
-> @@ -1287,7 +1301,7 @@ static int ti_sn_bridge_probe(struct i2c_client *client,
->  	pdata->aux.name = "ti-sn65dsi86-aux";
->  	pdata->aux.dev = pdata->dev;
->  	pdata->aux.transfer = ti_sn_aux_transfer;
-> -	drm_dp_aux_register(&pdata->aux);
-> +	drm_dp_aux_init(&pdata->aux);
+>  		ret = dp_ctrl_read_link_status(ctrl, link_status);
+>  		if (ret)
+> diff --git a/drivers/gpu/drm/msm/edp/edp_ctrl.c b/drivers/gpu/drm/msm/edp/edp_ctrl.c
+> index 57af3d8b6699..6501598448b4 100644
+> --- a/drivers/gpu/drm/msm/edp/edp_ctrl.c
+> +++ b/drivers/gpu/drm/msm/edp/edp_ctrl.c
+> @@ -608,7 +608,7 @@ static int edp_start_link_train_1(struct edp_ctrl *ctrl)
+>  	tries = 0;
+>  	old_v_level = ctrl->v_level;
+>  	while (1) {
+> -		drm_dp_link_train_clock_recovery_delay(ctrl->dpcd);
+> +		drm_dp_link_train_clock_recovery_delay(ctrl->drm_aux, ctrl->dpcd);
 >  
->  	pdata->bridge.funcs = &ti_sn_bridge_funcs;
->  	pdata->bridge.of_node = client->dev.of_node;
+>  		rlen = drm_dp_dpcd_read_link_status(ctrl->drm_aux, link_status);
+>  		if (rlen < DP_LINK_STATUS_SIZE) {
+> diff --git a/drivers/gpu/drm/radeon/atombios_dp.c b/drivers/gpu/drm/radeon/atombios_dp.c
+> index c50c504bad50..299b9d8da376 100644
+> --- a/drivers/gpu/drm/radeon/atombios_dp.c
+> +++ b/drivers/gpu/drm/radeon/atombios_dp.c
+> @@ -680,7 +680,7 @@ static int radeon_dp_link_train_cr(struct radeon_dp_link_train_info *dp_info)
+>  	dp_info->tries = 0;
+>  	voltage = 0xff;
+>  	while (1) {
+> -		drm_dp_link_train_clock_recovery_delay(dp_info->dpcd);
+> +		drm_dp_link_train_clock_recovery_delay(dp_info->aux, dp_info->dpcd);
+>  
+>  		if (drm_dp_dpcd_read_link_status(dp_info->aux,
+>  						 dp_info->link_status) <= 0) {
+> diff --git a/drivers/gpu/drm/xlnx/zynqmp_dp.c b/drivers/gpu/drm/xlnx/zynqmp_dp.c
+> index 8272eee03adc..5cc295d8ba9f 100644
+> --- a/drivers/gpu/drm/xlnx/zynqmp_dp.c
+> +++ b/drivers/gpu/drm/xlnx/zynqmp_dp.c
+> @@ -713,7 +713,7 @@ static int zynqmp_dp_link_train_cr(struct zynqmp_dp *dp)
+>  		if (ret)
+>  			return ret;
+>  
+> -		drm_dp_link_train_clock_recovery_delay(dp->dpcd);
+> +		drm_dp_link_train_clock_recovery_delay(&dp->aux, dp->dpcd);
+>  		ret = drm_dp_dpcd_read_link_status(&dp->aux, link_status);
+>  		if (ret < 0)
+>  			return ret;
+> diff --git a/include/drm/drm_dp_helper.h b/include/drm/drm_dp_helper.h
+> index 45ec74862212..e4681665231e 100644
+> --- a/include/drm/drm_dp_helper.h
+> +++ b/include/drm/drm_dp_helper.h
+> @@ -29,6 +29,7 @@
+>  #include <drm/drm_connector.h>
+>  
+>  struct drm_device;
+> +struct drm_dp_aux;
+>  
+>  /*
+>   * Unless otherwise noted, all values are from the DP 1.1a spec.  Note that
+> @@ -1475,7 +1476,8 @@ u8 drm_dp_get_adjust_request_post_cursor(const u8 link_status[DP_LINK_STATUS_SIZ
+>  #define DP_LTTPR_COMMON_CAP_SIZE	8
+>  #define DP_LTTPR_PHY_CAP_SIZE		3
+>  
+> -void drm_dp_link_train_clock_recovery_delay(const u8 dpcd[DP_RECEIVER_CAP_SIZE]);
+> +void drm_dp_link_train_clock_recovery_delay(const struct drm_dp_aux *aux,
+> +					    const u8 dpcd[DP_RECEIVER_CAP_SIZE]);
+>  void drm_dp_lttpr_link_train_clock_recovery_delay(void);
+>  void drm_dp_link_train_channel_eq_delay(const u8 dpcd[DP_RECEIVER_CAP_SIZE]);
+>  void drm_dp_lttpr_link_train_channel_eq_delay(const u8 caps[DP_LTTPR_PHY_CAP_SIZE]);
 
 -- 
 Regards,
