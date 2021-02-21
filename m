@@ -2,161 +2,42 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 16026321DA2
-	for <lists+nouveau@lfdr.de>; Mon, 22 Feb 2021 18:00:42 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 067DD321DA0
+	for <lists+nouveau@lfdr.de>; Mon, 22 Feb 2021 18:00:39 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 794B26E584;
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4B0AB6E55E;
 	Mon, 22 Feb 2021 17:00:37 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from userp2130.oracle.com (userp2130.oracle.com [156.151.31.86])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 15D7B6ECAD;
- Sat, 20 Feb 2021 00:01:05 +0000 (UTC)
-Received: from pps.filterd (userp2130.oracle.com [127.0.0.1])
- by userp2130.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 11K007Vd108102;
- Sat, 20 Feb 2021 00:00:07 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
- h=subject : to : cc :
- references : from : message-id : date : in-reply-to : content-type :
- content-transfer-encoding : mime-version; s=corp-2020-01-29;
- bh=Y/1Rbl3M9BfZ0Z0hndSyr6AhqYtgqVV5G/OyW4hBz7I=;
- b=RrPwkanvaetiVvaN/34DZC6QPNCVDceabm0+2pUq/x8j27lA/hYON9sGlsnme9KZwQm4
- 9M6Zo4gWxR9/V3Yhm1WF+VqN8GL+U06yv953pVgJNEXaop5XRzeLSYm+W/uExG0yWcMf
- im9eGs7SeCgkyWsQEm6UqQZTzkfQFdRgNY/zz6qfEXJujTbqFkGKk+bUrZVvY5u3UkI3
- GIBmYEkbqp5MTFUGaVRjund5P6hc/V0lsIOIxjqw7K67C0A6KgDM+P8Cdy+dtPn+z32v
- YfU0xSIg9HDQH+buDTtlxDIHm2fzIXTOk1+Y3+5NFG6Jh7XvTvQ3Qnf8D9cP7SEYko1T mg== 
-Received: from aserp3030.oracle.com (aserp3030.oracle.com [141.146.126.71])
- by userp2130.oracle.com with ESMTP id 36p66rb3t9-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Sat, 20 Feb 2021 00:00:07 +0000
-Received: from pps.filterd (aserp3030.oracle.com [127.0.0.1])
- by aserp3030.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 11JNuVkv131595;
- Sat, 20 Feb 2021 00:00:06 GMT
-Received: from nam02-bl2-obe.outbound.protection.outlook.com
- (mail-bl2nam02lp2055.outbound.protection.outlook.com [104.47.38.55])
- by aserp3030.oracle.com with ESMTP id 36prbsqydk-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Sat, 20 Feb 2021 00:00:06 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=QCmOyuJrc/ZVzb9DLnW6nhkAaVU54Rqn9LIvbKIFHDF7ivmxxZ1s0hAhAyiLjKlXU6Q00XC677BD7Xb1OZRhIj45KabeDDJg4AH7A/4cmLTKhM0Z++B9J8zOUo7lfZU/jOW9kyrt9NUrczL4CXcxO+5QUWK17gdR0xb4hNU9YLPwpKijFoEjB5E1BGnUytLHZMWvMVw8Zl/wePx08Amx3DGO+KlaV/pJqnCHysY4PX+pJ302jONXXA1C6B2zedP7oJdQnjtqQ/AJKblgvFkaOtljA+9Rc3+FLNzRwfWALMI2/g5ylz/lLLMfvWirIJfRShJksgS0Ga+NztqIWUSsVQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Y/1Rbl3M9BfZ0Z0hndSyr6AhqYtgqVV5G/OyW4hBz7I=;
- b=FGv/cD/onuD6rn36VacLKq0wRegFJxsfzAFFlpZzPAuO432Qb59OPk+jVyUUcjpsOv4fsvpnKI8EvIT60VHY89dhyea7uHBdbRs1NubjCGveWCJBB69lJMoKdNgj+brGkcQEs+V8YEMBwt0Qngea2gpQGJcg8C1mAILEdo5HWVqZgOwWdxlQ7uZHhy28Q7dFMK2npDyIx3KjLsm7Hu2JB46TCw+7U+vAsOgs4pOsb+Jsm2ELh/qv0tgyPOy8Eu1xxxsSZBzkePORQR972k0en3s0Db4CR1IPsaTqktjmv11HUoERoYILX9FkOqZOlWBLoZQ3ASSkZI3A+p06ZnKSMw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oracle.com; dmarc=pass action=none header.from=oracle.com;
- dkim=pass header.d=oracle.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Y/1Rbl3M9BfZ0Z0hndSyr6AhqYtgqVV5G/OyW4hBz7I=;
- b=rn3tuoDTZG8LxnbDl5WtBXHVX+/Kw9sUIf7++eP1+3d29N6LX8iyox2HZZimXwwtHwJdsY7Q5Q7z6xh+CPdgt3/Z1I4oShP8dU9DOTcaoL3zB3CWTeA9islOlBkWcjCZ5v5MPE/3VrtmNKkbdt/Yd8XxdEVokQyBkVYfYW3sx4Y=
-Authentication-Results: amd.com; dkim=none (message not signed)
- header.d=none;amd.com; dmarc=none action=none header.from=oracle.com;
-Received: from BYAPR10MB3288.namprd10.prod.outlook.com (2603:10b6:a03:156::21)
- by BYAPR10MB3478.namprd10.prod.outlook.com (2603:10b6:a03:124::17)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3846.31; Sat, 20 Feb
- 2021 00:00:02 +0000
-Received: from BYAPR10MB3288.namprd10.prod.outlook.com
- ([fe80::f489:4e25:63e0:c721]) by BYAPR10MB3288.namprd10.prod.outlook.com
- ([fe80::f489:4e25:63e0:c721%7]) with mapi id 15.20.3868.029; Sat, 20 Feb 2021
- 00:00:02 +0000
-To: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
- Christoph Hellwig <hch@lst.de>, jgross@suse.com
-References: <20210203233709.19819-1-dongli.zhang@oracle.com>
- <20210203233709.19819-6-dongli.zhang@oracle.com>
- <20210204084023.GA32328@lst.de> <20210207155601.GA25111@lst.de>
- <YDAgT2ZIdncNwNlf@Konrads-MacBook-Pro.local>
-From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-Message-ID: <e0baa2fa-0ca4-ef21-aeb0-319d9648e830@oracle.com>
-Date: Fri, 19 Feb 2021 18:59:50 -0500
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
- Gecko/20100101 Thunderbird/78.7.1
-In-Reply-To: <YDAgT2ZIdncNwNlf@Konrads-MacBook-Pro.local>
-Content-Language: en-US
-X-Originating-IP: [138.3.200.49]
-X-ClientProxiedBy: SA9PR13CA0183.namprd13.prod.outlook.com
- (2603:10b6:806:26::8) To BYAPR10MB3288.namprd10.prod.outlook.com
- (2603:10b6:a03:156::21)
+X-Greylist: delayed 556 seconds by postgrey-1.36 at gabe;
+ Sun, 21 Feb 2021 18:21:37 UTC
+Received: from perceval.ideasonboard.com (perceval.ideasonboard.com
+ [213.167.242.64])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 247B06E075;
+ Sun, 21 Feb 2021 18:21:37 +0000 (UTC)
+Received: from pendragon.ideasonboard.com (62-78-145-57.bb.dnainternet.fi
+ [62.78.145.57])
+ by perceval.ideasonboard.com (Postfix) with ESMTPSA id 59FA7EF;
+ Sun, 21 Feb 2021 19:21:34 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
+ s=mail; t=1613931694;
+ bh=GrTgQ2aab5eBCzMDahXFKzsgqhR0cCzd4d93CPbsd74=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=S7py4GN1+mpKFxaItm5BBufzjOGkqLdjNQ2MgSfbxdQj+51l9D2t3BC2YyeQEmWI7
+ XeNseMhQGrt8folLYb5Ub+y60aver4uMxtfEEWxsp3I0QdkeEcogpgL/qx0R3cZL50
+ Jf4yp7Vzr3b+VPBGRGqLdh/UMEIwSFyVwm8rczfQ=
+Date: Sun, 21 Feb 2021 20:21:08 +0200
+From: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+To: Lyude Paul <lyude@redhat.com>
+Message-ID: <YDKklI3grZjn3dde@pendragon.ideasonboard.com>
+References: <20210219215326.2227596-1-lyude@redhat.com>
+ <20210219215326.2227596-16-lyude@redhat.com>
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [10.74.102.113] (138.3.200.49) by
- SA9PR13CA0183.namprd13.prod.outlook.com (2603:10b6:806:26::8) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.3890.12 via Frontend Transport; Fri, 19 Feb 2021 23:59:54 +0000
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: bb977870-6db9-4847-4298-08d8d5327889
-X-MS-TrafficTypeDiagnostic: BYAPR10MB3478:
-X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: <BYAPR10MB347819496D28F67CB66D38608A839@BYAPR10MB3478.namprd10.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:9508;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: wHw8Rtx56J3eNRtZBG9OfoZ1cOLDXUf6QDLcCWPioJ5/KOPcUj3PSCBdhUP7BePHPJ6ibTO6BrurKX3Exn4z+Ksng6aTsUlWNbm1G09qeQWyZfSwuhPHQxpmy9/yWDJAzq5qjIrtO4wYs1YIUzcOc4h6YpRoISCpv3l9eDx3QTjzUuhWuRcSlM0N6jXktGmoJ3CvjBdiZmBxzoD3cUFDmHGwsf3xTmMRvfSkZsr4wJej2OvfnF0plIxq0yfiKeiJOm038h6DGy4hz1z3Yn6GUjOUY1NmhKCHKUay95nlQce1Ae1MxZ68x1cMUzsZHGb4HssnfLTgnq5ACwU7dvu7Siyyllr7mYN7d4siXgzqtxBuNAgQZkFsTfDi1KuzKC+zKFJol1Wl18x7y/YEtCcng/cbeyFT9wO18tJ0IEEKveNT+HLyit2yadfNjZIV7kguyyoK3jgNePYYM4paLSijNM8AIEjD18LwhZ5vmILZrhXotVvTB7NWCNpYeBRs3dUjFJLwU/OV7PIfnPmvBFAB3VyZsgeB7NmvIBJZ9YsHqDmLV/A+F/cISJl2SraKa3/0/D0ni6tVIQi+OR5Q8wfZg5RFzwOQejne37B3sjBHnFU=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:BYAPR10MB3288.namprd10.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(366004)(136003)(346002)(39860400002)(396003)(376002)(6486002)(186003)(86362001)(53546011)(36756003)(2906002)(8936002)(66476007)(16526019)(31686004)(7416002)(478600001)(316002)(5660300002)(8676002)(26005)(31696002)(66946007)(2616005)(44832011)(7406005)(16576012)(6666004)(110136005)(956004)(66556008)(4326008)(43740500002)(45980500001);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData: =?utf-8?B?QVNCUUpBb2NkS1p2blZLb3hFcGxJUkI3NHQvSElScElQcUNXNTVVcWErT2hQ?=
- =?utf-8?B?ckZScGRYT3UvRWM1czFuVjgrVDViTVVyY0FQQmpqNCt5eVJEMUtNcDkxYjFD?=
- =?utf-8?B?L28xVWtrRUQ2YXYrcGw3cVBIVm1CbmQ2aS9DeDJSWnBPeVc1aXN2S3FIVkdP?=
- =?utf-8?B?WmV6TkNuTjdUazdKR0hOUStHKzFWajlZWmFBdisvRnFRTmR6RVIxVGQraFpQ?=
- =?utf-8?B?T2dPUkpEY3dvMFBFT2FqOG5HWUZOR20wYnkxQ0s3cVlsMEN6OXpGaDUxTW8v?=
- =?utf-8?B?Rm54WURzTDh4RWJjb2hUWlpibkZrdDFyc29OQjduRDhwK1NKalk5bkMvWXFl?=
- =?utf-8?B?SVllM3ROWVcyZkZvNXNRd1BEM2pobm5jWUNhOWl3VC9JOFFESi82YzhLeFN0?=
- =?utf-8?B?TjVxcVJtTkhjSm45akN0TW90UU5kU2ZLQ0pXUDlJRTQ1MFAzbno5ajQ3eWxt?=
- =?utf-8?B?SlUyUWhZTDZCOTZLSEw1anJ1T0lVMmVZU2txMTdQbXI0NWhsbE82RnhobXMv?=
- =?utf-8?B?VHF3S2tESy8rYmhlSWh6OTZhN1VjUDRKbHcyckJpckVFRjdXcHVoanVnZkJy?=
- =?utf-8?B?VHdPZmczc05abzEwMkxrdW4wS1NqRTFwbzJ4L082OVZmbVp5VTk2aDFOQURJ?=
- =?utf-8?B?RWZOKzNMWnRDNGpxdHM0YkpCVjlwQzZ2d1FZcWtFYWVqR3plMzU1U0ZtSWpZ?=
- =?utf-8?B?YjFxUzhDcmZIYUJSL2JOR25scGZkM1dVWGpVLzdsMEdvN2hwMzlXVmlDa01O?=
- =?utf-8?B?QVErY3VCa3J0bzBFMThmN2xzWEtWb3VqTHFVcTdBUmlBeWE3ZWJndDhhTkUv?=
- =?utf-8?B?dE12QnNPUGhUZWVHZ01TZzdJamhBZEo1UW44NGhhM1NTUkhjbkdEeitpeHIw?=
- =?utf-8?B?d2pjRStpNFFjSFlaeUFQbWl3TUZEZWlNZ3lGaE5razNaY2lqZ2JIUCtTSUpM?=
- =?utf-8?B?YUNyRUtySjg5eVhxYzNDZkV5V3o5N3hnUUdFN3pybzYrRnRhUDdSSGxUb2x5?=
- =?utf-8?B?NFNoQnFuMVkxRk1xN3EvT0pwRUJEcTRHbmZCdUVOamRlbWNjTHJoaldTMExn?=
- =?utf-8?B?RW9kcVhyQU9qV3dPbG14S2ZwMjVHQlZzak1PU0N1RHpGcHNWYjJNRFU1TERE?=
- =?utf-8?B?K0RadlpBaGpUVklYZW9iZUl0TVpCQlpUMzFsdmU4S0tHRWxVcEphQWI1MG1i?=
- =?utf-8?B?aURDSXgwbzZBR0U0aHM3am5kZzZHL0U1OWhJVjlvem5CQ3VNR3ZRRU1YQWRJ?=
- =?utf-8?B?MkxTdlBXNkU4QWMyZnBNNFIvZzNhSHU1MGRmV3RJK2lmVU5nYTNOTmgwMHJ5?=
- =?utf-8?B?YVpKVkVXNTRQRTkzZVB3Z1pXZEVjQ3FzMDcramdETkZveXZrNjB3ODV3V0dN?=
- =?utf-8?B?Y0ZhcTF6YXZmbHFrcDlNZjdEYVBGbjA1bzNmZ050R3FPbTVIYVllY0g3VFVj?=
- =?utf-8?B?NWRJbm9tOEhmVStJQ3hzWWlyclJQQlZwVzBlYkVvVWN4RFMrc0d4SUJGamlK?=
- =?utf-8?B?S2hEb05WejZmclpKd1pvOUtXeHVteHEzNUZkS1ZOWTY3a0Rzc0dKdHNZMzRl?=
- =?utf-8?B?WUlWRVhQWEMzQ1dNUkkzQzVVOHlpeTEzbWo0Z1lYNThxSkRDUTBkajdZM3VQ?=
- =?utf-8?B?OXVkUVI0eVNTYkZqeDV2cU9ObDBEeEpoaExaSmQ1YjRhN25lZm5NMXpZSURl?=
- =?utf-8?B?S2FsVGZCS3J0YU1aZ3c3NmgvWE5rb09qNDBaeVo1Wk43NXArbU9GZFhTeEhz?=
- =?utf-8?Q?n2oelDtJvZWoXjrMy4S1QIGAPbxs5OfZ1Dx/wvW?=
-X-OriginatorOrg: oracle.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: bb977870-6db9-4847-4298-08d8d5327889
-X-MS-Exchange-CrossTenant-AuthSource: BYAPR10MB3288.namprd10.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Feb 2021 00:00:02.3805 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Des4+MdYQUm56M8MWeOPJBdTKtHtZDWQxPVWdvf+t3tq7lw1L/455wkojdxiIP+TV14ml/NWhpHwXjt94wgy9iCuufxjtuBu/+w3PAZeb30=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR10MB3478
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=9900
- signatures=668683
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 malwarescore=0
- spamscore=0 mlxscore=0
- phishscore=0 adultscore=0 bulkscore=0 mlxlogscore=999 suspectscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2009150000
- definitions=main-2102190196
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=9900
- signatures=668683
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0
- lowpriorityscore=0 suspectscore=0
- impostorscore=0 priorityscore=1501 clxscore=1011 spamscore=0 mlxscore=0
- phishscore=0 malwarescore=0 bulkscore=0 adultscore=0 mlxlogscore=999
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2009150000
- definitions=main-2102190196
+Content-Disposition: inline
+In-Reply-To: <20210219215326.2227596-16-lyude@redhat.com>
 X-Mailman-Approved-At: Mon, 22 Feb 2021 17:00:36 +0000
-Subject: Re: [Nouveau] [PATCH RFC v1 5/6] xen-swiotlb: convert variables to
- arrays
+Subject: Re: [Nouveau] [PATCH 15/30] drm/dp: Add backpointer to drm_device
+ in drm_dp_aux
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -168,81 +49,365 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: ulf.hansson@linaro.org, airlied@linux.ie, benh@kernel.crashing.org,
- joonas.lahtinen@linux.intel.com, dri-devel@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, paulus@samba.org, hpa@zytor.com,
- mingo@kernel.org, m.szyprowski@samsung.com, sstabellini@kernel.org,
- Dongli Zhang <dongli.zhang@oracle.com>, x86@kernel.org, joe.jin@oracle.com,
- peterz@infradead.org, mingo@redhat.com, bskeggs@redhat.com,
- linux-pci@vger.kernel.org, xen-devel@lists.xenproject.org,
- matthew.auld@intel.com, thomas.lendacky@amd.com,
- intel-gfx@lists.freedesktop.org, jani.nikula@linux.intel.com, bp@alien8.de,
- rodrigo.vivi@intel.com, bhelgaas@google.com, tglx@linutronix.de,
- adrian.hunter@intel.com, tsbogend@alpha.franken.de, chris@chris-wilson.co.uk,
- nouveau@lists.freedesktop.org, robin.murphy@arm.com, linux-mmc@vger.kernel.org,
- linux-mips@vger.kernel.org, iommu@lists.linux-foundation.org,
- bauerman@linux.ibm.com, daniel@ffwll.ch, mpe@ellerman.id.au,
- akpm@linux-foundation.org, linuxppc-dev@lists.ozlabs.org, rppt@kernel.org
+Cc: Neil Armstrong <narmstrong@baylibre.com>, David Airlie <airlied@linux.ie>,
+ nouveau@lists.freedesktop.org,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Oleg Vasilev <oleg.vasilev@intel.com>, dri-devel@lists.freedesktop.org,
+ Andrzej Hajda <a.hajda@samsung.com>, Thierry Reding <thierry.reding@gmail.com>,
+ Sam Ravnborg <sam@ravnborg.org>,
+ Ville =?utf-8?B?U3lyasOkbMOk?= <ville.syrjala@linux.intel.com>,
+ Emil Velikov <emil.velikov@collabora.com>,
+ Tomi Valkeinen <tomi.valkeinen@ti.com>, Michal Simek <michal.simek@xilinx.com>,
+ amd-gfx@lists.freedesktop.org, Vasily Khoruzhick <anarsoul@gmail.com>,
+ "Jerry \(Fangzhi\) Zuo" <Jerry.Zuo@amd.com>,
+ Luben Tuikov <luben.tuikov@amd.com>, Ben Skeggs <bskeggs@redhat.com>,
+ Swapnil Jakhade <sjakhade@cadence.com>,
+ Marek Szyprowski <m.szyprowski@samsung.com>,
+ Harry Wentland <harry.wentland@amd.com>, Icenowy Zheng <icenowy@aosc.io>,
+ Daniel Vetter <daniel@ffwll.ch>, Jonas Karlman <jonas@kwiboo.se>,
+ Leo Li <sunpeng.li@amd.com>,
+ "open list:DRM DRIVER FOR MSM ADRENO GPU" <linux-arm-msm@vger.kernel.org>,
+ intel-gfx@lists.freedesktop.org,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>,
+ Rodrigo Siqueira <rodrigosiqueiramelo@gmail.com>,
+ Yuti Amonkar <yamonkar@cadence.com>, Jani Nikula <jani.nikula@linux.intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ "open list:DRM DRIVERS FOR NVIDIA TEGRA" <linux-tegra@vger.kernel.org>,
+ Mikita Lipski <mikita.lipski@amd.com>, Sean Paul <sean@poorly.run>,
+ "moderated list:ARM/ZYNQ ARCHITECTURE" <linux-arm-kernel@lists.infradead.org>,
+ Jernej Skrabec <jernej.skrabec@siol.net>, Chris Park <Chris.Park@amd.com>,
+ Eryk Brol <eryk.brol@amd.com>, Hyun Kwon <hyun.kwon@xilinx.com>,
+ Pankaj Bharadiya <pankaj.laxminarayan.bharadiya@intel.com>,
+ open list <linux-kernel@vger.kernel.org>, Julia Lawall <Julia.Lawall@inria.fr>,
+ Rob Clark <robdclark@gmail.com>,
+ Boris Brezillon <boris.brezillon@collabora.com>, Torsten Duwe <duwe@lst.de>,
+ Alex Deucher <alexander.deucher@amd.com>, Joe Perches <joe@perches.com>,
+ "open list:DRM DRIVER FOR MSM ADRENO GPU" <freedreno@lists.freedesktop.org>,
+ Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+Hi Lyude,
 
-On 2/19/21 3:32 PM, Konrad Rzeszutek Wilk wrote:
-> On Sun, Feb 07, 2021 at 04:56:01PM +0100, Christoph Hellwig wrote:
->> On Thu, Feb 04, 2021 at 09:40:23AM +0100, Christoph Hellwig wrote:
->>> So one thing that has been on my mind for a while:  I'd really like
->>> to kill the separate dma ops in Xen swiotlb.  If we compare xen-swiotlb
->>> to swiotlb the main difference seems to be:
->>>
->>>  - additional reasons to bounce I/O vs the plain DMA capable
->>>  - the possibility to do a hypercall on arm/arm64
->>>  - an extra translation layer before doing the phys_to_dma and vice
->>>    versa
->>>  - an special memory allocator
->>>
->>> I wonder if inbetween a few jump labels or other no overhead enablement
->>> options and possibly better use of the dma_range_map we could kill
->>> off most of swiotlb-xen instead of maintaining all this code duplication?
->> So I looked at this a bit more.
->>
->> For x86 with XENFEAT_auto_translated_physmap (how common is that?)
-> Juergen, Boris please correct me if I am wrong, but that XENFEAT_auto_translated_physmap
-> only works for PVH guests?
+Thank you for the patch.
 
+On Fri, Feb 19, 2021 at 04:53:11PM -0500, Lyude Paul wrote:
+> This is something that we've wanted for a while now: the ability to
+> actually look up the respective drm_device for a given drm_dp_aux struct.
+> This will also allow us to transition over to using the drm_dbg_*() helpers
+> for debug message printing, as we'll finally have a drm_device to reference
+> for doing so.
 
-That's both HVM and PVH (for dom0 it's only PVH).
+Isn't it better to use the existing dev field ? If you have multiple DP
+outputs for one DRM device, using the DRM device name in debug messages
+won't tell which output the message corresponds to.
 
+> Note that there is one limitation with this - because some DP AUX adapters
+> exist as platform devices which are initialized independently of their
+> respective DRM devices, one cannot rely on drm_dp_aux->drm_dev to always be
+> non-NULL until drm_dp_aux_register() has been called. We make sure to point
+> this out in the documentation for struct drm_dp_aux.
+> 
+> Signed-off-by: Lyude Paul <lyude@redhat.com>
+> ---
+>  drivers/gpu/drm/amd/amdgpu/atombios_dp.c                 | 1 +
+>  .../gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_mst_types.c  | 1 +
+>  drivers/gpu/drm/bridge/analogix/analogix-anx6345.c       | 1 +
+>  drivers/gpu/drm/bridge/analogix/analogix-anx78xx.c       | 1 +
+>  drivers/gpu/drm/bridge/analogix/analogix_dp_core.c       | 1 +
+>  drivers/gpu/drm/bridge/cadence/cdns-mhdp8546-core.c      | 1 +
+>  drivers/gpu/drm/bridge/tc358767.c                        | 1 +
+>  drivers/gpu/drm/bridge/ti-sn65dsi86.c                    | 1 +
+>  drivers/gpu/drm/drm_dp_aux_dev.c                         | 6 ++++++
+>  drivers/gpu/drm/drm_dp_mst_topology.c                    | 1 +
+>  drivers/gpu/drm/i915/display/intel_dp_aux.c              | 1 +
+>  drivers/gpu/drm/msm/edp/edp.h                            | 3 +--
+>  drivers/gpu/drm/msm/edp/edp_aux.c                        | 5 +++--
+>  drivers/gpu/drm/msm/edp/edp_ctrl.c                       | 2 +-
+>  drivers/gpu/drm/nouveau/nouveau_connector.c              | 1 +
+>  drivers/gpu/drm/radeon/atombios_dp.c                     | 1 +
+>  drivers/gpu/drm/tegra/dpaux.c                            | 1 +
+>  drivers/gpu/drm/xlnx/zynqmp_dp.c                         | 1 +
+>  include/drm/drm_dp_helper.h                              | 9 ++++++++-
+>  19 files changed, 33 insertions(+), 6 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/amd/amdgpu/atombios_dp.c b/drivers/gpu/drm/amd/amdgpu/atombios_dp.c
+> index a3ba9ca11e98..6d35da65e09f 100644
+> --- a/drivers/gpu/drm/amd/amdgpu/atombios_dp.c
+> +++ b/drivers/gpu/drm/amd/amdgpu/atombios_dp.c
+> @@ -188,6 +188,7 @@ void amdgpu_atombios_dp_aux_init(struct amdgpu_connector *amdgpu_connector)
+>  {
+>  	amdgpu_connector->ddc_bus->rec.hpd = amdgpu_connector->hpd.hpd;
+>  	amdgpu_connector->ddc_bus->aux.transfer = amdgpu_atombios_dp_aux_transfer;
+> +	amdgpu_connector->ddc_bus->aux.drm_dev = amdgpu_connector->base.dev;
+>  	drm_dp_aux_init(&amdgpu_connector->ddc_bus->aux);
+>  	amdgpu_connector->ddc_bus->has_aux = true;
+>  }
+> diff --git a/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_mst_types.c b/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_mst_types.c
+> index 41b09ab22233..163641b44339 100644
+> --- a/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_mst_types.c
+> +++ b/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_mst_types.c
+> @@ -431,6 +431,7 @@ void amdgpu_dm_initialize_dp_connector(struct amdgpu_display_manager *dm,
+>  			  link_index);
+>  	aconnector->dm_dp_aux.aux.transfer = dm_dp_aux_transfer;
+>  	aconnector->dm_dp_aux.ddc_service = aconnector->dc_link->ddc;
+> +	aconnector->dm_dp_aux.aux.drm_dev = dm->ddev;
+>  
+>  	drm_dp_aux_init(&aconnector->dm_dp_aux.aux);
+>  	drm_dp_cec_register_connector(&aconnector->dm_dp_aux.aux,
+> diff --git a/drivers/gpu/drm/bridge/analogix/analogix-anx6345.c b/drivers/gpu/drm/bridge/analogix/analogix-anx6345.c
+> index aa6cda458eb9..e33cd077595a 100644
+> --- a/drivers/gpu/drm/bridge/analogix/analogix-anx6345.c
+> +++ b/drivers/gpu/drm/bridge/analogix/analogix-anx6345.c
+> @@ -537,6 +537,7 @@ static int anx6345_bridge_attach(struct drm_bridge *bridge,
+>  	/* Register aux channel */
+>  	anx6345->aux.name = "DP-AUX";
+>  	anx6345->aux.dev = &anx6345->client->dev;
+> +	anx6345->aux.drm_dev = bridge->dev;
+>  	anx6345->aux.transfer = anx6345_aux_transfer;
+>  
+>  	err = drm_dp_aux_register(&anx6345->aux);
+> diff --git a/drivers/gpu/drm/bridge/analogix/analogix-anx78xx.c b/drivers/gpu/drm/bridge/analogix/analogix-anx78xx.c
+> index f20558618220..5e6a0ed39199 100644
+> --- a/drivers/gpu/drm/bridge/analogix/analogix-anx78xx.c
+> +++ b/drivers/gpu/drm/bridge/analogix/analogix-anx78xx.c
+> @@ -905,6 +905,7 @@ static int anx78xx_bridge_attach(struct drm_bridge *bridge,
+>  	/* Register aux channel */
+>  	anx78xx->aux.name = "DP-AUX";
+>  	anx78xx->aux.dev = &anx78xx->client->dev;
+> +	anx78xx->aux.drm_dev = bridge->dev;
+>  	anx78xx->aux.transfer = anx78xx_aux_transfer;
+>  
+>  	err = drm_dp_aux_register(&anx78xx->aux);
+> diff --git a/drivers/gpu/drm/bridge/analogix/analogix_dp_core.c b/drivers/gpu/drm/bridge/analogix/analogix_dp_core.c
+> index f115233b1cb9..550814ca2139 100644
+> --- a/drivers/gpu/drm/bridge/analogix/analogix_dp_core.c
+> +++ b/drivers/gpu/drm/bridge/analogix/analogix_dp_core.c
+> @@ -1765,6 +1765,7 @@ int analogix_dp_bind(struct analogix_dp_device *dp, struct drm_device *drm_dev)
+>  	dp->aux.name = "DP-AUX";
+>  	dp->aux.transfer = analogix_dpaux_transfer;
+>  	dp->aux.dev = dp->dev;
+> +	dp->aux.drm_dev = drm_dev;
+>  
+>  	ret = drm_dp_aux_register(&dp->aux);
+>  	if (ret)
+> diff --git a/drivers/gpu/drm/bridge/cadence/cdns-mhdp8546-core.c b/drivers/gpu/drm/bridge/cadence/cdns-mhdp8546-core.c
+> index d966a33743b5..fe821ad628ec 100644
+> --- a/drivers/gpu/drm/bridge/cadence/cdns-mhdp8546-core.c
+> +++ b/drivers/gpu/drm/bridge/cadence/cdns-mhdp8546-core.c
+> @@ -1674,6 +1674,7 @@ static int cdns_mhdp_attach(struct drm_bridge *bridge,
+>  
+>  	dev_dbg(mhdp->dev, "%s\n", __func__);
+>  
+> +	mhdp->aux.drm_dev = bridge->dev;
+>  	ret = drm_dp_aux_register(&mhdp->aux);
+>  	if (ret < 0)
+>  		return ret;
+> diff --git a/drivers/gpu/drm/bridge/tc358767.c b/drivers/gpu/drm/bridge/tc358767.c
+> index da89922721ed..23a6f90b694b 100644
+> --- a/drivers/gpu/drm/bridge/tc358767.c
+> +++ b/drivers/gpu/drm/bridge/tc358767.c
+> @@ -1414,6 +1414,7 @@ static int tc_bridge_attach(struct drm_bridge *bridge,
+>  	if (flags & DRM_BRIDGE_ATTACH_NO_CONNECTOR)
+>  		return 0;
+>  
+> +	tc->aux.drm_dev = drm;
+>  	ret = drm_dp_aux_register(&tc->aux);
+>  	if (ret < 0)
+>  		return ret;
+> diff --git a/drivers/gpu/drm/bridge/ti-sn65dsi86.c b/drivers/gpu/drm/bridge/ti-sn65dsi86.c
+> index 88df4dd0f39d..8e24272bbf00 100644
+> --- a/drivers/gpu/drm/bridge/ti-sn65dsi86.c
+> +++ b/drivers/gpu/drm/bridge/ti-sn65dsi86.c
+> @@ -362,6 +362,7 @@ static int ti_sn_bridge_attach(struct drm_bridge *bridge,
+>  		return -EINVAL;
+>  	}
+>  
+> +	pdata->aux.drm_dev = bridge->dev;
+>  	ret = drm_dp_aux_register(&pdata->aux);
+>  	if (ret < 0) {
+>  		drm_err(bridge->dev, "Failed to register DP AUX channel: %d\n", ret);
+> diff --git a/drivers/gpu/drm/drm_dp_aux_dev.c b/drivers/gpu/drm/drm_dp_aux_dev.c
+> index e25181bf2c48..06b374cae956 100644
+> --- a/drivers/gpu/drm/drm_dp_aux_dev.c
+> +++ b/drivers/gpu/drm/drm_dp_aux_dev.c
+> @@ -278,6 +278,12 @@ void drm_dp_aux_unregister_devnode(struct drm_dp_aux *aux)
+>  	if (!aux_dev) /* attach must have failed */
+>  		return;
+>  
+> +	/*
+> +	 * As some AUX adapters may exist as platform devices which outlive their respective DRM
+> +	 * devices, we clear drm_dev to ensure that we never accidentally reference a stale pointer
+> +	 */
+> +	aux->drm_dev = NULL;
+> +
+>  	mutex_lock(&aux_idr_mutex);
+>  	idr_remove(&aux_idr, aux_dev->index);
+>  	mutex_unlock(&aux_idr_mutex);
+> diff --git a/drivers/gpu/drm/drm_dp_mst_topology.c b/drivers/gpu/drm/drm_dp_mst_topology.c
+> index 932c4641ec3e..cf4f2f85711e 100644
+> --- a/drivers/gpu/drm/drm_dp_mst_topology.c
+> +++ b/drivers/gpu/drm/drm_dp_mst_topology.c
+> @@ -2349,6 +2349,7 @@ drm_dp_mst_add_port(struct drm_device *dev,
+>  	port->aux.is_remote = true;
+>  
+>  	/* initialize the MST downstream port's AUX crc work queue */
+> +	port->aux.drm_dev = dev;
+>  	drm_dp_remote_aux_init(&port->aux);
+>  
+>  	/*
+> diff --git a/drivers/gpu/drm/i915/display/intel_dp_aux.c b/drivers/gpu/drm/i915/display/intel_dp_aux.c
+> index eaebf123310a..0571c0794226 100644
+> --- a/drivers/gpu/drm/i915/display/intel_dp_aux.c
+> +++ b/drivers/gpu/drm/i915/display/intel_dp_aux.c
+> @@ -675,6 +675,7 @@ void intel_dp_aux_init(struct intel_dp *intel_dp)
+>  	else
+>  		intel_dp->get_aux_send_ctl = g4x_get_aux_send_ctl;
+>  
+> +	intel_dp->aux.drm_dev = &dev_priv->drm;
+>  	drm_dp_aux_init(&intel_dp->aux);
+>  
+>  	/* Failure to allocate our preferred name is not critical */
+> diff --git a/drivers/gpu/drm/msm/edp/edp.h b/drivers/gpu/drm/msm/edp/edp.h
+> index eb34243dad53..8590f2ce274d 100644
+> --- a/drivers/gpu/drm/msm/edp/edp.h
+> +++ b/drivers/gpu/drm/msm/edp/edp.h
+> @@ -46,8 +46,7 @@ void edp_bridge_destroy(struct drm_bridge *bridge);
+>  struct drm_connector *msm_edp_connector_init(struct msm_edp *edp);
+>  
+>  /* AUX */
+> -void *msm_edp_aux_init(struct device *dev, void __iomem *regbase,
+> -			struct drm_dp_aux **drm_aux);
+> +void *msm_edp_aux_init(struct msm_edp *edp, void __iomem *regbase, struct drm_dp_aux **drm_aux);
+>  void msm_edp_aux_destroy(struct device *dev, struct edp_aux *aux);
+>  irqreturn_t msm_edp_aux_irq(struct edp_aux *aux, u32 isr);
+>  void msm_edp_aux_ctrl(struct edp_aux *aux, int enable);
+> diff --git a/drivers/gpu/drm/msm/edp/edp_aux.c b/drivers/gpu/drm/msm/edp/edp_aux.c
+> index df10a0196d94..e3d85c622cfb 100644
+> --- a/drivers/gpu/drm/msm/edp/edp_aux.c
+> +++ b/drivers/gpu/drm/msm/edp/edp_aux.c
+> @@ -184,9 +184,9 @@ static ssize_t edp_aux_transfer(struct drm_dp_aux *drm_aux,
+>  	return ret;
+>  }
+>  
+> -void *msm_edp_aux_init(struct device *dev, void __iomem *regbase,
+> -	struct drm_dp_aux **drm_aux)
+> +void *msm_edp_aux_init(struct msm_edp *edp, void __iomem *regbase, struct drm_dp_aux **drm_aux)
+>  {
+> +	struct device *dev = &edp->pdev->dev;
+>  	struct edp_aux *aux = NULL;
+>  	int ret;
+>  
+> @@ -201,6 +201,7 @@ void *msm_edp_aux_init(struct device *dev, void __iomem *regbase,
+>  
+>  	aux->drm_aux.name = "msm_edp_aux";
+>  	aux->drm_aux.dev = dev;
+> +	aux->drm_aux.drm_dev = edp->dev;
+>  	aux->drm_aux.transfer = edp_aux_transfer;
+>  	ret = drm_dp_aux_register(&aux->drm_aux);
+>  	if (ret) {
+> diff --git a/drivers/gpu/drm/msm/edp/edp_ctrl.c b/drivers/gpu/drm/msm/edp/edp_ctrl.c
+> index 0d9657cc70db..57af3d8b6699 100644
+> --- a/drivers/gpu/drm/msm/edp/edp_ctrl.c
+> +++ b/drivers/gpu/drm/msm/edp/edp_ctrl.c
+> @@ -1153,7 +1153,7 @@ int msm_edp_ctrl_init(struct msm_edp *edp)
+>  	}
+>  
+>  	/* Init aux and phy */
+> -	ctrl->aux = msm_edp_aux_init(dev, ctrl->base, &ctrl->drm_aux);
+> +	ctrl->aux = msm_edp_aux_init(edp, ctrl->base, &ctrl->drm_aux);
+>  	if (!ctrl->aux || !ctrl->drm_aux) {
+>  		pr_err("%s:failed to init aux\n", __func__);
+>  		return -ENOMEM;
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_connector.c b/drivers/gpu/drm/nouveau/nouveau_connector.c
+> index bfce762adcf0..d1b49508ecb9 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_connector.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_connector.c
+> @@ -1355,6 +1355,7 @@ nouveau_connector_create(struct drm_device *dev,
+>  	case DRM_MODE_CONNECTOR_DisplayPort:
+>  	case DRM_MODE_CONNECTOR_eDP:
+>  		nv_connector->aux.dev = connector->kdev;
+> +		nv_connector->aux.drm_dev = dev;
+>  		nv_connector->aux.transfer = nouveau_connector_aux_xfer;
+>  		snprintf(aux_name, sizeof(aux_name), "sor-%04x-%04x",
+>  			 dcbe->hasht, dcbe->hashm);
+> diff --git a/drivers/gpu/drm/radeon/atombios_dp.c b/drivers/gpu/drm/radeon/atombios_dp.c
+> index 15b00a347560..c50c504bad50 100644
+> --- a/drivers/gpu/drm/radeon/atombios_dp.c
+> +++ b/drivers/gpu/drm/radeon/atombios_dp.c
+> @@ -232,6 +232,7 @@ void radeon_dp_aux_init(struct radeon_connector *radeon_connector)
+>  
+>  	radeon_connector->ddc_bus->rec.hpd = radeon_connector->hpd.hpd;
+>  	radeon_connector->ddc_bus->aux.dev = radeon_connector->base.kdev;
+> +	radeon_connector->ddc_bus->aux.drm_dev = radeon_connector->base.dev;
+>  	if (ASIC_IS_DCE5(rdev)) {
+>  		if (radeon_auxch)
+>  			radeon_connector->ddc_bus->aux.transfer = radeon_dp_aux_transfer_native;
+> diff --git a/drivers/gpu/drm/tegra/dpaux.c b/drivers/gpu/drm/tegra/dpaux.c
+> index ea56c6ec25e4..7d7cc90b6fc9 100644
+> --- a/drivers/gpu/drm/tegra/dpaux.c
+> +++ b/drivers/gpu/drm/tegra/dpaux.c
+> @@ -719,6 +719,7 @@ int drm_dp_aux_attach(struct drm_dp_aux *aux, struct tegra_output *output)
+>  	unsigned long timeout;
+>  	int err;
+>  
+> +	aux->drm_dev = output->connector.dev;
+>  	err = drm_dp_aux_register(aux);
+>  	if (err < 0)
+>  		return err;
+> diff --git a/drivers/gpu/drm/xlnx/zynqmp_dp.c b/drivers/gpu/drm/xlnx/zynqmp_dp.c
+> index 99158ee67d02..8272eee03adc 100644
+> --- a/drivers/gpu/drm/xlnx/zynqmp_dp.c
+> +++ b/drivers/gpu/drm/xlnx/zynqmp_dp.c
+> @@ -1069,6 +1069,7 @@ static int zynqmp_dp_aux_init(struct zynqmp_dp *dp)
+>  
+>  	dp->aux.name = "ZynqMP DP AUX";
+>  	dp->aux.dev = dp->dev;
+> +	dp->aux.drm_dev = dp->drm;
+>  	dp->aux.transfer = zynqmp_dp_aux_transfer;
+>  
+>  	return drm_dp_aux_register(&dp->aux);
+> diff --git a/include/drm/drm_dp_helper.h b/include/drm/drm_dp_helper.h
+> index b35a1c1339e8..45ec74862212 100644
+> --- a/include/drm/drm_dp_helper.h
+> +++ b/include/drm/drm_dp_helper.h
+> @@ -1833,13 +1833,19 @@ struct drm_dp_aux_cec {
+>   * @name: user-visible name of this AUX channel and the I2C-over-AUX adapter
+>   * @ddc: I2C adapter that can be used for I2C-over-AUX communication
+>   * @dev: pointer to struct device that is the parent for this AUX channel
+> + * @drm_dev: pointer to the &drm_device that owns this AUX channel. Beware, this may be %NULL
+> + * before drm_dp_aux_register() has been called.
+>   * @crtc: backpointer to the crtc that is currently using this AUX channel
+>   * @hw_mutex: internal mutex used for locking transfers
+>   * @crc_work: worker that captures CRCs for each frame
+>   * @crc_count: counter of captured frame CRCs
+>   * @transfer: transfers a message representing a single AUX transaction
+>   *
+> - * The @dev field should be set to a pointer to the device that implements the AUX channel.
+> + * The @dev field should be set to a pointer to the device that implements the AUX channel. As well,
+> + * the @drm_dev field should be set to the &drm_device that will be using this AUX channel as early
+> + * as possible. For many graphics drivers this should happen before drm_dp_aux_init(), however it's
+> + * perfectly fine to set this field later so long as it's assigned before calling
+> + * drm_dp_aux_register().
+>   *
+>   * The @name field may be used to specify the name of the I2C adapter. If set to %NULL, dev_name()
+>   * of @dev will be used.
+> @@ -1866,6 +1872,7 @@ struct drm_dp_aux {
+>  	const char *name;
+>  	struct i2c_adapter ddc;
+>  	struct device *dev;
+> +	struct drm_device *drm_dev;
+>  	struct drm_crtc *crtc;
+>  	struct mutex hw_mutex;
+>  	struct work_struct crc_work;
 
--boris
+-- 
+Regards,
 
-
-
->
->> pfn_to_gfn is a nop, so plain phys_to_dma/dma_to_phys do work as-is.
->>
->> xen_arch_need_swiotlb always returns true for x86, and
->> range_straddles_page_boundary should never be true for the
->> XENFEAT_auto_translated_physmap case.
-> Correct. The kernel should have no clue of what the real MFNs are
-> for PFNs.
->> So as far as I can tell the mapping fast path for the
->> XENFEAT_auto_translated_physmap can be trivially reused from swiotlb.
->>
->> That leaves us with the next more complicated case, x86 or fully cache
->> coherent arm{,64} without XENFEAT_auto_translated_physmap.  In that case
->> we need to patch in a phys_to_dma/dma_to_phys that performs the MFN
->> lookup, which could be done using alternatives or jump labels.
->> I think if that is done right we should also be able to let that cover
->> the foreign pages in is_xen_swiotlb_buffer/is_swiotlb_buffer, but
->> in that worst case that would need another alternative / jump label.
->>
->> For non-coherent arm{,64} we'd also need to use alternatives or jump
->> labels to for the cache maintainance ops, but that isn't a hard problem
->> either.
->>
->>
+Laurent Pinchart
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
