@@ -1,40 +1,48 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id B1419320C8D
-	for <lists+nouveau@lfdr.de>; Sun, 21 Feb 2021 19:24:08 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6ACC4321455
+	for <lists+nouveau@lfdr.de>; Mon, 22 Feb 2021 11:47:05 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A34C46E42A;
-	Sun, 21 Feb 2021 18:24:06 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 437B96E0D6;
+	Mon, 22 Feb 2021 10:46:59 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from perceval.ideasonboard.com (perceval.ideasonboard.com
- [213.167.242.64])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 946C66E426;
- Sun, 21 Feb 2021 18:24:05 +0000 (UTC)
-Received: from pendragon.ideasonboard.com (62-78-145-57.bb.dnainternet.fi
- [62.78.145.57])
- by perceval.ideasonboard.com (Postfix) with ESMTPSA id ECBD2BB2;
- Sun, 21 Feb 2021 19:24:03 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
- s=mail; t=1613931844;
- bh=orousB+kOMLJsWZCvVHsBnccCXT5Cw7mZo7av0LIF8o=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=wB6H8dAsvUMP7HUZKu5ZvNAtM49Zsy6DTGALbPMQh/6+5lMdTGFsls0KeJEunQtTR
- FfcpXAHVstN1ruLTTrBcJ+H+8KIZybo2eBjmomtz0W0uGx0Ta+t0mWvC/dCtlr6ofs
- kAJ90Er6X6Qjeru1iqmShQf2cRm/lCsfN5Fikndw=
-Date: Sun, 21 Feb 2021 20:23:37 +0200
-From: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
-To: Lyude Paul <lyude@redhat.com>
-Message-ID: <YDKlKXoDKI4P/aNb@pendragon.ideasonboard.com>
-References: <20210219215326.2227596-1-lyude@redhat.com>
- <20210219215326.2227596-21-lyude@redhat.com>
+Received: from hqnvemgate24.nvidia.com (hqnvemgate24.nvidia.com
+ [216.228.121.143])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8FA2A6E056;
+ Mon, 22 Feb 2021 10:46:57 +0000 (UTC)
+Received: from hqmail.nvidia.com (Not Verified[216.228.121.13]) by
+ hqnvemgate24.nvidia.com (using TLS: TLSv1.2, AES256-SHA)
+ id <B60338ba00000>; Mon, 22 Feb 2021 02:46:56 -0800
+Received: from nvdebian.localnet (172.20.145.6) by HQMAIL107.nvidia.com
+ (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1497.2; Mon, 22 Feb
+ 2021 10:46:53 +0000
+From: Alistair Popple <apopple@nvidia.com>
+To: Christoph Hellwig <hch@infradead.org>
+Date: Mon, 22 Feb 2021 21:46:51 +1100
+Message-ID: <67252432.xGUjY6W94y@nvdebian>
+In-Reply-To: <20210219094741.GA641389@infradead.org>
+References: <20210219020750.16444-1-apopple@nvidia.com>
+ <20210219020750.16444-2-apopple@nvidia.com>
+ <20210219094741.GA641389@infradead.org>
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20210219215326.2227596-21-lyude@redhat.com>
-Subject: Re: [Nouveau] [PATCH 20/30] drm/dp: Pass drm_dp_aux to
- drm_dp*_link_train_channel_eq_delay()
+X-Originating-IP: [172.20.145.6]
+X-ClientProxiedBy: HQMAIL111.nvidia.com (172.20.187.18) To
+ HQMAIL107.nvidia.com (172.20.187.13)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
+ t=1613990816; bh=WSELGhqP+NOSudWxdZmSn1jCecQ9LfJU/HOyyjATzQk=;
+ h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+ MIME-Version:Content-Transfer-Encoding:Content-Type:
+ X-Originating-IP:X-ClientProxiedBy;
+ b=AsDH1KFt7q2fn1GQH1bGZsfxPuP6PWniyR68l2YMD7Q3Cfbq5uK+p+mMUtOfNCzHP
+ a+hSdF72Kju84oKrEh0gg6e8rGRcP4SODxDcOyS/1SQNOgR82RHgMN4+muzfJRKteX
+ TZjWkSDKTi+eWBm5dbyv/oZyE95BVowqo+OXcexYvpYnlUsHqC93D9hf3z7vCcYpXg
+ beQX9uq28IHVckKy1BtFiOs2mBRghniAdXwhBHNF2E6SUF7HvL5sLv5fN7c9Krbh1R
+ iMHvxXCUtmJre53wnpmserXyNhCq0cnsUNF+34d7gdgVUyWwc2BnUqJO0ARndiY3DG
+ gOBglEpWEttmA==
+Subject: Re: [Nouveau] [PATCH v2 1/4] hmm: Device exclusive memory access
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -46,230 +54,245 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
- Imre Deak <imre.deak@intel.com>,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- Oleg Vasilev <oleg.vasilev@intel.com>, dri-devel@lists.freedesktop.org,
- Lee Jones <lee.jones@linaro.org>,
- Ville =?utf-8?B?U3lyasOkbMOk?= <ville.syrjala@linux.intel.com>,
- Emil Velikov <emil.velikov@collabora.com>,
- Michal Simek <michal.simek@xilinx.com>, amd-gfx@lists.freedesktop.org,
- Luben Tuikov <luben.tuikov@amd.com>,
- Chandan Uddaraju <chandanu@codeaurora.org>, Daniel Vetter <daniel@ffwll.ch>,
- Jeevan B <jeevan.b@intel.com>,
- "open list:DRM DRIVER FOR MSM ADRENO GPU" <linux-arm-msm@vger.kernel.org>,
- intel-gfx@lists.freedesktop.org,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Stephen Boyd <swboyd@chromium.org>,
- Kuogee Hsieh <khsieh@codeaurora.org>,
- Jani Nikula <jani.nikula@linux.intel.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>,
- =?utf-8?B?Sm9zw6k=?= Roberto de Souza <jose.souza@intel.com>,
- Sean Paul <sean@poorly.run>,
- "moderated list:ARM/ZYNQ ARCHITECTURE" <linux-arm-kernel@lists.infradead.org>,
- Tanmay Shah <tanmay@codeaurora.org>, Hyun Kwon <hyun.kwon@xilinx.com>,
- open list <linux-kernel@vger.kernel.org>,
- Manasi Navare <manasi.d.navare@intel.com>, Rob Clark <robdclark@gmail.com>,
- Alex Deucher <alexander.deucher@amd.com>,
- "open list:DRM DRIVER FOR MSM ADRENO GPU" <freedreno@lists.freedesktop.org>,
- Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>
+Cc: rcampbell@nvidia.com, daniel@ffwll.ch, linux-doc@vger.kernel.org,
+ nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, kvm-ppc@vger.kernel.org, linux-mm@kvack.org,
+ bskeggs@redhat.com, jgg@nvidia.com, akpm@linux-foundation.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi Lyude,
-
-Thank you for the patch.
-
-On Fri, Feb 19, 2021 at 04:53:16PM -0500, Lyude Paul wrote:
-> So that we can start using drm_dbg_*() for
-> drm_dp_link_train_channel_eq_delay() and
-> drm_dp_lttpr_link_train_channel_eq_delay().
+On Friday, 19 February 2021 8:47:41 PM AEDT Christoph Hellwig wrote:
+> >  			page = migration_entry_to_page(swpent);
+> >  		else if (is_device_private_entry(swpent))
+> >  			page = device_private_entry_to_page(swpent);
+> > +		else if (is_device_exclusive_entry(swpent))
+> > +			page = device_exclusive_entry_to_page(swpent);
 > 
-> Signed-off-by: Lyude Paul <lyude@redhat.com>
-
-Reviewed-by: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
-
-> ---
->  drivers/gpu/drm/amd/amdgpu/atombios_dp.c           |  2 +-
->  drivers/gpu/drm/drm_dp_helper.c                    | 14 +++++++++-----
->  .../gpu/drm/i915/display/intel_dp_link_training.c  |  4 ++--
->  drivers/gpu/drm/msm/dp/dp_ctrl.c                   |  4 ++--
->  drivers/gpu/drm/msm/edp/edp_ctrl.c                 |  4 ++--
->  drivers/gpu/drm/radeon/atombios_dp.c               |  2 +-
->  drivers/gpu/drm/xlnx/zynqmp_dp.c                   |  2 +-
->  include/drm/drm_dp_helper.h                        |  6 ++++--
->  8 files changed, 22 insertions(+), 16 deletions(-)
+> >  			page = migration_entry_to_page(swpent);
+> >  		else if (is_device_private_entry(swpent))
+> >  			page = device_private_entry_to_page(swpent);
+> > +		else if (is_device_exclusive_entry(swpent))
+> > +			page = device_exclusive_entry_to_page(swpent);
 > 
-> diff --git a/drivers/gpu/drm/amd/amdgpu/atombios_dp.c b/drivers/gpu/drm/amd/amdgpu/atombios_dp.c
-> index 4468f9d6b4dd..59ce6f620fdc 100644
-> --- a/drivers/gpu/drm/amd/amdgpu/atombios_dp.c
-> +++ b/drivers/gpu/drm/amd/amdgpu/atombios_dp.c
-> @@ -676,7 +676,7 @@ amdgpu_atombios_dp_link_train_ce(struct amdgpu_atombios_dp_link_train_info *dp_i
->  	dp_info->tries = 0;
->  	channel_eq = false;
->  	while (1) {
-> -		drm_dp_link_train_channel_eq_delay(dp_info->dpcd);
-> +		drm_dp_link_train_channel_eq_delay(dp_info->aux, dp_info->dpcd);
->  
->  		if (drm_dp_dpcd_read_link_status(dp_info->aux,
->  						 dp_info->link_status) <= 0) {
-> diff --git a/drivers/gpu/drm/drm_dp_helper.c b/drivers/gpu/drm/drm_dp_helper.c
-> index ce08eb3bface..a9316c1ecb52 100644
-> --- a/drivers/gpu/drm/drm_dp_helper.c
-> +++ b/drivers/gpu/drm/drm_dp_helper.c
-> @@ -151,7 +151,8 @@ void drm_dp_link_train_clock_recovery_delay(const struct drm_dp_aux *aux,
->  }
->  EXPORT_SYMBOL(drm_dp_link_train_clock_recovery_delay);
->  
-> -static void __drm_dp_link_train_channel_eq_delay(unsigned long rd_interval)
-> +static void __drm_dp_link_train_channel_eq_delay(const struct drm_dp_aux *aux,
-> +						 unsigned long rd_interval)
->  {
->  	if (rd_interval > 4)
->  		DRM_DEBUG_KMS("AUX interval %lu, out of range (max 4)\n",
-> @@ -165,9 +166,11 @@ static void __drm_dp_link_train_channel_eq_delay(unsigned long rd_interval)
->  	usleep_range(rd_interval, rd_interval * 2);
->  }
->  
-> -void drm_dp_link_train_channel_eq_delay(const u8 dpcd[DP_RECEIVER_CAP_SIZE])
-> +void drm_dp_link_train_channel_eq_delay(const struct drm_dp_aux *aux,
-> +					const u8 dpcd[DP_RECEIVER_CAP_SIZE])
->  {
-> -	__drm_dp_link_train_channel_eq_delay(dpcd[DP_TRAINING_AUX_RD_INTERVAL] &
-> +	__drm_dp_link_train_channel_eq_delay(aux,
-> +					     dpcd[DP_TRAINING_AUX_RD_INTERVAL] &
->  					     DP_TRAINING_AUX_RD_MASK);
->  }
->  EXPORT_SYMBOL(drm_dp_link_train_channel_eq_delay);
-> @@ -183,13 +186,14 @@ static u8 dp_lttpr_phy_cap(const u8 phy_cap[DP_LTTPR_PHY_CAP_SIZE], int r)
->  	return phy_cap[r - DP_TRAINING_AUX_RD_INTERVAL_PHY_REPEATER1];
->  }
->  
-> -void drm_dp_lttpr_link_train_channel_eq_delay(const u8 phy_cap[DP_LTTPR_PHY_CAP_SIZE])
-> +void drm_dp_lttpr_link_train_channel_eq_delay(const struct drm_dp_aux *aux,
-> +					      const u8 phy_cap[DP_LTTPR_PHY_CAP_SIZE])
->  {
->  	u8 interval = dp_lttpr_phy_cap(phy_cap,
->  				       DP_TRAINING_AUX_RD_INTERVAL_PHY_REPEATER1) &
->  		      DP_TRAINING_AUX_RD_MASK;
->  
-> -	__drm_dp_link_train_channel_eq_delay(interval);
-> +	__drm_dp_link_train_channel_eq_delay(aux, interval);
->  }
->  EXPORT_SYMBOL(drm_dp_lttpr_link_train_channel_eq_delay);
->  
-> diff --git a/drivers/gpu/drm/i915/display/intel_dp_link_training.c b/drivers/gpu/drm/i915/display/intel_dp_link_training.c
-> index 222073d46bdb..fe8b5a5d9d1a 100644
-> --- a/drivers/gpu/drm/i915/display/intel_dp_link_training.c
-> +++ b/drivers/gpu/drm/i915/display/intel_dp_link_training.c
-> @@ -593,11 +593,11 @@ intel_dp_link_training_channel_equalization_delay(struct intel_dp *intel_dp,
->  						  enum drm_dp_phy dp_phy)
->  {
->  	if (dp_phy == DP_PHY_DPRX) {
-> -		drm_dp_link_train_channel_eq_delay(intel_dp->dpcd);
-> +		drm_dp_link_train_channel_eq_delay(&intel_dp->aux, intel_dp->dpcd);
->  	} else {
->  		const u8 *phy_caps = intel_dp_lttpr_phy_caps(intel_dp, dp_phy);
->  
-> -		drm_dp_lttpr_link_train_channel_eq_delay(phy_caps);
-> +		drm_dp_lttpr_link_train_channel_eq_delay(&intel_dp->aux, phy_caps);
->  	}
->  }
->  
-> diff --git a/drivers/gpu/drm/msm/dp/dp_ctrl.c b/drivers/gpu/drm/msm/dp/dp_ctrl.c
-> index 2501a6b326a3..33df288dd4eb 100644
-> --- a/drivers/gpu/drm/msm/dp/dp_ctrl.c
-> +++ b/drivers/gpu/drm/msm/dp/dp_ctrl.c
-> @@ -1184,7 +1184,7 @@ static int dp_ctrl_link_lane_down_shift(struct dp_ctrl_private *ctrl)
->  static void dp_ctrl_clear_training_pattern(struct dp_ctrl_private *ctrl)
->  {
->  	dp_ctrl_train_pattern_set(ctrl, DP_TRAINING_PATTERN_DISABLE);
-> -	drm_dp_link_train_channel_eq_delay(ctrl->panel->dpcd);
-> +	drm_dp_link_train_channel_eq_delay(ctrl->aux, ctrl->panel->dpcd);
->  }
->  
->  static int dp_ctrl_link_train_2(struct dp_ctrl_private *ctrl,
-> @@ -1215,7 +1215,7 @@ static int dp_ctrl_link_train_2(struct dp_ctrl_private *ctrl,
->  	dp_ctrl_train_pattern_set(ctrl, pattern | DP_RECOVERED_CLOCK_OUT_EN);
->  
->  	for (tries = 0; tries <= maximum_retries; tries++) {
-> -		drm_dp_link_train_channel_eq_delay(ctrl->panel->dpcd);
-> +		drm_dp_link_train_channel_eq_delay(ctrl->aux, ctrl->panel->dpcd);
->  
->  		ret = dp_ctrl_read_link_status(ctrl, link_status);
->  		if (ret)
-> diff --git a/drivers/gpu/drm/msm/edp/edp_ctrl.c b/drivers/gpu/drm/msm/edp/edp_ctrl.c
-> index 6501598448b4..4fb397ee7c84 100644
-> --- a/drivers/gpu/drm/msm/edp/edp_ctrl.c
-> +++ b/drivers/gpu/drm/msm/edp/edp_ctrl.c
-> @@ -665,7 +665,7 @@ static int edp_start_link_train_2(struct edp_ctrl *ctrl)
->  		return ret;
->  
->  	while (1) {
-> -		drm_dp_link_train_channel_eq_delay(ctrl->dpcd);
-> +		drm_dp_link_train_channel_eq_delay(ctrl->drm_aux, ctrl->dpcd);
->  
->  		rlen = drm_dp_dpcd_read_link_status(ctrl->drm_aux, link_status);
->  		if (rlen < DP_LINK_STATUS_SIZE) {
-> @@ -743,7 +743,7 @@ static int edp_clear_training_pattern(struct edp_ctrl *ctrl)
->  
->  	ret = edp_train_pattern_set_write(ctrl, 0);
->  
-> -	drm_dp_link_train_channel_eq_delay(ctrl->dpcd);
-> +	drm_dp_link_train_channel_eq_delay(ctrl->drm_aux, ctrl->dpcd);
->  
->  	return ret;
->  }
-> diff --git a/drivers/gpu/drm/radeon/atombios_dp.c b/drivers/gpu/drm/radeon/atombios_dp.c
-> index 299b9d8da376..4c1e551d9714 100644
-> --- a/drivers/gpu/drm/radeon/atombios_dp.c
-> +++ b/drivers/gpu/drm/radeon/atombios_dp.c
-> @@ -743,7 +743,7 @@ static int radeon_dp_link_train_ce(struct radeon_dp_link_train_info *dp_info)
->  	dp_info->tries = 0;
->  	channel_eq = false;
->  	while (1) {
-> -		drm_dp_link_train_channel_eq_delay(dp_info->dpcd);
-> +		drm_dp_link_train_channel_eq_delay(dp_info->aux, dp_info->dpcd);
->  
->  		if (drm_dp_dpcd_read_link_status(dp_info->aux,
->  						 dp_info->link_status) <= 0) {
-> diff --git a/drivers/gpu/drm/xlnx/zynqmp_dp.c b/drivers/gpu/drm/xlnx/zynqmp_dp.c
-> index 5cc295d8ba9f..f6f2293db18d 100644
-> --- a/drivers/gpu/drm/xlnx/zynqmp_dp.c
-> +++ b/drivers/gpu/drm/xlnx/zynqmp_dp.c
-> @@ -778,7 +778,7 @@ static int zynqmp_dp_link_train_ce(struct zynqmp_dp *dp)
->  		if (ret)
->  			return ret;
->  
-> -		drm_dp_link_train_channel_eq_delay(dp->dpcd);
-> +		drm_dp_link_train_channel_eq_delay(&dp->aux, dp->dpcd);
->  		ret = drm_dp_dpcd_read_link_status(&dp->aux, link_status);
->  		if (ret < 0)
->  			return ret;
-> diff --git a/include/drm/drm_dp_helper.h b/include/drm/drm_dp_helper.h
-> index e4681665231e..2151aeb6c279 100644
-> --- a/include/drm/drm_dp_helper.h
-> +++ b/include/drm/drm_dp_helper.h
-> @@ -1479,8 +1479,10 @@ u8 drm_dp_get_adjust_request_post_cursor(const u8 link_status[DP_LINK_STATUS_SIZ
->  void drm_dp_link_train_clock_recovery_delay(const struct drm_dp_aux *aux,
->  					    const u8 dpcd[DP_RECEIVER_CAP_SIZE]);
->  void drm_dp_lttpr_link_train_clock_recovery_delay(void);
-> -void drm_dp_link_train_channel_eq_delay(const u8 dpcd[DP_RECEIVER_CAP_SIZE]);
-> -void drm_dp_lttpr_link_train_channel_eq_delay(const u8 caps[DP_LTTPR_PHY_CAP_SIZE]);
-> +void drm_dp_link_train_channel_eq_delay(const struct drm_dp_aux *aux,
-> +					const u8 dpcd[DP_RECEIVER_CAP_SIZE]);
-> +void drm_dp_lttpr_link_train_channel_eq_delay(const struct drm_dp_aux *aux,
-> +					      const u8 caps[DP_LTTPR_PHY_CAP_SIZE]);
->  
->  u8 drm_dp_link_rate_to_bw_code(int link_rate);
->  int drm_dp_bw_code_to_link_rate(u8 link_bw);
+> >  		if (is_device_private_entry(entry))
+> >  			page = device_private_entry_to_page(entry);
+> > +
+> > +		if (is_device_exclusive_entry(entry))
+> > +			page = device_exclusive_entry_to_page(entry);
+> 
+> Any chance we can come up with a clever scheme to avoid all this
+> boilerplate code (and maybe also what it gets compiled to)?
 
--- 
-Regards,
+If I open code the entry_to_page() functions as suggested below then these 
+simplify down to single if statements like so:
 
-Laurent Pinchart
+                if (is_migration_entry(entry) ||
+                    is_device_private_entry(entry) ||
+                    is_device_exclusive_entry(entry))
+                        page = pfn_to_page(swp_offset(entry));
+
+I could simplify further by hiding that in a single static inline like so:
+
+static inline bool is_special_entry(swp_entry_t entry)
+{
+	return is_migration_entry(entry) ||
+			is_device_private_entry(entry) ||
+          is_device_exclusive_entry(entry);
+}
+
+My only concern with doing that is these entries can't *always* be treated the 
+same so it might make it too easy to overlook the subtle differences.
+
+> > diff --git a/include/linux/hmm.h b/include/linux/hmm.h
+> > index 866a0fa104c4..5d28ff6d4d80 100644
+> > --- a/include/linux/hmm.h
+> > +++ b/include/linux/hmm.h
+> > @@ -109,6 +109,10 @@ struct hmm_range {
+> >   */
+> >  int hmm_range_fault(struct hmm_range *range);
+> >  
+> > +int hmm_exclusive_range(struct mm_struct *mm, unsigned long start,
+> > +			unsigned long end, struct page **pages);
+> > +vm_fault_t hmm_remove_exclusive_entry(struct vm_fault *vmf);
+> 
+> Can we avoid the hmm naming for new code (we should probably also kill
+> it off for the existing code)?
+
+Sure. I ended up stuffing it in there for the moment because I didn't know of 
+any other "obvious" spot to put it. How about these for names:
+
+int make_device_exclusive_range(struct mm_struct *mm, unsigned long start,
+			unsigned long end, struct page **pages);
+vm_fault_t remove_device_exclusive_entry(struct vm_fault *vmf);
+
+I am open to any alternative naming suggestions though.
+
+> > +#define free_swap_and_cache(e) ({(is_migration_entry(e) || 
+is_device_private_entry(e) \
+> > +					|| is_device_exclusive_entry(e)); })
+> > +#define swapcache_prepare(e) ({(is_migration_entry(e) || 
+is_device_private_entry(e) \
+> > +					|| is_device_exclusive_entry(e)); })
+> Can you turn these into properly formatted inline functions?  As-is this
+> becomes pretty unreadable.
+
+Ok, if I add a is_special_entry() function as suggested above these could just 
+use that.
+ 
+> > +static inline void make_device_exclusive_entry_read(swp_entry_t *entry)
+> > +{
+> > +	*entry = swp_entry(SWP_DEVICE_EXCLUSIVE_READ, swp_offset(*entry));
+> > +}
+> 
+> s/make_device_exclusive_entry_read/mark_device_exclusive_entry_readable/
+> ??
+
+See my next comment.
+
+> > +
+> > +static inline swp_entry_t make_device_exclusive_entry(struct page *page, 
+bool write)
+> > +{
+> > +	return swp_entry(write ? SWP_DEVICE_EXCLUSIVE_WRITE : 
+SWP_DEVICE_EXCLUSIVE_READ,
+> > +			 page_to_pfn(page));
+> > +}
+> 
+> I'd split this into two helpers, which is easier to follow and avoids
+> the pointlessly overlong lines.
+
+I assume you mean separate read and write functions instead of using the write 
+flag?
+
+These are based on the existing device private functions which themselves 
+looked to be based on the migration entry functions. It would be good to keep 
+these consistent so when making the changes above I would also refactor the 
+existing make_device_private_entry() and make_migration_entry() functions to 
+match as well.
+
+As a test I tried refactoring the migration entry functions into the below and 
+it seemed to make things a bit easier to follow if not a little verbose:
+
+static inline int is_writable_migration_entry(swp_entry_t entry);
+static inline swp_entry_t make_readable_migration_entry(pgoff_t offset);
+static inline swp_entry_t make_writable_migration_entry(pgoff_t offset);
+static inline int is_migration_entry(swp_entry_t entry);
+
+So I can do that along with the same refactoring of device private accessor 
+functions as a prep patch if that seems reasonable?
+
+> > +static inline bool is_device_exclusive_entry(swp_entry_t entry)
+> > +{
+> > +	int type = swp_type(entry);
+> > +	return type == SWP_DEVICE_EXCLUSIVE_READ || type == 
+SWP_DEVICE_EXCLUSIVE_WRITE;
+> > +}
+> 
+> Another overly long line.  I also wouldn't bother with the local
+> variable:
+> 
+> 	return swp_type(entry) == SWP_DEVICE_EXCLUSIVE_READ ||
+> 		swp_type(entry) == SWP_DEVICE_EXCLUSIVE_WRITE;
+> 		
+> 
+> > +static inline bool is_write_device_exclusive_entry(swp_entry_t entry)
+> > +{
+> > +	return swp_type(entry) == SWP_DEVICE_EXCLUSIVE_WRITE;
+> > +}
+> 
+> Or reuse these kind of helpers..
+>
+> > +
+> > +static inline unsigned long device_exclusive_entry_to_pfn(swp_entry_t 
+entry)
+> > +{
+> > +	return swp_offset(entry);
+> > +}
+> > +
+> > +static inline struct page *device_exclusive_entry_to_page(swp_entry_t 
+entry)
+> > +{
+> > +	return pfn_to_page(swp_offset(entry));
+> > +}
+> 
+> I'd rather open code these two, and as a prep patch also kill off the
+> equivalents for the migration and device private entries, which would
+> actually clean up a lot of the mess mentioned in my first comment above.
+
+Ok, I have just tried doing that and it ends up being more concise and 
+accurate so I'll add it to the series. 
+
+> > +static int hmm_exclusive_skip(unsigned long start,
+> > +		      unsigned long end,
+> > +		      __always_unused int depth,
+> > +		      struct mm_walk *walk)
+> > +{
+> > +	struct hmm_exclusive_walk *hmm_exclusive_walk = walk->private;
+> > +	unsigned long addr;
+> > +
+> > +	for (addr = start; addr < end; addr += PAGE_SIZE)
+> > +		hmm_exclusive_walk->pages[hmm_exclusive_walk->npages++] = NULL;
+> > +
+> > +	return 0;
+> > +}
+> 
+> Wouldn't pre-zeroing the array be simpler and more efficient?
+
+Good point. I had other code here but I didn't need it and should have just 
+removed what was left.
+
+> > +int hmm_exclusive_range(struct mm_struct *mm, unsigned long start,
+> > +			unsigned long end, struct page **pages)
+> > +{
+> > +	struct hmm_exclusive_walk hmm_exclusive_walk = { .pages = pages, 
+.npages = 0 };
+> > +	int i;
+> > +
+> > +	/* Collect and lock candidate pages */
+> > +	walk_page_range(mm, start, end, &hmm_exclusive_walk_ops, 
+&hmm_exclusive_walk);
+> 
+> Please avoid the overly long lines.
+> 
+> But more importantly:  Unless I'm missing something obvious this
+> walk_page_range call just open codes get_user_pages_fast, why can't you
+> use that?
+
+Good idea, you aren't missing anything although I don't think 
+get_user_pages_fast() will work as the driver needs to be able to operate on a 
+remote mm_struct. 
+
+But something like get_user_pages_remote() would work better than open-coding 
+it.
+
+> > +#if defined(CONFIG_ARCH_ENABLE_THP_MIGRATION) || defined(CONFIG_HUGETLB)
+> > +		if (PageTransHuge(page)) {
+> > +			VM_BUG_ON_PAGE(1, page);
+> > +			continue;
+> > +		}
+> > +#endif
+> 
+> Doesn't PageTransHuge always return false for that case?  If not
+> shouldn't we make sure it does?
+
+Right, this is probably an overly defensive check so I'll remove it.
+
+[snip - will address code format/structure suggestions]
+
+> 
+> try_to_unmap_one has turned into a monster.  A little refactoring to
+> split it into managable pieces would be nice.
+> 
+
+Agreed, adding this it did seem a little unwieldy. I will see if I can do a 
+bit of refactoring for the next version.
+
+ - Alistair
+
+
+
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
