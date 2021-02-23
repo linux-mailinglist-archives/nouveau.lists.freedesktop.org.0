@@ -1,47 +1,60 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 12D39322DD1
-	for <lists+nouveau@lfdr.de>; Tue, 23 Feb 2021 16:47:07 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id CC9E2322F3E
+	for <lists+nouveau@lfdr.de>; Tue, 23 Feb 2021 18:01:49 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id F04296E9E7;
-	Tue, 23 Feb 2021 15:47:04 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1664B6E98D;
+	Tue, 23 Feb 2021 17:01:45 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-io1-f49.google.com (mail-io1-f49.google.com
- [209.85.166.49])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 58C6D6E9D2;
- Tue, 23 Feb 2021 15:47:04 +0000 (UTC)
-Received: by mail-io1-f49.google.com with SMTP id i8so17541660iog.7;
- Tue, 23 Feb 2021 07:47:04 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=q+CvRb8uJsnMhLBA4z+SJwvevSaxCnZTQPudMnhz+y8=;
- b=AeWapl4co9ZkJosmvA0IgSFwSNbO7+4rttRnp6JNidX+AWkrFF0mrFiBXHjl5eqtoh
- oC9kUTt4q2uh/U58gT5RgoeJtF/vBqpSGB0jgz2NYfPWAD0M23YLu1Rf1oSRUKXTw6zz
- S0W+W8UtftOLc+qHg+pkPsrj3aGj3cQnCUEx0/MvbdHXQqquPEfGf9CgoyFnGwc0xVRs
- 6WhG/GRzt5Jw12WNntutbE8ecN0OcJNv3GVSeMZWwtmCLSKxYY3S9lRVJ9ELDCPnekq8
- SRfR2g9nwhFmyz2Cs3HPsPBP6Ba5HBmSSV3iouhaSYBtaZ8QMHpkB67kd4T8AOxd87ps
- Gjdg==
-X-Gm-Message-State: AOAM530NiDcUG9NOAO0BMkBGA+d5rFUPf5q42NXKQHGQbQ6v/CySda/z
- 1AtwLpN5SnuwiWfe//dXfDazOVm5gl0iftNaMQE=
-X-Google-Smtp-Source: ABdhPJz1kFrzRXcSKPQzV0L9KIq7evTjzIK/fhnl6+WUHdZTdl5LT2+m6x7mNbscJ1uoZ/eP3Tr0b55SGQjjzmQLtUI=
-X-Received: by 2002:a6b:f206:: with SMTP id q6mr20237814ioh.143.1614095223592; 
- Tue, 23 Feb 2021 07:47:03 -0800 (PST)
-MIME-Version: 1.0
+X-Greylist: delayed 548 seconds by postgrey-1.36 at gabe;
+ Tue, 23 Feb 2021 15:45:55 UTC
+Received: from mout.kundenserver.de (mout.kundenserver.de [212.227.17.10])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 895AF6E9C4;
+ Tue, 23 Feb 2021 15:45:55 +0000 (UTC)
+Received: from mail.cetitecgmbh.com ([87.190.42.90]) by
+ mrelayeu.kundenserver.de (mreue107 [213.165.67.113]) with ESMTPSA (Nemesis)
+ id 1M5gAG-1lCxBL1zPW-007Dru; Tue, 23 Feb 2021 16:36:33 +0100
+Received: from pflvmailgateway.corp.cetitec.com (unknown [127.0.0.1])
+ by mail.cetitecgmbh.com (Postfix) with ESMTP id 92CFB1E01E7;
+ Tue, 23 Feb 2021 15:36:32 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at cetitec.com
+Received: from mail.cetitecgmbh.com ([127.0.0.1])
+ by pflvmailgateway.corp.cetitec.com (pflvmailgateway.corp.cetitec.com
+ [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id blSB3nUsz-cE; Tue, 23 Feb 2021 16:36:32 +0100 (CET)
+Received: from pflmari.corp.cetitec.com (2-usr-pf-main.vpn.it.cetitec.com
+ [10.8.5.2])
+ by mail.cetitecgmbh.com (Postfix) with ESMTPSA id 3F9B51E01E6;
+ Tue, 23 Feb 2021 16:36:32 +0100 (CET)
+Received: by pflmari.corp.cetitec.com (Postfix, from local account)
+Date: Tue, 23 Feb 2021 16:36:31 +0100
+From: Alex Riesen <alexander.riesen@cetitec.com>
+To: Ilia Mirkin <imirkin@alum.mit.edu>
+Message-ID: <YDUg/9fjsvTkRUqr@pflmari>
 References: <20210119015415.2511028-1-lyude@redhat.com>
  <20210119015415.2511028-2-lyude@redhat.com>
  <YDUN+Re/alMVL0Zn@pflmari>
  <CAKb7UvhFkw23so-a4JKLzpQLhphzjzarOy-9h+FiKP-aAC=4xw@mail.gmail.com>
- <YDUg/9fjsvTkRUqr@pflmari>
-In-Reply-To: <YDUg/9fjsvTkRUqr@pflmari>
-From: Ilia Mirkin <imirkin@alum.mit.edu>
-Date: Tue, 23 Feb 2021 10:46:52 -0500
-Message-ID: <CAKb7Uvji_+N+b8HghZckU-uSBWn-=BZwNAiUff2oitbVuNUE2Q@mail.gmail.com>
-To: Alex Riesen <alexander.riesen@cetitec.com>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <CAKb7UvhFkw23so-a4JKLzpQLhphzjzarOy-9h+FiKP-aAC=4xw@mail.gmail.com>
+X-Provags-ID: V03:K1:lLfiHh+wAU5dx6w2wtMoChBxn+RUn1NPTqMejn0E5YxvkGIR5C7
+ T/ocA7y4+SV4umv5AYaWXbtoiI04JxTxRQyXnS5A5TN+Ey+EqY1H5nL19RGjrJyFGdRBynt
+ bKPDnBpiqfV282AW5wOnWm26A0+NwhDq/puB793Ygpd0zuN+qZgQxfnFLwTF5ddKAFMP8w1
+ apOtnKnNM1j+zfAPQW+Bw==
+X-Spam-Flag: NO
+X-UI-Out-Filterresults: notjunk:1;V03:K0:Bv5rWH9T7NQ=:R4YKxD1vUCvKsLHSpatmlM
+ 5RYVodJf6RNTarfWPc/mI0t6joh6TYTng9UhC4DvB8brSsXW+NR06UM3Ni+HedW/gm21Ew/jF
+ lCZ9xF1QfkX2Hb4e0BNLImD3mJ5brLM4LEhXSZEkzA5dnlzGLS8kqJC/Fnv34cTJAatnB9Eed
+ vwQo3VlYefm+ff556yHV0H8cUnVsY1ovENYG3DSdlPFsiUG7+ZufKJjcioEKTxIZKj5L6wYLl
+ kiU1v2jQUvJg9iAUl790zcDLZfP35GtCOGWSDssMM1Uu7UtyZkqLBapm42B8HUZd8JePUy4aN
+ w9Iu9sNcBcljpduvtQzA04aZBxC7Bx77FM+7xPT3fJ0ieT+SMsRxVCjswEvv4KzCJGFfU6Y5N
+ 2SQKJfcsDeDEDrACB5pOfn9S2ivX4T2DB0GZzMOMUsJOqfc7+WyehoUBLOyugbPqodcZ3OIaK
+ pvXV5zxPlg==
+X-Mailman-Approved-At: Tue, 23 Feb 2021 17:01:43 +0000
 Subject: Re: [Nouveau] [PATCH 2/3] drm/nouveau/kms/nv50-: Report max cursor
  size to userspace
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -65,61 +78,49 @@ Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, Feb 23, 2021 at 10:36 AM Alex Riesen
-<alexander.riesen@cetitec.com> wrote:
->
-> Ilia Mirkin, Tue, Feb 23, 2021 15:56:21 +0100:
-> > On Tue, Feb 23, 2021 at 9:26 AM Alex Riesen <alexander.riesen@cetitec.com> wrote:
-> > > Lyude Paul, Tue, Jan 19, 2021 02:54:13 +0100:
-> > > > diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.c b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-> > > > index c6367035970e..5f4f09a601d4 100644
-> > > > --- a/drivers/gpu/drm/nouveau/dispnv50/disp.c
-> > > > +++ b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-> > > > @@ -2663,6 +2663,14 @@ nv50_display_create(struct drm_device *dev)
-> > > >       else
-> > > >               nouveau_display(dev)->format_modifiers = disp50xx_modifiers;
-> > > >
-> > > > +     if (disp->disp->object.oclass >= GK104_DISP) {
-> > > > +             dev->mode_config.cursor_width = 256;
-> > > > +             dev->mode_config.cursor_height = 256;
-> > > > +     } else {
-> > > > +             dev->mode_config.cursor_width = 64;
-> > > > +             dev->mode_config.cursor_height = 64;
-> > > > +     }
-> > > > +
-> > > >       /* create crtc objects to represent the hw heads */
-> > > >       if (disp->disp->object.oclass >= GV100_DISP)
-> > > >               crtcs = nvif_rd32(&device->object, 0x610060) & 0xff;
+Ilia Mirkin, Tue, Feb 23, 2021 15:56:21 +0100:
+> On Tue, Feb 23, 2021 at 9:26 AM Alex Riesen <alexander.riesen@cetitec.com> wrote:
+> > Lyude Paul, Tue, Jan 19, 2021 02:54:13 +0100:
+> > > diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.c b/drivers/gpu/drm/nouveau/dispnv50/disp.c
+> > > index c6367035970e..5f4f09a601d4 100644
+> > > --- a/drivers/gpu/drm/nouveau/dispnv50/disp.c
+> > > +++ b/drivers/gpu/drm/nouveau/dispnv50/disp.c
+> > > @@ -2663,6 +2663,14 @@ nv50_display_create(struct drm_device *dev)
+> > >       else
+> > >               nouveau_display(dev)->format_modifiers = disp50xx_modifiers;
 > > >
-> > > This change broke X cursor in my setup, and reverting the commit restores it.
-> > >
-> > > Dell Precision M4800, issue ~2014 with GK106GLM [Quadro K2100M] (rev a1).
-> > > libdrm 2.4.91-1 (Debian 10.8 stable).
-> > > There are no errors or warnings in Xorg logs nor in the kernel log.
+> > > +     if (disp->disp->object.oclass >= GK104_DISP) {
+> > > +             dev->mode_config.cursor_width = 256;
+> > > +             dev->mode_config.cursor_height = 256;
+> > > +     } else {
+> > > +             dev->mode_config.cursor_width = 64;
+> > > +             dev->mode_config.cursor_height = 64;
+> > > +     }
+> > > +
+> > >       /* create crtc objects to represent the hw heads */
+> > >       if (disp->disp->object.oclass >= GV100_DISP)
+> > >               crtcs = nvif_rd32(&device->object, 0x610060) & 0xff;
 > >
-> > Could you confirm which ddx is driving the nvidia hw? You can find
-> > this out by running "xrandr --listproviders", or also in the xorg log.
->
-> xrandr(1) does not seem to list much:
->
-> $ xrandr --listproviders
-> Providers: number : 1
-> Provider 0: id: 0x48 cap: 0xf, Source Output, Sink Output, Source Offload, Sink Offload crtcs: 4 outputs: 5 associated providers: 0 name:modesetting
+> > This change broke X cursor in my setup, and reverting the commit restores it.
+> >
+> > Dell Precision M4800, issue ~2014 with GK106GLM [Quadro K2100M] (rev a1).
+> > libdrm 2.4.91-1 (Debian 10.8 stable).
+> > There are no errors or warnings in Xorg logs nor in the kernel log.
+> 
+> Could you confirm which ddx is driving the nvidia hw? You can find
+> this out by running "xrandr --listproviders", or also in the xorg log.
 
-Thanks - this is what I was looking for. name:modesetting, i.e. the
-modesetting ddx driver.
+xrandr(1) does not seem to list much:
 
-I checked nouveau source, and it seems like it uses a 64x64 cursor no
-matter what. Not sure what the modesetting ddx does.
+$ xrandr --listproviders
+Providers: number : 1
+Provider 0: id: 0x48 cap: 0xf, Source Output, Sink Output, Source Offload, Sink Offload crtcs: 4 outputs: 5 associated providers: 0 name:modesetting
 
-I'd recommend using xf86-video-nouveau in any case, but some distros
-have decided to explicitly force modesetting in preference of nouveau.
-Oh well. (And regardless, the regression should be addressed somehow,
-but it's also good to understand what the problem is.)
+I failed to find a DDX in Xorg.0.log. Both Xorg.0.log and dmesg can be seen here:
 
-Can you confirm what the problem with the cursor is?
+    https://gist.github.com/ar-cetitec/68c27551d9a59b89dc73bffe0456bbef
 
-  -ilia
+
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
