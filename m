@@ -2,43 +2,59 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 44EEA322391
-	for <lists+nouveau@lfdr.de>; Tue, 23 Feb 2021 02:23:40 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C9A16322CDA
+	for <lists+nouveau@lfdr.de>; Tue, 23 Feb 2021 15:52:39 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id AA0DD6E7FE;
-	Tue, 23 Feb 2021 01:23:38 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 337D06E839;
+	Tue, 23 Feb 2021 14:52:38 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A5EE26E591;
- Tue, 23 Feb 2021 01:22:28 +0000 (UTC)
-Received: by mail.kernel.org (Postfix) with ESMTPSA id A8BC86023B;
- Tue, 23 Feb 2021 01:22:25 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1614043347;
- bh=QyNsljerVpDiDO+K9/ltiFTkhVqcxc/0Ay2CXZ1z8vI=;
- h=Date:From:To:cc:Subject:In-Reply-To:References:From;
- b=qT9uEWGJgqYzpURFhCR6u+Wbw6bbsJzfvEpXt+qOvRpZBeHHsRUnipN3HQHDDB3E3
- gCjXrJz0oOmy8eLfkAtbzisTgVdrdP8aPT65rPgULTDiPO+qGgU3kXayVSCi7szBX/
- MfxWKKRGZmJ1Y0ya3KFks5fDwYLPA+LP36j6egOWcx+zZZlUCQVI7We8WcL7pgLfTc
- aFyNR7YKXv/dZO9DLIrqsrZIWF99Xag6MDO0N1HuYflfFdk0rqJHeOrj3VhyML8MHz
- tVChYYBBryvSqBDuB2Mo5J/NvyYzT12d/wTuwUUZX0GTHVvNU/omP5eYzJ827lYJXw
- ABjqJ4JGM8RZA==
-Date: Mon, 22 Feb 2021 17:22:24 -0800 (PST)
-From: Stefano Stabellini <sstabellini@kernel.org>
-X-X-Sender: sstabellini@sstabellini-ThinkPad-T480s
-To: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
-In-Reply-To: <YDAgT2ZIdncNwNlf@Konrads-MacBook-Pro.local>
-Message-ID: <alpine.DEB.2.21.2102221511360.3234@sstabellini-ThinkPad-T480s>
-References: <20210203233709.19819-1-dongli.zhang@oracle.com>
- <20210203233709.19819-6-dongli.zhang@oracle.com>
- <20210204084023.GA32328@lst.de> <20210207155601.GA25111@lst.de>
- <YDAgT2ZIdncNwNlf@Konrads-MacBook-Pro.local>
-User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
+X-Greylist: delayed 548 seconds by postgrey-1.36 at gabe;
+ Tue, 23 Feb 2021 14:24:52 UTC
+Received: from mout.kundenserver.de (mout.kundenserver.de [217.72.192.73])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B8CC56E1F9;
+ Tue, 23 Feb 2021 14:24:52 +0000 (UTC)
+Received: from mail.cetitecgmbh.com ([87.190.42.90]) by
+ mrelayeu.kundenserver.de (mreue109 [213.165.67.113]) with ESMTPSA (Nemesis)
+ id 1Mdvyi-1lnKzS3eCM-00b0aU; Tue, 23 Feb 2021 15:15:24 +0100
+Received: from pflvmailgateway.corp.cetitec.com (unknown [127.0.0.1])
+ by mail.cetitecgmbh.com (Postfix) with ESMTP id 73AB41E01EB;
+ Tue, 23 Feb 2021 14:15:22 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at cetitec.com
+Received: from mail.cetitecgmbh.com ([127.0.0.1])
+ by pflvmailgateway.corp.cetitec.com (pflvmailgateway.corp.cetitec.com
+ [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id VmzJgTaF5xPP; Tue, 23 Feb 2021 15:15:22 +0100 (CET)
+Received: from pflmari.corp.cetitec.com (21-usr-pf-main.vpn.it.cetitec.com
+ [10.8.5.21])
+ by mail.cetitecgmbh.com (Postfix) with ESMTPSA id 2CA121E01EA;
+ Tue, 23 Feb 2021 15:15:22 +0100 (CET)
+Received: by pflmari.corp.cetitec.com (Postfix, from local account)
+Date: Tue, 23 Feb 2021 15:15:21 +0100
+From: Alex Riesen <alexander.riesen@cetitec.com>
+To: Lyude Paul <lyude@redhat.com>
+Message-ID: <YDUN+Re/alMVL0Zn@pflmari>
+References: <20210119015415.2511028-1-lyude@redhat.com>
+ <20210119015415.2511028-2-lyude@redhat.com>
 MIME-Version: 1.0
-X-Mailman-Approved-At: Tue, 23 Feb 2021 01:23:37 +0000
-Subject: Re: [Nouveau] [PATCH RFC v1 5/6] xen-swiotlb: convert variables to
- arrays
+Content-Disposition: inline
+In-Reply-To: <20210119015415.2511028-2-lyude@redhat.com>
+X-Provags-ID: V03:K1:OyqQZwzOO6IF8d6ExZM9WpBmYey37Dqo2pTpIaNdzhHny21aso9
+ h9QRW0YUsgsKhN2jbE1zQlEowesa1sbZjl74BpdeCiwCjsHcDZCfjho0irbPPx1/QDzq+K0
+ tyMd+mno2hxFag40eKo36u+8W6EfsthzItJotElpVDj3/DHoL1e8MLwPNtqkEISL8uW4s/U
+ xQTFFT0qoIwQAZcfUUirA==
+X-Spam-Flag: NO
+X-UI-Out-Filterresults: notjunk:1;V03:K0:bnEOmraRsnw=:cTjHY+Sy9eHB6CM5tAfgFb
+ 2W3nQV6I1HGjGrov4lXLgQIS4PlXTA1rhh8iEPRRpl/S6sN8Iwmzh3pAhQ8BJfeo8pHn1wFWQ
+ EqaamcLnwGZl10UMwnE/kHDONfiAzp9b/fgYO1AJxUbzn/OStVeDwXOm8UPKq6Kk4taEaWpdT
+ mmsGy6gsIjTo1aCCSdt65vQyS7ikl1A31OT2jj6Z7Hs09LnDTK/47PUQicOfCRsdxZiMVlV6S
+ RCutc3d/m0oxpUB0OdBPtSV3nl675z5hgq4rRiL3370hs2MiAAIipa8A94ERrTmpc+1nDsuO+
+ s/QqB5JWYPqVcavtlhbGJB9HMOl6LcFYF0ucBb93Ii0dlTPVaRk4QCZMI+8eepOifObk9oLiH
+ rOSVx802UWztsEO8C1z8q8Te1lLPhmNu0+jFpw6hlxtKQa36U2y1uKFeuqvtnKASrUWQ+mAq6
+ Dee1waM0iA==
+X-Mailman-Approved-At: Tue, 23 Feb 2021 14:52:37 +0000
+Subject: Re: [Nouveau] [PATCH 2/3] drm/nouveau/kms/nv50-: Report max cursor
+ size to userspace
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -50,124 +66,46 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: ulf.hansson@linaro.org, airlied@linux.ie, benh@kernel.crashing.org,
- joonas.lahtinen@linux.intel.com, dri-devel@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, paulus@samba.org, hpa@zytor.com,
- Christoph Hellwig <hch@lst.de>, m.szyprowski@samsung.com,
- sstabellini@kernel.org, adrian.hunter@intel.com,
- Dongli Zhang <dongli.zhang@oracle.com>, x86@kernel.org, joe.jin@oracle.com,
- mingo@kernel.org, peterz@infradead.org, mingo@redhat.com, bskeggs@redhat.com,
- linux-pci@vger.kernel.org, xen-devel@lists.xenproject.org,
- matthew.auld@intel.com, thomas.lendacky@amd.com,
- intel-gfx@lists.freedesktop.org, jani.nikula@linux.intel.com, bp@alien8.de,
- rodrigo.vivi@intel.com, bhelgaas@google.com,
- Boris Ostrovsky <boris.ostrovsky@oracle.com>, chris@chris-wilson.co.uk,
- jgross@suse.com, tsbogend@alpha.franken.de, nouveau@lists.freedesktop.org,
- robin.murphy@arm.com, linux-mmc@vger.kernel.org, linux-mips@vger.kernel.org,
- iommu@lists.linux-foundation.org, tglx@linutronix.de, bauerman@linux.ibm.com,
- daniel@ffwll.ch, mpe@ellerman.id.au, akpm@linux-foundation.org,
- linuxppc-dev@lists.ozlabs.org, rppt@kernel.org
+Cc: Pankaj Bharadiya <pankaj.laxminarayan.bharadiya@intel.com>,
+ David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
+ Takashi Iwai <tiwai@suse.de>, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>,
+ Daniel Vetter <daniel@ffwll.ch>, Simon Ser <contact@emersion.fr>,
+ Dave Airlie <airlied@redhat.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, 19 Feb 2021, Konrad Rzeszutek Wilk wrote:
-> On Sun, Feb 07, 2021 at 04:56:01PM +0100, Christoph Hellwig wrote:
-> > On Thu, Feb 04, 2021 at 09:40:23AM +0100, Christoph Hellwig wrote:
-> > > So one thing that has been on my mind for a while:  I'd really like
-> > > to kill the separate dma ops in Xen swiotlb.  If we compare xen-swiotlb
-> > > to swiotlb the main difference seems to be:
-> > > 
-> > >  - additional reasons to bounce I/O vs the plain DMA capable
-> > >  - the possibility to do a hypercall on arm/arm64
-> > >  - an extra translation layer before doing the phys_to_dma and vice
-> > >    versa
-> > >  - an special memory allocator
-> > > 
-> > > I wonder if inbetween a few jump labels or other no overhead enablement
-> > > options and possibly better use of the dma_range_map we could kill
-> > > off most of swiotlb-xen instead of maintaining all this code duplication?
-> > 
-> > So I looked at this a bit more.
-> > 
-> > For x86 with XENFEAT_auto_translated_physmap (how common is that?)
-> 
-> Juergen, Boris please correct me if I am wrong, but that XENFEAT_auto_translated_physmap
-> only works for PVH guests?
+Lyude Paul, Tue, Jan 19, 2021 02:54:13 +0100:
+> diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.c b/drivers/gpu/drm/nouveau/dispnv50/disp.c
+> index c6367035970e..5f4f09a601d4 100644
+> --- a/drivers/gpu/drm/nouveau/dispnv50/disp.c
+> +++ b/drivers/gpu/drm/nouveau/dispnv50/disp.c
+> @@ -2663,6 +2663,14 @@ nv50_display_create(struct drm_device *dev)
+>  	else
+>  		nouveau_display(dev)->format_modifiers = disp50xx_modifiers;
+>  
+> +	if (disp->disp->object.oclass >= GK104_DISP) {
+> +		dev->mode_config.cursor_width = 256;
+> +		dev->mode_config.cursor_height = 256;
+> +	} else {
+> +		dev->mode_config.cursor_width = 64;
+> +		dev->mode_config.cursor_height = 64;
+> +	}
+> +
+>  	/* create crtc objects to represent the hw heads */
+>  	if (disp->disp->object.oclass >= GV100_DISP)
+>  		crtcs = nvif_rd32(&device->object, 0x610060) & 0xff;
 
-ARM is always XENFEAT_auto_translated_physmap
+This change broke X cursor in my setup, and reverting the commit restores it.
 
+Dell Precision M4800, issue ~2014 with GK106GLM [Quadro K2100M] (rev a1).
+libdrm 2.4.91-1 (Debian 10.8 stable).
+There are no errors or warnings in Xorg logs nor in the kernel log.
 
-> > pfn_to_gfn is a nop, so plain phys_to_dma/dma_to_phys do work as-is.
-> > 
-> > xen_arch_need_swiotlb always returns true for x86, and
-> > range_straddles_page_boundary should never be true for the
-> > XENFEAT_auto_translated_physmap case.
-> 
-> Correct. The kernel should have no clue of what the real MFNs are
-> for PFNs.
-
-On ARM, Linux knows the MFNs because for local pages MFN == PFN and for
-foreign pages it keeps track in arch/arm/xen/p2m.c. More on this below.
-
-xen_arch_need_swiotlb only returns true on ARM in rare situations where
-bouncing on swiotlb buffers is required. Today it only happens on old
-versions of Xen that don't support the cache flushing hypercall but
-there could be more cases in the future.
-
-
-> > 
-> > So as far as I can tell the mapping fast path for the
-> > XENFEAT_auto_translated_physmap can be trivially reused from swiotlb.
-> > 
-> > That leaves us with the next more complicated case, x86 or fully cache
-> > coherent arm{,64} without XENFEAT_auto_translated_physmap.  In that case
-> > we need to patch in a phys_to_dma/dma_to_phys that performs the MFN
-> > lookup, which could be done using alternatives or jump labels.
-> > I think if that is done right we should also be able to let that cover
-> > the foreign pages in is_xen_swiotlb_buffer/is_swiotlb_buffer, but
-> > in that worst case that would need another alternative / jump label.
-> > 
-> > For non-coherent arm{,64} we'd also need to use alternatives or jump
-> > labels to for the cache maintainance ops, but that isn't a hard problem
-> > either.
-
-With the caveat that ARM is always XENFEAT_auto_translated_physmap, what
-you wrote looks correct. I am writing down a brief explanation on how
-swiotlb-xen is used on ARM.
-
-
-pfn: address as seen by the guest, pseudo-physical address in ARM terminology
-mfn (or bfn): real address, physical address in ARM terminology
-
-
-On ARM dom0 is auto_translated (so Xen sets up the stage2 translation
-in the MMU) and the translation is 1:1. So pfn == mfn for Dom0.
-
-However, when another domain shares a page with Dom0, that page is not
-1:1. Swiotlb-xen is used to retrieve the mfn for the foreign page at
-xen_swiotlb_map_page. It does that with xen_phys_to_bus -> pfn_to_bfn.
-It is implemented with a rbtree in arch/arm/xen/p2m.c.
-
-In addition, swiotlb-xen is also used to cache-flush the page via
-hypercall at xen_swiotlb_unmap_page. That is done because dev_addr is
-really the mfn at unmap_page and we don't know the pfn for it. We can do
-pfn-to-mfn but we cannot do mfn-to-pfn (there are good reasons for it
-unfortunately). The only way to cache-flush by mfn is by issuing a
-hypercall. The hypercall is implemented in arch/arm/xen/mm.c.
-
-The pfn != bfn and pfn_valid() checks are used to detect if the page is
-local (of dom0) or foreign; they work thanks to the fact that Dom0 is
-1:1 mapped.
-
-
-Getting back to what you wrote, yes if we had a way to do MFN lookups in
-phys_to_dma, and a way to call the hypercall at unmap_page if the page
-is foreign (e.g. if it fails a pfn_valid check) then I think we would be
-good from an ARM perspective. The only exception is when
-xen_arch_need_swiotlb returns true, in which case we need to actually
-bounce on swiotlb buffers.
+Regards,
+Alex
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
