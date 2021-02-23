@@ -2,60 +2,59 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 20C91322F3D
-	for <lists+nouveau@lfdr.de>; Tue, 23 Feb 2021 18:01:47 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7FEE4322F3F
+	for <lists+nouveau@lfdr.de>; Tue, 23 Feb 2021 18:01:51 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 179EA6E828;
-	Tue, 23 Feb 2021 17:01:44 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A73946EA0C;
+	Tue, 23 Feb 2021 17:01:45 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 580 seconds by postgrey-1.36 at gabe;
- Tue, 23 Feb 2021 16:01:22 UTC
-Received: from mout.kundenserver.de (mout.kundenserver.de [212.227.126.131])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 2EEFD6E9DE;
- Tue, 23 Feb 2021 16:01:22 +0000 (UTC)
+Received: from mout.kundenserver.de (mout.kundenserver.de [212.227.17.24])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 05A6B6E83A;
+ Tue, 23 Feb 2021 16:23:05 +0000 (UTC)
 Received: from mail.cetitecgmbh.com ([87.190.42.90]) by
- mrelayeu.kundenserver.de (mreue009 [213.165.67.97]) with ESMTPSA (Nemesis) id
- 1M89P1-1lATVT1OiJ-005M5W; Tue, 23 Feb 2021 16:51:28 +0100
+ mrelayeu.kundenserver.de (mreue107 [213.165.67.113]) with ESMTPSA (Nemesis)
+ id 1N4h7p-1lvvos45KR-011img; Tue, 23 Feb 2021 17:22:50 +0100
 Received: from pflvmailgateway.corp.cetitec.com (unknown [127.0.0.1])
- by mail.cetitecgmbh.com (Postfix) with ESMTP id 3A6551E01E7;
- Tue, 23 Feb 2021 15:51:27 +0000 (UTC)
+ by mail.cetitecgmbh.com (Postfix) with ESMTP id BE0EC1E01E7;
+ Tue, 23 Feb 2021 16:22:48 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at cetitec.com
 Received: from mail.cetitecgmbh.com ([127.0.0.1])
  by pflvmailgateway.corp.cetitec.com (pflvmailgateway.corp.cetitec.com
  [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id tnEpDMyau6jA; Tue, 23 Feb 2021 16:51:26 +0100 (CET)
+ with ESMTP id AmtucNZYzPf5; Tue, 23 Feb 2021 17:22:48 +0100 (CET)
 Received: from pflmari.corp.cetitec.com (2-usr-pf-main.vpn.it.cetitec.com
  [10.8.5.2])
- by mail.cetitecgmbh.com (Postfix) with ESMTPSA id E826D1E01E6;
- Tue, 23 Feb 2021 16:51:26 +0100 (CET)
+ by mail.cetitecgmbh.com (Postfix) with ESMTPSA id 7C2AB1E01E6;
+ Tue, 23 Feb 2021 17:22:48 +0100 (CET)
 Received: by pflmari.corp.cetitec.com (Postfix, from local account)
-Date: Tue, 23 Feb 2021 16:51:26 +0100
+Date: Tue, 23 Feb 2021 17:22:48 +0100
 From: Alex Riesen <alexander.riesen@cetitec.com>
 To: Ilia Mirkin <imirkin@alum.mit.edu>
-Message-ID: <YDUkfjDA4xLJlxE5@pflmari>
+Message-ID: <YDUr2OGDsxDyC0l2@pflmari>
 References: <20210119015415.2511028-1-lyude@redhat.com>
  <20210119015415.2511028-2-lyude@redhat.com>
  <YDUN+Re/alMVL0Zn@pflmari>
  <CAKb7UvhFkw23so-a4JKLzpQLhphzjzarOy-9h+FiKP-aAC=4xw@mail.gmail.com>
  <YDUg/9fjsvTkRUqr@pflmari>
  <CAKb7Uvji_+N+b8HghZckU-uSBWn-=BZwNAiUff2oitbVuNUE2Q@mail.gmail.com>
+ <YDUkfjDA4xLJlxE5@pflmari>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <CAKb7Uvji_+N+b8HghZckU-uSBWn-=BZwNAiUff2oitbVuNUE2Q@mail.gmail.com>
-X-Provags-ID: V03:K1:TZGccT2syXDhApLxVFzVDJq5wKOtDGq/dl3aJQEA5t+BCVA3L2q
- V2lhNWDapJfSve9PZ5g8vpBtD2MQCXpv4W0PVMnTyWJdp+BAqHPypSdzeLnJYlzv9EmFZC+
- +D2ZnMjL5Xr4bJYsf5D69SAm/mbjuwsuOsuWdiJQDmhgdDu0O08nB4SHW3ORqAliTh1oPrC
- 5KbbtmIVlyk6JiDnl/AAg==
+In-Reply-To: <YDUkfjDA4xLJlxE5@pflmari>
+X-Provags-ID: V03:K1:uxJfi3ydTk8ysbucSUV4XAHzr1MDK4K2Qpb1RjV23QE0dhbIwRa
+ CoMudbULWew6HpAnY88BtTMf9aYScxJ/i21uWliY42ZIh9MQge9AJtKi4L3bixZruomkmGV
+ o8DfWXw6AmzXny984pg2X3QVHXQu5WwVLAfmdj5jba2ozgNTg4vw5D3TzcWy6++m56G63C+
+ VLD/cG3Jj+DrqseRsOuIQ==
 X-Spam-Flag: NO
-X-UI-Out-Filterresults: notjunk:1;V03:K0:reKDNF92mpg=:HzSCcAp1LpNOOjLHI71DVs
- PCsb+x8Qmjf11jh6L9oODUC1NWq5xsI79fGt7k5skFEHtNmwDVxMuZonkgFKBMyor9UUR1Opr
- GAy5KXwyMa2zCu1QoirClLwd9beo/Tk4oOywgHxVeBtwSzpaIdaoaZa2XkIzZ/80WqCVJ5win
- fk7YNqiQFODA9O0XLx582G2AVAMmuE0Rl1R0t5ZQd7JMvhJtZaGYC1TQYrudhvbrFypbkwec7
- yXDEmjJQgXu8il1jU4baQ7Efi44vtGvz7wU6bfiWji6BUke3jpAxAjY9Jn+IaR5xzb8G5zE+f
- ybF1WdV9qs+Od7VxauYaOFMPMyEyzRoLHhxS61p3mwkzwbChABlT69iEUbjnF0uIx1Jb8i13q
- 42l+cyQ7RW65lTW0rHn9b5PH/OeO0bJbuG1FjJYP6UnUYqdfrtFl5yKAU7rNBJoc8DSZ86p7/
- tOcbLReaRQ==
+X-UI-Out-Filterresults: notjunk:1;V03:K0:NJUyY+qoh3U=:Oe5YbRyAdC5zUDEi1EEocZ
+ /efMtL2j7n63uwuzI8AgdB3e7aNtq3OEBHsJOlW3q4/5sY49G8GgwNuoGIwNaAYa/4ggbk9Uy
+ SSLcd0DMTQUiwZ8JuYwzToffnePVdVE2kSmndbnVgBl/1+uXIJP7/HxFEIstJbWmJCouIgITp
+ 80iBRQSHT49Nn24mOgaF+D80cKmws+nsmJgZYHCQnCwlHEWgzDMRpnVJaC+wjvGhii87JB0cQ
+ DmTR+Lpmsx0XlsG5F2Zm+m5GqpwLmMuMD68pge+JVYgiti9HlE3Az0sOrlvjWkbPhGW+60dhw
+ I36WLq9OkgUbByQUoDdMdhuedBX+7ntK7jnojiVmDVyMOIkYD/uxu8isYPJ7RDWwHt4pfLBw+
+ 3h4XO9uRKrwgf9WO5niAZ3QaASXQfbDhs1KSftPdU3UrGm6NDJJmOGLdUwug9VzV1wl7vt23c
+ qzhb83zmGw==
 X-Mailman-Approved-At: Tue, 23 Feb 2021 17:01:43 +0000
 Subject: Re: [Nouveau] [PATCH 2/3] drm/nouveau/kms/nv50-: Report max cursor
  size to userspace
@@ -80,45 +79,20 @@ Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Ilia Mirkin, Tue, Feb 23, 2021 16:46:52 +0100:
-> On Tue, Feb 23, 2021 at 10:36 AM Alex Riesen <alexander.riesen@cetitec.com> wrote:
-> > Ilia Mirkin, Tue, Feb 23, 2021 15:56:21 +0100:
-> > > On Tue, Feb 23, 2021 at 9:26 AM Alex Riesen <alexander.riesen@cetitec.com> wrote:
-> > > >
-> > > > This change broke X cursor in my setup, and reverting the commit restores it.
-> > > >
-> > > > Dell Precision M4800, issue ~2014 with GK106GLM [Quadro K2100M] (rev a1).
-> > > > libdrm 2.4.91-1 (Debian 10.8 stable).
-> > > > There are no errors or warnings in Xorg logs nor in the kernel log.
-> > >
-> > > Could you confirm which ddx is driving the nvidia hw? You can find
-> > > this out by running "xrandr --listproviders", or also in the xorg log.
-> >
-> > xrandr(1) does not seem to list much:
-> >
-> > $ xrandr --listproviders
-> > Providers: number : 1
-> > Provider 0: id: 0x48 cap: 0xf, Source Output, Sink Output, Source Offload, Sink Offload crtcs: 4 outputs: 5 associated providers: 0 name:modesetting
+Alex Riesen, Tue, Feb 23, 2021 16:51:26 +0100:
+> Ilia Mirkin, Tue, Feb 23, 2021 16:46:52 +0100:
+> > I'd recommend using xf86-video-nouveau in any case, but some distros
 > 
-> Thanks - this is what I was looking for. name:modesetting, i.e. the
-> modesetting ddx driver.
-> 
-> I checked nouveau source, and it seems like it uses a 64x64 cursor no
-> matter what. Not sure what the modesetting ddx does.
-> 
-> I'd recommend using xf86-video-nouveau in any case, but some distros
+> I would like try this out. Do you know how to force the xorg server to
+> choose this driver instead of modesetting?
 
-I would like try this out. Do you know how to force the xorg server to
-choose this driver instead of modesetting?
+Found that myself (a Device section with Driver set to "nouveau"):
 
-> have decided to explicitly force modesetting in preference of nouveau.
-> Oh well. (And regardless, the regression should be addressed somehow,
-> but it's also good to understand what the problem is.)
->
-> Can you confirm what the problem with the cursor is?
+    $ xrandr  --listproviders
+    Providers: number : 1
+    Provider 0: id: 0x68 cap: 0x7, Source Output, Sink Output, Source Offload crtcs: 4 outputs: 5 associated providers: 0 name:nouveau
 
-The cursor looks stretched vertically over a bigger matrix, while missing some
-lines and being wrapped over the bottom on top of that matrix.
+And yes, the cursor looks good in v5.11 even without reverting the commit.
 
 _______________________________________________
 Nouveau mailing list
