@@ -2,50 +2,62 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9E14332346B
-	for <lists+nouveau@lfdr.de>; Wed, 24 Feb 2021 00:57:13 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1D68532392F
+	for <lists+nouveau@lfdr.de>; Wed, 24 Feb 2021 10:09:15 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D39E46E873;
-	Tue, 23 Feb 2021 23:57:10 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E77936E8AB;
+	Wed, 24 Feb 2021 09:09:12 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1859D6E57E
- for <nouveau@lists.freedesktop.org>; Tue, 23 Feb 2021 23:57:08 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1614124627;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=/BRP8WOD3C7GnixOAaJcuGj6DLx+wECwJIj7jVM8RU0=;
- b=GXwPKih+WvdYP06FTajRZjl6v6rV0sfhnnbUlLRqUJ0UzM4c6Hhw67WlH4zsaru7sjCezV
- KrOnjg2Sv+fXh2/kkKJPVhPm19zhlH+JHVIp1BsSr1VCd6q1NKOXbkYe/rzdDB82XHWCBX
- eW/Nlxslv+00JXgddMRmx8qkBSduHv4=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-483-LDBGhwqoPLyuZszq9G7YoA-1; Tue, 23 Feb 2021 18:57:06 -0500
-X-MC-Unique: LDBGhwqoPLyuZszq9G7YoA-1
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
- [10.5.11.23])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id BD0B91005501;
- Tue, 23 Feb 2021 23:57:03 +0000 (UTC)
-Received: from Ruby.redhat.com (ovpn-112-95.rdu2.redhat.com [10.10.112.95])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 11D5B19C46;
- Tue, 23 Feb 2021 23:57:00 +0000 (UTC)
-From: Lyude Paul <lyude@redhat.com>
-To: nouveau@lists.freedesktop.org
-Date: Tue, 23 Feb 2021 18:56:47 -0500
-Message-Id: <20210223235653.66120-1-lyude@redhat.com>
-In-Reply-To: <20210119014849.2509965-5-lyude@redhat.com>
-References: <20210119014849.2509965-5-lyude@redhat.com>
+Received: from mout.kundenserver.de (mout.kundenserver.de [217.72.192.73])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id DF8F16E8AB;
+ Wed, 24 Feb 2021 09:09:10 +0000 (UTC)
+Received: from mail.cetitecgmbh.com ([87.190.42.90]) by
+ mrelayeu.kundenserver.de (mreue107 [213.165.67.113]) with ESMTPSA (Nemesis)
+ id 1MRnXY-1lPOpV2sAs-00TCfi; Wed, 24 Feb 2021 10:08:27 +0100
+Received: from pflvmailgateway.corp.cetitec.com (unknown [127.0.0.1])
+ by mail.cetitecgmbh.com (Postfix) with ESMTP id 732881E01E7;
+ Wed, 24 Feb 2021 09:08:26 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at cetitec.com
+Received: from mail.cetitecgmbh.com ([127.0.0.1])
+ by pflvmailgateway.corp.cetitec.com (pflvmailgateway.corp.cetitec.com
+ [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id Wonho7DAe5NY; Wed, 24 Feb 2021 10:08:26 +0100 (CET)
+Received: from pflmari.corp.cetitec.com (67-usr-pf-main.vpn.it.cetitec.com
+ [10.8.5.67])
+ by mail.cetitecgmbh.com (Postfix) with ESMTPSA id F367C1E01E6;
+ Wed, 24 Feb 2021 10:08:25 +0100 (CET)
+Received: by pflmari.corp.cetitec.com (Postfix, from local account)
+Date: Wed, 24 Feb 2021 10:08:25 +0100
+From: Alex Riesen <alexander.riesen@cetitec.com>
+To: Ilia Mirkin <imirkin@alum.mit.edu>
+Message-ID: <YDYXiTm7MDXgYT7H@pflmari>
+References: <20210119015415.2511028-1-lyude@redhat.com>
+ <20210119015415.2511028-2-lyude@redhat.com>
+ <YDUN+Re/alMVL0Zn@pflmari>
+ <CAKb7UvhFkw23so-a4JKLzpQLhphzjzarOy-9h+FiKP-aAC=4xw@mail.gmail.com>
+ <YDUg/9fjsvTkRUqr@pflmari>
+ <CAKb7Uvji_+N+b8HghZckU-uSBWn-=BZwNAiUff2oitbVuNUE2Q@mail.gmail.com>
+ <YDUkfjDA4xLJlxE5@pflmari> <YDUr2OGDsxDyC0l2@pflmari>
+ <CAKb7UvjmdgS536tNzisomi_oXOGk3Q+anp0AfPvA8OruU_9m5Q@mail.gmail.com>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
-Subject: [Nouveau] [PATCH v2] drm/nouveau/kms/nvd9-nv138: Fix CRC
- calculation for the cursor channel
+Content-Disposition: inline
+In-Reply-To: <CAKb7UvjmdgS536tNzisomi_oXOGk3Q+anp0AfPvA8OruU_9m5Q@mail.gmail.com>
+X-Provags-ID: V03:K1:cGed9gPj+JIzUf3H2cRPnpC8QpnkW70X803lIk1/AQ44QAF3SiG
+ g00oP6MNRxFYbzW5J6kmzHnCpI4c/LDd38xnOztL0+JpRVTlNJ+ysrNYIMSQHb8oAhSYPrG
+ dMIhKmyX+E84qo9WDcwMMFo5MQai1bLvFCFIoioHlAmS1ZHLwhW+bLLBrylJHWbLeHKhJ20
+ vmGWGvRrwXt6K8J4SJBTw==
+X-Spam-Flag: NO
+X-UI-Out-Filterresults: notjunk:1;V03:K0:7bn3tjKrTjE=:rZQSYL5WOWbhb84kuRdpMs
+ Y1NbTu4ibzvvwGDO/ld8k+duIBAKUuVMUTil71dDP/n0iSMt2a9iv5v7n1Q9lv/XFD2psI7yM
+ q0g8MLqyWRTks9I95NkXTgRA/0WP+R7nyR8eErOuHgyNu4NB60s66nogT2iR7Y0qPZW6WFvY1
+ vWa+TlbEFmORlXryDe0SLeoZR7Sr1+zCAINHL+Fu7PtOkU0rsP8Wpcyat3ysrtSXtbTNa6ItM
+ UDs3aogTL8XlBJGle1cbKCvQheUnGR0uG58pc0wXXee3zwUPS2VOTIC26viatLAkqrGE0hGaL
+ Xu4B6YM+CzPrb3bBpNJgHXjIEgR86T7yB8y2x1LNjF54vkFE/6GSnI58sAj30dCDQjAEh6ZBT
+ ohmnmwKhZwYoqq3H1eqtDexX7JXUyAua3wmS1bkiyBzI1b7FeDStj19HhO9JpmZAhUcPnpRJ4
+ evW7IlubQA==
+Subject: Re: [Nouveau] [PATCH 2/3] drm/nouveau/kms/nv50-: Report max cursor
+ size to userspace
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,70 +69,97 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, Simon Ser <contact@emersion.fr>,
- open list <linux-kernel@vger.kernel.org>,
- "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
- <dri-devel@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>,
- Daniel Vetter <daniel@ffwll.ch>
+Cc: David Airlie <airlied@linux.ie>,
+ Pankaj Bharadiya <pankaj.laxminarayan.bharadiya@intel.com>,
+ LKML <linux-kernel@vger.kernel.org>,
+ dri-devel <dri-devel@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>,
+ nouveau <nouveau@lists.freedesktop.org>, Dave Airlie <airlied@redhat.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Something that didn't get noticed until I started running cursor tests:
-we're accidentally disabling an option for CRC calculation that's enabled
-by default: WidePipeCrc, which controls whether we use the full width of
-the data in the display pipe in order calculate CRCs. Having this disabled
-apparently causes frames with the cursor plane enabled to generate
-different CRCs than frames without the cursor plane enabled, even if the
-frames are pixel-equivalent.
+Ilia Mirkin, Tue, Feb 23, 2021 19:13:59 +0100:
+> On Tue, Feb 23, 2021 at 11:23 AM Alex Riesen <alexander.riesen@cetitec.com> wrote:
+> >
+> >     $ xrandr  --listproviders
+> >     Providers: number : 1
+> >     Provider 0: id: 0x68 cap: 0x7, Source Output, Sink Output, Source Offload crtcs: 4 outputs: 5 associated providers: 0 name:nouveau
+> >
+> > And yes, the cursor looks good in v5.11 even without reverting the commit.
+> 
+> FWIW it's not immediately apparent to me what grave error modesetting
+> is committing in setting the cursor. The logic looks perfectly
+> reasonable. It's not trying to be fancy with rendering the cursor/etc.
+> 
+> The one thing is that it's using drmModeSetCursor2 which sets the
+> hotspot at the same time. But internally inside nouveau I think it
+> should work out to the same thing. Perhaps setting the hotspot, or
+> something in that path, doesn't quite work for 256x256? [Again, no
+> clue what that might be.]
+> 
+> It might also be worthwhile just testing if the 256x256 cursor works
+> quite the way one would want. If you're interested, grab libdrm,
+> there's a test called 'modetest', which has an option to enable a
+> moving cursor (-c iirc). It's hard-coded to 64x64, so you'll have to
+> modify it there too (and probably change the pattern from plain gray
+> to any one of the other ones).
 
-So, let's make sure to enable this and fix a bunch of cursor related tests
-in IGT.
+I am interested, so I did.
 
-v2:
-* Nvidia added the specific bit we were using to fix this issues to
-  open-gpu-docs, so pull in the actual macro definitions for it
+If I start the test without X running, the sprite of 256x256 cursor always
+contained horizontal lines across it, both with commit reverted and vanilla
+v5.11. Similarly, the 64x64 cursor has no lines across it in both kernels.
 
-Cc: Martin Peres <martin.peres@free.fr>
-Cc: Jeremy Cline <jcline@redhat.com>
-Cc: Simon Ser <contact@emersion.fr>
-Signed-off-by: Lyude Paul <lyude@redhat.com>
----
- drivers/gpu/drm/nouveau/dispnv50/crc907d.c          | 3 ++-
- drivers/gpu/drm/nouveau/include/nvhw/class/cl907d.h | 3 +++
- 2 files changed, 5 insertions(+), 1 deletion(-)
+The test does not seem to work at all if there is an X server running (using
+modesetting driver): modetest complained about permission denied to set the
+mode, and just sits there, drawing nothing on the displays.
+So I could not run the test in the environment of original problem.
+Am I starting it correctly? Is the change in modetest.c correct?
 
-diff --git a/drivers/gpu/drm/nouveau/dispnv50/crc907d.c b/drivers/gpu/drm/nouveau/dispnv50/crc907d.c
-index 0a89ae9523d4..f9ad641555b7 100644
---- a/drivers/gpu/drm/nouveau/dispnv50/crc907d.c
-+++ b/drivers/gpu/drm/nouveau/dispnv50/crc907d.c
-@@ -32,7 +32,8 @@ crc907d_set_src(struct nv50_head *head, int or, enum nv50_crc_source_type source
- 		       NVDEF(NV907D, HEAD_SET_CRC_CONTROL, EXPECT_BUFFER_COLLAPSE, FALSE) |
- 		       NVDEF(NV907D, HEAD_SET_CRC_CONTROL, TIMESTAMP_MODE, FALSE) |
- 		       NVDEF(NV907D, HEAD_SET_CRC_CONTROL, SECONDARY_OUTPUT, NONE) |
--		       NVDEF(NV907D, HEAD_SET_CRC_CONTROL, CRC_DURING_SNOOZE, DISABLE);
-+		       NVDEF(NV907D, HEAD_SET_CRC_CONTROL, CRC_DURING_SNOOZE, DISABLE) |
-+		       NVDEF(NV907D, HEAD_SET_CRC_CONTROL, WIDE_PIPE_CRC, ENABLE);
+    $ ./modetest -c |grep '^[0-9]\|preferred'
+    85	86	connected	LVDS-1         	340x190		13	86
+      #0 1920x1080 60.01 1920 2010 2070 2226 1080 1086 1095 1142 152540 flags: phsync, nvsync; type: preferred, driver
+    87	89	connected	DP-1           	470x300		18	88, 89
+      #0 1680x1050 59.88 1680 1728 1760 1840 1050 1053 1059 1080 119000 flags: phsync, nvsync; type: preferred, driver
+    90	0	disconnected	DP-2           	0x0		0	91, 92
+    93	95	connected	DP-3           	520x320		10	94, 95
+      #0 1920x1200 59.95 1920 1968 2000 2080 1200 1203 1209 1235 154000 flags: phsync, nvsync; type: preferred, driver
+    96	0	disconnected	VGA-1          	0x0		0	97
+
+    $ ./modetest -s 85:1920x1080 -s 93:1920x1200 -s 87:1680x1050  -C
+    trying to open device 'i915'...failed
+    trying to open device 'amdgpu'...failed
+    trying to open device 'radeon'...failed
+    trying to open device 'nouveau'...done
+    setting mode 1920x1080-60.01Hz on connectors 85, crtc 50
+    starting cursor
+
+    cursor stopped
+
+This is the change on top of 1225171b (master):
+
+diff --git a/tests/modetest/modetest.c b/tests/modetest/modetest.c
+index fc75383a..cdba7b4e 100644
+--- a/tests/modetest/modetest.c
++++ b/tests/modetest/modetest.c
+@@ -1730,14 +1730,14 @@ static void set_cursors(struct device *dev, struct pipe_arg *pipes, unsigned int
  	int ret;
  
- 	switch (source) {
-diff --git a/drivers/gpu/drm/nouveau/include/nvhw/class/cl907d.h b/drivers/gpu/drm/nouveau/include/nvhw/class/cl907d.h
-index 79aff6ff3138..f972ef1409f4 100644
---- a/drivers/gpu/drm/nouveau/include/nvhw/class/cl907d.h
-+++ b/drivers/gpu/drm/nouveau/include/nvhw/class/cl907d.h
-@@ -246,6 +246,9 @@
- #define NV907D_HEAD_SET_CRC_CONTROL_CRC_DURING_SNOOZE                           5:5
- #define NV907D_HEAD_SET_CRC_CONTROL_CRC_DURING_SNOOZE_DISABLE                   (0x00000000)
- #define NV907D_HEAD_SET_CRC_CONTROL_CRC_DURING_SNOOZE_ENABLE                    (0x00000001)
-+#define NV907D_HEAD_SET_CRC_CONTROL_WIDE_PIPE_CRC                               6:6
-+#define NV907D_HEAD_SET_CRC_CONTROL_WIDE_PIPE_CRC_DISABLE                       (0x00000000)
-+#define NV907D_HEAD_SET_CRC_CONTROL_WIDE_PIPE_CRC_ENABLE                        (0x00000001)
- #define NV907D_HEAD_SET_CONTEXT_DMA_CRC(a)                                      (0x00000438 + (a)*0x00000300)
- #define NV907D_HEAD_SET_CONTEXT_DMA_CRC_HANDLE                                  31:0
- #define NV907D_HEAD_SET_OUTPUT_LUT_LO(a)                                        (0x00000448 + (a)*0x00000300)
--- 
-2.29.2
+ 	/* maybe make cursor width/height configurable some day */
+-	uint32_t cw = 64;
+-	uint32_t ch = 64;
++	uint32_t cw = 256;
++	uint32_t ch = 256;
+ 
+ 	/* create cursor bo.. just using PATTERN_PLAIN as it has
+ 	 * translucent alpha
+ 	 */
+ 	bo = bo_create(dev->fd, DRM_FORMAT_ARGB8888, cw, ch, handles, pitches,
+-		       offsets, UTIL_PATTERN_PLAIN);
++		       offsets, UTIL_PATTERN_SMPTE);
+ 	if (bo == NULL)
+ 		return;
 
 _______________________________________________
 Nouveau mailing list
