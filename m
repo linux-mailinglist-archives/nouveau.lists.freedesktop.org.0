@@ -2,54 +2,81 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 359B4324351
-	for <lists+nouveau@lfdr.de>; Wed, 24 Feb 2021 18:48:13 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 49A083243CE
+	for <lists+nouveau@lfdr.de>; Wed, 24 Feb 2021 19:33:05 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 29A106EAC3;
-	Wed, 24 Feb 2021 17:48:11 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C4E6F6E062;
+	Wed, 24 Feb 2021 18:33:03 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-io1-f47.google.com (mail-io1-f47.google.com
- [209.85.166.47])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6F5006EAC3;
- Wed, 24 Feb 2021 17:48:10 +0000 (UTC)
-Received: by mail-io1-f47.google.com with SMTP id f20so2885018ioo.10;
- Wed, 24 Feb 2021 09:48:10 -0800 (PST)
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [63.128.21.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B7A786E062
+ for <nouveau@lists.freedesktop.org>; Wed, 24 Feb 2021 18:33:01 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1614191580;
+ h=from:from:reply-to:reply-to:subject:subject:date:date:
+ message-id:message-id:to:to:cc:cc:mime-version:mime-version:
+ content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=+/gCQg/tEM71zxcoR7zjR5gmsskJ0eZ/dRc7gd53l/g=;
+ b=EyrdCeNpw3MjhmXyPEo+1HCQamyepYDlddbNmZEG018c4WANCW0KU3xUBgOwNVeTuq/UB9
+ xK8ALj+GziRIjn1cI9qx7vLrakyU4ybwnACEI4y3R5cpDXDQQZPDJ5TJb1ro3cZ4QJYhbG
+ ww13DkaQpKlS9vwmbjaKaoMuYQYoF80=
+Received: from mail-qv1-f69.google.com (mail-qv1-f69.google.com
+ [209.85.219.69]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-84-SInfYmrmPEOhT5lv_nhB8Q-1; Wed, 24 Feb 2021 13:31:34 -0500
+X-MC-Unique: SInfYmrmPEOhT5lv_nhB8Q-1
+Received: by mail-qv1-f69.google.com with SMTP id a13so2173709qvv.14
+ for <nouveau@lists.freedesktop.org>; Wed, 24 Feb 2021 10:31:34 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=Bv5RQcdIfShLFylSDZtYk4PaZOVGAzg45snN8Ej9HqI=;
- b=IXgN3HdenaZtyVyP5PIcEQ5pneHizqeN2xeGZEUGllHe03pqB9VgGu/ME2gzmLVBLF
- oC1RELM/RVYlQpdd2IaXnMkWyJq2GLgBknQksbGip953xudV1WP90mnJvHfpgzsh73mC
- Yg5yKkpZKTEJNZCdv03pjuVM7ngoEn+aEvCR1ShYGJPzEq8xP+in6KG94mlsvfMNidnL
- Fdyic+4+uj7aKHoZopPdt6AJC5Z+cIUzzQsM28Oh/IVzUCSCT5uQ0mhkG0OKcdiTpKy5
- aKTrPv+GVzrMHlipvzz9ewhsyvJPPkm06MFXS2ov8PjeoxKkG9ialKvWVreqZgLm2yrE
- qLcw==
-X-Gm-Message-State: AOAM5305PyId52JuZwft/KyGB5T56BJyF0kI/IiB3PLqq4SPCDqa//gz
- gCg8nICOq//eUJpGOAlfMnWJA/QWMu44DdbQkho=
-X-Google-Smtp-Source: ABdhPJyPsqeDDT52Q4AE9Ft31pyz1XZ8gSO1OiAoqFS2of8Tjt9qlj27WdIV8SzQtua/v9tE6qDWNcMAbmesEzZHX8k=
-X-Received: by 2002:a05:6638:2a3:: with SMTP id
- d3mr5867570jaq.42.1614188889711; 
- Wed, 24 Feb 2021 09:48:09 -0800 (PST)
+ h=x-gm-message-state:message-id:subject:from:reply-to:to:cc:date
+ :in-reply-to:references:organization:user-agent:mime-version
+ :content-transfer-encoding;
+ bh=+/gCQg/tEM71zxcoR7zjR5gmsskJ0eZ/dRc7gd53l/g=;
+ b=KIQJ1l7QlbJasMaloKUnTvAslXJZ6XmxqOwc7r7X9Ypie0zNCruWqm/DInFqZKuNES
+ bK1+5wNaqcuX+nFbTe0wANlGQxIJQ1f06HLzKBcMbGB6qSHpUmRIhk91zaqM4fIcCPYn
+ AO5tSdTAOAAD4XUqtPfASBsJgYuz06k9hALJzmMj4wxGlezwNPQXApDzM0S50iT0/2Ht
+ 8qjuNNmhUGlDxWtqPfnxquX1N0ycn7cbL3OuGQ+jWYRXzFR80Ygbb1ewa29q8kVh6ifk
+ bMN2TnycDGKR70AcZdMNOhoH02YtPyANWkA9iHaUBIVvKh21kj/pv8IMex+fkpQRx4Mx
+ Kaog==
+X-Gm-Message-State: AOAM531ZmL85mavKYoDUJ4qCk0km7C/42a5frrwRT8hxMP0tXZLIv6N1
+ 3PSNAfmQPCuLY+LYjr9M60bA58TrSwK4Owd/isfsG8Z0sZUJhFwQFQQHAz8+knqaz8mXZWXw5Qs
+ CujlZByZjPuhF9irAYxkzHBX0wQ==
+X-Received: by 2002:a37:4e04:: with SMTP id c4mr33312005qkb.340.1614191493637; 
+ Wed, 24 Feb 2021 10:31:33 -0800 (PST)
+X-Google-Smtp-Source: ABdhPJwW9RlbVM9pqZTZ8CABHHXQBMB2R40gfT6GhFa2haWyMC4079fPiV1sq4fr+b91tAm6uQeTbA==
+X-Received: by 2002:a37:4e04:: with SMTP id c4mr33311985qkb.340.1614191493402; 
+ Wed, 24 Feb 2021 10:31:33 -0800 (PST)
+Received: from Whitewolf.lyude.net
+ (pool-108-49-102-102.bstnma.fios.verizon.net. [108.49.102.102])
+ by smtp.gmail.com with ESMTPSA id r3sm2123793qkm.129.2021.02.24.10.31.32
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 24 Feb 2021 10:31:32 -0800 (PST)
+Message-ID: <aea7945a0a481046b3ab73950e71b11a39ad7a81.camel@redhat.com>
+From: Lyude Paul <lyude@redhat.com>
+To: Randy Dunlap <rdunlap@infradead.org>, intel-gfx@lists.freedesktop.org, 
+ dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org, 
+ nouveau@lists.freedesktop.org, Ville =?ISO-8859-1?Q?Syrj=E4l=E4?=
+ <ville.syrjala@linux.intel.com>, Jani Nikula <jani.nikula@linux.intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>, Thomas Zimmermann
+ <tzimmermann@suse.de>
+Date: Wed, 24 Feb 2021 13:31:31 -0500
+In-Reply-To: <712dc0c3-8ef3-ae3a-8838-93276529dff7@infradead.org>
+References: <20210219215326.2227596-1-lyude@redhat.com>
+ <20210219215326.2227596-2-lyude@redhat.com>
+ <712dc0c3-8ef3-ae3a-8838-93276529dff7@infradead.org>
+Organization: Red Hat
+User-Agent: Evolution 3.38.4 (3.38.4-1.fc33)
 MIME-Version: 1.0
-References: <CAKb7Uvji_+N+b8HghZckU-uSBWn-=BZwNAiUff2oitbVuNUE2Q@mail.gmail.com>
- <YDUkfjDA4xLJlxE5@pflmari> <YDUr2OGDsxDyC0l2@pflmari>
- <CAKb7UvjmdgS536tNzisomi_oXOGk3Q+anp0AfPvA8OruU_9m5Q@mail.gmail.com>
- <YDYXiTm7MDXgYT7H@pflmari>
- <CAKb7UvgQXXThAfqJo+FEfUbgLtGzb2kvg9aSFXZn_XWivsv48Q@mail.gmail.com>
- <YDaAQts9LIb5h3xd@pflmari>
- <CAKb7Uvi8GUe+F3oMOwtAxOAi5ffF=b=9XYv+fZf742frroXfSA@mail.gmail.com>
- <YDaEiDkTiqhy/r+i@pflmari>
- <CAKb7UviFdgqqSrFvZJzfenaKa_0P6hJ4SaDrwA39Lz8jVigDGw@mail.gmail.com>
- <YDaGtzRDUIbErYDY@pflmari>
-In-Reply-To: <YDaGtzRDUIbErYDY@pflmari>
-From: Ilia Mirkin <imirkin@alum.mit.edu>
-Date: Wed, 24 Feb 2021 12:47:58 -0500
-Message-ID: <CAKb7UvjBQeb84sitYUTLOd6EJo_+_9hXjmT=8r5V1onxtUMh7g@mail.gmail.com>
-To: Alex Riesen <alexander.riesen@cetitec.com>
-Subject: Re: [Nouveau] [PATCH 2/3] drm/nouveau/kms/nv50-: Report max cursor
- size to userspace
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=lyude@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Subject: Re: [Nouveau] [PATCH 01/30] drm/dp: Rewrap kdocs for struct
+ drm_dp_aux
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,80 +88,108 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Simon Ser <contact@emersion.fr>,
- dri-devel <dri-devel@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>,
- nouveau <nouveau@lists.freedesktop.org>, Dave Airlie <airlied@redhat.com>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Reply-To: lyude@redhat.com
+Cc: David Airlie <airlied@linux.ie>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Daniel Vetter <daniel@ffwll.ch>, Maxime Ripard <mripard@kernel.org>,
+ open list <linux-kernel@vger.kernel.org>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, Feb 24, 2021 at 12:03 PM Alex Riesen
-<alexander.riesen@cetitec.com> wrote:
->
-> Ilia Mirkin, Wed, Feb 24, 2021 17:57:41 +0100:
-> > On Wed, Feb 24, 2021 at 11:53 AM Alex Riesen <alexander.riesen@cetitec.com> wrote:
-> > > Ilia Mirkin, Wed, Feb 24, 2021 17:48:39 +0100:
-> > > > Just to be crystal clear -- are you saying that 128x128 works or does
-> > > > not work? (You said "yes", which would imply it works OK, but then you
-> > > > said both cases, which would imply doesn't work since 256x256 doesn't
-> > > > work?)
-> > >
-> > > Modetest with 128x128 cursor works. Without damage to the cursor: modetest
-> > > shows normal cursor in vanilla v5.11. Modetest also shows normal cursor in
-> > > vanilla v5.11 with the commit reverted.
-> >
-> > But modetest with 256x256 doesn't work (correctly) right? Or did I
-> > misunderstand?
->
-> Right. That's why I was asking if I did everything right: it was just corrupted
-> in both kernels.
-
-OK. So 128x128 works, 256x256 does not. Interesting.
-
->
-> > All the patch does is allow those large cursors to be used, which gets
-> > reported via drm APIs and modesetting picks the largest cursor
-> > available. (And actually I think it's even not required to use the
-> > large cursors, it just controls what's reported in the defaults to
-> > userspace.)
->
-> Maybe something in X code is not prepared to handle the kernel reporting
-> large cursor support? Even though 128x128 is pretty large, and I don't think
-> I even use that large cursors in X configuration. How can I check?
-
-Yes, 64x64 is enough for anyone (or was it 640kb?) But it's unlikely
-to be an issue. I believe that AMD also exposes 256x256 cursors
-depending on the gen:
-
-display/dc/dce100/dce100_resource.c:    dc->caps.max_cursor_size = 128;
-display/dc/dce110/dce110_resource.c:    dc->caps.max_cursor_size = 128;
-display/dc/dce112/dce112_resource.c:    dc->caps.max_cursor_size = 128;
-display/dc/dce120/dce120_resource.c:    dc->caps.max_cursor_size = 128;
-display/dc/dce60/dce60_resource.c:      dc->caps.max_cursor_size = 64;
-display/dc/dce60/dce60_resource.c:      dc->caps.max_cursor_size = 64;
-display/dc/dce60/dce60_resource.c:      dc->caps.max_cursor_size = 64;
-display/dc/dce80/dce80_resource.c:      dc->caps.max_cursor_size = 128;
-display/dc/dce80/dce80_resource.c:      dc->caps.max_cursor_size = 128;
-display/dc/dce80/dce80_resource.c:      dc->caps.max_cursor_size = 128;
-display/dc/dcn10/dcn10_resource.c:      dc->caps.max_cursor_size = 256;
-display/dc/dcn20/dcn20_resource.c:      dc->caps.max_cursor_size = 256;
-display/dc/dcn21/dcn21_resource.c:      dc->caps.max_cursor_size = 256;
-display/dc/dcn30/dcn30_resource.c:      dc->caps.max_cursor_size = 256;
-
-which should have the equivalent effect.
-
-But since you're seeing issues with modetest as well (which uses the
-ioctl's pretty directly), presumably Xorg is not to blame.
-
-It's easy enough to adjust the kernel to report a lower size (and
-reject the larger cursors), I just want to understand which gens are
-affected by this.
-
-Cheers,
-
-  -ilia
-_______________________________________________
-Nouveau mailing list
-Nouveau@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/nouveau
+T24gRnJpLCAyMDIxLTAyLTE5IGF0IDE1OjQyIC0wODAwLCBSYW5keSBEdW5sYXAgd3JvdGU6Cj4g
+T24gMi8xOS8yMSAxOjUyIFBNLCBMeXVkZSBQYXVsIHdyb3RlOgo+ID4gU2luY2Ugd2UncmUgYWJv
+dXQgdG8gYmUgYWRkaW5nIHNvbWUgbW9yZSBmaWVsZHMgYW5kIHVwZGF0ZSB0aGlzCj4gPiBkb2N1
+bWVudGF0aW9uLCBsZXQncyByZXdyYXAgaXQgdG8gdGhlIG5ldyBjb2x1bW4gbGltaXQgb2YgMTAw
+IGJlZm9yZWhhbmQuCj4gPiBObyBhY3R1YWwgZG9jIG9yIGZ1bmN0aW9uYWwgY2hhbmdlcyBhcmUg
+bWFkZSBoZXJlLgo+ID4gCj4gCj4gVGhlIHByZWZlcnJlZCBjb2x1bW4gbGltaXQgaXMgc3RpbGwg
+ODAuCj4gRm9yIHNvbWUgKGV4Y2VwdGlvbmFsKSBjYXNlcywgZ29pbmcgdXAgdG8gMTAwIGlzIE9L
+LAo+IGJ1dCBJIGRvbid0IHNlZSBhbnkgcmVhc29uIGhlcmUgdG8gZ28gYmV5b25kIDgwLgoKRm91
+bmQgc29tZSBwb3N0cyBvbmxpbmUgdGhhdCBkaXNjdXNzZWQgdGhpcyBpbiBkZXRhaWw6CgpodHRw
+czovL2xpbnV4LnNsYXNoZG90Lm9yZy9zdG9yeS8yMC8wNS8zMS8yMTEyMTEvbGludXMtdG9ydmFs
+ZHMtYXJndWVzLWFnYWluc3QtODAtY29sdW1uLWxpbmUtbGVuZ3RoLWNvZGluZy1zdHlsZS1hcy1s
+aW51eC1rZXJuZWwtZGVwcmVjYXRlcy1pdAoKc28gSSBndWVzcyBJJ20gZmluZSB3aXRoIHJld3Jh
+cHBpbmcgdGhlc2UgdG8gODAgY29scyAoYWx0aG91Z2ggaG9uZXN0bHksIGl0J2QgYmUKcmVhbGx5
+IG5pY2UgdG8ganVzdCBoYXZlIGEgc2luZ2xlIGNvbCBsaW1pdCB0byBtYWtlIHRoaW5ncyBlYXNp
+ZXIgb24gdGV4dAplZGl0b3JzIDopIGluIHRoZSBuZXh0IHJlc3Bpbi4KCgo+IFNpZ25lZC1vZmYt
+Ynk6IEx5dWRlIFBhdWwgPGx5dWRlQHJlZGhhdC5jb20+Cj4gLS0tCj4gwqBpbmNsdWRlL2RybS9k
+cm1fZHBfaGVscGVyLmggfCA0MiArKysrKysrKysrKysrKysrLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+Cj4gwqAxIGZpbGUgY2hhbmdlZCwgMTggaW5zZXJ0aW9ucygrKSwgMjQgZGVsZXRpb25zKC0pCj4g
+Cj4gZGlmZiAtLWdpdCBhL2luY2x1ZGUvZHJtL2RybV9kcF9oZWxwZXIuaCBiL2luY2x1ZGUvZHJt
+L2RybV9kcF9oZWxwZXIuaAo+IGluZGV4IGVkZmZkMWRjY2EzZS4uMjg5MWE5OGVlYmM4IDEwMDY0
+NAo+IC0tLSBhL2luY2x1ZGUvZHJtL2RybV9kcF9oZWxwZXIuaAo+ICsrKyBiL2luY2x1ZGUvZHJt
+L2RybV9kcF9oZWxwZXIuaAo+IEBAIC0xODM5LDM0ICsxODM5LDI4IEBAIHN0cnVjdCBkcm1fZHBf
+YXV4X2NlYyB7Cj4gwqAgKiBAY3JjX2NvdW50OiBjb3VudGVyIG9mIGNhcHR1cmVkIGZyYW1lIENS
+Q3MKPiDCoCAqIEB0cmFuc2ZlcjogdHJhbnNmZXJzIGEgbWVzc2FnZSByZXByZXNlbnRpbmcgYSBz
+aW5nbGUgQVVYIHRyYW5zYWN0aW9uCj4gwqAgKgo+IC0gKiBUaGUgLmRldiBmaWVsZCBzaG91bGQg
+YmUgc2V0IHRvIGEgcG9pbnRlciB0byB0aGUgZGV2aWNlIHRoYXQgaW1wbGVtZW50cwo+IC0gKiB0
+aGUgQVVYIGNoYW5uZWwuCj4gKyAqIFRoZSAuZGV2IGZpZWxkIHNob3VsZCBiZSBzZXQgdG8gYSBw
+b2ludGVyIHRvIHRoZSBkZXZpY2UgdGhhdCBpbXBsZW1lbnRzCj4gdGhlIEFVWCBjaGFubmVsLgo+
+IMKgICoKPiAtICogVGhlIC5uYW1lIGZpZWxkIG1heSBiZSB1c2VkIHRvIHNwZWNpZnkgdGhlIG5h
+bWUgb2YgdGhlIEkyQyBhZGFwdGVyLiBJZiBzZXQKPiB0bwo+IC0gKiBOVUxMLCBkZXZfbmFtZSgp
+IG9mIC5kZXYgd2lsbCBiZSB1c2VkLgo+ICsgKiBUaGUgLm5hbWUgZmllbGQgbWF5IGJlIHVzZWQg
+dG8gc3BlY2lmeSB0aGUgbmFtZSBvZiB0aGUgSTJDIGFkYXB0ZXIuIElmIHNldAo+IHRvIE5VTEws
+IGRldl9uYW1lKCkgb2YKPiArICogLmRldiB3aWxsIGJlIHVzZWQuCj4gwqAgKgo+IC0gKiBEcml2
+ZXJzIHByb3ZpZGUgYSBoYXJkd2FyZS1zcGVjaWZpYyBpbXBsZW1lbnRhdGlvbiBvZiBob3cgdHJh
+bnNhY3Rpb25zCj4gLSAqIGFyZSBleGVjdXRlZCB2aWEgdGhlIC50cmFuc2ZlcigpIGZ1bmN0aW9u
+LiBBIHBvaW50ZXIgdG8gYSBkcm1fZHBfYXV4X21zZwo+IC0gKiBzdHJ1Y3R1cmUgZGVzY3JpYmlu
+ZyB0aGUgdHJhbnNhY3Rpb24gaXMgcGFzc2VkIGludG8gdGhpcyBmdW5jdGlvbi4gVXBvbgo+IC0g
+KiBzdWNjZXNzLCB0aGUgaW1wbGVtZW50YXRpb24gc2hvdWxkIHJldHVybiB0aGUgbnVtYmVyIG9m
+IHBheWxvYWQgYnl0ZXMKPiAtICogdGhhdCB3ZXJlIHRyYW5zZmVycmVkLCBvciBhIG5lZ2F0aXZl
+IGVycm9yLWNvZGUgb24gZmFpbHVyZS4gSGVscGVycwo+IC0gKiBwcm9wYWdhdGUgZXJyb3JzIGZy
+b20gdGhlIC50cmFuc2ZlcigpIGZ1bmN0aW9uLCB3aXRoIHRoZSBleGNlcHRpb24gb2YKPiAtICog
+dGhlIC1FQlVTWSBlcnJvciwgd2hpY2ggY2F1c2VzIGEgdHJhbnNhY3Rpb24gdG8gYmUgcmV0cmll
+ZC4gT24gYSBzaG9ydCwKPiAtICogaGVscGVycyB3aWxsIHJldHVybiAtRVBST1RPIHRvIG1ha2Ug
+aXQgc2ltcGxlciB0byBjaGVjayBmb3IgZmFpbHVyZS4KPiArICogRHJpdmVycyBwcm92aWRlIGEg
+aGFyZHdhcmUtc3BlY2lmaWMgaW1wbGVtZW50YXRpb24gb2YgaG93IHRyYW5zYWN0aW9ucyBhcmUK
+PiBleGVjdXRlZCB2aWEgdGhlCj4gKyAqIC50cmFuc2ZlcigpIGZ1bmN0aW9uLiBBIHBvaW50ZXIg
+dG8gYSBkcm1fZHBfYXV4X21zZyBzdHJ1Y3R1cmUgZGVzY3JpYmluZwo+IHRoZSB0cmFuc2FjdGlv
+biBpcwo+ICsgKiBwYXNzZWQgaW50byB0aGlzIGZ1bmN0aW9uLiBVcG9uIHN1Y2Nlc3MsIHRoZSBp
+bXBsZW1lbnRhdGlvbiBzaG91bGQgcmV0dXJuCj4gdGhlIG51bWJlciBvZiBwYXlsb2FkCj4gKyAq
+IGJ5dGVzIHRoYXQgd2VyZSB0cmFuc2ZlcnJlZCwgb3IgYSBuZWdhdGl2ZSBlcnJvci1jb2RlIG9u
+IGZhaWx1cmUuIEhlbHBlcnMKPiBwcm9wYWdhdGUgZXJyb3JzIGZyb20KPiArICogdGhlIC50cmFu
+c2ZlcigpIGZ1bmN0aW9uLCB3aXRoIHRoZSBleGNlcHRpb24gb2YgdGhlIC1FQlVTWSBlcnJvciwg
+d2hpY2gKPiBjYXVzZXMgYSB0cmFuc2FjdGlvbiB0bwo+ICsgKiBiZSByZXRyaWVkLiBPbiBhIHNo
+b3J0LCBoZWxwZXJzIHdpbGwgcmV0dXJuIC1FUFJPVE8gdG8gbWFrZSBpdCBzaW1wbGVyIHRvCj4g
+Y2hlY2sgZm9yIGZhaWx1cmUuCj4gwqAgKgo+IC0gKiBBbiBBVVggY2hhbm5lbCBjYW4gYWxzbyBi
+ZSB1c2VkIHRvIHRyYW5zcG9ydCBJMkMgbWVzc2FnZXMgdG8gYSBzaW5rLiBBCj4gLSAqIHR5cGlj
+YWwgYXBwbGljYXRpb24gb2YgdGhhdCBpcyB0byBhY2Nlc3MgYW4gRURJRCB0aGF0J3MgcHJlc2Vu
+dCBpbiB0aGUKPiAtICogc2luayBkZXZpY2UuIFRoZSAudHJhbnNmZXIoKSBmdW5jdGlvbiBjYW4g
+YWxzbyBiZSB1c2VkIHRvIGV4ZWN1dGUgc3VjaAo+IC0gKiB0cmFuc2FjdGlvbnMuIFRoZSBkcm1f
+ZHBfYXV4X3JlZ2lzdGVyKCkgZnVuY3Rpb24gcmVnaXN0ZXJzIGFuIEkyQwo+IC0gKiBhZGFwdGVy
+IHRoYXQgY2FuIGJlIHBhc3NlZCB0byBkcm1fcHJvYmVfZGRjKCkuIFVwb24gcmVtb3ZhbCwgZHJp
+dmVycwo+IC0gKiBzaG91bGQgY2FsbCBkcm1fZHBfYXV4X3VucmVnaXN0ZXIoKSB0byByZW1vdmUg
+dGhlIEkyQyBhZGFwdGVyLgo+IC0gKiBUaGUgSTJDIGFkYXB0ZXIgdXNlcyBsb25nIHRyYW5zZmVy
+cyBieSBkZWZhdWx0OyBpZiBhIHBhcnRpYWwgcmVzcG9uc2UgaXMKPiAtICogcmVjZWl2ZWQsIHRo
+ZSBhZGFwdGVyIHdpbGwgZHJvcCBkb3duIHRvIHRoZSBzaXplIGdpdmVuIGJ5IHRoZSBwYXJ0aWFs
+Cj4gLSAqIHJlc3BvbnNlIGZvciB0aGlzIHRyYW5zYWN0aW9uIG9ubHkuCj4gKyAqIEFuIEFVWCBj
+aGFubmVsIGNhbiBhbHNvIGJlIHVzZWQgdG8gdHJhbnNwb3J0IEkyQyBtZXNzYWdlcyB0byBhIHNp
+bmsuIEEKPiB0eXBpY2FsIGFwcGxpY2F0aW9uIG9mCj4gKyAqIHRoYXQgaXMgdG8gYWNjZXNzIGFu
+IEVESUQgdGhhdCdzIHByZXNlbnQgaW4gdGhlIHNpbmsgZGV2aWNlLiBUaGUKPiAudHJhbnNmZXIo
+KSBmdW5jdGlvbiBjYW4gYWxzbyBiZQo+ICsgKiB1c2VkIHRvIGV4ZWN1dGUgc3VjaCB0cmFuc2Fj
+dGlvbnMuIFRoZSBkcm1fZHBfYXV4X3JlZ2lzdGVyKCkgZnVuY3Rpb24KPiByZWdpc3RlcnMgYW4g
+STJDIGFkYXB0ZXIKPiArICogdGhhdCBjYW4gYmUgcGFzc2VkIHRvIGRybV9wcm9iZV9kZGMoKS4g
+VXBvbiByZW1vdmFsLCBkcml2ZXJzIHNob3VsZCBjYWxsCj4gZHJtX2RwX2F1eF91bnJlZ2lzdGVy
+KCkKPiArICogdG8gcmVtb3ZlIHRoZSBJMkMgYWRhcHRlci4gVGhlIEkyQyBhZGFwdGVyIHVzZXMg
+bG9uZyB0cmFuc2ZlcnMgYnkgZGVmYXVsdDsKPiBpZiBhIHBhcnRpYWwgcmVzcG9uc2UKPiArICog
+aXMgcmVjZWl2ZWQsIHRoZSBhZGFwdGVyIHdpbGwgZHJvcCBkb3duIHRvIHRoZSBzaXplIGdpdmVu
+IGJ5IHRoZSBwYXJ0aWFsCj4gcmVzcG9uc2UgZm9yIHRoaXMKPiArICogdHJhbnNhY3Rpb24gb25s
+eS4KPiDCoCAqCj4gLSAqIE5vdGUgdGhhdCB0aGUgYXV4IGhlbHBlciBjb2RlIGFzc3VtZXMgdGhh
+dCB0aGUgLnRyYW5zZmVyKCkgZnVuY3Rpb24KPiAtICogb25seSBtb2RpZmllcyB0aGUgcmVwbHkg
+ZmllbGQgb2YgdGhlIGRybV9kcF9hdXhfbXNnIHN0cnVjdHVyZS7CoCBUaGUKPiAtICogcmV0cnkg
+bG9naWMgYW5kIGkyYyBoZWxwZXJzIGFzc3VtZSB0aGlzIGlzIHRoZSBjYXNlLgo+ICsgKiBOb3Rl
+IHRoYXQgdGhlIGF1eCBoZWxwZXIgY29kZSBhc3N1bWVzIHRoYXQgdGhlIC50cmFuc2ZlcigpIGZ1
+bmN0aW9uIG9ubHkKPiBtb2RpZmllcyB0aGUgcmVwbHkgZmllbGQKPiArICogb2YgdGhlIGRybV9k
+cF9hdXhfbXNnIHN0cnVjdHVyZS4gVGhlIHJldHJ5IGxvZ2ljIGFuZCBpMmMgaGVscGVycyBhc3N1
+bWUKPiB0aGlzIGlzIHRoZSBjYXNlLgo+IMKgICovCj4gwqBzdHJ1Y3QgZHJtX2RwX2F1eCB7Cj4g
+wqDCoMKgwqDCoMKgwqDCoGNvbnN0IGNoYXIgKm5hbWU7Cj4gCgoKCgotLSAKU2luY2VyZWx5LAog
+ICBMeXVkZSBQYXVsIChzaGUvaGVyKQogICBTb2Z0d2FyZSBFbmdpbmVlciBhdCBSZWQgSGF0CiAg
+IApOb3RlOiBJIGRlYWwgd2l0aCBhIGxvdCBvZiBlbWFpbHMgYW5kIGhhdmUgYSBsb3Qgb2YgYnVn
+cyBvbiBteSBwbGF0ZS4gSWYgeW91J3ZlCmFza2VkIG1lIGEgcXVlc3Rpb24sIGFyZSB3YWl0aW5n
+IGZvciBhIHJldmlldy9tZXJnZSBvbiBhIHBhdGNoLCBldGMuIGFuZCBJCmhhdmVuJ3QgcmVzcG9u
+ZGVkIGluIGEgd2hpbGUsIHBsZWFzZSBmZWVsIGZyZWUgdG8gc2VuZCBtZSBhbm90aGVyIGVtYWls
+IHRvIGNoZWNrCm9uIG15IHN0YXR1cy4gSSBkb24ndCBiaXRlIQoKX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBtYWlsaW5nIGxpc3QKTm91dmVh
+dUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFp
+bG1hbi9saXN0aW5mby9ub3V2ZWF1Cg==
