@@ -2,34 +2,37 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 97546325231
-	for <lists+nouveau@lfdr.de>; Thu, 25 Feb 2021 16:19:51 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D4F25325235
+	for <lists+nouveau@lfdr.de>; Thu, 25 Feb 2021 16:19:56 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 46E2B6E1B7;
+	by gabe.freedesktop.org (Postfix) with ESMTP id A34D66EC9F;
 	Thu, 25 Feb 2021 15:19:48 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from szxga04-in.huawei.com (szxga04-in.huawei.com [45.249.212.190])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 737FB6E14D;
- Thu, 25 Feb 2021 11:38:11 +0000 (UTC)
-Received: from DGGEMS414-HUB.china.huawei.com (unknown [172.30.72.60])
- by szxga04-in.huawei.com (SkyGuard) with ESMTP id 4DmW2l0pD6z16CZf;
- Thu, 25 Feb 2021 19:36:31 +0800 (CST)
-Received: from huawei.com (10.69.192.56) by DGGEMS414-HUB.china.huawei.com
- (10.3.19.214) with Microsoft SMTP Server id 14.3.498.0; Thu, 25 Feb 2021
- 19:37:58 +0800
-From: Luo Jiaxing <luojiaxing@huawei.com>
-To: <nouveau@lists.freedesktop.org>, <dri-devel@lists.freedesktop.org>,
- <bskeggs@redhat.com>
-Date: Thu, 25 Feb 2021 19:38:52 +0800
-Message-ID: <1614253132-21793-1-git-send-email-luojiaxing@huawei.com>
-X-Mailer: git-send-email 2.7.4
+Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0FE3F6E10C;
+ Thu, 25 Feb 2021 12:53:08 +0000 (UTC)
+Received: by mail.kernel.org (Postfix) with ESMTPSA id DCA7864F11;
+ Thu, 25 Feb 2021 12:53:04 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1614257587;
+ bh=QCiGi85fr9DFYHiTlbvSudt58MY7c/cO+LSTBCt1zIs=;
+ h=From:To:Cc:Subject:Date:From;
+ b=l5ZUYTfXS2EGUsILj+mBWQ0aXkivB0bbPsOsL5UM/Ww6tuslziEvuaXA2yUuSx1jQ
+ UgVQImLsMcXJbunGtJMORCSt8Za/+7sapzbEiIjX7gFN2SavTPbIywYmwhL/1mgrQ+
+ Rk2SF7G2nNFaWYtLFv3JzxlPN85RY9SqfwRSNCkgn7UtzVrcoUZ0iAVpGtJji/fnYi
+ mcCgtJYLJbyakXMm18B0clCZ9qQ02gg7pP0XYGiGysna5tzyrfAHTqJG/Gt4vgk3lq
+ VkFWXWeJ9RJXdWkLUR+J1cBnMDUASUwaf3QfrLigFQqBJ5+/QPtfF/KWQZ6dU62i1s
+ O8/odlO8exDcA==
+From: Arnd Bergmann <arnd@kernel.org>
+To: Ben Skeggs <bskeggs@redhat.com>, David Airlie <airlied@linux.ie>,
+ Daniel Vetter <daniel@ffwll.ch>
+Date: Thu, 25 Feb 2021 13:52:38 +0100
+Message-Id: <20210225125301.1723047-1-arnd@kernel.org>
+X-Mailer: git-send-email 2.29.2
 MIME-Version: 1.0
-X-Originating-IP: [10.69.192.56]
-X-CFilter-Loop: Reflected
 X-Mailman-Approved-At: Thu, 25 Feb 2021 15:19:47 +0000
-Subject: [Nouveau] [PATCH v1] drm/nouveau/device: append a NUL-terminated
- character for the string which filled by strncpy()
+Subject: [Nouveau] [PATCH] drm/nouveau/pci: rework AGP dependency
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -41,47 +44,129 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: luojiaxing@huawei.com, linux-kernel@vger.kernel.org, linuxarm@openeuler.org
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: Arnd Bergmann <arnd@arndb.de>, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Rm9sbG93aW5nIHdhcm5pbmcgaXMgZm91bmQgd2hlbiB1c2luZyBXPTEgdG8gYnVpbGQga2VybmVs
-OgoKSW4gZnVuY3Rpb24g4oCYbnZrbV91ZGV2aWNlX2luZm/igJksCiAgICBpbmxpbmVkIGZyb20g
-4oCYbnZrbV91ZGV2aWNlX210aGTigJkgYXQgZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbnZrbS9l
-bmdpbmUvZGV2aWNlL3VzZXIuYzoxOTU6MTA6CmRyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L252a20v
-ZW5naW5lL2RldmljZS91c2VyLmM6MTY0OjI6IHdhcm5pbmc6IOKAmHN0cm5jcHnigJkgc3BlY2lm
-aWVkIGJvdW5kIDE2IGVxdWFscyBkZXN0aW5hdGlvbiBzaXplIFstV3N0cmluZ29wLXRydW5jYXRp
-b25dCiAgMTY0IHwgIHN0cm5jcHkoYXJncy0+djAuY2hpcCwgZGV2aWNlLT5jaGlwLT5uYW1lLCBz
-aXplb2YoYXJncy0+djAuY2hpcCkpOwpkcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9udmttL2VuZ2lu
-ZS9kZXZpY2UvdXNlci5jOjE2NToyOiB3YXJuaW5nOiDigJhzdHJuY3B54oCZIHNwZWNpZmllZCBi
-b3VuZCA2NCBlcXVhbHMgZGVzdGluYXRpb24gc2l6ZSBbLVdzdHJpbmdvcC10cnVuY2F0aW9uXQog
-IDE2NSB8ICBzdHJuY3B5KGFyZ3MtPnYwLm5hbWUsIGRldmljZS0+bmFtZSwgc2l6ZW9mKGFyZ3Mt
-PnYwLm5hbWUpKTsKClRoZSByZWFzb24gb2YgdGhpcyB3YXJuaW5nIGlzIHN0cm5jcHkoKSBkb2Vz
-IG5vdCBndWFyYW50ZWUgdGhhdCB0aGUKZGVzdGluYXRpb24gYnVmZmVyIHdpbGwgYmUgTlVMIHRl
-cm1pbmF0ZWQuIElmIHRoZSBsZW5ndGggb2Ygc291cmNlIHN0cmluZwppcyBiaWdnZXIgdGhhbiBu
-dW1iZXIgd2Ugc2V0IGJ5IHRoaXJkIGlucHV0IHBhcmFtZXRlciwgb25seSBmaXJzdCBbbnVtYmVy
-XQpvZiBjaGFyYWN0ZXJzIGlzIGNvcGllZCB0byB0aGUgZGVzdGluYXRpb24sIGFuZCBubyBOVUwt
-dGVybWluYXRlZCBpcwphdXRvbWF0aWNhbGx5IGFkZGVkLiBUaGVyZSBhcmUgc29tZSBwb3RlbnRp
-YWwgcmlza3MuCgpTaWduZWQtb2ZmLWJ5OiBMdW8gSmlheGluZyA8bHVvamlheGluZ0BodWF3ZWku
-Y29tPgotLS0KIGRyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L252a20vZW5naW5lL2RldmljZS91c2Vy
-LmMgfCA2ICsrKystLQogMSBmaWxlIGNoYW5nZWQsIDQgaW5zZXJ0aW9ucygrKSwgMiBkZWxldGlv
-bnMoLSkKCmRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9udmttL2VuZ2luZS9k
-ZXZpY2UvdXNlci5jIGIvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbnZrbS9lbmdpbmUvZGV2aWNl
-L3VzZXIuYwppbmRleCBmZWE5ZDhmLi4yYTMyZmUwIDEwMDY0NAotLS0gYS9kcml2ZXJzL2dwdS9k
-cm0vbm91dmVhdS9udmttL2VuZ2luZS9kZXZpY2UvdXNlci5jCisrKyBiL2RyaXZlcnMvZ3B1L2Ry
-bS9ub3V2ZWF1L252a20vZW5naW5lL2RldmljZS91c2VyLmMKQEAgLTE2MSw4ICsxNjEsMTAgQEAg
-bnZrbV91ZGV2aWNlX2luZm8oc3RydWN0IG52a21fdWRldmljZSAqdWRldiwgdm9pZCAqZGF0YSwg
-dTMyIHNpemUpCiAJaWYgKGltZW0gJiYgYXJncy0+djAucmFtX3NpemUgPiAwKQogCQlhcmdzLT52
-MC5yYW1fdXNlciA9IGFyZ3MtPnYwLnJhbV91c2VyIC0gaW1lbS0+cmVzZXJ2ZWQ7CiAKLQlzdHJu
-Y3B5KGFyZ3MtPnYwLmNoaXAsIGRldmljZS0+Y2hpcC0+bmFtZSwgc2l6ZW9mKGFyZ3MtPnYwLmNo
-aXApKTsKLQlzdHJuY3B5KGFyZ3MtPnYwLm5hbWUsIGRldmljZS0+bmFtZSwgc2l6ZW9mKGFyZ3Mt
-PnYwLm5hbWUpKTsKKwlzdHJuY3B5KGFyZ3MtPnYwLmNoaXAsIGRldmljZS0+Y2hpcC0+bmFtZSwg
-c2l6ZW9mKGFyZ3MtPnYwLmNoaXApIC0gMSk7CisJYXJncy0+djAuY2hpcFtzaXplb2YoYXJncy0+
-djAuY2hpcCkgLSAxXSA9ICdcMCc7CisJc3RybmNweShhcmdzLT52MC5uYW1lLCBkZXZpY2UtPm5h
-bWUsIHNpemVvZihhcmdzLT52MC5uYW1lKSAtIDEpOworCWFyZ3MtPnYwLm5hbWVbc2l6ZW9mKGFy
-Z3MtPnYwLm5hbWUpIC0gMV0gPSAnXDAnOwogCXJldHVybiAwOwogfQogCi0tIAoyLjcuNAoKX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBtYWls
-aW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5mcmVl
-ZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1Cg==
+From: Arnd Bergmann <arnd@arndb.de>
+
+I noticed a warning from 'nm' when CONFIG_TRIM_UNUSED_KSYMS is set
+and IS_REACHABLE(CONFIG_AGP) is false:
+
+drivers/gpu/drm/nouveau/nvkm/subdev/pci/agp.o: no symbols
+
+I later found this is completely harmless and we should find a way
+to suppress the warning, but at that point I had already done a
+cleanup patch to address this instance.
+
+It turns out this code could be improved anyway, as the current version
+behaves unexpectedly when AGP is a loadable module but nouveau is built-in
+itself, in which case it silently omits agp support.
+
+A better way to handle this is with a Kconfig dependency that requires
+AGP either to be disabled, or forces nouveau to be a module for AGP=m.
+With this change, the compile-time hack can be removed and lld no
+longer warns.
+
+Fixes: 340b0e7c500a ("drm/nouveau/pci: merge agp handling from nouveau drm")
+Signed-off-by: Arnd Bergmann <arnd@arndb.de>
+---
+ drivers/gpu/drm/nouveau/Kbuild                 | 1 +
+ drivers/gpu/drm/nouveau/Kconfig                | 1 +
+ drivers/gpu/drm/nouveau/nvkm/subdev/pci/Kbuild | 2 +-
+ drivers/gpu/drm/nouveau/nvkm/subdev/pci/agp.c  | 2 --
+ drivers/gpu/drm/nouveau/nvkm/subdev/pci/agp.h  | 9 +++++----
+ 5 files changed, 8 insertions(+), 7 deletions(-)
+
+diff --git a/drivers/gpu/drm/nouveau/Kbuild b/drivers/gpu/drm/nouveau/Kbuild
+index 60586fb8275e..173b8d9d85e3 100644
+--- a/drivers/gpu/drm/nouveau/Kbuild
++++ b/drivers/gpu/drm/nouveau/Kbuild
+@@ -15,6 +15,7 @@ nouveau-y := $(nvif-y)
+ #- code also used by various userspace tools/tests
+ include $(src)/nvkm/Kbuild
+ nouveau-y += $(nvkm-y)
++nouveau-m += $(nvkm-m)
+ 
+ # DRM - general
+ ifdef CONFIG_X86
+diff --git a/drivers/gpu/drm/nouveau/Kconfig b/drivers/gpu/drm/nouveau/Kconfig
+index 278e048235a9..90276a557a70 100644
+--- a/drivers/gpu/drm/nouveau/Kconfig
++++ b/drivers/gpu/drm/nouveau/Kconfig
+@@ -2,6 +2,7 @@
+ config DRM_NOUVEAU
+ 	tristate "Nouveau (NVIDIA) cards"
+ 	depends on DRM && PCI && MMU
++	depends on AGP || !AGP
+ 	select IOMMU_API
+ 	select FW_LOADER
+ 	select DRM_KMS_HELPER
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/pci/Kbuild b/drivers/gpu/drm/nouveau/nvkm/subdev/pci/Kbuild
+index 174bdf995271..a400c680cf65 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/pci/Kbuild
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/pci/Kbuild
+@@ -1,5 +1,5 @@
+ # SPDX-License-Identifier: MIT
+-nvkm-y += nvkm/subdev/pci/agp.o
++nvkm-$(CONFIG_AGP) += nvkm/subdev/pci/agp.o
+ nvkm-y += nvkm/subdev/pci/base.o
+ nvkm-y += nvkm/subdev/pci/pcie.o
+ nvkm-y += nvkm/subdev/pci/nv04.o
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/pci/agp.c b/drivers/gpu/drm/nouveau/nvkm/subdev/pci/agp.c
+index 385a90f91ed6..86c9e1d658af 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/pci/agp.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/pci/agp.c
+@@ -20,7 +20,6 @@
+  * OTHER DEALINGS IN THE SOFTWARE.
+  */
+ #include "agp.h"
+-#ifdef __NVKM_PCI_AGP_H__
+ #include <core/option.h>
+ 
+ struct nvkm_device_agp_quirk {
+@@ -172,4 +171,3 @@ nvkm_agp_ctor(struct nvkm_pci *pci)
+ 
+ 	pci->agp.mtrr = arch_phys_wc_add(pci->agp.base, pci->agp.size);
+ }
+-#endif
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/pci/agp.h b/drivers/gpu/drm/nouveau/nvkm/subdev/pci/agp.h
+index ad4d3621d02b..041fe1fbf093 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/pci/agp.h
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/pci/agp.h
+@@ -1,15 +1,14 @@
+-/* SPDX-License-Identifier: MIT */
+-#include "priv.h"
+-#if defined(CONFIG_AGP) || (defined(CONFIG_AGP_MODULE) && defined(MODULE))
+ #ifndef __NVKM_PCI_AGP_H__
+ #define __NVKM_PCI_AGP_H__
+ 
++/* SPDX-License-Identifier: MIT */
++#include "priv.h"
++#if IS_ENABLED(CONFIG_AGP)
+ void nvkm_agp_ctor(struct nvkm_pci *);
+ void nvkm_agp_dtor(struct nvkm_pci *);
+ void nvkm_agp_preinit(struct nvkm_pci *);
+ int nvkm_agp_init(struct nvkm_pci *);
+ void nvkm_agp_fini(struct nvkm_pci *);
+-#endif
+ #else
+ static inline void nvkm_agp_ctor(struct nvkm_pci *pci) {}
+ static inline void nvkm_agp_dtor(struct nvkm_pci *pci) {}
+@@ -17,3 +16,5 @@ static inline void nvkm_agp_preinit(struct nvkm_pci *pci) {}
+ static inline int nvkm_agp_init(struct nvkm_pci *pci) { return -ENOSYS; }
+ static inline void nvkm_agp_fini(struct nvkm_pci *pci) {}
+ #endif
++
++#endif
+-- 
+2.29.2
+
+_______________________________________________
+Nouveau mailing list
+Nouveau@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/nouveau
