@@ -2,44 +2,52 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id B5906325A75
-	for <lists+nouveau@lfdr.de>; Fri, 26 Feb 2021 00:59:07 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 59467325B65
+	for <lists+nouveau@lfdr.de>; Fri, 26 Feb 2021 02:57:47 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 37ED06E80B;
-	Thu, 25 Feb 2021 23:59:06 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 867976E8D6;
+	Fri, 26 Feb 2021 01:57:45 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-il1-f174.google.com (mail-il1-f174.google.com
- [209.85.166.174])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0141A6E80B
- for <nouveau@lists.freedesktop.org>; Thu, 25 Feb 2021 23:59:05 +0000 (UTC)
-Received: by mail-il1-f174.google.com with SMTP id h18so6546595ils.2
- for <nouveau@lists.freedesktop.org>; Thu, 25 Feb 2021 15:59:05 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=apkHnD1v4NSKkWvhCxkjGmlfWyKh5hZwXjMh9j4dIV4=;
- b=m8dU7bU/Y1wCYYcqpO5oKhvwhSrM+7DH0tzbRDQu5vIyI1kMuRuLYn9wnF1OG3+KBi
- NvG6hHReUdVs9Z5bXEO7Eq+pnc/bflfMPZ/p2Yk6/A2wdwLSHzxTl7HmlVovwsUj989T
- 7QvRTGnamdaQ2akp486RXH8y7rzeOubxlfjAOLExWYoqevrIsg7m7F+flwVOFYUP9Q6C
- KGTPZaLF7RMEAU6vnTP00IAqzlI9JZiNGknZvx1ssypXi7qoTkj1MYDkcP825ZAl9OFb
- RvIBQFR+jSuO9Svxk0esTUZ6tnAzXxsW9ZRuW9t65ZOg7kcrRq+DbOJoUD7fAVXx0BXA
- 2I7w==
-X-Gm-Message-State: AOAM530SRbwoF+JxUimL1bTMiD4qKhGFedbtHooqZ+wjaizS/D3+Pe7l
- FQjCxh3vF7h41sC5zbgsZ5lWWHT8SEXqRIeDUY6Xgd8ciDkeqQ==
-X-Google-Smtp-Source: ABdhPJxb3dAfHpjjNDV+8Aebyk1Dj9ZCKx8MwucBbHhJjuVqQSLkyQGTgRSinvhobICGEuU1KJAqvoMa9HFuW3kAh3g=
-X-Received: by 2002:a05:6e02:1848:: with SMTP id
- b8mr187710ilv.210.1614297545300; 
- Thu, 25 Feb 2021 15:59:05 -0800 (PST)
+X-Greylist: delayed 1041 seconds by postgrey-1.36 at gabe;
+ Fri, 26 Feb 2021 01:18:42 UTC
+Received: from szxga02-in.huawei.com (szxga02-in.huawei.com [45.249.212.188])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7292C6E086;
+ Fri, 26 Feb 2021 01:18:42 +0000 (UTC)
+Received: from DGGEMM406-HUB.china.huawei.com (unknown [172.30.72.54])
+ by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4Dmrsd1ZJGzRHRD;
+ Fri, 26 Feb 2021 08:59:49 +0800 (CST)
+Received: from dggemi761-chm.china.huawei.com (10.1.198.147) by
+ DGGEMM406-HUB.china.huawei.com (10.3.20.214) with Microsoft SMTP Server (TLS)
+ id 14.3.498.0; Fri, 26 Feb 2021 09:01:17 +0800
+Received: from dggemi761-chm.china.huawei.com (10.1.198.147) by
+ dggemi761-chm.china.huawei.com (10.1.198.147) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id
+ 15.1.2106.2; Fri, 26 Feb 2021 09:01:17 +0800
+Received: from dggemi761-chm.china.huawei.com ([10.9.49.202]) by
+ dggemi761-chm.china.huawei.com ([10.9.49.202]) with mapi id 15.01.2106.006;
+ Fri, 26 Feb 2021 09:01:17 +0800
+From: "Song Bao Hua (Barry Song)" <song.bao.hua@hisilicon.com>
+To: luojiaxing <luojiaxing@huawei.com>, "nouveau@lists.freedesktop.org"
+ <nouveau@lists.freedesktop.org>, "dri-devel@lists.freedesktop.org"
+ <dri-devel@lists.freedesktop.org>, "bskeggs@redhat.com" <bskeggs@redhat.com>
+Thread-Topic: [Linuxarm]  [PATCH v1] drm/nouveau/device: append a
+ NUL-terminated character for the string which filled by strncpy()
+Thread-Index: AQHXC2rCMCjd7ClCyEWCr1KHIxXraKppnNNQ
+Date: Fri, 26 Feb 2021 01:01:17 +0000
+Message-ID: <1b841f487ad742ee941282b534bdcb4d@hisilicon.com>
+References: <1614253132-21793-1-git-send-email-luojiaxing@huawei.com>
+In-Reply-To: <1614253132-21793-1-git-send-email-luojiaxing@huawei.com>
+Accept-Language: en-GB, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.126.200.34]
 MIME-Version: 1.0
-References: <YDgnVpKo8ya8WRAF@localhost4.local>
-In-Reply-To: <YDgnVpKo8ya8WRAF@localhost4.local>
-From: Ilia Mirkin <imirkin@alum.mit.edu>
-Date: Thu, 25 Feb 2021 18:58:54 -0500
-Message-ID: <CAKb7UvjWv2P01bDLcxpXmvZzn++kmA9+t=YMQbNamUP5Zj8HMw@mail.gmail.com>
-To: Roger <rogerx.oss@gmail.com>
-Subject: Re: [Nouveau] i2c-dev driver corrupts display?
+X-CFilter-Loop: Reflected
+X-Mailman-Approved-At: Fri, 26 Feb 2021 01:57:44 +0000
+Subject: Re: [Nouveau] [Linuxarm] [PATCH v1] drm/nouveau/device: append a
+ NUL-terminated character for the string which filled by strncpy()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -51,93 +59,60 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau <nouveau@lists.freedesktop.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: luojiaxing <luojiaxing@huawei.com>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "linuxarm@openeuler.org" <linuxarm@openeuler.org>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-That's very surprising. As I recall, i2c-dev just adds /dev nodes for
-various i2c devices (some of which would be exposed by nouveau, most
-likely just the connector one to read EDID in your case, as temp/etc
-sensors came later). It shouldn't cause nouveau to do anything
-differently -- just allows user-space to have access to the i2c
-adapters.
-
-You can try messing with the i2c implementation a bit with
-
-nouveau.config=NvI2C=1
-
-which will flip the internal implementation from the "shared" bit-bang
-implementation, to a dedicated nouveau one. But it shouldn't matter.
-And as I mentioned before, not sure how the i2c-dev module can affect
-it either way -- either the shared impl works or it doesn't.
-
-You can also try booting with
-
-nouveau.debug=debug
-
-to see if you can glean any meaningful information from the "broken" case.
-
-I also remember reports of a later mobile board (NV28M) having weird
-clock-related and cursor layout issues
-(https://bugs.freedesktop.org/show_bug.cgi?id=54700,
-https://bugs.freedesktop.org/show_bug.cgi?id=78543). Not directly
-related to your situation, but just pointing to it in case it triggers
-some ideas.
-
-In your testing, it might also be wise to differentiate warm vs cold
-boots. You can also force re-initialization of the board with
-
-nouveau.config=NvForcePost=1
-
-Cheers,
-
-  -ilia
-
-On Thu, Feb 25, 2021 at 5:40 PM Roger <rogerx.oss@gmail.com> wrote:
->
-> HARDWARE:
-> Dell Inspiron 8100 laptop
-> nVIDIA Geforce2 Go (NV11) with Intel AGP
->
-> PROBLEM:
-> Display corruption whenever nouveau module was loaded, seemingly at random.
->
-> CULPRIT:
-> Whenever the i2c-dev.ko driver/module was loaded, the display would become
-> corrupted, or as if the timing became out of sync with hardware specifications,
-> with weird moving pixels throughout the display.
->
-> If the i2c-dev is built into the kernel, possible the display would turn-off
-> upon nouveau module loading, but could be possibly worked around (I think) by
-> building the nouveau driver statically into the kernel, possibly loading prior
-> to i2c-dev loading?
->
-> Been having this problem for many years, finally found it, and nothing found
-> via Google on i2c-dev & nouveau.
->
-> WORKAROUND:
-> /etc/modprobe.d/blacklist.conf
-> blacklist i2c_dev
->
-> Or, rebuild the kernel without i2c-dev.
->
-> Quite a few Linux distributions either compile the i2c-dev into the kernel, or
-> load the module during booting, creating significant display problems (as noted
-> above) when trying to install from a Linux distribution CD/DVD.  Most people
-> performing an install, I'm guessing, are then simply performing a nomodeset
-> during boot and/or reverting to VESA/UVESAFB.
->
->
-> --
-> Roger
-> http://rogerx.sdf.org/
-> _______________________________________________
-> Nouveau mailing list
-> Nouveau@lists.freedesktop.org
-> https://lists.freedesktop.org/mailman/listinfo/nouveau
-_______________________________________________
-Nouveau mailing list
-Nouveau@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/nouveau
+DQoNCj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4gRnJvbTogTHVvIEppYXhpbmcgW21h
+aWx0bzpsdW9qaWF4aW5nQGh1YXdlaS5jb21dDQo+IFNlbnQ6IEZyaWRheSwgRmVicnVhcnkgMjYs
+IDIwMjEgMTI6MzkgQU0NCj4gVG86IG5vdXZlYXVAbGlzdHMuZnJlZWRlc2t0b3Aub3JnOyBkcmkt
+ZGV2ZWxAbGlzdHMuZnJlZWRlc2t0b3Aub3JnOw0KPiBic2tlZ2dzQHJlZGhhdC5jb20NCj4gQ2M6
+IGxpbnV4LWtlcm5lbEB2Z2VyLmtlcm5lbC5vcmc7IGxpbnV4YXJtQG9wZW5ldWxlci5vcmc7IGx1
+b2ppYXhpbmcNCj4gPGx1b2ppYXhpbmdAaHVhd2VpLmNvbT4NCj4gU3ViamVjdDogW0xpbnV4YXJt
+XSBbUEFUQ0ggdjFdIGRybS9ub3V2ZWF1L2RldmljZTogYXBwZW5kIGEgTlVMLXRlcm1pbmF0ZWQN
+Cj4gY2hhcmFjdGVyIGZvciB0aGUgc3RyaW5nIHdoaWNoIGZpbGxlZCBieSBzdHJuY3B5KCkNCj4g
+DQo+IEZvbGxvd2luZyB3YXJuaW5nIGlzIGZvdW5kIHdoZW4gdXNpbmcgVz0xIHRvIGJ1aWxkIGtl
+cm5lbDoNCj4gDQo+IEluIGZ1bmN0aW9uIOKAmG52a21fdWRldmljZV9pbmZv4oCZLA0KPiAgICAg
+aW5saW5lZCBmcm9tIOKAmG52a21fdWRldmljZV9tdGhk4oCZIGF0DQo+IGRyaXZlcnMvZ3B1L2Ry
+bS9ub3V2ZWF1L252a20vZW5naW5lL2RldmljZS91c2VyLmM6MTk1OjEwOg0KPiBkcml2ZXJzL2dw
+dS9kcm0vbm91dmVhdS9udmttL2VuZ2luZS9kZXZpY2UvdXNlci5jOjE2NDoyOiB3YXJuaW5nOiDi
+gJhzdHJuY3B54oCZDQo+IHNwZWNpZmllZCBib3VuZCAxNiBlcXVhbHMgZGVzdGluYXRpb24gc2l6
+ZSBbLVdzdHJpbmdvcC10cnVuY2F0aW9uXQ0KPiAgIDE2NCB8ICBzdHJuY3B5KGFyZ3MtPnYwLmNo
+aXAsIGRldmljZS0+Y2hpcC0+bmFtZSwgc2l6ZW9mKGFyZ3MtPnYwLmNoaXApKTsNCj4gZHJpdmVy
+cy9ncHUvZHJtL25vdXZlYXUvbnZrbS9lbmdpbmUvZGV2aWNlL3VzZXIuYzoxNjU6Mjogd2Fybmlu
+Zzog4oCYc3RybmNweeKAmQ0KPiBzcGVjaWZpZWQgYm91bmQgNjQgZXF1YWxzIGRlc3RpbmF0aW9u
+IHNpemUgWy1Xc3RyaW5nb3AtdHJ1bmNhdGlvbl0NCj4gICAxNjUgfCAgc3RybmNweShhcmdzLT52
+MC5uYW1lLCBkZXZpY2UtPm5hbWUsIHNpemVvZihhcmdzLT52MC5uYW1lKSk7DQo+IA0KPiBUaGUg
+cmVhc29uIG9mIHRoaXMgd2FybmluZyBpcyBzdHJuY3B5KCkgZG9lcyBub3QgZ3VhcmFudGVlIHRo
+YXQgdGhlDQo+IGRlc3RpbmF0aW9uIGJ1ZmZlciB3aWxsIGJlIE5VTCB0ZXJtaW5hdGVkLiBJZiB0
+aGUgbGVuZ3RoIG9mIHNvdXJjZSBzdHJpbmcNCj4gaXMgYmlnZ2VyIHRoYW4gbnVtYmVyIHdlIHNl
+dCBieSB0aGlyZCBpbnB1dCBwYXJhbWV0ZXIsIG9ubHkgZmlyc3QgW251bWJlcl0NCj4gb2YgY2hh
+cmFjdGVycyBpcyBjb3BpZWQgdG8gdGhlIGRlc3RpbmF0aW9uLCBhbmQgbm8gTlVMLXRlcm1pbmF0
+ZWQgaXMNCj4gYXV0b21hdGljYWxseSBhZGRlZC4gVGhlcmUgYXJlIHNvbWUgcG90ZW50aWFsIHJp
+c2tzLg0KPiANCj4gU2lnbmVkLW9mZi1ieTogTHVvIEppYXhpbmcgPGx1b2ppYXhpbmdAaHVhd2Vp
+LmNvbT4NCj4gLS0tDQo+ICBkcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9udmttL2VuZ2luZS9kZXZp
+Y2UvdXNlci5jIHwgNiArKysrLS0NCj4gIDEgZmlsZSBjaGFuZ2VkLCA0IGluc2VydGlvbnMoKyks
+IDIgZGVsZXRpb25zKC0pDQo+IA0KPiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL25vdXZl
+YXUvbnZrbS9lbmdpbmUvZGV2aWNlL3VzZXIuYw0KPiBiL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1
+L252a20vZW5naW5lL2RldmljZS91c2VyLmMNCj4gaW5kZXggZmVhOWQ4Zi4uMmEzMmZlMCAxMDA2
+NDQNCj4gLS0tIGEvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbnZrbS9lbmdpbmUvZGV2aWNlL3Vz
+ZXIuYw0KPiArKysgYi9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9udmttL2VuZ2luZS9kZXZpY2Uv
+dXNlci5jDQo+IEBAIC0xNjEsOCArMTYxLDEwIEBAIG52a21fdWRldmljZV9pbmZvKHN0cnVjdCBu
+dmttX3VkZXZpY2UgKnVkZXYsIHZvaWQgKmRhdGEsDQo+IHUzMiBzaXplKQ0KPiAgCWlmIChpbWVt
+ICYmIGFyZ3MtPnYwLnJhbV9zaXplID4gMCkNCj4gIAkJYXJncy0+djAucmFtX3VzZXIgPSBhcmdz
+LT52MC5yYW1fdXNlciAtIGltZW0tPnJlc2VydmVkOw0KPiANCj4gLQlzdHJuY3B5KGFyZ3MtPnYw
+LmNoaXAsIGRldmljZS0+Y2hpcC0+bmFtZSwgc2l6ZW9mKGFyZ3MtPnYwLmNoaXApKTsNCj4gLQlz
+dHJuY3B5KGFyZ3MtPnYwLm5hbWUsIGRldmljZS0+bmFtZSwgc2l6ZW9mKGFyZ3MtPnYwLm5hbWUp
+KTsNCj4gKwlzdHJuY3B5KGFyZ3MtPnYwLmNoaXAsIGRldmljZS0+Y2hpcC0+bmFtZSwgc2l6ZW9m
+KGFyZ3MtPnYwLmNoaXApIC0gMSk7DQo+ICsJYXJncy0+djAuY2hpcFtzaXplb2YoYXJncy0+djAu
+Y2hpcCkgLSAxXSA9ICdcMCc7DQo+ICsJc3RybmNweShhcmdzLT52MC5uYW1lLCBkZXZpY2UtPm5h
+bWUsIHNpemVvZihhcmdzLT52MC5uYW1lKSAtIDEpOw0KPiArCWFyZ3MtPnYwLm5hbWVbc2l6ZW9m
+KGFyZ3MtPnYwLm5hbWUpIC0gMV0gPSAnXDAnOw0KDQoNCklzbid0IGl0IGJldHRlciB0byB1c2Ug
+c25wcmludGYoKT8NCg0KPiAgCXJldHVybiAwOw0KPiAgfQ0KPiANClRoYW5rcw0KQmFycnkNCg0K
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
+YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
+cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1Cg==
