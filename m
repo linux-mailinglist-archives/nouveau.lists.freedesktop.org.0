@@ -2,37 +2,53 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 346463273FF
-	for <lists+nouveau@lfdr.de>; Sun, 28 Feb 2021 20:10:40 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D399B327412
+	for <lists+nouveau@lfdr.de>; Sun, 28 Feb 2021 20:24:55 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0275C89F8B;
-	Sun, 28 Feb 2021 19:10:37 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C379E6E2E3;
+	Sun, 28 Feb 2021 19:24:52 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-io1-f45.google.com (mail-io1-f45.google.com
- [209.85.166.45])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 00F7E89F8B
- for <nouveau@lists.freedesktop.org>; Sun, 28 Feb 2021 19:10:35 +0000 (UTC)
-Received: by mail-io1-f45.google.com with SMTP id i8so15362416iog.7
- for <nouveau@lists.freedesktop.org>; Sun, 28 Feb 2021 11:10:35 -0800 (PST)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2A30B6E2E3
+ for <nouveau@lists.freedesktop.org>; Sun, 28 Feb 2021 19:24:51 +0000 (UTC)
+Received: by mail-ej1-x62f.google.com with SMTP id jt13so24273834ejb.0
+ for <nouveau@lists.freedesktop.org>; Sun, 28 Feb 2021 11:24:51 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=reply-to:subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=jIaqdRF9+G4yV4wZ4pzKcCcaSIOqGR2isnFjgkfLYzM=;
+ b=EAh3LRz5bvlPxbIAEBsi5gscHChFyKl8Niv8dGFiji43Cmj2gPCCL8FBPQcG8FHutb
+ 075N8t1en20GPmQI/9M81+PnVThnyxjVkl9tn2NhqsfCqQw4tLvGgaJ6HAqy5H0uFyTV
+ ZQEP3Cwgj2xiNfNyuVtRtBxFeRK57QpbcxcFCFHfBtL9l/NN4766lPKIg8xx24XgfSDX
+ Lu2T+sCkfSpWl2B7fdG5bSeySe9vFVC0t5qvJjhIcQeJO+y1uqDymP8aNV/jNX47M6Vo
+ YYIWKo8YjAgvYIesH07WGCJsGjvJpOgEmwf23hgZ9KW3sgreidaiUaK9PMUjsPpYUoXw
+ /8/g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=3RyMdf27d4YfRZCYiitWwZ1QZzQZBmpl830KZc01AU4=;
- b=lLUFlKfIidauwLTJ5Ob5yB+hI85U5SRMTfafEPCq42SkItoEas5JyUnth96JsJDmPb
- CJsyylswu88ExarpuN54t3iiXSPY0jawGzvR5rYpT3yQxc2bNRH1Q8+WtjivyRtw+Etu
- HJH/TvdqeNq4Tou3ycLP4krUrmhO4em2pO2XvbUMl5kt5/OXoJLn3IH1QG3f2Won4GlP
- q5WOd6rRGXyCU28yUUwlTHI7t5uplZtoZqeS2KbS7Z7L7Cs98sO6h7JR8i4lsXRiPB87
- JbjKBB3P8PKe6lJWGk0z9hWcQVlBhCLtqpw3Jo7D6P4Kfg8iZVoOOwlYbr2YGQUk0H36
- 2wHA==
-X-Gm-Message-State: AOAM530AcuGvDJNckEPWSNtKNQHACTQgS79Ndzrlym+mQdJs8x/so+Jt
- JudVUyhc2MV5+asYCgPjize+R0yYEtIVozzd2x1sJD0tPzY=
-X-Google-Smtp-Source: ABdhPJzH/7N0ZuWOavSyKLnW0embSEQ5ypGpgfuqT2YAp7CJGSRb+3+uXoFDk94lBoErT2iI98Z+8b/bI6vWtTdpz0k=
-X-Received: by 2002:a05:6638:635:: with SMTP id
- h21mr1590089jar.97.1614539435241; 
- Sun, 28 Feb 2021 11:10:35 -0800 (PST)
-MIME-Version: 1.0
+ h=x-gm-message-state:reply-to:subject:to:cc:references:from
+ :message-id:date:user-agent:mime-version:in-reply-to
+ :content-language:content-transfer-encoding;
+ bh=jIaqdRF9+G4yV4wZ4pzKcCcaSIOqGR2isnFjgkfLYzM=;
+ b=q97OyS6I4+GPvix5Q1x/iPXlksHFyLRDkXga7fDw7eu1bWREECF82J6krQD85p2zQw
+ WlzlFKOm/9kecKe0I6+CtyWv1rEAPo6Fv29ayFtrE/tK+zJDSxUuEGb6k89FWLIaJ7Yb
+ Cylq6FhvDe7B5y/UcMUtEl8Qq6MCkZr44xEYpmhZJnxrTi+ErtTNEmSLOLawvzuBsxse
+ Gx3wvsxImxNwOv3c0A+XpGO3VyPHDFnNBzOChkSGlnhQElyg0Frz+O+QPmR7mMUIoHjK
+ GDVOShO66jc28Vg5czHjev8t66Ymge2pazr6C9VrXT6OMxA6fFK+WdJUpGLigUxUqgRW
+ qYkg==
+X-Gm-Message-State: AOAM530vkMKJjnt2UlzJ33OfKrtnnBN7mQCr+BfLXVuJpUiUfrRUq6qM
+ aPd5LSV7TR4jchLgPS4uw0M=
+X-Google-Smtp-Source: ABdhPJwJrw0zg+YI8Vt8XzqTXz9XK5R4kzCqVWwSB5y/yddF8vtI5h9s6jywrV6TyU4r3aJUbr4dQA==
+X-Received: by 2002:a17:906:6047:: with SMTP id
+ p7mr12840593ejj.400.1614540289759; 
+ Sun, 28 Feb 2021 11:24:49 -0800 (PST)
+Received: from ?IPv6:2a02:8070:a396:f000:42be:1b84:875b:eaf?
+ ([2a02:8070:a396:f000:42be:1b84:875b:eaf])
+ by smtp.googlemail.com with ESMTPSA id y11sm10964954ejd.72.2021.02.28.11.24.48
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 28 Feb 2021 11:24:49 -0800 (PST)
+To: Ilia Mirkin <imirkin@alum.mit.edu>
 References: <CAKb7Uvji_+N+b8HghZckU-uSBWn-=BZwNAiUff2oitbVuNUE2Q@mail.gmail.com>
  <YDUkfjDA4xLJlxE5@pflmari> <YDUr2OGDsxDyC0l2@pflmari>
  <CAKb7UvjmdgS536tNzisomi_oXOGk3Q+anp0AfPvA8OruU_9m5Q@mail.gmail.com>
@@ -49,11 +65,15 @@ References: <CAKb7Uvji_+N+b8HghZckU-uSBWn-=BZwNAiUff2oitbVuNUE2Q@mail.gmail.com>
  <56b77cbe-6ace-6850-b26a-a762ae94dbcd@gmail.com>
  <CAKb7UvjYcrqzbyRCZDcO=hA3R4pF2hzEdjqMHgRGuYQPYSqKmQ@mail.gmail.com>
  <a4b52255-5b09-4eaa-8a35-81c1c062b462@gmail.com>
-In-Reply-To: <a4b52255-5b09-4eaa-8a35-81c1c062b462@gmail.com>
-From: Ilia Mirkin <imirkin@alum.mit.edu>
-Date: Sun, 28 Feb 2021 14:10:24 -0500
-Message-ID: <CAKb7Uvh5T-B37yTeky7keXYZQEd8B8=sqKbQ7TsD0W83HbanWg@mail.gmail.com>
-To: uwe.sauter.de@gmail.com
+ <CAKb7Uvh5T-B37yTeky7keXYZQEd8B8=sqKbQ7TsD0W83HbanWg@mail.gmail.com>
+From: Uwe Sauter <uwe.sauter.de@gmail.com>
+Message-ID: <b7f1d101-36e5-c7ef-9b7c-5d4162a8c68b@gmail.com>
+Date: Sun, 28 Feb 2021 20:24:47 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.8.0
+MIME-Version: 1.0
+In-Reply-To: <CAKb7Uvh5T-B37yTeky7keXYZQEd8B8=sqKbQ7TsD0W83HbanWg@mail.gmail.com>
+Content-Language: de-DE
 Subject: Re: [Nouveau] [PATCH 2/3] drm/nouveau/kms/nv50-: Report max cursor
  size to userspace
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -67,233 +87,187 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
+Reply-To: uwe.sauter.de@gmail.com
 Cc: Alex Riesen <alexander.riesen@cetitec.com>,
  nouveau <nouveau@lists.freedesktop.org>, Simon Ser <contact@emersion.fr>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Sun, Feb 28, 2021 at 12:59 PM Uwe Sauter <uwe.sauter.de@gmail.com> wrote:
->
->
->
-> Am 28.02.21 um 18:02 schrieb Ilia Mirkin:
-> > On Sun, Feb 28, 2021 at 10:10 AM Uwe Sauter <uwe.sauter.de@gmail.com> wrote:
-> >>
-> >>
-> >>
-> >> Am 27.02.21 um 22:26 schrieb Ilia Mirkin:
-> >>> On Sat, Feb 27, 2021 at 7:28 AM Uwe Sauter <uwe.sauter.de@gmail.com> wrote:
-> >>>>
-> >>>> I can also report that the modesetting ddx that comes with xorg-server 1.20.10-3 (Arch Linux package) shows this kind of
-> >>>> cursor-cut-into-horizontal-stripes behavior. Changing to xf86-video-nouveau 1.0.17-1 solves this issue. But nouveau has
-> >>>> issues with Mate 1.24 (as discussed earlier this month).
-> >>>>
-> >>>> My hardware:
-> >>>> # lspci -s 3:0.0 -v
-> >>>> 03:00.0 VGA compatible controller: NVIDIA Corporation GK208B [GeForce GT 710] (rev a1) (prog-if 00 [VGA controller])
-> >>>>           Subsystem: ASUSTeK Computer Inc. GT710-4H-SL-2GD5
-> >>>>           Flags: bus master, fast devsel, latency 0, IRQ 36, IOMMU group 12
-> >>>>           Memory at fb000000 (32-bit, non-prefetchable) [size=16M]
-> >>>>           Memory at fff0000000 (64-bit, prefetchable) [size=128M]
-> >>>>           Memory at fff8000000 (64-bit, prefetchable) [size=32M]
-> >>>>           I/O ports at f000 [size=128]
-> >>>>           Expansion ROM at fc000000 [disabled] [size=512K]
-> >>>>           Capabilities: [60] Power Management version 3
-> >>>>           Capabilities: [68] MSI: Enable+ Count=1/1 Maskable- 64bit+
-> >>>>           Capabilities: [78] Express Legacy Endpoint, MSI 00
-> >>>>           Capabilities: [100] Virtual Channel
-> >>>>           Capabilities: [128] Power Budgeting <?>
-> >>>>           Capabilities: [600] Vendor Specific Information: ID=0001 Rev=1 Len=024 <?>
-> >>>>           Capabilities: [900] Secondary PCI Express
-> >>>>           Kernel driver in use: nouveau
-> >>>>           Kernel modules: nouveau
-> >>>>
-> >>>>
-> >>>> If I can help in any way please let me know.
-> >>>
-> >>> Thanks, that's good info. Simon - you originally said that everything
-> >>> looked good on your GK208, so a retest would be super.
-> >>>
-> >>> I just double-checked on a GP108 (with an older kernel, but same idea
-> >>> should apply), and it seems like 256x256 cursors are fine there.
-> >>> However the display logic has gone through some ideally no-op updates
-> >>> since that kernel version, but there could very easily be issues.
-> >>>
-> >>> Can you try Alex's patch to modetest and confirm that you see issues
-> >>> with modetest? If so, can you (and maybe Alex as well) try an older
-> >>> kernel (I'm on 5.6) and see if modetest behaves well there. [The patch
-> >>> in question was to expose 256x256 as the 'preferred' size, but support
-> >>> for the larger cursors has been around for a while.] Alex - if you
-> >>> have time, same question to you.
-> >>>
-> >>> You can find the patch here:
-> >>> https://lists.x.org/archives/nouveau/2021-February/037992.html
-> >>
-> >> I had to install a parallel Arch Linux to my existing production system in order to keep it clean from all the
-> >> development stuff.
-> >>
-> >> System summary (most recent):
-> >> AMD Ryzen 3 3100
-> >> Gigabyte B550M S2H with BIOS F13c
-> >> Asus GT710-4H-SL-2GD5 (GK208B [GeForce GT 710] (rev a1)) using nouveau kernel module
-> >> 32GB DDR4-3200MHz ECC
-> >>
-> >> libdrm 2.4.104-1
-> >> linux 5.11.2.arch1-1
-> >> mesa 20.3.4-3
-> >> xf86-video-nouveau 1.0.17-1
-> >>
-> >>
-> >>
-> >> I built libdrm 2.4.104.r16.ga9bb32cf in order to get modetest.
-> >>
-> >> With unmodified kernel / modetest (cw=64, ch=64) I call:
-> >>
-> >> $ ./modetest -c |grep '^[0-9]\|preferred'
-> >> 85  86  connected HDMI-A-1        530x300   40  86
-> >>     #0 1920x1080 60.00 1920 2008 2052 2200 1080 1084 1089 1125 148500 flags: phsync, pvsync; type: preferred, driver
-> >> 87  0 disconnected  HDMI-A-2        0x0   0 88
-> >> 89  0 disconnected  HDMI-A-3        0x0   0 90
-> >> 91  0 disconnected  HDMI-A-4        0x0   0 92
-> >>
-> >> ./modetest -s 85:1920x1080 -C
-> >> trying to open device 'i915'...failed
-> >> trying to open device 'amdgpu'...failed
-> >> trying to open device 'radeon'...failed
-> >> trying to open device 'nouveau'...done
-> >> setting mode 1920x1080-60.00Hz on connectors 85, crtc 50
-> >> starting cursor
-> >> ^C
-> >>
-> >> This shows several things:
-> >> * There is a moving gray, half transparent square bouncing around. I believe that this is
-> >>     the mentioned cursor.
-> >>
-> >> * The cursor movement happens at various speeds, sometimes staying half a second on the
-> >>     same position to then move quite fast to another, then slowing down.
-> >>
-> >> * The cursor is flickering.
-> >>
-> >> * When (forcefully) ending the test the screen is not properly reset, leaving the
-> >>     previous content in a state similar to the phenomenon with the mouse cursor that stated
-> >>     this discussion. On my FullHD display the console output is sliced horizontally and
-> >>     offset with about 1/5th of the screen width.
-> >>
-> >> This also happens on my other machine with a Xeon E3-1245 v3 with integrated graphics on a ASRock C226 WS, using the
-> >> i915 kernel module and same software versions as above.
-> >>
-> >> Applying Alex' patch with (cw=128, ch=128) shows a cursor that contains the same test pattern as is shown in the
-> >> background. The behavior is as jumpy and flickery as it was with size 64.
-> >> When killing the test the last position of the cursor still shows the test pattern while the background is again sliced
-> >> and shuffled horizontally.
-> >>
-> >> Setting the size to 256 shows an even larger cursor. It shows the same jumpy and flickery behavior as the other two. The
-> >> cursor itself also shows a horizontal sliced in the lower half. After killing the test the cursor's last position still
-> >> shows the test pattern while the background is sliced.
-> >>
-> >> This testing was all conducted with packages from the Arch Linux distribution (but for modetest).
-> >>
-> >> Questions:
-> >>
-> >> 1) Is this jumpy and flickery behavior expected or should the cursor move smoothly?
-> >
-> > Good question. It's definitely jumpy/flickery for me too. I haven't
-> > looked at why, but I wouldn't worry about it. I suspect it has to do
-> > with the mechanics of how it causes the cursor to be moved.
-> >
-> >>
-> >> 2) With unmodified modetest, what should the cursor look like? Without further inspection
-> >>      of the code I suspect that the change from UTIL_PATTERN_PLAIN to UTIL_PATTERN_SMPTE
-> >>      changed the cursor's appearance.
-> >
-> > The PLAIN pattern is just gray, which isn't necessarily a great test
-> > to see visual corruption.
-> >
-> >>
-> >> 4) How long is modetest expected to run? On the first run I let it test for over 10min
-> >>      before deciding to kill it.
-> >
-> > Until you hit enter (or escape or maybe any key, I forget).
-> >
-> >>
-> >> 5) Is modetest expected to reset the display to the state it was before? Why doesn't it
-> >>      do that when being killed?
-> >
-> > No. You can switch vt's back and forth to restore. It's just a test
-> > application. It's unfortunately not an entirely trivial thing to do.
-> >
-> >>
-> >> 6) Where do you expect this bug to come from? Kernel nouveau driver, modesetting ddx,
-> >>      nouveau ddx?
-> >
-> > modetest interacts with the kernel directly. The bug is most likely in
-> > the hardware, and we should just not use the 256x256 size even though
-> > allegedly the hw supports it. But perhaps the kernel screws something
-> > up.
-> >
-> >>
-> >> 7) Any proposal what kernel to test next?
-> >
-> > If you could test modetest with 256x256 cursor on a pre-5.9 kernel and
-> > ensure that you see the same corruption in the cursor image, that'd
-> > confirm that we didn't just screw something up in the macro rework
-> > which landed in 5.9, vs a hw issue.
->
->
-> Ok, two more kernels tested.
->
-> 5.10.19:
-> * modetest same as 5.11.2
-> * mouse pointer in X session is ok (both modesetting ddx and nouveau ddx)
-> * (Mate issue does appear with nouveau ddx but not with modesetting ddx)
->
-> 5.4.101:
-> * modetest connector ID changed from 85 to 69
-> * other than that same as 5.11.2
-> * mouse pointer in X session is ok (both modesetting ddx and nouveau ddx)
-> * (Mate issue does appear with nouveau ddx but not with modesetting ddx)
->
->
-> Summary:
->                    5.4.101  | 5.10.19  | 5.11.2
-> modetest-64       seems ok | seems ok | seems ok
-> modetest-128      seems ok | seems ok | seems ok
-> modetest-256      sliced   | sliced   | sliced
-> X mouse pointer   ok       | ok       | sliced
-> (modesetting ddx)
-> X mouse pointer   ok       | ok       | ok
-> (nouveau ddx)
->
-> Really strange that the issue only appears on 5.11 on my hardware.
->
->
-> >
-> > Presumably the corruption you refer to in the cursor image at 256x256
-> > is similar to what you see with Xorg + modesetting?
->
-> In X the mouse pointer is sliced and somehow wraps in vertical direction so that
-> the tip of the arrow is about 1/3 from the top.
->
-> The sclicing in the modetest cursor appears in the area from about 1/2 to 3/4 from
-> the top of the cursor.
-
-It's probably the same corruption, just looks slightly different based
-on the image. Kernel 5.11 made 256x256 cursors the default (which is
-what xf86-video-modesetting uses to determine cursor size), hence the
-change in behavior.
-
-Thanks again for confirming.
-
-So it sounds like all Kepler hardware has issues with 256x256. I've
-tested on gp108 and did not observe any obvious issues. Probably good
-to find a GM107 and GM200 to test on as well.
-
-Cheers,
-
-  -ilia
-_______________________________________________
-Nouveau mailing list
-Nouveau@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/nouveau
+CgpBbSAyOC4wMi4yMSB1bSAyMDoxMCBzY2hyaWViIElsaWEgTWlya2luOgo+IE9uIFN1biwgRmVi
+IDI4LCAyMDIxIGF0IDEyOjU5IFBNIFV3ZSBTYXV0ZXIgPHV3ZS5zYXV0ZXIuZGVAZ21haWwuY29t
+PiB3cm90ZToKPj4KPj4KPj4KPj4gQW0gMjguMDIuMjEgdW0gMTg6MDIgc2NocmllYiBJbGlhIE1p
+cmtpbjoKPj4+IE9uIFN1biwgRmViIDI4LCAyMDIxIGF0IDEwOjEwIEFNIFV3ZSBTYXV0ZXIgPHV3
+ZS5zYXV0ZXIuZGVAZ21haWwuY29tPiB3cm90ZToKPj4+Pgo+Pj4+Cj4+Pj4KPj4+PiBBbSAyNy4w
+Mi4yMSB1bSAyMjoyNiBzY2hyaWViIElsaWEgTWlya2luOgo+Pj4+PiBPbiBTYXQsIEZlYiAyNywg
+MjAyMSBhdCA3OjI4IEFNIFV3ZSBTYXV0ZXIgPHV3ZS5zYXV0ZXIuZGVAZ21haWwuY29tPiB3cm90
+ZToKPj4+Pj4+Cj4+Pj4+PiBJIGNhbiBhbHNvIHJlcG9ydCB0aGF0IHRoZSBtb2Rlc2V0dGluZyBk
+ZHggdGhhdCBjb21lcyB3aXRoIHhvcmctc2VydmVyIDEuMjAuMTAtMyAoQXJjaCBMaW51eCBwYWNr
+YWdlKSBzaG93cyB0aGlzIGtpbmQgb2YKPj4+Pj4+IGN1cnNvci1jdXQtaW50by1ob3Jpem9udGFs
+LXN0cmlwZXMgYmVoYXZpb3IuIENoYW5naW5nIHRvIHhmODYtdmlkZW8tbm91dmVhdSAxLjAuMTct
+MSBzb2x2ZXMgdGhpcyBpc3N1ZS4gQnV0IG5vdXZlYXUgaGFzCj4+Pj4+PiBpc3N1ZXMgd2l0aCBN
+YXRlIDEuMjQgKGFzIGRpc2N1c3NlZCBlYXJsaWVyIHRoaXMgbW9udGgpLgo+Pj4+Pj4KPj4+Pj4+
+IE15IGhhcmR3YXJlOgo+Pj4+Pj4gIyBsc3BjaSAtcyAzOjAuMCAtdgo+Pj4+Pj4gMDM6MDAuMCBW
+R0EgY29tcGF0aWJsZSBjb250cm9sbGVyOiBOVklESUEgQ29ycG9yYXRpb24gR0syMDhCIFtHZUZv
+cmNlIEdUIDcxMF0gKHJldiBhMSkgKHByb2ctaWYgMDAgW1ZHQSBjb250cm9sbGVyXSkKPj4+Pj4+
+ICAgICAgICAgICAgU3Vic3lzdGVtOiBBU1VTVGVLIENvbXB1dGVyIEluYy4gR1Q3MTAtNEgtU0wt
+MkdENQo+Pj4+Pj4gICAgICAgICAgICBGbGFnczogYnVzIG1hc3RlciwgZmFzdCBkZXZzZWwsIGxh
+dGVuY3kgMCwgSVJRIDM2LCBJT01NVSBncm91cCAxMgo+Pj4+Pj4gICAgICAgICAgICBNZW1vcnkg
+YXQgZmIwMDAwMDAgKDMyLWJpdCwgbm9uLXByZWZldGNoYWJsZSkgW3NpemU9MTZNXQo+Pj4+Pj4g
+ICAgICAgICAgICBNZW1vcnkgYXQgZmZmMDAwMDAwMCAoNjQtYml0LCBwcmVmZXRjaGFibGUpIFtz
+aXplPTEyOE1dCj4+Pj4+PiAgICAgICAgICAgIE1lbW9yeSBhdCBmZmY4MDAwMDAwICg2NC1iaXQs
+IHByZWZldGNoYWJsZSkgW3NpemU9MzJNXQo+Pj4+Pj4gICAgICAgICAgICBJL08gcG9ydHMgYXQg
+ZjAwMCBbc2l6ZT0xMjhdCj4+Pj4+PiAgICAgICAgICAgIEV4cGFuc2lvbiBST00gYXQgZmMwMDAw
+MDAgW2Rpc2FibGVkXSBbc2l6ZT01MTJLXQo+Pj4+Pj4gICAgICAgICAgICBDYXBhYmlsaXRpZXM6
+IFs2MF0gUG93ZXIgTWFuYWdlbWVudCB2ZXJzaW9uIDMKPj4+Pj4+ICAgICAgICAgICAgQ2FwYWJp
+bGl0aWVzOiBbNjhdIE1TSTogRW5hYmxlKyBDb3VudD0xLzEgTWFza2FibGUtIDY0Yml0Kwo+Pj4+
+Pj4gICAgICAgICAgICBDYXBhYmlsaXRpZXM6IFs3OF0gRXhwcmVzcyBMZWdhY3kgRW5kcG9pbnQs
+IE1TSSAwMAo+Pj4+Pj4gICAgICAgICAgICBDYXBhYmlsaXRpZXM6IFsxMDBdIFZpcnR1YWwgQ2hh
+bm5lbAo+Pj4+Pj4gICAgICAgICAgICBDYXBhYmlsaXRpZXM6IFsxMjhdIFBvd2VyIEJ1ZGdldGlu
+ZyA8Pz4KPj4+Pj4+ICAgICAgICAgICAgQ2FwYWJpbGl0aWVzOiBbNjAwXSBWZW5kb3IgU3BlY2lm
+aWMgSW5mb3JtYXRpb246IElEPTAwMDEgUmV2PTEgTGVuPTAyNCA8Pz4KPj4+Pj4+ICAgICAgICAg
+ICAgQ2FwYWJpbGl0aWVzOiBbOTAwXSBTZWNvbmRhcnkgUENJIEV4cHJlc3MKPj4+Pj4+ICAgICAg
+ICAgICAgS2VybmVsIGRyaXZlciBpbiB1c2U6IG5vdXZlYXUKPj4+Pj4+ICAgICAgICAgICAgS2Vy
+bmVsIG1vZHVsZXM6IG5vdXZlYXUKPj4+Pj4+Cj4+Pj4+Pgo+Pj4+Pj4gSWYgSSBjYW4gaGVscCBp
+biBhbnkgd2F5IHBsZWFzZSBsZXQgbWUga25vdy4KPj4+Pj4KPj4+Pj4gVGhhbmtzLCB0aGF0J3Mg
+Z29vZCBpbmZvLiBTaW1vbiAtIHlvdSBvcmlnaW5hbGx5IHNhaWQgdGhhdCBldmVyeXRoaW5nCj4+
+Pj4+IGxvb2tlZCBnb29kIG9uIHlvdXIgR0syMDgsIHNvIGEgcmV0ZXN0IHdvdWxkIGJlIHN1cGVy
+Lgo+Pj4+Pgo+Pj4+PiBJIGp1c3QgZG91YmxlLWNoZWNrZWQgb24gYSBHUDEwOCAod2l0aCBhbiBv
+bGRlciBrZXJuZWwsIGJ1dCBzYW1lIGlkZWEKPj4+Pj4gc2hvdWxkIGFwcGx5KSwgYW5kIGl0IHNl
+ZW1zIGxpa2UgMjU2eDI1NiBjdXJzb3JzIGFyZSBmaW5lIHRoZXJlLgo+Pj4+PiBIb3dldmVyIHRo
+ZSBkaXNwbGF5IGxvZ2ljIGhhcyBnb25lIHRocm91Z2ggc29tZSBpZGVhbGx5IG5vLW9wIHVwZGF0
+ZXMKPj4+Pj4gc2luY2UgdGhhdCBrZXJuZWwgdmVyc2lvbiwgYnV0IHRoZXJlIGNvdWxkIHZlcnkg
+ZWFzaWx5IGJlIGlzc3Vlcy4KPj4+Pj4KPj4+Pj4gQ2FuIHlvdSB0cnkgQWxleCdzIHBhdGNoIHRv
+IG1vZGV0ZXN0IGFuZCBjb25maXJtIHRoYXQgeW91IHNlZSBpc3N1ZXMKPj4+Pj4gd2l0aCBtb2Rl
+dGVzdD8gSWYgc28sIGNhbiB5b3UgKGFuZCBtYXliZSBBbGV4IGFzIHdlbGwpIHRyeSBhbiBvbGRl
+cgo+Pj4+PiBrZXJuZWwgKEknbSBvbiA1LjYpIGFuZCBzZWUgaWYgbW9kZXRlc3QgYmVoYXZlcyB3
+ZWxsIHRoZXJlLiBbVGhlIHBhdGNoCj4+Pj4+IGluIHF1ZXN0aW9uIHdhcyB0byBleHBvc2UgMjU2
+eDI1NiBhcyB0aGUgJ3ByZWZlcnJlZCcgc2l6ZSwgYnV0IHN1cHBvcnQKPj4+Pj4gZm9yIHRoZSBs
+YXJnZXIgY3Vyc29ycyBoYXMgYmVlbiBhcm91bmQgZm9yIGEgd2hpbGUuXSBBbGV4IC0gaWYgeW91
+Cj4+Pj4+IGhhdmUgdGltZSwgc2FtZSBxdWVzdGlvbiB0byB5b3UuCj4+Pj4+Cj4+Pj4+IFlvdSBj
+YW4gZmluZCB0aGUgcGF0Y2ggaGVyZToKPj4+Pj4gaHR0cHM6Ly9saXN0cy54Lm9yZy9hcmNoaXZl
+cy9ub3V2ZWF1LzIwMjEtRmVicnVhcnkvMDM3OTkyLmh0bWwKPj4+Pgo+Pj4+IEkgaGFkIHRvIGlu
+c3RhbGwgYSBwYXJhbGxlbCBBcmNoIExpbnV4IHRvIG15IGV4aXN0aW5nIHByb2R1Y3Rpb24gc3lz
+dGVtIGluIG9yZGVyIHRvIGtlZXAgaXQgY2xlYW4gZnJvbSBhbGwgdGhlCj4+Pj4gZGV2ZWxvcG1l
+bnQgc3R1ZmYuCj4+Pj4KPj4+PiBTeXN0ZW0gc3VtbWFyeSAobW9zdCByZWNlbnQpOgo+Pj4+IEFN
+RCBSeXplbiAzIDMxMDAKPj4+PiBHaWdhYnl0ZSBCNTUwTSBTMkggd2l0aCBCSU9TIEYxM2MKPj4+
+PiBBc3VzIEdUNzEwLTRILVNMLTJHRDUgKEdLMjA4QiBbR2VGb3JjZSBHVCA3MTBdIChyZXYgYTEp
+KSB1c2luZyBub3V2ZWF1IGtlcm5lbCBtb2R1bGUKPj4+PiAzMkdCIEREUjQtMzIwME1IeiBFQ0MK
+Pj4+Pgo+Pj4+IGxpYmRybSAyLjQuMTA0LTEKPj4+PiBsaW51eCA1LjExLjIuYXJjaDEtMQo+Pj4+
+IG1lc2EgMjAuMy40LTMKPj4+PiB4Zjg2LXZpZGVvLW5vdXZlYXUgMS4wLjE3LTEKPj4+Pgo+Pj4+
+Cj4+Pj4KPj4+PiBJIGJ1aWx0IGxpYmRybSAyLjQuMTA0LnIxNi5nYTliYjMyY2YgaW4gb3JkZXIg
+dG8gZ2V0IG1vZGV0ZXN0Lgo+Pj4+Cj4+Pj4gV2l0aCB1bm1vZGlmaWVkIGtlcm5lbCAvIG1vZGV0
+ZXN0IChjdz02NCwgY2g9NjQpIEkgY2FsbDoKPj4+Pgo+Pj4+ICQgLi9tb2RldGVzdCAtYyB8Z3Jl
+cCAnXlswLTldXHxwcmVmZXJyZWQnCj4+Pj4gODUgIDg2ICBjb25uZWN0ZWQgSERNSS1BLTEgICAg
+ICAgIDUzMHgzMDAgICA0MCAgODYKPj4+PiAgICAgICMwIDE5MjB4MTA4MCA2MC4wMCAxOTIwIDIw
+MDggMjA1MiAyMjAwIDEwODAgMTA4NCAxMDg5IDExMjUgMTQ4NTAwIGZsYWdzOiBwaHN5bmMsIHB2
+c3luYzsgdHlwZTogcHJlZmVycmVkLCBkcml2ZXIKPj4+PiA4NyAgMCBkaXNjb25uZWN0ZWQgIEhE
+TUktQS0yICAgICAgICAweDAgICAwIDg4Cj4+Pj4gODkgIDAgZGlzY29ubmVjdGVkICBIRE1JLUEt
+MyAgICAgICAgMHgwICAgMCA5MAo+Pj4+IDkxICAwIGRpc2Nvbm5lY3RlZCAgSERNSS1BLTQgICAg
+ICAgIDB4MCAgIDAgOTIKPj4+Pgo+Pj4+IC4vbW9kZXRlc3QgLXMgODU6MTkyMHgxMDgwIC1DCj4+
+Pj4gdHJ5aW5nIHRvIG9wZW4gZGV2aWNlICdpOTE1Jy4uLmZhaWxlZAo+Pj4+IHRyeWluZyB0byBv
+cGVuIGRldmljZSAnYW1kZ3B1Jy4uLmZhaWxlZAo+Pj4+IHRyeWluZyB0byBvcGVuIGRldmljZSAn
+cmFkZW9uJy4uLmZhaWxlZAo+Pj4+IHRyeWluZyB0byBvcGVuIGRldmljZSAnbm91dmVhdScuLi5k
+b25lCj4+Pj4gc2V0dGluZyBtb2RlIDE5MjB4MTA4MC02MC4wMEh6IG9uIGNvbm5lY3RvcnMgODUs
+IGNydGMgNTAKPj4+PiBzdGFydGluZyBjdXJzb3IKPj4+PiBeQwo+Pj4+Cj4+Pj4gVGhpcyBzaG93
+cyBzZXZlcmFsIHRoaW5nczoKPj4+PiAqIFRoZXJlIGlzIGEgbW92aW5nIGdyYXksIGhhbGYgdHJh
+bnNwYXJlbnQgc3F1YXJlIGJvdW5jaW5nIGFyb3VuZC4gSSBiZWxpZXZlIHRoYXQgdGhpcyBpcwo+
+Pj4+ICAgICAgdGhlIG1lbnRpb25lZCBjdXJzb3IuCj4+Pj4KPj4+PiAqIFRoZSBjdXJzb3IgbW92
+ZW1lbnQgaGFwcGVucyBhdCB2YXJpb3VzIHNwZWVkcywgc29tZXRpbWVzIHN0YXlpbmcgaGFsZiBh
+IHNlY29uZCBvbiB0aGUKPj4+PiAgICAgIHNhbWUgcG9zaXRpb24gdG8gdGhlbiBtb3ZlIHF1aXRl
+IGZhc3QgdG8gYW5vdGhlciwgdGhlbiBzbG93aW5nIGRvd24uCj4+Pj4KPj4+PiAqIFRoZSBjdXJz
+b3IgaXMgZmxpY2tlcmluZy4KPj4+Pgo+Pj4+ICogV2hlbiAoZm9yY2VmdWxseSkgZW5kaW5nIHRo
+ZSB0ZXN0IHRoZSBzY3JlZW4gaXMgbm90IHByb3Blcmx5IHJlc2V0LCBsZWF2aW5nIHRoZQo+Pj4+
+ICAgICAgcHJldmlvdXMgY29udGVudCBpbiBhIHN0YXRlIHNpbWlsYXIgdG8gdGhlIHBoZW5vbWVu
+b24gd2l0aCB0aGUgbW91c2UgY3Vyc29yIHRoYXQgc3RhdGVkCj4+Pj4gICAgICB0aGlzIGRpc2N1
+c3Npb24uIE9uIG15IEZ1bGxIRCBkaXNwbGF5IHRoZSBjb25zb2xlIG91dHB1dCBpcyBzbGljZWQg
+aG9yaXpvbnRhbGx5IGFuZAo+Pj4+ICAgICAgb2Zmc2V0IHdpdGggYWJvdXQgMS81dGggb2YgdGhl
+IHNjcmVlbiB3aWR0aC4KPj4+Pgo+Pj4+IFRoaXMgYWxzbyBoYXBwZW5zIG9uIG15IG90aGVyIG1h
+Y2hpbmUgd2l0aCBhIFhlb24gRTMtMTI0NSB2MyB3aXRoIGludGVncmF0ZWQgZ3JhcGhpY3Mgb24g
+YSBBU1JvY2sgQzIyNiBXUywgdXNpbmcgdGhlCj4+Pj4gaTkxNSBrZXJuZWwgbW9kdWxlIGFuZCBz
+YW1lIHNvZnR3YXJlIHZlcnNpb25zIGFzIGFib3ZlLgo+Pj4+Cj4+Pj4gQXBwbHlpbmcgQWxleCcg
+cGF0Y2ggd2l0aCAoY3c9MTI4LCBjaD0xMjgpIHNob3dzIGEgY3Vyc29yIHRoYXQgY29udGFpbnMg
+dGhlIHNhbWUgdGVzdCBwYXR0ZXJuIGFzIGlzIHNob3duIGluIHRoZQo+Pj4+IGJhY2tncm91bmQu
+IFRoZSBiZWhhdmlvciBpcyBhcyBqdW1weSBhbmQgZmxpY2tlcnkgYXMgaXQgd2FzIHdpdGggc2l6
+ZSA2NC4KPj4+PiBXaGVuIGtpbGxpbmcgdGhlIHRlc3QgdGhlIGxhc3QgcG9zaXRpb24gb2YgdGhl
+IGN1cnNvciBzdGlsbCBzaG93cyB0aGUgdGVzdCBwYXR0ZXJuIHdoaWxlIHRoZSBiYWNrZ3JvdW5k
+IGlzIGFnYWluIHNsaWNlZAo+Pj4+IGFuZCBzaHVmZmxlZCBob3Jpem9udGFsbHkuCj4+Pj4KPj4+
+PiBTZXR0aW5nIHRoZSBzaXplIHRvIDI1NiBzaG93cyBhbiBldmVuIGxhcmdlciBjdXJzb3IuIEl0
+IHNob3dzIHRoZSBzYW1lIGp1bXB5IGFuZCBmbGlja2VyeSBiZWhhdmlvciBhcyB0aGUgb3RoZXIg
+dHdvLiBUaGUKPj4+PiBjdXJzb3IgaXRzZWxmIGFsc28gc2hvd3MgYSBob3Jpem9udGFsIHNsaWNl
+ZCBpbiB0aGUgbG93ZXIgaGFsZi4gQWZ0ZXIga2lsbGluZyB0aGUgdGVzdCB0aGUgY3Vyc29yJ3Mg
+bGFzdCBwb3NpdGlvbiBzdGlsbAo+Pj4+IHNob3dzIHRoZSB0ZXN0IHBhdHRlcm4gd2hpbGUgdGhl
+IGJhY2tncm91bmQgaXMgc2xpY2VkLgo+Pj4+Cj4+Pj4gVGhpcyB0ZXN0aW5nIHdhcyBhbGwgY29u
+ZHVjdGVkIHdpdGggcGFja2FnZXMgZnJvbSB0aGUgQXJjaCBMaW51eCBkaXN0cmlidXRpb24gKGJ1
+dCBmb3IgbW9kZXRlc3QpLgo+Pj4+Cj4+Pj4gUXVlc3Rpb25zOgo+Pj4+Cj4+Pj4gMSkgSXMgdGhp
+cyBqdW1weSBhbmQgZmxpY2tlcnkgYmVoYXZpb3IgZXhwZWN0ZWQgb3Igc2hvdWxkIHRoZSBjdXJz
+b3IgbW92ZSBzbW9vdGhseT8KPj4+Cj4+PiBHb29kIHF1ZXN0aW9uLiBJdCdzIGRlZmluaXRlbHkg
+anVtcHkvZmxpY2tlcnkgZm9yIG1lIHRvby4gSSBoYXZlbid0Cj4+PiBsb29rZWQgYXQgd2h5LCBi
+dXQgSSB3b3VsZG4ndCB3b3JyeSBhYm91dCBpdC4gSSBzdXNwZWN0IGl0IGhhcyB0byBkbwo+Pj4g
+d2l0aCB0aGUgbWVjaGFuaWNzIG9mIGhvdyBpdCBjYXVzZXMgdGhlIGN1cnNvciB0byBiZSBtb3Zl
+ZC4KPj4+Cj4+Pj4KPj4+PiAyKSBXaXRoIHVubW9kaWZpZWQgbW9kZXRlc3QsIHdoYXQgc2hvdWxk
+IHRoZSBjdXJzb3IgbG9vayBsaWtlPyBXaXRob3V0IGZ1cnRoZXIgaW5zcGVjdGlvbgo+Pj4+ICAg
+ICAgIG9mIHRoZSBjb2RlIEkgc3VzcGVjdCB0aGF0IHRoZSBjaGFuZ2UgZnJvbSBVVElMX1BBVFRF
+Uk5fUExBSU4gdG8gVVRJTF9QQVRURVJOX1NNUFRFCj4+Pj4gICAgICAgY2hhbmdlZCB0aGUgY3Vy
+c29yJ3MgYXBwZWFyYW5jZS4KPj4+Cj4+PiBUaGUgUExBSU4gcGF0dGVybiBpcyBqdXN0IGdyYXks
+IHdoaWNoIGlzbid0IG5lY2Vzc2FyaWx5IGEgZ3JlYXQgdGVzdAo+Pj4gdG8gc2VlIHZpc3VhbCBj
+b3JydXB0aW9uLgo+Pj4KPj4+Pgo+Pj4+IDQpIEhvdyBsb25nIGlzIG1vZGV0ZXN0IGV4cGVjdGVk
+IHRvIHJ1bj8gT24gdGhlIGZpcnN0IHJ1biBJIGxldCBpdCB0ZXN0IGZvciBvdmVyIDEwbWluCj4+
+Pj4gICAgICAgYmVmb3JlIGRlY2lkaW5nIHRvIGtpbGwgaXQuCj4+Pgo+Pj4gVW50aWwgeW91IGhp
+dCBlbnRlciAob3IgZXNjYXBlIG9yIG1heWJlIGFueSBrZXksIEkgZm9yZ2V0KS4KPj4+Cj4+Pj4K
+Pj4+PiA1KSBJcyBtb2RldGVzdCBleHBlY3RlZCB0byByZXNldCB0aGUgZGlzcGxheSB0byB0aGUg
+c3RhdGUgaXQgd2FzIGJlZm9yZT8gV2h5IGRvZXNuJ3QgaXQKPj4+PiAgICAgICBkbyB0aGF0IHdo
+ZW4gYmVpbmcga2lsbGVkPwo+Pj4KPj4+IE5vLiBZb3UgY2FuIHN3aXRjaCB2dCdzIGJhY2sgYW5k
+IGZvcnRoIHRvIHJlc3RvcmUuIEl0J3MganVzdCBhIHRlc3QKPj4+IGFwcGxpY2F0aW9uLiBJdCdz
+IHVuZm9ydHVuYXRlbHkgbm90IGFuIGVudGlyZWx5IHRyaXZpYWwgdGhpbmcgdG8gZG8uCj4+Pgo+
+Pj4+Cj4+Pj4gNikgV2hlcmUgZG8geW91IGV4cGVjdCB0aGlzIGJ1ZyB0byBjb21lIGZyb20/IEtl
+cm5lbCBub3V2ZWF1IGRyaXZlciwgbW9kZXNldHRpbmcgZGR4LAo+Pj4+ICAgICAgIG5vdXZlYXUg
+ZGR4Pwo+Pj4KPj4+IG1vZGV0ZXN0IGludGVyYWN0cyB3aXRoIHRoZSBrZXJuZWwgZGlyZWN0bHku
+IFRoZSBidWcgaXMgbW9zdCBsaWtlbHkgaW4KPj4+IHRoZSBoYXJkd2FyZSwgYW5kIHdlIHNob3Vs
+ZCBqdXN0IG5vdCB1c2UgdGhlIDI1NngyNTYgc2l6ZSBldmVuIHRob3VnaAo+Pj4gYWxsZWdlZGx5
+IHRoZSBodyBzdXBwb3J0cyBpdC4gQnV0IHBlcmhhcHMgdGhlIGtlcm5lbCBzY3Jld3Mgc29tZXRo
+aW5nCj4+PiB1cC4KPj4+Cj4+Pj4KPj4+PiA3KSBBbnkgcHJvcG9zYWwgd2hhdCBrZXJuZWwgdG8g
+dGVzdCBuZXh0Pwo+Pj4KPj4+IElmIHlvdSBjb3VsZCB0ZXN0IG1vZGV0ZXN0IHdpdGggMjU2eDI1
+NiBjdXJzb3Igb24gYSBwcmUtNS45IGtlcm5lbCBhbmQKPj4+IGVuc3VyZSB0aGF0IHlvdSBzZWUg
+dGhlIHNhbWUgY29ycnVwdGlvbiBpbiB0aGUgY3Vyc29yIGltYWdlLCB0aGF0J2QKPj4+IGNvbmZp
+cm0gdGhhdCB3ZSBkaWRuJ3QganVzdCBzY3JldyBzb21ldGhpbmcgdXAgaW4gdGhlIG1hY3JvIHJl
+d29yawo+Pj4gd2hpY2ggbGFuZGVkIGluIDUuOSwgdnMgYSBodyBpc3N1ZS4KPj4KPj4KPj4gT2ss
+IHR3byBtb3JlIGtlcm5lbHMgdGVzdGVkLgo+Pgo+PiA1LjEwLjE5Ogo+PiAqIG1vZGV0ZXN0IHNh
+bWUgYXMgNS4xMS4yCj4+ICogbW91c2UgcG9pbnRlciBpbiBYIHNlc3Npb24gaXMgb2sgKGJvdGgg
+bW9kZXNldHRpbmcgZGR4IGFuZCBub3V2ZWF1IGRkeCkKPj4gKiAoTWF0ZSBpc3N1ZSBkb2VzIGFw
+cGVhciB3aXRoIG5vdXZlYXUgZGR4IGJ1dCBub3Qgd2l0aCBtb2Rlc2V0dGluZyBkZHgpCj4+Cj4+
+IDUuNC4xMDE6Cj4+ICogbW9kZXRlc3QgY29ubmVjdG9yIElEIGNoYW5nZWQgZnJvbSA4NSB0byA2
+OQo+PiAqIG90aGVyIHRoYW4gdGhhdCBzYW1lIGFzIDUuMTEuMgo+PiAqIG1vdXNlIHBvaW50ZXIg
+aW4gWCBzZXNzaW9uIGlzIG9rIChib3RoIG1vZGVzZXR0aW5nIGRkeCBhbmQgbm91dmVhdSBkZHgp
+Cj4+ICogKE1hdGUgaXNzdWUgZG9lcyBhcHBlYXIgd2l0aCBub3V2ZWF1IGRkeCBidXQgbm90IHdp
+dGggbW9kZXNldHRpbmcgZGR4KQo+Pgo+Pgo+PiBTdW1tYXJ5Ogo+PiAgICAgICAgICAgICAgICAg
+ICAgIDUuNC4xMDEgIHwgNS4xMC4xOSAgfCA1LjExLjIKPj4gbW9kZXRlc3QtNjQgICAgICAgc2Vl
+bXMgb2sgfCBzZWVtcyBvayB8IHNlZW1zIG9rCj4+IG1vZGV0ZXN0LTEyOCAgICAgIHNlZW1zIG9r
+IHwgc2VlbXMgb2sgfCBzZWVtcyBvawo+PiBtb2RldGVzdC0yNTYgICAgICBzbGljZWQgICB8IHNs
+aWNlZCAgIHwgc2xpY2VkCj4+IFggbW91c2UgcG9pbnRlciAgIG9rICAgICAgIHwgb2sgICAgICAg
+fCBzbGljZWQKPj4gKG1vZGVzZXR0aW5nIGRkeCkKPj4gWCBtb3VzZSBwb2ludGVyICAgb2sgICAg
+ICAgfCBvayAgICAgICB8IG9rCj4+IChub3V2ZWF1IGRkeCkKCk9uZSBtb3JlIGRhdGEgcG9pbnQ6
+CkxpbnVzJyB2YW5pbGxhIGtlcm5lbCBjb21taXQgNTY5NWU1MTYxOTc0NWQ0ZmUzZWMyNTA2YTJm
+MGNkOTgyYzVlMjdhNCAoU2F0IEZlYiAyNyAwODoyOTowMiAyMDIxIC0wODAwKSBzaG93cyB0aGUg
+c2FtZSAKYmVoYXZpb3IuCgpJIGNvdWxkIHRyeSB0byBiaXNlY3TigKYKClJlZ2FyZHMsCgoJVXdl
+CgoKCj4+Cj4+IFJlYWxseSBzdHJhbmdlIHRoYXQgdGhlIGlzc3VlIG9ubHkgYXBwZWFycyBvbiA1
+LjExIG9uIG15IGhhcmR3YXJlLgo+Pgo+Pgo+Pj4KPj4+IFByZXN1bWFibHkgdGhlIGNvcnJ1cHRp
+b24geW91IHJlZmVyIHRvIGluIHRoZSBjdXJzb3IgaW1hZ2UgYXQgMjU2eDI1Ngo+Pj4gaXMgc2lt
+aWxhciB0byB3aGF0IHlvdSBzZWUgd2l0aCBYb3JnICsgbW9kZXNldHRpbmc/Cj4+Cj4+IEluIFgg
+dGhlIG1vdXNlIHBvaW50ZXIgaXMgc2xpY2VkIGFuZCBzb21laG93IHdyYXBzIGluIHZlcnRpY2Fs
+IGRpcmVjdGlvbiBzbyB0aGF0Cj4+IHRoZSB0aXAgb2YgdGhlIGFycm93IGlzIGFib3V0IDEvMyBm
+cm9tIHRoZSB0b3AuCj4+Cj4+IFRoZSBzY2xpY2luZyBpbiB0aGUgbW9kZXRlc3QgY3Vyc29yIGFw
+cGVhcnMgaW4gdGhlIGFyZWEgZnJvbSBhYm91dCAxLzIgdG8gMy80IGZyb20KPj4gdGhlIHRvcCBv
+ZiB0aGUgY3Vyc29yLgo+IAo+IEl0J3MgcHJvYmFibHkgdGhlIHNhbWUgY29ycnVwdGlvbiwganVz
+dCBsb29rcyBzbGlnaHRseSBkaWZmZXJlbnQgYmFzZWQKPiBvbiB0aGUgaW1hZ2UuIEtlcm5lbCA1
+LjExIG1hZGUgMjU2eDI1NiBjdXJzb3JzIHRoZSBkZWZhdWx0ICh3aGljaCBpcwo+IHdoYXQgeGY4
+Ni12aWRlby1tb2Rlc2V0dGluZyB1c2VzIHRvIGRldGVybWluZSBjdXJzb3Igc2l6ZSksIGhlbmNl
+IHRoZQo+IGNoYW5nZSBpbiBiZWhhdmlvci4KPiAKPiBUaGFua3MgYWdhaW4gZm9yIGNvbmZpcm1p
+bmcuCj4gCj4gU28gaXQgc291bmRzIGxpa2UgYWxsIEtlcGxlciBoYXJkd2FyZSBoYXMgaXNzdWVz
+IHdpdGggMjU2eDI1Ni4gSSd2ZQo+IHRlc3RlZCBvbiBncDEwOCBhbmQgZGlkIG5vdCBvYnNlcnZl
+IGFueSBvYnZpb3VzIGlzc3Vlcy4gUHJvYmFibHkgZ29vZAo+IHRvIGZpbmQgYSBHTTEwNyBhbmQg
+R00yMDAgdG8gdGVzdCBvbiBhcyB3ZWxsLgo+IAo+IENoZWVycywKPiAKPiAgICAtaWxpYQo+IApf
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpOb3V2ZWF1IG1h
+aWxpbmcgbGlzdApOb3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZy
+ZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL25vdXZlYXUK
