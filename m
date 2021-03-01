@@ -1,86 +1,82 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 959933283B5
-	for <lists+nouveau@lfdr.de>; Mon,  1 Mar 2021 17:26:07 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0C0773288EC
+	for <lists+nouveau@lfdr.de>; Mon,  1 Mar 2021 18:49:33 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 00A746E835;
-	Mon,  1 Mar 2021 16:26:06 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id AACF96E876;
+	Mon,  1 Mar 2021 17:49:26 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 901 seconds by postgrey-1.36 at gabe;
- Mon, 01 Mar 2021 16:26:05 UTC
-Received: from hqnvemgate26.nvidia.com (hqnvemgate26.nvidia.com
- [216.228.121.65])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 29D476E835
- for <nouveau@lists.freedesktop.org>; Mon,  1 Mar 2021 16:26:05 +0000 (UTC)
+Received: from hqnvemgate25.nvidia.com (hqnvemgate25.nvidia.com
+ [216.228.121.64])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6358D6E85A;
+ Mon,  1 Mar 2021 17:49:25 +0000 (UTC)
 Received: from hqmail.nvidia.com (Not Verified[216.228.121.13]) by
- hqnvemgate26.nvidia.com (using TLS: TLSv1.2, AES256-SHA)
- id <B603d12160002>; Mon, 01 Mar 2021 08:11:02 -0800
-Received: from HKMAIL102.nvidia.com (10.18.16.11) by HQMAIL105.nvidia.com
+ hqnvemgate25.nvidia.com (using TLS: TLSv1.2, AES256-SHA)
+ id <B603d29230000>; Mon, 01 Mar 2021 09:49:23 -0800
+Received: from HKMAIL103.nvidia.com (10.18.16.12) by HQMAIL105.nvidia.com
  (172.20.187.12) with Microsoft SMTP Server (TLS) id 15.0.1497.2; Mon, 1 Mar
- 2021 16:10:59 +0000
-Received: from HKMAIL101.nvidia.com (10.18.16.10) by HKMAIL102.nvidia.com
- (10.18.16.11) with Microsoft SMTP Server (TLS) id 15.0.1497.2; Mon, 1 Mar
- 2021 16:10:54 +0000
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com (104.47.58.106)
- by HKMAIL101.nvidia.com (10.18.16.10) with Microsoft SMTP Server (TLS) id
- 15.0.1497.2 via Frontend Transport; Mon, 1 Mar 2021 16:10:53 +0000
+ 2021 17:49:20 +0000
+Received: from HKMAIL103.nvidia.com (10.18.16.12) by HKMAIL103.nvidia.com
+ (10.18.16.12) with Microsoft SMTP Server (TLS) id 15.0.1497.2; Mon, 1 Mar
+ 2021 17:46:46 +0000
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com (104.47.58.108)
+ by HKMAIL103.nvidia.com (10.18.16.12) with Microsoft SMTP Server (TLS) id
+ 15.0.1497.2 via Frontend Transport; Mon, 1 Mar 2021 17:46:46 +0000
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=iIvfkYIldJFlB2bF9iVlVjYBgyx3WuWo60Tnp/Kz5ulnafHnu521giNPp005sUWEs31Nn3OSJBoAVz0R6yMBicmj7UvaVacJP9KLqNXCTcuwdSCsCKnNzqc58AJyWB6u62gaIwunOU34J+69ttCrwdF4O9bngupVyBlF8hBMwzZp0unZNZuYMCOJIZ51ZM8TAPIDJPYskgD1YofW5YNN1Dpc2D1FXgcRdshOT80IlpayuhJ5oFdj3pRZ6027DhpHiAvUUrjRDk8hgla6w2dyPdYGL4lTg9YSM0guw8qqq57bl7bQUYUtIknPswdJ8sBAS1CUPcjIviRWcPjAIrcx2w==
+ b=EFVbnwnrw8qnly/zwDwfbu+B94qDVwSg3iuERtvKOGPh4Y22OMfahxfI9Ie74AvbWF1cwwWy/2Cj7tOcC0VaQUp7KB9Vd6mbI8x+LC2TGzspQMPlZ+XdlDeUyiJk69DJnftqYvmclYhrBGled0gZKsftrOTLi/fiO5N3S6IKPxu73MJ3pfZHJiDvCXcoF6R+orT/fEScVedMvxudcNLDQg2shcxfxPre+ViaV7YoEWhUd7t7Kuu7Kw/k7zGCy8vEVgjOT3fMUrvq1ibbZdxMGO//DhFbC85uCnK+B+aUxeunzv8M7PifAiLwQoKfjXUx4m0iMIahWfewzYK23SffMg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=GVgJyOzesM6AuTpgAxp4tGR/vGa6dnCRQWH6QFebQWQ=;
- b=SUUiJQhWku40N/hWDe5iTtnaZcFF5XsrcKzdmpW+OeBiIuzlEx6UKW9ztbOkFKIEjIiTld023V+ANc2zMzF5lheF+ECT6r+IrLrfZFe047jMBmnz/mJNxgim5TeIwjwC3oStQQ6SFUIctBpzkO6aVhrVJXWbgPWpUb6/6QJFkyot4hgndVGa+PmCaXFLxsoKxOHjohS/g6ia7UWPPwe2pse/gfFNloQPpA0vHywrNho/rPDIxF4vt/mwJGhRO1lKUMBghLDqzBl0rkoIAxwvYI+0Z0oo4nVMyhpFIv9ww2XUlgDWhGS1RXZGTBCFarBZdpMEwDjrHQbyKS6Yu4cGWQ==
+ bh=Y8pdUlkTt7laEoofqh+gCwYtoAFeW/XvvLozoOUJdds=;
+ b=IVoNxQsXijD7eGHGmSHm2UfKhgfr11UZ35gle62wNb/GyVSL7V4Sj9+Dl3t/RQZ2Ux0vmxjriE0Z9W1JmpU2TK/7R6zy1kV0fVtotjmRcYFhEM8ChXKQpoYrNFImoEYAQo10kOW/ZZvJH75HYXZ3JRO+hcDtmt8UlA6fazqpR0dDgqsnzGDLm4rHrm+AeAF1bMXXGiW97ydj17jLuWBRuaoZ4ay/xSO34x5zJehXPjRxXe/pySQvytUsdW++LPgAF332jW8oT954iJuM3ObEMC7c+LGUs61X3Y50emCCprRy7cpeUrXk3kIC6HJ/11Hk2hxmTh5nF6cJhTL5X+1KrA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
  dkim=pass header.d=nvidia.com; arc=none
 Received: from DM6PR12MB3834.namprd12.prod.outlook.com (2603:10b6:5:14a::12)
- by DM6PR12MB3739.namprd12.prod.outlook.com (2603:10b6:5:1c4::21) with
+ by DM6PR12MB3833.namprd12.prod.outlook.com (2603:10b6:5:1cf::18) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3890.22; Mon, 1 Mar
- 2021 16:10:51 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3890.19; Mon, 1 Mar
+ 2021 17:46:43 +0000
 Received: from DM6PR12MB3834.namprd12.prod.outlook.com
  ([fe80::1c62:7fa3:617b:ab87]) by DM6PR12MB3834.namprd12.prod.outlook.com
  ([fe80::1c62:7fa3:617b:ab87%6]) with mapi id 15.20.3890.026; Mon, 1 Mar 2021
- 16:10:51 +0000
-Date: Mon, 1 Mar 2021 12:10:49 -0400
+ 17:46:43 +0000
+Date: Mon, 1 Mar 2021 13:46:42 -0400
 From: Jason Gunthorpe <jgg@nvidia.com>
 To: Alistair Popple <apopple@nvidia.com>
-Message-ID: <20210301161049.GJ4247@nvidia.com>
+Message-ID: <20210301174642.GP4247@nvidia.com>
 References: <20210226071832.31547-1-apopple@nvidia.com>
- <20210226071832.31547-4-apopple@nvidia.com>
+ <20210226071832.31547-2-apopple@nvidia.com>
 Content-Disposition: inline
-In-Reply-To: <20210226071832.31547-4-apopple@nvidia.com>
-X-ClientProxiedBy: BL1PR13CA0158.namprd13.prod.outlook.com
- (2603:10b6:208:2bd::13) To DM6PR12MB3834.namprd12.prod.outlook.com
+In-Reply-To: <20210226071832.31547-2-apopple@nvidia.com>
+X-ClientProxiedBy: BL0PR0102CA0061.prod.exchangelabs.com
+ (2603:10b6:208:25::38) To DM6PR12MB3834.namprd12.prod.outlook.com
  (2603:10b6:5:14a::12)
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 Received: from mlx.ziepe.ca (142.162.115.133) by
- BL1PR13CA0158.namprd13.prod.outlook.com (2603:10b6:208:2bd::13) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3912.9 via Frontend
- Transport; Mon, 1 Mar 2021 16:10:50 +0000
+ BL0PR0102CA0061.prod.exchangelabs.com (2603:10b6:208:25::38) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.3890.19 via Frontend Transport; Mon, 1 Mar 2021 17:46:43 +0000
 Received: from jgg by mlx with local (Exim 4.94)	(envelope-from
- <jgg@nvidia.com>)	id 1lGl8D-0032CY-C1; Mon, 01 Mar 2021 12:10:49 -0400
+ <jgg@nvidia.com>)	id 1lGmd0-0033mo-3R; Mon, 01 Mar 2021 13:46:42 -0400
 X-Header: ProcessedBy-CMR-outbound
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
- t=1614615062; bh=GVgJyOzesM6AuTpgAxp4tGR/vGa6dnCRQWH6QFebQWQ=;
+ t=1614620963; bh=Y8pdUlkTt7laEoofqh+gCwYtoAFeW/XvvLozoOUJdds=;
  h=ARC-Seal:ARC-Message-Signature:ARC-Authentication-Results:Date:
  From:To:CC:Subject:Message-ID:References:Content-Type:
  Content-Disposition:In-Reply-To:X-ClientProxiedBy:MIME-Version:
  X-MS-Exchange-MessageSentRepresentingType:X-Header;
- b=YS4YDlR5gI45XNcgZrRPC4haxzCo+qdJEB3GKWryFlod8PfutFipT8HmRj7hlcN81
- 3b8f4faXlmGhZoQEd7yUvTvQe11b6eKb25dZB67C1C+iJGWvZQGXXh1Tb3ByW0nvnM
- 384GgTA54dt7POC40CS7Eo3B6Afw21aEafWsVruiJH+x95LbbGy/OBq5fJ+TFR6988
- ikBUDL1yqe3Jz5SkLO3woY0mStNDl7/cMsVjR4O3Oq1sGiB8DK3z1YR/ESs9p1PEkF
- +n2vq8qK83YXOwdsaIpS6Ho8qk2hP12/Keyixo/8MZPznJvZDgXi95Tg4nm00oc/+q
- aP2ncZfW9MLMw==
-Subject: Re: [Nouveau] [PATCH v3 3/8] mm/rmap: Split try_to_munlock from
- try_to_unmap
+ b=WQek7+9WJID/D6OIMheZEoOPDcWZGUB5ZPAr6KaS7u8L9vDATkZMXw5QBb4cV4wJ5
+ i1Fs1mBiT0/wKq7K+3SJ3e+x2Oj353Rh9acmIyg8whhpOPl2UiyiXKrZ0ppddJsCwd
+ wtW2k7cZy9GEYxh4c0wKaFoJ0qfsgg3XRYNzjhRQjSLYd3jvDbgL9A2+TdgShRCzNk
+ JLaAA6z/HVfn1lJz2LdyJNRTycw7yntrOgdwqJIFD3An5xh9AEO8heby/yOZE4OcGw
+ AmTK9kotlxGE41E7tqbBe9EM4esvk3ACNAyFCP5MbbpEs1CHImbQ2EIOHj60JN2c1h
+ On9fWJPWy2Z5A==
+Subject: Re: [Nouveau] [PATCH v3 1/8] mm: Remove special swap entry functions
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -101,90 +97,45 @@ Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, Feb 26, 2021 at 06:18:27PM +1100, Alistair Popple wrote:
-> The behaviour of try_to_unmap_one() is difficult to follow because it
-> performs different operations based on a fairly large set of flags used
-> in different combinations.
-> 
-> TTU_MUNLOCK is one such flag. However it is exclusively used by
-> try_to_munlock() which specifies no other flags. Therefore rather than
-> overload try_to_unmap_one() with unrelated behaviour split this out into
-> it's own function and remove the flag.
+On Fri, Feb 26, 2021 at 06:18:25PM +1100, Alistair Popple wrote:
+> Remove the migration and device private entry_to_page() and
+> entry_to_pfn() inline functions and instead open code them directly.
+> This results in shorter code which is easier to understand.
 > 
 > Signed-off-by: Alistair Popple <apopple@nvidia.com>
-> 
-> 
-> Given the comments on not needing to hold mmap_lock it was not 100% clear
-> to me if it is safe to check vma->vma_flags & VM_LOCKED and if re-checking
-> under the ptl was significant. I left the extra check in case it was, but
-> it seems one of the checks is redunant as either the first check is racey
-> or the second check is unneccsary.
+> ---
+>  arch/s390/mm/pgtable.c  |  2 +-
+>  fs/proc/task_mmu.c      | 23 +++++++------------
+>  include/linux/swap.h    |  4 ++--
+>  include/linux/swapops.h | 51 ++++-------------------------------------
+>  mm/hmm.c                |  5 ++--
+>  mm/memcontrol.c         |  2 +-
+>  mm/memory.c             | 10 ++++----
+>  mm/migrate.c            |  6 ++---
+>  mm/page_vma_mapped.c    |  6 ++---
+>  9 files changed, 30 insertions(+), 79 deletions(-)
 
-The rmap doesn't hold the mmap_lock so I think both of these cases are
-racey.
+I wish you could come up with a more descriptive word that special
+here
 
-eg 
+What I understand is this is true when the swap_offset is a pfn?
 
-apply_vma_lock_flags()
+> -static inline struct page *migration_entry_to_page(swp_entry_t entry)
+> -{
+> -	struct page *p = pfn_to_page(swp_offset(entry));
+> -	/*
+> -	 * Any use of migration entries may only occur while the
+> -	 * corresponding page is locked
+> -	 */
+> -	BUG_ON(!PageLocked(compound_head(p)));
+> -	return p;
 
-	vma = find_vma(current->mm, start);
-	if (!vma || vma->vm_start > start)
-		return -ENOMEM;
+And this constraint has been completely lost?
 
-	prev = vma->vm_prev;
-	if (start > vma->vm_start)
-		prev = vma;
+A comment in front of the is_special_entry explaining all the rule
+would help alot
 
-	for (nstart = start ; ; ) {
-		vm_flags_t newflags = vma->vm_flags & VM_LOCKED_CLEAR_MASK;
-
-		newflags |= flags;
- [...]
-mlock_fixup()
-	/*
-	 * vm_flags is protected by the mmap_lock held in write mode.
-	 * It's okay if try_to_unmap_one unmaps a page just after we
-	 * set VM_LOCKED, populate_vma_page_range will bring it back.
-	 */
-
-	if (lock)
-		vma->vm_flags = newflags;
-	else
-               	vma->vm_flags &= VM_LOCKED_CLEAR_MASK;
-
-Which is only done under the mmap_sem
-
-> +static bool try_to_munlock_one(struct page *page, struct vm_area_struct *vma,
-> +		     unsigned long address, void *arg)
-> +{
-> +	struct page_vma_mapped_walk pvmw = {
-> +		.page = page,
-> +		.vma = vma,
-> +		.address = address,
-> +	};
-> +	bool ret = true;
-> +
-> +	/* munlock has nothing to gain from examining un-locked vmas */
-> +	if (!(vma->vm_flags & VM_LOCKED))
-> +		return true;
-
-The mmap_sem can't be obtained in the rmap walkers due to lock
-ordering, the various rmap locks are nested under the mmap_sem
-
-So, when reading data that is not locked it should be written as:
-
-   READ_ONCE(vma->vm_flags) & VM_LOCKED
-
-> +	while (page_vma_mapped_walk(&pvmw)) {
-> +		/*
-> +		 * If the page is mlock()d, we cannot swap it out.
-> +		 * If it's recently referenced (perhaps page_referenced
-> +		 * skipped over this mm) then we should reactivate it.
-> +		 */
-> +		if (vma->vm_flags & VM_LOCKED) {
-
-And since we write the data without holding the PTLs this looks
-pointless, unless there is some other VM_LOCKED manipulation
+Transformation looks fine otherwise
 
 Jason
 _______________________________________________
