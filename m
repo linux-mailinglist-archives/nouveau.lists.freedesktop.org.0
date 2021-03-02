@@ -2,46 +2,46 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 96D5D329560
-	for <lists+nouveau@lfdr.de>; Tue,  2 Mar 2021 01:21:45 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E60D6329705
+	for <lists+nouveau@lfdr.de>; Tue,  2 Mar 2021 09:53:01 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8B0DC6E0CE;
-	Tue,  2 Mar 2021 00:21:42 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4892D6E8D4;
+	Tue,  2 Mar 2021 08:53:00 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from hqnvemgate26.nvidia.com (hqnvemgate26.nvidia.com
- [216.228.121.65])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6BCE06E0CC;
- Tue,  2 Mar 2021 00:21:41 +0000 (UTC)
+Received: from hqnvemgate24.nvidia.com (hqnvemgate24.nvidia.com
+ [216.228.121.143])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0BFDD6E8D4;
+ Tue,  2 Mar 2021 08:52:59 +0000 (UTC)
 Received: from hqmail.nvidia.com (Not Verified[216.228.121.13]) by
- hqnvemgate26.nvidia.com (using TLS: TLSv1.2, AES256-SHA)
- id <B603d85150000>; Mon, 01 Mar 2021 16:21:41 -0800
+ hqnvemgate24.nvidia.com (using TLS: TLSv1.2, AES256-SHA)
+ id <B603dfcea0002>; Tue, 02 Mar 2021 00:52:58 -0800
 Received: from nvdebian.localnet (172.20.145.6) by HQMAIL107.nvidia.com
  (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1497.2; Tue, 2 Mar
- 2021 00:21:37 +0000
+ 2021 08:52:55 +0000
 From: Alistair Popple <apopple@nvidia.com>
-To: Jason Gunthorpe <jgg@nvidia.com>
-Date: Tue, 2 Mar 2021 11:21:35 +1100
-Message-ID: <3156280.dJpzq75PnV@nvdebian>
-In-Reply-To: <20210301174642.GP4247@nvidia.com>
+To: Christoph Hellwig <hch@infradead.org>
+Date: Tue, 2 Mar 2021 19:52:53 +1100
+Message-ID: <2110609.1zlQqR5hOE@nvdebian>
+In-Reply-To: <20210226155909.GA2907711@infradead.org>
 References: <20210226071832.31547-1-apopple@nvidia.com>
  <20210226071832.31547-2-apopple@nvidia.com>
- <20210301174642.GP4247@nvidia.com>
+ <20210226155909.GA2907711@infradead.org>
 MIME-Version: 1.0
 X-Originating-IP: [172.20.145.6]
 X-ClientProxiedBy: HQMAIL111.nvidia.com (172.20.187.18) To
  HQMAIL107.nvidia.com (172.20.187.13)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
- t=1614644501; bh=azDUrxm78xZYK+HMnHGyx9Cls7mv6No8+tEzyjhqkY4=;
+ t=1614675178; bh=Q3KJiry9KyGM4bq+yenpeuhX/mI9emX6OFn6eNSXghg=;
  h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version:Content-Transfer-Encoding:Content-Type:
  X-Originating-IP:X-ClientProxiedBy;
- b=OWpxffKeP4tRIYOnIzWmKU2ko4OneFNOwVj+FyTqa4wUuAyUq/G035xSN96rL3s4U
- CA2Le5hOQkxj09JDqjwtL+dcVozOjVJOqsAP/77YPxoAGDgKoCS+uC44nuPIHShHJu
- AQcoFQv2I5HrVxcpLUdaEYX96qs+Fbn+H4WH6IiNhxMuJse6m0q6LImPEePfGXcqS3
- y8rWRlSZ6kxZv7XVJ05BMWPXBFERIbAwCPh/cbO3qmpQiPSlkeCWEOdT2cGGNX3CKM
- xj85TG9o7jkYYmeYx1sJ/KOkEFDUPRj2HB/Euue8YPgbHDP8xnwpiiRC88gPjPdE07
- Dv/DTQIp44Jsg==
+ b=dsu+1waYJQ7mqyv3AqpWc1eGn2uJdvbYr5/iNbgdcM0TKiIQTQh8JHHCNijiQjUUf
+ EJP+ja4ILdram33pqB4lCLWhSVsECM/8l5SOVdZXTtYrVTlGcWZgCDPjJ2YzG4pYXI
+ STyeVXGtNaS8EV2CYHHsTdnVdS2Dol2WMH8fKy1PJoaEhBx8SRB9cfUPxg/9cjK9cK
+ kf6s5gY/VIse5I8b7CBhYBQiKFQIuYpFBSPKt+fxSyPlTCLXtg5uUddehOmZFX9Ebo
+ LXja9zY84Af/ktvtHgmQeel83G4QfOfL/kBuBfZ/d1ZX5GHIBGhMFETZtVOCJlT2Bd
+ qxtZaFFgBfb1A==
 Subject: Re: [Nouveau] [PATCH v3 1/8] mm: Remove special swap entry functions
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -54,54 +54,154 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: rcampbell@nvidia.com, linux-doc@vger.kernel.org,
+Cc: rcampbell@nvidia.com, daniel@ffwll.ch, linux-doc@vger.kernel.org,
  nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, hch@infradead.org, linux-mm@kvack.org,
- bskeggs@redhat.com, daniel@ffwll.ch, akpm@linux-foundation.org
+ dri-devel@lists.freedesktop.org, linux-mm@kvack.org, bskeggs@redhat.com,
+ jgg@nvidia.com, akpm@linux-foundation.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tuesday, 2 March 2021 4:46:42 AM AEDT Jason Gunthorpe wrote:
+On Saturday, 27 February 2021 2:59:09 AM AEDT Christoph Hellwig wrote:
+> > -		struct page *page = migration_entry_to_page(entry);
+> > +		struct page *page = pfn_to_page(swp_offset(entry));
 > 
-> I wish you could come up with a more descriptive word that special
-> here
+> I wonder if keeping a single special_entry_to_page() helper would still
+> me a useful.  But I'm not entirely sure.  There are also two more open
+> coded copies of this in the THP migration code.
+
+I think it might be if only to clearly document where these entries are used. 
+Will add it for the next version to see what it looks like.
+
+> > -#define free_swap_and_cache(e) ({(is_migration_entry(e) || 
+is_device_private_entry(e));})
+> > -#define swapcache_prepare(e) ({(is_migration_entry(e) || 
+is_device_private_entry(e));})
+> > +#define free_swap_and_cache(e) is_special_entry(e)
+> > +#define swapcache_prepare(e) is_special_entry(e)
 > 
-> What I understand is this is true when the swap_offset is a pfn?
-
-Correct, and that points to a better name. Maybe is_pfn_swap_entry()? In which 
-case adding a helper as Christoph suggested makes some more sense. Eg: 
-pfn_swap_entry_to_page()
-
-> > -static inline struct page *migration_entry_to_page(swp_entry_t entry)
-> > -{
-> > -	struct page *p = pfn_to_page(swp_offset(entry));
-> > -	/*
-> > -	 * Any use of migration entries may only occur while the
-> > -	 * corresponding page is locked
-> > -	 */
-> > -	BUG_ON(!PageLocked(compound_head(p)));
-> > -	return p;
+> Staring at this I'm really, really confused at what this is doing.
 > 
-> And this constraint has been completely lost?
+> Looking a little closer these are the !CONFIG_SWAP stubs, but it could
+> probably use a comment or two.
 
-Yes, sorry I should have called that out. I didn't think loosing the check was 
-a big deal, but I can add some checks to some of the call sites which would 
-catch a page being incorrectly unlocked.
-
-> A comment in front of the is_special_entry explaining all the rule
-> would help alot
-
-Will add one.
-
-> Transformation looks fine otherwise
-
-Thanks.
+Will do, thanks.
 
  - Alistair
  
-> Jason
+> >  	} else if (is_migration_entry(entry)) {
+> > -		page = migration_entry_to_page(entry);
+> > +		page = pfn_to_page(swp_offset(entry));
+> >  
+> >  		rss[mm_counter(page)]++;
+> >  
+> > @@ -737,7 +737,7 @@ copy_nonpresent_pte(struct mm_struct *dst_mm, struct 
+mm_struct *src_mm,
+> >  			set_pte_at(src_mm, addr, src_pte, pte);
+> >  		}
+> >  	} else if (is_device_private_entry(entry)) {
+> > -		page = device_private_entry_to_page(entry);
+> > +		page = pfn_to_page(swp_offset(entry));
+> >  
+> >  		/*
+> >  		 * Update rss count even for unaddressable pages, as
+> > @@ -1274,7 +1274,7 @@ static unsigned long zap_pte_range(struct mmu_gather 
+*tlb,
+> >  
+> >  		entry = pte_to_swp_entry(ptent);
+> >  		if (is_device_private_entry(entry)) {
+> > -			struct page *page = device_private_entry_to_page(entry);
+> > +			struct page *page = pfn_to_page(swp_offset(entry));
+> >  
+> >  			if (unlikely(details && details->check_mapping)) {
+> >  				/*
+> > @@ -1303,7 +1303,7 @@ static unsigned long zap_pte_range(struct mmu_gather 
+*tlb,
+> >  		else if (is_migration_entry(entry)) {
+> >  			struct page *page;
+> >  
+> > -			page = migration_entry_to_page(entry);
+> > +			page = pfn_to_page(swp_offset(entry));
+> >  			rss[mm_counter(page)]--;
+> >  		}
+> >  		if (unlikely(!free_swap_and_cache(entry)))
+> > @@ -3271,7 +3271,7 @@ vm_fault_t do_swap_page(struct vm_fault *vmf)
+> >  			migration_entry_wait(vma->vm_mm, vmf->pmd,
+> >  					     vmf->address);
+> >  		} else if (is_device_private_entry(entry)) {
+> > -			vmf->page = device_private_entry_to_page(entry);
+> > +			vmf->page = pfn_to_page(swp_offset(entry));
+> >  			ret = vmf->page->pgmap->ops->migrate_to_ram(vmf);
+> >  		} else if (is_hwpoison_entry(entry)) {
+> >  			ret = VM_FAULT_HWPOISON;
+> > diff --git a/mm/migrate.c b/mm/migrate.c
+> > index 20ca887ea769..72adcc3d8f5b 100644
+> > --- a/mm/migrate.c
+> > +++ b/mm/migrate.c
+> > @@ -321,7 +321,7 @@ void __migration_entry_wait(struct mm_struct *mm, 
+pte_t *ptep,
+> >  	if (!is_migration_entry(entry))
+> >  		goto out;
+> >  
+> > -	page = migration_entry_to_page(entry);
+> > +	page = pfn_to_page(swp_offset(entry));
+> >  
+> >  	/*
+> >  	 * Once page cache replacement of page migration started, page_count
+> > @@ -361,7 +361,7 @@ void pmd_migration_entry_wait(struct mm_struct *mm, 
+pmd_t *pmd)
+> >  	ptl = pmd_lock(mm, pmd);
+> >  	if (!is_pmd_migration_entry(*pmd))
+> >  		goto unlock;
+> > -	page = migration_entry_to_page(pmd_to_swp_entry(*pmd));
+> > +	page = pfn_to_page(swp_offset(pmd_to_swp_entry(*pmd)));
+> >  	if (!get_page_unless_zero(page))
+> >  		goto unlock;
+> >  	spin_unlock(ptl);
+> > @@ -2437,7 +2437,7 @@ static int migrate_vma_collect_pmd(pmd_t *pmdp,
+> >  			if (!is_device_private_entry(entry))
+> >  				goto next;
+> >  
+> > -			page = device_private_entry_to_page(entry);
+> > +			page = pfn_to_page(swp_offset(entry));
+> >  			if (!(migrate->flags &
+> >  				MIGRATE_VMA_SELECT_DEVICE_PRIVATE) ||
+> >  			    page->pgmap->owner != migrate->pgmap_owner)
+> > diff --git a/mm/page_vma_mapped.c b/mm/page_vma_mapped.c
+> > index 86e3a3688d59..34230d08556a 100644
+> > --- a/mm/page_vma_mapped.c
+> > +++ b/mm/page_vma_mapped.c
+> > @@ -96,7 +96,7 @@ static bool check_pte(struct page_vma_mapped_walk *pvmw)
+> >  		if (!is_migration_entry(entry))
+> >  			return false;
+> >  
+> > -		pfn = migration_entry_to_pfn(entry);
+> > +		pfn = swp_offset(entry);
+> >  	} else if (is_swap_pte(*pvmw->pte)) {
+> >  		swp_entry_t entry;
+> >  
+> > @@ -105,7 +105,7 @@ static bool check_pte(struct page_vma_mapped_walk 
+*pvmw)
+> >  		if (!is_device_private_entry(entry))
+> >  			return false;
+> >  
+> > -		pfn = device_private_entry_to_pfn(entry);
+> > +		pfn = swp_offset(entry);
+> >  	} else {
+> >  		if (!pte_present(*pvmw->pte))
+> >  			return false;
+> > @@ -200,7 +200,7 @@ bool page_vma_mapped_walk(struct page_vma_mapped_walk 
+*pvmw)
+> >  				if (is_migration_entry(pmd_to_swp_entry(*pvmw->pmd))) {
+> >  					swp_entry_t entry = pmd_to_swp_entry(*pvmw->pmd);
+> >  
+> > -					if (migration_entry_to_page(entry) != page)
+> > +					if (pfn_to_page(swp_offset(entry)) != page)
+> >  						return not_found(pvmw);
+> >  					return true;
+> >  				}
+> ---end quoted text---
 > 
 
 
