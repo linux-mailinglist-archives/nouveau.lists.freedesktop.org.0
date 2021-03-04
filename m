@@ -1,50 +1,52 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0EA6932CA62
-	for <lists+nouveau@lfdr.de>; Thu,  4 Mar 2021 03:21:06 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7888032CB5B
+	for <lists+nouveau@lfdr.de>; Thu,  4 Mar 2021 05:27:32 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B4C3B6E3EC;
-	Thu,  4 Mar 2021 02:21:02 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 90CCD89C63;
+	Thu,  4 Mar 2021 04:27:25 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
- [IPv6:2a00:1450:4864:20::134])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0A54C6E3EC
- for <nouveau@lists.freedesktop.org>; Thu,  4 Mar 2021 02:21:00 +0000 (UTC)
-Received: by mail-lf1-x134.google.com with SMTP id m22so40571641lfg.5
- for <nouveau@lists.freedesktop.org>; Wed, 03 Mar 2021 18:20:59 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:from:date:message-id:subject:to;
- bh=LSSsMdcQpFxHaMW9H9FPG1FXpwnEAafTZIYBs3ck4P4=;
- b=LysQGRTiKO5DTWnrNgNPyRFfHItB5hoZ1B0POfR97Df3v/N50w5vB1IeMZ9raiUU3O
- qc/CIlA1KXNegWaoNKSU9C5+Se6/rDvyHrw4O5XTVyOrvYkL9RcS5NzjCXYswqOJNU0P
- /hh/vbu871lNtQF6QPpn/BjmlKRPHm7L1MNfvf9WmpjriTsumhaJMWav+W+NLLYK4RyU
- 8cUNcH4iEe0N8kcpoe4uXsQJDVG1c1s9OjAMCvd+01vLFvsNaeJkbx4e3EpiCO4kdGGu
- EQUZiqQ0RY7Zg2leQ2nXqMbrifOgoCQ7223H0npsbGCcQQIE28F2dnUzby/Age6cEelB
- YdKw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=LSSsMdcQpFxHaMW9H9FPG1FXpwnEAafTZIYBs3ck4P4=;
- b=iKoSXjasV7VKX9lSsjpEjRQMgNrFT49oOIeUQRygOJA7zBgJoguNH/VWXjlHDn7Hjq
- q/mu3MqI9oz+JGZyamCUpKsBs84NjnCQ/YWEQisrd2iR74q5IwIOKeyeNsGw35i82xqI
- w1KEzk9GNgJKz/QVeu7Ghxt0ZXhbUOFRg5+/SKxUv/aK7T5EnieRhg7RH1JZvlbx0PCo
- RbANFHYQ+ddHqsMQZAfiA9BIa6pMt0+QrMFnYvk4+IQ3Cm3vIhUvSqxGy70u6w8wfpuU
- eQzGxF8602A3+EqbebxADajzFudiP9ZgxxB/HDBw6S5r9Y0RpYg1m558iOe54nGGeT5b
- aIIg==
-X-Gm-Message-State: AOAM530KJZEL5f58R0ZquzxSuhfzmTwBuCOhnKKJEZSSZUBcoSB5mtxl
- Ds3pH/S7o+QxTQwfLeQy0dLbBTcNWbraCmw48Qesfn/+pIQ=
-X-Google-Smtp-Source: ABdhPJzNb/CYgHP7ZOobu2rueIMvtMCwWwjZLzMCGXo5pWBtZd2+DElXj9xpuD2RKuCjqzMM+jJ/Q5nvCXzMGULZ67M=
-X-Received: by 2002:ac2:5c0a:: with SMTP id r10mr892313lfp.47.1614824458349;
- Wed, 03 Mar 2021 18:20:58 -0800 (PST)
+Received: from hqnvemgate26.nvidia.com (hqnvemgate26.nvidia.com
+ [216.228.121.65])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2ED6A89B84;
+ Thu,  4 Mar 2021 04:27:24 +0000 (UTC)
+Received: from hqmail.nvidia.com (Not Verified[216.228.121.13]) by
+ hqnvemgate26.nvidia.com (using TLS: TLSv1.2, AES256-SHA)
+ id <B604061aa0002>; Wed, 03 Mar 2021 20:27:22 -0800
+Received: from DRHQMAIL107.nvidia.com (10.27.9.16) by HQMAIL105.nvidia.com
+ (172.20.187.12) with Microsoft SMTP Server (TLS) id 15.0.1497.2; Thu, 4 Mar
+ 2021 04:27:21 +0000
+Received: from nvdebian.localnet (172.20.145.6) by DRHQMAIL107.nvidia.com
+ (10.27.9.16) with Microsoft SMTP Server (TLS) id 15.0.1497.2; Thu, 4 Mar 2021
+ 04:27:18 +0000
+From: Alistair Popple <apopple@nvidia.com>
+To: Jason Gunthorpe <jgg@nvidia.com>
+Date: Thu, 4 Mar 2021 15:27:16 +1100
+Message-ID: <29906974.JcgKRUyaEZ@nvdebian>
+In-Reply-To: <20210301161049.GJ4247@nvidia.com>
+References: <20210226071832.31547-1-apopple@nvidia.com>
+ <20210226071832.31547-4-apopple@nvidia.com>
+ <20210301161049.GJ4247@nvidia.com>
 MIME-Version: 1.0
-From: o1bigtenor <o1bigtenor@gmail.com>
-Date: Wed, 3 Mar 2021 20:20:22 -0600
-Message-ID: <CAPpdf59bkxEQ9+iozLOc0o51w2h1e1jJhSROH-91YAEry3k8cw@mail.gmail.com>
-To: nouveau <nouveau@lists.freedesktop.org>
-Subject: [Nouveau] Request for information and/or assistance
+X-Originating-IP: [172.20.145.6]
+X-ClientProxiedBy: HQMAIL105.nvidia.com (172.20.187.12) To
+ DRHQMAIL107.nvidia.com (10.27.9.16)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
+ t=1614832042; bh=p4JDJbZednwqFrVYpTjMUfEe/DvW0PBtYvVi5ZHIeDg=;
+ h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+ MIME-Version:Content-Transfer-Encoding:Content-Type:
+ X-Originating-IP:X-ClientProxiedBy;
+ b=eK4xtp0Lie2rFKeCJiwu9nlyb3pg65al7AaYhe5pFEkjuZypZcZWqWwBhIJF/wcDp
+ PeQNy6FGBUd0zDIOEMAmPED2HCpYTvechpwR+GhIoYVRZFKyk01aJKt7ARncP8p8JZ
+ ybgZM6eVhq/ekdvvxoHYF4ZUo3i3wFiUVmzFby7JbEpdKu/9FUzqaXW8BGo+t+IT56
+ wnlFRZhUlyDxyoFeYFzg2G/DH1DkrOlKSB4Gze98CVtRP0KXBvoV+25QwHqG+JoaMn
+ aZRBeoYSfmsvpz2jOgPXwj+ksEe+zXuX4lMEPiIXdghUNttv0RhWvDU/1dJpobBdT8
+ cwnG9pSLeDbSQ==
+Subject: Re: [Nouveau] [PATCH v3 3/8] mm/rmap: Split try_to_munlock from
+ try_to_unmap
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,49 +58,35 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
+Cc: rcampbell@nvidia.com, linux-doc@vger.kernel.org,
+ nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, hch@infradead.org, linux-mm@kvack.org,
+ bskeggs@redhat.com, daniel@ffwll.ch, akpm@linux-foundation.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Greetings
+On Tuesday, 2 March 2021 3:10:49 AM AEDT Jason Gunthorpe wrote:
+> > +       while (page_vma_mapped_walk(&pvmw)) {
+> > +               /*
+> > +                * If the page is mlock()d, we cannot swap it out.
+> > +                * If it's recently referenced (perhaps page_referenced
+> > +                * skipped over this mm) then we should reactivate it.
+> > +                */
+> > +               if (vma->vm_flags & VM_LOCKED) {
+> 
+> And since we write the data without holding the PTLs this looks
+> pointless, unless there is some other VM_LOCKED manipulation
+> 
 
-Running debian testing, 2 nvidia gpus (GP107 and GF110) and 5 monitors
-(1 - 3840x2160 and 2 1920x1080 on the GP107 and 2 - 1920x1080 on the
-GF110) using one screen (7680x3000).
+Thanks. I couldn't find any other manipulation of VM_LOCKED whilst holding the 
+PTL so I'll remove this redundant check.
 
-I would still like to modify some things but can't find any docs on
-how to do that and my attempts have only made things worse and I can
-function, even though some things are right awkward, on the system.
-What I've run into is that my graphics system either refuses to come
-out of hibernation or decides to come back on but in a locked state. I
-then log into this machine from another on the network and do a reboot
-for a 'graceful' restart (rather than use the kill button - - - the
-hard shut off).
+ - Alistair
 
-This event, graphics shutdown, is happening in direct relationship to
-how much I have happening on the desktops of which I have lots.
 
-In searching it seems that nouveau support for the GP107 is not yet
-complete - - - - or that's what it seems like.
 
-Is there someone out there who has some idea what the problem is?
-(There are quite a number of different individuals mentioning this
-issue in one of the bug reports.)
-
-I would be happen to revise the nouveau pages on xrandr updating the
-information from 1.3 to 1.5 and possibly some of the other pages as
-well. I have no programming skills but I do have reasonable writing
-skills - - - - would rather trade than to continue taking that 1/2
-hour it takes to set my system up after each reboot - - - - taking an
-hour or even 1.5 hours a day doing this is a huge drain on my
-resources and would rather change this.
-
-Please advise!
-
-Regards
-
-Aj
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
