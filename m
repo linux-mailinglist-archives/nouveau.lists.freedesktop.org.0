@@ -2,51 +2,49 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7888032CB5B
-	for <lists+nouveau@lfdr.de>; Thu,  4 Mar 2021 05:27:32 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B898A32CBCF
+	for <lists+nouveau@lfdr.de>; Thu,  4 Mar 2021 06:21:04 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 90CCD89C63;
-	Thu,  4 Mar 2021 04:27:25 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 78B0A6E492;
+	Thu,  4 Mar 2021 05:20:59 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from hqnvemgate26.nvidia.com (hqnvemgate26.nvidia.com
  [216.228.121.65])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 2ED6A89B84;
- Thu,  4 Mar 2021 04:27:24 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 858D06E491;
+ Thu,  4 Mar 2021 05:20:58 +0000 (UTC)
 Received: from hqmail.nvidia.com (Not Verified[216.228.121.13]) by
  hqnvemgate26.nvidia.com (using TLS: TLSv1.2, AES256-SHA)
- id <B604061aa0002>; Wed, 03 Mar 2021 20:27:22 -0800
-Received: from DRHQMAIL107.nvidia.com (10.27.9.16) by HQMAIL105.nvidia.com
- (172.20.187.12) with Microsoft SMTP Server (TLS) id 15.0.1497.2; Thu, 4 Mar
- 2021 04:27:21 +0000
+ id <B60406e3a0000>; Wed, 03 Mar 2021 21:20:58 -0800
+Received: from DRHQMAIL107.nvidia.com (10.27.9.16) by HQMAIL109.nvidia.com
+ (172.20.187.15) with Microsoft SMTP Server (TLS) id 15.0.1497.2; Thu, 4 Mar
+ 2021 05:20:56 +0000
 Received: from nvdebian.localnet (172.20.145.6) by DRHQMAIL107.nvidia.com
  (10.27.9.16) with Microsoft SMTP Server (TLS) id 15.0.1497.2; Thu, 4 Mar 2021
- 04:27:18 +0000
+ 05:20:54 +0000
 From: Alistair Popple <apopple@nvidia.com>
 To: Jason Gunthorpe <jgg@nvidia.com>
-Date: Thu, 4 Mar 2021 15:27:16 +1100
-Message-ID: <29906974.JcgKRUyaEZ@nvdebian>
-In-Reply-To: <20210301161049.GJ4247@nvidia.com>
+Date: Thu, 4 Mar 2021 16:20:52 +1100
+Message-ID: <2083651.v4LkQjjfQp@nvdebian>
+In-Reply-To: <20210302124152.GF4247@nvidia.com>
 References: <20210226071832.31547-1-apopple@nvidia.com>
- <20210226071832.31547-4-apopple@nvidia.com>
- <20210301161049.GJ4247@nvidia.com>
+ <2758096.Z30Q8iEM0t@nvdebian> <20210302124152.GF4247@nvidia.com>
 MIME-Version: 1.0
 X-Originating-IP: [172.20.145.6]
-X-ClientProxiedBy: HQMAIL105.nvidia.com (172.20.187.12) To
+X-ClientProxiedBy: HQMAIL107.nvidia.com (172.20.187.13) To
  DRHQMAIL107.nvidia.com (10.27.9.16)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
- t=1614832042; bh=p4JDJbZednwqFrVYpTjMUfEe/DvW0PBtYvVi5ZHIeDg=;
+ t=1614835258; bh=9xq8FfvlXkYAk6gs2678CTOmYbDE3Qd9No1oNQX9mU8=;
  h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version:Content-Transfer-Encoding:Content-Type:
  X-Originating-IP:X-ClientProxiedBy;
- b=eK4xtp0Lie2rFKeCJiwu9nlyb3pg65al7AaYhe5pFEkjuZypZcZWqWwBhIJF/wcDp
- PeQNy6FGBUd0zDIOEMAmPED2HCpYTvechpwR+GhIoYVRZFKyk01aJKt7ARncP8p8JZ
- ybgZM6eVhq/ekdvvxoHYF4ZUo3i3wFiUVmzFby7JbEpdKu/9FUzqaXW8BGo+t+IT56
- wnlFRZhUlyDxyoFeYFzg2G/DH1DkrOlKSB4Gze98CVtRP0KXBvoV+25QwHqG+JoaMn
- aZRBeoYSfmsvpz2jOgPXwj+ksEe+zXuX4lMEPiIXdghUNttv0RhWvDU/1dJpobBdT8
- cwnG9pSLeDbSQ==
-Subject: Re: [Nouveau] [PATCH v3 3/8] mm/rmap: Split try_to_munlock from
- try_to_unmap
+ b=pdZOZqStw2k9kfUFThuG08SuNOI+mxN+x8dJw3XY+pM3XOS0KNusvlx7Jc8OmFDTP
+ 1yLQwxTNBqHauziGi82t9z4NolEGpl064lNuH+GMljlF7shSZzhkX0cOxfFgsigt6T
+ xTZCkHQHNCzFRImpRR2ildShmJcGlzmD9S2WSCmPGvQz1AuZIgLx2/B/LWMWl3Uygq
+ 22c/GzkFoGtVRvbdCQ/ffN0LnSmAmIJ4CxK9n7vAY+aaqagzn/7jl6GH6UwXw4Y54x
+ fg7uzjwBKZt6NGVv2TKGuIXUv2P0JIZsIRJkaFC//mQiZr15JDiQyleyVMMn4J8u0M
+ pFKBKhvcVbdbQ==
+Subject: Re: [Nouveau] [PATCH v3 5/8] mm: Device exclusive memory access
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,21 +65,19 @@ Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tuesday, 2 March 2021 3:10:49 AM AEDT Jason Gunthorpe wrote:
-> > +       while (page_vma_mapped_walk(&pvmw)) {
-> > +               /*
-> > +                * If the page is mlock()d, we cannot swap it out.
-> > +                * If it's recently referenced (perhaps page_referenced
-> > +                * skipped over this mm) then we should reactivate it.
-> > +                */
-> > +               if (vma->vm_flags & VM_LOCKED) {
+On Tuesday, 2 March 2021 11:41:52 PM AEDT Jason Gunthorpe wrote:
+> > However try_to_protect() scans the PTEs again under the PTL so checking 
+the 
+> > mapping of interest actually gets replaced during the rmap walk seems like 
+a 
+> > reasonable solution. Thanks for the comments.
 > 
-> And since we write the data without holding the PTLs this looks
-> pointless, unless there is some other VM_LOCKED manipulation
-> 
+> It does seem cleaner if you can manage it, the notifier will still be
+> needd to program the HW though
 
-Thanks. I couldn't find any other manipulation of VM_LOCKED whilst holding the 
-PTL so I'll remove this redundant check.
+Checking during the rmap walk wasn't hard but ultimately pointless. As you say 
+a range notifier and lock is required to program the hardware, which requires 
+checking the mappings with a mmu notifier sequence anyway.
 
  - Alistair
 
