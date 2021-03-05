@@ -2,37 +2,53 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2C42932E56C
-	for <lists+nouveau@lfdr.de>; Fri,  5 Mar 2021 10:58:13 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 79B6932EC64
+	for <lists+nouveau@lfdr.de>; Fri,  5 Mar 2021 14:40:28 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6F0F16E165;
-	Fri,  5 Mar 2021 09:58:11 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E227C6E20E;
+	Fri,  5 Mar 2021 13:40:25 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 30B696E165;
- Fri,  5 Mar 2021 09:58:10 +0000 (UTC)
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 26D6A64F1D;
- Fri,  5 Mar 2021 09:58:09 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1614938289;
- bh=/lb8uN3ccDMS8ANXkjYL2gkpQf8TDnHZRLuIhsU6K5Q=;
- h=Date:From:To:Cc:Subject:From;
- b=NhlDLvtZ32Qy5Ze42To9z1nyExlHaEKoiU+ZYMkPdNC5Sll/sHGOjwLHz6SgGYhrH
- dTqSCaFpgnqSFJ/rGR0E4vShyZJ3rMxgezeJf4i57wbKnDIxi6eg2PZEb8/mOP/qbH
- T2XRiWTtPvzXH6Ro7Fx/+wwxNGTL2PpDfujAmisEqHxJxCoWsMJueaiY4d4LT7xyTR
- dAaKSlTNDS3KaCeKcpCA4dLS4RtUI7f9VZr/Xe60j82ELTRPu0BgSUAwy/sCjE+DM+
- G26yj1UlNxVR0AMJwowOEmUwU9R6lcaTFyMNiTSy30XoowkKS4yZgyzt60qhJ5OT5/
- E/iq9/zrJIoHQ==
-Date: Fri, 5 Mar 2021 03:58:07 -0600
-From: "Gustavo A. R. Silva" <gustavoars@kernel.org>
-To: Ben Skeggs <bskeggs@redhat.com>, David Airlie <airlied@linux.ie>,
- Daniel Vetter <daniel@ffwll.ch>
-Message-ID: <20210305095807.GA142125@embeddedor>
+X-Greylist: delayed 1787 seconds by postgrey-1.36 at gabe;
+ Fri, 05 Mar 2021 13:40:24 UTC
+Received: from re-prd-fep-041.btinternet.com (mailomta25-re.btinternet.com
+ [213.120.69.118])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 509C06E20E
+ for <nouveau@lists.freedesktop.org>; Fri,  5 Mar 2021 13:40:24 +0000 (UTC)
+Received: from re-prd-rgout-004.btmx-prd.synchronoss.net ([10.2.54.7])
+ by re-prd-fep-046.btinternet.com with ESMTP id
+ <20210305131035.IFNH17749.re-prd-fep-046.btinternet.com@re-prd-rgout-004.btmx-prd.synchronoss.net>
+ for <nouveau@lists.freedesktop.org>; Fri, 5 Mar 2021 13:10:35 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=btopenworld.com;
+ s=btmx201904; t=1614949835; 
+ bh=Tt0rGBwb/1ZQWmCj97Vo6+xMpbZk0QtgLqNjShKRF+4=;
+ h=To:From:Subject:Message-ID:Date:MIME-Version;
+ b=DT3DrOpSl48KbFyF8FJ7wQ0eytUGGJF70MVzm3OvZLmr8ZiZUPDY2FZW3TxgouMNxUqju8oozGlkoFQzYTklZEgpsmK1Q7T3GSOm0avr51Bkf4UWdwONRfIJ/9HA4gPQYMUOHfVt2R7hL4m5YDL3+RIUxYbDjLAjd7JoHWMjGs0uACUH4tO2Vws5daa71rrbDtQ4vPJIZZtcZg1WfST3uaT7WCG0RJpwgk3/0tA5C7dNg/59aVJXfnR1MOiSDqmTZyVOdptvdsqqLbad6zo1DWHyXp2P5u+JT+xxlxWelaeqbv0lN6pyesV7enSzTKYRvotRbPUoqosK214IXKvZtA==
+Authentication-Results: btinternet.com;
+ auth=pass (PLAIN) smtp.auth=graemebrett.houston@btopenworld.com
+X-SNCR-Rigid: 5ED9C5062955E2DD
+X-Originating-IP: [81.140.186.120]
+X-OWM-Source-IP: 81.140.186.120 (GB)
+X-OWM-Env-Sender: graemebrett.houston@btinternet.com
+X-VadeSecure-score: verdict=clean score=0/300, class=clean
+X-RazorGate-Vade: gggruggvucftvghtrhhoucdtuddrgeduledruddtiedggeeiucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuueftkffvkffujffvgffngfevqffopdfqfgfvnecuuegrihhlohhuthemuceftddunecunecujfgurhepvffhuffkffgfgggtgfesthejredttdefjeenucfhrhhomhepifhrrggvmhgvuceurhgvthhtucfjohhushhtohhnuceoghhrrggvmhgvsghrvghtthdrhhhouhhsthhonhessghtohhpvghnfihorhhlugdrtghomheqnecuggftrfgrthhtvghrnhepveehvdfhfeetleeuvdeuudefgffggfdugfeuudfgfefhhefgjefgvedtgfduleegnecukfhppeekuddrudegtddrudekiedruddvtdenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhephhgvlhhopegludelvddrudeikedrtddrvddtngdpihhnvghtpeekuddrudegtddrudekiedruddvtddpmhgrihhlfhhrohhmpeeoghhrrggvmhgvsghrvghtthdrhhhouhhsthhonhessghtihhnthgvrhhnvghtrdgtohhmqecuuefqffgjpeekuefkvffokffogfdprhgtphhtthhopeeonhhouhhvvggruheslhhishhtshdrfhhrvggvuggvshhkthhophdrohhrgheq
+X-RazorGate-Vade-Verdict: clean 0
+X-RazorGate-Vade-Classification: clean
+X-SNCR-hdrdom: btopenworld.com
+Received: from [192.168.0.20] (81.140.186.120) by
+ re-prd-rgout-004.btmx-prd.synchronoss.net (5.8.340) (authenticated as
+ graemebrett.houston@btopenworld.com)
+ id 5ED9C5062955E2DD for nouveau@lists.freedesktop.org;
+ Fri, 5 Mar 2021 13:10:35 +0000
+To: nouveau@lists.freedesktop.org
+From: Graeme Brett Houston <graemebrett.houston@btopenworld.com>
+Message-ID: <6f69148e-b0c8-03ba-c4de-96afee5362c0@btopenworld.com>
+Date: Fri, 5 Mar 2021 13:10:34 +0000
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.7.1
 MIME-Version: 1.0
-Content-Disposition: inline
-Subject: [Nouveau] [PATCH RESEND][next] drm/nouveau/therm: Fix fall-through
- warnings for Clang
+Content-Language: en-US
+Subject: [Nouveau] VFIO traceing + Nvidia Cards
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -44,38 +60,38 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, linux-hardening@vger.kernel.org,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- "Gustavo A. R. Silva" <gustavoars@kernel.org>
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-In preparation to enable -Wimplicit-fallthrough for Clang, fix a warning
-by explicitly adding a break statement instead of letting the code fall
-through to the next case.
+Hi i was looking to find out if there is any tools that can be used to 
+capture guaranteed repeatable trases of Nvidia Registers using VFIO VGA 
+pass through?
 
-Link: https://github.com/KSPP/linux/issues/115
-Signed-off-by: Gustavo A. R. Silva <gustavoars@kernel.org>
----
- drivers/gpu/drm/nouveau/nvkm/subdev/therm/gf119.c | 1 +
- 1 file changed, 1 insertion(+)
 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/therm/gf119.c b/drivers/gpu/drm/nouveau/nvkm/subdev/therm/gf119.c
-index 2b031d4eaeb6..684aff7437ee 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/therm/gf119.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/therm/gf119.c
-@@ -41,6 +41,7 @@ pwm_info(struct nvkm_therm *therm, int line)
- 		default:
- 			break;
- 		}
-+		break;
- 	default:
- 		break;
- 	}
--- 
-2.27.0
+my understanding is envytools works on linux where i was thinking to get 
+traces of what nvidia drivers/hardware are doing via VFIO pass through 
+of the pci/pcie card, running windows doing a standard set of tests.
+
+
+Also on such a setup what parameters would need to be sent to qemu and 
+what extar compile settings would be used?
+
+
+i have tried this with PowerVR card and get traces but don't think i get 
+all the DMA activity however but as that is a separate 3d accelerator 
+and i have not manged ot get old vga cards of that erra working in vfio 
+pass through that explains that .
+
+
+But i was thinking for RTX 4000 i could potentially grab register 
+accesses as a trace but as i say recon would need a standard test 
+process to follow.
+
+
+
+Graeme Houston
 
 _______________________________________________
 Nouveau mailing list
