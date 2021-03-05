@@ -1,52 +1,48 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9253B32DE1D
-	for <lists+nouveau@lfdr.de>; Fri,  5 Mar 2021 00:54:57 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2DBC532DF43
+	for <lists+nouveau@lfdr.de>; Fri,  5 Mar 2021 02:53:07 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D3BA66EA97;
-	Thu,  4 Mar 2021 23:54:55 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id DE94C6EAC1;
+	Fri,  5 Mar 2021 01:53:02 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from hqnvemgate25.nvidia.com (hqnvemgate25.nvidia.com
- [216.228.121.64])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 008566EA96;
- Thu,  4 Mar 2021 23:54:54 +0000 (UTC)
-Received: from hqmail.nvidia.com (Not Verified[216.228.121.13]) by
- hqnvemgate25.nvidia.com (using TLS: TLSv1.2, AES256-SHA)
- id <B6041734e0000>; Thu, 04 Mar 2021 15:54:54 -0800
-Received: from DRHQMAIL107.nvidia.com (10.27.9.16) by HQMAIL107.nvidia.com
- (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1497.2; Thu, 4 Mar
- 2021 23:54:54 +0000
-Received: from nvdebian.localnet (172.20.145.6) by DRHQMAIL107.nvidia.com
- (10.27.9.16) with Microsoft SMTP Server (TLS) id 15.0.1497.2; Thu, 4 Mar 2021
- 23:54:51 +0000
-From: Alistair Popple <apopple@nvidia.com>
-To: Zi Yan <ziy@nvidia.com>
-Date: Fri, 5 Mar 2021 10:54:48 +1100
-Message-ID: <84997524.IMQpRet0Aq@nvdebian>
-In-Reply-To: <E93F89E1-3CE2-4CA3-97D9-6BCED78E1001@nvidia.com>
-References: <20210226071832.31547-1-apopple@nvidia.com>
- <20210226071832.31547-5-apopple@nvidia.com>
- <E93F89E1-3CE2-4CA3-97D9-6BCED78E1001@nvidia.com>
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [216.205.24.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8E3896EAC1
+ for <nouveau@lists.freedesktop.org>; Fri,  5 Mar 2021 01:53:01 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1614909180;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=1PouAGyaEAojf3ovTLFX1yOmiU99mhHbemhpq78aaTo=;
+ b=C0xgrCWzON1kAS2yto6GXsR7vCoa4hRY8wH3vm1x7KjvIsVQvfES4rypGPq3yRgsrET7o1
+ RMGW1kSLhcmvA1kkvgGayN40Rj1wPMGltXFGYxC1VSwVFtbs91jEFIT66IAFcaIC6+WTWC
+ OwwrE7eLjHUztO6xsqO4YZJAgka3mps=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-21-aoH0ADXoPxG-HWKJhQM3Yw-1; Thu, 04 Mar 2021 20:52:56 -0500
+X-MC-Unique: aoH0ADXoPxG-HWKJhQM3Yw-1
+Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
+ [10.5.11.11])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 56E2F1842142;
+ Fri,  5 Mar 2021 01:52:54 +0000 (UTC)
+Received: from Whitewolf.lyude.net (ovpn-113-27.rdu2.redhat.com [10.10.113.27])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 9FCD52BFEB;
+ Fri,  5 Mar 2021 01:52:52 +0000 (UTC)
+From: Lyude Paul <lyude@redhat.com>
+To: nouveau@lists.freedesktop.org
+Date: Thu,  4 Mar 2021 20:52:41 -0500
+Message-Id: <20210305015242.740590-1-lyude@redhat.com>
 MIME-Version: 1.0
-X-Originating-IP: [172.20.145.6]
-X-ClientProxiedBy: HQMAIL101.nvidia.com (172.20.187.10) To
- DRHQMAIL107.nvidia.com (10.27.9.16)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
- t=1614902094; bh=F3stMHCU+5ii6x1iy3omj83ayupI0P+Mr9dS1o5FIt0=;
- h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
- MIME-Version:Content-Transfer-Encoding:Content-Type:
- X-Originating-IP:X-ClientProxiedBy;
- b=NpU2unlnheR6/rs4Zkq9TpQwW8Ut3zxi8Pn9daVGKPN2Zf3wm0lvYJ/fXsPnTrJ2C
- 8r6FecCuivTyRTi4tEnX/gdG9VaTETErNKJhNRJW79HRPU3l70FQFYUPIkhEgdY7tX
- YIlY/ILaZKek6pTrRHqTdQ0bbLwCKcvyZQIUXQp259KaTmOAv19PPuEro7v397+5Ru
- zN6MpkzlSUiIVTJVHly9G9jlXozppR3Xo1drI0n42SmVmEVacBDR8DiJef1PPXPiVo
- gD39vcJO1NY/MhM/r142FNOwKGLtl9ekatblvwVaSTLNgcdn4994m2D59bfjPvLnRH
- 5WIgHVadyysng==
-Subject: Re: [Nouveau] [PATCH v3 4/8] mm/rmap: Split migration into its own
- function
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
+Subject: [Nouveau] [PATCH] drm/nouveau/kms/nve4-nv108: Limit cursors to
+ 128x128
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,70 +54,69 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: rcampbell@nvidia.com, daniel@ffwll.ch, linux-doc@vger.kernel.org,
- nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, hch@infradead.org, linux-mm@kvack.org,
- bskeggs@redhat.com, jgg@nvidia.com, akpm@linux-foundation.org
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
+ <dri-devel@lists.freedesktop.org>, David Airlie <airlied@linux.ie>,
+ Pankaj Bharadiya <pankaj.laxminarayan.bharadiya@intel.com>,
+ open list <linux-kernel@vger.kernel.org>, stable@vger.kernel.org,
+ Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>,
+ Dave Airlie <airlied@redhat.com>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-T24gV2VkbmVzZGF5LCAzIE1hcmNoIDIwMjEgOTowODoxNSBBTSBBRURUIFppIFlhbiB3cm90ZToK
-PiBPbiAyNiBGZWIgMjAyMSwgYXQgMjoxOCwgQWxpc3RhaXIgUG9wcGxlIHdyb3RlOgoKPiA+IGRp
-ZmYgLS1naXQgYS9pbmNsdWRlL2xpbnV4L3JtYXAuaCBiL2luY2x1ZGUvbGludXgvcm1hcC5oCj4g
-PiBpbmRleCA3ZjFlZTQxMWJkN2IuLjc3ZmExN2RlNTFkNyAxMDA2NDQKPiA+IC0tLSBhL2luY2x1
-ZGUvbGludXgvcm1hcC5oCj4gPiArKysgYi9pbmNsdWRlL2xpbnV4L3JtYXAuaAo+ID4gQEAgLTg2
-LDggKzg2LDYgQEAgc3RydWN0IGFub25fdm1hX2NoYWluIHsKPiA+ICB9Owo+ID4KPiA+ICBlbnVt
-IHR0dV9mbGFncyB7Cj4gPiAtCVRUVV9NSUdSQVRJT04JCT0gMHgxLAkvKiBtaWdyYXRpb24gbW9k
-ZSAqLwo+ID4gLQo+ID4gIAlUVFVfU1BMSVRfSFVHRV9QTUQJPSAweDQsCS8qIHNwbGl0IGh1Z2Ug
-UE1EIGlmIGFueSAqLwo+IAo+IEl0IGltcGxpZXMgZnJlZXplIGluIHRyeV90b19taWdyYXRlKCkg
-YW5kIG5vIGZyZWV6ZSBpbiB0cnlfdG9fdW5tYXAoKS4gSSAKdGhpbmsKPiB3ZSBuZWVkIHNvbWUg
-Y29tbWVudHMgaGVyZSwgYWJvdmUgdHJ5X3RvX21pZ3JhdGUoKSwgYW5kIGFib3ZlIHRyeV90b191
-bm1hcCgpCj4gdG8gY2xhcmlmeSB0aGUgaW1wbGljYXRpb24uCgpTdXJlLiBUaGlzIGNvbmZ1c2Vk
-IG1lIGZvciBhIGJpdCBhbmQgSSB3YXMgaW5pdGlhbGx5IHRlbXB0ZWQgdG8gbGVhdmUgClRUVV9T
-UExJVF9GUkVFWkUgYXMgYSBzZXBhcmF0ZSBtb2RlIGZsYWcgYnV0IGxvb2tpbmcgYXQgd2hhdCBm
-cmVlemUgYWN0dWFsbHkgCmRvZXMgaXQgbWFkZSBzZW5zZSB0byByZW1vdmUgaXQgYmVjYXVzZSB0
-cnlfdG9fbWlncmF0ZSgpIGlzIGZvciBpbnN0YWxsaW5nIAptaWdyYXRpb24gZW50cmllcyAod2hp
-Y2ggaXMgd2hhdCBmcmVlemUgZG9lcykgYW5kIHRyeV90b191bm1hcCgpIGp1c3QgdW5tYXBzLiAK
-U28gSSdsbCBhZGQgc29tZSBjb21tZW50cyB0byB0aGF0IGVmZmVjdC4KIAo+ID4gIAlUVFVfSUdO
-T1JFX01MT0NLCT0gMHg4LAkvKiBpZ25vcmUgbWxvY2sgKi8KPiA+ICAJVFRVX0lHTk9SRV9IV1BP
-SVNPTgk9IDB4MjAsCS8qIGNvcnJ1cHRlZCBwYWdlIGlzIHJlY292ZXJhYmxlICovCj4gPiBAQCAt
-OTYsNyArOTQsNiBAQCBlbnVtIHR0dV9mbGFncyB7Cj4gPiAgCQkJCQkgKiBkbyBhIGZpbmFsIGZs
-dXNoIGlmIG5lY2Vzc2FyeSAqLwo+ID4gIAlUVFVfUk1BUF9MT0NLRUQJCT0gMHg4MCwJLyogZG8g
-bm90IGdyYWIgcm1hcCBsb2NrOgo+ID4gIAkJCQkJICogY2FsbGVyIGhvbGRzIGl0ICovCj4gPiAt
-CVRUVV9TUExJVF9GUkVFWkUJPSAweDEwMCwJCS8qIGZyZWV6ZSBwdGUgdW5kZXIgc3BsaXR0aW5n
-IHRocCAqLwo+ID4gIH07Cj4gPgo+ID4gICNpZmRlZiBDT05GSUdfTU1VCj4gPiBAQCAtMTkzLDYg
-KzE5MCw3IEBAIHN0YXRpYyBpbmxpbmUgdm9pZCBwYWdlX2R1cF9ybWFwKHN0cnVjdCBwYWdlICpw
-YWdlLCAKYm9vbCBjb21wb3VuZCkKPiA+ICBpbnQgcGFnZV9yZWZlcmVuY2VkKHN0cnVjdCBwYWdl
-ICosIGludCBpc19sb2NrZWQsCj4gPiAgCQkJc3RydWN0IG1lbV9jZ3JvdXAgKm1lbWNnLCB1bnNp
-Z25lZCBsb25nICp2bV9mbGFncyk7Cj4gPgo+ID4gK2Jvb2wgdHJ5X3RvX21pZ3JhdGUoc3RydWN0
-IHBhZ2UgKnBhZ2UsIGVudW0gdHR1X2ZsYWdzIGZsYWdzKTsKPiA+ICBib29sIHRyeV90b191bm1h
-cChzdHJ1Y3QgcGFnZSAqLCBlbnVtIHR0dV9mbGFncyBmbGFncyk7Cj4gPgo+ID4gIC8qIEF2b2lk
-IHJhY3kgY2hlY2tzICovCj4gPiBkaWZmIC0tZ2l0IGEvbW0vaHVnZV9tZW1vcnkuYyBiL21tL2h1
-Z2VfbWVtb3J5LmMKPiA+IGluZGV4IGQwMGI5M2RjMmQ5ZS4uMzU3MDUyYTQ1NjdiIDEwMDY0NAo+
-ID4gLS0tIGEvbW0vaHVnZV9tZW1vcnkuYwo+ID4gKysrIGIvbW0vaHVnZV9tZW1vcnkuYwo+ID4g
-QEAgLTIzNTEsMTYgKzIzNTEsMTYgQEAgdm9pZCB2bWFfYWRqdXN0X3RyYW5zX2h1Z2Uoc3RydWN0
-IHZtX2FyZWFfc3RydWN0IAoqdm1hLAo+ID4KPiA+ICBzdGF0aWMgdm9pZCB1bm1hcF9wYWdlKHN0
-cnVjdCBwYWdlICpwYWdlKQo+ID4gIHsKPiA+IC0JZW51bSB0dHVfZmxhZ3MgdHR1X2ZsYWdzID0g
-VFRVX0lHTk9SRV9NTE9DSyB8Cj4gPiAtCQlUVFVfUk1BUF9MT0NLRUQgfCBUVFVfU1BMSVRfSFVH
-RV9QTUQ7Cj4gPiArCWVudW0gdHR1X2ZsYWdzIHR0dV9mbGFncyA9IFRUVV9STUFQX0xPQ0tFRCB8
-IFRUVV9TUExJVF9IVUdFX1BNRDsKPiA+ICAJYm9vbCB1bm1hcF9zdWNjZXNzOwo+ID4KPiA+ICAJ
-Vk1fQlVHX09OX1BBR0UoIVBhZ2VIZWFkKHBhZ2UpLCBwYWdlKTsKPiA+Cj4gPiAgCWlmIChQYWdl
-QW5vbihwYWdlKSkKPiA+IC0JCXR0dV9mbGFncyB8PSBUVFVfU1BMSVRfRlJFRVpFOwo+ID4gLQo+
-ID4gLQl1bm1hcF9zdWNjZXNzID0gdHJ5X3RvX3VubWFwKHBhZ2UsIHR0dV9mbGFncyk7Cj4gPiAr
-CQl1bm1hcF9zdWNjZXNzID0gdHJ5X3RvX21pZ3JhdGUocGFnZSwgdHR1X2ZsYWdzKTsKPiA+ICsJ
-ZWxzZQo+ID4gKwkJdW5tYXBfc3VjY2VzcyA9IHRyeV90b191bm1hcChwYWdlLCB0dHVfZmxhZ3Mg
-fAo+ID4gKwkJCQkJCVRUVV9JR05PUkVfTUxPQ0spOwo+IAo+IEkgdGhpbmsgd2UgbmVlZCBhIGNv
-bW1lbnQgaGVyZSBhYm91dCB3aHkgYW5vbnltb3VzIHBhZ2VzIG5lZWQgCnRyeV90b19taWdyYXRl
-KCkKPiBhbmQgb3RoZXJzIG5lZWQgdHJ5X3RvX3VubWFwKCkuCgpIaXN0b3JpY2FsbHkgdGhpcyBj
-b21lcyBmcm9tIGJhYTM1NWZkMzMxNCAoInRocDogZmlsZSBwYWdlcyBzdXBwb3J0IGZvciAKc3Bs
-aXRfaHVnZV9wYWdlKCkiKSB3aGljaCBzYXlzOgoKIldlIGRvbid0IHNldHVwIG1pZ3JhdGlvbiBl
-bnRyaWVzLiBKdXN0IHVubWFwIHBhZ2VzLiBJdCBoZWxwcyBoYW5kbGluZyBjYXNlcyAKd2hlbiBp
-X3NpemUgaXMgaW4gdGhlIG1pZGRsZSBvZiB0aGUgcGFnZTogbm8gbmVlZCBoYW5kbGUgdW5tYXAg
-cGFnZXMgYmV5b25kIAppX3NpemUgbWFudWFsbHkuIgoKQnV0IEknbGwgYWRkIGEgY29tbWVudCBo
-ZXJlLCB0aGFua3MuCgogLSBBbGlzdGFpcgoKPiBUaGFua3MuCj4gCj4g4oCUCj4gQmVzdCBSZWdh
-cmRzLAo+IFlhbiBaaQoKCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX18KTm91dmVhdSBtYWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5v
-cmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1
-Cg==
+While Kepler does technically support 256x256 cursors, it turns out that
+Kepler actually has some additional requirements for scanout surfaces that
+we're not enforcing correctly, which aren't present on Maxwell and later.
+Cursor surfaces must always use small pages (4K), and overlay surfaces must
+always use large pages (128K).
+
+Fixing this correctly though will take a bit more work: as we'll need to
+add some code in prepare_fb() to move cursor FBs in large pages to small
+pages, and vice-versa for overlay FBs. So until we have the time to do
+that, just limit cursor surfaces to 128x128 - a size small enough to always
+default to small pages.
+
+This means small ovlys are still broken on Kepler, but it is extremely
+unlikely anyone cares about those anyway :).
+
+Signed-off-by: Lyude Paul <lyude@redhat.com>
+Fixes: d3b2f0f7921c ("drm/nouveau/kms/nv50-: Report max cursor size to userspace")
+Cc: <stable@vger.kernel.org> # v5.11+
+---
+ drivers/gpu/drm/nouveau/dispnv50/disp.c | 13 ++++++++++++-
+ 1 file changed, 12 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.c b/drivers/gpu/drm/nouveau/dispnv50/disp.c
+index 196612addfd6..1c9c0cdf85db 100644
+--- a/drivers/gpu/drm/nouveau/dispnv50/disp.c
++++ b/drivers/gpu/drm/nouveau/dispnv50/disp.c
+@@ -2693,9 +2693,20 @@ nv50_display_create(struct drm_device *dev)
+ 	else
+ 		nouveau_display(dev)->format_modifiers = disp50xx_modifiers;
+ 
+-	if (disp->disp->object.oclass >= GK104_DISP) {
++	/* FIXME: 256x256 cursors are supported on Kepler, however unlike Maxwell and later
++	 * generations Kepler requires that we use small pages (4K) for cursor scanout surfaces. The
++	 * proper fix for this is to teach nouveau to migrate fbs being used for the cursor plane to
++	 * small page allocations in prepare_fb(). When this is implemented, we should also force
++	 * large pages (128K) for ovly fbs in order to fix Kepler ovlys.
++	 * But until then, just limit cursors to 128x128 - which is small enough to avoid ever using
++	 * large pages.
++	 */
++	if (disp->disp->object.oclass >= GM107_DISP) {
+ 		dev->mode_config.cursor_width = 256;
+ 		dev->mode_config.cursor_height = 256;
++	} else if (disp->disp->object.oclass >= GK104_DISP) {
++		dev->mode_config.cursor_width = 128;
++		dev->mode_config.cursor_height = 128;
+ 	} else {
+ 		dev->mode_config.cursor_width = 64;
+ 		dev->mode_config.cursor_height = 64;
+-- 
+2.29.2
+
+_______________________________________________
+Nouveau mailing list
+Nouveau@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/nouveau
