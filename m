@@ -1,58 +1,61 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 747DF330370
-	for <lists+nouveau@lfdr.de>; Sun,  7 Mar 2021 18:49:30 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id A6FBB330433
+	for <lists+nouveau@lfdr.de>; Sun,  7 Mar 2021 20:19:52 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id CAB5D898E4;
-	Sun,  7 Mar 2021 17:49:26 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 311F86E1BE;
+	Sun,  7 Mar 2021 19:19:50 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-qk1-x72b.google.com (mail-qk1-x72b.google.com
- [IPv6:2607:f8b0:4864:20::72b])
- by gabe.freedesktop.org (Postfix) with ESMTPS id F35F4898E4;
- Sun,  7 Mar 2021 17:49:25 +0000 (UTC)
-Received: by mail-qk1-x72b.google.com with SMTP id n79so7196477qke.3;
- Sun, 07 Mar 2021 09:49:25 -0800 (PST)
+Received: from mail-pl1-x644.google.com (mail-pl1-x644.google.com
+ [IPv6:2607:f8b0:4864:20::644])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 84B926E500;
+ Sat,  6 Mar 2021 11:17:58 +0000 (UTC)
+Received: by mail-pl1-x644.google.com with SMTP id s16so2687100plr.9;
+ Sat, 06 Mar 2021 03:17:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=sender:from:to:cc:subject:date:message-id:mime-version
+ h=from:to:cc:subject:date:message-id:mime-version
  :content-transfer-encoding;
- bh=naEL6AlE5P2OmqExZ9prNWI8kGRtuL6si5yW6TuTam4=;
- b=iaHNKyxipXn55s1z9UxZnkEqIX6YtUb013+8nlrLHNtWtjJJLEh150QZ9nwPeHOe+T
- Y79B5BV1iVIx3podYMq7o3nFHLcwOC2POnj61MNr91obZ+BgH0k0vG8pudQK4kPccqGv
- +049qbGnfsmfH1mbz20l9eL4dDP/RHo/we7OAGYdsTEt8/xlxWV9a+HcR+bA3NmhQJPT
- u5RQxDRlr0mhXPzYYE9csXu9i5fQx4oecgMlNrYUxvYuU7wlTx6nKG5b6hiK/VPKg5jS
- +YmKR6cc5LH58W+xeopMVWqbtFfzGNqPIGNlAPMShp2yQ0BmFaYxmOUd9u5378v926aN
- WMfw==
+ bh=xdaYIHbo42EzW4+tTrCCIBJZrl43XKwjfdhXKE79QkI=;
+ b=OU8IkoIgBcGiyXFXs7IFjfZBTGGs0bWhDh2k3i2p+t5/sRh2gppxbcqpCrkBP/7Lne
+ Dp0G+U77bTBi4eAhBRLbDSjcd6glcsaLr9G0ohROwCRG1diGuR7pp1U7UoQeaA2BE0zf
+ x3zEuKMokoALIZ7dgB4wqajTb7GTVjLo+ocBnn6BeYOUqgNYlYxgSTv31GuDJ0kVQ6Lh
+ go5XkMfJBomHLOvtZzTo1gDKE/iBCo9C78UGgbHxepzHYRDuEVr+W6DCwqgGaG12weBS
+ uDDfYHxABSD2akfNtdqx15BmZcqQ2ezXQHhiYfIVTd+wZL66l3gQY191krzaNGOJsoyP
+ 3aPQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
- :mime-version:content-transfer-encoding;
- bh=naEL6AlE5P2OmqExZ9prNWI8kGRtuL6si5yW6TuTam4=;
- b=jm8+sdh840nP8cFtAUUWmaYyaNT6eALz0kIuPYYWF0Blki1lfu7UsZjE2Tbagc1Qg0
- bS0nhUoq2J4utCJsMrPwi2A/06xQdNIHcrF5G6hsUFdf2G3kXPbyEsCcjfas28Bb3ZV2
- DW+TarzfjKXLm9GYGngY6X3EbCox4pjXqx+DWaGzdDrgrY4SJjp3E9VoIPHKgvTfJ7fy
- vGj01/phq4Z/69yiFpl4Vqua284NRxrdx/hTehNFF2QAn13TPidAILiO/Ki3wRpUP+7C
- mf9yYI4J+/aDMwEoaGXOgJAh9fQQgK2ZWNvejxb3hX0VidiS5IeATymbGZRD/zEO45uB
- JpJQ==
-X-Gm-Message-State: AOAM533/4lu3BaH/fsWHq9b4nNG35CbbO/fzaYb63CR0kt9IIcUclSHT
- fU2VqG5/l15YIBL/wtwfPaY=
-X-Google-Smtp-Source: ABdhPJw6H/zGeACZcIyalUEcdXQw4T5njNsIqSEwK98j/QDguSeb4w6drziERYrP4I2xw1/rDMJhSA==
-X-Received: by 2002:a05:620a:414e:: with SMTP id
- k14mr18576858qko.243.1615139365011; 
- Sun, 07 Mar 2021 09:49:25 -0800 (PST)
-Received: from athos.hellosponsor.com ([70.19.70.200])
- by smtp.gmail.com with ESMTPSA id a14sm6130862qkc.47.2021.03.07.09.49.24
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=xdaYIHbo42EzW4+tTrCCIBJZrl43XKwjfdhXKE79QkI=;
+ b=dUx76KaPRXr2l4NUSb/Qm+TjQ9BH4AizJy+Pq/lmJLh8rMB/qZERnYJ6ThisOTRuuI
+ kwpuGB8kE/RoOhLi8dLYmO6GG8i+F6B3DOCbbZD8XvwrvJVibPD9G7pbj61TCjue3jQ6
+ C+E5qf88b1jfUbNnxuspPH95IL/04PZ4JKjYy44TBNAuj3pHSZDroGwdLywMglcgrAjc
+ tT8Zg68iZrigHDVs+/EqrdXkx/0tBu56VYmMo95vtbQKXBXsVvjJyQ7wpOSl+URVq0j6
+ tcNrS3b18F6K1loYRez6Rceh/RY5dWl0Pw4FIOLbjGQ89IMaw9iHo9NVw9d5cechmEMj
+ II5w==
+X-Gm-Message-State: AOAM533gsW+KOwpSTuPFBeSHZM2P1dJ92JAvXQem1xfjrQLSEibBx9Hg
+ scV+DbGp1hD/64q3KiI74yI=
+X-Google-Smtp-Source: ABdhPJx4gWaZVfPNcXcXFDwquU8hwFVxF7LWE6D2TVf8jy2qAw7j6kTV29gabrWD9ercYIzdRabKrg==
+X-Received: by 2002:a17:90a:6286:: with SMTP id
+ d6mr15012274pjj.234.1615029478197; 
+ Sat, 06 Mar 2021 03:17:58 -0800 (PST)
+Received: from localhost.localdomain ([178.236.46.205])
+ by smtp.gmail.com with ESMTPSA id u15sm4925194pfk.128.2021.03.06.03.17.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 07 Mar 2021 09:49:24 -0800 (PST)
-From: Ilia Mirkin <imirkin@alum.mit.edu>
+ Sat, 06 Mar 2021 03:17:57 -0800 (PST)
+From: menglong8.dong@gmail.com
+X-Google-Original-From: zhang.yunkai@zte.com.cn
 To: bskeggs@redhat.com
-Date: Sun,  7 Mar 2021 12:48:53 -0500
-Message-Id: <20210307174853.28273-1-imirkin@alum.mit.edu>
-X-Mailer: git-send-email 2.26.2
+Date: Sat,  6 Mar 2021 03:17:51 -0800
+Message-Id: <20210306111751.216932-1-zhang.yunkai@zte.com.cn>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Subject: [Nouveau] [PATCH] drm/nouveau/kms/nv04: use vzalloc for nv04_display
+X-Mailman-Approved-At: Sun, 07 Mar 2021 19:19:49 +0000
+Subject: [Nouveau] [PATCH] drm/nouveau: remove duplicate include in
+ nouveau_dmem and base
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -64,48 +67,52 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: "Nathan E . Egge" <unlord@xiph.org>, nouveau@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org
+Cc: airlied@linux.ie, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ zhang.yunkai@zte.com.cn, daniel@ffwll.ch
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-The struct is giant, and triggers an order-7 allocation (512K). There is
-no reason for this to be kmalloc-type memory, so switch to vmalloc. This
-should help loading nouveau on low-memory and/or long-running systems.
+From: Zhang Yunkai <zhang.yunkai@zte.com.cn>
 
-Reported-by: Nathan E. Egge <unlord@xiph.org>
-Signed-off-by: Ilia Mirkin <imirkin@alum.mit.edu>
-Cc: stable@vger.kernel.org
+'if000c.h' included in 'nouveau_dmem.c' is duplicated.
+'priv.h' included in 'base.c' is duplicated.
+
+Signed-off-by: Zhang Yunkai <zhang.yunkai@zte.com.cn>
 ---
- drivers/gpu/drm/nouveau/dispnv04/disp.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ drivers/gpu/drm/nouveau/nouveau_dmem.c           | 1 -
+ drivers/gpu/drm/nouveau/nvkm/engine/nvenc/base.c | 2 --
+ 2 files changed, 3 deletions(-)
 
-diff --git a/drivers/gpu/drm/nouveau/dispnv04/disp.c b/drivers/gpu/drm/nouveau/dispnv04/disp.c
-index 7739f46470d3..99fee4d8cd31 100644
---- a/drivers/gpu/drm/nouveau/dispnv04/disp.c
-+++ b/drivers/gpu/drm/nouveau/dispnv04/disp.c
-@@ -205,7 +205,7 @@ nv04_display_destroy(struct drm_device *dev)
- 	nvif_notify_dtor(&disp->flip);
+diff --git a/drivers/gpu/drm/nouveau/nouveau_dmem.c b/drivers/gpu/drm/nouveau/nouveau_dmem.c
+index 92987daa5e17..f5cc057b123b 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_dmem.c
++++ b/drivers/gpu/drm/nouveau/nouveau_dmem.c
+@@ -33,7 +33,6 @@
+ #include <nvif/if000c.h>
+ #include <nvif/if500b.h>
+ #include <nvif/if900b.h>
+-#include <nvif/if000c.h>
  
- 	nouveau_display(dev)->priv = NULL;
--	kfree(disp);
-+	vfree(disp);
+ #include <nvhw/class/cla0b5.h>
  
- 	nvif_object_unmap(&drm->client.device.object);
- }
-@@ -223,7 +223,7 @@ nv04_display_create(struct drm_device *dev)
- 	struct nv04_display *disp;
- 	int i, ret;
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/nvenc/base.c b/drivers/gpu/drm/nouveau/nvkm/engine/nvenc/base.c
+index c39e797dc7c9..09524168431c 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/nvenc/base.c
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/nvenc/base.c
+@@ -20,8 +20,6 @@
+  * OTHER DEALINGS IN THE SOFTWARE.
+  */
+ #include "priv.h"
+-
+-#include "priv.h"
+ #include <core/firmware.h>
  
--	disp = kzalloc(sizeof(*disp), GFP_KERNEL);
-+	disp = vzalloc(sizeof(*disp));
- 	if (!disp)
- 		return -ENOMEM;
- 
+ static void *
 -- 
-2.26.2
+2.25.1
 
 _______________________________________________
 Nouveau mailing list
