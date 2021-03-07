@@ -1,48 +1,58 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id AB7DA32F5D4
-	for <lists+nouveau@lfdr.de>; Fri,  5 Mar 2021 23:22:10 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 747DF330370
+	for <lists+nouveau@lfdr.de>; Sun,  7 Mar 2021 18:49:30 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 318E16E1D3;
-	Fri,  5 Mar 2021 22:22:08 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id CAB5D898E4;
+	Sun,  7 Mar 2021 17:49:26 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 592916E1D3
- for <nouveau@lists.freedesktop.org>; Fri,  5 Mar 2021 22:22:07 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1614982925;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=aPyMsdHMnfaSpLLwitdtmkV1UTfjg0RUBiyEq1fqjlk=;
- b=Ba60+t8/izwTxEjvGilUw7Av7LHpL9irPpPCnRn99AC3+KivhgDrqjqzlytFAYv5NNGFku
- oTp/IueEsiEmoL0W22LWejpkb3ROZ2d/mvCGiolyBRxk/5e+oICTLcAoAt/yFe7waGnA3l
- k7F/sa0VYJHEJFTqP1l+EmuUZfqfpMc=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-177-PeNlqFzlPsSfWOOkoEvYJg-1; Fri, 05 Mar 2021 17:22:04 -0500
-X-MC-Unique: PeNlqFzlPsSfWOOkoEvYJg-1
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
- [10.5.11.23])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 238B3801814;
- Fri,  5 Mar 2021 22:22:02 +0000 (UTC)
-Received: from Whitewolf.lyude.net (ovpn-117-70.rdu2.redhat.com [10.10.117.70])
- by smtp.corp.redhat.com (Postfix) with ESMTP id E58B31A353;
- Fri,  5 Mar 2021 22:21:59 +0000 (UTC)
-From: Lyude Paul <lyude@redhat.com>
-To: nouveau@lists.freedesktop.org
-Date: Fri,  5 Mar 2021 17:21:33 -0500
-Message-Id: <20210305222135.1269175-1-lyude@redhat.com>
+Received: from mail-qk1-x72b.google.com (mail-qk1-x72b.google.com
+ [IPv6:2607:f8b0:4864:20::72b])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id F35F4898E4;
+ Sun,  7 Mar 2021 17:49:25 +0000 (UTC)
+Received: by mail-qk1-x72b.google.com with SMTP id n79so7196477qke.3;
+ Sun, 07 Mar 2021 09:49:25 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=sender:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=naEL6AlE5P2OmqExZ9prNWI8kGRtuL6si5yW6TuTam4=;
+ b=iaHNKyxipXn55s1z9UxZnkEqIX6YtUb013+8nlrLHNtWtjJJLEh150QZ9nwPeHOe+T
+ Y79B5BV1iVIx3podYMq7o3nFHLcwOC2POnj61MNr91obZ+BgH0k0vG8pudQK4kPccqGv
+ +049qbGnfsmfH1mbz20l9eL4dDP/RHo/we7OAGYdsTEt8/xlxWV9a+HcR+bA3NmhQJPT
+ u5RQxDRlr0mhXPzYYE9csXu9i5fQx4oecgMlNrYUxvYuU7wlTx6nKG5b6hiK/VPKg5jS
+ +YmKR6cc5LH58W+xeopMVWqbtFfzGNqPIGNlAPMShp2yQ0BmFaYxmOUd9u5378v926aN
+ WMfw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
+ :mime-version:content-transfer-encoding;
+ bh=naEL6AlE5P2OmqExZ9prNWI8kGRtuL6si5yW6TuTam4=;
+ b=jm8+sdh840nP8cFtAUUWmaYyaNT6eALz0kIuPYYWF0Blki1lfu7UsZjE2Tbagc1Qg0
+ bS0nhUoq2J4utCJsMrPwi2A/06xQdNIHcrF5G6hsUFdf2G3kXPbyEsCcjfas28Bb3ZV2
+ DW+TarzfjKXLm9GYGngY6X3EbCox4pjXqx+DWaGzdDrgrY4SJjp3E9VoIPHKgvTfJ7fy
+ vGj01/phq4Z/69yiFpl4Vqua284NRxrdx/hTehNFF2QAn13TPidAILiO/Ki3wRpUP+7C
+ mf9yYI4J+/aDMwEoaGXOgJAh9fQQgK2ZWNvejxb3hX0VidiS5IeATymbGZRD/zEO45uB
+ JpJQ==
+X-Gm-Message-State: AOAM533/4lu3BaH/fsWHq9b4nNG35CbbO/fzaYb63CR0kt9IIcUclSHT
+ fU2VqG5/l15YIBL/wtwfPaY=
+X-Google-Smtp-Source: ABdhPJw6H/zGeACZcIyalUEcdXQw4T5njNsIqSEwK98j/QDguSeb4w6drziERYrP4I2xw1/rDMJhSA==
+X-Received: by 2002:a05:620a:414e:: with SMTP id
+ k14mr18576858qko.243.1615139365011; 
+ Sun, 07 Mar 2021 09:49:25 -0800 (PST)
+Received: from athos.hellosponsor.com ([70.19.70.200])
+ by smtp.gmail.com with ESMTPSA id a14sm6130862qkc.47.2021.03.07.09.49.24
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 07 Mar 2021 09:49:24 -0800 (PST)
+From: Ilia Mirkin <imirkin@alum.mit.edu>
+To: bskeggs@redhat.com
+Date: Sun,  7 Mar 2021 12:48:53 -0500
+Message-Id: <20210307174853.28273-1-imirkin@alum.mit.edu>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
-Subject: [Nouveau] [PATCH v2] drm/nouveau/kms/nve4-nv108: Don't advertise
- 256x256 cursor support yet
+Subject: [Nouveau] [PATCH] drm/nouveau/kms/nv04: use vzalloc for nv04_display
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -54,68 +64,48 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
- <dri-devel@lists.freedesktop.org>, David Airlie <airlied@linux.ie>,
- Pankaj Bharadiya <pankaj.laxminarayan.bharadiya@intel.com>,
- open list <linux-kernel@vger.kernel.org>, stable@vger.kernel.org,
- Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>,
- Dave Airlie <airlied@redhat.com>
+Cc: "Nathan E . Egge" <unlord@xiph.org>, nouveau@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-While Kepler does technically support 256x256 cursors, it turns out that
-in order for us to use these correctly we need to make sure that the cursor
-plane uses a ctxdma that is set to use small (4K)/large (128K) pages -
-whichever is applicable to the given cursor surface.
+The struct is giant, and triggers an order-7 allocation (512K). There is
+no reason for this to be kmalloc-type memory, so switch to vmalloc. This
+should help loading nouveau on low-memory and/or long-running systems.
 
-Right now however, we share the main kmsVramCtxDma that is used for all but
-the ovly plane which defaults to small pages - resulting in artifacts when
-we use 256x256 cursor surfaces. So until we teach nouveau to use a separate
-ctxdma for the cursor, let's just stop advertising 256x256 cursors by
-default - which should fix the issues that users were seeing.
-
-Coincidentally - this is also why small ovlys don't work on Kepler: the
-ctxdma we use for ovlys is set to large pages.
-
-Changes since v2:
-* Fix comments and patch description
-
-Signed-off-by: Lyude Paul <lyude@redhat.com>
-Fixes: d3b2f0f7921c ("drm/nouveau/kms/nv50-: Report max cursor size to userspace")
-Cc: <stable@vger.kernel.org> # v5.11+
+Reported-by: Nathan E. Egge <unlord@xiph.org>
+Signed-off-by: Ilia Mirkin <imirkin@alum.mit.edu>
+Cc: stable@vger.kernel.org
 ---
- drivers/gpu/drm/nouveau/dispnv50/disp.c | 12 +++++++++++-
- 1 file changed, 11 insertions(+), 1 deletion(-)
+ drivers/gpu/drm/nouveau/dispnv04/disp.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.c b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-index 196612addfd6..d92cf9e17ac3 100644
---- a/drivers/gpu/drm/nouveau/dispnv50/disp.c
-+++ b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-@@ -2693,9 +2693,19 @@ nv50_display_create(struct drm_device *dev)
- 	else
- 		nouveau_display(dev)->format_modifiers = disp50xx_modifiers;
+diff --git a/drivers/gpu/drm/nouveau/dispnv04/disp.c b/drivers/gpu/drm/nouveau/dispnv04/disp.c
+index 7739f46470d3..99fee4d8cd31 100644
+--- a/drivers/gpu/drm/nouveau/dispnv04/disp.c
++++ b/drivers/gpu/drm/nouveau/dispnv04/disp.c
+@@ -205,7 +205,7 @@ nv04_display_destroy(struct drm_device *dev)
+ 	nvif_notify_dtor(&disp->flip);
  
--	if (disp->disp->object.oclass >= GK104_DISP) {
-+	/* FIXME: 256x256 cursors are supported on Kepler, however unlike Maxwell and later
-+	 * generations Kepler requires that we specify the page type, small (4K) or large (128K),
-+	 * correctly for the ctxdma being used on curs/ovly. We currently share a ctxdma across all
-+	 * display planes (except ovly) that defaults to small pages, which results in artifacting
-+	 * on 256x256 cursors. Until we teach nouveau to create an appropriate ctxdma for the cursor
-+	 * fb in use, simply avoid advertising support for 256x256 cursors.
-+	 */
-+	if (disp->disp->object.oclass >= GM107_DISP) {
- 		dev->mode_config.cursor_width = 256;
- 		dev->mode_config.cursor_height = 256;
-+	} else if (disp->disp->object.oclass >= GK104_DISP) {
-+		dev->mode_config.cursor_width = 128;
-+		dev->mode_config.cursor_height = 128;
- 	} else {
- 		dev->mode_config.cursor_width = 64;
- 		dev->mode_config.cursor_height = 64;
+ 	nouveau_display(dev)->priv = NULL;
+-	kfree(disp);
++	vfree(disp);
+ 
+ 	nvif_object_unmap(&drm->client.device.object);
+ }
+@@ -223,7 +223,7 @@ nv04_display_create(struct drm_device *dev)
+ 	struct nv04_display *disp;
+ 	int i, ret;
+ 
+-	disp = kzalloc(sizeof(*disp), GFP_KERNEL);
++	disp = vzalloc(sizeof(*disp));
+ 	if (!disp)
+ 		return -ENOMEM;
+ 
 -- 
-2.29.2
+2.26.2
 
 _______________________________________________
 Nouveau mailing list
