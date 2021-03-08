@@ -1,54 +1,35 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 867A0330EEE
-	for <lists+nouveau@lfdr.de>; Mon,  8 Mar 2021 14:13:54 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6FD84331251
+	for <lists+nouveau@lfdr.de>; Mon,  8 Mar 2021 16:34:48 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 00F5C6E0CD;
-	Mon,  8 Mar 2021 13:13:53 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 920776E16F;
+	Mon,  8 Mar 2021 15:34:46 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-lj1-x22f.google.com (mail-lj1-x22f.google.com
- [IPv6:2a00:1450:4864:20::22f])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9D9456E0CD
- for <nouveau@lists.freedesktop.org>; Mon,  8 Mar 2021 13:13:51 +0000 (UTC)
-Received: by mail-lj1-x22f.google.com with SMTP id 2so16015229ljr.5
- for <nouveau@lists.freedesktop.org>; Mon, 08 Mar 2021 05:13:51 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=u3KxBlq0zPK8QIlO8+MuF0pPec8mDS4KY0jLiSi9nSI=;
- b=FllWGJOZuyDz/G3ut+BvyCRg7VUvoTemVJ0NfOSIhoI0bdAx1tJkTkZh1cU/0mxxRP
- 42JaGhf0nZAkwYpnK5g9zpKjptbYjI6BKzoAA7hx0Y/B26nWsRlPHBtu846jtd2LhjaJ
- h4eHiWZBrotTUTgtA2rY2S4uxqgSrfEBGh4uH+USWJsfX8JlyrHpEigsz/dNLnosrSrn
- SNZvfRA/ZTwOjbEFMPawBsonFnyjKl0uFX2bfBGnOB70bVe+5raFK83EQkWrboYDKuFW
- Sdioci7UAc8oarozlPxJfWzpLS47fpSB986JLyA+6e7oMraEOMxiDXXlchDl9R38F/Kh
- 3fXw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=u3KxBlq0zPK8QIlO8+MuF0pPec8mDS4KY0jLiSi9nSI=;
- b=CUgWOVI8dGCD+YUFjUrTmiL4KqBGFFwOm8DGULPpsk/hVEVzNtbU29AC9sTz2uMtlB
- BfKLs65rdXEfotPsdRwbJtMZkjbqxkT62pWsqAMcebHM6PmBKOGmC4N2ALLvM3IfdMHG
- /z1YCpBMTXmnRfrvKiYfBFcHhDDAc1QwcO3A6DbqYls5wIBhMGLC6bRD+Ie+hSJgZNQj
- tLKRYhcyLpLWQo6u0xAvVbSiyCM6i8wnE4yuWshMAYOgjBV8PTVGGuR4rlEXTviM6VbA
- Lu8WK13nyXB30CW8Ox5mXP3pWnkyhwYsocf7vBJu+KIu4sDc56kDARH0v04JZoBzniX/
- B/Qw==
-X-Gm-Message-State: AOAM530ZLjUhMsPdt2qY6+lBkRsFf+eBsOQQSEGValvhJr0FrDFfgE4W
- H+bT88x3lBoE0/klTpHl6csjexXV6AG2smKz2nY=
-X-Google-Smtp-Source: ABdhPJxqXbpJu7xhP92c7F0V15HL7BDOVi27xRhCvFFfsJmEyW+nvefLiFeTewaXymmi5pJPZCgEpYfaCDXhuxfXBt8=
-X-Received: by 2002:a2e:730b:: with SMTP id o11mr13792256ljc.221.1615209230026; 
- Mon, 08 Mar 2021 05:13:50 -0800 (PST)
+Received: from szxga04-in.huawei.com (szxga04-in.huawei.com [45.249.212.190])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1E44889ECB;
+ Mon,  8 Mar 2021 08:32:19 +0000 (UTC)
+Received: from DGGEMS414-HUB.china.huawei.com (unknown [172.30.72.58])
+ by szxga04-in.huawei.com (SkyGuard) with ESMTP id 4DvBNz6wqGz16HjZ;
+ Mon,  8 Mar 2021 16:30:27 +0800 (CST)
+Received: from huawei.com (10.69.192.56) by DGGEMS414-HUB.china.huawei.com
+ (10.3.19.214) with Microsoft SMTP Server id 14.3.498.0; Mon, 8 Mar 2021
+ 16:32:05 +0800
+From: Luo Jiaxing <luojiaxing@huawei.com>
+To: <nouveau@lists.freedesktop.org>, <dri-devel@lists.freedesktop.org>,
+ <bskeggs@redhat.com>
+Date: Mon, 8 Mar 2021 16:32:52 +0800
+Message-ID: <1615192372-47348-1-git-send-email-luojiaxing@huawei.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-References: <CAPpdf59bkxEQ9+iozLOc0o51w2h1e1jJhSROH-91YAEry3k8cw@mail.gmail.com>
- <CACO55tu4PtcVCdUta2MXr9UQQA2nCrmL4-O6btD2F4d_=zUMKA@mail.gmail.com>
-In-Reply-To: <CACO55tu4PtcVCdUta2MXr9UQQA2nCrmL4-O6btD2F4d_=zUMKA@mail.gmail.com>
-From: o1bigtenor <o1bigtenor@gmail.com>
-Date: Mon, 8 Mar 2021 07:13:13 -0600
-Message-ID: <CAPpdf5887gqSzw=yGjO3ZWzkJWAvjwK-Uh=wkrAdAgN=K6ZWxA@mail.gmail.com>
-To: Karol Herbst <kherbst@redhat.com>
-Subject: Re: [Nouveau] Request for information and/or assistance
+X-Originating-IP: [10.69.192.56]
+X-CFilter-Loop: Reflected
+X-Mailman-Approved-At: Mon, 08 Mar 2021 15:34:44 +0000
+Subject: [Nouveau] [PATCH v1] drm/nouveau/device: use snprintf() to replace
+ strncpy() to avoid NUL-terminated string loss
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,93 +41,47 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau <nouveau@lists.freedesktop.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: song.bao.hua@hisilicon.com, luojiaxing@huawei.com,
+ linux-kernel@vger.kernel.org, linuxarm@openeuler.org
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Mon, Mar 8, 2021 at 3:05 AM Karol Herbst <kherbst@redhat.com> wrote:
->
-> On Thu, Mar 4, 2021 at 3:21 AM o1bigtenor <o1bigtenor@gmail.com> wrote:
-> >
-> > Greetings
-> >
-> > Running debian testing, 2 nvidia gpus (GP107 and GF110) and 5 monitors
-> > (1 - 3840x2160 and 2 1920x1080 on the GP107 and 2 - 1920x1080 on the
-> > GF110) using one screen (7680x3000).
-> >Direct firmware load for nouveau/nvc8_fuc084 failed with error -2
-> > I would still like to modify some things but can't find any docs on
-> > how to do that and my attempts have only made things worse and I can
-> > function, even though some things are right awkward, on the system.
-> > What I've run into is that my graphics system either refuses to come
-> > out of hibernation or decides to come back on but in a locked state. I
-> > then log into this machine from another on the network and do a reboot
-> > for a 'graceful' restart (rather than use the kill button - - - the
-> > hard shut off).
-> >
-> > This event, graphics shutdown, is happening in direct relationship to
-> > how much I have happening on the desktops of which I have lots.
-> >
-> > In searching it seems that nouveau support for the GP107 is not yet
-> > complete - - - - or that's what it seems like.
-> >
-> > Is there someone out there who has some idea what the problem is?
-> > (There are quite a number of different individuals mentioning this
-> > issue in one of the bug reports.)
-> >
-> > I would be happy to revise the nouveau pages on xrandr updating the
-> > information from 1.3 to 1.5 and possibly some of the other pages as
-> > well. I have no programming skills but I do have reasonable writing
-> > skills - - - - would rather trade than to continue taking that 1/2
-> > hour it takes to set my system up after each reboot - - - - taking an
-> > hour or even 1.5 hours a day doing this is a huge drain on my
-> > resources and would rather change this.
-> >
-> > Please advise!
-> >
->
-> I think at this point we can only guess what's going on there and
-> having system logs would help us figure out what's wrong. Mind sharing
-> system logs from the time the crash or whatever that is happens?
-> Output of dmesg via ssh could be enough.
->
-
-As requested:
-
-debianbase kernel: [  436.180582] nouveau 0000:02:00.0: Direct
-firmware load for nouveau/nvc8_fuc084 failed with error -2
-Mar  5 20:24:40 debianbase kernel: [  436.180597] nouveau
-0000:02:00.0: Direct firmware load for nouveau/nvc8_fuc084d failed
-with error -2
-Mar  6 00:00:02 debianbase kernel: [13358.378698] audit: type=1400
-audit(1615010402.464:22): apparmor="DENIED" operation="capable"
-profile="/usr/sbin/cupsd" pid=13168 comm="cupsd" capability=12
-capname="net_admin"
-Mar  6 00:00:02 debianbase kernel: [13358.415978] audit: type=1400
-audit(1615010402.500:23): apparmor="DENIED" operation="capable"
-profile="/usr/sbin/cups-browsed" pid=13170 comm="cups-browsed"
-capability=23  capname="sys_nice"
-Mar  6 07:40:56 debianbase kernel: [41012.952323] perf: interrupt took
-too long (2511 > 2500), lowering kernel.perf_event_max_sample_rate to
-79500
-Mar  6 12:04:47 debianbase kernel: [56843.957285] perf: interrupt took
-too long (3152 > 3138), lowering kernel.perf_event_max_sample_rate to
-63250
-Mar  6 15:56:25 debianbase kernel: [70741.868103] perf: interrupt took
-too long (3952 > 3940), lowering kernel.perf_event_max_sample_rate to
-50500
-Mar  7 00:00:01 debianbase kernel: [99758.601985] audit: type=1400
-audit(1615096801.491:24): apparmor="DENIED" operation="capable"
-profile="/usr/sbin/cupsd" pid=56136 comm="cupsd" capability=12
-capname="net_admin"
-Mar  7 00:00:01 debianbase kernel: [99758.625644] audit: type=1400
-audit(1615096801.515:25): apparmor="DENIED" operation="capable"
-profile="/usr/sbin/cups-browsed" pid=56139 comm="cups-browsed"
-capability=23  capname="sys_nice"
-
-Is this sufficient?
-_______________________________________________
-Nouveau mailing list
-Nouveau@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/nouveau
+Rm9sbG93aW5nIHdhcm5pbmcgaXMgZm91bmQgd2hlbiB1c2luZyBXPTEgdG8gYnVpbGQga2VybmVs
+OgoKSW4gZnVuY3Rpb24g4oCYbnZrbV91ZGV2aWNlX2luZm/igJksCiAgICBpbmxpbmVkIGZyb20g
+4oCYbnZrbV91ZGV2aWNlX210aGTigJkgYXQgZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbnZrbS9l
+bmdpbmUvZGV2aWNlL3VzZXIuYzoxOTU6MTA6CmRyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L252a20v
+ZW5naW5lL2RldmljZS91c2VyLmM6MTY0OjI6IHdhcm5pbmc6IOKAmHN0cm5jcHnigJkgc3BlY2lm
+aWVkIGJvdW5kIDE2IGVxdWFscyBkZXN0aW5hdGlvbiBzaXplIFstV3N0cmluZ29wLXRydW5jYXRp
+b25dCiAgMTY0IHwgIHN0cm5jcHkoYXJncy0+djAuY2hpcCwgZGV2aWNlLT5jaGlwLT5uYW1lLCBz
+aXplb2YoYXJncy0+djAuY2hpcCkpOwpkcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9udmttL2VuZ2lu
+ZS9kZXZpY2UvdXNlci5jOjE2NToyOiB3YXJuaW5nOiDigJhzdHJuY3B54oCZIHNwZWNpZmllZCBi
+b3VuZCA2NCBlcXVhbHMgZGVzdGluYXRpb24gc2l6ZSBbLVdzdHJpbmdvcC10cnVuY2F0aW9uXQog
+IDE2NSB8ICBzdHJuY3B5KGFyZ3MtPnYwLm5hbWUsIGRldmljZS0+bmFtZSwgc2l6ZW9mKGFyZ3Mt
+PnYwLm5hbWUpKTsKClRoZSByZWFzb24gb2YgdGhpcyB3YXJuaW5nIGlzIHN0cm5jcHkoKSBkb2Vz
+IG5vdCBndWFyYW50ZWUgdGhhdCB0aGUKZGVzdGluYXRpb24gYnVmZmVyIHdpbGwgYmUgTlVMIHRl
+cm1pbmF0ZWQuIElmIHRoZSBsZW5ndGggb2Ygc291cmNlIHN0cmluZwppcyBiaWdnZXIgdGhhbiBu
+dW1iZXIgd2Ugc2V0IGJ5IHRoaXJkIGlucHV0IHBhcmFtZXRlciwgb25seSBhIHBhcnQgb2YKY2hh
+cmFjdGVycyBpcyBjb3BpZWQgdG8gdGhlIGRlc3RpbmF0aW9uLCBhbmQgbm8gTlVMLXRlcm1pbmF0
+ZWQgc3RyaW5nIGlzCmF1dG9tYXRpY2FsbHkgYWRkZWQuIFRoZXJlIGFyZSBzb21lIHBvdGVudGlh
+bCByaXNrcy4KClNvIHVzZSBzbnByaW50ZigpIHRvIHJlcGxhY2Ugc3RybmNweSgpLgoKU2lnbmVk
+LW9mZi1ieTogTHVvIEppYXhpbmcgPGx1b2ppYXhpbmdAaHVhd2VpLmNvbT4KLS0tCiBkcml2ZXJz
+L2dwdS9kcm0vbm91dmVhdS9udmttL2VuZ2luZS9kZXZpY2UvdXNlci5jIHwgNCArKy0tCiAxIGZp
+bGUgY2hhbmdlZCwgMiBpbnNlcnRpb25zKCspLCAyIGRlbGV0aW9ucygtKQoKZGlmZiAtLWdpdCBh
+L2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L252a20vZW5naW5lL2RldmljZS91c2VyLmMgYi9kcml2
+ZXJzL2dwdS9kcm0vbm91dmVhdS9udmttL2VuZ2luZS9kZXZpY2UvdXNlci5jCmluZGV4IGZlYTlk
+OGYuLjRiZjY1YmIgMTAwNjQ0Ci0tLSBhL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L252a20vZW5n
+aW5lL2RldmljZS91c2VyLmMKKysrIGIvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbnZrbS9lbmdp
+bmUvZGV2aWNlL3VzZXIuYwpAQCAtMTYxLDggKzE2MSw4IEBAIG52a21fdWRldmljZV9pbmZvKHN0
+cnVjdCBudmttX3VkZXZpY2UgKnVkZXYsIHZvaWQgKmRhdGEsIHUzMiBzaXplKQogCWlmIChpbWVt
+ICYmIGFyZ3MtPnYwLnJhbV9zaXplID4gMCkKIAkJYXJncy0+djAucmFtX3VzZXIgPSBhcmdzLT52
+MC5yYW1fdXNlciAtIGltZW0tPnJlc2VydmVkOwogCi0Jc3RybmNweShhcmdzLT52MC5jaGlwLCBk
+ZXZpY2UtPmNoaXAtPm5hbWUsIHNpemVvZihhcmdzLT52MC5jaGlwKSk7Ci0Jc3RybmNweShhcmdz
+LT52MC5uYW1lLCBkZXZpY2UtPm5hbWUsIHNpemVvZihhcmdzLT52MC5uYW1lKSk7CisJc25wcmlu
+dGYoYXJncy0+djAuY2hpcCwgc2l6ZW9mKGFyZ3MtPnYwLmNoaXApLCAiJXMiLCBkZXZpY2UtPmNo
+aXAtPm5hbWUpOworCXNucHJpbnRmKGFyZ3MtPnYwLm5hbWUsIHNpemVvZihhcmdzLT52MC5uYW1l
+KSwgIiVzIiwgZGV2aWNlLT5uYW1lKTsKIAlyZXR1cm4gMDsKIH0KIAotLSAKMi43LjQKCl9fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCk5vdXZlYXUgbWFpbGlu
+ZyBsaXN0Ck5vdXZlYXVAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRl
+c2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vbm91dmVhdQo=
