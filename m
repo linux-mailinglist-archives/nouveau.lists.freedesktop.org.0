@@ -1,35 +1,63 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6FD84331251
-	for <lists+nouveau@lfdr.de>; Mon,  8 Mar 2021 16:34:48 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7DF42331250
+	for <lists+nouveau@lfdr.de>; Mon,  8 Mar 2021 16:34:47 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 920776E16F;
-	Mon,  8 Mar 2021 15:34:46 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id EA7716E12B;
+	Mon,  8 Mar 2021 15:34:45 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from szxga04-in.huawei.com (szxga04-in.huawei.com [45.249.212.190])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1E44889ECB;
- Mon,  8 Mar 2021 08:32:19 +0000 (UTC)
-Received: from DGGEMS414-HUB.china.huawei.com (unknown [172.30.72.58])
- by szxga04-in.huawei.com (SkyGuard) with ESMTP id 4DvBNz6wqGz16HjZ;
- Mon,  8 Mar 2021 16:30:27 +0800 (CST)
-Received: from huawei.com (10.69.192.56) by DGGEMS414-HUB.china.huawei.com
- (10.3.19.214) with Microsoft SMTP Server id 14.3.498.0; Mon, 8 Mar 2021
- 16:32:05 +0800
-From: Luo Jiaxing <luojiaxing@huawei.com>
-To: <nouveau@lists.freedesktop.org>, <dri-devel@lists.freedesktop.org>,
- <bskeggs@redhat.com>
-Date: Mon, 8 Mar 2021 16:32:52 +0800
-Message-ID: <1615192372-47348-1-git-send-email-luojiaxing@huawei.com>
-X-Mailer: git-send-email 2.7.4
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id BCABC6E841
+ for <nouveau@lists.freedesktop.org>; Mon,  8 Mar 2021 09:19:37 +0000 (UTC)
+Received: by mail-wm1-x332.google.com with SMTP id
+ r15-20020a05600c35cfb029010e639ca09eso3337360wmq.1
+ for <nouveau@lists.freedesktop.org>; Mon, 08 Mar 2021 01:19:37 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:content-transfer-encoding:in-reply-to;
+ bh=hEOGgoBFFfBcRYu8R+ZFzD5oTYtm/qga63LL53Ov/bU=;
+ b=evLEsiqayrflm8/aMCMFF1KGm9tCqy5TgmLozN1pf5OV8v3XOrrOZ7dusez6ueByqx
+ QbfNJbn3Tb6TelmwrFWDd4WHxalQui+FvvMLcnchyO2FEC0WH66rXpO7Bg5MqXxBzX+Z
+ cc9Pr7PgNkEy1bM1xcbTqIIGCmKoaS4GNgx3Ck/1lpofYRw8U2M/EjDO4iJe0z6SkwP7
+ NEfv8QFCktFfq07V+8oK+WYbUu5K7JfqkfwOCUZH8ZfaC1XQzqb4v836tecMta/an5NF
+ q1zYSc8uWIE/dnLOv0rAgqCp8RZ+/3Pe/2mlOOfPdm/KIfJDoR0E3DqxqFiDR11IYcOx
+ uh1A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:content-transfer-encoding
+ :in-reply-to;
+ bh=hEOGgoBFFfBcRYu8R+ZFzD5oTYtm/qga63LL53Ov/bU=;
+ b=pBxf10eDJ76sd6dyoe7IDBU8sIEMaVjgX6FMZVUik3ZGVn3H0A14xvDIffinI0Nmm0
+ ITEnLBYqB1B1ugYVdATrYUo8mn6BOxL3j9y+g25g4WPDa/5HuDtqjEjPgCb6QxFRiFrW
+ 3pbZ0+Aa0clhxqh+r08itp91r6v7oWAdhCx3YG7tEvlg6U6Knn9GWI6DuIvEkLIX0uou
+ 5zxAcqYkG8l/dil8wggAL0oGuJSc62jxXiIeUmFQRmDdiAJFR6p3hBqcRB4N7KAXdANT
+ jGyf5k5BW2RjhspDfNl6b/Gbx3a5BjuIR456s0My2R24l57JoFoP/MJ0CsldIZ3ltVfe
+ NVKQ==
+X-Gm-Message-State: AOAM530+yLLE/ubDqxMwxC1Kd4q5PRZ3qLalYtbWrxRlVnCbYmmr3/51
+ Jtkhm6pErWCqW1vRI4TytdpkBQ==
+X-Google-Smtp-Source: ABdhPJySpXzmJ3MCPU31zc4PaUGqi7NmkyvQv0pK/pj0WvYnEHQRAY6VwjmHVQ6JfBzbPkybjDafLg==
+X-Received: by 2002:a1c:400b:: with SMTP id n11mr20979920wma.167.1615195176468; 
+ Mon, 08 Mar 2021 01:19:36 -0800 (PST)
+Received: from dell ([91.110.221.130])
+ by smtp.gmail.com with ESMTPSA id i11sm17599389wro.53.2021.03.08.01.19.34
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 08 Mar 2021 01:19:35 -0800 (PST)
+Date: Mon, 8 Mar 2021 09:19:32 +0000
+From: Lee Jones <lee.jones@linaro.org>
+To: Roland Scheidegger <sroland@vmware.com>
+Message-ID: <20210308091932.GB4931@dell>
+References: <20210303134319.3160762-1-lee.jones@linaro.org>
+ <16d4300e-bf29-1e85-317b-53d257890cb9@vmware.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.69.192.56]
-X-CFilter-Loop: Reflected
+Content-Disposition: inline
+In-Reply-To: <16d4300e-bf29-1e85-317b-53d257890cb9@vmware.com>
 X-Mailman-Approved-At: Mon, 08 Mar 2021 15:34:44 +0000
-Subject: [Nouveau] [PATCH v1] drm/nouveau/device: use snprintf() to replace
- strncpy() to avoid NUL-terminated string loss
+Subject: Re: [Nouveau] [RESEND 00/53] Rid GPU from W=1 warnings
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -41,47 +69,38 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: song.bao.hua@hisilicon.com, luojiaxing@huawei.com,
- linux-kernel@vger.kernel.org, linuxarm@openeuler.org
+Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, Qinglang Miao <miaoqinglang@huawei.com>,
+ Anthony Koo <Anthony.Koo@amd.com>, Sumit Semwal <sumit.semwal@linaro.org>,
+ Jeremy Kolb <jkolb@brandeis.edu>, amd-gfx@lists.freedesktop.org,
+ Rob Clark <rob.clark@linaro.org>,
+ VMware Graphics <linux-graphics-maintainer@vmware.com>,
+ Ben Skeggs <bskeggs@redhat.com>, Dave Airlie <airlied@redhat.com>,
+ Harry Wentland <harry.wentland@amd.com>, linux-media@vger.kernel.org,
+ Leo Li <sunpeng.li@amd.com>, linux-arm-msm@vger.kernel.org,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, linaro-mm-sig@lists.linaro.org,
+ Sean Paul <sean@poorly.run>, Kuogee Hsieh <khsieh@codeaurora.org>,
+ linux-kernel@vger.kernel.org, Rob Clark <robdclark@gmail.com>,
+ Daniel Vetter <daniel@ffwll.ch>, Alex Deucher <alexander.deucher@amd.com>,
+ Colin Ian King <colin.king@canonical.com>, freedreno@lists.freedesktop.org,
+ Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+ Zack Rusin <zackr@vmware.com>
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Rm9sbG93aW5nIHdhcm5pbmcgaXMgZm91bmQgd2hlbiB1c2luZyBXPTEgdG8gYnVpbGQga2VybmVs
-OgoKSW4gZnVuY3Rpb24g4oCYbnZrbV91ZGV2aWNlX2luZm/igJksCiAgICBpbmxpbmVkIGZyb20g
-4oCYbnZrbV91ZGV2aWNlX210aGTigJkgYXQgZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbnZrbS9l
-bmdpbmUvZGV2aWNlL3VzZXIuYzoxOTU6MTA6CmRyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L252a20v
-ZW5naW5lL2RldmljZS91c2VyLmM6MTY0OjI6IHdhcm5pbmc6IOKAmHN0cm5jcHnigJkgc3BlY2lm
-aWVkIGJvdW5kIDE2IGVxdWFscyBkZXN0aW5hdGlvbiBzaXplIFstV3N0cmluZ29wLXRydW5jYXRp
-b25dCiAgMTY0IHwgIHN0cm5jcHkoYXJncy0+djAuY2hpcCwgZGV2aWNlLT5jaGlwLT5uYW1lLCBz
-aXplb2YoYXJncy0+djAuY2hpcCkpOwpkcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9udmttL2VuZ2lu
-ZS9kZXZpY2UvdXNlci5jOjE2NToyOiB3YXJuaW5nOiDigJhzdHJuY3B54oCZIHNwZWNpZmllZCBi
-b3VuZCA2NCBlcXVhbHMgZGVzdGluYXRpb24gc2l6ZSBbLVdzdHJpbmdvcC10cnVuY2F0aW9uXQog
-IDE2NSB8ICBzdHJuY3B5KGFyZ3MtPnYwLm5hbWUsIGRldmljZS0+bmFtZSwgc2l6ZW9mKGFyZ3Mt
-PnYwLm5hbWUpKTsKClRoZSByZWFzb24gb2YgdGhpcyB3YXJuaW5nIGlzIHN0cm5jcHkoKSBkb2Vz
-IG5vdCBndWFyYW50ZWUgdGhhdCB0aGUKZGVzdGluYXRpb24gYnVmZmVyIHdpbGwgYmUgTlVMIHRl
-cm1pbmF0ZWQuIElmIHRoZSBsZW5ndGggb2Ygc291cmNlIHN0cmluZwppcyBiaWdnZXIgdGhhbiBu
-dW1iZXIgd2Ugc2V0IGJ5IHRoaXJkIGlucHV0IHBhcmFtZXRlciwgb25seSBhIHBhcnQgb2YKY2hh
-cmFjdGVycyBpcyBjb3BpZWQgdG8gdGhlIGRlc3RpbmF0aW9uLCBhbmQgbm8gTlVMLXRlcm1pbmF0
-ZWQgc3RyaW5nIGlzCmF1dG9tYXRpY2FsbHkgYWRkZWQuIFRoZXJlIGFyZSBzb21lIHBvdGVudGlh
-bCByaXNrcy4KClNvIHVzZSBzbnByaW50ZigpIHRvIHJlcGxhY2Ugc3RybmNweSgpLgoKU2lnbmVk
-LW9mZi1ieTogTHVvIEppYXhpbmcgPGx1b2ppYXhpbmdAaHVhd2VpLmNvbT4KLS0tCiBkcml2ZXJz
-L2dwdS9kcm0vbm91dmVhdS9udmttL2VuZ2luZS9kZXZpY2UvdXNlci5jIHwgNCArKy0tCiAxIGZp
-bGUgY2hhbmdlZCwgMiBpbnNlcnRpb25zKCspLCAyIGRlbGV0aW9ucygtKQoKZGlmZiAtLWdpdCBh
-L2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L252a20vZW5naW5lL2RldmljZS91c2VyLmMgYi9kcml2
-ZXJzL2dwdS9kcm0vbm91dmVhdS9udmttL2VuZ2luZS9kZXZpY2UvdXNlci5jCmluZGV4IGZlYTlk
-OGYuLjRiZjY1YmIgMTAwNjQ0Ci0tLSBhL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L252a20vZW5n
-aW5lL2RldmljZS91c2VyLmMKKysrIGIvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbnZrbS9lbmdp
-bmUvZGV2aWNlL3VzZXIuYwpAQCAtMTYxLDggKzE2MSw4IEBAIG52a21fdWRldmljZV9pbmZvKHN0
-cnVjdCBudmttX3VkZXZpY2UgKnVkZXYsIHZvaWQgKmRhdGEsIHUzMiBzaXplKQogCWlmIChpbWVt
-ICYmIGFyZ3MtPnYwLnJhbV9zaXplID4gMCkKIAkJYXJncy0+djAucmFtX3VzZXIgPSBhcmdzLT52
-MC5yYW1fdXNlciAtIGltZW0tPnJlc2VydmVkOwogCi0Jc3RybmNweShhcmdzLT52MC5jaGlwLCBk
-ZXZpY2UtPmNoaXAtPm5hbWUsIHNpemVvZihhcmdzLT52MC5jaGlwKSk7Ci0Jc3RybmNweShhcmdz
-LT52MC5uYW1lLCBkZXZpY2UtPm5hbWUsIHNpemVvZihhcmdzLT52MC5uYW1lKSk7CisJc25wcmlu
-dGYoYXJncy0+djAuY2hpcCwgc2l6ZW9mKGFyZ3MtPnYwLmNoaXApLCAiJXMiLCBkZXZpY2UtPmNo
-aXAtPm5hbWUpOworCXNucHJpbnRmKGFyZ3MtPnYwLm5hbWUsIHNpemVvZihhcmdzLT52MC5uYW1l
-KSwgIiVzIiwgZGV2aWNlLT5uYW1lKTsKIAlyZXR1cm4gMDsKIH0KIAotLSAKMi43LjQKCl9fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCk5vdXZlYXUgbWFpbGlu
-ZyBsaXN0Ck5vdXZlYXVAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRl
-c2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vbm91dmVhdQo=
+T24gRnJpLCAwNSBNYXIgMjAyMSwgUm9sYW5kIFNjaGVpZGVnZ2VyIHdyb3RlOgoKPiBUaGUgdm13
+Z2Z4IG9uZXMgbG9vayBhbGwgZ29vZCB0byBtZSwgc28gZm9yCj4gMjMtNTM6IFJldmlld2VkLWJ5
+OiBSb2xhbmQgU2NoZWlkZWdnZXIgPHNyb2xhbmRAdm13YXJlLmNvbT4KPiBUaGF0IHNhaWQsIHRo
+ZXkgd2VyZSBhbHJlYWR5IHNpZ25lZCBvZmYgYnkgWmFjaywgc28gbm90IHN1cmUgd2hhdAo+IGhh
+cHBlbmVkIGhlcmUuCgpZZXMsIHRoZXkgd2VyZSBhY2NlcHRlZCBhdCBvbmUgcG9pbnQsIHRoZW4g
+ZHJvcHBlZCB3aXRob3V0IGEgcmVhc29uLgoKU2luY2UgSSByZWJhc2VkIG9udG8gdGhlIGxhdGVz
+dCAtbmV4dCwgSSBoYWQgdG8gcGx1Y2sgdGhlbSBiYWNrIG91dCBvZgphIHByZXZpb3VzIG9uZS4K
+Ci0tIApMZWUgSm9uZXMgW+adjueQvOaWr10KU2VuaW9yIFRlY2huaWNhbCBMZWFkIC0gRGV2ZWxv
+cGVyIFNlcnZpY2VzCkxpbmFyby5vcmcg4pSCIE9wZW4gc291cmNlIHNvZnR3YXJlIGZvciBBcm0g
+U29DcwpGb2xsb3cgTGluYXJvOiBGYWNlYm9vayB8IFR3aXR0ZXIgfCBCbG9nCl9fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCk5vdXZlYXUgbWFpbGluZyBsaXN0
+Ck5vdXZlYXVAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Au
+b3JnL21haWxtYW4vbGlzdGluZm8vbm91dmVhdQo=
