@@ -1,58 +1,93 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 05FCD331BFB
-	for <lists+nouveau@lfdr.de>; Tue,  9 Mar 2021 02:02:09 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id B8053331C2C
+	for <lists+nouveau@lfdr.de>; Tue,  9 Mar 2021 02:17:30 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id BC1486E420;
-	Tue,  9 Mar 2021 01:02:05 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 373F289A6D;
+	Tue,  9 Mar 2021 01:17:27 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-qt1-x829.google.com (mail-qt1-x829.google.com
- [IPv6:2607:f8b0:4864:20::829])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 60C716E420
- for <nouveau@lists.freedesktop.org>; Tue,  9 Mar 2021 01:02:04 +0000 (UTC)
-Received: by mail-qt1-x829.google.com with SMTP id w60so4197883qte.0
- for <nouveau@lists.freedesktop.org>; Mon, 08 Mar 2021 17:02:04 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=sender:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=/tcua8JEh20I7qSkX1+7PRmxJ8LW5jyV4ca6Nk6BFCU=;
- b=VLDt80ym8VZBCec32PaS17NiIbK8ONM/dgzWVOklmG/O/RnBGbgvN8QkYeytdz0WmK
- mdlvOcnvoWC9fN9VjqQzBKF5M/4h9CYAogd6EjMfUS+9rzic46kluqD1BXqiNKweOaIi
- SNiXf5TchzBKuRoY4hUl7hXKquBTuAebryxpMMqiFWOuoY6G1lJUszzf1p5DtHRAlDq1
- j9geWM2uFf27F/u03vqBaRW/MrVvZjD0kZrtvcoNnoYIooeF6d3gb4MVX7FFegbmd9U5
- vErJ2BbT2Dr+HGF3GBNHzOV2XTK8LLuz9/je3WKS/5+D5k3Xqqb/HiynUKXReozlIPMy
- ieRA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
- :mime-version:content-transfer-encoding;
- bh=/tcua8JEh20I7qSkX1+7PRmxJ8LW5jyV4ca6Nk6BFCU=;
- b=HiDvBsRR6qRQ03afiHoOkHeAfjZN13T8BOwWLMP3FnAEJexYOAKFWlDsnIVS7KOrWF
- pZdg5WhUuX5j5enXZOVIoM9EcgR8G3VSsrGJGx8yXMAyS6ayHuQeuWvIhUEbC12SodPY
- cHXIeYQSCg67y1Mi4SnXkOP+wKLKQRXqbj4vUmnvB3B8yQHvaRru1NJnjNOXvTAb88Zq
- uV5aahmvVz2891ZvvzfgzMQTjrJ65+vAr1qlj5qXpmhOagncvMuOjPAqL+mvIRDLBKo/
- WB0TKLY6JQLQPzPGssf4nNs7tukPpNnLZO13ZJyAUVF+RChEGwqYvgOTN+1kd7iv5bDe
- 1C3g==
-X-Gm-Message-State: AOAM5315y07qGZ5hikUK1RjnyCfE55jtgbiVF0dsd3vw6uiwMI4rdIVq
- Cq3l8NQxb8Mb7deSEHDJMUEIOlcWCx+uLw==
-X-Google-Smtp-Source: ABdhPJzEnFKABf+1theh4zUyf9ouFgIBXbRkNEcq4v6vhaT1nr2UMbdu8DR/l1DYP77gZeAKz5Y5Ug==
-X-Received: by 2002:ac8:5ac8:: with SMTP id d8mr22164426qtd.354.1615251723421; 
- Mon, 08 Mar 2021 17:02:03 -0800 (PST)
-Received: from athos.hellosponsor.com ([70.19.70.200])
- by smtp.gmail.com with ESMTPSA id o89sm9181772qte.84.2021.03.08.17.02.02
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 08 Mar 2021 17:02:02 -0800 (PST)
-From: Ilia Mirkin <imirkin@alum.mit.edu>
-To: nouveau@lists.freedesktop.org
-Date: Mon,  8 Mar 2021 20:02:01 -0500
-Message-Id: <20210309010201.29230-1-imirkin@alum.mit.edu>
-X-Mailer: git-send-email 2.26.2
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com
+ (mail-bn7nam10on2070.outbound.protection.outlook.com [40.107.92.70])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3DB4389A6D;
+ Tue,  9 Mar 2021 01:17:26 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=AMCvPrL6ayveLzdYZDl/To3RwmQTautnZVcJqx2Pb1dhSoRqn4nOiFbl8RMRWfSD90ZMy1MNRyMHNO2iq+JyKs9apkVo8qWDH9B0LR/a9lDsRyRGsfRc/0JaUXifULNWgH7AS5XgkFWtuI1sWNkLiGOjQu3KzKw0U3cKZsajZambbCXtNznxUQM1+WKsYwyvKzGico/9SP78zlB9ephVg9TuwyTNRHO5VZGVou/uNeLyW1M+9uuZSu3qkVsoDT0EntCs+4uwjWr99bCONdMW1FQZJjMcRataawWj9TO2OqmYkBXNZKC/1tKcTTsnt5St3COqT8TI+2Kar4X72kcraQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=9tQXbMYeq+FZ6yArCaBTCoz8d2g5YR1FNHecZRJh10w=;
+ b=EMmgB/Cq+lCGY2lxJGcSwL61pw/86nSohMF9S4qlW9Fe0Guycos3I7xDJuCNFIeIuSkkXC/Rt9VZ9RfbMD1zdo+fb/EKvUfRA9Qk2QUtOHAooUau2VB875m3vx3fR7kokkk2fYSCIGPsKT+Ukwnl65wUAt+ifvu7lJ2KlgSI+HjpEnpnhTTm1i/AlkBViIGsglKr57Yi1RjX22hMfdfD4D0QhQ9thrxrUWzpRFcKTd2q2Ime9YttCSSsk8pSmJDHeU1br7lqasdJ5kaNpxq99wBhdT/1voIrK2TgsJhCeMUAp67rdxri+zA5O2ji4Y+W53wE/HGgVSUv31EE8kbQGA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 216.228.112.34) smtp.rcpttodomain=vger.kernel.org smtp.mailfrom=nvidia.com;
+ dmarc=pass (p=none sp=none pct=100) action=none header.from=nvidia.com;
+ dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=9tQXbMYeq+FZ6yArCaBTCoz8d2g5YR1FNHecZRJh10w=;
+ b=vAKTd7FC3IFahMO8cW/JhqO+D7evYrlqcu7oKeCj48iTOmB1bKRyXnOW4WAw4nLE40PQ7CQfq5aZ4GMtdnYExesTGnrMD55mj/M49YJ+d3ykVrFRib6LHYHf7fDUvB+aVfdcFu8AIupeOylZCOvihIgOHdNrEURG0GCohcYHu98=
+Received: from CO2PR04CA0136.namprd04.prod.outlook.com (2603:10b6:104::14) by
+ MW3PR12MB4474.namprd12.prod.outlook.com (2603:10b6:303:2e::7) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.3912.17; Tue, 9 Mar 2021 01:17:21 +0000
+Received: from CO1NAM11FT065.eop-nam11.prod.protection.outlook.com
+ (2603:10b6:104:0:cafe::16) by CO2PR04CA0136.outlook.office365.com
+ (2603:10b6:104::14) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3912.17 via Frontend
+ Transport; Tue, 9 Mar 2021 01:17:21 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.112.34)
+ smtp.mailfrom=nvidia.com; vger.kernel.org; dkim=none (message not signed)
+ header.d=none; vger.kernel.org; dmarc=pass action=none header.from=nvidia.com; 
+Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
+ 216.228.112.34 as permitted sender) receiver=protection.outlook.com;
+ client-ip=216.228.112.34; helo=mail.nvidia.com;
+Received: from mail.nvidia.com (216.228.112.34) by
+ CO1NAM11FT065.mail.protection.outlook.com (10.13.174.62) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id
+ 15.20.3890.19 via Frontend Transport; Tue, 9 Mar 2021 01:17:21 +0000
+Received: from nvdebian.localnet (172.20.145.6) by HQMAIL107.nvidia.com
+ (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1497.2; Tue, 9 Mar
+ 2021 01:17:18 +0000
+From: Alistair Popple <apopple@nvidia.com>
+To: Ralph Campbell <rcampbell@nvidia.com>
+Date: Tue, 9 Mar 2021 12:17:16 +1100
+Message-ID: <1795020.LnfgZAJ4CS@nvdebian>
+In-Reply-To: <ac380c1c-20f4-7c5b-dc5b-be6e1e970921@nvidia.com>
+References: <20210304061645.29747-1-apopple@nvidia.com>
+ <20210304061645.29747-6-apopple@nvidia.com>
+ <ac380c1c-20f4-7c5b-dc5b-be6e1e970921@nvidia.com>
 MIME-Version: 1.0
-Subject: [Nouveau] [PATCH] xv: add MMX / SSE acceleration for YV12 -> YUYV
- repacking
+X-Originating-IP: [172.20.145.6]
+X-ClientProxiedBy: HQMAIL105.nvidia.com (172.20.187.12) To
+ HQMAIL107.nvidia.com (172.20.187.13)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: f9550d66-14b1-4073-5590-08d8e29916d9
+X-MS-TrafficTypeDiagnostic: MW3PR12MB4474:
+X-Microsoft-Antispam-PRVS: <MW3PR12MB447431527986E9024242BC63DF929@MW3PR12MB4474.namprd12.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:10000;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: eT4AfXYctdZI1Qch7dpjGj/ixHJxf/TSKb4C2DZByuS67WaNxcrrR/VBBhxJuJOg3WwzcdjzyISVndRO+fI+hmOugxca5Z+7V+9JfFcXGshlfkNJqquz5FNmkIb/ACS+qy8y0DCxZm4+Sf6t/9yKn5TlED2pSrIaXSSAifCsVxwnGFRWSuCblXa5BtWOGTmjk6X7vz3fp4z/oRZS5wDM2NyXWEQSGqQKR/c47tgRhbOjoIRNzUgKUqSOfvKCoY3GJHRyyiqIDJslxyYyyxmUz9tI4g8AM79T7lEmqO/lgVIzypkjCP3DSQdouWdYUfrjtcDhtVMTnP2MAcMN17wVgim6P6U4rTbRRnqweuAG5D+OSKsYIBtpsnjZgKlKu5W+diOM1bgjG0Rbb00xl+sCG+uz3xKDKXL6dEg1mlPW8yI1MMVtK4uttRzIW+oO8GMujQPMk3NR6fh4nWRAvmdjQupN5L5QavEHA4us4WNdOUH/Xiu+BXwq4imKTpaFwNkrpkiJeKkX/Ztw8E78SsgnB8131O+R4JYPbGzmegcR54ZFDpOo3agWwq84qZ6i3pJG7ZEy8EryrLpiXD7ZKMPfwrq/ZEBaLHbCHQfr/nbPs3CwLFiIY+cQG/sT9uAx3KwfIPjva/q53eks+uohsFmurz68PJnAHgMBe7c4RHXtuWB7KzOWr38VGs2gwMJEBF08bIb947zwSyAsykRbw/hCyQ==
+X-Forefront-Antispam-Report: CIP:216.228.112.34; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:schybrid03.nvidia.com; CAT:NONE;
+ SFS:(4636009)(396003)(136003)(376002)(39860400002)(346002)(46966006)(36840700001)(36906005)(86362001)(8676002)(426003)(16526019)(8936002)(316002)(356005)(478600001)(33716001)(336012)(5660300002)(54906003)(36860700001)(47076005)(6636002)(2906002)(186003)(83380400001)(34020700004)(53546011)(70206006)(6862004)(70586007)(82740400003)(9686003)(4326008)(7636003)(26005)(9576002)(82310400003)(39026012);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Mar 2021 01:17:21.3001 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: f9550d66-14b1-4073-5590-08d8e29916d9
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.112.34];
+ Helo=[mail.nvidia.com]
+X-MS-Exchange-CrossTenant-AuthSource: CO1NAM11FT065.eop-nam11.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW3PR12MB4474
+Subject: Re: [Nouveau] [PATCH v4 5/8] mm: Device exclusive memory access
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -64,159 +99,97 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
+Cc: linux-doc@vger.kernel.org, nouveau@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ kvm-ppc@vger.kernel.org, linux-mm@kvack.org, bskeggs@redhat.com,
+ akpm@linux-foundation.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-This is used by the blit adaptor. Might as well try to accelerate it.
-When testing with it hacked to take effect for nvc0, saw, a decrease of
-NVPutImage usage in the X process from 68% -> 43% (MMX) -> 24% (SSE)
-(which is approximately a 7x speed-up to the function, assuming other
-parts remained equal).
+On Tuesday, 9 March 2021 6:44:41 AM AEDT Ralph Campbell wrote:
+> 
+> On 3/3/21 10:16 PM, Alistair Popple wrote:
+> > Some devices require exclusive write access to shared virtual
+> > memory (SVM) ranges to perform atomic operations on that memory. This
+> > requires CPU page tables to be updated to deny access whilst atomic
+> > operations are occurring.
+> > 
+> > In order to do this introduce a new swap entry
+> > type (SWP_DEVICE_EXCLUSIVE). When a SVM range needs to be marked for
+> > exclusive access by a device all page table mappings for the particular
+> > range are replaced with device exclusive swap entries. This causes any
+> > CPU access to the page to result in a fault.
+> > 
+> > Faults are resovled by replacing the faulting entry with the original
+> > mapping. This results in MMU notifiers being called which a driver uses
+> > to update access permissions such as revoking atomic access. After
+> > notifiers have been called the device will no longer have exclusive
+> > access to the region.
+> > 
+> > Signed-off-by: Alistair Popple <apopple@nvidia.com>
+> 
+> I see in the next two patches how make_device_exclusive_entry() and
+> check_device_exclusive_range() are used. This points out a similar
+> problem that migrate_vma_setup() had before I added the
+> mmu_notifier_range_init_migrate() helper to pass a cookie from
+> migrate_vma_setup() to the invalidation callback so the device driver
+> could ignore an invalidation callback triggered by the caller and thus
+> resulting in a deadlock or having to invalidate device PTEs that
+> wouldn't be migrating.
+> 
+> I think you can eliminate the need for check_device_exclusive_range() in
+> the same way by adding a "void *" pointer to make_device_exclusive_entry()
+> and passing that through to try_to_protect(), setting rmap_walk_control 
+rwc.arg
+> and then passing arg to mmu_notifier_range_init_migrate().
 
-Signed-off-by: Ilia Mirkin <imirkin@alum.mit.edu>
----
+Thanks for the idea, I had missed there was already a way of passing a "void 
+*" as part of mmu_notifier_range_init_migrate(). Agree that should allow a 
+single pass without needing check_device_exclusive_range().
 
-I did some basic testing with a patch to force the texture path to do
-this conversion rather than to NV12, testing all 3 cases. However I need
-to do better testing of edge cases, which I will do before pushing.
+As Jason points out still need to check the GUP page is mapped at the expected 
+address but that can be done as part of installing the exclusive swap entry in 
+try_to_protect_one().
 
- src/nouveau_xv.c | 94 ++++++++++++++++++++++++++++++++++++++++--------
- 1 file changed, 80 insertions(+), 14 deletions(-)
+> Although, maybe it would be better to define a new
+> mmu_notifier_range_init_exclusive() and event type MMU_NOTIFY_EXCLUSIVE so
+> that a device driver can revoke atomic/exclusive access but keep read/write
+> access to other parts of the page.
 
-diff --git a/src/nouveau_xv.c b/src/nouveau_xv.c
-index b2d75c5..16aca93 100644
---- a/src/nouveau_xv.c
-+++ b/src/nouveau_xv.c
-@@ -25,7 +25,7 @@
- #include "config.h"
- #endif
+Agree, I don't think overloading mmu_notifier_range_init_migrate() with the 
+exclusive usage is correct. Better to define a new helper.
+
+> I thought about how make_device_exclusive_entry() is similar to 
+hmm_range_fault()
+> and whether it would be possible to add a new HMM_PFN_REQ_EXCLUSIVE flag but 
+I
+> see that make_device_exclusive_entry() returns the pages locked and with an
+> additional get_page() reference. This doesn't fit well with the other
+> hmm_range_fault() entries being returned as a "snapshot" so having a 
+different
+> API makes sense. I think it would be useful to add a HMM_PFN_EXCLUSIVE flag 
+so
+> that snapshots of the page tables can at least report that a page is 
+exclusively
+> being accessed by *some* device. Unfortunately, there is no pgmap pointer to 
+be
+> able to tell which device has exclusive access (since any struct page could 
+be
+> exclusively accessed, not just device private ones).
  
--#ifdef __SSE2__
-+#if defined(__SSE2__) || defined(__MMX__)
- #include <immintrin.h>
- #endif
- 
-@@ -568,7 +568,7 @@ NVCopyData420(unsigned char *src1, unsigned char *src2, unsigned char *src3,
- {
- 	CARD32 *dst;
- 	CARD8 *s1, *s2, *s3;
--	int i, j;
-+	int i, j, l, e;
- 
- #define su(X) (((j & 1) && j < (h-1)) ? ((unsigned)((signed int)s2[X] +        \
- 		(signed int)(s2 + srcPitch2)[X]) / 2) : (s2[X]))
-@@ -576,29 +576,95 @@ NVCopyData420(unsigned char *src1, unsigned char *src2, unsigned char *src3,
- 		(signed int)(s3 + srcPitch2)[X]) / 2) : (s3[X]))
- 
- 	w >>= 1;
-+#ifdef __MMX__
-+	l = w >> 3;
-+	e = w & 7;
-+#else
-+	l = w >> 2;
-+	e = w & 3;
-+#endif
- 
- 	for (j = 0; j < h; j++) {
- 		dst = (CARD32*)dst1;
- 		s1 = src1;  s2 = src2;  s3 = src3;
- 		i = w;
- 
--		while (i > 4) {
-+		for (i = 0; i < l; i++) {
-+#ifdef __MMX__
-+			__m64 mm_v = *(__m64 *)&s2[0];
-+			__m64 mm_u = *(__m64 *)&s3[0];
-+
-+			if (j & 1 && j < (h - 1)) {
-+				__m64 mm_vnext = *(__m64 *)&(s2 + srcPitch2)[0];
-+#ifdef __SSE__
-+				mm_v = _mm_avg_pu8(mm_v, mm_vnext);
-+#else /* __SSE__ */
-+				__m64 zero = _m_from_int(0);
-+				/* make 16-bit wide values */
-+				__m64 mm_vnext16_1 = _mm_unpacklo_pi8(mm_vnext, zero);
-+				__m64 mm_vnext16_2 = _mm_unpackhi_pi8(mm_vnext, zero);
-+				__m64 mm_v16_1 = _mm_unpacklo_pi8(mm_v, zero);
-+				__m64 mm_v16_2 = _mm_unpackhi_pi8(mm_v, zero);
-+				/* add together */
-+				mm_v16_1 = _mm_add_pi16(mm_v16_1, mm_vnext16_1);
-+				mm_v16_2 = _mm_add_pi16(mm_v16_2, mm_vnext16_2);
-+				/* divide by 2 */
-+				mm_v16_1 = _mm_srli_pi16(mm_v16_1, 1);
-+				mm_v16_2 = _mm_srli_pi16(mm_v16_2, 1);
-+				/* put back into 8-bit values */
-+				mm_v = _mm_packs_pu16(mm_v16_1, mm_v16_2);
-+#endif
-+
-+				/* repeat for u */
-+				__m64 mm_unext = *(__m64 *)&(s3 + srcPitch2)[0];
-+#ifdef __SSE__
-+				mm_u = _mm_avg_pu8(mm_u, mm_unext);
-+#else /* __SSE__ */
-+				/* make 16-bit wide values */
-+				__m64 mm_unext16_1 = _mm_unpacklo_pi8(mm_unext, zero);
-+				__m64 mm_unext16_2 = _mm_unpackhi_pi8(mm_unext, zero);
-+				__m64 mm_u16_1 = _mm_unpacklo_pi8(mm_u, zero);
-+				__m64 mm_u16_2 = _mm_unpackhi_pi8(mm_u, zero);
-+				/* add together */
-+				mm_u16_1 = _mm_add_pi16(mm_u16_1, mm_unext16_1);
-+				mm_u16_2 = _mm_add_pi16(mm_u16_2, mm_unext16_2);
-+				/* divide by 2 */
-+				mm_u16_1 = _mm_srli_pi16(mm_u16_1, 1);
-+				mm_u16_2 = _mm_srli_pi16(mm_u16_2, 1);
-+				/* put back into 8-bit values */
-+				mm_u = _mm_packs_pu16(mm_u16_1, mm_u16_2);
-+#endif
-+			}
-+
-+			__m64 mm_y1 = *(__m64 *)s1;
-+			__m64 mm_y2 = *(__m64 *)&s1[8];
-+
-+			__m64 mm_uv1 = _mm_unpacklo_pi8(mm_u, mm_v);
-+			__m64 mm_uv2 = _mm_unpackhi_pi8(mm_u, mm_v);
-+
-+			*(__m64 *)&dst[0] = _mm_unpacklo_pi8(mm_y1, mm_uv1);
-+			*(__m64 *)&dst[2] = _mm_unpackhi_pi8(mm_y1, mm_uv1);
-+			*(__m64 *)&dst[4] = _mm_unpacklo_pi8(mm_y2, mm_uv2);
-+			*(__m64 *)&dst[6] = _mm_unpackhi_pi8(mm_y2, mm_uv2);
-+
-+			dst += 8; s2 += 8; s3 += 8; s1 += 16;
-+#else /* __MMX__ */
- #if X_BYTE_ORDER == X_BIG_ENDIAN
--		dst[0] = (s1[0] << 24) | (s1[1] << 8) | (sv(0) << 16) | su(0);
--		dst[1] = (s1[2] << 24) | (s1[3] << 8) | (sv(1) << 16) | su(1);
--		dst[2] = (s1[4] << 24) | (s1[5] << 8) | (sv(2) << 16) | su(2);
--		dst[3] = (s1[6] << 24) | (s1[7] << 8) | (sv(3) << 16) | su(3);
-+			dst[0] = (s1[0] << 24) | (s1[1] << 8) | (sv(0) << 16) | su(0);
-+			dst[1] = (s1[2] << 24) | (s1[3] << 8) | (sv(1) << 16) | su(1);
-+			dst[2] = (s1[4] << 24) | (s1[5] << 8) | (sv(2) << 16) | su(2);
-+			dst[3] = (s1[6] << 24) | (s1[7] << 8) | (sv(3) << 16) | su(3);
- #else
--		dst[0] = s1[0] | (s1[1] << 16) | (sv(0) << 8) | (su(0) << 24);
--		dst[1] = s1[2] | (s1[3] << 16) | (sv(1) << 8) | (su(1) << 24);
--		dst[2] = s1[4] | (s1[5] << 16) | (sv(2) << 8) | (su(2) << 24);
--		dst[3] = s1[6] | (s1[7] << 16) | (sv(3) << 8) | (su(3) << 24);
-+			dst[0] = s1[0] | (s1[1] << 16) | (sv(0) << 8) | (su(0) << 24);
-+			dst[1] = s1[2] | (s1[3] << 16) | (sv(1) << 8) | (su(1) << 24);
-+			dst[2] = s1[4] | (s1[5] << 16) | (sv(2) << 8) | (su(2) << 24);
-+			dst[3] = s1[6] | (s1[7] << 16) | (sv(3) << 8) | (su(3) << 24);
- #endif
--		dst += 4; s2 += 4; s3 += 4; s1 += 8;
--		i -= 4;
-+			dst += 4; s2 += 4; s3 += 4; s1 += 8;
-+#endif /* __MMX__ */
- 		}
- 
--		while (i--) {
-+		for (i = 0; i < e; i++) {
- #if X_BYTE_ORDER == X_BIG_ENDIAN
- 		dst[0] = (s1[0] << 24) | (s1[1] << 8) | (sv(0) << 16) | su(0);
- #else
--- 
-2.26.2
+I have also experimented with integrating this with HMM but it just didn't end 
+up being a good fit for the reasons you mention.
+
+I also don't think adding HMM_PFN_EXCLUSIVE to read page table snapshots is 
+that useful because there is no way to tell *which* device has exclusive 
+access. So unless I've missed some particular usage for it now I think it can 
+probably be added as a future improvement to HMM if/when it is needed.
+
+ - Alistair
+
+
 
 _______________________________________________
 Nouveau mailing list
