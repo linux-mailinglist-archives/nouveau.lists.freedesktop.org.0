@@ -1,82 +1,93 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 88BE0337978
-	for <lists+nouveau@lfdr.de>; Thu, 11 Mar 2021 17:34:48 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6DF203384B8
+	for <lists+nouveau@lfdr.de>; Fri, 12 Mar 2021 05:42:57 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0A2686E504;
-	Thu, 11 Mar 2021 16:34:47 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id BE8076E110;
+	Fri, 12 Mar 2021 04:42:55 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [IPv6:2a00:1450:4864:20::32e])
- by gabe.freedesktop.org (Postfix) with ESMTPS id AA5866ECF0
- for <nouveau@lists.freedesktop.org>; Thu, 11 Mar 2021 13:52:01 +0000 (UTC)
-Received: by mail-wm1-x32e.google.com with SMTP id o26so1354402wmc.5
- for <nouveau@lists.freedesktop.org>; Thu, 11 Mar 2021 05:52:01 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=date:from:to:subject:message-id:references:mime-version
- :content-disposition:content-transfer-encoding:in-reply-to;
- bh=GdXN3z4xkG8mhrjjLyuf+xPSPLFfHaqc7TyE3s6lR5o=;
- b=mzyHuGYkxuGBqtX56UH+ZqkeHQrY7cxjlNcTXAnF2iB0rcPRz1a0NOXIcbCaQA03iz
- EDY3iXzg3ylmx6DshXuHd/xYeDBmICAzMcMb1ziWGbtGMp88T3If/JFMeDUTgYLA5FaR
- lZzyUcqQNlTgrbOWxIiCNNkGXcN+YcAkRa7XtcndRuHIISjtS1bqOozbZsz1nC5hcsDD
- u26KEay0y9NGORuXLNCFAGzVfuTbflhbbVeY0FwDzd47mAegDitFXQlidZ+r3vc4qp62
- 2wq4Ap9JOFRY2OG3rj7JvheiELYyUdtdiEu9Q/yHgDadrXZxY7kRNmrLS7Phdb9dJhjR
- /WTQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:subject:message-id:references
- :mime-version:content-disposition:content-transfer-encoding
- :in-reply-to;
- bh=GdXN3z4xkG8mhrjjLyuf+xPSPLFfHaqc7TyE3s6lR5o=;
- b=Cq64jmoncurhjvFEMz/TGJsfWkF0qAnaCiWa0tHldHSzPHdD/VSU2jXCx7tjlRDxWm
- Rmxct0kWPZx93QmYTcab59aVjktU9k0sRoj+XKuRCMTMvb86FJ5kGlYN7gdB5qq4bxGh
- nius83gucxdKZ8VH4pvsvCDI8toq7D7WjRpmb8LRCKTCHpr8wV1hQUZB14N/C8UgNPeS
- f9RDmI5PzqGkwZ/eLG+pLPnyJMOMPUMoLmMfzBZNbxgfFMnGKqV4wyV4Rr+FbxkyK3wa
- 5X9SPDtqhomFL5ZAtzl0AyxgLjfbllAYgqfgd8Ogk0OqG3bFRo8qpMXoN9llrQh9jkxt
- gEBg==
-X-Gm-Message-State: AOAM532bemTTqZWnyPRI2Kfqe+BicjYoYPBaFi3YzpES4LK9ITJab6b1
- w5KmPrASBykL+f7O7EbC6s9rkw==
-X-Google-Smtp-Source: ABdhPJwtZ3Lak0tbe7621fR5C5wI2ILNInbUcMVPIDqge9Cl2Uqimu1nbUPn2VLmqrVsQ9qrcxz2sA==
-X-Received: by 2002:a7b:cd81:: with SMTP id y1mr8400832wmj.51.1615470715019;
- Thu, 11 Mar 2021 05:51:55 -0800 (PST)
-Received: from dell ([91.110.221.204])
- by smtp.gmail.com with ESMTPSA id h10sm4119795wrp.22.2021.03.11.05.51.53
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Mar 2021 05:51:54 -0800 (PST)
-Date: Thu, 11 Mar 2021 13:51:52 +0000
-From: Lee Jones <lee.jones@linaro.org>
-To: Roland Scheidegger <sroland@vmware.com>, linux-kernel@vger.kernel.org,
- Alex Deucher <alexander.deucher@amd.com>,
- amd-gfx@lists.freedesktop.org, Anthony Koo <Anthony.Koo@amd.com>,
- Ben Skeggs <bskeggs@redhat.com>,
- Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
- Colin Ian King <colin.king@canonical.com>,
- Dave Airlie <airlied@redhat.com>, David Airlie <airlied@linux.ie>,
- dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org,
- Harry Wentland <harry.wentland@amd.com>, Jeremy Kolb <jkolb@brandeis.edu>,
- Kuogee Hsieh <khsieh@codeaurora.org>, Leo Li <sunpeng.li@amd.com>,
- linaro-mm-sig@lists.linaro.org, linux-arm-msm@vger.kernel.org,
- linux-media@vger.kernel.org, Lyude Paul <lyude@redhat.com>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, nouveau@lists.freedesktop.org,
- Qinglang Miao <miaoqinglang@huawei.com>,
- Rob Clark <rob.clark@linaro.org>, Rob Clark <robdclark@gmail.com>,
- Sean Paul <sean@poorly.run>, Sumit Semwal <sumit.semwal@linaro.org>,
- Thomas Zimmermann <tzimmermann@suse.de>,
- VMware Graphics <linux-graphics-maintainer@vmware.com>,
- Zack Rusin <zackr@vmware.com>
-Message-ID: <20210311135152.GT701493@dell>
-References: <20210303134319.3160762-1-lee.jones@linaro.org>
- <16d4300e-bf29-1e85-317b-53d257890cb9@vmware.com>
- <20210308091932.GB4931@dell> <YEobySvG0zPs9xhc@phenom.ffwll.local>
+Received: from NAM12-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam12on2041.outbound.protection.outlook.com [40.107.243.41])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3B43D6E110;
+ Fri, 12 Mar 2021 04:42:54 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=Ba9YDpVj0NoLxL1uiSod4GaSKUxgfGwxYEO7VhsAQzbVsDEZQ4eV3uUOPwU/zQE0Abg47D6PS1gKAe8sOjQeIoJVoYpkC0Br9jDckGXkUcxoDQOuSR7Ium5WuVyAwFgd5rRjgPdiAHMHSWngL2YD53Xsgm+por79SeCihLKGG9Witl0H186tzB8+3WDw713PQFBkXzuyk5GUU5Sm9eMUrq2S2uJ+H4wjGqtdWrtGd8TblyrsLlIRNmD89w6Fd1gRmJT9u/xMO0fKOdGQqBuTM6zMmaS3T+Dks4VC2OIaCkLG3sL4hKFa33mV99PdffMXWAiGcn89pICbAWfmlUOn+g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=dTK0VPwwkhLyGgUfm/5MUrWbjzo2X8rxMBnm7Z0Pbns=;
+ b=GRUnR8juX0PDp2MEUVjoXO+YNqykY9SQj7EZ30KKBcfDCkXA0ktItYJEqiyQpfbFMNtaLUyUYExYE7hVdGE6iiV0FIRx856ybbUptGe6MbpDQyUNCgNmkUtbUAZhmNMb9u+PAfO1/r89KLPyBgEf11/z03VFEoXNcYU8F2eZDXEo1hlvxGEeKKM2O1wTTwIp6jPHCVLbR24xXX0km8+AzC2N3DABCsDnbxmtQx5oYXDP86Bf04Q1Xn9lI1/Q47Sob1dH1JK9Js9oN8iSRLpOXYopnccw9BaXMSy3E8mjOSPvHJ9m7GxKix5qhu8MeXyVkwkjrBo36eM9MA8FhqOktQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 216.228.112.34) smtp.rcpttodomain=vger.kernel.org smtp.mailfrom=nvidia.com;
+ dmarc=pass (p=none sp=none pct=100) action=none header.from=nvidia.com;
+ dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=dTK0VPwwkhLyGgUfm/5MUrWbjzo2X8rxMBnm7Z0Pbns=;
+ b=JKNqqEqntWbJrQKaF+3BthDC8FnakQrPeZc0k+EXqPVTb7BH4i7DGGDpS27iq1P6WCCyco4nnddyPsQ5MQh5M/3RPFo/Iy/KcwyZ884qNeSxbH1ZPgLG0i4nQM8UP8tnFe1mYDMCp+dN+BoIH5nOSBv+UTbwc4AIFg9TOrA3i0ydKgSBoKWrTpXM25eJWIcMadEOQ3w8Zd9STZNwKQ17P3ZRSadphgYhGZx66mO6z39d1hzXoW+1BMhPfpRGsDd2wzeLeYsYs22f30BPj4cduFblhgbijzG+QdfQCVPzNT6css9kWoZ7zz3j684RqPfbPMNUSV0IiTFTafAYktx2dA==
+Received: from BN6PR13CA0011.namprd13.prod.outlook.com (2603:10b6:404:10a::21)
+ by BYAPR12MB3173.namprd12.prod.outlook.com (2603:10b6:a03:13d::26)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3912.30; Fri, 12 Mar
+ 2021 04:42:50 +0000
+Received: from BN8NAM11FT043.eop-nam11.prod.protection.outlook.com
+ (2603:10b6:404:10a:cafe::28) by BN6PR13CA0011.outlook.office365.com
+ (2603:10b6:404:10a::21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3955.11 via Frontend
+ Transport; Fri, 12 Mar 2021 04:42:50 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.112.34)
+ smtp.mailfrom=nvidia.com; vger.kernel.org; dkim=none (message not signed)
+ header.d=none; vger.kernel.org; dmarc=pass action=none header.from=nvidia.com; 
+Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
+ 216.228.112.34 as permitted sender) receiver=protection.outlook.com;
+ client-ip=216.228.112.34; helo=mail.nvidia.com;
+Received: from mail.nvidia.com (216.228.112.34) by
+ BN8NAM11FT043.mail.protection.outlook.com (10.13.177.218) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id
+ 15.20.3933.31 via Frontend Transport; Fri, 12 Mar 2021 04:42:49 +0000
+Received: from nvdebian.localnet (172.20.145.6) by HQMAIL107.nvidia.com
+ (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1497.2; Fri, 12 Mar
+ 2021 04:42:46 +0000
+From: Alistair Popple <apopple@nvidia.com>
+To: Matthew Wilcox <willy@infradead.org>
+Date: Fri, 12 Mar 2021 15:42:44 +1100
+Message-ID: <2167899.OcvonqYCbN@nvdebian>
+In-Reply-To: <20210309124949.GJ3479805@casper.infradead.org>
+References: <20210309121505.23608-1-apopple@nvidia.com>
+ <20210309121505.23608-2-apopple@nvidia.com>
+ <20210309124949.GJ3479805@casper.infradead.org>
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <YEobySvG0zPs9xhc@phenom.ffwll.local>
-X-Mailman-Approved-At: Thu, 11 Mar 2021 16:34:45 +0000
-Subject: Re: [Nouveau] [RESEND 00/53] Rid GPU from W=1 warnings
+X-Originating-IP: [172.20.145.6]
+X-ClientProxiedBy: HQMAIL105.nvidia.com (172.20.187.12) To
+ HQMAIL107.nvidia.com (172.20.187.13)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: fd51258b-0988-4bfa-b5ae-08d8e5114a7e
+X-MS-TrafficTypeDiagnostic: BYAPR12MB3173:
+X-Microsoft-Antispam-PRVS: <BYAPR12MB3173C96F00D6FFFD92B56102DF6F9@BYAPR12MB3173.namprd12.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:7219;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: WFlhR2qpeQYMK2jDBMXa3uHStYOSv/TSPUvby5N/pt+Rr07nrhSZZ3QnxyHQ8gj+sNTh4sI92wBaI8KT5om9/AfwUdNAHJnwOA92H9AAmlf65crh4EJBkIdbwCzZDZWfP+IhHNavU9F4gExlbJG8jECEQTwQxjRTwqOCEGKXK01zd95wcJLnEy/009lGRBCazaQj7B/TlV9pnc4GthnDFW7g+WjEKjxIaPHubrdlTuCSDlVuS8NJHssD4ybMHHSbPQEw5mK0egYjE95oRg5f38OwYVeBfe9gjs1aKAY1WwE3MzN7G0RyvXujAsAz4JHF9jKUGpL0vaPRP7IYO8KqXXwzRADbXNf8Ld0SnbZnAHf368UbIA2hVHZ5H1OIGu+gh7DiLBT2O0iGsyFT6OIOwd42Vh7d/0JZrm15eRKBvviWT1FbHu72VMqEh1t2Sye6mUe/UcILeIaITjz8XmKAKWRVnSmxZWMYaBegXGOG/udLmOobVMnB/sfvbVxxnnJaELIn76mZmS87lzhuFdoHo/bYRF0tAf2dj/D7YnG1tZbxXx1+yDQh3wp6VEaj76D5RHpjQHvvDJpBIUQfqc3YejcSTIi+5L0g2VkR8xCUeprcMek9zLkTuZzIZJnagszzW3Ekvoco1J4jfpcYbZsdD6XDiZuc/juUoYVoA12POo+tmqkwZm4e04mmm0XlieXq
+X-Forefront-Antispam-Report: CIP:216.228.112.34; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:schybrid03.nvidia.com; CAT:NONE;
+ SFS:(4636009)(346002)(376002)(39860400002)(136003)(396003)(46966006)(36840700001)(36906005)(54906003)(7416002)(426003)(82310400003)(5660300002)(316002)(356005)(36860700001)(6916009)(7636003)(83380400001)(86362001)(47076005)(82740400003)(33716001)(336012)(186003)(478600001)(34020700004)(70206006)(26005)(70586007)(8936002)(2906002)(9576002)(4326008)(9686003)(8676002)(16526019);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Mar 2021 04:42:49.8408 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: fd51258b-0988-4bfa-b5ae-08d8e5114a7e
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.112.34];
+ Helo=[mail.nvidia.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN8NAM11FT043.eop-nam11.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR12MB3173
+Subject: Re: [Nouveau] [PATCH v5 1/8] mm: Remove special swap entry functions
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -88,34 +99,98 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: rcampbell@nvidia.com, linux-doc@vger.kernel.org,
+ nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, kvm-ppc@vger.kernel.org, linux-mm@kvack.org,
+ bskeggs@redhat.com, akpm@linux-foundation.org
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-T24gVGh1LCAxMSBNYXIgMjAyMSwgRGFuaWVsIFZldHRlciB3cm90ZToKCj4gT24gTW9uLCBNYXIg
-MDgsIDIwMjEgYXQgMDk6MTk6MzJBTSArMDAwMCwgTGVlIEpvbmVzIHdyb3RlOgo+ID4gT24gRnJp
-LCAwNSBNYXIgMjAyMSwgUm9sYW5kIFNjaGVpZGVnZ2VyIHdyb3RlOgo+ID4gCj4gPiA+IFRoZSB2
-bXdnZnggb25lcyBsb29rIGFsbCBnb29kIHRvIG1lLCBzbyBmb3IKPiA+ID4gMjMtNTM6IFJldmll
-d2VkLWJ5OiBSb2xhbmQgU2NoZWlkZWdnZXIgPHNyb2xhbmRAdm13YXJlLmNvbT4KPiA+ID4gVGhh
-dCBzYWlkLCB0aGV5IHdlcmUgYWxyZWFkeSBzaWduZWQgb2ZmIGJ5IFphY2ssIHNvIG5vdCBzdXJl
-IHdoYXQKPiA+ID4gaGFwcGVuZWQgaGVyZS4KPiA+IAo+ID4gWWVzLCB0aGV5IHdlcmUgYWNjZXB0
-ZWQgYXQgb25lIHBvaW50LCB0aGVuIGRyb3BwZWQgd2l0aG91dCBhIHJlYXNvbi4KPiA+IAo+ID4g
-U2luY2UgSSByZWJhc2VkIG9udG8gdGhlIGxhdGVzdCAtbmV4dCwgSSBoYWQgdG8gcGx1Y2sgdGhl
-bSBiYWNrIG91dCBvZgo+ID4gYSBwcmV2aW91cyBvbmUuCj4gCj4gVGhleSBzaG91bGQgc2hvdyB1
-cCBpbiBsaW51eC1uZXh0IGFnYWluLiBXZSBtZXJnZSBwYXRjaGVzIGZvciBuZXh0IG1lcmdlCj4g
-d2luZG93IGV2ZW4gZHVyaW5nIHRoZSBjdXJyZW50IG1lcmdlIHdpbmRvdywgYnV0IG5lZWQgdG8g
-bWFrZSBzdXJlIHRoZXkKPiBkb24ndCBwb2xsdXRlIGxpbnV4LW5leHQuIE9jY2FzaW9uYWxseSB0
-aGUgY3V0IG9mZiBpcyB3cm9uZyBzbyBwYXRjaGVzCj4gc2hvdyB1cCwgYW5kIHRoZW4gZ2V0IHB1
-bGxlZCBhZ2Fpbi4KPiAKPiBVbmZvcnR1bmF0ZWx5IGVzcGVjaWFsbHkgdGhlIDUuMTIgbWVyZ2Ug
-Y3ljbGUgd2FzIHZlcnkgd29iYmx5IGR1ZSB0byBzb21lCj4gY29uZnVzaW9uIGhlcmUuIEJ1dCB5
-b3VyIHBhdGNoZXMgc2hvdWxkIGFsbCBiZSBpbiBsaW51eC1uZXh0IGFnYWluICh0aGV5Cj4gYXJl
-IHF1ZXVlZCB1cCBmb3IgNS4xMyBpbiBkcm0tbWlzYy1uZXh0LCBJIGNoZWNrZWQgdGhhdCkuCj4g
-Cj4gU29ycnkgZm9yIHRoZSBjb25mdXNpb24gaGVyZS4KCk9oLCBJIHNlZS4gIFdlbGwgc28gbG9u
-ZyBhcyB0aGV5IGRvbid0IGdldCBkcm9wcGVkLCBJJ2xsIGJlIGhhcHB5LgoKVGhhbmtzIGZvciB0
-aGUgZXhwbGFuYXRpb24gRGFuaWVsCgotLSAKTGVlIEpvbmVzIFvmnY7nkLzmlq9dClNlbmlvciBU
-ZWNobmljYWwgTGVhZCAtIERldmVsb3BlciBTZXJ2aWNlcwpMaW5hcm8ub3JnIOKUgiBPcGVuIHNv
-dXJjZSBzb2Z0d2FyZSBmb3IgQXJtIFNvQ3MKRm9sbG93IExpbmFybzogRmFjZWJvb2sgfCBUd2l0
-dGVyIHwgQmxvZwpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-XwpOb3V2ZWF1IG1haWxpbmcgbGlzdApOb3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRw
-czovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL25vdXZlYXUK
+On Tuesday, 9 March 2021 11:49:49 PM AEDT Matthew Wilcox wrote:
+> On Tue, Mar 09, 2021 at 11:14:58PM +1100, Alistair Popple wrote:
+> > -static inline struct page *migration_entry_to_page(swp_entry_t entry)
+> > -{
+> > -	struct page *p = pfn_to_page(swp_offset(entry));
+> > -	/*
+> > -	 * Any use of migration entries may only occur while the
+> > -	 * corresponding page is locked
+> > -	 */
+> > -	BUG_ON(!PageLocked(compound_head(p)));
+> > -	return p;
+> > -}
+> 
+> > +static inline struct page *pfn_swap_entry_to_page(swp_entry_t entry)
+> > +{
+> > +	struct page *p = pfn_to_page(swp_offset(entry));
+> > +
+> > +	/*
+> > +	 * Any use of migration entries may only occur while the
+> > +	 * corresponding page is locked
+> > +	 */
+> > +	BUG_ON(is_migration_entry(entry) && !PageLocked(compound_head(p)));
+> > +
+> > +	return p;
+> > +}
+> 
+> I appreciate you're only moving this code, but PageLocked includes an
+> implicit compound_head():
+
+I am happy to clean this up at the same time. It did seem a odd when I added 
+it and I had meant to follow up on it some more.
+
+> 1. __PAGEFLAG(Locked, locked, PF_NO_TAIL)
+> 
+> 2. #define __PAGEFLAG(uname, lname, policy)                                \
+>         TESTPAGEFLAG(uname, lname, policy)                              \
+> 
+> 3. #define TESTPAGEFLAG(uname, lname, policy)                              \
+> static __always_inline int Page##uname(struct page *page)               \
+>         { return test_bit(PG_##lname, &policy(page, 0)->flags); }
+> 
+> 4. #define PF_NO_TAIL(page, enforce) ({                                    \
+>                 VM_BUG_ON_PGFLAGS(enforce && PageTail(page), page);     \
+>                 PF_POISONED_CHECK(compound_head(page)); })
+> 
+> 5. #define PF_POISONED_CHECK(page) ({                                      \
+>                 VM_BUG_ON_PGFLAGS(PagePoisoned(page), page);            \
+>                 page; })
+> 
+> 
+> This macrology isn't easy to understand the first time you read it (nor,
+> indeed, the tenth time), so let me decode it:
+> 
+> Substitute 5 into 4 and remove irrelevancies:
+> 
+> 6. #define PF_NO_TAIL(page, enforce) compound_head(page)
+> 
+> Expand 1 in 2:
+> 
+> 7.	TESTPAGEFLAG(Locked, locked, PF_NO_TAIL)
+> 
+> Expand 7 in 3:
+> 
+> 8. static __always_inline int PageLocked(struct page *page)
+> 	{ return test_bit(PG_locked, &PF_NO_TAIL(page, 0)->flags); }
+> 
+> Expand 6 in 8:
+> 
+> 9. static __always_inline int PageLocked(struct page *page)
+> 	{ return test_bit(PG_locked, &compound_head(page)->flags); }
+
+Thanks for expanding that out, makes sense and matches my reading as well. 
+Will remove the redundant compound_head() call in PageLocked() for the next 
+revision.
+
+> (in case it's not clear, compound_head() is idempotent.  that is:
+> 	f(f(a)) == f(a))
+
+
+
+
+
+_______________________________________________
+Nouveau mailing list
+Nouveau@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/nouveau
