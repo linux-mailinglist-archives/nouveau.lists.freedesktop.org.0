@@ -2,92 +2,90 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6DF203384B8
-	for <lists+nouveau@lfdr.de>; Fri, 12 Mar 2021 05:42:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0CC3A338795
+	for <lists+nouveau@lfdr.de>; Fri, 12 Mar 2021 09:39:24 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id BE8076E110;
-	Fri, 12 Mar 2021 04:42:55 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B5A7F6F495;
+	Fri, 12 Mar 2021 08:39:21 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam12on2041.outbound.protection.outlook.com [40.107.243.41])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3B43D6E110;
- Fri, 12 Mar 2021 04:42:54 +0000 (UTC)
+Received: from NAM02-BL2-obe.outbound.protection.outlook.com
+ (mail-eopbgr750078.outbound.protection.outlook.com [40.107.75.78])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B22A26F492;
+ Fri, 12 Mar 2021 08:39:20 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Ba9YDpVj0NoLxL1uiSod4GaSKUxgfGwxYEO7VhsAQzbVsDEZQ4eV3uUOPwU/zQE0Abg47D6PS1gKAe8sOjQeIoJVoYpkC0Br9jDckGXkUcxoDQOuSR7Ium5WuVyAwFgd5rRjgPdiAHMHSWngL2YD53Xsgm+por79SeCihLKGG9Witl0H186tzB8+3WDw713PQFBkXzuyk5GUU5Sm9eMUrq2S2uJ+H4wjGqtdWrtGd8TblyrsLlIRNmD89w6Fd1gRmJT9u/xMO0fKOdGQqBuTM6zMmaS3T+Dks4VC2OIaCkLG3sL4hKFa33mV99PdffMXWAiGcn89pICbAWfmlUOn+g==
+ b=SCRKYLsk0J61g+A8mqtt9IPHwvRVspeyUAsFn2LXCOg6u57I1N/inYmV0VisdviG09CWNtF1dxGxPXO2jGp8VljMliM1CeNZ/IOlcIgkqRVxxtRuM/DqsdkwtkDW6+PQCibbkCthno8VxCGzSQlfkkavNBcU0ZaobS0pBCkv2m4xL/ED7vd3AjPy3Lu+F7+dw4B4QEM/WV6Ezz0X9ipbUnte99NV76YqkUMFBFtARzK3AYFbttaxq6FGQcVBF7QxNJwfwk7bfzmkdKFixeI/dAVsUcdSCQueXsSddM1MrMDbjuia0w6S1Pf85/tBcyuGXQqwLuFWmxBmSbfJov+H2g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=dTK0VPwwkhLyGgUfm/5MUrWbjzo2X8rxMBnm7Z0Pbns=;
- b=GRUnR8juX0PDp2MEUVjoXO+YNqykY9SQj7EZ30KKBcfDCkXA0ktItYJEqiyQpfbFMNtaLUyUYExYE7hVdGE6iiV0FIRx856ybbUptGe6MbpDQyUNCgNmkUtbUAZhmNMb9u+PAfO1/r89KLPyBgEf11/z03VFEoXNcYU8F2eZDXEo1hlvxGEeKKM2O1wTTwIp6jPHCVLbR24xXX0km8+AzC2N3DABCsDnbxmtQx5oYXDP86Bf04Q1Xn9lI1/Q47Sob1dH1JK9Js9oN8iSRLpOXYopnccw9BaXMSy3E8mjOSPvHJ9m7GxKix5qhu8MeXyVkwkjrBo36eM9MA8FhqOktQ==
+ bh=iheuNJz7RXNm8r1gEKLmd8v8UDVPYB/wb+Vsc4S6fDs=;
+ b=PNNdBm6X1uyZNKsXZrk9MEr0nNsGYZi3geLkTNjMvVHLzBnLacsbxZSX9a5LZrVWGCavcPXw021YDr03C6bB5c9sArTrZgy7EtmL2UGOkAyjiJZ+dSVHynfxRUsYrJkRLcat8AHu2yzQKu6vNRYx2jY1SB15oI2g7MHQXXamUroGnqehN8eIurPkKRyG7J/nGmHJlgmYos1JdF6fvHsuvSayWLzseMPLcS2XZ2ciBfmqugFuhB2eJvHnldOqEbhoapEHtXmhvOtDLZ/uL3FmSMdTCgCWGgU6waIbhr9olf7O/QAShrvt8anW7Pi7rSGDs3opiIzO5+rpVz/SwLwomA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 216.228.112.34) smtp.rcpttodomain=vger.kernel.org smtp.mailfrom=nvidia.com;
+ 216.228.112.34) smtp.rcpttodomain=redhat.com smtp.mailfrom=nvidia.com;
  dmarc=pass (p=none sp=none pct=100) action=none header.from=nvidia.com;
  dkim=none (message not signed); arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=dTK0VPwwkhLyGgUfm/5MUrWbjzo2X8rxMBnm7Z0Pbns=;
- b=JKNqqEqntWbJrQKaF+3BthDC8FnakQrPeZc0k+EXqPVTb7BH4i7DGGDpS27iq1P6WCCyco4nnddyPsQ5MQh5M/3RPFo/Iy/KcwyZ884qNeSxbH1ZPgLG0i4nQM8UP8tnFe1mYDMCp+dN+BoIH5nOSBv+UTbwc4AIFg9TOrA3i0ydKgSBoKWrTpXM25eJWIcMadEOQ3w8Zd9STZNwKQ17P3ZRSadphgYhGZx66mO6z39d1hzXoW+1BMhPfpRGsDd2wzeLeYsYs22f30BPj4cduFblhgbijzG+QdfQCVPzNT6css9kWoZ7zz3j684RqPfbPMNUSV0IiTFTafAYktx2dA==
-Received: from BN6PR13CA0011.namprd13.prod.outlook.com (2603:10b6:404:10a::21)
- by BYAPR12MB3173.namprd12.prod.outlook.com (2603:10b6:a03:13d::26)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3912.30; Fri, 12 Mar
- 2021 04:42:50 +0000
-Received: from BN8NAM11FT043.eop-nam11.prod.protection.outlook.com
- (2603:10b6:404:10a:cafe::28) by BN6PR13CA0011.outlook.office365.com
- (2603:10b6:404:10a::21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3955.11 via Frontend
- Transport; Fri, 12 Mar 2021 04:42:50 +0000
+ bh=iheuNJz7RXNm8r1gEKLmd8v8UDVPYB/wb+Vsc4S6fDs=;
+ b=ms4LZTAT9qxcLMkdLMPefEy+C58fm6Rm0Nn3m9qwgLUTdjJLm54cqtj4ORyx157qxyerswBqsAhTwa3XarW4QsthNkiVH+pPyAAmQTLk3maVOe159I/MaGLzogWRxcz7w55woQuqlfq/qCyWwQvkME1mwSstcDC7lHLV/TWfKxfk8GzvAUldSTGw+bFSVw6OivhYsLvnYbrkl5999YSX5L/UZjBNEYkTt/AOgUph4/mcSFUhnqnEdXRecrKxf/MkmtNLwkwxn5i1JNd1RdCuYGU1iOQ/iOLXfZuA+gm8p0+iPcNLWIM/VYH9D+s94JiWjT6bxYccAGh5PPnbJocvUg==
+Received: from DM5PR10CA0012.namprd10.prod.outlook.com (2603:10b6:4:2::22) by
+ CH2PR12MB4117.namprd12.prod.outlook.com (2603:10b6:610:ae::13) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.3933.32; Fri, 12 Mar 2021 08:39:16 +0000
+Received: from DM6NAM11FT023.eop-nam11.prod.protection.outlook.com
+ (2603:10b6:4:2:cafe::e9) by DM5PR10CA0012.outlook.office365.com
+ (2603:10b6:4:2::22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3912.21 via Frontend
+ Transport; Fri, 12 Mar 2021 08:39:16 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.112.34)
- smtp.mailfrom=nvidia.com; vger.kernel.org; dkim=none (message not signed)
- header.d=none; vger.kernel.org; dmarc=pass action=none header.from=nvidia.com; 
+ smtp.mailfrom=nvidia.com; redhat.com; dkim=none (message not signed)
+ header.d=none;redhat.com; dmarc=pass action=none header.from=nvidia.com;
 Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
  216.228.112.34 as permitted sender) receiver=protection.outlook.com;
  client-ip=216.228.112.34; helo=mail.nvidia.com;
 Received: from mail.nvidia.com (216.228.112.34) by
- BN8NAM11FT043.mail.protection.outlook.com (10.13.177.218) with Microsoft SMTP
+ DM6NAM11FT023.mail.protection.outlook.com (10.13.173.96) with Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id
- 15.20.3933.31 via Frontend Transport; Fri, 12 Mar 2021 04:42:49 +0000
-Received: from nvdebian.localnet (172.20.145.6) by HQMAIL107.nvidia.com
+ 15.20.3933.31 via Frontend Transport; Fri, 12 Mar 2021 08:39:16 +0000
+Received: from localhost (172.20.145.6) by HQMAIL107.nvidia.com
  (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1497.2; Fri, 12 Mar
- 2021 04:42:46 +0000
+ 2021 08:39:15 +0000
 From: Alistair Popple <apopple@nvidia.com>
-To: Matthew Wilcox <willy@infradead.org>
-Date: Fri, 12 Mar 2021 15:42:44 +1100
-Message-ID: <2167899.OcvonqYCbN@nvdebian>
-In-Reply-To: <20210309124949.GJ3479805@casper.infradead.org>
-References: <20210309121505.23608-1-apopple@nvidia.com>
- <20210309121505.23608-2-apopple@nvidia.com>
- <20210309124949.GJ3479805@casper.infradead.org>
+To: <linux-mm@kvack.org>, <nouveau@lists.freedesktop.org>,
+ <bskeggs@redhat.com>, <akpm@linux-foundation.org>
+Date: Fri, 12 Mar 2021 19:38:43 +1100
+Message-ID: <20210312083851.15981-1-apopple@nvidia.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
 X-Originating-IP: [172.20.145.6]
-X-ClientProxiedBy: HQMAIL105.nvidia.com (172.20.187.12) To
+X-ClientProxiedBy: HQMAIL111.nvidia.com (172.20.187.18) To
  HQMAIL107.nvidia.com (172.20.187.13)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: fd51258b-0988-4bfa-b5ae-08d8e5114a7e
-X-MS-TrafficTypeDiagnostic: BYAPR12MB3173:
-X-Microsoft-Antispam-PRVS: <BYAPR12MB3173C96F00D6FFFD92B56102DF6F9@BYAPR12MB3173.namprd12.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:7219;
+X-MS-Office365-Filtering-Correlation-Id: d8abfa89-2664-4c41-5c62-08d8e532521c
+X-MS-TrafficTypeDiagnostic: CH2PR12MB4117:
+X-Microsoft-Antispam-PRVS: <CH2PR12MB4117E26B793434014E26A2C0DF6F9@CH2PR12MB4117.namprd12.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:8273;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: WFlhR2qpeQYMK2jDBMXa3uHStYOSv/TSPUvby5N/pt+Rr07nrhSZZ3QnxyHQ8gj+sNTh4sI92wBaI8KT5om9/AfwUdNAHJnwOA92H9AAmlf65crh4EJBkIdbwCzZDZWfP+IhHNavU9F4gExlbJG8jECEQTwQxjRTwqOCEGKXK01zd95wcJLnEy/009lGRBCazaQj7B/TlV9pnc4GthnDFW7g+WjEKjxIaPHubrdlTuCSDlVuS8NJHssD4ybMHHSbPQEw5mK0egYjE95oRg5f38OwYVeBfe9gjs1aKAY1WwE3MzN7G0RyvXujAsAz4JHF9jKUGpL0vaPRP7IYO8KqXXwzRADbXNf8Ld0SnbZnAHf368UbIA2hVHZ5H1OIGu+gh7DiLBT2O0iGsyFT6OIOwd42Vh7d/0JZrm15eRKBvviWT1FbHu72VMqEh1t2Sye6mUe/UcILeIaITjz8XmKAKWRVnSmxZWMYaBegXGOG/udLmOobVMnB/sfvbVxxnnJaELIn76mZmS87lzhuFdoHo/bYRF0tAf2dj/D7YnG1tZbxXx1+yDQh3wp6VEaj76D5RHpjQHvvDJpBIUQfqc3YejcSTIi+5L0g2VkR8xCUeprcMek9zLkTuZzIZJnagszzW3Ekvoco1J4jfpcYbZsdD6XDiZuc/juUoYVoA12POo+tmqkwZm4e04mmm0XlieXq
+X-Microsoft-Antispam-Message-Info: Jw0uqvtIXSGnoAv/4npDgMlK6d+lX4g4KZXDrOdqztco/WXI4kktH6rRY7a6l6f8Enu8b+EsxVcPPbsvspHCaBITAWJAA5yufzUjcPYsLDUcioUj/y9KXR6ev6nPS0kY1p9DjcQXxzwkOZnW77t/SNBb8XyRh2qycaCdDT1gG1h+XfPwBhDKopM9+/02W2ql5V1oAyPWwPimK+6eC+ao4T5ypYT3wki0C6cOmDYHySMT+QAl+I9VLfWJbkbV8GOGQ3vKBsgNXWxXsNgxhIFN4bCXutD5i3D2nnjVf/E0EBHtSYpeU1VV1OR9L+oGQ8hKx3AmbbIYRU3Le7cI+vRYeHOoCRyf8scvhf67Jfnt+F7wiq0A63SNPnw2XuqWRjJXMItc7JMV+SxpGCQl3BMmF0NBHyBBHohZGOfXxzgBQPMa8GRMYenSLftuYq2bFw+DtW6eoBfczelESfOJQH1swgctzoJCaHubjcgIja+PzPOA4S0nWhd055Usjvfluf1JIzmbkFrR/e0ZIa+uCsfnGncPoDsRX4X+iBZMRLB10yQZxUpWUe0WE8EbOQBBfwqldiHb/sod/29O6IvhYHnEL6Rx7S87Yi6weas120bmABDuncCoAmaa7ulCFfXBpgbUMzbN0bSSOthHLra2DJT6yXOYgpMZBxT2dQ0thLawlx12HuI1VzDa8fOKH1CTyLH0
 X-Forefront-Antispam-Report: CIP:216.228.112.34; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:schybrid03.nvidia.com; CAT:NONE;
- SFS:(4636009)(346002)(376002)(39860400002)(136003)(396003)(46966006)(36840700001)(36906005)(54906003)(7416002)(426003)(82310400003)(5660300002)(316002)(356005)(36860700001)(6916009)(7636003)(83380400001)(86362001)(47076005)(82740400003)(33716001)(336012)(186003)(478600001)(34020700004)(70206006)(26005)(70586007)(8936002)(2906002)(9576002)(4326008)(9686003)(8676002)(16526019);
+ SFS:(4636009)(136003)(346002)(39860400002)(396003)(376002)(36840700001)(46966006)(70206006)(70586007)(16526019)(26005)(186003)(2906002)(36860700001)(336012)(86362001)(7416002)(426003)(2616005)(47076005)(478600001)(34020700004)(8676002)(6666004)(4326008)(36906005)(54906003)(316002)(36756003)(356005)(83380400001)(5660300002)(110136005)(1076003)(107886003)(7636003)(82310400003)(82740400003)(8936002);
  DIR:OUT; SFP:1101; 
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Mar 2021 04:42:49.8408 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: fd51258b-0988-4bfa-b5ae-08d8e5114a7e
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Mar 2021 08:39:16.0481 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: d8abfa89-2664-4c41-5c62-08d8e532521c
 X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.112.34];
  Helo=[mail.nvidia.com]
-X-MS-Exchange-CrossTenant-AuthSource: BN8NAM11FT043.eop-nam11.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: DM6NAM11FT023.eop-nam11.prod.protection.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR12MB3173
-Subject: Re: [Nouveau] [PATCH v5 1/8] mm: Remove special swap entry functions
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH2PR12MB4117
+Subject: [Nouveau] [PATCH v6 0/8] Add support for SVM atomics in Nouveau
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -99,96 +97,93 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: rcampbell@nvidia.com, linux-doc@vger.kernel.org,
- nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, kvm-ppc@vger.kernel.org, linux-mm@kvack.org,
- bskeggs@redhat.com, akpm@linux-foundation.org
+Cc: rcampbell@nvidia.com, willy@infradead.org, daniel@ffwll.ch,
+ linux-doc@vger.kernel.org, Alistair Popple <apopple@nvidia.com>,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ hch@infradead.org, kvm-ppc@vger.kernel.org, jgg@nvidia.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tuesday, 9 March 2021 11:49:49 PM AEDT Matthew Wilcox wrote:
-> On Tue, Mar 09, 2021 at 11:14:58PM +1100, Alistair Popple wrote:
-> > -static inline struct page *migration_entry_to_page(swp_entry_t entry)
-> > -{
-> > -	struct page *p = pfn_to_page(swp_offset(entry));
-> > -	/*
-> > -	 * Any use of migration entries may only occur while the
-> > -	 * corresponding page is locked
-> > -	 */
-> > -	BUG_ON(!PageLocked(compound_head(p)));
-> > -	return p;
-> > -}
-> 
-> > +static inline struct page *pfn_swap_entry_to_page(swp_entry_t entry)
-> > +{
-> > +	struct page *p = pfn_to_page(swp_offset(entry));
-> > +
-> > +	/*
-> > +	 * Any use of migration entries may only occur while the
-> > +	 * corresponding page is locked
-> > +	 */
-> > +	BUG_ON(is_migration_entry(entry) && !PageLocked(compound_head(p)));
-> > +
-> > +	return p;
-> > +}
-> 
-> I appreciate you're only moving this code, but PageLocked includes an
-> implicit compound_head():
+This is the sixth version of a series to add support to Nouveau for atomic
+memory operations on OpenCL shared virtual memory (SVM) regions.
 
-I am happy to clean this up at the same time. It did seem a odd when I added 
-it and I had meant to follow up on it some more.
+There are no significant changes for version six other than correcting a
+minor s390 build and bisectability issue and removing a redundant call to
+compound_page() when checking for PageLocked in patch 1.
 
-> 1. __PAGEFLAG(Locked, locked, PF_NO_TAIL)
-> 
-> 2. #define __PAGEFLAG(uname, lname, policy)                                \
->         TESTPAGEFLAG(uname, lname, policy)                              \
-> 
-> 3. #define TESTPAGEFLAG(uname, lname, policy)                              \
-> static __always_inline int Page##uname(struct page *page)               \
->         { return test_bit(PG_##lname, &policy(page, 0)->flags); }
-> 
-> 4. #define PF_NO_TAIL(page, enforce) ({                                    \
->                 VM_BUG_ON_PGFLAGS(enforce && PageTail(page), page);     \
->                 PF_POISONED_CHECK(compound_head(page)); })
-> 
-> 5. #define PF_POISONED_CHECK(page) ({                                      \
->                 VM_BUG_ON_PGFLAGS(PagePoisoned(page), page);            \
->                 page; })
-> 
-> 
-> This macrology isn't easy to understand the first time you read it (nor,
-> indeed, the tenth time), so let me decode it:
-> 
-> Substitute 5 into 4 and remove irrelevancies:
-> 
-> 6. #define PF_NO_TAIL(page, enforce) compound_head(page)
-> 
-> Expand 1 in 2:
-> 
-> 7.	TESTPAGEFLAG(Locked, locked, PF_NO_TAIL)
-> 
-> Expand 7 in 3:
-> 
-> 8. static __always_inline int PageLocked(struct page *page)
-> 	{ return test_bit(PG_locked, &PF_NO_TAIL(page, 0)->flags); }
-> 
-> Expand 6 in 8:
-> 
-> 9. static __always_inline int PageLocked(struct page *page)
-> 	{ return test_bit(PG_locked, &compound_head(page)->flags); }
+Exclusive device access is implemented by adding a new swap entry type
+(SWAP_DEVICE_EXCLUSIVE) which is similar to a migration entry. The main
+difference is that on fault the original entry is immediately restored by
+the fault handler instead of waiting.
 
-Thanks for expanding that out, makes sense and matches my reading as well. 
-Will remove the redundant compound_head() call in PageLocked() for the next 
-revision.
+Restoring the entry triggers calls to MMU notifers which allows a device
+driver to revoke the atomic access permission from the GPU prior to the CPU
+finalising the entry.
 
-> (in case it's not clear, compound_head() is idempotent.  that is:
-> 	f(f(a)) == f(a))
+Patches 1 & 2 refactor existing migration and device private entry
+functions.
 
+Patches 3 & 4 rework try_to_unmap_one() by splitting out unrelated
+functionality into separate functions - try_to_migrate_one() and
+try_to_munlock_one(). These should not change any functionality, but any
+help testing would be much appreciated as I have not been able to test
+every usage of try_to_unmap_one().
 
+Patch 5 contains the bulk of the implementation for device exclusive
+memory.
 
+Patch 6 contains some additions to the HMM selftests to ensure everything
+works as expected.
 
+Patch 7 is a cleanup for the Nouveau SVM implementation.
+
+Patch 8 contains the implementation of atomic access for the Nouveau
+driver.
+
+This has been tested using the latest upstream Mesa userspace with a simple
+OpenCL test program which checks the results of atomic GPU operations on a
+SVM buffer whilst also writing to the same buffer from the CPU.
+
+Alistair Popple (8):
+  mm: Remove special swap entry functions
+  mm/swapops: Rework swap entry manipulation code
+  mm/rmap: Split try_to_munlock from try_to_unmap
+  mm/rmap: Split migration into its own function
+  mm: Device exclusive memory access
+  mm: Selftests for exclusive device memory
+  nouveau/svm: Refactor nouveau_range_fault
+  nouveau/svm: Implement atomic SVM access
+
+ Documentation/vm/hmm.rst                      |  19 +-
+ arch/s390/mm/pgtable.c                        |   2 +-
+ drivers/gpu/drm/nouveau/include/nvif/if000c.h |   1 +
+ drivers/gpu/drm/nouveau/nouveau_svm.c         | 130 +++-
+ drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.h |   1 +
+ .../drm/nouveau/nvkm/subdev/mmu/vmmgp100.c    |   6 +
+ fs/proc/task_mmu.c                            |  23 +-
+ include/linux/mmu_notifier.h                  |  25 +-
+ include/linux/rmap.h                          |   9 +-
+ include/linux/swap.h                          |   8 +-
+ include/linux/swapops.h                       | 123 ++--
+ lib/test_hmm.c                                | 126 +++-
+ lib/test_hmm_uapi.h                           |   2 +
+ mm/debug_vm_pgtable.c                         |  12 +-
+ mm/hmm.c                                      |  12 +-
+ mm/huge_memory.c                              |  45 +-
+ mm/hugetlb.c                                  |  10 +-
+ mm/memcontrol.c                               |   2 +-
+ mm/memory.c                                   | 127 +++-
+ mm/migrate.c                                  |  41 +-
+ mm/mprotect.c                                 |  18 +-
+ mm/page_vma_mapped.c                          |  15 +-
+ mm/rmap.c                                     | 597 +++++++++++++++---
+ tools/testing/selftests/vm/hmm-tests.c        | 219 +++++++
+ 24 files changed, 1313 insertions(+), 260 deletions(-)
+
+-- 
+2.20.1
 
 _______________________________________________
 Nouveau mailing list
