@@ -2,41 +2,42 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1CB4933AC66
-	for <lists+nouveau@lfdr.de>; Mon, 15 Mar 2021 08:43:01 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E62DC33ACC4
+	for <lists+nouveau@lfdr.de>; Mon, 15 Mar 2021 08:52:50 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id CCDB489394;
-	Mon, 15 Mar 2021 07:42:58 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 62E2A89815;
+	Mon, 15 Mar 2021 07:52:49 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from casper.infradead.org (casper.infradead.org
  [IPv6:2001:8b0:10b:1236::1])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7CF7A89394;
- Mon, 15 Mar 2021 07:42:57 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 239C089815;
+ Mon, 15 Mar 2021 07:52:48 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
  References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
  Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=a0crwDimWuDDFbQSyz3+xFwWCr0UuEjinSqp5FgMyJQ=; b=GonZpIh8oQ35/lgbuyAazr754g
- ymArFIK48vHRADKrI7FoPunJP2FDYfPjcCFFX8sZOOXbc5S0+Tv0oLBvzXawhHXhrDIxKE2vDdWGc
- 0ZFmYCNt1B0CpKBLvCNl+zazYzJnc05ohUmEkHMLdEde6ONgnLxWkSQkghMm73TA7msRuL53MreVd
- AHAltoj4GcwxUbanRdRiGgz9xDB8SKQ7lpeR2RZ6HcMqRqRk1kwyW+b9j8UPDCRdVTTn5Vwpcac+x
- i0gb0GbEuyZejWop1J3hTZ0QbU8pjf43J2fzmYlAPV68tQYl/0aoNYn8jAGzrDPnnby+8dB0IbjDU
- weKd2ByQ==;
+ bh=FCQj5B5Zp1rCBgedoXr3WWrEwlMWhZUzdqOcxosJGQw=; b=wRkw1cfr0IC8CR6t82z+HYxHFv
+ VwF/tmGGdg4KPiwHX84XlVhB70vI4qKVPJb4zq2X0u72shDpS3zQnjEPkkVBEQyLoYdu7hZMdOQXM
+ UIdFcYK8CUjNIvi3bzvpYQfQefNFXErUWa8P0ORjcvxmtaUgR3L2QHe8JipBS3IXKTRAUYM8zt3CL
+ PlSQnfmpbv68kjqm6E5FTHerLPsTO1lDnQtEl+KweBJyzyuRjrj/f7i47X3awojHqCazrDuXVvNnJ
+ B+BCGRiX8eIBhxPucslU4zDrXnmg9fLIfS7pNLD8peWWGhHmwlVcDfaGAn229P3hdRo0y0OsXuxsA
+ QWr2l9bw==;
 Received: from hch by casper.infradead.org with local (Exim 4.94 #2 (Red Hat
- Linux)) id 1lLhsD-00HNdD-P4; Mon, 15 Mar 2021 07:42:46 +0000
-Date: Mon, 15 Mar 2021 07:42:45 +0000
+ Linux)) id 1lLi0P-00HOOO-B9; Mon, 15 Mar 2021 07:51:24 +0000
+Date: Mon, 15 Mar 2021 07:51:13 +0000
 From: Christoph Hellwig <hch@infradead.org>
 To: Alistair Popple <apopple@nvidia.com>
-Message-ID: <20210315074245.GC4136862@infradead.org>
+Message-ID: <20210315075113.GD4136862@infradead.org>
 References: <20210312083851.15981-1-apopple@nvidia.com>
- <20210312083851.15981-6-apopple@nvidia.com>
+ <20210312083851.15981-9-apopple@nvidia.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20210312083851.15981-6-apopple@nvidia.com>
+In-Reply-To: <20210312083851.15981-9-apopple@nvidia.com>
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
  casper.infradead.org. See http://www.infradead.org/rpr.html
-Subject: Re: [Nouveau] [PATCH v6 5/8] mm: Device exclusive memory access
+Subject: Re: [Nouveau] [PATCH v6 8/8] nouveau/svm: Implement atomic SVM
+ access
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,107 +59,35 @@ Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-> +Not all devices support atomic access to system memory. To support atomic
-> +operations to a shared virtual memory page such a device needs access to that
-> +page which is exclusive of any userspace access from the CPU. The
-> +``make_device_exclusive_range()`` function can be used to make a memory range
-> +inaccessible from userspace.
+> -	/*XXX: atomic? */
+> -	return (fa->access == 0 || fa->access == 3) -
+> -	       (fb->access == 0 || fb->access == 3);
+> +	/* Atomic access (2) has highest priority */
+> +	return (-1*(fa->access == 2) + (fa->access == 0 || fa->access == 3)) -
+> +	       (-1*(fb->access == 2) + (fb->access == 0 || fb->access == 3));
 
-s/Not all devices/Some devices/ ?
+This looks really unreabable.  If the magic values 0, 2 and 3 had names
+it might become a little more understadable, then factor the duplicated
+calculation of the priority value into a helper and we'll have code that
+mere humans can understand..
 
->  static inline int mm_has_notifiers(struct mm_struct *mm)
-> @@ -528,7 +534,17 @@ static inline void mmu_notifier_range_init_migrate(
->  {
->  	mmu_notifier_range_init(range, MMU_NOTIFY_MIGRATE, flags, vma, mm,
->  				start, end);
-> -	range->migrate_pgmap_owner = pgmap;
-> +	range->owner = pgmap;
-> +}
-> +
-> +static inline void mmu_notifier_range_init_exclusive(
-> +			struct mmu_notifier_range *range, unsigned int flags,
-> +			struct vm_area_struct *vma, struct mm_struct *mm,
-> +			unsigned long start, unsigned long end, void *owner)
-> +{
-> +	mmu_notifier_range_init(range, MMU_NOTIFY_EXCLUSIVE, flags, vma, mm,
-> +				start, end);
-> +	range->owner = owner;
-
-Maybe just replace mmu_notifier_range_init_migrate with a
-mmu_notifier_range_init_owner helper that takes the owner but does
-not hard code a type?
-
->  		}
-> +	} else if (is_device_exclusive_entry(entry)) {
-> +		page = pfn_swap_entry_to_page(entry);
-> +
-> +		get_page(page);
-> +		rss[mm_counter(page)]++;
-> +
-> +		if (is_writable_device_exclusive_entry(entry) &&
-> +		    is_cow_mapping(vm_flags)) {
-> +			/*
-> +			 * COW mappings require pages in both
-> +			 * parent and child to be set to read.
-> +			 */
-> +			entry = make_readable_device_exclusive_entry(
-> +							swp_offset(entry));
-> +			pte = swp_entry_to_pte(entry);
-> +			if (pte_swp_soft_dirty(*src_pte))
-> +				pte = pte_swp_mksoft_dirty(pte);
-> +			if (pte_swp_uffd_wp(*src_pte))
-> +				pte = pte_swp_mkuffd_wp(pte);
-> +			set_pte_at(src_mm, addr, src_pte, pte);
-> +		}
-
-Just cosmetic, but I wonder if should factor this code block into
-a little helper.
-
-> +
-> +static bool try_to_protect_one(struct page *page, struct vm_area_struct *vma,
-> +			unsigned long address, void *arg)
-> +{
-> +	struct mm_struct *mm = vma->vm_mm;
-> +	struct page_vma_mapped_walk pvmw = {
-> +		.page = page,
-> +		.vma = vma,
-> +		.address = address,
-> +	};
-> +	struct ttp_args *ttp = (struct ttp_args *) arg;
-
-This cast should not be needed.
-
-> +	return ttp.valid && (!page_mapcount(page) ? true : false);
-
-This can be simplified to:
-
-	return ttp.valid && !page_mapcount(page);
-
-> +	npages = get_user_pages_remote(mm, start, npages,
-> +				       FOLL_GET | FOLL_WRITE | FOLL_SPLIT_PMD,
-> +				       pages, NULL, NULL);
-> +	for (i = 0; i < npages; i++, start += PAGE_SIZE) {
-> +		if (!trylock_page(pages[i])) {
-> +			put_page(pages[i]);
-> +			pages[i] = NULL;
+> +		mutex_lock(&svmm->mutex);
+> +		if (mmu_interval_read_retry(&notifier->notifier,
+> +					    notifier_seq)) {
+> +			mutex_unlock(&svmm->mutex);
 > +			continue;
 > +		}
-> +
-> +		if (!try_to_protect(pages[i], mm, start, arg)) {
-> +			unlock_page(pages[i]);
-> +			put_page(pages[i]);
-> +			pages[i] = NULL;
-> +		}
+> +		break;
+> +	}
 
-Should the trylock_page go into try_to_protect to simplify the loop
-a little?  Also I wonder if we need make_device_exclusive_range or
-should just open code the get_user_pages_remote + try_to_protect
-loop in the callers, as that might allow them to also deduct other
-information about the found pages.
+This looks good, why not:
 
-Otherwise looks good:
-
-Reviewed-by: Christoph Hellwig <hch@lst.de>
+		mutex_lock(&svmm->mutex);
+		if (!mmu_interval_read_retry(&notifier->notifier,
+					     notifier_seq))
+			break;
+		mutex_unlock(&svmm->mutex);
+	}
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
