@@ -2,43 +2,53 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7213533F4FA
-	for <lists+nouveau@lfdr.de>; Wed, 17 Mar 2021 17:05:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 381EB33F9FF
+	for <lists+nouveau@lfdr.de>; Wed, 17 Mar 2021 21:32:56 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B43626E7DD;
-	Wed, 17 Mar 2021 16:05:35 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A13B96E846;
+	Wed, 17 Mar 2021 20:32:51 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 977 seconds by postgrey-1.36 at gabe;
- Wed, 17 Mar 2021 09:53:57 UTC
-Received: from m12-13.163.com (m12-13.163.com [220.181.12.13])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1F86D6E517
- for <nouveau@lists.freedesktop.org>; Wed, 17 Mar 2021 09:53:55 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
- s=s110527; h=From:Subject:Date:Message-Id:MIME-Version; bh=aG9PL
- GfCbgZItHrxOJqHyjNFlL/xfuALIBa53rMsoSY=; b=ApK6Y+exknHjMND+oObGv
- tLnrCqVigeXl1Sy1gUHse9PTioYIK5GP2i6Hj9cetC65DlxkbR5v5kIU61D6aBRL
- sqnLEcL13F7W7xHoTFul+de01O0LOLqPNZqRSZ1gnWEjG9NEmz4vIU73BSdJGSCN
- chICbTazTv7mRaBYjwMvx0=
-Received: from COOL-20200911ZP.ccdomain.com (unknown [218.94.48.178])
- by smtp9 (Coremail) with SMTP id DcCowABHzhZ2zVFgT9axBg--.14457S2;
- Wed, 17 Mar 2021 17:36:06 +0800 (CST)
-From: ChunyouTang <tangchunyou@163.com>
-To: bskeggs@redhat.com, airlied@linux.ie, daniel@ffwll.ch, lyude@redhat.com
-Date: Wed, 17 Mar 2021 17:35:45 +0800
-Message-Id: <20210317093545.354-1-tangchunyou@163.com>
-X-Mailer: git-send-email 2.30.0.windows.1
+Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
+ [IPv6:2607:f8b0:4864:20::330])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 49B566E02B
+ for <nouveau@lists.freedesktop.org>; Wed, 17 Mar 2021 20:32:50 +0000 (UTC)
+Received: by mail-ot1-x330.google.com with SMTP id
+ o19-20020a9d22130000b02901bfa5b79e18so3097651ota.0
+ for <nouveau@lists.freedesktop.org>; Wed, 17 Mar 2021 13:32:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=IHCnunVxEHDcq+HTDx4ulePq7olKHfoa4KrEracuGEE=;
+ b=F3jWDKeZzOEZZV+TtU/QAqYOuYjLzlwHXLJOUphmL/VTnC00lws/xyjCQFL1MFzEIq
+ cOmU8WIgXcWr8H47lTCo4CJ6guTqcA2xR8IVXUiA4RT0KOFJNwKrTI7IziG13bdXuDmh
+ 1mV45jQA3sCOkiQ18AaiLVLPMdYLhTJRLR/3I=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=IHCnunVxEHDcq+HTDx4ulePq7olKHfoa4KrEracuGEE=;
+ b=di30YWD4vS6BSXdWsWGH2AEKSQpul2+kWagKVObZy6h+IkL9Udqp1At8wTMpcqAvnM
+ J9VC+WCK4NNros71QFLcyt0l0toFqhJyGm9+VMaBFcZHhVBcTqOL92S0quzuHYpOFMyI
+ TOVkgdJk53z90V8Y1xlU9sVJJbhPIcwz/DFZFRbqmBqdUjIt6IPfEg5Wpqi6V6Kwn2x8
+ l5Ns8WqyUgimviopb7Q0rbxhCLQi85Ies0tBzqQ4F6xl0bzwawm46YVbWTM4Ijr4+RKz
+ jsowirlSC0XTQycoT6kpPUA1DQGyqhk3gT62nuY5UbMyvxf1Q7ye1TZtCeg9/gARHxSR
+ XNTw==
+X-Gm-Message-State: AOAM531RcWOkyrGomYZQhu2qsM29lICLWP89YlxB2/Kixs6K/DFKfvBe
+ aBUhjPuP5of4qjjj7oXfDk+zwubdVJlnv68BDwVy5w==
+X-Google-Smtp-Source: ABdhPJwpaKtWZD5ndm43ILhNLn5AjG91euFm+8cd3zhFc4Jg9VKRXCNzX5CQhv6Shjqegj6++qTq+qWnq/5dHW2jDuI=
+X-Received: by 2002:a9d:6481:: with SMTP id g1mr4590503otl.303.1616013169521; 
+ Wed, 17 Mar 2021 13:32:49 -0700 (PDT)
 MIME-Version: 1.0
-X-CM-TRANSID: DcCowABHzhZ2zVFgT9axBg--.14457S2
-X-Coremail-Antispam: 1Uf129KBjvdXoWrZw1kGryxWrWkZw1kCr1UGFg_yoWDAFX_AF
- 1rZrn3Wr4FkrnxuFsrAr1xJF9agwnFvF4vvF1Iqas3W347Ww43Xr1qgr1avrWDWr1rZF98
- K3WvqrnxXrWjgjkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
- 9fnUUvcSsGvfC2KfnxnUUI43ZEXa7IU8ZiSJUUUUU==
-X-Originating-IP: [218.94.48.178]
-X-CM-SenderInfo: 5wdqwu5kxq50rx6rljoofrz/1tbipQZYUVUMc2xcnAAAss
-X-Mailman-Approved-At: Wed, 17 Mar 2021 16:05:34 +0000
-Subject: [Nouveau] [PATCH] nouveau/nvkm/subdev/devinit/mcp89.c:Unneeded
- variable
+References: <20210303134319.3160762-1-lee.jones@linaro.org>
+ <16d4300e-bf29-1e85-317b-53d257890cb9@vmware.com> <20210308091932.GB4931@dell>
+ <YEobySvG0zPs9xhc@phenom.ffwll.local> <20210311135152.GT701493@dell>
+ <20210317081729.GH701493@dell>
+In-Reply-To: <20210317081729.GH701493@dell>
+From: Daniel Vetter <daniel@ffwll.ch>
+Date: Wed, 17 Mar 2021 21:32:38 +0100
+Message-ID: <CAKMK7uEibsgXXTEM1d2CGSswp-koouPSouseP_rwLHTdpxfRpw@mail.gmail.com>
+To: Lee Jones <lee.jones@linaro.org>
+Subject: Re: [Nouveau] [RESEND 00/53] Rid GPU from W=1 warnings
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -50,47 +60,77 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, tangchunyou@yulong.com,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org
+Cc: David Airlie <airlied@linux.ie>,
+ Nouveau Dev <nouveau@lists.freedesktop.org>,
+ dri-devel <dri-devel@lists.freedesktop.org>,
+ Qinglang Miao <miaoqinglang@huawei.com>, Anthony Koo <Anthony.Koo@amd.com>,
+ Sumit Semwal <sumit.semwal@linaro.org>, Jeremy Kolb <jkolb@brandeis.edu>,
+ amd-gfx list <amd-gfx@lists.freedesktop.org>, Rob Clark <rob.clark@linaro.org>,
+ VMware Graphics <linux-graphics-maintainer@vmware.com>,
+ Ben Skeggs <bskeggs@redhat.com>, linux-arm-msm <linux-arm-msm@vger.kernel.org>,
+ Dave Airlie <airlied@redhat.com>, Harry Wentland <harry.wentland@amd.com>,
+ "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>,
+ Leo Li <sunpeng.li@amd.com>, Roland Scheidegger <sroland@vmware.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>,
+ "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>,
+ Sean Paul <sean@poorly.run>, Kuogee Hsieh <khsieh@codeaurora.org>,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ Rob Clark <robdclark@gmail.com>, Alex Deucher <alexander.deucher@amd.com>,
+ Colin Ian King <colin.king@canonical.com>,
+ freedreno <freedreno@lists.freedesktop.org>,
+ =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
+ Zack Rusin <zackr@vmware.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-From: tangchunyou <tangchunyou@yulong.com>
+On Wed, Mar 17, 2021 at 9:17 AM Lee Jones <lee.jones@linaro.org> wrote:
+>
+> On Thu, 11 Mar 2021, Lee Jones wrote:
+>
+> > On Thu, 11 Mar 2021, Daniel Vetter wrote:
+> >
+> > > On Mon, Mar 08, 2021 at 09:19:32AM +0000, Lee Jones wrote:
+> > > > On Fri, 05 Mar 2021, Roland Scheidegger wrote:
+> > > >
+> > > > > The vmwgfx ones look all good to me, so for
+> > > > > 23-53: Reviewed-by: Roland Scheidegger <sroland@vmware.com>
+> > > > > That said, they were already signed off by Zack, so not sure what
+> > > > > happened here.
+> > > >
+> > > > Yes, they were accepted at one point, then dropped without a reason.
+> > > >
+> > > > Since I rebased onto the latest -next, I had to pluck them back out of
+> > > > a previous one.
+> > >
+> > > They should show up in linux-next again. We merge patches for next merge
+> > > window even during the current merge window, but need to make sure they
+> > > don't pollute linux-next. Occasionally the cut off is wrong so patches
+> > > show up, and then get pulled again.
+> > >
+> > > Unfortunately especially the 5.12 merge cycle was very wobbly due to some
+> > > confusion here. But your patches should all be in linux-next again (they
+> > > are queued up for 5.13 in drm-misc-next, I checked that).
+> > >
+> > > Sorry for the confusion here.
+> >
+> > Oh, I see.  Well so long as they don't get dropped, I'll be happy.
+> >
+> > Thanks for the explanation Daniel
+>
+> After rebasing today, all of my GPU patches have remained.  Would
+> someone be kind enough to check that everything is still in order
+> please?
 
-disable,delete disable and return 0
-
-Signed-off-by: tangchunyou <tangchunyou@yulong.com>
----
- drivers/gpu/drm/nouveau/nvkm/subdev/devinit/mcp89.c | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
-
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/mcp89.c b/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/mcp89.c
-index fb90d47..a9cdf24 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/mcp89.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/mcp89.c
-@@ -32,7 +32,6 @@
- 	struct nvkm_device *device = init->subdev.device;
- 	u32 r001540 = nvkm_rd32(device, 0x001540);
- 	u32 r00154c = nvkm_rd32(device, 0x00154c);
--	u64 disable = 0;
- 
- 	if (!(r001540 & 0x40000000)) {
- 		nvkm_subdev_disable(device, NVKM_ENGINE_MSPDEC, 0);
-@@ -48,7 +47,7 @@
- 	if (!(r00154c & 0x00000200))
- 		nvkm_subdev_disable(device, NVKM_ENGINE_CE, 0);
- 
--	return disable;
-+	return 0;
- }
- 
- static const struct nvkm_devinit_func
+It's still broken somehow. I've kiced Maxime and Maarten again,
+they're also on this thread.
+-Daniel
 -- 
-1.9.1
-
-
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
