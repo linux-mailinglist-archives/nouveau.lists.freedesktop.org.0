@@ -1,44 +1,44 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 43A0C3405A3
-	for <lists+nouveau@lfdr.de>; Thu, 18 Mar 2021 13:39:29 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0A96A34060C
+	for <lists+nouveau@lfdr.de>; Thu, 18 Mar 2021 13:49:39 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id AE8F26E0D8;
-	Thu, 18 Mar 2021 12:39:26 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 75C216E8F2;
+	Thu, 18 Mar 2021 12:49:37 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 06A356E09E;
- Thu, 18 Mar 2021 12:39:24 +0000 (UTC)
-IronPort-SDR: KFL/cpJQAy5TTEddowIhTKBtACbA/elCU0v6WmHYNCav1xK0CtoG0OkFoKckomiF/ohNLCaBn7
- ChEGaU713X/w==
-X-IronPort-AV: E=McAfee;i="6000,8403,9926"; a="176796185"
-X-IronPort-AV: E=Sophos;i="5.81,258,1610438400"; d="scan'208";a="176796185"
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
- by orsmga101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 18 Mar 2021 05:39:23 -0700
-IronPort-SDR: 5lnf3Hk57uTi9+5ikVYPWvSgVXwinY/yxtbFNCwxFrV+j7cw+6KIhRX2o/IeDlOCkMd2zVxIy+
- yy1KNP4lLrfw==
+Received: from mga06.intel.com (mga06.intel.com [134.134.136.31])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1DE446E8EF;
+ Thu, 18 Mar 2021 12:49:36 +0000 (UTC)
+IronPort-SDR: 0Lhp0lyDhZzxN5dtfoeSaqoKIWAQ6EYo5phYbKe/1sbWz9WIkIuXY0ZrA5kUYA1BdcKM1N0DEM
+ ylVMY8ZJBQHw==
+X-IronPort-AV: E=McAfee;i="6000,8403,9926"; a="251024704"
+X-IronPort-AV: E=Sophos;i="5.81,258,1610438400"; d="scan'208";a="251024704"
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+ by orsmga104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 18 Mar 2021 05:49:35 -0700
+IronPort-SDR: gAbkG7WDcEWtwTTcHn6tSggRajUMo5FTvSoiNgP8omTYImJfU/kdPimuG+HeJI97xQDQ8Rukze
+ xFmA6Q1smZug==
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.81,258,1610438400"; d="scan'208";a="389222851"
+X-IronPort-AV: E=Sophos;i="5.81,258,1610438400"; d="scan'208";a="512106143"
 Received: from stinkbox.fi.intel.com (HELO stinkbox) ([10.237.72.171])
- by orsmga002.jf.intel.com with SMTP; 18 Mar 2021 05:39:20 -0700
+ by fmsmga001.fm.intel.com with SMTP; 18 Mar 2021 05:49:30 -0700
 Received: by stinkbox (sSMTP sendmail emulation);
- Thu, 18 Mar 2021 14:39:19 +0200
-Date: Thu, 18 Mar 2021 14:39:19 +0200
+ Thu, 18 Mar 2021 14:49:29 +0200
+Date: Thu, 18 Mar 2021 14:49:29 +0200
 From: Ville =?iso-8859-1?Q?Syrj=E4l=E4?= <ville.syrjala@linux.intel.com>
-To: Martin Peres <martin.peres@mupuf.org>
-Message-ID: <YFNJ96fvZpNKtRGv@intel.com>
-References: <20210317224520.447939-1-lyude@redhat.com>
- <4793631d-ee46-3d80-aa24-30d18d42e38b@mupuf.org>
+To: Lyude <lyude@redhat.com>
+Message-ID: <YFNMWZwBNHDn3YeH@intel.com>
+References: <20210317224949.448284-1-lyude@redhat.com>
+ <20210317224949.448284-5-lyude@redhat.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <4793631d-ee46-3d80-aa24-30d18d42e38b@mupuf.org>
+In-Reply-To: <20210317224949.448284-5-lyude@redhat.com>
 X-Patchwork-Hint: comment
-Subject: Re: [Nouveau] [igt-dev] [PATCH i-g-t] tests/kms_cursor_crc: Test
- 32x32 cursors
+Subject: Re: [Nouveau] [igt-dev] [PATCH i-g-t 4/7] lib/igt_fb: Remove domain
+ from igt_fb
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -50,36 +50,99 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Petri Latvala <petri.latvala@intel.com>, nouveau@lists.freedesktop.org,
- igt-dev@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>
+Cc: igt-dev@lists.freedesktop.org, nouveau@lists.freedesktop.org
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, Mar 18, 2021 at 08:39:01AM +0200, Martin Peres wrote:
-> On 18/03/2021 00:45, Lyude wrote:
-> > From: Lyude Paul <lyude@redhat.com>
-> > =
-
-> > Since pre-nve4 only has two cursor sizes (32x32 and 64x64), we should at
-> > least test both of them.
+On Wed, Mar 17, 2021 at 06:49:46PM -0400, Lyude wrote:
+> From: Lyude Paul <lyude@redhat.com>
 > =
 
-> This adds 36 subtests, which take about 1s in average. So the runtime is =
+> It doesn't look like that this is used by i915 for anything these days, so
+> let's just remove this while we're at it.
 
-> not significantly increased on the Intel side.
+I wa scurious why this is here so dug around a bit.
+
+It was added in
+commit 18d0b1efb875 ("lib/igt_fb: Fix domain tracking for GTT cairo surface=
+s")
+
+then got broken again by
+commit 89b3ffe02c2a ("lib: Map dumb buffers")
+
+and later fixed again with
+commit 3bd68529c464 ("lib/igt_fb: Add missing set_domain calls")
+
+So yeah, not needed anymore.
+Reviewed-by: Ville Syrj=E4l=E4 <ville.syrjala@linux.intel.com>
+
 > =
 
-> It also seems that Intel should add skips or fix the kernel to support =
+> Signed-off-by: Lyude Paul <lyude@redhat.com>
+> Cc: Martin Peres <martin.peres@free.fr>
+> Cc: Jeremy Cline <jcline@redhat.com>
+> ---
+>  lib/igt_fb.c | 3 ---
+>  lib/igt_fb.h | 2 --
+>  2 files changed, 5 deletions(-)
+> =
 
-> these 32xXX format.
+> diff --git a/lib/igt_fb.c b/lib/igt_fb.c
+> index f0fcd1a7..2b478887 100644
+> --- a/lib/igt_fb.c
+> +++ b/lib/igt_fb.c
+> @@ -2491,7 +2491,6 @@ static void create_cairo_surface__gpu(int fd, struc=
+t igt_fb *fb)
+>  						    cairo_format,
+>  						    fb->width, fb->height,
+>  						    blit->linear.fb.strides[0]);
+> -	fb->domain =3D I915_GEM_DOMAIN_GTT;
+>  =
 
-Intel hw at least does not support 32x32 cursors. We should
-probably just just probe the kernel to see if it accepts the
-requested cursor size, and skip the subtest if not. That
-would also let us remove the i915 platform specific information
-from has_nonsquare_cursors().
+>  	cairo_surface_set_user_data(fb->cairo_surface,
+>  				    (cairo_user_data_key_t *)create_cairo_surface__gpu,
+> @@ -2571,8 +2570,6 @@ static void create_cairo_surface__gtt(int fd, struc=
+t igt_fb *fb)
+>  		      "Unable to create a cairo surface: %s\n",
+>  		      cairo_status_to_string(cairo_surface_status(fb->cairo_surface)));
+>  =
+
+> -	fb->domain =3D I915_GEM_DOMAIN_GTT;
+> -
+>  	cairo_surface_set_user_data(fb->cairo_surface,
+>  				    (cairo_user_data_key_t *)create_cairo_surface__gtt,
+>  				    fb, destroy_cairo_surface__gtt);
+> diff --git a/lib/igt_fb.h b/lib/igt_fb.h
+> index 0d64898a..e4f8b2b1 100644
+> --- a/lib/igt_fb.h
+> +++ b/lib/igt_fb.h
+> @@ -64,7 +64,6 @@ struct buf_ops;
+>   * @modifier: tiling mode as a DRM framebuffer modifier
+>   * @size: size in bytes of the underlying backing storage
+>   * @cairo_surface: optionally attached cairo drawing surface
+> - * @domain: current domain for cache flushing tracking on i915.ko
+>   * @num_planes: Amount of planes on this fb. >1 for planar formats.
+>   * @strides: line stride for each plane in bytes
+>   * @offsets: Offset for each plane in bytes.
+> @@ -87,7 +86,6 @@ typedef struct igt_fb {
+>  	uint64_t modifier;
+>  	uint64_t size;
+>  	cairo_surface_t *cairo_surface;
+> -	unsigned int domain;
+>  	unsigned int num_planes;
+>  	uint32_t strides[4];
+>  	uint32_t offsets[4];
+> -- =
+
+> 2.29.2
+> =
+
+> _______________________________________________
+> igt-dev mailing list
+> igt-dev@lists.freedesktop.org
+> https://lists.freedesktop.org/mailman/listinfo/igt-dev
 
 -- =
 
