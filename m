@@ -2,77 +2,49 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4F645340C75
-	for <lists+nouveau@lfdr.de>; Thu, 18 Mar 2021 19:07:05 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 71717341012
+	for <lists+nouveau@lfdr.de>; Thu, 18 Mar 2021 22:56:03 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D8A346E944;
-	Thu, 18 Mar 2021 18:07:03 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B90986E190;
+	Thu, 18 Mar 2021 21:55:58 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
+X-Greylist: delayed 83145 seconds by postgrey-1.36 at gabe;
+ Thu, 18 Mar 2021 21:55:58 UTC
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1E97D6E944
- for <nouveau@lists.freedesktop.org>; Thu, 18 Mar 2021 18:07:03 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 11E886E190
+ for <nouveau@lists.freedesktop.org>; Thu, 18 Mar 2021 21:55:57 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1616090822;
- h=from:from:reply-to:reply-to:subject:subject:date:date:
- message-id:message-id:to:to:cc:cc:mime-version:mime-version:
- content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=2Rx+nwVul0x5gvAgblGTcfm4THJFBM/JLnFq+1419jE=;
- b=gjpxpLGiQh0VJwIjf+DlahetJM5nUcWSYMUsQDmDn8YZJwHOKwxhUqozps200wujGtxDak
- dKMW6yoDS/DFOfdlz0vOORvCHKWogZqJb1dbk4UhgnYko8B26EPi4+BzkJcDlYH3T8p7GQ
- X5+Npxz/AIMM0MTHNZgJuO233yGyB2I=
-Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com
- [209.85.160.197]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-321-EB2HjgcMNa-wr6PDnaa2uA-1; Thu, 18 Mar 2021 14:07:00 -0400
-X-MC-Unique: EB2HjgcMNa-wr6PDnaa2uA-1
-Received: by mail-qt1-f197.google.com with SMTP id m35so18011004qtd.11
- for <nouveau@lists.freedesktop.org>; Thu, 18 Mar 2021 11:07:00 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:message-id:subject:from:reply-to:to:cc:date
- :in-reply-to:references:organization:user-agent:mime-version
- :content-transfer-encoding;
- bh=2Rx+nwVul0x5gvAgblGTcfm4THJFBM/JLnFq+1419jE=;
- b=dIpvlOCHLb/eVvvEFp1R4SD/kASj5mNGrE+6GUnazSaiJ5xJB18O5l39hMG/ulHZ9K
- /feWk0Irgu/NehQcLU58i1bn55CGjD0LZs9WPGyywCA9YktaRuMN2BGE+yajqyFnP9P/
- yRQz5AMHHUdJ2oSsSBNpQAsSBgjdjx629ZQKXe3jrcx+6lpm2iFLtSLYAhhcEN2uALbh
- qAXaZuSanNrxtOq7zo5vLD6zuXGp4TUiba2YT3ZUh6pI0NNzSzlqgplwMR/wbl2acexl
- eFJVZf9COMsbXQHUToxW6++swR5/d9yUYRcmrvv0WSvvF8kNWXxQSj7siF0ONg2Asvaf
- zQaQ==
-X-Gm-Message-State: AOAM530H7V9oby4r7/UURWHHxufsAxDBOhrAKHgwcOpN2CvY9YkEZE2r
- mke/Hc1Yj12GYkeVvvOAANIreA10j3xEepyACGkjUfFjjgOAtbZKu3apUWTaEMX0VLa/r6K+Yfj
- l1LiPTKsyHwQukiyxr6SGt3MoYg==
-X-Received: by 2002:ae9:df46:: with SMTP id t67mr5584402qkf.269.1616090819938; 
- Thu, 18 Mar 2021 11:06:59 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJyLnMMjILsyiTKl4O+ac7F90UMNkezjnmTIOI9Q7pZTXy3Lb2S7Umkza94M495XP2hKzdPdqg==
-X-Received: by 2002:ae9:df46:: with SMTP id t67mr5584390qkf.269.1616090819779; 
- Thu, 18 Mar 2021 11:06:59 -0700 (PDT)
-Received: from Whitewolf.lyude.net
- (pool-108-49-102-102.bstnma.fios.verizon.net. [108.49.102.102])
- by smtp.gmail.com with ESMTPSA id k28sm2308015qki.101.2021.03.18.11.06.58
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 18 Mar 2021 11:06:58 -0700 (PDT)
-Message-ID: <28908b23aecc3d340ba14ec42896eea933b9d959.camel@redhat.com>
+ s=mimecast20190719; t=1616104556;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=+F9WBdvna1lLwOxbPDF5YvSCuQnZUcRY6D1ed3m7rV0=;
+ b=TtxOTKPq4yOgZZxU35XkdWKHUTjqj8IBPSAZkUvawalDSA3/0DA1SiPNZBFwXBnrXxaU4V
+ 90LVy+XwLrNJlALJLenltX95B6MxNZgp0g8RDGtNcNSXaEve+pl3ATn27o1UZOqDpCRBjS
+ 9gv5o07CXtvvwokslYNU9MqvCVhV+t8=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-198-3wuonlc2PaWuoZRdCBN9wA-1; Thu, 18 Mar 2021 17:55:52 -0400
+X-MC-Unique: 3wuonlc2PaWuoZRdCBN9wA-1
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
+ [10.5.11.23])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id BE5B38143F2;
+ Thu, 18 Mar 2021 21:55:50 +0000 (UTC)
+Received: from Whitewolf.lyude.net (ovpn-113-18.rdu2.redhat.com [10.10.113.18])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 32D4C1F070;
+ Thu, 18 Mar 2021 21:55:49 +0000 (UTC)
 From: Lyude Paul <lyude@redhat.com>
-To: Ville =?ISO-8859-1?Q?Syrj=E4l=E4?= <ville.syrjala@linux.intel.com>, 
- Martin Peres <martin.peres@mupuf.org>
-Date: Thu, 18 Mar 2021 14:06:58 -0400
-In-Reply-To: <YFNJ96fvZpNKtRGv@intel.com>
-References: <20210317224520.447939-1-lyude@redhat.com>
- <4793631d-ee46-3d80-aa24-30d18d42e38b@mupuf.org>
- <YFNJ96fvZpNKtRGv@intel.com>
-Organization: Red Hat
-User-Agent: Evolution 3.38.4 (3.38.4-1.fc33)
+To: nouveau@lists.freedesktop.org
+Date: Thu, 18 Mar 2021 17:55:40 -0400
+Message-Id: <20210318215545.901756-1-lyude@redhat.com>
 MIME-Version: 1.0
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=lyude@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Subject: Re: [Nouveau] [igt-dev] [PATCH i-g-t] tests/kms_cursor_crc: Test
- 32x32 cursors
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
+Subject: [Nouveau] [PATCH] drm/nouveau/kms/nv50-: Check plane size for
+ cursors, not fb size
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -84,36 +56,80 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Reply-To: lyude@redhat.com
-Cc: igt-dev@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- Petri Latvala <petri.latvala@intel.com>, Ben Skeggs <bskeggs@redhat.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
+ "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
+ <dri-devel@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>,
+ Daniel Vetter <daniel@ffwll.ch>, Martin Peres <martin.peres@mupuf.org>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-T24gVGh1LCAyMDIxLTAzLTE4IGF0IDE0OjM5ICswMjAwLCBWaWxsZSBTeXJqw6Rsw6Qgd3JvdGU6
-Cj4gT24gVGh1LCBNYXIgMTgsIDIwMjEgYXQgMDg6Mzk6MDFBTSArMDIwMCwgTWFydGluIFBlcmVz
-IHdyb3RlOgo+ID4gT24gMTgvMDMvMjAyMSAwMDo0NSwgTHl1ZGUgd3JvdGU6Cj4gPiA+IEZyb206
-IEx5dWRlIFBhdWwgPGx5dWRlQHJlZGhhdC5jb20+Cj4gPiA+IAo+ID4gPiBTaW5jZSBwcmUtbnZl
-NCBvbmx5IGhhcyB0d28gY3Vyc29yIHNpemVzICgzMngzMiBhbmQgNjR4NjQpLCB3ZSBzaG91bGQg
-YXQKPiA+ID4gbGVhc3QgdGVzdCBib3RoIG9mIHRoZW0uCj4gPiAKPiA+IFRoaXMgYWRkcyAzNiBz
-dWJ0ZXN0cywgd2hpY2ggdGFrZSBhYm91dCAxcyBpbiBhdmVyYWdlLiBTbyB0aGUgcnVudGltZSBp
-cyAKPiA+IG5vdCBzaWduaWZpY2FudGx5IGluY3JlYXNlZCBvbiB0aGUgSW50ZWwgc2lkZS4KPiA+
-IAo+ID4gSXQgYWxzbyBzZWVtcyB0aGF0IEludGVsIHNob3VsZCBhZGQgc2tpcHMgb3IgZml4IHRo
-ZSBrZXJuZWwgdG8gc3VwcG9ydCAKPiA+IHRoZXNlIDMyeFhYIGZvcm1hdC4KPiAKPiBJbnRlbCBo
-dyBhdCBsZWFzdCBkb2VzIG5vdCBzdXBwb3J0IDMyeDMyIGN1cnNvcnMuIFdlIHNob3VsZAo+IHBy
-b2JhYmx5IGp1c3QganVzdCBwcm9iZSB0aGUga2VybmVsIHRvIHNlZSBpZiBpdCBhY2NlcHRzIHRo
-ZQo+IHJlcXVlc3RlZCBjdXJzb3Igc2l6ZSwgYW5kIHNraXAgdGhlIHN1YnRlc3QgaWYgbm90LiBU
-aGF0Cj4gd291bGQgYWxzbyBsZXQgdXMgcmVtb3ZlIHRoZSBpOTE1IHBsYXRmb3JtIHNwZWNpZmlj
-IGluZm9ybWF0aW9uCj4gZnJvbSBoYXNfbm9uc3F1YXJlX2N1cnNvcnMoKS4KCnNndG0sIHdpbGwg
-cmVzcGluIHdpdGggdGhlc2UgY2hhbmdlcyBpbiBqdXN0IGEgbW9tZW50Cj4gCgotLSAKU2luY2Vy
-ZWx5LAogICBMeXVkZSBQYXVsIChzaGUvaGVyKQogICBTb2Z0d2FyZSBFbmdpbmVlciBhdCBSZWQg
-SGF0CiAgIApOb3RlOiBJIGRlYWwgd2l0aCBhIGxvdCBvZiBlbWFpbHMgYW5kIGhhdmUgYSBsb3Qg
-b2YgYnVncyBvbiBteSBwbGF0ZS4gSWYgeW91J3ZlCmFza2VkIG1lIGEgcXVlc3Rpb24sIGFyZSB3
-YWl0aW5nIGZvciBhIHJldmlldy9tZXJnZSBvbiBhIHBhdGNoLCBldGMuIGFuZCBJCmhhdmVuJ3Qg
-cmVzcG9uZGVkIGluIGEgd2hpbGUsIHBsZWFzZSBmZWVsIGZyZWUgdG8gc2VuZCBtZSBhbm90aGVy
-IGVtYWlsIHRvIGNoZWNrCm9uIG15IHN0YXR1cy4gSSBkb24ndCBiaXRlIQoKX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBtYWlsaW5nIGxpc3QK
-Tm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5v
-cmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1Cg==
+Found this while trying to make some changes to the kms_cursor_crc test.
+curs507a_acquire checks that the width and height of the cursor framebuffer
+are equal (asyw->image.{w,h}). This is actually wrong though, as we only
+want to be concerned that the actual width/height of the plane are the
+same. It's fine if we scan out from an fb that's slightly larger than the
+cursor plane (in fact, some igt tests actually do this).
+
+Note that I'm not entirely sure why this wasn't previously breaking
+kms_cursor_crc tests - they all set up cursors with the height being one
+pixel larger than the actual size of the cursor. But this seems to fix
+things, and the code before was definitely incorrect - so it's not really
+worth looking into further imho.
+
+Signed-off-by: Lyude Paul <lyude@redhat.com>
+Cc: Martin Peres <martin.peres@mupuf.org>
+Cc: Jeremy Cline <jcline@redhat.com>
+---
+ drivers/gpu/drm/nouveau/dispnv50/curs507a.c | 2 +-
+ drivers/gpu/drm/nouveau/dispnv50/head507d.c | 2 +-
+ drivers/gpu/drm/nouveau/dispnv50/head917d.c | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/drivers/gpu/drm/nouveau/dispnv50/curs507a.c b/drivers/gpu/drm/nouveau/dispnv50/curs507a.c
+index 54fbd6fe751d..7a7f80e51ec0 100644
+--- a/drivers/gpu/drm/nouveau/dispnv50/curs507a.c
++++ b/drivers/gpu/drm/nouveau/dispnv50/curs507a.c
+@@ -109,7 +109,7 @@ curs507a_acquire(struct nv50_wndw *wndw, struct nv50_wndw_atom *asyw,
+ 	if (ret || !asyh->curs.visible)
+ 		return ret;
+ 
+-	if (asyw->image.w != asyw->image.h)
++	if (asyw->state.crtc_w != asyw->state.crtc_h)
+ 		return -EINVAL;
+ 
+ 	ret = head->func->curs_layout(head, asyw, asyh);
+diff --git a/drivers/gpu/drm/nouveau/dispnv50/head507d.c b/drivers/gpu/drm/nouveau/dispnv50/head507d.c
+index 09b89983864b..3d230ca488c9 100644
+--- a/drivers/gpu/drm/nouveau/dispnv50/head507d.c
++++ b/drivers/gpu/drm/nouveau/dispnv50/head507d.c
+@@ -176,7 +176,7 @@ int
+ head507d_curs_layout(struct nv50_head *head, struct nv50_wndw_atom *asyw,
+ 		     struct nv50_head_atom *asyh)
+ {
+-	switch (asyw->image.w) {
++	switch (asyw->state.crtc_w) {
+ 	case 32: asyh->curs.layout = NV507D_HEAD_SET_CONTROL_CURSOR_SIZE_W32_H32; break;
+ 	case 64: asyh->curs.layout = NV507D_HEAD_SET_CONTROL_CURSOR_SIZE_W64_H64; break;
+ 	default:
+diff --git a/drivers/gpu/drm/nouveau/dispnv50/head917d.c b/drivers/gpu/drm/nouveau/dispnv50/head917d.c
+index 4ce47b55f72c..caa7d633691b 100644
+--- a/drivers/gpu/drm/nouveau/dispnv50/head917d.c
++++ b/drivers/gpu/drm/nouveau/dispnv50/head917d.c
+@@ -103,7 +103,7 @@ int
+ head917d_curs_layout(struct nv50_head *head, struct nv50_wndw_atom *asyw,
+ 		     struct nv50_head_atom *asyh)
+ {
+-	switch (asyw->state.fb->width) {
++	switch (asyw->state.crtc_w) {
+ 	case  32: asyh->curs.layout = NV917D_HEAD_SET_CONTROL_CURSOR_SIZE_W32_H32; break;
+ 	case  64: asyh->curs.layout = NV917D_HEAD_SET_CONTROL_CURSOR_SIZE_W64_H64; break;
+ 	case 128: asyh->curs.layout = NV917D_HEAD_SET_CONTROL_CURSOR_SIZE_W128_H128; break;
+-- 
+2.29.2
+
+_______________________________________________
+Nouveau mailing list
+Nouveau@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/nouveau
