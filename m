@@ -2,54 +2,77 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id CFAD73406B0
-	for <lists+nouveau@lfdr.de>; Thu, 18 Mar 2021 14:18:39 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id CADC3340A86
+	for <lists+nouveau@lfdr.de>; Thu, 18 Mar 2021 17:49:22 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 00F056E90B;
-	Thu, 18 Mar 2021 13:18:38 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 556696E8F3;
+	Thu, 18 Mar 2021 16:49:20 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
- [IPv6:2607:f8b0:4864:20::32e])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0A2B26E906
- for <nouveau@lists.freedesktop.org>; Thu, 18 Mar 2021 13:18:37 +0000 (UTC)
-Received: by mail-ot1-x32e.google.com with SMTP id
- w21-20020a9d63950000b02901ce7b8c45b4so5141099otk.5
- for <nouveau@lists.freedesktop.org>; Thu, 18 Mar 2021 06:18:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=v0u3U62VgqQ/5cx0dl1OlmbnmTob1+65hnEnMoAP8+g=;
- b=Wq2xIKdqjdfzxw2Myb5taaYoDXG0Mt5eTvw70t+Qfukgix/l82cWO0JuAAM9pp9Lr8
- iuztkE2RYqfAeHvp28wsWDJ+QoGaPWC+Rv09fwMM2iRu/K2UOyFvuXajEDVEVPCoATb4
- oF5XWjbtWmNZTiF6bVmPZ4xhDEvuykvOW88w0=
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [63.128.21.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E3F796E8A7
+ for <nouveau@lists.freedesktop.org>; Thu, 18 Mar 2021 16:49:18 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1616086158;
+ h=from:from:reply-to:reply-to:subject:subject:date:date:
+ message-id:message-id:to:to:cc:cc:mime-version:mime-version:
+ content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=58mfL97IvEYUj6Zg/JL2i7ElYsYo76QJ4ddbnp0yADU=;
+ b=XpuUjMZNBA0ZOqL1o3gaQmLOI/EKMcsCV/JTTZrEHAf0SvYRdvP9yyf4A9B318RlBu0u7i
+ qpgU1DlLIsK87hbJhReXUq1hXcUtV/19rgIf4KUY0SpCrjfgvd0HrY8/gUtkn+m5zgzjnt
+ RR9MmM+7Br2n62wtZW+iIdaMXVvyMNw=
+Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com
+ [209.85.222.199]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-572-1dCsb5nlO5OJGG_aNYhklA-1; Thu, 18 Mar 2021 12:49:15 -0400
+X-MC-Unique: 1dCsb5nlO5OJGG_aNYhklA-1
+Received: by mail-qk1-f199.google.com with SMTP id t24so14750001qkg.3
+ for <nouveau@lists.freedesktop.org>; Thu, 18 Mar 2021 09:49:15 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=v0u3U62VgqQ/5cx0dl1OlmbnmTob1+65hnEnMoAP8+g=;
- b=Qx0zTM9nrZgF4YEPnRNU8R8+FWVqhGqEM2i9FJcWdQ8JkPslzJkaG/XR5y/2r6O6i8
- z+HNNISUbLjGf5y1TazxbVfDsV3jYFS7YWIiY4B1GVQkiQ2W3YL+94ZmraqUIQaby+aB
- HE63+ulJgPd9CUYKSXZ6hjpyVmYuwOIdx508Drfymybi9dt95BvubEov/3hAWbKCRJTs
- XfdkEf4vXl4bS6LdFybjjTOLWzNwaIMj5Lo74PsAnbJvt9a7GI9QylxYm6ZRnYLQHPJg
- tX0R+3t6/sXqun0PMX42UgteDKHF/Xz5E4QwBVBfoFslzBWh/gBGYTPU9qu2deALdBlO
- ompA==
-X-Gm-Message-State: AOAM5313sTQMbHsWg/TO0tLf7yjBFjjKCKPIl4ZgENqgS0AQKVqorZr9
- A/v1N/eOLBvNHWDycyfpk4H6oFo1lEIjmdI7fp3pBg==
-X-Google-Smtp-Source: ABdhPJys7CWu1QW7sqaGp8DPpYtt4z4UFBXzAiTSc52E6cJ3FtAgdwRl3llcaxjGyQonUci42YLrVhEplIIDHitKc+k=
-X-Received: by 2002:a9d:63d6:: with SMTP id e22mr7303358otl.188.1616073516410; 
- Thu, 18 Mar 2021 06:18:36 -0700 (PDT)
+ h=x-gm-message-state:message-id:subject:from:reply-to:to:cc:date
+ :in-reply-to:references:organization:user-agent:mime-version
+ :content-transfer-encoding;
+ bh=58mfL97IvEYUj6Zg/JL2i7ElYsYo76QJ4ddbnp0yADU=;
+ b=gUYtQmXf987XDkXoY6a+B2G18fSj2LPNdNT03/VcpMZVIZylOgpNRQ/Hj9CgNUN+5H
+ wkuz0exD6/yhZx6lVWNkjkAfgsDYg3BFoN5P+/crTb3sLHaokAA/Kv8isxeYq1iK1vIO
+ Sv3pwDhbTDewxCeoiuBsik9EioMhzvlMoc5N2iZWwtprdOrfmguhY/ZDhOc5C+56Mvrv
+ 30HZ3A21syNe+aOUSZX4oaQBIBGCzotEBAxcr+c5UnzmvFBECjN/+dZWpQBML2KkkIDp
+ 3Kct5L1LFehvh0MFM3oth0TNAwrkmZaT9Uer9h8CvO97To4HNDDZcMpP9F20wc8sIZHI
+ qsvg==
+X-Gm-Message-State: AOAM530Tz+JFjRtm9oMjJmVX381x1PRzkPpdvNwxWfh37M/4n+VlQhvv
+ BzmRjq3pZUit9Zb5jo3jN7bgiXOwqEb183nYhfxfuhosZJPElEmzgCJEA+vACm42Rtwcq9c2U1+
+ YLmXwwxt62lGyXnd1yv4BqnTIgw==
+X-Received: by 2002:ad4:51c1:: with SMTP id p1mr5284035qvq.39.1616086155385;
+ Thu, 18 Mar 2021 09:49:15 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJy1prQrldQnaewXNBb34uN0dwD+jsgrVxRWsx/Xcph9Jt/tLKqwESYUe4k6ieid+UKUeXEvow==
+X-Received: by 2002:ad4:51c1:: with SMTP id p1mr5284021qvq.39.1616086155230;
+ Thu, 18 Mar 2021 09:49:15 -0700 (PDT)
+Received: from Whitewolf.lyude.net
+ (pool-108-49-102-102.bstnma.fios.verizon.net. [108.49.102.102])
+ by smtp.gmail.com with ESMTPSA id q64sm1814007qtd.32.2021.03.18.09.49.14
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 18 Mar 2021 09:49:14 -0700 (PDT)
+Message-ID: <3c5108990850ae8f88952c3149eaa935f7e378e7.camel@redhat.com>
+From: Lyude Paul <lyude@redhat.com>
+To: Petri Latvala <petri.latvala@intel.com>, Martin Peres
+ <martin.peres@mupuf.org>
+Date: Thu, 18 Mar 2021 12:49:13 -0400
+In-Reply-To: <YFMaG3tRgsiizy+J@platvala-desk.ger.corp.intel.com>
+References: <20210317223827.446803-1-lyude@redhat.com>
+ <f42f3af7-658e-b06f-fb79-c36273ac4810@mupuf.org>
+ <YFMaG3tRgsiizy+J@platvala-desk.ger.corp.intel.com>
+Organization: Red Hat
+User-Agent: Evolution 3.38.4 (3.38.4-1.fc33)
 MIME-Version: 1.0
-References: <20210303134319.3160762-1-lee.jones@linaro.org>
- <16d4300e-bf29-1e85-317b-53d257890cb9@vmware.com> <20210308091932.GB4931@dell>
- <YEobySvG0zPs9xhc@phenom.ffwll.local> <20210311135152.GT701493@dell>
- <20210317081729.GH701493@dell>
- <CAKMK7uEibsgXXTEM1d2CGSswp-koouPSouseP_rwLHTdpxfRpw@mail.gmail.com>
-In-Reply-To: <CAKMK7uEibsgXXTEM1d2CGSswp-koouPSouseP_rwLHTdpxfRpw@mail.gmail.com>
-From: Daniel Vetter <daniel@ffwll.ch>
-Date: Thu, 18 Mar 2021 14:18:25 +0100
-Message-ID: <CAKMK7uHkJGDL8k3FfAqAM78honZR0euMcacW8UpdPZfS1J-7cA@mail.gmail.com>
-To: Lee Jones <lee.jones@linaro.org>
-Subject: Re: [Nouveau] [RESEND 00/53] Rid GPU from W=1 warnings
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=lyude@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Subject: Re: [Nouveau] [igt-dev] [PATCH i-g-t] lib: Introduce the
+ igt_nouveau library
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,84 +84,37 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>,
- Nouveau Dev <nouveau@lists.freedesktop.org>,
- dri-devel <dri-devel@lists.freedesktop.org>,
- Qinglang Miao <miaoqinglang@huawei.com>, Anthony Koo <Anthony.Koo@amd.com>,
- Sumit Semwal <sumit.semwal@linaro.org>, Jeremy Kolb <jkolb@brandeis.edu>,
- amd-gfx list <amd-gfx@lists.freedesktop.org>, Rob Clark <rob.clark@linaro.org>,
- VMware Graphics <linux-graphics-maintainer@vmware.com>,
- Ben Skeggs <bskeggs@redhat.com>, linux-arm-msm <linux-arm-msm@vger.kernel.org>,
- Dave Airlie <airlied@redhat.com>, Harry Wentland <harry.wentland@amd.com>,
- "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>,
- Leo Li <sunpeng.li@amd.com>, Roland Scheidegger <sroland@vmware.com>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>,
- "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>,
- Sean Paul <sean@poorly.run>, Kuogee Hsieh <khsieh@codeaurora.org>,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- Rob Clark <robdclark@gmail.com>, Alex Deucher <alexander.deucher@amd.com>,
- Colin Ian King <colin.king@canonical.com>,
- freedreno <freedreno@lists.freedesktop.org>,
- =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
- Zack Rusin <zackr@vmware.com>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Reply-To: lyude@redhat.com
+Cc: igt-dev@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ Ben Skeggs <bskeggs@redhat.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, Mar 17, 2021 at 9:32 PM Daniel Vetter <daniel@ffwll.ch> wrote:
->
-> On Wed, Mar 17, 2021 at 9:17 AM Lee Jones <lee.jones@linaro.org> wrote:
-> >
-> > On Thu, 11 Mar 2021, Lee Jones wrote:
-> >
-> > > On Thu, 11 Mar 2021, Daniel Vetter wrote:
-> > >
-> > > > On Mon, Mar 08, 2021 at 09:19:32AM +0000, Lee Jones wrote:
-> > > > > On Fri, 05 Mar 2021, Roland Scheidegger wrote:
-> > > > >
-> > > > > > The vmwgfx ones look all good to me, so for
-> > > > > > 23-53: Reviewed-by: Roland Scheidegger <sroland@vmware.com>
-> > > > > > That said, they were already signed off by Zack, so not sure what
-> > > > > > happened here.
-> > > > >
-> > > > > Yes, they were accepted at one point, then dropped without a reason.
-> > > > >
-> > > > > Since I rebased onto the latest -next, I had to pluck them back out of
-> > > > > a previous one.
-> > > >
-> > > > They should show up in linux-next again. We merge patches for next merge
-> > > > window even during the current merge window, but need to make sure they
-> > > > don't pollute linux-next. Occasionally the cut off is wrong so patches
-> > > > show up, and then get pulled again.
-> > > >
-> > > > Unfortunately especially the 5.12 merge cycle was very wobbly due to some
-> > > > confusion here. But your patches should all be in linux-next again (they
-> > > > are queued up for 5.13 in drm-misc-next, I checked that).
-> > > >
-> > > > Sorry for the confusion here.
-> > >
-> > > Oh, I see.  Well so long as they don't get dropped, I'll be happy.
-> > >
-> > > Thanks for the explanation Daniel
-> >
-> > After rebasing today, all of my GPU patches have remained.  Would
-> > someone be kind enough to check that everything is still in order
-> > please?
->
-> It's still broken somehow. I've kiced Maxime and Maarten again,
-> they're also on this thread.
-
-You're patches have made it into drm-next meanwhile, so they should
-show up in linux-next through that tree at least. Except if that one
-also has some trouble.
--Daniel
--- 
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
-_______________________________________________
-Nouveau mailing list
-Nouveau@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/nouveau
+T24gVGh1LCAyMDIxLTAzLTE4IGF0IDExOjE1ICswMjAwLCBQZXRyaSBMYXR2YWxhIHdyb3RlOgo+
+IE9uIFRodSwgTWFyIDE4LCAyMDIxIGF0IDA5OjA2OjI5QU0gKzAyMDAsIE1hcnRpbiBQZXJlcyB3
+cm90ZToKPiA+IE9uIDE4LzAzLzIwMjEgMDA6MzgsIEx5dWRlIHdyb3RlOgo+ID4gPiBkaWZmIC0t
+Z2l0IGEvaW5jbHVkZS9kcm0tdWFwaS9kcm1fZm91cmNjLmggYi9pbmNsdWRlL2RybS11YXBpL2Ry
+bV9mb3VyY2MuaAo+ID4gPiBpbmRleCBhN2JjMDU4Yy4uODdjODc0ODUgMTAwNjQ0Cj4gPiA+IC0t
+LSBhL2luY2x1ZGUvZHJtLXVhcGkvZHJtX2ZvdXJjYy5oCj4gPiA+ICsrKyBiL2luY2x1ZGUvZHJt
+LXVhcGkvZHJtX2ZvdXJjYy5oCj4gPiA+IEBAIC02ODEsNyArNjgxLDcgQEAgZHJtX2ZvdXJjY19j
+YW5vbmljYWxpemVfbnZpZGlhX2Zvcm1hdF9tb2QoX191NjQKPiA+ID4gbW9kaWZpZXIpCj4gPiA+
+IMKgIH0KPiA+ID4gwqAgLyoKPiA+ID4gLSAqIDE2QngyIEJsb2NrIExpbmVhciBsYXlvdXQsIHVz
+ZWQgYnkgVGVncmEgSzEgYW5kIGxhdGVyCj4gPiA+ICsgKiAxNkJ4MiBCbG9jayBMaW5lYXIgbGF5
+b3V0LCB1c2VkIGJ5IGRlc2t0b3AgR1BVcywgYW5kIFRlZ3JhIEsxIGFuZAo+ID4gPiBsYXRlcgo+
+ID4gCj4gPiBNYXliZSByZW1vdmUgb25lIG9mIHRoZSAiYW5kInM/Cj4gPiAKPiA+IDE2QngyIEJs
+b2NrIExpbmVhciBsYXlvdXQsIHVzZWQgYnkgZGVza3RvcCBHUFVzLCBhbmQgVGVncmEgSzErCj4g
+Cj4gZHJtX2ZvdXJjYy5oIGlzIGNvcGllZCBmcm9tIHRoZSBrZXJuZWwsIG5vIGhhbmQtZWRpdGlu
+ZyBpbiBJR1QuCgpUaGVzZSBhZGRpdGlvbnMgYXJlIGFsbCBjb3BpZWQgZnJvbSB0aGUgZHJtX2Zv
+dXJjYy5oIGZpbGUgaW4gdGhlIGtlcm5lbCB0aG91Z2gsCmRvIHlvdSB3YW50IG1lIHRvIGp1c3Qg
+dXBkYXRlIHRoZSB3aG9sZSBmaWxlIGluc3RlYWQ/Cgo+IAo+IAoKLS0gClNpbmNlcmVseSwKICAg
+THl1ZGUgUGF1bCAoc2hlL2hlcikKICAgU29mdHdhcmUgRW5naW5lZXIgYXQgUmVkIEhhdAogICAK
+Tm90ZTogSSBkZWFsIHdpdGggYSBsb3Qgb2YgZW1haWxzIGFuZCBoYXZlIGEgbG90IG9mIGJ1Z3Mg
+b24gbXkgcGxhdGUuIElmIHlvdSd2ZQphc2tlZCBtZSBhIHF1ZXN0aW9uLCBhcmUgd2FpdGluZyBm
+b3IgYSByZXZpZXcvbWVyZ2Ugb24gYSBwYXRjaCwgZXRjLiBhbmQgSQpoYXZlbid0IHJlc3BvbmRl
+ZCBpbiBhIHdoaWxlLCBwbGVhc2UgZmVlbCBmcmVlIHRvIHNlbmQgbWUgYW5vdGhlciBlbWFpbCB0
+byBjaGVjawpvbiBteSBzdGF0dXMuIEkgZG9uJ3QgYml0ZSEKCl9fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fCk5vdXZlYXUgbWFpbGluZyBsaXN0Ck5vdXZlYXVA
+bGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxt
+YW4vbGlzdGluZm8vbm91dmVhdQo=
