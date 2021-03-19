@@ -1,62 +1,33 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id C9AF2341F91
-	for <lists+nouveau@lfdr.de>; Fri, 19 Mar 2021 15:36:48 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 054C0341FB1
+	for <lists+nouveau@lfdr.de>; Fri, 19 Mar 2021 15:37:04 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id CBB3C6EA2C;
-	Fri, 19 Mar 2021 14:36:46 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 763BA6EA43;
+	Fri, 19 Mar 2021 14:36:51 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A79D06E9AE
- for <nouveau@lists.freedesktop.org>; Fri, 19 Mar 2021 08:24:51 +0000 (UTC)
-Received: by mail-ej1-x631.google.com with SMTP id l4so8268918ejc.10
- for <nouveau@lists.freedesktop.org>; Fri, 19 Mar 2021 01:24:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=BenSWVQP2zN1koiPW0t4kws5hTFRiEoau/BE1y9GfNM=;
- b=oYWlnV715tCLUBUZeEDrM0wpCjeONuoxo+3C79hxVxvB8pCEQYK+jSqFAx2gbfgfwH
- n1TztEimoVY6MF894XhvGVjWrmeVXaVorLFS8ocMbNhFlUz2t4DL8H9yv6Mi54buMcP2
- zrrtllvrV3JRgkGqf44mltxIzcxnMk8t7PnwcUJjIHICtm79tOaAYocHa45kjgQaqGIF
- E/gReLSRwchhEXGmAmFH0ZYmXlBGQ38VW6Ed/nUE783qy8NQ27hsty26IGAFI5ZZJv5E
- aYta5XBi+HF2Zq7l1JEX14Ib5cARXLIat30SuqSMDq/lG/mSrl8dk4NxJcs8BQCPG2a9
- tWXw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=BenSWVQP2zN1koiPW0t4kws5hTFRiEoau/BE1y9GfNM=;
- b=iQMuwY6zuik521xuJ6jki59QWBw3atvbK52/qEoPWIjQJfZoPEvb+DYzmxJW2ChIvB
- g82IzJDxBRYYXT1CbVhCvMYP5XA1tMSNHGkms3QZmZUsMH/CmD0nmlSd0zrKZ4LzAgbg
- BfhiwAR4Xe9F1bohr21e51gmOLjOGG9cbAQp3t4Wyn1K865LPiPiskozxBevwNFpLetR
- XGX5O/h740oi6nj6TgRW8mELPD0WWfLnA6Su3rQe5II2nxGOB05mFBBCfItHRUooTmVe
- 3cEKRlKFgGgtf655lMJ3iW3nsXiteT6uHh405jyOmtVeJTiSGgqvpkPMvdf1K1oQGEQ/
- QMLg==
-X-Gm-Message-State: AOAM533cEm62i3Bhl2D1ZCBxBbrArX43+PL4dlXKw2ZR3PjfQoXxW2id
- BhYqsinIXirQIl7CsE3mzwimog==
-X-Google-Smtp-Source: ABdhPJxuH+2sZwvtwXnTvWJjVjs+eqo/uTPUENoEZ5KkXMAP0d9KhrIHoM6ef56AjMLywklcMo0kcA==
-X-Received: by 2002:a17:906:2b46:: with SMTP id
- b6mr2916696ejg.521.1616142290404; 
- Fri, 19 Mar 2021 01:24:50 -0700 (PDT)
-Received: from dell.default ([91.110.221.194])
- by smtp.gmail.com with ESMTPSA id b18sm3273727ejb.77.2021.03.19.01.24.49
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 19 Mar 2021 01:24:50 -0700 (PDT)
-From: Lee Jones <lee.jones@linaro.org>
-To: lee.jones@linaro.org
-Date: Fri, 19 Mar 2021 08:24:28 +0000
-Message-Id: <20210319082428.3294591-20-lee.jones@linaro.org>
-X-Mailer: git-send-email 2.27.0
-In-Reply-To: <20210319082428.3294591-1-lee.jones@linaro.org>
-References: <20210319082428.3294591-1-lee.jones@linaro.org>
-MIME-Version: 1.0
+Received: from out30-45.freemail.mail.aliyun.com
+ (out30-45.freemail.mail.aliyun.com [115.124.30.45])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 53F8D6E99E;
+ Fri, 19 Mar 2021 08:40:52 +0000 (UTC)
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R211e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=e01e04400;
+ MF=jiapeng.chong@linux.alibaba.com; NM=1; PH=DS; RN=7; SR=0;
+ TI=SMTPD_---0USYrtC0_1616143241; 
+Received: from
+ j63c13417.sqa.eu95.tbsite.net(mailfrom:jiapeng.chong@linux.alibaba.com
+ fp:SMTPD_---0USYrtC0_1616143241) by smtp.aliyun-inc.com(127.0.0.1);
+ Fri, 19 Mar 2021 16:40:48 +0800
+From: Jiapeng Chong <jiapeng.chong@linux.alibaba.com>
+To: bskeggs@redhat.com
+Date: Fri, 19 Mar 2021 16:40:40 +0800
+Message-Id: <1616143240-16356-1-git-send-email-jiapeng.chong@linux.alibaba.com>
+X-Mailer: git-send-email 1.8.3.1
 X-Mailman-Approved-At: Fri, 19 Mar 2021 14:36:46 +0000
-Subject: [Nouveau] [PATCH 19/19] drm/nouveau/nouveau_ioc32: Demote
- kernel-doc abuse to standard comment block
+Subject: [Nouveau] [PATCH] drm/nouveau:  Remove unused variable ret
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,45 +39,49 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>
+Cc: Jiapeng Chong <jiapeng.chong@linux.alibaba.com>, airlied@linux.ie,
+ nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, daniel@ffwll.ch
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Fixes the following W=1 kernel build warning(s):
+Fix the following coccicheck warnings:
 
- drivers/gpu/drm/nouveau/nouveau_ioc32.c:52: warning: Function parameter or member 'filp' not described in 'nouveau_compat_ioctl'
- drivers/gpu/drm/nouveau/nouveau_ioc32.c:52: warning: Function parameter or member 'cmd' not described in 'nouveau_compat_ioctl'
- drivers/gpu/drm/nouveau/nouveau_ioc32.c:52: warning: Function parameter or member 'arg' not described in 'nouveau_compat_ioctl'
+./drivers/gpu/drm/nouveau/nouveau_bios.c:2048:5-8: Unneeded variable:
+"ret". Return "0" on line 2061.
 
-Cc: Ben Skeggs <bskeggs@redhat.com>
-Cc: David Airlie <airlied@linux.ie>
-Cc: Daniel Vetter <daniel@ffwll.ch>
-Cc: dri-devel@lists.freedesktop.org
-Cc: nouveau@lists.freedesktop.org
-Signed-off-by: Lee Jones <lee.jones@linaro.org>
+Reported-by: Abaci Robot <abaci@linux.alibaba.com>
+Signed-off-by: Jiapeng Chong <jiapeng.chong@linux.alibaba.com>
 ---
- drivers/gpu/drm/nouveau/nouveau_ioc32.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/gpu/drm/nouveau/nouveau_bios.c | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_ioc32.c b/drivers/gpu/drm/nouveau/nouveau_ioc32.c
-index 8ddf9b2325a42..2af3615c5205c 100644
---- a/drivers/gpu/drm/nouveau/nouveau_ioc32.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_ioc32.c
-@@ -38,7 +38,7 @@
+diff --git a/drivers/gpu/drm/nouveau/nouveau_bios.c b/drivers/gpu/drm/nouveau/nouveau_bios.c
+index e8c445e..41b78e9 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_bios.c
++++ b/drivers/gpu/drm/nouveau/nouveau_bios.c
+@@ -2045,7 +2045,6 @@ static bool NVInitVBIOS(struct drm_device *dev)
+ {
+ 	struct nouveau_drm *drm = nouveau_drm(dev);
+ 	struct nvbios *bios = &drm->vbios;
+-	int ret = 0;
  
- #include "nouveau_ioctl.h"
+ 	/* Reset the BIOS head to 0. */
+ 	bios->state.crtchead = 0;
+@@ -2058,7 +2057,7 @@ static bool NVInitVBIOS(struct drm_device *dev)
+ 		bios->fp.lvds_init_run = false;
+ 	}
  
--/**
-+/*
-  * Called whenever a 32-bit process running under a 64-bit kernel
-  * performs an ioctl on /dev/dri/card<n>.
-  *
+-	return ret;
++	return 0;
+ }
+ 
+ static bool
 -- 
-2.27.0
+1.8.3.1
 
 _______________________________________________
 Nouveau mailing list
