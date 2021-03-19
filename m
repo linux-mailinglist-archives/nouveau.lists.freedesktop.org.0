@@ -2,37 +2,46 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3139B341652
-	for <lists+nouveau@lfdr.de>; Fri, 19 Mar 2021 08:20:39 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A7D3E3417ED
+	for <lists+nouveau@lfdr.de>; Fri, 19 Mar 2021 10:04:45 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 092EF6E992;
-	Fri, 19 Mar 2021 07:20:37 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A74DA6E9AD;
+	Fri, 19 Mar 2021 09:04:43 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from aibo.runbox.com (aibo.runbox.com [91.220.196.211])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7ACE96E992;
- Fri, 19 Mar 2021 07:20:35 +0000 (UTC)
-Received: from [10.9.9.73] (helo=submission02.runbox)
- by mailtransmit03.runbox with esmtp (Exim 4.86_2)
- (envelope-from <martin.peres@mupuf.org>)
- id 1lN9Qu-0008R8-8M; Fri, 19 Mar 2021 08:20:32 +0100
-Received: by submission02.runbox with esmtpsa [Authenticated alias (981869)]
- (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.90_1)
- id 1lN9Qs-0000Yt-JJ; Fri, 19 Mar 2021 08:20:30 +0100
-To: Lyude <lyude@redhat.com>, igt-dev@lists.freedesktop.org,
- nouveau@lists.freedesktop.org
-References: <20210318222124.970997-1-lyude@redhat.com>
- <20210318222124.970997-2-lyude@redhat.com>
-From: Martin Peres <martin.peres@mupuf.org>
-Message-ID: <72c0f4e1-c785-d52f-a3c2-fe9bbc20b217@mupuf.org>
-Date: Fri, 19 Mar 2021 09:20:29 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.8.1
+Received: from mga18.intel.com (mga18.intel.com [134.134.136.126])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 299396E9AD;
+ Fri, 19 Mar 2021 09:04:42 +0000 (UTC)
+IronPort-SDR: BEyyCSzckN5+N9qS7B3zyeCv1FcDkKLh3NuMRR9JleYQP+zZITwKUNfQPnO+nhjM4sBqwQAvZl
+ cHV7kSQ8ZMGA==
+X-IronPort-AV: E=McAfee;i="6000,8403,9927"; a="177445265"
+X-IronPort-AV: E=Sophos;i="5.81,261,1610438400"; d="scan'208";a="177445265"
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+ by orsmga106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 19 Mar 2021 02:04:41 -0700
+IronPort-SDR: D35LQJhT/k11HbNnUMIUFudTaqNXPGtVUniZba/4oMrVYkYlxd2aFklQD7SoqXjgkIDC2vJ07f
+ gAXNtJ56sXqg==
+X-IronPort-AV: E=Sophos;i="5.81,261,1610438400"; d="scan'208";a="450801506"
+Received: from thrakatuluk.fi.intel.com (HELO thrakatuluk) ([10.237.68.154])
+ by orsmga001-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 19 Mar 2021 02:04:39 -0700
+Received: from platvala by thrakatuluk with local (Exim 4.94)
+ (envelope-from <petri.latvala@intel.com>)
+ id 1lNB4H-0003dy-8u; Fri, 19 Mar 2021 11:05:17 +0200
+Date: Fri, 19 Mar 2021 11:05:17 +0200
+From: Petri Latvala <petri.latvala@intel.com>
+To: Lyude Paul <lyude@redhat.com>
+Message-ID: <YFRpTVxr8Kso/7ky@platvala-desk.ger.corp.intel.com>
+References: <20210317223827.446803-1-lyude@redhat.com>
+ <f42f3af7-658e-b06f-fb79-c36273ac4810@mupuf.org>
+ <YFMaG3tRgsiizy+J@platvala-desk.ger.corp.intel.com>
+ <3c5108990850ae8f88952c3149eaa935f7e378e7.camel@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <20210318222124.970997-2-lyude@redhat.com>
-Content-Language: en-US
-Subject: Re: [Nouveau] [igt-dev] [PATCH i-g-t v2 1/2] tests/kms_cursor_crc:
- Probe kernel for cursor size support
+Content-Disposition: inline
+In-Reply-To: <3c5108990850ae8f88952c3149eaa935f7e378e7.camel@redhat.com>
+X-Patchwork-Hint: comment
+Subject: Re: [Nouveau] [igt-dev] [PATCH i-g-t] lib: Introduce the
+ igt_nouveau library
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -44,209 +53,82 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Ben Skeggs <bskeggs@redhat.com>
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
+Cc: igt-dev@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ Ben Skeggs <bskeggs@redhat.com>, Martin Peres <martin.peres@mupuf.org>
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 19/03/2021 00:21, Lyude wrote:
-> From: Lyude Paul <lyude@redhat.com>
-> 
-> Currently we just assume that every cursor size up to data->cursor_max_w/h will
-> be supported by the driver, and check for support of nonsquare cursors by
-> checking if we're running on u815 and if so, which variant of intel hardware
-> we're running on. This isn't really ideal as we're about to enable 32x32 cursor
-> size tests for nouveau, and Intel hardware doesn't support cursor sizes that
-> small.
-> 
-> So, fix this by removing has_nonsquare_cursors() and replacing it with a more
-> generic require_cursor_size() function which checks whether or not the driver
-> we're using supports a given cursor size by attempting a test-only atomic
-> commit.
+On Thu, Mar 18, 2021 at 12:49:13PM -0400, Lyude Paul wrote:
+> On Thu, 2021-03-18 at 11:15 +0200, Petri Latvala wrote:
+> > On Thu, Mar 18, 2021 at 09:06:29AM +0200, Martin Peres wrote:
+> > > On 18/03/2021 00:38, Lyude wrote:
+> > > > diff --git a/include/drm-uapi/drm_fourcc.h b/include/drm-uapi/drm_f=
+ourcc.h
+> > > > index a7bc058c..87c87485 100644
+> > > > --- a/include/drm-uapi/drm_fourcc.h
+> > > > +++ b/include/drm-uapi/drm_fourcc.h
+> > > > @@ -681,7 +681,7 @@ drm_fourcc_canonicalize_nvidia_format_mod(__u64
+> > > > modifier)
+> > > > =A0 }
+> > > > =A0 /*
+> > > > - * 16Bx2 Block Linear layout, used by Tegra K1 and later
+> > > > + * 16Bx2 Block Linear layout, used by desktop GPUs, and Tegra K1 a=
+nd
+> > > > later
+> > > =
 
-Looks clean to me, and results in no new failures in Intel's results 
-(https://intel-gfx-ci.01.org/tree/drm-tip/IGTPW_5625/shards-all.html?testfilter=kms_cursor_crc), 
-and no changes in the results for any other test.
+> > > Maybe remove one of the "and"s?
+> > > =
 
-Not sure I can comment on the implementation details of 
-require_cursor_size(), but everything else, and the series is:
+> > > 16Bx2 Block Linear layout, used by desktop GPUs, and Tegra K1+
+> > =
 
-Reviewed-by: Martin Peres <martin.peres@mupuf.org>
+> > drm_fourcc.h is copied from the kernel, no hand-editing in IGT.
+> =
 
-> 
-> Signed-off-by: Lyude Paul <lyude@redhat.com>
-> Cc: Martin Peres <martin.peres@free.fr>
-> Cc: Ben Skeggs <bskeggs@redhat.com>
-> Cc: Jeremy Cline <jcline@redhat.com>
-> ---
->   tests/kms_cursor_crc.c | 131 ++++++++++++++++++++++++-----------------
->   1 file changed, 76 insertions(+), 55 deletions(-)
-> 
-> diff --git a/tests/kms_cursor_crc.c b/tests/kms_cursor_crc.c
-> index 3541ea06..b9c05472 100644
-> --- a/tests/kms_cursor_crc.c
-> +++ b/tests/kms_cursor_crc.c
-> @@ -523,26 +523,43 @@ static void create_cursor_fb(data_t *data, int cur_w, int cur_h)
->   	igt_put_cairo_ctx(cr);
->   }
->   
-> -static bool has_nonsquare_cursors(data_t *data)
-> +static void require_cursor_size(data_t *data, int w, int h)
->   {
-> -	uint32_t devid;
-> +	igt_fb_t primary_fb;
-> +	drmModeModeInfo *mode;
-> +	igt_display_t *display = &data->display;
-> +	igt_output_t *output = data->output;
-> +	igt_plane_t *primary, *cursor;
-> +	int ret;
->   
-> -	if (!is_i915_device(data->drm_fd))
-> -		return false;
-> +	igt_output_set_pipe(output, data->pipe);
->   
-> -	devid = intel_get_drm_devid(data->drm_fd);
-> +	mode = igt_output_get_mode(output);
-> +	primary = igt_output_get_plane_type(output, DRM_PLANE_TYPE_PRIMARY);
-> +	cursor = igt_output_get_plane_type(output, DRM_PLANE_TYPE_CURSOR);
->   
-> -	/*
-> -	 * Test non-square cursors a bit on the platforms
-> -	 * that support such things.
-> -	 */
-> -	if (devid == PCI_CHIP_845_G || devid == PCI_CHIP_I865_G)
-> -		return true;
-> +	/* Create temporary primary fb for testing */
-> +	igt_assert(igt_create_fb(data->drm_fd, mode->hdisplay, mode->vdisplay, DRM_FORMAT_XRGB8888,
-> +				 LOCAL_DRM_FORMAT_MOD_NONE, &primary_fb));
->   
-> -	if (IS_VALLEYVIEW(devid) || IS_CHERRYVIEW(devid))
-> -		return false;
-> +	igt_plane_set_fb(primary, &primary_fb);
-> +	igt_plane_set_fb(cursor, &data->fb);
-> +	igt_plane_set_size(cursor, w, h);
-> +	igt_fb_set_size(&data->fb, cursor, w, h);
-> +
-> +	/* Test if the kernel supports the given cursor size or not */
-> +	ret = igt_display_try_commit_atomic(display,
-> +					    DRM_MODE_ATOMIC_TEST_ONLY |
-> +					    DRM_MODE_ATOMIC_ALLOW_MODESET,
-> +					    NULL);
-> +
-> +	igt_plane_set_fb(primary, NULL);
-> +	igt_plane_set_fb(cursor, NULL);
-> +
-> +	igt_remove_fb(data->drm_fd, &primary_fb);
-> +	igt_output_set_pipe(output, PIPE_NONE);
->   
-> -	return intel_gen(devid) >= 7;
-> +	igt_skip_on_f(ret, "Cursor size %dx%d not supported by driver\n", w, h);
->   }
->   
->   static void test_cursor_size(data_t *data)
-> @@ -697,27 +714,33 @@ static void run_tests_on_pipe(data_t *data, enum pipe pipe)
->   			create_cursor_fb(data, w, h);
->   		}
->   
-> -		/* Using created cursor FBs to test cursor support */
-> -		igt_describe("Check if a given-size cursor is well-positioned inside the screen.");
-> -		igt_subtest_f("pipe-%s-cursor-%dx%d-onscreen", kmstest_pipe_name(pipe), w, h)
-> -			run_test(data, test_crc_onscreen, w, h);
-> -
-> -		igt_describe("Check if a given-size cursor is well-positioned outside the screen.");
-> -		igt_subtest_f("pipe-%s-cursor-%dx%d-offscreen", kmstest_pipe_name(pipe), w, h)
-> -			run_test(data, test_crc_offscreen, w, h);
-> -
-> -		igt_describe("Check the smooth and pixel-by-pixel given-size cursor movements on"
-> -		             "horizontal, vertical and diagonal.");
-> -		igt_subtest_f("pipe-%s-cursor-%dx%d-sliding", kmstest_pipe_name(pipe), w, h)
-> -			run_test(data, test_crc_sliding, w, h);
-> -
-> -		igt_describe("Check random placement of a cursor with given size.");
-> -		igt_subtest_f("pipe-%s-cursor-%dx%d-random", kmstest_pipe_name(pipe), w, h)
-> -			run_test(data, test_crc_random, w, h);
-> -
-> -		igt_describe("Check the rapid update of given-size cursor movements.");
-> -		igt_subtest_f("pipe-%s-cursor-%dx%d-rapid-movement", kmstest_pipe_name(pipe), w, h) {
-> -			run_test(data, test_rapid_movement, w, h);
-> +		igt_subtest_group {
-> +			igt_fixture
-> +				require_cursor_size(data, w, h);
-> +
-> +			/* Using created cursor FBs to test cursor support */
-> +			igt_describe("Check if a given-size cursor is well-positioned inside the "
-> +				     "screen.");
-> +			igt_subtest_f("pipe-%s-cursor-%dx%d-onscreen", kmstest_pipe_name(pipe), w, h)
-> +				run_test(data, test_crc_onscreen, w, h);
-> +
-> +			igt_describe("Check if a given-size cursor is well-positioned outside the "
-> +				     "screen.");
-> +			igt_subtest_f("pipe-%s-cursor-%dx%d-offscreen", kmstest_pipe_name(pipe), w, h)
-> +				run_test(data, test_crc_offscreen, w, h);
-> +
-> +			igt_describe("Check the smooth and pixel-by-pixel given-size cursor "
-> +				     "movements on horizontal, vertical and diagonal.");
-> +			igt_subtest_f("pipe-%s-cursor-%dx%d-sliding", kmstest_pipe_name(pipe), w, h)
-> +				run_test(data, test_crc_sliding, w, h);
-> +
-> +			igt_describe("Check random placement of a cursor with given size.");
-> +			igt_subtest_f("pipe-%s-cursor-%dx%d-random", kmstest_pipe_name(pipe), w, h)
-> +				run_test(data, test_crc_random, w, h);
-> +
-> +			igt_describe("Check the rapid update of given-size cursor movements.");
-> +			igt_subtest_f("pipe-%s-cursor-%dx%d-rapid-movement", kmstest_pipe_name(pipe), w, h)
-> +				run_test(data, test_rapid_movement, w, h);
->   		}
->   
->   		igt_fixture
-> @@ -730,27 +753,25 @@ static void run_tests_on_pipe(data_t *data, enum pipe pipe)
->   		 */
->   		h /= 3;
->   
-> -		igt_fixture {
-> -			if (has_nonsquare_cursors(data))
-> -				create_cursor_fb(data, w, h);
-> -		}
-> +		igt_fixture
-> +			create_cursor_fb(data, w, h);
->   
-> -		/* Using created cursor FBs to test cursor support */
-> -		igt_subtest_f("pipe-%s-cursor-%dx%d-onscreen", kmstest_pipe_name(pipe), w, h) {
-> -			igt_require(has_nonsquare_cursors(data));
-> -			run_test(data, test_crc_onscreen, w, h);
-> -		}
-> -		igt_subtest_f("pipe-%s-cursor-%dx%d-offscreen", kmstest_pipe_name(pipe), w, h) {
-> -			igt_require(has_nonsquare_cursors(data));
-> -			run_test(data, test_crc_offscreen, w, h);
-> -		}
-> -		igt_subtest_f("pipe-%s-cursor-%dx%d-sliding", kmstest_pipe_name(pipe), w, h) {
-> -			igt_require(has_nonsquare_cursors(data));
-> -			run_test(data, test_crc_sliding, w, h);
-> -		}
-> -		igt_subtest_f("pipe-%s-cursor-%dx%d-random", kmstest_pipe_name(pipe), w, h) {
-> -			igt_require(has_nonsquare_cursors(data));
-> -			run_test(data, test_crc_random, w, h);
-> +		igt_subtest_group {
-> +			igt_fixture
-> +				require_cursor_size(data, w, h);
-> +
-> +			/* Using created cursor FBs to test cursor support */
-> +			igt_subtest_f("pipe-%s-cursor-%dx%d-onscreen", kmstest_pipe_name(pipe), w, h)
-> +				run_test(data, test_crc_onscreen, w, h);
-> +
-> +			igt_subtest_f("pipe-%s-cursor-%dx%d-offscreen", kmstest_pipe_name(pipe), w, h)
-> +				run_test(data, test_crc_offscreen, w, h);
-> +
-> +			igt_subtest_f("pipe-%s-cursor-%dx%d-sliding", kmstest_pipe_name(pipe), w, h)
-> +				run_test(data, test_crc_sliding, w, h);
-> +
-> +			igt_subtest_f("pipe-%s-cursor-%dx%d-random", kmstest_pipe_name(pipe), w, h)
-> +				run_test(data, test_crc_random, w, h);
->   		}
->   
->   		igt_fixture
-> 
+> These additions are all copied from the drm_fourcc.h file in the kernel t=
+hough,
+> do you want me to just update the whole file instead?
+
+It was more of a response to Martin's suggestion that would need to go
+through the kernel.
+
+As for this patch to IGT, yes please, copy the file from the kernel
+as-is. As a separate commit, commit message stating which SHA in
+kernel it's from.
+
+
+-- =
+
+Petri Latvala
+
+
+
+> =
+
+> > =
+
+> > =
+
+> =
+
+> -- =
+
+> Sincerely,
+>    Lyude Paul (she/her)
+>    Software Engineer at Red Hat
+>    =
+
+> Note: I deal with a lot of emails and have a lot of bugs on my plate. If =
+you've
+> asked me a question, are waiting for a review/merge on a patch, etc. and I
+> haven't responded in a while, please feel free to send me another email t=
+o check
+> on my status. I don't bite!
+> =
+
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
