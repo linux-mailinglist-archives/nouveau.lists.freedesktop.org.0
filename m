@@ -2,61 +2,61 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9377F341FA8
-	for <lists+nouveau@lfdr.de>; Fri, 19 Mar 2021 15:37:01 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2EF7F341FB5
+	for <lists+nouveau@lfdr.de>; Fri, 19 Mar 2021 15:37:05 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B848D6EA3A;
-	Fri, 19 Mar 2021 14:36:50 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 85F1D6EA44;
+	Fri, 19 Mar 2021 14:36:51 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
  [IPv6:2a00:1450:4864:20::634])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8A4A36E99F
- for <nouveau@lists.freedesktop.org>; Fri, 19 Mar 2021 08:24:44 +0000 (UTC)
-Received: by mail-ej1-x634.google.com with SMTP id r12so8275024ejr.5
- for <nouveau@lists.freedesktop.org>; Fri, 19 Mar 2021 01:24:44 -0700 (PDT)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 65D576E9A9
+ for <nouveau@lists.freedesktop.org>; Fri, 19 Mar 2021 08:24:45 +0000 (UTC)
+Received: by mail-ej1-x634.google.com with SMTP id va9so8266693ejb.12
+ for <nouveau@lists.freedesktop.org>; Fri, 19 Mar 2021 01:24:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=MDb62l+8C+YekUvtP2oUdE/QSSZdTHGqGLcmgtoRZ6A=;
- b=fH44IuNWOT0gzD6ZDTpIA6Ik59/TezQetQjXfZCUitBkzSKS+ixlThvf4S2c4z24cR
- v9A2hvCloFo6enmQJULhrlvhLslpAa3OylYUAhVahQ0DFcq9p3SApUfigyhYrfPYbOrx
- 5oHB+zplzVnHfUyn0TnAgQR2ekgdd7RiP0JcI2yo1lyFoyfqotZU/s2LrJfGx6xGGArD
- SZJe92Das2D14/RPj+IkMR57XFYlLxJtpRUzoL9Ns/q/ExyaowNLvTTl8LYKvqwvwf2F
- eY6l+uTTJSI0CA5NWvGVQmu7tiFOEDgKAR0vSc8twz3TBFsV2/1yNzjo09TQ9pVbQseb
- PURA==
+ bh=l3BFodeOPTMMoMJFhYQYaXV3COFge4hJ56ydgoQMcn0=;
+ b=yDpwOUtr8Y8qaTzYWOy1tt72khTzKSstlpxPsggpndpTO0YpW29THZpXQ9yaQtYC79
+ 68SiANuDXV2bSx2a9n5Y3wAC/eP0plAl1TGb6e+VnH1n4+0m5M9iXQI0YAoCJfyjI92r
+ bJO4s7N++8FfpUyaw9clV/1j0pVHhkhv+aBOSJlq/c34rzYh33L12XhsLGnY+GSnpOSP
+ clPV01gl/MoIDV/HszIHC/Uqp5oKYVVQgSfQ1CUHacjvw22R5vfaWmvOYp9Jg7ANcaMD
+ SkYlMwCKcvaSKswcxaHWWBfBb47Q4a3HBm2iAsPljuDZ33X3VcDmgTCdML23L3pKNPM2
+ Ed7g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=MDb62l+8C+YekUvtP2oUdE/QSSZdTHGqGLcmgtoRZ6A=;
- b=Y8G9Kk0HtA7Wjtnp12z4TOBGGfDh9s3uKMe/prcV4O8uEeQwuf2AzLg6PLbqMZHIpA
- lQfKpQS31k8Ylc+hR2DHusMQ5nbNhghPtaWKH+9/vM2X+GsJAAvZgpFckyA7Hh2Rro0c
- QwFjR4fMZHk0Jf30POGLyWh7L6w4pt0XJxNkB14EmsCldUiNiYDxpm4/6Bux5Jb6QeAc
- fEkw2KWTWI+HpOZuvqD+pRhIUpF1/kAPQiC0ggZG+0P/w+9oxuaLXanbqkV9lJLXR4y5
- PsK784bqBI9PuMwsyEn2Cbo8YUeeNa52p2PnXFBPrmZFAy8lO17iOZWPLQ/Ep4Tm0miE
- yKqQ==
-X-Gm-Message-State: AOAM530FBUCK+SaEeTtbgS3J4aWSOOwkCYMKP8EUyVxqwqgDVd+0zS0H
- YQhZupHwz/Kl6SXu2f4TAr2XpA==
-X-Google-Smtp-Source: ABdhPJyNb/fOjzcFnA+jISAx3+fw5LpZGcDKcbMm/A9AcKdX1Vod6gM5IT6T6hUSVhBEzP8gkYxL9Q==
-X-Received: by 2002:a17:906:340d:: with SMTP id
- c13mr3036223ejb.29.1616142283208; 
- Fri, 19 Mar 2021 01:24:43 -0700 (PDT)
+ bh=l3BFodeOPTMMoMJFhYQYaXV3COFge4hJ56ydgoQMcn0=;
+ b=KQ/hp3z9GYY0asDfEM46gSVtWOvmq3GERcYFy/IXyWVMBqrDA9bbwkJAfe/Tvby6ku
+ Jly/LghL4unxVq5f/KrvKqK5qkAP3LO5+ZtS5us6/xKo1ur93DzvzjPv7pHxAyUwimW4
+ MinrzoKihZC3oNhRaIVw+WtLmGQo55m3+Yz3rfBW1NVp5YIuSWKrS6mODwOtwbUV1Rvo
+ a+f8bAT3cfWw+hceV79Ocm1eZ5TA/4FlVKZFz2BbKIHtPVvo6jZtN3ibJA38+UaTL2oY
+ nNXYozqjZP/XM/wEPmUJjbBDWMzM8JNlOlAMjhPdr7sqREBZTfjJAkJQ5vF/tgFTnLCv
+ PF2Q==
+X-Gm-Message-State: AOAM530l5BKNn4VLCpBeSJlMSOnRHoUsKvONPj4K54Md4DB0nIvxaUWJ
+ 4d6x/SkbKfjHgMuvNidz36vLyQ==
+X-Google-Smtp-Source: ABdhPJxoo5i8vW6NNowcMoz9sB++W3ReJn5ajzefnBphKE7+Df6szDDubQQH7q/pELeFudxCf4ap9g==
+X-Received: by 2002:a17:906:b4c:: with SMTP id
+ v12mr3007707ejg.330.1616142284127; 
+ Fri, 19 Mar 2021 01:24:44 -0700 (PDT)
 Received: from dell.default ([91.110.221.194])
- by smtp.gmail.com with ESMTPSA id b18sm3273727ejb.77.2021.03.19.01.24.42
+ by smtp.gmail.com with ESMTPSA id b18sm3273727ejb.77.2021.03.19.01.24.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 19 Mar 2021 01:24:42 -0700 (PDT)
+ Fri, 19 Mar 2021 01:24:43 -0700 (PDT)
 From: Lee Jones <lee.jones@linaro.org>
 To: lee.jones@linaro.org
-Date: Fri, 19 Mar 2021 08:24:20 +0000
-Message-Id: <20210319082428.3294591-12-lee.jones@linaro.org>
+Date: Fri, 19 Mar 2021 08:24:21 +0000
+Message-Id: <20210319082428.3294591-13-lee.jones@linaro.org>
 X-Mailer: git-send-email 2.27.0
 In-Reply-To: <20210319082428.3294591-1-lee.jones@linaro.org>
 References: <20210319082428.3294591-1-lee.jones@linaro.org>
 MIME-Version: 1.0
 X-Mailman-Approved-At: Fri, 19 Mar 2021 14:36:46 +0000
-Subject: [Nouveau] [PATCH 11/19] drm/nouveau/nouveau_display: Remove set but
- unused variable 'width'
+Subject: [Nouveau] [PATCH 12/19] drm/nouveau/dispnv04/crtc: Demote
+ non-conforming kernel-doc headers
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,39 +71,58 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
  linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
  Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Rml4ZXMgdGhlIGZvbGxvd2luZyBXPTEga2VybmVsIGJ1aWxkIHdhcm5pbmcocyk6CgogZHJpdmVy
-cy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9kaXNwbGF5LmM6IEluIGZ1bmN0aW9uIOKAmG5vdXZl
-YXVfZnJhbWVidWZmZXJfbmV34oCZOgogZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9k
-aXNwbGF5LmM6MzA5OjE1OiB3YXJuaW5nOiB2YXJpYWJsZSDigJh3aWR0aOKAmSBzZXQgYnV0IG5v
-dCB1c2VkIFstV3VudXNlZC1idXQtc2V0LXZhcmlhYmxlXQoKQ2M6IEJlbiBTa2VnZ3MgPGJza2Vn
-Z3NAcmVkaGF0LmNvbT4KQ2M6IERhdmlkIEFpcmxpZSA8YWlybGllZEBsaW51eC5pZT4KQ2M6IERh
-bmllbCBWZXR0ZXIgPGRhbmllbEBmZndsbC5jaD4KQ2M6IGRyaS1kZXZlbEBsaXN0cy5mcmVlZGVz
-a3RvcC5vcmcKQ2M6IG5vdXZlYXVAbGlzdHMuZnJlZWRlc2t0b3Aub3JnClNpZ25lZC1vZmYtYnk6
-IExlZSBKb25lcyA8bGVlLmpvbmVzQGxpbmFyby5vcmc+Ci0tLQogZHJpdmVycy9ncHUvZHJtL25v
-dXZlYXUvbm91dmVhdV9kaXNwbGF5LmMgfCA4ICsrKystLS0tCiAxIGZpbGUgY2hhbmdlZCwgNCBp
-bnNlcnRpb25zKCspLCA0IGRlbGV0aW9ucygtKQoKZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2Ry
-bS9ub3V2ZWF1L25vdXZlYXVfZGlzcGxheS5jIGIvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91
-dmVhdV9kaXNwbGF5LmMKaW5kZXggZGFjMDJjN2JlNTRkYy4uYmUyMzI3Y2U3Mzk0YyAxMDA2NDQK
-LS0tIGEvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9kaXNwbGF5LmMKKysrIGIvZHJp
-dmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9kaXNwbGF5LmMKQEAgLTMwNiw3ICszMDYsNyBA
-QCBub3V2ZWF1X2ZyYW1lYnVmZmVyX25ldyhzdHJ1Y3QgZHJtX2RldmljZSAqZGV2LAogCXN0cnVj
-dCBub3V2ZWF1X2JvICpudmJvID0gbm91dmVhdV9nZW1fb2JqZWN0KGdlbSk7CiAJc3RydWN0IGRy
-bV9mcmFtZWJ1ZmZlciAqZmI7CiAJY29uc3Qgc3RydWN0IGRybV9mb3JtYXRfaW5mbyAqaW5mbzsK
-LQl1bnNpZ25lZCBpbnQgd2lkdGgsIGhlaWdodCwgaTsKKwl1bnNpZ25lZCBpbnQgaGVpZ2h0LCBp
-OwogCXVpbnQzMl90IHRpbGVfbW9kZTsKIAl1aW50OF90IGtpbmQ7CiAJaW50IHJldDsKQEAgLTM0
-Myw5ICszNDMsOSBAQCBub3V2ZWF1X2ZyYW1lYnVmZmVyX25ldyhzdHJ1Y3QgZHJtX2RldmljZSAq
-ZGV2LAogCWluZm8gPSBkcm1fZ2V0X2Zvcm1hdF9pbmZvKGRldiwgbW9kZV9jbWQpOwogCiAJZm9y
-IChpID0gMDsgaSA8IGluZm8tPm51bV9wbGFuZXM7IGkrKykgewotCQl3aWR0aCA9IGRybV9mb3Jt
-YXRfaW5mb19wbGFuZV93aWR0aChpbmZvLAotCQkJCQkJICAgIG1vZGVfY21kLT53aWR0aCwKLQkJ
-CQkJCSAgICBpKTsKKwkJZHJtX2Zvcm1hdF9pbmZvX3BsYW5lX3dpZHRoKGluZm8sCisJCQkJCSAg
-ICBtb2RlX2NtZC0+d2lkdGgsCisJCQkJCSAgICBpKTsKIAkJaGVpZ2h0ID0gZHJtX2Zvcm1hdF9p
-bmZvX3BsYW5lX2hlaWdodChpbmZvLAogCQkJCQkJICAgICAgbW9kZV9jbWQtPmhlaWdodCwKIAkJ
-CQkJCSAgICAgIGkpOwotLSAKMi4yNy4wCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fXwpOb3V2ZWF1IG1haWxpbmcgbGlzdApOb3V2ZWF1QGxpc3RzLmZyZWVk
-ZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZv
-L25vdXZlYXUK
+Fixes the following W=1 kernel build warning(s):
+
+ drivers/gpu/drm/nouveau/dispnv04/crtc.c:462: warning: Function parameter or member 'crtc' not described in 'nv_crtc_mode_set_regs'
+ drivers/gpu/drm/nouveau/dispnv04/crtc.c:462: warning: Function parameter or member 'mode' not described in 'nv_crtc_mode_set_regs'
+ drivers/gpu/drm/nouveau/dispnv04/crtc.c:640: warning: Function parameter or member 'crtc' not described in 'nv_crtc_mode_set'
+ drivers/gpu/drm/nouveau/dispnv04/crtc.c:640: warning: Function parameter or member 'mode' not described in 'nv_crtc_mode_set'
+ drivers/gpu/drm/nouveau/dispnv04/crtc.c:640: warning: Function parameter or member 'adjusted_mode' not described in 'nv_crtc_mode_set'
+ drivers/gpu/drm/nouveau/dispnv04/crtc.c:640: warning: Function parameter or member 'x' not described in 'nv_crtc_mode_set'
+ drivers/gpu/drm/nouveau/dispnv04/crtc.c:640: warning: Function parameter or member 'y' not described in 'nv_crtc_mode_set'
+ drivers/gpu/drm/nouveau/dispnv04/crtc.c:640: warning: Function parameter or member 'old_fb' not described in 'nv_crtc_mode_set'
+
+Cc: Ben Skeggs <bskeggs@redhat.com>
+Cc: David Airlie <airlied@linux.ie>
+Cc: Daniel Vetter <daniel@ffwll.ch>
+Cc: dri-devel@lists.freedesktop.org
+Cc: nouveau@lists.freedesktop.org
+Signed-off-by: Lee Jones <lee.jones@linaro.org>
+---
+ drivers/gpu/drm/nouveau/dispnv04/crtc.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/gpu/drm/nouveau/dispnv04/crtc.c b/drivers/gpu/drm/nouveau/dispnv04/crtc.c
+index f9e962fd94d0d..f9a276ea5a9e0 100644
+--- a/drivers/gpu/drm/nouveau/dispnv04/crtc.c
++++ b/drivers/gpu/drm/nouveau/dispnv04/crtc.c
+@@ -449,7 +449,7 @@ nv_crtc_mode_set_vga(struct drm_crtc *crtc, struct drm_display_mode *mode)
+ 	regp->Attribute[NV_CIO_AR_CSEL_INDEX] = 0x00;
+ }
+ 
+-/**
++/*
+  * Sets up registers for the given mode/adjusted_mode pair.
+  *
+  * The clocks, CRTCs and outputs attached to this CRTC must be off.
+@@ -625,7 +625,7 @@ nv_crtc_swap_fbs(struct drm_crtc *crtc, struct drm_framebuffer *old_fb)
+ 	return ret;
+ }
+ 
+-/**
++/*
+  * Sets up registers for the given mode/adjusted_mode pair.
+  *
+  * The clocks, CRTCs and outputs attached to this CRTC must be off.
+-- 
+2.27.0
+
+_______________________________________________
+Nouveau mailing list
+Nouveau@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/nouveau
