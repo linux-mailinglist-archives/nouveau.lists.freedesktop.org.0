@@ -2,45 +2,56 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7EDF0342798
-	for <lists+nouveau@lfdr.de>; Fri, 19 Mar 2021 22:21:39 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2FA673432A6
+	for <lists+nouveau@lfdr.de>; Sun, 21 Mar 2021 13:59:56 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id EA5E46EACF;
-	Fri, 19 Mar 2021 21:21:37 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E700B89CAF;
+	Sun, 21 Mar 2021 12:59:52 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mga07.intel.com (mga07.intel.com [134.134.136.100])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 91CA66EACE;
- Fri, 19 Mar 2021 21:21:36 +0000 (UTC)
-IronPort-SDR: UbWX/+r4de4iiZIaVR8KGF0fCMmr1vi0DXzht+pxRQifnQCdE35kMuI7vM/xriwZxRrsbDeTSn
- aL9NR8NXBSFA==
-X-IronPort-AV: E=McAfee;i="6000,8403,9928"; a="253969824"
-X-IronPort-AV: E=Sophos;i="5.81,262,1610438400"; d="scan'208";a="253969824"
-Received: from fmsmga008.fm.intel.com ([10.253.24.58])
- by orsmga105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 19 Mar 2021 14:21:35 -0700
-IronPort-SDR: ulkUhcUYsJqpYBVcyGjwze4MBbpz5f8lR/KNuyjCRt6zPsJ8JziDiODCyhx/jBBWf+eHXvKXmw
- 0//Sa1U16q4Q==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.81,262,1610438400"; d="scan'208";a="406949375"
-Received: from stinkbox.fi.intel.com (HELO stinkbox) ([10.237.72.171])
- by fmsmga008.fm.intel.com with SMTP; 19 Mar 2021 14:21:33 -0700
-Received: by stinkbox (sSMTP sendmail emulation);
- Fri, 19 Mar 2021 23:21:32 +0200
-Date: Fri, 19 Mar 2021 23:21:32 +0200
-From: Ville =?iso-8859-1?Q?Syrj=E4l=E4?= <ville.syrjala@linux.intel.com>
-To: Lyude Paul <lyude@redhat.com>
-Message-ID: <YFUV3LNYs/DUEzsV@intel.com>
+Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
+ [IPv6:2607:f8b0:4864:20::331])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 98B6689CAF
+ for <nouveau@lists.freedesktop.org>; Sun, 21 Mar 2021 12:59:51 +0000 (UTC)
+Received: by mail-ot1-x331.google.com with SMTP id
+ g8-20020a9d6c480000b02901b65ca2432cso13224877otq.3
+ for <nouveau@lists.freedesktop.org>; Sun, 21 Mar 2021 05:59:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=1J+4eAxW/si+VFaMUSmzb7cCoNaxtGxwK6Pn+djnrXc=;
+ b=BS+UDe56cCewprkpfUAmksah3yZY4wugMYJ7JULgrvN5eXT3Q4c5DAnEzezPnHdv1C
+ 3jjGIfVithrj4bdMx3H4zm2Lu0ctS9TM0MieOnB4d5fXVEBckc13r85P9dQFgr6i+1yn
+ eOXdaAH83KemYy4qSIjJ6sBFpdFfbHfMWLgb8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=1J+4eAxW/si+VFaMUSmzb7cCoNaxtGxwK6Pn+djnrXc=;
+ b=TxCBaRkFareVfioILbxjkVjq4+bJnK4rnMpNzArTCpkOnDBuGQohziYqfrhE093bf9
+ U9s6zf2fpuMDun92xKBQS5xsAEt3OuxJXgQM1vmQKH60yzV7AFHmyAUF0OF9bvDUI5bG
+ Ws+8+LzVWkuf937xcDXz6LSF8GeRo2qA/VdndwDMev4v09lRKKSYeeActlZ5o57ZxiHt
+ OsnScM4bblGsZndSoAk9vHPV0zoLHUBKwn2Qy7C2025r0LXSp5Ozas0fm/OS0lC3qFTQ
+ WGESCjzonjyF5w+/01TibF8dn+I4kV4pKvOGB69Oi/BkHLKcDIorZSQYBhSkHgV1FpKq
+ u9rw==
+X-Gm-Message-State: AOAM5311jbCQtM6HzSYSJXKPERqIrmBfgyuPR97chfcXqzbPSUI97nwr
+ hoTLNhX17GOp3xM1Tyg/IeoXUQRWDq8EFAX+TMGvug==
+X-Google-Smtp-Source: ABdhPJx4XD/im2LDZADkqA9QknlJgQuvobTopzaaxnDzY7/Tb1NUm5pOMGM8THeIBttIccC5pHpraCczO5KaSaDprbg=
+X-Received: by 2002:a9d:6481:: with SMTP id g1mr7748259otl.303.1616331590841; 
+ Sun, 21 Mar 2021 05:59:50 -0700 (PDT)
+MIME-Version: 1.0
 References: <20210318222124.970997-1-lyude@redhat.com>
  <20210318222124.970997-2-lyude@redhat.com>
  <YFS8vuuArWJtH9Mb@intel.com>
  <19ee182cd7965f3a250062dac927eccc7ae31a91.camel@redhat.com>
  <YFTmxXGL4qF9Z41X@intel.com>
  <51b473f2905a444868a1878bbbd0578ad888963c.camel@redhat.com>
-MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <51b473f2905a444868a1878bbbd0578ad888963c.camel@redhat.com>
-X-Patchwork-Hint: comment
+ <YFUV3LNYs/DUEzsV@intel.com>
+In-Reply-To: <YFUV3LNYs/DUEzsV@intel.com>
+From: Daniel Vetter <daniel.vetter@ffwll.ch>
+Date: Sun, 21 Mar 2021 13:59:39 +0100
+Message-ID: <CAKMK7uGuiwyp-00Rs7GnJT2XPFNzZ7xa3fi9OgN4aQh94qyy6A@mail.gmail.com>
+To: =?UTF-8?B?VmlsbGUgU3lyasOkbMOk?= <ville.syrjala@linux.intel.com>
 Subject: Re: [Nouveau] [igt-dev] [PATCH i-g-t v2 1/2] tests/kms_cursor_crc:
  Probe kernel for cursor size support
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -54,161 +65,111 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: igt-dev@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- Ben Skeggs <bskeggs@redhat.com>
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Cc: IGT development <igt-dev@lists.freedesktop.org>,
+ Nouveau Dev <nouveau@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, Mar 19, 2021 at 02:43:56PM -0400, Lyude Paul wrote:
-> On Fri, 2021-03-19 at 20:00 +0200, Ville Syrj=E4l=E4 wrote:
-> > On Fri, Mar 19, 2021 at 01:40:52PM -0400, Lyude Paul wrote:
-> > > On Fri, 2021-03-19 at 17:01 +0200, Ville Syrj=E4l=E4 wrote:
-> > > > On Thu, Mar 18, 2021 at 06:21:23PM -0400, Lyude wrote:
-> > > > > From: Lyude Paul <lyude@redhat.com>
-> > > > > =
-
-> > > > > Currently we just assume that every cursor size up to data-
-> > > > > >cursor_max_w/h
-> > > > > will
-> > > > > be supported by the driver, and check for support of nonsquare cu=
-rsors
-> > > > > by
-> > > > > checking if we're running on u815 and if so, which variant of int=
-el
-> > > > > hardware
-> > > > > we're running on. This isn't really ideal as we're about to enabl=
-e 32x32
-> > > > > cursor
-> > > > > size tests for nouveau, and Intel hardware doesn't support cursor=
- sizes
-> > > > > that
-> > > > > small.
-> > > > > =
-
-> > > > > So, fix this by removing has_nonsquare_cursors() and replacing it=
- with a
-> > > > > more
-> > > > > generic require_cursor_size() function which checks whether or no=
-t the
-> > > > > driver
-> > > > > we're using supports a given cursor size by attempting a test-only
-> > > > > atomic
-> > > > > commit.
-> > > > > =
-
-> > > > > Signed-off-by: Lyude Paul <lyude@redhat.com>
-> > > > > Cc: Martin Peres <martin.peres@free.fr>
-> > > > > Cc: Ben Skeggs <bskeggs@redhat.com>
-> > > > > Cc: Jeremy Cline <jcline@redhat.com>
-> > > > > ---
-> > > > > =A0tests/kms_cursor_crc.c | 131 ++++++++++++++++++++++++---------=
---------
-> > > > > =A01 file changed, 76 insertions(+), 55 deletions(-)
-> > > > > =
-
-> > > > > diff --git a/tests/kms_cursor_crc.c b/tests/kms_cursor_crc.c
-> > > > > index 3541ea06..b9c05472 100644
-> > > > > --- a/tests/kms_cursor_crc.c
-> > > > > +++ b/tests/kms_cursor_crc.c
-> > > > > @@ -523,26 +523,43 @@ static void create_cursor_fb(data_t *data, =
-int
-> > > > > cur_w,
-> > > > > int cur_h)
-> > > > > =A0=A0=A0=A0=A0=A0=A0=A0igt_put_cairo_ctx(cr);
-> > > > > =A0}
-> > > > > =A0
-> > > > > -static bool has_nonsquare_cursors(data_t *data)
-> > > > > +static void require_cursor_size(data_t *data, int w, int h)
-> > > > > =A0{
-> > > > > -=A0=A0=A0=A0=A0=A0=A0uint32_t devid;
-> > > > > +=A0=A0=A0=A0=A0=A0=A0igt_fb_t primary_fb;
-> > > > > +=A0=A0=A0=A0=A0=A0=A0drmModeModeInfo *mode;
-> > > > > +=A0=A0=A0=A0=A0=A0=A0igt_display_t *display =3D &data->display;
-> > > > > +=A0=A0=A0=A0=A0=A0=A0igt_output_t *output =3D data->output;
-> > > > > +=A0=A0=A0=A0=A0=A0=A0igt_plane_t *primary, *cursor;
-> > > > > +=A0=A0=A0=A0=A0=A0=A0int ret;
-> > > > > =A0
-> > > > > -=A0=A0=A0=A0=A0=A0=A0if (!is_i915_device(data->drm_fd))
-> > > > > -=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0return false;
-> > > > > +=A0=A0=A0=A0=A0=A0=A0igt_output_set_pipe(output, data->pipe);
-> > > > > =A0
-> > > > > -=A0=A0=A0=A0=A0=A0=A0devid =3D intel_get_drm_devid(data->drm_fd);
-> > > > > +=A0=A0=A0=A0=A0=A0=A0mode =3D igt_output_get_mode(output);
-> > > > > +=A0=A0=A0=A0=A0=A0=A0primary =3D igt_output_get_plane_type(outpu=
-t,
-> > > > > DRM_PLANE_TYPE_PRIMARY);
-> > > > > +=A0=A0=A0=A0=A0=A0=A0cursor =3D igt_output_get_plane_type(output,
-> > > > > DRM_PLANE_TYPE_CURSOR);
-> > > > > =A0
-> > > > > -=A0=A0=A0=A0=A0=A0=A0/*
-> > > > > -=A0=A0=A0=A0=A0=A0=A0 * Test non-square cursors a bit on the pla=
-tforms
-> > > > > -=A0=A0=A0=A0=A0=A0=A0 * that support such things.
-> > > > > -=A0=A0=A0=A0=A0=A0=A0 */
-> > > > > -=A0=A0=A0=A0=A0=A0=A0if (devid =3D=3D PCI_CHIP_845_G || devid =
-=3D=3D PCI_CHIP_I865_G)
-> > > > > -=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0return true;
-> > > > > +=A0=A0=A0=A0=A0=A0=A0/* Create temporary primary fb for testing =
-*/
-> > > > > +=A0=A0=A0=A0=A0=A0=A0igt_assert(igt_create_fb(data->drm_fd, mode=
-->hdisplay, mode-
-> > > > > > vdisplay, DRM_FORMAT_XRGB8888,
-> > > > > +=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
-=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 LOCAL_DRM_FORMAT_MOD_NONE,
-> > > > > &primary_fb));
-> > > > > =A0
-> > > > > -=A0=A0=A0=A0=A0=A0=A0if (IS_VALLEYVIEW(devid) || IS_CHERRYVIEW(d=
-evid))
-> > > > > -=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0return false;
-> > > > > +=A0=A0=A0=A0=A0=A0=A0igt_plane_set_fb(primary, &primary_fb);
-> > > > > +=A0=A0=A0=A0=A0=A0=A0igt_plane_set_fb(cursor, &data->fb);
-> > > > > +=A0=A0=A0=A0=A0=A0=A0igt_plane_set_size(cursor, w, h);
-> > > > > +=A0=A0=A0=A0=A0=A0=A0igt_fb_set_size(&data->fb, cursor, w, h);
-> > > > > +
-> > > > > +=A0=A0=A0=A0=A0=A0=A0/* Test if the kernel supports the given cu=
-rsor size or not */
-> > > > > +=A0=A0=A0=A0=A0=A0=A0ret =3D igt_display_try_commit_atomic(displ=
-ay,
-> > > > > +=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
-=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 DRM_MODE_AT=
-OMIC_TEST_ONLY |
-> > > > > +=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
-=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0
-> > > > > DRM_MODE_ATOMIC_ALLOW_MODESET,
-> > > > > +=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
-=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 NULL);
-> > > > =
-
-> > > > Would be better to not depend on atomic. We have platforms
-> > > > that don't expose it yet.
-> > > =
-
-> > > Do you have any other ideas how we could probe for this then? it seem=
-s like
-> > > the
-> > > only alternative would be to add intel-specific checks to fix that, o=
-r add
-> > > some
-> > > ioctl for querying the minimum cursor size (which sounds preferable i=
-mo).
-> > > would
-> > > the latter work for you, or do you have another idea?
-> > =
-
-> > Just do it for real instead of TEST_ONLY.
-> =
-
-> ah-and it'll still fail in that case I assume?
-
-Yeah, should fail just the same if the driver doesn't like it.
-
--- =
-
-Ville Syrj=E4l=E4
-Intel
-_______________________________________________
-Nouveau mailing list
-Nouveau@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/nouveau
+T24gRnJpLCBNYXIgMTksIDIwMjEgYXQgMTA6MjEgUE0gVmlsbGUgU3lyasOkbMOkCjx2aWxsZS5z
+eXJqYWxhQGxpbnV4LmludGVsLmNvbT4gd3JvdGU6Cj4KPiBPbiBGcmksIE1hciAxOSwgMjAyMSBh
+dCAwMjo0Mzo1NlBNIC0wNDAwLCBMeXVkZSBQYXVsIHdyb3RlOgo+ID4gT24gRnJpLCAyMDIxLTAz
+LTE5IGF0IDIwOjAwICswMjAwLCBWaWxsZSBTeXJqw6Rsw6Qgd3JvdGU6Cj4gPiA+IE9uIEZyaSwg
+TWFyIDE5LCAyMDIxIGF0IDAxOjQwOjUyUE0gLTA0MDAsIEx5dWRlIFBhdWwgd3JvdGU6Cj4gPiA+
+ID4gT24gRnJpLCAyMDIxLTAzLTE5IGF0IDE3OjAxICswMjAwLCBWaWxsZSBTeXJqw6Rsw6Qgd3Jv
+dGU6Cj4gPiA+ID4gPiBPbiBUaHUsIE1hciAxOCwgMjAyMSBhdCAwNjoyMToyM1BNIC0wNDAwLCBM
+eXVkZSB3cm90ZToKPiA+ID4gPiA+ID4gRnJvbTogTHl1ZGUgUGF1bCA8bHl1ZGVAcmVkaGF0LmNv
+bT4KPiA+ID4gPiA+ID4KPiA+ID4gPiA+ID4gQ3VycmVudGx5IHdlIGp1c3QgYXNzdW1lIHRoYXQg
+ZXZlcnkgY3Vyc29yIHNpemUgdXAgdG8gZGF0YS0KPiA+ID4gPiA+ID4gPmN1cnNvcl9tYXhfdy9o
+Cj4gPiA+ID4gPiA+IHdpbGwKPiA+ID4gPiA+ID4gYmUgc3VwcG9ydGVkIGJ5IHRoZSBkcml2ZXIs
+IGFuZCBjaGVjayBmb3Igc3VwcG9ydCBvZiBub25zcXVhcmUgY3Vyc29ycwo+ID4gPiA+ID4gPiBi
+eQo+ID4gPiA+ID4gPiBjaGVja2luZyBpZiB3ZSdyZSBydW5uaW5nIG9uIHU4MTUgYW5kIGlmIHNv
+LCB3aGljaCB2YXJpYW50IG9mIGludGVsCj4gPiA+ID4gPiA+IGhhcmR3YXJlCj4gPiA+ID4gPiA+
+IHdlJ3JlIHJ1bm5pbmcgb24uIFRoaXMgaXNuJ3QgcmVhbGx5IGlkZWFsIGFzIHdlJ3JlIGFib3V0
+IHRvIGVuYWJsZSAzMngzMgo+ID4gPiA+ID4gPiBjdXJzb3IKPiA+ID4gPiA+ID4gc2l6ZSB0ZXN0
+cyBmb3Igbm91dmVhdSwgYW5kIEludGVsIGhhcmR3YXJlIGRvZXNuJ3Qgc3VwcG9ydCBjdXJzb3Ig
+c2l6ZXMKPiA+ID4gPiA+ID4gdGhhdAo+ID4gPiA+ID4gPiBzbWFsbC4KPiA+ID4gPiA+ID4KPiA+
+ID4gPiA+ID4gU28sIGZpeCB0aGlzIGJ5IHJlbW92aW5nIGhhc19ub25zcXVhcmVfY3Vyc29ycygp
+IGFuZCByZXBsYWNpbmcgaXQgd2l0aCBhCj4gPiA+ID4gPiA+IG1vcmUKPiA+ID4gPiA+ID4gZ2Vu
+ZXJpYyByZXF1aXJlX2N1cnNvcl9zaXplKCkgZnVuY3Rpb24gd2hpY2ggY2hlY2tzIHdoZXRoZXIg
+b3Igbm90IHRoZQo+ID4gPiA+ID4gPiBkcml2ZXIKPiA+ID4gPiA+ID4gd2UncmUgdXNpbmcgc3Vw
+cG9ydHMgYSBnaXZlbiBjdXJzb3Igc2l6ZSBieSBhdHRlbXB0aW5nIGEgdGVzdC1vbmx5Cj4gPiA+
+ID4gPiA+IGF0b21pYwo+ID4gPiA+ID4gPiBjb21taXQuCj4gPiA+ID4gPiA+Cj4gPiA+ID4gPiA+
+IFNpZ25lZC1vZmYtYnk6IEx5dWRlIFBhdWwgPGx5dWRlQHJlZGhhdC5jb20+Cj4gPiA+ID4gPiA+
+IENjOiBNYXJ0aW4gUGVyZXMgPG1hcnRpbi5wZXJlc0BmcmVlLmZyPgo+ID4gPiA+ID4gPiBDYzog
+QmVuIFNrZWdncyA8YnNrZWdnc0ByZWRoYXQuY29tPgo+ID4gPiA+ID4gPiBDYzogSmVyZW15IENs
+aW5lIDxqY2xpbmVAcmVkaGF0LmNvbT4KPiA+ID4gPiA+ID4gLS0tCj4gPiA+ID4gPiA+ICB0ZXN0
+cy9rbXNfY3Vyc29yX2NyYy5jIHwgMTMxICsrKysrKysrKysrKysrKysrKysrKysrKy0tLS0tLS0t
+LS0tLS0tLS0tCj4gPiA+ID4gPiA+ICAxIGZpbGUgY2hhbmdlZCwgNzYgaW5zZXJ0aW9ucygrKSwg
+NTUgZGVsZXRpb25zKC0pCj4gPiA+ID4gPiA+Cj4gPiA+ID4gPiA+IGRpZmYgLS1naXQgYS90ZXN0
+cy9rbXNfY3Vyc29yX2NyYy5jIGIvdGVzdHMva21zX2N1cnNvcl9jcmMuYwo+ID4gPiA+ID4gPiBp
+bmRleCAzNTQxZWEwNi4uYjljMDU0NzIgMTAwNjQ0Cj4gPiA+ID4gPiA+IC0tLSBhL3Rlc3RzL2tt
+c19jdXJzb3JfY3JjLmMKPiA+ID4gPiA+ID4gKysrIGIvdGVzdHMva21zX2N1cnNvcl9jcmMuYwo+
+ID4gPiA+ID4gPiBAQCAtNTIzLDI2ICs1MjMsNDMgQEAgc3RhdGljIHZvaWQgY3JlYXRlX2N1cnNv
+cl9mYihkYXRhX3QgKmRhdGEsIGludAo+ID4gPiA+ID4gPiBjdXJfdywKPiA+ID4gPiA+ID4gaW50
+IGN1cl9oKQo+ID4gPiA+ID4gPiAgICAgICAgIGlndF9wdXRfY2Fpcm9fY3R4KGNyKTsKPiA+ID4g
+PiA+ID4gIH0KPiA+ID4gPiA+ID4KPiA+ID4gPiA+ID4gLXN0YXRpYyBib29sIGhhc19ub25zcXVh
+cmVfY3Vyc29ycyhkYXRhX3QgKmRhdGEpCj4gPiA+ID4gPiA+ICtzdGF0aWMgdm9pZCByZXF1aXJl
+X2N1cnNvcl9zaXplKGRhdGFfdCAqZGF0YSwgaW50IHcsIGludCBoKQo+ID4gPiA+ID4gPiAgewo+
+ID4gPiA+ID4gPiAtICAgICAgIHVpbnQzMl90IGRldmlkOwo+ID4gPiA+ID4gPiArICAgICAgIGln
+dF9mYl90IHByaW1hcnlfZmI7Cj4gPiA+ID4gPiA+ICsgICAgICAgZHJtTW9kZU1vZGVJbmZvICpt
+b2RlOwo+ID4gPiA+ID4gPiArICAgICAgIGlndF9kaXNwbGF5X3QgKmRpc3BsYXkgPSAmZGF0YS0+
+ZGlzcGxheTsKPiA+ID4gPiA+ID4gKyAgICAgICBpZ3Rfb3V0cHV0X3QgKm91dHB1dCA9IGRhdGEt
+Pm91dHB1dDsKPiA+ID4gPiA+ID4gKyAgICAgICBpZ3RfcGxhbmVfdCAqcHJpbWFyeSwgKmN1cnNv
+cjsKPiA+ID4gPiA+ID4gKyAgICAgICBpbnQgcmV0Owo+ID4gPiA+ID4gPgo+ID4gPiA+ID4gPiAt
+ICAgICAgIGlmICghaXNfaTkxNV9kZXZpY2UoZGF0YS0+ZHJtX2ZkKSkKPiA+ID4gPiA+ID4gLSAg
+ICAgICAgICAgICAgIHJldHVybiBmYWxzZTsKPiA+ID4gPiA+ID4gKyAgICAgICBpZ3Rfb3V0cHV0
+X3NldF9waXBlKG91dHB1dCwgZGF0YS0+cGlwZSk7Cj4gPiA+ID4gPiA+Cj4gPiA+ID4gPiA+IC0g
+ICAgICAgZGV2aWQgPSBpbnRlbF9nZXRfZHJtX2RldmlkKGRhdGEtPmRybV9mZCk7Cj4gPiA+ID4g
+PiA+ICsgICAgICAgbW9kZSA9IGlndF9vdXRwdXRfZ2V0X21vZGUob3V0cHV0KTsKPiA+ID4gPiA+
+ID4gKyAgICAgICBwcmltYXJ5ID0gaWd0X291dHB1dF9nZXRfcGxhbmVfdHlwZShvdXRwdXQsCj4g
+PiA+ID4gPiA+IERSTV9QTEFORV9UWVBFX1BSSU1BUlkpOwo+ID4gPiA+ID4gPiArICAgICAgIGN1
+cnNvciA9IGlndF9vdXRwdXRfZ2V0X3BsYW5lX3R5cGUob3V0cHV0LAo+ID4gPiA+ID4gPiBEUk1f
+UExBTkVfVFlQRV9DVVJTT1IpOwo+ID4gPiA+ID4gPgo+ID4gPiA+ID4gPiAtICAgICAgIC8qCj4g
+PiA+ID4gPiA+IC0gICAgICAgICogVGVzdCBub24tc3F1YXJlIGN1cnNvcnMgYSBiaXQgb24gdGhl
+IHBsYXRmb3Jtcwo+ID4gPiA+ID4gPiAtICAgICAgICAqIHRoYXQgc3VwcG9ydCBzdWNoIHRoaW5n
+cy4KPiA+ID4gPiA+ID4gLSAgICAgICAgKi8KPiA+ID4gPiA+ID4gLSAgICAgICBpZiAoZGV2aWQg
+PT0gUENJX0NISVBfODQ1X0cgfHwgZGV2aWQgPT0gUENJX0NISVBfSTg2NV9HKQo+ID4gPiA+ID4g
+PiAtICAgICAgICAgICAgICAgcmV0dXJuIHRydWU7Cj4gPiA+ID4gPiA+ICsgICAgICAgLyogQ3Jl
+YXRlIHRlbXBvcmFyeSBwcmltYXJ5IGZiIGZvciB0ZXN0aW5nICovCj4gPiA+ID4gPiA+ICsgICAg
+ICAgaWd0X2Fzc2VydChpZ3RfY3JlYXRlX2ZiKGRhdGEtPmRybV9mZCwgbW9kZS0+aGRpc3BsYXks
+IG1vZGUtCj4gPiA+ID4gPiA+ID4gdmRpc3BsYXksIERSTV9GT1JNQVRfWFJHQjg4ODgsCj4gPiA+
+ID4gPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIExPQ0FMX0RSTV9GT1JNQVRf
+TU9EX05PTkUsCj4gPiA+ID4gPiA+ICZwcmltYXJ5X2ZiKSk7Cj4gPiA+ID4gPiA+Cj4gPiA+ID4g
+PiA+IC0gICAgICAgaWYgKElTX1ZBTExFWVZJRVcoZGV2aWQpIHx8IElTX0NIRVJSWVZJRVcoZGV2
+aWQpKQo+ID4gPiA+ID4gPiAtICAgICAgICAgICAgICAgcmV0dXJuIGZhbHNlOwo+ID4gPiA+ID4g
+PiArICAgICAgIGlndF9wbGFuZV9zZXRfZmIocHJpbWFyeSwgJnByaW1hcnlfZmIpOwo+ID4gPiA+
+ID4gPiArICAgICAgIGlndF9wbGFuZV9zZXRfZmIoY3Vyc29yLCAmZGF0YS0+ZmIpOwo+ID4gPiA+
+ID4gPiArICAgICAgIGlndF9wbGFuZV9zZXRfc2l6ZShjdXJzb3IsIHcsIGgpOwo+ID4gPiA+ID4g
+PiArICAgICAgIGlndF9mYl9zZXRfc2l6ZSgmZGF0YS0+ZmIsIGN1cnNvciwgdywgaCk7Cj4gPiA+
+ID4gPiA+ICsKPiA+ID4gPiA+ID4gKyAgICAgICAvKiBUZXN0IGlmIHRoZSBrZXJuZWwgc3VwcG9y
+dHMgdGhlIGdpdmVuIGN1cnNvciBzaXplIG9yIG5vdCAqLwo+ID4gPiA+ID4gPiArICAgICAgIHJl
+dCA9IGlndF9kaXNwbGF5X3RyeV9jb21taXRfYXRvbWljKGRpc3BsYXksCj4gPiA+ID4gPiA+ICsg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgRFJNX01PREVfQVRPTUlD
+X1RFU1RfT05MWSB8Cj4gPiA+ID4gPiA+ICsKPiA+ID4gPiA+ID4gRFJNX01PREVfQVRPTUlDX0FM
+TE9XX01PREVTRVQsCj4gPiA+ID4gPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgTlVMTCk7Cj4gPiA+ID4gPgo+ID4gPiA+ID4gV291bGQgYmUgYmV0dGVyIHRv
+IG5vdCBkZXBlbmQgb24gYXRvbWljLiBXZSBoYXZlIHBsYXRmb3Jtcwo+ID4gPiA+ID4gdGhhdCBk
+b24ndCBleHBvc2UgaXQgeWV0Lgo+ID4gPiA+Cj4gPiA+ID4gRG8geW91IGhhdmUgYW55IG90aGVy
+IGlkZWFzIGhvdyB3ZSBjb3VsZCBwcm9iZSBmb3IgdGhpcyB0aGVuPyBpdCBzZWVtcyBsaWtlCj4g
+PiA+ID4gdGhlCj4gPiA+ID4gb25seSBhbHRlcm5hdGl2ZSB3b3VsZCBiZSB0byBhZGQgaW50ZWwt
+c3BlY2lmaWMgY2hlY2tzIHRvIGZpeCB0aGF0LCBvciBhZGQKPiA+ID4gPiBzb21lCj4gPiA+ID4g
+aW9jdGwgZm9yIHF1ZXJ5aW5nIHRoZSBtaW5pbXVtIGN1cnNvciBzaXplICh3aGljaCBzb3VuZHMg
+cHJlZmVyYWJsZSBpbW8pLgo+ID4gPiA+IHdvdWxkCj4gPiA+ID4gdGhlIGxhdHRlciB3b3JrIGZv
+ciB5b3UsIG9yIGRvIHlvdSBoYXZlIGFub3RoZXIgaWRlYT8KPiA+ID4KPiA+ID4gSnVzdCBkbyBp
+dCBmb3IgcmVhbCBpbnN0ZWFkIG9mIFRFU1RfT05MWS4KPiA+Cj4gPiBhaC1hbmQgaXQnbGwgc3Rp
+bGwgZmFpbCBpbiB0aGF0IGNhc2UgSSBhc3N1bWU/Cj4KPiBZZWFoLCBzaG91bGQgZmFpbCBqdXN0
+IHRoZSBzYW1lIGlmIHRoZSBkcml2ZXIgZG9lc24ndCBsaWtlIGl0LgoKRG9pbmcgdGhlIGF0b21p
+YyBURVNUX09OTFkgZmlyc3Qgd291bGQgYmUgZ29vZCwgaWYgYXRvbWljIHN1cHBvcnQKZXhpc3Rz
+LCBzaW5jZSBpdCdzIGZhc3Rlci4gRG9pbmcgbW9kZXNldHMganVzdCB0byBmaWd1cmUgb3V0IHdo
+ZXRoZXIKd2Ugc2hvdWxkIHRlc3Qgc29tZXRoaW5nIGlzIGEgYml0IGV4cGVuc2l2ZSwgYmVzdCBu
+b3QgdG8gaW5mbGljdCBvbgp0aGF0IG9uIG5ldyBtYWNoaW5lcy4KLURhbmllbAoKPgo+IC0tCj4g
+VmlsbGUgU3lyasOkbMOkCj4gSW50ZWwKPiBfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fXwo+IGlndC1kZXYgbWFpbGluZyBsaXN0Cj4gaWd0LWRldkBsaXN0cy5m
+cmVlZGVza3RvcC5vcmcKPiBodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xp
+c3RpbmZvL2lndC1kZXYKCgoKLS0gCkRhbmllbCBWZXR0ZXIKU29mdHdhcmUgRW5naW5lZXIsIElu
+dGVsIENvcnBvcmF0aW9uCmh0dHA6Ly9ibG9nLmZmd2xsLmNoCl9fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fCk5vdXZlYXUgbWFpbGluZyBsaXN0Ck5vdXZlYXVA
+bGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxt
+YW4vbGlzdGluZm8vbm91dmVhdQo=
