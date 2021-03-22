@@ -1,49 +1,39 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1459B34359C
-	for <lists+nouveau@lfdr.de>; Mon, 22 Mar 2021 00:05:32 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id C963D343A05
+	for <lists+nouveau@lfdr.de>; Mon, 22 Mar 2021 07:53:50 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 60D6689E0C;
-	Sun, 21 Mar 2021 23:05:28 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9C5F289DBF;
+	Mon, 22 Mar 2021 06:53:48 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 574 seconds by postgrey-1.36 at gabe;
- Sun, 21 Mar 2021 23:05:26 UTC
-Received: from mupuf.org (mupuf.org [167.71.42.210])
- by gabe.freedesktop.org (Postfix) with ESMTP id 8A39B89E50
- for <nouveau@lists.freedesktop.org>; Sun, 21 Mar 2021 23:05:26 +0000 (UTC)
-Received: from [IPv6:2a01:4b00:86b9:100:9ede:1593:85ef:7eda] (unknown
- [IPv6:2a01:4b00:86b9:100:9ede:1593:85ef:7eda])
- by Neelix.spliet.org (Postfix) with ESMTPSA id D17A8F202F7
- for <nouveau@lists.freedesktop.org>; Sun, 21 Mar 2021 22:58:08 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 Neelix.spliet.org D17A8F202F7
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=spliet.org;
- s=default; t=1616367488;
- bh=rkx3yBZJgL/5upNugXo7t76ldEte7e+gNcZrIW8odt4=;
- h=Subject:To:References:From:Date:In-Reply-To:From;
- b=RpF03bjD5a10YXd6/OfbaP2iAqD73JTjmt7yJbUmu/sWoAjUhGw9CqgsRwXcbf3Vp
- iXU4kRwH4n5dfRuArRISnWVoI0QN14b/o5T8k8O7ro+EkAdJpju0hWoq6QhTWzKtUm
- 9wRciHV3h3FzPwVpNKnkNegIGJfWRtE7hsw8oUJ8=
-To: nouveau@lists.freedesktop.org
-References: <20210305222135.1269175-1-lyude@redhat.com>
-From: Roy Spliet <nouveau@spliet.org>
-Message-ID: <dcb3f3e4-6eef-fcc1-836a-7729ad045921@spliet.org>
-Date: Sun, 21 Mar 2021 22:58:08 +0000
+Received: from aibo.runbox.com (aibo.runbox.com [91.220.196.211])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0ABBE89BB3;
+ Mon, 22 Mar 2021 06:53:47 +0000 (UTC)
+Received: from [10.9.9.72] (helo=submission01.runbox)
+ by mailtransmit02.runbox with esmtp (Exim 4.86_2)
+ (envelope-from <martin.peres@mupuf.org>)
+ id 1lOERX-00006u-Ti; Mon, 22 Mar 2021 07:53:40 +0100
+Received: by submission01.runbox with esmtpsa [Authenticated alias (981869)]
+ (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.90_1)
+ id 1lOERM-00063p-DY; Mon, 22 Mar 2021 07:53:28 +0100
+To: juhapekka.heikkila@gmail.com, Lyude <lyude@redhat.com>,
+ igt-dev@lists.freedesktop.org, nouveau@lists.freedesktop.org
+References: <20210317224407.447572-1-lyude@redhat.com>
+ <f5554f76-fc26-e307-0fe0-e59d3bca15ba@mupuf.org>
+ <3c1b6581-9b61-4e1a-56bd-95c8a2ec6472@gmail.com>
+From: Martin Peres <martin.peres@mupuf.org>
+Message-ID: <c958dcae-4324-be1d-e3a9-5bf2ba7ab2ae@mupuf.org>
+Date: Mon, 22 Mar 2021 08:53:27 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.8.1
 MIME-Version: 1.0
-In-Reply-To: <20210305222135.1269175-1-lyude@redhat.com>
-Content-Language: en-GB
-X-Spam-Status: No, score=-3.1 required=5.0 tests=ALL_TRUSTED,BAYES_00,
- DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A
- autolearn=unavailable autolearn_force=no version=3.4.4
-X-Spam-Checker-Version: SpamAssassin 3.4.4 (2020-01-24) on Neelix
-X-Virus-Scanned: clamav-milter 0.103.1 at Neelix
-X-Virus-Status: Clean
-Subject: Re: [Nouveau] [PATCH v2] drm/nouveau/kms/nve4-nv108: Don't
- advertise 256x256 cursor support yet
+In-Reply-To: <3c1b6581-9b61-4e1a-56bd-95c8a2ec6472@gmail.com>
+Content-Language: en-US
+Subject: Re: [Nouveau] [igt-dev] [PATCH i-g-t] tests/kms_plane: Don't unset
+ primary_fb when testing other planes
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -55,65 +45,88 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
+Cc: "Lisovskiy, Stanislav" <stanislav.lisovskiy@intel.com>,
+ Ben Skeggs <bskeggs@redhat.com>
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Tested-by: Roy Spliet <nouveau@spliet.org>
-
-Op 05-03-2021 om 22:21 schreef Lyude Paul:
-> While Kepler does technically support 256x256 cursors, it turns out that
-> in order for us to use these correctly we need to make sure that the cursor
-> plane uses a ctxdma that is set to use small (4K)/large (128K) pages -
-> whichever is applicable to the given cursor surface.
-> 
-> Right now however, we share the main kmsVramCtxDma that is used for all but
-> the ovly plane which defaults to small pages - resulting in artifacts when
-> we use 256x256 cursor surfaces. So until we teach nouveau to use a separate
-> ctxdma for the cursor, let's just stop advertising 256x256 cursors by
-> default - which should fix the issues that users were seeing.
-> 
-> Coincidentally - this is also why small ovlys don't work on Kepler: the
-> ctxdma we use for ovlys is set to large pages.
-> 
-> Changes since v2:
-> * Fix comments and patch description
-> 
-> Signed-off-by: Lyude Paul <lyude@redhat.com>
-> Fixes: d3b2f0f7921c ("drm/nouveau/kms/nv50-: Report max cursor size to userspace")
-> Cc: <stable@vger.kernel.org> # v5.11+
-> ---
->   drivers/gpu/drm/nouveau/dispnv50/disp.c | 12 +++++++++++-
->   1 file changed, 11 insertions(+), 1 deletion(-)
-> 
-> diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.c b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-> index 196612addfd6..d92cf9e17ac3 100644
-> --- a/drivers/gpu/drm/nouveau/dispnv50/disp.c
-> +++ b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-> @@ -2693,9 +2693,19 @@ nv50_display_create(struct drm_device *dev)
->   	else
->   		nouveau_display(dev)->format_modifiers = disp50xx_modifiers;
->   
-> -	if (disp->disp->object.oclass >= GK104_DISP) {
-> +	/* FIXME: 256x256 cursors are supported on Kepler, however unlike Maxwell and later
-> +	 * generations Kepler requires that we specify the page type, small (4K) or large (128K),
-> +	 * correctly for the ctxdma being used on curs/ovly. We currently share a ctxdma across all
-> +	 * display planes (except ovly) that defaults to small pages, which results in artifacting
-> +	 * on 256x256 cursors. Until we teach nouveau to create an appropriate ctxdma for the cursor
-> +	 * fb in use, simply avoid advertising support for 256x256 cursors.
-> +	 */
-> +	if (disp->disp->object.oclass >= GM107_DISP) {
->   		dev->mode_config.cursor_width = 256;
->   		dev->mode_config.cursor_height = 256;
-> +	} else if (disp->disp->object.oclass >= GK104_DISP) {
-> +		dev->mode_config.cursor_width = 128;
-> +		dev->mode_config.cursor_height = 128;
->   	} else {
->   		dev->mode_config.cursor_width = 64;
->   		dev->mode_config.cursor_height = 64;
->
-_______________________________________________
-Nouveau mailing list
-Nouveau@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/nouveau
+T24gMjEvMDMvMjAyMSAyMjowMiwgSnVoYS1QZWtrYSBIZWlra2lsYSB3cm90ZToKPiBPbiAxOC4z
+LjIwMjEgOC40MSwgTWFydGluIFBlcmVzIHdyb3RlOgo+PiBPbiAxOC8wMy8yMDIxIDAwOjQ0LCBM
+eXVkZSB3cm90ZToKPj4+IEZyb206IEx5dWRlIFBhdWwgPGx5dWRlQHJlZGhhdC5jb20+Cj4+Pgo+
+Pj4gQ3VycmVudGx5LCBub3V2ZWF1IGRvZXNuJ3Qgc3VwcG9ydCBoYXZpbmcgYSBDUlRDIHdpdGhv
+dXQgYSBwcmltYXJ5IEZCIAo+Pj4gc2V0LiBXZQo+Pj4gd29uJ3QgcmVqZWN0IHN1Y2ggY29uZmln
+dXJhdGlvbnMsIGJ1dCB0aGUgYmVoYXZpb3IgaXMgdW5kZWZpbmVkIHdoaWNoIAo+Pj4gd2lsbCBj
+YXVzZQo+Pj4gQ1JDcyB0byBiZWNvbWUgdW5kZWZpbmVkLiBTbywgYXZvaWQgY2xlYXJpbmcgdGhl
+IHByaW1hcnkgRkIgd2hpbGUgCj4+PiB3ZSdyZSB0ZXN0aW5nCj4+PiBub24tcHJpbWFyeSBwbGFu
+ZXMuCj4+Cj4+IExvb2tzIGdvb2QgdG8gbWU6Cj4+Cj4+IFJldmlld2VkLWJ5OiBNYXJ0aW4gUGVy
+ZXMgPG1hcnRpbi5wZXJlc0BtdXB1Zi5vcmc+Cj4+Cj4gCj4gVGhpcyBkb2Vzbid0IGxvb2sgZ29v
+ZCBhdCBhbGwuIENvZGUgY2hhbmdlcyB3ZXJlIG5ldmVyIHJ1biBvbiBjaSwgc2VlIHRoaXM6Cj4g
+aHR0cHM6Ly9pbnRlbC1nZngtY2kuMDEub3JnL3RyZWUvZHJtLXRpcC9JR1RQV181NjE0L3NoYXJk
+cy1hbGwuaHRtbD90ZXN0ZmlsdGVyPWttc19wbGFuZUBwaXhlbC1mb3JtYXQgCj4gCj4gCj4gVGhp
+cyBoYXBwZW4gYmVjYXVzZSBvZjoKPiBpZ3QtZ3B1LXRvb2xzJCBnaXQgYmxhbWUgdGVzdHMvaW50
+ZWwtY2kvYmxhY2tsaXN0LXByZS1tZXJnZS50eHQgLUwgMTczLCsxCj4gM2U2ODYwOThkOSAoTWFy
+dGluIFBlcmVzIDIwMjAtMDItMjEgMTE6MDA6NDcgKzAyMDAgMTczKSAKPiBpZ3RAa21zX3BsYW5l
+QHBpeGVsLWZvcm1hdC1waXBlLVthLWRdLXBsYW5lcygtc291cmNlLWNsYW1waW5nKT8KCktpbGxl
+ZCBieSBteSBvd24gY3JlYXRpb24sIGlzbid0IGl0IHF1YWludD8gVGhhbmtzIGEgbG90IGZvciAK
+aW52ZXN0aWdhdGluZyB0aGUgcmVncmVzc2lvbiwgYW5kIEknbGwgYmUgd2VhcmluZyBteSBicm93
+biBiYWcgdG9kYXkgOnMKCj4gCj4gWW91J2xsIG5lZWQgdG8gaW5jbHVkZSBzb21ldGhpbmcgbGlr
+ZSB0aGlzIHRvIHRlc3QgYW5kIHJldmlldyB3aGF0IGRpZCAKPiBjaGFuZ2Ugb24gcGl4ZWwgZm9y
+bWF0IHRlc3RzOgo+IGh0dHBzOi8vcGF0Y2h3b3JrLmZyZWVkZXNrdG9wLm9yZy9wYXRjaC80MDQ3
+MDYvP3Nlcmllcz04NDM3MCZyZXY9MQo+IAo+IGJ1dCBhcyB0aGlzIHBhdGNoIHNlZW1zIHRvIGJl
+IGFscmVhZHkgbWVyZ2VkIGFzIHVudGVzdGVkIHdlIG5vdyBoYXZlIAo+IHBpeGVsIGZvcm1hdCB0
+ZXN0cyBmYWlsaW5nIHJlbGlhYmx5IGV2ZXIgc2luY2U6Cj4gaHR0cHM6Ly9pbnRlbC1nZngtY2ku
+MDEub3JnL3RyZWUvZHJtLXRpcC9pbmRleC5odG1sP3Rlc3RmaWx0ZXI9a21zX3BsYW5lQHBpeGVs
+LWZvcm1hdCZob3N0cz10Z2wlN0NpY2wgCj4gCj4gCj4gSSBoYXZlIG9ubHkgaW50ZWwgaWNsIGF0
+IGhhbmQgc28gSSBoYXZlIG5vIHN1Z2dlc3Rpb25zIGZvciBmaXguIFRob3VnaCwgCj4gbG9va2lu
+ZyBhdCB0aG9zZSBmYWlsdXJlcyBTdGFuIChDQ2QpIG1heSBoYXZlIHNvbWUgaW50ZXJlc3Qgb24g
+dGhlbS4KCkkgd291bGQgaW5kZWVkIGxpa2UgdG8gaGVhciBpZiB0aGlzIHNvdW5kcyBsaWtlIGEg
+a2VybmVsIGJ1ZywgYSAKdmlvbGF0aW9uIG9mIHRoZSBLTVMgc3BlYywgb3IgdGhlIHNwZWMgaXMg
+bm90IGNsZWFyLWVub3VnaCBvbiB0aGlzLgoKSWYgSSBkb24ndCBoZWFyIGJhY2sgb24gdGhpcyB0
+b2RheSwgSSdsbCBzZW5kIGEgcmV2ZXJ0IHdoaWxlIHRoZSAKc2l0dWF0aW9uIGlzIGludmVzdGln
+YXRlZC4KCk1hcnRpbgoKPiAKPiAvSnVoYS1QZWtrYQo+IAo+Pj4KPj4+IFNpZ25lZC1vZmYtYnk6
+IEx5dWRlIFBhdWwgPGx5dWRlQHJlZGhhdC5jb20+Cj4+PiBDYzogTWFydGluIFBlcmVzIDxtYXJ0
+aW4ucGVyZXNAZnJlZS5mcj4KPj4+IENjOiBCZW4gU2tlZ2dzIDxic2tlZ2dzQHJlZGhhdC5jb20+
+Cj4+PiBDYzogSmVyZW15IENsaW5lIDxqY2xpbmVAcmVkaGF0LmNvbT4KPj4+IC0tLQo+Pj4gwqAg
+dGVzdHMva21zX3BsYW5lLmMgfCA5ICsrKysrLS0tLQo+Pj4gwqAgMSBmaWxlIGNoYW5nZWQsIDUg
+aW5zZXJ0aW9ucygrKSwgNCBkZWxldGlvbnMoLSkKPj4+Cj4+PiBkaWZmIC0tZ2l0IGEvdGVzdHMv
+a21zX3BsYW5lLmMgYi90ZXN0cy9rbXNfcGxhbmUuYwo+Pj4gaW5kZXggMjk4YTkzNzUuLmM4Nzk4
+M2E0IDEwMDY0NAo+Pj4gLS0tIGEvdGVzdHMva21zX3BsYW5lLmMKPj4+ICsrKyBiL3Rlc3RzL2tt
+c19wbGFuZS5jCj4+PiBAQCAtODE3LDkgKzgxNywxMCBAQCBlbnVtIGNyY19zZXQgeyBQQUNLRURf
+Q1JDX1NFVCwKPj4+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBNQVhfQ1JDX1NFVCB9Owo+Pj4g
+wqAgc3RhdGljIGJvb2wgdGVzdF9mb3JtYXRfcGxhbmUoZGF0YV90ICpkYXRhLCBlbnVtIHBpcGUg
+cGlwZSwKPj4+IC3CoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGlndF9vdXRwdXRf
+dCAqb3V0cHV0LCBpZ3RfcGxhbmVfdCAqcGxhbmUpCj4+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoCBpZ3Rfb3V0cHV0X3QgKm91dHB1dCwgaWd0X3BsYW5lX3QgKnBsYW5lLCBp
+Z3RfZmJfdCAKPj4+ICpwcmltYXJ5X2ZiKQo+Pj4gwqAgewo+Pj4gwqDCoMKgwqDCoCBzdHJ1Y3Qg
+aWd0X2ZiIGZiID0ge307Cj4+PiArwqDCoMKgIHN0cnVjdCBpZ3RfZmIgKmNsZWFyX2ZiID0gcGxh
+bmUtPnR5cGUgPT0gRFJNX1BMQU5FX1RZUEVfUFJJTUFSWSAKPj4+ID8gcHJpbWFyeV9mYiA6IE5V
+TEw7Cj4+PiDCoMKgwqDCoMKgIGRybU1vZGVNb2RlSW5mbyAqbW9kZTsKPj4+IMKgwqDCoMKgwqAg
+dWludDMyX3QgZm9ybWF0LCByZWZfZm9ybWF0Owo+Pj4gwqDCoMKgwqDCoCB1aW50NjRfdCBtb2Rp
+ZmllciwgcmVmX21vZGlmaWVyOwo+Pj4gQEAgLTg3OSw3ICs4ODAsNyBAQCBzdGF0aWMgYm9vbCB0
+ZXN0X2Zvcm1hdF9wbGFuZShkYXRhX3QgKmRhdGEsIGVudW0gCj4+PiBwaXBlIHBpcGUsCj4+PiDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBoZWlnaHQgPSB0ZXN0X2ZiLmhlaWdodDsKPj4+IMKg
+wqDCoMKgwqDCoMKgwqDCoCB9Cj4+PiAtwqDCoMKgwqDCoMKgwqAgaWd0X3BsYW5lX3NldF9mYihw
+bGFuZSwgTlVMTCk7Cj4+PiArwqDCoMKgwqDCoMKgwqAgaWd0X3BsYW5lX3NldF9mYihwbGFuZSwg
+Y2xlYXJfZmIpOwo+Pj4gwqDCoMKgwqDCoMKgwqDCoMKgIGlndF9yZW1vdmVfZmIoZGF0YS0+ZHJt
+X2ZkLCAmdGVzdF9mYik7Cj4+PiDCoMKgwqDCoMKgIH0KPj4+IEBAIC05MzcsNyArOTM4LDcgQEAg
+c3RhdGljIGJvb2wgdGVzdF9mb3JtYXRfcGxhbmUoZGF0YV90ICpkYXRhLCBlbnVtIAo+Pj4gcGlw
+ZSBwaXBlLAo+Pj4gwqDCoMKgwqDCoCBpZ3RfcGlwZV9jcmNfc3RvcChkYXRhLT5waXBlX2NyYyk7
+Cj4+PiAtwqDCoMKgIGlndF9wbGFuZV9zZXRfZmIocGxhbmUsIE5VTEwpOwo+Pj4gK8KgwqDCoCBp
+Z3RfcGxhbmVfc2V0X2ZiKHBsYW5lLCBjbGVhcl9mYik7Cj4+PiDCoMKgwqDCoMKgIGlndF9yZW1v
+dmVfZmIoZGF0YS0+ZHJtX2ZkLCAmZmIpOwo+Pj4gwqDCoMKgwqDCoCByZXR1cm4gcmVzdWx0Owo+
+Pj4gQEAgLTEwMTAsNyArMTAxMSw3IEBAIHRlc3RfcGl4ZWxfZm9ybWF0cyhkYXRhX3QgKmRhdGEs
+IGVudW0gcGlwZSBwaXBlKQo+Pj4gwqDCoMKgwqDCoCBmb3JfZWFjaF9wbGFuZV9vbl9waXBlKCZk
+YXRhLT5kaXNwbGF5LCBwaXBlLCBwbGFuZSkgewo+Pj4gwqDCoMKgwqDCoMKgwqDCoMKgIGlmIChz
+a2lwX3BsYW5lKGRhdGEsIHBsYW5lKSkKPj4+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGNv
+bnRpbnVlOwo+Pj4gLcKgwqDCoMKgwqDCoMKgIHJlc3VsdCAmPSB0ZXN0X2Zvcm1hdF9wbGFuZShk
+YXRhLCBwaXBlLCBvdXRwdXQsIHBsYW5lKTsKPj4+ICvCoMKgwqDCoMKgwqDCoCByZXN1bHQgJj0g
+dGVzdF9mb3JtYXRfcGxhbmUoZGF0YSwgcGlwZSwgb3V0cHV0LCBwbGFuZSwgCj4+PiAmcHJpbWFy
+eV9mYik7Cj4+PiDCoMKgwqDCoMKgIH0KPj4+IMKgwqDCoMKgwqAgdGVzdF9maW5pKGRhdGEpOwo+
+Pj4KPj4gX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KPj4g
+aWd0LWRldiBtYWlsaW5nIGxpc3QKPj4gaWd0LWRldkBsaXN0cy5mcmVlZGVza3RvcC5vcmcKPj4g
+aHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9pZ3QtZGV2Cj4g
+Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCk5vdXZlYXUg
+bWFpbGluZyBsaXN0Ck5vdXZlYXVAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMu
+ZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vbm91dmVhdQo=
