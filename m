@@ -1,25 +1,25 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 08F0D343C99
-	for <lists+nouveau@lfdr.de>; Mon, 22 Mar 2021 10:20:23 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id F0984343CBB
+	for <lists+nouveau@lfdr.de>; Mon, 22 Mar 2021 10:27:44 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 52CFC89DE1;
-	Mon, 22 Mar 2021 09:20:16 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1F699898ED;
+	Mon, 22 Mar 2021 09:27:42 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com
- (mail-bn7nam10on2043.outbound.protection.outlook.com [40.107.92.43])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9910389D7C;
- Mon, 22 Mar 2021 09:20:14 +0000 (UTC)
+Received: from NAM04-CO1-obe.outbound.protection.outlook.com
+ (mail-eopbgr690060.outbound.protection.outlook.com [40.107.69.60])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9322889906;
+ Mon, 22 Mar 2021 09:27:41 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=ncU4kAkpGlI8KH59+ib9bu57bA2pCA59eAeXa3jfZl8sbX4I2ihThNsczeJXJUvgQZI05wqzemsAV9H+dUO5bBwY+TI+OpYWiJxbYX9X5/LGKk0+J3x22L11OhelsEECKtYZW3RiKbo+fRkzqGYofBvN9jVe38owM/qljrwmvN3fNssoSgLo+B+Zu9+CYuWZKax9psEXUVTdwqTuDgPAwwOmPHzmm6ko5ENOBfolUEvWdmX0F+tuW+EMl3y1sJUdjIL+VyiJQ6+WJB4x1DHQip3mcmRRmDoHxtGcOq3MTan5H68GsKW1pkIX28im22H7H5ykh7MZl8Pe/oqnNzY/+w==
+ b=JSxLdpusDg4c+eQ8ShMx8ygkenaDl0jfVzx6S2uVIuBR2uxLrLGsW1DSXOK6JYB1lhH+nQe4zvhrNhl9GC9GEYF5d0lLyKR1mwl4RRck7x3VeC6NiieR4w5yCLXQ1Bmj9dR8WGUxCfeg9bPZ6eDz2Ggq2VYmGYaCcsbdrlF80GyMtMV9k0ORqaDUlbWX5CP2aINBbm0Eh/xEG4ZeHyY6cAIBswNUVtwcZpOa6HHZVOGWXXZoMA4FToYm6GnnG1Eqw+x6eOwad6Qm6KopLxLz+57/5ZHi7KcKzF2QpqhxJ7ADxUved96zcE9AFbZtGGh70xWOqTuvrYsUxXF/2NwxYA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=7PjgjOoPIn79dcehwmI54t/6L4wBBoa0m84RXRN81Pg=;
- b=kwp7+eMr0ZktJD8c+2XdRm8Owwuo7jDI3MjqKr5Rk568dmVkiIE5MWQ1cWZcTWKuowP2yH976WFXMEPsnWKJt1ocNW0xdkjMml/gdBTfBXTEDux2PgBh4+o34ky9CJUcBv9hiPh3WOgScXHN9dzXY68J2QYi5ieUVZgr7h/8JWWFciOZgwcdDFVq8Lg4uW1pxHMEUPyGCOGWCn8EwyEaJa1thkhQd5aMyXM6ua93GqIU9JCsDxTQrO3zeB/QOLizN+oWrIbgcEqXBuaVV7GPJs41Fd04/5cM7oPHkTfNLH82caJDvAom5usVNCtFgKLaHugq8nAMjGxM2Airouo2FA==
+ bh=RQstACXxhRbgfGic/9H1wBzJo+J7NBQEs2uehIvi1pg=;
+ b=ZQQpxSkApnIrlsWxLnvNdCEmo3ZaAJqlNiJxSOLvspGcNNOR5ZxHxXKy5qCEafPr3XobXhnsYXcAeVqtQ0pfoYr0VJiI4jW8V3lcgHb60kRR7fUgLLtQBnsdRq2zwix41w7bqnSx24WsC60l9864vu1gganLCshRRvguBGxYmO5Voar/Hdol2DaFR1AQP0nKXb/kknBaG5a/GcpC81bJZ5SX8hEKbp2Ky5tWcCFFqyPhJJ6+ZUdehMx72AP+dMttdNJpcL8dndHyWZ7+zzCmzzSYjcqVl824y22DISFeR/kkEnhDn93Tc9LVcHgT9iW5/6KMBOoYMEM69YnGxIeomw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  216.228.112.34) smtp.rcpttodomain=lists.freedesktop.org
  smtp.mailfrom=nvidia.com; dmarc=pass (p=none sp=none pct=100) action=none
@@ -27,18 +27,18 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=7PjgjOoPIn79dcehwmI54t/6L4wBBoa0m84RXRN81Pg=;
- b=stog+HaaPlb3GxW4BbXKqcfC3ADcm5TmaMazu2ZgeSHyMqMoMGA1PcBS3pHLp+AzSe/Az7nXyY46LSZPFQuP9GnwLneddjYrBTI3EDxeDcw5uTB2UbxACrro6mW6jB3biXwcfcrX71ZDkPhmSSIg9rl5j8kW48CHbfNG+WwSv+T7NtN4EURjelY2F5yhZ3Nuwl45UI1Ha1peoJNOE2QUqgxN264bE1bgGm4yGKL0nCvRBcey3Zf+uFBGcMPl0A5r1wOc5sWJMyS3IoTGjXXTrKo9V5hejVU2oWEa6X3rw4IC13yrEZWryDi+sth7krjFhuDOpMZNwcVTy2iB1a615A==
-Received: from MWHPR20CA0018.namprd20.prod.outlook.com (2603:10b6:300:13d::28)
- by DM6PR12MB3257.namprd12.prod.outlook.com (2603:10b6:5:184::10) with
+ bh=RQstACXxhRbgfGic/9H1wBzJo+J7NBQEs2uehIvi1pg=;
+ b=bINofUd9HjDpToHTpe34LlTWicLpbpI+MsNlI+wczeiIRXb1gwWmTh5bE/FDQWzXEBQAW0fNMIiSw4egcGmINMrYZLXLcmlgy4VB94Nx8Cd6wuNBNijTaoJum1e3f8XlqTa5G032U/CVr4MVizArimVobzUse6rWJ8J0XETfp8xdHCQSIxYMZM7COWkp+Q82E2xlzd4Vt3KinSHBhJ2PzMBYE5mJFJbBQDamfcXiA5/736bqXVY8Ylu9LKqnYNRR8UYy3m1+wZmcjwilje8rREiLw3OhITYylcgprCvVeM6Nr38HQU0wzG92Sjq2gN1Y7jTlquGJZ481aEsbt0GmbQ==
+Received: from BN0PR03CA0013.namprd03.prod.outlook.com (2603:10b6:408:e6::18)
+ by DM4PR12MB5200.namprd12.prod.outlook.com (2603:10b6:5:397::11) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3955.24; Mon, 22 Mar
- 2021 09:20:11 +0000
-Received: from CO1NAM11FT019.eop-nam11.prod.protection.outlook.com
- (2603:10b6:300:13d:cafe::e3) by MWHPR20CA0018.outlook.office365.com
- (2603:10b6:300:13d::28) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3955.18; Mon, 22 Mar
+ 2021 09:27:39 +0000
+Received: from BN8NAM11FT061.eop-nam11.prod.protection.outlook.com
+ (2603:10b6:408:e6:cafe::9f) by BN0PR03CA0013.outlook.office365.com
+ (2603:10b6:408:e6::18) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3955.18 via Frontend
- Transport; Mon, 22 Mar 2021 09:20:11 +0000
+ Transport; Mon, 22 Mar 2021 09:27:39 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.112.34)
  smtp.mailfrom=nvidia.com; lists.freedesktop.org; dkim=none (message not
  signed) header.d=none;lists.freedesktop.org; dmarc=pass action=none
@@ -47,48 +47,49 @@ Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
  216.228.112.34 as permitted sender) receiver=protection.outlook.com;
  client-ip=216.228.112.34; helo=mail.nvidia.com;
 Received: from mail.nvidia.com (216.228.112.34) by
- CO1NAM11FT019.mail.protection.outlook.com (10.13.175.57) with Microsoft SMTP
+ BN8NAM11FT061.mail.protection.outlook.com (10.13.177.144) with Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id
- 15.20.3955.18 via Frontend Transport; Mon, 22 Mar 2021 09:20:10 +0000
+ 15.20.3955.18 via Frontend Transport; Mon, 22 Mar 2021 09:27:38 +0000
 Received: from nvdebian.localnet (172.20.145.6) by HQMAIL107.nvidia.com
  (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1497.2; Mon, 22 Mar
- 2021 09:20:07 +0000
+ 2021 09:27:35 +0000
 From: Alistair Popple <apopple@nvidia.com>
 To: Christoph Hellwig <hch@infradead.org>
-Date: Mon, 22 Mar 2021 20:20:05 +1100
-Message-ID: <13488904.3iE9EkMCc7@nvdebian>
-In-Reply-To: <20210315072757.GA4136862@infradead.org>
+Date: Mon, 22 Mar 2021 20:27:33 +1100
+Message-ID: <6407817.nLXe9rGL3b@nvdebian>
+In-Reply-To: <20210315075113.GD4136862@infradead.org>
 References: <20210312083851.15981-1-apopple@nvidia.com>
- <20210312083851.15981-2-apopple@nvidia.com>
- <20210315072757.GA4136862@infradead.org>
+ <20210312083851.15981-9-apopple@nvidia.com>
+ <20210315075113.GD4136862@infradead.org>
 MIME-Version: 1.0
 X-Originating-IP: [172.20.145.6]
 X-ClientProxiedBy: HQMAIL105.nvidia.com (172.20.187.12) To
  HQMAIL107.nvidia.com (172.20.187.13)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 400be08d-5f3a-43cd-a6be-08d8ed13b172
-X-MS-TrafficTypeDiagnostic: DM6PR12MB3257:
-X-Microsoft-Antispam-PRVS: <DM6PR12MB325797E4F4DF173B5BF601F6DF659@DM6PR12MB3257.namprd12.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:1360;
+X-MS-Office365-Filtering-Correlation-Id: f89110f9-433d-47b9-ec2e-08d8ed14bc77
+X-MS-TrafficTypeDiagnostic: DM4PR12MB5200:
+X-Microsoft-Antispam-PRVS: <DM4PR12MB5200B43C5D71E47629643337DF659@DM4PR12MB5200.namprd12.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:7691;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: C4uG3LeY5M3MA8lEsSXCTnNll2QeHbuRwIyZmLpR09/3PzJEZgxAv7bHsOjRTtH31hwTqIu2kLlHXBeEczQFdo8K/4aXQfDlNfMirdPb3SJ0xNxcI/4yVAI2RwJFpgKo6BdmJG7gGumTpVbyNbkTI/nFlCEt5dZ2ENpSBgy7U6AP2ZxG1hiVpmrlXQ3oyier34gNWhm4esrZCrobKGh/GUp6BbsH1Usmpe5FWKLqViqf8j1hz0xgINhUdMcsU9m49fkw+fUFCcLqY+yALdTyOHztTIdfXM9r3eO+uUQAMJjrk9UOuH7aNlcjwmzUpQyHOors2+2QXzxo3txs2pwl5rh5kj/JramWfmTDXLDG4UufRtRpTW429UYBOjU/ZlMkeTzLU4FoYh+y2/rthpZzMRtFUttizQDmmASwluCk7V/izwH9yLZBHu3PjPSExdTuZYjYU9P+MKf+5ReKPBduuObEsV5hfDmhlPFkHqVpOfmOIOSi4KtfGaB9JKKlkthZ7wjmsRQDiwifW+GYMD4vwXZz5efL2vzriY9pMp0LquELP+3uMaaDrLA6N+gTHcSR7x1UIvp90EpYBzHmjrRYSnEtBUbZamxV5fLqcEouyfYhrXB+9wgInBvCk/YwRJHtlRNFPlexgaf3+wbUUMo7g3u5RyNHGQczbqPWuXRFDabuvuev8Mp0mOhjjnq520vX
+X-Microsoft-Antispam-Message-Info: EYPmVZ8NVK1ujJIBvTl2wbBciwt6o3DmYWe5L3KyicneaumPZl4L1G2My+o+V+YDu/L+2wM2MDiMeXI8EKEUjDookQmr1g/656hqJd6c+xmtO7alvUQXhUVjAWf1lESpq63ncp16mgVeM2GKA5z/QaorVaaeYamoZ2TqpGaon7NJ8klCWuTpjKtRmSEPEZvZ2muPvag/bkoZ4Az9tn02yH2As9CChxRLSBWV5hHPSkH5Xr/eMGbRrhQQHg23KIhKTPHV9QwwHODMXvsSroc44vK0UbhA7MZLjXEI6N3oSrO2UmDhf40cCtlqwswbH9Tzwu2qtJF96bKdlblozePIGoimXSz57Vb9uOs6NcoQDRcZeVOy4lluEkJA4bSn67OMimudrv9LlXB+t/JDwDfxk8k7gImu7O0ua9pjg9CYNAxHeLWpAp1RdaT2eQ9ckwEXS1H/pwMzL5sjEYrW7bzjUTHxlZjphVTRXwqj2/wTamEk7K30vB9lpb8rUCT1aoaebr7N5B+uoqIT1dpYDd/yKz/aTiOVBmmKDFhJxmZX/CfcOWVh6el+OPugBh7gWsmPjIOZfl5kXIV8EWdUXoW4WA0hPO1nw33d9ZfzI1p6XoqJ5zBJe+g5NxC5qIjhjCRfIrH+eWPBx4A2Wn4LwJ555BRDyF3mTg9vUyFWinFKH9mceJXAhCLgTn21YkVHAKnr+qPJQ2j/JJ49F4ClzeAesA==
 X-Forefront-Antispam-Report: CIP:216.228.112.34; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:schybrid03.nvidia.com; CAT:NONE;
- SFS:(4636009)(136003)(39860400002)(346002)(376002)(396003)(36840700001)(46966006)(9686003)(26005)(54906003)(16526019)(5660300002)(186003)(4744005)(47076005)(7416002)(426003)(82310400003)(336012)(36860700001)(2906002)(70586007)(36906005)(316002)(70206006)(8936002)(6916009)(33716001)(8676002)(86362001)(4326008)(478600001)(7636003)(356005)(9576002)(82740400003)(39026012);
+ SFS:(4636009)(39860400002)(396003)(346002)(136003)(376002)(46966006)(36840700001)(4326008)(9576002)(16526019)(36906005)(2906002)(186003)(336012)(316002)(8676002)(86362001)(8936002)(47076005)(70206006)(26005)(426003)(7416002)(5660300002)(82310400003)(70586007)(54906003)(82740400003)(36860700001)(478600001)(33716001)(356005)(7636003)(83380400001)(6916009)(9686003)(39026012)(21314003);
  DIR:OUT; SFP:1101; 
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Mar 2021 09:20:10.8948 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 400be08d-5f3a-43cd-a6be-08d8ed13b172
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Mar 2021 09:27:38.8350 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: f89110f9-433d-47b9-ec2e-08d8ed14bc77
 X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.112.34];
  Helo=[mail.nvidia.com]
-X-MS-Exchange-CrossTenant-AuthSource: CO1NAM11FT019.eop-nam11.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: BN8NAM11FT061.eop-nam11.prod.protection.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB3257
-Subject: Re: [Nouveau] [PATCH v6 1/8] mm: Remove special swap entry functions
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB5200
+Subject: Re: [Nouveau] [PATCH v6 8/8] nouveau/svm: Implement atomic SVM
+ access
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -110,21 +111,41 @@ Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Monday, 15 March 2021 6:27:57 PM AEDT Christoph Hellwig wrote:
-> On Fri, Mar 12, 2021 at 07:38:44PM +1100, Alistair Popple wrote:
-> > Remove the migration and device private entry_to_page() and
-> > entry_to_pfn() inline functions and instead open code them directly.
-> > This results in shorter code which is easier to understand.
+On Monday, 15 March 2021 6:51:13 PM AEDT Christoph Hellwig wrote:
+> > -	/*XXX: atomic? */
+> > -	return (fa->access == 0 || fa->access == 3) -
+> > -	       (fb->access == 0 || fb->access == 3);
+> > +	/* Atomic access (2) has highest priority */
+> > +	return (-1*(fa->access == 2) + (fa->access == 0 || fa->access == 3)) -
+> > +	       (-1*(fb->access == 2) + (fb->access == 0 || fb->access == 3));
 > 
-> I think this commit log should mention pfn_swap_entry_to_page() now.
+> This looks really unreabable.  If the magic values 0, 2 and 3 had names
+> it might become a little more understadable, then factor the duplicated
+> calculation of the priority value into a helper and we'll have code that
+> mere humans can understand..
 
-Will add. Thanks for the review.
+Fair enough, will add some definitions for the magic values.
 
-> Otherwise looks good:
+> > +		mutex_lock(&svmm->mutex);
+> > +		if (mmu_interval_read_retry(&notifier->notifier,
+> > +					    notifier_seq)) {
+> > +			mutex_unlock(&svmm->mutex);
+> > +			continue;
+> > +		}
+> > +		break;
+> > +	}
 > 
-> Reviewed-by: Christoph Hellwig <hch@lst.de>
+> This looks good, why not:
 > 
+> 		mutex_lock(&svmm->mutex);
+> 		if (!mmu_interval_read_retry(&notifier->notifier,
+> 					     notifier_seq))
+> 			break;
+> 		mutex_unlock(&svmm->mutex);
+> 	}
 
+I had copied that from nouveau_range_fault() but this suggestion is better. 
+Will update, thanks for looking.
 
 
 
