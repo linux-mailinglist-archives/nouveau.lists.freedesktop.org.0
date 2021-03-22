@@ -1,93 +1,94 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0A5D83444CF
-	for <lists+nouveau@lfdr.de>; Mon, 22 Mar 2021 14:09:08 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2BEEA343DC6
+	for <lists+nouveau@lfdr.de>; Mon, 22 Mar 2021 11:28:00 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id F36EC89CE1;
-	Mon, 22 Mar 2021 13:09:01 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 45C0089930;
+	Mon, 22 Mar 2021 10:27:57 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0226E89C80
- for <nouveau@lists.freedesktop.org>; Mon, 22 Mar 2021 08:39:52 +0000 (UTC)
-Received: by mail-ed1-x532.google.com with SMTP id z1so18267845edb.8
- for <nouveau@lists.freedesktop.org>; Mon, 22 Mar 2021 01:39:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=date:from:to:subject:message-id:references:mime-version
- :content-disposition:content-transfer-encoding:in-reply-to;
- bh=WosURJkM/PKSCOw9xPERzj9fjDA03BThhpk0x/4VEXg=;
- b=Xmw1I0kVglEkkyuysEP1PPTcEa0qNfUT+YiRUf21xzme6vAcGVqGQFhILRd5KF6HQT
- oAFfhdwqyw/7k+Z2aHghIGttZFXr1qMivDnMOZCpx8s5pSWybC9p5wS1T/12dE6axlRE
- XAlEAguYbFxtFpFCih0t7ANGSfFkAXJPAyhS+Jg6Q8zR7vgp8MQJsJZwV5QH4Lv271/e
- lMaD1/D08eqYnnkHs2fb3tKFeeRsUuQqLNmnsRV+6ktK6/aHy3TmEZc2QmGgIgILxbUb
- 0fyOqeOpSaLYJh4YvLz/ximI7JeQMp89Wpc2roOfrbULHCS6TVt3Xn9qBMNloAPNH+ra
- IZWA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:subject:message-id:references
- :mime-version:content-disposition:content-transfer-encoding
- :in-reply-to;
- bh=WosURJkM/PKSCOw9xPERzj9fjDA03BThhpk0x/4VEXg=;
- b=W3CKJkFR2EQtF1+Eiiq/6oY9P5rgz0xVp0CPM2WiXn04V7nZ5jQo+WbxPvsx+tQmd/
- wxPDJr8Mzm2jvmnUouv1AdS1YAf4KpUjDTc4Xh0EN5oGOouJr6oJOLsNJaGWwKtPTXT1
- VP7CI89x6w9WPDKwnqq80Xcplp8H1QX753zOF9WqtXatwH0quYzysyy2k3yjX4zfq5ZX
- laLl/VWlA91Fdb/RXEFm0otuykya7k3aLdfZe2TCW9gxc22oSGFqt+ljkYP9ZnyRAYo/
- iKh06Ryu/42bsLvqh27DlJ1Qjnv0s+F6Sx+iqVBHw7IhVxzJXOsNxTyHMapa8SIB0+mz
- A9SA==
-X-Gm-Message-State: AOAM5328d+xTd95OKLPpivi6IHVj6KwSS6IfnPkLqxdZrIIzV7nJPJdc
- QF6bPdwhgyDWqh/DDf37y14rTA==
-X-Google-Smtp-Source: ABdhPJw6q+bFZcIwo/y4uN0oE8skM7XUnmmeJDRr9QTv/JOzMN54LLFvW9KELWO6DcVO4jr2DhMgiA==
-X-Received: by 2002:a05:6402:1713:: with SMTP id
- y19mr23148734edu.52.1616402390537; 
- Mon, 22 Mar 2021 01:39:50 -0700 (PDT)
-Received: from dell ([91.110.221.180])
- by smtp.gmail.com with ESMTPSA id ga28sm4809735ejc.82.2021.03.22.01.39.49
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 22 Mar 2021 01:39:50 -0700 (PDT)
-Date: Mon, 22 Mar 2021 08:39:47 +0000
-From: Lee Jones <lee.jones@linaro.org>
-To: Roland Scheidegger <sroland@vmware.com>,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- Alex Deucher <alexander.deucher@amd.com>,
- amd-gfx list <amd-gfx@lists.freedesktop.org>,
- Anthony Koo <Anthony.Koo@amd.com>, Ben Skeggs <bskeggs@redhat.com>,
- Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
- Colin Ian King <colin.king@canonical.com>,
- Dave Airlie <airlied@redhat.com>, David Airlie <airlied@linux.ie>,
- dri-devel <dri-devel@lists.freedesktop.org>,
- freedreno <freedreno@lists.freedesktop.org>,
- Harry Wentland <harry.wentland@amd.com>, Jeremy Kolb <jkolb@brandeis.edu>,
- Kuogee Hsieh <khsieh@codeaurora.org>, Leo Li <sunpeng.li@amd.com>,
- "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>,
- linux-arm-msm <linux-arm-msm@vger.kernel.org>,
- "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>,
- Lyude Paul <lyude@redhat.com>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>,
- Nouveau Dev <nouveau@lists.freedesktop.org>,
- Qinglang Miao <miaoqinglang@huawei.com>,
- Rob Clark <rob.clark@linaro.org>, Rob Clark <robdclark@gmail.com>,
- Sean Paul <sean@poorly.run>, Sumit Semwal <sumit.semwal@linaro.org>,
- Thomas Zimmermann <tzimmermann@suse.de>,
- VMware Graphics <linux-graphics-maintainer@vmware.com>,
- Zack Rusin <zackr@vmware.com>
-Message-ID: <20210322083947.GM2916463@dell>
-References: <20210303134319.3160762-1-lee.jones@linaro.org>
- <16d4300e-bf29-1e85-317b-53d257890cb9@vmware.com>
- <20210308091932.GB4931@dell> <YEobySvG0zPs9xhc@phenom.ffwll.local>
- <20210311135152.GT701493@dell> <20210317081729.GH701493@dell>
- <CAKMK7uEibsgXXTEM1d2CGSswp-koouPSouseP_rwLHTdpxfRpw@mail.gmail.com>
- <CAKMK7uHkJGDL8k3FfAqAM78honZR0euMcacW8UpdPZfS1J-7cA@mail.gmail.com>
- <20210319082407.GG2916463@dell>
- <YFTlhh1ZSFffO+Nr@phenom.ffwll.local>
+Received: from NAM12-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam12on2077.outbound.protection.outlook.com [40.107.243.77])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5CC9489930;
+ Mon, 22 Mar 2021 10:27:56 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=P6RbVX2dRoM+V4SvUxDP68g+oMrypkx+UsLPTEaVlUcuRxx3a/AiD0YMfMRjArvJT1znqmXoXpfDvi+L6DqyUHs4S0Nez/257huEoxtBiQKLArmHAQpgxw3yjcHH9++uikkaUDo9nRqaixW70bxWu+dPp4P3kELOP3sSW5LRw0mjqJR30YPzReSfcb/htvtiiIaKYXIbzRCg/uoQUD2VufVaMevyagd4TDXcitrG4q8b3+0D2HQuzy0PfeTzSjhhIjpiX9xw2vCvBSHpvgfKh5UITIA30p1ZEV0/CeCVn0ekYB0GBzzJ/ABmJOwL9ODddVvDi+hOqP0W+c4i0oYTtQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Tu85S1tb13VE2v351z6HKk4HzDVjZgv9QJA4MLE3F3g=;
+ b=FCdnHuNNnhunVQG2WRs5fNwidyTkjgkmypG/PJqKfZkFqDfneK6oXwjTCVT1CddUsTF5+HQRiojaRPSvHocp3+VlsPxWF8SBRYLOQzIOpTTbDhwSbP/PrMfLpuLeu5/HJR9EnqZUgfkrY3Rqdi92Y4r22wq0ipcoZu0YH8YGQYtpKChw0RtGbLMjXxvuGhqyFO2D72mKi/8b7UJ86fs+pLm9D1lQld/bimFqBiOE+wgLTMlitxI+TDGK4eUFZ8cS0du/wF7vR4rVz7FIcxB763TCFXS5be5pxSkQvkw02hea8syPT3UwDSAcROLJZ2foIiWTngFOFA2PPOO+Y8e/9A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 216.228.112.34) smtp.rcpttodomain=lists.freedesktop.org
+ smtp.mailfrom=nvidia.com; dmarc=pass (p=none sp=none pct=100) action=none
+ header.from=nvidia.com; dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Tu85S1tb13VE2v351z6HKk4HzDVjZgv9QJA4MLE3F3g=;
+ b=adh8xcAxeXufTzcfBqDpsOiZDq5dPvP3/vDJfxhS4zd0aD7nQ90B1rIwHPv6YDXcUV0V4dFAnCC41cAzFmzhJKQndifOWrT7+cQdUwkZAkMSEl9aq3XUBzc+zW1HXz7oug9XMZAhziudacdGdi/1dQponvIU9+RbmuEvyEvN0eyXAnt1r0e6fIVVungy76ZyEBW/gn1tYrJwu2iNGyborWOE8wgO6+z2pJ27oje2CU6N0/N8N1m5Xlk6BTOq0b8ByS3QfthnDfEZznJI4IeQHDj02qWd7jiWxwOUi1cBY6ntqF92/aLcFiFQrJbsK2ekeQA8qmP1gnaLQtc2mx1sVg==
+Received: from DM5PR15CA0028.namprd15.prod.outlook.com (2603:10b6:4:4b::14) by
+ BL0PR12MB4929.namprd12.prod.outlook.com (2603:10b6:208:1c4::7) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.3955.18; Mon, 22 Mar 2021 10:27:54 +0000
+Received: from DM6NAM11FT009.eop-nam11.prod.protection.outlook.com
+ (2603:10b6:4:4b:cafe::39) by DM5PR15CA0028.outlook.office365.com
+ (2603:10b6:4:4b::14) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3955.18 via Frontend
+ Transport; Mon, 22 Mar 2021 10:27:54 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.112.34)
+ smtp.mailfrom=nvidia.com; lists.freedesktop.org; dkim=none (message not
+ signed) header.d=none;lists.freedesktop.org; dmarc=pass action=none
+ header.from=nvidia.com;
+Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
+ 216.228.112.34 as permitted sender) receiver=protection.outlook.com;
+ client-ip=216.228.112.34; helo=mail.nvidia.com;
+Received: from mail.nvidia.com (216.228.112.34) by
+ DM6NAM11FT009.mail.protection.outlook.com (10.13.173.20) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id
+ 15.20.3955.18 via Frontend Transport; Mon, 22 Mar 2021 10:27:54 +0000
+Received: from nvdebian.localnet (172.20.145.6) by HQMAIL107.nvidia.com
+ (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1497.2; Mon, 22 Mar
+ 2021 10:27:48 +0000
+From: Alistair Popple <apopple@nvidia.com>
+To: Christoph Hellwig <hch@infradead.org>
+Date: Mon, 22 Mar 2021 21:27:46 +1100
+Message-ID: <6616451.iqfUG9VtI1@nvdebian>
+In-Reply-To: <20210315074245.GC4136862@infradead.org>
+References: <20210312083851.15981-1-apopple@nvidia.com>
+ <20210312083851.15981-6-apopple@nvidia.com>
+ <20210315074245.GC4136862@infradead.org>
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <YFTlhh1ZSFffO+Nr@phenom.ffwll.local>
-X-Mailman-Approved-At: Mon, 22 Mar 2021 13:09:01 +0000
-Subject: Re: [Nouveau] [RESEND 00/53] Rid GPU from W=1 warnings
+X-Originating-IP: [172.20.145.6]
+X-ClientProxiedBy: HQMAIL105.nvidia.com (172.20.187.12) To
+ HQMAIL107.nvidia.com (172.20.187.13)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 3dbf1a86-3994-4f7a-2eb0-08d8ed1d2792
+X-MS-TrafficTypeDiagnostic: BL0PR12MB4929:
+X-Microsoft-Antispam-PRVS: <BL0PR12MB4929A0F578E537132E588809DF659@BL0PR12MB4929.namprd12.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:10000;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: LO1tcYpP9kaKzCjpWUVxbUT1WQJg5+ARKGz260bLyqaabALLlnEUa/lFoawKA8acwWfOX4LBTo5s7kTNtkolJUVdMLo2uH+LGPPjlAdw1WAGjShO0Dof6mZdVvfwHiQEJAzWNim9UGrpbB//aeIJU0K1bIJfHPpla/+08fvavMX+IldlKRlUU7TxvAez9T4774PzxIXR3l+n3ft0IiNYMlsech65HuLU8+pCPKy8mMho73fZgBUmbwxZg8p1Jy2znkQnDK1/Pmm2ooCAOLRtxN0cVLWULnwrz83ktIKPSBoj9ya1WuFtYb6BkdJRhCY4p+WQStggi9E3CIbmKxv3EtdnXuczCZaNz4+WYMD0FcK2G/S6EhHvs3nlKs1uZ8yGwc7bBbnq8HtP86hCrm5s/NXbkbi2xEC0vWZdWJXbSTWven9AqU17rSwODO+TxvmiIt5JG5u9+lXehK1dEjM6qilI7oUy3IMkXQJF/nInRjP8agz1ECuf4jhGc1+yuHS4QwT9sNAfFxkvH6hw1QqqCdkV03+PQR6YbxLRu/GAVUP6zIDZGvratqASKZE+9KvAX9B5UM8Mqo0EBCMg7kosD1CC0g+KqBdr8BP/1/Hz0CyY70l6lZ7DzNM/UTY9HLb+3XjIy6OXnqVYRmEQdtVmwEyYN96lEqkCwPuzbo17yJMMszdmVAw05Jdz9vxvs0bA
+X-Forefront-Antispam-Report: CIP:216.228.112.34; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:schybrid03.nvidia.com; CAT:NONE;
+ SFS:(4636009)(396003)(376002)(39860400002)(136003)(346002)(36840700001)(46966006)(316002)(54906003)(8676002)(356005)(4326008)(9576002)(8936002)(7636003)(47076005)(336012)(6916009)(426003)(83380400001)(86362001)(2906002)(36906005)(36860700001)(186003)(478600001)(33716001)(82740400003)(70586007)(9686003)(70206006)(16526019)(5660300002)(82310400003)(26005)(7416002)(39026012);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Mar 2021 10:27:54.5462 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3dbf1a86-3994-4f7a-2eb0-08d8ed1d2792
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.112.34];
+ Helo=[mail.nvidia.com]
+X-MS-Exchange-CrossTenant-AuthSource: DM6NAM11FT009.eop-nam11.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL0PR12MB4929
+Subject: Re: [Nouveau] [PATCH v6 5/8] mm: Device exclusive memory access
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -99,61 +100,151 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: rcampbell@nvidia.com, willy@infradead.org, daniel@ffwll.ch,
+ linux-doc@vger.kernel.org, nouveau@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ kvm-ppc@vger.kernel.org, linux-mm@kvack.org, bskeggs@redhat.com,
+ jgg@nvidia.com, akpm@linux-foundation.org
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-T24gRnJpLCAxOSBNYXIgMjAyMSwgRGFuaWVsIFZldHRlciB3cm90ZToKCj4gT24gRnJpLCBNYXIg
-MTksIDIwMjEgYXQgMDg6MjQ6MDdBTSArMDAwMCwgTGVlIEpvbmVzIHdyb3RlOgo+ID4gT24gVGh1
-LCAxOCBNYXIgMjAyMSwgRGFuaWVsIFZldHRlciB3cm90ZToKPiA+IAo+ID4gPiBPbiBXZWQsIE1h
-ciAxNywgMjAyMSBhdCA5OjMyIFBNIERhbmllbCBWZXR0ZXIgPGRhbmllbEBmZndsbC5jaD4gd3Jv
-dGU6Cj4gPiA+ID4KPiA+ID4gPiBPbiBXZWQsIE1hciAxNywgMjAyMSBhdCA5OjE3IEFNIExlZSBK
-b25lcyA8bGVlLmpvbmVzQGxpbmFyby5vcmc+IHdyb3RlOgo+ID4gPiA+ID4KPiA+ID4gPiA+IE9u
-IFRodSwgMTEgTWFyIDIwMjEsIExlZSBKb25lcyB3cm90ZToKPiA+ID4gPiA+Cj4gPiA+ID4gPiA+
-IE9uIFRodSwgMTEgTWFyIDIwMjEsIERhbmllbCBWZXR0ZXIgd3JvdGU6Cj4gPiA+ID4gPiA+Cj4g
-PiA+ID4gPiA+ID4gT24gTW9uLCBNYXIgMDgsIDIwMjEgYXQgMDk6MTk6MzJBTSArMDAwMCwgTGVl
-IEpvbmVzIHdyb3RlOgo+ID4gPiA+ID4gPiA+ID4gT24gRnJpLCAwNSBNYXIgMjAyMSwgUm9sYW5k
-IFNjaGVpZGVnZ2VyIHdyb3RlOgo+ID4gPiA+ID4gPiA+ID4KPiA+ID4gPiA+ID4gPiA+ID4gVGhl
-IHZtd2dmeCBvbmVzIGxvb2sgYWxsIGdvb2QgdG8gbWUsIHNvIGZvcgo+ID4gPiA+ID4gPiA+ID4g
-PiAyMy01MzogUmV2aWV3ZWQtYnk6IFJvbGFuZCBTY2hlaWRlZ2dlciA8c3JvbGFuZEB2bXdhcmUu
-Y29tPgo+ID4gPiA+ID4gPiA+ID4gPiBUaGF0IHNhaWQsIHRoZXkgd2VyZSBhbHJlYWR5IHNpZ25l
-ZCBvZmYgYnkgWmFjaywgc28gbm90IHN1cmUgd2hhdAo+ID4gPiA+ID4gPiA+ID4gPiBoYXBwZW5l
-ZCBoZXJlLgo+ID4gPiA+ID4gPiA+ID4KPiA+ID4gPiA+ID4gPiA+IFllcywgdGhleSB3ZXJlIGFj
-Y2VwdGVkIGF0IG9uZSBwb2ludCwgdGhlbiBkcm9wcGVkIHdpdGhvdXQgYSByZWFzb24uCj4gPiA+
-ID4gPiA+ID4gPgo+ID4gPiA+ID4gPiA+ID4gU2luY2UgSSByZWJhc2VkIG9udG8gdGhlIGxhdGVz
-dCAtbmV4dCwgSSBoYWQgdG8gcGx1Y2sgdGhlbSBiYWNrIG91dCBvZgo+ID4gPiA+ID4gPiA+ID4g
-YSBwcmV2aW91cyBvbmUuCj4gPiA+ID4gPiA+ID4KPiA+ID4gPiA+ID4gPiBUaGV5IHNob3VsZCBz
-aG93IHVwIGluIGxpbnV4LW5leHQgYWdhaW4uIFdlIG1lcmdlIHBhdGNoZXMgZm9yIG5leHQgbWVy
-Z2UKPiA+ID4gPiA+ID4gPiB3aW5kb3cgZXZlbiBkdXJpbmcgdGhlIGN1cnJlbnQgbWVyZ2Ugd2lu
-ZG93LCBidXQgbmVlZCB0byBtYWtlIHN1cmUgdGhleQo+ID4gPiA+ID4gPiA+IGRvbid0IHBvbGx1
-dGUgbGludXgtbmV4dC4gT2NjYXNpb25hbGx5IHRoZSBjdXQgb2ZmIGlzIHdyb25nIHNvIHBhdGNo
-ZXMKPiA+ID4gPiA+ID4gPiBzaG93IHVwLCBhbmQgdGhlbiBnZXQgcHVsbGVkIGFnYWluLgo+ID4g
-PiA+ID4gPiA+Cj4gPiA+ID4gPiA+ID4gVW5mb3J0dW5hdGVseSBlc3BlY2lhbGx5IHRoZSA1LjEy
-IG1lcmdlIGN5Y2xlIHdhcyB2ZXJ5IHdvYmJseSBkdWUgdG8gc29tZQo+ID4gPiA+ID4gPiA+IGNv
-bmZ1c2lvbiBoZXJlLiBCdXQgeW91ciBwYXRjaGVzIHNob3VsZCBhbGwgYmUgaW4gbGludXgtbmV4
-dCBhZ2FpbiAodGhleQo+ID4gPiA+ID4gPiA+IGFyZSBxdWV1ZWQgdXAgZm9yIDUuMTMgaW4gZHJt
-LW1pc2MtbmV4dCwgSSBjaGVja2VkIHRoYXQpLgo+ID4gPiA+ID4gPiA+Cj4gPiA+ID4gPiA+ID4g
-U29ycnkgZm9yIHRoZSBjb25mdXNpb24gaGVyZS4KPiA+ID4gPiA+ID4KPiA+ID4gPiA+ID4gT2gs
-IEkgc2VlLiAgV2VsbCBzbyBsb25nIGFzIHRoZXkgZG9uJ3QgZ2V0IGRyb3BwZWQsIEknbGwgYmUg
-aGFwcHkuCj4gPiA+ID4gPiA+Cj4gPiA+ID4gPiA+IFRoYW5rcyBmb3IgdGhlIGV4cGxhbmF0aW9u
-IERhbmllbAo+ID4gPiA+ID4KPiA+ID4gPiA+IEFmdGVyIHJlYmFzaW5nIHRvZGF5LCBhbGwgb2Yg
-bXkgR1BVIHBhdGNoZXMgaGF2ZSByZW1haW5lZC4gIFdvdWxkCj4gPiA+ID4gPiBzb21lb25lIGJl
-IGtpbmQgZW5vdWdoIHRvIGNoZWNrIHRoYXQgZXZlcnl0aGluZyBpcyBzdGlsbCBpbiBvcmRlcgo+
-ID4gPiA+ID4gcGxlYXNlPwo+ID4gPiA+Cj4gPiA+ID4gSXQncyBzdGlsbCBicm9rZW4gc29tZWhv
-dy4gSSd2ZSBraWNlZCBNYXhpbWUgYW5kIE1hYXJ0ZW4gYWdhaW4sCj4gPiA+ID4gdGhleSdyZSBh
-bHNvIG9uIHRoaXMgdGhyZWFkLgo+ID4gPiAKPiA+ID4gWW91J3JlIHBhdGNoZXMgaGF2ZSBtYWRl
-IGl0IGludG8gZHJtLW5leHQgbWVhbndoaWxlLCBzbyB0aGV5IHNob3VsZAo+ID4gPiBzaG93IHVw
-IGluIGxpbnV4LW5leHQgdGhyb3VnaCB0aGF0IHRyZWUgYXQgbGVhc3QuIEV4Y2VwdCBpZiB0aGF0
-IG9uZQo+ID4gPiBhbHNvIGhhcyBzb21lIHRyb3VibGUuCj4gPiAKPiA+IFRoYW5rcyBmb3IgbGV0
-dGluZyBtZSBrbm93Lgo+ID4gCj4gPiBJIHNlZSBzb21lIHBhdGNoZXMgbWFkZSBpdCBiYWNrIGlu
-LCBvdGhlcnMgZGlkbid0Lgo+ID4gCj4gPiBJJ2xsIHJlc2VuZCB0aGUgc3RyYWdnbGVycyAtIGJl
-YXIgd2l0aC4KPiAKPiBUaGUgdm13Z2Z4IG9uZXMgc2hvdWxkIGFsbCBiZSBiYWNrLCB0aGUgb3Ro
-ZXJzIEkgZ3Vlc3MganVzdCB3ZXJlbnQgZXZlcgo+IGFwcGxpZWQuIEknbGwgdmFjdXVtIHRoZW0g
-YWxsIHVwIGlmIHlvdSByZXNlbmQuIEFwb2xvZ2llcyBmb3IgdGhlIHdvYmJseQo+IHJpZGUuCgpO
-UCwgaXQgaGFwcGVucy4KCi0tIApMZWUgSm9uZXMgW+adjueQvOaWr10KU2VuaW9yIFRlY2huaWNh
-bCBMZWFkIC0gRGV2ZWxvcGVyIFNlcnZpY2VzCkxpbmFyby5vcmcg4pSCIE9wZW4gc291cmNlIHNv
-ZnR3YXJlIGZvciBBcm0gU29DcwpGb2xsb3cgTGluYXJvOiBGYWNlYm9vayB8IFR3aXR0ZXIgfCBC
-bG9nCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCk5vdXZl
-YXUgbWFpbGluZyBsaXN0Ck5vdXZlYXVAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlz
-dHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vbm91dmVhdQo=
+On Monday, 15 March 2021 6:42:45 PM AEDT Christoph Hellwig wrote:
+> > +Not all devices support atomic access to system memory. To support atomic
+> > +operations to a shared virtual memory page such a device needs access to 
+that
+> > +page which is exclusive of any userspace access from the CPU. The
+> > +``make_device_exclusive_range()`` function can be used to make a memory 
+range
+> > +inaccessible from userspace.
+> 
+> s/Not all devices/Some devices/ ?
+
+I will reword this. What I was trying to convey is that devices may have 
+features which allow for atomics to be implemented with SW assistance.
+
+> >  static inline int mm_has_notifiers(struct mm_struct *mm)
+> > @@ -528,7 +534,17 @@ static inline void mmu_notifier_range_init_migrate(
+> >  {
+> >  	mmu_notifier_range_init(range, MMU_NOTIFY_MIGRATE, flags, vma, mm,
+> >  				start, end);
+> > -	range->migrate_pgmap_owner = pgmap;
+> > +	range->owner = pgmap;
+> > +}
+> > +
+> > +static inline void mmu_notifier_range_init_exclusive(
+> > +			struct mmu_notifier_range *range, unsigned int flags,
+> > +			struct vm_area_struct *vma, struct mm_struct *mm,
+> > +			unsigned long start, unsigned long end, void *owner)
+> > +{
+> > +	mmu_notifier_range_init(range, MMU_NOTIFY_EXCLUSIVE, flags, vma, mm,
+> > +				start, end);
+> > +	range->owner = owner;
+> 
+> Maybe just replace mmu_notifier_range_init_migrate with a
+> mmu_notifier_range_init_owner helper that takes the owner but does
+> not hard code a type?
+
+Ok. That does result in a function which takes a fair number of arguments, but 
+I guess that's no worse than multiple functions hard coding the different 
+types and it does result in less code overall.
+
+> >  		}
+> > +	} else if (is_device_exclusive_entry(entry)) {
+> > +		page = pfn_swap_entry_to_page(entry);
+> > +
+> > +		get_page(page);
+> > +		rss[mm_counter(page)]++;
+> > +
+> > +		if (is_writable_device_exclusive_entry(entry) &&
+> > +		    is_cow_mapping(vm_flags)) {
+> > +			/*
+> > +			 * COW mappings require pages in both
+> > +			 * parent and child to be set to read.
+> > +			 */
+> > +			entry = make_readable_device_exclusive_entry(
+> > +							swp_offset(entry));
+> > +			pte = swp_entry_to_pte(entry);
+> > +			if (pte_swp_soft_dirty(*src_pte))
+> > +				pte = pte_swp_mksoft_dirty(pte);
+> > +			if (pte_swp_uffd_wp(*src_pte))
+> > +				pte = pte_swp_mkuffd_wp(pte);
+> > +			set_pte_at(src_mm, addr, src_pte, pte);
+> > +		}
+> 
+> Just cosmetic, but I wonder if should factor this code block into
+> a little helper.
+
+In that case there are arguably are other bits of this function which should 
+be refactored into helpers as well. Unless you feel strongly about it I would 
+like to leave this as is and put together a future series to fix this and a 
+couple of other areas I've noticed that could do with some refactoring/clean 
+ups.
+
+> > +
+> > +static bool try_to_protect_one(struct page *page, struct vm_area_struct 
+*vma,
+> > +			unsigned long address, void *arg)
+> > +{
+> > +	struct mm_struct *mm = vma->vm_mm;
+> > +	struct page_vma_mapped_walk pvmw = {
+> > +		.page = page,
+> > +		.vma = vma,
+> > +		.address = address,
+> > +	};
+> > +	struct ttp_args *ttp = (struct ttp_args *) arg;
+> 
+> This cast should not be needed.
+> 
+> > +	return ttp.valid && (!page_mapcount(page) ? true : false);
+> 
+> This can be simplified to:
+> 
+> 	return ttp.valid && !page_mapcount(page);
+> 
+> > +	npages = get_user_pages_remote(mm, start, npages,
+> > +				       FOLL_GET | FOLL_WRITE | FOLL_SPLIT_PMD,
+> > +				       pages, NULL, NULL);
+> > +	for (i = 0; i < npages; i++, start += PAGE_SIZE) {
+> > +		if (!trylock_page(pages[i])) {
+> > +			put_page(pages[i]);
+> > +			pages[i] = NULL;
+> > +			continue;
+> > +		}
+> > +
+> > +		if (!try_to_protect(pages[i], mm, start, arg)) {
+> > +			unlock_page(pages[i]);
+> > +			put_page(pages[i]);
+> > +			pages[i] = NULL;
+> > +		}
+> 
+> Should the trylock_page go into try_to_protect to simplify the loop
+> a little?  Also I wonder if we need make_device_exclusive_range or
+> should just open code the get_user_pages_remote + try_to_protect
+> loop in the callers, as that might allow them to also deduct other
+> information about the found pages.
+
+This function has evolved over time and putting the trylock_page into 
+try_to_protect does simplify things nicely. I'm not sure what other 
+information a caller could deduct through open coding though, but I guess in 
+some circumstances it might be possible for callers to skip 
+get_user_pages_remote() which might be a future improvement.
+
+The main reason it looks like this was simply to keep it looking fairly 
+similar to how hmm_range_fault() and migrate_vma() are used with an array of 
+pages (or pfns) which are filled out from the given address range.
+ 
+> Otherwise looks good:
+> 
+> Reviewed-by: Christoph Hellwig <hch@lst.de>
+> 
+
+Thanks.
+
+
+
+_______________________________________________
+Nouveau mailing list
+Nouveau@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/nouveau
