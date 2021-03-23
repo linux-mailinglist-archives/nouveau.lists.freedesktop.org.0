@@ -2,32 +2,32 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4986134581C
-	for <lists+nouveau@lfdr.de>; Tue, 23 Mar 2021 08:03:14 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 36824346812
+	for <lists+nouveau@lfdr.de>; Tue, 23 Mar 2021 19:49:09 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id AED886E461;
-	Tue, 23 Mar 2021 07:03:10 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 75A7E6E92B;
+	Tue, 23 Mar 2021 18:49:06 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from szxga07-in.huawei.com (szxga07-in.huawei.com [45.249.212.35])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E752A6E461;
- Tue, 23 Mar 2021 07:03:08 +0000 (UTC)
-Received: from DGGEMS408-HUB.china.huawei.com (unknown [172.30.72.60])
- by szxga07-in.huawei.com (SkyGuard) with ESMTP id 4F4Mhx0HjMz92nC;
- Tue, 23 Mar 2021 15:01:05 +0800 (CST)
-Received: from hulk-robot-4.huawei.com (10.175.124.27) by
- DGGEMS408-HUB.china.huawei.com (10.3.19.208) with Microsoft SMTP Server id
- 14.3.498.0; Tue, 23 Mar 2021 15:02:53 +0800
-From: Zou Wei <zou_wei@huawei.com>
-To: <bskeggs@redhat.com>, <airlied@linux.ie>, <daniel@ffwll.ch>
-Date: Tue, 23 Mar 2021 07:48:57 +0000
-Message-ID: <20210323074857.38818-1-zou_wei@huawei.com>
-X-Mailer: git-send-email 2.17.1
-MIME-Version: 1.0
-X-Originating-IP: [10.175.124.27]
-X-CFilter-Loop: Reflected
-Subject: [Nouveau] [PATCH -next] drm/nouveau/core/client: Mark
- nvkm_uclient_sclass with static keyword
+Received: from out30-42.freemail.mail.aliyun.com
+ (out30-42.freemail.mail.aliyun.com [115.124.30.42])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3BDDE6E094;
+ Tue, 23 Mar 2021 08:01:31 +0000 (UTC)
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R141e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=e01e04395;
+ MF=jiapeng.chong@linux.alibaba.com; NM=1; PH=DS; RN=7; SR=0;
+ TI=SMTPD_---0UT2X8eb_1616486482; 
+Received: from
+ j63c13417.sqa.eu95.tbsite.net(mailfrom:jiapeng.chong@linux.alibaba.com
+ fp:SMTPD_---0UT2X8eb_1616486482) by smtp.aliyun-inc.com(127.0.0.1);
+ Tue, 23 Mar 2021 16:01:28 +0800
+From: Jiapeng Chong <jiapeng.chong@linux.alibaba.com>
+To: bskeggs@redhat.com
+Date: Tue, 23 Mar 2021 16:01:21 +0800
+Message-Id: <1616486481-94130-1-git-send-email-jiapeng.chong@linux.alibaba.com>
+X-Mailer: git-send-email 1.8.3.1
+X-Mailman-Approved-At: Tue, 23 Mar 2021 18:49:05 +0000
+Subject: [Nouveau] [PATCH] drm/nouveau/mc: make tu102_mc_intr_unarm static
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -39,8 +39,10 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, Zou Wei <zou_wei@huawei.com>,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org
+Cc: Jiapeng Chong <jiapeng.chong@linux.alibaba.com>, airlied@linux.ie,
+ nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, daniel@ffwll.ch
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
@@ -48,28 +50,42 @@ Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 Fix the following sparse warning:
 
-drivers/gpu/drm/nouveau/nvkm/core/client.c:64:1: warning: symbol 'nvkm_uclient_sclass' was not declared. Should it be static?
+drivers/gpu/drm/nouveau/nvkm/subdev/mc/tu102.c:74:1: warning: symbol
+'tu102_mc_intr_mask' was not declared. Should it be static?
 
-Signed-off-by: Zou Wei <zou_wei@huawei.com>
+drivers/gpu/drm/nouveau/nvkm/subdev/mc/tu102.c:62:1: warning: symbol
+'tu102_mc_intr_rearm' was not declared. Should it be static?
+
+Reported-by: Abaci Robot <abaci@linux.alibaba.com>
+Signed-off-by: Jiapeng Chong <jiapeng.chong@linux.alibaba.com>
 ---
- drivers/gpu/drm/nouveau/nvkm/core/client.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/gpu/drm/nouveau/nvkm/subdev/mc/tu102.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/core/client.c b/drivers/gpu/drm/nouveau/nvkm/core/client.c
-index ac671202919e..0c8c55c73b12 100644
---- a/drivers/gpu/drm/nouveau/nvkm/core/client.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/core/client.c
-@@ -60,7 +60,7 @@ nvkm_uclient_new(const struct nvkm_oclass *oclass, void *argv, u32 argc,
- 	return 0;
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/mc/tu102.c b/drivers/gpu/drm/nouveau/nvkm/subdev/mc/tu102.c
+index 58db83e..7cf659cc 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/mc/tu102.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/mc/tu102.c
+@@ -58,7 +58,7 @@ struct tu102_mc {
+ 	spin_unlock_irqrestore(&mc->lock, flags);
  }
  
--const struct nvkm_sclass
-+static const struct nvkm_sclass
- nvkm_uclient_sclass = {
- 	.oclass = NVIF_CLASS_CLIENT,
- 	.minver = 0,
+-void
++static void
+ tu102_mc_intr_rearm(struct nvkm_mc *base)
+ {
+ 	struct tu102_mc *mc = tu102_mc(base);
+@@ -70,7 +70,7 @@ struct tu102_mc {
+ 	spin_unlock_irqrestore(&mc->lock, flags);
+ }
+ 
+-void
++static void
+ tu102_mc_intr_mask(struct nvkm_mc *base, u32 mask, u32 intr)
+ {
+ 	struct tu102_mc *mc = tu102_mc(base);
 -- 
-2.17.1
+1.8.3.1
 
 _______________________________________________
 Nouveau mailing list
