@@ -2,32 +2,33 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 36824346812
-	for <lists+nouveau@lfdr.de>; Tue, 23 Mar 2021 19:49:09 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7EC56346813
+	for <lists+nouveau@lfdr.de>; Tue, 23 Mar 2021 19:49:11 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 75A7E6E92B;
-	Tue, 23 Mar 2021 18:49:06 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 133016E94F;
+	Tue, 23 Mar 2021 18:49:07 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from out30-42.freemail.mail.aliyun.com
- (out30-42.freemail.mail.aliyun.com [115.124.30.42])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3BDDE6E094;
- Tue, 23 Mar 2021 08:01:31 +0000 (UTC)
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R141e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=e01e04395;
+Received: from out30-132.freemail.mail.aliyun.com
+ (out30-132.freemail.mail.aliyun.com [115.124.30.132])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 41FBE6E095;
+ Tue, 23 Mar 2021 08:11:49 +0000 (UTC)
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R121e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=e01e04420;
  MF=jiapeng.chong@linux.alibaba.com; NM=1; PH=DS; RN=7; SR=0;
- TI=SMTPD_---0UT2X8eb_1616486482; 
+ TI=SMTPD_---0UT2qUJD_1616487100; 
 Received: from
  j63c13417.sqa.eu95.tbsite.net(mailfrom:jiapeng.chong@linux.alibaba.com
- fp:SMTPD_---0UT2X8eb_1616486482) by smtp.aliyun-inc.com(127.0.0.1);
- Tue, 23 Mar 2021 16:01:28 +0800
+ fp:SMTPD_---0UT2qUJD_1616487100) by smtp.aliyun-inc.com(127.0.0.1);
+ Tue, 23 Mar 2021 16:11:46 +0800
 From: Jiapeng Chong <jiapeng.chong@linux.alibaba.com>
 To: bskeggs@redhat.com
-Date: Tue, 23 Mar 2021 16:01:21 +0800
-Message-Id: <1616486481-94130-1-git-send-email-jiapeng.chong@linux.alibaba.com>
+Date: Tue, 23 Mar 2021 16:11:24 +0800
+Message-Id: <1616487084-104391-1-git-send-email-jiapeng.chong@linux.alibaba.com>
 X-Mailer: git-send-email 1.8.3.1
 X-Mailman-Approved-At: Tue, 23 Mar 2021 18:49:05 +0000
-Subject: [Nouveau] [PATCH] drm/nouveau/mc: make tu102_mc_intr_unarm static
+Subject: [Nouveau] [PATCH v2] drm/nouveau/mc: make tu102_mc_intr_mask and
+ tu102_mc_intr_rearm static
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,6 +60,9 @@ drivers/gpu/drm/nouveau/nvkm/subdev/mc/tu102.c:62:1: warning: symbol
 Reported-by: Abaci Robot <abaci@linux.alibaba.com>
 Signed-off-by: Jiapeng Chong <jiapeng.chong@linux.alibaba.com>
 ---
+Changes in v2:
+  -Modified the commit message.
+
  drivers/gpu/drm/nouveau/nvkm/subdev/mc/tu102.c | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 
