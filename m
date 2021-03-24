@@ -2,53 +2,53 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 815DC348545
-	for <lists+nouveau@lfdr.de>; Thu, 25 Mar 2021 00:29:07 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C9DF3348559
+	for <lists+nouveau@lfdr.de>; Thu, 25 Mar 2021 00:33:52 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id BECBA6EAC1;
-	Wed, 24 Mar 2021 23:29:04 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 384DD6EAC8;
+	Wed, 24 Mar 2021 23:33:51 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-yb1-xb30.google.com (mail-yb1-xb30.google.com
- [IPv6:2607:f8b0:4864:20::b30])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 669D16EAC1;
- Wed, 24 Mar 2021 23:29:04 +0000 (UTC)
-Received: by mail-yb1-xb30.google.com with SMTP id x189so373068ybg.5;
- Wed, 24 Mar 2021 16:29:04 -0700 (PDT)
+Received: from mail-yb1-xb29.google.com (mail-yb1-xb29.google.com
+ [IPv6:2607:f8b0:4864:20::b29])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 09B7A6EAC8;
+ Wed, 24 Mar 2021 23:33:50 +0000 (UTC)
+Received: by mail-yb1-xb29.google.com with SMTP id o66so349582ybg.10;
+ Wed, 24 Mar 2021 16:33:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=szMyrlVIzLgkuWOdfnjXqAD83OmSXPmtaUZglnnq0Iw=;
- b=U1Wb1zOKrEBdqaW8up8hYUOKhLJOii3QLZEBREfU6wiLpwHRSg721PdIN2QEmhKpSu
- Q4iZAyLmtlSjLIXvfyGhaN9kwjgF7OdcrWkv8CRNB26WCWcFbvU9eheYY783bUNX8MWj
- cnkO8eJmaR5S1ETumlGVDkbnZSuclmpqcjaESJxyDeMQYsFwunkoUXYKjEw2Yduqrnyx
- l/k6UCfTC2gpx5oEtC8B17v2DjYSzIWDokLeVqgoCo+DhYDvJQsGeMvysMKu8Fhf7IRB
- 5DwfdlWd8Qav2VZafgi9CtexdsYullmmY0XNi2Ng6W5o35dW++W8lJrDlOB9Sm3TfNAw
- +z/Q==
+ :cc; bh=mS6K4y5Gdwm273OjX7Mj3NnKkqV9h0GOYxPLfw0a8kE=;
+ b=TbBBCMKGGrU1SLAS0jXw2dUt2IsKi4yR/C/6kDgvmt3Zrd/Iy3pI9RU8qXxdO9gUne
+ 9KFbKOHNGpE4ITCowW1oyy+m+lpITlKOlZdjbnWqBwieqWuExsFJuvsueD1b7ESR05MJ
+ 9Y1u1rPJVUfGFvdLZirXVQTxpO9TSbMapoFxyysFh9SOW11pe1X+NTUC6Yazhwqi52j1
+ s7K7qZeIF3uiE4De/8ZydW5pOinjvRKlmJCgU6grEWlPW7X82bOjp8oRmUp/ApdRu1Jj
+ 7dOeYZzNgoM2pnsIsYaDF0hTqeNrGMRXnvA4fvygFZxOV0K3KX+0x2ze1TKeySBky6M/
+ 3T5A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=szMyrlVIzLgkuWOdfnjXqAD83OmSXPmtaUZglnnq0Iw=;
- b=uSrfup/axQHmFkEv5IMTb/A8fa+YluxFHCbjTZRr/5hC06fhy95TXiXvmwnWk3aCxP
- AVWNROhxlDUNouq8hobeqVmbMyCNmN7Flo2GZ5I2/vYVXO19RrKFYLOG6Vw9I+Swl2R4
- S0k0tIg2Mj7JXJRLg9K0tYli1DcVdyv487751ZjMpF5+1lSqjYv06LEL0Mkziwf9Q19b
- jRUhJrxL9ciVQcm24u2GxvS8d7crjJWeVMa+lR5h2aAXZZl4coHX6ZMQu5PBaeGq46dH
- 94UoQANgWJRIeXYJG59zJoGYEekcds1XrWY/OqJhDUwkoWmSDpDMbu0dXTv3oyLWuNq0
- fFtw==
-X-Gm-Message-State: AOAM530y6YLW5GdusPTHmGf4F9rQunoaXC59zDeasKwO1C+oCdRXY014
- z+j+kD195nDCkvh68pPVtbb8cylscuazzxov3eg=
-X-Google-Smtp-Source: ABdhPJyOs9xaGa+QOKUSOuI31tkhHjwgr5dxjeryBWUSHHVi7wTeTF4Stk2Ysp67G6woc0dQ0qgfpRTJ0VGQLHnGRPA=
-X-Received: by 2002:a5b:591:: with SMTP id l17mr8407393ybp.60.1616628543635;
- Wed, 24 Mar 2021 16:29:03 -0700 (PDT)
+ bh=mS6K4y5Gdwm273OjX7Mj3NnKkqV9h0GOYxPLfw0a8kE=;
+ b=jSN339P2FTBj2z9FckqwUN9q3rTuRwr9dqMoINqUVRyrjI3T8wACW6+5zSiPhMevms
+ XNI3+/vuipZf8OHMxb19/yNvC89bO34SPlLAeqQ45E405WBzfxS3nRp4LbwrDeHcqVdA
+ SAO5V+C6mbnu5OOLeccSxK9V3A7bqmDlS7ri1dpzoLPi98rKvyjgLQRifl4/B1SQGy3S
+ JNM5i81NAqRmHRpnb+8mPr5+JaHJ448xf3wVMbsnVDS3ld5kg1vqJ1Q5pPjXgmyj35YZ
+ BIZ+49p/XGEQOxeO/xd9wzUMqylQayf2pp2cM8NIZEfLEwts0kUNi19qYhIYIxb/Po47
+ Kd1A==
+X-Gm-Message-State: AOAM531YcQlK9p04AgfpY8RMpQc8kdAZGa15z/5ydGMVvvaK3pA8D842
+ cdukKkdWL5vqbrFMYxvys2xuiPQ/Jki+1jESmlM=
+X-Google-Smtp-Source: ABdhPJyPreiShhfrSTu/mc2aeIAHsRz/4bu0nXdtJz4x0g8v6RWB8S6GmasK38ftTfLNqR/9w0YsOjOWd4ey1SbNiqo=
+X-Received: by 2002:a25:6003:: with SMTP id u3mr8647385ybb.96.1616628829328;
+ Wed, 24 Mar 2021 16:33:49 -0700 (PDT)
 MIME-Version: 1.0
-References: <20210317093545.354-1-tangchunyou@163.com>
-In-Reply-To: <20210317093545.354-1-tangchunyou@163.com>
+References: <20210307174853.28273-1-imirkin@alum.mit.edu>
+In-Reply-To: <20210307174853.28273-1-imirkin@alum.mit.edu>
 From: Ben Skeggs <skeggsb@gmail.com>
-Date: Thu, 25 Mar 2021 09:28:52 +1000
-Message-ID: <CACAvsv6ixo422jtf+KRQj9P1bs3LCqMB3JhSnVhQ0wyQrUa84g@mail.gmail.com>
-To: ChunyouTang <tangchunyou@163.com>
-Subject: Re: [Nouveau] [PATCH] nouveau/nvkm/subdev/devinit/mcp89.c:Unneeded
- variable
+Date: Thu, 25 Mar 2021 09:33:38 +1000
+Message-ID: <CACAvsv5MEeCwc2Cvx8uwMLRu9o-EvNP9ERc44BGB9cPOB5caLQ@mail.gmail.com>
+To: Ilia Mirkin <imirkin@alum.mit.edu>
+Subject: Re: [Nouveau] [PATCH] drm/nouveau/kms/nv04: use vzalloc for
+ nv04_display
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,58 +60,58 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Dave Airlie <airlied@linux.ie>, ML nouveau <nouveau@lists.freedesktop.org>,
- LKML <linux-kernel@vger.kernel.org>,
+Cc: ML nouveau <nouveau@lists.freedesktop.org>,
  ML dri-devel <dri-devel@lists.freedesktop.org>,
- Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>,
- tangchunyou@yulong.com
+ Ben Skeggs <bskeggs@redhat.com>, "Nathan E . Egge" <unlord@xiph.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, 17 Mar 2021 at 19:51, ChunyouTang <tangchunyou@163.com> wrote:
+On Mon, 8 Mar 2021 at 03:49, Ilia Mirkin <imirkin@alum.mit.edu> wrote:
 >
-> From: tangchunyou <tangchunyou@yulong.com>
+> The struct is giant, and triggers an order-7 allocation (512K). There is
+> no reason for this to be kmalloc-type memory, so switch to vmalloc. This
+> should help loading nouveau on low-memory and/or long-running systems.
 >
-> disable,delete disable and return 0
->
-> Signed-off-by: tangchunyou <tangchunyou@yulong.com>
+> Reported-by: Nathan E. Egge <unlord@xiph.org>
+> Signed-off-by: Ilia Mirkin <imirkin@alum.mit.edu>
+> Cc: stable@vger.kernel.org
 Thanks!
 
 > ---
->  drivers/gpu/drm/nouveau/nvkm/subdev/devinit/mcp89.c | 3 +--
->  1 file changed, 1 insertion(+), 2 deletions(-)
+>  drivers/gpu/drm/nouveau/dispnv04/disp.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
 >
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/mcp89.c b/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/mcp89.c
-> index fb90d47..a9cdf24 100644
-> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/mcp89.c
-> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/devinit/mcp89.c
-> @@ -32,7 +32,6 @@
->         struct nvkm_device *device = init->subdev.device;
->         u32 r001540 = nvkm_rd32(device, 0x001540);
->         u32 r00154c = nvkm_rd32(device, 0x00154c);
-> -       u64 disable = 0;
+> diff --git a/drivers/gpu/drm/nouveau/dispnv04/disp.c b/drivers/gpu/drm/nouveau/dispnv04/disp.c
+> index 7739f46470d3..99fee4d8cd31 100644
+> --- a/drivers/gpu/drm/nouveau/dispnv04/disp.c
+> +++ b/drivers/gpu/drm/nouveau/dispnv04/disp.c
+> @@ -205,7 +205,7 @@ nv04_display_destroy(struct drm_device *dev)
+>         nvif_notify_dtor(&disp->flip);
 >
->         if (!(r001540 & 0x40000000)) {
->                 nvkm_subdev_disable(device, NVKM_ENGINE_MSPDEC, 0);
-> @@ -48,7 +47,7 @@
->         if (!(r00154c & 0x00000200))
->                 nvkm_subdev_disable(device, NVKM_ENGINE_CE, 0);
+>         nouveau_display(dev)->priv = NULL;
+> -       kfree(disp);
+> +       vfree(disp);
 >
-> -       return disable;
-> +       return 0;
+>         nvif_object_unmap(&drm->client.device.object);
 >  }
+> @@ -223,7 +223,7 @@ nv04_display_create(struct drm_device *dev)
+>         struct nv04_display *disp;
+>         int i, ret;
 >
->  static const struct nvkm_devinit_func
+> -       disp = kzalloc(sizeof(*disp), GFP_KERNEL);
+> +       disp = vzalloc(sizeof(*disp));
+>         if (!disp)
+>                 return -ENOMEM;
+>
 > --
-> 1.9.1
->
+> 2.26.2
 >
 > _______________________________________________
-> dri-devel mailing list
-> dri-devel@lists.freedesktop.org
-> https://lists.freedesktop.org/mailman/listinfo/dri-devel
+> Nouveau mailing list
+> Nouveau@lists.freedesktop.org
+> https://lists.freedesktop.org/mailman/listinfo/nouveau
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
