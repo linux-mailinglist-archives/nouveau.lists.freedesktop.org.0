@@ -1,78 +1,53 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id E022E34B1A9
-	for <lists+nouveau@lfdr.de>; Fri, 26 Mar 2021 23:01:02 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id CF08134B339
+	for <lists+nouveau@lfdr.de>; Sat, 27 Mar 2021 01:10:18 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 490726F4A9;
-	Fri, 26 Mar 2021 22:00:59 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id CDEB56F502;
+	Sat, 27 Mar 2021 00:10:15 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 418096F49A
- for <nouveau@lists.freedesktop.org>; Fri, 26 Mar 2021 22:00:57 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 310F86F502
+ for <nouveau@lists.freedesktop.org>; Sat, 27 Mar 2021 00:10:14 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1616796056;
- h=from:from:reply-to:reply-to:subject:subject:date:date:
- message-id:message-id:to:to:cc:cc:mime-version:mime-version:
- content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=NwmpBP589O6V0JxrSUt13E4QZLT4xX4RH4BOYcChKvM=;
- b=aVt4G+xHATarXn3s2aPCmfvZkAsognmtRJrXOObOmR4I31naRKzlv0wZ6o9ijak+fWZi1p
- oOX3RfIYzlklm1Tg5pgoenRI3SoxZICQfEIgVnmCNs/xojULAvWZq4WSEp6Sp5TNg/5JeO
- nBBmfR4U8hv+5qj05/GdOA78TxfPKfw=
-Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com
- [209.85.222.199]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-191-LZFP57T3NrieZ8DtthPOHQ-1; Fri, 26 Mar 2021 18:00:54 -0400
-X-MC-Unique: LZFP57T3NrieZ8DtthPOHQ-1
-Received: by mail-qk1-f199.google.com with SMTP id c1so7198733qke.8
- for <nouveau@lists.freedesktop.org>; Fri, 26 Mar 2021 15:00:54 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:message-id:subject:from:reply-to:to:cc:date
- :in-reply-to:references:organization:user-agent:mime-version
- :content-transfer-encoding;
- bh=NwmpBP589O6V0JxrSUt13E4QZLT4xX4RH4BOYcChKvM=;
- b=L4OXycG3rZVlQBa5ZwZI7Adhx8o07xCzikOvnRvFX6gK35RDmUYmzRR/trwFfx0x9c
- ustAIGVewlayak0ubnYqNnpzJ1vRtAYMqKRBJ4woV5Nq04KrblpxFubM+eiuF0qxaqFw
- n0PpUKzj3KzLYHSOoGcT0gffS16i6D+LTAHTvnWCoIldAkCQNH9fFJfELSo0Fed4Z0jl
- FyZSdg6mO9H/08kycmUCB2ZBFsYvIBofRLCkmnM7pW3sdo9c93rBse2wozYlLfE/Z50W
- ICrLndWspwBBjuXVT2XQ1gDlcWy/HKoC63VuyJ23N1e7J+ETwiYHZ50aUmBljQqMcrGu
- teFA==
-X-Gm-Message-State: AOAM5337tN51TswpK4ZKqEXbjfQ9NIJDbyEm3jrFu2Sk9cE+yOtip4SH
- sc+0DIrD5vegIbGiUo2vS/H7A24eIOR/rXiT6QT3BbAM6FVSxu4xQHIJZlbxR3zDLdFHgNA39rN
- NMd7gC0msWp7drFEoLav/tioZLA==
-X-Received: by 2002:a37:a38e:: with SMTP id
- m136mr15199347qke.250.1616796053859; 
- Fri, 26 Mar 2021 15:00:53 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJxdjc8K+Reia9/uZrIZA0FnyV82RIoH05Va+FBTVeF7yBkyt1wnjDJ4h2zusGmfId1aYTbjwQ==
-X-Received: by 2002:a37:a38e:: with SMTP id
- m136mr15199330qke.250.1616796053657; 
- Fri, 26 Mar 2021 15:00:53 -0700 (PDT)
-Received: from Whitewolf.lyude.net
- (pool-108-49-102-102.bstnma.fios.verizon.net. [108.49.102.102])
- by smtp.gmail.com with ESMTPSA id 21sm7965657qkv.12.2021.03.26.15.00.52
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 26 Mar 2021 15:00:52 -0700 (PDT)
-Message-ID: <b4da382b17a77b66e45fd374c9d806dac6054e3a.camel@redhat.com>
+ s=mimecast20190719; t=1616803813;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=UzOfXuForNxRCd56jvCtpAf71VkQSVPbu3+nSN5bh8I=;
+ b=XCmEVrT/mm97OJJZFg0awtdaiyqDNqwICdW+KOwu3TaT7w3aL1s0jLUe6m+o7yGNmMs/YU
+ qoZfsJQymq1n5FgGjYBbg1ZZhDbJ/5j2CMZDVwVdU0ExCaVDrfbirzfemvDugm1hOeiyz8
+ v4517zECuw9kDcHeK/PHDRwdbdnYIFY=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-234-N6UtDt_mN-SGNxxDr3UmSg-1; Fri, 26 Mar 2021 20:10:11 -0400
+X-MC-Unique: N6UtDt_mN-SGNxxDr3UmSg-1
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
+ [10.5.11.23])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 5EECD107ACCD
+ for <nouveau@lists.freedesktop.org>; Sat, 27 Mar 2021 00:10:10 +0000 (UTC)
+Received: from Whitewolf.lyude.net (ovpn-114-133.rdu2.redhat.com
+ [10.10.114.133])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id E51751972B;
+ Sat, 27 Mar 2021 00:10:09 +0000 (UTC)
 From: Lyude Paul <lyude@redhat.com>
-To: Jeremy Cline <jcline@redhat.com>, Ben Skeggs <bskeggs@redhat.com>
-Date: Fri, 26 Mar 2021 18:00:51 -0400
-In-Reply-To: <20201125202648.5220-1-jcline@redhat.com>
-References: <20201103194912.184413-1-jcline@redhat.com>
- <20201125202648.5220-1-jcline@redhat.com>
-Organization: Red Hat
-User-Agent: Evolution 3.38.4 (3.38.4-1.fc33)
+To: nouveau@lists.freedesktop.org
+Date: Fri, 26 Mar 2021 20:09:58 -0400
+Message-Id: <20210327001001.229093-1-lyude@redhat.com>
 MIME-Version: 1.0
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
 Authentication-Results: relay.mimecast.com;
  auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=lyude@redhat.com
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Subject: Re: [Nouveau] [PATCH v2 0/3] drm/nouveau: fix a use-after-free in
- postclose()
+Subject: [Nouveau] [PATCH v2 0/3] drm/nouveau: extend the lifetime of
+ nouveau_drm
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -84,55 +59,76 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Reply-To: lyude@redhat.com
-Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-VGhpcyBwYXRjaCBzZXJpZXMgaXM6CgpSZXZpZXdlZC1ieTogTHl1ZGUgUGF1bCA8bHl1ZGVAcmVk
-aGF0LmNvbT4KCkJ0dyAtIGluIHRoZSBmdXR1cmUgaWYgeW91IG5lZWQgdG8gc2VuZCBhIHJlc3Bp
-biBvZiBtdWx0aXBsZSBwYXRjaGVzLCB5b3UgbmVlZAp0byBzZW5kIGl0IGFzIGl0J3Mgb3duIHNl
-cGFyYXRlIHNlcmllcyBpbnN0ZWFkIG9mIHJlcGx5aW5nIHRvIHRoZSBwcmV2aW91cyBvbmUKKG9u
-ZS1vZmYgcmVzcGlucyBjYW4ganVzdCBiZSBwb3N0ZWQgYXMgcmVwbGllcyB0aG91Z2gpLCBvdGhl
-cndpc2UgcGF0Y2h3b3JrCndvbid0IHBpY2sgaXQgdXAKCk9uIFdlZCwgMjAyMC0xMS0yNSBhdCAx
-NToyNiAtMDUwMCwgSmVyZW15IENsaW5lIHdyb3RlOgo+IFRoaXMgc2VyaWVzIGZpeGVzIGEgbnVt
-YmVyIG9mIHVzZS1hZnRlci1mcmVlcyBpbiBub3V2ZWF1J3MgcG9zdGNsb3NlKCkKPiBoYW5kbGVy
-LiBJdCB3YXMgZGlzY292ZXJlZCBieSBwb2ludGluZyBJR1QncyBjb3JlX2hvdHVucGx1ZyB0ZXN0
-cyBhdCBhCj4gbm91dmVhdSBkZXZpY2UsIGJ1dCB0aGUgc3RlcHMgdG8gcmVwcm9kdWNlIGl0IGFy
-ZSBzaW1wbGU6Cj4gCj4gMS4gT3BlbiB0aGUgZGV2aWNlIGZpbGUKPiAyLiBVbmJpbmQgdGhlIGRy
-aXZlciBvciByZW1vdmUgdGhlIGRldmljZQo+IDMuIENsb3NlIHRoZSBmaWxlIG9wZW5lZCBpbiBz
-dGVwIDEuCj4gCj4gRHVyaW5nIHRoZSBkZXZpY2UgcmVtb3ZhbCwgdGhlIG5vdXZlYXVfZHJtIHN0
-cnVjdHVyZSBpcyBkZS1hbGxvY2F0ZWQsCj4gYnV0IGlzIGRlcmVmZXJlbmNlZCBpbiB0aGUgcG9z
-dGNsb3NlKCkgaGFuZGxlci4KPiAKPiBPbmUgb2J2aW91cyBzb2x1dGlvbiBpcyB0byBlbnN1cmUg
-YWxsIHRoZSBvcGVyYXRpb25zIGluIHRoZSBwb3N0Y2xvc2UoKQo+IGhhbmRsZXIgYXJlIHZhbGlk
-IGJ5IGV4dGVuZGluZyB0aGUgbGlmZXRpbWUgb2YgdGhlIG5vdXZlYXVfZHJtCj4gc3RydWN0dXJl
-LiBUaGlzIGlzIHBvc3NpYmxlIHdpdGggdGhlIG5ldyBkZXZtX2RybV9kZXZfYWxsb2MoKSBpbnRl
-cmZhY2UsCj4gYnV0IHRoZSBjaGFuZ2UgaXMgc29tZXdoYXQgaW52YXNpdmUgc28gSSB0aG91Z2h0
-IGl0IGJlc3QgdG8gc3VibWl0IHRoYXQKPiB3b3JrIHNlcGFyYXRlbHkuCj4gCj4gSW5zdGVhZCwg
-d2UgbWFrZSB1c2Ugb2YgdGhlIGRybV9kZXZfdW5wbHVnKCkgQVBJLCBjbGVhbiB1cCBhbGwgY2xp
-ZW50cwo+IGluIHRoZSBkZXZpY2UgcmVtb3ZhbCBjYWxsLCBhbmQgY2hlY2sgdG8gbWFrZSBzdXJl
-IHRoZSBkZXZpY2UgaGFzIG5vdAo+IGJlZW4gdW5wbHVnZ2VkIGluIHRoZSBwb3N0Y2xvc2UoKSBo
-YW5kbGVyLiBXaGlsZSB0aGlzIGRvZXMgbm90IGVuYWJsZQo+IGhvdC11bnBsdWcgc3VwcG9ydCBm
-b3Igbm91dmVhdSwgaXQncyBlbm91Z2ggdG8gYXZvaWQgY3Jhc2hpbmcgdGhlIGtlcm5lbAo+IGFu
-ZCBsZWFkcyB0byBhbGwgdGhlIGNvcmVfaG90dW5wbHVnIHRlc3RzIHRvIHBhc3MuCj4gCj4gVGhp
-cyBzZXJpZXMgcmVyb2xsIGFkZHJlc3NlcyBhIG1pc3NpbmcgbXV0ZXhfZGVzdHJveSgpIGNhbGwg
-YW5kIGEgdHlwbwo+IGluIGEgY29tbWl0IG1lc3NhZ2UuCj4gCj4gSmVyZW15IENsaW5lICgzKToK
-PiDCoCBkcm0vbm91dmVhdTogdXNlIGRybV9kZXZfdW5wbHVnKCkgZHVyaW5nIGRldmljZSByZW1v
-dmFsCj4gwqAgZHJtL25vdXZlYXU6IEFkZCBhIGRlZGljYXRlZCBtdXRleCBmb3IgdGhlIGNsaWVu
-dHMgbGlzdAo+IMKgIGRybS9ub3V2ZWF1OiBjbGVhbiB1cCBhbGwgY2xpZW50cyBvbiBkZXZpY2Ug
-cmVtb3ZhbAo+IAo+IMKgZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9kcm0uYyB8IDQy
-ICsrKysrKysrKysrKysrKysrKysrKysrLS0tLQo+IMKgZHJpdmVycy9ncHUvZHJtL25vdXZlYXUv
-bm91dmVhdV9kcnYuaCB8wqAgNSArKysrCj4gwqAyIGZpbGVzIGNoYW5nZWQsIDQyIGluc2VydGlv
-bnMoKyksIDUgZGVsZXRpb25zKC0pCj4gCgotLSAKU2luY2VyZWx5LAogICBMeXVkZSBQYXVsIChz
-aGUvaGVyKQogICBTb2Z0d2FyZSBFbmdpbmVlciBhdCBSZWQgSGF0CiAgIApOb3RlOiBJIGRlYWwg
-d2l0aCBhIGxvdCBvZiBlbWFpbHMgYW5kIGhhdmUgYSBsb3Qgb2YgYnVncyBvbiBteSBwbGF0ZS4g
-SWYgeW91J3ZlCmFza2VkIG1lIGEgcXVlc3Rpb24sIGFyZSB3YWl0aW5nIGZvciBhIHJldmlldy9t
-ZXJnZSBvbiBhIHBhdGNoLCBldGMuIGFuZCBJCmhhdmVuJ3QgcmVzcG9uZGVkIGluIGEgd2hpbGUs
-IHBsZWFzZSBmZWVsIGZyZWUgdG8gc2VuZCBtZSBhbm90aGVyIGVtYWlsIHRvIGNoZWNrCm9uIG15
-IHN0YXR1cy4gSSBkb24ndCBiaXRlIQoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX18KTm91dmVhdSBtYWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVz
-a3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9u
-b3V2ZWF1Cg==
+			       !!!Note!!!
+
+This isn't my patch series and I've only reviewed 2/3 of the patches so
+far, but I'm going to review the docs patch here the next chance I get.
+I'm just rebasing this until then, so hopefully we can get the first two
+patches of this into nouveau
+
+------------------------------------------------------------------------
+
+Hi folks,
+
+Currently, when the device is removed (or the driver is unbound) the
+nouveau_drm structure de-allocated. However, it's still accessible from
+and used by some DRM layer callbacks. For example, file handles can be
+closed after the device has been removed (physically or otherwise). This
+series converts the Nouveau device structure to be allocated and
+de-allocated with the devm_drm_dev_alloc() API.
+
+In the future, additional resources that should be bound to the lifetime
+of the drm_device can be added, and the drmm_add_action() APIs offer a
+nice hook for arbitrary cleanup actions before the drm_device is
+destroyed, so I suspect much of the current cleanup code in Nouveau
+would benefit from some refactoring to use this.
+
+Finally, although not *strictly* necessary for this series, I included
+some documentation for structures I investigated for this work.
+
+Jeremy Cline (3):
+  drm/nouveau: Use helper to convert nouveau_drm to drm_device
+  drm/nouveau: manage nouveau_drm lifetime with devres
+  drm/nouveau: begin documenting core nouveau structures
+
+ drivers/gpu/drm/nouveau/dispnv04/crtc.c     |  10 +-
+ drivers/gpu/drm/nouveau/dispnv50/base.c     |   2 +-
+ drivers/gpu/drm/nouveau/dispnv50/base507c.c |   7 +-
+ drivers/gpu/drm/nouveau/dispnv50/core.c     |   2 +-
+ drivers/gpu/drm/nouveau/dispnv50/core507d.c |   2 +-
+ drivers/gpu/drm/nouveau/dispnv50/curs.c     |   2 +-
+ drivers/gpu/drm/nouveau/dispnv50/curs507a.c |   5 +-
+ drivers/gpu/drm/nouveau/dispnv50/disp.c     |  16 +--
+ drivers/gpu/drm/nouveau/dispnv50/oimm.c     |   2 +-
+ drivers/gpu/drm/nouveau/dispnv50/oimm507b.c |   2 +-
+ drivers/gpu/drm/nouveau/dispnv50/ovly.c     |   2 +-
+ drivers/gpu/drm/nouveau/dispnv50/ovly507e.c |   5 +-
+ drivers/gpu/drm/nouveau/dispnv50/wimm.c     |   2 +-
+ drivers/gpu/drm/nouveau/dispnv50/wimmc37b.c |   2 +-
+ drivers/gpu/drm/nouveau/dispnv50/wndw.c     |   2 +-
+ drivers/gpu/drm/nouveau/dispnv50/wndwc37e.c |   5 +-
+ drivers/gpu/drm/nouveau/nouveau_bo.c        |  14 +--
+ drivers/gpu/drm/nouveau/nouveau_debugfs.c   |   9 +-
+ drivers/gpu/drm/nouveau/nouveau_display.c   |  16 +--
+ drivers/gpu/drm/nouveau/nouveau_dmem.c      |  17 +--
+ drivers/gpu/drm/nouveau/nouveau_drm.c       |  46 ++++----
+ drivers/gpu/drm/nouveau/nouveau_drv.h       | 111 +++++++++++++++++++-
+ drivers/gpu/drm/nouveau/nouveau_fbcon.c     |  19 ++--
+ drivers/gpu/drm/nouveau/nouveau_gem.c       |   8 +-
+ drivers/gpu/drm/nouveau/nouveau_svm.c       |   4 +-
+ drivers/gpu/drm/nouveau/nouveau_ttm.c       |  10 +-
+ drivers/gpu/drm/nouveau/nouveau_vga.c       |   8 +-
+ 27 files changed, 220 insertions(+), 110 deletions(-)
+
+-- 
+2.30.2
+
+_______________________________________________
+Nouveau mailing list
+Nouveau@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/nouveau
