@@ -1,52 +1,37 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id BDED134B33C
-	for <lists+nouveau@lfdr.de>; Sat, 27 Mar 2021 01:10:45 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id AC35634EF59
+	for <lists+nouveau@lfdr.de>; Tue, 30 Mar 2021 19:25:19 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D4E4C6F507;
-	Sat, 27 Mar 2021 00:10:40 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C8A6E6E94E;
+	Tue, 30 Mar 2021 17:25:15 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E89306F504
- for <nouveau@lists.freedesktop.org>; Sat, 27 Mar 2021 00:10:38 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1616803837;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=p+le+7o7WICus9ZcLLEMXNUCCrtxxyozGQvSzYxP59s=;
- b=gBwGiwu9HH/tRLmA9KlTQjFJAO5yRq9NHS4Qpzgd1l9+O+2yFwGkUyhhvBOCZiinsiB0Fn
- zOH2EFQX5MVeTFVdun5Y46WBiUFHFIU+PjgkoIrZ3CSqauBNDSOcSTSiyoDLZM1JOGf7x2
- kXkHxRtiNrdLAMA3npitkJ8Ed0ahT2g=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-597-J9RQ6Dm5MIaokVwDed9NIw-1; Fri, 26 Mar 2021 20:10:35 -0400
-X-MC-Unique: J9RQ6Dm5MIaokVwDed9NIw-1
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
- [10.5.11.23])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 7B425107ACCD;
- Sat, 27 Mar 2021 00:10:34 +0000 (UTC)
-Received: from Whitewolf.lyude.net (ovpn-114-133.rdu2.redhat.com
- [10.10.114.133])
- by smtp.corp.redhat.com (Postfix) with ESMTP id A8AEA1972B;
- Sat, 27 Mar 2021 00:10:33 +0000 (UTC)
-From: Lyude Paul <lyude@redhat.com>
-To: nouveau@lists.freedesktop.org
-Date: Fri, 26 Mar 2021 20:10:01 -0400
-Message-Id: <20210327001001.229093-4-lyude@redhat.com>
-In-Reply-To: <20210327001001.229093-1-lyude@redhat.com>
-References: <20210327001001.229093-1-lyude@redhat.com>
+Received: from szxga04-in.huawei.com (szxga04-in.huawei.com [45.249.212.190])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A99626F515;
+ Sat, 27 Mar 2021 01:59:04 +0000 (UTC)
+Received: from DGGEMS404-HUB.china.huawei.com (unknown [172.30.72.59])
+ by szxga04-in.huawei.com (SkyGuard) with ESMTP id 4F6hlb29WqznbSw;
+ Sat, 27 Mar 2021 09:56:27 +0800 (CST)
+Received: from thunder-town.china.huawei.com (10.174.179.202) by
+ DGGEMS404-HUB.china.huawei.com (10.3.19.204) with Microsoft SMTP Server id
+ 14.3.498.0; Sat, 27 Mar 2021 09:58:55 +0800
+From: Zhen Lei <thunder.leizhen@huawei.com>
+To: Ben Skeggs <bskeggs@redhat.com>, David Airlie <airlied@linux.ie>, "Daniel
+ Vetter" <daniel@ffwll.ch>, dri-devel <dri-devel@lists.freedesktop.org>,
+ nouveau <nouveau@lists.freedesktop.org>, linux-kernel
+ <linux-kernel@vger.kernel.org>
+Date: Sat, 27 Mar 2021 09:58:44 +0800
+Message-ID: <20210327015844.1868-1-thunder.leizhen@huawei.com>
+X-Mailer: git-send-email 2.26.0.windows.1
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
-Subject: [Nouveau] [PATCH v2 3/3] drm/nouveau: begin documenting core
- nouveau structures
+X-Originating-IP: [10.174.179.202]
+X-CFilter-Loop: Reflected
+X-Mailman-Approved-At: Tue, 30 Mar 2021 17:25:14 +0000
+Subject: [Nouveau] [PATCH 1/1] drm/nouveau/dmem: Remove duplicated header
+ file inclusion
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,148 +43,35 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
- "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
- <dri-devel@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>,
- Daniel Vetter <daniel@ffwll.ch>
+Cc: Zhen Lei <thunder.leizhen@huawei.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-From: Jeremy Cline <jcline@redhat.com>
+The header file <nvif/if000c.h> is already included above and can be
+removed here.
 
-Start on documentation for the Nouveau device structure and the NVIF
-client structure it uses. This documentation is not complete as the
-structures are non-trivial and I am not familiar with large portions of
-them.
-
-Signed-off-by: Jeremy Cline <jcline@redhat.com>
-Signed-off-by: Lyude Paul <lyude@redhat.com>
+Signed-off-by: Zhen Lei <thunder.leizhen@huawei.com>
 ---
- drivers/gpu/drm/nouveau/nouveau_drv.h | 67 +++++++++++++++++++++++++++
- 1 file changed, 67 insertions(+)
+ drivers/gpu/drm/nouveau/nouveau_dmem.c | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_drv.h b/drivers/gpu/drm/nouveau/nouveau_drv.h
-index 8eb133fd6df0..43d751d2445f 100644
---- a/drivers/gpu/drm/nouveau/nouveau_drv.h
-+++ b/drivers/gpu/drm/nouveau/nouveau_drv.h
-@@ -88,8 +88,20 @@ enum nouveau_drm_handle {
- 	NVDRM_NVSW    = 0x55550000,
- };
+diff --git a/drivers/gpu/drm/nouveau/nouveau_dmem.c b/drivers/gpu/drm/nouveau/nouveau_dmem.c
+index 92987daa5e17d02..f5cc057b123b8b0 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_dmem.c
++++ b/drivers/gpu/drm/nouveau/nouveau_dmem.c
+@@ -33,7 +33,6 @@
+ #include <nvif/if000c.h>
+ #include <nvif/if500b.h>
+ #include <nvif/if900b.h>
+-#include <nvif/if000c.h>
  
-+/**
-+ * struct nouveau_cli - A DRM-specific NVIF client.
-+ *
-+ * This encapsulates a NVIF client and is intended to be the sole interface
-+ * between the DRM APIs and NVKM. An instance of this structure is allocated
-+ * for each userspace client when they open the device file. Additionally,
-+ * there are several allocated strictly for the kernel's use.
-+ */
- struct nouveau_cli {
- 	struct nvif_client base;
-+
-+	/**
-+	 * @drm: A reference to the device that the client is associated with.
-+	 */
- 	struct nouveau_drm *drm;
- 	struct mutex mutex;
+ #include <nvhw/class/cla0b5.h>
  
-@@ -99,6 +111,9 @@ struct nouveau_cli {
- 	struct nouveau_vmm svm;
- 	const struct nvif_mclass *mem;
- 
-+	/**
-+	 * @head: The list entry for this client in the @drm device's list of clients.
-+	 */
- 	struct list_head head;
- 	void *abi16;
- 	struct list_head objects;
-@@ -106,13 +121,36 @@ struct nouveau_cli {
- 	char name[32];
- 
- 	struct work_struct work;
-+
-+	/**
-+	 * @worker: List of pending &struct nouveau_cli_work associated with this client.
-+	 */
- 	struct list_head worker;
-+
-+	/**
-+	 * @lock: Protects the @worker list. Additionally, this lock on the
-+	 * @drm.master instance is used to serialize destruction of the @base
-+	 * member in this structure, as well as the destruction of the &struct
-+	 * nvif_mem embedded in &struct nouveau_mem instances.
-+	 */
- 	struct mutex lock;
- };
- 
-+/**
-+ * struct nouveau_cli_work - A pending work item for an NVIF client.
-+ */
- struct nouveau_cli_work {
- 	void (*func)(struct nouveau_cli_work *);
-+
-+	/**
-+	 * @cli: Reference to the NVIF client this work belongs to.
-+	 */
- 	struct nouveau_cli *cli;
-+
-+	/**
-+	 * @head: The list entry for this work item in the &struct nouveau_cli
-+	 * worker list.
-+	 */
- 	struct list_head head;
- 
- 	struct dma_fence *fence;
-@@ -131,9 +169,32 @@ nouveau_cli(struct drm_file *fpriv)
- #include <nvif/object.h>
- #include <nvif/parent.h>
- 
-+/**
-+ * struct nouveau_drm - The nouveau-specific device structure.
-+ *
-+ * This structure is allocated for a device when it is probed and keeps track
-+ * of all the nouveau-specific device details. The lifetime of this structure
-+ * is the same as the lifetime of a &struct drm_device and is managed by the
-+ * DRM layer.
-+ */
- struct nouveau_drm {
-+	/**
-+	 * @parent: Implementation of the interface required to use the NVIF_DEBUG
-+	 * and NVIF_ERROR macros
-+	 */
- 	struct nvif_parent parent;
-+
-+	/**
-+	 * @master: This NVIF client is used to initialize the NVIF driver and used
-+	 * for TTM memory allocations. It is the root of the NVIF object tree.
-+	 */
- 	struct nouveau_cli master;
-+
-+	/**
-+	 * @client: This NVIF client is used by the DRM layer to interact with
-+	 * the NVKM layer for everything except TTM memory allocations. It, and
-+	 * all other clients, are children of the primary (@master) client.
-+	 */
- 	struct nouveau_cli client;
- 
- 	/**
-@@ -141,6 +202,12 @@ struct nouveau_drm {
- 	 */
- 	struct drm_device drm_dev;
- 
-+	/**
-+	 * @clients: List of all &struct nouveau_cli allocated for userspace
-+	 * associated with this DRM device. Clients are allocated when the DRM
-+	 * file is opened and deallocated when the file is closed. This list is
-+	 * protected by the mutex in @client.
-+	 */
- 	struct list_head clients;
- 
- 	u8 old_pm_cap;
 -- 
-2.30.2
+1.8.3
+
 
 _______________________________________________
 Nouveau mailing list
