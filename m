@@ -2,36 +2,61 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 26D3F34EF58
-	for <lists+nouveau@lfdr.de>; Tue, 30 Mar 2021 19:25:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8219B34C402
+	for <lists+nouveau@lfdr.de>; Mon, 29 Mar 2021 08:50:50 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5E4BC6E947;
-	Tue, 30 Mar 2021 17:25:15 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 80A806E0F2;
+	Mon, 29 Mar 2021 06:50:47 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from szxga07-in.huawei.com (szxga07-in.huawei.com [45.249.212.35])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A257D6F515;
- Sat, 27 Mar 2021 02:04:18 +0000 (UTC)
-Received: from DGGEMS404-HUB.china.huawei.com (unknown [172.30.72.58])
- by szxga07-in.huawei.com (SkyGuard) with ESMTP id 4F6htF4D8BzB0VB;
- Sat, 27 Mar 2021 10:02:13 +0800 (CST)
-Received: from thunder-town.china.huawei.com (10.174.179.202) by
- DGGEMS404-HUB.china.huawei.com (10.3.19.204) with Microsoft SMTP Server id
- 14.3.498.0; Sat, 27 Mar 2021 10:03:59 +0800
-From: Zhen Lei <thunder.leizhen@huawei.com>
-To: Ben Skeggs <bskeggs@redhat.com>, David Airlie <airlied@linux.ie>, "Daniel
- Vetter" <daniel@ffwll.ch>, dri-devel <dri-devel@lists.freedesktop.org>,
- nouveau <nouveau@lists.freedesktop.org>, linux-kernel
- <linux-kernel@vger.kernel.org>
-Date: Sat, 27 Mar 2021 10:03:48 +0800
-Message-ID: <20210327020348.1968-1-thunder.leizhen@huawei.com>
-X-Mailer: git-send-email 2.26.0.windows.1
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 880DF6E0F2;
+ Mon, 29 Mar 2021 06:50:46 +0000 (UTC)
+Received: by mail-ej1-x630.google.com with SMTP id u9so17688867ejj.7;
+ Sun, 28 Mar 2021 23:50:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to:user-agent;
+ bh=MRKoM7dLBS9DMoYGv5mFilj8qS/0VViXMQGlcQLXpXA=;
+ b=nLSWHKf5KAmj1oGujUv1uA9+7+PNBOeKPQb5KRjdmPRLgc2Vy3m8JTlf+wSsNuwwLD
+ 1CLQ3o2yXPwTBBqemFJn7JxtFsE0fQSr7TOIdnKHXwzYhE4K6Vz7//alWLAJ339ziNoM
+ +Dl/upjMwMrtkv6Nwb3fSQJhb4cqc3vhJ9V0r6eD92btN57tboCb2UUXPyrFjOAPsMkh
+ FlKGNnvmmUGs6+3s+52a7yyww57Is1RvCbzWg7k/cK4g4fZZoTFp/BCKBpY1mrrXT2gS
+ 07B8GAqHJKhd7Mo0idhmeQ4P3WV/MugJ5YHungvXhLB2D1UATEIgRLTdXH690rQaSPZ2
+ 3WDw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to:user-agent;
+ bh=MRKoM7dLBS9DMoYGv5mFilj8qS/0VViXMQGlcQLXpXA=;
+ b=VX44F9a/VFJJOyRpa3hCS++GNC6bnswve257KZYJF5VWbq8QARXbCvNpJogdR6//tT
+ kcsVbrWq7cTKRPwurZtmAiljV2c4ZASLVQSrCEB1Z7cE1m33D/rhT159qxpcYsMmjXjg
+ Rf7OUNUhwxz6NnLW5BU2al/x25ESFrwifigWWZRbihQsEVXj541PtlidW+fBWgR5/Qbf
+ e+zAY4ofqgz7DDTyh6+bYUk+ITIVoq8dj3MX7xor5B303LO8eZaItSGcQHt5ijcIlUnF
+ NIDx6qFugmspXZDS/Ov9E1SIjBuk7INxVdl7S4tScbsBVYzSlVz1ZJnGGiHyn0kV+0ZR
+ HriA==
+X-Gm-Message-State: AOAM530438dbe8SJpae86X6bBGfbWjl6ppOu2UxBFcdTCsqYGQPMwZt7
+ 0wu/qQGMrP6Txw5HGjDcErM=
+X-Google-Smtp-Source: ABdhPJzkQD/gxtEB7aJEpelFjec40cUy+ftj4/iW4yoqa2XdZRoReftjFH3rK8clufBajPxwC4spGA==
+X-Received: by 2002:a17:906:ecf3:: with SMTP id
+ qt19mr26693818ejb.467.1617000645203; 
+ Sun, 28 Mar 2021 23:50:45 -0700 (PDT)
+Received: from localhost ([62.96.65.119])
+ by smtp.gmail.com with ESMTPSA id c19sm8403325edu.20.2021.03.28.23.50.43
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 28 Mar 2021 23:50:44 -0700 (PDT)
+Date: Mon, 29 Mar 2021 08:51:09 +0200
+From: Thierry Reding <thierry.reding@gmail.com>
+To: Lyude Paul <lyude@redhat.com>
+Message-ID: <YGF43W1kppXmOTwh@orome.fritz.box>
+References: <20210326203807.105754-1-lyude@redhat.com>
+ <20210326203807.105754-3-lyude@redhat.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.174.179.202]
-X-CFilter-Loop: Reflected
-X-Mailman-Approved-At: Tue, 30 Mar 2021 17:25:14 +0000
-Subject: [Nouveau] [PATCH 1/1] drm/nouveau/nvenc: Remove duplicated header
- file inclusion
+In-Reply-To: <20210326203807.105754-3-lyude@redhat.com>
+User-Agent: Mutt/2.0.6 (98f8cb83) (2021-03-06)
+Subject: Re: [Nouveau] [PATCH v2 02/20] drm/tegra: Don't register DP AUX
+ channels before connectors
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -43,37 +68,77 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Zhen Lei <thunder.leizhen@huawei.com>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
+ intel-gfx@lists.freedesktop.org, open list <linux-kernel@vger.kernel.org>,
+ amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ Daniel Vetter <daniel@ffwll.ch>,
+ "open list:DRM DRIVERS FOR NVIDIA TEGRA" <linux-tegra@vger.kernel.org>
+Content-Type: multipart/mixed; boundary="===============0965460843=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-The header file "priv.h" is already included above and can be
-removed here.
 
-Signed-off-by: Zhen Lei <thunder.leizhen@huawei.com>
----
- drivers/gpu/drm/nouveau/nvkm/engine/nvenc/base.c | 1 -
- 1 file changed, 1 deletion(-)
+--===============0965460843==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="3/3ODl/4QwGFlK0b"
+Content-Disposition: inline
 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/nvenc/base.c b/drivers/gpu/drm/nouveau/nvkm/engine/nvenc/base.c
-index c39e797dc7c9425..cf5dcfda7b2538f 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/nvenc/base.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/nvenc/base.c
-@@ -21,7 +21,6 @@
-  */
- #include "priv.h"
- 
--#include "priv.h"
- #include <core/firmware.h>
- 
- static void *
--- 
-1.8.3
 
+--3/3ODl/4QwGFlK0b
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Fri, Mar 26, 2021 at 04:37:49PM -0400, Lyude Paul wrote:
+> As pointed out by the documentation for drm_dp_aux_register(),
+> drm_dp_aux_init() should be used in situations where the AUX channel for a
+> display driver can potentially be registered before it's respective DRM
+> driver. This is the case with Tegra, since the DP aux channel exists as a
+> platform device instead of being a grandchild of the DRM device.
+>=20
+> Since we're about to add a backpointer to a DP AUX channel's respective D=
+RM
+> device, let's fix this so that we don't potentially allow userspace to use
+> the AUX channel before we've associated it with it's DRM connector.
+>=20
+> Signed-off-by: Lyude Paul <lyude@redhat.com>
+> ---
+>  drivers/gpu/drm/tegra/dpaux.c | 11 ++++++-----
+>  1 file changed, 6 insertions(+), 5 deletions(-)
+
+Acked-by: Thierry Reding <treding@nvidia.com>
+
+--3/3ODl/4QwGFlK0b
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEEiOrDCAFJzPfAjcif3SOs138+s6EFAmBheN0ACgkQ3SOs138+
+s6E2+g/+IIUa7Z93weSOTP7EoyYiNnDgVw5B2vMst7Px4Nck336qqsZbv0J9ZQ0L
+h5P0mlUejyzOxAshnHtiYejeAXTN1GbyFUw6GlN+EEaZFoPcOSkSszhaO+UWNERE
+sIVhvhYtePlzA9dASwQtxjXYOHjWmBO1EcQaLCUjeI0bRAPKhlFjnpMM3xLRlegU
+k4yJCJIwUzRTaz7AHESzqZney+D89lF2yl8PO7xn176KWR/bJwW7cozPvzLoJCdh
+Qx8j3tXwGe11Ssc6EqUmuYOqNqIZQDLn+n+8PnEpRKebSr1UKj1907EtiUwsVPEJ
+BdeDhJKMqNKX9Rna/4Qj+ggLrhAPmlZOeMqHe6oretW9JBQGBd54GcijZVU65SbR
+LEaye5H1okuCEDPRCAswRBpkpOss8ri0BZtWecDzQvorSKq6pIcOL9pgBccasjHQ
+k4/d0bDTj4qR8S5iqYs7IChTSTKIpd5UUVYCyVuiVoVkr4j4QxW3/zvffr/RtxmN
+GEm3qwnJ6S6Ug3GH6Fsp7rNSWOxlhvEhet54IqJpAWUsKtGL3nCOEQ21xM87qUsh
+Bl+xjmYrHzwOokbIT6Ee1aB+4M7GsvVU1tO3sW/djawCF/LjdBJDa7ZBQTy6lhRV
+tRaDjz8d3XII/RohT4aLokZOpGop8lMWohyjqv8tWgiCpq5jWtU=
+=BnXA
+-----END PGP SIGNATURE-----
+
+--3/3ODl/4QwGFlK0b--
+
+--===============0965460843==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/nouveau
+
+--===============0965460843==--
