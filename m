@@ -1,63 +1,85 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7818734EF5A
-	for <lists+nouveau@lfdr.de>; Tue, 30 Mar 2021 19:25:21 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5B45534E135
+	for <lists+nouveau@lfdr.de>; Tue, 30 Mar 2021 08:28:03 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 954866E948;
-	Tue, 30 Mar 2021 17:25:15 +0000 (UTC)
-X-Original-To: nouveau@lists.freedesktop.org
-Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 659696E28B;
- Mon, 29 Mar 2021 07:08:36 +0000 (UTC)
-Received: by mail-ed1-x531.google.com with SMTP id h13so13016064eds.5;
- Mon, 29 Mar 2021 00:08:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to:user-agent;
- bh=nsgDV40GpgMjdMBehMLStcFSCLaYlMp03YLRRXFE+RA=;
- b=VxMZ7dSGQEdi8XOeWO1BicR5PJXdG9cKLNO6DN3n22tMui9UBI2ot+5PlRjW6qjCKv
- kkBbSAt5V7Y3j3LRRAHs9H5M1AASRp+Z0Hk5xJi1S4YuPya4yGJbKEyVjLVJwaF7yUSG
- 0dSr68sCJPigikcaTg4rQNISm5kZwfHkO1AA63bJmhSuCZoeaHbDHPH+bG98njKUO51r
- DWrZ9E5rabkL5rid66HlEq5PRQ6BbxQFNZiGztlvB/wDoo+FZaaKJ62YGqEi6DgrVzKY
- XHDB4llTrEMZTZoCXYzTSsygURQ0muMvLDFU3XRquFpzxTG+7rsX+wseLGmMjJiteyf9
- vZhg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to:user-agent;
- bh=nsgDV40GpgMjdMBehMLStcFSCLaYlMp03YLRRXFE+RA=;
- b=ZHJhLHJAH5p5ORFWsw4heTjKWRJ/ZeN+b7b4XoLCHpV2bUfGhqby//OrRJ7n7iJZwI
- G2IGjR8guE8GFuMzdDuz3gyMEh0LwLj6b1ES3w83frw1HRfJeFHjy9/qlw2hOTJKi4t1
- XTLSucVWdLGBe698XUz6yk434nCKwTo0Jo2rzDKTKR++95RvNX+k8WULYHjLUrPZe9mZ
- T1jZPIboVseSnV5D4y+2OqYtdTfLiGgqlg2rBdeupCg+msW0n3paOWUO3c0k8p0nrN+W
- 81Lh1Q8BIHN17NqEgqZ9+h4eeLQ/lrCkaLe1/lELbMH7oiVOQCJaZYlZ4MrKthX2LJN8
- rxTA==
-X-Gm-Message-State: AOAM533RbQ6QICig4fXluK11w9HdQQhcKGizx1me2JgJcSfliy6wdD1Y
- 1wwR8r9TBtLZNhOjuvek+K10VtI+7vI=
-X-Google-Smtp-Source: ABdhPJwEJT/07GJdbFQtJ2P6vX8qiUN2z0P2wCX/J/CoVqW4cmKzRx2ZrUQ7oHNCPgeOgptcmNi0Rw==
-X-Received: by 2002:a05:6402:31a7:: with SMTP id
- dj7mr27411505edb.33.1617001715049; 
- Mon, 29 Mar 2021 00:08:35 -0700 (PDT)
-Received: from localhost ([62.96.65.119])
- by smtp.gmail.com with ESMTPSA id n16sm8443196edr.42.2021.03.29.00.08.33
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 29 Mar 2021 00:08:34 -0700 (PDT)
-Date: Mon, 29 Mar 2021 09:08:59 +0200
-From: Thierry Reding <thierry.reding@gmail.com>
-To: Lyude Paul <lyude@redhat.com>
-Message-ID: <YGF9C284EOaf/WZP@orome.fritz.box>
-References: <20210326203807.105754-1-lyude@redhat.com>
- <20210326203807.105754-6-lyude@redhat.com>
+	by gabe.freedesktop.org (Postfix) with ESMTP id C0B0989F3C;
+	Tue, 30 Mar 2021 06:28:01 +0000 (UTC)
+X-Original-To: Nouveau@lists.freedesktop.org
+Delivered-To: Nouveau@lists.freedesktop.org
+Received: from EUR04-DB3-obe.outbound.protection.outlook.com
+ (mail-oln040092074010.outbound.protection.outlook.com [40.92.74.10])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 379EF89F3C
+ for <Nouveau@lists.freedesktop.org>; Tue, 30 Mar 2021 06:28:00 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=GZ1WX16wS2bcdOFD02STSdwV/9AUCdFISBXcTGa4piJLxCuV4ErsjJpS6mZWfo6rO5YClmiOiRWZTMOU7crtYeA+mDNVtRbDz4VKitya1PylxZthE1oJ836M2hbk4l2VWLg2odgnPsVNyoC1pU4X9sb8gtUzizyDXClIEnaVeDZJ7CviG/AzOEJ5+8xY25/ZXV1WwMPFBxHOU8Y5HFh99XzBRE/8nfdSeBAr/LRDuyuFfnvhYXs5wcqciPGbqxsU/Y1ApDIujgg+6cnfWhG1KF5xe1GdkzPsknie1r0/DCofoNRrbRDQofLMpTGE5TZFU8Vm9WJS4BYTTyOgnPEdPA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=VqygzBf8/v+Lh2tnNfj63PgYcQl3uckl5g5wx9acNg0=;
+ b=h44fOwaBX0PUU67Wvu53YEYjTZGchttKbEtIJn2574IWeUGGOtp9pxXNzIaZN1fF7lVWuFmq3hIOWtTPpEne2hGEUGTlvH7ca1GDriKQFlnGA50bvFG7G/H6eGNVl7pimZOLvCebYsz6D3DiZHhaFu9RdePuNmWEOFpiokuxug6f9Hekvilf2Op4SIGaPkNZCefGgi/+9ab3TE+rKcD/L1ahTAWlj4PYA3hgRH8z/9jh2leyMM5sCS13fJhbwkr5wRDw4WjH7qMjHpLkNDSkKyyurLlYp0cHDNLX8EZAr/EE5Pp2vNr1fyf1n7kFHQcE6neCB2Y2z55MzN1yZWbpfA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=outlook.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=VqygzBf8/v+Lh2tnNfj63PgYcQl3uckl5g5wx9acNg0=;
+ b=EHNQbKVyjGvBQfqEF/sSiFxRoqfezGctNyLSiBH+VcBdj/L5HfP34M81zULog1UMbs1BDQW5mSoUAcp3Zq1LiAzar/W4DkaPBHiauXEm61YMOmQah30ZVzZONLsH1uUWRH6Yk90I/6gQ2uPBV/D2DpoYqVKMZjmVxNX36Iguka4IvxSEJpIyO0oqds/dxDiHVwiqDmRiM4hPd6uK9+w7sKAiE/pJ3aCmG31Fnnji99c2XYzLOGORzr/F5Uz7wIdaRbMB1Jle7qMOpoySP7QSmR9uTd8fRVY0/JX+qzLPKYtcV3stEG3Pw14h2FpjYA/4sL3X8Y3WwhiGQ/sovlmDUw==
+Received: from VI1EUR04FT003.eop-eur04.prod.protection.outlook.com
+ (2a01:111:e400:7e0e::4f) by
+ VI1EUR04HT238.eop-eur04.prod.protection.outlook.com (2a01:111:e400:7e0e::377)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3977.29; Tue, 30 Mar
+ 2021 06:27:57 +0000
+Received: from AM5PR0201MB2386.eurprd02.prod.outlook.com
+ (2a01:111:e400:7e0e::4f) by VI1EUR04FT003.mail.protection.outlook.com
+ (2a01:111:e400:7e0e::110) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3977.25 via Frontend
+ Transport; Tue, 30 Mar 2021 06:27:57 +0000
+X-IncomingTopHeaderMarker: OriginalChecksum:872B75C759B52DC8C16BB8471CB32A37062E85CD3EF0E8F7EE002673A10B1575;
+ UpperCasedChecksum:415A7F47DDA2761A6D75E67A0A7EBC403612735B83AF2AB67E9F19638E27B2C3;
+ SizeAsReceived:8410; Count:44
+Received: from AM5PR0201MB2386.eurprd02.prod.outlook.com
+ ([fe80::8ce:a38f:6ef9:3dd7]) by AM5PR0201MB2386.eurprd02.prod.outlook.com
+ ([fe80::8ce:a38f:6ef9:3dd7%6]) with mapi id 15.20.3977.033; Tue, 30 Mar 2021
+ 06:27:57 +0000
+Date: Tue, 30 Mar 2021 08:27:50 +0200
+Message-ID: <AM5PR0201MB23868ACFBFA07B794174E1DCB57D9@AM5PR0201MB2386.eurprd02.prod.outlook.com>
+X-Android-Message-ID: <5b77309a-13e8-48c5-a1c3-309b68cba164@email.android.com>
+From: georges1897@outlook.com
+To: Nouveau@lists.freedesktop.org
+X-TMN: [0WBR3BQldVFvQlT0++vkhYuBl/77dDYZ]
+X-ClientProxiedBy: PR0P264CA0206.FRAP264.PROD.OUTLOOK.COM
+ (2603:10a6:100:1f::26) To AM5PR0201MB2386.eurprd02.prod.outlook.com
+ (2603:10a6:203:33::8)
+X-Microsoft-Original-Message-ID: <5b77309a-13e8-48c5-a1c3-309b68cba164@email.android.com>
 MIME-Version: 1.0
-In-Reply-To: <20210326203807.105754-6-lyude@redhat.com>
-User-Agent: Mutt/2.0.6 (98f8cb83) (2021-03-06)
-X-Mailman-Approved-At: Tue, 30 Mar 2021 17:25:14 +0000
-Subject: Re: [Nouveau] [PATCH v2 05/20] drm/dp: Add backpointer to
- drm_device in drm_dp_aux
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from [100.69.102.89] (193.57.125.106) by
+ PR0P264CA0206.FRAP264.PROD.OUTLOOK.COM (2603:10a6:100:1f::26) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.3977.26 via Frontend Transport; Tue, 30 Mar 2021 06:27:56 +0000
+X-MS-PublicTrafficType: Email
+X-IncomingHeaderCount: 44
+X-EOPAttributedMessage: 0
+X-MS-Office365-Filtering-Correlation-Id: 98c0c4f9-45ff-4d24-44c6-08d8f344f514
+X-MS-TrafficTypeDiagnostic: VI1EUR04HT238:
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: KDh8S+CQZd2zTX7OpEqiFU2TQujNpqW/VMMgbvCoA+5xHj+a8YPkNPV8/4SM4o3aZ67AzdCi/b3y6fQKVUl2r8ngVjpuNupZ4ZB7Rml5HJ4g9drub80ws71P+uxE8VsCBKMkWSNycMzPx6e7JkpJsv2rRaSRswy6mYLW5YUrQ6jUBkfjVjTlmltu6rEGQ3yxwqIIDV6t4D0Fzx6vOTrV+l1LOKdNivO+DSzpxR2twNKsxXfLOND2Q6eAfTdSxRkEhz5H3OFfUzSVflnkzwrvn88GipDgmyJUh4nXHDL67DQl3IpaBkxoLWvfYch6mxiTXKVAKzz02lz5qZepvcKNX5ElagdNh+xG7SCUP6Rcgj7jMEA622dSmScf6zoc8htwDJ+yum8YTsDGOCWtKbr4qw==
+X-MS-Exchange-AntiSpam-MessageData: Yb4QzPNT2BiSg6/oCqi5WM+faONHNLCYwa49Zi3iCaVga7AzI1YlsWDzeNkOhZbodUMtpHj/oqJuc/6UrG3sxOSBhPzxlHOLE2UPvNBdEPzo+QUwZ5gymTakboNC4k+u8VTlIL43b5sn0XjaP03n5g==
+X-OriginatorOrg: outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 98c0c4f9-45ff-4d24-44c6-08d8f344f514
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Mar 2021 06:27:57.3454 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-CrossTenant-AuthSource: VI1EUR04FT003.eop-eur04.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: Internet
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1EUR04HT238
+Subject: [Nouveau] SLI support for nv44
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,109 +91,32 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Neil Armstrong <narmstrong@baylibre.com>, David Airlie <airlied@linux.ie>,
- nouveau@lists.freedesktop.org,
- Guido =?utf-8?Q?G=C3=BCnther?= <agx@sigxcpu.org>,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- Oleg Vasilev <oleg.vasilev@intel.com>, dri-devel@lists.freedesktop.org,
- Andrzej Hajda <a.hajda@samsung.com>,
- Laurent Pinchart <Laurent.pinchart@ideasonboard.com>,
- Sam Ravnborg <sam@ravnborg.org>,
- Ville =?utf-8?B?U3lyasOkbMOk?= <ville.syrjala@linux.intel.com>,
- Marek Szyprowski <m.szyprowski@samsung.com>,
- Tomi Valkeinen <tomi.valkeinen@ti.com>,
- Rodrigo Siqueira <Rodrigo.Siqueira@amd.com>,
- Michal Simek <michal.simek@xilinx.com>, amd-gfx@lists.freedesktop.org,
- Vasily Khoruzhick <anarsoul@gmail.com>,
- "Jerry \(Fangzhi\) Zuo" <Jerry.Zuo@amd.com>,
- Luben Tuikov <luben.tuikov@amd.com>, Ben Skeggs <bskeggs@redhat.com>,
- Swapnil Jakhade <sjakhade@cadence.com>,
- Harry Wentland <harry.wentland@amd.com>, Imre Deak <imre.deak@intel.com>,
- "moderated list:ARM/ZYNQ ARCHITECTURE" <linux-arm-kernel@lists.infradead.org>,
- Daniel Vetter <daniel@ffwll.ch>, Jonas Karlman <jonas@kwiboo.se>,
- Leo Li <sunpeng.li@amd.com>, Lucas De Marchi <lucas.demarchi@intel.com>,
- intel-gfx@lists.freedesktop.org,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Joe Perches <joe@perches.com>,
- Yuti Amonkar <yamonkar@cadence.com>, Jani Nikula <jani.nikula@linux.intel.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>,
- "open list:DRM DRIVERS FOR NVIDIA TEGRA" <linux-tegra@vger.kernel.org>,
- Mikita Lipski <mikita.lipski@amd.com>, Sean Paul <sean@poorly.run>,
- "open list:DRM DRIVER FOR MSM ADRENO GPU" <linux-arm-msm@vger.kernel.org>,
- Matt Roper <matthew.d.roper@intel.com>,
- Jernej Skrabec <jernej.skrabec@siol.net>, Chris Park <Chris.Park@amd.com>,
- Eryk Brol <eryk.brol@amd.com>, Hyun Kwon <hyun.kwon@xilinx.com>,
- Jyri Sarha <jsarha@ti.com>, open list <linux-kernel@vger.kernel.org>,
- Robert Foss <robert.foss@linaro.org>, Julia Lawall <Julia.Lawall@inria.fr>,
- Rob Clark <robdclark@gmail.com>,
- Boris Brezillon <boris.brezillon@collabora.com>,
- Alex Deucher <alexander.deucher@amd.com>, Andy Yan <andy.yan@rock-chips.com>,
- "open list:DRM DRIVER FOR MSM ADRENO GPU" <freedreno@lists.freedesktop.org>,
- Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>
-Content-Type: multipart/mixed; boundary="===============1825941259=="
+Content-Type: multipart/mixed; boundary="===============0698121336=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+--===============0698121336==
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: base64
 
---===============1825941259==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="S4O2kq+aHqU/5PJ1"
-Content-Disposition: inline
+PG1ldGEgaHR0cC1lcXVpdj0iQ29udGVudC1UeXBlIiBjb250ZW50PSJ0ZXh0L2h0bWw7IGNoYXJz
+ZXQ9dXRmLTgiPjxkaXYgZGlyPSJhdXRvIj48ZGl2IGRpcj0iYXV0byI+SGksJm5ic3A7PC9kaXY+
+PGRpdiBkaXI9ImF1dG8iPkkgYW0gY3VycmVudGx5IHRoZSBoYXBweSBvd25lciBvZiBhIG5mb3Jj
+ZSA0IC0gU0xJIHdpdGggdHdvIDcxMDBncyBncmFwaGljcyBjYXJkcyBzZXR1cC4mbmJzcDs8L2Rp
+dj48ZGl2IGRpcj0iYXV0byI+U2luY2UgSSd2ZSByZWFkIG9uIHlvdXIgZmVhdHVyZXMgbWF0cml4
+IHRoYXQgc3VjaCBhIHNldHVwIGlzIHJhdGhlciB1bmNvbW1vbiBhbW9uZyBkZXZlbG9wZXJzLCBJ
+IHdvdWxkIGxpa2UgdG8gaGVscCB5b3UgaW1wbGVtZW50aW5nIFNMSSBmb3Igb2xkIEdlRm9yY2Ug
+Y2FyZHMgYXMgbXVjaCBhcyBJIGNhbi4gVGhlIGxhY2sgb2Ygc3VwcG9ydCBmb3IgbmV3ZXIga2Vy
+bmVscyBmcm9tIE52aWRpYSBoYXMgaW5kZWVkIG1hZGUgbXkgc3lzdGVtIG9ic29sZXRlIChJIGRv
+IGVuY291bnRlciBncmFwaGljYWwgZ2xpdGNoZXMgd2l0aCBtYW55IERFcykuPC9kaXY+PGRpdiBk
+aXI9ImF1dG8iPkkgY2FuIHJ1biB0ZXN0cyB3aXRoIG15IGhhcmR3YXJlLCB0cnkgbmV3IGRyaXZl
+cnMsIGFuZCBrbm93IHRoZSBiYXNpY3Mgb2YgQyBwcm9ncmFtbWluZyBpZiBuZWNlc3NhcnkuPC9k
+aXY+PGRpdiBkaXI9ImF1dG8iPjxicj48L2Rpdj48ZGl2IGRpcj0iYXV0byI+SWYgeW91IHRoaW5r
+IHRoYXQgSSBjb3VsZCBiZSBoZWxwZnVsIGluIGFueSB3YXksIGRvbid0IGhlc2l0YXRlIHRvIGNv
+bnRhY3QgbWUgYmFjay48L2Rpdj48ZGl2IGRpcj0iYXV0byI+PGJyPjwvZGl2PjxkaXYgZGlyPSJh
+dXRvIj5CZXN0IHJlZ2FyZHM8L2Rpdj48L2Rpdj4=
 
-
---S4O2kq+aHqU/5PJ1
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Fri, Mar 26, 2021 at 04:37:52PM -0400, Lyude Paul wrote:
-> This is something that we've wanted for a while now: the ability to
-> actually look up the respective drm_device for a given drm_dp_aux struct.
-> This will also allow us to transition over to using the drm_dbg_*() helpe=
-rs
-> for debug message printing, as we'll finally have a drm_device to referen=
-ce
-> for doing so.
->=20
-> Note that there is one limitation with this - because some DP AUX adapters
-> exist as platform devices which are initialized independently of their
-> respective DRM devices, one cannot rely on drm_dp_aux->drm_dev to always =
-be
-> non-NULL until drm_dp_aux_register() has been called. We make sure to poi=
-nt
-> this out in the documentation for struct drm_dp_aux.
->=20
-> Signed-off-by: Lyude Paul <lyude@redhat.com>
-> ---
-[...]
->  drivers/gpu/drm/tegra/dpaux.c                            | 1 +
-[...]
-
-Acked-by: Thierry Reding <treding@nvidia.com>
-
---S4O2kq+aHqU/5PJ1
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEEiOrDCAFJzPfAjcif3SOs138+s6EFAmBhfQgACgkQ3SOs138+
-s6HzSQ/9Eo9S9xJvfEMo3ZsjRgZiCwhHpK8p3ntNKOfVV0ipfpeo8vw4YguhWC10
-loGRu6CMa+hJqNW3xt/Bhjsj3Wu15gLGcW2igvKlQIr8aNWpssLD3lNELgd2ousG
-82a+SF/3ljYs/060sFVCTK782CM+kNBw0ODjoohQjNoO++D1Rr2T0oq85DR8SKcu
-K+dCQR1V/D7bwL9d2/M9UHM4i9hlOkGUKkFOre0x9FyFeOAAXu4q7dfOg9FCkcU/
-4nIFE8mzWkW4o/fNLiF757dB2llZXxOl+pXNOBye31oslqZxGI6tkJQsvof4sODq
-s9Eo0qjPjR0rIXZDkVJCScM7yOH2PrzCiVQFTLutTBVuJ6vDd3dmnyzOzRMeqU8h
-CRcPTECPt3lP77XvqptSH/qdGiylAy0nnIwbw+9/Q7ZZ4KQM6e9pcj/fiSqOocdv
-bz044P8GPgO18yExiKM4xun4K9t6vJ6MckuHTZEG+16DrRsj6ybdxjBosdBiDN2T
-OyusX77/sl2KXr9fHW+tWwrDavb7GJ8jpJzZqyxUJa5Tb/ZeVzoScwiSfsLV62Nb
-JXM8KHUhdfKqOa9Yefaf2O4yGFwcF6PLpKlTPw73PlNqEyhxEBLDqFgb5q2pEXLF
-uo9LCn/Bju7B/15eqK58g9OAN7no8PxXCmaiO7y6w4fjqsFPTjI=
-=4qxj
------END PGP SIGNATURE-----
-
---S4O2kq+aHqU/5PJ1--
-
---===============1825941259==
+--===============0698121336==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -182,4 +127,4 @@ Nouveau mailing list
 Nouveau@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/nouveau
 
---===============1825941259==--
+--===============0698121336==--
