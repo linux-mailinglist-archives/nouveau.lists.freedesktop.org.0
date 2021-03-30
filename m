@@ -2,56 +2,44 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 08E3634EF5B
-	for <lists+nouveau@lfdr.de>; Tue, 30 Mar 2021 19:25:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 99A9B34E9D4
+	for <lists+nouveau@lfdr.de>; Tue, 30 Mar 2021 16:05:09 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 057BA6E951;
-	Tue, 30 Mar 2021 17:25:16 +0000 (UTC)
-X-Original-To: nouveau@lists.freedesktop.org
-Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pf1-x436.google.com (mail-pf1-x436.google.com
- [IPv6:2607:f8b0:4864:20::436])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0A9236E8AE
- for <nouveau@lists.freedesktop.org>; Tue, 30 Mar 2021 11:19:43 +0000 (UTC)
-Received: by mail-pf1-x436.google.com with SMTP id g15so11950652pfq.3
- for <nouveau@lists.freedesktop.org>; Tue, 30 Mar 2021 04:19:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=nEiq5VYqidlia0rfaVKXey2aQI1J0UOeUfwbZ7SzFqw=;
- b=qIay2yJaGw8H+hG15KImlYeu0r6L9MLLcQDEnZF2qFdTW2zSpQ40IXg+/vxlnJQz4o
- TKzi5YqlKrIHttRWaLvFbdM20gKQ/igZVcwm8SFzdsf0/GzVTOyvvDeB6kqpBolWhn33
- iI+TCXiaVJhMe/oW7DCLEON36LzdAAwFwyEShryYOFQyky1isZ0YY5RVfN5W3oiAYvwy
- 8+KnWX/nQwEbJaqACWTSuM18VOAT1ks9X9zr7SchWYDgwTLwBD/knap1CJ7Ca9tlGG8b
- sFpNlx44sNZxtyb4faahEv9qJLV1qWz1e1po03itPLigsO5ao0DVK7AqSPfVLMue7R6H
- nwTg==
+	by gabe.freedesktop.org (Postfix) with ESMTP id 2150E6E903;
+	Tue, 30 Mar 2021 14:05:07 +0000 (UTC)
+X-Original-To: Nouveau@lists.freedesktop.org
+Delivered-To: Nouveau@lists.freedesktop.org
+Received: from mail-il1-f179.google.com (mail-il1-f179.google.com
+ [209.85.166.179])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 911516E903
+ for <Nouveau@lists.freedesktop.org>; Tue, 30 Mar 2021 14:05:05 +0000 (UTC)
+Received: by mail-il1-f179.google.com with SMTP id y17so14249384ila.6
+ for <Nouveau@lists.freedesktop.org>; Tue, 30 Mar 2021 07:05:05 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=nEiq5VYqidlia0rfaVKXey2aQI1J0UOeUfwbZ7SzFqw=;
- b=am1PR2grKv47OFyUVOI9ZDyxe12HhaF+LgukKdvsW1IFst8OsvVhj36dKsmv1lAFxb
- jDZWvGPX316oqTf4gDJ6cYFP5g8jHBDDPvpD2Gy9x3Hhid5NBXoXINM7SkdcsS4H3fuX
- 7U/t/NdYs3Etj88v8WzYej3iXesugyaf82h45hhgv8DWWXKRJRjZpscFmQyWq9ohly1x
- wOwYuk0CX4FkAlDsyzGW/wt+/NN+J0/StqdRdvrpLe80UKIMd6Ty0hllnLglwgp0pG4W
- IlJsLbI7JwtroZApO0KwEpYXojJgo5QCdYFYSwvEUbcNzUr66NDMv6fhdiOSrnQJLNOR
- Cpww==
-X-Gm-Message-State: AOAM530H690ZDisHBjcadu389UwoVqL++Y5DcZngq9REj9VALhr9g8nt
- u69VlJPZZbkTMfLsuyV5YsLoLgL6/fP4iGPJ8Qh3Fg==
-X-Google-Smtp-Source: ABdhPJxq5q/aaT+6jdvgQQdbDwMNlvYfZjAmKD/2J/yR3c6DqBDMvry2T/Awy6EWGZ+THIsQHdyfhPbS801PyKVA3nE=
-X-Received: by 2002:a05:6a00:b54:b029:207:2a04:7b05 with SMTP id
- p20-20020a056a000b54b02902072a047b05mr29651828pfo.12.1617103182535; Tue, 30
- Mar 2021 04:19:42 -0700 (PDT)
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=ZJTERZpInHvfX1WgVDfK/+91Wtfi/tX2sp94j2mcXS0=;
+ b=qyouzxt2or6wak0ocOygma+nbg7NINT5eg21phwTaqpaFgGhHtygf1Z47Zep6PdMwW
+ 9tOtBKGmstqfFOUf2OyuK3JOhqmywtq6NtSu6OIwXjxcq3UPGJd3gU0y8doXbVumy/nl
+ hACqrrNUr8jVxBNzQLbdrEXjJSSNmwYbeWm3Hi4Gdd8o7NCIRxZnHVHloUZUfzDC5nEa
+ Lc+EH5stUib1Vgolv65q4upAdgAqW7fygK4Zqx9tJGQQsIbrVQUReQX+9IVEzbCUe9Dj
+ 5QYW9Kl3GtfKNGTG4ljY7XETa6XSOc224MBHUaSuY9Gm+EeUz5PC5eumGo7jVF/lkN85
+ xWFA==
+X-Gm-Message-State: AOAM532kuiDl1UCNOasVvj46o0/orEovZqjC7ScR7MpJYSG8d7qx0YG8
+ dUUDXYlnGWG1yutdeQOpzuwYFQeR+gUHNcZMoz0=
+X-Google-Smtp-Source: ABdhPJzEg7ZDkx7GRgEMJSAjvQMymRI2j/hvoygjOL/Yh5U7Rt6WpwURhCGN0oXR/womUMMe0SzTsAAyT0BW32Bbrb4=
+X-Received: by 2002:a92:6a0c:: with SMTP id f12mr25691677ilc.117.1617113104852; 
+ Tue, 30 Mar 2021 07:05:04 -0700 (PDT)
 MIME-Version: 1.0
-References: <20210326203807.105754-1-lyude@redhat.com>
- <20210326203807.105754-21-lyude@redhat.com>
-In-Reply-To: <20210326203807.105754-21-lyude@redhat.com>
-From: Robert Foss <robert.foss@linaro.org>
-Date: Tue, 30 Mar 2021 13:19:31 +0200
-Message-ID: <CAG3jFyvEvb=YWopYUmi1bf=fe3ZX7VmtvnnmT5dHcNjLhHvsQg@mail.gmail.com>
-To: Lyude Paul <lyude@redhat.com>
-X-Mailman-Approved-At: Tue, 30 Mar 2021 17:25:14 +0000
-Subject: Re: [Nouveau] [PATCH v2 20/20] drm/dp_mst: Convert
- drm_dp_mst_topology.c to drm_err()/drm_dbg*()
+References: <AM5PR0201MB23868ACFBFA07B794174E1DCB57D9@AM5PR0201MB2386.eurprd02.prod.outlook.com>
+ <CACO55ttjWMnSgF9gEtCFH9NU+X=-62gbmmYbawtJeUjGDunBCw@mail.gmail.com>
+In-Reply-To: <CACO55ttjWMnSgF9gEtCFH9NU+X=-62gbmmYbawtJeUjGDunBCw@mail.gmail.com>
+From: Ilia Mirkin <imirkin@alum.mit.edu>
+Date: Tue, 30 Mar 2021 10:04:53 -0400
+Message-ID: <CAKb7Uvh8UDP3VbayNxx4Zygm31Gq66KHS+rnz5+C6v1U2PqvjA@mail.gmail.com>
+To: Karol Herbst <kherbst@redhat.com>
+Subject: Re: [Nouveau] SLI support for nv44
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,76 +51,55 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: dri-devel <dri-devel@lists.freedesktop.org>,
- David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
- intel-gfx@lists.freedesktop.org,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- open list <linux-kernel@vger.kernel.org>, Maxime Ripard <mripard@kernel.org>,
- amd-gfx@lists.freedesktop.org, Daniel Vetter <daniel@ffwll.ch>
+Cc: nouveau <Nouveau@lists.freedesktop.org>, georges1897@outlook.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hey Lyude,
-
-This patch looks good, but I have one question below. With it
-addressed, feel free to add my r-b.
-
-Reviewed-by: Robert Foss <robert.foss@linaro.org>
-
+On Tue, Mar 30, 2021 at 4:25 AM Karol Herbst <kherbst@redhat.com> wrote:
 >
-> -static bool drm_dp_sideband_parse_req(struct drm_dp_sideband_msg_rx *raw,
-> +static bool drm_dp_sideband_parse_req(const struct drm_dp_mst_topology_mgr *mgr,
-> +                                     struct drm_dp_sideband_msg_rx *raw,
->                                       struct drm_dp_sideband_msg_req_body *msg)
->  {
->         memset(msg, 0, sizeof(*msg));
-> @@ -1117,12 +1125,12 @@ static bool drm_dp_sideband_parse_req(struct drm_dp_sideband_msg_rx *raw,
+> On Tue, Mar 30, 2021 at 8:28 AM <georges1897@outlook.com> wrote:
+> >
+> > Hi,
+> > I am currently the happy owner of a nforce 4 - SLI with two 7100gs graphics cards setup.
+> > Since I've read on your features matrix that such a setup is rather uncommon among developers, I would like to help you implementing SLI for old GeForce cards as much as I can. The lack of support for newer kernels from Nvidia has indeed made my system obsolete (I do encounter graphical glitches with many DEs).
+> > I can run tests with my hardware, try new drivers, and know the basics of C programming if necessary.
+> >
+> > If you think that I could be helpful in any way, don't hesitate to contact me back.
+> >
 >
->         switch (msg->req_type) {
->         case DP_CONNECTION_STATUS_NOTIFY:
-> -               return drm_dp_sideband_parse_connection_status_notify(raw, msg);
-> +               return drm_dp_sideband_parse_connection_status_notify(mgr, raw, msg);
->         case DP_RESOURCE_STATUS_NOTIFY:
-> -               return drm_dp_sideband_parse_resource_status_notify(raw, msg);
-> +               return drm_dp_sideband_parse_resource_status_notify(mgr, raw, msg);
->         default:
-> -               DRM_ERROR("Got unknown request 0x%02x (%s)\n", msg->req_type,
-> -                         drm_dp_mst_req_type_str(msg->req_type));
-> +               drm_err(mgr->dev, "Got unknown request 0x%02x (%s)\n",
-> +                       msg->req_type, drm_dp_mst_req_type_str(msg->req_type));
->                 return false;
->         }
->  }
->
+> well, SLI is really low priority, so unless somebody is willing to
+> reverse engineer the nvidia driver and implement the code in nouveau,
+> I highly doubt there will be any progress on SLI in the near or far
+> future. So if you want to help out, you'd do the full thing as there
+> is nobody working on SLI. Some bits might already be reverse
+> engineered though.
 
-.. snip ..
+The tricky bit with SLI is how to split up the work. The original
+Voodoo2 SLI was great -- the renderer would build up the scene, and
+both boards would do the render, but alternate scanlines of what they
+actually computed, effectively doing half the work. The specific
+method of splitting doesn't matter, but the important part is that the
+splitting is done. However with more modern software, you might have
+an intermediate render, e.g. first you render a texture, then you use
+that texture for the final render, then you have to recombine the two
+render "halves" on both GPUs in order for them to have access to it
+for the final render. This reduces SLI's effectiveness, and makes it
+much trickier to manage.
 
-> @@ -4118,12 +4121,12 @@ static int drm_dp_mst_handle_up_req(struct drm_dp_mst_topology_mgr *mgr)
->
->         INIT_LIST_HEAD(&up_req->next);
->
-> -       drm_dp_sideband_parse_req(&mgr->up_req_recv, &up_req->msg);
-> +       drm_dp_sideband_parse_req(mgr, &mgr->up_req_recv, &up_req->msg);
+If you wanted to improve the situation with that generation of
+hardware, I'd definitely focus more on making it conform to GL 2.1.
+This is a problem on which you can make measurable progress on. There
+are a number of shortcomings there, and I think fixing them will help
+resolve some of the issues you see with DEs. This is not an extremely
+easy task -- if it were, it'd be done already. If you're interested in
+diving in, join #nouveau on irc.freenode.net and we can talk further
+about your abilities, goals, and next steps.
 
-drm_dp_sideband_parse_req() is only called here, and the function
-arguments could probably stand to have `&mgr->up_req_recv` removed
-(here and in the func. declaration) since the same data structure is
-accessible through the `mgr` pointer inside of
-drm_dp_sideband_parse_req(). I guess this is a matter of taste, so
-feel free to do what you want with this.
+Cheers,
 
->
->         if (up_req->msg.req_type != DP_CONNECTION_STATUS_NOTIFY &&
->             up_req->msg.req_type != DP_RESOURCE_STATUS_NOTIFY) {
-> -               DRM_DEBUG_KMS("Received unknown up req type, ignoring: %x\n",
-> -                             up_req->msg.req_type);
-> +               drm_dbg_kms(mgr->dev, "Received unknown up req type, ignoring: %x\n",
-> +                           up_req->msg.req_type);
->                 kfree(up_req);
->                 goto out;
->         }
+  -ilia
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
