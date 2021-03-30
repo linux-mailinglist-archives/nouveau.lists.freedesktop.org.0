@@ -1,65 +1,58 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 05D2F34E318
-	for <lists+nouveau@lfdr.de>; Tue, 30 Mar 2021 10:25:04 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2194534EF5F
+	for <lists+nouveau@lfdr.de>; Tue, 30 Mar 2021 19:25:26 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 451466E879;
-	Tue, 30 Mar 2021 08:25:02 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 2652F6E952;
+	Tue, 30 Mar 2021 17:25:16 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [63.128.21.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8FEEE6E879
- for <nouveau@lists.freedesktop.org>; Tue, 30 Mar 2021 08:25:00 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1617092699;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=b5Rr58Hbc63Cgp3a6e/yK918318YTg4gYMgJF0Ngs9w=;
- b=TjyepuBWJbG7dKedFJ35Ot7y8Dw8KMkTHP6iygJf17inF1BVn+zJPYoCY+LqEpO0V7fNEZ
- nHJOz8ZBtS9bMotGQwUgW4F5Zkv/pEYVL8STq1aD7w2t4ZxspMKn3h+MRUAHlbFRXZ28oN
- 0YyFW0ytUx9i2JK5TvpvGR1o5DHtirY=
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-552-CV9dBgiDO2SVp9xS_EqIyQ-1; Tue, 30 Mar 2021 04:24:54 -0400
-X-MC-Unique: CV9dBgiDO2SVp9xS_EqIyQ-1
-Received: by mail-wm1-f70.google.com with SMTP id a63so243019wmd.8
- for <Nouveau@lists.freedesktop.org>; Tue, 30 Mar 2021 01:24:53 -0700 (PDT)
+Received: from mail-pj1-x102d.google.com (mail-pj1-x102d.google.com
+ [IPv6:2607:f8b0:4864:20::102d])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A7CCD6E8AD
+ for <nouveau@lists.freedesktop.org>; Tue, 30 Mar 2021 10:43:26 +0000 (UTC)
+Received: by mail-pj1-x102d.google.com with SMTP id
+ lr1-20020a17090b4b81b02900ea0a3f38c1so1117892pjb.0
+ for <nouveau@lists.freedesktop.org>; Tue, 30 Mar 2021 03:43:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=inEEvxoI2d27PWTByb00t7709zab101mRTK+HEEURs0=;
+ b=C9+RPFkWx1dnLku0VJzXhT4WCqoHsMPAfkkwl/4KohDQakhhONCUx+woSyEwYjrpXR
+ t1d16MDlzS32+twkwF9bbNrzqgVVnTIfoI0AZogYL4G1S7OgpeJg0emu3T5/HWp5kcJG
+ ++epmYQmqILHMzY2hL2QmPVz7uTVYnSW6ybUpM4NE/4ka6AX9/8CrsJwa6V5+njYVIo+
+ XgbVwDjQ2vtltDtglB4fNijvaQUZc0s53NH8e1EYls6/XbWYbhbOWqh0zjfmI0VBaOGj
+ vhK9ArLDxUL+ZjLu/rXXyDanwAeMXX50oJ08dRer+OEiWgpVZHK0JFYQd9TBlKlb28DY
+ jk6A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=b5Rr58Hbc63Cgp3a6e/yK918318YTg4gYMgJF0Ngs9w=;
- b=V833Vq/5A42JBQiW8wJ04ZtWtUyAAdm8BBjDgmblFRkDYTLhDw8usuX7WeQtvlCddZ
- htJ5+CwiDoJoiez/dPW7b6Z9kkgbxPzudrJ/HbxP5SuGV0Pvp7a7fiFnLAtp4tOVEV7G
- t8b+ko0nufrQbB8YPtlLg7qlhX29TDstMiuYvLCeA779hptethpBCjsGAUTuaIq4tdez
- YSblQpBLyfOqAg8O5P3Ep/OxjdNGWxMDCku+sn1Ho0XQ5uHaAIr8I64LrHoQGcHJZqkV
- eFnz6aPaztWRJHhbSTvVthS41p2bDGGLdIEwg0YVPi9LsRoSidNjxtH/+XB36/IpUilh
- XgVA==
-X-Gm-Message-State: AOAM532SOPxiPlMerPCkbC4Zf/ZD/oOcIcrQZKoWKYW2TpQrlQDXHgBx
- pBXp2CS8bpMiwrF1QvB/K5ZLN769YPPACHVGb4jKQ2fhqQAePg3VTXFadruHHPEPsDsUc86KNoh
- C5RBLMZNLmM4Dw1VcipL3pHZH1AMW/QRuH6dQgB4vjA==
-X-Received: by 2002:a1c:e184:: with SMTP id y126mr2785669wmg.163.1617092692840; 
- Tue, 30 Mar 2021 01:24:52 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJw09dZAHnan2rZojxHuI26bfN6xik5M0Oec6prQi3TzKIztSEtiG1hTiDLJPuV4jsLgoiLf9/Bi6Ld87Wn3EwA=
-X-Received: by 2002:a1c:e184:: with SMTP id y126mr2785648wmg.163.1617092692644; 
- Tue, 30 Mar 2021 01:24:52 -0700 (PDT)
+ :message-id:subject:to:cc;
+ bh=inEEvxoI2d27PWTByb00t7709zab101mRTK+HEEURs0=;
+ b=BafOUcvTzuve/PdM3QLLThWJ51BrIzSeOIod7AgC9mD2J+ZuidAUt2xlLreY0uladi
+ h+9dRBYuPrDv8ngLl0A6BKrgC4UfQw3+Z2rbPCR/SIa+69DlOXgfBZ28zBpEylMPtvGd
+ JGAGbNPnc2eX8CkBPZR1AkP1kwdjSjf2c7vJ1WgDPGI6W5HM73UCrNY1hvXJn0n7wmJ1
+ tJWG+M8SxltFpe6SnK/Zis9brs0ctayvukMN77Vnbl4yz9zaEwAZCsb8fARMr7DkjZiN
+ 0s5jzu+VA+3zM31XJ5po2ZXAX79X97ENQZHhC2LvnIaU1/aBkT751/oIyrABzd2jrMFd
+ 7rgQ==
+X-Gm-Message-State: AOAM53292vCFK07I2nWKcWRviIH6pLI3mcIC0sV2KLgNnFETmdV6qapc
+ JlaHsJ+v3KSoVNwFnhIDRDcfzDgO7YEb6AyCI4Lheg==
+X-Google-Smtp-Source: ABdhPJxPMfsifg57CMk+e08YOVt3TzMww6aMvw5ulnMzAx23GI1ES2FVCsm8qjLz2RBA6UgJxREJNfH8cDlZ1xM4T2Y=
+X-Received: by 2002:a17:902:e752:b029:e6:822c:355c with SMTP id
+ p18-20020a170902e752b02900e6822c355cmr32807495plf.69.1617101006157; Tue, 30
+ Mar 2021 03:43:26 -0700 (PDT)
 MIME-Version: 1.0
-References: <AM5PR0201MB23868ACFBFA07B794174E1DCB57D9@AM5PR0201MB2386.eurprd02.prod.outlook.com>
-In-Reply-To: <AM5PR0201MB23868ACFBFA07B794174E1DCB57D9@AM5PR0201MB2386.eurprd02.prod.outlook.com>
-From: Karol Herbst <kherbst@redhat.com>
-Date: Tue, 30 Mar 2021 10:24:42 +0200
-Message-ID: <CACO55ttjWMnSgF9gEtCFH9NU+X=-62gbmmYbawtJeUjGDunBCw@mail.gmail.com>
-To: georges1897@outlook.com
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=kherbst@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Subject: Re: [Nouveau] SLI support for nv44
+References: <20210326203807.105754-1-lyude@redhat.com>
+ <20210326203807.105754-8-lyude@redhat.com>
+In-Reply-To: <20210326203807.105754-8-lyude@redhat.com>
+From: Robert Foss <robert.foss@linaro.org>
+Date: Tue, 30 Mar 2021 12:43:15 +0200
+Message-ID: <CAG3jFyvK6bk5mF_Jp6w9HpN2rDAPKkdHKbQMRKiW6gGKdR9-Yw@mail.gmail.com>
+To: Lyude Paul <lyude@redhat.com>
+X-Mailman-Approved-At: Tue, 30 Mar 2021 17:25:14 +0000
+Subject: Re: [Nouveau] [PATCH v2 07/20] drm/print: Fixup
+ DRM_DEBUG_KMS_RATELIMITED()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,35 +64,88 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau <Nouveau@lists.freedesktop.org>
+Cc: dri-devel <dri-devel@lists.freedesktop.org>,
+ David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
+ intel-gfx@lists.freedesktop.org,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ open list <linux-kernel@vger.kernel.org>, Maxime Ripard <mripard@kernel.org>,
+ amd-gfx@lists.freedesktop.org, Daniel Vetter <daniel@ffwll.ch>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, Mar 30, 2021 at 8:28 AM <georges1897@outlook.com> wrote:
->
-> Hi,
-> I am currently the happy owner of a nforce 4 - SLI with two 7100gs graphics cards setup.
-> Since I've read on your features matrix that such a setup is rather uncommon among developers, I would like to help you implementing SLI for old GeForce cards as much as I can. The lack of support for newer kernels from Nvidia has indeed made my system obsolete (I do encounter graphical glitches with many DEs).
-> I can run tests with my hardware, try new drivers, and know the basics of C programming if necessary.
->
-> If you think that I could be helpful in any way, don't hesitate to contact me back.
->
+Hey Lyude,
 
-well, SLI is really low priority, so unless somebody is willing to
-reverse engineer the nvidia driver and implement the code in nouveau,
-I highly doubt there will be any progress on SLI in the near or far
-future. So if you want to help out, you'd do the full thing as there
-is nobody working on SLI. Some bits might already be reverse
-engineered though.
+I'm seeing no issues with this patch and the reasoning behind the
+patch is sound to me.
 
-> Best regards
-> _______________________________________________
-> Nouveau mailing list
-> Nouveau@lists.freedesktop.org
-> https://lists.freedesktop.org/mailman/listinfo/nouveau
+Reviewed-by: Robert Foss <robert.foss@linaro.org>
 
+On Fri, 26 Mar 2021 at 21:39, Lyude Paul <lyude@redhat.com> wrote:
+>
+> Since we're about to move drm_dp_helper.c over to drm_dbg_*(), we'll want
+> to make sure that we can also add ratelimited versions of these macros in
+> order to retain some of the previous debugging output behavior we had.
+>
+> However, as I was preparing to do this I noticed that the current
+> rate limited macros we have are kind of bogus. It looks like when I wrote
+> these, I didn't notice that we'd always be calling __ratelimit() even if
+> the debugging message we'd be printing would normally be filtered out due
+> to the relevant DRM debugging category being disabled.
+>
+> So, let's fix this by making sure to check drm_debug_enabled() in our
+> ratelimited macros before calling __ratelimit(), and start using
+> drm_dev_printk() in order to print debugging messages since that will save
+> us from doing a redundant drm_debug_enabled() check. And while we're at it,
+> let's move the code for this into another macro that we can reuse for
+> defining new ratelimited DRM debug macros more easily.
+>
+> v2:
+> * Make sure to use tabs where possible in __DRM_DEFINE_DBG_RATELIMITED()
+>
+> Signed-off-by: Lyude Paul <lyude@redhat.com>
+> Cc: Robert Foss <robert.foss@linaro.org>
+> ---
+>  include/drm/drm_print.h | 20 ++++++++++++--------
+>  1 file changed, 12 insertions(+), 8 deletions(-)
+>
+> diff --git a/include/drm/drm_print.h b/include/drm/drm_print.h
+> index f32d179e139d..a3c58c941bdc 100644
+> --- a/include/drm/drm_print.h
+> +++ b/include/drm/drm_print.h
+> @@ -524,16 +524,20 @@ void __drm_err(const char *format, ...);
+>  #define DRM_DEBUG_DP(fmt, ...)                                         \
+>         __drm_dbg(DRM_UT_DP, fmt, ## __VA_ARGS__)
+>
+> -
+> -#define DRM_DEBUG_KMS_RATELIMITED(fmt, ...)                            \
+> -({                                                                     \
+> -       static DEFINE_RATELIMIT_STATE(_rs,                              \
+> -                                     DEFAULT_RATELIMIT_INTERVAL,       \
+> -                                     DEFAULT_RATELIMIT_BURST);         \
+> -       if (__ratelimit(&_rs))                                          \
+> -               drm_dev_dbg(NULL, DRM_UT_KMS, fmt, ##__VA_ARGS__);      \
+> +#define __DRM_DEFINE_DBG_RATELIMITED(category, drm, fmt, ...)                                  \
+> +({                                                                                             \
+> +       static DEFINE_RATELIMIT_STATE(rs_, DEFAULT_RATELIMIT_INTERVAL, DEFAULT_RATELIMIT_BURST);\
+> +       const struct drm_device *drm_ = (drm);                                                  \
+> +                                                                                               \
+> +       if (drm_debug_enabled(DRM_UT_ ## category) && __ratelimit(&rs_))                        \
+> +               drm_dev_printk(drm_ ? drm_->dev : NULL, KERN_DEBUG, fmt, ## __VA_ARGS__);       \
+>  })
+>
+> +#define drm_dbg_kms_ratelimited(drm, fmt, ...) \
+> +       __DRM_DEFINE_DBG_RATELIMITED(KMS, drm, fmt, ## __VA_ARGS__)
+> +
+> +#define DRM_DEBUG_KMS_RATELIMITED(fmt, ...) drm_dbg_kms_ratelimited(NULL, fmt, ## __VA_ARGS__)
+> +
+>  /*
+>   * struct drm_device based WARNs
+>   *
+> --
+> 2.30.2
+>
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
