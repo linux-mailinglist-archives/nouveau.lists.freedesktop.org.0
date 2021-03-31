@@ -1,92 +1,97 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6F30634F4A9
-	for <lists+nouveau@lfdr.de>; Wed, 31 Mar 2021 00:56:37 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 23A8934F7A4
+	for <lists+nouveau@lfdr.de>; Wed, 31 Mar 2021 05:56:51 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 92B0A6E98F;
-	Tue, 30 Mar 2021 22:56:30 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5295B6E12C;
+	Wed, 31 Mar 2021 03:56:44 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM04-SN1-obe.outbound.protection.outlook.com
- (mail-eopbgr700066.outbound.protection.outlook.com [40.107.70.66])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E8BD96E0E7;
- Tue, 30 Mar 2021 22:56:28 +0000 (UTC)
+Received: from NAM02-SN1-obe.outbound.protection.outlook.com
+ (mail-eopbgr770074.outbound.protection.outlook.com [40.107.77.74])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B5B976E12A;
+ Wed, 31 Mar 2021 03:56:42 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=hPvSdKzPlv1nJJzpFE8HhQvT+t5TOjpX43WwnRifFGNVSmPbdO67AvesS2QAcRqqy+WcyiR4V50tN8c2GZt/GxC/VJCTIXJHtUHeYX1TXechY10LAvpmQRtr9ojSib93/0eoNQVMwyYSTC2GUOCDz6GoUjCB6XlTiLXt1JpSKvp5BJpXpe7w0wi8C5q5sBL5a64pn6nrzfwK7v6CgWM2+UiIB+t71GiVNGhefh7zVoyQ2PMicy1ZG314+mviYcavMvInlXmRhotJxkhanRy8fH1awHERRSl4IzpWNzKXHMsa/6nNcH94OY2gTR1F7JVz0LbXEHqSEe85PuAn2ksSqQ==
+ b=VWo74krv900VkiFfqk3tJ4reqAvJiTzTjzCa5w315JVlhKNl8xIEayzx9iFEU57gLTpFrCovG2hhPyHtmj5FAVoRF7Il7X+qp2b9qh4ABGTb/qH5tt7+TEDt1wqpmL9S7vssqNPeo7sF2F/husHb5xXI4LkSGlJwJbcZinkwcEI+OmirVr46SesgNOBDnePXAg7lPCIBU4jaBIeEFeBWkGdCyz0K72UmzWc9zwZ9qgzHXAEojI7Ao9KY3PvIIrr34USJCumTwqUU2PLwXCgvHDvuJcdzfF/W3eUAfeBjx4KnYRM528kRgcrtYwwUM8K5NHVR4gVF04/t+iR+bCjAng==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=cpi7+2Q3W8AlMH/coytc85wXVzRatzANM0nrEySTwVk=;
- b=cLcy1oxLqy0H/emsHxpqZPZZPeempy1kPxBqERUiVVr94ZeYAxiNoGxopb1VBMO7iQv+rT6rSkwymyXvDYRaqkL4Aa/GQnF2nCkCkTYZ02oukIItfxUjsuKGu1nNJ7j7kSQdH+VW8yyV5t8wpJl/EPSGLV+Urk1f5+T9tcyONhj62drv696crRqMoZwOworWbqK0IsOluOzMNPwzPwgYUfDaG/Zrt3K421hTf+bk4zLd1OlZeZqOy1ZuNJTgFbIWZzgSMo9N8H4KlvTUzP6b+QMgMSlSHSVOdFnShm/KIMbOBuwCeYz9vbqsjWR90QFrDiltvoSr+B4B+pdYFHtjxg==
+ bh=SxCUBrjh7vhjBmCnyudkgDD2gnIqHNuKSrLXyz3R8xQ=;
+ b=krrvlYu2jcTJVQ7mcYnta54AbGNXzEfQunjjR9vG5yxX9JgkToKw3/aOFDOKM/I9pNqFz8DuATKP+ws8nl/Eo3qNsPCbPxSUkgwemtjf98CeHD2anEUavz77/zN7H6XzRtHExOvvA9hPkf7A1Py79Ab8zrExJb0jl+5pk3aNgN7Zi/K1K/bQ741bN66AOv0HqJ/7KB7I7sBB4OWdBOhtlWGPza6/hACvXCASFqRAbG/wjhDb28/RR9ojmVXrDfNaibmkE7jj63hHkl7gJ1OI7i6L3uTmY0Wy5GEnyNCI4Pxt9Cqi6iLZ8gL89uk+GQ/awFUrWP9U+uvfIjkV0by9dA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 216.228.112.34) smtp.rcpttodomain=infradead.org smtp.mailfrom=nvidia.com;
- dmarc=pass (p=none sp=none pct=100) action=none header.from=nvidia.com;
- dkim=none (message not signed); arc=none
+ 216.228.112.34) smtp.rcpttodomain=linux-foundation.org
+ smtp.mailfrom=nvidia.com; dmarc=pass (p=none sp=none pct=100) action=none
+ header.from=nvidia.com; dkim=none (message not signed); arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=cpi7+2Q3W8AlMH/coytc85wXVzRatzANM0nrEySTwVk=;
- b=D/u8EzOEf8VjPjS1cxTUs8IYcjL+Xx35S/BpOyFiChErDbHZ1CSG2F2Qs/PC8ynmZODbs/FAvTBrDRao+k7dHY+4EwNyokiZ9L7lqMMAHyCWn6lZi50WrBOUiisx2vX8SmialSNIgJGj5EZu8n6yAjTL4WEsoOZiVK9mNgYNNR4H8nVGxTfB7Sgdxr0C2kVQE8RXJeLTrmxib56mXR0vy8ki4WmKS5TmEZbyoJtm5kgpHldp74gaLvH5cO/RtYKICv/7okwFp9wptwek33X+Pz3eKhvN8Ps+Bzidi3wYZ84ZONAShNL33njeva+Pl8Ds7W2PLjUo03/7oqIkSvnTcQ==
-Received: from BN6PR13CA0018.namprd13.prod.outlook.com (2603:10b6:404:10a::28)
- by DM6PR12MB4139.namprd12.prod.outlook.com (2603:10b6:5:214::18) with
+ bh=SxCUBrjh7vhjBmCnyudkgDD2gnIqHNuKSrLXyz3R8xQ=;
+ b=mTPHMs/YaKX2MJTW3LAHHAtFfV7g+PoLBefKx5r5zNga2WWTLt/Gg3EgjthAuoVkHNzWTj3rjnHMAiHpwZGPk7b0YUh6nP1ra/F25fgbm4cyv6QmnwXp4C+hkAs4SNgGbM/Qj6KA3j8LGKJhr9I0HmCD7zYqtS1S+yPr04AyhHwQMaHokzKKlITcrQRJ++SaFY9pAEW+0Zf0Oc+ADFDqN8gyby2a90im4ofhXU8b5YcCcambrKRxCi8xpw5pHzEcfr6tvzd9yFdbSIPBnK8ekIFaXE8fOskcnjdlIW4an5O/MDW0vM1unprtK67Fxy18NZPyi3AFWijVXhy8S6fLqQ==
+Received: from MWHPR22CA0041.namprd22.prod.outlook.com (2603:10b6:300:69::27)
+ by DM6PR12MB4284.namprd12.prod.outlook.com (2603:10b6:5:21a::12) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3977.24; Tue, 30 Mar
- 2021 22:56:27 +0000
-Received: from BN8NAM11FT029.eop-nam11.prod.protection.outlook.com
- (2603:10b6:404:10a:cafe::f6) by BN6PR13CA0018.outlook.office365.com
- (2603:10b6:404:10a::28) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3999.16 via Frontend
- Transport; Tue, 30 Mar 2021 22:56:27 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3977.26; Wed, 31 Mar
+ 2021 03:56:40 +0000
+Received: from CO1NAM11FT039.eop-nam11.prod.protection.outlook.com
+ (2603:10b6:300:69:cafe::42) by MWHPR22CA0041.outlook.office365.com
+ (2603:10b6:300:69::27) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3977.26 via Frontend
+ Transport; Wed, 31 Mar 2021 03:56:40 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.112.34)
- smtp.mailfrom=nvidia.com; infradead.org; dkim=none (message not signed)
- header.d=none;infradead.org; dmarc=pass action=none header.from=nvidia.com;
+ smtp.mailfrom=nvidia.com; linux-foundation.org; dkim=none (message not
+ signed) header.d=none;linux-foundation.org; dmarc=pass action=none
+ header.from=nvidia.com;
 Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
  216.228.112.34 as permitted sender) receiver=protection.outlook.com;
  client-ip=216.228.112.34; helo=mail.nvidia.com;
 Received: from mail.nvidia.com (216.228.112.34) by
- BN8NAM11FT029.mail.protection.outlook.com (10.13.177.68) with Microsoft SMTP
+ CO1NAM11FT039.mail.protection.outlook.com (10.13.174.110) with Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id
- 15.20.3955.18 via Frontend Transport; Tue, 30 Mar 2021 22:56:26 +0000
-Received: from nvdebian.localnet (172.20.145.6) by HQMAIL107.nvidia.com
- (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1497.2; Tue, 30 Mar
- 2021 22:56:23 +0000
-From: Alistair Popple <apopple@nvidia.com>
-To: John Hubbard <jhubbard@nvidia.com>
-Date: Wed, 31 Mar 2021 09:56:20 +1100
-Message-ID: <12636584.zsJ0Sx4KLp@nvdebian>
-In-Reply-To: <bce0605a-336f-99ba-5b65-a8e5a7e49e00@nvidia.com>
+ 15.20.3955.18 via Frontend Transport; Wed, 31 Mar 2021 03:56:39 +0000
+Received: from [10.2.63.109] (172.20.145.6) by HQMAIL107.nvidia.com
+ (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1497.2; Wed, 31 Mar
+ 2021 03:56:39 +0000
+To: Alistair Popple <apopple@nvidia.com>
 References: <20210326000805.2518-1-apopple@nvidia.com>
  <20210330222440.GC2356281@nvidia.com>
  <bce0605a-336f-99ba-5b65-a8e5a7e49e00@nvidia.com>
+ <12636584.zsJ0Sx4KLp@nvdebian>
+From: John Hubbard <jhubbard@nvidia.com>
+Message-ID: <b4b11c59-975d-26c7-043a-6acddff78dfd@nvidia.com>
+Date: Tue, 30 Mar 2021 20:56:38 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.9.0
 MIME-Version: 1.0
+In-Reply-To: <12636584.zsJ0Sx4KLp@nvdebian>
+Content-Language: en-US
 X-Originating-IP: [172.20.145.6]
-X-ClientProxiedBy: HQMAIL107.nvidia.com (172.20.187.13) To
+X-ClientProxiedBy: HQMAIL101.nvidia.com (172.20.187.10) To
  HQMAIL107.nvidia.com (172.20.187.13)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: a22db820-06fd-4788-658d-08d8f3cf0c8b
-X-MS-TrafficTypeDiagnostic: DM6PR12MB4139:
-X-Microsoft-Antispam-PRVS: <DM6PR12MB41394768A8A0A783BD70C9A7DF7D9@DM6PR12MB4139.namprd12.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:9508;
+X-MS-Office365-Filtering-Correlation-Id: 22300cc3-3276-47cd-3300-08d8f3f8fd3e
+X-MS-TrafficTypeDiagnostic: DM6PR12MB4284:
+X-Microsoft-Antispam-PRVS: <DM6PR12MB42846FB425A16C04D8D00843A87C9@DM6PR12MB4284.namprd12.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:10000;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: HRjVnFfdanjDSrRKE1YZnq3AN3oh7bHoCbPyLEjC33HeMz8iJH9GgBlCzCIsoW1Z3/24HHckunGGkXZheJ10XsskLx9RRIu71gP7MtA8B4Bm96oBuRyg7J5p7Ux0qvZzBfbm/bbjwWqmqTWnHW13iZ5DWMiLVbZ7saZVphP1Zt1EUcyomsRA6/rIs7D39ZDk92B9cvmyLdDSRsypgYdJVm1uyrXQa2oRqEQUjlCp1yhB8J+Oo2+y8WXsc+e1GG2q+3YLY3hXClc6VqASixRzKy4bzzEryQ5Uu2wGMd/ZocPHZGGEGmOZ8hXvLh/LGErfsXIgv0kbY+Y/jMXmK4mDLx8OP5WKUEyHv7U2Fa9ClqVBUSE2cSTmoUhj9mluZ8ng7RU649vZ19wDkpWFsDpYmcPkZAj+vf1kuvTGY4bV7NMJwicxdjfD/RJ59Q1C7pfJwNQ3gi0wEgw3k2j3lckUBil5bLoog8g2aQEk8jwsSHZwB58R8foAac1hcgQQAydy7yYDfGOcEE2tcY3zesd9GpgI6MDsgbzXe9Px61o0Frj/FFAVaMvgcnrOLcrhfoXQlyUVLb91+fKBxe/+W1PNYqCH0zzA9WEPlF/aECe/bL16yBZRFOzEESdjn1oioYyZqFM5J1pfjOAA1B7EOMh9bz6JV7YQRrPuXGoqCqW6dCE++q9TnpuPHVrrHeJzPPV0
+X-Microsoft-Antispam-Message-Info: HQAOxm9xGmR6U+ToleSZJBBq4vvNSUt3/l7roC3llk3Z/pe21D3+S/gcUVYtrG7qzEI/AqBamvrBqdD8WUhuc7C0VrrlxK4O8YAsV7OZi2L4UCC5A11hqxw98x+E+YDYYDFRaswwwQl89mg1bF4I/HRfURfGyi6JGdmzJ2hFRIKWEmfKMYlPjqGdNrbFIlbbjqH+WUJ8kakBtcwyn2gMwZbL7x62ucLOFaVSq5kpsCFmePuNeVfw8AiTW7vzzn5UM5XhpAT69SRA4VNQn6+esfHMXH8t52AiTeH/XPQKpWATvbi1riNd4BKs8xrHiBc41p4IRoHXQBYGC8CID31s6XDTGyOi2B9ZC5Qad17wSeD7bHPYFnGLbEsyeCpAXvDu3C7/oHaRGZgCOuzh4xAdgYU8OhoGU3tUNA0MAchyissVb7zPRYhXf87H4UJr7ry4ULFl3I4Rt2T7MO27oziIg8/bvjUOLL/qcdhZmSPeNVaZ4m604XwM+e5Sg9JRyAqvBI3+iPSpMXqsqeb/zsrzIt9mOp/EuJCEJHTd1LyS/hbwxAHiTpzYczmK0ai/8EctGvfBt0BDAL80sNxFcOfmckj2knkxYw23HK10VLtCPRTIx6zAdz9HxZVop8PhA8bbMgOctgUndt4QEEiRfh45/lCvOAIms9XgXfQCQDZjqC0oIW6Ba8ELPB/aEXHjsa5E
 X-Forefront-Antispam-Report: CIP:216.228.112.34; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:schybrid03.nvidia.com; CAT:NONE;
- SFS:(4636009)(136003)(346002)(39860400002)(376002)(396003)(46966006)(36840700001)(83380400001)(336012)(8936002)(36860700001)(6862004)(8676002)(478600001)(33716001)(16526019)(26005)(356005)(54906003)(426003)(186003)(47076005)(70206006)(9576002)(2906002)(7416002)(4326008)(316002)(53546011)(82740400003)(5660300002)(7636003)(9686003)(86362001)(70586007)(82310400003)(6636002)(36906005)(39026012);
+ SFS:(4636009)(396003)(136003)(376002)(346002)(39860400002)(36840700001)(46966006)(36756003)(53546011)(8936002)(7636003)(7416002)(82740400003)(5660300002)(36860700001)(36906005)(70586007)(70206006)(86362001)(37006003)(2616005)(336012)(31686004)(83380400001)(6636002)(426003)(54906003)(478600001)(316002)(16526019)(4326008)(16576012)(82310400003)(186003)(8676002)(26005)(2906002)(6862004)(31696002)(356005)(47076005)(43740500002);
  DIR:OUT; SFP:1101; 
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Mar 2021 22:56:26.5438 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: a22db820-06fd-4788-658d-08d8f3cf0c8b
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Mar 2021 03:56:39.7357 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 22300cc3-3276-47cd-3300-08d8f3f8fd3e
 X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.112.34];
  Helo=[mail.nvidia.com]
-X-MS-Exchange-CrossTenant-AuthSource: BN8NAM11FT029.eop-nam11.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: CO1NAM11FT039.eop-nam11.prod.protection.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4139
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4284
 Subject: Re: [Nouveau] [PATCH v7 3/8] mm/rmap: Split try_to_munlock from
  try_to_unmap
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -106,102 +111,85 @@ Cc: rcampbell@nvidia.com, willy@infradead.org, daniel@ffwll.ch,
  kvm-ppc@vger.kernel.org, hch@infradead.org, linux-mm@kvack.org,
  bskeggs@redhat.com, Jason Gunthorpe <jgg@nvidia.com>,
  akpm@linux-foundation.org, Christoph Hellwig <hch@lst.de>
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wednesday, 31 March 2021 9:43:19 AM AEDT John Hubbard wrote:
-> On 3/30/21 3:24 PM, Jason Gunthorpe wrote:
-> ...
-> >> As far as I can tell this has always been called try_to_munlock() even 
-though
-> >> it appears to do the opposite.
-> > 
-> > Maybe we should change it then?
-> > 
-> >>> /**
-> >>>   * try_to_munlock - try to munlock a page
-> >>>   * @page: the page to be munlocked
-> >>>   *
-> >>>   * Called from munlock code.  Checks all of the VMAs mapping the page
-> >>>   * to make sure nobody else has this page mlocked. The page will be
-> >>>   * returned with PG_mlocked cleared if no other vmas have it mlocked.
-> >>>   */
-> >>
-> >> In other words it sets PG_mlocked if one or more vmas has it mlocked. So
-> >> try_to_mlock() might be a better name, except that seems to have the 
-potential
-> >> for confusion as well because it's only called from the munlock code path 
-and
-> >> never for mlock.
-> > 
-> > That explanation makes more sense.. This function looks like it is
-> > 'set PG_mlocked of the page if any vm->flags has VM_LOCKED'
-> > 
-> > Maybe call it check_vm_locked or something then and reword the above
-> > comment?
-> > 
-> > (and why is it OK to read vm->flags for this without any locking?)
-> > 
-> >>> Something needs attention here..
-> >>
-> >> I think the code is correct, but perhaps the naming could be better. 
-Would be
-> >> interested hearing any thoughts on renaming try_to_munlock() to 
-try_to_mlock()
-> >> as the current name appears based on the context it is called from 
-(munlock)
-> >> rather than what it does (mlock).
-> > 
-> > The point of this patch is to make it clearer, after all, so I'd
-> > change something and maybe slightly clarify the comment.
-> > 
-
-Yep, agree with that.
- 
-> I'd add that, after looking around the calling code, this is a really 
-unhappy
-> pre-existing situation. Anyone reading this has to remember at which point 
-in the
-> call stack the naming transitions from "do the opposite of what the name 
-says",
-> to "do what the name says".
->
-> +1 for renaming "munlock*" items to "mlock*", where applicable. good grief.
-
-At least the situation was weird enough to prompt further investigation :) 
-
-Renaming to mlock* doesn't feel like the right solution to me either though. I 
-am not sure if you saw me responding to myself earlier but I am thinking 
-renaming try_to_munlock() -> page_mlocked() and try_to_munlock_one() -> 
-page_mlock_one() might be better. Thoughts?
-
-This is actually inspired from a suggestion in Documentation/vm/unevictable-
-lru.rst which warns about this problem:
-
-try_to_munlock() Reverse Map Scan
----------------------------------
-
-.. warning::
-   [!] TODO/FIXME: a better name might be page_mlocked() - analogous to the
-   page_referenced() reverse map walker.
-
-> Although, it seems reasonable to tack such renaming patches onto the tail 
-end
-> of this series. But whatever works.
-
-Unless anyone objects strongly I will roll the rename into this patch as there 
-is only one caller of try_to_munlock.
-
- - Alistair
-
-> thanks,
+On 3/30/21 3:56 PM, Alistair Popple wrote:
+...
+>> +1 for renaming "munlock*" items to "mlock*", where applicable. good grief.
+> 
+> At least the situation was weird enough to prompt further investigation :)
+> 
+> Renaming to mlock* doesn't feel like the right solution to me either though. I
+> am not sure if you saw me responding to myself earlier but I am thinking
+> renaming try_to_munlock() -> page_mlocked() and try_to_munlock_one() ->
+> page_mlock_one() might be better. Thoughts?
 > 
 
+Quite confused by this naming idea. Because: try_to_munlock() returns
+void, so a boolean-style name such as "page_mlocked()" is already not a
+good fit.
+
+Even more important, though, is that try_to_munlock() is mlock-ing the
+page, right? Is there some subtle point I'm missing? It really is doing
+an mlock to the best of my knowledge here. Although the kerneldoc
+comment for try_to_munlock() seems questionable too:
+
+/**
+  * try_to_munlock - try to munlock a page
+  * @page: the page to be munlocked
+  *
+  * Called from munlock code.  Checks all of the VMAs mapping the page
+  * to make sure nobody else has this page mlocked. The page will be
+  * returned with PG_mlocked cleared if no other vmas have it mlocked.
+  */
+
+...because I don't see where, in *this* routine, it clears PG_mlocked!
+
+Obviously we agree that a routine should be named based on what it does,
+rather than on who calls it. So I think that still leads to:
+
+      try_to_munlock() --> try_to_mlock()
+      try_to_munlock_one() --> try_to_mlock_one()
+
+Sorry if I'm missing something really obvious.
 
 
+> This is actually inspired from a suggestion in Documentation/vm/unevictable-
+> lru.rst which warns about this problem:
+> 
+> try_to_munlock() Reverse Map Scan
+> ---------------------------------
+> 
+> .. warning::
+>     [!] TODO/FIXME: a better name might be page_mlocked() - analogous to the
+>     page_referenced() reverse map walker.
+> 
 
+This is actually rather bad advice! page_referenced() returns an
+int-that-is-really-a-boolean, whereas try_to_munlock(), at least as it
+stands now, returns void. Usually when I'm writing a TODO item, I'm in a
+hurry, and I think that's what probably happened here, too. :)
+
+
+>> Although, it seems reasonable to tack such renaming patches onto the tail
+> end
+>> of this series. But whatever works.
+> 
+> Unless anyone objects strongly I will roll the rename into this patch as there
+> is only one caller of try_to_munlock.
+> 
+>   - Alistair
+> 
+
+No objections here. :)
+
+thanks,
+-- 
+John Hubbard
+NVIDIA
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
