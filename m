@@ -2,42 +2,33 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 96C4235154E
-	for <lists+nouveau@lfdr.de>; Thu,  1 Apr 2021 15:41:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 947C835157F
+	for <lists+nouveau@lfdr.de>; Thu,  1 Apr 2021 16:07:01 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2E7216ECAF;
-	Thu,  1 Apr 2021 13:40:52 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4CE5F6E14D;
+	Thu,  1 Apr 2021 14:06:59 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mga05.intel.com (mga05.intel.com [192.55.52.43])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0B9CE6E0CF;
- Thu,  1 Apr 2021 13:40:49 +0000 (UTC)
-IronPort-SDR: 3PSqg89DRxisX0jP9kS1oDlvqUhegBjHPvIZIzj0WkbKxN9UKtVwDq27gcWPrusr6/2moxzn7l
- +gesSGOT1BDQ==
-X-IronPort-AV: E=McAfee;i="6000,8403,9941"; a="277431052"
-X-IronPort-AV: E=Sophos;i="5.81,296,1610438400"; d="scan'208";a="277431052"
-Received: from orsmga008.jf.intel.com ([10.7.209.65])
- by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 01 Apr 2021 06:40:39 -0700
-IronPort-SDR: LFYKKCnNLIHo8d1WzwQ5AsNeqrd0MpZqv++pww8uo/8fUTlbro4kse1JFIDXwGB/auZUAspbsR
- I6L+jGfT4YTw==
-X-IronPort-AV: E=Sophos;i="5.81,296,1610438400"; d="scan'208";a="419206855"
-Received: from shergane-mobl.ger.corp.intel.com (HELO localhost)
- ([10.252.41.188])
- by orsmga008-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 01 Apr 2021 06:40:36 -0700
-From: Jani Nikula <jani.nikula@linux.intel.com>
-To: Lyude Paul <lyude@redhat.com>, nouveau@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
- intel-gfx@lists.freedesktop.org
-In-Reply-To: <20210326203807.105754-1-lyude@redhat.com>
-Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
-References: <20210326203807.105754-1-lyude@redhat.com>
-Date: Thu, 01 Apr 2021 16:40:33 +0300
-Message-ID: <87blaym8by.fsf@intel.com>
+Received: from out4436.biz.mail.alibaba.com (out4436.biz.mail.alibaba.com
+ [47.88.44.36])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 55AB66E104;
+ Thu,  1 Apr 2021 09:04:00 +0000 (UTC)
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R101e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=e01e04394;
+ MF=jiapeng.chong@linux.alibaba.com; NM=1; PH=DS; RN=11; SR=0;
+ TI=SMTPD_---0UU5S6MB_1617267817; 
+Received: from
+ j63c13417.sqa.eu95.tbsite.net(mailfrom:jiapeng.chong@linux.alibaba.com
+ fp:SMTPD_---0UU5S6MB_1617267817) by smtp.aliyun-inc.com(127.0.0.1);
+ Thu, 01 Apr 2021 17:03:44 +0800
+From: Jiapeng Chong <jiapeng.chong@linux.alibaba.com>
+To: bskeggs@redhat.com
+Date: Thu,  1 Apr 2021 17:03:35 +0800
+Message-Id: <1617267815-110014-1-git-send-email-jiapeng.chong@linux.alibaba.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Subject: Re: [Nouveau] [Intel-gfx] [PATCH v2 00/20] drm: Use new DRM printk
- funcs (like drm_dbg_*()) in DP helpers
+X-Mailman-Approved-At: Thu, 01 Apr 2021 14:06:57 +0000
+Subject: [Nouveau] [PATCH] drm/nouveau: remove unused code
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -49,124 +40,33 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: Jiapeng Chong <jiapeng.chong@linux.alibaba.com>, airlied@linux.ie,
+ nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, christian.koenig@amd.com,
+ linaro-mm-sig@lists.linaro.org, daniel@ffwll.ch, sumit.semwal@linaro.org,
+ linux-media@vger.kernel.org
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, 26 Mar 2021, Lyude Paul <lyude@redhat.com> wrote:
-> Since it's been asked quite a few times on some of the various DP
-> related patch series I've submitted to use the new DRM printk helpers,
-> and it technically wasn't really trivial to do this before due to the
-> lack of a consistent way to find a drm_device for an AUX channel, this
-> patch series aims to address this. In this series we:
->
-> * Clean-up potentially erroneous usages of drm_dp_aux_init() and
->   drm_dp_aux_register() so that actual AUX registration doesn't happen
->   until we have an associated DRM device
-> * Clean-up any obvious errors in drivers we find along the way
-> * Add a backpointer to the respective drm_device for an AUX channel in
->   drm_dp_aux.drm_dev, and hook it up in every driver with an AUX channel
->   across the tree
-> * Add a new ratelimited print helper we'll need for converting the DP
->   helpers over to using the new DRM printk helpers
-> * Fix any inconsistencies with logging in drm_dp_helper.c so we always
->   have the aux channel name printed
-> * Prepare the various DP helpers so they can find the correct drm_device
->   to use for logging
-> * And finally, convert all of the DP helpers over to using drm_dbg_*()
->   and drm_err().
->
-> Series-wide changes in v2:
-> * Address most checkpatch issues ('most' as in all except for one line
->   going two chars over 100 in "drm/dp_mst: Pass drm_dp_mst_topology_mgr
->   to drm_dp_get_vc_payload_bw()" as this was the style in use
->   previously, and 2 chars over the limit looks nicer then trying to
->   line-wrap this
-> * Don't rewrap comments
-
-For anything touching i915, and for merging via whichever tree or branch
-seems best,
-
-Acked-by: Jani Nikula <jani.nikula@intel.com>
-
-That said, gut feeling says there will be conflicts before latest
-drm-misc-next and drm-intel-next have been merged to drm-next, and
-drm-next has been backmerged to drm-misc-next and drm-intel-next.
-
-It just might be a good idea to wait for those (as well as other driver
-feature pulls) to settle, do a topic branch with a common ancestor
-between drm-next and drm-misc-next, apply there, merge the topic branch
-to drm-misc-next, and let all drivers merge the topic branch as
-needed. Due to the timing, otherwise we might have to carry the
-conflicts for quite a while.
-
-BR,
-Jani.
-
-
->
-> Lyude Paul (20):
->   drm/dp: Fixup kernel docs for struct drm_dp_aux
->   drm/tegra: Don't register DP AUX channels before connectors
->   drm/bridge/cdns-mhdp8546: Register DP aux channel with userspace
->   drm/nouveau/kms/nv50-: Move AUX adapter reg to connector late
->     register/early unregister
->   drm/dp: Add backpointer to drm_device in drm_dp_aux
->   drm/dp: Clarify DP AUX registration time
->   drm/print: Fixup DRM_DEBUG_KMS_RATELIMITED()
->   drm/dp: Pass drm_dp_aux to drm_dp_link_train_clock_recovery_delay()
->   drm/dp: Pass drm_dp_aux to drm_dp*_link_train_channel_eq_delay()
->   drm/dp: Always print aux channel name in logs
->   drm/dp_dual_mode: Pass drm_device to drm_dp_dual_mode_detect()
->   drm/dp_dual_mode: Pass drm_device to
->     drm_dp_dual_mode_set_tmds_output()
->   drm/dp_dual_mode: Pass drm_device to drm_dp_dual_mode_max_tmds_clock()
->   drm/dp_dual_mode: Pass drm_device to
->     drm_dp_dual_mode_get_tmds_output()
->   drm/dp_dual_mode: Pass drm_device to drm_lspcon_(get|set)_mode()
->   drm/dp_mst: Pass drm_dp_mst_topology_mgr to drm_dp_get_vc_payload_bw()
->   drm/dp: Convert drm_dp_helper.c to using drm_err/drm_dbg_*()
->   drm/dp_dual_mode: Convert drm_dp_dual_mode_helper.c to using
->     drm_err/drm_dbg_kms()
->   drm/dp_mst: Drop DRM_ERROR() on kzalloc() fail in
->     drm_dp_mst_handle_up_req()
->   drm/dp_mst: Convert drm_dp_mst_topology.c to drm_err()/drm_dbg*()
->
->  drivers/gpu/drm/amd/amdgpu/atombios_dp.c      |   5 +-
->  .../display/amdgpu_dm/amdgpu_dm_mst_types.c   |   1 +
->  .../drm/bridge/analogix/analogix-anx6345.c    |   1 +
->  .../drm/bridge/analogix/analogix-anx78xx.c    |   1 +
->  .../drm/bridge/analogix/analogix_dp_core.c    |   1 +
->  .../drm/bridge/cadence/cdns-mhdp8546-core.c   |  12 +-
->  drivers/gpu/drm/bridge/tc358767.c             |   1 +
->  drivers/gpu/drm/bridge/ti-sn65dsi86.c         |   1 +
->  drivers/gpu/drm/drm_dp_aux_dev.c              |   6 +
->  drivers/gpu/drm/drm_dp_dual_mode_helper.c     |  68 ++--
->  drivers/gpu/drm/drm_dp_helper.c               | 181 +++++----
->  drivers/gpu/drm/drm_dp_mst_topology.c         | 381 +++++++++---------
->  drivers/gpu/drm/i915/display/intel_dp_aux.c   |   1 +
->  .../drm/i915/display/intel_dp_link_training.c |   6 +-
->  drivers/gpu/drm/i915/display/intel_dp_mst.c   |   3 +-
->  drivers/gpu/drm/i915/display/intel_hdmi.c     |   7 +-
->  drivers/gpu/drm/i915/display/intel_lspcon.c   |  17 +-
->  drivers/gpu/drm/msm/dp/dp_ctrl.c              |   6 +-
->  drivers/gpu/drm/msm/edp/edp.h                 |   3 +-
->  drivers/gpu/drm/msm/edp/edp_aux.c             |   5 +-
->  drivers/gpu/drm/msm/edp/edp_ctrl.c            |   8 +-
->  drivers/gpu/drm/nouveau/nouveau_connector.c   |  27 +-
->  drivers/gpu/drm/radeon/atombios_dp.c          |   5 +-
->  drivers/gpu/drm/tegra/dpaux.c                 |  12 +-
->  drivers/gpu/drm/xlnx/zynqmp_dp.c              |   5 +-
->  include/drm/drm_dp_dual_mode_helper.h         |  14 +-
->  include/drm/drm_dp_helper.h                   |  61 +--
->  include/drm/drm_dp_mst_helper.h               |   3 +-
->  include/drm/drm_print.h                       |  20 +-
->  29 files changed, 478 insertions(+), 384 deletions(-)
-
--- 
-Jani Nikula, Intel Open Source Graphics Center
-_______________________________________________
-Nouveau mailing list
-Nouveau@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/nouveau
+Rml4IHRoZSBmb2xsb3dpbmcgd2hpdGVzY2FuIHdhcm5pbmc6Cgpkcml2ZXJzL2dwdS9kcm0vbm91
+dmVhdS9ub3V2ZWF1X2JvLmM6MTI4NzoxNzogd2FybmluZzogdmFyaWFibGUg4oCYZGV24oCZCnNl
+dCBidXQgbm90IHVzZWQgWy1XdW51c2VkLWJ1dC1zZXQtdmFyaWFibGVdLgoKUmVwb3J0ZWQtYnk6
+IEFiYWNpIFJvYm90IDxhYmFjaUBsaW51eC5hbGliYWJhLmNvbT4KU2lnbmVkLW9mZi1ieTogSmlh
+cGVuZyBDaG9uZyA8amlhcGVuZy5jaG9uZ0BsaW51eC5hbGliYWJhLmNvbT4KLS0tCiBkcml2ZXJz
+L2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2JvLmMgfCAyIC0tCiAxIGZpbGUgY2hhbmdlZCwgMiBk
+ZWxldGlvbnMoLSkKCmRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1
+X2JvLmMgYi9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2JvLmMKaW5kZXggZjI3MjBh
+MC4uYjY2MWQwZCAxMDA2NDQKLS0tIGEvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9i
+by5jCisrKyBiL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfYm8uYwpAQCAtMTI4NCwx
+NCArMTI4NCwxMiBAQCB2bV9mYXVsdF90IG5vdXZlYXVfdHRtX2ZhdWx0X3Jlc2VydmVfbm90aWZ5
+KHN0cnVjdCB0dG1fYnVmZmVyX29iamVjdCAqYm8pCiAJCQkgIHN0cnVjdCB0dG1fdHQgKnR0bSkK
+IHsKIAlzdHJ1Y3Qgbm91dmVhdV9kcm0gKmRybTsKLQlzdHJ1Y3QgZGV2aWNlICpkZXY7CiAJYm9v
+bCBzbGF2ZSA9ICEhKHR0bS0+cGFnZV9mbGFncyAmIFRUTV9QQUdFX0ZMQUdfU0cpOwogCiAJaWYg
+KHNsYXZlKQogCQlyZXR1cm47CiAKIAlkcm0gPSBub3V2ZWF1X2JkZXYoYmRldik7Ci0JZGV2ID0g
+ZHJtLT5kZXYtPmRldjsKIAogCXJldHVybiB0dG1fcG9vbF9mcmVlKCZkcm0tPnR0bS5iZGV2LnBv
+b2wsIHR0bSk7CiB9Ci0tIAoxLjguMy4xCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fXwpOb3V2ZWF1IG1haWxpbmcgbGlzdApOb3V2ZWF1QGxpc3RzLmZyZWVk
+ZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZv
+L25vdXZlYXUK
