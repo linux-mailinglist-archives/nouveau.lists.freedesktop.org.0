@@ -1,31 +1,32 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8B18C354EA8
-	for <lists+nouveau@lfdr.de>; Tue,  6 Apr 2021 10:29:59 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 87240354F77
+	for <lists+nouveau@lfdr.de>; Tue,  6 Apr 2021 11:09:10 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 380B689F2D;
-	Tue,  6 Apr 2021 08:29:48 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C0B9F6E0AB;
+	Tue,  6 Apr 2021 09:09:08 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 170CD89F2D;
- Tue,  6 Apr 2021 08:29:47 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 871EE6E0AB;
+ Tue,  6 Apr 2021 09:09:07 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id A7C12B134;
- Tue,  6 Apr 2021 08:29:45 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 11B72B2FA;
+ Tue,  6 Apr 2021 09:09:06 +0000 (UTC)
 From: Thomas Zimmermann <tzimmermann@suse.de>
-To: daniel@ffwll.ch, airlied@linux.ie, mripard@kernel.org,
- maarten.lankhorst@linux.intel.com, bskeggs@redhat.com, kraxel@redhat.com
-Date: Tue,  6 Apr 2021 10:29:42 +0200
-Message-Id: <20210406082942.24049-5-tzimmermann@suse.de>
+To: alexander.deucher@amd.com, christian.koenig@amd.com, airlied@linux.ie,
+ daniel@ffwll.ch, bskeggs@redhat.com, ray.huang@amd.com,
+ linux-graphics-maintainer@vmware.com, sroland@vmware.com, zackr@vmware.com,
+ shashank.sharma@amd.com, sam@ravnborg.org, emil.velikov@collabora.com,
+ Felix.Kuehling@amd.com, nirmoy.das@amd.com
+Date: Tue,  6 Apr 2021 11:08:55 +0200
+Message-Id: <20210406090903.7019-1-tzimmermann@suse.de>
 X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20210406082942.24049-1-tzimmermann@suse.de>
-References: <20210406082942.24049-1-tzimmermann@suse.de>
 MIME-Version: 1.0
-Subject: [Nouveau] [PATCH 4/4] drm/qxl: Use drm_gem_ttm_dumb_map_offset()
+Subject: [Nouveau] [PATCH 0/8] drm: Clean up mmap for TTM-based GEM drivers
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -37,117 +38,62 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, spice-devel@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org
+Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ amd-gfx@lists.freedesktop.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Qxl now uses drm_gem_ttm_dumb_map_offset() to implement struct
-drm_driver.dumb_map_offset.
+Implement mmap via struct drm_gem_object_functions.mmap for amdgpu,
+radeon and nouveau. This allows for using common DRM helpers for
+the mmap-related callbacks in struct file_operations and struct
+drm_driver. The drivers have their own vm_ops, which are now set
+automatically by the DRM core functions. The code in each driver's
+verify_access becomes part of the driver's new mmap implementation.
 
-Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
----
- drivers/gpu/drm/qxl/qxl_drv.c    |  3 ++-
- drivers/gpu/drm/qxl/qxl_drv.h    |  3 ---
- drivers/gpu/drm/qxl/qxl_dumb.c   | 17 -----------------
- drivers/gpu/drm/qxl/qxl_ioctl.c  |  4 ++--
- drivers/gpu/drm/qxl/qxl_object.h |  5 -----
- 5 files changed, 4 insertions(+), 28 deletions(-)
+With the GEM drivers converted, vmwgfx is the only user of
+ttm_bo_mmap() and related infrastructure. So move everything into
+vmwgfx and delete the rsp code from TTM.
 
-diff --git a/drivers/gpu/drm/qxl/qxl_drv.c b/drivers/gpu/drm/qxl/qxl_drv.c
-index 1864467f1063..db92eec07d96 100644
---- a/drivers/gpu/drm/qxl/qxl_drv.c
-+++ b/drivers/gpu/drm/qxl/qxl_drv.c
-@@ -37,6 +37,7 @@
- #include <drm/drm_atomic_helper.h>
- #include <drm/drm_drv.h>
- #include <drm/drm_file.h>
-+#include <drm/drm_gem_ttm_helper.h>
- #include <drm/drm_modeset_helper.h>
- #include <drm/drm_prime.h>
- #include <drm/drm_probe_helper.h>
-@@ -271,7 +272,7 @@ static struct drm_driver qxl_driver = {
- 	.driver_features = DRIVER_GEM | DRIVER_MODESET | DRIVER_ATOMIC,
- 
- 	.dumb_create = qxl_mode_dumb_create,
--	.dumb_map_offset = qxl_mode_dumb_mmap,
-+	.dumb_map_offset = drm_gem_ttm_dumb_map_offset,
- #if defined(CONFIG_DEBUG_FS)
- 	.debugfs_init = qxl_debugfs_init,
- #endif
-diff --git a/drivers/gpu/drm/qxl/qxl_drv.h b/drivers/gpu/drm/qxl/qxl_drv.h
-index 6dd57cfb2e7c..20a0f3ab84ad 100644
---- a/drivers/gpu/drm/qxl/qxl_drv.h
-+++ b/drivers/gpu/drm/qxl/qxl_drv.h
-@@ -330,9 +330,6 @@ void qxl_bo_force_delete(struct qxl_device *qdev);
- int qxl_mode_dumb_create(struct drm_file *file_priv,
- 			 struct drm_device *dev,
- 			 struct drm_mode_create_dumb *args);
--int qxl_mode_dumb_mmap(struct drm_file *filp,
--		       struct drm_device *dev,
--		       uint32_t handle, uint64_t *offset_p);
- 
- /* qxl ttm */
- int qxl_ttm_init(struct qxl_device *qdev);
-diff --git a/drivers/gpu/drm/qxl/qxl_dumb.c b/drivers/gpu/drm/qxl/qxl_dumb.c
-index 48a58ba1db96..a635d9fdf8ac 100644
---- a/drivers/gpu/drm/qxl/qxl_dumb.c
-+++ b/drivers/gpu/drm/qxl/qxl_dumb.c
-@@ -69,20 +69,3 @@ int qxl_mode_dumb_create(struct drm_file *file_priv,
- 	args->handle = handle;
- 	return 0;
- }
--
--int qxl_mode_dumb_mmap(struct drm_file *file_priv,
--		       struct drm_device *dev,
--		       uint32_t handle, uint64_t *offset_p)
--{
--	struct drm_gem_object *gobj;
--	struct qxl_bo *qobj;
--
--	BUG_ON(!offset_p);
--	gobj = drm_gem_object_lookup(file_priv, handle);
--	if (gobj == NULL)
--		return -ENOENT;
--	qobj = gem_to_qxl_bo(gobj);
--	*offset_p = qxl_bo_mmap_offset(qobj);
--	drm_gem_object_put(gobj);
--	return 0;
--}
-diff --git a/drivers/gpu/drm/qxl/qxl_ioctl.c b/drivers/gpu/drm/qxl/qxl_ioctl.c
-index b6075f452b9e..38aabcbe2238 100644
---- a/drivers/gpu/drm/qxl/qxl_ioctl.c
-+++ b/drivers/gpu/drm/qxl/qxl_ioctl.c
-@@ -67,8 +67,8 @@ static int qxl_map_ioctl(struct drm_device *dev, void *data,
- 	struct qxl_device *qdev = to_qxl(dev);
- 	struct drm_qxl_map *qxl_map = data;
- 
--	return qxl_mode_dumb_mmap(file_priv, &qdev->ddev, qxl_map->handle,
--				  &qxl_map->offset);
-+	return drm_gem_ttm_dumb_map_offset(file_priv, &qdev->ddev, qxl_map->handle,
-+					   &qxl_map->offset);
- }
- 
- struct qxl_reloc_info {
-diff --git a/drivers/gpu/drm/qxl/qxl_object.h b/drivers/gpu/drm/qxl/qxl_object.h
-index ee9c29de4d3d..cee4b52b75dd 100644
---- a/drivers/gpu/drm/qxl/qxl_object.h
-+++ b/drivers/gpu/drm/qxl/qxl_object.h
-@@ -53,11 +53,6 @@ static inline unsigned long qxl_bo_size(struct qxl_bo *bo)
- 	return bo->tbo.base.size;
- }
- 
--static inline u64 qxl_bo_mmap_offset(struct qxl_bo *bo)
--{
--	return drm_vma_node_offset_addr(&bo->tbo.base.vma_node);
--}
--
- extern int qxl_bo_create(struct qxl_device *qdev,
- 			 unsigned long size,
- 			 bool kernel, bool pinned, u32 domain,
--- 
+This touches several drivers. Preferably everything would be merged
+at once via drm-misc-next.
+
+Thomas Zimmermann (8):
+  drm/ttm: Don't override vm_ops callbacks, if set
+  drm/amdgpu: Remove unused function amdgpu_bo_fbdev_mmap()
+  drm/amdgpu: Implement mmap as GEM object function
+  drm/radeon: Implement mmap as GEM object function
+  drm/nouveau: Implement mmap as GEM object function
+  drm/vmwgfx: Inline ttm_bo_mmap() into vmwgfx driver
+  drm/vmwgfx: Inline vmw_verify_access()
+  drm/ttm: Remove ttm_bo_mmap() and friends
+
+ drivers/gpu/drm/amd/amdgpu/amdgpu_dma_buf.c | 46 -------------
+ drivers/gpu/drm/amd/amdgpu/amdgpu_dma_buf.h |  2 -
+ drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c     |  4 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_gem.c     | 64 +++++++++++++++++++
+ drivers/gpu/drm/amd/amdgpu/amdgpu_object.c  | 19 ------
+ drivers/gpu/drm/amd/amdgpu/amdgpu_object.h  |  2 -
+ drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c     | 71 ---------------------
+ drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.h     |  1 -
+ drivers/gpu/drm/nouveau/nouveau_bo.c        | 10 ---
+ drivers/gpu/drm/nouveau/nouveau_drm.c       |  3 +-
+ drivers/gpu/drm/nouveau/nouveau_gem.c       | 36 +++++++++++
+ drivers/gpu/drm/nouveau/nouveau_ttm.c       | 49 --------------
+ drivers/gpu/drm/nouveau/nouveau_ttm.h       |  1 -
+ drivers/gpu/drm/radeon/radeon_drv.c         |  3 +-
+ drivers/gpu/drm/radeon/radeon_gem.c         | 52 +++++++++++++++
+ drivers/gpu/drm/radeon/radeon_ttm.c         | 65 -------------------
+ drivers/gpu/drm/radeon/radeon_ttm.h         |  1 -
+ drivers/gpu/drm/ttm/ttm_bo_vm.c             | 60 ++---------------
+ drivers/gpu/drm/vmwgfx/vmwgfx_ttm_buffer.c  |  9 ---
+ drivers/gpu/drm/vmwgfx/vmwgfx_ttm_glue.c    | 51 ++++++++++++++-
+ include/drm/ttm/ttm_bo_api.h                | 13 ----
+ include/drm/ttm/ttm_device.h                | 15 -----
+ 22 files changed, 212 insertions(+), 365 deletions(-)
+
+--
 2.30.2
 
 _______________________________________________
