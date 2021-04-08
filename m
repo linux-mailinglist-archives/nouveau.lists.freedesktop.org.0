@@ -1,59 +1,33 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id B2F75358188
-	for <lists+nouveau@lfdr.de>; Thu,  8 Apr 2021 13:19:18 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id F067E3581F6
+	for <lists+nouveau@lfdr.de>; Thu,  8 Apr 2021 13:34:10 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3ADAB6EA97;
-	Thu,  8 Apr 2021 11:19:17 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id BE2636EAA3;
+	Thu,  8 Apr 2021 11:34:07 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C45F46EA9B
- for <nouveau@lists.freedesktop.org>; Thu,  8 Apr 2021 11:19:16 +0000 (UTC)
-Received: by mail-wm1-x32d.google.com with SMTP id
- g66-20020a1c39450000b0290125d187ba22so415532wma.2
- for <nouveau@lists.freedesktop.org>; Thu, 08 Apr 2021 04:19:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to;
- bh=7MyYEn9i2H/YcmRBa5m+qswzCV9lJj45DGS2du8D2As=;
- b=VZ6krWmPnff3rHrTu1YBPFVdpjNvgWRo+PMkwb2/yv64ErPAFo1LTBr9XGLjEybJRp
- yDXvpbDylqRd0tH22iKkYhm00Hh3iU5gUzE+oevKRklnndB881b26zFi5PshljLdi40O
- h6ZckHexnPdr0xgMsvLhWxsst+VXghWxVOD8c=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=7MyYEn9i2H/YcmRBa5m+qswzCV9lJj45DGS2du8D2As=;
- b=ShqaaASgHmP+P5OyHUceJeYT0RNYJgHJZ/bFLcdWi/7jsH9zbfN7JZzRsqJrO1VzsJ
- sV60q5A8X4ajGEDt6/LpLjMwFAuEj/QERq5PHQDtKMHGADdY99H2owtQ7rWERQcmGWzb
- fsIMD7QO91vQ5m/XIyMLwVYuvWdB+FwaMiaGUQ4dWfEPqjkwrEEWURHBwPw/aCsJQ5sf
- XfhZjjaIZLAAjIH6fN2Vemg+XDIAAv4ld/X5v/bzqAF4gJ8T8J+kndr5HE7oJmHkZ/nI
- R3IGeSxkE6GwNWLMDOtM7/9YgzNGOQq26GKuqLggZcdc5IyS69RrXTYL/h+ixIG2UCyW
- 8iJQ==
-X-Gm-Message-State: AOAM532iQL+PG88oDKSOaRkVBIKwFpeBViIjKPc1+KjJlEWG3I2uYuls
- Cs3rvqZ2yhvg2sCeeCrPezlFRg==
-X-Google-Smtp-Source: ABdhPJwVXGk6II7OwYliQ9jwB6zvIqzky42R8LIj54sh24c+NrzV1rA30sUfpWa13IAc+0jtn1AqhA==
-X-Received: by 2002:a1c:7713:: with SMTP id t19mr6915193wmi.13.1617880755544; 
- Thu, 08 Apr 2021 04:19:15 -0700 (PDT)
-Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
- by smtp.gmail.com with ESMTPSA id g15sm11081167wmq.31.2021.04.08.04.19.14
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 08 Apr 2021 04:19:14 -0700 (PDT)
-Date: Thu, 8 Apr 2021 13:19:12 +0200
-From: Daniel Vetter <daniel@ffwll.ch>
-To: Thomas Zimmermann <tzimmermann@suse.de>
-Message-ID: <YG7msOScvAKpjAXx@phenom.ffwll.local>
-References: <20210406090903.7019-1-tzimmermann@suse.de>
+Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 524746EAA3;
+ Thu,  8 Apr 2021 11:34:06 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id CF712B229;
+ Thu,  8 Apr 2021 11:34:04 +0000 (UTC)
+To: Daniel Vetter <daniel@ffwll.ch>
+References: <20210406082942.24049-1-tzimmermann@suse.de>
+ <YG7mHvmhPZIPA37B@phenom.ffwll.local>
+From: Thomas Zimmermann <tzimmermann@suse.de>
+Message-ID: <52dd3e3f-a893-3d90-e642-df01a033490a@suse.de>
+Date: Thu, 8 Apr 2021 13:34:03 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.8.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20210406090903.7019-1-tzimmermann@suse.de>
-X-Operating-System: Linux phenom 5.7.0-1-amd64 
-Subject: Re: [Nouveau] [PATCH 0/8] drm: Clean up mmap for TTM-based GEM
- drivers
+In-Reply-To: <YG7mHvmhPZIPA37B@phenom.ffwll.local>
+Subject: Re: [Nouveau] [PATCH 0/4] drm: Generic dumb_map_offset for
+ TTM-based drivers
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -65,82 +39,133 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: dri-devel@lists.freedesktop.org, shashank.sharma@amd.com, airlied@linux.ie,
- nouveau@lists.freedesktop.org, Felix.Kuehling@amd.com, sroland@vmware.com,
- nirmoy.das@amd.com, amd-gfx@lists.freedesktop.org, ray.huang@amd.com,
- linux-graphics-maintainer@vmware.com, bskeggs@redhat.com, daniel@ffwll.ch,
- alexander.deucher@amd.com, sam@ravnborg.org, christian.koenig@amd.com,
- zackr@vmware.com, emil.velikov@collabora.com
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: airlied@linux.ie, nouveau@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
+ kraxel@redhat.com, spice-devel@lists.freedesktop.org, bskeggs@redhat.com
+Content-Type: multipart/mixed; boundary="===============0893525404=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, Apr 06, 2021 at 11:08:55AM +0200, Thomas Zimmermann wrote:
-> Implement mmap via struct drm_gem_object_functions.mmap for amdgpu,
-> radeon and nouveau. This allows for using common DRM helpers for
-> the mmap-related callbacks in struct file_operations and struct
-> drm_driver. The drivers have their own vm_ops, which are now set
-> automatically by the DRM core functions. The code in each driver's
-> verify_access becomes part of the driver's new mmap implementation.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--===============0893525404==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="wtPaAHNX0gkUUytT5iAsY74CPhbxKSfTl"
 
-Is there anything left in there which isn't already handled by the gem
-checks? Iirc there was some custom limit for ttm drivers once to allow
-co-existing with ums drivers, but that's never really been a thing since
-forever ...
--Daniel
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--wtPaAHNX0gkUUytT5iAsY74CPhbxKSfTl
+Content-Type: multipart/mixed; boundary="qHPZSfiFLTcaOfLLakODrcFJUrLuyNz8z";
+ protected-headers="v1"
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: Daniel Vetter <daniel@ffwll.ch>
+Cc: airlied@linux.ie, nouveau@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
+ kraxel@redhat.com, spice-devel@lists.freedesktop.org, bskeggs@redhat.com
+Message-ID: <52dd3e3f-a893-3d90-e642-df01a033490a@suse.de>
+Subject: Re: [PATCH 0/4] drm: Generic dumb_map_offset for TTM-based drivers
+References: <20210406082942.24049-1-tzimmermann@suse.de>
+ <YG7mHvmhPZIPA37B@phenom.ffwll.local>
+In-Reply-To: <YG7mHvmhPZIPA37B@phenom.ffwll.local>
 
-> 
-> With the GEM drivers converted, vmwgfx is the only user of
-> ttm_bo_mmap() and related infrastructure. So move everything into
-> vmwgfx and delete the rsp code from TTM.
-> 
-> This touches several drivers. Preferably everything would be merged
-> at once via drm-misc-next.
-> 
-> Thomas Zimmermann (8):
->   drm/ttm: Don't override vm_ops callbacks, if set
->   drm/amdgpu: Remove unused function amdgpu_bo_fbdev_mmap()
->   drm/amdgpu: Implement mmap as GEM object function
->   drm/radeon: Implement mmap as GEM object function
->   drm/nouveau: Implement mmap as GEM object function
->   drm/vmwgfx: Inline ttm_bo_mmap() into vmwgfx driver
->   drm/vmwgfx: Inline vmw_verify_access()
->   drm/ttm: Remove ttm_bo_mmap() and friends
-> 
->  drivers/gpu/drm/amd/amdgpu/amdgpu_dma_buf.c | 46 -------------
->  drivers/gpu/drm/amd/amdgpu/amdgpu_dma_buf.h |  2 -
->  drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c     |  4 +-
->  drivers/gpu/drm/amd/amdgpu/amdgpu_gem.c     | 64 +++++++++++++++++++
->  drivers/gpu/drm/amd/amdgpu/amdgpu_object.c  | 19 ------
->  drivers/gpu/drm/amd/amdgpu/amdgpu_object.h  |  2 -
->  drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c     | 71 ---------------------
->  drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.h     |  1 -
->  drivers/gpu/drm/nouveau/nouveau_bo.c        | 10 ---
->  drivers/gpu/drm/nouveau/nouveau_drm.c       |  3 +-
->  drivers/gpu/drm/nouveau/nouveau_gem.c       | 36 +++++++++++
->  drivers/gpu/drm/nouveau/nouveau_ttm.c       | 49 --------------
->  drivers/gpu/drm/nouveau/nouveau_ttm.h       |  1 -
->  drivers/gpu/drm/radeon/radeon_drv.c         |  3 +-
->  drivers/gpu/drm/radeon/radeon_gem.c         | 52 +++++++++++++++
->  drivers/gpu/drm/radeon/radeon_ttm.c         | 65 -------------------
->  drivers/gpu/drm/radeon/radeon_ttm.h         |  1 -
->  drivers/gpu/drm/ttm/ttm_bo_vm.c             | 60 ++---------------
->  drivers/gpu/drm/vmwgfx/vmwgfx_ttm_buffer.c  |  9 ---
->  drivers/gpu/drm/vmwgfx/vmwgfx_ttm_glue.c    | 51 ++++++++++++++-
->  include/drm/ttm/ttm_bo_api.h                | 13 ----
->  include/drm/ttm/ttm_device.h                | 15 -----
->  22 files changed, 212 insertions(+), 365 deletions(-)
-> 
-> --
-> 2.30.2
-> 
+--qHPZSfiFLTcaOfLLakODrcFJUrLuyNz8z
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
 
--- 
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
+Hi
+
+Am 08.04.21 um 13:16 schrieb Daniel Vetter:
+> On Tue, Apr 06, 2021 at 10:29:38AM +0200, Thomas Zimmermann wrote:
+>> The implementation of drm_driver.dumb_map_offset is the same for sever=
+al
+>> TTM-based drivers. Provide a common function in GEM-TTM helpers.
+>=20
+> Out of curiosity, why does this not fit for radeon/amdgpu?
+
+These drivers perform additional permission checks in their implementatio=
+ns.
+
+But those checks are also part of the actual mmap code. I want to=20
+propose a patch to use the generic drm_gem_ttm_map_offset in=20
+amdgpu/radeon, and then rely on mmap to fail if necessary. It might=20
+result in a longer discussion, so that's for another patchset.
+
+Best regards
+Thomas
+
+> -Daniel
+>=20
+>>
+>> Thomas Zimmermann (4):
+>>    drm/gem-ttm-helper: Provide helper for struct
+>>      drm_driver.dumb_map_offset
+>>    drm/vram-helper: Use drm_gem_ttm_dumb_map_offset()
+>>    drm/nouveau: Use drm_gem_ttm_dumb_map_offset()
+>>    drm/qxl: Use drm_gem_ttm_dumb_map_offset()
+>>
+>>   drivers/gpu/drm/drm_gem_ttm_helper.c      | 33 ++++++++++++++++
+>>   drivers/gpu/drm/drm_gem_vram_helper.c     | 48 ---------------------=
+--
+>>   drivers/gpu/drm/nouveau/nouveau_display.c | 18 ---------
+>>   drivers/gpu/drm/nouveau/nouveau_display.h |  2 -
+>>   drivers/gpu/drm/nouveau/nouveau_drm.c     |  3 +-
+>>   drivers/gpu/drm/qxl/qxl_drv.c             |  3 +-
+>>   drivers/gpu/drm/qxl/qxl_drv.h             |  3 --
+>>   drivers/gpu/drm/qxl/qxl_dumb.c            | 17 --------
+>>   drivers/gpu/drm/qxl/qxl_ioctl.c           |  4 +-
+>>   drivers/gpu/drm/qxl/qxl_object.h          |  5 ---
+>>   include/drm/drm_gem_ttm_helper.h          |  5 ++-
+>>   include/drm/drm_gem_vram_helper.h         |  7 +---
+>>   12 files changed, 45 insertions(+), 103 deletions(-)
+>>
+>> --
+>> 2.30.2
+>>
+>=20
+
+--=20
+Thomas Zimmermann
+Graphics Driver Developer
+SUSE Software Solutions Germany GmbH
+Maxfeldstr. 5, 90409 N=C3=BCrnberg, Germany
+(HRB 36809, AG N=C3=BCrnberg)
+Gesch=C3=A4ftsf=C3=BChrer: Felix Imend=C3=B6rffer
+
+
+--qHPZSfiFLTcaOfLLakODrcFJUrLuyNz8z--
+
+--wtPaAHNX0gkUUytT5iAsY74CPhbxKSfTl
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
+
+-----BEGIN PGP SIGNATURE-----
+
+wsF5BAABCAAjFiEExndm/fpuMUdwYFFolh/E3EQov+AFAmBu6iwFAwAAAAAACgkQlh/E3EQov+Bo
+xA/+N/inEFG7DAxEuVBieUUeYry0VZLHkDhsuHDNCkbAxyPqlhO/SSDCCESlPAsm7FgzLYuklbhm
+aB7wxekjdILBNWFLV0l6ymkF7lzTxdEZi2pi/Or8iJxEhOohWNyahKXsLfzgfqeN7sqjHNi/5h3B
+HZnfLn24dQmOs767YvshMRDMkP7t4jIp5UM2XCHs/sDlOC6fevqOJCgVSZ65gj/WvvpfopbsLKnT
+xibHhMyRlFxYwuAvamzcP6j364nN5yaVWDYBX2XYrTGCRV8BcN5IIvhq3464xOfwyFLUp/TSynL1
+tm+AoFDJEJJBkDUjeBsqryu3ZcL+7fWaiYDY5vMTXb7nO/wh7mChfatnTiw2XlKHJ40ERuPRJ7iW
+hQ+FyJdpx9HSTjLqgvJxROnmOa2zix+eO4ORtnqrDMCUpmDaeHkuRGadwcZR73/pA53hBiEKjvan
+4XbhDa+njjUEtLLkAoFl0NaAfd+ezN2xFwv4iYA0NnGxDvzStWjOWxZphqunDTMMufu3p1e1/IZE
+1E+4p9s8GSXsp0tPH+pGns5tt2HKBzaLuS+Cbbwu4nJLNuLTn8PKGhvFvjR82Fi6jUBzrV5Gs3yx
+PlFhk+sWo1qm0yJWjSvW/civrO64AdAl8jGcMcPU6dLY92TfFksZwkXeq7SL7+FSKolX4GK93lBi
+aBE=
+=bGEM
+-----END PGP SIGNATURE-----
+
+--wtPaAHNX0gkUUytT5iAsY74CPhbxKSfTl--
+
+--===============0893525404==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/nouveau
+
+--===============0893525404==--
