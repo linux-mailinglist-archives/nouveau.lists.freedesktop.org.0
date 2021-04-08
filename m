@@ -1,72 +1,46 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id D0632359F45
-	for <lists+nouveau@lfdr.de>; Fri,  9 Apr 2021 14:51:38 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4809B359F43
+	for <lists+nouveau@lfdr.de>; Fri,  9 Apr 2021 14:51:34 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 275D46EC19;
-	Fri,  9 Apr 2021 12:51:32 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id AC2EC6E49D;
+	Fri,  9 Apr 2021 12:51:31 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from out4-smtp.messagingengine.com (out4-smtp.messagingengine.com
- [66.111.4.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id DFA4F6E9E9;
- Thu,  8 Apr 2021 07:58:31 +0000 (UTC)
-Received: from compute6.internal (compute6.nyi.internal [10.202.2.46])
- by mailout.nyi.internal (Postfix) with ESMTP id 153465C0158;
- Thu,  8 Apr 2021 03:58:26 -0400 (EDT)
-Received: from mailfrontend2 ([10.202.2.163])
- by compute6.internal (MEProxy); Thu, 08 Apr 2021 03:58:26 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cerno.tech; h=
- date:from:to:cc:subject:message-id:references:mime-version
- :content-type:in-reply-to; s=fm2; bh=ivSego4I7bZ5eKPvELmNaata1GV
- NDZ6LFRSh0KXK3/s=; b=QYYGFdH44pO2Brvkt6h7KBB2+iF3JvIxNLLyLozZSNq
- 0/9i8XWoehGstw8qZj4OneximALk8Al3bZjWkd/x7EVOmrkdddsI/C1tLCMGwm+s
- v7ZZ3seD+zsnDZGQomRHyY7IgHF8FkF2pKUVZxHKHT3NXu/49Lir+1yUNLYN0OSc
- fYNRvFb00vS+EQqnuPT4KLvUZkp5EWI27727ZvHsMhECm5lGXiudgbjot60Xkgdb
- nUTldisoOBfS9YHyEDAFLpuof1ATnFKoiXTDOzpxHi3fgXhfwuDcIz1nUObUdd5R
- 8EuFEV6M12FCH0fCGxXFPGuxQo6aJxBgPPbqzGAwX1w==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to:x-me-proxy
- :x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; bh=ivSego
- 4I7bZ5eKPvELmNaata1GVNDZ6LFRSh0KXK3/s=; b=rnsqcrBJjqOEY/S7Xh5oeQ
- MBRGIS4lT5HcFM4R6cURTEKooZzLu3I3DYttwlHow+VpTgYDNRGBvBojuiubp8c3
- BLpBmhf/pgPwmw2Y5DNHfEE/T0SRFLI0dqpclqV3k44HvKLkVGP9ll8WGP4qG0zZ
- ETb7yjLoQomCgoj+zAVK8Z7DvKBQPwsZl3ARm06uH8IhBOKQWl45BGwdnf/MRGqd
- r7TmIsbPhELd8x08nGa2wasS3/2Isqu+V3RwVvyStv1KpQtk16mbhu05VcDs1EFk
- Ynogcpgt6MaIRtVp0WEheuzN7+LVNIsySF/OniDf0CDqJel9QrjzuNSOrlPmpM1g
- ==
-X-ME-Sender: <xms:oLduYDHcmnIMqNmYCWPZuTEZfIYXjkhDfEA6iKLjVHKmV10Zfqo22g>
- <xme:oLduYAXj5bB9ftt8RZsN316A6HmRUWlk_EDIu-Hl8231IxEbAMt61GvyPglIAZhkS
- qV9Ut-DJ19ocxDWvIs>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeduledrudejkedguddviecutefuodetggdotefrod
- ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
- necuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
- enucfjughrpeffhffvuffkfhggtggujgesghdtreertddtvdenucfhrhhomhepofgrgihi
- mhgvucftihhprghrugcuoehmrgigihhmvgestggvrhhnohdrthgvtghhqeenucggtffrrg
- htthgvrhhnpeelkeeghefhuddtleejgfeljeffheffgfeijefhgfeufefhtdevteegheei
- heegudenucfkphepledtrdekledrieekrdejieenucevlhhushhtvghrufhiiigvpedtne
- curfgrrhgrmhepmhgrihhlfhhrohhmpehmrgigihhmvgestggvrhhnohdrthgvtghh
-X-ME-Proxy: <xmx:oLduYFJ_1HEAfAiNW9uKySDw2WoWoU-7C_Ns6N8_BgFXkQvtCOMF8A>
- <xmx:oLduYBFOWSIpgaDU658cXNdjYlQ3FRm2u1PWP_OpDtMGyfS-olBBqA>
- <xmx:oLduYJVHGc5W6knP_Hxkh4FxppzptGc5Vl23fn7OK0QoZ09zpaRjaw>
- <xmx:orduYIE40mZx-jQjW4zFb_irlF7oDY06Vvke2o2XCWSiHQjdI7uRAQ>
-Received: from localhost (lfbn-tou-1-1502-76.w90-89.abo.wanadoo.fr
- [90.89.68.76])
- by mail.messagingengine.com (Postfix) with ESMTPA id 04150108005F;
- Thu,  8 Apr 2021 03:58:23 -0400 (EDT)
-Date: Thu, 8 Apr 2021 09:58:21 +0200
-From: Maxime Ripard <maxime@cerno.tech>
-To: Thomas Zimmermann <tzimmermann@suse.de>
-Message-ID: <20210408075821.bbmxlurmihd4ghpx@gilmour>
-References: <20210406082942.24049-1-tzimmermann@suse.de>
+X-Greylist: delayed 936 seconds by postgrey-1.36 at gabe;
+ Thu, 08 Apr 2021 11:29:11 UTC
+Received: from m12-11.163.com (m12-11.163.com [220.181.12.11])
+ by gabe.freedesktop.org (Postfix) with SMTP id 30EAB6EA9A
+ for <nouveau@lists.freedesktop.org>; Thu,  8 Apr 2021 11:29:10 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+ s=s110527; h=From:Subject:Date:Message-Id:MIME-Version; bh=nH5Ox
+ NX9QI3+WOQ+MgGkJpJsPf6+I533Yqbkktrymh8=; b=aAwlmqBHAh88elaBJTWlG
+ 8R9pmJsqO/wYuLb4aaysIBVsrS/Pk2TALBUKg1qAA46qLLBHvFlQf8mkTJbEYuCo
+ qAgyCvz5f2VlhdR5bz31Rrg3jlkESRN+VUwcpH7WNCJFChiq3bQU2GteL+9KH7yk
+ vKptBj8KQFaxuUj8ds+04o=
+Received: from localhost.localdomain (unknown [119.137.53.45])
+ by smtp7 (Coremail) with SMTP id C8CowADHtY3q5G5ggMrUWA--.3666S2;
+ Thu, 08 Apr 2021 19:11:39 +0800 (CST)
+From: Carlis <llyz108@163.com>
+To: bskeggs@redhat.com,
+	airlied@linux.ie,
+	daniel@ffwll.ch
+Date: Thu,  8 Apr 2021 11:11:36 +0000
+Message-Id: <20210408111136.27691-1-llyz108@163.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-In-Reply-To: <20210406082942.24049-1-tzimmermann@suse.de>
+X-CM-TRANSID: C8CowADHtY3q5G5ggMrUWA--.3666S2
+X-Coremail-Antispam: 1Uf129KBjvJXoW7WF13JFy8Kw1kWF1Dtr4UXFb_yoW8CFWkpF
+ 4xCFW7Zr4jkw47XF1xtF1jva4avanrGFy7GF92k3s09Fs7trWDXF15ArW5tryrJr43C3yY
+ yr1Dta4Y9a1av3DanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07jsTmfUUUUU=
+X-Originating-IP: [119.137.53.45]
+X-CM-SenderInfo: xoo16iiqy6il2tof0z/xtbBQgtuhV++LTpN3AAAsF
 X-Mailman-Approved-At: Fri, 09 Apr 2021 12:51:30 +0000
-Subject: Re: [Nouveau] [PATCH 0/4] drm: Generic dumb_map_offset for
- TTM-based drivers
+Subject: [Nouveau] [PATCH] drm/nouveau/hwmon: convert sysfs snprintf to
+ sysfs_emit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -78,56 +52,63 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: airlied@linux.ie, nouveau@lists.freedesktop.org,
- maarten.lankhorst@linux.intel.com, dri-devel@lists.freedesktop.org,
- virtualization@lists.linux-foundation.org, bskeggs@redhat.com, daniel@ffwll.ch,
- spice-devel@lists.freedesktop.org, kraxel@redhat.com
-Content-Type: multipart/mixed; boundary="===============0577796345=="
+Cc: nouveau@lists.freedesktop.org, Xuezhi Zhang <zhangxuezhi1@yulong.com>,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+From: Xuezhi Zhang <zhangxuezhi1@yulong.com>
 
---===============0577796345==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="nhsoqxufqmlyazgx"
-Content-Disposition: inline
+Fix the following coccicheck warning:
+drivers/gpu/drm//nouveau/nouveau_hwmon.c:44:8-16: 
+WARNING: use scnprintf or sprintf
+drivers/gpu/drm//nouveau/nouveau_hwmon.c:57:8-16: 
+WARNING: use scnprintf or sprintf
+drivers/gpu/drm//nouveau/nouveau_hwmon.c:90:8-16: 
+WARNING: use scnprintf or sprintf
 
+Signed-off-by: Xuezhi Zhang <zhangxuezhi1@yulong.com>
+---
+ drivers/gpu/drm/nouveau/nouveau_hwmon.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
---nhsoqxufqmlyazgx
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-
-On Tue, Apr 06, 2021 at 10:29:38AM +0200, Thomas Zimmermann wrote:
-> The implementation of drm_driver.dumb_map_offset is the same for several
-> TTM-based drivers. Provide a common function in GEM-TTM helpers.
-
-For the series:
-Acked-by: Maxime Ripard <maxime@cerno.tech>
-
-Maxime
-
---nhsoqxufqmlyazgx
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYIAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCYG63nQAKCRDj7w1vZxhR
-xRYHAQCB5YdMvJQCmZrSZdd7iTzptJmugGwvmitemDPO09KmEwD+MN5lN6korTN4
-2ZX4gbC41r49DjVpw79WiUzkQ4ReUg8=
-=KBmF
------END PGP SIGNATURE-----
-
---nhsoqxufqmlyazgx--
-
---===============0577796345==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+diff --git a/drivers/gpu/drm/nouveau/nouveau_hwmon.c b/drivers/gpu/drm/nouveau/nouveau_hwmon.c
+index 1c3104d20571..c6e5ee9ece6d 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_hwmon.c
++++ b/drivers/gpu/drm/nouveau/nouveau_hwmon.c
+@@ -41,7 +41,7 @@ static ssize_t
+ nouveau_hwmon_show_temp1_auto_point1_pwm(struct device *d,
+ 					 struct device_attribute *a, char *buf)
+ {
+-	return snprintf(buf, PAGE_SIZE, "%d\n", 100);
++	return sysfs_emit(buf, "%d\n", 100);
+ }
+ static SENSOR_DEVICE_ATTR(temp1_auto_point1_pwm, 0444,
+ 			  nouveau_hwmon_show_temp1_auto_point1_pwm, NULL, 0);
+@@ -54,7 +54,7 @@ nouveau_hwmon_temp1_auto_point1_temp(struct device *d,
+ 	struct nouveau_drm *drm = nouveau_drm(dev);
+ 	struct nvkm_therm *therm = nvxx_therm(&drm->client.device);
+ 
+-	return snprintf(buf, PAGE_SIZE, "%d\n",
++	return sysfs_emit(buf, "%d\n",
+ 	      therm->attr_get(therm, NVKM_THERM_ATTR_THRS_FAN_BOOST) * 1000);
+ }
+ static ssize_t
+@@ -87,7 +87,7 @@ nouveau_hwmon_temp1_auto_point1_temp_hyst(struct device *d,
+ 	struct nouveau_drm *drm = nouveau_drm(dev);
+ 	struct nvkm_therm *therm = nvxx_therm(&drm->client.device);
+ 
+-	return snprintf(buf, PAGE_SIZE, "%d\n",
++	return sysfs_emit(buf, "%d\n",
+ 	 therm->attr_get(therm, NVKM_THERM_ATTR_THRS_FAN_BOOST_HYST) * 1000);
+ }
+ static ssize_t
+-- 
+2.25.1
 
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/nouveau
-
---===============0577796345==--
