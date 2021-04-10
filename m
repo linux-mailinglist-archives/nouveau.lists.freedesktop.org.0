@@ -1,37 +1,34 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id BEB4E35AEEC
-	for <lists+nouveau@lfdr.de>; Sat, 10 Apr 2021 17:51:38 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 76C3635B01B
+	for <lists+nouveau@lfdr.de>; Sat, 10 Apr 2021 21:33:59 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id F420E6E529;
-	Sat, 10 Apr 2021 15:51:34 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A876A6EC9E;
+	Sat, 10 Apr 2021 19:33:57 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mupuf.org (mupuf.org [167.71.42.210])
- by gabe.freedesktop.org (Postfix) with ESMTP id 057106E529
- for <nouveau@lists.freedesktop.org>; Sat, 10 Apr 2021 15:51:32 +0000 (UTC)
-Received: from [IPv6:2a01:4b00:86b9:100:3a72:2134:f4fb:f726] (unknown
- [IPv6:2a01:4b00:86b9:100:3a72:2134:f4fb:f726])
- by Neelix.spliet.org (Postfix) with ESMTPSA id 5964DF20111;
- Sat, 10 Apr 2021 16:51:29 +0100 (BST)
-DKIM-Filter: OpenDKIM Filter v2.11.0 Neelix.spliet.org 5964DF20111
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=spliet.org;
- s=default; t=1618069889;
- bh=k2lVuNhhyJZ9m1XrTo42m98YzGLcO7suMUeViVTMkQk=;
- h=Subject:To:Cc:References:From:Date:In-Reply-To:From;
- b=gBCPJoSz0yL9JpfaOx5UYCv5PCkdSVV0o2wQUAQVB0dP9ra1Tc7vfUTd4aVWQpHMn
- MvJ3ZE/ghE90wQGRwjiC0n5Bpg0AcZ41Ka2ibuOmkN7FQFSVst3xJK//ASD/P5dcpL
- iGNKsMJvNdcXp22p/zDect3Q+yFTZBVwNb55rEQQ=
-To: Karol Herbst <kherbst@redhat.com>,
- Kai-Heng Feng <kai.heng.feng@canonical.com>
-References: <20201214060621.1102931-1-kai.heng.feng@canonical.com>
- <20201216124726.2842197-1-kai.heng.feng@canonical.com>
- <s5h5z51oj12.wl-tiwai@suse.de>
- <CAAd53p6kORC1GsW5zt+=0=J5ki43iriO-OqtFvf5W67LWhyyhA@mail.gmail.com>
- <s5hzh2dn3oa.wl-tiwai@suse.de>
- <CAAd53p6Ef2zFX_t3y1c6O7BmHnxYGtGSfgzXAMQSom1ainWXzg@mail.gmail.com>
+X-Greylist: delayed 638 seconds by postgrey-1.36 at gabe;
+ Sat, 10 Apr 2021 19:33:56 UTC
+Received: from bmailout3.hostsharing.net (bmailout3.hostsharing.net
+ [176.9.242.62])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 705DC6EC9E
+ for <nouveau@lists.freedesktop.org>; Sat, 10 Apr 2021 19:33:56 +0000 (UTC)
+Received: from h08.hostsharing.net (h08.hostsharing.net
+ [IPv6:2a01:37:1000::53df:5f1c:0])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (Client CN "*.hostsharing.net",
+ Issuer "RapidSSL TLS DV RSA Mixed SHA256 2020 CA-1" (verified OK))
+ by bmailout3.hostsharing.net (Postfix) with ESMTPS id 1A9A51003D000;
+ Sat, 10 Apr 2021 21:23:15 +0200 (CEST)
+Received: by h08.hostsharing.net (Postfix, from userid 100393)
+ id DCAFB1E6B5; Sat, 10 Apr 2021 21:23:14 +0200 (CEST)
+Date: Sat, 10 Apr 2021 21:23:14 +0200
+From: Lukas Wunner <lukas@wunner.de>
+To: Roy Spliet <nouveau@spliet.org>
+Message-ID: <20210410192314.GB16240@wunner.de>
+References: <CAAd53p6Ef2zFX_t3y1c6O7BmHnxYGtGSfgzXAMQSom1ainWXzg@mail.gmail.com>
  <s5hsg85n2km.wl-tiwai@suse.de> <s5hmtydn0yg.wl-tiwai@suse.de>
  <CAAd53p6MMFh=HCNF9pyrJc9hVMZWFe7_8MvBcBHVWARqHU_TTA@mail.gmail.com>
  <s5h7dpfk06y.wl-tiwai@suse.de>
@@ -39,20 +36,11 @@ References: <20201214060621.1102931-1-kai.heng.feng@canonical.com>
  <CAKb7UvjWX7xbwMKtnad5EVy16nY1M-A13YJeRWyUwHzemcVswA@mail.gmail.com>
  <CAAd53p4=bSX26QzsPyV1sxADiuVn2sowWyb5JFDoPZQ+ZYoCzA@mail.gmail.com>
  <CACO55tsPx_UC3OPf9Hq9sGdnZg9jH1+B0zOi6EAxTZ13E1tf7A@mail.gmail.com>
-From: Roy Spliet <nouveau@spliet.org>
-Message-ID: <d01e375f-bf16-a005-ec66-0910956cc616@spliet.org>
-Date: Sat, 10 Apr 2021 16:51:27 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.8.1
+ <d01e375f-bf16-a005-ec66-0910956cc616@spliet.org>
 MIME-Version: 1.0
-In-Reply-To: <CACO55tsPx_UC3OPf9Hq9sGdnZg9jH1+B0zOi6EAxTZ13E1tf7A@mail.gmail.com>
-Content-Language: en-US
-X-Spam-Status: No, score=-3.1 required=5.0 tests=ALL_TRUSTED,BAYES_00,
- DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,NICE_REPLY_A
- autolearn=unavailable autolearn_force=no version=3.4.4
-X-Spam-Checker-Version: SpamAssassin 3.4.4 (2020-01-24) on Neelix
-X-Virus-Scanned: clamav-milter 0.103.2 at Neelix
-X-Virus-Status: Clean
+Content-Disposition: inline
+In-Reply-To: <d01e375f-bf16-a005-ec66-0910956cc616@spliet.org>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 Subject: Re: [Nouveau] [PATCH v2] ALSA: hda: Continue to probe when codec
  probe fails
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -67,130 +55,38 @@ List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
 Cc: "moderated list:SOUND" <alsa-devel@alsa-project.org>,
+ open list <linux-kernel@vger.kernel.org>,
  Kai Vehmanen <kai.vehmanen@linux.intel.com>, Takashi Iwai <tiwai@suse.de>,
  nouveau <nouveau@lists.freedesktop.org>,
  Pierre-Louis Bossart <pierre-louis.bossart@linux.intel.com>, tiwai@suse.com,
- Alex Deucher <alexander.deucher@amd.com>,
- Alan Stern <stern@rowland.harvard.edu>, Mike Rapoport <rppt@kernel.org>,
- Linux PCI <linux-pci@vger.kernel.org>, Bjorn Helgaas <bhelgaas@google.com>,
- Jaroslav Kysela <perex@perex.cz>, open list <linux-kernel@vger.kernel.org>
+ Bjorn Helgaas <bhelgaas@google.com>,
+ Kai-Heng Feng <kai.heng.feng@canonical.com>,
+ Alan Stern <stern@rowland.harvard.edu>, Linux PCI <linux-pci@vger.kernel.org>,
+ Alex Deucher <alexander.deucher@amd.com>, Jaroslav Kysela <perex@perex.cz>,
+ Mike Rapoport <rppt@kernel.org>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Reviving this thread as we have another user (rightfully) complaining on 
-IRC about this.
+On Sat, Apr 10, 2021 at 04:51:27PM +0100, Roy Spliet wrote:
+> Can I ask someone with more
+> technical knowledge of snd_hda_intel and vgaswitcheroo to brainstorm about
+> the possible challenges of nouveau taking matters into its own hand rather
+> than keeping this PCI quirk around?
 
-The way I see it there's two issues:
-1) snd_hda_intel not allowing runpm (or w/e vgaswitcheroo needs) when 
-there's missing codecs, inhibiting the entire GPU from performing runpm. 
-This needlessly wastes lots of battery power.
-2) HDMI audio not working on such machines unless it was plugged in at 
-boot-time.
+It sounds to me like the HDA is not powered if no cable is plugged in.
+What is reponsible then for powering it up or down, firmware code on
+the GPU or in the host's BIOS?
 
-The original workarounds proposed by Kai-Heng seem to fix 1), which is 
-progress. I don't see a reason why that should be held off even if it 
-doesn't fix 2).
-To fix 2), more work is needed. On a high level, I suspect nouveau 
-should start controlling the enabling/disabling of the HDA controller 
-based on connector events and/or connector state at module load. 
-Currently the PCI quirk seems to enable it wholesale, and I don't know 
-why. If no GPU driver is loaded, it's pointless to turn the HDA device 
-on. The blob presumably doesn't need this either, as it can control the 
-device just as well as nouveau. If it doesn't, NVIDIA should fix it 
-rather than rely on this quirk. The only reason I can think of is that 
-snd_hda_intel or vgaswitcheroo isn't prepared for hot(un)plugging (or 
-alternatively reprobing) devices. Without that, we presumably won't 
-solve issue 2). Can I ask someone with more technical knowledge of 
-snd_hda_intel and vgaswitcheroo to brainstorm about the possible 
-challenges of nouveau taking matters into its own hand rather than 
-keeping this PCI quirk around?
+Ideally, we should try to find out how to control HDA power from the
+operating system rather than trying to cooperate with whatever firmware
+is doing.  If we have that capability, the OS should power the HDA up
+and down as it sees fit.
 
-Roy
+Thanks,
 
-Op 04-01-2021 om 13:20 schreef Karol Herbst:
-> On Tue, Dec 22, 2020 at 3:50 AM Kai-Heng Feng
-> <kai.heng.feng@canonical.com> wrote:
->>
->> On Tue, Dec 22, 2020 at 1:56 AM Ilia Mirkin <imirkin@alum.mit.edu> wrote:
->>>
->>> On Mon, Dec 21, 2020 at 11:33 AM Kai-Heng Feng
->>> <kai.heng.feng@canonical.com> wrote:
->>>>
->>>> [+Cc nouveau]
->>>>
->>>> On Fri, Dec 18, 2020 at 4:06 PM Takashi Iwai <tiwai@suse.de> wrote:
->>>> [snip]
->>>>>> Quite possibly the system doesn't power up HDA controller when there's
->>>>>> no external monitor.
->>>>>> So when it's connected to external monitor, it's still needed for HDMI audio.
->>>>>> Let me ask the user to confirm this.
->>>>>
->>>>> Yeah, it's the basic question whether the HD-audio is supposed to work
->>>>> on this machine at all.  If yes, the current approach we take makes
->>>>> less sense - instead we should rather make the HD-audio controller
->>>>> working.
->>>>
->>>> Yea, confirmed that the Nvidia HDA works when HDMI is connected prior boot.
->>>>
->>>>>>> - The second problem is that pci_enable_device() ignores the error
->>>>>>>    returned from pci_set_power_state() if it's -EIO.  And the
->>>>>>>    inaccessible access error returns -EIO, although it's rather a fatal
->>>>>>>    problem.  So the driver believes as the PCI device gets enabled
->>>>>>>    properly.
->>>>>>
->>>>>> This was introduced in 2005, by Alan's 11f3859b1e85 ("[PATCH] PCI: Fix
->>>>>> regression in pci_enable_device_bars") to fix UHCI controller.
->>>>>>
->>>>>>>
->>>>>>> - The third problem is that HD-audio driver blindly believes the
->>>>>>>    codec_mask read from the register even if it's a read failure as I
->>>>>>>    already showed.
->>>>>>
->>>>>> This approach has least regression risk.
->>>>>
->>>>> Yes, but it assumes that HD-audio is really non-existent.
->>>>
->>>> I really don't know any good approach to address this.
->>>> On Windows, HDA PCI is "hidden" until HDMI cable is plugged, then the
->>>> driver will flag the magic bit to make HDA audio appear on the PCI
->>>> bus.
->>>> IIRC the current approach is to make nouveau and device link work.
->>>
->>> I don't have the full context of this discussion, but the kernel
->>> force-enables the HDA subfunction nowadays, irrespective of nouveau or
->>> nvidia or whatever:
->>
->> That's the problem.
->>
->> The nvidia HDA controller on the affected system only gets its power
->> after HDMI cable plugged, so the probe on boot fails.
->>
-> 
-> it might be that the code to enable the sub function is a bit broken
-> :/ but it should work. Maybe the quirk_nvidia_hda function needs to be
-> called on more occasions? No idea.
-> 
->> Kai-Heng
->>
->>>
->>> https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/pci/quirks.c?h=v5.10#n5267
->>>
->>> Cheers,
->>>
->>>    -ilia
->> _______________________________________________
->> Nouveau mailing list
->> Nouveau@lists.freedesktop.org
->> https://lists.freedesktop.org/mailman/listinfo/nouveau
->>
-> 
-> _______________________________________________
-> Nouveau mailing list
-> Nouveau@lists.freedesktop.org
-> https://lists.freedesktop.org/mailman/listinfo/nouveau
-> 
+Lukas
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
