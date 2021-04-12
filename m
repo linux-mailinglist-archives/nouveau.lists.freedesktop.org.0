@@ -1,58 +1,37 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 43ADC35D19A
-	for <lists+nouveau@lfdr.de>; Mon, 12 Apr 2021 22:01:02 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 355B135D1A4
+	for <lists+nouveau@lfdr.de>; Mon, 12 Apr 2021 22:03:58 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id DCA6589CC1;
-	Mon, 12 Apr 2021 20:00:58 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 61B9F89C83;
+	Mon, 12 Apr 2021 20:03:56 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM02-BL2-obe.outbound.protection.outlook.com
- (mail-eopbgr750047.outbound.protection.outlook.com [40.107.75.47])
- by gabe.freedesktop.org (Postfix) with ESMTPS id DA5C589919
- for <nouveau@lists.freedesktop.org>; Mon, 12 Apr 2021 20:00:55 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=JLFUruR2vhMWQUP9xR5A91cQ52IN5FIBfJ5ktlH0ZDpf8yXjHwUztxGrhcxeewNwEMnoFtkqrghNBxULNhnGRmOrKI0z4myv2aSUmgbewrnPcx9WAboOISZHv1QS1iCQg5X603do5gnibf22u7I4yJUDbHMpSaS7HQRrQuO+VJfngqJ7z75iRreyaS8PeOB303j96v3i8XgkfFz/fA0E0ujGL3V1QYYpIHvS9/qTg1YoKTHfHHPYzZdQctrfxjvvJmnSk6GK8hypZxGdic3H+gGkB0hZ6lKI7JNQYdUFyCzm0UTNDCRR9wqYm5sjqqQyfGWFDjYI0DEhO2LLHE9MKw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=VorQfXBgtpdRn7YSY2KFbZCAoyi0OawSklJlghBN7bE=;
- b=hK5TRKgKp+5jT7MfDiYWeWET3gi8zbP0jX8KfBkKK6fplvlWhWv96TMgVETB+cH0hlxRFtsijTysawK+62pJ3eeImH07BBywdVzCJ2wIdqqj9SJWj6NUzJQ188m8y9wJRHfzE9QIaU135pi0d+wQBcpHAT+NBi1POCxOHOLGAVWKTk3WJ3tyj8v6tLMrkOk1KmK0SYtU6S4F9JqAE6MwXJnwT06tGZewTYPrMQnp3UyOiCcIl4PG5W0zgxbZ0vjy4irY1l+099ypLyJK1CFlqpC+lutGGAKl+r/usbFQ2/d1puHDHZdhbj28mG2+VhZ+oNXumPYlG9DBvVxRwbmshQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 216.228.112.34) smtp.rcpttodomain=linux.intel.com smtp.mailfrom=nvidia.com;
- dmarc=pass (p=none sp=none pct=100) action=none header.from=nvidia.com;
- dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=VorQfXBgtpdRn7YSY2KFbZCAoyi0OawSklJlghBN7bE=;
- b=A1K50KtblEHYHzQp2ilafOsO1YLhJI16/HsaskN8fjwsxVCe2tlzHDce4j0wheTGLQDk8TQ3DHRqneZ6xzg11xk4jKAWe4KfsXxZknJ+KHEKPlb69k6YYg4YMSGZOHR3drX68UmXvD2lAP4utPL3SfCaaAVpOivfzTI1LTvTrmk1HmJcqPM7zEI/6KuCXNWkDW1vZhw9IQ7Q0IzsoOzJZWJ/vD9+BEXzISg3HPyK2TxlwotrLyP8XW5ZvrByXtyUVrwtLk3hrtn5Hv3VYm2hHhFdxToLqNRstWnL6YpTfJtGF5jfXSwsvhpUVhIw1X4f57+K4veI1xNzSbCkjtcFGw==
-Received: from CO2PR04CA0204.namprd04.prod.outlook.com (2603:10b6:104:5::34)
- by MN2PR12MB3215.namprd12.prod.outlook.com (2603:10b6:208:101::33) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4020.22; Mon, 12 Apr
- 2021 20:00:53 +0000
-Received: from CO1NAM11FT008.eop-nam11.prod.protection.outlook.com
- (2603:10b6:104:5:cafe::4f) by CO2PR04CA0204.outlook.office365.com
- (2603:10b6:104:5::34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4020.16 via Frontend
- Transport; Mon, 12 Apr 2021 20:00:53 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.112.34)
- smtp.mailfrom=nvidia.com; linux.intel.com; dkim=none (message not signed)
- header.d=none; linux.intel.com; dmarc=pass action=none header.from=nvidia.com; 
-Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
- 216.228.112.34 as permitted sender) receiver=protection.outlook.com;
- client-ip=216.228.112.34; helo=mail.nvidia.com;
-Received: from mail.nvidia.com (216.228.112.34) by
- CO1NAM11FT008.mail.protection.outlook.com (10.13.175.191) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id
- 15.20.4020.17 via Frontend Transport; Mon, 12 Apr 2021 20:00:52 +0000
-Received: from ace.plattnerplace.us (172.20.145.6) by HQMAIL107.nvidia.com
- (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1497.2; Mon, 12 Apr
- 2021 20:00:52 +0000
-To: Roy Spliet <nouveau@spliet.org>, Lukas Wunner <lukas@wunner.de>
+Received: from mail-io1-f52.google.com (mail-io1-f52.google.com
+ [209.85.166.52])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6E9D889C83
+ for <nouveau@lists.freedesktop.org>; Mon, 12 Apr 2021 20:03:55 +0000 (UTC)
+Received: by mail-io1-f52.google.com with SMTP id k25so14744924iob.6
+ for <nouveau@lists.freedesktop.org>; Mon, 12 Apr 2021 13:03:55 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=V1DKBip1cD3aSFLjp4/QXCXfgqw6DxdHnGOMaVMs/Mk=;
+ b=FIjlwsW24FhR877UO4L18ZQI8/sfMJfc9sHR71yl2cfK7y5zE85DYnoycJozrxn3SN
+ 4XbwtCeYu1VyKwe6/pzNWMf9HdbSFczJw/4CvEXCoOXfXZaYjdTNX7SosqAqTh4LgW+b
+ 81gnSFRbsdZpqI4mT1m551veFjPAXffLUV6VhWu7Z00UHL31BDZVua7FYS6jFVUcZavw
+ whAsf2dxvApOiqdDIDttLJLrDPDFqOnpgRXhJQkpOala0bbBssBo95mN99Zs5M4QPwbh
+ +ESnWAdNgfhyypyfa8gZwZTWT0ud4GCDt3nzltrj7bQtXL2P/77ntKSXNjbdS2aGXYOX
+ mxSA==
+X-Gm-Message-State: AOAM531LIhlbNtx72gyg9+/1wxAcifO3DaB71/jQPlY0IzWzkV26LvUB
+ QybXYj5i5zn2Pck6eAIcOTQSw57V6euiMs7zR+Y=
+X-Google-Smtp-Source: ABdhPJyY69c31V3iKZiKQc18J3Idwmvowy5sUcT5nSDjCCDU2vU8FsrTnez4bmmXKiJh9b4vCq2zBbyoii3mC3d+KvE=
+X-Received: by 2002:a6b:ec08:: with SMTP id c8mr23006489ioh.55.1618257834792; 
+ Mon, 12 Apr 2021 13:03:54 -0700 (PDT)
+MIME-Version: 1.0
 References: <CAAd53p6Ef2zFX_t3y1c6O7BmHnxYGtGSfgzXAMQSom1ainWXzg@mail.gmail.com>
  <s5hsg85n2km.wl-tiwai@suse.de> <s5hmtydn0yg.wl-tiwai@suse.de>
  <CAAd53p6MMFh=HCNF9pyrJc9hVMZWFe7_8MvBcBHVWARqHU_TTA@mail.gmail.com>
@@ -66,41 +45,12 @@ References: <CAAd53p6Ef2zFX_t3y1c6O7BmHnxYGtGSfgzXAMQSom1ainWXzg@mail.gmail.com>
  <bddba2ca-15d5-7fd3-5b64-f4ba7e179ec0@spliet.org>
  <81b2a8c7-5b0b-b8fa-fbed-f164128de7a3@nvidia.com>
  <8d358110-769d-b984-d2ec-825dc2c3d77a@spliet.org>
-X-Nvconfidentiality: public
-From: Aaron Plattner <aplattner@nvidia.com>
-Message-ID: <d616715e-b0e3-74f6-9621-805fb5a0c898@nvidia.com>
-Date: Mon, 12 Apr 2021 13:00:51 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.9.0
-MIME-Version: 1.0
-In-Reply-To: <8d358110-769d-b984-d2ec-825dc2c3d77a@spliet.org>
-Content-Language: en-US
-X-Originating-IP: [172.20.145.6]
-X-ClientProxiedBy: HQMAIL111.nvidia.com (172.20.187.18) To
- HQMAIL107.nvidia.com (172.20.187.13)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: a7e2bd62-4060-412d-3158-08d8fdedad49
-X-MS-TrafficTypeDiagnostic: MN2PR12MB3215:
-X-Microsoft-Antispam-PRVS: <MN2PR12MB32153AE1C6296E30987F7873CD709@MN2PR12MB3215.namprd12.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:10000;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: N8YrVPtI8jI9OqIlLJC9Zbt1Sujm7J8IzTAKiuPeJhKRy3jrVYOUH793QktHU777ztqTGUiARpuvdbihDJBRZkIXX1XBFIq/RXKso8OWGSrLChrCS0TVDgdhE4FpH7qJiWWiUj8vOrTrmyUhV7o4ldv014ZpnnDyyJklDfj8F4xny2FBAHdVNJ7dhWP5YSHaDV7I/DGeWuJ+CBJhgZp2KSJgndg7KN5Jsob9kDk9FC6pAEl5RRYgz1ioC46GxjnGydkxa8RT7tBgqomhRO9lesGCkw7T4ycZSTts4hjuJTdSM5mrOq/Hhpy4+MhOBCKmT6CxokhE3g1EZQBQvVjxHKqb5jCkQR55lO/1WzDmV5FI5Z4/nFrvHjzm7lQ6+yhcs4Epsz8OkhNQL9zhg9SwZXMVdbse2cSDZKAJICxlXlgRwKdF42kaPzSCsVsPjLX8JgAswJPsgL7mTCBNGs0A2rrPoMSwrPgQShtprfNvz18ikEJ8TO/vmy68GEo6P2qNzS4MYAk3m9v9ibVxJWkfraLnEWZTu/vb/fRQYXQ0JtyMuLt0SF62s+JFXaGlCRqc/kVI46c03K9t0PuHredkVbRSgb39zmodUx3YoeA6SFasYqmpQaWXrxAVZ4yHzNmkog+3uup8fK+wFXJ+eVQ+6RfvetdByhrTq9j/eRl0/jjqynUrzzXEi+1a9fuk9f4mMiJ3h90vnw6dxDXFCPg/BlnrkDebJOz2OB4UG5/y7kYGp+a2vKymAxBL3BRtEjgI5x4LfHqVuBZpOTau1ynwD/lZOP8N7wWY1S/p9u4a8Uk=
-X-Forefront-Antispam-Report: CIP:216.228.112.34; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:schybrid03.nvidia.com; CAT:NONE;
- SFS:(4636009)(346002)(376002)(39860400002)(396003)(136003)(46966006)(36840700001)(70586007)(966005)(7636003)(26005)(82740400003)(478600001)(356005)(36756003)(4326008)(8936002)(336012)(5660300002)(82310400003)(36906005)(16526019)(186003)(86362001)(83380400001)(2906002)(31686004)(31696002)(2616005)(53546011)(110136005)(8676002)(47076005)(426003)(7416002)(316002)(70206006)(36860700001)(54906003)(75396010)(43740500002);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Apr 2021 20:00:52.8637 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: a7e2bd62-4060-412d-3158-08d8fdedad49
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.112.34];
- Helo=[mail.nvidia.com]
-X-MS-Exchange-CrossTenant-AuthSource: CO1NAM11FT008.eop-nam11.prod.protection.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB3215
+ <d616715e-b0e3-74f6-9621-805fb5a0c898@nvidia.com>
+In-Reply-To: <d616715e-b0e3-74f6-9621-805fb5a0c898@nvidia.com>
+From: Ilia Mirkin <imirkin@alum.mit.edu>
+Date: Mon, 12 Apr 2021 16:03:43 -0400
+Message-ID: <CAKb7UvjMmL3wp4uRCnkAW0r551uj5526RW7u==Arad23zF_Z8g@mail.gmail.com>
+To: Aaron Plattner <aplattner@nvidia.com>
 Subject: Re: [Nouveau] [PATCH v2] ALSA: hda: Continue to probe when codec
  probe fails
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -114,150 +64,107 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: "moderated list:SOUND" <alsa-devel@alsa-project.org>,
- open list <linux-kernel@vger.kernel.org>,
+Cc: Kai-Heng Feng <kai.heng.feng@canonical.com>,
+ "moderated list:SOUND" <alsa-devel@alsa-project.org>,
  Kai Vehmanen <kai.vehmanen@linux.intel.com>, Takashi Iwai <tiwai@suse.de>,
- nouveau <nouveau@lists.freedesktop.org>,
- Pierre-Louis Bossart <pierre-louis.bossart@linux.intel.com>, tiwai@suse.com,
- Bjorn Helgaas <bhelgaas@google.com>,
- Kai-Heng Feng <kai.heng.feng@canonical.com>,
- Alan Stern <stern@rowland.harvard.edu>, Linux PCI <linux-pci@vger.kernel.org>,
- Alex Deucher <alexander.deucher@amd.com>, Jaroslav Kysela <perex@perex.cz>,
+ nouveau <nouveau@lists.freedesktop.org>, tiwai@suse.com,
+ open list <linux-kernel@vger.kernel.org>,
+ Pierre-Louis Bossart <pierre-louis.bossart@linux.intel.com>,
+ Alex Deucher <alexander.deucher@amd.com>,
+ Linux PCI <linux-pci@vger.kernel.org>, Bjorn Helgaas <bhelgaas@google.com>,
+ Alan Stern <stern@rowland.harvard.edu>, Jaroslav Kysela <perex@perex.cz>,
  Mike Rapoport <rppt@kernel.org>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-T24gNC8xMi8yMSAxMjozNiBQTSwgUm95IFNwbGlldCB3cm90ZToKPiBIZWxsbyBBYXJvbiwKPgo+
-IFRoYW5rcyBmb3IgeW91ciBpbnNpZ2h0cy4gQSBmb2xsb3ctdXAgcXVlcnkgYW5kIHNvbWUgb2Jz
-ZXJ2YXRpb25zIAo+IGluLWxpbmUuCj4KPiBPcCAxMi0wNC0yMDIxIG9tIDIwOjA2IHNjaHJlZWYg
-QWFyb24gUGxhdHRuZXI6Cj4+IE9uIDQvMTAvMjEgMTo0OCBQTSwgUm95IFNwbGlldCB3cm90ZToK
-Pj4+IE9wIDEwLTA0LTIwMjEgb20gMjA6MjMgc2NocmVlZiBMdWthcyBXdW5uZXI6Cj4+Pj4gT24g
-U2F0LCBBcHIgMTAsIDIwMjEgYXQgMDQ6NTE6MjdQTSArMDEwMCwgUm95IFNwbGlldCB3cm90ZToK
-Pj4+Pj4gQ2FuIEkgYXNrIHNvbWVvbmUgd2l0aCBtb3JlCj4+Pj4+IHRlY2huaWNhbCBrbm93bGVk
-Z2Ugb2Ygc25kX2hkYV9pbnRlbCBhbmQgdmdhc3dpdGNoZXJvbyB0byAKPj4+Pj4gYnJhaW5zdG9y
-bSBhYm91dAo+Pj4+PiB0aGUgcG9zc2libGUgY2hhbGxlbmdlcyBvZiBub3V2ZWF1IHRha2luZyBt
-YXR0ZXJzIGludG8gaXRzIG93biAKPj4+Pj4gaGFuZCByYXRoZXIKPj4+Pj4gdGhhbiBrZWVwaW5n
-IHRoaXMgUENJIHF1aXJrIGFyb3VuZD8KPj4+Pgo+Pj4+IEl0IHNvdW5kcyB0byBtZSBsaWtlIHRo
-ZSBIREEgaXMgbm90IHBvd2VyZWQgaWYgbm8gY2FibGUgaXMgcGx1Z2dlZCBpbi4KPj4+PiBXaGF0
-IGlzIHJlcG9uc2libGUgdGhlbiBmb3IgcG93ZXJpbmcgaXQgdXAgb3IgZG93biwgZmlybXdhcmUg
-Y29kZSBvbgo+Pj4+IHRoZSBHUFUgb3IgaW4gdGhlIGhvc3QncyBCSU9TPwo+Pj4KPj4+IFNvbWV0
-aW1lcyB0aGUgQklPUywgYnV0IGRlZmluaXRlbHkgdW5jb25kaXRpb25hbGx5IHRoZSBQQ0kgcXVp
-cmsgCj4+PiBjb2RlOiAKPj4+IGh0dHBzOi8vZ2l0aHViLmNvbS90b3J2YWxkcy9saW51eC9ibG9i
-L21hc3Rlci9kcml2ZXJzL3BjaS9xdWlya3MuYyNMNTI4OSAKPj4+Cj4+Pgo+Pj4gKENDIEFhcm9u
-IFBsYXR0bmVyKQo+Pgo+PiBNeSBiYXNpYyB1bmRlcnN0YW5kaW5nIGlzIHRoYXQgdGhlIGF1ZGlv
-IGZ1bmN0aW9uIHN0b3BzIHJlc3BvbmRpbmcgCj4+IHdoZW5ldmVyIHRoZSBncmFwaGljcyBmdW5j
-dGlvbiBpcyBwb3dlcmVkIG9mZi4gU28gdGhlIHJlcXVpcmVtZW50IAo+PiBoZXJlIGlzIHRoYXQg
-dGhlIGF1ZGlvIGRyaXZlciBjYW4ndCB0cnkgdG8gdGFsayB0byB0aGUgYXVkaW8gZnVuY3Rpb24g
-Cj4+IHdoaWxlIHRoZSBncmFwaGljcyBmdW5jdGlvbiBpcyBhc2xlZXAsIGFuZCBtdXN0IHRyaWdn
-ZXIgYSBncmFwaGljcyAKPj4gZnVuY3Rpb24gd2FrZXVwIGJlZm9yZSB0cnlpbmcgdG8gY29tbXVu
-aWNhdGUgd2l0aCB0aGUgYXVkaW8gZnVuY3Rpb24uCj4KPiBJIGJlbGlldmUgdGhhdCB2Z2Fzd2l0
-Y2hlcm9vIHRha2VzIGNhcmUgb2YgdGhpcyBmb3IgdXMuCj4KPj4gSSB0aGluayB0aGVyZSBhcmUg
-YWxzbyByZXF1aXJlbWVudHMgYWJvdXQgdGhlIGF1ZGlvIGZ1bmN0aW9uIG5lZWRpbmcgCj4+IHRv
-IGJlIGF3YWtlIHdoZW4gdGhlIGdyYXBoaWNzIGRyaXZlciBpcyB1cGRhdGluZyB0aGUgRUxELCBi
-dXQgSSdtIG5vdCAKPj4gc3VyZS4KPj4KPj4gVGhpcyBpcyBoYXJkZXIgb24gV2luZG93cyBiZWNh
-dXNlIHRoZSBhdWRpbyBkcml2ZXIgbGl2ZXMgaW4gaXRzIG93biAKPj4gbGl0dGxlIHdvcmxkIGRv
-aW5nIGl0cyBvd24gdGhpbmcgYnV0IG9uIExpbnV4IHdlIGNhbiBkbyBiZXR0ZXIuCj4+Cj4+Pj4g
-SWRlYWxseSwgd2Ugc2hvdWxkIHRyeSB0byBmaW5kIG91dCBob3cgdG8gY29udHJvbCBIREEgcG93
-ZXIgZnJvbSB0aGUKPj4+PiBvcGVyYXRpbmcgc3lzdGVtIHJhdGhlciB0aGFuIHRyeWluZyB0byBj
-b29wZXJhdGUgd2l0aCB3aGF0ZXZlciAKPj4+PiBmaXJtd2FyZQo+Pj4+IGlzIGRvaW5nLsKgIElm
-IHdlIGhhdmUgdGhhdCBjYXBhYmlsaXR5LCB0aGUgT1Mgc2hvdWxkIHBvd2VyIHRoZSBIREEgdXAK
-Pj4+PiBhbmQgZG93biBhcyBpdCBzZWVzIGZpdC4KPj4KPj4gQWZ0ZXIgc3lzdGVtIGJvb3QsIEkg
-ZG9uJ3QgdGhpbmsgdGhlcmUncyBhbnkgZmlybXdhcmUgaW52b2x2ZWQsIGJ1dCAKPj4gSSdtIG5v
-dCBzdXBlciBmYW1pbGlhciB3aXRoIHRoZSBsb3ctbGV2ZWwgZGV0YWlscyBhbmQgaXQncyBwb3Nz
-aWJsZSAKPj4gdGhlIHNpdHVhdGlvbiBjaGFuZ2VkIHNpbmNlIEkgbGFzdCBsb29rZWQgYXQgaXQu
-Cj4+Cj4+IEkgdGhpbmsgdGhlIHByb2JsZW0gd2l0aCBoYXZpbmcgbm91dmVhdSB3cml0ZSB0aGlz
-IHF1aXJrIGlzIHRoYXQgdGhlIAo+PiBrZXJuZWwgd2lsbCBuZWVkIHRvIHJlLXByb2JlIHRoZSBQ
-Q0kgZGV2aWNlIHRvIG5vdGljZSB0aGF0IGl0IGhhcyAKPj4gc3VkZGVubHkgYmVjb21lIGEgbXVs
-dGktZnVuY3Rpb24gZGV2aWNlIHdpdGggYW4gYXVkaW8gZnVuY3Rpb24sIGFuZCAKPj4gaG90cGx1
-ZyB0aGUgYXVkaW8gZHJpdmVyLiBJIG9yaWdpbmFsbHkgbG9va2VkIGludG8gdHJ5aW5nIHRvIGRv
-IHRoYXQgCj4+IGJ1dCBpdCB3YXMgdHJpY2t5IGJlY2F1c2UgdGhlIFBDSSBzdWJzeXN0ZW0gZGlk
-bid0IHJlYWxseSBoYXZlIGEgCj4+IG1lY2hhbmlzbSBmb3IgYSBzaW5nbGUtZnVuY3Rpb24gZGV2
-aWNlIHRvIGJlY29tZSBhIG11bHRpLWZ1bmN0aW9uIAo+PiBkZXZpY2Ugb24gdGhlIGZseSBhbmQg
-aXQgc2VlbWVkIGVhc2llciB0byBlbmFibGUgaXQgZWFybHkgb24gZHVyaW5nIAo+PiBidXMgZW51
-bWVyYXRpb24uIFRoYXQgd2F5IHRoZSBrZXJuZWwgc2VlcyBib3RoIGZ1bmN0aW9ucyBhbGwgdGhl
-IHRpbWUgCj4+IHdpdGhvdXQgYW55dGhpbmcgZWxzZSBoYXZpbmcgdG8gYmUgc3BlY2lhbCBhYm91
-dCB0aGlzIGNvbmZpZ3VyYXRpb24uCj4KPiBSaWdodCwgc28gZm9yIGEgbGl0dGxlIG1vcmUgY29u
-dGV4dDogYSB3aGlsZSBhZ28gSSBub3RpY2VkIHRoYXQgbXkgCj4gbGFwdG9wIChsdWNreSBtZSwg
-QXN1cyBLNTAxVUIpIGhhcyBhIDk0ME0gd2l0aCBIREEgYnV0IG5vIGNvZGVjLiBTZWVtcyAKPiBs
-ZWdpdCwgZ2l2ZW4gaG93IHRoaXMgR1BVIGhhcyBubyBkaXNwbGF5cyBhdHRhY2hlZDsgdGhleSdy
-ZSBhbGwgaG9va2VkIAo+IHVwIHRvIHRoZSBJbnRlbCBpbnRlZ3JhdGVkIEdQVS4gVGhhdCB0aHJl
-dyBvZmYgdGhlIHNuZF9oZGFfaW50ZWwgCj4gbWlkLXByb2JlLCBhbmQgYXMgYSByZXN1bHQgZGlk
-bid0IHBlcm1pdCBydW5wbSwga2VlcGluZyB0aGUgZW50aXJlIAo+IEdQVSwgUENJZSBidXMgYW5k
-IHRodXMgdGhlIENQVSBwYWNrYWdlIGF3YWtlLiBBIGJpdCBvZiBoYWNrZXJseSBsYXRlciAKPiB3
-ZSBkZWNpZGVkIHRvIGNvbnRpbnVlIHByb2Jpbmcgd2l0aG91dCBhIGNvZGVjLCBhbmQgbm93IG15
-IGxhcHRvcCBpcyAKPiBoYXBweSwgYnV0Li4uCgpXaGF0IGlzIHRoZSBQQ0kgY2xhc3Mgb2YgdGhl
-IEdQVSBpbiB5b3VyIHN5c3RlbT8gSWYgaXQgaGFzIG5vIGRpc3BsYXkgCm91dHB1dHMgaXQncyBw
-cm9iYWJseSAweDMwMiAoIjNEIENvbnRyb2xsZXIiKSByYXRoZXIgdGhhbiAweDMwMCAoIlZHQSAK
-Q29udHJvbGxlciIpLiBMb29raW5nIGF0IHRoZSBjb2RlIGl0IGxvb2tzIGxpa2UgdGhpcyB3b3Jr
-YXJvdW5kIGlzIGJlaW5nIAphcHBsaWVkIHRvIGJvdGggYnV0IG1heWJlIGl0IHNob3VsZCBiZSBy
-ZXN0cmljdGVkIHRvIGp1c3QgVkdBIGNvbnRyb2xsZXJzLgoKLS0gQWFyb24KCj4gQSBuZXcgcHJv
-YmxlbSBwb3BwZWQgdXAgd2l0aCBzZXZlcmFsIG90aGVyIE5WSURJQSBHUFVzIHRoYXQgZXhwb3Nl
-IAo+IHRoZWlyIEhEQSBzdWJkZXZpY2UsIGJ1dCBzb21laG93IGl0cyBpbmFjY2Vzc2libGUuIFJl
-bGV2YW50IGxpbmVzIGZyb20gCj4gYSB1c2VycycgbG9nOgo+Cj4gW8KgwqDCoCAzLjAzMTIyMl0g
-TVhNOiBHVUlEIGRldGVjdGVkIGluIEJJT1MKPiBbwqDCoMKgIDMuMDMxMjgwXSBBQ1BJIEJJT1Mg
-RXJyb3IgKGJ1Zyk6IEFFX0FNTF9QQUNLQUdFX0xJTUlULCBJbmRleCAKPiAoMHgwMDAwMDAwMDMp
-IGlzIGJleW9uZCBlbmQgb2Ygb2JqZWN0IChsZW5ndGggMHgwKSAKPiAoMjAyMDA5MjUvZXhvcGFy
-ZzItMzkzKQo+IFvCoMKgwqAgMy4wMzEzNTJdIEFDUEkgRXJyb3I6IEFib3J0aW5nIG1ldGhvZCBc
-X1NCLlBDSTAuR0ZYMC5fRFNNIGR1ZSB0byAKPiBwcmV2aW91cyBlcnJvciAoQUVfQU1MX1BBQ0tB
-R0VfTElNSVQpICgyMDIwMDkyNS9wc3BhcnNlLTUyOSkKPiBbwqDCoMKgIDMuMDMxNDE5XSBBQ1BJ
-OiBcX1NCXy5QQ0kwLkdGWDA6IGZhaWxlZCB0byBldmFsdWF0ZSBfRFNNICgweDMwMGIpCj4gW8Kg
-wqDCoCAzLjAzMTQyNF0gQUNQSSBXYXJuaW5nOiBcX1NCLlBDSTAuR0ZYMC5fRFNNOiBBcmd1bWVu
-dCAjNCB0eXBlIAo+IG1pc21hdGNoIC0gRm91bmQgW0J1ZmZlcl0sIEFDUEkgcmVxdWlyZXMgW1Bh
-Y2thZ2VdIAo+ICgyMDIwMDkyNS9uc2FyZ3VtZW50cy02MSkKPiBbwqDCoMKgIDMuMDMxNjE5XSBw
-Y2kgMDAwMDowMDowMi4wOiBvcHRpbXVzIGNhcGFiaWxpdGllczogZW5hYmxlZCwgc3RhdHVzIAo+
-IGR5bmFtaWMgcG93ZXIsCj4gW8KgwqDCoCAzLjAzMTY2N10gQUNQSSBCSU9TIEVycm9yIChidWcp
-OiBBRV9BTUxfUEFDS0FHRV9MSU1JVCwgSW5kZXggCj4gKDB4MDAwMDAwMDAzKSBpcyBiZXlvbmQg
-ZW5kIG9mIG9iamVjdCAobGVuZ3RoIDB4MCkgCj4gKDIwMjAwOTI1L2V4b3BhcmcyLTM5MykKPiBb
-wqDCoMKgIDMuMDMxNzMxXSBBQ1BJIEVycm9yOiBBYm9ydGluZyBtZXRob2QgXF9TQi5QQ0kwLkdG
-WDAuX0RTTSBkdWUgdG8gCj4gcHJldmlvdXMgZXJyb3IgKEFFX0FNTF9QQUNLQUdFX0xJTUlUKSAo
-MjAyMDA5MjUvcHNwYXJzZS01MjkpCj4gW8KgwqDCoCAzLjAzMTc5MV0gQUNQSSBFcnJvcjogQWJv
-cnRpbmcgbWV0aG9kIFxfU0IuUENJMC5QRUcwLlBFR1AuX0RTTSAKPiBkdWUgdG8gcHJldmlvdXMg
-ZXJyb3IgKEFFX0FNTF9QQUNLQUdFX0xJTUlUKSAoMjAyMDA5MjUvcHNwYXJzZS01MjkpCj4gW8Kg
-wqDCoCAzLjAzMTg1Nl0gQUNQSTogXF9TQl8uUENJMC5QRUcwLlBFR1A6IGZhaWxlZCB0byBldmFs
-dWF0ZSBfRFNNIAo+ICgweDMwMGIpCj4gW8KgwqDCoCAzLjAzMTg1OV0gQUNQSSBXYXJuaW5nOiBc
-X1NCLlBDSTAuUEVHMC5QRUdQLl9EU006IEFyZ3VtZW50ICM0IAo+IHR5cGUgbWlzbWF0Y2ggLSBG
-b3VuZCBbQnVmZmVyXSwgQUNQSSByZXF1aXJlcyBbUGFja2FnZV0gCj4gKDIwMjAwOTI1L25zYXJn
-dW1lbnRzLTYxKQo+IFvCoMKgwqAgMy4wMzIwNThdIHBjaSAwMDAwOjAxOjAwLjA6IG9wdGltdXMg
-Y2FwYWJpbGl0aWVzOiBlbmFibGVkLCBzdGF0dXMgCj4gZHluYW1pYyBwb3dlciwKPiBbwqDCoMKg
-IDMuMDMyMDYxXSBWR0Egc3dpdGNoZXJvbzogZGV0ZWN0ZWQgT3B0aW11cyBEU00gbWV0aG9kIAo+
-IFxfU0JfLlBDSTAuUEVHMC5QRUdQIGhhbmRsZQo+IFvCoMKgwqAgMy4wMzIzMjNdIGNoZWNraW5n
-IGdlbmVyaWMgKGQwMDAwMDAwIDQxMDAwMCkgdnMgaHcgKGY2MDAwMDAwIAo+IDEwMDAwMDApCj4g
-W8KgwqDCoCAzLjAzMjMyNV0gY2hlY2tpbmcgZ2VuZXJpYyAoZDAwMDAwMDAgNDEwMDAwKSB2cyBo
-dyAoZTAwMDAwMDAgCj4gMTAwMDAwMDApCj4gW8KgwqDCoCAzLjAzMjMyNl0gY2hlY2tpbmcgZ2Vu
-ZXJpYyAoZDAwMDAwMDAgNDEwMDAwKSB2cyBodyAoZjAwMDAwMDAgCj4gMjAwMDAwMCkKPiBbwqDC
-oMKgIDMuMDMyNDEwXSBub3V2ZWF1IDAwMDA6MDE6MDAuMDogTlZJRElBIEdLMTA3ICgwZTcxZjBh
-MikKPiBbwqDCoMKgIDMuMDQyMzg1XSBub3V2ZWF1IDAwMDA6MDE6MDAuMDogYmlvczogdmVyc2lv
-biA4MC4wNy5hMC4wMC4xMQo+IC0tLSBzbmlwIC0tLQo+IFvCoMKgwqAgOC45NTE0NzhdIHNuZF9o
-ZGFfaW50ZWwgMDAwMDowMTowMC4xOiBjYW4ndCBjaGFuZ2UgcG93ZXIgc3RhdGUgCj4gZnJvbSBE
-M2NvbGQgdG8gRDAgKGNvbmZpZyBzcGFjZSBpbmFjY2Vzc2libGUpCj4gW8KgwqDCoCA4Ljk1MTUw
-OV0gc25kX2hkYV9pbnRlbCAwMDAwOjAxOjAwLjE6IGNhbid0IGNoYW5nZSBwb3dlciBzdGF0ZSAK
-PiBmcm9tIEQzaG90IHRvIEQwIChjb25maWcgc3BhY2UgaW5hY2Nlc3NpYmxlKQo+IFvCoMKgwqAg
-OC45NTE2MDhdIHNuZF9oZGFfaW50ZWwgMDAwMDowMTowMC4xOiBEaXNhYmxpbmcgTVNJCj4gW8Kg
-wqDCoCA4Ljk1MTYyMV0gc25kX2hkYV9pbnRlbCAwMDAwOjAxOjAwLjE6IEhhbmRsZSB2Z2Ffc3dp
-dGNoZXJvbyBhdWRpbyAKPiBjbGllbnQKPiBbwqDCoMKgIDguOTUyNDYxXSBzbmRfaGRhX2ludGVs
-IDAwMDA6MDA6MWIuMDogYm91bmQgMDAwMDowMDowMi4wIChvcHMgCj4gaTkxNV9hdWRpb19jb21w
-b25lbnRfYmluZF9vcHMgW2k5MTVdKQo+IFvCoMKgwqAgOC45NTI2NDJdIHNuZF9oZGFfaW50ZWwg
-MDAwMDowMTowMC4xOiBudW1iZXIgb2YgSS9PIHN0cmVhbXMgaXMgCj4gMzAsIGZvcmNpbmcgc2Vw
-YXJhdGUgc3RyZWFtIHRhZ3MKPgo+IE5vdyBJIGRvbid0IGtub3cgd2hhdCdzIGdvaW5nIG9uLCBi
-dXQgdGhlIHNuZF9oZGFfaW50ZWwgbWVzc2FnZXMgYXJlIAo+IG9taW5vdXMuIEFuZCBzbyBhcmUg
-dGhlIEFDUEkgd2FybmluZ3MuIEJ1dCBJIGRvbid0IGtub3cgaG93IG11Y2ggdGhlc2UgCj4gdHdv
-IGFyZSByZWxhdGVkLgo+Cj4gWW91IHNheSB0aGF0IGl0IGlzIGRlc2lyYWJsZSB0byBzd2l0Y2gg
-b24gSERBIGF0IGJvb3QtdGltZSBiZWNhdXNlIHRoZSAKPiBQQ0kgc3Vic3lzdGVtIGRvZXNuJ3Qg
-cGxheSBuaWNlbHkgd2l0aCBjaGFuZ2luZyBhIGRldmljZSB0byAKPiBtdWx0aS1mdW5jdGlvbi4g
-VGhhdCBydWxlcyBvdXQgdGhlIG9wdGlvbiBvZiBvbmx5IGVuYWJsaW5nIHRoZSBIREEgCj4gZGV2
-aWNlIG9uY2UgYSBjYWJsZSBpcyBwbHVnZ2VkIGluLiBBcmUgdGhlcmUgYW55IG90aGVyIHRyYXAg
-ZG9vcnMgdGhhdCAKPiBzbmRfaGRhX2ludGVsIG5lZWRzIHRvIG5hdmlnYXRlIGFyb3VuZCB0byBt
-YWtlIHRoaXMgd29yayBmYXVsdCBmcmVlIG9uIAo+IGFsbCBoYXJkd2FyZSwgc3VjaCBhczoKPiAt
-IENvZGVjcyBub3QgcmV2ZWFsaW5nIHRoZW1zZWx2ZXMgdW50aWwgYSBkaXNwbGF5IGlzIHBsdWdn
-ZWQgaW4sIAo+IHJlcXVpcmluZyBwZXJoYXBzIGEgImNvZGVjIHJlcHJvYmUiIGFuZCAiY29kZWMg
-cmVtb3ZlIiBldmVudCBmcm9tIAo+IG5vdXZlYXUvcm0gdG8gc25kX2hkYV9pbnRlbCwKPiAtIEJv
-cmtlZCBCSU9TZXMganVzdCBibGluZGx5IGFzc2lnbmluZyB0aGUgTU1JTyBzcGFjZSBvZiB0aGUg
-SERBIAo+IGRldmljZSB0byBhbm90aGVyIGRldmljZSwgb3Igbm90aGluZyBhdCBhbGwsCj4gLSAu
-Li4gb3RoZXIgdGhpbmdzIHRoYXQgbWlnaHQgZ2l2ZSBhbnkgb2YgdXMgbmlnaHRtYXJlcyBhbmQg
-aGVhcnQgYnVybj8KPgo+IFRoYW5rcyEKPgo+IFJveQo+Cj4+Cj4+IC0tIEFhcm9uCj4+Cj4+Pj4g
-VGhhbmtzLAo+Pj4+Cj4+Pj4gTHVrYXMKPgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fXwpOb3V2ZWF1IG1haWxpbmcgbGlzdApOb3V2ZWF1QGxpc3RzLmZyZWVk
-ZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZv
-L25vdXZlYXUK
+On Mon, Apr 12, 2021 at 4:01 PM Aaron Plattner <aplattner@nvidia.com> wrote:
+>
+> On 4/12/21 12:36 PM, Roy Spliet wrote:
+> > Hello Aaron,
+> >
+> > Thanks for your insights. A follow-up query and some observations
+> > in-line.
+> >
+> > Op 12-04-2021 om 20:06 schreef Aaron Plattner:
+> >> On 4/10/21 1:48 PM, Roy Spliet wrote:
+> >>> Op 10-04-2021 om 20:23 schreef Lukas Wunner:
+> >>>> On Sat, Apr 10, 2021 at 04:51:27PM +0100, Roy Spliet wrote:
+> >>>>> Can I ask someone with more
+> >>>>> technical knowledge of snd_hda_intel and vgaswitcheroo to
+> >>>>> brainstorm about
+> >>>>> the possible challenges of nouveau taking matters into its own
+> >>>>> hand rather
+> >>>>> than keeping this PCI quirk around?
+> >>>>
+> >>>> It sounds to me like the HDA is not powered if no cable is plugged in.
+> >>>> What is reponsible then for powering it up or down, firmware code on
+> >>>> the GPU or in the host's BIOS?
+> >>>
+> >>> Sometimes the BIOS, but definitely unconditionally the PCI quirk
+> >>> code:
+> >>> https://github.com/torvalds/linux/blob/master/drivers/pci/quirks.c#L5289
+> >>>
+> >>>
+> >>> (CC Aaron Plattner)
+> >>
+> >> My basic understanding is that the audio function stops responding
+> >> whenever the graphics function is powered off. So the requirement
+> >> here is that the audio driver can't try to talk to the audio function
+> >> while the graphics function is asleep, and must trigger a graphics
+> >> function wakeup before trying to communicate with the audio function.
+> >
+> > I believe that vgaswitcheroo takes care of this for us.
+> >
+> >> I think there are also requirements about the audio function needing
+> >> to be awake when the graphics driver is updating the ELD, but I'm not
+> >> sure.
+> >>
+> >> This is harder on Windows because the audio driver lives in its own
+> >> little world doing its own thing but on Linux we can do better.
+> >>
+> >>>> Ideally, we should try to find out how to control HDA power from the
+> >>>> operating system rather than trying to cooperate with whatever
+> >>>> firmware
+> >>>> is doing.  If we have that capability, the OS should power the HDA up
+> >>>> and down as it sees fit.
+> >>
+> >> After system boot, I don't think there's any firmware involved, but
+> >> I'm not super familiar with the low-level details and it's possible
+> >> the situation changed since I last looked at it.
+> >>
+> >> I think the problem with having nouveau write this quirk is that the
+> >> kernel will need to re-probe the PCI device to notice that it has
+> >> suddenly become a multi-function device with an audio function, and
+> >> hotplug the audio driver. I originally looked into trying to do that
+> >> but it was tricky because the PCI subsystem didn't really have a
+> >> mechanism for a single-function device to become a multi-function
+> >> device on the fly and it seemed easier to enable it early on during
+> >> bus enumeration. That way the kernel sees both functions all the time
+> >> without anything else having to be special about this configuration.
+> >
+> > Right, so for a little more context: a while ago I noticed that my
+> > laptop (lucky me, Asus K501UB) has a 940M with HDA but no codec. Seems
+> > legit, given how this GPU has no displays attached; they're all hooked
+> > up to the Intel integrated GPU. That threw off the snd_hda_intel
+> > mid-probe, and as a result didn't permit runpm, keeping the entire
+> > GPU, PCIe bus and thus the CPU package awake. A bit of hackerly later
+> > we decided to continue probing without a codec, and now my laptop is
+> > happy, but...
+>
+> What is the PCI class of the GPU in your system? If it has no display
+> outputs it's probably 0x302 ("3D Controller") rather than 0x300 ("VGA
+> Controller"). Looking at the code it looks like this workaround is being
+> applied to both but maybe it should be restricted to just VGA controllers.
+
+That was a comment I had back when the quirk was being implemented,
+but helpfully there are some of these devices running around which say
+"3D Controller" but still have displays attached to them. Lukas
+probably remembers more specifics.
+
+  -ilia
+_______________________________________________
+Nouveau mailing list
+Nouveau@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/nouveau
