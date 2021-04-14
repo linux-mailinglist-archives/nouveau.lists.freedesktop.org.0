@@ -1,73 +1,44 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 20C8A35ECA4
-	for <lists+nouveau@lfdr.de>; Wed, 14 Apr 2021 07:58:37 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id EFCF135EE9A
+	for <lists+nouveau@lfdr.de>; Wed, 14 Apr 2021 09:44:31 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8423989991;
-	Wed, 14 Apr 2021 05:58:30 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E9E5F6E463;
+	Wed, 14 Apr 2021 07:44:29 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from userp2120.oracle.com (userp2120.oracle.com [156.151.31.85])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 037A489911;
- Wed, 14 Apr 2021 05:58:28 +0000 (UTC)
-Received: from pps.filterd (userp2120.oracle.com [127.0.0.1])
- by userp2120.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 13E5vPYK013680;
- Wed, 14 Apr 2021 05:58:23 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
- h=date : from : to : cc
- : subject : message-id : mime-version : content-type; s=corp-2020-01-29;
- bh=kUKmOerkc4ti6G8+ArQ1eNVByqqeEEy3cBhe7cYrEW0=;
- b=dQqshySTxyaljXhs7r1c221uNgYwgomy2nna8M1GybdHPTPsbeYIWJ6syem+xBes8W0M
- faNzPUawCUH7Q/wbfTZQzk8Y+emLXwdQsDW+BVqMNRF8GTfeB8vSnT0PMiH6P8OxN1U0
- sQ5qNx3qI8wSB2WFvK1jKrPMvFYU1FDe9nsFOaNTojOZuI2KS7GLOAjKYqAQhC+/8cUR
- +toti+dOS1+1ipQiDVouHomoxs71reFKl/1Z2I7U1CvHtFnMk5o4woaHcQ3npBcza7vf
- 0+zmRn2uXLdSB7ZOYn0TaWfEnqXDTfsW4vF2TbHEVX2s2/IEP5VGbjfkVGk3UiHeRejc DA== 
-Received: from userp3030.oracle.com (userp3030.oracle.com [156.151.31.80])
- by userp2120.oracle.com with ESMTP id 37u4nnh4n9-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 14 Apr 2021 05:58:23 +0000
-Received: from pps.filterd (userp3030.oracle.com [127.0.0.1])
- by userp3030.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 13E5uO1J169527;
- Wed, 14 Apr 2021 05:58:22 GMT
-Received: from userv0121.oracle.com (userv0121.oracle.com [156.151.31.72])
- by userp3030.oracle.com with ESMTP id 37unxxw360-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 14 Apr 2021 05:58:22 +0000
-Received: from abhmp0013.oracle.com (abhmp0013.oracle.com [141.146.116.19])
- by userv0121.oracle.com (8.14.4/8.13.8) with ESMTP id 13E5wJrM014311;
- Wed, 14 Apr 2021 05:58:20 GMT
-Received: from mwanda (/10.175.166.128)
- by default (Oracle Beehive Gateway v4.0)
- with ESMTP ; Tue, 13 Apr 2021 22:58:18 -0700
-Date: Wed, 14 Apr 2021 08:58:12 +0300
-From: Dan Carpenter <dan.carpenter@oracle.com>
-To: Ben Skeggs <bskeggs@redhat.com>, Pierre Moreau <pierre.morrow@free.fr>
-Message-ID: <YHaEdBgqCFQRqg1B@mwanda>
+Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 449F06E47B;
+ Wed, 14 Apr 2021 07:44:29 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id B873DABF6;
+ Wed, 14 Apr 2021 07:44:26 +0000 (UTC)
+To: Felix Kuehling <felix.kuehling@amd.com>,
+ =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
+ alexander.deucher@amd.com, airlied@linux.ie, daniel@ffwll.ch,
+ bskeggs@redhat.com, ray.huang@amd.com, linux-graphics-maintainer@vmware.com,
+ sroland@vmware.com, zackr@vmware.com, shashank.sharma@amd.com,
+ sam@ravnborg.org, emil.velikov@collabora.com, nirmoy.das@amd.com
+References: <20210406090903.7019-1-tzimmermann@suse.de>
+ <20210406090903.7019-4-tzimmermann@suse.de>
+ <6b261dab-4a4d-f0c6-95c0-f720c7df12c1@amd.com>
+ <b76d1922-c9a5-8533-657a-2c1149832347@suse.de>
+ <9db18654-770f-459b-a89a-c57dc8a21bac@amd.com>
+ <573dca0f-d017-3614-5e4f-d8d0b6bc413f@amd.com>
+ <780bb477-77c3-2f3c-2417-edeffccd63b9@amd.com>
+ <a152c174-c0fe-fc6f-9fa0-9054ffe415a9@amd.com>
+From: Thomas Zimmermann <tzimmermann@suse.de>
+Message-ID: <63c90815-c9d8-68df-daa1-c165215a6b7c@suse.de>
+Date: Wed, 14 Apr 2021 09:44:25 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.9.0
 MIME-Version: 1.0
-Content-Disposition: inline
-X-Mailer: git-send-email haha only kidding
-X-Proofpoint-IMR: 1
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=9953
- signatures=668683
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 mlxscore=0
- bulkscore=0 malwarescore=0
- spamscore=0 adultscore=0 phishscore=0 mlxlogscore=999 suspectscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2104060000
- definitions=main-2104140041
-X-Proofpoint-ORIG-GUID: Af1ALPuAt7CncMKwoyepc_tRF9h-ox9z
-X-Proofpoint-GUID: Af1ALPuAt7CncMKwoyepc_tRF9h-ox9z
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=9953
- signatures=668683
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 adultscore=0
- malwarescore=0
- phishscore=0 suspectscore=0 mlxlogscore=999 priorityscore=1501
- clxscore=1011 lowpriorityscore=0 spamscore=0 impostorscore=0 bulkscore=0
- mlxscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2104060000 definitions=main-2104140041
-Subject: [Nouveau] [PATCH] drm/nouveau: fix an error code in
- nouveau_backlight_init()
+In-Reply-To: <a152c174-c0fe-fc6f-9fa0-9054ffe415a9@amd.com>
+Subject: Re: [Nouveau] [PATCH 3/8] drm/amdgpu: Implement mmap as GEM object
+ function
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -79,44 +50,162 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
- kernel-janitors@vger.kernel.org, dri-devel@lists.freedesktop.org,
- Daniel Vetter <daniel@ffwll.ch>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ amd-gfx@lists.freedesktop.org
+Content-Type: multipart/mixed; boundary="===============0493802761=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-If nouveau_get_backlight_name() fails then this should return -ENOMEM
-but currently it returns success.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--===============0493802761==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="Jzk40XCw0oHnpIZqrmxs3V1v04lxedhKe"
 
-Fixes: db1a0ae21461 ("drm/nouveau/bl: Assign different names to interfaces")
-Signed-off-by: Dan Carpenter <dan.carpenter@oracle.com>
----
-This is from static analysis.  In the original commit db1a0ae21461
-("drm/nouveau/bl: Assign different names to interfaces") then returning
-zero seemed to be a very deliberate choice.  I do think it was wrong
-though and -ENOMEM is the currect return.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--Jzk40XCw0oHnpIZqrmxs3V1v04lxedhKe
+Content-Type: multipart/mixed; boundary="otObQxGaOSMPhIOvTCAlNX8ckBPTJka99";
+ protected-headers="v1"
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: Felix Kuehling <felix.kuehling@amd.com>,
+ =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
+ alexander.deucher@amd.com, airlied@linux.ie, daniel@ffwll.ch,
+ bskeggs@redhat.com, ray.huang@amd.com, linux-graphics-maintainer@vmware.com,
+ sroland@vmware.com, zackr@vmware.com, shashank.sharma@amd.com,
+ sam@ravnborg.org, emil.velikov@collabora.com, nirmoy.das@amd.com
+Cc: nouveau@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org
+Message-ID: <63c90815-c9d8-68df-daa1-c165215a6b7c@suse.de>
+Subject: Re: [PATCH 3/8] drm/amdgpu: Implement mmap as GEM object function
+References: <20210406090903.7019-1-tzimmermann@suse.de>
+ <20210406090903.7019-4-tzimmermann@suse.de>
+ <6b261dab-4a4d-f0c6-95c0-f720c7df12c1@amd.com>
+ <b76d1922-c9a5-8533-657a-2c1149832347@suse.de>
+ <9db18654-770f-459b-a89a-c57dc8a21bac@amd.com>
+ <573dca0f-d017-3614-5e4f-d8d0b6bc413f@amd.com>
+ <780bb477-77c3-2f3c-2417-edeffccd63b9@amd.com>
+ <a152c174-c0fe-fc6f-9fa0-9054ffe415a9@amd.com>
+In-Reply-To: <a152c174-c0fe-fc6f-9fa0-9054ffe415a9@amd.com>
 
- drivers/gpu/drm/nouveau/nouveau_backlight.c | 1 +
- 1 file changed, 1 insertion(+)
+--otObQxGaOSMPhIOvTCAlNX8ckBPTJka99
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_backlight.c b/drivers/gpu/drm/nouveau/nouveau_backlight.c
-index 72f35a2babcb..3786b1c85182 100644
---- a/drivers/gpu/drm/nouveau/nouveau_backlight.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_backlight.c
-@@ -274,6 +274,7 @@ nouveau_backlight_init(struct drm_connector *connector)
- 
- 	if (!nouveau_get_backlight_name(backlight_name, bl)) {
- 		NV_ERROR(drm, "Failed to retrieve a unique name for the backlight interface\n");
-+		ret = -ENOMEM;
- 		goto fail_alloc;
- 	}
- 
--- 
-2.30.2
+Hi
+
+Am 07.04.21 um 21:49 schrieb Felix Kuehling:
+> On 2021-04-07 3:34 p.m., Felix Kuehling wrote:
+>> On 2021-04-07 7:25 a.m., Christian K=C3=B6nig wrote:
+>>>>>>> +=C2=A0=C2=A0=C2=A0 /*
+>>>>>>> +=C2=A0=C2=A0=C2=A0=C2=A0 * Don't verify access for KFD BOs. They=20
+don't have a GEM
+>>>>>>> +=C2=A0=C2=A0=C2=A0=C2=A0 * object associated with them.
+>>>>>>> +=C2=A0=C2=A0=C2=A0=C2=A0 */
+>>>>>>> +=C2=A0=C2=A0=C2=A0 if (bo->kfd_bo)
+>>>>>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 goto out;
+>>>>>> Who does the access verification now?
+>>>>> This is somewhat confusing.
+>>>>>
+>>>>> I took this check as-is, including the comment, from amdgpu's
+>>>>> verify_access function. The verify_access function was called by
+>>>>> ttm_bo_mmap. It returned 0 and ttm_bo_mmap did the mapping.
+>>>> This is probably a left-over from when we mapped BOs using /dev/kfd.=20
+We
+>>>> changed this to use /dev/dri/renderD* a long time ago to fix CPU=20
+>>>> mapping
+>>>> invalidations on memory evictions. I think we can let GEM do the acc=
+ess
+>>>> check.
+>>>
+>>> Ok, good to know.
+>>>
+>>> Thomas can you remove the extra handling in a separate prerequisite=20
+>>> patch?
+>>>
+>>> If anybody then bisects to this patch we at least know what to do to =
+
+>>> get it working again.
+>>
+>> FWIW, I ran KFDTest test with this shortcut removed on current=20
+>> amd-staging-drm-next + my HMM patch series, and it didn't seem to=20
+>> cause any issues.
+>=20
+> Wait, I celebrated too soon. I was running the wrong kernel. I do see=20
+> some failures where access is being denied. I need to do more debugging=20
+
+> to figure out what's causing that.
+
+Any news here? I saw the patch at [1], which removes the kfd_bo test.=20
+Can I assume that the series addresses the issue?
+
+Best regards
+Thomas
+
+[1] https://patchwork.freedesktop.org/patch/427516/?series=3D88822&rev=3D=
+1
+
+>=20
+> Regards,
+>  =C2=A0 Felix
+>=20
+>=20
+>>
+>> Regards,
+>> =C2=A0 Felix
+>>
+>>
+>>>
+>>> Regards,
+>>> Christian.=20
+> _______________________________________________
+> dri-devel mailing list
+> dri-devel@lists.freedesktop.org
+> https://lists.freedesktop.org/mailman/listinfo/dri-devel
+
+--=20
+Thomas Zimmermann
+Graphics Driver Developer
+SUSE Software Solutions Germany GmbH
+Maxfeldstr. 5, 90409 N=C3=BCrnberg, Germany
+(HRB 36809, AG N=C3=BCrnberg)
+Gesch=C3=A4ftsf=C3=BChrer: Felix Imend=C3=B6rffer
+
+
+--otObQxGaOSMPhIOvTCAlNX8ckBPTJka99--
+
+--Jzk40XCw0oHnpIZqrmxs3V1v04lxedhKe
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
+
+-----BEGIN PGP SIGNATURE-----
+
+wsF5BAABCAAjFiEExndm/fpuMUdwYFFolh/E3EQov+AFAmB2nVkFAwAAAAAACgkQlh/E3EQov+DS
+nw/9E/yHXw5W+6+v6OVFtoP5+DJbb2QzdRHvxKJky6y9PkdHRSi9zwJJQcuPgeJEttn6/5+XEN2w
+YMTb3qqH+Dzye0ahAEAZVHT0z4XWUbh7e4WaJ84dW6WqHnqOl2BkPitWGH7Mjn/CrBy/OF6J8Jcr
+LO6mkCWvpCxPblvDz/4Dc1rESBLgqmdVouyD6nJDYJW9gRADVTpf4cfod5zaP2Y2na5L4O9Z5wgp
+OSw3D/KCHLceD5pKvthyxWwmRAhwOKtOHqxRz7wbM1z4LuW8ZNXvBc2H57q8Cv8CwyvK04MCpcpI
+JQh9omsxLXZUXQA8E3kSVbzj1HZ/e6L9OesllYTg6iCx4WveKDTVtOyG/QcNuCaxke6CGhNqzbdh
+2tq90uDbZSDvHd0k2zcd1UMb8oYcqVM8F/YhqczNwAeDqhCFxgSskgxKRA8d29oSJ7ka18jxuBSe
+847NZBeiYbAk7y21X3ejQoJ4koKe8y3q5SLStif4s+YX/gy0CJaoA2ZPqYUnvLUsrsHfcNXlKJXa
+k3Mo/M0aFdyRfzbTdSTWpXeMJL1lwFvBeMhrRcRGYScZxCM4ZchHLobVqtdrDTXIICQNqpCBO3PO
+1GJWPAorjioN4D18HJkxIVF2u5AwIMYKHiPFdidM/2to4CPbeKnjPXGhNedlaTxqFkuFj1ifkWpX
+2ag=
+=MCWY
+-----END PGP SIGNATURE-----
+
+--Jzk40XCw0oHnpIZqrmxs3V1v04lxedhKe--
+
+--===============0493802761==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/nouveau
+
+--===============0493802761==--
