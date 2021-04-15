@@ -2,123 +2,36 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 46CAC360862
-	for <lists+nouveau@lfdr.de>; Thu, 15 Apr 2021 13:38:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 830AA3608F2
+	for <lists+nouveau@lfdr.de>; Thu, 15 Apr 2021 14:11:19 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 028636EA45;
-	Thu, 15 Apr 2021 11:38:37 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 673086E500;
+	Thu, 15 Apr 2021 12:11:14 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM02-CY1-obe.outbound.protection.outlook.com
- (mail-eopbgr760047.outbound.protection.outlook.com [40.107.76.47])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 70D0C6EA42;
- Thu, 15 Apr 2021 11:38:36 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=DGX1DoCVJWKBmT2nznE3WYaluvGFxjpEbjuv+3IlaTX7cmFw+kI1oZdOxEEi1PsXfeOTc/GhrUd1pEWoKjURYzMO9J8Yj0TRSmX1ZOYNgXoBMG+dvhBMxBEM5yHai1VDqcj52a2RqQwardCMPYPTiZ2wKu1SdVrtenSjLStjEIRk3lqVVM0a2BGlvTx837Ya0RgDxoY8xmEDZl32/dBeBSa93cPVk1hygshdLomvjXs1G3spfthjJKrywlkHsQdTugmIPgkg5QX3KZh4ia3bk4xuYqhCtiHlS7a5A03aJGKbhaOiTP/09xvZhB7SHaLABBy/ekr8hYVET/2yer6G3A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=RBEnKbdcuBw9he11Fj/YxAsbVwhtDxaiuETw9QBjIW8=;
- b=LavT6WbIVNHQ5hhh7K4RIsJgyf8XYSboFEskbSQUFT0GNEckcZg+T+TX7vI0E76r3yWFCLB31/ML/k6/OeeexZVBV3ao3OeoztMu8cL7uy5vcawzDV9ghzFXHRcvfvGuVmE6wAmFxwdgs4wRqZ4fnQlvlL9S7KU1ElcyE3xt1cvF526Z/IfpERVtFl7RTS4BX64rSSsTDwoDqWxFnFXrKIhkEMKF8oTkAsncPhELR+Nuv2ICgOT+ImchRQnHaNknw/fm7VaM0n1ByZPz2PLqQJe1/dPPDVZ3FvRUcFyRUqCoLuGcG6js1fusY3OjG/yx0K0VPqb5h7OAWteRv5xtSA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=RBEnKbdcuBw9he11Fj/YxAsbVwhtDxaiuETw9QBjIW8=;
- b=P/BooAIilvuQFIZH4ye9xY6RW5SC2fc/mCUTBeN8SZUWgXZBPuU3YMW/L5ro8IoTzPq91j9oj3mCJ/6clx0k/xgung0Ufc/Ob6yQU7LyaUGyQHIcDCoQ7FQ5MRJ2QD0yKk3t66Ciln7GRzNPBslzRII9NUf/aM+1qTztY+/I05s=
-Authentication-Results: lists.freedesktop.org; dkim=none (message not signed)
- header.d=none; lists.freedesktop.org;
- dmarc=none action=none header.from=amd.com;
-Received: from MN2PR12MB3775.namprd12.prod.outlook.com (2603:10b6:208:159::19)
- by MN2PR12MB4782.namprd12.prod.outlook.com (2603:10b6:208:a3::33)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4020.22; Thu, 15 Apr
- 2021 11:38:34 +0000
-Received: from MN2PR12MB3775.namprd12.prod.outlook.com
- ([fe80::6d4d:4674:1cf6:8d34]) by MN2PR12MB3775.namprd12.prod.outlook.com
- ([fe80::6d4d:4674:1cf6:8d34%6]) with mapi id 15.20.4020.025; Thu, 15 Apr 2021
- 11:38:34 +0000
-To: Thomas Zimmermann <tzimmermann@suse.de>, alexander.deucher@amd.com,
- airlied@linux.ie, daniel@ffwll.ch, bskeggs@redhat.com, ray.huang@amd.com,
- linux-graphics-maintainer@vmware.com, sroland@vmware.com, zackr@vmware.com,
- shashank.sharma@amd.com, sam@ravnborg.org, emil.velikov@collabora.com,
- Felix.Kuehling@amd.com, nirmoy.das@amd.com
+Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 18ED16E183;
+ Thu, 15 Apr 2021 12:11:13 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 95DFEAF4F;
+ Thu, 15 Apr 2021 12:11:11 +0000 (UTC)
+To: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
+ alexander.deucher@amd.com, airlied@linux.ie, daniel@ffwll.ch,
+ bskeggs@redhat.com, ray.huang@amd.com, linux-graphics-maintainer@vmware.com,
+ sroland@vmware.com, zackr@vmware.com, shashank.sharma@amd.com,
+ sam@ravnborg.org, emil.velikov@collabora.com, Felix.Kuehling@amd.com,
+ nirmoy.das@amd.com
 References: <20210415101740.21847-1-tzimmermann@suse.de>
  <20210415101740.21847-3-tzimmermann@suse.de>
-From: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
-Message-ID: <a62230ca-a800-20b9-01bb-c74dd19ef412@amd.com>
-Date: Thu, 15 Apr 2021 13:38:25 +0200
+ <a62230ca-a800-20b9-01bb-c74dd19ef412@amd.com>
+From: Thomas Zimmermann <tzimmermann@suse.de>
+Message-ID: <ceb6e5df-25ba-a31b-5a24-44a7bb964009@suse.de>
+Date: Thu, 15 Apr 2021 14:11:10 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.7.1
-In-Reply-To: <20210415101740.21847-3-tzimmermann@suse.de>
-Content-Language: en-US
-X-Originating-IP: [2a02:908:1252:fb60:7291:d81e:8eb2:63ca]
-X-ClientProxiedBy: PR0P264CA0284.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:100:1::32) To MN2PR12MB3775.namprd12.prod.outlook.com
- (2603:10b6:208:159::19)
+ Thunderbird/78.9.0
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [IPv6:2a02:908:1252:fb60:7291:d81e:8eb2:63ca]
- (2a02:908:1252:fb60:7291:d81e:8eb2:63ca) by
- PR0P264CA0284.FRAP264.PROD.OUTLOOK.COM (2603:10a6:100:1::32) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.4042.16 via Frontend Transport; Thu, 15 Apr 2021 11:38:31 +0000
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 2c2a5de4-5aa3-477c-5ed9-08d90002fff2
-X-MS-TrafficTypeDiagnostic: MN2PR12MB4782:
-X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: <MN2PR12MB4782F6F12CCF3B5189726D68834D9@MN2PR12MB4782.namprd12.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:8882;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: kBMRcyngrnTxQA8bkngT+X4Bd1E0LC/8ODMebsuPpFHjOb+oA9GQz6f2hY+rkHcrENLbwIOhUfMsz1+qL+8Tj3tSy6ATKzPvFAH91g0CTDZxcOdKWV+v9SFraPXjPDz9q5JNeUhwtGrLSm9+/Mtlx4vM64KWqg4zIIoWYO3mX0VsUVmvaDjLbdRUUBA6SB+9vn3KcqHD6+53P0qtfYOuiNb4huvg41XbbxFNqcyyfTHyz76aJ7l/DEhYUjXCTRfFUhBR/wmUfIgEd9XNpkzp16aaXGBQEBVfHQeoOJloWGobdgiEc3mDNAe8UlBl6RwjQ7iHWX8rhYRnmQpk3xJMGRjxrf+Dd9rfbrr9mJ9L2lorYsl/ljrUSwxBfFxTI/ZStZ6a0M05xPv2WlluRlYxWbW03JvIItNw7MPNIyQRI+8I3YgO5GxvIV1SC36fgkOgrTdeUjRkmLSysjhQYbZqDNmjXo2LGrtL6TCepCBYLc6ZFZCIHk57MONQwzU7ISKgzdxi0/DJVDRXU2AeiESL2tAX9C+GuRYwYlHyZ3ruodlZiGtVzbuXP4smtlgBwv6w5RldXVIJKoK4B3JuvWRCmcDOsJIXApigncPFu/rDyalFF+EpE3btpGgR+3K/8Y5GgxiPgmjIKoiHczBpP0CntkjUm3W1zTh1qJ8TEeVpLED7cP6PtMj9pZc/pX6RG56kDczNfkiuDBuCBnObh/wTuQ==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:MN2PR12MB3775.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(4636009)(346002)(136003)(39860400002)(396003)(366004)(376002)(83380400001)(31686004)(86362001)(4326008)(2906002)(2616005)(7416002)(5660300002)(52116002)(8936002)(921005)(6666004)(8676002)(31696002)(6636002)(66946007)(38100700002)(6486002)(316002)(66476007)(66556008)(478600001)(36756003)(186003)(16526019)(45980500001)(43740500002);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData: =?utf-8?B?Qm1YdmpnM3QvdXJnanVsZzMwWUVSU0JTMDVIRzZZYWp0RE1BRDkrdDFGT3BV?=
- =?utf-8?B?a04vTjdGeEhWa1N6N0kxdUY3YWF6ZGNUWkZnczVlWDIya1ZHOUtsTnFBOGM5?=
- =?utf-8?B?NTVrWXMxRGN5K0xmTTRPSU9oVjFGTTc0OGRvWHZhNmZtdm5sRDFpRDFQVi9U?=
- =?utf-8?B?NDkrcStibUREK2VuZWdFa0FwbHVuK0VqLzdnQnk5YnprOEV0dzdZKzVmbCsz?=
- =?utf-8?B?dWhXVFdXZjVTRndhQkFFMGVNc2Z4dlNFU01TYmYybGFlb01GL29HU3NqdWNP?=
- =?utf-8?B?RmVXelBCalpwQjRvWGZESzVsUFR5Q3VyU3JleThoVFRjb3Vxd1pvc25uNXpq?=
- =?utf-8?B?SzlZMXBqRjNiSVB0RXYxWFlhUklXaERnQ29QNDBocWhEWEtucm9uU3RwdmRy?=
- =?utf-8?B?V2c0VXA0TkdDUE9Zc1pSMXgraVBlUUJPZE80aVhQbzJNLzQvLzgwejl5QUJ1?=
- =?utf-8?B?dGpxbWtFWDNYYzgxTTlweE1BWjRTbG1IUWFpa0JMVzd4ZVF5NStVa2NuNnBo?=
- =?utf-8?B?SnJ2cWNxSlJvVENGdWVPbksrYk5yRllPNEVNVlprZjBVWjlzaXJFS0NjUENt?=
- =?utf-8?B?SEVHR3ZkNm5adkMrL2tyTVlDUzh4MXpoL1hESWtHVmloZ0lDaWVUTmxYK2o4?=
- =?utf-8?B?ellQQkJodTY5Nk1rVFc1ZHdRTEdYM0ZOS2RqOVExV3NKTTdONVVWMWhLOEhB?=
- =?utf-8?B?TVpmYTBwNkxaOWJ6YW1PMzMrSktnNHZrNDUwcTdnV2wxcGtoTzEvM0l6UVFR?=
- =?utf-8?B?c1Q5NFY1MzVMTFFBcGF6aDJzVlNBUURZczFLMks3QVpIWUExci9tUENMemV1?=
- =?utf-8?B?bElKdk1SZUFVMnV2b3AyTEFuTnFIU0pRaU40bHpLTzJRUGhRd0VJUy83UHhZ?=
- =?utf-8?B?aEdjYWVFMXJVTVFYWnFJdWxDUDIxOGFYQXZKczVaMmNZOStQUEZobEVrVnFV?=
- =?utf-8?B?Wi9QalQyakpzRjBSWEkyRVFqSTVhbEN1bUpHYlcxTFBER0QzOStidGJTVzB2?=
- =?utf-8?B?RWx0aGgxWEVvUm9kVlYzY1BiWE5mT3dDcTkrdGJiUDNsQ1lYbmFwQURCK0Ey?=
- =?utf-8?B?T2kycmV1RE5VL3R6TUdIemtxZHY1V2YzQXJuMzdQcURuVDMxMnBjYW56MVhJ?=
- =?utf-8?B?Ui9IdG5KdXVGUUxvRkpsalJKREJrZzVoMWppMUVoM0ZYakV4MnBMV3RpYnpV?=
- =?utf-8?B?bTNvWWpBajUzTTI5UWpiRi8zMjdhSmV2OFk4K0xaREdYSk1teWJLeDMwSGJy?=
- =?utf-8?B?cDJwbUJTcy95RmpOdUFzUTA5NFVjdVlRRDFTa202enJ3MEpqNXhrU3U0K1Nw?=
- =?utf-8?B?RWxqUVVPMFpuT0l5ejJ6ZFVubVo4Z2tqeGdjOTdqUlJHYjl4THl5clV4R1dX?=
- =?utf-8?B?M2YwY0VBWURubEU4Wjd2TDQyeW1kd0tpallJTERPUzFwNXpDYUQvWDJad0tU?=
- =?utf-8?B?WW91NnJIQVlZdFcwSUFmYThqRW8vOUtDbmU5VGJjNjh4T2h6clE5aTRRV1Rn?=
- =?utf-8?B?WFVyV2FVV0YxTTg2S0o1NkZoSFJnMzNoNE45YzIwcGNjK1lEaGFiZVY2WFpQ?=
- =?utf-8?B?Y1laSUFjZWVvWnlranpSNVlqT1hSbE0zS1ltcWE1RkRCTkJBVGpsTVZCYmFu?=
- =?utf-8?B?UjdaK2hEaW9wb0RxbmRYVSt1Y3VjSmNJYmw3NVR6RkFaUkg2WllTZDNuUUVB?=
- =?utf-8?B?MlcrQ1dOYUdhSmZabmxkMWxWMFc5N1JjalJjd1JRcWZVc3p2TFlIVk8vT0lX?=
- =?utf-8?B?eVN2eGcwSW90NnZFNVRZcngyVkhTdjlwOVpzcnNRQzl3dWoxR0ZhY2RWYWtU?=
- =?utf-8?B?YXdwNzBEYU9NNzl4OGkzMmF6SFdibDV5bFVXdC82WnRPaWlBK0k3MGE3TnJR?=
- =?utf-8?Q?7qYLId2VOBmP3?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2c2a5de4-5aa3-477c-5ed9-08d90002fff2
-X-MS-Exchange-CrossTenant-AuthSource: MN2PR12MB3775.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Apr 2021 11:38:34.1799 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: GIFmNYAoKpOyAloP1s+VdT5Gkz9xLkoQbrrXL52nJWdCBc6yxVw11ZNg+PBT5Dgk
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB4782
+In-Reply-To: <a62230ca-a800-20b9-01bb-c74dd19ef412@amd.com>
 Subject: Re: [Nouveau] [PATCH v2 2/7] drm/amdgpu: Implement mmap as GEM
  object function
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -134,184 +47,313 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
 Cc: nouveau@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
  dri-devel@lists.freedesktop.org
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
+Content-Type: multipart/mixed; boundary="===============0347779793=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Am 15.04.21 um 12:17 schrieb Thomas Zimmermann:
-> Moving the driver-specific mmap code into a GEM object function allows
-> for using DRM helpers for various mmap callbacks.
->
-> This change resolves several inconsistencies between regular mmap and
-> prime-based mmap. The vm_ops field in vma is now set for all mmap'ed
-> areas. Previously it way only set for regular mmap calls, prime-based
-> mmap used TTM's default vm_ops. The function amdgpu_verify_access() is
-> no longer being called and therefore removed by this patch.
->
-> As a side effect, amdgpu_ttm_vm_ops and amdgpu_ttm_fault() are now
-> implemented in amdgpu's GEM code.
->
-> v2:
-> 	* rename amdgpu_ttm_vm_ops and amdgpu_ttm_fault() to
-> 	  amdgpu_gem_vm_ops and amdgpu_gem_fault() (Christian)
-> 	* the check for kfd_bo has meanwhile been removed
->
-> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--===============0347779793==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="pmMjG4wVVuKWNJE59kdLozS885YbW0iSk"
 
-[SNIP]
-> +static int amdgpu_gem_prime_mmap(struct drm_gem_object *obj, struct vm_area_struct *vma)
-> +{
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--pmMjG4wVVuKWNJE59kdLozS885YbW0iSk
+Content-Type: multipart/mixed; boundary="yhoBttp0rv0llyX1xoE8kdZAdSPTqSirv";
+ protected-headers="v1"
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
+ alexander.deucher@amd.com, airlied@linux.ie, daniel@ffwll.ch,
+ bskeggs@redhat.com, ray.huang@amd.com, linux-graphics-maintainer@vmware.com,
+ sroland@vmware.com, zackr@vmware.com, shashank.sharma@amd.com,
+ sam@ravnborg.org, emil.velikov@collabora.com, Felix.Kuehling@amd.com,
+ nirmoy.das@amd.com
+Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ amd-gfx@lists.freedesktop.org
+Message-ID: <ceb6e5df-25ba-a31b-5a24-44a7bb964009@suse.de>
+Subject: Re: [PATCH v2 2/7] drm/amdgpu: Implement mmap as GEM object function
+References: <20210415101740.21847-1-tzimmermann@suse.de>
+ <20210415101740.21847-3-tzimmermann@suse.de>
+ <a62230ca-a800-20b9-01bb-c74dd19ef412@amd.com>
+In-Reply-To: <a62230ca-a800-20b9-01bb-c74dd19ef412@amd.com>
 
-Mhm, just double checking this function is now a core GEM function and 
-not prime specific?
+--yhoBttp0rv0llyX1xoE8kdZAdSPTqSirv
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
 
-If yes maybe drop the _prime part.
+Hi
 
-> +	struct amdgpu_bo *bo = gem_to_amdgpu_bo(obj);
-> +	struct amdgpu_device *adev = amdgpu_ttm_adev(bo->tbo.bdev);
-> +	unsigned long asize = amdgpu_bo_size(bo);
-> +
-> +	if (!vma->vm_file)
-> +		return -ENODEV;
-> +
-> +	if (!adev)
-> +		return -ENODEV;
-> +
-> +	/* Check for valid size. */
-> +	if (asize < vma->vm_end - vma->vm_start)
-> +		return -EINVAL;
+Am 15.04.21 um 13:38 schrieb Christian K=C3=B6nig:
+> Am 15.04.21 um 12:17 schrieb Thomas Zimmermann:
+>> Moving the driver-specific mmap code into a GEM object function allows=
 
-Shouldn't we have that check in the common code?
+>> for using DRM helpers for various mmap callbacks.
+>>
+>> This change resolves several inconsistencies between regular mmap and
+>> prime-based mmap. The vm_ops field in vma is now set for all mmap'ed
+>> areas. Previously it way only set for regular mmap calls, prime-based
+>> mmap used TTM's default vm_ops. The function amdgpu_verify_access() is=
 
-Apart from that looks good to me.
+>> no longer being called and therefore removed by this patch.
+>>
+>> As a side effect, amdgpu_ttm_vm_ops and amdgpu_ttm_fault() are now
+>> implemented in amdgpu's GEM code.
+>>
+>> v2:
+>> =C2=A0=C2=A0=C2=A0=C2=A0* rename amdgpu_ttm_vm_ops and amdgpu_ttm_faul=
+t() to
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 amdgpu_gem_vm_ops and amdgpu_gem_fault(=
+) (Christian)
+>> =C2=A0=C2=A0=C2=A0=C2=A0* the check for kfd_bo has meanwhile been remo=
+ved
+>>
+>> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+>=20
+> [SNIP]
+>> +static int amdgpu_gem_prime_mmap(struct drm_gem_object *obj, struct=20
+>> vm_area_struct *vma)
+>> +{
+>=20
+> Mhm, just double checking this function is now a core GEM function and =
 
-Christian.
+> not prime specific?
+>=20
+> If yes maybe drop the _prime part.
 
-> +
-> +	if (amdgpu_ttm_tt_get_usermm(bo->tbo.ttm) ||
-> +	    (bo->flags & AMDGPU_GEM_CREATE_NO_CPU_ACCESS)) {
-> +		return -EPERM;
-> +	}
-> +
-> +	return drm_gem_ttm_mmap(obj, vma);
-> +}
-> +
->   static const struct drm_gem_object_funcs amdgpu_gem_object_funcs = {
->   	.free = amdgpu_gem_object_free,
->   	.open = amdgpu_gem_object_open,
-> @@ -212,6 +266,8 @@ static const struct drm_gem_object_funcs amdgpu_gem_object_funcs = {
->   	.export = amdgpu_gem_prime_export,
->   	.vmap = drm_gem_ttm_vmap,
->   	.vunmap = drm_gem_ttm_vunmap,
-> +	.mmap = amdgpu_gem_prime_mmap,
-> +	.vm_ops = &amdgpu_gem_vm_ops,
->   };
->   
->   /*
-> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c
-> index 1485f33c3cc7..d4083c19402b 100644
-> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c
-> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c
-> @@ -152,25 +152,6 @@ static void amdgpu_evict_flags(struct ttm_buffer_object *bo,
->   	*placement = abo->placement;
->   }
->   
-> -/**
-> - * amdgpu_verify_access - Verify access for a mmap call
-> - *
-> - * @bo:	The buffer object to map
-> - * @filp: The file pointer from the process performing the mmap
-> - *
-> - * This is called by ttm_bo_mmap() to verify whether a process
-> - * has the right to mmap a BO to their process space.
-> - */
-> -static int amdgpu_verify_access(struct ttm_buffer_object *bo, struct file *filp)
-> -{
-> -	struct amdgpu_bo *abo = ttm_to_amdgpu_bo(bo);
-> -
-> -	if (amdgpu_ttm_tt_get_usermm(bo->ttm))
-> -		return -EPERM;
-> -	return drm_vma_node_verify_access(&abo->tbo.base.vma_node,
-> -					  filp->private_data);
-> -}
-> -
->   /**
->    * amdgpu_ttm_map_buffer - Map memory into the GART windows
->    * @bo: buffer object to map
-> @@ -1522,7 +1503,6 @@ static struct ttm_device_funcs amdgpu_bo_driver = {
->   	.eviction_valuable = amdgpu_ttm_bo_eviction_valuable,
->   	.evict_flags = &amdgpu_evict_flags,
->   	.move = &amdgpu_bo_move,
-> -	.verify_access = &amdgpu_verify_access,
->   	.delete_mem_notify = &amdgpu_bo_delete_mem_notify,
->   	.release_notify = &amdgpu_bo_release_notify,
->   	.io_mem_reserve = &amdgpu_ttm_io_mem_reserve,
-> @@ -1897,50 +1877,6 @@ void amdgpu_ttm_set_buffer_funcs_status(struct amdgpu_device *adev, bool enable)
->   	adev->mman.buffer_funcs_enabled = enable;
->   }
->   
-> -static vm_fault_t amdgpu_ttm_fault(struct vm_fault *vmf)
-> -{
-> -	struct ttm_buffer_object *bo = vmf->vma->vm_private_data;
-> -	vm_fault_t ret;
-> -
-> -	ret = ttm_bo_vm_reserve(bo, vmf);
-> -	if (ret)
-> -		return ret;
-> -
-> -	ret = amdgpu_bo_fault_reserve_notify(bo);
-> -	if (ret)
-> -		goto unlock;
-> -
-> -	ret = ttm_bo_vm_fault_reserved(vmf, vmf->vma->vm_page_prot,
-> -				       TTM_BO_VM_NUM_PREFAULT, 1);
-> -	if (ret == VM_FAULT_RETRY && !(vmf->flags & FAULT_FLAG_RETRY_NOWAIT))
-> -		return ret;
-> -
-> -unlock:
-> -	dma_resv_unlock(bo->base.resv);
-> -	return ret;
-> -}
-> -
-> -static const struct vm_operations_struct amdgpu_ttm_vm_ops = {
-> -	.fault = amdgpu_ttm_fault,
-> -	.open = ttm_bo_vm_open,
-> -	.close = ttm_bo_vm_close,
-> -	.access = ttm_bo_vm_access
-> -};
-> -
-> -int amdgpu_mmap(struct file *filp, struct vm_area_struct *vma)
-> -{
-> -	struct drm_file *file_priv = filp->private_data;
-> -	struct amdgpu_device *adev = drm_to_adev(file_priv->minor->dev);
-> -	int r;
-> -
-> -	r = ttm_bo_mmap(filp, vma, &adev->mman.bdev);
-> -	if (unlikely(r != 0))
-> -		return r;
-> -
-> -	vma->vm_ops = &amdgpu_ttm_vm_ops;
-> -	return 0;
-> -}
-> -
->   int amdgpu_copy_buffer(struct amdgpu_ring *ring, uint64_t src_offset,
->   		       uint64_t dst_offset, uint32_t byte_count,
->   		       struct dma_resv *resv,
-> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.h b/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.h
-> index dec0db8b0b13..6e51faad7371 100644
-> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.h
-> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.h
-> @@ -146,7 +146,6 @@ int amdgpu_fill_buffer(struct amdgpu_bo *bo,
->   			struct dma_resv *resv,
->   			struct dma_fence **fence);
->   
-> -int amdgpu_mmap(struct file *filp, struct vm_area_struct *vma);
->   int amdgpu_ttm_alloc_gart(struct ttm_buffer_object *bo);
->   int amdgpu_ttm_recover_gart(struct ttm_buffer_object *tbo);
->   uint64_t amdgpu_ttm_domain_start(struct amdgpu_device *adev, uint32_t type);
+No problem, but other functions in the GEM callbacks are also named=20
+_prime_. Probably needs a clean-up.
+
+>=20
+>> +=C2=A0=C2=A0=C2=A0 struct amdgpu_bo *bo =3D gem_to_amdgpu_bo(obj);
+>> +=C2=A0=C2=A0=C2=A0 struct amdgpu_device *adev =3D amdgpu_ttm_adev(bo-=
+>tbo.bdev);
+>> +=C2=A0=C2=A0=C2=A0 unsigned long asize =3D amdgpu_bo_size(bo);
+>> +
+>> +=C2=A0=C2=A0=C2=A0 if (!vma->vm_file)
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return -ENODEV;
+>> +
+>> +=C2=A0=C2=A0=C2=A0 if (!adev)
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return -ENODEV;
+>> +
+>> +=C2=A0=C2=A0=C2=A0 /* Check for valid size. */
+>> +=C2=A0=C2=A0=C2=A0 if (asize < vma->vm_end - vma->vm_start)
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return -EINVAL;
+>=20
+> Shouldn't we have that check in the common code?
+
+It's at [1]. I didn't really bother about tidying up the checks=20
+themselves. We can drop all these except for the usermm branch below.=20
+Same for the radeon patch.
+
+Best regards
+Thomas
+
+[1]=20
+https://elixir.bootlin.com/linux/v5.12-rc7/source/drivers/gpu/drm/drm_gem=
+=2Ec#L1059
+
+>=20
+> Apart from that looks good to me.
+>=20
+> Christian.
+>=20
+>> +
+>> +=C2=A0=C2=A0=C2=A0 if (amdgpu_ttm_tt_get_usermm(bo->tbo.ttm) ||
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (bo->flags & AMDGPU_GEM_CR=
+EATE_NO_CPU_ACCESS)) {
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return -EPERM;
+>> +=C2=A0=C2=A0=C2=A0 }
+>> +
+>> +=C2=A0=C2=A0=C2=A0 return drm_gem_ttm_mmap(obj, vma);
+>> +}
+>> +
+>> =C2=A0 static const struct drm_gem_object_funcs amdgpu_gem_object_func=
+s =3D {
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 .free =3D amdgpu_gem_object_free,
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 .open =3D amdgpu_gem_object_open,
+>> @@ -212,6 +266,8 @@ static const struct drm_gem_object_funcs=20
+>> amdgpu_gem_object_funcs =3D {
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 .export =3D amdgpu_gem_prime_export,
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 .vmap =3D drm_gem_ttm_vmap,
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 .vunmap =3D drm_gem_ttm_vunmap,
+>> +=C2=A0=C2=A0=C2=A0 .mmap =3D amdgpu_gem_prime_mmap,
+>> +=C2=A0=C2=A0=C2=A0 .vm_ops =3D &amdgpu_gem_vm_ops,
+>> =C2=A0 };
+>> =C2=A0 /*
+>> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c=20
+>> b/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c
+>> index 1485f33c3cc7..d4083c19402b 100644
+>> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c
+>> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c
+>> @@ -152,25 +152,6 @@ static void amdgpu_evict_flags(struct=20
+>> ttm_buffer_object *bo,
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 *placement =3D abo->placement;
+>> =C2=A0 }
+>> -/**
+>> - * amdgpu_verify_access - Verify access for a mmap call
+>> - *
+>> - * @bo:=C2=A0=C2=A0=C2=A0 The buffer object to map
+>> - * @filp: The file pointer from the process performing the mmap
+>> - *
+>> - * This is called by ttm_bo_mmap() to verify whether a process
+>> - * has the right to mmap a BO to their process space.
+>> - */
+>> -static int amdgpu_verify_access(struct ttm_buffer_object *bo, struct =
+
+>> file *filp)
+>> -{
+>> -=C2=A0=C2=A0=C2=A0 struct amdgpu_bo *abo =3D ttm_to_amdgpu_bo(bo);
+>> -
+>> -=C2=A0=C2=A0=C2=A0 if (amdgpu_ttm_tt_get_usermm(bo->ttm))
+>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return -EPERM;
+>> -=C2=A0=C2=A0=C2=A0 return drm_vma_node_verify_access(&abo->tbo.base.v=
+ma_node,
+>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 filp->private_d=
+ata);
+>> -}
+>> -
+>> =C2=A0 /**
+>> =C2=A0=C2=A0 * amdgpu_ttm_map_buffer - Map memory into the GART window=
+s
+>> =C2=A0=C2=A0 * @bo: buffer object to map
+>> @@ -1522,7 +1503,6 @@ static struct ttm_device_funcs amdgpu_bo_driver =
+=3D {
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 .eviction_valuable =3D amdgpu_ttm_bo_ev=
+iction_valuable,
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 .evict_flags =3D &amdgpu_evict_flags,
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 .move =3D &amdgpu_bo_move,
+>> -=C2=A0=C2=A0=C2=A0 .verify_access =3D &amdgpu_verify_access,
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 .delete_mem_notify =3D &amdgpu_bo_delet=
+e_mem_notify,
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 .release_notify =3D &amdgpu_bo_release_=
+notify,
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 .io_mem_reserve =3D &amdgpu_ttm_io_mem_=
+reserve,
+>> @@ -1897,50 +1877,6 @@ void amdgpu_ttm_set_buffer_funcs_status(struct =
+
+>> amdgpu_device *adev, bool enable)
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 adev->mman.buffer_funcs_enabled =3D ena=
+ble;
+>> =C2=A0 }
+>> -static vm_fault_t amdgpu_ttm_fault(struct vm_fault *vmf)
+>> -{
+>> -=C2=A0=C2=A0=C2=A0 struct ttm_buffer_object *bo =3D vmf->vma->vm_priv=
+ate_data;
+>> -=C2=A0=C2=A0=C2=A0 vm_fault_t ret;
+>> -
+>> -=C2=A0=C2=A0=C2=A0 ret =3D ttm_bo_vm_reserve(bo, vmf);
+>> -=C2=A0=C2=A0=C2=A0 if (ret)
+>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return ret;
+>> -
+>> -=C2=A0=C2=A0=C2=A0 ret =3D amdgpu_bo_fault_reserve_notify(bo);
+>> -=C2=A0=C2=A0=C2=A0 if (ret)
+>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 goto unlock;
+>> -
+>> -=C2=A0=C2=A0=C2=A0 ret =3D ttm_bo_vm_fault_reserved(vmf, vmf->vma->vm=
+_page_prot,
+>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 TTM_BO_VM=
+_NUM_PREFAULT, 1);
+>> -=C2=A0=C2=A0=C2=A0 if (ret =3D=3D VM_FAULT_RETRY && !(vmf->flags &=20
+>> FAULT_FLAG_RETRY_NOWAIT))
+>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return ret;
+>> -
+>> -unlock:
+>> -=C2=A0=C2=A0=C2=A0 dma_resv_unlock(bo->base.resv);
+>> -=C2=A0=C2=A0=C2=A0 return ret;
+>> -}
+>> -
+>> -static const struct vm_operations_struct amdgpu_ttm_vm_ops =3D {
+>> -=C2=A0=C2=A0=C2=A0 .fault =3D amdgpu_ttm_fault,
+>> -=C2=A0=C2=A0=C2=A0 .open =3D ttm_bo_vm_open,
+>> -=C2=A0=C2=A0=C2=A0 .close =3D ttm_bo_vm_close,
+>> -=C2=A0=C2=A0=C2=A0 .access =3D ttm_bo_vm_access
+>> -};
+>> -
+>> -int amdgpu_mmap(struct file *filp, struct vm_area_struct *vma)
+>> -{
+>> -=C2=A0=C2=A0=C2=A0 struct drm_file *file_priv =3D filp->private_data;=
+
+>> -=C2=A0=C2=A0=C2=A0 struct amdgpu_device *adev =3D drm_to_adev(file_pr=
+iv->minor->dev);
+>> -=C2=A0=C2=A0=C2=A0 int r;
+>> -
+>> -=C2=A0=C2=A0=C2=A0 r =3D ttm_bo_mmap(filp, vma, &adev->mman.bdev);
+>> -=C2=A0=C2=A0=C2=A0 if (unlikely(r !=3D 0))
+>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return r;
+>> -
+>> -=C2=A0=C2=A0=C2=A0 vma->vm_ops =3D &amdgpu_ttm_vm_ops;
+>> -=C2=A0=C2=A0=C2=A0 return 0;
+>> -}
+>> -
+>> =C2=A0 int amdgpu_copy_buffer(struct amdgpu_ring *ring, uint64_t src_o=
+ffset,
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0 uint64_t dst_offset, uint32_t byte_count,
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0 struct dma_resv *resv,
+>> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.h=20
+>> b/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.h
+>> index dec0db8b0b13..6e51faad7371 100644
+>> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.h
+>> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.h
+>> @@ -146,7 +146,6 @@ int amdgpu_fill_buffer(struct amdgpu_bo *bo,
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0 struct dma_resv *resv,
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0 struct dma_fence **fence);
+>> -int amdgpu_mmap(struct file *filp, struct vm_area_struct *vma);
+>> =C2=A0 int amdgpu_ttm_alloc_gart(struct ttm_buffer_object *bo);
+>> =C2=A0 int amdgpu_ttm_recover_gart(struct ttm_buffer_object *tbo);
+>> =C2=A0 uint64_t amdgpu_ttm_domain_start(struct amdgpu_device *adev,=20
+>> uint32_t type);
+>=20
+
+--=20
+Thomas Zimmermann
+Graphics Driver Developer
+SUSE Software Solutions Germany GmbH
+Maxfeldstr. 5, 90409 N=C3=BCrnberg, Germany
+(HRB 36809, AG N=C3=BCrnberg)
+Gesch=C3=A4ftsf=C3=BChrer: Felix Imend=C3=B6rffer
+
+
+--yhoBttp0rv0llyX1xoE8kdZAdSPTqSirv--
+
+--pmMjG4wVVuKWNJE59kdLozS885YbW0iSk
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
+
+-----BEGIN PGP SIGNATURE-----
+
+wsF5BAABCAAjFiEExndm/fpuMUdwYFFolh/E3EQov+AFAmB4LV4FAwAAAAAACgkQlh/E3EQov+D/
+vw/9Et3TRmKROx+ayS6e84x+zlzYOVDdM6qW9gUKUii5q4xlTrEbZIzS91errESrs6YKDPnat92T
+8B8lda7UtRegsT2Gq1MeUt+4ghNVYACNuEpkQEIjt9fhxwd0qDng53oCs/Ei5ofacgF92vzJvDI0
+595tWpMaFMB+7YYBSi2SgMkCaajVJFqAn0NiaGphUV+gQbGz8D/DTK6HekFPtkzRoEMPUGwiy4z1
+BZ9wYG4AMQb/pf1hUjankcFpI3d7J9gjQUz+WOTsv6z5YGimifLtshV4OHB8LfcM8FintwOHFWYs
+LWANbi7mkqkuvraExmP0shP+g3aPq7UWkKfFRD0XpP8WHdkQVAPi1kJPSrcGLo0EQdqz3CBzvmza
+D06WHjt1lVkmIS+kPkEBbNvJZZVFIrJbecbYXB67i97zZK8RV8qdJSWXXda7VdjN7jUmNgF8i6vN
+I4eeC6tV8GeZJKpRFuzKFBaVvgeMG0kqkVbmmqsJK9oLb39Iyr+ExbrbeVC1gIi28eWx9Gv38T/Z
+RaRRKLgC2D06JUY+XKo82YZge3SRefz9OsmiTSK7uoMzy9u6lg8m1OHqewopbMAXtDbPKkrbPLai
+HoiVTVpVSBLd2OtByPXi1HEMkGL3OCVu51pSAKXh2/8co6/Cep/wqeuROYnXj3zzx8gbWnTJ5fCU
+VIo=
+=ZTNY
+-----END PGP SIGNATURE-----
+
+--pmMjG4wVVuKWNJE59kdLozS885YbW0iSk--
+
+--===============0347779793==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/nouveau
+
+--===============0347779793==--
