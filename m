@@ -1,70 +1,67 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id BFA753640D8
-	for <lists+nouveau@lfdr.de>; Mon, 19 Apr 2021 13:49:16 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 32CE93640DA
+	for <lists+nouveau@lfdr.de>; Mon, 19 Apr 2021 13:49:36 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1C01E6E252;
-	Mon, 19 Apr 2021 11:49:07 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 95ABE6E255;
+	Mon, 19 Apr 2021 11:49:29 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 308A26E252
- for <nouveau@lists.freedesktop.org>; Mon, 19 Apr 2021 11:49:05 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [216.205.24.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id DE20C6E255
+ for <nouveau@lists.freedesktop.org>; Mon, 19 Apr 2021 11:49:28 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1618832944;
+ s=mimecast20190719; t=1618832968;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=X8/WB5h/DCpqWz25sPbtK613PP91ho7sThr7U3NsdLI=;
- b=OEtl5oYZ0J24OGiW5ijqjxbuWwts0PrdNg4U7v0JVJfqSRLgU3vRSLTYnVczKd4vxsOrxB
- YhbdCU3661vXSvGgXqwjROjg41pLL4VOKZROu5SV+Bx+CIYK2SPwZ05xxYkZIKxrPxLAju
- EsncctTIf4A0U80NBZ4ASwMFzZDx8ag=
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-470-pxjH0EFWMNCEnzJ_pHHikA-1; Mon, 19 Apr 2021 07:49:02 -0400
-X-MC-Unique: pxjH0EFWMNCEnzJ_pHHikA-1
-Received: by mail-wm1-f69.google.com with SMTP id
- j128-20020a1c55860000b02901384b712094so241207wmb.2
- for <nouveau@lists.freedesktop.org>; Mon, 19 Apr 2021 04:49:02 -0700 (PDT)
+ bh=Nly+1DO6xtNI7xIJZQr0CwBL9odu8O2pnwWHw5PL2Fk=;
+ b=IWbM7XCutl77mrKsg0+uKe3NGY5TOOuMIVvXC9gJ4O9rLyzr3P2MUEuOgCJaXWVE9pussH
+ ZWF40qSqc9nK0Gei/G/rrmgO3/SvYfOZgc25HN3d6gbneh1J/i+BCca0Bir1ZdsZAUPeg/
+ PzkVwZbjx/YDFdQQxyXQU+Ylxr5Bvx4=
+Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
+ [209.85.221.71]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-155-ruJIii_GO0-oQsZP97FjcA-1; Mon, 19 Apr 2021 07:49:26 -0400
+X-MC-Unique: ruJIii_GO0-oQsZP97FjcA-1
+Received: by mail-wr1-f71.google.com with SMTP id
+ v20-20020a5d59140000b02901028c7a1f7dso8922732wrd.18
+ for <nouveau@lists.freedesktop.org>; Mon, 19 Apr 2021 04:49:26 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=X8/WB5h/DCpqWz25sPbtK613PP91ho7sThr7U3NsdLI=;
- b=qWSNXfvdKCcuP6FNoaqFgrK1BYiFUYPiiSZF3v9ns7lBIHJhzQvKp6tm5XbPzJxows
- l7FivY4K/oltaVKlU1lwAAil9tH4aQ1qFXs5f1A30GJBlh67d7d+N4NcIZr1cPEJU0fq
- LEg6fKQFl5Yhsz+aMUVrDFXZ0QNFWUFlMcjwZzgphF758eAfGCspIEFXEtkf0Z0z5gHJ
- Y8r7DdE4e5JGSB1rDYq+lb9V67qa3aA0YvHU/2XStqtaquDEs3EsJw5pevS+ij34XTfs
- +eka+VAipKlO/i26wv+bZNQkESlY001EZhAEaVGTcaPmI39Me7lKN8Tz7CP4GNDea0Jh
- 380w==
-X-Gm-Message-State: AOAM5314reXdylZDuu4l4O26XMitJDxIwGgy/Q5HTZiLmobe7xN2QvFM
- l2PJH4VrzL/SZACX9ZYcZjODmKBzb0+NmEU7v6jOwom/8YLvJdOxcyls8D4L5W6SkAYLAtsQRd0
- +DKh5jvqa4YpNnTMEcLTgUSyfqUWQeej6l3Zsp+BHYQ==
-X-Received: by 2002:a05:600c:3796:: with SMTP id
- o22mr21036155wmr.139.1618832941557; 
- Mon, 19 Apr 2021 04:49:01 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJwqeEo6baFAOSCC5EED8Adjw7elmBbplC1HwyVdu+epP3qNnST1SJ2pLkLV0oLFm79ijqBFSPkWTkiLHj2i6Lo=
-X-Received: by 2002:a05:600c:3796:: with SMTP id
- o22mr21036144wmr.139.1618832941419; 
- Mon, 19 Apr 2021 04:49:01 -0700 (PDT)
+ :message-id:subject:to:cc;
+ bh=Nly+1DO6xtNI7xIJZQr0CwBL9odu8O2pnwWHw5PL2Fk=;
+ b=YxambT/PaibSFWrDKa3i/YF5BsmjP9ZhfR5bEu13lvNHoO8mXOO5eDPrCMLwTd13l0
+ lg4eisezjcBPw0BGcFI7FnoJpWb+Vrgz4MVv8g5y/yPVAbgCRDCqMFTNbF3JFc3G9g/A
+ MGsasVmz/rwSQ5TDvjUD6plJIeIBWH2heTXh3hrhFU02nkIvffKvwdxZrLspxkicZej9
+ Fc1AOfPCwpbeiPOhv+I3lIawWuUJIID8kJrvC1clJjz5rn2VTQTHxvZ7uQ8ILuDgeBhV
+ f8OZEfgP3Roit9r681JdVOSjGJH/6l175YnRRHXKyyBycEv2VD9vm4KtIe2w4c6/g+KJ
+ LjgA==
+X-Gm-Message-State: AOAM533VuvEGz+ZAKziIkK6SCPMEbSWnFqiSVxKQp1Ldy9N2QkB+COUU
+ mgiSi4IpGWmapHq77v0DNEJyyy8VR89nWKcoOpbHCHPAmC7dgYuZRffn4Of2RlKHTQnlXuv9Pnq
+ GK95ORxHV9nmmxUky732vUEJXwbfJ2wKaIzlCexEyDw==
+X-Received: by 2002:a5d:524d:: with SMTP id k13mr14503026wrc.113.1618832965218; 
+ Mon, 19 Apr 2021 04:49:25 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJxo70JbUkSOXLnCMJ/q0c/kasxJbjovwmjfD+BmIDk5mqXW5hGpIhL7aPNl6r8rZpHGwg8WLg/vphWP4pcCf1U=
+X-Received: by 2002:a5d:524d:: with SMTP id k13mr14503007wrc.113.1618832965102; 
+ Mon, 19 Apr 2021 04:49:25 -0700 (PDT)
 MIME-Version: 1.0
 References: <20210416143725.2769053-1-lee.jones@linaro.org>
- <20210416143725.2769053-16-lee.jones@linaro.org>
-In-Reply-To: <20210416143725.2769053-16-lee.jones@linaro.org>
+ <20210416143725.2769053-17-lee.jones@linaro.org>
+In-Reply-To: <20210416143725.2769053-17-lee.jones@linaro.org>
 From: Karol Herbst <kherbst@redhat.com>
-Date: Mon, 19 Apr 2021 13:48:50 +0200
-Message-ID: <CACO55tvbVFPfjzTxmoKMbxVv1bR9xguX+QCLZawtg2SdSN9qzQ@mail.gmail.com>
+Date: Mon, 19 Apr 2021 13:49:14 +0200
+Message-ID: <CACO55tsRq3dMrmw+msxnGf4e5=30m0R+XyAX4AMtgNrMNv284w@mail.gmail.com>
 To: Lee Jones <lee.jones@linaro.org>
 Authentication-Results: relay.mimecast.com;
  auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=kherbst@redhat.com
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Subject: Re: [Nouveau] [PATCH 15/40] drm/nouveau/nouveau_svm: Remove unused
- variable 'ret' from void function
+Subject: Re: [Nouveau] [PATCH 16/40] drm/nouveau/nouveau_ioc32: Demote
+ kernel-doc abuse to standard comment block
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -80,49 +77,54 @@ Cc: David Airlie <airlied@linux.ie>, nouveau <nouveau@lists.freedesktop.org>,
  LKML <linux-kernel@vger.kernel.org>,
  dri-devel <dri-devel@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>,
  Daniel Vetter <daniel@ffwll.ch>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-T24gRnJpLCBBcHIgMTYsIDIwMjEgYXQgNDozOCBQTSBMZWUgSm9uZXMgPGxlZS5qb25lc0BsaW5h
-cm8ub3JnPiB3cm90ZToKPgo+IEZpeGVzIHRoZSBmb2xsb3dpbmcgVz0xIGtlcm5lbCBidWlsZCB3
-YXJuaW5nKHMpOgo+Cj4gIGRyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfc3ZtLmM6IElu
-IGZ1bmN0aW9uIOKAmG5vdXZlYXVfcGZuc19tYXDigJk6Cj4gIGRyaXZlcnMvZ3B1L2RybS9ub3V2
-ZWF1L25vdXZlYXVfc3ZtLmM6ODEwOjY6IHdhcm5pbmc6IHZhcmlhYmxlIOKAmHJldOKAmSBzZXQg
-YnV0IG5vdCB1c2VkIFstV3VudXNlZC1idXQtc2V0LXZhcmlhYmxlXQo+Cj4gQ2M6IEJlbiBTa2Vn
-Z3MgPGJza2VnZ3NAcmVkaGF0LmNvbT4KPiBDYzogRGF2aWQgQWlybGllIDxhaXJsaWVkQGxpbnV4
-LmllPgo+IENjOiBEYW5pZWwgVmV0dGVyIDxkYW5pZWxAZmZ3bGwuY2g+Cj4gQ2M6IGRyaS1kZXZl
-bEBsaXN0cy5mcmVlZGVza3RvcC5vcmcKPiBDYzogbm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5v
-cmcKPiBTaWduZWQtb2ZmLWJ5OiBMZWUgSm9uZXMgPGxlZS5qb25lc0BsaW5hcm8ub3JnPgo+IC0t
-LQo+ICBkcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X3N2bS5jIHwgNSArKy0tLQo+ICAx
-IGZpbGUgY2hhbmdlZCwgMiBpbnNlcnRpb25zKCspLCAzIGRlbGV0aW9ucygtKQo+Cj4gZGlmZiAt
-LWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfc3ZtLmMgYi9kcml2ZXJzL2dw
-dS9kcm0vbm91dmVhdS9ub3V2ZWF1X3N2bS5jCj4gaW5kZXggMWMzZjg5MDM3N2QyYy4uMjZhZjZl
-ZTkxNTM2OCAxMDA2NDQKPiAtLS0gYS9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X3N2
-bS5jCj4gKysrIGIvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9zdm0uYwo+IEBAIC04
-MTEsNyArODExLDYgQEAgbm91dmVhdV9wZm5zX21hcChzdHJ1Y3Qgbm91dmVhdV9zdm1tICpzdm1t
-LCBzdHJ1Y3QgbW1fc3RydWN0ICptbSwKPiAgICAgICAgICAgICAgICAgIHVuc2lnbmVkIGxvbmcg
-YWRkciwgdTY0ICpwZm5zLCB1bnNpZ25lZCBsb25nIG5wYWdlcykKPiAgewo+ICAgICAgICAgc3Ry
-dWN0IG5vdXZlYXVfcGZubWFwX2FyZ3MgKmFyZ3MgPSBub3V2ZWF1X3BmbnNfdG9fYXJncyhwZm5z
-KTsKPiAtICAgICAgIGludCByZXQ7Cj4KPiAgICAgICAgIGFyZ3MtPnAuYWRkciA9IGFkZHI7Cj4g
-ICAgICAgICBhcmdzLT5wLnNpemUgPSBucGFnZXMgPDwgUEFHRV9TSElGVDsKPiBAQCAtODE5LDgg
-KzgxOCw4IEBAIG5vdXZlYXVfcGZuc19tYXAoc3RydWN0IG5vdXZlYXVfc3ZtbSAqc3ZtbSwgc3Ry
-dWN0IG1tX3N0cnVjdCAqbW0sCj4gICAgICAgICBtdXRleF9sb2NrKCZzdm1tLT5tdXRleCk7Cj4K
-PiAgICAgICAgIHN2bW0tPnZtbS0+dm1tLm9iamVjdC5jbGllbnQtPnN1cGVyID0gdHJ1ZTsKPiAt
-ICAgICAgIHJldCA9IG52aWZfb2JqZWN0X2lvY3RsKCZzdm1tLT52bW0tPnZtbS5vYmplY3QsIGFy
-Z3MsIHNpemVvZigqYXJncykgKwo+IC0gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgbnBh
-Z2VzICogc2l6ZW9mKGFyZ3MtPnAucGh5c1swXSksIE5VTEwpOwo+ICsgICAgICAgbnZpZl9vYmpl
-Y3RfaW9jdGwoJnN2bW0tPnZtbS0+dm1tLm9iamVjdCwgYXJncywgc2l6ZW9mKCphcmdzKSArCj4g
-KyAgICAgICAgICAgICAgICAgICAgICAgICBucGFnZXMgKiBzaXplb2YoYXJncy0+cC5waHlzWzBd
-KSwgTlVMTCk7Cgp5ZWFoIG1oaC4uIEkgdGhpbmsgdGhpcyBvbmUgaXMgYWN0dWFsbHkgZmluZSwg
-YnV0IGl0IG1pZ2h0IG1ha2Ugc2Vuc2UKdG8gc3RpbGwgcmVwb3J0IHNvbWV0aGluZyBiYWNrLCBh
-bHRob3VnaCBpbiB1c2Vyc3BhY2Ugd2Ugc3RpbGwgZG9uJ3QKY2FyZSBhcyB0aGUgQ0wgQVBJIGRv
-ZXNuJ3QgcmV0dXJuIGFueSBlcnJvci4KCj4gICAgICAgICBzdm1tLT52bW0tPnZtbS5vYmplY3Qu
-Y2xpZW50LT5zdXBlciA9IGZhbHNlOwo+Cj4gICAgICAgICBtdXRleF91bmxvY2soJnN2bW0tPm11
-dGV4KTsKPiAtLQo+IDIuMjcuMAo+Cj4gX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX18KPiBOb3V2ZWF1IG1haWxpbmcgbGlzdAo+IE5vdXZlYXVAbGlzdHMuZnJl
-ZWRlc2t0b3Aub3JnCj4gaHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0
-aW5mby9ub3V2ZWF1CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fXwpOb3V2ZWF1IG1haWxpbmcgbGlzdApOb3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpo
-dHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL25vdXZlYXUK
+Reviewed-by: Karol Herbst <kherbst@redhat.com>
+
+On Fri, Apr 16, 2021 at 4:38 PM Lee Jones <lee.jones@linaro.org> wrote:
+>
+> Fixes the following W=1 kernel build warning(s):
+>
+>  drivers/gpu/drm/nouveau/nouveau_ioc32.c:52: warning: Function parameter or member 'filp' not described in 'nouveau_compat_ioctl'
+>  drivers/gpu/drm/nouveau/nouveau_ioc32.c:52: warning: Function parameter or member 'cmd' not described in 'nouveau_compat_ioctl'
+>  drivers/gpu/drm/nouveau/nouveau_ioc32.c:52: warning: Function parameter or member 'arg' not described in 'nouveau_compat_ioctl'
+>
+> Cc: Ben Skeggs <bskeggs@redhat.com>
+> Cc: David Airlie <airlied@linux.ie>
+> Cc: Daniel Vetter <daniel@ffwll.ch>
+> Cc: dri-devel@lists.freedesktop.org
+> Cc: nouveau@lists.freedesktop.org
+> Signed-off-by: Lee Jones <lee.jones@linaro.org>
+> ---
+>  drivers/gpu/drm/nouveau/nouveau_ioc32.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_ioc32.c b/drivers/gpu/drm/nouveau/nouveau_ioc32.c
+> index 8ddf9b2325a42..2af3615c5205c 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_ioc32.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_ioc32.c
+> @@ -38,7 +38,7 @@
+>
+>  #include "nouveau_ioctl.h"
+>
+> -/**
+> +/*
+>   * Called whenever a 32-bit process running under a 64-bit kernel
+>   * performs an ioctl on /dev/dri/card<n>.
+>   *
+> --
+> 2.27.0
+>
+> _______________________________________________
+> Nouveau mailing list
+> Nouveau@lists.freedesktop.org
+> https://lists.freedesktop.org/mailman/listinfo/nouveau
+>
+
+_______________________________________________
+Nouveau mailing list
+Nouveau@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/nouveau
