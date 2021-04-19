@@ -1,41 +1,41 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 12AA0364E48
-	for <lists+nouveau@lfdr.de>; Tue, 20 Apr 2021 00:58:13 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 328BB364EB9
+	for <lists+nouveau@lfdr.de>; Tue, 20 Apr 2021 01:38:02 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A50456E4A2;
-	Mon, 19 Apr 2021 22:57:57 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A64CD6E4A7;
+	Mon, 19 Apr 2021 23:37:59 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E14F26E5A4
- for <nouveau@lists.freedesktop.org>; Mon, 19 Apr 2021 22:57:54 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id DC5D16E452
+ for <nouveau@lists.freedesktop.org>; Mon, 19 Apr 2021 22:56:21 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1618873074;
+ s=mimecast20190719; t=1618872980;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=/jb12OiBmY/eNgfoiidXOMQwNy95ZiC/Tf0MpT8t/vI=;
- b=I1QMuG5JsijpBwFyYUZfBHlZQ40T61QFjdK/tVh0sSa0GEWJhCXCudemuFDvVXfSQUNT6d
- 8KbZ/gLpqp/FiWCH1jCML16nilCLuLZwmYkfwKP9gRz0yzuA2pTnM0LNDt+uhqGUJa79gj
- 4Mr9ttvZmmDNxgz66ows1aMBpa9fqgk=
+ bh=/gXQksC4Vn7UiMIO1YOE5ew9eXhmdtYYbXkyZK0tt5c=;
+ b=Rt/bsFtYaM/BRw1QU0pGfMwv8VtYYnwQ773DbVTkp6Z6eEc5P8luo4Nfvh0X//z+B3udLB
+ E+1J+8W11S2aS/VnA58gW9fftFK4GRyqLo4j5RQKkphNOKrL33QQkmKdanuagUdoipHOaD
+ Q3gtubUO1PDO8+mZvYv+TXFjjkK2t2Y=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-267-AGvyY6Y5NSiqw0UiWBzOwQ-1; Mon, 19 Apr 2021 18:57:50 -0400
-X-MC-Unique: AGvyY6Y5NSiqw0UiWBzOwQ-1
+ us-mta-528-lVccxBXPPlKzXbG2FbjVzw-1; Mon, 19 Apr 2021 18:56:18 -0400
+X-MC-Unique: lVccxBXPPlKzXbG2FbjVzw-1
 Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
  [10.5.11.16])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id C3B6F107ACFE;
- Mon, 19 Apr 2021 22:57:47 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 7B488801814;
+ Mon, 19 Apr 2021 22:56:13 +0000 (UTC)
 Received: from Ruby.lyude.net (ovpn-119-153.rdu2.redhat.com [10.10.119.153])
- by smtp.corp.redhat.com (Postfix) with ESMTP id D27275C1C4;
- Mon, 19 Apr 2021 22:57:45 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id DA40E5C1C4;
+ Mon, 19 Apr 2021 22:56:05 +0000 (UTC)
 From: Lyude Paul <lyude@redhat.com>
 To: dri-devel@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
  nouveau@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
@@ -44,14 +44,19 @@ To: dri-devel@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
  Rodrigo Vivi <rodrigo.vivi@intel.com>,
  Thomas Zimmermann <tzimmermann@suse.de>,
  Thierry Reding <thierry.reding@gmail.com>
-Date: Mon, 19 Apr 2021 18:55:22 -0400
-Message-Id: <20210419225523.184856-21-lyude@redhat.com>
+Date: Mon, 19 Apr 2021 18:55:05 -0400
+Message-Id: <20210419225523.184856-4-lyude@redhat.com>
 In-Reply-To: <20210419225523.184856-1-lyude@redhat.com>
 References: <20210419225523.184856-1-lyude@redhat.com>
 MIME-Version: 1.0
 X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
-Subject: [Nouveau] [PATCH v3 20/20] drm/dp_mst: Convert
- drm_dp_mst_topology.c to drm_err()/drm_dbg*()
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=lyude@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+X-Mailman-Approved-At: Mon, 19 Apr 2021 23:37:58 +0000
+Subject: [Nouveau] [PATCH v3 03/20] drm/dp: Move i2c init to drm_dp_aux_init,
+ add __must_check and fini
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,1001 +68,652 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>,
+Cc: Neil Armstrong <narmstrong@baylibre.com>, David Airlie <airlied@linux.ie>,
+ =?UTF-8?q?Guido=20G=C3=BCnther?= <agx@sigxcpu.org>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Oleg Vasilev <oleg.vasilev@intel.com>, Tanmay Shah <tanmay@codeaurora.org>,
+ Meenakshikumar Somasundaram <meenakshikumar.somasundaram@amd.com>,
+ Andrzej Hajda <a.hajda@samsung.com>,
+ Aurabindo Pillai <aurabindo.pillai@amd.com>,
+ Laurent Pinchart <Laurent.pinchart@ideasonboard.com>,
+ Sam Ravnborg <sam@ravnborg.org>, Chandan Uddaraju <chandanu@codeaurora.org>,
+ Tomi Valkeinen <tomi.valkeinen@ti.com>,
+ Parshuram Thombare <pthombar@cadence.com>,
+ Rodrigo Siqueira <Rodrigo.Siqueira@amd.com>,
+ Michal Simek <michal.simek@xilinx.com>, Luben Tuikov <luben.tuikov@amd.com>,
+ Ben Skeggs <bskeggs@redhat.com>, Swapnil Jakhade <sjakhade@cadence.com>,
+ Thierry Reding <treding@nvidia.com>, Harry Wentland <harry.wentland@amd.com>,
+ Imre Deak <imre.deak@intel.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Leo Li <sunpeng.li@amd.com>,
+ "open list:DRM DRIVER FOR MSM ADRENO GPU" <linux-arm-msm@vger.kernel.org>,
  Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- open list <linux-kernel@vger.kernel.org>, Maxime Ripard <mripard@kernel.org>,
- Robert Foss <robert.foss@linaro.org>, Daniel Vetter <daniel@ffwll.ch>
+ Maxime Ripard <mripard@kernel.org>, Stephen Boyd <swboyd@chromium.org>,
+ Kuogee Hsieh <khsieh@codeaurora.org>, Joe Perches <joe@perches.com>,
+ Yuti Amonkar <yamonkar@cadence.com>,
+ "open list:DRM DRIVERS FOR NVIDIA TEGRA" <linux-tegra@vger.kernel.org>,
+ Mikita Lipski <mikita.lipski@amd.com>, Sean Paul <sean@poorly.run>,
+ "moderated list:ARM/ZYNQ ARCHITECTURE" <linux-arm-kernel@lists.infradead.org>,
+ Navid Emamdoost <navid.emamdoost@gmail.com>,
+ Matt Roper <matthew.d.roper@intel.com>,
+ Jernej Skrabec <jernej.skrabec@siol.net>, Chris Park <Chris.Park@amd.com>,
+ Eryk Brol <eryk.brol@amd.com>, Hyun Kwon <hyun.kwon@xilinx.com>,
+ open list <linux-kernel@vger.kernel.org>, Robert Foss <robert.foss@linaro.org>,
+ Julia Lawall <Julia.Lawall@inria.fr>, Rob Clark <robdclark@gmail.com>,
+ Boris Brezillon <boris.brezillon@collabora.com>,
+ Daniel Vetter <daniel@ffwll.ch>, Alex Deucher <alexander.deucher@amd.com>,
+ "open list:DRM DRIVER FOR MSM ADRENO GPU" <freedreno@lists.freedesktop.org>,
+ =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-And finally, convert all of the code in drm_dp_mst_topology.c over to using
-drm_err() and drm_dbg*(). Note that this refactor would have been a lot
-more complicated to have tried writing a coccinelle script for, so this
-whole thing was done by hand.
+When moving around drm_dp_aux_register() calls, it turned out we
+accidentally managed to cause issues with the Tegra driver due to the fact
+the Tegra driver would attempt to retrieve a reference to the AUX channel's
+i2c adapter - which wouldn't be initialized until drm_dp_aux_register() is
+called.
 
-v2:
-* Fix line-wrapping in drm_dp_mst_atomic_check_mstb_bw_limit()
+This doesn't actually make a whole ton of sense, as it's not unexpected for
+a driver to need to be able to use an AUX adapter before it's been
+registered. Likewise-it's not unexpected for a driver to try using the i2c
+adapter for said AUX channel before it's been registered as well. In fact,
+the current documentation for drm_dp_aux_init() even seems to imply that
+drm_dp_aux_init() is supposed to be handling i2c adapter creation for this
+precise reason - not drm_dp_aux_register().
+
+Since the i2c adapter doesn't need to be linked to the DRM device in any
+way, we can just fix this problem by moving i2c adapter creation out of
+drm_dp_aux_register() and into drm_dp_aux_init(). Additionally, since this
+means that drm_dp_aux_init() can fail we go ahead and add a __must_check
+attribute to it so that drivers don't ignore its return status on failures.
+And finally, we add a drm_dp_aux_fini() and hook it up in all DRM drivers
+across the kernel to take care of cleaning up the i2c adapter once it's no
+longer needed.
+
+This should also fix the regressions noted in the Tegra driver.
 
 Signed-off-by: Lyude Paul <lyude@redhat.com>
-Cc: Robert Foss <robert.foss@linaro.org>
-Reviewed-by: Robert Foss <robert.foss@linaro.org>
+Fixes: 39c17ae60ea9 ("drm/tegra: Don't register DP AUX channels before connectors")
+Cc: Thierry Reding <treding@nvidia.com>
+Cc: Thierry Reding <thierry.reding@gmail.com>
 ---
- drivers/gpu/drm/drm_dp_mst_topology.c | 368 +++++++++++++-------------
- 1 file changed, 187 insertions(+), 181 deletions(-)
+ .../gpu/drm/amd/amdgpu/amdgpu_connectors.c    |  7 +-
+ drivers/gpu/drm/amd/amdgpu/atombios_dp.c      | 10 ++-
+ drivers/gpu/drm/amd/amdgpu/atombios_dp.h      |  2 +-
+ .../display/amdgpu_dm/amdgpu_dm_mst_types.c   |  6 +-
+ .../drm/bridge/analogix/analogix-anx6345.c    |  2 +
+ .../drm/bridge/analogix/analogix-anx78xx.c    |  2 +
+ .../drm/bridge/analogix/analogix_dp_core.c    |  1 +
+ .../drm/bridge/cadence/cdns-mhdp8546-core.c   | 14 ++-
+ drivers/gpu/drm/bridge/tc358767.c             |  5 +-
+ drivers/gpu/drm/bridge/ti-sn65dsi86.c         | 16 ++--
+ drivers/gpu/drm/drm_dp_helper.c               | 88 ++++++++++++++-----
+ drivers/gpu/drm/i915/display/intel_dp_aux.c   | 10 ++-
+ drivers/gpu/drm/i915/display/intel_dp_aux.h   |  2 +-
+ drivers/gpu/drm/msm/dp/dp_aux.c               |  1 +
+ drivers/gpu/drm/msm/edp/edp_aux.c             |  1 +
+ drivers/gpu/drm/nouveau/nouveau_connector.c   |  1 +
+ drivers/gpu/drm/radeon/radeon_connectors.c    |  1 +
+ drivers/gpu/drm/tegra/dpaux.c                 | 14 ++-
+ drivers/gpu/drm/xlnx/zynqmp_dp.c              |  1 +
+ include/drm/drm_dp_helper.h                   |  3 +-
+ 20 files changed, 140 insertions(+), 47 deletions(-)
 
-diff --git a/drivers/gpu/drm/drm_dp_mst_topology.c b/drivers/gpu/drm/drm_dp_mst_topology.c
-index 9bac5bd050ab..5539a91b4031 100644
---- a/drivers/gpu/drm/drm_dp_mst_topology.c
-+++ b/drivers/gpu/drm/drm_dp_mst_topology.c
-@@ -286,7 +286,8 @@ static void drm_dp_encode_sideband_msg_hdr(struct drm_dp_sideband_msg_hdr *hdr,
- 	*len = idx;
+diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_connectors.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_connectors.c
+index b9c11c2b2885..23b2134a651b 100644
+--- a/drivers/gpu/drm/amd/amdgpu/amdgpu_connectors.c
++++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_connectors.c
+@@ -1963,8 +1963,11 @@ amdgpu_connector_add(struct amdgpu_device *adev,
+ 
+ 	connector->display_info.subpixel_order = subpixel_order;
+ 
+-	if (has_aux)
+-		amdgpu_atombios_dp_aux_init(amdgpu_connector);
++	if (has_aux) {
++		int ret = amdgpu_atombios_dp_aux_init(amdgpu_connector);
++		if (ret)
++			goto failed;
++	}
+ 
+ 	if (connector_type == DRM_MODE_CONNECTOR_DisplayPort ||
+ 	    connector_type == DRM_MODE_CONNECTOR_eDP) {
+diff --git a/drivers/gpu/drm/amd/amdgpu/atombios_dp.c b/drivers/gpu/drm/amd/amdgpu/atombios_dp.c
+index a3ba9ca11e98..54c209ab8c9f 100644
+--- a/drivers/gpu/drm/amd/amdgpu/atombios_dp.c
++++ b/drivers/gpu/drm/amd/amdgpu/atombios_dp.c
+@@ -184,12 +184,18 @@ amdgpu_atombios_dp_aux_transfer(struct drm_dp_aux *aux, struct drm_dp_aux_msg *m
+ 	return ret;
  }
  
--static bool drm_dp_decode_sideband_msg_hdr(struct drm_dp_sideband_msg_hdr *hdr,
-+static bool drm_dp_decode_sideband_msg_hdr(const struct drm_dp_mst_topology_mgr *mgr,
-+					   struct drm_dp_sideband_msg_hdr *hdr,
- 					   u8 *buf, int buflen, u8 *hdrlen)
+-void amdgpu_atombios_dp_aux_init(struct amdgpu_connector *amdgpu_connector)
++int amdgpu_atombios_dp_aux_init(struct amdgpu_connector *amdgpu_connector)
  {
- 	u8 crc4;
-@@ -303,7 +304,7 @@ static bool drm_dp_decode_sideband_msg_hdr(struct drm_dp_sideband_msg_hdr *hdr,
- 	crc4 = drm_dp_msg_header_crc4(buf, (len * 2) - 1);
- 
- 	if ((crc4 & 0xf) != (buf[len - 1] & 0xf)) {
--		DRM_DEBUG_KMS("crc4 mismatch 0x%x 0x%x\n", crc4, buf[len - 1]);
-+		drm_dbg_kms(mgr->dev, "crc4 mismatch 0x%x 0x%x\n", crc4, buf[len - 1]);
- 		return false;
- 	}
- 
-@@ -789,7 +790,8 @@ static bool drm_dp_sideband_append_payload(struct drm_dp_sideband_msg_rx *msg,
- 	return true;
++	int ret;
++
+ 	amdgpu_connector->ddc_bus->rec.hpd = amdgpu_connector->hpd.hpd;
+ 	amdgpu_connector->ddc_bus->aux.transfer = amdgpu_atombios_dp_aux_transfer;
+-	drm_dp_aux_init(&amdgpu_connector->ddc_bus->aux);
++	ret = drm_dp_aux_init(&amdgpu_connector->ddc_bus->aux);
++	if (ret)
++		return ret;
++
+ 	amdgpu_connector->ddc_bus->has_aux = true;
++	return ret;
  }
  
--static bool drm_dp_sideband_parse_link_address(struct drm_dp_sideband_msg_rx *raw,
-+static bool drm_dp_sideband_parse_link_address(const struct drm_dp_mst_topology_mgr *mgr,
-+					       struct drm_dp_sideband_msg_rx *raw,
- 					       struct drm_dp_sideband_msg_reply_body *repmsg)
+ /***** general DP utility functions *****/
+diff --git a/drivers/gpu/drm/amd/amdgpu/atombios_dp.h b/drivers/gpu/drm/amd/amdgpu/atombios_dp.h
+index f59d85eaddf0..6b65cbf009fd 100644
+--- a/drivers/gpu/drm/amd/amdgpu/atombios_dp.h
++++ b/drivers/gpu/drm/amd/amdgpu/atombios_dp.h
+@@ -24,7 +24,7 @@
+ #ifndef __ATOMBIOS_DP_H__
+ #define __ATOMBIOS_DP_H__
+ 
+-void amdgpu_atombios_dp_aux_init(struct amdgpu_connector *amdgpu_connector);
++int amdgpu_atombios_dp_aux_init(struct amdgpu_connector *amdgpu_connector);
+ u8 amdgpu_atombios_dp_get_sinktype(struct amdgpu_connector *amdgpu_connector);
+ int amdgpu_atombios_dp_get_dpcd(struct amdgpu_connector *amdgpu_connector);
+ int amdgpu_atombios_dp_get_panel_mode(struct drm_encoder *encoder,
+diff --git a/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_mst_types.c b/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_mst_types.c
+index 3dee9cce9c9e..51fbbf3ef59b 100644
+--- a/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_mst_types.c
++++ b/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_mst_types.c
+@@ -439,7 +439,10 @@ int amdgpu_dm_initialize_dp_connector(struct amdgpu_display_manager *dm,
+ 	dm_aux->aux.transfer = dm_dp_aux_transfer;
+ 	dm_aux->ddc_service = aconnector->dc_link->ddc;
+ 
+-	drm_dp_aux_init(&dm_aux->aux);
++	ret = drm_dp_aux_init(&dm_aux->aux);
++	if (ret)
++		goto free_name;
++
+ 	drm_dp_cec_register_connector(&dm_aux->aux, &aconnector->base);
+ 
+ 	if (aconnector->base.connector_type == DRM_MODE_CONNECTOR_eDP)
+@@ -456,6 +459,7 @@ int amdgpu_dm_initialize_dp_connector(struct amdgpu_display_manager *dm,
+ 	return 0;
+ unreg_cec:
+ 	drm_dp_cec_unregister_connector(&dm_aux->aux);
++free_name:
+ 	kfree(dm_aux->aux.name);
+ 	return ret;
+ }
+diff --git a/drivers/gpu/drm/bridge/analogix/analogix-anx6345.c b/drivers/gpu/drm/bridge/analogix/analogix-anx6345.c
+index aa6cda458eb9..c105dcb79c37 100644
+--- a/drivers/gpu/drm/bridge/analogix/analogix-anx6345.c
++++ b/drivers/gpu/drm/bridge/analogix/analogix-anx6345.c
+@@ -794,6 +794,8 @@ static int anx6345_i2c_remove(struct i2c_client *client)
+ 
+ 	unregister_i2c_dummy_clients(anx6345);
+ 
++	drm_dp_aux_fini(&anx6345->aux);
++
+ 	kfree(anx6345->edid);
+ 
+ 	mutex_destroy(&anx6345->lock);
+diff --git a/drivers/gpu/drm/bridge/analogix/analogix-anx78xx.c b/drivers/gpu/drm/bridge/analogix/analogix-anx78xx.c
+index f20558618220..0778458e81be 100644
+--- a/drivers/gpu/drm/bridge/analogix/analogix-anx78xx.c
++++ b/drivers/gpu/drm/bridge/analogix/analogix-anx78xx.c
+@@ -1364,6 +1364,8 @@ static int anx78xx_i2c_remove(struct i2c_client *client)
+ 
+ 	unregister_i2c_dummy_clients(anx78xx);
+ 
++	drm_dp_aux_fini(&anx78xx->aux);
++
+ 	kfree(anx78xx->edid);
+ 
+ 	return 0;
+diff --git a/drivers/gpu/drm/bridge/analogix/analogix_dp_core.c b/drivers/gpu/drm/bridge/analogix/analogix_dp_core.c
+index f115233b1cb9..f82e193d32ae 100644
+--- a/drivers/gpu/drm/bridge/analogix/analogix_dp_core.c
++++ b/drivers/gpu/drm/bridge/analogix/analogix_dp_core.c
+@@ -1806,6 +1806,7 @@ EXPORT_SYMBOL_GPL(analogix_dp_unbind);
+ void analogix_dp_remove(struct analogix_dp_device *dp)
  {
- 	int idx = 1;
-@@ -1014,7 +1016,8 @@ drm_dp_sideband_parse_query_stream_enc_status(
- 	return true;
+ 	clk_disable_unprepare(dp->clock);
++	drm_dp_aux_fini(&dp->aux);
+ }
+ EXPORT_SYMBOL_GPL(analogix_dp_remove);
+ 
+diff --git a/drivers/gpu/drm/bridge/cadence/cdns-mhdp8546-core.c b/drivers/gpu/drm/bridge/cadence/cdns-mhdp8546-core.c
+index 01e95466502a..c5e2bc75b226 100644
+--- a/drivers/gpu/drm/bridge/cadence/cdns-mhdp8546-core.c
++++ b/drivers/gpu/drm/bridge/cadence/cdns-mhdp8546-core.c
+@@ -2436,14 +2436,17 @@ static int cdns_mhdp_probe(struct platform_device *pdev)
+ 	mutex_init(&mhdp->link_mutex);
+ 	spin_lock_init(&mhdp->start_lock);
+ 
+-	drm_dp_aux_init(&mhdp->aux);
+ 	mhdp->aux.dev = dev;
+ 	mhdp->aux.transfer = cdns_mhdp_transfer;
++	ret = drm_dp_aux_init(&mhdp->aux);
++	if (ret)
++		return ret;
+ 
+ 	mhdp->regs = devm_platform_ioremap_resource(pdev, 0);
+ 	if (IS_ERR(mhdp->regs)) {
+ 		dev_err(dev, "Failed to get memory resource\n");
+-		return PTR_ERR(mhdp->regs);
++		ret = PTR_ERR(mhdp->regs);
++		goto aux_fini;
+ 	}
+ 
+ 	mhdp->sapb_regs = devm_platform_ioremap_resource_byname(pdev, "mhdptx-sapb");
+@@ -2458,7 +2461,8 @@ static int cdns_mhdp_probe(struct platform_device *pdev)
+ 	mhdp->phy = devm_of_phy_get_by_index(dev, pdev->dev.of_node, 0);
+ 	if (IS_ERR(mhdp->phy)) {
+ 		dev_err(dev, "no PHY configured\n");
+-		return PTR_ERR(mhdp->phy);
++		ret = PTR_ERR(mhdp->phy);
++		goto aux_fini;
+ 	}
+ 
+ 	platform_set_drvdata(pdev, mhdp);
+@@ -2555,6 +2559,8 @@ static int cdns_mhdp_probe(struct platform_device *pdev)
+ 	pm_runtime_disable(dev);
+ clk_disable:
+ 	clk_disable_unprepare(mhdp->clk);
++aux_fini:
++	drm_dp_aux_fini(&mhdp->aux);
+ 
+ 	return ret;
+ }
+@@ -2597,6 +2603,8 @@ static int cdns_mhdp_remove(struct platform_device *pdev)
+ 
+ 	clk_disable_unprepare(mhdp->clk);
+ 
++	drm_dp_aux_fini(&mhdp->aux);
++
+ 	return ret;
  }
  
--static bool drm_dp_sideband_parse_reply(struct drm_dp_sideband_msg_rx *raw,
-+static bool drm_dp_sideband_parse_reply(const struct drm_dp_mst_topology_mgr *mgr,
-+					struct drm_dp_sideband_msg_rx *raw,
- 					struct drm_dp_sideband_msg_reply_body *msg)
- {
- 	memset(msg, 0, sizeof(*msg));
-@@ -1030,7 +1033,7 @@ static bool drm_dp_sideband_parse_reply(struct drm_dp_sideband_msg_rx *raw,
- 
- 	switch (msg->req_type) {
- 	case DP_LINK_ADDRESS:
--		return drm_dp_sideband_parse_link_address(raw, msg);
-+		return drm_dp_sideband_parse_link_address(mgr, raw, msg);
- 	case DP_QUERY_PAYLOAD:
- 		return drm_dp_sideband_parse_query_payload_ack(raw, msg);
- 	case DP_REMOTE_DPCD_READ:
-@@ -1053,14 +1056,16 @@ static bool drm_dp_sideband_parse_reply(struct drm_dp_sideband_msg_rx *raw,
- 	case DP_QUERY_STREAM_ENC_STATUS:
- 		return drm_dp_sideband_parse_query_stream_enc_status(raw, msg);
- 	default:
--		DRM_ERROR("Got unknown reply 0x%02x (%s)\n", msg->req_type,
--			  drm_dp_mst_req_type_str(msg->req_type));
-+		drm_err(mgr->dev, "Got unknown reply 0x%02x (%s)\n",
-+			msg->req_type, drm_dp_mst_req_type_str(msg->req_type));
- 		return false;
- 	}
- }
- 
--static bool drm_dp_sideband_parse_connection_status_notify(struct drm_dp_sideband_msg_rx *raw,
--							   struct drm_dp_sideband_msg_req_body *msg)
-+static bool
-+drm_dp_sideband_parse_connection_status_notify(const struct drm_dp_mst_topology_mgr *mgr,
-+					       struct drm_dp_sideband_msg_rx *raw,
-+					       struct drm_dp_sideband_msg_req_body *msg)
- {
- 	int idx = 1;
- 
-@@ -1082,12 +1087,14 @@ static bool drm_dp_sideband_parse_connection_status_notify(struct drm_dp_sideban
- 	idx++;
- 	return true;
- fail_len:
--	DRM_DEBUG_KMS("connection status reply parse length fail %d %d\n", idx, raw->curlen);
-+	drm_dbg_kms(mgr->dev, "connection status reply parse length fail %d %d\n",
-+		    idx, raw->curlen);
- 	return false;
- }
- 
--static bool drm_dp_sideband_parse_resource_status_notify(struct drm_dp_sideband_msg_rx *raw,
--							   struct drm_dp_sideband_msg_req_body *msg)
-+static bool drm_dp_sideband_parse_resource_status_notify(const struct drm_dp_mst_topology_mgr *mgr,
-+							 struct drm_dp_sideband_msg_rx *raw,
-+							 struct drm_dp_sideband_msg_req_body *msg)
- {
- 	int idx = 1;
- 
-@@ -1105,11 +1112,12 @@ static bool drm_dp_sideband_parse_resource_status_notify(struct drm_dp_sideband_
- 	idx++;
- 	return true;
- fail_len:
--	DRM_DEBUG_KMS("resource status reply parse length fail %d %d\n", idx, raw->curlen);
-+	drm_dbg_kms(mgr->dev, "resource status reply parse length fail %d %d\n", idx, raw->curlen);
- 	return false;
- }
- 
--static bool drm_dp_sideband_parse_req(struct drm_dp_sideband_msg_rx *raw,
-+static bool drm_dp_sideband_parse_req(const struct drm_dp_mst_topology_mgr *mgr,
-+				      struct drm_dp_sideband_msg_rx *raw,
- 				      struct drm_dp_sideband_msg_req_body *msg)
- {
- 	memset(msg, 0, sizeof(*msg));
-@@ -1117,12 +1125,12 @@ static bool drm_dp_sideband_parse_req(struct drm_dp_sideband_msg_rx *raw,
- 
- 	switch (msg->req_type) {
- 	case DP_CONNECTION_STATUS_NOTIFY:
--		return drm_dp_sideband_parse_connection_status_notify(raw, msg);
-+		return drm_dp_sideband_parse_connection_status_notify(mgr, raw, msg);
- 	case DP_RESOURCE_STATUS_NOTIFY:
--		return drm_dp_sideband_parse_resource_status_notify(raw, msg);
-+		return drm_dp_sideband_parse_resource_status_notify(mgr, raw, msg);
- 	default:
--		DRM_ERROR("Got unknown request 0x%02x (%s)\n", msg->req_type,
--			  drm_dp_mst_req_type_str(msg->req_type));
-+		drm_err(mgr->dev, "Got unknown request 0x%02x (%s)\n",
-+			msg->req_type, drm_dp_mst_req_type_str(msg->req_type));
- 		return false;
- 	}
- }
-@@ -1232,14 +1240,14 @@ static int drm_dp_mst_assign_payload_id(struct drm_dp_mst_topology_mgr *mgr,
- 	ret = find_first_zero_bit(&mgr->payload_mask, mgr->max_payloads + 1);
- 	if (ret > mgr->max_payloads) {
- 		ret = -EINVAL;
--		DRM_DEBUG_KMS("out of payload ids %d\n", ret);
-+		drm_dbg_kms(mgr->dev, "out of payload ids %d\n", ret);
- 		goto out_unlock;
- 	}
- 
- 	vcpi_ret = find_first_zero_bit(&mgr->vcpi_mask, mgr->max_payloads + 1);
- 	if (vcpi_ret > mgr->max_payloads) {
- 		ret = -EINVAL;
--		DRM_DEBUG_KMS("out of vcpi ids %d\n", ret);
-+		drm_dbg_kms(mgr->dev, "out of vcpi ids %d\n", ret);
- 		goto out_unlock;
- 	}
- 
-@@ -1261,7 +1269,7 @@ static void drm_dp_mst_put_payload_id(struct drm_dp_mst_topology_mgr *mgr,
- 		return;
- 
- 	mutex_lock(&mgr->payload_lock);
--	DRM_DEBUG_KMS("putting payload %d\n", vcpi);
-+	drm_dbg_kms(mgr->dev, "putting payload %d\n", vcpi);
- 	clear_bit(vcpi - 1, &mgr->vcpi_mask);
- 
- 	for (i = 0; i < mgr->max_payloads; i++) {
-@@ -1331,7 +1339,8 @@ static int drm_dp_mst_wait_tx_reply(struct drm_dp_mst_branch *mstb,
- 			goto out;
- 		}
- 	} else {
--		DRM_DEBUG_KMS("timedout msg send %p %d %d\n", txmsg, txmsg->state, txmsg->seqno);
-+		drm_dbg_kms(mgr->dev, "timedout msg send %p %d %d\n",
-+			    txmsg, txmsg->state, txmsg->seqno);
- 
- 		/* dump some state */
- 		ret = -EIO;
-@@ -1485,7 +1494,7 @@ static void
- drm_dp_mst_get_mstb_malloc(struct drm_dp_mst_branch *mstb)
- {
- 	kref_get(&mstb->malloc_kref);
--	DRM_DEBUG("mstb %p (%d)\n", mstb, kref_read(&mstb->malloc_kref));
-+	drm_dbg(mstb->mgr->dev, "mstb %p (%d)\n", mstb, kref_read(&mstb->malloc_kref));
- }
- 
- /**
-@@ -1502,7 +1511,7 @@ drm_dp_mst_get_mstb_malloc(struct drm_dp_mst_branch *mstb)
- static void
- drm_dp_mst_put_mstb_malloc(struct drm_dp_mst_branch *mstb)
- {
--	DRM_DEBUG("mstb %p (%d)\n", mstb, kref_read(&mstb->malloc_kref) - 1);
-+	drm_dbg(mstb->mgr->dev, "mstb %p (%d)\n", mstb, kref_read(&mstb->malloc_kref) - 1);
- 	kref_put(&mstb->malloc_kref, drm_dp_free_mst_branch_device);
- }
- 
-@@ -1536,7 +1545,7 @@ void
- drm_dp_mst_get_port_malloc(struct drm_dp_mst_port *port)
- {
- 	kref_get(&port->malloc_kref);
--	DRM_DEBUG("port %p (%d)\n", port, kref_read(&port->malloc_kref));
-+	drm_dbg(port->mgr->dev, "port %p (%d)\n", port, kref_read(&port->malloc_kref));
- }
- EXPORT_SYMBOL(drm_dp_mst_get_port_malloc);
- 
-@@ -1553,7 +1562,7 @@ EXPORT_SYMBOL(drm_dp_mst_get_port_malloc);
- void
- drm_dp_mst_put_port_malloc(struct drm_dp_mst_port *port)
- {
--	DRM_DEBUG("port %p (%d)\n", port, kref_read(&port->malloc_kref) - 1);
-+	drm_dbg(port->mgr->dev, "port %p (%d)\n", port, kref_read(&port->malloc_kref) - 1);
- 	kref_put(&port->malloc_kref, drm_dp_free_mst_port);
- }
- EXPORT_SYMBOL(drm_dp_mst_put_port_malloc);
-@@ -1778,8 +1787,7 @@ drm_dp_mst_topology_try_get_mstb(struct drm_dp_mst_branch *mstb)
- 	topology_ref_history_lock(mstb->mgr);
- 	ret = kref_get_unless_zero(&mstb->topology_kref);
- 	if (ret) {
--		DRM_DEBUG("mstb %p (%d)\n",
--			  mstb, kref_read(&mstb->topology_kref));
-+		drm_dbg(mstb->mgr->dev, "mstb %p (%d)\n", mstb, kref_read(&mstb->topology_kref));
- 		save_mstb_topology_ref(mstb, DRM_DP_MST_TOPOLOGY_REF_GET);
- 	}
- 
-@@ -1809,7 +1817,7 @@ static void drm_dp_mst_topology_get_mstb(struct drm_dp_mst_branch *mstb)
- 	save_mstb_topology_ref(mstb, DRM_DP_MST_TOPOLOGY_REF_GET);
- 	WARN_ON(kref_read(&mstb->topology_kref) == 0);
- 	kref_get(&mstb->topology_kref);
--	DRM_DEBUG("mstb %p (%d)\n", mstb, kref_read(&mstb->topology_kref));
-+	drm_dbg(mstb->mgr->dev, "mstb %p (%d)\n", mstb, kref_read(&mstb->topology_kref));
- 
- 	topology_ref_history_unlock(mstb->mgr);
- }
-@@ -1831,8 +1839,7 @@ drm_dp_mst_topology_put_mstb(struct drm_dp_mst_branch *mstb)
- {
- 	topology_ref_history_lock(mstb->mgr);
- 
--	DRM_DEBUG("mstb %p (%d)\n",
--		  mstb, kref_read(&mstb->topology_kref) - 1);
-+	drm_dbg(mstb->mgr->dev, "mstb %p (%d)\n", mstb, kref_read(&mstb->topology_kref) - 1);
- 	save_mstb_topology_ref(mstb, DRM_DP_MST_TOPOLOGY_REF_PUT);
- 
- 	topology_ref_history_unlock(mstb->mgr);
-@@ -1895,8 +1902,7 @@ drm_dp_mst_topology_try_get_port(struct drm_dp_mst_port *port)
- 	topology_ref_history_lock(port->mgr);
- 	ret = kref_get_unless_zero(&port->topology_kref);
- 	if (ret) {
--		DRM_DEBUG("port %p (%d)\n",
--			  port, kref_read(&port->topology_kref));
-+		drm_dbg(port->mgr->dev, "port %p (%d)\n", port, kref_read(&port->topology_kref));
- 		save_port_topology_ref(port, DRM_DP_MST_TOPOLOGY_REF_GET);
- 	}
- 
-@@ -1923,7 +1929,7 @@ static void drm_dp_mst_topology_get_port(struct drm_dp_mst_port *port)
- 
- 	WARN_ON(kref_read(&port->topology_kref) == 0);
- 	kref_get(&port->topology_kref);
--	DRM_DEBUG("port %p (%d)\n", port, kref_read(&port->topology_kref));
-+	drm_dbg(port->mgr->dev, "port %p (%d)\n", port, kref_read(&port->topology_kref));
- 	save_port_topology_ref(port, DRM_DP_MST_TOPOLOGY_REF_GET);
- 
- 	topology_ref_history_unlock(port->mgr);
-@@ -1944,8 +1950,7 @@ static void drm_dp_mst_topology_put_port(struct drm_dp_mst_port *port)
- {
- 	topology_ref_history_lock(port->mgr);
- 
--	DRM_DEBUG("port %p (%d)\n",
--		  port, kref_read(&port->topology_kref) - 1);
-+	drm_dbg(port->mgr->dev, "port %p (%d)\n", port, kref_read(&port->topology_kref) - 1);
- 	save_port_topology_ref(port, DRM_DP_MST_TOPOLOGY_REF_PUT);
- 
- 	topology_ref_history_unlock(port->mgr);
-@@ -2130,8 +2135,7 @@ drm_dp_port_set_pdt(struct drm_dp_mst_port *port, u8 new_pdt,
- 			mstb = drm_dp_add_mst_branch_device(lct, rad);
- 			if (!mstb) {
- 				ret = -ENOMEM;
--				DRM_ERROR("Failed to create MSTB for port %p",
--					  port);
-+				drm_err(mgr->dev, "Failed to create MSTB for port %p", port);
- 				goto out;
- 			}
- 
-@@ -2261,8 +2265,8 @@ static void build_mst_prop_path(const struct drm_dp_mst_branch *mstb,
- int drm_dp_mst_connector_late_register(struct drm_connector *connector,
- 				       struct drm_dp_mst_port *port)
- {
--	DRM_DEBUG_KMS("registering %s remote bus for %s\n",
--		      port->aux.name, connector->kdev->kobj.name);
-+	drm_dbg_kms(port->mgr->dev, "registering %s remote bus for %s\n",
-+		    port->aux.name, connector->kdev->kobj.name);
- 
- 	port->aux.dev = connector->kdev;
- 	return drm_dp_aux_register_devnode(&port->aux);
-@@ -2281,8 +2285,8 @@ EXPORT_SYMBOL(drm_dp_mst_connector_late_register);
- void drm_dp_mst_connector_early_unregister(struct drm_connector *connector,
- 					   struct drm_dp_mst_port *port)
- {
--	DRM_DEBUG_KMS("unregistering %s remote bus for %s\n",
--		      port->aux.name, connector->kdev->kobj.name);
-+	drm_dbg_kms(port->mgr->dev, "unregistering %s remote bus for %s\n",
-+		    port->aux.name, connector->kdev->kobj.name);
- 	drm_dp_aux_unregister_devnode(&port->aux);
- }
- EXPORT_SYMBOL(drm_dp_mst_connector_early_unregister);
-@@ -2312,7 +2316,7 @@ drm_dp_mst_port_add_connector(struct drm_dp_mst_branch *mstb,
- 	return;
- 
- error:
--	DRM_ERROR("Failed to create connector for port %p: %d\n", port, ret);
-+	drm_err(mgr->dev, "Failed to create connector for port %p: %d\n", port, ret);
- }
- 
- /*
-@@ -2452,8 +2456,7 @@ drm_dp_mst_handle_link_address_port(struct drm_dp_mst_branch *mstb,
- 	if (ret == 1) {
- 		send_link_addr = true;
- 	} else if (ret < 0) {
--		DRM_ERROR("Failed to change PDT on port %p: %d\n",
--			  port, ret);
-+		drm_err(dev, "Failed to change PDT on port %p: %d\n", port, ret);
- 		goto fail;
- 	}
- 
-@@ -2548,8 +2551,7 @@ drm_dp_mst_handle_conn_stat(struct drm_dp_mst_branch *mstb,
- 	if (ret == 1) {
- 		dowork = true;
- 	} else if (ret < 0) {
--		DRM_ERROR("Failed to change PDT for port %p: %d\n",
--			  port, ret);
-+		drm_err(mgr->dev, "Failed to change PDT for port %p: %d\n", port, ret);
- 		dowork = false;
- 	}
- 
-@@ -2608,7 +2610,9 @@ static struct drm_dp_mst_branch *drm_dp_get_mst_branch_device(struct drm_dp_mst_
- 			if (port->port_num == port_num) {
- 				mstb = port->mstb;
- 				if (!mstb) {
--					DRM_ERROR("failed to lookup MSTB with lct %d, rad %02x\n", lct, rad[0]);
-+					drm_err(mgr->dev,
-+						"failed to lookup MSTB with lct %d, rad %02x\n",
-+						lct, rad[0]);
- 					goto out;
- 				}
- 
-@@ -2744,7 +2748,7 @@ static void drm_dp_mst_link_probe_work(struct work_struct *work)
- 	 * things work again.
- 	 */
- 	if (clear_payload_id_table) {
--		DRM_DEBUG_KMS("Clearing payload ID table\n");
-+		drm_dbg_kms(dev, "Clearing payload ID table\n");
- 		drm_dp_send_clear_payload_id_table(mgr, mstb);
- 	}
- 
-@@ -2806,7 +2810,7 @@ static int drm_dp_send_sideband_msg(struct drm_dp_mst_topology_mgr *mgr,
- 				retries++;
- 				goto retry;
- 			}
--			DRM_DEBUG_KMS("failed to dpcd write %d %d\n", tosend, ret);
-+			drm_dbg_kms(mgr->dev, "failed to dpcd write %d %d\n", tosend, ret);
- 
- 			return -EIO;
- 		}
-@@ -2919,7 +2923,7 @@ static void process_single_down_tx_qlock(struct drm_dp_mst_topology_mgr *mgr)
- 				 struct drm_dp_sideband_msg_tx, next);
- 	ret = process_single_tx_qlock(mgr, txmsg, false);
- 	if (ret < 0) {
--		DRM_DEBUG_KMS("failed to send msg in q %d\n", ret);
-+		drm_dbg_kms(mgr->dev, "failed to send msg in q %d\n", ret);
- 		list_del(&txmsg->next);
- 		txmsg->state = DRM_DP_SIDEBAND_TX_TIMEOUT;
- 		wake_up_all(&mgr->tx_waitq);
-@@ -2944,24 +2948,26 @@ static void drm_dp_queue_down_tx(struct drm_dp_mst_topology_mgr *mgr,
- }
- 
- static void
--drm_dp_dump_link_address(struct drm_dp_link_address_ack_reply *reply)
-+drm_dp_dump_link_address(const struct drm_dp_mst_topology_mgr *mgr,
-+			 struct drm_dp_link_address_ack_reply *reply)
- {
- 	struct drm_dp_link_addr_reply_port *port_reply;
- 	int i;
- 
- 	for (i = 0; i < reply->nports; i++) {
- 		port_reply = &reply->ports[i];
--		DRM_DEBUG_KMS("port %d: input %d, pdt: %d, pn: %d, dpcd_rev: %02x, mcs: %d, ddps: %d, ldps %d, sdp %d/%d\n",
--			      i,
--			      port_reply->input_port,
--			      port_reply->peer_device_type,
--			      port_reply->port_number,
--			      port_reply->dpcd_revision,
--			      port_reply->mcs,
--			      port_reply->ddps,
--			      port_reply->legacy_device_plug_status,
--			      port_reply->num_sdp_streams,
--			      port_reply->num_sdp_stream_sinks);
-+		drm_dbg_kms(mgr->dev,
-+			    "port %d: input %d, pdt: %d, pn: %d, dpcd_rev: %02x, mcs: %d, ddps: %d, ldps %d, sdp %d/%d\n",
-+			    i,
-+			    port_reply->input_port,
-+			    port_reply->peer_device_type,
-+			    port_reply->port_number,
-+			    port_reply->dpcd_revision,
-+			    port_reply->mcs,
-+			    port_reply->ddps,
-+			    port_reply->legacy_device_plug_status,
-+			    port_reply->num_sdp_streams,
-+			    port_reply->num_sdp_stream_sinks);
- 	}
- }
- 
-@@ -2987,26 +2993,25 @@ static int drm_dp_send_link_address(struct drm_dp_mst_topology_mgr *mgr,
- 	/* FIXME: Actually do some real error handling here */
- 	ret = drm_dp_mst_wait_tx_reply(mstb, txmsg);
- 	if (ret <= 0) {
--		DRM_ERROR("Sending link address failed with %d\n", ret);
-+		drm_err(mgr->dev, "Sending link address failed with %d\n", ret);
- 		goto out;
- 	}
- 	if (txmsg->reply.reply_type == DP_SIDEBAND_REPLY_NAK) {
--		DRM_ERROR("link address NAK received\n");
-+		drm_err(mgr->dev, "link address NAK received\n");
- 		ret = -EIO;
- 		goto out;
- 	}
- 
- 	reply = &txmsg->reply.u.link_addr;
--	DRM_DEBUG_KMS("link address reply: %d\n", reply->nports);
--	drm_dp_dump_link_address(reply);
-+	drm_dbg_kms(mgr->dev, "link address reply: %d\n", reply->nports);
-+	drm_dp_dump_link_address(mgr, reply);
- 
- 	ret = drm_dp_check_mstb_guid(mstb, reply->guid);
- 	if (ret) {
- 		char buf[64];
- 
- 		drm_dp_mst_rad_to_str(mstb->rad, mstb->lct, buf, sizeof(buf));
--		DRM_ERROR("GUID check on %s failed: %d\n",
--			  buf, ret);
-+		drm_err(mgr->dev, "GUID check on %s failed: %d\n", buf, ret);
- 		goto out;
- 	}
- 
-@@ -3030,8 +3035,8 @@ static int drm_dp_send_link_address(struct drm_dp_mst_topology_mgr *mgr,
- 		if (port_mask & BIT(port->port_num))
- 			continue;
- 
--		DRM_DEBUG_KMS("port %d was not in link address, removing\n",
--			      port->port_num);
-+		drm_dbg_kms(mgr->dev, "port %d was not in link address, removing\n",
-+			    port->port_num);
- 		list_del(&port->next);
- 		drm_dp_mst_topology_put_port(port);
- 		changed = true;
-@@ -3063,7 +3068,7 @@ drm_dp_send_clear_payload_id_table(struct drm_dp_mst_topology_mgr *mgr,
- 
- 	ret = drm_dp_mst_wait_tx_reply(mstb, txmsg);
- 	if (ret > 0 && txmsg->reply.reply_type == DP_SIDEBAND_REPLY_NAK)
--		DRM_DEBUG_KMS("clear payload table id nak received\n");
-+		drm_dbg_kms(mgr->dev, "clear payload table id nak received\n");
- 
- 	kfree(txmsg);
- }
-@@ -3092,15 +3097,15 @@ drm_dp_send_enum_path_resources(struct drm_dp_mst_topology_mgr *mgr,
- 		path_res = &txmsg->reply.u.path_resources;
- 
- 		if (txmsg->reply.reply_type == DP_SIDEBAND_REPLY_NAK) {
--			DRM_DEBUG_KMS("enum path resources nak received\n");
-+			drm_dbg_kms(mgr->dev, "enum path resources nak received\n");
- 		} else {
- 			if (port->port_num != path_res->port_number)
- 				DRM_ERROR("got incorrect port in response\n");
- 
--			DRM_DEBUG_KMS("enum path resources %d: %d %d\n",
--				      path_res->port_number,
--				      path_res->full_payload_bw_number,
--				      path_res->avail_payload_bw_number);
-+			drm_dbg_kms(mgr->dev, "enum path resources %d: %d %d\n",
-+				    path_res->port_number,
-+				    path_res->full_payload_bw_number,
-+				    path_res->avail_payload_bw_number);
- 
- 			/*
- 			 * If something changed, make sure we send a
-@@ -3346,7 +3351,7 @@ static int drm_dp_destroy_payload_step1(struct drm_dp_mst_topology_mgr *mgr,
- 					int id,
- 					struct drm_dp_payload *payload)
- {
--	DRM_DEBUG_KMS("\n");
-+	drm_dbg_kms(mgr->dev, "\n");
- 	/* it's okay for these to fail */
- 	if (port) {
- 		drm_dp_payload_send_msg(mgr, port, id, 0);
-@@ -3452,7 +3457,7 @@ int drm_dp_update_payload_part1(struct drm_dp_mst_topology_mgr *mgr)
- 			continue;
- 		}
- 
--		DRM_DEBUG_KMS("removing payload %d\n", i);
-+		drm_dbg_kms(mgr->dev, "removing payload %d\n", i);
- 		for (j = i; j < mgr->max_payloads - 1; j++) {
- 			mgr->payloads[j] = mgr->payloads[j + 1];
- 			mgr->proposed_vcpis[j] = mgr->proposed_vcpis[j + 1];
-@@ -3499,7 +3504,7 @@ int drm_dp_update_payload_part2(struct drm_dp_mst_topology_mgr *mgr)
- 
- 		port = container_of(mgr->proposed_vcpis[i], struct drm_dp_mst_port, vcpi);
- 
--		DRM_DEBUG_KMS("payload %d %d\n", i, mgr->payloads[i].payload_state);
-+		drm_dbg_kms(mgr->dev, "payload %d %d\n", i, mgr->payloads[i].payload_state);
- 		if (mgr->payloads[i].payload_state == DP_PAYLOAD_LOCAL) {
- 			ret = drm_dp_create_payload_step2(mgr, port, mgr->proposed_vcpis[i]->vcpi, &mgr->payloads[i]);
- 		} else if (mgr->payloads[i].payload_state == DP_PAYLOAD_DELETE_LOCAL) {
-@@ -3544,8 +3549,8 @@ static int drm_dp_send_dpcd_read(struct drm_dp_mst_topology_mgr *mgr,
- 
- 	/* DPCD read should never be NACKed */
- 	if (txmsg->reply.reply_type == 1) {
--		DRM_ERROR("mstb %p port %d: DPCD read on addr 0x%x for %d bytes NAKed\n",
--			  mstb, port->port_num, offset, size);
-+		drm_err(mgr->dev, "mstb %p port %d: DPCD read on addr 0x%x for %d bytes NAKed\n",
-+			mstb, port->port_num, offset, size);
- 		ret = -EIO;
- 		goto fail_free;
- 	}
-@@ -3651,8 +3656,8 @@ int drm_dp_get_vc_payload_bw(const struct drm_dp_mst_topology_mgr *mgr,
- 			     int link_rate, int link_lane_count)
- {
- 	if (link_rate == 0 || link_lane_count == 0)
--		DRM_DEBUG_KMS("invalid link rate/lane count: (%d / %d)\n",
--			      link_rate, link_lane_count);
-+		drm_dbg_kms(mgr->dev, "invalid link rate/lane count: (%d / %d)\n",
-+			    link_rate, link_lane_count);
- 
- 	/* See DP v2.0 2.6.4.2, VCPayload_Bandwidth_for_OneTimeSlotPer_MTP_Allocation */
- 	return link_rate * link_lane_count / 54000;
-@@ -3709,7 +3714,7 @@ int drm_dp_mst_topology_mgr_set_mst(struct drm_dp_mst_topology_mgr *mgr, bool ms
- 		/* get dpcd info */
- 		ret = drm_dp_dpcd_read(mgr->aux, DP_DPCD_REV, mgr->dpcd, DP_RECEIVER_CAP_SIZE);
- 		if (ret != DP_RECEIVER_CAP_SIZE) {
--			DRM_DEBUG_KMS("failed to read DPCD\n");
-+			drm_dbg_kms(mgr->dev, "failed to read DPCD\n");
- 			goto out_unlock;
- 		}
- 
-@@ -3844,7 +3849,7 @@ int drm_dp_mst_topology_mgr_resume(struct drm_dp_mst_topology_mgr *mgr,
- 	ret = drm_dp_dpcd_read(mgr->aux, DP_DPCD_REV, mgr->dpcd,
- 			       DP_RECEIVER_CAP_SIZE);
- 	if (ret != DP_RECEIVER_CAP_SIZE) {
--		DRM_DEBUG_KMS("dpcd read failed - undocked during suspend?\n");
-+		drm_dbg_kms(mgr->dev, "dpcd read failed - undocked during suspend?\n");
- 		goto out_fail;
- 	}
- 
-@@ -3853,20 +3858,20 @@ int drm_dp_mst_topology_mgr_resume(struct drm_dp_mst_topology_mgr *mgr,
- 				 DP_UP_REQ_EN |
- 				 DP_UPSTREAM_IS_SRC);
- 	if (ret < 0) {
--		DRM_DEBUG_KMS("mst write failed - undocked during suspend?\n");
-+		drm_dbg_kms(mgr->dev, "mst write failed - undocked during suspend?\n");
- 		goto out_fail;
- 	}
- 
- 	/* Some hubs forget their guids after they resume */
- 	ret = drm_dp_dpcd_read(mgr->aux, DP_GUID, guid, 16);
- 	if (ret != 16) {
--		DRM_DEBUG_KMS("dpcd read failed - undocked during suspend?\n");
-+		drm_dbg_kms(mgr->dev, "dpcd read failed - undocked during suspend?\n");
- 		goto out_fail;
- 	}
- 
- 	ret = drm_dp_check_mstb_guid(mgr->mst_primary, guid);
- 	if (ret) {
--		DRM_DEBUG_KMS("check mstb failed - undocked during suspend?\n");
-+		drm_dbg_kms(mgr->dev, "check mstb failed - undocked during suspend?\n");
- 		goto out_fail;
- 	}
- 
-@@ -3879,7 +3884,8 @@ int drm_dp_mst_topology_mgr_resume(struct drm_dp_mst_topology_mgr *mgr,
- 	mutex_unlock(&mgr->lock);
- 
- 	if (sync) {
--		DRM_DEBUG_KMS("Waiting for link probe work to finish re-syncing topology...\n");
-+		drm_dbg_kms(mgr->dev,
-+			    "Waiting for link probe work to finish re-syncing topology...\n");
- 		flush_work(&mgr->work);
- 	}
- 
-@@ -3912,15 +3918,15 @@ drm_dp_get_one_sb_msg(struct drm_dp_mst_topology_mgr *mgr, bool up,
- 	len = min(mgr->max_dpcd_transaction_bytes, 16);
- 	ret = drm_dp_dpcd_read(mgr->aux, basereg, replyblock, len);
- 	if (ret != len) {
--		DRM_DEBUG_KMS("failed to read DPCD down rep %d %d\n", len, ret);
-+		drm_dbg_kms(mgr->dev, "failed to read DPCD down rep %d %d\n", len, ret);
- 		return false;
- 	}
- 
--	ret = drm_dp_decode_sideband_msg_hdr(&hdr, replyblock, len, &hdrlen);
-+	ret = drm_dp_decode_sideband_msg_hdr(mgr, &hdr, replyblock, len, &hdrlen);
- 	if (ret == false) {
- 		print_hex_dump(KERN_DEBUG, "failed hdr", DUMP_PREFIX_NONE, 16,
- 			       1, replyblock, len, false);
--		DRM_DEBUG_KMS("ERROR: failed header\n");
-+		drm_dbg_kms(mgr->dev, "ERROR: failed header\n");
- 		return false;
- 	}
- 
-@@ -3928,22 +3934,20 @@ drm_dp_get_one_sb_msg(struct drm_dp_mst_topology_mgr *mgr, bool up,
- 		/* Caller is responsible for giving back this reference */
- 		*mstb = drm_dp_get_mst_branch_device(mgr, hdr.lct, hdr.rad);
- 		if (!*mstb) {
--			DRM_DEBUG_KMS("Got MST reply from unknown device %d\n",
--				      hdr.lct);
-+			drm_dbg_kms(mgr->dev, "Got MST reply from unknown device %d\n", hdr.lct);
- 			return false;
- 		}
- 	}
- 
- 	if (!drm_dp_sideband_msg_set_header(msg, &hdr, hdrlen)) {
--		DRM_DEBUG_KMS("sideband msg set header failed %d\n",
--			      replyblock[0]);
-+		drm_dbg_kms(mgr->dev, "sideband msg set header failed %d\n", replyblock[0]);
- 		return false;
- 	}
- 
- 	replylen = min(msg->curchunk_len, (u8)(len - hdrlen));
- 	ret = drm_dp_sideband_append_payload(msg, replyblock + hdrlen, replylen);
- 	if (!ret) {
--		DRM_DEBUG_KMS("sideband msg build failed %d\n", replyblock[0]);
-+		drm_dbg_kms(mgr->dev, "sideband msg build failed %d\n", replyblock[0]);
- 		return false;
- 	}
- 
-@@ -3954,14 +3958,14 @@ drm_dp_get_one_sb_msg(struct drm_dp_mst_topology_mgr *mgr, bool up,
- 		ret = drm_dp_dpcd_read(mgr->aux, basereg + curreply,
- 				    replyblock, len);
- 		if (ret != len) {
--			DRM_DEBUG_KMS("failed to read a chunk (len %d, ret %d)\n",
--				      len, ret);
-+			drm_dbg_kms(mgr->dev, "failed to read a chunk (len %d, ret %d)\n",
-+				    len, ret);
- 			return false;
- 		}
- 
- 		ret = drm_dp_sideband_append_payload(msg, replyblock, len);
- 		if (!ret) {
--			DRM_DEBUG_KMS("failed to build sideband msg\n");
-+			drm_dbg_kms(mgr->dev, "failed to build sideband msg\n");
- 			return false;
- 		}
- 
-@@ -3995,21 +3999,21 @@ static int drm_dp_mst_handle_down_rep(struct drm_dp_mst_topology_mgr *mgr)
- 		struct drm_dp_sideband_msg_hdr *hdr;
- 
- 		hdr = &msg->initial_hdr;
--		DRM_DEBUG_KMS("Got MST reply with no msg %p %d %d %02x %02x\n",
--			      mstb, hdr->seqno, hdr->lct, hdr->rad[0],
--			      msg->msg[0]);
-+		drm_dbg_kms(mgr->dev, "Got MST reply with no msg %p %d %d %02x %02x\n",
-+			    mstb, hdr->seqno, hdr->lct, hdr->rad[0], msg->msg[0]);
- 		goto out_clear_reply;
- 	}
- 
--	drm_dp_sideband_parse_reply(msg, &txmsg->reply);
-+	drm_dp_sideband_parse_reply(mgr, msg, &txmsg->reply);
- 
- 	if (txmsg->reply.reply_type == DP_SIDEBAND_REPLY_NAK) {
--		DRM_DEBUG_KMS("Got NAK reply: req 0x%02x (%s), reason 0x%02x (%s), nak data 0x%02x\n",
--			      txmsg->reply.req_type,
--			      drm_dp_mst_req_type_str(txmsg->reply.req_type),
--			      txmsg->reply.u.nak.reason,
--			      drm_dp_mst_nak_reason_str(txmsg->reply.u.nak.reason),
--			      txmsg->reply.u.nak.nak_data);
-+		drm_dbg_kms(mgr->dev,
-+			    "Got NAK reply: req 0x%02x (%s), reason 0x%02x (%s), nak data 0x%02x\n",
-+			    txmsg->reply.req_type,
-+			    drm_dp_mst_req_type_str(txmsg->reply.req_type),
-+			    txmsg->reply.u.nak.reason,
-+			    drm_dp_mst_nak_reason_str(txmsg->reply.u.nak.reason),
-+			    txmsg->reply.u.nak.nak_data);
- 	}
- 
- 	memset(msg, 0, sizeof(struct drm_dp_sideband_msg_rx));
-@@ -4057,8 +4061,7 @@ drm_dp_mst_process_up_req(struct drm_dp_mst_topology_mgr *mgr,
- 	}
- 
- 	if (!mstb) {
--		DRM_DEBUG_KMS("Got MST reply from unknown device %d\n",
--			      hdr->lct);
-+		drm_dbg_kms(mgr->dev, "Got MST reply from unknown device %d\n", hdr->lct);
- 		return false;
- 	}
- 
-@@ -4118,12 +4121,12 @@ static int drm_dp_mst_handle_up_req(struct drm_dp_mst_topology_mgr *mgr)
- 
- 	INIT_LIST_HEAD(&up_req->next);
- 
--	drm_dp_sideband_parse_req(&mgr->up_req_recv, &up_req->msg);
-+	drm_dp_sideband_parse_req(mgr, &mgr->up_req_recv, &up_req->msg);
- 
- 	if (up_req->msg.req_type != DP_CONNECTION_STATUS_NOTIFY &&
- 	    up_req->msg.req_type != DP_RESOURCE_STATUS_NOTIFY) {
--		DRM_DEBUG_KMS("Received unknown up req type, ignoring: %x\n",
--			      up_req->msg.req_type);
-+		drm_dbg_kms(mgr->dev, "Received unknown up req type, ignoring: %x\n",
-+			    up_req->msg.req_type);
- 		kfree(up_req);
- 		goto out;
- 	}
-@@ -4135,20 +4138,20 @@ static int drm_dp_mst_handle_up_req(struct drm_dp_mst_topology_mgr *mgr)
- 		const struct drm_dp_connection_status_notify *conn_stat =
- 			&up_req->msg.u.conn_stat;
- 
--		DRM_DEBUG_KMS("Got CSN: pn: %d ldps:%d ddps: %d mcs: %d ip: %d pdt: %d\n",
--			      conn_stat->port_number,
--			      conn_stat->legacy_device_plug_status,
--			      conn_stat->displayport_device_plug_status,
--			      conn_stat->message_capability_status,
--			      conn_stat->input_port,
--			      conn_stat->peer_device_type);
-+		drm_dbg_kms(mgr->dev, "Got CSN: pn: %d ldps:%d ddps: %d mcs: %d ip: %d pdt: %d\n",
-+			    conn_stat->port_number,
-+			    conn_stat->legacy_device_plug_status,
-+			    conn_stat->displayport_device_plug_status,
-+			    conn_stat->message_capability_status,
-+			    conn_stat->input_port,
-+			    conn_stat->peer_device_type);
- 	} else if (up_req->msg.req_type == DP_RESOURCE_STATUS_NOTIFY) {
- 		const struct drm_dp_resource_status_notify *res_stat =
- 			&up_req->msg.u.resource_stat;
- 
--		DRM_DEBUG_KMS("Got RSN: pn: %d avail_pbn %d\n",
--			      res_stat->port_number,
--			      res_stat->available_pbn);
-+		drm_dbg_kms(mgr->dev, "Got RSN: pn: %d avail_pbn %d\n",
-+			    res_stat->port_number,
-+			    res_stat->available_pbn);
- 	}
- 
- 	up_req->hdr = mgr->up_req_recv.initial_hdr;
-@@ -4388,8 +4391,9 @@ int drm_dp_atomic_find_vcpi_slots(struct drm_atomic_state *state,
- 			 * which is an error
- 			 */
- 			if (WARN_ON(!prev_slots)) {
--				DRM_ERROR("cannot allocate and release VCPI on [MST PORT:%p] in the same state\n",
--					  port);
-+				drm_err(mgr->dev,
-+					"cannot allocate and release VCPI on [MST PORT:%p] in the same state\n",
-+					port);
- 				return -EINVAL;
- 			}
- 
-@@ -4406,12 +4410,12 @@ int drm_dp_atomic_find_vcpi_slots(struct drm_atomic_state *state,
- 
- 	req_slots = DIV_ROUND_UP(pbn, pbn_div);
- 
--	DRM_DEBUG_ATOMIC("[CONNECTOR:%d:%s] [MST PORT:%p] VCPI %d -> %d\n",
--			 port->connector->base.id, port->connector->name,
--			 port, prev_slots, req_slots);
--	DRM_DEBUG_ATOMIC("[CONNECTOR:%d:%s] [MST PORT:%p] PBN %d -> %d\n",
--			 port->connector->base.id, port->connector->name,
--			 port, prev_bw, pbn);
-+	drm_dbg_atomic(mgr->dev, "[CONNECTOR:%d:%s] [MST PORT:%p] VCPI %d -> %d\n",
-+		       port->connector->base.id, port->connector->name,
-+		       port, prev_slots, req_slots);
-+	drm_dbg_atomic(mgr->dev, "[CONNECTOR:%d:%s] [MST PORT:%p] PBN %d -> %d\n",
-+		       port->connector->base.id, port->connector->name,
-+		       port, prev_bw, pbn);
- 
- 	/* Add the new allocation to the state */
- 	if (!vcpi) {
-@@ -4475,12 +4479,12 @@ int drm_dp_atomic_release_vcpi_slots(struct drm_atomic_state *state,
- 		}
- 	}
- 	if (WARN_ON(!found)) {
--		DRM_ERROR("no VCPI for [MST PORT:%p] found in mst state %p\n",
--			  port, &topology_state->base);
-+		drm_err(mgr->dev, "no VCPI for [MST PORT:%p] found in mst state %p\n",
-+			port, &topology_state->base);
- 		return -EINVAL;
- 	}
- 
--	DRM_DEBUG_ATOMIC("[MST PORT:%p] VCPI %d -> 0\n", port, pos->vcpi);
-+	drm_dbg_atomic(mgr->dev, "[MST PORT:%p] VCPI %d -> 0\n", port, pos->vcpi);
- 	if (pos->vcpi) {
- 		drm_dp_mst_put_port_malloc(port);
- 		pos->vcpi = 0;
-@@ -4511,8 +4515,9 @@ bool drm_dp_mst_allocate_vcpi(struct drm_dp_mst_topology_mgr *mgr,
- 		return false;
- 
- 	if (port->vcpi.vcpi > 0) {
--		DRM_DEBUG_KMS("payload: vcpi %d already allocated for pbn %d - requested pbn %d\n",
--			      port->vcpi.vcpi, port->vcpi.pbn, pbn);
-+		drm_dbg_kms(mgr->dev,
-+			    "payload: vcpi %d already allocated for pbn %d - requested pbn %d\n",
-+			    port->vcpi.vcpi, port->vcpi.pbn, pbn);
- 		if (pbn == port->vcpi.pbn) {
- 			drm_dp_mst_topology_put_port(port);
- 			return true;
-@@ -4521,13 +4526,12 @@ bool drm_dp_mst_allocate_vcpi(struct drm_dp_mst_topology_mgr *mgr,
- 
- 	ret = drm_dp_init_vcpi(mgr, &port->vcpi, pbn, slots);
- 	if (ret) {
--		DRM_DEBUG_KMS("failed to init vcpi slots=%d max=63 ret=%d\n",
--			      DIV_ROUND_UP(pbn, mgr->pbn_div), ret);
-+		drm_dbg_kms(mgr->dev, "failed to init vcpi slots=%d max=63 ret=%d\n",
-+			    DIV_ROUND_UP(pbn, mgr->pbn_div), ret);
- 		drm_dp_mst_topology_put_port(port);
- 		goto out;
- 	}
--	DRM_DEBUG_KMS("initing vcpi for pbn=%d slots=%d\n",
--		      pbn, port->vcpi.num_slots);
-+	drm_dbg_kms(mgr->dev, "initing vcpi for pbn=%d slots=%d\n", pbn, port->vcpi.num_slots);
- 
- 	/* Keep port allocated until its payload has been removed */
- 	drm_dp_mst_get_port_malloc(port);
-@@ -4609,14 +4613,14 @@ static int drm_dp_dpcd_write_payload(struct drm_dp_mst_topology_mgr *mgr,
- 
- 	ret = drm_dp_dpcd_write(mgr->aux, DP_PAYLOAD_ALLOCATE_SET, payload_alloc, 3);
- 	if (ret != 3) {
--		DRM_DEBUG_KMS("failed to write payload allocation %d\n", ret);
-+		drm_dbg_kms(mgr->dev, "failed to write payload allocation %d\n", ret);
- 		goto fail;
- 	}
- 
- retry:
- 	ret = drm_dp_dpcd_readb(mgr->aux, DP_PAYLOAD_TABLE_UPDATE_STATUS, &status);
- 	if (ret < 0) {
--		DRM_DEBUG_KMS("failed to read payload table status %d\n", ret);
-+		drm_dbg_kms(mgr->dev, "failed to read payload table status %d\n", ret);
- 		goto fail;
- 	}
- 
-@@ -4626,7 +4630,8 @@ static int drm_dp_dpcd_write_payload(struct drm_dp_mst_topology_mgr *mgr,
- 			usleep_range(10000, 20000);
- 			goto retry;
- 		}
--		DRM_DEBUG_KMS("status not set after read payload table status %d\n", status);
-+		drm_dbg_kms(mgr->dev, "status not set after read payload table status %d\n",
-+			    status);
- 		ret = -EINVAL;
- 		goto fail;
- 	}
-@@ -4673,16 +4678,15 @@ int drm_dp_check_act_status(struct drm_dp_mst_topology_mgr *mgr)
- 				 status & DP_PAYLOAD_ACT_HANDLED || status < 0,
- 				 200, timeout_ms * USEC_PER_MSEC);
- 	if (ret < 0 && status >= 0) {
--		DRM_ERROR("Failed to get ACT after %dms, last status: %02x\n",
--			  timeout_ms, status);
-+		drm_err(mgr->dev, "Failed to get ACT after %dms, last status: %02x\n",
-+			timeout_ms, status);
- 		return -EINVAL;
- 	} else if (status < 0) {
- 		/*
- 		 * Failure here isn't unexpected - the hub may have
- 		 * just been unplugged
- 		 */
--		DRM_DEBUG_KMS("Failed to read payload table status: %d\n",
--			      status);
-+		drm_dbg_kms(mgr->dev, "Failed to read payload table status: %d\n", status);
- 		return status;
- 	}
- 
-@@ -5122,12 +5126,11 @@ drm_dp_mst_atomic_check_mstb_bw_limit(struct drm_dp_mst_branch *mstb,
- 		return 0;
- 
- 	if (mstb->port_parent)
--		DRM_DEBUG_ATOMIC("[MSTB:%p] [MST PORT:%p] Checking bandwidth limits on [MSTB:%p]\n",
--				 mstb->port_parent->parent, mstb->port_parent,
--				 mstb);
-+		drm_dbg_atomic(mstb->mgr->dev,
-+			       "[MSTB:%p] [MST PORT:%p] Checking bandwidth limits on [MSTB:%p]\n",
-+			       mstb->port_parent->parent, mstb->port_parent, mstb);
- 	else
--		DRM_DEBUG_ATOMIC("[MSTB:%p] Checking bandwidth limits\n",
--				 mstb);
-+		drm_dbg_atomic(mstb->mgr->dev, "[MSTB:%p] Checking bandwidth limits\n", mstb);
- 
- 	list_for_each_entry(port, &mstb->ports, next) {
- 		ret = drm_dp_mst_atomic_check_port_bw_limit(port, state);
-@@ -5185,14 +5188,14 @@ drm_dp_mst_atomic_check_port_bw_limit(struct drm_dp_mst_port *port,
- 	}
- 
- 	if (pbn_used > port->full_pbn) {
--		DRM_DEBUG_ATOMIC("[MSTB:%p] [MST PORT:%p] required PBN of %d exceeds port limit of %d\n",
--				 port->parent, port, pbn_used,
--				 port->full_pbn);
-+		drm_dbg_atomic(port->mgr->dev,
-+			       "[MSTB:%p] [MST PORT:%p] required PBN of %d exceeds port limit of %d\n",
-+			       port->parent, port, pbn_used, port->full_pbn);
- 		return -ENOSPC;
- 	}
- 
--	DRM_DEBUG_ATOMIC("[MSTB:%p] [MST PORT:%p] uses %d out of %d PBN\n",
--			 port->parent, port, pbn_used, port->full_pbn);
-+	drm_dbg_atomic(port->mgr->dev, "[MSTB:%p] [MST PORT:%p] uses %d out of %d PBN\n",
-+		       port->parent, port, pbn_used, port->full_pbn);
- 
- 	return pbn_used;
- }
-@@ -5207,31 +5210,31 @@ drm_dp_mst_atomic_check_vcpi_alloc_limit(struct drm_dp_mst_topology_mgr *mgr,
- 	list_for_each_entry(vcpi, &mst_state->vcpis, next) {
- 		/* Releasing VCPI is always OK-even if the port is gone */
- 		if (!vcpi->vcpi) {
--			DRM_DEBUG_ATOMIC("[MST PORT:%p] releases all VCPI slots\n",
--					 vcpi->port);
-+			drm_dbg_atomic(mgr->dev, "[MST PORT:%p] releases all VCPI slots\n",
-+				       vcpi->port);
- 			continue;
- 		}
- 
--		DRM_DEBUG_ATOMIC("[MST PORT:%p] requires %d vcpi slots\n",
--				 vcpi->port, vcpi->vcpi);
-+		drm_dbg_atomic(mgr->dev, "[MST PORT:%p] requires %d vcpi slots\n",
-+			       vcpi->port, vcpi->vcpi);
- 
- 		avail_slots -= vcpi->vcpi;
- 		if (avail_slots < 0) {
--			DRM_DEBUG_ATOMIC("[MST PORT:%p] not enough VCPI slots in mst state %p (avail=%d)\n",
--					 vcpi->port, mst_state,
--					 avail_slots + vcpi->vcpi);
-+			drm_dbg_atomic(mgr->dev,
-+				       "[MST PORT:%p] not enough VCPI slots in mst state %p (avail=%d)\n",
-+				       vcpi->port, mst_state, avail_slots + vcpi->vcpi);
- 			return -ENOSPC;
- 		}
- 
- 		if (++payload_count > mgr->max_payloads) {
--			DRM_DEBUG_ATOMIC("[MST MGR:%p] state %p has too many payloads (max=%d)\n",
--					 mgr, mst_state, mgr->max_payloads);
-+			drm_dbg_atomic(mgr->dev,
-+				       "[MST MGR:%p] state %p has too many payloads (max=%d)\n",
-+				       mgr, mst_state, mgr->max_payloads);
- 			return -EINVAL;
- 		}
- 	}
--	DRM_DEBUG_ATOMIC("[MST MGR:%p] mst state %p VCPI avail=%d used=%d\n",
--			 mgr, mst_state, avail_slots,
--			 63 - avail_slots);
-+	drm_dbg_atomic(mgr->dev, "[MST MGR:%p] mst state %p VCPI avail=%d used=%d\n",
-+		       mgr, mst_state, avail_slots, 63 - avail_slots);
+diff --git a/drivers/gpu/drm/bridge/tc358767.c b/drivers/gpu/drm/bridge/tc358767.c
+index da89922721ed..6a56acf36a9a 100644
+--- a/drivers/gpu/drm/bridge/tc358767.c
++++ b/drivers/gpu/drm/bridge/tc358767.c
+@@ -1693,7 +1693,9 @@ static int tc_probe(struct i2c_client *client, const struct i2c_device_id *id)
+ 	tc->aux.name = "TC358767 AUX i2c adapter";
+ 	tc->aux.dev = tc->dev;
+ 	tc->aux.transfer = tc_aux_transfer;
+-	drm_dp_aux_init(&tc->aux);
++	ret = drm_dp_aux_init(&tc->aux);
++	if (ret)
++		return ret;
+ 
+ 	tc->bridge.funcs = &tc_bridge_funcs;
+ 	if (tc->hpd_pin >= 0)
+@@ -1713,6 +1715,7 @@ static int tc_remove(struct i2c_client *client)
+ 	struct tc_data *tc = i2c_get_clientdata(client);
+ 
+ 	drm_bridge_remove(&tc->bridge);
++	drm_dp_aux_fini(&tc->aux);
  
  	return 0;
  }
-@@ -5288,8 +5291,8 @@ int drm_dp_mst_add_affected_dsc_crtcs(struct drm_atomic_state *state, struct drm
- 		if (IS_ERR(crtc_state))
- 			return PTR_ERR(crtc_state);
+diff --git a/drivers/gpu/drm/bridge/ti-sn65dsi86.c b/drivers/gpu/drm/bridge/ti-sn65dsi86.c
+index 88df4dd0f39d..6190451c9195 100644
+--- a/drivers/gpu/drm/bridge/ti-sn65dsi86.c
++++ b/drivers/gpu/drm/bridge/ti-sn65dsi86.c
+@@ -1291,17 +1291,16 @@ static int ti_sn_bridge_probe(struct i2c_client *client,
+ 	pm_runtime_enable(pdata->dev);
  
--		DRM_DEBUG_ATOMIC("[MST MGR:%p] Setting mode_changed flag on CRTC %p\n",
--				 mgr, crtc);
-+		drm_dbg_atomic(mgr->dev, "[MST MGR:%p] Setting mode_changed flag on CRTC %p\n",
-+			       mgr, crtc);
+ 	ret = ti_sn_setup_gpio_controller(pdata);
+-	if (ret) {
+-		pm_runtime_disable(pdata->dev);
+-		return ret;
+-	}
+-
++	if (ret)
++		goto fail_pm;
+ 	i2c_set_clientdata(client, pdata);
  
- 		crtc_state->mode_changed = true;
- 	}
-@@ -5334,21 +5337,24 @@ int drm_dp_mst_atomic_enable_dsc(struct drm_atomic_state *state,
+ 	pdata->aux.name = "ti-sn65dsi86-aux";
+ 	pdata->aux.dev = pdata->dev;
+ 	pdata->aux.transfer = ti_sn_aux_transfer;
+-	drm_dp_aux_init(&pdata->aux);
++	ret = drm_dp_aux_init(&pdata->aux);
++	if (ret)
++		goto fail_pm;
+ 
+ 	pdata->bridge.funcs = &ti_sn_bridge_funcs;
+ 	pdata->bridge.of_node = client->dev.of_node;
+@@ -1311,6 +1310,9 @@ static int ti_sn_bridge_probe(struct i2c_client *client,
+ 	ti_sn_debugfs_init(pdata);
+ 
+ 	return 0;
++fail_pm:
++	pm_runtime_disable(pdata->dev);
++	return ret;
+ }
+ 
+ static int ti_sn_bridge_remove(struct i2c_client *client)
+@@ -1332,6 +1334,8 @@ static int ti_sn_bridge_remove(struct i2c_client *client)
+ 		mipi_dsi_device_unregister(pdata->dsi);
  	}
  
- 	if (!found) {
--		DRM_DEBUG_ATOMIC("[MST PORT:%p] Couldn't find VCPI allocation in mst state %p\n",
--				 port, mst_state);
-+		drm_dbg_atomic(state->dev,
-+			       "[MST PORT:%p] Couldn't find VCPI allocation in mst state %p\n",
-+			       port, mst_state);
- 		return -EINVAL;
- 	}
++	drm_dp_aux_fini(&pdata->aux);
++
+ 	drm_bridge_remove(&pdata->bridge);
  
- 	if (pos->dsc_enabled == enable) {
--		DRM_DEBUG_ATOMIC("[MST PORT:%p] DSC flag is already set to %d, returning %d VCPI slots\n",
--				 port, enable, pos->vcpi);
-+		drm_dbg_atomic(state->dev,
-+			       "[MST PORT:%p] DSC flag is already set to %d, returning %d VCPI slots\n",
-+			       port, enable, pos->vcpi);
- 		vcpi = pos->vcpi;
- 	}
+ 	return 0;
+diff --git a/drivers/gpu/drm/drm_dp_helper.c b/drivers/gpu/drm/drm_dp_helper.c
+index cb2f53e56685..6c9e552233fd 100644
+--- a/drivers/gpu/drm/drm_dp_helper.c
++++ b/drivers/gpu/drm/drm_dp_helper.c
+@@ -1731,10 +1731,18 @@ EXPORT_SYMBOL(drm_dp_remote_aux_init);
+  * If you need to use the drm_dp_aux's i2c adapter prior to registering it
+  * with the outside world, call drm_dp_aux_init() first. You must still
+  * call drm_dp_aux_register() once the connector has been registered to
+- * allow userspace access to the auxiliary DP channel.
++ * allow userspace access to the auxiliary DP channel. Once the AUX channel is
++ * no longer being used and has been unregistered with
++ * drm_dp_aux_unregister(), the driver must clean up any resources it's
++ * allocated with drm_dp_aux_fini().
++ *
++ * Returns:
++ * %0 on success, negative error code on failure
+  */
+-void drm_dp_aux_init(struct drm_dp_aux *aux)
++int drm_dp_aux_init(struct drm_dp_aux *aux)
+ {
++	int ret;
++
+ 	mutex_init(&aux->hw_mutex);
+ 	mutex_init(&aux->cec.lock);
+ 	INIT_WORK(&aux->crc_work, drm_dp_aux_crc_work);
+@@ -1744,16 +1752,55 @@ void drm_dp_aux_init(struct drm_dp_aux *aux)
+ 	aux->ddc.retries = 3;
  
- 	if (enable) {
- 		vcpi = drm_dp_atomic_find_vcpi_slots(state, port->mgr, port, pbn, pbn_div);
--		DRM_DEBUG_ATOMIC("[MST PORT:%p] Enabling DSC flag, reallocating %d VCPI slots on the port\n",
--				 port, vcpi);
-+		drm_dbg_atomic(state->dev,
-+			       "[MST PORT:%p] Enabling DSC flag, reallocating %d VCPI slots on the port\n",
-+			       port, vcpi);
- 		if (vcpi < 0)
- 			return -EINVAL;
+ 	aux->ddc.lock_ops = &drm_dp_i2c_lock_ops;
++
++	aux->ddc.class = I2C_CLASS_DDC;
++	aux->ddc.owner = THIS_MODULE;
++	aux->ddc.dev.parent = aux->dev;
++
++	strlcpy(aux->ddc.name, aux->name ?: dev_name(aux->dev), sizeof(aux->ddc.name));
++
++	ret = i2c_add_adapter(&aux->ddc);
++	if (ret) {
++		aux->ddc.algo = NULL;
++		mutex_destroy(&aux->hw_mutex);
++		mutex_destroy(&aux->cec.lock);
++	}
++
++	return ret;
+ }
+ EXPORT_SYMBOL(drm_dp_aux_init);
+ 
+ /**
+- * drm_dp_aux_register() - initialise and register aux channel
++ * drm_dp_aux_fini() - release resources from an aux channel
+  * @aux: DisplayPort AUX channel
+  *
+- * Automatically calls drm_dp_aux_init() if this hasn't been done yet.
++ * Cleans up any resources associated with a DP AUX channel, along with
++ * removing it's associated i2c adapter. Must always be called once an AUX
++ * channel is being removed. Note that if drm_dp_aux_init() was not called on
++ * @aux, this function is a no-op.
++ */
++void drm_dp_aux_fini(struct drm_dp_aux *aux)
++{
++	if (!aux->ddc.algo)
++		return;
++
++	i2c_del_adapter(&aux->ddc);
++	mutex_destroy(&aux->hw_mutex);
++	mutex_destroy(&aux->cec.lock);
++}
++EXPORT_SYMBOL(drm_dp_aux_fini);
++
++/**
++ * drm_dp_aux_register() - register aux channel
++ * @aux: DisplayPort AUX channel
++ *
++ * Automatically calls drm_dp_aux_init() if this hasn't been done yet. The
++ * driver must make sure to call drm_dp_aux_unregister() to unregister the
++ * device, and drm_dp_aux_fini() to cleanup the device after it's been
++ * unregistered.
++ *
+  * This should only be called when the underlying &struct drm_connector is
+- * initialiazed already. Therefore the best place to call this is from
++ * initialized already. Therefore the best place to call this is from
+  * &drm_connector_funcs.late_register. Not that drivers which don't follow this
+  * will Oops when CONFIG_DRM_DP_AUX_CHARDEV is enabled.
+  *
+@@ -1766,39 +1813,32 @@ EXPORT_SYMBOL(drm_dp_aux_init);
+ int drm_dp_aux_register(struct drm_dp_aux *aux)
+ {
+ 	int ret;
++	const bool init_aux = !aux->ddc.algo;
+ 
+-	if (!aux->ddc.algo)
+-		drm_dp_aux_init(aux);
+-
+-	aux->ddc.class = I2C_CLASS_DDC;
+-	aux->ddc.owner = THIS_MODULE;
+-	aux->ddc.dev.parent = aux->dev;
+-
+-	strlcpy(aux->ddc.name, aux->name ? aux->name : dev_name(aux->dev),
+-		sizeof(aux->ddc.name));
++	if (init_aux) {
++		ret = drm_dp_aux_init(aux);
++		if (ret)
++			return ret;
++	}
+ 
+ 	ret = drm_dp_aux_register_devnode(aux);
+-	if (ret)
+-		return ret;
++	if (ret && init_aux)
++		drm_dp_aux_fini(aux);
+ 
+-	ret = i2c_add_adapter(&aux->ddc);
+-	if (ret) {
+-		drm_dp_aux_unregister_devnode(aux);
+-		return ret;
+-	}
+-
+-	return 0;
++	return ret;
+ }
+ EXPORT_SYMBOL(drm_dp_aux_register);
+ 
+ /**
+  * drm_dp_aux_unregister() - unregister an AUX adapter
+  * @aux: DisplayPort AUX channel
++ *
++ * Note that this function does not take care of calling drm_dp_aux_fini(),
++ * the driver must handle this part itself.
+  */
+ void drm_dp_aux_unregister(struct drm_dp_aux *aux)
+ {
+ 	drm_dp_aux_unregister_devnode(aux);
+-	i2c_del_adapter(&aux->ddc);
+ }
+ EXPORT_SYMBOL(drm_dp_aux_unregister);
+ 
+diff --git a/drivers/gpu/drm/i915/display/intel_dp_aux.c b/drivers/gpu/drm/i915/display/intel_dp_aux.c
+index 7e83bc2cc34a..a79c6e781638 100644
+--- a/drivers/gpu/drm/i915/display/intel_dp_aux.c
++++ b/drivers/gpu/drm/i915/display/intel_dp_aux.c
+@@ -644,15 +644,17 @@ void intel_dp_aux_fini(struct intel_dp *intel_dp)
+ 	if (cpu_latency_qos_request_active(&intel_dp->pm_qos))
+ 		cpu_latency_qos_remove_request(&intel_dp->pm_qos);
+ 
++	drm_dp_aux_fini(&intel_dp->aux);
+ 	kfree(intel_dp->aux.name);
+ }
+ 
+-void intel_dp_aux_init(struct intel_dp *intel_dp)
++int intel_dp_aux_init(struct intel_dp *intel_dp)
+ {
+ 	struct drm_i915_private *dev_priv = dp_to_i915(intel_dp);
+ 	struct intel_digital_port *dig_port = dp_to_dig_port(intel_dp);
+ 	struct intel_encoder *encoder = &dig_port->base;
+ 	enum aux_ch aux_ch = dig_port->aux_ch;
++	int ret;
+ 
+ 	if (DISPLAY_VER(dev_priv) >= 12) {
+ 		intel_dp->aux_ch_ctl_reg = tgl_aux_ctl_reg;
+@@ -682,7 +684,9 @@ void intel_dp_aux_init(struct intel_dp *intel_dp)
+ 	else
+ 		intel_dp->get_aux_send_ctl = g4x_get_aux_send_ctl;
+ 
+-	drm_dp_aux_init(&intel_dp->aux);
++	ret = drm_dp_aux_init(&intel_dp->aux);
++	if (ret)
++		return ret;
+ 
+ 	/* Failure to allocate our preferred name is not critical */
+ 	if (DISPLAY_VER(dev_priv) >= 12 && aux_ch >= AUX_CH_USBC1)
+@@ -696,4 +700,6 @@ void intel_dp_aux_init(struct intel_dp *intel_dp)
+ 
+ 	intel_dp->aux.transfer = intel_dp_aux_transfer;
+ 	cpu_latency_qos_add_request(&intel_dp->pm_qos, PM_QOS_DEFAULT_VALUE);
++
++	return ret;
+ }
+diff --git a/drivers/gpu/drm/i915/display/intel_dp_aux.h b/drivers/gpu/drm/i915/display/intel_dp_aux.h
+index 4afbe76217b9..321bab28eb07 100644
+--- a/drivers/gpu/drm/i915/display/intel_dp_aux.h
++++ b/drivers/gpu/drm/i915/display/intel_dp_aux.h
+@@ -13,6 +13,6 @@ struct intel_dp;
+ u32 intel_dp_pack_aux(const u8 *src, int src_bytes);
+ 
+ void intel_dp_aux_fini(struct intel_dp *intel_dp);
+-void intel_dp_aux_init(struct intel_dp *intel_dp);
++int intel_dp_aux_init(struct intel_dp *intel_dp);
+ 
+ #endif /* __INTEL_DP_AUX_H__ */
+diff --git a/drivers/gpu/drm/msm/dp/dp_aux.c b/drivers/gpu/drm/msm/dp/dp_aux.c
+index 7c22bfe0fc7d..2ef42ca1fda5 100644
+--- a/drivers/gpu/drm/msm/dp/dp_aux.c
++++ b/drivers/gpu/drm/msm/dp/dp_aux.c
+@@ -494,6 +494,7 @@ int dp_aux_register(struct drm_dp_aux *dp_aux)
+ void dp_aux_unregister(struct drm_dp_aux *dp_aux)
+ {
+ 	drm_dp_aux_unregister(dp_aux);
++	drm_dp_aux_fini(dp_aux);
+ }
+ 
+ struct drm_dp_aux *dp_aux_get(struct device *dev, struct dp_catalog *catalog)
+diff --git a/drivers/gpu/drm/msm/edp/edp_aux.c b/drivers/gpu/drm/msm/edp/edp_aux.c
+index df10a0196d94..ced3a38781ed 100644
+--- a/drivers/gpu/drm/msm/edp/edp_aux.c
++++ b/drivers/gpu/drm/msm/edp/edp_aux.c
+@@ -218,6 +218,7 @@ void msm_edp_aux_destroy(struct device *dev, struct edp_aux *aux)
+ {
+ 	if (aux) {
+ 		drm_dp_aux_unregister(&aux->drm_aux);
++		drm_dp_aux_fini(&aux->drm_aux);
+ 		mutex_destroy(&aux->msg_mutex);
  	}
-@@ -5695,7 +5701,7 @@ static int drm_dp_mst_i2c_xfer(struct i2c_adapter *adapter,
- 	} else if (remote_i2c_write_ok(msgs, num)) {
- 		ret = drm_dp_mst_i2c_write(mstb, port, msgs, num);
- 	} else {
--		DRM_DEBUG_KMS("Unsupported I2C transaction for MST device\n");
-+		drm_dbg_kms(mgr->dev, "Unsupported I2C transaction for MST device\n");
- 		ret = -EIO;
+ }
+diff --git a/drivers/gpu/drm/nouveau/nouveau_connector.c b/drivers/gpu/drm/nouveau/nouveau_connector.c
+index 61e6d7412505..e5a93fab856e 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_connector.c
++++ b/drivers/gpu/drm/nouveau/nouveau_connector.c
+@@ -402,6 +402,7 @@ nouveau_connector_destroy(struct drm_connector *connector)
+ 	if (nv_connector->aux.transfer) {
+ 		drm_dp_cec_unregister_connector(&nv_connector->aux);
+ 		drm_dp_aux_unregister(&nv_connector->aux);
++		drm_dp_aux_fini(&nv_connector->aux);
+ 		kfree(nv_connector->aux.name);
  	}
+ 	kfree(connector);
+diff --git a/drivers/gpu/drm/radeon/radeon_connectors.c b/drivers/gpu/drm/radeon/radeon_connectors.c
+index 607ad5620bd9..f185d3e96bf8 100644
+--- a/drivers/gpu/drm/radeon/radeon_connectors.c
++++ b/drivers/gpu/drm/radeon/radeon_connectors.c
+@@ -921,6 +921,7 @@ static void radeon_connector_unregister(struct drm_connector *connector)
+ 
+ 	if (radeon_connector->ddc_bus && radeon_connector->ddc_bus->has_aux) {
+ 		drm_dp_aux_unregister(&radeon_connector->ddc_bus->aux);
++		drm_dp_aux_fini(&radeon_connector->ddc_bus->aux);
+ 		radeon_connector->ddc_bus->has_aux = false;
+ 	}
+ }
+diff --git a/drivers/gpu/drm/tegra/dpaux.c b/drivers/gpu/drm/tegra/dpaux.c
+index ea56c6ec25e4..6379f2f32d4d 100644
+--- a/drivers/gpu/drm/tegra/dpaux.c
++++ b/drivers/gpu/drm/tegra/dpaux.c
+@@ -534,7 +534,9 @@ static int tegra_dpaux_probe(struct platform_device *pdev)
+ 	dpaux->aux.transfer = tegra_dpaux_transfer;
+ 	dpaux->aux.dev = &pdev->dev;
+ 
+-	drm_dp_aux_init(&dpaux->aux);
++	err = drm_dp_aux_init(&dpaux->aux);
++	if (err)
++		return err;
+ 
+ 	/*
+ 	 * Assume that by default the DPAUX/I2C pads will be used for HDMI,
+@@ -546,7 +548,7 @@ static int tegra_dpaux_probe(struct platform_device *pdev)
+ 	 */
+ 	err = tegra_dpaux_pad_config(dpaux, DPAUX_PADCTL_FUNC_I2C);
+ 	if (err < 0)
+-		return err;
++		goto aux_fini;
+ 
+ #ifdef CONFIG_GENERIC_PINCONF
+ 	dpaux->desc.name = dev_name(&pdev->dev);
+@@ -559,7 +561,8 @@ static int tegra_dpaux_probe(struct platform_device *pdev)
+ 	dpaux->pinctrl = devm_pinctrl_register(&pdev->dev, &dpaux->desc, dpaux);
+ 	if (IS_ERR(dpaux->pinctrl)) {
+ 		dev_err(&pdev->dev, "failed to register pincontrol\n");
+-		return PTR_ERR(dpaux->pinctrl);
++		err = PTR_ERR(dpaux->pinctrl);
++		goto aux_fini;
+ 	}
+ #endif
+ 	/* enable and clear all interrupts */
+@@ -573,6 +576,9 @@ static int tegra_dpaux_probe(struct platform_device *pdev)
+ 	mutex_unlock(&dpaux_lock);
+ 
+ 	return 0;
++aux_fini:
++	drm_dp_aux_fini(&dpaux->aux);
++	return err;
+ }
+ 
+ static int tegra_dpaux_remove(struct platform_device *pdev)
+@@ -584,6 +590,8 @@ static int tegra_dpaux_remove(struct platform_device *pdev)
+ 	/* make sure pads are powered down when not in use */
+ 	tegra_dpaux_pad_power_down(dpaux);
+ 
++	drm_dp_aux_fini(&dpaux->aux);
++
+ 	pm_runtime_put_sync(&pdev->dev);
+ 	pm_runtime_disable(&pdev->dev);
+ 
+diff --git a/drivers/gpu/drm/xlnx/zynqmp_dp.c b/drivers/gpu/drm/xlnx/zynqmp_dp.c
+index 59d1fb017da0..5370b99aabdf 100644
+--- a/drivers/gpu/drm/xlnx/zynqmp_dp.c
++++ b/drivers/gpu/drm/xlnx/zynqmp_dp.c
+@@ -1083,6 +1083,7 @@ static int zynqmp_dp_aux_init(struct zynqmp_dp *dp)
+ static void zynqmp_dp_aux_cleanup(struct zynqmp_dp *dp)
+ {
+ 	drm_dp_aux_unregister(&dp->aux);
++	drm_dp_aux_fini(&dp->aux);
+ }
+ 
+ /* -----------------------------------------------------------------------------
+diff --git a/include/drm/drm_dp_helper.h b/include/drm/drm_dp_helper.h
+index e44b0ee7b85e..54d13a4d819f 100644
+--- a/include/drm/drm_dp_helper.h
++++ b/include/drm/drm_dp_helper.h
+@@ -2009,7 +2009,8 @@ bool drm_dp_lttpr_voltage_swing_level_3_supported(const u8 caps[DP_LTTPR_PHY_CAP
+ bool drm_dp_lttpr_pre_emphasis_level_3_supported(const u8 caps[DP_LTTPR_PHY_CAP_SIZE]);
+ 
+ void drm_dp_remote_aux_init(struct drm_dp_aux *aux);
+-void drm_dp_aux_init(struct drm_dp_aux *aux);
++__must_check int drm_dp_aux_init(struct drm_dp_aux *aux);
++void drm_dp_aux_fini(struct drm_dp_aux *aux);
+ __must_check int drm_dp_aux_register(struct drm_dp_aux *aux);
+ void drm_dp_aux_unregister(struct drm_dp_aux *aux);
  
 -- 
 2.30.2
