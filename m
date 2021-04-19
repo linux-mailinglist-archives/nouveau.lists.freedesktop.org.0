@@ -1,41 +1,41 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id EEB69364DE9
-	for <lists+nouveau@lfdr.de>; Tue, 20 Apr 2021 00:55:47 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 412B1364DFC
+	for <lists+nouveau@lfdr.de>; Tue, 20 Apr 2021 00:56:31 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 24E8F6E442;
-	Mon, 19 Apr 2021 22:55:46 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 56DEC6E461;
+	Mon, 19 Apr 2021 22:56:29 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 09A5E6E442
- for <nouveau@lists.freedesktop.org>; Mon, 19 Apr 2021 22:55:44 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id DA4F86E444
+ for <nouveau@lists.freedesktop.org>; Mon, 19 Apr 2021 22:56:27 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1618872944;
+ s=mimecast20190719; t=1618872987;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=rXvOa2vhLxgteuwROnjXnJNpH30+jnf9gvFzYDgEgi8=;
- b=iY9BBvw5PFomrD8P+j7IaJAMViPST7eEsGW5sP6vGKLOlR8hhxXs0yNzz29JT4lDI9AgHQ
- ZRM6cpch1xz2lQhXf2eo8uHaz5Kf7UXE/TU+GAxxLzS6ci8J7Q9sjXDSr051qsM/JXCEoJ
- Gw2AVTxwOrMlYInCBBbynFH0CcE1eos=
+ bh=YT1fh9K2NL+l15ttMbG26Q+AYdw8647SY7qUirtEs3k=;
+ b=II8Pgcmt6muLQBzUa5n1SSE5lmgGLe8WF670ankpPqBdMN8fZ3i9QRXdXisBkcNB5KIPA5
+ jtO0y8ARXaCZSsrIjbG91oMrvj/4igIoL93+Gfuzf4xUq3yRg+yQH+HWVv5cl35Cj2P1U+
+ P3R3IwOGZvUUi2u0lVBmmTu2N7BFIQY=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-513-t7lRGv6PMXia-qAM3eMBaw-1; Mon, 19 Apr 2021 18:55:42 -0400
-X-MC-Unique: t7lRGv6PMXia-qAM3eMBaw-1
+ us-mta-326-evR6FvvnPgu75Bgib6db6g-1; Mon, 19 Apr 2021 18:56:23 -0400
+X-MC-Unique: evR6FvvnPgu75Bgib6db6g-1
 Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
  [10.5.11.16])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 3CAB281744F;
- Mon, 19 Apr 2021 22:55:40 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 05F4F1006C80;
+ Mon, 19 Apr 2021 22:56:21 +0000 (UTC)
 Received: from Ruby.lyude.net (ovpn-119-153.rdu2.redhat.com [10.10.119.153])
- by smtp.corp.redhat.com (Postfix) with ESMTP id D3B795C1CF;
- Mon, 19 Apr 2021 22:55:38 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 8CC105C1C4;
+ Mon, 19 Apr 2021 22:56:18 +0000 (UTC)
 From: Lyude Paul <lyude@redhat.com>
 To: dri-devel@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
  nouveau@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
@@ -44,14 +44,14 @@ To: dri-devel@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
  Rodrigo Vivi <rodrigo.vivi@intel.com>,
  Thomas Zimmermann <tzimmermann@suse.de>,
  Thierry Reding <thierry.reding@gmail.com>
-Date: Mon, 19 Apr 2021 18:55:04 -0400
-Message-Id: <20210419225523.184856-3-lyude@redhat.com>
+Date: Mon, 19 Apr 2021 18:55:06 -0400
+Message-Id: <20210419225523.184856-5-lyude@redhat.com>
 In-Reply-To: <20210419225523.184856-1-lyude@redhat.com>
 References: <20210419225523.184856-1-lyude@redhat.com>
 MIME-Version: 1.0
 X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
-Subject: [Nouveau] [PATCH v3 02/20] drm/dp: Add __no_check to
- drm_dp_aux_register()
+Subject: [Nouveau] [PATCH v3 04/20] drm/bridge/cdns-mhdp8546: Register DP
+ aux channel with userspace
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,38 +63,67 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Daniel Vetter <daniel@ffwll.ch>, Maxime Ripard <mripard@kernel.org>,
- open list <linux-kernel@vger.kernel.org>
+Cc: Jernej Skrabec <jernej.skrabec@siol.net>, Jonas Karlman <jonas@kwiboo.se>,
+ David Airlie <airlied@linux.ie>, Neil Armstrong <narmstrong@baylibre.com>,
+ open list <linux-kernel@vger.kernel.org>, Robert Foss <robert.foss@linaro.org>,
+ Julia Lawall <Julia.Lawall@inria.fr>, Andrzej Hajda <a.hajda@samsung.com>,
+ Parshuram Thombare <pthombar@cadence.com>,
+ Tomi Valkeinen <tomi.valkeinen@ti.com>,
+ Laurent Pinchart <Laurent.pinchart@ideasonboard.com>,
+ Daniel Vetter <daniel@ffwll.ch>, Swapnil Jakhade <sjakhade@cadence.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Since we're about to make it so that drm_dp_aux_init() can fail (and thus -
-should have it's return value checked) - we should require that callers of
-drm_dp_aux_register() also check it's return value since drm_dp_aux_init()
-can be called from there.
+Just adds some missing calls to
+drm_dp_aux_register()/drm_dp_aux_unregister() for when we attach/detach the
+bridge.
 
 Signed-off-by: Lyude Paul <lyude@redhat.com>
 ---
- include/drm/drm_dp_helper.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/gpu/drm/bridge/cadence/cdns-mhdp8546-core.c | 11 ++++++++++-
+ 1 file changed, 10 insertions(+), 1 deletion(-)
 
-diff --git a/include/drm/drm_dp_helper.h b/include/drm/drm_dp_helper.h
-index 1e85c2021f2f..e44b0ee7b85e 100644
---- a/include/drm/drm_dp_helper.h
-+++ b/include/drm/drm_dp_helper.h
-@@ -2010,7 +2010,7 @@ bool drm_dp_lttpr_pre_emphasis_level_3_supported(const u8 caps[DP_LTTPR_PHY_CAP_
+diff --git a/drivers/gpu/drm/bridge/cadence/cdns-mhdp8546-core.c b/drivers/gpu/drm/bridge/cadence/cdns-mhdp8546-core.c
+index c5e2bc75b226..518e9a441c21 100644
+--- a/drivers/gpu/drm/bridge/cadence/cdns-mhdp8546-core.c
++++ b/drivers/gpu/drm/bridge/cadence/cdns-mhdp8546-core.c
+@@ -1719,10 +1719,14 @@ static int cdns_mhdp_attach(struct drm_bridge *bridge,
  
- void drm_dp_remote_aux_init(struct drm_dp_aux *aux);
- void drm_dp_aux_init(struct drm_dp_aux *aux);
--int drm_dp_aux_register(struct drm_dp_aux *aux);
-+__must_check int drm_dp_aux_register(struct drm_dp_aux *aux);
- void drm_dp_aux_unregister(struct drm_dp_aux *aux);
+ 	dev_dbg(mhdp->dev, "%s\n", __func__);
  
- int drm_dp_start_crc(struct drm_dp_aux *aux, struct drm_crtc *crtc);
++	ret = drm_dp_aux_register(&mhdp->aux);
++	if (ret < 0)
++		return ret;
++
+ 	if (!(flags & DRM_BRIDGE_ATTACH_NO_CONNECTOR)) {
+ 		ret = cdns_mhdp_connector_init(mhdp);
+ 		if (ret)
+-			return ret;
++			goto aux_unregister;
+ 	}
+ 
+ 	spin_lock(&mhdp->start_lock);
+@@ -1738,6 +1742,9 @@ static int cdns_mhdp_attach(struct drm_bridge *bridge,
+ 		       mhdp->regs + CDNS_APB_INT_MASK);
+ 
+ 	return 0;
++aux_unregister:
++	drm_dp_aux_unregister(&mhdp->aux);
++	return ret;
+ }
+ 
+ static void cdns_mhdp_configure_video(struct cdns_mhdp_device *mhdp,
+@@ -2082,6 +2089,8 @@ static void cdns_mhdp_detach(struct drm_bridge *bridge)
+ 
+ 	dev_dbg(mhdp->dev, "%s\n", __func__);
+ 
++	drm_dp_aux_unregister(&mhdp->aux);
++
+ 	spin_lock(&mhdp->start_lock);
+ 
+ 	mhdp->bridge_attached = false;
 -- 
 2.30.2
 
