@@ -1,41 +1,41 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 412B1364DFC
-	for <lists+nouveau@lfdr.de>; Tue, 20 Apr 2021 00:56:31 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id DB4EE364DFE
+	for <lists+nouveau@lfdr.de>; Tue, 20 Apr 2021 00:56:32 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 56DEC6E461;
-	Mon, 19 Apr 2021 22:56:29 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 226346E454;
+	Mon, 19 Apr 2021 22:56:31 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id DA4F86E444
- for <nouveau@lists.freedesktop.org>; Mon, 19 Apr 2021 22:56:27 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9B7F96E466
+ for <nouveau@lists.freedesktop.org>; Mon, 19 Apr 2021 22:56:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1618872987;
+ s=mimecast20190719; t=1618872988;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=YT1fh9K2NL+l15ttMbG26Q+AYdw8647SY7qUirtEs3k=;
- b=II8Pgcmt6muLQBzUa5n1SSE5lmgGLe8WF670ankpPqBdMN8fZ3i9QRXdXisBkcNB5KIPA5
- jtO0y8ARXaCZSsrIjbG91oMrvj/4igIoL93+Gfuzf4xUq3yRg+yQH+HWVv5cl35Cj2P1U+
- P3R3IwOGZvUUi2u0lVBmmTu2N7BFIQY=
+ bh=qNrOwAYHuDRQm2XF7UqOlIRXB71biF83Wt2YTi7FWw8=;
+ b=Xb2O1AQ5MNyglCl0u0H+VNA31CQD4VdiVwx9Tmo1JCVjXYWN0WZlFMS9FtIBfV8GatwZyM
+ xMcxeI0smjA/d+RjpNCAiN9vPCHNXIIDsIrypJ+nogGF+55+BbWaPgxfrBnmsbNk43Obgw
+ 5BwXJIdGSMlqa+TrWfkbMyAJhndlv9E=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-326-evR6FvvnPgu75Bgib6db6g-1; Mon, 19 Apr 2021 18:56:23 -0400
-X-MC-Unique: evR6FvvnPgu75Bgib6db6g-1
+ us-mta-196-PSlAEljGPdahTTS4T4gSGg-1; Mon, 19 Apr 2021 18:56:27 -0400
+X-MC-Unique: PSlAEljGPdahTTS4T4gSGg-1
 Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
  [10.5.11.16])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 05F4F1006C80;
- Mon, 19 Apr 2021 22:56:21 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id B450D81744F;
+ Mon, 19 Apr 2021 22:56:25 +0000 (UTC)
 Received: from Ruby.lyude.net (ovpn-119-153.rdu2.redhat.com [10.10.119.153])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 8CC105C1C4;
- Mon, 19 Apr 2021 22:56:18 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 695085C1C4;
+ Mon, 19 Apr 2021 22:56:21 +0000 (UTC)
 From: Lyude Paul <lyude@redhat.com>
 To: dri-devel@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
  nouveau@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
@@ -44,14 +44,14 @@ To: dri-devel@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
  Rodrigo Vivi <rodrigo.vivi@intel.com>,
  Thomas Zimmermann <tzimmermann@suse.de>,
  Thierry Reding <thierry.reding@gmail.com>
-Date: Mon, 19 Apr 2021 18:55:06 -0400
-Message-Id: <20210419225523.184856-5-lyude@redhat.com>
+Date: Mon, 19 Apr 2021 18:55:07 -0400
+Message-Id: <20210419225523.184856-6-lyude@redhat.com>
 In-Reply-To: <20210419225523.184856-1-lyude@redhat.com>
 References: <20210419225523.184856-1-lyude@redhat.com>
 MIME-Version: 1.0
 X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
-Subject: [Nouveau] [PATCH v3 04/20] drm/bridge/cdns-mhdp8546: Register DP
- aux channel with userspace
+Subject: [Nouveau] [PATCH v3 05/20] drm/nouveau/kms/nv50-: Move AUX adapter
+ reg to connector late register/early unregister
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,67 +63,82 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Jernej Skrabec <jernej.skrabec@siol.net>, Jonas Karlman <jonas@kwiboo.se>,
- David Airlie <airlied@linux.ie>, Neil Armstrong <narmstrong@baylibre.com>,
- open list <linux-kernel@vger.kernel.org>, Robert Foss <robert.foss@linaro.org>,
- Julia Lawall <Julia.Lawall@inria.fr>, Andrzej Hajda <a.hajda@samsung.com>,
- Parshuram Thombare <pthombar@cadence.com>,
- Tomi Valkeinen <tomi.valkeinen@ti.com>,
- Laurent Pinchart <Laurent.pinchart@ideasonboard.com>,
- Daniel Vetter <daniel@ffwll.ch>, Swapnil Jakhade <sjakhade@cadence.com>
+Cc: David Airlie <airlied@linux.ie>, Ben Skeggs <bskeggs@redhat.com>,
+ Daniel Vetter <daniel@ffwll.ch>, open list <linux-kernel@vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Just adds some missing calls to
-drm_dp_aux_register()/drm_dp_aux_unregister() for when we attach/detach the
-bridge.
+Since AUX adapters on nouveau have their respective DRM connectors as
+parents, we need to make sure that we register then after their connectors.
 
 Signed-off-by: Lyude Paul <lyude@redhat.com>
 ---
- drivers/gpu/drm/bridge/cadence/cdns-mhdp8546-core.c | 11 ++++++++++-
- 1 file changed, 10 insertions(+), 1 deletion(-)
+ drivers/gpu/drm/nouveau/nouveau_connector.c | 25 ++++++++++++++++-----
+ 1 file changed, 20 insertions(+), 5 deletions(-)
 
-diff --git a/drivers/gpu/drm/bridge/cadence/cdns-mhdp8546-core.c b/drivers/gpu/drm/bridge/cadence/cdns-mhdp8546-core.c
-index c5e2bc75b226..518e9a441c21 100644
---- a/drivers/gpu/drm/bridge/cadence/cdns-mhdp8546-core.c
-+++ b/drivers/gpu/drm/bridge/cadence/cdns-mhdp8546-core.c
-@@ -1719,10 +1719,14 @@ static int cdns_mhdp_attach(struct drm_bridge *bridge,
- 
- 	dev_dbg(mhdp->dev, "%s\n", __func__);
- 
-+	ret = drm_dp_aux_register(&mhdp->aux);
-+	if (ret < 0)
-+		return ret;
-+
- 	if (!(flags & DRM_BRIDGE_ATTACH_NO_CONNECTOR)) {
- 		ret = cdns_mhdp_connector_init(mhdp);
- 		if (ret)
--			return ret;
-+			goto aux_unregister;
+diff --git a/drivers/gpu/drm/nouveau/nouveau_connector.c b/drivers/gpu/drm/nouveau/nouveau_connector.c
+index e5a93fab856e..56eaa29b34d6 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_connector.c
++++ b/drivers/gpu/drm/nouveau/nouveau_connector.c
+@@ -401,7 +401,6 @@ nouveau_connector_destroy(struct drm_connector *connector)
+ 	drm_connector_cleanup(connector);
+ 	if (nv_connector->aux.transfer) {
+ 		drm_dp_cec_unregister_connector(&nv_connector->aux);
+-		drm_dp_aux_unregister(&nv_connector->aux);
+ 		drm_dp_aux_fini(&nv_connector->aux);
+ 		kfree(nv_connector->aux.name);
  	}
+@@ -906,13 +905,29 @@ nouveau_connector_late_register(struct drm_connector *connector)
+ 	int ret;
  
- 	spin_lock(&mhdp->start_lock);
-@@ -1738,6 +1742,9 @@ static int cdns_mhdp_attach(struct drm_bridge *bridge,
- 		       mhdp->regs + CDNS_APB_INT_MASK);
+ 	ret = nouveau_backlight_init(connector);
++	if (ret)
++		return ret;
  
- 	return 0;
-+aux_unregister:
-+	drm_dp_aux_unregister(&mhdp->aux);
-+	return ret;
++	if (connector->connector_type == DRM_MODE_CONNECTOR_eDP ||
++	    connector->connector_type == DRM_MODE_CONNECTOR_DisplayPort) {
++		ret = drm_dp_aux_register(&nouveau_connector(connector)->aux);
++		if (ret)
++			goto backlight_fini;
++	}
++
++	return 0;
++backlight_fini:
++	nouveau_backlight_fini(connector);
+ 	return ret;
  }
  
- static void cdns_mhdp_configure_video(struct cdns_mhdp_device *mhdp,
-@@ -2082,6 +2089,8 @@ static void cdns_mhdp_detach(struct drm_bridge *bridge)
- 
- 	dev_dbg(mhdp->dev, "%s\n", __func__);
- 
-+	drm_dp_aux_unregister(&mhdp->aux);
+ static void
+ nouveau_connector_early_unregister(struct drm_connector *connector)
+ {
++	if (connector->connector_type == DRM_MODE_CONNECTOR_eDP ||
++	    connector->connector_type == DRM_MODE_CONNECTOR_DisplayPort)
++		drm_dp_aux_unregister(&nouveau_connector(connector)->aux);
 +
- 	spin_lock(&mhdp->start_lock);
+ 	nouveau_backlight_fini(connector);
+ }
  
- 	mhdp->bridge_attached = false;
+@@ -1344,14 +1359,14 @@ nouveau_connector_create(struct drm_device *dev,
+ 		snprintf(aux_name, sizeof(aux_name), "sor-%04x-%04x",
+ 			 dcbe->hasht, dcbe->hashm);
+ 		nv_connector->aux.name = kstrdup(aux_name, GFP_KERNEL);
+-		ret = drm_dp_aux_register(&nv_connector->aux);
++		ret = drm_dp_aux_init(&nv_connector->aux);
+ 		if (ret) {
+-			NV_ERROR(drm, "failed to register aux channel\n");
++			NV_ERROR(drm, "Failed to init AUX adapter for sor-%04x-%04x: %d\n",
++				 dcbe->hasht, dcbe->hashm, ret);
+ 			kfree(nv_connector);
+ 			return ERR_PTR(ret);
+ 		}
+-		funcs = &nouveau_connector_funcs;
+-		break;
++		fallthrough;
+ 	default:
+ 		funcs = &nouveau_connector_funcs;
+ 		break;
 -- 
 2.30.2
 
