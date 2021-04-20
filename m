@@ -1,45 +1,41 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 18106364EB8
-	for <lists+nouveau@lfdr.de>; Tue, 20 Apr 2021 01:38:00 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 637F736538C
+	for <lists+nouveau@lfdr.de>; Tue, 20 Apr 2021 09:51:39 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 877C26E466;
-	Mon, 19 Apr 2021 23:37:58 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 93B9D6E105;
+	Tue, 20 Apr 2021 07:51:31 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mga18.intel.com (mga18.intel.com [134.134.136.126])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 221216E466;
- Mon, 19 Apr 2021 23:16:29 +0000 (UTC)
-IronPort-SDR: L99NkPty0CcDgh0mIHNeQx8WK8/100QaonWYrEILTfSVNAEHocFv2zs+CLOHq7x+/egMaqTRwu
- ZIXqdrAg7QtA==
-X-IronPort-AV: E=McAfee;i="6200,9189,9959"; a="182906982"
-X-IronPort-AV: E=Sophos;i="5.82,235,1613462400"; d="scan'208";a="182906982"
-Received: from orsmga008.jf.intel.com ([10.7.209.65])
- by orsmga106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 19 Apr 2021 16:16:27 -0700
-IronPort-SDR: iIIH7NlXhkxVafhWosExRMhnrx+Hu6+CYp2cRfQaVv6rb1BmvP4PniIkDXtldicdcUQKnnVY5j
- x/lpHd1JEztQ==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.82,235,1613462400"; d="scan'208";a="426687226"
-Received: from stinkbox.fi.intel.com (HELO stinkbox) ([10.237.72.171])
- by orsmga008.jf.intel.com with SMTP; 19 Apr 2021 16:16:13 -0700
-Received: by stinkbox (sSMTP sendmail emulation);
- Tue, 20 Apr 2021 02:16:13 +0300
-Date: Tue, 20 Apr 2021 02:16:13 +0300
-From: Ville =?iso-8859-1?Q?Syrj=E4l=E4?= <ville.syrjala@linux.intel.com>
-To: Lyude Paul <lyude@redhat.com>
-Message-ID: <YH4PPbY1qqF2NtrN@intel.com>
-References: <20210419225523.184856-1-lyude@redhat.com>
- <20210419225523.184856-4-lyude@redhat.com>
+Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1056289C80;
+ Tue, 20 Apr 2021 07:51:30 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 9712BB23F;
+ Tue, 20 Apr 2021 07:51:28 +0000 (UTC)
+To: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
+ =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>,
+ alexander.deucher@amd.com, airlied@linux.ie, daniel@ffwll.ch,
+ bskeggs@redhat.com, ray.huang@amd.com, linux-graphics-maintainer@vmware.com,
+ sroland@vmware.com, zackr@vmware.com, shashank.sharma@amd.com,
+ sam@ravnborg.org, emil.velikov@collabora.com, Felix.Kuehling@amd.com,
+ nirmoy.das@amd.com
+References: <20210416133146.24825-1-tzimmermann@suse.de>
+ <20210416133146.24825-6-tzimmermann@suse.de>
+ <b7008944-fbe5-bd59-d2a9-ff62bea38237@gmail.com>
+ <80012c09-6975-f694-420f-72b2236dcf4e@amd.com>
+From: Thomas Zimmermann <tzimmermann@suse.de>
+Message-ID: <52403618-62f5-2085-c245-e1e98762cccb@suse.de>
+Date: Tue, 20 Apr 2021 09:51:27 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.9.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20210419225523.184856-4-lyude@redhat.com>
-X-Patchwork-Hint: comment
-X-Mailman-Approved-At: Mon, 19 Apr 2021 23:37:58 +0000
-Subject: Re: [Nouveau] [PATCH v3 03/20] drm/dp: Move i2c init to
- drm_dp_aux_init, add __must_check and fini
+In-Reply-To: <80012c09-6975-f694-420f-72b2236dcf4e@amd.com>
+Subject: Re: [Nouveau] [PATCH v3 5/7] drm/vmwgfx: Inline ttm_bo_mmap() into
+ vmwgfx driver
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -51,94 +47,250 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Neil Armstrong <narmstrong@baylibre.com>,
-	David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
-	Guido =?iso-8859-1?Q?G=FCnther?= <agx@sigxcpu.org>,
-	Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
-	Oleg Vasilev <oleg.vasilev@intel.com>,
-	dri-devel@lists.freedesktop.org,
-	Meenakshikumar Somasundaram <meenakshikumar.somasundaram@amd.com>,
-	Andrzej Hajda <a.hajda@samsung.com>,
-	Aurabindo Pillai <aurabindo.pillai@amd.com>,
-	Thierry Reding <thierry.reding@gmail.com>,
-	Laurent Pinchart <Laurent.pinchart@ideasonboard.com>,
-	Sam Ravnborg <sam@ravnborg.org>, Matt@freedesktop.org,
-	Tomi Valkeinen <tomi.valkeinen@ti.com>,
-	Parshuram Thombare <pthombar@cadence.com>,
-	Rodrigo Siqueira <Rodrigo.Siqueira@amd.com>,
-	Michal Simek <michal.simek@xilinx.com>,
-	amd-gfx@lists.freedesktop.org, Luben Tuikov <luben.tuikov@amd.com>,
-	Ben Skeggs <bskeggs@redhat.com>,
-	Swapnil Jakhade <sjakhade@cadence.com>,
-	Thierry Reding <treding@nvidia.com>,
-	Harry Wentland <harry.wentland@amd.com>,
-	Imre Deak <imre.deak@intel.com>, Daniel Vetter <daniel@ffwll.ch>,
-	Jonas Karlman <jonas@kwiboo.se>, Leo Li <sunpeng.li@amd.com>,
-	intel-gfx@lists.freedesktop.org,
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-	Jani Nikula <jani.nikula@linux.intel.com>,
-	Joe Perches <joe@perches.com>, Yuti Amonkar <yamonkar@cadence.com>,
-	Maxime Ripard <mripard@kernel.org>,
-	Rodrigo Vivi <rodrigo.vivi@intel.com>,
-	Mikita Lipski <mikita.lipski@amd.com>, Sean Paul <sean@poorly.run>,
-	Navid Emamdoost <navid.emamdoost@gmail.com>,
-	Jernej Skrabec <jernej.skrabec@siol.net>,
-	Chris Park <Chris.Park@amd.com>, Eryk Brol <eryk.brol@amd.com>,
-	Hyun Kwon <hyun.kwon@xilinx.com>,
-	Robert Foss <robert.foss@linaro.org>,
-	Julia Lawall <Julia.Lawall@inria.fr>,
-	Rob Clark <robdclark@gmail.com>,
-	Boris Brezillon <boris.brezillon@collabora.com>,
-	Alex Deucher <alexander.deucher@amd.com>,
-	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Cc: nouveau@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org
+Content-Type: multipart/mixed; boundary="===============1266548398=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Mon, Apr 19, 2021 at 06:55:05PM -0400, Lyude Paul wrote:
-> When moving around drm_dp_aux_register() calls, it turned out we
-> accidentally managed to cause issues with the Tegra driver due to the fact
-> the Tegra driver would attempt to retrieve a reference to the AUX channel=
-'s
-> i2c adapter - which wouldn't be initialized until drm_dp_aux_register() is
-> called.
-> =
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--===============1266548398==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="gQzpEqqhDoyhySzOfs5qkbaa7mzBt19EA"
 
-> This doesn't actually make a whole ton of sense, as it's not unexpected f=
-or
-> a driver to need to be able to use an AUX adapter before it's been
-> registered. Likewise-it's not unexpected for a driver to try using the i2c
-> adapter for said AUX channel before it's been registered as well. In fact,
-> the current documentation for drm_dp_aux_init() even seems to imply that
-> drm_dp_aux_init() is supposed to be handling i2c adapter creation for this
-> precise reason - not drm_dp_aux_register().
-> =
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--gQzpEqqhDoyhySzOfs5qkbaa7mzBt19EA
+Content-Type: multipart/mixed; boundary="4hXKDfjTeiDGgeeZmmQD2sc8GodJ4lZ0X";
+ protected-headers="v1"
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
+ =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>,
+ alexander.deucher@amd.com, airlied@linux.ie, daniel@ffwll.ch,
+ bskeggs@redhat.com, ray.huang@amd.com, linux-graphics-maintainer@vmware.com,
+ sroland@vmware.com, zackr@vmware.com, shashank.sharma@amd.com,
+ sam@ravnborg.org, emil.velikov@collabora.com, Felix.Kuehling@amd.com,
+ nirmoy.das@amd.com
+Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ amd-gfx@lists.freedesktop.org
+Message-ID: <52403618-62f5-2085-c245-e1e98762cccb@suse.de>
+Subject: Re: [PATCH v3 5/7] drm/vmwgfx: Inline ttm_bo_mmap() into vmwgfx
+ driver
+References: <20210416133146.24825-1-tzimmermann@suse.de>
+ <20210416133146.24825-6-tzimmermann@suse.de>
+ <b7008944-fbe5-bd59-d2a9-ff62bea38237@gmail.com>
+ <80012c09-6975-f694-420f-72b2236dcf4e@amd.com>
+In-Reply-To: <80012c09-6975-f694-420f-72b2236dcf4e@amd.com>
 
-> Since the i2c adapter doesn't need to be linked to the DRM device in any
-> way, we can just fix this problem by moving i2c adapter creation out of
-> drm_dp_aux_register() and into drm_dp_aux_init(). Additionally, since this
-> means that drm_dp_aux_init() can fail we go ahead and add a __must_check
-> attribute to it so that drivers don't ignore its return status on failure=
-s.
-> And finally, we add a drm_dp_aux_fini() and hook it up in all DRM drivers
-> across the kernel to take care of cleaning up the i2c adapter once it's no
-> longer needed.
-> =
+--4hXKDfjTeiDGgeeZmmQD2sc8GodJ4lZ0X
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
 
-> This should also fix the regressions noted in the Tegra driver.
+Hi
 
-The init vs. register split is intentional. Registering the thing
-and allowing userspace access to it before the rest of the driver
-is ready isn't particularly great. For a while now we've tried to
-move towards an architecture where the driver is fully initialzied
-before anything gets exposed to userspace.
+Am 16.04.21 um 15:51 schrieb Christian K=C3=B6nig:
+> Am 16.04.21 um 15:46 schrieb Christian K=C3=B6nig:
+>> Am 16.04.21 um 15:31 schrieb Thomas Zimmermann:
+>>> The vmwgfx driver is the only remaining user of ttm_bo_mmap(). Inline=
 
--- =
+>>> the code. The internal helper ttm_bo_vm_lookup() is now also part of
+>>> vmwgfx as vmw_bo_vm_lookup().
+>>>
+>>> v2:
+>>> =C2=A0=C2=A0=C2=A0=C2=A0* replace pr_err() with drm_err() (Zack)
+>>>
+>>> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+>>> Reviewed-by: Zack Rusin <zackr@vmware.com>
+>>> ---
+>>> =C2=A0 drivers/gpu/drm/vmwgfx/vmwgfx_ttm_glue.c | 56 ++++++++++++++++=
+++++++--
+>>> =C2=A0 1 file changed, 53 insertions(+), 3 deletions(-)
+>>>
+>>> diff --git a/drivers/gpu/drm/vmwgfx/vmwgfx_ttm_glue.c=20
+>>> b/drivers/gpu/drm/vmwgfx/vmwgfx_ttm_glue.c
+>>> index cb9975889e2f..c8b6543b4e39 100644
+>>> --- a/drivers/gpu/drm/vmwgfx/vmwgfx_ttm_glue.c
+>>> +++ b/drivers/gpu/drm/vmwgfx/vmwgfx_ttm_glue.c
+>>> @@ -27,6 +27,32 @@
+>>> =C2=A0 =C2=A0 #include "vmwgfx_drv.h"
+>>> =C2=A0 +static struct ttm_buffer_object *vmw_bo_vm_lookup(struct=20
+>>> ttm_device *bdev,
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0 unsigned long offset,
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0 unsigned long pages)
+>>> +{
+>>> +=C2=A0=C2=A0=C2=A0 struct vmw_private *dev_priv =3D container_of(bde=
+v, struct=20
+>>> vmw_private, bdev);
+>>> +=C2=A0=C2=A0=C2=A0 struct drm_device *drm =3D &dev_priv->drm;
+>>> +=C2=A0=C2=A0=C2=A0 struct drm_vma_offset_node *node;
+>>> +=C2=A0=C2=A0=C2=A0 struct ttm_buffer_object *bo =3D NULL;
+>>> +
+>>> +=C2=A0=C2=A0=C2=A0 drm_vma_offset_lock_lookup(bdev->vma_manager);
+>>> +
+>>> +=C2=A0=C2=A0=C2=A0 node =3D drm_vma_offset_lookup_locked(bdev->vma_m=
+anager, offset,=20
+>>> pages);
+>>> +=C2=A0=C2=A0=C2=A0 if (likely(node)) {
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 bo =3D container_of(node,=20
+struct ttm_buffer_object,
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 base.vma_node);
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 bo =3D ttm_bo_get_unless_=
+zero(bo);
+>>> +=C2=A0=C2=A0=C2=A0 }
+>>> +
+>>> +=C2=A0=C2=A0=C2=A0 drm_vma_offset_unlock_lookup(bdev->vma_manager);
+>>> +
+>>> +=C2=A0=C2=A0=C2=A0 if (!bo)
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 drm_err(drm, "Could not f=
+ind buffer object to map\n");
+>>> +
+>>> +=C2=A0=C2=A0=C2=A0 return bo;
+>>> +}
+>>> +
+>>> =C2=A0 int vmw_mmap(struct file *filp, struct vm_area_struct *vma)
+>>> =C2=A0 {
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 static const struct vm_operations_stru=
+ct vmw_vm_ops =3D {
+>>> @@ -41,10 +67,28 @@ int vmw_mmap(struct file *filp, struct=20
+>>> vm_area_struct *vma)
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 };
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 struct drm_file *file_priv =3D filp->p=
+rivate_data;
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 struct vmw_private *dev_priv =3D vmw_p=
+riv(file_priv->minor->dev);
+>>> -=C2=A0=C2=A0=C2=A0 int ret =3D ttm_bo_mmap(filp, vma, &dev_priv->bde=
+v);
+>>> +=C2=A0=C2=A0=C2=A0 struct ttm_device *bdev =3D &dev_priv->bdev;
+>>> +=C2=A0=C2=A0=C2=A0 struct ttm_buffer_object *bo;
+>>> +=C2=A0=C2=A0=C2=A0 int ret;
+>>> +
+>>> +=C2=A0=C2=A0=C2=A0 if (unlikely(vma->vm_pgoff < DRM_FILE_PAGE_OFFSET=
+_START))
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return -EINVAL;
+>>> +
+>>> +=C2=A0=C2=A0=C2=A0 bo =3D vmw_bo_vm_lookup(bdev, vma->vm_pgoff, vma_=
+pages(vma));
+>>> +=C2=A0=C2=A0=C2=A0 if (unlikely(!bo))
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return -EINVAL;
+>>> =C2=A0 -=C2=A0=C2=A0=C2=A0 if (ret)
+>>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return ret;
+>>> +=C2=A0=C2=A0=C2=A0 if (unlikely(!bo->bdev->funcs->verify_access)) {
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ret =3D -EPERM;
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 goto out_unref;
+>>> +=C2=A0=C2=A0=C2=A0 }
+>>> +=C2=A0=C2=A0=C2=A0 ret =3D bo->bdev->funcs->verify_access(bo, filp);=
 
-Ville Syrj=E4l=E4
-Intel
+>>
+>> Is there any reason we can't call vmw_verify_access() directly here?
+>>
+>> Would allow us to completely nuke the verify_access callback as well=20
+>> as far as I can see.
+>=20
+> Forget what I said, couldn't see the next patch in my mailbox at time o=
+f=20
+> writing.
+>=20
+> Whole series is Reviewed-by: Christian K=C3=B6nig <christian.koenig@amd=
+=2Ecom>
+
+Thanks a lot. If I'm not mistaken, the patches at [1] need to go in=20
+first. So it could take a a bit until this lands.
+
+Otherwise, this series could go through the same tree as [1] if nouveau=20
+and vmwgfx devs don't mind.
+
+Best regards
+Thomas
+
+[1] https://patchwork.freedesktop.org/series/88822/
+
+>=20
+> Thanks for the nice cleanup,
+> Christian.
+>=20
+>>
+>> Regards,
+>> Christian.
+>>
+>>> +=C2=A0=C2=A0=C2=A0 if (unlikely(ret !=3D 0))
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 goto out_unref;
+>>> +
+>>> +=C2=A0=C2=A0=C2=A0 ret =3D ttm_bo_mmap_obj(vma, bo);
+>>> +=C2=A0=C2=A0=C2=A0 if (unlikely(ret !=3D 0))
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 goto out_unref;
+>>> =C2=A0 =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 vma->vm_ops =3D &vmw_vm_ops;
+>>> =C2=A0 @@ -52,7 +96,13 @@ int vmw_mmap(struct file *filp, struct=20
+>>> vm_area_struct *vma)
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (!is_cow_mapping(vma->vm_flags))
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 vma->vm_flags =
+=3D (vma->vm_flags & ~VM_MIXEDMAP) | VM_PFNMAP;
+>>> =C2=A0 +=C2=A0=C2=A0=C2=A0 ttm_bo_put(bo); /* release extra ref taken=20
+by=20
+>>> ttm_bo_mmap_obj() */
+>>> +
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return 0;
+>>> +
+>>> +out_unref:
+>>> +=C2=A0=C2=A0=C2=A0 ttm_bo_put(bo);
+>>> +=C2=A0=C2=A0=C2=A0 return ret;
+>>> =C2=A0 }
+>>> =C2=A0 =C2=A0 /* struct vmw_validation_mem callback */
+>>
+>=20
+> _______________________________________________
+> dri-devel mailing list
+> dri-devel@lists.freedesktop.org
+> https://lists.freedesktop.org/mailman/listinfo/dri-devel
+
+--=20
+Thomas Zimmermann
+Graphics Driver Developer
+SUSE Software Solutions Germany GmbH
+Maxfeldstr. 5, 90409 N=C3=BCrnberg, Germany
+(HRB 36809, AG N=C3=BCrnberg)
+Gesch=C3=A4ftsf=C3=BChrer: Felix Imend=C3=B6rffer
+
+
+--4hXKDfjTeiDGgeeZmmQD2sc8GodJ4lZ0X--
+
+--gQzpEqqhDoyhySzOfs5qkbaa7mzBt19EA
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
+
+-----BEGIN PGP SIGNATURE-----
+
+wsF5BAABCAAjFiEExndm/fpuMUdwYFFolh/E3EQov+AFAmB+h/8FAwAAAAAACgkQlh/E3EQov+B7
+4w/8CdxG67uhYl2m7yiaoCqLylhg0vp0+DpL76ZlvDReGHl/qxbqAkaSDXDq7wN0+GlV6iixjNx2
+3zcvPYSLKPi1YNJSBWWsOdLsRAhxtENUCcXJtkCmZ5fUFIy+7fv8KeSn6+I7HvTpqneexqNl4fBb
+q+LmTG9bfOhV+wPW/1I6fTyESpubq2sN0+ma126xNj2eiD7Pt17c56fcjKxZ3mnYZXPRXiDZQWa8
+4CYrywBzUzu3XvW1LLwle5tnCUllr+z4Pcd0nvPZv4xOM/mttf0k3Z494JkZzgjdwNgU7b9TiVUn
+G94TkjzYletmDrJr76qErWrinI0e2Z9Yf8yMWOMNxo5ujwiwB586Kx+dPH3hpJORkDSQzwF9urKd
+bO7ZDrdwiU308uYbhFJypI3YxqKIrJfoXfSrLW30xv+vFk3mjD8R5hp1uRCfGTgpqXsFmDELj4dG
+aSJCG+8NtOR7B36DUslfbdI9yYR3+hCk4A5lamkCxllJgUrTV5bXw++aQZVEM7ynVGCELGKuXYiH
+IwG96eUL4XfTRRyY76bhng1G41zj9dHOl4XkeMSE7boHQ0aOlaugxAGoDmzE9JC54DJuStzIeC5L
+25K/1nDCL4LKJYu0DkP9FB0S8PxSnPiL32TA+omuGqZ7kwDshms4LwhpRbFjX6f5P9vh6FTgbr/p
+SSo=
+=ymPq
+-----END PGP SIGNATURE-----
+
+--gQzpEqqhDoyhySzOfs5qkbaa7mzBt19EA--
+
+--===============1266548398==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/nouveau
+
+--===============1266548398==--
