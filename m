@@ -2,38 +2,61 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 637F736538C
-	for <lists+nouveau@lfdr.de>; Tue, 20 Apr 2021 09:51:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 312A8365499
+	for <lists+nouveau@lfdr.de>; Tue, 20 Apr 2021 10:51:59 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 93B9D6E105;
-	Tue, 20 Apr 2021 07:51:31 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4ADD06E49C;
+	Tue, 20 Apr 2021 08:51:56 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1056289C80;
- Tue, 20 Apr 2021 07:51:30 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 9712BB23F;
- Tue, 20 Apr 2021 07:51:28 +0000 (UTC)
-To: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
- =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>,
- alexander.deucher@amd.com, airlied@linux.ie, daniel@ffwll.ch,
- bskeggs@redhat.com, ray.huang@amd.com, linux-graphics-maintainer@vmware.com,
- sroland@vmware.com, zackr@vmware.com, shashank.sharma@amd.com,
- sam@ravnborg.org, emil.velikov@collabora.com, Felix.Kuehling@amd.com,
- nirmoy.das@amd.com
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7847D6E4A2
+ for <nouveau@lists.freedesktop.org>; Tue, 20 Apr 2021 08:51:55 +0000 (UTC)
+Received: by mail-ej1-x62e.google.com with SMTP id u17so57113038ejk.2
+ for <nouveau@lists.freedesktop.org>; Tue, 20 Apr 2021 01:51:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:content-transfer-encoding:in-reply-to;
+ bh=j+++nrevZRXPhpw9iv22J29xnksChvbllnn/Sum81nU=;
+ b=KvafGYBp1xKT95Sd29BDdgK7yWKpZmi5b87cfkS5aa1IzN7sDkXtpEqI2pCDOwHYOZ
+ AKIOrpAyGskd/D8xwVPqA+dvy+crgCkaGC7tD3OVQTBI2JHjMk+5Si3ywls3nkFOpmPn
+ SwoErAP2/j0X0i1SjVy9sRUNph7RCi3e3SFh4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:content-transfer-encoding
+ :in-reply-to;
+ bh=j+++nrevZRXPhpw9iv22J29xnksChvbllnn/Sum81nU=;
+ b=KFhkX5MdBLqyN1oxwb9IA7314qqSCSFz2CjjSA/twauEHd8Uc7qLdrci+ctsNjHR0n
+ DTgDIJ9AX3ZSQYxJoQataB+uyGF90UakYFi4yVxX59ZVASS6YTj4Ibu9gAegW9WAqCMg
+ pE9IHqvMw7dWBLl7itu+htjO2LZ4qW39hXiPGwumaJHnBdM+iKxl8TvHoypK4ZyLlHUf
+ 5SiAcNimO65uklTuJAnp8zZvcHFmPRm6gWaA6pouqWjyCfG63tHYtMUqGAfTTd3PlH8V
+ 7G2DjSSHF1WlRGjOvFtTYA45+ggT6SS8vVA6GYhmbiAHBWGSZ2wS6E2sU/IrzTOy7KcU
+ FrRQ==
+X-Gm-Message-State: AOAM532R6C2Irt9yjymBV/jRf5dg8uUgi8NSeGIGF+xB3EFgw/o/Fy5W
+ x44X/ggzzWKDT2Ima+W6Z/2qJQ==
+X-Google-Smtp-Source: ABdhPJxQeoo1M1oumGIbitNwXso9Gevl5Db2luvteAH4h8DEe/JHpH9usI0nbQ02nn0EK2p7FSYBgQ==
+X-Received: by 2002:a17:906:e08b:: with SMTP id
+ gh11mr26386908ejb.33.1618908714023; 
+ Tue, 20 Apr 2021 01:51:54 -0700 (PDT)
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
+ by smtp.gmail.com with ESMTPSA id e16sm15157737edu.94.2021.04.20.01.51.52
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 20 Apr 2021 01:51:53 -0700 (PDT)
+Date: Tue, 20 Apr 2021 10:51:51 +0200
+From: Daniel Vetter <daniel@ffwll.ch>
+To: Thomas Zimmermann <tzimmermann@suse.de>
+Message-ID: <YH6WJ0p2jGd3Q5Xw@phenom.ffwll.local>
 References: <20210416133146.24825-1-tzimmermann@suse.de>
  <20210416133146.24825-6-tzimmermann@suse.de>
  <b7008944-fbe5-bd59-d2a9-ff62bea38237@gmail.com>
  <80012c09-6975-f694-420f-72b2236dcf4e@amd.com>
-From: Thomas Zimmermann <tzimmermann@suse.de>
-Message-ID: <52403618-62f5-2085-c245-e1e98762cccb@suse.de>
-Date: Tue, 20 Apr 2021 09:51:27 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.9.1
+ <52403618-62f5-2085-c245-e1e98762cccb@suse.de>
 MIME-Version: 1.0
-In-Reply-To: <80012c09-6975-f694-420f-72b2236dcf4e@amd.com>
+Content-Disposition: inline
+In-Reply-To: <52403618-62f5-2085-c245-e1e98762cccb@suse.de>
+X-Operating-System: Linux phenom 5.7.0-1-amd64 
 Subject: Re: [Nouveau] [PATCH v3 5/7] drm/vmwgfx: Inline ttm_bo_mmap() into
  vmwgfx driver
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -47,250 +70,222 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org
-Content-Type: multipart/mixed; boundary="===============1266548398=="
+Cc: amd-gfx@lists.freedesktop.org, shashank.sharma@amd.com, airlied@linux.ie,
+ Christian =?iso-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>,
+ Felix.Kuehling@amd.com, sroland@vmware.com, nirmoy.das@amd.com,
+ dri-devel@lists.freedesktop.org, ray.huang@amd.com,
+ linux-graphics-maintainer@vmware.com, bskeggs@redhat.com, daniel@ffwll.ch,
+ nouveau@lists.freedesktop.org, alexander.deucher@amd.com, sam@ravnborg.org,
+ Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+ zackr@vmware.com, emil.velikov@collabora.com
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============1266548398==
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="gQzpEqqhDoyhySzOfs5qkbaa7mzBt19EA"
+On Tue, Apr 20, 2021 at 09:51:27AM +0200, Thomas Zimmermann wrote:
+> Hi
+> =
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---gQzpEqqhDoyhySzOfs5qkbaa7mzBt19EA
-Content-Type: multipart/mixed; boundary="4hXKDfjTeiDGgeeZmmQD2sc8GodJ4lZ0X";
- protected-headers="v1"
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
- =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>,
- alexander.deucher@amd.com, airlied@linux.ie, daniel@ffwll.ch,
- bskeggs@redhat.com, ray.huang@amd.com, linux-graphics-maintainer@vmware.com,
- sroland@vmware.com, zackr@vmware.com, shashank.sharma@amd.com,
- sam@ravnborg.org, emil.velikov@collabora.com, Felix.Kuehling@amd.com,
- nirmoy.das@amd.com
-Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- amd-gfx@lists.freedesktop.org
-Message-ID: <52403618-62f5-2085-c245-e1e98762cccb@suse.de>
-Subject: Re: [PATCH v3 5/7] drm/vmwgfx: Inline ttm_bo_mmap() into vmwgfx
- driver
-References: <20210416133146.24825-1-tzimmermann@suse.de>
- <20210416133146.24825-6-tzimmermann@suse.de>
- <b7008944-fbe5-bd59-d2a9-ff62bea38237@gmail.com>
- <80012c09-6975-f694-420f-72b2236dcf4e@amd.com>
-In-Reply-To: <80012c09-6975-f694-420f-72b2236dcf4e@amd.com>
+> Am 16.04.21 um 15:51 schrieb Christian K=F6nig:
+> > Am 16.04.21 um 15:46 schrieb Christian K=F6nig:
+> > > Am 16.04.21 um 15:31 schrieb Thomas Zimmermann:
+> > > > The vmwgfx driver is the only remaining user of ttm_bo_mmap(). Inli=
+ne
+> > > > the code. The internal helper ttm_bo_vm_lookup() is now also part of
+> > > > vmwgfx as vmw_bo_vm_lookup().
+> > > > =
 
---4hXKDfjTeiDGgeeZmmQD2sc8GodJ4lZ0X
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
+> > > > v2:
+> > > > =A0=A0=A0=A0* replace pr_err() with drm_err() (Zack)
+> > > > =
 
-Hi
+> > > > Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+> > > > Reviewed-by: Zack Rusin <zackr@vmware.com>
+> > > > ---
+> > > > =A0 drivers/gpu/drm/vmwgfx/vmwgfx_ttm_glue.c | 56 +++++++++++++++++=
++++++--
+> > > > =A0 1 file changed, 53 insertions(+), 3 deletions(-)
+> > > > =
 
-Am 16.04.21 um 15:51 schrieb Christian K=C3=B6nig:
-> Am 16.04.21 um 15:46 schrieb Christian K=C3=B6nig:
->> Am 16.04.21 um 15:31 schrieb Thomas Zimmermann:
->>> The vmwgfx driver is the only remaining user of ttm_bo_mmap(). Inline=
+> > > > diff --git a/drivers/gpu/drm/vmwgfx/vmwgfx_ttm_glue.c
+> > > > b/drivers/gpu/drm/vmwgfx/vmwgfx_ttm_glue.c
+> > > > index cb9975889e2f..c8b6543b4e39 100644
+> > > > --- a/drivers/gpu/drm/vmwgfx/vmwgfx_ttm_glue.c
+> > > > +++ b/drivers/gpu/drm/vmwgfx/vmwgfx_ttm_glue.c
+> > > > @@ -27,6 +27,32 @@
+> > > > =A0 =A0 #include "vmwgfx_drv.h"
+> > > > =A0 +static struct ttm_buffer_object *vmw_bo_vm_lookup(struct
+> > > > ttm_device *bdev,
+> > > > +=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
+=A0=A0=A0 unsigned long offset,
+> > > > +=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
+=A0=A0=A0 unsigned long pages)
+> > > > +{
+> > > > +=A0=A0=A0 struct vmw_private *dev_priv =3D container_of(bdev, stru=
+ct
+> > > > vmw_private, bdev);
+> > > > +=A0=A0=A0 struct drm_device *drm =3D &dev_priv->drm;
+> > > > +=A0=A0=A0 struct drm_vma_offset_node *node;
+> > > > +=A0=A0=A0 struct ttm_buffer_object *bo =3D NULL;
+> > > > +
+> > > > +=A0=A0=A0 drm_vma_offset_lock_lookup(bdev->vma_manager);
+> > > > +
+> > > > +=A0=A0=A0 node =3D drm_vma_offset_lookup_locked(bdev->vma_manager,
+> > > > offset, pages);
+> > > > +=A0=A0=A0 if (likely(node)) {
+> > > > +=A0=A0=A0=A0=A0=A0=A0 bo =3D container_of(node,
+> struct ttm_buffer_object,
+> > > > +=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 base.vma_node);
+> > > > +=A0=A0=A0=A0=A0=A0=A0 bo =3D ttm_bo_get_unless_zero(bo);
+> > > > +=A0=A0=A0 }
+> > > > +
+> > > > +=A0=A0=A0 drm_vma_offset_unlock_lookup(bdev->vma_manager);
+> > > > +
+> > > > +=A0=A0=A0 if (!bo)
+> > > > +=A0=A0=A0=A0=A0=A0=A0 drm_err(drm, "Could not find buffer object t=
+o map\n");
+> > > > +
+> > > > +=A0=A0=A0 return bo;
+> > > > +}
+> > > > +
+> > > > =A0 int vmw_mmap(struct file *filp, struct vm_area_struct *vma)
+> > > > =A0 {
+> > > > =A0=A0=A0=A0=A0 static const struct vm_operations_struct vmw_vm_ops=
+ =3D {
+> > > > @@ -41,10 +67,28 @@ int vmw_mmap(struct file *filp, struct
+> > > > vm_area_struct *vma)
+> > > > =A0=A0=A0=A0=A0 };
+> > > > =A0=A0=A0=A0=A0 struct drm_file *file_priv =3D filp->private_data;
+> > > > =A0=A0=A0=A0=A0 struct vmw_private *dev_priv =3D vmw_priv(file_priv=
+->minor->dev);
+> > > > -=A0=A0=A0 int ret =3D ttm_bo_mmap(filp, vma, &dev_priv->bdev);
+> > > > +=A0=A0=A0 struct ttm_device *bdev =3D &dev_priv->bdev;
+> > > > +=A0=A0=A0 struct ttm_buffer_object *bo;
+> > > > +=A0=A0=A0 int ret;
+> > > > +
+> > > > +=A0=A0=A0 if (unlikely(vma->vm_pgoff < DRM_FILE_PAGE_OFFSET_START))
+> > > > +=A0=A0=A0=A0=A0=A0=A0 return -EINVAL;
+> > > > +
+> > > > +=A0=A0=A0 bo =3D vmw_bo_vm_lookup(bdev, vma->vm_pgoff, vma_pages(v=
+ma));
+> > > > +=A0=A0=A0 if (unlikely(!bo))
+> > > > +=A0=A0=A0=A0=A0=A0=A0 return -EINVAL;
+> > > > =A0 -=A0=A0=A0 if (ret)
+> > > > -=A0=A0=A0=A0=A0=A0=A0 return ret;
+> > > > +=A0=A0=A0 if (unlikely(!bo->bdev->funcs->verify_access)) {
+> > > > +=A0=A0=A0=A0=A0=A0=A0 ret =3D -EPERM;
+> > > > +=A0=A0=A0=A0=A0=A0=A0 goto out_unref;
+> > > > +=A0=A0=A0 }
+> > > > +=A0=A0=A0 ret =3D bo->bdev->funcs->verify_access(bo, filp);
+> > > =
 
->>> the code. The internal helper ttm_bo_vm_lookup() is now also part of
->>> vmwgfx as vmw_bo_vm_lookup().
->>>
->>> v2:
->>> =C2=A0=C2=A0=C2=A0=C2=A0* replace pr_err() with drm_err() (Zack)
->>>
->>> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
->>> Reviewed-by: Zack Rusin <zackr@vmware.com>
->>> ---
->>> =C2=A0 drivers/gpu/drm/vmwgfx/vmwgfx_ttm_glue.c | 56 ++++++++++++++++=
-++++++--
->>> =C2=A0 1 file changed, 53 insertions(+), 3 deletions(-)
->>>
->>> diff --git a/drivers/gpu/drm/vmwgfx/vmwgfx_ttm_glue.c=20
->>> b/drivers/gpu/drm/vmwgfx/vmwgfx_ttm_glue.c
->>> index cb9975889e2f..c8b6543b4e39 100644
->>> --- a/drivers/gpu/drm/vmwgfx/vmwgfx_ttm_glue.c
->>> +++ b/drivers/gpu/drm/vmwgfx/vmwgfx_ttm_glue.c
->>> @@ -27,6 +27,32 @@
->>> =C2=A0 =C2=A0 #include "vmwgfx_drv.h"
->>> =C2=A0 +static struct ttm_buffer_object *vmw_bo_vm_lookup(struct=20
->>> ttm_device *bdev,
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0 unsigned long offset,
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0 unsigned long pages)
->>> +{
->>> +=C2=A0=C2=A0=C2=A0 struct vmw_private *dev_priv =3D container_of(bde=
-v, struct=20
->>> vmw_private, bdev);
->>> +=C2=A0=C2=A0=C2=A0 struct drm_device *drm =3D &dev_priv->drm;
->>> +=C2=A0=C2=A0=C2=A0 struct drm_vma_offset_node *node;
->>> +=C2=A0=C2=A0=C2=A0 struct ttm_buffer_object *bo =3D NULL;
->>> +
->>> +=C2=A0=C2=A0=C2=A0 drm_vma_offset_lock_lookup(bdev->vma_manager);
->>> +
->>> +=C2=A0=C2=A0=C2=A0 node =3D drm_vma_offset_lookup_locked(bdev->vma_m=
-anager, offset,=20
->>> pages);
->>> +=C2=A0=C2=A0=C2=A0 if (likely(node)) {
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 bo =3D container_of(node,=20
-struct ttm_buffer_object,
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 base.vma_node);
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 bo =3D ttm_bo_get_unless_=
-zero(bo);
->>> +=C2=A0=C2=A0=C2=A0 }
->>> +
->>> +=C2=A0=C2=A0=C2=A0 drm_vma_offset_unlock_lookup(bdev->vma_manager);
->>> +
->>> +=C2=A0=C2=A0=C2=A0 if (!bo)
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 drm_err(drm, "Could not f=
-ind buffer object to map\n");
->>> +
->>> +=C2=A0=C2=A0=C2=A0 return bo;
->>> +}
->>> +
->>> =C2=A0 int vmw_mmap(struct file *filp, struct vm_area_struct *vma)
->>> =C2=A0 {
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 static const struct vm_operations_stru=
-ct vmw_vm_ops =3D {
->>> @@ -41,10 +67,28 @@ int vmw_mmap(struct file *filp, struct=20
->>> vm_area_struct *vma)
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 };
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 struct drm_file *file_priv =3D filp->p=
-rivate_data;
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 struct vmw_private *dev_priv =3D vmw_p=
-riv(file_priv->minor->dev);
->>> -=C2=A0=C2=A0=C2=A0 int ret =3D ttm_bo_mmap(filp, vma, &dev_priv->bde=
-v);
->>> +=C2=A0=C2=A0=C2=A0 struct ttm_device *bdev =3D &dev_priv->bdev;
->>> +=C2=A0=C2=A0=C2=A0 struct ttm_buffer_object *bo;
->>> +=C2=A0=C2=A0=C2=A0 int ret;
->>> +
->>> +=C2=A0=C2=A0=C2=A0 if (unlikely(vma->vm_pgoff < DRM_FILE_PAGE_OFFSET=
-_START))
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return -EINVAL;
->>> +
->>> +=C2=A0=C2=A0=C2=A0 bo =3D vmw_bo_vm_lookup(bdev, vma->vm_pgoff, vma_=
-pages(vma));
->>> +=C2=A0=C2=A0=C2=A0 if (unlikely(!bo))
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return -EINVAL;
->>> =C2=A0 -=C2=A0=C2=A0=C2=A0 if (ret)
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return ret;
->>> +=C2=A0=C2=A0=C2=A0 if (unlikely(!bo->bdev->funcs->verify_access)) {
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ret =3D -EPERM;
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 goto out_unref;
->>> +=C2=A0=C2=A0=C2=A0 }
->>> +=C2=A0=C2=A0=C2=A0 ret =3D bo->bdev->funcs->verify_access(bo, filp);=
+> > > Is there any reason we can't call vmw_verify_access() directly here?
+> > > =
 
->>
->> Is there any reason we can't call vmw_verify_access() directly here?
->>
->> Would allow us to completely nuke the verify_access callback as well=20
->> as far as I can see.
->=20
-> Forget what I said, couldn't see the next patch in my mailbox at time o=
-f=20
-> writing.
->=20
-> Whole series is Reviewed-by: Christian K=C3=B6nig <christian.koenig@amd=
-=2Ecom>
+> > > Would allow us to completely nuke the verify_access callback as well
+> > > as far as I can see.
+> > =
 
-Thanks a lot. If I'm not mistaken, the patches at [1] need to go in=20
-first. So it could take a a bit until this lands.
+> > Forget what I said, couldn't see the next patch in my mailbox at time of
+> > writing.
+> > =
 
-Otherwise, this series could go through the same tree as [1] if nouveau=20
-and vmwgfx devs don't mind.
+> > Whole series is Reviewed-by: Christian K=F6nig <christian.koenig@amd.co=
+m>
+> =
 
-Best regards
-Thomas
+> Thanks a lot. If I'm not mistaken, the patches at [1] need to go in first.
+> So it could take a a bit until this lands.
+> =
 
-[1] https://patchwork.freedesktop.org/series/88822/
+> Otherwise, this series could go through the same tree as [1] if nouveau a=
+nd
+> vmwgfx devs don't mind.
 
->=20
-> Thanks for the nice cleanup,
-> Christian.
->=20
->>
->> Regards,
->> Christian.
->>
->>> +=C2=A0=C2=A0=C2=A0 if (unlikely(ret !=3D 0))
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 goto out_unref;
->>> +
->>> +=C2=A0=C2=A0=C2=A0 ret =3D ttm_bo_mmap_obj(vma, bo);
->>> +=C2=A0=C2=A0=C2=A0 if (unlikely(ret !=3D 0))
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 goto out_unref;
->>> =C2=A0 =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 vma->vm_ops =3D &vmw_vm_ops;
->>> =C2=A0 @@ -52,7 +96,13 @@ int vmw_mmap(struct file *filp, struct=20
->>> vm_area_struct *vma)
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (!is_cow_mapping(vma->vm_flags))
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 vma->vm_flags =
-=3D (vma->vm_flags & ~VM_MIXEDMAP) | VM_PFNMAP;
->>> =C2=A0 +=C2=A0=C2=A0=C2=A0 ttm_bo_put(bo); /* release extra ref taken=20
-by=20
->>> ttm_bo_mmap_obj() */
->>> +
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return 0;
->>> +
->>> +out_unref:
->>> +=C2=A0=C2=A0=C2=A0 ttm_bo_put(bo);
->>> +=C2=A0=C2=A0=C2=A0 return ret;
->>> =C2=A0 }
->>> =C2=A0 =C2=A0 /* struct vmw_validation_mem callback */
->>
->=20
-> _______________________________________________
-> dri-devel mailing list
-> dri-devel@lists.freedesktop.org
-> https://lists.freedesktop.org/mailman/listinfo/dri-devel
-
---=20
-Thomas Zimmermann
-Graphics Driver Developer
-SUSE Software Solutions Germany GmbH
-Maxfeldstr. 5, 90409 N=C3=BCrnberg, Germany
-(HRB 36809, AG N=C3=BCrnberg)
-Gesch=C3=A4ftsf=C3=BChrer: Felix Imend=C3=B6rffer
+I would land it all through drm-misc-next. Maybe check with Alex on irc
+for an ack for merging that way, but I don't think this will cause issues
+against the amdgpu tree. Lots of ttm cleanup has landed this way already
+past few months. Otherwise you could create a small topic branch with
+these patches here and send that to Alex, and he can sort out the
+interaction with Felix' series.
+-Daniel
 
 
---4hXKDfjTeiDGgeeZmmQD2sc8GodJ4lZ0X--
+> =
 
---gQzpEqqhDoyhySzOfs5qkbaa7mzBt19EA
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature"
+> Best regards
+> Thomas
+> =
 
------BEGIN PGP SIGNATURE-----
+> [1] https://patchwork.freedesktop.org/series/88822/
+> =
 
-wsF5BAABCAAjFiEExndm/fpuMUdwYFFolh/E3EQov+AFAmB+h/8FAwAAAAAACgkQlh/E3EQov+B7
-4w/8CdxG67uhYl2m7yiaoCqLylhg0vp0+DpL76ZlvDReGHl/qxbqAkaSDXDq7wN0+GlV6iixjNx2
-3zcvPYSLKPi1YNJSBWWsOdLsRAhxtENUCcXJtkCmZ5fUFIy+7fv8KeSn6+I7HvTpqneexqNl4fBb
-q+LmTG9bfOhV+wPW/1I6fTyESpubq2sN0+ma126xNj2eiD7Pt17c56fcjKxZ3mnYZXPRXiDZQWa8
-4CYrywBzUzu3XvW1LLwle5tnCUllr+z4Pcd0nvPZv4xOM/mttf0k3Z494JkZzgjdwNgU7b9TiVUn
-G94TkjzYletmDrJr76qErWrinI0e2Z9Yf8yMWOMNxo5ujwiwB586Kx+dPH3hpJORkDSQzwF9urKd
-bO7ZDrdwiU308uYbhFJypI3YxqKIrJfoXfSrLW30xv+vFk3mjD8R5hp1uRCfGTgpqXsFmDELj4dG
-aSJCG+8NtOR7B36DUslfbdI9yYR3+hCk4A5lamkCxllJgUrTV5bXw++aQZVEM7ynVGCELGKuXYiH
-IwG96eUL4XfTRRyY76bhng1G41zj9dHOl4XkeMSE7boHQ0aOlaugxAGoDmzE9JC54DJuStzIeC5L
-25K/1nDCL4LKJYu0DkP9FB0S8PxSnPiL32TA+omuGqZ7kwDshms4LwhpRbFjX6f5P9vh6FTgbr/p
-SSo=
-=ymPq
------END PGP SIGNATURE-----
+> > =
 
---gQzpEqqhDoyhySzOfs5qkbaa7mzBt19EA--
+> > Thanks for the nice cleanup,
+> > Christian.
+> > =
 
---===============1266548398==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+> > > =
 
+> > > Regards,
+> > > Christian.
+> > > =
+
+> > > > +=A0=A0=A0 if (unlikely(ret !=3D 0))
+> > > > +=A0=A0=A0=A0=A0=A0=A0 goto out_unref;
+> > > > +
+> > > > +=A0=A0=A0 ret =3D ttm_bo_mmap_obj(vma, bo);
+> > > > +=A0=A0=A0 if (unlikely(ret !=3D 0))
+> > > > +=A0=A0=A0=A0=A0=A0=A0 goto out_unref;
+> > > > =A0 =A0=A0=A0=A0=A0 vma->vm_ops =3D &vmw_vm_ops;
+> > > > =A0 @@ -52,7 +96,13 @@ int vmw_mmap(struct file *filp, struct
+> > > > vm_area_struct *vma)
+> > > > =A0=A0=A0=A0=A0 if (!is_cow_mapping(vma->vm_flags))
+> > > > =A0=A0=A0=A0=A0=A0=A0=A0=A0 vma->vm_flags =3D (vma->vm_flags & ~VM_=
+MIXEDMAP) | VM_PFNMAP;
+> > > > =A0 +=A0=A0=A0 ttm_bo_put(bo); /* release extra ref taken
+> by
+> > > > ttm_bo_mmap_obj() */
+> > > > +
+> > > > =A0=A0=A0=A0=A0 return 0;
+> > > > +
+> > > > +out_unref:
+> > > > +=A0=A0=A0 ttm_bo_put(bo);
+> > > > +=A0=A0=A0 return ret;
+> > > > =A0 }
+> > > > =A0 =A0 /* struct vmw_validation_mem callback */
+> > > =
+
+> > =
+
+> > _______________________________________________
+> > dri-devel mailing list
+> > dri-devel@lists.freedesktop.org
+> > https://lists.freedesktop.org/mailman/listinfo/dri-devel
+> =
+
+> -- =
+
+> Thomas Zimmermann
+> Graphics Driver Developer
+> SUSE Software Solutions Germany GmbH
+> Maxfeldstr. 5, 90409 N=FCrnberg, Germany
+> (HRB 36809, AG N=FCrnberg)
+> Gesch=E4ftsf=FChrer: Felix Imend=F6rffer
+> =
+
+
+
+
+
+-- =
+
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/nouveau
-
---===============1266548398==--
