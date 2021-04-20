@@ -2,61 +2,121 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 312A8365499
-	for <lists+nouveau@lfdr.de>; Tue, 20 Apr 2021 10:51:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2FFD13660CC
+	for <lists+nouveau@lfdr.de>; Tue, 20 Apr 2021 22:23:06 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4ADD06E49C;
-	Tue, 20 Apr 2021 08:51:56 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0D2BB88420;
+	Tue, 20 Apr 2021 20:23:04 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7847D6E4A2
- for <nouveau@lists.freedesktop.org>; Tue, 20 Apr 2021 08:51:55 +0000 (UTC)
-Received: by mail-ej1-x62e.google.com with SMTP id u17so57113038ejk.2
- for <nouveau@lists.freedesktop.org>; Tue, 20 Apr 2021 01:51:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:content-transfer-encoding:in-reply-to;
- bh=j+++nrevZRXPhpw9iv22J29xnksChvbllnn/Sum81nU=;
- b=KvafGYBp1xKT95Sd29BDdgK7yWKpZmi5b87cfkS5aa1IzN7sDkXtpEqI2pCDOwHYOZ
- AKIOrpAyGskd/D8xwVPqA+dvy+crgCkaGC7tD3OVQTBI2JHjMk+5Si3ywls3nkFOpmPn
- SwoErAP2/j0X0i1SjVy9sRUNph7RCi3e3SFh4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:content-transfer-encoding
- :in-reply-to;
- bh=j+++nrevZRXPhpw9iv22J29xnksChvbllnn/Sum81nU=;
- b=KFhkX5MdBLqyN1oxwb9IA7314qqSCSFz2CjjSA/twauEHd8Uc7qLdrci+ctsNjHR0n
- DTgDIJ9AX3ZSQYxJoQataB+uyGF90UakYFi4yVxX59ZVASS6YTj4Ibu9gAegW9WAqCMg
- pE9IHqvMw7dWBLl7itu+htjO2LZ4qW39hXiPGwumaJHnBdM+iKxl8TvHoypK4ZyLlHUf
- 5SiAcNimO65uklTuJAnp8zZvcHFmPRm6gWaA6pouqWjyCfG63tHYtMUqGAfTTd3PlH8V
- 7G2DjSSHF1WlRGjOvFtTYA45+ggT6SS8vVA6GYhmbiAHBWGSZ2wS6E2sU/IrzTOy7KcU
- FrRQ==
-X-Gm-Message-State: AOAM532R6C2Irt9yjymBV/jRf5dg8uUgi8NSeGIGF+xB3EFgw/o/Fy5W
- x44X/ggzzWKDT2Ima+W6Z/2qJQ==
-X-Google-Smtp-Source: ABdhPJxQeoo1M1oumGIbitNwXso9Gevl5Db2luvteAH4h8DEe/JHpH9usI0nbQ02nn0EK2p7FSYBgQ==
-X-Received: by 2002:a17:906:e08b:: with SMTP id
- gh11mr26386908ejb.33.1618908714023; 
- Tue, 20 Apr 2021 01:51:54 -0700 (PDT)
-Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
- by smtp.gmail.com with ESMTPSA id e16sm15157737edu.94.2021.04.20.01.51.52
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 20 Apr 2021 01:51:53 -0700 (PDT)
-Date: Tue, 20 Apr 2021 10:51:51 +0200
-From: Daniel Vetter <daniel@ffwll.ch>
-To: Thomas Zimmermann <tzimmermann@suse.de>
-Message-ID: <YH6WJ0p2jGd3Q5Xw@phenom.ffwll.local>
+Received: from NAM04-SN1-obe.outbound.protection.outlook.com
+ (mail-eopbgr700058.outbound.protection.outlook.com [40.107.70.58])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 41E9B6E8C7;
+ Tue, 20 Apr 2021 20:23:03 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=eJj6dGM9DUoPWzHW5HHZ4HiU1KIyn7ic9XJn84hNG6MnGuwf30FnQdBzFINnJtVmYlvy6w7o62tLU+oesx/E7lckmLqbkhr3dxtpC8BSZVmDChOVR1ucJPAxHMnBJV1eBepBkQ13ylcyfvuqrbRyYozSiaYAtRf04n7uj/3t5KImlYNTtBrA19UD2pJt1tq3KZu9dhQGSc9/+IR8PYSzLdCXyoO5fhbEn6fG/+YWrEPF2urMXVlwPpAqCxwiCiOplrBQjzBi1NPcZLdBBEWz/LK2W4cKVgPBmIUUpy3ImhLVP3XnYMlon0DeR4pFWsrobvJyfzYBksfdh2urqPxO6g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=DXgcXxmcZejwM81qec+IEW2PMDmEuYfApbfXWI6aRDo=;
+ b=Ah8Ka7TJ3tz+KNM8tQN4g2FZjalfkIRpLr2IweHGWjF8sMtRIO91C10k1UOG1VmGWjQOMnjNJjkQeU5xSrtz9ClMMb2sjIbaWHy6SRkeSCU6fBA3I6EVMr89fX78I017yiTq2qtrvpc/TleNy+aAOD25vYq3yGn4dkkn3vMalEe8155KkmZxPfx9bmYjnl77I7AtXI6lYksnqhZeberfBR9I/VeKeqi9IB3GSDU7bVjftPpvdJjZmL/mtcWWt9ghtrqT6QVbapnXyz+aCDYmfxtTa+IZ+mt9nGmhJnIPuZdmeNekHc/P10yGoGce2mYjXFpFo6V4cU7/Z/BPPI5N/A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=DXgcXxmcZejwM81qec+IEW2PMDmEuYfApbfXWI6aRDo=;
+ b=USM4YWrAH2agjM0pQNSgELeF2k5aS/qKxqSCfs6ye0nG4KpbLvEar8O0FX5bBeBOM9Ff41PoWexNDeotdDSQwgY/zwk6LuranynjrRTkZZogF7rpcaszHROi6evcFesJa/7izXaXaH5pVk19z08fHZfY2gFm/BmGPD27V7uMOwE=
+Authentication-Results: lists.freedesktop.org; dkim=none (message not signed)
+ header.d=none; lists.freedesktop.org;
+ dmarc=none action=none header.from=amd.com;
+Received: from BL0PR12MB4948.namprd12.prod.outlook.com (2603:10b6:208:1cc::20)
+ by BL0PR12MB4947.namprd12.prod.outlook.com (2603:10b6:208:17d::16)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3933.32; Tue, 20 Apr
+ 2021 20:23:01 +0000
+Received: from BL0PR12MB4948.namprd12.prod.outlook.com
+ ([fe80::70f5:99ed:65a1:c033]) by BL0PR12MB4948.namprd12.prod.outlook.com
+ ([fe80::70f5:99ed:65a1:c033%7]) with mapi id 15.20.3933.040; Tue, 20 Apr 2021
+ 20:23:01 +0000
+To: Daniel Vetter <daniel@ffwll.ch>, Thomas Zimmermann <tzimmermann@suse.de>
 References: <20210416133146.24825-1-tzimmermann@suse.de>
  <20210416133146.24825-6-tzimmermann@suse.de>
  <b7008944-fbe5-bd59-d2a9-ff62bea38237@gmail.com>
  <80012c09-6975-f694-420f-72b2236dcf4e@amd.com>
  <52403618-62f5-2085-c245-e1e98762cccb@suse.de>
+ <YH6WJ0p2jGd3Q5Xw@phenom.ffwll.local>
+From: Felix Kuehling <felix.kuehling@amd.com>
+Message-ID: <a76b44d2-d894-ab4e-ef37-f0feb4326297@amd.com>
+Date: Tue, 20 Apr 2021 16:22:58 -0400
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.7.1
+In-Reply-To: <YH6WJ0p2jGd3Q5Xw@phenom.ffwll.local>
+Content-Language: en-US
+X-Originating-IP: [142.182.180.233]
+X-ClientProxiedBy: YTBPR01CA0011.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b01:14::24) To BL0PR12MB4948.namprd12.prod.outlook.com
+ (2603:10b6:208:1cc::20)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <52403618-62f5-2085-c245-e1e98762cccb@suse.de>
-X-Operating-System: Linux phenom 5.7.0-1-amd64 
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from [192.168.2.100] (142.182.180.233) by
+ YTBPR01CA0011.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:14::24) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.4042.19 via Frontend Transport; Tue, 20 Apr 2021 20:22:59 +0000
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 1d5b7ef1-cfac-4082-c699-08d9043a17e7
+X-MS-TrafficTypeDiagnostic: BL0PR12MB4947:
+X-MS-Exchange-Transport-Forked: True
+X-Microsoft-Antispam-PRVS: <BL0PR12MB49473BA465580CAD072E9B3392489@BL0PR12MB4947.namprd12.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:10000;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: eNXgFH2CA7iVbO7xsI4/v7GOMReKddLo0AR/t9rrQiJhTrv4GdSwViGV5mOerBd2OezX1CJQFGyo0UalSrYYjgOinJBh3KjezSXfF8sjngyZCw4KEGEdE7e1P9hXVP/Q1xlSogAjdkHUIc9lTtc8yqpOoUBDj4rtuLcGWNZAIKmC6fiMiwaT7Tx4Dh7YMBF9no5/LlXMKEVguPD4JWLGnoKTGsGKK6YXt8kddkQjdTj87hF1XT9ZVXzXONmJrv8Mv5AQ71/KKLowjjbR8RhpDr4Db5cRtcedzL9Ksrd/Zrsj6iOwFmxJW1Te0oPYysIpHWu7SiamkGVyJ/ZzZ8+u4/+22icE7dGbo5SOfBzk+CYrTdVevCI42/4mZwukdok04tOu5JGvC83wX922yz8osMM71fF44Lqe4VA4ANBbXRD1qTEfQa/LrUuAwUsTVWywb/sw8ea7wvGdsw7YOS53YRIsThzt1/zkAVcTali/ecPm4tfW2cTs/0iPEXwXSMryhRHOVPqC++xI6+tc+QbZUx/7ZBgnmAaO5PH22o+aGG9ZoUgTsStuZguk3McUjuJ7CWrj2UVzZ4QRyuU0pGKCX9TvZXHxRXwxTr8BpvJEWIaBi7AsIJjIxOhVAHW5iSt1pB6lR43BYyY8yN2INi3BQelmXa1oKv9zIJXpV87+ytWQAzUXV+D0RYrl5UtI5U6uB1MKGCqkhoX8IosTeihtjQ==
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:BL0PR12MB4948.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(4636009)(39850400004)(346002)(396003)(376002)(136003)(366004)(110136005)(16526019)(86362001)(8936002)(36756003)(8676002)(2616005)(66946007)(26005)(66556008)(44832011)(316002)(4326008)(956004)(31686004)(66476007)(54906003)(7416002)(2906002)(5660300002)(186003)(31696002)(6486002)(16576012)(38100700002)(478600001)(40753002)(43740500002)(45980500001);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData: =?utf-8?B?bVFvQkpjQkI3VnEzNExQbjF1VTZ4WC9yRnd5NDVWN09LeEFmcWxLd0VQdXJm?=
+ =?utf-8?B?OFlIcGlRZWVZR0RaYnBHZnlhSjJ3YXpVeTdKd2ZqUzA4MGZpNFFVUXdtbW9o?=
+ =?utf-8?B?aGFvdjUySWMzbFZLRlNndnVycm9TcHNQNzlYV0w0bnd0YXJJVTV3dHhGOXBQ?=
+ =?utf-8?B?MVE5NVM5UEpjOXFNV0ZtaGVkWGtISzl4amFKMkJYOWhXY0RQQ0ZEeFZNZXIr?=
+ =?utf-8?B?Vkx4dGp0TGk3ajRXaHlhU0Ztb1RKYzNackpKSUEyaGJaR3VMR2h3TWFuNklx?=
+ =?utf-8?B?d3ZMbnZycmlrSytkN1NGbklJTWsyNTdreWV2K3FrQWtleDVMazVrb0hGUHUr?=
+ =?utf-8?B?cVhPQXRzcWhvMHhnRlRVc3pWeEZxUU91dUtvaWpMNExYZWJ2R21obU1Fb1ZG?=
+ =?utf-8?B?dkhMVUg1WXlpRjlKYmdaUXJUVWtWR1FJOHl1NWVBMVN1NW1DbXJXZCtTNGRY?=
+ =?utf-8?B?MlFpUWNVY0ZtNWFjQlFrOXRoYXRLMytzVmNjdm5rMURYN0E2OHlSbmFtbjA4?=
+ =?utf-8?B?clMxaFdaR0p0blVDSGR2WlpVSXUrUmNLUDZ1dlUxRU84czg5Z0NwVndBSG96?=
+ =?utf-8?B?NCtoRW1QZkhiM0lSd1VJVUN3Q3RxL250cEY2bEVoTlByYUVTV216UkhoSXcv?=
+ =?utf-8?B?OG02OVJDbVJqSW9wV3RLNDhYY0EvZXhvNTVaMVNyWktvQldYWnRYY3NWT09F?=
+ =?utf-8?B?TzJaNjdodG54aFF0bFcrYVFsbjNBcHZ5Mkl6Mmk1ME9MM20xaTRiT0h0ZThQ?=
+ =?utf-8?B?Y0FsbjhnUlYxUmNZOStZT1ZqNUN0b1Z1NXB0Ynl0RzlrV3lWdXVlWHp5K1Bo?=
+ =?utf-8?B?QlQrNzVEVnMrSWFNUGJZSStYMGtqbkhyb2NUQUszbWhqcFJIUlgzY2tMVkhC?=
+ =?utf-8?B?NCtWUytCV1VmSkNPcitFSjRnZFhMVXNVQWRqbGFPRHpya080TFp5T1pXSXlw?=
+ =?utf-8?B?MkV0cnVsSk8vb3ovVm42WFlWaitkYTg0YTA0M3JmUUlIckl3ckcyeFNML1FP?=
+ =?utf-8?B?dndZOU8xTjRCTDJIRWxHWXh1bisrSDJ5SkxNUkN5ZVRMaG84V3h4TnV0eDB0?=
+ =?utf-8?B?M2ovSDg3SXYyRnpvdzNqakVrVHJqY3AxN3R3bURLZ2RnN2E3Z2JMdDRmaHVZ?=
+ =?utf-8?B?LzV3RUExS1FjbWorY1RBTHNjOE03clE3TTB1eFJiQmw0SVo4MTNSUzZ4amZk?=
+ =?utf-8?B?K0VESHNDYUhwTVJZTzVMc2xpNmVqTFpCelpaelBVb00ySm1MUTkreFV0a2t2?=
+ =?utf-8?B?cUx2V3ovSGUxWlhXeTFhWmNpRm1kelRIN1ZGLytKdXpvL0lZVHV0V3dGWWpB?=
+ =?utf-8?B?cHJ2L0ZzeW1SOWlRbHlFZllhVG44TmllLzZTeGFwbVBWYTB5dFhiVE1nREEx?=
+ =?utf-8?B?Q2MrNUg4VkYwQ2tFRC82UFl2cEVwSjNxalFRVVRaTXlqTDBvaVNFUVBPRGYr?=
+ =?utf-8?B?MTM3VnZScDV3Z09PRUo3VVBMNERMUGNBR3NoNHZHV0ZJWVk2aHkzcmpqSHZE?=
+ =?utf-8?B?U2JBeEhkK2NZY01yVC96NExWR2tDQ1pUVnZ6QjhqL1NhVzdBYklzVnpId0tm?=
+ =?utf-8?B?V2ZnN3YzTWtlMkoxbld6RHF6SU9sbDduSzhXV1N2dlJ2Szl2ZFByZGZWQmkw?=
+ =?utf-8?B?TmZIaWFkenZyV2tsZTF2SUJackpKRHNVajZvaElrZDFFdExCT0JYWWpLVmY0?=
+ =?utf-8?B?Vk44aUllSEtmdHJCTnJyOHR6OTJVSW41WXkzRG95VDd2NzhVLzV0QjVJS2d4?=
+ =?utf-8?B?eXk5UkNiTnRaaHdRWVQ5SWlGakFVczNhK0lrcnZKUGNaekxWdUxNZ2xlVzNs?=
+ =?utf-8?B?TEprOCtDdkhvZHZXOG1udz09?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1d5b7ef1-cfac-4082-c699-08d9043a17e7
+X-MS-Exchange-CrossTenant-AuthSource: BL0PR12MB4948.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Apr 2021 20:23:00.7595 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 1SO/oinS0iMQ9qn9y3EgIQGBVFt7n46vqHWmD28ayG4nrWmKRqFmFIt77PHtaWbWKVGbRPrEN84pEBCAxZdOWQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL0PR12MB4947
 Subject: Re: [Nouveau] [PATCH v3 5/7] drm/vmwgfx: Inline ttm_bo_mmap() into
  vmwgfx driver
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -71,221 +131,39 @@ List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
 Cc: amd-gfx@lists.freedesktop.org, shashank.sharma@amd.com, airlied@linux.ie,
- Christian =?iso-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>,
- Felix.Kuehling@amd.com, sroland@vmware.com, nirmoy.das@amd.com,
- dri-devel@lists.freedesktop.org, ray.huang@amd.com,
- linux-graphics-maintainer@vmware.com, bskeggs@redhat.com, daniel@ffwll.ch,
+ =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>,
+ sroland@vmware.com, nirmoy.das@amd.com, dri-devel@lists.freedesktop.org,
+ ray.huang@amd.com, linux-graphics-maintainer@vmware.com, bskeggs@redhat.com,
  nouveau@lists.freedesktop.org, alexander.deucher@amd.com, sam@ravnborg.org,
- Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
- zackr@vmware.com, emil.velikov@collabora.com
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+ =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>, zackr@vmware.com,
+ emil.velikov@collabora.com
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, Apr 20, 2021 at 09:51:27AM +0200, Thomas Zimmermann wrote:
-> Hi
-> =
-
-> Am 16.04.21 um 15:51 schrieb Christian K=F6nig:
-> > Am 16.04.21 um 15:46 schrieb Christian K=F6nig:
-> > > Am 16.04.21 um 15:31 schrieb Thomas Zimmermann:
-> > > > The vmwgfx driver is the only remaining user of ttm_bo_mmap(). Inli=
-ne
-> > > > the code. The internal helper ttm_bo_vm_lookup() is now also part of
-> > > > vmwgfx as vmw_bo_vm_lookup().
-> > > > =
-
-> > > > v2:
-> > > > =A0=A0=A0=A0* replace pr_err() with drm_err() (Zack)
-> > > > =
-
-> > > > Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-> > > > Reviewed-by: Zack Rusin <zackr@vmware.com>
-> > > > ---
-> > > > =A0 drivers/gpu/drm/vmwgfx/vmwgfx_ttm_glue.c | 56 +++++++++++++++++=
-+++++--
-> > > > =A0 1 file changed, 53 insertions(+), 3 deletions(-)
-> > > > =
-
-> > > > diff --git a/drivers/gpu/drm/vmwgfx/vmwgfx_ttm_glue.c
-> > > > b/drivers/gpu/drm/vmwgfx/vmwgfx_ttm_glue.c
-> > > > index cb9975889e2f..c8b6543b4e39 100644
-> > > > --- a/drivers/gpu/drm/vmwgfx/vmwgfx_ttm_glue.c
-> > > > +++ b/drivers/gpu/drm/vmwgfx/vmwgfx_ttm_glue.c
-> > > > @@ -27,6 +27,32 @@
-> > > > =A0 =A0 #include "vmwgfx_drv.h"
-> > > > =A0 +static struct ttm_buffer_object *vmw_bo_vm_lookup(struct
-> > > > ttm_device *bdev,
-> > > > +=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
-=A0=A0=A0 unsigned long offset,
-> > > > +=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
-=A0=A0=A0 unsigned long pages)
-> > > > +{
-> > > > +=A0=A0=A0 struct vmw_private *dev_priv =3D container_of(bdev, stru=
-ct
-> > > > vmw_private, bdev);
-> > > > +=A0=A0=A0 struct drm_device *drm =3D &dev_priv->drm;
-> > > > +=A0=A0=A0 struct drm_vma_offset_node *node;
-> > > > +=A0=A0=A0 struct ttm_buffer_object *bo =3D NULL;
-> > > > +
-> > > > +=A0=A0=A0 drm_vma_offset_lock_lookup(bdev->vma_manager);
-> > > > +
-> > > > +=A0=A0=A0 node =3D drm_vma_offset_lookup_locked(bdev->vma_manager,
-> > > > offset, pages);
-> > > > +=A0=A0=A0 if (likely(node)) {
-> > > > +=A0=A0=A0=A0=A0=A0=A0 bo =3D container_of(node,
-> struct ttm_buffer_object,
-> > > > +=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 base.vma_node);
-> > > > +=A0=A0=A0=A0=A0=A0=A0 bo =3D ttm_bo_get_unless_zero(bo);
-> > > > +=A0=A0=A0 }
-> > > > +
-> > > > +=A0=A0=A0 drm_vma_offset_unlock_lookup(bdev->vma_manager);
-> > > > +
-> > > > +=A0=A0=A0 if (!bo)
-> > > > +=A0=A0=A0=A0=A0=A0=A0 drm_err(drm, "Could not find buffer object t=
-o map\n");
-> > > > +
-> > > > +=A0=A0=A0 return bo;
-> > > > +}
-> > > > +
-> > > > =A0 int vmw_mmap(struct file *filp, struct vm_area_struct *vma)
-> > > > =A0 {
-> > > > =A0=A0=A0=A0=A0 static const struct vm_operations_struct vmw_vm_ops=
- =3D {
-> > > > @@ -41,10 +67,28 @@ int vmw_mmap(struct file *filp, struct
-> > > > vm_area_struct *vma)
-> > > > =A0=A0=A0=A0=A0 };
-> > > > =A0=A0=A0=A0=A0 struct drm_file *file_priv =3D filp->private_data;
-> > > > =A0=A0=A0=A0=A0 struct vmw_private *dev_priv =3D vmw_priv(file_priv=
-->minor->dev);
-> > > > -=A0=A0=A0 int ret =3D ttm_bo_mmap(filp, vma, &dev_priv->bdev);
-> > > > +=A0=A0=A0 struct ttm_device *bdev =3D &dev_priv->bdev;
-> > > > +=A0=A0=A0 struct ttm_buffer_object *bo;
-> > > > +=A0=A0=A0 int ret;
-> > > > +
-> > > > +=A0=A0=A0 if (unlikely(vma->vm_pgoff < DRM_FILE_PAGE_OFFSET_START))
-> > > > +=A0=A0=A0=A0=A0=A0=A0 return -EINVAL;
-> > > > +
-> > > > +=A0=A0=A0 bo =3D vmw_bo_vm_lookup(bdev, vma->vm_pgoff, vma_pages(v=
-ma));
-> > > > +=A0=A0=A0 if (unlikely(!bo))
-> > > > +=A0=A0=A0=A0=A0=A0=A0 return -EINVAL;
-> > > > =A0 -=A0=A0=A0 if (ret)
-> > > > -=A0=A0=A0=A0=A0=A0=A0 return ret;
-> > > > +=A0=A0=A0 if (unlikely(!bo->bdev->funcs->verify_access)) {
-> > > > +=A0=A0=A0=A0=A0=A0=A0 ret =3D -EPERM;
-> > > > +=A0=A0=A0=A0=A0=A0=A0 goto out_unref;
-> > > > +=A0=A0=A0 }
-> > > > +=A0=A0=A0 ret =3D bo->bdev->funcs->verify_access(bo, filp);
-> > > =
-
-> > > Is there any reason we can't call vmw_verify_access() directly here?
-> > > =
-
-> > > Would allow us to completely nuke the verify_access callback as well
-> > > as far as I can see.
-> > =
-
-> > Forget what I said, couldn't see the next patch in my mailbox at time of
-> > writing.
-> > =
-
-> > Whole series is Reviewed-by: Christian K=F6nig <christian.koenig@amd.co=
-m>
-> =
-
-> Thanks a lot. If I'm not mistaken, the patches at [1] need to go in first.
-> So it could take a a bit until this lands.
-> =
-
-> Otherwise, this series could go through the same tree as [1] if nouveau a=
-nd
-> vmwgfx devs don't mind.
-
-I would land it all through drm-misc-next. Maybe check with Alex on irc
-for an ack for merging that way, but I don't think this will cause issues
-against the amdgpu tree. Lots of ttm cleanup has landed this way already
-past few months. Otherwise you could create a small topic branch with
-these patches here and send that to Alex, and he can sort out the
-interaction with Felix' series.
--Daniel
-
-
-> =
-
-> Best regards
-> Thomas
-> =
-
-> [1] https://patchwork.freedesktop.org/series/88822/
-> =
-
-> > =
-
-> > Thanks for the nice cleanup,
-> > Christian.
-> > =
-
-> > > =
-
-> > > Regards,
-> > > Christian.
-> > > =
-
-> > > > +=A0=A0=A0 if (unlikely(ret !=3D 0))
-> > > > +=A0=A0=A0=A0=A0=A0=A0 goto out_unref;
-> > > > +
-> > > > +=A0=A0=A0 ret =3D ttm_bo_mmap_obj(vma, bo);
-> > > > +=A0=A0=A0 if (unlikely(ret !=3D 0))
-> > > > +=A0=A0=A0=A0=A0=A0=A0 goto out_unref;
-> > > > =A0 =A0=A0=A0=A0=A0 vma->vm_ops =3D &vmw_vm_ops;
-> > > > =A0 @@ -52,7 +96,13 @@ int vmw_mmap(struct file *filp, struct
-> > > > vm_area_struct *vma)
-> > > > =A0=A0=A0=A0=A0 if (!is_cow_mapping(vma->vm_flags))
-> > > > =A0=A0=A0=A0=A0=A0=A0=A0=A0 vma->vm_flags =3D (vma->vm_flags & ~VM_=
-MIXEDMAP) | VM_PFNMAP;
-> > > > =A0 +=A0=A0=A0 ttm_bo_put(bo); /* release extra ref taken
-> by
-> > > > ttm_bo_mmap_obj() */
-> > > > +
-> > > > =A0=A0=A0=A0=A0 return 0;
-> > > > +
-> > > > +out_unref:
-> > > > +=A0=A0=A0 ttm_bo_put(bo);
-> > > > +=A0=A0=A0 return ret;
-> > > > =A0 }
-> > > > =A0 =A0 /* struct vmw_validation_mem callback */
-> > > =
-
-> > =
-
-> > _______________________________________________
-> > dri-devel mailing list
-> > dri-devel@lists.freedesktop.org
-> > https://lists.freedesktop.org/mailman/listinfo/dri-devel
-> =
-
-> -- =
-
-> Thomas Zimmermann
-> Graphics Driver Developer
-> SUSE Software Solutions Germany GmbH
-> Maxfeldstr. 5, 90409 N=FCrnberg, Germany
-> (HRB 36809, AG N=FCrnberg)
-> Gesch=E4ftsf=FChrer: Felix Imend=F6rffer
-> =
-
-
-
-
-
--- =
-
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
-_______________________________________________
-Nouveau mailing list
-Nouveau@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/nouveau
+CkFtIDIwMjEtMDQtMjAgdW0gNDo1MSBhLm0uIHNjaHJpZWIgRGFuaWVsIFZldHRlcjoKPj4+IFdo
+b2xlIHNlcmllcyBpcyBSZXZpZXdlZC1ieTogQ2hyaXN0aWFuIEvDtm5pZyA8Y2hyaXN0aWFuLmtv
+ZW5pZ0BhbWQuY29tPgo+PiBUaGFua3MgYSBsb3QuIElmIEknbSBub3QgbWlzdGFrZW4sIHRoZSBw
+YXRjaGVzIGF0IFsxXSBuZWVkIHRvIGdvIGluIGZpcnN0Lgo+PiBTbyBpdCBjb3VsZCB0YWtlIGEg
+YSBiaXQgdW50aWwgdGhpcyBsYW5kcy4KPj4KPj4gT3RoZXJ3aXNlLCB0aGlzIHNlcmllcyBjb3Vs
+ZCBnbyB0aHJvdWdoIHRoZSBzYW1lIHRyZWUgYXMgWzFdIGlmIG5vdXZlYXUgYW5kCj4+IHZtd2dm
+eCBkZXZzIGRvbid0IG1pbmQuCj4gSSB3b3VsZCBsYW5kIGl0IGFsbCB0aHJvdWdoIGRybS1taXNj
+LW5leHQuIE1heWJlIGNoZWNrIHdpdGggQWxleCBvbiBpcmMKPiBmb3IgYW4gYWNrIGZvciBtZXJn
+aW5nIHRoYXQgd2F5LCBidXQgSSBkb24ndCB0aGluayB0aGlzIHdpbGwgY2F1c2UgaXNzdWVzCj4g
+YWdhaW5zdCB0aGUgYW1kZ3B1IHRyZWUuIExvdHMgb2YgdHRtIGNsZWFudXAgaGFzIGxhbmRlZCB0
+aGlzIHdheSBhbHJlYWR5Cj4gcGFzdCBmZXcgbW9udGhzLiBPdGhlcndpc2UgeW91IGNvdWxkIGNy
+ZWF0ZSBhIHNtYWxsIHRvcGljIGJyYW5jaCB3aXRoCj4gdGhlc2UgcGF0Y2hlcyBoZXJlIGFuZCBz
+ZW5kIHRoYXQgdG8gQWxleCwgYW5kIGhlIGNhbiBzb3J0IG91dCB0aGUKPiBpbnRlcmFjdGlvbiB3
+aXRoIEZlbGl4JyBzZXJpZXMuCj4gLURhbmllbAoKTXkgcGF0Y2ggc2VyaWVzIGludm9sdmVkIHNv
+bWUgcHJldHR5IGZhci1yZWFjaGluZyBjaGFuZ2VzIGluIEtGRAoocmVuYW1pbmcgc29tZSB2YXJp
+YWJsZXMgaW4gS0ZEIGFuZCBhbWRncHUsIGNoYW5naW5nIHRoZSBLRkQtPmFtZGdwdQppbnRlcmZh
+Y2UpLiBXZSBhbHJlYWR5IHN1Ym1pdHRlZCBvdGhlciBwYXRjaGVzIG9uIHRvcCBvZiBpdCB0aGF0
+IGhhdmUKZGVwZW5kZW5jaWVzIG9uIGl0LiBJZiB3ZSBkZWNpZGUgdG8gZGVsaXZlciB0aGlzIHRo
+cm91Z2ggYSBkaWZmZXJlbnQKdHJlZSBhbmQgcmVtb3ZlIGl0IGZyb20gYW1kLXN0YWdpbmctZHJt
+LW5leHQsIHRoZXJlIHdpbGwgYmUgY29uZmxpY3RzIHRvCnJlc29sdmUgd2hlbiByZW1vdmluZyBp
+dCBmcm9tIGFtZC1zdGFnaW5nLWRybS1uZXh0LCBhbmQgYWdhaW4gdGhlIG5leHQKdGltZSB5b3Ug
+bWVyZ2Ugd2l0aCBhbWQtc3RhZ2luZy1kcm0tbmV4dC4KClJlZ2FyZHMsCsKgIEZlbGl4CgoKPgo+
+Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCk5vdXZlYXUg
+bWFpbGluZyBsaXN0Ck5vdXZlYXVAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBzOi8vbGlzdHMu
+ZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vbm91dmVhdQo=
