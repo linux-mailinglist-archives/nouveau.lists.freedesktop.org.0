@@ -2,67 +2,64 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3A4543667B8
-	for <lists+nouveau@lfdr.de>; Wed, 21 Apr 2021 11:12:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3FEEA366D5D
+	for <lists+nouveau@lfdr.de>; Wed, 21 Apr 2021 15:57:24 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5AE666E42F;
-	Wed, 21 Apr 2021 09:12:27 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E2F7E6E1F9;
+	Wed, 21 Apr 2021 13:57:20 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3B5656E430
- for <nouveau@lists.freedesktop.org>; Wed, 21 Apr 2021 09:12:26 +0000 (UTC)
-Received: by mail-ej1-x62d.google.com with SMTP id r20so12680538ejo.11
- for <nouveau@lists.freedesktop.org>; Wed, 21 Apr 2021 02:12:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:content-transfer-encoding:in-reply-to;
- bh=FEam5TET7rhN7+PR3mXypZotRQqC9IqmKKfFLGC0Cc4=;
- b=Iepkup3IaMiOfVhyXm8Bbckx6YcsWQ2s2PMMnKfIgyF5vuA3JHPpJ7oCxu07f77CFl
- NhFQP7+p72gmHHrl0Dc0sEwZclXd3QEQgViUb/DX1OY5xJ9U/46wQ/ADCKO4p67YtBGb
- yl1CIe/v9rWHBrjTuUR21RQXOS9k+Q8UvSOP4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:content-transfer-encoding
- :in-reply-to;
- bh=FEam5TET7rhN7+PR3mXypZotRQqC9IqmKKfFLGC0Cc4=;
- b=Ihwe83EgDk9kCa6MgzQIEX9z5xQMsjWxO5E77ocpsFwJBRNil4T12tnp9JBrtmWopo
- ZVQjLhaUbeBdwaPCMlpeeauYYzEmIkMLQUHNjj3JSwE+VZ8ZS8yEToA3VpG/fh6XvGFW
- oZb/vxGM7Wd3mu2opZ7RIhHyUZ398DwGzrdX6zSo05hK37NSLXK2IfhT5hp60r3oeQ5m
- ftqAtlWswygt4xltX9lZZuAjI9dtpBRIJ2FL+4vFkBGe7oqP24hGgXa6q98IDLKZtLbF
- UFU7hm002kTrxisFv1WPkriNpT/H+R3O7v2gHSkGmnQycG7N/xs4Xv60SP6ZAOxeIMH1
- pxqw==
-X-Gm-Message-State: AOAM5301MAOF9wwkQcL9J2KvBgC+j6skGdBhIHNEkcwGQcmzKkOxUA4S
- n34YPVp5Rf8RzftNQXsjuE9Vvw==
-X-Google-Smtp-Source: ABdhPJwRFLGQeI5LUaHl/xRUKCcQz20vdi9yS83zYlInGKxg8bjL2xita3Xtc67I179eBVX1eD8Pgw==
-X-Received: by 2002:a17:906:a10e:: with SMTP id
- t14mr31318076ejy.103.1618996344761; 
- Wed, 21 Apr 2021 02:12:24 -0700 (PDT)
-Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
- by smtp.gmail.com with ESMTPSA id o17sm2489966edt.92.2021.04.21.02.12.23
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 21 Apr 2021 02:12:24 -0700 (PDT)
-Date: Wed, 21 Apr 2021 11:12:22 +0200
-From: Daniel Vetter <daniel@ffwll.ch>
-To: Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
-Message-ID: <YH/sdlVA5dG51LP0@phenom.ffwll.local>
-References: <20210416133146.24825-1-tzimmermann@suse.de>
- <20210416133146.24825-6-tzimmermann@suse.de>
- <b7008944-fbe5-bd59-d2a9-ff62bea38237@gmail.com>
- <80012c09-6975-f694-420f-72b2236dcf4e@amd.com>
- <52403618-62f5-2085-c245-e1e98762cccb@suse.de>
- <YH6WJ0p2jGd3Q5Xw@phenom.ffwll.local>
- <a76b44d2-d894-ab4e-ef37-f0feb4326297@amd.com>
- <CAKMK7uGmR_US-fy1GTWF4jCnCiRofyDrrJP1qFrE2CKLWbTXBA@mail.gmail.com>
- <a60d976a-8b1e-b0bb-07ba-f5801242b86c@amd.com>
+X-Greylist: delayed 1977 seconds by postgrey-1.36 at gabe;
+ Wed, 21 Apr 2021 13:57:19 UTC
+Received: from mx0a-00069f02.pphosted.com (mx0a-00069f02.pphosted.com
+ [205.220.165.32])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 93E866E1F9
+ for <nouveau@lists.freedesktop.org>; Wed, 21 Apr 2021 13:57:19 +0000 (UTC)
+Received: from pps.filterd (m0246629.ppops.net [127.0.0.1])
+ by mx0b-00069f02.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
+ 13LDLNAa029005; Wed, 21 Apr 2021 13:24:20 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
+ h=date : from : to : cc
+ : subject : message-id : mime-version : content-type; s=corp-2020-01-29;
+ bh=O8webnG6Ih+IJteyYF/I4uxEf3uFO80YIIXVsB1Qyt0=;
+ b=lHCC5HTsb36oYqGBZ/8r+Ithhl5awZCW+2Zp8Rf4Kbkrepu1PXNRnubc0nYIpvvlWYqt
+ KleS3SWHxV3UBr3PX3wmFyhTuxmT8/T5VVbrG6WI/hLPB0MjawE/+Kn2ce2PRCZ6rvGB
+ F1W8sMrWCJH6H5BwZNC0wPh2LTpSzOy4oXoLfRLaY7D3t9jh7ia0avWefmNRXjDq3epn
+ FcjE2zYN0SLf9o6ylhmYrG1UGVS64RESi2614kWuHkYaGju/Ia3L+1bpQI76Us7uupoB
+ UynB5MI7AaYCjUxww7h+41YwDcLDOu/3i8RBHyy3DYgq05xNc313bGnZi9pOgBN2M6+O dQ== 
+Received: from oracle.com (userp3020.oracle.com [156.151.31.79])
+ by mx0b-00069f02.pphosted.com with ESMTP id 381tw0ghc5-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 21 Apr 2021 13:24:20 +0000
+Received: from userp3020.oracle.com (userp3020.oracle.com [127.0.0.1])
+ by pps.podrdrct (8.16.0.36/8.16.0.36) with SMTP id 13LDM8eR185500;
+ Wed, 21 Apr 2021 13:24:18 GMT
+Received: from pps.reinject (localhost [127.0.0.1])
+ by userp3020.oracle.com with ESMTP id 3809eu91g2-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 21 Apr 2021 13:24:18 +0000
+Received: from userp3020.oracle.com (userp3020.oracle.com [127.0.0.1])
+ by pps.reinject (8.16.0.36/8.16.0.36) with SMTP id 13LDOIbq192255;
+ Wed, 21 Apr 2021 13:24:18 GMT
+Received: from aserv0122.oracle.com (aserv0122.oracle.com [141.146.126.236])
+ by userp3020.oracle.com with ESMTP id 3809eu91fk-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 21 Apr 2021 13:24:18 +0000
+Received: from abhmp0003.oracle.com (abhmp0003.oracle.com [141.146.116.9])
+ by aserv0122.oracle.com (8.14.4/8.14.4) with ESMTP id 13LDOHf0026533;
+ Wed, 21 Apr 2021 13:24:17 GMT
+Received: from mwanda (/102.36.221.92) by default (Oracle Beehive Gateway v4.0)
+ with ESMTP ; Wed, 21 Apr 2021 13:24:16 +0000
+Date: Wed, 21 Apr 2021 16:24:09 +0300
+From: Dan Carpenter <dan.carpenter@oracle.com>
+To: osalvador.vilardaga@gmail.com
+Message-ID: <YIAneTPoxr5n7485@mwanda>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <a60d976a-8b1e-b0bb-07ba-f5801242b86c@amd.com>
-X-Operating-System: Linux phenom 5.7.0-1-amd64 
-Subject: Re: [Nouveau] [PATCH v3 5/7] drm/vmwgfx: Inline ttm_bo_mmap() into
- vmwgfx driver
+X-Proofpoint-GUID: RCY3N5YlO-zXh8u-3aXRQLtKgexjiP5U
+X-Proofpoint-ORIG-GUID: RCY3N5YlO-zXh8u-3aXRQLtKgexjiP5U
+Subject: [Nouveau] [bug report] drm/nouveau/hwmon: Remove old code,
+ add .write/.read operations
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -74,83 +71,66 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: amd-gfx list <amd-gfx@lists.freedesktop.org>,
- Daniel Vetter <daniel@ffwll.ch>, "Sharma, Shashank" <shashank.sharma@amd.com>,
- Dave Airlie <airlied@linux.ie>,
- Christian =?iso-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>,
- Felix Kuehling <felix.kuehling@amd.com>,
- Roland Scheidegger <sroland@vmware.com>, Nirmoy Das <nirmoy.das@amd.com>,
- dri-devel <dri-devel@lists.freedesktop.org>, Huang Rui <ray.huang@amd.com>,
- VMware Graphics <linux-graphics-maintainer@vmware.com>,
- Ben Skeggs <bskeggs@redhat.com>, Nouveau Dev <nouveau@lists.freedesktop.org>,
- Alex Deucher <alexander.deucher@amd.com>, Sam Ravnborg <sam@ravnborg.org>,
- Zack Rusin <zackr@vmware.com>, Emil Velikov <emil.velikov@collabora.com>
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Cc: nouveau@lists.freedesktop.org
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, Apr 21, 2021 at 09:01:00AM +0200, Christian K=F6nig wrote:
-> Am 20.04.21 um 22:53 schrieb Daniel Vetter:
-> > On Tue, Apr 20, 2021 at 10:23 PM Felix Kuehling <felix.kuehling@amd.com=
-> wrote:
-> > > =
+Hello Oscar Salvador,
 
-> > > Am 2021-04-20 um 4:51 a.m. schrieb Daniel Vetter:
-> > > > > > Whole series is Reviewed-by: Christian K=F6nig <christian.koeni=
-g@amd.com>
-> > > > > Thanks a lot. If I'm not mistaken, the patches at [1] need to go =
-in first.
-> > > > > So it could take a a bit until this lands.
-> > > > > =
+The patch bfb96e4c344e: "drm/nouveau/hwmon: Remove old code, add
+.write/.read operations" from May 18, 2017, leads to the following
+static checker warning:
 
-> > > > > Otherwise, this series could go through the same tree as [1] if n=
-ouveau and
-> > > > > vmwgfx devs don't mind.
-> > > > I would land it all through drm-misc-next. Maybe check with Alex on=
- irc
-> > > > for an ack for merging that way, but I don't think this will cause =
-issues
-> > > > against the amdgpu tree. Lots of ttm cleanup has landed this way al=
-ready
-> > > > past few months. Otherwise you could create a small topic branch wi=
-th
-> > > > these patches here and send that to Alex, and he can sort out the
-> > > > interaction with Felix' series.
-> > > > -Daniel
-> > > My patch series involved some pretty far-reaching changes in KFD
-> > > (renaming some variables in KFD and amdgpu, changing the KFD->amdgpu
-> > > interface). We already submitted other patches on top of it that have
-> > > dependencies on it. If we decide to deliver this through a different
-> > > tree and remove it from amd-staging-drm-next, there will be conflicts=
- to
-> > > resolve when removing it from amd-staging-drm-next, and again the next
-> > > time you merge with amd-staging-drm-next.
-> > Ah then the usual way is for Alex to assemble a topic pull request
-> > (stable, non-rebasing) with those select patches, which then gets
-> > merged into drm-misc-next. Or we smash it all into amdgpu-next. Or we
-> > just wait until -rc2 when drm-next is back open for business.
-> =
+    drivers/gpu/drm/nouveau/nouveau_hwmon.c:507 nouveau_in_read()
+    warn: check sign expansion for '-19'
+    drivers/gpu/drm/nouveau/nouveau_hwmon.c:510 nouveau_in_read()
+    warn: check sign expansion for '-19'
 
-> I need to double check, but if I'm not totally mistaken the changes in
-> question should already be in drm-next.
-> =
+drivers/gpu/drm/nouveau/nouveau_hwmon.c
+   488  static int
+   489  nouveau_in_read(struct device *dev, u32 attr, int channel, long *val)
+   490  {
+   491          struct drm_device *drm_dev = dev_get_drvdata(dev);
+   492          struct nouveau_drm *drm = nouveau_drm(drm_dev);
+   493          struct nvkm_volt *volt = nvxx_volt(&drm->client.device);
+   494          int ret;
+   495  
+   496          if (!volt)
+   497                  return -EOPNOTSUPP;
+   498  
+   499          switch (attr) {
+   500          case hwmon_in_input:
+   501                  if (drm_dev->switch_power_state != DRM_SWITCH_POWER_ON)
+   502                          return -EINVAL;
+   503                  ret = nvkm_volt_get(volt);
+   504                  *val = ret < 0 ? ret : (ret / 1000);
+   505                  break;
+   506          case hwmon_in_min:
+   507                  *val = volt->min_uv > 0 ? (volt->min_uv / 1000) : -ENODEV;
 
-> But exactly that was the reason why I asked when the next backmerge from
-> drm-next into drm-misc-next is planned :)
+This is trying to set "*val = -ENODEV" but because "volt->min_uv" is
+unsigned int it actually sets it to "*val = (unsigned int)-ENODEV".
 
-Best way to make that happen isn't to ask when it will happen, but tell
-drm-misc maintainers to do it and why (ideally with references to the
-commits you need). Also I tend to do those requests over irc.
+It's weird to me that this code doesn't return -ENODEV instead of
+setting *val to it.
 
-Backmerges are generally on demand, not on schedule. Hence you need to
-demand one :-)
--Daniel
--- =
+   508                  break;
+   509          case hwmon_in_max:
+   510                  *val = volt->max_uv > 0 ? (volt->max_uv / 1000) : -ENODEV;
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
+   511                  break;
+   512          default:
+   513                  return -EOPNOTSUPP;
+   514          }
+   515  
+   516          return 0;
+   517  }
+
+regards,
+dan carpenter
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
