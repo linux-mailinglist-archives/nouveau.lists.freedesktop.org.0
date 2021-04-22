@@ -1,64 +1,53 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 949FB368276
-	for <lists+nouveau@lfdr.de>; Thu, 22 Apr 2021 16:30:10 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 14838368451
+	for <lists+nouveau@lfdr.de>; Thu, 22 Apr 2021 18:00:06 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E5C486E0B6;
-	Thu, 22 Apr 2021 14:30:08 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5C9386E3C6;
+	Thu, 22 Apr 2021 16:00:04 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A099B6E0B6
- for <nouveau@lists.freedesktop.org>; Thu, 22 Apr 2021 14:30:06 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1619101805;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=HYt9Rf/Ul3DrTKE2GLD2RprgJCJ4jvXDEv81RZ/uurQ=;
- b=h3Ca6y+FIrH5HrThMz6Bvl+VK1Lwd3friB8w6Rf3MG8hQqvx7wWPSeqNy1NyOjcxIPr6MV
- FsM4Dz+gEMJpfoGHaPaAGJh7W1RLJsXJ8hQeA3tr7mICtvO8xLyioH97E0bm92XxWkDqar
- 5u16TJ7sKAnxJlcNpgZGItO9O7St0NU=
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-533-TltoI5uEPJ6Q4AK6bHZkuQ-1; Thu, 22 Apr 2021 10:30:01 -0400
-X-MC-Unique: TltoI5uEPJ6Q4AK6bHZkuQ-1
-Received: by mail-wm1-f72.google.com with SMTP id
- y7-20020a1c4b070000b02901357a988015so1353191wma.5
- for <nouveau@lists.freedesktop.org>; Thu, 22 Apr 2021 07:30:01 -0700 (PDT)
+Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
+ [IPv6:2a00:1450:4864:20::235])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C81EE6E3C6
+ for <nouveau@lists.freedesktop.org>; Thu, 22 Apr 2021 16:00:02 +0000 (UTC)
+Received: by mail-lj1-x235.google.com with SMTP id o16so52434595ljp.3
+ for <nouveau@lists.freedesktop.org>; Thu, 22 Apr 2021 09:00:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=sPqtDg1MZKEB+gxfdYzkKUY5G3irXGW+JCmp2Xo0atU=;
+ b=H82XkYFUeDTasimM77WdCIe4a8YFV3S6Zo1V0E5Cp0PUh9Lsytvdgrx3TXlvH/AuDO
+ arMSqqF/1ZLswSCC+kwsr78W++fFiMWkN1WMOWzLKeZSsSnhLKyn4/6dkRT35C2yWrlU
+ kfsLP1LuEZmb1f9frtBothfrDSTCLPgez/lCN00jxoYXZX89zZRuLbIJbstXeqy3UktA
+ 2JCAuJkb6vg96NBL+0TttOctexMehDbIGwdFlGeLaAR6yCO0kwc89o2HcKQBAJN9Flrw
+ 8urc6i/Il2s4VnolTjv9DBahPGNnZr5+ZfAi1cA4n4GCJrLnwxlf33b39UTqjo5ZCNSO
+ +I3A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=HYt9Rf/Ul3DrTKE2GLD2RprgJCJ4jvXDEv81RZ/uurQ=;
- b=WvMGWcU9v/fVo0twbEhknQ0XnJZzv9jgjywye2Ye0gZPMVQ9bwntPFb/3E+zztORmq
- pK/40M33yE8f5q0U6s4Mh2AdT/TPn7lgYxEIo7Cs3H3h9a1hWKkRhvPdG95mtzbqbpRu
- fmclKNX/y3DeX3Rw6LGKrTuxHOpeeaBGPesMy3pRZffxDMKF27wayNLWkBmKd6qUlroK
- kScwi7a7JunfOxpXb3BKjiyt0pD2jjTY8/z6xhHXGFd7XR5QbbRtJITeXg5y8VvDTi3w
- FrRhx4fuWZn5cICPS4mzczRkVrbUk+Tb6GRAqpZeXKBSmqdGLDbikLx8YAEjVl1/RBeg
- QOxA==
-X-Gm-Message-State: AOAM5307csWZCJlKTVXaJ2G6uo5+jQq9tqRHi4S5e8iqz4JuTcmzB/gq
- 5sj3bHF4lR5E9vsTYPVcECSqDc6fQwv0DMZYj/6mqMlcG2++saAihy4U/SEbKH1OpB/n5ej+LAg
- TFIMajtY87cjt0a0KcmrGmvNT1/KHaeJhl+hJLrBsLw==
-X-Received: by 2002:a1c:3983:: with SMTP id g125mr306861wma.163.1619101800387; 
- Thu, 22 Apr 2021 07:30:00 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJzPlJ5AdFfXK9CeIfpi5VOU2ybVjqWLEkdKk7nrTgHQf0MdDXxU8gPcZINy3oD4kaj+Wuo28RxFDRBMb5Tdm/g=
-X-Received: by 2002:a1c:3983:: with SMTP id g125mr306849wma.163.1619101800251; 
- Thu, 22 Apr 2021 07:30:00 -0700 (PDT)
+ bh=sPqtDg1MZKEB+gxfdYzkKUY5G3irXGW+JCmp2Xo0atU=;
+ b=Y6RMDbP8atDa8VEwVEtLpdtXlfJxIWcVqK5ETVtlgz+9QIJIVlu1yp1UaqDuleH5tS
+ DJe6t2m0s7va/CPxlRP1HlrUiQM1ipIq54vQAs1ElJJxRZBTuR0Uq/r80MmlLV+vRPo3
+ jXgGNp5YkMl4a/kU4owdgZRb0F8Qg37OrEt3z9Onkod5nQ9hyXQ8RLh9ruNRyXjEo8yx
+ 59oZVCeDaCBifmrsYYiFG+EE63F4MUXxXq3tWbx4LpH5r8rB7iSC+1Tqx4hS7WeZE8xE
+ oeY7hg1VMsbqist7KrigDfGqwiNJe2HvEcaASjiI01vXGakVc1Suq4NexcNJ6DhfbYVC
+ K72Q==
+X-Gm-Message-State: AOAM533PvBYmDr+GqojUWFnI9i/ssi8HS4hLyvQutky9XZonSFAw+Eew
+ vXTEMNWjH7gkBTkdLPBdBSc103pTfNXnyDW5V1ieEtVaqNsdVw==
+X-Google-Smtp-Source: ABdhPJzwpD0nbCnW1tscMILhUtP6e/g1oGvotbcsZt0WJpvX9DWaimeNHta7iCzdRwG+CJPvnC1YsjH5qyCVJ6ZIfFw=
+X-Received: by 2002:a2e:2246:: with SMTP id i67mr2847042lji.396.1619107201252; 
+ Thu, 22 Apr 2021 09:00:01 -0700 (PDT)
 MIME-Version: 1.0
 References: <CAPpdf58cSDz-22biF3Zyn7brchnt6Nrju0cXq=ksMBhOSqihhw@mail.gmail.com>
-In-Reply-To: <CAPpdf58cSDz-22biF3Zyn7brchnt6Nrju0cXq=ksMBhOSqihhw@mail.gmail.com>
-From: Karol Herbst <kherbst@redhat.com>
-Date: Thu, 22 Apr 2021 16:29:49 +0200
-Message-ID: <CACO55tuRxKQh_OsjPCrzTY1To_gmAiCLqtmk_YXWAXMW8zyHDA@mail.gmail.com>
-To: o1bigtenor <o1bigtenor@gmail.com>
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=kherbst@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
+ <CACO55tuRxKQh_OsjPCrzTY1To_gmAiCLqtmk_YXWAXMW8zyHDA@mail.gmail.com>
+In-Reply-To: <CACO55tuRxKQh_OsjPCrzTY1To_gmAiCLqtmk_YXWAXMW8zyHDA@mail.gmail.com>
+From: o1bigtenor <o1bigtenor@gmail.com>
+Date: Thu, 22 Apr 2021 10:59:25 -0500
+Message-ID: <CAPpdf5_h4ZGvLaJnVxPx30REuDicnSxaZuEC=YD1Oq1T426X6w@mail.gmail.com>
+To: Karol Herbst <kherbst@redhat.com>
 Subject: Re: [Nouveau] Bug system problems
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -77,27 +66,27 @@ Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-I've notified the gitlab admins, but maybe you can use the social
-login (google, github, twitter, etc..) for the moment or would that
-require the confirmation email as well?
+On Thu, Apr 22, 2021 at 9:30 AM Karol Herbst <kherbst@redhat.com> wrote:
+>
+> I've notified the gitlab admins, but maybe you can use the social
+> login (google, github, twitter, etc..) for the moment or would that
+> require the confirmation email as well?
+>
+Apologies to Mr Korol - - - - I hadn't used reply all!
 
-On Thu, Apr 22, 2021 at 3:44 PM o1bigtenor <o1bigtenor@gmail.com> wrote:
->
-> Greetings
->
-> In the process of setting up an account at the https://gitlab.freedesktop.org/
-> location to file a bug I am not receiving any kind of confirmation email to
-> respond to.
->
-> What do I have to do to effect an account?
->
-> TIA
-> _______________________________________________
-> Nouveau mailing list
-> Nouveau@lists.freedesktop.org
-> https://lists.freedesktop.org/mailman/listinfo/nouveau
->
 
+It appears not to.
+
+Successfully logged in.
+
+Not terribly useful though - - - - I wanted to edit what I had written trying
+to make things easier to read and I needed to complete (one of those
+incredibly useless) recaptcha gizmos which was not visible nor could
+I find it.
+
+So apologies for the poor formatting in the bug report.
+
+Regards
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
