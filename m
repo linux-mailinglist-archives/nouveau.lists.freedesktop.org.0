@@ -2,40 +2,80 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1CDFB369602
-	for <lists+nouveau@lfdr.de>; Fri, 23 Apr 2021 17:20:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2E419369A15
+	for <lists+nouveau@lfdr.de>; Fri, 23 Apr 2021 20:44:51 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 16C9A6EC08;
-	Fri, 23 Apr 2021 15:20:28 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7F1DB6EC3F;
+	Fri, 23 Apr 2021 18:44:49 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by gabe.freedesktop.org (Postfix) with ESMTP id 70EAF6EB93;
- Fri, 23 Apr 2021 13:46:35 +0000 (UTC)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 9E1CE1063;
- Fri, 23 Apr 2021 06:46:34 -0700 (PDT)
-Received: from [10.57.62.63] (unknown [10.57.62.63])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 903A33F73B;
- Fri, 23 Apr 2021 06:46:27 -0700 (PDT)
-To: Claire Chang <tientzu@chromium.org>, Joerg Roedel <joro@8bytes.org>,
- Will Deacon <will@kernel.org>, Frank Rowand <frowand.list@gmail.com>,
- Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, boris.ostrovsky@oracle.com,
- jgross@suse.com, Christoph Hellwig <hch@lst.de>,
- Marek Szyprowski <m.szyprowski@samsung.com>
-References: <20210422081508.3942748-1-tientzu@chromium.org>
- <20210422081508.3942748-15-tientzu@chromium.org>
-From: Robin Murphy <robin.murphy@arm.com>
-Message-ID: <70b895c2-4a39-bbbd-a719-5c8b6b922026@arm.com>
-Date: Fri, 23 Apr 2021 14:46:25 +0100
-User-Agent: Mozilla/5.0 (Windows NT 10.0; rv:78.0) Gecko/20100101
- Thunderbird/78.10.0
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [216.205.24.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id ADBD26E141
+ for <nouveau@lists.freedesktop.org>; Fri, 23 Apr 2021 17:53:39 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1619200418;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=iMN2vr30yb/ELiIJb3jXFJDgM9IBXB6WS94R3EgBst0=;
+ b=QTgKjEO9QviHC202r72SLho/D8bidgBP99vm4U8ejzjwDsIPB1pdOng81Zy8JSkIGhnUPV
+ KvPe2XzDCxS8k/CagOOVUO1xPI0+BlqrbMTKrNuozFxD8XwC1QGgtAv6CiHDJfZjVwYem1
+ Uz/IvW396a/sb7B6AlYMvEbx78RqvQo=
+Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com
+ [209.85.160.198]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-581-U716uKJmOaSIJ2EyDDlqSA-1; Fri, 23 Apr 2021 13:53:36 -0400
+X-MC-Unique: U716uKJmOaSIJ2EyDDlqSA-1
+Received: by mail-qt1-f198.google.com with SMTP id
+ v1-20020a05622a1301b02901b8238285bbso12825616qtk.0
+ for <nouveau@lists.freedesktop.org>; Fri, 23 Apr 2021 10:53:36 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
+ :references:organization:user-agent:mime-version
+ :content-transfer-encoding;
+ bh=iMN2vr30yb/ELiIJb3jXFJDgM9IBXB6WS94R3EgBst0=;
+ b=czcjHtwOcSIvJx3GZPXQRkZHqlXD0kGB4ElUgMWRGQyQ658rNi+L6VAX1w2ZO0YA2n
+ UNg4zeA4xfAw84nITVTRn5SamrUqh7THaLxYzBJx2v6WGCQdogk13MBdbgYScpVH3KKB
+ pSs6W/6KfGguxnEjdPPA/XP8L7z1Qm1ovExxGZwh2mZFI0WgBT2i6kCbypgZIxm2CIW+
+ 0n/QRKNyqOu9spxLQO9CDu8+8MTJviS9V1bfzzW1cjnSAFG1ArFXzzS6MnoKLSS5fHr7
+ EuOA8VoyOEfVWkkXsyl7iCe8vKYrCjKT6TixvCOUNeJzoS2yvj6UY+QePCsNrZgqgiA9
+ P/wQ==
+X-Gm-Message-State: AOAM533K8u8QPxXJuIrlrwOdXA1UquCUwCA5++gOIgKDZcBlPjEGS7da
+ UPTrv+nAqMWZg1oL3SaRhcgIlBUDQ2woDf28KzmIePPnJMiV7Qc22Rzrnjl3OPaOUtmHbIxyCTg
+ uIo+byxrjyBoWSqRbVC+DAjqQ/Q==
+X-Received: by 2002:a0c:dc11:: with SMTP id s17mr5457277qvk.18.1619200415935; 
+ Fri, 23 Apr 2021 10:53:35 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJxTUVUlVfoiWl//W0HjPD0d13jw9avPkrwnpeZvBDIw6oqnKzSgsucO2i02vJ5q3mqdmlhTGw==
+X-Received: by 2002:a0c:dc11:: with SMTP id s17mr5457242qvk.18.1619200415744; 
+ Fri, 23 Apr 2021 10:53:35 -0700 (PDT)
+Received: from Ruby.lyude.net (pool-108-49-102-102.bstnma.fios.verizon.net.
+ [108.49.102.102])
+ by smtp.gmail.com with ESMTPSA id c5sm4715913qkl.7.2021.04.23.10.53.33
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 23 Apr 2021 10:53:35 -0700 (PDT)
+Message-ID: <cb7339fe172f31c615d824b56a709d2df6b79bb7.camel@redhat.com>
+From: Lyude Paul <lyude@redhat.com>
+To: Thierry Reding <treding@nvidia.com>
+Date: Fri, 23 Apr 2021 13:53:33 -0400
+In-Reply-To: <YILABCrcMb5MksxD@orome.fritz.box>
+References: <20210419225523.184856-1-lyude@redhat.com>
+ <20210419225523.184856-4-lyude@redhat.com> <YH4PPbY1qqF2NtrN@intel.com>
+ <56a931c9f284ee6a23583eb3dc59de4afaa60e93.camel@redhat.com>
+ <2e211a6623664714af1d180eadcd74aa7ef417db.camel@redhat.com>
+ <17aa145e4cfa3d8852f7411067c5c37bff771b16.camel@redhat.com>
+ <YILABCrcMb5MksxD@orome.fritz.box>
+Organization: Red Hat
+User-Agent: Evolution 3.38.4 (3.38.4-1.fc33)
 MIME-Version: 1.0
-In-Reply-To: <20210422081508.3942748-15-tientzu@chromium.org>
-Content-Language: en-GB
-X-Mailman-Approved-At: Fri, 23 Apr 2021 15:20:27 +0000
-Subject: Re: [Nouveau] [PATCH v5 14/16] dma-direct: Allocate memory from
- restricted DMA pool if available
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=lyude@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+X-Mailman-Approved-At: Fri, 23 Apr 2021 18:44:47 +0000
+Subject: Re: [Nouveau] [PATCH v3 03/20] drm/dp: Move i2c init to
+ drm_dp_aux_init, add __must_check and fini
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -47,152 +87,73 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: heikki.krogerus@linux.intel.com, thomas.hellstrom@linux.intel.com,
- peterz@infradead.org, benh@kernel.crashing.org,
- joonas.lahtinen@linux.intel.com, dri-devel@lists.freedesktop.org,
- chris@chris-wilson.co.uk, grant.likely@arm.com, paulus@samba.org,
- mingo@kernel.org, jxgao@google.com, sstabellini@kernel.org,
- Saravana Kannan <saravanak@google.com>, xypron.glpk@gmx.de,
- "Rafael J . Wysocki" <rafael.j.wysocki@intel.com>,
- Bartosz Golaszewski <bgolaszewski@baylibre.com>, bskeggs@redhat.com,
- linux-pci@vger.kernel.org, xen-devel@lists.xenproject.org,
- Thierry Reding <treding@nvidia.com>, intel-gfx@lists.freedesktop.org,
- matthew.auld@intel.com, linux-devicetree <devicetree@vger.kernel.org>,
- daniel@ffwll.ch, airlied@linux.ie, maarten.lankhorst@linux.intel.com,
- jani.nikula@linux.intel.com, Nicolas Boichat <drinkcat@chromium.org>,
- rodrigo.vivi@intel.com, bhelgaas@google.com,
- Dan Williams <dan.j.williams@intel.com>,
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- nouveau@lists.freedesktop.org, Greg KH <gregkh@linuxfoundation.org>,
- Randy Dunlap <rdunlap@infradead.org>, lkml <linux-kernel@vger.kernel.org>,
- tfiga@chromium.org,
- "list@263.net:IOMMU DRIVERS" <iommu@lists.linux-foundation.org>,
- Jim Quinlan <james.quinlan@broadcom.com>, linuxppc-dev@lists.ozlabs.org,
- bauerman@linux.ibm.com
+Cc: Neil Armstrong <narmstrong@baylibre.com>, David Airlie <airlied@linux.ie>,
+ nouveau@lists.freedesktop.org,
+ Guido =?ISO-8859-1?Q?G=FCnther?= <agx@sigxcpu.org>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Oleg Vasilev <oleg.vasilev@intel.com>, dri-devel@lists.freedesktop.org,
+ Meenakshikumar Somasundaram <meenakshikumar.somasundaram@amd.com>,
+ Andrzej Hajda <a.hajda@samsung.com>,
+ Aurabindo Pillai <aurabindo.pillai@amd.com>,
+ Thierry Reding <thierry.reding@gmail.com>,
+ Laurent Pinchart <Laurent.pinchart@ideasonboard.com>,
+ Sam Ravnborg <sam@ravnborg.org>,
+ Ville =?ISO-8859-1?Q?Syrj=E4l=E4?= <ville.syrjala@linux.intel.com>,
+ Tomi Valkeinen <tomi.valkeinen@ti.com>,
+ Parshuram Thombare <pthombar@cadence.com>,
+ Rodrigo Siqueira <Rodrigo.Siqueira@amd.com>,
+ Michal Simek <michal.simek@xilinx.com>, amd-gfx@lists.freedesktop.org,
+ Luben Tuikov <luben.tuikov@amd.com>, Ben Skeggs <bskeggs@redhat.com>,
+ Swapnil Jakhade <sjakhade@cadence.com>,
+ Harry Wentland <harry.wentland@amd.com>, Imre Deak <imre.deak@intel.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Leo Li <sunpeng.li@amd.com>,
+ intel-gfx@lists.freedesktop.org,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>, Joe Perches <joe@perches.com>,
+ Yuti Amonkar <yamonkar@cadence.com>, Maxime Ripard <mripard@kernel.org>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>, Mikita Lipski <mikita.lipski@amd.com>,
+ Sean Paul <sean@poorly.run>, Navid Emamdoost <navid.emamdoost@gmail.com>,
+ Jernej Skrabec <jernej.skrabec@siol.net>, Chris Park <Chris.Park@amd.com>,
+ Eryk Brol <eryk.brol@amd.com>, Hyun Kwon <hyun.kwon@xilinx.com>,
+ Robert Foss <robert.foss@linaro.org>, Julia Lawall <Julia.Lawall@inria.fr>,
+ Rob Clark <robdclark@gmail.com>,
+ Boris Brezillon <boris.brezillon@collabora.com>,
+ Daniel Vetter <daniel@ffwll.ch>, Alex Deucher <alexander.deucher@amd.com>,
+ Christian =?ISO-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 2021-04-22 09:15, Claire Chang wrote:
-> The restricted DMA pool is preferred if available.
+On Fri, 2021-04-23 at 14:39 +0200, Thierry Reding wrote:
 > 
-> The restricted DMA pools provide a basic level of protection against the
-> DMA overwriting buffer contents at unexpected times. However, to protect
-> against general data leakage and system memory corruption, the system
-> needs to provide a way to lock down the memory access, e.g., MPU.
+> I'm curious: how is a DP AUX adapter reference count going to solve the
+> issue of potentially registering devices too early (i.e. before the DRM
+> is registered)?
 > 
-> Signed-off-by: Claire Chang <tientzu@chromium.org>
-> ---
->   kernel/dma/direct.c | 35 ++++++++++++++++++++++++++---------
->   1 file changed, 26 insertions(+), 9 deletions(-)
+> Is it because registering too early could cause a reference count
+> problem if somebody get a hold of the DP AUX adapter before the parent
+> DRM device is around?
+
+Well currently the problem is that we kind of want to avoid setting up the i2c
+adapter before the DRM driver is registered with userspace, but it's not
+really possible to do that if we need the core device struct for the ddc
+adapter initialized so that tegra can call get_device() on it in
+drivers/gpu/drm/tegra/sor.c. So my thought is instead of calling get_device()
+on the ddc adapter that the AUX channel provides, why not just call it on the
+actual platform device that implements the AUX channel instead? I think this
+should work pretty nicely while still preventing the platform device for the
+AUX channel from disappearing before the SOR has disappeared.
+
+
 > 
-> diff --git a/kernel/dma/direct.c b/kernel/dma/direct.c
-> index 7a27f0510fcc..29523d2a9845 100644
-> --- a/kernel/dma/direct.c
-> +++ b/kernel/dma/direct.c
-> @@ -78,6 +78,10 @@ static bool dma_coherent_ok(struct device *dev, phys_addr_t phys, size_t size)
->   static void __dma_direct_free_pages(struct device *dev, struct page *page,
->   				    size_t size)
->   {
-> +#ifdef CONFIG_DMA_RESTRICTED_POOL
-> +	if (swiotlb_free(dev, page, size))
-> +		return;
-> +#endif
->   	dma_free_contiguous(dev, page, size);
->   }
->   
-> @@ -92,7 +96,17 @@ static struct page *__dma_direct_alloc_pages(struct device *dev, size_t size,
->   
->   	gfp |= dma_direct_optimal_gfp_mask(dev, dev->coherent_dma_mask,
->   					   &phys_limit);
-> -	page = dma_alloc_contiguous(dev, size, gfp);
-> +
-> +#ifdef CONFIG_DMA_RESTRICTED_POOL
-> +	page = swiotlb_alloc(dev, size);
-> +	if (page && !dma_coherent_ok(dev, page_to_phys(page), size)) {
-> +		__dma_direct_free_pages(dev, page, size);
-> +		page = NULL;
-> +	}
-> +#endif
-> +
-> +	if (!page)
-> +		page = dma_alloc_contiguous(dev, size, gfp);
->   	if (page && !dma_coherent_ok(dev, page_to_phys(page), size)) {
->   		dma_free_contiguous(dev, page, size);
->   		page = NULL;
-> @@ -148,7 +162,7 @@ void *dma_direct_alloc(struct device *dev, size_t size,
->   		gfp |= __GFP_NOWARN;
->   
->   	if ((attrs & DMA_ATTR_NO_KERNEL_MAPPING) &&
-> -	    !force_dma_unencrypted(dev)) {
-> +	    !force_dma_unencrypted(dev) && !is_dev_swiotlb_force(dev)) {
->   		page = __dma_direct_alloc_pages(dev, size, gfp & ~__GFP_ZERO);
->   		if (!page)
->   			return NULL;
-> @@ -161,8 +175,8 @@ void *dma_direct_alloc(struct device *dev, size_t size,
->   	}
->   
->   	if (!IS_ENABLED(CONFIG_ARCH_HAS_DMA_SET_UNCACHED) &&
-> -	    !IS_ENABLED(CONFIG_DMA_DIRECT_REMAP) &&
-> -	    !dev_is_dma_coherent(dev))
-> +	    !IS_ENABLED(CONFIG_DMA_DIRECT_REMAP) && !dev_is_dma_coherent(dev) &&
-> +	    !is_dev_swiotlb_force(dev))
->   		return arch_dma_alloc(dev, size, dma_handle, gfp, attrs);
->   
->   	/*
-> @@ -172,7 +186,9 @@ void *dma_direct_alloc(struct device *dev, size_t size,
->   	if (IS_ENABLED(CONFIG_DMA_COHERENT_POOL) &&
->   	    !gfpflags_allow_blocking(gfp) &&
->   	    (force_dma_unencrypted(dev) ||
-> -	     (IS_ENABLED(CONFIG_DMA_DIRECT_REMAP) && !dev_is_dma_coherent(dev))))
-> +	     (IS_ENABLED(CONFIG_DMA_DIRECT_REMAP) &&
-> +	      !dev_is_dma_coherent(dev))) &&
-> +	    !is_dev_swiotlb_force(dev))
->   		return dma_direct_alloc_from_pool(dev, size, dma_handle, gfp);
->   
->   	/* we always manually zero the memory once we are done */
-> @@ -253,15 +269,15 @@ void dma_direct_free(struct device *dev, size_t size,
->   	unsigned int page_order = get_order(size);
->   
->   	if ((attrs & DMA_ATTR_NO_KERNEL_MAPPING) &&
-> -	    !force_dma_unencrypted(dev)) {
-> +	    !force_dma_unencrypted(dev) && !is_dev_swiotlb_force(dev)) {
->   		/* cpu_addr is a struct page cookie, not a kernel address */
->   		dma_free_contiguous(dev, cpu_addr, size);
->   		return;
->   	}
->   
->   	if (!IS_ENABLED(CONFIG_ARCH_HAS_DMA_SET_UNCACHED) &&
-> -	    !IS_ENABLED(CONFIG_DMA_DIRECT_REMAP) &&
-> -	    !dev_is_dma_coherent(dev)) {
-> +	    !IS_ENABLED(CONFIG_DMA_DIRECT_REMAP) && !dev_is_dma_coherent(dev) &&
-> +	    !is_dev_swiotlb_force(dev)) {
->   		arch_dma_free(dev, size, cpu_addr, dma_addr, attrs);
->   		return;
->   	}
-> @@ -289,7 +305,8 @@ struct page *dma_direct_alloc_pages(struct device *dev, size_t size,
->   	void *ret;
->   
->   	if (IS_ENABLED(CONFIG_DMA_COHERENT_POOL) &&
-> -	    force_dma_unencrypted(dev) && !gfpflags_allow_blocking(gfp))
-> +	    force_dma_unencrypted(dev) && !gfpflags_allow_blocking(gfp) &&
-> +	    !is_dev_swiotlb_force(dev))
->   		return dma_direct_alloc_from_pool(dev, size, dma_handle, gfp);
+> Thierry
 
-Wait, this seems broken for non-coherent devices - in that case we need 
-to return a non-cacheable address, but we can't simply fall through into 
-the remapping path below in GFP_ATOMIC context. That's why we need the 
-atomic pool concept in the first place :/
+-- 
+Cheers,
+ Lyude Paul (she/her)
+ Software Engineer at Red Hat
 
-Unless I've overlooked something, we're still using the regular 
-cacheable linear map address of the dma_io_tlb_mem buffer, no?
-
-Robin.
-
->   
->   	page = __dma_direct_alloc_pages(dev, size, gfp);
-> 
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
