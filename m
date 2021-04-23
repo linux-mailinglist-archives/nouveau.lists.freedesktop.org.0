@@ -1,81 +1,58 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2E419369A15
-	for <lists+nouveau@lfdr.de>; Fri, 23 Apr 2021 20:44:51 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id CB8F93699F2
+	for <lists+nouveau@lfdr.de>; Fri, 23 Apr 2021 20:43:34 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7F1DB6EC3F;
-	Fri, 23 Apr 2021 18:44:49 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 452056E16F;
+	Fri, 23 Apr 2021 18:43:33 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id ADBD26E141
- for <nouveau@lists.freedesktop.org>; Fri, 23 Apr 2021 17:53:39 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 577CB6E17D
+ for <nouveau@lists.freedesktop.org>; Fri, 23 Apr 2021 18:43:32 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1619200418;
+ s=mimecast20190719; t=1619203411;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=iMN2vr30yb/ELiIJb3jXFJDgM9IBXB6WS94R3EgBst0=;
- b=QTgKjEO9QviHC202r72SLho/D8bidgBP99vm4U8ejzjwDsIPB1pdOng81Zy8JSkIGhnUPV
- KvPe2XzDCxS8k/CagOOVUO1xPI0+BlqrbMTKrNuozFxD8XwC1QGgtAv6CiHDJfZjVwYem1
- Uz/IvW396a/sb7B6AlYMvEbx78RqvQo=
-Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com
- [209.85.160.198]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-581-U716uKJmOaSIJ2EyDDlqSA-1; Fri, 23 Apr 2021 13:53:36 -0400
-X-MC-Unique: U716uKJmOaSIJ2EyDDlqSA-1
-Received: by mail-qt1-f198.google.com with SMTP id
- v1-20020a05622a1301b02901b8238285bbso12825616qtk.0
- for <nouveau@lists.freedesktop.org>; Fri, 23 Apr 2021 10:53:36 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
- :references:organization:user-agent:mime-version
- :content-transfer-encoding;
- bh=iMN2vr30yb/ELiIJb3jXFJDgM9IBXB6WS94R3EgBst0=;
- b=czcjHtwOcSIvJx3GZPXQRkZHqlXD0kGB4ElUgMWRGQyQ658rNi+L6VAX1w2ZO0YA2n
- UNg4zeA4xfAw84nITVTRn5SamrUqh7THaLxYzBJx2v6WGCQdogk13MBdbgYScpVH3KKB
- pSs6W/6KfGguxnEjdPPA/XP8L7z1Qm1ovExxGZwh2mZFI0WgBT2i6kCbypgZIxm2CIW+
- 0n/QRKNyqOu9spxLQO9CDu8+8MTJviS9V1bfzzW1cjnSAFG1ArFXzzS6MnoKLSS5fHr7
- EuOA8VoyOEfVWkkXsyl7iCe8vKYrCjKT6TixvCOUNeJzoS2yvj6UY+QePCsNrZgqgiA9
- P/wQ==
-X-Gm-Message-State: AOAM533K8u8QPxXJuIrlrwOdXA1UquCUwCA5++gOIgKDZcBlPjEGS7da
- UPTrv+nAqMWZg1oL3SaRhcgIlBUDQ2woDf28KzmIePPnJMiV7Qc22Rzrnjl3OPaOUtmHbIxyCTg
- uIo+byxrjyBoWSqRbVC+DAjqQ/Q==
-X-Received: by 2002:a0c:dc11:: with SMTP id s17mr5457277qvk.18.1619200415935; 
- Fri, 23 Apr 2021 10:53:35 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJxTUVUlVfoiWl//W0HjPD0d13jw9avPkrwnpeZvBDIw6oqnKzSgsucO2i02vJ5q3mqdmlhTGw==
-X-Received: by 2002:a0c:dc11:: with SMTP id s17mr5457242qvk.18.1619200415744; 
- Fri, 23 Apr 2021 10:53:35 -0700 (PDT)
-Received: from Ruby.lyude.net (pool-108-49-102-102.bstnma.fios.verizon.net.
- [108.49.102.102])
- by smtp.gmail.com with ESMTPSA id c5sm4715913qkl.7.2021.04.23.10.53.33
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 23 Apr 2021 10:53:35 -0700 (PDT)
-Message-ID: <cb7339fe172f31c615d824b56a709d2df6b79bb7.camel@redhat.com>
+ to:to:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=+swtazcwNbLfgM04sybYAGJfVx7ZPYjQP+dUg9WubdU=;
+ b=ccXNappB1NHCHq/1z4xtKiOP2KPvm9nArgADGvWqCeXigjmGwjaxC7BcwdvGJMIXYzvt9/
+ P/rrXzCQuzv/LhCgB8/yrAF+dnOC33163Jf5Dtbcb0kYh8MMOba8PQqsUHoCJluuVWJyNx
+ L2wNpKkaSSxQBCJSyz2/Wn3h/weWpJA=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-376-25v7JVbOPMCXCpj692otlw-1; Fri, 23 Apr 2021 14:43:27 -0400
+X-MC-Unique: 25v7JVbOPMCXCpj692otlw-1
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
+ [10.5.11.13])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id D6D191B18BC0;
+ Fri, 23 Apr 2021 18:43:25 +0000 (UTC)
+Received: from Ruby.lyude.net (ovpn-114-74.rdu2.redhat.com [10.10.114.74])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 6C6856090F;
+ Fri, 23 Apr 2021 18:43:23 +0000 (UTC)
 From: Lyude Paul <lyude@redhat.com>
-To: Thierry Reding <treding@nvidia.com>
-Date: Fri, 23 Apr 2021 13:53:33 -0400
-In-Reply-To: <YILABCrcMb5MksxD@orome.fritz.box>
-References: <20210419225523.184856-1-lyude@redhat.com>
- <20210419225523.184856-4-lyude@redhat.com> <YH4PPbY1qqF2NtrN@intel.com>
- <56a931c9f284ee6a23583eb3dc59de4afaa60e93.camel@redhat.com>
- <2e211a6623664714af1d180eadcd74aa7ef417db.camel@redhat.com>
- <17aa145e4cfa3d8852f7411067c5c37bff771b16.camel@redhat.com>
- <YILABCrcMb5MksxD@orome.fritz.box>
-Organization: Red Hat
-User-Agent: Evolution 3.38.4 (3.38.4-1.fc33)
+To: dri-devel@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
+ =?UTF-8?q?Ville=20Syrj=C3=A4l=C3=A4?= <ville.syrjala@linux.intel.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ Thomas Zimmermann <tzimmermann@suse.de>,
+ Thierry Reding <thierry.reding@gmail.com>
+Date: Fri, 23 Apr 2021 14:42:52 -0400
+Message-Id: <20210423184309.207645-1-lyude@redhat.com>
 MIME-Version: 1.0
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
 Authentication-Results: relay.mimecast.com;
  auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=lyude@redhat.com
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-X-Mailman-Approved-At: Fri, 23 Apr 2021 18:44:47 +0000
-Subject: Re: [Nouveau] [PATCH v3 03/20] drm/dp: Move i2c init to
- drm_dp_aux_init, add __must_check and fini
+Subject: [Nouveau] [PATCH v4 00/17] drm: Use new DRM printk funcs (like
+ drm_dbg_*()) in DP helpers
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -87,72 +64,96 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Neil Armstrong <narmstrong@baylibre.com>, David Airlie <airlied@linux.ie>,
- nouveau@lists.freedesktop.org,
- Guido =?ISO-8859-1?Q?G=FCnther?= <agx@sigxcpu.org>,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- Oleg Vasilev <oleg.vasilev@intel.com>, dri-devel@lists.freedesktop.org,
- Meenakshikumar Somasundaram <meenakshikumar.somasundaram@amd.com>,
- Andrzej Hajda <a.hajda@samsung.com>,
- Aurabindo Pillai <aurabindo.pillai@amd.com>,
- Thierry Reding <thierry.reding@gmail.com>,
- Laurent Pinchart <Laurent.pinchart@ideasonboard.com>,
- Sam Ravnborg <sam@ravnborg.org>,
- Ville =?ISO-8859-1?Q?Syrj=E4l=E4?= <ville.syrjala@linux.intel.com>,
- Tomi Valkeinen <tomi.valkeinen@ti.com>,
- Parshuram Thombare <pthombar@cadence.com>,
- Rodrigo Siqueira <Rodrigo.Siqueira@amd.com>,
- Michal Simek <michal.simek@xilinx.com>, amd-gfx@lists.freedesktop.org,
- Luben Tuikov <luben.tuikov@amd.com>, Ben Skeggs <bskeggs@redhat.com>,
- Swapnil Jakhade <sjakhade@cadence.com>,
- Harry Wentland <harry.wentland@amd.com>, Imre Deak <imre.deak@intel.com>,
- Jonas Karlman <jonas@kwiboo.se>, Leo Li <sunpeng.li@amd.com>,
- intel-gfx@lists.freedesktop.org,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Jani Nikula <jani.nikula@linux.intel.com>, Joe Perches <joe@perches.com>,
- Yuti Amonkar <yamonkar@cadence.com>, Maxime Ripard <mripard@kernel.org>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>, Mikita Lipski <mikita.lipski@amd.com>,
- Sean Paul <sean@poorly.run>, Navid Emamdoost <navid.emamdoost@gmail.com>,
- Jernej Skrabec <jernej.skrabec@siol.net>, Chris Park <Chris.Park@amd.com>,
- Eryk Brol <eryk.brol@amd.com>, Hyun Kwon <hyun.kwon@xilinx.com>,
- Robert Foss <robert.foss@linaro.org>, Julia Lawall <Julia.Lawall@inria.fr>,
- Rob Clark <robdclark@gmail.com>,
- Boris Brezillon <boris.brezillon@collabora.com>,
- Daniel Vetter <daniel@ffwll.ch>, Alex Deucher <alexander.deucher@amd.com>,
- Christian =?ISO-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, 2021-04-23 at 14:39 +0200, Thierry Reding wrote:
-> 
-> I'm curious: how is a DP AUX adapter reference count going to solve the
-> issue of potentially registering devices too early (i.e. before the DRM
-> is registered)?
-> 
-> Is it because registering too early could cause a reference count
-> problem if somebody get a hold of the DP AUX adapter before the parent
-> DRM device is around?
+Since it's been asked quite a few times on some of the various DP
+related patch series I've submitted to use the new DRM printk helpers,
+and it technically wasn't really trivial to do this before due to the
+lack of a consistent way to find a drm_device for an AUX channel, this
+patch series aims to address this. In this series we:
 
-Well currently the problem is that we kind of want to avoid setting up the i2c
-adapter before the DRM driver is registered with userspace, but it's not
-really possible to do that if we need the core device struct for the ddc
-adapter initialized so that tegra can call get_device() on it in
-drivers/gpu/drm/tegra/sor.c. So my thought is instead of calling get_device()
-on the ddc adapter that the AUX channel provides, why not just call it on the
-actual platform device that implements the AUX channel instead? I think this
-should work pretty nicely while still preventing the platform device for the
-AUX channel from disappearing before the SOR has disappeared.
+* (NEW! starting from V3) Make sure drm_dbg_*() and friends can handle
+  NULL drm device pointers
+* Clean-up potentially erroneous usages of drm_dp_aux_init() and
+  drm_dp_aux_register() so that actual AUX registration doesn't happen
+  until we have an associated DRM device
+* Clean-up any obvious errors in drivers we find along the way
+* Add a backpointer to the respective drm_device for an AUX channel in
+  drm_dp_aux.drm_dev, and hook it up in every driver with an AUX channel
+  across the tree
+* Add a new ratelimited print helper we'll need for converting the DP
+  helpers over to using the new DRM printk helpers
+* Fix any inconsistencies with logging in drm_dp_helper.c so we always
+  have the aux channel name printed
+* Prepare the various DP helpers so they can find the correct drm_device
+  to use for logging
+* And finally, convert all of the DP helpers over to using drm_dbg_*()
+  and drm_err().
 
+Major changes in v4:
+* Don't move i2c aux init into drm_dp_aux_init(), since I think I've
+  found a much better solution to tegra's issues:
+  https://patchwork.freedesktop.org/series/89420/
 
-> 
-> Thierry
+Lyude Paul (17):
+  drm/bridge/cdns-mhdp8546: Register DP aux channel with userspace
+  drm/nouveau/kms/nv50-: Move AUX adapter reg to connector late
+    register/early unregister
+  drm/dp: Add backpointer to drm_device in drm_dp_aux
+  drm/dp: Clarify DP AUX registration time
+  drm/dp: Pass drm_dp_aux to drm_dp_link_train_clock_recovery_delay()
+  drm/dp: Pass drm_dp_aux to drm_dp*_link_train_channel_eq_delay()
+  drm/dp: Always print aux channel name in logs
+  drm/dp_dual_mode: Pass drm_device to drm_dp_dual_mode_detect()
+  drm/dp_dual_mode: Pass drm_device to
+    drm_dp_dual_mode_set_tmds_output()
+  drm/dp_dual_mode: Pass drm_device to drm_dp_dual_mode_max_tmds_clock()
+  drm/dp_dual_mode: Pass drm_device to
+    drm_dp_dual_mode_get_tmds_output()
+  drm/dp_dual_mode: Pass drm_device to drm_lspcon_(get|set)_mode()
+  drm/dp_mst: Pass drm_dp_mst_topology_mgr to drm_dp_get_vc_payload_bw()
+  drm/print: Handle potentially NULL drm_devices in drm_dbg_*
+  drm/dp: Convert drm_dp_helper.c to using drm_err/drm_dbg_*()
+  drm/dp_dual_mode: Convert drm_dp_dual_mode_helper.c to using
+    drm_err/drm_dbg_kms()
+  drm/dp_mst: Convert drm_dp_mst_topology.c to drm_err()/drm_dbg*()
+
+ drivers/gpu/drm/amd/amdgpu/atombios_dp.c      |   6 +-
+ .../display/amdgpu_dm/amdgpu_dm_mst_types.c   |   1 +
+ .../drm/bridge/analogix/analogix-anx6345.c    |   1 +
+ .../drm/bridge/analogix/analogix-anx78xx.c    |   1 +
+ .../drm/bridge/analogix/analogix_dp_core.c    |   1 +
+ .../drm/bridge/cadence/cdns-mhdp8546-core.c   |  12 +-
+ drivers/gpu/drm/bridge/tc358767.c             |   1 +
+ drivers/gpu/drm/bridge/ti-sn65dsi86.c         |   1 +
+ drivers/gpu/drm/drm_dp_aux_dev.c              |   6 +
+ drivers/gpu/drm/drm_dp_dual_mode_helper.c     |  68 ++--
+ drivers/gpu/drm/drm_dp_helper.c               | 184 +++++----
+ drivers/gpu/drm/drm_dp_mst_topology.c         | 376 +++++++++---------
+ drivers/gpu/drm/i915/display/intel_dp_aux.c   |   1 +
+ .../drm/i915/display/intel_dp_link_training.c |   6 +-
+ drivers/gpu/drm/i915/display/intel_dp_mst.c   |   3 +-
+ drivers/gpu/drm/i915/display/intel_hdmi.c     |   7 +-
+ drivers/gpu/drm/i915/display/intel_lspcon.c   |  17 +-
+ drivers/gpu/drm/msm/dp/dp_ctrl.c              |   6 +-
+ drivers/gpu/drm/msm/edp/edp.h                 |   3 +-
+ drivers/gpu/drm/msm/edp/edp_aux.c             |   5 +-
+ drivers/gpu/drm/msm/edp/edp_ctrl.c            |   8 +-
+ drivers/gpu/drm/nouveau/nouveau_connector.c   |  26 +-
+ drivers/gpu/drm/radeon/atombios_dp.c          |   5 +-
+ drivers/gpu/drm/tegra/dpaux.c                 |   1 +
+ drivers/gpu/drm/xlnx/zynqmp_dp.c              |   5 +-
+ include/drm/drm_dp_dual_mode_helper.h         |  14 +-
+ include/drm/drm_dp_helper.h                   |  19 +-
+ include/drm/drm_dp_mst_helper.h               |   3 +-
+ include/drm/drm_print.h                       |  20 +-
+ 29 files changed, 453 insertions(+), 354 deletions(-)
 
 -- 
-Cheers,
- Lyude Paul (she/her)
- Software Engineer at Red Hat
+2.30.2
 
 _______________________________________________
 Nouveau mailing list
