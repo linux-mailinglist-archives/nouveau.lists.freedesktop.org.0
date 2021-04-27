@@ -1,55 +1,57 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9C1E336BCAC
-	for <lists+nouveau@lfdr.de>; Tue, 27 Apr 2021 02:33:19 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id A839036C199
+	for <lists+nouveau@lfdr.de>; Tue, 27 Apr 2021 11:20:48 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1E7056E8D1;
-	Tue, 27 Apr 2021 00:33:14 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id ED1226E936;
+	Tue, 27 Apr 2021 09:20:31 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E28B96E8BF;
- Tue, 27 Apr 2021 00:33:12 +0000 (UTC)
-Received: by mail-ej1-x62a.google.com with SMTP id n21so10874222eji.1;
- Mon, 26 Apr 2021 17:33:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=Cf3TJ97HTdCZPoAJ80mQPVhpWi6wBWhAxRGu7SEQjM4=;
- b=IaH+32eyyXKSwgldn4Qc1XdBBjn9AuLmCnkllByIPJuluHtXdDpyFLgx12zkSs/ILp
- UwxvKwN2TPi5glM3+/f6XoiMeci4JbU080FROUfujqYnBQM8P7CJrISBkIprUm0tPM/h
- RgbQv+yPJ0kvF9bd66lWoigaJ4A+C8N5HB3XI+ZqTrCsFZ6DXtNOZz935GDKCziqyzRn
- ANU5nz1Yr0j8dR1w3RVA1pyTDOcPrI879QAkRLxp4p5W1Q0X+E/P0vYP6dv/1nWrWhih
- /magqQ6hrLlELMngiHN+e6qEvRY6D63PwoejGrh4JJ4KiRwPGe717Ar2QebvUfXXFXIn
- Tl+g==
+Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
+ [IPv6:2a00:1450:4864:20::42f])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 24A9E6E932
+ for <nouveau@lists.freedesktop.org>; Tue, 27 Apr 2021 09:20:30 +0000 (UTC)
+Received: by mail-wr1-x42f.google.com with SMTP id j5so57738762wrn.4
+ for <nouveau@lists.freedesktop.org>; Tue, 27 Apr 2021 02:20:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
+ h=from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding;
+ bh=KOCIo0GxcuBFJ7MAFxsDsYBoZyOhVlSKHbo+qwITV5Q=;
+ b=eqYcy5pEgjEbNBPBox4dInLBHfCo5j5j+wLOf5FWeDDHDm35ZfHa+F5PzHefmdBR6Y
+ mQW4c1LZ9C340D8p4VatAiPiLY3FHujh7UGENv0MV6WyIJwZcmvgTMPp/O/XIZZvCLfc
+ tqpPiLk+lTMEF0Qfwn2RGiopa0yyp2/jXUk1s=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=Cf3TJ97HTdCZPoAJ80mQPVhpWi6wBWhAxRGu7SEQjM4=;
- b=XxqZDZ/zgj4Kn5C2egrWTHfdykWUpvp8Hvdz18Y+iL0oonuZljJirb/7OXMBVEFNGN
- Z+88H8HzMnYM/iKbnmBDtuLCcFmtZB8+5JCKrxDnyb7pMGOSrUdJC7gJjMdUJkLj5sem
- DXhCaQSz5qS7hBAuStMrZyNRtKFye6GKwjF3qlaoTs/Lgv07Ot6P6xwbnFKzs+qujlaT
- WZTdnzMVHoz+ItVVjlpzSFHTHfOEWyZV/pnimQNintXdsZ3pRG1koQT0XA9XYOwb4MW1
- aPgqjmdfOK2Vy3Az/y8vvGalunflD9hK/73CgL1XhsadoH/TCNS5xg0fEhEvRRVsVCeF
- hV6A==
-X-Gm-Message-State: AOAM530v9qvgGaWyc5uheZ4rsYfI0ko4XIVxElZttFvj1b5waZBLO72v
- 1YvauYz+uLb+FWCWXjpiculxkBvd6AooAQJZIyg=
-X-Google-Smtp-Source: ABdhPJyzt/jeZbwQY12OFBLjpNWM8wFblxT1QEVj/Pv+cKHUMAZBORD1+QoD+F59kc2J1bEIOpu3VnsIA0cy0fPY/Cc=
-X-Received: by 2002:a17:906:f42:: with SMTP id
- h2mr21573016ejj.317.1619483591455; 
- Mon, 26 Apr 2021 17:33:11 -0700 (PDT)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=KOCIo0GxcuBFJ7MAFxsDsYBoZyOhVlSKHbo+qwITV5Q=;
+ b=M7MkZli9kJ/FrX2BUyKzCWLTuuK8OhOiIdgQZsTuElc+fCjTIvXrWtbDPYMvXIRA48
+ KTjYn4AFF555MD1FkjPM2UV/94ovA2noLZ/0AppdQti2Xz7a9p4MvAkmmqMl7EOMz36R
+ hFZ/GAXabdWQWi3+q/WLsVYM/Xv2/CqZsSOMZCjOm4yvAtgyuT06GZ+AruVg3MdCcq8r
+ 89U8sVuapUmgn6f469q/A1fDspTx+hTqx1z4ht2jdxZe83ou26OyG+PvWHae9Ry0soTL
+ EkL+NmTbKUepATZAuPUQkK6Z4EF+71R5rstPpfjU54jW49pA3uMi/0sy69Pe3/yquoD/
+ K64A==
+X-Gm-Message-State: AOAM530IXdbOuKT8Vc25iZ2wOKeVuvzOiChgECYUtO9dqW9vDqYbXB3C
+ imkfsBETsVC1YIl8RUbPCeI5dw==
+X-Google-Smtp-Source: ABdhPJxBaxOImxswpfiXYoCXOXsQQQFm/5Ib8J6++xeSyqcKN0bxddZpkjc1KLyL1GncdKpYFf7B5A==
+X-Received: by 2002:adf:e60d:: with SMTP id p13mr18428250wrm.326.1619515228862; 
+ Tue, 27 Apr 2021 02:20:28 -0700 (PDT)
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
+ by smtp.gmail.com with ESMTPSA id r24sm1939816wmh.8.2021.04.27.02.20.28
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 27 Apr 2021 02:20:28 -0700 (PDT)
+From: Daniel Vetter <daniel.vetter@ffwll.ch>
+To: DRI Development <dri-devel@lists.freedesktop.org>
+Date: Tue, 27 Apr 2021 11:20:16 +0200
+Message-Id: <20210427092018.832258-6-daniel.vetter@ffwll.ch>
+X-Mailer: git-send-email 2.31.0
+In-Reply-To: <20210427092018.832258-1-daniel.vetter@ffwll.ch>
+References: <20210427092018.832258-1-daniel.vetter@ffwll.ch>
 MIME-Version: 1.0
-References: <20210423184309.207645-1-lyude@redhat.com>
-In-Reply-To: <20210423184309.207645-1-lyude@redhat.com>
-From: Dave Airlie <airlied@gmail.com>
-Date: Tue, 27 Apr 2021 10:32:59 +1000
-Message-ID: <CAPM=9tyXBLxhg4htyh6pWgPFg5+WmH-u5+LAi3kx2kYE9mJwuw@mail.gmail.com>
-To: Lyude Paul <lyude@redhat.com>
-Subject: Re: [Nouveau] [PATCH v4 00/17] drm: Use new DRM printk funcs (like
- drm_dbg_*()) in DP helpers
+Subject: [Nouveau] [PATCH 6/8] drm/nouveau: Don't set allow_fb_modifiers
+ explicitly
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,57 +63,54 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: dri-devel <dri-devel@lists.freedesktop.org>,
- nouveau <nouveau@lists.freedesktop.org>,
+Cc: Pekka Paalanen <pekka.paalanen@collabora.com>,
  Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
- Jani Nikula <jani.nikula@linux.intel.com>,
- Thierry Reding <thierry.reding@gmail.com>,
- amd-gfx mailing list <amd-gfx@lists.freedesktop.org>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>,
- =?UTF-8?B?VmlsbGUgU3lyasOkbMOk?= <ville.syrjala@linux.intel.com>
+ stable@vger.kernel.org, Ben Skeggs <bskeggs@redhat.com>,
+ nouveau@lists.freedesktop.org, Daniel Vetter <daniel.vetter@intel.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Sat, 24 Apr 2021 at 04:43, Lyude Paul <lyude@redhat.com> wrote:
->
-> Since it's been asked quite a few times on some of the various DP
-> related patch series I've submitted to use the new DRM printk helpers,
-> and it technically wasn't really trivial to do this before due to the
-> lack of a consistent way to find a drm_device for an AUX channel, this
-> patch series aims to address this. In this series we:
->
-> * (NEW! starting from V3) Make sure drm_dbg_*() and friends can handle
->   NULL drm device pointers
-> * Clean-up potentially erroneous usages of drm_dp_aux_init() and
->   drm_dp_aux_register() so that actual AUX registration doesn't happen
->   until we have an associated DRM device
-> * Clean-up any obvious errors in drivers we find along the way
-> * Add a backpointer to the respective drm_device for an AUX channel in
->   drm_dp_aux.drm_dev, and hook it up in every driver with an AUX channel
->   across the tree
-> * Add a new ratelimited print helper we'll need for converting the DP
->   helpers over to using the new DRM printk helpers
-> * Fix any inconsistencies with logging in drm_dp_helper.c so we always
->   have the aux channel name printed
-> * Prepare the various DP helpers so they can find the correct drm_device
->   to use for logging
-> * And finally, convert all of the DP helpers over to using drm_dbg_*()
->   and drm_err().
->
-> Major changes in v4:
-> * Don't move i2c aux init into drm_dp_aux_init(), since I think I've
->   found a much better solution to tegra's issues:
->   https://patchwork.freedesktop.org/series/89420/
+Since
 
-I've given this a general once over, seems like a good plan and since
-it's mostly mechanical.
+commit 890880ddfdbe256083170866e49c87618b706ac7
+Author: Paul Kocialkowski <paul.kocialkowski@bootlin.com>
+Date:   Fri Jan 4 09:56:10 2019 +0100
 
-for the series:
-Reviewed-by: Dave Airlie <airlied@redhat.com>
+    drm: Auto-set allow_fb_modifiers when given modifiers at plane init
 
-Dave.
+this is done automatically as part of plane init, if drivers set the
+modifier list correctly. Which is the case here.
+
+Note that this fixes an inconsistency: We've set the cap everywhere,
+but only nv50+ supports modifiers. Hence cc stable, but not further
+back then the patch from Paul.
+
+Cc: stable@vger.kernel.org # v5.1 +
+Cc: Pekka Paalanen <pekka.paalanen@collabora.com>
+Signed-off-by: Daniel Vetter <daniel.vetter@intel.com>
+Cc: Ben Skeggs <bskeggs@redhat.com>
+Cc: nouveau@lists.freedesktop.org
+---
+ drivers/gpu/drm/nouveau/nouveau_display.c | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/drivers/gpu/drm/nouveau/nouveau_display.c b/drivers/gpu/drm/nouveau/nouveau_display.c
+index 14101bd2a0ff..929de41c281f 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_display.c
++++ b/drivers/gpu/drm/nouveau/nouveau_display.c
+@@ -697,7 +697,6 @@ nouveau_display_create(struct drm_device *dev)
+ 
+ 	dev->mode_config.preferred_depth = 24;
+ 	dev->mode_config.prefer_shadow = 1;
+-	dev->mode_config.allow_fb_modifiers = true;
+ 
+ 	if (drm->client.device.info.chipset < 0x11)
+ 		dev->mode_config.async_page_flip = false;
+-- 
+2.31.0
+
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
