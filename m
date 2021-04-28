@@ -1,57 +1,70 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id A839036C199
-	for <lists+nouveau@lfdr.de>; Tue, 27 Apr 2021 11:20:48 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id E240C36D3CE
+	for <lists+nouveau@lfdr.de>; Wed, 28 Apr 2021 10:19:35 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id ED1226E936;
-	Tue, 27 Apr 2021 09:20:31 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 490886EAC5;
+	Wed, 28 Apr 2021 08:19:34 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
- [IPv6:2a00:1450:4864:20::42f])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 24A9E6E932
- for <nouveau@lists.freedesktop.org>; Tue, 27 Apr 2021 09:20:30 +0000 (UTC)
-Received: by mail-wr1-x42f.google.com with SMTP id j5so57738762wrn.4
- for <nouveau@lists.freedesktop.org>; Tue, 27 Apr 2021 02:20:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=KOCIo0GxcuBFJ7MAFxsDsYBoZyOhVlSKHbo+qwITV5Q=;
- b=eqYcy5pEgjEbNBPBox4dInLBHfCo5j5j+wLOf5FWeDDHDm35ZfHa+F5PzHefmdBR6Y
- mQW4c1LZ9C340D8p4VatAiPiLY3FHujh7UGENv0MV6WyIJwZcmvgTMPp/O/XIZZvCLfc
- tqpPiLk+lTMEF0Qfwn2RGiopa0yyp2/jXUk1s=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=KOCIo0GxcuBFJ7MAFxsDsYBoZyOhVlSKHbo+qwITV5Q=;
- b=M7MkZli9kJ/FrX2BUyKzCWLTuuK8OhOiIdgQZsTuElc+fCjTIvXrWtbDPYMvXIRA48
- KTjYn4AFF555MD1FkjPM2UV/94ovA2noLZ/0AppdQti2Xz7a9p4MvAkmmqMl7EOMz36R
- hFZ/GAXabdWQWi3+q/WLsVYM/Xv2/CqZsSOMZCjOm4yvAtgyuT06GZ+AruVg3MdCcq8r
- 89U8sVuapUmgn6f469q/A1fDspTx+hTqx1z4ht2jdxZe83ou26OyG+PvWHae9Ry0soTL
- EkL+NmTbKUepATZAuPUQkK6Z4EF+71R5rstPpfjU54jW49pA3uMi/0sy69Pe3/yquoD/
- K64A==
-X-Gm-Message-State: AOAM530IXdbOuKT8Vc25iZ2wOKeVuvzOiChgECYUtO9dqW9vDqYbXB3C
- imkfsBETsVC1YIl8RUbPCeI5dw==
-X-Google-Smtp-Source: ABdhPJxBaxOImxswpfiXYoCXOXsQQQFm/5Ib8J6++xeSyqcKN0bxddZpkjc1KLyL1GncdKpYFf7B5A==
-X-Received: by 2002:adf:e60d:: with SMTP id p13mr18428250wrm.326.1619515228862; 
- Tue, 27 Apr 2021 02:20:28 -0700 (PDT)
-Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
- by smtp.gmail.com with ESMTPSA id r24sm1939816wmh.8.2021.04.27.02.20.28
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 27 Apr 2021 02:20:28 -0700 (PDT)
-From: Daniel Vetter <daniel.vetter@ffwll.ch>
-To: DRI Development <dri-devel@lists.freedesktop.org>
-Date: Tue, 27 Apr 2021 11:20:16 +0200
-Message-Id: <20210427092018.832258-6-daniel.vetter@ffwll.ch>
-X-Mailer: git-send-email 2.31.0
-In-Reply-To: <20210427092018.832258-1-daniel.vetter@ffwll.ch>
-References: <20210427092018.832258-1-daniel.vetter@ffwll.ch>
+X-Greylist: delayed 1167 seconds by postgrey-1.36 at gabe;
+ Wed, 28 Apr 2021 08:19:32 UTC
+Received: from mx0b-00069f02.pphosted.com (mx0b-00069f02.pphosted.com
+ [205.220.177.32])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 54BC46EAC5
+ for <nouveau@lists.freedesktop.org>; Wed, 28 Apr 2021 08:19:31 +0000 (UTC)
+Received: from pps.filterd (m0246630.ppops.net [127.0.0.1])
+ by mx0b-00069f02.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
+ 13S7wGNt006396; Wed, 28 Apr 2021 08:00:03 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
+ h=date : from : to : cc
+ : subject : message-id : references : mime-version : content-type :
+ in-reply-to; s=corp-2020-01-29;
+ bh=yKiGWIP4/+YH6mYHG15FR8yqppTY5o48IPAwFozwQLs=;
+ b=ybnufCtws/FXa7tn30Bg8oaRUzlBjPtJXTteV1WcjIbdqiJBaFiHJe7PX1rQpq5viVSg
+ 35eP9/ed+QAcEmk52LzPHqJvc38NjYZ9jqnmkXyiSGwQ3w3C/eSwwUTEZsgYr7OSTTv1
+ 0qa3BRJ47t4OPQxM3byiUDoX2Sb9etGFR9fIxna7hV2OxaKEDCd6zSL39bK6XNXaEpnQ
+ mZNOFw1PJTPbeVlnBpyoqTYFrbnukwVLv4uXjB7IATG5NOBGutzrZTWUMlvWojAlW0T9
+ LpwmGPAt7m1cvF645360ROTMCjDJ+GCyiIccATpdLnU+b4fI4krSD/qqe7+SsBlvk3Ck hA== 
+Received: from oracle.com (aserp3020.oracle.com [141.146.126.70])
+ by mx0b-00069f02.pphosted.com with ESMTP id 385p7j92yt-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 28 Apr 2021 08:00:03 +0000
+Received: from aserp3020.oracle.com (aserp3020.oracle.com [127.0.0.1])
+ by pps.podrdrct (8.16.0.36/8.16.0.36) with SMTP id 13S802l4003776;
+ Wed, 28 Apr 2021 08:00:02 GMT
+Received: from pps.reinject (localhost [127.0.0.1])
+ by aserp3020.oracle.com with ESMTP id 384b582chq-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 28 Apr 2021 08:00:02 +0000
+Received: from aserp3020.oracle.com (aserp3020.oracle.com [127.0.0.1])
+ by pps.reinject (8.16.0.36/8.16.0.36) with SMTP id 13S8010l003238;
+ Wed, 28 Apr 2021 08:00:01 GMT
+Received: from userv0121.oracle.com (userv0121.oracle.com [156.151.31.72])
+ by aserp3020.oracle.com with ESMTP id 384b582c6q-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 28 Apr 2021 08:00:00 +0000
+Received: from abhmp0019.oracle.com (abhmp0019.oracle.com [141.146.116.25])
+ by userv0121.oracle.com (8.14.4/8.13.8) with ESMTP id 13S7xhn9008520;
+ Wed, 28 Apr 2021 07:59:43 GMT
+Received: from kadam (/102.36.221.92) by default (Oracle Beehive Gateway v4.0)
+ with ESMTP ; Wed, 28 Apr 2021 00:59:43 -0700
+Date: Wed, 28 Apr 2021 10:59:37 +0300
+From: Dan Carpenter <dan.carpenter@oracle.com>
+To: Karol Herbst <kherbst@redhat.com>
+Message-ID: <20210428075937.GZ1959@kadam>
+References: <YIAneTPoxr5n7485@mwanda>
+ <CACO55tvrienoNTXmVeHnXHOEAMB0AsJdu-BexuXhe-8gMohhSg@mail.gmail.com>
 MIME-Version: 1.0
-Subject: [Nouveau] [PATCH 6/8] drm/nouveau: Don't set allow_fb_modifiers
- explicitly
+Content-Disposition: inline
+In-Reply-To: <CACO55tvrienoNTXmVeHnXHOEAMB0AsJdu-BexuXhe-8gMohhSg@mail.gmail.com>
+User-Agent: Mutt/1.9.4 (2018-02-28)
+X-Proofpoint-GUID: mhF1oRydBq6j9HDsPY4CHyBWiRuZkrT1
+X-Proofpoint-ORIG-GUID: mhF1oRydBq6j9HDsPY4CHyBWiRuZkrT1
+Subject: Re: [Nouveau] [bug report] drm/nouveau/hwmon: Remove old code,
+ add .write/.read operations
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,53 +76,64 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Pekka Paalanen <pekka.paalanen@collabora.com>,
- Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
- stable@vger.kernel.org, Ben Skeggs <bskeggs@redhat.com>,
- nouveau@lists.freedesktop.org, Daniel Vetter <daniel.vetter@intel.com>
+Cc: nouveau <nouveau@lists.freedesktop.org>, osalvador.vilardaga@gmail.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Since
+On Wed, Apr 21, 2021 at 06:04:45PM +0200, Karol Herbst wrote:
+> On Wed, Apr 21, 2021 at 3:57 PM Dan Carpenter <dan.carpenter@oracle.com> wrote:
+> >
+> > Hello Oscar Salvador,
+> >
+> > The patch bfb96e4c344e: "drm/nouveau/hwmon: Remove old code, add
+> > .write/.read operations" from May 18, 2017, leads to the following
+> > static checker warning:
+> >
+> >     drivers/gpu/drm/nouveau/nouveau_hwmon.c:507 nouveau_in_read()
+> >     warn: check sign expansion for '-19'
+> >     drivers/gpu/drm/nouveau/nouveau_hwmon.c:510 nouveau_in_read()
+> >     warn: check sign expansion for '-19'
+> >
+> > drivers/gpu/drm/nouveau/nouveau_hwmon.c
+> >    488  static int
+> >    489  nouveau_in_read(struct device *dev, u32 attr, int channel, long *val)
+> >    490  {
+> >    491          struct drm_device *drm_dev = dev_get_drvdata(dev);
+> >    492          struct nouveau_drm *drm = nouveau_drm(drm_dev);
+> >    493          struct nvkm_volt *volt = nvxx_volt(&drm->client.device);
+> >    494          int ret;
+> >    495
+> >    496          if (!volt)
+> >    497                  return -EOPNOTSUPP;
+> >    498
+> >    499          switch (attr) {
+> >    500          case hwmon_in_input:
+> >    501                  if (drm_dev->switch_power_state != DRM_SWITCH_POWER_ON)
+> >    502                          return -EINVAL;
+> >    503                  ret = nvkm_volt_get(volt);
+> >    504                  *val = ret < 0 ? ret : (ret / 1000);
+> >    505                  break;
+> >    506          case hwmon_in_min:
+> >    507                  *val = volt->min_uv > 0 ? (volt->min_uv / 1000) : -ENODEV;
+> >
+> > This is trying to set "*val = -ENODEV" but because "volt->min_uv" is
+> > unsigned int it actually sets it to "*val = (unsigned int)-ENODEV".
+> >
+> > It's weird to me that this code doesn't return -ENODEV instead of
+> > setting *val to it.
+> >
+> 
+> ohh.. that might actually be a left over from the conversion we've
+> done in the past. Thanks for pointing it out. Do you want to write the
+> patch as well?
 
-commit 890880ddfdbe256083170866e49c87618b706ac7
-Author: Paul Kocialkowski <paul.kocialkowski@bootlin.com>
-Date:   Fri Jan 4 09:56:10 2019 +0100
+Sorry the delayed response.  I'm still not sure if this should return
+-ENODEV or not.  Could you please fix it and give me a reported-by tag?
 
-    drm: Auto-set allow_fb_modifiers when given modifiers at plane init
-
-this is done automatically as part of plane init, if drivers set the
-modifier list correctly. Which is the case here.
-
-Note that this fixes an inconsistency: We've set the cap everywhere,
-but only nv50+ supports modifiers. Hence cc stable, but not further
-back then the patch from Paul.
-
-Cc: stable@vger.kernel.org # v5.1 +
-Cc: Pekka Paalanen <pekka.paalanen@collabora.com>
-Signed-off-by: Daniel Vetter <daniel.vetter@intel.com>
-Cc: Ben Skeggs <bskeggs@redhat.com>
-Cc: nouveau@lists.freedesktop.org
----
- drivers/gpu/drm/nouveau/nouveau_display.c | 1 -
- 1 file changed, 1 deletion(-)
-
-diff --git a/drivers/gpu/drm/nouveau/nouveau_display.c b/drivers/gpu/drm/nouveau/nouveau_display.c
-index 14101bd2a0ff..929de41c281f 100644
---- a/drivers/gpu/drm/nouveau/nouveau_display.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_display.c
-@@ -697,7 +697,6 @@ nouveau_display_create(struct drm_device *dev)
- 
- 	dev->mode_config.preferred_depth = 24;
- 	dev->mode_config.prefer_shadow = 1;
--	dev->mode_config.allow_fb_modifiers = true;
- 
- 	if (drm->client.device.info.chipset < 0x11)
- 		dev->mode_config.async_page_flip = false;
--- 
-2.31.0
+regards,
+dan carpenter
 
 _______________________________________________
 Nouveau mailing list
