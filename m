@@ -2,66 +2,109 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id E1180371E89
-	for <lists+nouveau@lfdr.de>; Mon,  3 May 2021 19:26:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0A6C6371E8B
+	for <lists+nouveau@lfdr.de>; Mon,  3 May 2021 19:26:57 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 52EA76E9E8;
-	Mon,  3 May 2021 17:26:53 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 791676E9E9;
+	Mon,  3 May 2021 17:26:54 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pg1-x52e.google.com (mail-pg1-x52e.google.com
- [IPv6:2607:f8b0:4864:20::52e])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 93A5E6E12C
- for <nouveau@lists.freedesktop.org>; Mon,  3 May 2021 14:32:30 +0000 (UTC)
-Received: by mail-pg1-x52e.google.com with SMTP id y30so3757555pgl.7
- for <nouveau@lists.freedesktop.org>; Mon, 03 May 2021 07:32:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=ELcNibbwxopbe4wnzShPTb7xRMLVvYpqQ8un28QQp9U=;
- b=nOyrfh2thpmQagEkzKEHJkMTgRy+3FJJdT9Oo6MZndwooAl8msGQ2IZHFMeS6aJ6Md
- +OeRGM111zl+0t7XmNgYC8WpP2ka9OwZM9VN//prTwlXpUXb+Muztthx/dt4YfUeTqwD
- ene0+k2RSvchnHpwNfAnGfkLV6l7GmkYIbRvE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=ELcNibbwxopbe4wnzShPTb7xRMLVvYpqQ8un28QQp9U=;
- b=hHus2rVNfmQtubQk1YsqxA2xJWVExivtJumA3qZsqhJggpQVpyq/xx10FMuDFzDPcJ
- DvZxybqVsqcspJ95PvOoHWrE4+pgNz55N3+uWuf5krVKIL4vrIezgzjiCmFN6zZVvJVe
- IbE5pFuPNDeokrU9ak/k/LC2tvHDIUX5gvp5XNUwZ6QKuxjIcAS89/KRESPcM7JHtqlv
- okC92lgFgmGlUk8MPIb20jBXI/th2FwncAAGX9R79wQs/Dfr9BFcVvae3CThapDiM0Fk
- lF5+2OO+fOj42Or6TruR/S/mcWOgRWyccZqIg0uTfuiAAOtbm6kYmwEXp5udo1G9MbTZ
- J1HQ==
-X-Gm-Message-State: AOAM5308q1NlCNkwPpHpzI9Sk9Ecg1v77uO2KneG+lTfDcH20X84Uyc/
- m7xxkKruQ9hmX8qCkCkAW4uJqo15/oSziA==
-X-Google-Smtp-Source: ABdhPJzcaHs6VpJy790N8Y3tQOyrBFMjceXJNOkWb3hfU3slxLpKrQZ2hJDQGyHXrnNpkYkYy3Na5A==
-X-Received: by 2002:aa7:9aa2:0:b029:28e:af64:ec59 with SMTP id
- x2-20020aa79aa20000b029028eaf64ec59mr3067529pfi.0.1620052349790; 
- Mon, 03 May 2021 07:32:29 -0700 (PDT)
-Received: from mail-pf1-f182.google.com (mail-pf1-f182.google.com.
- [209.85.210.182])
- by smtp.gmail.com with ESMTPSA id a1sm3439226pfi.22.2021.05.03.07.32.29
- for <nouveau@lists.freedesktop.org>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 03 May 2021 07:32:29 -0700 (PDT)
-Received: by mail-pf1-f182.google.com with SMTP id h11so4354369pfn.0
- for <nouveau@lists.freedesktop.org>; Mon, 03 May 2021 07:32:29 -0700 (PDT)
-X-Received: by 2002:a05:6e02:f4e:: with SMTP id
- y14mr3397094ilj.18.1620051971892; 
- Mon, 03 May 2021 07:26:11 -0700 (PDT)
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com
+ (mail-bn7nam10on2060.outbound.protection.outlook.com [40.107.92.60])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5D29F6E9E4;
+ Mon,  3 May 2021 17:21:40 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=EUeFoY4rPpfd9X6rh1KAQAzU+ClOtpUBSLybGj0jd/yGzKQ9WKmWk1abDzAEjAV1olHMsQXix+Rudrn65lYUt6WJA1dyAbzDBf5+tQ//v0HFegfkOGvVpJ25Nk7p/2aLih7J3ZYMoN7KKaq+lNZlgTik1pB3mP9DUUcG53QnjOEZ/RXPXi8pJRwmTyW6rFQPPgnietkdkYq+o8QlCWNtAdRrNAWhBgHR6gC7/gMYGxbe4Qs3csg6+m9AWwMmwGMW4yMFpejTCutwLmDHhcCd+bZRd6UhgLX8y0rqWm4VMtpEwwY1HPTUqYeJFnefXyQhkIQA4guL+DboMqlht/wvEA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=JNFjYkSKS4gZ+J5giPa61NpDQ8wqqbRifQ3pk+vPeKI=;
+ b=Q6FtrdEs8e7+CeJvl3Ce4BnD1jQay3eavug7kc2C8hxEeKrL3B+uaeLO5giw6Ra510eDbotq9stwvj6P0r/lXAAgQKaMrROFx3M8w1N2h/iTsfkiTYb2Lnalld/tN3//pjyxgW1zAlbP3/TIRHyJIPRI6OJT9745x8OMkLUGToPljtrqFSlxxz35TBWKcNTm+np1YGxebHajgg8Zr10pKK3U0d73FyIYdkgcEb0E2VraB86imyfGtNk6KKtZBDdFWZsVlR0Rojn3u4DOJ8jLqTqa/aBTH3uF7ulNomXYaUybb/KXjNqNIjFjiheuKF7viHN28MA61MqkD9EwilOEjA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=JNFjYkSKS4gZ+J5giPa61NpDQ8wqqbRifQ3pk+vPeKI=;
+ b=RVLVhbYqWBkAxqmW5TwHZyqEyFW9UNTsDo9i4JTG5LW54yKSRBQ8VP1al2Z72/DLSCJYW7y0gsmg1ppCR/eqp+QgQ/m547Evx4OxGQEpxC7h/mx6ixIlRovr9w3KcJm5/86vHPoEYf0BhpTl16H2RpO97uwb1cqo74y+AF1KZpY=
+Authentication-Results: lists.freedesktop.org; dkim=none (message not signed)
+ header.d=none; lists.freedesktop.org;
+ dmarc=none action=none header.from=amd.com;
+Received: from BL0PR12MB4676.namprd12.prod.outlook.com (2603:10b6:207:19::30)
+ by BL0PR12MB5010.namprd12.prod.outlook.com (2603:10b6:208:17c::13)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4087.26; Mon, 3 May
+ 2021 17:21:38 +0000
+Received: from BL0PR12MB4676.namprd12.prod.outlook.com
+ ([fe80::50c7:783f:720a:239c]) by BL0PR12MB4676.namprd12.prod.outlook.com
+ ([fe80::50c7:783f:720a:239c%5]) with mapi id 15.20.4087.040; Mon, 3 May 2021
+ 17:21:38 +0000
+From: Nikola Cornij <nikola.cornij@amd.com>
+To: amd-gfx@lists.freedesktop.org
+Date: Mon,  3 May 2021 13:21:09 -0400
+Message-Id: <20210503172109.22877-2-nikola.cornij@amd.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20210503172109.22877-1-nikola.cornij@amd.com>
+References: <20210503172109.22877-1-nikola.cornij@amd.com>
+X-Originating-IP: [165.204.55.250]
+X-ClientProxiedBy: YT1PR01CA0069.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b01:2d::8) To BL0PR12MB4676.namprd12.prod.outlook.com
+ (2603:10b6:207:19::30)
 MIME-Version: 1.0
-References: <20210422081508.3942748-1-tientzu@chromium.org>
- <20210422081508.3942748-15-tientzu@chromium.org>
- <70b895c2-4a39-bbbd-a719-5c8b6b922026@arm.com>
-In-Reply-To: <70b895c2-4a39-bbbd-a719-5c8b6b922026@arm.com>
-From: Claire Chang <tientzu@chromium.org>
-Date: Mon, 3 May 2021 22:26:00 +0800
-X-Gmail-Original-Message-ID: <CALiNf28cc5T-cMZxNPZnrTQvqu2Ge_MmZj-teN4mE_-E-6_6XQ@mail.gmail.com>
-Message-ID: <CALiNf28cc5T-cMZxNPZnrTQvqu2Ge_MmZj-teN4mE_-E-6_6XQ@mail.gmail.com>
-To: Robin Murphy <robin.murphy@arm.com>
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from ubuntu.localdomain (165.204.55.250) by
+ YT1PR01CA0069.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2d::8) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.4087.38 via Frontend Transport; Mon, 3 May 2021 17:21:36 +0000
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: d66e91ab-5052-42e8-3ede-08d90e57e895
+X-MS-TrafficTypeDiagnostic: BL0PR12MB5010:
+X-MS-Exchange-Transport-Forked: True
+X-Microsoft-Antispam-PRVS: <BL0PR12MB5010C7BEE3BD3499FCD8B2C4EE5B9@BL0PR12MB5010.namprd12.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:1751;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: uRJc7sm8F+iI4VGzVUkzpmovEU7QZc5CVaJ+3LX3ExwcRoQRygOymeVGApUEZ4Q+9W//ur4QDwN1Lub3Q51HPTW6Yaz7A7E55sKDApoTD87l3dVTUilaJcJ7iBc8fr8huFmYwlqCxrwcOmVrp2qBiB02CmRQTtsWECqbIGFEs29CyiyfsbKwlEA3EGd+tnC/eu+LZjStjSxL5CKeT5KqnWiFWNV0dKDuA2XJtgXY5dAtZDw0h3rF+sC4c5ih97YXC5H22Nl7H3PtKMvJ878s+4tO7wJssTvfs21SnbI2g0mUlnRWlDlirrB4ZC2e2MYDLSj9/eqcxXh/IBn0kYtjPEm0sIRLwOE2mt1mKQFLuqHgnuALdqyTmsGrwYdSwoV/bweWrjlw3O7hoSzTf7vd6o0puV6Wp6AbPYR8mXXy7/wpthlizGD5QgVL9kFjew84QDb4Nf+a0SWmOKBAE1Rq2Po1kq+/mJqax/TtYiqtUue8mrgxMmPXFJt3H5YbA2FJzA+jzIosa4Mv/0II9Ei3yVapvRAVptO8Xswcz2xz0PDU5qnfXlsM3HWIEWVmjsQy+2eG2PVSiQwUKOrsibGqDK+hWzjoyFX4bce0iHYQ/+jQVhKHDLMnRrDl3ZQirt0L2Mtb5S4VGGoi0xpzW/dQA6/e98xillcHX6wPUJTd+3E=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:BL0PR12MB4676.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(4636009)(39860400002)(136003)(376002)(396003)(366004)(346002)(316002)(2906002)(6506007)(44832011)(8936002)(83380400001)(6486002)(36756003)(38350700002)(38100700002)(6512007)(86362001)(1076003)(478600001)(4326008)(6666004)(54906003)(8676002)(66556008)(5660300002)(2616005)(66476007)(186003)(16526019)(26005)(6916009)(66946007)(7416002)(52116002)(956004);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData: =?us-ascii?Q?zsP7fwcK/nUovNg42CsBhiqHWWkq3TP5E/voEiMkbmK+QbOKJo/TddSDlH2c?=
+ =?us-ascii?Q?vsPGRyMXvqPIcuwEp+RRbe10d2JurVZgHaO2b5qsTTT3qQNFplVdJUKkStJs?=
+ =?us-ascii?Q?ElW145N+9wuGBFiFomGWiUB+HhKC6EQU7Pf5ylSGA73xYFng3rl7xtfc1ptT?=
+ =?us-ascii?Q?QLSeqk5H605z/d9nFGCYPgUJ6Vh9p4iDhYmotfbsiMnii2H+gheOsE3j69L5?=
+ =?us-ascii?Q?PTmEZRbU3JreciMXIqolwEnqRP/oKxTAND3CkGoahTUE2Iweqkg69Jo30RxQ?=
+ =?us-ascii?Q?S+RMAjI026qLElejcz3UbD/+67uySGoQ16rndWqDfDAgDXSSs/OX7J9sKkrg?=
+ =?us-ascii?Q?JZSpwX96WTkyJ0ORsALSWkY80N1f8paengyJODHltsAt3tDBE4OLKVt25Iyg?=
+ =?us-ascii?Q?7Qq9kkhf+XmWho5Q+bU0H91DbhdTMJCIT9nnRY/YUHMvHTxyyR4zrDRv8ZPx?=
+ =?us-ascii?Q?MgDJGtNyd8gfR5+oJMbhA6+GeV+/TgSxDQADPHdO1JSsnjwzQjzeg/aYNamx?=
+ =?us-ascii?Q?ZJNZcbj/9LXpd4yAr23eU+ZxKbCwGimvKlvB4PwSi3tFk6EK2lP5UQ/IX8AO?=
+ =?us-ascii?Q?Rb9wFPP+2d+T2JaKYWckFV0MfnDUcLtqjP2h9N4LBKT2j9CX1eHdPkkLPpF1?=
+ =?us-ascii?Q?hxWQPRJTUbOt8qW9mZoEJR/DkAcPYLI0ZtPdnq/V6d+yD41pm8y7dpnNySVB?=
+ =?us-ascii?Q?ploVoHPyPvWH+mM0qHbadxeLis+gL/xdZusAWHbU6B/OsJ/H35rS47ekIqAI?=
+ =?us-ascii?Q?3w/a9dbw2pKIWkPvQ7hlEpUuGVBbP2j40QRJxX/ZO9+5BDFoAkugswPVBiQd?=
+ =?us-ascii?Q?HO2j36v6Q8cUfJp+GRLoNmD0pEm2TM2jU04bFLrk9PyBrNvvZalLXjTBY33R?=
+ =?us-ascii?Q?QfjFZye5d9pJqPNBD2Tntsc7bA/ln9OvBrC757wxuJR1KcDfZNsEZmchD6HG?=
+ =?us-ascii?Q?vjEUUcW3k4DJPDX0W8IpvXTNqDjlR2xAiAQB8Mk1B0TGfaBuh/OH7OAYvV76?=
+ =?us-ascii?Q?YKBZmm2fkipYVFLwjJGEJ+ivqsjO5WWPyEtROf5M5PVsYaiSNqkjs5RoGStC?=
+ =?us-ascii?Q?5pvQsMFTzyOw5gWfF7M+uRFylzvlZok/TKnLy3oplaH3d1HGC69TW0RRpLnx?=
+ =?us-ascii?Q?/29MDq7nGCHXjBo1wTmWv/vJ7tsWxwk2eaudvFexfPJmwwMRYKHhV9zl9CoM?=
+ =?us-ascii?Q?Mv6SE0nIZyWlbPiOp3K/n0cNnFICGe+noBL6yDwdLvd5IvAMMJgeiAk8hl+S?=
+ =?us-ascii?Q?JPTV7hMgZMoGFekeInNRgEAouGhuRL8cNZ3BtH0lQOIuoXSJavBn3R0t3YKv?=
+ =?us-ascii?Q?QVyTBYhg3eAU7rBWJDBZZvpT?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: d66e91ab-5052-42e8-3ede-08d90e57e895
+X-MS-Exchange-CrossTenant-AuthSource: BL0PR12MB4676.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 May 2021 17:21:37.8773 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: zZR82G+R0gYchYz+IzJ2rOznDQLvRsFb1IBYp3z1YfCTCtkb6d/Bt7Q+2CUGz/X+Z+JZ/lsKFLjlpG7sFzsemA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL0PR12MB5010
 X-Mailman-Approved-At: Mon, 03 May 2021 17:26:52 +0000
-Subject: Re: [Nouveau] [PATCH v5 14/16] dma-direct: Allocate memory from
- restricted DMA pool if available
+Subject: [Nouveau] [PATCH v1 1/1] drm/dp_mst: Use kHz as link rate units
+ when settig source max link caps at init
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -73,167 +116,177 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: heikki.krogerus@linux.intel.com, thomas.hellstrom@linux.intel.com,
- peterz@infradead.org, benh@kernel.crashing.org,
- joonas.lahtinen@linux.intel.com, dri-devel@lists.freedesktop.org,
- lkml <linux-kernel@vger.kernel.org>, grant.likely@arm.com, paulus@samba.org,
- Will Deacon <will@kernel.org>, mingo@kernel.org,
- Marek Szyprowski <m.szyprowski@samsung.com>, sstabellini@kernel.org,
- Saravana Kannan <saravanak@google.com>, xypron.glpk@gmx.de,
- Joerg Roedel <joro@8bytes.org>,
- "Rafael J . Wysocki" <rafael.j.wysocki@intel.com>,
- Christoph Hellwig <hch@lst.de>,
- Bartosz Golaszewski <bgolaszewski@baylibre.com>, bskeggs@redhat.com,
- linux-pci@vger.kernel.org, xen-devel@lists.xenproject.org,
- Thierry Reding <treding@nvidia.com>, intel-gfx@lists.freedesktop.org,
- matthew.auld@intel.com, linux-devicetree <devicetree@vger.kernel.org>,
- Jianxiong Gao <jxgao@google.com>, Daniel Vetter <daniel@ffwll.ch>,
- Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
- maarten.lankhorst@linux.intel.com, airlied@linux.ie,
- Dan Williams <dan.j.williams@intel.com>, jani.nikula@linux.intel.com,
- Nicolas Boichat <drinkcat@chromium.org>, rodrigo.vivi@intel.com,
- Bjorn Helgaas <bhelgaas@google.com>, boris.ostrovsky@oracle.com,
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>, jgross@suse.com,
- chris@chris-wilson.co.uk, nouveau@lists.freedesktop.org,
- Greg KH <gregkh@linuxfoundation.org>, Randy Dunlap <rdunlap@infradead.org>,
- Frank Rowand <frowand.list@gmail.com>, Tomasz Figa <tfiga@chromium.org>,
- "list@263.net:IOMMU DRIVERS" <iommu@lists.linux-foundation.org>,
- Jim Quinlan <james.quinlan@broadcom.com>, linuxppc-dev@lists.ozlabs.org,
- bauerman@linux.ibm.com
+Cc: David Airlie <airlied@linux.ie>, Ramalingam C <ramalingam.c@intel.com>,
+ Imre Deak <imre.deak@intel.com>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ dri-devel@lists.freedesktop.org,
+ Meenakshikumar Somasundaram <meenakshikumar.somasundaram@amd.com>,
+ Aurabindo Pillai <aurabindo.pillai@amd.com>,
+ =?UTF-8?q?Ville=20Syrj=C3=A4l=C3=A4?= <ville.syrjala@linux.intel.com>,
+ Rodrigo Siqueira <Rodrigo.Siqueira@amd.com>, koba.ko@canonical.com,
+ Luben Tuikov <luben.tuikov@amd.com>, Ben Skeggs <bskeggs@redhat.com>,
+ nouveau@lists.freedesktop.org, Dave Airlie <airlied@redhat.com>,
+ Harry Wentland <harry.wentland@amd.com>, Daniel Vetter <daniel@ffwll.ch>,
+ Leo Li <sunpeng.li@amd.com>, Lucas De Marchi <lucas.demarchi@intel.com>,
+ intel-gfx@lists.freedesktop.org,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Nikola Cornij <nikola.cornij@amd.com>,
+ Sean Paul <seanpaul@chromium.org>, Jani Nikula <jani.nikula@linux.intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>, Mikita Lipski <mikita.lipski@amd.com>,
+ Matt Roper <matthew.d.roper@intel.com>, Chris Park <Chris.Park@amd.com>,
+ Eryk Brol <eryk.brol@amd.com>, linux-kernel@vger.kernel.org,
+ Wayne Lin <Wayne.Lin@amd.com>, Alex Deucher <alexander.deucher@amd.com>,
+ Lee Shawn C <shawn.c.lee@intel.com>,
+ =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, Apr 23, 2021 at 9:46 PM Robin Murphy <robin.murphy@arm.com> wrote:
->
-> On 2021-04-22 09:15, Claire Chang wrote:
-> > The restricted DMA pool is preferred if available.
-> >
-> > The restricted DMA pools provide a basic level of protection against the
-> > DMA overwriting buffer contents at unexpected times. However, to protect
-> > against general data leakage and system memory corruption, the system
-> > needs to provide a way to lock down the memory access, e.g., MPU.
-> >
-> > Signed-off-by: Claire Chang <tientzu@chromium.org>
-> > ---
-> >   kernel/dma/direct.c | 35 ++++++++++++++++++++++++++---------
-> >   1 file changed, 26 insertions(+), 9 deletions(-)
-> >
-> > diff --git a/kernel/dma/direct.c b/kernel/dma/direct.c
-> > index 7a27f0510fcc..29523d2a9845 100644
-> > --- a/kernel/dma/direct.c
-> > +++ b/kernel/dma/direct.c
-> > @@ -78,6 +78,10 @@ static bool dma_coherent_ok(struct device *dev, phys_addr_t phys, size_t size)
-> >   static void __dma_direct_free_pages(struct device *dev, struct page *page,
-> >                                   size_t size)
-> >   {
-> > +#ifdef CONFIG_DMA_RESTRICTED_POOL
-> > +     if (swiotlb_free(dev, page, size))
-> > +             return;
-> > +#endif
-> >       dma_free_contiguous(dev, page, size);
-> >   }
-> >
-> > @@ -92,7 +96,17 @@ static struct page *__dma_direct_alloc_pages(struct device *dev, size_t size,
-> >
-> >       gfp |= dma_direct_optimal_gfp_mask(dev, dev->coherent_dma_mask,
-> >                                          &phys_limit);
-> > -     page = dma_alloc_contiguous(dev, size, gfp);
-> > +
-> > +#ifdef CONFIG_DMA_RESTRICTED_POOL
-> > +     page = swiotlb_alloc(dev, size);
-> > +     if (page && !dma_coherent_ok(dev, page_to_phys(page), size)) {
-> > +             __dma_direct_free_pages(dev, page, size);
-> > +             page = NULL;
-> > +     }
-> > +#endif
-> > +
-> > +     if (!page)
-> > +             page = dma_alloc_contiguous(dev, size, gfp);
-> >       if (page && !dma_coherent_ok(dev, page_to_phys(page), size)) {
-> >               dma_free_contiguous(dev, page, size);
-> >               page = NULL;
-> > @@ -148,7 +162,7 @@ void *dma_direct_alloc(struct device *dev, size_t size,
-> >               gfp |= __GFP_NOWARN;
-> >
-> >       if ((attrs & DMA_ATTR_NO_KERNEL_MAPPING) &&
-> > -         !force_dma_unencrypted(dev)) {
-> > +         !force_dma_unencrypted(dev) && !is_dev_swiotlb_force(dev)) {
-> >               page = __dma_direct_alloc_pages(dev, size, gfp & ~__GFP_ZERO);
-> >               if (!page)
-> >                       return NULL;
-> > @@ -161,8 +175,8 @@ void *dma_direct_alloc(struct device *dev, size_t size,
-> >       }
-> >
-> >       if (!IS_ENABLED(CONFIG_ARCH_HAS_DMA_SET_UNCACHED) &&
-> > -         !IS_ENABLED(CONFIG_DMA_DIRECT_REMAP) &&
-> > -         !dev_is_dma_coherent(dev))
-> > +         !IS_ENABLED(CONFIG_DMA_DIRECT_REMAP) && !dev_is_dma_coherent(dev) &&
-> > +         !is_dev_swiotlb_force(dev))
-> >               return arch_dma_alloc(dev, size, dma_handle, gfp, attrs);
-> >
-> >       /*
-> > @@ -172,7 +186,9 @@ void *dma_direct_alloc(struct device *dev, size_t size,
-> >       if (IS_ENABLED(CONFIG_DMA_COHERENT_POOL) &&
-> >           !gfpflags_allow_blocking(gfp) &&
-> >           (force_dma_unencrypted(dev) ||
-> > -          (IS_ENABLED(CONFIG_DMA_DIRECT_REMAP) && !dev_is_dma_coherent(dev))))
-> > +          (IS_ENABLED(CONFIG_DMA_DIRECT_REMAP) &&
-> > +           !dev_is_dma_coherent(dev))) &&
-> > +         !is_dev_swiotlb_force(dev))
-> >               return dma_direct_alloc_from_pool(dev, size, dma_handle, gfp);
-> >
-> >       /* we always manually zero the memory once we are done */
-> > @@ -253,15 +269,15 @@ void dma_direct_free(struct device *dev, size_t size,
-> >       unsigned int page_order = get_order(size);
-> >
-> >       if ((attrs & DMA_ATTR_NO_KERNEL_MAPPING) &&
-> > -         !force_dma_unencrypted(dev)) {
-> > +         !force_dma_unencrypted(dev) && !is_dev_swiotlb_force(dev)) {
-> >               /* cpu_addr is a struct page cookie, not a kernel address */
-> >               dma_free_contiguous(dev, cpu_addr, size);
-> >               return;
-> >       }
-> >
-> >       if (!IS_ENABLED(CONFIG_ARCH_HAS_DMA_SET_UNCACHED) &&
-> > -         !IS_ENABLED(CONFIG_DMA_DIRECT_REMAP) &&
-> > -         !dev_is_dma_coherent(dev)) {
-> > +         !IS_ENABLED(CONFIG_DMA_DIRECT_REMAP) && !dev_is_dma_coherent(dev) &&
-> > +         !is_dev_swiotlb_force(dev)) {
-> >               arch_dma_free(dev, size, cpu_addr, dma_addr, attrs);
-> >               return;
-> >       }
-> > @@ -289,7 +305,8 @@ struct page *dma_direct_alloc_pages(struct device *dev, size_t size,
-> >       void *ret;
-> >
-> >       if (IS_ENABLED(CONFIG_DMA_COHERENT_POOL) &&
-> > -         force_dma_unencrypted(dev) && !gfpflags_allow_blocking(gfp))
-> > +         force_dma_unencrypted(dev) && !gfpflags_allow_blocking(gfp) &&
-> > +         !is_dev_swiotlb_force(dev))
-> >               return dma_direct_alloc_from_pool(dev, size, dma_handle, gfp);
->
-> Wait, this seems broken for non-coherent devices - in that case we need
-> to return a non-cacheable address, but we can't simply fall through into
-> the remapping path below in GFP_ATOMIC context. That's why we need the
-> atomic pool concept in the first place :/
+[why]
+Link rate in kHz is what is eventually required to calculate the link
+bandwidth, which makes kHz a more generic unit. This should also make
+forward-compatibility with new DP standards easier.
 
-Sorry for the late reply. I'm not very familiar with this. I wonder if
-the memory returned here must be coherent. If yes, could we say for
-this case, one must set up another device coherent pool
-(shared-dma-pool) and go with dma_alloc_from_dev_coherent()[1]?
+[how]
+- Replace 'link rate DPCD code' with 'link rate in kHz' when used with
+drm_dp_mst_topology_mgr_init()
+- Add/remove related DPCD code conversion from/to kHz where applicable
 
-[1] https://elixir.bootlin.com/linux/v5.12/source/kernel/dma/mapping.c#L435
+Signed-off-by: Nikola Cornij <nikola.cornij@amd.com>
+---
+ .../gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_mst_types.c   | 4 ++--
+ drivers/gpu/drm/drm_dp_mst_topology.c                     | 8 ++++----
+ drivers/gpu/drm/i915/display/intel_dp_mst.c               | 4 ++--
+ drivers/gpu/drm/nouveau/dispnv50/disp.c                   | 5 +++--
+ drivers/gpu/drm/radeon/radeon_dp_mst.c                    | 2 +-
+ include/drm/drm_dp_mst_helper.h                           | 8 ++++----
+ 6 files changed, 16 insertions(+), 15 deletions(-)
 
->
-> Unless I've overlooked something, we're still using the regular
-> cacheable linear map address of the dma_io_tlb_mem buffer, no?
->
-> Robin.
->
-> >
-> >       page = __dma_direct_alloc_pages(dev, size, gfp);
-> >
+diff --git a/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_mst_types.c b/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_mst_types.c
+index ef8d53e24c47..3f3ead83c21c 100644
+--- a/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_mst_types.c
++++ b/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_mst_types.c
+@@ -453,8 +453,8 @@ void amdgpu_dm_initialize_dp_connector(struct amdgpu_display_manager *dm,
+ 		&aconnector->dm_dp_aux.aux,
+ 		16,
+ 		4,
+-		(u8)max_link_enc_cap.lane_count,
+-		(u8)max_link_enc_cap.link_rate,
++		max_link_enc_cap.lane_count,
++		drm_dp_bw_code_to_link_rate(max_link_enc_cap.link_rate),
+ 		aconnector->connector_id);
+ 
+ 	drm_connector_attach_dp_subconnector_property(&aconnector->base);
+diff --git a/drivers/gpu/drm/drm_dp_mst_topology.c b/drivers/gpu/drm/drm_dp_mst_topology.c
+index 54604633e65c..32b7f8983b94 100644
+--- a/drivers/gpu/drm/drm_dp_mst_topology.c
++++ b/drivers/gpu/drm/drm_dp_mst_topology.c
+@@ -3722,9 +3722,9 @@ int drm_dp_mst_topology_mgr_set_mst(struct drm_dp_mst_topology_mgr *mgr, bool ms
+ 		}
+ 
+ 		lane_count = min_t(int, mgr->dpcd[2] & DP_MAX_LANE_COUNT_MASK, mgr->max_lane_count);
+-		link_rate = min_t(int, mgr->dpcd[1], mgr->max_link_rate);
++		link_rate = min_t(int, drm_dp_bw_code_to_link_rate(mgr->dpcd[1]), mgr->max_link_rate);
+ 		mgr->pbn_div = drm_dp_get_vc_payload_bw(mgr,
+-							drm_dp_bw_code_to_link_rate(link_rate),
++							link_rate,
+ 							lane_count);
+ 		if (mgr->pbn_div == 0) {
+ 			ret = -EINVAL;
+@@ -5454,7 +5454,7 @@ EXPORT_SYMBOL(drm_atomic_get_mst_topology_state);
+  * @max_dpcd_transaction_bytes: hw specific DPCD transaction limit
+  * @max_payloads: maximum number of payloads this GPU can source
+  * @max_lane_count: maximum number of lanes this GPU supports
+- * @max_link_rate: maximum link rate this GPU supports, units as in DPCD
++ * @max_link_rate: maximum link rate per lane this GPU supports in kHz
+  * @conn_base_id: the connector object ID the MST device is connected to.
+  *
+  * Return 0 for success, or negative error code on failure
+@@ -5462,7 +5462,7 @@ EXPORT_SYMBOL(drm_atomic_get_mst_topology_state);
+ int drm_dp_mst_topology_mgr_init(struct drm_dp_mst_topology_mgr *mgr,
+ 				 struct drm_device *dev, struct drm_dp_aux *aux,
+ 				 int max_dpcd_transaction_bytes, int max_payloads,
+-				 u8 max_lane_count, u8 max_link_rate,
++				 int max_lane_count, int max_link_rate,
+ 				 int conn_base_id)
+ {
+ 	struct drm_dp_mst_topology_state *mst_state;
+diff --git a/drivers/gpu/drm/i915/display/intel_dp_mst.c b/drivers/gpu/drm/i915/display/intel_dp_mst.c
+index f608c0cb98f4..26f65445bc8a 100644
+--- a/drivers/gpu/drm/i915/display/intel_dp_mst.c
++++ b/drivers/gpu/drm/i915/display/intel_dp_mst.c
+@@ -960,8 +960,8 @@ intel_dp_mst_encoder_init(struct intel_digital_port *dig_port, int conn_base_id)
+ 	intel_dp_create_fake_mst_encoders(dig_port);
+ 	ret = drm_dp_mst_topology_mgr_init(&intel_dp->mst_mgr, &i915->drm,
+ 					   &intel_dp->aux, 16, 3,
+-					   (u8)dig_port->max_lanes,
+-					   drm_dp_link_rate_to_bw_code(max_source_rate),
++					   dig_port->max_lanes,
++					   max_source_rate,
+ 					   conn_base_id);
+ 	if (ret)
+ 		return ret;
+diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.c b/drivers/gpu/drm/nouveau/dispnv50/disp.c
+index c46d0374b6e6..f949767698fc 100644
+--- a/drivers/gpu/drm/nouveau/dispnv50/disp.c
++++ b/drivers/gpu/drm/nouveau/dispnv50/disp.c
+@@ -1617,8 +1617,9 @@ nv50_mstm_new(struct nouveau_encoder *outp, struct drm_dp_aux *aux, int aux_max,
+ 	mstm->mgr.cbs = &nv50_mstm;
+ 
+ 	ret = drm_dp_mst_topology_mgr_init(&mstm->mgr, dev, aux, aux_max,
+-					   (u8)max_payloads, outp->dcb->dpconf.link_nr,
+-					   (u8)outp->dcb->dpconf.link_bw, conn_base_id);
++					   max_payloads, outp->dcb->dpconf.link_nr,
++					   drm_dp_bw_code_to_link_rate(outp->dcb->dpconf.link_bw),
++					   conn_base_id);
+ 	if (ret)
+ 		return ret;
+ 
+diff --git a/drivers/gpu/drm/radeon/radeon_dp_mst.c b/drivers/gpu/drm/radeon/radeon_dp_mst.c
+index 13072c2a6502..ec867fa880a4 100644
+--- a/drivers/gpu/drm/radeon/radeon_dp_mst.c
++++ b/drivers/gpu/drm/radeon/radeon_dp_mst.c
+@@ -642,7 +642,7 @@ radeon_dp_mst_init(struct radeon_connector *radeon_connector)
+ 	radeon_connector->mst_mgr.cbs = &mst_cbs;
+ 	return drm_dp_mst_topology_mgr_init(&radeon_connector->mst_mgr, dev,
+ 					    &radeon_connector->ddc_bus->aux, 16, 6,
+-					    4, (u8)max_link_rate,
++					    4, drm_dp_bw_code_to_link_rate(max_link_rate),
+ 					    radeon_connector->base.base.id);
+ }
+ 
+diff --git a/include/drm/drm_dp_mst_helper.h b/include/drm/drm_dp_mst_helper.h
+index c87a829b6498..ddb9231d0309 100644
+--- a/include/drm/drm_dp_mst_helper.h
++++ b/include/drm/drm_dp_mst_helper.h
+@@ -596,11 +596,11 @@ struct drm_dp_mst_topology_mgr {
+ 	/**
+ 	 * @max_lane_count: maximum number of lanes the GPU can drive.
+ 	 */
+-	u8 max_lane_count;
++	int max_lane_count;
+ 	/**
+-	 * @max_link_rate: maximum link rate per lane GPU can output.
++	 * @max_link_rate: maximum link rate per lane GPU can output, in kHz.
+ 	 */
+-	u8 max_link_rate;
++	int max_link_rate;
+ 	/**
+ 	 * @conn_base_id: DRM connector ID this mgr is connected to. Only used
+ 	 * to build the MST connector path value.
+@@ -774,7 +774,7 @@ int drm_dp_mst_topology_mgr_init(struct drm_dp_mst_topology_mgr *mgr,
+ 				 struct drm_device *dev, struct drm_dp_aux *aux,
+ 				 int max_dpcd_transaction_bytes,
+ 				 int max_payloads,
+-				 u8 max_lane_count, u8 max_link_rate,
++				 int max_lane_count, int max_link_rate,
+ 				 int conn_base_id);
+ 
+ void drm_dp_mst_topology_mgr_destroy(struct drm_dp_mst_topology_mgr *mgr);
+-- 
+2.25.1
+
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
