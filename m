@@ -1,47 +1,36 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2DD3637706D
-	for <lists+nouveau@lfdr.de>; Sat,  8 May 2021 09:34:30 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id CE7B43774CF
+	for <lists+nouveau@lfdr.de>; Sun,  9 May 2021 03:12:03 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 327776E85B;
-	Sat,  8 May 2021 07:34:28 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id CAA166E160;
+	Sun,  9 May 2021 01:11:58 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from smtp1-g21.free.fr (smtp1-g21.free.fr [IPv6:2a01:e0c:1:1599::10])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8FF206E85B;
- Sat,  8 May 2021 07:34:27 +0000 (UTC)
-Received: from pmoreau.org (unknown [88.129.173.226])
- (Authenticated sender: pierre.morrow@free.fr)
- by smtp1-g21.free.fr (Postfix) with ESMTPSA id 605A1B0053E;
- Sat,  8 May 2021 09:34:09 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=free.fr;
- s=smtp-20201208; t=1620459265;
- bh=CoRmAemj/IAoMOFqzKxhniIqN+11bAiqsffykCtDA5Q=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=F8AoDu73pLmKkDzdHapqCOTc9l2GpsNhhWg7LvSeQwEiaEfCKTiLc2DS2OvA/dUCs
- KHvWNs8pUEEB/fz1cz9YU8M96mF8JBvMe4mK4ZGcNZOCD7DfqUl1+LfRseYfPagMPB
- 7IdmCnLyWLcJG6rbIhe+YSkU2onMgCudJhxn53BMgWTdXwm/JSN1lILpGM4Qlw4rAe
- iwxHaF6cSca/IwOUfyPxH+P27I4BD19siDm9zhrh/BEw0ifQcYIh/6BjggPWy7HLbx
- 7TL4cvMESw4zd61rVDqO087ybwoFjoFLMjf5XD+95VS4Cn9pMlkWxRn7TZbA7rxLYf
- sWi+JvOGdN2JA==
-Date: Sat, 8 May 2021 09:34:00 +0200
-From: Pierre Moreau <pierre.morrow@free.fr>
-To: Zhen Lei <thunder.leizhen@huawei.com>
-Message-ID: <20210508073400.nnmwwyoxqqiwv36w@pmoreau.org>
-Mail-Followup-To: Zhen Lei <thunder.leizhen@huawei.com>,
- Dan Carpenter <dan.carpenter@oracle.com>,
- Ben Skeggs <bskeggs@redhat.com>, David Airlie <airlied@linux.ie>,
- Daniel Vetter <daniel@ffwll.ch>,
- dri-devel <dri-devel@lists.freedesktop.org>,
- nouveau <nouveau@lists.freedesktop.org>,
+Received: from szxga05-in.huawei.com (szxga05-in.huawei.com [45.249.212.191])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id AFC886E84A;
+ Sat,  8 May 2021 03:48:25 +0000 (UTC)
+Received: from DGGEMS410-HUB.china.huawei.com (unknown [172.30.72.58])
+ by szxga05-in.huawei.com (SkyGuard) with ESMTP id 4FcYBL2G1JzkX91;
+ Sat,  8 May 2021 11:45:46 +0800 (CST)
+Received: from thunder-town.china.huawei.com (10.174.177.72) by
+ DGGEMS410-HUB.china.huawei.com (10.3.19.210) with Microsoft SMTP Server id
+ 14.3.498.0; Sat, 8 May 2021 11:48:15 +0800
+From: Zhen Lei <thunder.leizhen@huawei.com>
+To: Ben Skeggs <bskeggs@redhat.com>, David Airlie <airlied@linux.ie>, "Daniel
+ Vetter" <daniel@ffwll.ch>, Pierre Moreau <pierre.morrow@free.fr>, dri-devel
+ <dri-devel@lists.freedesktop.org>, nouveau <nouveau@lists.freedesktop.org>,
  linux-kernel <linux-kernel@vger.kernel.org>
-References: <20210508034810.2374-1-thunder.leizhen@huawei.com>
+Date: Sat, 8 May 2021 11:48:10 +0800
+Message-ID: <20210508034810.2374-1-thunder.leizhen@huawei.com>
+X-Mailer: git-send-email 2.26.0.windows.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20210508034810.2374-1-thunder.leizhen@huawei.com>
-Subject: Re: [Nouveau] [PATCH 1/1] drm/nouveau: fix error return code in
+X-Originating-IP: [10.174.177.72]
+X-CFilter-Loop: Reflected
+X-Mailman-Approved-At: Sun, 09 May 2021 01:11:57 +0000
+Subject: [Nouveau] [PATCH 1/1] drm/nouveau: fix error return code in
  nouveau_backlight_init()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -54,42 +43,39 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, nouveau <nouveau@lists.freedesktop.org>,
- linux-kernel <linux-kernel@vger.kernel.org>,
- dri-devel <dri-devel@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>,
- Daniel Vetter <daniel@ffwll.ch>, Dan Carpenter <dan.carpenter@oracle.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: Zhen Lei <thunder.leizhen@huawei.com>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-SGVsbG8gWmhlbiwKClRoZXJlIHdhcyBhIHNpbWlsYXIgcGF0Y2ggc2VudCBpbiBsYXN0IG1vbnRo
-LCB0aG91Z2ggd2hpY2ggZG9lcyBub3Qgc2VlbSB0bwpoYXZlIGJlZW4gbWVyZ2VkIHlldDsgc2Vl
-Cmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL2FyY2hpdmVzL25vdXZlYXUvMjAyMS1BcHJp
-bC8wMzg0NTEuaHRtbC4KCldoZXRoZXIgYHJldGAgc2hvdWxkIGJlIGAtRU5PU1BDYCBvciBgLUVO
-T01FTWAgaXMgaGFyZCB0byBzYXkgYXMKYG5vdXZlYXVfZ2V0X2JhY2tsaWdodF9uYW1lKClgIGNv
-dWxkIGZhaWwgZHVlIHRvIGVpdGhlci4KCkkgd2lsbCBwcm9wb3NlIGFuIGFsdGVybmF0aXZlIGZp
-eCB3aGljaCBtb2RpZmllcyBgbm91dmVhdV9nZXRfYmFja2xpZ2h0X25hbWUoKWAKdG8gcmV0dXJu
-IGFuIGludCBzbyB0aGUgYWN0dWFsIGVycm9yIGNvZGUgY2FuIGJlIHByb3BhZ2F0ZWQgYmFjayBp
-bnN0ZWFkIG9mCmd1ZXNzZWQsIGFzIHdlbGwgYXMgZml4IGFuIGlkYSBJRCBsZWFrIHdoaWNoIEkg
-anVzdCBzcG90dGVkLgoKQmVzdCwKUGllcnJlCgpPbiAyMDIxLTA1LTA4IOKAlCAxMTo0OCwgWmhl
-biBMZWkgd3JvdGU6Cj4gRml4IHRvIHJldHVybiBhIG5lZ2F0aXZlIGVycm9yIGNvZGUgZnJvbSB0
-aGUgZXJyb3IgaGFuZGxpbmcgY2FzZSBpbnN0ZWFkCj4gb2YgMCwgYXMgZG9uZSBlbHNld2hlcmUg
-aW4gdGhpcyBmdW5jdGlvbi4KPiAKPiBGaXhlczogZGIxYTBhZTIxNDYxICgiZHJtL25vdXZlYXUv
-Ymw6IEFzc2lnbiBkaWZmZXJlbnQgbmFtZXMgdG8gaW50ZXJmYWNlcyIpCj4gUmVwb3J0ZWQtYnk6
-IEh1bGsgUm9ib3QgPGh1bGtjaUBodWF3ZWkuY29tPgo+IFNpZ25lZC1vZmYtYnk6IFpoZW4gTGVp
-IDx0aHVuZGVyLmxlaXpoZW5AaHVhd2VpLmNvbT4KPiAtLS0KPiAgZHJpdmVycy9ncHUvZHJtL25v
-dXZlYXUvbm91dmVhdV9iYWNrbGlnaHQuYyB8IDEgKwo+ICAxIGZpbGUgY2hhbmdlZCwgMSBpbnNl
-cnRpb24oKykKPiAKPiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVh
-dV9iYWNrbGlnaHQuYyBiL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfYmFja2xpZ2h0
-LmMKPiBpbmRleCA3MmYzNWEyYmFiY2IuLjA5N2NhMzQ0YTA4NiAxMDA2NDQKPiAtLS0gYS9kcml2
-ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2JhY2tsaWdodC5jCj4gKysrIGIvZHJpdmVycy9n
-cHUvZHJtL25vdXZlYXUvbm91dmVhdV9iYWNrbGlnaHQuYwo+IEBAIC0yNzMsNiArMjczLDcgQEAg
-bm91dmVhdV9iYWNrbGlnaHRfaW5pdChzdHJ1Y3QgZHJtX2Nvbm5lY3RvciAqY29ubmVjdG9yKQo+
-ICAJCXJldHVybiAtRU5PTUVNOwo+ICAKPiAgCWlmICghbm91dmVhdV9nZXRfYmFja2xpZ2h0X25h
-bWUoYmFja2xpZ2h0X25hbWUsIGJsKSkgewo+ICsJCXJldCA9IC1FTk9TUEM7Cj4gIAkJTlZfRVJS
-T1IoZHJtLCAiRmFpbGVkIHRvIHJldHJpZXZlIGEgdW5pcXVlIG5hbWUgZm9yIHRoZSBiYWNrbGln
-aHQgaW50ZXJmYWNlXG4iKTsKPiAgCQlnb3RvIGZhaWxfYWxsb2M7Cj4gIAl9Cj4gLS0gCj4gMi4y
-NS4xCj4gCj4gCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-Ck5vdXZlYXUgbWFpbGluZyBsaXN0Ck5vdXZlYXVAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCmh0dHBz
-Oi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vbm91dmVhdQo=
+Fix to return a negative error code from the error handling case instead
+of 0, as done elsewhere in this function.
+
+Fixes: db1a0ae21461 ("drm/nouveau/bl: Assign different names to interfaces")
+Reported-by: Hulk Robot <hulkci@huawei.com>
+Signed-off-by: Zhen Lei <thunder.leizhen@huawei.com>
+---
+ drivers/gpu/drm/nouveau/nouveau_backlight.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/drivers/gpu/drm/nouveau/nouveau_backlight.c b/drivers/gpu/drm/nouveau/nouveau_backlight.c
+index 72f35a2babcb..097ca344a086 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_backlight.c
++++ b/drivers/gpu/drm/nouveau/nouveau_backlight.c
+@@ -273,6 +273,7 @@ nouveau_backlight_init(struct drm_connector *connector)
+ 		return -ENOMEM;
+ 
+ 	if (!nouveau_get_backlight_name(backlight_name, bl)) {
++		ret = -ENOSPC;
+ 		NV_ERROR(drm, "Failed to retrieve a unique name for the backlight interface\n");
+ 		goto fail_alloc;
+ 	}
+-- 
+2.25.1
+
+
+_______________________________________________
+Nouveau mailing list
+Nouveau@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/nouveau
