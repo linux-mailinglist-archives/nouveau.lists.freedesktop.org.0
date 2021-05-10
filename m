@@ -1,32 +1,32 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 244BB37A9A9
-	for <lists+nouveau@lfdr.de>; Tue, 11 May 2021 16:38:51 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3068537A9A0
+	for <lists+nouveau@lfdr.de>; Tue, 11 May 2021 16:38:47 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C28E36EA6B;
-	Tue, 11 May 2021 14:38:34 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 95FB86EA61;
+	Tue, 11 May 2021 14:38:28 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from verein.lst.de (verein.lst.de [213.95.11.211])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 2A9A488284;
- Mon, 10 May 2021 14:58:28 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C476689861;
+ Mon, 10 May 2021 14:59:02 +0000 (UTC)
 Received: by verein.lst.de (Postfix, from userid 2407)
- id 7F6AC67373; Mon, 10 May 2021 16:58:23 +0200 (CEST)
-Date: Mon, 10 May 2021 16:58:23 +0200
+ id 621D667373; Mon, 10 May 2021 16:59:00 +0200 (CEST)
+Date: Mon, 10 May 2021 16:59:00 +0200
 From: Christoph Hellwig <hch@lst.de>
 To: Claire Chang <tientzu@chromium.org>
-Message-ID: <20210510145823.GA28066@lst.de>
+Message-ID: <20210510145900.GB28066@lst.de>
 References: <20210510095026.3477496-1-tientzu@chromium.org>
- <20210510095026.3477496-2-tientzu@chromium.org>
+ <20210510095026.3477496-3-tientzu@chromium.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20210510095026.3477496-2-tientzu@chromium.org>
+In-Reply-To: <20210510095026.3477496-3-tientzu@chromium.org>
 User-Agent: Mutt/1.5.17 (2007-11-01)
 X-Mailman-Approved-At: Tue, 11 May 2021 14:38:26 +0000
-Subject: Re: [Nouveau] [PATCH v6 01/15] swiotlb: Refactor swiotlb init
- functions
+Subject: Re: [Nouveau] [PATCH v6 02/15] swiotlb: Refactor
+ swiotlb_create_debugfs
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
