@@ -1,65 +1,65 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id DFA6437B594
-	for <lists+nouveau@lfdr.de>; Wed, 12 May 2021 07:46:43 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 650C437B595
+	for <lists+nouveau@lfdr.de>; Wed, 12 May 2021 07:46:45 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6A0896E0C2;
+	by gabe.freedesktop.org (Postfix) with ESMTP id 573A66E049;
 	Wed, 12 May 2021 05:46:38 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pg1-x533.google.com (mail-pg1-x533.google.com
- [IPv6:2607:f8b0:4864:20::533])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 50F6D6E5B2
- for <nouveau@lists.freedesktop.org>; Tue, 11 May 2021 16:42:40 +0000 (UTC)
-Received: by mail-pg1-x533.google.com with SMTP id t193so3613572pgb.4
- for <nouveau@lists.freedesktop.org>; Tue, 11 May 2021 09:42:40 -0700 (PDT)
+Received: from mail-pf1-x42a.google.com (mail-pf1-x42a.google.com
+ [IPv6:2607:f8b0:4864:20::42a])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C2C4889E86
+ for <nouveau@lists.freedesktop.org>; Tue, 11 May 2021 16:48:17 +0000 (UTC)
+Received: by mail-pf1-x42a.google.com with SMTP id q2so16445223pfh.13
+ for <nouveau@lists.freedesktop.org>; Tue, 11 May 2021 09:48:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=I574vs+oxpmw2RaQkdeqT3TmVa8C0vE6HCQzgLmVaEk=;
- b=EO4zcKQD13cnMpJi5k5sqZg36m/uhjFrv+x7tUEK/JnHkDgZTOULzljGCah93D1FN5
- SwmaT+lt9As201TL9V65C0BiJShCnGyDe8UgjgY5Jm1YBpkuQxrN8+e9OJjS8RpeP4ih
- 4tasAkIoShr42ndvrMVih2QtviIwqYbb0WQHQ=
+ :cc; bh=k6jrKLJf+SUK032/zz9tWYcN5Rhay3mFZvhqIWgxNBs=;
+ b=L/Y31OZjVAvXas4gAOFGDpY1O+WckxTleHtLR2a6rScOLannRZ4axVg75JGljNN3EA
+ 40xB287W01zuvyDHYZFS2WLSs1CG9A82KNV8OVT7o92X2FrRRw8J292qbL27/DexCkE7
+ qg4XvM9gaQyzYYNGyObKTqbnr0WqygwnwiYxc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=I574vs+oxpmw2RaQkdeqT3TmVa8C0vE6HCQzgLmVaEk=;
- b=gCsxdVXG1hVeCT8YUsN38a6zATKF//8cE2y3g/mlGm/hZ3KBikXAAmahij8EetPukv
- gHRLN0x2lKrEklYG1jXnfiJYBMx6UTYx9XguyxvpJ+akmF30oY31wbFmKeZdE7dITOw1
- k7jsfRUSW4etwJQc6JTnf083OovDcmNleiGUNa2ePOylZVPuU1K737jb4eGynT9ZdkU8
- TrwQlu7n3iANhKZyh7ggcGvQkq8GHcc2YrOKNGKBzW9mZZap4+5xU+DXhfe3PJuzzS8T
- UBtaPmvEykZaQgbf88IZj0V14nBcPx3ZgUUZqOB4ngNbb8VBREI1SSQu1VikaB4j00+b
- kGTw==
-X-Gm-Message-State: AOAM531ugTBMggjQnblEYWjMn8BW6/VOqsOSaigcMaJxorxEEWsXnCCc
- 4/SLHB+GbqOjWSmeftht0lJFjJK7DOrFTA==
-X-Google-Smtp-Source: ABdhPJyksVlu3rpYW9L9zTQo9Vppm4TQDr7+At7+KYbDFllrC3jcnXQMuCiulHKBy5i3jPgrdXMJQA==
-X-Received: by 2002:a65:6a4f:: with SMTP id o15mr31237754pgu.399.1620751359683; 
- Tue, 11 May 2021 09:42:39 -0700 (PDT)
-Received: from mail-pf1-f179.google.com (mail-pf1-f179.google.com.
- [209.85.210.179])
- by smtp.gmail.com with ESMTPSA id g16sm2546707pju.17.2021.05.11.09.42.38
+ bh=k6jrKLJf+SUK032/zz9tWYcN5Rhay3mFZvhqIWgxNBs=;
+ b=CHQ2xhWPHQPVyBMbNNZnOlDSn0dVcjXIvwLQSqj98iPhRxzz1wqgk77gFWzHzIc55c
+ p1alCZ8sEvLi3yqKFLiT4uWkyarT2pPTCSKeR8MCDHPlk2/4eNO988GvLNoKeaVDtR6o
+ HsXd0zq/VU6l97Pt2N0r7nNmpyfMOaKjfHT8YFZEhtpqmJ8cZDFlmb5iyQpelyvJ1e4/
+ YTEAhuepvCYz2nGXCTsKNSlhwWLZwTOXt7uabnvq8pcZaZ0bIr4JfL6rVRWQCpcPBl5b
+ S57LCX6otpmpff1JR57BmU743r+7qvTdDOZPvLOvgweJFPIGj8E/VM0avvc3lMrPZZJ2
+ X7Bw==
+X-Gm-Message-State: AOAM533ZqAxSh/Yo64JjPp3pTt89wCEP6COJrP6Kr2mM4vRuZUE5d8q6
+ kz3c1Fgs1HabIxrMpfAgmWah2WrLdupRiw==
+X-Google-Smtp-Source: ABdhPJyFKPUC/k9LALUfhHMTlLs9u1iBkl9Q+jE570OEh0pmgYgvXeaphMv7TPEioEyMo+ENoppuvg==
+X-Received: by 2002:a63:4c66:: with SMTP id m38mr31679805pgl.157.1620751697164; 
+ Tue, 11 May 2021 09:48:17 -0700 (PDT)
+Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com.
+ [209.85.210.177])
+ by smtp.gmail.com with ESMTPSA id 130sm13326475pfy.75.2021.05.11.09.48.16
  for <nouveau@lists.freedesktop.org>
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 11 May 2021 09:42:39 -0700 (PDT)
-Received: by mail-pf1-f179.google.com with SMTP id p4so16531210pfo.3
- for <nouveau@lists.freedesktop.org>; Tue, 11 May 2021 09:42:38 -0700 (PDT)
-X-Received: by 2002:a92:6804:: with SMTP id d4mr27241366ilc.5.1620751346868;
- Tue, 11 May 2021 09:42:26 -0700 (PDT)
+ Tue, 11 May 2021 09:48:16 -0700 (PDT)
+Received: by mail-pf1-f177.google.com with SMTP id v191so16470708pfc.8
+ for <nouveau@lists.freedesktop.org>; Tue, 11 May 2021 09:48:16 -0700 (PDT)
+X-Received: by 2002:a6b:7b08:: with SMTP id l8mr22174004iop.50.1620751352978; 
+ Tue, 11 May 2021 09:42:32 -0700 (PDT)
 MIME-Version: 1.0
 References: <20210510095026.3477496-1-tientzu@chromium.org>
- <20210510095026.3477496-9-tientzu@chromium.org>
- <20210510150516.GE28066@lst.de>
-In-Reply-To: <20210510150516.GE28066@lst.de>
+ <20210510095026.3477496-6-tientzu@chromium.org>
+ <20210510150342.GD28066@lst.de>
+In-Reply-To: <20210510150342.GD28066@lst.de>
 From: Claire Chang <tientzu@chromium.org>
-Date: Wed, 12 May 2021 00:42:15 +0800
-X-Gmail-Original-Message-ID: <CALiNf2-x8Gw0TPLdeRnfPmUTeuK9dsLbDXN4hPnc08y21uuUXQ@mail.gmail.com>
-Message-ID: <CALiNf2-x8Gw0TPLdeRnfPmUTeuK9dsLbDXN4hPnc08y21uuUXQ@mail.gmail.com>
+Date: Wed, 12 May 2021 00:42:22 +0800
+X-Gmail-Original-Message-ID: <CALiNf2_7mHuMG5DTQD0GsriN=vuX0ytyUn4rxEmsK2iP3PKV+w@mail.gmail.com>
+Message-ID: <CALiNf2_7mHuMG5DTQD0GsriN=vuX0ytyUn4rxEmsK2iP3PKV+w@mail.gmail.com>
 To: Christoph Hellwig <hch@lst.de>
 X-Mailman-Approved-At: Wed, 12 May 2021 05:46:37 +0000
-Subject: Re: [Nouveau] [PATCH v6 08/15] swiotlb: Bounce data from/to
- restricted DMA pool if available
+Subject: Re: [Nouveau] [PATCH v6 05/15] swiotlb: Add a new get_io_tlb_mem
+ getter
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -103,31 +103,23 @@ Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Mon, May 10, 2021 at 11:05 PM Christoph Hellwig <hch@lst.de> wrote:
+On Mon, May 10, 2021 at 11:03 PM Christoph Hellwig <hch@lst.de> wrote:
 >
-> > +static inline bool is_dev_swiotlb_force(struct device *dev)
+> > +static inline struct io_tlb_mem *get_io_tlb_mem(struct device *dev)
 > > +{
 > > +#ifdef CONFIG_DMA_RESTRICTED_POOL
-> > +     if (dev->dma_io_tlb_mem)
-> > +             return true;
+> > +     if (dev && dev->dma_io_tlb_mem)
+> > +             return dev->dma_io_tlb_mem;
 > > +#endif /* CONFIG_DMA_RESTRICTED_POOL */
-> > +     return false;
-> > +}
 > > +
+> > +     return io_tlb_default_mem;
 >
-> >       /* If SWIOTLB is active, use its maximum mapping size */
-> >       if (is_swiotlb_active(dev) &&
-> > -         (dma_addressing_limited(dev) || swiotlb_force == SWIOTLB_FORCE))
-> > +         (dma_addressing_limited(dev) || swiotlb_force == SWIOTLB_FORCE ||
-> > +          is_dev_swiotlb_force(dev)))
->
-> This is a mess.  I think the right way is to have an always_bounce flag
-> in the io_tlb_mem structure instead.  Then the global swiotlb_force can
-> go away and be replace with this and the fact that having no
-> io_tlb_mem structure at all means forced no buffering (after a little
-> refactoring).
+> Given that we're also looking into a not addressing restricted pool
+> I'd rather always assign the active pool to dev->dma_io_tlb_mem and
+> do away with this helper.
 
-Will do in the next version.
+Where do you think is the proper place to do the assignment? First
+time calling swiotlb_map? or in of_dma_configure_id?
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
