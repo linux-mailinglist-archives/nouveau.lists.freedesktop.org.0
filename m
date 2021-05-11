@@ -1,32 +1,35 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 82C8537A99B
-	for <lists+nouveau@lfdr.de>; Tue, 11 May 2021 16:38:44 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id C6F2A37A996
+	for <lists+nouveau@lfdr.de>; Tue, 11 May 2021 16:38:40 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A973E6EA62;
+	by gabe.freedesktop.org (Postfix) with ESMTP id 47E5C6EA57;
 	Tue, 11 May 2021 14:38:28 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from verein.lst.de (verein.lst.de [213.95.11.211])
- by gabe.freedesktop.org (Postfix) with ESMTPS id AD07789D5B;
- Mon, 10 May 2021 15:05:19 +0000 (UTC)
-Received: by verein.lst.de (Postfix, from userid 2407)
- id 2DAB567373; Mon, 10 May 2021 17:05:17 +0200 (CEST)
-Date: Mon, 10 May 2021 17:05:16 +0200
-From: Christoph Hellwig <hch@lst.de>
-To: Claire Chang <tientzu@chromium.org>
-Message-ID: <20210510150516.GE28066@lst.de>
-References: <20210510095026.3477496-1-tientzu@chromium.org>
- <20210510095026.3477496-9-tientzu@chromium.org>
+Received: from szxga06-in.huawei.com (szxga06-in.huawei.com [45.249.212.32])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 09C0D89FC8;
+ Tue, 11 May 2021 08:29:06 +0000 (UTC)
+Received: from DGGEMS407-HUB.china.huawei.com (unknown [172.30.72.60])
+ by szxga06-in.huawei.com (SkyGuard) with ESMTP id 4FfWHK1TtTzlZXh;
+ Tue, 11 May 2021 16:26:53 +0800 (CST)
+Received: from thunder-town.china.huawei.com (10.174.177.72) by
+ DGGEMS407-HUB.china.huawei.com (10.3.19.207) with Microsoft SMTP Server id
+ 14.3.498.0; Tue, 11 May 2021 16:28:55 +0800
+From: Zhen Lei <thunder.leizhen@huawei.com>
+To: Ben Skeggs <bskeggs@redhat.com>, David Airlie <airlied@linux.ie>, "Daniel
+ Vetter" <daniel@ffwll.ch>, Pierre Moreau <pierre.morrow@free.fr>, dri-devel
+ <dri-devel@lists.freedesktop.org>, nouveau <nouveau@lists.freedesktop.org>
+Date: Tue, 11 May 2021 16:28:39 +0800
+Message-ID: <20210511082841.4181-1-thunder.leizhen@huawei.com>
+X-Mailer: git-send-email 2.26.0.windows.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20210510095026.3477496-9-tientzu@chromium.org>
-User-Agent: Mutt/1.5.17 (2007-11-01)
+X-Originating-IP: [10.174.177.72]
+X-CFilter-Loop: Reflected
 X-Mailman-Approved-At: Tue, 11 May 2021 14:38:26 +0000
-Subject: Re: [Nouveau] [PATCH v6 08/15] swiotlb: Bounce data from/to
- restricted DMA pool if available
+Subject: [Nouveau] [PATCH v2 0/2] Fix ida leak and error return code
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -38,59 +41,27 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: heikki.krogerus@linux.intel.com, thomas.hellstrom@linux.intel.com,
- peterz@infradead.org, benh@kernel.crashing.org,
- joonas.lahtinen@linux.intel.com, dri-devel@lists.freedesktop.org,
- chris@chris-wilson.co.uk, grant.likely@arm.com, paulus@samba.org,
- Frank Rowand <frowand.list@gmail.com>, mingo@kernel.org,
- Marek Szyprowski <m.szyprowski@samsung.com>, sstabellini@kernel.org,
- Saravana Kannan <saravanak@google.com>, mpe@ellerman.id.au,
- Joerg Roedel <joro@8bytes.org>,
- "Rafael J . Wysocki" <rafael.j.wysocki@intel.com>,
- Christoph Hellwig <hch@lst.de>,
- Bartosz Golaszewski <bgolaszewski@baylibre.com>, bskeggs@redhat.com,
- linux-pci@vger.kernel.org, xen-devel@lists.xenproject.org,
- Thierry Reding <treding@nvidia.com>, intel-gfx@lists.freedesktop.org,
- matthew.auld@intel.com, linux-devicetree <devicetree@vger.kernel.org>,
- jxgao@google.com, daniel@ffwll.ch, Will Deacon <will@kernel.org>,
- Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
- maarten.lankhorst@linux.intel.com, airlied@linux.ie,
- Dan Williams <dan.j.williams@intel.com>, linuxppc-dev@lists.ozlabs.org,
- jani.nikula@linux.intel.com, Rob Herring <robh+dt@kernel.org>,
- rodrigo.vivi@intel.com, bhelgaas@google.com, boris.ostrovsky@oracle.com,
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>, jgross@suse.com,
- Nicolas Boichat <drinkcat@chromium.org>, nouveau@lists.freedesktop.org,
- Greg KH <gregkh@linuxfoundation.org>, Randy Dunlap <rdunlap@infradead.org>,
- lkml <linux-kernel@vger.kernel.org>, tfiga@chromium.org,
- "list@263.net:IOMMU DRIVERS" <iommu@lists.linux-foundation.org>,
- Jim Quinlan <james.quinlan@broadcom.com>, xypron.glpk@gmx.de,
- Robin Murphy <robin.murphy@arm.com>, bauerman@linux.ibm.com
+Cc: Zhen Lei <thunder.leizhen@huawei.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-> +static inline bool is_dev_swiotlb_force(struct device *dev)
-> +{
-> +#ifdef CONFIG_DMA_RESTRICTED_POOL
-> +	if (dev->dma_io_tlb_mem)
-> +		return true;
-> +#endif /* CONFIG_DMA_RESTRICTED_POOL */
-> +	return false;
-> +}
-> +
+v1 --> v2:
+1. Add Patch 1 to fix ida leak
+2. Modifies nouveau_get_backlight_name() to propagate the actual error code
 
->  	/* If SWIOTLB is active, use its maximum mapping size */
->  	if (is_swiotlb_active(dev) &&
-> -	    (dma_addressing_limited(dev) || swiotlb_force == SWIOTLB_FORCE))
-> +	    (dma_addressing_limited(dev) || swiotlb_force == SWIOTLB_FORCE ||
-> +	     is_dev_swiotlb_force(dev)))
+Zhen Lei (2):
+  drm/nouveau: Fix ida leak
+  drm/nouveau: Fix error return code in nouveau_backlight_init()
 
-This is a mess.  I think the right way is to have an always_bounce flag
-in the io_tlb_mem structure instead.  Then the global swiotlb_force can
-go away and be replace with this and the fact that having no
-io_tlb_mem structure at all means forced no buffering (after a little
-refactoring).
+ drivers/gpu/drm/nouveau/nouveau_backlight.c | 14 ++++++++------
+ 1 file changed, 8 insertions(+), 6 deletions(-)
+
+-- 
+2.26.0.106.g9fadedd
+
+
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
