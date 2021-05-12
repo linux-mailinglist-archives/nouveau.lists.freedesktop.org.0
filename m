@@ -1,41 +1,108 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9CF6D37FF07
-	for <lists+nouveau@lfdr.de>; Thu, 13 May 2021 22:26:47 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 434BC37FF06
+	for <lists+nouveau@lfdr.de>; Thu, 13 May 2021 22:26:46 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 82E286EDD6;
-	Thu, 13 May 2021 20:26:41 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A5F7A6EDD3;
+	Thu, 13 May 2021 20:26:40 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from szxga04-in.huawei.com (szxga04-in.huawei.com [45.249.212.190])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 313F66EB52;
- Wed, 12 May 2021 06:57:33 +0000 (UTC)
-Received: from DGGEMS403-HUB.china.huawei.com (unknown [172.30.72.59])
- by szxga04-in.huawei.com (SkyGuard) with ESMTP id 4Fg5BZ1t2Lz16Q7L;
- Wed, 12 May 2021 14:54:46 +0800 (CST)
-Received: from [127.0.0.1] (10.174.177.72) by DGGEMS403-HUB.china.huawei.com
- (10.3.19.203) with Microsoft SMTP Server id 14.3.498.0; Wed, 12 May 2021
- 14:57:24 +0800
-To: Ben Skeggs <bskeggs@redhat.com>, David Airlie <airlied@linux.ie>, "Daniel
- Vetter" <daniel@ffwll.ch>, dri-devel <dri-devel@lists.freedesktop.org>,
- nouveau <nouveau@lists.freedesktop.org>
-References: <20210511082841.4181-1-thunder.leizhen@huawei.com>
- <20210511082841.4181-2-thunder.leizhen@huawei.com>
- <20210512063952.5kwdrq2yzbmgmn4x@Normandy.localdomain>
-From: "Leizhen (ThunderTown)" <thunder.leizhen@huawei.com>
-Message-ID: <0800f5b6-ff18-94eb-a4a0-113800a9b14d@huawei.com>
-Date: Wed, 12 May 2021 14:57:23 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:60.0) Gecko/20100101
- Thunderbird/60.7.0
+Received: from NAM02-BN1-obe.outbound.protection.outlook.com
+ (mail-bn1nam07on2086.outbound.protection.outlook.com [40.107.212.86])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6BF066E53C;
+ Wed, 12 May 2021 21:00:31 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=RNNaL6GJ9ApJDlTqAWw+GuAONGi4s7v7Xm/doZXo1va46P7GTjRinC+v4r5ih0Q97zeCAxQObfKOwFzoKPAV9tRP9ybj/NGePDScOpf6ugEmuMcSQC1D2erqgcaOauC5JaJUdWPashAvXB2PXMSiAekWe/Mq07XMoT3tgBipaUA5cc9AhfBwKI0LqU3ySmTPaCADQuH7ioL2WngExlzON1hwyg+Yc6asvLCWzvIEY7dTq1ju4Vdg/N+MESTJtga/KTZgQ8OHkUdacEwMGhi2WWylh4FFA3tm6llmZki+PWWe2PfMW2OIaKtqVATkFI3HAq8SfyO1QdXHJh3mNg6G+Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=I8t4h6jVJDoOreWD+oRhj5uS2hECWUqv9fQ6Bj1frkI=;
+ b=ew9g4alf8WXOgeBcO11FvAVeU4qM+kEI/Cs81M0RHnKfYzqqWLk/1+vARfOEls+uOb4GJ0Lx7H/QSgz4H8Yc3WcLwLKKdVkavNNdoAxGlaaMp1o9LjfrfkrMlV4lLVbFtR6pEf73C/X2JNc8I67tQE/2x4qJdWHUEAsMB80fz8TEgewKVnBiBEEKmD2NuUE4bTqVDzU4gHuk+32EVx3pyAI26J2MjutvDxlPw3iK+UG0BqM+cATF2H2WAUeDjBFRzRR+9wnbLoIY0GZTBT8WuGN2FcWOpy+ISuDArAKBwHwai84QYz6sqSZ9iPEgYIAWrbtBVg0ge4hpld1eZm3qDA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=I8t4h6jVJDoOreWD+oRhj5uS2hECWUqv9fQ6Bj1frkI=;
+ b=CZSR6HAbfMO/Mk/T54UemPUIDrQnPWXlOdgpB3n2MVugshIFwDqr7lKz4T0ABjmtLwj1xA1oURidtzECwOVqc1hvnVCupV67I90rigkQB/wr4K8MmE5EZE+Mg2buosydjUTZFUNvQBivjGhXo7+mLBFRurIO9Dms3HrU+YZgEtc=
+Authentication-Results: lists.freedesktop.org; dkim=none (message not signed)
+ header.d=none; lists.freedesktop.org;
+ dmarc=none action=none header.from=amd.com;
+Received: from DM5PR12MB4679.namprd12.prod.outlook.com (2603:10b6:4:a2::37) by
+ DM5PR12MB1834.namprd12.prod.outlook.com (2603:10b6:3:10a::9) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.4108.29; Wed, 12 May 2021 21:00:28 +0000
+Received: from DM5PR12MB4679.namprd12.prod.outlook.com
+ ([fe80::b5bc:c121:c4e9:d4ea]) by DM5PR12MB4679.namprd12.prod.outlook.com
+ ([fe80::b5bc:c121:c4e9:d4ea%6]) with mapi id 15.20.4129.026; Wed, 12 May 2021
+ 21:00:28 +0000
+From: Nikola Cornij <nikola.cornij@amd.com>
+To: amd-gfx@lists.freedesktop.org
+Date: Wed, 12 May 2021 17:00:10 -0400
+Message-Id: <20210512210011.8425-1-nikola.cornij@amd.com>
+X-Mailer: git-send-email 2.25.1
+X-Originating-IP: [165.204.55.250]
+X-ClientProxiedBy: YT1PR01CA0110.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b01:2c::19) To DM5PR12MB4679.namprd12.prod.outlook.com
+ (2603:10b6:4:a2::37)
 MIME-Version: 1.0
-In-Reply-To: <20210512063952.5kwdrq2yzbmgmn4x@Normandy.localdomain>
-Content-Language: en-US
-X-Originating-IP: [10.174.177.72]
-X-CFilter-Loop: Reflected
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from ubuntu.localdomain (165.204.55.250) by
+ YT1PR01CA0110.CANPRD01.PROD.OUTLOOK.COM (2603:10b6:b01:2c::19) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.4108.31 via Frontend Transport; Wed, 12 May 2021 21:00:26 +0000
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: a205e5dd-0e41-42ea-3529-08d91588f8ca
+X-MS-TrafficTypeDiagnostic: DM5PR12MB1834:
+X-MS-Exchange-Transport-Forked: True
+X-Microsoft-Antispam-PRVS: <DM5PR12MB18347C8B8D6BC1B5194F5069EE529@DM5PR12MB1834.namprd12.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:4125;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: VjOjb18RJbZTEkiBrXM3q4wHq7F4yLRIEKCb782TW0KEgRx4RxjJ4LVlAWBFyce9B6vKPgXImcbfed99LEEkXvC3ELk8wqIvu8Xiu+qetcWLWW23nsxkoB4EHsY62scBgsBlToT6u3Xott4H2FIvNr7eAgv2iq4pm1qXbB1JpDp45cgwlKcce6nv2yNlnhhNaC1FaUkc7Ki7H06B9RMarvk0lYBR5Z3aEL4CF/89S/XHMeKHtRS0DUSKq9J2Rzg8DWMV63jm1p0Yy6UeyP/xfk8EPB3k6c93GHMVOenVnbdeetufXNhAT0+xlsNEWvw3S1LJqiaJYx5bjgVpZ0Bm6YJ5Eu0UssZM44dpMcHIpCIrnTJuQeXb0+NWnRjq1b9FGxW4VeU1nYESmoDCrIGibvCdo+JQJW+Z+vr1/ipYDICDv+FmDuN6ADC6CZOId+RUJhf/IWzCsrN2SmFNe5g+sgR7xDtLI9zLtTfn9B7DYTDSKJ4UMj0sQ3zwB9kX2MhAOHKT+GPNzifewGAEY4bTlz6bYQy5NLFKAH0nH7KmdnXm6dFehr67NbcGeOGxHJQs6xE/9ZfF0myPHtjmGXtvkzQuI675+HjwxJvBoLPUuWSct5dBKxAQxs6DNL9VFXHO43EK8m3GOLz/WoW4+fGbQlG/WCP9ERLZA3NBHOa2r5A=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DM5PR12MB4679.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(4636009)(376002)(396003)(39860400002)(346002)(366004)(136003)(66946007)(6512007)(4744005)(66556008)(54906003)(2906002)(83380400001)(66476007)(7416002)(44832011)(316002)(1076003)(86362001)(478600001)(36756003)(16526019)(4326008)(52116002)(186003)(38350700002)(6506007)(6916009)(38100700002)(8936002)(6666004)(956004)(8676002)(5660300002)(26005)(2616005)(6486002);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData: =?us-ascii?Q?TVxVCnseYrGtiOCM0IslRUqg5F1+/e2GtjJ7raqsg2ZQkLqIMrDRy6OZzKq8?=
+ =?us-ascii?Q?wVH4qVbTJD62OSaagf/vzvBUW+VKLxCdi/f854pXwDeAfrkTXpUlm6yw0dwZ?=
+ =?us-ascii?Q?YC7ZIuzzzPSJhuYPPfUu+Sf8DAm4uIfuNGXUhnWKsradhxQ1a3HyF2lbSS06?=
+ =?us-ascii?Q?yohSFpZuoSRm2/EcpO2K2FIb80qYx8qAIETSN3X/K8zkmCI8pXXsLVJTFfv+?=
+ =?us-ascii?Q?Z9Cjv8Qj94vlzcbdb2gw4kyoX4ecs6l14KaL45SmVT/dAHZPqU1NTUo70FXk?=
+ =?us-ascii?Q?7Hn7stQ0sxt+tPymmIQiUxb54s0nuJ+OpGNKh09J0SuzTN/zpP61FK4MdmEK?=
+ =?us-ascii?Q?4QVTrDeOYH8lxeTRmyleWp/72N/SVDWwLImCFfeTZUW/haKRUqfsFq+czdry?=
+ =?us-ascii?Q?0EB1O/AAvfPcQK4NcPYd5kX4L7NVr1Hf3tef+EmgdV+TK3sY+LATqjTIp4qy?=
+ =?us-ascii?Q?QdeH2B3CLG91FAuuX04Qpg2Fes8ZsMX5Fj4w7O1Yy8U99YK1HEHPryc7ogBw?=
+ =?us-ascii?Q?thgU1mBkY1Ahpglc02zsT7FsJJlqpHU3I407HVIst3MpblRCjI/Do5nickso?=
+ =?us-ascii?Q?DLYwybZFlpnESoVbZJ2uQ5RZY8WnSKAQDK1h4LZf0/ROeEeUp2bB8X8iDkU6?=
+ =?us-ascii?Q?doVlHmTeHi7SUUI3jOIKjaeZ1crtQMNx2BEV4QjQrJD0Ud6DF/j9R24Yos3U?=
+ =?us-ascii?Q?EkxGjad23tHmT2NQdlDzFHGAblUXIyCXHd1uL4F0M6vFdK1q3i4nsWSJo6i4?=
+ =?us-ascii?Q?DYiHS7H44p1gEe3QIeXDEZdg0QUtiq4gEklPq61WI+Ta6OazYf7UGKhJf5+q?=
+ =?us-ascii?Q?9zZVCvu7/yzX6WEaxvIR7pu8w8JtHa5h5/HMDs08B4JQTNspid/MpCF2pz8b?=
+ =?us-ascii?Q?8Ix2UyN65L10k10cEwE/zbcAND4RmCjvjErZC/rf3FQkHMfmwKCYupalPznn?=
+ =?us-ascii?Q?zFCZCrWiRlEWTmvpZcqbgMoMNCizcqKP2hK92ztGbyaxOZzYnyjb4KMM9LEi?=
+ =?us-ascii?Q?iKFzoil0x7vQ5qm5fF4S69wC6GaqV8xDcY2YQCNhYhFKSMTanRUWVkil7B1j?=
+ =?us-ascii?Q?GR7U8kBWa96vJM4MOUTn6ircof6o4+zaFGdFKVTRMKx182SZ4ESjyN7DoiZF?=
+ =?us-ascii?Q?SH1EYFLegRgm7eMAtfiC0Zs0TNREgcP2jiM6K4CXlDbTgnQZTQyAZlQODCzc?=
+ =?us-ascii?Q?PX0I/T1FrwY6DKxhPyCtZQlyCzY+d1HxjXxzHzgp44eqItfNZKfnf/268Fb9?=
+ =?us-ascii?Q?1tRZ4gOB8B0HBn/Eo5fYRoXjfuE41fOQjRLwTLCrEahX5frhC8eNveqXhu/d?=
+ =?us-ascii?Q?PoCwxA+dWO0Pbs28J8QdG+Lw?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: a205e5dd-0e41-42ea-3529-08d91588f8ca
+X-MS-Exchange-CrossTenant-AuthSource: DM5PR12MB4679.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 May 2021 21:00:28.5011 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: k8n+hg1jrrXq1zK84DciTWKwrOHrGsd55TYF15lwOBos9xU0bI5w/3ONx47KRp49sEiZP1THOs/WfUlSx/zZyQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM5PR12MB1834
 X-Mailman-Approved-At: Thu, 13 May 2021 20:26:39 +0000
-Subject: Re: [Nouveau] [PATCH v2 1/2] drm/nouveau: Fix ida leak
+Subject: [Nouveau] [PATCH v2 0/1] drm/dp_mst: Use kHz as link rate units
+ when settig source max link caps at init
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -47,41 +114,55 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: David Airlie <airlied@linux.ie>, Ramalingam C <ramalingam.c@intel.com>,
+ Imre Deak <imre.deak@intel.com>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ dri-devel@lists.freedesktop.org,
+ Meenakshikumar Somasundaram <meenakshikumar.somasundaram@amd.com>,
+ =?UTF-8?q?Ville=20Syrj=C3=A4l=C3=A4?= <ville.syrjala@linux.intel.com>,
+ Rodrigo Siqueira <Rodrigo.Siqueira@amd.com>,
+ Aurabindo Pillai <aurabindo.pillai@amd.com>, Ben Skeggs <bskeggs@redhat.com>,
+ nouveau@lists.freedesktop.org, Dave Airlie <airlied@redhat.com>,
+ Harry Wentland <harry.wentland@amd.com>, Daniel Vetter <daniel@ffwll.ch>,
+ Leo Li <sunpeng.li@amd.com>, Lucas De Marchi <lucas.demarchi@intel.com>,
+ intel-gfx@lists.freedesktop.org,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Nikola Cornij <nikola.cornij@amd.com>,
+ Sean Paul <seanpaul@chromium.org>, Jani Nikula <jani.nikula@linux.intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>, Mikita Lipski <mikita.lipski@amd.com>,
+ Matt Roper <matthew.d.roper@intel.com>, Chris Park <Chris.Park@amd.com>,
+ Eryk Brol <eryk.brol@amd.com>, "Pan, Xinhui" <Xinhui.Pan@amd.com>,
+ linux-kernel@vger.kernel.org, Wayne Lin <Wayne.Lin@amd.com>,
+ Alex Deucher <alexander.deucher@amd.com>, Lee Shawn C <shawn.c.lee@intel.com>,
+ =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-CgpPbiAyMDIxLzUvMTIgMTQ6MzksIFBpZXJyZSBNb3JlYXUgd3JvdGU6Cj4gV2h5IHJlbW92ZSB0
-aGUgY29uc3QgbW9kaWZpZXIgb24gYG5iYD8KCkEgbm9uLXBvaW50ZXIgbG9jYWwgdmFyaWFibGUs
-IEkgZG9uJ3QgdGhpbmsgaXQncyBuZWNlc3NhcnkgdG8KYWRkIGNvbnN0IG1vZGlmaWVyIHRvIG1h
-a2UgdGhlIHN5bnRheCB0b28gY29tcGxpY2F0ZWQuCgo+IAo+IE9uIDIwMjEtMDUtMTEg4oCUIDE2
-OjI4LCBaaGVuIExlaSB3cm90ZToKPj4gV2hlbiB0aGUgJ25iJyB2YWx1ZSBhbGxvY2F0ZWQgZnJv
-bSAnYmxfaWRhJyBpcyBncmVhdGVyIHRoYW4gb3IgZXF1YWwgdG8KPj4gMTAwLCBpdCB3aWxsIG5v
-dCBiZSByZWxlYXNlZC4gSW4gZmFjdCwgd2UgY2FuIHNpbXBsaWZ5IG9wZXJhdGlvbnMgYnkKPj4g
-bGltaXRpbmcgdGhlIHJhbmdlIG9mIGlkYXMgdGhhdCBjYW4gYmUgYXBwbGllZCBmb3IuCj4+Cj4+
-IEJ5IHRoZSB3YXksIGRlbGV0ZSB0aGUgY29uc3QgbW9kaWZpZXIgb2YgdGhlIGxvY2FsIHZhcmlh
-YmxlICduYicuCj4+Cj4+IEZpeGVzOiBkYjFhMGFlMjE0NjEgKCJkcm0vbm91dmVhdS9ibDogQXNz
-aWduIGRpZmZlcmVudCBuYW1lcyB0byBpbnRlcmZhY2VzIikKPj4gU2lnbmVkLW9mZi1ieTogWmhl
-biBMZWkgPHRodW5kZXIubGVpemhlbkBodWF3ZWkuY29tPgo+PiAtLS0KPj4gIGRyaXZlcnMvZ3B1
-L2RybS9ub3V2ZWF1L25vdXZlYXVfYmFja2xpZ2h0LmMgfCA1ICsrKy0tCj4+ICAxIGZpbGUgY2hh
-bmdlZCwgMyBpbnNlcnRpb25zKCspLCAyIGRlbGV0aW9ucygtKQo+Pgo+PiBkaWZmIC0tZ2l0IGEv
-ZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9iYWNrbGlnaHQuYyBiL2RyaXZlcnMvZ3B1
-L2RybS9ub3V2ZWF1L25vdXZlYXVfYmFja2xpZ2h0LmMKPj4gaW5kZXggNzJmMzVhMmJhYmNiMjBl
-Li5kMWM5OThlNjQ1ZmI0YjYgMTAwNjQ0Cj4+IC0tLSBhL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1
-L25vdXZlYXVfYmFja2xpZ2h0LmMKPj4gKysrIGIvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91
-dmVhdV9iYWNrbGlnaHQuYwo+PiBAQCAtNTEsOCArNTEsOSBAQCBzdGF0aWMgYm9vbAo+PiAgbm91
-dmVhdV9nZXRfYmFja2xpZ2h0X25hbWUoY2hhciBiYWNrbGlnaHRfbmFtZVtCTF9OQU1FX1NJWkVd
-LAo+PiAgCQkJICAgc3RydWN0IG5vdXZlYXVfYmFja2xpZ2h0ICpibCkKPj4gIHsKPj4gLQljb25z
-dCBpbnQgbmIgPSBpZGFfc2ltcGxlX2dldCgmYmxfaWRhLCAwLCAwLCBHRlBfS0VSTkVMKTsKPj4g
-LQlpZiAobmIgPCAwIHx8IG5iID49IDEwMCkKPj4gKwlpbnQgbmIgPSBpZGFfc2ltcGxlX2dldCgm
-YmxfaWRhLCAwLCAxMDAsIEdGUF9LRVJORUwpOwo+PiArCj4+ICsJaWYgKG5iIDwgMCkKPj4gIAkJ
-cmV0dXJuIGZhbHNlOwo+PiAgCWlmIChuYiA+IDApCj4+ICAJCXNucHJpbnRmKGJhY2tsaWdodF9u
-YW1lLCBCTF9OQU1FX1NJWkUsICJudl9iYWNrbGlnaHQlZCIsIG5iKTsKPj4gLS0gCj4+IDIuMjYu
-MC4xMDYuZzlmYWRlZGQKPj4KPj4KPj4gX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX18KPj4gTm91dmVhdSBtYWlsaW5nIGxpc3QKPj4gTm91dmVhdUBsaXN0cy5m
-cmVlZGVza3RvcC5vcmcKPj4gaHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9s
-aXN0aW5mby9ub3V2ZWF1Cj4gCj4gLgo+IAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX18KTm91dmVhdSBtYWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVl
-ZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5m
-by9ub3V2ZWF1Cg==
+Change log:
+  v2:
+  - Added 'Acked-by' to comment
+  
+  v1:
+  - Initial
+
+Nikola Cornij (1):
+  drm/dp_mst: Use kHz as link rate units when settig source max link
+    caps at init
+
+ .../gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_mst_types.c   | 4 ++--
+ drivers/gpu/drm/drm_dp_mst_topology.c                     | 8 ++++----
+ drivers/gpu/drm/i915/display/intel_dp_mst.c               | 4 ++--
+ drivers/gpu/drm/nouveau/dispnv50/disp.c                   | 5 +++--
+ drivers/gpu/drm/radeon/radeon_dp_mst.c                    | 2 +-
+ include/drm/drm_dp_mst_helper.h                           | 8 ++++----
+ 6 files changed, 16 insertions(+), 15 deletions(-)
+
+-- 
+2.25.1
+
+_______________________________________________
+Nouveau mailing list
+Nouveau@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/nouveau
