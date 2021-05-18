@@ -1,68 +1,74 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id A60FF387EA8
-	for <lists+nouveau@lfdr.de>; Tue, 18 May 2021 19:44:56 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id D5224387EAA
+	for <lists+nouveau@lfdr.de>; Tue, 18 May 2021 19:44:58 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0CF616EC52;
+	by gabe.freedesktop.org (Postfix) with ESMTP id 581866EC55;
 	Tue, 18 May 2021 17:44:55 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com
- [IPv6:2607:f8b0:4864:20::72c])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B87456EAA7
- for <nouveau@lists.freedesktop.org>; Tue, 18 May 2021 06:54:50 +0000 (UTC)
-Received: by mail-qk1-x72c.google.com with SMTP id f29so8398330qka.0
- for <nouveau@lists.freedesktop.org>; Mon, 17 May 2021 23:54:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=XgyF0OvHzw8KTyadFBcEzsCamkUD+/ukWzei3hnGvkc=;
- b=VO0BvOlWIIiGkUdtOb1VSOWiBrk2KLMr0fiDCPwaBrvrf/j2/7hCX1JlEDcxzMqFmv
- 42I6m34flwgfsu+jKFLERtm6bjzporQ7M0BTCF240tpdoJChz4PcESq3XpYvN81Vfxez
- ZW4CMor3EwZRISv4nvwP/XJ/8ZZ+MrGyZniYE=
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [216.205.24.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E683A6EB84
+ for <nouveau@lists.freedesktop.org>; Tue, 18 May 2021 14:17:12 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1621347432;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=cNUKCr7oEW4YoycabUCZ5TkkkBmsnw3r2ErIPXCKNh8=;
+ b=i12pKO1RKYDjcrP3hmNwAffhNhCxRoYhRDqQq6jXj0bG5DZuap+fL43ViQF1jOwn/RIlwI
+ 9Nd+w60Gil0uHf7qOB67RlGOpp4mcVkM75zxHEVuvKmc4NZ1RsiIVQdM2PcJBgfvQ9gLe7
+ XjEpexGFx0ZydG3eA+wPQSK/pjG+DjE=
+Received: from mail-qv1-f70.google.com (mail-qv1-f70.google.com
+ [209.85.219.70]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-549-SVF_3yklNGCmoWCj7OeFug-1; Tue, 18 May 2021 10:17:09 -0400
+X-MC-Unique: SVF_3yklNGCmoWCj7OeFug-1
+Received: by mail-qv1-f70.google.com with SMTP id
+ a18-20020a0cca920000b02901d3c6996bb7so7408754qvk.6
+ for <nouveau@lists.freedesktop.org>; Tue, 18 May 2021 07:17:09 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=XgyF0OvHzw8KTyadFBcEzsCamkUD+/ukWzei3hnGvkc=;
- b=CquVVLVu5GUWAJQXP1zbdWLsUEasQr0rmZIkxj7lGjcUKafYA/JgIwmJmAYj0drPNi
- 4Vdya1yAOtoj5ND1Cc62Wk6I7+n6JxsOoWYYnVaEDLmA4OUaYlYf+jy3Qzasuvf28ot0
- qJutyMtKqa+d/hWHYI7/rsvOR0FZrWPoeXMrfNEK6caM5tmFd8tcTDV2qXIqEdpkfGqw
- FGbSb6X+7us7hNRLCnN0LMrFjUleQjJQvOBhQLC4Nx3ZlNw0aw6aMh741sf9bnkzZhM9
- ZbN2oFu7Q8u9KG/fEPBenMP8L4NP+Hiokzc9phCa5Daq6euQaIB3GFqOHqpsa/B+wY2S
- OUZw==
-X-Gm-Message-State: AOAM530DOmqAU4Hvg/aW/zg800BKQ4IAFj956rFOCJvb3aZAbmlRftCg
- 9YXHMrfq/4QdjUV0Y8PiogaPm/dpi3PuNA==
-X-Google-Smtp-Source: ABdhPJwB1I82ay50z5/XMbMKUEWc2fY+INBbR2mLn6KQ/vv4JADUfLwQj6cRHU4/TQaWYbwpJ9CEJQ==
-X-Received: by 2002:a37:7046:: with SMTP id l67mr3947428qkc.69.1621320889465; 
- Mon, 17 May 2021 23:54:49 -0700 (PDT)
-Received: from mail-qt1-f182.google.com (mail-qt1-f182.google.com.
- [209.85.160.182])
- by smtp.gmail.com with ESMTPSA id h5sm12396879qkg.122.2021.05.17.23.54.48
- for <nouveau@lists.freedesktop.org>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 17 May 2021 23:54:48 -0700 (PDT)
-Received: by mail-qt1-f182.google.com with SMTP id t20so6734331qtx.8
- for <nouveau@lists.freedesktop.org>; Mon, 17 May 2021 23:54:48 -0700 (PDT)
-X-Received: by 2002:a05:6638:10e4:: with SMTP id
- g4mr3960623jae.90.1621320877050; 
- Mon, 17 May 2021 23:54:37 -0700 (PDT)
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=cNUKCr7oEW4YoycabUCZ5TkkkBmsnw3r2ErIPXCKNh8=;
+ b=jy97CL7KmgJlW9Det/qGpNW94nQYDxIZ7wZ1dPM54fwIo3az2YUX7c7Hw+Hf8AmyNe
+ ufaexMBB4bAIhksZfC7jBcX0jrkmrCpFcLRb1jXez78K7a18qEGdLzYk7JWVMZsYESLg
+ iec+Vk2ou4fKf7lc7XwhzoLfYF+ciK8yOqL78Eo9RCCy1JwVE/KWFp/DP8N08dX/Tnr2
+ U3q+beZs7nxYRe/SB8vIa45DPSJuYFaKYbuvRmYPDAU8RM36huWHW0Q11mnfk30F5+oy
+ TklOiFjeZFTTF7W4HBCusilN+Bw+73QgozXPxVavsSoJJAetOvuFJk+TXbSjnGV8EQr+
+ zTVA==
+X-Gm-Message-State: AOAM5328tiEdDefMQiisYev5aHeesXaF1KKBt7LkELokzASdsllAknEw
+ O2D/pGfRgyJ4kqdLW9tSc+j55fZZkVEtpLRbDRQ9ClxttDK7ONndpDDyLRMg1eIXS83ZH4+HtEY
+ FyLMdPtB6mLYWgmYYDHFbRCF+sA==
+X-Received: by 2002:a37:a854:: with SMTP id r81mr5567977qke.83.1621347429187; 
+ Tue, 18 May 2021 07:17:09 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJwNwMG50chJ/VK9YBnzgEPGUA+fkxk4jQnSOcxrE0QnRfHFDXo6jlaBwydyt2CUYa9cICfbkQ==
+X-Received: by 2002:a37:a854:: with SMTP id r81mr5567929qke.83.1621347428799; 
+ Tue, 18 May 2021 07:17:08 -0700 (PDT)
+Received: from t490s (bras-base-toroon474qw-grc-72-184-145-4-219.dsl.bell.ca.
+ [184.145.4.219])
+ by smtp.gmail.com with ESMTPSA id a23sm12742012qtd.60.2021.05.18.07.17.07
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 18 May 2021 07:17:07 -0700 (PDT)
+Date: Tue, 18 May 2021 10:17:06 -0400
+From: Peter Xu <peterx@redhat.com>
+To: Alistair Popple <apopple@nvidia.com>
+Message-ID: <YKPMYuh06R2DXPHS@t490s>
+References: <20210407084238.20443-1-apopple@nvidia.com>
+ <20210407084238.20443-2-apopple@nvidia.com>
+ <YKMjvKGIHdwQN2Ml@t490s> <2009782.faHf7sVjGQ@nvdebian>
 MIME-Version: 1.0
-References: <20210510095026.3477496-1-tientzu@chromium.org>
-In-Reply-To: <20210510095026.3477496-1-tientzu@chromium.org>
-From: Claire Chang <tientzu@chromium.org>
-Date: Tue, 18 May 2021 14:54:26 +0800
-X-Gmail-Original-Message-ID: <CALiNf2-LhQqAX3kJSETOxG4ipu9Nhs97yYiGm0XZKG7vBQ_hNQ@mail.gmail.com>
-Message-ID: <CALiNf2-LhQqAX3kJSETOxG4ipu9Nhs97yYiGm0XZKG7vBQ_hNQ@mail.gmail.com>
-To: Rob Herring <robh+dt@kernel.org>, mpe@ellerman.id.au,
- Joerg Roedel <joro@8bytes.org>, 
- Will Deacon <will@kernel.org>, Frank Rowand <frowand.list@gmail.com>, 
- Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, boris.ostrovsky@oracle.com,
- jgross@suse.com, 
- Christoph Hellwig <hch@lst.de>, Marek Szyprowski <m.szyprowski@samsung.com>
+In-Reply-To: <2009782.faHf7sVjGQ@nvdebian>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=peterx@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Disposition: inline
 X-Mailman-Approved-At: Tue, 18 May 2021 17:44:54 +0000
-Subject: Re: [Nouveau] [PATCH v6 00/15] Restricted DMA
+Subject: Re: [Nouveau] [PATCH v8 1/8] mm: Remove special swap entry functions
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -74,130 +80,94 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: heikki.krogerus@linux.intel.com, thomas.hellstrom@linux.intel.com,
- peterz@infradead.org, benh@kernel.crashing.org,
- joonas.lahtinen@linux.intel.com, dri-devel@lists.freedesktop.org,
- chris@chris-wilson.co.uk, grant.likely@arm.com, paulus@samba.org,
- mingo@kernel.org, Jianxiong Gao <jxgao@google.com>, sstabellini@kernel.org,
- Saravana Kannan <saravanak@google.com>, xypron.glpk@gmx.de,
- "Rafael J . Wysocki" <rafael.j.wysocki@intel.com>,
- Bartosz Golaszewski <bgolaszewski@baylibre.com>, bskeggs@redhat.com,
- linux-pci@vger.kernel.org, xen-devel@lists.xenproject.org,
- Thierry Reding <treding@nvidia.com>, intel-gfx@lists.freedesktop.org,
- matthew.auld@intel.com, linux-devicetree <devicetree@vger.kernel.org>,
- Daniel Vetter <daniel@ffwll.ch>, airlied@linux.ie,
- maarten.lankhorst@linux.intel.com, Robin Murphy <robin.murphy@arm.com>,
- jani.nikula@linux.intel.com, Nicolas Boichat <drinkcat@chromium.org>,
- rodrigo.vivi@intel.com, Bjorn Helgaas <bhelgaas@google.com>,
- Dan Williams <dan.j.williams@intel.com>,
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- nouveau@lists.freedesktop.org, Greg KH <gregkh@linuxfoundation.org>,
- Randy Dunlap <rdunlap@infradead.org>, lkml <linux-kernel@vger.kernel.org>,
- Tomasz Figa <tfiga@chromium.org>,
- "list@263.net:IOMMU DRIVERS" <iommu@lists.linux-foundation.org>,
- Jim Quinlan <james.quinlan@broadcom.com>, linuxppc-dev@lists.ozlabs.org,
- bauerman@linux.ibm.com
+Cc: rcampbell@nvidia.com, willy@infradead.org, daniel@ffwll.ch,
+ linux-doc@vger.kernel.org, nouveau@lists.freedesktop.org,
+ bsingharora@gmail.com, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, hch@infradead.org, linux-mm@kvack.org,
+ bskeggs@redhat.com, jgg@nvidia.com, akpm@linux-foundation.org,
+ Christoph Hellwig <hch@lst.de>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-v7: https://lore.kernel.org/patchwork/cover/1431031/
+On Tue, May 18, 2021 at 09:58:09PM +1000, Alistair Popple wrote:
+> On Tuesday, 18 May 2021 12:17:32 PM AEST Peter Xu wrote:
+> > On Wed, Apr 07, 2021 at 06:42:31PM +1000, Alistair Popple wrote:
+> > > +static inline struct page *pfn_swap_entry_to_page(swp_entry_t entry)
+> > > +{
+> > > +     struct page *p = pfn_to_page(swp_offset(entry));
+> > > +
+> > > +     /*
+> > > +      * Any use of migration entries may only occur while the
+> > > +      * corresponding page is locked
+> > > +      */
+> > > +     BUG_ON(is_migration_entry(entry) && !PageLocked(p));
+> > > +
+> > > +     return p;
+> > > +}
+> > 
+> > Would swap_pfn_entry_to_page() be slightly better?
+> > 
+> > The thing is it's very easy to read pfn_*() as a function to take a pfn as
+> > parameter...
+> > 
+> > Since I'm also recently working on some swap-related new ptes [1], I'm
+> > thinking whether we could name these swap entries as "swap XXX entries". 
+> > Say, "swap hwpoison entry", "swap pfn entry" (which is a superset of "swap
+> > migration entry", "swap device exclusive entry", ...).  That's where I came
+> > with the above swap_pfn_entry_to_page(), then below will be naturally
+> > is_swap_pfn_entry().
+> 
+> Equally though "hwpoison swap entry", "pfn swap entry", "migration swap 
+> entry", etc. also makes sense (at least to me), but does that not fit in as 
+> well with your series? I haven't looked too deeply at your series but have 
+> been meaning to so thanks for the pointer.
 
-On Mon, May 10, 2021 at 5:50 PM Claire Chang <tientzu@chromium.org> wrote:
->
-> From: Claire Chang <tientzu@google.com>
->
-> This series implements mitigations for lack of DMA access control on
-> systems without an IOMMU, which could result in the DMA accessing the
-> system memory at unexpected times and/or unexpected addresses, possibly
-> leading to data leakage or corruption.
->
-> For example, we plan to use the PCI-e bus for Wi-Fi and that PCI-e bus is
-> not behind an IOMMU. As PCI-e, by design, gives the device full access to
-> system memory, a vulnerability in the Wi-Fi firmware could easily escalate
-> to a full system exploit (remote wifi exploits: [1a], [1b] that shows a
-> full chain of exploits; [2], [3]).
->
-> To mitigate the security concerns, we introduce restricted DMA. Restricted
-> DMA utilizes the existing swiotlb to bounce streaming DMA in and out of a
-> specially allocated region and does memory allocation from the same region.
-> The feature on its own provides a basic level of protection against the DMA
-> overwriting buffer contents at unexpected times. However, to protect
-> against general data leakage and system memory corruption, the system needs
-> to provide a way to restrict the DMA to a predefined memory region (this is
-> usually done at firmware level, e.g. MPU in ATF on some ARM platforms [4]).
->
-> [1a] https://googleprojectzero.blogspot.com/2017/04/over-air-exploiting-broadcoms-wi-fi_4.html
-> [1b] https://googleprojectzero.blogspot.com/2017/04/over-air-exploiting-broadcoms-wi-fi_11.html
-> [2] https://blade.tencent.com/en/advisories/qualpwn/
-> [3] https://www.bleepingcomputer.com/news/security/vulnerabilities-found-in-highly-popular-firmware-for-wifi-chips/
-> [4] https://github.com/ARM-software/arm-trusted-firmware/blob/master/plat/mediatek/mt8183/drivers/emi_mpu/emi_mpu.c#L132
->
-> v6:
-> Address the comments in v5
->
-> v5:
-> Rebase on latest linux-next
-> https://lore.kernel.org/patchwork/cover/1416899/
->
-> v4:
-> - Fix spinlock bad magic
-> - Use rmem->name for debugfs entry
-> - Address the comments in v3
-> https://lore.kernel.org/patchwork/cover/1378113/
->
-> v3:
-> Using only one reserved memory region for both streaming DMA and memory
-> allocation.
-> https://lore.kernel.org/patchwork/cover/1360992/
->
-> v2:
-> Building on top of swiotlb.
-> https://lore.kernel.org/patchwork/cover/1280705/
->
-> v1:
-> Using dma_map_ops.
-> https://lore.kernel.org/patchwork/cover/1271660/
-> *** BLURB HERE ***
->
-> Claire Chang (15):
->   swiotlb: Refactor swiotlb init functions
->   swiotlb: Refactor swiotlb_create_debugfs
->   swiotlb: Add DMA_RESTRICTED_POOL
->   swiotlb: Add restricted DMA pool initialization
->   swiotlb: Add a new get_io_tlb_mem getter
->   swiotlb: Update is_swiotlb_buffer to add a struct device argument
->   swiotlb: Update is_swiotlb_active to add a struct device argument
->   swiotlb: Bounce data from/to restricted DMA pool if available
->   swiotlb: Move alloc_size to find_slots
->   swiotlb: Refactor swiotlb_tbl_unmap_single
->   dma-direct: Add a new wrapper __dma_direct_free_pages()
->   swiotlb: Add restricted DMA alloc/free support.
->   dma-direct: Allocate memory from restricted DMA pool if available
->   dt-bindings: of: Add restricted DMA pool
->   of: Add plumbing for restricted DMA pool
->
->  .../reserved-memory/reserved-memory.txt       |  27 ++
->  drivers/gpu/drm/i915/gem/i915_gem_internal.c  |   2 +-
->  drivers/gpu/drm/nouveau/nouveau_ttm.c         |   2 +-
->  drivers/iommu/dma-iommu.c                     |  12 +-
->  drivers/of/address.c                          |  25 ++
->  drivers/of/device.c                           |   3 +
->  drivers/of/of_private.h                       |   5 +
->  drivers/pci/xen-pcifront.c                    |   2 +-
->  drivers/xen/swiotlb-xen.c                     |   2 +-
->  include/linux/device.h                        |   4 +
->  include/linux/swiotlb.h                       |  41 ++-
->  kernel/dma/Kconfig                            |  14 +
->  kernel/dma/direct.c                           |  63 +++--
->  kernel/dma/direct.h                           |   9 +-
->  kernel/dma/swiotlb.c                          | 242 +++++++++++++-----
->  15 files changed, 356 insertions(+), 97 deletions(-)
->
-> --
-> 2.31.1.607.g51e8a6a459-goog
->
+Yeah it looks good too.  It's just to avoid starting with "pfn_" I guess, so at
+least we know that's something related to swap not one specific pfn.
+
+I found the naming is important as e.g. in my series I introduced another idea
+called "swap special pte" or "special swap pte" (yeah so indeed my naming is
+not that coherent as well... :), then I noticed if without a good naming I'm
+afraid we can get lost easier.
+
+I have a description here in the commit message re the new swap special pte:
+
+https://lore.kernel.org/lkml/20210427161317.50682-5-peterx@redhat.com/
+
+In which the uffd-wp marker pte will be the first swap special pte.  Feel free
+to ignore the details too, just want to mention some context, while it should
+be orthogonal to this series.
+
+I think yet-another swap entry suites for my case too but it'll be a waste as
+in that pte I don't need to keep pfn information, but only a marker (one single
+bit would suffice), so I chose one single pte value (one for each arch, I only
+defined that on x86 in my series which is a special pte with only one bit set)
+to not pollute the swap entry address spaces.
+
+> 
+> > No strong opinion as this is already a v8 series (and sorry to chim in this
+> > late), just to raise this up.
+> 
+> No worries, it's good timing as I was about to send a v9 which was just a 
+> rebase anyway. I am hoping to try and get this accepted for the next merge 
+> window but I will wait before sending v9 to see if anyone else has thoughts on 
+> the naming here.
+> 
+> I don't have a particularly strong opinion either, and your justification is 
+> more thought than I gave to naming these originally so am happy to rename if 
+> it's more readable or fits better with your series.
+
+I'll leave the decision to you, especially in case you still prefer the old
+naming.  Or feel free to wait too until someone else shares the thoughts so as
+to avoid unnecessary rebase work.
+
+Thanks,
+
+-- 
+Peter Xu
+
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
