@@ -1,25 +1,25 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B2E12388C52
-	for <lists+nouveau@lfdr.de>; Wed, 19 May 2021 13:05:08 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 343B4388CE7
+	for <lists+nouveau@lfdr.de>; Wed, 19 May 2021 13:35:27 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 17C976ED18;
-	Wed, 19 May 2021 11:05:05 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A056E6ED29;
+	Wed, 19 May 2021 11:35:22 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM04-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam08on2088.outbound.protection.outlook.com [40.107.102.88])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 764236ED18;
- Wed, 19 May 2021 11:05:02 +0000 (UTC)
+Received: from NAM02-SN1-obe.outbound.protection.outlook.com
+ (mail-sn1anam02on2043.outbound.protection.outlook.com [40.107.96.43])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0CC206E1B7;
+ Wed, 19 May 2021 11:35:20 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=aehnl+0ofynJeY73r8Ub7PgzHvZ31nKD18YEtDqy9jeCIPLE7xqWMSW3rUeUPmxl34rZkUB1zMe9GyiAgsb1akbp3sTu4khPMhQVcXHScAqFo3CgiHFonEZX3ro4lWzr3LegGt7UzEdIzANb588FwxD+0QmAtfWcy+raj/9MRXzzSurwho4jljsZz6pTGgTPKyjsHEn6bzGg7OI5wHEUL2j5VncBp9OOoAPAZaJpnWw0OBaFDaTp1gY04FO1f1cJGsEAc69Yqn79Y4J6HSox+tcalAe4WYLj22RFSJAuZ8uJjkVWqbM8irLkCj7Ps6Ojulk3i6jnRl/M4oaGsvVdyw==
+ b=IJdOuKJgkt2AxFELWVjV922sdRIV5EKiKo3L3OVVQDoNxNJ8HpNfDRC6G3nj29mdmKLQDoRid1emLuOFtHrct9MeMdeaq/mSdeOlN2uzm+nZwdO3mnEdVrmL4s1Co5ZQV36essMrA6oKaclaYiHdyBvbvB3hw2bh/a/CTAIWncrdBbQegQGt/sRx9HFQdZKRGFpERG3SrmHqsCnMKJMqcQPGS1plkQvZc21iqibv5nENe6TfdAD3KiiUuPVJu6makXwdckbDkOINttX8wUYBLfNoFLHP8pk3t8eWNEYspVdasVGwETkYBpEkp4Zto+cs2ayEYCIY7zjqsQ4TLSLjqQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=1DfRxZ+5VEOIpzSSpe0jdE2XkRnpvc4rL9wNBbngamI=;
- b=VBpTEplWsYqQKau36j/2i0seWElPlG0DaLism1CwxnyPeDIaiubNv/G71Row3GyP5VTqTuT/9TgrKs54Tj5c0tx44zYzAYCkGShq9nLE2zLqhHvXDfkqgUg9x3P3AdHwP29HRFRRbbBtA6AUULHriMTrKl9vzMSSYTHTNmhYPfH25z3qajwP+Pg/CyViHV6TqZJid/+NVr+7Nj4+70Rpoh72OD+i3M/EjaEhiKTuaZYeupIA8LZ0J9aDCtfVAsVMAj++GXvOds/oLHXsBrkbTbgfhrf+S1C8o9NA1q5JKRAofgLPfDGUKDlUWt8sL1lsP1JGGt/OQJxvQZCqq6uikA==
+ bh=r6CQ8755svoCY2YPzo7oiuSSdcZXJ08tTxYmaeR7asI=;
+ b=ay7Us3y8jMpJQuJOKFcoB8g//sGOwMkBGx+Vmwn8BT9MWjJuCenCJ7YJL520h12bNhLkO3GHNc80/gCNd6WMneF/Hli2/hoQrcR65l9ZZu+gJJt/7sTKr4JliPZA8xxwFEK/42Vaht8PP+bfKlXt/rJtGyiq+3Bgx/8M/XkNzkYfGXCk0CbejbJ7suhdtExyP3+wCwX8fxiJp9QEcpqQYRkusqqScII3ubsHlc/PFbsjODkj2prhkL+u76A5PxAoCgG9veCX97UqMfjnx+O3yABGKGkXdj7PtbNCMK6GXd2lEde3J8P5Iop6uzixuWFT9RjDJYOMxZJiIGrSKENHdQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  216.228.112.34) smtp.rcpttodomain=infradead.org smtp.mailfrom=nvidia.com;
  dmarc=pass (p=none sp=none pct=100) action=none header.from=nvidia.com;
@@ -27,18 +27,18 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=1DfRxZ+5VEOIpzSSpe0jdE2XkRnpvc4rL9wNBbngamI=;
- b=KU7G1rIDr9p6Y9tLaZff1J/MX0q5HrqKy7mmeAeuWy/TWHKcnyp4u3xX38jjhWM8ZPTv+F/9l8RPJ7k345RvsEU8fwxPCpaUsSDIdvx7NKcmagGlfSpBlck1/3le1Ms3wpC3wyuHSBAy+q08wQCq4U9QwMsoOzOC00IgjqN4OXs+3sVYvuW5nYeNefqYhsxb/JwykuN8uDTS0E7mUQLxVJ7lr36HDzc0BdyZFlmx7he7s7YVVd5UoC2PCMHZsPrBeOdaNcTkBhcOjKdk4Bukb8ZhyToEKtE0rdEhUow5IDjcVrPsV+w/qy4SgAE8vqTFlV3yJKQYqxOezaqpw43xYw==
-Received: from BN9PR03CA0359.namprd03.prod.outlook.com (2603:10b6:408:f6::34)
- by MN2PR12MB3837.namprd12.prod.outlook.com (2603:10b6:208:166::30)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4129.28; Wed, 19 May
- 2021 11:04:59 +0000
-Received: from BN8NAM11FT048.eop-nam11.prod.protection.outlook.com
- (2603:10b6:408:f6:cafe::94) by BN9PR03CA0359.outlook.office365.com
- (2603:10b6:408:f6::34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4108.25 via Frontend
- Transport; Wed, 19 May 2021 11:04:59 +0000
+ bh=r6CQ8755svoCY2YPzo7oiuSSdcZXJ08tTxYmaeR7asI=;
+ b=by/wMgPtjZALmJA9/n94mno2jV65Y8VWuRQ/4yWsH+1SUmi+GbymPZyCnBsSh2rZlQa6i2CWJemu5LDWq5ytsByzDxhEzYAaz6cC9OZFwJX4KQo/YPlM4yxs7g86Wf4vIE4BfmredPIo5wHfP7ktwXRneG9QZKlKqdgrgQ468ZCjtowELXWGtURgWy9aIDtdDRxNxFMDZg+bbCafS7RIcB1fGNgO+36CX58GVKva3Xzqkyje6dBIgdHV6khvKbjxQWc511J43BXqbeLLy3bM9BlxuzGpxVi8GGO2OON1nRwrmZ0cVVtDIbtLXXRpdijdXj/9HfbwQ6LrELzp9J9NTg==
+Received: from MWHPR04CA0056.namprd04.prod.outlook.com (2603:10b6:300:6c::18)
+ by MWHPR12MB1344.namprd12.prod.outlook.com (2603:10b6:300:9::9) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4129.25; Wed, 19 May
+ 2021 11:35:18 +0000
+Received: from CO1NAM11FT016.eop-nam11.prod.protection.outlook.com
+ (2603:10b6:300:6c:cafe::32) by MWHPR04CA0056.outlook.office365.com
+ (2603:10b6:300:6c::18) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4129.32 via Frontend
+ Transport; Wed, 19 May 2021 11:35:18 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.112.34)
  smtp.mailfrom=nvidia.com; infradead.org; dkim=none (message not signed)
  header.d=none;infradead.org; dmarc=pass action=none header.from=nvidia.com;
@@ -46,46 +46,46 @@ Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
  216.228.112.34 as permitted sender) receiver=protection.outlook.com;
  client-ip=216.228.112.34; helo=mail.nvidia.com;
 Received: from mail.nvidia.com (216.228.112.34) by
- BN8NAM11FT048.mail.protection.outlook.com (10.13.177.117) with Microsoft SMTP
+ CO1NAM11FT016.mail.protection.outlook.com (10.13.175.141) with Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id
- 15.20.4129.25 via Frontend Transport; Wed, 19 May 2021 11:04:58 +0000
+ 15.20.4129.25 via Frontend Transport; Wed, 19 May 2021 11:35:16 +0000
 Received: from nvdebian.localnet (172.20.145.6) by HQMAIL107.nvidia.com
  (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1497.2; Wed, 19 May
- 2021 11:04:55 +0000
+ 2021 11:35:12 +0000
 From: Alistair Popple <apopple@nvidia.com>
 To: Peter Xu <peterx@redhat.com>
-Date: Wed, 19 May 2021 21:04:53 +1000
-Message-ID: <2235357.HsqDk0zIjc@nvdebian>
-In-Reply-To: <YKRRgZmRMdk1vH7A@t490s>
+Date: Wed, 19 May 2021 21:35:10 +1000
+Message-ID: <2217153.lfGrokb94b@nvdebian>
+In-Reply-To: <YKP5Dj4Q/riGGc43@t490s>
 References: <20210407084238.20443-1-apopple@nvidia.com>
- <20210518230327.GG1002214@nvidia.com> <YKRRgZmRMdk1vH7A@t490s>
+ <47694715.suB6H4Uo8R@nvdebian> <YKP5Dj4Q/riGGc43@t490s>
 MIME-Version: 1.0
 X-Originating-IP: [172.20.145.6]
 X-ClientProxiedBy: HQMAIL107.nvidia.com (172.20.187.13) To
  HQMAIL107.nvidia.com (172.20.187.13)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 2b0ef9d4-36e6-4232-7f63-08d91ab5f159
-X-MS-TrafficTypeDiagnostic: MN2PR12MB3837:
-X-Microsoft-Antispam-PRVS: <MN2PR12MB38377842BCD32C537E6DB787DF2B9@MN2PR12MB3837.namprd12.prod.outlook.com>
+X-MS-Office365-Filtering-Correlation-Id: 692c5b3a-c6ab-4ca3-4599-08d91aba2cc5
+X-MS-TrafficTypeDiagnostic: MWHPR12MB1344:
+X-Microsoft-Antispam-PRVS: <MWHPR12MB1344AAE4231E74FF10FAAFDADF2B9@MWHPR12MB1344.namprd12.prod.outlook.com>
 X-MS-Oob-TLC-OOBClassifiers: OLM:9508;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: kwWuasoXuvWV5NQQVV1oO3hXN0nr0wukMkaxIDB3VyVPC/Ai12Xpx8i5sfyrViXXd6z98upa2pptC69wnyTTJvjT91IBO+rNw/fcM6G2j33IU18j3jYMAFWrADy/fwinsq+A1lMGH2v9gnLHAVfx9wr1DM2CLidZwoWZiWP0hZHOxFK3dV7hPoBndfATVWX+1wOHvd41//p/Rx76EyPyYzURPyuLhjN7539IJ7OQr/6RftmmwnoEmJIYH3na/v8jRGaynx0YECBcAYC4DvK0PBeH0WdKL+u4FzT9c8Ey6hnBfgnNMCqNBX7Nzla97dmXSREiqZNaN4msHEGPtkUqdTyzCwS4l8jb0GausK3Qg5NpB5qPmDpWLIfVJinkydOE80bYu0omH5ezCiNOPHmtX4S5vDSgeuKkCYJoaiLETzR3khGqXcKie3Iop1smQt0DyMk93ieH+75RG29Wknq7RyoTgiBsP9JjyVdLGK9pzWNWZ9Eqs031gdMPuY1mrchwQG2ffLqgwPd+DL9SFUCpC3SKek2X81E7c0YnYEUNSCuwdQKoK1yNoelpMNeaf6UtdXY3u/JOFJYDhoui/wSoa0FyRgY8seVY5kSw+yJJL94sYwwFbfdjG4mkYxDiRcYWYxT+51NQKDtvOIz41NVWEqQlo+SZYr0Rr9IB+XGyLyn9jIkPisdsE9fAjKM9r2U0
+X-Microsoft-Antispam-Message-Info: 9ekHdPF+vHBadjByZ9hZjOBIDdDlIVEiAfR0VFvn9KQYS0rw339RYUHumf26lWPrreSlD+5z5a4sekSSddyigATjQsysKrXmZ1J51DQP2bdqh1QiIvl23bmlX/H27XbRGk9lWpM03nQaPitMBB7M0brEuwxUiDCN9iItYUyoyrGGY3ivN0kAwpgSrWtBScKRYRzqhxlx8swELIuOJ6fTUcFmWY82uh1FdvlBXAwSSMluNkaXxKiTZPYtx7VIUlfCkknAN2k1Mx1I/J7DSdEgZIMqgHhJZxxbUfrbNlu73/P28OMrfS8rNSmLPndKgV3jKxz5K3AjCVhhiUKTMDr3WOVRRCVqOoCIwwJnbk+JtIlXEuKJzCbZ4PBCKEmpUTWd2cI6s2+aq9WaNMI5XB42VzUJpoXxX7WCIx89RtukmvoN1hSe61W6ud1RBKzVgGgz1V3IkXg8bNSggU14pCvMT2KaWMxWXPdyL78rtruHPbc7wjKYmg6fKzmKgA/+vh8g2QNj9iDggpsBRnKpLcZN+GeZ5UieDlx2nKLrL5Qu/ASCh0RGMO3a8MWc92pj2U11vgCykX50/UjYAK3YK1ewiQxSX2sc8P5On3SAcfwqqMqcc+2Td0qs4Nzd2Jj3kRC/XRwpmWHzsbydBOXv/NFThELLZ+QcUpoXs9X3VNblaiPdLaIcIyo6sKog787xSeUzIxPLN2lCp3RAK7qdR+QjN19XRcPTXEvKQOR2ah7CcZsKuN2yZBxDsAo3uBZK56ztcqDYevM7hy9jMWYKFssK3w==
 X-Forefront-Antispam-Report: CIP:216.228.112.34; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:schybrid03.nvidia.com; CAT:NONE;
- SFS:(4636009)(39860400002)(136003)(346002)(376002)(396003)(36840700001)(46966006)(6916009)(70206006)(70586007)(9686003)(7636003)(2906002)(7416002)(83380400001)(36860700001)(8936002)(26005)(186003)(356005)(16526019)(47076005)(82310400003)(336012)(33716001)(478600001)(8676002)(86362001)(4326008)(9576002)(426003)(316002)(36906005)(5660300002)(82740400003)(54906003)(39026012);
+ SFS:(4636009)(396003)(39860400002)(376002)(136003)(346002)(36840700001)(46966006)(36906005)(70206006)(36860700001)(426003)(70586007)(336012)(478600001)(33716001)(186003)(8676002)(82310400003)(356005)(966005)(16526019)(82740400003)(4326008)(86362001)(7636003)(9686003)(7416002)(9576002)(47076005)(8936002)(26005)(54906003)(316002)(83380400001)(5660300002)(2906002)(6916009)(39026012);
  DIR:OUT; SFP:1101; 
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 May 2021 11:04:58.8403 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2b0ef9d4-36e6-4232-7f63-08d91ab5f159
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 May 2021 11:35:16.6041 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 692c5b3a-c6ab-4ca3-4599-08d91aba2cc5
 X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.112.34];
  Helo=[mail.nvidia.com]
-X-MS-Exchange-CrossTenant-AuthSource: BN8NAM11FT048.eop-nam11.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: CO1NAM11FT016.eop-nam11.prod.protection.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB3837
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MWHPR12MB1344
 Subject: Re: [Nouveau] [PATCH v8 5/8] mm: Device exclusive memory access
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -102,55 +102,58 @@ Cc: rcampbell@nvidia.com, willy@infradead.org, daniel@ffwll.ch,
  linux-doc@vger.kernel.org, nouveau@lists.freedesktop.org,
  bsingharora@gmail.com, linux-kernel@vger.kernel.org,
  dri-devel@lists.freedesktop.org, hch@infradead.org, linux-mm@kvack.org,
- bskeggs@redhat.com, Jason Gunthorpe <jgg@nvidia.com>,
- akpm@linux-foundation.org, Christoph Hellwig <hch@lst.de>
+ bskeggs@redhat.com, jgg@nvidia.com, akpm@linux-foundation.org,
+ Christoph Hellwig <hch@lst.de>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wednesday, 19 May 2021 9:45:05 AM AEST Peter Xu wrote:
-> External email: Use caution opening links or attachments
-> 
-> On Tue, May 18, 2021 at 08:03:27PM -0300, Jason Gunthorpe wrote:
-> > Logically during fork all these device exclusive pages should be
-> > reverted back to their CPU pages, write protected and the CPU page PTE
-> > copied to the fork.
+On Wednesday, 19 May 2021 3:27:42 AM AEST Peter Xu wrote:
+> > > The odd part is the remote GUP should have walked the page table
+> > > already, so since the target here is the vaddr to replace, the 1st page
+> > > table walk should be able to both trylock/lock the page, then modify
+> > > the pte with pgtable lock held, return the locked page, then walk the
+> > > rmap again to remove all the rest of the ptes that are mapping to this
+> > > page.  In that case before we call the rmap_walk() we know this must be
+> > > the page we want to take care of, and no one will be able to restore
+> > > the original mm pte either (as we're with the page lock).  Then we
+> > > don't need this check, neither do we need ttp->address.
 > > 
-> > We should not copy the device exclusive page PTE to the fork. I think
-> > I pointed to this on an earlier rev..
+> > If I am understanding you correctly I think this would be similar to the
+> > approach that was taken in v2. However it pretty much ended up being just
+> > an open-coded version of gup which is useful anyway to fault the page in.
+> I see.  For easier reference this is v2 patch 1:
 > 
-> Agreed.  Though please see the question I posted in the other thread: now I
-> am not very sure whether we'll be able to mark a page as device exclusive
-> if that page has mapcount>1.
->
-> > We can optimize this into the various variants above, but logically
-> > device exclusive stop existing during fork.
-> 
-> Makes sense, I think that's indeed what this patch did at least for the COW
-> case, so I think Alistair did address that comment.  It's just that I think
-> we need to drop the other !COW case (imho that should correspond to the
-> changes in copy_nonpresent_pte()) in this patch to guarantee it.
+> https://lore.kernel.org/lkml/20210219020750.16444-2-apopple@nvidia.com/
 
-Right. The main change from v7 -> v8 was to remove device exclusive entries on 
-fork instead of copying them. The change in copy_nonpresent_pte() is for the
-!COW case. I think what you are getting at is given exclusive entries are 
-(currently) only supported for PageAnon pages is_cow_mapping() will always be 
-true and therefore the change to copy_nonpresent_pte() can be dropped. That 
-logic seems reasonable so I will change the exclusive case in 
-copy_nonpresent_pte() to a VM_WARN_ON.
+Sorry, I should have been clearer and just included that reference for you.
 
-> I also hope we don't make copy_pte_range() even more complicated just to do
-> the lock_page() right, so we could fail the fork() if the lock is hard to
-> take.
+> Indeed that looks like it, it's just that instead of grabbing the page only
+> in hmm_exclusive_pmd() we can do the pte modification along the way to seal
+> the whole thing (address/pte & page).  I saw Christoph and Jason commented
+> in that patch, but not regarding to this approach.  So is there a reason
+> that you switched?  Do you think it'll work?
 
-Failing fork() because we couldn't take a lock doesn't seem like the right 
-approach though, especially as there is already existing code that retries. I 
-get this adds complexity though, so would be happy to take a look at cleaning 
-copy_pte_range() up in future.
+I think the approach you are describing is similar to what 
+migrate_vma_collect()/migrate_vma_unamp() does now and I think it could be 
+made to work. I ended up going with the GUP+unmap approach in part because 
+Christoph suggested it but primarily because it required less code especially 
+given we needed to call something to fault the page in/break COW anyway (or 
+extend what was there to call handle_mm_fault(), etc.).
 
-> --
-> Peter Xu
+> I have no strong opinion either, it's just not crystal clear why we'd need
+> that ttp->address at all for a rmap walk along with that "valid" field.
+
+It's purely to ensure the PTE pointing to the GUP page was replaced with an 
+exclusive swap entry and that the mapping didn't change between calls.
+
+> Meanwhile it should be slightly less efficient too to go with current
+> approach, especially when the page array gets huge, I think: since there'll
+> be longer time we do GUP before doing the rmap walk, so higher possibility
+> that the GUPed pages got replaced for whatever reason.  Then the call to
+> make_device_exclusive_range() will fail as a whole just for a single page
+> replacement within the range.
 
 
 
