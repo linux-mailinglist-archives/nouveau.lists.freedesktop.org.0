@@ -1,91 +1,114 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 72857388EAF
-	for <lists+nouveau@lfdr.de>; Wed, 19 May 2021 15:12:08 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id AA017388F1A
+	for <lists+nouveau@lfdr.de>; Wed, 19 May 2021 15:28:51 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0F8A66E3BB;
-	Wed, 19 May 2021 13:12:05 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D7BE46EDA9;
+	Wed, 19 May 2021 13:28:46 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam10on2065.outbound.protection.outlook.com [40.107.94.65])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E26D16E3BB;
- Wed, 19 May 2021 13:12:02 +0000 (UTC)
+Received: from NAM11-CO1-obe.outbound.protection.outlook.com
+ (mail-co1nam11on2084.outbound.protection.outlook.com [40.107.220.84])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9AB3D6EDA9;
+ Wed, 19 May 2021 13:28:45 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=GdJE79JpFnYW8ID2u1XX4avM+GtKcg7orgwOazsq4ehxC49P/1wP4u2STBs3diY4NBEz9af72ZK5zP9QEQ8pTkubSWr6eXj68NxfuaMMUuH1lXmSU+B+xetSYmxXUExOvLXQSi6Xd3op+4WQfUW63QXLCcfG1Dfh+fnTl4P2P4YIJQIagw6MAnVlY3NEYZC35/xSm7Nfrh+usfdpCxxCxL7iQ+ZX6fHVlV8Ut1hVUwZX51nYPSQ5UX80km6IoFbtUPXyCral/DuzxoCs1Z9T+cPgBvFWzVEYsDydmquCnaI0iH4TEORFsMhIwLb3ZWaUxlBW7IEVeCoHR5x7N+1jNQ==
+ b=XQHQ39hWwBktipV7TcC2G2roVTSgoSTr4J+3iBSCCORKOoMlSNhYqKcnCH7rj6E3fdUmQLNbDMKtvOapSxSqm87npjh0j6is/dQSPVAJdXYnI/g7ofJwOMzCrquCHFQbpBFDIrZo305Fl8OfdjZr54hVptaFxOEQ8R/RIO1UdAL+qVTUVRS4y2ets+WvO/bD2GZ8m2Lr25wjQCq4ZVBbEdYbdLsTwcsdMqDijravjppf11DF/nh+eJe0E5tjAAoR6v2cUUcJYxmKm9h3zn/hLWuaKE4YcwMCT27BvvoGOz4tqIzDT4SWH4kzZHtUjDWfktOxz0QOOiMqSFbFZfqB8w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=0uoknZbjGAYWkMqjYvXJe1jcU3yiTsCf/UaNR3x7LbU=;
- b=c8D7r9iIbPlVvMkse1kUJ+dw2KZBiXS5oWFBa+pX/LELXMfsU98ysa0Xg9ndoSb9p0LkCxQvxsQSmb97cUuYMPy1iyM5TNjaUobrrPmGDVZLHecovLpFqRBoE0opuQGbwBIrYwUyOSd5bXPtQzYOzdDxwVzZgE7uw6IkEYGISVmKijpUSLWbhbdV5n3/jFsq+9VR40zlRlJgnXSwoIgKTx8MgeQ1tJqDJ0n9kLKXpN1hutkCFKBVagptJys5z2ajjoHVU8V7dxQ32CLcc4EFu7R2kwJ0qQbCdN/S9GWbqfFOfxsd8si0LDz2jMMykZQO7rjSlhjvWVFT/4jvfcm8WA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 216.228.112.34) smtp.rcpttodomain=infradead.org smtp.mailfrom=nvidia.com;
- dmarc=pass (p=none sp=none pct=100) action=none header.from=nvidia.com;
- dkim=none (message not signed); arc=none
+ bh=gIXrrVoT7xnB18TlBrA+vGXv0bpN7Vl+C68QPq3kaAQ=;
+ b=eul/VpfoyqXSKtGQR2KyVXNEsJQ+ypaO0B2HN9bwPY4JMAN2PmHbwhcxkuqbbyNqdVRvEZGX+Y5J2gb5fMRnJ6hI1czHcS0lxkW/rmg1phTP+ERcNptBzfipkdB6mKIiUe7BnK0tssQgkuj+gv73LR5qH48oktoowXZPC5nL1wak8GKdJq5vQfXUZU5K2N86mYJeIHuYYPaJ0fmmXnCfn7saf91cdRNJNb5/zYv2uM0Iujq5K7EqOMJ1d/T5UwGeXAVKG2jzvcG5kPFejzzNe0MV9e6I3NQO/xGHyZwSIVQIn4RohIVLplULjNxP1OJi7zC5Xhce5bQGYms+W02fgQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=0uoknZbjGAYWkMqjYvXJe1jcU3yiTsCf/UaNR3x7LbU=;
- b=io5fHVE5OHMBOBbf0/cq3PYkQE2piUfZVimedZZI75XpfdX16KRZPbknZXB++NPjXBDG4uoiVnbAQoM4u4vx3/eVGkSWl+Rf7oRCkvUknpnSWaBaI4Xt6J0jbvz2AVUG6r+j41YDjByL6ROyOrjj6NSUmEPQzovUiNlfAY2/lOTu31tL3Z20kjPccOzC3xdVVh0W79h7b4/nAkcufiiTI1ZCK1HZkc3QRaIVns0y1CY2XxOIW0RB+IWGt5H4dozGQUiebM7K8lMQq3tNCt1d9XE/A2Wt+alKm1rIO/bRt6iCxqoMzS1hpsDCZxRKAmZHTLAsX25l+F8+LCkeKSKQVQ==
-Received: from DS7PR03CA0157.namprd03.prod.outlook.com (2603:10b6:5:3b2::12)
- by MN2PR12MB4813.namprd12.prod.outlook.com (2603:10b6:208:1bb::17) with
+ bh=gIXrrVoT7xnB18TlBrA+vGXv0bpN7Vl+C68QPq3kaAQ=;
+ b=leA8ktJqAzXf2X5uHXjVKr0Tm0dpzDoAYJ42LOE0fBpbiq5rPx6VUi3XC1acScygP6QVrzTwu1SU15evxRIiNuKUNcqEw4x3QeV3RRBh2pD9Lr0YrlK3JAC4JC/kZ3AEuyEwXJJdV3RSJIL6TIfSXsWVN1q9I2piWDVe53s6y85nQJ2mdjeF4ex7VFAl8fV//F+dSGkw8WIM6Uun1LOcwJZaXhLKkP2CRWlOOq23IES84EmA++Qx/gGWjPxjt7SDFoEZsbA3dYycqMC06WNeGHmQ4fY7YGvf2DijMo1DHcvmptR1rh+FfaCMu+1aXV/ZFVtdS7yJQ7usXFok0yXqBg==
+Authentication-Results: redhat.com; dkim=none (message not signed)
+ header.d=none;redhat.com; dmarc=none action=none header.from=nvidia.com;
+Received: from DM6PR12MB3834.namprd12.prod.outlook.com (2603:10b6:5:14a::12)
+ by DM6PR12MB4009.namprd12.prod.outlook.com (2603:10b6:5:1cd::25) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4129.25; Wed, 19 May
- 2021 13:12:01 +0000
-Received: from DM6NAM11FT063.eop-nam11.prod.protection.outlook.com
- (2603:10b6:5:3b2:cafe::eb) by DS7PR03CA0157.outlook.office365.com
- (2603:10b6:5:3b2::12) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4108.31 via Frontend
- Transport; Wed, 19 May 2021 13:12:01 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.112.34)
- smtp.mailfrom=nvidia.com; infradead.org; dkim=none (message not signed)
- header.d=none;infradead.org; dmarc=pass action=none header.from=nvidia.com;
-Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
- 216.228.112.34 as permitted sender) receiver=protection.outlook.com;
- client-ip=216.228.112.34; helo=mail.nvidia.com;
-Received: from mail.nvidia.com (216.228.112.34) by
- DM6NAM11FT063.mail.protection.outlook.com (10.13.172.219) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id
- 15.20.4129.25 via Frontend Transport; Wed, 19 May 2021 13:12:00 +0000
-Received: from nvdebian.localnet (172.20.145.6) by HQMAIL107.nvidia.com
- (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1497.2; Wed, 19 May
- 2021 13:11:57 +0000
-From: Alistair Popple <apopple@nvidia.com>
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4129.28; Wed, 19 May
+ 2021 13:28:44 +0000
+Received: from DM6PR12MB3834.namprd12.prod.outlook.com
+ ([fe80::ddb4:2cbb:4589:f039]) by DM6PR12MB3834.namprd12.prod.outlook.com
+ ([fe80::ddb4:2cbb:4589:f039%4]) with mapi id 15.20.4129.033; Wed, 19 May 2021
+ 13:28:44 +0000
+Date: Wed, 19 May 2021 10:28:42 -0300
+From: Jason Gunthorpe <jgg@nvidia.com>
 To: Peter Xu <peterx@redhat.com>
-Date: Wed, 19 May 2021 23:11:55 +1000
-Message-ID: <2569629.VzlulnA7BY@nvdebian>
-In-Reply-To: <YKUBbVuvm5FUJRMl@t490s>
-References: <20210407084238.20443-1-apopple@nvidia.com>
- <2235357.HsqDk0zIjc@nvdebian> <YKUBbVuvm5FUJRMl@t490s>
+Message-ID: <20210519132842.GJ1002214@nvidia.com>
+References: <20210407084238.20443-6-apopple@nvidia.com>
+ <YKMhorngO2DVrxac@t490s> <47694715.suB6H4Uo8R@nvdebian>
+ <YKP5Dj4Q/riGGc43@t490s> <20210518173334.GE1002214@nvidia.com>
+ <YKQBACJCjsxeM3ro@t490s> <20210518194509.GF1002214@nvidia.com>
+ <YKQjmtMo+YQGx/wZ@t490s> <20210518230327.GG1002214@nvidia.com>
+ <YKRRgZmRMdk1vH7A@t490s>
+Content-Disposition: inline
+In-Reply-To: <YKRRgZmRMdk1vH7A@t490s>
+X-Originating-IP: [47.55.113.94]
+X-ClientProxiedBy: MN2PR01CA0050.prod.exchangelabs.com (2603:10b6:208:23f::19)
+ To DM6PR12MB3834.namprd12.prod.outlook.com
+ (2603:10b6:5:14a::12)
 MIME-Version: 1.0
-X-Originating-IP: [172.20.145.6]
-X-ClientProxiedBy: HQMAIL107.nvidia.com (172.20.187.13) To
- HQMAIL107.nvidia.com (172.20.187.13)
-X-EOPAttributedMessage: 0
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from mlx.ziepe.ca (47.55.113.94) by
+ MN2PR01CA0050.prod.exchangelabs.com (2603:10b6:208:23f::19) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.4129.32 via Frontend Transport; Wed, 19 May 2021 13:28:43 +0000
+Received: from jgg by mlx with local (Exim 4.94)	(envelope-from
+ <jgg@nvidia.com>)	id 1ljMFe-00AiBe-GF; Wed, 19 May 2021 10:28:42 -0300
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 2dfe2fa5-c08a-45ec-dc52-08d91ac7b06d
-X-MS-TrafficTypeDiagnostic: MN2PR12MB4813:
-X-Microsoft-Antispam-PRVS: <MN2PR12MB48131A696F2BF70CC10A783EDF2B9@MN2PR12MB4813.namprd12.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:10000;
+X-MS-Office365-Filtering-Correlation-Id: 51402c4a-818c-42d9-7ebc-08d91aca0614
+X-MS-TrafficTypeDiagnostic: DM6PR12MB4009:
+X-MS-Exchange-Transport-Forked: True
+X-Microsoft-Antispam-PRVS: <DM6PR12MB4009985A1F1C7C655D046DB3C22B9@DM6PR12MB4009.namprd12.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:9508;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: Z4tdDNENPPeeQgW1+xvJPcp1KfSSs/nC8L2EJiw/ILX7k4XWuqAoiPBFMfjDQdWZR+JZZarZ+NgsVNqohy+r+QutIvva3z6V3BkVoAPFNBVpx3o9ddUfzAZABNeief0e1KXnnAHcEdTiGfmfmcVGK7xPoJ1FWwqFN/Mk1e9bBcwhHgIKSn7RG0ww5hfMVJRbL7xC8m6zz4X7iiqGeJzAGmg6i8rvJxQggn7XA7jl773n4+fFRXuUH+fNbRoSz0xXQyT5wGkOai0lEB3fom6h3HwsP0MRCs2KX9RabYSlVt+Zssk0pwPWCapE+UBXkNx+LOs8/BAjDXoaiyKspwBE/pKNf/1iEKMwxPIgwupbRGLyD6PAmDKzqNAQOKJxGJ912pvqY65Mb+S3dhrfe49dD+ZNhsDDdxCv7S96I/INFJyLxyfIxRf5AuOslCRqIf7heE2Ruwf5OFo7aL1Q6iHZJMwbBslP4Xw3e56Orwbr0Y/Op/1cIbxo4PXkr0BBEJTSKbNbTunsUVMe8o1+A27y/fq5CNagjCaT6LoD2JCOCmXSUqYQ4SA7PzXIp2DIctqTEI9Jtn8dhkVvNIeGnkN9AvYZPVmaMZP+M8QZEC3T5G3vQ7l6bPLkkQelIaDCH6v7fvUQ0UAZThxd50dl8IrGybnfiMPNekXU77j0IlrBycrZkWg1IGwhJQOPmnMawkfT
-X-Forefront-Antispam-Report: CIP:216.228.112.34; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:schybrid03.nvidia.com; CAT:NONE;
- SFS:(4636009)(39860400002)(136003)(346002)(396003)(376002)(36840700001)(46966006)(33716001)(7636003)(82740400003)(5660300002)(36860700001)(356005)(316002)(36906005)(83380400001)(9686003)(47076005)(86362001)(478600001)(2906002)(336012)(9576002)(8676002)(26005)(8936002)(186003)(16526019)(7416002)(82310400003)(426003)(70206006)(54906003)(6916009)(70586007)(4326008)(39026012);
+X-Microsoft-Antispam-Message-Info: uK7b7/gne5+gH8pDassTi/nGiPGU8vv5qjsEnFpCglKnSRmgdPF3Img6mQldQaI3kzkUgligeAV9gDW4ekG/IHYSpD8Oo1o+Dvw43EOa8Wlo8VyN6nCPw7Hkg0+nZZmBEZBqy08kwBpdvb/zl0MCW9OAhGRD/2NquQBoD7MpX1cxQWy7FoHdO3qxyCeaNzWO4Od3j82B7O7AaFkCxkvB/P8erGUoTGVKRHNiM9YGpOm0/p3Zd9r4GvquHs3LIfskI0WJ5/q/HW3tKPXxLwKL2Q5s2iSyWzxRMN5dHPe2oHNLJVrAZIaXYr2xKAQENFW/0dybaYFP0SkDT0xSFbyCL1B2doLVBkNMSDYl5D2jG3bOPt7Zzc/W2Be/bwlkpJLToMpG6NE7ODHdinHHhRa64F5F3M7/iVl//3ss88XqUnGARHsyzxgpNWQJUlNJogebK6jLGwWcOHLvQsQkquEsYOYeudkdqrhsQHDWI06SFJEYJgeUN5BAqvu1ak48My8XWEx77/Dnz4KRPpsnVULWDVkVaDgISqCtEsdFqqRJRyYN2pMEy3ZcMI3KJowg4y253OhmEWGb1OJp1Xdx99uloe2uR/xFAhV4MDgIEYkD3Fg=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DM6PR12MB3834.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(4636009)(366004)(136003)(376002)(346002)(39860400002)(396003)(7416002)(38100700002)(8676002)(9746002)(9786002)(478600001)(8936002)(2906002)(186003)(86362001)(26005)(54906003)(66946007)(66476007)(6916009)(316002)(1076003)(5660300002)(36756003)(33656002)(4744005)(426003)(2616005)(66556008)(4326008);
  DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData: =?us-ascii?Q?ShX1+RtbSmyhnUT/Thz17PmmI5w2jnNyQ5gokaWj/tfM5uehd+vuKS5yDsSG?=
+ =?us-ascii?Q?OiIj0j/oj0ojbSylpCyNWUcqDI5fAr9F3XxcVPD3pa9fXDlierKy5AwnDeUA?=
+ =?us-ascii?Q?oRXtzqy+xRnAQplEBsm08yMmm9zAW7n3l6nDUsqeb4ongYaKN+O/6yPcrKvs?=
+ =?us-ascii?Q?iDsTQjW9BnvpmiRBX5NPZLfrc/VWMOyXRQEMb8T/Mpw/+gdb1ECYOfl3dYw3?=
+ =?us-ascii?Q?r7oSQzEmWSo/Zw4WszUaC0PaHFFhII/MZ9/FIeBwnanUfcec4pYDr60DpGHY?=
+ =?us-ascii?Q?byVj5cbWKJpaXi1U5/rqP54Q7yQB9jyTC/1BTUOHFP1I2l4zoLP/dTuQk/pb?=
+ =?us-ascii?Q?RBOEUiyEbin8Q6TsYR12lmclD2s6bhanj8UCXMsI9Ov+ZkYJDV+iNg30kQ9a?=
+ =?us-ascii?Q?2MEl86RtH9jgWtcdhhuHA0TRUl7382Cn/XpYnMuvNRBW+vwBoriJRkmCjuQK?=
+ =?us-ascii?Q?bNn2kgkG2WWTq94o/9bN8i2PiRjnbVKlGo+J5yEKEMXK8tYC8girSvCGWt3k?=
+ =?us-ascii?Q?sf9qKSkigbj3ENnKJBKOK92tAOVB+8T/qeXSt2h1wycHLR3HvSj1KuHsKsN9?=
+ =?us-ascii?Q?d+WC/hcs3udO85yaBOAHWYx5TfV7EDGXgFzoS9OVg2v98XpBks0s1C5uXMzC?=
+ =?us-ascii?Q?amt0zVEgYpIBzczbo7Y5SCMhTQJsuJuaTIHqvV4eo4CTVOFCRidtKM4OvCJl?=
+ =?us-ascii?Q?jweTSibwdypfdCHndNfYOcxt6oKQhaN/t96i3viFKgoUdx1YpyQITvWXfHhu?=
+ =?us-ascii?Q?cR8NKpTxOHUhUUooZ1i0Q6Ck6QoG/AlWHW7HniJbrGBcn7aLB7updiTZi5UY?=
+ =?us-ascii?Q?W+TKXwSSYJfw6ZGr6CfNs841K9Q90NHfXbuWVRGMc8em2AJhOUoM8e9txvQy?=
+ =?us-ascii?Q?9kaaFf8RMgRO54XDt495wfPFxxfBFmuRzB8m1vRC4aVEoBJ3PLFp7nGWbMTQ?=
+ =?us-ascii?Q?nn9VrW1p5TyIhepNPEvm8XCM2YR6vC4KaQIyEHVZpALufAGCJxROb8ddx+QO?=
+ =?us-ascii?Q?yRe5g7oH2unlzWSxf0IlzsV/EveXs9/PbMkssfNhkLPuUie+qfiwMswKaFCy?=
+ =?us-ascii?Q?CBXiQJqKIVuRYp6l5Mj3OImdldGAfpZ5X6/umTyj2EanB6S0fJLCxY1Mb17y?=
+ =?us-ascii?Q?fVbyyCD0CGA8UBL4tbbY6bgf9DLW2PvF4veB7i8jPCU7Vs2NoQZKLNMWroYd?=
+ =?us-ascii?Q?gogrgGz0wX4NlrLR2nGfpgoAeflfY9sMk5imzVK7Po4nsIcal26Z2tDD+VC2?=
+ =?us-ascii?Q?GHV60/mAiei38bt24d8WH/Ml4umTm3v0CYW3MyXMnKfsUK4JHyRasPDd621N?=
+ =?us-ascii?Q?Cl20lHabUfv/w05A06HZd//H?=
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 May 2021 13:12:00.9280 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2dfe2fa5-c08a-45ec-dc52-08d91ac7b06d
+X-MS-Exchange-CrossTenant-Network-Message-Id: 51402c4a-818c-42d9-7ebc-08d91aca0614
+X-MS-Exchange-CrossTenant-AuthSource: DM6PR12MB3834.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 May 2021 13:28:43.9397 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.112.34];
- Helo=[mail.nvidia.com]
-X-MS-Exchange-CrossTenant-AuthSource: DM6NAM11FT063.eop-nam11.prod.protection.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB4813
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: BWUJnu65MOFz8vJg7aBCytyzxzKCp7KP1onUZ+J9OPS9POvPEpZ0CsErjHlafNVQ
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4009
 Subject: Re: [Nouveau] [PATCH v8 5/8] mm: Device exclusive memory access
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -98,57 +121,36 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: rcampbell@nvidia.com, willy@infradead.org, daniel@ffwll.ch,
- linux-doc@vger.kernel.org, nouveau@lists.freedesktop.org,
- bsingharora@gmail.com, linux-kernel@vger.kernel.org,
+Cc: rcampbell@nvidia.com, willy@infradead.org, linux-doc@vger.kernel.org,
+ nouveau@lists.freedesktop.org, bsingharora@gmail.com,
+ Alistair Popple <apopple@nvidia.com>, linux-kernel@vger.kernel.org,
  dri-devel@lists.freedesktop.org, hch@infradead.org, linux-mm@kvack.org,
- bskeggs@redhat.com, Jason Gunthorpe <jgg@nvidia.com>,
- akpm@linux-foundation.org, Christoph Hellwig <hch@lst.de>
+ bskeggs@redhat.com, daniel@ffwll.ch, akpm@linux-foundation.org,
+ Christoph Hellwig <hch@lst.de>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wednesday, 19 May 2021 10:15:41 PM AEST Peter Xu wrote:
-> External email: Use caution opening links or attachments
+On Tue, May 18, 2021 at 07:45:05PM -0400, Peter Xu wrote:
+> On Tue, May 18, 2021 at 08:03:27PM -0300, Jason Gunthorpe wrote:
+> > Logically during fork all these device exclusive pages should be
+> > reverted back to their CPU pages, write protected and the CPU page PTE
+> > copied to the fork.
+> > 
+> > We should not copy the device exclusive page PTE to the fork. I think
+> > I pointed to this on an earlier rev..
 > 
-> On Wed, May 19, 2021 at 09:04:53PM +1000, Alistair Popple wrote:
-> > Failing fork() because we couldn't take a lock doesn't seem like the right
-> > approach though, especially as there is already existing code that
-> > retries. I get this adds complexity though, so would be happy to take a
-> > look at cleaning copy_pte_range() up in future.
-> 
-> Yes, I proposed that as this one won't affect any existing applications
-> (unlike the existing ones) but only new userspace driver apps that will use
-> this new atomic feature.
-> 
-> IMHO it'll be a pity to add extra complexity and maintainance burden into
-> fork() if only for keeping the "logical correctness of fork()" however the
-> code never triggers. If we start with trylock we'll know whether people
-> will use it, since people will complain with a reason when needed; however
-> I still doubt whether a sane userspace device driver should fork() within
-> busy interaction with the device underneath..
+> Agreed.  Though please see the question I posted in the other thread: now I am
+> not very sure whether we'll be able to mark a page as device exclusive if that
+> page has mapcount>1.
 
-I will refrain from commenting on the sanity or otherwise of doing that :-)
+IMHO it is similar to write protect done by filesystems on shared
+mappings - all VMAs with a copy of the CPU page have to get switched
+to the device exclusive PTE. This is why the rmap stuff is involved in
+the migration helpers
 
-Agree such a scenario seems unlikely in practice (and possibly unreasonable). 
-Keeping the "logical correctness of fork()" still seems worthwhile to me, but 
-if the added complexity/maintenance burden for an admittedly fairly specific 
-feature is going to stop progress here I am happy to take the fail fork 
-approach. I could then possibly fix it up as a future clean up to 
-copy_pte_range(). Perhaps others have thoughts?
-
-> In all cases, please still consider to keep them in copy_nonpresent_pte()
-> (and if to rework, separating patches would be great).
->
-> Thanks,
-> 
-> --
-> Peter Xu
-
-
-
-
+Jason
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
