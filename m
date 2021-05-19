@@ -2,68 +2,68 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id E2FC83893C0
-	for <lists+nouveau@lfdr.de>; Wed, 19 May 2021 18:29:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 924803893C6
+	for <lists+nouveau@lfdr.de>; Wed, 19 May 2021 18:29:27 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D047E6EE27;
-	Wed, 19 May 2021 16:29:11 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5FA666EE35;
+	Wed, 19 May 2021 16:29:15 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E30556ED91
- for <nouveau@lists.freedesktop.org>; Wed, 19 May 2021 12:15:46 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [216.205.24.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B76EA6ED95
+ for <nouveau@lists.freedesktop.org>; Wed, 19 May 2021 12:21:13 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1621426546;
+ s=mimecast20190719; t=1621426872;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=tpsW6GoLBuPX3m2t6ZDWDsXVHyOzAne0XpIqOVeHL30=;
- b=iWJyJ2JzQRelZ805GCtdPoB9VQ1XEdIFM564RmmA7mx2ZGzJqSwzReDjGZYbV/b2mEll1M
- EWEOflN3vFnYnv+LNtdPgqnUgeQAmdbryad4yfCU6fCUY9bC7BpELXBFv9n0mkZJyVjMMT
- fKznwmsLn0Y2agTqb3v5v8170IhBbME=
+ bh=iT4YtjBsBt0s/M51Kj84dkt6amzmmMXBn/lNki8qQn0=;
+ b=aadB3nSK7zJu8MLuvZBnwJIwxcvxXFffv3horplEQW35HfRM12D6zRbCkuUb1AeVSk0Nrt
+ XAPy3eFD3993+UOMa2COO5RBmilwY5BRi24cg/Jkq7JGByfjJO+QUgoNqe6YhlUEDLEmI1
+ JioP1UtKeJ9uyGOd6/goD5mhUaymIrs=
 Received: from mail-qv1-f69.google.com (mail-qv1-f69.google.com
  [209.85.219.69]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-246-gcop4rCfNFy-wF9Kw3Iv3w-1; Wed, 19 May 2021 08:15:44 -0400
-X-MC-Unique: gcop4rCfNFy-wF9Kw3Iv3w-1
+ us-mta-251-TBw99y3UOn-xSlhZBfuxAw-1; Wed, 19 May 2021 08:21:10 -0400
+X-MC-Unique: TBw99y3UOn-xSlhZBfuxAw-1
 Received: by mail-qv1-f69.google.com with SMTP id
- r11-20020a0cb28b0000b02901c87a178503so10112425qve.22
- for <nouveau@lists.freedesktop.org>; Wed, 19 May 2021 05:15:44 -0700 (PDT)
+ e2-20020ad442a20000b02901f3586a14easo2669841qvr.12
+ for <nouveau@lists.freedesktop.org>; Wed, 19 May 2021 05:21:10 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to;
- bh=tpsW6GoLBuPX3m2t6ZDWDsXVHyOzAne0XpIqOVeHL30=;
- b=FnEPvL1Iue9busYOotRsN9hWJbWhgkUcQvW/RP79YFe7Y5pmOJCxeg5tXgE+v2Kpzz
- MOFPlJXXfYYRLraqFZojYz1DBDXJOaBBR/B8oZwLKjzVbbTZ+eHOYaG+VaDzJl8oJl+/
- ua6kyHOaM6wndQWdonyjD1VndwOWOcoC+uZ3shsGvzDSqFVRnw1om9IKY32m7p7oJZ2N
- qpWce++4z2VPWSsrhjLef9dtRWFqvm1ufSfCULKpeiEyQsSUXXgDjJ9/mkOQLog649y+
- LY12XtUfT7Xod1+zAl9S7h3hXqkFGf5F6hmMg7mqlvuih87XHFjwMwZJ3wVnjWp2cW8r
- 0lKw==
-X-Gm-Message-State: AOAM531nK5uT9dU+Ty6uJDnKqhC1/C4hJrY0hC+g0i5WLEVeeOBL6kpf
- MNztiXTPd9UizpvCsc1XyU/Ca5LaUKsQDhwo2oxYrdr3DIDYco+1x1lNpO08kDbAfXyq2mNOGkt
- fTGpwYnDJApixxxEJ8um73lykLA==
-X-Received: by 2002:a05:6214:20c4:: with SMTP id
- 4mr13195003qve.38.1621426543765; 
- Wed, 19 May 2021 05:15:43 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJxJeMvnD48yKledjvAvmUkVuVahWxfS9KHq8l5vFptQfcG6pDYRH4satuz1xLVBYj0ZmxaSVA==
-X-Received: by 2002:a05:6214:20c4:: with SMTP id
- 4mr13194979qve.38.1621426543531; 
- Wed, 19 May 2021 05:15:43 -0700 (PDT)
+ bh=iT4YtjBsBt0s/M51Kj84dkt6amzmmMXBn/lNki8qQn0=;
+ b=GoXStMCnrqoOcJ283RcWcE7+4+0QmNtCzUDceWx8zI0EtHrXnlVvpGdc0zTqpA+UuR
+ n0S4mtH1wnYrwaEeNXpj5yFHGh66rGFfM+gARa07P9tgzXdv84gAZo3jC38Ei6G9AzzK
+ SW55qTQWPWwuJo7++i566IpV/ChBOAQyJkKiwxDq+W8cLgleg8Ssnncm1uk/gBOov89z
+ 0RYZ7fTSD33MEfxp1aSR1PWFpxhHDtWjC2j2W6TpZXL7llAqZ0fLxj9d2RVS3B+1VYqq
+ GvCwUibW2Gv1JMwweKkClRFNJPa0Q/8grehEiRGQYSwW5reYuPQsxU8GJuTN+t4NphSH
+ 2LXw==
+X-Gm-Message-State: AOAM530Iml1RxS1VhL0yB7T4nPUZMrFu6rt8YJTTZpjf4nhfSzEIyZMI
+ eY+EVg47oyYY8FAiCcZG7ziIi7gtzpkp4BBmdtHZLDCocZSSxl4AmlKm4wCdljg4872A9b2x4iB
+ dV/+MRy7rlkaj0xodI9VxiO/7wg==
+X-Received: by 2002:a05:620a:818:: with SMTP id
+ s24mr7432106qks.425.1621426869767; 
+ Wed, 19 May 2021 05:21:09 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJym25A+8CZrSnha27nfGC/bkh618yND6m6b6Lo8EgcNF6Oma7UyN8ZK+yut+/9S1ILrFjJgwA==
+X-Received: by 2002:a05:620a:818:: with SMTP id
+ s24mr7432081qks.425.1621426869529; 
+ Wed, 19 May 2021 05:21:09 -0700 (PDT)
 Received: from t490s (bras-base-toroon474qw-grc-72-184-145-4-219.dsl.bell.ca.
  [184.145.4.219])
- by smtp.gmail.com with ESMTPSA id y9sm14576208qkm.19.2021.05.19.05.15.41
+ by smtp.gmail.com with ESMTPSA id o10sm15018668qki.72.2021.05.19.05.21.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 19 May 2021 05:15:42 -0700 (PDT)
-Date: Wed, 19 May 2021 08:15:41 -0400
+ Wed, 19 May 2021 05:21:09 -0700 (PDT)
+Date: Wed, 19 May 2021 08:21:08 -0400
 From: Peter Xu <peterx@redhat.com>
 To: Alistair Popple <apopple@nvidia.com>
-Message-ID: <YKUBbVuvm5FUJRMl@t490s>
+Message-ID: <YKUCtA4FrfmkNrn7@t490s>
 References: <20210407084238.20443-1-apopple@nvidia.com>
- <20210518230327.GG1002214@nvidia.com> <YKRRgZmRMdk1vH7A@t490s>
- <2235357.HsqDk0zIjc@nvdebian>
+ <47694715.suB6H4Uo8R@nvdebian> <YKP5Dj4Q/riGGc43@t490s>
+ <2217153.lfGrokb94b@nvdebian>
 MIME-Version: 1.0
-In-Reply-To: <2235357.HsqDk0zIjc@nvdebian>
+In-Reply-To: <2217153.lfGrokb94b@nvdebian>
 Authentication-Results: relay.mimecast.com;
  auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=peterx@redhat.com
 X-Mimecast-Spam-Score: 0
@@ -86,34 +86,23 @@ Cc: rcampbell@nvidia.com, willy@infradead.org, daniel@ffwll.ch,
  linux-doc@vger.kernel.org, nouveau@lists.freedesktop.org,
  bsingharora@gmail.com, linux-kernel@vger.kernel.org,
  dri-devel@lists.freedesktop.org, hch@infradead.org, linux-mm@kvack.org,
- bskeggs@redhat.com, Jason Gunthorpe <jgg@nvidia.com>,
- akpm@linux-foundation.org, Christoph Hellwig <hch@lst.de>
+ bskeggs@redhat.com, jgg@nvidia.com, akpm@linux-foundation.org,
+ Christoph Hellwig <hch@lst.de>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, May 19, 2021 at 09:04:53PM +1000, Alistair Popple wrote:
-> Failing fork() because we couldn't take a lock doesn't seem like the right 
-> approach though, especially as there is already existing code that retries. I 
-> get this adds complexity though, so would be happy to take a look at cleaning 
-> copy_pte_range() up in future.
+On Wed, May 19, 2021 at 09:35:10PM +1000, Alistair Popple wrote:
+> I think the approach you are describing is similar to what 
+> migrate_vma_collect()/migrate_vma_unamp() does now and I think it could be 
+> made to work. I ended up going with the GUP+unmap approach in part because 
+> Christoph suggested it but primarily because it required less code especially 
+> given we needed to call something to fault the page in/break COW anyway (or 
+> extend what was there to call handle_mm_fault(), etc.).
 
-Yes, I proposed that as this one won't affect any existing applications (unlike
-the existing ones) but only new userspace driver apps that will use this new
-atomic feature.
-
-IMHO it'll be a pity to add extra complexity and maintainance burden into
-fork() if only for keeping the "logical correctness of fork()" however the code
-never triggers. If we start with trylock we'll know whether people will use it,
-since people will complain with a reason when needed; however I still doubt
-whether a sane userspace device driver should fork() within busy interaction
-with the device underneath..
-
-In all cases, please still consider to keep them in copy_nonpresent_pte() (and
-if to rework, separating patches would be great).
-
-Thanks,
+I see, thank. Would you mind add a short paragraph in the commit message
+talking about these two solutions and why we choose the GUP way?
 
 -- 
 Peter Xu
