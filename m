@@ -2,68 +2,70 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 74F223893C2
-	for <lists+nouveau@lfdr.de>; Wed, 19 May 2021 18:29:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 299FA3893C3
+	for <lists+nouveau@lfdr.de>; Wed, 19 May 2021 18:29:22 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2D0D26EE29;
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8A6DC6EE2D;
 	Wed, 19 May 2021 16:29:12 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 114206E1CE
- for <nouveau@lists.freedesktop.org>; Wed, 19 May 2021 14:04:37 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [216.205.24.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 862936EDC3
+ for <nouveau@lists.freedesktop.org>; Wed, 19 May 2021 14:09:38 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1621433077;
+ s=mimecast20190719; t=1621433377;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=q0X6ufyJH5fadmIknxn4nGcWs1xnqbL6wQGkTAtdW1c=;
- b=ailDZ4T5yH9yzP/6nWW8SEhnrD3t5BI3WDTv1DRsPkeyuVKdVHqh0FFgEJGJHo5yM+RuHG
- 6NY302fJ3dEFy7/N2ZzKjD1DDzM448teII4/BiNFGYZIEoNRMTUIpzgHoLX+DOX1rBsThF
- LF99FAjeGc01GXSTmJVkR8Y+FCWUqco=
-Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com
- [209.85.160.198]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-312-UpEAdZoAOPKyZft8naCkZA-1; Wed, 19 May 2021 10:04:34 -0400
-X-MC-Unique: UpEAdZoAOPKyZft8naCkZA-1
-Received: by mail-qt1-f198.google.com with SMTP id
- g13-20020ac8580d0000b02901e117526d0fso9905318qtg.5
- for <nouveau@lists.freedesktop.org>; Wed, 19 May 2021 07:04:34 -0700 (PDT)
+ bh=uA5LBQUpQQcpe5I2oDgwRimXB7jI4me/eAnHY5LMMkc=;
+ b=KFmiMj3s2us43/++cpPNGprz9FWDrJ3XOUFDYYYXGhqmakgiZ/af8CvyAPfS2kBeoNwt9l
+ uPLmAoOb9RYF4gt6p5J4+UBUHQn+V6bSki4q/yB2cDS9v9MsxkV+4jW+9hH0GnZZ7GHvHC
+ 28jjjOWVpS4imP0Qszj0PUjZK5b7Kw4=
+Received: from mail-qv1-f69.google.com (mail-qv1-f69.google.com
+ [209.85.219.69]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-221-bCZDavjrPluxySxUG3PZBw-1; Wed, 19 May 2021 10:09:35 -0400
+X-MC-Unique: bCZDavjrPluxySxUG3PZBw-1
+Received: by mail-qv1-f69.google.com with SMTP id
+ w4-20020a0c8e440000b02901f0640ffdafso5553297qvb.13
+ for <nouveau@lists.freedesktop.org>; Wed, 19 May 2021 07:09:35 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to;
- bh=q0X6ufyJH5fadmIknxn4nGcWs1xnqbL6wQGkTAtdW1c=;
- b=k/ME4V+CRQsquT9vt2lG8hn3ZrPfwsCEUK1vC1kmWg+2gE1mlTc5Ai3XeoqD3HrHrQ
- xvgQ0yi7WFzG33hXQs/MZoTpE0pQfo7seWPcRk8YMW+uRFgWLlTmOG7mojz7cbkEXX1V
- tfwlYEDC1xzaPFrRG6hib1cOeCkeO+z16DPQW9e93xzXHXJaYCNkIwXf6ZjMjaBklP7i
- sh7SJCmI+LnO7wsvd8PABHz1HaHk7Zz+kvqIB9twlRIgLXx0EbhQmlTCbM6Ajzh9B6wZ
- JACF6P4qf9YXa6n+p+8qAR2OkkyG0ob54v3d6W7LGZYvnNfym1j1folGNkW6hWDzIgV5
- XX5Q==
-X-Gm-Message-State: AOAM530d28sK3w2LLmE8wLvw0F+BKHzuQlQUWr3Pi/exjofTtfljIelQ
- GJ26o4cfeJqsfBpQkU1QndXgIEBu9aOjbf/SxNlNAKRbpOSmdMyRID/G6SNhaPjHyslU9D53RwD
- 43AFpgFw/PjlkSgJxeOzYXwpm6A==
-X-Received: by 2002:a05:6214:d87:: with SMTP id
- e7mr13037365qve.53.1621433074135; 
- Wed, 19 May 2021 07:04:34 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJw6J2iQWttFbTggjwn9zrUjjmVN+9VOim38VY5Z448bl6PpUs3xqQHJcSoYTLuhDbSvYY+iNA==
-X-Received: by 2002:a05:6214:d87:: with SMTP id
- e7mr13037337qve.53.1621433073770; 
- Wed, 19 May 2021 07:04:33 -0700 (PDT)
+ bh=uA5LBQUpQQcpe5I2oDgwRimXB7jI4me/eAnHY5LMMkc=;
+ b=TMRL0/AB0jkdG5G3dD6gqgnfSNT3B3O4QAamkcnj+aDtkZLKM4cPMj0EzItiW7LVHM
+ AtyXSgbrCWq0iCjvN/1+OacJ5Si7fDS8DE/I5j5DVqwL/E85xmfmeJjV5D3JIGdEyvuq
+ vD+/dgBoNsooVM0MldhK4kaRbzGdUegRcmIG9rtSBjMUXAKAgbg/MG75mBammraHU5bA
+ N4GwnSJshRDZXBc/ZGJJa2s5N7fEJGdIvUEc/v7WGfQmM5jDa4LkCKOlDi1B/QNGQ6nR
+ HezjydCCSqlwl3Wwe4p26YlMQPJNJYrnXYOHavfUDiIKSkMwsAQaMkoC5cgWdR1PDZ8T
+ gqQA==
+X-Gm-Message-State: AOAM53210kQOrFz0WbkAltL47+MZvCaMr4MEHUSLqY5pKdD5hqFVW8Wj
+ BucTKlad17AGfW1FUMJZ/o5EEKpoaXIKoJ74qVKvZerUWslne6u4W9VBG+xtuoMcHKt6kbZDobk
+ NVDX6OHlymZvmnG2/tBeVpswCaQ==
+X-Received: by 2002:a05:622a:413:: with SMTP id
+ n19mr11309608qtx.238.1621433375268; 
+ Wed, 19 May 2021 07:09:35 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJwfgXghdceBt0pzuJuLcMWZrj1qSDnzHPuTLDIdA4muPS9QaO8qeOo+lEtQMgzjzxGPQ17Ppg==
+X-Received: by 2002:a05:622a:413:: with SMTP id
+ n19mr11309576qtx.238.1621433375015; 
+ Wed, 19 May 2021 07:09:35 -0700 (PDT)
 Received: from t490s (bras-base-toroon474qw-grc-72-184-145-4-219.dsl.bell.ca.
  [184.145.4.219])
- by smtp.gmail.com with ESMTPSA id b13sm802748qkl.16.2021.05.19.07.04.32
+ by smtp.gmail.com with ESMTPSA id c20sm15634299qtm.52.2021.05.19.07.09.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 19 May 2021 07:04:33 -0700 (PDT)
-Date: Wed, 19 May 2021 10:04:32 -0400
+ Wed, 19 May 2021 07:09:34 -0700 (PDT)
+Date: Wed, 19 May 2021 10:09:33 -0400
 From: Peter Xu <peterx@redhat.com>
-To: Alistair Popple <apopple@nvidia.com>
-Message-ID: <YKUa8HZjfFW2Dhb1@t490s>
-References: <20210407084238.20443-1-apopple@nvidia.com>
- <2235357.HsqDk0zIjc@nvdebian> <YKUBbVuvm5FUJRMl@t490s>
- <2569629.VzlulnA7BY@nvdebian>
+To: Jason Gunthorpe <jgg@nvidia.com>
+Message-ID: <YKUcHfhQMbDnjXC7@t490s>
+References: <YKMhorngO2DVrxac@t490s> <47694715.suB6H4Uo8R@nvdebian>
+ <YKP5Dj4Q/riGGc43@t490s> <20210518173334.GE1002214@nvidia.com>
+ <YKQBACJCjsxeM3ro@t490s> <20210518194509.GF1002214@nvidia.com>
+ <YKQjmtMo+YQGx/wZ@t490s> <20210518230327.GG1002214@nvidia.com>
+ <YKRRgZmRMdk1vH7A@t490s> <20210519132842.GJ1002214@nvidia.com>
 MIME-Version: 1.0
-In-Reply-To: <2569629.VzlulnA7BY@nvdebian>
+In-Reply-To: <20210519132842.GJ1002214@nvidia.com>
 Authentication-Results: relay.mimecast.com;
  auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=peterx@redhat.com
 X-Mimecast-Spam-Score: 0
@@ -82,55 +84,49 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: rcampbell@nvidia.com, willy@infradead.org, daniel@ffwll.ch,
- linux-doc@vger.kernel.org, nouveau@lists.freedesktop.org,
- bsingharora@gmail.com, linux-kernel@vger.kernel.org,
+Cc: rcampbell@nvidia.com, willy@infradead.org, linux-doc@vger.kernel.org,
+ nouveau@lists.freedesktop.org, bsingharora@gmail.com,
+ Alistair Popple <apopple@nvidia.com>, linux-kernel@vger.kernel.org,
  dri-devel@lists.freedesktop.org, hch@infradead.org, linux-mm@kvack.org,
- bskeggs@redhat.com, Jason Gunthorpe <jgg@nvidia.com>,
- akpm@linux-foundation.org, Christoph Hellwig <hch@lst.de>
+ bskeggs@redhat.com, daniel@ffwll.ch, akpm@linux-foundation.org,
+ Christoph Hellwig <hch@lst.de>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, May 19, 2021 at 11:11:55PM +1000, Alistair Popple wrote:
-> On Wednesday, 19 May 2021 10:15:41 PM AEST Peter Xu wrote:
-> > External email: Use caution opening links or attachments
+On Wed, May 19, 2021 at 10:28:42AM -0300, Jason Gunthorpe wrote:
+> On Tue, May 18, 2021 at 07:45:05PM -0400, Peter Xu wrote:
+> > On Tue, May 18, 2021 at 08:03:27PM -0300, Jason Gunthorpe wrote:
+> > > Logically during fork all these device exclusive pages should be
+> > > reverted back to their CPU pages, write protected and the CPU page PTE
+> > > copied to the fork.
+> > > 
+> > > We should not copy the device exclusive page PTE to the fork. I think
+> > > I pointed to this on an earlier rev..
 > > 
-> > On Wed, May 19, 2021 at 09:04:53PM +1000, Alistair Popple wrote:
-> > > Failing fork() because we couldn't take a lock doesn't seem like the right
-> > > approach though, especially as there is already existing code that
-> > > retries. I get this adds complexity though, so would be happy to take a
-> > > look at cleaning copy_pte_range() up in future.
-> > 
-> > Yes, I proposed that as this one won't affect any existing applications
-> > (unlike the existing ones) but only new userspace driver apps that will use
-> > this new atomic feature.
-> > 
-> > IMHO it'll be a pity to add extra complexity and maintainance burden into
-> > fork() if only for keeping the "logical correctness of fork()" however the
-> > code never triggers. If we start with trylock we'll know whether people
-> > will use it, since people will complain with a reason when needed; however
-> > I still doubt whether a sane userspace device driver should fork() within
-> > busy interaction with the device underneath..
+> > Agreed.  Though please see the question I posted in the other thread: now I am
+> > not very sure whether we'll be able to mark a page as device exclusive if that
+> > page has mapcount>1.
 > 
-> I will refrain from commenting on the sanity or otherwise of doing that :-)
-> 
-> Agree such a scenario seems unlikely in practice (and possibly unreasonable). 
-> Keeping the "logical correctness of fork()" still seems worthwhile to me, but 
-> if the added complexity/maintenance burden for an admittedly fairly specific 
-> feature is going to stop progress here I am happy to take the fail fork 
-> approach. I could then possibly fix it up as a future clean up to 
-> copy_pte_range(). Perhaps others have thoughts?
+> IMHO it is similar to write protect done by filesystems on shared
+> mappings - all VMAs with a copy of the CPU page have to get switched
+> to the device exclusive PTE. This is why the rmap stuff is involved in
+> the migration helpers
 
-Yes, it's more about making this series easier to be accepted, and it'll be
-great to have others' input.
+Right, I think Alistair corrected me there that I missed the early COW
+happening in GUP.
 
-Btw, just to mention that I don't even think fail fork() on failed trylock() is
-against "logical correctness of fork()": IMHO it's still 100% correct just like
-most syscalls can return with -EAGAIN, that suggests the userspace to try again
-the syscall, and I hope that also works for fork().  I'd be more than glad to
-be corrected too.
+Actually even without that GUP triggering early COW it won't be a problem,
+because as long as one child mm restored the pte from exclusive to normal
+(before any further COW happens) device exclusiveness is broken in the mmu
+notifiers, and after that point all previous-exclusive ptes actually becomes
+the same as a very normal PageAnon.  Then it's very sane to even not have the
+original page in parent process, because we know each COWed page will contain
+all the device atomic modifications (so we don't really have the requirement to
+return the original page to parent).
+
+Sorry for the noise.
 
 -- 
 Peter Xu
