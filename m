@@ -2,41 +2,56 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D74FF38CE86
-	for <lists+nouveau@lfdr.de>; Fri, 21 May 2021 22:04:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C0B1838E488
+	for <lists+nouveau@lfdr.de>; Mon, 24 May 2021 12:48:11 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E19BD6F8E0;
-	Fri, 21 May 2021 20:03:58 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 297AE6E19A;
+	Mon, 24 May 2021 10:48:07 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mga06.intel.com (mga06.intel.com [134.134.136.31])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6A2DE6F8DE;
- Fri, 21 May 2021 20:03:57 +0000 (UTC)
-IronPort-SDR: Nm1/gWi5twXK1rUmMLYHclN9+PW0CDI0MQHOvZcXFXJFLzfKxPt6OC7F85LuD2MiaiCn3uOSUo
- h4hhUl3zK0gw==
-X-IronPort-AV: E=McAfee;i="6200,9189,9991"; a="262782005"
-X-IronPort-AV: E=Sophos;i="5.82,319,1613462400"; d="scan'208";a="262782005"
-Received: from orsmga005.jf.intel.com ([10.7.209.41])
- by orsmga104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 21 May 2021 13:03:55 -0700
-IronPort-SDR: IBeM0IXzsqaI1CpzPRHvUZf09sgZZ3x6P0C6+btIARsA706T4V2CZVqO1t+ue1xEEs8vi3dRkp
- 90W5LjXicbJw==
-X-IronPort-AV: E=Sophos;i="5.82,319,1613462400"; d="scan'208";a="613363289"
-Received: from dweeratu-mobl1.amr.corp.intel.com (HELO intel.com)
- ([10.254.1.200])
- by orsmga005-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 21 May 2021 13:03:52 -0700
-Date: Fri, 21 May 2021 16:03:51 -0400
-From: Rodrigo Vivi <rodrigo.vivi@intel.com>
-To: Lyude Paul <lyude@redhat.com>, Jani Nikula <jani.nikula@intel.com>
-Message-ID: <YKgSJ+0YtLYQnOQB@intel.com>
-References: <20210514181504.565252-1-lyude@redhat.com>
- <20210514181504.565252-2-lyude@redhat.com>
+Received: from mga12.intel.com (mga12.intel.com [192.55.52.136])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5929B6E190;
+ Mon, 24 May 2021 10:48:05 +0000 (UTC)
+IronPort-SDR: kB8vCDuLWipRcZwnT/2jZXG9OR/WUOkTJEgSAnUAyoUxNCeoAOwqs4bM7FJg3soFRI0ad4whtS
+ k/rjRrFG6EIw==
+X-IronPort-AV: E=McAfee;i="6200,9189,9993"; a="181544376"
+X-IronPort-AV: E=Sophos;i="5.82,319,1613462400"; d="scan'208";a="181544376"
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+ by fmsmga106.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 24 May 2021 03:48:04 -0700
+IronPort-SDR: QuEnAfZ5/WIeo3m+UEXFblrExKUADwlP9aJSrqDHvReibVvmxIJCm/OBqO5uyGflOOKgDPu+dc
+ Y6pL8dPMhDpg==
+X-IronPort-AV: E=Sophos;i="5.82,319,1613462400"; d="scan'208";a="413543179"
+Received: from gtenuto-mobl1.ger.corp.intel.com (HELO [10.213.210.116])
+ ([10.213.210.116])
+ by orsmga002-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 24 May 2021 03:48:02 -0700
+From: Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>
+To: Daniel Vetter <daniel@ffwll.ch>
+References: <c6c61179-5b4b-4e0b-6e57-ec4839ca3268@linux.intel.com>
+ <6cf2f14a-6a16-5ea3-d307-004faad4cc79@linux.intel.com>
+ <a2b03603-eb3e-7bef-a799-c15cfb1a8e0b@amd.com>
+ <YKJ+F4KqEiQQYkRz@phenom.ffwll.local>
+ <BYAPR12MB2840C633CF05C1F29263F5BCF42D9@BYAPR12MB2840.namprd12.prod.outlook.com>
+ <c85fc53f-d25b-464c-d411-eed4a509a009@linux.intel.com>
+ <BYAPR12MB28409E25DEFD3DD620E596ABF42D9@BYAPR12MB2840.namprd12.prod.outlook.com>
+ <BYAPR12MB284090FAC1C6E149F0A1A0ECF42D9@BYAPR12MB2840.namprd12.prod.outlook.com>
+ <mysJHURIfWxBRBabIlnunj7LZNkkRQ-Knu_o6v7GZI4xCwGMZXn0rvjscl-aTT_d-ttlAQgJOG3gP95DBd_dxCPQNfguTSdrltxPrKt2FGs=@emersion.fr>
+ <7f8fc38a-cd25-aa1f-fa2d-5d3334edb3d2@linux.intel.com>
+ <CAPj87rOL7SEVXoH1rWH9ypj7idRmVPLXzmEsdVqFdVjsMh5PbA@mail.gmail.com>
+ <71428a10-4b2f-dbbf-7678-7487f9eda6a5@linux.intel.com>
+ <c22608a4-b84c-a3a4-0df1-448312b1292e@linux.intel.com>
+ <CAKMK7uF0fHBoYfiTS+-80RtUeuKFUcYDBpGHtNY6Ma+aJmmkxA@mail.gmail.com>
+ <b1d508ee-6809-f5dc-6539-70cb89ef5e3b@linux.intel.com>
+Organization: Intel Corporation UK Plc
+Message-ID: <74dd3086-13c5-2fb0-bb66-eec1a061e693@linux.intel.com>
+Date: Mon, 24 May 2021 11:48:00 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.8.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20210514181504.565252-2-lyude@redhat.com>
-Subject: Re: [Nouveau] [PATCH v6 1/9] drm/i915/dpcd_bl: Remove redundant AUX
- backlight frequency calculations
+In-Reply-To: <b1d508ee-6809-f5dc-6539-70cb89ef5e3b@linux.intel.com>
+Content-Language: en-US
+Subject: Re: [Nouveau] [Intel-gfx] [PATCH 0/7] Per client engine busyness
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -48,166 +63,62 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Jani Nikula <jani.nikula@intel.com>,
- Rajeev Nandan <rajeevny@codeaurora.org>, greg.depoire@gmail.com,
- nouveau@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
- Lucas De Marchi <lucas.demarchi@intel.com>,
- open list <linux-kernel@vger.kernel.org>, dri-devel@lists.freedesktop.org,
- Gwan-gyeong Mun <gwan-gyeong.mun@intel.com>, David Airlie <airlied@linux.ie>,
- Uma Shankar <uma.shankar@intel.com>, Sean Paul <seanpaul@chromium.org>,
- Anshuman Gupta <anshuman.gupta@intel.com>, Dave Airlie <airlied@redhat.com>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: Intel Graphics Development <Intel-gfx@lists.freedesktop.org>,
+ Maling list - DRI developers <dri-devel@lists.freedesktop.org>,
+ Daniel Stone <daniel@fooishbar.org>, Simon Ser <contact@emersion.fr>,
+ "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>, "Koenig,
+ Christian" <Christian.Koenig@amd.com>, "Nieto, David M" <David.Nieto@amd.com>
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, May 14, 2021 at 02:14:55PM -0400, Lyude Paul wrote:
-> Noticed this while moving all of the VESA backlight code in i915 over to
-> DRM helpers: it would appear that we calculate the frequency value we want
-> to write to DP_EDP_BACKLIGHT_FREQ_SET twice even though this value never
-> actually changes during runtime. So, let's simplify things by just caching
-> this value in intel_panel.backlight, and re-writing it as-needed.
-> 
-> Changes since v1:
-> * Wrap panel->backlight.edp.vesa.pwm_freq_pre_divider in
->   DP_EDP_BACKLIGHT_FREQ_AUX_SET_CAP check - Jani
-
-This looks okay to me now... Jani, agree?
-
-> 
-> Signed-off-by: Lyude Paul <lyude@redhat.com>
-> Cc: Jani Nikula <jani.nikula@intel.com>
-> Cc: Dave Airlie <airlied@gmail.com>
-> Cc: greg.depoire@gmail.com
-> ---
->  .../drm/i915/display/intel_display_types.h    |  1 +
->  .../drm/i915/display/intel_dp_aux_backlight.c | 65 ++++++-------------
->  2 files changed, 20 insertions(+), 46 deletions(-)
-> 
-> diff --git a/drivers/gpu/drm/i915/display/intel_display_types.h b/drivers/gpu/drm/i915/display/intel_display_types.h
-> index 9c0adfc60c6f..7054a37363fb 100644
-> --- a/drivers/gpu/drm/i915/display/intel_display_types.h
-> +++ b/drivers/gpu/drm/i915/display/intel_display_types.h
-> @@ -311,6 +311,7 @@ struct intel_panel {
->  		union {
->  			struct {
->  				u8 pwmgen_bit_count;
-> +				u8 pwm_freq_pre_divider;
->  			} vesa;
->  			struct {
->  				bool sdr_uses_aux;
-> diff --git a/drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c b/drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c
-> index 8e9ac9ba1d38..68bfe50ada59 100644
-> --- a/drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c
-> +++ b/drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c
-> @@ -373,50 +373,6 @@ intel_dp_aux_vesa_set_backlight(const struct drm_connector_state *conn_state,
->  	}
->  }
->  
-> -/*
-> - * Set PWM Frequency divider to match desired frequency in vbt.
-> - * The PWM Frequency is calculated as 27Mhz / (F x P).
-> - * - Where F = PWM Frequency Pre-Divider value programmed by field 7:0 of the
-> - *             EDP_BACKLIGHT_FREQ_SET register (DPCD Address 00728h)
-> - * - Where P = 2^Pn, where Pn is the value programmed by field 4:0 of the
-> - *             EDP_PWMGEN_BIT_COUNT register (DPCD Address 00724h)
-> - */
-> -static bool intel_dp_aux_vesa_set_pwm_freq(struct intel_connector *connector)
-> -{
-> -	struct drm_i915_private *dev_priv = to_i915(connector->base.dev);
-> -	struct intel_dp *intel_dp = intel_attached_dp(connector);
-> -	const u8 pn = connector->panel.backlight.edp.vesa.pwmgen_bit_count;
-> -	int freq, fxp, f, fxp_actual, fxp_min, fxp_max;
-> -
-> -	freq = dev_priv->vbt.backlight.pwm_freq_hz;
-> -	if (!freq) {
-> -		drm_dbg_kms(&dev_priv->drm,
-> -			    "Use panel default backlight frequency\n");
-> -		return false;
-> -	}
-> -
-> -	fxp = DIV_ROUND_CLOSEST(KHz(DP_EDP_BACKLIGHT_FREQ_BASE_KHZ), freq);
-> -	f = clamp(DIV_ROUND_CLOSEST(fxp, 1 << pn), 1, 255);
-> -	fxp_actual = f << pn;
-> -
-> -	/* Ensure frequency is within 25% of desired value */
-> -	fxp_min = DIV_ROUND_CLOSEST(fxp * 3, 4);
-> -	fxp_max = DIV_ROUND_CLOSEST(fxp * 5, 4);
-> -
-> -	if (fxp_min > fxp_actual || fxp_actual > fxp_max) {
-> -		drm_dbg_kms(&dev_priv->drm, "Actual frequency out of range\n");
-> -		return false;
-> -	}
-> -
-> -	if (drm_dp_dpcd_writeb(&intel_dp->aux,
-> -			       DP_EDP_BACKLIGHT_FREQ_SET, (u8) f) < 0) {
-> -		drm_dbg_kms(&dev_priv->drm,
-> -			    "Failed to write aux backlight freq\n");
-> -		return false;
-> -	}
-> -	return true;
-> -}
-> -
->  static void
->  intel_dp_aux_vesa_enable_backlight(const struct intel_crtc_state *crtc_state,
->  				   const struct drm_connector_state *conn_state, u32 level)
-> @@ -459,9 +415,13 @@ intel_dp_aux_vesa_enable_backlight(const struct intel_crtc_state *crtc_state,
->  		break;
->  	}
->  
-> -	if (intel_dp->edp_dpcd[2] & DP_EDP_BACKLIGHT_FREQ_AUX_SET_CAP)
-> -		if (intel_dp_aux_vesa_set_pwm_freq(connector))
-> +	if (panel->backlight.edp.vesa.pwm_freq_pre_divider) {
-> +		if (drm_dp_dpcd_writeb(&intel_dp->aux, DP_EDP_BACKLIGHT_FREQ_SET,
-> +				       panel->backlight.edp.vesa.pwm_freq_pre_divider) == 1)
->  			new_dpcd_buf |= DP_EDP_BACKLIGHT_FREQ_AUX_SET_ENABLE;
-> +		else
-> +			drm_dbg_kms(&i915->drm, "Failed to write aux backlight frequency\n");
-> +	}
->  
->  	if (new_dpcd_buf != dpcd_buf) {
->  		if (drm_dp_dpcd_writeb(&intel_dp->aux,
-> @@ -482,6 +442,14 @@ static void intel_dp_aux_vesa_disable_backlight(const struct drm_connector_state
->  				  false);
->  }
->  
-> +/*
-> + * Compute PWM frequency divider value based off the frequency provided to us by the vbt.
-> + * The PWM Frequency is calculated as 27Mhz / (F x P).
-> + * - Where F = PWM Frequency Pre-Divider value programmed by field 7:0 of the
-> + *             EDP_BACKLIGHT_FREQ_SET register (DPCD Address 00728h)
-> + * - Where P = 2^Pn, where Pn is the value programmed by field 4:0 of the
-> + *             EDP_PWMGEN_BIT_COUNT register (DPCD Address 00724h)
-> + */
->  static u32 intel_dp_aux_vesa_calc_max_backlight(struct intel_connector *connector)
->  {
->  	struct drm_i915_private *i915 = to_i915(connector->base.dev);
-> @@ -533,8 +501,10 @@ static u32 intel_dp_aux_vesa_calc_max_backlight(struct intel_connector *connecto
->  	pn_min &= DP_EDP_PWMGEN_BIT_COUNT_MASK;
->  	pn_max &= DP_EDP_PWMGEN_BIT_COUNT_MASK;
->  
-> +	/* Ensure frequency is within 25% of desired value */
->  	fxp_min = DIV_ROUND_CLOSEST(fxp * 3, 4);
->  	fxp_max = DIV_ROUND_CLOSEST(fxp * 5, 4);
-> +
->  	if (fxp_min < (1 << pn_min) || (255 << pn_max) < fxp_max) {
->  		drm_dbg_kms(&i915->drm,
->  			    "VBT defined backlight frequency out of range\n");
-> @@ -555,7 +525,10 @@ static u32 intel_dp_aux_vesa_calc_max_backlight(struct intel_connector *connecto
->  			    "Failed to write aux pwmgen bit count\n");
->  		return max_backlight;
->  	}
-> +
->  	panel->backlight.edp.vesa.pwmgen_bit_count = pn;
-> +	if (intel_dp->edp_dpcd[2] & DP_EDP_BACKLIGHT_FREQ_AUX_SET_CAP)
-> +		panel->backlight.edp.vesa.pwm_freq_pre_divider = f;
->  
->  	max_backlight = (1 << pn) - 1;
->  
-> -- 
-> 2.31.1
-> 
-_______________________________________________
-Nouveau mailing list
-Nouveau@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/nouveau
+Ck9uIDIwLzA1LzIwMjEgMDk6MzUsIFR2cnRrbyBVcnN1bGluIHdyb3RlOgo+IE9uIDE5LzA1LzIw
+MjEgMTk6MjMsIERhbmllbCBWZXR0ZXIgd3JvdGU6Cj4+IE9uIFdlZCwgTWF5IDE5LCAyMDIxIGF0
+IDY6MTYgUE0gVHZydGtvIFVyc3VsaW4KPj4gPHR2cnRrby51cnN1bGluQGxpbnV4LmludGVsLmNv
+bT4gd3JvdGU6Cj4+Pgo+Pj4KPj4+IE9uIDE4LzA1LzIwMjEgMTA6NDAsIFR2cnRrbyBVcnN1bGlu
+IHdyb3RlOgo+Pj4+Cj4+Pj4gT24gMTgvMDUvMjAyMSAxMDoxNiwgRGFuaWVsIFN0b25lIHdyb3Rl
+Ogo+Pj4+PiBIaSwKPj4+Pj4KPj4+Pj4gT24gVHVlLCAxOCBNYXkgMjAyMSBhdCAxMDowOSwgVHZy
+dGtvIFVyc3VsaW4KPj4+Pj4gPHR2cnRrby51cnN1bGluQGxpbnV4LmludGVsLmNvbT4gd3JvdGU6
+Cj4+Pj4+PiBJIHdhcyBqdXN0IHdvbmRlcmluZyBpZiBzdGF0KDIpIGFuZCBhIGNocmRldiBtYWpv
+ciBjaGVjayB3b3VsZCBiZSBhCj4+Pj4+PiBzb2xpZCBjcml0ZXJpYSB0byBtb3JlIGVmZmljaWVu
+dGx5IChjb21wYXJlZCB0byBwYXJzaW5nIHRoZSB0ZXh0Cj4+Pj4+PiBjb250ZW50KSBkZXRlY3Qg
+ZHJtIGZpbGVzIHdoaWxlIHdhbGtpbmcgcHJvY2ZzLgo+Pj4+Pgo+Pj4+PiBNYXliZSBJJ20gbWlz
+c2luZyBzb21ldGhpbmcsIGJ1dCBpcyB0aGUgcGVyLVBJRCB3YWxrIGFjdHVhbGx5IGEKPj4+Pj4g
+bWVhc3VyYWJsZSBwZXJmb3JtYW5jZSBpc3N1ZSByYXRoZXIgdGhhbiBqdXN0IGEgYml0IHVucGxl
+YXNhbnQ/Cj4+Pj4KPj4+PiBQZXIgcGlkIGFuZCBwZXIgZWFjaCBvcGVuIGZkLgo+Pj4+Cj4+Pj4g
+QXMgc2FpZCBpbiB0aGUgb3RoZXIgdGhyZWFkIHdoYXQgYm90aGVycyBtZSBhIGJpdCBpbiB0aGlz
+IHNjaGVtZSBpcyAKPj4+PiB0aGF0Cj4+Pj4gdGhlIGNvc3Qgb2Ygb2J0YWluaW5nIEdQVSB1c2Fn
+ZSBzY2FsZXMgYmFzZWQgb24gbm9uLUdQVSBjcml0ZXJpYS4KPj4+Pgo+Pj4+IEZvciB1c2UgY2Fz
+ZSBvZiBhIHRvcC1saWtlIHRvb2wgd2hpY2ggc2hvd3MgYWxsIHByb2Nlc3NlcyB0aGlzIGlzIGEK
+Pj4+PiBzbWFsbGVyIGFkZGl0aW9uYWwgY29zdCwgYnV0IHRoZW4gZm9yIGEgZ3B1LXRvcCBsaWtl
+IHRvb2wgaXQgaXMgCj4+Pj4gc29tZXdoYXQKPj4+PiBoaWdoZXIuCj4+Pgo+Pj4gVG8gZnVydGhl
+ciBleHBhbmQsIG5vdCBvbmx5IGNvc3Qgd291bGQgc2NhbGUgcGVyIHBpZCBtdWx0aXBsaWVzIHBl
+ciBvcGVuCj4+PiBmZCwgYnV0IHRvIGRldGVjdCB3aGljaCBvZiB0aGUgZmRzIGFyZSBEUk0gSSBz
+ZWUgdGhlc2UgdGhyZWUgb3B0aW9uczoKPj4+Cj4+PiAxKSBPcGVuIGFuZCBwYXJzZSBmZGluZm8u
+Cj4+PiAyKSBOYW1lIGJhc2VkIG1hdGNoaW5nIGllIC9kZXYvZHJpLy4uIHNvbWV0aGluZy4KPj4+
+IDMpIFN0YXQgdGhlIHN5bWxpbmsgdGFyZ2V0IGFuZCBjaGVjayBmb3IgRFJNIG1ham9yLgo+Pgo+
+PiBzdGF0IHdpdGggc3ltbGluayBmb2xsb3dpbmcgc2hvdWxkIGJlIHBsZW50eSBmYXN0Lgo+IAo+
+IE1heWJlLiBJIGRvbid0IHRoaW5rIG15IHBvaW50IGFib3V0IGtlZXBpbmcgdGhlIGRlbnRyeSBj
+YWNoZSBuZWVkbGVzc2x5IAo+IGhvdCBpcyBnZXR0aW5nIHRocm91Z2ggYXQgYWxsLiBPbiBteSBs
+aWdodGx5IGxvYWRlZCBkZXNrdG9wOgo+IAo+ICDCoCQgc3VkbyBsc29mIHwgd2MgLWwKPiAgwqA1
+OTk1NTEKPiAKPiAgwqAkIHN1ZG8gbHNvZiB8IGdyZXAgIi9kZXYvZHJpLyIgfCB3YyAtbAo+ICDC
+oDE5NjUKPiAKPiBJdCdzIGdvaW5nIHRvIGxvb2sgdXAgfjYwMGsgcG9pbnRsZXNzIGRlbnRyaWVz
+IGluIGV2ZXJ5IGl0ZXJhdGlvbi4gSnVzdCAKPiB0byBmaW5kIGEgaGFuZGZ1bCBvZiBEUk0gb25l
+cy4gSGFyZCB0byBzYXkgaWYgdGhhdCBpcyBiZXR0ZXIgb3Igd29yc2UgCj4gdGhhbiBqdXN0IHBh
+cnNpbmcgZmRpbmZvIHRleHQgZm9yIGFsbCBmaWxlcy4gV2lsbCBzZWUuCgpDUFUgdXNhZ2UgbG9v
+a3MgcGFzc2FibGUgdW5kZXIgYSBwcm9kdWN0aW9uIGtlcm5lbCAobm9uLWRlYnVnKS4gT25jZSBh
+IApzZWNvbmQgcmVmcmVzaCBwZXJpb2QsIG9uIGEgbm90IHJlYWxseSB0aGF0IGxvYWRlZCBzeXN0
+ZW0gKDExNSBydW5uaW5nIApwcm9jZXNzZXMsIDMwOTYgb3BlbiBmaWxlIGRlc2NyaXB0b3JzIGFz
+IHJlcG9ydGVkIGJ5IGxzb2YsIG5vbmUgb2Ygd2hpY2ggCmFyZSBEUk0pLCByZXN1bHRzIGluIGEg
+c3lzdGVtIGNhbGwgaGVhdnkgbG9hZDoKCnJlYWwgICAgMG01NS4zNDhzCnVzZXIgICAgMG0wLjEw
+MHMKc3lzICAgICAwbTAuMzE5cwoKT25jZSBwZXIgc2Vjb25kIGxvb3AgaXMgZXNzZW50aWFsbHkg
+YWxvbmcgdGhlIGxpbmVzIG9mOgoKICAgZm9yIGVhY2ggcGlkIGluIC9wcm9jLzxwaWQ+OgogICAg
+IGZvciBlYWNoIGZkIGluIC9wcm9jLzxwaWQ+L2ZkaW5mbzoKICAgICAgIGlmIGZzdGF0YXQoZmQp
+IGlzIGRybSBtYWpvcjoKICAgICAgICAgcmVhZCBmZGluZm8gdGV4dCBpbiBvbmUgc3dlZXAgYW5k
+IHBhcnNlIGl0CgpJJ2xsIHBvc3QgdGhlIHF1aWNrIGludGVsX2dwdV90b3AgcGF0Y2ggZm9yIHJl
+ZmVyZW5jZSBidXQgc3RyaW5nIHBhcnNpbmcgCmluIEMgbGVhdmVzIGEgZmV3IHRoaW5ncyB0byBi
+ZSBkZXNpcmVkIHRoZXJlLgoKUmVnYXJkcywKClR2cnRrbwpfX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fXwpOb3V2ZWF1IG1haWxpbmcgbGlzdApOb3V2ZWF1QGxp
+c3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFu
+L2xpc3RpbmZvL25vdXZlYXUK
