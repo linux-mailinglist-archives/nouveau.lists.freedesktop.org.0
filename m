@@ -2,51 +2,44 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5AE5F3953E7
-	for <lists+nouveau@lfdr.de>; Mon, 31 May 2021 04:30:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DCA9139797E
+	for <lists+nouveau@lfdr.de>; Tue,  1 Jun 2021 19:51:53 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 886036E860;
-	Mon, 31 May 2021 02:30:50 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 440C76EA9C;
+	Tue,  1 Jun 2021 17:51:52 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4C2DF6E147
- for <nouveau@lists.freedesktop.org>; Sun, 30 May 2021 00:23:36 +0000 (UTC)
-Received: by mail-ej1-x62e.google.com with SMTP id qq22so2654115ejb.9
- for <nouveau@lists.freedesktop.org>; Sat, 29 May 2021 17:23:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:from:date:message-id:subject:to;
- bh=giM3qu4eAM6QEU9ioJTeH0qaOJDxHpjPhqJSauGoQ0Q=;
- b=Ex4V38sT8hzRKidrNR1XyFC4m1OK/4bB+4jV21Kl2xln4tGHlA+bsJ3vLm0ZiLCni9
- hntSZ2mybiEV8JrX/WfyvAAppW6d9iHo6glOL2IoccdwNkQ8Mdf5BAZxNdYcLB/RiABj
- onxQ44T+a0YBfjgO/AAglEfCpvZISfO0UFKa0+Som5qIQTdLXkWg/bPLmdF0EOcAC0ce
- XUjNbakxuLwDkBSWLOqpJtVfbKUU4ElMzzs1I5RL/J26juwdMRSXiPzmpw4I61TJ6xrb
- zeS49SlzikRaXxCMsxa4J0Zn1sVMVIDDvZItRd2HoLQh3498o+KqCZl66unSB3f/zNSO
- S3Og==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=giM3qu4eAM6QEU9ioJTeH0qaOJDxHpjPhqJSauGoQ0Q=;
- b=rwRqBfWopplmmjc2eyYhYoC3896g3SPLpJK31A/zlZoMytEyGnHFbI4DhrBQGtj2+B
- buBNrLgMxcVzD7QVI1BpgHVgANf2PlZMvzIb9aYQaUeHMy99ZZ8BlvHoBEeDggKH1za+
- f2K1oav2/WN950iJjhLrZ4BzenJuDvNqEx+pY1NR24f/+cCMlknfznggUJcACJcp3EgW
- UI04DJ66DoX6+t79sENYndHZa8TogqE3Zq/1wJ9l2Revc+zBdRLbfvaGG+3q3pwLi6eX
- 4gkiGCKz7+7UGKbLkdfLQl1ZhUecE9YUi04ajAR4lPqClziLlaRDYWEQtE0W7o1f8K7d
- ER8w==
-X-Gm-Message-State: AOAM533OtozUalo1shMpvkcJe42rGGYETWeS7NGUJVCSCELUNhOuSdum
- cc63gIiJyQ8rIVVWXNLVM8qKho98Z+YLmlTcFqlvBtT6
-X-Google-Smtp-Source: ABdhPJx/MzoEd9uUXFl++Ob2O7yvk/YG0o65PMcMOqfUvGk2V7xwH4wjQtM19bWi85i8uGx5ZmHPPyTMQUZquRDJBV4=
-X-Received: by 2002:a17:906:5285:: with SMTP id
- c5mr15644890ejm.282.1622334214740; 
- Sat, 29 May 2021 17:23:34 -0700 (PDT)
+X-Greylist: delayed 1159 seconds by postgrey-1.36 at gabe;
+ Mon, 31 May 2021 02:48:18 UTC
+Received: from szxga01-in.huawei.com (szxga01-in.huawei.com [45.249.212.187])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9A8CC6E450
+ for <nouveau@lists.freedesktop.org>; Mon, 31 May 2021 02:48:18 +0000 (UTC)
+Received: from dggemv704-chm.china.huawei.com (unknown [172.30.72.55])
+ by szxga01-in.huawei.com (SkyGuard) with ESMTP id 4FtfHh5flZzWq73;
+ Mon, 31 May 2021 10:24:16 +0800 (CST)
+Received: from dggpeml500020.china.huawei.com (7.185.36.88) by
+ dggemv704-chm.china.huawei.com (10.3.19.47) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2176.2; Mon, 31 May 2021 10:28:56 +0800
+Received: from huawei.com (10.175.127.227) by dggpeml500020.china.huawei.com
+ (7.185.36.88) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2176.2; Mon, 31 May
+ 2021 10:28:56 +0800
+From: Baokun Li <libaokun1@huawei.com>
+To: <bskeggs@redhat.com>, <airlied@linux.ie>, <daniel@ffwll.ch>,
+ <dri-devel@lists.freedesktop.org>, <nouveau@lists.freedesktop.org>,
+ <linux-kernel@vger.kernel.org>
+Date: Mon, 31 May 2021 10:38:11 +0800
+Message-ID: <20210531023811.477542-1-libaokun1@huawei.com>
+X-Mailer: git-send-email 2.25.4
 MIME-Version: 1.0
-From: Joseph Kraemer <jkremer952@gmail.com>
-Date: Sat, 29 May 2021 20:23:23 -0400
-Message-ID: <CABdSSFcwzXCE9pJTRxtfuJAH542GrpGvPeOSMQ-92pD=vBgpNQ@mail.gmail.com>
-To: nouveau@lists.freedesktop.org
-X-Mailman-Approved-At: Mon, 31 May 2021 02:30:49 +0000
-Subject: [Nouveau] Building a Free as in Freedom PC
+X-Originating-IP: [10.175.127.227]
+X-ClientProxiedBy: dggems706-chm.china.huawei.com (10.3.19.183) To
+ dggpeml500020.china.huawei.com (7.185.36.88)
+X-CFilter-Loop: Reflected
+X-Mailman-Approved-At: Tue, 01 Jun 2021 17:51:50 +0000
+Subject: [Nouveau] [PATCH -next] drm/nouveau/svm: Remove set but not used
+ variable 'ret'
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,63 +51,37 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1067245757=="
+Cc: yuehaibing@huawei.com, libaokun1@huawei.com, weiyongjun1@huawei.com,
+ yukuai3@huawei.com, yangjihong1@huawei.com
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
---===============1067245757==
-Content-Type: multipart/alternative; boundary="000000000000939c6605c3811e64"
-
---000000000000939c6605c3811e64
-Content-Type: text/plain; charset="UTF-8"
-
-Hello,
-
-I'm sorry if this is the wrong place to ask this question. I didn't see an
-answer under the FAQ, so I figured I'd send an email.
-
-I want to build a PC that is free as in freedom. I know one can build a
-tower without a hitch that meets the respects your freedom certification,
-but I'm wondering if a Nvidia graphics card can be added to it with the
-nouveau driver. If I use the nouveau driver, is it a totally free system?
-Or does the card itself have proprietary firmware running on it? Can some
-cards be free and others not, similar to how Libreboot only supports
-certain hardware? If it does vary based on the card, how can I tell what
-cards would be free?
-
-Thanks in advance!
-
-Regards,
-Joseph
-
---000000000000939c6605c3811e64
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div>Hello, <br></div><div><br></div><div>I&#39;m sorry if=
- this is the wrong place to ask this question. I didn&#39;t see an answer u=
-nder the FAQ, so I figured I&#39;d send an email. <br></div><div><br></div>=
-<div>I want to build a PC that is free as in freedom. I know one can build =
-a tower without a hitch that meets the respects your freedom certification,=
- but I&#39;m wondering if a Nvidia graphics card can be added to it with th=
-e nouveau driver. If I use the nouveau driver, is it a totally free system?=
- Or does the card itself have proprietary firmware running on it? Can some =
-cards be free and others not, similar to how Libreboot only supports certai=
-n hardware? If it does vary based on the card, how can I tell what cards wo=
-uld be free? <br></div><div><br></div><div>Thanks in advance! <br></div><di=
-v><br></div><div>Regards,</div><div>Joseph<br></div></div>
-
---000000000000939c6605c3811e64--
-
---===============1067245757==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
-_______________________________________________
-Nouveau mailing list
-Nouveau@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/nouveau
-
---===============1067245757==--
+Rml4ZXMgZ2NjICctV3VudXNlZC1idXQtc2V0LXZhcmlhYmxlJyB3YXJuaW5nOgoKZHJpdmVycy9n
+cHUvZHJtL25vdXZlYXUvbm91dmVhdV9zdm0uYzogSW4gZnVuY3Rpb24gJ25vdXZlYXVfcGZuc19t
+YXAnOgpkcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X3N2bS5jOjgxNDo2OiB3YXJuaW5n
+OgogdmFyaWFibGUg4oCYcmV04oCZIHNldCBidXQgbm90IHVzZWQgWy1XdW51c2VkLWJ1dC1zZXQt
+dmFyaWFibGVdCgpJdCBuZXZlciB1c2VkIHNpbmNlIGludHJvZHVjdGlvbi4KClNpZ25lZC1vZmYt
+Ynk6IEJhb2t1biBMaSA8bGliYW9rdW4xQGh1YXdlaS5jb20+Ci0tLQogZHJpdmVycy9ncHUvZHJt
+L25vdXZlYXUvbm91dmVhdV9zdm0uYyB8IDMgKy0tCiAxIGZpbGUgY2hhbmdlZCwgMSBpbnNlcnRp
+b24oKyksIDIgZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL25vdXZl
+YXUvbm91dmVhdV9zdm0uYyBiL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfc3ZtLmMK
+aW5kZXggODQ3MjZhODllNjY1Li4xNmZiZjkwZjlmMzEgMTAwNjQ0Ci0tLSBhL2RyaXZlcnMvZ3B1
+L2RybS9ub3V2ZWF1L25vdXZlYXVfc3ZtLmMKKysrIGIvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUv
+bm91dmVhdV9zdm0uYwpAQCAtOTIxLDcgKzkyMSw2IEBAIG5vdXZlYXVfcGZuc19tYXAoc3RydWN0
+IG5vdXZlYXVfc3ZtbSAqc3ZtbSwgc3RydWN0IG1tX3N0cnVjdCAqbW0sCiAJCSB1bnNpZ25lZCBs
+b25nIGFkZHIsIHU2NCAqcGZucywgdW5zaWduZWQgbG9uZyBucGFnZXMpCiB7CiAJc3RydWN0IG5v
+dXZlYXVfcGZubWFwX2FyZ3MgKmFyZ3MgPSBub3V2ZWF1X3BmbnNfdG9fYXJncyhwZm5zKTsKLQlp
+bnQgcmV0OwogCiAJYXJncy0+cC5hZGRyID0gYWRkcjsKIAlhcmdzLT5wLnNpemUgPSBucGFnZXMg
+PDwgUEFHRV9TSElGVDsKQEAgLTkyOSw3ICs5MjgsNyBAQCBub3V2ZWF1X3BmbnNfbWFwKHN0cnVj
+dCBub3V2ZWF1X3N2bW0gKnN2bW0sIHN0cnVjdCBtbV9zdHJ1Y3QgKm1tLAogCW11dGV4X2xvY2so
+JnN2bW0tPm11dGV4KTsKIAogCXN2bW0tPnZtbS0+dm1tLm9iamVjdC5jbGllbnQtPnN1cGVyID0g
+dHJ1ZTsKLQlyZXQgPSBudmlmX29iamVjdF9pb2N0bCgmc3ZtbS0+dm1tLT52bW0ub2JqZWN0LCBh
+cmdzLCBzaXplb2YoKmFyZ3MpICsKKwludmlmX29iamVjdF9pb2N0bCgmc3ZtbS0+dm1tLT52bW0u
+b2JqZWN0LCBhcmdzLCBzaXplb2YoKmFyZ3MpICsKIAkJCQlucGFnZXMgKiBzaXplb2YoYXJncy0+
+cC5waHlzWzBdKSwgTlVMTCk7CiAJc3ZtbS0+dm1tLT52bW0ub2JqZWN0LmNsaWVudC0+c3VwZXIg
+PSBmYWxzZTsKIAotLSAKMi4yNS40CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fXwpOb3V2ZWF1IG1haWxpbmcgbGlzdApOb3V2ZWF1QGxpc3RzLmZyZWVkZXNr
+dG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL25v
+dXZlYXUK
