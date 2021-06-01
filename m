@@ -1,25 +1,25 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 509EC397CF0
-	for <lists+nouveau@lfdr.de>; Wed,  2 Jun 2021 01:16:19 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id C0ED4397D1E
+	for <lists+nouveau@lfdr.de>; Wed,  2 Jun 2021 01:43:50 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id CAEA26E03A;
-	Tue,  1 Jun 2021 23:16:16 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3A8A889F77;
+	Tue,  1 Jun 2021 23:43:48 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 1223 seconds by postgrey-1.36 at gabe;
- Tue, 01 Jun 2021 23:16:15 UTC
-Received: from gateway24.websitewelcome.com (gateway24.websitewelcome.com
- [192.185.51.56])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 470606E03A
- for <nouveau@lists.freedesktop.org>; Tue,  1 Jun 2021 23:16:15 +0000 (UTC)
-Received: from cm12.websitewelcome.com (cm12.websitewelcome.com [100.42.49.8])
- by gateway24.websitewelcome.com (Postfix) with ESMTP id 72C8D798B
- for <nouveau@lists.freedesktop.org>; Tue,  1 Jun 2021 17:55:50 -0500 (CDT)
+X-Greylist: delayed 1502 seconds by postgrey-1.36 at gabe;
+ Tue, 01 Jun 2021 23:43:46 UTC
+Received: from gateway23.websitewelcome.com (gateway23.websitewelcome.com
+ [192.185.49.218])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A19C989F77
+ for <nouveau@lists.freedesktop.org>; Tue,  1 Jun 2021 23:43:46 +0000 (UTC)
+Received: from cm11.websitewelcome.com (cm11.websitewelcome.com [100.42.49.5])
+ by gateway23.websitewelcome.com (Postfix) with ESMTP id CE36142DE
+ for <nouveau@lists.freedesktop.org>; Tue,  1 Jun 2021 17:56:50 -0500 (CDT)
 Received: from gator4166.hostgator.com ([108.167.133.22]) by cmsmtp with SMTP
- id oDIclbbgbDedfoDIclgidY; Tue, 01 Jun 2021 17:55:50 -0500
+ id oDJalM1pQnrr4oDJalBWKe; Tue, 01 Jun 2021 17:56:50 -0500
 X-Authority-Reason: nr=8
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=embeddedor.com; s=default; h=Content-Transfer-Encoding:Content-Type:
@@ -27,30 +27,30 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  :Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
  Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
  List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=HZ/MTcaMdemBlTWSin6KFaYC79fzi9Rdgyc+g76CuqM=; b=foLOTTxYICaO7v8eLQaTaEahFo
- zqebbpvFrS2kAgzqy9S3OFlG/fnrpbjNnsO0RksEYJwbSQXsWadiaXj1ycYeRgPOQ2C05nluoLE9h
- AbCD83ALZ1/cnY7emezcWoHuhq0b3ZCvKlzlkTT913+nuiILPwA6EqwDtsASJtZcYWudAlLmRpIgF
- LfDwItC8QsHvHV/QVsXXo09bcRgBH/Nh7asrYJuNQJIEmYkCoR2dDDOwC6K3DTNHUgJMmJPbItOyv
- zRuOB4fM44016mDSn1VXhxQA/CMwBCmjBzhTrPloJFolwyCQJ5+tXNYQiAiGTBdSDiwYRUxcLn58T
- xHrrEwgA==;
-Received: from 187-162-31-110.static.axtel.net ([187.162.31.110]:53062
+ bh=R2HquvGjn56KztXhaP1kfmdCBWzUVbxxQVncCbBwj70=; b=tILX86ska22+Sj6DlfjIb2xVoD
+ p14G1IEBdmkyOdX6JjBs+EjBqcf8OdrorvklYI2EqP8K6DDl1AepLzCgnCL0MeTXLfTMREaHVFO/t
+ ObVT6//1XlCk9qxffbZdYJVE6cX2qNMBK6FJlLX/P2gkGwOpVJMBz5Mxs1qomt6Cc7iw6G3zXhWXv
+ 358G9ad/nBBuBqKPEeZmabADNwLqIDHKlGxADZSqJrfOE30Bx1WCMbraf7yW21JdQI7Pa2kIBWpnv
+ m2WcXJBpZphiPYxb8GQb5NgiGoSuKHc/pQrbtASWY0Jh0I3X7hWlclMi9lfmUukAAGden9hpjcWJI
+ Q+SGNkdg==;
+Received: from 187-162-31-110.static.axtel.net ([187.162.31.110]:53072
  helo=[192.168.15.8])
  by gator4166.hostgator.com with esmtpsa (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.94.2)
  (envelope-from <gustavo@embeddedor.com>)
- id 1loDIY-000tqs-Pv; Tue, 01 Jun 2021 17:55:46 -0500
+ id 1loDJX-000ur5-Ax; Tue, 01 Jun 2021 17:56:47 -0500
 From: "Gustavo A. R. Silva" <gustavo@embeddedor.com>
 To: "Gustavo A. R. Silva" <gustavoars@kernel.org>,
  Ben Skeggs <bskeggs@redhat.com>, David Airlie <airlied@linux.ie>,
  Daniel Vetter <daniel@ffwll.ch>
-References: <20210305095657.GA142006@embeddedor>
- <79ff569a-5828-ef21-538b-12d07d34a4ff@embeddedor.com>
-Message-ID: <1ec627af-514e-b24a-da88-13eb561ccb15@embeddedor.com>
-Date: Tue, 1 Jun 2021 17:56:50 -0500
+References: <20210305095609.GA141907@embeddedor>
+ <b42a6c20-e70d-c56a-795a-072ecc772bf2@embeddedor.com>
+Message-ID: <2aaf5382-3907-ac2a-ebff-a33b308aaf7d@embeddedor.com>
+Date: Tue, 1 Jun 2021 17:57:51 -0500
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.8.1
 MIME-Version: 1.0
-In-Reply-To: <79ff569a-5828-ef21-538b-12d07d34a4ff@embeddedor.com>
+In-Reply-To: <b42a6c20-e70d-c56a-795a-072ecc772bf2@embeddedor.com>
 Content-Language: en-US
 X-AntiAbuse: This header was added to track abuse,
  please include it with any abuse report
@@ -61,18 +61,18 @@ X-AntiAbuse: Sender Address Domain - embeddedor.com
 X-BWhitelist: no
 X-Source-IP: 187.162.31.110
 X-Source-L: No
-X-Exim-ID: 1loDIY-000tqs-Pv
+X-Exim-ID: 1loDJX-000ur5-Ax
 X-Source: 
 X-Source-Args: 
 X-Source-Dir: 
 X-Source-Sender: 187-162-31-110.static.axtel.net ([192.168.15.8])
- [187.162.31.110]:53062
+ [187.162.31.110]:53072
 X-Source-Auth: gustavo@embeddedor.com
-X-Email-Count: 20
+X-Email-Count: 29
 X-Source-Cap: Z3V6aWRpbmU7Z3V6aWRpbmU7Z2F0b3I0MTY2Lmhvc3RnYXRvci5jb20=
 X-Local-Domain: yes
-Subject: Re: [Nouveau] [PATCH RESEND][next] drm/nouveau: Fix fall-through
- warnings for Clang
+Subject: Re: [Nouveau] [PATCH RESEND][next] drm/nouveau/clk: Fix
+ fall-through warnings for Clang
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -115,41 +115,28 @@ On 4/20/21 15:13, Gustavo A. R. Silva wrote:
 > Gustavo
 > 
 > On 3/5/21 03:56, Gustavo A. R. Silva wrote:
->> In preparation to enable -Wimplicit-fallthrough for Clang, fix a couple
->> of warnings by explicitly adding a couple of break statements instead
->> of letting the code fall through to the next case.
+>> In preparation to enable -Wimplicit-fallthrough for Clang, fix a warning
+>> by explicitly adding a break statement instead of letting the code fall
+>> through to the next case.
 >>
 >> Link: https://github.com/KSPP/linux/issues/115
 >> Signed-off-by: Gustavo A. R. Silva <gustavoars@kernel.org>
 >> ---
->>  drivers/gpu/drm/nouveau/nouveau_bo.c        | 1 +
->>  drivers/gpu/drm/nouveau/nouveau_connector.c | 1 +
->>  2 files changed, 2 insertions(+)
+>>  drivers/gpu/drm/nouveau/nvkm/subdev/clk/nv50.c | 1 +
+>>  1 file changed, 1 insertion(+)
 >>
->> diff --git a/drivers/gpu/drm/nouveau/nouveau_bo.c b/drivers/gpu/drm/nouveau/nouveau_bo.c
->> index 2375711877cf..62903c3b368d 100644
->> --- a/drivers/gpu/drm/nouveau/nouveau_bo.c
->> +++ b/drivers/gpu/drm/nouveau/nouveau_bo.c
->> @@ -443,6 +443,7 @@ nouveau_bo_pin(struct nouveau_bo *nvbo, uint32_t domain, bool contig)
->>  			break;
->>  		case TTM_PL_TT:
->>  			error |= !(domain & NOUVEAU_GEM_DOMAIN_GART);
->> +			break;
+>> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/clk/nv50.c b/drivers/gpu/drm/nouveau/nvkm/subdev/clk/nv50.c
+>> index 83067763c0ec..e1d31c62f9ec 100644
+>> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/clk/nv50.c
+>> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/clk/nv50.c
+>> @@ -313,6 +313,7 @@ nv50_clk_read(struct nvkm_clk *base, enum nv_clk_src src)
 >>  		default:
 >>  			break;
 >>  		}
->> diff --git a/drivers/gpu/drm/nouveau/nouveau_connector.c b/drivers/gpu/drm/nouveau/nouveau_connector.c
->> index 61e6d7412505..eb844cdcaec2 100644
->> --- a/drivers/gpu/drm/nouveau/nouveau_connector.c
->> +++ b/drivers/gpu/drm/nouveau/nouveau_connector.c
->> @@ -157,6 +157,7 @@ nouveau_conn_atomic_set_property(struct drm_connector *connector,
->>  			default:
->>  				break;
->>  			}
->> +			break;
->>  		case DRM_MODE_SCALE_FULLSCREEN:
->>  		case DRM_MODE_SCALE_CENTER:
->>  		case DRM_MODE_SCALE_ASPECT:
+>> +		break;
+>>  	default:
+>>  		break;
+>>  	}
 >>
 _______________________________________________
 Nouveau mailing list
