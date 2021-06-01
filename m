@@ -1,42 +1,78 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D92A8397A87
-	for <lists+nouveau@lfdr.de>; Tue,  1 Jun 2021 21:13:39 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 509EC397CF0
+	for <lists+nouveau@lfdr.de>; Wed,  2 Jun 2021 01:16:19 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1364489FF7;
-	Tue,  1 Jun 2021 19:13:35 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id CAEA26E03A;
+	Tue,  1 Jun 2021 23:16:16 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
- by gabe.freedesktop.org (Postfix) with ESMTPS id BE71A89FC9;
- Tue,  1 Jun 2021 19:13:33 +0000 (UTC)
-IronPort-SDR: KotutrrtKP/BHdt7tVLJt66zqxfUuuL8OfL+ZL9MI04WZraFgHgXZWISMxFM+5wsv0cBOTpHAh
- 0s5gCia1O2lA==
-X-IronPort-AV: E=McAfee;i="6200,9189,10002"; a="203427598"
-X-IronPort-AV: E=Sophos;i="5.83,240,1616482800"; d="scan'208";a="203427598"
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
- by fmsmga103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 01 Jun 2021 12:13:33 -0700
-IronPort-SDR: XZfNggu8LPnDflnn0SwdD0eW5QHn16G+JHMjSIbx7gJ4GsbhykrcMm1S7EKLBBD58pMxnt1b90
- 9m7iHrvHCi2g==
-X-IronPort-AV: E=Sophos;i="5.83,240,1616482800"; d="scan'208";a="479405172"
-Received: from ycohenha-mobl1.ger.corp.intel.com (HELO localhost)
- ([10.252.54.130])
- by orsmga001-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 01 Jun 2021 12:13:28 -0700
-From: Jani Nikula <jani.nikula@intel.com>
-To: Rodrigo Vivi <rodrigo.vivi@intel.com>, Lyude Paul <lyude@redhat.com>
-In-Reply-To: <YKgSJ+0YtLYQnOQB@intel.com>
-Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
-References: <20210514181504.565252-1-lyude@redhat.com>
- <20210514181504.565252-2-lyude@redhat.com> <YKgSJ+0YtLYQnOQB@intel.com>
-Date: Tue, 01 Jun 2021 22:13:25 +0300
-Message-ID: <87wnrdpfe2.fsf@intel.com>
+X-Greylist: delayed 1223 seconds by postgrey-1.36 at gabe;
+ Tue, 01 Jun 2021 23:16:15 UTC
+Received: from gateway24.websitewelcome.com (gateway24.websitewelcome.com
+ [192.185.51.56])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 470606E03A
+ for <nouveau@lists.freedesktop.org>; Tue,  1 Jun 2021 23:16:15 +0000 (UTC)
+Received: from cm12.websitewelcome.com (cm12.websitewelcome.com [100.42.49.8])
+ by gateway24.websitewelcome.com (Postfix) with ESMTP id 72C8D798B
+ for <nouveau@lists.freedesktop.org>; Tue,  1 Jun 2021 17:55:50 -0500 (CDT)
+Received: from gator4166.hostgator.com ([108.167.133.22]) by cmsmtp with SMTP
+ id oDIclbbgbDedfoDIclgidY; Tue, 01 Jun 2021 17:55:50 -0500
+X-Authority-Reason: nr=8
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=embeddedor.com; s=default; h=Content-Transfer-Encoding:Content-Type:
+ In-Reply-To:MIME-Version:Date:Message-ID:References:Cc:To:From:Subject:Sender
+ :Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
+ List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=HZ/MTcaMdemBlTWSin6KFaYC79fzi9Rdgyc+g76CuqM=; b=foLOTTxYICaO7v8eLQaTaEahFo
+ zqebbpvFrS2kAgzqy9S3OFlG/fnrpbjNnsO0RksEYJwbSQXsWadiaXj1ycYeRgPOQ2C05nluoLE9h
+ AbCD83ALZ1/cnY7emezcWoHuhq0b3ZCvKlzlkTT913+nuiILPwA6EqwDtsASJtZcYWudAlLmRpIgF
+ LfDwItC8QsHvHV/QVsXXo09bcRgBH/Nh7asrYJuNQJIEmYkCoR2dDDOwC6K3DTNHUgJMmJPbItOyv
+ zRuOB4fM44016mDSn1VXhxQA/CMwBCmjBzhTrPloJFolwyCQJ5+tXNYQiAiGTBdSDiwYRUxcLn58T
+ xHrrEwgA==;
+Received: from 187-162-31-110.static.axtel.net ([187.162.31.110]:53062
+ helo=[192.168.15.8])
+ by gator4166.hostgator.com with esmtpsa (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.94.2)
+ (envelope-from <gustavo@embeddedor.com>)
+ id 1loDIY-000tqs-Pv; Tue, 01 Jun 2021 17:55:46 -0500
+From: "Gustavo A. R. Silva" <gustavo@embeddedor.com>
+To: "Gustavo A. R. Silva" <gustavoars@kernel.org>,
+ Ben Skeggs <bskeggs@redhat.com>, David Airlie <airlied@linux.ie>,
+ Daniel Vetter <daniel@ffwll.ch>
+References: <20210305095657.GA142006@embeddedor>
+ <79ff569a-5828-ef21-538b-12d07d34a4ff@embeddedor.com>
+Message-ID: <1ec627af-514e-b24a-da88-13eb561ccb15@embeddedor.com>
+Date: Tue, 1 Jun 2021 17:56:50 -0500
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.8.1
 MIME-Version: 1.0
-Subject: Re: [Nouveau] [PATCH v6 1/9] drm/i915/dpcd_bl: Remove redundant AUX
- backlight frequency calculations
+In-Reply-To: <79ff569a-5828-ef21-538b-12d07d34a4ff@embeddedor.com>
+Content-Language: en-US
+X-AntiAbuse: This header was added to track abuse,
+ please include it with any abuse report
+X-AntiAbuse: Primary Hostname - gator4166.hostgator.com
+X-AntiAbuse: Original Domain - lists.freedesktop.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - embeddedor.com
+X-BWhitelist: no
+X-Source-IP: 187.162.31.110
+X-Source-L: No
+X-Exim-ID: 1loDIY-000tqs-Pv
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-Source-Sender: 187-162-31-110.static.axtel.net ([192.168.15.8])
+ [187.162.31.110]:53062
+X-Source-Auth: gustavo@embeddedor.com
+X-Email-Count: 20
+X-Source-Cap: Z3V6aWRpbmU7Z3V6aWRpbmU7Z2F0b3I0MTY2Lmhvc3RnYXRvci5jb20=
+X-Local-Domain: yes
+Subject: Re: [Nouveau] [PATCH RESEND][next] drm/nouveau: Fix fall-through
+ warnings for Clang
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -48,172 +84,73 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Rajeev Nandan <rajeevny@codeaurora.org>, greg.depoire@gmail.com,
- nouveau@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
- Lucas De Marchi <lucas.demarchi@intel.com>,
- open list <linux-kernel@vger.kernel.org>, dri-devel@lists.freedesktop.org,
- Gwan-gyeong Mun <gwan-gyeong.mun@intel.com>, David Airlie <airlied@linux.ie>,
- Uma Shankar <uma.shankar@intel.com>, Sean Paul <seanpaul@chromium.org>,
- Anshuman Gupta <anshuman.gupta@intel.com>, Dave Airlie <airlied@redhat.com>
+Cc: Kees Cook <keescook@chromium.org>, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ linux-hardening@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, 21 May 2021, Rodrigo Vivi <rodrigo.vivi@intel.com> wrote:
-> On Fri, May 14, 2021 at 02:14:55PM -0400, Lyude Paul wrote:
->> Noticed this while moving all of the VESA backlight code in i915 over to
->> DRM helpers: it would appear that we calculate the frequency value we want
->> to write to DP_EDP_BACKLIGHT_FREQ_SET twice even though this value never
->> actually changes during runtime. So, let's simplify things by just caching
->> this value in intel_panel.backlight, and re-writing it as-needed.
->> 
->> Changes since v1:
->> * Wrap panel->backlight.edp.vesa.pwm_freq_pre_divider in
->>   DP_EDP_BACKLIGHT_FREQ_AUX_SET_CAP check - Jani
->
-> This looks okay to me now... Jani, agree?
+Hi,
 
-Reviewed-by: Jani Nikula <jani.nikula@intel.com>
+Friendly second ping: who can take this?
 
+I can add this to my -next branch for 5.14 if you don't mind.
 
->
->> 
->> Signed-off-by: Lyude Paul <lyude@redhat.com>
->> Cc: Jani Nikula <jani.nikula@intel.com>
->> Cc: Dave Airlie <airlied@gmail.com>
->> Cc: greg.depoire@gmail.com
+JFYI: We had thousands of these sorts of warnings and now we are down
+to just 23 in linux-next. This is one of those last remaining warnings.
+
+Thanks
+--
+Gustavo
+
+On 4/20/21 15:13, Gustavo A. R. Silva wrote:
+> Hi all,
+> 
+> Friendly ping: who can take this, please?
+> 
+> Thanks
+> --
+> Gustavo
+> 
+> On 3/5/21 03:56, Gustavo A. R. Silva wrote:
+>> In preparation to enable -Wimplicit-fallthrough for Clang, fix a couple
+>> of warnings by explicitly adding a couple of break statements instead
+>> of letting the code fall through to the next case.
+>>
+>> Link: https://github.com/KSPP/linux/issues/115
+>> Signed-off-by: Gustavo A. R. Silva <gustavoars@kernel.org>
 >> ---
->>  .../drm/i915/display/intel_display_types.h    |  1 +
->>  .../drm/i915/display/intel_dp_aux_backlight.c | 65 ++++++-------------
->>  2 files changed, 20 insertions(+), 46 deletions(-)
->> 
->> diff --git a/drivers/gpu/drm/i915/display/intel_display_types.h b/drivers/gpu/drm/i915/display/intel_display_types.h
->> index 9c0adfc60c6f..7054a37363fb 100644
->> --- a/drivers/gpu/drm/i915/display/intel_display_types.h
->> +++ b/drivers/gpu/drm/i915/display/intel_display_types.h
->> @@ -311,6 +311,7 @@ struct intel_panel {
->>  		union {
->>  			struct {
->>  				u8 pwmgen_bit_count;
->> +				u8 pwm_freq_pre_divider;
->>  			} vesa;
->>  			struct {
->>  				bool sdr_uses_aux;
->> diff --git a/drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c b/drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c
->> index 8e9ac9ba1d38..68bfe50ada59 100644
->> --- a/drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c
->> +++ b/drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c
->> @@ -373,50 +373,6 @@ intel_dp_aux_vesa_set_backlight(const struct drm_connector_state *conn_state,
->>  	}
->>  }
->>  
->> -/*
->> - * Set PWM Frequency divider to match desired frequency in vbt.
->> - * The PWM Frequency is calculated as 27Mhz / (F x P).
->> - * - Where F = PWM Frequency Pre-Divider value programmed by field 7:0 of the
->> - *             EDP_BACKLIGHT_FREQ_SET register (DPCD Address 00728h)
->> - * - Where P = 2^Pn, where Pn is the value programmed by field 4:0 of the
->> - *             EDP_PWMGEN_BIT_COUNT register (DPCD Address 00724h)
->> - */
->> -static bool intel_dp_aux_vesa_set_pwm_freq(struct intel_connector *connector)
->> -{
->> -	struct drm_i915_private *dev_priv = to_i915(connector->base.dev);
->> -	struct intel_dp *intel_dp = intel_attached_dp(connector);
->> -	const u8 pn = connector->panel.backlight.edp.vesa.pwmgen_bit_count;
->> -	int freq, fxp, f, fxp_actual, fxp_min, fxp_max;
->> -
->> -	freq = dev_priv->vbt.backlight.pwm_freq_hz;
->> -	if (!freq) {
->> -		drm_dbg_kms(&dev_priv->drm,
->> -			    "Use panel default backlight frequency\n");
->> -		return false;
->> -	}
->> -
->> -	fxp = DIV_ROUND_CLOSEST(KHz(DP_EDP_BACKLIGHT_FREQ_BASE_KHZ), freq);
->> -	f = clamp(DIV_ROUND_CLOSEST(fxp, 1 << pn), 1, 255);
->> -	fxp_actual = f << pn;
->> -
->> -	/* Ensure frequency is within 25% of desired value */
->> -	fxp_min = DIV_ROUND_CLOSEST(fxp * 3, 4);
->> -	fxp_max = DIV_ROUND_CLOSEST(fxp * 5, 4);
->> -
->> -	if (fxp_min > fxp_actual || fxp_actual > fxp_max) {
->> -		drm_dbg_kms(&dev_priv->drm, "Actual frequency out of range\n");
->> -		return false;
->> -	}
->> -
->> -	if (drm_dp_dpcd_writeb(&intel_dp->aux,
->> -			       DP_EDP_BACKLIGHT_FREQ_SET, (u8) f) < 0) {
->> -		drm_dbg_kms(&dev_priv->drm,
->> -			    "Failed to write aux backlight freq\n");
->> -		return false;
->> -	}
->> -	return true;
->> -}
->> -
->>  static void
->>  intel_dp_aux_vesa_enable_backlight(const struct intel_crtc_state *crtc_state,
->>  				   const struct drm_connector_state *conn_state, u32 level)
->> @@ -459,9 +415,13 @@ intel_dp_aux_vesa_enable_backlight(const struct intel_crtc_state *crtc_state,
->>  		break;
->>  	}
->>  
->> -	if (intel_dp->edp_dpcd[2] & DP_EDP_BACKLIGHT_FREQ_AUX_SET_CAP)
->> -		if (intel_dp_aux_vesa_set_pwm_freq(connector))
->> +	if (panel->backlight.edp.vesa.pwm_freq_pre_divider) {
->> +		if (drm_dp_dpcd_writeb(&intel_dp->aux, DP_EDP_BACKLIGHT_FREQ_SET,
->> +				       panel->backlight.edp.vesa.pwm_freq_pre_divider) == 1)
->>  			new_dpcd_buf |= DP_EDP_BACKLIGHT_FREQ_AUX_SET_ENABLE;
->> +		else
->> +			drm_dbg_kms(&i915->drm, "Failed to write aux backlight frequency\n");
->> +	}
->>  
->>  	if (new_dpcd_buf != dpcd_buf) {
->>  		if (drm_dp_dpcd_writeb(&intel_dp->aux,
->> @@ -482,6 +442,14 @@ static void intel_dp_aux_vesa_disable_backlight(const struct drm_connector_state
->>  				  false);
->>  }
->>  
->> +/*
->> + * Compute PWM frequency divider value based off the frequency provided to us by the vbt.
->> + * The PWM Frequency is calculated as 27Mhz / (F x P).
->> + * - Where F = PWM Frequency Pre-Divider value programmed by field 7:0 of the
->> + *             EDP_BACKLIGHT_FREQ_SET register (DPCD Address 00728h)
->> + * - Where P = 2^Pn, where Pn is the value programmed by field 4:0 of the
->> + *             EDP_PWMGEN_BIT_COUNT register (DPCD Address 00724h)
->> + */
->>  static u32 intel_dp_aux_vesa_calc_max_backlight(struct intel_connector *connector)
->>  {
->>  	struct drm_i915_private *i915 = to_i915(connector->base.dev);
->> @@ -533,8 +501,10 @@ static u32 intel_dp_aux_vesa_calc_max_backlight(struct intel_connector *connecto
->>  	pn_min &= DP_EDP_PWMGEN_BIT_COUNT_MASK;
->>  	pn_max &= DP_EDP_PWMGEN_BIT_COUNT_MASK;
->>  
->> +	/* Ensure frequency is within 25% of desired value */
->>  	fxp_min = DIV_ROUND_CLOSEST(fxp * 3, 4);
->>  	fxp_max = DIV_ROUND_CLOSEST(fxp * 5, 4);
->> +
->>  	if (fxp_min < (1 << pn_min) || (255 << pn_max) < fxp_max) {
->>  		drm_dbg_kms(&i915->drm,
->>  			    "VBT defined backlight frequency out of range\n");
->> @@ -555,7 +525,10 @@ static u32 intel_dp_aux_vesa_calc_max_backlight(struct intel_connector *connecto
->>  			    "Failed to write aux pwmgen bit count\n");
->>  		return max_backlight;
->>  	}
->> +
->>  	panel->backlight.edp.vesa.pwmgen_bit_count = pn;
->> +	if (intel_dp->edp_dpcd[2] & DP_EDP_BACKLIGHT_FREQ_AUX_SET_CAP)
->> +		panel->backlight.edp.vesa.pwm_freq_pre_divider = f;
->>  
->>  	max_backlight = (1 << pn) - 1;
->>  
->> -- 
->> 2.31.1
->> 
-
--- 
-Jani Nikula, Intel Open Source Graphics Center
+>>  drivers/gpu/drm/nouveau/nouveau_bo.c        | 1 +
+>>  drivers/gpu/drm/nouveau/nouveau_connector.c | 1 +
+>>  2 files changed, 2 insertions(+)
+>>
+>> diff --git a/drivers/gpu/drm/nouveau/nouveau_bo.c b/drivers/gpu/drm/nouveau/nouveau_bo.c
+>> index 2375711877cf..62903c3b368d 100644
+>> --- a/drivers/gpu/drm/nouveau/nouveau_bo.c
+>> +++ b/drivers/gpu/drm/nouveau/nouveau_bo.c
+>> @@ -443,6 +443,7 @@ nouveau_bo_pin(struct nouveau_bo *nvbo, uint32_t domain, bool contig)
+>>  			break;
+>>  		case TTM_PL_TT:
+>>  			error |= !(domain & NOUVEAU_GEM_DOMAIN_GART);
+>> +			break;
+>>  		default:
+>>  			break;
+>>  		}
+>> diff --git a/drivers/gpu/drm/nouveau/nouveau_connector.c b/drivers/gpu/drm/nouveau/nouveau_connector.c
+>> index 61e6d7412505..eb844cdcaec2 100644
+>> --- a/drivers/gpu/drm/nouveau/nouveau_connector.c
+>> +++ b/drivers/gpu/drm/nouveau/nouveau_connector.c
+>> @@ -157,6 +157,7 @@ nouveau_conn_atomic_set_property(struct drm_connector *connector,
+>>  			default:
+>>  				break;
+>>  			}
+>> +			break;
+>>  		case DRM_MODE_SCALE_FULLSCREEN:
+>>  		case DRM_MODE_SCALE_CENTER:
+>>  		case DRM_MODE_SCALE_ASPECT:
+>>
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
