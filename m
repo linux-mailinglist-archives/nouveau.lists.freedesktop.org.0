@@ -2,59 +2,63 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id C260C398CF1
-	for <lists+nouveau@lfdr.de>; Wed,  2 Jun 2021 16:33:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E96D3399141
+	for <lists+nouveau@lfdr.de>; Wed,  2 Jun 2021 19:16:26 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3F5AE6ECC3;
-	Wed,  2 Jun 2021 14:33:29 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 2B1676EE23;
+	Wed,  2 Jun 2021 17:16:22 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 79F056ECC2
- for <nouveau@lists.freedesktop.org>; Wed,  2 Jun 2021 14:33:27 +0000 (UTC)
-Received: by mail-wm1-x336.google.com with SMTP id m18so1475183wmq.0
- for <nouveau@lists.freedesktop.org>; Wed, 02 Jun 2021 07:33:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=SjYtCEx4Gm+TGSpGlmvvhCGW5wnbP6a4KsRuIEipo4s=;
- b=gofFevHTLNP8OF2mr2XqTcfqX1D3ngKNuZkPIThUZ73Sp9nI1B1Y8Tv/hVti3HkZ4s
- tWgT8IUhvVnFoBxbeWx3jn/nCNincbNXHzx9B6lZygFD3Cmrl1/GliP9x5+FqnKxuPfm
- edhx4dGvfjtFqI2hI0dZirgAh2HzbbwtsnovQrHetfPrP5AImxGrEqUHfmWDl53UHqKs
- /+0zrGfOn8gh9ia/+b83GKKJBPIOXAVM31QEAOYOYsPQyU57Q/x0kj+ovAtNleLZnv5t
- 00TuL9IjHwDR0WWej7u0zyCtlYD2ZkTnzOWAQUY+i5DZV7ZSP+s5VOJj084G1ZggEaNK
- yZfg==
+Received: from mail-pj1-x102d.google.com (mail-pj1-x102d.google.com
+ [IPv6:2607:f8b0:4864:20::102d])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 249446E3C6;
+ Wed,  2 Jun 2021 08:50:42 +0000 (UTC)
+Received: by mail-pj1-x102d.google.com with SMTP id k5so1295012pjj.1;
+ Wed, 02 Jun 2021 01:50:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to;
+ bh=o9lxecdQ+sUFtyWEQYnGHVSA9kUb7tM0XtaGYDbglIU=;
+ b=EHucTEQtsxnfYE2QIpFkB+b80UKPVtGTuj44cfEGTctDfweDXFNWILx2kT/juLet+7
+ oBhCr11wzlo8i3a1kMBkNGW2KgkQ3mL4ZdNrvSnEz/Q7rkxkl386Ip3wJ5rYkzSFOCqo
+ 1zamko+VpG6K/7JTBgdROITcvin5vhpWh6Ts6QOaJTg1HC88CFOon2Ut2v59IkScKCTj
+ SexhOHCDaGtsqxI5BtUNlmmeY0E5hYObhyd8wqYN2Jzv0Jpbfh5n7Edss6F6dEFLlD4f
+ 32xH8cG/3ZD0vLVicGYr+P+g7E5syLUrogiZ/hqtvZHLW6GDp5MH71RbPal+/6f5MOCS
+ hb/g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=SjYtCEx4Gm+TGSpGlmvvhCGW5wnbP6a4KsRuIEipo4s=;
- b=t8TTw9ba80YcHMPrKKb/D12Xow4o0uZduFFSOS/2FpH9BxzR+GMiy/jOjuqtqo7eMn
- Zp/eiTIvKDkw+esAc2jDMjUlhI8Sgd9BrA6hJDtEoz/NlpMm26ax/wKuYRdZW1s2w6r3
- o+kL2jmnd21Mly/f/xTslPldJRWYxSNvdfjJf8Yq1M1zqxAKjmWlAdkudAdJsW++OGra
- wdSjYCL9GN6d+vxmFaT5Yac1uK6Ocxa0td2n3/9Bv2C9FjvHiffAupI70W+dvLyzeXBO
- /HZ1LjotXcvhvfrxrH9li4qPS04WhyqU884njd2ebJGMLJmAEwbuLfRpAmcuiDTJQ0so
- ArIg==
-X-Gm-Message-State: AOAM532qFbyoxyBVdtPpcSXpek/sfTAjnHdL03izWZkzTcWVPkeC5Z9t
- Lle6cS6fvNrOlT/xme9k89RFtA==
-X-Google-Smtp-Source: ABdhPJx3OI3S8vnYR8EVGsMrIxEMMmnLlVVY9ywmN5evmDEYm9hwef+Z9UJbAvOn0EMCoEwbTJPJvg==
-X-Received: by 2002:a7b:cbc2:: with SMTP id n2mr5534394wmi.116.1622644406183; 
- Wed, 02 Jun 2021 07:33:26 -0700 (PDT)
-Received: from dell.default ([91.110.221.214])
- by smtp.gmail.com with ESMTPSA id o11sm132315wrq.93.2021.06.02.07.33.25
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=o9lxecdQ+sUFtyWEQYnGHVSA9kUb7tM0XtaGYDbglIU=;
+ b=tmisFiptQSM3mA6yJpgtv9HSj+US/KJfxOsGdiChzl9LTnQMG8hTx0pJA9ITfTPjNq
+ fLEU7N9aAv2MhsGy4EMhLKlay0uTHteM+OBK7emuoeJOGtxwGkUX7Ip9wJ14b+ZDeTKN
+ 4C+6C3qHUzxGNoZ3n6VPHaGoUWCiMVn566nGYBK3vv7HbdDJV8hLdoShN3pzHFrvpp/C
+ 7M/EPAEqa+87IdW73jLPkn2MMgxwuSG93lGpkC6Ln/nbtqJPq7ok8qcpab73p+icbisU
+ GVzYRlONoATaMHNrwl95G19ghs1WYvekonVuZVIx7sFBuYR1rP1tN0R2aVViybVcTwER
+ Hz7Q==
+X-Gm-Message-State: AOAM531RSruvKXgJevT8ArIMdHpVWKFln9Y7proW3X1k6nBQ+9xTp/zS
+ vweYBYuW7Y7ju3CzCwawnuQ=
+X-Google-Smtp-Source: ABdhPJyaugF6+CYwrJI3pVkj2b4jzGpeXPEYzpUFLG3awQAK21ZuritpgNYaqMGnLzReJocPn1YhKg==
+X-Received: by 2002:a17:90a:6e07:: with SMTP id b7mr4431857pjk.7.1622623841640; 
+ Wed, 02 Jun 2021 01:50:41 -0700 (PDT)
+Received: from localhost (60-242-95-222.static.tpgi.com.au. [60.242.95.222])
+ by smtp.gmail.com with ESMTPSA id nn6sm5443508pjb.57.2021.06.02.01.50.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 02 Jun 2021 07:33:25 -0700 (PDT)
-From: Lee Jones <lee.jones@linaro.org>
-To: lee.jones@linaro.org
-Date: Wed,  2 Jun 2021 15:32:49 +0100
-Message-Id: <20210602143300.2330146-16-lee.jones@linaro.org>
-X-Mailer: git-send-email 2.31.1
-In-Reply-To: <20210602143300.2330146-1-lee.jones@linaro.org>
-References: <20210602143300.2330146-1-lee.jones@linaro.org>
+ Wed, 02 Jun 2021 01:50:40 -0700 (PDT)
+Date: Wed, 2 Jun 2021 18:50:37 +1000
+From: Balbir Singh <bsingharora@gmail.com>
+To: John Hubbard <jhubbard@nvidia.com>
+Message-ID: <YLdGXSw0zdiovn4i@balbir-desktop>
+References: <20210524132725.12697-1-apopple@nvidia.com>
+ <20210524132725.12697-8-apopple@nvidia.com>
+ <20210524151157.2dc5d2bb510ff86dc449bf0c@linux-foundation.org>
+ <YKzk0ILRsyazMs2W@balbir-desktop>
+ <8844f8c1-d78c-e0f9-c046-592bd75d4c07@nvidia.com>
 MIME-Version: 1.0
-Subject: [Nouveau] [RESEND 15/26] drm/nouveau/nvkm/subdev/mc/tu102: Make
- functions called by reference static
+Content-Disposition: inline
+In-Reply-To: <8844f8c1-d78c-e0f9-c046-592bd75d4c07@nvidia.com>
+X-Mailman-Approved-At: Wed, 02 Jun 2021 17:16:20 +0000
+Subject: Re: [Nouveau] [PATCH v9 07/10] mm: Device exclusive memory access
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -66,46 +70,82 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
- Alistair Popple <apopple@nvidia.com>, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>,
- Daniel Vetter <daniel@ffwll.ch>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: rcampbell@nvidia.com, willy@infradead.org, linux-doc@vger.kernel.org,
+ nouveau@lists.freedesktop.org, Alistair Popple <apopple@nvidia.com>,
+ hughd@google.com, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, peterx@redhat.com, hch@infradead.org,
+ linux-mm@kvack.org, bskeggs@redhat.com, jgg@nvidia.com,
+ Andrew Morton <akpm@linux-foundation.org>, Christoph Hellwig <hch@lst.de>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Rml4ZXMgdGhlIGZvbGxvd2luZyBXPTEga2VybmVsIGJ1aWxkIHdhcm5pbmcocyk6CgogZHJpdmVy
-cy9ncHUvZHJtL25vdXZlYXUvbnZrbS9zdWJkZXYvbWMvdHUxMDIuYzo1MDoxOiB3YXJuaW5nOiBu
-byBwcmV2aW91cyBwcm90b3R5cGUgZm9yIOKAmHR1MTAyX21jX2ludHJfdW5hcm3igJkgWy1XbWlz
-c2luZy1wcm90b3R5cGVzXQogZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbnZrbS9zdWJkZXYvbWMv
-dHUxMDIuYzo2MjoxOiB3YXJuaW5nOiBubyBwcmV2aW91cyBwcm90b3R5cGUgZm9yIOKAmHR1MTAy
-X21jX2ludHJfcmVhcm3igJkgWy1XbWlzc2luZy1wcm90b3R5cGVzXQogZHJpdmVycy9ncHUvZHJt
-L25vdXZlYXUvbnZrbS9zdWJkZXYvbWMvdHUxMDIuYzo3NDoxOiB3YXJuaW5nOiBubyBwcmV2aW91
-cyBwcm90b3R5cGUgZm9yIOKAmHR1MTAyX21jX2ludHJfbWFza+KAmSBbLVdtaXNzaW5nLXByb3Rv
-dHlwZXNdCgpDYzogQmVuIFNrZWdncyA8YnNrZWdnc0ByZWRoYXQuY29tPgpDYzogRGF2aWQgQWly
-bGllIDxhaXJsaWVkQGxpbnV4LmllPgpDYzogRGFuaWVsIFZldHRlciA8ZGFuaWVsQGZmd2xsLmNo
-PgpDYzogQWxpc3RhaXIgUG9wcGxlIDxhcG9wcGxlQG52aWRpYS5jb20+CkNjOiBkcmktZGV2ZWxA
-bGlzdHMuZnJlZWRlc2t0b3Aub3JnCkNjOiBub3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpT
-aWduZWQtb2ZmLWJ5OiBMZWUgSm9uZXMgPGxlZS5qb25lc0BsaW5hcm8ub3JnPgotLS0KIGRyaXZl
-cnMvZ3B1L2RybS9ub3V2ZWF1L252a20vc3ViZGV2L21jL3R1MTAyLmMgfCA2ICsrKy0tLQogMSBm
-aWxlIGNoYW5nZWQsIDMgaW5zZXJ0aW9ucygrKSwgMyBkZWxldGlvbnMoLSkKCmRpZmYgLS1naXQg
-YS9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9udmttL3N1YmRldi9tYy90dTEwMi5jIGIvZHJpdmVy
-cy9ncHUvZHJtL25vdXZlYXUvbnZrbS9zdWJkZXYvbWMvdHUxMDIuYwppbmRleCA1OGRiODNlYmFk
-YzVmLi5hOTYwODRiMzRhNzg4IDEwMDY0NAotLS0gYS9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9u
-dmttL3N1YmRldi9tYy90dTEwMi5jCisrKyBiL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L252a20v
-c3ViZGV2L21jL3R1MTAyLmMKQEAgLTQ2LDcgKzQ2LDcgQEAgdHUxMDJfbWNfaW50cl91cGRhdGUo
-c3RydWN0IHR1MTAyX21jICptYykKIAkJbnZrbV93cjMyKGRldmljZSwgMHhiODE2MTAsIDB4Nik7
-CiB9CiAKLXZvaWQKK3N0YXRpYyB2b2lkCiB0dTEwMl9tY19pbnRyX3VuYXJtKHN0cnVjdCBudmtt
-X21jICpiYXNlKQogewogCXN0cnVjdCB0dTEwMl9tYyAqbWMgPSB0dTEwMl9tYyhiYXNlKTsKQEAg
-LTU4LDcgKzU4LDcgQEAgdHUxMDJfbWNfaW50cl91bmFybShzdHJ1Y3QgbnZrbV9tYyAqYmFzZSkK
-IAlzcGluX3VubG9ja19pcnFyZXN0b3JlKCZtYy0+bG9jaywgZmxhZ3MpOwogfQogCi12b2lkCitz
-dGF0aWMgdm9pZAogdHUxMDJfbWNfaW50cl9yZWFybShzdHJ1Y3QgbnZrbV9tYyAqYmFzZSkKIHsK
-IAlzdHJ1Y3QgdHUxMDJfbWMgKm1jID0gdHUxMDJfbWMoYmFzZSk7CkBAIC03MCw3ICs3MCw3IEBA
-IHR1MTAyX21jX2ludHJfcmVhcm0oc3RydWN0IG52a21fbWMgKmJhc2UpCiAJc3Bpbl91bmxvY2tf
-aXJxcmVzdG9yZSgmbWMtPmxvY2ssIGZsYWdzKTsKIH0KIAotdm9pZAorc3RhdGljIHZvaWQKIHR1
-MTAyX21jX2ludHJfbWFzayhzdHJ1Y3QgbnZrbV9tYyAqYmFzZSwgdTMyIG1hc2ssIHUzMiBpbnRy
-KQogewogCXN0cnVjdCB0dTEwMl9tYyAqbWMgPSB0dTEwMl9tYyhiYXNlKTsKLS0gCjIuMzEuMQoK
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBt
-YWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5m
-cmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1Cg==
+On Wed, May 26, 2021 at 12:17:18AM -0700, John Hubbard wrote:
+> On 5/25/21 4:51 AM, Balbir Singh wrote:
+> ...
+> > > How beneficial is this code to nouveau users?  I see that it permits a
+> > > part of OpenCL to be implemented, but how useful/important is this in
+> > > the real world?
+> > 
+> > That is a very good question! I've not reviewed the code, but a sample
+> > program with the described use case would make things easy to parse.
+> > I suspect that is not easy to build at the moment?
+> > 
+> 
+> The cover letter says this:
+> 
+> This has been tested with upstream Mesa 21.1.0 and a simple OpenCL program
+> which checks that GPU atomic accesses to system memory are atomic. Without
+> this series the test fails as there is no way of write-protecting the page
+> mapping which results in the device clobbering CPU writes. For reference
+> the test is available at https://ozlabs.org/~apopple/opencl_svm_atomics/
+> 
+> Further testing has been performed by adding support for testing exclusive
+> access to the hmm-tests kselftests.
+> 
+> ...so that seems to cover the "sample program" request, at least.
+
+Thanks, I'll take a look
+
+> 
+> > I wonder how we co-ordinate all the work the mm is doing, page migration,
+> > reclaim with device exclusive access? Do we have any numbers for the worst
+> > case page fault latency when something is marked away for exclusive access?
+> 
+> CPU page fault latency is approximately "terrible", if a page is resident on
+> the GPU. We have to spin up a DMA engine on the GPU and have it copy the page
+> over the PCIe bus, after all.
+> 
+> > I presume for now this is anonymous memory only? SWP_DEVICE_EXCLUSIVE would
+> 
+> Yes, for now.
+> 
+> > only impact the address space of programs using the GPU. Should the exclusively
+> > marked range live in the unreclaimable list and recycled back to active/in-active
+> > to account for the fact that
+> > 
+> > 1. It is not reclaimable and reclaim will only hurt via page faults?
+> > 2. It ages the page correctly or at-least allows for that possibility when the
+> >     page is used by the GPU.
+> 
+> I'm not sure that that is *necessarily* something we can conclude. It depends upon
+> access patterns of each program. For example, a "reduction" parallel program sends
+> over lots of data to the GPU, and only a tiny bit of (reduced!) data comes back
+> to the CPU. In that case, freeing the physical page on the CPU is actually the
+> best decision for the OS to make (if the OS is sufficiently prescient).
+>
+
+With a shared device or a device exclusive range, it would be good to get the device
+usage pattern and update the mm with that knowledge, so that the LRU can be better
+maintained. With your comment you seem to suggest that a page used by the GPU might
+be a good candidate for reclaim based on the CPU's understanding of the age of
+the page should not account for use by the device
+(are GPU workloads - access once and discard?) 
+
+Balbir Singh.
+
+_______________________________________________
+Nouveau mailing list
+Nouveau@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/nouveau
