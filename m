@@ -1,69 +1,67 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id E912F39BBF2
-	for <lists+nouveau@lfdr.de>; Fri,  4 Jun 2021 17:34:15 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 157E139BBF4
+	for <lists+nouveau@lfdr.de>; Fri,  4 Jun 2021 17:34:20 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A98726E108;
-	Fri,  4 Jun 2021 15:34:13 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 596F96E9F8;
+	Fri,  4 Jun 2021 15:34:14 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 66B9E6F48B
- for <nouveau@lists.freedesktop.org>; Thu,  3 Jun 2021 14:47:47 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id BBC536F617
+ for <nouveau@lists.freedesktop.org>; Fri,  4 Jun 2021 15:20:56 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1622731666;
+ s=mimecast20190719; t=1622820055;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=ggwAzDwYsJe761/h5KeyH0+JH3HJIdjU1YmA0yiaMkI=;
- b=c6KbUWHozjlgPRGeKkkVLjeAZIWBPqMyh56ebADi0rfZcqAJGEBYATvwEoUYnfBI9VRW8f
- Gjk4IeEfuXNd/w7x4TXUjO2lOEmf8jgt5gI0IaRTryfSZKkzbgRUPYZn0vYcMtNngguA7V
- mIztC+qrLSMk4ynNtaj0G+X5RfORWt0=
-Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com
- [209.85.160.198]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-19-L-h_qU6qNRiRywRkN3Qbog-1; Thu, 03 Jun 2021 10:47:43 -0400
-X-MC-Unique: L-h_qU6qNRiRywRkN3Qbog-1
-Received: by mail-qt1-f198.google.com with SMTP id
- t25-20020ac865d90000b029024320bc6dc9so3202148qto.9
- for <nouveau@lists.freedesktop.org>; Thu, 03 Jun 2021 07:47:43 -0700 (PDT)
+ bh=4AbIlLedm5Mu+ovdpvNjPfOsXH7m99kQNtIejaRsUUU=;
+ b=aeqKdawg7sPeFs5OAk/SZXNhGlTx0+oUowDFRIqBJlbei1qvU7oefc7LKk7MjK621tZebS
+ iTKdhb46fY2pfj6P/zWd/cqLVJgaSXXMMuqrvDLycyJVSFcUdEtnYUNpPbr4g06Qgk/tdu
+ uFLbyEB8tl/hcZHUEcF5An6yyjXiZyk=
+Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com
+ [209.85.222.198]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-343-J4Ihykw8M9SmR0zV_mWeIA-1; Fri, 04 Jun 2021 11:20:51 -0400
+X-MC-Unique: J4Ihykw8M9SmR0zV_mWeIA-1
+Received: by mail-qk1-f198.google.com with SMTP id
+ o6-20020a05620a1106b02903a9f97c808bso4000061qkk.1
+ for <nouveau@lists.freedesktop.org>; Fri, 04 Jun 2021 08:20:51 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to;
- bh=ggwAzDwYsJe761/h5KeyH0+JH3HJIdjU1YmA0yiaMkI=;
- b=dT1Mapfh5RumVwt8M/WCSbgF2x4hSM6ZrlEjf1yNEMDfBs9Oi7esLWoyLjvnXGgq0r
- TguoGypx0JKZFoDt1yoUqWOt2a+dY5uzUXH95o2aDh2Q2+L2hALlueKCwt2fDR6YMntv
- qJfN2S8aicxNpJOe0gjCNWZhdZ7M8jNDtlPFz4TIVxc+HLxm41fWaYdt6G73yFLWH8sC
- XO111oTwFbzs8NqafGT/BipRas68afTLB0ipr9JoHmHZJS7iMngmrQ4d//6VNncc/guS
- F8qVfJLq0cJEUbZVTtyv9ibEOX6TYBkLkgxOAL10Zo1PvymsGdYOdLa3M9qNOg22046F
- jVUA==
-X-Gm-Message-State: AOAM5331IVAv9fnALxIqbC7YW2mu3wLAjh53xsO6dAmtgDJ0dpoxUBFW
- WGoRM9I3Y61dIenDQE23o5LwDCbEDZR8AIWETNVm1s2NGWvTOhwQ89kYqB4Ittz43BpcKjPR+fA
- fU5bM7iheUyTkZ6/ub22LSdcsfA==
-X-Received: by 2002:a37:ae81:: with SMTP id
- x123mr31891341qke.251.1622731662880; 
- Thu, 03 Jun 2021 07:47:42 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJw8G2sTC80gzexHAH3BN9zjekxO4BROz6GuR6h2LK/qUHy5QdzjC03iGstjtnqP8uH7ytX0pw==
-X-Received: by 2002:a37:ae81:: with SMTP id
- x123mr31891297qke.251.1622731662359; 
- Thu, 03 Jun 2021 07:47:42 -0700 (PDT)
+ bh=4AbIlLedm5Mu+ovdpvNjPfOsXH7m99kQNtIejaRsUUU=;
+ b=UFakhNpU3OMuB1woS9Yx0T5GYtNYwBPMMP3tbC86VvcIV3xtRZE1LiKo30XaeN0RAB
+ JfHuOhhdrzQBIN7jINizS9/8VD4WpSxr7Dfc7Kd+BAbyA2MS93lTK/ZUtmobwoOqQW2x
+ mQun2ivRIbpEpRhN9SJMKtE1ILI5e6ChDYWheS8NXpSJ1vbMf0Jy9ruT4QELFcYmqdNf
+ C+este3Gj7VRpVVUKuzoSMqI5Drlq4gvk7e7xv9gwHsSoSk39VdAxmx2IkqEPLwhPG42
+ DXxGlvfCIxaKuoCCrRZpbIMuz9VYvqWIKVc4+B3tDaydFpYYvGaxyVvze9BQoarPTtEn
+ EYkA==
+X-Gm-Message-State: AOAM531XPXyhOtTCZj9l9of4Ak5G+0oFWSw7f0JXFOSWCMsQQjG3D+jB
+ m+JSkWeSfiKqpqg2Cm7xPtl+PLJoRLuXb0y9Tmnc0vGwMYO0DtrocbLXt98vdcWIOilTNsuC2JB
+ F5/f7IRrkgVVFRHFEPlVUcYRqbg==
+X-Received: by 2002:a37:911:: with SMTP id 17mr2506635qkj.436.1622820051431;
+ Fri, 04 Jun 2021 08:20:51 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJwSkb15icJCjCC2a0yzUkFB8Tk/1b3Gxyat2dgZri3GuoK2EOI4ZaPq1ePBkTLwQGSCPYLtvg==
+X-Received: by 2002:a37:911:: with SMTP id 17mr2506604qkj.436.1622820051225;
+ Fri, 04 Jun 2021 08:20:51 -0700 (PDT)
 Received: from t490s
  (bras-base-toroon474qw-grc-61-184-147-118-108.dsl.bell.ca. [184.147.118.108])
- by smtp.gmail.com with ESMTPSA id j28sm2041208qkl.35.2021.06.03.07.47.40
+ by smtp.gmail.com with ESMTPSA id x9sm3701082qtf.76.2021.06.04.08.20.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 03 Jun 2021 07:47:41 -0700 (PDT)
-Date: Thu, 3 Jun 2021 10:47:40 -0400
+ Fri, 04 Jun 2021 08:20:50 -0700 (PDT)
+Date: Fri, 4 Jun 2021 11:20:49 -0400
 From: Peter Xu <peterx@redhat.com>
 To: Alistair Popple <apopple@nvidia.com>
-Message-ID: <YLjrjJXMP9Y3bvej@t490s>
+Message-ID: <YLpE0U789jvD2zxN@t490s>
 References: <20210524132725.12697-1-apopple@nvidia.com>
- <YLdGXSw0zdiovn4i@balbir-desktop> <YLeXqp/U0DgylI/u@t490s>
- <3853054.AI2YdRgKcH@nvdebian>
+ <3853054.AI2YdRgKcH@nvdebian> <YLjrjJXMP9Y3bvej@t490s>
+ <10231977.pWpf7cJbZl@nvdebian>
 MIME-Version: 1.0
-In-Reply-To: <3853054.AI2YdRgKcH@nvdebian>
+In-Reply-To: <10231977.pWpf7cJbZl@nvdebian>
 Authentication-Results: relay.mimecast.com;
  auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=peterx@redhat.com
 X-Mimecast-Spam-Score: 0
@@ -93,12 +91,31 @@ Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, Jun 03, 2021 at 09:39:32PM +1000, Alistair Popple wrote:
-> Reclaim won't run on the page due to the extra references from the special 
-> swap entries.
+On Fri, Jun 04, 2021 at 11:07:42AM +1000, Alistair Popple wrote:
+> On Friday, 4 June 2021 12:47:40 AM AEST Peter Xu wrote:
+> > External email: Use caution opening links or attachments
+> > 
+> > On Thu, Jun 03, 2021 at 09:39:32PM +1000, Alistair Popple wrote:
+> > > Reclaim won't run on the page due to the extra references from the special
+> > > swap entries.
+> > 
+> > That sounds reasonable, but I didn't find the point that stops it, probably
+> > due to my limited knowledge on the reclaim code.  Could you elaborate?
+> 
+> Sure, it isn't immediately obvious but it ends up being detected at the start 
+> of is_page_cache_freeable() in the pageout code:
+> 
+> 
+> static pageout_t pageout(struct page *page, struct address_space *mapping)
+> {
+> 
+> [...]
+> 
+> 	if (!is_page_cache_freeable(page))
+> 		return PAGE_KEEP;
 
-That sounds reasonable, but I didn't find the point that stops it, probably due
-to my limited knowledge on the reclaim code.  Could you elaborate?
+I did look at pageout() but still missed this small helper indeed (while it's
+so important to know..), thanks!
 
 -- 
 Peter Xu
