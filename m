@@ -1,74 +1,34 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 157E139BBF4
-	for <lists+nouveau@lfdr.de>; Fri,  4 Jun 2021 17:34:20 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0CAA539CACB
+	for <lists+nouveau@lfdr.de>; Sat,  5 Jun 2021 21:53:15 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 596F96E9F8;
-	Fri,  4 Jun 2021 15:34:14 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A5C2F6E1F9;
+	Sat,  5 Jun 2021 19:53:11 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id BBC536F617
- for <nouveau@lists.freedesktop.org>; Fri,  4 Jun 2021 15:20:56 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1622820055;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=4AbIlLedm5Mu+ovdpvNjPfOsXH7m99kQNtIejaRsUUU=;
- b=aeqKdawg7sPeFs5OAk/SZXNhGlTx0+oUowDFRIqBJlbei1qvU7oefc7LKk7MjK621tZebS
- iTKdhb46fY2pfj6P/zWd/cqLVJgaSXXMMuqrvDLycyJVSFcUdEtnYUNpPbr4g06Qgk/tdu
- uFLbyEB8tl/hcZHUEcF5An6yyjXiZyk=
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com
- [209.85.222.198]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-343-J4Ihykw8M9SmR0zV_mWeIA-1; Fri, 04 Jun 2021 11:20:51 -0400
-X-MC-Unique: J4Ihykw8M9SmR0zV_mWeIA-1
-Received: by mail-qk1-f198.google.com with SMTP id
- o6-20020a05620a1106b02903a9f97c808bso4000061qkk.1
- for <nouveau@lists.freedesktop.org>; Fri, 04 Jun 2021 08:20:51 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=4AbIlLedm5Mu+ovdpvNjPfOsXH7m99kQNtIejaRsUUU=;
- b=UFakhNpU3OMuB1woS9Yx0T5GYtNYwBPMMP3tbC86VvcIV3xtRZE1LiKo30XaeN0RAB
- JfHuOhhdrzQBIN7jINizS9/8VD4WpSxr7Dfc7Kd+BAbyA2MS93lTK/ZUtmobwoOqQW2x
- mQun2ivRIbpEpRhN9SJMKtE1ILI5e6ChDYWheS8NXpSJ1vbMf0Jy9ruT4QELFcYmqdNf
- C+este3Gj7VRpVVUKuzoSMqI5Drlq4gvk7e7xv9gwHsSoSk39VdAxmx2IkqEPLwhPG42
- DXxGlvfCIxaKuoCCrRZpbIMuz9VYvqWIKVc4+B3tDaydFpYYvGaxyVvze9BQoarPTtEn
- EYkA==
-X-Gm-Message-State: AOAM531XPXyhOtTCZj9l9of4Ak5G+0oFWSw7f0JXFOSWCMsQQjG3D+jB
- m+JSkWeSfiKqpqg2Cm7xPtl+PLJoRLuXb0y9Tmnc0vGwMYO0DtrocbLXt98vdcWIOilTNsuC2JB
- F5/f7IRrkgVVFRHFEPlVUcYRqbg==
-X-Received: by 2002:a37:911:: with SMTP id 17mr2506635qkj.436.1622820051431;
- Fri, 04 Jun 2021 08:20:51 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJwSkb15icJCjCC2a0yzUkFB8Tk/1b3Gxyat2dgZri3GuoK2EOI4ZaPq1ePBkTLwQGSCPYLtvg==
-X-Received: by 2002:a37:911:: with SMTP id 17mr2506604qkj.436.1622820051225;
- Fri, 04 Jun 2021 08:20:51 -0700 (PDT)
-Received: from t490s
- (bras-base-toroon474qw-grc-61-184-147-118-108.dsl.bell.ca. [184.147.118.108])
- by smtp.gmail.com with ESMTPSA id x9sm3701082qtf.76.2021.06.04.08.20.49
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 04 Jun 2021 08:20:50 -0700 (PDT)
-Date: Fri, 4 Jun 2021 11:20:49 -0400
-From: Peter Xu <peterx@redhat.com>
-To: Alistair Popple <apopple@nvidia.com>
-Message-ID: <YLpE0U789jvD2zxN@t490s>
-References: <20210524132725.12697-1-apopple@nvidia.com>
- <3853054.AI2YdRgKcH@nvdebian> <YLjrjJXMP9Y3bvej@t490s>
- <10231977.pWpf7cJbZl@nvdebian>
+X-Greylist: delayed 552 seconds by postgrey-1.36 at gabe;
+ Sat, 05 Jun 2021 19:53:10 UTC
+Received: from hosting.gsystem.sk (hosting.gsystem.sk [212.5.213.30])
+ by gabe.freedesktop.org (Postfix) with ESMTP id D2E056E1F9;
+ Sat,  5 Jun 2021 19:53:10 +0000 (UTC)
+Received: from [192.168.0.2] (188-167-68-178.dynamic.chello.sk
+ [188.167.68.178])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by hosting.gsystem.sk (Postfix) with ESMTPSA id 93AA07A021C;
+ Sat,  5 Jun 2021 21:43:56 +0200 (CEST)
+From: Ondrej Zary <linux@zary.sk>
+To: Ben Skeggs <bskeggs@redhat.com>
+Date: Sat, 5 Jun 2021 21:43:52 +0200
+User-Agent: KMail/1.9.10
 MIME-Version: 1.0
-In-Reply-To: <10231977.pWpf7cJbZl@nvdebian>
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=peterx@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
-X-Mailman-Approved-At: Fri, 04 Jun 2021 15:34:13 +0000
-Subject: Re: [Nouveau] [PATCH v9 07/10] mm: Device exclusive memory access
+Message-Id: <202106052143.52488.linux@zary.sk>
+Subject: [Nouveau] nouveau broken on Riva TNT2 in 5.13.0-rc4: NULL pointer
+ dereference in nouveau_bo_sync_for_device
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -80,46 +40,83 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: rcampbell@nvidia.com, willy@infradead.org, linux-doc@vger.kernel.org,
- nouveau@lists.freedesktop.org, Balbir Singh <bsingharora@gmail.com>,
- hughd@google.com, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, hch@infradead.org, linux-mm@kvack.org,
- bskeggs@redhat.com, jgg@nvidia.com, Andrew Morton <akpm@linux-foundation.org>,
- Christoph Hellwig <hch@lst.de>
+Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, Jun 04, 2021 at 11:07:42AM +1000, Alistair Popple wrote:
-> On Friday, 4 June 2021 12:47:40 AM AEST Peter Xu wrote:
-> > External email: Use caution opening links or attachments
-> > 
-> > On Thu, Jun 03, 2021 at 09:39:32PM +1000, Alistair Popple wrote:
-> > > Reclaim won't run on the page due to the extra references from the special
-> > > swap entries.
-> > 
-> > That sounds reasonable, but I didn't find the point that stops it, probably
-> > due to my limited knowledge on the reclaim code.  Could you elaborate?
-> 
-> Sure, it isn't immediately obvious but it ends up being detected at the start 
-> of is_page_cache_freeable() in the pageout code:
-> 
-> 
-> static pageout_t pageout(struct page *page, struct address_space *mapping)
-> {
-> 
-> [...]
-> 
-> 	if (!is_page_cache_freeable(page))
-> 		return PAGE_KEEP;
+Hello,
+I'm testing 5.13.0-rc4 and nouveau crashes with NULL pointer dereference in nouveau_bo_sync_for_device.
+Found various reports like this but that was back in februaryso that should be fixed now.
 
-I did look at pageout() but still missed this small helper indeed (while it's
-so important to know..), thanks!
+[   21.003216] BUG: kernel NULL pointer dereference, address: 00000000
+[   21.003235] #PF: supervisor read access in kernel mode
+[   21.003243] #PF: error_code(0x0000) - not-present page
+[   21.003250] *pde = 00000000
+[   21.003258] Oops: 0000 [#1] SMP
+[   21.003268] CPU: 0 PID: 222 Comm: systemd-udevd Not tainted 5.13.0-rc4+ #327
+[   21.003278] Hardware name:  /848P-ICH5, BIOS 6.00 PG 02/03/2005
+[   21.003285] EIP: nouveau_bo_sync_for_device+0x9e/0xbf [nouveau]
+[   21.003571] Code: 02 89 45 e8 01 d1 8b 19 89 5d ec bb 01 00 00 00 3b 5d e8 74 0d 89 d8 c1 e0 05 03 45 ec 39 04 99 74 1e 8b 46 10 89 d9 c1 e1 0c <8b> 14 10 8b 47 e0 8b 40 08 6a 01 e8 d5 03 55 df 01 5d f0 58 eb ae
+[   21.003588] EAX: 00000000 EBX: 00000010 ECX: 00010000 EDX: 00000000
+[   21.003597] ESI: c3e90280 EDI: c185a494 EBP: c2ed7c10 ESP: c2ed7bf8
+[   21.003606] DS: 007b ES: 007b FS: 00d8 GS: 0033 SS: 0068 EFLAGS: 00210206
+[   21.003615] CR0: 80050033 CR2: 00000000 CR3: 02ecb000 CR4: 00000690
+[   21.003625] Call Trace:
+[   21.003635]  nouveau_bo_validate+0x3f/0x48 [nouveau]
+[   21.003911]  nouveau_bo_pin+0xf0/0x187 [nouveau]
+[   21.004182]  nouveau_channel_prep+0xc0/0x269 [nouveau]
+[   21.004454]  nouveau_channel_new+0x3c/0x5f5 [nouveau]
+[   21.004725]  ? slab_free_freelist_hook+0x3b/0xa7
+[   21.004740]  ? kfree+0x9e/0x11a
+[   21.004749]  ? nvif_object_sclass_put+0xd/0x16 [nouveau]
+[   21.004944]  nouveau_drm_device_init+0x2e2/0x646 [nouveau]
+[   21.005186]  ? pci_enable_device_flags+0x23/0x97
+[   21.005202]  nouveau_drm_probe+0xe5/0x182 [nouveau]
+[   21.005443]  ? nouveau_drm_device_init+0x646/0x646 [nouveau]
+[   21.005683]  pci_device_probe+0x89/0xe9
+[   21.005696]  really_probe+0x127/0x2b9
+[   21.005707]  driver_probe_device+0x62/0x89
+[   21.005715]  device_driver_attach+0x2e/0x41
+[   21.005724]  __driver_attach+0x83/0x8a
+[   21.005732]  bus_for_each_dev+0x4c/0x66
+[   21.005740]  driver_attach+0x14/0x16
+[   21.005747]  ? device_driver_attach+0x41/0x41
+[   21.005756]  bus_add_driver+0xc5/0x16c
+[   21.005764]  driver_register+0x87/0xb9
+[   21.005772]  __pci_register_driver+0x38/0x3b
+[   21.005780]  ? 0xf0be4000
+[   21.005787]  nouveau_drm_init+0x14c/0x1000 [nouveau]
+[   21.005964]  do_one_initcall+0x5a/0x134
+[   21.005975]  ? __vunmap+0x124/0x12d
+[   21.005984]  ? __vunmap+0x124/0x12d
+[   21.005992]  ? kmem_cache_alloc+0xa8/0xb6
+[   21.006001]  ? do_init_module+0x17/0x1cf
+[   21.006012]  do_init_module+0x46/0x1cf
+[   21.006021]  load_module+0x1799/0x1bcb
+[   21.006032]  __ia32_sys_finit_module+0x72/0x7a
+[   21.006044]  do_int80_syscall_32+0x53/0x62
+[   21.006054]  entry_INT80_32+0xf0/0xf0
+[   21.006063] EIP: 0xb7f40092
+[   21.006071] Code: 00 00 00 e9 90 ff ff ff ff a3 24 00 00 00 68 30 00 00 00 e9 80 ff ff ff ff a3 e8 ff ff ff 66 90 00 00 00 00 00 00 00 00 cd 80 <c3> 8d b4 26 00 00 00 00 8d b6 00 00 00 00 8b 1c 24 c3 8d b4 26 00
+[   21.006086] EAX: ffffffda EBX: 00000010 ECX: b7e9bbdd EDX: 00000000
+[   21.006095] ESI: 008f27d0 EDI: 008f9e10 EBP: 00000000 ESP: bfa140b8
+[   21.006103] DS: 007b ES: 007b FS: 0000 GS: 0033 SS: 007b EFLAGS: 00200296
+[   21.006114] Modules linked in: nouveau(+) snd_intel8x0 snd_ac97_codec pcmcia wmi hwmon ac97_bus yenta_socket pcmcia_rsrc drm_ttm_helper snd_pcm ttm snd_timer pcmcia_core psmouse 8139cp snd sg soundcore serio_raw parport_pc intel_agp parport
+[   21.006165] CR2: 0000000000000000
+[   21.006201] ---[ end trace 02dc541683feafc6 ]---
+[   21.006211] EIP: nouveau_bo_sync_for_device+0x9e/0xbf [nouveau]
+[   21.006460] Code: 02 89 45 e8 01 d1 8b 19 89 5d ec bb 01 00 00 00 3b 5d e8 74 0d 89 d8 c1 e0 05 03 45 ec 39 04 99 74 1e 8b 46 10 89 d9 c1 e1 0c <8b> 14 10 8b 47 e0 8b 40 08 6a 01 e8 d5 03 55 df 01 5d f0 58 eb ae
+[   21.006476] EAX: 00000000 EBX: 00000010 ECX: 00010000 EDX: 00000000
+[   21.006485] ESI: c3e90280 EDI: c185a494 EBP: c2ed7c10 ESP: c2ed7bf8
+[   21.006494] DS: 007b ES: 007b FS: 00d8 GS: 0033 SS: 0068 EFLAGS: 00210206
+[   21.006503] CR0: 80050033 CR2: 00000000 CR3: 02ecb000 CR4: 00000690
+
 
 -- 
-Peter Xu
-
+Ondrej Zary
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
