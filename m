@@ -1,96 +1,74 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4FD0F3B511F
-	for <lists+nouveau@lfdr.de>; Sun, 27 Jun 2021 05:35:36 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 97C193B50F4
+	for <lists+nouveau@lfdr.de>; Sun, 27 Jun 2021 05:35:01 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id DD7526E176;
-	Sun, 27 Jun 2021 03:34:48 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 262646E079;
+	Sun, 27 Jun 2021 03:34:46 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM12-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam12on2070.outbound.protection.outlook.com [40.107.244.70])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B8A0A89EB4;
- Thu, 10 Jun 2021 09:43:31 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=XckL/xqsnCELTuELcxGjTV/0tDPt1NwsREKTDyrhP2u+cZ6AmTxyx+FDNFp+Z9bzWU4Ojn5t67FE/gOqYYTxopOO67dVwKTu70P4kmS+gyn4/kZ7m9eESK18rVtCNG9dQrL6XMvB0YVviA6YTdJLMecyOWhSzXz8X37IQ0X5LNlVywgNckgA909eNC4AdYZWSuPiu2GvMEtlVvSRR82+wQTv3vbMaCAqbHM8pQ9BvoQtOY+i8W12D57Sfff38dQC/YQCmMnDRG7OxzW6ZUbUylIWSwwHppb+1i17ujhlNQaApytmaQh6/rYcVPAeWFKWqcXpPqh+RJd2nTS/KMZkKQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=vGK9rUIFxUs8bHXhSCqIoa+yufeNg8P83cp5NrbknVM=;
- b=eviWql1fURTWoh/NPCHdscS3GzHx1bUQRnB3HW/Ijwg6y+iR7atal90PlSnJr2WR2Mz5HxvobEOw96Gt8+gnej7LwB7iTFGusLfWUhIP7bWbYOiEX91joY6NwT69h847wVoHEHc8GFgWL53TWna6JTO7r1W0Iq9bixO7dy/59v0jPDVInfXmsNghDLm+5hTzFgkcR4Q0e/FWSWhGhuY3jcN6U/sMoANRFNrWNn2tVHUklyJ1vzzgifeyB/l2ty9P4il/XOdpS4YX4Ul6iyaDENgS1TGWxGyJ9/VZhv3mvepvzGlIuIhTJ7zlANZQJ/rNlzLh0MbiiVkecBF4zDB/kw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=kapsi.fi smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=none pct=100) action=none header.from=amd.com; dkim=none
- (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=vGK9rUIFxUs8bHXhSCqIoa+yufeNg8P83cp5NrbknVM=;
- b=NM2wzRQtGmbXRoKoQ32s7BoNhZpuVJvoJEOwrJk624q7JgaK19yj14vn0TBmzASOe3GPUei0b+bDxVzGpopHbm8jPeRgADJlZS/YhXbiSNhqreEKmkoinlQY4rYkK1hWR0HbseYFhyeA+gr+S4rmeTxG/f1EXnLHSsYiZaE6TVs=
-Received: from DM5PR16CA0026.namprd16.prod.outlook.com (2603:10b6:4:15::12) by
- DM6PR12MB4811.namprd12.prod.outlook.com (2603:10b6:5:1fb::13) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.4219.22; Thu, 10 Jun 2021 09:43:27 +0000
-Received: from DM6NAM11FT046.eop-nam11.prod.protection.outlook.com
- (2603:10b6:4:15:cafe::11) by DM5PR16CA0026.outlook.office365.com
- (2603:10b6:4:15::12) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4219.20 via Frontend
- Transport; Thu, 10 Jun 2021 09:43:27 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; kapsi.fi; dkim=none (message not signed)
- header.d=none;kapsi.fi; dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com;
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- DM6NAM11FT046.mail.protection.outlook.com (10.13.172.121) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.4219.21 via Frontend Transport; Thu, 10 Jun 2021 09:43:25 +0000
-Received: from hr-amd (10.180.168.240) by SATLEXMB04.amd.com (10.181.40.145)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2242.4; Thu, 10 Jun
- 2021 04:43:23 -0500
-Date: Thu, 10 Jun 2021 17:43:32 +0800
-From: Huang Rui <ray.huang@amd.com>
-To: "Koenig, Christian" <Christian.Koenig@amd.com>
-Message-ID: <20210610094332.GA4134750@hr-amd>
-References: <20210609172902.1937-1-christian.koenig@amd.com>
- <899d773e-9a7d-062c-47fa-080161b22cd6@kapsi.fi>
- <b0a257a6-af87-c443-0eed-0f3081169482@amd.com>
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [216.205.24.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id BFA0C6E4DD
+ for <nouveau@lists.freedesktop.org>; Thu, 10 Jun 2021 18:04:40 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1623348279;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=CEoL5V4Mmey/+otE2j2URoJUKULpKPt4rB1iuEzrSWg=;
+ b=G6norW3i4bK27LW6BCb6fBgCQx1yBFMpw9I0bWinL1NMtiLwv6uNCH3gwJNc8YdXUraUU0
+ 708WvDvpOGVtvn3Ht61kyV0PkpLgiGCGSdF26qFkcchEqXSm+MhgZAhrfyhOt5+xy6CePH
+ dVIZy3NdrrfEaUVnKIV1BzOVlvZNksE=
+Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com
+ [209.85.160.199]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-355-YDGohSZ3P9Gz1oK2oKsJBA-1; Thu, 10 Jun 2021 14:04:38 -0400
+X-MC-Unique: YDGohSZ3P9Gz1oK2oKsJBA-1
+Received: by mail-qt1-f199.google.com with SMTP id
+ d7-20020ac811870000b02901e65f85117bso345708qtj.18
+ for <nouveau@lists.freedesktop.org>; Thu, 10 Jun 2021 11:04:38 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=CEoL5V4Mmey/+otE2j2URoJUKULpKPt4rB1iuEzrSWg=;
+ b=VTx3DAABTRb+ZBp9b9Tx8u0zhDffSs+Qlug4GtZP99AU0t9Qf3ecx9eUrLr9Ww7t9a
+ 4YAWUDfn/2y3iBf/CPstAondVJEbW44hGXHSusTU1KOuKz0vscFJg19CmWWa3mQwrJwE
+ n0rHjl92ccoc8XA0tJI6mvxJBzsYeURtH1ct1j865pHtsdcKYgqx7Q5TwWwQ8ZsY+MOP
+ oI3IpQiBWB720CEKI0fdpLkHymEZOH54Lr2okcgFA/NqAEw5PY4cLOZi+rBmF9cnYw7V
+ v/yijEfz/srplwuFvlR0eFcW95uM/bMqxGcWKKhg7uPfeJLhu4awG+y4fWu4DweXI4bu
+ xinQ==
+X-Gm-Message-State: AOAM531Eu5gf1BwPBJzhAJEcmmuUMcgoDp4bB1A6IegegcLNk/reLs5M
+ vVYWq8HexrrtSoK28nktXe5gcGfNctbovk5TC/0MpBMB3kdGiGT0X8Z2iSuP5+21sGwXdUNKqnl
+ 9pU2NCm3W2Ca747pYGh4OYhjWaA==
+X-Received: by 2002:aed:306f:: with SMTP id 102mr3458qte.197.1623348277896;
+ Thu, 10 Jun 2021 11:04:37 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJxTTO+KkTdxTZkkMrHOmkbo6ejQaZkDXpeywK0BwU0l5R3cowlkisPdpRInl2BsP3WxC79JBQ==
+X-Received: by 2002:aed:306f:: with SMTP id 102mr3418qte.197.1623348277505;
+ Thu, 10 Jun 2021 11:04:37 -0700 (PDT)
+Received: from t490s (bras-base-toroon474qw-grc-88-174-93-75-200.dsl.bell.ca.
+ [174.93.75.200])
+ by smtp.gmail.com with ESMTPSA id o3sm2731692qkc.93.2021.06.10.11.04.35
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 10 Jun 2021 11:04:36 -0700 (PDT)
+Date: Thu, 10 Jun 2021 14:04:35 -0400
+From: Peter Xu <peterx@redhat.com>
+To: Alistair Popple <apopple@nvidia.com>
+Message-ID: <YMJUM4sx1VclR7oz@t490s>
+References: <20210607075855.5084-1-apopple@nvidia.com>
+ <270551728.uXnuCZxQlr@nvdebian> <YMDmsha6GDtUf3Vs@t490s>
+ <2773835.D95cIkl9rl@nvdebian>
 MIME-Version: 1.0
+In-Reply-To: <2773835.D95cIkl9rl@nvdebian>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=peterx@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
-In-Reply-To: <b0a257a6-af87-c443-0eed-0f3081169482@amd.com>
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
- (10.181.40.145)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: c004b1d8-14e1-4b24-bda9-08d92bf431a2
-X-MS-TrafficTypeDiagnostic: DM6PR12MB4811:
-X-Microsoft-Antispam-PRVS: <DM6PR12MB48119A0921F576696CA319D8EC359@DM6PR12MB4811.namprd12.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:7219;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: Ut4gVu5IjD5/51Wn8wJ5RSqtcb0Jj/l5TfCpEaioyULpiFW7qtHJ5YPBq+EAfRidjAKXXujsrtQATccuGV4S1YxUdU4QMTicWYGndRpHbF4ydd2G/ogI/S+knZL+e3OOxAn1pmuVSw/V3vyNbdv+Ad8DGmAbGjd99ZfWM26bZdIack421RWf0AWn7nSiHAFFw9TZL/oQ+HCuQb/8KXRAIkEbIHQxXWIi5HK5yc+J+hmUle1DxGVPBS7G4KDWGeF0EslW/s7UzAfx0dGOZwFQZ2QrO9FtR6/Z6sboOYGD+9GL1IUus9WW5+jr6tyToN2rBu3K50jDyra/iH/pf9lNJChSZxNAzRSBt7TW4GLK8wtVj/jOfk05sXhfPYTpJry8tw5dI6DbnCkAbfV/RX0E8IHGo3MLAhdqZrZT6AMXT8dg1lV6fLGayFShisaieCb+fzl0nQ5HMfSBEXwTGK020WJNyzs8id3N8KHuHgWgtK643WG9l3TGRr1EgOA4Ufm5X55xYoBcIeHyLI1LltYuuziEoWM8EqATF+LjrZaK4izDJQeh0TwvGWe2i+vTDq0dPlcKHDBjduAcG1JXZkYt4vey5M0Vmf/Y1APeedK+1NgUkWlutax3yRrLfC9paUhEhyfLVAb36k1SGCn04hLiASKBgaG00JRqmUJxekdy7RPCx2C7JZDi3zv5ojvVrcfX
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(4636009)(136003)(396003)(39860400002)(376002)(346002)(36840700001)(46966006)(9686003)(55016002)(478600001)(82740400003)(4326008)(6862004)(356005)(336012)(6636002)(8936002)(1076003)(316002)(54906003)(8676002)(36860700001)(426003)(82310400003)(81166007)(70206006)(70586007)(33716001)(2906002)(33656002)(6666004)(5660300002)(53546011)(86362001)(47076005)(26005)(16526019)(186003)(36900700001);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jun 2021 09:43:25.3449 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: c004b1d8-14e1-4b24-bda9-08d92bf431a2
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: DM6NAM11FT046.eop-nam11.prod.protection.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4811
 X-Mailman-Approved-At: Sun, 27 Jun 2021 03:34:44 +0000
-Subject: Re: [Nouveau] [PATCH] drm/nouveau: init the base GEM fields for
- internal BOs
+Subject: Re: [Nouveau] [PATCH v10 07/10] mm: Device exclusive memory access
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -102,85 +80,47 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
- "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
- "matthew.auld@intel.com" <matthew.auld@intel.com>,
- "linux-tegra@vger.kernel.org" <linux-tegra@vger.kernel.org>
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Cc: rcampbell@nvidia.com, willy@infradead.org, linux-doc@vger.kernel.org,
+ nouveau@lists.freedesktop.org, hughd@google.com, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, hch@infradead.org, linux-mm@kvack.org,
+ shakeelb@google.com, bskeggs@redhat.com, jgg@nvidia.com,
+ akpm@linux-foundation.org, Christoph Hellwig <hch@lst.de>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, Jun 10, 2021 at 04:08:40PM +0800, Koenig, Christian wrote:
-> =
+On Thu, Jun 10, 2021 at 10:18:25AM +1000, Alistair Popple wrote:
+> > > The main problem is split_huge_pmd_address() unconditionally calls a mmu
+> > > notifier so I would need to plumb in passing an owner everywhere which could
+> > > get messy.
+> > 
+> > Could I ask why?  split_huge_pmd_address() will notify with CLEAR, so I'm a bit
+> > confused why we need to pass over the owner.
+> 
+> Sure, it is the same reason we need to pass it for the exclusive notifier.
+> Any invalidation during the make exclusive operation will break the mmu read
+> side critical section forcing a retry of the operation. The owner field is what
+> is used to filter out invalidations (such as the exclusive invalidation) that
+> don't need to be retried.
 
-> =
+Do you mean the mmu_interval_read_begin|retry() calls?
 
-> Am 09.06.21 um 19:45 schrieb Mikko Perttunen:
-> > On 6/9/21 8:29 PM, Christian K=F6nig wrote:
-> >> TTMs buffer objects are based on GEM objects for quite a while
-> >> and rely on initializing those fields before initializing the TTM BO.
-> >>
-> >> Noveau now doesn't init the GEM object for internally allocated BOs,
-> >
-> > Nouveau
-> >
-> >> so make sure that we at least initialize some necessary fields.
-> >>
-> >> Signed-off-by: Christian K=F6nig <christian.koenig@amd.com>
-> >> ---
-> >> =A0 drivers/gpu/drm/nouveau/nouveau_bo.c | 6 ++++++
-> >> =A0 1 file changed, 6 insertions(+)
-> >>
-> >> diff --git a/drivers/gpu/drm/nouveau/nouveau_bo.c =
+Hmm, the thing is.. to me FOLL_SPLIT_PMD should have similar effect to explicit
+call split_huge_pmd_address(), afaict.  Since both of them use __split_huge_pmd()
+internally which will generate that unwanted CLEAR notify.
 
-> >> b/drivers/gpu/drm/nouveau/nouveau_bo.c
-> >> index 520b1ea9d16c..085023624fb0 100644
-> >> --- a/drivers/gpu/drm/nouveau/nouveau_bo.c
-> >> +++ b/drivers/gpu/drm/nouveau/nouveau_bo.c
-> >> @@ -149,6 +149,8 @@ nouveau_bo_del_ttm(struct ttm_buffer_object *bo)
-> >> =A0=A0=A0=A0=A0=A0 */
-> >> =A0=A0=A0=A0=A0 if (bo->base.dev)
-> >> =A0=A0=A0=A0=A0=A0=A0=A0=A0 drm_gem_object_release(&bo->base);
-> >> +=A0=A0=A0 else
-> >> +=A0=A0=A0=A0=A0=A0=A0 dma_resv_fini(&bo->base._resv);
-> >> =A0 =A0=A0=A0=A0=A0 kfree(nvbo);
-> >> =A0 }
-> >> @@ -330,6 +332,10 @@ nouveau_bo_new(struct nouveau_cli *cli, u64 =
+If that's the case, I think it fails because split_huge_pmd_address() will
+trigger that CLEAR notify unconditionally (even if it's not a thp; not sure
+whether it should be optimized to not notify at all... definitely another
+story), while FOLL_SPLIT_PMD will skip the notify as it calls split_huge_pmd()
+instead, who checks the pmd before calling __split_huge_pmd().
 
-> >> size, int align,
-> >> =A0=A0=A0=A0=A0 if (IS_ERR(nvbo))
-> >> =A0=A0=A0=A0=A0=A0=A0=A0=A0 return PTR_ERR(nvbo);
-> >> =A0 +=A0=A0=A0 nvbo->bo.base.size =3D size;
-> >> +=A0=A0=A0 dma_resv_init(&nvbo->bo.base._resv);
-> >> +=A0=A0=A0 drm_vma_node_reset(&nvbo->bo.base.vma_node);
-> >> +
-> >> =A0=A0=A0=A0=A0 ret =3D nouveau_bo_init(nvbo, size, align, domain, sg,=
- robj);
-> >> =A0=A0=A0=A0=A0 if (ret)
-> >> =A0=A0=A0=A0=A0=A0=A0=A0=A0 return ret;
-> >>
-> >
-> > That works, thanks for the fix!
-> >
-> > Tested-by: Mikko Perttunen <mperttunen@nvidia.com>
+Does it also mean that if there's a real THP it won't really work?  As then
+FOLL_SPLIT_PMD will start to trigger that CLEAR notify too, I think..
 
-Reviewed-by: Huang Rui <ray.huang@amd.com>
-
-> =
-
-> Thanks. Can anybody give me an rb that I can push this to drm-misc-next =
-
-> before the weekend?
-> =
-
-> Regards,
-> Christian.
-> =
-
-> >
-> > Mikko
-> =
+-- 
+Peter Xu
 
 _______________________________________________
 Nouveau mailing list
