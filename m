@@ -1,36 +1,71 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5CEA53A4892
-	for <lists+nouveau@lfdr.de>; Fri, 11 Jun 2021 20:23:21 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 85C543A612F
+	for <lists+nouveau@lfdr.de>; Mon, 14 Jun 2021 12:43:50 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4DE376F3B3;
-	Fri, 11 Jun 2021 18:23:18 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6CA3089C3B;
+	Mon, 14 Jun 2021 10:43:47 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from hosting.gsystem.sk (hosting.gsystem.sk [212.5.213.30])
- by gabe.freedesktop.org (Postfix) with ESMTP id 5B3A66F3B3;
- Fri, 11 Jun 2021 18:23:17 +0000 (UTC)
-Received: from [192.168.0.2] (unknown [188.167.68.178])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by hosting.gsystem.sk (Postfix) with ESMTPSA id F2EDD7A024A;
- Fri, 11 Jun 2021 20:23:13 +0200 (CEST)
-From: Ondrej Zary <linux@zary.sk>
-To: Christian =?utf-8?q?K=C3=B6nig?= <christian.koenig@amd.com>
-Date: Fri, 11 Jun 2021 20:23:10 +0200
-User-Agent: KMail/1.9.10
-References: <202106052143.52488.linux@zary.sk>
- <d4e5042c-3981-02b0-4b9e-fa2c8e373be4@amd.com>
- <4b4248d8-b708-3832-7fe3-2a9fd2c2311e@amd.com>
-In-Reply-To: <4b4248d8-b708-3832-7fe3-2a9fd2c2311e@amd.com>
-X-KMail-QuotePrefix: > 
+Received: from userp2130.oracle.com (userp2130.oracle.com [156.151.31.86])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1C08889C3B;
+ Mon, 14 Jun 2021 10:43:45 +0000 (UTC)
+Received: from pps.filterd (userp2130.oracle.com [127.0.0.1])
+ by userp2130.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 15EAeVUn086337;
+ Mon, 14 Jun 2021 10:43:40 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
+ h=date : from : to : cc
+ : subject : message-id : mime-version : content-type; s=corp-2020-01-29;
+ bh=RwF5QWsM6mGzJgPl1c9NHQVTtQMu3XYCLLJJCitoHJs=;
+ b=Tyu+7nNlFX/Em+m4aMnTtG+9UUd6QmRRNcBydeuZC73AidOSfswh/LaJOBXJj8sRL9Bm
+ sDQXWgwzJjOrVNOqWoWLqk8NbY8117Mo3v5s7AnvXkAbUzNlvNKA9Li3GPB4aralId7h
+ W5AhNRChlAdM2pAvJTsUlHaK84A+ndstT1CUX+u/svLGJ4LGNsWKIptq5VidG2qKef9I
+ Nd6Uis1Cn2Nl/dt/ilaqervL/L5W7Da5NGtiX21fjZCjQ0ybwpyg7TjHh0QtShBFL2x6
+ 6GJnooS9gdJr0RtrdV5wO3/ZJN3DZhJ/nNU3lEof797zmNXMoUmtxQKxO4CHcWQiluuq VA== 
+Received: from userp3020.oracle.com (userp3020.oracle.com [156.151.31.79])
+ by userp2130.oracle.com with ESMTP id 394mbsb1qr-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Mon, 14 Jun 2021 10:43:40 +0000
+Received: from pps.filterd (userp3020.oracle.com [127.0.0.1])
+ by userp3020.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 15EAfM3a101693;
+ Mon, 14 Jun 2021 10:43:40 GMT
+Received: from pps.reinject (localhost [127.0.0.1])
+ by userp3020.oracle.com with ESMTP id 395hk23vad-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Mon, 14 Jun 2021 10:43:40 +0000
+Received: from userp3020.oracle.com (userp3020.oracle.com [127.0.0.1])
+ by pps.reinject (8.16.0.36/8.16.0.36) with SMTP id 15EAhdr9110851;
+ Mon, 14 Jun 2021 10:43:39 GMT
+Received: from userv0121.oracle.com (userv0121.oracle.com [156.151.31.72])
+ by userp3020.oracle.com with ESMTP id 395hk23va9-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Mon, 14 Jun 2021 10:43:39 +0000
+Received: from abhmp0006.oracle.com (abhmp0006.oracle.com [141.146.116.12])
+ by userv0121.oracle.com (8.14.4/8.13.8) with ESMTP id 15EAhYAr026333;
+ Mon, 14 Jun 2021 10:43:34 GMT
+Received: from mwanda (/41.212.42.34) by default (Oracle Beehive Gateway v4.0)
+ with ESMTP ; Mon, 14 Jun 2021 03:43:33 -0700
+Date: Mon, 14 Jun 2021 13:43:27 +0300
+From: Dan Carpenter <dan.carpenter@oracle.com>
+To: Ben Skeggs <bskeggs@redhat.com>
+Message-ID: <YMcyzyVyI4N6anBo@mwanda>
 MIME-Version: 1.0
 Content-Disposition: inline
-Message-Id: <202106112023.11270.linux@zary.sk>
-Subject: Re: [Nouveau] nouveau broken on Riva TNT2 in 5.13.0-rc4: NULL
- pointer dereference in nouveau_bo_sync_for_device
+X-Mailer: git-send-email haha only kidding
+X-Proofpoint-ORIG-GUID: aSMWYRi6et9j-LW7LLEv_Rrd_WQpxffb
+X-Proofpoint-GUID: aSMWYRi6et9j-LW7LLEv_Rrd_WQpxffb
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=10014
+ signatures=668682
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 clxscore=1011
+ impostorscore=0
+ malwarescore=0 mlxlogscore=999 mlxscore=0 suspectscore=0 phishscore=0
+ spamscore=0 priorityscore=1501 adultscore=0 bulkscore=0 lowpriorityscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2104190000
+ definitions=main-2106140075
+Subject: [Nouveau] [PATCH] drm/nouveau/core/object: fix double free on error
+ in nvkm_ioctl_new()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -42,112 +77,48 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>,
- dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, Daniel Vetter <daniel@ffwll.ch>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-T24gRnJpZGF5IDExIEp1bmUgMjAyMSAxNDozODoxOCBDaHJpc3RpYW4gS8O2bmlnIHdyb3RlOgo+
-IAo+IEFtIDEwLjA2LjIxIHVtIDE5OjU5IHNjaHJpZWIgQ2hyaXN0aWFuIEvDtm5pZzoKPiA+IEFt
-IDEwLjA2LjIxIHVtIDE5OjUwIHNjaHJpZWIgT25kcmVqIFphcnk6Cj4gPj4gW1NOSVBdCj4gPj4+
-IEkgY2FuJ3Qgc2VlIGhvdyB0aGlzIGlzIGNhbGxlZCBmcm9tIHRoZSBub3V2ZWF1IGNvZGUsIG9u
-bHkgCj4gPj4+IHBvc3NpYmlsaXR5IEkKPiA+Pj4gc2VlIGlzIHRoYXQgaXQgaXMgbWF5YmUgY2Fs
-bGVkIHRocm91Z2ggdGhlIEFHUCBjb2RlIHNvbWVob3cuCj4gPj4gWWVzLCB5b3UncmUgcmlnaHQ6
-Cj4gPj4gW8KgwqAgMTMuMTkyNjYzXSBDYWxsIFRyYWNlOgo+ID4+IFvCoMKgIDEzLjE5MjY3OF3C
-oCBkdW1wX3N0YWNrKzB4NTQvMHg2OAo+ID4+IFvCoMKgIDEzLjE5MjY5MF3CoCB0dG1fdHRfaW5p
-dCsweDExLzB4OGEgW3R0bV0KPiA+PiBbwqDCoCAxMy4xOTI2OTldwqAgdHRtX2FncF90dF9jcmVh
-dGUrMHgzOS8weDUxIFt0dG1dCj4gPj4gW8KgwqAgMTMuMTkyODQwXcKgIG5vdXZlYXVfdHRtX3R0
-X2NyZWF0ZSsweDE3LzB4MjIgW25vdXZlYXVdCj4gPj4gW8KgwqAgMTMuMTkyODU2XcKgIHR0bV90
-dF9jcmVhdGUrMHg3OC8weDhjIFt0dG1dCj4gPj4gW8KgwqAgMTMuMTkyODY0XcKgIHR0bV9ib19o
-YW5kbGVfbW92ZV9tZW0rMHg3ZC8weGNhIFt0dG1dCj4gPj4gW8KgwqAgMTMuMTkyODczXcKgIHR0
-bV9ib192YWxpZGF0ZSsweDkyLzB4YzggW3R0bV0KPiA+PiBbwqDCoCAxMy4xOTI4ODNdwqAgdHRt
-X2JvX2luaXRfcmVzZXJ2ZWQrMHgyMTYvMHgyNDMgW3R0bV0KPiA+PiBbwqDCoCAxMy4xOTI4OTJd
-wqAgdHRtX2JvX2luaXQrMHg0NS8weDY1IFt0dG1dCj4gPj4gW8KgwqAgMTMuMTkzMDE4XcKgID8g
-bm91dmVhdV9ib19kZWxfaW9fcmVzZXJ2ZV9scnUrMHg0OC8weDQ4IFtub3V2ZWF1XQo+ID4+IFvC
-oMKgIDEzLjE5MzE1MF3CoCBub3V2ZWF1X2JvX2luaXQrMHg4Yy8weDk0IFtub3V2ZWF1XQo+ID4+
-IFvCoMKgIDEzLjE5MzI3M13CoCA/IG5vdXZlYXVfYm9fZGVsX2lvX3Jlc2VydmVfbHJ1KzB4NDgv
-MHg0OCBbbm91dmVhdV0KPiA+PiBbwqDCoCAxMy4xOTM0MDddwqAgbm91dmVhdV9ib19uZXcrMHg0
-NC8weDU3IFtub3V2ZWF1XQo+ID4+IFvCoMKgIDEzLjE5MzUzN13CoCBub3V2ZWF1X2NoYW5uZWxf
-cHJlcCsweGEzLzB4MjY5IFtub3V2ZWF1XQo+ID4+IFvCoMKgIDEzLjE5MzY2NV3CoCBub3V2ZWF1
-X2NoYW5uZWxfbmV3KzB4M2MvMHg1ZjcgW25vdXZlYXVdCj4gPj4gW8KgwqAgMTMuMTkzNjc5XcKg
-ID8gc2xhYl9mcmVlX2ZyZWVsaXN0X2hvb2srMHgzYi8weGE3Cj4gPj4gW8KgwqAgMTMuMTkzNjg2
-XcKgID8ga2ZyZWUrMHg5ZS8weDExYQo+ID4+IFvCoMKgIDEzLjE5Mzc4MV3CoCA/IG52aWZfb2Jq
-ZWN0X3NjbGFzc19wdXQrMHhkLzB4MTYgW25vdXZlYXVdCj4gPj4gW8KgwqAgMTMuMTkzOTA4XcKg
-IG5vdXZlYXVfZHJtX2RldmljZV9pbml0KzB4MmUyLzB4NjQ2IFtub3V2ZWF1XQo+ID4+IFvCoMKg
-IDEzLjE5MzkyNF3CoCA/IHBjaV9lbmFibGVfZGV2aWNlX2ZsYWdzKzB4MWUvMHhhYwo+ID4+IFvC
-oMKgIDEzLjE5NDA1Ml3CoCBub3V2ZWF1X2RybV9wcm9iZSsweGViLzB4MTg4IFtub3V2ZWF1XQo+
-ID4+IFvCoMKgIDEzLjE5NDE4Ml3CoCA/IG5vdXZlYXVfZHJtX2RldmljZV9pbml0KzB4NjQ2LzB4
-NjQ2IFtub3V2ZWF1XQo+ID4+IFvCoMKgIDEzLjE5NDE5NV3CoCBwY2lfZGV2aWNlX3Byb2JlKzB4
-ODkvMHhlOQo+ID4+IFvCoMKgIDEzLjE5NDIwNV3CoCByZWFsbHlfcHJvYmUrMHgxMjcvMHgyYTcK
-PiA+PiBbwqDCoCAxMy4xOTQyMTJdwqAgZHJpdmVyX3Byb2JlX2RldmljZSsweDViLzB4ODcKPiA+
-PiBbwqDCoCAxMy4xOTQyMTldwqAgZGV2aWNlX2RyaXZlcl9hdHRhY2grMHgyZS8weDQxCj4gPj4g
-W8KgwqAgMTMuMTk0MjI2XcKgIF9fZHJpdmVyX2F0dGFjaCsweDdjLzB4ODMKPiA+PiBbwqDCoCAx
-My4xOTQyMzJdwqAgYnVzX2Zvcl9lYWNoX2RldisweDRjLzB4NjYKPiA+PiBbwqDCoCAxMy4xOTQy
-MzhdwqAgZHJpdmVyX2F0dGFjaCsweDE0LzB4MTYKPiA+PiBbwqDCoCAxMy4xOTQyNDRdwqAgPyBk
-ZXZpY2VfZHJpdmVyX2F0dGFjaCsweDQxLzB4NDEKPiA+PiBbwqDCoCAxMy4xOTQyNTFdwqAgYnVz
-X2FkZF9kcml2ZXIrMHhjNS8weDE2Ywo+ID4+IFvCoMKgIDEzLjE5NDI1OF3CoCBkcml2ZXJfcmVn
-aXN0ZXIrMHg4Ny8weGI5Cj4gPj4gW8KgwqAgMTMuMTk0MjY1XcKgIF9fcGNpX3JlZ2lzdGVyX2Ry
-aXZlcisweDM4LzB4M2IKPiA+PiBbwqDCoCAxMy4xOTQyNzFdwqAgPyAweGYwYzBkMDAwCj4gPj4g
-W8KgwqAgMTMuMTk0MzYyXcKgIG5vdXZlYXVfZHJtX2luaXQrMHgxNGMvMHgxMDAwIFtub3V2ZWF1
-XQo+ID4+Cj4gPj4gSG93IGlzIHR0bV9kbWFfdHQtPmRtYV9hZGRyZXNzIGFsbG9jYXRlZD8KPiA+
-Cj4gPiBNaG0sIEkgbmVlZCB0byBkb3VibGUgY2hlY2sgaG93IEFHUCBpcyBzdXBwb3NlZCB0byB3
-b3JrLgo+ID4KPiA+IFNpbmNlIGJhcmVseSBhbnlib2R5IGlzIHVzaW5nIGl0IHRoZXNlIGRheXMg
-aXQgaXMgc29tZXRoaW5nIHdoaWNoIAo+ID4gYnJlYWtzIGZyb20gdGltZSB0byB0aW1lLgo+IAo+
-IEkgaGF2ZSBubyBpZGVhIGhvdyB0aGF0IGV2ZXIgd29ya2VkIGluIHRoZSBmaXJzdCBwbGFjZSBz
-aW5jZSBBR1AgaXNuJ3QgCj4gc3VwcG9zZWQgdG8gc3luYyBiZXR3ZWVuIENQVS9HUFUuIEV2ZXJ5
-dGhpbmcgaXMgY29oZXJlbnQgZm9yIHRoYXQgY2FzZS4KPiAKPiBBbnl3YXkgaGVyZSBpcyBhIHBh
-dGNoIHdoaWNoIGFkZHMgYSBjaGVjayB0byB0aG9zZSBmdW5jdGlvbnMgaWYgdGhlIAo+IGRtYV9h
-ZGRyZXNzIGFycmF5IGlzIGFsbG9jYXRlZCBpbiB0aGUgZmlyc3QgcGxhY2UuIFBsZWFzZSB0ZXN0
-IGl0LgoKVGhhbmtzLCB0aGUgcGF0Y2ggZml4ZXMgdGhlIHByb2JsZW0gYW5kIG5vdXZlYXUgbm93
-IHdvcmtzIQpTaG91bGQgYmUgYXBwbGllZCB0byA1LjEyLXN0YWJsZSB0b28gKDUuMTEgaXMgYWZm
-ZWN0ZWQgdG9vIGJ1dCBFT0wpLgoKSXQncyB3ZWlyZCB0aGF0IGl0IHdvcmtlZCBiZWZvcmUuCkxv
-b2tzIGxpa2UgZG1hX2FkZHJlc3Mgd2FzIHVzZWQgdW5pbml0aWFsaXplZCAtIGl0IGNvbnRhaW5l
-ZCBzb21lIHJhbmRvbQpjcmFwOgpbICAgMTIuMjkzMzA0XSBub3V2ZWF1X2JvX3N5bmNfZm9yX2Rl
-dmljZTogdHRtX2RtYS0+ZG1hX2FkZHJlc3M9M2UwNTU5NzEgdHRtX2RtYS0+dHRtLm51bV9wYWdl
-cz0xOApbICAgMTIuMjkzMzIxXSB0dG1fZG1hLT5kbWFfYWRkcmVzc1swXT0weDAKWyAgIDEyLjI5
-MzM0MV0gdHRtX2RtYS0+ZG1hX2FkZHJlc3NbMV09MHgwClsgICAxMi4yOTMzNjBdIHR0bV9kbWEt
-PmRtYV9hZGRyZXNzWzJdPTB4ZWU3Mjg5ODAKWyAgIDEyLjI5MzM3OV0gdHRtX2RtYS0+ZG1hX2Fk
-ZHJlc3NbM109MHhlZDFjYjEyMApbICAgMTIuMjkzMzk3XSB0dG1fZG1hLT5kbWFfYWRkcmVzc1s0
-XT0weDEyClsgICAxMi4yOTM0MTZdIHR0bV9kbWEtPmRtYV9hZGRyZXNzWzVdPTB4MApbICAgMTIu
-MjkzNDM0XSB0dG1fZG1hLT5kbWFfYWRkcmVzc1s2XT0weDEKWyAgIDEyLjI5MzQ1M10gdHRtX2Rt
-YS0+ZG1hX2FkZHJlc3NbN109MHgwClsgICAxMi4yOTM0NzFdIHR0bV9kbWEtPmRtYV9hZGRyZXNz
-WzhdPTB4MTAwMDAKWyAgIDEyLjI5MzQ5MF0gdHRtX2RtYS0+ZG1hX2FkZHJlc3NbOV09MHgwClsg
-ICAxMi4yOTM1MTBdIHR0bV9kbWEtPmRtYV9hZGRyZXNzWzEwXT0weDEwMQpbICAgMTIuMjkzNTI4
-XSB0dG1fZG1hLT5kbWFfYWRkcmVzc1sxMV09MHhlZTcyODllYwpbICAgMTIuMjkzNTQ2XSB0dG1f
-ZG1hLT5kbWFfYWRkcmVzc1sxMl09MHhlZTcyODllYwpbICAgMTIuMjkzNTY0XSB0dG1fZG1hLT5k
-bWFfYWRkcmVzc1sxM109MHgwClsgICAxMi4yOTM1ODFdIHR0bV9kbWEtPmRtYV9hZGRyZXNzWzE0
-XT0weDAKWyAgIDEyLjI5MzU5OV0gdHRtX2RtYS0+ZG1hX2FkZHJlc3NbMTVdPTB4MApbICAgMTIu
-MjkzNjE2XSB0dG1fZG1hLT5kbWFfYWRkcmVzc1sxNl09MHgwClsgICAxMi4yOTM2MzRdIHR0bV9k
-bWEtPmRtYV9hZGRyZXNzWzE3XT0weDAKQnV0IGl0IGRpZCBub3QgbWF0dGVyIGFzIGRtYV9zeW5j
-X3NpbmdsZV9mb3JfZGV2aWNlIGlzIGEgbm8tb3AgaGVyZS4KV2hlbiBkbWFfYWRkcmVzcyBpcyBw
-cm9wZXJseSBpbml0aWFsaXplZCB0byBOVUxMLCBpdCBjcmFzaGVzLi4uCgo+IFRoYW5rcywKPiBD
-aHJpc3RpYW4uCj4gCj4gPgo+ID4gVGhhbmtzIGZvciB0aGUgYmFja3RyYWNlLAo+ID4gQ2hyaXN0
-aWFuLgo+ID4KPiA+PiDCoCBJIGNhbm5vdCBmaW5kIGFueSBhc3NpZ25tZW50Cj4gPj4gZXhlY3V0
-ZWQgKGluIHRoZSB3b3JraW5nIGNvZGUpOgo+ID4+Cj4gPj4gJCBnaXQgZ3JlcCBkbWFfYWRkcmVz
-c1wgPSBkcml2ZXJzL2dwdS8KPiA+PiBkcml2ZXJzL2dwdS9kcm0vYW1kL2FtZGdwdS9hbWRncHVf
-YW1ka2ZkX2dwdXZtLmM6IAo+ID4+IHNnLT5zZ2wtPmRtYV9hZGRyZXNzID0gYWRkcjsKPiA+PiBk
-cml2ZXJzL2dwdS9kcm0vYW1kL2FtZGdwdS9hbWRncHVfdHRtLmM6IGRtYV9hZGRyZXNzID0gCj4g
-Pj4gJmRtYS0+ZG1hX2FkZHJlc3Nbb2Zmc2V0ID4+IFBBR0VfU0hJRlRdOwo+ID4+IGRyaXZlcnMv
-Z3B1L2RybS9hbWQvYW1kZ3B1L2FtZGdwdV90dG0uYzogZG1hX2FkZHJlc3MgPSAKPiA+PiAobW1f
-bm9kZS0+c3RhcnQgPDwgUEFHRV9TSElGVCkgKyBvZmZzZXQ7Cj4gPj4gZHJpdmVycy9ncHUvZHJt
-L2k5MTUvZ3Z0L3NjaGVkdWxlci5jOsKgwqAgc2ctPmRtYV9hZGRyZXNzID0gYWRkcjsKPiA+PiBk
-cml2ZXJzL2dwdS9kcm0vaTkxNS9pOTE1X2dwdV9lcnJvci5jOsKgIHNnLT5kbWFfYWRkcmVzcyA9
-IGl0Owo+ID4+IGRyaXZlcnMvZ3B1L2RybS90dG0vdHRtX3R0LmM6wqDCoCB0dG0tPmRtYV9hZGRy
-ZXNzID0gKHZvaWQgKikgCj4gPj4gKHR0bS0+dHRtLnBhZ2VzICsgdHRtLT50dG0ubnVtX3BhZ2Vz
-KTsKPiA+PiBkcml2ZXJzL2dwdS9kcm0vdHRtL3R0bV90dC5jOsKgwqAgdHRtLT5kbWFfYWRkcmVz
-cyA9IAo+ID4+IGt2bWFsbG9jX2FycmF5KHR0bS0+dHRtLm51bV9wYWdlcywKPiA+PiBkcml2ZXJz
-L2dwdS9kcm0vdHRtL3R0bV90dC5jOsKgwqAgdHRtX2RtYS0+ZG1hX2FkZHJlc3MgPSBOVUxMOwo+
-ID4+IGRyaXZlcnMvZ3B1L2RybS92bXdnZngvdm13Z2Z4X3R0bV9idWZmZXIuYzogdml0ZXItPmRt
-YV9hZGRyZXNzID0gCj4gPj4gJl9fdm13X3BpdGVyX3BoeXNfYWRkcjsKPiA+PiBkcml2ZXJzL2dw
-dS9kcm0vdm13Z2Z4L3Ztd2dmeF90dG1fYnVmZmVyLmM6IHZpdGVyLT5kbWFfYWRkcmVzcyA9IAo+
-ID4+ICZfX3Ztd19waXRlcl9kbWFfYWRkcjsKPiA+PiBkcml2ZXJzL2dwdS9kcm0vdm13Z2Z4L3Zt
-d2dmeF90dG1fYnVmZmVyLmM6IHZpdGVyLT5kbWFfYWRkcmVzcyA9IAo+ID4+ICZfX3Ztd19waXRl
-cl9zZ19hZGRyOwo+ID4+Cj4gPj4gVGhlIDIgY2FzZXMgaW4gdHRtX3R0LmMgYXJlIGluIHR0bV9k
-bWFfdHRfYWxsb2NfcGFnZV9kaXJlY3RvcnkoKSBhbmQKPiA+PiB0dG1fc2dfdHRfYWxsb2NfcGFn
-ZV9kaXJlY3RvcnkoKS4KPiA+PiBDb25maXJtZWQgYnkgYWRkaW5nIHByaW50aygpcyB0aGF0IHRo
-ZXkncmUgTk9UIGNhbGxlZC4KPiA+Pgo+ID4+Cj4gPgo+IAo+IAoKCi0tIApPbmRyZWogWmFyeQpf
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpOb3V2ZWF1IG1h
-aWxpbmcgbGlzdApOb3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZy
-ZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL25vdXZlYXUK
+If nvkm_object_init() fails then we should not call nvkm_object_fini()
+because it results in calling object->func->fini(object, suspend) twice.
+Once inside the nvkm_object_init() function and once inside the
+nvkm_object_fini() function.
+
+Fixes: fbd58ebda9c8 ("drm/nouveau/object: merge with handle")
+Signed-off-by: Dan Carpenter <dan.carpenter@oracle.com>
+---
+This is something that I spotted while looking for reference counting
+bugs.  I have tried running it, but it does not fix my crashes.  My
+system is basically unusable.  It's something to do with the new version
+of Firefox which triggers the refcount_t underflow, but switching to
+Epiphany doesn't solve the issue either.
+
+ drivers/gpu/drm/nouveau/nvkm/core/ioctl.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/gpu/drm/nouveau/nvkm/core/ioctl.c b/drivers/gpu/drm/nouveau/nvkm/core/ioctl.c
+index d777df5a64e6..87c761fb475a 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/core/ioctl.c
++++ b/drivers/gpu/drm/nouveau/nvkm/core/ioctl.c
+@@ -134,8 +134,8 @@ nvkm_ioctl_new(struct nvkm_client *client,
+ 				return 0;
+ 			}
+ 			ret = -EEXIST;
++			nvkm_object_fini(object, false);
+ 		}
+-		nvkm_object_fini(object, false);
+ 	}
+ 
+ 	nvkm_object_del(&object);
+-- 
+2.30.2
+
+_______________________________________________
+Nouveau mailing list
+Nouveau@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/nouveau
