@@ -1,72 +1,92 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id B54DA3A8449
-	for <lists+nouveau@lfdr.de>; Tue, 15 Jun 2021 17:45:51 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id B56F83A8F00
+	for <lists+nouveau@lfdr.de>; Wed, 16 Jun 2021 04:47:53 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0C6976E18E;
-	Tue, 15 Jun 2021 15:45:49 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 178316E453;
+	Wed, 16 Jun 2021 02:47:47 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 9194 seconds by postgrey-1.36 at gabe;
- Tue, 15 Jun 2021 15:45:47 UTC
-Received: from aserp2120.oracle.com (aserp2120.oracle.com [141.146.126.78])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0349F6E18E
- for <nouveau@lists.freedesktop.org>; Tue, 15 Jun 2021 15:45:46 +0000 (UTC)
-Received: from pps.filterd (aserp2120.oracle.com [127.0.0.1])
- by aserp2120.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 15FDAC8Q075541;
- Tue, 15 Jun 2021 13:12:25 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
- h=date : from : to : cc
- : subject : message-id : mime-version : content-type; s=corp-2020-01-29;
- bh=qLiokJ1tzVb9+rR7CMgRGqAj4ViwhanH3KxArF77KFI=;
- b=eh2DifBx061/KQ681zuyL54cqJtXAx1FhDjD/6GlKkYx/S2AKNb7O3sw6P22BhoOiTwC
- 7LijEAhG3pYD50pGN4+wt/mTD227Voi4sBO5V2bFK9BZDyxtg+jeXE3rzygJe2T2s8iR
- NLvnY1igZIM03sKRPoeZIi8+Ew5f9YGjEkW7RabDy4c9UPxkxQWJgPqtLonP2gFOeCe7
- rihe/vGWozgBNt9cQzG9M2ekRol00kj3gce6Cz5/WzduyBvw1aNAZpB1/QZMSIM7kIiy
- IMyCw1tEx7j4/GEAThomibsYy2jY40hJgBFzPAjz1Qw0+CLQkMDw/Te4r4F13HGUpiUq HA== 
-Received: from userp3030.oracle.com (userp3030.oracle.com [156.151.31.80])
- by aserp2120.oracle.com with ESMTP id 394mvne659-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 15 Jun 2021 13:12:25 +0000
-Received: from pps.filterd (userp3030.oracle.com [127.0.0.1])
- by userp3030.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 15FDAm4C177839;
- Tue, 15 Jun 2021 13:12:24 GMT
-Received: from pps.reinject (localhost [127.0.0.1])
- by userp3030.oracle.com with ESMTP id 394j1ugq7w-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 15 Jun 2021 13:12:24 +0000
-Received: from userp3030.oracle.com (userp3030.oracle.com [127.0.0.1])
- by pps.reinject (8.16.0.36/8.16.0.36) with SMTP id 15FDCHql181026;
- Tue, 15 Jun 2021 13:12:24 GMT
-Received: from aserv0122.oracle.com (aserv0122.oracle.com [141.146.126.236])
- by userp3030.oracle.com with ESMTP id 394j1ugq6q-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 15 Jun 2021 13:12:24 +0000
-Received: from abhmp0015.oracle.com (abhmp0015.oracle.com [141.146.116.21])
- by aserv0122.oracle.com (8.14.4/8.14.4) with ESMTP id 15FDCF3Q011202;
- Tue, 15 Jun 2021 13:12:15 GMT
-Received: from mwanda (/41.212.42.34) by default (Oracle Beehive Gateway v4.0)
- with ESMTP ; Tue, 15 Jun 2021 13:12:14 +0000
-Date: Tue, 15 Jun 2021 16:12:07 +0300
-From: Dan Carpenter <dan.carpenter@oracle.com>
-To: Ben Skeggs <bskeggs@redhat.com>
-Message-ID: <YMinJwpIei9n1Pn1@mwanda>
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam12on2041.outbound.protection.outlook.com [40.107.244.41])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id ADB9F6E0CF;
+ Wed, 16 Jun 2021 02:47:45 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=lsfA4wN40cj16hFU02uV3tP+rZNkneh3Q0FZ2UgwLnvkVJlUEFYk24a7PbUkbsZLD8KdzDQ+YC87bcFX781BtTIc+HjzcjeWPB7ffPIRNvelGtcuyyryLRJWOaMTfy8ZwkB1RVc6oerrWqwkMX6VOAJVY5c3kgXMZ5Ky4tBcR+YYc0LmPXPxq2uPKKj6hCUi8JlvmVGN6p/IjJYcHgufiN3MMfWF7bCLNZBefMBiEwQTO5oY9YQiX9DDX7I6jCRx6RnULJzLNFHNLd+FroXoIIWaETYSCWLM4T0XRzrgSrNwUt77gjC3Z1aYF+wLOfe5aPkPBcGAfKfZYbXrD1qHCQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=WJl6gAnl6/WcEpv5curWcUlYd0ynnlQpemmN9T7KH6M=;
+ b=fm8xUL2M6m1YsxNBaozboKFh8zEmTNgfwdHXuaFt2XBbVRr0ZrodGLEJhyvmp6KrtiCWL+qAxD/f4nonWYLbJaC2m8CApay9IBYran/zBEwttvd8XRkGK5a3aVxsuz+h0PwMulvqulDYeMxhHigqy0SlrPAuNg0sICkOJ22qEr/ed5GT8vrLD88WBPJCyUYUDumXyWycaicQt69rFKAMwA1LEidqiSm6njrBE15HISblI8s9on8VSPQPS6XnzECljCXLnc0YlrwonoL8kwAPPTCXTF9XTH92ehe/50AK5yS/fNlbZW5ZpWrSAkmfYO85ynpMolSqQbWe4YJCDcegnA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 216.228.112.34) smtp.rcpttodomain=redhat.com smtp.mailfrom=nvidia.com;
+ dmarc=pass (p=none sp=none pct=100) action=none header.from=nvidia.com;
+ dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=WJl6gAnl6/WcEpv5curWcUlYd0ynnlQpemmN9T7KH6M=;
+ b=hS8byUOtfH1SU01suh9L6yAYW242p1QR0v+VD+bsI22QC7bUKDJXWpg28wzoOeHmsDjd+nYH4bLsydfCY5QUJQLEjeh2Nj2cDygB7ltEoPFsxHBSGgfBB0NMaMwJ/9QhUXNt3dO7ha2BFMebTLfQY3SeSBjzj+OA8yRcZA1PyoTR/mLyYduii8V4BZzT0ZeUwRmxjsDzznrFShSLMbpilqj2UvvArTLgUMKdVWxM3ZhJrXYOd95zjcQyoyc4630mIqz9So8cbIZ6OIY2DI1G1sQhlEHewT2DNQjCCE5B8gwGx4YxJse1NW+Dm5Pgba5hf90qh3l+69ZdL8lgPZyhwQ==
+Received: from DM5PR2001CA0019.namprd20.prod.outlook.com (2603:10b6:4:16::29)
+ by MWHPR12MB1872.namprd12.prod.outlook.com (2603:10b6:300:10d::23)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4219.20; Wed, 16 Jun
+ 2021 02:47:42 +0000
+Received: from DM6NAM11FT055.eop-nam11.prod.protection.outlook.com
+ (2603:10b6:4:16:cafe::28) by DM5PR2001CA0019.outlook.office365.com
+ (2603:10b6:4:16::29) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4242.16 via Frontend
+ Transport; Wed, 16 Jun 2021 02:47:42 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.112.34)
+ smtp.mailfrom=nvidia.com; redhat.com; dkim=none (message not signed)
+ header.d=none;redhat.com; dmarc=pass action=none header.from=nvidia.com;
+Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
+ 216.228.112.34 as permitted sender) receiver=protection.outlook.com;
+ client-ip=216.228.112.34; helo=mail.nvidia.com;
+Received: from mail.nvidia.com (216.228.112.34) by
+ DM6NAM11FT055.mail.protection.outlook.com (10.13.173.103) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id
+ 15.20.4242.16 via Frontend Transport; Wed, 16 Jun 2021 02:47:42 +0000
+Received: from nvdebian.localnet (172.20.187.5) by HQMAIL107.nvidia.com
+ (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1497.2; Wed, 16 Jun
+ 2021 02:47:38 +0000
+From: Alistair Popple <apopple@nvidia.com>
+To: Peter Xu <peterx@redhat.com>
+Date: Wed, 16 Jun 2021 12:47:36 +1000
+Message-ID: <3687765.3f4LTt0jjm@nvdebian>
+In-Reply-To: <YMjUZX8Sy0PuPt6j@t490s>
+References: <20210607075855.5084-1-apopple@nvidia.com>
+ <7383392.6iZ9WBDLDo@nvdebian> <YMjUZX8Sy0PuPt6j@t490s>
 MIME-Version: 1.0
-Content-Disposition: inline
-X-Mailer: git-send-email haha only kidding
-X-Proofpoint-ORIG-GUID: gJ-ZN4n7OqcJnHFopUbQ9HzrZvJnUHyS
-X-Proofpoint-GUID: gJ-ZN4n7OqcJnHFopUbQ9HzrZvJnUHyS
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=10015
- signatures=668682
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 impostorscore=0
- mlxscore=0
- lowpriorityscore=0 malwarescore=0 spamscore=0 bulkscore=0
- priorityscore=1501 clxscore=1011 mlxlogscore=999 phishscore=0 adultscore=0
- suspectscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2104190000 definitions=main-2106150086
-Subject: [Nouveau] [PATCH] drm/nouveau: fix double free in nouveau_gem_new()
+X-Originating-IP: [172.20.187.5]
+X-ClientProxiedBy: HQMAIL111.nvidia.com (172.20.187.18) To
+ HQMAIL107.nvidia.com (172.20.187.13)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 1a9057e9-1b0a-4371-d089-08d930711cd0
+X-MS-TrafficTypeDiagnostic: MWHPR12MB1872:
+X-Microsoft-Antispam-PRVS: <MWHPR12MB1872B95E9A7D6770325A1692DF0F9@MWHPR12MB1872.namprd12.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:10000;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: nXzN03t3rW01rjh3ZACEgqeFapjyTuiUiSfJ9tM1Pko1oExQJ2ij2DZTctIsG7EMT5H8a2ZmIeLx9imcHY9ExqdU3R52v9ZVQqW98f+WdbrcGokkjCit4ttiCvdqrq5uhaMFk0imUtuxuJ30YZFVwENHT98Q3lXryeav3IqETaFV813O3K74oPl2NFmvgyYv/soA2NJsYLlvSyqaU8HcSUDZUB4TB0yby/s41bZ7by92RiV06yHg+grWC5Iocs9EXQB3tcF9DkT0SMjlvHFYpJgjH91Q4J7e+kINX6bzVa3nEmcoqMzcJ4094ob8/ASuKASqSNSnUegDiE+6a8lY7D4Xz6KV8VC1tWSYyEK+/0NAncFGBLw7GldDptAQsZJfuDkLoBR9XtFM8NbUvbk6NhEpXrhDsXxSNoA73nxynBpTFog9Cu6apOtwxdGGZ3HT/Zm0URwHB70SqScb3QyXYU19gAtDt309K9d6OjV5qY8YGaBM543PBHtxhtMzrajOwsZmnYPWestAOCmUjwI2TTdyj4fvoQ1SLUE48AurBRS0yD2DJvBPFxX2En3r4a6F2lOXI4JANLlUOuKvyXxoV8PRalhNL3XKnhsqdRhMDzvMFnaGGkocDW9ZFLSxk5D9tmkt/jf5CSF48t1scyh2LziY7RjP+K0uu25vQnVw6nMXpoAGQWWWva4clwG647Tl
+X-Forefront-Antispam-Report: CIP:216.228.112.34; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:schybrid03.nvidia.com; CAT:NONE;
+ SFS:(4636009)(396003)(346002)(136003)(39860400002)(376002)(46966006)(36840700001)(86362001)(316002)(336012)(186003)(356005)(70206006)(9686003)(16526019)(82740400003)(426003)(82310400003)(8676002)(2906002)(9576002)(8936002)(5660300002)(83380400001)(70586007)(36860700001)(6916009)(4326008)(47076005)(26005)(54906003)(7416002)(33716001)(478600001)(36906005)(7636003)(39026012);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Jun 2021 02:47:42.0211 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1a9057e9-1b0a-4371-d089-08d930711cd0
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.112.34];
+ Helo=[mail.nvidia.com]
+X-MS-Exchange-CrossTenant-AuthSource: DM6NAM11FT055.eop-nam11.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MWHPR12MB1872
+Subject: Re: [Nouveau] [PATCH v10 07/10] mm: Device exclusive memory access
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -78,47 +98,147 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
- kernel-janitors@vger.kernel.org, dri-devel@lists.freedesktop.org,
- Gerd Hoffmann <kraxel@redhat.com>, Daniel Vetter <daniel@ffwll.ch>,
- Thierry Reding <treding@nvidia.com>
+Cc: rcampbell@nvidia.com, willy@infradead.org, linux-doc@vger.kernel.org,
+ nouveau@lists.freedesktop.org, hughd@google.com, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, hch@infradead.org, linux-mm@kvack.org,
+ shakeelb@google.com, bskeggs@redhat.com, jgg@nvidia.com,
+ akpm@linux-foundation.org, Christoph Hellwig <hch@lst.de>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-The ttm_bo_init_reserved() function calls ttm_bo_put(bo) which calls
-nouveau_bo_del_ttm() which frees the "nvbo.bo" so the nouveau_bo_ref()
-call leads to a double free.
+On Wednesday, 16 June 2021 2:25:09 AM AEST Peter Xu wrote:
+> On Tue, Jun 15, 2021 at 01:08:11PM +1000, Alistair Popple wrote:
+> > On Saturday, 12 June 2021 1:01:42 AM AEST Peter Xu wrote:
+> > > On Fri, Jun 11, 2021 at 01:43:20PM +1000, Alistair Popple wrote:
 
-Fixes: 019cbd4a4feb ("drm/nouveau: Initialize GEM object before TTM object")
-Signed-off-by: Dan Carpenter <dan.carpenter@oracle.com>
----
-This fix is obvious enough and fixes my double free, but unfortunately
-there are other bugs here so my system still hangs when I try to open
-ten latest version Firefox windows in a row.
+[...]
 
- drivers/gpu/drm/nouveau/nouveau_gem.c | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
+> > > Do you think we can restore pte right before wr-protect or zap?  Then all
+> > > things serializes with page lock (btw: it's already an insane userspace to
+> > > either unmap a page or wr-protect a page if it knows the device is using it!).
+> > > If these are the only two cases, it still sounds a cleaner approach to me than
+> > > the current approach.
+> >
+> > Perhaps we could but it would make {zap|change}_pte_range() much more complex as
+> > we can't sleep taking the page lock whilst holding the ptl, so we'd have to
+> > implement a retry scheme similar to copy_pte_range() in both those functions as
+> > well.
+> 
+> Yes, but shouldn't be hard to do so, imho. E.g., see when __tlb_remove_page()
+> returns true in zap_pte_range(), so we already did something like that.  IMHO
+> it's not uncommon to have such facilities as we do have requirements to sleep
+> during a spinlock critical section for a lot of places in mm, so we release
+> them when needed and retake.
 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_gem.c b/drivers/gpu/drm/nouveau/nouveau_gem.c
-index c88cbb85f101..d612c1a720f8 100644
---- a/drivers/gpu/drm/nouveau/nouveau_gem.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_gem.c
-@@ -211,10 +211,8 @@ nouveau_gem_new(struct nouveau_cli *cli, u64 size, int align, uint32_t domain,
- 	}
- 
- 	ret = nouveau_bo_init(nvbo, size, align, domain, NULL, NULL);
--	if (ret) {
--		nouveau_bo_ref(NULL, &nvbo);
-+	if (ret)
- 		return ret;
--	}
- 
- 	/* we restrict allowed domains on nv50+ to only the types
- 	 * that were requested at creation time.  not possibly on
--- 
-2.30.2
+Agreed, it's not hard to do and it's a common enough pattern. However we decided
+that for such a specific application this (trying to take the lock or drop locks
+and retry) was too complex for copy_pte_range() so it seems like the same should
+apply here.
+
+Admittedly copy_pte_range() already had several other retry paths so perhaps
+it was adding yet another that made it relatively more complex. Overall I have
+been trying to minimise the impact on core mm code for this feature, and adding
+this pattern to zap_pte_range(), etc. would make it more complex for any future
+addition that requires locks to be dropped and retried so I guess in that sense
+it is no different.
+
+> > Given mmu_interval_read_begin/retry was IMHO added to solve this type of
+> > problem (freezing pte's to safely program device pte's) it seems like the
+> > better option rather than adding more complex code to generic mm paths.
+> >
+> > It's also worth noting i915 seems to use mmu_interval_read_begin/retry() with
+> > gup to sync mappings so this isn't an entirely new concept. I'm not an expert
+> > in that driver but I imagine changing gup to generate unconditional mmu notifier
+> > invalidates would also cause issues there. So I think overall this is the
+> > cleanest solution as it reduces the amount of code (particularly in generic mm
+> > paths).
+> 
+> I could be wrong somewhere, but to me depending on mmu notifiers being
+> "accurate" in general is fragile..
+> 
+> Take an example of change_pte_range(), which will generate PROTECTION_VMA
+> notifies.  Let's imaging an userspace calls mprotect() e.g. twice or even more
+> times with the same PROT_* and upon the same region, we know very possibly the
+> 2nd,3rd,... calls will generate those notifies with totally no change to the
+> pgtable at all as they're all done on the 1st shot.  However we'll generate mmu
+> notifies anyways for the 2nd,3rd,... calls.  It means mmu notifiers should
+> really be tolerant of false positives as it does happen, and such thing can be
+> triggered even from userspace system calls very easily like this.  That's why I
+> think any kernel facility that depends on mmu notifiers being accurate is
+> probably not the right approach..
+
+Argh, thanks. I was focused on the specifics of this series but I think I
+understand your point better now - that as a more general principle we can't
+assume notifiers are accurate.
+
+> But yeah as you said I think it's working as is with the series (I think the
+> follow_pmd_mask() checking pmd_trans_huge before calling split_huge_pmd is a
+> double safety-net for it, so even if the GUP split_huge_pmd got replaced with
+> __split_huge_pmd it should still work with the one-retry logic), not sure
+> whether it matters a lot, as it's not common mm path; I think I'll step back so
+> Andrew could still pick it up as wish, I'm just still not fully convinced it's
+> the best solution to have for a long term to depend on that..
+
+Ok, thanks. I guess you have somewhat convinced me - depending on it for the
+long term might be a bit fragile. However as you say the current implementation
+does work and I am starting to look at support for PMD and file backed pages
+which require changes here anyway. So I am hoping Andrew can still take this
+(once rebased) as it would be easier for me to do those changes if the basic
+support and clean ups were already in place.
+
+> > > This also reminded me that right now the cpu pgtable recovery is lazy - it
+> > > happens either from fork() or a cpu page fault.  Even after device finished
+> > > using it, swap ptes keep there.
+> > >
+> > > What if the device tries to do atomic op on the same page twice?  I am not sure
+> > > whether it means we may also want to teach both GUP (majorly follow_page_pte()
+> > > for now before pmd support) and process of page_make_device_exclusive() with
+> > > understanding the device exclusive entries too?  Another option seems to be
+> > > restoring pte after device finish using it, as long as the device knows when.
+> >
+> > I don't think we need to complicate follow_page_pte() with knowledge of
+> > exclusive entries. GUP will just restore the original pte via the normal
+> > fault path - follow_page_pte() will return NULL for an exclusive entry,
+> > resulting in handle_mm_path() getting called via faultin_page(). Therefore
+> > a driver calling make_device_exclusive() twice on the same page won't cause an
+> > issue. Also the device shouldn't fault on subsequent accesses if the exclusive
+> > entry is still in place anyway.
+> 
+> Right, looks good then.
+> 
+> >
+> > We can't restore the pte when the device is finished with it because there is
+> > no way of knowing when a device is done using an exclusive entry - device
+> > pte's work much the same as cpu pte's in that regard.
+> 
+> I see, I feel like I understand how it works slightly better now, thanks.
+
+Feel free to ask if there are any more details you want, but there's nothing too
+magical going on here.
+
+> One last pure question: I see nouveau_atomic_range_fault() will call the other
+> nvif_object_ioctl() which seems to do the device pgtable mapping, am I right?
+
+Correct - that installs the page table mapping on the GPU.
+
+> Then I see the notifier is quickly removed before nouveau_atomic_range_fault()
+> returns.  What happens if CPU access happens after mmu notifier removed?  Or is
+> it not possible to happen?
+
+So there are two notifiers registered - this one and a process wide notifier
+(see nouveau_mn_ops). In this case the process wide notifier will get called
+to invalidate the access when the CPU fault removes the device exclusive
+entries.
+
+ - Alistair
+
+> --
+> Peter Xu
+> 
+
+
 
 _______________________________________________
 Nouveau mailing list
