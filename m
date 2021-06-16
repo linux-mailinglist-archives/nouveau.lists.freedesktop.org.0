@@ -2,91 +2,89 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B56F83A8F00
-	for <lists+nouveau@lfdr.de>; Wed, 16 Jun 2021 04:47:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B330C3A9864
+	for <lists+nouveau@lfdr.de>; Wed, 16 Jun 2021 13:00:48 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 178316E453;
-	Wed, 16 Jun 2021 02:47:47 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id CF7A46E570;
+	Wed, 16 Jun 2021 11:00:43 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM12-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam12on2041.outbound.protection.outlook.com [40.107.244.41])
- by gabe.freedesktop.org (Postfix) with ESMTPS id ADB9F6E0CF;
- Wed, 16 Jun 2021 02:47:45 +0000 (UTC)
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com
+ (mail-bn7nam10on2051.outbound.protection.outlook.com [40.107.92.51])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 333086E56A;
+ Wed, 16 Jun 2021 11:00:43 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=lsfA4wN40cj16hFU02uV3tP+rZNkneh3Q0FZ2UgwLnvkVJlUEFYk24a7PbUkbsZLD8KdzDQ+YC87bcFX781BtTIc+HjzcjeWPB7ffPIRNvelGtcuyyryLRJWOaMTfy8ZwkB1RVc6oerrWqwkMX6VOAJVY5c3kgXMZ5Ky4tBcR+YYc0LmPXPxq2uPKKj6hCUi8JlvmVGN6p/IjJYcHgufiN3MMfWF7bCLNZBefMBiEwQTO5oY9YQiX9DDX7I6jCRx6RnULJzLNFHNLd+FroXoIIWaETYSCWLM4T0XRzrgSrNwUt77gjC3Z1aYF+wLOfe5aPkPBcGAfKfZYbXrD1qHCQ==
+ b=YzB+PgbRVkAhcCjOqRcZnc67YKG/BYiS3iaHx6QWBOQjs7oaS9i3gerqYv7kTvz0onYE1GPWXy7dumP6mKQ1UCtkb+/j3/LlXx5XjUmHWi5ITX5h3X1iOn7TsvN5oPT6GltS1HvnrPdJHwoZ0XGxL0R1JSJLEfSaDW+niZYjPQZB6ZoZAn2M8LRchS5TfKwA0uGAdizoliQhouwydtOrhviN44T/Rm0ddkAthAQcrEDu5QeUyr0/DXTakOAexkkGc+QMHdPoVsilgmq7jBeJ3n3VdSO0UTHR1l+0mKrxn7lrHkc6gpOKKZbz6wxISuB2aZvn6rEdNUucVOdqQrqTbg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=WJl6gAnl6/WcEpv5curWcUlYd0ynnlQpemmN9T7KH6M=;
- b=fm8xUL2M6m1YsxNBaozboKFh8zEmTNgfwdHXuaFt2XBbVRr0ZrodGLEJhyvmp6KrtiCWL+qAxD/f4nonWYLbJaC2m8CApay9IBYran/zBEwttvd8XRkGK5a3aVxsuz+h0PwMulvqulDYeMxhHigqy0SlrPAuNg0sICkOJ22qEr/ed5GT8vrLD88WBPJCyUYUDumXyWycaicQt69rFKAMwA1LEidqiSm6njrBE15HISblI8s9on8VSPQPS6XnzECljCXLnc0YlrwonoL8kwAPPTCXTF9XTH92ehe/50AK5yS/fNlbZW5ZpWrSAkmfYO85ynpMolSqQbWe4YJCDcegnA==
+ bh=FV7OuWEo/GplBHvZyk7S65vBVvmRHJTYAuH7hBSqP+o=;
+ b=begbV7z0P2vxW59t5vLa98N05KvpXRgJQGff1t1ZNV7OR29AqBKSjGeqJEjQou6LOFKf8hK0yW2BkwI/MDWLedDySWqQpTsTSHKu5IsR1F7479xoI6laoq2fbEhUngGz82K3hNTtKFI6p2nztaiCq/vaC+vSctndy7AZ7xRl9KvdwqFqkw3XKhjI6aTVf6F2m6HkRLp+8hIiCNpy4T0IDoN4zXeRJMMC/EhHZFv7QfXwFwNMe7t6dQ51Fjr8OmiqbLPyBbBYSRnFTjLIxy3mWvMgVabCjFCgxozU+3jex7uwEokAiJrdMNu24BWhle9hjFVV4JICzdarkW9yuShV0w==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 216.228.112.34) smtp.rcpttodomain=redhat.com smtp.mailfrom=nvidia.com;
+ 216.228.112.34) smtp.rcpttodomain=infradead.org smtp.mailfrom=nvidia.com;
  dmarc=pass (p=none sp=none pct=100) action=none header.from=nvidia.com;
  dkim=none (message not signed); arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=WJl6gAnl6/WcEpv5curWcUlYd0ynnlQpemmN9T7KH6M=;
- b=hS8byUOtfH1SU01suh9L6yAYW242p1QR0v+VD+bsI22QC7bUKDJXWpg28wzoOeHmsDjd+nYH4bLsydfCY5QUJQLEjeh2Nj2cDygB7ltEoPFsxHBSGgfBB0NMaMwJ/9QhUXNt3dO7ha2BFMebTLfQY3SeSBjzj+OA8yRcZA1PyoTR/mLyYduii8V4BZzT0ZeUwRmxjsDzznrFShSLMbpilqj2UvvArTLgUMKdVWxM3ZhJrXYOd95zjcQyoyc4630mIqz9So8cbIZ6OIY2DI1G1sQhlEHewT2DNQjCCE5B8gwGx4YxJse1NW+Dm5Pgba5hf90qh3l+69ZdL8lgPZyhwQ==
-Received: from DM5PR2001CA0019.namprd20.prod.outlook.com (2603:10b6:4:16::29)
- by MWHPR12MB1872.namprd12.prod.outlook.com (2603:10b6:300:10d::23)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4219.20; Wed, 16 Jun
- 2021 02:47:42 +0000
-Received: from DM6NAM11FT055.eop-nam11.prod.protection.outlook.com
- (2603:10b6:4:16:cafe::28) by DM5PR2001CA0019.outlook.office365.com
- (2603:10b6:4:16::29) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4242.16 via Frontend
- Transport; Wed, 16 Jun 2021 02:47:42 +0000
+ bh=FV7OuWEo/GplBHvZyk7S65vBVvmRHJTYAuH7hBSqP+o=;
+ b=NulbOSOLywTD6vfd75EdSCkU9yFHVxantlXsL7K/3qeG+6KryNt5o3dfuVN4Jr9K1FedzYAK3yfwLxxGQdrgFoQtFWUxkXZHafEKjXulM3tNJQZeJt2A/9YpCf0WswZYVoICKwZnZbhWo/vcB2SMq/NTlHF+EuPm0K76nkm+FrwmJUQJUTGRtjW4O1ncs2ZCg/TS7ah20IA9Fjj1gcqZcie9wQQ9AYRLGNRGGWx8eaXMD+fqGHUPLnm8WG243kLwa6ub9M4NRjiMy27Ersgh8uzazW4bbj4ez4OhpWojt8pSFkRBnI61Kalb77Mm4g1fSO88ULt7mGeYwmrkdIfGng==
+Received: from BN6PR14CA0014.namprd14.prod.outlook.com (2603:10b6:404:79::24)
+ by DM6PR12MB4894.namprd12.prod.outlook.com (2603:10b6:5:209::12) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4242.16; Wed, 16 Jun
+ 2021 11:00:41 +0000
+Received: from BN8NAM11FT065.eop-nam11.prod.protection.outlook.com
+ (2603:10b6:404:79:cafe::f3) by BN6PR14CA0014.outlook.office365.com
+ (2603:10b6:404:79::24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4242.15 via Frontend
+ Transport; Wed, 16 Jun 2021 11:00:41 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.112.34)
- smtp.mailfrom=nvidia.com; redhat.com; dkim=none (message not signed)
- header.d=none;redhat.com; dmarc=pass action=none header.from=nvidia.com;
+ smtp.mailfrom=nvidia.com; infradead.org; dkim=none (message not signed)
+ header.d=none;infradead.org; dmarc=pass action=none header.from=nvidia.com;
 Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
  216.228.112.34 as permitted sender) receiver=protection.outlook.com;
  client-ip=216.228.112.34; helo=mail.nvidia.com;
 Received: from mail.nvidia.com (216.228.112.34) by
- DM6NAM11FT055.mail.protection.outlook.com (10.13.173.103) with Microsoft SMTP
+ BN8NAM11FT065.mail.protection.outlook.com (10.13.177.63) with Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id
- 15.20.4242.16 via Frontend Transport; Wed, 16 Jun 2021 02:47:42 +0000
-Received: from nvdebian.localnet (172.20.187.5) by HQMAIL107.nvidia.com
+ 15.20.4242.16 via Frontend Transport; Wed, 16 Jun 2021 11:00:40 +0000
+Received: from localhost (172.20.187.6) by HQMAIL107.nvidia.com
  (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1497.2; Wed, 16 Jun
- 2021 02:47:38 +0000
+ 2021 11:00:39 +0000
 From: Alistair Popple <apopple@nvidia.com>
-To: Peter Xu <peterx@redhat.com>
-Date: Wed, 16 Jun 2021 12:47:36 +1000
-Message-ID: <3687765.3f4LTt0jjm@nvdebian>
-In-Reply-To: <YMjUZX8Sy0PuPt6j@t490s>
-References: <20210607075855.5084-1-apopple@nvidia.com>
- <7383392.6iZ9WBDLDo@nvdebian> <YMjUZX8Sy0PuPt6j@t490s>
+To: <akpm@linux-foundation.org>
+Date: Wed, 16 Jun 2021 20:59:27 +1000
+Message-ID: <20210616105937.23201-1-apopple@nvidia.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-X-Originating-IP: [172.20.187.5]
+X-Originating-IP: [172.20.187.6]
 X-ClientProxiedBy: HQMAIL111.nvidia.com (172.20.187.18) To
  HQMAIL107.nvidia.com (172.20.187.13)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 1a9057e9-1b0a-4371-d089-08d930711cd0
-X-MS-TrafficTypeDiagnostic: MWHPR12MB1872:
-X-Microsoft-Antispam-PRVS: <MWHPR12MB1872B95E9A7D6770325A1692DF0F9@MWHPR12MB1872.namprd12.prod.outlook.com>
+X-MS-Office365-Filtering-Correlation-Id: 5d6661c7-019b-489a-8411-08d930b5fb39
+X-MS-TrafficTypeDiagnostic: DM6PR12MB4894:
+X-Microsoft-Antispam-PRVS: <DM6PR12MB4894FFA270F2D1F9953F48F5DF0F9@DM6PR12MB4894.namprd12.prod.outlook.com>
 X-MS-Oob-TLC-OOBClassifiers: OLM:10000;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: nXzN03t3rW01rjh3ZACEgqeFapjyTuiUiSfJ9tM1Pko1oExQJ2ij2DZTctIsG7EMT5H8a2ZmIeLx9imcHY9ExqdU3R52v9ZVQqW98f+WdbrcGokkjCit4ttiCvdqrq5uhaMFk0imUtuxuJ30YZFVwENHT98Q3lXryeav3IqETaFV813O3K74oPl2NFmvgyYv/soA2NJsYLlvSyqaU8HcSUDZUB4TB0yby/s41bZ7by92RiV06yHg+grWC5Iocs9EXQB3tcF9DkT0SMjlvHFYpJgjH91Q4J7e+kINX6bzVa3nEmcoqMzcJ4094ob8/ASuKASqSNSnUegDiE+6a8lY7D4Xz6KV8VC1tWSYyEK+/0NAncFGBLw7GldDptAQsZJfuDkLoBR9XtFM8NbUvbk6NhEpXrhDsXxSNoA73nxynBpTFog9Cu6apOtwxdGGZ3HT/Zm0URwHB70SqScb3QyXYU19gAtDt309K9d6OjV5qY8YGaBM543PBHtxhtMzrajOwsZmnYPWestAOCmUjwI2TTdyj4fvoQ1SLUE48AurBRS0yD2DJvBPFxX2En3r4a6F2lOXI4JANLlUOuKvyXxoV8PRalhNL3XKnhsqdRhMDzvMFnaGGkocDW9ZFLSxk5D9tmkt/jf5CSF48t1scyh2LziY7RjP+K0uu25vQnVw6nMXpoAGQWWWva4clwG647Tl
+X-Microsoft-Antispam-Message-Info: EdYplu0m6TUm11yAAObz3+dhW2NapQYJZJN9dtKTf4vZ34yySKDDdQEVF5RzmtC28xE22RtMR/ETp+GOchaME7/I+I7ozX45iMMjtQ0IZMOVcr+5tAZE+IvJOA7Od3Zb/7dkgIK5fULyr20v1j/Qa0EzkP3WQ7kaKJCs+Qd4wZl8g3wsCsCkzFMHSqHDPcW4WtMXrqNf/cU5CW0rcS5QLp3mHKcgkFH6jj9FmqtR4pOxs6RkRoHZmRc0gl2Dolf4HxhmEiVlBxPu9ftJxrkqGd0yPAmbkLgb6mK9y0lIVck1poa7+Mov3lXDfv9+/bb8WqpaYhSmZpzhVWvcSjAq9Hnd04UFPFY3qFmfH/kbrDh2jjPHchn4csVRLMCAW/Sj2RaQBRpBMdhhxGu2MfQPKX2AuHZuHgFP0jEBa9Wi5AcIMWs7pYxsZGufcKvqBfYp2GuvGj/Bq+GhzxHbQAalDcjRzGWk/pTGZAVE6ead0MW/aE1PEYBiAs0DQEx6N0FL3hWlCrYQmMY+akE5RhDs90zxP05KWYEEz8m7+aMuCXnzLl79V4vcRe1xquu0vNwIdzMndP5aMPkAaSf0PEUQwfA4DfOjzKPv7fABapdG5r0FVFuyrnM7zg77eGGBcwKf615mWejQYf5yaT3AzUdvZ6AdH7lMAsmOxTzO9on/PuRdxiAiltCRr1LNloML7HtwPuKI0g0OAPd1/I5zQgzUhBuxBcHfgZY4fVus3WM0z3O7/Af50mGcuwVjcELn/Nj6ps8rcyiS1QoSFsP9tr9ZkQ==
 X-Forefront-Antispam-Report: CIP:216.228.112.34; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:schybrid03.nvidia.com; CAT:NONE;
- SFS:(4636009)(396003)(346002)(136003)(39860400002)(376002)(46966006)(36840700001)(86362001)(316002)(336012)(186003)(356005)(70206006)(9686003)(16526019)(82740400003)(426003)(82310400003)(8676002)(2906002)(9576002)(8936002)(5660300002)(83380400001)(70586007)(36860700001)(6916009)(4326008)(47076005)(26005)(54906003)(7416002)(33716001)(478600001)(36906005)(7636003)(39026012);
+ SFS:(4636009)(346002)(136003)(39860400002)(396003)(376002)(36840700001)(46966006)(7636003)(7416002)(70586007)(16526019)(82740400003)(2906002)(186003)(478600001)(6666004)(966005)(356005)(5660300002)(8676002)(8936002)(336012)(6916009)(426003)(36756003)(36906005)(82310400003)(1076003)(47076005)(316002)(36860700001)(83380400001)(70206006)(86362001)(26005)(54906003)(2616005)(107886003)(4326008);
  DIR:OUT; SFP:1101; 
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Jun 2021 02:47:42.0211 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1a9057e9-1b0a-4371-d089-08d930711cd0
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Jun 2021 11:00:40.9931 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5d6661c7-019b-489a-8411-08d930b5fb39
 X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.112.34];
  Helo=[mail.nvidia.com]
-X-MS-Exchange-CrossTenant-AuthSource: DM6NAM11FT055.eop-nam11.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: BN8NAM11FT065.eop-nam11.prod.protection.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MWHPR12MB1872
-Subject: Re: [Nouveau] [PATCH v10 07/10] mm: Device exclusive memory access
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4894
+Subject: [Nouveau] [PATCH v11 00/10] Add support for SVM atomics in Nouveau
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -98,147 +96,135 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: rcampbell@nvidia.com, willy@infradead.org, linux-doc@vger.kernel.org,
- nouveau@lists.freedesktop.org, hughd@google.com, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, hch@infradead.org, linux-mm@kvack.org,
- shakeelb@google.com, bskeggs@redhat.com, jgg@nvidia.com,
- akpm@linux-foundation.org, Christoph Hellwig <hch@lst.de>
+Cc: rcampbell@nvidia.com, linux-doc@vger.kernel.org,
+ nouveau@lists.freedesktop.org, Alistair Popple <apopple@nvidia.com>,
+ hughd@google.com, linux-kernel@vger.kernel.org, willy@infradead.org,
+ hch@infradead.org, linux-mm@kvack.org, peterx@redhat.com, shakeelb@google.com,
+ dri-devel@lists.freedesktop.org, jgg@nvidia.com, bskeggs@redhat.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wednesday, 16 June 2021 2:25:09 AM AEST Peter Xu wrote:
-> On Tue, Jun 15, 2021 at 01:08:11PM +1000, Alistair Popple wrote:
-> > On Saturday, 12 June 2021 1:01:42 AM AEST Peter Xu wrote:
-> > > On Fri, Jun 11, 2021 at 01:43:20PM +1000, Alistair Popple wrote:
+Hi Andrew,
 
-[...]
+This is my series to add support for SVM atomics in Nouveau rebased onto
+v5.13-rc6-mmots-2021-06-15-20-28. Functionally there are no changes from
+the previous v10, however some changes were made during the rebase. If
+anyone would like to see a diff-of-diffs I can post it but my exhaustive
+(assuming I didn't miss anything in the diff-of-diff) summary below is
+probably easier to read.
 
-> > > Do you think we can restore pte right before wr-protect or zap?  Then all
-> > > things serializes with page lock (btw: it's already an insane userspace to
-> > > either unmap a page or wr-protect a page if it knows the device is using it!).
-> > > If these are the only two cases, it still sounds a cleaner approach to me than
-> > > the current approach.
-> >
-> > Perhaps we could but it would make {zap|change}_pte_range() much more complex as
-> > we can't sleep taking the page lock whilst holding the ptl, so we'd have to
-> > implement a retry scheme similar to copy_pte_range() in both those functions as
-> > well.
-> 
-> Yes, but shouldn't be hard to do so, imho. E.g., see when __tlb_remove_page()
-> returns true in zap_pte_range(), so we already did something like that.  IMHO
-> it's not uncommon to have such facilities as we do have requirements to sleep
-> during a spinlock critical section for a lot of places in mm, so we release
-> them when needed and retake.
+Hugh - based on our previous disscussion I'm reasonably confident I haven't
+missed anything from you in the rebase, but patch 4 ("Split migration into
+its own function") might be worth looking at as that contained the largest
+conflicts. Thanks.
 
-Agreed, it's not hard to do and it's a common enough pattern. However we decided
-that for such a specific application this (trying to take the lock or drop locks
-and retry) was too complex for copy_pte_range() so it seems like the same should
-apply here.
+[PATCH 01/10] mm: Remove special swap entry functions
 
-Admittedly copy_pte_range() already had several other retry paths so perhaps
-it was adding yet another that made it relatively more complex. Overall I have
-been trying to minimise the impact on core mm code for this feature, and adding
-this pattern to zap_pte_range(), etc. would make it more complex for any future
-addition that requires locks to be dropped and retried so I guess in that sense
-it is no different.
+- Fixed migration_entry_to_page() reference in __split_huge_pmd_locked()
+  introduced by Hugh's "mm/thp: fix __split_huge_pmd_locked() on shmem
+  migration entry".
 
-> > Given mmu_interval_read_begin/retry was IMHO added to solve this type of
-> > problem (freezing pte's to safely program device pte's) it seems like the
-> > better option rather than adding more complex code to generic mm paths.
-> >
-> > It's also worth noting i915 seems to use mmu_interval_read_begin/retry() with
-> > gup to sync mappings so this isn't an entirely new concept. I'm not an expert
-> > in that driver but I imagine changing gup to generate unconditional mmu notifier
-> > invalidates would also cause issues there. So I think overall this is the
-> > cleanest solution as it reduces the amount of code (particularly in generic mm
-> > paths).
-> 
-> I could be wrong somewhere, but to me depending on mmu notifiers being
-> "accurate" in general is fragile..
-> 
-> Take an example of change_pte_range(), which will generate PROTECTION_VMA
-> notifies.  Let's imaging an userspace calls mprotect() e.g. twice or even more
-> times with the same PROT_* and upon the same region, we know very possibly the
-> 2nd,3rd,... calls will generate those notifies with totally no change to the
-> pgtable at all as they're all done on the 1st shot.  However we'll generate mmu
-> notifies anyways for the 2nd,3rd,... calls.  It means mmu notifiers should
-> really be tolerant of false positives as it does happen, and such thing can be
-> triggered even from userspace system calls very easily like this.  That's why I
-> think any kernel facility that depends on mmu notifiers being accurate is
-> probably not the right approach..
+- Fixed migration_entry_to_page() reference in page_vma_mapped_walk()
+  changed by Hugh in "mm: page_vma_mapped_walk(): prettify PVMW_MIGRATION
+  block"
 
-Argh, thanks. I was focused on the specifics of this series but I think I
-understand your point better now - that as a more general principle we can't
-assume notifiers are accurate.
+[PATCH 02/10] mm/swapops: Rework swap entry manipulation code
 
-> But yeah as you said I think it's working as is with the series (I think the
-> follow_pmd_mask() checking pmd_trans_huge before calling split_huge_pmd is a
-> double safety-net for it, so even if the GUP split_huge_pmd got replaced with
-> __split_huge_pmd it should still work with the one-retry logic), not sure
-> whether it matters a lot, as it's not common mm path; I think I'll step back so
-> Andrew could still pick it up as wish, I'm just still not fully convinced it's
-> the best solution to have for a long term to depend on that..
+- No changes required.
 
-Ok, thanks. I guess you have somewhat convinced me - depending on it for the
-long term might be a bit fragile. However as you say the current implementation
-does work and I am starting to look at support for PMD and file backed pages
-which require changes here anyway. So I am hoping Andrew can still take this
-(once rebased) as it would be easier for me to do those changes if the basic
-support and clean ups were already in place.
+[PATCH 03/10] mm/rmap: Split try_to_munlock from try_to_unmap
 
-> > > This also reminded me that right now the cpu pgtable recovery is lazy - it
-> > > happens either from fork() or a cpu page fault.  Even after device finished
-> > > using it, swap ptes keep there.
-> > >
-> > > What if the device tries to do atomic op on the same page twice?  I am not sure
-> > > whether it means we may also want to teach both GUP (majorly follow_page_pte()
-> > > for now before pmd support) and process of page_make_device_exclusive() with
-> > > understanding the device exclusive entries too?  Another option seems to be
-> > > restoring pte after device finish using it, as long as the device knows when.
-> >
-> > I don't think we need to complicate follow_page_pte() with knowledge of
-> > exclusive entries. GUP will just restore the original pte via the normal
-> > fault path - follow_page_pte() will return NULL for an exclusive entry,
-> > resulting in handle_mm_path() getting called via faultin_page(). Therefore
-> > a driver calling make_device_exclusive() twice on the same page won't cause an
-> > issue. Also the device shouldn't fault on subsequent accesses if the exclusive
-> > entry is still in place anyway.
-> 
-> Right, looks good then.
-> 
-> >
-> > We can't restore the pte when the device is finished with it because there is
-> > no way of knowing when a device is done using an exclusive entry - device
-> > pte's work much the same as cpu pte's in that regard.
-> 
-> I see, I feel like I understand how it works slightly better now, thanks.
+- No changes required.
 
-Feel free to ask if there are any more details you want, but there's nothing too
-magical going on here.
+[PATCH 04/10] mm/rmap: Split migration into its own function
 
-> One last pure question: I see nouveau_atomic_range_fault() will call the other
-> nvif_object_ioctl() which seems to do the device pgtable mapping, am I right?
+- Updated try_to_migrate_one() and try_to_migrate() to accept TTU_SYNC
+  flag.
 
-Correct - that installs the page table mapping on the GPU.
+- Updated mmu notifier range calculation in try_to_migrate_one() to use
+  vma_address_end() introduced by Hugh in "mm/thp: fix vma_address() if
+  virtual address below file offset".
 
-> Then I see the notifier is quickly removed before nouveau_atomic_range_fault()
-> returns.  What happens if CPU access happens after mmu notifier removed?  Or is
-> it not possible to happen?
+- Update to unmap_page() in mm/hugh_memory.c to pass TTU_SYNC and check
+  page_mapped() now that try_to_{unmap|migrate} return void.
 
-So there are two notifiers registered - this one and a process wide notifier
-(see nouveau_mn_ops). In this case the process wide notifier will get called
-to invalidate the access when the CPU fault removes the device exclusive
-entries.
+[PATCH 05/10] mm: Rename migrate_pgmap_owner
 
- - Alistair
+- Added Peter's Reviewed-by.
 
-> --
-> Peter Xu
-> 
+[PATCH 06/10] mm/memory.c: Allow different return codes for copy_non_present_pte()
 
+- Updated call to copy_nonpresent_pte() for extra arguments added by Peter
+  in "mm/userfaultfd: fix uffd-wp special cases for fork()".
 
+- Added Peter's Reviewed-by.
+
+[PATCH 07/10] mm: Device exclusive memory access
+
+- s/vma/src_vma/ in copy_nonpresent_pte() due to "mm/userfaultfd: fix
+  uffd-wp special cases for fork()".
+
+- Skip calling rmap_walk on tail pages.
+
+[PATCH 08/10] mm: Selftests for exclusive device memory
+
+- Squashed in a fix from Colin King (see
+  https://lore.kernel.org/kernel-janitors/20210526170530.3766167-1-colin.king@canonical.com/).
+  Not sure what the best way of attributing that is though given it was
+  against next.
+
+[PATCH 09/10] nouveau/svm: Refactor nouveau_range_fault
+
+- No changes.
+
+[PATCH 10/10] nouveau/svm: Implement atomic SVM access
+
+- No changes.
+
+Alistair Popple (10):
+  mm: Remove special swap entry functions
+  mm/swapops: Rework swap entry manipulation code
+  mm/rmap: Split try_to_munlock from try_to_unmap
+  mm/rmap: Split migration into its own function
+  mm: Rename migrate_pgmap_owner
+  mm/memory.c: Allow different return codes for copy_nonpresent_pte()
+  mm: Device exclusive memory access
+  mm: Selftests for exclusive device memory
+  nouveau/svm: Refactor nouveau_range_fault
+  nouveau/svm: Implement atomic SVM access
+
+ Documentation/vm/hmm.rst                      |  19 +-
+ Documentation/vm/unevictable-lru.rst          |  33 +-
+ arch/s390/mm/pgtable.c                        |   2 +-
+ drivers/gpu/drm/nouveau/include/nvif/if000c.h |   1 +
+ drivers/gpu/drm/nouveau/nouveau_svm.c         | 156 ++++-
+ drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.h |   1 +
+ .../drm/nouveau/nvkm/subdev/mmu/vmmgp100.c    |   6 +
+ fs/proc/task_mmu.c                            |  23 +-
+ include/linux/mmu_notifier.h                  |  26 +-
+ include/linux/rmap.h                          |  11 +-
+ include/linux/swap.h                          |  13 +-
+ include/linux/swapops.h                       | 123 ++--
+ lib/test_hmm.c                                | 127 +++-
+ lib/test_hmm_uapi.h                           |   2 +
+ mm/debug_vm_pgtable.c                         |  12 +-
+ mm/hmm.c                                      |  12 +-
+ mm/huge_memory.c                              |  48 +-
+ mm/hugetlb.c                                  |  10 +-
+ mm/memcontrol.c                               |   2 +-
+ mm/memory.c                                   | 175 ++++-
+ mm/migrate.c                                  |  51 +-
+ mm/mlock.c                                    |  12 +-
+ mm/mprotect.c                                 |  18 +-
+ mm/page_vma_mapped.c                          |  15 +-
+ mm/rmap.c                                     | 612 +++++++++++++++---
+ tools/testing/selftests/vm/hmm-tests.c        | 158 +++++
+ 26 files changed, 1341 insertions(+), 327 deletions(-)
+
+-- 
+2.20.1
 
 _______________________________________________
 Nouveau mailing list
