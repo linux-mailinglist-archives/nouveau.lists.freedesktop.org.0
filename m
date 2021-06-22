@@ -1,64 +1,64 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7AFC13B513A
-	for <lists+nouveau@lfdr.de>; Sun, 27 Jun 2021 05:35:51 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6E7353B5135
+	for <lists+nouveau@lfdr.de>; Sun, 27 Jun 2021 05:35:48 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id AF0CE6E1B5;
-	Sun, 27 Jun 2021 03:34:57 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 61AE16E1D7;
+	Sun, 27 Jun 2021 03:34:58 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 210866E580
- for <nouveau@lists.freedesktop.org>; Tue, 22 Jun 2021 14:17:43 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 985066E57A
+ for <nouveau@lists.freedesktop.org>; Tue, 22 Jun 2021 14:17:41 +0000 (UTC)
 Received: from imap.suse.de (imap-alt.suse-dmz.suse.de [192.168.254.47])
  (using TLSv1.2 with cipher ECDHE-ECDSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 99B1521985;
+ by smtp-out1.suse.de (Postfix) with ESMTPS id A157D2198B;
+ Tue, 22 Jun 2021 14:10:06 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1624371006; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=SRAIM2b9hcMZtpj1XmOCRlAOXVW+Cbn/WAr682hqNSs=;
+ b=vqm9dI3V0nrHSjy2CtFLenVHqjz8WsHqZyyjhgNtOINrIavnieIQ310rzLkEAPtHq7VzGS
+ VHLPNnQEc6k693CAl2rM+uYgXq+OrJd5hMG3WynS3vDPiEhJD54dTYSd3GXskP1jP4nEyp
+ dxj1jZ3xfQ7o4TdmLLfQxD9AbLw4GdY=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1624371006;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=SRAIM2b9hcMZtpj1XmOCRlAOXVW+Cbn/WAr682hqNSs=;
+ b=xBXa4bW1nD4K8968XQUo8pVHbPuTILpO3mWKrxajgAUVry/PxbHgWYOtNoK22If5d4UBBj
+ w+UCYzGFnlkmd6Aw==
+Received: from imap3-int (imap-alt.suse-dmz.suse.de [192.168.254.47])
+ by imap.suse.de (Postfix) with ESMTP id 9B8C8118DD;
  Tue, 22 Jun 2021 14:10:05 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1624371005; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ t=1624371006; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=GoNglZRPP44fopTgtKNO/5FpNVm5X099LWZB3EEhRP8=;
- b=qJBdNIl6UaV7smXq1szg7MJd5BDQATnCxs8aVghPi1MBHLX15vBH/kCV56iwatLTejONsS
- 1WpiSzFhr1nBUt7FaUH7diXhwyZLPfJvK0qPCXBtyq/kt+z80oZTyZOQOtR+IHqxlUKqi8
- pNgWTcH/jcZjymNM3sOI7NHPuK9NKwg=
+ bh=SRAIM2b9hcMZtpj1XmOCRlAOXVW+Cbn/WAr682hqNSs=;
+ b=vqm9dI3V0nrHSjy2CtFLenVHqjz8WsHqZyyjhgNtOINrIavnieIQ310rzLkEAPtHq7VzGS
+ VHLPNnQEc6k693CAl2rM+uYgXq+OrJd5hMG3WynS3vDPiEhJD54dTYSd3GXskP1jP4nEyp
+ dxj1jZ3xfQ7o4TdmLLfQxD9AbLw4GdY=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1624371005;
+ s=susede2_ed25519; t=1624371006;
  h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=GoNglZRPP44fopTgtKNO/5FpNVm5X099LWZB3EEhRP8=;
- b=Ms7KgEYGwBcGyQV/ifbNdJsHDAoMzWRHs+8ChqcaySaoGr9wjA8djfaoJZ9sz+Pi9pNsQ9
- d0tGPVJV++W55cDg==
-Received: from imap3-int (imap-alt.suse-dmz.suse.de [192.168.254.47])
- by imap.suse.de (Postfix) with ESMTP id 7D8EF11A98;
- Tue, 22 Jun 2021 14:10:04 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1624371005; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=GoNglZRPP44fopTgtKNO/5FpNVm5X099LWZB3EEhRP8=;
- b=qJBdNIl6UaV7smXq1szg7MJd5BDQATnCxs8aVghPi1MBHLX15vBH/kCV56iwatLTejONsS
- 1WpiSzFhr1nBUt7FaUH7diXhwyZLPfJvK0qPCXBtyq/kt+z80oZTyZOQOtR+IHqxlUKqi8
- pNgWTcH/jcZjymNM3sOI7NHPuK9NKwg=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1624371005;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=GoNglZRPP44fopTgtKNO/5FpNVm5X099LWZB3EEhRP8=;
- b=Ms7KgEYGwBcGyQV/ifbNdJsHDAoMzWRHs+8ChqcaySaoGr9wjA8djfaoJZ9sz+Pi9pNsQ9
- d0tGPVJV++W55cDg==
+ bh=SRAIM2b9hcMZtpj1XmOCRlAOXVW+Cbn/WAr682hqNSs=;
+ b=xBXa4bW1nD4K8968XQUo8pVHbPuTILpO3mWKrxajgAUVry/PxbHgWYOtNoK22If5d4UBBj
+ w+UCYzGFnlkmd6Aw==
 Received: from director2.suse.de ([192.168.254.72]) by imap3-int with ESMTPSA
- id QEnCHTzv0WD3UAAALh3uQQ
- (envelope-from <tzimmermann@suse.de>); Tue, 22 Jun 2021 14:10:04 +0000
+ id AKIBJT3v0WD3UAAALh3uQQ
+ (envelope-from <tzimmermann@suse.de>); Tue, 22 Jun 2021 14:10:05 +0000
 From: Thomas Zimmermann <tzimmermann@suse.de>
 To: daniel@ffwll.ch, airlied@linux.ie, alexander.deucher@amd.com,
  christian.koenig@amd.com, Xinhui.Pan@amd.com, james.qian.wang@arm.com,
@@ -80,15 +80,15 @@ To: daniel@ffwll.ch, airlied@linux.ie, alexander.deucher@amd.com,
  emma@anholt.net, linux-graphics-maintainer@vmware.com, zackr@vmware.com,
  hyun.kwon@xilinx.com, laurent.pinchart@ideasonboard.com,
  michal.simek@xilinx.com
-Date: Tue, 22 Jun 2021 16:09:41 +0200
-Message-Id: <20210622141002.11590-2-tzimmermann@suse.de>
+Date: Tue, 22 Jun 2021 16:09:42 +0200
+Message-Id: <20210622141002.11590-3-tzimmermann@suse.de>
 X-Mailer: git-send-email 2.32.0
 In-Reply-To: <20210622141002.11590-1-tzimmermann@suse.de>
 References: <20210622141002.11590-1-tzimmermann@suse.de>
 MIME-Version: 1.0
 X-Mailman-Approved-At: Sun, 27 Jun 2021 03:34:44 +0000
-Subject: [Nouveau] [PATCH v2 01/22] drm/amdgpu: Track IRQ state in local
- device state
+Subject: [Nouveau] [PATCH v2 02/22] drm/hibmc: Call drm_irq_uninstall()
+ unconditionally
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -110,47 +110,29 @@ Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Replace usage of struct drm_device.irq_enabled with the driver's
-own state field struct amdgpu_device.irq.installed. The field in
-the DRM device structure is considered legacy and should not be
-used by KMS drivers.
+Remove the check around drm_irq_uninstall(). The same test is
+done by the function internally. The tested state in irq_enabled
+is considered obsolete and should not be used by KMS drivers.
 
 Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
 ---
- drivers/gpu/drm/amd/amdgpu/amdgpu_irq.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ drivers/gpu/drm/hisilicon/hibmc/hibmc_drm_drv.c | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_irq.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_irq.c
-index 32ce0e679dc7..7dad44e73cf6 100644
---- a/drivers/gpu/drm/amd/amdgpu/amdgpu_irq.c
-+++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_irq.c
-@@ -599,7 +599,7 @@ void amdgpu_irq_gpu_reset_resume_helper(struct amdgpu_device *adev)
- int amdgpu_irq_get(struct amdgpu_device *adev, struct amdgpu_irq_src *src,
- 		   unsigned type)
+diff --git a/drivers/gpu/drm/hisilicon/hibmc/hibmc_drm_drv.c b/drivers/gpu/drm/hisilicon/hibmc/hibmc_drm_drv.c
+index f4bc5386574a..f8ef711bbe5d 100644
+--- a/drivers/gpu/drm/hisilicon/hibmc/hibmc_drm_drv.c
++++ b/drivers/gpu/drm/hisilicon/hibmc/hibmc_drm_drv.c
+@@ -253,8 +253,7 @@ static int hibmc_unload(struct drm_device *dev)
  {
--	if (!adev_to_drm(adev)->irq_enabled)
-+	if (!adev->irq.installed)
- 		return -ENOENT;
+ 	drm_atomic_helper_shutdown(dev);
  
- 	if (type >= src->num_types)
-@@ -629,7 +629,7 @@ int amdgpu_irq_get(struct amdgpu_device *adev, struct amdgpu_irq_src *src,
- int amdgpu_irq_put(struct amdgpu_device *adev, struct amdgpu_irq_src *src,
- 		   unsigned type)
- {
--	if (!adev_to_drm(adev)->irq_enabled)
-+	if (!adev->irq.installed)
- 		return -ENOENT;
+-	if (dev->irq_enabled)
+-		drm_irq_uninstall(dev);
++	drm_irq_uninstall(dev);
  
- 	if (type >= src->num_types)
-@@ -660,7 +660,7 @@ int amdgpu_irq_put(struct amdgpu_device *adev, struct amdgpu_irq_src *src,
- bool amdgpu_irq_enabled(struct amdgpu_device *adev, struct amdgpu_irq_src *src,
- 			unsigned type)
- {
--	if (!adev_to_drm(adev)->irq_enabled)
-+	if (!adev->irq.installed)
- 		return false;
+ 	pci_disable_msi(to_pci_dev(dev->dev));
  
- 	if (type >= src->num_types)
 -- 
 2.32.0
 
