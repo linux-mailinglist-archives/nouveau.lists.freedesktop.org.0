@@ -1,64 +1,64 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 022A63B50FB
-	for <lists+nouveau@lfdr.de>; Sun, 27 Jun 2021 05:35:09 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id F22983B514A
+	for <lists+nouveau@lfdr.de>; Sun, 27 Jun 2021 05:35:59 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1F2B76E13C;
-	Sun, 27 Jun 2021 03:34:47 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0D8FE6E207;
+	Sun, 27 Jun 2021 03:35:19 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
- by gabe.freedesktop.org (Postfix) with ESMTPS id F0EF46E593
- for <nouveau@lists.freedesktop.org>; Tue, 22 Jun 2021 14:17:45 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6DCBE6E58A
+ for <nouveau@lists.freedesktop.org>; Tue, 22 Jun 2021 14:17:44 +0000 (UTC)
 Received: from imap.suse.de (imap-alt.suse-dmz.suse.de [192.168.254.47])
  (using TLSv1.2 with cipher ECDHE-ECDSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 806201FD6E;
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 77C181FD6F;
+ Tue, 22 Jun 2021 14:10:21 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1624371021; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=eQTWdf0/PIeqR+OtvVI1Ry57+82jitavcgCSlPgIzZQ=;
+ b=c7b4AXAcGH/bAEXw8Ghdu9GTFduB5gY2x5HgddK57C70i3PzdLsD10Kma1Bsx2uRhyPeJs
+ 20Co2J3mBbYTWSrbUYPpaeU5fYavZOQA40S4OBWL0ejv7GcR98fMG3NU/VWy4DuzkIYAkL
+ nxUBP8lCfiY3hSBu0xHc1E3lIQFizYs=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1624371021;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=eQTWdf0/PIeqR+OtvVI1Ry57+82jitavcgCSlPgIzZQ=;
+ b=6r2l44Ff6BoeQLlNn5A7fG60gW+AQ0BfYu1c25LDL0anTrO6DXvbOOhj//R7nLdH1pJHXi
+ SWYkAelMz0htb9Dg==
+Received: from imap3-int (imap-alt.suse-dmz.suse.de [192.168.254.47])
+ by imap.suse.de (Postfix) with ESMTP id 7A128118DD;
  Tue, 22 Jun 2021 14:10:20 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1624371020; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ t=1624371021; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=w2dZcC3pCkzy5sp555ZXIoyomUNrqmZoWcUP2DgjlBg=;
- b=zL8QGnMFbeGfsdbHMdvk3T9QOa67vCBsYr/vQZY7lEuDeBJnhuicYnmCadJrnC256hVZLO
- 5iipjR5YHVOaqliAv2cq76JU3Y+jd7mo58CAQ5eesRyBOGxcWm2PqU6ysTS8g993/wzq8U
- Xl/WxIcbSUYpbK0VPonEyKGO/xoZ+TQ=
+ bh=eQTWdf0/PIeqR+OtvVI1Ry57+82jitavcgCSlPgIzZQ=;
+ b=c7b4AXAcGH/bAEXw8Ghdu9GTFduB5gY2x5HgddK57C70i3PzdLsD10Kma1Bsx2uRhyPeJs
+ 20Co2J3mBbYTWSrbUYPpaeU5fYavZOQA40S4OBWL0ejv7GcR98fMG3NU/VWy4DuzkIYAkL
+ nxUBP8lCfiY3hSBu0xHc1E3lIQFizYs=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1624371020;
+ s=susede2_ed25519; t=1624371021;
  h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=w2dZcC3pCkzy5sp555ZXIoyomUNrqmZoWcUP2DgjlBg=;
- b=41k16nu8F+fiwSxPnCuq8da7b8e/Qk7BpEUgqb69uTSjjy84d8ul23QzdhP/XogpJKTBUj
- LkkMrYRQ0znXtiDA==
-Received: from imap3-int (imap-alt.suse-dmz.suse.de [192.168.254.47])
- by imap.suse.de (Postfix) with ESMTP id 7324411A98;
- Tue, 22 Jun 2021 14:10:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1624371020; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=w2dZcC3pCkzy5sp555ZXIoyomUNrqmZoWcUP2DgjlBg=;
- b=zL8QGnMFbeGfsdbHMdvk3T9QOa67vCBsYr/vQZY7lEuDeBJnhuicYnmCadJrnC256hVZLO
- 5iipjR5YHVOaqliAv2cq76JU3Y+jd7mo58CAQ5eesRyBOGxcWm2PqU6ysTS8g993/wzq8U
- Xl/WxIcbSUYpbK0VPonEyKGO/xoZ+TQ=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1624371020;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=w2dZcC3pCkzy5sp555ZXIoyomUNrqmZoWcUP2DgjlBg=;
- b=41k16nu8F+fiwSxPnCuq8da7b8e/Qk7BpEUgqb69uTSjjy84d8ul23QzdhP/XogpJKTBUj
- LkkMrYRQ0znXtiDA==
+ bh=eQTWdf0/PIeqR+OtvVI1Ry57+82jitavcgCSlPgIzZQ=;
+ b=6r2l44Ff6BoeQLlNn5A7fG60gW+AQ0BfYu1c25LDL0anTrO6DXvbOOhj//R7nLdH1pJHXi
+ SWYkAelMz0htb9Dg==
 Received: from director2.suse.de ([192.168.254.72]) by imap3-int with ESMTPSA
- id kB86G0vv0WD3UAAALh3uQQ
- (envelope-from <tzimmermann@suse.de>); Tue, 22 Jun 2021 14:10:19 +0000
+ id IAvvHEzv0WD3UAAALh3uQQ
+ (envelope-from <tzimmermann@suse.de>); Tue, 22 Jun 2021 14:10:20 +0000
 From: Thomas Zimmermann <tzimmermann@suse.de>
 To: daniel@ffwll.ch, airlied@linux.ie, alexander.deucher@amd.com,
  christian.koenig@amd.com, Xinhui.Pan@amd.com, james.qian.wang@arm.com,
@@ -80,14 +80,14 @@ To: daniel@ffwll.ch, airlied@linux.ie, alexander.deucher@amd.com,
  emma@anholt.net, linux-graphics-maintainer@vmware.com, zackr@vmware.com,
  hyun.kwon@xilinx.com, laurent.pinchart@ideasonboard.com,
  michal.simek@xilinx.com
-Date: Tue, 22 Jun 2021 16:09:55 +0200
-Message-Id: <20210622141002.11590-16-tzimmermann@suse.de>
+Date: Tue, 22 Jun 2021 16:09:56 +0200
+Message-Id: <20210622141002.11590-17-tzimmermann@suse.de>
 X-Mailer: git-send-email 2.32.0
 In-Reply-To: <20210622141002.11590-1-tzimmermann@suse.de>
 References: <20210622141002.11590-1-tzimmermann@suse.de>
 MIME-Version: 1.0
 X-Mailman-Approved-At: Sun, 27 Jun 2021 03:34:44 +0000
-Subject: [Nouveau] [PATCH v2 15/22] drm/stm: Don't set struct
+Subject: [Nouveau] [PATCH v2 16/22] drm/sun4i: Don't set struct
  drm_device.irq_enabled
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -111,27 +111,26 @@ Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 The field drm_device.irq_enabled is only used by legacy drivers
-with userspace modesetting. Don't set it in stm.
+with userspace modesetting. Don't set it in sun4i.
 
 Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
 ---
- drivers/gpu/drm/stm/ltdc.c | 3 ---
- 1 file changed, 3 deletions(-)
+ drivers/gpu/drm/sun4i/sun4i_drv.c | 2 --
+ 1 file changed, 2 deletions(-)
 
-diff --git a/drivers/gpu/drm/stm/ltdc.c b/drivers/gpu/drm/stm/ltdc.c
-index 08b71248044d..e9c5a52f041a 100644
---- a/drivers/gpu/drm/stm/ltdc.c
-+++ b/drivers/gpu/drm/stm/ltdc.c
-@@ -1339,9 +1339,6 @@ int ltdc_load(struct drm_device *ddev)
- 		goto err;
- 	}
+diff --git a/drivers/gpu/drm/sun4i/sun4i_drv.c b/drivers/gpu/drm/sun4i/sun4i_drv.c
+index af335f58bdfc..570f3af25e86 100644
+--- a/drivers/gpu/drm/sun4i/sun4i_drv.c
++++ b/drivers/gpu/drm/sun4i/sun4i_drv.c
+@@ -97,8 +97,6 @@ static int sun4i_drv_bind(struct device *dev)
+ 	if (ret)
+ 		goto cleanup_mode_config;
  
--	/* Allow usage of vblank without having to call drm_irq_install */
--	ddev->irq_enabled = 1;
+-	drm->irq_enabled = true;
 -
- 	clk_disable_unprepare(ldev->pixel_clk);
- 
- 	pinctrl_pm_select_sleep_state(ddev->dev);
+ 	/* Remove early framebuffers (ie. simplefb) */
+ 	ret = drm_aperture_remove_framebuffers(false, "sun4i-drm-fb");
+ 	if (ret)
 -- 
 2.32.0
 
