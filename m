@@ -1,41 +1,68 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3EAFB3B512D
-	for <lists+nouveau@lfdr.de>; Sun, 27 Jun 2021 05:35:44 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6933B3B513D
+	for <lists+nouveau@lfdr.de>; Sun, 27 Jun 2021 05:35:53 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 30E556E1A2;
-	Sun, 27 Jun 2021 03:34:57 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 315296E1D2;
+	Sun, 27 Jun 2021 03:34:58 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from perceval.ideasonboard.com (perceval.ideasonboard.com
- [213.167.242.64])
- by gabe.freedesktop.org (Postfix) with ESMTPS id DBA816EB55;
- Thu, 24 Jun 2021 10:48:34 +0000 (UTC)
-Received: from pendragon.ideasonboard.com (62-78-145-57.bb.dnainternet.fi
- [62.78.145.57])
- by perceval.ideasonboard.com (Postfix) with ESMTPSA id 571A61254;
- Thu, 24 Jun 2021 12:48:33 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
- s=mail; t=1624531713;
- bh=fIk5wMEN1B7CMPOBGbKPIoyHWGb/NJbW3Q+hz7HFjMM=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=OoLj5b8l/ofOHdX9hMnRB54xFpHcmL5qCdyqf0btt+Wqy//1J8rGXdoC24H1uq8n1
- 048gJuhXofMiwBWBvQAq72XeLSOhwF8Jn/QOm5PZoqoyR+V/AZX9s6u3YYgXawYOjf
- yqs50G3bJBKCjDvGArnYQnXaHNQWu9PnXSCiArt0=
-Date: Thu, 24 Jun 2021 13:48:03 +0300
-From: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B73206EB61;
+ Thu, 24 Jun 2021 12:01:38 +0000 (UTC)
+Received: by mail-wm1-x333.google.com with SMTP id
+ t11-20020a1cc30b0000b02901cec841b6a0so4739666wmf.0; 
+ Thu, 24 Jun 2021 05:01:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to:user-agent;
+ bh=WvUvm5hWnbpKvx8lC8t4mJz6e0uKheDES6Tk0i+zY+w=;
+ b=ulOl1WR6hUsemVsWu+nXQKAaF+NWBGm9rArEOLeaoN0WxBaALD4ZQdlEtLUwiyntGS
+ 6aCzvNYrxKlD5RcUH9is5U5vKg0MMhLQGX5wphQ1t0LH3vRbjIejDfUNRl6yOZmEdArX
+ ER4/AMzQk4RBswWBd14g4JyfQMQGAaQQl4ui6PTfaGCfGogzHiHmR0HN3yKrkh/cTjSY
+ DP2SS855aTgplaldxRVj7hkHvGVB5OucvNpiMP2/osl+xTvYX1oZFoe3TRDpf2HWT8kC
+ VWqIAp/206jzxPaefTLjmUt197n96j5inNoBvy2OtVPTiEtJy5ooWX2wRmaQY3coNk4A
+ U1/Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to:user-agent;
+ bh=WvUvm5hWnbpKvx8lC8t4mJz6e0uKheDES6Tk0i+zY+w=;
+ b=VNeS7I6vGn15LM+u7ql+dBy4CoUFe7LgYcEVKjTnu6HyhtDNSyMYjXJu9aJ3mbFhk3
+ LxGkQvYa+5Lv/ltfeVvH3ORGJsJUa7hmKqMiw9goBSiCkx6KMRomsPN0thv8HgCHg6Js
+ t8vlwyb4Y8GYiN0eXujk9fXx4+ivqLtGHbvR5UIcrvjJ/SreDfiUCrpZIi4OjZBHoOTX
+ xQH823rqWvg72jVlzV4Eo2lp9xB8ncjqOCzi1i+wx90/o0Oe2wgajHSuf/WmZiphv9xa
+ jweHA9ZEPkMjEHlGnE2L4KZjVwlGY+WaVqSBzdZ89TGorkLnumGPV0G/Egk5qZkqdHaQ
+ sFSw==
+X-Gm-Message-State: AOAM530I6yM/ArZ4ATI9hOFw6DGQ78ESP3TGRIjW3xe4PHx5WOVyfnfR
+ cPforl5HOBg5BLOtd2I9Uqs=
+X-Google-Smtp-Source: ABdhPJzn2HGsmWMVY2UrZXCNwuzUPp/4W4zcfowMlCWK89vJwbYcDL9+9zVkS5DWjagvR0lWoKHFhQ==
+X-Received: by 2002:a05:600c:1c08:: with SMTP id
+ j8mr3921135wms.73.1624536097480; 
+ Thu, 24 Jun 2021 05:01:37 -0700 (PDT)
+Received: from localhost ([62.96.65.119])
+ by smtp.gmail.com with ESMTPSA id e3sm3089350wro.26.2021.06.24.05.01.36
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 24 Jun 2021 05:01:36 -0700 (PDT)
+Date: Thu, 24 Jun 2021 14:03:39 +0200
+From: Thierry Reding <thierry.reding@gmail.com>
 To: Thomas Zimmermann <tzimmermann@suse.de>
-Message-ID: <YNRi4yR6lQTix7ar@pendragon.ideasonboard.com>
+Message-ID: <YNR0m2DJsdIW3NAZ@orome.fritz.box>
 References: <20210624072916.27703-1-tzimmermann@suse.de>
- <20210624072916.27703-25-tzimmermann@suse.de>
+ <20210624072916.27703-5-tzimmermann@suse.de>
+ <87im23u1ok.fsf@intel.com>
+ <b5e7729f-ed11-e9ca-386e-562feb2bd2b7@suse.de>
+ <877dijtzl2.fsf@intel.com>
+ <af21db75-584f-aec0-9659-d5386f27b4ea@suse.de>
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20210624072916.27703-25-tzimmermann@suse.de>
-X-Mailman-Approved-At: Sun, 27 Jun 2021 03:34:44 +0000
-Subject: Re: [Nouveau] [PATCH v3 24/27] drm/vkms: Don't set struct
- drm_device.irq_enabled
+In-Reply-To: <af21db75-584f-aec0-9659-d5386f27b4ea@suse.de>
+User-Agent: Mutt/2.0.7 (481f3800) (2021-05-04)
+X-Mailman-Approved-At: Sun, 27 Jun 2021 03:34:45 +0000
+Subject: Re: [Nouveau] [PATCH v3 04/27] drm: Don't test for IRQ support in
+ VBLANK ioctls
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -51,69 +78,156 @@ Cc: hamohammed.sa@gmail.com, heiko@sntech.de, emma@anholt.net, airlied@linux.ie,
  nouveau@lists.freedesktop.org, rodrigo.vivi@intel.com, liviu.dudau@arm.com,
  alexandre.torgue@foss.st.com, dri-devel@lists.freedesktop.org,
  michal.simek@xilinx.com, melissa.srw@gmail.com, linux-tegra@vger.kernel.org,
- thierry.reding@gmail.com, amd-gfx@lists.freedesktop.org,
- benjamin.gaignard@linaro.org, linux@armlinux.org.uk, mihail.atanassov@arm.com,
- festevam@gmail.com, linux-stm32@st-md-mailman.stormreply.com,
- linux-samsung-soc@vger.kernel.org, jy0922.shim@samsung.com,
- krzysztof.kozlowski@canonical.com, linux-rockchip@lists.infradead.org,
- linux-mediatek@lists.infradead.org, wens@csie.org, jernej.skrabec@gmail.com,
- xinliang.liu@linaro.org, kong.kongxinwei@hisilicon.com,
- james.qian.wang@arm.com, linux-imx@nxp.com, intel-gfx@lists.freedesktop.org,
- linux-graphics-maintainer@vmware.com, linux-sunxi@lists.linux.dev,
+ laurent.pinchart@ideasonboard.com, benjamin.gaignard@linaro.org,
+ linux@armlinux.org.uk, mihail.atanassov@arm.com, festevam@gmail.com,
+ linux-stm32@st-md-mailman.stormreply.com, linux-samsung-soc@vger.kernel.org,
+ jy0922.shim@samsung.com, krzysztof.kozlowski@canonical.com,
+ linux-rockchip@lists.infradead.org, linux-mediatek@lists.infradead.org,
+ wens@csie.org, jernej.skrabec@gmail.com, xinliang.liu@linaro.org,
+ kong.kongxinwei@hisilicon.com, james.qian.wang@arm.com, linux-imx@nxp.com,
+ linux-graphics-maintainer@vmware.com, intel-gfx@lists.freedesktop.org,
  bskeggs@redhat.com, chunkuang.hu@kernel.org, p.zabel@pengutronix.de,
  puck.chen@hisilicon.com, s.hauer@pengutronix.de,
- maarten.lankhorst@linux.intel.com, mripard@kernel.org, inki.dae@samsung.com,
- rodrigosiqueiramelo@gmail.com, john.stultz@linaro.org,
- jani.nikula@linux.intel.com, laurentiu.palcu@oss.nxp.com,
- matthias.bgg@gmail.com, kernel@pengutronix.de,
- linux-arm-kernel@lists.infradead.org, mcoquelin.stm32@gmail.com,
- hyun.kwon@xilinx.com, tomba@kernel.org, jyri.sarha@iki.fi,
- yannick.fertre@foss.st.com, Xinhui.Pan@amd.com, sw0312.kim@samsung.com,
- hjc@rock-chips.com, christian.koenig@amd.com, kyungmin.park@samsung.com,
- kieran.bingham+renesas@ideasonboard.com, philippe.cornu@foss.st.com,
- daniel@ffwll.ch, alexander.deucher@amd.com, tiantao6@hisilicon.com,
- shawnguo@kernel.org, brian.starkey@arm.com, zackr@vmware.com,
- l.stach@pengutronix.de
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+ maarten.lankhorst@linux.intel.com, Jani Nikula <jani.nikula@linux.intel.com>,
+ inki.dae@samsung.com, rodrigosiqueiramelo@gmail.com, john.stultz@linaro.org,
+ mripard@kernel.org, laurentiu.palcu@oss.nxp.com, matthias.bgg@gmail.com,
+ kernel@pengutronix.de, linux-arm-kernel@lists.infradead.org,
+ mcoquelin.stm32@gmail.com, amd-gfx@lists.freedesktop.org, hyun.kwon@xilinx.com,
+ tomba@kernel.org, jyri.sarha@iki.fi, yannick.fertre@foss.st.com,
+ Xinhui.Pan@amd.com, sw0312.kim@samsung.com, hjc@rock-chips.com,
+ christian.koenig@amd.com, linux-sunxi@lists.linux.dev,
+ kyungmin.park@samsung.com, kieran.bingham+renesas@ideasonboard.com,
+ philippe.cornu@foss.st.com, daniel@ffwll.ch, alexander.deucher@amd.com,
+ tiantao6@hisilicon.com, shawnguo@kernel.org, brian.starkey@arm.com,
+ zackr@vmware.com, l.stach@pengutronix.de
+Content-Type: multipart/mixed; boundary="===============0673144236=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi Thomas,
 
-Thank you for the patch.
+--===============0673144236==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="Lm2ZaOZ7foAeT6XX"
+Content-Disposition: inline
 
-On Thu, Jun 24, 2021 at 09:29:13AM +0200, Thomas Zimmermann wrote:
-> The field drm_device.irq_enabled is only used by legacy drivers
-> with userspace modesetting. Don't set it in vkms.
-> 
-> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
 
-Reviewed-by: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+--Lm2ZaOZ7foAeT6XX
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> ---
->  drivers/gpu/drm/vkms/vkms_drv.c | 2 --
->  1 file changed, 2 deletions(-)
-> 
-> diff --git a/drivers/gpu/drm/vkms/vkms_drv.c b/drivers/gpu/drm/vkms/vkms_drv.c
-> index 027ffe759440..496de38ad983 100644
-> --- a/drivers/gpu/drm/vkms/vkms_drv.c
-> +++ b/drivers/gpu/drm/vkms/vkms_drv.c
-> @@ -163,8 +163,6 @@ static int vkms_create(struct vkms_config *config)
->  		goto out_devres;
->  	}
->  
-> -	vkms_device->drm.irq_enabled = true;
-> -
->  	ret = drm_vblank_init(&vkms_device->drm, 1);
->  	if (ret) {
->  		DRM_ERROR("Failed to vblank\n");
+On Thu, Jun 24, 2021 at 11:07:57AM +0200, Thomas Zimmermann wrote:
+> Hi
+>=20
+> Am 24.06.21 um 10:51 schrieb Jani Nikula:
+> > On Thu, 24 Jun 2021, Thomas Zimmermann <tzimmermann@suse.de> wrote:
+> > > Hi
+> > >=20
+> > > Am 24.06.21 um 10:06 schrieb Jani Nikula:
+> > > > On Thu, 24 Jun 2021, Thomas Zimmermann <tzimmermann@suse.de> wrote:
+> > > > > diff --git a/drivers/gpu/drm/drm_vblank.c b/drivers/gpu/drm/drm_v=
+blank.c
+> > > > > index 3417e1ac7918..10fe16bafcb6 100644
+> > > > > --- a/drivers/gpu/drm/drm_vblank.c
+> > > > > +++ b/drivers/gpu/drm/drm_vblank.c
+> > > > > @@ -1748,8 +1748,16 @@ int drm_wait_vblank_ioctl(struct drm_devic=
+e *dev, void *data,
+> > > > >    	unsigned int pipe_index;
+> > > > >    	unsigned int flags, pipe, high_pipe;
+> > > > > -	if (!dev->irq_enabled)
+> > > > > -		return -EOPNOTSUPP;
+> > > > > +#if defined(CONFIG_DRM_LEGACY)
+> > > > > +	if  (unlikely(drm_core_check_feature(dev, DRIVER_LEGACY))) {
+> > > > > +		if (!dev->irq_enabled)
+> > > > > +			return -EOPNOTSUPP;
+> > > > > +	} else /* if DRIVER_MODESET */
+> > > > > +#endif
+> > > > > +	{
+> > > > > +		if (!drm_dev_has_vblank(dev))
+> > > > > +			return -EOPNOTSUPP;
+> > > > > +	}
+> > > >=20
+> > > > Sheesh I hate this kind of inline #ifdefs.
+> > > >=20
+> > > > Two alternate suggestions that I believe should be as just efficien=
+t:
+> > >=20
+> > > Or how about:
+> > >=20
+> > > static bool drm_wait_vblank_supported(struct drm_device *dev)
+> > >=20
+> > > {
+> > >=20
+> > > if defined(CONFIG_DRM_LEGACY)
+> > > 	if  (unlikely(drm_core_check_feature(dev, DRIVER_LEGACY)))
+> > >=20
+> > > 		return dev->irq_enabled;
+> > >=20
+> > > #endif
+> > > 	return drm_dev_has_vblank(dev);
+> > >=20
+> > > }
+> > >=20
+> > >=20
+> > > ?
+> > >=20
+> > > It's inline, but still readable.
+> >=20
+> > It's definitely better than the original, but it's unclear to me why
+> > you'd prefer this over option 2) below. I guess the only reason I can
+> > think of is emphasizing the conditional compilation. However,
+> > IS_ENABLED() is widely used in this manner specifically to avoid inline
+> > #if, and the compiler optimizes it away.
+>=20
+> It's simply more readable to me as the condition is simpler. But option 2=
+ is
+> also ok.
 
--- 
-Regards,
+Perhaps do something like this, then:
 
-Laurent Pinchart
+	if (IS_ENABLED(CONFIG_DRM_LEGACY)) {
+		if (unlikely(drm_core_check_feature(dev, DRIVER_LEGACY)))
+			return dev->irq_enabled;
+	}
+
+	return drm_dev_has_vblank(dev);
+
+That's about just as readable as the variant involving the preprocessor
+but has all the benefits of not using the preprocessor.
+
+Thierry
+
+--Lm2ZaOZ7foAeT6XX
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEEiOrDCAFJzPfAjcif3SOs138+s6EFAmDUdJsACgkQ3SOs138+
+s6GX9A/+JnX2q7LN8UzemTORS9HFtHwUAvUZS/tcgEtSUkLf0Sf8oIREq4vU6mR3
+gZ3hsE5Hn381Tc/ec7MCrbJG09BKGgg3XM2CZetMfKaEK+rL58OZhwSihyprbqKf
+uDFxqXSEKRX2mufyn2NjwLaIv7tVG8oL0jCwdW0Pj+s4rX9X1qWbU85JKZ2LFVhY
+Syt9T/2kOp0Btnx6KWiezWZU7kliWtXr55PcfVfwcPmM8ISrBkLR2BT5ZBd5CJtv
+sBWAgFMUBwAWbkszskSrxD1iGkmdZ7Ik0a3278+AdxEUZmL99gg3fG33CMH7Dt0Q
+9c+ZouwJlyGKEPY3ZahWwNW28nYlLBH1Gojqkmrjf9MYP0uTGkEW6rKYjQWs/ZI2
+Fuzmvo/i8pLhSxlYYpAFHScIQW7z6AiRNFHAq0O4eXCIFN0VK1QVRje3KrDawWVf
+KOIxC08UAGY+rfOcGABxDdutsiegkLqjUYDOORbul5Jda/4kt2izbUOGKOMrS1wt
+uiRoVoyw8p9jqpKMb+fNZHSWkkSHrqrUS09iyNM0eE3f8KOQwVAoExV40Hg4h2fp
+1NM98icmiHuCD6BfCHJrzKeBltLOqY8nY4JwkBLzwKnWmnAFNW+6U5mSOriTV9Vz
+JjFitWRGitM+/oADAzUvPspL3TTGCBzwiAUPSVsBgnTmeiseOX8=
+=4o32
+-----END PGP SIGNATURE-----
+
+--Lm2ZaOZ7foAeT6XX--
+
+--===============0673144236==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/nouveau
+
+--===============0673144236==--
