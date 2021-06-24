@@ -2,63 +2,63 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id C639C3B5123
-	for <lists+nouveau@lfdr.de>; Sun, 27 Jun 2021 05:35:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2A17E3B5138
+	for <lists+nouveau@lfdr.de>; Sun, 27 Jun 2021 05:35:50 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 21B596E195;
-	Sun, 27 Jun 2021 03:34:50 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E3B936E1B8;
+	Sun, 27 Jun 2021 03:34:57 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A831B6EA7D;
- Thu, 24 Jun 2021 07:29:35 +0000 (UTC)
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D4AAD6EA43;
+ Thu, 24 Jun 2021 07:29:36 +0000 (UTC)
 Received: from imap.suse.de (imap-alt.suse-dmz.suse.de [192.168.254.47])
  (using TLSv1.2 with cipher ECDHE-ECDSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 597A61FD6F;
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 82C3F21981;
+ Thu, 24 Jun 2021 07:29:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1624519775; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=cefLiwg7lmTrptqKmwk+oKG5ua0i1ugGlGhhGVH/wSk=;
+ b=uNdTbrA2PLoAdTU5T6L7wN8yKETI0zBvfYgk1spHrXT0qTRbfIZuDhCtpsaQAPcStYPViN
+ Dx+fpfuvD7+HfuvQYEd+tfgNDwQ9wRWgSV2aUwolfDoTtfIJiDS3dYJvJmQT98X6nQjSpn
+ nW7Kz/iUgypci9M75WvNwtn71vyG7YU=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1624519775;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=cefLiwg7lmTrptqKmwk+oKG5ua0i1ugGlGhhGVH/wSk=;
+ b=RvafANTFwNplD06NmTnpVdLAyIvwSZQJ86TKupF6ZVzk/3PVUEoBug5nrIUOiqTKD0DU2L
+ V1rtmwyHj2xU98Cw==
+Received: from imap3-int (imap-alt.suse-dmz.suse.de [192.168.254.47])
+ by imap.suse.de (Postfix) with ESMTP id 5D42211C9B;
  Thu, 24 Jun 2021 07:29:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1624519774; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ t=1624519775; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=p7hIscDicVLyq+MeIWmpJ6iRJMyr/DvDZycVYDakYTE=;
- b=rSUB50BnQ2ZTHuQLv4dB1NfJKrnWMa3YIfDGsD7nWIJXlsWaJ4T37ysokyiElhS6y4mMM/
- hR0fotQhK6yZ2z/pltCG1CgHXORYlhZkGL7YjYY8oVj5hVl1d9EJsDs9zm8ag8FnRZdX9Q
- WC6WPs38wf7GFSmpjjeA6NYGAYlGSWg=
+ bh=cefLiwg7lmTrptqKmwk+oKG5ua0i1ugGlGhhGVH/wSk=;
+ b=uNdTbrA2PLoAdTU5T6L7wN8yKETI0zBvfYgk1spHrXT0qTRbfIZuDhCtpsaQAPcStYPViN
+ Dx+fpfuvD7+HfuvQYEd+tfgNDwQ9wRWgSV2aUwolfDoTtfIJiDS3dYJvJmQT98X6nQjSpn
+ nW7Kz/iUgypci9M75WvNwtn71vyG7YU=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1624519774;
+ s=susede2_ed25519; t=1624519775;
  h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=p7hIscDicVLyq+MeIWmpJ6iRJMyr/DvDZycVYDakYTE=;
- b=5UUxftsahaUKpXEKJ0/dlzPZVIOzQJhllg6RWwQG/sjpZBXB3WBirQ26riJs9J8M3od8zD
- zS9V+T5EhA0v+4DA==
-Received: from imap3-int (imap-alt.suse-dmz.suse.de [192.168.254.47])
- by imap.suse.de (Postfix) with ESMTP id 312AF11A97;
- Thu, 24 Jun 2021 07:29:33 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1624519774; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=p7hIscDicVLyq+MeIWmpJ6iRJMyr/DvDZycVYDakYTE=;
- b=rSUB50BnQ2ZTHuQLv4dB1NfJKrnWMa3YIfDGsD7nWIJXlsWaJ4T37ysokyiElhS6y4mMM/
- hR0fotQhK6yZ2z/pltCG1CgHXORYlhZkGL7YjYY8oVj5hVl1d9EJsDs9zm8ag8FnRZdX9Q
- WC6WPs38wf7GFSmpjjeA6NYGAYlGSWg=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1624519774;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=p7hIscDicVLyq+MeIWmpJ6iRJMyr/DvDZycVYDakYTE=;
- b=5UUxftsahaUKpXEKJ0/dlzPZVIOzQJhllg6RWwQG/sjpZBXB3WBirQ26riJs9J8M3od8zD
- zS9V+T5EhA0v+4DA==
+ bh=cefLiwg7lmTrptqKmwk+oKG5ua0i1ugGlGhhGVH/wSk=;
+ b=RvafANTFwNplD06NmTnpVdLAyIvwSZQJ86TKupF6ZVzk/3PVUEoBug5nrIUOiqTKD0DU2L
+ V1rtmwyHj2xU98Cw==
 Received: from director2.suse.de ([192.168.254.72]) by imap3-int with ESMTPSA
- id ODkpC1001GAJfwAALh3uQQ
- (envelope-from <tzimmermann@suse.de>); Thu, 24 Jun 2021 07:29:33 +0000
+ id 4NvxFV401GAJfwAALh3uQQ
+ (envelope-from <tzimmermann@suse.de>); Thu, 24 Jun 2021 07:29:34 +0000
 From: Thomas Zimmermann <tzimmermann@suse.de>
 To: daniel@ffwll.ch, airlied@linux.ie, alexander.deucher@amd.com,
  christian.koenig@amd.com, Xinhui.Pan@amd.com, james.qian.wang@arm.com,
@@ -83,14 +83,14 @@ To: daniel@ffwll.ch, airlied@linux.ie, alexander.deucher@amd.com,
  rodrigo.vivi@intel.com, linux@armlinux.org.uk,
  kieran.bingham+renesas@ideasonboard.com, rodrigosiqueiramelo@gmail.com,
  melissa.srw@gmail.com, hamohammed.sa@gmail.com
-Date: Thu, 24 Jun 2021 09:29:01 +0200
-Message-Id: <20210624072916.27703-13-tzimmermann@suse.de>
+Date: Thu, 24 Jun 2021 09:29:02 +0200
+Message-Id: <20210624072916.27703-14-tzimmermann@suse.de>
 X-Mailer: git-send-email 2.32.0
 In-Reply-To: <20210624072916.27703-1-tzimmermann@suse.de>
 References: <20210624072916.27703-1-tzimmermann@suse.de>
 MIME-Version: 1.0
 X-Mailman-Approved-At: Sun, 27 Jun 2021 03:34:44 +0000
-Subject: [Nouveau] [PATCH v3 12/27] drm/imx/dcss: Don't set struct
+Subject: [Nouveau] [PATCH v3 13/27] drm/mediatek: Don't set struct
  drm_device.irq_enabled
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -115,37 +115,32 @@ Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 The field drm_device.irq_enabled is only used by legacy drivers
-with userspace modesetting. Don't set it in dcss.
+with userspace modesetting. Don't set it in mediatek.
 
 Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
 Reviewed-by: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
-Acked-by: Laurentiu Palcu <laurentiu.palcu@oss.nxp.com>
 Acked-by: Daniel Vetter <daniel.vetter@ffwll.ch>
 ---
- drivers/gpu/drm/imx/dcss/dcss-kms.c | 3 ---
- 1 file changed, 3 deletions(-)
+ drivers/gpu/drm/mediatek/mtk_drm_drv.c | 6 ------
+ 1 file changed, 6 deletions(-)
 
-diff --git a/drivers/gpu/drm/imx/dcss/dcss-kms.c b/drivers/gpu/drm/imx/dcss/dcss-kms.c
-index 37ae68a7fba5..917834b1c80e 100644
---- a/drivers/gpu/drm/imx/dcss/dcss-kms.c
-+++ b/drivers/gpu/drm/imx/dcss/dcss-kms.c
-@@ -133,8 +133,6 @@ struct dcss_kms_dev *dcss_kms_attach(struct dcss_dev *dcss)
- 	if (ret)
- 		goto cleanup_mode_config;
+diff --git a/drivers/gpu/drm/mediatek/mtk_drm_drv.c b/drivers/gpu/drm/mediatek/mtk_drm_drv.c
+index b46bdb8985da..9b60bec33d3b 100644
+--- a/drivers/gpu/drm/mediatek/mtk_drm_drv.c
++++ b/drivers/gpu/drm/mediatek/mtk_drm_drv.c
+@@ -270,12 +270,6 @@ static int mtk_drm_kms_init(struct drm_device *drm)
+ 		goto err_component_unbind;
+ 	}
  
+-	/*
+-	 * We don't use the drm_irq_install() helpers provided by the DRM
+-	 * core, so we need to set this manually in order to allow the
+-	 * DRM_IOCTL_WAIT_VBLANK to operate correctly.
+-	 */
 -	drm->irq_enabled = true;
--
- 	ret = dcss_kms_bridge_connector_init(kms);
- 	if (ret)
- 		goto cleanup_mode_config;
-@@ -178,7 +176,6 @@ void dcss_kms_detach(struct dcss_kms_dev *kms)
- 	drm_kms_helper_poll_fini(drm);
- 	drm_atomic_helper_shutdown(drm);
- 	drm_crtc_vblank_off(&kms->crtc.base);
--	drm->irq_enabled = false;
- 	drm_mode_config_cleanup(drm);
- 	dcss_crtc_deinit(&kms->crtc, drm);
- 	drm->dev_private = NULL;
+ 	ret = drm_vblank_init(drm, MAX_CRTC);
+ 	if (ret < 0)
+ 		goto err_component_unbind;
 -- 
 2.32.0
 
