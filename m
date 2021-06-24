@@ -1,93 +1,40 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9255A3B5153
-	for <lists+nouveau@lfdr.de>; Sun, 27 Jun 2021 05:36:04 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id D7C543B5163
+	for <lists+nouveau@lfdr.de>; Sun, 27 Jun 2021 05:36:12 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C23936E1F9;
-	Sun, 27 Jun 2021 03:35:18 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 905E66E209;
+	Sun, 27 Jun 2021 03:35:29 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9580F6EB26;
- Thu, 24 Jun 2021 09:08:00 +0000 (UTC)
-Received: from imap.suse.de (imap-alt.suse-dmz.suse.de [192.168.254.47])
- (using TLSv1.2 with cipher ECDHE-ECDSA-AES128-GCM-SHA256 (128/128 bits))
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 0463E1FD66;
- Thu, 24 Jun 2021 09:07:59 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1624525679; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=rKL9mP48io+APDMklw5yU/nTFyyLtllrHvhRByxGfgM=;
- b=Fa003aqPNfKvMmB5gj67Z2b+vADOqXwJZbsZa1wLiyJFEYxd8Ib341pE3+k1q3LB/3NTPM
- sec4L/zG58xoB1lJqeaGcoJORFmdA4MYlT10zNcfBOK9OQqTDe4HPy2ViRmxXEaOVhWpeB
- stgCohp2fTLc+re6z5B7wGsQj3RuBdw=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1624525679;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=rKL9mP48io+APDMklw5yU/nTFyyLtllrHvhRByxGfgM=;
- b=5fbRrwXqzrlBotN6vVs6nYUPpayauPPnI+y3I6tTE09d75iLijxUx+ydMD0QEa5X+6VQch
- gQMq4UauX+vXn3AA==
-Received: from imap3-int (imap-alt.suse-dmz.suse.de [192.168.254.47])
- by imap.suse.de (Postfix) with ESMTP id D3DC011A97;
- Thu, 24 Jun 2021 09:07:57 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1624525678; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=rKL9mP48io+APDMklw5yU/nTFyyLtllrHvhRByxGfgM=;
- b=qka1M/+/Q0elb+Z4f6NaP+BgHuSA/yV87SJKUK7fBN5PWNEmX+fCZcno/5kvg/PzTE44iv
- joOoo0J1V3O+yOBF1zFmhwUrUs2dy9UjZf9K1YAFsRlSIR/viSN1/anfeuQcykgILCWH0K
- 16EhnP2e/GNrZU++exd36UAeNj2qNMU=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1624525678;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=rKL9mP48io+APDMklw5yU/nTFyyLtllrHvhRByxGfgM=;
- b=XNZZ2ccXjd52Zfc2lfinuyEZHBLa2WF7fIMYqmaGxOEk8UiNOL4HuWXLk8lyaE0Mmw9X8C
- niNIquqh21hULJCQ==
-Received: from director2.suse.de ([192.168.254.72]) by imap3-int with ESMTPSA
- id GA8HMm1L1GANNwAALh3uQQ
- (envelope-from <tzimmermann@suse.de>); Thu, 24 Jun 2021 09:07:57 +0000
-To: Jani Nikula <jani.nikula@linux.intel.com>, daniel@ffwll.ch,
- airlied@linux.ie, alexander.deucher@amd.com, christian.koenig@amd.com,
- Xinhui.Pan@amd.com, james.qian.wang@arm.com, liviu.dudau@arm.com,
- mihail.atanassov@arm.com, brian.starkey@arm.com,
- maarten.lankhorst@linux.intel.com, mripard@kernel.org, inki.dae@samsung.com,
- jy0922.shim@samsung.com, sw0312.kim@samsung.com, kyungmin.park@samsung.com,
- krzysztof.kozlowski@canonical.com, xinliang.liu@linaro.org,
- tiantao6@hisilicon.com, john.stultz@linaro.org,
- kong.kongxinwei@hisilicon.com, puck.chen@hisilicon.com,
- laurentiu.palcu@oss.nxp.com, l.stach@pengutronix.de, p.zabel@pengutronix.de,
- shawnguo@kernel.org, s.hauer@pengutronix.de, kernel@pengutronix.de,
- festevam@gmail.com, linux-imx@nxp.com, chunkuang.hu@kernel.org,
- matthias.bgg@gmail.com, bskeggs@redhat.com, tomba@kernel.org,
- hjc@rock-chips.com, heiko@sntech.de, benjamin.gaignard@linaro.org,
- yannick.fertre@foss.st.com, philippe.cornu@foss.st.com,
- mcoquelin.stm32@gmail.com, alexandre.torgue@foss.st.com, wens@csie.org,
- jernej.skrabec@gmail.com, thierry.reding@gmail.com, jonathanh@nvidia.com,
- jyri.sarha@iki.fi, emma@anholt.net, linux-graphics-maintainer@vmware.com,
- zackr@vmware.com, hyun.kwon@xilinx.com, laurent.pinchart@ideasonboard.com,
- michal.simek@xilinx.com, rodrigo.vivi@intel.com, linux@armlinux.org.uk,
- kieran.bingham+renesas@ideasonboard.com, rodrigosiqueiramelo@gmail.com,
- melissa.srw@gmail.com, hamohammed.sa@gmail.com
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by gabe.freedesktop.org (Postfix) with ESMTP id B3CB86EB4D;
+ Thu, 24 Jun 2021 10:27:34 +0000 (UTC)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 051AA31B;
+ Thu, 24 Jun 2021 03:27:34 -0700 (PDT)
+Received: from e110455-lin.cambridge.arm.com (usa-sjc-imap-foss1.foss.arm.com
+ [10.121.207.14])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id BA68A3F718;
+ Thu, 24 Jun 2021 03:27:33 -0700 (PDT)
+Received: by e110455-lin.cambridge.arm.com (Postfix, from userid 1000)
+ id 75E09684F2B; Thu, 24 Jun 2021 11:27:32 +0100 (BST)
+Date: Thu, 24 Jun 2021 11:27:32 +0100
+From: Liviu Dudau <liviu.dudau@arm.com>
+To: Thomas Zimmermann <tzimmermann@suse.de>
+Message-ID: <20210624102732.3h7lnsik7mkbphgw@e110455-lin.cambridge.arm.com>
 References: <20210624072916.27703-1-tzimmermann@suse.de>
- <20210624072916.27703-5-tzimmermann@suse.de> <87im23u1ok.fsf@intel.com>
- <b5e7729f-ed11-e9ca-386e-562feb2bd2b7@suse.de> <877dijtzl2.fsf@intel.com>
-From: Thomas Zimmermann <tzimmermann@suse.de>
-Message-ID: <af21db75-584f-aec0-9659-d5386f27b4ea@suse.de>
-Date: Thu, 24 Jun 2021 11:07:57 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.11.0
+ <20210624072916.27703-5-tzimmermann@suse.de>
+ <87im23u1ok.fsf@intel.com>
+ <b5e7729f-ed11-e9ca-386e-562feb2bd2b7@suse.de>
+ <877dijtzl2.fsf@intel.com>
+ <af21db75-584f-aec0-9659-d5386f27b4ea@suse.de>
 MIME-Version: 1.0
-In-Reply-To: <877dijtzl2.fsf@intel.com>
-X-Mailman-Approved-At: Sun, 27 Jun 2021 03:34:45 +0000
+Content-Disposition: inline
+In-Reply-To: <af21db75-584f-aec0-9659-d5386f27b4ea@suse.de>
+X-Mailman-Approved-At: Sun, 27 Jun 2021 03:34:44 +0000
 Subject: Re: [Nouveau] [PATCH v3 04/27] drm: Don't test for IRQ support in
  VBLANK ioctls
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -101,256 +48,121 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: linux-samsung-soc@vger.kernel.org, nouveau@lists.freedesktop.org,
- intel-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- linux-sunxi@lists.linux.dev, linux-rockchip@lists.infradead.org,
- linux-mediatek@lists.infradead.org, amd-gfx@lists.freedesktop.org,
- linux-tegra@vger.kernel.org, linux-stm32@st-md-mailman.stormreply.com,
- linux-arm-kernel@lists.infradead.org
-Content-Type: multipart/mixed; boundary="===============1098957270=="
+Cc: hamohammed.sa@gmail.com, heiko@sntech.de, emma@anholt.net, airlied@linux.ie,
+ nouveau@lists.freedesktop.org, rodrigo.vivi@intel.com,
+ alexandre.torgue@foss.st.com, dri-devel@lists.freedesktop.org,
+ michal.simek@xilinx.com, melissa.srw@gmail.com, linux-tegra@vger.kernel.org,
+ thierry.reding@gmail.com, laurent.pinchart@ideasonboard.com,
+ benjamin.gaignard@linaro.org, linux@armlinux.org.uk, mihail.atanassov@arm.com,
+ festevam@gmail.com, linux-stm32@st-md-mailman.stormreply.com,
+ linux-samsung-soc@vger.kernel.org, jy0922.shim@samsung.com,
+ krzysztof.kozlowski@canonical.com, linux-rockchip@lists.infradead.org,
+ linux-mediatek@lists.infradead.org, wens@csie.org, jernej.skrabec@gmail.com,
+ xinliang.liu@linaro.org, kong.kongxinwei@hisilicon.com,
+ james.qian.wang@arm.com, linux-imx@nxp.com,
+ linux-graphics-maintainer@vmware.com, intel-gfx@lists.freedesktop.org,
+ bskeggs@redhat.com, chunkuang.hu@kernel.org, p.zabel@pengutronix.de,
+ puck.chen@hisilicon.com, s.hauer@pengutronix.de,
+ maarten.lankhorst@linux.intel.com, Jani Nikula <jani.nikula@linux.intel.com>,
+ inki.dae@samsung.com, rodrigosiqueiramelo@gmail.com, john.stultz@linaro.org,
+ mripard@kernel.org, laurentiu.palcu@oss.nxp.com, matthias.bgg@gmail.com,
+ kernel@pengutronix.de, linux-arm-kernel@lists.infradead.org,
+ mcoquelin.stm32@gmail.com, amd-gfx@lists.freedesktop.org, hyun.kwon@xilinx.com,
+ tomba@kernel.org, jyri.sarha@iki.fi, yannick.fertre@foss.st.com,
+ Xinhui.Pan@amd.com, sw0312.kim@samsung.com, hjc@rock-chips.com,
+ christian.koenig@amd.com, linux-sunxi@lists.linux.dev,
+ kyungmin.park@samsung.com, kieran.bingham+renesas@ideasonboard.com,
+ philippe.cornu@foss.st.com, daniel@ffwll.ch, alexander.deucher@amd.com,
+ tiantao6@hisilicon.com, shawnguo@kernel.org, brian.starkey@arm.com,
+ zackr@vmware.com, l.stach@pengutronix.de
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============1098957270==
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="Yy3WbyUimc1Hxu4dvJZCfzpxTV3jVapRO"
-
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---Yy3WbyUimc1Hxu4dvJZCfzpxTV3jVapRO
-Content-Type: multipart/mixed; boundary="4JbZC3NkmBgthQugAZppQ3TwC7sIXD4e6";
- protected-headers="v1"
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: Jani Nikula <jani.nikula@linux.intel.com>, daniel@ffwll.ch,
- airlied@linux.ie, alexander.deucher@amd.com, christian.koenig@amd.com,
- Xinhui.Pan@amd.com, james.qian.wang@arm.com, liviu.dudau@arm.com,
- mihail.atanassov@arm.com, brian.starkey@arm.com,
- maarten.lankhorst@linux.intel.com, mripard@kernel.org, inki.dae@samsung.com,
- jy0922.shim@samsung.com, sw0312.kim@samsung.com, kyungmin.park@samsung.com,
- krzysztof.kozlowski@canonical.com, xinliang.liu@linaro.org,
- tiantao6@hisilicon.com, john.stultz@linaro.org,
- kong.kongxinwei@hisilicon.com, puck.chen@hisilicon.com,
- laurentiu.palcu@oss.nxp.com, l.stach@pengutronix.de, p.zabel@pengutronix.de,
- shawnguo@kernel.org, s.hauer@pengutronix.de, kernel@pengutronix.de,
- festevam@gmail.com, linux-imx@nxp.com, chunkuang.hu@kernel.org,
- matthias.bgg@gmail.com, bskeggs@redhat.com, tomba@kernel.org,
- hjc@rock-chips.com, heiko@sntech.de, benjamin.gaignard@linaro.org,
- yannick.fertre@foss.st.com, philippe.cornu@foss.st.com,
- mcoquelin.stm32@gmail.com, alexandre.torgue@foss.st.com, wens@csie.org,
- jernej.skrabec@gmail.com, thierry.reding@gmail.com, jonathanh@nvidia.com,
- jyri.sarha@iki.fi, emma@anholt.net, linux-graphics-maintainer@vmware.com,
- zackr@vmware.com, hyun.kwon@xilinx.com, laurent.pinchart@ideasonboard.com,
- michal.simek@xilinx.com, rodrigo.vivi@intel.com, linux@armlinux.org.uk,
- kieran.bingham+renesas@ideasonboard.com, rodrigosiqueiramelo@gmail.com,
- melissa.srw@gmail.com, hamohammed.sa@gmail.com
-Cc: linux-samsung-soc@vger.kernel.org, nouveau@lists.freedesktop.org,
- intel-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- linux-stm32@st-md-mailman.stormreply.com,
- linux-rockchip@lists.infradead.org, linux-mediatek@lists.infradead.org,
- amd-gfx@lists.freedesktop.org, Daniel Vetter <daniel.vetter@ffwll.ch>,
- linux-tegra@vger.kernel.org, linux-sunxi@lists.linux.dev,
- linux-arm-kernel@lists.infradead.org
-Message-ID: <af21db75-584f-aec0-9659-d5386f27b4ea@suse.de>
-Subject: Re: [PATCH v3 04/27] drm: Don't test for IRQ support in VBLANK ioctls
-References: <20210624072916.27703-1-tzimmermann@suse.de>
- <20210624072916.27703-5-tzimmermann@suse.de> <87im23u1ok.fsf@intel.com>
- <b5e7729f-ed11-e9ca-386e-562feb2bd2b7@suse.de> <877dijtzl2.fsf@intel.com>
-In-Reply-To: <877dijtzl2.fsf@intel.com>
-
---4JbZC3NkmBgthQugAZppQ3TwC7sIXD4e6
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
-
-Hi
-
-Am 24.06.21 um 10:51 schrieb Jani Nikula:
-> On Thu, 24 Jun 2021, Thomas Zimmermann <tzimmermann@suse.de> wrote:
->> Hi
->>
->> Am 24.06.21 um 10:06 schrieb Jani Nikula:
->>> On Thu, 24 Jun 2021, Thomas Zimmermann <tzimmermann@suse.de> wrote:
->>>> diff --git a/drivers/gpu/drm/drm_vblank.c b/drivers/gpu/drm/drm_vbla=
-nk.c
->>>> index 3417e1ac7918..10fe16bafcb6 100644
->>>> --- a/drivers/gpu/drm/drm_vblank.c
->>>> +++ b/drivers/gpu/drm/drm_vblank.c
->>>> @@ -1748,8 +1748,16 @@ int drm_wait_vblank_ioctl(struct drm_device *=
-dev, void *data,
->>>>    	unsigned int pipe_index;
->>>>    	unsigned int flags, pipe, high_pipe;
->>>>   =20
->>>> -	if (!dev->irq_enabled)
->>>> -		return -EOPNOTSUPP;
->>>> +#if defined(CONFIG_DRM_LEGACY)
->>>> +	if  (unlikely(drm_core_check_feature(dev, DRIVER_LEGACY))) {
->>>> +		if (!dev->irq_enabled)
->>>> +			return -EOPNOTSUPP;
->>>> +	} else /* if DRIVER_MODESET */
->>>> +#endif
->>>> +	{
->>>> +		if (!drm_dev_has_vblank(dev))
->>>> +			return -EOPNOTSUPP;
->>>> +	}
->>>
->>> Sheesh I hate this kind of inline #ifdefs.
->>>
->>> Two alternate suggestions that I believe should be as just efficient:=
-
->>
->> Or how about:
->>
->> static bool drm_wait_vblank_supported(struct drm_device *dev)
->>
->> {
->>
->> if defined(CONFIG_DRM_LEGACY)
->> 	if  (unlikely(drm_core_check_feature(dev, DRIVER_LEGACY)))
->>
->> 		return dev->irq_enabled;
->>
->> #endif
->> 	return drm_dev_has_vblank(dev);
->>
->> }
->>
->>
->> ?
->>
->> It's inline, but still readable.
->=20
-> It's definitely better than the original, but it's unclear to me why
-> you'd prefer this over option 2) below. I guess the only reason I can
-> think of is emphasizing the conditional compilation. However,
-> IS_ENABLED() is widely used in this manner specifically to avoid inline=
-
-> #if, and the compiler optimizes it away.
-
-It's simply more readable to me as the condition is simpler. But option=20
-2 is also ok.
-
-Best regards
-Thomas
-
->=20
-> BR,
-> Jani.
->=20
->=20
->>
->> Best regards
->> Thomas
->>
->>>
->>> 1) The more verbose:
->>>
->>> #if defined(CONFIG_DRM_LEGACY)
->>> static bool drm_wait_vblank_supported(struct drm_device *dev)
->>> {
->>> 	if  (unlikely(drm_core_check_feature(dev, DRIVER_LEGACY)))
->>> 		return dev->irq_enabled;
->>> 	else
->>> 		return drm_dev_has_vblank(dev);
->>> }
->>> #else
->>> static bool drm_wait_vblank_supported(struct drm_device *dev)
->>> {
->>> 	return drm_dev_has_vblank(dev);
->>> }
->>> #endif
->>>
->>> 2) The more compact:
->>>
->>> static bool drm_wait_vblank_supported(struct drm_device *dev)
->>> {
->>> 	if  (IS_ENABLED(CONFIG_DRM_LEGACY) && unlikely(drm_core_check_featur=
-e(dev, DRIVER_LEGACY)))
->>> 		return dev->irq_enabled;
->>> 	else
->>> 		return drm_dev_has_vblank(dev);
->>> }
->>>
->>> Then, in drm_wait_vblank_ioctl().
->>>
->>> 	if (!drm_wait_vblank_supported(dev))
->>> 		return -EOPNOTSUPP;
->>>
->>> The compiler should do the right thing without any explicit inline
->>> keywords etc.
->>>
->>> BR,
->>> Jani.
->>>
->>>>   =20
->>>>    	if (vblwait->request.type & _DRM_VBLANK_SIGNAL)
->>>>    		return -EINVAL;
->>>> @@ -2023,7 +2031,7 @@ int drm_crtc_get_sequence_ioctl(struct drm_dev=
-ice *dev, void *data,
->>>>    	if (!drm_core_check_feature(dev, DRIVER_MODESET))
->>>>    		return -EOPNOTSUPP;
->>>>   =20
->>>> -	if (!dev->irq_enabled)
->>>> +	if (!drm_dev_has_vblank(dev))
->>>>    		return -EOPNOTSUPP;
->>>>   =20
->>>>    	crtc =3D drm_crtc_find(dev, file_priv, get_seq->crtc_id);
->>>> @@ -2082,7 +2090,7 @@ int drm_crtc_queue_sequence_ioctl(struct drm_d=
-evice *dev, void *data,
->>>>    	if (!drm_core_check_feature(dev, DRIVER_MODESET))
->>>>    		return -EOPNOTSUPP;
->>>>   =20
->>>> -	if (!dev->irq_enabled)
->>>> +	if (!drm_dev_has_vblank(dev))
->>>>    		return -EOPNOTSUPP;
->>>>   =20
->>>>    	crtc =3D drm_crtc_find(dev, file_priv, queue_seq->crtc_id);
->>>
->=20
-
---=20
-Thomas Zimmermann
-Graphics Driver Developer
-SUSE Software Solutions Germany GmbH
-Maxfeldstr. 5, 90409 N=C3=BCrnberg, Germany
-(HRB 36809, AG N=C3=BCrnberg)
-Gesch=C3=A4ftsf=C3=BChrer: Felix Imend=C3=B6rffer
-
-
---4JbZC3NkmBgthQugAZppQ3TwC7sIXD4e6--
-
---Yy3WbyUimc1Hxu4dvJZCfzpxTV3jVapRO
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature"
-
------BEGIN PGP SIGNATURE-----
-
-wsF5BAABCAAjFiEExndm/fpuMUdwYFFolh/E3EQov+AFAmDUS20FAwAAAAAACgkQlh/E3EQov+Cd
-sQ//WrJ+cTjeCic8XWKP/6B1g/HO+aPRrvY0ktdf5gWjTVO6YN/FUVYp01LvOH8E1lh+mUmOWXlH
-6sTbGXnxD39Kch9JuZqlVwVDjG+SFSNcwJtHHF4D93/sMMgf0C00N0dUwPEFARmqTu091Ya/R3fI
-6iTBwu1GDLEcHDVaw5asnzmmDY9mMr7GIiJ4Kcy9I9fsdNybxG+P6Em3pMTBUlOFN6N4/GHrqs7I
-MjCvfDylb5jXxjPNMxQIeaevOwIi+xPTIZwGIeVdEhIpY6GHe8HKWFSqV2saCb9AoHW7vkNs0Tig
-ol8QFs1B/Yau/K39PCoRg1F8Y4nJaZfKL7JCHh0/bhhetCas1X4j8m1Y+jGPHIXFCh6orFNIqT+v
-J05PwfQ0vIz6bmxPxPt+KsHyf2RaYP6u5MPjfDICbAx1DPygVNuJLa+cUstqxoDqnPDNsK8a/s7b
-1MitJWn6UOhnwzkXomyZcKTxvRzZqFy0nAcbGYQyGmZHg7hW1ylSuuWddE5a3wFgXY2yN4GwUARa
-t3F4HqZ+cFDwQJrxZ7Lev/rHSEL+IduPHzjfun+HVUzuqk2X/n/7qrll6ne0HOmaTLX19qRbMsZp
-NsZn3eCBnJbhcNS6NJ8CA6iMkBSb3oYkXDafmo8zZ1rbKVLsMJxHeaa/x9f79Ooa24VXjdRx3g0o
-EqM=
-=Jf7v
------END PGP SIGNATURE-----
-
---Yy3WbyUimc1Hxu4dvJZCfzpxTV3jVapRO--
-
---===============1098957270==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
-_______________________________________________
-Nouveau mailing list
-Nouveau@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/nouveau
-
---===============1098957270==--
+T24gVGh1LCBKdW4gMjQsIDIwMjEgYXQgMTE6MDc6NTdBTSArMDIwMCwgVGhvbWFzIFppbW1lcm1h
+bm4gd3JvdGU6Cj4gSGkKPiAKPiBBbSAyNC4wNi4yMSB1bSAxMDo1MSBzY2hyaWViIEphbmkgTmlr
+dWxhOgo+ID4gT24gVGh1LCAyNCBKdW4gMjAyMSwgVGhvbWFzIFppbW1lcm1hbm4gPHR6aW1tZXJt
+YW5uQHN1c2UuZGU+IHdyb3RlOgo+ID4gPiBIaQo+ID4gPiAKPiA+ID4gQW0gMjQuMDYuMjEgdW0g
+MTA6MDYgc2NocmllYiBKYW5pIE5pa3VsYToKPiA+ID4gPiBPbiBUaHUsIDI0IEp1biAyMDIxLCBU
+aG9tYXMgWmltbWVybWFubiA8dHppbW1lcm1hbm5Ac3VzZS5kZT4gd3JvdGU6Cj4gPiA+ID4gPiBk
+aWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL2RybV92YmxhbmsuYyBiL2RyaXZlcnMvZ3B1L2Ry
+bS9kcm1fdmJsYW5rLmMKPiA+ID4gPiA+IGluZGV4IDM0MTdlMWFjNzkxOC4uMTBmZTE2YmFmY2I2
+IDEwMDY0NAo+ID4gPiA+ID4gLS0tIGEvZHJpdmVycy9ncHUvZHJtL2RybV92YmxhbmsuYwo+ID4g
+PiA+ID4gKysrIGIvZHJpdmVycy9ncHUvZHJtL2RybV92YmxhbmsuYwo+ID4gPiA+ID4gQEAgLTE3
+NDgsOCArMTc0OCwxNiBAQCBpbnQgZHJtX3dhaXRfdmJsYW5rX2lvY3RsKHN0cnVjdCBkcm1fZGV2
+aWNlICpkZXYsIHZvaWQgKmRhdGEsCj4gPiA+ID4gPiAgICAJdW5zaWduZWQgaW50IHBpcGVfaW5k
+ZXg7Cj4gPiA+ID4gPiAgICAJdW5zaWduZWQgaW50IGZsYWdzLCBwaXBlLCBoaWdoX3BpcGU7Cj4g
+PiA+ID4gPiAtCWlmICghZGV2LT5pcnFfZW5hYmxlZCkKPiA+ID4gPiA+IC0JCXJldHVybiAtRU9Q
+Tk9UU1VQUDsKPiA+ID4gPiA+ICsjaWYgZGVmaW5lZChDT05GSUdfRFJNX0xFR0FDWSkKPiA+ID4g
+PiA+ICsJaWYgICh1bmxpa2VseShkcm1fY29yZV9jaGVja19mZWF0dXJlKGRldiwgRFJJVkVSX0xF
+R0FDWSkpKSB7Cj4gPiA+ID4gPiArCQlpZiAoIWRldi0+aXJxX2VuYWJsZWQpCj4gPiA+ID4gPiAr
+CQkJcmV0dXJuIC1FT1BOT1RTVVBQOwo+ID4gPiA+ID4gKwl9IGVsc2UgLyogaWYgRFJJVkVSX01P
+REVTRVQgKi8KPiA+ID4gPiA+ICsjZW5kaWYKPiA+ID4gPiA+ICsJewo+ID4gPiA+ID4gKwkJaWYg
+KCFkcm1fZGV2X2hhc192YmxhbmsoZGV2KSkKPiA+ID4gPiA+ICsJCQlyZXR1cm4gLUVPUE5PVFNV
+UFA7Cj4gPiA+ID4gPiArCX0KPiA+ID4gPiAKPiA+ID4gPiBTaGVlc2ggSSBoYXRlIHRoaXMga2lu
+ZCBvZiBpbmxpbmUgI2lmZGVmcy4KPiA+ID4gPiAKPiA+ID4gPiBUd28gYWx0ZXJuYXRlIHN1Z2dl
+c3Rpb25zIHRoYXQgSSBiZWxpZXZlIHNob3VsZCBiZSBhcyBqdXN0IGVmZmljaWVudDoKPiA+ID4g
+Cj4gPiA+IE9yIGhvdyBhYm91dDoKPiA+ID4gCj4gPiA+IHN0YXRpYyBib29sIGRybV93YWl0X3Zi
+bGFua19zdXBwb3J0ZWQoc3RydWN0IGRybV9kZXZpY2UgKmRldikKPiA+ID4gCj4gPiA+IHsKPiA+
+ID4gCj4gPiA+IGlmIGRlZmluZWQoQ09ORklHX0RSTV9MRUdBQ1kpCj4gPiA+IAlpZiAgKHVubGlr
+ZWx5KGRybV9jb3JlX2NoZWNrX2ZlYXR1cmUoZGV2LCBEUklWRVJfTEVHQUNZKSkpCj4gPiA+IAo+
+ID4gPiAJCXJldHVybiBkZXYtPmlycV9lbmFibGVkOwo+ID4gPiAKPiA+ID4gI2VuZGlmCj4gPiA+
+IAlyZXR1cm4gZHJtX2Rldl9oYXNfdmJsYW5rKGRldik7Cj4gPiA+IAo+ID4gPiB9Cj4gPiA+IAo+
+ID4gPiAKPiA+ID4gPwo+ID4gPiAKPiA+ID4gSXQncyBpbmxpbmUsIGJ1dCBzdGlsbCByZWFkYWJs
+ZS4KPiA+IAo+ID4gSXQncyBkZWZpbml0ZWx5IGJldHRlciB0aGFuIHRoZSBvcmlnaW5hbCwgYnV0
+IGl0J3MgdW5jbGVhciB0byBtZSB3aHkKPiA+IHlvdSdkIHByZWZlciB0aGlzIG92ZXIgb3B0aW9u
+IDIpIGJlbG93LiBJIGd1ZXNzIHRoZSBvbmx5IHJlYXNvbiBJIGNhbgo+ID4gdGhpbmsgb2YgaXMg
+ZW1waGFzaXppbmcgdGhlIGNvbmRpdGlvbmFsIGNvbXBpbGF0aW9uLiBIb3dldmVyLAo+ID4gSVNf
+RU5BQkxFRCgpIGlzIHdpZGVseSB1c2VkIGluIHRoaXMgbWFubmVyIHNwZWNpZmljYWxseSB0byBh
+dm9pZCBpbmxpbmUKPiA+ICNpZiwgYW5kIHRoZSBjb21waWxlciBvcHRpbWl6ZXMgaXQgYXdheS4K
+PiAKPiBJdCdzIHNpbXBseSBtb3JlIHJlYWRhYmxlIHRvIG1lIGFzIHRoZSBjb25kaXRpb24gaXMg
+c2ltcGxlci4gQnV0IG9wdGlvbiAyIGlzCj4gYWxzbyBvay4KCkVpdGhlciBvcHRpb24gbG9va3Mg
+Z29vZCB0byBtZS4KClJldmlld2VkLWJ5OiBMaXZpdSBEdWRhdSA8bGl2aXUuZHVkYXVAYXJtLmNv
+bT4KClRoYW5rcyBmb3IgZG9pbmcgdGhhdCEKTGl2aXUKCj4gCj4gQmVzdCByZWdhcmRzCj4gVGhv
+bWFzCj4gCj4gPiAKPiA+IEJSLAo+ID4gSmFuaS4KPiA+IAo+ID4gCj4gPiA+IAo+ID4gPiBCZXN0
+IHJlZ2FyZHMKPiA+ID4gVGhvbWFzCj4gPiA+IAo+ID4gPiA+IAo+ID4gPiA+IDEpIFRoZSBtb3Jl
+IHZlcmJvc2U6Cj4gPiA+ID4gCj4gPiA+ID4gI2lmIGRlZmluZWQoQ09ORklHX0RSTV9MRUdBQ1kp
+Cj4gPiA+ID4gc3RhdGljIGJvb2wgZHJtX3dhaXRfdmJsYW5rX3N1cHBvcnRlZChzdHJ1Y3QgZHJt
+X2RldmljZSAqZGV2KQo+ID4gPiA+IHsKPiA+ID4gPiAJaWYgICh1bmxpa2VseShkcm1fY29yZV9j
+aGVja19mZWF0dXJlKGRldiwgRFJJVkVSX0xFR0FDWSkpKQo+ID4gPiA+IAkJcmV0dXJuIGRldi0+
+aXJxX2VuYWJsZWQ7Cj4gPiA+ID4gCWVsc2UKPiA+ID4gPiAJCXJldHVybiBkcm1fZGV2X2hhc192
+YmxhbmsoZGV2KTsKPiA+ID4gPiB9Cj4gPiA+ID4gI2Vsc2UKPiA+ID4gPiBzdGF0aWMgYm9vbCBk
+cm1fd2FpdF92Ymxhbmtfc3VwcG9ydGVkKHN0cnVjdCBkcm1fZGV2aWNlICpkZXYpCj4gPiA+ID4g
+ewo+ID4gPiA+IAlyZXR1cm4gZHJtX2Rldl9oYXNfdmJsYW5rKGRldik7Cj4gPiA+ID4gfQo+ID4g
+PiA+ICNlbmRpZgo+ID4gPiA+IAo+ID4gPiA+IDIpIFRoZSBtb3JlIGNvbXBhY3Q6Cj4gPiA+ID4g
+Cj4gPiA+ID4gc3RhdGljIGJvb2wgZHJtX3dhaXRfdmJsYW5rX3N1cHBvcnRlZChzdHJ1Y3QgZHJt
+X2RldmljZSAqZGV2KQo+ID4gPiA+IHsKPiA+ID4gPiAJaWYgIChJU19FTkFCTEVEKENPTkZJR19E
+Uk1fTEVHQUNZKSAmJiB1bmxpa2VseShkcm1fY29yZV9jaGVja19mZWF0dXJlKGRldiwgRFJJVkVS
+X0xFR0FDWSkpKQo+ID4gPiA+IAkJcmV0dXJuIGRldi0+aXJxX2VuYWJsZWQ7Cj4gPiA+ID4gCWVs
+c2UKPiA+ID4gPiAJCXJldHVybiBkcm1fZGV2X2hhc192YmxhbmsoZGV2KTsKPiA+ID4gPiB9Cj4g
+PiA+ID4gCj4gPiA+ID4gVGhlbiwgaW4gZHJtX3dhaXRfdmJsYW5rX2lvY3RsKCkuCj4gPiA+ID4g
+Cj4gPiA+ID4gCWlmICghZHJtX3dhaXRfdmJsYW5rX3N1cHBvcnRlZChkZXYpKQo+ID4gPiA+IAkJ
+cmV0dXJuIC1FT1BOT1RTVVBQOwo+ID4gPiA+IAo+ID4gPiA+IFRoZSBjb21waWxlciBzaG91bGQg
+ZG8gdGhlIHJpZ2h0IHRoaW5nIHdpdGhvdXQgYW55IGV4cGxpY2l0IGlubGluZQo+ID4gPiA+IGtl
+eXdvcmRzIGV0Yy4KPiA+ID4gPiAKPiA+ID4gPiBCUiwKPiA+ID4gPiBKYW5pLgo+ID4gPiA+IAo+
+ID4gPiA+ID4gICAgCWlmICh2Ymx3YWl0LT5yZXF1ZXN0LnR5cGUgJiBfRFJNX1ZCTEFOS19TSUdO
+QUwpCj4gPiA+ID4gPiAgICAJCXJldHVybiAtRUlOVkFMOwo+ID4gPiA+ID4gQEAgLTIwMjMsNyAr
+MjAzMSw3IEBAIGludCBkcm1fY3J0Y19nZXRfc2VxdWVuY2VfaW9jdGwoc3RydWN0IGRybV9kZXZp
+Y2UgKmRldiwgdm9pZCAqZGF0YSwKPiA+ID4gPiA+ICAgIAlpZiAoIWRybV9jb3JlX2NoZWNrX2Zl
+YXR1cmUoZGV2LCBEUklWRVJfTU9ERVNFVCkpCj4gPiA+ID4gPiAgICAJCXJldHVybiAtRU9QTk9U
+U1VQUDsKPiA+ID4gPiA+IC0JaWYgKCFkZXYtPmlycV9lbmFibGVkKQo+ID4gPiA+ID4gKwlpZiAo
+IWRybV9kZXZfaGFzX3ZibGFuayhkZXYpKQo+ID4gPiA+ID4gICAgCQlyZXR1cm4gLUVPUE5PVFNV
+UFA7Cj4gPiA+ID4gPiAgICAJY3J0YyA9IGRybV9jcnRjX2ZpbmQoZGV2LCBmaWxlX3ByaXYsIGdl
+dF9zZXEtPmNydGNfaWQpOwo+ID4gPiA+ID4gQEAgLTIwODIsNyArMjA5MCw3IEBAIGludCBkcm1f
+Y3J0Y19xdWV1ZV9zZXF1ZW5jZV9pb2N0bChzdHJ1Y3QgZHJtX2RldmljZSAqZGV2LCB2b2lkICpk
+YXRhLAo+ID4gPiA+ID4gICAgCWlmICghZHJtX2NvcmVfY2hlY2tfZmVhdHVyZShkZXYsIERSSVZF
+Ul9NT0RFU0VUKSkKPiA+ID4gPiA+ICAgIAkJcmV0dXJuIC1FT1BOT1RTVVBQOwo+ID4gPiA+ID4g
+LQlpZiAoIWRldi0+aXJxX2VuYWJsZWQpCj4gPiA+ID4gPiArCWlmICghZHJtX2Rldl9oYXNfdmJs
+YW5rKGRldikpCj4gPiA+ID4gPiAgICAJCXJldHVybiAtRU9QTk9UU1VQUDsKPiA+ID4gPiA+ICAg
+IAljcnRjID0gZHJtX2NydGNfZmluZChkZXYsIGZpbGVfcHJpdiwgcXVldWVfc2VxLT5jcnRjX2lk
+KTsKPiA+ID4gPiAKPiA+IAo+IAo+IC0tIAo+IFRob21hcyBaaW1tZXJtYW5uCj4gR3JhcGhpY3Mg
+RHJpdmVyIERldmVsb3Blcgo+IFNVU0UgU29mdHdhcmUgU29sdXRpb25zIEdlcm1hbnkgR21iSAo+
+IE1heGZlbGRzdHIuIDUsIDkwNDA5IE7DvHJuYmVyZywgR2VybWFueQo+IChIUkIgMzY4MDksIEFH
+IE7DvHJuYmVyZykKPiBHZXNjaMOkZnRzZsO8aHJlcjogRmVsaXggSW1lbmTDtnJmZmVyCj4gCgoK
+CgotLSAKPT09PT09PT09PT09PT09PT09PT0KfCBJIHdvdWxkIGxpa2UgdG8gfAp8IGZpeCB0aGUg
+d29ybGQsICB8CnwgYnV0IHRoZXkncmUgbm90IHwKfCBnaXZpbmcgbWUgdGhlICAgfAogXCBzb3Vy
+Y2UgY29kZSEgIC8KICAtLS0tLS0tLS0tLS0tLS0KICAgIMKvXF8o44OEKV8vwq8KX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVhdSBtYWlsaW5nIGxp
+c3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVza3Rv
+cC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1Cg==
