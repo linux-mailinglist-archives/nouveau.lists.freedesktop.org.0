@@ -1,68 +1,43 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D449F3B76DC
-	for <lists+nouveau@lfdr.de>; Tue, 29 Jun 2021 19:03:47 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 286D23B7B8D
+	for <lists+nouveau@lfdr.de>; Wed, 30 Jun 2021 04:31:35 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 63CD789CDD;
-	Tue, 29 Jun 2021 17:03:45 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 22CE76E920;
+	Wed, 30 Jun 2021 02:31:28 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
- [IPv6:2a00:1450:4864:20::429])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0396D89CD5
- for <nouveau@lists.freedesktop.org>; Tue, 29 Jun 2021 17:03:44 +0000 (UTC)
-Received: by mail-wr1-x429.google.com with SMTP id p8so85051wrr.1
- for <nouveau@lists.freedesktop.org>; Tue, 29 Jun 2021 10:03:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20150623.gappssmtp.com; s=20150623;
- h=subject:to:cc:references:from:organization:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=1mzwo7wjAUa0IJEbXNRwxkpgdnTr5r+kaQt26hfpS9Q=;
- b=QmmxT28DkHNzpao9vOpgiqd/+dJLsDibGQbrStNZ7JbAn0dorBqHkDj0WWKEfZk7OQ
- FNxBzNYYbYzgKsCZ0j18iEU1KtSxaIL4Fyk8uM4HCQ67154O4rhEmH9kLiuRXoOrC5q7
- S624F07BLgYEYsvGXAHARz0QA4dg1CTiaNym2G/4ZRiWeANMPe2N15L3MveDp/WgRSYk
- IJA2nKKslgAsYg8dbGq8sMAXlDTQQYlDUbjGPAMWzEYVYvDRIOTDYXncAhpesbhqxL40
- 4Pb94hp2YdPRJ2JAMke+tMLiLTqa8JIZadNCDJ75yRoh9swK/MMMGXHQQBoAwR42SkSD
- djPw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:organization
- :message-id:date:user-agent:mime-version:in-reply-to
- :content-language:content-transfer-encoding;
- bh=1mzwo7wjAUa0IJEbXNRwxkpgdnTr5r+kaQt26hfpS9Q=;
- b=Y18/a0uTAXqWTK54v/4SZdwMTrPlI+T9DheZrKcvdzQcVhdQdgF0euIn7weToHDTsY
- QnXmKcBYLWnHp9pqtrS49wEjO+gjopk/UTZsXkLM3yNLMfYK4EGb3CbHXk63FOXuVX32
- S0r+VC+rlUs6LxdrdZfslzvr/s95TlOIOJRGNPO8aY+N8UX7yh4CWhLRNW1OAOe/a47f
- Rds23Fpt9oF3WuP8jTrgoE9PCgMA8jAth5b6R8ncYfRJVwPJL4IDAmt3fgDr8JhQ9UxN
- OyMqyyycIvpBo+PNP0O6jAzndzE6urc8+lPTJrxBrfa5ieGEUXdDsJPzYuH9/1p606fE
- wotQ==
-X-Gm-Message-State: AOAM530bYNIB0BoX0WxjitHam4O2b6qiDZ8T9IikytVT5plDnHHUk9ma
- PWN0ukDx+nSRF7e10FWfdLUMzw==
-X-Google-Smtp-Source: ABdhPJw9BHdV2PhR+4EY9fQcITZ83GZhxsD5N3hVP1Z53THaNgNupwsLwr8mtFaReraEAQtYUI3qaQ==
-X-Received: by 2002:adf:ff8e:: with SMTP id j14mr34485328wrr.374.1624986222594; 
- Tue, 29 Jun 2021 10:03:42 -0700 (PDT)
-Received: from ?IPv6:2001:861:44c0:66c0:9ed5:b63d:622c:fb4e?
- ([2001:861:44c0:66c0:9ed5:b63d:622c:fb4e])
- by smtp.gmail.com with ESMTPSA id h10sm3399285wmb.40.2021.06.29.10.03.37
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 29 Jun 2021 10:03:37 -0700 (PDT)
-To: Thomas Zimmermann <tzimmermann@suse.de>, daniel@ffwll.ch,
- airlied@redhat.com
-References: <20210629135833.22679-1-tzimmermann@suse.de>
-From: Neil Armstrong <narmstrong@baylibre.com>
-Organization: Baylibre
-Message-ID: <32c2b8f1-e8e5-c161-ed87-f80190173552@baylibre.com>
-Date: Tue, 29 Jun 2021 19:03:36 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.11.0
-MIME-Version: 1.0
-In-Reply-To: <20210629135833.22679-1-tzimmermann@suse.de>
-Content-Language: en-US
-Subject: Re: [Nouveau] [PATCH] drm/aperture: Pass DRM driver structure
- instead of driver name
+X-Greylist: delayed 929 seconds by postgrey-1.36 at gabe;
+ Sun, 27 Jun 2021 08:16:22 UTC
+Received: from m12-15.163.com (m12-15.163.com [220.181.12.15])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 7B12E89FDE;
+ Sun, 27 Jun 2021 08:16:22 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+ s=s110527; h=From:Subject:Date:Message-Id; bh=dn2OHWnaKzUjkxfP+B
+ r0ExjTZGAQz9D9C9SLtoPnw2c=; b=Oi2znL7XpqCdHeQt9vqzwmrv3SU8ouRVaj
+ DveHEikK1nTJNbiJ5Lp9Eg/sEJAg6458eA9fVJRj+zOMfYH53b/FwOo/+NT8IRXH
+ EzgutytcRdtqZhSBPpLnIny0ksHEr1p3c94cixtt0JwSG/ucE2VueDv30ZIO+BGd
+ f0N+NNZqQ=
+Received: from LAPTOP-UKSR4ENP.internal.baidu.com (unknown [39.183.0.171])
+ by smtp11 (Coremail) with SMTP id D8CowADHz_fpL9hgJ7k8Ag--.1973S4;
+ Sun, 27 Jun 2021 15:59:57 +0800 (CST)
+From: Cai Huoqing <caihuoqing1990@163.com>
+To: bskeggs@redhat.com, airlied@linux.ie, daniel@ffwll.ch, kherbst@redhat.com
+Date: Sun, 27 Jun 2021 15:59:35 +0800
+Message-Id: <20210627075935.373-1-caihuoqing1990@163.com>
+X-Mailer: git-send-email 2.17.1
+X-CM-TRANSID: D8CowADHz_fpL9hgJ7k8Ag--.1973S4
+X-Coremail-Antispam: 1Uf129KBjvJXoW7ZF4kWFykJw13Kw4rKr1kuFg_yoW8Jw43pF
+ 48Ca47ZF4DKws2gr40yF18ZF9IyanrJFyxGFyjy3sYgw4Fyr98Xr4rJry5ArW5JFyxuay3
+ tF9rKasIv3WjkaDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07jYGQDUUUUU=
+X-Originating-IP: [39.183.0.171]
+X-CM-SenderInfo: xfdlx3xrtl0warzziqqrwthudrp/1tbiMB2+plWByBTxdAAAs4
+X-Mailman-Approved-At: Wed, 30 Jun 2021 02:31:24 +0000
+Subject: [Nouveau] [PATCH v2] drm/nouveau: remove unused varialble "struct
+ device *dev"
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -74,53 +49,62 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: linux-hyperv@vger.kernel.org, nouveau@lists.freedesktop.org,
- intel-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- virtualization@lists.linux-foundation.org, linux-rockchip@lists.infradead.org,
- amd-gfx@lists.freedesktop.org, linux-arm-msm@vger.kernel.org,
- linux-tegra@vger.kernel.org, spice-devel@lists.freedesktop.org,
- linux-amlogic@lists.infradead.org, freedreno@lists.freedesktop.org,
- linux-sunxi@lists.linux.dev, linux-arm-kernel@lists.infradead.org
+Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, nouveau-bounces@lists.freedesktop.org
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi,
+From: Cai Huoqing <caihuoqing@baidu.com>
 
-On 29/06/2021 15:58, Thomas Zimmermann wrote:
-> Print the name of the DRM driver when taking over fbdev devices. Makes
-> the output to dmesg more consistent. Note that the driver name is only
-> used for printing a string to the kernel log. No UAPI is affected by this
-> change.
-> 
-> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-> ---
+fix the warning- variable 'dev' set but not used
 
-...
+Signed-off-by: Cai Huoqing <caihuoqing@baidu.com>
+Reviewed-by: Karol Herbst <kherbst@redhat.com>
+---
+ drivers/gpu/drm/nouveau/nouveau_bo.c | 4 ----
+ 1 file changed, 4 deletions(-)
 
->  drivers/gpu/drm/meson/meson_drv.c             |  2 +-
+diff --git a/drivers/gpu/drm/nouveau/nouveau_bo.c b/drivers/gpu/drm/nouveau/nouveau_bo.c
+index 984721bf3ab4..cb3ff4ae203e 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_bo.c
++++ b/drivers/gpu/drm/nouveau/nouveau_bo.c
+@@ -1242,7 +1242,6 @@ nouveau_ttm_tt_populate(struct ttm_device *bdev,
+ {
+        struct ttm_tt *ttm_dma = (void *)ttm;
+        struct nouveau_drm *drm;
+-       struct device *dev;
+        bool slave = !!(ttm->page_flags & TTM_PAGE_FLAG_SG);
 
-Acked-by: Neil Armstrong <narmstrong@baylibre.com>
+        if (ttm_tt_is_populated(ttm))
+@@ -1255,7 +1254,6 @@ nouveau_ttm_tt_populate(struct ttm_device *bdev,
+        }
 
-...
+        drm = nouveau_bdev(bdev);
+-       dev = drm->dev->dev;
 
->  
-> diff --git a/drivers/gpu/drm/meson/meson_drv.c b/drivers/gpu/drm/meson/meson_drv.c
-> index a7388bf7c838..3d0ccc7eef1b 100644
-> --- a/drivers/gpu/drm/meson/meson_drv.c
-> +++ b/drivers/gpu/drm/meson/meson_drv.c
-> @@ -285,7 +285,7 @@ static int meson_drv_bind_master(struct device *dev, bool has_components)
->  	 * Remove early framebuffers (ie. simplefb). The framebuffer can be
->  	 * located anywhere in RAM
->  	 */
-> -	ret = drm_aperture_remove_framebuffers(false, "meson-drm-fb");
-> +	ret = drm_aperture_remove_framebuffers(false, &meson_driver);
->  	if (ret)
->  		goto free_drm;
->  
+        return ttm_pool_alloc(&drm->ttm.bdev.pool, ttm, ctx);
+ }
+@@ -1265,14 +1263,12 @@ nouveau_ttm_tt_unpopulate(struct ttm_device *bdev,
+                          struct ttm_tt *ttm)
+ {
+        struct nouveau_drm *drm;
+-       struct device *dev;
+        bool slave = !!(ttm->page_flags & TTM_PAGE_FLAG_SG);
 
-...
+        if (slave)
+                return;
+
+        drm = nouveau_bdev(bdev);
+-       dev = drm->dev->dev;
+
+        return ttm_pool_free(&drm->ttm.bdev.pool, ttm);
+ }
+--
+2.17.1
+
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
