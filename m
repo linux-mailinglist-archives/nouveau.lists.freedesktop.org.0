@@ -2,61 +2,41 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id A0FD73B5886
-	for <lists+nouveau@lfdr.de>; Mon, 28 Jun 2021 07:13:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0EAE43B6A25
+	for <lists+nouveau@lfdr.de>; Mon, 28 Jun 2021 23:21:02 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 68A6E6E0B7;
-	Mon, 28 Jun 2021 05:13:25 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C1A526E575;
+	Mon, 28 Jun 2021 21:20:58 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 308 seconds by postgrey-1.36 at gabe;
- Mon, 28 Jun 2021 05:13:23 UTC
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 272966E0B7
- for <nouveau@lists.freedesktop.org>; Mon, 28 Jun 2021 05:13:22 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.net;
- s=badeba3b8450; t=1624857201;
- bh=p4NyXCslf/2NNSWvkidrJjQDtMBO2qbsRymu1UVAzTo=;
- h=X-UI-Sender-Class:Subject:From:To:Cc:Date:In-Reply-To:References;
- b=EbbC6a+6oW3Rq54dCHDjxLvLMjtlQLie9yLk8QHl2ugoqbneZvvBVdeG8wY4JN6Uq
- Kk5aD5zFtkvXCiPyOfnD3KWA6X1cdG6A9gICTJ+jmZdEo3Murvw9F+mHDYj5QA6CuT
- RRLvCBBnNPkgQiaxRjVxqW7JEoIjxyWLmwvHZaCw=
-X-UI-Sender-Class: 01bb95c1-4bf8-414a-932a-4f6e2808ef9c
-Received: from homer.fritz.box ([185.221.151.107]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MxUnz-1l06Wx2oo5-00xwDP; Mon, 28
- Jun 2021 07:08:10 +0200
-Message-ID: <9e57eba845860ec1bc613478b62734b678310fa2.camel@gmx.de>
-From: Mike Galbraith <efault@gmx.de>
-To: lkml <linux-kernel@vger.kernel.org>
-Date: Mon, 28 Jun 2021 07:08:10 +0200
-In-Reply-To: <f3cb7efc616be532ab2dc9f3ac2e8611dd643888.camel@gmx.de>
-References: <f3cb7efc616be532ab2dc9f3ac2e8611dd643888.camel@gmx.de>
-User-Agent: Evolution 3.34.4 
+Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6C5DE6E575;
+ Mon, 28 Jun 2021 21:20:57 +0000 (UTC)
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 6076361D03;
+ Mon, 28 Jun 2021 21:20:56 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1624915257;
+ bh=uvJEh0sxCUzclhUTIdb3WixNobiqcA+N5C6zNMxBtcs=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=GDghOrgAGxjexYn0aH4rZguWqJav7fNkQ03GXpFl4PhPY9A3gPcd7keLU3vKi6bQu
+ CcXB1RpifGARIAMPQ580Auhk59LbATQMWeRrDgQ8hFYqeIanITckZuzJMhGHz3FjdQ
+ VuFAet1Ll9OSEmHKGdz/6PCz2bqbnnKGY0szDJNPBYuGMZaNghqgQE41boAugdbs3m
+ 1g4TwhIpvrIq+iFkE4yS4YNauYrekzvkwqCFZkaDH05xKOYQnUAbOxTerVQu5o9vVw
+ tyn8DW8GvkjVFE2cvb86XLkKyv0otRCNlBhRsbO5WwEKJnKL7qOGEktBn13S9NGrjZ
+ DUIdBha/rie3w==
+From: Sasha Levin <sashal@kernel.org>
+To: linux-kernel@vger.kernel.org,
+	stable@vger.kernel.org
+Date: Mon, 28 Jun 2021 17:20:50 -0400
+Message-Id: <20210628212051.43265-4-sashal@kernel.org>
+X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20210628212051.43265-1-sashal@kernel.org>
+References: <20210628212051.43265-1-sashal@kernel.org>
 MIME-Version: 1.0
-X-Provags-ID: V03:K1:E+6AU6Qt5ySmV7t1Tfx6olcMt6iU91fFVtD8qMcCMNx50Mjx3Y4
- eAc6W12nOttRYjTDfVYy1o7xlO/HqmeX3b6ja02+DNtu2WjR7w+7O9RcWtwksyYmLRj9Q+M
- 09D0IIOyAxQnPNrHDBPk8WvDsBgd6n7v8L6kKlnuPmsh9znedK/fCs3cFT6e1kcpy7KwTsk
- ieAWhf138rQpu7ibUC1QA==
-X-Spam-Flag: NO
-X-UI-Out-Filterresults: notjunk:1;V03:K0:d1sAKHHrs34=:LcCVNDB+TPrQJwqiBsXnfI
- bzGeKHp3s3XkAL4VcS0cIeXgrE8cUTVvtGYmvD1Azrr9p/SWJQcYpit5IhwBLjRaix5Jk8gPf
- EoTLuQUsP+vndo+aCyRSPxsPTC2d11kLrOt9uFHCdM00MN/Q+ATJtq5YEWjTW2lIJoawbl+bz
- B+YtVdeqaEmgIOhIJamlp4zD9ILJD83LvrxQi4+u2fqVuZJbK0h2bG7no0Y2rNuRNl77NgnVo
- drx21US8MhZKL86X6556UqIaG8i9lj7MXafYTIOhYi/4mQIKMJaz4qosBkxfHcnZo7KI+OynR
- VAzpa7OuWwQa6n3K0aK6TkJtqF4L/zYNSSeG1C3WWnHv4V993KMr9beC+Y52JY9MfF0vJMAs1
- IK4b3Ur2oDZZ1KSxbWnVGr2eOYT86K0b1A0YyYZ3/7pC8B2J8Ty01/fup42u2TKYBPRg1ZFi4
- BAq8gCpyQGe5Icjtnd32SuX6uzGoVIQlsnZ4jvoO7NYN4Xhze0fNuin9/Y38AcA1k17/ERERE
- zmaDeoFgvi28Rkh9nf5L0QAHGaMKFOBdEY0b5DcjSP6eEfqvfqfYXF7DQTe7vuW/izcVyCFid
- HszsQEQu/KFp4l5r4pldsDjSt2OkZzhLrEj+qH9z8m2PbRO8G1X4fWNB53Dy4PnZNP9JXXD9m
- Cv6mm0+5Vf9LUlO/jHB9sMOSNlNbdhKz5vvmAkW/uGzTkLnOolcxVgC1ps489sgeI6veSa3YX
- yr2GyaVdmWKcXfjxpg9gJMzFdsjmaZqr7+Kri+LCg5jvV9MsUJylCxC7NFJprGYWVuPxsfpFp
- /5T5zBxyo80gCxLrAq+c77x6ik7S800rQaQKHrhf2OK4vmiaCCbPtB3mPeCcaCGe5jQ69wYnb
- 01PwTyYiGFYq+IFfwUgfLKf+1spZTg6xRUdNfwEAQkPj0XuHVWb12U+s+abZu/h2SQRpvzZiC
- 7FGePZjERvsM7rLcCbKRuGZQ6uw7VTom10qj+H3UxH0muoxKiF4AcY335GLp9+qCk+IKHc66n
- WASQMEeZXTeqU6wWu7SmkRTrVml4IivgPbrTEtvEoHwYaMHBlRfCKYUbDIkDj+SC4Eq1z355o
- LKuEBCKZLHuJPFBU4i1imaHINLMrYT77eJB
-Subject: Re: [Nouveau] drm/nouveau: lockdep circular locking dependency
- report
+X-stable: review
+X-Patchwork-Hint: Ignore
+Subject: [Nouveau] [PATCH AUTOSEL 5.12 4/5] drm/nouveau: fix dma_address
+ check for CPU/GPU sync
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,20 +48,38 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau <nouveau@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: Alex Deucher <alexander.deucher@amd.com>, Sasha Levin <sashal@kernel.org>,
+ =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
+ dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-I've now applied a revert of 551620f2a3816397266dfd812cd8b3be89f14be4
-to all trees where lockdep may be enabled to re-hide the inversion.  It
-thus won't every remind me of its existence, thus I won't be inspired
-to pass that reminder along.
-
-	-Mike
-
-_______________________________________________
-Nouveau mailing list
-Nouveau@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/nouveau
+RnJvbTogQ2hyaXN0aWFuIEvDtm5pZyA8Y2hyaXN0aWFuLmtvZW5pZ0BhbWQuY29tPgoKWyBVcHN0
+cmVhbSBjb21taXQgZDMzMDA5OTExNTU5N2JiYzIzOGQ2NzU4YTQ5MzBlNzJiNDllYTliYSBdCgpB
+R1AgZm9yIGV4YW1wbGUgZG9lc24ndCBoYXZlIGEgZG1hX2FkZHJlc3MgYXJyYXkuCgpTaWduZWQt
+b2ZmLWJ5OiBDaHJpc3RpYW4gS8O2bmlnIDxjaHJpc3RpYW4ua29lbmlnQGFtZC5jb20+CkFja2Vk
+LWJ5OiBBbGV4IERldWNoZXIgPGFsZXhhbmRlci5kZXVjaGVyQGFtZC5jb20+Ckxpbms6IGh0dHBz
+Oi8vcGF0Y2h3b3JrLmZyZWVkZXNrdG9wLm9yZy9wYXRjaC9tc2dpZC8yMDIxMDYxNDExMDUxNy4x
+NjI0LTEtY2hyaXN0aWFuLmtvZW5pZ0BhbWQuY29tClNpZ25lZC1vZmYtYnk6IFNhc2hhIExldmlu
+IDxzYXNoYWxAa2VybmVsLm9yZz4KLS0tCiBkcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1
+X2JvLmMgfCA0ICsrLS0KIDEgZmlsZSBjaGFuZ2VkLCAyIGluc2VydGlvbnMoKyksIDIgZGVsZXRp
+b25zKC0pCgpkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9iby5j
+IGIvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9iby5jCmluZGV4IGYyNzIwYTAwNjE5
+OS4uMGE0N2EyYTU1NTNkIDEwMDY0NAotLS0gYS9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2
+ZWF1X2JvLmMKKysrIGIvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9iby5jCkBAIC01
+NDksNyArNTQ5LDcgQEAgbm91dmVhdV9ib19zeW5jX2Zvcl9kZXZpY2Uoc3RydWN0IG5vdXZlYXVf
+Ym8gKm52Ym8pCiAJc3RydWN0IHR0bV90dCAqdHRtX2RtYSA9IChzdHJ1Y3QgdHRtX3R0ICopbnZi
+by0+Ym8udHRtOwogCWludCBpLCBqOwogCi0JaWYgKCF0dG1fZG1hKQorCWlmICghdHRtX2RtYSB8
+fCAhdHRtX2RtYS0+ZG1hX2FkZHJlc3MpCiAJCXJldHVybjsKIAlpZiAoIXR0bV9kbWEtPnBhZ2Vz
+KSB7CiAJCU5WX0RFQlVHKGRybSwgInR0bV9kbWEgMHglcDogcGFnZXMgTlVMTFxuIiwgdHRtX2Rt
+YSk7CkBAIC01ODUsNyArNTg1LDcgQEAgbm91dmVhdV9ib19zeW5jX2Zvcl9jcHUoc3RydWN0IG5v
+dXZlYXVfYm8gKm52Ym8pCiAJc3RydWN0IHR0bV90dCAqdHRtX2RtYSA9IChzdHJ1Y3QgdHRtX3R0
+ICopbnZiby0+Ym8udHRtOwogCWludCBpLCBqOwogCi0JaWYgKCF0dG1fZG1hKQorCWlmICghdHRt
+X2RtYSB8fCAhdHRtX2RtYS0+ZG1hX2FkZHJlc3MpCiAJCXJldHVybjsKIAlpZiAoIXR0bV9kbWEt
+PnBhZ2VzKSB7CiAJCU5WX0RFQlVHKGRybSwgInR0bV9kbWEgMHglcDogcGFnZXMgTlVMTFxuIiwg
+dHRtX2RtYSk7Ci0tIAoyLjMwLjIKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fCk5vdXZlYXUgbWFpbGluZyBsaXN0Ck5vdXZlYXVAbGlzdHMuZnJlZWRlc2t0
+b3Aub3JnCmh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlzdGluZm8vbm91
+dmVhdQo=
