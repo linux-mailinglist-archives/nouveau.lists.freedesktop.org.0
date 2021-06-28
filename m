@@ -1,41 +1,41 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id EBA943B6A38
-	for <lists+nouveau@lfdr.de>; Mon, 28 Jun 2021 23:21:21 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id EE4E13B6A3B
+	for <lists+nouveau@lfdr.de>; Mon, 28 Jun 2021 23:21:25 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E15A66E58B;
-	Mon, 28 Jun 2021 21:21:19 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B39716E593;
+	Mon, 28 Jun 2021 21:21:23 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4AF496E588;
- Mon, 28 Jun 2021 21:21:17 +0000 (UTC)
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 5FFBB61D07;
- Mon, 28 Jun 2021 21:21:16 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0C88F6E58E;
+ Mon, 28 Jun 2021 21:21:21 +0000 (UTC)
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 18F1B61CF1;
+ Mon, 28 Jun 2021 21:21:20 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1624915277;
- bh=RwhlPo07q9Dnn5VRY+Wwcbl/ggE2l517T8cSxQVsESI=;
+ s=k20201202; t=1624915280;
+ bh=mhQaTVy8s+F/kumuxowScws01H/8UkfLxvLYMWg9T48=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=edEoOm9ZExVN+5I/DJq7x3IA2Z4r/zOzzI8RzSFmrdCMOBe7iJqEYfIi6I33Bte8e
- TOjmZogZzvDMRCDgaDZwVBoWxU5PcSqaDfeRWglsWUTqbdtuYHYfz2C3kR+Ylo9QK/
- SR6Wd9etc87LNLO9ns4mWxqO6QRYzA/mshAT1CPZFI20JSSR+x0zrw8P4GfeVgz0k+
- o4FDtQMfsNXh+2mgrIpPyEfMwqo666v1WMJQDQ/9TRLXpdkqYowOaNhMl1W9Pdsa6p
- t1y3LbGTXroHRLwHVnAHSbdwFWd3lsrvlKiPC+2um/7EZR0trC2J+F17Nu/whuF3po
- UrOWuBgR7ZLGg==
+ b=O57lK0vVGtZvBGdmHzTykv3edAiBMHY3TYWA424k/Xbm53+nB5nSXkxNuxc6rBvRR
+ qFzLlffp6qNCTqbPzuZE8QP6/Ofv2H2y9RCFoT+HlaKjhtVncYXramjB3qGQb4N3au
+ 9a6puzbTawllLTlBQZrXKe8EBOfEpETv67nIRJILzasM4mG9094ac6D3FWsuo4sfE6
+ lgRSHltkJGckyP97PeOFPeKnmwpYpr0Td8qmgZPd1u2qkhitFRJsi0iQvxFtyHjAwx
+ 7BVKDl29z2lBXChJEROWS79sAKs9I2m0tL8UQwPz2sWfBe9FrZZR1AgJC+vymY+CI5
+ cdKyXOzi1yvWA==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Mon, 28 Jun 2021 17:21:13 -0400
-Message-Id: <20210628212114.43604-2-sashal@kernel.org>
+Date: Mon, 28 Jun 2021 17:21:17 -0400
+Message-Id: <20210628212117.43676-2-sashal@kernel.org>
 X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20210628212114.43604-1-sashal@kernel.org>
-References: <20210628212114.43604-1-sashal@kernel.org>
+In-Reply-To: <20210628212117.43676-1-sashal@kernel.org>
+References: <20210628212117.43676-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
-Subject: [Nouveau] [PATCH AUTOSEL 4.14 2/2] drm/nouveau: fix dma_address
+Subject: [Nouveau] [PATCH AUTOSEL 4.9 2/2] drm/nouveau: fix dma_address
  check for CPU/GPU sync
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -66,15 +66,15 @@ NjI0LTEtY2hyaXN0aWFuLmtvZW5pZ0BhbWQuY29tClNpZ25lZC1vZmYtYnk6IFNhc2hhIExldmlu
 IDxzYXNoYWxAa2VybmVsLm9yZz4KLS0tCiBkcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1
 X2JvLmMgfCA0ICsrLS0KIDEgZmlsZSBjaGFuZ2VkLCAyIGluc2VydGlvbnMoKyksIDIgZGVsZXRp
 b25zKC0pCgpkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9iby5j
-IGIvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9iby5jCmluZGV4IGU0MjdmODAzNDRj
-NC4uYTJkNzcwYWNkMTBhIDEwMDY0NAotLS0gYS9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2
+IGIvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9iby5jCmluZGV4IGEyZTZhODE2Njll
+Ny4uOTRiNzc5OGJkZWE0IDEwMDY0NAotLS0gYS9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2
 ZWF1X2JvLmMKKysrIGIvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9iby5jCkBAIC00
-NTAsNyArNDUwLDcgQEAgbm91dmVhdV9ib19zeW5jX2Zvcl9kZXZpY2Uoc3RydWN0IG5vdXZlYXVf
+NDcsNyArNDQ3LDcgQEAgbm91dmVhdV9ib19zeW5jX2Zvcl9kZXZpY2Uoc3RydWN0IG5vdXZlYXVf
 Ym8gKm52Ym8pCiAJc3RydWN0IHR0bV9kbWFfdHQgKnR0bV9kbWEgPSAoc3RydWN0IHR0bV9kbWFf
 dHQgKiludmJvLT5iby50dG07CiAJaW50IGk7CiAKLQlpZiAoIXR0bV9kbWEpCisJaWYgKCF0dG1f
 ZG1hIHx8ICF0dG1fZG1hLT5kbWFfYWRkcmVzcykKIAkJcmV0dXJuOwogCiAJLyogRG9uJ3Qgd2Fz
-dGUgdGltZSBsb29waW5nIGlmIHRoZSBvYmplY3QgaXMgY29oZXJlbnQgKi8KQEAgLTQ3MCw3ICs0
-NzAsNyBAQCBub3V2ZWF1X2JvX3N5bmNfZm9yX2NwdShzdHJ1Y3Qgbm91dmVhdV9ibyAqbnZibykK
+dGUgdGltZSBsb29waW5nIGlmIHRoZSBvYmplY3QgaXMgY29oZXJlbnQgKi8KQEAgLTQ2Nyw3ICs0
+NjcsNyBAQCBub3V2ZWF1X2JvX3N5bmNfZm9yX2NwdShzdHJ1Y3Qgbm91dmVhdV9ibyAqbnZibykK
 IAlzdHJ1Y3QgdHRtX2RtYV90dCAqdHRtX2RtYSA9IChzdHJ1Y3QgdHRtX2RtYV90dCAqKW52Ym8t
 PmJvLnR0bTsKIAlpbnQgaTsKIAotCWlmICghdHRtX2RtYSkKKwlpZiAoIXR0bV9kbWEgfHwgIXR0
 bV9kbWEtPmRtYV9hZGRyZXNzKQogCQlyZXR1cm47CiAKIAkvKiBEb24ndCB3YXN0ZSB0aW1lIGxv
