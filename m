@@ -2,46 +2,41 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 656433B7B8A
-	for <lists+nouveau@lfdr.de>; Wed, 30 Jun 2021 04:31:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D37823B9493
+	for <lists+nouveau@lfdr.de>; Thu,  1 Jul 2021 18:14:43 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 633146E91D;
-	Wed, 30 Jun 2021 02:31:25 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 584556EB56;
+	Thu,  1 Jul 2021 16:14:37 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5B3966E8BE;
- Tue, 29 Jun 2021 15:59:47 +0000 (UTC)
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 25AAC61DC0;
- Tue, 29 Jun 2021 15:59:47 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1624982387;
- bh=mApRLgk69+mMV6V2Jp0Hts8X9JoUe+4WPGnamh9oiBU=;
- h=References:In-Reply-To:Reply-To:From:Date:Subject:To:Cc:From;
- b=jn/UYtxd6DOT82xj4Jn5ozrIOU1lYCBRLr3TmBNuywthA+if1knOf6CycPUljm3dn
- qrjGs6Lu1J28zcL8aopJN6s5OgAz8oLAytGSTEQG1DzNQPPf3gRaYpVpMxeLaaiOyh
- bVLemkmvbDMqQhIQKL1xV/Q0bjnonDenCYi8Nolx6I+32TCDLTuouRZokZI1drVfJE
- rJ0FGqtMN7GMe63abKwOLeIESoem7LfaZWgx2r5f3S3BCSvyUtxwGLzfmuIrRVi5Ux
- miLI4IVM6blF+0nBNxbMjbmWsAsTFPSHxCiyoRO2xhOx2NgTOob6j1ZWe0xWsOAKXd
- Tr8eWN67R/h5g==
-Received: by mail-lf1-f49.google.com with SMTP id a11so40286909lfg.11;
- Tue, 29 Jun 2021 08:59:47 -0700 (PDT)
-X-Gm-Message-State: AOAM530kJE1RmJPbRwPC0CDLw+80CdUO8oloDvS06aNgaHQMOG6DmWZr
- kyS1569Lj/MV6ogjMU0QLKx3lLQMhLOpE/P88cM=
-X-Google-Smtp-Source: ABdhPJxbKRPGstVIg+10tcjtk+VnYZ+lj9b97iwRcHVe57pqV9+t3IECtbTnQC+RnmS+mFeMuInfdc2gJTFJGcCpAlk=
-X-Received: by 2002:a19:e210:: with SMTP id z16mr1316558lfg.233.1624982385490; 
- Tue, 29 Jun 2021 08:59:45 -0700 (PDT)
+Received: from fanzine.igalia.com (fanzine.igalia.com [178.60.130.6])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 89E0E6E0CB;
+ Thu,  1 Jul 2021 16:14:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
+ s=20170329; 
+ h=MIME-Version:Content-Type:References:In-Reply-To:Date:Cc:To:From:Subject:Message-ID;
+ bh=wK9wrmd+6oYN7FKRJ1PwqG4FPKNWD7UZGqxDhFVY3YA=; 
+ b=Y4rlul+uhkYkZ4p6PoktJ1He64NFdmYZWcPpM13vr6JwyByUFcMFxf7tyOvHSUYGAsQGuCwcUoD7h5DI4G0VjAPU8O8+bLIPf62+t7OUSN+R/QYhU0JnC0VuJKQTtRvbWX3fbx6b5WzNX1bZImGRveVbDTtd/0HPNao87E/LJkrpM6iDlUx/srHN6OI5snwK8PxazjWK5xG7t3iJJ9WU+csZyt0hFOSwx3R6pP4/3oRO0mRpynHUbJfXQ4UfRyQqzglMs6SBk6RjTXKmiyJ0CAnUvAeJ2bnyP0rx715hkwTsNSF1wpGP3s6PM34qHol9in6d5fNW/mzzdtcje0K6/g==;
+Received: from 152.red-88-9-105.dynamicip.rima-tde.net ([88.9.105.152]
+ helo=[192.168.2.252]) by fanzine.igalia.com with esmtpsa 
+ (Cipher TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim)
+ id 1lyzKj-0005WT-LU; Thu, 01 Jul 2021 18:14:33 +0200
+Message-ID: <f5ee80e067e79dff0b2d65c67dbb83b9be70014f.camel@igalia.com>
+From: Samuel Iglesias =?ISO-8859-1?Q?Gons=E1lvez?= <siglesias@igalia.com>
+To: "events@lists.x.org" <events@lists.x.org>, 
+ "xorg-devel@lists.freedesktop.org"
+ <xorg-devel@lists.freedesktop.org>, wayland-devel@lists.freedesktop.org, 
+ dri-devel@lists.freedesktop.org, mesa-dev@lists.freedesktop.org, 
+ amd-gfx@lists.freedesktop.org, etnaviv@lists.freedesktop.org, 
+ freedreno@lists.freedesktop.org, nouveau@lists.freedesktop.org, 
+ intel-gfx@lists.freedesktop.org
+Date: Thu, 01 Jul 2021 18:14:23 +0200
+In-Reply-To: <95ec2c414f7dd1ea5685184435b95430e1709047.camel@igalia.com>
+References: <95ec2c414f7dd1ea5685184435b95430e1709047.camel@igalia.com>
+User-Agent: Evolution 3.38.3-1 
 MIME-Version: 1.0
-References: <20210629135833.22679-1-tzimmermann@suse.de>
-In-Reply-To: <20210629135833.22679-1-tzimmermann@suse.de>
-From: Chen-Yu Tsai <wens@kernel.org>
-Date: Tue, 29 Jun 2021 23:59:33 +0800
-X-Gmail-Original-Message-ID: <CAGb2v66wYxs7u1AubriRokPFh72ZONMxGgmGNPB5mFLOZNw_3Q@mail.gmail.com>
-Message-ID: <CAGb2v66wYxs7u1AubriRokPFh72ZONMxGgmGNPB5mFLOZNw_3Q@mail.gmail.com>
-To: Thomas Zimmermann <tzimmermann@suse.de>
-X-Mailman-Approved-At: Wed, 30 Jun 2021 02:31:24 +0000
-Subject: Re: [Nouveau] [PATCH] drm/aperture: Pass DRM driver structure
- instead of driver name
+Subject: Re: [Nouveau] [Mesa-dev] Requests For Proposals for hosting XDC
+ 2022 are now open
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -53,38 +48,116 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Reply-To: wens@kernel.org
-Cc: linux-hyperv@vger.kernel.org,
- Intel Graphics <intel-gfx@lists.freedesktop.org>,
- nouveau@lists.freedesktop.org, linux-arm-msm <linux-arm-msm@vger.kernel.org>,
- dri-devel <dri-devel@lists.freedesktop.org>,
- virtualization@lists.linux-foundation.org,
- "open list:ARM/Rockchip SoC..." <linux-rockchip@lists.infradead.org>,
- amd-gfx@lists.freedesktop.org, Daniel Vetter <daniel@ffwll.ch>,
- spice-devel@lists.freedesktop.org, linux-tegra@vger.kernel.org,
- airlied@redhat.com,
- "open list:ARM/Amlogic Meson..." <linux-amlogic@lists.infradead.org>,
- freedreno@lists.freedesktop.org, linux-sunxi@lists.linux.dev,
- linux-arm-kernel <linux-arm-kernel@lists.infradead.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: "board@foundation.x.org" <board@foundation.x.org>
+Content-Type: multipart/mixed; boundary="===============1004827845=="
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, Jun 29, 2021 at 9:58 PM Thomas Zimmermann <tzimmermann@suse.de> wrote:
->
-> Print the name of the DRM driver when taking over fbdev devices. Makes
-> the output to dmesg more consistent. Note that the driver name is only
-> used for printing a string to the kernel log. No UAPI is affected by this
-> change.
->
-> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-> ---
 
->  drivers/gpu/drm/sun4i/sun4i_drv.c             |  2 +-
+--===============1004827845==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-QH/ByUmgrN7MqV73jY6n"
 
-Acked-by: Chen-Yu Tsai <wens@csie.org>
+
+--=-QH/ByUmgrN7MqV73jY6n
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+This is a reminder that the call for proposals for hosting XDC 2022
+period finishes in two months.
+
+Be sure to prepare your submission before you leave on holiday!
+
+Sam
+
+On Thu, 2021-05-20 at 12:15 +0200, Samuel Iglesias Gons=C3=A1lvez wrote:
+> Hello everyone!
+>=20
+> The X.org board is soliciting proposals to host XDC in 2022. Since
+> XDC 2021 is being held in Europe this year (although virtually),
+> we've
+> decided to host in North America. However, the board is open to other
+> locations, especially if there's an interesting co-location with
+> another conference.
+>=20
+> Of course though, due to the ongoing COVID-19 pandemic it's not yet
+> clear whether or not it will be possible to host XDC 2022 in person,
+> although is seems very likely. Because of this, we would like to
+> make it clear that sponsors should prepare for both the possibility
+> of an in person conference, and the possibility of a virtual
+> conference. We will work with organizers on coming up with a
+> deadline for deciding whether or not we'll be going virtual, likely
+> sometime around July 2022.
+>=20
+> If you're considering hosting XDC, we've assembled a wiki page with
+> what's generally expected and needed:
+>=20
+> https://www.x.org/wiki/Events/RFP/
+>=20
+> When submitting your proposal, please make sure to include at least
+> the
+> key information about the potential location in question, possible
+> dates along with estimated costs. Proposals can be submitted to board
+> at foundation.x.org until the deadline of *September 1st, 2021*.=C2=A0
+>=20
+> Additionally, an quirk early heads-up to the board if you're
+> considering hosting would be appreciated, in case we need to adjust
+> the
+> schedule a bit. Also, earlier is better since there generally will be
+> a
+> bit of Q&A with organizers.
+>=20
+> And if you just have some questions about what organizing XDC
+> entails,
+> please feel free to chat with previous organizers, or someone from
+> the
+> board.
+>=20
+> Thanks,
+>=20
+> Sam
+>=20
+> _______________________________________________
+> mesa-dev mailing list
+> mesa-dev@lists.freedesktop.org
+> https://lists.freedesktop.org/mailman/listinfo/mesa-dev
+
+
+--=-QH/ByUmgrN7MqV73jY6n
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEEQP+ZAvaXWkfuKXiEf/S6MvF9w0MFAmDd6d8ACgkQf/S6MvF9
+w0MKsRAA13BGnKOl2o6oyp+Ws0lBHITyQt5yGc5pIHoT3xjPVY924AFiGtJTsGq/
+oqYp9tMAGduh5VbFDmg9/FanKRpFSbFI8xXTWMuwC6OgaXgu+c9NDO8ilN8wl9vP
+3sAv88KlFP2bJtwwruGjw+jro7tnXE4WvKLaBILW8cqt3nL2xNZbI2JknPIFQDgp
+sddQ0GKSvFCtYuiEaMfxVTasJcaIyf1F4+bew031wDkS4yiuLdXUrBEoEXWNuGWG
+tcMg3HzGBAIkMFXrk3J8aSpSFlj/1r/AXlmT+UMHzp19xCk9YHcgEN5rUlnHA2BI
+AFrJKl5UBXiEl4q8h3V8sUoDM+MBItgpZxxW1P80dJvJe/OT0K9gh4VkYQoQx9Xh
+mg9IzmKENsavip/0Osh91MC9hUIBjEAvGWt2evEjlaIRCd2/xb1KO+gXcCMlz884
+nfZOoi3vAxtG/+XAohOq1pmdE6iSyuLdq8SPxtLSFXGCScHQ0R1Mh1I3xxou4dp6
+8jF2Wl4unF2ovuzCsR6VjQDyyGkXKCJHlueFLYyRrmlqjHd9n6ZDeQvHgCnYW93X
+eYYplicS4TVcZ9GHTsTgmxgGLXSM+aR7xzOZ0NQ4Dcy06uSYdbMet1iLz3XA3MoO
+ADwUOZ7evzwvmkdZ0AN4TjPI0iVtf9aVeZ5hpGPkP/eBEF033gA=
+=6VGv
+-----END PGP SIGNATURE-----
+
+--=-QH/ByUmgrN7MqV73jY6n--
+
+
+--===============1004827845==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
 https://lists.freedesktop.org/mailman/listinfo/nouveau
+
+--===============1004827845==--
+
