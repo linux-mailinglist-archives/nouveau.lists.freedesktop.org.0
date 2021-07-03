@@ -1,34 +1,52 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B1DDA3BA02D
-	for <lists+nouveau@lfdr.de>; Fri,  2 Jul 2021 14:05:30 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 661B43BA7F7
+	for <lists+nouveau@lfdr.de>; Sat,  3 Jul 2021 11:00:15 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D7CEE6E14F;
-	Fri,  2 Jul 2021 12:05:24 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 2C5E56E1BD;
+	Sat,  3 Jul 2021 09:00:11 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from youngberry.canonical.com (youngberry.canonical.com
- [91.189.89.112])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1C9486E14D;
- Fri,  2 Jul 2021 12:05:22 +0000 (UTC)
-Received: from 1.general.cking.uk.vpn ([10.172.193.212] helo=localhost)
- by youngberry.canonical.com with esmtpsa (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.93)
- (envelope-from <colin.king@canonical.com>)
- id 1lzHv5-0006TO-1f; Fri, 02 Jul 2021 12:05:19 +0000
-From: Colin King <colin.king@canonical.com>
-To: Ben Skeggs <bskeggs@redhat.com>, David Airlie <airlied@linux.ie>,
- Daniel Vetter <daniel@ffwll.ch>, lyude@redhat.com,
- Dave Airlie <airlied@redhat.com>, dri-devel@lists.freedesktop.org,
- nouveau@lists.freedesktop.org
-Date: Fri,  2 Jul 2021 13:05:18 +0100
-Message-Id: <20210702120518.17740-1-colin.king@canonical.com>
-X-Mailer: git-send-email 2.31.1
+Received: from mail-41103.protonmail.ch (mail-41103.protonmail.ch
+ [185.70.41.103])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id CB1696E1BD
+ for <nouveau@lists.freedesktop.org>; Sat,  3 Jul 2021 09:00:09 +0000 (UTC)
+Received: from mail-0301.mail-europe.com (mail-0301.mail-europe.com
+ [188.165.51.139])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits))
+ (No client certificate requested)
+ by mail-41103.protonmail.ch (Postfix) with ESMTPS id 4GH5WD2kKbz4xHxJ
+ for <nouveau@lists.freedesktop.org>; Sat,  3 Jul 2021 09:00:08 +0000 (UTC)
+Authentication-Results: mail-41103.protonmail.ch;
+ dkim=pass (2048-bit key) header.d=emersion.fr header.i=@emersion.fr
+ header.b="uKToOwdJ"
+Date: Sat, 03 Jul 2021 09:00:01 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=emersion.fr;
+ s=protonmail3; t=1625302803;
+ bh=bh7EqPBSxD7P0sFIwjUGPVXk5inH7QT2SLxv4vJUnxM=;
+ h=Date:To:From:Cc:Reply-To:Subject:In-Reply-To:References:From;
+ b=uKToOwdJAXk/AVaBEn+cTXOICdi8xkNcy99a/jle7KDl2C/uUR21XDBgTQXZ/UhQH
+ 3rNoExoJaLw8yoB2rhCXAfb8kJJ8tnX9ouE5qEWyn0nblI/zD7lM3btLFqnzaSlq7z
+ 25qB6N+e4aEdrL2hIMzoqRSC8Yhya0tv9UzyTwbg16N2r7Qg+tIX959cC80NTAXLfi
+ ysVmtIRvdzeyya//7XvBdQIPn4RcRDHJtjoZs8HdTnb6EhOhSN7qoTWTMOoHTjy43p
+ vggHDpukZ8RjVcyuG7cS+CpJdGw36Nlk+9DBGrRqAKipWyZBUzvDJFi2dLHQJMxYwr
+ cdR1lQug1hCdQ==
+To: gushengxian <gushengxian507419@gmail.com>
+From: Simon Ser <contact@emersion.fr>
+Message-ID: <anhfX5shNJsdNd6vWMeQqNTawyT0AGuoZYI7yRItB-il7fywDu9_Ie1kKL7Wwv2ecVxiYaoymsZHpufnuxUBqvja2uq0_t-Qmhhc4uHT5f0=@emersion.fr>
+In-Reply-To: <20210703072502.646239-1-gushengxian507419@gmail.com>
+References: <20210703072502.646239-1-gushengxian507419@gmail.com>
 MIME-Version: 1.0
-Subject: [Nouveau] [PATCH] drm/nouveau: Remove redundant error check on
- variable ret
+X-Spam-Status: No, score=-1.2 required=10.0 tests=ALL_TRUSTED,DKIM_SIGNED,
+ DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF shortcircuit=no
+ autolearn=disabled version=3.4.4
+X-Spam-Checker-Version: SpamAssassin 3.4.4 (2020-01-24) on
+ mailout.protonmail.ch
+Subject: Re: [Nouveau] [PATCH] include/uapi/drm: fix spelling mistakes in
+ header files
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -40,47 +58,24 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: kernel-janitors@vger.kernel.org, linux-kernel@vger.kernel.org
+Reply-To: Simon Ser <contact@emersion.fr>
+Cc: dri-devel@lists.freedesktop.org, linux-samsung-soc@vger.kernel.org,
+ lima@lists.freedesktop.org, airlied@linux.ie, nouveau@lists.freedesktop.org,
+ intel-gfx@lists.freedesktop.org, maarten.lankhorst@linux.intel.com,
+ linux-kernel@vger.kernel.org, mripard@kernel.org, yuq825@gmail.com,
+ daniel@ffwll.ch, gushengxian <gushengxian@yulong.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-From: Colin Ian King <colin.king@canonical.com>
+Reviewed-by: Simon Ser <contact@emersion.fr>
 
-The call to drm_dp_aux_init never returns an error code and there
-is no error return being assigned to variable ret. The check for
-an error in ret is always false since ret is still zero from the
-start of the function so the init error check and error message
-is redundant and can be removed.
+But this this touches a lot of different drivers, not sure we can just
+merge this via drm-misc-next?
 
-Addresses-Coverity: ("Logically dead code")
-Fixes: fd43ad9d47e7 ("drm/nouveau/kms/nv50-: Move AUX adapter reg to connector late register/early unregister")
-Signed-off-by: Colin Ian King <colin.king@canonical.com>
----
- drivers/gpu/drm/nouveau/nouveau_connector.c | 6 ------
- 1 file changed, 6 deletions(-)
-
-diff --git a/drivers/gpu/drm/nouveau/nouveau_connector.c b/drivers/gpu/drm/nouveau/nouveau_connector.c
-index 22b83a6577eb..f37e5f28a93f 100644
---- a/drivers/gpu/drm/nouveau/nouveau_connector.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_connector.c
-@@ -1362,12 +1362,6 @@ nouveau_connector_create(struct drm_device *dev,
- 			 dcbe->hasht, dcbe->hashm);
- 		nv_connector->aux.name = kstrdup(aux_name, GFP_KERNEL);
- 		drm_dp_aux_init(&nv_connector->aux);
--		if (ret) {
--			NV_ERROR(drm, "Failed to init AUX adapter for sor-%04x-%04x: %d\n",
--				 dcbe->hasht, dcbe->hashm, ret);
--			kfree(nv_connector);
--			return ERR_PTR(ret);
--		}
- 		fallthrough;
- 	default:
- 		funcs = &nouveau_connector_funcs;
--- 
-2.31.1
-
+In any case, please ping me again in a week if this hasn't been merged
+by then.
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
