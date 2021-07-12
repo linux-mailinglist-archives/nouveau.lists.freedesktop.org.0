@@ -2,61 +2,66 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 926D63C32E5
-	for <lists+nouveau@lfdr.de>; Sat, 10 Jul 2021 06:56:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B8DA23C4656
+	for <lists+nouveau@lfdr.de>; Mon, 12 Jul 2021 11:47:26 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id DB9356EAD1;
-	Sat, 10 Jul 2021 04:56:10 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 915ED89BF6;
+	Mon, 12 Jul 2021 09:47:24 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pj1-x1030.google.com (mail-pj1-x1030.google.com
- [IPv6:2607:f8b0:4864:20::1030])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C91B96E0C9;
- Sat,  3 Jul 2021 07:25:09 +0000 (UTC)
-Received: by mail-pj1-x1030.google.com with SMTP id
- x21-20020a17090aa395b029016e25313bfcso7765545pjp.2; 
- Sat, 03 Jul 2021 00:25:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=MIgwSNCLuBQs+cwAtmi0/COfPG7Xp5I02ys9HkOg0tY=;
- b=Zbsf3AQlfTFHr5ZjD1TkVnN2R1+5bZKeKX75HGW6KGEM05jlF/mb9uh+0CE46Ge5Ak
- UxGnEAz8Uy644cIRI/Mhg+HlXYsO6Th6qzK6jJOivOIqELSi/ARAVQq8ubftdSQyvWZV
- BbaRxZX+6/H94ncKjkU6v9HfUP3fUJRu4eykRVWL/XoNaCCdlB+Br5CmKtEvJhHlk9IB
- hxZhQQG99HVXjY1kzMe/TMWSZi2sUOY+vIuj0yNl0tJxSMSCRyNLl7dkb2x53Kwiqmvg
- EE9h0w4wZ9fLGvCb2AnZtsQN9GPuhs77ciktEQlP946kDTp/h2QNqhkKA4q3aAktTwrb
- 3DsQ==
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [216.205.24.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1D1E889B49
+ for <nouveau@lists.freedesktop.org>; Mon, 12 Jul 2021 09:47:22 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1626083241;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=OsAxr7I5wY3GHXnm0dzu227J/w3T3hi+AUx2iyLrph4=;
+ b=YRjKJ050sf3F5FYwrAj4EsxK1p9pnQ+stwJCtRKqrkmmZWFZPmGwGpsrjFbZgSE+8g1P6U
+ etBradPyuKnnTOzTVaGLaatuxPF/oK++v6DytXQGIIOhnZC7YWbT82u1QKJAb9ohF/0kck
+ oF+l8v3XSSLwXSILBooAuLallhI9Qak=
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-555-oZegqMxTMKGm-MyVpTEfEQ-1; Mon, 12 Jul 2021 05:47:20 -0400
+X-MC-Unique: oZegqMxTMKGm-MyVpTEfEQ-1
+Received: by mail-wr1-f70.google.com with SMTP id
+ h11-20020adffa8b0000b029013a357d7bdcso6553886wrr.18
+ for <nouveau@lists.freedesktop.org>; Mon, 12 Jul 2021 02:47:20 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=MIgwSNCLuBQs+cwAtmi0/COfPG7Xp5I02ys9HkOg0tY=;
- b=rcukUs+l5VyCkgbWYz2I6uw9+ll46lK6IqWEIbOqUK6fB1/wnGvu7eghbIAM4zFzHC
- bOJI2MOHbZX7l92nx/wW539grKP2ap3J9hA8IbNtNlc+A0ihW20XPFgjOjjT9CFlCUzr
- 0+AZ0gzs6BH0USP0u5UDCBZPO29wELLKTGNfyw6NElQ6c/MBmEsCR69mOyZxFBS5Kywj
- VrbhIocHH9q5gvf9WNUGrrWsZzo6ATVlNLHMlAanUE0wXOfaqAKoalYOsHCiXXnSaaQP
- oTdO5n0q+4b/nenbWiJMsRpkArBywCcPtSiYW4BM05KcE0+bgU+UPZGxq45DDpFG8vRy
- cDjA==
-X-Gm-Message-State: AOAM531fCuHMtFGUGRWGVIBa5C5+k0fNsyUseL5CV9deFWR0ScCKBlwK
- SGTZcNyLZmcAzUeHRqtsk+U=
-X-Google-Smtp-Source: ABdhPJwPF63ZZ1EbelrVHjC8zLNNOkAxEYxRNj2Gf18dQ+jrkBcIz+PrFaQ9AvLMMSH31i1CHkRL9Q==
-X-Received: by 2002:a17:90a:9308:: with SMTP id
- p8mr3467470pjo.119.1625297109313; 
- Sat, 03 Jul 2021 00:25:09 -0700 (PDT)
-Received: from ubuntu.localdomain ([103.220.76.197])
- by smtp.gmail.com with ESMTPSA id cp11sm1221152pjb.16.2021.07.03.00.25.06
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 03 Jul 2021 00:25:08 -0700 (PDT)
-From: gushengxian <gushengxian507419@gmail.com>
-To: maarten.lankhorst@linux.intel.com, mripard@kernel.org, tzimmermann@suse.de,
- airlied@linux.ie, daniel@ffwll.ch, yuq825@gmail.com
-Date: Sat,  3 Jul 2021 00:25:02 -0700
-Message-Id: <20210703072502.646239-1-gushengxian507419@gmail.com>
-X-Mailer: git-send-email 2.25.1
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=OsAxr7I5wY3GHXnm0dzu227J/w3T3hi+AUx2iyLrph4=;
+ b=cjostzMN2Sn5MloDDH2qRWAa3DYLBi3/lknXA9GE2VxBl75rlbXeyctw9J0/LZ8oE0
+ +WoPo+a3Jg8F2kUzCcApXv5CvJvL8MtJRc/8kipD4YbZ5CQxKUBUsJIvAGU25P7c9dQ2
+ GPmIktzDFgRCiznHIMELL1I+kk1ZX7TvIVPxDWeKivE+RsSn0oWYkRIkeLNyGy41xY0e
+ pV28tdQReBycRtPkMGo6cE2ohXhwJxp5HcQRs3MmLkjxYB4O2Gn0a8sO9p6Fy2zBkRqy
+ cQpEW+WzWe6AalFklo5GNcN6+TLGutfaQ25wwmrb+TZiBwrZ4aSaNkjOSrZ1HcNAfIrv
+ sJyg==
+X-Gm-Message-State: AOAM532h6nvxM7O/R9NPlP/h6g2iUxRN7ZDGMO21JAxAgoEJ54jRIsPt
+ WV70mrZb8bTEgpY+pBPRCzs0OpHpVpkjk89hLyE2d/3w80sc09xT5gmXB93BnOmR0W2fBmkHXLG
+ 4bontOLoiJhaDE5tNamMIZtUn9McJt09CBzKKVJtOTg==
+X-Received: by 2002:adf:ec0c:: with SMTP id x12mr23662121wrn.113.1626083239347; 
+ Mon, 12 Jul 2021 02:47:19 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJw3sW8UYSOM/Q6qgJACh2S4VICMKyF4ZwsV6v+fR4fftaOEQT2tUBbmhmNCwT2qSaSR3qFgvPBKqWkCA/b7Jp8=
+X-Received: by 2002:adf:ec0c:: with SMTP id x12mr23662105wrn.113.1626083239204; 
+ Mon, 12 Jul 2021 02:47:19 -0700 (PDT)
 MIME-Version: 1.0
-X-Mailman-Approved-At: Sat, 10 Jul 2021 04:56:09 +0000
-Subject: [Nouveau] [PATCH] include/uapi/drm: fix spelling mistakes in header
- files
+References: <20210703072502.646239-1-gushengxian507419@gmail.com>
+ <anhfX5shNJsdNd6vWMeQqNTawyT0AGuoZYI7yRItB-il7fywDu9_Ie1kKL7Wwv2ecVxiYaoymsZHpufnuxUBqvja2uq0_t-Qmhhc4uHT5f0=@emersion.fr>
+In-Reply-To: <anhfX5shNJsdNd6vWMeQqNTawyT0AGuoZYI7yRItB-il7fywDu9_Ie1kKL7Wwv2ecVxiYaoymsZHpufnuxUBqvja2uq0_t-Qmhhc4uHT5f0=@emersion.fr>
+From: Karol Herbst <kherbst@redhat.com>
+Date: Mon, 12 Jul 2021 11:47:08 +0200
+Message-ID: <CACO55tvmvcrAHjFjJ9fMgcFspyfMLE2gR7f3Fxe0_cxxrfwaUg@mail.gmail.com>
+To: Simon Ser <contact@emersion.fr>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=kherbst@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Subject: Re: [Nouveau] [PATCH] include/uapi/drm: fix spelling mistakes in
+ header files
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,176 +74,30 @@ List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
 Cc: linux-samsung-soc@vger.kernel.org, lima@lists.freedesktop.org,
- nouveau@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ gushengxian <gushengxian507419@gmail.com>, David Airlie <airlied@linux.ie>,
+ nouveau <nouveau@lists.freedesktop.org>,
+ Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
+ LKML <linux-kernel@vger.kernel.org>,
+ dri-devel <dri-devel@lists.freedesktop.org>, Qiang Yu <yuq825@gmail.com>,
  gushengxian <gushengxian@yulong.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-From: gushengxian <gushengxian@yulong.com>
+On Sat, Jul 3, 2021 at 11:00 AM Simon Ser <contact@emersion.fr> wrote:
+>
+> Reviewed-by: Simon Ser <contact@emersion.fr>
+>
+> But this this touches a lot of different drivers, not sure we can just
+> merge this via drm-misc-next?
+>
+> In any case, please ping me again in a week if this hasn't been merged
+> by then.
+>
 
-Fix some spelling mistakes in comments found by "codespell":
-cordinate ==> coordinate
-vertial ==> vertical
-horizonta ==> horizontal
-tranformation ==> transformation
-performend ==> performed
-synhronisation ==> synchronisation
-absulute ==> absolute
-successfuly ==> successfully
-privlege ==> privilege
-suface ==> surface
-automaticaly ==> automatically
-
-Signed-off-by: gushengxian <gushengxian@yulong.com>
----
- include/uapi/drm/drm_mode.h    | 8 ++++----
- include/uapi/drm/exynos_drm.h  | 6 +++---
- include/uapi/drm/i915_drm.h    | 4 ++--
- include/uapi/drm/lima_drm.h    | 2 +-
- include/uapi/drm/nouveau_drm.h | 2 +-
- include/uapi/drm/vc4_drm.h     | 2 +-
- include/uapi/drm/vmwgfx_drm.h  | 4 ++--
- 7 files changed, 14 insertions(+), 14 deletions(-)
-
-diff --git a/include/uapi/drm/drm_mode.h b/include/uapi/drm/drm_mode.h
-index 9b6722d45f36..8619c7dbb50d 100644
---- a/include/uapi/drm/drm_mode.h
-+++ b/include/uapi/drm/drm_mode.h
-@@ -757,8 +757,8 @@ struct hdr_metadata_infoframe {
- 	 * These are coded as unsigned 16-bit values in units of
- 	 * 0.00002, where 0x0000 represents zero and 0xC350
- 	 * represents 1.0000.
--	 * @display_primaries.x: X cordinate of color primary.
--	 * @display_primaries.y: Y cordinate of color primary.
-+	 * @display_primaries.x: X coordinate of color primary.
-+	 * @display_primaries.y: Y coordinate of color primary.
- 	 */
- 	struct {
- 		__u16 x, y;
-@@ -768,8 +768,8 @@ struct hdr_metadata_infoframe {
- 	 * These are coded as unsigned 16-bit values in units of
- 	 * 0.00002, where 0x0000 represents zero and 0xC350
- 	 * represents 1.0000.
--	 * @white_point.x: X cordinate of whitepoint of color primary.
--	 * @white_point.y: Y cordinate of whitepoint of color primary.
-+	 * @white_point.x: X coordinate of whitepoint of color primary.
-+	 * @white_point.y: Y coordinate of whitepoint of color primary.
- 	 */
- 	struct {
- 		__u16 x, y;
-diff --git a/include/uapi/drm/exynos_drm.h b/include/uapi/drm/exynos_drm.h
-index a51aa1c618c1..27daea06a78e 100644
---- a/include/uapi/drm/exynos_drm.h
-+++ b/include/uapi/drm/exynos_drm.h
-@@ -187,9 +187,9 @@ struct drm_exynos_ioctl_ipp_get_caps {
- };
- 
- enum drm_exynos_ipp_limit_type {
--	/* size (horizontal/vertial) limits, in pixels (min, max, alignment) */
-+	/* size (horizontal/vertical) limits, in pixels (min, max, alignment) */
- 	DRM_EXYNOS_IPP_LIMIT_TYPE_SIZE		= 0x0001,
--	/* scale ratio (horizonta/vertial), 16.16 fixed point (min, max) */
-+	/* scale ratio (horizontal/vertical), 16.16 fixed point (min, max) */
- 	DRM_EXYNOS_IPP_LIMIT_TYPE_SCALE		= 0x0002,
- 
- 	/* image buffer area */
-@@ -295,7 +295,7 @@ struct drm_exynos_ipp_task_rect {
- };
- 
- /**
-- * Image tranformation description.
-+ * Image transformation description.
-  *
-  * @id: must be DRM_EXYNOS_IPP_TASK_TRANSFORM
-  * @rotation: DRM_MODE_ROTATE_* and DRM_MODE_REFLECT_* values
-diff --git a/include/uapi/drm/i915_drm.h b/include/uapi/drm/i915_drm.h
-index c2c7759b7d2e..1ad8c1998693 100644
---- a/include/uapi/drm/i915_drm.h
-+++ b/include/uapi/drm/i915_drm.h
-@@ -995,7 +995,7 @@ struct drm_i915_gem_exec_object {
- struct drm_i915_gem_execbuffer {
- 	/**
- 	 * List of buffers to be validated with their relocations to be
--	 * performend on them.
-+	 * performed on them.
- 	 *
- 	 * This is a pointer to an array of struct drm_i915_gem_validate_entry.
- 	 *
-@@ -1067,7 +1067,7 @@ struct drm_i915_gem_exec_object2 {
-  * used by the GPU - this flag only disables the synchronisation prior to
-  * rendering with this object in this execbuf.
-  *
-- * Opting out of implicit synhronisation requires the user to do its own
-+ * Opting out of implicit synchronisation requires the user to do its own
-  * explicit tracking to avoid rendering corruption. See, for example,
-  * I915_PARAM_HAS_EXEC_FENCE to order execbufs and execute them asynchronously.
-  */
-diff --git a/include/uapi/drm/lima_drm.h b/include/uapi/drm/lima_drm.h
-index 1ec58d652a5a..4a38ac3442c8 100644
---- a/include/uapi/drm/lima_drm.h
-+++ b/include/uapi/drm/lima_drm.h
-@@ -134,7 +134,7 @@ struct drm_lima_gem_submit {
- struct drm_lima_gem_wait {
- 	__u32 handle;      /* in, GEM buffer handle */
- 	__u32 op;          /* in, CPU want to read/write this buffer */
--	__s64 timeout_ns;  /* in, wait timeout in absulute time */
-+	__s64 timeout_ns;  /* in, wait timeout in absolute time */
- };
- 
- /**
-diff --git a/include/uapi/drm/nouveau_drm.h b/include/uapi/drm/nouveau_drm.h
-index 853a327433d3..1fab2431df49 100644
---- a/include/uapi/drm/nouveau_drm.h
-+++ b/include/uapi/drm/nouveau_drm.h
-@@ -178,7 +178,7 @@ struct drm_nouveau_svm_bind {
- 
- /*
-  * NOUVEAU_BIND_COMMAND__MIGRATE: synchronous migrate to target memory.
-- * result: number of page successfuly migrate to the target memory.
-+ * result: number of page successfully migrate to the target memory.
-  */
- #define NOUVEAU_SVM_BIND_COMMAND__MIGRATE               0
- 
-diff --git a/include/uapi/drm/vc4_drm.h b/include/uapi/drm/vc4_drm.h
-index 2cac6277a1d7..8de7a98ca6ec 100644
---- a/include/uapi/drm/vc4_drm.h
-+++ b/include/uapi/drm/vc4_drm.h
-@@ -261,7 +261,7 @@ struct drm_vc4_mmap_bo {
-  * shader BOs.
-  *
-  * Since allowing a shader to be overwritten while it's also being
-- * executed from would allow privlege escalation, shaders must be
-+ * executed from would allow privilege escalation, shaders must be
-  * created using this ioctl, and they can't be mmapped later.
-  */
- struct drm_vc4_create_shader_bo {
-diff --git a/include/uapi/drm/vmwgfx_drm.h b/include/uapi/drm/vmwgfx_drm.h
-index 02e917507479..a46ba95f4e5a 100644
---- a/include/uapi/drm/vmwgfx_drm.h
-+++ b/include/uapi/drm/vmwgfx_drm.h
-@@ -165,7 +165,7 @@ struct drm_vmw_context_arg {
- 
- /*************************************************************************/
- /**
-- * DRM_VMW_CREATE_SURFACE - Create a host suface.
-+ * DRM_VMW_CREATE_SURFACE - Create a host surface.
-  *
-  * Allocates a device unique surface id, and queues a create surface command
-  * for the host. Does not wait for host completion. The surface ID can be
-@@ -442,7 +442,7 @@ union drm_vmw_alloc_bo_arg {
-  *
-  * This IOCTL controls the overlay units of the svga device.
-  * The SVGA overlay units does not work like regular hardware units in
-- * that they do not automaticaly read back the contents of the given dma
-+ * that they do not automatically read back the contents of the given dma
-  * buffer. But instead only read back for each call to this ioctl, and
-  * at any point between this call being made and a following call that
-  * either changes the buffer or disables the stream.
--- 
-2.25.1
+As long as it doesn't touch code I don't see why not. Just in case:
+Reviewed-by: Karol Herbst <kherbst@redhat.com>
 
 _______________________________________________
 Nouveau mailing list
