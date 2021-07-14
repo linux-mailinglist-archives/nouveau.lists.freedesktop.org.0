@@ -1,69 +1,39 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2E19D3C868F
-	for <lists+nouveau@lfdr.de>; Wed, 14 Jul 2021 17:02:30 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id D88283C8986
+	for <lists+nouveau@lfdr.de>; Wed, 14 Jul 2021 19:15:29 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id DF8F66E3D2;
-	Wed, 14 Jul 2021 15:02:23 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id DF5A76E432;
+	Wed, 14 Jul 2021 17:15:26 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
- [IPv6:2a00:1450:4864:20::433])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0EEB16E3D2
- for <nouveau@lists.freedesktop.org>; Wed, 14 Jul 2021 15:02:23 +0000 (UTC)
-Received: by mail-wr1-x433.google.com with SMTP id g16so3623870wrw.5
- for <nouveau@lists.freedesktop.org>; Wed, 14 Jul 2021 08:02:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
- h=date:from:to:cc:subject:message-id:mail-followup-to:references
- :mime-version:content-disposition:content-transfer-encoding
- :in-reply-to; bh=69w+z8JoXYSnbwOBKKpmUamhnEyqL/avmTKA+C4lMEY=;
- b=EPZ3o0qksnwmpDdR5qBMIUCBF2nDe1/LnvgVsRL0Uwn4u1966C5R0oynHkzDAMKTep
- MWRMvT9QbZRvzkJH2VgevF1v1XtiDt9PyMkkstslRN8KAOYbR7+kEj2EfRfUyeYHDSuF
- 27Z0DYgyvF/y9RpbDW5K8wF1/NZF8S8cRl0j4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id
- :mail-followup-to:references:mime-version:content-disposition
- :content-transfer-encoding:in-reply-to;
- bh=69w+z8JoXYSnbwOBKKpmUamhnEyqL/avmTKA+C4lMEY=;
- b=ssoKJEj1cr4uDarOUZy+Up6q4uYmkrZO5uan3Q3ZKjhxtrpX4SOnzmdbQlN99HgTdM
- nLhekiUsSs1LvrKnKVtESPqzc4bLbMo68T2EzNhdvlxOuRh8Ep/QEYr9p4ylV7CVpK0S
- +0BQAiDLDW7F9xTST3DA/jQfdckRwmel89hqlT6N0Sfu9LeTQFlTzLIZUgUo4Tbb++WX
- 7eYeCQdnG/5NltdUALhzKCU+UKkZ1bLM5AWLW/N5bsUU4fep1CEJv5XIn3+Pqygm7Nsz
- tSPmHfk13EC7gclnfRNJdIcLydPPhve9EcGY4uTVrZCF7Q4C/PHf/26aiNpEgVWmZh10
- sx/g==
-X-Gm-Message-State: AOAM53011tuUM5L0kYpR19ODpKAtFYAIgR6Jb8pjVmVx1XueFC+VQeV1
- xDvREaQpBrEenWeeQSrOEsr0Ig==
-X-Google-Smtp-Source: ABdhPJy9TYv3Dvc+7HTbNWDhitjGCLCY3N4IXMufP5bnqtdWagmFMkGNl9XOCiGVaKFbQMoPLbiAnw==
-X-Received: by 2002:a05:6000:136a:: with SMTP id
- q10mr13713546wrz.25.1626274941640; 
- Wed, 14 Jul 2021 08:02:21 -0700 (PDT)
-Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
- by smtp.gmail.com with ESMTPSA id b187sm5753264wmd.40.2021.07.14.08.02.20
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 14 Jul 2021 08:02:20 -0700 (PDT)
-Date: Wed, 14 Jul 2021 17:02:18 +0200
-From: Daniel Vetter <daniel@ffwll.ch>
-To: Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
-Message-ID: <YO78eo/MNcPMYAgC@phenom.ffwll.local>
-Mail-Followup-To: Christian =?iso-8859-1?Q?K=F6nig?=
- <christian.koenig@amd.com>, 
- "Kirill A. Shutemov" <kirill@shutemov.name>, airlied@linux.ie,
- Alistair Popple <apopple@nvidia.com>,
- Corentin Labbe <clabbe.montjoie@gmail.com>, bskeggs@redhat.com,
- dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org
-References: <YOC4uekpD7iA3xPi@Red> <1682547.0nLxAY2a9E@nvdebian>
- <dace0dea-7ca9-99cb-ad80-106824cb5e3f@amd.com>
- <20210714125652.eohw2s2pncplxovx@box.shutemov.name>
- <8fd70eb5-7306-89a3-57f9-d633243c9df5@amd.com>
+Received: from bombadil.infradead.org (bombadil.infradead.org
+ [IPv6:2607:7c80:54:e::133])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 73BAD6E432;
+ Wed, 14 Jul 2021 17:15:25 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
+ Content-Type:MIME-Version:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
+ Content-ID:Content-Description:In-Reply-To:References;
+ bh=kX9hKK1zO72+yBWFhZs3db5NllcwOVI8dLCu+ad+9IA=; b=h1H8yRGFNMYtQhBRHcFnIOv3sR
+ zEehWviMROtRkkzl8inD4QviXRaSWhD1fstkFSrsLAsJgIJl8mnPR1y8D7PGX0BbyJARINlRFh1sO
+ SA9dehEkYEZKmEkgs8eyJP+DM6XxfDj9nXCFeHPJ9WjgVncE1obqWnmfEFyfr5thqSYuJf6eD2Pxj
+ yp9Z+hIJcaZao6RfvYpbkHHKpRt6uu4t+MEZrjIW+V4Q2+qz8eNO7a6POsxPCH1p+pg/tolpF/Omw
+ IAU5ReM0eMuoCJZD/zOYZnyaoWJ0PTiSXLuk0sCTRtwpzF2LD7DHvl2SN2eaIchw/uK9JRlFjzUU0
+ 1iC2ckdA==;
+Received: from [2601:1c0:6280:3f0::aefb] (helo=bombadil.infradead.org)
+ by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
+ id 1m3iTk-00EGmG-8I; Wed, 14 Jul 2021 17:15:24 +0000
+From: Randy Dunlap <rdunlap@infradead.org>
+To: linux-kernel@vger.kernel.org
+Date: Wed, 14 Jul 2021 10:15:23 -0700
+Message-Id: <20210714171523.413-1-rdunlap@infradead.org>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <8fd70eb5-7306-89a3-57f9-d633243c9df5@amd.com>
-X-Operating-System: Linux phenom 5.10.0-7-amd64 
-Subject: Re: [Nouveau] nouveau: failed to initialise sync
+Subject: [Nouveau] [PATCH -next] drm: nouveau: fix disp.c build when
+ NOUVEAU_BACKLIGHT is not enabled
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -75,75 +45,62 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: airlied@linux.ie, nouveau@lists.freedesktop.org,
- Alistair Popple <apopple@nvidia.com>, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, Corentin Labbe <clabbe.montjoie@gmail.com>,
- bskeggs@redhat.com, daniel@ffwll.ch,
- "Kirill A. Shutemov" <kirill@shutemov.name>
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Cc: nouveau@lists.freedesktop.org, Randy Dunlap <rdunlap@infradead.org>,
+ Ben Skeggs <bskeggs@redhat.com>, dri-devel@lists.freedesktop.org
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, Jul 14, 2021 at 03:02:21PM +0200, Christian K=F6nig wrote:
-> Am 14.07.21 um 14:56 schrieb Kirill A. Shutemov:
-> > On Tue, Jul 06, 2021 at 08:58:37AM +0200, Christian K=F6nig wrote:
-> > > Hi guys,
-> > > =
-
-> > > yes nouveau was using the same functionality for internal BOs without
-> > > noticing it. This is fixes by the following commit:
-> > > =
-
-> > > commit d098775ed44021293b1962dea61efb19297b8d02
-> > > Author: Christian K=F6nig <christian.koenig@amd.com>
-> > > Date:=A0=A0 Wed Jun 9 19:25:56 2021 +0200
-> > > =
-
-> > >  =A0=A0=A0 drm/nouveau: init the base GEM fields for internal BOs
-> > > =
-
-> > >  =A0=A0=A0 TTMs buffer objects are based on GEM objects for quite a w=
-hile
-> > >  =A0=A0=A0 and rely on initializing those fields before initializing =
-the TTM BO.
-> > > =
-
-> > >  =A0=A0=A0 Nouveau now doesn't init the GEM object for internally all=
-ocated BOs,
-> > >  =A0=A0=A0 so make sure that we at least initialize some necessary fi=
-elds.
-> > > =
-
-> > > Could be that the patch needs to be send to stable as well.
-> > The regression is present in v5.14-rc1. Any idea when it will hit
-> > upstream? I don't see it being applied to drm=3Dnext.
-> =
-
-> Well that question needs to answer Dave or somebody else from the drm-misc
-> maintainer team.
-> =
-
-> This fix together with some others are already in drm-misc-next-fixes
-> waiting to be pushed upstream, but it looks like that hasn't happened yet.
-> =
-
-> Even Linus already pinged me where the fix for qxl got stuck.
-
-Yeah there was some missed patches. drm-misc-fixes is now in drm-fixes,
-and drm-misc-next-fixes is included in drm-misc-fixes, for which Thomas
-will do a pull request on Thu so it will land in -rc2.
-
-It should also now be in linux-next.
-
-But yes somehow bugfixes got a bit lost during the merge window.
--Daniel
--- =
-
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
-_______________________________________________
-Nouveau mailing list
-Nouveau@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/nouveau
+Rml4IGJ1aWxkIGVycm9ycyBhbmQgd2FybmluZ3Mgd2hlbgojIENPTkZJR19EUk1fTk9VVkVBVV9C
+QUNLTElHSFQgaXMgbm90IHNldAoKLi4vZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvZGlzcG52NTAv
+ZGlzcC5jOiBJbiBmdW5jdGlvbiDigJhudjUwX3Nvcl9hdG9taWNfZGlzYWJsZeKAmToKLi4vZHJp
+dmVycy9ncHUvZHJtL25vdXZlYXUvZGlzcG52NTAvZGlzcC5jOjE2NjU6NTI6IGVycm9yOiDigJhz
+dHJ1Y3Qgbm91dmVhdV9jb25uZWN0b3LigJkgaGFzIG5vIG1lbWJlciBuYW1lZCDigJhiYWNrbGln
+aHTigJkKICBzdHJ1Y3Qgbm91dmVhdV9iYWNrbGlnaHQgKmJhY2tsaWdodCA9IG52X2Nvbm5lY3Rv
+ci0+YmFja2xpZ2h0OwogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgXn4KLi4vZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvZGlzcG52NTAvZGlzcC5jOjE2
+NzA6Mjg6IGVycm9yOiBkZXJlZmVyZW5jaW5nIHBvaW50ZXIgdG8gaW5jb21wbGV0ZSB0eXBlIOKA
+mHN0cnVjdCBub3V2ZWF1X2JhY2tsaWdodOKAmQogIGlmIChiYWNrbGlnaHQgJiYgYmFja2xpZ2h0
+LT51c2VzX2RwY2QpIHsKCmFuZCB0aGVuIGZpeCBzdWJzZXF1ZW50IGJ1aWxkIHdhcm5pbmdzIGFm
+dGVyIHRoZSBhYm92ZSBhcmUgZml4ZWQ6CgouLi9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9kaXNw
+bnY1MC9kaXNwLmM6IEluIGZ1bmN0aW9uIOKAmG52NTBfc29yX2F0b21pY19kaXNhYmxl4oCZOgou
+Li9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9kaXNwbnY1MC9kaXNwLmM6MTY2OTo2OiB3YXJuaW5n
+OiB1bnVzZWQgdmFyaWFibGUg4oCYcmV04oCZIFstV3VudXNlZC12YXJpYWJsZV0KICBpbnQgcmV0
+OwogICAgICBefn4KLi4vZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvZGlzcG52NTAvZGlzcC5jOjE2
+NjI6MjI6IHdhcm5pbmc6IHVudXNlZCB2YXJpYWJsZSDigJhkcm3igJkgWy1XdW51c2VkLXZhcmlh
+YmxlXQogIHN0cnVjdCBub3V2ZWF1X2RybSAqZHJtID0gbm91dmVhdV9kcm0obnZfZW5jb2Rlci0+
+YmFzZS5iYXNlLmRldik7CiAgICAgICAgICAgICAgICAgICAgICBefn4KCkZpeGVzOiA2ZWNhMzEw
+ZTg5MjQgKCJkcm0vbm91dmVhdS9rbXMvbnY1MC06IEFkZCBiYXNpYyBEUENEIGJhY2tsaWdodCBz
+dXBwb3J0IGZvciBub3V2ZWF1IikKU2lnbmVkLW9mZi1ieTogUmFuZHkgRHVubGFwIDxyZHVubGFw
+QGluZnJhZGVhZC5vcmc+CkNjOiBCZW4gU2tlZ2dzIDxic2tlZ2dzQHJlZGhhdC5jb20+CkNjOiBk
+cmktZGV2ZWxAbGlzdHMuZnJlZWRlc2t0b3Aub3JnCkNjOiBub3V2ZWF1QGxpc3RzLmZyZWVkZXNr
+dG9wLm9yZwpDYzogTHl1ZGUgUGF1bCA8bHl1ZGVAcmVkaGF0LmNvbT4KLS0tCiBkcml2ZXJzL2dw
+dS9kcm0vbm91dmVhdS9kaXNwbnY1MC9kaXNwLmMgfCAgICA4ICsrKysrKy0tCiAxIGZpbGUgY2hh
+bmdlZCwgNiBpbnNlcnRpb25zKCspLCAyIGRlbGV0aW9ucygtKQoKLS0tIGxpbnV4LW5leHQtMjAy
+MTA3MTQub3JpZy9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9kaXNwbnY1MC9kaXNwLmMKKysrIGxp
+bnV4LW5leHQtMjAyMTA3MTQvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvZGlzcG52NTAvZGlzcC5j
+CkBAIC0xNjU5LDIzICsxNjU5LDI3IEBAIHN0YXRpYyB2b2lkCiBudjUwX3Nvcl9hdG9taWNfZGlz
+YWJsZShzdHJ1Y3QgZHJtX2VuY29kZXIgKmVuY29kZXIsIHN0cnVjdCBkcm1fYXRvbWljX3N0YXRl
+ICpzdGF0ZSkKIHsKIAlzdHJ1Y3Qgbm91dmVhdV9lbmNvZGVyICpudl9lbmNvZGVyID0gbm91dmVh
+dV9lbmNvZGVyKGVuY29kZXIpOwotCXN0cnVjdCBub3V2ZWF1X2RybSAqZHJtID0gbm91dmVhdV9k
+cm0obnZfZW5jb2Rlci0+YmFzZS5iYXNlLmRldik7CiAJc3RydWN0IG5vdXZlYXVfY3J0YyAqbnZf
+Y3J0YyA9IG5vdXZlYXVfY3J0Yyhudl9lbmNvZGVyLT5jcnRjKTsKIAlzdHJ1Y3Qgbm91dmVhdV9j
+b25uZWN0b3IgKm52X2Nvbm5lY3RvciA9IG52NTBfb3V0cF9nZXRfb2xkX2Nvbm5lY3RvcihzdGF0
+ZSwgbnZfZW5jb2Rlcik7CisjaWZkZWYgQ09ORklHX0RSTV9OT1VWRUFVX0JBQ0tMSUdIVAorCXN0
+cnVjdCBub3V2ZWF1X2RybSAqZHJtID0gbm91dmVhdV9kcm0obnZfZW5jb2Rlci0+YmFzZS5iYXNl
+LmRldik7CiAJc3RydWN0IG5vdXZlYXVfYmFja2xpZ2h0ICpiYWNrbGlnaHQgPSBudl9jb25uZWN0
+b3ItPmJhY2tsaWdodDsKKyNlbmRpZgogCXN0cnVjdCBkcm1fZHBfYXV4ICphdXggPSAmbnZfY29u
+bmVjdG9yLT5hdXg7CiAJaW50IHJldDsKIAl1OCBwd3I7CiAKKyNpZmRlZiBDT05GSUdfRFJNX05P
+VVZFQVVfQkFDS0xJR0hUCiAJaWYgKGJhY2tsaWdodCAmJiBiYWNrbGlnaHQtPnVzZXNfZHBjZCkg
+ewogCQlyZXQgPSBkcm1fZWRwX2JhY2tsaWdodF9kaXNhYmxlKGF1eCwgJmJhY2tsaWdodC0+ZWRw
+X2luZm8pOwogCQlpZiAocmV0IDwgMCkKIAkJCU5WX0VSUk9SKGRybSwgIkZhaWxlZCB0byBkaXNh
+YmxlIGJhY2tsaWdodCBvbiBbQ09OTkVDVE9SOiVkOiVzXTogJWRcbiIsCiAJCQkJIG52X2Nvbm5l
+Y3Rvci0+YmFzZS5iYXNlLmlkLCBudl9jb25uZWN0b3ItPmJhc2UubmFtZSwgcmV0KTsKIAl9Cisj
+ZW5kaWYKIAogCWlmIChudl9lbmNvZGVyLT5kY2ItPnR5cGUgPT0gRENCX09VVFBVVF9EUCkgewot
+CQlpbnQgcmV0ID0gZHJtX2RwX2RwY2RfcmVhZGIoYXV4LCBEUF9TRVRfUE9XRVIsICZwd3IpOwor
+CQlyZXQgPSBkcm1fZHBfZHBjZF9yZWFkYihhdXgsIERQX1NFVF9QT1dFUiwgJnB3cik7CiAKIAkJ
+aWYgKHJldCA9PSAwKSB7CiAJCQlwd3IgJj0gfkRQX1NFVF9QT1dFUl9NQVNLOwpfX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpOb3V2ZWF1IG1haWxpbmcgbGlz
+dApOb3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwpodHRwczovL2xpc3RzLmZyZWVkZXNrdG9w
+Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL25vdXZlYXUK
