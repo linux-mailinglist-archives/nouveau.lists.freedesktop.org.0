@@ -2,78 +2,36 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 59B513C9222
-	for <lists+nouveau@lfdr.de>; Wed, 14 Jul 2021 22:32:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 40FDD3C9ED4
+	for <lists+nouveau@lfdr.de>; Thu, 15 Jul 2021 14:41:34 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8B1126E4F9;
-	Wed, 14 Jul 2021 20:32:32 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5F2446E7EF;
+	Thu, 15 Jul 2021 12:41:31 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id AA52A6E503
- for <nouveau@lists.freedesktop.org>; Wed, 14 Jul 2021 20:32:31 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1626294750;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=OxicdESZtSsE1XlutUm+MWeszqFKD6QeBINVHmWH91o=;
- b=hmvyQ8q2rIyUYTjrIsekvXMvxffHVKaYzjJ6Fu+9KN+bSkUOuOXCCo2f2rhrkJz4lXTRiy
- qBWYapzwIL+m9B5chqJqpMbDTVI2jvj+o5YdGbQIZquWk4BytDYgjHLdSDqF/znMvzV1a9
- pL3tPorOUKMwvdJvxzPN79F3HzMMWRc=
-Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com
- [209.85.222.197]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-220-wxi458U_PwCmhJFf3Q9oXw-1; Wed, 14 Jul 2021 16:32:28 -0400
-X-MC-Unique: wxi458U_PwCmhJFf3Q9oXw-1
-Received: by mail-qk1-f197.google.com with SMTP id
- c3-20020a37b3030000b02903ad0001a2e8so2178247qkf.3
- for <nouveau@lists.freedesktop.org>; Wed, 14 Jul 2021 13:32:28 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:message-id:subject:from:to:cc:date:organization
- :user-agent:mime-version:content-transfer-encoding;
- bh=OxicdESZtSsE1XlutUm+MWeszqFKD6QeBINVHmWH91o=;
- b=apKU/p/b+2DyWxoP1QqnDI67CZ0FPcZCpnzJ344IKrgmZ/yl0vlnu0uq5XWt+LPqNA
- 4T36yIr2AYdYTtWPYDOPZ1ZRTyEzgwd3Ebpl6G2Ys8OgNLLmtsmFhbZauxDVZgxAfc0i
- hXB5cJ0mSPhTrkrHgb5diXwnXRKjPcbdhw7Q0cEvDYEBq8sJuR+K02xUkxloHGJmY6wy
- V21e31wpIyMbcT7TIFlpydDdPVecZQQYWVFddmu6HT82gmTdH2ubjjV3PsIXlUigdLyK
- 6O59CsZ+jEIjmJ7ANYt24MuGm+gGYTkDPkJpiHnit8MYyhoCTLtbPwnMklbFG1FmZM3R
- LZgA==
-X-Gm-Message-State: AOAM5312ITRCRV+8vkxSn3c5Wag4aDSHkX6Gfp+pF71oU1ksuxKBN5GK
- v0eUvRXuTIF3cEz/mqVCxopruq2E3Gs6aFMsoEGFtNXnQhZvqxOvSfnny9aW/zmXWtr3IEqDfZz
- L6XpowHl7yF7PGfw3qcFfQibXmw==
-X-Received: by 2002:a05:6214:242f:: with SMTP id
- gy15mr12535326qvb.0.1626294747594; 
- Wed, 14 Jul 2021 13:32:27 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJyFtQ14FbsB0BEAiFsPKb8Om98zdCR57hgqcLo3xfvVsS2QWW/f3fRfEiclgHf8PetYds9m0Q==
-X-Received: by 2002:a05:6214:242f:: with SMTP id
- gy15mr12535306qvb.0.1626294747375; 
- Wed, 14 Jul 2021 13:32:27 -0700 (PDT)
-Received: from Ruby.lyude.net (pool-108-49-102-102.bstnma.fios.verizon.net.
- [108.49.102.102])
- by smtp.gmail.com with ESMTPSA id x9sm1196113qtf.76.2021.07.14.13.32.26
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 14 Jul 2021 13:32:27 -0700 (PDT)
-Message-ID: <5a2b5d77c100a21b3d9e4eb0048c36a94cd1e4ea.camel@redhat.com>
-From: Lyude Paul <lyude@redhat.com>
-To: Xorg Members List <members@x.org>, "mesa-dev@lists.freedesktop.org"
- <mesa-dev@lists.freedesktop.org>, xorg-devel <xorg-devel@lists.x.org>, 
- "wayland-devel@lists.freedesktop.org"
- <wayland-devel@lists.freedesktop.org>, nouveau
- <nouveau@lists.freedesktop.org>,  dri-devel
- <dri-devel@lists.freedesktop.org>, IGT development
- <igt-dev@lists.freedesktop.org>,  amd-gfx list
- <amd-gfx@lists.freedesktop.org>
-Date: Wed, 14 Jul 2021 16:32:24 -0400
-Organization: Red Hat
-User-Agent: Evolution 3.38.4 (3.38.4-1.fc33)
+Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4C10F6E7EF
+ for <nouveau@lists.freedesktop.org>; Thu, 15 Jul 2021 12:41:30 +0000 (UTC)
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 6D930613C7;
+ Thu, 15 Jul 2021 12:41:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
+ s=korg; t=1626352889;
+ bh=ADvucH4/M2/4rdBi3FepxCas4YHRMlVydxn2sPsh7xg=;
+ h=Subject:To:Cc:From:Date:From;
+ b=L7t4c/YRcbloTOOFqhoZmgQeeMJXKogetp74sj/K0BBP5MrZOYQplMIxjYKlyZNja
+ T7jruHhaQWgJjfJ49ExlYJcxe2lpQXC64rGT+hsQmSbjOEZ/mncWHs6dJSkQbKVMVq
+ l/wjKhCvYUvzZi6seKnrF+jvUaxdllum5i3+5JMo=
+To: bskeggs@redhat.com, daniel.vetter@ffwll.ch, daniel.vetter@intel.com,
+ gregkh@linuxfoundation.org, lyude@redhat.com, nouveau@lists.freedesktop.org,
+ paul.kocialkowski@bootlin.com, pekka.paalanen@collabora.com
+From: <gregkh@linuxfoundation.org>
+Date: Thu, 15 Jul 2021 14:40:10 +0200
+Message-ID: <162635281014224@kroah.com>
 MIME-Version: 1.0
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=lyude@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Subject: [Nouveau] Help needed for EVoC/GSoC/Outreachy
+X-stable: commit
+X-Patchwork-Hint: ignore 
+Subject: [Nouveau] Patch "drm/nouveau: Don't set allow_fb_modifiers
+ explicitly" has been added to the 5.10-stable tree
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -85,93 +43,86 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: board@x.org
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: stable-commits@vger.kernel.org
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-SGkhIEFzIHNvbWUgb2YgeW91IG1pZ2h0IGFscmVhZHkgYmUgYXdhcmUsIGFmdGVyIGhlbHBpbmcg
-b3V0IFgub3JnCnByb2plY3QgdGhlIHByZXZpb3VzIHllYXJzIHdpdGggcmVnYXJkcyB0byBzdHVk
-ZW50IG91dHJlYWNoLCBUcmV2b3IKZGVjaWRlZCB0byByZXRpcmUgZnJvbSB0aGlzIHBvc2l0aW9u
-IGluIGhvcGVzIHRoYXQgc29tZW9uZSBlbHNlIHdpbGwgYmUKYWJsZSB0byBzdGVwIHVwIGFuZCB0
-YWtlIG9uIHRoZXNlIHJlc3BvbnNpYmlsaXRpZXMuIEFzIHN1Y2gsIHdlJ3JlCnRyeWluZyB0byBm
-aW5kIHBlb3BsZSB3aG8gd291bGQgYmUgd2lsbGluZyB0byB2b2x1bnRlZXIgdGhlaXIgdGltZSB0
-bwpoZWxwIG91dCB3aXRoIGdldHRpbmcgdXMgaW52b2x2ZWQgb25jZSBhZ2FpbiBpbiBzdHVkZW50
-IG91dHJlYWNoCnByb2dyYW1zLgoKSW4gdGhlIHBhc3QsIFgub3JnIGhhcyBiZWVuIGFjdGl2ZSBp
-biB0aGUgR1NvQyBwcm9ncmFtLCBvY2Nhc2lvbmFsbHkKT3V0cmVhY2h5LCBhbmQgb3VyIG93biBF
-Vm9DIHByb2dyYW0uIEFzIG9mIDIwMjEgdGhvdWdoLCBHU29DIGRlY2lkZWQgdG8Kc2hvcnRlbiB0
-aGUgYW1vdW50IG9mIHRpbWUgYWxsb2NhdGVkIGZvciBhIHN0dWRlbnQgdG8gd29yayBvbiB0aGVp
-cgpwcm9qZWN0LiBUaGlzIHVuZm9ydHVuYXRlbHkgcG9zZWQgc29tZSBwcm9ibGVtcyBmb3IKWC5v
-cmcvZnJlZWRlc2t0b3Aub3JnIGFzIGEgbG90IG9mIHRoZSBwb3RlbnRpYWwgd29yayB0aGF0IHdv
-dWxkIGhhdmUKYmVlbiBnb29kIGZvciB1cyB0byBoYXZlIHN0dWRlbnRzIHdvcmtpbmcgb24gd291
-bGRuJ3QgcmVhbGx5IGZpdCB3aXRoaW4KdGhlIG5ldyBHU29DIHRpbWVmcmFtZS4gV2hpbGUgaXQn
-cyBjZXJ0YWlubHkgcG9zc2libGUgdGhhdCB0aGVyZSB3aWxsIGJlCnByb2plY3RzIHRoYXQgY29t
-ZSB1cCBpbiB0aGUgZnV0dXJlIHdoaWNoIGRvIGZpdCBpbnRvIHRoaXMgbmV3IHRpbWVsaW5lLAp3
-ZSB0aGluayBpdCdkIGJlIGEgZ29vZCBpZGVhIHRvIHN0ZXAgdXAgb3VyIGludm9sdmVtZW50IGFn
-YWluIHdpdGgKT3V0cmVhY2h5IHdoZXJlIHRoZSBwcm9ncmFtIGlzIGEgZ29vZCBiaXQgbW9yZSBm
-bGV4aWJsZSB0aGVuIEdTb0MuIFdlJ3ZlCmFsc28gaGFkIHByZXR0eSBnb29kIGV4cGVyaWVuY2Ug
-d29ya2luZyB3aXRoIHRoZSBPdXRyZWFjaHkgY2FuZGlkYXRlcwp3ZSd2ZSBoYWQgaW4gdGhlIHBh
-c3QuCgpUaGUgb3RoZXIgbWFpbiB0b3BpYyBvZiBkaXNjdXNzaW9uIGlzIGFyb3VuZCB0aGUgZmFj
-dCB0aGF0IG91ciBvd24KcHJvZ3JhbSwgRVZvQywgaGFzbid0IHJlYWxseSBoYWQgYW55b25lIGF2
-YWlsYWJsZSB0byB2b2x1bnRlZXIgdG8gaGVscApydW4gaXQgZm9yIGEgd2hpbGUgbm93LiBGb3Ig
-dGhvc2Ugd2hvIGFyZW4ndCBhd2FyZSwgRVZvQyBpcyBhIHByb2dyYW0Kc2ltaWxhciB0byBHb29n
-bGUgU3VtbWVyIG9mIENvZGUgdGhhdCBYLm9yZyBzdGFydGVkIHJ1bm5pbmcgd2l0aCBtdWNoCm1v
-cmUgcmVsYXhlZCByZXF1aXJlbWVudHMgdGhlbiBHU29DL091dHJlYWNoeSBpbiBvcmRlciB0byBo
-ZWxwIGZpbGwgdGhlCmdhcHMgZm9yIGFueSBleGNlcHRpb25hbCBjYXNlcyB3aXRoIHN0dWRlbnRz
-IHdobyB3b3VsZCBvdGhlcndpc2UgYmUgbGVmdApvdXQgYnkgdGhlIHJlcXVpcmVtZW50cyBmb3Ig
-R1NvQy9PdXRyZWFjaHkuIFR5cGljYWxseSB0aG91Z2gsIEVWb0MgaXMKdXN1YWxseSBjb25zaWRl
-cmVkIHRoZSBsYXN0IHJlc29ydCBhZnRlciBhIHN0dWRlbnQgaGFzIHRyaWVkIGdldHRpbmcKaW50
-byBHU29DL091dHJlYWNoeS4KClNvLCB0aGUgdHdvIGJpZ2dlc3QgdGhpbmdzIHRoYXQgd2UgbmVl
-ZCBhcmU6CiogQWRtaW4gdm9sdW50ZWVyKHMpCiogTWVudG9ycywgbWVudG9ycywgbWVudG9ycyEg
-V2UgcmVhbGx5IG5lZWQgdGhlc2UgdGhlIG1vc3QuCgpTbywgd2hhdCByZXNwb25zaWJpbGl0aWVz
-IHdvdWxkIGJlaW5nIGFuIGFkbWluIGZvciB0aGlzIGVudGFpbD8KCiogRmllbGRpbmcgcXVlc3Rp
-b25zIGZyb20gcG90ZW50aWFsIEdTb0MvRVZvQy9PdXRyZWFjaHkgcGFydGljaXBhbnRzLgrCoCBN
-b3N0IG9mIHRoZXNlIHN0dWRlbnRzIGFyZSBqdXN0IGxvb2tpbmcgZm9yIHNpbXBsZSBkZXRhaWxz
-IG9mIGhvdwrCoCB0aGVzZSBwcm9ncmFtcyB3b3JrIGFuZCBhcmUgbG9va2luZyBmb3IgcHJvamVj
-dCBpZGVhcy4gUmVzcG9uZGluZyB0bwrCoCB0aGVzZSBpbnF1aXJpZXMgaXMgbW9zdGx5IGp1c3Qg
-YSBtYXR0ZXIgb2YgcG9pbnRpbmcgc3R1ZGVudHMgdG8KwqAgdmFyaW91cyBwYWdlcyBvbiBvdXIg
-d2lraSBvciByZXBseWluZyB3aXRoIGZvcm0vc3RvY2sgcmVwbGllcy4gTW9zdCBvZgrCoCB0aGUg
-c3R1ZGVudHMgYXQgdGhpcyBwaGFzZSBleHBlY3QgdG8gYmUgaGFuZGVkIGEgcHJvamVjdCBhbmQg
-YSBtZW50b3IsCsKgIGFuZCB0aGVyZWZvcmUgZW5kIHVwIGxlYXJuaW5nIHRoYXQgdGhleSB3aWxs
-IG5lZWQgdG8gY29tZSB1cCB3aXRoCsKgIHRoZWlyIG93biBwcm9qZWN0IGFuZCBtZW50b3IuCiog
-Rm9yIHRoZSBzbWFsbCBoYW5kZnVsIG9mIHN0dWRlbnRzIHRoYXQgbWFrZSBpdCB0byB0aGUgbmV4
-dCBwaGFzZSBhbmQKwqAgZmlndXJlIG91dCBhIHByb2plY3QgaWRlYSwgdGhleSB0aGVuIG5lZWQg
-dG8gZmluZCBhIG1lbnRvci4gVXN1YWxseQrCoCB0aGUgYWRtaW4gd2lsbCBoZWxwIG91dCBieSB0
-YWtpbmcgYSBsb29rIGF0IHdobyBwcm9wb3NlZCB0aGUgcHJvamVjdArCoCBpZGVhLCBhbmQvb3Ig
-bG9va2luZyB0aHJvdWdoIGNvbW1pdCBtZXNzYWdlcyBhbmQgbWFpbGluZyBsaXN0IGhpc3RvcnkK
-wqAgdG8gdHJ5IHRvIGZpbmQgc29tZW9uZSB3aG8gd291bGQgYmUgYSBnb29kIGZpdCBhbmQgd2ls
-bGluZyB0byBtZW50b3IKwqAgdGhlIHN0dWRlbnQuIFNvbWV0aW1lcyB0aGlzIGhhcHBlbnMgcXVp
-Y2tseSwgYW5kIHNvbWV0aW1lcyBpdCByZXF1aXJlcwrCoCBwb2tpbmcgYSBsb3Qgb2YgcGVvcGxl
-IC0gYW5kIG9jY2FzaW9uYWxseSwgdGhlcmUgbWlnaHQgbm90IGFsd2F5cyBiZSBhCsKgIG1lbnRv
-ciB0byBiZSBmb3VuZC4KKiBJZiB3ZSBoYXZlIGEgc3R1ZGVudCwgcHJvamVjdCwgYW5kIG1lbnRv
-ciB0aGVuIHRoZSBuZXh0IHN0ZXAgaXMgaGF2aW5nCsKgIHRoZSBzdHVkZW50IHdyaXRlIHVwIGEg
-cHJvcG9zYWwuIE1hbnkgc3R1ZGVudHMgc3RhcnQgb3V0IHdpdGgKwqAgb3Zlci1zaW1wbGlmaWVk
-IHByb3Bvc2Fscywgc28gYSBsb3Qgb2YgdGhpcyB3b3JrIGlzIGp1c3QgZ2VudGx5CsKgIG51ZGdp
-bmcgc3R1ZGVudHMgYW5kIGdldHRpbmcgdGhlbSB0byByZWZpbmUgdGhlaXIgd29yayBpdGVtcyBp
-bnRvIGEKwqAgd2Vlay1ieS13ZWVrIHN5bm9wc2lzLiBUaGVyZSdzIHVzdWFsbHkgYSBnb29kIGJp
-dCBvZiBiYWNrIGFuZCBmb3J0aArCoCB3aXRoIHRoZSBzdHVkZW50J3MgcHJvcG9zYWwsIGFuZCBv
-Y2Nhc2lvbmFsbHkgdGhlIG1lbnRvciBtYXkgYmUKwqAgaW52b2x2ZWQgd2l0aCB0aGlzIHN0ZXAu
-CiogVGhlIGFkbWluIHRoZW4gd29ya3Mgd2l0aCB0aGUgc3R1ZGVudCB0byBjb21lIHVwIHdpdGgg
-YSB0aW1lbGluZSBmb3IKwqAgdGhlaXIgd29yaywgdGFraW5nIGludG8gYWNjb3VudCBhbnkgdmFj
-YXRpb24gdGltZSB0aGUgc3R1ZGVudCBtYXkKwqAgaGF2ZSwgYWxvbmcgd2l0aCBjb29yZGluYXRp
-bmcgdGhlIGZyZXF1ZW5jeS90eXBlIG9mIG1lZXRpbmdzIHRoYXQKwqAgd2lsbCBoYXBwZW4gYmV0
-d2VlbiB0aGUgc3R1ZGVudCBhbmQgdGhlIG1lbnRvci4gSWYgdGhlIG1lbnRvciBpcwrCoCB1bmFi
-bGUgdG8gYXR0ZW5kIGFsbCBvZiB0aGVzZSBtZWV0aW5ncywgaXQncyB1c3VhbGx5IHVwIHRvIHRo
-ZSBhZG1pbgrCoCB0byBjaGVjayBpbiB3aXRoIHRoZSBzdHVkZW50IHRvIHNlZSBob3cgdGhleSBh
-cmUgcHJvZ3Jlc3NpbmcgYW5kCsKgIHBvdGVudGlhbGx5IHByb3ZpZGUgdGhlbSB0aXBzIGlmIHRo
-ZXkgZ2V0IHN0dWNrLgoKQXMgZm9yIGJlaW5nIGEgbWVudG9yLCBpdCdzIHByZXR0eSBtdWNoIGFz
-IHNpbXBsZSBhcyBpdCBzb3VuZHM6IHlvdSB3b3JrCndpdGggc3R1ZGVudHMgd2hvIGhhdmUgcHJv
-amVjdHMgdG8gaGVscCBmYW1pbGlhcml6ZSB0aGVtIHdpdGggdGhlCnByb2plY3QgYXQgaGFuZCwg
-aGVscCB0aGVtIG91dCB3aGVyZXZlciBuZWVkZWQsIGNoZWNrIGluIG9uIHRoZWlyCnByb2dyZXNz
-LCBhbmQgZ3VpZGUgdGhlbSBhbG9uZyB0aGUgd2F5IHRvd2FyZHMgcmVhY2hpbmcgdGhlaXIgcHJv
-amVjdApnb2FsIGFsb25nIHdpdGggZ3JhZGluZyB0aGVpciB3b3JrLgoKUGxlYXNlIGhlbHAgc3By
-ZWFkIHRoZSB3b3JkIG9uIHRoaXMsIGFuZCBjb250YWN0IGFueW9uZSB5b3Uga25vdyB3aG8KbWln
-aHQgYmUgaW52b2x2ZWQgd2l0aCB0aGlzISBXZSdsbCBiZSBoYXBweSB0byBwcm92aWRlIG1vcmUg
-aW5mb3JtYXRpb24Kb24gaG93IHlvdSBjYW4gZ2V0IHN0YXJ0ZWQuIFJlbWVtYmVyLCBmb2xrcyBs
-aWtlIG15c2VsZiB3b3VsZG4ndCBiZSBpbgp0aGlzIGNvbW11bml0eSB3aXRob3V0IHByb2plY3Rz
-IGxpa2UgR1NvQyA6KS4KCi0tIApDaGVlcnMsCiBMeXVkZSBQYXVsIChzaGUvaGVyKQogU29mdHdh
-cmUgRW5naW5lZXIgYXQgUmVkIEhhdAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX18KTm91dmVhdSBtYWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVz
-a3RvcC5vcmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9u
-b3V2ZWF1Cg==
+
+This is a note to let you know that I've just added the patch titled
+
+    drm/nouveau: Don't set allow_fb_modifiers explicitly
+
+to the 5.10-stable tree which can be found at:
+    http://www.kernel.org/git/?p=linux/kernel/git/stable/stable-queue.git;a=summary
+
+The filename of the patch is:
+     drm-nouveau-don-t-set-allow_fb_modifiers-explicitly.patch
+and it can be found in the queue-5.10 subdirectory.
+
+If you, or anyone else, feels it should not be added to the stable tree,
+please let <stable@vger.kernel.org> know about it.
+
+
+From cee93c028288b9af02919f3bd8593ba61d1e610d Mon Sep 17 00:00:00 2001
+From: Daniel Vetter <daniel.vetter@ffwll.ch>
+Date: Tue, 27 Apr 2021 11:20:16 +0200
+Subject: drm/nouveau: Don't set allow_fb_modifiers explicitly
+
+From: Daniel Vetter <daniel.vetter@ffwll.ch>
+
+commit cee93c028288b9af02919f3bd8593ba61d1e610d upstream.
+
+Since
+
+commit 890880ddfdbe256083170866e49c87618b706ac7
+Author: Paul Kocialkowski <paul.kocialkowski@bootlin.com>
+Date:   Fri Jan 4 09:56:10 2019 +0100
+
+    drm: Auto-set allow_fb_modifiers when given modifiers at plane init
+
+this is done automatically as part of plane init, if drivers set the
+modifier list correctly. Which is the case here.
+
+Note that this fixes an inconsistency: We've set the cap everywhere,
+but only nv50+ supports modifiers. Hence cc stable, but not further
+back then the patch from Paul.
+
+Reviewed-by: Lyude Paul <lyude@redhat.com>
+Cc: stable@vger.kernel.org # v5.1 +
+Cc: Pekka Paalanen <pekka.paalanen@collabora.com>
+Signed-off-by: Daniel Vetter <daniel.vetter@intel.com>
+Cc: Ben Skeggs <bskeggs@redhat.com>
+Cc: nouveau@lists.freedesktop.org
+Link: https://patchwork.freedesktop.org/patch/msgid/20210427092018.832258-6-daniel.vetter@ffwll.ch
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+---
+ drivers/gpu/drm/nouveau/nouveau_display.c |    1 -
+ 1 file changed, 1 deletion(-)
+
+--- a/drivers/gpu/drm/nouveau/nouveau_display.c
++++ b/drivers/gpu/drm/nouveau/nouveau_display.c
+@@ -700,7 +700,6 @@ nouveau_display_create(struct drm_device
+ 
+ 	dev->mode_config.preferred_depth = 24;
+ 	dev->mode_config.prefer_shadow = 1;
+-	dev->mode_config.allow_fb_modifiers = true;
+ 
+ 	if (drm->client.device.info.chipset < 0x11)
+ 		dev->mode_config.async_page_flip = false;
+
+
+Patches currently in stable-queue which might be from daniel.vetter@ffwll.ch are
+
+queue-5.10/drm-tegra-don-t-set-allow_fb_modifiers-explicitly.patch
+queue-5.10/drm-msm-mdp4-fix-modifier-support-enabling.patch
+queue-5.10/drm-mxsfb-don-t-select-drm_kms_fb_helper.patch
+queue-5.10/drm-arm-malidp-always-list-modifiers.patch
+queue-5.10/drm-zte-don-t-select-drm_kms_fb_helper.patch
+queue-5.10/drm-nouveau-don-t-set-allow_fb_modifiers-explicitly.patch
+_______________________________________________
+Nouveau mailing list
+Nouveau@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/nouveau
