@@ -1,36 +1,36 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1E6B03CA76D
-	for <lists+nouveau@lfdr.de>; Thu, 15 Jul 2021 20:51:52 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0EB393CA8BD
+	for <lists+nouveau@lfdr.de>; Thu, 15 Jul 2021 21:00:59 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9355D6E88B;
-	Thu, 15 Jul 2021 18:51:50 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 66B296E89E;
+	Thu, 15 Jul 2021 19:00:57 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 045016E88B
- for <nouveau@lists.freedesktop.org>; Thu, 15 Jul 2021 18:51:49 +0000 (UTC)
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 5D07C613CF;
- Thu, 15 Jul 2021 18:51:48 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D1A706E89E
+ for <nouveau@lists.freedesktop.org>; Thu, 15 Jul 2021 19:00:56 +0000 (UTC)
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 37A2C613F5;
+ Thu, 15 Jul 2021 19:00:56 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
- s=korg; t=1626375108;
+ s=korg; t=1626375656;
  bh=pTQ+NakHpAF9fF1GZfft8UgM0pu0m5bVmwOfu9zlOCM=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=u39riMY+W8wKTGsgUfQKHCiIWuiFfdi4LETAen3hZbnASwC0xgJs4wmnwcsr8UdVl
- He2TrwhGnsYI6XYef0DivStqJG3uIo468WRGPy7Bfo44zweXIX1d3hAacIOLaehk76
- 9UCEwbxV47oHk38r48HYkwRXjjrQBfXP/nVCN30A=
+ b=LSiceCCya+3aS4+BKhobD6UfMYFrwRFpZlpGq3dEg3Fq2H2HQJ2Yv90/PimuBkmB+
+ BSXlde4lEzyZGzkUgddEL6tUwTNjtG7UigNO+Tv5q8/cRL2ZK3QiQHImDQt7J+5xze
+ HqcRj/mmQ2utTS/f+/L/w2xr5Pyi+vT6jAzWGVJs=
 From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 To: linux-kernel@vger.kernel.org
-Date: Thu, 15 Jul 2021 20:38:56 +0200
-Message-Id: <20210715182628.542711345@linuxfoundation.org>
+Date: Thu, 15 Jul 2021 20:39:02 +0200
+Message-Id: <20210715182624.964000017@linuxfoundation.org>
 X-Mailer: git-send-email 2.32.0
-In-Reply-To: <20210715182558.381078833@linuxfoundation.org>
-References: <20210715182558.381078833@linuxfoundation.org>
+In-Reply-To: <20210715182551.731989182@linuxfoundation.org>
+References: <20210715182551.731989182@linuxfoundation.org>
 User-Agent: quilt/0.66
 MIME-Version: 1.0
-Subject: [Nouveau] [PATCH 5.10 164/215] drm/nouveau: Dont set
+Subject: [Nouveau] [PATCH 5.12 180/242] drm/nouveau: Dont set
  allow_fb_modifiers explicitly
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
