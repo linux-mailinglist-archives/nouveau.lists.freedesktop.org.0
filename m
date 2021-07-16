@@ -1,44 +1,122 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 984C43CB26E
-	for <lists+nouveau@lfdr.de>; Fri, 16 Jul 2021 08:23:52 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1BD4D3CB31D
+	for <lists+nouveau@lfdr.de>; Fri, 16 Jul 2021 09:14:17 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id F0AF16E90E;
-	Fri, 16 Jul 2021 06:23:50 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6FE216E92F;
+	Fri, 16 Jul 2021 07:14:13 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from casper.infradead.org (casper.infradead.org
- [IPv6:2001:8b0:10b:1236::1])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D2C4A6E90E;
- Fri, 16 Jul 2021 06:23:49 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
- References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
- Content-Type:Content-ID:Content-Description;
- bh=pNT+tlhb1TLZaD7zJSk0QSZZNpZ5j/lxFFrE1P5YCYo=; b=OhO+1fdiWv/p4CkMbSy5g3Uh5T
- zca2YmlRA3/jiwSte2lroKP9h6yVgPBj+BLiYBILyoYtwwY3Wyk/s8EcfbaShtqtgtETAdG0omTO8
- XskZEB4ze+dQmqvkgZrcQ9hbkS0q+k4xYXPhJgPFGZy/UQqi96jG08qvbeAayxDrQi1r3dcpou02/
- A6EGq7EJR0lDqVxp7WbsJWZFSnOSsA3kig2JSJ1V4KtxDx/O1C6J9oBu01WWX4mPsVPbAMrfbjjG0
- m7VpYIRA2oYazBh6c25rIiiPCTXf+i9iKUqHx2aA4dGDPd1c0hksggfWZX65f9OCnPDmpkW7JvSXp
- PGlYb8Lg==;
-Received: from [2001:4bb8:184:8b7c:6b57:320d:f068:19c6] (helo=localhost)
- by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1m4HEM-004D75-AS; Fri, 16 Jul 2021 06:22:02 +0000
-From: Christoph Hellwig <hch@lst.de>
-To: David Airlie <airlied@linux.ie>,
-	Daniel Vetter <daniel@ffwll.ch>
-Date: Fri, 16 Jul 2021 08:16:34 +0200
-Message-Id: <20210716061634.2446357-8-hch@lst.de>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20210716061634.2446357-1-hch@lst.de>
+Received: from NAM12-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam12on2075.outbound.protection.outlook.com [40.107.243.75])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 22CFC6E919;
+ Fri, 16 Jul 2021 07:14:11 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=c7rKeOpefamX+MRtYspqu+id9hQrWOLM2CK3tjGl2hD04Olu1d/tg6AD8WDh26yzXvkOc9otkf1ZrMmPArod6bXX5/HwP3AVEbWEj1iznI7AnmHlOy4nwxugNCyrudvFU62eFIGX17dkzOEfgIuZEZCetKZkj7plm7sarB+NCJcWWJKMbRG5h2ui3jJvntTEUoouj13A0NyiYNNxCNnXn86CmxTvu8OFPfAfyhQq57FGWf3qNRppBL/LeFbGH7cFGNdRXJ3G7UTHfa1lhvNHrgr4n4VOtNDHCU58E2IfpgyG9AtI6V5S5oOExnYSuRjrt9EcI9XY8Kv7B4m15fokqw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=6s3HULAHpH/8G3nZpJEN6arzpcIWy4KVbDhKnSw3FME=;
+ b=ZvTVYrwngDT3dN+XKZzffGvaOUVtCgKecMdC7/SmG1Mtc5m1jasad1j9QesEBL187nLvmo0jWKFPraCXqHQ04WgUngQtCWbPFP4a8IQOB4nwbM1Sw25H9orKsaQrsss0sixvycjv2N2/kbf+OALQpTOoDjyWgUuKLlzQ/jMv5qbRNu/a4hNi7jR2bQn3BZUcWJ0W9MRgw2jNBN7+DlZQ98EsE+DySzCnicf7GZSFZRIsJBtPWv1Oqw2lwo9SaR9EMghtmvwLC9w3Nc5eQsZKqFh5yEE1ta8expVw5pNdovFbvajp+ojXWIeXQrInwtBfi2Z04DTqMesdtxiU7qAxYg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=6s3HULAHpH/8G3nZpJEN6arzpcIWy4KVbDhKnSw3FME=;
+ b=YtbENP1PMZDclWraJ60WcK17ksjWoMGcEPTNuoju0AQp1pX4JUnK1/Jsx7nqGICGQNgz8tDY9La1C/MjGHEAgR3ZQszsgWc8uLtQXBTza1nSS0b3+wkk14ePUZvM25ObcRu8vCikiJMNYIaPsdK3px4Vh8V/5EP1yl12Up9neq4=
+Authentication-Results: vger.kernel.org; dkim=none (message not signed)
+ header.d=none;vger.kernel.org; dmarc=none action=none header.from=amd.com;
+Received: from MN2PR12MB3775.namprd12.prod.outlook.com (2603:10b6:208:159::19)
+ by MN2PR12MB3790.namprd12.prod.outlook.com (2603:10b6:208:164::31)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4331.21; Fri, 16 Jul
+ 2021 07:14:09 +0000
+Received: from MN2PR12MB3775.namprd12.prod.outlook.com
+ ([fe80::6c9e:1e08:7617:f756]) by MN2PR12MB3775.namprd12.prod.outlook.com
+ ([fe80::6c9e:1e08:7617:f756%5]) with mapi id 15.20.4331.026; Fri, 16 Jul 2021
+ 07:14:09 +0000
+To: Christoph Hellwig <hch@lst.de>, David Airlie <airlied@linux.ie>,
+ Daniel Vetter <daniel@ffwll.ch>
 References: <20210716061634.2446357-1-hch@lst.de>
+ <20210716061634.2446357-2-hch@lst.de>
+From: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
+Message-ID: <f171831b-3281-5a5a-04d3-2d69cb77f1a2@amd.com>
+Date: Fri, 16 Jul 2021 09:14:02 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.11.0
+In-Reply-To: <20210716061634.2446357-2-hch@lst.de>
+Content-Language: en-US
+X-ClientProxiedBy: AM0PR05CA0085.eurprd05.prod.outlook.com
+ (2603:10a6:208:136::25) To MN2PR12MB3775.namprd12.prod.outlook.com
+ (2603:10b6:208:159::19)
 MIME-Version: 1.0
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
- casper.infradead.org. See http://www.infradead.org/rpr.html
-Subject: [Nouveau] [PATCH 7/7] vgaarb: don't pass a cookie to
- vga_client_register
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from [IPv6:2a02:908:1252:fb60:e013:2fad:8ece:8234]
+ (2a02:908:1252:fb60:e013:2fad:8ece:8234) by
+ AM0PR05CA0085.eurprd05.prod.outlook.com (2603:10a6:208:136::25) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4331.21 via Frontend
+ Transport; Fri, 16 Jul 2021 07:14:06 +0000
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 8aebc0f1-1977-42dd-bc36-08d948294ddd
+X-MS-TrafficTypeDiagnostic: MN2PR12MB3790:
+X-MS-Exchange-Transport-Forked: True
+X-Microsoft-Antispam-PRVS: <MN2PR12MB379002903B1A1EC4D253D1B883119@MN2PR12MB3790.namprd12.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:7219;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: M8BCX88+XcAp4FVhXnz7Mj63uVnAfZRXeoC+KyodQ76SZ7Z20857UPuhcUZ9SyAWm+pRP5Glb/RFOCmbJBYadjlXyFJujIg9vLqk+QlGmT/NAh8ZxAbawEaXwunUm2RrNGAqvvzbxAAkBgsm8LBVM+Fxdv0LkGCBYIn8tmkTxhZ7TiA2oTCfgxT39AYojn7dyqHv5dJtN+nWG2dWMI2nM71r5bGXWiy0WZSZpoanSXhqz5DVks6AVMMzhJdbujM2YtkMxYQIcIWAzeJGD+OqsQqsDZuApRGeQ5IIX2tewYYQXiB0DwQQxgKaS9zk4KCEcj3BBre3MpKOpN6G+ktso2Ff0LClHc7leIbW+bmqB4uiVDlJqdHKqz1guOOFJF7Bc0fYWojMlgWSpmRcFUdP+zl9qiaSTeT4EOcUhK5ZchrlwUrlCgDPWeuK3uAxPbyd5Dz1UHamGkd61Rj6UTU+Moq0tffm4+uXKgwOyVyI/FGhAaXRwDmpD8oBQgu7rZ5Zw2728Xc4MLZ9My/7GUQuGlu6oXGh8s6Fo6tgFxWTCANXPpCywfD9Y1zBHdCtWpQerYqUAgRpSjjQ4sn/wWgug+mGrmAQ8PFroHgyMlaJ2PEGnLoscQKy/2shbpdQbWmd6ROYfmYm4DEtDhR1Pc/sdx6G78/JqslW6E/DUyH9WExxJk9jh4pKull1HIWj2mgXlXOMznst8vNOGzlN3qRtYl2KjqSMIudEtqTIjR45GcQNwfQCRGs5qLKzC6V8wC72
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:MN2PR12MB3775.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(4636009)(39860400002)(136003)(366004)(376002)(396003)(346002)(38100700002)(5660300002)(110136005)(2616005)(83380400001)(8676002)(66946007)(4744005)(186003)(31686004)(6486002)(86362001)(316002)(8936002)(6666004)(2906002)(54906003)(478600001)(36756003)(66476007)(4326008)(66556008)(7416002)(31696002)(43740500002)(45980500001);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Y09KM3Y4Rzh6Nm1TZEFpaG1Gc0d3VVoxdkFNbnVUdWdjZjlRVm9RZzd3b2to?=
+ =?utf-8?B?ZUpVOEJOb2dYNkoxWU9sVklnaU9zbkI4c1I4VE1lelQzalJ5RmtiZ3JtMnRM?=
+ =?utf-8?B?a2plY20ya2Z3N1FBODRZdFU3eUVNSkhpSEpzOUtNWU1KWHNrSXorLzlCVTAy?=
+ =?utf-8?B?MWlyM3FTMWRrSlhKdTNMTDlyUFF0SGFxRWRjV3dqVEtlSm9HZ3huR0tTeEdT?=
+ =?utf-8?B?SlM5bmpGdHFEWmVBNmIrdllwT3RaVCtlQWhla1hwM3ptc2dDaHBFZkJKamRi?=
+ =?utf-8?B?RTg2SGs2OFd6V3BabTNXRjFaSGUzVHRUNXpueXNGRG5qMXFhc0h2YVNaSEJ5?=
+ =?utf-8?B?b3dHdGpJQVJmMW1IRzNldUZ3dDdseUJMTjFmdUdXYVN6YXpKWEY0cm9qZ1ZK?=
+ =?utf-8?B?VkJRSnBMWi9va00vMkZ0Q0UydzdhazA3ZThZbEdqNmZKMzVnZnRPZnNpTnhs?=
+ =?utf-8?B?TGNBdWtveXdTS0pYMVhxYkdWOTVHMVR0Q2dydWNwUE5xYVR5NkRkOWFONSth?=
+ =?utf-8?B?TG5Xa2dub2ZMRGpPMU8xRWpiSis5dXdHSVFyTEZnS1MvSDkxY1IwSlpHeEhP?=
+ =?utf-8?B?RzVjcEtaMFZCZ0lUL1hGajN3T1JUWEk3VEM5SWhIYmFodElHKzJYRkgzTm1V?=
+ =?utf-8?B?K2RoR25RNDUyUTRjRUFiKzNrZzFvanpxTzR3K2wvb3RhckRpa21CeFMzcGRQ?=
+ =?utf-8?B?Q3JzeWhZd25ZNm9TWkFIR3VEeDNPNENXckw4cjQzdEZUV05qVjg0WUNIbXp0?=
+ =?utf-8?B?aTZocVdrRmt3eHdkaGMxbkNIc1dKQU1NSmZtWnhTT00zeEdxS1JwN0EyQlJH?=
+ =?utf-8?B?aVZaZmdvYTJQTEpnODhJWExtcVphVmxpU2sxZnpmSGlUSGVjdTVlTkMxTjRB?=
+ =?utf-8?B?RkNZYjBldDFwK1ZwUUx0NklpR2tQd1dsZWVJZWxTWXFHRnQ2b2RjQ3VCSlha?=
+ =?utf-8?B?TkQ5RWlvQjZjNHdRVXRIZHJRd3gzWmE2VGI3eWJ3ZzFEYzB5ZmF3N0M0QzNF?=
+ =?utf-8?B?T3JxRDhZUldLdWV4ZjFtd2ZUTnlndDRyeWRyeGluTFlJZEFqYVFwV21RVzdC?=
+ =?utf-8?B?b3d0ajF4U3ZvWkluNkxVbzN1Y1JyS3g5eDgycURpLzd3ejBFRzZCUkM1aW5Z?=
+ =?utf-8?B?cHBzdjdyYkpOa2Y0cXVOQjE0VEw2ekdZb1p3RHJRcXI5cGR3VzkwVW9hZXBP?=
+ =?utf-8?B?YTljck5WTE56M3hodlF6WmJzNDJHVkx5amowNHo1WEJ5V042ZlR4Ry85OGF5?=
+ =?utf-8?B?YlZMYmt0UE93RGxIR2hza1dONE9xY215Ly92ckd0SWcrbk1vOGRtRDRtQ2Z1?=
+ =?utf-8?B?ZHhVeW81aXVWekVScG5CcUZGNGZoUVkveUtrVGozMjdybUhNRngzQmIxajFC?=
+ =?utf-8?B?Nkxhc1NjUFNYTWV4aXlxMHpNYjh6NTZEenRYTUdJbGxCVVhlN3puZ3RHQS90?=
+ =?utf-8?B?MDVUK1B0Z3F5ZytHdVpPOGlRNWQ2Q0oxaWw5YjloeHY0UTBWZFV5V1MySXBT?=
+ =?utf-8?B?ZVZ3QmhFZnVieHM4M1RORTZ1VHhxNGdjTWZRNUc0WXpHdmgzYUVrSWxHRVl5?=
+ =?utf-8?B?R01lVEFMdGNJRHdSYm5QYVRPRDVmQXFuYVpaQzh6Uzhta0xBMTF5YjNZVzkw?=
+ =?utf-8?B?Z1Z5T1lNM05mSy9YTk1xQk9WT1BGMkEwN2hVTVM1VjQvZk9SV21YMU5ZTkFq?=
+ =?utf-8?B?aDd0dDZuc3Y3Wmh3c1p6cXp0MjVDSUZFTCtteHA1TURnNmZQK3MzelhQdkV3?=
+ =?utf-8?B?aTQrKzhyL3oyWkVGa2wwcWE3OFZsQ2NPNDRNNFp6OWNIZm9LY3JuRW9qSzhv?=
+ =?utf-8?B?TG5xSkxsMmdmRlBFV2xrUXgxTWU2ZDFpbktDbytGOGw2ajlPcExHMXpDUGVz?=
+ =?utf-8?Q?9naPV9ygiMwep?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8aebc0f1-1977-42dd-bc36-08d948294ddd
+X-MS-Exchange-CrossTenant-AuthSource: MN2PR12MB3775.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Jul 2021 07:14:08.9800 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: R9rR080WXzQ96bzhGe5JYvFUP4o+NFOr9ZU4CFxN3nOtx8UrnYZ8tc6beqgX1q9N
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB3790
+Subject: Re: [Nouveau] [PATCH 1/7] vgaarb: remove VGA_DEFAULT_DEVICE
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -54,298 +132,33 @@ Cc: Joonas Lahtinen <joonas.lahtinen@linux.intel.com>, kvm@vger.kernel.org,
  amd-gfx@lists.freedesktop.org, nouveau@lists.freedesktop.org,
  dri-devel@lists.freedesktop.org, "Pan, Xinhui" <Xinhui.Pan@amd.com>,
  Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>,
- Alex Williamson <alex.williamson@redhat.com>,
  Jani Nikula <jani.nikula@linux.intel.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ Alex Williamson <alex.williamson@redhat.com>,
+ Maxime Ripard <mripard@kernel.org>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
  Alex Deucher <alexander.deucher@amd.com>, intel-gfx@lists.freedesktop.org,
- =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
  Ben Skeggs <bskeggs@redhat.com>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-The VGA arbitration is entirely based on pci_dev structures, so just pass
-that back to the set_vga_decode callback.
-
-Signed-off-by: Christoph Hellwig <hch@lst.de>
----
- drivers/gpu/drm/amd/amdgpu/amdgpu_device.c |  9 ++++----
- drivers/gpu/drm/i915/display/intel_vga.c   |  7 ++++---
- drivers/gpu/drm/nouveau/nouveau_vga.c      |  6 +++---
- drivers/gpu/drm/radeon/radeon_device.c     |  9 ++++----
- drivers/gpu/vga/vgaarb.c                   | 24 +++++++++-------------
- drivers/vfio/pci/vfio_pci.c                |  9 ++++----
- include/linux/vgaarb.h                     | 10 ++++-----
- 7 files changed, 36 insertions(+), 38 deletions(-)
-
-diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_device.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_device.c
-index e433fab6bcf6..8398daa0c06a 100644
---- a/drivers/gpu/drm/amd/amdgpu/amdgpu_device.c
-+++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_device.c
-@@ -1266,15 +1266,16 @@ bool amdgpu_device_need_post(struct amdgpu_device *adev)
- /**
-  * amdgpu_device_vga_set_decode - enable/disable vga decode
-  *
-- * @cookie: amdgpu_device pointer
-+ * @pdev: PCI device pointer
-  * @state: enable/disable vga decode
-  *
-  * Enable/disable vga decode (all asics).
-  * Returns VGA resource flags.
-  */
--static unsigned int amdgpu_device_vga_set_decode(void *cookie, bool state)
-+static unsigned int amdgpu_device_vga_set_decode(struct pci_dev *pdev,
-+		bool state)
- {
--	struct amdgpu_device *adev = cookie;
-+	struct amdgpu_device *adev = drm_to_adev(pci_get_drvdata(pdev));
- 	amdgpu_asic_set_vga_state(adev, state);
- 	if (state)
- 		return VGA_RSRC_LEGACY_IO | VGA_RSRC_LEGACY_MEM |
-@@ -3715,7 +3716,7 @@ int amdgpu_device_init(struct amdgpu_device *adev,
- 	/* this will fail for cards that aren't VGA class devices, just
- 	 * ignore it */
- 	if ((adev->pdev->class >> 8) == PCI_CLASS_DISPLAY_VGA)
--		vga_client_register(adev->pdev, adev, amdgpu_device_vga_set_decode);
-+		vga_client_register(adev->pdev, amdgpu_device_vga_set_decode);
- 
- 	if (amdgpu_device_supports_px(ddev)) {
- 		px = true;
-diff --git a/drivers/gpu/drm/i915/display/intel_vga.c b/drivers/gpu/drm/i915/display/intel_vga.c
-index 0222719e0824..16c250700985 100644
---- a/drivers/gpu/drm/i915/display/intel_vga.c
-+++ b/drivers/gpu/drm/i915/display/intel_vga.c
-@@ -121,9 +121,9 @@ intel_vga_set_state(struct drm_i915_private *i915, bool enable_decode)
- }
- 
- static unsigned int
--intel_vga_set_decode(void *cookie, bool enable_decode)
-+intel_vga_set_decode(struct pci_dev *pdev, bool enable_decode)
- {
--	struct drm_i915_private *i915 = cookie;
-+	struct drm_i915_private *i915 = pdev_to_i915(pdev);
- 
- 	intel_vga_set_state(i915, enable_decode);
- 
-@@ -136,6 +136,7 @@ intel_vga_set_decode(void *cookie, bool enable_decode)
- 
- int intel_vga_register(struct drm_i915_private *i915)
- {
-+
- 	struct pci_dev *pdev = to_pci_dev(i915->drm.dev);
- 	int ret;
- 
-@@ -147,7 +148,7 @@ int intel_vga_register(struct drm_i915_private *i915)
- 	 * then we do not take part in VGA arbitration and the
- 	 * vga_client_register() fails with -ENODEV.
- 	 */
--	ret = vga_client_register(pdev, i915, intel_vga_set_decode);
-+	ret = vga_client_register(pdev, intel_vga_set_decode);
- 	if (ret && ret != -ENODEV)
- 		return ret;
- 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_vga.c b/drivers/gpu/drm/nouveau/nouveau_vga.c
-index d071c11249a3..60cd8c0463df 100644
---- a/drivers/gpu/drm/nouveau/nouveau_vga.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_vga.c
-@@ -11,9 +11,9 @@
- #include "nouveau_vga.h"
- 
- static unsigned int
--nouveau_vga_set_decode(void *priv, bool state)
-+nouveau_vga_set_decode(struct pci_dev *pdev, bool state)
- {
--	struct nouveau_drm *drm = nouveau_drm(priv);
-+	struct nouveau_drm *drm = nouveau_drm(pci_get_drvdata(pdev));
- 	struct nvif_object *device = &drm->client.device.object;
- 
- 	if (drm->client.device.info.family == NV_DEVICE_INFO_V0_CURIE &&
-@@ -94,7 +94,7 @@ nouveau_vga_init(struct nouveau_drm *drm)
- 		return;
- 	pdev = to_pci_dev(dev->dev);
- 
--	vga_client_register(pdev, dev, nouveau_vga_set_decode);
-+	vga_client_register(pdev, nouveau_vga_set_decode);
- 
- 	/* don't register Thunderbolt eGPU with vga_switcheroo */
- 	if (pci_is_thunderbolt_attached(pdev))
-diff --git a/drivers/gpu/drm/radeon/radeon_device.c b/drivers/gpu/drm/radeon/radeon_device.c
-index 11e8e42d99b3..cec03238e14d 100644
---- a/drivers/gpu/drm/radeon/radeon_device.c
-+++ b/drivers/gpu/drm/radeon/radeon_device.c
-@@ -1067,15 +1067,16 @@ void radeon_combios_fini(struct radeon_device *rdev)
- /**
-  * radeon_vga_set_decode - enable/disable vga decode
-  *
-- * @cookie: radeon_device pointer
-+ * @pdev: PCI device
-  * @state: enable/disable vga decode
-  *
-  * Enable/disable vga decode (all asics).
-  * Returns VGA resource flags.
-  */
--static unsigned int radeon_vga_set_decode(void *cookie, bool state)
-+static unsigned int radeon_vga_set_decode(struct pci_dev *pdev, bool state)
- {
--	struct radeon_device *rdev = cookie;
-+	struct drm_device *dev = pci_get_drvdata(pdev);
-+	struct radeon_device *rdev = dev->dev_private;
- 	radeon_vga_set_state(rdev, state);
- 	if (state)
- 		return VGA_RSRC_LEGACY_IO | VGA_RSRC_LEGACY_MEM |
-@@ -1434,7 +1435,7 @@ int radeon_device_init(struct radeon_device *rdev,
- 	/* if we have > 1 VGA cards, then disable the radeon VGA resources */
- 	/* this will fail for cards that aren't VGA class devices, just
- 	 * ignore it */
--	vga_client_register(rdev->pdev, rdev, radeon_vga_set_decode);
-+	vga_client_register(rdev->pdev, radeon_vga_set_decode);
- 
- 	if (rdev->flags & RADEON_IS_PX)
- 		runtime = true;
-diff --git a/drivers/gpu/vga/vgaarb.c b/drivers/gpu/vga/vgaarb.c
-index 4bde017f6f22..569930552957 100644
---- a/drivers/gpu/vga/vgaarb.c
-+++ b/drivers/gpu/vga/vgaarb.c
-@@ -72,8 +72,7 @@ struct vga_device {
- 	unsigned int io_norm_cnt;	/* normal IO count */
- 	unsigned int mem_norm_cnt;	/* normal MEM count */
- 	bool bridge_has_one_vga;
--	void *cookie;
--	unsigned int (*set_vga_decode)(void *cookie, bool decode);
-+	unsigned int (*set_decode)(struct pci_dev *pdev, bool decode);
- };
- 
- static LIST_HEAD(vga_list);
-@@ -806,7 +805,7 @@ static void __vga_set_legacy_decoding(struct pci_dev *pdev,
- 		goto bail;
- 
- 	/* don't let userspace futz with kernel driver decodes */
--	if (userspace && vgadev->set_vga_decode)
-+	if (userspace && vgadev->set_decode)
- 		goto bail;
- 
- 	/* update the device decodes + counter */
-@@ -840,12 +839,11 @@ EXPORT_SYMBOL(vga_set_legacy_decoding);
- /**
-  * vga_client_register - register or unregister a VGA arbitration client
-  * @pdev: pci device of the VGA client
-- * @cookie: client cookie to be used in callbacks
-- * @set_vga_decode: vga decode change callback
-+ * @set_decode: vga decode change callback
-  *
-  * Clients have two callback mechanisms they can use.
-  *
-- * @set_vga_decode callback: If a client can disable its GPU VGA resource, it
-+ * @set_decode callback: If a client can disable its GPU VGA resource, it
-  * will get a callback from this to set the encode/decode state.
-  *
-  * Rationale: we cannot disable VGA decode resources unconditionally some single
-@@ -862,9 +860,8 @@ EXPORT_SYMBOL(vga_set_legacy_decoding);
-  *
-  * Returns: 0 on success, -1 on failure
-  */
--int vga_client_register(struct pci_dev *pdev, void *cookie,
--			unsigned int (*set_vga_decode)(void *cookie,
--						       bool decode))
-+int vga_client_register(struct pci_dev *pdev,
-+		unsigned int (*set_decode)(struct pci_dev *pdev, bool decode))
- {
- 	int ret = -ENODEV;
- 	struct vga_device *vgadev;
-@@ -875,8 +872,7 @@ int vga_client_register(struct pci_dev *pdev, void *cookie,
- 	if (!vgadev)
- 		goto bail;
- 
--	vgadev->set_vga_decode = set_vga_decode;
--	vgadev->cookie = cookie;
-+	vgadev->set_decode = set_decode;
- 	ret = 0;
- 
- bail:
-@@ -1386,9 +1382,9 @@ static void vga_arbiter_notify_clients(void)
- 			new_state = false;
- 		else
- 			new_state = true;
--		if (vgadev->set_vga_decode) {
--			new_decodes = vgadev->set_vga_decode(vgadev->cookie,
--							     new_state);
-+		if (vgadev->set_decode) {
-+			new_decodes = vgadev->set_decode(vgadev->pdev,
-+							 new_state);
- 			vga_update_device_decodes(vgadev, new_decodes);
- 		}
- 	}
-diff --git a/drivers/vfio/pci/vfio_pci.c b/drivers/vfio/pci/vfio_pci.c
-index cc7d7592e7b1..cf27df8048db 100644
---- a/drivers/vfio/pci/vfio_pci.c
-+++ b/drivers/vfio/pci/vfio_pci.c
-@@ -119,10 +119,9 @@ static bool vfio_pci_is_denylisted(struct pci_dev *pdev)
-  * has no way to get to it and routing can be disabled externally at the
-  * bridge.
-  */
--static unsigned int vfio_pci_set_vga_decode(void *opaque, bool single_vga)
-+static unsigned int vfio_pci_set_decode(struct pci_dev *pdev, bool single_vga)
- {
--	struct vfio_pci_device *vdev = opaque;
--	struct pci_dev *tmp = NULL, *pdev = vdev->pdev;
-+	struct pci_dev *tmp = NULL;
- 	unsigned char max_busnr;
- 	unsigned int decodes;
- 
-@@ -1954,10 +1953,10 @@ static int vfio_pci_vga_init(struct vfio_pci_device *vdev)
- 	if (!vfio_pci_is_vga(pdev))
- 		return 0;
- 
--	ret = vga_client_register(pdev, vdev, vfio_pci_set_vga_decode);
-+	ret = vga_client_register(pdev, vfio_pci_set_decode);
- 	if (ret)
- 		return ret;
--	vga_set_legacy_decoding(pdev, vfio_pci_set_vga_decode(vdev, false));
-+	vga_set_legacy_decoding(pdev, vfio_pci_set_decode(pdev, false));
- 	return 0;
- }
- 
-diff --git a/include/linux/vgaarb.h b/include/linux/vgaarb.h
-index ea45d3e86fff..b4b9137f9792 100644
---- a/include/linux/vgaarb.h
-+++ b/include/linux/vgaarb.h
-@@ -51,8 +51,8 @@ void vga_put(struct pci_dev *pdev, unsigned int rsrc);
- struct pci_dev *vga_default_device(void);
- void vga_set_default_device(struct pci_dev *pdev);
- int vga_remove_vgacon(struct pci_dev *pdev);
--int vga_client_register(struct pci_dev *pdev, void *cookie,
--			unsigned int (*set_vga_decode)(void *cookie, bool state));
-+int vga_client_register(struct pci_dev *pdev,
-+		unsigned int (*set_decode)(struct pci_dev *pdev, bool state));
- #else /* CONFIG_VGA_ARB */
- static inline void vga_set_legacy_decoding(struct pci_dev *pdev,
- 		unsigned int decodes)
-@@ -77,8 +77,8 @@ static inline int vga_remove_vgacon(struct pci_dev *pdev)
- {
- 	return 0;
- }
--static inline int vga_client_register(struct pci_dev *pdev, void *cookie,
--				      unsigned int (*set_vga_decode)(void *cookie, bool state))
-+static inline int vga_client_register(struct pci_dev *pdev,
-+		unsigned int (*set_decode)(struct pci_dev *pdev, bool state))
- {
- 	return 0;
- }
-@@ -116,7 +116,7 @@ static inline int vga_get_uninterruptible(struct pci_dev *pdev,
- 
- static inline void vga_client_unregister(struct pci_dev *pdev)
- {
--	vga_client_register(pdev, NULL, NULL);
-+	vga_client_register(pdev, NULL);
- }
- 
- #endif /* LINUX_VGA_H */
--- 
-2.30.2
-
-_______________________________________________
-Nouveau mailing list
-Nouveau@lists.freedesktop.org
-https://lists.freedesktop.org/mailman/listinfo/nouveau
+QW0gMTYuMDcuMjEgdW0gMDg6MTYgc2NocmllYiBDaHJpc3RvcGggSGVsbHdpZzoKPiBUaGUgZGVm
+aW5lIGlzIGVudGlyZWx5IHVudXNlZC4KPgo+IFNpZ25lZC1vZmYtYnk6IENocmlzdG9waCBIZWxs
+d2lnIDxoY2hAbHN0LmRlPgoKSSdtIG5vdCBhbiBleHBlcnQgZm9yIHRoaXMgcGFydGljdWxhciBj
+b2RlLCBidXQgYXQgbGVhc3Qgb2YgaGFuZCAKZXZlcnl0aGluZyB5b3UgZG8gaGVyZSBtYWtlcyB0
+b3RhbGx5IHNlbnNlLgoKV2hvbGUgc2VyaWVzIGlzIEFja2VkLWJ5OiBDaHJpc3RpYW4gS8O2bmln
+IDxjaHJpc3RpYW4ua29lbmlnQGFtZC5jb20+CgpSZWdhcmRzLApDaHJpc3RpYW4uCgo+IC0tLQo+
+ICAgaW5jbHVkZS9saW51eC92Z2FhcmIuaCB8IDYgLS0tLS0tCj4gICAxIGZpbGUgY2hhbmdlZCwg
+NiBkZWxldGlvbnMoLSkKPgo+IGRpZmYgLS1naXQgYS9pbmNsdWRlL2xpbnV4L3ZnYWFyYi5oIGIv
+aW5jbHVkZS9saW51eC92Z2FhcmIuaAo+IGluZGV4IGRjNmRkY2U5MjA2Ni4uMjZlYzhhMDU3ZDJh
+IDEwMDY0NAo+IC0tLSBhL2luY2x1ZGUvbGludXgvdmdhYXJiLmgKPiArKysgYi9pbmNsdWRlL2xp
+bnV4L3ZnYWFyYi5oCj4gQEAgLTQyLDEyICs0Miw2IEBACj4gICAjZGVmaW5lIFZHQV9SU1JDX05P
+Uk1BTF9JTyAgICAgMHgwNAo+ICAgI2RlZmluZSBWR0FfUlNSQ19OT1JNQUxfTUVNICAgIDB4MDgK
+PiAgIAo+IC0vKiBQYXNzaW5nIHRoYXQgaW5zdGVhZCBvZiBhIHBjaV9kZXYgdG8gdXNlIHRoZSBz
+eXN0ZW0gImRlZmF1bHQiCj4gLSAqIGRldmljZSwgdGhhdCBpcyB0aGUgb25lIHVzZWQgYnkgdmdh
+Y29uLiBBcmNocyB3aWxsIHByb2JhYmx5Cj4gLSAqIGhhdmUgdG8gcHJvdmlkZSB0aGVpciBvd24g
+dmdhX2RlZmF1bHRfZGV2aWNlKCk7Cj4gLSAqLwo+IC0jZGVmaW5lIFZHQV9ERUZBVUxUX0RFVklD
+RSAgICAgKE5VTEwpCj4gLQo+ICAgc3RydWN0IHBjaV9kZXY7Cj4gICAKPiAgIC8qIEZvciB1c2Ug
+YnkgY2xpZW50cyAqLwoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX18KTm91dmVhdSBtYWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcK
+aHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1Cg==
