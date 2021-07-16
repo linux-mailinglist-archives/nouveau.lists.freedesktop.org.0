@@ -2,40 +2,42 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 684143CB24F
-	for <lists+nouveau@lfdr.de>; Fri, 16 Jul 2021 08:17:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5D6EB3CB254
+	for <lists+nouveau@lfdr.de>; Fri, 16 Jul 2021 08:18:28 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 62D596E911;
-	Fri, 16 Jul 2021 06:17:47 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B51F96E913;
+	Fri, 16 Jul 2021 06:18:26 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from casper.infradead.org (casper.infradead.org
  [IPv6:2001:8b0:10b:1236::1])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 194846E90E;
- Fri, 16 Jul 2021 06:17:45 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9E1236E913;
+ Fri, 16 Jul 2021 06:18:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
- Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:In-Reply-To:References;
- bh=hXKXpHy9bGS1uK5ljrzn6TAqp0ZG8VouCBfEiDPy5WA=; b=GJEd673PlZ7AR7tV1dxC6wtjsA
- UVpNI30sgXvL/Ry0x/2wOpyL+R4hVH7b+FVk44+PcY2U23pbL9UsP7EVpXGN28XR9ttgeZiV2z7Am
- M3G9wLjcCf2+hUP7WWVUU5LYENQtqKW1m5VSe50ac7qmR7lIuZzI70dS71V7szcjFa9XCDPjltDGt
- MA7CqwCSw51SF4wN865Znt0Hi4BzkaXSHseL8hTa+yAMz/tGzmHdNxoZKtZrtEEB090i6RWKUZrWU
- hDhdPWeWoFSbSQo5ZxZ8BT+70Qh/GL4QAscek3l89/HjCwtXLGYQ5m+z4m+sqS4y3VTKswXFV3PZa
- OtpHoarg==;
+ References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
+ Content-Type:Content-ID:Content-Description;
+ bh=YF5b8TNXnQcbiaEvFAaNqUDv1lgagsKKhX10bSFvUTo=; b=sqNZerJ2NfaOjzmouDqVOEgUxH
+ 3oMlW7vdLWOG4TnyeuXQKYg2N1l5qqFACYpROZdmOPyoaqFX35AT9x2rOMe2v/Z/UKbOdhOENcdSV
+ v2yInzYd3hKcOEZuzoXG2Tchc8co4oEoNEaJ20LeTASbXvnnlhztW/dilemKPiITr2/8eDWOpQq9n
+ d9rIs+jaX8+oo1UrlVwdQzR4OL5gvx8Fm8U2r8ruByVCIQwqQQcvdFMtjJeXdJB73kv4Vnjy7a0KJ
+ ON4N4OnkGUiSU3Y/9DVc1mEU3W5nqtMzLed1FojqNAnGuo7NOmoxFYPh04123B/rL4UKC75N/SVyg
+ hhVZFMMg==;
 Received: from [2001:4bb8:184:8b7c:6b57:320d:f068:19c6] (helo=localhost)
  by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1m4H9G-004CpP-Od; Fri, 16 Jul 2021 06:16:40 +0000
+ id 1m4H9i-004CsF-5q; Fri, 16 Jul 2021 06:17:12 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: David Airlie <airlied@linux.ie>,
 	Daniel Vetter <daniel@ffwll.ch>
-Date: Fri, 16 Jul 2021 08:16:27 +0200
-Message-Id: <20210716061634.2446357-1-hch@lst.de>
+Date: Fri, 16 Jul 2021 08:16:28 +0200
+Message-Id: <20210716061634.2446357-2-hch@lst.de>
 X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20210716061634.2446357-1-hch@lst.de>
+References: <20210716061634.2446357-1-hch@lst.de>
 MIME-Version: 1.0
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
  casper.infradead.org. See http://www.infradead.org/rpr.html
-Subject: [Nouveau] misc vgaarb cleanups
+Subject: [Nouveau] [PATCH 1/7] vgaarb: remove VGA_DEFAULT_DEVICE
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,20 +65,33 @@ Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi all,
+The define is entirely unused.
 
-this series cleans up a bunch of lose ends in the vgaarb code.
+Signed-off-by: Christoph Hellwig <hch@lst.de>
+---
+ include/linux/vgaarb.h | 6 ------
+ 1 file changed, 6 deletions(-)
 
-Diffstat:
- drivers/gpu/drm/amd/amdgpu/amdgpu_device.c |   11 +-
- drivers/gpu/drm/drm_irq.c                  |    4 
- drivers/gpu/drm/i915/display/intel_vga.c   |    9 +-
- drivers/gpu/drm/nouveau/nouveau_vga.c      |    8 -
- drivers/gpu/drm/radeon/radeon_device.c     |   11 +-
- drivers/gpu/vga/vgaarb.c                   |   67 +++++-----------
- drivers/vfio/pci/vfio_pci.c                |   11 +-
- include/linux/vgaarb.h                     |  118 ++++++++++-------------------
- 8 files changed, 93 insertions(+), 146 deletions(-)
+diff --git a/include/linux/vgaarb.h b/include/linux/vgaarb.h
+index dc6ddce92066..26ec8a057d2a 100644
+--- a/include/linux/vgaarb.h
++++ b/include/linux/vgaarb.h
+@@ -42,12 +42,6 @@
+ #define VGA_RSRC_NORMAL_IO     0x04
+ #define VGA_RSRC_NORMAL_MEM    0x08
+ 
+-/* Passing that instead of a pci_dev to use the system "default"
+- * device, that is the one used by vgacon. Archs will probably
+- * have to provide their own vga_default_device();
+- */
+-#define VGA_DEFAULT_DEVICE     (NULL)
+-
+ struct pci_dev;
+ 
+ /* For use by clients */
+-- 
+2.30.2
+
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
