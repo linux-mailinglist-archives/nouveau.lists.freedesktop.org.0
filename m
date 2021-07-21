@@ -2,65 +2,57 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id C9ECA3D0F58
-	for <lists+nouveau@lfdr.de>; Wed, 21 Jul 2021 15:17:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A6C6C3D1452
+	for <lists+nouveau@lfdr.de>; Wed, 21 Jul 2021 18:41:52 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 180F06E947;
-	Wed, 21 Jul 2021 13:17:06 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B149D6EC0A;
+	Wed, 21 Jul 2021 16:41:49 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 53A206E947
- for <nouveau@lists.freedesktop.org>; Wed, 21 Jul 2021 13:17:04 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1626873423;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=WdXnmIthBfvhDLRe9HH7m7PaWPjTv9M8l8OKpRGU2qs=;
- b=LJ5FfwJfh1t55ie7rIe0n0TFtq3AlKqhSL1ZFuEd2Btv6fyMqh6yG83qTDIRFdoN4+xasW
- pOKo469A0XmucJCAnZPNKaYVGfJBC2iNMlLMlvl8w1wSsnjCI6CT5HYRYbIlQBR2QsdOdd
- 8LU2eZ6dFGySdGmZzzbKVGGTVOe8VW8=
-Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
- [209.85.221.70]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-190-i9sJ56dVPu2u4VNNTaAj3w-1; Wed, 21 Jul 2021 09:17:02 -0400
-X-MC-Unique: i9sJ56dVPu2u4VNNTaAj3w-1
-Received: by mail-wr1-f70.google.com with SMTP id
- k3-20020a5d52430000b0290138092aea94so995160wrc.20
- for <nouveau@lists.freedesktop.org>; Wed, 21 Jul 2021 06:17:02 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=WdXnmIthBfvhDLRe9HH7m7PaWPjTv9M8l8OKpRGU2qs=;
- b=CFdGALDDpShsVWu02ZS8rljkWMnxBbTpCQUEvP2gYL7TjEaoZicCbxpWtnV6pcyr+n
- D5RbSvaUqnWo6W/if/Hd9vs8mGJ2nO75peMW+m8k2TciujdrHAbuX2YTAMgsCOIM+UNb
- Yn6HwWJVmRYLGKMkcYaG/C5XKZPc+Rmy0Hws1texUi8UR1HBxqMd126JmXrJBTpTa2cs
- 1xhIzey+TwUaCwKGjFfSZyPfoQS+cms8SvG8HDCs9GzEJ/h6y+e6ikaBZKnArTZAVp/J
- upAJK+BAyItKACmXHtE8y5+zLkno5txAOrv01Xq2dLM312D3DXH5jfVXbBmRIng0m58t
- vRFw==
-X-Gm-Message-State: AOAM532X2oXYOyV2IUc4uFY1ZUPjQ2wdFajg9AJCjaHq16Cuwcyy7TIE
- EuWEdJcm50d98c6hiqvFoDO8fsx4RZj4tJ+tPKYTTr3uzT0wUB7UrbpoRK8BcnYVVPxH/MMT1TK
- JFSFe5r0/cjRe9sZRsbF2rL3XRSeTOnG540tMHzQ85Q==
-X-Received: by 2002:adf:ec0c:: with SMTP id x12mr43978977wrn.113.1626873420971; 
- Wed, 21 Jul 2021 06:17:00 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJxtxqiFQhd2Yqzn7z0EYzjwIF+axMAgGWEKkS9ybmwpZq95QpPBqz+V9yQaSnNITfDsBvd/05suVCgIjpIrGP8=
-X-Received: by 2002:adf:ec0c:: with SMTP id x12mr43978959wrn.113.1626873420750; 
- Wed, 21 Jul 2021 06:17:00 -0700 (PDT)
-MIME-Version: 1.0
+Received: from smtpq1.tb.ukmail.iss.as9143.net
+ (smtpq1.tb.ukmail.iss.as9143.net [212.54.57.96])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E01C56EC0A
+ for <nouveau@lists.freedesktop.org>; Wed, 21 Jul 2021 16:41:48 +0000 (UTC)
+Received: from [212.54.57.112] (helo=csmtp8.tb.ukmail.iss.as9143.net)
+ by smtpq1.tb.ukmail.iss.as9143.net with esmtp (Exim 4.86_2)
+ (envelope-from <sboyce@blueyonder.co.uk>) id 1m6FI3-0007nQ-4I
+ for nouveau@lists.freedesktop.org; Wed, 21 Jul 2021 18:41:47 +0200
+Received: from [192.168.10.232] ([82.40.7.93]) by cmsmtp with ESMTPA
+ id 6FI2mEy19WWOW6FI2meXUW; Wed, 21 Jul 2021 18:41:47 +0200
+X-Originating-IP: [82.40.7.93]
+X-Authenticated-Sender: sboyce@blueyonder.co.uk
+X-Spam: 0
+X-Authority: v=2.4 cv=H5m4f8Ui c=1 sm=1 tr=0 ts=60f84e4b cx=a_exe
+ a=0t5s/6s+ZVRG1rmEzJFcZA==:117 a=0t5s/6s+ZVRG1rmEzJFcZA==:17
+ a=N659UExz7-8A:10 a=e_q4qTt1xDgA:10 a=x7bEGLp0ZPQA:10 a=VwQbUJbxAAAA:8
+ a=20KFwNOVAAAA:8 a=a5Gf7U6LAAAA:8 a=e5mUnYsNAAAA:8 a=mvCX7tj1kt5k_Y4krggA:9
+ a=pILNOxqGKmIA:10 a=AjGcO6oz07-iQ99wixmX:22 a=VWYBCMy2-3DvUfgBPAUA:22
+ a=Vxmtnl_E_bksehYqCbjh:22
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=blueyonder.co.uk;
+ s=meg.feb2017; t=1626885707;
+ bh=y3BkSDeYLiYjXi9b3I+42ToYO5ypSlbye0rf+kdFuGY=;
+ h=Reply-To:Subject:To:Cc:References:From:Date:In-Reply-To;
+ b=GDjOkM9WEaftQQQpBwx7GYIBgL5EbJKbqTr2q1k39/4mXRPfcgT/bvIuBggx7EpqY
+ YXGJp2vFy/5FamW4mt7NMo6xBiWulxGG8fAgH12Dx4oj0yAkCXG+O8gptpaI7qV92U
+ 9oYc4+RDRfvJyJhii0I7Frxr+sZR0VVUsTpYk6PilVyDyLb7izYUewkVdSUcSb6AwM
+ ywnmr4vgI4MbBs6gHx/7nN5Vav8lGWHGOcn8PG2DM8MtrYz3To7/Pupr2Meqv0fhq/
+ TQyCmkjfNV5hhzVT2aUl4/r3xmsR9hsiFY2bgmpS75tY8K7oqddCJmIVm/c0cIJNhb
+ EVqXzsfM+3auw==
+To: Karol Herbst <kherbst@redhat.com>
 References: <02813601-91da-5ab3-7852-1947c7bbf84c@blueyonder.co.uk>
  <CACO55tvQr5Te3hgn6OXFba30gQPUy2vOBbYnAMgWXXOHZGxTLA@mail.gmail.com>
-In-Reply-To: <CACO55tvQr5Te3hgn6OXFba30gQPUy2vOBbYnAMgWXXOHZGxTLA@mail.gmail.com>
-From: Karol Herbst <kherbst@redhat.com>
-Date: Wed, 21 Jul 2021 15:16:49 +0200
-Message-ID: <CACO55tsVhQPSocHOyS4a74K7gN2s2tRHsn3h0xbLWG7eikSg5w@mail.gmail.com>
-To: sboyce@blueyonder.co.uk
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=kherbst@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
+ <CACO55tsVhQPSocHOyS4a74K7gN2s2tRHsn3h0xbLWG7eikSg5w@mail.gmail.com>
+From: Sid Boyce <sboyce@blueyonder.co.uk>
+Organization: blueyonder.co.uk
+Message-ID: <eec04424-4a0b-f20f-1995-02e10e0276bf@blueyonder.co.uk>
+Date: Wed, 21 Jul 2021 17:41:46 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.12.0
+MIME-Version: 1.0
+In-Reply-To: <CACO55tsVhQPSocHOyS4a74K7gN2s2tRHsn3h0xbLWG7eikSg5w@mail.gmail.com>
+Content-Language: en-GB
+X-CMAE-Envelope: MS4xfImpAlK7JpnoI3+3g6iXBFIzEEricKMfHV8rY9wU/ppVI7rrDxB4HUsYF48k7Ud75rlVimto8Iq3dKpNLYLa8Qyx/ZcOEB4JDvc6uAhYwDczjVchrq0Z
+ pxRkqgSCVcnpqfhOP4+wVtpu5Y6NLmUYYxyvWFmoTXGX/MZdSSd4coacjPQ4N/feIftt/vOG2iWostKou4KH7AWrjIGG/MRWJC8TbPLMS+YD3F4itOpnPzt4
 Subject: Re: [Nouveau] nouveau failure 5.14-rc1 and -rc2
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -73,134 +65,167 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
+Reply-To: sboyce@blueyonder.co.uk
 Cc: "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="windows-1252"; Format="flowed"
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-YWN0dWFsbHkuLiBpdCB3YXMgYWxyZWFkeSBmb3VuZCBpbiB0aGlzIHRocmVhZDoKaHR0cHM6Ly9s
-b3JlLmtlcm5lbC5vcmcvbGttbC9ZT0M0dWVrcEQ3aUEzeFBpQFJlZC9ULyBmaXhlcyBpbmNvbWlu
-Zy4KCk9uIFdlZCwgSnVsIDIxLCAyMDIxIGF0IDM6MTMgUE0gS2Fyb2wgSGVyYnN0IDxraGVyYnN0
-QHJlZGhhdC5jb20+IHdyb3RlOgo+Cj4gZnlpOiBJIGFtIGFibGUgdG8gcmVwcm9kdWNlIGl0IG9u
-IG15IG1hY2hpbmUgYW5kIHdpbGwgZmlndXJlIG91dAo+IHdoYXQncyB3cm9uZy4gVGhhbmtzIQo+
-Cj4gT24gTW9uLCBKdWwgMTksIDIwMjEgYXQgMTA6NTMgUE0gU2lkIEJveWNlIDxzYm95Y2VAYmx1
-ZXlvbmRlci5jby51az4gd3JvdGU6Cj4gPgo+ID4gQWxzbyBzZW50IHRoaXMgdG8ga2VybmVsIG1h
-aWxpbmcgbGlzdC4KPiA+Cj4gPiBJIHNhdyBhbiBlYXJsaWVyIGtlcm5lbCBtYWlsaW5nIGxpc3Qg
-cG9zdCAod2VlayA4IC0gMTUgSnVseSkgdGhhdCBzbyBmYXIKPiA+IGhhc24ndCBtYWRlIGl0IGlu
-dG8gNS4xNC1yYy4KPiA+Cj4gPgo+ID4gR1BVJ3MgYXJlIEdlRm9yY2UgR1RYIDE2NTAsIGFuZCAy
-IHdpdGggR2VGb3JjZSBHVFggMTA1MCBUaS4KPiA+Cj4gPiAzIHN5c3RlbXMgYWZmZWN0ZWQsIG5v
-dGhpbmcgZGlzcGxheWVkIGR1cmluZyBib290IHVwLiBJIHVzZSBzc2ggZnJvbSBhCj4gPiBydW5u
-aW5nIHN5c3RlbSB0byBsb29rIGF0IGRtZXNnIG91dHB1dC4KPiA+Cj4gPiBbTW9uIEp1bCAxOSAw
-MDowMjowNiAyMDIxXSBoaWQtZ2VuZXJpYyAwMDAzOjBDQ0Q6MDAyOC4wMDA0Ogo+ID4gaW5wdXQs
-aGlkcmF3MzogVVNCIEhJRCB2MS4wMCBEZXZpY2UgW1VTQiBBdWRpb10gb24gdXNiLTAwMDA6MDU6
-MDAuMy00L2lucHV0Mwo+ID4gW01vbiBKdWwgMTkgMDA6MDI6MDYgMjAyMV0gdXNiIDUtNjogbmV3
-IGZ1bGwtc3BlZWQgVVNCIGRldmljZSBudW1iZXIgNAo+ID4gdXNpbmcgeGhjaV9oY2QKPiA+IFtN
-b24gSnVsIDE5IDAwOjAyOjA2IDIwMjFdIHVzYiA1LTY6IGNvbmZpZyAxIGhhcyBhbiBpbnZhbGlk
-IGludGVyZmFjZQo+ID4gbnVtYmVyOiAyIGJ1dCBtYXggaXMgMQo+ID4gW01vbiBKdWwgMTkgMDA6
-MDI6MDYgMjAyMV0gdXNiIDUtNjogY29uZmlnIDEgaGFzIG5vIGludGVyZmFjZSBudW1iZXIgMQo+
-ID4gW01vbiBKdWwgMTkgMDA6MDI6MDYgMjAyMV0gdXNiIDUtNjogTmV3IFVTQiBkZXZpY2UgZm91
-bmQsIGlkVmVuZG9yPTBiMDUsCj4gPiBpZFByb2R1Y3Q9MThmMywgYmNkRGV2aWNlPSAxLjAwCj4g
-PiBbTW9uIEp1bCAxOSAwMDowMjowNiAyMDIxXSB1c2IgNS02OiBOZXcgVVNCIGRldmljZSBzdHJp
-bmdzOiBNZnI9MSwKPiA+IFByb2R1Y3Q9MiwgU2VyaWFsTnVtYmVyPTMKPiA+IFtNb24gSnVsIDE5
-IDAwOjAyOjA2IDIwMjFdIHVzYiA1LTY6IFByb2R1Y3Q6IEFVUkEgTEVEIENvbnRyb2xsZXIKPiA+
-IFtNb24gSnVsIDE5IDAwOjAyOjA2IDIwMjFdIHVzYiA1LTY6IE1hbnVmYWN0dXJlcjogQXN1c1Rl
-ayBDb21wdXRlciBJbmMuCj4gPiBbTW9uIEp1bCAxOSAwMDowMjowNiAyMDIxXSB1c2IgNS02OiBT
-ZXJpYWxOdW1iZXI6IDk4NzY1NDMyMTAKPiA+IFtNb24gSnVsIDE5IDAwOjAyOjA2IDIwMjFdIGhp
-ZC1nZW5lcmljIDAwMDM6MEIwNToxOEYzLjAwMDU6Cj4gPiBoaWRkZXY5NixoaWRyYXc0OiBVU0Ig
-SElEIHYxLjExIERldmljZSBbQXN1c1RlayBDb21wdXRlciBJbmMuIEFVUkEgTEVECj4gPiBDb250
-cm9sbGVyXSBvbiB1c2ItMDAwMDowNTowMC4zLTYvaW5wdXQyCj4gPiBbTW9uIEp1bCAxOSAwMDow
-MjowNyAyMDIxXSBub3V2ZWF1IDAwMDA6MDg6MDAuMDogRFJNOiBWUkFNOiA0MDk2IE1pQgo+ID4g
-W01vbiBKdWwgMTkgMDA6MDI6MDcgMjAyMV0gbm91dmVhdSAwMDAwOjA4OjAwLjA6IERSTTogR0FS
-VDogMTA0ODU3NiBNaUIKPiA+IFtNb24gSnVsIDE5IDAwOjAyOjA3IDIwMjFdIG5vdXZlYXUgMDAw
-MDowODowMC4wOiBEUk06IFRNRFMgdGFibGUgdmVyc2lvbiAyLjAKPiA+IFtNb24gSnVsIDE5IDAw
-OjAyOjA3IDIwMjFdIG5vdXZlYXUgMDAwMDowODowMC4wOiBEUk06IERDQiB2ZXJzaW9uIDQuMAo+
-ID4gW01vbiBKdWwgMTkgMDA6MDI6MDcgMjAyMV0gbm91dmVhdSAwMDAwOjA4OjAwLjA6IERSTTog
-RENCIG91dHAgMDA6Cj4gPiAwMjAwMDMwMCAwMDAwMDAwMAo+ID4gW01vbiBKdWwgMTkgMDA6MDI6
-MDcgMjAyMV0gbm91dmVhdSAwMDAwOjA4OjAwLjA6IERSTTogRENCIG91dHAgMDE6Cj4gPiAwMTAw
-MDMwMiAwMDAyMDAzMAo+ID4gW01vbiBKdWwgMTkgMDA6MDI6MDcgMjAyMV0gbm91dmVhdSAwMDAw
-OjA4OjAwLjA6IERSTTogRENCIG91dHAgMDI6Cj4gPiAwNDAxMTM4MCAwMDAwMDAwMAo+ID4gW01v
-biBKdWwgMTkgMDA6MDI6MDcgMjAyMV0gbm91dmVhdSAwMDAwOjA4OjAwLjA6IERSTTogRENCIG91
-dHAgMDM6Cj4gPiAwODAxMTM4MiAwMDAyMDAzMAo+ID4gW01vbiBKdWwgMTkgMDA6MDI6MDcgMjAy
-MV0gbm91dmVhdSAwMDAwOjA4OjAwLjA6IERSTTogRENCIG91dHAgMDQ6Cj4gPiAwMjAyMjM2MiAw
-MDAyMDAxMAo+ID4gW01vbiBKdWwgMTkgMDA6MDI6MDcgMjAyMV0gbm91dmVhdSAwMDAwOjA4OjAw
-LjA6IERSTTogRENCIGNvbm4gMDA6IDAwMDAxMDMwCj4gPiBbTW9uIEp1bCAxOSAwMDowMjowNyAy
-MDIxXSBub3V2ZWF1IDAwMDA6MDg6MDAuMDogRFJNOiBEQ0IgY29ubiAwMTogMDAwMDAxMDAKPiA+
-IFtNb24gSnVsIDE5IDAwOjAyOjA3IDIwMjFdIG5vdXZlYXUgMDAwMDowODowMC4wOiBEUk06IERD
-QiBjb25uIDAyOiAwMDAwMjI2MQo+ID4gW01vbiBKdWwgMTkgMDA6MDI6MDcgMjAyMV0gbm91dmVh
-dSAwMDAwOjA4OjAwLjA6IERSTTogZmFpbGVkIHRvCj4gPiBpbml0aWFsaXNlIHN5bmMgc3Vic3lz
-dGVtLCAtMjgKPiA+IFtNb24gSnVsIDE5IDAwOjAyOjA3IDIwMjFdIG5vdXZlYXUgMDAwMDowODow
-MC4wOiBidXM6IE1NSU8gd3JpdGUgb2YKPiA+IDAwMDAwMDAyIEZBVUxUIGF0IDEzYzE1NCBbIFBS
-SVZSSU5HIF0KPiA+IFtNb24gSnVsIDE5IDAwOjAyOjA3IDIwMjFdIG5vdXZlYXU6IHByb2JlIG9m
-IDAwMDA6MDg6MDAuMCBmYWlsZWQgd2l0aAo+ID4gZXJyb3IgLTI4Cj4gPiBbTW9uIEp1bCAxOSAw
-MDowMjowOCAyMDIxXSBFWFQ0LWZzIChzZGEyKTogbW91bnRlZCBmaWxlc3lzdGVtIHdpdGgKPiA+
-IG9yZGVyZWQgZGF0YSBtb2RlLiBPcHRzOiAobnVsbCkuIFF1b3RhIG1vZGU6IG5vbmUuCj4gPiBb
-TW9uIEp1bCAxOSAwMDowMjowOCAyMDIxXSBzeXN0ZW1kLWpvdXJuYWxkWzI4Nl06IFJlY2VpdmVk
-IFNJR1RFUk0gZnJvbQo+ID4gUElEIDEgKHN5c3RlbWQpLgo+ID4gW01vbiBKdWwgMTkgMDA6MDI6
-MDkgMjAyMV0gc3lzdGVtZFsxXTogc3lzdGVtZCAyNDguMytzdXNlLjMwLmdlOWEyM2Q5ZTA2Cj4g
-PiBydW5uaW5nIGluIHN5c3RlbSBtb2RlLiAoK1BBTSArQVVESVQgK1NFTElOVVggK0FQUEFSTU9S
-IC1JTUEgLVNNQUNLCj4gPiArU0VDQ09NUCArR0NSWVBUICtHTlVUTFMgK09QRU5TU0wgK0FDTCAr
-QkxLSUQgK0NVUkwgK0VMRlVUSUxTICtGSURPMgo+ID4gK0lETjIgLUlETiAtSVBUQyArS01PRCAr
-TElCQ1JZUFRTRVRVUCArTElCRkRJU0sgK1BDUkUyICtQV1FVQUxJVFkKPiA+ICtQMTFLSVQgK1FS
-RU5DT0RFICtCWklQMiArTFo0ICtYWiArWkxJQiArWlNURCAtWEtCQ09NTU9OICtVVE1QICtTWVNW
-SU5JVAo+ID4gZGVmYXVsdC1oaWVyYXJjaHk9dW5pZmllZCkKPiA+IFtNb24gSnVsIDE5IDAwOjAy
-OjA5IDIwMjFdIHN5c3RlbWRbMV06IERldGVjdGVkIGFyY2hpdGVjdHVyZSB4ODYtNjQuCj4gPiBb
-TW9uIEp1bCAxOSAwMDowMjoyMSAyMDIxXSBzeXN0ZW1kLXN5c3YtZ2VuZXJhdG9yWzYxOV06IFN5
-c1Ygc2VydmljZQo+ID4gJy9ldGMvaW5pdC5kL3Ztd2FyZS1VU0JBcmJpdHJhdG9yJyBsYWNrcyBh
-IG5hdGl2ZSBzeXN0ZW1kIHVuaXQgZmlsZS4KPiA+IEF1dG9tYXRpY2FsbHkgZ2VuZXJhdGluZyBh
-IHVuaXQgZmlsZSBmb3IgY29tcGF0aWJpbGl0eS4gUGxlYXNlIHVwZGF0ZQo+ID4gcGFja2FnZSB0
-byBpbmNsdWRlIGEgbmF0aXZlIHN5c3RlbWQgdW5pdCBmaWxlLCBpbiBvcmRlciB0byBtYWtlIGl0
-IG1vcmUKPiA+IHNhZmUgYW5kIHJvYnVzdC4KPiA+IFtNb24gSnVsIDE5IDAwOjAyOjIxIDIwMjFd
-IHN5c3RlbWQtc3lzdi1nZW5lcmF0b3JbNjE5XTogU3lzViBzZXJ2aWNlCj4gPiAnL2V0Yy9pbml0
-LmQvd2VibWluJyBsYWNrcyBhIG5hdGl2ZSBzeXN0ZW1kIHVuaXQgZmlsZS4gQXV0b21hdGljYWxs
-eQo+ID4gZ2VuZXJhdGluZyBhIHVuaXQgZmlsZSBmb3IgY29tcGF0aWJpbGl0eS4gUGxlYXNlIHVw
-ZGF0ZSBwYWNrYWdlIHRvCj4gPiBpbmNsdWRlIGEgbmF0aXZlIHN5c3RlbWQgdW5pdCBmaWxlLCBp
-biBvcmRlciB0byBtYWtlIGl0IG1vcmUgc2FmZSBhbmQKPiA+IHJvYnVzdC4KPiA+IFtNb24gSnVs
-IDE5IDAwOjAyOjIxIDIwMjFdIHN5c3RlbWQtc3lzdi1nZW5lcmF0b3JbNjE5XTogU3lzViBzZXJ2
-aWNlCj4gPiAnL2V0Yy9pbml0LmQvdm13YXJlJyBsYWNrcyBhIG5hdGl2ZSBzeXN0ZW1kIHVuaXQg
-ZmlsZS4gQXV0b21hdGljYWxseQo+ID4gZ2VuZXJhdGluZyBhIHVuaXQgZmlsZSBmb3IgY29tcGF0
-aWJpbGl0eS4gUGxlYXNlIHVwZGF0ZSBwYWNrYWdlIHRvCj4gPiBpbmNsdWRlIGEgbmF0aXZlIHN5
-c3RlbWQgdW5pdCBmaWxlLCBpbiBvcmRlciB0byBtYWtlIGl0IG1vcmUgc2FmZSBhbmQKPiA+IHJv
-YnVzdC4KPiA+IFtNb24gSnVsIDE5IDAwOjAyOjIyIDIwMjFdIHN5c3RlbWRbMV06IC9ldGMvc3lz
-dGVtZC9zeXN0ZW0vdG1wLm1vdW50Ogo+ID4gc3ltbGlua3MgYXJlIG5vdCBhbGxvd2VkIGZvciB1
-bml0cyBvZiB0aGlzIHR5cGUsIHJlamVjdGluZy4KPiA+IFtNb24gSnVsIDE5IDAwOjAyOjIzIDIw
-MjFdIHN5c3RlbWRbMV06Cj4gPiAvdXNyL2xpYi9zeXN0ZW1kL3N5c3RlbS9uZXRkYXRhLnNlcnZp
-Y2U6MTQ6IFBJREZpbGU9IHJlZmVyZW5jZXMgYSBwYXRoCj4gPiBiZWxvdyBsZWdhY3kgZGlyZWN0
-b3J5IC92YXIvcnVuLywgdXBkYXRpbmcgL3Zhci9ydW4vbmV0ZGF0YS9uZXRkYXRhLnBpZAo+ID4g
-4oaSIC9ydW4vbmV0ZGF0YS9uZXRkYXRhLnBpZDsgcGxlYXNlIHVwZGF0ZSB0aGUgdW5pdCBmaWxl
-IGFjY29yZGluZ2x5Lgo+ID4gW01vbiBKdWwgMTkgMDA6MDI6MjMgMjAyMV0gc3lzdGVtZFsxXToK
-PiA+IC91c3IvbGliL3N5c3RlbWQvc3lzdGVtL3BseW1vdXRoLXN0YXJ0LnNlcnZpY2U6MTU6IFVu
-aXQgY29uZmlndXJlZCB0bwo+ID4gdXNlIEtpbGxNb2RlPW5vbmUuIFRoaXMgaXMgdW5zYWZlLCBh
-cyBpdCBkaXNhYmxlcyBzeXN0ZW1kJ3MgcHJvY2Vzcwo+ID4gbGlmZWN5Y2xlIG1hbmFnZW1lbnQg
-Zm9yIHRoZSBzZXJ2aWNlLiBQbGVhc2UgdXBkYXRlIHlvdXIgc2VydmljZSB0byB1c2UKPiA+IGEg
-c2FmZXIgS2lsbE1vZGU9LCBzdWNoIGFzICdtaXhlZCcgb3IgJ2NvbnRyb2wtZ3JvdXAnLiBTdXBw
-b3J0IGZvcgo+ID4gS2lsbE1vZGU9bm9uZSBpcyBkZXByZWNhdGVkIGFuZCB3aWxsIGV2ZW50dWFs
-bHkgYmUgcmVtb3ZlZC4KPiA+IFtNb24gSnVsIDE5IDAwOjAyOjIzIDIwMjFdIHN5c3RlbWRbMV06
-IGhhdmVnZWQuc2VydmljZTogTWFpbiBwcm9jZXNzCj4gPiBleGl0ZWQsIGNvZGU9ZXhpdGVkLCBz
-dGF0dXM9MS9GQUlMVVJFCj4gPiBbTW9uIEp1bCAxOSAwMDowMjoyMyAyMDIxXSBzeXN0ZW1kWzFd
-OiBoYXZlZ2VkLnNlcnZpY2U6IEZhaWxlZCB3aXRoCj4gPiByZXN1bHQgJ2V4aXQtY29kZScuCj4g
-PiBbTW9uIEp1bCAxOSAwMDowMjoyMyAyMDIxXSBzeXN0ZW1kWzFdOiBTdG9wcGVkIEVudHJvcHkg
-RGFlbW9uIGJhc2VkIG9uCj4gPiB0aGUgSEFWRUdFIGFsZ29yaXRobS4KPiA+IFtNb24gSnVsIDE5
-IDAwOjAyOjIzIDIwMjFdIHN5c3RlbWRbMV06IGluaXRyZC1zd2l0Y2gtcm9vdC5zZXJ2aWNlOgo+
-ID4gRGVhY3RpdmF0ZWQgc3VjY2Vzc2Z1bGx5Lgo+ID4gW01vbiBKdWwgMTkgMDA6MDI6MjMgMjAy
-MV0gc3lzdGVtZFsxXTogU3RvcHBlZCBTd2l0Y2ggUm9vdC4KPiA+IFtNb24gSnVsIDE5IDAwOjAy
-OjIzIDIwMjFdIHN5c3RlbWRbMV06IHN5c3RlbWQtam91cm5hbGQuc2VydmljZToKPiA+IFNjaGVk
-dWxlZCByZXN0YXJ0IGpvYiwgcmVzdGFydCBjb3VudGVyIGlzIGF0IDEuCj4gPiBbTW9uIEp1bCAx
-OSAwMDowMjoyMyAyMDIxXSBzeXN0ZW1kWzFdOiBDcmVhdGVkIHNsaWNlIHN5c3RlbS1nZXR0eS5z
-bGljZS4KPiA+IFtNb24gSnVsIDE5IDAwOjAyOjIzIDIwMjFdIHN5c3RlbWRbMV06IENyZWF0ZWQg
-c2xpY2Ugc3lzdGVtLW1vZHByb2JlLnNsaWNlLgo+ID4gW01vbiBKdWwgMTkgMDA6MDI6MjMgMjAy
-MV0gc3lzdGVtZFsxXTogQ3JlYXRlZCBzbGljZSBVc2VyIGFuZCBTZXNzaW9uIFNsaWNlLgo+ID4g
-W01vbiBKdWwgMTkgMDA6MDI6MjMgMjAyMV0gc3lzdGVtZFsxXTogU2V0IHVwIGF1dG9tb3VudCBB
-cmJpdHJhcnkKPiA+IEV4ZWN1dGFibGUgRmlsZSBGb3JtYXRzIEZpbGUgU3lzdGVtIEF1dG9tb3Vu
-dCBQb2ludC4KPiA+Cj4gPiBSZWdhcmRzCj4gPgo+ID4gU2lkLgo+ID4KPiA+IC0tCj4gPiBTaWQg
-Qm95Y2UgLi4uIEhhbXJhZGlvIExpY2Vuc2UgRzNWQlYsIExpY2Vuc2VkIFByaXZhdGUgUGlsb3QK
-PiA+IEVtZXJpdHVzIElCTS9BbWRhaGwgTWFpbmZyYW1lcyBhbmQgU3VuL0Z1aml0c3UgU2VydmVy
-cyBUZWNoIFN1cHBvcnQKPiA+IFNlbmlvciBTdGFmZiBTcGVjaWFsaXN0LCBDcmlja2V0IENvYWNo
-Cj4gPiBNaWNyb3NvZnQgV2luZG93cyBGcmVlIFpvbmUgLSBMaW51eCB1c2VkIGZvciBhbGwgQ29t
-cHV0aW5nIFRhc2tzCj4gPgo+ID4gX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX18KPiA+IE5vdXZlYXUgbWFpbGluZyBsaXN0Cj4gPiBOb3V2ZWF1QGxpc3RzLmZy
-ZWVkZXNrdG9wLm9yZwo+ID4gaHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9s
-aXN0aW5mby9ub3V2ZWF1Cj4gPgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX18KTm91dmVhdSBtYWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3Rv
-cC5vcmcKaHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2
-ZWF1Cg==
+Excellent, thanks.
+I could have done a git bisect from another box. I didn't think of it.
+Regards
+Sid.
+
+On 21/07/2021 14:16, Karol Herbst wrote:
+> actually.. it was already found in this thread:
+> https://lore.kernel.org/lkml/YOC4uekpD7iA3xPi@Red/T/ fixes incoming.
+>
+> On Wed, Jul 21, 2021 at 3:13 PM Karol Herbst <kherbst@redhat.com> wrote:
+>> fyi: I am able to reproduce it on my machine and will figure out
+>> what's wrong. Thanks!
+>>
+>> On Mon, Jul 19, 2021 at 10:53 PM Sid Boyce <sboyce@blueyonder.co.uk> wro=
+te:
+>>> Also sent this to kernel mailing list.
+>>>
+>>> I saw an earlier kernel mailing list post (week 8 - 15 July) that so far
+>>> hasn't made it into 5.14-rc.
+>>>
+>>>
+>>> GPU's are GeForce GTX 1650, and 2 with GeForce GTX 1050 Ti.
+>>>
+>>> 3 systems affected, nothing displayed during boot up. I use ssh from a
+>>> running system to look at dmesg output.
+>>>
+>>> [Mon Jul 19 00:02:06 2021] hid-generic 0003:0CCD:0028.0004:
+>>> input,hidraw3: USB HID v1.00 Device [USB Audio] on usb-0000:05:00.3-4/i=
+nput3
+>>> [Mon Jul 19 00:02:06 2021] usb 5-6: new full-speed USB device number 4
+>>> using xhci_hcd
+>>> [Mon Jul 19 00:02:06 2021] usb 5-6: config 1 has an invalid interface
+>>> number: 2 but max is 1
+>>> [Mon Jul 19 00:02:06 2021] usb 5-6: config 1 has no interface number 1
+>>> [Mon Jul 19 00:02:06 2021] usb 5-6: New USB device found, idVendor=3D0b=
+05,
+>>> idProduct=3D18f3, bcdDevice=3D 1.00
+>>> [Mon Jul 19 00:02:06 2021] usb 5-6: New USB device strings: Mfr=3D1,
+>>> Product=3D2, SerialNumber=3D3
+>>> [Mon Jul 19 00:02:06 2021] usb 5-6: Product: AURA LED Controller
+>>> [Mon Jul 19 00:02:06 2021] usb 5-6: Manufacturer: AsusTek Computer Inc.
+>>> [Mon Jul 19 00:02:06 2021] usb 5-6: SerialNumber: 9876543210
+>>> [Mon Jul 19 00:02:06 2021] hid-generic 0003:0B05:18F3.0005:
+>>> hiddev96,hidraw4: USB HID v1.11 Device [AsusTek Computer Inc. AURA LED
+>>> Controller] on usb-0000:05:00.3-6/input2
+>>> [Mon Jul 19 00:02:07 2021] nouveau 0000:08:00.0: DRM: VRAM: 4096 MiB
+>>> [Mon Jul 19 00:02:07 2021] nouveau 0000:08:00.0: DRM: GART: 1048576 MiB
+>>> [Mon Jul 19 00:02:07 2021] nouveau 0000:08:00.0: DRM: TMDS table versio=
+n 2.0
+>>> [Mon Jul 19 00:02:07 2021] nouveau 0000:08:00.0: DRM: DCB version 4.0
+>>> [Mon Jul 19 00:02:07 2021] nouveau 0000:08:00.0: DRM: DCB outp 00:
+>>> 02000300 00000000
+>>> [Mon Jul 19 00:02:07 2021] nouveau 0000:08:00.0: DRM: DCB outp 01:
+>>> 01000302 00020030
+>>> [Mon Jul 19 00:02:07 2021] nouveau 0000:08:00.0: DRM: DCB outp 02:
+>>> 04011380 00000000
+>>> [Mon Jul 19 00:02:07 2021] nouveau 0000:08:00.0: DRM: DCB outp 03:
+>>> 08011382 00020030
+>>> [Mon Jul 19 00:02:07 2021] nouveau 0000:08:00.0: DRM: DCB outp 04:
+>>> 02022362 00020010
+>>> [Mon Jul 19 00:02:07 2021] nouveau 0000:08:00.0: DRM: DCB conn 00: 0000=
+1030
+>>> [Mon Jul 19 00:02:07 2021] nouveau 0000:08:00.0: DRM: DCB conn 01: 0000=
+0100
+>>> [Mon Jul 19 00:02:07 2021] nouveau 0000:08:00.0: DRM: DCB conn 02: 0000=
+2261
+>>> [Mon Jul 19 00:02:07 2021] nouveau 0000:08:00.0: DRM: failed to
+>>> initialise sync subsystem, -28
+>>> [Mon Jul 19 00:02:07 2021] nouveau 0000:08:00.0: bus: MMIO write of
+>>> 00000002 FAULT at 13c154 [ PRIVRING ]
+>>> [Mon Jul 19 00:02:07 2021] nouveau: probe of 0000:08:00.0 failed with
+>>> error -28
+>>> [Mon Jul 19 00:02:08 2021] EXT4-fs (sda2): mounted filesystem with
+>>> ordered data mode. Opts: (null). Quota mode: none.
+>>> [Mon Jul 19 00:02:08 2021] systemd-journald[286]: Received SIGTERM from
+>>> PID 1 (systemd).
+>>> [Mon Jul 19 00:02:09 2021] systemd[1]: systemd 248.3+suse.30.ge9a23d9e06
+>>> running in system mode. (+PAM +AUDIT +SELINUX +APPARMOR -IMA -SMACK
+>>> +SECCOMP +GCRYPT +GNUTLS +OPENSSL +ACL +BLKID +CURL +ELFUTILS +FIDO2
+>>> +IDN2 -IDN -IPTC +KMOD +LIBCRYPTSETUP +LIBFDISK +PCRE2 +PWQUALITY
+>>> +P11KIT +QRENCODE +BZIP2 +LZ4 +XZ +ZLIB +ZSTD -XKBCOMMON +UTMP +SYSVINIT
+>>> default-hierarchy=3Dunified)
+>>> [Mon Jul 19 00:02:09 2021] systemd[1]: Detected architecture x86-64.
+>>> [Mon Jul 19 00:02:21 2021] systemd-sysv-generator[619]: SysV service
+>>> '/etc/init.d/vmware-USBArbitrator' lacks a native systemd unit file.
+>>> Automatically generating a unit file for compatibility. Please update
+>>> package to include a native systemd unit file, in order to make it more
+>>> safe and robust.
+>>> [Mon Jul 19 00:02:21 2021] systemd-sysv-generator[619]: SysV service
+>>> '/etc/init.d/webmin' lacks a native systemd unit file. Automatically
+>>> generating a unit file for compatibility. Please update package to
+>>> include a native systemd unit file, in order to make it more safe and
+>>> robust.
+>>> [Mon Jul 19 00:02:21 2021] systemd-sysv-generator[619]: SysV service
+>>> '/etc/init.d/vmware' lacks a native systemd unit file. Automatically
+>>> generating a unit file for compatibility. Please update package to
+>>> include a native systemd unit file, in order to make it more safe and
+>>> robust.
+>>> [Mon Jul 19 00:02:22 2021] systemd[1]: /etc/systemd/system/tmp.mount:
+>>> symlinks are not allowed for units of this type, rejecting.
+>>> [Mon Jul 19 00:02:23 2021] systemd[1]:
+>>> /usr/lib/systemd/system/netdata.service:14: PIDFile=3D references a path
+>>> below legacy directory /var/run/, updating /var/run/netdata/netdata.pid
+>>> =E2=86=92 /run/netdata/netdata.pid; please update the unit file accordi=
+ngly.
+>>> [Mon Jul 19 00:02:23 2021] systemd[1]:
+>>> /usr/lib/systemd/system/plymouth-start.service:15: Unit configured to
+>>> use KillMode=3Dnone. This is unsafe, as it disables systemd's process
+>>> lifecycle management for the service. Please update your service to use
+>>> a safer KillMode=3D, such as 'mixed' or 'control-group'. Support for
+>>> KillMode=3Dnone is deprecated and will eventually be removed.
+>>> [Mon Jul 19 00:02:23 2021] systemd[1]: haveged.service: Main process
+>>> exited, code=3Dexited, status=3D1/FAILURE
+>>> [Mon Jul 19 00:02:23 2021] systemd[1]: haveged.service: Failed with
+>>> result 'exit-code'.
+>>> [Mon Jul 19 00:02:23 2021] systemd[1]: Stopped Entropy Daemon based on
+>>> the HAVEGE algorithm.
+>>> [Mon Jul 19 00:02:23 2021] systemd[1]: initrd-switch-root.service:
+>>> Deactivated successfully.
+>>> [Mon Jul 19 00:02:23 2021] systemd[1]: Stopped Switch Root.
+>>> [Mon Jul 19 00:02:23 2021] systemd[1]: systemd-journald.service:
+>>> Scheduled restart job, restart counter is at 1.
+>>> [Mon Jul 19 00:02:23 2021] systemd[1]: Created slice system-getty.slice.
+>>> [Mon Jul 19 00:02:23 2021] systemd[1]: Created slice system-modprobe.sl=
+ice.
+>>> [Mon Jul 19 00:02:23 2021] systemd[1]: Created slice User and Session S=
+lice.
+>>> [Mon Jul 19 00:02:23 2021] systemd[1]: Set up automount Arbitrary
+>>> Executable File Formats File System Automount Point.
+>>>
+>>> Regards
+>>>
+>>> Sid.
+>>>
+>>> --
+>>> Sid Boyce ... Hamradio License G3VBV, Licensed Private Pilot
+>>> Emeritus IBM/Amdahl Mainframes and Sun/Fujitsu Servers Tech Support
+>>> Senior Staff Specialist, Cricket Coach
+>>> Microsoft Windows Free Zone - Linux used for all Computing Tasks
+>>>
+>>> _______________________________________________
+>>> Nouveau mailing list
+>>> Nouveau@lists.freedesktop.org
+>>> https://lists.freedesktop.org/mailman/listinfo/nouveau
+>>>
+
+-- =
+
+Sid Boyce ... Hamradio License G3VBV, Licensed Private Pilot
+Emeritus IBM/Amdahl Mainframes and Sun/Fujitsu Servers Tech Support
+Senior Staff Specialist, Cricket Coach
+Microsoft Windows Free Zone - Linux used for all Computing Tasks
+
+_______________________________________________
+Nouveau mailing list
+Nouveau@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/nouveau
