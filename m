@@ -2,65 +2,32 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2EFD33D27A1
-	for <lists+nouveau@lfdr.de>; Thu, 22 Jul 2021 18:36:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A046C3D2CBB
+	for <lists+nouveau@lfdr.de>; Thu, 22 Jul 2021 21:29:00 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 155FB6EA8F;
-	Thu, 22 Jul 2021 16:36:33 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id DF6B06EA97;
+	Thu, 22 Jul 2021 19:28:58 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 37A156EA8F
- for <nouveau@lists.freedesktop.org>; Thu, 22 Jul 2021 16:36:31 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1626971790;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=fZMOkA64FJekOUjL3voBbJsSGt3gN9+JWVUWGD6ac8M=;
- b=KVGDrtR5HlAvfLh82Ap7hK2NdOFFGYD0T9dXPobpN5WZjLAV+BklLHTfrG1kbflP65PVFR
- ziQy24ZMlkUDl/5Ubp+yEiKnLuWADGcbAV8yw7piEGSnKIkOMIS6PJUP0tl14Nt3ElRW2l
- l/G9eL+aK44PhyU6ISKvJSNpex08wmo=
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-522-935gl_86MkSTyEdfu1yn4w-1; Thu, 22 Jul 2021 12:36:26 -0400
-X-MC-Unique: 935gl_86MkSTyEdfu1yn4w-1
-Received: by mail-wr1-f72.google.com with SMTP id
- t8-20020a05600001c8b029013e2027cf9aso2624617wrx.9
- for <nouveau@lists.freedesktop.org>; Thu, 22 Jul 2021 09:36:26 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=fZMOkA64FJekOUjL3voBbJsSGt3gN9+JWVUWGD6ac8M=;
- b=GJnjHspW1wcrbLrnJMi9pYmt/zpTowZhND0I5hsmy2zY7myrOGYwa1arWNAw+Fxa2S
- 1/9YdwIllJ500JpUpGQDn84FxYHTRZPWTfWmjtCGuSouVMUAHfKpA8luaEb3Ayb4zN3z
- ZHuRubEh1DxE79O71h71wsYZewtsObJufZEPYFLwnpllWPGJq0i7KH7024lM14zU7LxG
- 4/YRJJstYgs8f3UHTIkXwPf/EdQ57A+4G8GsJNyDAhx3ibu2vtu8ZnN5EKY2qWZcQtv8
- vMVxVbdODsLjUHuAYQSkATnV6aQqMrwb+/gwWwaFfBc47j4tTMJ9DCpjHjWrWLitFSyk
- H3SA==
-X-Gm-Message-State: AOAM5312NTs3ch8/oVGtFGYW+MIrkIjOD8GwhQIIFo9isMRjwdOeNxOw
- ua3o5PlNaXZPpAaR4SR5IZbSmo3qJ+Hi2BY8mw1wMk/CNIZyzZZ8Zsc/Gv0Wy5oYTdn0KA7DW4C
- uLRhLAOC4a75Z/OdwzkK4yHcpJXYYeGhgh6S7elj/pg==
-X-Received: by 2002:a1c:808c:: with SMTP id b134mr9966359wmd.139.1626971785122; 
- Thu, 22 Jul 2021 09:36:25 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJx7BIablWte6MNaOXuJrxC32Tz7Dn+HKj5O7WrF/JIyJTXVI6odjmNUqMrHB7dqF1UaRKB/TGW656sB4DYSi0g=
-X-Received: by 2002:a1c:808c:: with SMTP id b134mr9966343wmd.139.1626971784910; 
- Thu, 22 Jul 2021 09:36:24 -0700 (PDT)
+X-Greylist: delayed 407 seconds by postgrey-1.36 at gabe;
+ Thu, 22 Jul 2021 19:28:57 UTC
+Received: from hosting.gsystem.sk (hosting.gsystem.sk [212.5.213.30])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 57B376EA37;
+ Thu, 22 Jul 2021 19:28:57 +0000 (UTC)
+Received: from [192.168.0.2] (188-167-68-178.dynamic.chello.sk
+ [188.167.68.178])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by hosting.gsystem.sk (Postfix) with ESMTPSA id 50A927A003B;
+ Thu, 22 Jul 2021 21:22:08 +0200 (CEST)
+From: Ondrej Zary <linux@zary.sk>
+To: Christian =?iso-8859-1?q?K=F6nig?= <christian.koenig@amd.com>
+Date: Thu, 22 Jul 2021 21:22:05 +0200
+User-Agent: KMail/1.9.10
 MIME-Version: 1.0
-References: <DM6PR19MB278063772C30271C6B8929B5BC109@DM6PR19MB2780.namprd19.prod.outlook.com>
-In-Reply-To: <DM6PR19MB278063772C30271C6B8929B5BC109@DM6PR19MB2780.namprd19.prod.outlook.com>
-From: Karol Herbst <kherbst@redhat.com>
-Date: Thu, 22 Jul 2021 18:36:14 +0200
-Message-ID: <CACO55tuHsFyAsVxtsggtJXWQuiLKDOWoFUaRmJr=7VdOJTaAaw@mail.gmail.com>
-To: Ratchanan Srirattanamet <peathot@hotmail.com>
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=kherbst@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Subject: Re: [Nouveau] [PATCH] drm/nouveau: don't touch has_pr3 for
- likely-non-NVIDIA device
+Content-Disposition: inline
+Message-Id: <202107222122.05546.linux@zary.sk>
+Subject: [Nouveau] nouveau broken again on Riva TNT2 in 5.14.0-rc2
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -72,104 +39,66 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau <nouveau@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>
+Cc: nouveau@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>,
+ dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-hey, thanks for the patch. But I am a bit confused on why that patch
-actually helps. It should only be called for nvidia GPUs, but are we
-ending up checking it for AMD GPUs as well?
+Hello,
+nouveau is broken again:
 
-Mind posting the output of lspci -tvnn?
+[   58.795794] BUG: kernel NULL pointer dereference, address: 0000017c
+[   58.795835] #PF: supervisor read access in kernel mode
+[   58.795844] #PF: error_code(0x0000) - not-present page
+[   58.795851] *pde = 00000000
+[   58.795862] Oops: 0000 [#1] SMP
+[   58.795875] CPU: 0 PID: 1730 Comm: Xorg Not tainted 5.14.0-rc2+ #391
+[   58.795886] Hardware name: VIA Technologies, Inc. VT82C694X/694X, BIOS 6.00 PG 02/19/2002
+[   58.795894] EIP: nouveau_bo_wr16+0x8/0x27 [nouveau]
+[   58.796716] Code: 85 ff 74 0d 80 7d f3 00 74 07 80 a6 c0 01 00 00 fe 89 f0 e8 e5 ee ff ff 8d 65 f4 89 f8 5b 5e 5f 5d c3 55 01 d2 89 e5 53 89 c3 <03> 93 7c 01 00 00 0f b7 c1 f6 83 84 01 00 00 80 74 07 e8 8a bc 72
+[   58.796728] EAX: 00000000 EBX: 00000000 ECX: 00000000 EDX: 00000000
+[   58.796736] ESI: 00000020 EDI: c18bc600 EBP: c7c49d88 ESP: c7c49d84
+[   58.796744] DS: 007b ES: 007b FS: 00d8 GS: 0033 SS: 0068 EFLAGS: 00210246
+[   58.796754] CR0: 80050033 CR2: 0000017c CR3: 07e12000 CR4: 00000690
+[   58.796762] Call Trace:
+[   58.796774]  nv04_crtc_cursor_set+0x148/0x1d8 [nouveau]
+[   58.796952]  ? ttm_bo_reserve.constprop.16+0x1c/0x1c [nouveau]
+[   58.797122]  drm_mode_cursor_common+0x13b/0x1ad
+[   58.797150]  ? ttm_bo_reserve.constprop.16+0x1c/0x1c [nouveau]
+[   58.797322]  drm_mode_cursor_ioctl+0x2e/0x36
+[   58.797335]  ? drm_mode_setplane+0x203/0x203
+[   58.797346]  drm_ioctl_kernel+0x66/0x99
+[   58.797366]  drm_ioctl+0x211/0x2d8
+[   58.797377]  ? drm_mode_setplane+0x203/0x203
+[   58.797389]  ? __cond_resched+0x1e/0x22
+[   58.797409]  ? mutex_lock+0xb/0x24
+[   58.797422]  ? rpm_resume.part.14+0x6f/0x362
+[   58.797447]  ? ktime_get_mono_fast_ns+0x5e/0xf2
+[   58.797469]  ? __pm_runtime_resume+0x5b/0x63
+[   58.797480]  nouveau_drm_ioctl+0x65/0x81 [nouveau]
+[   58.797662]  ? nouveau_cli_work+0xc3/0xc3 [nouveau]
+[   58.797838]  vfs_ioctl+0x1a/0x24
+[   58.797850]  __ia32_sys_ioctl+0x6ea/0x704
+[   58.797861]  ? doublefault_shim+0x120/0x120
+[   58.797872]  ? exit_to_user_mode_prepare+0x9e/0x10c
+[   58.797900]  do_int80_syscall_32+0x53/0x6e
+[   58.797910]  entry_INT80_32+0xf0/0xf0
+[   58.797923] EIP: 0xb7f04092
+[   58.797932] Code: 00 00 00 e9 90 ff ff ff ff a3 24 00 00 00 68 30 00 00 00 e9 80 ff ff ff ff a3 e8 ff ff ff 66 90 00 00 00 00 00 00 00 00 cd 80 <c3> 8d b4 26 00 00 00 00 8d b6 00 00 00 00 8b 1c 24 c3 8d b4 26 00
+[   58.797943] EAX: ffffffda EBX: 0000000e ECX: c01c64a3 EDX: bf9a15c0
+[   58.797952] ESI: 00997850 EDI: c01c64a3 EBP: 0000000e ESP: bf9a1574
+[   58.797959] DS: 007b ES: 007b FS: 0000 GS: 0033 SS: 007b EFLAGS: 00200292
+[   58.797972] Modules linked in: i2c_dev nouveau wmi hwmon drm_ttm_helper psmouse serio_raw via_agp sg parport_pc 8139cp parport
+[   58.798016] CR2: 000000000000017c
+[   58.798147] ---[ end trace 732829d39ed65de9 ]---
 
-On Thu, Jul 22, 2021 at 5:10 AM Ratchanan Srirattanamet
-<peathot@hotmail.com> wrote:
->
-> The call site of nouveau_dsm_pci_probe() uses single set of output
-> variables for all invocations. So, we must not write anything to them
-> until we think this is an NVIDIA device of interest. Otherwise, if we
-> are called with another device after the NVIDIA device, we'll clober the
-> result of the NVIDIA device.
->
-> In this case, if the other device doesn't have _PR3 resources, the
-> detection later would miss the presence of power resource support, and
-> the rest of the code will keep using Optimus DSM, breaking power
-> management for that machine. In particular, this fixes power management
-> of the NVIDIA card in Lenovo Legion 5-15ARH05... well, at least
-> partially. New error shows up, but this patch is correct in itself
-> anyway.
->
-> As a bonus, we'll also stop preventing _PR3 usage from the bridge for
-> unrelated devices, which is always nice, I guess.
->
-> As noted in commit ccfc2d5cdb024 ("drm/nouveau: Use generic helper to
-> check _PR3 presence"), care is taken to leave the _PR3 detection outside
-> of the optimus_func condition.
->
-> https://gitlab.freedesktop.org/drm/nouveau/-/issues/79
->
-> Fixes: ccfc2d5cdb024 ("drm/nouveau: Use generic helper to check _PR3
-> presence")
-> Signed-off-by: Ratchanan Srirattanamet <peathot@hotmail.com>
-> ---
->
-> Hello,
->
-> This is my first time submitting a Linux patch. I've done a
-> number of PR/MR workflows on GitHub or GitLab, but never done any
-> email-oriented development. So, please excuse me if I'm doing something
-> incorrectly.
->
->  drivers/gpu/drm/nouveau/nouveau_acpi.c | 18 +++++++++---------
->  1 file changed, 9 insertions(+), 9 deletions(-)
->
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_acpi.c b/drivers/gpu/drm/nouveau/nouveau_acpi.c
-> index 7c15f6448428..c88bda3ac820 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_acpi.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_acpi.c
-> @@ -220,15 +220,6 @@ static void nouveau_dsm_pci_probe(struct pci_dev *pdev, acpi_handle *dhandle_out
->         int optimus_funcs;
->         struct pci_dev *parent_pdev;
->
-> -       *has_pr3 = false;
-> -       parent_pdev = pci_upstream_bridge(pdev);
-> -       if (parent_pdev) {
-> -               if (parent_pdev->bridge_d3)
-> -                       *has_pr3 = pci_pr3_present(parent_pdev);
-> -               else
-> -                       pci_d3cold_disable(pdev);
-> -       }
-> -
->         dhandle = ACPI_HANDLE(&pdev->dev);
->         if (!dhandle)
->                 return;
-> @@ -249,6 +240,15 @@ static void nouveau_dsm_pci_probe(struct pci_dev *pdev, acpi_handle *dhandle_out
->         *has_opt = !!optimus_funcs;
->         *has_opt_flags = optimus_funcs & (1 << NOUVEAU_DSM_OPTIMUS_FLAGS);
->
-> +       *has_pr3 = false;
-> +       parent_pdev = pci_upstream_bridge(pdev);
-> +       if (parent_pdev) {
-> +               if (parent_pdev->bridge_d3)
-> +                       *has_pr3 = pci_pr3_present(parent_pdev);
-> +               else
-> +                       pci_d3cold_disable(pdev);
-> +       }
-> +
->         if (optimus_funcs) {
->                 uint32_t result;
->                 nouveau_optimus_dsm(dhandle, NOUVEAU_DSM_OPTIMUS_CAPS, 0,
-> --
-> 2.25.1
->
-> _______________________________________________
-> Nouveau mailing list
-> Nouveau@lists.freedesktop.org
-> https://lists.freedesktop.org/mailman/listinfo/nouveau
->
 
+d02117f8efaa5fbc37437df1ae955a147a2a424a is the first bad commit
+
+-- 
+Ondrej Zary
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
