@@ -1,74 +1,43 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7C7AB3D3D40
-	for <lists+nouveau@lfdr.de>; Fri, 23 Jul 2021 18:13:01 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id A80213D3D9F
+	for <lists+nouveau@lfdr.de>; Fri, 23 Jul 2021 18:31:39 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7619D6EDCE;
-	Fri, 23 Jul 2021 16:12:56 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 492006F8A9;
+	Fri, 23 Jul 2021 16:31:37 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C059E6EDB9
- for <nouveau@lists.freedesktop.org>; Fri, 23 Jul 2021 16:12:54 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1627056773;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=1NTO18YcF2qw6Kpg/GloKqP6tZBxoy9gh8XmkGeF9NE=;
- b=Zdjq+0NmIV1cinRkd4HYhlDIepfNIIB53q2WbZuVfooRtpBpgHAalS/fDWG903C9ZTEELT
- YNcZglg7d0ulZWISclDAVooR6o62i7Rv4OLjkYwdKONHuufjOykGKa5H14bb18JxAdxAG3
- oz5kb4ajlLJZBC3jEBv4qWknbiOQppU=
-Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com
- [209.85.222.200]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-387--5wQQdVnNkWhNaCoSgBMyA-1; Fri, 23 Jul 2021 12:12:50 -0400
-X-MC-Unique: -5wQQdVnNkWhNaCoSgBMyA-1
-Received: by mail-qk1-f200.google.com with SMTP id
- b4-20020a3799040000b02903b899a4309cso1468562qke.14
- for <nouveau@lists.freedesktop.org>; Fri, 23 Jul 2021 09:12:50 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
- :references:organization:user-agent:mime-version
- :content-transfer-encoding;
- bh=1NTO18YcF2qw6Kpg/GloKqP6tZBxoy9gh8XmkGeF9NE=;
- b=DcS/3I6ZLoojnSxAApn6gSAlgqQXwRnp8eWCGRusgXAwhLfwhFeFNljQXP9kGr/dDQ
- fi8KN1tAErEWtBUxrCBeXFgT4XLvaOrG3lNT+fu4LYArZWexr+9e7LmVvbnSWWnaa1H/
- AlQj13lUAV3iNfPYPBFZqyePxglpxKl9+d/0mi/ZnhBGcCCMpIE4iLuG98VCIC3lZCDI
- SrVHhHGn9IhFioXGmWBvP3BsFpJhfzaZvF5wPs4BZR3eieBb3uxRtaVKqzNhJRZfm75x
- E9vrbOw2xT5nr5GBiMoNEJZ/20k7lbfCibx2Nf5JZaAJpUWyBuq13NJOh9kgoRR8Y5Cs
- Om6g==
-X-Gm-Message-State: AOAM532d3Ct0QQAVAAJ3CHsqBROVXoz+G6rX/tb5+Zd/J19sE94fhx/p
- uuW8/yTIc/Wb6NBw56NPey/iZ3JbOdGy6DAYh9eiFYhvDBbBtJMOkHSg/36CMBddZRWniYaPzAW
- VMKKiUpVFN0Pk7P9t6zQbVBYdrQ==
-X-Received: by 2002:a37:a557:: with SMTP id o84mr5316599qke.323.1627056770355; 
- Fri, 23 Jul 2021 09:12:50 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJxzYXo962QZa+/2DWnJ5qoJGgdqtJlvieTRJp2rDEjkb+nPOP4CbJIp7neDMagHLOxSUTHzkQ==
-X-Received: by 2002:a37:a557:: with SMTP id o84mr5316567qke.323.1627056770077; 
- Fri, 23 Jul 2021 09:12:50 -0700 (PDT)
-Received: from Ruby.lyude.net (pool-108-49-102-102.bstnma.fios.verizon.net.
- [108.49.102.102])
- by smtp.gmail.com with ESMTPSA id c11sm11667633qth.29.2021.07.23.09.12.48
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 23 Jul 2021 09:12:49 -0700 (PDT)
-Message-ID: <d529bd638b394c7c918ff4753cf5cf18afc99989.camel@redhat.com>
-From: Lyude Paul <lyude@redhat.com>
-To: Daniel Vetter <daniel@ffwll.ch>, Arnd Bergmann <arnd@kernel.org>
-Date: Fri, 23 Jul 2021 12:12:47 -0400
-In-Reply-To: <CAKMK7uHG0T7kgHzrkxoGj+Cv1-5f=GaH1CviunoZd_wEL5G4YQ@mail.gmail.com>
+Received: from bombadil.infradead.org (bombadil.infradead.org
+ [IPv6:2607:7c80:54:e::133])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 70B686F8A9;
+ Fri, 23 Jul 2021 16:31:36 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
+ Content-Type:In-Reply-To:MIME-Version:Date:Message-ID:From:References:Cc:To:
+ Subject:Sender:Reply-To:Content-ID:Content-Description;
+ bh=AJR4Uwi2twf+SqV3Z1Vf6OE1gwqoYjBswhC7GZxo0Zk=; b=DR8TH5p8tSmZN+rEb8dwHCUOaX
+ hDANAh3CZGcYYS/mJ7ctrM3KkFNFb6vpT+5Q5ORTTNgbwzdgqTVoHZncRkq9KgTSeoac+6++u42xz
+ +JKg6ni/pFSh704KbFdxwLBkOYQRl8Q2L4xHvNbHrLlz63VONrrdpih4hzTVi5TeKmnb4PG7Bn5ZG
+ IYjMPpR0w7iuqajisWTNvwfoMTZS9NFEJrQ+DxZiX1vVujNBz/EHmYVesXU+LeUDZsYz5pPL5Uz3F
+ 3DFjtTSonKSPbHFEb9r3Ig0iw1dVA4DjLXXANvEc9XXQ68dxxEh7arlCGBUgIG213/YHQcb9DJtfr
+ kAfjfLEg==;
+Received: from [2601:1c0:6280:3f0::aefb]
+ by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
+ id 1m6y5G-005Lel-VX; Fri, 23 Jul 2021 16:31:35 +0000
+To: Karol Herbst <kherbst@redhat.com>
 References: <20210723091534.1730564-1-arnd@kernel.org>
- <CAKMK7uHG0T7kgHzrkxoGj+Cv1-5f=GaH1CviunoZd_wEL5G4YQ@mail.gmail.com>
-Organization: Red Hat
-User-Agent: Evolution 3.38.4 (3.38.4-1.fc33)
+ <a618e29a-e4b7-bda4-a3e0-7dfd67d64e92@infradead.org>
+ <CACO55tvQoCnjQWRJhrJ+8TzY5MuDDSUSnwd5AU8G1qsQYCSCBg@mail.gmail.com>
+From: Randy Dunlap <rdunlap@infradead.org>
+Message-ID: <7ddd0c7c-9bdc-9ea3-c635-f1d141d1e870@infradead.org>
+Date: Fri, 23 Jul 2021 09:31:34 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.11.0
 MIME-Version: 1.0
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=lyude@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
+In-Reply-To: <CACO55tvQoCnjQWRJhrJ+8TzY5MuDDSUSnwd5AU8G1qsQYCSCBg@mail.gmail.com>
+Content-Language: en-US
 Subject: Re: [Nouveau] [PATCH] drm/nouveau/kms/nv50-: fix build failure with
  CONFIG_BACKLIGHT=n
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -82,94 +51,91 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Arnd Bergmann <arnd@arndb.de>, David Airlie <airlied@linux.ie>,
- Nouveau Dev <nouveau@lists.freedesktop.org>,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+Cc: Arnd Bergmann <arnd@kernel.org>, Arnd Bergmann <arnd@arndb.de>,
+ David Airlie <airlied@linux.ie>, nouveau <nouveau@lists.freedesktop.org>,
+ LKML <linux-kernel@vger.kernel.org>,
  dri-devel <dri-devel@lists.freedesktop.org>,
  Nikola Cornij <nikola.cornij@amd.com>, Ben Skeggs <bskeggs@redhat.com>,
- Ville =?ISO-8859-1?Q?Syrj=E4l=E4?= <ville.syrjala@linux.intel.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ Daniel Vetter <daniel@ffwll.ch>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-T24gRnJpLCAyMDIxLTA3LTIzIGF0IDExOjI0ICswMjAwLCBEYW5pZWwgVmV0dGVyIHdyb3RlOgo+
-IE9uIEZyaSwgSnVsIDIzLCAyMDIxIGF0IDExOjE1IEFNIEFybmQgQmVyZ21hbm4gPGFybmRAa2Vy
-bmVsLm9yZz4gd3JvdGU6Cj4gPiAKPiA+IEZyb206IEFybmQgQmVyZ21hbm4gPGFybmRAYXJuZGIu
-ZGU+Cj4gPiAKPiA+IFdoZW4gdGhlIGJhY2tsaWdodCBzdXBwb3J0IGlzIGRpc2FibGVkLCB0aGUg
-ZHJpdmVyIGZhaWxzIHRvIGJ1aWxkOgo+ID4gCj4gPiBkcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9k
-aXNwbnY1MC9kaXNwLmM6IEluIGZ1bmN0aW9uCj4gPiAnbnY1MF9zb3JfYXRvbWljX2Rpc2FibGUn
-Ogo+ID4gZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvZGlzcG52NTAvZGlzcC5jOjE2NjU6NTk6IGVy
-cm9yOiAnc3RydWN0Cj4gPiBub3V2ZWF1X2Nvbm5lY3RvcicgaGFzIG5vIG1lbWJlciBuYW1lZCAn
-YmFja2xpZ2h0Jwo+ID4gwqAxNjY1IHzCoMKgwqDCoMKgwqDCoMKgIHN0cnVjdCBub3V2ZWF1X2Jh
-Y2tsaWdodCAqYmFja2xpZ2h0ID0gbnZfY29ubmVjdG9yLQo+ID4gPmJhY2tsaWdodDsKPiA+IMKg
-wqDCoMKgwqAgfMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgIF5+Cj4gPiBkcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9kaXNwbnY1MC9kaXNw
-LmM6MTY3MDozNTogZXJyb3I6IGludmFsaWQgdXNlIG9mCj4gPiB1bmRlZmluZWQgdHlwZSAnc3Ry
-dWN0IG5vdXZlYXVfYmFja2xpZ2h0Jwo+ID4gwqAxNjcwIHzCoMKgwqDCoMKgwqDCoMKgIGlmIChi
-YWNrbGlnaHQgJiYgYmFja2xpZ2h0LT51c2VzX2RwY2QpIHsKPiA+IMKgwqDCoMKgwqAgfMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgIF5+Cj4gPiBkcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9kaXNwbnY1MC9kaXNwLmM6MTY3
-MTo2NDogZXJyb3I6IGludmFsaWQgdXNlIG9mCj4gPiB1bmRlZmluZWQgdHlwZSAnc3RydWN0IG5v
-dXZlYXVfYmFja2xpZ2h0Jwo+ID4gwqAxNjcxIHzCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoCByZXQgPSBkcm1fZWRwX2JhY2tsaWdodF9kaXNhYmxlKGF1eCwgJmJhY2tsaWdodC0KPiA+
-ID5lZHBfaW5mbyk7Cj4gPiDCoMKgwqDCoMKgIHzCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgXn4KPiA+IAo+ID4gVGhl
-IHBhdGNoIHRoYXQgaW50cm9kdWNlZCB0aGUgcHJvYmxlbSBhbHJlYWR5IGNvbnRhaW5zIHNvbWUg
-I2lmZGVmCj4gPiBjaGVja3MsIHNvIGp1c3QgYWRkIGFub3RoZXIgb25lIHRoYXQgbWFrZXMgaXQg
-YnVpbGQgYWdhaW4uCj4gPiAKPiA+IEZpeGVzOiA2ZWNhMzEwZTg5MjQgKCJkcm0vbm91dmVhdS9r
-bXMvbnY1MC06IEFkZCBiYXNpYyBEUENEIGJhY2tsaWdodAo+ID4gc3VwcG9ydCBmb3Igbm91dmVh
-dSIpCj4gPiBTaWduZWQtb2ZmLWJ5OiBBcm5kIEJlcmdtYW5uIDxhcm5kQGFybmRiLmRlPgo+IAo+
-IENhbiB3ZSBqdXN0IHRvc3MgdGhlIGlkZWEgdGhhdCBCQUNLVExJR0hUPW4gaXMgYSByZWFzb25h
-YmxlIGNvbmZpZyBmb3IKPiBkcm0gZHJpdmVycyB1c2luZyBiYWNrbGlnaHRzLCBhbmQgYWRkIGRl
-cGVuZHMgQkFDS0xJR0hUIHRvIGFsbCBvZgo+IHRoZW0/CgpZZWFoIC0gSSdtIGZpbmUgd2l0aCB0
-aGlzIElNSE8sIGF0IGxlYXN0IGZvciB0aGUgZHJpdmVycyBhY3R1YWxseSBzdXBwb3J0aW5nCmJh
-Y2tsaWdodHMgaW4gc29tZSBtYW5uZXIgKEkgYXNzdW1lIHRoaXMgaXMgbW9zdCBvZiB0aGVtIHRo
-b3VnaCkKCj4gCj4gSSBtZWFuIHRoaXMgaXMgYSBwZXJmZWN0IHNvdXJjZSBvZiBjb250aW51ZWQg
-cGF0Y2ggc3RyZWFtcyB0byBrZWVwIHVzCj4gYWxsIGJ1c3ksIGJ1dCBiZXlvbmQgdGhhdCBJIHJl
-YWxseSBkb24ndCBzZWUgdGhlIHBvaW50IC4uLiBJIGZyYW5rbHkKPiBoYXZlIGJldHRlciB0aGlu
-Z3MgdG8gZG8sIGFuZCBlc3BlY2lhbGx5IHdpdGggdGhlIGJpZyBkcml2ZXJzIHdlIGhhdmUKPiBt
-YWtpbmcgYmFja2xpZ2h0IG9wdGlvbmFsIHNhdmVzIGNvbXBhcml0aXZlbHkgbm90aGluZy4KPiAt
-RGFuaWVsCj4gCj4gPiAtLS0KPiA+IMKgZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvZGlzcG52NTAv
-ZGlzcC5jIHwgMTEgKysrKysrKy0tLS0KPiA+IMKgMSBmaWxlIGNoYW5nZWQsIDcgaW5zZXJ0aW9u
-cygrKSwgNCBkZWxldGlvbnMoLSkKPiA+IAo+ID4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2Ry
-bS9ub3V2ZWF1L2Rpc3BudjUwL2Rpc3AuYwo+ID4gYi9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9k
-aXNwbnY1MC9kaXNwLmMKPiA+IGluZGV4IDA5M2UxZjcxNjNiMy4uZmNmNTNlMjRkYjIxIDEwMDY0
-NAo+ID4gLS0tIGEvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvZGlzcG52NTAvZGlzcC5jCj4gPiAr
-KysgYi9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9kaXNwbnY1MC9kaXNwLmMKPiA+IEBAIC0xNjU5
-LDIwICsxNjU5LDIzIEBAIHN0YXRpYyB2b2lkCj4gPiDCoG52NTBfc29yX2F0b21pY19kaXNhYmxl
-KHN0cnVjdCBkcm1fZW5jb2RlciAqZW5jb2Rlciwgc3RydWN0Cj4gPiBkcm1fYXRvbWljX3N0YXRl
-ICpzdGF0ZSkKPiA+IMKgewo+ID4gwqDCoMKgwqDCoMKgwqAgc3RydWN0IG5vdXZlYXVfZW5jb2Rl
-ciAqbnZfZW5jb2RlciA9IG5vdXZlYXVfZW5jb2RlcihlbmNvZGVyKTsKPiA+IC3CoMKgwqDCoMKg
-wqAgc3RydWN0IG5vdXZlYXVfZHJtICpkcm0gPSBub3V2ZWF1X2RybShudl9lbmNvZGVyLT5iYXNl
-LmJhc2UuZGV2KTsKPiA+IMKgwqDCoMKgwqDCoMKgIHN0cnVjdCBub3V2ZWF1X2NydGMgKm52X2Ny
-dGMgPSBub3V2ZWF1X2NydGMobnZfZW5jb2Rlci0+Y3J0Yyk7Cj4gPiDCoMKgwqDCoMKgwqDCoCBz
-dHJ1Y3Qgbm91dmVhdV9jb25uZWN0b3IgKm52X2Nvbm5lY3RvciA9Cj4gPiBudjUwX291dHBfZ2V0
-X29sZF9jb25uZWN0b3Ioc3RhdGUsIG52X2VuY29kZXIpOwo+ID4gLcKgwqDCoMKgwqDCoCBzdHJ1
-Y3Qgbm91dmVhdV9iYWNrbGlnaHQgKmJhY2tsaWdodCA9IG52X2Nvbm5lY3Rvci0+YmFja2xpZ2h0
-Owo+ID4gwqDCoMKgwqDCoMKgwqAgc3RydWN0IGRybV9kcF9hdXggKmF1eCA9ICZudl9jb25uZWN0
-b3ItPmF1eDsKPiA+IC3CoMKgwqDCoMKgwqAgaW50IHJldDsKPiA+IMKgwqDCoMKgwqDCoMKgIHU4
-IHB3cjsKPiA+IAo+ID4gKyNpZmRlZiBDT05GSUdfRFJNX05PVVZFQVVfQkFDS0xJR0hUCj4gPiAr
-wqDCoMKgwqDCoMKgIHN0cnVjdCBub3V2ZWF1X2RybSAqZHJtID0gbm91dmVhdV9kcm0obnZfZW5j
-b2Rlci0+YmFzZS5iYXNlLmRldik7Cj4gPiArwqDCoMKgwqDCoMKgIHN0cnVjdCBub3V2ZWF1X2Jh
-Y2tsaWdodCAqYmFja2xpZ2h0ID0gbnZfY29ubmVjdG9yLT5iYWNrbGlnaHQ7Cj4gPiArCj4gPiDC
-oMKgwqDCoMKgwqDCoCBpZiAoYmFja2xpZ2h0ICYmIGJhY2tsaWdodC0+dXNlc19kcGNkKSB7Cj4g
-PiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCByZXQgPSBkcm1fZWRwX2JhY2tsaWdodF9k
-aXNhYmxlKGF1eCwgJmJhY2tsaWdodC0KPiA+ID5lZHBfaW5mbyk7Cj4gPiArwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoCBpbnQgcmV0ID0gZHJtX2VkcF9iYWNrbGlnaHRfZGlzYWJsZShhdXgs
-ICZiYWNrbGlnaHQtCj4gPiA+ZWRwX2luZm8pOwo+ID4gKwo+ID4gwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgIGlmIChyZXQgPCAwKQo+ID4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoCBOVl9FUlJPUihkcm0sICJGYWlsZWQgdG8gZGlzYWJsZSBiYWNr
-bGlnaHQgb24KPiA+IFtDT05ORUNUT1I6JWQ6JXNdOiAlZFxuIiwKPiA+IMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgbnZfY29u
-bmVjdG9yLT5iYXNlLmJhc2UuaWQsIG52X2Nvbm5lY3Rvci0KPiA+ID5iYXNlLm5hbWUsIHJldCk7
-Cj4gPiDCoMKgwqDCoMKgwqDCoCB9Cj4gPiArI2VuZGlmCj4gPiAKPiA+IMKgwqDCoMKgwqDCoMKg
-IGlmIChudl9lbmNvZGVyLT5kY2ItPnR5cGUgPT0gRENCX09VVFBVVF9EUCkgewo+ID4gwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGludCByZXQgPSBkcm1fZHBfZHBjZF9yZWFkYihhdXgs
-IERQX1NFVF9QT1dFUiwgJnB3cik7Cj4gPiAtLQo+ID4gMi4yOS4yCj4gPiAKPiAKPiAKCi0tIApD
-aGVlcnMsCiBMeXVkZSBQYXVsIChzaGUvaGVyKQogU29mdHdhcmUgRW5naW5lZXIgYXQgUmVkIEhh
-dAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTm91dmVh
-dSBtYWlsaW5nIGxpc3QKTm91dmVhdUBsaXN0cy5mcmVlZGVza3RvcC5vcmcKaHR0cHM6Ly9saXN0
-cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1hbi9saXN0aW5mby9ub3V2ZWF1Cg==
+On 7/23/21 8:15 AM, Karol Herbst wrote:
+> On Fri, Jul 23, 2021 at 5:10 PM Randy Dunlap <rdunlap@infradead.org> wrote:
+>>
+>> On 7/23/21 2:15 AM, Arnd Bergmann wrote:
+>>> From: Arnd Bergmann <arnd@arndb.de>
+>>>
+>>> When the backlight support is disabled, the driver fails to build:
+>>>
+>>> drivers/gpu/drm/nouveau/dispnv50/disp.c: In function 'nv50_sor_atomic_disable':
+>>> drivers/gpu/drm/nouveau/dispnv50/disp.c:1665:59: error: 'struct nouveau_connector' has no member named 'backlight'
+>>>  1665 |         struct nouveau_backlight *backlight = nv_connector->backlight;
+>>>       |                                                           ^~
+>>> drivers/gpu/drm/nouveau/dispnv50/disp.c:1670:35: error: invalid use of undefined type 'struct nouveau_backlight'
+>>>  1670 |         if (backlight && backlight->uses_dpcd) {
+>>>       |                                   ^~
+>>> drivers/gpu/drm/nouveau/dispnv50/disp.c:1671:64: error: invalid use of undefined type 'struct nouveau_backlight'
+>>>  1671 |                 ret = drm_edp_backlight_disable(aux, &backlight->edp_info);
+>>>       |                                                                ^~
+>>>
+>>> The patch that introduced the problem already contains some #ifdef
+>>> checks, so just add another one that makes it build again.
+>>>
+>>> Fixes: 6eca310e8924 ("drm/nouveau/kms/nv50-: Add basic DPCD backlight support for nouveau")
+>>> Signed-off-by: Arnd Bergmann <arnd@arndb.de>
+>>> ---
+>>>  drivers/gpu/drm/nouveau/dispnv50/disp.c | 11 +++++++----
+>>>  1 file changed, 7 insertions(+), 4 deletions(-)
+>>>
+>>> diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.c b/drivers/gpu/drm/nouveau/dispnv50/disp.c
+>>> index 093e1f7163b3..fcf53e24db21 100644
+>>> --- a/drivers/gpu/drm/nouveau/dispnv50/disp.c
+>>> +++ b/drivers/gpu/drm/nouveau/dispnv50/disp.c
+>>> @@ -1659,20 +1659,23 @@ static void
+>>>  nv50_sor_atomic_disable(struct drm_encoder *encoder, struct drm_atomic_state *state)
+>>>  {
+>>>       struct nouveau_encoder *nv_encoder = nouveau_encoder(encoder);
+>>> -     struct nouveau_drm *drm = nouveau_drm(nv_encoder->base.base.dev);
+>>>       struct nouveau_crtc *nv_crtc = nouveau_crtc(nv_encoder->crtc);
+>>>       struct nouveau_connector *nv_connector = nv50_outp_get_old_connector(state, nv_encoder);
+>>> -     struct nouveau_backlight *backlight = nv_connector->backlight;
+>>>       struct drm_dp_aux *aux = &nv_connector->aux;
+>>> -     int ret;
+>>>       u8 pwr;
+>>>
+>>> +#ifdef CONFIG_DRM_NOUVEAU_BACKLIGHT
+>>> +     struct nouveau_drm *drm = nouveau_drm(nv_encoder->base.base.dev);
+>>> +     struct nouveau_backlight *backlight = nv_connector->backlight;
+>>> +
+>>>       if (backlight && backlight->uses_dpcd) {
+>>> -             ret = drm_edp_backlight_disable(aux, &backlight->edp_info);
+>>> +             int ret = drm_edp_backlight_disable(aux, &backlight->edp_info);
+>>> +
+>>>               if (ret < 0)
+>>>                       NV_ERROR(drm, "Failed to disable backlight on [CONNECTOR:%d:%s]: %d\n",
+>>>                                nv_connector->base.base.id, nv_connector->base.name, ret);
+>>>       }
+>>> +#endif
+>>>
+>>>       if (nv_encoder->dcb->type == DCB_OUTPUT_DP) {
+>>>               int ret = drm_dp_dpcd_readb(aux, DP_SET_POWER, &pwr);
+>>>
+>>
+>> Hm, only Lyude Paul replied to this patch:
+>>
+>> https://lore.kernel.org/lkml/20210714171523.413-1-rdunlap@infradead.org/
+>>
+> 
+> what's actually the use case of compiling with
+> CONFIG_DRM_NOUVEAU_BACKLIGHT=n anyway?
+
+Dunno. In this case it was just a randconfig. Still, it needs to be
+handled in some way - such as the other suggestion in this thread.
+
+_______________________________________________
+Nouveau mailing list
+Nouveau@lists.freedesktop.org
+https://lists.freedesktop.org/mailman/listinfo/nouveau
