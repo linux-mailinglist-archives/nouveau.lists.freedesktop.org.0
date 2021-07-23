@@ -1,38 +1,47 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9C1523D44F6
-	for <lists+nouveau@lfdr.de>; Sat, 24 Jul 2021 06:31:31 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id C85A83D44F4
+	for <lists+nouveau@lfdr.de>; Sat, 24 Jul 2021 06:31:28 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5E1506FE69;
-	Sat, 24 Jul 2021 04:31:23 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id BE3BD6FE65;
+	Sat, 24 Jul 2021 04:31:22 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E76B56F8C5;
- Fri, 23 Jul 2021 09:15:39 +0000 (UTC)
-Received: by mail.kernel.org (Postfix) with ESMTPSA id D50BC60ED4;
- Fri, 23 Jul 2021 09:15:37 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5DD266EABD;
+ Fri, 23 Jul 2021 10:16:49 +0000 (UTC)
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 2EE4A60E73;
+ Fri, 23 Jul 2021 10:16:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1627031739;
- bh=SE6snYvEeeZ9b06fLIc5TbNhAAvsQE2VfQEDDanskLQ=;
- h=From:To:Cc:Subject:Date:From;
- b=ahof7/VWmPmw0D21oaa1MW95ypJ8UCeqvOHW0gxCOovI1GP4WDQob2SBP6z6mG5kM
- rdkvSamfwj66jEMJkDqwBeIhZ650s1C2OzzobetoM2lIqESrHUshs/SfneFj1zoFcI
- QfhI6pP8cT4as2G8hKYqUcmCyj+/HzjzfUpZzRkiQqDh6JwEL9YFRXHOSy3sL9PNq4
- fOkHTpqtF7RxRupdpMFNpgGck7vrfreFZIlP3dg22xQnZru3tT0q0FySu6P+SJnPAh
- WN3506dobl/mPLCtlxUSq/yHH9Ulb8oLe3H+71W6DJSqy9gCbW2fv3UMuAW3TGnKKH
- HZXUqs24iWNdQ==
-From: Arnd Bergmann <arnd@kernel.org>
-To: Ben Skeggs <bskeggs@redhat.com>, David Airlie <airlied@linux.ie>,
- Daniel Vetter <daniel@ffwll.ch>, Lyude Paul <lyude@redhat.com>
-Date: Fri, 23 Jul 2021 11:15:27 +0200
-Message-Id: <20210723091534.1730564-1-arnd@kernel.org>
-X-Mailer: git-send-email 2.29.2
+ s=k20201202; t=1627035409;
+ bh=eBzt2n0xOqHlBvF7aRsjRRJPQRR0GZoHKCArOqHMbnA=;
+ h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+ b=gUd3YBzYI3+ChqWwG8xG/YcyCyhLt4pdo/xN/vW5wpAXrWUFVx3R7ty+D33jEix6w
+ sJ9VTEbzDcrVJAG6DGe7ZDpU2BszjzR8pBEuGxcPkmfTyonYCjm189FWGXg3KXhoES
+ /4Qq8g7chg6tVPo11uw3Mt+zAFRW7B+aUSC8olGh/Q0UmiYClcAFcEdMF/xxPaSLkm
+ 8bCZY4Kt+1XCdpbt7DXpg8vOFaUUV+Zs5QQBW9/Z/g60o5+zF2+lSvqsD4qRHmhWUI
+ yrllJ0uG6byClZ+uRF0kLsh2uFnkLmkF1ITL0iX1vJ8jYjcCy2rIGP9/91blbZH985
+ RnVtr6I0mQy5g==
+Received: by mail-wm1-f46.google.com with SMTP id k4so488815wms.3;
+ Fri, 23 Jul 2021 03:16:49 -0700 (PDT)
+X-Gm-Message-State: AOAM530qGei2gvPnywdz0Cp9dKDvsOPrWvhYbSIvFza5w56bAR76ih2G
+ PBgHnyHxIcg+6DMzJdjStUwmDy1Sinmg+ZeL9pw=
+X-Google-Smtp-Source: ABdhPJwBriPt4dTcNwE3BGv5cf7FScUwWKH8mN6ZDjljoRtKp64H/dz4+H7KChwVJTdiPt+6EDqL+lbLXkOOxsq0TXs=
+X-Received: by 2002:a7b:c385:: with SMTP id s5mr3670132wmj.43.1627035407814;
+ Fri, 23 Jul 2021 03:16:47 -0700 (PDT)
 MIME-Version: 1.0
+References: <20210723091534.1730564-1-arnd@kernel.org>
+ <CAKMK7uHG0T7kgHzrkxoGj+Cv1-5f=GaH1CviunoZd_wEL5G4YQ@mail.gmail.com>
+In-Reply-To: <CAKMK7uHG0T7kgHzrkxoGj+Cv1-5f=GaH1CviunoZd_wEL5G4YQ@mail.gmail.com>
+From: Arnd Bergmann <arnd@kernel.org>
+Date: Fri, 23 Jul 2021 12:16:31 +0200
+X-Gmail-Original-Message-ID: <CAK8P3a3xjS-zJFiQgjYDz2Gja4KBeHWyrQX4PrbkkZfEV2OJgg@mail.gmail.com>
+Message-ID: <CAK8P3a3xjS-zJFiQgjYDz2Gja4KBeHWyrQX4PrbkkZfEV2OJgg@mail.gmail.com>
+To: Daniel Vetter <daniel@ffwll.ch>
 X-Mailman-Approved-At: Sat, 24 Jul 2021 04:31:21 +0000
-Subject: [Nouveau] [PATCH] drm/nouveau/kms/nv50-: fix build failure with
+Subject: Re: [Nouveau] [PATCH] drm/nouveau/kms/nv50-: fix build failure with
  CONFIG_BACKLIGHT=n
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -45,74 +54,62 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Arnd Bergmann <arnd@arndb.de>, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- Nikola Cornij <nikola.cornij@amd.com>,
- =?UTF-8?q?Ville=20Syrj=C3=A4l=C3=A4?= <ville.syrjala@linux.intel.com>
+Cc: Arnd Bergmann <arnd@arndb.de>, David Airlie <airlied@linux.ie>,
+ Nouveau Dev <nouveau@lists.freedesktop.org>,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ dri-devel <dri-devel@lists.freedesktop.org>,
+ Nikola Cornij <nikola.cornij@amd.com>, Ben Skeggs <bskeggs@redhat.com>,
+ =?UTF-8?B?VmlsbGUgU3lyasOkbMOk?= <ville.syrjala@linux.intel.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-From: Arnd Bergmann <arnd@arndb.de>
+On Fri, Jul 23, 2021 at 11:25 AM Daniel Vetter <daniel@ffwll.ch> wrote:
+>
+> On Fri, Jul 23, 2021 at 11:15 AM Arnd Bergmann <arnd@kernel.org> wrote:
+> >
+> > From: Arnd Bergmann <arnd@arndb.de>
+> >
+> > When the backlight support is disabled, the driver fails to build:
+> >
+> > drivers/gpu/drm/nouveau/dispnv50/disp.c: In function 'nv50_sor_atomic_disable':
+> > drivers/gpu/drm/nouveau/dispnv50/disp.c:1665:59: error: 'struct nouveau_connector' has no member named 'backlight'
+> >  1665 |         struct nouveau_backlight *backlight = nv_connector->backlight;
+> >       |                                                           ^~
+> > drivers/gpu/drm/nouveau/dispnv50/disp.c:1670:35: error: invalid use of undefined type 'struct nouveau_backlight'
+> >  1670 |         if (backlight && backlight->uses_dpcd) {
+> >       |                                   ^~
+> > drivers/gpu/drm/nouveau/dispnv50/disp.c:1671:64: error: invalid use of undefined type 'struct nouveau_backlight'
+> >  1671 |                 ret = drm_edp_backlight_disable(aux, &backlight->edp_info);
+> >       |                                                                ^~
+> >
+> > The patch that introduced the problem already contains some #ifdef
+> > checks, so just add another one that makes it build again.
+> >
+> > Fixes: 6eca310e8924 ("drm/nouveau/kms/nv50-: Add basic DPCD backlight support for nouveau")
+> > Signed-off-by: Arnd Bergmann <arnd@arndb.de>
+>
+> Can we just toss the idea that BACKTLIGHT=n is a reasonable config for
+> drm drivers using backlights, and add depends BACKLIGHT to all of
+> them?
+>
+> I mean this is a perfect source of continued patch streams to keep us
+> all busy, but beyond that I really don't see the point ... I frankly
+> have better things to do, and especially with the big drivers we have
+> making backlight optional saves comparitively nothing.
+> -Daniel
 
-When the backlight support is disabled, the driver fails to build:
+Yes! I'd definitely be in favor of that, I've wasted way too much time trying
+to sort through dependency loops and other problems with backlight support.
 
-drivers/gpu/drm/nouveau/dispnv50/disp.c: In function 'nv50_sor_atomic_disable':
-drivers/gpu/drm/nouveau/dispnv50/disp.c:1665:59: error: 'struct nouveau_connector' has no member named 'backlight'
- 1665 |         struct nouveau_backlight *backlight = nv_connector->backlight;
-      |                                                           ^~
-drivers/gpu/drm/nouveau/dispnv50/disp.c:1670:35: error: invalid use of undefined type 'struct nouveau_backlight'
- 1670 |         if (backlight && backlight->uses_dpcd) {
-      |                                   ^~
-drivers/gpu/drm/nouveau/dispnv50/disp.c:1671:64: error: invalid use of undefined type 'struct nouveau_backlight'
- 1671 |                 ret = drm_edp_backlight_disable(aux, &backlight->edp_info);
-      |                                                                ^~
+Maybe we should leave the drivers/video/fbdev/ drivers untouched in this
+regard, at least for the moment, but for the drivers/gpu/drm users of
+backlight that would be a nice simplification, and even the smallest ones
+are unlikely to be used on systems that are too memory constrained to
+deal with 4KB extra .text.
 
-The patch that introduced the problem already contains some #ifdef
-checks, so just add another one that makes it build again.
-
-Fixes: 6eca310e8924 ("drm/nouveau/kms/nv50-: Add basic DPCD backlight support for nouveau")
-Signed-off-by: Arnd Bergmann <arnd@arndb.de>
----
- drivers/gpu/drm/nouveau/dispnv50/disp.c | 11 +++++++----
- 1 file changed, 7 insertions(+), 4 deletions(-)
-
-diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.c b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-index 093e1f7163b3..fcf53e24db21 100644
---- a/drivers/gpu/drm/nouveau/dispnv50/disp.c
-+++ b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-@@ -1659,20 +1659,23 @@ static void
- nv50_sor_atomic_disable(struct drm_encoder *encoder, struct drm_atomic_state *state)
- {
- 	struct nouveau_encoder *nv_encoder = nouveau_encoder(encoder);
--	struct nouveau_drm *drm = nouveau_drm(nv_encoder->base.base.dev);
- 	struct nouveau_crtc *nv_crtc = nouveau_crtc(nv_encoder->crtc);
- 	struct nouveau_connector *nv_connector = nv50_outp_get_old_connector(state, nv_encoder);
--	struct nouveau_backlight *backlight = nv_connector->backlight;
- 	struct drm_dp_aux *aux = &nv_connector->aux;
--	int ret;
- 	u8 pwr;
- 
-+#ifdef CONFIG_DRM_NOUVEAU_BACKLIGHT
-+	struct nouveau_drm *drm = nouveau_drm(nv_encoder->base.base.dev);
-+	struct nouveau_backlight *backlight = nv_connector->backlight;
-+
- 	if (backlight && backlight->uses_dpcd) {
--		ret = drm_edp_backlight_disable(aux, &backlight->edp_info);
-+		int ret = drm_edp_backlight_disable(aux, &backlight->edp_info);
-+
- 		if (ret < 0)
- 			NV_ERROR(drm, "Failed to disable backlight on [CONNECTOR:%d:%s]: %d\n",
- 				 nv_connector->base.base.id, nv_connector->base.name, ret);
- 	}
-+#endif
- 
- 	if (nv_encoder->dcb->type == DCB_OUTPUT_DP) {
- 		int ret = drm_dp_dpcd_readb(aux, DP_SET_POWER, &pwr);
--- 
-2.29.2
-
+       Arnd
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
