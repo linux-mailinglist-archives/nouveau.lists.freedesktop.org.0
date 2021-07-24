@@ -1,36 +1,37 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1B3F33D4AE7
-	for <lists+nouveau@lfdr.de>; Sun, 25 Jul 2021 03:58:18 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6ADA13D4AE9
+	for <lists+nouveau@lfdr.de>; Sun, 25 Jul 2021 03:58:20 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id EE7286E233;
-	Sun, 25 Jul 2021 01:58:10 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 322856FA58;
+	Sun, 25 Jul 2021 01:58:11 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 936266E079;
- Sat, 24 Jul 2021 14:05:01 +0000 (UTC)
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 5DF8F60E97;
- Sat, 24 Jul 2021 14:05:01 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E363B6E15C;
+ Sat, 24 Jul 2021 14:58:24 +0000 (UTC)
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 8D13C60EB0;
+ Sat, 24 Jul 2021 14:58:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1627135501;
- bh=2O1ur3A24Hv4gqCkdm20xC6QD3E7j9yg0tu1vwjXVsw=;
+ s=k20201202; t=1627138704;
+ bh=NbqjL70DokqVvV19hzj4hiRcYchamdVrDx6kJEYgsgM=;
  h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=bkRatRZpHOtR+aE3DhgBHrrhv1VXncOzBGwj3UsYTh+Co0fiWI8iZq7dYQIdRjI/k
- qHoeHwDdhMS+11XN1H2hCIjraTG9bMwivtXTg5L6iyAPZq9y7c9bm8fbiVE00yKJbT
- YwB7A/mNM9+9H8jBpojDeRWhnc/EnUFU1li7FhCdU/dx8dnm+wOCbP2p4RNIoBxKrV
- I4Dpwidq96afczxPMjUblawZHlbMZ43SAo5x55oJsiN97aX8c9M/xjR0m4cr59lKul
- wgqX+309KeSzv18jStZYat6uIMtUt9SAkLq9wrsBiL4vwWizEVBnN/LITyBuDUI9zl
- Od4LdFYTyYuww==
-Received: by mail-wr1-f42.google.com with SMTP id b9so4550028wrx.12;
- Sat, 24 Jul 2021 07:05:01 -0700 (PDT)
-X-Gm-Message-State: AOAM532WzvHgKz/zRFENzZ/+2P2WdnCE5/iwyRTrlgKyT7RIbYNzXx4t
- MQZOJlVqAaPGhfDg/qjCyBd9bpsLnk5mJcj6HNQ=
-X-Google-Smtp-Source: ABdhPJyKC4hlIYKQZNSTphY0smp/aRHoZeyrOis8ju5E0a4bjJB5Up9oudDm99dXbMvpGnDd4mDyBtueOrC8gp/BxgI=
-X-Received: by 2002:adf:b318:: with SMTP id j24mr10476011wrd.361.1627135499960; 
- Sat, 24 Jul 2021 07:04:59 -0700 (PDT)
+ b=IqSXjpLTIn6PxzBXLoGz2wvI8STZMkUsHdjULHm/QAiDJCK+FFPSya+ZsEpV67SUs
+ kgR1JNugBg+D2Qks7kJFatUrRasJVjUvGcik3Ul3RShflNDK0dr7wg8/jEltdYTZ9R
+ ha3JphNjP26TV/QlbYJu9yCxHPcg6mrWnQlVQeJfq5rvpDave68y1YC8Z/nZbOBwe2
+ sGCkJxS/4ayx4GTKbEXZIqu5+6/IFD6WYPTW0gPzq/++Gp73sGAXgc2HFa2MWc10rR
+ O1BcDMmAHJQxOAhIKWEFDFMV27tSa/mrPNvB8yJbIvHNelvgaNBeFr3BVXMZnIaKUx
+ /GqLkL2h2B3sA==
+Received: by mail-wm1-f52.google.com with SMTP id
+ j34-20020a05600c1c22b029024e75084404so2419267wms.1; 
+ Sat, 24 Jul 2021 07:58:24 -0700 (PDT)
+X-Gm-Message-State: AOAM530caWDz+p9EhoQPx+C5sETviO8TtC7q+2ol1VXLR4Altw2zgAlq
+ 8QMjKRDpb8MA89VvNlcYfljr9MptXEHdU91zLfE=
+X-Google-Smtp-Source: ABdhPJwltPl/wWX13/CxEFCAvNsrOMzwCqFUDp745ygruk3669M6BQP+fmfDf7Z3x+vjqYFjPYCieuVIF4EIc3uZU8w=
+X-Received: by 2002:a1c:4e0c:: with SMTP id g12mr18758940wmh.120.1627138703148; 
+ Sat, 24 Jul 2021 07:58:23 -0700 (PDT)
 MIME-Version: 1.0
 References: <20210723224617.3088886-1-kherbst@redhat.com>
  <CAK8P3a3u_jsxQW4dPXtsdKkw1mjKXL-h=qN1SGHytvUMPf3fPw@mail.gmail.com>
@@ -38,11 +39,13 @@ References: <20210723224617.3088886-1-kherbst@redhat.com>
  <CAK8P3a1BceSaiqkTf+9Pr4Br-G3kgqD4ztwiaS7fxNiUg9t7Dg@mail.gmail.com>
  <CACO55tsoi2akTKvFdz3p48UHRjFXDW7dUnOM8qVePBFWet-3UQ@mail.gmail.com>
  <CACO55tuceMUz2pgOM23wvcmtaTqbo6S6rCB+mfLptqJRt=fMWA@mail.gmail.com>
-In-Reply-To: <CACO55tuceMUz2pgOM23wvcmtaTqbo6S6rCB+mfLptqJRt=fMWA@mail.gmail.com>
+ <CAK8P3a3+AD02-8nbULMdae2Hc=hJ+-Zb_CL+bHF-9oGieYiZWQ@mail.gmail.com>
+ <CACO55tswMuDE9u3asU2Ls7BhA0uKGGarLk+E-WTD6MVnLwc3tw@mail.gmail.com>
+In-Reply-To: <CACO55tswMuDE9u3asU2Ls7BhA0uKGGarLk+E-WTD6MVnLwc3tw@mail.gmail.com>
 From: Arnd Bergmann <arnd@kernel.org>
-Date: Sat, 24 Jul 2021 16:04:43 +0200
-X-Gmail-Original-Message-ID: <CAK8P3a3+AD02-8nbULMdae2Hc=hJ+-Zb_CL+bHF-9oGieYiZWQ@mail.gmail.com>
-Message-ID: <CAK8P3a3+AD02-8nbULMdae2Hc=hJ+-Zb_CL+bHF-9oGieYiZWQ@mail.gmail.com>
+Date: Sat, 24 Jul 2021 16:58:06 +0200
+X-Gmail-Original-Message-ID: <CAK8P3a0i0WP24Z0TScmPqKxmM2ovtKnmm+qZq6+Tc1ju+hma0w@mail.gmail.com>
+Message-ID: <CAK8P3a0i0WP24Z0TScmPqKxmM2ovtKnmm+qZq6+Tc1ju+hma0w@mail.gmail.com>
 To: Karol Herbst <kherbst@redhat.com>
 X-Mailman-Approved-At: Sun, 25 Jul 2021 01:58:10 +0000
 Subject: Re: [Nouveau] [PATCH] nouveau: make backlight support non optional
@@ -67,78 +70,66 @@ Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Sat, Jul 24, 2021 at 2:52 PM Karol Herbst <kherbst@redhat.com> wrote:
+On Sat, Jul 24, 2021 at 4:14 PM Karol Herbst <kherbst@redhat.com> wrote:
 >
-> On Sat, Jul 24, 2021 at 2:10 PM Karol Herbst <kherbst@redhat.com> wrote:
-> >
-> > On Sat, Jul 24, 2021 at 1:56 PM Arnd Bergmann <arnd@kernel.org> wrote:
-> > >
-> > > On Sat, Jul 24, 2021 at 11:55 AM Karol Herbst <kherbst@redhat.com> wrote:
-> > >
-> > > - You run into dependency loops that prevent a successful build when some
-> > >    other driver has a 'depends on'. Preventing these loops was the main
-> > >    reason I said we should do this change.
-> > >
-> > > In theory we could change the other 85 drivers that use 'depends on' today,
-> > > and make BACKLIGHT_CLASS_DEVICE a hidden symbol that only ever
-> > > selected by the drivers that need it. This would avoid the third problem but
-> > > not the other one.
-> > >
-> > I see. Yeah, I guess we can do it this way then. I just wasn't aware
-> > of the bigger picture here. Thanks for explaining.
->
-> yeah... that doesn't work. So the issue is, that X86_PLATFORM_DEVICES
-> is a little bit in the way. If I remove the select
-> X86_PLATFORM_DEVICES then I guess problems once ACPI is enabled, but
-> if I keep it, I get cyclic dep errors :/
+> we use the MXM_WMI in code. We also have to keep arm in mind and not
+> break stuff there. So I will try to play around with your changes and
+> see how that goes.
 
-Right, this is the exact problem I explained: since all other drivers use
-'depends on X86_PLATFORM_DEVICES' instead of 'select', you get a
-loop again. Prior to changing the BACKLIGHT_CLASS_DEVICE dependency,
-nouveau was pretty much on top of everything else in the hierarchy,
-changing part of it can result in a loop.
+Ok, should find any randconfig build failures for arm, arm64 or x86 over the
+weekend. I also this on linux-next today
 
-I see that there are about ten more 'select' statements that look like
-they should not be there, and almost all of them were added in order
-to be able to 'select MXM_WMI'.
+ld: drivers/gpu/drm/i915/display/intel_panel.o: in function
+`intel_backlight_device_register':
+intel_panel.c:(.text+0x2804): undefined reference to `backlight_device_register'
+ld: intel_panel.c:(.text+0x284e): undefined reference to
+`backlight_device_register'
+ld: drivers/gpu/drm/i915/display/intel_panel.o: in function
+`intel_backlight_device_unregister':
+intel_panel.c:(.text+0x28b1): undefined reference to
+`backlight_device_unregister'
 
-I think we can go as far as the patch below, which I've put in my
-randconfig build machine, on top of your patch. I'm not entirely
-sure how strong the dependency on MXM_WMI is: does it cause
-a build failure when that is not enabled, or was this select just
-added for convenience so users don't get surprised when it's missing?
+and I added this same thing there to see how it goes:
 
-       Arnd
-
-diff --git a/drivers/gpu/drm/nouveau/Kconfig b/drivers/gpu/drm/nouveau/Kconfig
-index 9c2108b48524..f2585416507e 100644
---- a/drivers/gpu/drm/nouveau/Kconfig
-+++ b/drivers/gpu/drm/nouveau/Kconfig
-@@ -3,21 +3,14 @@ config DRM_NOUVEAU
-        tristate "Nouveau (NVIDIA) cards"
-        depends on DRM && PCI && MMU
-        depends on AGP || !AGP
+diff --git a/drivers/gpu/drm/i915/Kconfig b/drivers/gpu/drm/i915/Kconfig
+index 87825d36335b..69c6b7aec49e 100644
+--- a/drivers/gpu/drm/i915/Kconfig
++++ b/drivers/gpu/drm/i915/Kconfig
+@@ -3,6 +3,8 @@ config DRM_I915
+        tristate "Intel 8xx/9xx/G3x/G4x/HD Graphics"
+        depends on DRM
+        depends on X86 && PCI
 +       depends on ACPI_VIDEO || !ACPI
 +       depends on BACKLIGHT_CLASS_DEVICE
-+       depends on MXM_WMI || !X86 || !ACPI
-        select IOMMU_API
-        select FW_LOADER
-        select DRM_KMS_HELPER
-        select DRM_TTM
-        select DRM_TTM_HELPER
+        select INTEL_GTT
+        select INTERVAL_TREE
+        # we need shmfs for the swappable backing store, and in particular
+@@ -16,10 +18,6 @@ config DRM_I915
+        select IRQ_WORK
+        # i915 depends on ACPI_VIDEO when ACPI is enabled
+        # but for select to work, need to select ACPI_VIDEO's dependencies, ick
+-       select DRM_I915_BACKLIGHT if ACPI
+-       select INPUT if ACPI
+-       select ACPI_VIDEO if ACPI
+-       select ACPI_BUTTON if ACPI
+        select SYNC_FILE
+        select IOSF_MBI
+        select CRC32
+@@ -64,13 +62,7 @@ config DRM_I915_FORCE_PROBE
+          Use "*" to force probe the driver for all known devices.
+
+ config DRM_I915_BACKLIGHT
+-       tristate "Control backlight support"
+-       depends on DRM_I915
+-       default DRM_I915
 -       select BACKLIGHT_CLASS_DEVICE
--       select ACPI_VIDEO if ACPI && X86 && INPUT
--       select X86_PLATFORM_DEVICES if ACPI && X86
--       select ACPI_WMI if ACPI && X86
--       select MXM_WMI if ACPI && X86
--       select POWER_SUPPLY
--       # Similar to i915, we need to select ACPI_VIDEO and it's dependencies
--       select INPUT if ACPI && X86
--       select THERMAL if ACPI && X86
--       select ACPI_VIDEO if ACPI && X86
-        select SND_HDA_COMPONENT if SND_HDA_CORE
-        help
-          Choose this option for open-source NVIDIA support.
+-       help
+-          Say Y here if you want to control the backlight of your display
+-          (e.g. a laptop panel).
++       def_tristate DRM_I915
+
+ config DRM_I915_CAPTURE_ERROR
+        bool "Enable capturing GPU state following a hang"
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
