@@ -2,43 +2,45 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 621F63D4AE8
-	for <lists+nouveau@lfdr.de>; Sun, 25 Jul 2021 03:58:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A0DE03D4AE6
+	for <lists+nouveau@lfdr.de>; Sun, 25 Jul 2021 03:58:16 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 076646EB3B;
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8DB8C6E1D5;
 	Sun, 25 Jul 2021 01:58:10 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 216296F8B1;
- Sat, 24 Jul 2021 06:55:49 +0000 (UTC)
-Received: by mail.kernel.org (Postfix) with ESMTPSA id B4CAA60E9C;
- Sat, 24 Jul 2021 06:55:48 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 70CF56E0EC;
+ Sat, 24 Jul 2021 11:56:31 +0000 (UTC)
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 4B13160E93;
+ Sat, 24 Jul 2021 11:56:31 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1627109748;
- bh=B80hoZZe2OO2rx4q7PEXznNCfVJkARWnoc3HG9wphzQ=;
+ s=k20201202; t=1627127791;
+ bh=Or9WH1pvmZ4tR0pQ+qn4WAUGeesVrTpQna1KRhoMf9k=;
  h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=TPKBM4kCRjp6Dl8ERLme76Rqlot6iiRhwW3z4TPWOVwJ2+9Fs7xi3Zn1wR65TDQzs
- +ShXgwh64Rr4gLPIR4VuUZkIz0OY9RiIfMRMXzp7UfbQ4TYAxMB/6h+FkH5YixH7Mt
- lrpas+gEwhRV+I2mWemvQGFGlFEwDMXGatnDxi6EAfXWE4PiZJCSn0skFbJHbX35Xl
- /gaXVW99pnGOl9cTVxwf+iOWbIy6bs8vzvD3ASuwS+WbTB4SaclRIJXThFKv8svHYe
- 6WcRzdgCguxxYdkGK98bznKXi0tNj6T25JyB7YFOlFtiVg89XECJFR7br5nvLe+etP
- MBb+1mV8DeOnQ==
-Received: by mail-wm1-f51.google.com with SMTP id
- a80-20020a1c98530000b0290245467f26a4so2943898wme.0; 
- Fri, 23 Jul 2021 23:55:48 -0700 (PDT)
-X-Gm-Message-State: AOAM530uWyeAA9JzLAyAAi7C0idhgv+inbOPkn8+5cIq9UZ8nxDrdoFq
- 3gNDRBcB41QQAAcTUMeLOPNKapgAvZnh5ugvVdg=
-X-Google-Smtp-Source: ABdhPJyR72GsEjxAav2mThfrkDdq7Q7rsOokZHAxvRhxua1hNtotzPz//554fpJOxQYtC+mHVkp1i/zd0EA29NRxVbU=
-X-Received: by 2002:a7b:c385:: with SMTP id s5mr7491845wmj.43.1627109747390;
- Fri, 23 Jul 2021 23:55:47 -0700 (PDT)
+ b=GqiUR56gRh7BGaa5fFrU9Rxl8M2TrB00nMB8yg+92gB0euS8Aed0u+aaA8CISahNN
+ ldX9XAFfH7P3QVljI3NsDjd4x12IxCk6nqoWDzkr4kbJeiC3zg65f4k4eaV4mv5E0V
+ EyxiSqXXJ2scBbb2lUBTTqk5xs7btW2uq4Tnk7us8K9t+ZwBCPm2Jla+ibbFk/YEJY
+ L4aq6GOaM93UE2knqwhdJzGn6cwlXQdgBf3aNdaYHncu9Le3egmawIOQBo1/y9rXLf
+ +qYpUUY76vRC2vWNwEke7kgu9AQ//0V0DY8LLZ9hk97B1dMS+mpKeWPbRbL97Kc9cr
+ aQGpVKBa/GK4Q==
+Received: by mail-wm1-f45.google.com with SMTP id
+ j34-20020a05600c1c22b029024e75084404so2226621wms.1; 
+ Sat, 24 Jul 2021 04:56:31 -0700 (PDT)
+X-Gm-Message-State: AOAM531ymiw1fAuCBwAD6U5BdSJ3MbwIhtIDIetLTavaoOQNH+niGEh/
+ OszbXHL0NUEV7MTSEVBfdNMmQOrSjvvpm4F58T0=
+X-Google-Smtp-Source: ABdhPJxRsxDvG5h/w15BRF87kyh1VVVKr9ninZcoTF/7r4hhnZwOsQ2QlykYbGshv3uR73Sb2/2ucgam2jgOI9/0WVI=
+X-Received: by 2002:a7b:c2fa:: with SMTP id e26mr18402161wmk.84.1627127789904; 
+ Sat, 24 Jul 2021 04:56:29 -0700 (PDT)
 MIME-Version: 1.0
 References: <20210723224617.3088886-1-kherbst@redhat.com>
-In-Reply-To: <20210723224617.3088886-1-kherbst@redhat.com>
+ <CAK8P3a3u_jsxQW4dPXtsdKkw1mjKXL-h=qN1SGHytvUMPf3fPw@mail.gmail.com>
+ <CACO55tuNWk6emjnnukgv9h-9jbpVP564Ogmi7TGbybc9n5v+ZQ@mail.gmail.com>
+In-Reply-To: <CACO55tuNWk6emjnnukgv9h-9jbpVP564Ogmi7TGbybc9n5v+ZQ@mail.gmail.com>
 From: Arnd Bergmann <arnd@kernel.org>
-Date: Sat, 24 Jul 2021 08:55:31 +0200
-X-Gmail-Original-Message-ID: <CAK8P3a3u_jsxQW4dPXtsdKkw1mjKXL-h=qN1SGHytvUMPf3fPw@mail.gmail.com>
-Message-ID: <CAK8P3a3u_jsxQW4dPXtsdKkw1mjKXL-h=qN1SGHytvUMPf3fPw@mail.gmail.com>
+Date: Sat, 24 Jul 2021 13:56:11 +0200
+X-Gmail-Original-Message-ID: <CAK8P3a1BceSaiqkTf+9Pr4Br-G3kgqD4ztwiaS7fxNiUg9t7Dg@mail.gmail.com>
+Message-ID: <CAK8P3a1BceSaiqkTf+9Pr4Br-G3kgqD4ztwiaS7fxNiUg9t7Dg@mail.gmail.com>
 To: Karol Herbst <kherbst@redhat.com>
 X-Mailman-Approved-At: Sun, 25 Jul 2021 01:58:10 +0000
 Subject: Re: [Nouveau] [PATCH] nouveau: make backlight support non optional
@@ -63,31 +65,61 @@ Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Sat, Jul 24, 2021 at 12:47 AM Karol Herbst <kherbst@redhat.com> wrote:
+On Sat, Jul 24, 2021 at 11:55 AM Karol Herbst <kherbst@redhat.com> wrote:
 >
-> In the past this only led to compilation issues. Also the small amount of
-> extra .text shouldn't really matter compared to the entire nouveau driver
-> anyway.
+> On Sat, Jul 24, 2021 at 8:55 AM Arnd Bergmann <arnd@kernel.org> wrote:
+> >
+> > On Sat, Jul 24, 2021 at 12:47 AM Karol Herbst <kherbst@redhat.com> wrote:
+> > >
+> > > In the past this only led to compilation issues. Also the small amount of
+> > > extra .text shouldn't really matter compared to the entire nouveau driver
+> > > anyway.
+> > >
+> >
+> > >         select DRM_TTM_HELPER
+> > > -       select BACKLIGHT_CLASS_DEVICE if DRM_NOUVEAU_BACKLIGHT
+> > > -       select ACPI_VIDEO if ACPI && X86 && BACKLIGHT_CLASS_DEVICE && INPUT
+> > > +       select BACKLIGHT_CLASS_DEVICE
+> > > +       select ACPI_VIDEO if ACPI && X86 && INPUT
+> > >         select X86_PLATFORM_DEVICES if ACPI && X86
+> > >         select ACPI_WMI if ACPI && X86
+> >
+> > I think the logic needs to be the reverse: instead of 'select
+> > BACKLIGHT_CLASS_DEVICE',
+> > this should be 'depends on BACKLIGHT_CLASS_DEVICE', and the same for ACPI_VIDEO.
+> >
+> > We may want to add 'default DRM || FB' to BACKLIGHT_CLASS_DEVICE in the
+> > process so we don't lose it for users doing 'make oldconfig' or 'make defconfig'
+> >
 >
+> I think the problem with
+> "depends" is that the user needs to enable backlight support first
+> before even seeing nouveau and I don't know if that makes sense. But
+> maybe "default" is indeed helping here in this case.
 
->         select DRM_TTM_HELPER
-> -       select BACKLIGHT_CLASS_DEVICE if DRM_NOUVEAU_BACKLIGHT
-> -       select ACPI_VIDEO if ACPI && X86 && BACKLIGHT_CLASS_DEVICE && INPUT
-> +       select BACKLIGHT_CLASS_DEVICE
-> +       select ACPI_VIDEO if ACPI && X86 && INPUT
->         select X86_PLATFORM_DEVICES if ACPI && X86
->         select ACPI_WMI if ACPI && X86
+In general, no driver should ever 'select' a subsystem. Otherwise you end up
+with two problems:
 
-I think the logic needs to be the reverse: instead of 'select
-BACKLIGHT_CLASS_DEVICE',
-this should be 'depends on BACKLIGHT_CLASS_DEVICE', and the same for ACPI_VIDEO.
+- enabling this one driver suddenly makes all other drivers that have
+a dependency
+  on this visible, and some of those might have a 'default y', so you
+end up with
+  a ton of stuff in the kernel that would otherwise not be there.
 
-We may want to add 'default DRM || FB' to BACKLIGHT_CLASS_DEVICE in the
-process so we don't lose it for users doing 'make oldconfig' or 'make defconfig'
+- It becomes impossible to turn it off as long as some driver has that 'select'.
+  This is the pretty much the same problem as the one you describe, just
+   the other side of it.
 
-The rest of the patch looks good to me.
+- You run into dependency loops that prevent a successful build when some
+   other driver has a 'depends on'. Preventing these loops was the main
+   reason I said we should do this change.
 
-       Arnd
+In theory we could change the other 85 drivers that use 'depends on' today,
+and make BACKLIGHT_CLASS_DEVICE a hidden symbol that only ever
+selected by the drivers that need it. This would avoid the third problem but
+not the other one.
+
+      Arnd
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
