@@ -1,46 +1,48 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id A0DE03D4AE6
-	for <lists+nouveau@lfdr.de>; Sun, 25 Jul 2021 03:58:16 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1B3F33D4AE7
+	for <lists+nouveau@lfdr.de>; Sun, 25 Jul 2021 03:58:18 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8DB8C6E1D5;
+	by gabe.freedesktop.org (Postfix) with ESMTP id EE7286E233;
 	Sun, 25 Jul 2021 01:58:10 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 70CF56E0EC;
- Sat, 24 Jul 2021 11:56:31 +0000 (UTC)
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 4B13160E93;
- Sat, 24 Jul 2021 11:56:31 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 936266E079;
+ Sat, 24 Jul 2021 14:05:01 +0000 (UTC)
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 5DF8F60E97;
+ Sat, 24 Jul 2021 14:05:01 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1627127791;
- bh=Or9WH1pvmZ4tR0pQ+qn4WAUGeesVrTpQna1KRhoMf9k=;
+ s=k20201202; t=1627135501;
+ bh=2O1ur3A24Hv4gqCkdm20xC6QD3E7j9yg0tu1vwjXVsw=;
  h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=GqiUR56gRh7BGaa5fFrU9Rxl8M2TrB00nMB8yg+92gB0euS8Aed0u+aaA8CISahNN
- ldX9XAFfH7P3QVljI3NsDjd4x12IxCk6nqoWDzkr4kbJeiC3zg65f4k4eaV4mv5E0V
- EyxiSqXXJ2scBbb2lUBTTqk5xs7btW2uq4Tnk7us8K9t+ZwBCPm2Jla+ibbFk/YEJY
- L4aq6GOaM93UE2knqwhdJzGn6cwlXQdgBf3aNdaYHncu9Le3egmawIOQBo1/y9rXLf
- +qYpUUY76vRC2vWNwEke7kgu9AQ//0V0DY8LLZ9hk97B1dMS+mpKeWPbRbL97Kc9cr
- aQGpVKBa/GK4Q==
-Received: by mail-wm1-f45.google.com with SMTP id
- j34-20020a05600c1c22b029024e75084404so2226621wms.1; 
- Sat, 24 Jul 2021 04:56:31 -0700 (PDT)
-X-Gm-Message-State: AOAM531ymiw1fAuCBwAD6U5BdSJ3MbwIhtIDIetLTavaoOQNH+niGEh/
- OszbXHL0NUEV7MTSEVBfdNMmQOrSjvvpm4F58T0=
-X-Google-Smtp-Source: ABdhPJxRsxDvG5h/w15BRF87kyh1VVVKr9ninZcoTF/7r4hhnZwOsQ2QlykYbGshv3uR73Sb2/2ucgam2jgOI9/0WVI=
-X-Received: by 2002:a7b:c2fa:: with SMTP id e26mr18402161wmk.84.1627127789904; 
- Sat, 24 Jul 2021 04:56:29 -0700 (PDT)
+ b=bkRatRZpHOtR+aE3DhgBHrrhv1VXncOzBGwj3UsYTh+Co0fiWI8iZq7dYQIdRjI/k
+ qHoeHwDdhMS+11XN1H2hCIjraTG9bMwivtXTg5L6iyAPZq9y7c9bm8fbiVE00yKJbT
+ YwB7A/mNM9+9H8jBpojDeRWhnc/EnUFU1li7FhCdU/dx8dnm+wOCbP2p4RNIoBxKrV
+ I4Dpwidq96afczxPMjUblawZHlbMZ43SAo5x55oJsiN97aX8c9M/xjR0m4cr59lKul
+ wgqX+309KeSzv18jStZYat6uIMtUt9SAkLq9wrsBiL4vwWizEVBnN/LITyBuDUI9zl
+ Od4LdFYTyYuww==
+Received: by mail-wr1-f42.google.com with SMTP id b9so4550028wrx.12;
+ Sat, 24 Jul 2021 07:05:01 -0700 (PDT)
+X-Gm-Message-State: AOAM532WzvHgKz/zRFENzZ/+2P2WdnCE5/iwyRTrlgKyT7RIbYNzXx4t
+ MQZOJlVqAaPGhfDg/qjCyBd9bpsLnk5mJcj6HNQ=
+X-Google-Smtp-Source: ABdhPJyKC4hlIYKQZNSTphY0smp/aRHoZeyrOis8ju5E0a4bjJB5Up9oudDm99dXbMvpGnDd4mDyBtueOrC8gp/BxgI=
+X-Received: by 2002:adf:b318:: with SMTP id j24mr10476011wrd.361.1627135499960; 
+ Sat, 24 Jul 2021 07:04:59 -0700 (PDT)
 MIME-Version: 1.0
 References: <20210723224617.3088886-1-kherbst@redhat.com>
  <CAK8P3a3u_jsxQW4dPXtsdKkw1mjKXL-h=qN1SGHytvUMPf3fPw@mail.gmail.com>
  <CACO55tuNWk6emjnnukgv9h-9jbpVP564Ogmi7TGbybc9n5v+ZQ@mail.gmail.com>
-In-Reply-To: <CACO55tuNWk6emjnnukgv9h-9jbpVP564Ogmi7TGbybc9n5v+ZQ@mail.gmail.com>
+ <CAK8P3a1BceSaiqkTf+9Pr4Br-G3kgqD4ztwiaS7fxNiUg9t7Dg@mail.gmail.com>
+ <CACO55tsoi2akTKvFdz3p48UHRjFXDW7dUnOM8qVePBFWet-3UQ@mail.gmail.com>
+ <CACO55tuceMUz2pgOM23wvcmtaTqbo6S6rCB+mfLptqJRt=fMWA@mail.gmail.com>
+In-Reply-To: <CACO55tuceMUz2pgOM23wvcmtaTqbo6S6rCB+mfLptqJRt=fMWA@mail.gmail.com>
 From: Arnd Bergmann <arnd@kernel.org>
-Date: Sat, 24 Jul 2021 13:56:11 +0200
-X-Gmail-Original-Message-ID: <CAK8P3a1BceSaiqkTf+9Pr4Br-G3kgqD4ztwiaS7fxNiUg9t7Dg@mail.gmail.com>
-Message-ID: <CAK8P3a1BceSaiqkTf+9Pr4Br-G3kgqD4ztwiaS7fxNiUg9t7Dg@mail.gmail.com>
+Date: Sat, 24 Jul 2021 16:04:43 +0200
+X-Gmail-Original-Message-ID: <CAK8P3a3+AD02-8nbULMdae2Hc=hJ+-Zb_CL+bHF-9oGieYiZWQ@mail.gmail.com>
+Message-ID: <CAK8P3a3+AD02-8nbULMdae2Hc=hJ+-Zb_CL+bHF-9oGieYiZWQ@mail.gmail.com>
 To: Karol Herbst <kherbst@redhat.com>
 X-Mailman-Approved-At: Sun, 25 Jul 2021 01:58:10 +0000
 Subject: Re: [Nouveau] [PATCH] nouveau: make backlight support non optional
@@ -65,61 +67,78 @@ Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Sat, Jul 24, 2021 at 11:55 AM Karol Herbst <kherbst@redhat.com> wrote:
+On Sat, Jul 24, 2021 at 2:52 PM Karol Herbst <kherbst@redhat.com> wrote:
 >
-> On Sat, Jul 24, 2021 at 8:55 AM Arnd Bergmann <arnd@kernel.org> wrote:
+> On Sat, Jul 24, 2021 at 2:10 PM Karol Herbst <kherbst@redhat.com> wrote:
 > >
-> > On Sat, Jul 24, 2021 at 12:47 AM Karol Herbst <kherbst@redhat.com> wrote:
+> > On Sat, Jul 24, 2021 at 1:56 PM Arnd Bergmann <arnd@kernel.org> wrote:
 > > >
-> > > In the past this only led to compilation issues. Also the small amount of
-> > > extra .text shouldn't really matter compared to the entire nouveau driver
-> > > anyway.
+> > > On Sat, Jul 24, 2021 at 11:55 AM Karol Herbst <kherbst@redhat.com> wrote:
 > > >
-> >
-> > >         select DRM_TTM_HELPER
-> > > -       select BACKLIGHT_CLASS_DEVICE if DRM_NOUVEAU_BACKLIGHT
-> > > -       select ACPI_VIDEO if ACPI && X86 && BACKLIGHT_CLASS_DEVICE && INPUT
-> > > +       select BACKLIGHT_CLASS_DEVICE
-> > > +       select ACPI_VIDEO if ACPI && X86 && INPUT
-> > >         select X86_PLATFORM_DEVICES if ACPI && X86
-> > >         select ACPI_WMI if ACPI && X86
-> >
-> > I think the logic needs to be the reverse: instead of 'select
-> > BACKLIGHT_CLASS_DEVICE',
-> > this should be 'depends on BACKLIGHT_CLASS_DEVICE', and the same for ACPI_VIDEO.
-> >
-> > We may want to add 'default DRM || FB' to BACKLIGHT_CLASS_DEVICE in the
-> > process so we don't lose it for users doing 'make oldconfig' or 'make defconfig'
-> >
+> > > - You run into dependency loops that prevent a successful build when some
+> > >    other driver has a 'depends on'. Preventing these loops was the main
+> > >    reason I said we should do this change.
+> > >
+> > > In theory we could change the other 85 drivers that use 'depends on' today,
+> > > and make BACKLIGHT_CLASS_DEVICE a hidden symbol that only ever
+> > > selected by the drivers that need it. This would avoid the third problem but
+> > > not the other one.
+> > >
+> > I see. Yeah, I guess we can do it this way then. I just wasn't aware
+> > of the bigger picture here. Thanks for explaining.
 >
-> I think the problem with
-> "depends" is that the user needs to enable backlight support first
-> before even seeing nouveau and I don't know if that makes sense. But
-> maybe "default" is indeed helping here in this case.
+> yeah... that doesn't work. So the issue is, that X86_PLATFORM_DEVICES
+> is a little bit in the way. If I remove the select
+> X86_PLATFORM_DEVICES then I guess problems once ACPI is enabled, but
+> if I keep it, I get cyclic dep errors :/
 
-In general, no driver should ever 'select' a subsystem. Otherwise you end up
-with two problems:
+Right, this is the exact problem I explained: since all other drivers use
+'depends on X86_PLATFORM_DEVICES' instead of 'select', you get a
+loop again. Prior to changing the BACKLIGHT_CLASS_DEVICE dependency,
+nouveau was pretty much on top of everything else in the hierarchy,
+changing part of it can result in a loop.
 
-- enabling this one driver suddenly makes all other drivers that have
-a dependency
-  on this visible, and some of those might have a 'default y', so you
-end up with
-  a ton of stuff in the kernel that would otherwise not be there.
+I see that there are about ten more 'select' statements that look like
+they should not be there, and almost all of them were added in order
+to be able to 'select MXM_WMI'.
 
-- It becomes impossible to turn it off as long as some driver has that 'select'.
-  This is the pretty much the same problem as the one you describe, just
-   the other side of it.
+I think we can go as far as the patch below, which I've put in my
+randconfig build machine, on top of your patch. I'm not entirely
+sure how strong the dependency on MXM_WMI is: does it cause
+a build failure when that is not enabled, or was this select just
+added for convenience so users don't get surprised when it's missing?
 
-- You run into dependency loops that prevent a successful build when some
-   other driver has a 'depends on'. Preventing these loops was the main
-   reason I said we should do this change.
+       Arnd
 
-In theory we could change the other 85 drivers that use 'depends on' today,
-and make BACKLIGHT_CLASS_DEVICE a hidden symbol that only ever
-selected by the drivers that need it. This would avoid the third problem but
-not the other one.
-
-      Arnd
+diff --git a/drivers/gpu/drm/nouveau/Kconfig b/drivers/gpu/drm/nouveau/Kconfig
+index 9c2108b48524..f2585416507e 100644
+--- a/drivers/gpu/drm/nouveau/Kconfig
++++ b/drivers/gpu/drm/nouveau/Kconfig
+@@ -3,21 +3,14 @@ config DRM_NOUVEAU
+        tristate "Nouveau (NVIDIA) cards"
+        depends on DRM && PCI && MMU
+        depends on AGP || !AGP
++       depends on ACPI_VIDEO || !ACPI
++       depends on BACKLIGHT_CLASS_DEVICE
++       depends on MXM_WMI || !X86 || !ACPI
+        select IOMMU_API
+        select FW_LOADER
+        select DRM_KMS_HELPER
+        select DRM_TTM
+        select DRM_TTM_HELPER
+-       select BACKLIGHT_CLASS_DEVICE
+-       select ACPI_VIDEO if ACPI && X86 && INPUT
+-       select X86_PLATFORM_DEVICES if ACPI && X86
+-       select ACPI_WMI if ACPI && X86
+-       select MXM_WMI if ACPI && X86
+-       select POWER_SUPPLY
+-       # Similar to i915, we need to select ACPI_VIDEO and it's dependencies
+-       select INPUT if ACPI && X86
+-       select THERMAL if ACPI && X86
+-       select ACPI_VIDEO if ACPI && X86
+        select SND_HDA_COMPONENT if SND_HDA_CORE
+        help
+          Choose this option for open-source NVIDIA support.
 _______________________________________________
 Nouveau mailing list
 Nouveau@lists.freedesktop.org
