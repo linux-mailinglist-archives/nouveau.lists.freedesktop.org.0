@@ -1,72 +1,66 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 611323D4AEA
-	for <lists+nouveau@lfdr.de>; Sun, 25 Jul 2021 03:58:21 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0F60B3D74DC
+	for <lists+nouveau@lfdr.de>; Tue, 27 Jul 2021 14:12:06 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4B48272CCD;
-	Sun, 25 Jul 2021 01:58:11 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 73D5E6E1FB;
+	Tue, 27 Jul 2021 12:12:04 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id CDD8A6E16D
- for <nouveau@lists.freedesktop.org>; Sat, 24 Jul 2021 20:27:52 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id BE8196E8EB
+ for <nouveau@lists.freedesktop.org>; Tue, 27 Jul 2021 12:12:03 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1627158471;
+ s=mimecast20190719; t=1627387922;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=Q/1snXio7orhyt4GADMoDog5tLPSL6yylMx5qgvWHcw=;
- b=TUyT6Ydlgg/M8eNpPXjaSjLfGa7liEpVCvD4XR6bZsMGKQ4cWVxYDWj1K3g1ScPByqTG3S
- 8doiAD8RbSKhsr8zJw2n3Hp6OrdW0DHdeRR5d5l7p2I8VddL2YYzfbga6MfMlBxsEGY+/Y
- DwX1RjnWz3r6Au6fH0H1kBa8JntANJ0=
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com
- [209.85.222.198]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-379-LYtcDPkWMwyXcC3f02CYBA-1; Sat, 24 Jul 2021 16:27:47 -0400
-X-MC-Unique: LYtcDPkWMwyXcC3f02CYBA-1
-Received: by mail-qk1-f198.google.com with SMTP id
- p123-20020a378d810000b02903ad5730c883so4528252qkd.22
- for <nouveau@lists.freedesktop.org>; Sat, 24 Jul 2021 13:27:47 -0700 (PDT)
+ in-reply-to:in-reply-to:references:references;
+ bh=IQAyjxcRyBkQ7EQF6gV5mRRFtvTieivZ975mxLn5TPg=;
+ b=Ps3sT1oeTFi4LtY47iJ9AaUU9UWBuwAjTC+Wga7NggmkZ6f7oqwNadBF1omFXszEIpP29m
+ S9H7sDzOweDsVxjoI5zxRqecFrP1q8GekWwcGQXJo3Y9S+19WR5c5GhiQ70ZkIvBHYXltu
+ Qksi7+D2jzJxPekT5zRIC9dhbEdDGdw=
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-210-clMJ-HKIMiiT_Y9v5szwgw-1; Tue, 27 Jul 2021 08:12:00 -0400
+X-MC-Unique: clMJ-HKIMiiT_Y9v5szwgw-1
+Received: by mail-wr1-f70.google.com with SMTP id
+ l7-20020a5d48070000b0290153b1557952so1159941wrq.16
+ for <nouveau@lists.freedesktop.org>; Tue, 27 Jul 2021 05:12:00 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=Q/1snXio7orhyt4GADMoDog5tLPSL6yylMx5qgvWHcw=;
- b=JeYPcxjafvdHlf5TP3ALzM/e+bMpNf/sVaGTvdchCMvZ9k5OTiYELbP23ocnnkEmjI
- pdrihvejBlSSkMNLXhPUc4b14RdydeCOnMh6wmn4V7nJ3trlJbU71VqeYmVdMEaBvpJg
- uBKtz16dcfCoM5O/WiMa/p0viK4WgX9wcDelSJlLvzyTJOcdrRX7Dgp1xyJ9xoY71+zt
- BAuGCh4+y6ShtMZjMe9Tujko3/9GXQxF4MI7l7yr4xYR+vvRd43yD/+0Ip3PHJSXuJUj
- bizaQqykFm0dSjYOAbOzFfeFHkJb6WLAutwXCd2TLMsbsdinVyJH5GxWWgnRafSiRS9u
- Kiwg==
-X-Gm-Message-State: AOAM530r++1GUYk4UImq4O3wpm/uRV9tbAg2+U74PjizCvSf5eMK50nx
- o2AvMV7MynYTbaCxFjmMYIxAKK53Gy3U9eBYA9cVXf6aKLT0bBq4REcWPdjiKiha25fSElCgOxp
- RajEBhkBKvZX9tiymHcwjk/kMxQ==
-X-Received: by 2002:a37:f50d:: with SMTP id l13mr10711210qkk.298.1627158467401; 
- Sat, 24 Jul 2021 13:27:47 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJzi6hIhq+NVUhVPqnbgHKJ7z9VSQvET+rT1MdV2KhuXvUks5lvzfgQYu10UOdSyzb83grMAEQ==
-X-Received: by 2002:a37:f50d:: with SMTP id l13mr10711196qkk.298.1627158467186; 
- Sat, 24 Jul 2021 13:27:47 -0700 (PDT)
-Received: from localhost.localdomain.com (075-142-250-213.res.spectrum.com.
- [75.142.250.213])
- by smtp.gmail.com with ESMTPSA id h68sm16650148qkf.126.2021.07.24.13.27.45
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 24 Jul 2021 13:27:46 -0700 (PDT)
-From: trix@redhat.com
-To: bskeggs@redhat.com, airlied@linux.ie, daniel@ffwll.ch, lyude@redhat.com,
- nikola.cornij@amd.com, ville.syrjala@linux.intel.com
-Date: Sat, 24 Jul 2021 13:27:31 -0700
-Message-Id: <20210724202731.3949331-1-trix@redhat.com>
-X-Mailer: git-send-email 2.26.3
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=IQAyjxcRyBkQ7EQF6gV5mRRFtvTieivZ975mxLn5TPg=;
+ b=gGG60uewpJqAz0LRFnaiBXjPnh3VDAvU/KRHowIJVit1j6VuOtvNvxT8odRJ6Kir4T
+ IAseH5xbEKQtBMGaR7ocnrNLiZin6McvmZ9oag5Oi5xJPUQytpG21JR0FvJE5tY8dCBX
+ sEeDDY5ys9XAmrOcMVaIiuvtWOpgm0kvFfC1wkVRoK3h1GXXDjwKgc2/kIy5g/vPWfvQ
+ K0/+2nMTsWII1fBFsddb1Dum3LDIQZVhw0HPM0Cf0kwsZBnTl96hJYMlUMpbMiw+S9wY
+ ktg6cM25CNMFOImJ738VQ659Fu3y4D4SW+faFxDFFaOFyUmovCzUuYGe/aZwdHgxrAVe
+ 8vnw==
+X-Gm-Message-State: AOAM530s2DclL/twINDOz2xwuU2Nj+y9CflA7hpvH/8vGJryKdu39kV6
+ qaW0/67yZkRgoVSnW7Mzlj/JgHY3SeNKKRpdhJ80YMgDGtw2cL1/0X3jkdfs2RbUYzwl5705X0B
+ 1b+NfTQBRDK9nY7L2KuN2HMbKG2I8gftfkXRJiPbJ3g==
+X-Received: by 2002:adf:e507:: with SMTP id j7mr6251458wrm.113.1627387919226; 
+ Tue, 27 Jul 2021 05:11:59 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJwPc5lB9jSqIZ4ajtwt1T8JN7JgYqq83sKLX39CnHv4NLLv3OznsjTS+sVc8VtJR5zGAL6vEabEk5UTwnKb+aM=
+X-Received: by 2002:adf:e507:: with SMTP id j7mr6251435wrm.113.1627387919049; 
+ Tue, 27 Jul 2021 05:11:59 -0700 (PDT)
 MIME-Version: 1.0
+References: <DM6PR19MB278063772C30271C6B8929B5BC109@DM6PR19MB2780.namprd19.prod.outlook.com>
+In-Reply-To: <DM6PR19MB278063772C30271C6B8929B5BC109@DM6PR19MB2780.namprd19.prod.outlook.com>
+From: Karol Herbst <kherbst@redhat.com>
+Date: Tue, 27 Jul 2021 14:11:48 +0200
+Message-ID: <CACO55tsYWW_dfAFWBFLrH51SVivUeN72Omc6DRTCtzVWSLE68w@mail.gmail.com>
+To: Ratchanan Srirattanamet <peathot@hotmail.com>
 Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=trix@redhat.com
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=kherbst@redhat.com
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-X-Mailman-Approved-At: Sun, 25 Jul 2021 01:58:10 +0000
-Subject: [Nouveau] [PATCH] drm/nouveau/kms/nv50-: use DRM_NOUVEAU_BACKLIGHT
- consistently
+Subject: Re: [Nouveau] [PATCH] drm/nouveau: don't touch has_pr3 for
+ likely-non-NVIDIA device
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -78,71 +72,106 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, Tom Rix <trix@redhat.com>
+Cc: nouveau <nouveau@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-From: Tom Rix <trix@redhat.com>
+On Thu, Jul 22, 2021 at 5:10 AM Ratchanan Srirattanamet
+<peathot@hotmail.com> wrote:
+>
+> The call site of nouveau_dsm_pci_probe() uses single set of output
+> variables for all invocations. So, we must not write anything to them
+> until we think this is an NVIDIA device of interest. Otherwise, if we
+> are called with another device after the NVIDIA device, we'll clober the
+> result of the NVIDIA device.
+>
+> In this case, if the other device doesn't have _PR3 resources, the
+> detection later would miss the presence of power resource support, and
+> the rest of the code will keep using Optimus DSM, breaking power
+> management for that machine. In particular, this fixes power management
+> of the NVIDIA card in Lenovo Legion 5-15ARH05... well, at least
+> partially. New error shows up, but this patch is correct in itself
+> anyway.
+>
+> As a bonus, we'll also stop preventing _PR3 usage from the bridge for
+> unrelated devices, which is always nice, I guess.
+>
+> As noted in commit ccfc2d5cdb024 ("drm/nouveau: Use generic helper to
+> check _PR3 presence"), care is taken to leave the _PR3 detection outside
+> of the optimus_func condition.
+>
+> https://gitlab.freedesktop.org/drm/nouveau/-/issues/79
+>
+> Fixes: ccfc2d5cdb024 ("drm/nouveau: Use generic helper to check _PR3
+> presence")
+> Signed-off-by: Ratchanan Srirattanamet <peathot@hotmail.com>
+> ---
+>
+> Hello,
+>
+> This is my first time submitting a Linux patch. I've done a
+> number of PR/MR workflows on GitHub or GitLab, but never done any
+> email-oriented development. So, please excuse me if I'm doing something
+> incorrectly.
+>
+>  drivers/gpu/drm/nouveau/nouveau_acpi.c | 18 +++++++++---------
+>  1 file changed, 9 insertions(+), 9 deletions(-)
+>
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_acpi.c b/drivers/gpu/drm/nouveau/nouveau_acpi.c
+> index 7c15f6448428..c88bda3ac820 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_acpi.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_acpi.c
+> @@ -220,15 +220,6 @@ static void nouveau_dsm_pci_probe(struct pci_dev *pdev, acpi_handle *dhandle_out
+>         int optimus_funcs;
+>         struct pci_dev *parent_pdev;
+>
+> -       *has_pr3 = false;
+> -       parent_pdev = pci_upstream_bridge(pdev);
+> -       if (parent_pdev) {
+> -               if (parent_pdev->bridge_d3)
+> -                       *has_pr3 = pci_pr3_present(parent_pdev);
+> -               else
+> -                       pci_d3cold_disable(pdev);
+> -       }
+> -
+>         dhandle = ACPI_HANDLE(&pdev->dev);
+>         if (!dhandle)
+>                 return;
+> @@ -249,6 +240,15 @@ static void nouveau_dsm_pci_probe(struct pci_dev *pdev, acpi_handle *dhandle_out
+>         *has_opt = !!optimus_funcs;
+>         *has_opt_flags = optimus_funcs & (1 << NOUVEAU_DSM_OPTIMUS_FLAGS);
+>
+> +       *has_pr3 = false;
+> +       parent_pdev = pci_upstream_bridge(pdev);
+> +       if (parent_pdev) {
+> +               if (parent_pdev->bridge_d3)
+> +                       *has_pr3 = pci_pr3_present(parent_pdev);
+> +               else
+> +                       pci_d3cold_disable(pdev);
+> +       }
+> +
 
-A build error when DRM_NOUVEAU_BACKLIGHT is not defined
-disp.c:1665:52: error: 'struct nouveau_connector' has no
-  member named 'backlight'
+given that we call this code for all GPUs, I _think_ it is better to
+check for GPU Vendors or check if the GPU we touch is the secondary
+one. We also have systems with two Nvidia GPUs. But I don't know how
+the detection worked there and if that's fine in the end... I might
+have to investigate this on all laptops with various hybrid GPU types,
+but... mhh. Maybe checking for "this is a secondary GPU" is good
+enough.
 
-Use ifdef's similar to elsewhere in disp.c to conditionally
-use the new backlight support.
-
-Move scope of drm to where it is used, inside the backlight error
-reporting.
-
-Remove shadow ret decl.
-
-Fixes: 6eca310e8924 ("drm/nouveau/kms/nv50-: Add basic DPCD backlight support for nouveau")
-Signed-off-by: Tom Rix <trix@redhat.com>
----
- drivers/gpu/drm/nouveau/dispnv50/disp.c | 11 ++++++++---
- 1 file changed, 8 insertions(+), 3 deletions(-)
-
-diff --git a/drivers/gpu/drm/nouveau/dispnv50/disp.c b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-index 093e1f7163b31..6e957041edfb5 100644
---- a/drivers/gpu/drm/nouveau/dispnv50/disp.c
-+++ b/drivers/gpu/drm/nouveau/dispnv50/disp.c
-@@ -1659,23 +1659,28 @@ static void
- nv50_sor_atomic_disable(struct drm_encoder *encoder, struct drm_atomic_state *state)
- {
- 	struct nouveau_encoder *nv_encoder = nouveau_encoder(encoder);
--	struct nouveau_drm *drm = nouveau_drm(nv_encoder->base.base.dev);
- 	struct nouveau_crtc *nv_crtc = nouveau_crtc(nv_encoder->crtc);
- 	struct nouveau_connector *nv_connector = nv50_outp_get_old_connector(state, nv_encoder);
-+#ifdef CONFIG_DRM_NOUVEAU_BACKLIGHT
- 	struct nouveau_backlight *backlight = nv_connector->backlight;
-+#endif
- 	struct drm_dp_aux *aux = &nv_connector->aux;
- 	int ret;
- 	u8 pwr;
- 
-+#ifdef CONFIG_DRM_NOUVEAU_BACKLIGHT
- 	if (backlight && backlight->uses_dpcd) {
- 		ret = drm_edp_backlight_disable(aux, &backlight->edp_info);
--		if (ret < 0)
-+		if (ret < 0) {
-+			struct nouveau_drm *drm = nouveau_drm(nv_encoder->base.base.dev);
- 			NV_ERROR(drm, "Failed to disable backlight on [CONNECTOR:%d:%s]: %d\n",
- 				 nv_connector->base.base.id, nv_connector->base.name, ret);
-+		}
- 	}
-+#endif
- 
- 	if (nv_encoder->dcb->type == DCB_OUTPUT_DP) {
--		int ret = drm_dp_dpcd_readb(aux, DP_SET_POWER, &pwr);
-+		ret = drm_dp_dpcd_readb(aux, DP_SET_POWER, &pwr);
- 
- 		if (ret == 0) {
- 			pwr &= ~DP_SET_POWER_MASK;
--- 
-2.26.3
+>         if (optimus_funcs) {
+>                 uint32_t result;
+>                 nouveau_optimus_dsm(dhandle, NOUVEAU_DSM_OPTIMUS_CAPS, 0,
+> --
+> 2.25.1
+>
+> _______________________________________________
+> Nouveau mailing list
+> Nouveau@lists.freedesktop.org
+> https://lists.freedesktop.org/mailman/listinfo/nouveau
+>
 
 _______________________________________________
 Nouveau mailing list
