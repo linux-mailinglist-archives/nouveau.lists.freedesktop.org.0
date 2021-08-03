@@ -2,58 +2,109 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 51D013DE84E
-	for <lists+nouveau@lfdr.de>; Tue,  3 Aug 2021 10:23:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 72F333E3CF3
+	for <lists+nouveau@lfdr.de>; Mon,  9 Aug 2021 00:14:09 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4D1BA6E406;
-	Tue,  3 Aug 2021 08:23:33 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 62BE689831;
+	Sun,  8 Aug 2021 22:14:05 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
- by gabe.freedesktop.org (Postfix) with ESMTPS id EE54B6E406
- for <nouveau@lists.freedesktop.org>; Tue,  3 Aug 2021 08:23:31 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.net;
- s=badeba3b8450; t=1627979008;
- bh=VGrqiqPLxK1ao+MaE9xJ2BrGfoKdHhReKUOOSiouZ9w=;
- h=X-UI-Sender-Class:From:To:Cc:Subject:Date;
- b=RbqhUugBsu30ACFlBNsYjRt3CMHKIdS9hn0RnOf7mPCjYQlXhypVjjWHjN8B7H65u
- Nr8Vdq/MuIV14tPbdgWhQp+GwDWXqrzr5zFTw5JwxyhbfJSyGVe+ttvUGSJHTpvhu3
- OYPxVtsXiKeOv9zuasvJQIWdyZ+PzV6LtPyFZhc0=
-X-UI-Sender-Class: 01bb95c1-4bf8-414a-932a-4f6e2808ef9c
-Received: from apollon.localnet ([88.130.48.219]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MC30Z-1mIlaV0sYP-00CNWm; Tue, 03
- Aug 2021 10:18:22 +0200
-From: Reinhard Karcher <reinhard.karcher@gmx.net>
-To: Ben Skeggs <bskeggs@redhat.com>
-Cc: nouveau@lists.freedesktop.org
-Date: Tue, 03 Aug 2021 10:18:19 +0200
-Message-ID: <2027407.lYD7Z9Tp6P@apollon>
+X-Greylist: delayed 543 seconds by postgrey-1.36 at gabe;
+ Tue, 03 Aug 2021 14:25:40 UTC
+Received: from galois.linutronix.de (Galois.linutronix.de [193.142.43.55])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A07E66E886
+ for <nouveau@lists.freedesktop.org>; Tue,  3 Aug 2021 14:25:40 +0000 (UTC)
+From: Sebastian Andrzej Siewior <bigeasy@linutronix.de>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
+ s=2020; t=1628000193;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=Qkfc7lxCqn4p3B20wjfjiLsyLpuZIa2kIlbDitBY8sw=;
+ b=fStBYY9cDOofnMkMc6JUcZVYcNWx/eg2N05Pb/o7ef6JJTcTG48t+GioJgBl+eXKMJGEgi
+ TVCeDR+EwHJjgdulnpLwVy12sseYnaixefw5o14vk+2PAOm/LUlJHLssIOZ+nJyuRxaM3r
+ fCCG5ZeBAdz/Q3kIzOJQstWW7ST+mFehWQwEJk+hKZizcoepZD/zOgz+f7GO7oZ2MtK2DY
+ wm7slubFVtLqvtY6o7cEl9ZIw3mvJ35go7HuaiPxyi+ESejsT+e0qaP6D0Fis4EUqsKcRu
+ JGNGT0BYA9PAUGHVfsb3cVOtZwFCr59O6V6ObVy+T4OF395mknhLgwpLJFiGUg==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
+ s=2020e; t=1628000193;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=Qkfc7lxCqn4p3B20wjfjiLsyLpuZIa2kIlbDitBY8sw=;
+ b=pGmFmcj1u+vX59p9gWCClfCslb9a1WxY2Pwa8q+HwkfzdAY6X/r9JgYaxIXaCJOpPNDW2W
+ rceMZSe2cSwuwVDA==
+To: linux-kernel@vger.kernel.org
+Cc: tglx@linutronix.de, Peter Zijlstra <peterz@infradead.org>,
+ Alexander Shishkin <alexander.shishkin@linux.intel.com>,
+ Amit Kucheria <amitk@kernel.org>,
+ Andrew Morton <akpm@linux-foundation.org>,
+ Andy Lutomirski <luto@kernel.org>,
+ Arnaldo Carvalho de Melo <acme@kernel.org>, Arnd Bergmann <arnd@arndb.de>,
+ Benjamin Herrenschmidt <benh@kernel.crashing.org>,
+ Ben Segall <bsegall@google.com>, Borislav Petkov <bp@alien8.de>,
+ cgroups@vger.kernel.org, Christian Borntraeger <borntraeger@de.ibm.com>,
+ coresight@lists.linaro.org,
+ Daniel Bristot de Oliveira <bristot@redhat.com>,
+ Daniel Jordan <daniel.m.jordan@oracle.com>,
+ Daniel Lezcano <daniel.lezcano@linaro.org>,
+ Dave Hansen <dave.hansen@linux.intel.com>,
+ Davidlohr Bueso <dave@stgolabs.net>,
+ "David S. Miller" <davem@davemloft.net>,
+ Dietmar Eggemann <dietmar.eggemann@arm.com>,
+ Gonglei <arei.gonglei@huawei.com>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Guenter Roeck <linux@roeck-us.net>, Hans de Goede <hdegoede@redhat.com>,
+ Heiko Carstens <hca@linux.ibm.com>,
+ Herbert Xu <herbert@gondor.apana.org.au>, "H. Peter Anvin" <hpa@zytor.com>,
+ Ingo Molnar <mingo@kernel.org>, Ingo Molnar <mingo@redhat.com>,
+ Jakub Kicinski <kuba@kernel.org>, Jason Wang <jasowang@redhat.com>,
+ Jean Delvare <jdelvare@suse.com>, Jiri Kosina <jikos@kernel.org>,
+ Jiri Olsa <jolsa@redhat.com>, Joe Lawrence <joe.lawrence@redhat.com>,
+ Joel Fernandes <joel@joelfernandes.org>,
+ Johannes Weiner <hannes@cmpxchg.org>, John Stultz <john.stultz@linaro.org>,
+ Jonathan Corbet <corbet@lwn.net>, Josh Poimboeuf <jpoimboe@redhat.com>,
+ Josh Triplett <josh@joshtriplett.org>, Julian Wiedmann <jwi@linux.ibm.com>,
+ Juri Lelli <juri.lelli@redhat.com>, Karol Herbst <karolherbst@gmail.com>,
+ Karsten Graul <kgraul@linux.ibm.com>, kvm-ppc@vger.kernel.org,
+ Lai Jiangshan <jiangshanlai@gmail.com>, Len Brown <lenb@kernel.org>,
+ Len Brown <len.brown@intel.com>, Leo Yan <leo.yan@linaro.org>,
+ linux-acpi@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+ linux-crypto@vger.kernel.org, linux-doc@vger.kernel.org,
+ linux-edac@vger.kernel.org, linux-hwmon@vger.kernel.org,
+ linux-mips@vger.kernel.org, linux-mm@kvack.org, linux-pm@vger.kernel.org,
+ linuxppc-dev@lists.ozlabs.org, linux-raid@vger.kernel.org,
+ linux-s390@vger.kernel.org, live-patching@vger.kernel.org,
+ Mark Gross <mgross@linux.intel.com>, Mark Rutland <mark.rutland@arm.com>,
+ Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
+ Mathieu Poirier <mathieu.poirier@linaro.org>, Mel Gorman <mgorman@suse.de>,
+ Michael Ellerman <mpe@ellerman.id.au>,
+ "Michael S. Tsirkin" <mst@redhat.com>, Mike Leach <mike.leach@linaro.org>,
+ Mike Travis <mike.travis@hpe.com>, Miroslav Benes <mbenes@suse.cz>,
+ Namhyung Kim <namhyung@kernel.org>, netdev@vger.kernel.org,
+ nouveau@lists.freedesktop.org, "Paul E. McKenney" <paulmck@kernel.org>,
+ Paul Mackerras <paulus@samba.org>, Pavel Machek <pavel@ucw.cz>,
+ Pekka Paalanen <ppaalanen@gmail.com>, Petr Mladek <pmladek@suse.com>,
+ platform-driver-x86@vger.kernel.org,
+ "Rafael J. Wysocki" <rjw@rjwysocki.net>, rcu@vger.kernel.org,
+ Robin Holt <robinmholt@gmail.com>, Song Liu <song@kernel.org>,
+ Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>,
+ Steffen Klassert <steffen.klassert@secunet.com>,
+ Stephen Boyd <sboyd@kernel.org>, Steven Rostedt <rostedt@goodmis.org>,
+ Steve Wahl <steve.wahl@hpe.com>, Stuart Hayes <stuart.w.hayes@gmail.com>,
+ Suzuki K Poulose <suzuki.poulose@arm.com>, Tejun Heo <tj@kernel.org>,
+ Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
+ Tony Luck <tony.luck@intel.com>, Vasily Gorbik <gor@linux.ibm.com>,
+ Vincent Guittot <vincent.guittot@linaro.org>,
+ Viresh Kumar <viresh.kumar@linaro.org>,
+ virtualization@lists.linux-foundation.org, x86@kernel.org,
+ Zefan Li <lizefan.x@bytedance.com>, Zhang Rui <rui.zhang@intel.com>
+Date: Tue,  3 Aug 2021 16:15:43 +0200
+Message-Id: <20210803141621.780504-1-bigeasy@linutronix.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="UTF-8"
-X-Provags-ID: V03:K1:ofE2YgAU3IidQH9WHqXXlQ+TFjDuOnwWlvRSRTv9ePDfq+28Q4Q
- juqCxNVFjGBuGlvI3sQFQ9PXvJ2IgQTrwUgb+qKJVp2lRpQqKMc21VbicvQebhpj/Zs3XGN
- cHUHtfbO/HlYX1xxzI5AQ4/71ZEIet/PQpG8j0XIQbmlIvF7g5fRUCSNOEf3r9p+wJp7VnT
- L0PfleAwG8OhChDXTKySw==
-X-Spam-Flag: NO
-X-UI-Out-Filterresults: notjunk:1;V03:K0:Ua4AIW6kfhc=:aOu/uXT2in8HAqJOLU6AfG
- i1lPEPF25yOBA/EBxnidK56EcHCIqdLlSmlHdxjjw6uzeB5D0GB+8NBn99AXV/pPw5Vt0EjMq
- 7trFISrP4Sec7nZ2xlb7raBgX3uBg2c9+CCKhusKPhrmkGy7VEL/RowQK/lYWkdu3r+QlzVBl
- QGBCN1TwNssDS1X3h7WmwIHnZNWFaQSLzcG1XyzVxdMhtOR8VzA0HJtoWxKENmqMIcg+UMaxx
- XeBuq4E91sUN5TSL2a+nPHykivpWPKKQ5Den6yr4DxYXgEwx3c7lkHubglyr2ljwAfiJhrXkj
- cDYWKpQRhC0Fs8TgUdPIzhoowPtpSFwrtjxjUvhkpps7hMWO/ymi1cQTb0wonDNlsxH200C4N
- l4ASywDDzGn9KAphc9DXt+dHLvx90v4GoR2zHfDVWAps4b0PmsTieODxOIIYx0gGV30Ua9aDh
- 7qE5sCrrfbN9orUUONd6HYntiFiuBYpj4p9XAdzfMLCXVle8uxE1NJPiWlrDd9UwhXSZxKSlH
- 2yZix1jXkZvNh6d4a+CKhHC/zagE3EzxRGyNRCNBxfZlLgrIk+TdaPu2g7X8IYKE8h4WghEVD
- WSYkEHXDX5Rdy3dLJn/MxAqx3rfHA5X7TQQHKnRQM5DjCBqpCuVOAqQb4otpZD3p4SZ2EwO7+
- nXCgq0Y6Gir8Au2VN72IIhKwBaF4CWMeVinZFryXjQqK0PAu0v5Iy/VHb7NaRJ9t8w/ndHFtt
- qKYL28iKPtDQ52SzPpRtv+LJstwBz6BvnNVYvFhD9iQ8nuwuDbC1/NS8jS57edE4h2KlLzMlR
- FSjMsdm/cuJkQPCRTDmdl1ju7rASGrUM4QZgngrpFCbPdR8EJwE/S/x8UBL4DZj703EZzAmuA
- ToPl7BcQIVjxsSwRWzeRlE2N2mUX2xAaVqDJM3BjaoMU43admuFlkiZJkVmHL+XHyo0nU3mvU
- o4a2RgT/CfjzwpzJjuUUQYVorybNp5X4wHXjqRkiH9gQ5C/8b1Sm0D6k56VsjfY3V5sj5S+QH
- VXteaZ4Pu1hXRzESybFxWpsKIHJpPrZ5+0iT02R/EFijWeD2Ag/jmaMKVZIok2nTknmF+D0X/
- YlvkEmUfK//souwqOlDZurG2U/xEW+7Ez0aJgSjLsM6lGCRyKZoa9gCtg==
-Subject: [Nouveau] falcon limit(s) exceeded on GF108M [GeForce GT 620M]
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Sun, 08 Aug 2021 22:14:04 +0000
+Subject: [Nouveau] [PATCH 00/38] Replace deprecated CPU-hotplug
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,53 +119,116 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Dear maintainer,
+This is a tree wide replacement of the deprecated CPU hotplug functions
+which are only wrappers around the actual functions.
 
-I own an old Fujitsu-Siemens Lifebook N532 with Intel and NVIDIA graphic.
-lspci:
-00:00.0 Host bridge: Intel Corporation 3rd Gen Core processor DRAM Controller (rev 09)
-00:01.0 PCI bridge: Intel Corporation Xeon E3-1200 v2/3rd Gen Core processor PCI Express Root Port (rev 09)
-00:02.0 VGA compatible controller: Intel Corporation 3rd Gen Core processor Graphics Controller (rev 09)
-00:14.0 USB controller: Intel Corporation 7 Series/C210 Series Chipset Family USB xHCI Host Controller (rev 04)
-00:16.0 Communication controller: Intel Corporation 7 Series/C216 Chipset Family MEI Controller #1 (rev 04)
-00:1a.0 USB controller: Intel Corporation 7 Series/C216 Chipset Family USB Enhanced Host Controller #2 (rev 04)
-00:1b.0 Audio device: Intel Corporation 7 Series/C216 Chipset Family High Definition Audio Controller (rev 04)
-00:1c.0 PCI bridge: Intel Corporation 7 Series/C216 Chipset Family PCI Express Root Port 1 (rev c4)
-00:1c.1 PCI bridge: Intel Corporation 7 Series/C210 Series Chipset Family PCI Express Root Port 2 (rev c4)
-00:1c.2 PCI bridge: Intel Corporation 7 Series/C210 Series Chipset Family PCI Express Root Port 3 (rev c4)
-00:1c.5 PCI bridge: Intel Corporation 7 Series/C210 Series Chipset Family PCI Express Root Port 6 (rev c4)
-00:1d.0 USB controller: Intel Corporation 7 Series/C216 Chipset Family USB Enhanced Host Controller #1 (rev 04)
-00:1f.0 ISA bridge: Intel Corporation HM77 Express Chipset LPC Controller (rev 04)
-00:1f.2 SATA controller: Intel Corporation 7 Series Chipset Family 6-port SATA Controller [AHCI mode] (rev 04)
-00:1f.3 SMBus: Intel Corporation 7 Series/C216 Chipset Family SMBus Controller (rev 04)
-01:00.0 VGA compatible controller: NVIDIA Corporation GF108M [GeForce GT 620M] (rev a1)
-01:00.1 Audio device: NVIDIA Corporation GF108 High Definition Audio Controller (rev ff)
-03:00.0 Network controller: Intel Corporation Centrino Advanced-N 6205 [Taylor Peak] (rev 34)
-05:00.0 Ethernet controller: Realtek Semiconductor Co., Ltd. RTL8111/8168/8411 PCI Express Gigabit Ethernet Controller (rev 07)
+Each patch is independent and can be picked up by the relevant maintainer.
 
-and get when booting the error message:
-Aug 02 09:18:10 apollon kernel: nouveau 0000:01:00.0: ce: init running...
-Aug 02 09:18:10 apollon kernel: nouveau 0000:01:00.0: ce: one-time init running...
-Aug 02 09:18:10 apollon kernel: nouveau 0000:01:00.0: ce: falcon version: 0
-Aug 02 09:18:10 apollon kernel: nouveau 0000:01:00.0: ce: secret level: 0
-Aug 02 09:18:10 apollon kernel: nouveau 0000:01:00.0: ce: code limit: 0
-Aug 02 09:18:10 apollon kernel: nouveau 0000:01:00.0: ce: data limit: 0
-Aug 02 09:18:10 apollon kernel: nouveau 0000:01:00.0: ce: one-time init completed in 5us
-Aug 02 09:18:10 apollon kernel: nouveau 0000:01:00.0: ce: firmware: internal (static code/data segments)
-Aug 02 09:18:10 apollon kernel: nouveau 0000:01:00.0: ce: ucode exceeds falcon limit(s)
-Aug 02 09:18:10 apollon kernel: nouveau 0000:01:00.0: ce: init failed, -22
-Aug 02 09:18:10 apollon kernel: nouveau 0000:01:00.0: bus: MMIO read of 00000000 FAULT at 10312c [ PRIVRING ]
+Cc: Alexander Shishkin <alexander.shishkin@linux.intel.com>
+Cc: Amit Kucheria <amitk@kernel.org>
+Cc: Andrew Morton <akpm@linux-foundation.org>
+Cc: Andy Lutomirski <luto@kernel.org>
+Cc: Arnaldo Carvalho de Melo <acme@kernel.org>
+Cc: Arnd Bergmann <arnd@arndb.de>
+Cc: Benjamin Herrenschmidt <benh@kernel.crashing.org>
+Cc: Ben Segall <bsegall@google.com>
+Cc: Borislav Petkov <bp@alien8.de>
+Cc: cgroups@vger.kernel.org
+Cc: Christian Borntraeger <borntraeger@de.ibm.com>
+Cc: coresight@lists.linaro.org
+Cc: Daniel Bristot de Oliveira <bristot@redhat.com>
+Cc: Daniel Jordan <daniel.m.jordan@oracle.com>
+Cc: Daniel Lezcano <daniel.lezcano@linaro.org>
+Cc: Dave Hansen <dave.hansen@linux.intel.com>
+Cc: Davidlohr Bueso <dave@stgolabs.net>
+Cc: "David S. Miller" <davem@davemloft.net>
+Cc: Dietmar Eggemann <dietmar.eggemann@arm.com>
+Cc: Gonglei <arei.gonglei@huawei.com>
+Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Cc: Guenter Roeck <linux@roeck-us.net>
+Cc: Hans de Goede <hdegoede@redhat.com>
+Cc: Heiko Carstens <hca@linux.ibm.com>
+Cc: Herbert Xu <herbert@gondor.apana.org.au>
+Cc: "H. Peter Anvin" <hpa@zytor.com>
+Cc: Ingo Molnar <mingo@kernel.org>
+Cc: Ingo Molnar <mingo@redhat.com>
+Cc: Jakub Kicinski <kuba@kernel.org>
+Cc: Jason Wang <jasowang@redhat.com>
+Cc: Jean Delvare <jdelvare@suse.com>
+Cc: Jiri Kosina <jikos@kernel.org>
+Cc: Jiri Olsa <jolsa@redhat.com>
+Cc: Joe Lawrence <joe.lawrence@redhat.com>
+Cc: Joel Fernandes <joel@joelfernandes.org>
+Cc: Johannes Weiner <hannes@cmpxchg.org>
+Cc: John Stultz <john.stultz@linaro.org>
+Cc: Jonathan Corbet <corbet@lwn.net>
+Cc: Josh Poimboeuf <jpoimboe@redhat.com>
+Cc: Josh Triplett <josh@joshtriplett.org>
+Cc: Julian Wiedmann <jwi@linux.ibm.com>
+Cc: Juri Lelli <juri.lelli@redhat.com>
+Cc: Karol Herbst <karolherbst@gmail.com>
+Cc: Karsten Graul <kgraul@linux.ibm.com>
+Cc: kvm-ppc@vger.kernel.org
+Cc: Lai Jiangshan <jiangshanlai@gmail.com>
+Cc: Len Brown <lenb@kernel.org>
+Cc: Len Brown <len.brown@intel.com>
+Cc: Leo Yan <leo.yan@linaro.org>
+Cc: linux-acpi@vger.kernel.org
+Cc: linux-arm-kernel@lists.infradead.org
+Cc: linux-crypto@vger.kernel.org
+Cc: linux-doc@vger.kernel.org
+Cc: linux-edac@vger.kernel.org
+Cc: linux-hwmon@vger.kernel.org
+Cc: linux-kernel@vger.kernel.org
+Cc: linux-mips@vger.kernel.org
+Cc: linux-mm@kvack.org
+Cc: linux-pm@vger.kernel.org
+Cc: linuxppc-dev@lists.ozlabs.org
+Cc: linux-raid@vger.kernel.org
+Cc: linux-s390@vger.kernel.org
+Cc: live-patching@vger.kernel.org
+Cc: Mark Gross <mgross@linux.intel.com>
+Cc: Mark Rutland <mark.rutland@arm.com>
+Cc: Mathieu Desnoyers <mathieu.desnoyers@efficios.com>
+Cc: Mathieu Poirier <mathieu.poirier@linaro.org>
+Cc: Mel Gorman <mgorman@suse.de>
+Cc: Michael Ellerman <mpe@ellerman.id.au>
+Cc: "Michael S. Tsirkin" <mst@redhat.com>
+Cc: Mike Leach <mike.leach@linaro.org>
+Cc: Mike Travis <mike.travis@hpe.com>
+Cc: Miroslav Benes <mbenes@suse.cz>
+Cc: Namhyung Kim <namhyung@kernel.org>
+Cc: netdev@vger.kernel.org
+Cc: nouveau@lists.freedesktop.org
+Cc: "Paul E. McKenney" <paulmck@kernel.org>
+Cc: Paul Mackerras <paulus@samba.org>
+Cc: Pavel Machek <pavel@ucw.cz>
+Cc: Pekka Paalanen <ppaalanen@gmail.com>
+Cc: Peter Zijlstra <peterz@infradead.org>
+Cc: Petr Mladek <pmladek@suse.com>
+Cc: platform-driver-x86@vger.kernel.org
+Cc: "Rafael J. Wysocki" <rjw@rjwysocki.net>
+Cc: rcu@vger.kernel.org
+Cc: Robin Holt <robinmholt@gmail.com>
+Cc: Song Liu <song@kernel.org>
+Cc: Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>
+Cc: Steffen Klassert <steffen.klassert@secunet.com>
+Cc: Stephen Boyd <sboyd@kernel.org>
+Cc: Steven Rostedt <rostedt@goodmis.org>
+Cc: Steve Wahl <steve.wahl@hpe.com>
+Cc: Stuart Hayes <stuart.w.hayes@gmail.com>
+Cc: Suzuki K Poulose <suzuki.poulose@arm.com>
+Cc: Tejun Heo <tj@kernel.org>
+Cc: Thomas Bogendoerfer <tsbogend@alpha.franken.de>
+Cc: Thomas Gleixner <tglx@linutronix.de>
+Cc: Tony Luck <tony.luck@intel.com>
+Cc: Vasily Gorbik <gor@linux.ibm.com>
+Cc: Vincent Guittot <vincent.guittot@linaro.org>
+Cc: Viresh Kumar <viresh.kumar@linaro.org>
+Cc: virtualization@lists.linux-foundation.org
+Cc: x86@kernel.org
+Cc: Zefan Li <lizefan.x@bytedance.com>
+Cc: Zhang Rui <rui.zhang@intel.com>
 
-As the laptop uses Optimus and I don't need the enanced graphic,
-the NVIDIA hardware is always switched off.
-So I don't have any problems using the laptop.
-
-The kernel is a selfcompiled vanilla kernel using the git repository.
-If I remeber correctly, the message started with the 5.11 kernel.
-
-If you need more information, feel free to tell me what you want to see.
-
-Reinhard
-
-
+Sebastian
 
