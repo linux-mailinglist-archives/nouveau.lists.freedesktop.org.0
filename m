@@ -1,103 +1,42 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 09FFF3E3CF6
-	for <lists+nouveau@lfdr.de>; Mon,  9 Aug 2021 00:14:16 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2F4013DF928
+	for <lists+nouveau@lfdr.de>; Wed,  4 Aug 2021 03:07:36 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id BBA1F899C4;
-	Sun,  8 Aug 2021 22:14:05 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id EBEE46E9A4;
+	Wed,  4 Aug 2021 01:07:32 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from galois.linutronix.de (Galois.linutronix.de [193.142.43.55])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4A82289DFA
- for <nouveau@lists.freedesktop.org>; Tue,  3 Aug 2021 16:10:39 +0000 (UTC)
-Date: Tue, 3 Aug 2021 18:10:33 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020; t=1628007036;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=ZhCR89X1oG7iNKpxBHqwK160maOrSQVKgeomxdN0wRc=;
- b=LwdXqV6TEL+jelWYIVu/L1AwkukJUhfDeR6fxf6HaCffMyf5pGalG64DdzD6SrFbnK74/x
- PVNjb7a8JiALCQD3CJBVmxfKVnGPRCXtU70BUFy11admR5LtOLT9dQeI/ENtXdJ/CkhTdc
- pZNvsYTpT+QPzjRhgzvNT0CjgoFJhxwmycapteSubpDkPSBjZ+FP8bxnvUSWW30Gz0Y7dW
- 1ffy1Rr5tDaLDwQ1cWTtCeME4yw92tE3YUaDago5Lw9pEtw1H1L8au8do+a32W2/sN3gs0
- btcFKclunpFVufnMA6+fMpSDPoeRfMtyi+RFwzALyjj/jtaWzgKiRMXG8gO4tg==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020e; t=1628007036;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=ZhCR89X1oG7iNKpxBHqwK160maOrSQVKgeomxdN0wRc=;
- b=CjGblo5JavDHAEsakSWenCqJ60bnDYFeC+TGn7n/YdarB5rRq+iJbcWjrVSzA5F0n0kDM4
- Vc1wmHGVCRR8DGCA==
-From: Sebastian Andrzej Siewior <bigeasy@linutronix.de>
-To: Hans de Goede <hdegoede@redhat.com>
-Cc: linux-kernel@vger.kernel.org, tglx@linutronix.de,
- Peter Zijlstra <peterz@infradead.org>,
- Alexander Shishkin <alexander.shishkin@linux.intel.com>,
- Amit Kucheria <amitk@kernel.org>,
- Andrew Morton <akpm@linux-foundation.org>,
- Andy Lutomirski <luto@kernel.org>,
- Arnaldo Carvalho de Melo <acme@kernel.org>, Arnd Bergmann <arnd@arndb.de>,
- Benjamin Herrenschmidt <benh@kernel.crashing.org>,
- Ben Segall <bsegall@google.com>, Borislav Petkov <bp@alien8.de>,
- cgroups@vger.kernel.org, Christian Borntraeger <borntraeger@de.ibm.com>,
- coresight@lists.linaro.org,
- Daniel Bristot de Oliveira <bristot@redhat.com>,
- Daniel Jordan <daniel.m.jordan@oracle.com>,
- Daniel Lezcano <daniel.lezcano@linaro.org>,
- Dave Hansen <dave.hansen@linux.intel.com>,
- Davidlohr Bueso <dave@stgolabs.net>,
- "David S. Miller" <davem@davemloft.net>,
- Dietmar Eggemann <dietmar.eggemann@arm.com>,
- Gonglei <arei.gonglei@huawei.com>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Guenter Roeck <linux@roeck-us.net>, Heiko Carstens <hca@linux.ibm.com>,
- Herbert Xu <herbert@gondor.apana.org.au>,
- "H. Peter Anvin" <hpa@zytor.com>, Ingo Molnar <mingo@kernel.org>,
- Ingo Molnar <mingo@redhat.com>, Jakub Kicinski <kuba@kernel.org>,
- Jason Wang <jasowang@redhat.com>, Jean Delvare <jdelvare@suse.com>,
- Jiri Kosina <jikos@kernel.org>, Jiri Olsa <jolsa@redhat.com>,
- Joe Lawrence <joe.lawrence@redhat.com>,
- Joel Fernandes <joel@joelfernandes.org>,
- Johannes Weiner <hannes@cmpxchg.org>, John Stultz <john.stultz@linaro.org>,
- Jonathan Corbet <corbet@lwn.net>, Josh Poimboeuf <jpoimboe@redhat.com>,
- Josh Triplett <josh@joshtriplett.org>, Julian Wiedmann <jwi@linux.ibm.com>,
- Juri Lelli <juri.lelli@redhat.com>, Karol Herbst <karolherbst@gmail.com>,
- Karsten Graul <kgraul@linux.ibm.com>, kvm-ppc@vger.kernel.org,
- Lai Jiangshan <jiangshanlai@gmail.com>, Len Brown <lenb@kernel.org>,
- Len Brown <len.brown@intel.com>, Leo Yan <leo.yan@linaro.org>,
- linux-acpi@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
- linux-crypto@vger.kernel.org, linux-doc@vger.kernel.org,
- linux-edac@vger.kernel.org, linux-hwmon@vger.kernel.org,
- linux-mips@vger.kernel.org, linux-mm@kvack.org,
- linux-pm@vger.kernel.org, linuxppc-dev@lists.ozlabs.org,
- linux-raid@vger.kernel.org, linux-s390@vger.kernel.org,
- live-patching@vger.kernel.org, Mark Gross <mgross@linux.intel.com>,
- Mark Rutland <mark.rutland@arm.com>,
- Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
- Mathieu Poirier <mathieu.poirier@linaro.org>,
- Mel Gorman <mgorman@suse.de>, Michael Ellerman <mpe@ellerman.id.au>,
- "Michael S. Tsirkin" <mst@redhat.com>, Mike Leach <mike.leach@linaro.org>,
- Mike Travis <mike.travis@hpe.com>, Miroslav Benes <mbenes@suse.cz>,
- Namhyung Kim <namhyung@kernel.org>, netdev@vger.kernel.org,
- nouveau@lists.freedesktop.org, "Paul E. McKenney" <paulmck@kernel.org>,
- Paul Mackerras <paulus@samba.org>, Pavel Machek <pavel@ucw.cz>,
- Pekka Paalanen <ppaalanen@gmail.com>,
- Petr Mladek <pmladek@suse.com>, platform-driver-x86@vger.kernel.org,
- "Rafael J. Wysocki" <rjw@rjwysocki.net>, rcu@vger.kernel.org,
- virtualization@lists.linux-foundation.org, x86@kernel.org
-Message-ID: <20210803161033.vp3o34meyw3ek43z@linutronix.de>
+Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 631B96E9A4
+ for <nouveau@lists.freedesktop.org>; Wed,  4 Aug 2021 01:07:08 +0000 (UTC)
+Received: from rorschach.local.home (cpe-66-24-58-225.stny.res.rr.com
+ [66.24.58.225])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 7254E60EE9;
+ Wed,  4 Aug 2021 01:07:07 +0000 (UTC)
+Date: Tue, 3 Aug 2021 21:07:05 -0400
+From: Steven Rostedt <rostedt@goodmis.org>
+To: Sebastian Andrzej Siewior <bigeasy@linutronix.de>
+Cc: linux-kernel@vger.kernel.org, tglx@linutronix.de, Peter Zijlstra
+ <peterz@infradead.org>, Ingo Molnar <mingo@kernel.org>, Karol Herbst
+ <karolherbst@gmail.com>, Pekka Paalanen <ppaalanen@gmail.com>, Dave Hansen
+ <dave.hansen@linux.intel.com>, Andy Lutomirski <luto@kernel.org>, Borislav
+ Petkov <bp@alien8.de>, x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>,
+ nouveau@lists.freedesktop.org
+Message-ID: <20210803210705.2fdc9d1a@rorschach.local.home>
+In-Reply-To: <20210803141621.780504-7-bigeasy@linutronix.de>
 References: <20210803141621.780504-1-bigeasy@linutronix.de>
- <83dc5dfd-1ed0-f428-826f-fb819911fc89@redhat.com>
+ <20210803141621.780504-7-bigeasy@linutronix.de>
+X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <83dc5dfd-1ed0-f428-826f-fb819911fc89@redhat.com>
-X-Mailman-Approved-At: Sun, 08 Aug 2021 22:14:04 +0000
-Subject: Re: [Nouveau] [PATCH 00/38] Replace deprecated CPU-hotplug
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+Subject: Re: [Nouveau] [PATCH 06/38] x86/mmiotrace: Replace deprecated
+ CPU-hotplug functions.
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -112,26 +51,55 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 2021-08-03 17:30:40 [+0200], Hans de Goede wrote:
-> Hi Sebastien,
-Hi Hans,
+On Tue,  3 Aug 2021 16:15:49 +0200
+Sebastian Andrzej Siewior <bigeasy@linutronix.de> wrote:
 
-> On 8/3/21 4:15 PM, Sebastian Andrzej Siewior wrote:
-> > This is a tree wide replacement of the deprecated CPU hotplug functions
-> > which are only wrappers around the actual functions.
-> > 
-> > Each patch is independent and can be picked up by the relevant maintainer.
+> The functions get_online_cpus() and put_online_cpus() have been
+> deprecated during the CPU hotplug rework. They map directly to
+> cpus_read_lock() and cpus_read_unlock().
 > 
-> Ok; and I take it that then also is the plan for merging these ?
+> Replace deprecated CPU-hotplug functions with the official version.
+> The behavior remains unchanged.
 > 
-> FWIW I'm fine with the drivers/platform/x86 patch going upstream
-> through some other tree if its easier to keep the set together ...
+> Cc: Steven Rostedt <rostedt@goodmis.org>
 
-There is no need to keep that set together since each patch is
-independent. Please merge it through your tree.
+Reviewed-by: Steven Rostedt (VMware) <rostedt@goodmis.org>
 
-> Regards,
+-- Steve
+
+> Cc: Ingo Molnar <mingo@kernel.org>
+> Cc: Karol Herbst <karolherbst@gmail.com>
+> Cc: Pekka Paalanen <ppaalanen@gmail.com>
+> Cc: Dave Hansen <dave.hansen@linux.intel.com>
+> Cc: Andy Lutomirski <luto@kernel.org>
+> Cc: Peter Zijlstra <peterz@infradead.org>
+> Cc: Thomas Gleixner <tglx@linutronix.de>
+> Cc: Borislav Petkov <bp@alien8.de>
+> Cc: x86@kernel.org
+> Cc: "H. Peter Anvin" <hpa@zytor.com>
+> Cc: nouveau@lists.freedesktop.org
+> Signed-off-by: Sebastian Andrzej Siewior <bigeasy@linutronix.de>
+> ---
+>  arch/x86/mm/mmio-mod.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
 > 
-> Hans
+> diff --git a/arch/x86/mm/mmio-mod.c b/arch/x86/mm/mmio-mod.c
+> index cd768dafca9e9..933a2ebad471b 100644
+> --- a/arch/x86/mm/mmio-mod.c
+> +++ b/arch/x86/mm/mmio-mod.c
+> @@ -376,12 +376,12 @@ static void enter_uniprocessor(void)
+>  		goto out;
+>  	}
+>  
+> -	get_online_cpus();
+> +	cpus_read_lock();
+>  	cpumask_copy(downed_cpus, cpu_online_mask);
+>  	cpumask_clear_cpu(cpumask_first(cpu_online_mask), downed_cpus);
+>  	if (num_online_cpus() > 1)
+>  		pr_notice("Disabling non-boot CPUs...\n");
+> -	put_online_cpus();
+> +	cpus_read_unlock();
+>  
+>  	for_each_cpu(cpu, downed_cpus) {
+>  		err = remove_cpu(cpu);
 
-Sebastian
