@@ -2,69 +2,66 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id DDAAA3EF983
-	for <lists+nouveau@lfdr.de>; Wed, 18 Aug 2021 06:35:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CA20C3F01E1
+	for <lists+nouveau@lfdr.de>; Wed, 18 Aug 2021 12:38:31 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9832E6E39B;
-	Wed, 18 Aug 2021 04:35:38 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E108789182;
+	Wed, 18 Aug 2021 10:38:29 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 703DC89C08;
- Mon, 16 Aug 2021 07:03:49 +0000 (UTC)
-Received: by mail-ed1-x531.google.com with SMTP id i22so6098078edq.11;
- Mon, 16 Aug 2021 00:03:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=sender:date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to;
- bh=Yb1VspGeEa+6vIqGhuygrtILxKH6YEsREcc1oSVU1kU=;
- b=s9yyjtPYUOo2hNoAhkHh4Ljw2rRwbh9qrqCeX6+cxU41O9kzimWIUrVJUKaT4NyaQo
- m+cpgqVBCnLf4ZsEE3cixzK5JCSs8DCCD8CcfgHr+jjfGQ8Jre2GhQkp+xlqcDQ+Q2BB
- er7F7rROjbXr05CEMLzGEB7cE8gSJhsQlSVtpQGpJwQAZlUy6BJ76FSEPbHcDQjJ5Otb
- 8YvsuZtI3OfTBWy4OL0LAhe2Y+muPh9M9YupzO9bDcIXzyQkUrZFWD2E/faLiZ0UEBm/
- lSip/dcsD5suO9kpkfZxUte+w0i1L1LnMmJmyCPn4k4Y10OoDj9b1r2TcP7bBFmcbc77
- 1log==
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 909C289182
+ for <nouveau@lists.freedesktop.org>; Wed, 18 Aug 2021 10:38:16 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1629283095;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=Ltl0AK46FjmSHMdF3JnqbCOPSiE1x1FZolZonYtEoeY=;
+ b=DvpSpOnxsoZgVHsyk9Zzz6YczY3nx+ztRQ1K+ri+mtJDD47+gOlclYYLDR6AnAoNP6WsWM
+ Y4q3l+k1gBgZCesmjDLdRev27lH6+FvR2J4TGCLJR0+FKg7JVeOJiWDMLpB2mBN2iMbsLZ
+ 69A1UsKyjWhxbVwr2v72ZTcO3z2hyw4=
+Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
+ [209.85.221.69]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-380-KmZeMQZvOa2G-GsCqL1iKQ-1; Wed, 18 Aug 2021 06:38:13 -0400
+X-MC-Unique: KmZeMQZvOa2G-GsCqL1iKQ-1
+Received: by mail-wr1-f69.google.com with SMTP id
+ x18-20020a5d49120000b0290154e9dcf3dbso450268wrq.7
+ for <nouveau@lists.freedesktop.org>; Wed, 18 Aug 2021 03:38:13 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:sender:date:from:to:cc:subject:message-id
- :references:mime-version:content-disposition:in-reply-to;
- bh=Yb1VspGeEa+6vIqGhuygrtILxKH6YEsREcc1oSVU1kU=;
- b=oP1UaXXH6g2c6Nd+ZQcfQPkEijYrKXyx4KNmKLX387y7mJz+cElf7t5S6/w0CWcMhe
- WcAnaYn8FvxwbvdvCnQUtq1HO9BMmLDGIItTBK+jucz7xoEpweUxQW86K62wXFNuruYZ
- A6vrhRQEEqBPYmSuQ6VLauRvjTPualkFdnFGjrtcDZv6p997byumElQA9KQflZp4dD6h
- nlRfCOXeg/nbNv6OT/hmuTXts+L9AvXQ0XtzeGNU2GVg3nsgDEyf3ivpBY4WjRyZfgJ5
- 9tvB2jENtuUm/JM6lJBCOFx05w0x1p5gzjBA3m3xDRQCzX9H+eRfAjIdHeH8W1ssqgop
- UuGA==
-X-Gm-Message-State: AOAM533RCUVr2kbXBDWOBPdbdJziIwV+uAvMxcPJrOoG2si9pxZ9h63O
- pugDjrIpobATG0k6Git2iQE=
-X-Google-Smtp-Source: ABdhPJwZeh+sgTffMXUq95Yfd+ceZxj2C+La50wtKTotzfbkIE6hit2C7rhtFrxt0lV+6JpQO69qvA==
-X-Received: by 2002:a05:6402:184a:: with SMTP id
- v10mr18149746edy.324.1629097428184; 
- Mon, 16 Aug 2021 00:03:48 -0700 (PDT)
-Received: from eldamar (host-82-55-38-10.retail.telecomitalia.it.
- [82.55.38.10])
- by smtp.gmail.com with ESMTPSA id h10sm4360839edb.74.2021.08.16.00.03.47
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Aug 2021 00:03:47 -0700 (PDT)
-Date: Mon, 16 Aug 2021 09:03:46 +0200
-From: Salvatore Bonaccorso <carnil@debian.org>
-To: Lyude Paul <lyude@redhat.com>
-Cc: Jeremy Cline <jcline@redhat.com>, Ben Skeggs <bskeggs@redhat.com>,
- Karol Herbst <kherbst@redhat.com>, David Airlie <airlied@linux.ie>,
- nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- linux-kernel@vger.kernel.org
-Message-ID: <YRoN0vWFN6Lw22ej@eldamar.lan>
-References: <20201103194912.184413-1-jcline@redhat.com>
- <20201125202648.5220-1-jcline@redhat.com>
- <b4da382b17a77b66e45fd374c9d806dac6054e3a.camel@redhat.com>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=Ltl0AK46FjmSHMdF3JnqbCOPSiE1x1FZolZonYtEoeY=;
+ b=dz2O7WcbhDp2ZBrM0AR+zBFgfbhWLriL3waQQIzSq1iKFTE59Ffj0jCgBjXhXyGpj5
+ uGNKCJPCswRUV0Jg6vBne7Uxf+/6WChdscyq9wsssdLXqVytmGUXQWq6T3a/6ehrmNVd
+ cRDKlzPxiXxN7HzZ+U79j4B+yd1zx2G5xfPnS9vA4VaVeee2WV1NiZdZzHKZ9kc1eS+I
+ wKH8BQjxeHdiTSCTax0ApDuqPY3ak5yhSZ9/zgqIYl3CceEPD2hz7InMRtmLQWb/6Dnz
+ +rbySHt+ayPvrRPKFHlAYHHbAi8f5TJugd8Ow6KwOyxMdUGpD/7CqE6Zneo7l7VU92P8
+ VB8g==
+X-Gm-Message-State: AOAM5320iPz19cOBznFHyxS2z6GmqRDTxPyvPFHDv2fYPhYnfWZ+xhfT
+ IFHotEIKXP6n2o0bNZANUrhklUoMZ2txxlFtR953whujhW3aa2/NcJQ9HkJdLmvOjit2+JpmLzL
+ aaqkgtNH9+CQxsAolKbzk9HoWXTMdTxqQcwD3xK8zeg==
+X-Received: by 2002:a1c:7316:: with SMTP id d22mr7903142wmb.171.1629283092166; 
+ Wed, 18 Aug 2021 03:38:12 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJzw6/wFH+sMeZ3ii/uoOLA2AemBw1DQPT6WgURIDLbaJeb83UYEHh80oCBF7iHtqMicep+ACJmSnqb/NnZblx4=
+X-Received: by 2002:a1c:7316:: with SMTP id d22mr7903124wmb.171.1629283091939; 
+ Wed, 18 Aug 2021 03:38:11 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <b4da382b17a77b66e45fd374c9d806dac6054e3a.camel@redhat.com>
-X-Mailman-Approved-At: Wed, 18 Aug 2021 04:34:32 +0000
-Subject: Re: [Nouveau] [PATCH v2 0/3] drm/nouveau: fix a use-after-free in
- postclose()
+References: <alpine.DEB.2.20.2108131619500.25540@maria.rogerprice.org>
+In-Reply-To: <alpine.DEB.2.20.2108131619500.25540@maria.rogerprice.org>
+From: Karol Herbst <kherbst@redhat.com>
+Date: Wed, 18 Aug 2021 12:38:01 +0200
+Message-ID: <CACO55tu-GMU+Oo3VHM50=bjsxq8ZAWbDXfMg=4+KnDib2i28Aw@mail.gmail.com>
+To: Roger Price <roger@rogerprice.org>
+Cc: nouveau Mailing List <nouveau@lists.freedesktop.org>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=kherbst@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="UTF-8"
+Subject: Re: [Nouveau] Donate NVC0 GF 100 GL [Quadro 4000]
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -79,19 +76,18 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi,
+Hey, thanks for the offer. In which country are you located?
 
-On Fri, Mar 26, 2021 at 06:00:51PM -0400, Lyude Paul wrote:
-> This patch series is:
-> 
-> Reviewed-by: Lyude Paul <lyude@redhat.com>
-> 
-> Btw - in the future if you need to send a respin of multiple patches, you need
-> to send it as it's own separate series instead of replying to the previous one
-> (one-off respins can just be posted as replies though), otherwise patchwork
-> won't pick it up
+On Fri, Aug 13, 2021 at 4:44 PM Roger Price <roger@rogerprice.org> wrote:
+>
+> I have an NVC0 GF 100 GL [Quadro 4000] I would be happy to donate if anyone is
+> interested.  I'm in France.  I'll pay the postage.
+>
+> Nouveau as included in Debian 11 freezes after 10-100 minutes with this card.
+>
+> If anyone is interested in this card, I'll file a full bug report via Debian
+> as described at https://nouveau.freedesktop.org/Bugs.html
+>
+> Roger
+>
 
-Did this patch series somehow fall through the cracks or got lost?
-
-Regards,
-Salvatore
