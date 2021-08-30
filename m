@@ -2,63 +2,44 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 65B9A3FA837
-	for <lists+nouveau@lfdr.de>; Sun, 29 Aug 2021 04:21:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 74D613FB5BF
+	for <lists+nouveau@lfdr.de>; Mon, 30 Aug 2021 14:17:16 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7375889C9A;
-	Sun, 29 Aug 2021 02:21:36 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 65C5F89AEE;
+	Mon, 30 Aug 2021 12:17:13 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A116189C9A;
- Sun, 29 Aug 2021 02:21:34 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.net;
- s=badeba3b8450; t=1630203691;
- bh=V7qK4IrstNH3AProRHMWv7XjCfkBcbCbKQMNFd3lyWM=;
- h=X-UI-Sender-Class:Subject:From:To:Cc:Date:In-Reply-To:References;
- b=htYWNyw0d/496zUttrIsOxeI9hqmbZfOeAHdyOAbACfCGHr+NOW6cHUt8XIb0Q3WY
- V58h8SbYG2zVrNhtAanmgmVobau/ETbuQosJdVyVQKqC4zJpCwe1tzOPpEFLXI6wI4
- GMSbWuEiHSWRiqSNSRYDmQHaZF/JERy9W89nUdag=
-X-UI-Sender-Class: 01bb95c1-4bf8-414a-932a-4f6e2808ef9c
-Received: from homer.fritz.box ([185.191.217.207]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MrhUE-1mpuIQ44uq-00neVS; Sun, 29
- Aug 2021 04:21:31 +0200
-Message-ID: <733f071797b9d358eae3f972f69c590ed81f638f.camel@gmx.de>
-From: Mike Galbraith <efault@gmx.de>
-To: lkml <linux-kernel@vger.kernel.org>
-Cc: Ben Skeggs <bskeggs@redhat.com>, dri-devel@lists.freedesktop.org, 
+Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id CE72B89AB3;
+ Mon, 30 Aug 2021 12:17:12 +0000 (UTC)
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 608E5610FB;
+ Mon, 30 Aug 2021 12:17:12 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1630325832;
+ bh=tFvVHHaMT6FlpbVDOckw2bd08wQ0Fl+0KjyQgVzmY3c=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=oMjVfd3wgG6wqDUbaNgLfLsPz3zM32dKy64W5urL0GCkXgmiM0LrLMU3MoNQiXDXc
+ JsO8349ziptSjBteMiE1WofnvbNNaB+MNzUqZRJEXQBNSTgGvwylMIZAkU3EkMoe1D
+ QW+Q/+ewl+bE+avsGzKgWBLCqzE3QDJeepxVgJyBInc3E1g199RegSPXTSBNH0hz0s
+ kxtHDRz1z9AeEyQItbgzRrYKQU7AxAAcd6v6iaJiNVKt33F6aiVh1egbz6hTtm3zPC
+ 7HWD9TRl0u+z5daA/qidwz4Khr4uelQd43pTN78T9f7KTU8Vv9VNmVokqaGGVeQ/ZF
+ fPHMunvXk8yWg==
+Date: Mon, 30 Aug 2021 08:17:11 -0400
+From: Sasha Levin <sashal@kernel.org>
+To: Lyude Paul <lyude@redhat.com>
+Cc: linux-kernel@vger.kernel.org, stable@vger.kernel.org,
+ Ben Skeggs <bskeggs@redhat.com>, dri-devel@lists.freedesktop.org,
  nouveau@lists.freedesktop.org
-Date: Sun, 29 Aug 2021 04:21:30 +0200
-In-Reply-To: <b6faf6b447f2a5e92e50adb30bea8ebaa2e70ae1.camel@gmx.de>
-References: <b6faf6b447f2a5e92e50adb30bea8ebaa2e70ae1.camel@gmx.de>
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.41.2 
+Message-ID: <YSzMR4FnrnT5gjbe@sashalap>
+References: <20210824005356.630888-1-sashal@kernel.org>
+ <20210824005356.630888-20-sashal@kernel.org>
+ <6607dde4207eb7ad1666b131c86f60a57a2a193c.camel@redhat.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-X-Provags-ID: V03:K1:fNcxUyiRZPevO/4lVvGn6WhhCmsG464bBfQP2rDimT3hUy/CDeS
- ebShOJgExsoQdkXo5uBevX+RiUwIx0kc9CP9gx1qR3+2+1GHEQmr1FKN9UgcdSZtasF7EkJ
- AJJ1X0yq7j0ad/vAGAnXNLkorefAs6A02Op4aKpy49FmDOGNleOCLc0wmye9MetjBPuzM98
- nDP8+GxMeDnU7qJvkYb7g==
-X-Spam-Flag: NO
-X-UI-Out-Filterresults: notjunk:1;V03:K0:lYfTE8v5jiY=:s1YkHLZy2oGK4EJ+uDa9Zx
- kWCi0c7Eo4xHsAWcY0gN2N1DRbQ8NgVoOXGz+NocQo1wlVGlqyqmDde614kuI3Aq625w1sv8d
- l1kuOc5FxZGRq3O/ho1lAKw9H6rOz4C+kD2k2spRouPMouuphCx7pBbm8ymhuPQWAPA1YLfk6
- 8QI2BqdSAJ6lYek6p2MWKUvwybjDiPxfM9deaBXYZTw79f71EztN981Bzpojd1SPY8K7jQ2UF
- /GOC69W8HrpEKHqH9KYEnnYSbjnZLVIVfIcnCucQW+PlqIkbexbJLVldqsuN6EiGOFKNPs3v7
- GX12IrEH4Z6vmTANZLxeMURgy1Tndq42HcROHWLB4fJ+5KZp7dZC4O6+CGym2c6ULNWEMmvr8
- JTq/CcKn3TD8NxaB6vL3srAizq3EzHdpoQbq45KzD32/PEZYj85dUTVL/qnBShciaZ+lqwCRB
- L4aE6nkVH0wOr/attQQSCTgwm6yk3SnO87Ql5Knd++MBgxO+zntCM44j+zFtu738hVwJbMtAe
- KJIF+s8xqCZ+VMLIWIqkjha/DppDs00oN7s0smnTsvlIKYRqQvoODqPVuNM7x4PD16lCTO4fF
- AlQNm2Gooy5iGb219uCDxVG9h94DBVPWw/XmtJp5YdTdNaM5kKnuDG+4MYoi742KHa+5A2lrV
- aDvVS5KucRYJjvqRiG99cNugqegE85N5mbPosB5bSRCQ1W0yjK/5tLT+emP2h7xWNCY53LeOb
- EztrvHskRDrHw/vFuODVoJX5JawGP4wtI69iVMJB80BTPv2sovNWK4z4EdhYHJlTJCoZ2HpPL
- E5WZzoqH11t+MtZegt5hi73/kyfN4zi8agNzTjr1ZwXE5Kt9Xju+xP6GSOyEer/mfR3lQu9uI
- hZj4JO1RIszHg0+d1tE4zd5C386aJfMgM5g9Zd47vjk2fzzakuN2L/G8Ce/cKfAezXOvVOp97
- AXSixsquRlPO50GSvVZ6pQsOC9oGFvy9LBzpY38goj3K/XTpUH5V/BGLPU/Ui3bTo7sZwykwT
- 05ongIOyhUD6ogKoCX27ANlmP0C5RnH73EsT9FR8swAdWMv/pqyTN0q6UMIcPlzb6BTFNW2gH
- 15bxvwDqrYVe103dmBtyIWckLSEzRRepPBc
-Subject: Re: [Nouveau] dri, nouveau: BUG: KASAN: use-after-free in
- dma_fence_signal_timestamp_locked+0x399/0x430
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Disposition: inline
+In-Reply-To: <6607dde4207eb7ad1666b131c86f60a57a2a193c.camel@redhat.com>
+Subject: Re: [Nouveau] [PATCH AUTOSEL 5.13 20/26] drm/nouveau: recognise
+ GA107
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -73,12 +54,13 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Sat, 2021-08-28 at 11:38 +0200, Mike Galbraith wrote:
-> Enabling kasan or kcsan in my GTX-980 equipped box will in fairly short
-> order...
+On Tue, Aug 24, 2021 at 01:08:28PM -0400, Lyude Paul wrote:
+>This is more hardware enablement, I'm not sure this should be going into
+>stable either. Ben?
 
-Correction: kasan does NOT reproduce on demand.  My bottom line remains
-the same though, before enabling, either fix it, or evict it, lest it
-take testing center stage ala "Hey, over here, me me fix me" :)
+We take this sort of hardware enablement patches (where the platform
+code is already there, and we just add quirks/ids/etc.
 
-	-Mike
+-- 
+Thanks,
+Sasha
