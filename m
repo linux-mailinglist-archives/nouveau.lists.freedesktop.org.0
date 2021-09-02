@@ -1,55 +1,53 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id C98D23FE5B2
-	for <lists+nouveau@lfdr.de>; Thu,  2 Sep 2021 02:07:57 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3D04C3FF527
+	for <lists+nouveau@lfdr.de>; Thu,  2 Sep 2021 22:53:38 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1C2446E3EE;
-	Thu,  2 Sep 2021 00:07:55 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 62BD56E083;
+	Thu,  2 Sep 2021 20:53:35 +0000 (UTC)
 X-Original-To: Nouveau@lists.freedesktop.org
 Delivered-To: Nouveau@lists.freedesktop.org
-Received: from mail-yb1-xb2f.google.com (mail-yb1-xb2f.google.com
- [IPv6:2607:f8b0:4864:20::b2f])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5F2726E3EE
- for <Nouveau@lists.freedesktop.org>; Thu,  2 Sep 2021 00:07:52 +0000 (UTC)
-Received: by mail-yb1-xb2f.google.com with SMTP id e131so323557ybb.7
- for <Nouveau@lists.freedesktop.org>; Wed, 01 Sep 2021 17:07:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=8MFwhFq8MGcpGbKuhOC+evA/qmZV/qLcm7maq9c+lOA=;
- b=eZF1ziM+9h+Lvf2MeGvFoCmNTRdjOWtj2v8KnUhWsGR9bZanmkpNVZmJdMevn1ZK2C
- MVDhWnLtpwv5bGWM4mF7ZkOtniHnRXoMYJ03SNujdAsACR2P7UjTQjbKP0Pe4kDTRyXf
- LOtky0Eg2u0hdnBJwlW8UK9NiZSLslRwwkt4HX4l9McTKyY5cdV9VQufq8jupd3IzfKe
- TRSx+yuT4IScr1sAXFXIsanpGZekd5JKKdE2I18bhiW3iSv4Kp0HTaLG/LIGlk4q91Sv
- YcRxhp2Ev02iGMgUMBO8YorXzdZNuHKA2D30/5yPZ6Q06vdhvNW20WTDK3nQlbZ8to1S
- FtIA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=8MFwhFq8MGcpGbKuhOC+evA/qmZV/qLcm7maq9c+lOA=;
- b=gPRaGsNX7Dc2OFRunqx0Gx8StSHUCgdgYP2FUF4XTlhplbuOgPpb5xCud2FzS2UVfM
- habVyzyw7WjoTgwndLX3ZP1xeUXITRtPtDienf+eRDcM30s7GcKu0lHdubQ/bAsD8y2y
- TgL6CpEekXbfdzsQ62Kzi2NfluYb7tscnKH50rBO9NgATGEI6wm/H8739wV729LFLdCp
- 8slf/vHT72oGB27jyFixzZ+pC+m9k3RuG6Ji5jHa/a8S4phnEyBJZRBiUaO37X2PxT5O
- 788vIY3p4DzWCFyHzlwDaDGrz0Puw5OhG5X9d2qmUMESEjYXViGuzVfc2cHhxEIkSmQH
- 7bWw==
-X-Gm-Message-State: AOAM530JhfLgfJF6Op70XnBwD9pRdeqPDKF8G+tx3S57I7mrQzS35Zvc
- 787fwaj0Anvzf7LxHzrfwakHsBFGVgN8ivLhvpw=
-X-Google-Smtp-Source: ABdhPJwSh9v1Q4FHHlITQlMmofNv3nGLyHmkw1b8FuIpuSRjuzXFEj3rBDLz2Gds6bOi2D/TulpzAolexlYDcw/7MbE=
-X-Received: by 2002:a25:53c8:: with SMTP id h191mr740898ybb.71.1630541271546; 
- Wed, 01 Sep 2021 17:07:51 -0700 (PDT)
-MIME-Version: 1.0
+Received: from m-03.smrt1.linuxpl.com (m-03.smrt1.linuxpl.com [178.63.127.12])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6B9DF6E083
+ for <Nouveau@lists.freedesktop.org>; Thu,  2 Sep 2021 20:53:33 +0000 (UTC)
+Received: from [136.243.64.71] (helo=s29.cyber-folks.pl)
+ by smrt1.linuxpl.com with esmtpsa (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
+ (envelope-from <przemo@firszt.eu>)
+ id 1mLtiF-001N5e-KP; Thu, 02 Sep 2021 22:53:31 +0200
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=firszt.eu; 
+ s=x;
+ h=MIME-Version:Content-Type:References:In-Reply-To:Date:Cc:To:From:
+ Subject:Message-ID:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=j22Pnxcg7ndNKByJ/AIUO798BffEzpY/ZgRe8w5cksA=; b=CDmReM124Ya962HzA6Embku+nq
+ fEMNaK0M+KxYc7F0ii4HnGiJb/mWpSo0WP7e/iDYk88qDn3foTF6kiCa/uSqsFegQgCiVuvmPd0Te
+ 2j9LvdAfrRc57/ijetffG3/rAuOK53BsrUXPlZeKkIWwzr97EDuNPYWzJg/WGJ1i/GRk7Zh3IB+bb
+ LfN0AFoCigSbWsdOPh1mstsNF6T3YpDnY/HRKEh4n+T7wDBeSilK91BZoyKKmnPkJ8cqM2TeiATIO
+ u+2TgvV3D12OVTs6gsbTAVaMsk82G5pyuZsjDMrRKzbwfqae3epdM5DlfXerpUMrYs62hYP09he+F
+ cDAcUy1w==;
+Received: from [109.78.28.199] (helo=[192.168.1.156])
+ by s29.cyber-folks.pl with esmtpsa (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.94.2)
+ (envelope-from <przemo@firszt.eu>)
+ id 1mLti9-0007DG-3A; Thu, 02 Sep 2021 22:53:28 +0200
+Message-ID: <b077ae0710f10cdd688ccddbca82e9ee734c5a56.camel@firszt.eu>
+From: Przemo Firszt <przemo@firszt.eu>
+To: Ben Skeggs <skeggsb@gmail.com>, Karol Herbst <kherbst@redhat.com>
+Cc: nouveau <Nouveau@lists.freedesktop.org>
+Date: Thu, 02 Sep 2021 21:53:30 +0100
+In-Reply-To: <CACAvsv6YMuR=z5OHcqNQJSF5Rcjbw4wGEpKR2XwPcjGhLMEmbw@mail.gmail.com>
 References: <d9e232668dee230a02206baf2c528c67b9c1ec6d.camel@firszt.eu>
  <CACO55tviKOiQk3DmxNFhMTHVAZC4gT4VUvPqRWLRa8eDb9bGRA@mail.gmail.com>
-In-Reply-To: <CACO55tviKOiQk3DmxNFhMTHVAZC4gT4VUvPqRWLRa8eDb9bGRA@mail.gmail.com>
-From: Ben Skeggs <skeggsb@gmail.com>
-Date: Thu, 2 Sep 2021 10:07:40 +1000
-Message-ID: <CACAvsv6YMuR=z5OHcqNQJSF5Rcjbw4wGEpKR2XwPcjGhLMEmbw@mail.gmail.com>
-To: Karol Herbst <kherbst@redhat.com>
-Cc: Przemo Firszt <przemo@firszt.eu>, nouveau <Nouveau@lists.freedesktop.org>
-Content-Type: text/plain; charset="UTF-8"
+ <CACAvsv6YMuR=z5OHcqNQJSF5Rcjbw4wGEpKR2XwPcjGhLMEmbw@mail.gmail.com>
+Content-Type: multipart/signed; micalg="pgp-sha256";
+ protocol="application/pgp-signature"; boundary="=-dI1KHrC42/gHo6DZD5QE"
+User-Agent: Evolution 3.40.4 (3.40.4-1.fc34) 
+MIME-Version: 1.0
 Subject: Re: [Nouveau] RTX 3070 / NV174 / GA104 - is there any development
  happening?
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -66,55 +64,63 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, 2 Sept 2021 at 08:25, Karol Herbst <kherbst@redhat.com> wrote:
->
-> On Wed, Sep 1, 2021 at 11:19 PM Przemo Firszt <przemo@firszt.eu> wrote:
-> >
-> > Hi,
-> >
-> > Can you advise if there is any work happening on NV174 / GA104 (market
-> > name RTX 3070)? I checked the features matrix and searched the code of
-> > kernel, mesa, libdrm and xf86-video-nouveau. The only thig that seems
-> > to be ready is kernel mode setting and the only piece of code showing
-> > any results when searching for the code names is the linux kernel:
-> >
-> > $ grep -ERi 'ga104|fv170|fv174'
-> > grep: linux/.git/objects/pack/pack-
-> > ab4e07c9b3c4ddb7ed2970684121a5c4b7ddfb1d.pack: binary file matches
-> > linux/drivers/gpu/drm/nouveau/nvkm/engine/device/base.c:        .name
-> > = "GA104",
-> >
-> > Is there any developmen happening in the public space? I'd like to
-> > support it (coding, testing, donating money) as I have a laptop with
-> > that card.
-> >
->
-> Sadly there isn't much you can do right now as the next step is to
-> wait until Nvidia releases and publishes firmware files in order to
-> enable acceleration in Nouveau. Once that happens we will enable
-> OpenGL on those GPUs and then everybody is welcomed to report bugs and
-> so on. But atm it just stalls on the initial enablement of those
-> pieces. The firmware would land in the linux-firmware repository under
-> nvidia/ga104 for your GPU.
-I have had a whole slew of code sitting around locally for quite a
-while now, towards enabling acceleration on these GPUs.  Ampere has
-some significant changes in a few areas.  It hadn't been a huge
-priority to push out due to the lack of available firmware, and I'd
-taken the opportunity to work it in with numerous other improvements
-which will benefit earlier chipsets / work towards enabling Vulkan at
-the same time.
 
-However, it turns out Optimus/Prime without copy engine support
-(engine/ce, which depends on engine/host) is probably not possible.
-And, likely unusable even if it were.  So, I'm working furiously to
-get those chunks of it ready ASAP to at least enable those use-cases.
-Hopefully full acceleration will appear not too long afterwards, I'm
-working with NVIDIA on it.
+--=-dI1KHrC42/gHo6DZD5QE
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Ben.
->
-> > --
-> > Kind regards,
-> > Przemo Firszt
-> >
->
+On Thu, 2021-09-02 at 10:07 +1000, Ben Skeggs wrote:
+> On Thu, 2 Sept 2021 at 08:25, Karol Herbst <kherbst@redhat.com>
+> wrote:
+> > > [
+> > ..]
+> > Sadly there isn't much you can do right now as the next step is to
+> > wait until Nvidia releases and publishes firmware files in order to
+> > enable acceleration in Nouveau. Once that happens we will enable
+> > OpenGL on those GPUs and then everybody is welcomed to report bugs
+> > and
+> > so on. But atm it just stalls on the initial enablement of those
+> > pieces. The firmware would land in the linux-firmware repository
+> > under
+> > nvidia/ga104 for your GPU.
+> I have had a whole slew of code sitting around locally for quite a
+> while now, towards enabling acceleration on these GPUs.=C2=A0 Ampere has
+> some significant changes in a few areas.=C2=A0 It hadn't been a huge
+> priority to push out due to the lack of available firmware, and I'd
+> taken the opportunity to work it in with numerous other improvements
+> which will benefit earlier chipsets / work towards enabling Vulkan at
+> the same time.
+>=20
+> However, it turns out Optimus/Prime without copy engine support
+> (engine/ce, which depends on engine/host) is probably not possible.
+> And, likely unusable even if it were.=C2=A0 So, I'm working furiously to
+> get those chunks of it ready ASAP to at least enable those use-cases.
+> Hopefully full acceleration will appear not too long afterwards, I'm
+> working with NVIDIA on it.
+>=20
+> >=20
+Thank you very much for the info! I'll sit tight and watch the list.
+--=20
+Kind regards,
+Przemo Firszt
+
+
+--=-dI1KHrC42/gHo6DZD5QE
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAABCAAdFiEES47+VVWiUx0l5J35NDc3r6iXFhsFAmExOcoACgkQNDc3r6iX
+Fhs2qAgAqKGtt4w4NRha4cFez6cSrFkj1udzjuCAa2lRU2UvYqn3XOBY/6jV3wdB
+o1ANxn+wxnAHHYXNd22BB/krhq7Ei4qQ2FAVpCwi+2gXJnC3qTIEYWlxIEeKvE2p
+0yY+FSrmDxR4o9dH84PQ+5VdeyfU3IDtJ20WssTyJBBCJsuUZf+pysSJ2Of5xTbY
+ZE1vQRRvFwm2aQRYObGAEZk4Z0hT5RnZOmIRuazvxsXc6RQQoE0gOVeea1KJj4hN
+OOVWNPA493aqDiAJb1TV5iYcHM3dEGHhXMZwsPYsM1UcA9CXWAervckXadHFp6lG
+vVgkKZ4ITgTuKwb6aekLdE26T0Aq2g==
+=l0Z7
+-----END PGP SIGNATURE-----
+
+--=-dI1KHrC42/gHo6DZD5QE--
+
