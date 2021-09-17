@@ -1,52 +1,51 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id DAA7040FCDD
-	for <lists+nouveau@lfdr.de>; Fri, 17 Sep 2021 17:41:07 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id E1B7D40FCE8
+	for <lists+nouveau@lfdr.de>; Fri, 17 Sep 2021 17:41:46 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1D6E06EE29;
-	Fri, 17 Sep 2021 15:41:02 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5B9B06EE06;
+	Fri, 17 Sep 2021 15:41:40 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-qk1-x72b.google.com (mail-qk1-x72b.google.com
- [IPv6:2607:f8b0:4864:20::72b])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9B66D6EE1D
- for <nouveau@lists.freedesktop.org>; Fri, 17 Sep 2021 15:41:00 +0000 (UTC)
-Received: by mail-qk1-x72b.google.com with SMTP id bk29so18673389qkb.8
- for <nouveau@lists.freedesktop.org>; Fri, 17 Sep 2021 08:41:00 -0700 (PDT)
+Received: from mail-qk1-x730.google.com (mail-qk1-x730.google.com
+ [IPv6:2607:f8b0:4864:20::730])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 30BD86EE06
+ for <nouveau@lists.freedesktop.org>; Fri, 17 Sep 2021 15:41:39 +0000 (UTC)
+Received: by mail-qk1-x730.google.com with SMTP id y144so18724388qkb.6
+ for <nouveau@lists.freedesktop.org>; Fri, 17 Sep 2021 08:41:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=poorly.run; s=google;
  h=date:from:to:cc:subject:message-id:references:mime-version
  :content-disposition:in-reply-to:user-agent;
- bh=G/b3XiXy0Sb8x2PtTRvVL/40239eORGz1ZL98EY1EC8=;
- b=fzPGLaz85DNSjT8BpuMHmKOqlTmjcQ0qE3xixhpENWlDBqA/2YO/GHW63weTUvqukt
- /hTvkY+SrTcPo885plyDeFM72/dI9tOCbng/4AcduL2xIMkCXnVtu7q+T7+a/dD51gTH
- L7gwVnqTw/HxFpzCGCbsHv4pnw4VgWgPaHdZVIoNesVklyEarxWWcfWZeFjT4RjtbAt0
- zKMyHOGfRmRVSf82T/XUmWcFRHrKWywI2DYIEWYrkh+TpOc6k/7I+sqzH4nT9t/FGY5F
- hAHLlOmKX+HDxFDYattoDa8cZNtr6c5DAixr6gOGgaZ9CCc1QkEkWDxuavEl/4geEn+l
- 1U9g==
+ bh=sD9uOm5tvP8G0xyXDbxUkajObP/tQsvPQSYJ5ZYdDAM=;
+ b=Rg3pQPgRu26LSb3Ym25tiFmMLVhLfw9SdEEPoUud66ykQ931PiVOz52pLoXgAwC0ox
+ /mHm2+hTiXHgLGuu8t2OWBPxQeOxDuKiW2UWpQCJgV/9B2iyAFVPcdrDxhJyA8LPkxyJ
+ OVEGgkK3fO0TjncIvsrXlzuOkF9DG2sCzr1V8nefKneQvr08Iin7PI1M/USyeat1+qSV
+ cOlTWgRk5Y/SwKT1Vqv7vzUsbBQS0nxnQuYMU4VQRwxuRpApDeTEvusujkPUACV+t5Rr
+ PqWzgleLdsIFdM+KfFpZGV0L6vGeeHDCvPQNK/XrwqX+BsWpcls4hgKiAqKiOlKNQk9K
+ vi7Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to:user-agent;
- bh=G/b3XiXy0Sb8x2PtTRvVL/40239eORGz1ZL98EY1EC8=;
- b=xK+7PnRhdIg8gRsTvqD/zuPqR57yKrEkINqKfFpbBBNbUL1z14Sm8QQ/vwSuSodyCk
- oC4GFqefNWfOR99zQRDs91ve56ZmQUS25xJEsrPyhs3gA6rfLjY9JvrrdIgdFM/zj2jJ
- O7K5241wws0/kB+dfeiDhSJtBQcLnqmUf9nqtCBSEM3NVLBfCRKmdselxVaAPXeiCNqD
- j4OT9h53Qmb1/NrcIcnSyQFigY8eJ/lnQQjn6ZKpebPVj6afEw4kq28LlAkYce8QPOAl
- PIhEuRhRmiyCOoSRglwGkuc3wclIxNrIBfQwDQ2RBMlXTb7lGpnuXoty8568BS2lnykJ
- CrXg==
-X-Gm-Message-State: AOAM533yc7V7ZqXKkciLHAYDt0uI4AfBVjio118iY+i4HIAR4Mnwsr0v
- UREnH8b1lDVkylmS/Vsh0RY+h9Z+6DcOmw==
-X-Google-Smtp-Source: ABdhPJwEOXquIsSStFswyl2f30Mm94RU8fNeBCXsfk8xn7q1LDa0ztl6hhBn29sVtbQXy6Bzc6IuSA==
-X-Received: by 2002:a37:9b93:: with SMTP id
- d141mr10910675qke.236.1631893259801; 
- Fri, 17 Sep 2021 08:40:59 -0700 (PDT)
+ bh=sD9uOm5tvP8G0xyXDbxUkajObP/tQsvPQSYJ5ZYdDAM=;
+ b=uT6gD8sj4n0k/XTLzUOudoOcLHeK0xgzZkhGaTLqV3xSGA/MBGOH2XF9h4y18/MBrk
+ ygsFmuCQ1L2Ns51KfZwrAEXuEMvfylVnFy5/WusMmpsjhTCQwXUCQfZM9s2pWqUvdCol
+ pDZKJmOKKD3qyEMQ92V4M/bhCQTk0YZFQ+crQGUWo3CqoRmihppi3C9dgwbqsLONNvN6
+ taAXzI67m2jg9/NaEKloUKYVPY61AH3RfNdGfc11TSg/ROP3fVNHUSjVnPj+aFK8LLa1
+ s1LNxXBetNn0R/m3vX6s2rX5/WQWARr/59GaYRS3fYERVuC3VuuJReDn5KY8jnItE05I
+ pNaQ==
+X-Gm-Message-State: AOAM530cb0g7F4aoiog0qs6pXZ4jDWAlP2rWVtcU3n/4MlRQuaVSI4j0
+ r0+fkFF6MJ9nyy1Yg54FF1Z5Fg==
+X-Google-Smtp-Source: ABdhPJyjGqSsuJH7awGUj/YMxh1AbnFOYdGXvCtauKtD0RAp5YpZ9/RTGbsIl79Pjc1kmnuFaGBLDw==
+X-Received: by 2002:a37:a87:: with SMTP id 129mr3162058qkk.448.1631893298377; 
+ Fri, 17 Sep 2021 08:41:38 -0700 (PDT)
 Received: from localhost ([167.100.64.199])
- by smtp.gmail.com with ESMTPSA id l195sm3821941qke.98.2021.09.17.08.40.58
+ by smtp.gmail.com with ESMTPSA id 9sm4122038qtz.83.2021.09.17.08.41.37
  (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
- Fri, 17 Sep 2021 08:40:59 -0700 (PDT)
-Date: Fri, 17 Sep 2021 11:40:57 -0400
+ Fri, 17 Sep 2021 08:41:37 -0700 (PDT)
+Date: Fri, 17 Sep 2021 11:41:36 -0400
 From: Sean Paul <sean@poorly.run>
 To: Fernando Ramos <greenfoo@u92.eu>
 Cc: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
@@ -55,7 +54,7 @@ Cc: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
  linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org,
  nouveau@lists.freedesktop.org, linux-renesas-soc@vger.kernel.org,
  linux-tegra@vger.kernel.org
-Message-ID: <20210917154057.GI2515@art_vandelay>
+Message-ID: <20210917154136.GJ2515@art_vandelay>
 References: <20210916211552.33490-1-greenfoo@u92.eu>
  <20210916211552.33490-10-greenfoo@u92.eu>
 MIME-Version: 1.0
@@ -111,7 +110,10 @@ On Thu, Sep 16, 2021 at 11:15:46PM +0200, Fernando Ramos wrote:
 >  
 >  	return 0;
 
-Return ret here
+Return ret here, with that,
+
+Reviewed-by: Sean Paul <sean@poorly.run>
+
 
 >  }
 > -- 
