@@ -1,54 +1,71 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id EC753416110
-	for <lists+nouveau@lfdr.de>; Thu, 23 Sep 2021 16:32:23 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id BDE0E41648D
+	for <lists+nouveau@lfdr.de>; Thu, 23 Sep 2021 19:41:25 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 699E36ED74;
-	Thu, 23 Sep 2021 14:32:14 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 261106ED98;
+	Thu, 23 Sep 2021 17:41:22 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
- [IPv6:2a00:1450:4864:20::12b])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0C86E6E5D4
- for <nouveau@lists.freedesktop.org>; Tue, 21 Sep 2021 19:23:04 +0000 (UTC)
-Received: by mail-lf1-x12b.google.com with SMTP id m3so1917301lfu.2
- for <nouveau@lists.freedesktop.org>; Tue, 21 Sep 2021 12:23:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:from:date:message-id:subject:to;
- bh=ltgkYSCiUElg64P/JWdVOFFPV4XtSiBdY7O2n74fcx4=;
- b=HW4uExeRLZ6sdT/h7/izidNM1jke//Q9IeLdKGqZ28sHsc+dvOzwNIP1MBe/5SH9vo
- TY9VDl5vFm39jIMb3Gu8dzl4VlM5fn2HXBqdjoMhF5IyeEV6K3dSSmxSFa1R+W65MUxp
- X01lPYYstpMPY3n/on7Hw+jEnIbJYsjtFnTpNbYmPkOcyeLOzL5TKv+B5QA2Mv9f8G+l
- DH8/7LJ4DO0ifsdk6G5HV+0Z1/SpfSQV8cAD8EkHo7aCmci0nFNk4R+HqNLgX3UmNdJ0
- 4dcR8SD2/prfa+5KLbyIREa+F18bnDm9nsLkVdW6hF9dbBix0IvqPliyyWRNMNDnHq9h
- 7EuQ==
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [216.205.24.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A8BE36ED98
+ for <nouveau@lists.freedesktop.org>; Thu, 23 Sep 2021 17:41:20 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1632418879;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=SmDjFJsaZCA6KWN4HS486qKHt349/F7+f0mgEgYWTjc=;
+ b=NLo5wYk8+akoGlebpT6ReKvY9T3cl+wG/k5gKfvhQWS+OSAGXsnLPYMcMRMBpf44PS9nQU
+ g4jQEAeKveGdqtookQ+TW0Tlc9dBOi/tzjSxLVLso18hlpiZkoKifIXMbRNixkZ/1x4FcI
+ fhe83UnKypJNfBVUHRMe5pyLqft9yyU=
+Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
+ [209.85.221.69]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-441-KjQwG-SmMECcr2tdEIotXw-1; Thu, 23 Sep 2021 13:41:18 -0400
+X-MC-Unique: KjQwG-SmMECcr2tdEIotXw-1
+Received: by mail-wr1-f69.google.com with SMTP id
+ m1-20020a056000180100b0015e1ec30ac3so5788326wrh.8
+ for <nouveau@lists.freedesktop.org>; Thu, 23 Sep 2021 10:41:17 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=ltgkYSCiUElg64P/JWdVOFFPV4XtSiBdY7O2n74fcx4=;
- b=eG5CVJIwYCnVXdrFrqU/52KRGTIwnGHPevfSkETE02ivXHvJxJltP8Tlgr/zrq3M8o
- A9WaRd5xNNvVk8OYTXV3NukhrQiFPGG6OScF0qlRfuTVgajUIoEuGtSMqIRu9n/dY9IY
- 9THy7tOpf8H2NwHh9BFskp5iivwsyALQH7pbhtRcsn+c6I6byryKzT+kz22FbqOMomVN
- hrJOQwtwKyp+ZqbcKNTI9/rVHekq1IvfMde4yrc9K+KmT1+WcHbI0/b8MQ2Jo8FbwIhM
- vAbOk2cLqFGN9VYX1gOkxKKSveU9nQShxqr5o/ykghQW+snHXO5iyXfrRvOKCzlMby1i
- SE5g==
-X-Gm-Message-State: AOAM531w9uM3Lawe7fTYQ2PBhASxVKroxhQv/4yCzhjFaW/ZB5TeICPh
- SboQt7hgZNyHj1cim0I5i/6wDquEgXK8ogG+HHw=
-X-Google-Smtp-Source: ABdhPJwVKYXlyk4knfSGs9BqMCiM1X24A36UYEQ1OMeWsaIiCXu6kB4U9hc2Zz8UeTh2qaK5tPdEQECXDThSK9hUNpE=
-X-Received: by 2002:a05:6512:3f13:: with SMTP id
- y19mr23325538lfa.211.1632252183142; 
- Tue, 21 Sep 2021 12:23:03 -0700 (PDT)
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=SmDjFJsaZCA6KWN4HS486qKHt349/F7+f0mgEgYWTjc=;
+ b=T9/w6Fy6jzBwaHAW5U+bzQ3rq+IiWP25ZW6crNJ4d4mkuIgIJbJWAOpKCh/LNIoPhW
+ KLw+Eimdlar24tQCgID8m20rLJSX2u16/v80LL4ASTcAWAd++rKwKjg/0u2ScFzT1KEd
+ Ac4Sj+/Tq8O5T0sMLlLMk6Tlf11o+DP8KSHMFbTcTiaZh6XHb3vVICPtW63PgP5r4RwK
+ vF5aZ2cEpaQsU8CjAFDLUpVSDeMaql8C3UziobBwyeJDmEP0r/ykR4HxwoupQx1f6PSR
+ gle3KZ9HFLTpro6MR31cg5g6mcRd8ex3mGqipr8e7qWzvu1OaMx1oZGgNO3ONccVayUC
+ ivPw==
+X-Gm-Message-State: AOAM533dpV0uzSWBO4dveyV6/Be7nh5neB3bcsFNun3s6Om+LwtYDwYI
+ ii6timgmmk0yv0novZ6eHWPnul6t6JotDQCttZHX0lZGznwtREG9ZKIgoRFfMXc/IcHcyn2aZgD
+ 6+j2B7sZJATZg6oFPXzwpT3Z7orh1dZ7B2uCVvWVREw==
+X-Received: by 2002:a05:600c:4991:: with SMTP id
+ h17mr17588220wmp.74.1632418876767; 
+ Thu, 23 Sep 2021 10:41:16 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJwR58YifCWksEfIlo9ENLvXvdCtjvge/aoaotzcMzz/74Md4WFfXwftxwsiOhOaLEBb2oNOxywsZZR7MWvappc=
+X-Received: by 2002:a05:600c:4991:: with SMTP id
+ h17mr17588203wmp.74.1632418876628; 
+ Thu, 23 Sep 2021 10:41:16 -0700 (PDT)
 MIME-Version: 1.0
-From: __- -__ <isapgswell@gmail.com>
-Date: Tue, 21 Sep 2021 16:22:53 -0300
-Message-ID: <CAN9WMdPaokfbH=bxUkNkj+O1uGrMh0ztHD6wxwhiTuScq62CiQ@mail.gmail.com>
-To: linux-bugs@nvidia.com, nouveau@lists.freedesktop.org, 
- debian-boot@lists.debian.org, ubuntu-users@lists.ubuntu.com
-Content-Type: multipart/alternative; boundary="0000000000008f66ae05cc865398"
-X-Mailman-Approved-At: Thu, 23 Sep 2021 14:32:11 +0000
-Subject: [Nouveau] pl nvidia
+References: <CAN9WMdPCd3EY866WcKoJqnx=od9pOy4k5q6HM4tsr2wrZ2ZOeQ@mail.gmail.com>
+In-Reply-To: <CAN9WMdPCd3EY866WcKoJqnx=od9pOy4k5q6HM4tsr2wrZ2ZOeQ@mail.gmail.com>
+From: Karol Herbst <kherbst@redhat.com>
+Date: Thu, 23 Sep 2021 19:41:06 +0200
+Message-ID: <CACO55ttuSOQ4mUr9pR2L15KP6qy5DuPDwz7d_eSkm_mxDEqkoA@mail.gmail.com>
+To: __- -__ <isapgswell@gmail.com>
+Cc: linux-bugs@nvidia.com, nouveau <nouveau@lists.freedesktop.org>, 
+ Dell Tech Support <technical_support@dell.com>, ubuntu-users@lists.ubuntu.com, 
+ System76 <help@system76.com>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=kherbst@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="UTF-8"
+Subject: Re: [Nouveau] nvprime
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,37 +80,26 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
---0000000000008f66ae05cc865398
-Content-Type: text/plain; charset="UTF-8"
+If you have an issue with the Nvidia driver, ask Nvidia for help. And
+don't CC random Mailing lists and spam them.
 
-Hi,
+On Thu, Sep 23, 2021 at 4:32 PM __- -__ <isapgswell@gmail.com> wrote:
+>
+> Hi,
+>
+> I launch nvidia-settings; and
+> I launch __NV_PRIME_RENDER_OFFLOAD=1  nvidia-settings
+>
+> neither
+> __NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia nvidia-settings
+>
+> Sam results
+>
+> Shouldn't it?
+>
+> nvidia-smi nothing to show
+>
+> aTI,
+>
+> L. F
 
-I get,
-OpenGL GLX extension sup by display (missing); and
-steam do not get launched
-
-iGPU
-dGPU
-nor
-hybrid scenario working
-
-may it be lib_path into PRELOAD file can get it working soon
-
-aTI,
-
-L. F
-
---0000000000008f66ae05cc865398
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Hi,<div><br></div><div>I get,</div><div><span style=3D"bac=
-kground-color:rgb(255,153,0)"><font color=3D"#ffffff">OpenGL GLX extension =
-sup by display</font></span> (missing); and</div><div>steam do not get laun=
-ched</div><div><br></div><div>iGPU=C2=A0</div><div>dGPU</div><div>nor</div>=
-<div>hybrid scenario working</div><div><br></div><div>may it be lib_path in=
-to <font color=3D"#ffffff" style=3D"background-color:rgb(255,153,0)">PRELOA=
-D</font> file can get it working soon</div><div><br></div><div>aTI,</div><d=
-iv><br></div><div>L. F</div></div>
-
---0000000000008f66ae05cc865398--
