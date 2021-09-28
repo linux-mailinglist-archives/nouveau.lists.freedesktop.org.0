@@ -1,73 +1,70 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9685C41ADB4
-	for <lists+nouveau@lfdr.de>; Tue, 28 Sep 2021 13:18:12 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 08DD441ADE1
+	for <lists+nouveau@lfdr.de>; Tue, 28 Sep 2021 13:33:51 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 422536E0C9;
-	Tue, 28 Sep 2021 11:18:06 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5E5886E122;
+	Tue, 28 Sep 2021 11:33:47 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 955A66E0C2
- for <nouveau@lists.freedesktop.org>; Tue, 28 Sep 2021 11:18:04 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [216.205.24.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0F8966E11C
+ for <nouveau@lists.freedesktop.org>; Tue, 28 Sep 2021 11:33:44 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1632827883;
+ s=mimecast20190719; t=1632828824;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=LTH1Bqp5aQrMW9U7Wyi09yKeBdxoa/KnxdAvfiFTjy0=;
- b=Nni1aaRj4EN/AiQXO7Pbdl0bn+QqVum0ZUocusceXoJGjizBnFRMIhVxPDO3n9FNi6BD9H
- ASfChXuC7ZIA8NuvsArmn78fyTGGx1bb7jQfxllVglv5AoXtgkvM6VsJGyHWU3i0YdhDfg
- l9FiZgKn+BX1BQGXFgkAkMqtOoVHWVM=
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-570-5rbGdN7HOKWVOOcyi5F9XA-1; Tue, 28 Sep 2021 07:18:02 -0400
-X-MC-Unique: 5rbGdN7HOKWVOOcyi5F9XA-1
-Received: by mail-wm1-f72.google.com with SMTP id
- 200-20020a1c00d1000000b0030b3dce20e1so998696wma.0
- for <nouveau@lists.freedesktop.org>; Tue, 28 Sep 2021 04:18:02 -0700 (PDT)
+ bh=u328q7WNSMymaUrmKQOk37LWvJYmT3DIFH6zimZGPjY=;
+ b=S6tfrwu/f1o8hyDh5eS01l8cbgIGCE6xtXMuxVdp7MhqbuuYr8v9FnMQ27Z+jUSbRB0p3H
+ 325KxrLzrc1z94lasMQ3fAQYGQNnquFTZJAz6FK7jdTKzOVvsbqvODh1ldfVfeMAXY3bie
+ WAQ3A2pXZCBWbE4yCnzyHmiaJpr5p14=
+Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
+ [209.85.221.69]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-545-jzm7fvGkPxyp-QT3E8uwPA-1; Tue, 28 Sep 2021 07:33:42 -0400
+X-MC-Unique: jzm7fvGkPxyp-QT3E8uwPA-1
+Received: by mail-wr1-f69.google.com with SMTP id
+ c8-20020adfef48000000b00160646ed62cso3391224wrp.18
+ for <nouveau@lists.freedesktop.org>; Tue, 28 Sep 2021 04:33:42 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=LTH1Bqp5aQrMW9U7Wyi09yKeBdxoa/KnxdAvfiFTjy0=;
- b=nFyr7PcPs3CkxMKXZFgKN9yklRutYhcOva4K1JYbeC+cP4l09MdAlnfEKaJRC55K0D
- /EBOwpN1rtmvClPqwYPISZ/jCOJfpj2teP+IbnJ2viFBkNPUAr4kBY8I3ZB4nV0G8OWs
- vtJ0IWug1u0Z3cZDgYh1TeLpywgNZ0ItF1nOgBtXd4VWrC2scnMcZ9xVwC/Y3vlAHQ7F
- GB/xSZPey84jumXCJ0Ya8tGFXYnarebeu5McemrX0/3+UEkE1vyuTOFJenByFqkriBkX
- gfpN5U/of5vpw36c8x8UyXL+LDsirLOKgwRowsimg3h/Yt+QF896vwnt4u/LLfjb2StK
- N40Q==
-X-Gm-Message-State: AOAM532R0PxAMElkENM+FgtK13IqdzD8qsFtNWcAKEVJntlzKt3pgVbZ
- UBKZ1zcHaiwfbIGnX2egD7GVqZ868YoOFSSrg8jr3nZR/EJM4ODyZtndwnY16Wcgb/n0m4tctCv
- qRwKgk4AGB1Lh+CZXTpxhMjXOtGfFGXzv1H+t/hOFZQ==
-X-Received: by 2002:a5d:59a6:: with SMTP id p6mr5703242wrr.142.1632827881286; 
- Tue, 28 Sep 2021 04:18:01 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJwXey4AvCzQ1OIitejIrHYkhslIGKRMhKkajU7oL55IV3B2Y8nmEuFYibwyOSrec5I/msAUej7ScCzCJYa6KtI=
-X-Received: by 2002:a5d:59a6:: with SMTP id p6mr5703226wrr.142.1632827881160; 
- Tue, 28 Sep 2021 04:18:01 -0700 (PDT)
+ bh=u328q7WNSMymaUrmKQOk37LWvJYmT3DIFH6zimZGPjY=;
+ b=XiPnZ1Y9IAyNDoTt9nd25ksj+5WzfjAGri8I5cj444n8c0Ij3bdizvneKWxA+qNg5x
+ pmBdTxLB0eZgY42ZAFRAwuSg0d3AHDAeJlOgF2xku2YxlVDlq/MiHk16G/DejAqzTfr/
+ p2h5EtPEmmOlr0aTykC8nlUmq+x+qBOuRAli9851XQbavfxA3l2Cal3F3niL4MYv5vGC
+ YVnBjBoOA3Yz8tt6nsvC7z/4muO2nMwiPMHT4hEDVgMfV+cWjqTiq7Ea282V4uEfK+o3
+ CLLjy1Qsz4exDd8fN+RdN6Ld5UECX94tcNaNoUSLq0YsDN8bNFLCsH1ZHTxr05m7QdvS
+ cbUg==
+X-Gm-Message-State: AOAM530kWBDdKu+HzXJCrq/cNGq8LmBrZeFWMTnhn6wTyM3quwhHhBTq
+ nPz3I66lvaGmPv38g6oIGrgVhK/zv9OGeMcmQZFDQVAxMldtWFMxkSCD78+gzQVTw/Y/gx+mzoL
+ tJ+P3TZK15ktt1M5qfUX/WiMkhB0FvyD5Dkum8rfElA==
+X-Received: by 2002:adf:e44c:: with SMTP id t12mr5899184wrm.49.1632828821479; 
+ Tue, 28 Sep 2021 04:33:41 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJzz58XfMdNwS1JsheQmMOCdmsi2kubnksqbD9z+tXbyLb/8yux+PD/EOIxuFTfpkUkADbbnb+9ZEA793Gf+IR4=
+X-Received: by 2002:adf:e44c:: with SMTP id t12mr5899164wrm.49.1632828821289; 
+ Tue, 28 Sep 2021 04:33:41 -0700 (PDT)
 MIME-Version: 1.0
-References: <20210821021447.27097-1-luo.penghao@zte.com.cn>
-In-Reply-To: <20210821021447.27097-1-luo.penghao@zte.com.cn>
+References: <20210911075023.3969054-1-yangyingliang@huawei.com>
+In-Reply-To: <20210911075023.3969054-1-yangyingliang@huawei.com>
 From: Karol Herbst <kherbst@redhat.com>
-Date: Tue, 28 Sep 2021 13:17:50 +0200
-Message-ID: <CACO55tt3FF1gEffPjQTS+m3oW1yWG_xUQL_kP=kezyesj_oYkg@mail.gmail.com>
-To: CGEL <cgel.zte@gmail.com>
-Cc: Ben Skeggs <bskeggs@redhat.com>, David Airlie <airlied@linux.ie>, 
- Daniel Vetter <daniel@ffwll.ch>, Alistair Popple <apopple@nvidia.com>, 
- dri-devel <dri-devel@lists.freedesktop.org>,
+Date: Tue, 28 Sep 2021 13:33:30 +0200
+Message-ID: <CACO55ttfBAYcLUi7QGFupLFyUQZ2kDet+aABXWA0NVVx+cNEVg@mail.gmail.com>
+To: Yang Yingliang <yangyingliang@huawei.com>
+Cc: LKML <linux-kernel@vger.kernel.org>,
  nouveau <nouveau@lists.freedesktop.org>, 
- LKML <linux-kernel@vger.kernel.org>, Luo penghao <luo.penghao@zte.com.cn>, 
- Zeal Robot <zealci@zte.com.cn>
+ dri-devel <dri-devel@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>
 Authentication-Results: relay.mimecast.com;
  auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=kherbst@redhat.com
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="UTF-8"
-Subject: Re: [Nouveau] [PATCH linux-next] drm/nouveau/mmu/gp100-: drop
- unneeded assignment in the if condition.
+Subject: Re: [Nouveau] [PATCH 1/2] drm/nouveau/kms/nv50-: fix file release
+ memory leak
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -84,42 +81,31 @@ Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 Reviewed-by: Karol Herbst <kherbst@redhat.com>
 
-but I will remove the unnecessary brackets as well
-
-On Sat, Aug 21, 2021 at 10:46 AM CGEL <cgel.zte@gmail.com> wrote:
+On Sat, Sep 11, 2021 at 9:45 AM Yang Yingliang <yangyingliang@huawei.com> wrote:
 >
-> From: Luo penghao <luo.penghao@zte.com.cn>
+> When using single_open() for opening, single_release() should be
+> called, otherwise the 'op' allocated in single_open() will be leaked.
 >
-> In order to keep the code style consistency of the whole file,
-> the 'inst' assignments should be deleted.
->
-> The clang_analyzer complains as follows:
->
-> drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmgp100.c:499:8: warning:
-> Although the value storedto 'inst' is used in the enclosing expression,
-> the value is never actually read from 'inst'.
->
-> Reported-by: Zeal Robot <zealci@zte.com.cn>
-> Signed-off-by: Luo penghao <luo.penghao@zte.com.cn>
+> Fixes: 12885ecbfe62 ("drm/nouveau/kms/nvd9-: Add CRC support")
+> Reported-by: Hulk Robot <hulkci@huawei.com>
+> Signed-off-by: Yang Yingliang <yangyingliang@huawei.com>
 > ---
->  drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmgp100.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  drivers/gpu/drm/nouveau/dispnv50/crc.c | 1 +
+>  1 file changed, 1 insertion(+)
 >
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmgp100.c b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmgp100.c
-> index f02abd9..5d7766a 100644
-> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmgp100.c
-> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmgp100.c
-> @@ -502,7 +502,7 @@ gp100_vmm_fault_cancel(struct nvkm_vmm *vmm, void *argv, u32 argc)
->         args->v0.inst |= 0x80000000;
+> diff --git a/drivers/gpu/drm/nouveau/dispnv50/crc.c b/drivers/gpu/drm/nouveau/dispnv50/crc.c
+> index b8c31b697797..66f32d965c72 100644
+> --- a/drivers/gpu/drm/nouveau/dispnv50/crc.c
+> +++ b/drivers/gpu/drm/nouveau/dispnv50/crc.c
+> @@ -704,6 +704,7 @@ static const struct file_operations nv50_crc_flip_threshold_fops = {
+>         .open = nv50_crc_debugfs_flip_threshold_open,
+>         .read = seq_read,
+>         .write = nv50_crc_debugfs_flip_threshold_set,
+> +       .release = single_release,
+>  };
 >
->         if (!WARN_ON(nvkm_gr_ctxsw_pause(device))) {
-> -               if ((inst = nvkm_gr_ctxsw_inst(device)) == args->v0.inst) {
-> +               if ((nvkm_gr_ctxsw_inst(device)) == args->v0.inst) {
->                         gf100_vmm_invalidate(vmm, 0x0000001b
->                                              /* CANCEL_TARGETED. */ |
->                                              (args->v0.hub    << 20) |
+>  int nv50_head_crc_late_register(struct nv50_head *head)
 > --
-> 2.15.2
->
+> 2.25.1
 >
 
