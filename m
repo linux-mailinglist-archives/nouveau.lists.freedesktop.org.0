@@ -2,51 +2,43 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6E01041F958
-	for <lists+nouveau@lfdr.de>; Sat,  2 Oct 2021 04:24:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EC13D41F95A
+	for <lists+nouveau@lfdr.de>; Sat,  2 Oct 2021 04:24:15 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D69F16F465;
-	Sat,  2 Oct 2021 02:24:01 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8FC9E6F469;
+	Sat,  2 Oct 2021 02:24:02 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [IPv6:2a00:1450:4864:20::42a])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D283F6E44D
- for <nouveau@lists.freedesktop.org>; Sat, 25 Sep 2021 17:02:40 +0000 (UTC)
-Received: by mail-wr1-x42a.google.com with SMTP id w17so37113152wrv.10
- for <nouveau@lists.freedesktop.org>; Sat, 25 Sep 2021 10:02:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:from:date:message-id:subject:to;
- bh=S8BPntV9XgBE/TCsHZq87GqqqpOoQIwhpecS863GA/A=;
- b=gTT/VwU+ytgaNHG0xLK88i6bEcZ14G3DVf9NUsj4mGkhhbzmR2EjU0ju2ByEChye7S
- hK0stRsealcQstMdZiLsGeddqnzEDANpxuBo511+i/vlvR72PM93B85sMJ0fkrWidGXq
- sOQAkMt+yLGv8+vrRaomVHOe4w6L16o7/4QNpN0yo5b7eJQaDtn464HDn0RyFmzB5HuE
- Fo6AEwsVhUG4o+uxDCtiZafR7oGxN0yoSYKxFJQd96ZiYzD3f1gRebfH+Olb/QhGk/wi
- AA6tD84p/y8L7K54eoV6JwSf9tZgW6fsRh0J9TULyJFQKHDPHEkvpZoGuuJjnLAJ3tQ8
- bGLQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=S8BPntV9XgBE/TCsHZq87GqqqpOoQIwhpecS863GA/A=;
- b=nwKnRyYGkSaCeumpG3PjtP8anEGtsRpCsB2Xx5SsJmFnVs1RLEzfqlWt7h8dfN10aF
- Jcw0wfH2lCROg7qQUkm+AIVIb9vPCY7Akgd9nfUYqGvYcQTCLNdqDXkqdH2q784H+Vo0
- YlXVndAXjh14kDxznCNaiXaq3Vsuni4oLaNQIGGs+6bdbrbIUuuifJpd2yFkFt5idFFC
- giPA5JopXbf6n9feRVPMZXKyoRDrSr0w4a6UVndgc2JFi4L1nz/HOBj7TM20ovV8o2Sj
- Uu0/dBqVcUqVCRQWRabSLGNvpWsIIRm2cFI6MncqG5RLuNp9hhTK9Qh9DdCDvHPMadZ5
- jEcw==
-X-Gm-Message-State: AOAM532pPC4W0ZyqG4PLZlpcPalf07VzWhzcM55S05e+M7WkZgBhJRFJ
- OqhT91lm3eonjLYCC5uhPcqqKN2TVSfw2F/si9esI2rCpKk=
-X-Google-Smtp-Source: ABdhPJwdVN6LjSDPphsJoVFI8yP8BYP9OjbvlNFq5MtA/4oGGcfK31NNZTSVAYvnw2+18tRJh+bzSJBIQ7p4oRTlKJQ=
-X-Received: by 2002:a1c:7201:: with SMTP id n1mr7746763wmc.19.1632589359028;
- Sat, 25 Sep 2021 10:02:39 -0700 (PDT)
+X-Greylist: delayed 367 seconds by postgrey-1.36 at gabe;
+ Wed, 29 Sep 2021 06:34:52 UTC
+Received: from ssh248.corpemail.net (ssh248.corpemail.net [210.51.61.248])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3F1356E175;
+ Wed, 29 Sep 2021 06:34:51 +0000 (UTC)
+Received: from ([60.208.111.195])
+ by ssh248.corpemail.net ((LNX1044)) with ASMTP (SSL) id WFF00035;
+ Wed, 29 Sep 2021 14:28:35 +0800
+Received: from localhost.localdomain (10.72.201.241) by
+ jtjnmail201604.home.langchao.com (10.100.2.4) with Microsoft SMTP Server id
+ 15.1.2308.14; Wed, 29 Sep 2021 14:28:36 +0800
+From: Kai Song <songkai01@inspur.com>
+To: <bskeggs@redhat.com>, <airlied@linux.ie>, <daniel@ffwll.ch>
+CC: <dri-devel@lists.freedesktop.org>, <nouveau@lists.freedesktop.org>,
+ <linux-kernel@vger.kernel.org>, Kai Song <songkai01@inspur.com>
+Date: Wed, 29 Sep 2021 03:34:53 +0800
+Message-ID: <20210928193453.60253-1-songkai01@inspur.com>
+X-Mailer: git-send-email 2.27.0
 MIME-Version: 1.0
-From: Oswaldo Graterol <oswaldo.graterol@gmail.com>
-Date: Sat, 25 Sep 2021 13:02:13 -0400
-Message-ID: <CANj0vJkjpj_wQPVKo65ZKTgvTjXOfpC3hBdW60Z27c0mY8ejtA@mail.gmail.com>
-To: nouveau@lists.freedesktop.org
-Content-Type: multipart/alternative; boundary="000000000000cf1e0805ccd4d4c8"
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.72.201.241]
+tUid: 202192914283514c2a61f3762b548d99b739c325297b0
+X-Abuse-Reports-To: service@corp-email.com
+Abuse-Reports-To: service@corp-email.com
+X-Complaints-To: service@corp-email.com
+X-Report-Abuse-To: service@corp-email.com
 X-Mailman-Approved-At: Sat, 02 Oct 2021 02:24:00 +0000
-Subject: [Nouveau] Nvidia GeForce 8200M - Image flicker
+Subject: [Nouveau] [PATCH] drm/nouveau:Fix gcc '-Wunused-but-set-variable'
+ warnings:
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,34 +53,52 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
---000000000000cf1e0805ccd4d4c8
-Content-Type: text/plain; charset="UTF-8"
+drivers/gpu/drm/nouveau/nouveau_bo.c: In function 'nouveau_ttm_tt_populate':
+drivers/gpu/drm/nouveau/nouveau_bo.c:1251:17: warning: variable 'dev' set but not used [-Wunused-but-set-variable]
+drivers/gpu/drm/nouveau/nouveau_bo.c: In function 'nouveau_ttm_tt_unpopulate':
+drivers/gpu/drm/nouveau/nouveau_bo.c:1274:17: warning: variable 'dev' set but not used [-Wunused-but-set-variable]
 
-Hi,
+Signed-off-by: Kai Song <songkai01@inspur.com>
+---
+ drivers/gpu/drm/nouveau/nouveau_bo.c | 4 ----
+ 1 file changed, 4 deletions(-)
 
-I installed lubuntu 20.04 amd64 in my old laptop (Compaq CQ60-210 US), but
-the screen flicker when i open some program like firefox, i tried nvidia
-drivers to GeForce 8200M GPU, but no work to this hardware, i want to use
-nouveau drivers but need to fix the flicker problems. Can you help me with
-this?
-
-Thank you for any help you can provide.
-
+diff --git a/drivers/gpu/drm/nouveau/nouveau_bo.c b/drivers/gpu/drm/nouveau/nouveau_bo.c
+index d3b21d318b42..7f5a3a8eec9e 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_bo.c
++++ b/drivers/gpu/drm/nouveau/nouveau_bo.c
+@@ -1249,7 +1249,6 @@ nouveau_ttm_tt_populate(struct ttm_device *bdev,
+ {
+ 	struct ttm_tt *ttm_dma = (void *)ttm;
+ 	struct nouveau_drm *drm;
+-	struct device *dev;
+ 	bool slave = !!(ttm->page_flags & TTM_PAGE_FLAG_SG);
+ 
+ 	if (ttm_tt_is_populated(ttm))
+@@ -1262,7 +1261,6 @@ nouveau_ttm_tt_populate(struct ttm_device *bdev,
+ 	}
+ 
+ 	drm = nouveau_bdev(bdev);
+-	dev = drm->dev->dev;
+ 
+ 	return ttm_pool_alloc(&drm->ttm.bdev.pool, ttm, ctx);
+ }
+@@ -1272,7 +1270,6 @@ nouveau_ttm_tt_unpopulate(struct ttm_device *bdev,
+ 			  struct ttm_tt *ttm)
+ {
+ 	struct nouveau_drm *drm;
+-	struct device *dev;
+ 	bool slave = !!(ttm->page_flags & TTM_PAGE_FLAG_SG);
+ 
+ 	if (slave)
+@@ -1281,7 +1278,6 @@ nouveau_ttm_tt_unpopulate(struct ttm_device *bdev,
+ 	nouveau_ttm_tt_unbind(bdev, ttm);
+ 
+ 	drm = nouveau_bdev(bdev);
+-	dev = drm->dev->dev;
+ 
+ 	return ttm_pool_free(&drm->ttm.bdev.pool, ttm);
+ }
 -- 
-Oswaldo Graterol
+2.27.0
 
---000000000000cf1e0805ccd4d4c8
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div><br clear=3D"all"></div><div>Hi,=C2=A0 <br></div><div=
-><br></div><div>I installed lubuntu 20.04 amd64 in my old laptop (Compaq CQ=
-60-210 US), but the screen flicker when i open some program like firefox, i=
- tried nvidia drivers to GeForce 8200M GPU, but no work to this hardware, i=
- want to use nouveau drivers but need to fix the flicker problems. Can you =
-help me with this?</div><div><br></div><div>Thank you for any help you can =
-provide.<br></div><div><br></div><div>-- <br><div dir=3D"ltr" class=3D"gmai=
-l_signature" data-smartmail=3D"gmail_signature"><div>Oswaldo Graterol</div>=
-</div></div></div>
-
---000000000000cf1e0805ccd4d4c8--
