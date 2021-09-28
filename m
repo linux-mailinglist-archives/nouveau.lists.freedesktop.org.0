@@ -1,44 +1,81 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id EC13D41F95A
-	for <lists+nouveau@lfdr.de>; Sat,  2 Oct 2021 04:24:15 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9B1DF41F956
+	for <lists+nouveau@lfdr.de>; Sat,  2 Oct 2021 04:24:09 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8FC9E6F469;
-	Sat,  2 Oct 2021 02:24:02 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B5DEC6F464;
+	Sat,  2 Oct 2021 02:24:01 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 367 seconds by postgrey-1.36 at gabe;
- Wed, 29 Sep 2021 06:34:52 UTC
-Received: from ssh248.corpemail.net (ssh248.corpemail.net [210.51.61.248])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3F1356E175;
- Wed, 29 Sep 2021 06:34:51 +0000 (UTC)
-Received: from ([60.208.111.195])
- by ssh248.corpemail.net ((LNX1044)) with ASMTP (SSL) id WFF00035;
- Wed, 29 Sep 2021 14:28:35 +0800
-Received: from localhost.localdomain (10.72.201.241) by
- jtjnmail201604.home.langchao.com (10.100.2.4) with Microsoft SMTP Server id
- 15.1.2308.14; Wed, 29 Sep 2021 14:28:36 +0800
-From: Kai Song <songkai01@inspur.com>
-To: <bskeggs@redhat.com>, <airlied@linux.ie>, <daniel@ffwll.ch>
-CC: <dri-devel@lists.freedesktop.org>, <nouveau@lists.freedesktop.org>,
- <linux-kernel@vger.kernel.org>, Kai Song <songkai01@inspur.com>
-Date: Wed, 29 Sep 2021 03:34:53 +0800
-Message-ID: <20210928193453.60253-1-songkai01@inspur.com>
-X-Mailer: git-send-email 2.27.0
+Received: from mail-pf1-x42e.google.com (mail-pf1-x42e.google.com
+ [IPv6:2607:f8b0:4864:20::42e])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 700736E96C
+ for <nouveau@lists.freedesktop.org>; Tue, 28 Sep 2021 20:05:44 +0000 (UTC)
+Received: by mail-pf1-x42e.google.com with SMTP id 145so19809846pfz.11
+ for <nouveau@lists.freedesktop.org>; Tue, 28 Sep 2021 13:05:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=tt9tt/F3IxLyQ34cK+9pj6tNPzMMJ1v10W8CXUTZIXc=;
+ b=N3sK4GpDM7NoausvCZ7uvCv2xW8y1o2GqpLxTtHdEz+qukAhK9GRVXI15tRB36rXkG
+ nIIXXm2zgad8mAZpCf5s5YQsjUW2aE4PBDSL5ia/k1Nt9Mo4BFgPQLAOAlIwoYQXGXuH
+ fmr97KMI5Q8zlbFdiIq/dYgMzPBdrUuYP8EE4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=tt9tt/F3IxLyQ34cK+9pj6tNPzMMJ1v10W8CXUTZIXc=;
+ b=vEi1orz6se0xbmstTSlJN0JNpgPUc+u3vv9+cZjAHxtFaRtmOOIsCssPYN4JRgZgEF
+ FdcBmKTK9NHKWbmmAbqQvQawGXQ9aiUfRVrTb+eWY0kIZ6pxkLm9TAh2xsjLo8Ukt3LC
+ XEiHaRhuKnJGtuBP06Cnn98CSTB2DiIk5X3PhNMFWKOWyxDnzHlRmvYfoGGVpKWRSbon
+ OUdJ94qBl/Q8GVGw3JW8gJxd7bRH1GTpyYTYOzF5wQ5PydIdBEmum8SS25SNV6zMeFZN
+ /b9syAdlfTZYGjEP1GJwoBF4OV4wzCflqhTqOYjco4Lt2XWT/ja7i1sxFQ3R5TKfOAVG
+ +tUw==
+X-Gm-Message-State: AOAM532NnQVniTcmeh0X/wGf759FZwffe457vTbMY9afmTeYR55Cufng
+ X1k9PKcT9SmDgMAER7rgoWrQPnT8zhBc+Q==
+X-Google-Smtp-Source: ABdhPJxySKRj3Ymobn4cW8Zr7jA5mrjXJtwqNzCbmNi+Pwn+9z38p12fB2t6Cw7rOFPXFzcpsvOFFw==
+X-Received: by 2002:a63:9317:: with SMTP id b23mr6173088pge.199.1632859543620; 
+ Tue, 28 Sep 2021 13:05:43 -0700 (PDT)
+Received: from mail-pg1-f180.google.com (mail-pg1-f180.google.com.
+ [209.85.215.180])
+ by smtp.gmail.com with ESMTPSA id d3sm8947pfn.156.2021.09.28.13.05.43
+ for <nouveau@lists.freedesktop.org>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 28 Sep 2021 13:05:43 -0700 (PDT)
+Received: by mail-pg1-f180.google.com with SMTP id m21so183471pgu.13
+ for <nouveau@lists.freedesktop.org>; Tue, 28 Sep 2021 13:05:43 -0700 (PDT)
+X-Received: by 2002:a05:6e02:1847:: with SMTP id
+ b7mr5900911ilv.180.1632859215623; 
+ Tue, 28 Sep 2021 13:00:15 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.72.201.241]
-tUid: 202192914283514c2a61f3762b548d99b739c325297b0
-X-Abuse-Reports-To: service@corp-email.com
-Abuse-Reports-To: service@corp-email.com
-X-Complaints-To: service@corp-email.com
-X-Report-Abuse-To: service@corp-email.com
+References: <20210927201206.682788-1-lyude@redhat.com>
+ <20210927201206.682788-3-lyude@redhat.com>
+In-Reply-To: <20210927201206.682788-3-lyude@redhat.com>
+From: Doug Anderson <dianders@chromium.org>
+Date: Tue, 28 Sep 2021 13:00:04 -0700
+X-Gmail-Original-Message-ID: <CAD=FV=V00-z=zvh6oZVYt7Hw00o07zEYxCa4zMrCmgNKEzcBCw@mail.gmail.com>
+Message-ID: <CAD=FV=V00-z=zvh6oZVYt7Hw00o07zEYxCa4zMrCmgNKEzcBCw@mail.gmail.com>
+To: Lyude Paul <lyude@redhat.com>
+Cc: Intel Graphics <intel-gfx@lists.freedesktop.org>, 
+ dri-devel <dri-devel@lists.freedesktop.org>,
+ Rajeev Nandan <rajeevny@codeaurora.org>, 
+ Satadru Pramanik <satadru@gmail.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
+ David Airlie <airlied@linux.ie>, Daniel Vetter <daniel@ffwll.ch>, 
+ Jani Nikula <jani.nikula@linux.intel.com>, 
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>, Ben Skeggs <bskeggs@redhat.com>,
+ =?UTF-8?B?VmlsbGUgU3lyasOkbMOk?= <ville.syrjala@linux.intel.com>, 
+ Sean Paul <seanpaul@chromium.org>, open list <linux-kernel@vger.kernel.org>, 
+ "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
+ <nouveau@lists.freedesktop.org>
+Content-Type: text/plain; charset="UTF-8"
 X-Mailman-Approved-At: Sat, 02 Oct 2021 02:24:00 +0000
-Subject: [Nouveau] [PATCH] drm/nouveau:Fix gcc '-Wunused-but-set-variable'
- warnings:
+Subject: Re: [Nouveau] [PATCH 2/3] drm/dp,
+ drm/i915: Add support for VESA backlights using PWM for brightness
+ control
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -53,52 +90,92 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-drivers/gpu/drm/nouveau/nouveau_bo.c: In function 'nouveau_ttm_tt_populate':
-drivers/gpu/drm/nouveau/nouveau_bo.c:1251:17: warning: variable 'dev' set but not used [-Wunused-but-set-variable]
-drivers/gpu/drm/nouveau/nouveau_bo.c: In function 'nouveau_ttm_tt_unpopulate':
-drivers/gpu/drm/nouveau/nouveau_bo.c:1274:17: warning: variable 'dev' set but not used [-Wunused-but-set-variable]
+Hi,
 
-Signed-off-by: Kai Song <songkai01@inspur.com>
----
- drivers/gpu/drm/nouveau/nouveau_bo.c | 4 ----
- 1 file changed, 4 deletions(-)
+On Mon, Sep 27, 2021 at 1:12 PM Lyude Paul <lyude@redhat.com> wrote:
+>
+> @@ -3305,11 +3313,10 @@ EXPORT_SYMBOL(drm_edp_backlight_enable);
+>   * @bl: Backlight capability info from drm_edp_backlight_init()
+>   *
+>   * This function handles disabling DPCD backlight controls on a panel over AUX. Note that some
+> - * panels have backlights that are enabled/disabled by other means, despite having their brightness
+> - * values controlled through DPCD. On such panels &drm_edp_backlight_info.aux_enable will be set to
+> - * %false, this function will become a no-op (and we will skip updating
+> - * %DP_EDP_DISPLAY_CONTROL_REGISTER), and the driver must take care to perform it's own
+> - * implementation specific step for disabling the backlight.
+> + * panels have backlights that are enabled/disabled via PWM. On such panels
+> + * &drm_edp_backlight_info.aux_enable will be set to %false, this function will become a no-op (and
+> + * we will skip updating %DP_EDP_DISPLAY_CONTROL_REGISTER), and the driver must handle disabling the
+> + * backlight via PWM.
 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_bo.c b/drivers/gpu/drm/nouveau/nouveau_bo.c
-index d3b21d318b42..7f5a3a8eec9e 100644
---- a/drivers/gpu/drm/nouveau/nouveau_bo.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_bo.c
-@@ -1249,7 +1249,6 @@ nouveau_ttm_tt_populate(struct ttm_device *bdev,
- {
- 	struct ttm_tt *ttm_dma = (void *)ttm;
- 	struct nouveau_drm *drm;
--	struct device *dev;
- 	bool slave = !!(ttm->page_flags & TTM_PAGE_FLAG_SG);
- 
- 	if (ttm_tt_is_populated(ttm))
-@@ -1262,7 +1261,6 @@ nouveau_ttm_tt_populate(struct ttm_device *bdev,
- 	}
- 
- 	drm = nouveau_bdev(bdev);
--	dev = drm->dev->dev;
- 
- 	return ttm_pool_alloc(&drm->ttm.bdev.pool, ttm, ctx);
- }
-@@ -1272,7 +1270,6 @@ nouveau_ttm_tt_unpopulate(struct ttm_device *bdev,
- 			  struct ttm_tt *ttm)
- {
- 	struct nouveau_drm *drm;
--	struct device *dev;
- 	bool slave = !!(ttm->page_flags & TTM_PAGE_FLAG_SG);
- 
- 	if (slave)
-@@ -1281,7 +1278,6 @@ nouveau_ttm_tt_unpopulate(struct ttm_device *bdev,
- 	nouveau_ttm_tt_unbind(bdev, ttm);
- 
- 	drm = nouveau_bdev(bdev);
--	dev = drm->dev->dev;
- 
- 	return ttm_pool_free(&drm->ttm.bdev.pool, ttm);
- }
--- 
-2.27.0
+I'm not sure I understand the comment above. You say "enabled/disabled
+via PWM" and that doesn't make sense w/ my mental model. Normally I
+think of a PWM allowing you to adjust the brightness and there being a
+separate GPIO that's in charge of enable/disable. To some extent you
+could think of a PWM as being "disabled" when its duty cycle is 0%,
+but usually there's separate "enable" logic that really has nothing to
+do with the PWM itself.
 
+In general, it seems like the options are:
+
+1. DPCD controls PWM and the "enable" logic.
+
+2. DPCD controls PWM but requires an external "enable" GPIO.
+
+3. We require an external PWM but DPCD controls the "enable" logic.
+
+Maybe you need a second "capability" to describe whether the client of
+your code knows how to control an enable GPIO? ...or perhaps better
+you don't need a capability and you can just assume that if the client
+needs to set an "enable" GPIO that it will do so. That would match how
+things work today. AKA:
+
+a) Client calls the AUX backlight code to "enable"
+
+b) AUX backlight code will set the "enable" bit if supported.
+
+c) Client will set the "enable" GPIO if it knows about one.
+
+Presumably only one of b) or c) will actually do something. If neither
+does something then this panel simply isn't compatible with this
+board.
+
+
+> +/**
+> + * drm_edp_backlight_supported() - Check an eDP DPCD for VESA backlight support
+> + * @aux: The AUX channel, only used for debug logging
+> + * @edp_dpcd: The DPCD to check
+> + * @caps: The backlight capabilities this driver supports
+> + *
+> + * Returns: %True if @edp_dpcd indicates that VESA backlight controls are supported, %false
+> + * otherwise
+> + */
+> +bool drm_edp_backlight_supported(struct drm_dp_aux *aux,
+> +                                const u8 edp_dpcd[EDP_DISPLAY_CTL_CAP_SIZE],
+> +                                enum drm_edp_backlight_driver_caps caps)
+> +{
+> +       if (!(edp_dpcd[1] & DP_EDP_TCON_BACKLIGHT_ADJUSTMENT_CAP))
+> +               return false;
+> +
+> +       if (!(caps & DRM_EDP_BACKLIGHT_DRIVER_CAP_PWM) &&
+> +           (!(edp_dpcd[2] & DP_EDP_BACKLIGHT_BRIGHTNESS_AUX_SET_CAP) ||
+> +            !(edp_dpcd[2] & DP_EDP_BACKLIGHT_AUX_ENABLE_CAP))) {
+
+Elsewhere you match DP_EDP_BACKLIGHT_AUX_ENABLE_CAP against
+edp_dpcd[1]. Here you match against [2]. Are you sure that's correct?
+
+
+>  /*
+>   * DisplayPort AUX channel
+>   */
+> @@ -2200,7 +2182,11 @@ drm_dp_has_quirk(const struct drm_dp_desc *desc, enum drm_dp_quirk quirk)
+>   * @pwm_freq_pre_divider: The PWM frequency pre-divider value being used for this backlight, if any
+>   * @max: The maximum backlight level that may be set
+>   * @lsb_reg_used: Do we also write values to the DP_EDP_BACKLIGHT_BRIGHTNESS_LSB register?
+> - * @aux_enable: Does the panel support the AUX enable cap?
+> + * @aux_enable: Does the panel support the AUX enable cap? Always %false when the driver doesn't
+> + * support %DRM_EDP_BACKLIGHT_DRIVER_CAP_PWM
+
+Why is aux_enable always false if it doesn't support
+DRM_EDP_BACKLIGHT_DRIVER_CAP_PWM? It doesn't seem like the code
+enforces this and I'm not sure why it would. Am I confused?
