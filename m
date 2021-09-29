@@ -2,72 +2,48 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 29E2841BD6D
-	for <lists+nouveau@lfdr.de>; Wed, 29 Sep 2021 05:29:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 825CD41CD4D
+	for <lists+nouveau@lfdr.de>; Wed, 29 Sep 2021 22:17:08 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 88C216E160;
-	Wed, 29 Sep 2021 03:29:05 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 45BE26E20F;
+	Wed, 29 Sep 2021 20:17:06 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id BD4AD6E15E
- for <nouveau@lists.freedesktop.org>; Wed, 29 Sep 2021 03:29:03 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1632886142;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=Ypu7lSHLqUrP/H0+g4r3QAtlIt7DSpEMHZQnw4kUfiM=;
- b=Q5US/XUjUjKuRyODjblovUWUaV/iWUM5R7CU1CK0HLrzRmDJzP7gKfLonifdPXdsI1RD7F
- qIJ4V35ikNaGMvesnHl6+Ae06wXsFGpSYPG/EIT9u0KHvTDYW9eO109m/g6bAdycpl8k9y
- Xg1mRFvKr/AVwc9W6YWPoxdHGh0gc3g=
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-200-ijlPG7-XO9OgE8r1KGdQMA-1; Tue, 28 Sep 2021 23:28:59 -0400
-X-MC-Unique: ijlPG7-XO9OgE8r1KGdQMA-1
-Received: by mail-wm1-f71.google.com with SMTP id
- 70-20020a1c0149000000b0030b7dd84d81so527203wmb.3
- for <nouveau@lists.freedesktop.org>; Tue, 28 Sep 2021 20:28:59 -0700 (PDT)
+Received: from mail-vs1-xe33.google.com (mail-vs1-xe33.google.com
+ [IPv6:2607:f8b0:4864:20::e33])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3560B6E20F
+ for <nouveau@lists.freedesktop.org>; Wed, 29 Sep 2021 20:17:04 +0000 (UTC)
+Received: by mail-vs1-xe33.google.com with SMTP id f2so3623098vsj.4
+ for <nouveau@lists.freedesktop.org>; Wed, 29 Sep 2021 13:17:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cs.unc.edu; s=google;
+ h=mime-version:from:date:message-id:subject:to;
+ bh=r9lKLckoBFKPmXbYEdNaTsIlUxaL+QbAxvt08BB4Qp0=;
+ b=V27yCkfvpAnW1iwIVXtRHOfW+NMcx/GnE9rMVls9596Z7RDpvKk4k9fwlvCAG1EdWI
+ LbduMrN+hULdweC4/FsTgxTdVCdvf8JJSyXB+xKYKJtunWOmM8LqCP12sUWntVR9LOxS
+ 0W8Ylx5q/jmi+gLOsyRDQKn21lT3KKbrgxzus=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=Ypu7lSHLqUrP/H0+g4r3QAtlIt7DSpEMHZQnw4kUfiM=;
- b=XUrf0ddI3n8SvXyyTjFjCTaD3D2v7VbHhKkbIhj3PMsXR45pH7Jhtmf7YbYrHlwtHt
- pli1gcRhwYcustWhEOGPJKfcubLt6WZetwi8lns9oSbQYcydcM0brZ3NUWjnpKFQJbAs
- Eqj8vZBjezko9pzalBMgCtw9gJhV/uUG9Y1H7YYCfVLHzWq48JcO7XbNCSXjOa7GKNdx
- 0bk/iDDluBmfAKdehrna/7/BpbK1R/ZyMoYJlkGbPFW2VarjOt6+ZEu2sGrdFpcTsBq/
- F7SsBJovjNK3nXCOgoRXnXfK9MY4vHbOr5Xu+AWUmzHI0+yCyUTmWdM8ero4IDUGiuqi
- Rnew==
-X-Gm-Message-State: AOAM531s+wfyqnHHXeP39xxsPDmhVKCV1+U3EhfTyYkwgFsPW4ygbKYN
- F12XNvkcOZpDIlL5IcgK3j3FTQ5DAx+FK2oCIPrbTq8KccoOZUoMARsRYD839u7Km+dslYXCsue
- 6GIMcc/xn4Xr8hKHrr+UbkzIMt+uwJdcnCJQbJrm8Hg==
-X-Received: by 2002:a05:600c:4991:: with SMTP id
- h17mr8150570wmp.74.1632886138161; 
- Tue, 28 Sep 2021 20:28:58 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJy6FKlEbCVhn+zhHA/mzkU4owvOyJWUbP+zvqJr/PTgo0iMkgM659VzGx/wX8Umvr4GJinRuUX0AjYIjW/UQVU=
-X-Received: by 2002:a05:600c:4991:: with SMTP id
- h17mr8150552wmp.74.1632886137916; 
- Tue, 28 Sep 2021 20:28:57 -0700 (PDT)
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=r9lKLckoBFKPmXbYEdNaTsIlUxaL+QbAxvt08BB4Qp0=;
+ b=4HkHczFqxvFZ/GwRjxSBoCY1nWe+T6Be9CsWNkgaqfwVRlY3Ask8lOVDV0wioRqcy7
+ 8DBCUnBtm5q1Y5Rj/sQF/SOVgMg3/H3Y8hO5ipzs8pq0+4d7DTX3aHwKwgMbpt7C8Hhz
+ NZemaZbFXPI2p7b2iAaqj36GFUEV4GDttZJpYpCfDMz9wGCkFJ1icrYq/Cku0arGvWHN
+ fGm4/X88OmVs9ngCJgNxLn0Z2Qd+R+5OZVAVqedr79uZmaNtK1pzds7YaorOf+UEpSOy
+ Glhbz+aF6ZIfyT9qEV9mt5delTe/dADaw9TrTUqBw1cW2XLPo04GIa08p62N85F9F2b6
+ OGzw==
+X-Gm-Message-State: AOAM530Zm3eViAs56quACYWao74jT2ZtdFL0d8eGFlos5047MGwnXZtU
+ rHQIIwuKyYJLhzdbPwbbXi1O4bYVPGFvxMmFSIwBQkWZG614TXZO
+X-Google-Smtp-Source: ABdhPJzAhNwcKk/QlhCuKU2qfUivYuwOHnvPTe/LrpEYSwWbtYMoskN0AWzQvR+gbRD789DXcNIBLqTXbSQ1b7k5YvA=
+X-Received: by 2002:a05:6102:3548:: with SMTP id
+ e8mr771555vss.44.1632946622718; 
+ Wed, 29 Sep 2021 13:17:02 -0700 (PDT)
 MIME-Version: 1.0
-References: <20210928222513.GA294575@embeddedor>
-In-Reply-To: <20210928222513.GA294575@embeddedor>
-From: Karol Herbst <kherbst@redhat.com>
-Date: Wed, 29 Sep 2021 05:28:47 +0200
-Message-ID: <CACO55tsD98dNzw8fP=CiKLsdbnn2Vg78+wTRM90kutHtv1RZ5A@mail.gmail.com>
-To: "Gustavo A. R. Silva" <gustavoars@kernel.org>
-Cc: Ben Skeggs <bskeggs@redhat.com>, David Airlie <airlied@linux.ie>, 
- Daniel Vetter <daniel@ffwll.ch>, dri-devel <dri-devel@lists.freedesktop.org>, 
- nouveau <nouveau@lists.freedesktop.org>, LKML <linux-kernel@vger.kernel.org>, 
- linux-hardening@vger.kernel.org
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=kherbst@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
+From: Joshua Bakita <jbakita@cs.unc.edu>
+Date: Wed, 29 Sep 2021 16:16:52 -0400
+Message-ID: <CAAy0SxCY_5jpsRnR+okQ1HgXE2frzPe98hNJ8Yrju-bMRDqLnQ@mail.gmail.com>
+To: nouveau@lists.freedesktop.org
 Content-Type: text/plain; charset="UTF-8"
-Subject: Re: [Nouveau] [PATCH][next] nouveau/svm: Use kvcalloc() instead of
- kvzalloc()
+Subject: [Nouveau] Understanding BAR1 Offset to imem/VRAM PA Mapping
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -82,36 +58,27 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Lack of documentation inside Linux here is a bit annoying, but do I
-understand it correctly, that the main (and probably only) difference
-is that kvcalloc checks whether the multiplication overflows and
-returns NULL in this case?
+Hello,
 
-On Wed, Sep 29, 2021 at 12:21 AM Gustavo A. R. Silva
-<gustavoars@kernel.org> wrote:
->
-> Use 2-factor argument form kvcalloc() instead of kvzalloc().
->
-> Link: https://github.com/KSPP/linux/issues/162
-> Signed-off-by: Gustavo A. R. Silva <gustavoars@kernel.org>
-> ---
->  drivers/gpu/drm/nouveau/nouveau_svm.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_svm.c b/drivers/gpu/drm/nouveau/nouveau_svm.c
-> index b0c3422cb01f..1a896a24288a 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_svm.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_svm.c
-> @@ -992,7 +992,7 @@ nouveau_svm_fault_buffer_ctor(struct nouveau_svm *svm, s32 oclass, int id)
->         if (ret)
->                 return ret;
->
-> -       buffer->fault = kvzalloc(sizeof(*buffer->fault) * buffer->entries, GFP_KERNEL);
-> +       buffer->fault = kvcalloc(sizeof(*buffer->fault), buffer->entries, GFP_KERNEL);
->         if (!buffer->fault)
->                 return -ENOMEM;
->
-> --
-> 2.27.0
->
+I'm trying to understand how VRAM PAs are mapped to BAR1 offsets on
+Fermi+, but I'm having difficulty digging through the abstractions in
+nouveau. I spent the better part of yesterday digging through the
+nv50_instobj_*() functions, but I lost track of which page tables are
+being modified and where they're coming from somewhere around level 7
+of indirection/aliasing from the nvkm_kmap() call (aka
+nv50_instobj_acquire()) to the actual nvkm_vmm_iter() logic which I
+think does the mapping.
 
+If page tables are used to map BAR1 offsets to VRAM PAs on Fermi+, I'd
+like to understand their relation to the normal GPU VA to PA page
+tables, and how we tell the hardware which page tables to use for the
+BAR1 mappings.
+
+Best regards,
+
+Joshua Bakita
+PhD Student
+UNC Chapel Hill | Real-Time Systems Group
+
+(Apologies if anyone already received this email, I tried sending it
+earlier and I think it got stuck in moderation.)
