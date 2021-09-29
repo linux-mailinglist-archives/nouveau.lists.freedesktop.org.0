@@ -2,48 +2,44 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id E3D3041F959
-	for <lists+nouveau@lfdr.de>; Sat,  2 Oct 2021 04:24:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id ABDB341F957
+	for <lists+nouveau@lfdr.de>; Sat,  2 Oct 2021 04:24:11 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4933D6F468;
-	Sat,  2 Oct 2021 02:24:02 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D8FFA6F466;
+	Sat,  2 Oct 2021 02:24:01 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ua1-x92b.google.com (mail-ua1-x92b.google.com
- [IPv6:2607:f8b0:4864:20::92b])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A0F086EAB1
- for <nouveau@lists.freedesktop.org>; Wed, 29 Sep 2021 15:09:42 +0000 (UTC)
-Received: by mail-ua1-x92b.google.com with SMTP id b10so1823514uaw.1
- for <nouveau@lists.freedesktop.org>; Wed, 29 Sep 2021 08:09:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cs.unc.edu; s=google;
- h=mime-version:from:date:message-id:subject:to;
- bh=D/O+NPyNGwLtciZ8Yu1dLsqPDXbE7nFv8DHaikTZgJY=;
- b=A+MX/AGMwpVT0PZVXCkLzp2fBGW2dm+i5JMGn8zDYxH1sYdHORkRHRkow9PWoVyvJ5
- lol6HnhWFR+Lb8vb26unkRKXrSVLZz9CEwR6MN8VyRyEWHyeyeI2sQj0ZdSV5Q7oTgUB
- 0JRBASHor3kY8MlmuPoIAJSxgv091xD8xPnB4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=D/O+NPyNGwLtciZ8Yu1dLsqPDXbE7nFv8DHaikTZgJY=;
- b=glIaLDQGsCOXtGJZ3+thUl1RthQcsg4Lcd1hwFg51785z5jEC0ni8e+5rmFJrHBb8n
- kX9UmVJOo+kJddpsKuX4L5a6PyfkGo9PHfKFJHYEx5iIpWCkZjIbqf+VCKtabx+iVkbV
- o5fRnb1RFA1UC5JIEf0c2eYfIrWT+QCik48rnu2pKmiLsQCkJ36dxjlO5r+7QIloZIf1
- mFHCiHIFlUuxgZzcDARafRDa40Kzhub9NKFEVdEfGda91TIaRHrILVzE0ycqBtN5kTLy
- pGwbcyUyuVlxYP3uInoFUL/3QAumh3quj8ZruZqfs4wlU6Uycg0691niqXGeU7rqV4EI
- itCg==
-X-Gm-Message-State: AOAM533O6HG9yTiwxjs3bfnL5Ytxi1GPfrhCaYFCeQLSH4s0Qv4BTcK3
- 9SbZlwsBQBF8GJ9HlRXzcV+mfnzlnTC6SdJDDKwSjk7TPVAUGiEu
-X-Google-Smtp-Source: ABdhPJwRtx5OZRsRDYtzYUuu12hBGNuR7FQX0Nn3GB9wD1rSV7eCBiYZuSk8XX9weBKHrb3XjrHfmMAI65aJjbTJp4Q=
-X-Received: by 2002:ab0:5bdc:: with SMTP id z28mr603509uae.35.1632928181301;
- Wed, 29 Sep 2021 08:09:41 -0700 (PDT)
+X-Greylist: delayed 555 seconds by postgrey-1.36 at gabe;
+ Wed, 29 Sep 2021 19:45:29 UTC
+Received: from galois.linutronix.de (Galois.linutronix.de [193.142.43.55])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C5A436E217;
+ Wed, 29 Sep 2021 19:45:29 +0000 (UTC)
+From: John Ogness <john.ogness@linutronix.de>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
+ s=2020; t=1632944170;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type;
+ bh=sSLuRBFlzDo1MDk8K9oDSXuyG2gJ98toV3YqmhcDhug=;
+ b=Stg8WZylVaEbGM1n3UX2/Wx5LUrePV+Zkf6u1keyJeA8BLPB8pWH6Y0uvUcaSgsQ4hPglS
+ DzI/RVE5EDD7ZvCcVLgX8T7jvc9faHaWZERzTaeT2dgYh24vycCZgk2AnyCfI2PPGrTZIv
+ BgdqXU0b+8xbJQiqR1gpXQffabvj1qrlECqduS/CXvp5LW8qYa36VqdX5e1J7DTOPrc11c
+ sBsn74qDPUsM4WLNeqW4d/k9o/Gq6AxN3gEuCLMxRcxub5z27qY3s4h4YXWCc8KBd8W++Z
+ 2aCQ2+7Lj3b0x1lCV9s3lfwHGIko4eW1DWCf3I6i9edd3e94aH5P+HbZnktqgA==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
+ s=2020e; t=1632944170;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type;
+ bh=sSLuRBFlzDo1MDk8K9oDSXuyG2gJ98toV3YqmhcDhug=;
+ b=4ZX0DFGEEYRuiDSu9y47IbTvaUUghuyhq8jdw7mO9zzQessRdosX1P/T3O490NMd7IBaTI
+ HYV5aSo70LK97bBg==
+To: David Airlie <airlied@linux.ie>, Daniel Vetter <daniel@ffwll.ch>
+Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org
+Date: Wed, 29 Sep 2021 21:42:09 +0206
+Message-ID: <87v92j18eu.fsf@jogness.linutronix.de>
 MIME-Version: 1.0
-From: Joshua Bakita <jbakita@cs.unc.edu>
-Date: Wed, 29 Sep 2021 11:09:31 -0400
-Message-ID: <CAAy0SxA4zz1Sn1qH_QOgug2zg+zoSvepRr-dsnab-Zv7YFK6_Q@mail.gmail.com>
-To: nouveau@lists.freedesktop.org
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain
 X-Mailman-Approved-At: Sat, 02 Oct 2021 02:24:00 +0000
-Subject: [Nouveau] Understanding BAR1 Offset to imem/VRAM PA Mapping
+Subject: [Nouveau] kmemleak report: 5.15.0-rc3: nouveau_fence_new
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,22 +56,105 @@ Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 Hello,
 
-I'm trying to understand how VRAM PAs are mapped to BAR1 offsets on
-Fermi+, but I'm having difficulty digging through the abstractions in
-nouveau. I spent the better part of yesterday digging through the
-nv50_instobj_*() functions, but I lost track of which page tables are
-being modified and where they're coming from somewhere around level 7
-of indirection/aliasing from the nvkm_kmap() call (aka
-nv50_instobj_acquire()) to the actual nvkm_vmm_iter() logic which I
-think does the mapping.
+With 5.15.0-rc3 on my ppc64 (PowerMac G5) I am seeing kmemleak
+reports. They are always 96 bytes and with the same stacktrace.
 
-If page tables are used to map BAR1 offsets to VRAM PAs on Fermi+, I'd
-like to understand their relation to the normal GPU VA to PA page
-tables, and how we tell the hardware which page tables to use for the
-BAR1 mappings.
+unreferenced object 0xc000000011d2a7e0 (size 96):
+  comm "X", pid 1743, jiffies 4295010075 (age 5457.040s)
+  hex dump (first 32 bytes):
+    c0 00 00 00 0b 9f f0 00 c0 00 3d 00 00 b0 85 90  ..........=.....
+    00 00 00 a9 77 41 30 23 c0 00 00 00 08 db b7 c8  ....wA0#........
+  backtrace:
+    [<000000006f102108>] .nouveau_fence_new+0x4c/0x120 [nouveau]
+    [<00000000395e0a83>] .nouveau_bo_move+0x4f0/0x870 [nouveau]
+    [<00000000f17bc6da>] .ttm_bo_handle_move_mem+0xb4/0x1e0 [ttm]
+    [<00000000fb36762f>] .ttm_bo_validate+0x144/0x230 [ttm]
+    [<00000000a84dc7b3>] .nouveau_bo_validate+0x70/0xc0 [nouveau]
+    [<00000000b4e870a2>] .nouveau_gem_ioctl_pushbuf+0x6e0/0x1a90 [nouveau]
+    [<000000007b7c5c38>] .drm_ioctl_kernel+0x104/0x180 [drm]
+    [<000000000af76e30>] .drm_ioctl+0x244/0x490 [drm]
+    [<00000000ebb759e8>] .nouveau_drm_ioctl+0x78/0x140 [nouveau]
+    [<00000000263274a7>] .__se_sys_ioctl+0xfc/0x160
+    [<0000000088c39f3d>] .system_call_exception+0x178/0x2a0
+    [<000000000cfdf34f>] system_call_common+0xec/0x250
 
-Best regards,
+If I decode this stacktrace using decode_stacktrace.sh so that the line
+numbers can be seen, I get the following:
 
-Joshua Bakita
-PhD Student
-UNC Chapel Hill | Real-Time Systems Group
+.nouveau_fence_new+0x4c/0x120 [nouveau]
+linux-5.15-rc3/include/linux/slab.h:591
+linux-5.15-rc3/include/linux/slab.h:721
+linux-5.15-rc3/drivers/gpu/drm/nouveau/nouveau_fence.c:424
+
+.nouveau_bo_move+0x4f0/0x870 [nouveau]
+linux-5.15-rc3/drivers/gpu/drm/nouveau/nouveau_bo.c:821
+linux-5.15-rc3/drivers/gpu/drm/nouveau/nouveau_bo.c:1032
+
+.ttm_bo_handle_move_mem+0xb4/0x1e0 [ttm]
+linux-5.15-rc3/drivers/gpu/drm/ttm/ttm_bo.c:197
+
+.ttm_bo_validate+0x144/0x230 [ttm]
+linux-5.15-rc3/drivers/gpu/drm/ttm/ttm_bo.c:904
+linux-5.15-rc3/drivers/gpu/drm/ttm/ttm_bo.c:981
+
+.nouveau_bo_validate+0x70/0xc0 [nouveau]
+linux-5.15-rc3/drivers/gpu/drm/nouveau/nouveau_bo.c:647
+
+.nouveau_gem_ioctl_pushbuf+0x6e0/0x1a90 [nouveau]
+linux-5.15-rc3/drivers/gpu/drm/nouveau/nouveau_gem.c:548
+linux-5.15-rc3/drivers/gpu/drm/nouveau/nouveau_gem.c:605
+linux-5.15-rc3/drivers/gpu/drm/nouveau/nouveau_gem.c:799
+
+.drm_ioctl_kernel+0x104/0x180 [drm]
+linux-5.15-rc3/drivers/gpu/drm/drm_ioctl.c:795
+
+.drm_ioctl+0x244/0x490 [drm]
+linux-5.15-rc3/include/linux/thread_info.h:185
+linux-5.15-rc3/include/linux/thread_info.h:218
+linux-5.15-rc3/include/linux/uaccess.h:199
+linux-5.15-rc3/drivers/gpu/drm/drm_ioctl.c:899
+
+.nouveau_drm_ioctl+0x78/0x140 [nouveau]
+linux-5.15-rc3/drivers/gpu/drm/nouveau/nouveau_drm.c:1163
+
+.__se_sys_ioctl+0xfc/0x160
+linux-5.15-rc3/fs/ioctl.c:51
+linux-5.15-rc3/fs/ioctl.c:874
+linux-5.15-rc3/fs/ioctl.c:860
+
+.system_call_exception+0x178/0x2a0
+.system_call_exception
+linux-5.15-rc3/arch/powerpc/kernel/interrupt.c:233
+
+system_call_common+0xec/0x250
+linux-5.15-rc3/arch/powerpc/kernel/interrupt_64.S:314
+
+Here are all enabled DRM and NOUVEAU configs in my kernel:
+
+CONFIG_DRM=m
+CONFIG_DRM_KMS_HELPER=m
+CONFIG_DRM_FBDEV_EMULATION=y
+CONFIG_DRM_FBDEV_OVERALLOC=100
+CONFIG_DRM_TTM=m
+CONFIG_DRM_TTM_HELPER=m
+CONFIG_DRM_NOUVEAU=m
+CONFIG_NOUVEAU_DEBUG=5
+CONFIG_NOUVEAU_DEBUG_DEFAULT=3
+CONFIG_DRM_NOUVEAU_BACKLIGHT=y
+CONFIG_DRM_PANEL=y
+CONFIG_DRM_BRIDGE=y
+CONFIG_DRM_PANEL_BRIDGE=y
+CONFIG_DRM_PANEL_ORIENTATION_QUIRKS=m
+
+And lspci output:
+
+0000:f0:10.0 VGA compatible controller: NVIDIA Corporation NV34 [GeForce FX 5200 Ultra] (rev a1)
+
+I have been running 5.12 on my machine without these reports. So it
+might be something that showed up in 5.13 or 5.14 as well.
+
+I do not know if this is a good channel for reporting this, so please
+let me know if I should report it somewhere else. Also let me know if
+you need any additional information from me.
+
+John Ogness
