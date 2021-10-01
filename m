@@ -1,51 +1,47 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 50B1A41F02E
-	for <lists+nouveau@lfdr.de>; Fri,  1 Oct 2021 17:01:02 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6C01341F058
+	for <lists+nouveau@lfdr.de>; Fri,  1 Oct 2021 17:05:34 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3236B6EDE9;
-	Fri,  1 Oct 2021 15:00:59 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1394E6EDE9;
+	Fri,  1 Oct 2021 15:05:31 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-qt1-x835.google.com (mail-qt1-x835.google.com
- [IPv6:2607:f8b0:4864:20::835])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 560CF6EDE9
- for <nouveau@lists.freedesktop.org>; Fri,  1 Oct 2021 15:00:57 +0000 (UTC)
-Received: by mail-qt1-x835.google.com with SMTP id j13so9206154qtq.6
- for <nouveau@lists.freedesktop.org>; Fri, 01 Oct 2021 08:00:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:from:date:message-id:subject:to;
- bh=657jtzPdp6vWi5s2j6jc+EpqVk2uIrgDoYAwFxUSKI0=;
- b=aQycJLN6VKQXUTVhG8LhnX6sYeaZehAevbW65ybbhZ6hdOSfVhwMUhs46xzF681K9T
- 3+O3iWUbx6Me3UJ4uitzBZLoU114+wdEXTV4ur6K4tcYu1fbtvJjngC7HQgXbPqYasO1
- 3AjpBhhqBFnFJHWCgy+aCLDmiTNUaWgAr+H9y99vVyvhDGMP7BQpEL4elJcoxkIenV31
- FaAwWaHSfCDp0mJCwkKqUsfPwqrRQQ7mjt+jzOjhTTwKJRv8Q2iVK7DMIEmqHcbocOY8
- hr7/E7VWFRrfjIZGI2u4t+JTA4NalunwGCAJjP6xAUCKYef5aydqcCTlEMPi+sBpwMr6
- o9Kw==
+Received: from mail-io1-f42.google.com (mail-io1-f42.google.com
+ [209.85.166.42])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 028A86EDE9
+ for <nouveau@lists.freedesktop.org>; Fri,  1 Oct 2021 15:05:29 +0000 (UTC)
+Received: by mail-io1-f42.google.com with SMTP id 134so11959221iou.12
+ for <nouveau@lists.freedesktop.org>; Fri, 01 Oct 2021 08:05:29 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=657jtzPdp6vWi5s2j6jc+EpqVk2uIrgDoYAwFxUSKI0=;
- b=16EBgBRe40YSkFwapHZIC7KyE+B5ppR5pB5nabUP68piy3TRBiZL6pH/6+xxurkK9q
- DRwGEOGtnawYyycwpqjZS8f1Wb/doDQxTKjYiOniaKVK6qEYemnW6cUe0Rflohc1kPIL
- gS0GVq1D42UOWXZEtvbFSxhqLeC4zthtBNBtbSROfBEmhNms4uJAyX8ndWh1VjSPaygT
- mRH6T5wW1jZXwLzhgQUOUtjwvgqUSjPcGzbiku5eS2eIe2KwAEwiVrFcXwAG9fSPSsvr
- ipbobd3Z/P1y2WNPE0GXXxmzJoMzvhBRh1ySuq4g7J0NkmrLo/PYSG0JvwBmtOrSN2iX
- e8oQ==
-X-Gm-Message-State: AOAM531qTDcWvRInQS24EdfzuSscQfd5qCRh2W2cMuK6EtXZWf3nt+jS
- lvsafYgRfDk1nO3lmM3TeTp37OUELWLNKkji9LmVd6WrKxA=
-X-Google-Smtp-Source: ABdhPJxrhBLHaspOBhKUjsC7EHlweuX/CDyzlpoeT5bAMFp+zZxoZtDGsGbKn4Ir/J3tHcd1V6QZgCCSwlyDSFJNMuw=
-X-Received: by 2002:ac8:4a10:: with SMTP id x16mr13774794qtq.97.1633100455876; 
- Fri, 01 Oct 2021 08:00:55 -0700 (PDT)
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=nTiUoToLt4vlwSsttW+8ux7qUW0jKK/cKEbzzJm6wPE=;
+ b=pLmRpVHGmt4EhkzjJcPgwwuBMud4xu/gwyUZQUaISUob6rD+c8lF4DTGGVUB9JQzkD
+ hQ1YoE5PIeNYZXIB7PdqLvcABEFtthJUap93ZBb3D41dA5J/MInxi15cU4AyPxCiMiDI
+ MOyCTq9M2YzS8ufCa3CXjJ4hMQzfwAV2dcFTQ5TecSGwsu2X7sbufN+kHlNOX/RUh+Ed
+ R2+5kQ8v5DO7F/kRVqU7gk0UkYaGVusrs63zbpnjNRn+0BO+putmkA+ovFxpI5M/HppX
+ sG+FneitPugOM0aYsblm/atJgrmsNT44QYGqkU8UoEI+FGcAMtj1lV99f6mEyCvItgCE
+ bbsA==
+X-Gm-Message-State: AOAM532eANzPLRHT/EW8bjDfci5KSjg8cflfFZNSTJ/Ksy7cPRy2vRAg
+ Cq4fsdV7EaXPbPOEfG7wB3ADgwXnj0oaRk7RY68=
+X-Google-Smtp-Source: ABdhPJxtVsu7r4OkaaQ4C6i/CIumunsPOR6qcRCyVLUp5QWYe3q8CSnETK5682eehicexq6aU6p15u0VJTzJ7SgjwTQ=
+X-Received: by 2002:a05:6638:13d0:: with SMTP id
+ i16mr10158295jaj.111.1633100729240; 
+ Fri, 01 Oct 2021 08:05:29 -0700 (PDT)
 MIME-Version: 1.0
-From: Jerry Geis <jerry.geis@gmail.com>
-Date: Fri, 1 Oct 2021 11:00:44 -0400
-Message-ID: <CABr8-B5YD4YGgcVfuqNGQumBSpuz8tFA0hEUJWZnHps6ZOKpMA@mail.gmail.com>
-To: nouveau@lists.freedesktop.org
-Content-Type: multipart/alternative; boundary="0000000000008e1f3005cd4bd43f"
-Subject: [Nouveau] Nouveau on Ubuntu 20.04 LTS
+References: <CABr8-B5YD4YGgcVfuqNGQumBSpuz8tFA0hEUJWZnHps6ZOKpMA@mail.gmail.com>
+In-Reply-To: <CABr8-B5YD4YGgcVfuqNGQumBSpuz8tFA0hEUJWZnHps6ZOKpMA@mail.gmail.com>
+From: Ilia Mirkin <imirkin@alum.mit.edu>
+Date: Fri, 1 Oct 2021 11:05:18 -0400
+Message-ID: <CAKb7UvgXTkCTQhvK7A_98kfjicBxfJyH0nC_ya5y1wqYxFCfJw@mail.gmail.com>
+To: Jerry Geis <jerry.geis@gmail.com>
+Cc: nouveau <nouveau@lists.freedesktop.org>
+Content-Type: text/plain; charset="UTF-8"
+Subject: Re: [Nouveau] Nouveau on Ubuntu 20.04 LTS
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,35 +56,34 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
---0000000000008e1f3005cd4bd43f
-Content-Type: text/plain; charset="UTF-8"
+You can check the perf level your GPU is at, and potentially adjust it.
 
-I am trying to get Nouveau running and also playing video.
-lspci | grep VGA shows
-03:00.0 VGA compatible controller: NVIDIA Corporation GT218 [ION] (rev a2)
+cat /sys/kernel/debug/dri/0/pstate
 
-syslog shows nouveau loaded
+This should give a list of levels like "xx: stuff", with the "AC"
+level being the current settings. Echo'ing any one of the xx's into
+that file will attempt to switch to a different performance level.
+Sometimes it works, other times it kills the GPU until you reboot. Use
+with care.
 
-But video performance is SLOW - dropping frames.
+Cheers,
 
-have I missed something ?
+  -ilia
 
-How do I get better video performance ?
-
-Thanks,
-
-Jerry
-
---0000000000008e1f3005cd4bd43f
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">I am trying to get Nouveau running and also playing video.=
-<div>lspci | grep VGA shows</div><div>03:00.0 VGA compatible controller: NV=
-IDIA Corporation GT218 [ION] (rev a2)<br></div><div><br></div><div>syslog s=
-hows nouveau loaded</div><div><br></div><div>But video performance is SLOW =
-- dropping=C2=A0frames.</div><div><br></div><div>have I missed something ?<=
-/div><div><br></div><div>How do I get better video performance ?</div><div>=
-<br></div><div>Thanks,</div><div><br></div><div>Jerry</div></div>
-
---0000000000008e1f3005cd4bd43f--
+On Fri, Oct 1, 2021 at 11:01 AM Jerry Geis <jerry.geis@gmail.com> wrote:
+>
+> I am trying to get Nouveau running and also playing video.
+> lspci | grep VGA shows
+> 03:00.0 VGA compatible controller: NVIDIA Corporation GT218 [ION] (rev a2)
+>
+> syslog shows nouveau loaded
+>
+> But video performance is SLOW - dropping frames.
+>
+> have I missed something ?
+>
+> How do I get better video performance ?
+>
+> Thanks,
+>
+> Jerry
