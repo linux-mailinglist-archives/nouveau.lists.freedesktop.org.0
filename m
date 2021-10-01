@@ -1,59 +1,71 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B009141F667
-	for <lists+nouveau@lfdr.de>; Fri,  1 Oct 2021 22:41:59 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id C0ECB41F67D
+	for <lists+nouveau@lfdr.de>; Fri,  1 Oct 2021 22:48:29 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 008656F40A;
-	Fri,  1 Oct 2021 20:41:57 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 841846F402;
+	Fri,  1 Oct 2021 20:48:21 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-io1-f52.google.com (mail-io1-f52.google.com
- [209.85.166.52])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 872D76F3F9
- for <nouveau@lists.freedesktop.org>; Fri,  1 Oct 2021 20:41:55 +0000 (UTC)
-Received: by mail-io1-f52.google.com with SMTP id r75so13108653iod.7
- for <nouveau@lists.freedesktop.org>; Fri, 01 Oct 2021 13:41:55 -0700 (PDT)
+Received: from mail-qt1-x831.google.com (mail-qt1-x831.google.com
+ [IPv6:2607:f8b0:4864:20::831])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0681F6F3F9
+ for <nouveau@lists.freedesktop.org>; Fri,  1 Oct 2021 20:48:18 +0000 (UTC)
+Received: by mail-qt1-x831.google.com with SMTP id e16so30206qte.13
+ for <nouveau@lists.freedesktop.org>; Fri, 01 Oct 2021 13:48:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=poorly.run; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:content-transfer-encoding:in-reply-to
+ :user-agent; bh=fTwGjqOo2qpFUBnSVDlFyolMyzUY3P07s+PYc+sfnxY=;
+ b=DoDhvCYRyP3bI52k2WCEwtOJHIoz8ay9LklCmI5z0nlSjdj2gKo5hP9c/Xbp0MpgYa
+ QkDbjNuGI1fN3ObZzMb/IffcrHuMfDl1JqpDiziGrymys0Mj0bpC18FoM/SQRJ2yhh+H
+ mokkTqv/ZnP32g0hiEA/BcCjek8ynV3GjR40GtWy0/S2DA10ernlOVr5p65Kb0An0xqp
+ ZaOOZjGcZtf04Mml416DbxGvTXbpoK3UueGTN5Jdjky0/3POHDtxBxU2PKWtUz0cjVCU
+ D9jMXomhHB/OKNZVK51aa82CckJviyHHBn4r+QId2nGXfkZzAme7XSAZs0jtbiyCVQ2n
+ AokQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=UOxOdfFx0D6v58E0KtqCCRzTner+i+9eqJY7xy8l1mc=;
- b=rsiXJiMtg3vyC1dNcDYcRNDYtpsKSUjPyIh8lSs5f5KqJMciOv3kYdTgNMTlJLDGaL
- WSTbGdpzvbKDIj064o3I4/wEEiD+ZxTjc7kUid767uuVKLYFN6u7RiAQdojtDzYcqQqi
- E47od6VQwbDRoGUObKTy+NP0M2l788MYjH1GCWXBFhZJdpG+kOOe8Qcl4SV9dw5VIUGT
- BEccgcSjS4UaZQ4BCKUoezV1QTcFHkrnPtKuC+Eo0m4fZqKMb0jeb2PMOLbOQ6B+sZ9/
- qBDVjbL5IS7iKUlNKVbtmbQk5n6BJWhFZVQsh+3sbr7l2cKRdl1uAF1/Yt+byxFLFEWQ
- eb6w==
-X-Gm-Message-State: AOAM530qsfZeY24LlSKklGvFQ6yyuczkXgw82SC4P5lA+5cyVcDFrrcy
- BDdxm7Z1z6wMOUlcjLOjClOKVLkW4ATr9O/Si5VBSdJb
-X-Google-Smtp-Source: ABdhPJxxTwq1g3zyYu0sNX0VhUFWbiIVVm79FmurHTIvdgoyMHnIyYBFOyUKK49zcmI2tggiaNNEYeyJconuw80/LiM=
-X-Received: by 2002:a05:6638:1696:: with SMTP id f22mr6034jat.15.1633120914905; 
- Fri, 01 Oct 2021 13:41:54 -0700 (PDT)
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:content-transfer-encoding
+ :in-reply-to:user-agent;
+ bh=fTwGjqOo2qpFUBnSVDlFyolMyzUY3P07s+PYc+sfnxY=;
+ b=O7/dproDnuMS+ENNlThleMFkY00p7O5TStDb3zLndzNnLMoE0RTstqD2iCDvHDoSHf
+ v7DTGdFIn4b3dJR1NYd6WR+uj+6jEhz4AidEwAnen6V6B3++T08S6dXH0TOynNbSi6vj
+ Tic5klWYrjM95iO/3ABht3JySgYSgdZ0N+x2b59vNs3UpauzFQHty63tTlNkNcRjeEpS
+ mRp7KS6f1ofUfP5oh9QkOXCNm1GFq6rG8oBW2Z6mT6B3xQyV1mqe4jucTyYMzrDq8C7T
+ 6QBeIFELng+63v9wZYz8n8rtk4CUZ04qQSChb9+st7OjVQvQtguOQOAC/QC1OiSo66gf
+ cbMA==
+X-Gm-Message-State: AOAM533RJOEnrwmOqnoZCbfKrYHQ9AXLw8fQXnOxXEJd7CdPxrytnZiX
+ SYaZLgR/1AbZUvgMImF8eFM38A==
+X-Google-Smtp-Source: ABdhPJxa6tbnxCBVxCCTZMZ2tB2zzEWn+wtu5XraFB8rYcu4iq9lSU2A8XqbxRaJTOI7W1N9S6DK7A==
+X-Received: by 2002:a05:622a:1206:: with SMTP id y6mr82618qtx.68.1633121297387; 
+ Fri, 01 Oct 2021 13:48:17 -0700 (PDT)
+Received: from localhost ([167.100.64.199])
+ by smtp.gmail.com with ESMTPSA id d16sm3951352qtw.14.2021.10.01.13.48.16
+ (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
+ Fri, 01 Oct 2021 13:48:17 -0700 (PDT)
+Date: Fri, 1 Oct 2021 16:48:15 -0400
+From: Sean Paul <sean@poorly.run>
+To: Ville =?iso-8859-1?Q?Syrj=E4l=E4?= <ville.syrjala@linux.intel.com>
+Cc: Sean Paul <sean@poorly.run>, Fernando Ramos <greenfoo@u92.eu>,
+ dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ linux-doc@vger.kernel.org, amd-gfx@lists.freedesktop.org,
+ intel-gfx@lists.freedesktop.org, linux-arm-msm@vger.kernel.org,
+ freedreno@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ linux-renesas-soc@vger.kernel.org, linux-tegra@vger.kernel.org
+Message-ID: <20211001204815.GA2515@art_vandelay>
+References: <20210924064324.229457-1-greenfoo@u92.eu>
+ <20211001183655.GW2515@art_vandelay> <YVda4jNSGuQf50JV@intel.com>
 MIME-Version: 1.0
-References: <CABr8-B5YD4YGgcVfuqNGQumBSpuz8tFA0hEUJWZnHps6ZOKpMA@mail.gmail.com>
- <CAKb7UvgXTkCTQhvK7A_98kfjicBxfJyH0nC_ya5y1wqYxFCfJw@mail.gmail.com>
- <CABr8-B6iZZia65A+=-yZnnU9rB4VwgDbXA+neEZ-V=YJgXQ5-w@mail.gmail.com>
- <CAKb7UvghfxFBahsG5L-i-=u0LvFkW=oA3wckFzBBNV4N7Jx0UQ@mail.gmail.com>
- <CABr8-B7HauHQcwx5ymMqk_R6+MAEemo_-gaag+5NCmtS_O=Ejw@mail.gmail.com>
- <CAKb7Uvi1VRD0H-ZSJ=NrhV2y1rAk3-hsPE60Am_eE0Z2YnZj4Q@mail.gmail.com>
- <CABr8-B4V+UpMD5+kKFuZNxqYXTNkEV5yL3m20HGSAz73zWMCzA@mail.gmail.com>
- <CAKb7Uvh6ieqB3fCppR3z8gvVM2xp_0EvbQbXPueoeAXkH1_LAw@mail.gmail.com>
- <CABr8-B5cakVP_VLHFv4ORxZynddEskrHjbhXGAsVbFRsBkDuVg@mail.gmail.com>
- <CABr8-B6BfU--4WOXP3z80MpkN6rFsUpMTYN_y7yatYSA6RGvzw@mail.gmail.com>
- <CAKb7UvgaOi9Le9F2hv3d2xjSrxenatUWMobKjjfb_UfGuPRbtA@mail.gmail.com>
- <CABr8-B4zOQU1KYatZre7yZ9tkFOAffZj=DLKbvZe5om9uQ6ssA@mail.gmail.com>
- <CAKb7Uvi7V+cSOTWvRGyE6BhZpbShVDV+H1+nenJ0osTM-m+1Aw@mail.gmail.com>
- <CABr8-B4pDnBDM92WCWEbfjnyXaDsGr9hg8Z2ENcxDdskHP54PA@mail.gmail.com>
-In-Reply-To: <CABr8-B4pDnBDM92WCWEbfjnyXaDsGr9hg8Z2ENcxDdskHP54PA@mail.gmail.com>
-From: Ilia Mirkin <imirkin@alum.mit.edu>
-Date: Fri, 1 Oct 2021 16:41:44 -0400
-Message-ID: <CAKb7UvgpM2o71wWfjOt8hobFd1ovC_4JX3_TgT87WBj7H40LTw@mail.gmail.com>
-To: Jerry Geis <jerry.geis@gmail.com>
-Cc: nouveau <nouveau@lists.freedesktop.org>
-Content-Type: text/plain; charset="UTF-8"
-Subject: Re: [Nouveau] Nouveau on Ubuntu 20.04 LTS
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <YVda4jNSGuQf50JV@intel.com>
+User-Agent: Mutt/1.9.4 (2018-02-28)
+Subject: Re: [Nouveau] [PATCH v2 00/17] drm: cleanup: Use
+ DRM_MODESET_LOCK_ALL_* helpers where possible
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,18 +80,79 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, Oct 1, 2021 at 4:29 PM Jerry Geis <jerry.geis@gmail.com> wrote:
-> yes very weird on the sound. Using analog speakers at the moment
-> I got no test sound - and no video sound after getting nouveau to run correctly ????
-> I was playing analog audio before ?
-> Does nouveau only do HDMI audio ?
+On Fri, Oct 01, 2021 at 10:00:50PM +0300, Ville Syrjälä wrote:
+> On Fri, Oct 01, 2021 at 02:36:55PM -0400, Sean Paul wrote:
+> > On Fri, Sep 24, 2021 at 08:43:07AM +0200, Fernando Ramos wrote:
+> > > Hi all,
+> > > 
+> > > One of the things in the DRM TODO list ("Documentation/gpu/todo.rst") was to
+> > > "use DRM_MODESET_LOCAL_ALL_* helpers instead of boilerplate". That's what this
+> > > patch series is about.
+> > > 
+> > > You will find two types of changes here:
+> > > 
+> > >   - Replacing "drm_modeset_lock_all_ctx()" (and surrounding boilerplate) with
+> > >     "DRM_MODESET_LOCK_ALL_BEGIN()/END()" in the remaining places (as it has
+> > >     already been done in previous commits such as b7ea04d2)
+> > > 
+> > >   - Replacing "drm_modeset_lock_all()" with "DRM_MODESET_LOCK_ALL_BEGIN()/END()"
+> > >     in the remaining places (as it has already been done in previous commits
+> > >     such as 57037094)
+> > >     
+> > > Most of the changes are straight forward, except for a few cases in the "amd"
+> > > and "i915" drivers where some extra dancing was needed to overcome the
+> > > limitation that the DRM_MODESET_LOCK_ALL_BEGIN()/END() macros can only be used
+> > > once inside the same function (the reason being that the macro expansion
+> > > includes *labels*, and you can not have two labels named the same inside one
+> > > function)
+> > > 
+> > > Notice that, even after this patch series, some places remain where
+> > > "drm_modeset_lock_all()" and "drm_modeset_lock_all_ctx()" are still present,
+> > > all inside drm core (which makes sense), except for two (in "amd" and "i915")
+> > > which cannot be replaced due to the way they are being used.
+> > > 
+> > > Changes in v2:
+> > > 
+> > >   - Fix commit message typo
+> > >   - Use the value returned by DRM_MODESET_LOCK_ALL_END when possible
+> > >   - Split drm/i915 patch into two simpler ones
+> > >   - Remove drm_modeset_(un)lock_all()
+> > >   - Fix build problems in non-x86 platforms
+> > > 
+> > > Fernando Ramos (17):
+> > >   drm: cleanup: drm_modeset_lock_all_ctx() --> DRM_MODESET_LOCK_ALL_BEGIN()
+> > >   drm/i915: cleanup: drm_modeset_lock_all_ctx() --> DRM_MODESET_LOCK_ALL_BEGIN()
+> > >   drm/msm: cleanup: drm_modeset_lock_all_ctx() --> DRM_MODESET_LOCK_ALL_BEGIN()
+> > >   drm: cleanup: drm_modeset_lock_all() --> DRM_MODESET_LOCK_ALL_BEGIN() drm/vmwgfx: cleanup: drm_modeset_lock_all() --> DRM_MODESET_LOCK_ALL_BEGIN()
+> > >   drm/tegra: cleanup: drm_modeset_lock_all() --> DRM_MODESET_LOCK_ALL_BEGIN()
+> > >   drm/shmobile: cleanup: drm_modeset_lock_all() --> DRM_MODESET_LOCK_ALL_BEGIN()
+> > >   drm/radeon: cleanup: drm_modeset_lock_all() --> DRM_MODESET_LOCK_ALL_BEGIN()
+> > >   drm/omapdrm: cleanup: drm_modeset_lock_all() --> DRM_MODESET_LOCK_ALL_BEGIN()
+> > >   drm/nouveau: cleanup: drm_modeset_lock_all() --> DRM_MODESET_LOCK_ALL_BEGIN()
+> > >   drm/msm: cleanup: drm_modeset_lock_all() --> DRM_MODESET_LOCK_ALL_BEGIN()
+> > >   drm/i915: cleanup: drm_modeset_lock_all() --> DRM_MODESET_LOCK_ALL_BEGIN()
+> > >   drm/i915: cleanup: drm_modeset_lock_all() --> DRM_MODESET_LOCK_ALL_BEGIN() part 2
+> > >   drm/gma500: cleanup: drm_modeset_lock_all() --> DRM_MODESET_LOCK_ALL_BEGIN()
+> > >   drm/amd: cleanup: drm_modeset_lock_all() --> DRM_MODESET_LOCK_ALL_BEGIN()
+> > >   drm: cleanup: remove drm_modeset_(un)lock_all()
+> > >   doc: drm: remove TODO entry regarding DRM_MODSET_LOCK_ALL cleanup
+> > > 
+> > 
+> > Thank you for revising, Fernando! I've pushed the set to drm-misc-next (along
+> > with the necessary drm-tip conflict resolutions).
+> 
+> Ugh. Did anyone actually review the locking changes this does?
+> I shot the previous i915 stuff down because the commit messages
+> did not address any of it.
 
-nouveau only does HDMI(/DP) audio. A different driver will handle a
-built-in sound card (e.g. snd_hda_intel). You might want to reach out
-to your distro's support channels to better diagnose what's going on.
-Unlikely to have anything to do with nouveau. More likely that you had
-added "acpi=off" to hack around this. Or perhaps pci=nomsi for a
-broken audio adapter? Don't know. dmesg (not to mention google) will
-have the answers.
+I reviewed the set on 9/17, I didn't see your feedback on that thread.
 
-  -ilia
+Sean
+
+> 
+> -- 
+> Ville Syrjälä
+> Intel
+
+-- 
+Sean Paul, Software Engineer, Google / Chromium OS
