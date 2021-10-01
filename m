@@ -1,58 +1,48 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 713BA41F549
-	for <lists+nouveau@lfdr.de>; Fri,  1 Oct 2021 21:00:16 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 56F7241F55A
+	for <lists+nouveau@lfdr.de>; Fri,  1 Oct 2021 21:01:33 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B69656EF2E;
-	Fri,  1 Oct 2021 19:00:12 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 2F9DD6EF2E;
+	Fri,  1 Oct 2021 19:01:31 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-qt1-x833.google.com (mail-qt1-x833.google.com
- [IPv6:2607:f8b0:4864:20::833])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 59C4B6EEC1
- for <nouveau@lists.freedesktop.org>; Fri,  1 Oct 2021 19:00:11 +0000 (UTC)
-Received: by mail-qt1-x833.google.com with SMTP id b16so9936915qtt.7
- for <nouveau@lists.freedesktop.org>; Fri, 01 Oct 2021 12:00:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=Q/e+J6Fh4t7WeaOGZgEzOztqLztI/ZjW3gAAjPm/HkQ=;
- b=YmP2VULdSunC23N+CuDG8QKx0qRnAw801qatmmGUVO//kosQedkEsnoXQKeljrtul8
- 0Yq3d9Mx1PXtXDr4vcsm+pKvvUAI0NMXKMXxbw9DbMzsZfe95Ih+B9A/POAwzLV2inzc
- t2Rtar3JJitN5wNwY9+CPnkLC8sOPgqHfo4/CfNbfODY/LsH2Cc+qn2F2/Fh+9JlAEx3
- MT8J46sb0L8j7Iyr5fycCvBAj5TctlxNruMoiUI45RlDPMVTMJYFzLOArRikWIAEPaFm
- vC8oryNM9sKx7njJWY7WK1AAUd2rerpuNABGyjXOfHIxGKl8CKyWJXLcv/8bEpl251VC
- DGDw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=Q/e+J6Fh4t7WeaOGZgEzOztqLztI/ZjW3gAAjPm/HkQ=;
- b=UmbHU3+P7iRJ9PyschVQvEdjIMVXjbo0r3pwqkPo7qYw5U2F2RzugRLhGNtEHEuzp+
- eM79t1IVmrND0cexLJKWPKcFW5R25tk8zOzIUQd5Q5s/wAhYQH2FNNmTSU+vc60Pma0i
- bwmCw0TFl9FbecdXjRCWfoOq8B90hm9M6LLcH0wrtAfoFgbQWRy/XsCmcdvmwsmRHgfk
- pw6WLV2xIwxyJN8c0sH3wtr+4g2Nn8Hax3+UUsaVmDPg1qu9TLQqecQ8luEcW0PzOnuv
- Igvw5v3USRRx6YknNrPVyDUfZGg3wFD/QOc3lBnF60S6spyU9kv2UyREuTnV2009UPgZ
- ECrA==
-X-Gm-Message-State: AOAM532gWtboioGbYHUnhpXdFmBIdsDrXaSCnPt6mOGkYBmFCIlgrQcz
- uQdxiOGFxwPxHIBHrKwTGK7DBwUY6aRrMWme3DI=
-X-Google-Smtp-Source: ABdhPJzkhW81yNGjdgKB8cUOBBQ9zIBN2Eshx+gXujEOp4OK8zET/UlSL5ZA+lveiEPZAdlTv0lgqNsSTxPtaFXA9Qc=
-X-Received: by 2002:ac8:56f9:: with SMTP id 25mr15086027qtu.374.1633114810186; 
- Fri, 01 Oct 2021 12:00:10 -0700 (PDT)
+Received: from mga04.intel.com (mga04.intel.com [192.55.52.120])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 605FC6EF2E;
+ Fri,  1 Oct 2021 19:01:30 +0000 (UTC)
+X-IronPort-AV: E=McAfee;i="6200,9189,10124"; a="223640001"
+X-IronPort-AV: E=Sophos;i="5.85,339,1624345200"; d="scan'208";a="223640001"
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+ by fmsmga104.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 01 Oct 2021 12:00:55 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.85,339,1624345200"; d="scan'208";a="619340954"
+Received: from stinkbox.fi.intel.com (HELO stinkbox) ([10.237.72.171])
+ by fmsmga001.fm.intel.com with SMTP; 01 Oct 2021 12:00:51 -0700
+Received: by stinkbox (sSMTP sendmail emulation);
+ Fri, 01 Oct 2021 22:00:50 +0300
+Date: Fri, 1 Oct 2021 22:00:50 +0300
+From: Ville =?iso-8859-1?Q?Syrj=E4l=E4?= <ville.syrjala@linux.intel.com>
+To: Sean Paul <sean@poorly.run>
+Cc: Fernando Ramos <greenfoo@u92.eu>, dri-devel@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+ amd-gfx@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
+ linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org, linux-renesas-soc@vger.kernel.org,
+ linux-tegra@vger.kernel.org
+Message-ID: <YVda4jNSGuQf50JV@intel.com>
+References: <20210924064324.229457-1-greenfoo@u92.eu>
+ <20211001183655.GW2515@art_vandelay>
 MIME-Version: 1.0
-References: <CABr8-B5YD4YGgcVfuqNGQumBSpuz8tFA0hEUJWZnHps6ZOKpMA@mail.gmail.com>
- <CAKb7UvgXTkCTQhvK7A_98kfjicBxfJyH0nC_ya5y1wqYxFCfJw@mail.gmail.com>
- <CABr8-B6iZZia65A+=-yZnnU9rB4VwgDbXA+neEZ-V=YJgXQ5-w@mail.gmail.com>
- <CAKb7UvghfxFBahsG5L-i-=u0LvFkW=oA3wckFzBBNV4N7Jx0UQ@mail.gmail.com>
-In-Reply-To: <CAKb7UvghfxFBahsG5L-i-=u0LvFkW=oA3wckFzBBNV4N7Jx0UQ@mail.gmail.com>
-From: Jerry Geis <jerry.geis@gmail.com>
-Date: Fri, 1 Oct 2021 14:59:58 -0400
-Message-ID: <CABr8-B7HauHQcwx5ymMqk_R6+MAEemo_-gaag+5NCmtS_O=Ejw@mail.gmail.com>
-To: Ilia Mirkin <imirkin@alum.mit.edu>
-Cc: nouveau <nouveau@lists.freedesktop.org>
-Content-Type: multipart/alternative; boundary="000000000000237cf205cd4f2c6a"
-Subject: Re: [Nouveau] Nouveau on Ubuntu 20.04 LTS
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20211001183655.GW2515@art_vandelay>
+X-Patchwork-Hint: comment
+Subject: Re: [Nouveau] [PATCH v2 00/17] drm: cleanup: Use
+ DRM_MODESET_LOCK_ALL_* helpers where possible
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,182 +57,70 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
---000000000000237cf205cd4f2c6a
-Content-Type: text/plain; charset="UTF-8"
+On Fri, Oct 01, 2021 at 02:36:55PM -0400, Sean Paul wrote:
+> On Fri, Sep 24, 2021 at 08:43:07AM +0200, Fernando Ramos wrote:
+> > Hi all,
+> > 
+> > One of the things in the DRM TODO list ("Documentation/gpu/todo.rst") was to
+> > "use DRM_MODESET_LOCAL_ALL_* helpers instead of boilerplate". That's what this
+> > patch series is about.
+> > 
+> > You will find two types of changes here:
+> > 
+> >   - Replacing "drm_modeset_lock_all_ctx()" (and surrounding boilerplate) with
+> >     "DRM_MODESET_LOCK_ALL_BEGIN()/END()" in the remaining places (as it has
+> >     already been done in previous commits such as b7ea04d2)
+> > 
+> >   - Replacing "drm_modeset_lock_all()" with "DRM_MODESET_LOCK_ALL_BEGIN()/END()"
+> >     in the remaining places (as it has already been done in previous commits
+> >     such as 57037094)
+> >     
+> > Most of the changes are straight forward, except for a few cases in the "amd"
+> > and "i915" drivers where some extra dancing was needed to overcome the
+> > limitation that the DRM_MODESET_LOCK_ALL_BEGIN()/END() macros can only be used
+> > once inside the same function (the reason being that the macro expansion
+> > includes *labels*, and you can not have two labels named the same inside one
+> > function)
+> > 
+> > Notice that, even after this patch series, some places remain where
+> > "drm_modeset_lock_all()" and "drm_modeset_lock_all_ctx()" are still present,
+> > all inside drm core (which makes sense), except for two (in "amd" and "i915")
+> > which cannot be replaced due to the way they are being used.
+> > 
+> > Changes in v2:
+> > 
+> >   - Fix commit message typo
+> >   - Use the value returned by DRM_MODESET_LOCK_ALL_END when possible
+> >   - Split drm/i915 patch into two simpler ones
+> >   - Remove drm_modeset_(un)lock_all()
+> >   - Fix build problems in non-x86 platforms
+> > 
+> > Fernando Ramos (17):
+> >   drm: cleanup: drm_modeset_lock_all_ctx() --> DRM_MODESET_LOCK_ALL_BEGIN()
+> >   drm/i915: cleanup: drm_modeset_lock_all_ctx() --> DRM_MODESET_LOCK_ALL_BEGIN()
+> >   drm/msm: cleanup: drm_modeset_lock_all_ctx() --> DRM_MODESET_LOCK_ALL_BEGIN()
+> >   drm: cleanup: drm_modeset_lock_all() --> DRM_MODESET_LOCK_ALL_BEGIN() drm/vmwgfx: cleanup: drm_modeset_lock_all() --> DRM_MODESET_LOCK_ALL_BEGIN()
+> >   drm/tegra: cleanup: drm_modeset_lock_all() --> DRM_MODESET_LOCK_ALL_BEGIN()
+> >   drm/shmobile: cleanup: drm_modeset_lock_all() --> DRM_MODESET_LOCK_ALL_BEGIN()
+> >   drm/radeon: cleanup: drm_modeset_lock_all() --> DRM_MODESET_LOCK_ALL_BEGIN()
+> >   drm/omapdrm: cleanup: drm_modeset_lock_all() --> DRM_MODESET_LOCK_ALL_BEGIN()
+> >   drm/nouveau: cleanup: drm_modeset_lock_all() --> DRM_MODESET_LOCK_ALL_BEGIN()
+> >   drm/msm: cleanup: drm_modeset_lock_all() --> DRM_MODESET_LOCK_ALL_BEGIN()
+> >   drm/i915: cleanup: drm_modeset_lock_all() --> DRM_MODESET_LOCK_ALL_BEGIN()
+> >   drm/i915: cleanup: drm_modeset_lock_all() --> DRM_MODESET_LOCK_ALL_BEGIN() part 2
+> >   drm/gma500: cleanup: drm_modeset_lock_all() --> DRM_MODESET_LOCK_ALL_BEGIN()
+> >   drm/amd: cleanup: drm_modeset_lock_all() --> DRM_MODESET_LOCK_ALL_BEGIN()
+> >   drm: cleanup: remove drm_modeset_(un)lock_all()
+> >   doc: drm: remove TODO entry regarding DRM_MODSET_LOCK_ALL cleanup
+> > 
+> 
+> Thank you for revising, Fernando! I've pushed the set to drm-misc-next (along
+> with the necessary drm-tip conflict resolutions).
 
-On Fri, Oct 1, 2021 at 2:44 PM Ilia Mirkin <imirkin@alum.mit.edu> wrote:
+Ugh. Did anyone actually review the locking changes this does?
+I shot the previous i915 stuff down because the commit messages
+did not address any of it.
 
-> On Fri, Oct 1, 2021 at 2:29 PM Jerry Geis <jerry.geis@gmail.com> wrote:
-> > Thanks perhaps this is part of the problem:
-> >  ls -l /sys/kernel/debug/dri/
-> > total 0
->
-> This indicates that nouveau is not loaded. (Or loaded and failed
-> part-way through the load.)
->
-> Cheers,
->
->   -ilia
->
-
-Thanks I have this:
-
- grep nouveau /var/log/syslog
-Oct  1 09:48:41 mediaport57 /usr/lib/gdm3/gdm-x-session[1423]: (==) Matched
-nouveau as autoconfigured driver 0
-Oct  1 09:48:41 mediaport57 /usr/lib/gdm3/gdm-x-session[1423]: (II)
-LoadModule: "nouveau"
-Oct  1 09:48:41 mediaport57 /usr/lib/gdm3/gdm-x-session[1423]: (II) Loading
-/usr/lib/xorg/modules/drivers/nouveau_drv.so
-Oct  1 09:48:41 mediaport57 /usr/lib/gdm3/gdm-x-session[1423]: (II) Module
-nouveau: vendor="X.Org Foundation"
-Oct  1 09:48:41 mediaport57 /usr/lib/gdm3/gdm-x-session[1423]: (==) Matched
-nouveau as autoconfigured driver 0
-Oct  1 09:48:41 mediaport57 /usr/lib/gdm3/gdm-x-session[1423]: (II)
-LoadModule: "nouveau"
-Oct  1 09:48:41 mediaport57 /usr/lib/gdm3/gdm-x-session[1423]: (II) Loading
-/usr/lib/xorg/modules/drivers/nouveau_drv.so
-Oct  1 09:48:41 mediaport57 /usr/lib/gdm3/gdm-x-session[1423]: (II) Module
-nouveau: vendor="X.Org Foundation"
-Oct  1 09:48:41 mediaport57 /usr/lib/gdm3/gdm-x-session[1423]: (II)
-UnloadModule: "nouveau"
-Oct  1 09:48:41 mediaport57 /usr/lib/gdm3/gdm-x-session[1423]: (II)
-Unloading nouveau
-Oct  1 09:48:41 mediaport57 /usr/lib/gdm3/gdm-x-session[1423]: (II) Failed
-to load module "nouveau" (already loaded, 0)
-
-grep Loading /var/log/syslog
-Oct  1 09:47:47 mediaport57 kernel: [   12.300994] Loading compiled-in
-X.509 certificates
-Oct  1 09:47:47 mediaport57 kernel: [   12.772319] blacklist: Loading
-compiled-in revocation X.509 certificates
-Oct  1 09:47:47 mediaport57 kernel: [   37.869170] cfg80211: Loading
-compiled-in X.509 certificates for regulatory database
-Oct  1 09:47:57 mediaport57 lxd.activate[846]: ==> Loading snap
-configuration
-Oct  1 09:48:41 mediaport57 /usr/lib/gdm3/gdm-x-session[1423]: (II) Loading
-/usr/lib/xorg/modules/extensions/libglx.so
-Oct  1 09:48:41 mediaport57 /usr/lib/gdm3/gdm-x-session[1423]: (II) Loading
-/usr/lib/xorg/modules/drivers/nouveau_drv.so
-Oct  1 09:48:41 mediaport57 /usr/lib/gdm3/gdm-x-session[1423]: (II) Loading
-/usr/lib/xorg/modules/drivers/modesetting_drv.so
-Oct  1 09:48:41 mediaport57 /usr/lib/gdm3/gdm-x-session[1423]: (II) Loading
-/usr/lib/xorg/modules/drivers/vesa_drv.so
-Oct  1 09:48:41 mediaport57 /usr/lib/gdm3/gdm-x-session[1423]: (II) Loading
-/usr/lib/xorg/modules/drivers/nouveau_drv.so
-Oct  1 09:48:41 mediaport57 /usr/lib/gdm3/gdm-x-session[1423]: (II) Loading
-/usr/lib/xorg/modules/drivers/modesetting_drv.so
-Oct  1 09:48:41 mediaport57 /usr/lib/gdm3/gdm-x-session[1423]: (II) Loading
-/usr/lib/xorg/modules/drivers/vesa_drv.so
-Oct  1 09:48:41 mediaport57 /usr/lib/gdm3/gdm-x-session[1423]: (II) Loading
-sub module "vbe"
-Oct  1 09:48:41 mediaport57 /usr/lib/gdm3/gdm-x-session[1423]: (II) Loading
-/usr/lib/xorg/modules/libvbe.so
-Oct  1 09:48:41 mediaport57 /usr/lib/gdm3/gdm-x-session[1423]: (II) Loading
-sub module "int10"
-Oct  1 09:48:41 mediaport57 /usr/lib/gdm3/gdm-x-session[1423]: (II) Loading
-/usr/lib/xorg/modules/libint10.so
-Oct  1 09:48:42 mediaport57 /usr/lib/gdm3/gdm-x-session[1423]: (II) Loading
-sub module "ddc"
-Oct  1 09:48:43 mediaport57 /usr/lib/gdm3/gdm-x-session[1423]: (II) Loading
-sub module "shadow"
-Oct  1 09:48:43 mediaport57 /usr/lib/gdm3/gdm-x-session[1423]: (II) Loading
-/usr/lib/xorg/modules/libshadow.so
-Oct  1 09:48:43 mediaport57 /usr/lib/gdm3/gdm-x-session[1423]: (II) Loading
-sub module "fb"
-Oct  1 09:48:43 mediaport57 /usr/lib/gdm3/gdm-x-session[1423]: (II) Loading
-/usr/lib/xorg/modules/libfb.so
-Oct  1 09:48:43 mediaport57 /usr/lib/gdm3/gdm-x-session[1423]: (II) Loading
-sub module "int10"
-Oct  1 09:48:43 mediaport57 /usr/lib/gdm3/gdm-x-session[1423]: (II) Loading
-/usr/lib/xorg/modules/libint10.so
-Oct  1 09:48:44 mediaport57 /usr/lib/gdm3/gdm-x-session[1423]: (II) Loading
-/usr/lib/xorg/modules/input/libinput_drv.so
-
-lsmod | grep nouveau
-
-What dont I have ?
-
-Jerry
-
---000000000000237cf205cd4f2c6a
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
-<div dir=3D"ltr" class=3D"gmail_attr">On Fri, Oct 1, 2021 at 2:44 PM Ilia M=
-irkin &lt;<a href=3D"mailto:imirkin@alum.mit.edu">imirkin@alum.mit.edu</a>&=
-gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0=
-px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">On Fr=
-i, Oct 1, 2021 at 2:29 PM Jerry Geis &lt;<a href=3D"mailto:jerry.geis@gmail=
-.com" target=3D"_blank">jerry.geis@gmail.com</a>&gt; wrote:<br>
-&gt; Thanks perhaps this is part of the problem:<br>
-&gt;=C2=A0 ls -l /sys/kernel/debug/dri/<br>
-&gt; total 0<br>
-<br>
-This indicates that nouveau is not loaded. (Or loaded and failed<br>
-part-way through the load.)<br>
-<br>
-Cheers,<br>
-<br>
-=C2=A0 -ilia<br></blockquote><div><br></div><div>Thanks I have this:</div><=
-div><br></div>=C2=A0grep nouveau /var/log/syslog<br>Oct =C2=A01 09:48:41 me=
-diaport57 /usr/lib/gdm3/gdm-x-session[1423]: (=3D=3D) Matched nouveau as au=
-toconfigured driver 0<br>Oct =C2=A01 09:48:41 mediaport57 /usr/lib/gdm3/gdm=
--x-session[1423]: (II) LoadModule: &quot;nouveau&quot;<br>Oct =C2=A01 09:48=
-:41 mediaport57 /usr/lib/gdm3/gdm-x-session[1423]: (II) Loading /usr/lib/xo=
-rg/modules/drivers/nouveau_drv.so<br>Oct =C2=A01 09:48:41 mediaport57 /usr/=
-lib/gdm3/gdm-x-session[1423]: (II) Module nouveau: vendor=3D&quot;X.Org Fou=
-ndation&quot;<br>Oct =C2=A01 09:48:41 mediaport57 /usr/lib/gdm3/gdm-x-sessi=
-on[1423]: (=3D=3D) Matched nouveau as autoconfigured driver 0<br>Oct =C2=A0=
-1 09:48:41 mediaport57 /usr/lib/gdm3/gdm-x-session[1423]: (II) LoadModule: =
-&quot;nouveau&quot;<br>Oct =C2=A01 09:48:41 mediaport57 /usr/lib/gdm3/gdm-x=
--session[1423]: (II) Loading /usr/lib/xorg/modules/drivers/nouveau_drv.so<b=
-r>Oct =C2=A01 09:48:41 mediaport57 /usr/lib/gdm3/gdm-x-session[1423]: (II) =
-Module nouveau: vendor=3D&quot;X.Org Foundation&quot;<br>Oct =C2=A01 09:48:=
-41 mediaport57 /usr/lib/gdm3/gdm-x-session[1423]: (II) UnloadModule: &quot;=
-nouveau&quot;<br>Oct =C2=A01 09:48:41 mediaport57 /usr/lib/gdm3/gdm-x-sessi=
-on[1423]: (II) Unloading nouveau<br>Oct =C2=A01 09:48:41 mediaport57 /usr/l=
-ib/gdm3/gdm-x-session[1423]: (II) Failed to load module &quot;nouveau&quot;=
- (already loaded, 0)<br><div><br></div><div>grep Loading /var/log/syslog<br=
->Oct =C2=A01 09:47:47 mediaport57 kernel: [ =C2=A0 12.300994] Loading compi=
-led-in X.509 certificates<br>Oct =C2=A01 09:47:47 mediaport57 kernel: [ =C2=
-=A0 12.772319] blacklist: Loading compiled-in revocation X.509 certificates=
-<br>Oct =C2=A01 09:47:47 mediaport57 kernel: [ =C2=A0 37.869170] cfg80211: =
-Loading compiled-in X.509 certificates for regulatory database<br>Oct =C2=
-=A01 09:47:57 mediaport57 lxd.activate[846]: =3D=3D&gt; Loading snap config=
-uration<br>Oct =C2=A01 09:48:41 mediaport57 /usr/lib/gdm3/gdm-x-session[142=
-3]: (II) Loading /usr/lib/xorg/modules/extensions/libglx.so<br>Oct =C2=A01 =
-09:48:41 mediaport57 /usr/lib/gdm3/gdm-x-session[1423]: (II) Loading /usr/l=
-ib/xorg/modules/drivers/nouveau_drv.so<br>Oct =C2=A01 09:48:41 mediaport57 =
-/usr/lib/gdm3/gdm-x-session[1423]: (II) Loading /usr/lib/xorg/modules/drive=
-rs/modesetting_drv.so<br>Oct =C2=A01 09:48:41 mediaport57 /usr/lib/gdm3/gdm=
--x-session[1423]: (II) Loading /usr/lib/xorg/modules/drivers/vesa_drv.so<br=
->Oct =C2=A01 09:48:41 mediaport57 /usr/lib/gdm3/gdm-x-session[1423]: (II) L=
-oading /usr/lib/xorg/modules/drivers/nouveau_drv.so<br>Oct =C2=A01 09:48:41=
- mediaport57 /usr/lib/gdm3/gdm-x-session[1423]: (II) Loading /usr/lib/xorg/=
-modules/drivers/modesetting_drv.so<br>Oct =C2=A01 09:48:41 mediaport57 /usr=
-/lib/gdm3/gdm-x-session[1423]: (II) Loading /usr/lib/xorg/modules/drivers/v=
-esa_drv.so<br>Oct =C2=A01 09:48:41 mediaport57 /usr/lib/gdm3/gdm-x-session[=
-1423]: (II) Loading sub module &quot;vbe&quot;<br>Oct =C2=A01 09:48:41 medi=
-aport57 /usr/lib/gdm3/gdm-x-session[1423]: (II) Loading /usr/lib/xorg/modul=
-es/libvbe.so<br>Oct =C2=A01 09:48:41 mediaport57 /usr/lib/gdm3/gdm-x-sessio=
-n[1423]: (II) Loading sub module &quot;int10&quot;<br>Oct =C2=A01 09:48:41 =
-mediaport57 /usr/lib/gdm3/gdm-x-session[1423]: (II) Loading /usr/lib/xorg/m=
-odules/libint10.so<br>Oct =C2=A01 09:48:42 mediaport57 /usr/lib/gdm3/gdm-x-=
-session[1423]: (II) Loading sub module &quot;ddc&quot;<br>Oct =C2=A01 09:48=
-:43 mediaport57 /usr/lib/gdm3/gdm-x-session[1423]: (II) Loading sub module =
-&quot;shadow&quot;<br>Oct =C2=A01 09:48:43 mediaport57 /usr/lib/gdm3/gdm-x-=
-session[1423]: (II) Loading /usr/lib/xorg/modules/libshadow.so<br>Oct =C2=
-=A01 09:48:43 mediaport57 /usr/lib/gdm3/gdm-x-session[1423]: (II) Loading s=
-ub module &quot;fb&quot;<br>Oct =C2=A01 09:48:43 mediaport57 /usr/lib/gdm3/=
-gdm-x-session[1423]: (II) Loading /usr/lib/xorg/modules/libfb.so<br>Oct =C2=
-=A01 09:48:43 mediaport57 /usr/lib/gdm3/gdm-x-session[1423]: (II) Loading s=
-ub module &quot;int10&quot;<br>Oct =C2=A01 09:48:43 mediaport57 /usr/lib/gd=
-m3/gdm-x-session[1423]: (II) Loading /usr/lib/xorg/modules/libint10.so<br>O=
-ct =C2=A01 09:48:44 mediaport57 /usr/lib/gdm3/gdm-x-session[1423]: (II) Loa=
-ding /usr/lib/xorg/modules/input/libinput_drv.so<br></div><div><br></div><d=
-iv>lsmod | grep nouveau<br></div><div><br></div><div>What dont=C2=A0I have =
-?=C2=A0</div><div><br></div><div>Jerry=C2=A0</div></div></div>
-
---000000000000237cf205cd4f2c6a--
+-- 
+Ville Syrjälä
+Intel
