@@ -1,48 +1,51 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 56F7241F55A
-	for <lists+nouveau@lfdr.de>; Fri,  1 Oct 2021 21:01:33 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 874C641F573
+	for <lists+nouveau@lfdr.de>; Fri,  1 Oct 2021 21:06:08 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2F9DD6EF2E;
-	Fri,  1 Oct 2021 19:01:31 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A59656F3A8;
+	Fri,  1 Oct 2021 19:06:06 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mga04.intel.com (mga04.intel.com [192.55.52.120])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 605FC6EF2E;
- Fri,  1 Oct 2021 19:01:30 +0000 (UTC)
-X-IronPort-AV: E=McAfee;i="6200,9189,10124"; a="223640001"
-X-IronPort-AV: E=Sophos;i="5.85,339,1624345200"; d="scan'208";a="223640001"
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
- by fmsmga104.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 01 Oct 2021 12:00:55 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.85,339,1624345200"; d="scan'208";a="619340954"
-Received: from stinkbox.fi.intel.com (HELO stinkbox) ([10.237.72.171])
- by fmsmga001.fm.intel.com with SMTP; 01 Oct 2021 12:00:51 -0700
-Received: by stinkbox (sSMTP sendmail emulation);
- Fri, 01 Oct 2021 22:00:50 +0300
-Date: Fri, 1 Oct 2021 22:00:50 +0300
-From: Ville =?iso-8859-1?Q?Syrj=E4l=E4?= <ville.syrjala@linux.intel.com>
-To: Sean Paul <sean@poorly.run>
-Cc: Fernando Ramos <greenfoo@u92.eu>, dri-devel@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
- amd-gfx@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
- linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org,
- nouveau@lists.freedesktop.org, linux-renesas-soc@vger.kernel.org,
- linux-tegra@vger.kernel.org
-Message-ID: <YVda4jNSGuQf50JV@intel.com>
-References: <20210924064324.229457-1-greenfoo@u92.eu>
- <20211001183655.GW2515@art_vandelay>
+Received: from mail-il1-f177.google.com (mail-il1-f177.google.com
+ [209.85.166.177])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A2AF66F3D6
+ for <nouveau@lists.freedesktop.org>; Fri,  1 Oct 2021 19:06:04 +0000 (UTC)
+Received: by mail-il1-f177.google.com with SMTP id x2so11644390ilm.2
+ for <nouveau@lists.freedesktop.org>; Fri, 01 Oct 2021 12:06:04 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=K+B5pNiz5A7nxyg/+RyImTGREUs8jhp6dOa8lFB4K9Y=;
+ b=N6mmwELRTd7K3P7JieOxm627HmlsDpn6KI9jJcIChnk7pdiNyT/jCBKNFHKNYRSmd1
+ OQ4EkR2ZSuffJe0vpTC5Htma5DjIG/ugOio95gvABY7KakFnV5ILXrXMDcwQycfjO8G5
+ B22YtJVD5QdS2wvIqAVvxatIYRilSA3VcCQZfBF5mF2dn7Ric6gNAkGCiRX3v5rbXGtd
+ rLkErFDFseL6AGSVMF9Nj8kdfFYvqNyTHdB48Z375O1fYabHbUX85ryy0wLFcOuJIR0c
+ 8whyAnOlHcPXR/KHKiv7v6AIQzaE39UrDdN/G/sCqwsGxzexFKBgVkQJ7t1+zg9dL/1N
+ 2wAQ==
+X-Gm-Message-State: AOAM530BpbFxB1u6bnoXZiP9G+MNQE+Zt/IpccXouWCB0ay1Wn20QGqP
+ xxEQMSN/1bgCMznPInta3fUUwdfxUW/DSmUYlNo=
+X-Google-Smtp-Source: ABdhPJxvXdDG/7csyG4jbCqFvXHkttAt7Oak4IUcuAYBi+PsPAg1yOZ2LEyHe4GEn9Ztxixk/xiJq7JFapg7PkeJTao=
+X-Received: by 2002:a05:6e02:1a63:: with SMTP id
+ w3mr10443360ilv.235.1633115164105; 
+ Fri, 01 Oct 2021 12:06:04 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20211001183655.GW2515@art_vandelay>
-X-Patchwork-Hint: comment
-Subject: Re: [Nouveau] [PATCH v2 00/17] drm: cleanup: Use
- DRM_MODESET_LOCK_ALL_* helpers where possible
+References: <CABr8-B5YD4YGgcVfuqNGQumBSpuz8tFA0hEUJWZnHps6ZOKpMA@mail.gmail.com>
+ <CAKb7UvgXTkCTQhvK7A_98kfjicBxfJyH0nC_ya5y1wqYxFCfJw@mail.gmail.com>
+ <CABr8-B6iZZia65A+=-yZnnU9rB4VwgDbXA+neEZ-V=YJgXQ5-w@mail.gmail.com>
+ <CAKb7UvghfxFBahsG5L-i-=u0LvFkW=oA3wckFzBBNV4N7Jx0UQ@mail.gmail.com>
+ <CABr8-B7HauHQcwx5ymMqk_R6+MAEemo_-gaag+5NCmtS_O=Ejw@mail.gmail.com>
+In-Reply-To: <CABr8-B7HauHQcwx5ymMqk_R6+MAEemo_-gaag+5NCmtS_O=Ejw@mail.gmail.com>
+From: Ilia Mirkin <imirkin@alum.mit.edu>
+Date: Fri, 1 Oct 2021 15:05:53 -0400
+Message-ID: <CAKb7Uvi1VRD0H-ZSJ=NrhV2y1rAk3-hsPE60Am_eE0Z2YnZj4Q@mail.gmail.com>
+To: Jerry Geis <jerry.geis@gmail.com>
+Cc: nouveau <nouveau@lists.freedesktop.org>
+Content-Type: text/plain; charset="UTF-8"
+Subject: Re: [Nouveau] Nouveau on Ubuntu 20.04 LTS
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,70 +60,17 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, Oct 01, 2021 at 02:36:55PM -0400, Sean Paul wrote:
-> On Fri, Sep 24, 2021 at 08:43:07AM +0200, Fernando Ramos wrote:
-> > Hi all,
-> > 
-> > One of the things in the DRM TODO list ("Documentation/gpu/todo.rst") was to
-> > "use DRM_MODESET_LOCAL_ALL_* helpers instead of boilerplate". That's what this
-> > patch series is about.
-> > 
-> > You will find two types of changes here:
-> > 
-> >   - Replacing "drm_modeset_lock_all_ctx()" (and surrounding boilerplate) with
-> >     "DRM_MODESET_LOCK_ALL_BEGIN()/END()" in the remaining places (as it has
-> >     already been done in previous commits such as b7ea04d2)
-> > 
-> >   - Replacing "drm_modeset_lock_all()" with "DRM_MODESET_LOCK_ALL_BEGIN()/END()"
-> >     in the remaining places (as it has already been done in previous commits
-> >     such as 57037094)
-> >     
-> > Most of the changes are straight forward, except for a few cases in the "amd"
-> > and "i915" drivers where some extra dancing was needed to overcome the
-> > limitation that the DRM_MODESET_LOCK_ALL_BEGIN()/END() macros can only be used
-> > once inside the same function (the reason being that the macro expansion
-> > includes *labels*, and you can not have two labels named the same inside one
-> > function)
-> > 
-> > Notice that, even after this patch series, some places remain where
-> > "drm_modeset_lock_all()" and "drm_modeset_lock_all_ctx()" are still present,
-> > all inside drm core (which makes sense), except for two (in "amd" and "i915")
-> > which cannot be replaced due to the way they are being used.
-> > 
-> > Changes in v2:
-> > 
-> >   - Fix commit message typo
-> >   - Use the value returned by DRM_MODESET_LOCK_ALL_END when possible
-> >   - Split drm/i915 patch into two simpler ones
-> >   - Remove drm_modeset_(un)lock_all()
-> >   - Fix build problems in non-x86 platforms
-> > 
-> > Fernando Ramos (17):
-> >   drm: cleanup: drm_modeset_lock_all_ctx() --> DRM_MODESET_LOCK_ALL_BEGIN()
-> >   drm/i915: cleanup: drm_modeset_lock_all_ctx() --> DRM_MODESET_LOCK_ALL_BEGIN()
-> >   drm/msm: cleanup: drm_modeset_lock_all_ctx() --> DRM_MODESET_LOCK_ALL_BEGIN()
-> >   drm: cleanup: drm_modeset_lock_all() --> DRM_MODESET_LOCK_ALL_BEGIN() drm/vmwgfx: cleanup: drm_modeset_lock_all() --> DRM_MODESET_LOCK_ALL_BEGIN()
-> >   drm/tegra: cleanup: drm_modeset_lock_all() --> DRM_MODESET_LOCK_ALL_BEGIN()
-> >   drm/shmobile: cleanup: drm_modeset_lock_all() --> DRM_MODESET_LOCK_ALL_BEGIN()
-> >   drm/radeon: cleanup: drm_modeset_lock_all() --> DRM_MODESET_LOCK_ALL_BEGIN()
-> >   drm/omapdrm: cleanup: drm_modeset_lock_all() --> DRM_MODESET_LOCK_ALL_BEGIN()
-> >   drm/nouveau: cleanup: drm_modeset_lock_all() --> DRM_MODESET_LOCK_ALL_BEGIN()
-> >   drm/msm: cleanup: drm_modeset_lock_all() --> DRM_MODESET_LOCK_ALL_BEGIN()
-> >   drm/i915: cleanup: drm_modeset_lock_all() --> DRM_MODESET_LOCK_ALL_BEGIN()
-> >   drm/i915: cleanup: drm_modeset_lock_all() --> DRM_MODESET_LOCK_ALL_BEGIN() part 2
-> >   drm/gma500: cleanup: drm_modeset_lock_all() --> DRM_MODESET_LOCK_ALL_BEGIN()
-> >   drm/amd: cleanup: drm_modeset_lock_all() --> DRM_MODESET_LOCK_ALL_BEGIN()
-> >   drm: cleanup: remove drm_modeset_(un)lock_all()
-> >   doc: drm: remove TODO entry regarding DRM_MODSET_LOCK_ALL cleanup
-> > 
-> 
-> Thank you for revising, Fernando! I've pushed the set to drm-misc-next (along
-> with the necessary drm-tip conflict resolutions).
+On Fri, Oct 1, 2021 at 3:00 PM Jerry Geis <jerry.geis@gmail.com> wrote:
+> lsmod | grep nouveau
+>
+> What dont I have ?
 
-Ugh. Did anyone actually review the locking changes this does?
-I shot the previous i915 stuff down because the commit messages
-did not address any of it.
+nouveau :)
 
--- 
-Ville Syrjälä
-Intel
+Other than that, you got everything...
+
+Check dmesg for errors.
+
+Cheers,
+
+  -ilia
