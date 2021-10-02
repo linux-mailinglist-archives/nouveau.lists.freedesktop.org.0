@@ -2,63 +2,63 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5B4474203CC
-	for <lists+nouveau@lfdr.de>; Sun,  3 Oct 2021 21:51:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 773B64203CB
+	for <lists+nouveau@lfdr.de>; Sun,  3 Oct 2021 21:51:17 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 7B2A26E87B;
+	by gabe.freedesktop.org (Postfix) with ESMTP id 238C96E876;
 	Sun,  3 Oct 2021 19:51:13 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from new2-smtp.messagingengine.com (new2-smtp.messagingengine.com
- [66.111.4.224])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 37E566F4A2;
- Sat,  2 Oct 2021 07:13:34 +0000 (UTC)
-Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
- by mailnew.nyi.internal (Postfix) with ESMTP id EFE27581013;
- Sat,  2 Oct 2021 03:13:30 -0400 (EDT)
+Received: from new3-smtp.messagingengine.com (new3-smtp.messagingengine.com
+ [66.111.4.229])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id CB0D56F501;
+ Sat,  2 Oct 2021 17:28:10 +0000 (UTC)
+Received: from compute6.internal (compute6.nyi.internal [10.202.2.46])
+ by mailnew.nyi.internal (Postfix) with ESMTP id 647E45804E9;
+ Sat,  2 Oct 2021 13:28:08 -0400 (EDT)
 Received: from mailfrontend1 ([10.202.2.162])
- by compute4.internal (MEProxy); Sat, 02 Oct 2021 03:13:30 -0400
+ by compute6.internal (MEProxy); Sat, 02 Oct 2021 13:28:08 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=u92.eu; h=date
  :from:to:cc:subject:message-id:references:mime-version
- :content-type:content-transfer-encoding:in-reply-to; s=fm3; bh=h
- kdwWmElPEdAAxaQYiaUG9iDPW9L8k80trrD6uyRPLo=; b=b+qy2lC7OANZhdcFY
- lTuHru7sN/+DtcqTrF4SpXic1GmtM7cUT2qmnPzpzBoOwlJLK+z7eh8TFrUFqSQD
- TQ8jkhtPZqfnj2vBf+fDgE4RoYWo8WlREzgRC0Kgkb5u5KRBrrNW9I+jLw68qq5K
- nR1QEz/T3vXeMOnlNj/Kte72tUeYYrYxUq90NqOZhz8H/aQau8o3YqPwNJNR9p51
- IjEDlpgp6u3tl97X5eFyj1ScaFTQnCPDxidv6nerNdEjj30tannDQtOgGzaF9LP9
- ywzRJBQ3oe9A57JmpNxlJeehLxTyoJAGbhhjUtwcTPnRaupVb4E9JI7Bx0avudQu
- wU7Zw==
+ :content-type:content-transfer-encoding:in-reply-to; s=fm3; bh=N
+ dG2AiDGU0yyjfZEfSHSA1eX2my+Y7Dhy95tEwsxOEE=; b=EHf38XIxyX3AijX2q
+ ngopIdoNyr1T5LjiY1RSy1XuPrV8q1XjL/4tLTYscB1g0B6chFWCuxlMe9QImHiV
+ kUpLrMS9xdGbUshDw+eXNLhDLdgo8zVWBjqftwU0nnAVlbE+KFdfEpgLiDq38IZ4
+ AXamJNqMxQXQUKYBEugY/tcVm7z5aaZeWfLZgKrJsiQgRlW4aMI9ca3HhZF090fF
+ TY/u7r/lXgDW9S5blz3NC7PUxKj/TR7c8R646Q4AK7Nu9uCUNIXZXuEROSZtl92o
+ GYGRgcLS1zLTnpzVv/HMzNgUtzsoU8rYdAmiUHJVjxtvP/c6HfwAnyamZYrldcuB
+ 93tzw==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:content-transfer-encoding:content-type
  :date:from:in-reply-to:message-id:mime-version:references
  :subject:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
- :x-sasl-enc; s=fm1; bh=hkdwWmElPEdAAxaQYiaUG9iDPW9L8k80trrD6uyRP
- Lo=; b=D/XRLalTmeWLNXMgGrYTT36Ur+ARcjhRea20l1zZycriBriaimr4jYDvH
- Y/163WSY2WWorF7d3pv3hpERLm6NZDJlTk//5jLEVXcIMWmMoPJNQxbhgBi1BWBn
- Cya7cwjtn+FBF1NZP0fA4N1ZLelGM6CeBzY0yS2wBDAcnYs2k7uqp2sBcpzNWjb6
- i2zLNiZLVqztUinKNFfAh4HmJdPap30w+S9jG7OBxVgGj0AGGzwot5oYlTBmBwa3
- wt4cnG/tw8mgyWw7yKANX9GzEEYCNUrYCiZAngxSNFSdx9IvgQwTnhE894+IssxT
- TFpzih5gWDYejAq9jm76uBihYwVjQ==
-X-ME-Sender: <xms:mQZYYR7VpWIekz5jKw9rfJZPtY7gObW-Ps2HK3WAeJ6thHYPvyedzQ>
- <xme:mQZYYe7NssF99qddped0Oz3y0xvsSlXqyEN9IInl1E0lXOHMmNnU3P09OPy6-VZVV
- Kq6QxkN1Uw7cqd15Q>
-X-ME-Received: <xmr:mQZYYYfa7VDv6N19FC4M0Vettj4NdhNIg1PrJFkZXVaEfhz91yBv0dzwZCvP5KfF1YQRSpIl>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvtddrudekjedgudduhecutefuodetggdotefrod
+ :x-sasl-enc; s=fm1; bh=NdG2AiDGU0yyjfZEfSHSA1eX2my+Y7Dhy95tEwsxO
+ EE=; b=RrpcoIklxRRr1rba6cZd76mHODb8D+vtPu79QI+bAxxAMeXKLCDgaupqC
+ JBUzgot1VDDL+3oxEW+xFShKnLUv8F/9i97SMqx++QNxoq3x/LVndAw7I3HX3kdJ
+ /pJ7/W1ykkpDt+vPELlhrLDli4MI+GxLfSzApQw9pc2geW6yCJYw2aH9HHHcrcva
+ uSwZzMvBtjl2+H0v6OiyBRIYP9LmVlltLFMa267Jd579CWYYxFkJfi1BpSL9PqFK
+ aQfe+VLf7jqJ3oShgh3viO7+9jjJLuPfbRhF0qyGiIjt8ilL+WrvObsImLgTXnTr
+ M+oDUovLY3IvonoBXHDIz77IcXOLQ==
+X-ME-Sender: <xms:p5ZYYc6C5hKN4W1y5JtKH-pQV-GWgNVKCNp0gst7MYkbAFgbXncIXw>
+ <xme:p5ZYYd7hiKdkyl5vWoA78zGA5phD8s6tDgUtMlZBjWCMf5CXr0BN4kv6re3BEBXS4
+ dWP_07Ww8KH8SCIOw>
+X-ME-Received: <xmr:p5ZYYbf3PQTUIfpmiTMquywnIKLHp0OtfyBwiq7Vy2Og_pzRfgRNyWCRptIe86pa3FFNjg6T>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvtddrudekkedgudduvdcutefuodetggdotefrod
  ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
  necuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
  enucfjughrpeffhffvuffkfhggtggugfgjsehtkeertddttdejnecuhfhrohhmpefhvghr
  nhgrnhguohcutfgrmhhoshcuoehgrhgvvghnfhhoohesuhelvddrvghuqeenucggtffrrg
- htthgvrhhnpeffleelfeejkefgfffhvdffjedvteelhefgvdfftdehfefghfdtgeevgfek
- keeuleenucffohhmrghinhepfhhrvggvuggvshhkthhophdrohhrghdptddurdhorhhgne
- cuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepghhrvggv
- nhhfohhosehuledvrdgvuh
-X-ME-Proxy: <xmx:mgZYYaLB8vJT6HmaAyecptRqqdECxDA3-U7v-ucSTdOqaK0yFO0hbA>
- <xmx:mgZYYVLC78TXBxqTVCuTBFhpEgbixvlFTNJh-8rLG1dppSYC7Y77OQ>
- <xmx:mgZYYTwFKgNks0BLJyv6wDGWqMfiEngurGR3Api93phNOr_Ls8Qtcg>
- <xmx:mgZYYSCN8z0NaX2WnaxUXdRraVDUxKHnoPfZ_ydCt_0QpVQB9btRYQ>
+ htthgvrhhnpeeghfffgedufeeuheevtddukedtteeikefgiefhudfhfeffjeetvedtgfff
+ keejudenucffohhmrghinhepfhhrvggvuggvshhkthhophdrohhrghdpmhhuthgvgidrsh
+ honecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepghhr
+ vggvnhhfohhosehuledvrdgvuh
+X-ME-Proxy: <xmx:qJZYYRJPiM7v-h_OyID40YuW8z7zHCbCpFD7_x7o2gIg1-LmMH0EzQ>
+ <xmx:qJZYYQKb7yPr7CSSefp3QHug76AGInQ4EfuSKY6xBTXXI7qCH73gFw>
+ <xmx:qJZYYSxoB7UTJoL9NFfxQdHs61p9oapG08SeOKgWK_YlS0lJB_xsxQ>
+ <xmx:qJZYYdDxWowz3_IF0LiVoWYot8015Y8My-CogxeqM1cnMlDwleOVxA>
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Sat,
- 2 Oct 2021 03:13:26 -0400 (EDT)
-Date: Sat, 2 Oct 2021 09:13:22 +0200
+ 2 Oct 2021 13:28:04 -0400 (EDT)
+Date: Sat, 2 Oct 2021 19:28:02 +0200
 From: Fernando Ramos <greenfoo@u92.eu>
 To: Ville =?utf-8?B?U3lyasOkbMOk?= <ville.syrjala@linux.intel.com>
 Cc: Sean Paul <sean@poorly.run>, dri-devel@lists.freedesktop.org,
@@ -67,16 +67,17 @@ Cc: Sean Paul <sean@poorly.run>, dri-devel@lists.freedesktop.org,
  linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org,
  nouveau@lists.freedesktop.org, linux-renesas-soc@vger.kernel.org,
  linux-tegra@vger.kernel.org
-Message-ID: <YVgGklsHT5fkavDL@zacax395.localdomain>
+Message-ID: <YViWomXZWdy/81uT@zacax395.localdomain>
 References: <20210924064324.229457-1-greenfoo@u92.eu>
  <20211001183655.GW2515@art_vandelay> <YVda4jNSGuQf50JV@intel.com>
  <20211001204815.GA2515@art_vandelay> <YVeGOyLzuhN7zzV7@intel.com>
  <YVfEWaLfYWdhezCa@intel.com>
+ <YVgGklsHT5fkavDL@zacax395.localdomain>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <YVfEWaLfYWdhezCa@intel.com>
+In-Reply-To: <YVgGklsHT5fkavDL@zacax395.localdomain>
 X-Mailman-Approved-At: Sun, 03 Oct 2021 19:51:11 +0000
 Subject: Re: [Nouveau] [Intel-gfx] [PATCH v2 00/17] drm: cleanup: Use
  DRM_MODESET_LOCK_ALL_* helpers where possible
@@ -94,41 +95,105 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 21/10/02 05:30AM, Ville Syrjälä wrote:
-> On Sat, Oct 02, 2021 at 01:05:47AM +0300, Ville Syrjälä wrote:
-> > On Fri, Oct 01, 2021 at 04:48:15PM -0400, Sean Paul wrote:
-> > > On Fri, Oct 01, 2021 at 10:00:50PM +0300, Ville Syrjälä wrote:
-> > > > On Fri, Oct 01, 2021 at 02:36:55PM -0400, Sean Paul wrote:
+On 21/10/02 09:13AM, Fernando Ramos wrote:
+> On 21/10/02 05:30AM, Ville Syrjälä wrote:
+> > On Sat, Oct 02, 2021 at 01:05:47AM +0300, Ville Syrjälä wrote:
+> > > On Fri, Oct 01, 2021 at 04:48:15PM -0400, Sean Paul wrote:
+> > > > On Fri, Oct 01, 2021 at 10:00:50PM +0300, Ville Syrjälä wrote:
+> > > > > On Fri, Oct 01, 2021 at 02:36:55PM -0400, Sean Paul wrote:
+> > > > > > 
+> > > > > > Thank you for revising, Fernando! I've pushed the set to drm-misc-next (along
+> > > > > > with the necessary drm-tip conflict resolutions).
 > > > > > 
-> > > > > Thank you for revising, Fernando! I've pushed the set to drm-misc-next (along
-> > > > > with the necessary drm-tip conflict resolutions).
+> > > > > Ugh. Did anyone actually review the locking changes this does?
+> > > > > I shot the previous i915 stuff down because the commit messages
+> > > > > did not address any of it.
 > > > > 
-> > > > Ugh. Did anyone actually review the locking changes this does?
-> > > > I shot the previous i915 stuff down because the commit messages
-> > > > did not address any of it.
+> > > > I reviewed the set on 9/17, I didn't see your feedback on that thread.
 > > > 
-> > > I reviewed the set on 9/17, I didn't see your feedback on that thread.
-> > 
-> > It was much earlir than that.
-> > https://lists.freedesktop.org/archives/dri-devel/2021-June/313193.html
-> > 
-> > And I think I might have also shot down a similar thing earlier.
-> > 
-> > I was actually half considering sending a patch to nuke that
-> > misleading TODO item. I don't think anything which changes
-> > which locks are taken should be considred a starter level task.
-> > And the commit messages here don't seem to address any of it.
-> 
-> And i915 is now broken :(
-> 
-> https://intel-gfx-ci.01.org/tree/drm-tip/CI_DRM_10680/fi-bwr-2160/boot.html
+> > > It was much earlir than that.
+> > > https://lists.freedesktop.org/archives/dri-devel/2021-June/313193.html
 
-I completely overlooked the side effects of not having a global context anymore.
-Sorry for all the trouble.
+Sorry, I'm new to this and it did not occur to me to search for similar patches
+in the mailing list archives in case there were additional comments that applied
+to my change set.
 
-Sean, could you revert the whole patch series? I'll have a deeper look into the
-patch set and come up with a v3 where all these issues will be addressed.
+In case I had done that I would have found that, as you mentioned, you had
+already raised two issues back in June:
 
-Thanks and sorry once again for the extra overhead this might have caused.
+    On Tue, Jun 29, 2021, Ville Syrjälä wrote:
+    >
+    > That looks wrong. You're using a private ctx here, but still
+    > passing dev->mode_config.acquire_ctx to the lower level stuff.
+    > 
+    > Also DRM_MODESET_LOCK_ALL_{BEGIN,END}() do not seem to be
+    > equivalent to drm_modeset_{lock,unlock}_all() when it comes to 
+    > mode_config.mutex. So would need a proper review whether we
+    > actually need that lock or not.
+
+The first one was pointing out the same error I would later repeat in my patch
+series (ups).
+
+After further inspection of the code it looks to me that changing this:
+
+    intel_modeset_setup_hw_state(dev, dev->mode_config.acquire_ctx);
+
+...into this:
+
+    intel_modeset_setup_hw_state(dev, &ctx);
+
+...would be enough.
+
+Why? The only difference between the old drm_modeset_{lock,unlock}_all()
+functions and the new DRM_MODESET_LOCK_ALL_{BEGIN,END}() macros is that the
+former use a global context stored in dev->mode_config.acquire_ctx while the
+latter depend on a user provided one (typically in the stack).
+
+In the old (working) code the global context structure is freed in
+drm_modeset_unlock_all() thus we are sure no one is holding a reference to it at
+that point. This means that as long as no one accesses the global
+dev->mode_config.acquire_ctx context in the block that runs between lock/BEGIN
+and unlock/END, the code should be equivalent before and after my changes.
+
+In fact, now that my patch series removes the drm_modeset_{lock,unlock}_all()
+functions, the acquire_ctx field of the drm_mode_config structure should be
+deleted:
+
+    /**
+     * @acquire_ctx:
+     *
+     * Global implicit acquire context used by atomic drivers for legacy
+     * IOCTLs. Deprecated, since implicit locking contexts make it
+     * impossible to use driver-private &struct drm_modeset_lock. Users of
+     * this must hold @mutex.
+     */
+    struct drm_modeset_acquire_ctx *acquire_ctx;
+
+If I had done that (ie. removing this field) I would have detected the problem
+when compiling.
+
+There is another place (in the amdgpu driver) where this field is still being
+referenced, but before I investigate that I would like to know if you agree that
+this is a good path to follow.
+
+Regarding the second issue you raised...
+
+    > Also DRM_MODESET_LOCK_ALL_{BEGIN,END}() do not seem to be
+    > equivalent to drm_modeset_{lock,unlock}_all() when it comes to 
+    > mode_config.mutex. So would need a proper review whether we
+    > actually need that lock or not.
+
+...the only difference regarding mode_config.mutex I see is that in the new
+macros the mutex is locked only under this condition:
+
+    if (!drm_drv_uses_atomic_modeset(dev))
+
+...which seems reasonable, right? Is this what you were referring to or is it
+something else?
+
+Please let me know what you think.
+
+Thanks!
+
 
 
