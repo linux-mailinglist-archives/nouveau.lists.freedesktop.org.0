@@ -1,45 +1,49 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id ABDB341F957
-	for <lists+nouveau@lfdr.de>; Sat,  2 Oct 2021 04:24:11 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9077841F96A
+	for <lists+nouveau@lfdr.de>; Sat,  2 Oct 2021 04:31:03 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id D8FFA6F466;
-	Sat,  2 Oct 2021 02:24:01 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4D2A96F46A;
+	Sat,  2 Oct 2021 02:30:57 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 555 seconds by postgrey-1.36 at gabe;
- Wed, 29 Sep 2021 19:45:29 UTC
-Received: from galois.linutronix.de (Galois.linutronix.de [193.142.43.55])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C5A436E217;
- Wed, 29 Sep 2021 19:45:29 +0000 (UTC)
-From: John Ogness <john.ogness@linutronix.de>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020; t=1632944170;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type;
- bh=sSLuRBFlzDo1MDk8K9oDSXuyG2gJ98toV3YqmhcDhug=;
- b=Stg8WZylVaEbGM1n3UX2/Wx5LUrePV+Zkf6u1keyJeA8BLPB8pWH6Y0uvUcaSgsQ4hPglS
- DzI/RVE5EDD7ZvCcVLgX8T7jvc9faHaWZERzTaeT2dgYh24vycCZgk2AnyCfI2PPGrTZIv
- BgdqXU0b+8xbJQiqR1gpXQffabvj1qrlECqduS/CXvp5LW8qYa36VqdX5e1J7DTOPrc11c
- sBsn74qDPUsM4WLNeqW4d/k9o/Gq6AxN3gEuCLMxRcxub5z27qY3s4h4YXWCc8KBd8W++Z
- 2aCQ2+7Lj3b0x1lCV9s3lfwHGIko4eW1DWCf3I6i9edd3e94aH5P+HbZnktqgA==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020e; t=1632944170;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type;
- bh=sSLuRBFlzDo1MDk8K9oDSXuyG2gJ98toV3YqmhcDhug=;
- b=4ZX0DFGEEYRuiDSu9y47IbTvaUUghuyhq8jdw7mO9zzQessRdosX1P/T3O490NMd7IBaTI
- HYV5aSo70LK97bBg==
-To: David Airlie <airlied@linux.ie>, Daniel Vetter <daniel@ffwll.ch>
-Cc: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org
-Date: Wed, 29 Sep 2021 21:42:09 +0206
-Message-ID: <87v92j18eu.fsf@jogness.linutronix.de>
+Received: from mga12.intel.com (mga12.intel.com [192.55.52.136])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C4A776F467;
+ Sat,  2 Oct 2021 02:30:55 +0000 (UTC)
+X-IronPort-AV: E=McAfee;i="6200,9189,10124"; a="205125397"
+X-IronPort-AV: E=Sophos;i="5.85,340,1624345200"; d="scan'208";a="205125397"
+Received: from fmsmga008.fm.intel.com ([10.253.24.58])
+ by fmsmga106.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 01 Oct 2021 19:30:54 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.85,340,1624345200"; d="scan'208";a="521577655"
+Received: from stinkbox.fi.intel.com (HELO stinkbox) ([10.237.72.171])
+ by fmsmga008.fm.intel.com with SMTP; 01 Oct 2021 19:30:49 -0700
+Received: by stinkbox (sSMTP sendmail emulation);
+ Sat, 02 Oct 2021 05:30:49 +0300
+Date: Sat, 2 Oct 2021 05:30:49 +0300
+From: Ville =?iso-8859-1?Q?Syrj=E4l=E4?= <ville.syrjala@linux.intel.com>
+To: Sean Paul <sean@poorly.run>
+Cc: Fernando Ramos <greenfoo@u92.eu>, dri-devel@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+ amd-gfx@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
+ linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org, linux-renesas-soc@vger.kernel.org,
+ linux-tegra@vger.kernel.org
+Message-ID: <YVfEWaLfYWdhezCa@intel.com>
+References: <20210924064324.229457-1-greenfoo@u92.eu>
+ <20211001183655.GW2515@art_vandelay> <YVda4jNSGuQf50JV@intel.com>
+ <20211001204815.GA2515@art_vandelay> <YVeGOyLzuhN7zzV7@intel.com>
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Mailman-Approved-At: Sat, 02 Oct 2021 02:24:00 +0000
-Subject: [Nouveau] kmemleak report: 5.15.0-rc3: nouveau_fence_new
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <YVeGOyLzuhN7zzV7@intel.com>
+X-Patchwork-Hint: comment
+Subject: Re: [Nouveau] [Intel-gfx] [PATCH v2 00/17] drm: cleanup: Use
+ DRM_MODESET_LOCK_ALL_* helpers where possible
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -54,107 +58,89 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hello,
+On Sat, Oct 02, 2021 at 01:05:47AM +0300, Ville Syrjälä wrote:
+> On Fri, Oct 01, 2021 at 04:48:15PM -0400, Sean Paul wrote:
+> > On Fri, Oct 01, 2021 at 10:00:50PM +0300, Ville Syrjälä wrote:
+> > > On Fri, Oct 01, 2021 at 02:36:55PM -0400, Sean Paul wrote:
+> > > > On Fri, Sep 24, 2021 at 08:43:07AM +0200, Fernando Ramos wrote:
+> > > > > Hi all,
+> > > > > 
+> > > > > One of the things in the DRM TODO list ("Documentation/gpu/todo.rst") was to
+> > > > > "use DRM_MODESET_LOCAL_ALL_* helpers instead of boilerplate". That's what this
+> > > > > patch series is about.
+> > > > > 
+> > > > > You will find two types of changes here:
+> > > > > 
+> > > > >   - Replacing "drm_modeset_lock_all_ctx()" (and surrounding boilerplate) with
+> > > > >     "DRM_MODESET_LOCK_ALL_BEGIN()/END()" in the remaining places (as it has
+> > > > >     already been done in previous commits such as b7ea04d2)
+> > > > > 
+> > > > >   - Replacing "drm_modeset_lock_all()" with "DRM_MODESET_LOCK_ALL_BEGIN()/END()"
+> > > > >     in the remaining places (as it has already been done in previous commits
+> > > > >     such as 57037094)
+> > > > >     
+> > > > > Most of the changes are straight forward, except for a few cases in the "amd"
+> > > > > and "i915" drivers where some extra dancing was needed to overcome the
+> > > > > limitation that the DRM_MODESET_LOCK_ALL_BEGIN()/END() macros can only be used
+> > > > > once inside the same function (the reason being that the macro expansion
+> > > > > includes *labels*, and you can not have two labels named the same inside one
+> > > > > function)
+> > > > > 
+> > > > > Notice that, even after this patch series, some places remain where
+> > > > > "drm_modeset_lock_all()" and "drm_modeset_lock_all_ctx()" are still present,
+> > > > > all inside drm core (which makes sense), except for two (in "amd" and "i915")
+> > > > > which cannot be replaced due to the way they are being used.
+> > > > > 
+> > > > > Changes in v2:
+> > > > > 
+> > > > >   - Fix commit message typo
+> > > > >   - Use the value returned by DRM_MODESET_LOCK_ALL_END when possible
+> > > > >   - Split drm/i915 patch into two simpler ones
+> > > > >   - Remove drm_modeset_(un)lock_all()
+> > > > >   - Fix build problems in non-x86 platforms
+> > > > > 
+> > > > > Fernando Ramos (17):
+> > > > >   drm: cleanup: drm_modeset_lock_all_ctx() --> DRM_MODESET_LOCK_ALL_BEGIN()
+> > > > >   drm/i915: cleanup: drm_modeset_lock_all_ctx() --> DRM_MODESET_LOCK_ALL_BEGIN()
+> > > > >   drm/msm: cleanup: drm_modeset_lock_all_ctx() --> DRM_MODESET_LOCK_ALL_BEGIN()
+> > > > >   drm: cleanup: drm_modeset_lock_all() --> DRM_MODESET_LOCK_ALL_BEGIN() drm/vmwgfx: cleanup: drm_modeset_lock_all() --> DRM_MODESET_LOCK_ALL_BEGIN()
+> > > > >   drm/tegra: cleanup: drm_modeset_lock_all() --> DRM_MODESET_LOCK_ALL_BEGIN()
+> > > > >   drm/shmobile: cleanup: drm_modeset_lock_all() --> DRM_MODESET_LOCK_ALL_BEGIN()
+> > > > >   drm/radeon: cleanup: drm_modeset_lock_all() --> DRM_MODESET_LOCK_ALL_BEGIN()
+> > > > >   drm/omapdrm: cleanup: drm_modeset_lock_all() --> DRM_MODESET_LOCK_ALL_BEGIN()
+> > > > >   drm/nouveau: cleanup: drm_modeset_lock_all() --> DRM_MODESET_LOCK_ALL_BEGIN()
+> > > > >   drm/msm: cleanup: drm_modeset_lock_all() --> DRM_MODESET_LOCK_ALL_BEGIN()
+> > > > >   drm/i915: cleanup: drm_modeset_lock_all() --> DRM_MODESET_LOCK_ALL_BEGIN()
+> > > > >   drm/i915: cleanup: drm_modeset_lock_all() --> DRM_MODESET_LOCK_ALL_BEGIN() part 2
+> > > > >   drm/gma500: cleanup: drm_modeset_lock_all() --> DRM_MODESET_LOCK_ALL_BEGIN()
+> > > > >   drm/amd: cleanup: drm_modeset_lock_all() --> DRM_MODESET_LOCK_ALL_BEGIN()
+> > > > >   drm: cleanup: remove drm_modeset_(un)lock_all()
+> > > > >   doc: drm: remove TODO entry regarding DRM_MODSET_LOCK_ALL cleanup
+> > > > > 
+> > > > 
+> > > > Thank you for revising, Fernando! I've pushed the set to drm-misc-next (along
+> > > > with the necessary drm-tip conflict resolutions).
+> > > 
+> > > Ugh. Did anyone actually review the locking changes this does?
+> > > I shot the previous i915 stuff down because the commit messages
+> > > did not address any of it.
+> > 
+> > I reviewed the set on 9/17, I didn't see your feedback on that thread.
+> 
+> It was much earlir than that.
+> https://lists.freedesktop.org/archives/dri-devel/2021-June/313193.html
+> 
+> And I think I might have also shot down a similar thing earlier.
+> 
+> I was actually half considering sending a patch to nuke that
+> misleading TODO item. I don't think anything which changes
+> which locks are taken should be considred a starter level task.
+> And the commit messages here don't seem to address any of it.
 
-With 5.15.0-rc3 on my ppc64 (PowerMac G5) I am seeing kmemleak
-reports. They are always 96 bytes and with the same stacktrace.
+And i915 is now broken :(
 
-unreferenced object 0xc000000011d2a7e0 (size 96):
-  comm "X", pid 1743, jiffies 4295010075 (age 5457.040s)
-  hex dump (first 32 bytes):
-    c0 00 00 00 0b 9f f0 00 c0 00 3d 00 00 b0 85 90  ..........=.....
-    00 00 00 a9 77 41 30 23 c0 00 00 00 08 db b7 c8  ....wA0#........
-  backtrace:
-    [<000000006f102108>] .nouveau_fence_new+0x4c/0x120 [nouveau]
-    [<00000000395e0a83>] .nouveau_bo_move+0x4f0/0x870 [nouveau]
-    [<00000000f17bc6da>] .ttm_bo_handle_move_mem+0xb4/0x1e0 [ttm]
-    [<00000000fb36762f>] .ttm_bo_validate+0x144/0x230 [ttm]
-    [<00000000a84dc7b3>] .nouveau_bo_validate+0x70/0xc0 [nouveau]
-    [<00000000b4e870a2>] .nouveau_gem_ioctl_pushbuf+0x6e0/0x1a90 [nouveau]
-    [<000000007b7c5c38>] .drm_ioctl_kernel+0x104/0x180 [drm]
-    [<000000000af76e30>] .drm_ioctl+0x244/0x490 [drm]
-    [<00000000ebb759e8>] .nouveau_drm_ioctl+0x78/0x140 [nouveau]
-    [<00000000263274a7>] .__se_sys_ioctl+0xfc/0x160
-    [<0000000088c39f3d>] .system_call_exception+0x178/0x2a0
-    [<000000000cfdf34f>] system_call_common+0xec/0x250
+https://intel-gfx-ci.01.org/tree/drm-tip/CI_DRM_10680/fi-bwr-2160/boot.html
 
-If I decode this stacktrace using decode_stacktrace.sh so that the line
-numbers can be seen, I get the following:
-
-.nouveau_fence_new+0x4c/0x120 [nouveau]
-linux-5.15-rc3/include/linux/slab.h:591
-linux-5.15-rc3/include/linux/slab.h:721
-linux-5.15-rc3/drivers/gpu/drm/nouveau/nouveau_fence.c:424
-
-.nouveau_bo_move+0x4f0/0x870 [nouveau]
-linux-5.15-rc3/drivers/gpu/drm/nouveau/nouveau_bo.c:821
-linux-5.15-rc3/drivers/gpu/drm/nouveau/nouveau_bo.c:1032
-
-.ttm_bo_handle_move_mem+0xb4/0x1e0 [ttm]
-linux-5.15-rc3/drivers/gpu/drm/ttm/ttm_bo.c:197
-
-.ttm_bo_validate+0x144/0x230 [ttm]
-linux-5.15-rc3/drivers/gpu/drm/ttm/ttm_bo.c:904
-linux-5.15-rc3/drivers/gpu/drm/ttm/ttm_bo.c:981
-
-.nouveau_bo_validate+0x70/0xc0 [nouveau]
-linux-5.15-rc3/drivers/gpu/drm/nouveau/nouveau_bo.c:647
-
-.nouveau_gem_ioctl_pushbuf+0x6e0/0x1a90 [nouveau]
-linux-5.15-rc3/drivers/gpu/drm/nouveau/nouveau_gem.c:548
-linux-5.15-rc3/drivers/gpu/drm/nouveau/nouveau_gem.c:605
-linux-5.15-rc3/drivers/gpu/drm/nouveau/nouveau_gem.c:799
-
-.drm_ioctl_kernel+0x104/0x180 [drm]
-linux-5.15-rc3/drivers/gpu/drm/drm_ioctl.c:795
-
-.drm_ioctl+0x244/0x490 [drm]
-linux-5.15-rc3/include/linux/thread_info.h:185
-linux-5.15-rc3/include/linux/thread_info.h:218
-linux-5.15-rc3/include/linux/uaccess.h:199
-linux-5.15-rc3/drivers/gpu/drm/drm_ioctl.c:899
-
-.nouveau_drm_ioctl+0x78/0x140 [nouveau]
-linux-5.15-rc3/drivers/gpu/drm/nouveau/nouveau_drm.c:1163
-
-.__se_sys_ioctl+0xfc/0x160
-linux-5.15-rc3/fs/ioctl.c:51
-linux-5.15-rc3/fs/ioctl.c:874
-linux-5.15-rc3/fs/ioctl.c:860
-
-.system_call_exception+0x178/0x2a0
-.system_call_exception
-linux-5.15-rc3/arch/powerpc/kernel/interrupt.c:233
-
-system_call_common+0xec/0x250
-linux-5.15-rc3/arch/powerpc/kernel/interrupt_64.S:314
-
-Here are all enabled DRM and NOUVEAU configs in my kernel:
-
-CONFIG_DRM=m
-CONFIG_DRM_KMS_HELPER=m
-CONFIG_DRM_FBDEV_EMULATION=y
-CONFIG_DRM_FBDEV_OVERALLOC=100
-CONFIG_DRM_TTM=m
-CONFIG_DRM_TTM_HELPER=m
-CONFIG_DRM_NOUVEAU=m
-CONFIG_NOUVEAU_DEBUG=5
-CONFIG_NOUVEAU_DEBUG_DEFAULT=3
-CONFIG_DRM_NOUVEAU_BACKLIGHT=y
-CONFIG_DRM_PANEL=y
-CONFIG_DRM_BRIDGE=y
-CONFIG_DRM_PANEL_BRIDGE=y
-CONFIG_DRM_PANEL_ORIENTATION_QUIRKS=m
-
-And lspci output:
-
-0000:f0:10.0 VGA compatible controller: NVIDIA Corporation NV34 [GeForce FX 5200 Ultra] (rev a1)
-
-I have been running 5.12 on my machine without these reports. So it
-might be something that showed up in 5.13 or 5.14 as well.
-
-I do not know if this is a good channel for reporting this, so please
-let me know if I should report it somewhere else. Also let me know if
-you need any additional information from me.
-
-John Ogness
+-- 
+Ville Syrjälä
+Intel
