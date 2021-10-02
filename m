@@ -1,83 +1,85 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9616141FA8E
-	for <lists+nouveau@lfdr.de>; Sat,  2 Oct 2021 11:14:26 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5B4474203CC
+	for <lists+nouveau@lfdr.de>; Sun,  3 Oct 2021 21:51:20 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 71D696E835;
-	Sat,  2 Oct 2021 09:14:22 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7B2A26E87B;
+	Sun,  3 Oct 2021 19:51:13 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 021396E835
- for <nouveau@lists.freedesktop.org>; Sat,  2 Oct 2021 09:14:20 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1633166060;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=VJ9RXJTGIQ7TnplzhbGhNK6unhn11194McWtsI39dY4=;
- b=VcVtSCtO/4xlbQeqCAeGEAOVwJD/wlSzMZ+wTr9r96Zz4NZ/qSbGHtpjuV5blUUbJ2S9vc
- O7YPoXCVLUX5CYO7aqBDqyV6mDl5xnQfiFSuaVtGlmjzT/0F5OpEE4lk+66ltafd0oFOAv
- 9GPCvJTKF7dZ1puo+DZVOSl/dWwLiSo=
-Received: from mail-ed1-f72.google.com (mail-ed1-f72.google.com
- [209.85.208.72]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-584-EuU0SvtdOX6uuCToKZ02kg-1; Sat, 02 Oct 2021 05:14:19 -0400
-X-MC-Unique: EuU0SvtdOX6uuCToKZ02kg-1
-Received: by mail-ed1-f72.google.com with SMTP id
- e21-20020a50a695000000b003daa0f84db2so12574432edc.23
- for <nouveau@lists.freedesktop.org>; Sat, 02 Oct 2021 02:14:18 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:subject:to:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=VJ9RXJTGIQ7TnplzhbGhNK6unhn11194McWtsI39dY4=;
- b=QpUDbR4lZ8PVTHLa8N6aefCMAdOra9LbRRcOQEL4BNQxcu3cWj33PBwVHnlHEGaAFT
- UNPrF033gT2AQBoSBezjwpsBgqpwIb+GsIX9kxLXYw3x5Zz0o6hq7Yw38YlOqVBOonJx
- OmZQKpuzcPZpAH5bEuoaJKLzH9+n3pg16Rulrfd8N8eAsuKTgplhrTwwgmFHWTPhsXHZ
- ZN3nj9LjpTYB3fGaHs22nxaaPUGrjPdZuS0c+vjaN5A9tKi5A2N4450cA9yOtBxJk0XV
- 56ne6qCSn0CXb274h+9XFkPzcU8RqCLHo6kZPwP3o5ln86mr9Oe1EBFJZS7Pj+aVMM9s
- Dovg==
-X-Gm-Message-State: AOAM5325DTjgaiIm97/lNNHWo8uVtoLMPc8JvB1ed43U5dA0Aqt6W08f
- oxyWBuEd7D6DHDuUcNagqtS0FLYbvwv53m1rOosjr1vHGPbGpHL/L9PLwB9sKGcvRM7pkHWzpoZ
- X8poGHvH6CI0Vo9JCfNmzgqyXrklCcrJ01b6d3Q+dXvdzhRCa7mA7PU77YIstZWfng438e6WHUy
- sSWw==
-X-Received: by 2002:a17:906:2bd0:: with SMTP id
- n16mr3186265ejg.132.1633166057562; 
- Sat, 02 Oct 2021 02:14:17 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJw1WcknLHya1hGXb5KcKJOBaUIP1K0/AwOnuQKYVTxuWskWhkeiWUzh9k/0uLVoupeZjj/I0g==
-X-Received: by 2002:a17:906:2bd0:: with SMTP id
- n16mr3186232ejg.132.1633166057182; 
- Sat, 02 Oct 2021 02:14:17 -0700 (PDT)
-Received: from x1.localdomain
- (2001-1c00-0c1e-bf00-1054-9d19-e0f0-8214.cable.dynamic.v6.ziggo.nl.
- [2001:1c00:c1e:bf00:1054:9d19:e0f0:8214])
- by smtp.gmail.com with ESMTPSA id l23sm3882559ejn.15.2021.10.02.02.14.16
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 02 Oct 2021 02:14:16 -0700 (PDT)
-To: Lyude Paul <lyude@redhat.com>, intel-gfx@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org
-References: <20211001225344.1752203-1-lyude@redhat.com>
-From: Hans de Goede <hdegoede@redhat.com>
-Message-ID: <a6ea3fa3-fbbd-f5e8-54ab-3929ed9f7294@redhat.com>
-Date: Sat, 2 Oct 2021 11:14:15 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.11.0
+Received: from new2-smtp.messagingengine.com (new2-smtp.messagingengine.com
+ [66.111.4.224])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 37E566F4A2;
+ Sat,  2 Oct 2021 07:13:34 +0000 (UTC)
+Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
+ by mailnew.nyi.internal (Postfix) with ESMTP id EFE27581013;
+ Sat,  2 Oct 2021 03:13:30 -0400 (EDT)
+Received: from mailfrontend1 ([10.202.2.162])
+ by compute4.internal (MEProxy); Sat, 02 Oct 2021 03:13:30 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=u92.eu; h=date
+ :from:to:cc:subject:message-id:references:mime-version
+ :content-type:content-transfer-encoding:in-reply-to; s=fm3; bh=h
+ kdwWmElPEdAAxaQYiaUG9iDPW9L8k80trrD6uyRPLo=; b=b+qy2lC7OANZhdcFY
+ lTuHru7sN/+DtcqTrF4SpXic1GmtM7cUT2qmnPzpzBoOwlJLK+z7eh8TFrUFqSQD
+ TQ8jkhtPZqfnj2vBf+fDgE4RoYWo8WlREzgRC0Kgkb5u5KRBrrNW9I+jLw68qq5K
+ nR1QEz/T3vXeMOnlNj/Kte72tUeYYrYxUq90NqOZhz8H/aQau8o3YqPwNJNR9p51
+ IjEDlpgp6u3tl97X5eFyj1ScaFTQnCPDxidv6nerNdEjj30tannDQtOgGzaF9LP9
+ ywzRJBQ3oe9A57JmpNxlJeehLxTyoJAGbhhjUtwcTPnRaupVb4E9JI7Bx0avudQu
+ wU7Zw==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:content-transfer-encoding:content-type
+ :date:from:in-reply-to:message-id:mime-version:references
+ :subject:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
+ :x-sasl-enc; s=fm1; bh=hkdwWmElPEdAAxaQYiaUG9iDPW9L8k80trrD6uyRP
+ Lo=; b=D/XRLalTmeWLNXMgGrYTT36Ur+ARcjhRea20l1zZycriBriaimr4jYDvH
+ Y/163WSY2WWorF7d3pv3hpERLm6NZDJlTk//5jLEVXcIMWmMoPJNQxbhgBi1BWBn
+ Cya7cwjtn+FBF1NZP0fA4N1ZLelGM6CeBzY0yS2wBDAcnYs2k7uqp2sBcpzNWjb6
+ i2zLNiZLVqztUinKNFfAh4HmJdPap30w+S9jG7OBxVgGj0AGGzwot5oYlTBmBwa3
+ wt4cnG/tw8mgyWw7yKANX9GzEEYCNUrYCiZAngxSNFSdx9IvgQwTnhE894+IssxT
+ TFpzih5gWDYejAq9jm76uBihYwVjQ==
+X-ME-Sender: <xms:mQZYYR7VpWIekz5jKw9rfJZPtY7gObW-Ps2HK3WAeJ6thHYPvyedzQ>
+ <xme:mQZYYe7NssF99qddped0Oz3y0xvsSlXqyEN9IInl1E0lXOHMmNnU3P09OPy6-VZVV
+ Kq6QxkN1Uw7cqd15Q>
+X-ME-Received: <xmr:mQZYYYfa7VDv6N19FC4M0Vettj4NdhNIg1PrJFkZXVaEfhz91yBv0dzwZCvP5KfF1YQRSpIl>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvtddrudekjedgudduhecutefuodetggdotefrod
+ ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
+ necuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
+ enucfjughrpeffhffvuffkfhggtggugfgjsehtkeertddttdejnecuhfhrohhmpefhvghr
+ nhgrnhguohcutfgrmhhoshcuoehgrhgvvghnfhhoohesuhelvddrvghuqeenucggtffrrg
+ htthgvrhhnpeffleelfeejkefgfffhvdffjedvteelhefgvdfftdehfefghfdtgeevgfek
+ keeuleenucffohhmrghinhepfhhrvggvuggvshhkthhophdrohhrghdptddurdhorhhgne
+ cuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepghhrvggv
+ nhhfohhosehuledvrdgvuh
+X-ME-Proxy: <xmx:mgZYYaLB8vJT6HmaAyecptRqqdECxDA3-U7v-ucSTdOqaK0yFO0hbA>
+ <xmx:mgZYYVLC78TXBxqTVCuTBFhpEgbixvlFTNJh-8rLG1dppSYC7Y77OQ>
+ <xmx:mgZYYTwFKgNks0BLJyv6wDGWqMfiEngurGR3Api93phNOr_Ls8Qtcg>
+ <xmx:mgZYYSCN8z0NaX2WnaxUXdRraVDUxKHnoPfZ_ydCt_0QpVQB9btRYQ>
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Sat,
+ 2 Oct 2021 03:13:26 -0400 (EDT)
+Date: Sat, 2 Oct 2021 09:13:22 +0200
+From: Fernando Ramos <greenfoo@u92.eu>
+To: Ville =?utf-8?B?U3lyasOkbMOk?= <ville.syrjala@linux.intel.com>
+Cc: Sean Paul <sean@poorly.run>, dri-devel@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+ amd-gfx@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
+ linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org, linux-renesas-soc@vger.kernel.org,
+ linux-tegra@vger.kernel.org
+Message-ID: <YVgGklsHT5fkavDL@zacax395.localdomain>
+References: <20210924064324.229457-1-greenfoo@u92.eu>
+ <20211001183655.GW2515@art_vandelay> <YVda4jNSGuQf50JV@intel.com>
+ <20211001204815.GA2515@art_vandelay> <YVeGOyLzuhN7zzV7@intel.com>
+ <YVfEWaLfYWdhezCa@intel.com>
 MIME-Version: 1.0
-In-Reply-To: <20211001225344.1752203-1-lyude@redhat.com>
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=hdegoede@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-Subject: Re: [Nouveau] [Intel-gfx] [PATCH v2 0/4] drm/dp,
- drm/i915: Finish basic PWM support for VESA backlight helpers
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <YVfEWaLfYWdhezCa@intel.com>
+X-Mailman-Approved-At: Sun, 03 Oct 2021 19:51:11 +0000
+Subject: Re: [Nouveau] [Intel-gfx] [PATCH v2 00/17] drm: cleanup: Use
+ DRM_MODESET_LOCK_ALL_* helpers where possible
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -92,54 +94,41 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi Lyude,
-
-On 10/2/21 12:53 AM, Lyude Paul wrote:
-> When I originally moved all of the VESA backlight code in i915 into DRM
-> helpers, one of the things I didn't have the hardware or time for
-> testing was machines that used a combination of PWM and DPCD in order to
-> control their backlights. This has since then caused some breakages and
-> resulted in us disabling DPCD backlight support on such machines. This
-> works fine, unless you have a machine that actually needs this
-> functionality for backlight controls to work at all. Additionally, we
-> will need to support PWM for when we start adding support for VESA's
-> product (as in the product of multiplication) control mode for better
-> brightness ranges.
+On 21/10/02 05:30AM, Ville Syrjälä wrote:
+> On Sat, Oct 02, 2021 at 01:05:47AM +0300, Ville Syrjälä wrote:
+> > On Fri, Oct 01, 2021 at 04:48:15PM -0400, Sean Paul wrote:
+> > > On Fri, Oct 01, 2021 at 10:00:50PM +0300, Ville Syrjälä wrote:
+> > > > On Fri, Oct 01, 2021 at 02:36:55PM -0400, Sean Paul wrote:
+> > > > > 
+> > > > > Thank you for revising, Fernando! I've pushed the set to drm-misc-next (along
+> > > > > with the necessary drm-tip conflict resolutions).
+> > > > 
+> > > > Ugh. Did anyone actually review the locking changes this does?
+> > > > I shot the previous i915 stuff down because the commit messages
+> > > > did not address any of it.
+> > > 
+> > > I reviewed the set on 9/17, I didn't see your feedback on that thread.
+> > 
+> > It was much earlir than that.
+> > https://lists.freedesktop.org/archives/dri-devel/2021-June/313193.html
+> > 
+> > And I think I might have also shot down a similar thing earlier.
+> > 
+> > I was actually half considering sending a patch to nuke that
+> > misleading TODO item. I don't think anything which changes
+> > which locks are taken should be considred a starter level task.
+> > And the commit messages here don't seem to address any of it.
 > 
-> So - let's finally finish up implementing basic support for these types
-> of backlights to solve these problems in our DP helpers, along with
-> implementing support for this in i915. And since digging into this issue
-> solved the last questions we really had about probing backlights in i915
-> for the most part, let's update some of the comments around that as
-> well!
-
-Backlight control is a topic which I'm reasonably familiar with,
-do you want me to review this series for you ?
-
-Regards,
-
-Hans
-
-
-
+> And i915 is now broken :(
 > 
-> Changes:
-> * Fixup docs
-> * Add patch to stop us from breaking nouveau
-> 
-> Lyude Paul (4):
->   drm/i915: Add support for panels with VESA backlights with PWM
->     enable/disable
->   drm/nouveau/kms/nv50-: Explicitly check DPCD backlights for aux
->     enable/brightness
->   drm/dp, drm/i915: Add support for VESA backlights using PWM for
->     brightness control
->   drm/i915: Clarify probing order in intel_dp_aux_init_backlight_funcs()
-> 
->  drivers/gpu/drm/drm_dp_helper.c               | 75 +++++++++++------
->  .../drm/i915/display/intel_dp_aux_backlight.c | 80 ++++++++++++++-----
->  drivers/gpu/drm/nouveau/nouveau_backlight.c   |  5 +-
->  include/drm/drm_dp_helper.h                   |  7 +-
->  4 files changed, 122 insertions(+), 45 deletions(-)
-> 
+> https://intel-gfx-ci.01.org/tree/drm-tip/CI_DRM_10680/fi-bwr-2160/boot.html
+
+I completely overlooked the side effects of not having a global context anymore.
+Sorry for all the trouble.
+
+Sean, could you revert the whole patch series? I'll have a deeper look into the
+patch set and come up with a v3 where all these issues will be addressed.
+
+Thanks and sorry once again for the extra overhead this might have caused.
+
 
