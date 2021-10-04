@@ -2,80 +2,49 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 831874203CD
-	for <lists+nouveau@lfdr.de>; Sun,  3 Oct 2021 21:51:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 121C94206F0
+	for <lists+nouveau@lfdr.de>; Mon,  4 Oct 2021 10:01:24 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id CEECD6E87C;
-	Sun,  3 Oct 2021 19:51:14 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3D3126E94F;
+	Mon,  4 Oct 2021 08:01:15 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from new1-smtp.messagingengine.com (new1-smtp.messagingengine.com
- [66.111.4.221])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A37C56F465;
- Sat,  2 Oct 2021 22:32:39 +0000 (UTC)
-Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
- by mailnew.nyi.internal (Postfix) with ESMTP id BEC3D580812;
- Sat,  2 Oct 2021 18:32:38 -0400 (EDT)
-Received: from mailfrontend2 ([10.202.2.163])
- by compute3.internal (MEProxy); Sat, 02 Oct 2021 18:32:38 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=u92.eu; h=date
- :from:to:cc:subject:message-id:references:mime-version
- :content-type:in-reply-to; s=fm3; bh=feVIX2W/iu7IBNGFg1YLLfvKn4A
- Iy1omyC/w57V7Wug=; b=ovzWw3hIbQCcGYWWfpO5bqetBoj8fYi4cU/uzea2qvO
- Os2rrnreQKdvey22GdkFqYmTqVwHJlz6/KQlAp2Z8mQbRrcVVGS0RhHbrp1axmS1
- T4FNGBRIC6VRRFUJMyPMA1yIs4iwF9On1Bqrg0StKz63ldd8P4gi0modAY16sbNX
- WOnmsvjUWgOf1EVFXdUONhdRS4d570TW/OoyrKXXmebjiEw+1j8fLm+ljv907z9t
- CIOzD86mMLeHbUi80OMHKQWQ8a2BTeJqaaCtNR9LBUJzmUq7awJMWepSCUordAjM
- ngdvij4dTKC2HxgnXfPCiotEibBAe0PNcQega9F7pqA==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to:x-me-proxy
- :x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; bh=feVIX2
- W/iu7IBNGFg1YLLfvKn4AIy1omyC/w57V7Wug=; b=YMRGtjh8b6/uHXJHbSLqIN
- XkvnsOT7+fKkqo5MsyQdt9QElTwpFnNH7NZDiZLXzSXOS6FBDZrF/soSknUPTps7
- cSX/90+DSQd2xC8HCoXyBNUteJevzWwv9zGF6tVIfUiERM5LrxOfobmziR9FM4T0
- mLSPpj+5dA82NtTLbKYT3qLKVZAaZg0+5PRAHUA/IWgXUESWEo1fpoaeLWYr8All
- JpIncHLyYWJxtXR3Pqqqab9/qf/YQ861tur8Ji253I3WZ1vgqVr7s70Rik3/dyCs
- ITXmHAKFXd63QFz77+qvRhy+dIxMO6LWM6al1XMqrbbo7nzjVZHNbj/Kf3X0AxUg
- ==
-X-ME-Sender: <xms:Bd5YYVrkc8p0swSo4xEZCdl3rsDWQNqeVIZdmhP6Wf4caAa16nuybQ>
- <xme:Bd5YYXoybymUuSKmzHwxRHKymivMUvij6JnRtsZIZZVpo68liJZ5TGtJ4Vua42s3h
- LbwxpfrPkAuPzM3xA>
-X-ME-Received: <xmr:Bd5YYSNyitcnLvWu6_RcSwzRBf9mTNYHl30tfrNj1m3MO1-0de2gr9vj-JbxHL1gJia4r6Hs>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvtddrudekledgudduucetufdoteggodetrfdotf
- fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
- uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
- cujfgurhepfffhvffukfhfgggtuggjsehttdertddttdejnecuhfhrohhmpefhvghrnhgr
- nhguohcutfgrmhhoshcuoehgrhgvvghnfhhoohesuhelvddrvghuqeenucggtffrrghtth
- gvrhhnpedvjeeifeelhfetiefhhfdthfefkefhhfeutdetvdfgvefgveefheffgfekjeef
- heenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehgrh
- gvvghnfhhoohesuhelvddrvghu
-X-ME-Proxy: <xmx:Bd5YYQ53pf_AP7qMCUlDCqgVT7w95ls-2nvB6UhjKENlMbZ5WDSaxg>
- <xmx:Bd5YYU4JlqPHutlqQe1xw7mwVg9baVMFebyytWihVAutD_bPZs0x9A>
- <xmx:Bd5YYYimDCwEr_h0ImYBRvk71nWMA2_Ffonah7m0LdYM5in_bm1rRA>
- <xmx:Bt5YYRyL6bw7ctESdJ47OvY4c654oRJOS64QLo3qvUcb6D6jGOtaqA>
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Sat,
- 2 Oct 2021 18:32:32 -0400 (EDT)
-Date: Sun, 3 Oct 2021 00:32:14 +0200
-From: Fernando Ramos <greenfoo@u92.eu>
-To: Ville =?utf-8?B?U3lyasOkbMOk?= <ville.syrjala@linux.intel.com>
+Received: from mga05.intel.com (mga05.intel.com [192.55.52.43])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 402FE6E17D;
+ Mon,  4 Oct 2021 08:01:13 +0000 (UTC)
+X-IronPort-AV: E=McAfee;i="6200,9189,10126"; a="311528379"
+X-IronPort-AV: E=Sophos;i="5.85,345,1624345200"; d="scan'208";a="311528379"
+Received: from fmsmga007.fm.intel.com ([10.253.24.52])
+ by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 04 Oct 2021 01:01:12 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.85,345,1624345200"; d="scan'208";a="482808264"
+Received: from stinkbox.fi.intel.com (HELO stinkbox) ([10.237.72.171])
+ by fmsmga007.fm.intel.com with SMTP; 04 Oct 2021 01:01:02 -0700
+Received: by stinkbox (sSMTP sendmail emulation);
+ Mon, 04 Oct 2021 11:01:01 +0300
+Date: Mon, 4 Oct 2021 11:01:01 +0300
+From: Ville =?iso-8859-1?Q?Syrj=E4l=E4?= <ville.syrjala@linux.intel.com>
+To: Fernando Ramos <greenfoo@u92.eu>
 Cc: Sean Paul <sean@poorly.run>, dri-devel@lists.freedesktop.org,
  linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
  amd-gfx@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
  linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org,
  nouveau@lists.freedesktop.org, linux-renesas-soc@vger.kernel.org,
  linux-tegra@vger.kernel.org
-Message-ID: <YVjd7hLKtYG2bkY7@zacax395.localdomain>
+Message-ID: <YVq0vZgFUpSXEBFh@intel.com>
 References: <20210924064324.229457-1-greenfoo@u92.eu>
  <20211001183655.GW2515@art_vandelay> <YVda4jNSGuQf50JV@intel.com>
  <20211001204815.GA2515@art_vandelay> <YVeGOyLzuhN7zzV7@intel.com>
  <YVfEWaLfYWdhezCa@intel.com>
  <YVgGklsHT5fkavDL@zacax395.localdomain>
+ <YViWomXZWdy/81uT@zacax395.localdomain>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
-In-Reply-To: <YVgGklsHT5fkavDL@zacax395.localdomain>
-X-Mailman-Approved-At: Sun, 03 Oct 2021 19:51:11 +0000
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <YViWomXZWdy/81uT@zacax395.localdomain>
+X-Patchwork-Hint: comment
 Subject: Re: [Nouveau] [Intel-gfx] [PATCH v2 00/17] drm: cleanup: Use
  DRM_MODESET_LOCK_ALL_* helpers where possible
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -92,32 +61,114 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 21/10/02 09:13AM, Fernando Ramos wrote:
+On Sat, Oct 02, 2021 at 07:28:02PM +0200, Fernando Ramos wrote:
+> On 21/10/02 09:13AM, Fernando Ramos wrote:
+> > On 21/10/02 05:30AM, Ville Syrjälä wrote:
+> > > On Sat, Oct 02, 2021 at 01:05:47AM +0300, Ville Syrjälä wrote:
+> > > > On Fri, Oct 01, 2021 at 04:48:15PM -0400, Sean Paul wrote:
+> > > > > On Fri, Oct 01, 2021 at 10:00:50PM +0300, Ville Syrjälä wrote:
+> > > > > > On Fri, Oct 01, 2021 at 02:36:55PM -0400, Sean Paul wrote:
+> > > > > > > 
+> > > > > > > Thank you for revising, Fernando! I've pushed the set to drm-misc-next (along
+> > > > > > > with the necessary drm-tip conflict resolutions).
+> > > > > > 
+> > > > > > Ugh. Did anyone actually review the locking changes this does?
+> > > > > > I shot the previous i915 stuff down because the commit messages
+> > > > > > did not address any of it.
+> > > > > 
+> > > > > I reviewed the set on 9/17, I didn't see your feedback on that thread.
+> > > > 
+> > > > It was much earlir than that.
+> > > > https://lists.freedesktop.org/archives/dri-devel/2021-June/313193.html
 > 
-> Sean, could you revert the whole patch series? I'll have a deeper look into the
-> patch set and come up with a v3 where all these issues will be addressed.
+> Sorry, I'm new to this and it did not occur to me to search for similar patches
+> in the mailing list archives in case there were additional comments that applied
+> to my change set.
 > 
+> In case I had done that I would have found that, as you mentioned, you had
+> already raised two issues back in June:
+> 
+>     On Tue, Jun 29, 2021, Ville Syrjälä wrote:
+>     >
+>     > That looks wrong. You're using a private ctx here, but still
+>     > passing dev->mode_config.acquire_ctx to the lower level stuff.
+>     > 
+>     > Also DRM_MODESET_LOCK_ALL_{BEGIN,END}() do not seem to be
+>     > equivalent to drm_modeset_{lock,unlock}_all() when it comes to 
+>     > mode_config.mutex. So would need a proper review whether we
+>     > actually need that lock or not.
+> 
+> The first one was pointing out the same error I would later repeat in my patch
+> series (ups).
+> 
+> After further inspection of the code it looks to me that changing this:
+> 
+>     intel_modeset_setup_hw_state(dev, dev->mode_config.acquire_ctx);
+> 
+> ...into this:
+> 
+>     intel_modeset_setup_hw_state(dev, &ctx);
+> 
+> ...would be enough.
 
-Hi Sean,
+Yes.
 
-I now understand the nature of the issue that caused the problem with i915 and
-have proceed to remove the global context structure (which revealed a similar
-issue in the amdgpu driver).
+> 
+> Why? The only difference between the old drm_modeset_{lock,unlock}_all()
+> functions and the new DRM_MODESET_LOCK_ALL_{BEGIN,END}() macros is that the
+> former use a global context stored in dev->mode_config.acquire_ctx while the
+> latter depend on a user provided one (typically in the stack).
+> 
+> In the old (working) code the global context structure is freed in
+> drm_modeset_unlock_all() thus we are sure no one is holding a reference to it at
+> that point. This means that as long as no one accesses the global
+> dev->mode_config.acquire_ctx context in the block that runs between lock/BEGIN
+> and unlock/END, the code should be equivalent before and after my changes.
+> 
+> In fact, now that my patch series removes the drm_modeset_{lock,unlock}_all()
+> functions, the acquire_ctx field of the drm_mode_config structure should be
+> deleted:
+> 
+>     /**
+>      * @acquire_ctx:
+>      *
+>      * Global implicit acquire context used by atomic drivers for legacy
+>      * IOCTLs. Deprecated, since implicit locking contexts make it
+>      * impossible to use driver-private &struct drm_modeset_lock. Users of
+>      * this must hold @mutex.
+>      */
+>     struct drm_modeset_acquire_ctx *acquire_ctx;
+> 
+> If I had done that (ie. removing this field) I would have detected the problem
+> when compiling.
+> 
+> There is another place (in the amdgpu driver) where this field is still being
+> referenced, but before I investigate that I would like to know if you agree that
+> this is a good path to follow.
 
-I have prepared a V3 version of the patch set where these issues should
-hopefully be fixed for both the i915 and amdgpu drivers.
+Yeah, removing the mode_config.acquire_ctx is a good idea if it's
+no longer needed.
 
-In order to prevent causing more disruption, could you tell me what the proper
-way to proceed would be? In particular:
+> 
+> Regarding the second issue you raised...
+> 
+>     > Also DRM_MODESET_LOCK_ALL_{BEGIN,END}() do not seem to be
+>     > equivalent to drm_modeset_{lock,unlock}_all() when it comes to 
+>     > mode_config.mutex. So would need a proper review whether we
+>     > actually need that lock or not.
+> 
+> ...the only difference regarding mode_config.mutex I see is that in the new
+> macros the mutex is locked only under this condition:
+> 
+>     if (!drm_drv_uses_atomic_modeset(dev))
+> 
+> ...which seems reasonable, right? Is this what you were referring to or is it
+> something else?
 
-  1. Is there any place where I can push my changes so that they are tested
-     on a i915 machine? (Some type of automated pool)
+In order to eliminate the lock one first has to determine what that lock
+might be protecting here, and then prove that such protection is not
+actually needed.
 
-  2. I can test the amdgpu driver on my machine but, what about all the other
-     architectures? What is the standard procedure? Should I simply publish V3
-     and wait for feedback from the different vendors? (I would hate to cause a
-     simular situation again)
-
-  3. Should I post V3 on top of drm-next or drm-misc-next?
-
-Thanks for your patience :)
+-- 
+Ville Syrjälä
+Intel
