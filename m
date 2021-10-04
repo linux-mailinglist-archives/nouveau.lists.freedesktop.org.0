@@ -2,49 +2,68 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3BE46420777
-	for <lists+nouveau@lfdr.de>; Mon,  4 Oct 2021 10:40:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C2904421165
+	for <lists+nouveau@lfdr.de>; Mon,  4 Oct 2021 16:31:55 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E1CDF6E961;
-	Mon,  4 Oct 2021 08:40:30 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9E30E6E1B8;
+	Mon,  4 Oct 2021 14:31:52 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 157C36E95F;
- Mon,  4 Oct 2021 08:40:28 +0000 (UTC)
-X-IronPort-AV: E=McAfee;i="6200,9189,10126"; a="248594898"
-X-IronPort-AV: E=Sophos;i="5.85,345,1624345200"; d="scan'208";a="248594898"
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
- by fmsmga101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 04 Oct 2021 01:39:34 -0700
-X-IronPort-AV: E=Sophos;i="5.85,345,1624345200"; d="scan'208";a="621779755"
-Received: from pmittal1-mobl.gar.corp.intel.com (HELO localhost)
- ([10.251.223.27])
- by fmsmga001-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 04 Oct 2021 01:39:30 -0700
-From: Jani Nikula <jani.nikula@linux.intel.com>
-To: Ville =?utf-8?B?U3lyasOkbMOk?= <ville.syrjala@linux.intel.com>, Fernando
- Ramos <greenfoo@u92.eu>
-Cc: Sean Paul <sean@poorly.run>, dri-devel@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
- amd-gfx@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
- linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org,
- nouveau@lists.freedesktop.org, linux-renesas-soc@vger.kernel.org,
- linux-tegra@vger.kernel.org
-In-Reply-To: <YVq49SWuC3T7i1a6@intel.com>
-Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
-References: <20210924064324.229457-1-greenfoo@u92.eu>
- <20211001183655.GW2515@art_vandelay> <YVda4jNSGuQf50JV@intel.com>
- <20211001204815.GA2515@art_vandelay> <YVeGOyLzuhN7zzV7@intel.com>
- <YVfEWaLfYWdhezCa@intel.com> <YVgGklsHT5fkavDL@zacax395.localdomain>
- <YVjd7hLKtYG2bkY7@zacax395.localdomain> <YVq49SWuC3T7i1a6@intel.com>
-Date: Mon, 04 Oct 2021 11:39:27 +0300
-Message-ID: <87ee912ngg.fsf@intel.com>
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id BA1676E1B8
+ for <nouveau@lists.freedesktop.org>; Mon,  4 Oct 2021 14:31:51 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1633357910;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=khVDKyCgJwbfVnRRJFQB+Qcg3RCv+I5JMkL9oO0gvj8=;
+ b=BkWBwqQ1zSNmOkXx+ulD/vlbOxRx2Shh38MtwGq2Nzg2gMT0HjdflHmrqIrooiPcvNVaun
+ vVjTKkP2rny5w8bcko4VKqmYUlUuLL2EEGH/lvCyK2rI/KyBV6tBc8gXyX89Eh6M0TYC07
+ QL/uv9D24y0uaLGAa/o/ZKnOELaM//0=
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-450-ZCNvEEISNd2RmTkAGdfpxw-1; Mon, 04 Oct 2021 10:31:47 -0400
+X-MC-Unique: ZCNvEEISNd2RmTkAGdfpxw-1
+Received: by mail-wr1-f70.google.com with SMTP id
+ k2-20020adff5c2000000b00160b12639a5so547099wrp.3
+ for <nouveau@lists.freedesktop.org>; Mon, 04 Oct 2021 07:31:47 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=khVDKyCgJwbfVnRRJFQB+Qcg3RCv+I5JMkL9oO0gvj8=;
+ b=u4NPwkwt7hkzCH7MpY2m72ENwN6pbvscpjssio2dDnXQzaduXmdfQceMNKVqkp2DSn
+ H0pVJUJLatjzGj8wlJzf5JnAy3/gHk3Gj+qt7VjJJroQf8fnCipcCmmFhOsjqz/e3VxP
+ iP+9OfkvtUQc59pctDsKXl+aNNRnnVjAceFLlQg08ab1R8bDzSGver4w6qxv0PBwkIjD
+ eIRd2AJzEwmjC6Iw+t6mWnrwq46qKh3nx9Ey3quiMk2U15bcI3nRpnWOW+pVG4m7xule
+ HhIMK6NsDssJ5lO1Ra/X/TgMDgKcb4xKdcClXnuV3ll4ihoAjHXvMg/ZEogdpT0nz4Hf
+ hOsQ==
+X-Gm-Message-State: AOAM530JS9M7rrM/cTMxmRi44Vgi5aj02iTmns0CuLcDBmTF0jQpljRZ
+ vNkWUK7XVyiSFFZeDGelFdo8vhofby5qF0IefKdinictAR9TjonRVkxvaxS8/pfvJ+Nn9mklAne
+ D/QaH8SoaPKRMx4snhn0OooV8WAEAhsAWj6N0B80Yew==
+X-Received: by 2002:a1c:4e0f:: with SMTP id g15mr9400711wmh.74.1633357906047; 
+ Mon, 04 Oct 2021 07:31:46 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJx2o7biOqQFnZdDZdHT8IshuUzM9Zacfh6XxLBcPnT9PCiwH7KSDmv2mgvvvBosC8RqWNMESlhUdQpMp8/KBgI=
+X-Received: by 2002:a1c:4e0f:: with SMTP id g15mr9400687wmh.74.1633357905877; 
+ Mon, 04 Oct 2021 07:31:45 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+References: <CANj0vJkjpj_wQPVKo65ZKTgvTjXOfpC3hBdW60Z27c0mY8ejtA@mail.gmail.com>
+In-Reply-To: <CANj0vJkjpj_wQPVKo65ZKTgvTjXOfpC3hBdW60Z27c0mY8ejtA@mail.gmail.com>
+From: Karol Herbst <kherbst@redhat.com>
+Date: Mon, 4 Oct 2021 16:31:35 +0200
+Message-ID: <CACO55tvnT4mT1cVyMTOig5M1kVj07i8ZH28EN11fYYuB+L+abg@mail.gmail.com>
+To: Oswaldo Graterol <oswaldo.graterol@gmail.com>
+Cc: nouveau <nouveau@lists.freedesktop.org>, glenn.kennard@gmail.com
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=kherbst@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Subject: Re: [Nouveau] [Intel-gfx] [PATCH v2 00/17] drm: cleanup: Use
- DRM_MODESET_LOCK_ALL_* helpers where possible
+Subject: Re: [Nouveau] Nvidia GeForce 8200M - Image flicker
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,72 +78,33 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Mon, 04 Oct 2021, Ville Syrj=C3=A4l=C3=A4 <ville.syrjala@linux.intel.com=
-> wrote:
-> On Sun, Oct 03, 2021 at 12:32:14AM +0200, Fernando Ramos wrote:
->> On 21/10/02 09:13AM, Fernando Ramos wrote:
->> >=20
->> > Sean, could you revert the whole patch series? I'll have a deeper look=
- into the
->> > patch set and come up with a v3 where all these issues will be address=
-ed.
->> >=20
->>=20
->> Hi Sean,
->>=20
->> I now understand the nature of the issue that caused the problem with i9=
-15 and
->> have proceed to remove the global context structure (which revealed a si=
-milar
->> issue in the amdgpu driver).
->>=20
->> I have prepared a V3 version of the patch set where these issues should
->> hopefully be fixed for both the i915 and amdgpu drivers.
->>=20
->> In order to prevent causing more disruption, could you tell me what the =
-proper
->> way to proceed would be? In particular:
->>=20
->>   1. Is there any place where I can push my changes so that they are tes=
-ted
->>      on a i915 machine? (Some type of automated pool)
->
-> cc:intel-gfx, which it looks like you did, _but_ your patches did
-> did not even apply against drm-tip so our CI rejected it. There was
-> a reply to the patches from CI indicating that. And that is one
-> reason I probably just ignored the whole thing. If it doesn't
-> even apply/build it's not worth my time to read.
->
->>=20
->>   2. I can test the amdgpu driver on my machine but, what about all the =
-other
->>      architectures? What is the standard procedure? Should I simply publ=
-ish V3
->>      and wait for feedback from the different vendors? (I would hate to =
-cause a
->>      simular situation again)
->>=20
->>   3. Should I post V3 on top of drm-next or drm-misc-next?
->
-> The normal rule is: always work on drm-tip. That is what gets
-> tested by our CI as well. Yes, it does mean a bit of extra hurdles
-> during development since drm-tip is a rebasing tree, but there are
-> tools like dim retip to help out here.
->
-> As for where to merge them. I would generally recommed against merging
-> i915 patches through drm-misc unless there is a very compelling reason
-> to do so. i915 is a fast moving target and if there are significant
-> changes coming in via drm-misc they usually will cause conflicts for
-> people during drm-tip rebuild. Also I would expect to see an ack
-> requested from i915 maintainers for merging anything significant via
-> drm-misc, which I don't think happened in this case.
+We actually fixed a few of those issues on those old GPUs. But I don't
+think they are part of any mesa release yet:
 
-Indeed. All other things aside, it looks like it has enough conflict
-potential to warrant merging via drm-intel anyway.
+https://gitlab.freedesktop.org/mesa/mesa/-/commit/1387d1d41103b3120d40f93f6=
+6a7cfe00304bfd7
 
-BR,
-Jani.
+and we have a pending MR:
+https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/12154
+https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/12241
 
+Glenn, is there some update on those MRs? In case you are short on
+time, maybe somebody else should take a look?
 
---=20
-Jani Nikula, Intel Open Source Graphics Center
+On Sat, Oct 2, 2021 at 4:24 AM Oswaldo Graterol
+<oswaldo.graterol@gmail.com> wrote:
+>
+>
+> Hi,
+>
+> I installed lubuntu 20.04 amd64 in my old laptop (Compaq CQ60-210 US), bu=
+t the screen flicker when i open some program like firefox, i tried nvidia =
+drivers to GeForce 8200M GPU, but no work to this hardware, i want to use n=
+ouveau drivers but need to fix the flicker problems. Can you help me with t=
+his?
+>
+> Thank you for any help you can provide.
+>
+> --
+> Oswaldo Graterol
+
