@@ -2,69 +2,78 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 089B642118F
-	for <lists+nouveau@lfdr.de>; Mon,  4 Oct 2021 16:35:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1EBD44231E3
+	for <lists+nouveau@lfdr.de>; Tue,  5 Oct 2021 22:26:36 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4FB556E9D2;
-	Mon,  4 Oct 2021 14:35:35 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id AD63B6EC4C;
+	Tue,  5 Oct 2021 20:26:33 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3F85F6E9D2
- for <nouveau@lists.freedesktop.org>; Mon,  4 Oct 2021 14:35:33 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [216.205.24.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id E7DFE6EC46
+ for <nouveau@lists.freedesktop.org>; Tue,  5 Oct 2021 20:26:31 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1633358132;
+ s=mimecast20190719; t=1633465591;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=SUY7CafWbrSmAxfBWbVavN+A3FgAQRgD0YrIWBkosT8=;
- b=aIz+M9ZcC7KU/uF+lxNDGy3nxEC7yR8ch9CpSwsOK1bhe4gleSZGl6Wr4oF6b8VSQmEJqc
- tx3317rxRVaU9Q0SkxuT0yixKao4051qrDotYJ9+4Rv07/MlfXMooTiR4zO8gvGuOHHRkN
- ow7EbX3ubyG99uWcvTALAVz/hvGyw3E=
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-242-ym0uFip5Oi-Bj5dqpOcPWA-1; Mon, 04 Oct 2021 10:35:31 -0400
-X-MC-Unique: ym0uFip5Oi-Bj5dqpOcPWA-1
-Received: by mail-wm1-f72.google.com with SMTP id
- u3-20020a7bcb03000000b0030d5228cbbdso4270799wmj.3
- for <nouveau@lists.freedesktop.org>; Mon, 04 Oct 2021 07:35:31 -0700 (PDT)
+ bh=ZSF6jCxZJ9Lo/pAWpdyqwfRutIttoAnBdF2YSZZDlW0=;
+ b=cTAgbHmQr573ZEqQ9abysLcVDl0vtP7syR4NiFM0C2M4FPXPCtL2XMHdm6rrv9xlLwWxdu
+ BIERNkh95UITUKpE7OkOpaSYgplPiQpKEP7niEXZr1y1KDLMMOBqlM/vOv25JFLKPc/3Uv
+ /GOt87FywMXm+vITGauBGcvWSD+Q+d0=
+Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com
+ [209.85.222.200]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-517-nX2qyMbCNDqisqydDhB0xg-1; Tue, 05 Oct 2021 16:26:30 -0400
+X-MC-Unique: nX2qyMbCNDqisqydDhB0xg-1
+Received: by mail-qk1-f200.google.com with SMTP id
+ v14-20020a05620a0f0e00b0043355ed67d1so195620qkl.7
+ for <nouveau@lists.freedesktop.org>; Tue, 05 Oct 2021 13:26:30 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=SUY7CafWbrSmAxfBWbVavN+A3FgAQRgD0YrIWBkosT8=;
- b=d3001YBAkmQpH9nMgd9NiWGyXjkT3Q8RYhjII9Tybp4LvGtmrx/GdQ3NqsTWCF92a+
- xFDsoH9vsvDA1+eD9pGCLmiGeLsVMv9x9uxSKtwUlMgCIBiz6eTrW/8c/dfqwSEslRrf
- cUaKWIHwUwlinyjpPNpqYt7tfDze7xJumz30Kf5NnPFPLScueUYdFQnUn5UTSyfw56Wx
- /eBs9+C1UxaNe13sv6+d8uUyrUY5fyEBEIFKtzQllYUYRTYQHnlahpCCsPPT+H8nGs06
- /B4YbBsqlrgzL6H/fcTLAudgZFpa3d/V04S8fYvHV29Te0E/t8F+Ew6w0ExjbfurLE6/
- M38A==
-X-Gm-Message-State: AOAM533DS1Z9BKxzR2qpyzCn5rqmKu9goX2Az0vflVCSCxoUkAyLKv7X
- r/srZc17xg88XGlMrR/QlixxrT7YmhqWb9VwIevQ1HPq2buX5nYdukVbWN7HFd+PyRggVeTt0E7
- AogowuzIxj8NuFxaOZB4aZT62tXRPExdvpVEcwsQmQg==
-X-Received: by 2002:a7b:c5c9:: with SMTP id n9mr19229714wmk.141.1633358129490; 
- Mon, 04 Oct 2021 07:35:29 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJxsKATGhbyk1Mual4sS0bkE09O0QUHMs4QsIBTR4Ty7M5IYqpnrzrnvCiGnqPl0kFHa/H91kgxl4MLvqlFGVcw=
-X-Received: by 2002:a7b:c5c9:: with SMTP id n9mr19229695wmk.141.1633358129307; 
- Mon, 04 Oct 2021 07:35:29 -0700 (PDT)
+ h=x-gm-message-state:message-id:subject:from:to:date:in-reply-to
+ :references:organization:user-agent:mime-version
+ :content-transfer-encoding;
+ bh=ZSF6jCxZJ9Lo/pAWpdyqwfRutIttoAnBdF2YSZZDlW0=;
+ b=zAo6TnvLjYmqiUWliLU8JomwFZnOGtjRwEnyEHrDLqc5GdIswicy2F7GZIvktQEFDM
+ uImDMenYLBgbgWDILFq9lAEnAhU1eRRLATZJvM9G3kUj9mYl3jEgiIFsm+dv3HLkbFgm
+ EV4NGqemzDy4a9RcFdbpvWOYh2U6CytSpUsitozbB8j0bWG4u9w0FWn+G+KRhSaXH0CK
+ /FxjQAVksVzirbsvEPinKS/KSQhhpkZt4CkrC6KxND7U/nlCOQiWdkHBmCX/Y6jMH0gC
+ oiY54za9hRqhiNQ+8Y8Db/6STBtw15U/8BIRZ6FN47XU51qKL8TjLLCTayKXvpAqN0xQ
+ lJmQ==
+X-Gm-Message-State: AOAM5337XjZizQBL0ImDlIVByurw57eaSxdOUPoUNWzsNnZDs7tXkNY+
+ s+QJn4AHzdYknn1bjwf9ujNcAr8h93s6S9J9PHFP9eDL3z2zgNtphkF1RbssyBFxP9Vr4/T3bB9
+ X9cKSyDKl9oCjooFmN+BgfqCfAw==
+X-Received: by 2002:ac8:7594:: with SMTP id s20mr21704093qtq.158.1633465589735; 
+ Tue, 05 Oct 2021 13:26:29 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJyFGL8CYgwl0+YAqpEiDKaGURHpezzUi3uShlPK4PU7tYdF8F4X2cRWBAsEQwveFxTDxgtvuA==
+X-Received: by 2002:ac8:7594:: with SMTP id s20mr21704076qtq.158.1633465589546; 
+ Tue, 05 Oct 2021 13:26:29 -0700 (PDT)
+Received: from [192.168.8.206] (pool-96-230-249-157.bstnma.fios.verizon.net.
+ [96.230.249.157])
+ by smtp.gmail.com with ESMTPSA id a16sm10017550qkn.16.2021.10.05.13.26.28
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 05 Oct 2021 13:26:29 -0700 (PDT)
+Message-ID: <2b04c75841f4c1661c242a3371b12d52bb0573ef.camel@redhat.com>
+From: Lyude Paul <lyude@redhat.com>
+To: Hans de Goede <hdegoede@redhat.com>, intel-gfx@lists.freedesktop.org, 
+ dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org
+Date: Tue, 05 Oct 2021 16:26:28 -0400
+In-Reply-To: <a6ea3fa3-fbbd-f5e8-54ab-3929ed9f7294@redhat.com>
+References: <20211001225344.1752203-1-lyude@redhat.com>
+ <a6ea3fa3-fbbd-f5e8-54ab-3929ed9f7294@redhat.com>
+Organization: Red Hat
+User-Agent: Evolution 3.40.4 (3.40.4-1.fc34)
 MIME-Version: 1.0
-References: <CANj0vJkjpj_wQPVKo65ZKTgvTjXOfpC3hBdW60Z27c0mY8ejtA@mail.gmail.com>
- <CACO55tvnT4mT1cVyMTOig5M1kVj07i8ZH28EN11fYYuB+L+abg@mail.gmail.com>
-In-Reply-To: <CACO55tvnT4mT1cVyMTOig5M1kVj07i8ZH28EN11fYYuB+L+abg@mail.gmail.com>
-From: Karol Herbst <kherbst@redhat.com>
-Date: Mon, 4 Oct 2021 16:35:18 +0200
-Message-ID: <CACO55tvz+ELx3Dm--=fWZo1p2vvAoo1VsOLv51r+0O4VittD0w@mail.gmail.com>
-To: Oswaldo Graterol <oswaldo.graterol@gmail.com>
-Cc: nouveau <nouveau@lists.freedesktop.org>, glenn.kennard@gmail.com
 Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=kherbst@redhat.com
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=lyude@redhat.com
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [Nouveau] Nvidia GeForce 8200M - Image flicker
+Content-Transfer-Encoding: 8bit
+Subject: Re: [Nouveau] [Intel-gfx] [PATCH v2 0/4] drm/dp,
+ drm/i915: Finish basic PWM support for VESA backlight helpers
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -79,40 +88,66 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Mon, Oct 4, 2021 at 4:31 PM Karol Herbst <kherbst@redhat.com> wrote:
->
-> We actually fixed a few of those issues on those old GPUs. But I don't
-> think they are part of any mesa release yet:
->
-> https://gitlab.freedesktop.org/mesa/mesa/-/commit/1387d1d41103b3120d40f93=
-f66a7cfe00304bfd7
->
+On Sat, 2021-10-02 at 11:14 +0200, Hans de Goede wrote:
+> Hi Lyude,
+> 
+> On 10/2/21 12:53 AM, Lyude Paul wrote:
+> > When I originally moved all of the VESA backlight code in i915 into DRM
+> > helpers, one of the things I didn't have the hardware or time for
+> > testing was machines that used a combination of PWM and DPCD in order to
+> > control their backlights. This has since then caused some breakages and
+> > resulted in us disabling DPCD backlight support on such machines. This
+> > works fine, unless you have a machine that actually needs this
+> > functionality for backlight controls to work at all. Additionally, we
+> > will need to support PWM for when we start adding support for VESA's
+> > product (as in the product of multiplication) control mode for better
+> > brightness ranges.
+> > 
+> > So - let's finally finish up implementing basic support for these types
+> > of backlights to solve these problems in our DP helpers, along with
+> > implementing support for this in i915. And since digging into this issue
+> > solved the last questions we really had about probing backlights in i915
+> > for the most part, let's update some of the comments around that as
+> > well!
+> 
+> Backlight control is a topic which I'm reasonably familiar with,
+> do you want me to review this series for you ?
 
-actually.. seems like this patch got backported to 21.2.0 and 21.1.7,
-so if your mesa version is older it's worth trying a newer one to see
-if the problems improved at least a little.
+Possibly, although I definitely want to make sure that someone from Intel gets
+a chance to review this as well. I'm more curious if you might happen to have
+any systems that would be able to test this.
 
-> and we have a pending MR:
-> https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/12154
-> https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/12241
->
-> Glenn, is there some update on those MRs? In case you are short on
-> time, maybe somebody else should take a look?
->
-> On Sat, Oct 2, 2021 at 4:24 AM Oswaldo Graterol
-> <oswaldo.graterol@gmail.com> wrote:
-> >
-> >
-> > Hi,
-> >
-> > I installed lubuntu 20.04 amd64 in my old laptop (Compaq CQ60-210 US), =
-but the screen flicker when i open some program like firefox, i tried nvidi=
-a drivers to GeForce 8200M GPU, but no work to this hardware, i want to use=
- nouveau drivers but need to fix the flicker problems. Can you help me with=
- this?
-> >
-> > Thank you for any help you can provide.
-> >
-> > --
-> > Oswaldo Graterol
+> 
+> Regards,
+> 
+> Hans
+> 
+> 
+> 
+> > 
+> > Changes:
+> > * Fixup docs
+> > * Add patch to stop us from breaking nouveau
+> > 
+> > Lyude Paul (4):
+> >   drm/i915: Add support for panels with VESA backlights with PWM
+> >     enable/disable
+> >   drm/nouveau/kms/nv50-: Explicitly check DPCD backlights for aux
+> >     enable/brightness
+> >   drm/dp, drm/i915: Add support for VESA backlights using PWM for
+> >     brightness control
+> >   drm/i915: Clarify probing order in intel_dp_aux_init_backlight_funcs()
+> > 
+> >  drivers/gpu/drm/drm_dp_helper.c               | 75 +++++++++++------
+> >  .../drm/i915/display/intel_dp_aux_backlight.c | 80 ++++++++++++++-----
+> >  drivers/gpu/drm/nouveau/nouveau_backlight.c   |  5 +-
+> >  include/drm/drm_dp_helper.h                   |  7 +-
+> >  4 files changed, 122 insertions(+), 45 deletions(-)
+> > 
+> 
+
+-- 
+Cheers,
+ Lyude Paul (she/her)
+ Software Engineer at Red Hat
 
