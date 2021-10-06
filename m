@@ -1,73 +1,55 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7F1354232D0
-	for <lists+nouveau@lfdr.de>; Tue,  5 Oct 2021 23:27:37 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 63D3B4235EF
+	for <lists+nouveau@lfdr.de>; Wed,  6 Oct 2021 04:41:26 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B03736E45E;
-	Tue,  5 Oct 2021 21:27:35 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 869A56ECBE;
+	Wed,  6 Oct 2021 02:41:24 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8BB666E45E
- for <nouveau@lists.freedesktop.org>; Tue,  5 Oct 2021 21:27:34 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4BD606ECC5
+ for <nouveau@lists.freedesktop.org>; Wed,  6 Oct 2021 02:41:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1633469253;
+ s=mimecast20190719; t=1633488082;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=PwFfE+Y5InXuG9Mab93GHBXLo4VdByGAgXtkzB6nG04=;
- b=fHfdka/zfLwvLoBw7UygiX9NKpcVNSmzjMELbxOBetR9ukDCce9zyQzD1IYr/e1Baso3nZ
- DNEOqwqKjws0E/CrXd+ignQFbV1c49S8AWdWuJ9nb6DZ0g9a31pieiEbnIKG8QiIEJ0Uqs
- UZL36cdNKhH/cUVpogjq5M/NNAPkeD4=
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-171-XO52MwgWNWqIgTkPz-lRiA-1; Tue, 05 Oct 2021 17:27:32 -0400
-X-MC-Unique: XO52MwgWNWqIgTkPz-lRiA-1
-Received: by mail-wr1-f72.google.com with SMTP id
- n18-20020adff092000000b001609d9081d4so344335wro.18
- for <nouveau@lists.freedesktop.org>; Tue, 05 Oct 2021 14:27:32 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=PwFfE+Y5InXuG9Mab93GHBXLo4VdByGAgXtkzB6nG04=;
- b=pzLh6rCXKcOtU19KFy8MEZxcsi/ryinLQXKZRCoGgbIjEx5Rqts8U9jeoDWpauqy7G
- 55tuwvAVXeteu3p76kcuqw430Avf0Hlt6y+nr3eGDNnMBNGrVJJCYofUtoxHE5ZDDJr2
- OEUS66FgjsQGh2/J4BdXXdbHkQyoUZsxbUhcJBcgoF9uWjaLaACeZZkjXtNnZR1ilKPc
- w+pIaYdu9kxBfxnuAN14QYcGJS10Pi4zpWSG5HIpOf87Y/RJ7NXFGCybJHkwnGtq8qxu
- WKXm3o/bc76meyC0nkKzTnbmkjZeXzJQDamsy4BjEhWCA9wzZumvRkGl6vRjBWK8tBGd
- +Wjw==
-X-Gm-Message-State: AOAM530W1+vw2SHRijn7SGGFTYKf0erralBuxaa/lgjp2jZl2Gi+o1VX
- 9Z/T5yKdHC6jbKar6J1j0ketqiH0yG/DO+MVl7sCa3m6xDfLA5ykWowzFgQjBnyJ7bID+GL0dpC
- GK2eRvSKf6ClBVQxX3xHHdtLgE9UPjqGRQ6E+wnX5lg==
-X-Received: by 2002:a7b:c5c9:: with SMTP id n9mr6013047wmk.141.1633469251530; 
- Tue, 05 Oct 2021 14:27:31 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJxI6arb7Nu/LjPRQIeObx0l28qGXQBbA7WeXp9gAXr9AfEhUSIm9b8jErwZn57n5uHfE3BhTGBeeSFglHTNUn4=
-X-Received: by 2002:a7b:c5c9:: with SMTP id n9mr6013031wmk.141.1633469251335; 
- Tue, 05 Oct 2021 14:27:31 -0700 (PDT)
+ to:to:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=E3ytseCi5Oj9doDUfSdCM4nKRCGEoIFgdUICjz0Jf1s=;
+ b=O0zILraHzF5aanKp3t9lFUSF4YR3U1mORZ07MojBTsQlQ66vZeNuqr/+WKlaCyWbhhgm32
+ 0TX/gJfYlLBFTlRWb2yyCy7ySl8KaYmR67ODnsrv1GxTkFwuBdw2pIQmfTSVBjx0hEDDn1
+ jgF+AgSWoKaRQMXJb0YDIxUlJHMGKzw=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-125-YEH35CVKMVOY5jxgtUR7Pw-1; Tue, 05 Oct 2021 22:41:21 -0400
+X-MC-Unique: YEH35CVKMVOY5jxgtUR7Pw-1
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
+ [10.5.11.16])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 1510010168C0;
+ Wed,  6 Oct 2021 02:41:20 +0000 (UTC)
+Received: from Ruby.lyude.net (unknown [10.22.16.47])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 0E1429AA38;
+ Wed,  6 Oct 2021 02:41:14 +0000 (UTC)
+From: Lyude Paul <lyude@redhat.com>
+To: intel-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org
+Date: Tue,  5 Oct 2021 22:40:13 -0400
+Message-Id: <20211006024018.320394-1-lyude@redhat.com>
 MIME-Version: 1.0
-References: <20210907122633.16665-1-cymi20@fudan.edu.cn>
-In-Reply-To: <20210907122633.16665-1-cymi20@fudan.edu.cn>
-From: Karol Herbst <kherbst@redhat.com>
-Date: Tue, 5 Oct 2021 23:27:20 +0200
-Message-ID: <CACO55tvUuZJD_AOgxS=Ts3MBhXkJARwWapF6QaxQqTk0JG7zWQ@mail.gmail.com>
-To: Chenyuan Mi <cymi20@fudan.edu.cn>
-Cc: yuanxzhang@fudan.edu.cn, Xiyu Yang <xiyuyang19@fudan.edu.cn>, 
- Xin Tan <tanxin.ctf@gmail.com>, Ben Skeggs <bskeggs@redhat.com>, 
- David Airlie <airlied@linux.ie>, Daniel Vetter <daniel@ffwll.ch>, 
- dri-devel <dri-devel@lists.freedesktop.org>,
- nouveau <nouveau@lists.freedesktop.org>, 
- LKML <linux-kernel@vger.kernel.org>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
 Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=kherbst@redhat.com
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=lyude@redhat.com
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="UTF-8"
-Subject: Re: [Nouveau] [PATCH] drm/nouveau/svm: Fix refcount leak bug and
- missing check against null bug
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="US-ASCII"
+Subject: [Nouveau] [PATCH v3 0/5] drm/dp,
+ drm/i915: Finish basic PWM support for VESA backlight helpers
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -82,54 +64,50 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-I think it makes sense to add a Fixes tag to this:
+When I originally moved all of the VESA backlight code in i915 into DRM
+helpers, one of the things I didn't have the hardware or time for
+testing was machines that used a combination of PWM and DPCD in order to
+control their backlights. This has since then caused some breakages and
+resulted in us disabling DPCD backlight support on such machines. This
+works fine, unless you have a machine that actually needs this
+functionality for backlight controls to work at all. Additionally, we
+will need to support PWM for when we start adding support for VESA's
+product (as in the product of multiplication) control mode for better
+brightness ranges.
 
-Fixes: 822cab6150d3 ("drm/nouveau/svm: check for SVM initialized
-before migrating")
-Reviewed-by: Karol Herbst <kherbst@redhat.com>
+So - let's finally finish up implementing basic support for these types
+of backlights to solve these problems in our DP helpers, along with
+implementing support for this in i915. And since digging into this issue
+solved the last questions we really had about probing backlights in i915
+for the most part, let's update some of the comments around that as
+well!
 
-On Tue, Sep 7, 2021 at 3:20 PM Chenyuan Mi <cymi20@fudan.edu.cn> wrote:
->
-> The reference counting issue happens in one exception handling path of
-> nouveau_svmm_bind(). When cli->svm.svmm is null, the function forgets
-> to decrease the refcount of mm increased by get_task_mm(), causing a
-> refcount leak.
->
-> Fix this issue by using mmput() to decrease the refcount in the
-> exception handling path.
->
-> Also, the function forgets to do check against null when get mm
-> by get_task_mm().
->
-> Fix this issue by adding null check after get mm by get_task_mm().
->
-> Signed-off-by: Chenyuan Mi <cymi20@fudan.edu.cn>
-> Signed-off-by: Xiyu Yang <xiyuyang19@fudan.edu.cn>
-> Signed-off-by: Xin Tan <tanxin.ctf@gmail.com>
-> ---
->  drivers/gpu/drm/nouveau/nouveau_svm.c | 4 ++++
->  1 file changed, 4 insertions(+)
->
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_svm.c b/drivers/gpu/drm/nouveau/nouveau_svm.c
-> index b0c3422cb01f..9985bfde015a 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_svm.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_svm.c
-> @@ -162,10 +162,14 @@ nouveau_svmm_bind(struct drm_device *dev, void *data,
->          */
->
->         mm = get_task_mm(current);
-> +       if (!mm) {
-> +               return -EINVAL;
-> +       }
->         mmap_read_lock(mm);
->
->         if (!cli->svm.svmm) {
->                 mmap_read_unlock(mm);
-> +               mmput(mm);
->                 return -EINVAL;
->         }
->
-> --
-> 2.17.1
->
+Changes (v3):
+* Add likely fix for weird backlight scaling issues on samus-fi-bdw in intel's
+  CI, which pointed out we've been leaving some (currently) unsupported
+  backlight features on by mistake which certainly have the potential to cause
+  problems.
+Changes (v2):
+* Fixup docs
+* Add patch to stop us from breaking nouveau
+
+Lyude Paul (5):
+  drm/i915: Add support for panels with VESA backlights with PWM
+    enable/disable
+  drm/nouveau/kms/nv50-: Explicitly check DPCD backlights for aux
+    enable/brightness
+  drm/dp: Disable unsupported features in
+    DP_EDP_BACKLIGHT_MODE_SET_REGISTER
+  drm/dp, drm/i915: Add support for VESA backlights using PWM for
+    brightness control
+  drm/i915: Clarify probing order in intel_dp_aux_init_backlight_funcs()
+
+ drivers/gpu/drm/drm_dp_helper.c               | 82 +++++++++++++------
+ .../drm/i915/display/intel_dp_aux_backlight.c | 80 ++++++++++++++----
+ drivers/gpu/drm/nouveau/nouveau_backlight.c   |  5 +-
+ include/drm/drm_dp_helper.h                   |  7 +-
+ 4 files changed, 128 insertions(+), 46 deletions(-)
+
+-- 
+2.31.1
 
