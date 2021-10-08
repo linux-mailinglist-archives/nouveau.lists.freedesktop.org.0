@@ -1,59 +1,48 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4597B4260D3
-	for <lists+nouveau@lfdr.de>; Fri,  8 Oct 2021 02:00:15 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id E83F242686E
+	for <lists+nouveau@lfdr.de>; Fri,  8 Oct 2021 13:02:54 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 673486E85C;
-	Fri,  8 Oct 2021 00:00:13 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5A6EF6F467;
+	Fri,  8 Oct 2021 11:02:47 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-yb1-xb2f.google.com (mail-yb1-xb2f.google.com
- [IPv6:2607:f8b0:4864:20::b2f])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0976A6E04E;
- Fri,  8 Oct 2021 00:00:12 +0000 (UTC)
-Received: by mail-yb1-xb2f.google.com with SMTP id r1so17147880ybo.10;
- Thu, 07 Oct 2021 17:00:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=525REZtEeK0PFXhhzxFmSB8FcMG0mIL99+Md9Sh4UyI=;
- b=DqOdOwDJqcLiF+La2Dg1kaSYIsThJfYHt2LFa1VQB0w9gkLXQhokJtJHWFs9t73bWJ
- fea3c/m79MMYnmyW2Of9Aq6uq730fKdC58YSS+1/M/g1ErZfid3pPx9juNi+kzUPm4cR
- 99rKU82ARLFAlyKv/dOxu/oiSBCVbDzUdnwuSYtjQPul7N6UoPHiigCj2Q9tobEiEm/i
- NZ+hThm9NrfLxaZQywggKUcGbruAcdfGFG0UtAzzyHGQUCOLqP1w9HSZZg0NUPE2iIBm
- waJ+e+vAJVxvvp+TwDIw349XikDiY2N6xn95uMyTPYGfaMkQFLaFbWHJniNGvVY4CGAy
- wNQg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=525REZtEeK0PFXhhzxFmSB8FcMG0mIL99+Md9Sh4UyI=;
- b=jJxs1X+pKK4gCUEY7oY91ilhOBCdaGgOCDEC8Kj7yfR4Pk40J+pYrWGboQKsL3+n7T
- HMiHVFR65XIN/ZEtXSQbaoJWtPCJ0u9LP5256NC2FTuupf4HnKb7W0L3dmvRqPB/sA9r
- anTrDTdcHiUdBjE1nKTz/yGI9oWWuCgYSL2N2KUi7p2bCNYuxPmenIxSVRnTEXQpRoeI
- zek+zqVG1o8x1RsvAJHOPtSfWt44fXz9wxfA4hWz9t6x7DoBl6wQX8EqCiFgDElameCP
- Cvlu4wI/+ofXzq1N936gxnNpJtGD1CeMoBINVe+Bm2beBgLWeiftYAGbAG2vBCkszeN4
- SCzw==
-X-Gm-Message-State: AOAM530t5yJY8+5+qnBAXmFKzBH6lK4mAqiTZMT4JfHlbyMBx0A4Y49h
- xnhKihhARaem5F3aBa3oApBTSV+kw2rrgHChkDc=
-X-Google-Smtp-Source: ABdhPJxxm5SOn3w6dvn60Fm3ACaWzgy85Fy4Tbn0+YzDCnyr8cOPzcronUtgdAdVZYUPd+W8tWCocGA70ZXQDwQY8s0=
-X-Received: by 2002:a25:9a81:: with SMTP id s1mr24781ybo.230.1633651210963;
- Thu, 07 Oct 2021 17:00:10 -0700 (PDT)
+Received: from mga07.intel.com (mga07.intel.com [134.134.136.100])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id BCC656E0AF;
+ Fri,  8 Oct 2021 11:02:45 +0000 (UTC)
+X-IronPort-AV: E=McAfee;i="6200,9189,10130"; a="289981206"
+X-IronPort-AV: E=Sophos;i="5.85,357,1624345200"; d="scan'208";a="289981206"
+Received: from orsmga008.jf.intel.com ([10.7.209.65])
+ by orsmga105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 08 Oct 2021 04:02:45 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.85,357,1624345200"; d="scan'208";a="489419871"
+Received: from stinkbox.fi.intel.com (HELO stinkbox) ([10.237.72.171])
+ by orsmga008.jf.intel.com with SMTP; 08 Oct 2021 04:02:41 -0700
+Received: by stinkbox (sSMTP sendmail emulation);
+ Fri, 08 Oct 2021 14:02:40 +0300
+Date: Fri, 8 Oct 2021 14:02:40 +0300
+From: Ville =?iso-8859-1?Q?Syrj=E4l=E4?= <ville.syrjala@linux.intel.com>
+To: Javier Martinez Canillas <javierm@redhat.com>
+Cc: linux-kernel@vger.kernel.org, Johannes Stezenbach <js@sig21.net>,
+ Daniel Vetter <daniel@ffwll.ch>, David Airlie <airlied@linux.ie>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>,
+ Thomas Zimmermann <tzimmermann@suse.de>,
+ dri-devel@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>,
+ nouveau@lists.freedesktop.org
+Message-ID: <YWAlUBoMlerOGJEV@intel.com>
+References: <20211008071708.1954041-1-javierm@redhat.com>
 MIME-Version: 1.0
-References: <20211007214117.231472-1-marex@denx.de>
- <CACO55tsgmtR1CqdJOBMu9oQEEojfpnUwWNvab9gA7ZuZmyiSmA@mail.gmail.com>
-In-Reply-To: <CACO55tsgmtR1CqdJOBMu9oQEEojfpnUwWNvab9gA7ZuZmyiSmA@mail.gmail.com>
-From: Ben Skeggs <skeggsb@gmail.com>
-Date: Fri, 8 Oct 2021 09:59:59 +1000
-Message-ID: <CACAvsv54TiYbG1SFnkRdcbO0yiUR6wuHn=wWJFDGEr5shhQ5wQ@mail.gmail.com>
-To: Karol Herbst <kherbst@redhat.com>
-Cc: Marek Vasut <marex@denx.de>, dri-devel <dri-devel@lists.freedesktop.org>, 
- nouveau <nouveau@lists.freedesktop.org>, stable@vger.kernel.org, 
- Ben Skeggs <bskeggs@redhat.com>, Lyude Paul <lyude@redhat.com>
-Content-Type: text/plain; charset="UTF-8"
-Subject: Re: [Nouveau] [PATCH] drm/nouveau/fifo: Reinstate the correct
- engine bit programming
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20211008071708.1954041-1-javierm@redhat.com>
+X-Patchwork-Hint: comment
+Subject: Re: [Nouveau] [PATCH] Revert "drm/fb-helper: improve DRM fbdev
+ emulation device names"
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,66 +57,53 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, 8 Oct 2021 at 07:46, Karol Herbst <kherbst@redhat.com> wrote:
->
-> Reviewed-by: Karol Herbst <kherbst@redhat.com>
-Reviewed-by: Ben Skeggs <bskeggs@redhat.com>
+On Fri, Oct 08, 2021 at 09:17:08AM +0200, Javier Martinez Canillas wrote:
+> This reverts commit b3484d2b03e4c940a9598aa841a52d69729c582a.
+> 
+> That change attempted to improve the DRM drivers fbdev emulation device
+> names to avoid having confusing names like "simpledrmdrmfb" in /proc/fb.
+> 
+> But unfortunately there are user-space programs, such as pm-utils that
+> query that information and so broke after the mentioned commit. Since
+> the names in /proc/fb are used programs that consider it an ABI, let's
+> restore the old names even when this lead to silly naming like the one
+> mentioned above as an example.
 
->
-> I haven't checked if other places need fixing up yet, and I still want
-> to test this patch, but I won't get to it until Monday. But if
-> everything is in place we can get this pushed next week so we can
-> finally fix this annoying issue :) I was also seeing some minor
-> graphical corruptions which would be cool if this patch fixes it as
-> well.
->
-> Thanks for the patch and poking us about the bug again.
->
-> On Thu, Oct 7, 2021 at 11:41 PM Marek Vasut <marex@denx.de> wrote:
-> >
-> > Commit 64f7c698bea9 ("drm/nouveau/fifo: add engine_id hook") replaced
-> > fifo/chang84.c g84_fifo_chan_engine() call with an indirect call of
-> > fifo/g84.c g84_fifo_engine_id(). The G84_FIFO_ENGN_* values returned
-> > from the later g84_fifo_engine_id() are incremented by 1 compared to
-> > the previous g84_fifo_chan_engine() return values.
-> >
-> > This is fine either way for most of the code, except this one line
-> > where an engine bit programmed into the hardware is derived from the
-> > return value. Decrement the return value accordingly, otherwise the
-> > wrong engine bit is programmed into the hardware and that leads to
-> > the following failure:
-> > nouveau 0000:01:00.0: gr: 00000030 [ILLEGAL_MTHD ILLEGAL_CLASS] ch 1 [003fbce000 DRM] subc 3 class 0000 mthd 085c data 00000420
-> >
-> > On the following hardware:
-> > lspci -s 01:00.0
-> > 01:00.0 VGA compatible controller: NVIDIA Corporation GT216GLM [Quadro FX 880M] (rev a2)
-> > lspci -ns 01:00.0
-> > 01:00.0 0300: 10de:0a3c (rev a2)
-> >
-> > Fixes: 64f7c698bea9 ("drm/nouveau/fifo: add engine_id hook")
-> > Signed-off-by: Marek Vasut <marex@denx.de>
-> > Cc: <stable@vger.kernel.org> # 5.12+
-> > Cc: Ben Skeggs <bskeggs@redhat.com>
-> > Cc: Karol Herbst <kherbst@redhat.com>
-> > Cc: Lyude Paul <lyude@redhat.com>
-> > ---
-> >  drivers/gpu/drm/nouveau/nvkm/engine/fifo/chang84.c | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >
-> > diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/chang84.c b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/chang84.c
-> > index 353b77d9b3dc..3492c561f2cf 100644
-> > --- a/drivers/gpu/drm/nouveau/nvkm/engine/fifo/chang84.c
-> > +++ b/drivers/gpu/drm/nouveau/nvkm/engine/fifo/chang84.c
-> > @@ -82,7 +82,7 @@ g84_fifo_chan_engine_fini(struct nvkm_fifo_chan *base,
-> >         if (offset < 0)
-> >                 return 0;
-> >
-> > -       engn = fifo->base.func->engine_id(&fifo->base, engine);
-> > +       engn = fifo->base.func->engine_id(&fifo->base, engine) - 1;
-> >         save = nvkm_mask(device, 0x002520, 0x0000003f, 1 << engn);
-> >         nvkm_wr32(device, 0x0032fc, chan->base.inst->addr >> 12);
-> >         done = nvkm_msec(device, 2000,
-> > --
-> > 2.33.0
-> >
->
+The usage Johannes listed was this specificially:
+ using_kms() { grep -q -E '(nouveau|drm)fb' /proc/fb; }                                                        
+
+So it actually looks like  Daniel's
+commit f243dd06180a ("drm/nouveau: Use drm_fb_helper_fill_info")
+also broke the abi. But for the pm-utils use case at least
+just having the "drmfb" in there should cover even nouveau.
+
+Cc: stable@vger.kernel.org
+Reviewed-by: Ville Syrjälä <ville.syrjala@linux.intel.com>
+
+> 
+> Reported-by: Johannes Stezenbach <js@sig21.net>
+> Signed-off-by: Javier Martinez Canillas <javierm@redhat.com>
+> ---
+> 
+>  drivers/gpu/drm/drm_fb_helper.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/drivers/gpu/drm/drm_fb_helper.c b/drivers/gpu/drm/drm_fb_helper.c
+> index 3ab07832104..8993b02e783 100644
+> --- a/drivers/gpu/drm/drm_fb_helper.c
+> +++ b/drivers/gpu/drm/drm_fb_helper.c
+> @@ -1737,7 +1737,7 @@ void drm_fb_helper_fill_info(struct fb_info *info,
+>  			       sizes->fb_width, sizes->fb_height);
+>  
+>  	info->par = fb_helper;
+> -	snprintf(info->fix.id, sizeof(info->fix.id), "%s",
+> +	snprintf(info->fix.id, sizeof(info->fix.id), "%sdrmfb",
+>  		 fb_helper->dev->driver->name);
+>  
+>  }
+> -- 
+> 2.31.1
+
+-- 
+Ville Syrjälä
+Intel
