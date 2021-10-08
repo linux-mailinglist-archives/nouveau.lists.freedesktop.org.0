@@ -2,76 +2,77 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D00554324AF
-	for <lists+nouveau@lfdr.de>; Mon, 18 Oct 2021 19:19:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C9F6E4324AE
+	for <lists+nouveau@lfdr.de>; Mon, 18 Oct 2021 19:19:01 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 52D786EA57;
-	Mon, 18 Oct 2021 17:18:32 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E80A46EA4D;
+	Mon, 18 Oct 2021 17:18:31 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from wnew1-smtp.messagingengine.com (wnew1-smtp.messagingengine.com
- [64.147.123.26])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 6F1026F4E5;
- Thu,  7 Oct 2021 19:39:28 +0000 (UTC)
-Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
- by mailnew.west.internal (Postfix) with ESMTP id 7D7F92B009FD;
- Thu,  7 Oct 2021 15:39:27 -0400 (EDT)
+Received: from new4-smtp.messagingengine.com (new4-smtp.messagingengine.com
+ [66.111.4.230])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 0B1FF6E115;
+ Fri,  8 Oct 2021 20:55:22 +0000 (UTC)
+Received: from compute6.internal (compute6.nyi.internal [10.202.2.46])
+ by mailnew.nyi.internal (Postfix) with ESMTP id A9CF0580C13;
+ Fri,  8 Oct 2021 16:55:20 -0400 (EDT)
 Received: from mailfrontend1 ([10.202.2.162])
- by compute4.internal (MEProxy); Thu, 07 Oct 2021 15:39:28 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=u92.eu; h=from
- :to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding; s=fm3; bh=q7lysNWY/y86+
- dax3X8W9SkKV4HyuolKzTejQgSxgQI=; b=KrMq1lAAXXvmaAUAnfz7lwERtfWaC
- 1f2IWwAY+tHi+KdEXrpleIa9LNWT3eQXaGcn7sN63BYG9dF7qZGWzu0MiAosyDPb
- ce1QaGb12shmJzg72jLm9WHUP5Ny88S4+ONXEw8VYt8SlyyIq93asngRmT08P5aE
- aESn7yBinfKH5T58GU1fiIM1MAaxRWPHuQcgmk4EURXu7Td4JEf8+SywPK58l8Mr
- yGVbMvOgcWQcd36HoU49Rd7U+o8dSUCYzB2+jKPDBoEGh3hRAz+uLtDOTntT+Ytf
- gwvNhSWLto8+1ERwmf+sIef9XLA3AP9dFU/9QNXXKte69Q9Z2k0DGj6lQ==
+ by compute6.internal (MEProxy); Fri, 08 Oct 2021 16:55:20 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=u92.eu; h=date
+ :from:to:cc:subject:message-id:references:mime-version
+ :content-type:in-reply-to; s=fm3; bh=U/0tI2WqpY8R/D5cCNUlc8nWhAl
+ LsJXOzrctQujWspY=; b=l/83LD6l0rHvCZwTBsNAVmL0SqTO0/h8C5H2nz6CaE9
+ md5NOYwRiHDc6jGDWDvKo0iR9nkIZSNGQEIjT8pR+5GYB9tddVnD9emmUQGwuHeg
+ /XaeWspPz3GuFT/xqzFkTKAIDZCsdJU6v8uZ/47/ulLKqul5XLrF7kK6IF1uaNp6
+ EvHsRJNO3E2y0TqoqAzBJE+YW16DN+aKXC7jFF0ybZUvzcCKzAcFt+eHdQnUKaU2
+ W2YgPK5I2ERA1OQHY4EFj63/CfNVxsAz0e6vdb7aua/tm9u0rj2M2Bd3Z5NaA+TZ
+ 6UJUjBL1kIy2hE9BEPChzkjElPApG3xYKnLSSlRIe1w==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:content-transfer-encoding:date:from
- :in-reply-to:message-id:mime-version:references:subject:to
- :x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
- fm1; bh=q7lysNWY/y86+dax3X8W9SkKV4HyuolKzTejQgSxgQI=; b=anyH8xrh
- Cyy1FtBSxybtYyWFyaf1RqIyIKrKVFr4O59GjhxrGQP1mcJdtzT6q37scqcPWSxC
- libH/eClVWliiWIlcPX80gPN8mWp3zc43USRzhN76J6OjBnt5A7P1iHA84uHblhA
- v0kiPRmKK3Z0dnHk6vaXYmIp+63PVg3O8T25hILJ4DY3CwOXVyS0oE8QbcYqWi28
- Pv1XKrTr5JXD65D9vJHg6toMT0uxSc6PBmRJN3IeIW+C08sUfisp8YwGzvvSTYBW
- 5K6qL6A7XpVBl+A4h9sRp6ZXzktcbdMRvSE7BJVsTBmjouq5dRMGJiV2agF96EBx
- vBZMzx9jpgabLQ==
-X-ME-Sender: <xms:70xfYZV64G1o-RkvXO3g0BhYsRuHd_srNs4SD7YPG5VagRrX64Vj-Q>
- <xme:70xfYZkrCPZodCFuDCLjJL6xLZ9UOUD3-0oNNJ134tUrvVsTsbIaGrfdhMVZQN81Z
- DobPfRcIUgAw8OGxg>
-X-ME-Received: <xmr:70xfYVZeEu90nLkdjPndZOgTo3bwGwgzhboomOj38CIdzAijM_KAQGw3tghYqIEVtGp0>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvtddrudelkedgudefjecutefuodetggdotefrod
+ messagingengine.com; h=cc:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to:x-me-proxy
+ :x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; bh=U/0tI2
+ WqpY8R/D5cCNUlc8nWhAlLsJXOzrctQujWspY=; b=m2SDU6/GzFY7kNBWjel2k5
+ QMEEP9MAC0CM9LfpyTHmTohPW33zwMfXCgy9jlfJuRot5mNKDUfluGt1Chnc7S56
+ jBAE9SJ2A7OljpYYIbpisObs2KG3x2ppe/cQ6s8F+fk1a46k3RJ3gfRo3F56nQf0
+ 9y25aP8ii7jQlGiE19C/ich569t3faFmJxH8ht4VRUuDdLCMhUBPJUgE8j3ASqKD
+ JKe+BaXKl7D8AsX+faKETfGglnuEzW8UY3BVgWnLH5+btZA5wccHDMHTdmIkoP6r
+ /UuXeszP6MKZkEGiY1ezFuUB3vayyPXgDC4O1zqb4BsaKlwJKa5aXKMvZf4MOKWQ
+ ==
+X-ME-Sender: <xms:N7BgYRFnXQpksB119JM60EYoUp1HdvDkDoTj8GqluIHrunTIiMs9xA>
+ <xme:N7BgYWVEAF48p_ub6G8kiOLvInPbQRxOQveFA40yTau8rXhuZc0PI4N7JCnysYuuN
+ 5GklthLaMCdonISFw>
+X-ME-Received: <xmr:N7BgYTI1DN7JnUaNl4GIN1L0od1bEI4Lb8ivvXSmGNPh7y9W-OH-Pg9Qr9LkMibMGB6LetB3>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvtddrvddttddgudehvdcutefuodetggdotefrod
  ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
- necuuegrihhlohhuthemuceftddtnecunecujfgurhephffvufffkffojghfggfgsedtke
- ertdertddtnecuhfhrohhmpefhvghrnhgrnhguohcutfgrmhhoshcuoehgrhgvvghnfhho
- ohesuhelvddrvghuqeenucggtffrrghtthgvrhhnpeekleekjedtheejheekfefggeevvd
- fgueegffeuveduhfehueegkeeijedvvdejfeenucevlhhushhtvghrufhiiigvpedunecu
+ necuuegrihhlohhuthemuceftddtnecunecujfgurhepfffhvffukfhfgggtuggjsehttd
+ ertddttdejnecuhfhrohhmpefhvghrnhgrnhguohcutfgrmhhoshcuoehgrhgvvghnfhho
+ ohesuhelvddrvghuqeenucggtffrrghtthgvrhhnpedvjeeifeelhfetiefhhfdthfefke
+ fhhfeutdetvdfgvefgveefheffgfekjeefheenucevlhhushhtvghrufhiiigvpedtnecu
  rfgrrhgrmhepmhgrihhlfhhrohhmpehgrhgvvghnfhhoohesuhelvddrvghu
-X-ME-Proxy: <xmx:70xfYcXavhvLWXsnQXEfviLBZqM3OZ1GwXn3Ub8Qt10CVk_f1J9xYQ>
- <xmx:70xfYTnorwh5JgS9s6uctCYzXURGXUA95iOrIUYuwN8lRa0O-n1PXg>
- <xmx:70xfYZey-8CNFk0EC8h-mJ_IJItm193yKAcs_FlagY9CR8O0qQI6uA>
- <xmx:70xfYcg2hKctP-_jFoEh1Jn3G_qywGHGiJmCkA86BU_M10X9dXJ-gwaqVlw>
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
- 7 Oct 2021 15:39:24 -0400 (EDT)
+X-ME-Proxy: <xmx:OLBgYXH--C3B6cyF5MQe8RYpEULz7AsYHfXfb4nxT77sNhnXV1sFqg>
+ <xmx:OLBgYXWgDRJjNqBOXiP9JxTR4PnQb05pTwdvIFS_dicO4cgnkYLOMA>
+ <xmx:OLBgYSMMudCuWYDBs09GVSCVcETxBx0_XYMLA63OpFrtXz40j5t7Hw>
+ <xmx:OLBgYXSdfmbw2Zr7_8ALlJODSWNZqACW47MJLKfrt32cPzHaIv6KdA>
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
+ 8 Oct 2021 16:55:16 -0400 (EDT)
+Date: Fri, 8 Oct 2021 22:55:14 +0200
 From: Fernando Ramos <greenfoo@u92.eu>
 To: dri-devel@lists.freedesktop.org
-Cc: linux-kernel@vger.kernel.org, sean@poorly.run, linux-doc@vger.kernel.org,
- amd-gfx@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
- linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org,
- nouveau@lists.freedesktop.org, linux-renesas-soc@vger.kernel.org,
- linux-tegra@vger.kernel.org
-Date: Thu,  7 Oct 2021 21:37:55 +0200
-Message-Id: <20211007193755.29579-21-greenfoo@u92.eu>
-X-Mailer: git-send-email 2.33.0
-In-Reply-To: <20211007193755.29579-1-greenfoo@u92.eu>
+Cc: linux-kernel@vger.kernel.org, sean@poorly.run,
+ linux-doc@vger.kernel.org, amd-gfx@lists.freedesktop.org,
+ intel-gfx@lists.freedesktop.org, linux-arm-msm@vger.kernel.org,
+ freedreno@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ linux-renesas-soc@vger.kernel.org, linux-tegra@vger.kernel.org
+Message-ID: <YWCwMnHh09wOKwig@zacax395.localdomain>
 References: <20211007193755.29579-1-greenfoo@u92.eu>
+ <20211007193755.29579-21-greenfoo@u92.eu>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20211007193755.29579-21-greenfoo@u92.eu>
 X-Mailman-Approved-At: Mon, 18 Oct 2021 17:18:28 +0000
-Subject: [Nouveau] [PATCH v3 20/20] drm: cleanup: remove acquire_ctx from
- drm_mode_config
+Subject: Re: [Nouveau] [PATCH v3 20/20] drm: cleanup: remove acquire_ctx
+ from drm_mode_config
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -86,31 +87,14 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
----
- include/drm/drm_mode_config.h | 10 ----------
- 1 file changed, 10 deletions(-)
-
-diff --git a/include/drm/drm_mode_config.h b/include/drm/drm_mode_config.h
-index 48b7de80daf5..b214b07157f2 100644
---- a/include/drm/drm_mode_config.h
-+++ b/include/drm/drm_mode_config.h
-@@ -383,16 +383,6 @@ struct drm_mode_config {
- 	 */
- 	struct drm_modeset_lock connection_mutex;
- 
--	/**
--	 * @acquire_ctx:
--	 *
--	 * Global implicit acquire context used by atomic drivers for legacy
--	 * IOCTLs. Deprecated, since implicit locking contexts make it
--	 * impossible to use driver-private &struct drm_modeset_lock. Users of
--	 * this must hold @mutex.
--	 */
--	struct drm_modeset_acquire_ctx *acquire_ctx;
--
- 	/**
- 	 * @idr_mutex:
- 	 *
--- 
-2.33.0
-
+On 21/10/07 09:37PM, Fernando Ramos wrote:
+> ---
+>  include/drm/drm_mode_config.h | 10 ----------
+>  1 file changed, 10 deletions(-)
+> 
+> diff --git a/include/drm/drm_mode_config.h b/include/drm/drm_mode_config.h
+> index 48b7de80daf5..b214b07157f2 100644
+> 
+This patch was missing the commit description and signed-off-by line. I'll fix
+that for the next revision (v4) together with the rest of issues that might come
+up.
