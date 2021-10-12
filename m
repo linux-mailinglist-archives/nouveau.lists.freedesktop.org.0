@@ -2,48 +2,58 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8D98042AB5B
-	for <lists+nouveau@lfdr.de>; Tue, 12 Oct 2021 19:58:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8046142AF78
+	for <lists+nouveau@lfdr.de>; Wed, 13 Oct 2021 00:03:13 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 04F196E83A;
-	Tue, 12 Oct 2021 17:58:03 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C177E6E9E5;
+	Tue, 12 Oct 2021 22:03:11 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 399 seconds by postgrey-1.36 at gabe;
- Tue, 12 Oct 2021 17:58:00 UTC
-Received: from cloudserver094114.home.pl (cloudserver094114.home.pl
- [79.96.170.134])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C4CDE6E834;
- Tue, 12 Oct 2021 17:58:00 +0000 (UTC)
-Received: from localhost (127.0.0.1) (HELO v370.home.net.pl)
- by /usr/run/smtp (/usr/run/postfix/private/idea_relay_lmtp) via UNIX with SMTP
- (IdeaSmtpServer 3.0.0)
- id 6bc65ade955083a8; Tue, 12 Oct 2021 19:51:18 +0200
-Received: from kreacher.localnet (unknown [213.134.187.88])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by v370.home.net.pl (Postfix) with ESMTPSA id 0739766A819;
- Tue, 12 Oct 2021 19:51:17 +0200 (CEST)
-From: "Rafael J. Wysocki" <rjw@rjwysocki.net>
-To: Linux ACPI <linux-acpi@vger.kernel.org>
-Cc: LKML <linux-kernel@vger.kernel.org>, Ben Skeggs <bskeggs@redhat.com>,
- dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org
-Date: Tue, 12 Oct 2021 19:44:21 +0200
-Message-ID: <21245442.EfDdHjke4D@kreacher>
-In-Reply-To: <4369779.LvFx2qVVIh@kreacher>
-References: <4369779.LvFx2qVVIh@kreacher>
+Received: from mail-yb1-xb2e.google.com (mail-yb1-xb2e.google.com
+ [IPv6:2607:f8b0:4864:20::b2e])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9B47A6E9E5;
+ Tue, 12 Oct 2021 22:03:10 +0000 (UTC)
+Received: by mail-yb1-xb2e.google.com with SMTP id g6so1742355ybb.3;
+ Tue, 12 Oct 2021 15:03:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=ftKqaoZGMToDPlxiMR/hkrcdIKvYqHccSfyT6Zdak+w=;
+ b=E2K/JHuLWHAwGOkBErV9EIGjL9VxVIkjV11E47Q6tcWifgmKKAy6QICUVuaLCRLHbF
+ R2U0RxE4dVCzStCO7WkICmdqS765g4VZXWge7Dup+ZVu2hjTiQEL1cE+KNeHswmICc7O
+ svaU3l0FSfV+ldc9E1X32nqUCaih8gUr48KlEucXIFpMJcpzZ4SrNkiGcyolcknqdJ7f
+ x6oHH3XRVozET6g8BzwjTz7XW/9NuR9SujfBnT21XYh0oE5zn0olT4gDd5MbVpkDDcJf
+ beQAqv6AegrhN/wtJsLIZ+ydJZX70UcWq6cc2kC9Ddr+1H42wIhWqfx2kSRFAAdWVRAG
+ Q+Sw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=ftKqaoZGMToDPlxiMR/hkrcdIKvYqHccSfyT6Zdak+w=;
+ b=nOBjM4WnOsSOKQ0lvnpslJA42nHQ9wcDiWCyMrfin1rVjd9zSktBKNxbTMMAQmBvwz
+ Ys3hoSsTfE+KPELBimdKvgzM9M4KgQ+mpj5G/kvznv2C/BrMsQg5SPZUjqhi+e4FZ6lU
+ ZPCTdPxRQkTpXjVb/JuwmRcF37GzFbCgPx2Z+AuomLGwwfpIhK/RSIaF3/+rjvDMzBEE
+ g9SmaPUgnQeTwyuqeLCXOCblfxgtWvTtfNjxPlkxO9BRKG635KBOrqfkEBUEbJHr34i2
+ MD7hR5OCurUip8/A1cSiGfK7MTHwBjhSHjGGSgRUbPIgjr9s8tzCCLASubHEktJbsWL/
+ PyjQ==
+X-Gm-Message-State: AOAM530HAYeU69mEG07Vj58hfp+IxJUzJr5ELcTaeOEVMsWmnNt2vaLu
+ B+djz/B+D765NAbXsx+OE6bx9ZB0hL7DL9dXik6WzB1v
+X-Google-Smtp-Source: ABdhPJzw6ADZ1dpJOkdrPmTrdt2J53tEY05Emb4iJxrIIwJ77Ol4xtvXG3biqdksy3qqRPnIlIgTb9kBkCt/R+OYf70=
+X-Received: by 2002:a25:e6d0:: with SMTP id
+ d199mr29939096ybh.527.1634076189634; 
+ Tue, 12 Oct 2021 15:03:09 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7Bit
+References: <20211012133334.1737918-1-kherbst@redhat.com>
+In-Reply-To: <20211012133334.1737918-1-kherbst@redhat.com>
+From: Ben Skeggs <skeggsb@gmail.com>
+Date: Wed, 13 Oct 2021 08:02:58 +1000
+Message-ID: <CACAvsv47Xn07zM8pSqAAbTktjySaBeW_swrZAGjrfAVUnzdHzw@mail.gmail.com>
+To: Karol Herbst <kherbst@redhat.com>
+Cc: LKML <linux-kernel@vger.kernel.org>,
+ Stephen Rothwell <sfr@canb.auug.org.au>, 
+ DRI <dri-devel@lists.freedesktop.org>, 
+ ML nouveau <nouveau@lists.freedesktop.org>
 Content-Type: text/plain; charset="UTF-8"
-X-CLIENT-IP: 213.134.187.88
-X-CLIENT-HOSTNAME: 213.134.187.88
-X-VADE-SPAMSTATE: clean
-X-VADE-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedvtddrvddtkedgudduhecutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfjqffogffrnfdpggftiffpkfenuceurghilhhouhhtmecuudehtdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujfgurhephffvufffkfgjfhgggfgtsehtufertddttdejnecuhfhrohhmpedftfgrfhgrvghlucflrdcuhgihshhotghkihdfuceorhhjfiesrhhjfiihshhotghkihdrnhgvtheqnecuggftrfgrthhtvghrnhepvdejlefghfeiudektdelkeekvddugfeghffggeejgfeukeejleevgffgvdeluddtnecukfhppedvudefrddufeegrddukeejrdekkeenucevlhhushhtvghrufhiiigvpedvnecurfgrrhgrmhepihhnvghtpedvudefrddufeegrddukeejrdekkedphhgvlhhopehkrhgvrggthhgvrhdrlhhotggrlhhnvghtpdhmrghilhhfrhhomhepfdftrghfrggvlhculfdrucghhihsohgtkhhifdcuoehrjhifsehrjhifhihsohgtkhhirdhnvghtqedprhgtphhtthhopehlihhnuhigqdgrtghpihesvhhgvghrrdhkvghrnhgvlhdrohhrghdprhgtphhtthhopehlihhnuhigqdhkvghrnhgvlhesvhhgvghrrdhkvghrnhgvlhdrohhrghdprhgtphhtthhopegsshhkvghgghhssehrvgguhhgrthdrtghomhdprhgtphhtthhopegurhhiqdguvghvvghlsehlihhsthhsrdhfrhgvvgguvghskhhtohhprdhorhhgpdhrtghpthhtohepnhhouhhvvggr
- uheslhhishhtshdrfhhrvggvuggvshhkthhophdrohhrgh
-X-DCC--Metrics: v370.home.net.pl 1024; Body=5 Fuz1=5 Fuz2=5
-Subject: [Nouveau] [PATCH v1 2/7] nouveau: ACPI: Use the ACPI_COMPANION()
- macro directly
+Subject: Re: [Nouveau] [PATCH] drm/nouveau/mmu/gp100: remove unused variable
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,49 +68,35 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-From: Rafael J. Wysocki <rafael@kernel.org>
+On Tue, 12 Oct 2021 at 23:33, Karol Herbst <kherbst@redhat.com> wrote:
+>
+> Fixes a compilation issue introduced because I forgot to test with WERROR
+> enabled.
+>
+> Cc: Stephen Rothwell <sfr@canb.auug.org.au>
+> Cc: DRI <dri-devel@lists.freedesktop.org>
+> Cc: nouveau@lists.freedesktop.org
+> Fixes: 404046cf4805 ("drm/nouveau/mmu/gp100-: drop unneeded assignment in the if condition.")
+> Signed-off-by: Karol Herbst <kherbst@redhat.com>
+Reviewed-by: Ben Skeggs <bskeggs@redhat.com>
 
-The ACPI_HANDLE() macro is a wrapper arond the ACPI_COMPANION()
-macro and the ACPI handle produced by the former comes from the
-ACPI device object produced by the latter, so it is way more
-straightforward to evaluate the latter directly instead of passing
-the handle produced by the former to acpi_bus_get_device().
-
-Modify nouveau_acpi_edid() accordingly (no intentional functional
-impact).
-
-Signed-off-by: Rafael J. Wysocki <rafael@kernel.org>
----
- drivers/gpu/drm/nouveau/nouveau_acpi.c |    9 ++-------
- 1 file changed, 2 insertions(+), 7 deletions(-)
-
-Index: linux-pm/drivers/gpu/drm/nouveau/nouveau_acpi.c
-===================================================================
---- linux-pm.orig/drivers/gpu/drm/nouveau/nouveau_acpi.c
-+++ linux-pm/drivers/gpu/drm/nouveau/nouveau_acpi.c
-@@ -364,7 +364,6 @@ void *
- nouveau_acpi_edid(struct drm_device *dev, struct drm_connector *connector)
- {
- 	struct acpi_device *acpidev;
--	acpi_handle handle;
- 	int type, ret;
- 	void *edid;
- 
-@@ -377,12 +376,8 @@ nouveau_acpi_edid(struct drm_device *dev
- 		return NULL;
- 	}
- 
--	handle = ACPI_HANDLE(dev->dev);
--	if (!handle)
--		return NULL;
--
--	ret = acpi_bus_get_device(handle, &acpidev);
--	if (ret)
-+	acpidev = ACPI_COMPANION(dev->dev);
-+	if (!acpidev)
- 		return NULL;
- 
- 	ret = acpi_video_get_edid(acpidev, type, -1, &edid);
-
-
-
+> ---
+>  drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmgp100.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmgp100.c b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmgp100.c
+> index 2b21f43069aa..17899fc95b2d 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmgp100.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmmgp100.c
+> @@ -488,7 +488,7 @@ gp100_vmm_fault_cancel(struct nvkm_vmm *vmm, void *argv, u32 argc)
+>                 struct gp100_vmm_fault_cancel_v0 v0;
+>         } *args = argv;
+>         int ret = -ENOSYS;
+> -       u32 inst, aper;
+> +       u32 aper;
+>
+>         if ((ret = nvif_unpack(ret, &argv, &argc, args->v0, 0, 0, false)))
+>                 return ret;
+> --
+> 2.31.1
+>
