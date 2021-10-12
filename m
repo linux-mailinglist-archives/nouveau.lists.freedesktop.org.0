@@ -2,69 +2,79 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id ED393432497
-	for <lists+nouveau@lfdr.de>; Mon, 18 Oct 2021 19:18:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 007164324D1
+	for <lists+nouveau@lfdr.de>; Mon, 18 Oct 2021 19:19:19 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3ABE46EA35;
-	Mon, 18 Oct 2021 17:18:31 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7C6B06EA93;
+	Mon, 18 Oct 2021 17:18:35 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
- [IPv6:2a00:1450:4864:20::432])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 000FC6E430;
- Mon, 11 Oct 2021 07:05:57 +0000 (UTC)
-Received: by mail-wr1-x432.google.com with SMTP id r7so52758189wrc.10;
- Mon, 11 Oct 2021 00:05:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=sender:date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to;
- bh=wMNVOKH7I9nZJBmdmY82PpMuTIJnDPrxHG2zjEA5m9s=;
- b=pzSf3o5Llbrkbhs9yWVdcshQQe7s/EdjJ3wKU95Bwif3mVaeFGYa+EUBkmmBXYW03d
- DQrx0IEd6u+eYTF2YWHoL5pOUwgorBAP4CKBsOzj44HhL+zXdM2NB+Coh8cr8D/jON43
- OVCBCDKtMhQ1bWVbbSuOOzrQaLrwM8irwfgxmjgitZRbNQFf7x3CunUxuu3P0G3C50u7
- Cfr4417v1OZiiH1fXWemiB760QnXpOshNsShWDsTP4CxIloYsyoK7/xS6qR/Dx3wMq9/
- s8jnuo/KX33cv0vLJyZ9EpkpWlow2W6jwQ/Sirbmjn2IdAOpBih6kOcJW9svajFzl5bC
- vqlA==
+Received: from mail-il1-x132.google.com (mail-il1-x132.google.com
+ [IPv6:2607:f8b0:4864:20::132])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1E70D89D67
+ for <nouveau@lists.freedesktop.org>; Tue, 12 Oct 2021 20:45:18 +0000 (UTC)
+Received: by mail-il1-x132.google.com with SMTP id x1so425351ilv.4
+ for <nouveau@lists.freedesktop.org>; Tue, 12 Oct 2021 13:45:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=niP7v3xFwLnCjLXmT0nzm06tTYa6qI3k7igZv8TEJsc=;
+ b=MrnlfgVEgsrzhHRtZFc5utknl/ytW5WjQcYfTv2HnZ6fS9lKKuW+F42Nrbx+gHripS
+ Xc2RIA6gaKDSc/bn3xBmR20a0BtY+7gzFpyZmggMd//w3Ub3xZ+2jCun1uq9tVGlgJIT
+ sVMI8bJ+eODJIFrgH34toluuVDOHJLd8ha9UY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:sender:date:from:to:cc:subject:message-id
- :references:mime-version:content-disposition:in-reply-to;
- bh=wMNVOKH7I9nZJBmdmY82PpMuTIJnDPrxHG2zjEA5m9s=;
- b=GehxwMDrLu3Kpf1a5N4E2AB54R3Z/RbPBkKxRxQWfyyL3MRVYvo/fhqSZVqz1eUTrX
- eKRZV5DXSy7qIMC/7WGYo4e9Hf1jaqDzakHaovSL5BEj/at7HKWgvuLuwb4CdKZGI3hb
- e37KdcGpBvglsg7D2yxMAsQVSGv2TzeqrewAkoPBkM5AUkFx2lwZhTmNT0ntLEeqV09S
- blpDzy3bEe1hJSJePKcIJNkM5jIhSsXNmxUMjUifjYL3+fJpyLA9qyAiBfp2A9CIeUI5
- Wy6OBdjVG8ZlmfBjdzUgTlaFkMsXYmaWSVelt8mF9rQGYVUWpN78GPPCp/ThBt3p19W6
- 6nPA==
-X-Gm-Message-State: AOAM530h/KBNsY0ohc06NH5tK7xUOrR5u9enPRqBIUmJC8TvCYahspas
- rdco0ikm5A0Uz2jqYGAgbv0=
-X-Google-Smtp-Source: ABdhPJzKBXc4gUSq/yC+ip4ByIKGOGVWV28ONE7yJ0I9k61i/DnvMnUlb1J+JeJXSVO7uRqSmUCoxA==
-X-Received: by 2002:adf:ae1a:: with SMTP id x26mr21985872wrc.30.1633935956529; 
- Mon, 11 Oct 2021 00:05:56 -0700 (PDT)
-Received: from eldamar (80-218-24-251.dclient.hispeed.ch. [80.218.24.251])
- by smtp.gmail.com with ESMTPSA id u5sm7171049wrg.57.2021.10.11.00.05.55
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 11 Oct 2021 00:05:56 -0700 (PDT)
-Date: Mon, 11 Oct 2021 09:05:55 +0200
-From: Salvatore Bonaccorso <carnil@debian.org>
-To: Lyude Paul <lyude@redhat.com>
-Cc: Jeremy Cline <jcline@redhat.com>, Ben Skeggs <bskeggs@redhat.com>,
- Karol Herbst <kherbst@redhat.com>, David Airlie <airlied@linux.ie>,
- nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- linux-kernel@vger.kernel.org
-Message-ID: <YWPiU+9G0AKglHmi@eldamar.lan>
-References: <20201103194912.184413-1-jcline@redhat.com>
- <20201125202648.5220-1-jcline@redhat.com>
- <b4da382b17a77b66e45fd374c9d806dac6054e3a.camel@redhat.com>
- <YRoN0vWFN6Lw22ej@eldamar.lan>
- <418fdcbcf554d34cc6423a88974f916b64b3664c.camel@redhat.com>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=niP7v3xFwLnCjLXmT0nzm06tTYa6qI3k7igZv8TEJsc=;
+ b=OmD1E3F+wMkCUGK5F6SyMpPMZ94pMOl11qsAi6Np5v9zwD1PtMDKZL4JWlh5DesN3/
+ 8kz53KV/hGXEHjKuxd38Xtkn/QoqgWS63Zv0lw6jb1wwbnOcbE0Fn1UHqoLmAOQ0NaKJ
+ QKM2Jtux9JegxDeApRStwaSAuMjGLrYQUZAOP40BsesLesWH/7HVUFBq5EIFXaCIeGEW
+ tJcT1Ja+GVKGZto+5vMdcWZduyoIe68oAIQT0QnXpPggFPv9HKkjoB7cMw1Fg6rNpNI9
+ Xl41vLTgVTTuUjcCjZE0kifmasuFh1X8GfZlhoOGE/nY90uMu+5HTIL470RM7XJ1N+W/
+ kVqg==
+X-Gm-Message-State: AOAM532wNkud7Ed+Cc1dvkR3iftbl3SrUheiaeuizSHy667DT302RoJF
+ uWAuVj1l8+qnMgC+BdKOG8NoLkzGylh4Qg==
+X-Google-Smtp-Source: ABdhPJz8CvClB0ChZ53x12h90qoyg1ERUK+tZ627EW/KoOs7WF4UhfjIKWLee4I28FuH8BZJYQXilA==
+X-Received: by 2002:a05:6e02:1646:: with SMTP id
+ v6mr15080516ilu.140.1634071517224; 
+ Tue, 12 Oct 2021 13:45:17 -0700 (PDT)
+Received: from mail-io1-f49.google.com (mail-io1-f49.google.com.
+ [209.85.166.49])
+ by smtp.gmail.com with ESMTPSA id y30sm6280692iox.54.2021.10.12.13.45.15
+ for <nouveau@lists.freedesktop.org>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 12 Oct 2021 13:45:15 -0700 (PDT)
+Received: by mail-io1-f49.google.com with SMTP id e144so379025iof.3
+ for <nouveau@lists.freedesktop.org>; Tue, 12 Oct 2021 13:45:15 -0700 (PDT)
+X-Received: by 2002:a6b:f915:: with SMTP id j21mr25937447iog.98.1634071515111; 
+ Tue, 12 Oct 2021 13:45:15 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <418fdcbcf554d34cc6423a88974f916b64b3664c.camel@redhat.com>
+References: <20211006024018.320394-1-lyude@redhat.com>
+ <20211006024018.320394-5-lyude@redhat.com>
+In-Reply-To: <20211006024018.320394-5-lyude@redhat.com>
+From: Doug Anderson <dianders@chromium.org>
+Date: Tue, 12 Oct 2021 13:45:04 -0700
+X-Gmail-Original-Message-ID: <CAD=FV=WV15+qBBA8ZcgxwOQ=i_LHsytdrUWyqZHZZBwuJJ6CFQ@mail.gmail.com>
+Message-ID: <CAD=FV=WV15+qBBA8ZcgxwOQ=i_LHsytdrUWyqZHZZBwuJJ6CFQ@mail.gmail.com>
+To: Lyude Paul <lyude@redhat.com>
+Cc: Intel Graphics <intel-gfx@lists.freedesktop.org>, 
+ dri-devel <dri-devel@lists.freedesktop.org>, 
+ "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
+ <nouveau@lists.freedesktop.org>, Rajeev Nandan <rajeevny@codeaurora.org>, 
+ Satadru Pramanik <satadru@gmail.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
+ David Airlie <airlied@linux.ie>, Daniel Vetter <daniel@ffwll.ch>, 
+ Jani Nikula <jani.nikula@linux.intel.com>, 
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>, Sean Paul <seanpaul@chromium.org>,
+ =?UTF-8?B?VmlsbGUgU3lyasOkbMOk?= <ville.syrjala@linux.intel.com>, 
+ open list <linux-kernel@vger.kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 X-Mailman-Approved-At: Mon, 18 Oct 2021 17:18:27 +0000
-Subject: Re: [Nouveau] [PATCH v2 0/3] drm/nouveau: fix a use-after-free in
- postclose()
+Subject: Re: [Nouveau] [PATCH v3 4/5] drm/dp,
+ drm/i915: Add support for VESA backlights using PWM for brightness
+ control
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -79,34 +89,24 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi Ben,
+Hi,
 
-On Tue, Aug 17, 2021 at 04:32:31PM -0400, Lyude Paul wrote:
-> It may have been, we're in the process of trying to change around how we
-> currently accept nouveau patches to stop this from happening in the future.
-> 
-> Ben, whenever you get a moment can you take a look at this?
-> 
-> On Mon, 2021-08-16 at 09:03 +0200, Salvatore Bonaccorso wrote:
-> > Hi,
-> > 
-> > On Fri, Mar 26, 2021 at 06:00:51PM -0400, Lyude Paul wrote:
-> > > This patch series is:
-> > > 
-> > > Reviewed-by: Lyude Paul <lyude@redhat.com>
-> > > 
-> > > Btw - in the future if you need to send a respin of multiple patches, you
-> > > need
-> > > to send it as it's own separate series instead of replying to the previous
-> > > one
-> > > (one-off respins can just be posted as replies though), otherwise
-> > > patchwork
-> > > won't pick it up
-> > 
-> > Did this patch series somehow fall through the cracks or got lost?
+On Tue, Oct 5, 2021 at 7:41 PM Lyude Paul <lyude@redhat.com> wrote:
+>
+> @@ -1859,8 +1859,7 @@ drm_dp_sink_can_do_video_without_timing_msa(const u8 dpcd[DP_RECEIVER_CAP_SIZE])
+>  static inline bool
+>  drm_edp_backlight_supported(const u8 edp_dpcd[EDP_DISPLAY_CTL_CAP_SIZE])
+>  {
+> -       return (edp_dpcd[1] & DP_EDP_TCON_BACKLIGHT_ADJUSTMENT_CAP) &&
+> -               (edp_dpcd[2] & DP_EDP_BACKLIGHT_BRIGHTNESS_AUX_SET_CAP);
+> +       return !!(edp_dpcd[1] & DP_EDP_TCON_BACKLIGHT_ADJUSTMENT_CAP);
+>  }
 
-Looking some older threads, noticed this one. Ben did you got a chance
-to look at it, or is it now irrelevant by other means?
+nit: I don't believe that the "!!" is needed in the above. C should
+automatically handle this since the return type of the function is
+"bool".
 
-Regards,
-Salvatore
+I've reviewed the generic (non-intel) code and it looks like a
+reasonable approach to me.
+
+Reviewed-by: Douglas Anderson <dianders@chromium.org>
