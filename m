@@ -1,51 +1,47 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9331F42C7AB
-	for <lists+nouveau@lfdr.de>; Wed, 13 Oct 2021 19:31:16 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 270AB42C7DD
+	for <lists+nouveau@lfdr.de>; Wed, 13 Oct 2021 19:44:12 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1DF316E0E8;
-	Wed, 13 Oct 2021 17:31:15 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id DE68C6E0A5;
+	Wed, 13 Oct 2021 17:44:09 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-yb1-xb30.google.com (mail-yb1-xb30.google.com
- [IPv6:2607:f8b0:4864:20::b30])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 037096E0E8
- for <nouveau@lists.freedesktop.org>; Wed, 13 Oct 2021 17:31:13 +0000 (UTC)
-Received: by mail-yb1-xb30.google.com with SMTP id d131so8280134ybd.5
- for <nouveau@lists.freedesktop.org>; Wed, 13 Oct 2021 10:31:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:from:date:message-id:subject:to;
- bh=ri0jnJLbtQY8pzBVMtxcF6F4FOstCEkPkix8vFaAEuU=;
- b=ZKmHHAys7vyzb7hiMmovFeBSbqhh0iSmjZLht7Yvk+x5lxoVyAjpORN7aWGhcxtKG4
- RfyjnbukqdmXgWws0/yMzYrnmsvXetYfsXHBNSrhFCfw5y4G8yUrIUnNsoxUxJfd5eGu
- mtluQ9QrOXOn9Mz5mKa6EoeC6NIzPb9eTFVlCP1kRziyRWBfG2zCUDNeU8992XraHmGO
- ps5Cixz4vNPQnOampb1SiwlcSv+EYKtoNZy15WhCmdoL0EvkJnW/KLLLUantWsEohJdy
- bnAYJtuOZh5NrzNJcb5/M86z/pGPy5MhNaOHjX0Hqqya1LyGaWUtP4ErxoXcrCuLPvsK
- w1Yg==
+Received: from mail-il1-f169.google.com (mail-il1-f169.google.com
+ [209.85.166.169])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 297BB6E0A5
+ for <nouveau@lists.freedesktop.org>; Wed, 13 Oct 2021 17:44:08 +0000 (UTC)
+Received: by mail-il1-f169.google.com with SMTP id j8so549381ila.11
+ for <nouveau@lists.freedesktop.org>; Wed, 13 Oct 2021 10:44:07 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=ri0jnJLbtQY8pzBVMtxcF6F4FOstCEkPkix8vFaAEuU=;
- b=0g5wZQPJgj7syJLAwP22RUA4LPYYmpnCpzTwihYBuswplKnbqjex5B2k3iNpktP935
- yt3HIJQ21ULPzC9OvXEiZ2dRtzJs7idVyyF8q7bO9H3Dhs0LNQTiHi2Bw+mxdUqqbe7h
- 23McUB+JRsTWs/9otRK/gza7joD4pXDKrFjeJkkKxlJUHGp1/JzN844Qr64FIGdrEjfi
- Cv0kECF/wAWdFkZd1ROUG2P8gqGmI0uqj/faf0CyYEBlJGOyqEGxJlE/KH2ehj02XM6F
- fYSel2A7YPQvgZpEGMxqByHKmQEOYvSC20HsCPECIl2ZvYL0X4zuSL9swUW1RfQCZ4cA
- nmyQ==
-X-Gm-Message-State: AOAM530+I931/UdeqZX8kEJQyaC3J4muclzW8rfnTm1Xsty/OXk8Hi2s
- o9s7a9uXwLKt6mBdqD+2SF9pPW7EtiQvW7ApoZ100qmonVY=
-X-Google-Smtp-Source: ABdhPJyS/jIxdlPCaQ54JU9IEBKtbrzj1vQkdWBtkDcfa+dHxGZWpnyhwsuKUo3PUP4RZjeWjXz+IfDLJik/DrRjFKQ=
-X-Received: by 2002:a25:aa8e:: with SMTP id t14mr728718ybi.532.1634146273012; 
- Wed, 13 Oct 2021 10:31:13 -0700 (PDT)
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=39gB+SG/Zru8hPxaIndg+HaHoxIBBlyM8n/xI13oUbs=;
+ b=bIx7j8rLnUgzZwUeEiGmmBXF9krfPc/m1DOmDDeUKPUYm0Yr+shCxaObNTmP7Wgf4/
+ mJpJ3X0/HOlUg49k4zLLFIkLXDJ07eErNx78Q9wUbI3faKUS8bY+zKLgCBKzB7uAmNU8
+ DG2oBCQOIVdumUl9Lik2XVRXeia2rLutdv3ByfSeE8yeb1NElC5aqGs85odL3LzK8Pm7
+ 8dfpiymMJgtgZd3fNyhachcCoI2cDOseSK+ajBsfmWpeSmFzc0mNMqz+BC+mOMADny8s
+ kHUkyzw0ssZ5gdIF8R5l4nL7t05EtDz2u9sEwp+Nt+6y4ChEJRljPV1Ap8peYlHGzPXx
+ oE2Q==
+X-Gm-Message-State: AOAM533HMxf+l2Gofp3HEzrudrW4Pk24eex+uyhxkwn4h1ZixSJBwyQE
+ 1EXTxiz3NqUY8I0OygpER1diSqA9h5k/p0altkc=
+X-Google-Smtp-Source: ABdhPJx9PgwaAEEzLG4d9HUeXPBhoPheSalnf42ssDbB686ENO16uaZkNCN4nDckuYlfXzu9OU5GEreAkbjzkd7pVGo=
+X-Received: by 2002:a05:6e02:15c9:: with SMTP id
+ q9mr331377ilu.298.1634147047270; 
+ Wed, 13 Oct 2021 10:44:07 -0700 (PDT)
 MIME-Version: 1.0
-From: Computer Enthusiastic <computer.enthusiastic@gmail.com>
-Date: Wed, 13 Oct 2021 19:31:01 +0200
-Message-ID: <CAHSpYy3G7EPhLBAiy4MgngKRqFgs1cTC-pnJb662vxxmkmxPXA@mail.gmail.com>
-To: nouveau@lists.freedesktop.org
+References: <CAHSpYy3G7EPhLBAiy4MgngKRqFgs1cTC-pnJb662vxxmkmxPXA@mail.gmail.com>
+In-Reply-To: <CAHSpYy3G7EPhLBAiy4MgngKRqFgs1cTC-pnJb662vxxmkmxPXA@mail.gmail.com>
+From: Ilia Mirkin <imirkin@alum.mit.edu>
+Date: Wed, 13 Oct 2021 13:43:56 -0400
+Message-ID: <CAKb7UvhBekZhHhq=aD+hLCfOWe33whi_bScbLiDhXDwvEvbzfA@mail.gmail.com>
+To: Computer Enthusiastic <computer.enthusiastic@gmail.com>
+Cc: nouveau <nouveau@lists.freedesktop.org>
 Content-Type: text/plain; charset="UTF-8"
-Subject: [Nouveau] Advice about debugging nouveau driver suspend issue
+Subject: Re: [Nouveau] Advice about debugging nouveau driver suspend issue
  (init_on_alloc=1 and init_on_free=1)
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -61,24 +57,38 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hello,
+The most straightforward thing, if you can reproduce at will, would be
+to do a bisect to figure out which change this happened with. Once we
+know which change caused the problem, it will hopefully provide with
+more ability to sort out where we're going wrong. You can also play
+with things like KASAN, although it's not clear to me that they would
+necessarily catch this problem.
 
-Greeting to all list members.
+Cheers,
 
-I hope this mailing list is the right place to ask about it, otherwise
-I apologize in advance and, please, direct me to the right mailing
-list.
+  -ilia
 
-I would like to receive advice on how to debug (or help to debug) the
-noveau kernel module suspend issue reported in [1][2][3]. The issue is
-constantly reproducible and it consists in a  screen corruption with
-system lockup on resume after suspend to ram or suspend to disk. It
-seems to affect NV50 nvidia graphic cards at least from kernel 5.10.0
-(probably from 5.2 or 5.3) up to 5.14.10 (I have not tested 5.15 in rc
-state, actually).
-
-Thanks in advance.
-
-[1] https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/-/issues/547
-[2] https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=989705
-[3] https://bugzilla.kernel.org/show_bug.cgi?id=213617
+On Wed, Oct 13, 2021 at 1:31 PM Computer Enthusiastic
+<computer.enthusiastic@gmail.com> wrote:
+>
+> Hello,
+>
+> Greeting to all list members.
+>
+> I hope this mailing list is the right place to ask about it, otherwise
+> I apologize in advance and, please, direct me to the right mailing
+> list.
+>
+> I would like to receive advice on how to debug (or help to debug) the
+> noveau kernel module suspend issue reported in [1][2][3]. The issue is
+> constantly reproducible and it consists in a  screen corruption with
+> system lockup on resume after suspend to ram or suspend to disk. It
+> seems to affect NV50 nvidia graphic cards at least from kernel 5.10.0
+> (probably from 5.2 or 5.3) up to 5.14.10 (I have not tested 5.15 in rc
+> state, actually).
+>
+> Thanks in advance.
+>
+> [1] https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/-/issues/547
+> [2] https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=989705
+> [3] https://bugzilla.kernel.org/show_bug.cgi?id=213617
