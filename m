@@ -1,99 +1,75 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id A93B74324D2
-	for <lists+nouveau@lfdr.de>; Mon, 18 Oct 2021 19:19:20 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5CBBA4324C2
+	for <lists+nouveau@lfdr.de>; Mon, 18 Oct 2021 19:19:13 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B07426EA8D;
-	Mon, 18 Oct 2021 17:18:47 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id AD6F56EE48;
+	Mon, 18 Oct 2021 17:18:36 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from EUR04-HE1-obe.outbound.protection.outlook.com
- (mail-eopbgr70058.outbound.protection.outlook.com [40.107.7.58])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3CAFE89AE6
- for <nouveau@lists.freedesktop.org>; Wed, 13 Oct 2021 01:12:40 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=dK/ggnaHtEnURRJAo9YV6K/umhGvZkf/EOwLnabvXp7CcKhi0UwO6WH5wqODKQlLL9wWjDjypHjuK7xXxqEDhw2OYPNv7mYTDPSMyPerl3fJ8H0XkDa25Gu0mWWXTvneIURbUIWYXQqhLwlsRYYAfxOw4y46e4JXF5DnGxhUjLpPJYSLrKZzfdg0274d0yAX0HoZdxA1ujPzlU6gTYOsGSXcl5uvb9pAiovwfKYazEyFM3KfCuXuy4Ck2GPAO78GxqdwpNsq7j8VB/vcwDCPAn/bkAvavDIXig+un410pfdVzqcWJjbedFCEiWLuTzJNBpjzZQbSOqbvyDNv2PwXfw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=UzDpYU3WACSUscc+YK6oCFwXrWGVDiBZs1XdkO20bzI=;
- b=BHQu5wHmFKmY1bNjMPPAQYnOzeO4R0IwlzTl51jUYZzRGtn4sPu+BNvL9UWz5QVSWgz1J23g0rOrCTtLV50nuvc3xugDNa0twpJUumbHRqZG/xpHv3z4NqnYUGxUv7QzN4mKFKzTa+Vs58tMrTR4CimQzCzQ5LDhE5+I4wOc4BaJ8Mh02n8YMfVzpc1XJGGqEGfCcHVE+7I9xlVctbow71sTKjUWidi7RUfDG/7bqPXSpTDlag/fzbhhDTHAyMxKp2rhzm9V2ujkehaaO4utv5KUJNoNxYKgMis7zxJ6TKMgJHajkJF2w3Jk7PyVFTvZKcQr7a9ZhballkRCPxrb9w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 188.184.36.50) smtp.rcpttodomain=lists.freedesktop.org smtp.mailfrom=cern.ch; 
- dmarc=bestguesspass action=none header.from=cern.ch; dkim=none (message not
- signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cern.onmicrosoft.com; 
- s=selector2-cern-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=UzDpYU3WACSUscc+YK6oCFwXrWGVDiBZs1XdkO20bzI=;
- b=km0d0K3Od+egBa2FZRLPnllp9PUQoswhD4UQJwno6XW/+l0qt0h1pZOHjgQAunTCrR/9cE5rZgs3GSXV+1OO6ODMkIlTNtVKxfWsY7etoi7FlJr6rsDTADFJYBbq4IYbSSsmefmpH50WS1l0hpDpjYGI2uWP3OQ2bpLmmjcGlDQ=
-Received: from AM6P193CA0065.EURP193.PROD.OUTLOOK.COM (2603:10a6:209:8e::42)
- by VI1PR0602MB3680.eurprd06.prod.outlook.com (2603:10a6:803:1e::14) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4587.24; Wed, 13 Oct
- 2021 01:12:37 +0000
-Received: from AM5EUR02FT055.eop-EUR02.prod.protection.outlook.com
- (2603:10a6:209:8e:cafe::cf) by AM6P193CA0065.outlook.office365.com
- (2603:10a6:209:8e::42) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4608.15 via Frontend
- Transport; Wed, 13 Oct 2021 01:12:37 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 188.184.36.50)
- smtp.mailfrom=cern.ch; lists.freedesktop.org; dkim=none (message not signed)
- header.d=none;lists.freedesktop.org; dmarc=bestguesspass action=none
- header.from=cern.ch;
-Received-SPF: Pass (protection.outlook.com: domain of cern.ch designates
- 188.184.36.50 as permitted sender) receiver=protection.outlook.com;
- client-ip=188.184.36.50; helo=cernmxgwlb4.cern.ch;
-Received: from cernmxgwlb4.cern.ch (188.184.36.50) by
- AM5EUR02FT055.mail.protection.outlook.com (10.152.9.191) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id
- 15.20.4587.18 via Frontend Transport; Wed, 13 Oct 2021 01:12:36 +0000
-Received: from cernfe02.cern.ch (188.184.36.47) by cernmxgwlb4.cern.ch
- (188.184.36.50) with Microsoft SMTP Server (TLS) id 14.3.498.0; Wed, 13 Oct
- 2021 03:12:35 +0200
-Received: from [IPv6:2600:1700:ef10:46e0:9aa1:450a:4eb:4e12]
- (2600:1700:ef10:46e0:9aa1:450a:4eb:4e12) by smtp.cern.ch
- (2001:1458:201:66::100:14) with Microsoft SMTP Server (TLS) id 14.3.498.0;
- Wed, 13 Oct 2021 03:12:35 +0200
-To: <nouveau@lists.freedesktop.org>
-From: Dhevan Gangadharan <dhevan.raja.gangadharan@cern.ch>
-Message-ID: <96ecf8a6-e75e-4f11-b3c2-92f1b95af5db@cern.ch>
-Date: Tue, 12 Oct 2021 20:12:31 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.13.0
+Received: from new3-smtp.messagingengine.com (new3-smtp.messagingengine.com
+ [66.111.4.229])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8D28E6EB09;
+ Wed, 13 Oct 2021 20:48:53 +0000 (UTC)
+Received: from compute2.internal (compute2.nyi.internal [10.202.2.42])
+ by mailnew.nyi.internal (Postfix) with ESMTP id D8351581176;
+ Wed, 13 Oct 2021 16:48:52 -0400 (EDT)
+Received: from mailfrontend2 ([10.202.2.163])
+ by compute2.internal (MEProxy); Wed, 13 Oct 2021 16:48:52 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=u92.eu; h=from
+ :to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding; s=fm3; bh=K+ngjCbNvg5biFXc4iBRazvtWT
+ DSOI4XVs1u0aTjJbw=; b=Tvjc1tOnjj3zGJw0lJZ80K3vhPCpmQ4oICUTkyXtHN
+ d7S1dTjM0HnRfgzQAGPwFDs9wkg/mNeRZq9Je/IyIvnILR5i8vUw0FDq7i8kdoXV
+ 8OHXQb6b0gaPZooAr41EXUe6kdR/u2VNxZ1tb16g76/ABq36qxZzcvpzyFsH0Nvy
+ 1v/g/4w7KD7gxDOjBICloby6BV/tSrE9+92QC/XD5Y2FsVwGd1M6M0a6rPleh2Dh
+ XUEbfzqDWq6wqv3Q26I5gIBkYyfR06Y5/UMcqxiWJWL7MHEHqqwUAz4tmEiGb0HN
+ rG9pP9UfmgTfvnZumPqlt+SruCihex0E4PYas5mlL+Eg==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:content-transfer-encoding:date:from
+ :message-id:mime-version:subject:to:x-me-proxy:x-me-proxy
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; bh=K+ngjCbNvg5biFXc4
+ iBRazvtWTDSOI4XVs1u0aTjJbw=; b=OT0uXg/paNJS3IjRzXVsRS3ataNv4/0v8
+ iujH8IUrJogzX5gw5E1nzExfP/VmXpNF2YvQ4+Thm826+TxyEGUmrfG1bAWQvb6l
+ 5H1VXUXQgY2+GHvB4DzYN4tR4QMzddEJIpYRdFJ9XQa99otYc7hzGyeRSEumFnzQ
+ 66O0UA3Vsh7wKat3UHns2X0lStQvL+7yCZMmCtqWClFLfykwHR2pOrFEUjOpUDHi
+ wjCuGJbmQznTkg2+Eu4Lb9VbAXetiym8lqt9C0K1e5dgqdQbbrZYNEO3TJwNP+DE
+ v6wBXVOZWsFW0vo1ryZqbaFMdjcEOq4l3VzjXDxlSsVe3q+0KcF6g==
+X-ME-Sender: <xms:NEZnYaCj1HzF6opwzNRsaxopnIaizVToTfF_GQ_o2D9sy-jd4jnNQw>
+ <xme:NEZnYUiHARGY_-ZTWQ0rdC32Utq73HPHz7K1iaBLzSCii3qxCQqV0HGOrWtliaw7D
+ PkFT2duxEkBraCMjQ>
+X-ME-Received: <xmr:NEZnYdmh8boRq2KjNANujOFlMBrPY-6cbIDRh3M1u5jy8UEs33e2CLP4vLorS2dzgluD>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvtddrvddutddgudehudcutefuodetggdotefrod
+ ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
+ necuuegrihhlohhuthemuceftddtnecunecujfgurhephffvufffkffoggfgsedtkeertd
+ ertddtnecuhfhrohhmpefhvghrnhgrnhguohcutfgrmhhoshcuoehgrhgvvghnfhhoohes
+ uhelvddrvghuqeenucggtffrrghtthgvrhhnpeegtdehgeduteehkeeugedtuedugfffhe
+ fguedtudefvddtgeevudeuleegkeeitdenucffohhmrghinhepkhgvrhhnvghlrdhorhhg
+ necuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepghhrvg
+ gvnhhfohhosehuledvrdgvuh
+X-ME-Proxy: <xmx:NEZnYYxLOlfgjCsN1mknSxUY6OhEw46SW-6i569oRrbxhEE8YwYWFg>
+ <xmx:NEZnYfS2Bc0lpW3Gb6nLbgi9EIH56SRdvdvEwM6YhPe2zSRll0cEpQ>
+ <xmx:NEZnYTa6pC95ZCv7oO6YlghtPySmIb7yOZAu8Z0w90Q8ryfcN3GZ4A>
+ <xmx:NEZnYU9n6XIbyHQQuIU_I61tKhKiUR7mz1O7X6E3BPRW9P_35jNWyQ>
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
+ 13 Oct 2021 16:48:49 -0400 (EDT)
+From: Fernando Ramos <greenfoo@u92.eu>
+To: dri-devel@lists.freedesktop.org
+Cc: linux-kernel@vger.kernel.org, sean@poorly.run, linux-doc@vger.kernel.org,
+ amd-gfx@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
+ linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org, linux-renesas-soc@vger.kernel.org,
+ linux-tegra@vger.kernel.org
+Date: Wed, 13 Oct 2021 22:48:26 +0200
+Message-Id: <20211013204846.90026-1-greenfoo@u92.eu>
+X-Mailer: git-send-email 2.33.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; format=flowed
 Content-Transfer-Encoding: 8bit
-Content-Language: en-US
-X-Originating-IP: [2600:1700:ef10:46e0:9aa1:450a:4eb:4e12]
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 09929804-d4f7-49dd-658c-08d98de68b0a
-X-MS-TrafficTypeDiagnostic: VI1PR0602MB3680:
-X-Microsoft-Antispam-PRVS: <VI1PR0602MB368077F3AD23F60D37C35AEAB3B79@VI1PR0602MB3680.eurprd06.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:8273;
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 9dpRp8WABQ6wDX2QhHSdzLBB+hB3GA+8EF2BCXJtU4AqTnwKrjLy79CjWDJXQJ7SVbkQ0zTT9EaevDci3DF8/MQlyJlNvIv4iwrDngQgF/ElOlyLOfFZH0JSGBsmFqsOqspuyOVG4rJuRg6tB4r2c7KAFvfOxJ4R66Od6aJfieghL5ure6fu49PlIX6e8F4FzrA4C1Gh3h5ep6ImRtZPlpmzBN92Ctmp5cqtGdWmPYMifg/xd/3wibuWu2L43wA+5nzoFplxqmVlohCWhh0tO5vP4gx+RC5nAhMkwqskI7KppL83wH41TDMMRujzcyU2YHI/qEm96gFKOs6RPSzuK9pet2OeiyrbkDHX3Z4qnfEO/lJYUGZHKE/W0lTUKnPzgdhdXkTUwmZCo3Nwd1VBOyEwbyw0uK30iwo3VKDifUhYfn5CNoYvnLvx8Cp6imR1RJP11Yrb63PXfIJVrdSq1T+5AjR/xC8xy0S8zprSbb0ggNmBO0mYaN6hTOlnl5yEUatUdho6KwiRAjCMAJru/zqkpfTELc99x3oKYb+WzNQhYPEu2PerfS59CH3p2pDgZdzF2EPEbvFCjIADTqQcLXSPIdoiIMYucHTPxVZghVWCPY/2tnDbO4yPLOQug73NeAARfXE2IyISzmSfTNn0QhZdYHpFlW3c+XHDH08i8YhEUkQG84PA/Oj4Ucl93QHPLQDvgDuDUoqk+VHR6uWUPyQFAKvZPN9ho/YMc6Ildec=
-X-Forefront-Antispam-Report: CIP:188.184.36.50; CTRY:CH; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:cernmxgwlb4.cern.ch; PTR:cernmx11.cern.ch; CAT:NONE;
- SFS:(46966006)(36840700001)(8936002)(6666004)(5660300002)(36860700001)(2616005)(316002)(82310400003)(2906002)(36756003)(508600001)(4744005)(70206006)(26005)(86362001)(31696002)(31686004)(8676002)(356005)(7116003)(70586007)(16526019)(83380400001)(426003)(6916009)(336012)(186003)(7636003)(47076005)(43740500002);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: cern.ch
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Oct 2021 01:12:36.1326 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 09929804-d4f7-49dd-658c-08d98de68b0a
-X-MS-Exchange-CrossTenant-Id: c80d3499-4a40-4a8c-986e-abce017d6b19
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=c80d3499-4a40-4a8c-986e-abce017d6b19; Ip=[188.184.36.50];
- Helo=[cernmxgwlb4.cern.ch]
-X-MS-Exchange-CrossTenant-AuthSource: AM5EUR02FT055.eop-EUR02.prod.protection.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR0602MB3680
-X-Mailman-Approved-At: Mon, 18 Oct 2021 17:18:27 +0000
-Subject: [Nouveau] RTX 5000 compatibility
+X-Mailman-Approved-At: Mon, 18 Oct 2021 17:18:28 +0000
+Subject: [Nouveau] [PATCH v4 00/20] drm: cleanup: Use DRM_MODESET_LOCK_ALL_*
+ helpers
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -108,13 +84,132 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi,
+Hi all,
 
-I recently purchased an nvidia quadro RTX 5000 but for a certain linux 
-application the proprietary drivers do not work.  I was recommended to 
-try nouveau but first I wanted to see if this GPU is currently 
-supported.  I could not determine this from your documentation online.
-Could you let me know if your driver would work for me?  My OS is Ubuntu 20.
+One of the things in the DRM TODO list ("Documentation/gpu/todo.rst") was to
+"use DRM_MODESET_LOCAL_ALL_* helpers instead of boilerplate". That's what this
+patch series is about.
 
-Thanks,
-Dhevan
+You will find two types of changes here:
+
+  - Replacing "drm_modeset_lock_all_ctx()" (and surrounding boilerplate) with
+    "DRM_MODESET_LOCK_ALL_BEGIN()/END()" in the remaining places (as it has
+    already been done in previous commits such as b7ea04d2)
+
+  - Replacing "drm_modeset_lock_all()" with "DRM_MODESET_LOCK_ALL_BEGIN()/END()"
+    in the remaining places (as it has already been done in previous commits
+    such as 57037094)
+    
+Most of the changes are straight forward, except for a few cases in the "amd"
+and "i915" drivers where some extra dancing was needed to overcome the
+limitation that the DRM_MODESET_LOCK_ALL_BEGIN()/END() macros can only be used
+once inside the same function (the reason being that the macro expansion
+includes *labels*, and you can not have two labels named the same inside one
+function)
+
+Notice that, even after this patch series, some places remain where
+"drm_modeset_lock_all()" and "drm_modeset_lock_all_ctx()" are still present,
+all inside drm core (which makes sense), except for two (in "amd" and "i915")
+which cannot be replaced due to the way they are being used.
+
+Changes in v2:
+  - Fix commit message typo
+  - Use the value returned by DRM_MODESET_LOCK_ALL_END when possible
+  - Split drm/i915 patch into two simpler ones
+  - Remove drm_modeset_(un)lock_all()
+  - Fix build problems in non-x86 platforms
+
+Changes in v3:
+  - Fix in drm/i915 driver to make sure global context is no longer used
+  - Fix in drm/amdgpu driver to make sure global context is no longer used
+  - Split amdgpu driver to make it easier to understand
+  - Remove acquire_ctx from drm_mode_config 
+  - Rebase on top of drm-tip
+  - WARNING: There is some discussion going on regarding whether the new macros
+    should be used (or not) in the i915 driver, as a different set of functions
+    has been proposed in the past (see here:
+    https://lore.kernel.org/dri-devel/YVriZxCeipBUgc8O@intel.com/).
+    In that case I will need to create a v4 where i915 files are left unchanged.
+    Let me know your thoughts regarding this.
+
+Changes in v4:
+  - Fix missing "Signed-off-by" in one commit
+  - No extra comments received in one week
+  - Rebase on top of drm-tip
+
+Fernando Ramos (20):
+  drm: cleanup: drm_modeset_lock_all_ctx() -->
+    DRM_MODESET_LOCK_ALL_BEGIN()
+  drm/i915: cleanup: drm_modeset_lock_all_ctx() -->
+    DRM_MODESET_LOCK_ALL_BEGIN()
+  drm/msm: cleanup: drm_modeset_lock_all_ctx() -->
+    DRM_MODESET_LOCK_ALL_BEGIN()
+  drm: cleanup: drm_modeset_lock_all() --> DRM_MODESET_LOCK_ALL_BEGIN()
+  drm/vmwgfx: cleanup: drm_modeset_lock_all() -->
+    DRM_MODESET_LOCK_ALL_BEGIN()
+  drm/tegra: cleanup: drm_modeset_lock_all() -->
+    DRM_MODESET_LOCK_ALL_BEGIN()
+  drm/shmobile: cleanup: drm_modeset_lock_all() -->
+    DRM_MODESET_LOCK_ALL_BEGIN()
+  drm/radeon: cleanup: drm_modeset_lock_all() -->
+    DRM_MODESET_LOCK_ALL_BEGIN()
+  drm/omapdrm: cleanup: drm_modeset_lock_all() -->
+    DRM_MODESET_LOCK_ALL_BEGIN()
+  drm/nouveau: cleanup: drm_modeset_lock_all() -->
+    DRM_MODESET_LOCK_ALL_BEGIN()
+  drm/msm: cleanup: drm_modeset_lock_all() -->
+    DRM_MODESET_LOCK_ALL_BEGIN()
+  drm/i915: cleanup: drm_modeset_lock_all() -->
+    DRM_MODESET_LOCK_ALL_BEGIN()
+  drm/i915: cleanup: drm_modeset_lock_all() -->
+    DRM_MODESET_LOCK_ALL_BEGIN() [part 2]
+  drm/i915: cleanup: drm_modeset_lock_all() -->
+    DRM_MODESET_LOCK_ALL_BEGIN() [part 3]
+  drm/gma500: cleanup: drm_modeset_lock_all() -->
+    DRM_MODESET_LOCK_ALL_BEGIN()
+  drm/amd: cleanup: drm_modeset_lock_all() -->
+    DRM_MODESET_LOCK_ALL_BEGIN()
+  drm/amd: cleanup: drm_modeset_lock_all() -->
+    DRM_MODESET_LOCK_ALL_BEGIN() [part 2]
+  drm/amd: cleanup: drm_modeset_lock_all() -->
+    DRM_MODESET_LOCK_ALL_BEGIN() [part 3]
+  drm: cleanup: remove drm_modeset_(un)lock_all()
+  drm: cleanup: remove acquire_ctx from drm_mode_config
+
+ drivers/gpu/drm/amd/amdgpu/amdgpu_display.c   | 21 +++--
+ .../gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c | 58 ++++++------
+ .../gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.h |  3 +-
+ .../amd/display/amdgpu_dm/amdgpu_dm_debugfs.c | 25 ++---
+ drivers/gpu/drm/drm_client_modeset.c          | 14 ++-
+ drivers/gpu/drm/drm_crtc_helper.c             | 18 ++--
+ drivers/gpu/drm/drm_fb_helper.c               | 10 +-
+ drivers/gpu/drm/drm_framebuffer.c             |  6 +-
+ drivers/gpu/drm/drm_modeset_lock.c            | 94 +------------------
+ drivers/gpu/drm/gma500/psb_device.c           | 18 ++--
+ drivers/gpu/drm/i915/display/intel_audio.c    | 16 ++--
+ drivers/gpu/drm/i915/display/intel_display.c  | 25 ++---
+ .../drm/i915/display/intel_display_debugfs.c  | 46 +++++----
+ drivers/gpu/drm/i915/display/intel_overlay.c  | 46 ++++-----
+ drivers/gpu/drm/i915/display/intel_pipe_crc.c |  7 +-
+ drivers/gpu/drm/i915/i915_drv.c               | 13 ++-
+ drivers/gpu/drm/msm/disp/dpu1/dpu_crtc.c      | 10 +-
+ .../gpu/drm/msm/disp/msm_disp_snapshot_util.c | 12 +--
+ drivers/gpu/drm/nouveau/dispnv50/disp.c       | 15 ++-
+ drivers/gpu/drm/omapdrm/omap_fb.c             |  9 +-
+ drivers/gpu/drm/radeon/radeon_device.c        | 21 +++--
+ drivers/gpu/drm/radeon/radeon_dp_mst.c        | 10 +-
+ drivers/gpu/drm/shmobile/shmob_drm_drv.c      |  6 +-
+ drivers/gpu/drm/tegra/dsi.c                   |  6 +-
+ drivers/gpu/drm/tegra/hdmi.c                  |  6 +-
+ drivers/gpu/drm/tegra/sor.c                   | 11 ++-
+ drivers/gpu/drm/vmwgfx/vmwgfx_ioctl.c         | 11 ++-
+ drivers/gpu/drm/vmwgfx/vmwgfx_kms.c           | 12 ++-
+ include/drm/drm_mode_config.h                 | 10 --
+ include/drm/drm_modeset_lock.h                |  2 -
+ 30 files changed, 272 insertions(+), 289 deletions(-)
+
+
+base-commit: 3fdfa1de4774903b9cb4fb308102b5a2d762d829
+-- 
+2.33.0
+
