@@ -1,47 +1,52 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id B535842C608
-	for <lists+nouveau@lfdr.de>; Wed, 13 Oct 2021 18:16:45 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9331F42C7AB
+	for <lists+nouveau@lfdr.de>; Wed, 13 Oct 2021 19:31:16 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B7B976EA82;
-	Wed, 13 Oct 2021 16:16:43 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1DF316E0E8;
+	Wed, 13 Oct 2021 17:31:15 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from cloudserver094114.home.pl (cloudserver094114.home.pl
- [79.96.170.134])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 21DC56EA82;
- Wed, 13 Oct 2021 16:16:41 +0000 (UTC)
-Received: from localhost (127.0.0.1) (HELO v370.home.net.pl)
- by /usr/run/smtp (/usr/run/postfix/private/idea_relay_lmtp) via UNIX with SMTP
- (IdeaSmtpServer 3.0.0)
- id f7a05deb65d81dcd; Wed, 13 Oct 2021 18:16:39 +0200
-Received: from kreacher.localnet (unknown [213.134.161.244])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by v370.home.net.pl (Postfix) with ESMTPSA id 77EAD66A871;
- Wed, 13 Oct 2021 18:16:38 +0200 (CEST)
-From: "Rafael J. Wysocki" <rjw@rjwysocki.net>
-To: Linux ACPI <linux-acpi@vger.kernel.org>
-Cc: LKML <linux-kernel@vger.kernel.org>, Ben Skeggs <bskeggs@redhat.com>,
- dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org
-Date: Wed, 13 Oct 2021 18:08:06 +0200
-Message-ID: <2240749.ElGaqSPkdT@kreacher>
-In-Reply-To: <21245442.EfDdHjke4D@kreacher>
-References: <4369779.LvFx2qVVIh@kreacher> <21245442.EfDdHjke4D@kreacher>
+Received: from mail-yb1-xb30.google.com (mail-yb1-xb30.google.com
+ [IPv6:2607:f8b0:4864:20::b30])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 037096E0E8
+ for <nouveau@lists.freedesktop.org>; Wed, 13 Oct 2021 17:31:13 +0000 (UTC)
+Received: by mail-yb1-xb30.google.com with SMTP id d131so8280134ybd.5
+ for <nouveau@lists.freedesktop.org>; Wed, 13 Oct 2021 10:31:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:from:date:message-id:subject:to;
+ bh=ri0jnJLbtQY8pzBVMtxcF6F4FOstCEkPkix8vFaAEuU=;
+ b=ZKmHHAys7vyzb7hiMmovFeBSbqhh0iSmjZLht7Yvk+x5lxoVyAjpORN7aWGhcxtKG4
+ RfyjnbukqdmXgWws0/yMzYrnmsvXetYfsXHBNSrhFCfw5y4G8yUrIUnNsoxUxJfd5eGu
+ mtluQ9QrOXOn9Mz5mKa6EoeC6NIzPb9eTFVlCP1kRziyRWBfG2zCUDNeU8992XraHmGO
+ ps5Cixz4vNPQnOampb1SiwlcSv+EYKtoNZy15WhCmdoL0EvkJnW/KLLLUantWsEohJdy
+ bnAYJtuOZh5NrzNJcb5/M86z/pGPy5MhNaOHjX0Hqqya1LyGaWUtP4ErxoXcrCuLPvsK
+ w1Yg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=ri0jnJLbtQY8pzBVMtxcF6F4FOstCEkPkix8vFaAEuU=;
+ b=0g5wZQPJgj7syJLAwP22RUA4LPYYmpnCpzTwihYBuswplKnbqjex5B2k3iNpktP935
+ yt3HIJQ21ULPzC9OvXEiZ2dRtzJs7idVyyF8q7bO9H3Dhs0LNQTiHi2Bw+mxdUqqbe7h
+ 23McUB+JRsTWs/9otRK/gza7joD4pXDKrFjeJkkKxlJUHGp1/JzN844Qr64FIGdrEjfi
+ Cv0kECF/wAWdFkZd1ROUG2P8gqGmI0uqj/faf0CyYEBlJGOyqEGxJlE/KH2ehj02XM6F
+ fYSel2A7YPQvgZpEGMxqByHKmQEOYvSC20HsCPECIl2ZvYL0X4zuSL9swUW1RfQCZ4cA
+ nmyQ==
+X-Gm-Message-State: AOAM530+I931/UdeqZX8kEJQyaC3J4muclzW8rfnTm1Xsty/OXk8Hi2s
+ o9s7a9uXwLKt6mBdqD+2SF9pPW7EtiQvW7ApoZ100qmonVY=
+X-Google-Smtp-Source: ABdhPJyS/jIxdlPCaQ54JU9IEBKtbrzj1vQkdWBtkDcfa+dHxGZWpnyhwsuKUo3PUP4RZjeWjXz+IfDLJik/DrRjFKQ=
+X-Received: by 2002:a25:aa8e:: with SMTP id t14mr728718ybi.532.1634146273012; 
+ Wed, 13 Oct 2021 10:31:13 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7Bit
+From: Computer Enthusiastic <computer.enthusiastic@gmail.com>
+Date: Wed, 13 Oct 2021 19:31:01 +0200
+Message-ID: <CAHSpYy3G7EPhLBAiy4MgngKRqFgs1cTC-pnJb662vxxmkmxPXA@mail.gmail.com>
+To: nouveau@lists.freedesktop.org
 Content-Type: text/plain; charset="UTF-8"
-X-CLIENT-IP: 213.134.161.244
-X-CLIENT-HOSTNAME: 213.134.161.244
-X-VADE-SPAMSTATE: clean
-X-VADE-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedvtddrudeljedgkeehucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecujffqoffgrffnpdggtffipffknecuuegrihhlohhuthemucduhedtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjughrpefhvffufffkjghfggfgtgesthfuredttddtjeenucfhrhhomhepfdftrghfrggvlhculfdrucghhihsohgtkhhifdcuoehrjhifsehrjhifhihsohgtkhhirdhnvghtqeenucggtffrrghtthgvrhhnpedvjeelgffhiedukedtleekkedvudfggefhgfegjefgueekjeelvefggfdvledutdenucfkphepvddufedrudefgedrudeiuddrvdeggeenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepihhnvghtpedvudefrddufeegrdduiedurddvgeegpdhhvghlohepkhhrvggrtghhvghrrdhlohgtrghlnhgvthdpmhgrihhlfhhrohhmpedftfgrfhgrvghlucflrdcuhgihshhotghkihdfuceorhhjfiesrhhjfiihshhotghkihdrnhgvtheqpdhrtghpthhtoheplhhinhhugidqrggtphhisehvghgvrhdrkhgvrhhnvghlrdhorhhgpdhrtghpthhtoheplhhinhhugidqkhgvrhhnvghlsehvghgvrhdrkhgvrhhnvghlrdhorhhgpdhrtghpthhtohepsghskhgvghhgshesrhgvughhrghtrdgtohhmpdhrtghpthhtohepughrihdquggvvhgvlheslhhishhtshdrfhhrvggvuggvshhkthhophdrohhrghdprhgtphhtthhopehnohhuvhgv
- rghusehlihhsthhsrdhfrhgvvgguvghskhhtohhprdhorhhg
-X-DCC--Metrics: v370.home.net.pl 1024; Body=5 Fuz1=5 Fuz2=5
-Subject: [Nouveau] [PATCH v2 2/7] nouveau: ACPI: Use the ACPI_COMPANION()
- macro directly
+Subject: [Nouveau] Advice about debugging nouveau driver suspend issue
+ (init_on_alloc=1 and init_on_free=1)
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,56 +61,24 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-From: Rafael J. Wysocki <rafael.j.wysocki@intel.com>
+Hello,
 
-The ACPI_HANDLE() macro is a wrapper arond the ACPI_COMPANION()
-macro and the ACPI handle produced by the former comes from the
-ACPI device object produced by the latter, so it is way more
-straightforward to evaluate the latter directly instead of passing
-the handle produced by the former to acpi_bus_get_device().
+Greeting to all list members.
 
-Modify nouveau_acpi_edid() accordingly (no intentional functional
-impact).
+I hope this mailing list is the right place to ask about it, otherwise
+I apologize in advance and, please, direct me to the right mailing
+list.
 
-Signed-off-by: Rafael J. Wysocki <rafael.j.wysocki@intel.com>
-Reviewed-by: Ben Skeggs <bskeggs@redhat.com>
----
+I would like to receive advice on how to debug (or help to debug) the
+noveau kernel module suspend issue reported in [1][2][3]. The issue is
+constantly reproducible and it consists in a  screen corruption with
+system lockup on resume after suspend to ram or suspend to disk. It
+seems to affect NV50 nvidia graphic cards at least from kernel 5.10.0
+(probably from 5.2 or 5.3) up to 5.14.10 (I have not tested 5.15 in rc
+state, actually).
 
-v1 -> v2:
-   * Resend with a different From and S-o-b address and with R-by from Ben.
-     No other changes.
+Thanks in advance.
 
----
- drivers/gpu/drm/nouveau/nouveau_acpi.c |    9 ++-------
- 1 file changed, 2 insertions(+), 7 deletions(-)
-
-Index: linux-pm/drivers/gpu/drm/nouveau/nouveau_acpi.c
-===================================================================
---- linux-pm.orig/drivers/gpu/drm/nouveau/nouveau_acpi.c
-+++ linux-pm/drivers/gpu/drm/nouveau/nouveau_acpi.c
-@@ -364,7 +364,6 @@ void *
- nouveau_acpi_edid(struct drm_device *dev, struct drm_connector *connector)
- {
- 	struct acpi_device *acpidev;
--	acpi_handle handle;
- 	int type, ret;
- 	void *edid;
- 
-@@ -377,12 +376,8 @@ nouveau_acpi_edid(struct drm_device *dev
- 		return NULL;
- 	}
- 
--	handle = ACPI_HANDLE(dev->dev);
--	if (!handle)
--		return NULL;
--
--	ret = acpi_bus_get_device(handle, &acpidev);
--	if (ret)
-+	acpidev = ACPI_COMPANION(dev->dev);
-+	if (!acpidev)
- 		return NULL;
- 
- 	ret = acpi_video_get_edid(acpidev, type, -1, &edid);
-
-
-
+[1] https://gitlab.freedesktop.org/xorg/driver/xf86-video-nouveau/-/issues/547
+[2] https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=989705
+[3] https://bugzilla.kernel.org/show_bug.cgi?id=213617
