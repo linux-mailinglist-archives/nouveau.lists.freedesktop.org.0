@@ -2,35 +2,35 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 00C5942FB5D
-	for <lists+nouveau@lfdr.de>; Fri, 15 Oct 2021 20:45:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0748142FBFA
+	for <lists+nouveau@lfdr.de>; Fri, 15 Oct 2021 21:24:29 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8A5C16EDF5;
-	Fri, 15 Oct 2021 18:44:59 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B5A296E3BB;
+	Fri, 15 Oct 2021 19:24:18 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from msg-1.mailo.com (msg-1.mailo.com [213.182.54.11])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4266C6EDF1;
- Fri, 15 Oct 2021 18:44:57 +0000 (UTC)
+Received: from msg-6.mailo.com (ip-16.mailobj.net [213.182.54.16])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id BDE106E30F;
+ Fri, 15 Oct 2021 19:24:16 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=net-c.es; s=mailo;
- t=1634323490; bh=GH6/gUCiShU+F5SqmxsR4+La/OM2Q/v8Xu77xbZRtEI=;
+ t=1634325849; bh=LHI6ADKUuEjRgd/13zbEVoP8yqLJTf3ZSPQveWR4Xeg=;
  h=X-EA-Auth:Date:From:To:Cc:Subject:Message-ID:References:
  MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To;
- b=iS4Bu/dr4YsBsd4N3foSlzvu2+8B1KjImGHH0E7aCxLtA8G3qywnAvJtd24Fi/vQe
- gQWmJ7Dzs4IfVYLYObWC1Xc4gS8atxgQO6O2HEIOGUFHuwIS5iXfkeuEUx4usSreLp
- Qd/7etR7d+27siL13nnD/vntfKFtUGTvbHaB5anE=
-Received: by b-1.in.mailobj.net [192.168.90.11] with ESMTP
+ b=UJkcX3Tm6RHULPirG9jbEdfFYGGJ66I9KBQKuzi98ISfle+pBczUkzMcwmIzRVLdT
+ MAh0MVlf/AYndTRFTFK655yY2Mgf5bP1nrEWc/pBXWK9J27FJZxPow/BYvc+lLN2ir
+ EtHptpAEuwYVBB73L+5SXGwDanjW0SDVYPlyj5SQ=
+Received: by b-3.in.mailobj.net [192.168.90.13] with ESMTP
  via ip-206.mailobj.net [213.182.55.206]
- Fri, 15 Oct 2021 20:44:50 +0200 (CEST)
-X-EA-Auth: T0JFquBunFvgzGD4hDlMVaBd6t9O7J/bYpv2pxbJaZ0EDxqUCUY8D5LdZVbpM/ygJIFdRwSik6v8XCP0wRcT3NhVaxr9JWRH
-Date: Fri, 15 Oct 2021 20:44:47 +0200
+ Fri, 15 Oct 2021 21:24:09 +0200 (CEST)
+X-EA-Auth: U6CSUQYVFt3UVX/XYpcq7X1KrM+JbBDIgrc/Xwcsszd8MPNiA5z5prKhMOKAhZFdLHqNfioDKmq9YtwQVNP17+FoeAaZQdMb
+Date: Fri, 15 Oct 2021 21:24:06 +0200
 From: Claudio Suarez <cssk@net-c.es>
-To: Jani Nikula <jani.nikula@linux.intel.com>
-Cc: Ville =?iso-8859-1?Q?Syrj=E4l=E4?= <ville.syrjala@linux.intel.com>,
- dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
+To: Ville =?iso-8859-1?Q?Syrj=E4l=E4?= <ville.syrjala@linux.intel.com>
+Cc: dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
  linux-tegra@vger.kernel.org, intel-gfx@lists.freedesktop.org,
  David Airlie <airlied@linux.ie>, Daniel Vetter <daniel@ffwll.ch>,
  Laurent Pinchart <Laurent.pinchart@ideasonboard.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>,
  Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
  Rodrigo Vivi <rodrigo.vivi@intel.com>,
  Alex Deucher <alexander.deucher@amd.com>,
@@ -46,17 +46,17 @@ Cc: Ville =?iso-8859-1?Q?Syrj=E4l=E4?= <ville.syrjala@linux.intel.com>,
  Neil Armstrong <narmstrong@baylibre.com>,
  Robert Foss <robert.foss@linaro.org>,
  Ben Skeggs <bskeggs@redhat.com>, nouveau@lists.freedesktop.org
-Message-ID: <YWnMH/V1wRrAyYR9@gineta.localdomain>
+Message-ID: <YWnVVoCipTXxx8NW@gineta.localdomain>
 References: <20211015113713.630119-1-cssk@net-c.es>
- <20211015113713.630119-16-cssk@net-c.es> <87a6jav4n3.fsf@intel.com>
- <YWl7D9Qnt/Ysk2JI@intel.com> <874k9iuxit.fsf@intel.com>
+ <20211015113713.630119-2-cssk@net-c.es>
+ <YWluAX6LA2DupE+E@intel.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <874k9iuxit.fsf@intel.com>
-Subject: Re: [Nouveau] [Intel-gfx] [PATCH 15/15] drm/i915: replace
- drm_detect_hdmi_monitor() with drm_display_info.is_hdmi
+In-Reply-To: <YWluAX6LA2DupE+E@intel.com>
+Subject: Re: [Nouveau] [PATCH 01/15] gpu/drm: make drm_add_edid_modes()
+ consistent when updating connector->display_info
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,65 +71,76 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, Oct 15, 2021 at 06:18:34PM +0300, Jani Nikula wrote:
-> On Fri, 15 Oct 2021, Ville Syrjälä <ville.syrjala@linux.intel.com> wrote:
-> > On Fri, Oct 15, 2021 at 03:44:48PM +0300, Jani Nikula wrote:
-> >> On Fri, 15 Oct 2021, Claudio Suarez <cssk@net-c.es> wrote:
-> >> > Once EDID is parsed, the monitor HDMI support information is available
-> >> > through drm_display_info.is_hdmi. Retriving the same information with
-> >> > drm_detect_hdmi_monitor() is less efficient. Change to
-> >> > drm_display_info.is_hdmi where possible.
-> >> >
-> >> > This is a TODO task in Documentation/gpu/todo.rst
-> >> >
-> >> > Signed-off-by: Claudio Suarez <cssk@net-c.es>
-> >> > ---
-> >> >  drivers/gpu/drm/i915/display/intel_connector.c | 5 +++++
-> >> >  drivers/gpu/drm/i915/display/intel_connector.h | 1 +
-> >> >  drivers/gpu/drm/i915/display/intel_hdmi.c      | 2 +-
-> >> >  drivers/gpu/drm/i915/display/intel_sdvo.c      | 3 ++-
-> >> >  4 files changed, 9 insertions(+), 2 deletions(-)
-> >> >
-> >> > diff --git a/drivers/gpu/drm/i915/display/intel_connector.c b/drivers/gpu/drm/i915/display/intel_connector.c
-> >> > index 9bed1ccecea0..3346b55df6e1 100644
-> >> > --- a/drivers/gpu/drm/i915/display/intel_connector.c
-> >> > +++ b/drivers/gpu/drm/i915/display/intel_connector.c
-> >> > @@ -213,6 +213,11 @@ int intel_ddc_get_modes(struct drm_connector *connector,
-> >> >  	return ret;
-> >> >  }
-> >> >  
-> >> > +bool intel_connector_is_hdmi_monitor(struct drm_connector *connector)
-> >> > +{
-> >> > +	return connector->display_info.is_hdmi;
-> >> > +}
-> >> > +
-> >> 
-> >> A helper like this belongs in drm, not i915. Seems useful in other
-> >> drivers too.
-> >
-> > Not sure it's actually helpful for i915. We end up having to root around
-> > in the display_info in a lot of places anyway. So a helper for single
-> > boolean seems a bit out of place perhaps.
+On Fri, Oct 15, 2021 at 03:03:13PM +0300, Ville Syrjälä wrote:
+> On Fri, Oct 15, 2021 at 01:36:59PM +0200, Claudio Suarez wrote:
+> > According to the documentation, drm_add_edid_modes
+> > "... Also fills out the &drm_display_info structure and ELD in @connector
+> > with any information which can be derived from the edid."
+> > 
+> > drm_add_edid_modes accepts a struct edid *edid parameter which may have a
+> > value or may be null. When it is not null, connector->display_info and
+> > connector->eld are updated according to the edid. When edid=NULL, only
+> > connector->eld is reset. Reset connector->display_info to be consistent
+> > and accurate.
+> > 
+> > Signed-off-by: Claudio Suarez <cssk@net-c.es>
+> > ---
+> >  drivers/gpu/drm/drm_edid.c | 2 ++
+> >  1 file changed, 2 insertions(+)
+> > 
+> > diff --git a/drivers/gpu/drm/drm_edid.c b/drivers/gpu/drm/drm_edid.c
+> > index 6325877c5fd6..6cbe09b2357c 100644
+> > --- a/drivers/gpu/drm/drm_edid.c
+> > +++ b/drivers/gpu/drm/drm_edid.c
+> > @@ -5358,10 +5358,12 @@ int drm_add_edid_modes(struct drm_connector *connector, struct edid *edid)
+> >  
+> >  	if (edid == NULL) {
+> >  		clear_eld(connector);
+> > +		drm_reset_display_info(connector);
+> >  		return 0;
+> >  	}
+> >  	if (!drm_edid_is_valid(edid)) {
+> >  		clear_eld(connector);
+> > +		drm_reset_display_info(connector);
 > 
-> *shrug*
-> 
-> Maybe it's just my frustration at the lack of interfaces and poking
-> around in the depths of nested structs and pointer chasing that's coming
-> through. You just need to change so many things if you want to later
-> refactor where "is hdmi" comes from and is stored.
-> 
-> Anyway, if a helper is being added like in this series, I think it
-> should be one helper in drm, not redundant copies in multiple
-> drivers. Or we should not have the helper(s) at all. One or the other,
-> not the worst of both worlds.
+> Looks easier if you pull both of those out from these branches and
+> just call them unconditionally at the start.
 
-Thank you all for your comments :)
-The big work here was to figure out which drm_detect_hdmi_monitor() can be
-replaced. Changing a helper isn't a problem.
-I'll send a new patch in a few hours.
+After looking at the full code, I am not sure. This is the code:
+==================
+int drm_add_edid_modes(struct drm_connector *connector, struct edid *edid)
+{
+        int num_modes = 0;
+        u32 quirks;
+
+        if (edid == NULL) {
+                clear_eld(connector);
+                drm_reset_display_info(connector); <--- added by me
+                return 0;
+        }
+        if (!drm_edid_is_valid(edid)) {
+                clear_eld(connector);
+                drm_reset_display_info(connector); <--- added by me
+                drm_warn(connector->dev, "%s: EDID invalid.\n",
+                         connector->name);
+                return 0;
+        }
+
+        drm_edid_to_eld(connector, edid);
+
+        quirks = drm_add_display_info(connector, edid);
+	etc...
+=================
+
+If we move those out of these branches and edid != NULL, we are executing an
+unnecessary clear_eld(connector) and an unnecessary drm_reset_display_info(connector)
+because the fields will be set in the next drm_edid_to_eld(connector, edid) and
+drm_add_display_info(connector, edid)
+
+Do we want this ?
 
 BR
-Claudio Suarez.
+Claudio Suarez
 
 
 
