@@ -2,48 +2,63 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id A4D1842E0CF
-	for <lists+nouveau@lfdr.de>; Thu, 14 Oct 2021 20:07:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 63A8142F027
+	for <lists+nouveau@lfdr.de>; Fri, 15 Oct 2021 14:03:30 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0E1846EB78;
-	Thu, 14 Oct 2021 18:07:46 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 005F06ED11;
+	Fri, 15 Oct 2021 12:03:24 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-io1-f54.google.com (mail-io1-f54.google.com
- [209.85.166.54])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 064886EB78
- for <nouveau@lists.freedesktop.org>; Thu, 14 Oct 2021 18:07:45 +0000 (UTC)
-Received: by mail-io1-f54.google.com with SMTP id e144so4841535iof.3
- for <nouveau@lists.freedesktop.org>; Thu, 14 Oct 2021 11:07:44 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=NV+JROt2m5aBwFI67Z3EAMzaYlfZTwc+ozWvdnSjMKE=;
- b=tx4lkkhu81AT3IPGO8eI3aBOevPL78DA1VdThZKJFSrZ69MfCHe7QFj9ovAB7FbGkC
- 7SpjYjYkcdvNDgYZdidd57pL56Tg56WCrylBnUgkeSXGSsFfyA7SnMJ7ThDfUfln9Jon
- mRJ9A6hSlNyBfg7Em/W4rj967ENmF9fgXaicH+HGzaEwuBSKQJU6QaRGkL1MEP1EWNnN
- ebRp5T6AKTqbxK879sSXwFcSWoIA5XI4N5b7njzfmCXRZxXlVfhK1sqSS5rr6f+9c9wG
- ZeUUTLP74t34PApDh4F7FgtmfNCWrGbsmXqobJcju5eG+Wwa52U9iX2+EIzPRRkpHj40
- IHcw==
-X-Gm-Message-State: AOAM531MNx07DwG7Llvj3WH3HFaH6Gu9UYjaxMIxegjwLQ3Ssl5czLlj
- lwGa6p9Md4DnzBJumSrJRHNBl/XBjpfWjvQiwLE=
-X-Google-Smtp-Source: ABdhPJwPvbXCEesBZbatmp5rUv2tgd9QWEna5FfE2ZyUgHetP/ZJLZpWuCsr2ksKrnmtgubt+Gsfh9PJg38w+Gkk8+Q=
-X-Received: by 2002:a02:1d02:: with SMTP id 2mr5292761jaj.15.1634234864058;
- Thu, 14 Oct 2021 11:07:44 -0700 (PDT)
+Received: from mga12.intel.com (mga12.intel.com [192.55.52.136])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4221A6ED0D;
+ Fri, 15 Oct 2021 12:03:23 +0000 (UTC)
+X-IronPort-AV: E=McAfee;i="6200,9189,10137"; a="208015447"
+X-IronPort-AV: E=Sophos;i="5.85,375,1624345200"; d="scan'208";a="208015447"
+Received: from fmsmga007.fm.intel.com ([10.253.24.52])
+ by fmsmga106.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 15 Oct 2021 05:03:22 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.85,375,1624345200"; d="scan'208";a="488090838"
+Received: from stinkbox.fi.intel.com (HELO stinkbox) ([10.237.72.171])
+ by fmsmga007.fm.intel.com with SMTP; 15 Oct 2021 05:03:14 -0700
+Received: by stinkbox (sSMTP sendmail emulation);
+ Fri, 15 Oct 2021 15:03:13 +0300
+Date: Fri, 15 Oct 2021 15:03:13 +0300
+From: Ville =?iso-8859-1?Q?Syrj=E4l=E4?= <ville.syrjala@linux.intel.com>
+To: Claudio Suarez <cssk@net-c.es>
+Cc: dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
+ linux-tegra@vger.kernel.org, intel-gfx@lists.freedesktop.org,
+ David Airlie <airlied@linux.ie>, Daniel Vetter <daniel@ffwll.ch>,
+ Laurent Pinchart <Laurent.pinchart@ideasonboard.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ Alex Deucher <alexander.deucher@amd.com>,
+ Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+ Pan Xinhui <Xinhui.Pan@amd.com>, Emma Anholt <emma@anholt.net>,
+ Maxime Ripard <mripard@kernel.org>,
+ Thierry Reding <thierry.reding@gmail.com>,
+ Patrik Jakobsson <patrik.r.jakobsson@gmail.com>,
+ Jingoo Han <jingoohan1@gmail.com>, Rob Clark <robdclark@gmail.com>,
+ Sean Paul <sean@poorly.run>, linux-arm-msm@vger.kernel.org,
+ freedreno@lists.freedesktop.org, Chen-Yu Tsai <wens@csie.org>,
+ Benjamin Gaignard <benjamin.gaignard@linaro.org>,
+ Sandy Huang <hjc@rock-chips.com>, heiko@sntech.de,
+ Andrzej Hajda <a.hajda@samsung.com>,
+ Neil Armstrong <narmstrong@baylibre.com>,
+ Robert Foss <robert.foss@linaro.org>,
+ Ben Skeggs <bskeggs@redhat.com>, nouveau@lists.freedesktop.org
+Message-ID: <YWluAX6LA2DupE+E@intel.com>
+References: <20211015113713.630119-1-cssk@net-c.es>
+ <20211015113713.630119-2-cssk@net-c.es>
 MIME-Version: 1.0
-References: <CAHSpYy3G7EPhLBAiy4MgngKRqFgs1cTC-pnJb662vxxmkmxPXA@mail.gmail.com>
- <CAKb7UvhBekZhHhq=aD+hLCfOWe33whi_bScbLiDhXDwvEvbzfA@mail.gmail.com>
- <YWhgFZPqx3qKqr0C@debian.fritz.box>
-In-Reply-To: <YWhgFZPqx3qKqr0C@debian.fritz.box>
-From: Ilia Mirkin <imirkin@alum.mit.edu>
-Date: Thu, 14 Oct 2021 14:07:33 -0400
-Message-ID: <CAKb7UviFVRe7hbtEXF6hUQh2TuZPthu+bt90h+8haf3A1FYt7g@mail.gmail.com>
-To: Computer Enthusiastic <computer.enthusiastic@gmail.com>
-Cc: nouveau <nouveau@lists.freedesktop.org>
-Content-Type: text/plain; charset="UTF-8"
-Subject: Re: [Nouveau] Advice about debugging nouveau driver suspend issue
- (init_on_alloc=1 and init_on_free=1)
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20211015113713.630119-2-cssk@net-c.es>
+X-Patchwork-Hint: comment
+Subject: Re: [Nouveau] [PATCH 01/15] gpu/drm: make drm_add_edid_modes()
+ consistent when updating connector->display_info
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,37 +73,48 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, Oct 14, 2021 at 12:51 PM Computer Enthusiastic
-<computer.enthusiastic@gmail.com> wrote:
->
-> Hello,
->
-> Thanks for the answer.
->
-> On Wed, Oct 13, 2021 at 01:43:56PM -0400, Ilia Mirkin wrote:
-> > The most straightforward thing, if you can reproduce at will, would be
-> > to do a bisect to figure out which change this happened with. Once we
-> > know which change caused the problem, it will hopefully provide with
-> > more ability to sort out where we're going wrong. You can also play
-> > with things like KASAN, although it's not clear to me that they would
-> > necessarily catch this problem.
->
-> The patch is "mm: security: introduce init_on_alloc=1 and init_on_free=1
-> boot options" (commit 6471384af2a6530696fc0203bafe4de41a23c9ef) [1].
->
-> It was introduced in kernel version 5.2:
-> $ git describe --tags 6471384af2a6530696fc0203bafe4de41a23c9ef
-> v5.2-5754-g6471384af2a6
+On Fri, Oct 15, 2021 at 01:36:59PM +0200, Claudio Suarez wrote:
+> According to the documentation, drm_add_edid_modes
+> "... Also fills out the &drm_display_info structure and ELD in @connector
+> with any information which can be derived from the edid."
+> 
+> drm_add_edid_modes accepts a struct edid *edid parameter which may have a
+> value or may be null. When it is not null, connector->display_info and
+> connector->eld are updated according to the edid. When edid=NULL, only
+> connector->eld is reset. Reset connector->display_info to be consistent
+> and accurate.
+> 
+> Signed-off-by: Claudio Suarez <cssk@net-c.es>
+> ---
+>  drivers/gpu/drm/drm_edid.c | 2 ++
+>  1 file changed, 2 insertions(+)
+> 
+> diff --git a/drivers/gpu/drm/drm_edid.c b/drivers/gpu/drm/drm_edid.c
+> index 6325877c5fd6..6cbe09b2357c 100644
+> --- a/drivers/gpu/drm/drm_edid.c
+> +++ b/drivers/gpu/drm/drm_edid.c
+> @@ -5358,10 +5358,12 @@ int drm_add_edid_modes(struct drm_connector *connector, struct edid *edid)
+>  
+>  	if (edid == NULL) {
+>  		clear_eld(connector);
+> +		drm_reset_display_info(connector);
+>  		return 0;
+>  	}
+>  	if (!drm_edid_is_valid(edid)) {
+>  		clear_eld(connector);
+> +		drm_reset_display_info(connector);
 
-Uff... so you've verified that a kernel at that commit +
-init_on_alloc=1 and init_on_free=1 (or the CONFIG_* equivalents) will
-cause the problems?
+Looks easier if you pull both of those out from these branches and
+just call them unconditionally at the start.
 
-That means the problem has "always been there" (or at least we have no
-great way of knowing when it might have been introduced).
+>  		drm_warn(connector->dev, "%s: EDID invalid.\n",
+>  			 connector->name);
+>  		return 0;
+> -- 
+> 2.33.0
+> 
+> 
 
-I think there's some sort of SLUB debug options that help find
-use-after-frees and such. What if you disable the init_on_*, enable
-SLUB, and boot with like "slub_debug=FZP"?
-
-  -ilia
+-- 
+Ville Syrjälä
+Intel
