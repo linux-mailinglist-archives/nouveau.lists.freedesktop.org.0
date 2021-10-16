@@ -1,32 +1,30 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 989F94301C0
-	for <lists+nouveau@lfdr.de>; Sat, 16 Oct 2021 12:16:03 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3D6E0430453
+	for <lists+nouveau@lfdr.de>; Sat, 16 Oct 2021 20:43:11 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 10C326E429;
-	Sat, 16 Oct 2021 10:16:00 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 44F546E4A1;
+	Sat, 16 Oct 2021 18:42:50 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from msg-4.mailo.com (ip-15.mailobj.net [213.182.54.15])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B29F06E429;
- Sat, 16 Oct 2021 10:15:58 +0000 (UTC)
+Received: from msg-6.mailo.com (ip-16.mailobj.net [213.182.54.16])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 44AA86E492;
+ Sat, 16 Oct 2021 18:42:46 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=net-c.es; s=mailo;
- t=1634379354; bh=zqWX1gJTKZ5q18uqa5c3Zf7qkP/A+CGNlGSRL6MHo7E=;
- h=X-EA-Auth:Date:From:To:Cc:Subject:Message-ID:References:
- MIME-Version:Content-Type:In-Reply-To;
- b=sMf3huKcgBE4f9Qx46mnqxxW0kG/4lohTFqKS0NtZxNeWRKEMyEaEtphj4CMJ+lgy
- /yujIldahtXxN2v73vppnv9iR+b7D3zue7w+NHiEgHvg8SjPPoR/slscBcmeAG2zbg
- QcfsijBw/h/KFQfk1ZZF+RMG9rE7rwfK3oj+PkBY=
-Received: by b-3.in.mailobj.net [192.168.90.13] with ESMTP
+ t=1634409758; bh=Y96/8Nke5u5v4emB7cdeFsHUTA4siYUGx7ZcSnrwbJc=;
+ h=X-EA-Auth:From:To:Subject:Date:Message-Id:X-Mailer:MIME-Version:
+ Content-Transfer-Encoding;
+ b=uMQdpKjXPmL45QfDu3oipBmL3r96h2m9sLYnnz23pJ7RDlaaGtSpkOzHTgZgNzWWh
+ 5vBpYJ1Eh/9Xo6LBL9x+PARWp+o4g9MSCkc5Z/T6AXBnrRNmvO+KKC/opsD+l+j2rY
+ 8WnqdpHXXovGxW3BjdCLokoFHocYnxhfH767ElWE=
+Received: by b-1.in.mailobj.net [192.168.90.11] with ESMTP
  via ip-206.mailobj.net [213.182.55.206]
- Sat, 16 Oct 2021 12:15:54 +0200 (CEST)
-X-EA-Auth: yKCNRkwyeIQN4zIZhVP/t5GZ4LXBCXpTe707pgk8CcqdT5Z8+L4zajcnVM6jjzg+UKc0YJNBMB/9WGFbSHtL4/w+9RPySOhn
-Date: Sat, 16 Oct 2021 12:15:51 +0200
+ Sat, 16 Oct 2021 20:42:38 +0200 (CEST)
+X-EA-Auth: iJ48sRsSV5JqlxVWZLnB2p2jl3UkwY1uKYWmZBLCTlmQ+a1qcMCxa04E29WpMxMyFQYezQWpEpRzbhWGhePR9lhhiqNPwxDI
 From: Claudio Suarez <cssk@net-c.es>
-To: Harry Wentland <harry.wentland@amd.com>
-Cc: dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
+To: dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
  linux-tegra@vger.kernel.org, intel-gfx@lists.freedesktop.org,
  David Airlie <airlied@linux.ie>, Daniel Vetter <daniel@ffwll.ch>,
  Laurent Pinchart <Laurent.pinchart@ideasonboard.com>,
@@ -34,7 +32,7 @@ Cc: dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
  Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
  Rodrigo Vivi <rodrigo.vivi@intel.com>,
  Alex Deucher <alexander.deucher@amd.com>,
- Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+ =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
  Pan Xinhui <Xinhui.Pan@amd.com>, Emma Anholt <emma@anholt.net>,
  Maxime Ripard <mripard@kernel.org>,
  Thierry Reding <thierry.reding@gmail.com>,
@@ -44,18 +42,15 @@ Cc: dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
  freedreno@lists.freedesktop.org, Chen-Yu Tsai <wens@csie.org>,
  Sandy Huang <hjc@rock-chips.com>, heiko@sntech.de,
  Neil Armstrong <narmstrong@baylibre.com>,
- Robert Foss <robert.foss@linaro.org>,
- Ben Skeggs <bskeggs@redhat.com>, nouveau@lists.freedesktop.org
-Message-ID: <YWqmVwGQvosagb0s@gineta.localdomain>
-References: <20211015113713.630119-1-cssk@net-c.es>
- <20211015113713.630119-3-cssk@net-c.es>
- <62a3ee8d-9439-9275-4e71-876b865b9a7d@amd.com>
+ Robert Foss <robert.foss@linaro.org>, Ben Skeggs <bskeggs@redhat.com>,
+ nouveau@lists.freedesktop.org, ville.syrjala@linux.intel.com
+Date: Sat, 16 Oct 2021 20:42:13 +0200
+Message-Id: <20211016184226.3862-1-cssk@net-c.es>
+X-Mailer: git-send-email 2.33.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <62a3ee8d-9439-9275-4e71-876b865b9a7d@amd.com>
-Subject: Re: [Nouveau] [PATCH 02/15] drm/amdgpu: use drm_* functions instead
- of duplicated code in amdgpu driver
+Content-Transfer-Encoding: 8bit
+Subject: [Nouveau] [PATCH v2 00/13] replace drm_detect_hdmi_monitor() with
+ drm_display_info.is_hdmi
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,46 +65,62 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, Oct 15, 2021 at 11:14:54AM -0400, Harry Wentland wrote:
-> 
-> 
-> On 2021-10-15 07:37, Claudio Suarez wrote:
-> > a) Once EDID is parsed, the monitor HDMI support information is available
-> > through drm_display_info.is_hdmi. The amdgpu driver still calls
-> > drm_detect_hdmi_monitor() to retrieve the same information, which
-> > is less efficient. Change to drm_display_info.is_hdmi
-> > 
-> > This is a TODO task in Documentation/gpu/todo.rst
-> > 
-> > b) drm_display_info is updated by drm_get_edid() or
-> > drm_connector_update_edid_property(). In the amdgpu driver it is almost
-> > always updated when the edid is read in amdgpu_connector_get_edid(),
-> > but not always.  Change amdgpu_connector_get_edid() and
-> > amdgpu_connector_free_edid() to keep drm_display_info updated. This allows a)
-> > to work properly.
-> > 
-> > c) Use drm_edid_get_monitor_name() instead of duplicating the code that
-> > parses the EDID in dm_helpers_parse_edid_caps()
-> > 
-> > Also, remove the unused "struct dc_context *ctx" parameter in
-> > dm_helpers_parse_edid_caps()
-> > 
-> 
-> Thanks for this work.
-> 
-> The fact that you listed three separate changes in this commit
-> is a clear indication that this patch should be three separate
-> patches instead. Separating the functional bits from the straight
-> refactor will help with bisection if this leads to a regression.
-> 
-> All changes look reasonable to me, though. With this patch split
-> into three patches in the sequence (b), (c), then (a) this is
-> Reviewed-by: Harry Wentland <harry.wentland@amd.com>
+Changelog:
+v2:
+- no helper function
+- A separate patch is made for amdgpu
+- zte patch is removed because that driver no longer exists
 
-Ok, thanks. I'll send three patches.
+[Why]
+Copy&paste from Documentation/gpu/todo.rst 
+===
+Replace drm_detect_hdmi_monitor() with drm_display_info.is_hdmi
+---------------------------------------------------------------
 
-BR
+Once EDID is parsed, the monitor HDMI support information is available through
+drm_display_info.is_hdmi. Many drivers still call drm_detect_hdmi_monitor() to
+retrieve the same information, which is less efficient.
+
+Audit each individual driver calling drm_detect_hdmi_monitor() and switch to
+drm_display_info.is_hdmi if applicable.
+=====
+
+[How]
+I did it in two steps:
+- check that drm_display_info has a correct value.
+- in that case, replace drm_detect_hdmi_monitor() with drm_display_info.is_hdmi
+
+Almost all occurrences of drm_detect_hdmi_monitor() could be changed. Some
+small inconsistencies have been solved.
+
+Stats:
+ drivers/gpu/drm/bridge/adv7511/adv7511_drv.c |  2 +-
+ drivers/gpu/drm/bridge/sii902x.c             |  2 +-
+ drivers/gpu/drm/bridge/synopsys/dw-hdmi.c    |  2 +-
+ drivers/gpu/drm/drm_edid.c                   | 11 +++++------
+ drivers/gpu/drm/exynos/exynos_hdmi.c         |  6 ++++--
+ drivers/gpu/drm/gma500/cdv_intel_hdmi.c      |  3 ++-
+ drivers/gpu/drm/gma500/psb_intel_sdvo.c      |  6 ++++--
+ drivers/gpu/drm/i915/display/intel_hdmi.c    |  2 +-
+ drivers/gpu/drm/i915/display/intel_sdvo.c    |  3 ++-
+ drivers/gpu/drm/msm/hdmi/hdmi_connector.c    |  2 +-
+ drivers/gpu/drm/nouveau/dispnv50/disp.c      |  4 ++--
+ drivers/gpu/drm/nouveau/dispnv50/head.c      |  8 +-------
+ drivers/gpu/drm/radeon/atombios_encoders.c   |  6 +++---
+ drivers/gpu/drm/radeon/radeon_connectors.c   | 15 +++++++++------
+ drivers/gpu/drm/radeon/radeon_display.c      |  2 +-
+ drivers/gpu/drm/radeon/radeon_encoders.c     |  4 ++--
+ drivers/gpu/drm/rockchip/inno_hdmi.c         |  4 ++--
+ drivers/gpu/drm/rockchip/rk3066_hdmi.c       |  2 +-
+ drivers/gpu/drm/sti/sti_hdmi.c               | 10 ++++++----
+ drivers/gpu/drm/sun4i/sun4i_hdmi_enc.c       |  4 ++--
+ drivers/gpu/drm/tegra/hdmi.c                 |  6 +-----
+ drivers/gpu/drm/vc4/vc4_hdmi.c               |  6 +++---
+ 22 files changed, 55 insertions(+), 55 deletions(-)
+
+Best regards.
 Claudio Suarez
+
 
 
 
