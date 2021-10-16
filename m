@@ -1,28 +1,28 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id DDFEF43044F
-	for <lists+nouveau@lfdr.de>; Sat, 16 Oct 2021 20:43:05 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9E058430451
+	for <lists+nouveau@lfdr.de>; Sat, 16 Oct 2021 20:43:08 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5AC936E4A2;
-	Sat, 16 Oct 2021 18:42:50 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B1B616E49A;
+	Sat, 16 Oct 2021 18:42:48 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from msg-1.mailo.com (msg-1.mailo.com [213.182.54.11])
- by gabe.freedesktop.org (Postfix) with ESMTPS id CBB2F6E48D;
+Received: from msg-4.mailo.com (ip-15.mailobj.net [213.182.54.15])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D71746E48E;
  Sat, 16 Oct 2021 18:42:45 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=net-c.es; s=mailo;
- t=1634409760; bh=uuIT5sIGiM41ZxesdxWnWDZbyFiOv+uiIKfgEAa+79g=;
+ t=1634409762; bh=EXkDekAufK6goeabnufaLKQbzyG9y1fY1+pkrXICOg0=;
  h=X-EA-Auth:From:To:Cc:Subject:Date:Message-Id:X-Mailer:In-Reply-To:
  References:MIME-Version:Content-Transfer-Encoding;
- b=IPIoKFx0JxVdsmzJPgBTvp6QG6KTtYTPJ7FOH9QHT8JCko3JXW8wBt0Y9GQMPgmT/
- FJiNf3KB1I56GHgZcgPxghVdtS98Hxxq0mv4+WyBq+oh3pabDHL5Vy8dxix4dtYa90
- vsoFDglbVlDzDBoSw/bmcFcZ1L61FCkvKuHaXHd8=
+ b=qWMmjH05MZ99u0QzP1jsb3bV5W9QkmDNt3HAlUwgzvNmB0smEmrVfLmMri224Thrb
+ NrAJIYPZcF67Mj8w7gaCfl+3X1h2CzQG5pGveKTS6PUncSNN6tUbM7TbmEAgrDDLJo
+ 7Ik9Dy/5vJzWwn+NYQFlkpoW3W2kq7c4iUrPz77c=
 Received: by b-1.in.mailobj.net [192.168.90.11] with ESMTP
  via ip-206.mailobj.net [213.182.55.206]
- Sat, 16 Oct 2021 20:42:40 +0200 (CEST)
-X-EA-Auth: XgZ+C9JXLspqcHF7gvV4o69gypOR8PoGzuWho0tgdXFOzw77zQtKGq6mnlQ6WYFfnvD7kDmgRao0vHJ/+OHWE4uibMILq82P
+ Sat, 16 Oct 2021 20:42:41 +0200 (CEST)
+X-EA-Auth: ZT1bvVRSjwCXyJ5qMQMpI8DA5jiJfebeNQk7aKCzUT6lHLRx6DdXNzuri4BaUl0RTnbERGE8xabipPmjWqZr3BWIZk+ARf74
 From: Claudio Suarez <cssk@net-c.es>
 To: dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
  linux-tegra@vger.kernel.org, intel-gfx@lists.freedesktop.org,
@@ -45,15 +45,15 @@ To: dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
  Robert Foss <robert.foss@linaro.org>, Ben Skeggs <bskeggs@redhat.com>,
  nouveau@lists.freedesktop.org, ville.syrjala@linux.intel.com
 Cc: Claudio Suarez <cssk@net-c.es>
-Date: Sat, 16 Oct 2021 20:42:14 +0200
-Message-Id: <20211016184226.3862-2-cssk@net-c.es>
+Date: Sat, 16 Oct 2021 20:42:15 +0200
+Message-Id: <20211016184226.3862-3-cssk@net-c.es>
 X-Mailer: git-send-email 2.33.0
 In-Reply-To: <20211016184226.3862-1-cssk@net-c.es>
 References: <20211016184226.3862-1-cssk@net-c.es>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Subject: [Nouveau] [PATCH v2 01/13] gpu/drm: make drm_add_edid_modes()
- consistent when updating connector->display_info
+Subject: [Nouveau] [PATCH v2 02/13] drm/vc4: replace
+ drm_detect_hdmi_monitor() with drm_display_info.is_hdmi
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,45 +68,43 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-According to the documentation, drm_add_edid_modes
-"... Also fills out the &drm_display_info structure and ELD in @connector
-with any information which can be derived from the edid."
+Once EDID is parsed, the monitor HDMI support information is available
+through drm_display_info.is_hdmi. Use this value instead of calling
+drm_detect_hdmi_monitor() to avoid a second parse.
 
-drm_add_edid_modes accepts a struct edid *edid parameter which may have a
-value or may be null. When it is not null, connector->display_info and
-connector->eld are updated according to the edid. When edid=NULL, only
-connector->eld is reset. Reset connector->display_info to be consistent
-and accurate.
+This is a TODO task in Documentation/gpu/todo.rst
 
 Signed-off-by: Claudio Suarez <cssk@net-c.es>
 ---
- drivers/gpu/drm/drm_edid.c | 11 +++++------
- 1 file changed, 5 insertions(+), 6 deletions(-)
+ drivers/gpu/drm/vc4/vc4_hdmi.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/drivers/gpu/drm/drm_edid.c b/drivers/gpu/drm/drm_edid.c
-index 6325877c5fd6..c643db17782c 100644
---- a/drivers/gpu/drm/drm_edid.c
-+++ b/drivers/gpu/drm/drm_edid.c
-@@ -5356,14 +5356,13 @@ int drm_add_edid_modes(struct drm_connector *connector, struct edid *edid)
- 	int num_modes = 0;
- 	u32 quirks;
+diff --git a/drivers/gpu/drm/vc4/vc4_hdmi.c b/drivers/gpu/drm/vc4/vc4_hdmi.c
+index b4b4653fe301..d531e4c501eb 100644
+--- a/drivers/gpu/drm/vc4/vc4_hdmi.c
++++ b/drivers/gpu/drm/vc4/vc4_hdmi.c
+@@ -182,7 +182,8 @@ vc4_hdmi_connector_detect(struct drm_connector *connector, bool force)
  
--	if (edid == NULL) {
--		clear_eld(connector);
--		return 0;
--	}
- 	if (!drm_edid_is_valid(edid)) {
-+		/* edid == NULL or invalid here */
- 		clear_eld(connector);
--		drm_warn(connector->dev, "%s: EDID invalid.\n",
--			 connector->name);
-+		drm_reset_display_info(connector);
-+		if (edid)
-+			drm_warn(connector->dev, "%s: EDID invalid.\n",
-+				 connector->name);
- 		return 0;
- 	}
+ 			if (edid) {
+ 				cec_s_phys_addr_from_edid(vc4_hdmi->cec_adap, edid);
+-				vc4_hdmi->encoder.hdmi_monitor = drm_detect_hdmi_monitor(edid);
++				vc4_hdmi->encoder.hdmi_monitor =
++						connector->display_info.is_hdmi;
+ 				kfree(edid);
+ 			}
+ 		}
+@@ -212,10 +213,9 @@ static int vc4_hdmi_connector_get_modes(struct drm_connector *connector)
+ 	if (!edid)
+ 		return -ENODEV;
  
+-	vc4_encoder->hdmi_monitor = drm_detect_hdmi_monitor(edid);
+-
+ 	drm_connector_update_edid_property(connector, edid);
+ 	ret = drm_add_edid_modes(connector, edid);
++	vc4_encoder->hdmi_monitor = connector->display_info.is_hdmi;
+ 	kfree(edid);
+ 
+ 	if (vc4_hdmi->disable_4kp60) {
 -- 
 2.33.0
 
