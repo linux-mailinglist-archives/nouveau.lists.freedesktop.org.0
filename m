@@ -1,31 +1,31 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 044BC42FC6C
-	for <lists+nouveau@lfdr.de>; Fri, 15 Oct 2021 21:47:15 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4F8BF430126
+	for <lists+nouveau@lfdr.de>; Sat, 16 Oct 2021 10:25:29 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 61DAA6EDF2;
-	Fri, 15 Oct 2021 19:47:11 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4EFF66E420;
+	Sat, 16 Oct 2021 08:25:17 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A13FD6EDE4;
- Fri, 15 Oct 2021 19:47:09 +0000 (UTC)
-X-IronPort-AV: E=McAfee;i="6200,9189,10138"; a="227866926"
-X-IronPort-AV: E=Sophos;i="5.85,376,1624345200"; d="scan'208";a="227866926"
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
- by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 15 Oct 2021 12:47:09 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.85,376,1624345200"; d="scan'208";a="461666479"
-Received: from stinkbox.fi.intel.com (HELO stinkbox) ([10.237.72.171])
- by orsmga002.jf.intel.com with SMTP; 15 Oct 2021 12:47:00 -0700
-Received: by stinkbox (sSMTP sendmail emulation);
- Fri, 15 Oct 2021 22:46:59 +0300
-Date: Fri, 15 Oct 2021 22:46:59 +0300
-From: Ville =?iso-8859-1?Q?Syrj=E4l=E4?= <ville.syrjala@linux.intel.com>
-To: Claudio Suarez <cssk@net-c.es>
+Received: from msg-4.mailo.com (ip-15.mailobj.net [213.182.54.15])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id CF7A46E419;
+ Sat, 16 Oct 2021 08:25:14 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=net-c.es; s=mailo;
+ t=1634372706; bh=yZzgPykl4Bs+bjn8VyGJS4/uveNfNvHA1+ZdWhCtElE=;
+ h=X-EA-Auth:Date:From:To:Cc:Subject:Message-ID:References:
+ MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To;
+ b=wWMsPosvxYC0hUTuNskQtjaK4A0OSCkYJLfNsRREaPprBWK5/hFofHtPAM+pf+mFw
+ A8v6EwrivfPxjx2zz5g7sjcn2k6+1RMH1RIDAtESrMwq18LSo8OpckCitXvzPsCyeF
+ 7Lyg0wwMrnehjqaNydEV5nmunSRisHnMLDQjhizo=
+Received: by b-2.in.mailobj.net [192.168.90.12] with ESMTP
+ via ip-206.mailobj.net [213.182.55.206]
+ Sat, 16 Oct 2021 10:25:06 +0200 (CEST)
+X-EA-Auth: NRS5ipq4PdTt+JAH6bHxz4H2hBw4isFILYBvQU7UNrUFLZTxbjQJHTD8I+F5D0UsnPjvvuhUpwJExaACHSHoV/oeR/31d9wx
+Date: Sat, 16 Oct 2021 10:25:03 +0200
+From: Claudio Suarez <cssk@net-c.es>
+To: Ville =?iso-8859-1?Q?Syrj=E4l=E4?= <ville.syrjala@linux.intel.com>
 Cc: dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
  linux-tegra@vger.kernel.org, intel-gfx@lists.freedesktop.org,
  David Airlie <airlied@linux.ie>, Daniel Vetter <daniel@ffwll.ch>,
@@ -46,7 +46,7 @@ Cc: dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
  Neil Armstrong <narmstrong@baylibre.com>,
  Robert Foss <robert.foss@linaro.org>,
  Ben Skeggs <bskeggs@redhat.com>, nouveau@lists.freedesktop.org
-Message-ID: <YWnas70UYAdjZFKo@intel.com>
+Message-ID: <YWqMX+EOjk++HPOe@gineta.localdomain>
 References: <20211015113713.630119-1-cssk@net-c.es>
  <20211015113713.630119-2-cssk@net-c.es>
  <YWluAX6LA2DupE+E@intel.com> <YWnVVoCipTXxx8NW@gineta.localdomain>
@@ -56,8 +56,7 @@ Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
 In-Reply-To: <YWnXierh4TSXpDMc@intel.com>
-X-Patchwork-Hint: comment
-Subject: Re: [Nouveau] [Intel-gfx] [PATCH 01/15] gpu/drm: make
+Subject: Re: [Nouveau] [Freedreno] [PATCH 01/15] gpu/drm: make
  drm_add_edid_modes() consistent when updating connector->display_info
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -151,9 +150,30 @@ On Fri, Oct 15, 2021 at 10:33:29PM +0300, Ville Syrjälä wrote:
 > Hmm. Another option is to just move all these NULL/invalid edid
 > checks into drm_edid_to_eld() and drm_add_display_info().
 
-But maybe that's not so easy. Would still need to bail out
-from drm_add_edid_modes() I guess.
+I was thinking about this. We can use a boolean variable:
+===============
+        bool edid_is_invalid;
 
--- 
-Ville Syrjälä
-Intel
+	edid_is_invalid = !drm_edid_is_valid(edid);
+
+        if (edid == NULL || edid_is_invalid) {
+                clear_eld(connector);
+                drm_reset_display_info(connector);
+                if (edid_is_invalid)
+                         drm_warn(connector->dev, "%s: EDID invalid.\n",
+                                  connector->name);
+                return 0;
+        }
+
+        drm_edid_to_eld(connector, edid);
+...
+===============
+Internally, drm_edid_is_valid() handles NULL pointers properly.
+It is a quite elegant solution with a small change in the original
+design, and it improves this part in the way you pointed out.
+
+Best regards,
+Claudio Suarez
+
+
+
