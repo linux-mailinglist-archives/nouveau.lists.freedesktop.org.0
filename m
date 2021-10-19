@@ -1,112 +1,49 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6C1014324D5
-	for <lists+nouveau@lfdr.de>; Mon, 18 Oct 2021 19:19:21 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2FD79433E25
+	for <lists+nouveau@lfdr.de>; Tue, 19 Oct 2021 20:10:07 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 06FA56EE45;
-	Mon, 18 Oct 2021 17:18:48 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C677C8999E;
+	Tue, 19 Oct 2021 18:09:58 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from APC01-SG2-obe.outbound.protection.outlook.com
- (mail-eopbgr1310124.outbound.protection.outlook.com [40.107.131.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8DD136E9DE;
- Mon, 18 Oct 2021 11:31:48 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=MsItcok9o1/NIT7VeDHMldOTZUz9pRKvkiCxmjmZlEMM9NxVv4/+OKbD6pNIDnAjGJkasbV1Q5cCSlicLwNMJFo84toigXwNE2egbuCaPWWoOD8pClEiBp9mlZmRiogtOQsl4G0fmsNDuEuROdxnoyos+3cn47OYzAJSYBqinWKV9XqBI/HMMW7Ib6km9jkd8Qz9VnGrTNiwnB/gKJJFVD3LHTw0rfXQBHJfqFJUb/zcFfCId+YoFy7lbrHGqFIsTXkRwJGTVyuu86Ek5oHW19ww+RCLLC89OzRUKNlfW58PaMf4SCmtscIeLm8gnnQ/za00C7aD2D4ZFA4SzcBuTQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=0dJvIoEXFjtdnuA0nJCH/oNc8e1HCNddQ5goz6ec+m0=;
- b=mflKPRO/CvBO+/xp5POYkySbu49vXxjiJPJHUByDl/iZDq9av9NARLsIcp9Y4IXlTtcMPxWgxw/ajN830FHGRJe3tfkY0zIR1iP9etG7KlOCoFfKhbxPrhMbklos32E33BIRBt5G5QWD5IK6L5JKU6tWho0z7p49fZJ/FP/SEFCsn9P6Kt5VkSzP6pqHlGqunx64MmMspguMI/tIoG53WwFP4IlODHhDUNYuAg9ibBrXJu3Ffq8HzirKj90MUvpJsk8UQE9PCx4hVB81Auhw+AkDmGprPl7LSmLbujDh3/3XNrjOACswCotiGyDyVfK94tMxa0Hq+0IWAGtjWYOOHA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=vivo.com; dmarc=pass action=none header.from=vivo.com;
- dkim=pass header.d=vivo.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vivo0.onmicrosoft.com; 
- s=selector2-vivo0-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=0dJvIoEXFjtdnuA0nJCH/oNc8e1HCNddQ5goz6ec+m0=;
- b=nRryw/fAnHDhcan/OqgqS8zQjwhRbcRWBmDQmmu1rmFG4C76RrlJGy8BiTq3ZTniuolDFIrjMCajwkTRT/VaLiFc4dCZZYmnpHbQKcCSitc/xKsAru1Y2yiPIhNnDLbS26Wqjpx1knVpMk+K8sJr13GxtSwLC1R+CeZ9WFE4LBs=
-Authentication-Results: redhat.com; dkim=none (message not signed)
- header.d=none;redhat.com; dmarc=none action=none header.from=vivo.com;
-Received: from SL2PR06MB3082.apcprd06.prod.outlook.com (2603:1096:100:37::17)
- by SL2PR06MB3034.apcprd06.prod.outlook.com (2603:1096:100:31::18)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4608.16; Mon, 18 Oct
- 2021 11:31:46 +0000
-Received: from SL2PR06MB3082.apcprd06.prod.outlook.com
- ([fe80::4c9b:b71f:fb67:6414]) by SL2PR06MB3082.apcprd06.prod.outlook.com
- ([fe80::4c9b:b71f:fb67:6414%6]) with mapi id 15.20.4608.018; Mon, 18 Oct 2021
- 11:31:46 +0000
-From: Qing Wang <wangqing@vivo.com>
-To: Ben Skeggs <bskeggs@redhat.com>, David Airlie <airlied@linux.ie>,
- Daniel Vetter <daniel@ffwll.ch>, dri-devel@lists.freedesktop.org,
- nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org
-Cc: Qing Wang <wangqing@vivo.com>
-Date: Mon, 18 Oct 2021 04:31:39 -0700
-Message-Id: <1634556699-38892-1-git-send-email-wangqing@vivo.com>
-X-Mailer: git-send-email 2.7.4
-Content-Type: text/plain
-X-ClientProxiedBy: HK2PR0302CA0022.apcprd03.prod.outlook.com
- (2603:1096:202::32) To SL2PR06MB3082.apcprd06.prod.outlook.com
- (2603:1096:100:37::17)
+Received: from mga12.intel.com (mga12.intel.com [192.55.52.136])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8F09A89259;
+ Tue, 19 Oct 2021 18:09:57 +0000 (UTC)
+X-IronPort-AV: E=McAfee;i="6200,9189,10142"; a="208696114"
+X-IronPort-AV: E=Sophos;i="5.87,164,1631602800"; d="scan'208";a="208696114"
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+ by fmsmga106.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 19 Oct 2021 11:09:57 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.87,164,1631602800"; d="scan'208";a="630077639"
+Received: from stinkbox.fi.intel.com (HELO stinkbox) ([10.237.72.171])
+ by fmsmga001.fm.intel.com with SMTP; 19 Oct 2021 11:09:52 -0700
+Received: by stinkbox (sSMTP sendmail emulation);
+ Tue, 19 Oct 2021 21:09:52 +0300
+Date: Tue, 19 Oct 2021 21:09:52 +0300
+From: Ville =?iso-8859-1?Q?Syrj=E4l=E4?= <ville.syrjala@linux.intel.com>
+To: Lyude Paul <lyude@redhat.com>
+Cc: intel-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org, stable@vger.kernel.org,
+ Jani Nikula <jani.nikula@linux.intel.com>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ David Airlie <airlied@linux.ie>, Daniel Vetter <daniel@ffwll.ch>,
+ Sean Paul <seanpaul@chromium.org>, open list <linux-kernel@vger.kernel.org>
+Message-ID: <YW8J8Nc7UJnISaVg@intel.com>
+References: <20211006024018.320394-1-lyude@redhat.com>
+ <20211006024018.320394-2-lyude@redhat.com>
 MIME-Version: 1.0
-Received: from ubuntu.localdomain (218.213.202.189) by
- HK2PR0302CA0022.apcprd03.prod.outlook.com (2603:1096:202::32) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id
- 15.20.4628.13 via Frontend Transport; Mon, 18 Oct 2021 11:31:45 +0000
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 0bafa1aa-5d68-45f7-cae1-08d9922ade10
-X-MS-TrafficTypeDiagnostic: SL2PR06MB3034:
-X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: <SL2PR06MB30348A66D32E30ACE6F58AA8BDBC9@SL2PR06MB3034.apcprd06.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:2276;
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 2+8I1tkH7PD+ASVvif1xRbICpRcLPLadIIq2YM2C9ICm9VWyRfBTk5M2qDOfnWnTYgfQenUXtMnperN7FdTBnrP4DpQsQzuq7AuoHDOLRKTU59qyCNZdcp6oCpctLtbxuJr/1je8u2hX71EIrZrOyPYKluiBRao0xAaKNyBpndj0JWYk2frz8VksIVfnr0u8YdvHWnjW2U1r1vEqfDcrbx+pileALOWA/7Wv1o/ilis/I6FO9CgYA/Al/Wibg3JnzKt5eF3O5g/AFIIYLtgZ6JEV2TUBJFJWDM1qD0a8D7wWZPjsskWVmkQilLbVLxSDpLKM8JOPFXBXW1wgnbaF+jlRo1LKOiY8H8wWsJo01RG/HmSgPwxylXNy+8qfF5TykYrbg96lqBgTUEWRKSFYD3O2woOfcBqYIDz8GUps30BPmyQWDXEylXAPWdUhZTUFL7aHSbvwkan3YNgAk1hRsYNjzV85UJrJoeeMcRhAvHspJGmUciCAKPjXDrjU2ZS3v5qeJmrJ5BsyDljsOl6T08QpaO0jhSFLDeVAdVCwnt1SbR9hfCUhTiRERemJrgzo36tpfvIWxE/IG/e4tcKeN0dvS7/Z7Al9Sqz4N7dL+osDwqq6aO6aM18BOuLY0OHpJhdNV+3bwOlr39FkFn5P4a3oQrIE7ivS9w4xuFxqK+cWlR2OoXE7d4S2J9vQBS+QNNCMvfz+ZDF8iZvHLSQiQg==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SL2PR06MB3082.apcprd06.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(4636009)(366004)(8936002)(6486002)(52116002)(8676002)(66476007)(2906002)(6666004)(186003)(6512007)(4326008)(6506007)(26005)(66946007)(66556008)(36756003)(107886003)(316002)(4744005)(83380400001)(956004)(5660300002)(110136005)(2616005)(86362001)(508600001)(38350700002)(38100700002);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?1bOh8/DZ4ccHNnuqksAmatepfvBGwCauk7isWH4rZqbSb3kCVLLn4Oolah0o?=
- =?us-ascii?Q?HtqCKuem6VnjX0kS/eMWHGAuw1qy76SBv0Czf/w2yvEiHdnzkXv98viB6+Mo?=
- =?us-ascii?Q?GCXqjPzroVipyryu8158S/YFXO8fBcJaeYSy8Payo5HqpddyAgYU0rOO3hiW?=
- =?us-ascii?Q?Oo5D6R/X0jS18YhZpB8CJ1twhG/WTBlYRR5dd2U5aFiNfF97wRP2zwa5qLXS?=
- =?us-ascii?Q?qvK4cnxh+j8gosfX0nmHp+b/kwXRrXvc6nbTEQBbqjYcDsc5rQILT/vW7Zj5?=
- =?us-ascii?Q?CdmENDTBSUU2IOvjQPApNbLl9WKARFnc59Z/pM5Rrl2T3MqyGooi2VV/YkZb?=
- =?us-ascii?Q?wFNwJEoSVvBECmsiPgmOdNMir0e8MTBTtFYHsQQe+5iiRJEw7hS+Hf5GMxos?=
- =?us-ascii?Q?hfVbRhLS8UyBL7rGWLMn7DePCTnrzIA17Nrn4ey76Hf1EN+YRcnh8d/nH7eu?=
- =?us-ascii?Q?iDixid/btdMswJfEswPk1rPFTulUvf2TcipA29kqM9ThccO9xhWO8xVqnUho?=
- =?us-ascii?Q?OB6DdGXIBBqdUXJjJMJrotVCBTx/GsAcDxb6FzGCe4Zt30TuTF4RXtDJTJjp?=
- =?us-ascii?Q?DN62Sy0jfpDYzP+ZJka9UKOLkGGiJLWqpYWs1leuUqTip4wuEmbItDuVPjM8?=
- =?us-ascii?Q?yflD679hOcUDsc+EESozn34kXbIqtKoH/pgU8v+70j88bgoyRu5CChZINCKb?=
- =?us-ascii?Q?07lHiaCeYDaZ+6qMoZQirgEPSLYCO+BQoT/bdG0kWj+XFVJpnhzagNwZGMto?=
- =?us-ascii?Q?kJt+FxNU1670jgeNEKwJ3XWN/azFmjEDN5Xlq+VCfwm6ynZ9kf98f5Vta2hF?=
- =?us-ascii?Q?bePL4b20v0rZcszb3ilAgRHcuB2EXicMUQxAOezNzCDVK4IucCqLxpz0x9Uk?=
- =?us-ascii?Q?5KMrHCnveodbYOM6EtLNUYjkYvjHDe2nWTUub9biN1zf8r8AdugMpKPCMIlF?=
- =?us-ascii?Q?vlv5aR7VWzl7Agczszw8dGnJqAPDr7j5a+nYdEucKYConFOByMd38bbu6qge?=
- =?us-ascii?Q?peNu4CP8bsUky8kUgrxpQdPsa+zzQYSPOxOPegVSdeUToEVGmvhQL5DBk94e?=
- =?us-ascii?Q?wWDnLGChoa0Fbk/u/Jy1uCzTsy3JtgqoOG/0PFembcL0k2sz3x0Q3YY7MH8b?=
- =?us-ascii?Q?SeQJLlUaKB9US3D9HPPey3HGlb260h74o2Iov3aG3en9n6p3IuCWGWVYeP1G?=
- =?us-ascii?Q?pdsYvx+T8Fyv7clHRwe1NtmeGmcN+PPXFthC9oQJsaToL7LdxaNOXT+qXtjM?=
- =?us-ascii?Q?OJZGXJQ6N/pxJt487hdcw1ufsy9naP75XDFKhtzIDddIKVjV0Iz6WI3Nzn2+?=
- =?us-ascii?Q?xZqqmcDa195yu3Tlac9/mp2ZUp7BrtqpN6/52LJLHRbVbg=3D=3D?=
-X-OriginatorOrg: vivo.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0bafa1aa-5d68-45f7-cae1-08d9922ade10
-X-MS-Exchange-CrossTenant-AuthSource: SL2PR06MB3082.apcprd06.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Oct 2021 11:31:46.3249 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 923e42dc-48d5-4cbe-b582-1a797a6412ed
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 5/DAyC1qBZ99DR4BwRmBsceSYnn+OrDnZO3xWU01IRLLiUhfbeub3nXDc7+Iqy6SYuoekedHMc+6KxC/BJFm1w==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SL2PR06MB3034
-X-Mailman-Approved-At: Mon, 18 Oct 2021 17:18:27 +0000
-Subject: [Nouveau] [PATCH V2] gpu: drm: nouveau: switch over to
- vmemdup_user()
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20211006024018.320394-2-lyude@redhat.com>
+X-Patchwork-Hint: comment
+Subject: Re: [Nouveau] [PATCH v3 1/5] drm/i915: Add support for panels with
+ VESA backlights with PWM enable/disable
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -121,40 +58,88 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-This patch fixes the following Coccinelle warning:
+On Tue, Oct 05, 2021 at 10:40:14PM -0400, Lyude Paul wrote:
+> This simply adds proper support for panel backlights that can be controlled
+> via VESA's backlight control protocol, but which also require that we
+> enable and disable the backlight via PWM instead of via the DPCD interface.
+> We also enable this by default, in order to fix some people's backlights
+> that were broken by not having this enabled.
+> 
+> For reference, backlights that require this and use VESA's backlight
+> interface tend to be laptops with hybrid GPUs, but this very well may
+> change in the future.
+> 
+> Signed-off-by: Lyude Paul <lyude@redhat.com>
+> Link: https://gitlab.freedesktop.org/drm/intel/-/issues/3680
+> Fixes: fe7d52bccab6 ("drm/i915/dp: Don't use DPCD backlights that need PWM enable/disable")
+> Cc: <stable@vger.kernel.org> # v5.12+
+> ---
+>  .../drm/i915/display/intel_dp_aux_backlight.c | 24 ++++++++++++++-----
+>  1 file changed, 18 insertions(+), 6 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c b/drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c
+> index 569d17b4d00f..594fdc7453ca 100644
+> --- a/drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c
+> +++ b/drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c
+> @@ -293,6 +293,10 @@ intel_dp_aux_vesa_enable_backlight(const struct intel_crtc_state *crtc_state,
+>  	struct intel_panel *panel = &connector->panel;
+>  	struct intel_dp *intel_dp = enc_to_intel_dp(connector->encoder);
+>  
+> +	if (!panel->backlight.edp.vesa.info.aux_enable)
+> +		panel->backlight.pwm_funcs->enable(crtc_state, conn_state,
+> +						   panel->backlight.pwm_level_max);
 
-drivers/gpu/drm/nouveau/nouveau_gem.c:630: WARNING opportunity for vmemdup_user
+What't the story here with the non-inverted max vs. pontetially inverted
+0 in the counterpart?
 
-Use vmemdup_user rather than duplicating its implementation
-This is a little bit restricted to reduce false positives
+> +
+>  	drm_edp_backlight_enable(&intel_dp->aux, &panel->backlight.edp.vesa.info, level);
+>  }
+>  
+> @@ -304,6 +308,10 @@ static void intel_dp_aux_vesa_disable_backlight(const struct drm_connector_state
+>  	struct intel_dp *intel_dp = enc_to_intel_dp(connector->encoder);
+>  
+>  	drm_edp_backlight_disable(&intel_dp->aux, &panel->backlight.edp.vesa.info);
+> +
+> +	if (!panel->backlight.edp.vesa.info.aux_enable)
+> +		panel->backlight.pwm_funcs->disable(old_conn_state,
+> +						    intel_backlight_invert_pwm_level(connector, 0));
+>  }
+>  
+>  static int intel_dp_aux_vesa_setup_backlight(struct intel_connector *connector, enum pipe pipe)
+> @@ -321,6 +329,15 @@ static int intel_dp_aux_vesa_setup_backlight(struct intel_connector *connector,
+>  	if (ret < 0)
+>  		return ret;
+>  
+> +	if (!panel->backlight.edp.vesa.info.aux_enable) {
+> +		ret = panel->backlight.pwm_funcs->setup(connector, pipe);
+> +		if (ret < 0) {
+> +			drm_err(&i915->drm,
+> +				"Failed to setup PWM backlight controls for eDP backlight: %d\n",
+> +				ret);
+> +			return ret;
+> +		}
+> +	}
+>  	panel->backlight.max = panel->backlight.edp.vesa.info.max;
+>  	panel->backlight.min = 0;
+>  	if (current_mode == DP_EDP_BACKLIGHT_CONTROL_MODE_DPCD) {
+> @@ -340,12 +357,7 @@ intel_dp_aux_supports_vesa_backlight(struct intel_connector *connector)
+>  	struct intel_dp *intel_dp = intel_attached_dp(connector);
+>  	struct drm_i915_private *i915 = dp_to_i915(intel_dp);
+>  
+> -	/* TODO: We currently only support AUX only backlight configurations, not backlights which
+> -	 * require a mix of PWM and AUX controls to work. In the mean time, these machines typically
+> -	 * work just fine using normal PWM controls anyway.
+> -	 */
+> -	if ((intel_dp->edp_dpcd[1] & DP_EDP_BACKLIGHT_AUX_ENABLE_CAP) &&
+> -	    drm_edp_backlight_supported(intel_dp->edp_dpcd)) {
+> +	if (drm_edp_backlight_supported(intel_dp->edp_dpcd)) {
+>  		drm_dbg_kms(&i915->drm, "AUX Backlight Control Supported!\n");
+>  		return true;
+>  	}
+> -- 
+> 2.31.1
 
-Signed-off-by: Qing Wang <wangqing@vivo.com>
----
- drivers/gpu/drm/nouveau/nouveau_gem.c | 11 +++--------
- 1 file changed, 3 insertions(+), 8 deletions(-)
-
-diff --git a/drivers/gpu/drm/nouveau/nouveau_gem.c b/drivers/gpu/drm/nouveau/nouveau_gem.c
-index 8c2ecc2..3fc6959
---- a/drivers/gpu/drm/nouveau/nouveau_gem.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_gem.c
-@@ -627,14 +627,9 @@ u_memcpya(uint64_t user, unsigned nmemb, unsigned size)
- 
- 	size *= nmemb;
- 
--	mem = kvmalloc(size, GFP_KERNEL);
--	if (!mem)
--		return ERR_PTR(-ENOMEM);
--
--	if (copy_from_user(mem, userptr, size)) {
--		u_free(mem);
--		return ERR_PTR(-EFAULT);
--	}
-+	mem = vmemdup_user(userptr, size);
-+	if (IS_ERR(mem))
-+		return ERR_CAST(mem);
- 
- 	return mem;
- }
 -- 
-2.7.4
-
+Ville Syrjälä
+Intel
