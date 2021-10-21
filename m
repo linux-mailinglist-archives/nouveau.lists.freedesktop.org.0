@@ -1,85 +1,67 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6819043664B
-	for <lists+nouveau@lfdr.de>; Thu, 21 Oct 2021 17:31:21 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9340A43689C
+	for <lists+nouveau@lfdr.de>; Thu, 21 Oct 2021 19:03:25 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 529056ECBA;
-	Thu, 21 Oct 2021 15:31:18 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 511CF6ECE9;
+	Thu, 21 Oct 2021 17:03:22 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 04B786E0D5
- for <nouveau@lists.freedesktop.org>; Wed, 20 Oct 2021 16:40:25 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1634748025;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=StojfAqyeQHDkij+8rTrbPKJcvcUj0fGJk9VVUumXz4=;
- b=OOhs+PFs/yKvdKoKa2GjC/Qv1zHpOCF8kZwP9g7DSsJCYUzHLdcVQ1mdZ9cfTnn85gOWSo
- /zIgWHLMvpbqAzy22eqndaDLJHmSE22ymEJWp4Vq9MgCQGm6jS/Rdy6p6V8UwFw3SraTUf
- FGMZWKwlqqJy8SCWmeJBUwSyLcEj59c=
-Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
- [209.85.221.70]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-290-oI-kjuw0ME6z1QVXqbcM-g-1; Wed, 20 Oct 2021 12:40:19 -0400
-X-MC-Unique: oI-kjuw0ME6z1QVXqbcM-g-1
-Received: by mail-wr1-f70.google.com with SMTP id
- r21-20020adfa155000000b001608162e16dso10203408wrr.15
- for <nouveau@lists.freedesktop.org>; Wed, 20 Oct 2021 09:40:19 -0700 (PDT)
+Received: from mail-pj1-x102a.google.com (mail-pj1-x102a.google.com
+ [IPv6:2607:f8b0:4864:20::102a])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 44E8A6ECDB
+ for <nouveau@lists.freedesktop.org>; Thu, 21 Oct 2021 17:03:21 +0000 (UTC)
+Received: by mail-pj1-x102a.google.com with SMTP id
+ q10-20020a17090a1b0a00b001a076a59640so6151935pjq.0
+ for <nouveau@lists.freedesktop.org>; Thu, 21 Oct 2021 10:03:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to;
+ bh=dTcg4nnP3Q8OPOldUBNlJ77tCd6O60oSXI5JUaJbrOw=;
+ b=eW1MZxI1OmRUonS9v1rnZyRZSTC93O+t4454bYQxxN7sTvn0gzcyFi6nR0qXvK+4i4
+ ZkvHDpSMKZdH0IBFm9GsdJJkj+iDsEKWm5Xf/0sD2bDbWvHj+sIVH7sSu7kpTC2CY72U
+ acruMO4FPGAcQz5J7GuxKRVt/F5ICDOn9khtY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
- :content-language:to:references:from:in-reply-to
- :content-transfer-encoding;
- bh=StojfAqyeQHDkij+8rTrbPKJcvcUj0fGJk9VVUumXz4=;
- b=nOWrp83IJRH7j3Uc8qHxqEF1N1CZPNGUjymiTQioDqmD3Zwdt7Fj3Gd9O/bja2OfGA
- Q8nIn7Lh3NPfQyvBOhSviF3KrH2aNdujxHbhtYbILKP/xR2ff9O3k0q3AQ1Ek12+nYBc
- PcPNYLAlDytukxvU2WkM1Vp/GaNylFPyZiczIOS8VBS4Y5YKc1xyrbOaN2A4cWPMDbHC
- Q9lheoeZS+o7NIYGe9OIFMcgVeP+W0cjg57xCIcpnUb0IE/yCZNihG270eXu0OIMdPxc
- 2/RKyDs/DFSk0HWc0TQ4buxiF6FjftfcQCv6/On3FVx3gl9293ZSKqLAKEXXBbn8Xs70
- Gd5w==
-X-Gm-Message-State: AOAM533F8CVQJozjWdxxv0Kbo3DWtkHuUrUed6ojqqDvkMrRcJH4QJ0p
- 4HpvqVazuW9VYePveWI/gl50C3g62MITBth2aMmjo6MWh40nHhOJPjk1S+CUzpMJMn9BIkjpvvf
- 8OpLhT1DWZ2Odt5nFGJd8wTQZmQ==
-X-Received: by 2002:adf:e382:: with SMTP id e2mr421216wrm.90.1634748018445;
- Wed, 20 Oct 2021 09:40:18 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJw4j+FN8dHBAspNShPIfXEQEdqjV+D4OWwFaz88jZoJj1s/iEEzhN8nZO5xV9XP0HqGJTMqgA==
-X-Received: by 2002:adf:e382:: with SMTP id e2mr421162wrm.90.1634748018118;
- Wed, 20 Oct 2021 09:40:18 -0700 (PDT)
-Received: from [192.168.1.128] ([92.176.231.106])
- by smtp.gmail.com with ESMTPSA id g2sm2413587wrq.62.2021.10.20.09.40.17
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 20 Oct 2021 09:40:17 -0700 (PDT)
-Message-ID: <9989e16f-38a0-c76b-0408-d47f120eec7f@redhat.com>
-Date: Wed, 20 Oct 2021 18:40:16 +0200
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=dTcg4nnP3Q8OPOldUBNlJ77tCd6O60oSXI5JUaJbrOw=;
+ b=3NwPwEiiQu1KmS5+d9VMFteYqZJzCCx7Pkp7tTjRsEE4wF5xOuhQe7cwU7kqBBD8zn
+ ggACaaffpRDUYfqgbn8ROiK6XjsOE5aqmW1c8xMWN/WpPsuhOOyo8Hm6d91vLCS34p4G
+ 0hfK512zGfT9IOv2hP7cWzENRGwSRdSM4lO50tr54/FSHi7GSCWjxcfTuAsZZ8wMt5nO
+ a0zOHWGTGSoclyk/cG+0S51MVksblec15dG/I13pKZNeDUDke7yX8VWcOVdzlnNeLL0s
+ cKRhjDxqaithr7k9zpWxjfAoIMVrb0EmgdY6VDnekBmJi1StEx66iDxIDbDCvQFt41FO
+ QNhQ==
+X-Gm-Message-State: AOAM530MbYRTPR1PccE2/cd395msms/1qgAhzC2nyE4EKwGurXEzFRrK
+ 8+SPTNqg48awkGuYnc+MzHVX+5NsEm8=
+X-Google-Smtp-Source: ABdhPJxZPJROdmRol0REI+7u9He1qjFMzOPLeVcePBcrcnWgEUcZVclthczh6pTD+jqh26sdf0mjdg==
+X-Received: by 2002:a17:90b:1c8f:: with SMTP id
+ oo15mr8220645pjb.87.1634835800642; 
+ Thu, 21 Oct 2021 10:03:20 -0700 (PDT)
+Received: from www.outflux.net (smtp.outflux.net. [198.145.64.163])
+ by smtp.gmail.com with ESMTPSA id pc3sm6654862pjb.2.2021.10.21.10.03.20
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 21 Oct 2021 10:03:20 -0700 (PDT)
+Date: Thu, 21 Oct 2021 10:03:19 -0700
+From: Kees Cook <keescook@chromium.org>
+To: Karol Herbst <kherbst@redhat.com>
+Cc: "Gustavo A. R. Silva" <gustavoars@kernel.org>,
+ Ben Skeggs <bskeggs@redhat.com>, David Airlie <airlied@linux.ie>,
+ Daniel Vetter <daniel@ffwll.ch>,
+ dri-devel <dri-devel@lists.freedesktop.org>,
+ nouveau <nouveau@lists.freedesktop.org>,
+ LKML <linux-kernel@vger.kernel.org>, linux-hardening@vger.kernel.org
+Message-ID: <202110211002.CB975695@keescook>
+References: <20210928222513.GA294575@embeddedor>
+ <CACO55tsD98dNzw8fP=CiKLsdbnn2Vg78+wTRM90kutHtv1RZ5A@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.1.0
-To: =?UTF-8?B?VmlsbGUgU3lyasOkbMOk?= <ville.syrjala@linux.intel.com>,
- linux-kernel@vger.kernel.org, Johannes Stezenbach <js@sig21.net>,
- David Airlie <airlied@linux.ie>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- dri-devel@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>,
- nouveau@lists.freedesktop.org
-References: <20211008071708.1954041-1-javierm@redhat.com>
- <YWAlUBoMlerOGJEV@intel.com> <YWbQrP9blDndQV2F@phenom.ffwll.local>
-From: Javier Martinez Canillas <javierm@redhat.com>
-In-Reply-To: <YWbQrP9blDndQV2F@phenom.ffwll.local>
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=javierm@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Mailman-Approved-At: Thu, 21 Oct 2021 15:31:16 +0000
-Subject: Re: [Nouveau] [PATCH] Revert "drm/fb-helper: improve DRM fbdev
- emulation device names"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CACO55tsD98dNzw8fP=CiKLsdbnn2Vg78+wTRM90kutHtv1RZ5A@mail.gmail.com>
+Subject: Re: [Nouveau] [PATCH][next] nouveau/svm: Use kvcalloc() instead of
+ kvzalloc()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -94,22 +76,45 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hello Daniel,
+On Wed, Sep 29, 2021 at 05:28:47AM +0200, Karol Herbst wrote:
+> Lack of documentation inside Linux here is a bit annoying, but do I
+> understand it correctly, that the main (and probably only) difference
+> is that kvcalloc checks whether the multiplication overflows and
+> returns NULL in this case?
 
-On 10/13/21 14:27, Daniel Vetter wrote:
->>>  
->>>  	info->par = fb_helper;
->>> -	snprintf(info->fix.id, sizeof(info->fix.id), "%s",
+That's correct. :)
+
+> On Wed, Sep 29, 2021 at 12:21 AM Gustavo A. R. Silva
+> <gustavoars@kernel.org> wrote:
+> >
+> > Use 2-factor argument form kvcalloc() instead of kvzalloc().
+> >
+> > Link: https://github.com/KSPP/linux/issues/162
+> > Signed-off-by: Gustavo A. R. Silva <gustavoars@kernel.org>
+
+Reviewed-by: Kees Cook <keescook@chromium.org>
+
+> > ---
+> >  drivers/gpu/drm/nouveau/nouveau_svm.c | 2 +-
+> >  1 file changed, 1 insertion(+), 1 deletion(-)
+> >
+> > diff --git a/drivers/gpu/drm/nouveau/nouveau_svm.c b/drivers/gpu/drm/nouveau/nouveau_svm.c
+> > index b0c3422cb01f..1a896a24288a 100644
+> > --- a/drivers/gpu/drm/nouveau/nouveau_svm.c
+> > +++ b/drivers/gpu/drm/nouveau/nouveau_svm.c
+> > @@ -992,7 +992,7 @@ nouveau_svm_fault_buffer_ctor(struct nouveau_svm *svm, s32 oclass, int id)
+> >         if (ret)
+> >                 return ret;
+> >
+> > -       buffer->fault = kvzalloc(sizeof(*buffer->fault) * buffer->entries, GFP_KERNEL);
+> > +       buffer->fault = kvcalloc(sizeof(*buffer->fault), buffer->entries, GFP_KERNEL);
+> >         if (!buffer->fault)
+> >                 return -ENOMEM;
+> >
+> > --
+> > 2.27.0
+> >
 > 
-> Please add a comment here that drmfb is uapi because pm-utils matches
-> against it ...
-> 
 
-Sure, I'll do that and send a v2.
-
-Best regards,
 -- 
-Javier Martinez Canillas
-Linux Engineering
-Red Hat
-
+Kees Cook
