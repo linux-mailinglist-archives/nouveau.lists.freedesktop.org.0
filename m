@@ -1,67 +1,62 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9340A43689C
-	for <lists+nouveau@lfdr.de>; Thu, 21 Oct 2021 19:03:25 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4CFA9437613
+	for <lists+nouveau@lfdr.de>; Fri, 22 Oct 2021 13:37:03 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 511CF6ECE9;
-	Thu, 21 Oct 2021 17:03:22 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6EFAC6ED6B;
+	Fri, 22 Oct 2021 11:37:00 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pj1-x102a.google.com (mail-pj1-x102a.google.com
- [IPv6:2607:f8b0:4864:20::102a])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 44E8A6ECDB
- for <nouveau@lists.freedesktop.org>; Thu, 21 Oct 2021 17:03:21 +0000 (UTC)
-Received: by mail-pj1-x102a.google.com with SMTP id
- q10-20020a17090a1b0a00b001a076a59640so6151935pjq.0
- for <nouveau@lists.freedesktop.org>; Thu, 21 Oct 2021 10:03:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to;
- bh=dTcg4nnP3Q8OPOldUBNlJ77tCd6O60oSXI5JUaJbrOw=;
- b=eW1MZxI1OmRUonS9v1rnZyRZSTC93O+t4454bYQxxN7sTvn0gzcyFi6nR0qXvK+4i4
- ZkvHDpSMKZdH0IBFm9GsdJJkj+iDsEKWm5Xf/0sD2bDbWvHj+sIVH7sSu7kpTC2CY72U
- acruMO4FPGAcQz5J7GuxKRVt/F5ICDOn9khtY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=dTcg4nnP3Q8OPOldUBNlJ77tCd6O60oSXI5JUaJbrOw=;
- b=3NwPwEiiQu1KmS5+d9VMFteYqZJzCCx7Pkp7tTjRsEE4wF5xOuhQe7cwU7kqBBD8zn
- ggACaaffpRDUYfqgbn8ROiK6XjsOE5aqmW1c8xMWN/WpPsuhOOyo8Hm6d91vLCS34p4G
- 0hfK512zGfT9IOv2hP7cWzENRGwSRdSM4lO50tr54/FSHi7GSCWjxcfTuAsZZ8wMt5nO
- a0zOHWGTGSoclyk/cG+0S51MVksblec15dG/I13pKZNeDUDke7yX8VWcOVdzlnNeLL0s
- cKRhjDxqaithr7k9zpWxjfAoIMVrb0EmgdY6VDnekBmJi1StEx66iDxIDbDCvQFt41FO
- QNhQ==
-X-Gm-Message-State: AOAM530MbYRTPR1PccE2/cd395msms/1qgAhzC2nyE4EKwGurXEzFRrK
- 8+SPTNqg48awkGuYnc+MzHVX+5NsEm8=
-X-Google-Smtp-Source: ABdhPJxZPJROdmRol0REI+7u9He1qjFMzOPLeVcePBcrcnWgEUcZVclthczh6pTD+jqh26sdf0mjdg==
-X-Received: by 2002:a17:90b:1c8f:: with SMTP id
- oo15mr8220645pjb.87.1634835800642; 
- Thu, 21 Oct 2021 10:03:20 -0700 (PDT)
-Received: from www.outflux.net (smtp.outflux.net. [198.145.64.163])
- by smtp.gmail.com with ESMTPSA id pc3sm6654862pjb.2.2021.10.21.10.03.20
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Oct 2021 10:03:20 -0700 (PDT)
-Date: Thu, 21 Oct 2021 10:03:19 -0700
-From: Kees Cook <keescook@chromium.org>
-To: Karol Herbst <kherbst@redhat.com>
-Cc: "Gustavo A. R. Silva" <gustavoars@kernel.org>,
- Ben Skeggs <bskeggs@redhat.com>, David Airlie <airlied@linux.ie>,
- Daniel Vetter <daniel@ffwll.ch>,
- dri-devel <dri-devel@lists.freedesktop.org>,
- nouveau <nouveau@lists.freedesktop.org>,
- LKML <linux-kernel@vger.kernel.org>, linux-hardening@vger.kernel.org
-Message-ID: <202110211002.CB975695@keescook>
-References: <20210928222513.GA294575@embeddedor>
- <CACO55tsD98dNzw8fP=CiKLsdbnn2Vg78+wTRM90kutHtv1RZ5A@mail.gmail.com>
+Received: from msg-6.mailo.com (ip-16.mailobj.net [213.182.54.16])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 26C0A6ED42;
+ Fri, 22 Oct 2021 11:36:56 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=net-c.es; s=mailo;
+ t=1634898358; bh=qXTIz9NUZOX9AJLI0EfpCFCuPKutlkzQauklWJ1ZdII=;
+ h=X-EA-Auth:Date:From:To:Cc:Subject:Message-ID:References:
+ MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To;
+ b=CDMwG+cYraiCkOvqWNoXRIOQdd1SKnLC6HrdHC95WxmidMkx+VnAsy2hnJqIKzTzu
+ FEtdjZUf6XU2V9+66nVczdfj8AX/zERhEb1ooKV1f1ToGqd9ubuQgXMALLiCPlSACK
+ XGc2B/eNeFQHv6UGVfpbYVPnwzAUmBX65vye7TSQ=
+Received: by b-6.in.mailobj.net [192.168.90.16] with ESMTP
+ via ip-206.mailobj.net [213.182.55.206]
+ Fri, 22 Oct 2021 12:25:37 +0200 (CEST)
+X-EA-Auth: ZUkw32usS9GpQ95qw4isUA4Qn5D5k42ZU4ER4OtDUnr2ExZFz+AjbHpLkWo4vIllva24n6AgDPqBGMsl893/BqHzRs7jwkE6
+Date: Fri, 22 Oct 2021 12:25:33 +0200
+From: Claudio Suarez <cssk@net-c.es>
+To: Ville =?iso-8859-1?Q?Syrj=E4l=E4?= <ville.syrjala@linux.intel.com>
+Cc: dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
+ linux-tegra@vger.kernel.org, intel-gfx@lists.freedesktop.org,
+ David Airlie <airlied@linux.ie>, Daniel Vetter <daniel@ffwll.ch>,
+ Laurent Pinchart <Laurent.pinchart@ideasonboard.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ Alex Deucher <alexander.deucher@amd.com>,
+ Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+ Pan Xinhui <Xinhui.Pan@amd.com>, Emma Anholt <emma@anholt.net>,
+ Maxime Ripard <mripard@kernel.org>,
+ Thierry Reding <thierry.reding@gmail.com>,
+ Patrik Jakobsson <patrik.r.jakobsson@gmail.com>,
+ Jingoo Han <jingoohan1@gmail.com>, Rob Clark <robdclark@gmail.com>,
+ Sean Paul <sean@poorly.run>, linux-arm-msm@vger.kernel.org,
+ freedreno@lists.freedesktop.org, Chen-Yu Tsai <wens@csie.org>,
+ Sandy Huang <hjc@rock-chips.com>, heiko@sntech.de,
+ Neil Armstrong <narmstrong@baylibre.com>,
+ Robert Foss <robert.foss@linaro.org>,
+ Ben Skeggs <bskeggs@redhat.com>, nouveau@lists.freedesktop.org
+Message-ID: <YXKRnUHWuboQKBF1@zorro.micasa>
+References: <20211016184226.3862-1-cssk@net-c.es>
+ <20211016184226.3862-14-cssk@net-c.es> <YW8QYsmkm3ZrBAx3@intel.com>
+ <YW9L6d7e+RO29VJu@gineta.localdomain> <YXFwB7rN4bvR0Z+m@intel.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
-In-Reply-To: <CACO55tsD98dNzw8fP=CiKLsdbnn2Vg78+wTRM90kutHtv1RZ5A@mail.gmail.com>
-Subject: Re: [Nouveau] [PATCH][next] nouveau/svm: Use kvcalloc() instead of
- kvzalloc()
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <YXFwB7rN4bvR0Z+m@intel.com>
+Subject: Re: [Nouveau] [PATCH v3 13/13] drm/i915: replace
+ drm_detect_hdmi_monitor() with drm_display_info.is_hdmi
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -76,45 +71,34 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, Sep 29, 2021 at 05:28:47AM +0200, Karol Herbst wrote:
-> Lack of documentation inside Linux here is a bit annoying, but do I
-> understand it correctly, that the main (and probably only) difference
-> is that kvcalloc checks whether the multiplication overflows and
-> returns NULL in this case?
-
-That's correct. :)
-
-> On Wed, Sep 29, 2021 at 12:21 AM Gustavo A. R. Silva
-> <gustavoars@kernel.org> wrote:
-> >
-> > Use 2-factor argument form kvcalloc() instead of kvzalloc().
-> >
-> > Link: https://github.com/KSPP/linux/issues/162
-> > Signed-off-by: Gustavo A. R. Silva <gustavoars@kernel.org>
-
-Reviewed-by: Kees Cook <keescook@chromium.org>
-
-> > ---
-> >  drivers/gpu/drm/nouveau/nouveau_svm.c | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >
-> > diff --git a/drivers/gpu/drm/nouveau/nouveau_svm.c b/drivers/gpu/drm/nouveau/nouveau_svm.c
-> > index b0c3422cb01f..1a896a24288a 100644
-> > --- a/drivers/gpu/drm/nouveau/nouveau_svm.c
-> > +++ b/drivers/gpu/drm/nouveau/nouveau_svm.c
-> > @@ -992,7 +992,7 @@ nouveau_svm_fault_buffer_ctor(struct nouveau_svm *svm, s32 oclass, int id)
-> >         if (ret)
-> >                 return ret;
-> >
-> > -       buffer->fault = kvzalloc(sizeof(*buffer->fault) * buffer->entries, GFP_KERNEL);
-> > +       buffer->fault = kvcalloc(sizeof(*buffer->fault), buffer->entries, GFP_KERNEL);
-> >         if (!buffer->fault)
-> >                 return -ENOMEM;
-> >
-> > --
-> > 2.27.0
-> >
+On Thu, Oct 21, 2021 at 04:49:59PM +0300, Ville Syrjälä wrote:
+> On Wed, Oct 20, 2021 at 12:51:21AM +0200, Claudio Suarez wrote:
+> > drm_get_edid() internally calls to drm_connector_update_edid_property()
+> > and then drm_add_display_info(), which parses the EDID.
+> > This happens in the function intel_hdmi_set_edid() and
+> > intel_sdvo_tmds_sink_detect() (via intel_sdvo_get_edid()).
+> > 
+> > Once EDID is parsed, the monitor HDMI support information is available
+> > through drm_display_info.is_hdmi. Retriving the same information with
+> > drm_detect_hdmi_monitor() is less efficient. Change to
+> > drm_display_info.is_hdmi
 > 
+> I meant we need to examine all call chains that can lead to
+> .detect() to make sure all of them do in fact update the
+> display_info beforehand.
 
--- 
-Kees Cook
+Well, I studied it carefully and, yes, all call chains that can lead to
+drm_display_info.is_hdmi / drm_detect_hdmi_monitor() update display_info
+beforehand. In the case that this doesn't happen, the code is unchanged.
+
+Do you want I explain the changes in the code here again ? Or do you want
+to me change the commit message to be more clear ? In the first case, I can
+write here a detailed explanation. In the second case I can make a longer commit
+message.
+
+Or both?
+
+Best Regards,
+Claudio Suarez.
+
+
