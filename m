@@ -1,44 +1,44 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id AB10A4410CC
-	for <lists+nouveau@lfdr.de>; Sun, 31 Oct 2021 21:33:15 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 488734410CD
+	for <lists+nouveau@lfdr.de>; Sun, 31 Oct 2021 21:33:18 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 952CF89AB2;
-	Sun, 31 Oct 2021 20:33:12 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9096A89AB3;
+	Sun, 31 Oct 2021 20:33:14 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 35C526E22B
- for <nouveau@lists.freedesktop.org>; Mon, 25 Oct 2021 22:30:56 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [216.205.24.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 83D8F6E283
+ for <nouveau@lists.freedesktop.org>; Mon, 25 Oct 2021 22:38:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1635201055;
+ s=mimecast20190719; t=1635201528;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
  bh=4J1AonQCB7/aY+/rh+NKkrPlHas0envKCkSFtgpA41M=;
- b=R1/p/qTypLz9pmhDjvjlVmm0hUzynjaMAy1vQ5QhBWAtysUifugE7DsIXyTJdo4B1T6JB1
- JNZ0oU4fPkEhflQORyY9JIsGOIy1l0g8EBdNCj5JxTVsvFjxC42CIsIWZ6s66Fj9cQnBtP
- qqQ7S6V17b995ToVusjM8kOIwuAgWY0=
+ b=Uxdl8GyNPFj2Una9/ndpHpdtMpmI4sQ4h5Ghut/IS4As7KXhPX3fHeXxaxCbrAEqjT44r5
+ sTao3UCpbEvJtABLL9Rkmh1L3OehN9Cxl1I7Qdskz/Qf/oGo4EKJKgV1fMGff4xhWt5jGW
+ xMsxpaEdyqVzdzboAntfVKvslyGlm2M=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-192-psKK8TUhMy-NSXFyXAzTjQ-1; Mon, 25 Oct 2021 18:30:53 -0400
-X-MC-Unique: psKK8TUhMy-NSXFyXAzTjQ-1
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
- [10.5.11.14])
+ us-mta-377-sr4H7PwePi6FC-nuJqLrWw-1; Mon, 25 Oct 2021 18:38:47 -0400
+X-MC-Unique: sr4H7PwePi6FC-nuJqLrWw-1
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
+ [10.5.11.12])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 08B3D8018AC;
- Mon, 25 Oct 2021 22:30:47 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id B5468A0CAC;
+ Mon, 25 Oct 2021 22:38:42 +0000 (UTC)
 Received: from emerald.lyude.net (unknown [10.22.9.162])
- by smtp.corp.redhat.com (Postfix) with ESMTP id B1BD917CDB;
- Mon, 25 Oct 2021 22:30:42 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 2A5CA60BF1;
+ Mon, 25 Oct 2021 22:38:37 +0000 (UTC)
 From: Lyude Paul <lyude@redhat.com>
 To: dri-devel@lists.freedesktop.org,
-	amdgfx@lists.freedesktop.org
+	amd-gfx@lists.freedesktop.org
 Cc: Bhawanpreet Lakha <Bhawanpreet.Lakha@amd.com>,
  Harry Wentland <harry.wentland@amd.com>, Leo Li <sunpeng.li@amd.com>,
  Alex Deucher <alexander.deucher@amd.com>,
@@ -52,10 +52,11 @@ Cc: Bhawanpreet Lakha <Bhawanpreet.Lakha@amd.com>,
  Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
  Rodrigo Vivi <rodrigo.vivi@intel.com>, Ben Skeggs <bskeggs@redhat.com>,
  Nicholas Kazlauskas <nicholas.kazlauskas@amd.com>,
- Fangzhi Zuo <Jerry.Zuo@amd.com>, "Leo (Hanghong) Ma" <hanghong.ma@amd.com>,
+ Fangzhi Zuo <Jerry.Zuo@amd.com>, Mikita Lipski <mikita.lipski@amd.com>,
  Jude Shih <shenshih@amd.com>, Colin Ian King <colin.king@canonical.com>,
- Zhan Liu <zhan.liu@amd.com>, Roman Li <Roman.Li@amd.com>,
- Bing Guo <bing.guo@amd.com>, Aurabindo Pillai <aurabindo.pillai@amd.com>,
+ "Leo (Hanghong) Ma" <hanghong.ma@amd.com>, Zhan Liu <zhan.liu@amd.com>,
+ Roman Li <Roman.Li@amd.com>, Bing Guo <bing.guo@amd.com>,
+ Aurabindo Pillai <aurabindo.pillai@amd.com>,
  =?UTF-8?q?Ville=20Syrj=C3=A4l=C3=A4?= <ville.syrjala@linux.intel.com>,
  Matt Roper <matthew.d.roper@intel.com>,
  Anshuman Gupta <anshuman.gupta@intel.com>,
@@ -63,21 +64,20 @@ Cc: Bhawanpreet Lakha <Bhawanpreet.Lakha@amd.com>,
  =?UTF-8?q?Jos=C3=A9=20Roberto=20de=20Souza?= <jose.souza@intel.com>,
  He Ying <heying24@huawei.com>, Sean Paul <seanpaul@chromium.org>,
  Karol Herbst <kherbst@redhat.com>,
- amd-gfx@lists.freedesktop.org (open list:AMD DISPLAY CORE),
  linux-kernel@vger.kernel.org (open list),
  intel-gfx@lists.freedesktop.org (open list:INTEL DRM DRIVERS (excluding
  Poulsbo, Moorestow...), 
  nouveau@lists.freedesktop.org (open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO
  GPUS)
-Date: Mon, 25 Oct 2021 18:30:26 -0400
-Message-Id: <20211025223029.300891-3-lyude@redhat.com>
-In-Reply-To: <20211025223029.300891-1-lyude@redhat.com>
-References: <20211025223029.300891-1-lyude@redhat.com>
+Date: Mon, 25 Oct 2021 18:38:22 -0400
+Message-Id: <20211025223825.301703-3-lyude@redhat.com>
+In-Reply-To: <20211025223825.301703-1-lyude@redhat.com>
+References: <20211025223825.301703-1-lyude@redhat.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
 X-Mailman-Approved-At: Sun, 31 Oct 2021 20:33:12 +0000
-Subject: [Nouveau] [PATCH v5 2/4] drm: Update MST First Link Slot
+Subject: [Nouveau] [PATCH RESEND v5 2/4] drm: Update MST First Link Slot
  Information Based on Encoding Format
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
