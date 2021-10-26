@@ -2,57 +2,130 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 952EF43A979
-	for <lists+nouveau@lfdr.de>; Tue, 26 Oct 2021 02:55:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0FCEA43A97F
+	for <lists+nouveau@lfdr.de>; Tue, 26 Oct 2021 02:57:26 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 611676E171;
-	Tue, 26 Oct 2021 00:55:03 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D92EA6E1A8;
+	Tue, 26 Oct 2021 00:57:15 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B8F0A6E171
- for <nouveau@lists.freedesktop.org>; Tue, 26 Oct 2021 00:55:02 +0000 (UTC)
-Received: by mail-ed1-x52a.google.com with SMTP id y12so7035033eda.4
- for <nouveau@lists.freedesktop.org>; Mon, 25 Oct 2021 17:55:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:from:date:message-id:subject:to
- :content-transfer-encoding;
- bh=rZW+7gQIqNcEFs0H3yPNhkh/BKTxr4jBGRoD2wO43Cw=;
- b=mgBpeHiLtHOR90HUXHMDwhb6HCl7km291cxUR6crPw2d+gA9F2VWeZTgVzYYZp9r1I
- QGcNJj19Y0PS0SCMFjLYnhE09J+kjtuE21gBXRgCUFZen0NZd9cFQQHNjMfQb8V0RY7Y
- JwDMn8SSusqhnC/tka+pIzy4XjnHGgnh07AC9s25V4JA4urFrJbGnEoVPONqZT+WZMEd
- MtPRVU5ivzfC5dT31PmS5OmJwwfwNgwbDJJ/9hvqcrx0wN311+I2qNRHK5XTA1tIoEem
- k3Jnl45TlZr+xQK+5iYCdmn01iDqWq8TfKI8TMoz4A62IcOhKmqcJy81kJjaIQaeAtWf
- MdYA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to
- :content-transfer-encoding;
- bh=rZW+7gQIqNcEFs0H3yPNhkh/BKTxr4jBGRoD2wO43Cw=;
- b=VzLxW1gL22ScuzAupYfwisTHPg4cq9PcxwwrDxDUG829mKFDbl3FXlogoA2C7cLXOe
- h4zWpN/qb4Ab8qJRjSmMn223YJUuSiwNtrjQAT2t8DBfN6TdTdK6G2GFd41NFWUtanz3
- CE9/uGIsOQHohlZbUTCunD+0WxM3RWCC2x5FRIB8CW8zoQ5pIzgUSbRC93pLolI9u67A
- eQI1vg95GrX2DVRb+1Rf8mukgYkh+RFHHpIMd9JrT8826gnmNEWT58eF/wIqSf4cCtDW
- ZeVfyIapezg4DXAfv0znsMcswIKnILYlU42qHusePNEKeqTIywuH5mQhP8ERXOFd0z75
- +zNA==
-X-Gm-Message-State: AOAM531IWyje5lYlhUovEsnxA+5FYlDP/hNVZzhhNR1ko3F34aL8fWyd
- PU/Nzw3853GPSu1Ty61opKRFL1pa4FOVjPHd0/NPr6qK
-X-Google-Smtp-Source: ABdhPJyCIFCO3LxN8Zn4kdDvnf4zyTnAb7pY+t/KCBwX7qQilYeIR5EbF1nyrHfSi47auLQznrAPK5miTf17zPiW22o=
-X-Received: by 2002:a05:6402:190e:: with SMTP id
- e14mr31321095edz.20.1635209700715; 
- Mon, 25 Oct 2021 17:55:00 -0700 (PDT)
+Received: from NAM02-DM3-obe.outbound.protection.outlook.com
+ (mail-dm3nam07on2055.outbound.protection.outlook.com [40.107.95.55])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9816A6E195;
+ Tue, 26 Oct 2021 00:57:13 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=Eu0NMrII1gUYA22lbuk6C1KrC2pTUTqaUsLuz5Vzv92PFVOPxvuBiYgyWDLCTWsI8tGHgFssVScY47Nf0MWiyXyc5WisbrvDwVVUxJnW0+8RKflWkB/1SwDq2GzcTgfMWbPk5B/YAoHPtVk9zNxYyf+8CEbAgpuK5LMr1JKifRdt1FNvH9Gqp1f2iJuzajBRMJYIUfD7Ls8d1UqwLgyJzhZqNa/TBnHfLs8JDkfkiWyYS+9BKaMNjWtIR3y8IFw3CXta+88YAEvYsMd9q4k9b6z0b4LwKN6eoGYtextO1RDHMRQHbF/mcuvGrtO2uGozxxEORcHnUtL2FZXqTY5ZVg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=TYzq9i5jN3hDuz31Be1/qKrcqfMjuVMbBQ14xEEiLyc=;
+ b=BC/yuMoGq49hvGzThogsp7iny+w9KyEYv/LMsXLD3d5N9ACShz/GnUB+OaNBbzO4ysI2nCAXH+BmHzspiB3smWxvV3SNB0Y4LjYejEawaG/eNqGw4W0LGIkrw6mz6q4skQzwiVbO0UuyJWg5cjxQ7By7ZBt9r7PuhSbqxJvoWrf33zSoRrmDwRO5ku56QcjIStwgVv60E+S12fDpoR8gqY0XAw8yuB+F1yoLs2Hly91Hzqz//NxzD2R7DzEjv1EcRiFQHXdpoz2M/RMHN5vH6d1Ng790pDXSYQoHHd0xdauQEE++QEh+RvEU5YzEOS1HqAzy1Flww0bZSBy1ZS4GNA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=TYzq9i5jN3hDuz31Be1/qKrcqfMjuVMbBQ14xEEiLyc=;
+ b=DK/mF5j8JpykbcIYmo3CMVrRqB5lkaO9j+cZPscn041CiJnRJhLLiTyu9iI3hsqTp+G5EoBPccYKSqgTyBTbWQEGZDZ2dqXgnAjaZsJQRYxI8vKp+h7T9CKIjchxoEZkAGAoHAWT4IV+12tElzvIb1Xpo3WDljs5Rnf+oOhJJJC8JWjVFJIoHj5yhH2KmU5xlUcD4bJoALriv82yceeNy4MwbvH+AYaUqvjHritA/1SGWysLq1FVcHiFvKLIexYoF1xW58yiQIPsTu5BNngQ1wHD9jzCSOBjlu35G2bCL8LIiOcrW1t5lG/pSFjbkVTH7hzwV6i7Q9Sn3XkeFwbLEw==
+Authentication-Results: nvidia.com; dkim=none (message not signed)
+ header.d=none;nvidia.com; dmarc=none action=none header.from=nvidia.com;
+Received: from MN2PR12MB4344.namprd12.prod.outlook.com (2603:10b6:208:26e::11)
+ by BL0PR12MB2338.namprd12.prod.outlook.com (2603:10b6:207:4c::28)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4628.18; Tue, 26 Oct
+ 2021 00:57:10 +0000
+Received: from MN2PR12MB4344.namprd12.prod.outlook.com
+ ([fe80::c440:91f3:b2d4:9e9f]) by MN2PR12MB4344.namprd12.prod.outlook.com
+ ([fe80::c440:91f3:b2d4:9e9f%7]) with mapi id 15.20.4628.020; Tue, 26 Oct 2021
+ 00:57:10 +0000
+Message-ID: <f92e2dfe-f033-9b09-e83c-203052b491e1@nvidia.com>
+Date: Mon, 25 Oct 2021 17:57:06 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.1.0
+Content-Language: en-US
+To: Alistair Popple <apopple@nvidia.com>, akpm@linux-foundation.org
+Cc: kvm-ppc@vger.kernel.org, linuxppc-dev@lists.ozlabs.org,
+ Felix.Kuehling@amd.com, alexander.deucher@amd.com, linux-mm@kvack.org,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
+ jglisse@redhat.com, jhubbard@nvidia.com, ziy@nvidia.com, hch@lst.de,
+ bskeggs@redhat.com
+References: <20211025041608.289017-1-apopple@nvidia.com>
+From: Ralph Campbell <rcampbell@nvidia.com>
+In-Reply-To: <20211025041608.289017-1-apopple@nvidia.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: BYAPR05CA0105.namprd05.prod.outlook.com
+ (2603:10b6:a03:e0::46) To MN2PR12MB4344.namprd12.prod.outlook.com
+ (2603:10b6:208:26e::11)
 MIME-Version: 1.0
-Received: by 2002:a17:906:3410:0:0:0:0 with HTTP; Mon, 25 Oct 2021 17:55:00
- -0700 (PDT)
-From: riveravaldez <riveravaldezmail@gmail.com>
-Date: Mon, 25 Oct 2021 21:55:00 -0300
-Message-ID: <CAD8U+g_t-QVWsE5HtiDPecUknGnpgvYJ9dK66mHZfPfDUcizTQ@mail.gmail.com>
-To: nouveau <nouveau@lists.freedesktop.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Subject: [Nouveau] System freeze: Debian Stable with C61 [GeForce 7025 /
- nForce 630a]
+Received: from [IPV6:2601:646:8e80:c510::b850] (2601:646:8e80:c510::b850) by
+ BYAPR05CA0105.namprd05.prod.outlook.com (2603:10b6:a03:e0::46) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.4649.12 via Frontend Transport; Tue, 26 Oct 2021 00:57:08 +0000
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 31f356d6-27e4-48a2-d961-08d9981b8a27
+X-MS-TrafficTypeDiagnostic: BL0PR12MB2338:
+X-Microsoft-Antispam-PRVS: <BL0PR12MB23386FF92B70E8CDEBFB2AD5C2849@BL0PR12MB2338.namprd12.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:10000;
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: Yse1a2hpKEVn/oXBz8pKEyGVeAmOJpGL8YHAIjHt/zEpy3AKMbw75W663OnPCkbFKNlm/NH4DdurtzNb8W5HUBgHgAjRDMJXfISH5gGHct14reEjRJIutArSV0qVc/YkebkTULj3p64BxVrsN+gVCH44G9argw0WB4Ryy6hSpgNwC6G8D+fm5eoFYCH4BnEAo6+LK8tCGte4aMF6+e5sYSlwV+kA9EpUV3OLST6EWUoL8ozK8XRpNGfTUo2M2EB8ODVDI1lFO9oO/mh1dRN1I15hOMU7hAL4P7qBgpGZK19K7W1AQb0ZIvh8o4oldc+7USEEE34vGoxTafdbjWuOyR5fhpcziCYLxusHUfIi/C7mYFDCbOtbuJKEsnXrW7igFxi3kP8JI7QICM+tI53VSWQ4l2EXStS5Wd2GOEbvbn/5M7/8yospW7gOXTNyZ2zPBR40nFP853Nx7JDBLcUy5rpu3resRKL+A0S9lEVvYcKjbP+YLfGTJYY+5Azx41j2QfOvXRPaU2CacO4I2Xm2YjCUALFNj3DLOFv8fXLHfUTy7BeqV5v3IqY2dZ44UX6S7dQ9D0G8WLqnjeOIybF33X3wLsDDrs26zM/iHA4/xojx2SfoNlbO/FK7Th5O+d0qdEynxPc7GKtCn29BtQfYfsUrobgsRP1Xo+Mdqf0iTiwZMgZ4Yitgyno3592zFnYU/EhFE24hzm+aDfL4PAW/9MzF/vHEOuz5BnUGgE3G8sA=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:MN2PR12MB4344.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(4636009)(366004)(6486002)(66476007)(8936002)(83380400001)(2616005)(8676002)(31696002)(66556008)(66946007)(5660300002)(7416002)(2906002)(31686004)(508600001)(4326008)(38100700002)(53546011)(186003)(86362001)(30864003)(316002)(36756003)(43740500002)(45980500001);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?bzBCUXhNeFk4K2trRnhRZHdKbHI0SUQwV2RRalRHcVpKWDAwWXd5Ylh6OG9Y?=
+ =?utf-8?B?bEFLS0lyc2pKWHN0ZFBEbU1BZzI1R0NzazBNTVVMYkhTL1ZYblpaUElaUEsy?=
+ =?utf-8?B?bnVuR3p0UmJuK25EcHZJSVQ5R2ZWWnVMcjVhdTFVaW5tNWRNT3FOcFArWVdP?=
+ =?utf-8?B?WXNTRExXY1NYREcydDM3djMrTkx5bHNabnNmZUtxNHhma0pwelBwQ2NyTCs1?=
+ =?utf-8?B?aURYNEN1eXpyOFZlTzFhdDJXRWNVRUg4UXlDdzFMc1F1VHBxaWtTa0grUThD?=
+ =?utf-8?B?ME5UOUZnOXhhQUhFS2V1QytKMVZIWFZrQjZQTTFOM2JuTWpKVEh6MTJQT1Y1?=
+ =?utf-8?B?bTVSMWtYSy9aUi9icTE1ejRwOXZKbm11MThzKzErZlNGS3RVanVJZnNyOVVw?=
+ =?utf-8?B?Zk5GejNTb2V1TmM0NENjbzkrWkZtWUhHNXZwdEp3QjhTdjdGc25ETFBVT3hK?=
+ =?utf-8?B?ZUZwaDVwS2NLbEhpekdXYzRqZnlSNE1KTTM3OHEzWmlhRkxzOC9lUE8yUVFM?=
+ =?utf-8?B?aHZMNmVJV25HYVdwbHJsUW45Y3hrNTZiNGxSNWJERzBqeFdHTy9iWGNua2ZD?=
+ =?utf-8?B?cGxVRXE3ZjN3UVpWbGJrMWtmaFlTc2JOd1htdlR1WE94T0dmSmQ3bXdTSnNI?=
+ =?utf-8?B?eDJJSDExZjlWSXQyNkJBblVxbWxROE50azZtVTBZRE9QY1VLcXFQYWdNSVd3?=
+ =?utf-8?B?S0dHbStocW9MZ2Y5YXFldFFSa09ROHNUazhMZ1J3bEtvNXJtSjl5bFhINSs4?=
+ =?utf-8?B?TE8xOW1wdmZ5KzZ3UFlmZDd3eUkxc01wMmJPeVpDODQyQkhielhJZ0NwbVVY?=
+ =?utf-8?B?M1VZazVMbXMvVDBtZXRCMzNmT1JTZ1g3SVZ3V3BoUnBCYWZ3VmFTVU0vc0JI?=
+ =?utf-8?B?ZWlpRyt5SEozSEhvM29JdkNUUlUzNHRDMkN4MGs4U0RsaG0wNVZ0ZFU5U3B4?=
+ =?utf-8?B?VUtabnZuVUR6MVhFeCtISmpvbkl1eGdrc0pkNXM5KzJtSGtrZll3QURUbnFE?=
+ =?utf-8?B?TExJc0dIRHZmeE5uK0RJZGxVL2lVU0RVRXBXRXpKK0Z1dWlHRmhpMGNQOXEv?=
+ =?utf-8?B?dDd1c1FHaTVBMEU1UlMwOVV2cUoxQWthZk11SzczT0t2ZGphbGtTSWM2eDA2?=
+ =?utf-8?B?Ky9leTk3M05VUGc2WVVXNklUMXkzZGF0cC9CVDk5aklya01sNGZCdkdldnA1?=
+ =?utf-8?B?SUMvVy9HbE1ocXpSazQyS1N4K0ZRUktNN3hnSGlZTDlzNkYyd3JSNDl6ZjVM?=
+ =?utf-8?B?VlNYM1JZK0thb3ZncEpQa2hTRzVVNUcyc3BsT2ozbW9Xd01Oc2Y5QmFJZE1Q?=
+ =?utf-8?B?ZHhaUlRNeHFpNGpZdVhtRDNSeVdRck9ZbnlmUUlxUDVRbEpNcUpGVVZJTEtB?=
+ =?utf-8?B?TWt4NlRhUWpHeEtZMjJiSlZJejFVbEkzNHlRKzFreXA2TmtNditaUFVsYVh4?=
+ =?utf-8?B?emN2dXM0MVArSjV5eXJCNXFWajJ6RUFJa1M0OVIzZ0hueXpMMGZsQUZmdzd2?=
+ =?utf-8?B?NmxLd2gzZm5GZHE4dDQ2NE9SaUJra0JSL3BFY3I3NU5tckRXMWZFWEM2bHRu?=
+ =?utf-8?B?eFJZS2IvUzhPVFRNb1dGdTdXd29JVHVJaVBpRldKN093RTZCL2lMN0UrOVB0?=
+ =?utf-8?B?RFZQYUVWaDVlMEtGdVVyZUZkcEhPVXRSbVlPdVdaU2Y3czBWd0R4MGJJVEds?=
+ =?utf-8?B?MDhhdDN6OGpNcEVEeDdwbytHb2NDUkNUQnY0NE5RSTdHUXJlSU12NWdFd3Vo?=
+ =?utf-8?B?aW9zK2pyZUcxb0NEZ1dDTjJvNHBnYzhIdENEak9uOCtSUnFkMlhYLy9xR1Fl?=
+ =?utf-8?B?aHBTRnhZWjJGQldFcFc2Z2JJRmxxMEJSc2k5Y1dSbXFRSXZsdG1YQU1MZExw?=
+ =?utf-8?B?MGlaeFBkK2NYZE1EdmNvSHBsRnRyazRXVVZmcm9RS2FmR0t1U1dCVkkrYlE3?=
+ =?utf-8?B?aHN3MlE2MmFqK1p5TklKQnJGNktLc2Z4QWwyR2JzWk1GVHJNZmVMVkV3QS95?=
+ =?utf-8?B?VGZaTzBlOFJwZUdSZzN5VnlZRjRxcjE3RElvOHFyakdZNWFyeGVWU2lGeG04?=
+ =?utf-8?B?TmFIbzY3dkFKb1RvVVhoc2JibkV3TUZ4WkxpbEdoM25NYUFOeGI5RjFLSWRO?=
+ =?utf-8?B?NzZjQU1HWjFST29EU05WVlRYUmJ0cmpQbmd3OUdzeWtwQ2thbEZpOU1IMFMz?=
+ =?utf-8?Q?p7/epvmql3ekHPIRtMsj7mIXa+JXxfBUc7vbo7Wg8vu2?=
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 31f356d6-27e4-48a2-d961-08d9981b8a27
+X-MS-Exchange-CrossTenant-AuthSource: MN2PR12MB4344.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Oct 2021 00:57:10.0993 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: /elEt7RWTyK3pOpN4hp/yWJ8YdhTzm1n3NHN/lzDrxlQRcCOMJJtRXvrlu/qzQEzDMvrAqVAYzGRay/eBhT8eg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL0PR12MB2338
+Subject: Re: [Nouveau] [PATCH] mm/migrate.c: Remove MIGRATE_PFN_LOCKED
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,292 +140,392 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi, this may be an old issue.
-I copied at the bottom the last message of a previous solution for
-this same machine.
-Essentially I have random freezes (display image seems like a snow storm or=
- just
-gets frozen), nothing works, I'm forced to hard reset the machine.
-Last time the solution was just to remove nouveau_dri.so, and for what
-seems to be
-a couple of years system worked rock-solid.
-But a couple of days ago I did a system update (I'm on Debian Stable
-Bullseye right
-now) and apparently the problem reappeared but worse/different: now it
-happens even
-without nouveau_dri.so present on the system. (Meaning: I remove
-nouveau_dri.so and
-the freezes happen randomly anyway.)
-The hardware is the same, so, I'm imaging maybe is a kernel issue?
-This is the hardware:
 
-$ lspci
-00:00.0 RAM memory: NVIDIA Corporation MCP61 Host Bridge (rev a1)
-00:01.0 ISA bridge: NVIDIA Corporation MCP61 LPC Bridge (rev a2)
-00:01.1 SMBus: NVIDIA Corporation MCP61 SMBus (rev a2)
-00:01.2 RAM memory: NVIDIA Corporation MCP61 Memory Controller (rev a2)
-00:02.0 USB controller: NVIDIA Corporation MCP61 USB 1.1 Controller (rev a3=
-)
-00:02.1 USB controller: NVIDIA Corporation MCP61 USB 2.0 Controller (rev a3=
-)
-00:04.0 PCI bridge: NVIDIA Corporation MCP61 PCI bridge (rev a1)
-00:05.0 Audio device: NVIDIA Corporation MCP61 High Definition Audio (rev a=
-2)
-00:06.0 IDE interface: NVIDIA Corporation MCP61 IDE (rev a2)
-00:07.0 Bridge: NVIDIA Corporation MCP61 Ethernet (rev a2)
-00:08.0 IDE interface: NVIDIA Corporation MCP61 SATA Controller (rev a2)
-00:08.1 IDE interface: NVIDIA Corporation MCP61 SATA Controller (rev a2)
-00:0d.0 VGA compatible controller: NVIDIA Corporation C61 [GeForce
-7025 / nForce 630a] (rev a2)
-00:18.0 Host bridge: Advanced Micro Devices, Inc. [AMD] Family 10h
-Processor HyperTransport Configuration
-00:18.1 Host bridge: Advanced Micro Devices, Inc. [AMD] Family 10h
-Processor Address Map
-00:18.2 Host bridge: Advanced Micro Devices, Inc. [AMD] Family 10h
-Processor DRAM Controller
-00:18.3 Host bridge: Advanced Micro Devices, Inc. [AMD] Family 10h
-Processor Miscellaneous Control
-00:18.4 Host bridge: Advanced Micro Devices, Inc. [AMD] Family 10h
-Processor Link Control
-
-With:
-
-$ uname -a
-Linux debian 5.10.0-9-amd64 #1 SMP Debian 5.10.70-1 (2021-09-30)
-x86_64 GNU/Linux
-
-And:
-
-$ apt-cache policy xserver-xorg-video-nouveau
-xserver-xorg-video-nouveau:
-  Instalados: 1:1.0.17-1
-  Candidato:  1:1.0.17-1
-  Tabla de versi=C3=B3n:
- *** 1:1.0.17-1 500
-        500 https://deb.debian.org/debian bullseye/main amd64 Packages
-        100 /var/lib/dpkg/status
-
-And this seems to be all the info I have:
-
-$ sudo journalctl -S 2021-10-21 -x -p 4 | grep nouveau
-oct 21 13:16:43 debian kernel: nouveau 0000:00:0d.0: DRM: DCB type 4 not kn=
-own
-oct 21 13:16:43 debian kernel: nouveau 0000:00:0d.0: DRM: Unknown-1
-has no encoders, removing
-oct 21 13:17:00 debian kernel: nouveau 0000:00:0d.0: bus: MMIO write
-of 005c0001 FAULT at 00b000
-oct 21 17:12:05 debian kernel: nouveau 0000:00:0d.0: DRM: DCB type 4 not kn=
-own
-oct 21 17:12:05 debian kernel: nouveau 0000:00:0d.0: DRM: Unknown-1
-has no encoders, removing
-oct 21 17:12:18 debian kernel: nouveau 0000:00:0d.0: bus: MMIO write
-of 005c0001 FAULT at 00b000
-oct 21 17:22:21 debian kernel: nouveau 0000:00:0d.0: bus: MMIO write
-of 014b0001 FAULT at 00b010
-oct 21 17:22:21 debian kernel: nouveau 0000:00:0d.0: bus: MMIO write
-of 014b0001 FAULT at 00b010
-oct 21 21:32:55 debian kernel:  autofs4 ext4 crc16 mbcache jbd2
-crc32c_generic sd_mod t10_pi crc_t10dif crct10dif_generic
-crct10dif_common nouveau video mxm_wmi wmi i2c_algo_bit drm_kms_helper
-cec ttm ata_generic sata_nv drm libata scsi_mod psmouse serio_raw
-evdev button
-oct 21 22:22:53 debian kernel: nouveau 0000:00:0d.0: bus: MMIO write
-of 01f20001 FAULT at 00b020
-oct 21 22:23:14 debian kernel: nouveau 0000:00:0d.0: bus: MMIO write
-of 00000000 FAULT at 00b020
-oct 21 22:23:23 debian kernel: nouveau 0000:00:0d.0: bus: MMIO write
-of 01f20001 FAULT at 00b020
-oct 21 22:25:32 debian kernel: nouveau 0000:00:0d.0: DRM: DCB type 4 not kn=
-own
-oct 21 22:25:32 debian kernel: nouveau 0000:00:0d.0: DRM: Unknown-1
-has no encoders, removing
-oct 21 22:26:03 debian kernel: nouveau 0000:00:0d.0: bus: MMIO write
-of 005c0001 FAULT at 00b000
-oct 21 22:46:40 debian kernel: nouveau 0000:00:0d.0: DRM: DCB type 4 not kn=
-own
-oct 21 22:46:40 debian kernel: nouveau 0000:00:0d.0: DRM: Unknown-1
-has no encoders, removing
-oct 21 22:46:51 debian kernel: nouveau 0000:00:0d.0: bus: MMIO write
-of 005c0001 FAULT at 00b000
-oct 21 22:59:55 debian kernel:  crct10dif_common nouveau video mxm_wmi
-wmi i2c_algo_bit drm_kms_helper ata_generic sata_nv cec libata ttm drm
-scsi_mod psmouse evdev serio_raw button
-oct 21 23:44:26 debian kernel: nouveau 0000:00:0d.0: bus: MMIO write
-of 01570001 FAULT at 00b010
-oct 21 23:44:26 debian kernel: nouveau 0000:00:0d.0: bus: MMIO write
-of 01ef0001 FAULT at 00b020
-oct 21 23:45:08 debian kernel: nouveau 0000:00:0d.0: bus: MMIO write
-of 02550001 FAULT at 00b030
-oct 21 23:45:09 debian kernel: nouveau 0000:00:0d.0: bus: MMIO write
-of 01440001 FAULT at 00b030
-oct 21 23:45:09 debian kernel: nouveau 0000:00:0d.0: bus: MMIO write
-of 02610001 FAULT at 00b030
-oct 21 23:45:09 debian kernel: nouveau 0000:00:0d.0: bus: MMIO write
-of 015e0001 FAULT at 00b030
-oct 21 23:45:10 debian kernel: nouveau 0000:00:0d.0: bus: MMIO write
-of 02610001 FAULT at 00b030
-oct 21 23:45:11 debian kernel: nouveau 0000:00:0d.0: bus: MMIO write
-of 01440001 FAULT at 00b030
-oct 21 23:45:13 debian kernel: nouveau 0000:00:0d.0: bus: MMIO write
-of 02550001 FAULT at 00b030
-oct 21 23:45:13 debian kernel: nouveau 0000:00:0d.0: bus: MMIO write
-of 01440001 FAULT at 00b030
-oct 21 23:45:16 debian kernel: nouveau 0000:00:0d.0: bus: MMIO write
-of 02610001 FAULT at 00b040
-oct 21 23:45:17 debian kernel: nouveau 0000:00:0d.0: bus: MMIO write
-of 02550001 FAULT at 00b040
-oct 21 23:45:17 debian kernel: nouveau 0000:00:0d.0: bus: MMIO write
-of 00000000 FAULT at 00b030
-oct 21 23:45:24 debian kernel: nouveau 0000:00:0d.0: bus: MMIO write
-of 00000000 FAULT at 00b040
-oct 21 23:48:53 debian kernel: nouveau 0000:00:0d.0: DRM: DCB type 4 not kn=
-own
-oct 21 23:48:53 debian kernel: nouveau 0000:00:0d.0: DRM: Unknown-1
-has no encoders, removing
-oct 21 23:49:21 debian kernel: nouveau 0000:00:0d.0: bus: MMIO write
-of 005c0001 FAULT at 00b000
-oct 22 00:28:54 debian kernel: nouveau 0000:00:0d.0: DRM: DCB type 4 not kn=
-own
-oct 22 00:28:54 debian kernel: nouveau 0000:00:0d.0: DRM: Unknown-1
-has no encoders, removing
-oct 22 00:29:04 debian kernel: nouveau 0000:00:0d.0: bus: MMIO write
-of 005c0001 FAULT at 00b000
-oct 23 14:48:33 debian kernel:  parport_pc ppdev lp parport fuse
-configfs ip_tables x_tables autofs4 ext4 crc16 mbcache jbd2
-crc32c_generic sd_mod t10_pi crc_t10dif crct10dif_generic
-crct10dif_common nouveau video mxm_wmi wmi i2c_algo_bit drm_kms_helper
-cec ttm drm sata_nv ata_generic psmouse libata serio_raw scsi_mod
-evdev button
-oct 24 03:18:13 debian kernel: nouveau 0000:00:0d.0: DRM: DCB type 4 not kn=
-own
-oct 24 03:18:13 debian kernel: nouveau 0000:00:0d.0: DRM: Unknown-1
-has no encoders, removing
-oct 24 03:18:38 debian kernel: nouveau 0000:00:0d.0: bus: MMIO write
-of 005c0001 FAULT at 00b000
-oct 24 11:08:30 debian kernel: nouveau 0000:00:0d.0: DRM: DCB type 4 not kn=
-own
-oct 24 11:08:30 debian kernel: nouveau 0000:00:0d.0: DRM: Unknown-1
-has no encoders, removing
-oct 24 11:09:04 debian kernel: nouveau 0000:00:0d.0: bus: MMIO write
-of 005c0001 FAULT at 00b000
-oct 24 11:12:01 debian kernel: nouveau 0000:00:0d.0: bus: MMIO write
-of 01740001 FAULT at 00b010
-oct 24 11:12:02 debian kernel: nouveau 0000:00:0d.0: bus: MMIO write
-of 018b0001 FAULT at 00b020
-oct 24 11:12:18 debian kernel: nouveau 0000:00:0d.0: bus: MMIO write
-of 02150001 FAULT at 00b030
-oct 24 11:12:23 debian kernel: nouveau 0000:00:0d.0: bus: MMIO write
-of 00000000 FAULT at 00b030
-oct 24 11:12:23 debian kernel: nouveau 0000:00:0d.0: bus: MMIO write
-of 02910001 FAULT at 00b030
-oct 24 11:23:33 debian kernel: nouveau 0000:00:0d.0: bus: MMIO write
-of 00000000 FAULT at 00b030
-oct 24 12:33:35 debian kernel: nouveau 0000:00:0d.0: bus: MMIO write
-of 00000000 FAULT at 00b010
-oct 24 12:33:35 debian kernel: nouveau 0000:00:0d.0: bus: MMIO write
-of 00000000 FAULT at 00b020
-oct 24 12:33:35 debian kernel: nouveau 0000:00:0d.0: bus: MMIO write
-of 005c0001 FAULT at 00b000
-oct 24 12:33:45 debian kernel: nouveau 0000:00:0d.0: bus: MMIO write
-of 014a0001 FAULT at 00b010
-oct 24 12:33:45 debian kernel: nouveau 0000:00:0d.0: bus: MMIO write
-of 018b0001 FAULT at 00b020
-oct 24 13:09:37 debian kernel: nouveau 0000:00:0d.0: bus: MMIO write
-of 02290001 FAULT at 00b030
-oct 24 13:09:38 debian kernel: nouveau 0000:00:0d.0: bus: MMIO write
-of 01710001 FAULT at 00b040
-oct 24 13:09:38 debian kernel: nouveau 0000:00:0d.0: bus: MMIO write
-of 00000000 FAULT at 00b030
-oct 24 13:09:39 debian kernel: nouveau 0000:00:0d.0: bus: MMIO write
-of 00000000 FAULT at 00b040
-oct 24 13:09:39 debian kernel: nouveau 0000:00:0d.0: bus: MMIO write
-of 02870001 FAULT at 00b030
-oct 24 13:09:39 debian kernel: nouveau 0000:00:0d.0: bus: MMIO write
-of 01570001 FAULT at 00b030
-oct 24 13:09:42 debian kernel: nouveau 0000:00:0d.0: bus: MMIO write
-of 00000000 FAULT at 00b030
-
-Sorry for not trimming anything, not sure what's useful and what's not.
-
-Any hint?
-
-As previously, thanks A LOT in advance.
-
-Best regards!
-
-
-On 1/29/20, Ilia Mirkin <imirkin@alum.mit.edu> wrote:
-> On Wed, Jan 29, 2020 at 5:03 AM riveravaldez <riveravaldezmail@gmail.com>
-> wrote:
->>
->> On 12/11/18, Ilia Mirkin <imirkin@alum.mit.edu> wrote:
->> > On Tue, Dec 11, 2018 at 11:16 AM riveravaldez
->> > <riveravaldezmail@gmail.com> wrote:
->> >
->> >> The freezes appears randomly, in every situation, and not when I
->> >> launch some 3D applications or anything similar.
->> >
->> > Try removing nouveau_dri.so -- that will ensure no 3d accel is used,
->> > while keeping your 2d accel provided by the nouveau ddx.
->>
->> Sorry if it's wrong to continue this old thread, but after a good
->> amount of testing (+1 year) I can confirm that both the problem and
->> the solution where the mentioned ones.
->>
->> The problem (random full-system freezes) persists without change,
->> identical. And removing nouveau_dri.so from
->> /usr/lib/x86_64-linux-gnu/dri/ effectively fixes it completely
->> (leaving aside any lost of performance and some warning messages in
->> system upgrades and programs launching[1]).
->>
->> So, after a GREAT thank-you to Ilia, I consult:
->>
->> 1. Is this something that could be fixed? Can I do anything to help?
->>
->> 2. If the only possible/viable solution is the mentioned one (remove
->> nouveau_dri.so), which would be the proper way to make it permanent?
->>
->> 2'. In many dist-upgrades the nouveau_dri.so file is re-created in the
->> same folder, what would be a clean/neat way to handle this?
->>
->> Thanks A LOT again.
->>
->> [1] A lot of lines like these on some dist-upgrades:
->>
->> W: Possible missing firmware
->> /lib/firmware/nvidia/gp100/gr/sw_method_init.bin for module nouveau
->> W: Possible missing firmware
->> /lib/firmware/nvidia/gp100/gr/sw_bundle_init.bin for module nouveau
->> W: Possible missing firmware
->> /lib/firmware/nvidia/gp100/gr/sw_nonctx.bin for module nouveau
->> (...)
+On 10/24/21 21:16, Alistair Popple wrote:
+> MIGRATE_PFN_LOCKED is used to indicate to migrate_vma_prepare() that a
+> source page was already locked during migrate_vma_collect(). If it
+> wasn't then the a second attempt is made to lock the page. However if
+> the first attempt failed it's unlikely a second attempt will succeed,
+> and the retry adds complexity. So clean this up by removing the retry
+> and MIGRATE_PFN_LOCKED flag.
 >
-> Sounds like your initramfs builder tries to include these but they're
-> not available on your filesystem. As long as you're not plugging a
-> Pascal GPU into your system, you're fine.
+> Destination pages are also meant to have the MIGRATE_PFN_LOCKED flag
+> set, but nothing actually checks that.
 >
->>
->> And a lot of programs producing messages like these on start:
->>
->> libGL error: unable to load driver: nouveau_dri.so
->> libGL error: driver pointer missing
->> libGL error: failed to load driver: nouveau
+> Signed-off-by: Alistair Popple <apopple@nvidia.com>
+
+You can add:
+Reviewed-by: Ralph Campbell <rcampbell@nvidia.com>
+
+> ---
+>   Documentation/vm/hmm.rst                 |   2 +-
+>   arch/powerpc/kvm/book3s_hv_uvmem.c       |   4 +-
+>   drivers/gpu/drm/amd/amdkfd/kfd_migrate.c |   2 -
+>   drivers/gpu/drm/nouveau/nouveau_dmem.c   |   4 +-
+>   include/linux/migrate.h                  |   1 -
+>   lib/test_hmm.c                           |   5 +-
+>   mm/migrate.c                             | 145 +++++------------------
+>   7 files changed, 35 insertions(+), 128 deletions(-)
 >
-> Hmmmm annoying. I hadn't considered that. I could add an option to the
-> DDX which makes the default driver "swrast" or something. I also
-> wonder if just not loading the "glx" and "dri2" X modules would be
-> sufficient to get rid of these.
->
-> You can also stick LIBGL_ALWAYS_SOFTWARE=3D1 into your /etc/environment
-> (or whatever location causes that env var to appear everywhere) which
-> will force it to use swrast. (With the added benefit of being able to
-> unset it for the programs where you really do want 3d accel.)
->
-> As for a more permanent fix, one could invest developer attention to
-> the nv30 gallium driver, but that one would first have to be located.
-> I'd be happy to provide some limited mentoring in such a case.
->
-> Cheers,
->
->   -ilia
->
+> diff --git a/Documentation/vm/hmm.rst b/Documentation/vm/hmm.rst
+> index a14c2938e7af..f2a59ed82ed3 100644
+> --- a/Documentation/vm/hmm.rst
+> +++ b/Documentation/vm/hmm.rst
+> @@ -360,7 +360,7 @@ between device driver specific code and shared common code:
+>      system memory page, locks the page with ``lock_page()``, and fills in the
+>      ``dst`` array entry with::
+>   
+> -     dst[i] = migrate_pfn(page_to_pfn(dpage)) | MIGRATE_PFN_LOCKED;
+> +     dst[i] = migrate_pfn(page_to_pfn(dpage));
+>   
+>      Now that the driver knows that this page is being migrated, it can
+>      invalidate device private MMU mappings and copy device private memory
+> diff --git a/arch/powerpc/kvm/book3s_hv_uvmem.c b/arch/powerpc/kvm/book3s_hv_uvmem.c
+> index a7061ee3b157..28c436df9935 100644
+> --- a/arch/powerpc/kvm/book3s_hv_uvmem.c
+> +++ b/arch/powerpc/kvm/book3s_hv_uvmem.c
+> @@ -560,7 +560,7 @@ static int __kvmppc_svm_page_out(struct vm_area_struct *vma,
+>   				  gpa, 0, page_shift);
+>   
+>   	if (ret == U_SUCCESS)
+> -		*mig.dst = migrate_pfn(pfn) | MIGRATE_PFN_LOCKED;
+> +		*mig.dst = migrate_pfn(pfn);
+>   	else {
+>   		unlock_page(dpage);
+>   		__free_page(dpage);
+> @@ -774,7 +774,7 @@ static int kvmppc_svm_page_in(struct vm_area_struct *vma,
+>   		}
+>   	}
+>   
+> -	*mig.dst = migrate_pfn(page_to_pfn(dpage)) | MIGRATE_PFN_LOCKED;
+> +	*mig.dst = migrate_pfn(page_to_pfn(dpage));
+>   	migrate_vma_pages(&mig);
+>   out_finalize:
+>   	migrate_vma_finalize(&mig);
+> diff --git a/drivers/gpu/drm/amd/amdkfd/kfd_migrate.c b/drivers/gpu/drm/amd/amdkfd/kfd_migrate.c
+> index 4a16e3c257b9..41d9417f182b 100644
+> --- a/drivers/gpu/drm/amd/amdkfd/kfd_migrate.c
+> +++ b/drivers/gpu/drm/amd/amdkfd/kfd_migrate.c
+> @@ -300,7 +300,6 @@ svm_migrate_copy_to_vram(struct amdgpu_device *adev, struct svm_range *prange,
+>   			migrate->dst[i] = svm_migrate_addr_to_pfn(adev, dst[i]);
+>   			svm_migrate_get_vram_page(prange, migrate->dst[i]);
+>   			migrate->dst[i] = migrate_pfn(migrate->dst[i]);
+> -			migrate->dst[i] |= MIGRATE_PFN_LOCKED;
+>   			src[i] = dma_map_page(dev, spage, 0, PAGE_SIZE,
+>   					      DMA_TO_DEVICE);
+>   			r = dma_mapping_error(dev, src[i]);
+> @@ -580,7 +579,6 @@ svm_migrate_copy_to_ram(struct amdgpu_device *adev, struct svm_range *prange,
+>   			      dst[i] >> PAGE_SHIFT, page_to_pfn(dpage));
+>   
+>   		migrate->dst[i] = migrate_pfn(page_to_pfn(dpage));
+> -		migrate->dst[i] |= MIGRATE_PFN_LOCKED;
+>   		j++;
+>   	}
+>   
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_dmem.c b/drivers/gpu/drm/nouveau/nouveau_dmem.c
+> index 92987daa5e17..3828aafd3ac4 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_dmem.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_dmem.c
+> @@ -166,7 +166,7 @@ static vm_fault_t nouveau_dmem_fault_copy_one(struct nouveau_drm *drm,
+>   		goto error_dma_unmap;
+>   	mutex_unlock(&svmm->mutex);
+>   
+> -	args->dst[0] = migrate_pfn(page_to_pfn(dpage)) | MIGRATE_PFN_LOCKED;
+> +	args->dst[0] = migrate_pfn(page_to_pfn(dpage));
+>   	return 0;
+>   
+>   error_dma_unmap:
+> @@ -602,7 +602,7 @@ static unsigned long nouveau_dmem_migrate_copy_one(struct nouveau_drm *drm,
+>   		((paddr >> PAGE_SHIFT) << NVIF_VMM_PFNMAP_V0_ADDR_SHIFT);
+>   	if (src & MIGRATE_PFN_WRITE)
+>   		*pfn |= NVIF_VMM_PFNMAP_V0_W;
+> -	return migrate_pfn(page_to_pfn(dpage)) | MIGRATE_PFN_LOCKED;
+> +	return migrate_pfn(page_to_pfn(dpage));
+>   
+>   out_dma_unmap:
+>   	dma_unmap_page(dev, *dma_addr, PAGE_SIZE, DMA_BIDIRECTIONAL);
+> diff --git a/include/linux/migrate.h b/include/linux/migrate.h
+> index c8077e936691..479b861ae490 100644
+> --- a/include/linux/migrate.h
+> +++ b/include/linux/migrate.h
+> @@ -119,7 +119,6 @@ static inline int migrate_misplaced_page(struct page *page,
+>    */
+>   #define MIGRATE_PFN_VALID	(1UL << 0)
+>   #define MIGRATE_PFN_MIGRATE	(1UL << 1)
+> -#define MIGRATE_PFN_LOCKED	(1UL << 2)
+>   #define MIGRATE_PFN_WRITE	(1UL << 3)
+>   #define MIGRATE_PFN_SHIFT	6
+>   
+> diff --git a/lib/test_hmm.c b/lib/test_hmm.c
+> index c259842f6d44..e2ce8f9b7605 100644
+> --- a/lib/test_hmm.c
+> +++ b/lib/test_hmm.c
+> @@ -613,8 +613,7 @@ static void dmirror_migrate_alloc_and_copy(struct migrate_vma *args,
+>   		 */
+>   		rpage->zone_device_data = dmirror;
+>   
+> -		*dst = migrate_pfn(page_to_pfn(dpage)) |
+> -			    MIGRATE_PFN_LOCKED;
+> +		*dst = migrate_pfn(page_to_pfn(dpage));
+>   		if ((*src & MIGRATE_PFN_WRITE) ||
+>   		    (!spage && args->vma->vm_flags & VM_WRITE))
+>   			*dst |= MIGRATE_PFN_WRITE;
+> @@ -1137,7 +1136,7 @@ static vm_fault_t dmirror_devmem_fault_alloc_and_copy(struct migrate_vma *args,
+>   		lock_page(dpage);
+>   		xa_erase(&dmirror->pt, addr >> PAGE_SHIFT);
+>   		copy_highpage(dpage, spage);
+> -		*dst = migrate_pfn(page_to_pfn(dpage)) | MIGRATE_PFN_LOCKED;
+> +		*dst = migrate_pfn(page_to_pfn(dpage));
+>   		if (*src & MIGRATE_PFN_WRITE)
+>   			*dst |= MIGRATE_PFN_WRITE;
+>   	}
+> diff --git a/mm/migrate.c b/mm/migrate.c
+> index a6a7743ee98f..915e969811d0 100644
+> --- a/mm/migrate.c
+> +++ b/mm/migrate.c
+> @@ -2369,7 +2369,6 @@ static int migrate_vma_collect_pmd(pmd_t *pmdp,
+>   		 * can't be dropped from it).
+>   		 */
+>   		get_page(page);
+> -		migrate->cpages++;
+
+Why not move the get_page() into the "if (trylock_page())" instead
+of calling put_page() in the else case.
+
+>   
+>   		/*
+>   		 * Optimize for the common case where page is only mapped once
+> @@ -2379,7 +2378,7 @@ static int migrate_vma_collect_pmd(pmd_t *pmdp,
+>   		if (trylock_page(page)) {
+>   			pte_t swp_pte;
+>   
+> -			mpfn |= MIGRATE_PFN_LOCKED;
+> +			migrate->cpages++;
+>   			ptep_get_and_clear(mm, addr, ptep);
+
+I was looking at try_to_migrate_one() and looking at the differences with
+the code here to insert the migration PTE and noticed that instead of
+ptet_get_and_clear() it has:
+	pteval = ptep_clear_flush(vma, address, pvmw.pte);
+
+	/* Move the dirty bit to the page. Now the pte is gone. */
+	if (pte_dirty(pteval))
+		set_page_dirty(page);
+	update_hiwater_rss(mm);
+
+I know that is pre-existing, probably a separate patch if it is an issue.
+
+>   
+>   			/* Setup special migration page table entry */
+> @@ -2413,6 +2412,9 @@ static int migrate_vma_collect_pmd(pmd_t *pmdp,
+>   
+>   			if (pte_present(pte))
+>   				unmapped++;
+> +		} else {
+> +			put_page(page);
+> +			mpfn = 0;
+>   		}
+>   
+>   next:
+> @@ -2517,15 +2519,17 @@ static bool migrate_vma_check_page(struct page *page)
+>   }
+>   
+>   /*
+> - * migrate_vma_prepare() - lock pages and isolate them from the lru
+> + * migrate_vma_unmap() - replace page mapping with special migration pte entry
+>    * @migrate: migrate struct containing all migration information
+>    *
+> - * This locks pages that have been collected by migrate_vma_collect(). Once each
+> - * page is locked it is isolated from the lru (for non-device pages). Finally,
+> - * the ref taken by migrate_vma_collect() is dropped, as locked pages cannot be
+> - * migrated by concurrent kernel threads.
+> + * Isolate pages from the LRU and replace mappings (CPU page table pte) with a
+> + * special migration pte entry and check if it has been pinned. Pinned pages are
+> + * restored because we cannot migrate them.
+> + *
+> + * This is the last step before we call the device driver callback to allocate
+> + * destination memory and copy contents of original page over to new page.
+>    */
+> -static void migrate_vma_prepare(struct migrate_vma *migrate)
+> +static void migrate_vma_unmap(struct migrate_vma *migrate)
+>   {
+>   	const unsigned long npages = migrate->npages;
+>   	const unsigned long start = migrate->start;
+> @@ -2534,32 +2538,12 @@ static void migrate_vma_prepare(struct migrate_vma *migrate)
+>   
+>   	lru_add_drain();
+>   
+> -	for (i = 0; (i < npages) && migrate->cpages; i++) {
+> +	for (i = 0; i < npages; i++) {
+>   		struct page *page = migrate_pfn_to_page(migrate->src[i]);
+> -		bool remap = true;
+>   
+>   		if (!page)
+>   			continue;
+>   
+> -		if (!(migrate->src[i] & MIGRATE_PFN_LOCKED)) {
+> -			/*
+> -			 * Because we are migrating several pages there can be
+> -			 * a deadlock between 2 concurrent migration where each
+> -			 * are waiting on each other page lock.
+> -			 *
+> -			 * Make migrate_vma() a best effort thing and backoff
+> -			 * for any page we can not lock right away.
+> -			 */
+> -			if (!trylock_page(page)) {
+> -				migrate->src[i] = 0;
+> -				migrate->cpages--;
+> -				put_page(page);
+> -				continue;
+> -			}
+> -			remap = false;
+> -			migrate->src[i] |= MIGRATE_PFN_LOCKED;
+> -		}
+> -
+>   		/* ZONE_DEVICE pages are not on LRU */
+>   		if (!is_zone_device_page(page)) {
+>   			if (!PageLRU(page) && allow_drain) {
+> @@ -2569,16 +2553,9 @@ static void migrate_vma_prepare(struct migrate_vma *migrate)
+>   			}
+>   
+>   			if (isolate_lru_page(page)) {
+> -				if (remap) {
+> -					migrate->src[i] &= ~MIGRATE_PFN_MIGRATE;
+> -					migrate->cpages--;
+> -					restore++;
+> -				} else {
+> -					migrate->src[i] = 0;
+> -					unlock_page(page);
+> -					migrate->cpages--;
+> -					put_page(page);
+> -				}
+> +				migrate->src[i] &= ~MIGRATE_PFN_MIGRATE;
+> +				migrate->cpages--;
+> +				restore++;
+>   				continue;
+>   			}
+>   
+> @@ -2586,80 +2563,20 @@ static void migrate_vma_prepare(struct migrate_vma *migrate)
+>   			put_page(page);
+>   		}
+>   
+> -		if (!migrate_vma_check_page(page)) {
+> -			if (remap) {
+> -				migrate->src[i] &= ~MIGRATE_PFN_MIGRATE;
+> -				migrate->cpages--;
+> -				restore++;
+> -
+> -				if (!is_zone_device_page(page)) {
+> -					get_page(page);
+> -					putback_lru_page(page);
+> -				}
+> -			} else {
+> -				migrate->src[i] = 0;
+> -				unlock_page(page);
+> -				migrate->cpages--;
+> +		if (page_mapped(page))
+> +			try_to_migrate(page, 0);
+>   
+> -				if (!is_zone_device_page(page))
+> -					putback_lru_page(page);
+> -				else
+> -					put_page(page);
+> +		if (page_mapped(page) || !migrate_vma_check_page(page)) {
+> +			if (!is_zone_device_page(page)) {
+> +				get_page(page);
+> +				putback_lru_page(page);
+>   			}
+> -		}
+> -	}
+> -
+> -	for (i = 0, addr = start; i < npages && restore; i++, addr += PAGE_SIZE) {
+> -		struct page *page = migrate_pfn_to_page(migrate->src[i]);
+> -
+> -		if (!page || (migrate->src[i] & MIGRATE_PFN_MIGRATE))
+> -			continue;
+>   
+> -		remove_migration_pte(page, migrate->vma, addr, page);
+> -
+> -		migrate->src[i] = 0;
+> -		unlock_page(page);
+> -		put_page(page);
+> -		restore--;
+> -	}
+> -}
+> -
+> -/*
+> - * migrate_vma_unmap() - replace page mapping with special migration pte entry
+> - * @migrate: migrate struct containing all migration information
+> - *
+> - * Replace page mapping (CPU page table pte) with a special migration pte entry
+> - * and check again if it has been pinned. Pinned pages are restored because we
+> - * cannot migrate them.
+> - *
+> - * This is the last step before we call the device driver callback to allocate
+> - * destination memory and copy contents of original page over to new page.
+> - */
+> -static void migrate_vma_unmap(struct migrate_vma *migrate)
+> -{
+> -	const unsigned long npages = migrate->npages;
+> -	const unsigned long start = migrate->start;
+> -	unsigned long addr, i, restore = 0;
+> -
+> -	for (i = 0; i < npages; i++) {
+> -		struct page *page = migrate_pfn_to_page(migrate->src[i]);
+> -
+> -		if (!page || !(migrate->src[i] & MIGRATE_PFN_MIGRATE))
+> +			migrate->src[i] &= ~MIGRATE_PFN_MIGRATE;
+> +			migrate->cpages--;
+> +			restore++;
+>   			continue;
+> -
+> -		if (page_mapped(page)) {
+> -			try_to_migrate(page, 0);
+> -			if (page_mapped(page))
+> -				goto restore;
+>   		}
+> -
+> -		if (migrate_vma_check_page(page))
+> -			continue;
+> -
+> -restore:
+> -		migrate->src[i] &= ~MIGRATE_PFN_MIGRATE;
+> -		migrate->cpages--;
+> -		restore++;
+>   	}
+>   
+>   	for (addr = start, i = 0; i < npages && restore; addr += PAGE_SIZE, i++) {
+> @@ -2672,12 +2589,8 @@ static void migrate_vma_unmap(struct migrate_vma *migrate)
+>   
+>   		migrate->src[i] = 0;
+>   		unlock_page(page);
+> +		put_page(page);
+>   		restore--;
+> -
+> -		if (is_zone_device_page(page))
+> -			put_page(page);
+> -		else
+> -			putback_lru_page(page);
+>   	}
+>   }
+>   
+> @@ -2700,8 +2613,8 @@ static void migrate_vma_unmap(struct migrate_vma *migrate)
+>    * it for all those entries (ie with MIGRATE_PFN_VALID and MIGRATE_PFN_MIGRATE
+>    * flag set).  Once these are allocated and copied, the caller must update each
+>    * corresponding entry in the dst array with the pfn value of the destination
+> - * page and with the MIGRATE_PFN_VALID and MIGRATE_PFN_LOCKED flags set
+> - * (destination pages must have their struct pages locked, via lock_page()).
+> + * page and with MIGRATE_PFN_VALID. Destination pages must be locked via
+> + * lock_page().
+>    *
+>    * Note that the caller does not have to migrate all the pages that are marked
+>    * with MIGRATE_PFN_MIGRATE flag in src array unless this is a migration from
+> @@ -2770,8 +2683,6 @@ int migrate_vma_setup(struct migrate_vma *args)
+>   
+>   	migrate_vma_collect(args);
+>   
+> -	if (args->cpages)
+> -		migrate_vma_prepare(args);
+>   	if (args->cpages)
+>   		migrate_vma_unmap(args);
+>   
