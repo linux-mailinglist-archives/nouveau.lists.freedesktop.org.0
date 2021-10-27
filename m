@@ -1,136 +1,49 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id B0FBC43BD2B
-	for <lists+nouveau@lfdr.de>; Wed, 27 Oct 2021 00:25:31 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9117143C74C
+	for <lists+nouveau@lfdr.de>; Wed, 27 Oct 2021 12:03:30 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id CDC636E4C5;
-	Tue, 26 Oct 2021 22:25:27 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5C5D789DA8;
+	Wed, 27 Oct 2021 10:03:28 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 432 seconds by postgrey-1.36 at gabe;
- Tue, 26 Oct 2021 22:25:26 UTC
-Received: from mailout1.samsung.com (mailout1.samsung.com [203.254.224.24])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C0ED16E4C5;
- Tue, 26 Oct 2021 22:25:26 +0000 (UTC)
-Received: from epcas1p4.samsung.com (unknown [182.195.41.48])
- by mailout1.samsung.com (KnoxPortal) with ESMTP id
- 20211026221812epoutp0114cf88ba4448b457f12ee53bdb5ca6d0~xtJUSxmwq0846108461epoutp01c;
- Tue, 26 Oct 2021 22:18:12 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.samsung.com
- 20211026221812epoutp0114cf88ba4448b457f12ee53bdb5ca6d0~xtJUSxmwq0846108461epoutp01c
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1635286692;
- bh=YpSE6qnCQzEz7yZwtDVd9ekJ3kJ9xV2pwDRmKtQvlR4=;
- h=Subject:To:From:Date:In-Reply-To:References:From;
- b=DhIdexF5Qxadf1IqNPjtsOWb7/Y7QHnx89wa6eXwXBxVo03KJYHIrz9TdfHU1tPgt
- cIJD05A2SydOmY1DfZHkZHz1esctGkA93syd/Jas2NozFPWIEC37TzwwBOHzi+lhF1
- CyRPLKtjymnGDIigHPXwnNcusSFmmt483XcYM4Ls=
-Received: from epsnrtp4.localdomain (unknown [182.195.42.165]) by
- epcas1p1.samsung.com (KnoxPortal) with ESMTP id
- 20211026221811epcas1p1a5cfec876e41534f9d27ea252974a422~xtJUBusaL0988809888epcas1p1L;
- Tue, 26 Oct 2021 22:18:11 +0000 (GMT)
-Received: from epsmges1p3.samsung.com (unknown [182.195.38.235]) by
- epsnrtp4.localdomain (Postfix) with ESMTP id 4Hf5ms65Wpz4x9Pv; Tue, 26 Oct
- 2021 22:18:05 +0000 (GMT)
-Received: from epcas1p4.samsung.com ( [182.195.41.48]) by
- epsmges1p3.samsung.com (Symantec Messaging Gateway) with SMTP id
- E2.DB.09592.D9E78716; Wed, 27 Oct 2021 07:18:05 +0900 (KST)
-Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
- epcas1p3.samsung.com (KnoxPortal) with ESMTPA id
- 20211026221804epcas1p398bd502c4f4a0479d79e700e1368d645~xtJNr7oq32900529005epcas1p3Y;
- Tue, 26 Oct 2021 22:18:04 +0000 (GMT)
-Received: from epsmgms1p1new.samsung.com (unknown [182.195.42.41]) by
- epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
- 20211026221804epsmtrp20a474ddc52a5261c65af9e99586b041b~xtJNqjiSR0527705277epsmtrp2L;
- Tue, 26 Oct 2021 22:18:04 +0000 (GMT)
-X-AuditID: b6c32a37-2a5ff70000002578-dd-61787e9d1960
-Received: from epsmtip1.samsung.com ( [182.195.34.30]) by
- epsmgms1p1new.samsung.com (Symantec Messaging Gateway) with SMTP id
- 89.D3.29871.C9E78716; Wed, 27 Oct 2021 07:18:04 +0900 (KST)
-Received: from [10.113.221.211] (unknown [10.113.221.211]) by
- epsmtip1.samsung.com (KnoxPortal) with ESMTPA id
- 20211026221804epsmtip1a2d7b68c6a675cea8adda7e9be2ead61~xtJNSXFDn2682326823epsmtip1i;
- Tue, 26 Oct 2021 22:18:04 +0000 (GMT)
-To: Claudio Suarez <cssk@net-c.es>, dri-devel@lists.freedesktop.org,
- amd-gfx@lists.freedesktop.org, linux-tegra@vger.kernel.org,
- intel-gfx@lists.freedesktop.org, David Airlie <airlied@linux.ie>, Daniel
- Vetter <daniel@ffwll.ch>, Laurent Pinchart
- <Laurent.pinchart@ideasonboard.com>, Jani Nikula
- <jani.nikula@linux.intel.com>, Joonas Lahtinen
- <joonas.lahtinen@linux.intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
- Alex Deucher <alexander.deucher@amd.com>, =?UTF-8?Q?Christian_K=c3=b6nig?=
- <christian.koenig@amd.com>, Pan Xinhui <Xinhui.Pan@amd.com>, Emma Anholt
- <emma@anholt.net>, Maxime Ripard <mripard@kernel.org>, Thierry Reding
- <thierry.reding@gmail.com>, Patrik Jakobsson <patrik.r.jakobsson@gmail.com>,
- Jingoo Han <jingoohan1@gmail.com>, Rob Clark <robdclark@gmail.com>, Sean
- Paul <sean@poorly.run>, linux-arm-msm@vger.kernel.org,
- freedreno@lists.freedesktop.org, Chen-Yu Tsai <wens@csie.org>, Sandy Huang
- <hjc@rock-chips.com>, heiko@sntech.de, Neil Armstrong
- <narmstrong@baylibre.com>, Robert Foss <robert.foss@linaro.org>, Ben Skeggs
- <bskeggs@redhat.com>, nouveau@lists.freedesktop.org,
- ville.syrjala@linux.intel.com
-From: Inki Dae <inki.dae@samsung.com>
-Message-ID: <ee6b3bac-4762-fd8f-c12a-c0a7ea7b56e9@samsung.com>
-Date: Wed, 27 Oct 2021 07:28:45 +0900
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.13.0
+Received: from mga05.intel.com (mga05.intel.com [192.55.52.43])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8DD1089D61;
+ Wed, 27 Oct 2021 10:03:27 +0000 (UTC)
+X-IronPort-AV: E=McAfee;i="6200,9189,10149"; a="316330967"
+X-IronPort-AV: E=Sophos;i="5.87,186,1631602800"; d="scan'208";a="316330967"
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+ by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 27 Oct 2021 03:03:26 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.87,186,1631602800"; d="scan'208";a="635669892"
+Received: from stinkbox.fi.intel.com (HELO stinkbox) ([10.237.72.171])
+ by fmsmga001.fm.intel.com with SMTP; 27 Oct 2021 03:03:22 -0700
+Received: by stinkbox (sSMTP sendmail emulation);
+ Wed, 27 Oct 2021 13:03:22 +0300
+Date: Wed, 27 Oct 2021 13:03:22 +0300
+From: Ville =?iso-8859-1?Q?Syrj=E4l=E4?= <ville.syrjala@linux.intel.com>
+To: Lyude Paul <lyude@redhat.com>
+Cc: intel-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org, Satadru Pramanik <satadru@gmail.com>,
+ stable@vger.kernel.org, Jani Nikula <jani.nikula@linux.intel.com>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ David Airlie <airlied@linux.ie>, Daniel Vetter <daniel@ffwll.ch>,
+ open list <linux-kernel@vger.kernel.org>
+Message-ID: <YXkj6n/6U5ZaSRN7@intel.com>
+References: <20211026220848.439530-1-lyude@redhat.com>
+ <20211026220848.439530-2-lyude@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <20211016184226.3862-7-cssk@net-c.es>
-Content-Language: en-US
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-X-Brightmail-Tracker: H4sIAAAAAAAAA01TaVBTVxTufUneS7DRlKXcoRUhlDpgwYT1asGtFF9bW6l2uoAdfIU3wJDN
- JLQKYwehIogFIkgg7LJZoGyCStjBilhorVRwWAZlGQc6QEXZxoINPGz5933nfOee75w7h8sy
- 7iAsuCEyNa2UURIhbsS+1m4ncsj6/iQlmiyzQz/+1omh1MF6DiqsOEOgieJYgKaGDVS79AKg
- F9c0LPTn3AyOspoeYijzcbchNvIXB2VdPI0ykq5iqLinAqArz9IJ1JiHoThNAYE0zd0Einum
- w1FMXBEHtSX4oYWEBA766fIcjh7nLbLQrO4RCzXregk0lHwToCV9NhstrBjql9p+x1DJVQ2+
- bxt59t4yTkbN3MLJmQdnCbJypJRDNs7nssk63RBBZsSmc8j8hgmMrC6Jw8nB3gacvD7/kENm
- d35KDsd3YGTVaBFGduj7CXKm6T7uY+Ib6hFMU4G00oqWBcgDQ2RBnsKPjvq/5+/qJhI7iHch
- d6GVjJLSnkKvQz4O3iESw8qEVt9SkjBDyIdSqYQ793go5WFq2ipYrlJ7CmlFoEThqnBUUVJV
- mCzIUUard4tFIidXg/B4aHB9fzehSOGfzCgbJCKBdtN5wONCgQucaS4Aq9hYcAPA1mrReWBk
- wLMAPslYZDFkHsDExU7iZUWkZpBgEo0A3m6pZDNkBsD2Ze3aWyaCUHimZ3ZNZSo4x4NRFTGs
- 1QQusIWaK8P4KuYL9sDIwg72KmYb4l35NdgqNhN8BZc79RxG8xrsTB9b0/AETnAx8cKahiUw
- h/1jOet4G4yuzVjzCgXzPHi9ZggwXr1gTV8mi8EmcLKjZn0GC/h0uhFnCqIB1KT9ijEkFsCh
- 0T42o3KGzYXJhgTX0MIOVuh3MmFrWPc8CzCdN8PpuQucVQkU8GFsjDEjEcJbfzxY9wDh3QIN
- zmASjpfVr6/rZwDjb+fhScBKt2FQ3YbhdBuG0/3vIhewS8DrtEIlDaJVYoXzfx8eIJdWg7WL
- sne/AVKn/nZsAxgXtAHIZQlN+T3Z31HG/EDqVDitlPsrwyS0qg24GlavYVmYBcgNJylT+4td
- dolc3JycXZDYTSw05z+1PEEZC4IoNR1K0wpa+bIO4/IsIjHJgLdvqvKtkPzE4eZj8dbvf5kz
- UCN/O6/+6MIRo+2dmJ7zZEv5m35tuZuSa9Vq89Nkq80n3+iPKHmXVFUlfuG24vDn7M0BlViC
- tst0JSL5IJV3+PLox7vr3tUOWO7H0ix2eET8Y/tZmeXkeHTW/Szfz6W+DaWzd17pc48sKfCI
- vHuOP+4wvlfYf3xyaV9TDPdQK9u5vEVRb190aW/3vuWKEwfSL2Zq26NDqkPe6bLZX1m81f9e
- lSjph9qRafZAsGzLL+U7Ppj48PByjnW6zRdbtamPjn3dPDVPd2wv8n4jn3WTa5bSbbei6z3o
- NZaWZ3IHBA23LJa6SF9NkSorayI4VVVRS6eEbFUwJbZnKVXUvwc1qyXaBAAA
-X-Brightmail-Tracker: H4sIAAAAAAAAA02SbUxTZxiG957T89G6zkNBeQUysyLZdBtapvFN5nCE6E6y/UCjcXOLtdGT
- QqSl60Gl4kfBQdq6gdVNpHwJFZAyxlexIkpNa4ZlVBdwhBUUrDhnwKAEsV2mrhSX8O9+7vu6
- /j00LikhYugMdTanVSsypaRIcNEtffvD8qM5ijVVeR+hH256MHRmpItAtc15FHpUbwDo8Wjo
- LAm+AujVRTOObj+bIlFF9xiGyh96Q51/gkAVp46gspPtGKofaAbowkwpha5WY8hoPk8hs9NL
- IeOMhUSFxjoCuYq+Rs+LigjUUPOMRA+rAziattzDkdMySKE7p68DFLxcKUDPX4b8oOsWhmzt
- ZvLT5WxB/wuSzZ/6lWSnhgootsXfSLBXZ88J2E7LHYotM5QSrPXKI4xtsxlJdmTwCsk6ZscI
- ttKzhR090YOxrffrMLbnso9ip7r/INMid4o27OUyMw5w2tXJu0XpXT4vpflRnFP28wilByWL
- TEBIQ2Yt1JtHKBMQ0RKmC8C/88eACdChAUJ7Bz0fI6Hbzc8jjwEMNDvxOTeS2QfzBqbDbhRz
- QgjPuq34PNUEYI/VJ5ijSCYBmi+MknNZzCRDfW1PuBeE+j6rHZvLS5ivYP6NjtdMBPSUjocZ
- IZMEA8XfhxmceRf+W9mPz+do6Buvet0vh8c7yvCTIMKyQLcsUCwLFMsC5RwQ2MAyTsOrlCpe
- ppGpuYOJvELF71crE/dkqdpA+HdWrbwEHLYniS6A0cAFII1Lo8QDlQcVEvFehe4Qp82Sa/dn
- crwLxNICabT4d5NHLmGUimxuH8dpOO3/K0YLY/RY9yzeH9GbJLvd6Z8R7ey/5dZZ7/rL5dO+
- jGDuxzdPp9bXv7P+/vZJZ8K2ztq4Pseu6jhV07eUXSIvSmhnPosyBNbQQ3GdvU9Seye2LI1V
- jha7vtCtO7P4l8D5+IH1Zx+88YHtmxx+46AsOSvlk2HM42gojW8pVC5Ne5qyYVOFSf3+KSBb
- 9934IeZa9LFJed1PrmvKt3QRb9JdwtxgjVPoTd0omRQP/+NpuFdeoMtpGi7O1fR5Dif6uCXS
- xibKo3HyLfZUo8GJTBNJjPFzdYZ9R4rWG9t2Pe944+YVhUb/Vv1uwvFezZcH0lodf2qH0/9a
- 1DFjiLmxGmG/tQ5lZ96VCvh0hWwVruUV/wEmvDQhqgMAAA==
-X-CMS-MailID: 20211026221804epcas1p398bd502c4f4a0479d79e700e1368d645
-X-Msg-Generator: CA
-Content-Type: text/plain; charset="utf-8"
-X-Sendblock-Type: SVC_REQ_APPROVE
-CMS-TYPE: 101P
-DLP-Filter: Pass
-X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20211016193513epcas1p4e354183520df0aa4c381b19eb2863262
-References: <20211016184226.3862-1-cssk@net-c.es>
- <CGME20211016193513epcas1p4e354183520df0aa4c381b19eb2863262@epcas1p4.samsung.com>
- <20211016184226.3862-7-cssk@net-c.es>
-Subject: Re: [Nouveau] [PATCH v2 06/13] drm/exynos: replace
- drm_detect_hdmi_monitor() with drm_display_info.is_hdmi
+In-Reply-To: <20211026220848.439530-2-lyude@redhat.com>
+X-Patchwork-Hint: comment
+Subject: Re: [Nouveau] [PATCH v4 1/5] drm/i915: Add support for panels with
+ VESA backlights with PWM enable/disable
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -145,47 +58,95 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi,
-
-21. 10. 17. ì˜¤ì „ 3:42ì— Claudio Suarez ì´(ê°€) ì“´ ê¸€:
-> Once EDID is parsed, the monitor HDMI support information is available
-> through drm_display_info.is_hdmi. Retriving the same information with
-> drm_detect_hdmi_monitor() is less efficient. Change to
-> drm_display_info.is_hdmi
+On Tue, Oct 26, 2021 at 06:08:44PM -0400, Lyude Paul wrote:
+> This simply adds proper support for panel backlights that can be controlled
+> via VESA's backlight control protocol, but which also require that we
+> enable and disable the backlight via PWM instead of via the DPCD interface.
+> We also enable this by default, in order to fix some people's backlights
+> that were broken by not having this enabled.
 > 
-> Signed-off-by: Claudio Suarez <cssk@net-c.es>
+> For reference, backlights that require this and use VESA's backlight
+> interface tend to be laptops with hybrid GPUs, but this very well may
+> change in the future.
+> 
+> v4:
+> * Make sure that we call intel_backlight_level_to_pwm() in
+>   intel_dp_aux_vesa_enable_backlight() - vsyrjala
+> 
+> Signed-off-by: Lyude Paul <lyude@redhat.com>
+> Link: https://gitlab.freedesktop.org/drm/intel/-/issues/3680
+> Fixes: fe7d52bccab6 ("drm/i915/dp: Don't use DPCD backlights that need PWM enable/disable")
+> Cc: <stable@vger.kernel.org> # v5.12+
+
+Seems consistent enough.
+Reviewed-by: Ville Syrjälä <ville.syrjala@linux.intel.com>
+
 > ---
->  drivers/gpu/drm/exynos/exynos_hdmi.c | 6 ++++--
->  1 file changed, 4 insertions(+), 2 deletions(
+>  .../drm/i915/display/intel_dp_aux_backlight.c | 27 ++++++++++++++-----
+>  1 file changed, 21 insertions(+), 6 deletions(-)
 > 
-> diff --git a/drivers/gpu/drm/exynos/exynos_hdmi.c b/drivers/gpu/drm/exynos/exynos_hdmi.c
-> index 7655142a4651..a563d6386abe 100644
-> --- a/drivers/gpu/drm/exynos/exynos_hdmi.c
-> +++ b/drivers/gpu/drm/exynos/exynos_hdmi.c
-> @@ -893,12 +893,14 @@ static int hdmi_get_modes(struct drm_connector *connector)
->  	if (!edid)
->  		return -ENODEV;
+> diff --git a/drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c b/drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c
+> index 569d17b4d00f..f05b71c01b8e 100644
+> --- a/drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c
+> +++ b/drivers/gpu/drm/i915/display/intel_dp_aux_backlight.c
+> @@ -293,6 +293,13 @@ intel_dp_aux_vesa_enable_backlight(const struct intel_crtc_state *crtc_state,
+>  	struct intel_panel *panel = &connector->panel;
+>  	struct intel_dp *intel_dp = enc_to_intel_dp(connector->encoder);
 >  
-> -	hdata->dvi_mode = !drm_detect_hdmi_monitor(edid);
-> +	/* This updates connector->display_info */
-> +	drm_connector_update_edid_property(connector, edid);
+> +	if (!panel->backlight.edp.vesa.info.aux_enable) {
+> +		u32 pwm_level = intel_backlight_invert_pwm_level(connector,
+> +								 panel->backlight.pwm_level_max);
 > +
-> +	hdata->dvi_mode = !connector->display_info.is_hdmi;
-
-Thanks for correcting this. Yeah, we should use drm_display_info.is_hdmi parsed from EDID.
-https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/tree/drivers/gpu/drm/drm_edid.c?h=v5.14.14#n4725
-
-Signed-off-by: Inki Dae <inki.dae@samsung.com>
-
-Thanks,
-Inki Dae
-
->  	DRM_DEV_DEBUG_KMS(hdata->dev, "%s : width[%d] x height[%d]\n",
->  			  (hdata->dvi_mode ? "dvi monitor" : "hdmi monitor"),
->  			  edid->width_cm, edid->height_cm);
+> +		panel->backlight.pwm_funcs->enable(crtc_state, conn_state, pwm_level);
+> +	}
+> +
+>  	drm_edp_backlight_enable(&intel_dp->aux, &panel->backlight.edp.vesa.info, level);
+>  }
 >  
-> -	drm_connector_update_edid_property(connector, edid);
->  	cec_notifier_set_phys_addr_from_edid(hdata->notifier, edid);
+> @@ -304,6 +311,10 @@ static void intel_dp_aux_vesa_disable_backlight(const struct drm_connector_state
+>  	struct intel_dp *intel_dp = enc_to_intel_dp(connector->encoder);
 >  
->  	ret = drm_add_edid_modes(connector, edid);
-> 
+>  	drm_edp_backlight_disable(&intel_dp->aux, &panel->backlight.edp.vesa.info);
+> +
+> +	if (!panel->backlight.edp.vesa.info.aux_enable)
+> +		panel->backlight.pwm_funcs->disable(old_conn_state,
+> +						    intel_backlight_invert_pwm_level(connector, 0));
+>  }
+>  
+>  static int intel_dp_aux_vesa_setup_backlight(struct intel_connector *connector, enum pipe pipe)
+> @@ -321,6 +332,15 @@ static int intel_dp_aux_vesa_setup_backlight(struct intel_connector *connector,
+>  	if (ret < 0)
+>  		return ret;
+>  
+> +	if (!panel->backlight.edp.vesa.info.aux_enable) {
+> +		ret = panel->backlight.pwm_funcs->setup(connector, pipe);
+> +		if (ret < 0) {
+> +			drm_err(&i915->drm,
+> +				"Failed to setup PWM backlight controls for eDP backlight: %d\n",
+> +				ret);
+> +			return ret;
+> +		}
+> +	}
+>  	panel->backlight.max = panel->backlight.edp.vesa.info.max;
+>  	panel->backlight.min = 0;
+>  	if (current_mode == DP_EDP_BACKLIGHT_CONTROL_MODE_DPCD) {
+> @@ -340,12 +360,7 @@ intel_dp_aux_supports_vesa_backlight(struct intel_connector *connector)
+>  	struct intel_dp *intel_dp = intel_attached_dp(connector);
+>  	struct drm_i915_private *i915 = dp_to_i915(intel_dp);
+>  
+> -	/* TODO: We currently only support AUX only backlight configurations, not backlights which
+> -	 * require a mix of PWM and AUX controls to work. In the mean time, these machines typically
+> -	 * work just fine using normal PWM controls anyway.
+> -	 */
+> -	if ((intel_dp->edp_dpcd[1] & DP_EDP_BACKLIGHT_AUX_ENABLE_CAP) &&
+> -	    drm_edp_backlight_supported(intel_dp->edp_dpcd)) {
+> +	if (drm_edp_backlight_supported(intel_dp->edp_dpcd)) {
+>  		drm_dbg_kms(&i915->drm, "AUX Backlight Control Supported!\n");
+>  		return true;
+>  	}
+> -- 
+> 2.31.1
+
+-- 
+Ville Syrjälä
+Intel
