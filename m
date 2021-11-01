@@ -1,66 +1,57 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id E0C3C442086
-	for <lists+nouveau@lfdr.de>; Mon,  1 Nov 2021 20:09:20 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 133D74422A9
+	for <lists+nouveau@lfdr.de>; Mon,  1 Nov 2021 22:30:05 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 30EA06E14F;
-	Mon,  1 Nov 2021 19:09:19 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 55EBF89FDB;
+	Mon,  1 Nov 2021 21:30:01 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 851E36E176
- for <nouveau@lists.freedesktop.org>; Mon,  1 Nov 2021 19:09:17 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1635793756;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=HukUEUCHpcgSi4l+3g0z+54KWpoB588PN8POrzaMgE8=;
- b=G+M85yBKYTPTv4h7xYDCeFOIjiJ/XkI6Lxc4FQ6fXQ6I0nCWG2rdEpPEMnlWap1ha/b4mI
- ZptaVgsv09/8yRA14O09hjILunQNpjuPPaKKRLIemVsSqpLgRzsV5avO25RQ02nOlTnpZn
- WYBMXach1zYscBSsteQ7r2axuzPR/j0=
-Received: from mail-lj1-f198.google.com (mail-lj1-f198.google.com
- [209.85.208.198]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-478-sb5-zg56OjSZJpUMf8SZcw-1; Mon, 01 Nov 2021 15:09:14 -0400
-X-MC-Unique: sb5-zg56OjSZJpUMf8SZcw-1
-Received: by mail-lj1-f198.google.com with SMTP id
- e13-20020a2e9e0d000000b00216ace8e8e5so116667ljk.10
- for <nouveau@lists.freedesktop.org>; Mon, 01 Nov 2021 12:09:13 -0700 (PDT)
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [IPv6:2a00:1450:4864:20::52f])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3664C89FD1
+ for <nouveau@lists.freedesktop.org>; Mon,  1 Nov 2021 21:30:00 +0000 (UTC)
+Received: by mail-ed1-x52f.google.com with SMTP id w15so68939439edc.9
+ for <nouveau@lists.freedesktop.org>; Mon, 01 Nov 2021 14:30:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:in-reply-to:references:from:date:message-id:subject:to;
+ bh=Ordm7YYaovo1wOT4C8+Sr2RPoUg6yrW0P6U6oabG+ms=;
+ b=V8npJXB1DSpKWxcwn2yA5RWUOCi1fvqXwm7+xHHSrDb9EgYuuLiVPO7J0rNS4dDXdZ
+ xpL48xIVoR1ZFHPiYbiLf78UZwLRCiz5CzY0aRcrIBagq7cCPvYbpREptamtpwGiajJk
+ Yw6oeXkBdEdLXSoCliqwM3HmLN84RhwlFs0ynIRkBvJj8apF14G0pyLczdZWV6rLOvbt
+ 1towmLcuBJ54hx5ntiR9BRLA4VyrxgcA2ElviIF51v1NvX3d6UtwfUtmPnWMUU65tehA
+ NaZl8f3rS9qsxYhj7stn9iZljudNEjWO7HPIfQn9JimG9JYIotPNDlUpoyszDnHBib6K
+ yJQA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=HukUEUCHpcgSi4l+3g0z+54KWpoB588PN8POrzaMgE8=;
- b=vNE1/SWpCgOYtK6axcQGU89CWeU8Njl582egGz0Hz03+4Gf2TYA0ROHiVeq3+3vSqL
- Rgwta4xC/TnUd3+wuFQt8bCl1lSYdBPvMqK243Jb3Dw90UWa/lOadPgXidTd5rrVK77z
- KgmY2NvmhWM1jEee9O+tpWZt0fhiGmsE+LJGhrDSwMoS8hqYXGFoYQ5RT9M0j5lwnFpa
- LLkuDSUUgmJ23477yhx97ICwZi+5QyLs3G1Z+oOsy6zSHzA/c+vKO2ngSZuRIU+SEcx5
- cYWOqEwuU2IiGptIH+8geYvpJsI/PF2C+Qnxjot0KD/y4tISXdY4p7olT0bC3Z7WX+j1
- myXw==
-X-Gm-Message-State: AOAM531R599W56hVVkNZZrOJjTy0VjkKpCS5qEEjQIfSjzQtcL5b2O+G
- vQ+u6bpHMy4DeZqSnmG4kwCF4mZwFUSCe+yW9JuwQ8X9jgGrfcjU7QIHsmNlc+ME9hhrr9A9bJw
- Fl1mwJ47N2jMmkIhCC6W78XfK7WmA1PbXCQE0TdEA/w==
-X-Received: by 2002:a2e:5344:: with SMTP id t4mr32592550ljd.294.1635793752259; 
- Mon, 01 Nov 2021 12:09:12 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJyP70/Q6U8IQQGf0DSctxI6DkcnJbFw3wAvI3uNP5MAP0PcwCIIWQxZdxI8oTJFcSpkEwN5lgERHGH8ha3yxt8=
-X-Received: by 2002:a2e:5344:: with SMTP id t4mr32592529ljd.294.1635793752029; 
- Mon, 01 Nov 2021 12:09:12 -0700 (PDT)
+ h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+ :message-id:subject:to;
+ bh=Ordm7YYaovo1wOT4C8+Sr2RPoUg6yrW0P6U6oabG+ms=;
+ b=hJbXbodtPWvn0ZTLnNHNteiM7gLD03ZrkbVGKP51qXMKlnQDwLheefD21O+uQ2ygdo
+ DcYb8Nar+l+nf+1webXV9Ag0OlfkoM4xSIu/d/S3KA7E38MXkK+xfqe3cL/8Lt1716rZ
+ bA8AaviylCbsgPMDVB39VP+a49gWGtCyoYLlMjLTpTRhX4ZUdZmKpVYv9Mgsk10xNY+2
+ n+AlJjVpkTNeyXCaSong78+Kp8DlN79TeH4v4+3K5Dj3hYWSZET1lXULtqJJ2yARbqDq
+ Nj1Y23LQPxD7vW7jCabuZX6M2LutS3qRwRa9vbgh+GooLO/DX7FtqpouSN0sqccmvfxD
+ iARA==
+X-Gm-Message-State: AOAM533Z7/Blk/mL5S3ruqY+6j3sW5NZbBgfYl9ay1auTMRVsdsUV0mp
+ SRvasQeu0Cz1n5qo2V0Tku0/OXsfqMzGDTQr9JcgPLGN
+X-Google-Smtp-Source: ABdhPJxuGe6iJ9v80SGLtpYCN5EANxg8yejAU1axHBYJyND74z/oitryskmje/cTIZmnKo6jAJHGCwve4iqDWcQ7/EY=
+X-Received: by 2002:a17:907:6e16:: with SMTP id
+ sd22mr26452379ejc.542.1635802198619; 
+ Mon, 01 Nov 2021 14:29:58 -0700 (PDT)
 MIME-Version: 1.0
+Received: by 2002:a17:906:4c95:0:0:0:0 with HTTP; Mon, 1 Nov 2021 14:29:58
+ -0700 (PDT)
+In-Reply-To: <CACO55tuZwYJKKBfHd5cgEv3_ry+B5fMO=4KCUGhvwyX8=Kq_hQ@mail.gmail.com>
 References: <CAD8U+g_=X07mpM4_EJ_vteqTNdYqH+Ev7ihgea25qJW-3FZ_uw@mail.gmail.com>
  <CACO55tuZwYJKKBfHd5cgEv3_ry+B5fMO=4KCUGhvwyX8=Kq_hQ@mail.gmail.com>
-In-Reply-To: <CACO55tuZwYJKKBfHd5cgEv3_ry+B5fMO=4KCUGhvwyX8=Kq_hQ@mail.gmail.com>
-From: Karol Herbst <kherbst@redhat.com>
-Date: Mon, 1 Nov 2021 20:09:00 +0100
-Message-ID: <CACO55tv3DfrYObTfP7OqzOH6mESXx_KD5HRDtDaikUr0gH3hGg@mail.gmail.com>
-To: riveravaldez <riveravaldezmail@gmail.com>
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=kherbst@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="UTF-8"
+From: riveravaldez <riveravaldezmail@gmail.com>
+Date: Mon, 1 Nov 2021 18:29:58 -0300
+Message-ID: <CAD8U+g98ErhAD0Va25d0hbJU+_FEgD5yU1f-wBXbiirC=QGVPQ@mail.gmail.com>
+To: nouveau <nouveau@lists.freedesktop.org>
+Content-Type: multipart/alternative; boundary="000000000000f8b8f005cfc0e01a"
 Subject: Re: [Nouveau] Various kernel error messages on updated Arch box
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -73,116 +64,42 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau <nouveau@lists.freedesktop.org>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Actually.. seems like somebody already filed a bug like this:
-https://gitlab.freedesktop.org/drm/nouveau/-/issues/91
+--000000000000f8b8f005cfc0e01a
+Content-Type: text/plain; charset="UTF-8"
 
-Seems to be more widespread so I will check out if I hit this as well.
+On Monday, November 1, 2021, Karol Herbst <kherbst@redhat.com> wrote:
+> On Mon, Nov 1, 2021 at 7:38 PM riveravaldez <riveravaldezmail@gmail.com>
+wrote:
+>>
+>> Hi, I'm having this error messages at boot:
+>>
+>> $ sudo journalctl -ex -p3 | grep nouveau
+>> nov 01 14:47:39 arch kernel: nouveau 0000:01:00.0: ce: ucode exceeds
+falcon limit(s)
+>> nov 01 14:47:39 arch kernel: nouveau 0000:01:00.0: ce: init failed, -22
+> (...)
+>
+> I assume you are on the newest kernel and everything?
 
-On Mon, Nov 1, 2021 at 8:05 PM Karol Herbst <kherbst@redhat.com> wrote:
->
-> On Mon, Nov 1, 2021 at 7:38 PM riveravaldez <riveravaldezmail@gmail.com> wrote:
-> >
-> > Hi, I'm having this error messages at boot:
-> >
-> > $ sudo journalctl -ex -p3 | grep nouveau
-> > nov 01 14:47:39 arch kernel: nouveau 0000:01:00.0: ce: ucode exceeds falcon limit(s)
-> > nov 01 14:47:39 arch kernel: nouveau 0000:01:00.0: ce: init failed, -22
->
-> mhh, this shouldn't happen and the accesses below are probably related
-> to this. Mind sharing your complete dmesg via a pastebin site or just
-> go ahead and file a bug at
-> https://gitlab.freedesktop.org/drm/nouveau/-/issues ?
->
-> I assume you are on the newest kernel and everything? I will check if
-> I can reproduce it on the fermi I've got here, but could be something
-> specific to your GPU.
->
-> > nov 01 14:47:39 arch kernel: nouveau 0000:01:00.0: bus: MMIO read of 00000000 FAULT at 10312c [ PRIVRING ]
-> > nov 01 14:47:39 arch kernel: nouveau 0000:01:00.0: bus: MMIO read of 00000000 FAULT at 103048 [ PRIVRING ]
-> > (...)
-> > nov 01 14:54:04 arch kernel: nouveau 0000:01:00.0: bus: MMIO read of 00000000 FAULT at 103048 [ PRIVRING ]
-> > nov 01 14:54:04 arch kernel: nouveau 0000:01:00.0: bus: MMIO write of 00000000 FAULT at 103048 [ PRIVRING ]
-> > nov 01 14:54:22 arch kernel: nouveau 0000:01:00.0: bus: MMIO read of 00000000 FAULT at 103048 [ PRIVRING ]
-> > nov 01 14:54:54 arch kernel: nouveau 0000:01:00.0: bus: MMIO read of 00000000 FAULT at 103048 [ PRIVRING ]
-> > nov 01 14:55:06 arch kernel: nouveau 0000:01:00.0: bus: MMIO read of 00000000 FAULT at 103048 [ PRIVRING ]
-> > (..., many similar)
-> >
-> > In this hardware:
-> >
-> > $ lspci -k
-> > 00:00.0 Host bridge: Intel Corporation 2nd Generation Core Processor Family DRAM Controller (rev 09)
-> > Subsystem: Dell Device 04b6
-> > 00:01.0 PCI bridge: Intel Corporation Xeon E3-1200/2nd Generation Core Processor Family PCI Express Root Port (rev 09)
-> > Kernel driver in use: pcieport
-> > 00:02.0 VGA compatible controller: Intel Corporation 2nd Generation Core Processor Family Integrated Graphics Controller (rev 09)
-> > Subsystem: Dell Device 04b6
-> > Kernel driver in use: i915
-> > Kernel modules: i915
-> > 00:16.0 Communication controller: Intel Corporation 6 Series/C200 Series Chipset Family MEI Controller #1 (rev 04)
-> > Subsystem: Dell Device 04b6
-> > Kernel driver in use: mei_me
-> > Kernel modules: mei_me
-> > 00:1a.0 USB controller: Intel Corporation 6 Series/C200 Series Chipset Family USB Enhanced Host Controller #2 (rev 05)
-> > Subsystem: Dell Device 04b6
-> > Kernel driver in use: ehci-pci
-> > 00:1b.0 Audio device: Intel Corporation 6 Series/C200 Series Chipset Family High Definition Audio Controller (rev 05)
-> > Subsystem: Dell Device 04b6
-> > Kernel driver in use: snd_hda_intel
-> > Kernel modules: snd_hda_intel
-> > 00:1c.0 PCI bridge: Intel Corporation 6 Series/C200 Series Chipset Family PCI Express Root Port 1 (rev b5)
-> > Kernel driver in use: pcieport
-> > 00:1c.1 PCI bridge: Intel Corporation 6 Series/C200 Series Chipset Family PCI Express Root Port 2 (rev b5)
-> > Kernel driver in use: pcieport
-> > 00:1c.3 PCI bridge: Intel Corporation 6 Series/C200 Series Chipset Family PCI Express Root Port 4 (rev b5)
-> > Kernel driver in use: pcieport
-> > 00:1c.4 PCI bridge: Intel Corporation 6 Series/C200 Series Chipset Family PCI Express Root Port 5 (rev b5)
-> > Kernel driver in use: pcieport
-> > 00:1c.5 PCI bridge: Intel Corporation 6 Series/C200 Series Chipset Family PCI Express Root Port 6 (rev b5)
-> > Kernel driver in use: pcieport
-> > 00:1d.0 USB controller: Intel Corporation 6 Series/C200 Series Chipset Family USB Enhanced Host Controller #1 (rev 05)
-> > Subsystem: Dell Device 04b6
-> > Kernel driver in use: ehci-pci
-> > 00:1f.0 ISA bridge: Intel Corporation HM67 Express Chipset LPC Controller (rev 05)
-> > Subsystem: Dell Device 04b6
-> > Kernel driver in use: lpc_ich
-> > Kernel modules: lpc_ich
-> > 00:1f.2 SATA controller: Intel Corporation 6 Series/C200 Series Chipset Family 6 port Mobile SATA AHCI Controller (rev 05)
-> > Subsystem: Dell Device 04b6
-> > Kernel driver in use: ahci
-> > 00:1f.3 SMBus: Intel Corporation 6 Series/C200 Series Chipset Family SMBus Controller (rev 05)
-> > Subsystem: Dell Device 04b6
-> > Kernel driver in use: i801_smbus
-> > Kernel modules: i2c_i801
-> > 01:00.0 VGA compatible controller: NVIDIA Corporation GF108M [GeForce GT 525M] (rev a1)
-> > Subsystem: Dell Device 04b6
-> > Kernel driver in use: nouveau
-> > Kernel modules: nouveau
-> > 01:00.1 Audio device: NVIDIA Corporation GF108 High Definition Audio Controller (rev a1)
-> > Kernel driver in use: snd_hda_intel
-> > Kernel modules: snd_hda_intel
-> > 03:00.0 Network controller: Intel Corporation Centrino Wireless-N 1030 [Rainbow Peak] (rev 34)
-> > Subsystem: Intel Corporation Centrino Wireless-N 1030 BGN
-> > Kernel driver in use: iwlwifi
-> > Kernel modules: iwlwifi
-> > 04:00.0 USB controller: NEC Corporation uPD720200 USB 3.0 Host Controller (rev 04)
-> > Subsystem: Dell Device 04b6
-> > Kernel driver in use: xhci_hcd
-> > Kernel modules: xhci_pci
-> > 06:00.0 Ethernet controller: Realtek Semiconductor Co., Ltd. RTL8111/8168/8411 PCI Express Gigabit Ethernet Controller (rev 06)
-> > Subsystem: Dell Device 04b6
-> > Kernel driver in use: r8169
-> > Kernel modules: r8169
-> >
-> > Updated Arch system.
-> >
-> > $ uname -a
-> > Linux arch 5.14.14-arch1-1 #1 SMP PREEMPT Wed, 20 Oct 2021 21:35:18 +0000 x86_64 GNU/Linux
-> >
-> > Something I should worry or do about?
-> >
-> > Thanks a lot in advance. Kind regards.
+Hi, thanks for the reply.
+Yes, you assume correctly. Updated Arch system.
 
+--000000000000f8b8f005cfc0e01a
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Monday, November 1, 2021, Karol Herbst &lt;<a href=3D"mailto:kherbst@red=
+hat.com">kherbst@redhat.com</a>&gt; wrote:<br>&gt; On Mon, Nov 1, 2021 at 7=
+:38 PM riveravaldez &lt;<a href=3D"mailto:riveravaldezmail@gmail.com">river=
+avaldezmail@gmail.com</a>&gt; wrote:<br>&gt;&gt;<br>&gt;&gt; Hi, I&#39;m ha=
+ving this error messages at boot:<br>&gt;&gt;<br>&gt;&gt; $ sudo journalctl=
+ -ex -p3 | grep nouveau<br>&gt;&gt; nov 01 14:47:39 arch kernel: nouveau 00=
+00:01:00.0: ce: ucode exceeds falcon limit(s)<br>&gt;&gt; nov 01 14:47:39 a=
+rch kernel: nouveau 0000:01:00.0: ce: init failed, -22<br>&gt; (...)<br>&gt=
+;<br>&gt; I assume you are on the newest kernel and everything?<br><br>Hi, =
+thanks for the reply.<br>Yes, you assume correctly. Updated Arch system.
+
+--000000000000f8b8f005cfc0e01a--
