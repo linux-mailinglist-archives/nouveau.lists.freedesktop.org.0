@@ -1,32 +1,32 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id CDD39442E9A
-	for <lists+nouveau@lfdr.de>; Tue,  2 Nov 2021 13:58:55 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 30FD7442EB2
+	for <lists+nouveau@lfdr.de>; Tue,  2 Nov 2021 14:00:37 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B5EAD6E42D;
-	Tue,  2 Nov 2021 12:58:53 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B34B46FD24;
+	Tue,  2 Nov 2021 13:00:34 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from msg-1.mailo.com (msg-1.mailo.com [213.182.54.11])
- by gabe.freedesktop.org (Postfix) with ESMTPS id EFF786E42D;
- Tue,  2 Nov 2021 12:58:51 +0000 (UTC)
+Received: from msg-4.mailo.com (ip-15.mailobj.net [213.182.54.15])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1DD59890E9;
+ Tue,  2 Nov 2021 13:00:31 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=net-c.es; s=mailo;
- t=1635857790; bh=CxtE17YE8bTxc2OZMsovWXK3+dSK0SB9WZtSH2RbPug=;
+ t=1635858027; bh=KZE5be4kZ78AY9HnD875H39rS7AY7Po+gyBhLbeR+7Q=;
  h=X-EA-Auth:Date:From:To:Cc:Subject:Message-ID:References:
  MIME-Version:Content-Type:In-Reply-To;
- b=aXtmxAY1SH2wPjJvfHmAvgVeCVrMuJ6syrBNDNUerpV/YLeEqhs5miXhGUOqDZG5t
- r7lWYCaq7pBEeKveN4Tu42NfydGmsF5X4KWqaHj++7GbM27PJqfoCESSq5WX5BOVWK
- NNx4WNbtT4n3PE7H+vgLavkHmkcW2dCaKn8zDZ+Y=
+ b=gLPzDJ2Zt52jpaCdwkiNzcp7JRczDHs6DAzPfjQOmpW7xHavFW/ZqF+2X4AT7w0y/
+ 1DCTS+5mmrc0FzHCKnk5vXz3F0cG7Zy1lx+yJ9+2mFtL99bsA2gi8LCN18hRzZEeT6
+ vz6lFJECZyw3qmw9Cna4dfiDWsZBWaTEOcmvpuf0=
 Received: by b-1.in.mailobj.net [192.168.90.11] with ESMTP
  via ip-206.mailobj.net [213.182.55.206]
- Tue,  2 Nov 2021 13:56:30 +0100 (CET)
-X-EA-Auth: YdEHunKGztPDVs0BRuuYltTcf81Ut8uI6tAipFjzxRq1G8jzqA4E913inzbs1+c4T8oxY2G5RSvtViKvlHZ3omj5ufd2PEoZ
-Date: Tue, 2 Nov 2021 13:56:27 +0100
+ Tue,  2 Nov 2021 14:00:27 +0100 (CET)
+X-EA-Auth: kyKYQi70H6EL66+AI7uvNmj5oUg5Z6PG/JpYJTFXfoSMem1EG/HqbLnQ7tSwzwE8WKzJ1Hb3lnp7YzkeWlRV97PALCV7FQLV
+Date: Tue, 2 Nov 2021 14:00:24 +0100
 From: Claudio Suarez <cssk@net-c.es>
 To: Ville =?iso-8859-1?Q?Syrj=E4l=E4?= <ville.syrjala@linux.intel.com>
-Message-ID: <YYE1ezTN/O+4S/vt@gineta.localdomain>
+Message-ID: <YYE2aLJeUSx1lk/J@gineta.localdomain>
 References: <20211016184226.3862-1-cssk@net-c.es>
  <20211016184226.3862-14-cssk@net-c.es> <YW8QYsmkm3ZrBAx3@intel.com>
  <YW9L6d7e+RO29VJu@gineta.localdomain> <YXFwB7rN4bvR0Z+m@intel.com>
@@ -36,7 +36,7 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 In-Reply-To: <YXXbgWNHts9CMJXD@gineta.localdomain>
-Subject: Re: [Nouveau] [PATCH v3 13/13] drm/i915: replace
+Subject: Re: [Nouveau] [PATCH v4 13/13] drm/i915: replace
  drm_detect_hdmi_monitor() with drm_display_info.is_hdmi
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -69,17 +69,64 @@ Cc: heiko@sntech.de, Emma Anholt <emma@anholt.net>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Mon, Oct 25, 2021 at 12:17:37AM +0200, Claudio Suarez wrote:
-[...]
+Commit a92d083d08b0 created the new flag is_hdmi in drm_display_info
+which is set when sink compliant with CEA-861 (EDID) will be treated
+as an HDMI sink.
 
-No new comments about this, I suppose everything is fine.
+From that day, this value can be used in some cases instead of
+calling drm_detect_hdmi_monitor() and a second parse is avoided
+because drm_detect_hdmi_monitor() parses. A TODO task was
+registered in Documentation/gpu/todo.rst to perform that task in
+the future.
 
-I'm going to send the patch with this changes. Thanks to all and
-special thanks to you, Ville. Hope this helps the kernel.
-Don't hesitate to ask new changes if necessary.
+The flag drm_display_info.is_hdmi is set in the function
+drm_add_display_info(), which is called from
+drm_connector_update_edid_property(). Since commit 5186421cbfe2,
+drm_get_edid() calls drm_connector_update_edid_property() when
+reading the edid data from an i2c adapter. Therefore, in these
+cases drm_display_info.is_hdmi is updated to its correct
+value when returning from drm_get_edid().
 
-Best regards
-Claudio Suarez
+Replace drm_detect_hdmi_monitor() with drm_display_info.is_hdmi
+in the cases when drm_detect_hdmi_monitor() is called after a
+read from an i2c adapter using drm_get_edid() in the i915 driver.
+
+Signed-off-by: Claudio Suarez <cssk@net-c.es>
+---
+ drivers/gpu/drm/i915/display/intel_hdmi.c | 2 +-
+ drivers/gpu/drm/i915/display/intel_sdvo.c | 3 ++-
+ 2 files changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/gpu/drm/i915/display/intel_hdmi.c b/drivers/gpu/drm/i915/display/intel_hdmi.c
+index b04685bb6439..008e5b0ba408 100644
+--- a/drivers/gpu/drm/i915/display/intel_hdmi.c
++++ b/drivers/gpu/drm/i915/display/intel_hdmi.c
+@@ -2355,7 +2355,7 @@ intel_hdmi_set_edid(struct drm_connector *connector)
+ 	to_intel_connector(connector)->detect_edid = edid;
+ 	if (edid && edid->input & DRM_EDID_INPUT_DIGITAL) {
+ 		intel_hdmi->has_audio = drm_detect_monitor_audio(edid);
+-		intel_hdmi->has_hdmi_sink = drm_detect_hdmi_monitor(edid);
++		intel_hdmi->has_hdmi_sink = connector->display_info.is_hdmi;
+ 
+ 		connected = true;
+ 	}
+diff --git a/drivers/gpu/drm/i915/display/intel_sdvo.c b/drivers/gpu/drm/i915/display/intel_sdvo.c
+index 6cb27599ea03..b4065e4df644 100644
+--- a/drivers/gpu/drm/i915/display/intel_sdvo.c
++++ b/drivers/gpu/drm/i915/display/intel_sdvo.c
+@@ -2060,8 +2060,9 @@ intel_sdvo_tmds_sink_detect(struct drm_connector *connector)
+ 		if (edid->input & DRM_EDID_INPUT_DIGITAL) {
+ 			status = connector_status_connected;
+ 			if (intel_sdvo_connector->is_hdmi) {
+-				intel_sdvo->has_hdmi_monitor = drm_detect_hdmi_monitor(edid);
+ 				intel_sdvo->has_hdmi_audio = drm_detect_monitor_audio(edid);
++				intel_sdvo->has_hdmi_monitor =
++							    connector->display_info.is_hdmi;
+ 			}
+ 		} else
+ 			status = connector_status_disconnected;
+-- 
+2.33.0
 
 
 
