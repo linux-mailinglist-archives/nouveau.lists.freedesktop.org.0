@@ -1,71 +1,68 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 43E784422E7
-	for <lists+nouveau@lfdr.de>; Mon,  1 Nov 2021 22:49:00 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3D7B8442514
+	for <lists+nouveau@lfdr.de>; Tue,  2 Nov 2021 02:24:48 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 807536E1ED;
-	Mon,  1 Nov 2021 21:48:58 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 002846F546;
+	Tue,  2 Nov 2021 01:24:46 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id F27686E1ED
- for <nouveau@lists.freedesktop.org>; Mon,  1 Nov 2021 21:48:56 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6E7B76F546
+ for <nouveau@lists.freedesktop.org>; Tue,  2 Nov 2021 01:24:44 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1635803335;
+ s=mimecast20190719; t=1635816283;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=DLpDOAGbW+MJRL2f/hYEjotaY2tvvZbWw0vIDSR4zSg=;
- b=iEpx9vyZ45lMql8/eNHyGz2Oso5w/EVzPM683E6HfWtNF4CHQ1w9CIfFf4P+3g2ICD8DZr
- P9qiT7EBSp3+rU48TypFN+36eVbpRpmhzCNRntOGXNs28c+QYkJl8wIGwQqpUeI7qjoB9B
- scVcSRzF8bbu+5zWLXdO/GPeULqDBbQ=
-Received: from mail-lj1-f199.google.com (mail-lj1-f199.google.com
- [209.85.208.199]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-303-38ny6uMjMjGD1KDyKQeYkw-1; Mon, 01 Nov 2021 17:48:53 -0400
-X-MC-Unique: 38ny6uMjMjGD1KDyKQeYkw-1
-Received: by mail-lj1-f199.google.com with SMTP id
- v13-20020a2e2f0d000000b0021126b5cca2so6661769ljv.19
- for <nouveau@lists.freedesktop.org>; Mon, 01 Nov 2021 14:48:53 -0700 (PDT)
+ bh=d+8t+i0Gd3MPbVRCnRNisUB4JNqxi1cUeT9qw48JHr8=;
+ b=Zu1cFLL8sDBLraA9Boll+XeY7+w48s0CZTYIRwV9z8zBFmzlcjk96a8I2O88VpZLkCYzqz
+ gezZQx/shka7wE8waWaiyar0Vxb2OUiobaNm+qTQRuRMBaIvxwMdXk6KwIUzgoylFaDbw5
+ XsZzhoLT3pBMG3Ic67gCmfWYludd/4A=
+Received: from mail-lf1-f69.google.com (mail-lf1-f69.google.com
+ [209.85.167.69]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-439-J8PfHx3HNYmmH7oEyZW4pA-1; Mon, 01 Nov 2021 21:24:40 -0400
+X-MC-Unique: J8PfHx3HNYmmH7oEyZW4pA-1
+Received: by mail-lf1-f69.google.com with SMTP id
+ t62-20020a19c341000000b004000224ab0cso2457660lff.8
+ for <nouveau@lists.freedesktop.org>; Mon, 01 Nov 2021 18:24:40 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=DLpDOAGbW+MJRL2f/hYEjotaY2tvvZbWw0vIDSR4zSg=;
- b=W5X+sIWnJjloqXTbwHD7uxDWKBbrIRulYgUHF2JCRQ4vo2bwwxfAnIHbFDKs2G1GbD
- yvGR87hgBHmCwdQf+OEl0KBmOvrwQeqjNlrvYC0QNVKhJDZrscUsgYTWpTNRwdD21sxy
- KnaLAMJhJpTAsFeyZ4UZcycyYMJE1WxhwSsyo815VTCkuyMk7gRxXsVZlkd2qTIsIAav
- ZDc2SoykmqlEg+htZnmlWJsSBUoW7a2ftLVsmQTEfYdt8RG9bQRyGynRGRdU3hbztZ9L
- V94MhFShujULsNUO9IcknAxfvNwZKxRunJI+4r9qibiMvKC6WfUBJM3nbMf70CmV+s3q
- wFZA==
-X-Gm-Message-State: AOAM530VIhJJdReTBZP5xk+WoWFb941uZWLhNMsfvYIvfvQZU+fXgP43
- RNlerw/L7lDU8wlTZj+Fiq0vckt68CNPdHI43L9qRLvk2ZnkjL3nhNfNV+y8sZwFxsiXTuNHyFe
- 90tY4ngjITaWV18JNlK6WmsWQye4E2G21qM98FXRdZw==
-X-Received: by 2002:a05:6512:3a82:: with SMTP id
- q2mr3807384lfu.17.1635803331967; 
- Mon, 01 Nov 2021 14:48:51 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJyQ7PvI6rm5v1k1gTuTGn9Gx/yJODZbXWzt/ypsRS9f842y8wYsD8gWLellk7GIe0DDmf45Z09wT77a6qm0ci8=
-X-Received: by 2002:a05:6512:3a82:: with SMTP id
- q2mr3807364lfu.17.1635803331661; 
- Mon, 01 Nov 2021 14:48:51 -0700 (PDT)
+ bh=d+8t+i0Gd3MPbVRCnRNisUB4JNqxi1cUeT9qw48JHr8=;
+ b=dIAj76cMKHawy6KYM6f7cdRygBp2Jj04cDiGv2TuG0t/Z8v1JndqZBXGAT1syOFcP3
+ 1uPizvpC6acdvfjDQrCU1jZ0gCfLEWOo963u/3n8Avmv74Ihe5JHa5QxlZLMwGgxbyWr
+ 2vVnZ+VAy325ZrL7EdC5bzyHibqpQG3Tnh8V2WqwUyLRjfVBgCHtw6jImPZBE4hStm08
+ 2pUn8MIjYATSZlSQUcKoJlu6EGu8Ne3j1H4khqVVhVgWJJM09gR5dthk/4rLkD9an1Wp
+ YBYkpC9TZGZDIh6EJr2D+4iXUakOQraQftjOHwKK+7FjB7u6N6EnY1sKAjAPzg0clzL7
+ AFCg==
+X-Gm-Message-State: AOAM530Wc8JEH7DfZnRN0srgSKTeAF9o9h4Ea1eg4ogCiF9jq56LrQed
+ AK9rH6GruiQuRve5wbNpEncxCnpCheFJrTL6hyi7CLt+WIT5DS0/8oQYwuJ30+LL7/qpSCc2WXh
+ hZXMm11gw38KwhdB1USUmV5L+ZrNXpZQ11dH/awgh2g==
+X-Received: by 2002:a05:651c:a0b:: with SMTP id
+ k11mr17275772ljq.446.1635816278986; 
+ Mon, 01 Nov 2021 18:24:38 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJxB5ZiEgtQ7g8ICRneDBtPjtFB4UYgveLq+L7tMK06dL9NNkOZlu5chvQJu7iep6NIIT80MiKz8IKwtdWdqGwg=
+X-Received: by 2002:a05:651c:a0b:: with SMTP id
+ k11mr17275741ljq.446.1635816278690; 
+ Mon, 01 Nov 2021 18:24:38 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAD8U+g_=X07mpM4_EJ_vteqTNdYqH+Ev7ihgea25qJW-3FZ_uw@mail.gmail.com>
- <CACO55tuZwYJKKBfHd5cgEv3_ry+B5fMO=4KCUGhvwyX8=Kq_hQ@mail.gmail.com>
- <CACO55tv3DfrYObTfP7OqzOH6mESXx_KD5HRDtDaikUr0gH3hGg@mail.gmail.com>
- <CAD8U+g8n8DDEKxGg0mNjGwsZ8+0PFyM6PSzzD7ThKvqNowciQw@mail.gmail.com>
-In-Reply-To: <CAD8U+g8n8DDEKxGg0mNjGwsZ8+0PFyM6PSzzD7ThKvqNowciQw@mail.gmail.com>
+References: <4a8b1573-3cd6-19cc-b18b-588d7d8283d9@gmx.net>
+In-Reply-To: <4a8b1573-3cd6-19cc-b18b-588d7d8283d9@gmx.net>
 From: Karol Herbst <kherbst@redhat.com>
-Date: Mon, 1 Nov 2021 22:48:40 +0100
-Message-ID: <CACO55tsNWi=Uv8Wmb54MTVA_jYxhqA6fHqUjhy1S2knF6mq3GQ@mail.gmail.com>
-To: riveravaldez <riveravaldezmail@gmail.com>
+Date: Tue, 2 Nov 2021 02:24:25 +0100
+Message-ID: <CACO55tun0ohXCNV_3o3eZozs7+ehy-Bv0_cxP+uaOMFgwkq_Nw@mail.gmail.com>
+To: "Linux User #330250" <linuxuser330250@gmx.net>
 Authentication-Results: relay.mimecast.com;
  auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=kherbst@redhat.com
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="UTF-8"
-Subject: Re: [Nouveau] Various kernel error messages on updated Arch box
+Subject: Re: [Nouveau] hardware donation
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -81,22 +78,45 @@ Cc: nouveau <nouveau@lists.freedesktop.org>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Mon, Nov 1, 2021 at 10:37 PM riveravaldez <riveravaldezmail@gmail.com> wrote:
+On Tue, Oct 26, 2021 at 9:56 PM Linux User #330250
+<linuxuser330250@gmx.net> wrote:
 >
-> On Monday, November 1, 2021, Karol Herbst <kherbst@redhat.com> wrote:
-> > Actually.. seems like somebody already filed a bug like this:
-> > https://gitlab.freedesktop.org/drm/nouveau/-/issues/91
+> Hello!
 >
-> Should I add my dmesg there?
+> I have a ThinkPad T61 with an Nvidia Quadro G86M [NVS 140M] graphics
+> card. Recently the nvidia binary driver, version 340.x, has been removed
+> from most Linux distributions, forcing the use of nouveau.
+>
+> In the past, when nouveau was unstable/unusable, people moved to the
+> binary driver. Since this in no longer an option, nouveau is now the
+> only option. And I'm totally okay with it, I would have prferred an open
+> source solution anyway... BUT.
+>
+> BUT nouveau is unstable. I experience random freezes, like others too:
+> https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=995866
+>
+> The only option was to use nomodeset and to have an unaccelerated
+> graphics output. But if you want to use the laptop as a desktop machine,
+> this is not much fun.
+>
+> Long story short, the question I have:
+>
+> According to https://nouveau.freedesktop.org/HardwareDonations.html such
+> a graphics card could be of use?
 >
 
-yeah, I think it's still helpful, maybe it looks a bit different for
-you, but once I get a hold on a GPU with this issue I can start
-looking into it. Or somebody else does. The reporter of the issue
-seems to have already done a git bisect, but I am not quite sure how
-the fix needs to look like atm...
+If you are willing to give away the system anyway, it might make sense
+to retest with recent software, like newest Fedora or debian sid. We
+usually fix bugs, but often fixes are not added downstream. And I
+think the issue shown in this bug is actually fixed already as I
+remember seeing something like this and we fixed it.
 
-> > Seems to be more widespread so I will check out if I hit this as well.
+If the issue is still there with a recent kernel (newest 5.14 or even
+5.15) we can look into it.
+
+Thanks
+
+> Thanks,
+> Linux User #330250
 >
-> Great. Thanks a lot again. Let me know if I can help.
 
