@@ -2,69 +2,68 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id BB23B4464D6
-	for <lists+nouveau@lfdr.de>; Fri,  5 Nov 2021 15:25:46 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id BA6B44464D5
+	for <lists+nouveau@lfdr.de>; Fri,  5 Nov 2021 15:25:43 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 22DD46E8E4;
-	Fri,  5 Nov 2021 14:25:40 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id E6FE26E8E2;
+	Fri,  5 Nov 2021 14:25:39 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 56EC76EA37
- for <nouveau@lists.freedesktop.org>; Wed,  3 Nov 2021 13:06:19 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 202176E9BD
+ for <nouveau@lists.freedesktop.org>; Wed,  3 Nov 2021 13:09:11 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1635944778;
+ s=mimecast20190719; t=1635944951;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=QbLN+rLSmR4Lu23oOqZ5Rw/0XzuuN+zYLV6sy53LaJM=;
- b=Z1ECO6FMsh7mueLc0e0JCmXm68IqmsRtlyym4Y0m8sYqMgaJvfpE98OP2azZY7Q/nSVUCW
- IVKTHQ9sm9ZhESS9LZ3suNpkDQp777pAbE5SLFnCU8EMtWkMrwYCKVfAW3LPm+GXUxnibw
- OZMHrGS2RC1ki/KtHgIBCH0A73NYXi0=
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-468-GL8Ny7YgPG-WdZ9yDUjRsA-1; Wed, 03 Nov 2021 09:06:16 -0400
-X-MC-Unique: GL8Ny7YgPG-WdZ9yDUjRsA-1
-Received: by mail-wm1-f72.google.com with SMTP id
- k5-20020a7bc3050000b02901e081f69d80so1028384wmj.8
- for <nouveau@lists.freedesktop.org>; Wed, 03 Nov 2021 06:06:16 -0700 (PDT)
+ bh=iHMsC1oUCRsjBOtz0WOghUbDKMYwj98GGeuEKoCFpno=;
+ b=abgZHe6Tw/GWZ3AK5JIx7HQmcDDmZYd/pczhOUfbDAkL6X6ImtpEQAo1gSgYmyhrRcYRES
+ 8fnCQ+3hhpBznoAzjDyIS35lVn0thYFgt+FMyFpANnBPqgIC7DE6N3G/V7JT7DoB+3qa68
+ FR3CXzAtUi3NybSnUiqPUZ3BNZKJK3s=
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-592-u9oQ0jcaNXSO4s5mx3sFQw-1; Wed, 03 Nov 2021 09:09:10 -0400
+X-MC-Unique: u9oQ0jcaNXSO4s5mx3sFQw-1
+Received: by mail-wm1-f69.google.com with SMTP id
+ j193-20020a1c23ca000000b003306ae8bfb7so1035032wmj.7
+ for <nouveau@lists.freedesktop.org>; Wed, 03 Nov 2021 06:09:09 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
  :content-language:to:cc:references:from:in-reply-to
  :content-transfer-encoding;
- bh=QbLN+rLSmR4Lu23oOqZ5Rw/0XzuuN+zYLV6sy53LaJM=;
- b=r6ED270SslNyPtirdwLwGufkOTWfcUOV2zuaOs2lQgitTeuwGWMeS3OBFFYJXCqq/p
- oWcTtYOTth9jHE7ADu/lfT8B2e7jFiMc0ziLW4O/lnJYmAdXu9ZUEUz1AuJFfOpAcNsN
- ctuEBsjIsxr2pRPwAorVTAaQw2kKv6JCS/SOlBzhskcZFko6YT9qfR5Y5qswHn8pVPuo
- gvXBb2wOQiSCEY6GZfmzawcZizKcMUNbWmEpqKqfXfoZO4yGwotgu4sXmASEVGW5fW5B
- t6NpMUv6zkqgLrf0fMYNJ/Xnj3jQb884z+Lg2yOg69XMBSwCr+toFijzXB92zwiY/3gm
- UYaw==
-X-Gm-Message-State: AOAM5309cS8C7T94KLQtnHzyi71CL0L+vRrVcR1t/ANFrnsksVJ+cAKl
- wzcIe9jXJgPw2I/+zhb0qbMIQJVWsJDGa3U51y/R3/YHSlmfMn0F6/HSlClDEWq9Pxx+80rEN3w
- n8q7tJdYdMadDv6vCedWerWc0cA==
-X-Received: by 2002:a7b:c5d4:: with SMTP id n20mr15125802wmk.32.1635944774995; 
- Wed, 03 Nov 2021 06:06:14 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJxM0hXFNtYadm5yFc+JONq4iTPFyfiO2VjSzzIrHnbt608JviNYEXO0rXhutOI0PtrTAGlysw==
-X-Received: by 2002:a7b:c5d4:: with SMTP id n20mr15125743wmk.32.1635944774765; 
- Wed, 03 Nov 2021 06:06:14 -0700 (PDT)
+ bh=iHMsC1oUCRsjBOtz0WOghUbDKMYwj98GGeuEKoCFpno=;
+ b=W+9w7CElkmq0GseHhC8K9w1GLFVnauVmtCz78TYkvX4VyvznSMkJ6twlIvI0xPcLWU
+ 1SZDmUb8ynPnEH/FrZAT7JO1F5TyTXO2ns84w7XUvEO/5P5zvyFVsTxM2uj2rFoCltKQ
+ Uu0qpABvoe7Ox87iKgndL+a7daojhPLD4TWuVmf1KcY+Eu2Nz1CFQiZYbqjOWRksajqR
+ Y9unpXyzgQ00h2s2yEDRlLXBigKyY9e8GymjnNhufZNMVDmI8kh9u15jGovBdaA1IKdH
+ GAyaJX8Hfa3x3qhkqWmFOX0P5fxr4wfiNbTWKcu7HJLB1L79HMDQzVzbjSBw2Ti3KMtJ
+ Pkwg==
+X-Gm-Message-State: AOAM533nn7WAs7Wv4r+5rSP0wOyE3Mj0pa1oGdEDMYzCnH0q/CKCIAFv
+ QloSq/hfOxbOoC5MWAP2OB0jHIcoVdM64NGAKKskNxWccDdttHxcCKMrYbdxyg6mPzrUy+5ceUV
+ iOQ7rEhnEBoXC5VygN86mmzpm2w==
+X-Received: by 2002:a5d:69ca:: with SMTP id s10mr31884110wrw.312.1635944948941; 
+ Wed, 03 Nov 2021 06:09:08 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJzHrEigoCAeSjtml4DqbOgRDb3rC6POB4cYQ/OE3/fS74/sMET7hHGSgDw+3c9Pc+WnqHoSzQ==
+X-Received: by 2002:a5d:69ca:: with SMTP id s10mr31884038wrw.312.1635944948667; 
+ Wed, 03 Nov 2021 06:09:08 -0700 (PDT)
 Received: from [192.168.1.128] ([92.176.231.106])
- by smtp.gmail.com with ESMTPSA id g2sm1846869wrq.62.2021.11.03.06.06.12
+ by smtp.gmail.com with ESMTPSA id c11sm2186397wmq.27.2021.11.03.06.09.06
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 03 Nov 2021 06:06:14 -0700 (PDT)
-Message-ID: <fc835469-b908-608b-7a1c-d3b7340d7c20@redhat.com>
-Date: Wed, 3 Nov 2021 14:06:11 +0100
+ Wed, 03 Nov 2021 06:09:08 -0700 (PDT)
+Message-ID: <33807d3c-9dd1-241a-ad23-0e0d4fba13e1@redhat.com>
+Date: Wed, 3 Nov 2021 14:09:05 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.2.0
-To: Thomas Zimmermann <tzimmermann@suse.de>, linux-kernel@vger.kernel.org
+To: Jani Nikula <jani.nikula@linux.intel.com>, linux-kernel@vger.kernel.org
 References: <20211103122809.1040754-1-javierm@redhat.com>
- <20211103122809.1040754-3-javierm@redhat.com>
- <a95acef3-8647-9fb0-efa7-9c3a35524052@suse.de>
+ <20211103122809.1040754-3-javierm@redhat.com> <87tugtbdob.fsf@intel.com>
 From: Javier Martinez Canillas <javierm@redhat.com>
-In-Reply-To: <a95acef3-8647-9fb0-efa7-9c3a35524052@suse.de>
+In-Reply-To: <87tugtbdob.fsf@intel.com>
 Authentication-Results: relay.mimecast.com;
  auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=javierm@redhat.com
 X-Mimecast-Spam-Score: 0
@@ -97,7 +96,6 @@ Cc: linux-fbdev@vger.kernel.org, David Airlie <airlied@linux.ie>,
  =?UTF-8?Q?Michel_D=c3=a4nzer?= <michel@daenzer.net>,
  Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
  Maxime Ripard <mripard@kernel.org>, Hans de Goede <hdegoede@redhat.com>,
- Jani Nikula <jani.nikula@linux.intel.com>,
  Rodrigo Vivi <rodrigo.vivi@intel.com>, nouveau@lists.freedesktop.org,
  virtualization@lists.linux-foundation.org,
  Pekka Paalanen <pekka.paalanen@collabora.com>,
@@ -110,77 +108,43 @@ Cc: linux-fbdev@vger.kernel.org, David Airlie <airlied@linux.ie>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hello Thomas,
+Hello Jani,
 
-On 11/3/21 13:41, Thomas Zimmermann wrote:
-> Hi
-> 
-> Am 03.11.21 um 13:28 schrieb Javier Martinez Canillas:
->> The "nomodeset" kernel cmdline parameter is handled by the vgacon driver
->> but the exported vgacon_text_force() symbol is only used by DRM drivers.
->>
->> It makes much more sense for the parameter logic to be in the subsystem
->> of the drivers that are making use of it. Let's move that to DRM.
->>
->> Suggested-by: Daniel Vetter <daniel.vetter@ffwll.ch>
->> Signed-off-by: Javier Martinez Canillas <javierm@redhat.com>
->> ---
->>
->>   drivers/gpu/drm/Makefile                |  2 ++
->>   drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c |  3 +--
->>   drivers/gpu/drm/ast/ast_drv.c           |  1 -
->>   drivers/gpu/drm/drm_nomodeset.c         | 26 +++++++++++++++++++++++++
->>   drivers/gpu/drm/i915/i915_module.c      |  2 --
->>   drivers/gpu/drm/mgag200/mgag200_drv.c   |  1 -
->>   drivers/gpu/drm/nouveau/nouveau_drm.c   |  1 -
->>   drivers/gpu/drm/qxl/qxl_drv.c           |  1 -
->>   drivers/gpu/drm/radeon/radeon_drv.c     |  1 -
->>   drivers/gpu/drm/tiny/bochs.c            |  1 -
->>   drivers/gpu/drm/tiny/cirrus.c           |  1 -
->>   drivers/gpu/drm/vboxvideo/vbox_drv.c    |  1 -
->>   drivers/gpu/drm/virtio/virtgpu_drv.c    |  1 -
->>   drivers/gpu/drm/vmwgfx/vmwgfx_drv.c     |  1 -
->>   drivers/video/console/vgacon.c          | 21 --------------------
->>   include/drm/drm_mode_config.h           |  6 ++++++
->>   include/linux/console.h                 |  6 ------
->>   17 files changed, 35 insertions(+), 41 deletions(-)
->>   create mode 100644 drivers/gpu/drm/drm_nomodeset.c
->>
->> diff --git a/drivers/gpu/drm/Makefile b/drivers/gpu/drm/Makefile
->> index 1c41156deb5f..0e2d60ea93ca 100644
->> --- a/drivers/gpu/drm/Makefile
->> +++ b/drivers/gpu/drm/Makefile
->> @@ -33,6 +33,8 @@ drm-$(CONFIG_DRM_PRIVACY_SCREEN) += drm_privacy_screen.o drm_privacy_screen_x86.
->>   
->>   obj-$(CONFIG_DRM_DP_AUX_BUS) += drm_dp_aux_bus.o
->>   
+On 11/3/21 13:56, Jani Nikula wrote:
+
+[snip]
+
+>>  
 >> +obj-y += drm_nomodeset.o
 > 
-> Repeating my other comment, should this rather be protected by a 
-> separate config symbol that is selected by CONFIG_DRM?
+> This is a subtle functional change. With this, you'll always have
+> __setup("nomodeset", text_mode) builtin and the parameter available. And
+> using nomodeset will print out the pr_warn() splat from text_mode(). But
+> removing nomodeset will have no impact if CONFIG_VGA_CONSOLE=n as that
+> leads to vgacon_text_force() always returning false.
 >
 
-I actually thought about that and my opinion is that obj-y reflects
-what we really want here or do you envision this getting disabled
-in some cases ?
+Yes, that's what I decided at the end to make it unconditional. That
+way the same behaviour is preserved (even when only DRM drivers are
+using the exported symbol).
+ 
+> To not make functional changes, this should be:
+> 
+> obj-$(CONFIG_VGA_CONSOLE) += drm_nomodeset.o
+>
 
-Probably the problem is Kbuild descending into the drivers/gpu dir
-even when CONFIG_DRM is not set. Maybe what we want is something
-like the following instead?
+Right, that should work.
 
-diff --git a/drivers/gpu/Makefile b/drivers/gpu/Makefile
-index 835c88318cec..ef12ee05ba6e 100644
---- a/drivers/gpu/Makefile
-+++ b/drivers/gpu/Makefile
-@@ -3,6 +3,7 @@
- # taken to initialize them in the correct order. Link order is the only way
- # to ensure this currently.
- obj-$(CONFIG_TEGRA_HOST1X)     += host1x/
--obj-y                  += drm/ vga/
-+obj-$(CONFIG_DRM)              += drm/
-+obj-y                          += vga/
- obj-$(CONFIG_IMX_IPUV3_CORE)   += ipu-v3/
- obj-$(CONFIG_TRACE_GPU_MEM)            += trace/
+> Now, going with the cleanup in this series, maybe we should make the
+> functional change, and break the connection to CONFIG_VGA_CONSOLE
+> altogether, also in the header?
+> 
+> (Maybe we'll also need a proxy drm kconfig option to only have
+> drm_modeset.o builtin when CONFIG_DRM != n.)
+>
+
+See my other email. I believe the issue is drivers/gpu/drm always
+being included even when CONFIG_DRM is not set.
 
 Best regards, -- 
 Javier Martinez Canillas
