@@ -2,75 +2,67 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 88185444A37
-	for <lists+nouveau@lfdr.de>; Wed,  3 Nov 2021 22:26:18 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A4724444BAF
+	for <lists+nouveau@lfdr.de>; Thu,  4 Nov 2021 00:33:45 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 499307A455;
-	Wed,  3 Nov 2021 21:26:15 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0EB486E1E9;
+	Wed,  3 Nov 2021 23:33:43 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 24B8F7A454
- for <nouveau@lists.freedesktop.org>; Wed,  3 Nov 2021 21:26:13 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 358596E47A
+ for <nouveau@lists.freedesktop.org>; Wed,  3 Nov 2021 23:33:40 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1635974772;
+ s=mimecast20190719; t=1635982419;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=Znlql06AhhI7EaphpwppCQqpnxjsVHdYSJklJrdqL1M=;
- b=UgVstBDzG83/TybO/9nPQ/MxjO4Id1P789/KSDVLRmHqUW+JrK9VB0MGq19YByifiAg946
- vey3FmFw0qyiTaf4IekHZvzGBGPLhkgZEJFUPkRKZ+kpSzXWdk1C9pvfBN7dUZL3gGCJTL
- +TSNkofyBaSR/l7uZbNvQqVIt+J2qnw=
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-263-8XnpODIwNeC1fmks7scIpA-1; Wed, 03 Nov 2021 17:26:10 -0400
-X-MC-Unique: 8XnpODIwNeC1fmks7scIpA-1
-Received: by mail-wm1-f70.google.com with SMTP id
- 69-20020a1c0148000000b0033214e5b021so1638049wmb.3
- for <nouveau@lists.freedesktop.org>; Wed, 03 Nov 2021 14:26:10 -0700 (PDT)
+ bh=7De9Gqd8CUJxMa+TanGCv6guhL3v1dqZFI8MIBYGLDY=;
+ b=QZLa9KUPT6SfXPVw6lb5F+uVG3VVdROqyeM0YLLB9BdtTbc1X9lS+r3w1OwliC0SbpWq7M
+ yHgAf1/s+HqIHFrgdK9abeU1j/zadmICVfQnqVNaSZhC8foqg44Lx00wfEEkKz5h9B0axm
+ rc5fyOVS5Ss6mRUf2T6dJZGzrHblpSk=
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-263-tFauqqC1MimzIqTvrLErbA-1; Wed, 03 Nov 2021 19:33:37 -0400
+X-MC-Unique: tFauqqC1MimzIqTvrLErbA-1
+Received: by mail-wm1-f72.google.com with SMTP id
+ v18-20020a7bcb52000000b00322fea1d5b7so1786841wmj.9
+ for <nouveau@lists.freedesktop.org>; Wed, 03 Nov 2021 16:33:37 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=Znlql06AhhI7EaphpwppCQqpnxjsVHdYSJklJrdqL1M=;
- b=LdVS03wjjXCyIzXMzM3OHEy8JEenFl+AnWaQ0IEymxV9uY6xRzLl3ovFVnDsmCKyJQ
- F+4yZh3YeE2m05NVm/ELnC66gAUJK1PxKNrwAAyJ5Yx9emfVaQLvd0MCt1wrCx+9NuXP
- mKRLuZnEld/qoUfIjnYloT50f+AvbGDmJWeHzLkSUbdSQW5zLTfQ2zZ57fkxdIGhtnYR
- DrI0K107V7PHr2uGwscP8fXGGM8/Fc5WCx2JEyUOs/Eq1oqf3tCd1/vDiZNV+YE8rWCP
- A+HeienP/gQRYAszVyreyT/Ixk19Pt8v+T+1Rn3MdgyUp0n5UuW6Je0QmaBxEMWs0TJ3
- Rptw==
-X-Gm-Message-State: AOAM530arv18kUXIG0d06ij9hXZ+Cu32nGMLUjGma4eurQr8cMqi77rI
- S9K8X4hTLjRR+ZvKGW7Tpwhlv/yTP/GVGn63HanaDH/xUBWQA5cWW6M+4dwSRO+4jV2+E5lPStc
- UBIxeiUfP0fkKbbymKcte5GyQJyL+nC+SUpc4se3C9Q==
-X-Received: by 2002:a05:6000:2ae:: with SMTP id
- l14mr5061527wry.142.1635974768671; 
- Wed, 03 Nov 2021 14:26:08 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJxwEJRXkYNzDroD2U2ofyOYD+EctMvHrMm2ahndQNqZj0d+LO2dkGqQ/YFDy55GG7GxIjNBx/OX2kxn9iLDPiU=
-X-Received: by 2002:a05:6000:2ae:: with SMTP id
- l14mr5061507wry.142.1635974768434; 
- Wed, 03 Nov 2021 14:26:08 -0700 (PDT)
+ :message-id:subject:to:cc;
+ bh=7De9Gqd8CUJxMa+TanGCv6guhL3v1dqZFI8MIBYGLDY=;
+ b=nHsYDJ7KtypBAceqbWK3Up+aiEdAdeOJx1YymGJvUxWl9JRQj/9wjE4va0wp/sNY+4
+ jo2wcYv1i5eBqPTdweDTflxRQf1awXMztUYcDmB7Kefe4L3o5RXQvqnWxj8g4UwRfUG8
+ t5f14W4OERtmIZSHFb4wHmJrJxTDbfaFCb22rRRhMXefyxAIiWKo5uaUDlGT82f9gYKg
+ 3jBZvTvhqNQAcMXmgUetI9FsEAQg6wok+fRKNlUJBSvMTEaJFeUhk9t4oqwXXx/vJpOV
+ gRil6anLkAsJ/eO2W/LGbEU3COFLgnKzSMixmokvAtdiOf/A3aiKuM6wt/mcj4nOFt1C
+ pD5Q==
+X-Gm-Message-State: AOAM531YPT0Gbyo+0b9zktHHpoU50eccX/rl2HH4oSWt8jzcYGxt0fLf
+ PzJWpqOoUliKz+RZbbguFdlRnT9eukSGDVPLoMc5NUFfsOd37FG4BGTrJQ1lSLh6kDpW/il53mB
+ egbc7HCtlwcfBi5TJrWJ8yCp1WHQqawY72b+Cpht1sQ==
+X-Received: by 2002:adf:eb4b:: with SMTP id u11mr45872362wrn.49.1635982416132; 
+ Wed, 03 Nov 2021 16:33:36 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJzqsfgbnO5nmV+YmqNe0Y1+aMbBesCQYIeQ4yjNTSV5UP0D0DskkCEJQoOGYhf4sRFoTFZSB/+e5dySrD+tg8U=
+X-Received: by 2002:adf:eb4b:: with SMTP id u11mr45872342wrn.49.1635982415901; 
+ Wed, 03 Nov 2021 16:33:35 -0700 (PDT)
 MIME-Version: 1.0
-References: <20211101082511.254155853@linuxfoundation.org>
- <20211101082518.624936309@linuxfoundation.org>
- <871r3x2f0y.fsf@turtle.gmx.de>
- <CACO55tsq6DOZnyCZrg+N3m_hseJfN_6+YhjDyxVBAGq9PFJmGA@mail.gmail.com>
- <CACO55tsQVcUHNWAkWcbJ8i-S5pgKhrin-Nb3JYswcBPDd3Wj4w@mail.gmail.com>
- <87tugt0xx6.fsf@turtle.gmx.de>
-In-Reply-To: <87tugt0xx6.fsf@turtle.gmx.de>
+References: <20211103011057.15344-1-skeggsb@gmail.com>
+ <CACO55tvy5atSW9SJw1E_wmfgn1cZpDiZ2T7VuS35UGXRVdpEaw@mail.gmail.com>
+In-Reply-To: <CACO55tvy5atSW9SJw1E_wmfgn1cZpDiZ2T7VuS35UGXRVdpEaw@mail.gmail.com>
 From: Karol Herbst <kherbst@redhat.com>
-Date: Wed, 3 Nov 2021 22:25:57 +0100
-Message-ID: <CACO55tsNKKTW6X_+Ym0oySX-iNtikyV6rgHGu01Co7_mDWkxhg@mail.gmail.com>
-To: Sven Joachim <svenjoac@gmx.de>
+Date: Thu, 4 Nov 2021 00:33:25 +0100
+Message-ID: <CACO55tvOAvFVhUhtttfBU9wB_2eOQL6rt8f2sKrndHgCLhHEkA@mail.gmail.com>
+To: Ben Skeggs <skeggsb@gmail.com>
 Authentication-Results: relay.mimecast.com;
  auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=kherbst@redhat.com
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [Nouveau] [PATCH 5.10 32/77] drm/ttm: fix memleak in
- ttm_transfered_destroy
+Subject: Re: [Nouveau] [PATCH] ce/gf100: fix incorrect CE0 address
+ calculation on some GPUs
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -82,91 +74,74 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: "Erhard F." <erhard_f@mailbox.org>, nouveau <nouveau@lists.freedesktop.org>,
- LKML <linux-kernel@vger.kernel.org>, stable@vger.kernel.org,
- Huang Rui <ray.huang@amd.com>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
+Cc: nouveau <nouveau@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>,
+ stable@vger.kernel.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, Nov 3, 2021 at 9:47 PM Sven Joachim <svenjoac@gmx.de> wrote:
+On Wed, Nov 3, 2021 at 8:51 AM Karol Herbst <kherbst@redhat.com> wrote:
 >
-> On 2021-11-03 21:32 +0100, Karol Herbst wrote:
->
-> > On Wed, Nov 3, 2021 at 9:29 PM Karol Herbst <kherbst@redhat.com> wrote:
-> >>
-> >> On Wed, Nov 3, 2021 at 8:52 PM Sven Joachim <svenjoac@gmx.de> wrote:
-> >> >
-> >> > On 2021-11-01 10:17 +0100, Greg Kroah-Hartman wrote:
-> >> >
-> >> > > From: Christian K=C3=B6nig <christian.koenig@amd.com>
-> >> > >
-> >> > > commit 0db55f9a1bafbe3dac750ea669de9134922389b5 upstream.
-> >> > >
-> >> > > We need to cleanup the fences for ghost objects as well.
-> >> > >
-> >> > > Signed-off-by: Christian K=C3=B6nig <christian.koenig@amd.com>
-> >> > > Reported-by: Erhard F. <erhard_f@mailbox.org>
-> >> > > Tested-by: Erhard F. <erhard_f@mailbox.org>
-> >> > > Reviewed-by: Huang Rui <ray.huang@amd.com>
-> >> > > Bug: https://bugzilla.kernel.org/show_bug.cgi?id=3D214029
-> >> > > Bug: https://bugzilla.kernel.org/show_bug.cgi?id=3D214447
-> >> > > CC: <stable@vger.kernel.org>
-> >> > > Link: https://patchwork.freedesktop.org/patch/msgid/20211020173211=
-.2247-1-christian.koenig@amd.com
-> >> > > Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-> >> > > ---
-> >> > >  drivers/gpu/drm/ttm/ttm_bo_util.c |    1 +
-> >> > >  1 file changed, 1 insertion(+)
-> >> > >
-> >> > > --- a/drivers/gpu/drm/ttm/ttm_bo_util.c
-> >> > > +++ b/drivers/gpu/drm/ttm/ttm_bo_util.c
-> >> > > @@ -322,6 +322,7 @@ static void ttm_transfered_destroy(struc
-> >> > >       struct ttm_transfer_obj *fbo;
-> >> > >
-> >> > >       fbo =3D container_of(bo, struct ttm_transfer_obj, base);
-> >> > > +     dma_resv_fini(&fbo->base.base._resv);
-> >> > >       ttm_bo_put(fbo->bo);
-> >> > >       kfree(fbo);
-> >> > >  }
-> >> >
-> >> > Alas, this innocuous looking commit causes one of my systems to lock=
- up
-> >> > as soon as run startx.  This happens with the nouveau driver, two ot=
-her
-> >> > systems with radeon and intel graphics are not affected.  Also I onl=
-y
-> >> > noticed it in 5.10.77.  Kernels 5.15 and 5.14.16 are not affected, a=
-nd I
-> >> > do not use 5.4 anymore.
-> >> >
-> >> > I am not familiar with nouveau's ttm management and what has changed
-> >> > there between 5.10 and 5.14, but maybe one of their developers can s=
-hed
-> >> > a light on this.
-> >> >
-> >> > Cheers,
-> >> >        Sven
-> >> >
-> >>
-> >> could be related to 265ec0dd1a0d18f4114f62c0d4a794bb4e729bc1
+> On Wed, Nov 3, 2021 at 2:11 AM Ben Skeggs <skeggsb@gmail.com> wrote:
 > >
-> > maybe not.. but I did remember there being a few tmm related patches
-> > which only hurt nouveau :/  I guess one could do a git bisect to
-> > figure out what change "fixes" it.
+> > From: Ben Skeggs <bskeggs@redhat.com>
+> >
+> > The code which constructs the modules for each engine present on the GPU
+> > passes -1 for 'instance' on non-instanced engines, which affects how the
+> > name for a sub-device is generated.  This is then stored as 'instance 0'
+> > in nvkm_subdev.inst, so code can potentially be shared with earlier GPUs
+> > that only had a single instance of an engine.
+> >
+> > However, GF100's CE constructor uses this value to calculate the address
+> > of its falcon before it's translated, resulting in CE0 getting the wrong
+> > address.
+> >
+> > This slightly modifies the approach, always passing a valid instance for
+> > engines that *can* have multiple copies, and having the code for earlier
+> > GPUs explicitly ask for non-instanced name generation.
+> >
+> > Bug: https://gitlab.freedesktop.org/drm/nouveau/-/issues/91
+> >
+> > Fixes: 50551b15c760 ("drm/nouveau/ce: switch to instanced constructor")
+> > Cc: <stable@vger.kernel.org> # v5.12+
+> > Signed-off-by: Ben Skeggs <bskeggs@redhat.com>
+> > ---
+> >  drivers/gpu/drm/nouveau/nvkm/engine/ce/gt215.c    | 2 +-
+> >  drivers/gpu/drm/nouveau/nvkm/engine/device/base.c | 3 +--
+> >  2 files changed, 2 insertions(+), 3 deletions(-)
+> >
+> > diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/ce/gt215.c b/drivers/gpu/drm/nouveau/nvkm/engine/ce/gt215.c
+> > index 704df0f2d1f1..09a112af2f89 100644
+> > --- a/drivers/gpu/drm/nouveau/nvkm/engine/ce/gt215.c
+> > +++ b/drivers/gpu/drm/nouveau/nvkm/engine/ce/gt215.c
+> > @@ -78,6 +78,6 @@ int
+> >  gt215_ce_new(struct nvkm_device *device, enum nvkm_subdev_type type, int inst,
+> >              struct nvkm_engine **pengine)
+> >  {
+> > -       return nvkm_falcon_new_(&gt215_ce, device, type, inst,
+> > +       return nvkm_falcon_new_(&gt215_ce, device, type, -1,
+> >                                 (device->chipset != 0xaf), 0x104000, pengine);
+> >  }
+> > diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/device/base.c b/drivers/gpu/drm/nouveau/nvkm/engine/device/base.c
+> > index ca75c5f6ecaf..b51d690f375f 100644
+> > --- a/drivers/gpu/drm/nouveau/nvkm/engine/device/base.c
+> > +++ b/drivers/gpu/drm/nouveau/nvkm/engine/device/base.c
+> > @@ -3147,8 +3147,7 @@ nvkm_device_ctor(const struct nvkm_device_func *func,
+> >         WARN_ON(device->chip->ptr.inst & ~((1 << ARRAY_SIZE(device->ptr)) - 1));             \
+> >         for (j = 0; device->chip->ptr.inst && j < ARRAY_SIZE(device->ptr); j++) {            \
+> >                 if ((device->chip->ptr.inst & BIT(j)) && (subdev_mask & BIT_ULL(type))) {    \
+> > -                       int inst = (device->chip->ptr.inst == 1) ? -1 : (j);                 \
+> > -                       ret = device->chip->ptr.ctor(device, (type), inst, &device->ptr[j]); \
+> > +                       ret = device->chip->ptr.ctor(device, (type), (j), &device->ptr[j]);  \
+> >                         subdev = nvkm_device_subdev(device, (type), (j));                    \
+> >                         if (ret) {                                                           \
+> >                                 nvkm_subdev_del(&subdev);                                    \
+> > --
+> > 2.31.1
+> >
 >
-> Maybe, but since the memory leaks reported by Erhard only started to
-> show up in 5.14 (if I read the bugzilla reports correctly), perhaps the
-> patch should simply be reverted on earlier kernels?
->
+> Reviewed-by: Karol Herbst <kherbst@redhat.com>
 
-Yeah, I think this is probably the right approach.
+Tested that on a GF108, so
 
-> > On which GPU do you see this problem?
->
-> On an old GeForce 8500 GT, the whole PC is rather ancient.
->
-> Cheers,
->        Sven
->
+Tested-by: Karol Herbst <kherbst@redhat.com>
 
