@@ -1,69 +1,72 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D440D4463B6
-	for <lists+nouveau@lfdr.de>; Fri,  5 Nov 2021 14:00:33 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5AD624464E3
+	for <lists+nouveau@lfdr.de>; Fri,  5 Nov 2021 15:26:01 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9E96B6E24D;
-	Fri,  5 Nov 2021 13:00:27 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B2E7A6E928;
+	Fri,  5 Nov 2021 14:25:44 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
- by gabe.freedesktop.org (Postfix) with ESMTPS id DE9286E1A3;
- Fri,  5 Nov 2021 13:00:25 +0000 (UTC)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 3B7DA1FD37;
- Fri,  5 Nov 2021 13:00:24 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1636117224; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=tjnWxrfIUbkoahv7XQ0mkb34rkKEwu9iva4UCkL/Uzg=;
- b=bPiprZL7ZmOGy19QX38+b3CTSqukbvtVs7Vm/0Nri2gFsnOe7o3J1Fm5G0ZxkoWXWnUTWg
- IhzcWTycRQuQUd0P6DORk4mL9rUqPZrEplLxKBsgiGVNco+WljjyXrf0iUoA9YvZ9fDFrY
- iS7hYeOotlWPV9Ci6pdRs3fSdRO/QPY=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1636117224;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=tjnWxrfIUbkoahv7XQ0mkb34rkKEwu9iva4UCkL/Uzg=;
- b=IfMsFqCr6sUCPSpglCxZkkSTgHKZvB1Ud/VZGbn0cgD9RbqCNc+1ibpn5U3rQtcn3n2apN
- z++YZEXDZCUBU+Dw==
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id AEE0914004;
- Fri,  5 Nov 2021 13:00:23 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id 6AK1KecqhWF4WAAAMHmgww
- (envelope-from <tzimmermann@suse.de>); Fri, 05 Nov 2021 13:00:23 +0000
-Message-ID: <7de8c495-7e01-98f9-71c7-9168d51733c3@suse.de>
-Date: Fri, 5 Nov 2021 14:00:23 +0100
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5BAB372E8E
+ for <nouveau@lists.freedesktop.org>; Wed,  3 Nov 2021 12:30:03 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1635942602;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=lDu7V2UPes5WjN4f5IhHpRndmxXdgV1k4QHUorLyZaY=;
+ b=U8G1tNx2ZCjcYi+nyTuMBoCOei8IPPHoYSRhy1G2cXh8+seAFQz4v9psJaLPMd1ZR71NYQ
+ Ya6Ngb2JsaIAWJ0XWue8YycYHeQbxs2vPiiq0Cmzn/rhgmOfgsXiz4log+fZX5Dpl6X1k7
+ I0+Fk7/pYzssUEX09+6JPCln0Q4rds0=
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-83-SIWbrBMvP3eNTeFR21dr6w-1; Wed, 03 Nov 2021 08:28:28 -0400
+X-MC-Unique: SIWbrBMvP3eNTeFR21dr6w-1
+Received: by mail-wm1-f72.google.com with SMTP id
+ o22-20020a1c7516000000b0030d6f9c7f5fso1005907wmc.1
+ for <nouveau@lists.freedesktop.org>; Wed, 03 Nov 2021 05:28:28 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=lDu7V2UPes5WjN4f5IhHpRndmxXdgV1k4QHUorLyZaY=;
+ b=Zi5wrCpBIvRXeMJfh2Mo76iTIntZDgGsQmHhy9b54Uri/IFZSiLC2DnNM9BgNuUOET
+ EwS9/E9i1dCOkuoB/CY59BIJzYaXZ3zwYCfAiL+MlwfiirmIkKMz7rWDydMZK7sRGwUC
+ E+TxLVCNwidULqV8+8BQ7QunqxHcgvAXjAuo7eJoIQ+LTv5kUhXVllSMmFp3ghS8kpWz
+ aX8vXKC6rDVgZsH6KAmfptw5Mm05UqzalXMpwB2HpjnuDVtVJurIg/9kbsMkWjVruca6
+ 3pjsloA1TPF2yKXElikkRe64E7WJV5qy02ZCe1d6+Obxtf1zIMvAcL2pbnxIxAjyUfDn
+ s5zA==
+X-Gm-Message-State: AOAM533pY28wEzGvrayozd31ck+B+OAeOGsg7VLkmycTwaVv36CCuTMA
+ gh4V+Mc6xKFxYX/O8TzXTRNmxvceXIv3DG6Hid4wyXRyHopR3SXuNsqu4cb+FbCIi1xtGA0Cvfx
+ SwjyHA6ImqqVosrHNHAhxy6CNaQ==
+X-Received: by 2002:adf:a78a:: with SMTP id j10mr56180973wrc.231.1635942507380; 
+ Wed, 03 Nov 2021 05:28:27 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJxoKFRYs4+FwUh+L5HYY422zuSq9cxsugE+p23YKU/J7QO0nbcMQx6cOjsOctL5eIXzrrPWjA==
+X-Received: by 2002:adf:a78a:: with SMTP id j10mr56180921wrc.231.1635942507148; 
+ Wed, 03 Nov 2021 05:28:27 -0700 (PDT)
+Received: from minerva.home ([92.176.231.106])
+ by smtp.gmail.com with ESMTPSA id w7sm1868400wru.51.2021.11.03.05.28.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 03 Nov 2021 05:28:26 -0700 (PDT)
+From: Javier Martinez Canillas <javierm@redhat.com>
+To: linux-kernel@vger.kernel.org
+Date: Wed,  3 Nov 2021 13:28:04 +0100
+Message-Id: <20211103122809.1040754-1-javierm@redhat.com>
+X-Mailer: git-send-email 2.33.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.1
-Content-Language: en-US
-To: Javier Martinez Canillas <javierm@redhat.com>,
- Jani Nikula <jani.nikula@linux.intel.com>, linux-kernel@vger.kernel.org
-References: <20211104160707.1407052-1-javierm@redhat.com>
- <20211104160707.1407052-2-javierm@redhat.com> <87ilx7ae3v.fsf@intel.com>
- <0c07f121-42d3-9f37-1e14-842fb685b501@redhat.com>
- <d4a64906-69e5-3250-2362-79f2afac0a23@suse.de>
- <38dbcc8f-2f95-6846-537f-9b85468bfa87@redhat.com> <877ddmapfj.fsf@intel.com>
- <335a9e0f-cce9-480b-10e0-bd312b81e587@redhat.com>
-From: Thomas Zimmermann <tzimmermann@suse.de>
-In-Reply-To: <335a9e0f-cce9-480b-10e0-bd312b81e587@redhat.com>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------amYHNBfM0Vfmgj2bbPw0MP1t"
-Subject: Re: [Nouveau] [PATCH v2 1/2] drm: Add a drm_drv_enabled() to check
- if drivers should be enabled
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=javierm@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Fri, 05 Nov 2021 14:25:38 +0000
+Subject: [Nouveau] [RESEND PATCH 0/5] Cleanups for the nomodeset kernel
+ command line parameter logic
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -75,107 +78,101 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Gerd Hoffmann <kraxel@redhat.com>,
- Pekka Paalanen <pekka.paalanen@collabora.com>,
- Dave Airlie <airlied@redhat.com>, David Airlie <airlied@linux.ie>,
- intel-gfx@lists.freedesktop.org, "Pan, Xinhui" <Xinhui.Pan@amd.com>,
- Alex Deucher <alexander.deucher@amd.com>, dri-devel@lists.freedesktop.org,
- Gurchetan Singh <gurchetansingh@chromium.org>,
- =?UTF-8?Q?Michel_D=c3=a4nzer?= <michel@daenzer.net>,
- Hans de Goede <hdegoede@redhat.com>,
+Cc: linux-fbdev@vger.kernel.org, David Airlie <airlied@linux.ie>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ dri-devel@lists.freedesktop.org, Gurchetan Singh <gurchetansingh@chromium.org>,
+ Gerd Hoffmann <kraxel@redhat.com>,
+ Javier Martinez Canillas <javierm@redhat.com>, amd-gfx@lists.freedesktop.org,
  VMware Graphics <linux-graphics-maintainer@vmware.com>,
- amd-gfx@lists.freedesktop.org, Rodrigo Vivi <rodrigo.vivi@intel.com>,
- nouveau@lists.freedesktop.org, spice-devel@lists.freedesktop.org,
+ Peter Robinson <pbrobinson@gmail.com>, Neal Gompa <ngompa13@gmail.com>,
+ Dave Airlie <airlied@redhat.com>, Chia-I Wu <olvaffe@gmail.com>,
+ Ben Skeggs <bskeggs@redhat.com>,
+ =?UTF-8?q?Michel=20D=C3=A4nzer?= <michel@daenzer.net>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Hans de Goede <hdegoede@redhat.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>, nouveau@lists.freedesktop.org,
  virtualization@lists.linux-foundation.org,
- =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
- Peter Robinson <pbrobinson@gmail.com>, Ben Skeggs <bskeggs@redhat.com>
+ Pekka Paalanen <pekka.paalanen@collabora.com>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>, "Pan,
+ Xinhui" <Xinhui.Pan@amd.com>, spice-devel@lists.freedesktop.org,
+ Daniel Vetter <daniel@ffwll.ch>, Alex Deucher <alexander.deucher@amd.com>,
+ intel-gfx@lists.freedesktop.org,
+ =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
+ Zack Rusin <zackr@vmware.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------amYHNBfM0Vfmgj2bbPw0MP1t
-Content-Type: multipart/mixed; boundary="------------NVDuFp0u3pp2xWcJiJ7yN6Es";
- protected-headers="v1"
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: Javier Martinez Canillas <javierm@redhat.com>,
- Jani Nikula <jani.nikula@linux.intel.com>, linux-kernel@vger.kernel.org
-Cc: "Pan, Xinhui" <Xinhui.Pan@amd.com>,
- Pekka Paalanen <pekka.paalanen@collabora.com>,
- Hans de Goede <hdegoede@redhat.com>, David Airlie <airlied@linux.ie>,
- Daniel Vetter <daniel.vetter@ffwll.ch>, dri-devel@lists.freedesktop.org,
- Rodrigo Vivi <rodrigo.vivi@intel.com>, amd-gfx@lists.freedesktop.org,
- Gurchetan Singh <gurchetansingh@chromium.org>,
- Ben Skeggs <bskeggs@redhat.com>,
- VMware Graphics <linux-graphics-maintainer@vmware.com>,
- Gerd Hoffmann <kraxel@redhat.com>, spice-devel@lists.freedesktop.org,
- nouveau@lists.freedesktop.org, Alex Deucher <alexander.deucher@amd.com>,
- Dave Airlie <airlied@redhat.com>, =?UTF-8?Q?Christian_K=c3=b6nig?=
- <christian.koenig@amd.com>, virtualization@lists.linux-foundation.org,
- intel-gfx@lists.freedesktop.org, =?UTF-8?Q?Michel_D=c3=a4nzer?=
- <michel@daenzer.net>, Peter Robinson <pbrobinson@gmail.com>
-Message-ID: <7de8c495-7e01-98f9-71c7-9168d51733c3@suse.de>
-Subject: Re: [PATCH v2 1/2] drm: Add a drm_drv_enabled() to check if drivers
- should be enabled
-References: <20211104160707.1407052-1-javierm@redhat.com>
- <20211104160707.1407052-2-javierm@redhat.com> <87ilx7ae3v.fsf@intel.com>
- <0c07f121-42d3-9f37-1e14-842fb685b501@redhat.com>
- <d4a64906-69e5-3250-2362-79f2afac0a23@suse.de>
- <38dbcc8f-2f95-6846-537f-9b85468bfa87@redhat.com> <877ddmapfj.fsf@intel.com>
- <335a9e0f-cce9-480b-10e0-bd312b81e587@redhat.com>
-In-Reply-To: <335a9e0f-cce9-480b-10e0-bd312b81e587@redhat.com>
+[ resend with all relevant people as Cc now, sorry to others for the spam ]
 
---------------NVDuFp0u3pp2xWcJiJ7yN6Es
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+There is a lot of historical baggage on this parameter. It's defined in
+the vgacon driver as a "nomodeset" parameter, but it's handler function is
+called text_mode() that sets a variable named vgacon_text_mode_force whose
+value is queried with a function named vgacon_text_force().
 
-SGkNCg0KQW0gMDUuMTEuMjEgdW0gMTM6MDAgc2NocmllYiBKYXZpZXIgTWFydGluZXogQ2Fu
-aWxsYXM6DQo+IE9uIDExLzUvMjEgMTE6MDQsIEphbmkgTmlrdWxhIHdyb3RlOg0KPj4gT24g
-RnJpLCAwNSBOb3YgMjAyMSwgSmF2aWVyIE1hcnRpbmV6IENhbmlsbGFzIDxqYXZpZXJtQHJl
-ZGhhdC5jb20+IHdyb3RlOg0KPiANCj4gW3NuaXBdDQo+IA0KPj4+DQo+Pj4gRG8geW91IGVu
-dmlzaW9uIG90aGVyIGNvbmRpdGlvbiB0aGF0IGNvdWxkIGJlIGFkZGVkIGxhdGVyIHRvIGRp
-c2FibGUgYQ0KPj4+IERSTSBkcml2ZXIgPyBPciBkbyB5b3UgdGhpbmsgdGhhdCBqdXN0IGZy
-b20gYSBjb2RlIHJlYWRhYmlsaXR5IHBvaW50IG9mDQo+Pj4gdmlldyBtYWtlcyB3b3J0aCBp
-dCA/DQo+Pg0KPj4gVGFraW5nIGEgc3RlcCBiYWNrIGZvciBwZXJzcGVjdGl2ZS4NCj4+DQo+
-PiBJIHRoaW5rIHRoZXJlJ3MgYnJvYWQgY29uc2Vuc3VzIGluIG1vdmluZyB0aGUgcGFyYW1l
-dGVyIHRvIGRybSwgbmFtaW5nDQo+PiB0aGUgY2hlY2sgZnVuY3Rpb24gdG8gZHJtX3NvbWV0
-aGluZ19zb21ldGhpbmcoKSwgYW5kIGJyZWFraW5nIHRoZSB0aWVzDQo+PiB0byBDT05GSUdf
-VkdBX0NPTlNPTEUuIEkgYXBwcmVjaWF0ZSB0aGUgd29yayB5b3UncmUgZG9pbmcgdG8gdGhh
-dA0KPj4gZWZmZWN0Lg0KPj4NCj4gDQo+IFRoYW5rcywgSSBhcHByZWNpYXRlIHlvdXIgZmVl
-ZGJhY2sgYW5kIGNvbW1lbnRzLg0KPiAgIA0KPj4gSSB0aGluayBldmVyeXRoaW5nIGJleW9u
-ZCB0aGF0IGlzIHN0aWxsIGEgYml0IHZhZ3VlIGFuZC9vcg0KPj4gY29udGVudGlvdXMuIFNv
-IGhvdyBhYm91dCBtYWtpbmcgdGhlIGZpcnN0IDItMyBwYXRjaGVzIGp1c3QgdGhhdD8NCj4+
-IFNvbWV0aGluZyB3ZSBjYW4gYWxsIGFncmVlIG9uLCBtYWtlcyBnb29kIHByb2dyZXNzLCBp
-bXByb3ZlcyB0aGUga2VybmVsLA0KPj4gYW5kIGdpdmVzIHVzIHNvbWV0aGluZyB0byBidWls
-ZCBvbj8NCj4+DQo+IA0KPiBUaGF0IHdvcmtzIGZvciBtZS4gVGhvbWFzLCBkbyB5b3UgYWdy
-ZWUgd2l0aCB0aGF0IGFwcHJvYWNoID8NCg0KU3VyZS4gSSB0aGluayB0aGF0J3MgbW9yZSBv
-ciBsZXNzIHdoYXQgSSBwcm9wb3NlZCBpbiBteSByZXBseSB0byB0aGF0IG1haWwuDQoNCkJl
-c3QgcmVnYXJkcw0KVGhvbWFzDQoNCj4gICANCj4gQmVzdCByZWdhcmRzLA0KPiANCg0KLS0g
-DQpUaG9tYXMgWmltbWVybWFubg0KR3JhcGhpY3MgRHJpdmVyIERldmVsb3Blcg0KU1VTRSBT
-b2Z0d2FyZSBTb2x1dGlvbnMgR2VybWFueSBHbWJIDQpNYXhmZWxkc3RyLiA1LCA5MDQwOSBO
-w7xybmJlcmcsIEdlcm1hbnkNCihIUkIgMzY4MDksIEFHIE7DvHJuYmVyZykNCkdlc2Now6Rm
-dHNmw7xocmVyOiBJdm8gVG90ZXYNCg==
+All this implies that it's about forcing text mode for VGA, yet it is not
+used in neither vgacon nor other console driver. The only users for these
+are DRM drivers, that check for the vgacon_text_force() return value to
+determine whether the driver could be loaded or not.
 
---------------NVDuFp0u3pp2xWcJiJ7yN6Es--
+That makes it quite confusing to read the code, because the variables and
+function names don't reflect what they actually do and also are not in the
+same subsystem as the drivers that make use of them.
 
---------------amYHNBfM0Vfmgj2bbPw0MP1t
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature"
+This patch-set attempts to cleanup the code by moving the nomodseset param
+to the DRM subsystem and do some renaming to make their intention clearer.
 
------BEGIN PGP SIGNATURE-----
+There is also another aspect that could be improved, and is the fact that
+drivers are checking for the nomodeset being set as an indication if have
+to be loaded.
 
-wsF5BAABCAAjFiEExndm/fpuMUdwYFFolh/E3EQov+AFAmGFKucFAwAAAAAACgkQlh/E3EQov+D0
-uhAA0c8ZNQjbRr9n35QT+n1kfE+lZxXxUOp1XdNRH0W7s0yH8txdHGLC53BqYEf4ZZ6cM8gKXu3X
-KRnWqhQ88nbFRkEuoC0oHXbzl4er1Y5Fnu/4HsxVBLHTNqAEIFnaN/K0xc2WFRFju9IvyQtiVkq4
-gW327uTSQVJ8Fuhy9Ry5Uf4+qSGFhYtb0+W0WvQvejYpyZT7BaXiQdxIk5avSLFF6imFGdS5RRgA
-rUUE0xCBday57ZrDMviBfayQybH0ErVyKDE21EgFmSp7ny2I+Ra5XNkKjPrn0BR+SCGmlV8bKfeC
-WfUJCOhiDPC2Z2sPnDGoh5ItyCaEO4NtCpTRAh+yoS8BdpTLyTd3wp1NqdA9jc9xPRAAE5ghfbkQ
-Z4OvLJYlezxwzTR/FC5gPL1YJQsEolhVW4iOGGspCWx1VzJAkY6PQV47s8GHuH/f/oedcuyDQzNn
-GJbk9ZPNuJfw09KGl0BtpAVALVV0xYsnkxUr8RFW8qsJv5RJfZHwLwWrS/+3un8UEsgjL91bXJ8q
-zyCTj79SFduvJyIHyihlZFa5NWPwsY+qSb0yic9968LvKlY7OI1JnLZ5/UokVtbXPizSFJGS1tsz
-sFk1ZB+FP63bCOxw+wgoOij6E486p90t9BMHSI0V/RMjT6eqG1/nbyDPqGXZNg95xodHrqH/dS5+
-tlA=
-=R/av
------END PGP SIGNATURE-----
+But there may be other reasons why this could be the case, so it is better
+to encapsulate the logic in a separate function to make clear what's about.
 
---------------amYHNBfM0Vfmgj2bbPw0MP1t--
+Patch #1 is just a trivial fix for a comment that isn't referring to the
+correct kernel parameter.
+
+Patch #2 moves the nomodeset logic to the DRM subsystem.
+
+Patch #3 renames the vgacon_text_force() function and accompaning logic as
+drm_modeset_disabled(), which is what this function is really about.
+
+Patch #4 adds a drm_drv_enabled() function that could be used by drivers
+to check if could be enabled.
+
+Patch #5 uses the drm_drv_enabled() function to check this instead of just
+checking if nomodeset has been set.
+
+
+Javier Martinez Canillas (5):
+  drm/i915: Fix comment about modeset parameters
+  drm: Move nomodeset kernel parameter handler to the DRM subsystem
+  drm: Rename vgacon_text_force() function to drm_modeset_disabled()
+  drm: Add a drm_drv_enabled() helper function
+  drm: Use drm_drv_enabled() instead of drm_modeset_disabled()
+
+ drivers/gpu/drm/Makefile                |  2 ++
+ drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c |  5 ++---
+ drivers/gpu/drm/ast/ast_drv.c           |  3 +--
+ drivers/gpu/drm/drm_drv.c               | 21 ++++++++++++++++++++
+ drivers/gpu/drm/drm_nomodeset.c         | 26 +++++++++++++++++++++++++
+ drivers/gpu/drm/i915/i915_module.c      | 10 +++++-----
+ drivers/gpu/drm/mgag200/mgag200_drv.c   |  3 +--
+ drivers/gpu/drm/nouveau/nouveau_drm.c   |  3 +--
+ drivers/gpu/drm/qxl/qxl_drv.c           |  3 +--
+ drivers/gpu/drm/radeon/radeon_drv.c     |  3 +--
+ drivers/gpu/drm/tiny/bochs.c            |  3 +--
+ drivers/gpu/drm/tiny/cirrus.c           |  3 +--
+ drivers/gpu/drm/vboxvideo/vbox_drv.c    |  5 +----
+ drivers/gpu/drm/virtio/virtgpu_drv.c    |  3 +--
+ drivers/gpu/drm/vmwgfx/vmwgfx_drv.c     |  3 +--
+ drivers/video/console/vgacon.c          | 21 --------------------
+ include/drm/drm_drv.h                   |  1 +
+ include/drm/drm_mode_config.h           |  6 ++++++
+ include/linux/console.h                 |  6 ------
+ 19 files changed, 73 insertions(+), 57 deletions(-)
+ create mode 100644 drivers/gpu/drm/drm_nomodeset.c
+
+-- 
+2.33.1
+
