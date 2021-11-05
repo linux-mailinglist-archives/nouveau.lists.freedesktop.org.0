@@ -1,56 +1,55 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 86D6A4465AA
-	for <lists+nouveau@lfdr.de>; Fri,  5 Nov 2021 16:25:52 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 62D29446864
+	for <lists+nouveau@lfdr.de>; Fri,  5 Nov 2021 19:34:07 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 596B06E857;
-	Fri,  5 Nov 2021 15:25:50 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 801B36E41A;
+	Fri,  5 Nov 2021 18:34:03 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-qt1-x832.google.com (mail-qt1-x832.google.com
- [IPv6:2607:f8b0:4864:20::832])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 46AEE6E857
- for <nouveau@lists.freedesktop.org>; Fri,  5 Nov 2021 15:25:49 +0000 (UTC)
-Received: by mail-qt1-x832.google.com with SMTP id w9so2366740qtk.13
- for <nouveau@lists.freedesktop.org>; Fri, 05 Nov 2021 08:25:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=3nSFPzWX2bnFLYSqaf/wsVIjfFPRjPaRYR+oVy9/HBU=;
- b=GQODHuq7B6J0OY7vkZg786yoE9k6bxTXVztumjAb91RskWidLfQurG0h7OYbclbCuW
- dpok6uQSRk8XfYNLHzqrvVtxCYfLK7IRj9FtmdOjmND0+jwyHgk0KOm+GNb8HXsNhkO2
- 8tcI6xWogv3nAIN848sycp1Lj6f1sjhoiAorGX0DMfCaUDFgZicNuCyL2N82498I352/
- /BsFkhBsAcsjL9Sma+Sg/kZ6YQKaC7H405ycL1h2V61K5bAgza1lRdIlHfIAFx9Qi4nC
- ubLc0qcReC1QtP6Nk2UCLB3wRBdVLASUjLgczS4JhJR0dIOGHzSyzqwxlPp9TWWofAmO
- QwVg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=3nSFPzWX2bnFLYSqaf/wsVIjfFPRjPaRYR+oVy9/HBU=;
- b=lm2QC+nzU0qDi7SLlUa+i85QrCpKO+RCbLCFR+tJad6+/Jn4LWma9F5obzzyWar5te
- wCiuu6xzVNA2JihUpm5L9jerFuGVmUU8/suNq/6n6Jw4JeervYhsLzNsLSzaluFY5yEC
- M2i/QTRDCEUuoXKHxmLDmkGq8WxupPhp5J7LsXfSKRF8pfyYm9Mdg+eLb10V3MBIuRhV
- N+lmNVA08uyIGGkJ1tD0btl3kf/ixdlbEXdOCiw3dl4pXjUfPcUTXQUicOkjjyHB3BZL
- h4bnsCI0RLrIQgBEMqZNsoW+IBKYuUHZnO/xJk5xfuIf30CzCaA9MG5CPdubhq4U0wk1
- yaTA==
-X-Gm-Message-State: AOAM532jS2B+Nk50b2NtxKi2I3mvzf6BnfQxQm3uLXmbCDmL9NkZmrff
- dSdv8k2OkuRyJ8Dm0FwPCl4f1IXceU4r824U6bQln624ONg=
-X-Google-Smtp-Source: ABdhPJwlsGbnUxKFDN2nbQ8LtA7Max9lUshkNCUkECF17O1s2oI33ZyYhAAzw2xuku5Qc1xumq4P7JWFX75Sk6fdwk8=
-X-Received: by 2002:a05:622a:15cb:: with SMTP id
- d11mr26285121qty.4.1636125948438; 
- Fri, 05 Nov 2021 08:25:48 -0700 (PDT)
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 725D96E41A
+ for <nouveau@lists.freedesktop.org>; Fri,  5 Nov 2021 18:34:02 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1636137241;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=sLobVIUbaKMz6LiSgKJDhvPHikWx1fKXWii3cOCYfjY=;
+ b=fIWq3CzR6xCxpnTqdCi7OdpHt0xva1J3WebSqJ+2J2r33n0+h/ux6qCJMqQMJaf1YhDmJS
+ ErH7oGRru4bSNt8/lZOCJwVPI0Lx4ICQ4vWhVzrXFYK0qmPkVeXqOK7Uog2YE3+obJeZ3B
+ 23sfgX4o3oVtsZ1VYSeS3g0YVv8sMBs=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-162-O1TvOONXNMW5HQKUWRP3gA-1; Fri, 05 Nov 2021 14:33:59 -0400
+X-MC-Unique: O1TvOONXNMW5HQKUWRP3gA-1
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
+ [10.5.11.16])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id E3A1B8066F5;
+ Fri,  5 Nov 2021 18:33:58 +0000 (UTC)
+Received: from emerald.lyude.net (unknown [10.22.16.200])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id E61375C23A;
+ Fri,  5 Nov 2021 18:33:57 +0000 (UTC)
+From: Lyude Paul <lyude@redhat.com>
+To: dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ intel-gfx@lists.freedesktop.org
+Date: Fri,  5 Nov 2021 14:33:37 -0400
+Message-Id: <20211105183342.130810-1-lyude@redhat.com>
 MIME-Version: 1.0
-References: <CABr8-B7QAn9LV18d2HEWGqzvM3x4NcYj5rpvcXq=YsK-ozcoMQ@mail.gmail.com>
- <CAKb7Uvh63kpzmvKMQs7pnaWKkBVFGfO82_ZQdz-TKs0=hXuzWw@mail.gmail.com>
-In-Reply-To: <CAKb7Uvh63kpzmvKMQs7pnaWKkBVFGfO82_ZQdz-TKs0=hXuzWw@mail.gmail.com>
-From: Jerry Geis <jerry.geis@gmail.com>
-Date: Fri, 5 Nov 2021 11:25:37 -0400
-Message-ID: <CABr8-B5du61qNV1hqbMzFeqTegzhyvHTzKBj4k1gsgRE60FkhQ@mail.gmail.com>
-To: Ilia Mirkin <imirkin@alum.mit.edu>
-Content-Type: multipart/alternative; boundary="000000000000f6ebc805d00c41e7"
-Subject: Re: [Nouveau] Ubuntu 20.04 and vlc
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=lyude@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Subject: [Nouveau] [PATCH v5 0/5] drm/dp,
+ drm/i915: Finish basic PWM support for VESA backlight helpers
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -62,136 +61,43 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau <nouveau@lists.freedesktop.org>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
---000000000000f6ebc805d00c41e7
-Content-Type: text/plain; charset="UTF-8"
+When I originally moved all of the VESA backlight code in i915 into DRM
+helpers, one of the things I didn't have the hardware or time for
+testing was machines that used a combination of PWM and DPCD in order to
+control their backlights. This has since then caused some breakages and
+resulted in us disabling DPCD backlight support on such machines. This
+works fine, unless you have a machine that actually needs this
+functionality for backlight controls to work at all. Additionally, we
+will need to support PWM for when we start adding support for VESA's
+product (as in the product of multiplication) control mode for better
+brightness ranges.
 
-On Fri, Nov 5, 2021 at 11:02 AM Ilia Mirkin <imirkin@alum.mit.edu> wrote:
+So - let's finally finish up implementing basic support for these types
+of backlights to solve these problems in our DP helpers, along with
+implementing support for this in i915. And since digging into this issue
+solved the last questions we really had about probing backlights in i915
+for the most part, let's update some of the comments around that as
+well!
 
-> Hey Jerry,
->
-> I'd look in the kernel log to see what's up. Perhaps the GPU hangs?
->
-> Cheers,
->
->   -ilia
->
-> On Fri, Nov 5, 2021 at 10:42 AM Jerry Geis <jerry.geis@gmail.com> wrote:
-> >
-> > Hi All,
-> >
-> > I am using Ubuntu 20.04 with VLC... normally the box boots up runs an
-> plays videos just fien with about 20% usage for VLC (celeron and or intel
-> Atom hardware).
-> > After some time - day or two of playing videos. Something happens.
-> > The CPU usage jumps way up like 120% kind of usage.  Like the vdpau
-> stuff is no longer working.
-> >
-> > Is this a know issue ?
-> > What should I look for  ?
-> > What can I provide to help ?
-> >
-> >  Intel(R) Atom(TM) CPU D525   @ 1.80GHz
-> > 03:00.0 VGA compatible controller: NVIDIA Corporation GT218 [ION] (rev
-> a2)
-> >
-> > Thanks
-> >
-> > Jerry
->
+Lyude Paul (5):
+  drm/i915: Add support for panels with VESA backlights with PWM
+    enable/disable
+  drm/nouveau/kms/nv50-: Explicitly check DPCD backlights for aux
+    enable/brightness
+  drm/dp: Don't read back backlight mode in drm_edp_backlight_enable()
+  drm/dp, drm/i915: Add support for VESA backlights using PWM for
+    brightness control
+  drm/i915: Clarify probing order in intel_dp_aux_init_backlight_funcs()
 
-dmesg log
-   37.212407] kernel: bpfilter: Loaded bpfilter_umh pid 794
-[   37.214069] unknown: Started bpfilter
-[   38.778000] kernel: RTL8211B Gigabit Ethernet r8169-0-458:00: attached
-PHY driver (mii_bus:phy_addr=r8169-0-458:00, irq=MAC)
-[   38.856101] kernel: r8169 0000:04:0b.0 enp4s11: Link is Down
-[   41.275140] kernel: r8169 0000:04:0b.0 enp4s11: Link is Up - 1Gbps/Full
-- flow control off
-[   41.275192] kernel: IPv6: ADDRCONF(NETDEV_CHANGE): enp4s11: link becomes
-ready
+ drivers/gpu/drm/drm_dp_helper.c               | 108 ++++++++++--------
+ .../drm/i915/display/intel_dp_aux_backlight.c |  81 ++++++++++---
+ drivers/gpu/drm/nouveau/nouveau_backlight.c   |   5 +-
+ include/drm/drm_dp_helper.h                   |   7 +-
+ 4 files changed, 132 insertions(+), 69 deletions(-)
 
+-- 
+2.31.1
 
-/var/log/syslog
-Nov  5 11:11:50 mediaport44 smboot.sh[16157]: libva info: VA-API version
-1.7.0
-Nov  5 11:11:50 mediaport44 smboot.sh[16157]: libva info: Trying to open
-/usr/lib/x86_64-linux-gnu/dri/nouveau_drv_video.so
-Nov  5 11:11:50 mediaport44 smboot.sh[16157]: libva info: Found init
-function __vaDriverInit_1_7
-Nov  5 11:11:50 mediaport44 smboot.sh[16157]: libva info: va_openDriver()
-returns 0
-
-if I reboot the box - and look again at syslog it shows the same thing
-above.
-
-Not seeing any  errors or anything.
-
-Thoughts?
-
- Jerry
-
---000000000000f6ebc805d00c41e7
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
-<div dir=3D"ltr" class=3D"gmail_attr">On Fri, Nov 5, 2021 at 11:02 AM Ilia =
-Mirkin &lt;<a href=3D"mailto:imirkin@alum.mit.edu">imirkin@alum.mit.edu</a>=
-&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px =
-0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">Hey =
-Jerry,<br>
-<br>
-I&#39;d look in the kernel log to see what&#39;s up. Perhaps the GPU hangs?=
-<br>
-<br>
-Cheers,<br>
-<br>
-=C2=A0 -ilia<br>
-<br>
-On Fri, Nov 5, 2021 at 10:42 AM Jerry Geis &lt;<a href=3D"mailto:jerry.geis=
-@gmail.com" target=3D"_blank">jerry.geis@gmail.com</a>&gt; wrote:<br>
-&gt;<br>
-&gt; Hi All,<br>
-&gt;<br>
-&gt; I am using Ubuntu 20.04 with VLC... normally the box boots up runs an =
-plays videos just fien with about 20% usage for VLC (celeron and or intel A=
-tom hardware).<br>
-&gt; After some time - day or two of playing videos. Something happens.<br>
-&gt; The CPU usage jumps way up like 120% kind of usage.=C2=A0 Like the vdp=
-au stuff is no longer working.<br>
-&gt;<br>
-&gt; Is this a know issue ?<br>
-&gt; What should I look for=C2=A0 ?<br>
-&gt; What can I provide to help ?<br>
-&gt;<br>
-&gt;=C2=A0 Intel(R) Atom(TM) CPU D525=C2=A0 =C2=A0@ 1.80GHz<br>
-&gt; 03:00.0 VGA compatible controller: NVIDIA Corporation GT218 [ION] (rev=
- a2)<br>
-&gt;<br>
-&gt; Thanks<br>
-&gt;<br>
-&gt; Jerry<br></blockquote><div><br></div><div>dmesg log=C2=A0</div>=C2=A0 =
-=C2=A037.212407] kernel: bpfilter: Loaded bpfilter_umh pid 794<br>[ =C2=A0 =
-37.214069] unknown: Started bpfilter<br>[ =C2=A0 38.778000] kernel: RTL8211=
-B Gigabit Ethernet r8169-0-458:00: attached PHY driver (mii_bus:phy_addr=3D=
-r8169-0-458:00, irq=3DMAC)<br>[ =C2=A0 38.856101] kernel: r8169 0000:04:0b.=
-0 enp4s11: Link is Down<br>[ =C2=A0 41.275140] kernel: r8169 0000:04:0b.0 e=
-np4s11: Link is Up - 1Gbps/Full - flow control off<br>[ =C2=A0 41.275192] k=
-ernel: IPv6: ADDRCONF(NETDEV_CHANGE): enp4s11: link becomes ready<br><div><=
-br></div><div><br></div><div>/var/log/syslog</div><div>Nov =C2=A05 11:11:50=
- mediaport44 smboot.sh[16157]: libva info: VA-API version 1.7.0<br>Nov =C2=
-=A05 11:11:50 mediaport44 smboot.sh[16157]: libva info: Trying to open /usr=
-/lib/x86_64-linux-gnu/dri/nouveau_drv_video.so<br>Nov =C2=A05 11:11:50 medi=
-aport44 smboot.sh[16157]: libva info: Found init function __vaDriverInit_1_=
-7<br>Nov =C2=A05 11:11:50 mediaport44 smboot.sh[16157]: libva info: va_open=
-Driver() returns 0<br></div><div><br></div><div>if I reboot the box - and l=
-ook again at syslog it shows the same thing above.</div><div><br></div><div=
->Not seeing any=C2=A0 errors or anything.</div><div><br></div><div>Thoughts=
-?=C2=A0</div><div><br></div><div>=C2=A0Jerry</div><div><br></div></div></di=
-v>
-
---000000000000f6ebc805d00c41e7--
