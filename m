@@ -2,39 +2,63 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 555B144614C
-	for <lists+nouveau@lfdr.de>; Fri,  5 Nov 2021 10:22:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id AD3C3446177
+	for <lists+nouveau@lfdr.de>; Fri,  5 Nov 2021 10:39:23 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B2DEB6E112;
-	Fri,  5 Nov 2021 09:22:29 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 11A156E063;
+	Fri,  5 Nov 2021 09:39:14 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 299856E111;
- Fri,  5 Nov 2021 09:22:28 +0000 (UTC)
-X-IronPort-AV: E=McAfee;i="6200,9189,10158"; a="231714554"
-X-IronPort-AV: E=Sophos;i="5.87,211,1631602800"; d="scan'208";a="231714554"
-Received: from orsmga008.jf.intel.com ([10.7.209.65])
- by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 05 Nov 2021 02:22:27 -0700
-X-IronPort-AV: E=Sophos;i="5.87,211,1631602800"; d="scan'208";a="501878634"
-Received: from jprisaca-mobl.ger.corp.intel.com (HELO localhost)
- ([10.251.214.70])
- by orsmga008-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 05 Nov 2021 02:22:19 -0700
-From: Jani Nikula <jani.nikula@linux.intel.com>
-To: Thomas Zimmermann <tzimmermann@suse.de>,
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4DD9C6E03E;
+ Fri,  5 Nov 2021 09:39:12 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id D50C31FD33;
+ Fri,  5 Nov 2021 09:39:10 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1636105150; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=botD9nL5X/9G6SBGBomRO546/D9/hxd94G5P/qmUqTA=;
+ b=pZVx+Oe4Z2GMAWcfRx3PscGFaUgPYlMQRzsA8oKrmQvHNO1Pq565Or4zNHH37FoJBmsgoG
+ UnomX/+v+w7+YwT82o0sH4MUnJJwvsYNd1dxWIBFgEo4j/zGC3mN6QH2r5r3MvrR0VAIMv
+ mmCKxLaAj+RD4XPbIeVBq1prNqsCbjE=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1636105150;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=botD9nL5X/9G6SBGBomRO546/D9/hxd94G5P/qmUqTA=;
+ b=v4/EnLAwNyABGGeo5o31wIOvLgtyR0slgRzxpBfFmJ05mVYZiq6WTJkFA0ALAbIcGuFQyE
+ xy1eWkajhsOtQiDQ==
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 3B03E13B97;
+ Fri,  5 Nov 2021 09:39:10 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id 4dZbDb77hGEyawAAMHmgww
+ (envelope-from <tzimmermann@suse.de>); Fri, 05 Nov 2021 09:39:10 +0000
+Message-ID: <2698c680-6d05-f58d-d7c2-ea76aeb0bb47@suse.de>
+Date: Fri, 5 Nov 2021 10:39:09 +0100
+MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.2.1
+Content-Language: en-US
+To: Jani Nikula <jani.nikula@linux.intel.com>,
  Javier Martinez Canillas <javierm@redhat.com>, linux-kernel@vger.kernel.org
-In-Reply-To: <f2c40b22-04bf-e8f2-9839-36d6d26189a1@suse.de>
-Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
 References: <20211104160707.1407052-1-javierm@redhat.com>
  <20211104160707.1407052-3-javierm@redhat.com>
- <f2c40b22-04bf-e8f2-9839-36d6d26189a1@suse.de>
-Date: Fri, 05 Nov 2021 11:22:17 +0200
-Message-ID: <87cznf9cty.fsf@intel.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+ <f2c40b22-04bf-e8f2-9839-36d6d26189a1@suse.de> <87cznf9cty.fsf@intel.com>
+From: Thomas Zimmermann <tzimmermann@suse.de>
+In-Reply-To: <87cznf9cty.fsf@intel.com>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------zl0Oh59VDXN0QB6wEYp8aODT"
 Subject: Re: [Nouveau] [PATCH v2 2/2] drm: Move nomodeset kernel parameter
  to the DRM subsystem
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -56,7 +80,7 @@ Cc: linux-fbdev@vger.kernel.org, David Airlie <airlied@linux.ie>,
  Peter Robinson <pbrobinson@gmail.com>, nouveau@lists.freedesktop.org,
  Dave Airlie <airlied@redhat.com>, Chia-I Wu <olvaffe@gmail.com>,
  Ben Skeggs <bskeggs@redhat.com>,
- Michel =?utf-8?Q?D=C3=A4nzer?= <michel@daenzer.net>,
+ =?UTF-8?Q?Michel_D=c3=a4nzer?= <michel@daenzer.net>,
  Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
  Maxime Ripard <mripard@kernel.org>, Hans de Goede <hdegoede@redhat.com>,
  Rodrigo Vivi <rodrigo.vivi@intel.com>,
@@ -66,383 +90,325 @@ Cc: linux-fbdev@vger.kernel.org, David Airlie <airlied@linux.ie>,
  Xinhui" <Xinhui.Pan@amd.com>, spice-devel@lists.freedesktop.org,
  Daniel Vetter <daniel@ffwll.ch>, Alex Deucher <alexander.deucher@amd.com>,
  intel-gfx@lists.freedesktop.org,
- Christian =?utf-8?Q?K=C3=B6nig?= <christian.koenig@amd.com>,
+ =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
  Zack Rusin <zackr@vmware.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, 05 Nov 2021, Thomas Zimmermann <tzimmermann@suse.de> wrote:
-> Hi
->
-> Am 04.11.21 um 17:07 schrieb Javier Martinez Canillas:
->> The "nomodeset" kernel cmdline parameter is handled by the vgacon driver
->> but the exported vgacon_text_force() symbol is only used by DRM drivers.
->>=20
->> It makes much more sense for the parameter logic to be in the subsystem
->> of the drivers that are making use of it.
->>=20
->> Let's move the vgacon_text_force() function and related logic to the DRM
->> subsystem. While doing that, rename the function to drm_check_modeset()
->> which better reflects what the function is really used to test for.
->>=20
->> Suggested-by: Daniel Vetter <daniel.vetter@ffwll.ch>
->> Signed-off-by: Javier Martinez Canillas <javierm@redhat.com>
->> ---
->>=20
->> Changes in v2:
->> - Conditionally build drm_nomodeset.o if CONFIG_VGA_CONSOLE is set.
->> - Squash patches to move nomodeset logic to DRM and do the renaming.
->> - Name the function drm_check_modeset() and make it return -ENODEV.
->>=20
->>   drivers/gpu/drm/Makefile                |  2 ++
->>   drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c |  1 -
->>   drivers/gpu/drm/ast/ast_drv.c           |  1 -
->>   drivers/gpu/drm/drm_drv.c               |  9 +++++----
->>   drivers/gpu/drm/drm_nomodeset.c         | 26 +++++++++++++++++++++++++
->>   drivers/gpu/drm/i915/i915_module.c      |  2 --
->>   drivers/gpu/drm/mgag200/mgag200_drv.c   |  1 -
->>   drivers/gpu/drm/nouveau/nouveau_drm.c   |  1 -
->>   drivers/gpu/drm/qxl/qxl_drv.c           |  1 -
->>   drivers/gpu/drm/radeon/radeon_drv.c     |  1 -
->>   drivers/gpu/drm/tiny/bochs.c            |  1 -
->>   drivers/gpu/drm/tiny/cirrus.c           |  1 -
->>   drivers/gpu/drm/vboxvideo/vbox_drv.c    |  1 -
->>   drivers/gpu/drm/virtio/virtgpu_drv.c    |  1 -
->>   drivers/gpu/drm/vmwgfx/vmwgfx_drv.c     |  1 -
->>   drivers/video/console/vgacon.c          | 21 --------------------
->>   include/drm/drm_mode_config.h           |  6 ++++++
->>   include/linux/console.h                 |  6 ------
->>   18 files changed, 39 insertions(+), 44 deletions(-)
->>   create mode 100644 drivers/gpu/drm/drm_nomodeset.c
->>=20
->> diff --git a/drivers/gpu/drm/Makefile b/drivers/gpu/drm/Makefile
->> index 1c41156deb5f..c74810c285af 100644
->> --- a/drivers/gpu/drm/Makefile
->> +++ b/drivers/gpu/drm/Makefile
->> @@ -33,6 +33,8 @@ drm-$(CONFIG_DRM_PRIVACY_SCREEN) +=3D drm_privacy_scre=
-en.o drm_privacy_screen_x86.
->>=20=20=20
->>   obj-$(CONFIG_DRM_DP_AUX_BUS) +=3D drm_dp_aux_bus.o
->>=20=20=20
->> +obj-$(CONFIG_VGA_CONSOLE) +=3D drm_nomodeset.o
->> +
->
-> This now depends on the VGA textmode console. Even if you have no VGA=20
-> console, you'd want drm_nomodeset.o. Simpledrm might be built-in and can=
-=20
-> provide graphics. Non-PC systems don't even have a VGA device.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------zl0Oh59VDXN0QB6wEYp8aODT
+Content-Type: multipart/mixed; boundary="------------l4WtE5NDCwhX3Yej90putktx";
+ protected-headers="v1"
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: Jani Nikula <jani.nikula@linux.intel.com>,
+ Javier Martinez Canillas <javierm@redhat.com>, linux-kernel@vger.kernel.org
+Cc: =?UTF-8?Q?Michel_D=c3=a4nzer?= <michel@daenzer.net>,
+ Daniel Vetter <daniel.vetter@ffwll.ch>, Peter Robinson
+ <pbrobinson@gmail.com>, Pekka Paalanen <pekka.paalanen@collabora.com>,
+ Alex Deucher <alexander.deucher@amd.com>, Ben Skeggs <bskeggs@redhat.com>,
+ Chia-I Wu <olvaffe@gmail.com>, =?UTF-8?Q?Christian_K=c3=b6nig?=
+ <christian.koenig@amd.com>, Daniel Vetter <daniel@ffwll.ch>,
+ Dave Airlie <airlied@redhat.com>, David Airlie <airlied@linux.ie>,
+ Gerd Hoffmann <kraxel@redhat.com>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Gurchetan Singh <gurchetansingh@chromium.org>,
+ Hans de Goede <hdegoede@redhat.com>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, "Pan, Xinhui" <Xinhui.Pan@amd.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ VMware Graphics <linux-graphics-maintainer@vmware.com>,
+ Zack Rusin <zackr@vmware.com>, amd-gfx@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
+ linux-fbdev@vger.kernel.org, nouveau@lists.freedesktop.org,
+ spice-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org
+Message-ID: <2698c680-6d05-f58d-d7c2-ea76aeb0bb47@suse.de>
+Subject: Re: [PATCH v2 2/2] drm: Move nomodeset kernel parameter to the DRM
+ subsystem
+References: <20211104160707.1407052-1-javierm@redhat.com>
+ <20211104160707.1407052-3-javierm@redhat.com>
+ <f2c40b22-04bf-e8f2-9839-36d6d26189a1@suse.de> <87cznf9cty.fsf@intel.com>
+In-Reply-To: <87cznf9cty.fsf@intel.com>
 
-This was discussed in an earlier version, which had this builtin but the
-header still had a stub for CONFIG_VGA_CONSOLE=3Dn.
+--------------l4WtE5NDCwhX3Yej90putktx
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-> I think we really want a separate boolean config option that gets=20
-> selected by CONFIG_DRM.
+SGkNCg0KQW0gMDUuMTEuMjEgdW0gMTA6MjIgc2NocmllYiBKYW5pIE5pa3VsYToNCj4gT24g
+RnJpLCAwNSBOb3YgMjAyMSwgVGhvbWFzIFppbW1lcm1hbm4gPHR6aW1tZXJtYW5uQHN1c2Uu
+ZGU+IHdyb3RlOg0KPj4gSGkNCj4+DQo+PiBBbSAwNC4xMS4yMSB1bSAxNzowNyBzY2hyaWVi
+IEphdmllciBNYXJ0aW5leiBDYW5pbGxhczoNCj4+PiBUaGUgIm5vbW9kZXNldCIga2VybmVs
+IGNtZGxpbmUgcGFyYW1ldGVyIGlzIGhhbmRsZWQgYnkgdGhlIHZnYWNvbiBkcml2ZXINCj4+
+PiBidXQgdGhlIGV4cG9ydGVkIHZnYWNvbl90ZXh0X2ZvcmNlKCkgc3ltYm9sIGlzIG9ubHkg
+dXNlZCBieSBEUk0gZHJpdmVycy4NCj4+Pg0KPj4+IEl0IG1ha2VzIG11Y2ggbW9yZSBzZW5z
+ZSBmb3IgdGhlIHBhcmFtZXRlciBsb2dpYyB0byBiZSBpbiB0aGUgc3Vic3lzdGVtDQo+Pj4g
+b2YgdGhlIGRyaXZlcnMgdGhhdCBhcmUgbWFraW5nIHVzZSBvZiBpdC4NCj4+Pg0KPj4+IExl
+dCdzIG1vdmUgdGhlIHZnYWNvbl90ZXh0X2ZvcmNlKCkgZnVuY3Rpb24gYW5kIHJlbGF0ZWQg
+bG9naWMgdG8gdGhlIERSTQ0KPj4+IHN1YnN5c3RlbS4gV2hpbGUgZG9pbmcgdGhhdCwgcmVu
+YW1lIHRoZSBmdW5jdGlvbiB0byBkcm1fY2hlY2tfbW9kZXNldCgpDQo+Pj4gd2hpY2ggYmV0
+dGVyIHJlZmxlY3RzIHdoYXQgdGhlIGZ1bmN0aW9uIGlzIHJlYWxseSB1c2VkIHRvIHRlc3Qg
+Zm9yLg0KPj4+DQo+Pj4gU3VnZ2VzdGVkLWJ5OiBEYW5pZWwgVmV0dGVyIDxkYW5pZWwudmV0
+dGVyQGZmd2xsLmNoPg0KPj4+IFNpZ25lZC1vZmYtYnk6IEphdmllciBNYXJ0aW5leiBDYW5p
+bGxhcyA8amF2aWVybUByZWRoYXQuY29tPg0KPj4+IC0tLQ0KPj4+DQo+Pj4gQ2hhbmdlcyBp
+biB2MjoNCj4+PiAtIENvbmRpdGlvbmFsbHkgYnVpbGQgZHJtX25vbW9kZXNldC5vIGlmIENP
+TkZJR19WR0FfQ09OU09MRSBpcyBzZXQuDQo+Pj4gLSBTcXVhc2ggcGF0Y2hlcyB0byBtb3Zl
+IG5vbW9kZXNldCBsb2dpYyB0byBEUk0gYW5kIGRvIHRoZSByZW5hbWluZy4NCj4+PiAtIE5h
+bWUgdGhlIGZ1bmN0aW9uIGRybV9jaGVja19tb2Rlc2V0KCkgYW5kIG1ha2UgaXQgcmV0dXJu
+IC1FTk9ERVYuDQo+Pj4NCj4+PiAgICBkcml2ZXJzL2dwdS9kcm0vTWFrZWZpbGUgICAgICAg
+ICAgICAgICAgfCAgMiArKw0KPj4+ICAgIGRyaXZlcnMvZ3B1L2RybS9hbWQvYW1kZ3B1L2Ft
+ZGdwdV9kcnYuYyB8ICAxIC0NCj4+PiAgICBkcml2ZXJzL2dwdS9kcm0vYXN0L2FzdF9kcnYu
+YyAgICAgICAgICAgfCAgMSAtDQo+Pj4gICAgZHJpdmVycy9ncHUvZHJtL2RybV9kcnYuYyAg
+ICAgICAgICAgICAgIHwgIDkgKysrKystLS0tDQo+Pj4gICAgZHJpdmVycy9ncHUvZHJtL2Ry
+bV9ub21vZGVzZXQuYyAgICAgICAgIHwgMjYgKysrKysrKysrKysrKysrKysrKysrKysrKw0K
+Pj4+ICAgIGRyaXZlcnMvZ3B1L2RybS9pOTE1L2k5MTVfbW9kdWxlLmMgICAgICB8ICAyIC0t
+DQo+Pj4gICAgZHJpdmVycy9ncHUvZHJtL21nYWcyMDAvbWdhZzIwMF9kcnYuYyAgIHwgIDEg
+LQ0KPj4+ICAgIGRyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfZHJtLmMgICB8ICAx
+IC0NCj4+PiAgICBkcml2ZXJzL2dwdS9kcm0vcXhsL3F4bF9kcnYuYyAgICAgICAgICAgfCAg
+MSAtDQo+Pj4gICAgZHJpdmVycy9ncHUvZHJtL3JhZGVvbi9yYWRlb25fZHJ2LmMgICAgIHwg
+IDEgLQ0KPj4+ICAgIGRyaXZlcnMvZ3B1L2RybS90aW55L2JvY2hzLmMgICAgICAgICAgICB8
+ICAxIC0NCj4+PiAgICBkcml2ZXJzL2dwdS9kcm0vdGlueS9jaXJydXMuYyAgICAgICAgICAg
+fCAgMSAtDQo+Pj4gICAgZHJpdmVycy9ncHUvZHJtL3Zib3h2aWRlby92Ym94X2Rydi5jICAg
+IHwgIDEgLQ0KPj4+ICAgIGRyaXZlcnMvZ3B1L2RybS92aXJ0aW8vdmlydGdwdV9kcnYuYyAg
+ICB8ICAxIC0NCj4+PiAgICBkcml2ZXJzL2dwdS9kcm0vdm13Z2Z4L3Ztd2dmeF9kcnYuYyAg
+ICAgfCAgMSAtDQo+Pj4gICAgZHJpdmVycy92aWRlby9jb25zb2xlL3ZnYWNvbi5jICAgICAg
+ICAgIHwgMjEgLS0tLS0tLS0tLS0tLS0tLS0tLS0NCj4+PiAgICBpbmNsdWRlL2RybS9kcm1f
+bW9kZV9jb25maWcuaCAgICAgICAgICAgfCAgNiArKysrKysNCj4+PiAgICBpbmNsdWRlL2xp
+bnV4L2NvbnNvbGUuaCAgICAgICAgICAgICAgICAgfCAgNiAtLS0tLS0NCj4+PiAgICAxOCBm
+aWxlcyBjaGFuZ2VkLCAzOSBpbnNlcnRpb25zKCspLCA0NCBkZWxldGlvbnMoLSkNCj4+PiAg
+ICBjcmVhdGUgbW9kZSAxMDA2NDQgZHJpdmVycy9ncHUvZHJtL2RybV9ub21vZGVzZXQuYw0K
+Pj4+DQo+Pj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9NYWtlZmlsZSBiL2RyaXZl
+cnMvZ3B1L2RybS9NYWtlZmlsZQ0KPj4+IGluZGV4IDFjNDExNTZkZWI1Zi4uYzc0ODEwYzI4
+NWFmIDEwMDY0NA0KPj4+IC0tLSBhL2RyaXZlcnMvZ3B1L2RybS9NYWtlZmlsZQ0KPj4+ICsr
+KyBiL2RyaXZlcnMvZ3B1L2RybS9NYWtlZmlsZQ0KPj4+IEBAIC0zMyw2ICszMyw4IEBAIGRy
+bS0kKENPTkZJR19EUk1fUFJJVkFDWV9TQ1JFRU4pICs9IGRybV9wcml2YWN5X3NjcmVlbi5v
+IGRybV9wcml2YWN5X3NjcmVlbl94ODYuDQo+Pj4gICAgDQo+Pj4gICAgb2JqLSQoQ09ORklH
+X0RSTV9EUF9BVVhfQlVTKSArPSBkcm1fZHBfYXV4X2J1cy5vDQo+Pj4gICAgDQo+Pj4gK29i
+ai0kKENPTkZJR19WR0FfQ09OU09MRSkgKz0gZHJtX25vbW9kZXNldC5vDQo+Pj4gKw0KPj4N
+Cj4+IFRoaXMgbm93IGRlcGVuZHMgb24gdGhlIFZHQSB0ZXh0bW9kZSBjb25zb2xlLiBFdmVu
+IGlmIHlvdSBoYXZlIG5vIFZHQQ0KPj4gY29uc29sZSwgeW91J2Qgd2FudCBkcm1fbm9tb2Rl
+c2V0Lm8uIFNpbXBsZWRybSBtaWdodCBiZSBidWlsdC1pbiBhbmQgY2FuDQo+PiBwcm92aWRl
+IGdyYXBoaWNzLiBOb24tUEMgc3lzdGVtcyBkb24ndCBldmVuIGhhdmUgYSBWR0EgZGV2aWNl
+Lg0KPiANCj4gVGhpcyB3YXMgZGlzY3Vzc2VkIGluIGFuIGVhcmxpZXIgdmVyc2lvbiwgd2hp
+Y2ggaGFkIHRoaXMgYnVpbHRpbiBidXQgdGhlDQo+IGhlYWRlciBzdGlsbCBoYWQgYSBzdHVi
+IGZvciBDT05GSUdfVkdBX0NPTlNPTEU9bi4NCj4gDQo+PiBJIHRoaW5rIHdlIHJlYWxseSB3
+YW50IGEgc2VwYXJhdGUgYm9vbGVhbiBjb25maWcgb3B0aW9uIHRoYXQgZ2V0cw0KPj4gc2Vs
+ZWN0ZWQgYnkgQ09ORklHX0RSTS4NCj4gDQo+IFBlcmhhcHMgdGhhdCBzaG91bGQgYmUgYSBz
+ZXBhcmF0ZSBjaGFuZ2Ugb24gdG9wLg0KDQpTdXJlLCBtYWtlIGl0IGEgc2VwYXJhdGUgcGF0
+Y2guDQoNCldlIHdhbnQgdG8gbWFrZSB0aGlzIHdvcmsgb24gQVJNIHN5c3RlbXMuIEkgZXZl
+biBoYXZlIGEgcmVxdWVzdCB0byANCnJlcGxhY2Ugb2ZmYiBvbiBQb3dlciBhcmNoaXRlY3R1
+cmUgYnkgc2ltcGxlZHJtLiBTbyB0aGUgZmluYWwgY29uZmlnIGhhcyANCnRvIGJlIHN5c3Rl
+bSBhZ25vc3RpYy4NCg0KQmVzdCByZWdhcmRzDQpUaG9tYXMNCg0KPiANCj4gQlIsDQo+IEph
+bmkuDQo+IA0KPj4NCj4+DQo+Pj4gICAgZHJtX2NtYV9oZWxwZXIteSA6PSBkcm1fZ2VtX2Nt
+YV9oZWxwZXIubw0KPj4+ICAgIG9iai0kKENPTkZJR19EUk1fR0VNX0NNQV9IRUxQRVIpICs9
+IGRybV9jbWFfaGVscGVyLm8NCj4+PiAgICANCj4+PiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9n
+cHUvZHJtL2FtZC9hbWRncHUvYW1kZ3B1X2Rydi5jIGIvZHJpdmVycy9ncHUvZHJtL2FtZC9h
+bWRncHUvYW1kZ3B1X2Rydi5jDQo+Pj4gaW5kZXggN2ZkZTQwZDA2MTgxLi5iNGI2OTkzODYx
+ZTYgMTAwNjQ0DQo+Pj4gLS0tIGEvZHJpdmVycy9ncHUvZHJtL2FtZC9hbWRncHUvYW1kZ3B1
+X2Rydi5jDQo+Pj4gKysrIGIvZHJpdmVycy9ncHUvZHJtL2FtZC9hbWRncHUvYW1kZ3B1X2Ry
+di5jDQo+Pj4gQEAgLTMxLDcgKzMxLDYgQEANCj4+PiAgICAjaW5jbHVkZSAiYW1kZ3B1X2Ry
+di5oIg0KPj4+ICAgIA0KPj4+ICAgICNpbmNsdWRlIDxkcm0vZHJtX3BjaWlkcy5oPg0KPj4+
+IC0jaW5jbHVkZSA8bGludXgvY29uc29sZS5oPg0KPj4+ICAgICNpbmNsdWRlIDxsaW51eC9t
+b2R1bGUuaD4NCj4+PiAgICAjaW5jbHVkZSA8bGludXgvcG1fcnVudGltZS5oPg0KPj4+ICAg
+ICNpbmNsdWRlIDxsaW51eC92Z2Ffc3dpdGNoZXJvby5oPg0KPj4+IGRpZmYgLS1naXQgYS9k
+cml2ZXJzL2dwdS9kcm0vYXN0L2FzdF9kcnYuYyBiL2RyaXZlcnMvZ3B1L2RybS9hc3QvYXN0
+X2Rydi5jDQo+Pj4gaW5kZXggODAyMDYzMjc5Yjg2Li42MjIyMDgyYzMwODIgMTAwNjQ0DQo+
+Pj4gLS0tIGEvZHJpdmVycy9ncHUvZHJtL2FzdC9hc3RfZHJ2LmMNCj4+PiArKysgYi9kcml2
+ZXJzL2dwdS9kcm0vYXN0L2FzdF9kcnYuYw0KPj4+IEBAIC0yNiw3ICsyNiw2IEBADQo+Pj4g
+ICAgICogQXV0aG9yczogRGF2ZSBBaXJsaWUgPGFpcmxpZWRAcmVkaGF0LmNvbT4NCj4+PiAg
+ICAgKi8NCj4+PiAgICANCj4+PiAtI2luY2x1ZGUgPGxpbnV4L2NvbnNvbGUuaD4NCj4+PiAg
+ICAjaW5jbHVkZSA8bGludXgvbW9kdWxlLmg+DQo+Pj4gICAgI2luY2x1ZGUgPGxpbnV4L3Bj
+aS5oPg0KPj4+ICAgIA0KPj4+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0vZHJtX2Ry
+di5jIGIvZHJpdmVycy9ncHUvZHJtL2RybV9kcnYuYw0KPj4+IGluZGV4IDNmYjU2N2Q2Mjg4
+MS4uODBiODViOGVhNzc2IDEwMDY0NA0KPj4+IC0tLSBhL2RyaXZlcnMvZ3B1L2RybS9kcm1f
+ZHJ2LmMNCj4+PiArKysgYi9kcml2ZXJzL2dwdS9kcm0vZHJtX2Rydi5jDQo+Pj4gQEAgLTk4
+NiwxMiArOTg2LDEzIEBAIEVYUE9SVF9TWU1CT0woZHJtX2Rldl9zZXRfdW5pcXVlKTsNCj4+
+PiAgICAgKi8NCj4+PiAgICBpbnQgZHJtX2Rydl9lbmFibGVkKGNvbnN0IHN0cnVjdCBkcm1f
+ZHJpdmVyICpkcml2ZXIpDQo+Pj4gICAgew0KPj4+IC0JaWYgKHZnYWNvbl90ZXh0X2ZvcmNl
+KCkpIHsNCj4+PiArCWludCByZXQ7DQo+Pj4gKw0KPj4+ICsJcmV0ID0gZHJtX2NoZWNrX21v
+ZGVzZXQoKTsNCj4+PiArCWlmIChyZXQpDQo+Pj4gICAgCQlEUk1fSU5GTygiJXMgZHJpdmVy
+IGlzIGRpc2FibGVkXG4iLCBkcml2ZXItPm5hbWUpOw0KPj4+IC0JCXJldHVybiAtRU5PREVW
+Ow0KPj4+IC0JfQ0KPj4+ICAgIA0KPj4+IC0JcmV0dXJuIDA7DQo+Pj4gKwlyZXR1cm4gcmV0
+Ow0KPj4+ICAgIH0NCj4+PiAgICBFWFBPUlRfU1lNQk9MKGRybV9kcnZfZW5hYmxlZCk7DQo+
+Pj4gICAgDQo+Pj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9kcm1fbm9tb2Rlc2V0
+LmMgYi9kcml2ZXJzL2dwdS9kcm0vZHJtX25vbW9kZXNldC5jDQo+Pj4gbmV3IGZpbGUgbW9k
+ZSAxMDA2NDQNCj4+PiBpbmRleCAwMDAwMDAwMDAwMDAuLjY2ODNlMzk2ZDJjNQ0KPj4+IC0t
+LSAvZGV2L251bGwNCj4+PiArKysgYi9kcml2ZXJzL2dwdS9kcm0vZHJtX25vbW9kZXNldC5j
+DQo+Pj4gQEAgLTAsMCArMSwyNiBAQA0KPj4+ICsvLyBTUERYLUxpY2Vuc2UtSWRlbnRpZmll
+cjogR1BMLTIuMA0KPj4+ICsNCj4+PiArI2luY2x1ZGUgPGxpbnV4L21vZHVsZS5oPg0KPj4+
+ICsjaW5jbHVkZSA8bGludXgvdHlwZXMuaD4NCj4+PiArDQo+Pj4gK3N0YXRpYyBib29sIGRy
+bV9ub21vZGVzZXQ7DQo+Pj4gKw0KPj4+ICtpbnQgZHJtX2NoZWNrX21vZGVzZXQodm9pZCkN
+Cj4+PiArew0KPj4+ICsJcmV0dXJuIGRybV9ub21vZGVzZXQgPyAtRU5PREVWIDogMDsNCj4+
+PiArfQ0KPj4+ICtFWFBPUlRfU1lNQk9MKGRybV9jaGVja19tb2Rlc2V0KTsNCj4+PiArDQo+
+Pj4gK3N0YXRpYyBpbnQgX19pbml0IGRpc2FibGVfbW9kZXNldChjaGFyICpzdHIpDQo+Pj4g
+K3sNCj4+PiArCWRybV9ub21vZGVzZXQgPSB0cnVlOw0KPj4+ICsNCj4+PiArCXByX3dhcm4o
+IllvdSBoYXZlIGJvb3RlZCB3aXRoIG5vbW9kZXNldC4gVGhpcyBtZWFucyB5b3VyIEdQVSBk
+cml2ZXJzIGFyZSBESVNBQkxFRFxuIik7DQo+Pj4gKwlwcl93YXJuKCJBbnkgdmlkZW8gcmVs
+YXRlZCBmdW5jdGlvbmFsaXR5IHdpbGwgYmUgc2V2ZXJlbHkgZGVncmFkZWQsIGFuZCB5b3Ug
+bWF5IG5vdCBldmVuIGJlIGFibGUgdG8gc3VzcGVuZCB0aGUgc3lzdGVtIHByb3Blcmx5XG4i
+KTsNCj4+PiArCXByX3dhcm4oIlVubGVzcyB5b3UgYWN0dWFsbHkgdW5kZXJzdGFuZCB3aGF0
+IG5vbW9kZXNldCBkb2VzLCB5b3Ugc2hvdWxkIHJlYm9vdCB3aXRob3V0IGVuYWJsaW5nIGl0
+XG4iKTsNCj4+DQo+PiBJJ2QgdXBkYXRlIHRoaXMgdGV4dCB0byBiZSBsZXNzIHNlbnNhdGlv
+bmFsLg0KPj4NCj4+PiArDQo+Pj4gKwlyZXR1cm4gMTsNCj4+PiArfQ0KPj4+ICsNCj4+PiAr
+LyogRGlzYWJsZSBrZXJuZWwgbW9kZXNldHRpbmcgKi8NCj4+PiArX19zZXR1cCgibm9tb2Rl
+c2V0IiwgZGlzYWJsZV9tb2Rlc2V0KTsNCj4+PiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUv
+ZHJtL2k5MTUvaTkxNV9tb2R1bGUuYyBiL2RyaXZlcnMvZ3B1L2RybS9pOTE1L2k5MTVfbW9k
+dWxlLmMNCj4+PiBpbmRleCA0NWNiM2U1NDBlZmYuLmM4OTBjMWNhMjBjNCAxMDA2NDQNCj4+
+PiAtLS0gYS9kcml2ZXJzL2dwdS9kcm0vaTkxNS9pOTE1X21vZHVsZS5jDQo+Pj4gKysrIGIv
+ZHJpdmVycy9ncHUvZHJtL2k5MTUvaTkxNV9tb2R1bGUuYw0KPj4+IEBAIC00LDggKzQsNiBA
+QA0KPj4+ICAgICAqIENvcHlyaWdodCDCqSAyMDIxIEludGVsIENvcnBvcmF0aW9uDQo+Pj4g
+ICAgICovDQo+Pj4gICAgDQo+Pj4gLSNpbmNsdWRlIDxsaW51eC9jb25zb2xlLmg+DQo+Pj4g
+LQ0KPj4NCj4+IFRoZXNlIGNoYW5nZXMgc2hvdWxkIGJlIGluIHBhdGNoIDE/DQo+Pg0KPj4+
+ICAgICNpbmNsdWRlICJnZW0vaTkxNV9nZW1fY29udGV4dC5oIg0KPj4+ICAgICNpbmNsdWRl
+ICJnZW0vaTkxNV9nZW1fb2JqZWN0LmgiDQo+Pj4gICAgI2luY2x1ZGUgImk5MTVfYWN0aXZl
+LmgiDQo+Pj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9tZ2FnMjAwL21nYWcyMDBf
+ZHJ2LmMgYi9kcml2ZXJzL2dwdS9kcm0vbWdhZzIwMC9tZ2FnMjAwX2Rydi5jDQo+Pj4gaW5k
+ZXggMmE1ODEwOTRiYTJiLi44ZTAwMGNhYzExYmEgMTAwNjQ0DQo+Pj4gLS0tIGEvZHJpdmVy
+cy9ncHUvZHJtL21nYWcyMDAvbWdhZzIwMF9kcnYuYw0KPj4+ICsrKyBiL2RyaXZlcnMvZ3B1
+L2RybS9tZ2FnMjAwL21nYWcyMDBfZHJ2LmMNCj4+PiBAQCAtNiw3ICs2LDYgQEANCj4+PiAg
+ICAgKiAgICAgICAgICBEYXZlIEFpcmxpZQ0KPj4+ICAgICAqLw0KPj4+ICAgIA0KPj4+IC0j
+aW5jbHVkZSA8bGludXgvY29uc29sZS5oPg0KPj4+ICAgICNpbmNsdWRlIDxsaW51eC9tb2R1
+bGUuaD4NCj4+PiAgICAjaW5jbHVkZSA8bGludXgvcGNpLmg+DQo+Pj4gICAgI2luY2x1ZGUg
+PGxpbnV4L3ZtYWxsb2MuaD4NCj4+PiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL25v
+dXZlYXUvbm91dmVhdV9kcm0uYyBiL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVf
+ZHJtLmMNCj4+PiBpbmRleCA4ODQ0ZDM2MDJkODcuLmJkMTQ1NjUyMWI3YyAxMDA2NDQNCj4+
+PiAtLS0gYS9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2RybS5jDQo+Pj4gKysr
+IGIvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9kcm0uYw0KPj4+IEBAIC0yMiw3
+ICsyMiw2IEBADQo+Pj4gICAgICogQXV0aG9yczogQmVuIFNrZWdncw0KPj4+ICAgICAqLw0K
+Pj4+ICAgIA0KPj4+IC0jaW5jbHVkZSA8bGludXgvY29uc29sZS5oPg0KPj4+ICAgICNpbmNs
+dWRlIDxsaW51eC9kZWxheS5oPg0KPj4+ICAgICNpbmNsdWRlIDxsaW51eC9tb2R1bGUuaD4N
+Cj4+PiAgICAjaW5jbHVkZSA8bGludXgvcGNpLmg+DQo+Pj4gZGlmZiAtLWdpdCBhL2RyaXZl
+cnMvZ3B1L2RybS9xeGwvcXhsX2Rydi5jIGIvZHJpdmVycy9ncHUvZHJtL3F4bC9xeGxfZHJ2
+LmMNCj4+PiBpbmRleCAzYWMyZWYyYmY1NDUuLmZmMDcwYWM3NjExMSAxMDA2NDQNCj4+PiAt
+LS0gYS9kcml2ZXJzL2dwdS9kcm0vcXhsL3F4bF9kcnYuYw0KPj4+ICsrKyBiL2RyaXZlcnMv
+Z3B1L2RybS9xeGwvcXhsX2Rydi5jDQo+Pj4gQEAgLTI5LDcgKzI5LDYgQEANCj4+PiAgICAN
+Cj4+PiAgICAjaW5jbHVkZSAicXhsX2Rydi5oIg0KPj4+ICAgIA0KPj4+IC0jaW5jbHVkZSA8
+bGludXgvY29uc29sZS5oPg0KPj4+ICAgICNpbmNsdWRlIDxsaW51eC9tb2R1bGUuaD4NCj4+
+PiAgICAjaW5jbHVkZSA8bGludXgvcGNpLmg+DQo+Pj4gICAgI2luY2x1ZGUgPGxpbnV4L3Zn
+YWFyYi5oPg0KPj4+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0vcmFkZW9uL3JhZGVv
+bl9kcnYuYyBiL2RyaXZlcnMvZ3B1L2RybS9yYWRlb24vcmFkZW9uX2Rydi5jDQo+Pj4gaW5k
+ZXggNTZkNjg4YzA0MzQ2Li5mNTljYzk3MWVjOTUgMTAwNjQ0DQo+Pj4gLS0tIGEvZHJpdmVy
+cy9ncHUvZHJtL3JhZGVvbi9yYWRlb25fZHJ2LmMNCj4+PiArKysgYi9kcml2ZXJzL2dwdS9k
+cm0vcmFkZW9uL3JhZGVvbl9kcnYuYw0KPj4+IEBAIC0zMSw3ICszMSw2IEBADQo+Pj4gICAg
+DQo+Pj4gICAgDQo+Pj4gICAgI2luY2x1ZGUgPGxpbnV4L2NvbXBhdC5oPg0KPj4+IC0jaW5j
+bHVkZSA8bGludXgvY29uc29sZS5oPg0KPj4+ICAgICNpbmNsdWRlIDxsaW51eC9tb2R1bGUu
+aD4NCj4+PiAgICAjaW5jbHVkZSA8bGludXgvcG1fcnVudGltZS5oPg0KPj4+ICAgICNpbmNs
+dWRlIDxsaW51eC92Z2Ffc3dpdGNoZXJvby5oPg0KPj4+IGRpZmYgLS1naXQgYS9kcml2ZXJz
+L2dwdS9kcm0vdGlueS9ib2Nocy5jIGIvZHJpdmVycy9ncHUvZHJtL3RpbnkvYm9jaHMuYw0K
+Pj4+IGluZGV4IGVlNmIxZmY5MTI4Yi4uNmU5YTMxZjFhMGYzIDEwMDY0NA0KPj4+IC0tLSBh
+L2RyaXZlcnMvZ3B1L2RybS90aW55L2JvY2hzLmMNCj4+PiArKysgYi9kcml2ZXJzL2dwdS9k
+cm0vdGlueS9ib2Nocy5jDQo+Pj4gQEAgLTEsNiArMSw1IEBADQo+Pj4gICAgLy8gU1BEWC1M
+aWNlbnNlLUlkZW50aWZpZXI6IEdQTC0yLjAtb3ItbGF0ZXINCj4+PiAgICANCj4+PiAtI2lu
+Y2x1ZGUgPGxpbnV4L2NvbnNvbGUuaD4NCj4+PiAgICAjaW5jbHVkZSA8bGludXgvcGNpLmg+
+DQo+Pj4gICAgDQo+Pj4gICAgI2luY2x1ZGUgPGRybS9kcm1fYXBlcnR1cmUuaD4NCj4+PiBk
+aWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL3RpbnkvY2lycnVzLmMgYi9kcml2ZXJzL2dw
+dS9kcm0vdGlueS9jaXJydXMuYw0KPj4+IGluZGV4IDQ3MDZjNWJjMzA2Ny4uNjU5MjA4ZDVh
+ZWY5IDEwMDY0NA0KPj4+IC0tLSBhL2RyaXZlcnMvZ3B1L2RybS90aW55L2NpcnJ1cy5jDQo+
+Pj4gKysrIGIvZHJpdmVycy9ncHUvZHJtL3RpbnkvY2lycnVzLmMNCj4+PiBAQCAtMTYsNyAr
+MTYsNiBAQA0KPj4+ICAgICAqIENvcHlyaWdodCAxOTk5LTIwMDEgSmVmZiBHYXJ6aWsgPGpn
+YXJ6aWtAcG9ib3guY29tPg0KPj4+ICAgICAqLw0KPj4+ICAgIA0KPj4+IC0jaW5jbHVkZSA8
+bGludXgvY29uc29sZS5oPg0KPj4+ICAgICNpbmNsdWRlIDxsaW51eC9kbWEtYnVmLW1hcC5o
+Pg0KPj4+ICAgICNpbmNsdWRlIDxsaW51eC9tb2R1bGUuaD4NCj4+PiAgICAjaW5jbHVkZSA8
+bGludXgvcGNpLmg+DQo+Pj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS92Ym94dmlk
+ZW8vdmJveF9kcnYuYyBiL2RyaXZlcnMvZ3B1L2RybS92Ym94dmlkZW8vdmJveF9kcnYuYw0K
+Pj4+IGluZGV4IGU0Mzc3YzM3Y2YzMy4uYjFlNjNmZDU0M2JiIDEwMDY0NA0KPj4+IC0tLSBh
+L2RyaXZlcnMvZ3B1L2RybS92Ym94dmlkZW8vdmJveF9kcnYuYw0KPj4+ICsrKyBiL2RyaXZl
+cnMvZ3B1L2RybS92Ym94dmlkZW8vdmJveF9kcnYuYw0KPj4+IEBAIC03LDcgKzcsNiBAQA0K
+Pj4+ICAgICAqICAgICAgICAgIE1pY2hhZWwgVGhheWVyIDxtaWNoYWVsLnRoYXllckBvcmFj
+bGUuY29tLA0KPj4+ICAgICAqICAgICAgICAgIEhhbnMgZGUgR29lZGUgPGhkZWdvZWRlQHJl
+ZGhhdC5jb20+DQo+Pj4gICAgICovDQo+Pj4gLSNpbmNsdWRlIDxsaW51eC9jb25zb2xlLmg+
+DQo+Pj4gICAgI2luY2x1ZGUgPGxpbnV4L21vZHVsZS5oPg0KPj4+ICAgICNpbmNsdWRlIDxs
+aW51eC9wY2kuaD4NCj4+PiAgICAjaW5jbHVkZSA8bGludXgvdnRfa2Vybi5oPg0KPj4+IGRp
+ZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0vdmlydGlvL3ZpcnRncHVfZHJ2LmMgYi9kcml2
+ZXJzL2dwdS9kcm0vdmlydGlvL3ZpcnRncHVfZHJ2LmMNCj4+PiBpbmRleCAyODIwMGRmYmEy
+ZDEuLmJhOWMwYzJmOGFlNiAxMDA2NDQNCj4+PiAtLS0gYS9kcml2ZXJzL2dwdS9kcm0vdmly
+dGlvL3ZpcnRncHVfZHJ2LmMNCj4+PiArKysgYi9kcml2ZXJzL2dwdS9kcm0vdmlydGlvL3Zp
+cnRncHVfZHJ2LmMNCj4+PiBAQCAtMjcsNyArMjcsNiBAQA0KPj4+ICAgICAqLw0KPj4+ICAg
+IA0KPj4+ICAgICNpbmNsdWRlIDxsaW51eC9tb2R1bGUuaD4NCj4+PiAtI2luY2x1ZGUgPGxp
+bnV4L2NvbnNvbGUuaD4NCj4+PiAgICAjaW5jbHVkZSA8bGludXgvcGNpLmg+DQo+Pj4gICAg
+I2luY2x1ZGUgPGxpbnV4L3BvbGwuaD4NCj4+PiAgICAjaW5jbHVkZSA8bGludXgvd2FpdC5o
+Pg0KPj4+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0vdm13Z2Z4L3Ztd2dmeF9kcnYu
+YyBiL2RyaXZlcnMvZ3B1L2RybS92bXdnZngvdm13Z2Z4X2Rydi5jDQo+Pj4gaW5kZXggMDVl
+OTk0OTI5M2Q1Li4xMTVlYzk1MTgyNzcgMTAwNjQ0DQo+Pj4gLS0tIGEvZHJpdmVycy9ncHUv
+ZHJtL3Ztd2dmeC92bXdnZnhfZHJ2LmMNCj4+PiArKysgYi9kcml2ZXJzL2dwdS9kcm0vdm13
+Z2Z4L3Ztd2dmeF9kcnYuYw0KPj4+IEBAIC0yNSw3ICsyNSw2IEBADQo+Pj4gICAgICoNCj4+
+PiAgICAgKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioq
+KioqKioqKioqKioqKioqKioqKioqKioqKiovDQo+Pj4gICAgDQo+Pj4gLSNpbmNsdWRlIDxs
+aW51eC9jb25zb2xlLmg+DQo+Pj4gICAgI2luY2x1ZGUgPGxpbnV4L2RtYS1tYXBwaW5nLmg+
+DQo+Pj4gICAgI2luY2x1ZGUgPGxpbnV4L21vZHVsZS5oPg0KPj4+ICAgICNpbmNsdWRlIDxs
+aW51eC9wY2kuaD4NCj4+PiBkaWZmIC0tZ2l0IGEvZHJpdmVycy92aWRlby9jb25zb2xlL3Zn
+YWNvbi5jIGIvZHJpdmVycy92aWRlby9jb25zb2xlL3ZnYWNvbi5jDQo+Pj4gaW5kZXggZWY5
+YzU3Y2UwOTA2Li5kNDMyMGIxNDc5NTYgMTAwNjQ0DQo+Pj4gLS0tIGEvZHJpdmVycy92aWRl
+by9jb25zb2xlL3ZnYWNvbi5jDQo+Pj4gKysrIGIvZHJpdmVycy92aWRlby9jb25zb2xlL3Zn
+YWNvbi5jDQo+Pj4gQEAgLTk3LDMwICs5Nyw5IEBAIHN0YXRpYyBpbnQgCQl2Z2FfdmlkZW9f
+Zm9udF9oZWlnaHQ7DQo+Pj4gICAgc3RhdGljIGludCAJCXZnYV9zY2FuX2xpbmVzCQlfX3Jl
+YWRfbW9zdGx5Ow0KPj4+ICAgIHN0YXRpYyB1bnNpZ25lZCBpbnQgCXZnYV9yb2xsZWRfb3Zl
+cjsgLyogbGFzdCB2Y19vcmlnaW4gb2Zmc2V0IGJlZm9yZSB3cmFwICovDQo+Pj4gICAgDQo+
+Pj4gLXN0YXRpYyBib29sIHZnYWNvbl90ZXh0X21vZGVfZm9yY2U7DQo+Pj4gICAgc3RhdGlj
+IGJvb2wgdmdhX2hhcmRzY3JvbGxfZW5hYmxlZDsNCj4+PiAgICBzdGF0aWMgYm9vbCB2Z2Ff
+aGFyZHNjcm9sbF91c2VyX2VuYWJsZSA9IHRydWU7DQo+Pj4gICAgDQo+Pj4gLWJvb2wgdmdh
+Y29uX3RleHRfZm9yY2Uodm9pZCkNCj4+PiAtew0KPj4+IC0JcmV0dXJuIHZnYWNvbl90ZXh0
+X21vZGVfZm9yY2U7DQo+Pj4gLX0NCj4+PiAtRVhQT1JUX1NZTUJPTCh2Z2Fjb25fdGV4dF9m
+b3JjZSk7DQo+Pj4gLQ0KPj4+IC1zdGF0aWMgaW50IF9faW5pdCB0ZXh0X21vZGUoY2hhciAq
+c3RyKQ0KPj4+IC17DQo+Pj4gLQl2Z2Fjb25fdGV4dF9tb2RlX2ZvcmNlID0gdHJ1ZTsNCj4+
+PiAtDQo+Pj4gLQlwcl93YXJuKCJZb3UgaGF2ZSBib290ZWQgd2l0aCBub21vZGVzZXQuIFRo
+aXMgbWVhbnMgeW91ciBHUFUgZHJpdmVycyBhcmUgRElTQUJMRURcbiIpOw0KPj4+IC0JcHJf
+d2FybigiQW55IHZpZGVvIHJlbGF0ZWQgZnVuY3Rpb25hbGl0eSB3aWxsIGJlIHNldmVyZWx5
+IGRlZ3JhZGVkLCBhbmQgeW91IG1heSBub3QgZXZlbiBiZSBhYmxlIHRvIHN1c3BlbmQgdGhl
+IHN5c3RlbSBwcm9wZXJseVxuIik7DQo+Pj4gLQlwcl93YXJuKCJVbmxlc3MgeW91IGFjdHVh
+bGx5IHVuZGVyc3RhbmQgd2hhdCBub21vZGVzZXQgZG9lcywgeW91IHNob3VsZCByZWJvb3Qg
+d2l0aG91dCBlbmFibGluZyBpdFxuIik7DQo+Pj4gLQ0KPj4+IC0JcmV0dXJuIDE7DQo+Pj4g
+LX0NCj4+PiAtDQo+Pj4gLS8qIGZvcmNlIHRleHQgbW9kZSAtIHVzZWQgYnkga2VybmVsIG1v
+ZGVzZXR0aW5nICovDQo+Pj4gLV9fc2V0dXAoIm5vbW9kZXNldCIsIHRleHRfbW9kZSk7DQo+
+Pj4gLQ0KPj4+ICAgIHN0YXRpYyBpbnQgX19pbml0IG5vX3Njcm9sbChjaGFyICpzdHIpDQo+
+Pj4gICAgew0KPj4+ICAgIAkvKg0KPj4+IGRpZmYgLS1naXQgYS9pbmNsdWRlL2RybS9kcm1f
+bW9kZV9jb25maWcuaCBiL2luY2x1ZGUvZHJtL2RybV9tb2RlX2NvbmZpZy5oDQo+Pj4gaW5k
+ZXggNDhiN2RlODBkYWY1Li4xODk4MmQzNTA3ZTQgMTAwNjQ0DQo+Pj4gLS0tIGEvaW5jbHVk
+ZS9kcm0vZHJtX21vZGVfY29uZmlnLmgNCj4+PiArKysgYi9pbmNsdWRlL2RybS9kcm1fbW9k
+ZV9jb25maWcuaA0KPj4+IEBAIC05NjksNCArOTY5LDEwIEBAIHN0YXRpYyBpbmxpbmUgaW50
+IGRybV9tb2RlX2NvbmZpZ19pbml0KHN0cnVjdCBkcm1fZGV2aWNlICpkZXYpDQo+Pj4gICAg
+dm9pZCBkcm1fbW9kZV9jb25maWdfcmVzZXQoc3RydWN0IGRybV9kZXZpY2UgKmRldik7DQo+
+Pj4gICAgdm9pZCBkcm1fbW9kZV9jb25maWdfY2xlYW51cChzdHJ1Y3QgZHJtX2RldmljZSAq
+ZGV2KTsNCj4+PiAgICANCj4+PiArI2lmZGVmIENPTkZJR19WR0FfQ09OU09MRQ0KPj4+ICtl
+eHRlcm4gaW50IGRybV9jaGVja19tb2Rlc2V0KHZvaWQpOw0KPj4+ICsjZWxzZQ0KPj4+ICtz
+dGF0aWMgaW5saW5lIGludCBkcm1fY2hlY2tfbW9kZXNldCh2b2lkKSB7IHJldHVybiAwOyB9
+DQo+Pj4gKyNlbmRpZg0KPj4+ICsNCj4+PiAgICAjZW5kaWYNCj4+PiBkaWZmIC0tZ2l0IGEv
+aW5jbHVkZS9saW51eC9jb25zb2xlLmggYi9pbmNsdWRlL2xpbnV4L2NvbnNvbGUuaA0KPj4+
+IGluZGV4IDIwODc0ZGI1MGJjOC4uZDRkZDgzODQ4OThiIDEwMDY0NA0KPj4+IC0tLSBhL2lu
+Y2x1ZGUvbGludXgvY29uc29sZS5oDQo+Pj4gKysrIGIvaW5jbHVkZS9saW51eC9jb25zb2xl
+LmgNCj4+PiBAQCAtMjE3LDEyICsyMTcsNiBAQCBleHRlcm4gYXRvbWljX3QgaWdub3JlX2Nv
+bnNvbGVfbG9ja193YXJuaW5nOw0KPj4+ICAgICNkZWZpbmUgVkVTQV9IU1lOQ19TVVNQRU5E
+ICAgICAgMg0KPj4+ICAgICNkZWZpbmUgVkVTQV9QT1dFUkRPV04gICAgICAgICAgMw0KPj4+
+ICAgIA0KPj4+IC0jaWZkZWYgQ09ORklHX1ZHQV9DT05TT0xFDQo+Pj4gLWV4dGVybiBib29s
+IHZnYWNvbl90ZXh0X2ZvcmNlKHZvaWQpOw0KPj4+IC0jZWxzZQ0KPj4+IC1zdGF0aWMgaW5s
+aW5lIGJvb2wgdmdhY29uX3RleHRfZm9yY2Uodm9pZCkgeyByZXR1cm4gZmFsc2U7IH0NCj4+
+PiAtI2VuZGlmDQo+Pj4gLQ0KPj4+ICAgIGV4dGVybiB2b2lkIGNvbnNvbGVfaW5pdCh2b2lk
+KTsNCj4+PiAgICANCj4+PiAgICAvKiBGb3IgZGVmZXJyZWQgY29uc29sZSB0YWtlb3ZlciAq
+Lw0KPj4+DQo+IA0KDQotLSANClRob21hcyBaaW1tZXJtYW5uDQpHcmFwaGljcyBEcml2ZXIg
+RGV2ZWxvcGVyDQpTVVNFIFNvZnR3YXJlIFNvbHV0aW9ucyBHZXJtYW55IEdtYkgNCk1heGZl
+bGRzdHIuIDUsIDkwNDA5IE7DvHJuYmVyZywgR2VybWFueQ0KKEhSQiAzNjgwOSwgQUcgTsO8
+cm5iZXJnKQ0KR2VzY2jDpGZ0c2bDvGhyZXI6IEl2byBUb3Rldg0K
 
-Perhaps that should be a separate change on top.
+--------------l4WtE5NDCwhX3Yej90putktx--
 
-BR,
-Jani.
+--------------zl0Oh59VDXN0QB6wEYp8aODT
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
 
->
->
->>   drm_cma_helper-y :=3D drm_gem_cma_helper.o
->>   obj-$(CONFIG_DRM_GEM_CMA_HELPER) +=3D drm_cma_helper.o
->>=20=20=20
->> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c b/drivers/gpu/drm/a=
-md/amdgpu/amdgpu_drv.c
->> index 7fde40d06181..b4b6993861e6 100644
->> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c
->> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c
->> @@ -31,7 +31,6 @@
->>   #include "amdgpu_drv.h"
->>=20=20=20
->>   #include <drm/drm_pciids.h>
->> -#include <linux/console.h>
->>   #include <linux/module.h>
->>   #include <linux/pm_runtime.h>
->>   #include <linux/vga_switcheroo.h>
->> diff --git a/drivers/gpu/drm/ast/ast_drv.c b/drivers/gpu/drm/ast/ast_drv=
-.c
->> index 802063279b86..6222082c3082 100644
->> --- a/drivers/gpu/drm/ast/ast_drv.c
->> +++ b/drivers/gpu/drm/ast/ast_drv.c
->> @@ -26,7 +26,6 @@
->>    * Authors: Dave Airlie <airlied@redhat.com>
->>    */
->>=20=20=20
->> -#include <linux/console.h>
->>   #include <linux/module.h>
->>   #include <linux/pci.h>
->>=20=20=20
->> diff --git a/drivers/gpu/drm/drm_drv.c b/drivers/gpu/drm/drm_drv.c
->> index 3fb567d62881..80b85b8ea776 100644
->> --- a/drivers/gpu/drm/drm_drv.c
->> +++ b/drivers/gpu/drm/drm_drv.c
->> @@ -986,12 +986,13 @@ EXPORT_SYMBOL(drm_dev_set_unique);
->>    */
->>   int drm_drv_enabled(const struct drm_driver *driver)
->>   {
->> -	if (vgacon_text_force()) {
->> +	int ret;
->> +
->> +	ret =3D drm_check_modeset();
->> +	if (ret)
->>   		DRM_INFO("%s driver is disabled\n", driver->name);
->> -		return -ENODEV;
->> -	}
->>=20=20=20
->> -	return 0;
->> +	return ret;
->>   }
->>   EXPORT_SYMBOL(drm_drv_enabled);
->>=20=20=20
->> diff --git a/drivers/gpu/drm/drm_nomodeset.c b/drivers/gpu/drm/drm_nomod=
-eset.c
->> new file mode 100644
->> index 000000000000..6683e396d2c5
->> --- /dev/null
->> +++ b/drivers/gpu/drm/drm_nomodeset.c
->> @@ -0,0 +1,26 @@
->> +// SPDX-License-Identifier: GPL-2.0
->> +
->> +#include <linux/module.h>
->> +#include <linux/types.h>
->> +
->> +static bool drm_nomodeset;
->> +
->> +int drm_check_modeset(void)
->> +{
->> +	return drm_nomodeset ? -ENODEV : 0;
->> +}
->> +EXPORT_SYMBOL(drm_check_modeset);
->> +
->> +static int __init disable_modeset(char *str)
->> +{
->> +	drm_nomodeset =3D true;
->> +
->> +	pr_warn("You have booted with nomodeset. This means your GPU drivers a=
-re DISABLED\n");
->> +	pr_warn("Any video related functionality will be severely degraded, an=
-d you may not even be able to suspend the system properly\n");
->> +	pr_warn("Unless you actually understand what nomodeset does, you shoul=
-d reboot without enabling it\n");
->
-> I'd update this text to be less sensational.
->
->> +
->> +	return 1;
->> +}
->> +
->> +/* Disable kernel modesetting */
->> +__setup("nomodeset", disable_modeset);
->> diff --git a/drivers/gpu/drm/i915/i915_module.c b/drivers/gpu/drm/i915/i=
-915_module.c
->> index 45cb3e540eff..c890c1ca20c4 100644
->> --- a/drivers/gpu/drm/i915/i915_module.c
->> +++ b/drivers/gpu/drm/i915/i915_module.c
->> @@ -4,8 +4,6 @@
->>    * Copyright =C2=A9 2021 Intel Corporation
->>    */
->>=20=20=20
->> -#include <linux/console.h>
->> -
->
-> These changes should be in patch 1?
->
->>   #include "gem/i915_gem_context.h"
->>   #include "gem/i915_gem_object.h"
->>   #include "i915_active.h"
->> diff --git a/drivers/gpu/drm/mgag200/mgag200_drv.c b/drivers/gpu/drm/mga=
-g200/mgag200_drv.c
->> index 2a581094ba2b..8e000cac11ba 100644
->> --- a/drivers/gpu/drm/mgag200/mgag200_drv.c
->> +++ b/drivers/gpu/drm/mgag200/mgag200_drv.c
->> @@ -6,7 +6,6 @@
->>    *          Dave Airlie
->>    */
->>=20=20=20
->> -#include <linux/console.h>
->>   #include <linux/module.h>
->>   #include <linux/pci.h>
->>   #include <linux/vmalloc.h>
->> diff --git a/drivers/gpu/drm/nouveau/nouveau_drm.c b/drivers/gpu/drm/nou=
-veau/nouveau_drm.c
->> index 8844d3602d87..bd1456521b7c 100644
->> --- a/drivers/gpu/drm/nouveau/nouveau_drm.c
->> +++ b/drivers/gpu/drm/nouveau/nouveau_drm.c
->> @@ -22,7 +22,6 @@
->>    * Authors: Ben Skeggs
->>    */
->>=20=20=20
->> -#include <linux/console.h>
->>   #include <linux/delay.h>
->>   #include <linux/module.h>
->>   #include <linux/pci.h>
->> diff --git a/drivers/gpu/drm/qxl/qxl_drv.c b/drivers/gpu/drm/qxl/qxl_drv=
-.c
->> index 3ac2ef2bf545..ff070ac76111 100644
->> --- a/drivers/gpu/drm/qxl/qxl_drv.c
->> +++ b/drivers/gpu/drm/qxl/qxl_drv.c
->> @@ -29,7 +29,6 @@
->>=20=20=20
->>   #include "qxl_drv.h"
->>=20=20=20
->> -#include <linux/console.h>
->>   #include <linux/module.h>
->>   #include <linux/pci.h>
->>   #include <linux/vgaarb.h>
->> diff --git a/drivers/gpu/drm/radeon/radeon_drv.c b/drivers/gpu/drm/radeo=
-n/radeon_drv.c
->> index 56d688c04346..f59cc971ec95 100644
->> --- a/drivers/gpu/drm/radeon/radeon_drv.c
->> +++ b/drivers/gpu/drm/radeon/radeon_drv.c
->> @@ -31,7 +31,6 @@
->>=20=20=20
->>=20=20=20
->>   #include <linux/compat.h>
->> -#include <linux/console.h>
->>   #include <linux/module.h>
->>   #include <linux/pm_runtime.h>
->>   #include <linux/vga_switcheroo.h>
->> diff --git a/drivers/gpu/drm/tiny/bochs.c b/drivers/gpu/drm/tiny/bochs.c
->> index ee6b1ff9128b..6e9a31f1a0f3 100644
->> --- a/drivers/gpu/drm/tiny/bochs.c
->> +++ b/drivers/gpu/drm/tiny/bochs.c
->> @@ -1,6 +1,5 @@
->>   // SPDX-License-Identifier: GPL-2.0-or-later
->>=20=20=20
->> -#include <linux/console.h>
->>   #include <linux/pci.h>
->>=20=20=20
->>   #include <drm/drm_aperture.h>
->> diff --git a/drivers/gpu/drm/tiny/cirrus.c b/drivers/gpu/drm/tiny/cirrus=
-.c
->> index 4706c5bc3067..659208d5aef9 100644
->> --- a/drivers/gpu/drm/tiny/cirrus.c
->> +++ b/drivers/gpu/drm/tiny/cirrus.c
->> @@ -16,7 +16,6 @@
->>    * Copyright 1999-2001 Jeff Garzik <jgarzik@pobox.com>
->>    */
->>=20=20=20
->> -#include <linux/console.h>
->>   #include <linux/dma-buf-map.h>
->>   #include <linux/module.h>
->>   #include <linux/pci.h>
->> diff --git a/drivers/gpu/drm/vboxvideo/vbox_drv.c b/drivers/gpu/drm/vbox=
-video/vbox_drv.c
->> index e4377c37cf33..b1e63fd543bb 100644
->> --- a/drivers/gpu/drm/vboxvideo/vbox_drv.c
->> +++ b/drivers/gpu/drm/vboxvideo/vbox_drv.c
->> @@ -7,7 +7,6 @@
->>    *          Michael Thayer <michael.thayer@oracle.com,
->>    *          Hans de Goede <hdegoede@redhat.com>
->>    */
->> -#include <linux/console.h>
->>   #include <linux/module.h>
->>   #include <linux/pci.h>
->>   #include <linux/vt_kern.h>
->> diff --git a/drivers/gpu/drm/virtio/virtgpu_drv.c b/drivers/gpu/drm/virt=
-io/virtgpu_drv.c
->> index 28200dfba2d1..ba9c0c2f8ae6 100644
->> --- a/drivers/gpu/drm/virtio/virtgpu_drv.c
->> +++ b/drivers/gpu/drm/virtio/virtgpu_drv.c
->> @@ -27,7 +27,6 @@
->>    */
->>=20=20=20
->>   #include <linux/module.h>
->> -#include <linux/console.h>
->>   #include <linux/pci.h>
->>   #include <linux/poll.h>
->>   #include <linux/wait.h>
->> diff --git a/drivers/gpu/drm/vmwgfx/vmwgfx_drv.c b/drivers/gpu/drm/vmwgf=
-x/vmwgfx_drv.c
->> index 05e9949293d5..115ec9518277 100644
->> --- a/drivers/gpu/drm/vmwgfx/vmwgfx_drv.c
->> +++ b/drivers/gpu/drm/vmwgfx/vmwgfx_drv.c
->> @@ -25,7 +25,6 @@
->>    *
->>    *********************************************************************=
-*****/
->>=20=20=20
->> -#include <linux/console.h>
->>   #include <linux/dma-mapping.h>
->>   #include <linux/module.h>
->>   #include <linux/pci.h>
->> diff --git a/drivers/video/console/vgacon.c b/drivers/video/console/vgac=
-on.c
->> index ef9c57ce0906..d4320b147956 100644
->> --- a/drivers/video/console/vgacon.c
->> +++ b/drivers/video/console/vgacon.c
->> @@ -97,30 +97,9 @@ static int 		vga_video_font_height;
->>   static int 		vga_scan_lines		__read_mostly;
->>   static unsigned int 	vga_rolled_over; /* last vc_origin offset before =
-wrap */
->>=20=20=20
->> -static bool vgacon_text_mode_force;
->>   static bool vga_hardscroll_enabled;
->>   static bool vga_hardscroll_user_enable =3D true;
->>=20=20=20
->> -bool vgacon_text_force(void)
->> -{
->> -	return vgacon_text_mode_force;
->> -}
->> -EXPORT_SYMBOL(vgacon_text_force);
->> -
->> -static int __init text_mode(char *str)
->> -{
->> -	vgacon_text_mode_force =3D true;
->> -
->> -	pr_warn("You have booted with nomodeset. This means your GPU drivers a=
-re DISABLED\n");
->> -	pr_warn("Any video related functionality will be severely degraded, an=
-d you may not even be able to suspend the system properly\n");
->> -	pr_warn("Unless you actually understand what nomodeset does, you shoul=
-d reboot without enabling it\n");
->> -
->> -	return 1;
->> -}
->> -
->> -/* force text mode - used by kernel modesetting */
->> -__setup("nomodeset", text_mode);
->> -
->>   static int __init no_scroll(char *str)
->>   {
->>   	/*
->> diff --git a/include/drm/drm_mode_config.h b/include/drm/drm_mode_config=
-.h
->> index 48b7de80daf5..18982d3507e4 100644
->> --- a/include/drm/drm_mode_config.h
->> +++ b/include/drm/drm_mode_config.h
->> @@ -969,4 +969,10 @@ static inline int drm_mode_config_init(struct drm_d=
-evice *dev)
->>   void drm_mode_config_reset(struct drm_device *dev);
->>   void drm_mode_config_cleanup(struct drm_device *dev);
->>=20=20=20
->> +#ifdef CONFIG_VGA_CONSOLE
->> +extern int drm_check_modeset(void);
->> +#else
->> +static inline int drm_check_modeset(void) { return 0; }
->> +#endif
->> +
->>   #endif
->> diff --git a/include/linux/console.h b/include/linux/console.h
->> index 20874db50bc8..d4dd8384898b 100644
->> --- a/include/linux/console.h
->> +++ b/include/linux/console.h
->> @@ -217,12 +217,6 @@ extern atomic_t ignore_console_lock_warning;
->>   #define VESA_HSYNC_SUSPEND      2
->>   #define VESA_POWERDOWN          3
->>=20=20=20
->> -#ifdef CONFIG_VGA_CONSOLE
->> -extern bool vgacon_text_force(void);
->> -#else
->> -static inline bool vgacon_text_force(void) { return false; }
->> -#endif
->> -
->>   extern void console_init(void);
->>=20=20=20
->>   /* For deferred console takeover */
->>=20
+-----BEGIN PGP SIGNATURE-----
 
---=20
-Jani Nikula, Intel Open Source Graphics Center
+wsF5BAABCAAjFiEExndm/fpuMUdwYFFolh/E3EQov+AFAmGE+70FAwAAAAAACgkQlh/E3EQov+BH
+Bw//ficIfs5und3AvRNRvqP7fYQyqGJZzZWv5yi7/7ZFMufHfnTZI34+p6Roz85l6FBTdU4Jx6wK
+RwEEoKmbyaLZU6eS47P5AMuxo96Y3d51Z5TAz8fYOPIc7UHjmew3PigmFx8uYzIhOY3FE3knt9rJ
+4HgjHLHEq/UlaBBY++QClyp/OuxgCdgvX0QxpgKujPaVbJR5VNqcIJz2F2fKYqyiNjh/3j6WWQt5
+31hOHBE+JzRbRba6YkXyIYlOjFbAOvzERFC82WXS9oT02GkxFNLdN6X3OaszC33hBusJOYN4tNQX
+vwqm9QPDMI8i6OM3k+KwCuqpkGU9tvRERvaFGQTHo3aXSMNgwN+77HLr4R1p8E5XOh3CDW4LeHOd
+OpM6zduW+zeNGnUzT1tOYMzsNpO28xi175evsagMoWIQIvw8BqgA+sMDjvI1lD2+pTQ3SqVBvOhE
+od/KGJfCr3nXQSq7ojiQqGJSiBIzmA+MwIcEjkIzNAmcEMD/FhT+Jr5VlZI+XSLGbIS5aMn/6elZ
+QKIGIJkpR+7rR+RBIsCJPMFU00AMQfA10g67G1eo7nOBY6k4JlsojxTWE4ojqqNuvA8sAzcxZu+6
+fMLld3Fb7TZ4lRugs9x/f4bCW9kY/PsBucA/W/cTkXDePbcY8A/GrqBDTR+8NrG/2sFa4Q6leag9
+uro=
+=B9Me
+-----END PGP SIGNATURE-----
+
+--------------zl0Oh59VDXN0QB6wEYp8aODT--
