@@ -1,59 +1,55 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1D40844C602
-	for <lists+nouveau@lfdr.de>; Wed, 10 Nov 2021 18:33:57 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5092144CE74
+	for <lists+nouveau@lfdr.de>; Thu, 11 Nov 2021 01:43:15 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id ECBF46EC30;
-	Wed, 10 Nov 2021 17:33:53 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 680A36E5A2;
+	Thu, 11 Nov 2021 00:43:11 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 11FE26EC30
- for <nouveau@lists.freedesktop.org>; Wed, 10 Nov 2021 17:33:52 +0000 (UTC)
-Received: by mail-ed1-x532.google.com with SMTP id m14so13879415edd.0
- for <nouveau@lists.freedesktop.org>; Wed, 10 Nov 2021 09:33:51 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to;
- bh=gvkjzwwH9wCeM8xIUwXDr0jc0H1EZZRPrN5X5UOqwyo=;
- b=OSZt8HsjMglhaoCXrvxjpBuzZ6gwWrfbKIVkXAELfONxhHncp1AyBdpSLRINDxVGtN
- HDuF0/JyxevP3fUp+aa9cvFhxXL6B1/9TPSTRQwkxqxl8ws2AH83EBl0c6GE/5D9jeD2
- 9cdiOzmvwdIZGYsB3UzlSRc0XfCXQmix+LXyU=
+Received: from mail-yb1-xb31.google.com (mail-yb1-xb31.google.com
+ [IPv6:2607:f8b0:4864:20::b31])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id C37C76E436;
+ Thu, 11 Nov 2021 00:43:09 +0000 (UTC)
+Received: by mail-yb1-xb31.google.com with SMTP id v138so10823683ybb.8;
+ Wed, 10 Nov 2021 16:43:09 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=KbmbVjvohfrwAvo67OI5SINSyboo8b3+77H0HqyVNcY=;
+ b=OI8+/SLWf+OyAM+7QxLLrisD6+kiuYIuroalbPfdjWD/X7jJbWB5OXT9d3T/MuuZ+B
+ AcpJICUMbzU/wLqJkRHpBkr+wXSQ4/zH3l38oPklML2q/mJCwUj4GvXx+gSsvh2FcmdI
+ 9yaPgHPhEz40NH2f4h7+P9FBf1vvjQbZzHUZdZggTZHh0JddI/Apx9pl5H4o71h+ZGEd
+ KRsBnVVWLyo/W5wQ0pfkMu/wPfLJlgPBTexSIMmXaoyyWaB2atXsSUd8tKhQd7o8wuRv
+ WRlo5M6jkv7fUq0K/WTFVwwTwa2Ps07JKX4EV9uwyiVvbclDTirSdoV+2sed1qvvRAgJ
+ YQxQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=gvkjzwwH9wCeM8xIUwXDr0jc0H1EZZRPrN5X5UOqwyo=;
- b=krvIduQwYHIPdRvdCEj7rh6JaG0Hh63ZeH8g+EXGZ8rFFA93OeMkv752oHZHHIKe9l
- Uqo3Dv4gpliK+zYLm5TW7SWGitffFcwz+2+7KHPpconLeNfapz0BTejG/w6jgR6ZF4yu
- Huo0/pIKD9L3An2tp2bdln3P3bE7MGCUtoWqsoplBr2ZWkzFMvo+4IWXQXzjSaSHuGIf
- 5JHRsRxqKjLSkOuJwnEZajLq2IZG2TDVPDztUstai7RHfHnJyH9NvfuJAaJVWl9fb8Eg
- xsV8k9bl9NYaK14+W3rqSO+RwVpaDbknKemedhGke+i50IAyQ35kNKxPs/DcGtJPqL+S
- uF9A==
-X-Gm-Message-State: AOAM530gfzvrssNmZlxHf5Ws5WVlw8LtreJqsKEHs4barNcKWCHN5CMB
- zzAg4wclNeXHlukKzTlPcAvkZA==
-X-Google-Smtp-Source: ABdhPJypJbNYnKe5aXd7d7+Gi1dyeD7DSsTZuaua43rNJOTbSoleAHbGitAWrvXev37dsfYz8GnSMw==
-X-Received: by 2002:a17:906:2a06:: with SMTP id
- j6mr935983eje.401.1636565630533; 
- Wed, 10 Nov 2021 09:33:50 -0800 (PST)
-Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
- by smtp.gmail.com with ESMTPSA id u14sm237771edj.74.2021.11.10.09.33.49
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 10 Nov 2021 09:33:50 -0800 (PST)
-Date: Wed, 10 Nov 2021 18:33:48 +0100
-From: Daniel Vetter <daniel@ffwll.ch>
-To: Karol Herbst <kherbst@redhat.com>
-Message-ID: <YYwCfCaANDHsVRfR@phenom.ffwll.local>
-References: <20211110133157.553251-1-kherbst@redhat.com>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=KbmbVjvohfrwAvo67OI5SINSyboo8b3+77H0HqyVNcY=;
+ b=1O4png0UrhOn7vO2XkG+lAB/eFBBvdfV4zW1FUwxK9hIKVhihqXiybz+mlW4viS2oJ
+ WKhp4fB/kP5I1xCH+fZlbpw3kp4EjnWlXcM28nK54vHBhfUCVijzPa5N1xVdXRqqcVNe
+ YdFkyXIx8Vvc7I1k9GzqxiXEAcSR+gWepkt9iA3+tYY9EvEHGryStYa3QYHtJoGX9lcj
+ J7TKnbR8nHOOSoyfhOBG26M57XzqBjICyAZoDy1YkBKnLc07jM22XgGycJqDNWZUrRUb
+ YF8782Zr+l9vvVm7Kbh7JmcEGS9zneCl7QTUeYMWBCTA0WU0D8PocgPoCY9EubEKlGYR
+ 50QQ==
+X-Gm-Message-State: AOAM533k+oOLW0lr1NGyt/bAAUH2uxDboyodvEQSB7P8tdapkrSWBZbG
+ fxbQPdKWB8QEzzVsnCw4ywnP4REAaIWSsOL7Haw=
+X-Google-Smtp-Source: ABdhPJzVkVw3Cb9WjUCZuLTa0Oz4USHiK2SWvXeQGXZzVq23gej8re/c16Co3nxcHf8xSL+tJbWVEvhikMqZzJwjDYQ=
+X-Received: by 2002:a25:c6c2:: with SMTP id k185mr3967924ybf.230.1636591388838; 
+ Wed, 10 Nov 2021 16:43:08 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20211110133157.553251-1-kherbst@redhat.com>
-X-Operating-System: Linux phenom 5.10.0-8-amd64 
-Subject: Re: [Nouveau] [PATCH] MAINTAINERS: update information for nouveau
+References: <3d3bd0f7-c150-2479-9350-35d394ee772d@xs4all.nl>
+In-Reply-To: <3d3bd0f7-c150-2479-9350-35d394ee772d@xs4all.nl>
+From: Ben Skeggs <skeggsb@gmail.com>
+Date: Thu, 11 Nov 2021 10:42:57 +1000
+Message-ID: <CACAvsv5ZwkwD_c+H1=QFYm1nwTud0gh+EHOk=ak_3oZCRVRVjA@mail.gmail.com>
+To: Hans Verkuil <hverkuil-cisco@xs4all.nl>
+Content-Type: text/plain; charset="UTF-8"
+Subject: Re: [Nouveau] [PATCH] drm/nouveau: hdmigv100.c: fix corrupted HDMI
+ Vendor InfoFrame
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -65,71 +61,35 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>,
- Daniel Vetter <daniel@ffwll.ch>
+Cc: ML nouveau <nouveau@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>,
+ Maling list - DRI developers <dri-devel@lists.freedesktop.org>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, Nov 10, 2021 at 02:31:57PM +0100, Karol Herbst wrote:
-> Some side notes on this. Atm we do want to use gitlab for bug tracking and
-> merge requests. But due to the nature of the current linux kernel
-> development, we can only do so for nouveau internal changes.
-> 
-> Everything else still needs to be sent as emails and this is also includes
-> changes to UAPI etc.
-> 
-> Anyway, if somebody wants to submit patches via gitlab, they are free to
-> do so and this should just make this more official and documented.
-> 
-> People listed as maintainers are such that have push access to drm-misc
-> (where changes are pushed to after landing in gitlab) and are known
-> nouveau developers.
-> We did this already for some trivial changes and critical bug fixes
-> already, we just weren't thinking about updating the MAINTAINERS file.
-> 
-> Cc: Ben Skeggs <bskeggs@redhat.com>
-> Cc: Lyude Paul <lyude@redhat.com>
-> Cc: David Airlie <airlied@linux.ie>
-> Cc: Daniel Vetter <daniel@ffwll.ch>
-> Cc: dri-devel@lists.freedesktop.org
-> Cc: nouveau@lists.freedesktop.org
-> Signed-off-by: Karol Herbst <kherbst@redhat.com>
-
-Acked-by: Daniel Vetter <daniel.vetter@ffwll.ch>
+On Thu, 11 Nov 2021 at 01:43, Hans Verkuil <hverkuil-cisco@xs4all.nl> wrote:
+>
+> gv100_hdmi_ctrl() writes vendor_infoframe.subpack0_high to 0x6f0110, and
+> then overwrites it with 0. Just drop the overwrite with 0, that's clearly
+> a mistake.
+>
+> Because of this issue the HDMI VIC is 0 instead of 1 in the HDMI Vendor
+> InfoFrame when transmitting 4kp30.
+>
+> Signed-off-by: Hans Verkuil <hverkuil-cisco@xs4all.nl>
+> Fixes: 290ffeafcc1a (drm/nouveau/disp/gv100: initial support)
+Reviewed-by: Ben Skeggs <bskeggs@redhat.com>
 
 > ---
->  MAINTAINERS | 9 ++++++++-
->  1 file changed, 8 insertions(+), 1 deletion(-)
-> 
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 8805df335326..270dc9c0a427 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -5961,10 +5961,17 @@ F:	drivers/gpu/drm/panel/panel-novatek-nt36672a.c
->  
->  DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS
->  M:	Ben Skeggs <bskeggs@redhat.com>
-> +M:	Karol Herbst <kherbst@redhat.com>
-> +M:	Lyude Paul <lyude@redhat.com>
->  L:	dri-devel@lists.freedesktop.org
->  L:	nouveau@lists.freedesktop.org
->  S:	Supported
-> -T:	git git://github.com/skeggsb/linux
-> +W:	https://nouveau.freedesktop.org/
-> +Q:	https://patchwork.freedesktop.org/project/nouveau/
-> +Q:	https://gitlab.freedesktop.org/drm/nouveau/-/merge_requests
-> +B:	https://gitlab.freedesktop.org/drm/nouveau/-/issues
-> +C:	irc://irc.oftc.net/nouveau
-> +T:	git https://gitlab.freedesktop.org/drm/nouveau.git
->  F:	drivers/gpu/drm/nouveau/
->  F:	include/uapi/drm/nouveau_drm.h
->  
-> -- 
-> 2.33.1
-> 
-
--- 
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/disp/hdmigv100.c b/drivers/gpu/drm/nouveau/nvkm/engine/disp/hdmigv100.c
+> index 6e3c450eaace..3ff49344abc7 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/engine/disp/hdmigv100.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/disp/hdmigv100.c
+> @@ -62,7 +62,6 @@ gv100_hdmi_ctrl(struct nvkm_ior *ior, int head, bool enable, u8 max_ac_packet,
+>                 nvkm_wr32(device, 0x6f0108 + hdmi, vendor_infoframe.header);
+>                 nvkm_wr32(device, 0x6f010c + hdmi, vendor_infoframe.subpack0_low);
+>                 nvkm_wr32(device, 0x6f0110 + hdmi, vendor_infoframe.subpack0_high);
+> -               nvkm_wr32(device, 0x6f0110 + hdmi, 0x00000000);
+>                 nvkm_wr32(device, 0x6f0114 + hdmi, 0x00000000);
+>                 nvkm_wr32(device, 0x6f0118 + hdmi, 0x00000000);
+>                 nvkm_wr32(device, 0x6f011c + hdmi, 0x00000000);
+>
