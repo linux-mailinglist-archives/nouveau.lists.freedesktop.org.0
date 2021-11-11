@@ -1,54 +1,64 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id C215344CE82
-	for <lists+nouveau@lfdr.de>; Thu, 11 Nov 2021 01:46:26 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2B9E244D2CF
+	for <lists+nouveau@lfdr.de>; Thu, 11 Nov 2021 08:59:23 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2435C6E87D;
-	Thu, 11 Nov 2021 00:46:22 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 483706EA63;
+	Thu, 11 Nov 2021 07:59:21 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-yb1-xb2c.google.com (mail-yb1-xb2c.google.com
- [IPv6:2607:f8b0:4864:20::b2c])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9B66A6E869;
- Thu, 11 Nov 2021 00:46:20 +0000 (UTC)
-Received: by mail-yb1-xb2c.google.com with SMTP id y68so5600799ybe.1;
- Wed, 10 Nov 2021 16:46:20 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=jGclxXlL6lYvEF+SDFmYRiUkfiSkDSyd5IJKVOZ8EqE=;
- b=cRaG+ilODPlONYlYwH15hm3sbeeOVM7FlHUvJIv29IkWjAuwd6CzgRN5kwIrLn4ax5
- jLriURC1Zft0SKih49F52lIFpbeMq+NFQVPB4xwYax4W0vsEZCq5e2+VSn/t6hUhOXu3
- McqdyXPM9VoVSe/ur89/PbjEwYLZHwgUzvhwjx8qttl1/w+mCKaJcKXm8zDekfFR9E56
- zKV26HLTrK3HOFuFsvigJfYQkCnOoSFO2jfWSbtrBcr0VJtp3cyOf33nOqwFHMQIUQel
- W3GUa0Fs6CFj7fxfkD9zHXvBZKYj4GsjUJY/fLSS7gokT1VJVG2KIeM2+nAqwX7XASuh
- 22xg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=jGclxXlL6lYvEF+SDFmYRiUkfiSkDSyd5IJKVOZ8EqE=;
- b=XBJt9OQ2j0WiJck4aTGpEfz+0WrBw04pQl/hIN/zWHjy95fAEooy1p6kggjcmYlUQ6
- ZHo+v1kyjAbQW6UWaKp0RD+phN4W9uEaovrJfw/b8Gy9uaNZSQEqJV0GEEwsJGOIAONW
- LQynRCUMYUzAGxnYPBKwRF+1AFRHdhuHQRFhdvcDF+/Ssdntof9WyCo9FADxkaEzOQNH
- XMW6/4/aodExsKXMWwVBOXKpWMBoFhRO5hbBC21R57b7i5AZs6+EAWxRI1teRJuCXiFn
- 4xI0KzOJYGp2mqf1Vz1r6J1ZYpkeUZaM0qGDvmP23TaBein7USzhighCjTQgwvrRpup5
- JGew==
-X-Gm-Message-State: AOAM530BYAdmXkLO+loec0sBl9sNrKnGqkrfn3SyYntbfa7NUm1xGqG1
- jG0kaJoWYsOSYshDTvVD5b/RiXP5yzmZCJR6Aivo+zh+
-X-Google-Smtp-Source: ABdhPJzHopCA7n/yH9yxuczPe67/BWVGCG4P6b0YZIv/l3QbYpZ5JKlMNHR/A5zxOYbfTc9SEPCS+ymeZM2808khiJ4=
-X-Received: by 2002:a25:ec04:: with SMTP id j4mr3849065ybh.327.1636591579794; 
- Wed, 10 Nov 2021 16:46:19 -0800 (PST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id DC1D86EA63
+ for <nouveau@lists.freedesktop.org>; Thu, 11 Nov 2021 07:59:18 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.net;
+ s=badeba3b8450; t=1636617557;
+ bh=wDCbSXKW5heZxc3X80AxXt0zzeQtTR6l9xwaeyK2Fqg=;
+ h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:In-Reply-To;
+ b=UKzW5SUiriUx+6EMH9xC6HM4lXgkt7ceuwuOFf5OLDg9Iz6T2pH9I2iiIH+rMmm9n
+ sfWGfmynPFEn4Q9L+xU21kDNMVuloA/tltczpcvGbMgbNYt27fyqx1RP7pxt/VA/o+
+ A7hb2FFpVHx4/TtrLMRRtAYn3RsOnOxFgRo2s75I=
+X-UI-Sender-Class: 01bb95c1-4bf8-414a-932a-4f6e2808ef9c
+Received: from [192.168.0.181] ([178.115.40.235]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MPGW7-1n3zMW33Yj-00Pby2; Thu, 11
+ Nov 2021 08:54:06 +0100
+Message-ID: <3301ae21-6427-b706-e544-67ec82109271@gmx.net>
+Date: Thu, 11 Nov 2021 08:54:04 +0100
 MIME-Version: 1.0
-References: <20211110133157.553251-1-kherbst@redhat.com>
-In-Reply-To: <20211110133157.553251-1-kherbst@redhat.com>
-From: Ben Skeggs <skeggsb@gmail.com>
-Date: Thu, 11 Nov 2021 10:46:08 +1000
-Message-ID: <CACAvsv6a=jtpgr02cGWgu4ZrSNjmRRZecdNHtUNXVBWU1msDiQ@mail.gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.3.0
+Content-Language: en-US
 To: Karol Herbst <kherbst@redhat.com>
-Content-Type: text/plain; charset="UTF-8"
-Subject: Re: [Nouveau] [PATCH] MAINTAINERS: update information for nouveau
+References: <4a8b1573-3cd6-19cc-b18b-588d7d8283d9@gmx.net>
+ <CACO55tun0ohXCNV_3o3eZozs7+ehy-Bv0_cxP+uaOMFgwkq_Nw@mail.gmail.com>
+From: Linux User #330250 <linuxuser330250@gmx.net>
+In-Reply-To: <CACO55tun0ohXCNV_3o3eZozs7+ehy-Bv0_cxP+uaOMFgwkq_Nw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:Rq2T+UNAAOf9yeh02Ely7TegzjhAG5ZXDC3j4Nrr2Jqe2udJhQ7
+ CvuizfK9COTKhhzGac99mIoHz6hXJZznSc1HpfFzwKiIr4VZAd+lImgaaoJeFcA1MaW6Wa5
+ V+VCN+jwkb9kBqkNQQ9CuE28wmFPu+6tK3vLRJ/gHrXzBBW5LGPbBiRSoN/xJs3aDAhH9Io
+ rG/Q6I6vkeMHjVf0Oh5eQ==
+X-Spam-Flag: NO
+X-UI-Out-Filterresults: notjunk:1;V03:K0:E07DMnN99eE=:1V/OjK+MBCYCw5Qq//gVeD
+ 4LwSZAl/UDZX7wkcT8uf54M0wR6fXf2kjpwixrAPoLF1PB3NMcShOrykNLztE3MJBgxmnDkLX
+ q3GwrCkVR7QNp9/ecwwCzYKrTLceIbYL+toOiPoDZf9k0MrbPrd4r3r2jnhHnLy7r8KC62Mil
+ u4Uz0Xu/unU0nDPhL+K0OTDxmpUDovolbhPnzFwwreh9P6ZEMNw9g8LEIUiGxgk4yL3YLD5KB
+ y/ch5UnSRuiG2Yh7rBoCHv/5cCaGN6JpIq21KeJJ1Ov9JWC74k9EEYOIiq0CO4krZrc8I4mQp
+ QvO+NVlmyMiuNBn5uPMeDqXAdl2QGzGPP4W8J4hMs6UXyn834849RAJsP827sHXIrk7YUd4x5
+ ohYGJaOeODrK7iP23iXE5ytPjijIvCPwk1FVnTYq35z/pxjOHlUJWr2nHQ3aYLZhBnVwZcQyB
+ dsWPyifOVJBkd8n63Mr7HccFy1efPWvG+qHupep4BdFLBDabHrVH0nJt9kujBkpInVF1n2bkF
+ wNOmjXCPdq5CAQT7OoxEze2uNlwP2g3HtBEcm0xsjkQmx5QJ1Mb4VBfD0Ne8lqyoS6PYzF+Of
+ UjQ+tlBDmfAo18wm9dtoQLFKJY0gf34roiTc72HEsurWGKHWxtCOy2eVBTNXT2IJo8qKXdENh
+ +Uzgi56Z/RdydfLE4cM957aCpDiXfqbEO075x//BcUAoOoYy0C6QB0GcHsP394v98K6eqRcLA
+ kK/loSyL5jgxWwlzeDvZbMLOye4ItBKrzr7P27U02W/uDEHwe2hDZv/vFdbpjI+SyHzF+Abqm
+ szBAVr0MqnatqSaTpcyaVVGL+arm2Hm82JbLsEfjRr0XQfC28i7nezrF/FN7rQ/J4E6P/wvly
+ dvplcaXS/i/XfwniQKOeZ78QWxJ/tjxCsMx280budTPwzgA5peMmxbGy25ro758/uTB0fbucT
+ R5KAo9NKU9kciZer723wHzdZ+FXZ2p7irfk+HALtXjFlGSZ0nHIpgzw7dEHDyo0/FtrnJvR4E
+ BJ5m0K358zOeHEt/0ODSaJBaIxv1QR2dE+SrvSFYjX+vdFoo75gm1HmyJNgnScH6LJ6K6v3c3
+ E8ndFzZizB1tSE=
+Subject: Re: [Nouveau] hardware donation
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,66 +70,62 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, ML nouveau <nouveau@lists.freedesktop.org>,
- Daniel Vetter <daniel@ffwll.ch>, Ben Skeggs <bskeggs@redhat.com>,
- ML dri-devel <dri-devel@lists.freedesktop.org>
+Cc: nouveau <nouveau@lists.freedesktop.org>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, 10 Nov 2021 at 23:32, Karol Herbst <kherbst@redhat.com> wrote:
+On 02 Nov 2021, 02:24, Karol Herbst wrote:
+> On Tue, Oct 26, 2021 at 9:56 PM Linux User #330250
+> <linuxuser330250@gmx.net> wrote:
+>>
+>> Hello!
+>>
+>> I have a ThinkPad T61 with an Nvidia Quadro G86M [NVS 140M] graphics
+>> card. Recently the nvidia binary driver, version 340.x, has been remove=
+d
+>> from most Linux distributions, forcing the use of nouveau.
+>>
+>> In the past, when nouveau was unstable/unusable, people moved to the
+>> binary driver. Since this in no longer an option, nouveau is now the
+>> only option. And I'm totally okay with it, I would have prferred an ope=
+n
+>> source solution anyway... BUT.
+>>
+>> BUT nouveau is unstable. I experience random freezes, like others too:
+>> https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=3D995866
+>>
+>> The only option was to use nomodeset and to have an unaccelerated
+>> graphics output. But if you want to use the laptop as a desktop machine=
+,
+>> this is not much fun.
+>>
+>> Long story short, the question I have:
+>>
+>> According to https://nouveau.freedesktop.org/HardwareDonations.html suc=
+h
+>> a graphics card could be of use?
+>>
 >
-> Some side notes on this. Atm we do want to use gitlab for bug tracking and
-> merge requests. But due to the nature of the current linux kernel
-> development, we can only do so for nouveau internal changes.
+> If you are willing to give away the system anyway, it might make sense
+> to retest with recent software, like newest Fedora or debian sid. We
+> usually fix bugs, but often fixes are not added downstream. And I
+> think the issue shown in this bug is actually fixed already as I
+> remember seeing something like this and we fixed it.
 >
-> Everything else still needs to be sent as emails and this is also includes
-> changes to UAPI etc.
+> If the issue is still there with a recent kernel (newest 5.14 or even
+> 5.15) we can look into it.
 >
-> Anyway, if somebody wants to submit patches via gitlab, they are free to
-> do so and this should just make this more official and documented.
->
-> People listed as maintainers are such that have push access to drm-misc
-> (where changes are pushed to after landing in gitlab) and are known
-> nouveau developers.
-> We did this already for some trivial changes and critical bug fixes
-> already, we just weren't thinking about updating the MAINTAINERS file.
->
-> Cc: Ben Skeggs <bskeggs@redhat.com>
-> Cc: Lyude Paul <lyude@redhat.com>
-> Cc: David Airlie <airlied@linux.ie>
-> Cc: Daniel Vetter <daniel@ffwll.ch>
-> Cc: dri-devel@lists.freedesktop.org
-> Cc: nouveau@lists.freedesktop.org
-> Signed-off-by: Karol Herbst <kherbst@redhat.com>
-Signed-off-by: Ben Skeggs <bskeggs@redhat.com>
+> Thanks
 
-> ---
->  MAINTAINERS | 9 ++++++++-
->  1 file changed, 8 insertions(+), 1 deletion(-)
->
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 8805df335326..270dc9c0a427 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -5961,10 +5961,17 @@ F:      drivers/gpu/drm/panel/panel-novatek-nt36672a.c
->
->  DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS
->  M:     Ben Skeggs <bskeggs@redhat.com>
-> +M:     Karol Herbst <kherbst@redhat.com>
-> +M:     Lyude Paul <lyude@redhat.com>
->  L:     dri-devel@lists.freedesktop.org
->  L:     nouveau@lists.freedesktop.org
->  S:     Supported
-> -T:     git git://github.com/skeggsb/linux
-> +W:     https://nouveau.freedesktop.org/
-> +Q:     https://patchwork.freedesktop.org/project/nouveau/
-> +Q:     https://gitlab.freedesktop.org/drm/nouveau/-/merge_requests
-> +B:     https://gitlab.freedesktop.org/drm/nouveau/-/issues
-> +C:     irc://irc.oftc.net/nouveau
-> +T:     git https://gitlab.freedesktop.org/drm/nouveau.git
->  F:     drivers/gpu/drm/nouveau/
->  F:     include/uapi/drm/nouveau_drm.h
->
-> --
-> 2.33.1
->
+Hi!
+Sorry for the late reply. I don't have the time at the moment, but I
+will try the newest Debian testing on that system and report back. If
+that does work, it is an option to actually keep the system and use it
+as originally intended.
+
+If it doesn't work, I'm thinking about 1) Fedora and 2) Gentoo (because
+that's what I normally use). Even though the later would be quite time
+consuming, I'd certainly get the newest available sources to the hardware.
+
+>> Thanks,
+>> Linux User #330250
