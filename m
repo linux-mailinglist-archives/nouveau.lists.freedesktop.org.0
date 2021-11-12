@@ -1,68 +1,78 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7FDE944D543
-	for <lists+nouveau@lfdr.de>; Thu, 11 Nov 2021 11:48:44 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id B11C844EF74
+	for <lists+nouveau@lfdr.de>; Fri, 12 Nov 2021 23:37:46 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id F327D6EAC4;
-	Thu, 11 Nov 2021 10:48:42 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B09E76E0D8;
+	Fri, 12 Nov 2021 22:37:39 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 10467 seconds by postgrey-1.36 at gabe;
- Thu, 11 Nov 2021 10:48:40 UTC
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
- by gabe.freedesktop.org (Postfix) with ESMTPS id EB9386EAC4
- for <nouveau@lists.freedesktop.org>; Thu, 11 Nov 2021 10:48:40 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.net;
- s=badeba3b8450; t=1636627718;
- bh=c43eITtWTzvIQ97GDO5aMWXIRLvXTvvIfaF+N6dd1Mg=;
- h=X-UI-Sender-Class:Date:Subject:To:References:Cc:From:In-Reply-To;
- b=XscXj4viY1/nJVUb1sSJSiLmRBbNQim/BKa4i5Zohx6IYmdQtbvW1Tebg6XcDGYnm
- SpKalwjFAJvcV5vtTzXhoX8uEX7gS9H8OF0UMsDVAaYZzg2ldvEkmbkyw9L6E4K1lP
- CULKQ/qm4+LhrIVgyiASz+Pwokmr4MVs0ZXHPIpE=
-X-UI-Sender-Class: 01bb95c1-4bf8-414a-932a-4f6e2808ef9c
-Received: from [192.168.0.181] ([178.115.40.235]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1Mg6e4-1mDQVs0mK6-00heZg; Thu, 11
- Nov 2021 11:48:38 +0100
-Message-ID: <838ab7cb-dcb9-a842-cb9c-4aeae7ddbc9e@gmx.net>
-Date: Thu, 11 Nov 2021 11:48:36 +0100
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id DC91F6E0B9
+ for <nouveau@lists.freedesktop.org>; Fri, 12 Nov 2021 22:37:37 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1636756657;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=j8UFd87L7Ab8fMSkAQc3vH/XiCMU7sezVLrwRYH/XDg=;
+ b=ROU0xXFvW2PAEHPMSHr93DW2nQVgLc8j7Dt5eLQT2fEJlf/EHpzmiNknOmT1IBvMn7XdTk
+ dtk1GmTckwG567ZvA2jN9ecEv5XnxCkM0YSnle8BW99Ep5/J3hYoruWx2eVqNDwyEDAkyd
+ ONVDnQwg0msQBEmsIa+/KXunNKMMMJU=
+Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com
+ [209.85.160.199]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-225-txr80TrzMBaNigVD2ld1Yg-1; Fri, 12 Nov 2021 17:37:33 -0500
+X-MC-Unique: txr80TrzMBaNigVD2ld1Yg-1
+Received: by mail-qt1-f199.google.com with SMTP id
+ x28-20020ac8701c000000b0029f4b940566so8293853qtm.19
+ for <nouveau@lists.freedesktop.org>; Fri, 12 Nov 2021 14:37:33 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
+ :references:organization:user-agent:mime-version
+ :content-transfer-encoding;
+ bh=j8UFd87L7Ab8fMSkAQc3vH/XiCMU7sezVLrwRYH/XDg=;
+ b=g+mB2bS64pJ3yOcOrylTMZhkaBDvE4UdVGE4exgPAtCSAi9aOgA10wUQW1PVTNYQKy
+ wMTftQpAXZ+w1SvHSE+7fbxz/yiSMcIYbhB95H6q+ozvHQ1ARR6d9QNka9tk4sj3UAlu
+ yUKGwUWEFztQjW1siKFFUxTPiswsNjy5PHDjvpkapF5/4u1hrjVjHS42yxgM0xGtfLGF
+ TpO8HCZwHxuODFj7r8FA84WiztNRD4wKYgbKXBjAPdXiJ4qilQGDbUNIC8O0iDqf9uhc
+ 9PQqqqxxCzjiQ1Ox9Jjq8dxdzUFXcXWGWRHsolvr4ww83ULJwxiCkHX4R0cjTH4q1Kwy
+ 5gzQ==
+X-Gm-Message-State: AOAM530nyrLuna2g1l8WG7euoS0d1ey7yP4vdEGaQblYovvc9o2H7bHv
+ EHY3YmflIErQrNPVjScHWkLCqE5szE4LBMd9LnO63+vEpqheWcBIdJWT4CELbodBb3kp7JUOLGu
+ u7CJfhdjA3mILwoicZVeamzfLlA==
+X-Received: by 2002:a05:622a:307:: with SMTP id
+ q7mr20280371qtw.330.1636756653002; 
+ Fri, 12 Nov 2021 14:37:33 -0800 (PST)
+X-Google-Smtp-Source: ABdhPJwmv2+s9HsIhOZaWW0wh6WQGFS4c9E6qdrActSt8eoSle+Ac4DscVPTJ81svE0EOruG6rZTrQ==
+X-Received: by 2002:a05:622a:307:: with SMTP id
+ q7mr20280350qtw.330.1636756652794; 
+ Fri, 12 Nov 2021 14:37:32 -0800 (PST)
+Received: from [192.168.8.138] (pool-96-230-249-157.bstnma.fios.verizon.net.
+ [96.230.249.157])
+ by smtp.gmail.com with ESMTPSA id l1sm3377960qkp.65.2021.11.12.14.37.31
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 12 Nov 2021 14:37:32 -0800 (PST)
+Message-ID: <462fc433630bf6f5b059b6f6f5a62374b0ddd410.camel@redhat.com>
+From: Lyude Paul <lyude@redhat.com>
+To: Karol Herbst <kherbst@redhat.com>, dri-devel@lists.freedesktop.org
+Date: Fri, 12 Nov 2021 17:37:31 -0500
+In-Reply-To: <20211110133157.553251-1-kherbst@redhat.com>
+References: <20211110133157.553251-1-kherbst@redhat.com>
+Organization: Red Hat Inc.
+User-Agent: Evolution 3.40.4 (3.40.4-2.fc34)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.3.0
-Content-Language: en-US
-To: nouveau@lists.freedesktop.org
-References: <4a8b1573-3cd6-19cc-b18b-588d7d8283d9@gmx.net>
- <CACO55tun0ohXCNV_3o3eZozs7+ehy-Bv0_cxP+uaOMFgwkq_Nw@mail.gmail.com>
- <3301ae21-6427-b706-e544-67ec82109271@gmx.net>
- <a17361fb-975e-a845-b715-82cba2d8de11@gmail.com>
-From: Linux User #330250 <linuxuser330250@gmx.net>
-In-Reply-To: <a17361fb-975e-a845-b715-82cba2d8de11@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:s/f0qp1gT+D64tzFh2VXb/4+qK4MZUgpilfBt+vHpKk54SWYw+S
- voZxIa/DuKi90wuCsast4+CvdMXEH9Rybcr/FqbKbiuDJEprYex/2y27sjAamCDPGgQFLE4
- 9SUAf7SqBcZZJ14z5+fc+yWAG5bIP+6VRbzUFR4xWOB/tFx48AqtH8SLV5FX4tJq/HYS2MR
- 9ds0tnedkpkmHv7Tdmlww==
-X-Spam-Flag: NO
-X-UI-Out-Filterresults: notjunk:1;V03:K0:c6I2ZJxsP38=:tM6HvdjfAtof2ss2DEt9Hq
- MoNPeFw28orA3583RW3aRHwOzSLzL/JOgwu+ASmmsZFhQelKJD+JwooLyJh+stptUVNt63fqe
- OpULDI1gtbMIEmEk4Tjk9VEAMetL0uJqOGBqlytaBwFgj9X4ihPvDlBGZbm1mPEWjdubrt12S
- dQAmSK0DCOROgiEFQlKROXbnvLTCZdKHY5/63I4zt1fhYktU+ciL+3IlBMxBkiqSjOK+awv3O
- V96KQMur/kmoOz/UddqMq2Qm5954CIn+ErioUF1mnYD8jsZhPgzbDwSNBm5X1g2FxwKxR1Sw5
- fFkiSqWkewKlFvhay1MOSmpRz4WSiVF42vU+Ig7O0coVhn4xC17hvZxx75cCdWSOF6/amHC25
- cEWWq7SsBToG+PNoPXUTROU8BYcVVrO7GFFYeMlAOrt8Y8sSigaoIMuE0tmeYXZSIW8ZN6j/c
- FmTpJD8uZ4t0bF/5eYQgD1z5RsvVCP3VNUbTQM/Sd/y9IZc++unkjnzZzNeArEZp/aSaUySua
- XWJRS4EJ5J58HHSXJJiRzp5xIry5Rw+bsz2nLO4Ojtmk9lvEZzzu+CjmHGjKvClNsH0tgg9Sj
- wFndaRKowrxlGBq+SJg2grPapSOvvj2HrbR02jMhu00gPWjcSxs2BNueP1GjZqgU2yBR2OOsk
- i8bCvb/+EcDMxS5Bf5yVPg+rSmReWu4bt+Do2JpYZ1PQP2jpFi6L+5x0xwpPIUNUaNwVLK6By
- lU6WYDxAwAT2cOV6RfFmShzd4n70mEFjgAmA5cplpaF8mZcO/JiM2/dF3OlgMg0+ol2yl3qld
- DzakX5NpXwKcgiToPTQjwRw/r3jV0yndE7xDAY/VAQf4AP+jLjw6TQWMuQU6Ko+QUHukJp0+K
- Y4c0BfomnGlmbtSeIWq1RIyXoENqapl1dOvEiWIwqpDIKNQZOQYtzhNbZ1o/OrGEyIenaQ451
- Z0QLvBvVyIQqsDLV8xl/P0tCkhdBjgwVzJ398GKp/swGAeaHo+NEHZsAZ7s17yPTfIYWzC8Ob
- JsCghasbm9VLl/mMBpwZFA4dTuTSBWm2C2c1XL7mgDP53++tBygjD3kMpmRmTv31XDsk1QBBN
- xX9zHlc3526cfg=
-Subject: Re: [Nouveau] hardware donation
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=lyude@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+Subject: Re: [Nouveau] [PATCH] MAINTAINERS: update information for nouveau
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -74,51 +84,68 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
+Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
+ Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 11 Nov 2021, 09:08, Uwe Sauter wrote:
->> Hi!
->> Sorry for the late reply. I don't have the time at the moment, but I
->> will try the newest Debian testing on that system and report back. If
->> that does work, it is an option to actually keep the system and use it
->> as originally intended.
->>
->> If it doesn't work, I'm thinking about 1) Fedora and 2) Gentoo (because
->> that's what I normally use). Even though the later would be quite time
->> consuming, I'd certainly get the newest available sources to the hardwa=
-re.
->
-> Hi,
->
-> if you don't have time to compile a whole new Gentoo system then take a =
-look at Arch Linux where you
-> will find the latest kernel release only a few days after there were rel=
-eased.
->
-> I was using Gentoo for many years but it became too time consuming and t=
-he change to Arch was time
-> well spent (in regards to how much time I need now to keep the systems u=
-p to date).
->
-> (This post's intention is not to start discussions regarding distributio=
-ns, only to bring awareness
-> to Arch as rolling update distribution using the newest kernel and drive=
-rs.)
->
-> Regards,
->
-> 	Uwe
->
+Acked-by: Lyude Paul <lyude@redhat.com>
 
-Thanks, I'll definitely consider it. I've wanted to try Arch for years
-now, the Wiki is wonderful and I hear the distribution is as well. On my
-current Linux boxes the updates don't take that much time really. Also,
-what I do on one computer is more or less a template of how to proceed
-on another, so it really isn't /that/ much work, except for the
-compiling, but that's mostly the CPUs work... ;-)
+On Wed, 2021-11-10 at 14:31 +0100, Karol Herbst wrote:
+> Some side notes on this. Atm we do want to use gitlab for bug tracking and
+> merge requests. But due to the nature of the current linux kernel
+> development, we can only do so for nouveau internal changes.
+> 
+> Everything else still needs to be sent as emails and this is also includes
+> changes to UAPI etc.
+> 
+> Anyway, if somebody wants to submit patches via gitlab, they are free to
+> do so and this should just make this more official and documented.
+> 
+> People listed as maintainers are such that have push access to drm-misc
+> (where changes are pushed to after landing in gitlab) and are known
+> nouveau developers.
+> We did this already for some trivial changes and critical bug fixes
+> already, we just weren't thinking about updating the MAINTAINERS file.
+> 
+> Cc: Ben Skeggs <bskeggs@redhat.com>
+> Cc: Lyude Paul <lyude@redhat.com>
+> Cc: David Airlie <airlied@linux.ie>
+> Cc: Daniel Vetter <daniel@ffwll.ch>
+> Cc: dri-devel@lists.freedesktop.org
+> Cc: nouveau@lists.freedesktop.org
+> Signed-off-by: Karol Herbst <kherbst@redhat.com>
+> ---
+>  MAINTAINERS | 9 ++++++++-
+>  1 file changed, 8 insertions(+), 1 deletion(-)
+> 
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 8805df335326..270dc9c0a427 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -5961,10 +5961,17 @@ F:      drivers/gpu/drm/panel/panel-novatek-
+> nt36672a.c
+>  
+>  DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS
+>  M:     Ben Skeggs <bskeggs@redhat.com>
+> +M:     Karol Herbst <kherbst@redhat.com>
+> +M:     Lyude Paul <lyude@redhat.com>
+>  L:     dri-devel@lists.freedesktop.org
+>  L:     nouveau@lists.freedesktop.org
+>  S:     Supported
+> -T:     git git://github.com/skeggsb/linux
+> +W:     https://nouveau.freedesktop.org/
+> +Q:     https://patchwork.freedesktop.org/project/nouveau/
+> +Q:     https://gitlab.freedesktop.org/drm/nouveau/-/merge_requests
+> +B:     https://gitlab.freedesktop.org/drm/nouveau/-/issues
+> +C:     irc://irc.oftc.net/nouveau
+> +T:     git https://gitlab.freedesktop.org/drm/nouveau.git
+>  F:     drivers/gpu/drm/nouveau/
+>  F:     include/uapi/drm/nouveau_drm.h
+>  
 
-Anyway, thanks for the suggestion! I almost forgot about Arch... /Shame
-on me/
+-- 
+Cheers,
+ Lyude Paul (she/her)
+ Software Engineer at Red Hat
 
-Linux User #330250
