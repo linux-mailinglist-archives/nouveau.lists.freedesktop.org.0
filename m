@@ -2,77 +2,66 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id B11C844EF74
-	for <lists+nouveau@lfdr.de>; Fri, 12 Nov 2021 23:37:46 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5522744F53F
+	for <lists+nouveau@lfdr.de>; Sat, 13 Nov 2021 21:22:08 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B09E76E0D8;
-	Fri, 12 Nov 2021 22:37:39 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C7D5F6E1B6;
+	Sat, 13 Nov 2021 20:22:03 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id DC91F6E0B9
- for <nouveau@lists.freedesktop.org>; Fri, 12 Nov 2021 22:37:37 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 50EDE6E0D7
+ for <nouveau@lists.freedesktop.org>; Sat, 13 Nov 2021 20:22:02 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1636756657;
+ s=mimecast20190719; t=1636834920;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=j8UFd87L7Ab8fMSkAQc3vH/XiCMU7sezVLrwRYH/XDg=;
- b=ROU0xXFvW2PAEHPMSHr93DW2nQVgLc8j7Dt5eLQT2fEJlf/EHpzmiNknOmT1IBvMn7XdTk
- dtk1GmTckwG567ZvA2jN9ecEv5XnxCkM0YSnle8BW99Ep5/J3hYoruWx2eVqNDwyEDAkyd
- ONVDnQwg0msQBEmsIa+/KXunNKMMMJU=
-Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com
- [209.85.160.199]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-225-txr80TrzMBaNigVD2ld1Yg-1; Fri, 12 Nov 2021 17:37:33 -0500
-X-MC-Unique: txr80TrzMBaNigVD2ld1Yg-1
-Received: by mail-qt1-f199.google.com with SMTP id
- x28-20020ac8701c000000b0029f4b940566so8293853qtm.19
- for <nouveau@lists.freedesktop.org>; Fri, 12 Nov 2021 14:37:33 -0800 (PST)
+ bh=2F/RqjtwTDKHqbmFyTCtAaLezofMM+3SAjDwL4WYfjk=;
+ b=ObfBA3ivQg63n7cg1OwWDy7Th7KAfdF7/jOJ+kxtSgvS4MwRL/RSpH44yq3hCvsOpNpch3
+ 9O81S2BDHCjyXyA9nilHx/0d1+WDqHu81U24GidkaCDD3c9gZ83aYei7+b92AYw1ftxUmc
+ IPs83jIakZI//2jGk6GDgeU1XG4fhUw=
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-268-UT6IA_OGPziyAysx9FclsQ-1; Sat, 13 Nov 2021 15:21:59 -0500
+X-MC-Unique: UT6IA_OGPziyAysx9FclsQ-1
+Received: by mail-wm1-f72.google.com with SMTP id
+ l6-20020a05600c4f0600b0033321934a39so6121828wmq.9
+ for <nouveau@lists.freedesktop.org>; Sat, 13 Nov 2021 12:21:59 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
- :references:organization:user-agent:mime-version
- :content-transfer-encoding;
- bh=j8UFd87L7Ab8fMSkAQc3vH/XiCMU7sezVLrwRYH/XDg=;
- b=g+mB2bS64pJ3yOcOrylTMZhkaBDvE4UdVGE4exgPAtCSAi9aOgA10wUQW1PVTNYQKy
- wMTftQpAXZ+w1SvHSE+7fbxz/yiSMcIYbhB95H6q+ozvHQ1ARR6d9QNka9tk4sj3UAlu
- yUKGwUWEFztQjW1siKFFUxTPiswsNjy5PHDjvpkapF5/4u1hrjVjHS42yxgM0xGtfLGF
- TpO8HCZwHxuODFj7r8FA84WiztNRD4wKYgbKXBjAPdXiJ4qilQGDbUNIC8O0iDqf9uhc
- 9PQqqqxxCzjiQ1Ox9Jjq8dxdzUFXcXWGWRHsolvr4ww83ULJwxiCkHX4R0cjTH4q1Kwy
- 5gzQ==
-X-Gm-Message-State: AOAM530nyrLuna2g1l8WG7euoS0d1ey7yP4vdEGaQblYovvc9o2H7bHv
- EHY3YmflIErQrNPVjScHWkLCqE5szE4LBMd9LnO63+vEpqheWcBIdJWT4CELbodBb3kp7JUOLGu
- u7CJfhdjA3mILwoicZVeamzfLlA==
-X-Received: by 2002:a05:622a:307:: with SMTP id
- q7mr20280371qtw.330.1636756653002; 
- Fri, 12 Nov 2021 14:37:33 -0800 (PST)
-X-Google-Smtp-Source: ABdhPJwmv2+s9HsIhOZaWW0wh6WQGFS4c9E6qdrActSt8eoSle+Ac4DscVPTJ81svE0EOruG6rZTrQ==
-X-Received: by 2002:a05:622a:307:: with SMTP id
- q7mr20280350qtw.330.1636756652794; 
- Fri, 12 Nov 2021 14:37:32 -0800 (PST)
-Received: from [192.168.8.138] (pool-96-230-249-157.bstnma.fios.verizon.net.
- [96.230.249.157])
- by smtp.gmail.com with ESMTPSA id l1sm3377960qkp.65.2021.11.12.14.37.31
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 12 Nov 2021 14:37:32 -0800 (PST)
-Message-ID: <462fc433630bf6f5b059b6f6f5a62374b0ddd410.camel@redhat.com>
-From: Lyude Paul <lyude@redhat.com>
-To: Karol Herbst <kherbst@redhat.com>, dri-devel@lists.freedesktop.org
-Date: Fri, 12 Nov 2021 17:37:31 -0500
-In-Reply-To: <20211110133157.553251-1-kherbst@redhat.com>
-References: <20211110133157.553251-1-kherbst@redhat.com>
-Organization: Red Hat Inc.
-User-Agent: Evolution 3.40.4 (3.40.4-2.fc34)
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=2F/RqjtwTDKHqbmFyTCtAaLezofMM+3SAjDwL4WYfjk=;
+ b=qfmem/1seJI2SqmR5eb8cNphmTyXWjsLTd7qoFBpp91zjgyNFNFWGKE/gimRkkWDLz
+ 78wtaQqLgFaWvAJ5ugRDFUTg2NoJ/JnYxoToI8wUNvBAJSKurpzBE08MSpEpUJewJDvA
+ C1qRbz6ra0WraKbhv/XuUm2feUJwnclwa9OxZWbeIEsL0g4zL+Hg7xkn0jnjc9u9n239
+ d/F4fQzXG/zf00UEP8PvyE0wP+RA0R/s/GVXnJ85jXnCD4HsU2nhKiDe3qHhk8VRo9FZ
+ RmkuXrK1zsFB3XjF/XkFUHtBmnroucvSxu3O3hGrFpsfNc4evceD3yvMJaC38PQQYmbg
+ WcWQ==
+X-Gm-Message-State: AOAM530ZcnGb1JUXxAVBojFDDtY25zoN8pvvuHDB8msvIPM8U6HouCME
+ d1YN/dzB00eeidHs0qbXECJo+XopeKVWBZLTtOI95UDmYHiSB5nSTTF9kdsLCJbu+1h0P01hayq
+ R2ZF0j06ebc7HIYJKNz5XQMvoVMa8Cezhf29Ml/3SBw==
+X-Received: by 2002:a5d:43c5:: with SMTP id v5mr31811219wrr.11.1636834918442; 
+ Sat, 13 Nov 2021 12:21:58 -0800 (PST)
+X-Google-Smtp-Source: ABdhPJzvqhfKWTCnwIY4T3+XKKRpmPT2+dOSNYismuaVwHbxo7aKrTV7NWW08xEzDGvONPamHxoBM3Hbj1P73gNHmAk=
+X-Received: by 2002:a5d:43c5:: with SMTP id v5mr31811191wrr.11.1636834918255; 
+ Sat, 13 Nov 2021 12:21:58 -0800 (PST)
 MIME-Version: 1.0
+References: <CABvMjLTVZaU8vMW__2BDo6FnjFa_bsh2S-kEmg=KV4KTsFiUzA@mail.gmail.com>
+In-Reply-To: <CABvMjLTVZaU8vMW__2BDo6FnjFa_bsh2S-kEmg=KV4KTsFiUzA@mail.gmail.com>
+From: Karol Herbst <kherbst@redhat.com>
+Date: Sat, 13 Nov 2021 21:21:47 +0100
+Message-ID: <CACO55tuDQ9UC2rr=_Hsowvujk49oNK1zWfHj3jMnhEqsTAnh0Q@mail.gmail.com>
+To: Yizhuo Zhai <yzhai003@ucr.edu>
 Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=lyude@redhat.com
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=kherbst@redhat.com
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-Subject: Re: [Nouveau] [PATCH] MAINTAINERS: update information for nouveau
+Subject: Re: [Nouveau] [PATCH] drm/nouveau/core: fix the uninitialized use
+ in nvkm_ioctl_map()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -84,68 +73,43 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
- Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>
+Cc: David Airlie <airlied@linux.ie>, nouveau <nouveau@lists.freedesktop.org>,
+ LKML <linux-kernel@vger.kernel.org>,
+ dri-devel <dri-devel@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>,
+ Daniel Vetter <daniel@ffwll.ch>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Acked-by: Lyude Paul <lyude@redhat.com>
+something seems to have messed with the patch so it doesn't apply correctly.
 
-On Wed, 2021-11-10 at 14:31 +0100, Karol Herbst wrote:
-> Some side notes on this. Atm we do want to use gitlab for bug tracking and
-> merge requests. But due to the nature of the current linux kernel
-> development, we can only do so for nouveau internal changes.
-> 
-> Everything else still needs to be sent as emails and this is also includes
-> changes to UAPI etc.
-> 
-> Anyway, if somebody wants to submit patches via gitlab, they are free to
-> do so and this should just make this more official and documented.
-> 
-> People listed as maintainers are such that have push access to drm-misc
-> (where changes are pushed to after landing in gitlab) and are known
-> nouveau developers.
-> We did this already for some trivial changes and critical bug fixes
-> already, we just weren't thinking about updating the MAINTAINERS file.
-> 
-> Cc: Ben Skeggs <bskeggs@redhat.com>
-> Cc: Lyude Paul <lyude@redhat.com>
-> Cc: David Airlie <airlied@linux.ie>
-> Cc: Daniel Vetter <daniel@ffwll.ch>
-> Cc: dri-devel@lists.freedesktop.org
-> Cc: nouveau@lists.freedesktop.org
-> Signed-off-by: Karol Herbst <kherbst@redhat.com>
+On Thu, Jun 17, 2021 at 9:39 AM Yizhuo Zhai <yzhai003@ucr.edu> wrote:
+>
+> In function nvkm_ioctl_map(), the variable "type" could be
+> uninitialized if "nvkm_object_map()" returns error code,
+> however, it does not check the return value and directly
+> use the "type" in the if statement, which is potentially
+> unsafe.
+>
+> Signed-off-by: Yizhuo <yzhai003@ucr.edu>
 > ---
->  MAINTAINERS | 9 ++++++++-
->  1 file changed, 8 insertions(+), 1 deletion(-)
-> 
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 8805df335326..270dc9c0a427 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -5961,10 +5961,17 @@ F:      drivers/gpu/drm/panel/panel-novatek-
-> nt36672a.c
->  
->  DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS
->  M:     Ben Skeggs <bskeggs@redhat.com>
-> +M:     Karol Herbst <kherbst@redhat.com>
-> +M:     Lyude Paul <lyude@redhat.com>
->  L:     dri-devel@lists.freedesktop.org
->  L:     nouveau@lists.freedesktop.org
->  S:     Supported
-> -T:     git git://github.com/skeggsb/linux
-> +W:     https://nouveau.freedesktop.org/
-> +Q:     https://patchwork.freedesktop.org/project/nouveau/
-> +Q:     https://gitlab.freedesktop.org/drm/nouveau/-/merge_requests
-> +B:     https://gitlab.freedesktop.org/drm/nouveau/-/issues
-> +C:     irc://irc.oftc.net/nouveau
-> +T:     git https://gitlab.freedesktop.org/drm/nouveau.git
->  F:     drivers/gpu/drm/nouveau/
->  F:     include/uapi/drm/nouveau_drm.h
->  
-
--- 
-Cheers,
- Lyude Paul (she/her)
- Software Engineer at Red Hat
+>  drivers/gpu/drm/nouveau/nvkm/core/ioctl.c | 2 ++
+>  1 file changed, 2 insertions(+)
+>
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/core/ioctl.c
+> b/drivers/gpu/drm/nouveau/nvkm/core/ioctl.c
+> index d777df5a64e6..7f2e8482f167 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/core/ioctl.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/core/ioctl.c
+> @@ -266,6 +266,8 @@ nvkm_ioctl_map(struct nvkm_client *client,
+>                 ret = nvkm_object_map(object, data, size, &type,
+>                                       &args->v0.handle,
+>                                       &args->v0.length);
+> +               if (ret)
+> +                       return ret;
+>                 if (type == NVKM_OBJECT_MAP_IO)
+>                         args->v0.type = NVIF_IOCTL_MAP_V0_IO;
+>                 else
+> --
+> 2.17.1
+>
 
