@@ -1,67 +1,53 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5522744F53F
-	for <lists+nouveau@lfdr.de>; Sat, 13 Nov 2021 21:22:08 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1FBB444FA17
+	for <lists+nouveau@lfdr.de>; Sun, 14 Nov 2021 20:13:06 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C7D5F6E1B6;
-	Sat, 13 Nov 2021 20:22:03 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4F88F89CE3;
+	Sun, 14 Nov 2021 19:13:04 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 50EDE6E0D7
- for <nouveau@lists.freedesktop.org>; Sat, 13 Nov 2021 20:22:02 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1636834920;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=2F/RqjtwTDKHqbmFyTCtAaLezofMM+3SAjDwL4WYfjk=;
- b=ObfBA3ivQg63n7cg1OwWDy7Th7KAfdF7/jOJ+kxtSgvS4MwRL/RSpH44yq3hCvsOpNpch3
- 9O81S2BDHCjyXyA9nilHx/0d1+WDqHu81U24GidkaCDD3c9gZ83aYei7+b92AYw1ftxUmc
- IPs83jIakZI//2jGk6GDgeU1XG4fhUw=
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-268-UT6IA_OGPziyAysx9FclsQ-1; Sat, 13 Nov 2021 15:21:59 -0500
-X-MC-Unique: UT6IA_OGPziyAysx9FclsQ-1
-Received: by mail-wm1-f72.google.com with SMTP id
- l6-20020a05600c4f0600b0033321934a39so6121828wmq.9
- for <nouveau@lists.freedesktop.org>; Sat, 13 Nov 2021 12:21:59 -0800 (PST)
+Received: from mail-lj1-x230.google.com (mail-lj1-x230.google.com
+ [IPv6:2a00:1450:4864:20::230])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7044D89DF9
+ for <nouveau@lists.freedesktop.org>; Sun, 14 Nov 2021 01:25:47 +0000 (UTC)
+Received: by mail-lj1-x230.google.com with SMTP id 13so26725674ljj.11
+ for <nouveau@lists.freedesktop.org>; Sat, 13 Nov 2021 17:25:47 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:from:date:message-id:subject:to;
+ bh=zq3P2FuXDsszO3/rzBiVtH9v5De7G1T9e1MLjbN9ZZg=;
+ b=fdNIJhQec8VpOGstU2I9ML+PwRj/a3Zf0do+5fMZeWr63GihX/vvuHODElGbr4vZiF
+ l763qGqDklOkmrszI4YTtT+QmPFzoEscXxRRf5uCoTygjL/nJ3SfwoPUo+mvBwVRCXc4
+ 5rYNpjr4rUuYO85Ly2V5XDT0VSi+feCuCdvN/axN+L+LP1qMcHp56aGcQ8FwjOeRi0ES
+ 5ro2IG6XHviMMq49Smr1lQhuHMhsxpDV6y7CG24ODyCDmt2mUzjBprqSxjFPyRKtVwcF
+ SCwcHF1uNFMI0e4pNEWZ9GVEtV9a/SUypR9nutyatySH3zWswG12a1/7Zvh08PZch+gQ
+ vlxQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=2F/RqjtwTDKHqbmFyTCtAaLezofMM+3SAjDwL4WYfjk=;
- b=qfmem/1seJI2SqmR5eb8cNphmTyXWjsLTd7qoFBpp91zjgyNFNFWGKE/gimRkkWDLz
- 78wtaQqLgFaWvAJ5ugRDFUTg2NoJ/JnYxoToI8wUNvBAJSKurpzBE08MSpEpUJewJDvA
- C1qRbz6ra0WraKbhv/XuUm2feUJwnclwa9OxZWbeIEsL0g4zL+Hg7xkn0jnjc9u9n239
- d/F4fQzXG/zf00UEP8PvyE0wP+RA0R/s/GVXnJ85jXnCD4HsU2nhKiDe3qHhk8VRo9FZ
- RmkuXrK1zsFB3XjF/XkFUHtBmnroucvSxu3O3hGrFpsfNc4evceD3yvMJaC38PQQYmbg
- WcWQ==
-X-Gm-Message-State: AOAM530ZcnGb1JUXxAVBojFDDtY25zoN8pvvuHDB8msvIPM8U6HouCME
- d1YN/dzB00eeidHs0qbXECJo+XopeKVWBZLTtOI95UDmYHiSB5nSTTF9kdsLCJbu+1h0P01hayq
- R2ZF0j06ebc7HIYJKNz5XQMvoVMa8Cezhf29Ml/3SBw==
-X-Received: by 2002:a5d:43c5:: with SMTP id v5mr31811219wrr.11.1636834918442; 
- Sat, 13 Nov 2021 12:21:58 -0800 (PST)
-X-Google-Smtp-Source: ABdhPJzvqhfKWTCnwIY4T3+XKKRpmPT2+dOSNYismuaVwHbxo7aKrTV7NWW08xEzDGvONPamHxoBM3Hbj1P73gNHmAk=
-X-Received: by 2002:a5d:43c5:: with SMTP id v5mr31811191wrr.11.1636834918255; 
- Sat, 13 Nov 2021 12:21:58 -0800 (PST)
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=zq3P2FuXDsszO3/rzBiVtH9v5De7G1T9e1MLjbN9ZZg=;
+ b=v6LAVF/cN86yuKpJUqFuX1TPSODApiPOrpXc6Y/GJhtECHn3Wqwyr2kpq9lGQuwIR1
+ LldG4YRRSBcvxP0SGlFOaQPkuONC7gHdZYMEzU0py5pPnQkpMWYpJm588EjMlDpBro1a
+ vzRYG8BIx9O0g3L/NnW5Qvrf5HJh020IZFbR8UUMZ/tE5F2fVMBLfJj1bv04vuExBECb
+ Fl0Z4bUWqiJ+RHW+a0ivZPZZNqOKUblwViLJuXCS2N/2lg/rA8IySVba6T3/Lxg3abXf
+ jBdUXKYoO/hBY95/OIt1x/tSTSeM0cFOuvDr/+89PnTLU/Zq1SkZEuxHqG14CjeKsoHv
+ SdHg==
+X-Gm-Message-State: AOAM530XvGPfJvnyNyxGtrkJMW7GR5kb8OW+SSDT4MemialRNPHkYeRe
+ zWa7eQHLEqcSem7d6usQyJIocpqkGfQiJVBbMguQ0h49tjhmvPX9
+X-Google-Smtp-Source: ABdhPJz3ngnjNESpXfs1sqMZIPN14gHvji4HySutbh/bNIblpfDNrAvt2slV80CyNep/n7NcCuJaJ7/BnuiCv0tpvW8=
+X-Received: by 2002:a2e:7310:: with SMTP id o16mr23293001ljc.394.1636853145278; 
+ Sat, 13 Nov 2021 17:25:45 -0800 (PST)
 MIME-Version: 1.0
-References: <CABvMjLTVZaU8vMW__2BDo6FnjFa_bsh2S-kEmg=KV4KTsFiUzA@mail.gmail.com>
-In-Reply-To: <CABvMjLTVZaU8vMW__2BDo6FnjFa_bsh2S-kEmg=KV4KTsFiUzA@mail.gmail.com>
-From: Karol Herbst <kherbst@redhat.com>
-Date: Sat, 13 Nov 2021 21:21:47 +0100
-Message-ID: <CACO55tuDQ9UC2rr=_Hsowvujk49oNK1zWfHj3jMnhEqsTAnh0Q@mail.gmail.com>
-To: Yizhuo Zhai <yzhai003@ucr.edu>
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=kherbst@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="UTF-8"
-Subject: Re: [Nouveau] [PATCH] drm/nouveau/core: fix the uninitialized use
- in nvkm_ioctl_map()
+From: __- -__ <isapgswell@gmail.com>
+Date: Sat, 13 Nov 2021 22:25:28 -0300
+Message-ID: <CAN9WMdPfKr0avHiKYYkkkLSbS3wbtbnc-7ObPtymi_kcPxpmzg@mail.gmail.com>
+To: nouveau@lists.freedesktop.org, ubuntu-users@lists.ubuntu.com, 
+ debian-boot@lists.debian.org, System76 <help@system76.com>
+Content-Type: multipart/alternative; boundary="000000000000461fd805d0b5920e"
+X-Mailman-Approved-At: Sun, 14 Nov 2021 19:13:03 +0000
+Subject: [Nouveau] 'nvidia' prop noscreen_tearing no_flickering
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -73,43 +59,79 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, nouveau <nouveau@lists.freedesktop.org>,
- LKML <linux-kernel@vger.kernel.org>,
- dri-devel <dri-devel@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>,
- Daniel Vetter <daniel@ffwll.ch>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-something seems to have messed with the patch so it doesn't apply correctly.
+--000000000000461fd805d0b5920e
+Content-Type: text/plain; charset="UTF-8"
 
-On Thu, Jun 17, 2021 at 9:39 AM Yizhuo Zhai <yzhai003@ucr.edu> wrote:
->
-> In function nvkm_ioctl_map(), the variable "type" could be
-> uninitialized if "nvkm_object_map()" returns error code,
-> however, it does not check the return value and directly
-> use the "type" in the if statement, which is potentially
-> unsafe.
->
-> Signed-off-by: Yizhuo <yzhai003@ucr.edu>
-> ---
->  drivers/gpu/drm/nouveau/nvkm/core/ioctl.c | 2 ++
->  1 file changed, 2 insertions(+)
->
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/core/ioctl.c
-> b/drivers/gpu/drm/nouveau/nvkm/core/ioctl.c
-> index d777df5a64e6..7f2e8482f167 100644
-> --- a/drivers/gpu/drm/nouveau/nvkm/core/ioctl.c
-> +++ b/drivers/gpu/drm/nouveau/nvkm/core/ioctl.c
-> @@ -266,6 +266,8 @@ nvkm_ioctl_map(struct nvkm_client *client,
->                 ret = nvkm_object_map(object, data, size, &type,
->                                       &args->v0.handle,
->                                       &args->v0.length);
-> +               if (ret)
-> +                       return ret;
->                 if (type == NVKM_OBJECT_MAP_IO)
->                         args->v0.type = NVIF_IOCTL_MAP_V0_IO;
->                 else
-> --
-> 2.17.1
->
+Greetings
 
+thus my 40-libinput.conf and 10-nvidia.conf
+
+Section "InputClass"
+        Identifier "pointer catchall"
+        Driver "mouse"
+EndSection
+
+Section "InputClass"
+        Identifier "keyboard catchall"
+        Driver "kbd"
+EndSection
+
+Section "InputClass"
+    Identifier "nvidia"
+    MatchDriver "nvidia-drm"
+    Option "Primary" "on"
+    Driver "nvidia"
+EndSection
+
+
+Section "OutputClass"
+    Identifier "nvidia"
+    MatchDriver "nvidia-drm"
+    Driver "nvidia"
+    Option "PrimaryGPU" "on"
+    Option "AllowEmptyInitialConfiguration"
+    ModulePath "/usr/lib/x86_64-linux-gnu/nvidia/xorg"
+EndSection
+
+appears OK, at this period
+
+Thank you
+
+L. F
+
+--000000000000461fd805d0b5920e
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div>Greetings</div><div><span style=3D"background-color:r=
+gb(255,255,255)"><br></span></div><div><span style=3D"background-color:rgb(=
+255,255,255)">thus my 40-libinput.conf and 10-nvidia.conf</span></div><div>=
+<span style=3D"color:rgb(255,255,255)"><span style=3D"background-color:rgb(=
+255,153,0)"><br></span></span></div><div><span style=3D"color:rgb(255,255,2=
+55)"><span style=3D"background-color:rgb(255,153,0)">Section &quot;InputCla=
+ss&quot;<br>=C2=A0 =C2=A0 =C2=A0 =C2=A0 Identifier &quot;pointer catchall&q=
+uot;<br>=C2=A0 =C2=A0 =C2=A0 =C2=A0 Driver &quot;mouse&quot;<br>EndSection<=
+br><br>Section &quot;InputClass&quot;<br>=C2=A0 =C2=A0 =C2=A0 =C2=A0 Identi=
+fier &quot;keyboard catchall&quot;<br>=C2=A0 =C2=A0 =C2=A0 =C2=A0 Driver &q=
+uot;kbd&quot;<br>EndSection</span></span></div><div><span style=3D"color:rg=
+b(255,255,255)"><span style=3D"background-color:rgb(255,153,0)"><br></span>=
+</span></div><div><span style=3D"color:rgb(255,255,255)"><span style=3D"bac=
+kground-color:rgb(255,153,0)">Section &quot;InputClass&quot;<br>=C2=A0 =C2=
+=A0 Identifier &quot;nvidia&quot;<br>=C2=A0 =C2=A0 MatchDriver &quot;nvidia=
+-drm&quot;<br>=C2=A0 =C2=A0 Option &quot;Primary&quot; &quot;on&quot;<br>=
+=C2=A0 =C2=A0 Driver &quot;nvidia&quot;<br>EndSection</span></span></div><d=
+iv><br></div><div><br></div><div><span style=3D"color:rgb(0,255,0)"><span s=
+tyle=3D"background-color:rgb(255,255,0)">Section &quot;OutputClass&quot;<br=
+>=C2=A0 =C2=A0 Identifier &quot;nvidia&quot;<br>=C2=A0 =C2=A0 MatchDriver &=
+quot;nvidia-drm&quot;<br>=C2=A0 =C2=A0 Driver &quot;nvidia&quot;<br>=C2=A0 =
+=C2=A0 Option &quot;PrimaryGPU&quot; &quot;on&quot; <br>=C2=A0 =C2=A0 Optio=
+n &quot;AllowEmptyInitialConfiguration&quot;<br>=C2=A0 =C2=A0 ModulePath &q=
+uot;/usr/lib/x86_64-linux-gnu/nvidia/xorg&quot;<br>EndSection</span></span>=
+<br></div><div><br></div><div>appears OK, at this period</div><div><br></di=
+v><div>Thank you<br></div><div><br></div><div>L. F</div><div><br></div></di=
+v>
+
+--000000000000461fd805d0b5920e--
