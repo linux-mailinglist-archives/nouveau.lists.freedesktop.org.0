@@ -2,72 +2,78 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id DBE024570E0
-	for <lists+nouveau@lfdr.de>; Fri, 19 Nov 2021 15:39:17 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id F002A459700
+	for <lists+nouveau@lfdr.de>; Mon, 22 Nov 2021 22:52:46 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2D0F06E194;
-	Fri, 19 Nov 2021 14:39:16 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 47CF189DD2;
+	Mon, 22 Nov 2021 21:52:44 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 03BD36E194
- for <nouveau@lists.freedesktop.org>; Fri, 19 Nov 2021 14:39:14 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1637332754;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=KPVAyMjSb/gSfj+6d4BZw3+mYUBoOnUapoYcaEraNcA=;
- b=hNRZ3eoEkMUcw+nOUT3IRcMhZxwXRQAPYi+r/RUOtE38qGlWKzfUPc29HhBPSbTTMXGu/5
- opQ58N8ex4ZSLJMKVdF2X2xeJggCZNx5bbZMipOe4jhlYXW1JiiBtBDycDpgDTr3NnlBed
- eekf+VKNPYtin0u0mP/7jM1uEkhCw2M=
-Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
- [209.85.221.70]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-476-2sDfwiQdOOmjl7PDtYcWwA-1; Fri, 19 Nov 2021 09:39:12 -0500
-X-MC-Unique: 2sDfwiQdOOmjl7PDtYcWwA-1
-Received: by mail-wr1-f70.google.com with SMTP id
- p17-20020adff211000000b0017b902a7701so1808283wro.19
- for <nouveau@lists.freedesktop.org>; Fri, 19 Nov 2021 06:39:12 -0800 (PST)
+X-Greylist: delayed 426 seconds by postgrey-1.36 at gabe;
+ Tue, 16 Nov 2021 06:05:38 UTC
+Received: from mx-lax3-3.ucr.edu (mx-lax3-3.ucr.edu [169.235.156.38])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 06C7B6E94C
+ for <nouveau@lists.freedesktop.org>; Tue, 16 Nov 2021 06:05:38 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=ucr.edu; i=@ucr.edu; q=dns/txt; s=selector3;
+ t=1637042739; x=1668578739;
+ h=mime-version:references:in-reply-to:from:date:message-id:
+ subject:to:cc; bh=Z3Zujelhp95n7JiGO15pEnuj1r6cZj7PyaJcCYcZCrc=;
+ b=WRyfEVyzsvm7pJGPjszSA4HnXd1cIUYJWgx4Evz4UdPKobi3LAP8+FGR
+ C1bylyZ08m24ZUrjn+XOJuFcWpU/2JLlcFJeMseLvWdI7mvZQnqT0ZENC
+ R0CRMJgUfwDrdagWf9tc0IdG2MeEl9xZFdhXPi+fYFYf2kgN1FcUx19IO
+ x1vUysclKeO3pyGmoKE/qVt5JTOijQS72OtrVVnfKbTABT09UgLDu4itQ
+ vG6+tjwRRhr/VSC0yGHXvjCPTSBDdFY9hZ05JR3k1jvr3Ahf/x1Y1FlRx
+ ckhmokL8PZ8+WeiTq/xl8TzNY+rurlPLGCIyPNcoLI+koM0srf8kSmjDS Q==;
+IronPort-SDR: IcQ/pcOxBUM8teMchpgq28OCiwUeaCdLw1fARCKGvbT+dNvPs390zlWuF1h/vGku4mySVExjrL
+ 19qHMZctH1MD+rTyyNxzGxCL+Sc7ato6f7abpoaCZ01LEyGU4IHmSCcu23yRueqNcs5tXLTyvW
+ K/+iNRPR1Af0wjhLBDqSSaFKVQnFgefLtSrSrZlcYdFugZQklUQkfhAtunAKy2qfc1PxIXZ2gu
+ B/tHR8olvmgHnXZWTvvBdVLDCVH49w5ZdllQVQf10NWFhMJcpBq3zhHFoma1UD4YXriCxpbQZT
+ KibeQrP6XJeM2BBXZ2IecjH2
+X-IronPort-AV: E=Sophos;i="5.87,238,1631602800"; d="scan'208";a="86384917"
+Received: from mail-yb1-f200.google.com ([209.85.219.200])
+ by smtp-lax3-3.ucr.edu with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
+ 15 Nov 2021 21:58:31 -0800
+Received: by mail-yb1-f200.google.com with SMTP id
+ s189-20020a252cc6000000b005c1f206d91eso30602502ybs.14
+ for <nouveau@lists.freedesktop.org>; Mon, 15 Nov 2021 21:58:31 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ucr.edu; s=rmail;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=8/XhVolQXCHPmPCzdRzFWhpIuM6H2Dzx9QQPO3TDOnQ=;
+ b=f867r1i2Ostx6BltPr4Oc+FLyknNCfRZZ8l/kHRJB8wnAdh1Z+85jOUgfhVaqYWG43
+ PnHHT6jy+L7VBZdHouMBNsvuWuuto8figPchs2mldQ8qtJC5qaOraraScvZVlbxxkf4L
+ SkpkgUNLz56wCGs3dil3hUuNC1TeoZwqBwW/w=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=KPVAyMjSb/gSfj+6d4BZw3+mYUBoOnUapoYcaEraNcA=;
- b=m9w28N/QAA1QLWOAkitgwcC2nyLrIa8aWZqNariy1wfdpDqpyK/Dq/2j7yJ0BnQkxn
- zDvDDpaW6mCPqOSvZoh2QylYA1Ri8Gtgt26YVSraUHC5cZOmoVPzj4MCY9/pASuhRSt3
- 3rzxd2T3bJPlSOBKrp4HDwGNAYYLBCHwpuVzpLe2josy2fyOMCREkJBhUWr1XQTf2G5H
- BtwgAzldo/zBvZXp4hpGZ18XsV+52xd22lxcNv8sZqelVH56XzBA6F2a+h2MZuv/2SpM
- kRzJwsPcbXPD8DhxfkIVPNCU+rq3+Uh//i+s3MjPEWgl9OEt2VRtDrp9nJmdp+nkRwk1
- B9Qg==
-X-Gm-Message-State: AOAM532rFgnAhYWLBp6s9Ss1cGZdUcgPu81LWZAk7XF1vm2DlM2kPRM8
- UZGjuohPvxZVIElsRe7Ef1iIBiwSmSIQ5PZc5TYP3ipM578mINYNc8BX7W3gAGH4ZmgztVF88yd
- /8APQT6Ozd/xJkA7AQF5ffHaQ9Edrzz9uOb5HNAP0Aw==
-X-Received: by 2002:a7b:c207:: with SMTP id x7mr177663wmi.108.1637332751671;
- Fri, 19 Nov 2021 06:39:11 -0800 (PST)
-X-Google-Smtp-Source: ABdhPJyMCPD6zuoDj64o2bHPErJ/MtegllB1fynfyrNwPIhkloNW30yhjiz3Q2IkpNk26/qY4E4Nu4bdVxfVmxfBC98=
-X-Received: by 2002:a7b:c207:: with SMTP id x7mr177621wmi.108.1637332751371;
- Fri, 19 Nov 2021 06:39:11 -0800 (PST)
+ :message-id:subject:to:cc;
+ bh=8/XhVolQXCHPmPCzdRzFWhpIuM6H2Dzx9QQPO3TDOnQ=;
+ b=1+YfL2mHOCpZTz8kGlxsAKZNlp3B0MlbS/UqeENumrml8fxHrYNZLJIUIngJFCog0p
+ LNZmfFz3WX18YQDyXxhyGkRTF3TRwMe9Gw+KZraORkG00TFDZ22vPAFWMVy4z3YjpqvJ
+ rM9ZhjtL/4Nsxn6mc2P3t/yn9P1xl9Rj1u45ASAsxBpy8Shci2XkjnSPzydcbO0PFFgw
+ Dw5rQSh3GRKxIakHFVBMImClJkjPZGcLBVQdsvb6ejz6cIR2WB9eJGzjBxgtaoYv/QKG
+ dLaYP/CK2qa2hOEiF9ZAm3Gk8Q0M1iP4w/bsMj77UZihLrijLXd3pxNctrzmVOp6qBkQ
+ FtEQ==
+X-Gm-Message-State: AOAM531PxREYtE6RBlKoongNzf7ln6zLZgjwbOKk9XKQ5jhZQvMOR/7N
+ OFW8drQ+zQgp0gheimWhQ770NQdVrCoaDKbhVNg+1tIki5huIrIDEGoG4rn5zefiiokqqazGq/0
+ SgS9pPiHblWfKFkhkKSkHzjUa88eefLBHvtFc7C11Uso=
+X-Received: by 2002:a25:d103:: with SMTP id i3mr5547196ybg.260.1637042310185; 
+ Mon, 15 Nov 2021 21:58:30 -0800 (PST)
+X-Google-Smtp-Source: ABdhPJxwUr/rkQjN0wPIocSPR9Ha22HtX3sCwe21HdQmlEhLyrgEeqa6u/wE7tEwiSL8OX/t6aAWemYEafgo1TEtMxs=
+X-Received: by 2002:a25:d103:: with SMTP id i3mr5547162ybg.260.1637042309942; 
+ Mon, 15 Nov 2021 21:58:29 -0800 (PST)
 MIME-Version: 1.0
-References: <19065a66-ce89-b9b9-d534-eb2cabff7825@urv.cat>
- <CACO55tuWxXJoWJk-V11f-bb+6akfjBYiG8L0RoCZfRiceo9N5Q@mail.gmail.com>
- <3f418b50-e731-ff71-dc93-b065f9be8389@urv.cat>
- <CACO55tsqBSSzyeyJbS-81rO4=JXtdJxz_vOHoc-f7rvVwZdLog@mail.gmail.com>
- <f7a8c82c-2fa3-60ed-40e4-ccde4a96b8c6@urv.cat>
-In-Reply-To: <f7a8c82c-2fa3-60ed-40e4-ccde4a96b8c6@urv.cat>
-From: Karol Herbst <kherbst@redhat.com>
-Date: Fri, 19 Nov 2021 15:39:00 +0100
-Message-ID: <CACO55tuoWJbx0wqcGypocQm78sLrp6DoS+o2nGE4mVQAidNFGg@mail.gmail.com>
-To: dmanye <dmanye@urv.cat>
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=kherbst@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
+References: <CABvMjLTVZaU8vMW__2BDo6FnjFa_bsh2S-kEmg=KV4KTsFiUzA@mail.gmail.com>
+ <CACO55tuDQ9UC2rr=_Hsowvujk49oNK1zWfHj3jMnhEqsTAnh0Q@mail.gmail.com>
+In-Reply-To: <CACO55tuDQ9UC2rr=_Hsowvujk49oNK1zWfHj3jMnhEqsTAnh0Q@mail.gmail.com>
+From: Yizhuo Zhai <yzhai003@ucr.edu>
+Date: Mon, 15 Nov 2021 21:58:19 -0800
+Message-ID: <CABvMjLSFLpG4=+tE3Sr2wfRsEuKLXMm++Xx+JNmA8YXptgzkmw@mail.gmail.com>
+To: Karol Herbst <kherbst@redhat.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [Nouveau] [INVALID_ARG] mthd 0414
+X-Mailman-Approved-At: Mon, 22 Nov 2021 21:52:42 +0000
+Subject: Re: [Nouveau] [PATCH] drm/nouveau/core: fix the uninitialized use
+ in nvkm_ioctl_map()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -79,63 +85,58 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau <nouveau@lists.freedesktop.org>
+Cc: David Airlie <airlied@linux.ie>, nouveau <nouveau@lists.freedesktop.org>,
+ LKML <linux-kernel@vger.kernel.org>,
+ dri-devel <dri-devel@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>,
+ Daniel Vetter <daniel@ffwll.ch>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, Nov 19, 2021 at 2:00 PM dmanye <dmanye@urv.cat> wrote:
+Hi Karol:
+Thanks for the feedback, the patch might be too old to apply to the
+latest code tree. Let me check and get back to you soon.
+
+On Sat, Nov 13, 2021 at 12:22 PM Karol Herbst <kherbst@redhat.com> wrote:
 >
-> On 19/11/21 13:31, Karol Herbst wrote:
-> > yeah.. not quite sure yet. I tried it out with my gk208b gpus, but
-> > couldn't hit anything. Maybe using VGA makes the difference here. Or
-> > something else is different. Might also already be fixed in 5.16...
-> > too many unknowns still. I will do another round of testing with VGA
-> > and see how that ends.
+> something seems to have messed with the patch so it doesn't apply correctly.
 >
-> hello again,
->
-> thanks for your effort Karol. i've just found another time the bug and:
->
-> 1) kept the vga cable in the same place.
->
-> 2) connected a dvi cable between the same computer and the same monitor.
->
-> 3) told xrandr to dup the signal through the dvi cable:
->
-> DISPLAY=3D:0.0 xrandr --output DVI-D-1 --mode "1920x1080" --same-as VGA-1
->
-> 4) voil=C3=A0! the monitor, all alone, switched to dvi input and there is=
- my
-> x session up and running.
->
-> 5) if i force the monitor to change to vga input it refuses it and
-> returns to dvi
->
-> so i think the driver does its job but without actually sending anything
-> through the vga cable.
+> On Thu, Jun 17, 2021 at 9:39 AM Yizhuo Zhai <yzhai003@ucr.edu> wrote:
+> >
+> > In function nvkm_ioctl_map(), the variable "type" could be
+> > uninitialized if "nvkm_object_map()" returns error code,
+> > however, it does not check the return value and directly
+> > use the "type" in the if statement, which is potentially
+> > unsafe.
+> >
+> > Signed-off-by: Yizhuo <yzhai003@ucr.edu>
+> > ---
+> >  drivers/gpu/drm/nouveau/nvkm/core/ioctl.c | 2 ++
+> >  1 file changed, 2 insertions(+)
+> >
+> > diff --git a/drivers/gpu/drm/nouveau/nvkm/core/ioctl.c
+> > b/drivers/gpu/drm/nouveau/nvkm/core/ioctl.c
+> > index d777df5a64e6..7f2e8482f167 100644
+> > --- a/drivers/gpu/drm/nouveau/nvkm/core/ioctl.c
+> > +++ b/drivers/gpu/drm/nouveau/nvkm/core/ioctl.c
+> > @@ -266,6 +266,8 @@ nvkm_ioctl_map(struct nvkm_client *client,
+> >                 ret = nvkm_object_map(object, data, size, &type,
+> >                                       &args->v0.handle,
+> >                                       &args->v0.length);
+> > +               if (ret)
+> > +                       return ret;
+> >                 if (type == NVKM_OBJECT_MAP_IO)
+> >                         args->v0.type = NVIF_IOCTL_MAP_V0_IO;
+> >                 else
+> > --
+> > 2.17.1
+> >
 >
 
-yeah.. not quite sure yet what's going on here. Maybe the cable are
-just a bit broken, or.... other signals interfering or whatever. Maybe
-a driver bug. VGA being an analog signal and stuff makes it a bit
-painful to tell what's wrong. If dmesg is clean, then no idea how to
-dig into this even. I couldn't reproduce it with my Fedora system
-running the latest 5.10 kernel either with VGA.
 
-Could also be the displays being weird...
+-- 
+Kind Regards,
 
-Anyway, if using DVI is an option for you I highly recommend using
-that. But I'd also like to figure out what's wrong here.
+Yizhuo Zhai
 
-What I think could help is to enable drm debugging once you hit the
-error. For that you can write "0x1ff" into
-/sys/module/drm/paramters/debug as root, restart X, change the
-resolution via xrandr to force X to set a new mode on the connector
-and pastebin the output of dmesg somewhere. Maybe that helps, maybe
-not. Let's see what information that gives us.
-
->
-> thanks.
->
->
-
+Computer Science, Graduate Student
+University of California, Riverside
