@@ -2,54 +2,69 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id C922B44FCD3
-	for <lists+nouveau@lfdr.de>; Mon, 15 Nov 2021 02:51:55 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 78034452FEA
+	for <lists+nouveau@lfdr.de>; Tue, 16 Nov 2021 12:09:23 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 95EBE89BAF;
-	Mon, 15 Nov 2021 01:51:52 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5E74E6E9F4;
+	Tue, 16 Nov 2021 11:09:21 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com
- [IPv6:2a00:1450:4864:20::232])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 747DD89FEC
- for <nouveau@lists.freedesktop.org>; Sun, 14 Nov 2021 21:29:11 +0000 (UTC)
-Received: by mail-lj1-x232.google.com with SMTP id t11so31122372ljh.6
- for <nouveau@lists.freedesktop.org>; Sun, 14 Nov 2021 13:29:11 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:from:date:message-id:subject:to;
- bh=7Ekd4txhZzPHGTw+v3fkoFFNw7YeesibMv0l+7p7JK0=;
- b=mSAQohKVEZrLBAWcKhvxkNlLjZPd8iK+0Kj9Qt0Vf9E+JmwJ1zrPKaNcr06UuHluK8
- 9VQEz/MxZy1/prWHRqTIvluQ93tVGd0SAEJfNFSqflNdcTSzAb5joZ8h97ACHbTW67vG
- Xpfgy0dkQGNigwGav2iPCz2UZXmwkUlHAWCNHJlkWsq82ilxKovKzgNbDq0R8p4oG6h7
- 8O9JjItlPLtvRGoA6QaoOs4AahadITlm2rDDcKyxa8pJD0XO7b9ZhZ0FTNBQUVaN8myO
- aES0JwtOzRB8gRitjBGT5Gqqt0T2aYxkbMt7M/PmzJylHsnBvqT+rEtJwq8hBbcriY1J
- RVFw==
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 38DE16E9F4
+ for <nouveau@lists.freedesktop.org>; Tue, 16 Nov 2021 11:09:20 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1637060959;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=HL9hhLdIrLyUpBuE4w+BC97fd9zpve2OyGyAHsqNBwE=;
+ b=DEC4tYVqVE97FFFuwOk91/GtZN1xD2nGcA0K3Pfuk1kN83eX2c4qMIzAW7FqXsitywfPFR
+ H4xhqjlKnjY7xGm92W1Rm65P3Kyxac4+XFeorqFwi0zsWI4vERAMhuh86lZoQ4TZo1a/qQ
+ 0N9Cy+lkzXFvKtQF+SAA9+GJt7vGh7U=
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-138-I9OmwNCEOYuLb6EuMMER3g-1; Tue, 16 Nov 2021 06:09:18 -0500
+X-MC-Unique: I9OmwNCEOYuLb6EuMMER3g-1
+Received: by mail-wr1-f70.google.com with SMTP id
+ q17-20020adfcd91000000b0017bcb12ad4fso4398031wrj.12
+ for <nouveau@lists.freedesktop.org>; Tue, 16 Nov 2021 03:09:17 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=7Ekd4txhZzPHGTw+v3fkoFFNw7YeesibMv0l+7p7JK0=;
- b=0eKtfpFNn3Nc50FMioH8z3iM/SMiSHmrhmll2VvySNPQHdS4cuT7vALd5CSKx5nEGO
- uQC/Vw1Ixoi0TadX31qwIwmIlqYM00lYWndqqvDCL8THwR+wZnRi1F/OgX5nSg4UCvcL
- vCgmmiB6p4lNXKDUEdKPfi5cmOuvUo170REzvA7inviyR+2KsfK9c2ejuVT5boplJg2R
- Qdo6qv6pZ03jVWD35TGD+Sx9O9xqvJowPaOMkOYUWhiEqUCl8sO9Hxqpwlfu5VHPUAWE
- BWbbL7wqVZ1OwkFt0HXUuEZAoncZuNCIb8UYJSFQgEM8EmOjBHRx9BwDs4xx9t18UEIK
- EoCA==
-X-Gm-Message-State: AOAM532wnl6NstBAvcbtu3E90SgijFAHAneiO9bWmonJ7xMH2MgVwRqs
- d4OUh24uNTYOyyer8djb+svgsxsyqrjCu7utXkg=
-X-Google-Smtp-Source: ABdhPJySNH2bJGrlT2wg7i6f0QkVa3wUo+aS9hqpsFEnabBhVkZTn+acD0Nub2rA9EX+yIsOma1DtyFtBbC5U8a7yGQ=
-X-Received: by 2002:a2e:3513:: with SMTP id z19mr33659856ljz.406.1636925349831; 
- Sun, 14 Nov 2021 13:29:09 -0800 (PST)
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=HL9hhLdIrLyUpBuE4w+BC97fd9zpve2OyGyAHsqNBwE=;
+ b=KNbCyJWUT9e/RJ+YB/yJZJn5VoUJk6/CbefRf6CgRFly5uu2DHTEaAObDe7q5AScNt
+ U1nhg+IxlPKNqLfSRCYRX8+g87DtnvugqsWmhG7jyTnrllXtI6LlaH/1An2c2EbA8Amg
+ XiLCp/vjNqH2b03CjwcvVebBG8V39CJaO6PzNMPwl8nz+/etW245NeP7wKGAok8F+8eN
+ 6suJWmiABXZYYn+zxNFoVErCzFHRZo482v3rfjBlcz3KH14t4nFQ9Wq/7U9ymSo8m8xO
+ WnKTvOn3jgOIQWNRL2Gc5WAS1A5oXJ54AghU/7owbVNuVsIAjsunYJP1dhOCG1Scmeze
+ roDQ==
+X-Gm-Message-State: AOAM531hZDRCyWiQfhKmnUVFDhkUAsDukoppSpLO0uSpvJgJKYR6hnSr
+ /K13Nj5mkleOjWES6+3sV8dn0GyIyym5G90FO3wAuU1x8LJ0IPN5JnbWhFihAGWfZSUKt8XazbV
+ XKJnlS7642tVmAYeAtSvFjNOe/OsVoVk4ss5P/Tbk/A==
+X-Received: by 2002:adf:dcd0:: with SMTP id x16mr8196479wrm.229.1637060956898; 
+ Tue, 16 Nov 2021 03:09:16 -0800 (PST)
+X-Google-Smtp-Source: ABdhPJyTgah4x2G9O8O+iUz5EmWC3uhlRWC07X48xzTEYzOUA98ZreV80VeBn9mcy5hBafA5uvas47+J9y5b040RUo4=
+X-Received: by 2002:adf:dcd0:: with SMTP id x16mr8196441wrm.229.1637060956649; 
+ Tue, 16 Nov 2021 03:09:16 -0800 (PST)
 MIME-Version: 1.0
-From: __- -__ <isapgswell@gmail.com>
-Date: Sun, 14 Nov 2021 18:28:51 -0300
-Message-ID: <CAN9WMdNtFitxZGADFB4Bp_TTwgzHuj5D6Jta_i7JyU1pACfFrQ@mail.gmail.com>
-To: debian-boot@lists.debian.org, 
- Dell Tech Support <technical_support@dell.com>, 
- Dell Tech Support <technical_support@help.dell.com>,
- ubuntu-users@lists.ubuntu.com, nouveau@lists.freedesktop.org
-Content-Type: multipart/alternative; boundary="0000000000000027c905d0c6628f"
-X-Mailman-Approved-At: Mon, 15 Nov 2021 01:51:52 +0000
-Subject: [Nouveau] nvidia-0 dGPU (igpu disabled on bios)
+References: <CABvMjLTVZaU8vMW__2BDo6FnjFa_bsh2S-kEmg=KV4KTsFiUzA@mail.gmail.com>
+ <CACO55tuDQ9UC2rr=_Hsowvujk49oNK1zWfHj3jMnhEqsTAnh0Q@mail.gmail.com>
+ <CABvMjLSFLpG4=+tE3Sr2wfRsEuKLXMm++Xx+JNmA8YXptgzkmw@mail.gmail.com>
+In-Reply-To: <CABvMjLSFLpG4=+tE3Sr2wfRsEuKLXMm++Xx+JNmA8YXptgzkmw@mail.gmail.com>
+From: Karol Herbst <kherbst@redhat.com>
+Date: Tue, 16 Nov 2021 12:09:05 +0100
+Message-ID: <CACO55tu5V1pF-Ox937Auq6vSreFTfz3gkaz0zg6Zk+ydyVpZwg@mail.gmail.com>
+To: Yizhuo Zhai <yzhai003@ucr.edu>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=kherbst@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="UTF-8"
+Subject: Re: [Nouveau] [PATCH] drm/nouveau/core: fix the uninitialized use
+ in nvkm_ioctl_map()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,55 +76,67 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
+Cc: David Airlie <airlied@linux.ie>, nouveau <nouveau@lists.freedesktop.org>,
+ LKML <linux-kernel@vger.kernel.org>,
+ dri-devel <dri-devel@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>,
+ Daniel Vetter <daniel@ffwll.ch>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
---0000000000000027c905d0c6628f
-Content-Type: text/plain; charset="UTF-8"
+On Tue, Nov 16, 2021 at 6:58 AM Yizhuo Zhai <yzhai003@ucr.edu> wrote:
+>
+> Hi Karol:
+> Thanks for the feedback, the patch might be too old to apply to the
+> latest code tree. Let me check and get back to you soon.
+>
 
-hi,
+sorry, that's not what I meant. It used whitespaces instead of tabs
+and the headers were also a bit broken. I just suspect that when
+sending it something went wrong or so.
 
-i would like to share my dedicated proprietary nvidia driver conf files
+> On Sat, Nov 13, 2021 at 12:22 PM Karol Herbst <kherbst@redhat.com> wrote:
+> >
+> > something seems to have messed with the patch so it doesn't apply correctly.
+> >
+> > On Thu, Jun 17, 2021 at 9:39 AM Yizhuo Zhai <yzhai003@ucr.edu> wrote:
+> > >
+> > > In function nvkm_ioctl_map(), the variable "type" could be
+> > > uninitialized if "nvkm_object_map()" returns error code,
+> > > however, it does not check the return value and directly
+> > > use the "type" in the if statement, which is potentially
+> > > unsafe.
+> > >
+> > > Signed-off-by: Yizhuo <yzhai003@ucr.edu>
+> > > ---
+> > >  drivers/gpu/drm/nouveau/nvkm/core/ioctl.c | 2 ++
+> > >  1 file changed, 2 insertions(+)
+> > >
+> > > diff --git a/drivers/gpu/drm/nouveau/nvkm/core/ioctl.c
+> > > b/drivers/gpu/drm/nouveau/nvkm/core/ioctl.c
+> > > index d777df5a64e6..7f2e8482f167 100644
+> > > --- a/drivers/gpu/drm/nouveau/nvkm/core/ioctl.c
+> > > +++ b/drivers/gpu/drm/nouveau/nvkm/core/ioctl.c
+> > > @@ -266,6 +266,8 @@ nvkm_ioctl_map(struct nvkm_client *client,
+> > >                 ret = nvkm_object_map(object, data, size, &type,
+> > >                                       &args->v0.handle,
+> > >                                       &args->v0.length);
+> > > +               if (ret)
+> > > +                       return ret;
+> > >                 if (type == NVKM_OBJECT_MAP_IO)
+> > >                         args->v0.type = NVIF_IOCTL_MAP_V0_IO;
+> > >                 else
+> > > --
+> > > 2.17.1
+> > >
+> >
+>
+>
+> --
+> Kind Regards,
+>
+> Yizhuo Zhai
+>
+> Computer Science, Graduate Student
+> University of California, Riverside
+>
 
-/usr/share/X11/xorg.conf.d/nvidia-drm-outputclass.conf
-
-Section "OutputClass"
-   Identifier       "nvidia"
-   MatchDriver  "nvidia-drm"
-   Driver            "nvidia"
-EndSection
-
-Section "InputClass"
-    Identifier          "nvidia"
-    MatchDriver    "nvidia-modeset"
-    Driver              "nvidia"
-EndSection
-
-running on debian 11 codename bullseye
-
-aTI,
-
-L. F
-
---0000000000000027c905d0c6628f
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><div>hi,</div><div><br><=
-/div><div>i would like to share my dedicated proprietary nvidia driver conf=
- files</div><div><br></div><div>/usr/share/X11/xorg.conf.d/nvidia-drm-outpu=
-tclass.conf</div><div><br></div><div>Section &quot;OutputClass&quot;<br>=C2=
-=A0 =C2=A0Identifier =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 &quot;nvidia&quot;<br>=
-=C2=A0 =C2=A0MatchDriver=C2=A0 &quot;nvidia-drm&quot;<br>=C2=A0 =C2=A0Drive=
-r =C2=A0 =C2=A0 =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 &quot;nvidia&quot;<br>=
-EndSection</div><div><br></div>Section &quot;InputClass&quot;<br>=C2=A0 =C2=
-=A0 Identifier =C2=A0 =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 &quot;nvidia&quo=
-t;<br>=C2=A0 =C2=A0 MatchDriver =C2=A0=C2=A0 &quot;nvidia-modeset&quot;<br>=
-=C2=A0 =C2=A0 Driver =C2=A0 =C2=A0 =C2=A0 =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0 &quot;nvidia&quot;<br>EndSection</div><div dir=3D"ltr"><br></div><div>r=
-unning on debian 11 codename bullseye</div><div><br></div><div>aTI,</div><d=
-iv><br></div><div>L. F<br></div><div dir=3D"ltr"><div><br></div><div><br></=
-div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></=
-div></div></div></div>
-
---0000000000000027c905d0c6628f--
