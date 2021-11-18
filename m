@@ -1,67 +1,56 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 30CE8455F22
-	for <lists+nouveau@lfdr.de>; Thu, 18 Nov 2021 16:14:05 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id A8BFA45659D
+	for <lists+nouveau@lfdr.de>; Thu, 18 Nov 2021 23:26:36 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1BD7D6ECA6;
-	Thu, 18 Nov 2021 15:14:03 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 0421E6E4EC;
+	Thu, 18 Nov 2021 22:26:35 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 3ED6E6ECAB
- for <nouveau@lists.freedesktop.org>; Thu, 18 Nov 2021 15:14:02 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1637248441;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=imKBJBnWqulcXaGNXhXaIzfjZs6tVfFFxQOYZMmHlio=;
- b=fsnwNyr26az3iSRO4/8FhGOkbUJ9E9hMjAQ/W+uWwGATtVPzsdrg3srimMQoYXOHNouByD
- s8IOqGpD2Jao9AeWvxMZXsnBz0sA20eLJZBO4abq8MzkVZDX0uazRPhMPfF9TDMAKHQjvc
- lS/jkKV1M7frNGBhIo55LZsROPasV2k=
-Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
- [209.85.221.70]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-258-KI1YMgP7Pfqrl7HDobdPaw-1; Thu, 18 Nov 2021 10:13:59 -0500
-X-MC-Unique: KI1YMgP7Pfqrl7HDobdPaw-1
-Received: by mail-wr1-f70.google.com with SMTP id
- v18-20020a5d5912000000b001815910d2c0so1158306wrd.1
- for <nouveau@lists.freedesktop.org>; Thu, 18 Nov 2021 07:13:59 -0800 (PST)
+Received: from mail-yb1-xb2c.google.com (mail-yb1-xb2c.google.com
+ [IPv6:2607:f8b0:4864:20::b2c])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9F3E86E4EC
+ for <nouveau@lists.freedesktop.org>; Thu, 18 Nov 2021 22:26:33 +0000 (UTC)
+Received: by mail-yb1-xb2c.google.com with SMTP id d10so22582028ybe.3
+ for <nouveau@lists.freedesktop.org>; Thu, 18 Nov 2021 14:26:33 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=Kk30iqGKovicOAumPd3n2uUe0KtoemK64nSpi1eywUk=;
+ b=nctq6mtpzs41jNrVcKT0G4MtD81evL5kLAra+Plg2Kq+gLlCNz1we8c3yRlhmN29H4
+ QCz7Oz3pM8/EvVvnH8elBy/YCXDIlTOExB+C2OMijHy/qyXereMwJxMZv+gJ8cyZpNK4
+ 7NA1zK1/YxN+bg26rrSrYL7i3eYnFuD48900kHXyQ0cicOWuaHr7kKq8tlF/tLYDZHS7
+ v/lE5EdHhMKRZOMx/lbpR0Qq45ZnVDvoia3fkdJPPQXWmoXj9Mk6u43iEOmGK2VX+wgN
+ k/i+d2cyqPWq/bzbNCULtIfxhBR3ZAH27fJhZNbBglVZPggVqZ1dCLsjhv1cUsCLXyRs
+ vCJA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=imKBJBnWqulcXaGNXhXaIzfjZs6tVfFFxQOYZMmHlio=;
- b=fqGwCBBXVqsiwr2RSkhBdBBMxE++QOXdtOU0vjqngDwPBKa6rLRP2uJcCr1ZIOI9WQ
- oifycrkS91zyi1ivQ9wedChn7r5TWEud7416+Q/7Gm81cyMBQT83Ur1OTbCCcwZNG09t
- Z3xOD1MockkdJhAGSoXA1IV3XIQ+jzVwUFoGYzuyVx/RrniQAXp2x10I5yhg7hdWmzJ/
- E/MZ1tp+8p/Kim81+/HtAwcT3I1ZhcN+LPBSPd/v3IWMEX+epoeRMJYZ2C1PjVP+dgc9
- VaF38nzPachzfloflAfGallp1p4KMksNM4Khn0Eku+jfmN22nsW4YkQBMD1fBiULhstv
- JRwQ==
-X-Gm-Message-State: AOAM530bfrvcvf2I1P0xxuhH5bNNq+5BInVUp8bDWhdrC2hdJNE+5tZ7
- yzUR3dQlGkpo40UO/umf5v4pqAvx2EUEC8UThLOvE4YVYcZLCoO+8oe7MxjmmzgXAxzQEtqRYxf
- j0pvUWkovUTbr8rIh1T/Ee8xPHt1n805trdRZONZqAg==
-X-Received: by 2002:adf:e484:: with SMTP id i4mr31761692wrm.49.1637248438330; 
- Thu, 18 Nov 2021 07:13:58 -0800 (PST)
-X-Google-Smtp-Source: ABdhPJx+C2m3jCFu+7BKlfD+zjB3J/CJcadePZ7N6fogG3nZU+QvSiZdGjpnZj1leOyCqCUQXMgukaibfuMVaSB+S4Y=
-X-Received: by 2002:adf:e484:: with SMTP id i4mr31761667wrm.49.1637248438181; 
- Thu, 18 Nov 2021 07:13:58 -0800 (PST)
+ bh=Kk30iqGKovicOAumPd3n2uUe0KtoemK64nSpi1eywUk=;
+ b=D7fpJ9tO6aZFCdO4y/aGhyFO3lbLEWTvPgQpdbFtLP8sflJpXBwDiKnroat0mYGoLP
+ /YXBHYwBZ79sIbmUOJ3oJqwqE6ByyhupYKswUq6k4iiKjsp1ggQ9tR2ClgijU1p50BJz
+ RjpVXAr8FZclr0IU+fdFjATlZ0ZAtmm2R+c6up0JPGNKUFWuym4E2rPAEea77Xv+lSp7
+ eFhtHfCWZfA0s43KDA3D63In958cA2On0KU4VW/F5gNMJ3gjXfBS9JY/gwIwBOiqdPg6
+ 9FW59zqJVihug+9AxXn+TfZP1MHNzbS8NxVy7WrNX9KoNbDNyFLd56htrSXg4d85Bpjg
+ KZ+Q==
+X-Gm-Message-State: AOAM533eExh0UavFNF16eQg2+lOUw9++vZUvVginYrcHBVQodaukOmB9
+ Bb5CgnOhT3ezIBybsJ4bKGwMPUJQi7/DsLAdcgk=
+X-Google-Smtp-Source: ABdhPJwuw3rhOGkNUqGPQIWXsZUmYb7uuifFv9G7MqaAY4t0sxBjm26IjW0Q6Fw7POcdWQZ4uCafsRf58zQqFF7aTkg=
+X-Received: by 2002:a25:378c:: with SMTP id
+ e134mr30005401yba.474.1637274392736; 
+ Thu, 18 Nov 2021 14:26:32 -0800 (PST)
 MIME-Version: 1.0
-References: <19065a66-ce89-b9b9-d534-eb2cabff7825@urv.cat>
-In-Reply-To: <19065a66-ce89-b9b9-d534-eb2cabff7825@urv.cat>
-From: Karol Herbst <kherbst@redhat.com>
-Date: Thu, 18 Nov 2021 16:13:47 +0100
-Message-ID: <CACO55tuWxXJoWJk-V11f-bb+6akfjBYiG8L0RoCZfRiceo9N5Q@mail.gmail.com>
-To: dmanye <dmanye@urv.cat>
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=kherbst@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
+References: <20211118030413.2610-1-skeggsb@gmail.com>
+ <CACO55tuyS+wA5zK7k2rT5PyTHFuGD-3MfmpcX2h5B+v+nH-FKg@mail.gmail.com>
+In-Reply-To: <CACO55tuyS+wA5zK7k2rT5PyTHFuGD-3MfmpcX2h5B+v+nH-FKg@mail.gmail.com>
+From: Ben Skeggs <skeggsb@gmail.com>
+Date: Fri, 19 Nov 2021 08:26:21 +1000
+Message-ID: <CACAvsv4EfmtYJrDzkfcWXL-OLy=D7mNVAKEoSfOuOTTDtKdU9A@mail.gmail.com>
+To: Karol Herbst <kherbst@redhat.com>
 Content-Type: text/plain; charset="UTF-8"
-Subject: Re: [Nouveau] [INVALID_ARG] mthd 0414
+Subject: Re: [Nouveau] [PATCH] drm/nouveau: recognise GA106
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -73,50 +62,68 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau <nouveau@lists.freedesktop.org>
+Cc: nouveau <nouveau@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, Nov 18, 2021 at 2:59 PM dmanye <dmanye@urv.cat> wrote:
+On Fri, 19 Nov 2021 at 00:14, Karol Herbst <kherbst@redhat.com> wrote:
 >
-> hello,
->
-> i have a problem and i think that it is in the nouveau driver. i hope
-> you can help me...
->
-> i have 20 identical computers with debian bullseye (11) installed (only
-> "official" debian packages). sometimes some of them boot but the screen
-> is remains in black. if i connect remotely i can see that the X session
-> starts as expected (i have set a lightdm autologin). restarting lightdm
-> does not help, but rebooting the computer solves the problem but it
-> reappears here and there (when i boot all the computers, between 0 and 2
-> usually get the black screen).
->
+> Cc: stable?
+Yeah, that probably makes sense actually.
 
-What kind of connector are you using? I have a gk208B GPU here so I
-could see if I hit this bug if I just reboot often enough on 5.10
-
-> i've noticed that this three lines appear always in dmesg when it fails:
 >
-> [    4.090415] nouveau 0000:07:00.0: disp: chid 0 stat 00004414 reason 4
-> [INVALID_ARG] mthd 0414 data 00000000 code 00000001
-> [    4.090430] nouveau 0000:07:00.0: disp: chid 0 stat 10004418 reason 4
-> [INVALID_ARG] mthd 0418 data 00000000 code 00000001
-> [    4.090445] nouveau 0000:07:00.0: disp: chid 0 stat 10004424 reason 4
-> [INVALID_ARG] mthd 0424 data 00000000 code 00000001
+> On Thu, Nov 18, 2021 at 4:04 AM Ben Skeggs <skeggsb@gmail.com> wrote:
+> >
+> > From: Ben Skeggs <bskeggs@redhat.com>
+> >
+> > I've got HW now, appears to work as expected so far.
+> >
+> > Signed-off-by: Ben Skeggs <bskeggs@redhat.com>
+> > ---
+> >  .../gpu/drm/nouveau/nvkm/engine/device/base.c | 22 +++++++++++++++++++
+> >  1 file changed, 22 insertions(+)
+> >
+> > diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/device/base.c b/drivers/gpu/drm/nouveau/nvkm/engine/device/base.c
+> > index b51d690f375f..88d262ba648c 100644
+> > --- a/drivers/gpu/drm/nouveau/nvkm/engine/device/base.c
+> > +++ b/drivers/gpu/drm/nouveau/nvkm/engine/device/base.c
+> > @@ -2626,6 +2626,27 @@ nv174_chipset = {
+> >         .fifo     = { 0x00000001, ga102_fifo_new },
+> >  };
+> >
+> > +static const struct nvkm_device_chip
+> > +nv176_chipset = {
+> > +       .name = "GA106",
+> > +       .bar      = { 0x00000001, tu102_bar_new },
+> > +       .bios     = { 0x00000001, nvkm_bios_new },
+> > +       .devinit  = { 0x00000001, ga100_devinit_new },
+> > +       .fb       = { 0x00000001, ga102_fb_new },
+> > +       .gpio     = { 0x00000001, ga102_gpio_new },
+> > +       .i2c      = { 0x00000001, gm200_i2c_new },
+> > +       .imem     = { 0x00000001, nv50_instmem_new },
+> > +       .mc       = { 0x00000001, ga100_mc_new },
+> > +       .mmu      = { 0x00000001, tu102_mmu_new },
+> > +       .pci      = { 0x00000001, gp100_pci_new },
+> > +       .privring = { 0x00000001, gm200_privring_new },
+> > +       .timer    = { 0x00000001, gk20a_timer_new },
+> > +       .top      = { 0x00000001, ga100_top_new },
+> > +       .disp     = { 0x00000001, ga102_disp_new },
+> > +       .dma      = { 0x00000001, gv100_dma_new },
+> > +       .fifo     = { 0x00000001, ga102_fifo_new },
+> > +};
+> > +
+> >  static const struct nvkm_device_chip
+> >  nv177_chipset = {
+> >         .name = "GA107",
+> > @@ -3072,6 +3093,7 @@ nvkm_device_ctor(const struct nvkm_device_func *func,
+> >                 case 0x168: device->chip = &nv168_chipset; break;
+> >                 case 0x172: device->chip = &nv172_chipset; break;
+> >                 case 0x174: device->chip = &nv174_chipset; break;
+> > +               case 0x176: device->chip = &nv176_chipset; break;
+> >                 case 0x177: device->chip = &nv177_chipset; break;
+> >                 default:
+> >                         if (nvkm_boolopt(device->cfgopt, "NvEnableUnsupportedChipsets", false)) {
+> > --
+> > 2.31.1
+> >
 >
-> i can solve it without rebooting by unloading and loading again the
-> nouveau driver
->
-> kernel version is 5.10.46-4
->
-> nouveau driver debian package is 1:1.0.17-1
->
-> i attach dmesg log in case it could help.
->
-> please don't hesitate to ask for more info if you need it.
->
-> thank you in advance.
->
->
-
