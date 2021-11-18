@@ -1,56 +1,56 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id A8BFA45659D
-	for <lists+nouveau@lfdr.de>; Thu, 18 Nov 2021 23:26:36 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4366B4565D7
+	for <lists+nouveau@lfdr.de>; Thu, 18 Nov 2021 23:45:55 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0421E6E4EC;
-	Thu, 18 Nov 2021 22:26:35 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 639C16E418;
+	Thu, 18 Nov 2021 22:45:51 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-yb1-xb2c.google.com (mail-yb1-xb2c.google.com
- [IPv6:2607:f8b0:4864:20::b2c])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9F3E86E4EC
- for <nouveau@lists.freedesktop.org>; Thu, 18 Nov 2021 22:26:33 +0000 (UTC)
-Received: by mail-yb1-xb2c.google.com with SMTP id d10so22582028ybe.3
- for <nouveau@lists.freedesktop.org>; Thu, 18 Nov 2021 14:26:33 -0800 (PST)
+Received: from mail-yb1-xb2e.google.com (mail-yb1-xb2e.google.com
+ [IPv6:2607:f8b0:4864:20::b2e])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B7C776E1D8;
+ Thu, 18 Nov 2021 22:45:50 +0000 (UTC)
+Received: by mail-yb1-xb2e.google.com with SMTP id e71so22625898ybh.10;
+ Thu, 18 Nov 2021 14:45:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=Kk30iqGKovicOAumPd3n2uUe0KtoemK64nSpi1eywUk=;
- b=nctq6mtpzs41jNrVcKT0G4MtD81evL5kLAra+Plg2Kq+gLlCNz1we8c3yRlhmN29H4
- QCz7Oz3pM8/EvVvnH8elBy/YCXDIlTOExB+C2OMijHy/qyXereMwJxMZv+gJ8cyZpNK4
- 7NA1zK1/YxN+bg26rrSrYL7i3eYnFuD48900kHXyQ0cicOWuaHr7kKq8tlF/tLYDZHS7
- v/lE5EdHhMKRZOMx/lbpR0Qq45ZnVDvoia3fkdJPPQXWmoXj9Mk6u43iEOmGK2VX+wgN
- k/i+d2cyqPWq/bzbNCULtIfxhBR3ZAH27fJhZNbBglVZPggVqZ1dCLsjhv1cUsCLXyRs
- vCJA==
+ :cc; bh=Drrxg0bait9D2hSu5Rb+lqByc8pviUXeN3/NBO2Mdw0=;
+ b=ALelaSYbC0JAGYqDK1XiIqBleMj2mT/SaxMSw+/uyDrnimujzZtPhY0VtYFsUEqaXg
+ mm/OIiSTamkgkCAyipQRGpRKcuZzigaaVhPUlGRailSg2QJTWJhHdCoeWjvLxS20SHRH
+ MnPT2HsDkPxXMJoHb8O/VXSjN9BcJtZ4sHdihnpPwUo9NaxD2nb+25F+DljhM4n3frHW
+ sYys5igeVfB3WFLjkCb44UuoqLV0cu7TknknwZWHXTD2UePVXD4orSxxEC8rNxyxNN/n
+ +Ck60VdaF8aV0NEHFVw7d0/Vu3c0omHgS4nnbRsF5PtuMivM7iiNFmlZhhvvfM0SS1QH
+ 4Ayw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=Kk30iqGKovicOAumPd3n2uUe0KtoemK64nSpi1eywUk=;
- b=D7fpJ9tO6aZFCdO4y/aGhyFO3lbLEWTvPgQpdbFtLP8sflJpXBwDiKnroat0mYGoLP
- /YXBHYwBZ79sIbmUOJ3oJqwqE6ByyhupYKswUq6k4iiKjsp1ggQ9tR2ClgijU1p50BJz
- RjpVXAr8FZclr0IU+fdFjATlZ0ZAtmm2R+c6up0JPGNKUFWuym4E2rPAEea77Xv+lSp7
- eFhtHfCWZfA0s43KDA3D63In958cA2On0KU4VW/F5gNMJ3gjXfBS9JY/gwIwBOiqdPg6
- 9FW59zqJVihug+9AxXn+TfZP1MHNzbS8NxVy7WrNX9KoNbDNyFLd56htrSXg4d85Bpjg
- KZ+Q==
-X-Gm-Message-State: AOAM533eExh0UavFNF16eQg2+lOUw9++vZUvVginYrcHBVQodaukOmB9
- Bb5CgnOhT3ezIBybsJ4bKGwMPUJQi7/DsLAdcgk=
-X-Google-Smtp-Source: ABdhPJwuw3rhOGkNUqGPQIWXsZUmYb7uuifFv9G7MqaAY4t0sxBjm26IjW0Q6Fw7POcdWQZ4uCafsRf58zQqFF7aTkg=
+ bh=Drrxg0bait9D2hSu5Rb+lqByc8pviUXeN3/NBO2Mdw0=;
+ b=ZZmfDOhhGUFl8JR2JIl/qkCAt2eNtLDpdLfYHpyazJXrfcqC47pMXvgpjuLMkXr7nb
+ j5Od12y/d+Y1wSYBZbNYCRv877buH+AHMgMvPeXGohhJ+X8RcLti1lICqO3LCCrirSw+
+ 1/WdKyF46/Rw90GiuLge6csRJvsB15ornjsd2uFeOTqLlgYWu83onikfLi3LnBMKc40d
+ qZYxKkDc/VABKFsJURzLp4GbBnHHjUTTvggEwdweDWnCXTyMDiis+st2sCaJqJ1FOKrN
+ hZEJrAhXqbzAvHzKNAQ/Qeo0PU94fysG1Kj3zs/PjHMcpZur58R9lT2+E2uPeUhmVHvd
+ 4yBQ==
+X-Gm-Message-State: AOAM532rLRbY5k1JIEV0Gc9SED7m6pdnpPjckpHNH7OuycrS9+rXYnKK
+ hLaoDn3icpTk3/mfhQQdKPeS7r9eq+RFpPjMawe1l2Zs
+X-Google-Smtp-Source: ABdhPJz4F3+J1gbdCBhQ0sBG5pFrqOoaVWVM1MOWWO5ipi7oqJGxkL204p7x7LR7PkF1BEm0c3jhfkDCgRf8F3yERwU=
 X-Received: by 2002:a25:378c:: with SMTP id
- e134mr30005401yba.474.1637274392736; 
- Thu, 18 Nov 2021 14:26:32 -0800 (PST)
+ e134mr30130496yba.474.1637275549921; 
+ Thu, 18 Nov 2021 14:45:49 -0800 (PST)
 MIME-Version: 1.0
-References: <20211118030413.2610-1-skeggsb@gmail.com>
- <CACO55tuyS+wA5zK7k2rT5PyTHFuGD-3MfmpcX2h5B+v+nH-FKg@mail.gmail.com>
-In-Reply-To: <CACO55tuyS+wA5zK7k2rT5PyTHFuGD-3MfmpcX2h5B+v+nH-FKg@mail.gmail.com>
+References: <20211118111314.GB1147@kili>
+In-Reply-To: <20211118111314.GB1147@kili>
 From: Ben Skeggs <skeggsb@gmail.com>
-Date: Fri, 19 Nov 2021 08:26:21 +1000
-Message-ID: <CACAvsv4EfmtYJrDzkfcWXL-OLy=D7mNVAKEoSfOuOTTDtKdU9A@mail.gmail.com>
-To: Karol Herbst <kherbst@redhat.com>
+Date: Fri, 19 Nov 2021 08:45:38 +1000
+Message-ID: <CACAvsv5jiOo+4hvO-G1ojAvrwZDALX7VfAV8-SHnzYak-3mFDA@mail.gmail.com>
+To: Dan Carpenter <dan.carpenter@oracle.com>
 Content-Type: text/plain; charset="UTF-8"
-Subject: Re: [Nouveau] [PATCH] drm/nouveau: recognise GA106
+Subject: Re: [Nouveau] [PATCH] drm/nouveau/acr: fix a couple NULL vs
+ IS_ERR() checks
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -62,68 +62,67 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau <nouveau@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>
+Cc: David Airlie <airlied@linux.ie>, ML nouveau <nouveau@lists.freedesktop.org>,
+ kernel-janitors@vger.kernel.org, LKML <linux-kernel@vger.kernel.org>,
+ ML dri-devel <dri-devel@lists.freedesktop.org>,
+ Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, 19 Nov 2021 at 00:14, Karol Herbst <kherbst@redhat.com> wrote:
+On Thu, 18 Nov 2021 at 21:13, Dan Carpenter <dan.carpenter@oracle.com> wrote:
 >
-> Cc: stable?
-Yeah, that probably makes sense actually.
+> The nvkm_acr_lsfw_add() function never returns NULL.  It returns error
+> pointers on error.
+>
+> Fixes: 22dcda45a3d1 ("drm/nouveau/acr: implement new subdev to replace "secure boot"")
+> Signed-off-by: Dan Carpenter <dan.carpenter@oracle.com>
+Reviewed-by: Ben Skeggs <bskeggs@redhat.com>
 
+> ---
+>  drivers/gpu/drm/nouveau/nvkm/subdev/acr/gm200.c | 6 ++++--
+>  drivers/gpu/drm/nouveau/nvkm/subdev/acr/gp102.c | 6 ++++--
+>  2 files changed, 8 insertions(+), 4 deletions(-)
 >
-> On Thu, Nov 18, 2021 at 4:04 AM Ben Skeggs <skeggsb@gmail.com> wrote:
-> >
-> > From: Ben Skeggs <bskeggs@redhat.com>
-> >
-> > I've got HW now, appears to work as expected so far.
-> >
-> > Signed-off-by: Ben Skeggs <bskeggs@redhat.com>
-> > ---
-> >  .../gpu/drm/nouveau/nvkm/engine/device/base.c | 22 +++++++++++++++++++
-> >  1 file changed, 22 insertions(+)
-> >
-> > diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/device/base.c b/drivers/gpu/drm/nouveau/nvkm/engine/device/base.c
-> > index b51d690f375f..88d262ba648c 100644
-> > --- a/drivers/gpu/drm/nouveau/nvkm/engine/device/base.c
-> > +++ b/drivers/gpu/drm/nouveau/nvkm/engine/device/base.c
-> > @@ -2626,6 +2626,27 @@ nv174_chipset = {
-> >         .fifo     = { 0x00000001, ga102_fifo_new },
-> >  };
-> >
-> > +static const struct nvkm_device_chip
-> > +nv176_chipset = {
-> > +       .name = "GA106",
-> > +       .bar      = { 0x00000001, tu102_bar_new },
-> > +       .bios     = { 0x00000001, nvkm_bios_new },
-> > +       .devinit  = { 0x00000001, ga100_devinit_new },
-> > +       .fb       = { 0x00000001, ga102_fb_new },
-> > +       .gpio     = { 0x00000001, ga102_gpio_new },
-> > +       .i2c      = { 0x00000001, gm200_i2c_new },
-> > +       .imem     = { 0x00000001, nv50_instmem_new },
-> > +       .mc       = { 0x00000001, ga100_mc_new },
-> > +       .mmu      = { 0x00000001, tu102_mmu_new },
-> > +       .pci      = { 0x00000001, gp100_pci_new },
-> > +       .privring = { 0x00000001, gm200_privring_new },
-> > +       .timer    = { 0x00000001, gk20a_timer_new },
-> > +       .top      = { 0x00000001, ga100_top_new },
-> > +       .disp     = { 0x00000001, ga102_disp_new },
-> > +       .dma      = { 0x00000001, gv100_dma_new },
-> > +       .fifo     = { 0x00000001, ga102_fifo_new },
-> > +};
-> > +
-> >  static const struct nvkm_device_chip
-> >  nv177_chipset = {
-> >         .name = "GA107",
-> > @@ -3072,6 +3093,7 @@ nvkm_device_ctor(const struct nvkm_device_func *func,
-> >                 case 0x168: device->chip = &nv168_chipset; break;
-> >                 case 0x172: device->chip = &nv172_chipset; break;
-> >                 case 0x174: device->chip = &nv174_chipset; break;
-> > +               case 0x176: device->chip = &nv176_chipset; break;
-> >                 case 0x177: device->chip = &nv177_chipset; break;
-> >                 default:
-> >                         if (nvkm_boolopt(device->cfgopt, "NvEnableUnsupportedChipsets", false)) {
-> > --
-> > 2.31.1
-> >
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/acr/gm200.c b/drivers/gpu/drm/nouveau/nvkm/subdev/acr/gm200.c
+> index cdb1ead26d84..82b4c8e1457c 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/acr/gm200.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/acr/gm200.c
+> @@ -207,11 +207,13 @@ int
+>  gm200_acr_wpr_parse(struct nvkm_acr *acr)
+>  {
+>         const struct wpr_header *hdr = (void *)acr->wpr_fw->data;
+> +       struct nvkm_acr_lsfw *lsfw;
+>
+>         while (hdr->falcon_id != WPR_HEADER_V0_FALCON_ID_INVALID) {
+>                 wpr_header_dump(&acr->subdev, hdr);
+> -               if (!nvkm_acr_lsfw_add(NULL, acr, NULL, (hdr++)->falcon_id))
+> -                       return -ENOMEM;
+> +               lsfw = nvkm_acr_lsfw_add(NULL, acr, NULL, (hdr++)->falcon_id);
+> +               if (IS_ERR(lsfw))
+> +                       return PTR_ERR(lsfw);
+>         }
+>
+>         return 0;
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/acr/gp102.c b/drivers/gpu/drm/nouveau/nvkm/subdev/acr/gp102.c
+> index fb9132a39bb1..fd97a935a380 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/acr/gp102.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/acr/gp102.c
+> @@ -161,11 +161,13 @@ int
+>  gp102_acr_wpr_parse(struct nvkm_acr *acr)
+>  {
+>         const struct wpr_header_v1 *hdr = (void *)acr->wpr_fw->data;
+> +       struct nvkm_acr_lsfw *lsfw;
+>
+>         while (hdr->falcon_id != WPR_HEADER_V1_FALCON_ID_INVALID) {
+>                 wpr_header_v1_dump(&acr->subdev, hdr);
+> -               if (!nvkm_acr_lsfw_add(NULL, acr, NULL, (hdr++)->falcon_id))
+> -                       return -ENOMEM;
+> +               lsfw = nvkm_acr_lsfw_add(NULL, acr, NULL, (hdr++)->falcon_id);
+> +               if (IS_ERR(lsfw))
+> +                       return PTR_ERR(lsfw);
+>         }
+>
+>         return 0;
+> --
+> 2.20.1
 >
