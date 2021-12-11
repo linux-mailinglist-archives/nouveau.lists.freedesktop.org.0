@@ -2,38 +2,30 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3FEB546FD5D
-	for <lists+nouveau@lfdr.de>; Fri, 10 Dec 2021 10:06:22 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E227C47133C
+	for <lists+nouveau@lfdr.de>; Sat, 11 Dec 2021 10:59:42 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 65EB610E59F;
-	Fri, 10 Dec 2021 09:06:20 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1195910E6F7;
+	Sat, 11 Dec 2021 09:59:35 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from wp530.webpack.hosteurope.de (wp530.webpack.hosteurope.de
- [IPv6:2a01:488:42:1000:50ed:8234::])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C621710E59F;
- Fri, 10 Dec 2021 09:06:19 +0000 (UTC)
-Received: from ip4d173d4a.dynamic.kabel-deutschland.de ([77.23.61.74]
- helo=[192.168.66.200]); authenticated
- by wp530.webpack.hosteurope.de running ExIM with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128)
- id 1mvbr6-0005NW-Fu; Fri, 10 Dec 2021 10:06:16 +0100
-Message-ID: <079d8b88-f3bf-e3ed-677e-8bfdd27b67fb@leemhuis.info>
-Date: Fri, 10 Dec 2021 10:06:15 +0100
+Received: from manul.sfritsch.de (manul.sfritsch.de
+ [IPv6:2a01:4f8:172:195f:112::2])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 72C5210E6E3;
+ Sat, 11 Dec 2021 09:59:33 +0000 (UTC)
+Message-ID: <b6acb31c-ec63-4242-32da-a35e950e5a67@sfritsch.de>
+Date: Sat, 11 Dec 2021 10:59:23 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.3.0
+ Thunderbird/91.4.0
 Content-Language: de-DE
 To: =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>,
- dmoulding@me.com, sf@sfritsch.de, bskeggs@redhat.com
+ dmoulding@me.com, bskeggs@redhat.com
 References: <20211209102335.18321-1-christian.koenig@amd.com>
-From: Thorsten Leemhuis <regressions@leemhuis.info>
+From: Stefan Fritsch <sf@sfritsch.de>
 In-Reply-To: <20211209102335.18321-1-christian.koenig@amd.com>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-bounce-key: webpack.hosteurope.de; regressions@leemhuis.info; 1639127179;
- 38ea121e; 
-X-HE-SMSGID: 1mvbr6-0005NW-Fu
 Subject: Re: [Nouveau] [PATCH] drm/nouveau: wait for the exclusive fence
  after the shared ones v2
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -51,8 +43,6 @@ Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi, this is your Linux kernel regression tracker speaking.
-
 On 09.12.21 11:23, Christian König wrote:
 > Always waiting for the exclusive fence resulted on some performance
 > regressions. So try to wait for the shared fences first, then the
@@ -62,51 +52,77 @@ On 09.12.21 11:23, Christian König wrote:
 > 
 > Signed-off-by: Christian König <christian.koenig@amd.com>
 
-FWIW: In case you need to send an improved patch, could you please add
-this (see (¹) below for the reasoning):
+Tested-by: Stefan Fritsch <sf@sfritsch.de>
 
-Link:
-https://lore.kernel.org/dri-devel/da142fb9-07d7-24fe-4533-0247b8d16cdd@sfritsch.de/
+Please also add a cc for linux-stable, so that this is fixed in 5.15.x
 
-And if the patch is already good to go: could the subsystem maintainer
-please add it when applying? See (¹) for the reasoning.
+Cheers,
+Stefan
 
-BTW, these two lines afaics are missing as well:
-
-Fixes: 3e1ad79bf661 ("drm/nouveau: always wait for the exclusive fence")
-Reported-by: Stefan Fritsch <sf@sfritsch.de>
-
-Ciao, Thorsten
-
-(¹) Long story: The commit message would benefit from a link to the
-regression report, for reasons explained in
-Documentation/process/submitting-patches.rst. To quote:
-
-```
-If related discussions or any other background information behind the
-change can be found on the web, add 'Link:' tags pointing to it. In case
-your patch fixes a bug, for example, add a tag with a URL referencing
-the report in the mailing list archives or a bug tracker;
-```
-
-This concept is old, but the text was reworked recently to make this use
-case for the Link: tag clearer. For details see:
-https://git.kernel.org/linus/1f57bd42b77c
-
-Yes, that "Link:" is not really crucial; but it's good to have if
-someone needs to look into the backstory of this change sometime in the
-future. But I care for a different reason. I'm tracking this regression
-(and others) with regzbot, my Linux kernel regression tracking bot. This
-bot will notice if a patch with a Link: tag to a tracked regression gets
-posted and record that, which allowed anyone looking into the regression
-to quickly gasp the current status from regzbot's webui
-(https://linux-regtracking.leemhuis.info/regzbot ) or its reports. The
-bot will also notice if a commit with a Link: tag to a regression report
-is applied by Linus and then automatically mark the regression as
-resolved then.
-
-IOW: this tag makes my life a regression tracker a lot easier, as I
-otherwise have to tell regzbot manually when the fix lands. :-/
-
-#regzbot ^backmonitor:
-https://lore.kernel.org/dri-devel/da142fb9-07d7-24fe-4533-0247b8d16cdd@sfritsch.de/
+> ---
+>   drivers/gpu/drm/nouveau/nouveau_fence.c | 28 +++++++++++++------------
+>   1 file changed, 15 insertions(+), 13 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_fence.c b/drivers/gpu/drm/nouveau/nouveau_fence.c
+> index 05d0b3eb3690..0ae416aa76dc 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_fence.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_fence.c
+> @@ -353,15 +353,22 @@ nouveau_fence_sync(struct nouveau_bo *nvbo, struct nouveau_channel *chan, bool e
+>   
+>   		if (ret)
+>   			return ret;
+> -	}
+>   
+> -	fobj = dma_resv_shared_list(resv);
+> -	fence = dma_resv_excl_fence(resv);
+> +		fobj = NULL;
+> +	} else {
+> +		fobj = dma_resv_shared_list(resv);
+> +	}
+>   
+> -	if (fence) {
+> +	/* Waiting for the exclusive fence first causes performance regressions
+> +	 * under some circumstances. So manually wait for the shared ones first.
+> +	 */
+> +	for (i = 0; i < (fobj ? fobj->shared_count : 0) && !ret; ++i) {
+>   		struct nouveau_channel *prev = NULL;
+>   		bool must_wait = true;
+>   
+> +		fence = rcu_dereference_protected(fobj->shared[i],
+> +						dma_resv_held(resv));
+> +
+>   		f = nouveau_local_fence(fence, chan->drm);
+>   		if (f) {
+>   			rcu_read_lock();
+> @@ -373,20 +380,13 @@ nouveau_fence_sync(struct nouveau_bo *nvbo, struct nouveau_channel *chan, bool e
+>   
+>   		if (must_wait)
+>   			ret = dma_fence_wait(fence, intr);
+> -
+> -		return ret;
+>   	}
+>   
+> -	if (!exclusive || !fobj)
+> -		return ret;
+> -
+> -	for (i = 0; i < fobj->shared_count && !ret; ++i) {
+> +	fence = dma_resv_excl_fence(resv);
+> +	if (fence) {
+>   		struct nouveau_channel *prev = NULL;
+>   		bool must_wait = true;
+>   
+> -		fence = rcu_dereference_protected(fobj->shared[i],
+> -						dma_resv_held(resv));
+> -
+>   		f = nouveau_local_fence(fence, chan->drm);
+>   		if (f) {
+>   			rcu_read_lock();
+> @@ -398,6 +398,8 @@ nouveau_fence_sync(struct nouveau_bo *nvbo, struct nouveau_channel *chan, bool e
+>   
+>   		if (must_wait)
+>   			ret = dma_fence_wait(fence, intr);
+> +
+> +		return ret;
+>   	}
+>   
+>   	return ret;
