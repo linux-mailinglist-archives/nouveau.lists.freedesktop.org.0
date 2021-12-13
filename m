@@ -2,39 +2,38 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id E7330472709
-	for <lists+nouveau@lfdr.de>; Mon, 13 Dec 2021 10:59:28 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1044E472D66
+	for <lists+nouveau@lfdr.de>; Mon, 13 Dec 2021 14:34:27 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id BF89410E701;
-	Mon, 13 Dec 2021 09:59:26 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id DAF3310E8F3;
+	Mon, 13 Dec 2021 13:34:22 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mga05.intel.com (mga05.intel.com [192.55.52.43])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 680B210E62C;
- Mon, 13 Dec 2021 09:59:25 +0000 (UTC)
-X-IronPort-AV: E=McAfee;i="6200,9189,10196"; a="324970232"
-X-IronPort-AV: E=Sophos;i="5.88,202,1635231600"; d="scan'208";a="324970232"
-Received: from fmsmga008.fm.intel.com ([10.253.24.58])
- by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 13 Dec 2021 01:59:25 -0800
-X-IronPort-AV: E=Sophos;i="5.88,202,1635231600"; d="scan'208";a="566495206"
+Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2E8B110E8E2;
+ Mon, 13 Dec 2021 13:34:20 +0000 (UTC)
+X-IronPort-AV: E=McAfee;i="6200,9189,10196"; a="238675399"
+X-IronPort-AV: E=Sophos;i="5.88,202,1635231600"; d="scan'208";a="238675399"
+Received: from orsmga008.jf.intel.com ([10.7.209.65])
+ by orsmga103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 13 Dec 2021 05:34:19 -0800
+X-IronPort-AV: E=Sophos;i="5.88,202,1635231600"; d="scan'208";a="517751011"
 Received: from ppolasze-mobl.ger.corp.intel.com (HELO localhost)
  ([10.252.20.7])
- by fmsmga008-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 13 Dec 2021 01:59:20 -0800
+ by orsmga008-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 13 Dec 2021 05:34:15 -0800
 From: Jani Nikula <jani.nikula@linux.intel.com>
 To: Thomas Zimmermann <tzimmermann@suse.de>, mripard@kernel.org,
  maarten.lankhorst@linux.intel.com, airlied@linux.ie, daniel@ffwll.ch
-In-Reply-To: <20211213093650.19598-3-tzimmermann@suse.de>
+In-Reply-To: <20211213093650.19598-1-tzimmermann@suse.de>
 Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
 References: <20211213093650.19598-1-tzimmermann@suse.de>
- <20211213093650.19598-3-tzimmermann@suse.de>
-Date: Mon, 13 Dec 2021 11:59:18 +0200
-Message-ID: <87v8zs7rm1.fsf@intel.com>
+Date: Mon, 13 Dec 2021 15:34:12 +0200
+Message-ID: <87lf0o7hnv.fsf@intel.com>
 MIME-Version: 1.0
 Content-Type: text/plain
-Subject: Re: [Nouveau] [Intel-gfx] [PATCH 2/3] drm/dp: Move DP declarations
- into separate header file
+Subject: Re: [Nouveau] [PATCH 0/3] drm/dp: Move DisplayPort helpers into own
+ module
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -54,154 +53,62 @@ Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 On Mon, 13 Dec 2021, Thomas Zimmermann <tzimmermann@suse.de> wrote:
-> Split the DP declarations from other helpers before moving the
-> DP functions into a separate module.
+> Split-off DisplayPort functions from KMS helper library and move them
+> into their own module. Reduces the size of drm_kms_helper.ko by ~50%.
 >
-> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-> ---
->  drivers/gpu/drm/drm_crtc_helper_internal.h | 27 ---------------------
->  drivers/gpu/drm/drm_dp_aux_dev.c           |  2 +-
->  drivers/gpu/drm/drm_dp_helper.c            |  2 +-
->  drivers/gpu/drm/drm_dp_helper_internal.h   | 28 ++++++++++++++++++++++
->  drivers/gpu/drm/drm_dp_mst_topology.c      |  2 +-
->  drivers/gpu/drm/drm_kms_helper_common.c    |  1 +
->  6 files changed, 32 insertions(+), 30 deletions(-)
->  create mode 100644 drivers/gpu/drm/drm_dp_helper_internal.h
->
-> diff --git a/drivers/gpu/drm/drm_crtc_helper_internal.h b/drivers/gpu/drm/drm_crtc_helper_internal.h
-> index 61e09f8a8d0f..28e04e750130 100644
-> --- a/drivers/gpu/drm/drm_crtc_helper_internal.h
-> +++ b/drivers/gpu/drm/drm_crtc_helper_internal.h
-> @@ -28,36 +28,9 @@
->  
->  #include <drm/drm_connector.h>
->  #include <drm/drm_crtc.h>
-> -#include <drm/drm_dp_helper.h>
->  #include <drm/drm_encoder.h>
->  #include <drm/drm_modes.h>
->  
-> -/* drm_dp_aux_dev.c */
-> -#ifdef CONFIG_DRM_DP_AUX_CHARDEV
-> -int drm_dp_aux_dev_init(void);
-> -void drm_dp_aux_dev_exit(void);
-> -int drm_dp_aux_register_devnode(struct drm_dp_aux *aux);
-> -void drm_dp_aux_unregister_devnode(struct drm_dp_aux *aux);
-> -#else
-> -static inline int drm_dp_aux_dev_init(void)
-> -{
-> -	return 0;
-> -}
-> -
-> -static inline void drm_dp_aux_dev_exit(void)
-> -{
-> -}
-> -
-> -static inline int drm_dp_aux_register_devnode(struct drm_dp_aux *aux)
-> -{
-> -	return 0;
-> -}
-> -
-> -static inline void drm_dp_aux_unregister_devnode(struct drm_dp_aux *aux)
-> -{
-> -}
-> -#endif
-> -
->  /* drm_probe_helper.c */
->  enum drm_mode_status drm_crtc_mode_valid(struct drm_crtc *crtc,
->  					 const struct drm_display_mode *mode);
-> diff --git a/drivers/gpu/drm/drm_dp_aux_dev.c b/drivers/gpu/drm/drm_dp_aux_dev.c
-> index 06b374cae956..0618dfe16660 100644
-> --- a/drivers/gpu/drm/drm_dp_aux_dev.c
-> +++ b/drivers/gpu/drm/drm_dp_aux_dev.c
-> @@ -40,7 +40,7 @@
->  #include <drm/drm_dp_mst_helper.h>
->  #include <drm/drm_print.h>
->  
-> -#include "drm_crtc_helper_internal.h"
-> +#include "drm_dp_helper_internal.h"
->  
->  struct drm_dp_aux_dev {
->  	unsigned index;
-> diff --git a/drivers/gpu/drm/drm_dp_helper.c b/drivers/gpu/drm/drm_dp_helper.c
-> index 23f9073bc473..e995a0262ed7 100644
-> --- a/drivers/gpu/drm/drm_dp_helper.c
-> +++ b/drivers/gpu/drm/drm_dp_helper.c
-> @@ -35,7 +35,7 @@
->  #include <drm/drm_dp_mst_helper.h>
->  #include <drm/drm_panel.h>
->  
-> -#include "drm_crtc_helper_internal.h"
-> +#include "drm_dp_helper_internal.h"
->  
->  struct dp_aux_backlight {
->  	struct backlight_device *base;
-> diff --git a/drivers/gpu/drm/drm_dp_helper_internal.h b/drivers/gpu/drm/drm_dp_helper_internal.h
-> new file mode 100644
-> index 000000000000..5c9f8bb0c99a
-> --- /dev/null
-> +++ b/drivers/gpu/drm/drm_dp_helper_internal.h
-> @@ -0,0 +1,28 @@
-> +/* SPDX-License-Identifier: MIT */
-> +
-> +#include <drm/drm_dp_helper.h>
+> This patchset is part of an on-going effort to reduce the minimum
+> binary size of the DRM core and helpers. It's helpful for systems with
+> early-boot DRM graphics, which requires DRM to be linked into the
+> kernel image.
 
-Please don't include other headers if you can avoid them by using
-forward declarations.
+Would it be time to add a subdirectory for each non-driver, non-core drm
+module? We've touched this topic before. I find it increasingly hard to
+remember which files are part of helpers. This would also help with the
+arbitrary drm_dp_helper_mod.c naming.
+
+Perhaps drivers/gpu/drm/drm_dp/?
 
 BR,
 Jani.
 
 
-> +
-> +#ifdef CONFIG_DRM_DP_AUX_CHARDEV
-> +int drm_dp_aux_dev_init(void);
-> +void drm_dp_aux_dev_exit(void);
-> +int drm_dp_aux_register_devnode(struct drm_dp_aux *aux);
-> +void drm_dp_aux_unregister_devnode(struct drm_dp_aux *aux);
-> +#else
-> +static inline int drm_dp_aux_dev_init(void)
-> +{
-> +	return 0;
-> +}
-> +
-> +static inline void drm_dp_aux_dev_exit(void)
-> +{
-> +}
-> +
-> +static inline int drm_dp_aux_register_devnode(struct drm_dp_aux *aux)
-> +{
-> +	return 0;
-> +}
-> +
-> +static inline void drm_dp_aux_unregister_devnode(struct drm_dp_aux *aux)
-> +{
-> +}
-> +#endif
-> diff --git a/drivers/gpu/drm/drm_dp_mst_topology.c b/drivers/gpu/drm/drm_dp_mst_topology.c
-> index 7f0ff96261cf..9f7b0b606924 100644
-> --- a/drivers/gpu/drm/drm_dp_mst_topology.c
-> +++ b/drivers/gpu/drm/drm_dp_mst_topology.c
-> @@ -45,7 +45,7 @@
->  #include <drm/drm_print.h>
->  #include <drm/drm_probe_helper.h>
->  
-> -#include "drm_crtc_helper_internal.h"
-> +#include "drm_dp_helper_internal.h"
->  #include "drm_dp_mst_topology_internal.h"
->  
->  /**
-> diff --git a/drivers/gpu/drm/drm_kms_helper_common.c b/drivers/gpu/drm/drm_kms_helper_common.c
-> index 47e92400548d..88260d26409c 100644
-> --- a/drivers/gpu/drm/drm_kms_helper_common.c
-> +++ b/drivers/gpu/drm/drm_kms_helper_common.c
-> @@ -29,6 +29,7 @@
->  
->  #include <drm/drm_print.h>
->  
-> +#include "drm_dp_helper_internal.h"
->  #include "drm_crtc_helper_internal.h"
->  
->  MODULE_AUTHOR("David Airlie, Jesse Barnes");
+
+>
+> Thomas Zimmermann (3):
+>   drm/dp_mst: Remove trailing whitespace.
+>   drm/dp: Move DP declarations into separate header file
+>   drm/dp: Move DisplayPort helpers into separate helper module
+>
+>  drivers/gpu/drm/Kconfig                       |  8 ++++++
+>  drivers/gpu/drm/Makefile                      | 14 ++++++----
+>  drivers/gpu/drm/bridge/Kconfig                |  4 +++
+>  drivers/gpu/drm/bridge/analogix/Kconfig       |  2 ++
+>  drivers/gpu/drm/bridge/cadence/Kconfig        |  1 +
+>  drivers/gpu/drm/drm_crtc_helper_internal.h    | 27 ------------------
+>  drivers/gpu/drm/{drm_dp_helper.c => drm_dp.c} |  2 +-
+>  drivers/gpu/drm/drm_dp_aux_dev.c              |  2 +-
+>  drivers/gpu/drm/drm_dp_helper_internal.h      | 28 +++++++++++++++++++
+>  drivers/gpu/drm/drm_dp_helper_mod.c           | 22 +++++++++++++++
+>  drivers/gpu/drm/drm_dp_mst_topology.c         |  4 +--
+>  drivers/gpu/drm/drm_kms_helper_common.c       | 14 ----------
+>  drivers/gpu/drm/i915/Kconfig                  |  1 +
+>  drivers/gpu/drm/msm/Kconfig                   |  1 +
+>  drivers/gpu/drm/nouveau/Kconfig               |  1 +
+>  drivers/gpu/drm/rockchip/Kconfig              |  1 +
+>  drivers/gpu/drm/tegra/Kconfig                 |  1 +
+>  drivers/gpu/drm/xlnx/Kconfig                  |  1 +
+>  18 files changed, 83 insertions(+), 51 deletions(-)
+>  rename drivers/gpu/drm/{drm_dp_helper.c => drm_dp.c} (99%)
+>  create mode 100644 drivers/gpu/drm/drm_dp_helper_internal.h
+>  create mode 100644 drivers/gpu/drm/drm_dp_helper_mod.c
+>
+>
+> base-commit: 3f422828221d9ceefcddef0be33561b1646a1cbe
+> prerequisite-patch-id: c2b2f08f0eccc9f5df0c0da49fa1d36267deb11d
+> prerequisite-patch-id: c67e5d886a47b7d0266d81100837557fda34cb24
+> --
+> 2.34.1
+>
 
 -- 
 Jani Nikula, Intel Open Source Graphics Center
