@@ -2,108 +2,54 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 88BE0474238
-	for <lists+nouveau@lfdr.de>; Tue, 14 Dec 2021 13:18:16 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9AEA5474988
+	for <lists+nouveau@lfdr.de>; Tue, 14 Dec 2021 18:34:21 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id AEE5310E41F;
-	Tue, 14 Dec 2021 12:18:14 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 809FE10E266;
+	Tue, 14 Dec 2021 17:34:19 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from APC01-PSA-obe.outbound.protection.outlook.com
- (mail-psaapc01on2109.outbound.protection.outlook.com [40.107.255.109])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8D01810E41F;
- Tue, 14 Dec 2021 12:18:13 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=BeiTFDpPGu1zL4hagBi/CYGPKV/bFO3+9J4FYBpynPFjv7RxJQuDFwbAQHY6YWPInk+FEdOnaYtCEYHJMruKBTJujSd4LIM9GBzxcHHjW9/lAKrWYHS9vzq8squgbt+ddh+wOIxzX/ZzS4W4iFiLDkqgDrJj/THG7U1OEObH4pv8ilKLi+lTtorKUiPmOYB50FFrlu6fEzYQdWSZgtcpH4gR/Er6eqFRUnj8ehKJtfAp+LpMfYqnAzcmxV3N8BAUEiCxfTySIazBr3N89GTD7odyOd4KGGb8cTScHj+CDenTwjlZQdwo8XcFkBKq96pICcwAGTBPVmmDR9rD3Jbsqg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=qarb1zlIk6SEFIQ9kuG92GCPO+xkARTN4H9Hklzzz9E=;
- b=CqSz9X6Grb1a4VnAzWD8S0TClrsBU5AnYgmn7NMoAbjTNL7mQot4yaIEBGiPJKJdF2l13MMcf9mumBxw6AQh5NbLn8ZZNdqS1BF+9l61rvYI9lIGFWCebTWnxpi77XeWGQ2iQX4+wtEJOOr4mdwMUrBnjWJjij1tkexJvCFfMv4D6PvBDBIte9cGXQv47gUUtCU45CI9TYTgIbVRXnouHjeN+mfg7fMHBurD7t5QvFKyw12ZBLdi8Lkyd3D5hAhAcbuTv6iuEWFLtJAPQsRGsLYBMbUUp+3et/JLuUCSHwRX/34aNUP7FpBQGmi9vMr20B5ew1H0CrnlKysqhm7zLw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=vivo.com; dmarc=pass action=none header.from=vivo.com;
- dkim=pass header.d=vivo.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vivo0.onmicrosoft.com; 
- s=selector2-vivo0-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=qarb1zlIk6SEFIQ9kuG92GCPO+xkARTN4H9Hklzzz9E=;
- b=ALeBAOw/eYc5EmyN92xM4kFKTycjHTZkHmTBmsfM4upeUeXRA9gf5F4NdZtEYNGD47oK8k25TWVzG2WGseAGl8jiIexrnp7SBhdAqQWTS+z4+3xf3mbcd+oJ/iIrDs4lE21ihEroxb0AiPI0mhkB9FYrlk2dNUuRW9ePHmolVfs=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=vivo.com;
-Received: from SL2PR06MB3082.apcprd06.prod.outlook.com (2603:1096:100:37::17)
- by SL2PR06MB3003.apcprd06.prod.outlook.com (2603:1096:100:33::12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4755.25; Tue, 14 Dec
- 2021 12:18:11 +0000
-Received: from SL2PR06MB3082.apcprd06.prod.outlook.com
- ([fe80::a0cf:a0e2:ee48:a396]) by SL2PR06MB3082.apcprd06.prod.outlook.com
- ([fe80::a0cf:a0e2:ee48:a396%4]) with mapi id 15.20.4778.018; Tue, 14 Dec 2021
- 12:18:11 +0000
-From: Qing Wang <wangqing@vivo.com>
-To: Ben Skeggs <bskeggs@redhat.com>, David Airlie <airlied@linux.ie>,
- Daniel Vetter <daniel@ffwll.ch>, dri-devel@lists.freedesktop.org,
- nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org
-Date: Tue, 14 Dec 2021 04:18:03 -0800
-Message-Id: <1639484284-75779-1-git-send-email-wangqing@vivo.com>
-X-Mailer: git-send-email 2.7.4
-Content-Type: text/plain
-X-ClientProxiedBy: HK2PR0302CA0009.apcprd03.prod.outlook.com
- (2603:1096:202::19) To SL2PR06MB3082.apcprd06.prod.outlook.com
- (2603:1096:100:37::17)
+Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6688F89D77;
+ Tue, 14 Dec 2021 17:34:18 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1639503258; x=1671039258;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:in-reply-to;
+ bh=h7NmkOeXP+EgPvcnXUzU1fiOTvJLA9yEcsDhPz0HhPo=;
+ b=KpSEWZD2d6SKliliDH1+j5+0LuU0DdDzY4y13LjmhKZWhMcG8LNrsITh
+ cnZczoyYyhIlgiBvyzRU5f2eYYg7ogPD2esb2Zn1LDRPLM8ghyjYA+IrV
+ D/FIO5D8LsBkwEA+PrH1DEmz/R/DaCX4Ee2BHyzVcV2PFuIqAcFBQJuu3
+ abQCMoajCC1nwSQIHoa2FzzszmufJuvJbagjlGdB1nBPwyE05ssyr0aLQ
+ EJa6BlVovplwDA6qLu7Pct4elqFlEgv3IyMR0D/yRMcQrFKklOVxCUqK7
+ hOI3M2cfauzT2QHTeH2ZiV4aLfwt1NHGG9K7h/9YfOzghQ/zjPOzIy942 g==;
+X-IronPort-AV: E=McAfee;i="6200,9189,10197"; a="236568675"
+X-IronPort-AV: E=Sophos;i="5.88,205,1635231600"; d="scan'208";a="236568675"
+Received: from orsmga005.jf.intel.com ([10.7.209.41])
+ by fmsmga102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 14 Dec 2021 09:34:17 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.88,205,1635231600"; d="scan'208";a="682143613"
+Received: from lkp-server02.sh.intel.com (HELO 9f38c0981d9f) ([10.239.97.151])
+ by orsmga005.jf.intel.com with ESMTP; 14 Dec 2021 09:34:15 -0800
+Received: from kbuild by 9f38c0981d9f with local (Exim 4.92)
+ (envelope-from <lkp@intel.com>)
+ id 1mxBgs-0000ZC-E1; Tue, 14 Dec 2021 17:34:14 +0000
+Date: Wed, 15 Dec 2021 01:33:50 +0800
+From: kernel test robot <lkp@intel.com>
+To: Qing Wang <wangqing@vivo.com>, Ben Skeggs <bskeggs@redhat.com>,
+ David Airlie <airlied@linux.ie>, Daniel Vetter <daniel@ffwll.ch>,
+ dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org
+Message-ID: <202112150140.JBV3kw5P-lkp@intel.com>
+References: <1639484284-75779-1-git-send-email-wangqing@vivo.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 0b6ff759-b3a8-41a1-9802-08d9befbcbe3
-X-MS-TrafficTypeDiagnostic: SL2PR06MB3003:EE_
-X-Microsoft-Antispam-PRVS: <SL2PR06MB30036A5D14CB510FA68DD8A4BD759@SL2PR06MB3003.apcprd06.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:935;
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: /3geq2svV1uOipTPkXErhi60YYGpY75shipH8xo1rniWFrZlHKbNQoH5OnPVpEd0ipVfYLIF1/17XUIy8rliCy+I0+b8oxlasLi0IUjYaUGXLgPxx86nnaI8VSj5VIdnm3hXzxKBqow3lAnaXNUoijztAnoYe4mqobuFl4IC9ppnRBmS9VfBCP1ZOslMUiL4RO61vsXAmdQ6UivfFvy1cls6yqUnWJC64Z1L77RpR6tUzbmzRGfySo+tl4OFYz90kkNVX21K6+VllG4446xmGKWCkwHW/rmmfxbFu04C2sG7mqbePhVrlM6bK6/SUGxVNuREsf0bQEVvLRKalKffzTvye92YZlOaYEGPzMqaJ2bbd3ExOWPx7QuYv3/+DHVt+JfJ+EfC/YIuYfmDyz1w5UFNvCqE2SlzdmC/E2q5iUqnZyH91cB63c321mqSgw8odKhYXNF/HRSwJxwH46+xundsPXQ5qOr1zMqhiEn/rjSmeFdtgD2wr1OoisO0WTRyxERfrM1zHlsQTA2tRnyfCWuDgXPecT3kyhuIaVcvJEfgmAVitdpjP3wGq/luOnqi1Mmuma+hUVYxSIr4t3C+NFFy4/xbQzUSWgBB7tri9l0Fe2mMgn5QNBxaIqyyQM1ieghnFm70qgpGmGLeJXv0nBUVgE7f386pd1iUFVU07RoSMJWwvynKQXJ/za1wbbjmAuN75UL2nEHohXkgpvnQqA==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SL2PR06MB3082.apcprd06.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(4636009)(366004)(38350700002)(38100700002)(186003)(6506007)(83380400001)(6666004)(66946007)(6486002)(2616005)(4744005)(66556008)(66476007)(316002)(110136005)(8676002)(86362001)(5660300002)(8936002)(508600001)(6512007)(4326008)(2906002)(36756003)(52116002)(26005)(107886003);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?+FM9Db5puACbHqofa9TTK652ai0UHP2t8FrA5hNE896V2c9yd0/iwwDKgFd+?=
- =?us-ascii?Q?XFYh6sZPcEFAzzMQ8A+iuwlud/GLWrNFF2v0+8YrcF+tzdUeVrw/M9Nt3i2h?=
- =?us-ascii?Q?QeYqWIjZPUJjRDzni2eBq6N5ky5h97bopFDTeUEA2CEYIMXH48h0VEBUtl16?=
- =?us-ascii?Q?AXI58PVK4Inp9MFuYucneDcFU+lTJcEOO1Kg7C/Nl9N9hvm1qDiGkQ+5NmGr?=
- =?us-ascii?Q?uUMmDGhiCCr31K53DjzNdQmwZ1NIJ3roC1TAipBbyhGTXDb5EHxPiOfYQZ8c?=
- =?us-ascii?Q?MgEFRZoswZblyYBQanPsFrBeSwH0LxU/Psh6IveR3e2vQt4yv3MgsLPU4Ar4?=
- =?us-ascii?Q?2ebEtlB7ROuha3KSqPzRHohf4wTiSh1JnBgIR5TfS2HUj5NQXsH/LOOI9giG?=
- =?us-ascii?Q?qz8PpMBT9Ovwt4Y0feIr+KD2LiERh6n5NRJBw5r3MrAsPRsC21z24swbBC/A?=
- =?us-ascii?Q?x4yIfUGh3gEWv13cW5MPO5cgmrTdvfyHciZsLVo9ypizigRk0pek/RqSYr7q?=
- =?us-ascii?Q?jYGfOTGHcKFHbQsnWZR9qaqXC1Tz/J0yOLxoS+xdsaIhGLyMfK+I1p9v8Vdf?=
- =?us-ascii?Q?46Iskqe0kCK9acf8lgyuAWNQG+ZiDM+icq1FDo5Sf9dMxiphyVpi057Bb+ij?=
- =?us-ascii?Q?XhxVXxHIKngno3UvAM6dfg3xrKx/0t3ob/w5hishN6tH8VUjmxQBatbwQqf3?=
- =?us-ascii?Q?Ukq9iEz6WqedRweAZemEdUOnq7izvXCPf38Xcl0aWI2/DQ9aQynkA4Vod9ag?=
- =?us-ascii?Q?tClOljrtrr6JbRKik9SJUsWzEYw0kwIlFV5M75zCJsOqXahW+hpGw978hWLr?=
- =?us-ascii?Q?qNLEbVu9N67TWzUW+6tkFU3df96rF+26ZC0iY+id0F/6A1mzYdHO54sKIx8L?=
- =?us-ascii?Q?OJ0ir2Kc7dhiSykr0a/GUHh6SIZIYj2A5AJkyNMokFbkgcghGuNXQvIgsuOS?=
- =?us-ascii?Q?xT9cDczfP3+0ghWjObsNnUC65aj8/KKOudEZvxkB7FeeEDmJYDZVCHV8s070?=
- =?us-ascii?Q?xES/BcWcFmk53BtTyNXfCzo7AcCC9YPe5aEbHPEYu6Yn9t4+5WwCq6VF9D4x?=
- =?us-ascii?Q?4G2H1q02HeMcOlyyaiXq5xVj8F5t8SJ3F6hgcgi3RyL+yMCLnLLbQlZBOn6z?=
- =?us-ascii?Q?aG2MYJC0gxm5omdepHckGYZXwcGYnKk3Ni21+lEyg/Lv9g6kT5YFhfist32D?=
- =?us-ascii?Q?imRiuTATEJMR/s73MUtHi4rAPCA9mPru+6/LLD92tJ66U47SAolAcpBxU8c2?=
- =?us-ascii?Q?2dkQqTlql1JAJOk1ERLo1SrERSzeUYE65GrAn/14t46nZBnNIPTqyvbf7t0W?=
- =?us-ascii?Q?51njl9HyXEFi1XrzwoKuePEkjwqin1VjjzJ4WRodEug87BRMc0OasoZEVowh?=
- =?us-ascii?Q?/cl4QwocvgoKxB6+k324feceNc2HIS25NEFowLEE1xVHCu04s56k9bDsiNEI?=
- =?us-ascii?Q?UZ0eUiiSjHESQfoJKnbXbshoPraOtrF7UYSMwoO8vSBEFJ2PxMBJsiL63B5z?=
- =?us-ascii?Q?IXyvXE2ce6B9GM4jC5rr7fvsMUFnPbO6EPPI/ZZU51EogY1rwVm6j8tjvsaJ?=
- =?us-ascii?Q?gyrFB/lV92c8LvFxxXbADp0aOwpzCc5DBDwRA725UUR08sulcUZ3S132ua01?=
- =?us-ascii?Q?1XIA/YnhrtagS7nNNcCDHKE=3D?=
-X-OriginatorOrg: vivo.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0b6ff759-b3a8-41a1-9802-08d9befbcbe3
-X-MS-Exchange-CrossTenant-AuthSource: SL2PR06MB3082.apcprd06.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Dec 2021 12:18:11.8054 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 923e42dc-48d5-4cbe-b582-1a797a6412ed
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: kAgQ+sdnYeingLGn870G+sNKQN+43XLcM7DgHUkFFK6JkqDNxB7zkRnsIlOY9jPmnxrjTUjUOiiazpC67RsbXg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SL2PR06MB3003
-Subject: [Nouveau] [PATCH] drm: nouveau: lsfw: cleanup coccinelle warning
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <1639484284-75779-1-git-send-email-wangqing@vivo.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Subject: Re: [Nouveau] [PATCH] drm: nouveau: lsfw: cleanup coccinelle warning
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -115,36 +61,157 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Wang Qing <wangqing@vivo.com>
+Cc: Wang Qing <wangqing@vivo.com>, kbuild-all@lists.01.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-From: Wang Qing <wangqing@vivo.com>
+Hi Qing,
 
-odd_ptr_err.cocci has complained about this warning for a long time:
-lsfw.c:194:5-11: inconsistent IS_ERR and PTR_ERR on line 195.
+Thank you for the patch! Yet something to improve:
 
-Although there is no actual impact, it can improve scanning efficiency.
+[auto build test ERROR on drm/drm-next]
+[also build test ERROR on v5.16-rc5 next-20211213]
+[If your patch is applied to the wrong git tree, kindly drop us a note.
+And when submitting patch, we suggest to use '--base' as documented in
+https://git-scm.com/docs/git-format-patch]
 
-Signed-off-by: Wang Qing <wangqing@vivo.com>
+url:    https://github.com/0day-ci/linux/commits/Qing-Wang/drm-nouveau-lsfw-cleanup-coccinelle-warning/20211214-202245
+base:   git://anongit.freedesktop.org/drm/drm drm-next
+config: arc-allyesconfig (https://download.01.org/0day-ci/archive/20211215/202112150140.JBV3kw5P-lkp@intel.com/config)
+compiler: arceb-elf-gcc (GCC) 11.2.0
+reproduce (this is a W=1 build):
+        wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/make.cross -O ~/bin/make.cross
+        chmod +x ~/bin/make.cross
+        # https://github.com/0day-ci/linux/commit/3a85ab7f09d9dc599e9910c320115b93f0274272
+        git remote add linux-review https://github.com/0day-ci/linux
+        git fetch --no-tags linux-review Qing-Wang/drm-nouveau-lsfw-cleanup-coccinelle-warning/20211214-202245
+        git checkout 3a85ab7f09d9dc599e9910c320115b93f0274272
+        # save the config file to linux build tree
+        mkdir build_dir
+        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=gcc-11.2.0 make.cross O=build_dir ARCH=arc SHELL=/bin/bash
+
+If you fix the issue, kindly add following tag as appropriate
+Reported-by: kernel test robot <lkp@intel.com>
+
+All errors (new ones prefixed by >>):
+
+   drivers/gpu/drm/nouveau/nvkm/subdev/acr/lsfw.c: In function 'nvkm_acr_lsfw_load_bl_inst_data_sig':
+>> drivers/gpu/drm/nouveau/nvkm/subdev/acr/lsfw.c:195:25: error: expected ')' before 'return'
+     195 |         if (IS_ERR(lsfw)
+         |            ~            ^
+         |                         )
+     196 |                 return PTR_ERR(lsfw);
+         |                 ~~~~~~   
+>> drivers/gpu/drm/nouveau/nvkm/subdev/acr/lsfw.c:254:1: error: expected expression before '}' token
+     254 | }
+         | ^
+   drivers/gpu/drm/nouveau/nvkm/subdev/acr/lsfw.c:192:13: warning: unused variable 'ret' [-Wunused-variable]
+     192 |         int ret;
+         |             ^~~
+   drivers/gpu/drm/nouveau/nvkm/subdev/acr/lsfw.c:191:14: warning: unused variable 'bldata' [-Wunused-variable]
+     191 |         u32 *bldata;
+         |              ^~~~~~
+   drivers/gpu/drm/nouveau/nvkm/subdev/acr/lsfw.c:190:36: warning: unused variable 'desc' [-Wunused-variable]
+     190 |         const struct nvfw_bl_desc *desc;
+         |                                    ^~~~
+   drivers/gpu/drm/nouveau/nvkm/subdev/acr/lsfw.c:189:36: warning: unused variable 'hdr' [-Wunused-variable]
+     189 |         const struct nvfw_bin_hdr *hdr;
+         |                                    ^~~
+   drivers/gpu/drm/nouveau/nvkm/subdev/acr/lsfw.c:188:58: warning: unused variable 'data' [-Wunused-variable]
+     188 |         const struct firmware *bl = NULL, *inst = NULL, *data = NULL;
+         |                                                          ^~~~
+   drivers/gpu/drm/nouveau/nvkm/subdev/acr/lsfw.c:188:44: warning: unused variable 'inst' [-Wunused-variable]
+     188 |         const struct firmware *bl = NULL, *inst = NULL, *data = NULL;
+         |                                            ^~~~
+   drivers/gpu/drm/nouveau/nvkm/subdev/acr/lsfw.c:188:32: warning: unused variable 'bl' [-Wunused-variable]
+     188 |         const struct firmware *bl = NULL, *inst = NULL, *data = NULL;
+         |                                ^~
+   drivers/gpu/drm/nouveau/nvkm/subdev/acr/lsfw.c:254:1: error: control reaches end of non-void function [-Werror=return-type]
+     254 | }
+         | ^
+   cc1: some warnings being treated as errors
+
+
+vim +195 drivers/gpu/drm/nouveau/nvkm/subdev/acr/lsfw.c
+
+   178	
+   179	int
+   180	nvkm_acr_lsfw_load_bl_inst_data_sig(struct nvkm_subdev *subdev,
+   181					    struct nvkm_falcon *falcon,
+   182					    enum nvkm_acr_lsf_id id,
+   183					    const char *path, int ver,
+   184					    const struct nvkm_acr_lsf_func *func)
+   185	{
+   186		struct nvkm_acr *acr = subdev->device->acr;
+   187		struct nvkm_acr_lsfw *lsfw;
+   188		const struct firmware *bl = NULL, *inst = NULL, *data = NULL;
+   189		const struct nvfw_bin_hdr *hdr;
+   190		const struct nvfw_bl_desc *desc;
+   191		u32 *bldata;
+   192		int ret;
+   193	
+   194		lsfw = nvkm_acr_lsfw_add(func, acr, falcon, id);
+ > 195		if (IS_ERR(lsfw)
+   196			return PTR_ERR(lsfw);
+   197	
+   198		ret = nvkm_firmware_load_name(subdev, path, "bl", ver, &bl);
+   199		if (ret)
+   200			goto done;
+   201	
+   202		hdr = nvfw_bin_hdr(subdev, bl->data);
+   203		desc = nvfw_bl_desc(subdev, bl->data + hdr->header_offset);
+   204		bldata = (void *)(bl->data + hdr->data_offset);
+   205	
+   206		ret = nvkm_firmware_load_name(subdev, path, "inst", ver, &inst);
+   207		if (ret)
+   208			goto done;
+   209	
+   210		ret = nvkm_firmware_load_name(subdev, path, "data", ver, &data);
+   211		if (ret)
+   212			goto done;
+   213	
+   214		ret = nvkm_firmware_load_name(subdev, path, "sig", ver, &lsfw->sig);
+   215		if (ret)
+   216			goto done;
+   217	
+   218		lsfw->bootloader_size = ALIGN(desc->code_size, 256);
+   219		lsfw->bootloader_imem_offset = desc->start_tag << 8;
+   220	
+   221		lsfw->app_start_offset = lsfw->bootloader_size;
+   222		lsfw->app_imem_entry = 0;
+   223		lsfw->app_resident_code_offset = 0;
+   224		lsfw->app_resident_code_size = ALIGN(inst->size, 256);
+   225		lsfw->app_resident_data_offset = lsfw->app_resident_code_size;
+   226		lsfw->app_resident_data_size = ALIGN(data->size, 256);
+   227		lsfw->app_size = lsfw->app_resident_code_size +
+   228				 lsfw->app_resident_data_size;
+   229	
+   230		lsfw->img.size = lsfw->bootloader_size + lsfw->app_size;
+   231		if (!(lsfw->img.data = kzalloc(lsfw->img.size, GFP_KERNEL))) {
+   232			ret = -ENOMEM;
+   233			goto done;
+   234		}
+   235	
+   236		memcpy(lsfw->img.data, bldata, lsfw->bootloader_size);
+   237		memcpy(lsfw->img.data + lsfw->app_start_offset +
+   238		       lsfw->app_resident_code_offset, inst->data, inst->size);
+   239		memcpy(lsfw->img.data + lsfw->app_start_offset +
+   240		       lsfw->app_resident_data_offset, data->data, data->size);
+   241	
+   242		lsfw->ucode_size = ALIGN(lsfw->app_resident_data_offset, 256) +
+   243				   lsfw->bootloader_size;
+   244		lsfw->data_size = lsfw->app_size + lsfw->bootloader_size -
+   245				  lsfw->ucode_size;
+   246	
+   247	done:
+   248		if (ret)
+   249			nvkm_acr_lsfw_del(lsfw);
+   250		nvkm_firmware_put(data);
+   251		nvkm_firmware_put(inst);
+   252		nvkm_firmware_put(bl);
+   253		return ret;
+ > 254	}
+
 ---
- drivers/gpu/drm/nouveau/nvkm/subdev/acr/lsfw.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
-
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/acr/lsfw.c b/drivers/gpu/drm/nouveau/nvkm/subdev/acr/lsfw.c
-index 9b1cf67..0f70d14
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/acr/lsfw.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/acr/lsfw.c
-@@ -191,7 +191,8 @@ nvkm_acr_lsfw_load_bl_inst_data_sig(struct nvkm_subdev *subdev,
- 	u32 *bldata;
- 	int ret;
- 
--	if (IS_ERR((lsfw = nvkm_acr_lsfw_add(func, acr, falcon, id))))
-+	lsfw = nvkm_acr_lsfw_add(func, acr, falcon, id);
-+	if (IS_ERR(lsfw)
- 		return PTR_ERR(lsfw);
- 
- 	ret = nvkm_firmware_load_name(subdev, path, "bl", ver, &bl);
--- 
-2.7.4
-
+0-DAY CI Kernel Test Service, Intel Corporation
+https://lists.01.org/hyperkitty/list/kbuild-all@lists.01.org
