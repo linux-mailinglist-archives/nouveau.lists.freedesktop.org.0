@@ -1,65 +1,60 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0F38347577C
-	for <lists+nouveau@lfdr.de>; Wed, 15 Dec 2021 12:12:29 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id BD6124765F1
+	for <lists+nouveau@lfdr.de>; Wed, 15 Dec 2021 23:32:59 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5F73210E48E;
-	Wed, 15 Dec 2021 11:12:27 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A14DD10F4F9;
+	Wed, 15 Dec 2021 22:32:57 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D364A10E48E;
- Wed, 15 Dec 2021 11:12:26 +0000 (UTC)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 781621F386;
- Wed, 15 Dec 2021 11:12:25 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1639566745; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=bbZO9ysX0uCXDwHVS9hyNW+8Tmt8urhUpLdw4FhMSJo=;
- b=oNJG8RBc74gmNQz5uRboqK6lUIhA06/mxUa2Duh/gl20ysqe5sJUGlxcvrGIwB6ZO1T+KU
- gX1MP1dbJqlP2qOFSd8OQgLc9CU6gUHs1m38Zr9z4Mmg7YUl1KT7xT5J1C1UDYIwlXnX6H
- 7GQovU16qxEsG3gUoRaivjzqigH7tYA=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1639566745;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=bbZO9ysX0uCXDwHVS9hyNW+8Tmt8urhUpLdw4FhMSJo=;
- b=Y1Mo6E1ktA8KRGhl+YTwmRerTL82XXMxi4+7bNo6g0g0xLYAUYeJ/ni9/0yojIaHNsKhXp
- o12D5DrpR5WaVrAw==
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 362551330B;
- Wed, 15 Dec 2021 11:12:25 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id CD0oDJnNuWGsCQAAMHmgww
- (envelope-from <tzimmermann@suse.de>); Wed, 15 Dec 2021 11:12:25 +0000
-Message-ID: <2165cfb8-c9c6-1aca-b492-587a8e07eb9f@suse.de>
-Date: Wed, 15 Dec 2021 12:12:24 +0100
+Received: from mail-yb1-xb29.google.com (mail-yb1-xb29.google.com
+ [IPv6:2607:f8b0:4864:20::b29])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D2C8810F4F9;
+ Wed, 15 Dec 2021 22:32:56 +0000 (UTC)
+Received: by mail-yb1-xb29.google.com with SMTP id v203so59301470ybe.6;
+ Wed, 15 Dec 2021 14:32:56 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=nSNOK8CGzWG9o4EGKDRvXn+fAqlzalal6kJk2SdxUWo=;
+ b=eC3NXcU4yGFKm5xMZeM4MGZaoslKrXV15YqG9yBjzGPizZgAP/O904vvsxhGYfCISP
+ Y5VikEXhCSNPAeJdZQCSSqtd7jJbOAAi95PSnVadBG3qYrykd0h/vjfOkivZ29US7uE3
+ mdav2zA/5s374hFZNnCTleWV0en0dkCmxu1LobprFcDQZk/Z3rExavhnCAewTbpVu6Iu
+ oCJbryNIyTBMNLUvlGsFNMuVs2IDMjOfl80j2P5CEenf3T1WL7BDMbx9INxqOAsf3MGD
+ 8LxAVF9xYTJ4BPUD9nzosV/gus7ZKXKFUdtOLKmnQ5An52ysUM6k7isTwdclZAiVte+8
+ YjRg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=nSNOK8CGzWG9o4EGKDRvXn+fAqlzalal6kJk2SdxUWo=;
+ b=tX93Ka0IqHaAq3D4TGfAijpWxzwSOe4wCOhKZjaQyzC24l3mjtfPg9WCj3yNF2J4z3
+ QCIjA/G7GJHlDppVKi7aCPRGYIAVeFgqSyQr0OyEqoPIR568SLnOLGmM4Q4uw2y13ecg
+ bAqs/N8g9zKfaX/aEDkt7DIizKwhBaTg6CqWgmRDegTwloiPgL75d1jCZBlDAva6Ih34
+ MBjgyYZ6fAx/yw2dkexlVp4S1tnzr2yH9dy5FtYLiljSzMVN02cBB8gNYuwhEz1eknqi
+ DHu0hTflTw3vF99pz+NCHDaO5UzbC1HvgnJOS22qKMx/enm661DmqIrQVNlGdypI/Xie
+ 6wNw==
+X-Gm-Message-State: AOAM533hqoxApIWzF1/ZLKo60VL16uHj5iIJH4TgkEDBj7PB7O+dUjn+
+ QbpTNBCJjUBfowPslgaaddtBDAcHz7s6/XdHWrreE6Lwwvc=
+X-Google-Smtp-Source: ABdhPJxuFgIpoX7ccNghqERlx0qK6BbUWdm7zRvty5ahz4/qwp9TldKuNmT8joe6rdMvzt4WiWsrSmoMEPc5gpORnVE=
+X-Received: by 2002:a05:6902:1507:: with SMTP id
+ q7mr9583142ybu.671.1639607575998; 
+ Wed, 15 Dec 2021 14:32:55 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.3.2
-Content-Language: en-US
-To: Jani Nikula <jani.nikula@linux.intel.com>, mripard@kernel.org,
- maarten.lankhorst@linux.intel.com, airlied@linux.ie, daniel@ffwll.ch
-References: <20211215104318.18866-1-tzimmermann@suse.de>
- <20211215104318.18866-4-tzimmermann@suse.de> <87pmpy3za7.fsf@intel.com>
-From: Thomas Zimmermann <tzimmermann@suse.de>
-In-Reply-To: <87pmpy3za7.fsf@intel.com>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------NjiJBJidkxdywBFmRsUVvTBz"
-Subject: Re: [Nouveau] [PATCH v2 3/5] drm/dp: Move DisplayPort helpers into
- separate helper module
+References: <20211209102335.18321-1-christian.koenig@amd.com>
+ <b6acb31c-ec63-4242-32da-a35e950e5a67@sfritsch.de>
+ <8aee128c-0699-5057-2655-4f7d91ac235b@gmail.com>
+In-Reply-To: <8aee128c-0699-5057-2655-4f7d91ac235b@gmail.com>
+From: Ben Skeggs <skeggsb@gmail.com>
+Date: Thu, 16 Dec 2021 08:32:44 +1000
+Message-ID: <CACAvsv7D7=Mud1YQ+GACFAqdvBGNp3rjY-eudkXy3uaefY6q+Q@mail.gmail.com>
+To: =?UTF-8?Q?Christian_K=C3=B6nig?= <ckoenig.leichtzumerken@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: [Nouveau] [PATCH] drm/nouveau: wait for the exclusive fence
+ after the shared ones v2
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,79 +66,107 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, linux-rockchip@lists.infradead.org,
- linux-arm-msm@vger.kernel.org, linux-tegra@vger.kernel.org,
- freedreno@lists.freedesktop.org, linux-arm-kernel@lists.infradead.org
+Cc: ML nouveau <nouveau@lists.freedesktop.org>, dmoulding@me.com,
+ Ben Skeggs <bskeggs@redhat.com>,
+ ML dri-devel <dri-devel@lists.freedesktop.org>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------NjiJBJidkxdywBFmRsUVvTBz
-Content-Type: multipart/mixed; boundary="------------CjvT8PR4kFFI3de8QxPISLnx";
- protected-headers="v1"
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: Jani Nikula <jani.nikula@linux.intel.com>, mripard@kernel.org,
- maarten.lankhorst@linux.intel.com, airlied@linux.ie, daniel@ffwll.ch
-Cc: linux-arm-msm@vger.kernel.org, intel-gfx@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, linux-rockchip@lists.infradead.org,
- nouveau@lists.freedesktop.org, linux-tegra@vger.kernel.org,
- freedreno@lists.freedesktop.org, linux-arm-kernel@lists.infradead.org
-Message-ID: <2165cfb8-c9c6-1aca-b492-587a8e07eb9f@suse.de>
-Subject: Re: [PATCH v2 3/5] drm/dp: Move DisplayPort helpers into separate
- helper module
-References: <20211215104318.18866-1-tzimmermann@suse.de>
- <20211215104318.18866-4-tzimmermann@suse.de> <87pmpy3za7.fsf@intel.com>
-In-Reply-To: <87pmpy3za7.fsf@intel.com>
+On Tue, 14 Dec 2021 at 19:19, Christian K=C3=B6nig
+<ckoenig.leichtzumerken@gmail.com> wrote:
+>
+> Am 11.12.21 um 10:59 schrieb Stefan Fritsch:
+> > On 09.12.21 11:23, Christian K=C3=B6nig wrote:
+> >> Always waiting for the exclusive fence resulted on some performance
+> >> regressions. So try to wait for the shared fences first, then the
+> >> exclusive fence should always be signaled already.
+> >>
+> >> v2: fix incorrectly placed "(", add some comment why we do this.
+> >>
+> >> Signed-off-by: Christian K=C3=B6nig <christian.koenig@amd.com>
+> >
+> > Tested-by: Stefan Fritsch <sf@sfritsch.de>
+>
+> Thanks.
+>
+> >
+> > Please also add a cc for linux-stable, so that this is fixed in 5.15.x
+>
+> Sure, but I still need some acked-by or rb from one of the Nouveau guys.
+> So gentle ping on that.
+Acked-by: Ben Skeggs <bskeggs@redhat.com>
 
---------------CjvT8PR4kFFI3de8QxPISLnx
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
-
-SGkNCg0KQW0gMTUuMTIuMjEgdW0gMTI6MDQgc2NocmllYiBKYW5pIE5pa3VsYToNCj4gT24g
-V2VkLCAxNSBEZWMgMjAyMSwgVGhvbWFzIFppbW1lcm1hbm4gPHR6aW1tZXJtYW5uQHN1c2Uu
-ZGU+IHdyb3RlOg0KPj4gCSogbW92ZSBEUCBoZWxwZXIgY29kZSBpbnRvIGRwLyAoSmFuaSkN
-Cj4gDQo+IEkgc3VnZ2VzdGVkIGFkZGluZyB0aGUgc3ViZGlyZWN0b3J5LCBidXQgSSdtIGdv
-aW5nIHRvIGJpa2VzaGVkIHRoZSBuYW1lLA0KPiB3aGljaCBJIGRpZG4ndCBzdWdnZXN0Lg0K
-PiANCj4gJCBmaW5kIGRyaXZlcnMvZ3B1L2RybSAtbWluZGVwdGggMSAtbWF4ZGVwdGggMSAt
-dHlwZSBkIHwgd2MgLWwNCj4gNjgNCj4gDQo+IEFzc3VtaW5nIHdlIG1vdmUgbW9yZSBvZiB0
-aGUgZHJtIG1vZHVsZXMgdG8gc3ViZGlyZWN0b3JpZXMsIGhvdyBhcmUgdGhleQ0KPiBnb2lu
-ZyB0byBzdGFuZCBvdXQgZnJvbSBkcml2ZXJzPw0KPiANCj4gSSBzdWdnZXN0ZWQgZHJtX2Rw
-LCB3aGljaCBJIHVuZGVyc3RhbmQgcmVzdWx0cyBpbiB0YXV0b2xvZ3ksIGJ1dCBoZXksDQo+
-IGFsbCB0aGUgZmlsZW5hbWVzIHVuZGVyIGRybS8gYWxzbyBoYXZlIGRybV8qLltjaF0uIEFu
-ZCBJIGZpbmQgdGhhdCB2ZXJ5DQo+IHVzZWZ1bCBmb3IgZ2l0IGdyZXBzIGFuZCBvdGhlciBj
-b2RlIGFyY2hlb2xvZ3kuIFdpdGgganVzdCB0aGUgZHAgbmFtZSwNCj4geW91J2QgaGF2ZSB0
-byBrbm93IGFuZCBsaXN0IGFsbCB0aGUgZHJtIHN1YmRpcmVjdG9yaWVzIHdoZW4gbG9va2lu
-ZyB1cA0KPiBzdHVmZiB0aGF0J3MgcGFydCBvZiBkcm0gYnV0IG5vdCBkcml2ZXJzLg0KDQpJ
-IHRoaW5rIHdlIGhhdmUgZW5vdWdoIGZpbGVuYW1lIHByZWZpeGVzIGFscmVhZHkuIGRybS9k
-cm1fZHAvZHJtX2RwXyBpcyANCmp1c3QgcmlkaWN1bG91cy4NCg0KQmVzdCByZWdhcmRzDQpU
-aG9tYXMNCg0KPiANCj4gDQo+IEJSLA0KPiBKYW5pLg0KPiANCj4gDQoNCi0tIA0KVGhvbWFz
-IFppbW1lcm1hbm4NCkdyYXBoaWNzIERyaXZlciBEZXZlbG9wZXINClNVU0UgU29mdHdhcmUg
-U29sdXRpb25zIEdlcm1hbnkgR21iSA0KTWF4ZmVsZHN0ci4gNSwgOTA0MDkgTsO8cm5iZXJn
-LCBHZXJtYW55DQooSFJCIDM2ODA5LCBBRyBOw7xybmJlcmcpDQpHZXNjaMOkZnRzZsO8aHJl
-cjogSXZvIFRvdGV2DQo=
-
---------------CjvT8PR4kFFI3de8QxPISLnx--
-
---------------NjiJBJidkxdywBFmRsUVvTBz
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature"
-
------BEGIN PGP SIGNATURE-----
-
-wsF5BAABCAAjFiEExndm/fpuMUdwYFFolh/E3EQov+AFAmG5zZgFAwAAAAAACgkQlh/E3EQov+Bp
-ixAAwWs8icDnyBSxV2SFa3psBdVLmho2jWbzofKikPHRoIcQYX/gUZfJJkp5B/s4nOKVq/PfyKms
-cEHDVBGJxyKsjQHvRqDja4JA5RZD52fvYt3+mJM4eZK7cqZabIURhhWnKMKbQKChZQ2fWECJpBcF
-AHJ2n95F/Tz7N2NUxAtWspQZSfYgoIEpc4hfwMDNlSFHdfzjb/OzUHNyPo5Wj/xZhbTp9jCScVau
-Qd3wDAp3/94OEsk3SvmuDqlCO2N4NCVPHHOQ8ZxI9WUm7tIWqd8oZ2P3usRwWQrCzNP/24qENqV8
-3NKz7xFup4ZIGVqL3XlgtELUyDTc2d0KhB/KiQnoIm5G3ABGla6sHnO53NpCKvWDiWKiloZwWgfb
-m/c4v+tGONqUpvhEJYAwDIptWMNioWmfMTIcKQ5EI2TX+pEcCj40fPmykz2ms4RekdAXmYKo+TW0
-fHI1ihrdJTHma0XKP/if1b0iLpqy+6JJ1edAgoOyMG8tzDiLmKeJIAOoaQg0qTqXHc4qkFMOTT79
-uoJE08Ysab/cT4isNZDpsVxHEwiNvtc94sPLvU8HCcyBLsPpOkY1aiKbRV4WNxJx3llBtGNUL47I
-N35xD2LxHS7sH43a9o5hxQyiZlh0aWqIuQ1mIEIbmL7edw2cDOT1XXVyBvRZ8VXDio3GKHIiJcHi
-VAI=
-=vQBm
------END PGP SIGNATURE-----
-
---------------NjiJBJidkxdywBFmRsUVvTBz--
+>
+> Regards,
+> Christian.
+>
+> >
+> > Cheers,
+> > Stefan
+> >
+> >> ---
+> >>   drivers/gpu/drm/nouveau/nouveau_fence.c | 28 +++++++++++++----------=
+--
+> >>   1 file changed, 15 insertions(+), 13 deletions(-)
+> >>
+> >> diff --git a/drivers/gpu/drm/nouveau/nouveau_fence.c
+> >> b/drivers/gpu/drm/nouveau/nouveau_fence.c
+> >> index 05d0b3eb3690..0ae416aa76dc 100644
+> >> --- a/drivers/gpu/drm/nouveau/nouveau_fence.c
+> >> +++ b/drivers/gpu/drm/nouveau/nouveau_fence.c
+> >> @@ -353,15 +353,22 @@ nouveau_fence_sync(struct nouveau_bo *nvbo,
+> >> struct nouveau_channel *chan, bool e
+> >>             if (ret)
+> >>               return ret;
+> >> -    }
+> >>   -    fobj =3D dma_resv_shared_list(resv);
+> >> -    fence =3D dma_resv_excl_fence(resv);
+> >> +        fobj =3D NULL;
+> >> +    } else {
+> >> +        fobj =3D dma_resv_shared_list(resv);
+> >> +    }
+> >>   -    if (fence) {
+> >> +    /* Waiting for the exclusive fence first causes performance
+> >> regressions
+> >> +     * under some circumstances. So manually wait for the shared
+> >> ones first.
+> >> +     */
+> >> +    for (i =3D 0; i < (fobj ? fobj->shared_count : 0) && !ret; ++i) {
+> >>           struct nouveau_channel *prev =3D NULL;
+> >>           bool must_wait =3D true;
+> >>   +        fence =3D rcu_dereference_protected(fobj->shared[i],
+> >> +                        dma_resv_held(resv));
+> >> +
+> >>           f =3D nouveau_local_fence(fence, chan->drm);
+> >>           if (f) {
+> >>               rcu_read_lock();
+> >> @@ -373,20 +380,13 @@ nouveau_fence_sync(struct nouveau_bo *nvbo,
+> >> struct nouveau_channel *chan, bool e
+> >>             if (must_wait)
+> >>               ret =3D dma_fence_wait(fence, intr);
+> >> -
+> >> -        return ret;
+> >>       }
+> >>   -    if (!exclusive || !fobj)
+> >> -        return ret;
+> >> -
+> >> -    for (i =3D 0; i < fobj->shared_count && !ret; ++i) {
+> >> +    fence =3D dma_resv_excl_fence(resv);
+> >> +    if (fence) {
+> >>           struct nouveau_channel *prev =3D NULL;
+> >>           bool must_wait =3D true;
+> >>   -        fence =3D rcu_dereference_protected(fobj->shared[i],
+> >> -                        dma_resv_held(resv));
+> >> -
+> >>           f =3D nouveau_local_fence(fence, chan->drm);
+> >>           if (f) {
+> >>               rcu_read_lock();
+> >> @@ -398,6 +398,8 @@ nouveau_fence_sync(struct nouveau_bo *nvbo,
+> >> struct nouveau_channel *chan, bool e
+> >>             if (must_wait)
+> >>               ret =3D dma_fence_wait(fence, intr);
+> >> +
+> >> +        return ret;
+> >>       }
+> >>         return ret;
+>
