@@ -2,59 +2,51 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id BD6124765F1
-	for <lists+nouveau@lfdr.de>; Wed, 15 Dec 2021 23:32:59 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 64830476C57
+	for <lists+nouveau@lfdr.de>; Thu, 16 Dec 2021 09:58:20 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A14DD10F4F9;
-	Wed, 15 Dec 2021 22:32:57 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3A38A10E965;
+	Thu, 16 Dec 2021 08:58:11 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-yb1-xb29.google.com (mail-yb1-xb29.google.com
- [IPv6:2607:f8b0:4864:20::b29])
- by gabe.freedesktop.org (Postfix) with ESMTPS id D2C8810F4F9;
- Wed, 15 Dec 2021 22:32:56 +0000 (UTC)
-Received: by mail-yb1-xb29.google.com with SMTP id v203so59301470ybe.6;
- Wed, 15 Dec 2021 14:32:56 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=nSNOK8CGzWG9o4EGKDRvXn+fAqlzalal6kJk2SdxUWo=;
- b=eC3NXcU4yGFKm5xMZeM4MGZaoslKrXV15YqG9yBjzGPizZgAP/O904vvsxhGYfCISP
- Y5VikEXhCSNPAeJdZQCSSqtd7jJbOAAi95PSnVadBG3qYrykd0h/vjfOkivZ29US7uE3
- mdav2zA/5s374hFZNnCTleWV0en0dkCmxu1LobprFcDQZk/Z3rExavhnCAewTbpVu6Iu
- oCJbryNIyTBMNLUvlGsFNMuVs2IDMjOfl80j2P5CEenf3T1WL7BDMbx9INxqOAsf3MGD
- 8LxAVF9xYTJ4BPUD9nzosV/gus7ZKXKFUdtOLKmnQ5An52ysUM6k7isTwdclZAiVte+8
- YjRg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=nSNOK8CGzWG9o4EGKDRvXn+fAqlzalal6kJk2SdxUWo=;
- b=tX93Ka0IqHaAq3D4TGfAijpWxzwSOe4wCOhKZjaQyzC24l3mjtfPg9WCj3yNF2J4z3
- QCIjA/G7GJHlDppVKi7aCPRGYIAVeFgqSyQr0OyEqoPIR568SLnOLGmM4Q4uw2y13ecg
- bAqs/N8g9zKfaX/aEDkt7DIizKwhBaTg6CqWgmRDegTwloiPgL75d1jCZBlDAva6Ih34
- MBjgyYZ6fAx/yw2dkexlVp4S1tnzr2yH9dy5FtYLiljSzMVN02cBB8gNYuwhEz1eknqi
- DHu0hTflTw3vF99pz+NCHDaO5UzbC1HvgnJOS22qKMx/enm661DmqIrQVNlGdypI/Xie
- 6wNw==
-X-Gm-Message-State: AOAM533hqoxApIWzF1/ZLKo60VL16uHj5iIJH4TgkEDBj7PB7O+dUjn+
- QbpTNBCJjUBfowPslgaaddtBDAcHz7s6/XdHWrreE6Lwwvc=
-X-Google-Smtp-Source: ABdhPJxuFgIpoX7ccNghqERlx0qK6BbUWdm7zRvty5ahz4/qwp9TldKuNmT8joe6rdMvzt4WiWsrSmoMEPc5gpORnVE=
-X-Received: by 2002:a05:6902:1507:: with SMTP id
- q7mr9583142ybu.671.1639607575998; 
- Wed, 15 Dec 2021 14:32:55 -0800 (PST)
+X-Greylist: delayed 388 seconds by postgrey-1.36 at gabe;
+ Thu, 16 Dec 2021 02:24:56 UTC
+Received: from cstnet.cn (smtp25.cstnet.cn [159.226.251.25])
+ by gabe.freedesktop.org (Postfix) with ESMTP id 1860710FD17
+ for <nouveau@lists.freedesktop.org>; Thu, 16 Dec 2021 02:24:55 +0000 (UTC)
+Received: from localhost.localdomain (unknown [124.16.138.126])
+ by APP-05 (Coremail) with SMTP id zQCowABH4kDwobphfstgAw--.43200S2;
+ Thu, 16 Dec 2021 10:18:24 +0800 (CST)
+From: Jiasheng Jiang <jiasheng@iscas.ac.cn>
+To: bskeggs@redhat.com,
+	airlied@linux.ie,
+	daniel@ffwll.ch
+Date: Thu, 16 Dec 2021 10:18:23 +0800
+Message-Id: <20211216021823.281472-1-jiasheng@iscas.ac.cn>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20211209102335.18321-1-christian.koenig@amd.com>
- <b6acb31c-ec63-4242-32da-a35e950e5a67@sfritsch.de>
- <8aee128c-0699-5057-2655-4f7d91ac235b@gmail.com>
-In-Reply-To: <8aee128c-0699-5057-2655-4f7d91ac235b@gmail.com>
-From: Ben Skeggs <skeggsb@gmail.com>
-Date: Thu, 16 Dec 2021 08:32:44 +1000
-Message-ID: <CACAvsv7D7=Mud1YQ+GACFAqdvBGNp3rjY-eudkXy3uaefY6q+Q@mail.gmail.com>
-To: =?UTF-8?Q?Christian_K=C3=B6nig?= <ckoenig.leichtzumerken@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [Nouveau] [PATCH] drm/nouveau: wait for the exclusive fence
- after the shared ones v2
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID: zQCowABH4kDwobphfstgAw--.43200S2
+X-Coremail-Antispam: 1UD129KBjvdXoWrtw4xtryxJr4xuFWfur45ZFb_yoWDAFc_Cw
+ 48ZrZxGF4fCF1j9anrCr1rZ342k3ykuFnFvrnaqa43Jw47Jr93Xry7Wr1SgrWDJFyxCFyD
+ Aa1qqF98GFyUujkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
+ 9fnUUIcSsGvfJTRUUUbcAFF20E14v26r4j6ryUM7CY07I20VC2zVCF04k26cxKx2IYs7xG
+ 6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8w
+ A2z4x0Y4vE2Ix0cI8IcVAFwI0_tr0E3s1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr1j
+ 6F4UJwA2z4x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwVC2z280aVCY1x0267AKxVW0oV
+ Cq3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0
+ I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r
+ 4UM4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwCY02Avz4vE14v_Gr1l
+ 42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJV
+ WUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r126r1DMIIYrxkI7VAK
+ I48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r1j6r
+ 4UMIIF0xvE42xK8VAvwI8IcIk0rVWrJr0_WFyUJwCI42IY6I8E87Iv67AKxVWUJVW8JwCI
+ 42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjfUO_MaUUUUU
+X-Originating-IP: [124.16.138.126]
+X-CM-SenderInfo: pmld2xxhqjqxpvfd2hldfou0/
+X-Mailman-Approved-At: Thu, 16 Dec 2021 08:58:10 +0000
+Subject: [Nouveau] [PATCH] drm/nouveau/acr: potential dereference of null
+ pointer
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -66,107 +58,34 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: ML nouveau <nouveau@lists.freedesktop.org>, dmoulding@me.com,
- Ben Skeggs <bskeggs@redhat.com>,
- ML dri-devel <dri-devel@lists.freedesktop.org>
+Cc: nouveau@lists.freedesktop.org, Jiasheng Jiang <jiasheng@iscas.ac.cn>,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, 14 Dec 2021 at 19:19, Christian K=C3=B6nig
-<ckoenig.leichtzumerken@gmail.com> wrote:
->
-> Am 11.12.21 um 10:59 schrieb Stefan Fritsch:
-> > On 09.12.21 11:23, Christian K=C3=B6nig wrote:
-> >> Always waiting for the exclusive fence resulted on some performance
-> >> regressions. So try to wait for the shared fences first, then the
-> >> exclusive fence should always be signaled already.
-> >>
-> >> v2: fix incorrectly placed "(", add some comment why we do this.
-> >>
-> >> Signed-off-by: Christian K=C3=B6nig <christian.koenig@amd.com>
-> >
-> > Tested-by: Stefan Fritsch <sf@sfritsch.de>
->
-> Thanks.
->
-> >
-> > Please also add a cc for linux-stable, so that this is fixed in 5.15.x
->
-> Sure, but I still need some acked-by or rb from one of the Nouveau guys.
-> So gentle ping on that.
-Acked-by: Ben Skeggs <bskeggs@redhat.com>
+The return value of kmalloc() needs to be checked.
+To avoid use in memcpy() in case of the failure of alloc.
 
->
-> Regards,
-> Christian.
->
-> >
-> > Cheers,
-> > Stefan
-> >
-> >> ---
-> >>   drivers/gpu/drm/nouveau/nouveau_fence.c | 28 +++++++++++++----------=
---
-> >>   1 file changed, 15 insertions(+), 13 deletions(-)
-> >>
-> >> diff --git a/drivers/gpu/drm/nouveau/nouveau_fence.c
-> >> b/drivers/gpu/drm/nouveau/nouveau_fence.c
-> >> index 05d0b3eb3690..0ae416aa76dc 100644
-> >> --- a/drivers/gpu/drm/nouveau/nouveau_fence.c
-> >> +++ b/drivers/gpu/drm/nouveau/nouveau_fence.c
-> >> @@ -353,15 +353,22 @@ nouveau_fence_sync(struct nouveau_bo *nvbo,
-> >> struct nouveau_channel *chan, bool e
-> >>             if (ret)
-> >>               return ret;
-> >> -    }
-> >>   -    fobj =3D dma_resv_shared_list(resv);
-> >> -    fence =3D dma_resv_excl_fence(resv);
-> >> +        fobj =3D NULL;
-> >> +    } else {
-> >> +        fobj =3D dma_resv_shared_list(resv);
-> >> +    }
-> >>   -    if (fence) {
-> >> +    /* Waiting for the exclusive fence first causes performance
-> >> regressions
-> >> +     * under some circumstances. So manually wait for the shared
-> >> ones first.
-> >> +     */
-> >> +    for (i =3D 0; i < (fobj ? fobj->shared_count : 0) && !ret; ++i) {
-> >>           struct nouveau_channel *prev =3D NULL;
-> >>           bool must_wait =3D true;
-> >>   +        fence =3D rcu_dereference_protected(fobj->shared[i],
-> >> +                        dma_resv_held(resv));
-> >> +
-> >>           f =3D nouveau_local_fence(fence, chan->drm);
-> >>           if (f) {
-> >>               rcu_read_lock();
-> >> @@ -373,20 +380,13 @@ nouveau_fence_sync(struct nouveau_bo *nvbo,
-> >> struct nouveau_channel *chan, bool e
-> >>             if (must_wait)
-> >>               ret =3D dma_fence_wait(fence, intr);
-> >> -
-> >> -        return ret;
-> >>       }
-> >>   -    if (!exclusive || !fobj)
-> >> -        return ret;
-> >> -
-> >> -    for (i =3D 0; i < fobj->shared_count && !ret; ++i) {
-> >> +    fence =3D dma_resv_excl_fence(resv);
-> >> +    if (fence) {
-> >>           struct nouveau_channel *prev =3D NULL;
-> >>           bool must_wait =3D true;
-> >>   -        fence =3D rcu_dereference_protected(fobj->shared[i],
-> >> -                        dma_resv_held(resv));
-> >> -
-> >>           f =3D nouveau_local_fence(fence, chan->drm);
-> >>           if (f) {
-> >>               rcu_read_lock();
-> >> @@ -398,6 +398,8 @@ nouveau_fence_sync(struct nouveau_bo *nvbo,
-> >> struct nouveau_channel *chan, bool e
-> >>             if (must_wait)
-> >>               ret =3D dma_fence_wait(fence, intr);
-> >> +
-> >> +        return ret;
-> >>       }
-> >>         return ret;
->
+Fixes: 22dcda45a3d1 ("drm/nouveau/acr: implement new subdev to replace "secure boot"")
+Signed-off-by: Jiasheng Jiang <jiasheng@iscas.ac.cn>
+---
+ drivers/gpu/drm/nouveau/nvkm/subdev/acr/hsfw.c | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/acr/hsfw.c b/drivers/gpu/drm/nouveau/nvkm/subdev/acr/hsfw.c
+index 667fa016496e..776573e77988 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/acr/hsfw.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/acr/hsfw.c
+@@ -143,6 +143,9 @@ nvkm_acr_hsfw_load_bl(struct nvkm_acr *acr, const char *name, int ver,
+ 	hsfw->imem_size = desc->code_size;
+ 	hsfw->imem_tag = desc->start_tag;
+ 	hsfw->imem = kmalloc(desc->code_size, GFP_KERNEL);
++	if (!hsfw->imem)
++		return -ENOMEM;
++
+ 	memcpy(hsfw->imem, data + desc->code_off, desc->code_size);
+ 
+ 	nvkm_firmware_put(fw);
+-- 
+2.25.1
+
