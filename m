@@ -2,108 +2,80 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id E906C47DDB4
-	for <lists+nouveau@lfdr.de>; Thu, 23 Dec 2021 03:24:44 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 25CCF482918
+	for <lists+nouveau@lfdr.de>; Sun,  2 Jan 2022 05:18:10 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9E70B10E257;
-	Thu, 23 Dec 2021 02:24:36 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 70E1189F89;
+	Sun,  2 Jan 2022 04:17:57 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from APC01-HK2-obe.outbound.protection.outlook.com
- (mail-eopbgr1300108.outbound.protection.outlook.com [40.107.130.108])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 827C510E256;
- Thu, 23 Dec 2021 02:24:34 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=IE77Gj5vT41PrEFnli1t6GkKd5gdExbxKtoC6n+cnuQTkD5O2mk8B2llSGCjIhQklyMt2jHnMQvbUyTU6/isQRZJcAnvUm8RySsoal694Jv9pgxd0jIZhsoj5gSVj1xwbkyfuvAVRwcED+4yN42IFRkoiVOdgWpEdb11xHFMxoo/bxzPNJ4qocDUf4umEBxlSUQiTdtUZyJ9KR51LBpMy0c3RjQ89ORyn2YwOUbwGT1Ew/c1V0x+RKgwrtoOS6QqY0+mGmFDo0sBIfUq/RTnt1QEqA2UHTZgXLTw8VTh8dH/UWBr/nEZ8hLlR9LygKkCKXmkqk1JflmIyEcBuNDxbg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=QJ7h6+8kAUk2S8BR5jqjnp/2xQ336H/XiVV9DZAeNS0=;
- b=WslS7lcH2ZnTvTe3Fzi6dzocCwKRToM19WsYejgRTkaBx6Sn9tQPUOzIDs/NtpU4RmP9Ak8K9cFRs6ppsEFFcWtNKLnwQZHHueoijFqzJF8h5lMHzvFfRucsX5irTU3XOKUrPxJsj9u0MQ8YctA0/LcMoK2P8ybk+t9QU3a7rCvQOJ6+omdoNdGo8ulSUuqCJ7mHL7aJl1uz2tT3sh3jCtCPYwYr/i5MLgMxmxLX4ER9mm98Asx59KXfcL26fL0TiqS+0kS0P5hAuavSssLnR0TL2HGdGOIVCHWq3A+azUAIkRhvvfReATvKiotsmcF6sTu0fFAoZ4MK3zFkWfDK9g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=vivo.com; dmarc=pass action=none header.from=vivo.com;
- dkim=pass header.d=vivo.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vivo0.onmicrosoft.com; 
- s=selector2-vivo0-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=QJ7h6+8kAUk2S8BR5jqjnp/2xQ336H/XiVV9DZAeNS0=;
- b=V70t8/3HTISfs/YGA/dIUwPd9kA2GMub0bWBofoDVA66/4dABZyfSC/nMkAsSwZliZ/2Lb/ce/c99U+mPMopm4LFVXbrXAcOYbsdDnUGfo2hSKjgkkZj2e9P9V8wb0XmlQFY6r7tV+WLGmTl8uMuFcl9oqoZWjo3UWLdiWc01gA=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=vivo.com;
-Received: from SL2PR06MB3082.apcprd06.prod.outlook.com (2603:1096:100:37::17)
- by SL2PR06MB3388.apcprd06.prod.outlook.com (2603:1096:100:3c::18)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4823.19; Thu, 23 Dec
- 2021 02:24:31 +0000
-Received: from SL2PR06MB3082.apcprd06.prod.outlook.com
- ([fe80::4d34:9df8:fabe:fdb2]) by SL2PR06MB3082.apcprd06.prod.outlook.com
- ([fe80::4d34:9df8:fabe:fdb2%6]) with mapi id 15.20.4823.019; Thu, 23 Dec 2021
- 02:24:30 +0000
-From: Qing Wang <wangqing@vivo.com>
-To: Ben Skeggs <bskeggs@redhat.com>, David Airlie <airlied@linux.ie>,
- Daniel Vetter <daniel@ffwll.ch>, dri-devel@lists.freedesktop.org,
- nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org
-Date: Wed, 22 Dec 2021 18:24:22 -0800
-Message-Id: <1640226263-32739-1-git-send-email-wangqing@vivo.com>
-X-Mailer: git-send-email 2.7.4
-Content-Type: text/plain
-X-ClientProxiedBy: HK2PR06CA0019.apcprd06.prod.outlook.com
- (2603:1096:202:2e::31) To SL2PR06MB3082.apcprd06.prod.outlook.com
- (2603:1096:100:37::17)
+Received: from mx5.ucr.edu (mx.ucr.edu [138.23.62.67])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id CCB8510E342
+ for <nouveau@lists.freedesktop.org>; Sat, 18 Dec 2021 02:56:40 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=ucr.edu; i=@ucr.edu; q=dns/txt; s=selector3;
+ t=1639796201; x=1671332201;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=Vhh2Wojmk5xxnlKfiyWrawrHKzGyzr84ZKM1o8pV+po=;
+ b=Rmo5pVaZe2sMOWSHHXX1hOjW0v3i4G7mjrxLO/ofld0n8w7qmQPYR8iv
+ vUCBONsNE8GgIfrGmfFNymgSiDSrjQeJCjsjAubZkgPSBMBjLEVmkXGOp
+ 7fbbomsvPj+8qgp72t32OzPhEymfLv0DfXT5Qx0fh/62p1cG2uYMiqvL4
+ YJf7hGqxRMfxIw8HZEWVeWR9l2rTmEC+rP8akT2Qf+mol2KMv6hAGiOml
+ 2RZe0ydhb2M46J1rwwyJ0yo0KKCxAAJGXOoJHHvB5D9g7NAyZAL0a5du8
+ ko5DWXAjaQ74Z/PtnO3oKZxk03EUabQtmJTXrH2FTauaxfs7q86rg7Kby A==;
+IronPort-SDR: W5GIraq98mLpnwbZtlo9Eo20/3DHuG3hNl8umSFJhSnGEn1YisIgEV4pTijDzDyjDw+kZdFNSi
+ Sw/Hj/Y+NcyjHLhKa9aTq4C4XuYnsAKNazgMeDp5b55G+mkUASJVP3mAQSNoT2RvWI0S2AQ4E0
+ 4EkdqL4tJ61jsGofbFIgXOkaWzUeW/hZy+ssPIplMVuiG5UaLWxQSjiXcxx3HAgkQvi1yf6dz5
+ lwg83FhFKoNlX3FFXM7Kogw70Jh8fUwG+qEHn3tJwqR5cgrX3tyBhwb0dJNm9X/v69w9XplNLo
+ avp1Dd9UTrPsfgxpOfTflSKo
+X-IronPort-AV: E=Sophos;i="5.88,215,1635231600"; d="scan'208";a="263260738"
+Received: from mail-qt1-f197.google.com ([209.85.160.197])
+ by smtpmx5.ucr.edu with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
+ 17 Dec 2021 18:56:40 -0800
+Received: by mail-qt1-f197.google.com with SMTP id
+ 4-20020ac85744000000b002b2f329efc2so4210307qtx.12
+ for <nouveau@lists.freedesktop.org>; Fri, 17 Dec 2021 18:56:39 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ucr.edu; s=rmail;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=W/oW4xcGaHD/Q9q+L8wKlfwu0bwPMu3EEaXJ1rCZ7r8=;
+ b=Q1p+R3mC+VX9kDcyIZHntGkxKhbBd1chuPJ73wN16OAQ/DfnmvLJpQcHRIU2WoU7Zq
+ tMDLlXWxqTIUo1WvrzD36E0gfnySwXT6rY6UQs9nb+9GXnekte7W8LvZLG6zEtyWu/Al
+ FsP2C5hPSiTsbWEQBzH3/3CSPKY18FDzVtEgk=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=W/oW4xcGaHD/Q9q+L8wKlfwu0bwPMu3EEaXJ1rCZ7r8=;
+ b=RimLMM2MXkpFLy0LuZRc40CIO+iCv2pYyf44AdtyHrcl9J+Y1Up4pL9jVdKL7JUhkg
+ lQktte9ADdR5nh8gq38+ApoLzYOaiVtoTSqo3t4EYXS8oGI5Jo0U9RY8q3gKDFUNj08n
+ jzxsG0nWBrJNjr1NwJ/E5H6bCNMZ+3v72DFq7KaNyOtWP9PhR0KqXL0zvVP/yVrkWgZK
+ kgWvdM0090Jkss2g6BvDcsGSURN4B7naFpgrSvhzL60D/52G5EfGYKnKbFdlEAIwykPN
+ ikgWDnG8orWogaeiIM+I5YaSsX361IIVleGFsMlGToajKF5j6TBuwqkjrMFKSbSMrMMW
+ dd8g==
+X-Gm-Message-State: AOAM5303+sCTsrdTrcz+wJDJH8iflyKmrnH7R+Faq/mt6N6o5X5fBoBY
+ n/TKH3zh1a3E0kL1w9f6um/nOglUBLPp2bFS+QW+qPXnf0IVZ+QAfft8tlQdZM2rgZJnoRVlVYU
+ rMxnn9tFwi5flVyU4LRMZyTtN6D0=
+X-Received: by 2002:ad4:594e:: with SMTP id eo14mr5090072qvb.99.1639796198057; 
+ Fri, 17 Dec 2021 18:56:38 -0800 (PST)
+X-Google-Smtp-Source: ABdhPJzNSeR5+Y93fUCIc7POaHKnPLRzL0hlcG5CdAYxVV5YFjohfuBdG0RQ94oMtIxeknO4m2da8g==
+X-Received: by 2002:ad4:594e:: with SMTP id eo14mr5090057qvb.99.1639796197839; 
+ Fri, 17 Dec 2021 18:56:37 -0800 (PST)
+Received: from kq.cs.ucr.edu (kq.cs.ucr.edu. [169.235.27.223])
+ by smtp.googlemail.com with ESMTPSA id m1sm8455617qtk.34.2021.12.17.18.56.36
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 17 Dec 2021 18:56:37 -0800 (PST)
+From: Yizhuo Zhai <yzhai003@ucr.edu>
+To: 
+Date: Fri, 17 Dec 2021 18:56:30 -0800
+Message-Id: <20211218025632.2514288-1-yzhai003@ucr.edu>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 867e5b19-6d35-48de-225c-08d9c5bb59d9
-X-MS-TrafficTypeDiagnostic: SL2PR06MB3388:EE_
-X-Microsoft-Antispam-PRVS: <SL2PR06MB3388CFF609567AA6CA969150BD7E9@SL2PR06MB3388.apcprd06.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:935;
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 5W2S96thZl5uo4tDrmc9jvoa4xICXIt3Q/9fztnxlT5NYk3tmMjbH+MjKDYklIXY5Xtg4MdX8MsvbmNcK6NJ54dNpB+L8iKg+iirjuxne+9tS1Nk2xgu8iCfGDTehQ0j+lGpf1WGpXpBzDAWhvq2vOdElOZ3vqOQKb08D5e8YvKn43sCB5oaZ0l+NTEFS2TS28aFYfEirWg4zFpyrEtkdumrIdvmLh7JmtO9Pwj0xUDXaK05zvsJBHeAhpBLE4WA/7jpV3ImNy7zjBgnfb96eOLjztkNjxdsWlLh9+eKlaqg7coA8Pd3ww2NcuklzFELmKhefBUhG1TBtGBdb8+/BzftKKLTZrF4Dsuj2soZgMDlWCPZztlQUMFv3uIGdPdVe3Z9Q45JxGktoUHVquFLZtfpD8POShQ0lwXy6t5O1u7eIhM2/UpcrmRp9wSSydeGNrSZcV8o2HS5sduQ7dA9Jc291EEHAgsaD9y+rEJ5Ycnk/EjahKG11KnjTSoTnMF68b9ofn0jrvI8F3vgzVKdC5PcHxCc3dZgN0A9WObFGIlWW9Oxb2/YSfztByh88jm7VMWwmm7O6fZyrw0Cc1n/OGcA9GIwyh0QWmy/I13xlBiV6MpgExxVwKtmKy7qqrTwU7xZ6eLsaOA1Pf63mSh7Y2kkyBD7687+gfFqR1DaASw3jGWcVeaG0bMVMfQWIlMniuQ18w0WadAMV7CpcbL3sg==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SL2PR06MB3082.apcprd06.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(4636009)(366004)(66556008)(8676002)(4326008)(36756003)(52116002)(6512007)(26005)(2616005)(66946007)(66476007)(6666004)(8936002)(508600001)(6506007)(86362001)(83380400001)(107886003)(110136005)(2906002)(38100700002)(38350700002)(5660300002)(316002)(186003)(6486002)(4744005);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?tFwlHNS8Ilsg9W1ZUHapf5MPswoPl1gZNVlhu6jg9ig96I4/kRt9sVHtgulL?=
- =?us-ascii?Q?xVhvx4nmwxoCrP3Irxs+VFE2Mq2E7vDuwwaQ+F5Vv8RudSJN6wV3gg1z+qyy?=
- =?us-ascii?Q?BNiqHN7RnXj5ygs0kRGblfqFjD/U2X+VDmj6mNtk+Sfq1l3v7IppGMUoFQd9?=
- =?us-ascii?Q?I3PUGwRyFkC+wvefnRPna77+W7MJ/NjGZOWJOGidNmVYhxETsTVekg4sahhE?=
- =?us-ascii?Q?n5fKaR6+ySstzR2/aNORAv4hB6/+KzlMUBr4tMLJEFIUyAARpP4MgBnGbWDL?=
- =?us-ascii?Q?cnH2gyEwqENY+0L235CcjospcGI4RiPTvJ4Yp7fGqC57eCtXOgDs0pishZuw?=
- =?us-ascii?Q?qaQKfMP1eEYFnjFN7VZBdT3IGhd9GoZTtnji2yXoyT7OHKUhWakEwO2PpHjJ?=
- =?us-ascii?Q?+VSfFh+2afT77TVW2r0lv1e99u3AjaEJtsgGA9G+t22ezsSMirNXP8B0u1VL?=
- =?us-ascii?Q?ChGN2XUK/bwi3CVLv27N4e8kf5qGUJJFiHr8egjjpmhyUPUvi1b75X6O3u2W?=
- =?us-ascii?Q?bVstgeDV/latTmCnmJfrkVBm5AMnB9yckC5e2rchsevpTRVUUwvyCqILvmP1?=
- =?us-ascii?Q?9WiaSny/D2HADtbp47Wc3DgRbLaQMBnNK7NCMqSS5SEVCqJoSRChiveUEJDi?=
- =?us-ascii?Q?+KEOFBl72Fzshnh6EMjRC+T8zR6KjUp7Jd1s5WMnZaFN7dyEJdddofFOmfgj?=
- =?us-ascii?Q?8rg++ygDyVPxDeloQuJ3IWSRxNPEZbVrJg9YpUJHg70usQSCNfOWI7H3ORMk?=
- =?us-ascii?Q?ffPHnW4BhLVgx6VhGaKx2dBZ2u9bcE1tpUkoKU/x1fNOdGg9dgh/hgYDbQhw?=
- =?us-ascii?Q?EFtfDN1W09gOMBjYHK4vlDWzR+83rllYkI5SVS7NxrweGiprE5ilGRKN1HR/?=
- =?us-ascii?Q?tnOlHFgGxTedcrUhRDmxdt60u+/7iIXhZEJeRUjsFDaMoEia5ToZfCnL28yD?=
- =?us-ascii?Q?qt0xrC4YQBgFU8713jM+u4K9dhp3WqlVZS9ceN+ZDTxp2K5c3tRgG88AB4Nd?=
- =?us-ascii?Q?6OJWzSfeva/LKEOPaUN8g1JirHdEqMOVYcZGl5ztZtZaPk270J6DoaxQcSCW?=
- =?us-ascii?Q?dOyBh8x8+Vdf1Ozq6H/eIRVy1QpaMfnIPawhnsLn8ns7ze99dJGSk050hZEB?=
- =?us-ascii?Q?rZyfUu5PfGh86y/l0OsriXkq2qCElYWy5PJLuM4C7Mk9byL32zhdrERjEVoA?=
- =?us-ascii?Q?4PiHQUHJU+0hORUZs/NL5k5sBTeGgWGy0beUf3aJ6nrZLBXiXwlLREu0QML2?=
- =?us-ascii?Q?++wSROrkKGdI90nsOMgYQbYC9kezUxVdtBukZExOGPf4N32hdtNfk5FG3e+C?=
- =?us-ascii?Q?j8Z4r+OhnCU4mzbOasAJ4H0PJw569qk+zmDNLH7WVH0Tak2D09Lm9BEy9kS/?=
- =?us-ascii?Q?NAG+e/VRzZbjKwX1zWiF9C3zjasc0WH9GeJmRIPTHkRhcizAOqitcUEN4IgR?=
- =?us-ascii?Q?/R6ObkxdbD56dT7wMbM1PWuOg+gbA6UTJVpiRcE7UuK0b0GboFing1egnu0G?=
- =?us-ascii?Q?x4DaWVMynVFxCibOIQcy48CYqjen6ILHzFgb27fREOVAEc50tyF6IHFydvOQ?=
- =?us-ascii?Q?EOQ86VN/uxpnVzjnY9Rpf7BkqiPzo+hjkJi2BqWV+ivoINvpjvYE3hBd997Q?=
- =?us-ascii?Q?G0C7bj3VzLmEZWc72nGbfTA=3D?=
-X-OriginatorOrg: vivo.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 867e5b19-6d35-48de-225c-08d9c5bb59d9
-X-MS-Exchange-CrossTenant-AuthSource: SL2PR06MB3082.apcprd06.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Dec 2021 02:24:30.8781 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 923e42dc-48d5-4cbe-b582-1a797a6412ed
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: HAdvmmxpN8B/hgZbcX/U1q0HqZZdvfFi/fWP0PZlW1aVhthu5lnjYuhalfyzc0pOMZEusewg2ODyZzDExyMkmw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SL2PR06MB3388
-Subject: [Nouveau] [PATCH V2] drm: nouveau: lsfw: cleanup coccinelle warning
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Sun, 02 Jan 2022 04:17:56 +0000
+Subject: [Nouveau] [PATCH] drm/nouveau/core/object: Fix the uninitialized
+ use of "type"
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -115,36 +87,38 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Wang Qing <wangqing@vivo.com>
+Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ stable@vger.kernel.org, Yizhuo Zhai <yzhai003@ucr.edu>,
+ Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-From: Wang Qing <wangqing@vivo.com>
+In function nvkm_ioctl_map(), the variable "type" could be
+uninitialized if "nvkm_object_map()" returns error code, however,
+it does not check the return value and directly use the "type" in
+the if statement, which is potentially unsafe.
 
-odd_ptr_err.cocci has complained about this warning for a long time:
-lsfw.c:194:5-11: inconsistent IS_ERR and PTR_ERR on line 195.
-
-Although there is no actual impact, it can improve scanning efficiency.
-
-Signed-off-by: Wang Qing <wangqing@vivo.com>
+Cc: stable@vger.kernel.org
+Fixes: 01326050391c ("drm/nouveau/core/object: allow arguments to be passed to map function")
+Signed-off-by: Yizhuo Zhai <yzhai003@ucr.edu>
 ---
- drivers/gpu/drm/nouveau/nvkm/subdev/acr/lsfw.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ drivers/gpu/drm/nouveau/nvkm/core/ioctl.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/acr/lsfw.c b/drivers/gpu/drm/nouveau/nvkm/subdev/acr/lsfw.c
-index 9b1cf67..0f70d14
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/acr/lsfw.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/acr/lsfw.c
-@@ -191,7 +191,8 @@ nvkm_acr_lsfw_load_bl_inst_data_sig(struct nvkm_subdev *subdev,
- 	u32 *bldata;
- 	int ret;
- 
--	if (IS_ERR((lsfw = nvkm_acr_lsfw_add(func, acr, falcon, id))))
-+	lsfw = nvkm_acr_lsfw_add(func, acr, falcon, id);
-+	if (IS_ERR(lsfw))
- 		return PTR_ERR(lsfw);
- 
- 	ret = nvkm_firmware_load_name(subdev, path, "bl", ver, &bl);
+diff --git a/drivers/gpu/drm/nouveau/nvkm/core/ioctl.c b/drivers/gpu/drm/nouveau/nvkm/core/ioctl.c
+index 735cb6816f10..4264d9d79783 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/core/ioctl.c
++++ b/drivers/gpu/drm/nouveau/nvkm/core/ioctl.c
+@@ -266,6 +266,8 @@ nvkm_ioctl_map(struct nvkm_client *client,
+ 		ret = nvkm_object_map(object, data, size, &type,
+ 				      &args->v0.handle,
+ 				      &args->v0.length);
++		if (ret)
++			return ret;
+ 		if (type == NVKM_OBJECT_MAP_IO)
+ 			args->v0.type = NVIF_IOCTL_MAP_V0_IO;
+ 		else
 -- 
-2.7.4
+2.25.1
 
