@@ -1,52 +1,40 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 64830476C57
-	for <lists+nouveau@lfdr.de>; Thu, 16 Dec 2021 09:58:20 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 477C147A88C
+	for <lists+nouveau@lfdr.de>; Mon, 20 Dec 2021 12:23:06 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3A38A10E965;
-	Thu, 16 Dec 2021 08:58:11 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D4D95112EDA;
+	Mon, 20 Dec 2021 11:23:02 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 388 seconds by postgrey-1.36 at gabe;
- Thu, 16 Dec 2021 02:24:56 UTC
-Received: from cstnet.cn (smtp25.cstnet.cn [159.226.251.25])
- by gabe.freedesktop.org (Postfix) with ESMTP id 1860710FD17
- for <nouveau@lists.freedesktop.org>; Thu, 16 Dec 2021 02:24:55 +0000 (UTC)
-Received: from localhost.localdomain (unknown [124.16.138.126])
- by APP-05 (Coremail) with SMTP id zQCowABH4kDwobphfstgAw--.43200S2;
- Thu, 16 Dec 2021 10:18:24 +0800 (CST)
-From: Jiasheng Jiang <jiasheng@iscas.ac.cn>
-To: bskeggs@redhat.com,
-	airlied@linux.ie,
-	daniel@ffwll.ch
-Date: Thu, 16 Dec 2021 10:18:23 +0800
-Message-Id: <20211216021823.281472-1-jiasheng@iscas.ac.cn>
-X-Mailer: git-send-email 2.25.1
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by gabe.freedesktop.org (Postfix) with ESMTP id F31E3112ECE;
+ Mon, 20 Dec 2021 11:23:00 +0000 (UTC)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 21E8E11FB;
+ Mon, 20 Dec 2021 03:23:00 -0800 (PST)
+Received: from [10.57.34.58] (unknown [10.57.34.58])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 481643F718;
+ Mon, 20 Dec 2021 03:22:58 -0800 (PST)
+Message-ID: <1d3d4486-1fe0-372c-f702-30da7cf86b5a@arm.com>
+Date: Mon, 20 Dec 2021 11:22:51 +0000
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: zQCowABH4kDwobphfstgAw--.43200S2
-X-Coremail-Antispam: 1UD129KBjvdXoWrtw4xtryxJr4xuFWfur45ZFb_yoWDAFc_Cw
- 48ZrZxGF4fCF1j9anrCr1rZ342k3ykuFnFvrnaqa43Jw47Jr93Xry7Wr1SgrWDJFyxCFyD
- Aa1qqF98GFyUujkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
- 9fnUUIcSsGvfJTRUUUbcAFF20E14v26r4j6ryUM7CY07I20VC2zVCF04k26cxKx2IYs7xG
- 6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8w
- A2z4x0Y4vE2Ix0cI8IcVAFwI0_tr0E3s1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr1j
- 6F4UJwA2z4x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwVC2z280aVCY1x0267AKxVW0oV
- Cq3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0
- I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r
- 4UM4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwCY02Avz4vE14v_Gr1l
- 42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJV
- WUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r126r1DMIIYrxkI7VAK
- I48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r1j6r
- 4UMIIF0xvE42xK8VAvwI8IcIk0rVWrJr0_WFyUJwCI42IY6I8E87Iv67AKxVWUJVW8JwCI
- 42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjfUO_MaUUUUU
-X-Originating-IP: [124.16.138.126]
-X-CM-SenderInfo: pmld2xxhqjqxpvfd2hldfou0/
-X-Mailman-Approved-At: Thu, 16 Dec 2021 08:58:10 +0000
-Subject: [Nouveau] [PATCH] drm/nouveau/acr: potential dereference of null
- pointer
+User-Agent: Mozilla/5.0 (Windows NT 10.0; rv:91.0) Gecko/20100101
+ Thunderbird/91.4.0
+Content-Language: en-GB
+To: Lu Baolu <baolu.lu@linux.intel.com>, Ben Skeggs <bskeggs@redhat.com>,
+ David Airlie <airlied@linux.ie>, Daniel Vetter <daniel@ffwll.ch>,
+ Thierry Reding <thierry.reding@gmail.com>,
+ Jonathan Hunter <jonathanh@nvidia.com>
+References: <20211218074546.1772553-1-baolu.lu@linux.intel.com>
+From: Robin Murphy <robin.murphy@arm.com>
+In-Reply-To: <20211218074546.1772553-1-baolu.lu@linux.intel.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Subject: Re: [Nouveau] [PATCH 1/1] drm/nouveau/device: Get right
+ pgsize_bitmap of iommu_domain
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,34 +46,40 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, Jiasheng Jiang <jiasheng@iscas.ac.cn>,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org
+Cc: nouveau@lists.freedesktop.org, Joerg Roedel <joro@8bytes.org>,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ iommu@lists.linux-foundation.org, linux-tegra@vger.kernel.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-The return value of kmalloc() needs to be checked.
-To avoid use in memcpy() in case of the failure of alloc.
+On 2021-12-18 07:45, Lu Baolu wrote:
+> The suported page sizes of an iommu_domain are saved in the pgsize_bitmap
+> field. Retrieve the value from the right place.
+> 
+> Fixes: 58fd9375c2c534 ("drm/nouveau/platform: probe IOMMU if present")
 
-Fixes: 22dcda45a3d1 ("drm/nouveau/acr: implement new subdev to replace "secure boot"")
-Signed-off-by: Jiasheng Jiang <jiasheng@iscas.ac.cn>
----
- drivers/gpu/drm/nouveau/nvkm/subdev/acr/hsfw.c | 3 +++
- 1 file changed, 3 insertions(+)
+...except domain->pgsize_bitmap was introduced more than a year after 
+that commit ;)
 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/acr/hsfw.c b/drivers/gpu/drm/nouveau/nvkm/subdev/acr/hsfw.c
-index 667fa016496e..776573e77988 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/acr/hsfw.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/acr/hsfw.c
-@@ -143,6 +143,9 @@ nvkm_acr_hsfw_load_bl(struct nvkm_acr *acr, const char *name, int ver,
- 	hsfw->imem_size = desc->code_size;
- 	hsfw->imem_tag = desc->start_tag;
- 	hsfw->imem = kmalloc(desc->code_size, GFP_KERNEL);
-+	if (!hsfw->imem)
-+		return -ENOMEM;
-+
- 	memcpy(hsfw->imem, data + desc->code_off, desc->code_size);
- 
- 	nvkm_firmware_put(fw);
--- 
-2.25.1
+As an improvement rather than a fix, though,
 
+Reviewed-by: Robin Murphy <robin.murphy@arm.com>
+
+> Signed-off-by: Lu Baolu <baolu.lu@linux.intel.com>
+> ---
+>   drivers/gpu/drm/nouveau/nvkm/engine/device/tegra.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/device/tegra.c b/drivers/gpu/drm/nouveau/nvkm/engine/device/tegra.c
+> index d0d52c1d4aee..992cc285f2fe 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/engine/device/tegra.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/device/tegra.c
+> @@ -133,7 +133,7 @@ nvkm_device_tegra_probe_iommu(struct nvkm_device_tegra *tdev)
+>   		 * or equal to the system's PAGE_SIZE, with a preference if
+>   		 * both are equal.
+>   		 */
+> -		pgsize_bitmap = tdev->iommu.domain->ops->pgsize_bitmap;
+> +		pgsize_bitmap = tdev->iommu.domain->pgsize_bitmap;
+>   		if (pgsize_bitmap & PAGE_SIZE) {
+>   			tdev->iommu.pgshift = PAGE_SHIFT;
+>   		} else {
