@@ -1,38 +1,52 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id F0243482913
-	for <lists+nouveau@lfdr.de>; Sun,  2 Jan 2022 05:17:59 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id B9694482916
+	for <lists+nouveau@lfdr.de>; Sun,  2 Jan 2022 05:18:07 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 92DF989F6B;
-	Sun,  2 Jan 2022 04:17:56 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4F42A89F77;
+	Sun,  2 Jan 2022 04:17:57 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mga18.intel.com (mga18.intel.com [134.134.136.126])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B517010ED0E;
- Sat, 18 Dec 2021 07:46:15 +0000 (UTC)
-X-IronPort-AV: E=McAfee;i="6200,9189,10201"; a="226756303"
-X-IronPort-AV: E=Sophos;i="5.88,215,1635231600"; d="scan'208";a="226756303"
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
- by orsmga106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 17 Dec 2021 23:46:14 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.88,215,1635231600"; d="scan'208";a="663074663"
-Received: from allen-box.sh.intel.com ([10.239.159.118])
- by fmsmga001.fm.intel.com with ESMTP; 17 Dec 2021 23:46:11 -0800
-From: Lu Baolu <baolu.lu@linux.intel.com>
-To: Ben Skeggs <bskeggs@redhat.com>, David Airlie <airlied@linux.ie>,
- Daniel Vetter <daniel@ffwll.ch>, Thierry Reding <thierry.reding@gmail.com>,
- Jonathan Hunter <jonathanh@nvidia.com>
-Date: Sat, 18 Dec 2021 15:45:46 +0800
-Message-Id: <20211218074546.1772553-1-baolu.lu@linux.intel.com>
-X-Mailer: git-send-email 2.25.1
+Received: from mr85p00im-zteg06021901.me.com (mr85p00im-zteg06021901.me.com
+ [17.58.23.194])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 200F6113F41
+ for <nouveau@lists.freedesktop.org>; Mon, 20 Dec 2021 19:17:23 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=me.com; s=1a1hai;
+ t=1640027842; bh=oEd1/Nx3AqNocMtu+/yy25+4PG7xkt60w3PEpzRII28=;
+ h=From:To:Subject:Date:Message-Id:MIME-Version;
+ b=vaeMilyVJ/FP2kc07lAXBkfnn/q2rc57jz9YA75cQcKfXd7c79AFbbY3h0x7AEnhX
+ qCETE5+ah06gCcPhNg0MlXtms4cSSSeo/8UQ+RbqJ+5xqw7kdCIyQ/mw5WefU+EguJ
+ rzUEqk20NcZi4OJRTNlNcNoVpjR1KUVSNQ2ZAHAQjz5fOKKvWDcoWL4VzUMwxx2u1j
+ y9YbsLmA2t9AUXjnSQaAkx/jfw+tXZwCLGCOY8yaawDT1X5XvemXH8CmEani9Bw+n2
+ 1ncOWPjdtl+JWww0MUOpmrHZ/DJhbwCUK2m8rFLNjZYzYyYDRRzJkxEze7zVVHEJhH
+ mf/NpcJp4ENHA==
+Received: from hitch.danm.net (c-73-98-236-45.hsd1.ut.comcast.net
+ [73.98.236.45])
+ by mr85p00im-zteg06021901.me.com (Postfix) with ESMTPSA id 01C98720C72;
+ Mon, 20 Dec 2021 19:17:21 +0000 (UTC)
+From: Dan Moulding <dmoulding@me.com>
+To: ckoenig.leichtzumerken@gmail.com
+Date: Mon, 20 Dec 2021 12:17:02 -0700
+Message-Id: <20211220191702.27995-1-dmoulding@me.com>
+X-Mailer: git-send-email 2.32.0
+In-Reply-To: <20211209102335.18321-1-christian.koenig@amd.com>
+References: <20211209102335.18321-1-christian.koenig@amd.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Proofpoint-Virus-Version: =?UTF-8?Q?vendor=3Dfsecure_engine=3D1.1.170-22c6f66c430a71ce266a39bfe25bc?=
+ =?UTF-8?Q?2903e8d5c8f:6.0.425,18.0.790,17.0.607.475.0000000_definitions?=
+ =?UTF-8?Q?=3D2021-12-20=5F08:2021-12-20=5F01,2021-12-20=5F08,2020-04-07?=
+ =?UTF-8?Q?=5F01_signatures=3D0?=
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 mlxscore=0
+ mlxlogscore=567 spamscore=0
+ adultscore=0 suspectscore=0 bulkscore=0 phishscore=0 malwarescore=0
+ clxscore=1011 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2009150000 definitions=main-2112200108
 X-Mailman-Approved-At: Sun, 02 Jan 2022 04:17:56 +0000
-Subject: [Nouveau] [PATCH 1/1] drm/nouveau/device: Get right pgsize_bitmap
- of iommu_domain
+Subject: Re: [Nouveau] [PATCH] drm/nouveau: wait for the exclusive fence
+ after the shared ones v2
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -44,35 +58,13 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, Joerg Roedel <joro@8bytes.org>,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- iommu@lists.linux-foundation.org, linux-tegra@vger.kernel.org,
- Robin Murphy <robin.murphy@arm.com>, Lu Baolu <baolu.lu@linux.intel.com>
+Cc: nouveau@lists.freedesktop.org, dmoulding@me.com, bskeggs@redhat.com,
+ dri-devel@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-The suported page sizes of an iommu_domain are saved in the pgsize_bitmap
-field. Retrieve the value from the right place.
+Tested-by: Dan Moulding <dmoulding@me.com>
 
-Fixes: 58fd9375c2c534 ("drm/nouveau/platform: probe IOMMU if present")
-Signed-off-by: Lu Baolu <baolu.lu@linux.intel.com>
----
- drivers/gpu/drm/nouveau/nvkm/engine/device/tegra.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Thanks!
 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/device/tegra.c b/drivers/gpu/drm/nouveau/nvkm/engine/device/tegra.c
-index d0d52c1d4aee..992cc285f2fe 100644
---- a/drivers/gpu/drm/nouveau/nvkm/engine/device/tegra.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/engine/device/tegra.c
-@@ -133,7 +133,7 @@ nvkm_device_tegra_probe_iommu(struct nvkm_device_tegra *tdev)
- 		 * or equal to the system's PAGE_SIZE, with a preference if
- 		 * both are equal.
- 		 */
--		pgsize_bitmap = tdev->iommu.domain->ops->pgsize_bitmap;
-+		pgsize_bitmap = tdev->iommu.domain->pgsize_bitmap;
- 		if (pgsize_bitmap & PAGE_SIZE) {
- 			tdev->iommu.pgshift = PAGE_SHIFT;
- 		} else {
--- 
-2.25.1
-
+-- Dan
