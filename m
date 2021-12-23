@@ -1,71 +1,109 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id EA29647BE19
-	for <lists+nouveau@lfdr.de>; Tue, 21 Dec 2021 11:20:57 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id E906C47DDB4
+	for <lists+nouveau@lfdr.de>; Thu, 23 Dec 2021 03:24:44 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6E05710EF61;
-	Tue, 21 Dec 2021 10:20:54 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9E70B10E257;
+	Thu, 23 Dec 2021 02:24:36 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
- [IPv6:2a00:1450:4864:20::436])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7476E10EF61;
- Tue, 21 Dec 2021 10:20:53 +0000 (UTC)
-Received: by mail-wr1-x436.google.com with SMTP id c4so25872445wrd.9;
- Tue, 21 Dec 2021 02:20:53 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-transfer-encoding:content-language;
- bh=Vg1fVyTUCjS7zrjH16C85VwkkRPIMAZVGo2xmQuhg1I=;
- b=dhNvqw2Fx5pzWKlgBGFX3bScz+GNESXjomyerpRscIxrgO2fsUNicQKeQTBRY7mp7d
- nlP2/vIEyjPBZUiQT+ZFIddIjOUf1FP/Q2EPx27OmQ1kW0hUA14l1AiDFzCvsQex9g5Q
- pKg9S86LLznBCXUwyx1TjTHj12ZSwhaFmhaCorp3btBZkZLIHnr3eYQdTqw7sfPZfPl+
- j5t26lkxSvK8c4R/k8Ll6AyGmH5GhZt+7gE3sAke44rN1cG/jDUPcJ389wT4G32B9VaE
- UQlWto3VR4TBl2RZLusDcGFOBVvJN9SuQHFAzSa+AUC23BiNuCDBKTkfIBHgEJqTkC6C
- 47pQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-transfer-encoding
- :content-language;
- bh=Vg1fVyTUCjS7zrjH16C85VwkkRPIMAZVGo2xmQuhg1I=;
- b=hIDeggf+JuzAHwIIvLDR2PY9ZxJGFbhedblZMgE+fWL1IOx9hy6w3i7TqU74eQyyEP
- MKsgL/Ot+Dhrer8/DnfFn49qTSegVI5OHrX49RryByUr2sipvw1GheVkwEr5IYSVSJSj
- uVOOy5K8d/gwUbBVOZYGU20VEPg553r0LoBJyoxisvbX6RuCG/mzXzZLyjQh7RZZ9x0j
- 07BYsAQS5hLscsv3CXPFfHNCRq9US9nAuzv5pXcWfmljPcq3783WBml3xm+E8HAKJlkt
- Nk2youpuI+h6lrCbs82htdGForcAlNNljFw0/UuMHS03IxKnmkMit45aqdREnbUQgqpy
- H/Zg==
-X-Gm-Message-State: AOAM531h8Hmu0q5BPa9H+XSDrFPwb54idRa3tJQEmJ3cWeKw8zNPnFpI
- Ddc+5locC383cruNm8zi+xU=
-X-Google-Smtp-Source: ABdhPJywrGYWkBthTBY3XwHdtgZzUweiSi4U7HlYjYmIz1bJkZNnND4CNhMaI6gImgLOR1Ufc1eTMQ==
-X-Received: by 2002:a5d:4343:: with SMTP id u3mr2057334wrr.450.1640082051891; 
- Tue, 21 Dec 2021 02:20:51 -0800 (PST)
-Received: from [192.168.178.21] (p57b0bff8.dip0.t-ipconnect.de.
- [87.176.191.248])
- by smtp.gmail.com with ESMTPSA id g6sm6805987wri.67.2021.12.21.02.20.50
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 21 Dec 2021 02:20:51 -0800 (PST)
-To: Thorsten Leemhuis <regressions@leemhuis.info>,
- Ben Skeggs <skeggsb@gmail.com>
-References: <20211209102335.18321-1-christian.koenig@amd.com>
- <b6acb31c-ec63-4242-32da-a35e950e5a67@sfritsch.de>
- <8aee128c-0699-5057-2655-4f7d91ac235b@gmail.com>
- <CACAvsv7D7=Mud1YQ+GACFAqdvBGNp3rjY-eudkXy3uaefY6q+Q@mail.gmail.com>
- <c0e77c90-ad42-29ed-7bc6-68f45dbbcfc2@leemhuis.info>
-From: =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>
-Message-ID: <0e0afdc2-513e-86d9-78ca-4c433e3da5a8@gmail.com>
-Date: Tue, 21 Dec 2021 11:20:50 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.14.0
+Received: from APC01-HK2-obe.outbound.protection.outlook.com
+ (mail-eopbgr1300108.outbound.protection.outlook.com [40.107.130.108])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 827C510E256;
+ Thu, 23 Dec 2021 02:24:34 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=IE77Gj5vT41PrEFnli1t6GkKd5gdExbxKtoC6n+cnuQTkD5O2mk8B2llSGCjIhQklyMt2jHnMQvbUyTU6/isQRZJcAnvUm8RySsoal694Jv9pgxd0jIZhsoj5gSVj1xwbkyfuvAVRwcED+4yN42IFRkoiVOdgWpEdb11xHFMxoo/bxzPNJ4qocDUf4umEBxlSUQiTdtUZyJ9KR51LBpMy0c3RjQ89ORyn2YwOUbwGT1Ew/c1V0x+RKgwrtoOS6QqY0+mGmFDo0sBIfUq/RTnt1QEqA2UHTZgXLTw8VTh8dH/UWBr/nEZ8hLlR9LygKkCKXmkqk1JflmIyEcBuNDxbg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=QJ7h6+8kAUk2S8BR5jqjnp/2xQ336H/XiVV9DZAeNS0=;
+ b=WslS7lcH2ZnTvTe3Fzi6dzocCwKRToM19WsYejgRTkaBx6Sn9tQPUOzIDs/NtpU4RmP9Ak8K9cFRs6ppsEFFcWtNKLnwQZHHueoijFqzJF8h5lMHzvFfRucsX5irTU3XOKUrPxJsj9u0MQ8YctA0/LcMoK2P8ybk+t9QU3a7rCvQOJ6+omdoNdGo8ulSUuqCJ7mHL7aJl1uz2tT3sh3jCtCPYwYr/i5MLgMxmxLX4ER9mm98Asx59KXfcL26fL0TiqS+0kS0P5hAuavSssLnR0TL2HGdGOIVCHWq3A+azUAIkRhvvfReATvKiotsmcF6sTu0fFAoZ4MK3zFkWfDK9g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=vivo.com; dmarc=pass action=none header.from=vivo.com;
+ dkim=pass header.d=vivo.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vivo0.onmicrosoft.com; 
+ s=selector2-vivo0-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=QJ7h6+8kAUk2S8BR5jqjnp/2xQ336H/XiVV9DZAeNS0=;
+ b=V70t8/3HTISfs/YGA/dIUwPd9kA2GMub0bWBofoDVA66/4dABZyfSC/nMkAsSwZliZ/2Lb/ce/c99U+mPMopm4LFVXbrXAcOYbsdDnUGfo2hSKjgkkZj2e9P9V8wb0XmlQFY6r7tV+WLGmTl8uMuFcl9oqoZWjo3UWLdiWc01gA=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=vivo.com;
+Received: from SL2PR06MB3082.apcprd06.prod.outlook.com (2603:1096:100:37::17)
+ by SL2PR06MB3388.apcprd06.prod.outlook.com (2603:1096:100:3c::18)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4823.19; Thu, 23 Dec
+ 2021 02:24:31 +0000
+Received: from SL2PR06MB3082.apcprd06.prod.outlook.com
+ ([fe80::4d34:9df8:fabe:fdb2]) by SL2PR06MB3082.apcprd06.prod.outlook.com
+ ([fe80::4d34:9df8:fabe:fdb2%6]) with mapi id 15.20.4823.019; Thu, 23 Dec 2021
+ 02:24:30 +0000
+From: Qing Wang <wangqing@vivo.com>
+To: Ben Skeggs <bskeggs@redhat.com>, David Airlie <airlied@linux.ie>,
+ Daniel Vetter <daniel@ffwll.ch>, dri-devel@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org
+Date: Wed, 22 Dec 2021 18:24:22 -0800
+Message-Id: <1640226263-32739-1-git-send-email-wangqing@vivo.com>
+X-Mailer: git-send-email 2.7.4
+Content-Type: text/plain
+X-ClientProxiedBy: HK2PR06CA0019.apcprd06.prod.outlook.com
+ (2603:1096:202:2e::31) To SL2PR06MB3082.apcprd06.prod.outlook.com
+ (2603:1096:100:37::17)
 MIME-Version: 1.0
-In-Reply-To: <c0e77c90-ad42-29ed-7bc6-68f45dbbcfc2@leemhuis.info>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
-Subject: Re: [Nouveau] [PATCH] drm/nouveau: wait for the exclusive fence
- after the shared ones v2
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 867e5b19-6d35-48de-225c-08d9c5bb59d9
+X-MS-TrafficTypeDiagnostic: SL2PR06MB3388:EE_
+X-Microsoft-Antispam-PRVS: <SL2PR06MB3388CFF609567AA6CA969150BD7E9@SL2PR06MB3388.apcprd06.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:935;
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 5W2S96thZl5uo4tDrmc9jvoa4xICXIt3Q/9fztnxlT5NYk3tmMjbH+MjKDYklIXY5Xtg4MdX8MsvbmNcK6NJ54dNpB+L8iKg+iirjuxne+9tS1Nk2xgu8iCfGDTehQ0j+lGpf1WGpXpBzDAWhvq2vOdElOZ3vqOQKb08D5e8YvKn43sCB5oaZ0l+NTEFS2TS28aFYfEirWg4zFpyrEtkdumrIdvmLh7JmtO9Pwj0xUDXaK05zvsJBHeAhpBLE4WA/7jpV3ImNy7zjBgnfb96eOLjztkNjxdsWlLh9+eKlaqg7coA8Pd3ww2NcuklzFELmKhefBUhG1TBtGBdb8+/BzftKKLTZrF4Dsuj2soZgMDlWCPZztlQUMFv3uIGdPdVe3Z9Q45JxGktoUHVquFLZtfpD8POShQ0lwXy6t5O1u7eIhM2/UpcrmRp9wSSydeGNrSZcV8o2HS5sduQ7dA9Jc291EEHAgsaD9y+rEJ5Ycnk/EjahKG11KnjTSoTnMF68b9ofn0jrvI8F3vgzVKdC5PcHxCc3dZgN0A9WObFGIlWW9Oxb2/YSfztByh88jm7VMWwmm7O6fZyrw0Cc1n/OGcA9GIwyh0QWmy/I13xlBiV6MpgExxVwKtmKy7qqrTwU7xZ6eLsaOA1Pf63mSh7Y2kkyBD7687+gfFqR1DaASw3jGWcVeaG0bMVMfQWIlMniuQ18w0WadAMV7CpcbL3sg==
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:SL2PR06MB3082.apcprd06.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(4636009)(366004)(66556008)(8676002)(4326008)(36756003)(52116002)(6512007)(26005)(2616005)(66946007)(66476007)(6666004)(8936002)(508600001)(6506007)(86362001)(83380400001)(107886003)(110136005)(2906002)(38100700002)(38350700002)(5660300002)(316002)(186003)(6486002)(4744005);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?tFwlHNS8Ilsg9W1ZUHapf5MPswoPl1gZNVlhu6jg9ig96I4/kRt9sVHtgulL?=
+ =?us-ascii?Q?xVhvx4nmwxoCrP3Irxs+VFE2Mq2E7vDuwwaQ+F5Vv8RudSJN6wV3gg1z+qyy?=
+ =?us-ascii?Q?BNiqHN7RnXj5ygs0kRGblfqFjD/U2X+VDmj6mNtk+Sfq1l3v7IppGMUoFQd9?=
+ =?us-ascii?Q?I3PUGwRyFkC+wvefnRPna77+W7MJ/NjGZOWJOGidNmVYhxETsTVekg4sahhE?=
+ =?us-ascii?Q?n5fKaR6+ySstzR2/aNORAv4hB6/+KzlMUBr4tMLJEFIUyAARpP4MgBnGbWDL?=
+ =?us-ascii?Q?cnH2gyEwqENY+0L235CcjospcGI4RiPTvJ4Yp7fGqC57eCtXOgDs0pishZuw?=
+ =?us-ascii?Q?qaQKfMP1eEYFnjFN7VZBdT3IGhd9GoZTtnji2yXoyT7OHKUhWakEwO2PpHjJ?=
+ =?us-ascii?Q?+VSfFh+2afT77TVW2r0lv1e99u3AjaEJtsgGA9G+t22ezsSMirNXP8B0u1VL?=
+ =?us-ascii?Q?ChGN2XUK/bwi3CVLv27N4e8kf5qGUJJFiHr8egjjpmhyUPUvi1b75X6O3u2W?=
+ =?us-ascii?Q?bVstgeDV/latTmCnmJfrkVBm5AMnB9yckC5e2rchsevpTRVUUwvyCqILvmP1?=
+ =?us-ascii?Q?9WiaSny/D2HADtbp47Wc3DgRbLaQMBnNK7NCMqSS5SEVCqJoSRChiveUEJDi?=
+ =?us-ascii?Q?+KEOFBl72Fzshnh6EMjRC+T8zR6KjUp7Jd1s5WMnZaFN7dyEJdddofFOmfgj?=
+ =?us-ascii?Q?8rg++ygDyVPxDeloQuJ3IWSRxNPEZbVrJg9YpUJHg70usQSCNfOWI7H3ORMk?=
+ =?us-ascii?Q?ffPHnW4BhLVgx6VhGaKx2dBZ2u9bcE1tpUkoKU/x1fNOdGg9dgh/hgYDbQhw?=
+ =?us-ascii?Q?EFtfDN1W09gOMBjYHK4vlDWzR+83rllYkI5SVS7NxrweGiprE5ilGRKN1HR/?=
+ =?us-ascii?Q?tnOlHFgGxTedcrUhRDmxdt60u+/7iIXhZEJeRUjsFDaMoEia5ToZfCnL28yD?=
+ =?us-ascii?Q?qt0xrC4YQBgFU8713jM+u4K9dhp3WqlVZS9ceN+ZDTxp2K5c3tRgG88AB4Nd?=
+ =?us-ascii?Q?6OJWzSfeva/LKEOPaUN8g1JirHdEqMOVYcZGl5ztZtZaPk270J6DoaxQcSCW?=
+ =?us-ascii?Q?dOyBh8x8+Vdf1Ozq6H/eIRVy1QpaMfnIPawhnsLn8ns7ze99dJGSk050hZEB?=
+ =?us-ascii?Q?rZyfUu5PfGh86y/l0OsriXkq2qCElYWy5PJLuM4C7Mk9byL32zhdrERjEVoA?=
+ =?us-ascii?Q?4PiHQUHJU+0hORUZs/NL5k5sBTeGgWGy0beUf3aJ6nrZLBXiXwlLREu0QML2?=
+ =?us-ascii?Q?++wSROrkKGdI90nsOMgYQbYC9kezUxVdtBukZExOGPf4N32hdtNfk5FG3e+C?=
+ =?us-ascii?Q?j8Z4r+OhnCU4mzbOasAJ4H0PJw569qk+zmDNLH7WVH0Tak2D09Lm9BEy9kS/?=
+ =?us-ascii?Q?NAG+e/VRzZbjKwX1zWiF9C3zjasc0WH9GeJmRIPTHkRhcizAOqitcUEN4IgR?=
+ =?us-ascii?Q?/R6ObkxdbD56dT7wMbM1PWuOg+gbA6UTJVpiRcE7UuK0b0GboFing1egnu0G?=
+ =?us-ascii?Q?x4DaWVMynVFxCibOIQcy48CYqjen6ILHzFgb27fREOVAEc50tyF6IHFydvOQ?=
+ =?us-ascii?Q?EOQ86VN/uxpnVzjnY9Rpf7BkqiPzo+hjkJi2BqWV+ivoINvpjvYE3hBd997Q?=
+ =?us-ascii?Q?G0C7bj3VzLmEZWc72nGbfTA=3D?=
+X-OriginatorOrg: vivo.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 867e5b19-6d35-48de-225c-08d9c5bb59d9
+X-MS-Exchange-CrossTenant-AuthSource: SL2PR06MB3082.apcprd06.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Dec 2021 02:24:30.8781 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 923e42dc-48d5-4cbe-b582-1a797a6412ed
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: HAdvmmxpN8B/hgZbcX/U1q0HqZZdvfFi/fWP0PZlW1aVhthu5lnjYuhalfyzc0pOMZEusewg2ODyZzDExyMkmw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SL2PR06MB3388
+Subject: [Nouveau] [PATCH V2] drm: nouveau: lsfw: cleanup coccinelle warning
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -77,131 +115,36 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, ML nouveau <nouveau@lists.freedesktop.org>,
- ML dri-devel <dri-devel@lists.freedesktop.org>, dmoulding@me.com,
- Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>
+Cc: Wang Qing <wangqing@vivo.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Am 21.12.21 um 11:11 schrieb Thorsten Leemhuis:
-> Hi, this is your Linux kernel regression tracker speaking.
->
-> CCing Dave and Daniel.
->
-> On 15.12.21 23:32, Ben Skeggs wrote:
->> On Tue, 14 Dec 2021 at 19:19, Christian König
->> <ckoenig.leichtzumerken@gmail.com> wrote:
->>> Am 11.12.21 um 10:59 schrieb Stefan Fritsch:
->>>> On 09.12.21 11:23, Christian König wrote:
->>>>> Always waiting for the exclusive fence resulted on some performance
->>>>> regressions. So try to wait for the shared fences first, then the
->>>>> exclusive fence should always be signaled already.
->>>>>
->>>>> v2: fix incorrectly placed "(", add some comment why we do this.
->>>>>
->>>>> Signed-off-by: Christian König <christian.koenig@amd.com>
->>>> Tested-by: Stefan Fritsch <sf@sfritsch.de>
->>> Thanks.
->>>
->>>> Please also add a cc for linux-stable, so that this is fixed in 5.15.x
->>> Sure, but I still need some acked-by or rb from one of the Nouveau guys.
->>> So gentle ping on that.
->> Acked-by: Ben Skeggs <bskeggs@redhat.com>
-> What's the status of this patch? I checked a few git trees, but either
-> it's not there or it missed it.
+From: Wang Qing <wangqing@vivo.com>
 
-You missed it. I've pushed it to drm-misc-fixes about 2 hours ago: 
-https://cgit.freedesktop.org/drm/drm-misc/log/?h=drm-misc-fixes
+odd_ptr_err.cocci has complained about this warning for a long time:
+lsfw.c:194:5-11: inconsistent IS_ERR and PTR_ERR on line 195.
 
-Regards,
-Christian.
+Although there is no actual impact, it can improve scanning efficiency.
 
->
-> Reminder, it's a regression already introduced in v5.15, hence all users
-> of the current stable kernel are affected by it, so it would be nice to
-> get the fix on its way now that Ben acked it and Dan tested it.
->
-> Ciao, Thorsten
->
-> P.S.: As a Linux kernel regression tracker I'm getting a lot of reports
-> on my table. I can only look briefly into most of them. Unfortunately
-> therefore I sometimes will get things wrong or miss something important.
-> I hope that's not the case here; if you think it is, don't hesitate to
-> tell me about it in a public reply. That's in everyone's interest, as
-> what I wrote above might be misleading to everyone reading this; any
-> suggestion I gave thus might sent someone reading this down the wrong
-> rabbit hole, which none of us wants.
->
-> BTW, I have no personal interest in this issue, which is tracked using
-> regzbot, my Linux kernel regression tracking bot
-> (https://linux-regtracking.leemhuis.info/regzbot/). I'm only posting
-> this mail to get things rolling again and hence don't need to be CC on
-> all further activities wrt to this regression.
->
-> #regzbot poke
->
->>>>> ---
->>>>>    drivers/gpu/drm/nouveau/nouveau_fence.c | 28 +++++++++++++------------
->>>>>    1 file changed, 15 insertions(+), 13 deletions(-)
->>>>>
->>>>> diff --git a/drivers/gpu/drm/nouveau/nouveau_fence.c
->>>>> b/drivers/gpu/drm/nouveau/nouveau_fence.c
->>>>> index 05d0b3eb3690..0ae416aa76dc 100644
->>>>> --- a/drivers/gpu/drm/nouveau/nouveau_fence.c
->>>>> +++ b/drivers/gpu/drm/nouveau/nouveau_fence.c
->>>>> @@ -353,15 +353,22 @@ nouveau_fence_sync(struct nouveau_bo *nvbo,
->>>>> struct nouveau_channel *chan, bool e
->>>>>              if (ret)
->>>>>                return ret;
->>>>> -    }
->>>>>    -    fobj = dma_resv_shared_list(resv);
->>>>> -    fence = dma_resv_excl_fence(resv);
->>>>> +        fobj = NULL;
->>>>> +    } else {
->>>>> +        fobj = dma_resv_shared_list(resv);
->>>>> +    }
->>>>>    -    if (fence) {
->>>>> +    /* Waiting for the exclusive fence first causes performance
->>>>> regressions
->>>>> +     * under some circumstances. So manually wait for the shared
->>>>> ones first.
->>>>> +     */
->>>>> +    for (i = 0; i < (fobj ? fobj->shared_count : 0) && !ret; ++i) {
->>>>>            struct nouveau_channel *prev = NULL;
->>>>>            bool must_wait = true;
->>>>>    +        fence = rcu_dereference_protected(fobj->shared[i],
->>>>> +                        dma_resv_held(resv));
->>>>> +
->>>>>            f = nouveau_local_fence(fence, chan->drm);
->>>>>            if (f) {
->>>>>                rcu_read_lock();
->>>>> @@ -373,20 +380,13 @@ nouveau_fence_sync(struct nouveau_bo *nvbo,
->>>>> struct nouveau_channel *chan, bool e
->>>>>              if (must_wait)
->>>>>                ret = dma_fence_wait(fence, intr);
->>>>> -
->>>>> -        return ret;
->>>>>        }
->>>>>    -    if (!exclusive || !fobj)
->>>>> -        return ret;
->>>>> -
->>>>> -    for (i = 0; i < fobj->shared_count && !ret; ++i) {
->>>>> +    fence = dma_resv_excl_fence(resv);
->>>>> +    if (fence) {
->>>>>            struct nouveau_channel *prev = NULL;
->>>>>            bool must_wait = true;
->>>>>    -        fence = rcu_dereference_protected(fobj->shared[i],
->>>>> -                        dma_resv_held(resv));
->>>>> -
->>>>>            f = nouveau_local_fence(fence, chan->drm);
->>>>>            if (f) {
->>>>>                rcu_read_lock();
->>>>> @@ -398,6 +398,8 @@ nouveau_fence_sync(struct nouveau_bo *nvbo,
->>>>> struct nouveau_channel *chan, bool e
->>>>>              if (must_wait)
->>>>>                ret = dma_fence_wait(fence, intr);
->>>>> +
->>>>> +        return ret;
->>>>>        }
->>>>>          return ret;
+Signed-off-by: Wang Qing <wangqing@vivo.com>
+---
+ drivers/gpu/drm/nouveau/nvkm/subdev/acr/lsfw.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/acr/lsfw.c b/drivers/gpu/drm/nouveau/nvkm/subdev/acr/lsfw.c
+index 9b1cf67..0f70d14
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/acr/lsfw.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/acr/lsfw.c
+@@ -191,7 +191,8 @@ nvkm_acr_lsfw_load_bl_inst_data_sig(struct nvkm_subdev *subdev,
+ 	u32 *bldata;
+ 	int ret;
+ 
+-	if (IS_ERR((lsfw = nvkm_acr_lsfw_add(func, acr, falcon, id))))
++	lsfw = nvkm_acr_lsfw_add(func, acr, falcon, id);
++	if (IS_ERR(lsfw))
+ 		return PTR_ERR(lsfw);
+ 
+ 	ret = nvkm_firmware_load_name(subdev, path, "bl", ver, &bl);
+-- 
+2.7.4
 
