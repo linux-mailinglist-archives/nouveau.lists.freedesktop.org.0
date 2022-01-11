@@ -2,67 +2,77 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5D29A48AB32
-	for <lists+nouveau@lfdr.de>; Tue, 11 Jan 2022 11:14:53 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9128F48B57E
+	for <lists+nouveau@lfdr.de>; Tue, 11 Jan 2022 19:12:09 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 603D6113035;
-	Tue, 11 Jan 2022 10:14:47 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 644F410E1CC;
+	Tue, 11 Jan 2022 18:12:03 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B739F113035
- for <nouveau@lists.freedesktop.org>; Tue, 11 Jan 2022 10:14:45 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2DAAD10E27C
+ for <nouveau@lists.freedesktop.org>; Tue, 11 Jan 2022 18:12:02 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1641896084;
+ s=mimecast20190719; t=1641924721;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=w4UFv2C7NbASGLbjZLWWBlH7/M35wDrD8QLQPaEHRl8=;
- b=WgaHs5be5vvos3CbTQ8P7sXtRkctg+DuC+yIK8P5TWmWv0EUXCBstjAxZegIbKpWWkpfNa
- 1f4t4Pp2DqHXqUBGwTpe/6QklPHISErMtc9cVMpknujwHM9QyeEU4vzcQvXGg9pfHxZMGh
- Jlj+KVZshgTAaSkkDqsRQ2jBvRndB2U=
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=3hgp9TNlhmh2F8YJ1u7gu8AeVl0SpLbsYxPdRZu+7iA=;
+ b=MFaHUqYR5OkE5FaZ+kSimdHeXq1gA+DV47DjgdqAARAiOzWyQ+GrlNeftric7VGjw/EfVL
+ L5tu4m/uOav3yhggrlinWAf9mwqWn/7n94N8RoTr0DZJ8yTYbogZpzAhSzzkdEGe08PBsi
+ 8Wp+xVgz+ZBGCKb50Hfrq1hA85sfR6Q=
+Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com
+ [209.85.219.72]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-213-SDcVQc4-PlSluJAtSkrddw-1; Tue, 11 Jan 2022 05:14:32 -0500
-X-MC-Unique: SDcVQc4-PlSluJAtSkrddw-1
-Received: by mail-wr1-f72.google.com with SMTP id
- g6-20020adfbc86000000b001a2d62be244so4739923wrh.23
- for <nouveau@lists.freedesktop.org>; Tue, 11 Jan 2022 02:14:31 -0800 (PST)
+ us-mta-558-BgCdYNfbMEepv6Vtt4GTCA-1; Tue, 11 Jan 2022 13:11:57 -0500
+X-MC-Unique: BgCdYNfbMEepv6Vtt4GTCA-1
+Received: by mail-qv1-f72.google.com with SMTP id
+ i3-20020ad45c63000000b0041143710adbso92784qvh.18
+ for <nouveau@lists.freedesktop.org>; Tue, 11 Jan 2022 10:11:57 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=w4UFv2C7NbASGLbjZLWWBlH7/M35wDrD8QLQPaEHRl8=;
- b=O3Fmj60NN7THyzt+KSNw0VRYMfwlIhP6fmekQyPEh9A5NresfNH4ZIcbBDnw1LsmBm
- KDpjq3KrRThKCoFqqRrIP+q0FFYvHC7BGBeGEqfctYYI09ALfieXxRoZLXkebPdHjOaM
- Flo4dSMYvarF7ReI7FKkhvvTP4343DTyLDchraErxuOEn9VO6qC/RAT6ZltEMl8ievsL
- JglSRyPEKz+Qb7xcrz1ivgV08C83mzxQ63mFOA9Z/SThaeCdPKbi6/zNcowo3yzuM6s9
- PBvqd+zNcxIwn6lcBHKZIM4wbszsNMG9x3arBpZHpX5GPBAgnV32EtZvCPsyxgsIYsUA
- NC4A==
-X-Gm-Message-State: AOAM532ALHi69x2SXI6eapVIoNDcND5gLuMVsV/PLhVhfAFry+mSFIix
- dpQvk6PUQfB254eTtZU8G9oDZQfkDnAcwepSqTRjMqdQyL1VQkbiExi6XUieXudqeQYX/lnBhAN
- 3W1YiOhj95R/HKfuetRPUDGYd/mKnhheculX9kWUckg==
-X-Received: by 2002:a7b:c30e:: with SMTP id k14mr1807237wmj.74.1641896070767; 
- Tue, 11 Jan 2022 02:14:30 -0800 (PST)
-X-Google-Smtp-Source: ABdhPJyGFmntQReFhyepmbZsKbViOCRNzWWxS+UHw0oCGOJrka3xSDyYs2Pvhv6C5zPsV9yEERAWG2eY80r0GXfMRaM=
-X-Received: by 2002:a7b:c30e:: with SMTP id k14mr1807217wmj.74.1641896070434; 
- Tue, 11 Jan 2022 02:14:30 -0800 (PST)
+ h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
+ :references:organization:user-agent:mime-version
+ :content-transfer-encoding;
+ bh=3hgp9TNlhmh2F8YJ1u7gu8AeVl0SpLbsYxPdRZu+7iA=;
+ b=BfojkXZ07ya+pEVLj08/NMShWx4b41tImEmsKCYjpmEMYhRpqHjvCoQ/wt4dR9e3qb
+ XSeGXrf2Xvo1XdplG3g/miP4LR29uf7VAvS3J3knW5YdMoSkUeqGYPGjFOKwGQihZC79
+ XVpLpC+TmT5UEIqdfe2IhWLwTf6i8WjggYshElh/oC3nF1NhPE3Ml4dAncFT13rGHeaT
+ GUtZX2IQyPkaQ5J0JTDANU+D3PJNl8HKwyle2F3yVnKS+8eVByT8R3DhntHDYiUHC7V+
+ e2ddS9dP/AaFwSmIUiMn25Lsls0vmWVQDFUxmm6EMbIp94Rw2/Ipfdha3U8TdRzbhjVc
+ xBpQ==
+X-Gm-Message-State: AOAM5329jU2vv7CPvS1CWMIdpES+q1NnQg6bON0p07fdEZvk8V/hbe4B
+ Fdmyntr0hOGs6OOeyEyq4nAJhnpWuMdHEUoxs3xAMzNmBVRlX2wQyi7nCpzc9SUricl5aoAopZj
+ BOusK/HSDXzpo1MdGnPsrsMUBZQ==
+X-Received: by 2002:a37:ef17:: with SMTP id j23mr3846399qkk.400.1641924716815; 
+ Tue, 11 Jan 2022 10:11:56 -0800 (PST)
+X-Google-Smtp-Source: ABdhPJyvsxA+do5OMy7/Gkj99hwDfSQMXE+E3UHnj4iMm90i8YoXCddk9cREEvoOwLscfzjDtZ8gfg==
+X-Received: by 2002:a37:ef17:: with SMTP id j23mr3846376qkk.400.1641924716545; 
+ Tue, 11 Jan 2022 10:11:56 -0800 (PST)
+Received: from [192.168.8.138] (pool-98-118-105-43.bstnma.ftas.verizon.net.
+ [98.118.105.43])
+ by smtp.gmail.com with ESMTPSA id o17sm7804481qtv.87.2022.01.11.10.11.55
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 11 Jan 2022 10:11:56 -0800 (PST)
+Message-ID: <83a52893a963f37cb1c86f0b95c9a84091620361.camel@redhat.com>
+From: Lyude Paul <lyude@redhat.com>
+To: Yizhuo Zhai <yzhai003@ucr.edu>
+Date: Tue, 11 Jan 2022 13:11:54 -0500
+In-Reply-To: <20211218025632.2514288-1-yzhai003@ucr.edu>
+References: <20211218025632.2514288-1-yzhai003@ucr.edu>
+Organization: Red Hat Inc.
+User-Agent: Evolution 3.42.2 (3.42.2-1.fc35)
 MIME-Version: 1.0
-References: <712f2647-3df4-87da-3f92-bfe15426553d@gmail.com>
-In-Reply-To: <712f2647-3df4-87da-3f92-bfe15426553d@gmail.com>
-From: Karol Herbst <kherbst@redhat.com>
-Date: Tue, 11 Jan 2022 11:14:19 +0100
-Message-ID: <CACO55tvKFy7B1j1rgTRnVrNUvqe6dxM5h9NMnf44NeinZ1LY2Q@mail.gmail.com>
-To: Ilario Gelmetti <iochesonome@gmail.com>
 Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=kherbst@redhat.com
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=lyude@redhat.com
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="UTF-8"
-Subject: Re: [Nouveau] Piglit results for NV46 and glitches using GeForce
- 7500LE
+Content-Transfer-Encoding: 8bit
+Subject: Re: [Nouveau] [PATCH] drm/nouveau/core/object: Fix the
+ uninitialized use of "type"
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -74,138 +84,46 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau <nouveau@lists.freedesktop.org>
+Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>,
+ stable@vger.kernel.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-I've fixed a really really really old bug in mesa which impacted
-gnome: https://gitlab.freedesktop.org/mesa/mesa/-/commit/1387d1d41103b3120d40f93f66a7cfe00304bfd7
+Reviewed-by: Lyude Paul <lyude@redhat.com>
 
-this one is part of 21.3 and should have made it into 21.1 and 21.2
-stable releases.
+On Fri, 2021-12-17 at 18:56 -0800, Yizhuo Zhai wrote:
+> In function nvkm_ioctl_map(), the variable "type" could be
+> uninitialized if "nvkm_object_map()" returns error code, however,
+> it does not check the return value and directly use the "type" in
+> the if statement, which is potentially unsafe.
+> 
+> Cc: stable@vger.kernel.org
+> Fixes: 01326050391c ("drm/nouveau/core/object: allow arguments to be passed
+> to map function")
+> Signed-off-by: Yizhuo Zhai <yzhai003@ucr.edu>
+> ---
+>  drivers/gpu/drm/nouveau/nvkm/core/ioctl.c | 2 ++
+>  1 file changed, 2 insertions(+)
+> 
+> diff --git a/drivers/gpu/drm/nouveau/nvkm/core/ioctl.c
+> b/drivers/gpu/drm/nouveau/nvkm/core/ioctl.c
+> index 735cb6816f10..4264d9d79783 100644
+> --- a/drivers/gpu/drm/nouveau/nvkm/core/ioctl.c
+> +++ b/drivers/gpu/drm/nouveau/nvkm/core/ioctl.c
+> @@ -266,6 +266,8 @@ nvkm_ioctl_map(struct nvkm_client *client,
+>                 ret = nvkm_object_map(object, data, size, &type,
+>                                       &args->v0.handle,
+>                                       &args->v0.length);
+> +               if (ret)
+> +                       return ret;
+>                 if (type == NVKM_OBJECT_MAP_IO)
+>                         args->v0.type = NVIF_IOCTL_MAP_V0_IO;
+>                 else
 
-We also have two pending merge requests which should fix other issues
-related to gnome and random other stuff:
-https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests?scope=all&state=opened&label_name[]=nv30
-
-I'd suggest if you want to start digging into issues you do so with a
-fixed mesa and those merge requests applied.
-
-On Mon, Jan 10, 2022 at 4:05 PM Ilario Gelmetti <iochesonome@gmail.com> wrote:
->
-> Dear all,
-> thanks for your work on Nouveau!!!
-> I have been a user, but I never touched the Nouveau code or testing
-> suite before.
->
-> I am building a desktop PC with some rather old hardware and a nVidia
-> GeForce 7500LE 64MB TC V/D/VO PN 88-1N01-0C-PB (NV46, G72) graphic card
-> (see lshw output here [1]).
->
-> I observed frequent glitches with some common user experiences:
-> * Ubuntu 21.10
-> * Ubuntu 18.04
-> * Debian 11 stable with GDM3+Gnome
-> * Debian 10 oldstable with GDM3+Gnome with errors in dmesg like this [2]
-> and glitches like these [3]
-> * Debian 10 oldstable with GDM3+XFCE with usually no errors in dmesg [4]
-> and glitches like these [5]. But sometimes runs smoothly
->
-> The situation improved replacing GDM3 by LightDM (why??), so now I have
-> these two setups where under normal operation I see no glitches (but
-> glitches appear after running piglit):
-> * Arch without DM and with XFCE
-> * Debian oldstable with LightDM and Gnome
->
-> So I run piglit with various combinations of software versions and
-> distros, and X crashed with some of these (the only responsive thing was
-> the moving-but-not-shapeshifting mouse arrow, like this [6]).
->
-> Here I detail the piglit tests and the results:
->
-> * Debian 10 oldstable (kernel 4.19) + LightDM + Gnome + piglit compiled
-> from source + libdrm2 (2.4.97) + libdrm-nouveau (2.4.97) +
-> xserver-xorg-core 1.20.4 + xserver-xorg-video-nouveau (1.0.16)
->
-> no glitches observed during normal operation
-> both piglit from Debian oldstable repository and piglit compiled from
-> source run to completion but at the end there are some glitches
-> at the screen, like this [7], or sometimes just a black screen or all
-> the windows as black rectangles.
-> Here you can find the result of the tests in these conditions: [8]
->
-> * Arch Linux + kernel (tested both 5.15.12 and 5.16.0-rc8 from linux-git
-> package) + nouveau (tested both 1.0.17 and 1.0.17.r2 from
-> xf86-video-nouveau-git package) + libdrm (tested both 2.4.109 and
-> 2.4.109.r7 from libdrm-git package) + mesa (tested both 21.3.3 and
-> 22.0.0_devel from mesa-git package) + XFCE
->
-> no glitches observed during normal operation
-> piglit-git (r11511.6c4da153b) makes X crash (or something similar, the
-> kernel seems not panicked as magic-sysrq work). This happens
-> reproducibly always after the getteximage-depth test (which itself
-> succeeds but the next one, any next one, gets stuck in the "running"
-> status) and very often also when the other "*getteximage*" or "*vertex*"
-> or "generatemipmap-base-change" or "arb_get_texture_sub_image" or
-> "texture with glblitframebuffer" or "fbo-finish-deleted" or
-> "ext_image_dma_buf_import_sample_argb8888" or
-> "depthstencil-render-mpilevels" or "readpixels-24_8" (I noticed that
-> when it does not make X crash it just results in dmesg-fail output,
-> maybe this happens also to the others, I didn't check) or "texsubimage"
-> or "draw-pixels".
-> The glitches caused by running piglit look like these [9].
-> When I manage to get out of the crashed X (using Alt+SysRq+R,E) I can
-> get some error messages from dmesg, like these [10].
-> And here are also some coredumps obtained via "coredumpctl dump" command
-> [11].
-> After many reboots and adding many exclusions to the tests list I gave
-> up trying to reach the end of the tests list, so here you have a couple
-> of incomplete lists with the results that got to actually run: [12]
->
-> Let me know if I can help.
-> Thanks for your help and for your precious work! :)
-> Ilario Gelmetti
->
-> [1]: https://uz.sns.it/~ilario/nouveau-nv46/lshw
->
-> [2]:
-> https://uz.sns.it/~ilario/nouveau-nv46/debian/dmesg/20220107-nouveau-gdm3-gnome
->
-> [3]:
-> https://uz.sns.it/~ilario/nouveau-nv46/debian/glitches/IMG_20220108_002132.jpg
-> https://uz.sns.it/~ilario/nouveau-nv46/debian/glitches/IMG_20220108_002140.jpg
->
-> [4]:
-> https://uz.sns.it/~ilario/nouveau-nv46/debian/dmesg/20220107-nouveau-gdm3-xfce
->
-> [5]:
-> https://uz.sns.it/~ilario/nouveau-nv46/debian/glitches/IMG_20220108_001511.jpg
->
-> [6]:
-> https://uz.sns.it/~ilario/nouveau-nv46/arch/glitches/IMG_20220104_130045.jpg
->
-> [7]:
-> https://uz.sns.it/~ilario/nouveau-nv46/debian/glitches/IMG_20220104_231136.jpg
->
-> [8]:
-> https://uz.sns.it/~ilario/nouveau-nv46/nv46-2022-01-05_1020-ilario.json.bz2
->
-> [9]: https://uz.sns.it/~ilario/nouveau-nv46/arch/glitches/
->
-> [10]: https://uz.sns.it/~ilario/nouveau-nv46/arch/dmesg/
->
-> [11]: https://uz.sns.it/~ilario/nouveau-nv46/arch/coredumps/
->
-> [12]:
-> https://uz.sns.it/~ilario/nouveau-nv46/arch/nv46-2022-01-06_1321-ilario-incomplete.tar.xz
-> https://uz.sns.it/~ilario/nouveau-nv46/arch/nv46-2022-01-07_2210-ilario-incomplete.tar.xz
->
->
->
-> --
-> Ilario
-> iochesonome@gmail.com
-> ilario@sindominio.net
->
->
+-- 
+Cheers,
+ Lyude Paul (she/her)
+ Software Engineer at Red Hat
 
