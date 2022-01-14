@@ -1,56 +1,54 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id E642648D93F
-	for <lists+nouveau@lfdr.de>; Thu, 13 Jan 2022 14:44:37 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id C2D9648EB7E
+	for <lists+nouveau@lfdr.de>; Fri, 14 Jan 2022 15:18:37 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A8D3B1124FA;
-	Thu, 13 Jan 2022 13:44:31 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 02B3010E4F3;
+	Fri, 14 Jan 2022 14:18:36 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-yb1-xb29.google.com (mail-yb1-xb29.google.com
- [IPv6:2607:f8b0:4864:20::b29])
- by gabe.freedesktop.org (Postfix) with ESMTPS id CC78B1124F8
- for <nouveau@lists.freedesktop.org>; Thu, 13 Jan 2022 13:44:30 +0000 (UTC)
-Received: by mail-yb1-xb29.google.com with SMTP id 66so78284ybf.4
- for <nouveau@lists.freedesktop.org>; Thu, 13 Jan 2022 05:44:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=fooishbar-org.20210112.gappssmtp.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=t4iOUVFv53bNQSQ/gO0aroSu848/nmRUJMS9RO8UVKs=;
- b=L3t/7x5E6+oOdmCJJKKVoRGWTgQRkrBeAvTi/BR6XX6Q5XLRVBspgMP0moqqe1UGKu
- ddfQ5RrHcPahfVgeYOmn5AHJlMWc+TOAeWBWMgyMUnrivvh+PMMHgT209bAyuKNQKk3P
- k5e1boYAvB/kJ+LnMsQsDhZiHUXhb1sNYO6pAdHkXjVzD2b9imk89CO5pjBTJ1gRqmjn
- 1rGkYILN48K3Xm/0nFyBivNcRKr+prkJFgLFQudXjewMCIb583bksfZpHF2EAupjIetP
- 8tVVIFo+S6Vc8JE8qXdS6cSLm37UHqx/W5t6Ee+cWLutbIkIgEgGhIgQ0VWxA2nXMH26
- UgGQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=t4iOUVFv53bNQSQ/gO0aroSu848/nmRUJMS9RO8UVKs=;
- b=WRu+2ZABeYOQS1UC7ViZ5ljyMD7RdSTxdrO3lKRqKEEG1km1/TWYhtuh/0T5aO0iT8
- qUw6RN5JpZxv+eIFXyDdzHgwq3IgUcSjMrhVnfHwTmgGaDVTLkIrTuaMZsPi2UG6HFDQ
- kvDbLLFwbwtPyHYVCHlnd1FmAR3Vih4jGdv/5I9qvMDhv3qXek76aeE7fmqoJJi4E03S
- MftvEbRDJUUnQkWIkylz2iO//+EENRnWdrlI1QFEI7wKPGHeM8jj02Zs1G5TBEyLaB2G
- 85kV3MciX1fFSr0ZrGHqi/+MfVMph4xqA+CpkBZU1P7JdNHL+IwSjyPE6em93cBgk7iw
- ZS0w==
-X-Gm-Message-State: AOAM533I3v9PeTRTINY2IHPHR6phwDslf9hVxU/M+u3uQEOfWv4YCIpz
- vjyh4L5msqDGc1zB4XO2b7+2XTA3bHysYt6A9S9CYw==
-X-Google-Smtp-Source: ABdhPJwo6URqBePslK+oKLzNiKNduFsi241hMu0BUXNptg5RSut3Cj4rzAH5lLArTqXi4SXz//NaTZwj4mHiagIizJ4=
-X-Received: by 2002:a25:7b44:: with SMTP id w65mr5871202ybc.59.1642081469812; 
- Thu, 13 Jan 2022 05:44:29 -0800 (PST)
-MIME-Version: 1.0
-References: <20220113094419.12433-1-etom@igel.co.jp>
-In-Reply-To: <20220113094419.12433-1-etom@igel.co.jp>
-From: Daniel Stone <daniel@fooishbar.org>
-Date: Thu, 13 Jan 2022 13:44:18 +0000
-Message-ID: <CAPj87rPk3_8LdnwWJ3BhtJnRuR+_WHg2hfdgK2R4SMacPGCrUQ@mail.gmail.com>
+Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 82CD610E4F2;
+ Fri, 14 Jan 2022 14:18:34 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1642169914; x=1673705914;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:in-reply-to;
+ bh=AEvnDslGsOGfg/KTFj4CDj9oYhA5k0NUZG4ddu+7HzE=;
+ b=OOj8h1vBGwHAM8kwVRbbjWVBsB8+1yJWuF/BngmiP2JhWA+7VLt1Q5hK
+ 1W/unN1HrRaNunJLstevQHNtLgPnm+RsPRXGD93GGr+JFQeP5aJ6P9NN6
+ g5+eIcsw1Hd78Lj3tz9IgrI8OU0Yn66fvAUWowRyTVkP0lx6BGFILZNEh
+ SsZXzzc95GUfYTZzartVm6WDoz9Nc++9D4wLmMAnC8fhKYip+6g5i3ucv
+ C0OYR8FNTgd/S6k2jj6PJMRCGDw5xf2TKjkK+/e2IpMHHtTbTs5wQrqPC
+ C0mLNAP+nc2yUVy+5ZQw/2FkdArYD69XhzIU4ou2Q9qIq3M+4bgvYIQnZ A==;
+X-IronPort-AV: E=McAfee;i="6200,9189,10226"; a="244453356"
+X-IronPort-AV: E=Sophos;i="5.88,288,1635231600"; d="scan'208";a="244453356"
+Received: from orsmga005.jf.intel.com ([10.7.209.41])
+ by fmsmga103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 14 Jan 2022 06:18:34 -0800
+X-IronPort-AV: E=Sophos;i="5.88,288,1635231600"; d="scan'208";a="692227145"
+Received: from smile.fi.intel.com ([10.237.72.61])
+ by orsmga005-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 14 Jan 2022 06:18:27 -0800
+Received: from andy by smile.fi.intel.com with local (Exim 4.95)
+ (envelope-from <andriy.shevchenko@linux.intel.com>)
+ id 1n8NNq-00AeD8-2B; Fri, 14 Jan 2022 16:16:50 +0200
+Date: Fri, 14 Jan 2022 16:16:26 +0200
+From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
 To: Tomohito Esaki <etom@igel.co.jp>
-Content-Type: text/plain; charset="UTF-8"
-Subject: Re: [Nouveau] [RFC PATCH v2 0/3] Add support modifiers for drivers
- whose planes only support linear layout
+Message-ID: <YeGFugZvwbF7l2I/@smile.fi.intel.com>
+References: <20220114101753.24996-1-etom@igel.co.jp>
+ <20220114101753.24996-3-etom@igel.co.jp>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20220114101753.24996-3-etom@igel.co.jp>
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
+Subject: Re: [Nouveau] [RFC PATCH v3 2/3] drm: add support modifiers for
+ drivers whose planes only support linear layout
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -64,50 +62,45 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
 Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
  dri-devel@lists.freedesktop.org,
- =?UTF-8?Q?Michel_D=C3=A4nzer?= <mdaenzer@redhat.com>,
- Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
- Lee Jones <lee.jones@linaro.org>, Rob Clark <robdclark@chromium.org>,
- Evan Quan <evan.quan@amd.com>, amd-gfx@lists.freedesktop.org,
- Ben Skeggs <bskeggs@redhat.com>, Petr Mladek <pmladek@suse.com>,
- Sakari Ailus <sakari.ailus@linux.intel.com>,
+ Michel =?iso-8859-1?Q?D=E4nzer?= <mdaenzer@redhat.com>,
+ Daniel Stone <daniel@fooishbar.org>, Lee Jones <lee.jones@linaro.org>,
+ Rob Clark <robdclark@chromium.org>, Takanari Hayama <taki@igel.co.jp>,
+ amd-gfx@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>,
+ Petr Mladek <pmladek@suse.com>, Sakari Ailus <sakari.ailus@linux.intel.com>,
  Bas Nieuwenhuizen <bas@basnieuwenhuizen.nl>,
  Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
  Abhinav Kumar <abhinavk@codeaurora.org>,
- Dmitry Baryshkov <dmitry.baryshkov@linaro.org>,
- Takanari Hayama <taki@igel.co.jp>, Sean Paul <seanpaul@chromium.org>,
+ Alex Deucher <alexander.deucher@amd.com>, Sean Paul <seanpaul@chromium.org>,
  Maxime Ripard <mripard@kernel.org>, Daniel Vetter <daniel@ffwll.ch>,
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- Mark Yacoub <markyacoub@chromium.org>, Qingqing Zhuo <qingqing.zhuo@amd.com>,
- "Pan, Xinhui" <Xinhui.Pan@amd.com>, linux-kernel@vger.kernel.org,
- Simon Ser <contact@emersion.fr>, Alex Deucher <alexander.deucher@amd.com>,
+ Evan Quan <evan.quan@amd.com>, Mark Yacoub <markyacoub@chromium.org>,
+ Qingqing Zhuo <qingqing.zhuo@amd.com>, "Pan, Xinhui" <Xinhui.Pan@amd.com>,
+ linux-kernel@vger.kernel.org, Simon Ser <contact@emersion.fr>,
+ Dmitry Baryshkov <dmitry.baryshkov@linaro.org>,
  Damian Hobson-Garcia <dhobsong@igel.co.jp>,
- =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
+ Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi Esaki-san,
-
-On Thu, 13 Jan 2022 at 09:44, Tomohito Esaki <etom@igel.co.jp> wrote:
-> Some drivers whose planes only support linear layout fb do not support format
+On Fri, Jan 14, 2022 at 07:17:52PM +0900, Tomohito Esaki wrote:
+> The LINEAR modifier is advertised as default if a driver doesn't specify
 > modifiers.
-> These drivers should support modifiers, however the DRM core should handle this
-> rather than open-coding in every driver.
->
-> In this patch series, these drivers expose format modifiers based on the
-> following suggestion[1].
 
-Thanks for the series, it looks like the right thing to do.
+...
 
-Can you please change the patch ordering though? At the moment there
-will be a bisection break at patch #1, because the legacy drivers will
-suddenly start gaining modifier support, before it is removed in patch
-#2.
+> +	const uint64_t default_modifiers[] = {
+> +		DRM_FORMAT_MOD_LINEAR,
+> +		DRM_FORMAT_MOD_INVALID
 
-I think a better order would be:
-  1: add fb_modifiers_not_supported flag to core and drivers
-  2: add default modifiers (and set allow_fb_modifiers) if
-fb_modifiers_not_supported flag is not set
-  3: remove allow_fb_modifiers flag
++ Comma?
 
-Cheers,
-Daniel
+> +	};
+
+Why not enum?
+
+
+-- 
+With Best Regards,
+Andy Shevchenko
+
+
