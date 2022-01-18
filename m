@@ -2,46 +2,46 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id DAE43491411
-	for <lists+nouveau@lfdr.de>; Tue, 18 Jan 2022 03:20:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 07CD7491605
+	for <lists+nouveau@lfdr.de>; Tue, 18 Jan 2022 03:32:42 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C1E141128B8;
-	Tue, 18 Jan 2022 02:20:35 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 530041128E2;
+	Tue, 18 Jan 2022 02:32:40 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by gabe.freedesktop.org (Postfix) with ESMTPS id CF27C1128B8;
- Tue, 18 Jan 2022 02:20:34 +0000 (UTC)
+Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5111F1128E2;
+ Tue, 18 Jan 2022 02:32:38 +0000 (UTC)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 3C586612B9;
- Tue, 18 Jan 2022 02:20:34 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 844B6C36AEB;
- Tue, 18 Jan 2022 02:20:31 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 16634B8124B;
+ Tue, 18 Jan 2022 02:32:37 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BEF8DC36AEB;
+ Tue, 18 Jan 2022 02:32:33 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1642472432;
+ s=k20201202; t=1642473154;
  bh=0tDVZXKr9K09AvgqRFA/1j1lSWqb13QUoRj3scev9K0=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=ARaaXh1YUYrzudbBSo54q4bskMt9FUD3BC1dEBKa9idG7avmVj7w1kP+kqXQj0H4G
- aYdkinK3RlWGSnr1vv06D+oUjbooG11eoPUKOjtIVpNZWFlWmWOljBYbuj1dbCGwkJ
- Ly4eJpZzS05Zd5MxyRq5M4NqfzGcYLikRAPn406GjtQ+8+hfL2p4gkgHYcGtE8M8cg
- EQpfdTr1loxSgzWA44mYihE7rMGyQyGxR5l5kjNd3LaK1IJlenAc+X8vWKLFd/N2GF
- GxfN2lI5Cxa5sJfoblQoCdjqw/NQzOdD9ErEyCK8Xo5rRDX5FKf9i1B8xqlO35+P8C
- 1fc84beTii64w==
+ b=bfWTC0pmTADMl5OkoFwb5pUHn94rDhh5f4/Oi/EulQ+GQHBl8H2OP02hQnLAeqlY7
+ eJLh7r3olEsMyoc6f9TfVgrjRvKNkpkddoWBcIP6f2P7EnqEi4xzBKd6XqYnJTXZLx
+ ZkVYh9vLpQ0STXE+eva9X5jDpZaaRMBXV2PsrmD1V9BhgBBNFA6BAXVDCcCtDyXOVf
+ jBDrbG1DTw9LV4mVgqo4pdEEa7b9XLPhfIOpIS9GN1TsnEMCpEBAdVySXddAwBnMnf
+ 7jPJTysZ5TsMcua+F2j5k0PrqV07ZnLQGDQ1IvlDcBiN4oVSSJ4sHBKBOMNzHqdiVZ
+ HTtWZZ98cjWag==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Mon, 17 Jan 2022 21:16:20 -0500
-Message-Id: <20220118021940.1942199-17-sashal@kernel.org>
+Date: Mon, 17 Jan 2022 21:28:57 -0500
+Message-Id: <20220118023152.1948105-13-sashal@kernel.org>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20220118021940.1942199-1-sashal@kernel.org>
-References: <20220118021940.1942199-1-sashal@kernel.org>
+In-Reply-To: <20220118023152.1948105-1-sashal@kernel.org>
+References: <20220118023152.1948105-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
 Content-Transfer-Encoding: 8bit
-Subject: [Nouveau] [PATCH AUTOSEL 5.16 017/217] drm/nouveau/pmu/gm200-:
+Subject: [Nouveau] [PATCH AUTOSEL 5.15 013/188] drm/nouveau/pmu/gm200-:
  avoid touching PMU outside of DEVINIT/PREOS/ACR
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
