@@ -1,47 +1,48 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 07CD7491605
-	for <lists+nouveau@lfdr.de>; Tue, 18 Jan 2022 03:32:42 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2C6D8491755
+	for <lists+nouveau@lfdr.de>; Tue, 18 Jan 2022 03:40:37 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 530041128E2;
-	Tue, 18 Jan 2022 02:32:40 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 125D0112908;
+	Tue, 18 Jan 2022 02:40:34 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5111F1128E2;
- Tue, 18 Jan 2022 02:32:38 +0000 (UTC)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [IPv6:2604:1380:4641:c500::1])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 91737112907;
+ Tue, 18 Jan 2022 02:40:32 +0000 (UTC)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id 16634B8124B;
- Tue, 18 Jan 2022 02:32:37 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BEF8DC36AEB;
- Tue, 18 Jan 2022 02:32:33 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 1F540608C0;
+ Tue, 18 Jan 2022 02:40:32 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2FA76C36AE3;
+ Tue, 18 Jan 2022 02:40:30 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1642473154;
- bh=0tDVZXKr9K09AvgqRFA/1j1lSWqb13QUoRj3scev9K0=;
+ s=k20201202; t=1642473631;
+ bh=N+xAuBNrumYAwKdpAGtW0TSvVD1arLgbiAIJ/iqPfH8=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=bfWTC0pmTADMl5OkoFwb5pUHn94rDhh5f4/Oi/EulQ+GQHBl8H2OP02hQnLAeqlY7
- eJLh7r3olEsMyoc6f9TfVgrjRvKNkpkddoWBcIP6f2P7EnqEi4xzBKd6XqYnJTXZLx
- ZkVYh9vLpQ0STXE+eva9X5jDpZaaRMBXV2PsrmD1V9BhgBBNFA6BAXVDCcCtDyXOVf
- jBDrbG1DTw9LV4mVgqo4pdEEa7b9XLPhfIOpIS9GN1TsnEMCpEBAdVySXddAwBnMnf
- 7jPJTysZ5TsMcua+F2j5k0PrqV07ZnLQGDQ1IvlDcBiN4oVSSJ4sHBKBOMNzHqdiVZ
- HTtWZZ98cjWag==
+ b=ap6SszjwUFCxNiG2/oHXaOLCnm9Crze4tcFsaJqqczDgLp2jqkhlzjsguy33kZtqf
+ D/+i8WhZCcHQ5RsdI3FdSo+y6awCnMucEgVtkfUlOhZEwUUE9d0dIJODhXiT1lI6gU
+ BE6bBEphq+vb7DHEWTLZo/LzsRiRtnyNltNZ5U0+m8/tgJKuPylVlfPOM5QfvRtzTp
+ ++jWgoPYb/9qWCbgnNKe3y/uwoKTElgaqyHDeJB6LfPddZdAZP6dnnXmXGESKXW3Y+
+ GwJAtaIEdOy1eFoDWzFfzgT5ZDavefcS4hhFtnwH5bQ37fTckE61hok0TK0O6UABFi
+ KbwjaCN3ladig==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Mon, 17 Jan 2022 21:28:57 -0500
-Message-Id: <20220118023152.1948105-13-sashal@kernel.org>
+Date: Mon, 17 Jan 2022 21:38:19 -0500
+Message-Id: <20220118024007.1950576-8-sashal@kernel.org>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20220118023152.1948105-1-sashal@kernel.org>
-References: <20220118023152.1948105-1-sashal@kernel.org>
+In-Reply-To: <20220118024007.1950576-1-sashal@kernel.org>
+References: <20220118024007.1950576-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
 Content-Transfer-Encoding: 8bit
-Subject: [Nouveau] [PATCH AUTOSEL 5.15 013/188] drm/nouveau/pmu/gm200-:
+Subject: [Nouveau] [PATCH AUTOSEL 5.10 008/116] drm/nouveau/pmu/gm200-:
  avoid touching PMU outside of DEVINIT/PREOS/ACR
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -85,7 +86,7 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  1 file changed, 21 insertions(+), 16 deletions(-)
 
 diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/pmu/base.c b/drivers/gpu/drm/nouveau/nvkm/subdev/pmu/base.c
-index 24382875fb4f3..455e95a89259f 100644
+index a0fe607c9c07f..3bfc55c571b5e 100644
 --- a/drivers/gpu/drm/nouveau/nvkm/subdev/pmu/base.c
 +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/pmu/base.c
 @@ -94,20 +94,13 @@ nvkm_pmu_fini(struct nvkm_subdev *subdev, bool suspend)
