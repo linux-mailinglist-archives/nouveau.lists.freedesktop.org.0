@@ -1,48 +1,53 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id B2AD24918F1
-	for <lists+nouveau@lfdr.de>; Tue, 18 Jan 2022 03:49:20 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id C475A492310
+	for <lists+nouveau@lfdr.de>; Tue, 18 Jan 2022 10:47:08 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C9350112926;
-	Tue, 18 Jan 2022 02:49:18 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 238DB1129E0;
+	Tue, 18 Jan 2022 09:47:07 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 50377112927;
- Tue, 18 Jan 2022 02:49:18 +0000 (UTC)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id C7C8361355;
- Tue, 18 Jan 2022 02:49:17 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 79FB0C36AE3;
- Tue, 18 Jan 2022 02:49:16 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1642474157;
- bh=42cKnB73ycwsYbytnMtn+m7ZqxOi3VaJu09BCcgAuRU=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=JCCNcrnERTv9qv6aqBQ2JvOjihd72HgFsRPZKyQHJ9R5jZ/0TmmlLk2PjJr5yNuRv
- m3YUqZ1wDjW7x/8ZihEyepCLGDU1zneFQ0eaNu4TY64uPXIEQTL2T6vquNWge/r8gi
- PKeXmPodBmCnJPjIopQvczJk+q9y7zip2NTCdhTkAq4h2ibYwuVT07dfm3xenKNwOz
- g79ehxQE0SqCsfJgEQTcE6KfMkA7+pE2vVIpLPfwOeSWbAUzIQhKrFpsMAdMlC9oMQ
- K3Jt6VibBQwovQ7aoJ6nDTMsfBjUvW4cKn9OM2G8ds94PDqTzLbn79c83OuwEIWF/d
- e/dS5DFeqSu0A==
-From: Sasha Levin <sashal@kernel.org>
-To: linux-kernel@vger.kernel.org,
-	stable@vger.kernel.org
-Date: Mon, 17 Jan 2022 21:48:16 -0500
-Message-Id: <20220118024908.1953673-4-sashal@kernel.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20220118024908.1953673-1-sashal@kernel.org>
-References: <20220118024908.1953673-1-sashal@kernel.org>
+Received: from mga07.intel.com (mga07.intel.com [134.134.136.100])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B56AD1129E1;
+ Tue, 18 Jan 2022 09:47:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1642499225; x=1674035225;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:in-reply-to;
+ bh=L+OPdNsaU2FY8wr/SJr9DyBE7V4Xr+Q/OlCWELomdhA=;
+ b=nTY0FFD9zDnkccdxOlHdWX1x4/kl+E/yxDMzCRgeZGiVZcd0pyNagA6m
+ VsRmag6NO73/3kQKCbXRSZ5otOcn52ScoE8anWDj3VVmNR8g47uDLSNBW
+ PQPlSNfM80/T90XuIkoYJiqHHm1O5ZHZWR8MJWsjOdHyDFWVAcUC2ekd5
+ 8t0S9PS7NeexulONalq4sTFEHciy9D8LFSKt1kUQUQarcw+wEYP8GoN6s
+ HrcBa+uvvyRY9KIhfs7ufja0J+5zaD5uXYDMY3RGDXgB4TzqThlryyanT
+ w0wxKc2+aXpKfdtPpkWjAdPs2CIS81yYCNjzp8kOQ4fqSlRP64coaWuLy g==;
+X-IronPort-AV: E=McAfee;i="6200,9189,10230"; a="308114961"
+X-IronPort-AV: E=Sophos;i="5.88,297,1635231600"; d="scan'208";a="308114961"
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+ by orsmga105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 18 Jan 2022 01:47:04 -0800
+X-IronPort-AV: E=Sophos;i="5.88,297,1635231600"; d="scan'208";a="622085988"
+Received: from smile.fi.intel.com ([10.237.72.61])
+ by fmsmga002-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 18 Jan 2022 01:46:57 -0800
+Received: from andy by smile.fi.intel.com with local (Exim 4.95)
+ (envelope-from <andriy.shevchenko@linux.intel.com>)
+ id 1n9l3i-00BnjX-K9; Tue, 18 Jan 2022 11:45:46 +0200
+Date: Tue, 18 Jan 2022 11:45:46 +0200
+From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+To: Tomohito Esaki <etom@igel.co.jp>
+Message-ID: <YeaMSguM7hTN/I2B@smile.fi.intel.com>
+References: <20220118083652.16335-1-etom@igel.co.jp>
 MIME-Version: 1.0
-X-stable: review
-X-Patchwork-Hint: Ignore
-Content-Transfer-Encoding: 8bit
-Subject: [Nouveau] [PATCH AUTOSEL 4.14 04/56] drm/nouveau/pmu/gm200-: avoid
- touching PMU outside of DEVINIT/PREOS/ACR
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20220118083652.16335-1-etom@igel.co.jp>
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
+Subject: Re: [Nouveau] [RFC PATCH v4 0/3] Add support modifiers for drivers
+ whose planes only support linear layout
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -54,108 +59,99 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Sasha Levin <sashal@kernel.org>, airlied@linux.ie,
- nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- Diego Viola <diego.viola@gmail.com>, Ben Skeggs <bskeggs@redhat.com>,
- daniel@ffwll.ch
+Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org,
+ Michel =?iso-8859-1?Q?D=E4nzer?= <mdaenzer@redhat.com>,
+ Daniel Stone <daniel@fooishbar.org>, Lee Jones <lee.jones@linaro.org>,
+ Rob Clark <robdclark@chromium.org>, Takanari Hayama <taki@igel.co.jp>,
+ amd-gfx@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>,
+ Petr Mladek <pmladek@suse.com>, Sakari Ailus <sakari.ailus@linux.intel.com>,
+ Bas Nieuwenhuizen <bas@basnieuwenhuizen.nl>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Abhinav Kumar <abhinavk@codeaurora.org>,
+ Alex Deucher <alexander.deucher@amd.com>, Sean Paul <seanpaul@chromium.org>,
+ Maxime Ripard <mripard@kernel.org>, Daniel Vetter <daniel@ffwll.ch>,
+ Evan Quan <evan.quan@amd.com>, Mark Yacoub <markyacoub@chromium.org>,
+ Qingqing Zhuo <qingqing.zhuo@amd.com>, "Pan, Xinhui" <Xinhui.Pan@amd.com>,
+ linux-kernel@vger.kernel.org, Simon Ser <contact@emersion.fr>,
+ Dmitry Baryshkov <dmitry.baryshkov@linaro.org>,
+ Damian Hobson-Garcia <dhobsong@igel.co.jp>,
+ Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-From: Ben Skeggs <bskeggs@redhat.com>
+On Tue, Jan 18, 2022 at 05:36:49PM +0900, Tomohito Esaki wrote:
+> Some drivers whose planes only support linear layout fb do not support format
+> modifiers.
+> These drivers should support modifiers, however the DRM core should handle this
+> rather than open-coding in every driver.
+> 
+> In this patch series, these drivers expose format modifiers based on the
+> following suggestion[1].
+> 
+> On Thu, Nov 18, 2021 at 01:02:11PM +0000, Daniel Stone wrote:
+> > I think the best way forward here is:
+> >   - add a new mode_config.cannot_support_modifiers flag, and enable
+> > this in radeon (plus any other drivers in the same boat)
+> >   - change drm_universal_plane_init() to advertise the LINEAR modifier
+> > when NULL is passed as the modifier list (including installing a
+> > default .format_mod_supported hook)
+> >   - remove the mode_config.allow_fb_modifiers hook and always
+> > advertise modifier support, unless
+> > mode_config.cannot_support_modifiers is set
 
-[ Upstream commit 1d2271d2fb85e54bfc9630a6c30ac0feb9ffb983 ]
+FWIW,
+Reviewed-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
 
-There have been reports of the WFI timing out on some boards, and a
-patch was proposed to just remove it.  This stuff is rather fragile,
-and I believe the WFI might be needed with our FW prior to GM200.
+> [1] https://patchwork.kernel.org/project/linux-renesas-soc/patch/20190509054518.10781-1-etom@igel.co.jp/#24602575
+> 
+> v4:
+> * modify documentation for fb_modifiers_not_supported flag in kerneldoc
+> 
+> v3: https://www.spinics.net/lists/dri-devel/msg329102.html
+> * change the order as follows:
+>    1. add fb_modifiers_not_supported flag
+>    2. add default modifiers
+>    3. remove allow_fb_modifiers flag
+> * add a conditional disable in amdgpu_dm_plane_init()
+> 
+> v2: https://www.spinics.net/lists/dri-devel/msg328939.html
+> * rebase to the latest master branch (5.16.0+)
+>       + "drm/plane: Make format_mod_supported truly optional" patch [2]
+>   [2] https://patchwork.freedesktop.org/patch/467940/?series=98255&rev=3
+> 
+> v1: https://www.spinics.net/lists/dri-devel/msg327352.html
+> * The initial patch set
+> 
+> Tomohito Esaki (3):
+>   drm: introduce fb_modifiers_not_supported flag in mode_config
+>   drm: add support modifiers for drivers whose planes only support
+>     linear layout
+>   drm: remove allow_fb_modifiers
+> 
+>  drivers/gpu/drm/amd/amdgpu/amdgpu_display.c   |  6 ++---
+>  drivers/gpu/drm/amd/amdgpu/dce_v10_0.c        |  2 ++
+>  drivers/gpu/drm/amd/amdgpu/dce_v11_0.c        |  2 ++
+>  drivers/gpu/drm/amd/amdgpu/dce_v6_0.c         |  1 +
+>  drivers/gpu/drm/amd/amdgpu/dce_v8_0.c         |  2 ++
+>  .../gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c |  3 +++
+>  drivers/gpu/drm/drm_framebuffer.c             |  6 ++---
+>  drivers/gpu/drm/drm_ioctl.c                   |  2 +-
+>  drivers/gpu/drm/drm_plane.c                   | 22 +++++++++----------
+>  drivers/gpu/drm/nouveau/nouveau_display.c     |  6 +++--
+>  drivers/gpu/drm/radeon/radeon_display.c       |  2 ++
+>  .../gpu/drm/selftests/test-drm_framebuffer.c  |  1 -
+>  include/drm/drm_mode_config.h                 | 18 +++++----------
+>  include/drm/drm_plane.h                       |  3 +++
+>  14 files changed, 43 insertions(+), 33 deletions(-)
+> 
+> -- 
+> 2.25.1
+> 
 
-However, we probably should not be touching PMU during init on GPUs
-where we depend on NVIDIA FW, outside of limited circumstances, so
-this should be a somewhat safer change that achieves the desired
-result.
-
-Reported-by: Diego Viola <diego.viola@gmail.com>
-Signed-off-by: Ben Skeggs <bskeggs@redhat.com>
-Reviewed-by: Karol Herbst <kherbst@redhat.com>
-Signed-off-by: Karol Herbst <kherbst@redhat.com>
-Link: https://gitlab.freedesktop.org/drm/nouveau/-/merge_requests/10
-Signed-off-by: Sasha Levin <sashal@kernel.org>
----
- .../gpu/drm/nouveau/nvkm/subdev/pmu/base.c    | 37 +++++++++++--------
- 1 file changed, 21 insertions(+), 16 deletions(-)
-
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/pmu/base.c b/drivers/gpu/drm/nouveau/nvkm/subdev/pmu/base.c
-index ce70a193caa7f..8cf3d1b4662de 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/pmu/base.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/pmu/base.c
-@@ -70,20 +70,13 @@ nvkm_pmu_fini(struct nvkm_subdev *subdev, bool suspend)
- 	return 0;
- }
- 
--static int
-+static void
- nvkm_pmu_reset(struct nvkm_pmu *pmu)
- {
- 	struct nvkm_device *device = pmu->subdev.device;
- 
- 	if (!pmu->func->enabled(pmu))
--		return 0;
--
--	/* Inhibit interrupts, and wait for idle. */
--	nvkm_wr32(device, 0x10a014, 0x0000ffff);
--	nvkm_msec(device, 2000,
--		if (!nvkm_rd32(device, 0x10a04c))
--			break;
--	);
-+		return;
- 
- 	/* Reset. */
- 	if (pmu->func->reset)
-@@ -94,25 +87,37 @@ nvkm_pmu_reset(struct nvkm_pmu *pmu)
- 		if (!(nvkm_rd32(device, 0x10a10c) & 0x00000006))
- 			break;
- 	);
--
--	return 0;
- }
- 
- static int
- nvkm_pmu_preinit(struct nvkm_subdev *subdev)
- {
- 	struct nvkm_pmu *pmu = nvkm_pmu(subdev);
--	return nvkm_pmu_reset(pmu);
-+	nvkm_pmu_reset(pmu);
-+	return 0;
- }
- 
- static int
- nvkm_pmu_init(struct nvkm_subdev *subdev)
- {
- 	struct nvkm_pmu *pmu = nvkm_pmu(subdev);
--	int ret = nvkm_pmu_reset(pmu);
--	if (ret == 0 && pmu->func->init)
--		ret = pmu->func->init(pmu);
--	return ret;
-+	struct nvkm_device *device = pmu->subdev.device;
-+
-+	if (!pmu->func->init)
-+		return 0;
-+
-+	if (pmu->func->enabled(pmu)) {
-+		/* Inhibit interrupts, and wait for idle. */
-+		nvkm_wr32(device, 0x10a014, 0x0000ffff);
-+		nvkm_msec(device, 2000,
-+			if (!nvkm_rd32(device, 0x10a04c))
-+				break;
-+		);
-+
-+		nvkm_pmu_reset(pmu);
-+	}
-+
-+	return pmu->func->init(pmu);
- }
- 
- static int
 -- 
-2.34.1
+With Best Regards,
+Andy Shevchenko
+
 
