@@ -1,64 +1,63 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 26C0A492EFB
-	for <lists+nouveau@lfdr.de>; Tue, 18 Jan 2022 21:08:48 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 889BE492EF9
+	for <lists+nouveau@lfdr.de>; Tue, 18 Jan 2022 21:08:42 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4951A10E553;
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1AA4510E288;
 	Tue, 18 Jan 2022 20:08:38 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pf1-x42d.google.com (mail-pf1-x42d.google.com
- [IPv6:2607:f8b0:4864:20::42d])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 941BF1122B3
- for <nouveau@lists.freedesktop.org>; Tue, 18 Jan 2022 08:37:24 +0000 (UTC)
-Received: by mail-pf1-x42d.google.com with SMTP id r5so5332682pfl.2
- for <nouveau@lists.freedesktop.org>; Tue, 18 Jan 2022 00:37:24 -0800 (PST)
+Received: from mail-pj1-x1034.google.com (mail-pj1-x1034.google.com
+ [IPv6:2607:f8b0:4864:20::1034])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 30866112934
+ for <nouveau@lists.freedesktop.org>; Tue, 18 Jan 2022 08:37:32 +0000 (UTC)
+Received: by mail-pj1-x1034.google.com with SMTP id hv15so22627750pjb.5
+ for <nouveau@lists.freedesktop.org>; Tue, 18 Jan 2022 00:37:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=igel-co-jp.20210112.gappssmtp.com; s=20210112;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=Z7DU13bl/Kr7bejWSCxzgyPXSQzgiVvowF1ijJEKZSA=;
- b=YLSxu/tIwj92oYZwW7XT/H9srKLMjIQQT+1nn/oOFcZLB4PgCo3+UDGGZcffN6xDLN
- fiY8zn+trt9sov1CskL0+pT6MAvoPHgB7Z/nRy20Y57dKLRXOoZplUdqd/cUnbQaoO+P
- ur+SOLXf5+Tr+gfMMMvxQcG8FdHMzW+kJrXJdaA+Tb94t4eapVv5nADD2uJIavifzmvC
- aq4MMGAdZg5Q2IgIfOFOuvCy29XWqKuBktEFwlABvPZa+bDCLWUJDX+ueDSzGYUGzHE1
- Ay2XO98YiVEGcPqsk0Z/ElsxPO4L+GAPzZQ/yrDFRsxojzPV1q5C9HVd+KyQpo3TQ5Vl
- 4F/Q==
+ bh=nHubPpVUFbRzFLg8T8kDPGraTUFZHSM+yB+IayI7i+s=;
+ b=BNVQLfmQk6md7zj5f5A2JZMLlkVY3nsW+rWNMcDQFQSSESG1iJa90hai3eZwmBFsKn
+ IrVMI1n4eyrPuICVT8b+BX/szy3mZ/xRbWkq9V6tQ8FhTSadk5weQSMhQvA7y+4Ve78T
+ Jq9eRUhJyvV8+eBPuLyvaGXkpEBYcxGDqtObjkINyRsC5Rpeh+jrPgikvbbOodrLWtW9
+ 9KBVPKwK7PPvNHOKARO3F6N9clDzEP/XvdHUGp/UyT7ZCemmm8AonZIvKt2vqjIcULbN
+ boomgfHUy5Y968l+0He/v51djOdv4spkhmPe2t6R6dEtt2mTLdDXz8+XqXKKriiZl9Eo
+ ZCww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=Z7DU13bl/Kr7bejWSCxzgyPXSQzgiVvowF1ijJEKZSA=;
- b=kev6AsV8Vk3D50Uysm1QR1qYulAGipgtqqNsP3GyzGIPg1/jS3dOQ4b7WNt/ITXyf1
- tavxpHnPyx5eAwF1Qc370vzSDvPpL67UikHW+D3WnvmOcEqeB5YdKwecwkGF9/5WIGjV
- 6vUfwH3DDx9j2J8Twy1OTmZ25T4D8hqU/qQfADfOWautKc3KiPruPyfImHih2IkheaUC
- 2k5tOYjXmvB0NiqtXGrZDcUZskl1imvg2cfLoc6YVjzQFEjKefWZYAp4ji+cF3Kwvmcy
- YeOamkNk001BMaFhCyCb3MshFU38GqOSGQ8OMdR/Pm5uQrelndJX5wxnTYpbqggAMEM2
- Tblw==
-X-Gm-Message-State: AOAM530MK6ad6qO1uwuCWvYSxQCGbXnHkr5sbEVi5pclheeWT3CK++tx
- s+SZCpDOIr2GRCN7AZuUzHPuaQ==
-X-Google-Smtp-Source: ABdhPJxUXPnlq3fnqBxNwq+VU2c6cdmBk++xs+hnu+nnviQYYFI6uuFUKT5La/Jt+m2gv1zoVNQ6+w==
-X-Received: by 2002:a05:6a00:1a55:b0:4c4:394:8a22 with SMTP id
- h21-20020a056a001a5500b004c403948a22mr10068904pfv.63.1642495044202; 
- Tue, 18 Jan 2022 00:37:24 -0800 (PST)
+ bh=nHubPpVUFbRzFLg8T8kDPGraTUFZHSM+yB+IayI7i+s=;
+ b=u1Z1GBWHC5P+xaXZhaAEPd9e74dLeXScQX2n3lSkLi9pxh8oXD65MJtV9PIJFb33iW
+ C2zol3tBSgKw7Nqx2eY4Fa+JStmI1MmNb9yYr1Jmtg9L7jmJ4GNgF+MwdwUS8QeuFeMc
+ zBe0VeVIpi3RS7BLir2R+3PG2mUSBP45sZrbewIIJW8zPAQqniqucCk0lBVkLzWZYRwo
+ 3ItRpdhxw175+3X5POxNXkkVHJhosaxA8jbp0C2S4FnUWR5sNuMCAwdMCEHYFsn9O9Rs
+ EtcP2+6lKa/ZNcT+1njyntbuMVqTM0PI4NQ/VFWxqe7kLJeqAW55L66CEIKFP3sSfBeJ
+ p//A==
+X-Gm-Message-State: AOAM530hBWBlbW3ycZc9LrMJvPRgutq9Fes0L7xNRz4j8xWgpqUhE6fr
+ pNXVDQM4oSUd81l381C8sphFvw==
+X-Google-Smtp-Source: ABdhPJzZ58k/3S62+PArMC81nnoj8/jh7NTLeCglvPNuoMj1t8UJHrK1+E/kF7kQg0Ovz0GW78kTbQ==
+X-Received: by 2002:a17:90b:1b50:: with SMTP id
+ nv16mr17412800pjb.93.1642495051777; 
+ Tue, 18 Jan 2022 00:37:31 -0800 (PST)
 Received: from aqua.hq.igel.co.jp (napt.igel.co.jp. [219.106.231.132])
- by smtp.gmail.com with ESMTPSA id c6sm1775615pjo.39.2022.01.18.00.37.16
+ by smtp.gmail.com with ESMTPSA id c6sm1775615pjo.39.2022.01.18.00.37.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Jan 2022 00:37:23 -0800 (PST)
+ Tue, 18 Jan 2022 00:37:31 -0800 (PST)
 From: Tomohito Esaki <etom@igel.co.jp>
 To: dri-devel@lists.freedesktop.org
-Date: Tue, 18 Jan 2022 17:36:51 +0900
-Message-Id: <20220118083652.16335-3-etom@igel.co.jp>
+Date: Tue, 18 Jan 2022 17:36:52 +0900
+Message-Id: <20220118083652.16335-4-etom@igel.co.jp>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20220118083652.16335-1-etom@igel.co.jp>
 References: <20220118083652.16335-1-etom@igel.co.jp>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Tue, 18 Jan 2022 20:08:37 +0000
-Subject: [Nouveau] [RFC PATCH v4 2/3] drm: add support modifiers for drivers
- whose planes only support linear layout
+Subject: [Nouveau] [RFC PATCH v4 3/3] drm: remove allow_fb_modifiers
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -93,76 +92,75 @@ Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-The LINEAR modifier is advertised as default if a driver doesn't specify
-modifiers.
+The allow_fb_modifiers flag is unnecessary since it has been replaced
+with cannot_support_modifiers flag.
 
 Signed-off-by: Tomohito Esaki <etom@igel.co.jp>
 ---
- drivers/gpu/drm/drm_plane.c | 15 ++++++++++++---
- include/drm/drm_plane.h     |  3 +++
- 2 files changed, 15 insertions(+), 3 deletions(-)
+ drivers/gpu/drm/drm_plane.c                      |  9 ---------
+ drivers/gpu/drm/selftests/test-drm_framebuffer.c |  1 -
+ include/drm/drm_mode_config.h                    | 16 ----------------
+ 3 files changed, 26 deletions(-)
 
 diff --git a/drivers/gpu/drm/drm_plane.c b/drivers/gpu/drm/drm_plane.c
-index deeec60a3315..5aa7e241971e 100644
+index 5aa7e241971e..89a3d044ab59 100644
 --- a/drivers/gpu/drm/drm_plane.c
 +++ b/drivers/gpu/drm/drm_plane.c
-@@ -237,6 +237,10 @@ static int __drm_universal_plane_init(struct drm_device *dev,
- 				      const char *name, va_list ap)
- {
- 	struct drm_mode_config *config = &dev->mode_config;
-+	const uint64_t default_modifiers[] = {
-+		DRM_FORMAT_MOD_LINEAR,
-+		DRM_FORMAT_MOD_INVALID
-+	};
- 	unsigned int format_modifier_count = 0;
- 	int ret;
- 
-@@ -277,6 +281,11 @@ static int __drm_universal_plane_init(struct drm_device *dev,
- 
- 		while (*temp_modifiers++ != DRM_FORMAT_MOD_INVALID)
- 			format_modifier_count++;
-+	} else {
-+		if (!dev->mode_config.fb_modifiers_not_supported) {
-+			format_modifiers = default_modifiers;
-+			format_modifier_count = 1;
-+		}
+@@ -288,15 +288,6 @@ static int __drm_universal_plane_init(struct drm_device *dev,
+ 		}
  	}
  
- 	/* autoset the cap and check for consistency across all planes */
-@@ -341,7 +350,7 @@ static int __drm_universal_plane_init(struct drm_device *dev,
- 		drm_object_attach_property(&plane->base, config->prop_src_h, 0);
- 	}
+-	/* autoset the cap and check for consistency across all planes */
+-	if (format_modifier_count) {
+-		drm_WARN_ON(dev, !config->allow_fb_modifiers &&
+-			    !list_empty(&config->plane_list));
+-		config->allow_fb_modifiers = true;
+-	} else {
+-		drm_WARN_ON(dev, config->allow_fb_modifiers);
+-	}
+-
+ 	plane->modifier_count = format_modifier_count;
+ 	plane->modifiers = kmalloc_array(format_modifier_count,
+ 					 sizeof(format_modifiers[0]),
+diff --git a/drivers/gpu/drm/selftests/test-drm_framebuffer.c b/drivers/gpu/drm/selftests/test-drm_framebuffer.c
+index 61b44d3a6a61..f6d66285c5fc 100644
+--- a/drivers/gpu/drm/selftests/test-drm_framebuffer.c
++++ b/drivers/gpu/drm/selftests/test-drm_framebuffer.c
+@@ -323,7 +323,6 @@ static struct drm_device mock_drm_device = {
+ 		.max_width = MAX_WIDTH,
+ 		.min_height = MIN_HEIGHT,
+ 		.max_height = MAX_HEIGHT,
+-		.allow_fb_modifiers = true,
+ 		.funcs = &mock_config_funcs,
+ 	},
+ };
+diff --git a/include/drm/drm_mode_config.h b/include/drm/drm_mode_config.h
+index b73af96e2c96..c41df5932a6b 100644
+--- a/include/drm/drm_mode_config.h
++++ b/include/drm/drm_mode_config.h
+@@ -917,22 +917,6 @@ struct drm_mode_config {
+ 	 */
+ 	bool async_page_flip;
  
--	if (config->allow_fb_modifiers)
-+	if (format_modifier_count)
- 		create_in_format_blob(dev, plane);
- 
- 	return 0;
-@@ -368,8 +377,8 @@ static int __drm_universal_plane_init(struct drm_device *dev,
-  * drm_universal_plane_init() to let the DRM managed resource infrastructure
-  * take care of cleanup and deallocation.
-  *
-- * Drivers supporting modifiers must set @format_modifiers on all their planes,
-- * even those that only support DRM_FORMAT_MOD_LINEAR.
-+ * For drivers supporting modifiers, all planes will advertise
-+ * DRM_FORMAT_MOD_LINEAR support, if @format_modifiers is not set.
-  *
-  * Returns:
-  * Zero on success, error code on failure.
-diff --git a/include/drm/drm_plane.h b/include/drm/drm_plane.h
-index 0c1102dc4d88..cad641b1f797 100644
---- a/include/drm/drm_plane.h
-+++ b/include/drm/drm_plane.h
-@@ -803,6 +803,9 @@ void *__drmm_universal_plane_alloc(struct drm_device *dev,
-  *
-  * The @drm_plane_funcs.destroy hook must be NULL.
-  *
-+ * For drivers supporting modifiers, all planes will advertise
-+ * DRM_FORMAT_MOD_LINEAR support, if @format_modifiers is not set.
-+ *
-  * Returns:
-  * Pointer to new plane, or ERR_PTR on failure.
-  */
+-	/**
+-	 * @allow_fb_modifiers:
+-	 *
+-	 * Whether the driver supports fb modifiers in the ADDFB2.1 ioctl call.
+-	 * Note that drivers should not set this directly, it is automatically
+-	 * set in drm_universal_plane_init().
+-	 *
+-	 * IMPORTANT:
+-	 *
+-	 * If this is set the driver must fill out the full implicit modifier
+-	 * information in their &drm_mode_config_funcs.fb_create hook for legacy
+-	 * userspace which does not set modifiers. Otherwise the GETFB2 ioctl is
+-	 * broken for modifier aware userspace.
+-	 */
+-	bool allow_fb_modifiers;
+-
+ 	/**
+ 	 * @fb_modifiers_not_supported:
+ 	 *
 -- 
 2.25.1
 
