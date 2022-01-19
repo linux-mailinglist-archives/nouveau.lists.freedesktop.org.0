@@ -2,58 +2,57 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4F746493E79
-	for <lists+nouveau@lfdr.de>; Wed, 19 Jan 2022 17:43:14 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id CBC2E4940F4
+	for <lists+nouveau@lfdr.de>; Wed, 19 Jan 2022 20:35:14 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 3FBF710E1C1;
-	Wed, 19 Jan 2022 16:43:12 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 68BA110F069;
+	Wed, 19 Jan 2022 19:35:12 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 303 seconds by postgrey-1.36 at gabe;
- Wed, 19 Jan 2022 16:43:11 UTC
-Received: from eu-smtp-delivery-151.mimecast.com
- (eu-smtp-delivery-151.mimecast.com [185.58.86.151])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 16F6010E210
- for <nouveau@lists.freedesktop.org>; Wed, 19 Jan 2022 16:43:10 +0000 (UTC)
-Received: from AcuMS.aculab.com (156.67.243.121 [156.67.243.121]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id
- uk-mta-70-ad3hgsm6PzCTMw0_BweRrA-1; Wed, 19 Jan 2022 16:37:02 +0000
-X-MC-Unique: ad3hgsm6PzCTMw0_BweRrA-1
-Received: from AcuMS.Aculab.com (fd9f:af1c:a25b:0:994c:f5c2:35d6:9b65) by
- AcuMS.aculab.com (fd9f:af1c:a25b:0:994c:f5c2:35d6:9b65) with Microsoft SMTP
- Server (TLS) id 15.0.1497.28; Wed, 19 Jan 2022 16:37:00 +0000
-Received: from AcuMS.Aculab.com ([fe80::994c:f5c2:35d6:9b65]) by
- AcuMS.aculab.com ([fe80::994c:f5c2:35d6:9b65%12]) with mapi id
- 15.00.1497.028; Wed, 19 Jan 2022 16:37:00 +0000
-From: David Laight <David.Laight@ACULAB.COM>
-To: 'Steven Rostedt' <rostedt@goodmis.org>, Andy Shevchenko
- <andy.shevchenko@gmail.com>
-Thread-Topic: [PATCH 1/3] lib/string_helpers: Consolidate yesno()
- implementation
-Thread-Index: AQHYDUVmV8sHy8JfXU2yTPkp1VbmK6xqitzA
-Date: Wed, 19 Jan 2022 16:37:00 +0000
-Message-ID: <06420a70f4434c2b8590cc89cad0dd6a@AcuMS.aculab.com>
-References: <20220119072450.2890107-1-lucas.demarchi@intel.com>
- <20220119072450.2890107-2-lucas.demarchi@intel.com>
- <CAHp75Vf5QOD_UtDK8VbxNApEBuJvzUic0NkzDNmRo3Q7Ud+=qw@mail.gmail.com>
- <20220119100102.61f9bfde@gandalf.local.home>
-In-Reply-To: <20220119100102.61f9bfde@gandalf.local.home>
-Accept-Language: en-GB, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.202.205.107]
+Received: from mga12.intel.com (mga12.intel.com [192.55.52.136])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id A3D2E10EB17;
+ Wed, 19 Jan 2022 19:35:10 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1642620910; x=1674156910;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:in-reply-to;
+ bh=hA5pSNQjxDTLN0gQu3qfl7xtlPzKT55FdGnVp2YHmjo=;
+ b=F+enoCSUhhxOnKi67uwq9A2rDFl53ZOc/oHnREgt+wBSoY2mOpNxmNXQ
+ kiieHGfaQxJAzI+Tu/mVc0GFwt45XRZ1Mw6x+n5zd94rrKb7ol1SZUryu
+ ixIoE2xwbHT1aaroMYQ0f5aeU2N660KejvPn7VO33cOT49CKKcyPj98D1
+ 1am9B8fWWJRFqOV9x7/tLmFiRz/cn8oU4SJ54JICVQ5bdJHFh3YxWuyYY
+ 0GrwZsRD5tJ1Q+7qFsiy3gcc0K/xi77RABh4YRYdp+vMGD8vOXuHbNcK3
+ C1KB1S+l9Xy+Hm8WCjwhZUmtirETyazLFJUNcbTDGVFvPMSPHQb7xox/o Q==;
+X-IronPort-AV: E=McAfee;i="6200,9189,10231"; a="225151213"
+X-IronPort-AV: E=Sophos;i="5.88,300,1635231600"; d="scan'208";a="225151213"
+Received: from fmsmga007.fm.intel.com ([10.253.24.52])
+ by fmsmga106.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 19 Jan 2022 11:18:54 -0800
+X-IronPort-AV: E=Sophos;i="5.88,300,1635231600"; d="scan'208";a="530741414"
+Received: from smile.fi.intel.com ([10.237.72.61])
+ by fmsmga007-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 19 Jan 2022 11:18:46 -0800
+Received: from andy by smile.fi.intel.com with local (Exim 4.95)
+ (envelope-from <andriy.shevchenko@linux.intel.com>)
+ id 1nAGSd-00CETd-Sx; Wed, 19 Jan 2022 21:17:35 +0200
+Date: Wed, 19 Jan 2022 21:17:35 +0200
+From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+To: Esaki Tomohito <etom@igel.co.jp>
+Message-ID: <Yehjz1ixBKqL7Qw+@smile.fi.intel.com>
+References: <20220114101753.24996-1-etom@igel.co.jp>
+ <20220114101753.24996-3-etom@igel.co.jp>
+ <YeGFugZvwbF7l2I/@smile.fi.intel.com>
+ <0cf405a1-0d2d-ed5e-abdf-be645e7a9209@igel.co.jp>
+ <YeaOHqfTcf+evbVC@smile.fi.intel.com>
+ <94bddda6-9823-6479-bc1d-cbb8c1079877@igel.co.jp>
 MIME-Version: 1.0
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=C51A453 smtp.mailfrom=david.laight@aculab.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: aculab.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [Nouveau] [PATCH 1/3] lib/string_helpers: Consolidate yesno()
- implementation
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <94bddda6-9823-6479-bc1d-cbb8c1079877@igel.co.jp>
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
+Subject: Re: [Nouveau] [RFC PATCH v3 2/3] drm: add support modifiers for
+ drivers whose planes only support linear layout
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -65,45 +64,74 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Emma Anholt <emma@anholt.net>, David Airlie <airlied@linux.ie>,
- "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- Rasmus Villemoes <linux@rasmusvillemoes.dk>,
- "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
- Chris Wilson <chris@chris-wilson.co.uk>, Vishal Kulkarni <vishal@chelsio.com>,
- Francis Laniel <laniel_francis@privacyrequired.com>,
- Kentaro Takeda <takedakn@nttdata.co.jp>, Mikita Lipski <mikita.lipski@amd.com>,
- "amd-gfx@lists.freedesktop.org" <amd-gfx@lists.freedesktop.org>,
- Ben Skeggs <bskeggs@redhat.com>, Jakub
- Kicinski <kuba@kernel.org>, Harry Wentland <harry.wentland@amd.com>,
+Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org,
+ Michel =?iso-8859-1?Q?D=E4nzer?= <mdaenzer@redhat.com>,
+ Daniel Stone <daniel@fooishbar.org>, Lee Jones <lee.jones@linaro.org>,
+ Rob Clark <robdclark@chromium.org>, Takanari Hayama <taki@igel.co.jp>,
+ amd-gfx@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>,
  Petr Mladek <pmladek@suse.com>, Sakari Ailus <sakari.ailus@linux.intel.com>,
- Leo Li <sunpeng.li@amd.com>,
- "intel-gfx@lists.freedesktop.org" <intel-gfx@lists.freedesktop.org>, Raju
- Rangoju <rajur@chelsio.com>, Lucas De Marchi <lucas.demarchi@intel.com>,
- Jani Nikula <jani.nikula@linux.intel.com>, Julia Lawall <julia.lawall@lip6.fr>,
- Rahul Lakkireddy <rahul.lakkireddy@chelsio.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>,
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- Eryk Brol <eryk.brol@amd.com>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- =?iso-8859-1?Q?Christian_K=F6nig?= <christian.koenig@amd.com>,
- Sergey Senozhatsky <sergey.senozhatsky@gmail.com>,
- "linux-security-module@vger.kernel.org"
- <linux-security-module@vger.kernel.org>, Daniel Vetter <daniel@ffwll.ch>,
- "netdev@vger.kernel.org" <netdev@vger.kernel.org>,
- Alex Deucher <alexander.deucher@amd.com>, Andrew
- Morton <akpm@linux-foundation.org>, "David S . Miller" <davem@davemloft.net>
+ Bas Nieuwenhuizen <bas@basnieuwenhuizen.nl>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Abhinav Kumar <abhinavk@codeaurora.org>,
+ Alex Deucher <alexander.deucher@amd.com>, Sean Paul <seanpaul@chromium.org>,
+ Maxime Ripard <mripard@kernel.org>, Daniel Vetter <daniel@ffwll.ch>,
+ Evan Quan <evan.quan@amd.com>, Mark Yacoub <markyacoub@chromium.org>,
+ Qingqing Zhuo <qingqing.zhuo@amd.com>, "Pan, Xinhui" <Xinhui.Pan@amd.com>,
+ linux-kernel@vger.kernel.org, Simon Ser <contact@emersion.fr>,
+ Dmitry Baryshkov <dmitry.baryshkov@linaro.org>,
+ Damian Hobson-Garcia <dhobsong@igel.co.jp>,
+ Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-> > > +static inline const char *yesno(bool v) { return v ? "yes" : "no"; }
+On Wed, Jan 19, 2022 at 11:35:22AM +0900, Esaki Tomohito wrote:
+> On 2022/01/18 18:53, Andy Shevchenko wrote:
+> > On Mon, Jan 17, 2022 at 02:15:48PM +0900, Esaki Tomohito wrote:
+> > > On 2022/01/14 23:16, Andy Shevchenko wrote:
+> > > > On Fri, Jan 14, 2022 at 07:17:52PM +0900, Tomohito Esaki wrote:
+> > > > > The LINEAR modifier is advertised as default if a driver doesn't specify
+> > > > > modifiers.
+> > > > 
+> > > > ...
+> > > > 
+> > > > > +	const uint64_t default_modifiers[] = {
+> > > > > +		DRM_FORMAT_MOD_LINEAR,
+> > > > > +		DRM_FORMAT_MOD_INVALID
+> > > > 
+> > > > + Comma?
+> > > 
+> > > There is no mention in the coding style about adding/removing a comma to the
+> > > last element of an array. Is there a policy in drm driver?
+> > > 
+> > > I think the advantage of adding a comma to the last element of an array is
+> > > that diff is only one line when an element is added to the end.
+> > > However since INVALID is always the last element in the modifiers array, I
+> > > think it can be either in this case.
+> > > If there is a policy, I will match it.
+> > 
+> > Indeed, but there is a common sense. The idea behind (multi-line) definitions
+> > that when next time somebody will add an element in the array, there are will
+> > be:
+> > 
+> > a) no additional churn (like in case of this patch, if the item will be added
+> >     at the bottom;
+> > 
+> > b) an element that may not be added behind the terminator, which will look
+> >     weird.
+> > 
+> > That said, the question is if the element is terminator one or not, if not,
+> > comma is better than no comma and vise versa.
+> 
+> Ah I see. In this case, DRM_FORMAT_MOD_INVALID is terminator, so it
+> should not have a comma.
 
-=09return "yes\0no" + v * 4;
+Thanks for pointing this out. In this case we are good and any new item, AFAIU,
+must be added before _INVALID one.
 
-:-)
+-- 
+With Best Regards,
+Andy Shevchenko
 
--
-Registered Address Lakeside, Bramley Road, Mount Farm, Milton Keynes, MK1 1=
-PT, UK
-Registration No: 1397386 (Wales)
 
