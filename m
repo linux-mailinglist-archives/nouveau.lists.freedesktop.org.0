@@ -1,59 +1,58 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 69C0049371A
-	for <lists+nouveau@lfdr.de>; Wed, 19 Jan 2022 10:20:44 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2B82449373C
+	for <lists+nouveau@lfdr.de>; Wed, 19 Jan 2022 10:28:08 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8542E10E99F;
-	Wed, 19 Jan 2022 09:20:41 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4FFE010EA5D;
+	Wed, 19 Jan 2022 09:28:04 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8B10F10E9A0;
- Wed, 19 Jan 2022 09:20:40 +0000 (UTC)
-Received: by mail-ed1-x532.google.com with SMTP id b13so8452059edn.0;
- Wed, 19 Jan 2022 01:20:40 -0800 (PST)
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 936F510EA57;
+ Wed, 19 Jan 2022 09:28:02 +0000 (UTC)
+Received: by mail-ed1-x52a.google.com with SMTP id a18so8275912edj.7;
+ Wed, 19 Jan 2022 01:28:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:in-reply-to:references:from:date:message-id:subject:to
- :cc; bh=jFVYA84iERSWI2eG2VbY/NEBmj7G8Zymi2vXwt/X7TE=;
- b=ZUT7Ji4Zmripr3brkosoB8UHJqM1SQCuZUg63GHC/GJtL0nUIs1WkOjV6uAEl5MrRZ
- YitshWOtPZB/dm8f3//S/hYyhgh5DIttuOKHEr16ksPYaQSe1O5YwcToTz75n/822u+K
- nc2NsZKrE+EFrdOYoUDx2gg69mo2tELXqzfktV3nKpQJ6uvJgpZnq6uimRvIbrHgatnQ
- Ryk9udsYw51p7Fpb48CK3E/MawUpvcCIIop09ihvlJhk0bvVv98QIyTTV4QRXc0SIl2Y
- f7RgztYk61QQhJ1uR2E32woSAlBkuRt+3GaX0f+Xt1Jm1kdEtsrr13KWgPoLYHQ47unR
- ZRjQ==
+ :cc; bh=ZpjZiXge5MmLdeZ7sq62ywqFLlshFcV242w1B1ga8fE=;
+ b=alYODJFwKJyRXVgjCth6glBQ83blPbhgQGo/sKN3ZZ0kWO417f3L/4pJ1/SlzdDTQq
+ AJVy81nkYez2Ys3CVjm1fbAxTB8ZcvAYVd+6RVN+SrL0rvyOGW32FmMybkLPe45Mbf9a
+ pGZ4YJK3/fRPLNPN+sq34WAQ2CgLGNTGklvMvonBXMMTAR3AW6G3X90zQjDK7/wAjUVn
+ QYsMUALvP7okIJOrrrKojdwdK43064rtKD0qOJYWFoaS7b0dXKKrsST0V9+tK3txvYpC
+ kmNr04dKaaYql3IJC++NcRucl1mR3xKBl/kMl6b5lwcWXoHvV4P65C99RUDI94OWPDUI
+ SRQA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:in-reply-to:references:from:date
  :message-id:subject:to:cc;
- bh=jFVYA84iERSWI2eG2VbY/NEBmj7G8Zymi2vXwt/X7TE=;
- b=ZD0hatwDNV+dzHWSTeme9Q8tNj5r1ZDmwuAPzupcj2p3F8eNmBt9z6Wgbxk6WVRjeg
- LrT5Kk7BuOaF8xnXU+FEFfgeLK0vA6/eUZp1VJ+xMjO+mGx6i/0ccDQr9ZuTeJy+o+At
- 9tsKPUP8gyY/+5l4npRXBkek/IFjsHdY1dZzlVMG5EVHpGX9p/73yTtacBYy42ugaKyn
- 6Ys5SU6g7Zw5ecYP0oeX4cvxcuVRiiiNDe6a+xZL5ltwlxBF83IImQ1mOfmNKgT+c6Ws
- AWIzjg0PIK97OqTFSUclQoxiilcmOAc3ef/cSzXhnQPig24Ni4A6lhj9xuzoGoPe+Bag
- +pZg==
-X-Gm-Message-State: AOAM531+2RWrfuDSIdKyvEXXy9SYomkvyDwSGeYE1aklHqfqSHUEQthM
- c1EIQBpam8OxciQpnHdkZEG47UZhNP1eOUAf97Q=
-X-Google-Smtp-Source: ABdhPJwsoxqyH4FPYot3nhU44Ferdvu2ZNJNGMmTIZrzMRA3gUfXGcFXqMKOzjpJVUYAPO4NHNC3SHSENLknyWe/Lf4=
-X-Received: by 2002:a17:907:6e0b:: with SMTP id
- sd11mr24475371ejc.132.1642584039027; 
- Wed, 19 Jan 2022 01:20:39 -0800 (PST)
+ bh=ZpjZiXge5MmLdeZ7sq62ywqFLlshFcV242w1B1ga8fE=;
+ b=MHxui0Rqslv26nmOqdPP6N0fCONTz/6mxVILBWPWJcGbNmvhDVPYfIPE1Wj5yq4reS
+ Qy7+NlACz8ivFy8/6dDFiuT1bNcSKpZwUy/xxXE0Gsmwz6RkBmPe9h6MRwLtdT8l0caD
+ JWX9V8AW8QRUAV5Vvc3DCZj/g4MQVv7cnwck9Dj+56hELs+RHus024ePSpR+I7LBwBMK
+ 3LUqJLo5B1qI0YKEdJqbCBPwv7WqtjzwwpPZ053lh6+mVCWUvUwLx9yUthzTlX6tjswg
+ mlsIxBJDT6tMVVP8ACC+g/BJllPH6izvXo9ZcSKQ9NQ4BANgg4fqh4GFQqyGbqsN6bmB
+ zpiA==
+X-Gm-Message-State: AOAM532rzf71edgVnO3a2f1Nd6RrEGO50Q73tt4tzatIoEMFEWdXKah+
+ NADEHDfGNr82cNjoRTkCgASp3erpTYPwhbSfvWg=
+X-Google-Smtp-Source: ABdhPJx0+0PoGb9LmeItG8Oe9e0LaAcBBxz4OlRtPZtJuTrjHgW+G57PsDi+wgXkupxxYhfKxWl20N+4+hMdKmpgkJk=
+X-Received: by 2002:a05:6402:4c5:: with SMTP id
+ n5mr29750107edw.122.1642584481124; 
+ Wed, 19 Jan 2022 01:28:01 -0800 (PST)
 MIME-Version: 1.0
-Received: by 2002:a17:907:9713:0:0:0:0 with HTTP; Wed, 19 Jan 2022 01:20:38
+Received: by 2002:a17:907:9713:0:0:0:0 with HTTP; Wed, 19 Jan 2022 01:28:00
  -0800 (PST)
-In-Reply-To: <20220119072450.2890107-3-lucas.demarchi@intel.com>
+In-Reply-To: <20220119072450.2890107-1-lucas.demarchi@intel.com>
 References: <20220119072450.2890107-1-lucas.demarchi@intel.com>
- <20220119072450.2890107-3-lucas.demarchi@intel.com>
 From: Andy Shevchenko <andy.shevchenko@gmail.com>
-Date: Wed, 19 Jan 2022 11:20:38 +0200
-Message-ID: <CAHp75Vc4bdu1OTi2t-fHeHkmnVgd6LCdeotnGEH_+q4EGk3OmQ@mail.gmail.com>
+Date: Wed, 19 Jan 2022 11:28:00 +0200
+Message-ID: <CAHp75Veu+b48FiEwvPy1v2LUw9ytk7Hj9w06B8nTHFOddefMSA@mail.gmail.com>
 To: Lucas De Marchi <lucas.demarchi@intel.com>
-Content-Type: multipart/alternative; boundary="00000000000028f6a405d5ebe660"
-Subject: Re: [Nouveau] [PATCH 2/3] lib/string_helpers: Add helpers for
- enable[d]/disable[d]
+Content-Type: multipart/alternative; boundary="00000000000082d4da05d5ec006a"
+Subject: Re: [Nouveau] [PATCH 0/3] lib/string_helpers: Add a few string
+ helpers
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -96,154 +95,337 @@ Cc: Emma Anholt <emma@anholt.net>, David Airlie <airlied@linux.ie>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
---00000000000028f6a405d5ebe660
+--00000000000082d4da05d5ec006a
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
 On Wednesday, January 19, 2022, Lucas De Marchi <lucas.demarchi@intel.com>
 wrote:
 
-> Follow the yes/no logic and add helpers for enabled/disabled and
-> enable/disable - those are not so common throughout the kernel,
-> but they give a nice way to reuse the strings to log things as
-> enabled/disabled or enable/disable.
+> Add some helpers under lib/string_helpers.h so they can be used
+> throughout the kernel. When I started doing this there were 2 other
+> previous attempts I know of, not counting the iterations each of them
+> had:
 >
-> Signed-off-by: Lucas De Marchi <lucas.demarchi@intel.com>
-> ---
->  drivers/gpu/drm/i915/i915_utils.h | 10 ----------
->  include/linux/string_helpers.h    |  2 ++
->  2 files changed, 2 insertions(+), 10 deletions(-)
+> 1) https://lore.kernel.org/all/20191023131308.9420-1-jani.
+> nikula@intel.com/
+> 2) https://lore.kernel.org/all/20210215142137.64476-1-andriy.
+> shevchenko@linux.intel.com/#t
 >
-> diff --git a/drivers/gpu/drm/i915/i915_utils.h
-> b/drivers/gpu/drm/i915/i915_utils.h
-> index 2a8781cc648b..cbec79bae0d2 100644
-> --- a/drivers/gpu/drm/i915/i915_utils.h
-> +++ b/drivers/gpu/drm/i915/i915_utils.h
-> @@ -419,16 +419,6 @@ static inline const char *onoff(bool v)
->         return v ? "on" : "off";
->  }
+> Going through the comments I tried to find some common ground and
+> justification for what is in here, addressing some of the concerns
+> raised.
 >
-> -static inline const char *enabledisable(bool v)
-> -{
-> -       return v ? "enable" : "disable";
-> -}
-> -
-> -static inline const char *enableddisabled(bool v)
-> -{
-> -       return v ? "enabled" : "disabled";
-> -}
-> -
->  void add_taint_for_CI(struct drm_i915_private *i915, unsigned int taint);
->  static inline void __add_taint_for_CI(unsigned int taint)
->  {
-> diff --git a/include/linux/string_helpers.h b/include/linux/string_
-> helpers.h
-> index e980dec05d31..e4b82f364ee1 100644
-> --- a/include/linux/string_helpers.h
-> +++ b/include/linux/string_helpers.h
-> @@ -103,5 +103,7 @@ char *kstrdup_quotable_file(struct file *file, gfp_t
-> gfp);
->  void kfree_strarray(char **array, size_t n);
+> a. This version should be a drop-in replacement for what is currently in
+>    the tree, with no change in behavior or binary size. For binary
+>    size what I checked wat that the linked objects in the end have the
+>    same size (gcc 11). From comments in the previous attempts this seems
+>    also the case for earlier compiler versions
 >
->  static inline const char *yesno(bool v) { return v ? "yes" : "no"; }
-> +static inline const char *enabledisable(bool v) { return v ? "enable" :
-> "disable"; }
-> +static inline const char *enableddisabled(bool v) { return v ? "enabled"
-> : "disabled"; }
-
-
-Looks not readable even if takes 80 characters. Please, keep original style.
-
-
-I believe you wanted to have nice negative statistics from day 1, then you
-may add more patches in the series to cleanup more users.
-
-
-
-
+> b. I didn't change the function name to choice_* as suggested by Andrew
+>    Morton in 20191023155619.43e0013f0c8c673a5c508c1e@linux-foundation.org
+>    because other people argumented in favor of shorter names for these
+>    simple helpers - if they are long and people simply not use due to
+>    that, we failed
 >
->  #endif
+> c. Use string_helper.h for these helpers - pulling string.h in the
+>    compilations units was one of the concerns and I think re-using this
+>    already existing header is better than creating a new string-choice.h
+>
+> d. This doesn't bring onoff() helper as there are some places in the
+>    kernel with onoff as variable - another name is probably needed for
+>    this function in order not to shadow the variable, or those variables
+>    could be renamed.  Or if people wanting  <someprefix>
+>    try to find a short one
+>
+> e. One alternative to all of this suggested by Christian K=C3=B6nig
+>    (43456ba7-c372-84cc-4949-dcb817188e21@amd.com) would be to add a
+>    printk format. But besides the comment, he also seemed to like
+>    the common function. This brought the argument from others that the
+>    simple yesno()/enabledisable() already used in the code is easier to
+>    remember and use than e.g. %py[DOY]
+>
+> Last patch also has some additional conversion of open coded cases. I
+> preferred starting with drm/ since this is "closer to home".
+>
+> I hope this is a good summary of the previous attempts and a way we can
+> move forward.
+>
+> Andrew Morton, Petr Mladek, Andy Shevchenko: if this is accepted, my
+> proposal is to take first 2 patches either through mm tree or maybe
+> vsprintf. Last patch can be taken later through drm.
+
+
+
+I believe the best if we go via drm-misc with the entire series.
+
+I have couple of comments, after addressing them:
+
+Reviewed-by: Andy Shevchenko <andy.shevchenko@gmail.com>
+
+
+> thanks
+> Lucas De Marchi
+>
+> Cc: Alex Deucher <alexander.deucher@amd.com>
+> Cc: Andrew Morton <akpm@linux-foundation.org>
+> Cc: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+> Cc: Andy Shevchenko <andy.shevchenko@gmail.com>
+> Cc: Ben Skeggs <bskeggs@redhat.com>
+> Cc: Christian K=C3=B6nig <christian.koenig@amd.com>
+> Cc: Chris Wilson <chris@chris-wilson.co.uk>
+> Cc: Daniel Vetter <daniel@ffwll.ch>
+> Cc: David Airlie <airlied@linux.ie>
+> Cc: David S. Miller <davem@davemloft.net>
+> Cc: Emma Anholt <emma@anholt.net>
+> Cc: Eryk Brol <eryk.brol@amd.com>
+> Cc: Francis Laniel <laniel_francis@privacyrequired.com>
+> Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+> Cc: Harry Wentland <harry.wentland@amd.com>
+> Cc: Jakub Kicinski <kuba@kernel.org>
+> Cc: Jani Nikula <jani.nikula@linux.intel.com>
+> Cc: Joonas Lahtinen <joonas.lahtinen@linux.intel.com>
+> Cc: Julia Lawall <julia.lawall@lip6.fr>
+> Cc: Kentaro Takeda <takedakn@nttdata.co.jp>
+> Cc: Leo Li <sunpeng.li@amd.com>
+> Cc: Mikita Lipski <mikita.lipski@amd.com>
+> Cc: Petr Mladek <pmladek@suse.com>
+> Cc: Rahul Lakkireddy <rahul.lakkireddy@chelsio.com>
+> Cc: Raju Rangoju <rajur@chelsio.com>
+> Cc: Rasmus Villemoes <linux@rasmusvillemoes.dk>
+> Cc: Rodrigo Vivi <rodrigo.vivi@intel.com>
+> Cc: Sakari Ailus <sakari.ailus@linux.intel.com>
+> Cc: Sergey Senozhatsky <sergey.senozhatsky@gmail.com>
+> Cc: Steven Rostedt <rostedt@goodmis.org>
+> Cc: Vishal Kulkarni <vishal@chelsio.com>
+>
+> Lucas De Marchi (3):
+>   lib/string_helpers: Consolidate yesno() implementation
+>   lib/string_helpers: Add helpers for enable[d]/disable[d]
+>   drm: Convert open yes/no strings to yesno()
+>
+>  drivers/gpu/drm/amd/amdgpu/atom.c              |  3 ++-
+>  .../amd/display/amdgpu_dm/amdgpu_dm_debugfs.c  |  6 +-----
+>  drivers/gpu/drm/drm_client_modeset.c           |  3 ++-
+>  drivers/gpu/drm/drm_dp_helper.c                |  3 ++-
+>  drivers/gpu/drm/drm_gem.c                      |  3 ++-
+>  drivers/gpu/drm/i915/i915_utils.h              | 15 ---------------
+>  drivers/gpu/drm/nouveau/nvkm/subdev/i2c/aux.c  |  4 +++-
+>  drivers/gpu/drm/radeon/atom.c                  |  3 ++-
+>  drivers/gpu/drm/v3d/v3d_debugfs.c              | 11 ++++++-----
+>  drivers/gpu/drm/virtio/virtgpu_debugfs.c       |  3 ++-
+>  .../net/ethernet/chelsio/cxgb4/cxgb4_debugfs.c | 11 -----------
+>  include/linux/string_helpers.h                 |  4 ++++
+>  security/tomoyo/audit.c                        |  2 +-
+>  security/tomoyo/common.c                       | 18 ++++--------------
+>  security/tomoyo/common.h                       |  1 -
+>  15 files changed, 31 insertions(+), 59 deletions(-)
+>
 > --
 > 2.34.1
 >
 >
 
--- 
+--=20
 With Best Regards,
 Andy Shevchenko
 
---00000000000028f6a405d5ebe660
+--00000000000082d4da05d5ec006a
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
 <br><br>On Wednesday, January 19, 2022, Lucas De Marchi &lt;<a href=3D"mail=
 to:lucas.demarchi@intel.com">lucas.demarchi@intel.com</a>&gt; wrote:<br><bl=
 ockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #=
-ccc solid;padding-left:1ex">Follow the yes/no logic and add helpers for ena=
-bled/disabled and<br>
-enable/disable - those are not so common throughout the kernel,<br>
-but they give a nice way to reuse the strings to log things as<br>
-enabled/disabled or enable/disable.<br>
+ccc solid;padding-left:1ex">Add some helpers under lib/string_helpers.h so =
+they can be used<br>
+throughout the kernel. When I started doing this there were 2 other<br>
+previous attempts I know of, not counting the iterations each of them<br>
+had:<br>
 <br>
-Signed-off-by: Lucas De Marchi &lt;<a href=3D"mailto:lucas.demarchi@intel.c=
-om">lucas.demarchi@intel.com</a>&gt;<br>
----<br>
-=C2=A0drivers/gpu/drm/i915/i915_<wbr>utils.h | 10 ----------<br>
-=C2=A0include/linux/string_helpers.h=C2=A0 =C2=A0 |=C2=A0 2 ++<br>
-=C2=A02 files changed, 2 insertions(+), 10 deletions(-)<br>
-<br>
-diff --git a/drivers/gpu/drm/i915/i915_<wbr>utils.h b/drivers/gpu/drm/i915/=
-i915_<wbr>utils.h<br>
-index 2a8781cc648b..cbec79bae0d2 100644<br>
---- a/drivers/gpu/drm/i915/i915_<wbr>utils.h<br>
-+++ b/drivers/gpu/drm/i915/i915_<wbr>utils.h<br>
-@@ -419,16 +419,6 @@ static inline const char *onoff(bool v)<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 return v ? &quot;on&quot; : &quot;off&quot;;<br=
+1) <a href=3D"https://lore.kernel.org/all/20191023131308.9420-1-jani.nikula=
+@intel.com/" target=3D"_blank">https://lore.kernel.org/all/<wbr>20191023131=
+308.9420-1-jani.<wbr>nikula@intel.com/</a><br>
+2) <a href=3D"https://lore.kernel.org/all/20210215142137.64476-1-andriy.she=
+vchenko@linux.intel.com/#t" target=3D"_blank">https://lore.kernel.org/all/<=
+wbr>20210215142137.64476-1-andriy.<wbr>shevchenko@linux.intel.com/#t</a><br=
 >
-=C2=A0}<br>
 <br>
--static inline const char *enabledisable(bool v)<br>
--{<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0return v ? &quot;enable&quot; : &quot;disable&q=
-uot;;<br>
--}<br>
--<br>
--static inline const char *enableddisabled(bool v)<br>
--{<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0return v ? &quot;enabled&quot; : &quot;disabled=
-&quot;;<br>
--}<br>
--<br>
-=C2=A0void add_taint_for_CI(struct drm_i915_private *i915, unsigned int tai=
-nt);<br>
-=C2=A0static inline void __add_taint_for_CI(unsigned int taint)<br>
-=C2=A0{<br>
-diff --git a/include/linux/string_<wbr>helpers.h b/include/linux/string_<wb=
-r>helpers.h<br>
-index e980dec05d31..e4b82f364ee1 100644<br>
---- a/include/linux/string_<wbr>helpers.h<br>
-+++ b/include/linux/string_<wbr>helpers.h<br>
-@@ -103,5 +103,7 @@ char *kstrdup_quotable_file(struct file *file, gfp_t gf=
-p);<br>
-=C2=A0void kfree_strarray(char **array, size_t n);<br>
+Going through the comments I tried to find some common ground and<br>
+justification for what is in here, addressing some of the concerns<br>
+raised.<br>
 <br>
-=C2=A0static inline const char *yesno(bool v) { return v ? &quot;yes&quot; =
-: &quot;no&quot;; }<br>
-+static inline const char *enabledisable(bool v) { return v ? &quot;enable&=
-quot; : &quot;disable&quot;; }<br>
-+static inline const char *enableddisabled(bool v) { return v ? &quot;enabl=
-ed&quot; : &quot;disabled&quot;; }</blockquote><div><br></div><div>Looks no=
-t readable even if takes 80 characters. Please, keep original style.</div><=
-div><br></div><div><br></div><div>I believe you wanted to have nice negativ=
-e statistics from day 1, then you may add more patches in the series to cle=
-anup more users.</div><div><br></div><div><br></div><div>=C2=A0</div><block=
-quote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc=
- solid;padding-left:1ex">
+a. This version should be a drop-in replacement for what is currently in<br=
+>
+=C2=A0 =C2=A0the tree, with no change in behavior or binary size. For binar=
+y<br>
+=C2=A0 =C2=A0size what I checked wat that the linked objects in the end hav=
+e the<br>
+=C2=A0 =C2=A0same size (gcc 11). From comments in the previous attempts thi=
+s seems<br>
+=C2=A0 =C2=A0also the case for earlier compiler versions<br>
 <br>
-=C2=A0#endif<br>
+b. I didn&#39;t change the function name to choice_* as suggested by Andrew=
+<br>
+=C2=A0 =C2=A0Morton in <a href=3D"mailto:20191023155619.43e0013f0c8c673a5c5=
+08c1e@linux-foundation.org">20191023155619.<wbr>43e0013f0c8c673a5c508c1e@<w=
+br>linux-foundation.org</a><br>
+=C2=A0 =C2=A0because other people argumented in favor of shorter names for =
+these<br>
+=C2=A0 =C2=A0simple helpers - if they are long and people simply not use du=
+e to<br>
+=C2=A0 =C2=A0that, we failed<br>
+<br>
+c. Use string_helper.h for these helpers - pulling string.h in the<br>
+=C2=A0 =C2=A0compilations units was one of the concerns and I think re-usin=
+g this<br>
+=C2=A0 =C2=A0already existing header is better than creating a new string-c=
+hoice.h<br>
+<br>
+d. This doesn&#39;t bring onoff() helper as there are some places in the<br=
+>
+=C2=A0 =C2=A0kernel with onoff as variable - another name is probably neede=
+d for<br>
+=C2=A0 =C2=A0this function in order not to shadow the variable, or those va=
+riables<br>
+=C2=A0 =C2=A0could be renamed.=C2=A0 Or if people wanting=C2=A0 &lt;somepre=
+fix&gt;<br>
+=C2=A0 =C2=A0try to find a short one<br>
+<br>
+e. One alternative to all of this suggested by Christian K=C3=B6nig<br>
+=C2=A0 =C2=A0(<a href=3D"mailto:43456ba7-c372-84cc-4949-dcb817188e21@amd.co=
+m">43456ba7-c372-84cc-4949-<wbr>dcb817188e21@amd.com</a>) would be to add a=
+<br>
+=C2=A0 =C2=A0printk format. But besides the comment, he also seemed to like=
+<br>
+=C2=A0 =C2=A0the common function. This brought the argument from others tha=
+t the<br>
+=C2=A0 =C2=A0simple yesno()/enabledisable() already used in the code is eas=
+ier to<br>
+=C2=A0 =C2=A0remember and use than e.g. %py[DOY]<br>
+<br>
+Last patch also has some additional conversion of open coded cases. I<br>
+preferred starting with drm/ since this is &quot;closer to home&quot;.<br>
+<br>
+I hope this is a good summary of the previous attempts and a way we can<br>
+move forward.<br>
+<br>
+Andrew Morton, Petr Mladek, Andy Shevchenko: if this is accepted, my<br>
+proposal is to take first 2 patches either through mm tree or maybe<br>
+vsprintf. Last patch can be taken later through drm.</blockquote><div><br><=
+/div><div><br></div><div>I believe the best if we go via drm-misc with the =
+entire series.</div><div><br></div><div>I have couple of comments, after ad=
+dressing them:</div><div><br></div><div>Reviewed-by: Andy Shevchenko &lt;<a=
+ href=3D"mailto:andy.shevchenko@gmail.com">andy.shevchenko@gmail.com</a>&gt=
+;</div><div>=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:0=
+ 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">
+thanks<br>
+Lucas De Marchi<br>
+<br>
+Cc: Alex Deucher &lt;<a href=3D"mailto:alexander.deucher@amd.com">alexander=
+.deucher@amd.com</a>&gt;<br>
+Cc: Andrew Morton &lt;<a href=3D"mailto:akpm@linux-foundation.org">akpm@lin=
+ux-foundation.org</a>&gt;<br>
+Cc: Andy Shevchenko &lt;<a href=3D"mailto:andriy.shevchenko@linux.intel.com=
+">andriy.shevchenko@linux.<wbr>intel.com</a>&gt;<br>
+Cc: Andy Shevchenko &lt;<a href=3D"mailto:andy.shevchenko@gmail.com">andy.s=
+hevchenko@gmail.com</a>&gt;<br>
+Cc: Ben Skeggs &lt;<a href=3D"mailto:bskeggs@redhat.com">bskeggs@redhat.com=
+</a>&gt;<br>
+Cc: Christian K=C3=B6nig &lt;<a href=3D"mailto:christian.koenig@amd.com">ch=
+ristian.koenig@amd.com</a>&gt;<br>
+Cc: Chris Wilson &lt;<a href=3D"mailto:chris@chris-wilson.co.uk">chris@chri=
+s-wilson.co.uk</a>&gt;<br>
+Cc: Daniel Vetter &lt;<a href=3D"mailto:daniel@ffwll.ch">daniel@ffwll.ch</a=
+>&gt;<br>
+Cc: David Airlie &lt;<a href=3D"mailto:airlied@linux.ie">airlied@linux.ie</=
+a>&gt;<br>
+Cc: David S. Miller &lt;<a href=3D"mailto:davem@davemloft.net">davem@daveml=
+oft.net</a>&gt;<br>
+Cc: Emma Anholt &lt;<a href=3D"mailto:emma@anholt.net">emma@anholt.net</a>&=
+gt;<br>
+Cc: Eryk Brol &lt;<a href=3D"mailto:eryk.brol@amd.com">eryk.brol@amd.com</a=
+>&gt;<br>
+Cc: Francis Laniel &lt;<a href=3D"mailto:laniel_francis@privacyrequired.com=
+">laniel_francis@<wbr>privacyrequired.com</a>&gt;<br>
+Cc: Greg Kroah-Hartman &lt;<a href=3D"mailto:gregkh@linuxfoundation.org">gr=
+egkh@linuxfoundation.org</a>&gt;<br>
+Cc: Harry Wentland &lt;<a href=3D"mailto:harry.wentland@amd.com">harry.went=
+land@amd.com</a>&gt;<br>
+Cc: Jakub Kicinski &lt;<a href=3D"mailto:kuba@kernel.org">kuba@kernel.org</=
+a>&gt;<br>
+Cc: Jani Nikula &lt;<a href=3D"mailto:jani.nikula@linux.intel.com">jani.nik=
+ula@linux.intel.com</a>&gt;<br>
+Cc: Joonas Lahtinen &lt;<a href=3D"mailto:joonas.lahtinen@linux.intel.com">=
+joonas.lahtinen@linux.intel.<wbr>com</a>&gt;<br>
+Cc: Julia Lawall &lt;<a href=3D"mailto:julia.lawall@lip6.fr">julia.lawall@l=
+ip6.fr</a>&gt;<br>
+Cc: Kentaro Takeda &lt;<a href=3D"mailto:takedakn@nttdata.co.jp">takedakn@n=
+ttdata.co.jp</a>&gt;<br>
+Cc: Leo Li &lt;<a href=3D"mailto:sunpeng.li@amd.com">sunpeng.li@amd.com</a>=
+&gt;<br>
+Cc: Mikita Lipski &lt;<a href=3D"mailto:mikita.lipski@amd.com">mikita.lipsk=
+i@amd.com</a>&gt;<br>
+Cc: Petr Mladek &lt;<a href=3D"mailto:pmladek@suse.com">pmladek@suse.com</a=
+>&gt;<br>
+Cc: Rahul Lakkireddy &lt;<a href=3D"mailto:rahul.lakkireddy@chelsio.com">ra=
+hul.lakkireddy@chelsio.com</a>&gt;<br>
+Cc: Raju Rangoju &lt;<a href=3D"mailto:rajur@chelsio.com">rajur@chelsio.com=
+</a>&gt;<br>
+Cc: Rasmus Villemoes &lt;<a href=3D"mailto:linux@rasmusvillemoes.dk">linux@=
+rasmusvillemoes.dk</a>&gt;<br>
+Cc: Rodrigo Vivi &lt;<a href=3D"mailto:rodrigo.vivi@intel.com">rodrigo.vivi=
+@intel.com</a>&gt;<br>
+Cc: Sakari Ailus &lt;<a href=3D"mailto:sakari.ailus@linux.intel.com">sakari=
+.ailus@linux.intel.com</a>&gt;<br>
+Cc: Sergey Senozhatsky &lt;<a href=3D"mailto:sergey.senozhatsky@gmail.com">=
+sergey.senozhatsky@gmail.com</a>&gt;<br>
+Cc: Steven Rostedt &lt;<a href=3D"mailto:rostedt@goodmis.org">rostedt@goodm=
+is.org</a>&gt;<br>
+Cc: Vishal Kulkarni &lt;<a href=3D"mailto:vishal@chelsio.com">vishal@chelsi=
+o.com</a>&gt;<br>
+<br>
+Lucas De Marchi (3):<br>
+=C2=A0 lib/string_helpers: Consolidate yesno() implementation<br>
+=C2=A0 lib/string_helpers: Add helpers for enable[d]/disable[d]<br>
+=C2=A0 drm: Convert open yes/no strings to yesno()<br>
+<br>
+=C2=A0drivers/gpu/drm/amd/amdgpu/<wbr>atom.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 |=C2=A0 3 ++-<br>
+=C2=A0.../amd/display/amdgpu_dm/<wbr>amdgpu_dm_debugfs.c=C2=A0 |=C2=A0 6 +-=
+----<br>
+=C2=A0drivers/gpu/drm/drm_client_<wbr>modeset.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0|=C2=A0 3 ++-<br>
+=C2=A0drivers/gpu/drm/drm_dp_helper.<wbr>c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 3 ++-<br>
+=C2=A0drivers/gpu/drm/drm_gem.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 3 ++-<br>
+=C2=A0drivers/gpu/drm/i915/i915_<wbr>utils.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 | 15 ---------------<br>
+=C2=A0drivers/gpu/drm/nouveau/nvkm/<wbr>subdev/i2c/aux.c=C2=A0 |=C2=A0 4 ++=
++-<br>
+=C2=A0drivers/gpu/drm/radeon/atom.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 3 ++-<br>
+=C2=A0drivers/gpu/drm/v3d/v3d_<wbr>debugfs.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 | 11 ++++++-----<br>
+=C2=A0drivers/gpu/drm/virtio/<wbr>virtgpu_debugfs.c=C2=A0 =C2=A0 =C2=A0 =C2=
+=A0|=C2=A0 3 ++-<br>
+=C2=A0.../net/ethernet/chelsio/<wbr>cxgb4/cxgb4_debugfs.c | 11 -----------<=
+br>
+=C2=A0include/linux/string_helpers.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 4 ++++<br>
+=C2=A0security/tomoyo/audit.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 2 +-<br>
+=C2=A0security/tomoyo/common.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 18 ++++--------------<br>
+=C2=A0security/tomoyo/common.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 1 -<br>
+=C2=A015 files changed, 31 insertions(+), 59 deletions(-)<br>
+<br>
 -- <br>
 2.34.1<br>
 <br>
 </blockquote><br><br>-- <br>With Best Regards,<br>Andy Shevchenko<br><br><b=
 r>
 
---00000000000028f6a405d5ebe660--
+--00000000000082d4da05d5ec006a--
