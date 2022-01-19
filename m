@@ -2,53 +2,42 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 71527494108
-	for <lists+nouveau@lfdr.de>; Wed, 19 Jan 2022 20:39:31 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 44DF649423B
+	for <lists+nouveau@lfdr.de>; Wed, 19 Jan 2022 21:58:33 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A59E310F0EF;
-	Wed, 19 Jan 2022 19:39:27 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 10CCD10E201;
+	Wed, 19 Jan 2022 20:58:30 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mga17.intel.com (mga17.intel.com [192.55.52.151])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8DC8010F0E7;
- Wed, 19 Jan 2022 19:39:26 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1642621166; x=1674157166;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:in-reply-to;
- bh=wjoA2KAzAua/sWhboAdUBsDnQlEM3jScHHUyibF2GDY=;
- b=E6LgJ4O5rqnQTIUVs6sXJ8UPWaAY7I6DLgOlTrTB0Mj93am0sW72WfCD
- dr1qiOMKl7LR4vnA9Q56T3EQ/I2FXBp9bZkxzQdbrUDEIjd9x7XLXr0tC
- jCoiz+iTo5hz8cayfAPBuMcCV1t3Iv77RydBWxi+6SbuAefZ4nxVKelsH
- JgFBiLFcK610wWyqnKKtRj008SVG5blYmkevK/XNwhX3OfFjFr5tvhz77
- yFUnIhvLvpqeOcINRuD/8QS0FzgERfO9uWCFyCCQz6BGHMBSUG1+tEeur
- GWQMB0eI04/yDv5Z56IPAskouU9t/a9SaPipWNlDwMzBxyE3ZG064HOua w==;
-X-IronPort-AV: E=McAfee;i="6200,9189,10231"; a="225846458"
-X-IronPort-AV: E=Sophos;i="5.88,300,1635231600"; d="scan'208";a="225846458"
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
- by fmsmga107.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 19 Jan 2022 11:32:06 -0800
-X-IronPort-AV: E=Sophos;i="5.88,300,1635231600"; d="scan'208";a="672288940"
-Received: from smile.fi.intel.com ([10.237.72.61])
- by fmsmga001-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 19 Jan 2022 11:31:58 -0800
-Received: from andy by smile.fi.intel.com with local (Exim 4.95)
- (envelope-from <andriy.shevchenko@linux.intel.com>)
- id 1nAGfP-00CEep-7a; Wed, 19 Jan 2022 21:30:47 +0200
-Date: Wed, 19 Jan 2022 21:30:47 +0200
-From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-To: Lucas De Marchi <lucas.demarchi@intel.com>
-Message-ID: <Yehm5/DJ5Ljo1EWs@smile.fi.intel.com>
+Received: from ams.source.kernel.org (ams.source.kernel.org
+ [IPv6:2604:1380:4601:e00::1])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 4619110E203;
+ Wed, 19 Jan 2022 20:58:28 +0000 (UTC)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by ams.source.kernel.org (Postfix) with ESMTPS id D4040B81BFB;
+ Wed, 19 Jan 2022 20:58:24 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DD93AC340E1;
+ Wed, 19 Jan 2022 20:58:19 +0000 (UTC)
+Date: Wed, 19 Jan 2022 15:58:18 -0500
+From: Steven Rostedt <rostedt@goodmis.org>
+To: Andy Shevchenko <andy.shevchenko@gmail.com>
+Message-ID: <20220119155818.7ab45e0e@gandalf.local.home>
+In-Reply-To: <YehlEe1prbwhxZEv@smile.fi.intel.com>
 References: <20220119072450.2890107-1-lucas.demarchi@intel.com>
- <20220119072450.2890107-4-lucas.demarchi@intel.com>
+ <20220119072450.2890107-2-lucas.demarchi@intel.com>
+ <CAHp75Vf5QOD_UtDK8VbxNApEBuJvzUic0NkzDNmRo3Q7Ud+=qw@mail.gmail.com>
+ <20220119100102.61f9bfde@gandalf.local.home>
+ <06420a70f4434c2b8590cc89cad0dd6a@AcuMS.aculab.com>
+ <9c26ca9bf75d494ea966059d9bcbc2b5@AcuMS.aculab.com>
+ <YehlEe1prbwhxZEv@smile.fi.intel.com>
+X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20220119072450.2890107-4-lucas.demarchi@intel.com>
-Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
-Subject: Re: [Nouveau] [PATCH 3/3] drm: Convert open yes/no strings to
- yesno()
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+Subject: Re: [Nouveau] [PATCH 1/3] lib/string_helpers: Consolidate yesno()
+ implementation
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,118 +50,51 @@ List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
 Cc: Emma Anholt <emma@anholt.net>, David Airlie <airlied@linux.ie>,
- nouveau@lists.freedesktop.org,
+ "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
  Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- Rasmus Villemoes <linux@rasmusvillemoes.dk>, dri-devel@lists.freedesktop.org,
+ Rasmus Villemoes <linux@rasmusvillemoes.dk>,
+ "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
  Chris Wilson <chris@chris-wilson.co.uk>, Vishal Kulkarni <vishal@chelsio.com>,
  Francis Laniel <laniel_francis@privacyrequired.com>,
- Kentaro Takeda <takedakn@nttdata.co.jp>, amd-gfx@lists.freedesktop.org,
+ Kentaro Takeda <takedakn@nttdata.co.jp>,
+ "amd-gfx@lists.freedesktop.org" <amd-gfx@lists.freedesktop.org>,
  Ben Skeggs <bskeggs@redhat.com>, Jakub Kicinski <kuba@kernel.org>,
  Harry Wentland <harry.wentland@amd.com>, Petr Mladek <pmladek@suse.com>,
  Sakari Ailus <sakari.ailus@linux.intel.com>, Leo Li <sunpeng.li@amd.com>,
- intel-gfx@lists.freedesktop.org, Raju Rangoju <rajur@chelsio.com>,
+ "intel-gfx@lists.freedesktop.org" <intel-gfx@lists.freedesktop.org>,
+ Raju Rangoju <rajur@chelsio.com>, Lucas De Marchi <lucas.demarchi@intel.com>,
  Jani Nikula <jani.nikula@linux.intel.com>, Julia Lawall <julia.lawall@lip6.fr>,
  Rahul Lakkireddy <rahul.lakkireddy@chelsio.com>,
- Steven Rostedt <rostedt@goodmis.org>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
- Mikita Lipski <mikita.lipski@amd.com>, Eryk Brol <eryk.brol@amd.com>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>, linux-kernel@vger.kernel.org,
- Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>, Mikita Lipski <mikita.lipski@amd.com>,
+ Eryk Brol <eryk.brol@amd.com>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>,
  Sergey Senozhatsky <sergey.senozhatsky@gmail.com>,
- linux-security-module@vger.kernel.org, Daniel Vetter <daniel@ffwll.ch>,
- netdev@vger.kernel.org, Alex Deucher <alexander.deucher@amd.com>,
+ "linux-security-module@vger.kernel.org"
+ <linux-security-module@vger.kernel.org>,
+ David Laight <David.Laight@aculab.com>, Daniel Vetter <daniel@ffwll.ch>,
+ "netdev@vger.kernel.org" <netdev@vger.kernel.org>,
+ Alex Deucher <alexander.deucher@amd.com>,
  Andrew Morton <akpm@linux-foundation.org>,
  "David S . Miller" <davem@davemloft.net>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, Jan 18, 2022 at 11:24:50PM -0800, Lucas De Marchi wrote:
-> linux/string_helpers.h provides a helper to return "yes"/"no"
-> strings. Replace the open coded versions with yesno(). The places were
-> identified with the following semantic patch:
+On Wed, 19 Jan 2022 21:22:57 +0200
+Andy Shevchenko <andy.shevchenko@gmail.com> wrote:
+
+> On Wed, Jan 19, 2022 at 04:38:26PM +0000, David Laight wrote:
+> > > > > > +static inline const char *yesno(bool v) { return v ? "yes" : "no"; }  
+> > > 
+> > > 	return "yes\0no" + v * 4;
+> > > 
+> > > :-)  
+> > 
+> > except '"no\0\0yes" + v * 4' works a bit better.  
 > 
-> 	@@
-> 	expression b;
-> 	@@
+> Is it a C code obfuscation contest?
 > 
-> 	- b ? "yes" : "no"
-> 	+ yesno(b)
-> 
-> Then the includes were added, so we include-what-we-use, and parenthesis
-> adjusted in drivers/gpu/drm/v3d/v3d_debugfs.c. After the conversion we
-> still see the same binary sizes:
-> 
->    text    data     bss     dec     hex filename
-> 1442171   60344     800 1503315  16f053 ./drivers/gpu/drm/radeon/radeon.ko
-> 1442171   60344     800 1503315  16f053 ./drivers/gpu/drm/radeon/radeon.ko.old
-> 5985991  324439   33808 6344238  60ce2e ./drivers/gpu/drm/amd/amdgpu/amdgpu.ko
-> 5985991  324439   33808 6344238  60ce2e ./drivers/gpu/drm/amd/amdgpu/amdgpu.ko.old
->  411986   10490    6176  428652   68a6c ./drivers/gpu/drm/drm.ko
->  411986   10490    6176  428652   68a6c ./drivers/gpu/drm/drm.ko.old
-> 1970292  109515    2352 2082159  1fc56f ./drivers/gpu/drm/nouveau/nouveau.ko
-> 1970292  109515    2352 2082159  1fc56f ./drivers/gpu/drm/nouveau/nouveau.ko.old
 
-...
+	return '/'/'/';
 
->  #include <linux/module.h>
->  #include <linux/sched.h>
->  #include <linux/slab.h>
-> +#include <linux/string_helpers.h>
-
-+ blank line?
-
-> +#include <linux/string_helpers.h>
-
-...
-
->  	seq_printf(m, "\tDP branch device present: %s\n",
-> -		   branch_device ? "yes" : "no");
-> +		   yesno(branch_device));
-
-Now it's possible to keep this on one line.
-
-...
-
->  	drm_printf_indent(p, indent, "imported=%s\n",
-> -			  obj->import_attach ? "yes" : "no");
-> +			  yesno(obj->import_attach));
-
-81 here, but anyway, ditto!
-
-...
-
->   */
-
-+blank line here?
-
-> +#include <linux/string_helpers.h>
-> +
->  #include "aux.h"
->  #include "pad.h"
-
-...
-
->  	seq_printf(m, "MMU:        %s\n",
-> -		   (ident2 & V3D_HUB_IDENT2_WITH_MMU) ? "yes" : "no");
-> +		   yesno(ident2 & V3D_HUB_IDENT2_WITH_MMU));
->  	seq_printf(m, "TFU:        %s\n",
-> -		   (ident1 & V3D_HUB_IDENT1_WITH_TFU) ? "yes" : "no");
-> +		   yesno(ident1 & V3D_HUB_IDENT1_WITH_TFU));
->  	seq_printf(m, "TSY:        %s\n",
-> -		   (ident1 & V3D_HUB_IDENT1_WITH_TSY) ? "yes" : "no");
-> +		   yesno(ident1 & V3D_HUB_IDENT1_WITH_TSY));
->  	seq_printf(m, "MSO:        %s\n",
-> -		   (ident1 & V3D_HUB_IDENT1_WITH_MSO) ? "yes" : "no");
-> +		   yesno(ident1 & V3D_HUB_IDENT1_WITH_MSO));
->  	seq_printf(m, "L3C:        %s (%dkb)\n",
-> -		   (ident1 & V3D_HUB_IDENT1_WITH_L3C) ? "yes" : "no",
-> +		   yesno(ident1 & V3D_HUB_IDENT1_WITH_L3C),
->  		   V3D_GET_FIELD(ident2, V3D_HUB_IDENT2_L3C_NKB));
-
-I believe it's fine to join back to have less LOCs (yes, it will be 83 or so,
-but I believe in these cases it's very much okay).
-
--- 
-With Best Regards,
-Andy Shevchenko
-
-
+-- Steve
