@@ -2,94 +2,58 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7AAD1493E2E
-	for <lists+nouveau@lfdr.de>; Wed, 19 Jan 2022 17:15:12 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4F746493E79
+	for <lists+nouveau@lfdr.de>; Wed, 19 Jan 2022 17:43:14 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1C17010E35E;
-	Wed, 19 Jan 2022 16:15:09 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3FBF710E1C1;
+	Wed, 19 Jan 2022 16:43:12 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C33A910E39D
- for <nouveau@lists.freedesktop.org>; Wed, 19 Jan 2022 16:15:07 +0000 (UTC)
-Received: by mail-wm1-x32c.google.com with SMTP id p18so6012793wmg.4
- for <nouveau@lists.freedesktop.org>; Wed, 19 Jan 2022 08:15:07 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
- h=date:from:to:cc:subject:message-id:mail-followup-to:references
- :mime-version:content-disposition:content-transfer-encoding
- :in-reply-to; bh=/740EhzwYoGWwplLvQqVEtpoUmpyOdkwft+pAru/eUg=;
- b=CLleadD2rlpyVmC2Y6vZSEoLi9LN/RUvstwkUMHlt3h7gHDd+Twhzs8oNKymBLJ71M
- +mCmZ512cWOY8OIf9l9LSqDn0RzEX5N4nNE80SRlE4EPdjhpbA+VFlLjEUNdd6c7+gmz
- hc/Es0b3squc/LZ7AtYoKuJMwS6NkmXhvHLNA=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:date:from:to:cc:subject:message-id
- :mail-followup-to:references:mime-version:content-disposition
- :content-transfer-encoding:in-reply-to;
- bh=/740EhzwYoGWwplLvQqVEtpoUmpyOdkwft+pAru/eUg=;
- b=KT/ghThlQj4V8zrCdn8zarqzEsT/TU0IPNjcWQ3VxcIZ+O3TK6Kle74m5oVm2pQio5
- 6rpIQFCIIS/p9NRwFlNLMAXEUR6sYDOcDKK5L8n7CslMrskAG9xTaL04BxUy5JrqW+qP
- 8xcLHe4E6+mHM0E1cGil2fq0l4HbmMXUZ1b3y2Akd0TRCf/0HNrvDhpuCKRXrXyCdtq6
- rDixefYd6jKp+mC1ilH72EHCuWUj3v6EsCr6KvBi61YVdPnb7c91ltxw7tP8qXwdKchX
- VoE8ENW5AnStESLArP6r4OyGdkm5VYvGAUlJS7OAtdCAmI/Kbj05s24rB4IkXt1PkuXv
- 5uWA==
-X-Gm-Message-State: AOAM532nqQRyKdfxhBIePvPcSI0sQquIu0LnK6peT3zNtK7V+I5eVpiW
- 6S6LyB6e1NgEq1YQKKd7odSPpA==
-X-Google-Smtp-Source: ABdhPJwiLLIYLwmxveHTo+l6K6jAbRNMKsadqYtKqTPCn9x60CqA3JeQAqEpCJtSMiU+47LHV4yaMA==
-X-Received: by 2002:adf:fb84:: with SMTP id a4mr30060043wrr.315.1642608906005; 
- Wed, 19 Jan 2022 08:15:06 -0800 (PST)
-Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
- by smtp.gmail.com with ESMTPSA id o13sm298372wrq.37.2022.01.19.08.15.04
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 19 Jan 2022 08:15:05 -0800 (PST)
-Date: Wed, 19 Jan 2022 17:15:02 +0100
-From: Daniel Vetter <daniel@ffwll.ch>
-To: Jani Nikula <jani.nikula@linux.intel.com>
-Message-ID: <Yeg5BpV8tknSPdSQ@phenom.ffwll.local>
-Mail-Followup-To: Jani Nikula <jani.nikula@linux.intel.com>,
- Petr Mladek <pmladek@suse.com>,
- Lucas De Marchi <lucas.demarchi@intel.com>,
- linux-kernel@vger.kernel.org, intel-gfx@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
- linux-security-module@vger.kernel.org,
- nouveau@lists.freedesktop.org, netdev@vger.kernel.org,
- Alex Deucher <alexander.deucher@amd.com>,
- Andrew Morton <akpm@linux-foundation.org>,
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- Andy Shevchenko <andy.shevchenko@gmail.com>,
- Ben Skeggs <bskeggs@redhat.com>,
- Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
- Chris Wilson <chris@chris-wilson.co.uk>,
- David Airlie <airlied@linux.ie>,
- "David S . Miller" <davem@davemloft.net>,
- Emma Anholt <emma@anholt.net>, Eryk Brol <eryk.brol@amd.com>,
- Francis Laniel <laniel_francis@privacyrequired.com>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Harry Wentland <harry.wentland@amd.com>,
- Jakub Kicinski <kuba@kernel.org>,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- Julia Lawall <julia.lawall@lip6.fr>,
- Kentaro Takeda <takedakn@nttdata.co.jp>,
- Leo Li <sunpeng.li@amd.com>, Mikita Lipski <mikita.lipski@amd.com>,
- Rahul Lakkireddy <rahul.lakkireddy@chelsio.com>,
- Raju Rangoju <rajur@chelsio.com>,
- Rasmus Villemoes <linux@rasmusvillemoes.dk>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>,
- Sakari Ailus <sakari.ailus@linux.intel.com>,
- Sergey Senozhatsky <sergey.senozhatsky@gmail.com>,
- Steven Rostedt <rostedt@goodmis.org>,
- Vishal Kulkarni <vishal@chelsio.com>
+X-Greylist: delayed 303 seconds by postgrey-1.36 at gabe;
+ Wed, 19 Jan 2022 16:43:11 UTC
+Received: from eu-smtp-delivery-151.mimecast.com
+ (eu-smtp-delivery-151.mimecast.com [185.58.86.151])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 16F6010E210
+ for <nouveau@lists.freedesktop.org>; Wed, 19 Jan 2022 16:43:10 +0000 (UTC)
+Received: from AcuMS.aculab.com (156.67.243.121 [156.67.243.121]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id
+ uk-mta-70-ad3hgsm6PzCTMw0_BweRrA-1; Wed, 19 Jan 2022 16:37:02 +0000
+X-MC-Unique: ad3hgsm6PzCTMw0_BweRrA-1
+Received: from AcuMS.Aculab.com (fd9f:af1c:a25b:0:994c:f5c2:35d6:9b65) by
+ AcuMS.aculab.com (fd9f:af1c:a25b:0:994c:f5c2:35d6:9b65) with Microsoft SMTP
+ Server (TLS) id 15.0.1497.28; Wed, 19 Jan 2022 16:37:00 +0000
+Received: from AcuMS.Aculab.com ([fe80::994c:f5c2:35d6:9b65]) by
+ AcuMS.aculab.com ([fe80::994c:f5c2:35d6:9b65%12]) with mapi id
+ 15.00.1497.028; Wed, 19 Jan 2022 16:37:00 +0000
+From: David Laight <David.Laight@ACULAB.COM>
+To: 'Steven Rostedt' <rostedt@goodmis.org>, Andy Shevchenko
+ <andy.shevchenko@gmail.com>
+Thread-Topic: [PATCH 1/3] lib/string_helpers: Consolidate yesno()
+ implementation
+Thread-Index: AQHYDUVmV8sHy8JfXU2yTPkp1VbmK6xqitzA
+Date: Wed, 19 Jan 2022 16:37:00 +0000
+Message-ID: <06420a70f4434c2b8590cc89cad0dd6a@AcuMS.aculab.com>
 References: <20220119072450.2890107-1-lucas.demarchi@intel.com>
- <YegPiR7LU8aVisMf@alley> <87tudzbykz.fsf@intel.com>
+ <20220119072450.2890107-2-lucas.demarchi@intel.com>
+ <CAHp75Vf5QOD_UtDK8VbxNApEBuJvzUic0NkzDNmRo3Q7Ud+=qw@mail.gmail.com>
+ <20220119100102.61f9bfde@gandalf.local.home>
+In-Reply-To: <20220119100102.61f9bfde@gandalf.local.home>
+Accept-Language: en-GB, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.202.205.107]
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <87tudzbykz.fsf@intel.com>
-X-Operating-System: Linux phenom 5.10.0-8-amd64 
-Subject: Re: [Nouveau] [PATCH 0/3] lib/string_helpers: Add a few string
- helpers
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=C51A453 smtp.mailfrom=david.laight@aculab.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: aculab.com
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: [Nouveau] [PATCH 1/3] lib/string_helpers: Consolidate yesno()
+ implementation
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -102,132 +66,44 @@ List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
 Cc: Emma Anholt <emma@anholt.net>, David Airlie <airlied@linux.ie>,
- nouveau@lists.freedesktop.org,
+ "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
  Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- Rasmus Villemoes <linux@rasmusvillemoes.dk>, dri-devel@lists.freedesktop.org,
+ Rasmus Villemoes <linux@rasmusvillemoes.dk>,
+ "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
  Chris Wilson <chris@chris-wilson.co.uk>, Vishal Kulkarni <vishal@chelsio.com>,
  Francis Laniel <laniel_francis@privacyrequired.com>,
  Kentaro Takeda <takedakn@nttdata.co.jp>, Mikita Lipski <mikita.lipski@amd.com>,
- amd-gfx@lists.freedesktop.org, Andy Shevchenko <andy.shevchenko@gmail.com>,
- Ben Skeggs <bskeggs@redhat.com>, Jakub Kicinski <kuba@kernel.org>,
- Harry Wentland <harry.wentland@amd.com>, Petr Mladek <pmladek@suse.com>,
- Sakari Ailus <sakari.ailus@linux.intel.com>, Leo Li <sunpeng.li@amd.com>,
- intel-gfx@lists.freedesktop.org, Raju Rangoju <rajur@chelsio.com>,
- Lucas De Marchi <lucas.demarchi@intel.com>,
- Steven Rostedt <rostedt@goodmis.org>, Julia Lawall <julia.lawall@lip6.fr>,
+ "amd-gfx@lists.freedesktop.org" <amd-gfx@lists.freedesktop.org>,
+ Ben Skeggs <bskeggs@redhat.com>, Jakub
+ Kicinski <kuba@kernel.org>, Harry Wentland <harry.wentland@amd.com>,
+ Petr Mladek <pmladek@suse.com>, Sakari Ailus <sakari.ailus@linux.intel.com>,
+ Leo Li <sunpeng.li@amd.com>,
+ "intel-gfx@lists.freedesktop.org" <intel-gfx@lists.freedesktop.org>, Raju
+ Rangoju <rajur@chelsio.com>, Lucas De Marchi <lucas.demarchi@intel.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>, Julia Lawall <julia.lawall@lip6.fr>,
  Rahul Lakkireddy <rahul.lakkireddy@chelsio.com>,
  Rodrigo Vivi <rodrigo.vivi@intel.com>,
  Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- Eryk Brol <eryk.brol@amd.com>, netdev@vger.kernel.org,
- linux-kernel@vger.kernel.org,
- Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+ Eryk Brol <eryk.brol@amd.com>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ =?iso-8859-1?Q?Christian_K=F6nig?= <christian.koenig@amd.com>,
  Sergey Senozhatsky <sergey.senozhatsky@gmail.com>,
- linux-security-module@vger.kernel.org, Daniel Vetter <daniel@ffwll.ch>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Alex Deucher <alexander.deucher@amd.com>,
- Andrew Morton <akpm@linux-foundation.org>,
- "David S . Miller" <davem@davemloft.net>
+ "linux-security-module@vger.kernel.org"
+ <linux-security-module@vger.kernel.org>, Daniel Vetter <daniel@ffwll.ch>,
+ "netdev@vger.kernel.org" <netdev@vger.kernel.org>,
+ Alex Deucher <alexander.deucher@amd.com>, Andrew
+ Morton <akpm@linux-foundation.org>, "David S . Miller" <davem@davemloft.net>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, Jan 19, 2022 at 04:16:12PM +0200, Jani Nikula wrote:
-> On Wed, 19 Jan 2022, Petr Mladek <pmladek@suse.com> wrote:
-> > On Tue 2022-01-18 23:24:47, Lucas De Marchi wrote:
-> >> Add some helpers under lib/string_helpers.h so they can be used
-> >> throughout the kernel. When I started doing this there were 2 other
-> >> previous attempts I know of, not counting the iterations each of them
-> >> had:
-> >> 
-> >> 1) https://lore.kernel.org/all/20191023131308.9420-1-jani.nikula@intel.com/
-> >> 2) https://lore.kernel.org/all/20210215142137.64476-1-andriy.shevchenko@linux.intel.com/#t
-> >> 
-> >> Going through the comments I tried to find some common ground and
-> >> justification for what is in here, addressing some of the concerns
-> >> raised.
-> >> 
-> >> d. This doesn't bring onoff() helper as there are some places in the
-> >>    kernel with onoff as variable - another name is probably needed for
-> >>    this function in order not to shadow the variable, or those variables
-> >>    could be renamed.  Or if people wanting  <someprefix>
-> >>    try to find a short one
-> >
-> > I would call it str_on_off().
-> >
-> > And I would actually suggest to use the same style also for
-> > the other helpers.
-> >
-> > The "str_" prefix would make it clear that it is something with
-> > string. There are other <prefix>_on_off() that affect some
-> > functionality, e.g. mute_led_on_off(), e1000_vlan_filter_on_off().
-> >
-> > The dash '_' would significantly help to parse the name. yesno() and
-> > onoff() are nicely short and kind of acceptable. But "enabledisable()"
-> > is a puzzle.
-> >
-> > IMHO, str_yes_no(), str_on_off(), str_enable_disable() are a good
-> > compromise.
-> >
-> > The main motivation should be code readability. You write the
-> > code once. But many people will read it many times. Open coding
-> > is sometimes better than misleading macro names.
-> >
-> > That said, I do not want to block this patchset. If others like
-> > it... ;-)
-> 
-> I don't mind the names either way. Adding the prefix and dashes is
-> helpful in that it's possible to add the functions first and convert
-> users at leisure, though with a bunch of churn, while using names that
-> collide with existing ones requires the changes to happen in one go.
-> 
-> What I do mind is grinding this series to a halt once again. I sent a
-> handful of versions of this three years ago, with inconclusive
-> bikeshedding back and forth, eventually threw my hands up in disgust,
-> and walked away.
+> > > +static inline const char *yesno(bool v) { return v ? "yes" : "no"; }
 
-Yeah we can sed this anytime later we want to, but we need to get the foot
-in the door. There's also a pile more of these all over.
+=09return "yes\0no" + v * 4;
 
-Acked-by: Daniel Vetter <daniel.vetter@ffwll.ch>
+:-)
 
-on the series, maybe it helps? And yes let's merge this through drm-misc.
--Daniel
+-
+Registered Address Lakeside, Bramley Road, Mount Farm, Milton Keynes, MK1 1=
+PT, UK
+Registration No: 1397386 (Wales)
 
-> 
-> >
-> >
-> >> e. One alternative to all of this suggested by Christian König
-> >>    (43456ba7-c372-84cc-4949-dcb817188e21@amd.com) would be to add a
-> >>    printk format. But besides the comment, he also seemed to like
-> >>    the common function. This brought the argument from others that the
-> >>    simple yesno()/enabledisable() already used in the code is easier to
-> >>    remember and use than e.g. %py[DOY]
-> >
-> > Thanks for not going this way :-)
-> >
-> >> Last patch also has some additional conversion of open coded cases. I
-> >> preferred starting with drm/ since this is "closer to home".
-> >> 
-> >> I hope this is a good summary of the previous attempts and a way we can
-> >> move forward.
-> >> 
-> >> Andrew Morton, Petr Mladek, Andy Shevchenko: if this is accepted, my
-> >> proposal is to take first 2 patches either through mm tree or maybe
-> >> vsprintf. Last patch can be taken later through drm.
-> >
-> > I agree with Andy that it should go via drm tree. It would make it
-> > easier to handle potential conflicts.
-> >
-> > Just in case, you decide to go with str_yes_no() or something similar.
-> > Mass changes are typically done at the end on the merge window.
-> > The best solution is when it can be done by a script.
-> >
-> > Best Regards,
-> > Petr
-> 
-> -- 
-> Jani Nikula, Intel Open Source Graphics Center
-
--- 
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
