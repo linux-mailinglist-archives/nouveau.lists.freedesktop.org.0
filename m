@@ -1,52 +1,38 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 37B26493BD4
-	for <lists+nouveau@lfdr.de>; Wed, 19 Jan 2022 15:16:54 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1D13F493C75
+	for <lists+nouveau@lfdr.de>; Wed, 19 Jan 2022 16:01:20 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C8C0C10E9F1;
-	Wed, 19 Jan 2022 14:16:46 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3A46F10E4C5;
+	Wed, 19 Jan 2022 15:01:14 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C05F710E9F1;
- Wed, 19 Jan 2022 14:16:43 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1642601803; x=1674137803;
- h=from:to:cc:subject:in-reply-to:references:date:
- message-id:mime-version:content-transfer-encoding;
- bh=d7hVq3oxHgek+LZjbNjbhxHHdzW6IMVr8vZX6/zGsrc=;
- b=aNnY8icCbsWxwY7sIbaOgmz7QJ1+jLHuqMQg7Ek6103MFuPfuCG7gwXC
- i19mJ0w36G1t4FE0MKaHAVbuIX5SSlResG6HkTVqqcKxBQoIyML0o0SF/
- 0GSZYC8wW2YJwYQPUUq9mJZMmr7PfdZaAqhNYf/ky3fntuNqZEkmVQGp/
- 9ITB8iexKA9vZjkzb4hO63uf1ypCq2XQJM4U+FnEypSj1RCCX5T2e6sQD
- jY3DT85Fj+YMH7+x9linwpT1V7iq1dOWukxTAOMgnD1B496rWQhdlFy57
- f8268Nkp8ZorVG4dPasBUuz4Vb3VVE+bJYw1RjyubIoiZKB9fw86e5KlI Q==;
-X-IronPort-AV: E=McAfee;i="6200,9189,10231"; a="245271579"
-X-IronPort-AV: E=Sophos;i="5.88,299,1635231600"; d="scan'208";a="245271579"
-Received: from orsmga006.jf.intel.com ([10.7.209.51])
- by fmsmga103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 19 Jan 2022 06:16:42 -0800
-X-IronPort-AV: E=Sophos;i="5.88,299,1635231600"; d="scan'208";a="477387201"
-Received: from elenadel-mobl.ger.corp.intel.com (HELO localhost)
- ([10.252.50.196])
- by orsmga006-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 19 Jan 2022 06:16:15 -0800
-From: Jani Nikula <jani.nikula@linux.intel.com>
-To: Petr Mladek <pmladek@suse.com>, Lucas De Marchi <lucas.demarchi@intel.com>
-In-Reply-To: <YegPiR7LU8aVisMf@alley>
-Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
+Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 63D8310E457;
+ Wed, 19 Jan 2022 15:01:12 +0000 (UTC)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by ams.source.kernel.org (Postfix) with ESMTPS id DB5CCB81A0C;
+ Wed, 19 Jan 2022 15:01:08 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DC12DC004E1;
+ Wed, 19 Jan 2022 15:01:03 +0000 (UTC)
+Date: Wed, 19 Jan 2022 10:01:02 -0500
+From: Steven Rostedt <rostedt@goodmis.org>
+To: Andy Shevchenko <andy.shevchenko@gmail.com>
+Message-ID: <20220119100102.61f9bfde@gandalf.local.home>
+In-Reply-To: <CAHp75Vf5QOD_UtDK8VbxNApEBuJvzUic0NkzDNmRo3Q7Ud+=qw@mail.gmail.com>
 References: <20220119072450.2890107-1-lucas.demarchi@intel.com>
- <YegPiR7LU8aVisMf@alley>
-Date: Wed, 19 Jan 2022 16:16:12 +0200
-Message-ID: <87tudzbykz.fsf@intel.com>
+ <20220119072450.2890107-2-lucas.demarchi@intel.com>
+ <CAHp75Vf5QOD_UtDK8VbxNApEBuJvzUic0NkzDNmRo3Q7Ud+=qw@mail.gmail.com>
+X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [Nouveau] [PATCH 0/3] lib/string_helpers: Add a few string
- helpers
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+Subject: Re: [Nouveau] [PATCH 1/3] lib/string_helpers: Consolidate yesno()
+ implementation
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,117 +45,56 @@ List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
 Cc: Emma Anholt <emma@anholt.net>, David Airlie <airlied@linux.ie>,
- nouveau@lists.freedesktop.org,
+ "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
  Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- Rasmus Villemoes <linux@rasmusvillemoes.dk>, dri-devel@lists.freedesktop.org,
+ Rasmus Villemoes <linux@rasmusvillemoes.dk>,
+ "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
  Chris Wilson <chris@chris-wilson.co.uk>, Vishal Kulkarni <vishal@chelsio.com>,
  Francis Laniel <laniel_francis@privacyrequired.com>,
  Kentaro Takeda <takedakn@nttdata.co.jp>, Mikita Lipski <mikita.lipski@amd.com>,
- amd-gfx@lists.freedesktop.org, Andy Shevchenko <andy.shevchenko@gmail.com>,
+ "amd-gfx@lists.freedesktop.org" <amd-gfx@lists.freedesktop.org>,
  Ben Skeggs <bskeggs@redhat.com>, Jakub Kicinski <kuba@kernel.org>,
- Harry Wentland <harry.wentland@amd.com>,
+ Harry Wentland <harry.wentland@amd.com>, Petr Mladek <pmladek@suse.com>,
  Sakari Ailus <sakari.ailus@linux.intel.com>, Leo Li <sunpeng.li@amd.com>,
- intel-gfx@lists.freedesktop.org, Raju Rangoju <rajur@chelsio.com>,
- Steven Rostedt <rostedt@goodmis.org>, Julia Lawall <julia.lawall@lip6.fr>,
+ "intel-gfx@lists.freedesktop.org" <intel-gfx@lists.freedesktop.org>,
+ Raju Rangoju <rajur@chelsio.com>, Lucas De Marchi <lucas.demarchi@intel.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>, Julia Lawall <julia.lawall@lip6.fr>,
  Rahul Lakkireddy <rahul.lakkireddy@chelsio.com>,
  Rodrigo Vivi <rodrigo.vivi@intel.com>,
  Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
  Eryk Brol <eryk.brol@amd.com>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- linux-kernel@vger.kernel.org,
- Christian =?utf-8?Q?K=C3=B6nig?= <christian.koenig@amd.com>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>,
  Sergey Senozhatsky <sergey.senozhatsky@gmail.com>,
- linux-security-module@vger.kernel.org, Daniel Vetter <daniel@ffwll.ch>,
- netdev@vger.kernel.org, Alex Deucher <alexander.deucher@amd.com>,
- Andrew Morton <akpm@linux-foundation.org>, "David S
- . Miller" <davem@davemloft.net>
+ "linux-security-module@vger.kernel.org"
+ <linux-security-module@vger.kernel.org>, Daniel Vetter <daniel@ffwll.ch>,
+ "netdev@vger.kernel.org" <netdev@vger.kernel.org>,
+ Alex Deucher <alexander.deucher@amd.com>,
+ Andrew Morton <akpm@linux-foundation.org>,
+ "David S . Miller" <davem@davemloft.net>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, 19 Jan 2022, Petr Mladek <pmladek@suse.com> wrote:
-> On Tue 2022-01-18 23:24:47, Lucas De Marchi wrote:
->> Add some helpers under lib/string_helpers.h so they can be used
->> throughout the kernel. When I started doing this there were 2 other
->> previous attempts I know of, not counting the iterations each of them
->> had:
->>=20
->> 1) https://lore.kernel.org/all/20191023131308.9420-1-jani.nikula@intel.c=
-om/
->> 2) https://lore.kernel.org/all/20210215142137.64476-1-andriy.shevchenko@=
-linux.intel.com/#t
->>=20
->> Going through the comments I tried to find some common ground and
->> justification for what is in here, addressing some of the concerns
->> raised.
->>=20
->> d. This doesn't bring onoff() helper as there are some places in the
->>    kernel with onoff as variable - another name is probably needed for
->>    this function in order not to shadow the variable, or those variables
->>    could be renamed.  Or if people wanting  <someprefix>
->>    try to find a short one
->
-> I would call it str_on_off().
->
-> And I would actually suggest to use the same style also for
-> the other helpers.
->
-> The "str_" prefix would make it clear that it is something with
-> string. There are other <prefix>_on_off() that affect some
-> functionality, e.g. mute_led_on_off(), e1000_vlan_filter_on_off().
->
-> The dash '_' would significantly help to parse the name. yesno() and
-> onoff() are nicely short and kind of acceptable. But "enabledisable()"
-> is a puzzle.
->
-> IMHO, str_yes_no(), str_on_off(), str_enable_disable() are a good
-> compromise.
->
-> The main motivation should be code readability. You write the
-> code once. But many people will read it many times. Open coding
-> is sometimes better than misleading macro names.
->
-> That said, I do not want to block this patchset. If others like
-> it... ;-)
+On Wed, 19 Jan 2022 11:15:08 +0200
+Andy Shevchenko <andy.shevchenko@gmail.com> wrote:
 
-I don't mind the names either way. Adding the prefix and dashes is
-helpful in that it's possible to add the functions first and convert
-users at leisure, though with a bunch of churn, while using names that
-collide with existing ones requires the changes to happen in one go.
+> > +static inline const char *yesno(bool v) { return v ? "yes" : "no"; }  
+> 
+> 
+> 
+> Perhaps keep it on 4 lines? Yes, yes/no is short, but if we add others
+> (enable/disable) it will not be possible to keep on one line. And hence
+> style will be broken among similar functions.
 
-What I do mind is grinding this series to a halt once again. I sent a
-handful of versions of this three years ago, with inconclusive
-bikeshedding back and forth, eventually threw my hands up in disgust,
-and walked away.
+Agreed. Functions should always be of the normal format:
 
->
->
->> e. One alternative to all of this suggested by Christian K=C3=B6nig
->>    (43456ba7-c372-84cc-4949-dcb817188e21@amd.com) would be to add a
->>    printk format. But besides the comment, he also seemed to like
->>    the common function. This brought the argument from others that the
->>    simple yesno()/enabledisable() already used in the code is easier to
->>    remember and use than e.g. %py[DOY]
->
-> Thanks for not going this way :-)
->
->> Last patch also has some additional conversion of open coded cases. I
->> preferred starting with drm/ since this is "closer to home".
->>=20
->> I hope this is a good summary of the previous attempts and a way we can
->> move forward.
->>=20
->> Andrew Morton, Petr Mladek, Andy Shevchenko: if this is accepted, my
->> proposal is to take first 2 patches either through mm tree or maybe
->> vsprintf. Last patch can be taken later through drm.
->
-> I agree with Andy that it should go via drm tree. It would make it
-> easier to handle potential conflicts.
->
-> Just in case, you decide to go with str_yes_no() or something similar.
-> Mass changes are typically done at the end on the merge window.
-> The best solution is when it can be done by a script.
->
-> Best Regards,
-> Petr
+type func(params)
+{
+	body;
+}
 
---=20
-Jani Nikula, Intel Open Source Graphics Center
+Unless it is a stub function.
+
+type func(params) { return 0; }
+
+-- Steve
