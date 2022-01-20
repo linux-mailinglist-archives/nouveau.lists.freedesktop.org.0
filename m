@@ -1,47 +1,48 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 640BE495400
-	for <lists+nouveau@lfdr.de>; Thu, 20 Jan 2022 19:17:07 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id C150749541E
+	for <lists+nouveau@lfdr.de>; Thu, 20 Jan 2022 19:24:17 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 1B8C610E6D3;
-	Thu, 20 Jan 2022 18:16:53 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5121210E93D;
+	Thu, 20 Jan 2022 18:24:15 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 2B26610E49E;
- Thu, 20 Jan 2022 10:45:39 +0000 (UTC)
-Received: from relay2.suse.de (relay2.suse.de [149.44.160.134])
- by smtp-out2.suse.de (Postfix) with ESMTP id 971CA1F394;
- Thu, 20 Jan 2022 10:45:37 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
- t=1642675537; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=lNXsCxk1kmLzWZ3KuMXgc2QP7yNDhqQLgFtjl4LsFGg=;
- b=s80Eh1CewTbGXaANSfdmhOC8yS7mIDv9FCt/I0hzu7cf9Pu9Si7tpC0AUMlifM6MhpyvNI
- EdQykNw0T5LfW9CMRgRZQ36TExFEeiyITs3AE72J+aELbU1yWnXuKDUzDzoC1F8NJaMUMu
- 9y1MB7bqBlsK9YohaVnVWyOxwl7Ul6w=
-Received: from suse.cz (unknown [10.100.224.162])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by relay2.suse.de (Postfix) with ESMTPS id 65535A3B81;
- Thu, 20 Jan 2022 10:45:30 +0000 (UTC)
-Date: Thu, 20 Jan 2022 11:45:36 +0100
-From: Petr Mladek <pmladek@suse.com>
-To: Jani Nikula <jani.nikula@linux.intel.com>
-Message-ID: <Yek9UEHpS16/9ajt@alley>
-References: <20220119072450.2890107-1-lucas.demarchi@intel.com>
- <YegPiR7LU8aVisMf@alley> <87tudzbykz.fsf@intel.com>
- <YekfbKMjOP9ecc5v@alley> <8735libwjo.fsf@intel.com>
+Received: from mail-il1-f181.google.com (mail-il1-f181.google.com
+ [209.85.166.181])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id BA7BA10EBE2
+ for <nouveau@lists.freedesktop.org>; Thu, 20 Jan 2022 18:24:14 +0000 (UTC)
+Received: by mail-il1-f181.google.com with SMTP id d3so5706664ilr.10
+ for <nouveau@lists.freedesktop.org>; Thu, 20 Jan 2022 10:24:14 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=sFP1wVyx7t56F3h899HjLSDKtPOh4Dwk1dyymvIKXj8=;
+ b=AI4xxKtkVdCDdeTz0j/Z9vATKC5FKPtYqqSIMsQp11Qx8TQqzN36snhBh2vSPw7ZhK
+ fUEgCFkqTW8vEmbUnyZNFAFRK7yGabJmlPSr94E5M+0aTpLEnE+bZMXGRUBVAWQOGI/z
+ Wfben9Tqqd4eV+jpuMQMKxbnvUdR9ZFPs1DxZ9yABkMxGV2Iv5wsXEkILPzLkzXE1rX+
+ aRiXefgWKM/nS6qxg4V/uFZNhD9yYstq3X2DqwKoYuSV1WXT5KHcIF01kC17KatWD77+
+ y6BJH8ab8DA3diq08KLz6NJMwxCVJFMJ5VzQp4hUbGjMjbYAZMDlQdf8TIHxWO0drkRW
+ 3DMw==
+X-Gm-Message-State: AOAM530vXs7Lfd+PClnOgwqeLMJ2s1zwcylD6QFWQKFMTep9zSodLCh1
+ fDVO3Ca6utUV+bRtpQTVMpDXxNIfF3SLfIfM8S/46znu
+X-Google-Smtp-Source: ABdhPJwBU+q82iCba/BE0eOTpzEuD0Qw3uS0bvX/+ZOkQ/EjZ27bkRgaS0Zdr8xZJJ6U/3kIKKvGFR70jjpQeljzShE=
+X-Received: by 2002:a05:6e02:1ba8:: with SMTP id
+ n8mr113816ili.235.1642703053940; 
+ Thu, 20 Jan 2022 10:24:13 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <8735libwjo.fsf@intel.com>
-X-Mailman-Approved-At: Thu, 20 Jan 2022 18:16:51 +0000
-Subject: Re: [Nouveau] [PATCH 0/3] lib/string_helpers: Add a few string
- helpers
+References: <20220120181657.8E3BB10E684@gabe.freedesktop.org>
+In-Reply-To: <20220120181657.8E3BB10E684@gabe.freedesktop.org>
+From: Ilia Mirkin <imirkin@alum.mit.edu>
+Date: Thu, 20 Jan 2022 13:24:02 -0500
+Message-ID: <CAKb7Uvi4+=7PTATZMh0vHcX8pg0FqR48r4_1MHphZKYQu1=hEw@mail.gmail.com>
+To: Nick Lopez <nick@glowingmonkey.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: [Nouveau] Off-by-one or bad BIOS image? Apple eMac 800 GeForce
+ 2MX
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -53,52 +54,71 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Emma Anholt <emma@anholt.net>, David Airlie <airlied@linux.ie>,
- nouveau@lists.freedesktop.org,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- Rasmus Villemoes <linux@rasmusvillemoes.dk>, dri-devel@lists.freedesktop.org,
- Chris Wilson <chris@chris-wilson.co.uk>, Vishal Kulkarni <vishal@chelsio.com>,
- Francis Laniel <laniel_francis@privacyrequired.com>,
- Kentaro Takeda <takedakn@nttdata.co.jp>, Mikita Lipski <mikita.lipski@amd.com>,
- amd-gfx@lists.freedesktop.org, Andy Shevchenko <andy.shevchenko@gmail.com>,
- Ben Skeggs <bskeggs@redhat.com>, Jakub Kicinski <kuba@kernel.org>,
- Harry Wentland <harry.wentland@amd.com>,
- Sakari Ailus <sakari.ailus@linux.intel.com>, Leo Li <sunpeng.li@amd.com>,
- intel-gfx@lists.freedesktop.org, Raju Rangoju <rajur@chelsio.com>,
- Lucas De Marchi <lucas.demarchi@intel.com>,
- Steven Rostedt <rostedt@goodmis.org>, Julia Lawall <julia.lawall@lip6.fr>,
- Rahul Lakkireddy <rahul.lakkireddy@chelsio.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>,
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- Eryk Brol <eryk.brol@amd.com>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- linux-kernel@vger.kernel.org,
- Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
- Sergey Senozhatsky <sergey.senozhatsky@gmail.com>,
- linux-security-module@vger.kernel.org, Daniel Vetter <daniel@ffwll.ch>,
- netdev@vger.kernel.org, Alex Deucher <alexander.deucher@amd.com>,
- Andrew Morton <akpm@linux-foundation.org>,
- "David S . Miller" <davem@davemloft.net>
+Cc: "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu 2022-01-20 11:12:27, Jani Nikula wrote:
-> On Thu, 20 Jan 2022, Petr Mladek <pmladek@suse.com> wrote:
-> > The problem is not that visible with yesno() and onoff(). But as you said,
-> > onoff() confliscts with variable names. And enabledisable() sucks.
-> > As a result, there is a non-trivial risk of two mass changes:
-> 
-> My point is, in the past three years we could have churned through more
-> than two mass renames just fine, if needed, *if* we had just managed to
-> merge something for a start!
+This stuff is always so confusing. Let's think this through.... if
+bios size is 4, and we're trying to read a 4-byte thing starting at
+address 0, that _ought_ to work, I think. So in my strawman case,
+bios->size =3D=3D 4, and size =3D=3D 4. So we should only error if size >
+bios->size, not if they're =3D=3D. Looks like your patch is right.
 
-Huh, this sound alarming.
+Want to make a linux kernel patch submission with this? (i.e.
+including changelog, signoff, etc?)
 
-Cosmetic changes just complicate history. They make "git blame" useless.
-They also complicate backports. I know that it is not problem for
-mainline. But there are supported stable branches, ...
+Cheers,
 
-There should be a good reason for such changes. They should not be
-done light-heartedly.
+  -ilia
 
-Best Regards,
-Petr
+On Thu, Jan 20, 2022 at 1:17 PM Nick Lopez <nick@glowingmonkey.org> wrote:
+>
+> Because I watch too much retro YouTube I decided it was a good idea to tr=
+y installing Adelie Linux on my old G4/800 eMac, but the Live installer wou=
+ld freeze. By blacklisting nouveau I was able to get it booted and manually=
+ installed and, after hours and hours of compiling, get a working kernel tr=
+ee to poke at. After only a few iterations with dump_stack() and nvkm_debug=
+ and the output of envytools/nvbios I worked out at the last initscript ins=
+truction was stored in the last byte of the ROM. I think the bounds check i=
+n the nvbios_addr() function is miscalculating the limit as one byte short,=
+ that=E2=80=99s why I was seeing this in the syslog:
+>
+>
+>
+> nouveau 0000:00:10.0: bios: OOB 1 000007b2 000007b2
+>
+> nouveau 0000:00:10.0: devinit: 0x000007b2[ ]: unknown opcode 0x00
+>
+> nouveau 0000:00:10.0: preinit failed with -22
+>
+> nouveau: DRM-master:00000000:00000080: init failed with -22
+>
+> nouveau 0000:00:10.0: DRM-master: Device allocation failed: -22
+>
+> nouveau: probe of 0000:00:10.0 failed with error -22
+>
+>
+>
+> After I changed the limit check from:
+>
+> if (unlikely(*addr + size >=3D bios->size)) {
+>
+> to:
+>
+> if (unlikely(*addr + size > bios->size)) {
+>
+>
+>
+> it initialized the card properly, brought up the fbconsole and even seems=
+ to be working in X with DRI. So the question is: was the bounds check wron=
+g, or is the NVDA,BMP image provided by OpenFirmware truncated? I=E2=80=99m=
+ guess this doesn=E2=80=99t turn up elsewhere because the ROM images read t=
+hrough any of the other methods are the size of flash chip they=E2=80=99re =
+stored on so there=E2=80=99s always unused space at the end and they never =
+use the last byte where the NVDA,BMP provided by OpenFirmware is just the a=
+ctive section.
+>
+>
+>
+> The patch is against the Adelie easy-kernel patch 5.4 tree, but it looks =
+like that code is still there in the current upstream torvalds/linux git.
