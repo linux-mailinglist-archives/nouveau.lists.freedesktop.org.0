@@ -1,43 +1,44 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id E36BE4953FE
-	for <lists+nouveau@lfdr.de>; Thu, 20 Jan 2022 19:17:05 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 640BE495400
+	for <lists+nouveau@lfdr.de>; Thu, 20 Jan 2022 19:17:07 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2D17810E6E7;
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1B8C610E6D3;
 	Thu, 20 Jan 2022 18:16:53 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1386510E479;
- Thu, 20 Jan 2022 08:38:11 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2B26610E49E;
+ Thu, 20 Jan 2022 10:45:39 +0000 (UTC)
 Received: from relay2.suse.de (relay2.suse.de [149.44.160.134])
- by smtp-out2.suse.de (Postfix) with ESMTP id 1F79E1F391;
- Thu, 20 Jan 2022 08:38:09 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTP id 971CA1F394;
+ Thu, 20 Jan 2022 10:45:37 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
- t=1642667889; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ t=1642675537; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=S1149P6IJdsdpbMcrXZq6Mc6WqPqJoBvK3pMWsa4MN8=;
- b=mgVK2GKX4z682928eNQNmcKH4PlzeX6XpPLxSucJKp6GDejDBl9xGnHm3EQ7m1HB7u4s0x
- HmV98Y94Jgx4BP2N49y70kzTAsfC49uladYoyY9u+lMOkRTYf7K7VjPT83DyGrKubQrpNL
- 4X9INnLQQrZk7xUamCgzquBLJDcbk7E=
+ bh=lNXsCxk1kmLzWZ3KuMXgc2QP7yNDhqQLgFtjl4LsFGg=;
+ b=s80Eh1CewTbGXaANSfdmhOC8yS7mIDv9FCt/I0hzu7cf9Pu9Si7tpC0AUMlifM6MhpyvNI
+ EdQykNw0T5LfW9CMRgRZQ36TExFEeiyITs3AE72J+aELbU1yWnXuKDUzDzoC1F8NJaMUMu
+ 9y1MB7bqBlsK9YohaVnVWyOxwl7Ul6w=
 Received: from suse.cz (unknown [10.100.224.162])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by relay2.suse.de (Postfix) with ESMTPS id 1E602A3B81;
- Thu, 20 Jan 2022 08:38:04 +0000 (UTC)
-Date: Thu, 20 Jan 2022 09:38:04 +0100
+ by relay2.suse.de (Postfix) with ESMTPS id 65535A3B81;
+ Thu, 20 Jan 2022 10:45:30 +0000 (UTC)
+Date: Thu, 20 Jan 2022 11:45:36 +0100
 From: Petr Mladek <pmladek@suse.com>
 To: Jani Nikula <jani.nikula@linux.intel.com>
-Message-ID: <YekfbKMjOP9ecc5v@alley>
+Message-ID: <Yek9UEHpS16/9ajt@alley>
 References: <20220119072450.2890107-1-lucas.demarchi@intel.com>
  <YegPiR7LU8aVisMf@alley> <87tudzbykz.fsf@intel.com>
+ <YekfbKMjOP9ecc5v@alley> <8735libwjo.fsf@intel.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <87tudzbykz.fsf@intel.com>
+In-Reply-To: <8735libwjo.fsf@intel.com>
 X-Mailman-Approved-At: Thu, 20 Jan 2022 18:16:51 +0000
 Subject: Re: [Nouveau] [PATCH 0/3] lib/string_helpers: Add a few string
  helpers
@@ -80,78 +81,24 @@ Cc: Emma Anholt <emma@anholt.net>, David Airlie <airlied@linux.ie>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed 2022-01-19 16:16:12, Jani Nikula wrote:
-> On Wed, 19 Jan 2022, Petr Mladek <pmladek@suse.com> wrote:
-> > On Tue 2022-01-18 23:24:47, Lucas De Marchi wrote:
-> >> d. This doesn't bring onoff() helper as there are some places in the
-> >>    kernel with onoff as variable - another name is probably needed for
-> >>    this function in order not to shadow the variable, or those variables
-> >>    could be renamed.  Or if people wanting  <someprefix>
-> >>    try to find a short one
-> >
-> > I would call it str_on_off().
-> >
-> > And I would actually suggest to use the same style also for
-> > the other helpers.
-> >
-> > The "str_" prefix would make it clear that it is something with
-> > string. There are other <prefix>_on_off() that affect some
-> > functionality, e.g. mute_led_on_off(), e1000_vlan_filter_on_off().
-> >
-> > The dash '_' would significantly help to parse the name. yesno() and
-> > onoff() are nicely short and kind of acceptable. But "enabledisable()"
-> > is a puzzle.
-> >
-> > IMHO, str_yes_no(), str_on_off(), str_enable_disable() are a good
-> > compromise.
-> >
-> > The main motivation should be code readability. You write the
-> > code once. But many people will read it many times. Open coding
-> > is sometimes better than misleading macro names.
-> >
-> > That said, I do not want to block this patchset. If others like
-> > it... ;-)
+On Thu 2022-01-20 11:12:27, Jani Nikula wrote:
+> On Thu, 20 Jan 2022, Petr Mladek <pmladek@suse.com> wrote:
+> > The problem is not that visible with yesno() and onoff(). But as you said,
+> > onoff() confliscts with variable names. And enabledisable() sucks.
+> > As a result, there is a non-trivial risk of two mass changes:
 > 
-> I don't mind the names either way. Adding the prefix and dashes is
-> helpful in that it's possible to add the functions first and convert
-> users at leisure, though with a bunch of churn, while using names that
-> collide with existing ones requires the changes to happen in one go.
+> My point is, in the past three years we could have churned through more
+> than two mass renames just fine, if needed, *if* we had just managed to
+> merge something for a start!
 
-It is also possible to support both notations at the beginning.
-And convert the existing users in the 2nd step.
+Huh, this sound alarming.
 
-> What I do mind is grinding this series to a halt once again. I sent a
-> handful of versions of this three years ago, with inconclusive
-> bikeshedding back and forth, eventually threw my hands up in disgust,
-> and walked away.
+Cosmetic changes just complicate history. They make "git blame" useless.
+They also complicate backports. I know that it is not problem for
+mainline. But there are supported stable branches, ...
 
-Yeah, and I am sorry for bikeshedding. Honestly, I do not know what is
-better. This is why I do not want to block this series when others
-like this.
-
-My main motivation is to point out that:
-
-    enabledisable(enable)
-
-might be, for some people, more eye bleeding than
-
-    enable ? "enable" : "disable"
-
-
-The problem is not that visible with yesno() and onoff(). But as you said,
-onoff() confliscts with variable names. And enabledisable() sucks.
-As a result, there is a non-trivial risk of two mass changes:
-
-now:
-
-- contition ? "yes" : "no"
-+ yesno(condition)
-
-a few moths later:
-
-- yesno(condition)
-+ str_yes_no(condition)
-
+There should be a good reason for such changes. They should not be
+done light-heartedly.
 
 Best Regards,
 Petr
