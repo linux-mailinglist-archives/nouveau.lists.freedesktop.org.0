@@ -1,55 +1,58 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 54ABA496F29
-	for <lists+nouveau@lfdr.de>; Sun, 23 Jan 2022 01:17:16 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 743DB496F2A
+	for <lists+nouveau@lfdr.de>; Sun, 23 Jan 2022 01:17:19 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C603710E67B;
-	Sun, 23 Jan 2022 00:17:12 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D1DB410E686;
+	Sun, 23 Jan 2022 00:17:13 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 1357 seconds by postgrey-1.36 at gabe;
- Sat, 22 Jan 2022 08:41:58 UTC
-Received: from zappa.azrackspace.net (zappa.azrackspace.net
- [IPv6:2602:41:65b8:d100:0:5a:4150:5041])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 92E1510E339;
- Sat, 22 Jan 2022 08:41:58 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=glowingmonkey.org; s=default; h=Content-Transfer-Encoding:MIME-Version:
- Message-Id:Date:Subject:To:From:References:In-Reply-To:Content-Type;
- bh=YUhLV1TxOoojK02NbEFT1+1m1Eg+U9q+F0pj/Qb+75g=; b=zFEJw97zWLVytLmp7e7HZ+zuLl
- 4cbgGbqJDGpUMhqISODYLuYvDM23vG2LM1RkipRLkkRHngxQXEa1mlVlXyFYNHFXPRBpnm12zbCeD
- g/y1WmJW6aq8E5LyyJw+PxgWe;
-Received: from localhost ([127.0.0.1])
- by zappa.azrackspace.net with esmtp (Exim 4.92)
- (envelope-from <github@glowingmonkey.org>)
- id 1nBBcF-0000vO-Kv; Sat, 22 Jan 2022 01:19:19 -0700
-X-Virus-Scanned: Debian amavisd-new at zappa.azrackspace.net
-X-Spam-Flag: NO
-X-Spam-Score: -1
-X-Spam-Level: 
-X-Spam-Status: No, score=-1 tagged_above=-100 required=6.31
- tests=[ALL_TRUSTED=-1] autolearn=disabled
-Received: from zappa.azrackspace.net ([IPv6:::1])
- by localhost (zappa.azrackspace.net [IPv6:::1]) (amavisd-new, port 10024)
- with ESMTP id LLWHomNwZY_P; Sat, 22 Jan 2022 01:19:19 -0700 (MST)
-Received: from [2001:579:83b8:2b90:644c:afff:feec:42cc] (helo=mythbob.gm)
- by zappa.azrackspace.net with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
- (envelope-from <github@glowingmonkey.org>)
- id 1nBBcE-0000uJ-Qz; Sat, 22 Jan 2022 01:19:18 -0700
-From: Nick Lopez <github@glowingmonkey.org>
-To: nouveau@lists.freedesktop.org,
-	dri-devel@lists.freedesktop.org
-Date: Sat, 22 Jan 2022 01:19:06 -0700
-Message-Id: <20220122081906.2633061-1-github@glowingmonkey.org>
-X-Mailer: git-send-email 2.30.2
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 55E7F10E2B9;
+ Sat, 22 Jan 2022 13:34:12 +0000 (UTC)
+Received: by mail-ej1-x635.google.com with SMTP id jx6so7962370ejb.0;
+ Sat, 22 Jan 2022 05:34:12 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=e8hh0ttf5WPVcY+RjJGEBP+0C6QN/+UHlasoRckpvYA=;
+ b=DAH1vUg+pWl4l4xR5PDM7YO/P7l6uHCABIctrRJ8cuwxYZzMhTIeavOJpv2vhPFkXR
+ 0kmkNOgFxXfopXIt0T4JSvOPYXf5QqXKEFxtwqncHEWVnaO9DDgpIghrKxhkGrC55fqS
+ 6lqCIJphynvCHXv3N3z0acq7iqbU37Wo3BMow4f4+W/n0iDFmLPPUdchX3HUBSGeGPYI
+ DQk03O9FizCHE+dtCtWJKp/g9ALb3sUgP0qXztOR5iiWcmgnggCx6mpycVBF7Q/Jg7Q/
+ 886Rzie38TPE3rzT21/EMgQMBnHrMY4njYnJcmcVDr3NhtHK0bh2WbA5YHuwr8c2r0gc
+ dz/A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=e8hh0ttf5WPVcY+RjJGEBP+0C6QN/+UHlasoRckpvYA=;
+ b=ZXXwgyIVK9IEB2JBHjG6JRUtD5eCDfaf0R71e8mE5Bij9Kg9nkwbgfYYBJWCA1yTY7
+ TehfTTN8arV1joCjRPtObrjj/IqkQk1NA0bBrCX4ROQuemSLB1JvzUJr6TiLAJzeq1Xt
+ g4oV3ZKm4ZDA8iZ1JLp77fLui/h/0VkYJAygjPpV/vaWr1AHGDL9P4pvUpSxnulBfnoY
+ cTBBcH9WVfsSMdRPT5MhZS0AS5nso1yJPTXjlqPUlmGo3M1RgK0solr94/kiHDFnhpQE
+ gW50n+RXo5eEMP+bHj2bGlE2QmVSXjZ+Ihfl3OsyTqwgzhDXhpxh3sPCOSgPI/TlrvuM
+ 5xCw==
+X-Gm-Message-State: AOAM532HlT90FMkfIgKEzli1WhYwgGmqPBwFCzCz8My11gPyZcL7Q+fk
+ bw124qZO8Ie5E+Ge3oN6PeEVaYzSdb17B9qKjIM=
+X-Google-Smtp-Source: ABdhPJz15xCQwDBgEuc+XPcP4i6Bw/2wu1X1SCyF/jbi3hUsBR7++TQZJ4MsGPk9gQg9TgX0gILjLS53cSZnYuKJlCE=
+X-Received: by 2002:a17:906:274f:: with SMTP id
+ a15mr6678000ejd.492.1642858450621; 
+ Sat, 22 Jan 2022 05:34:10 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20220121165436.30956-1-sampaio.ime@gmail.com>
+ <20220121165436.30956-2-sampaio.ime@gmail.com>
+In-Reply-To: <20220121165436.30956-2-sampaio.ime@gmail.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Sat, 22 Jan 2022 10:33:58 -0300
+Message-ID: <CAOMZO5DX-zzQGi6hWj66yHDYAHXd7yzJ6CQqtHVQHt-U4LVq8g@mail.gmail.com>
+To: Luiz Sampaio <sampaio.ime@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
 X-Mailman-Approved-At: Sun, 23 Jan 2022 00:17:11 +0000
-Subject: [Nouveau] [PATCH] drm/nouveau: fix off by one in BIOS boundry
- checking
+Subject: Re: [Nouveau] [PATCH 01/31] gpu: nouveau: nouveau_led: changing
+ LED_FULL to actual value
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,38 +64,26 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Nick Lopez <github@glowingmonkey.org>
+Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
+ linux-kernel <linux-kernel@vger.kernel.org>,
+ DRI mailing list <dri-devel@lists.freedesktop.org>,
+ Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Bounds checking when parsing init scripts embedded in the BIOS reject
-access to the last byte. This causes driver initialization to fail on
-Apple eMac's with GeForce 2 MX GPUs, leaving the system with no working
-console.
+Hi Luiz,
 
-This is probably only seen on OpenFirmware machines like PowerPC Macs
-because the BIOS image provides by OF is only the used parts of the ROM,
-not a power-of-two blocks read from PCI directly so PCs always have
-empty bytes at the end that are never accesseed.
+On Sat, Jan 22, 2022 at 7:44 AM Luiz Sampaio <sampaio.ime@gmail.com> wrote:
+>
+> The enum led_brightness, which contains the declaration of LED_OFF,
+> LED_ON, LED_HALF and LED_FULL is obsolete, as the led class now supports
+> max_brightness.
 
-Signed-off-by: Nick Lopez <github@glowingmonkey.org>
----
- drivers/gpu/drm/nouveau/nvkm/subdev/bios/base.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Your Signed-off-by tag is missing.
 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/bios/base.c b/drivers/gpu/drm/nouveau/nvkm/subdev/bios/base.c
-index d0f52d59fc2f..64e423dddd9e 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/bios/base.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/bios/base.c
-@@ -38,7 +38,7 @@ nvbios_addr(struct nvkm_bios *bios, u32 *addr, u8 size)
- 		*addr += bios->imaged_addr;
- 	}
- 
--	if (unlikely(*addr + size >= bios->size)) {
-+	if (unlikely(*addr + size > bios->size)) {
- 		nvkm_error(&bios->subdev, "OOB %d %08x %08x\n", size, p, *addr);
- 		return false;
- 	}
--- 
-2.30.2
+Please run ./scripts/checkpatch.pl on your patch and it helps detect
+this kind of issue.
 
+Regards,
+
+Fabio Estevam
