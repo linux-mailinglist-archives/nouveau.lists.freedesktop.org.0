@@ -2,65 +2,54 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 46DBC49674B
-	for <lists+nouveau@lfdr.de>; Fri, 21 Jan 2022 22:28:52 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 54ABA496F29
+	for <lists+nouveau@lfdr.de>; Sun, 23 Jan 2022 01:17:16 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C0CA810E1BE;
-	Fri, 21 Jan 2022 21:28:48 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id C603710E67B;
+	Sun, 23 Jan 2022 00:17:12 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
- [IPv6:2607:f8b0:4864:20::333])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 953E010EEC5;
- Fri, 21 Jan 2022 16:54:16 +0000 (UTC)
-Received: by mail-ot1-x333.google.com with SMTP id
- n22-20020a9d2016000000b0059bd79f7777so12083118ota.2; 
- Fri, 21 Jan 2022 08:54:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=WJAypc7GOb09YdvN33B2vpee2uXuBcVdkBylIc96AeA=;
- b=K5JwDApwVvttoj1FuEQWHcNMeEk9ffV26USk+IVo7z4R+E0TB6ZLbA+uyyhQbQIeIW
- 7/HguzO/fxNh33d2a1NipgqeVvG2HGQkV2/EUEuAcyenIBmOSItP0HQtiTRTMSQCTB19
- Q8JRE466S0mqUGFHRMq6HnMj6W7VTJm84rdOAn/bB0D6pKxs4VHgQ12wQqE8s4vSm8ad
- pfC/q04FuRUVchCnEmBr9uvyn9AHV11GeeDBs4nU09hWmqoVn7DMtgVKdhjraXSGsd9L
- S0FyshtxeBr3TgNQJXcg1xT2BR2QOjvt6FqBAdNWocPYRpii+5V1Wc/NGPoJFEjoJ972
- JFQQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=WJAypc7GOb09YdvN33B2vpee2uXuBcVdkBylIc96AeA=;
- b=Ya+lRc6Z/0Mgt8wwb75xlPMYvFQFBdYkAb0WcPX6I421sjvcFZg+zqiL8qAJbGOijf
- OrEthvgfbY6jOM4eohljIY6FUn9DXQMDnosDJgkLMKIcwQF2j39poWorQvdzwUOVJ+Gj
- lVIeY98yZAWh6hwDQyBSlUw+5jQN3lYYOMI4/ZgPFP6HYHguCkTU/69ghw05OWZB6BT2
- 4aLgH4a3JHHwyTAkpCsOVkGBiAFAO+211kUpo16yzDoNPP54bJafozI8dURFjfwxqfEp
- SxJinAH2Cc/cgiD99J0otIwtt2lKmeKN4lqJ/6EES7aUZvkL0bQgVzk51JIHJEo6GqEC
- 4s/Q==
-X-Gm-Message-State: AOAM533BpxPJQD/VWm05RO29MM+bD87iZd5XMZrT5VHDu1LThwsdaKgr
- Z/CCEBJIoYTJNVZ3WKEmVOo=
-X-Google-Smtp-Source: ABdhPJxVTLluA8KZ26wu9YLuaAzbXLzAR+oweGtMG8xK7CPe3rWm/4vkcVKatam8xzsp4HJXvlwuhg==
-X-Received: by 2002:a9d:650e:: with SMTP id i14mr3360247otl.350.1642784055795; 
- Fri, 21 Jan 2022 08:54:15 -0800 (PST)
-Received: from thinkpad.localdomain ([2804:14d:5cd1:5d03:cf72:4317:3105:f6e5])
- by smtp.gmail.com with ESMTPSA id
- y8sm1089271oou.23.2022.01.21.08.54.12
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 21 Jan 2022 08:54:15 -0800 (PST)
-From: Luiz Sampaio <sampaio.ime@gmail.com>
-To: Ben Skeggs <bskeggs@redhat.com>, Karol Herbst <kherbst@redhat.com>,
- Lyude Paul <lyude@redhat.com>, David Airlie <airlied@linux.ie>,
- Daniel Vetter <daniel@ffwll.ch>
-Date: Fri, 21 Jan 2022 13:54:06 -0300
-Message-Id: <20220121165436.30956-2-sampaio.ime@gmail.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20220121165436.30956-1-sampaio.ime@gmail.com>
-References: <20220121165436.30956-1-sampaio.ime@gmail.com>
+X-Greylist: delayed 1357 seconds by postgrey-1.36 at gabe;
+ Sat, 22 Jan 2022 08:41:58 UTC
+Received: from zappa.azrackspace.net (zappa.azrackspace.net
+ [IPv6:2602:41:65b8:d100:0:5a:4150:5041])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 92E1510E339;
+ Sat, 22 Jan 2022 08:41:58 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=glowingmonkey.org; s=default; h=Content-Transfer-Encoding:MIME-Version:
+ Message-Id:Date:Subject:To:From:References:In-Reply-To:Content-Type;
+ bh=YUhLV1TxOoojK02NbEFT1+1m1Eg+U9q+F0pj/Qb+75g=; b=zFEJw97zWLVytLmp7e7HZ+zuLl
+ 4cbgGbqJDGpUMhqISODYLuYvDM23vG2LM1RkipRLkkRHngxQXEa1mlVlXyFYNHFXPRBpnm12zbCeD
+ g/y1WmJW6aq8E5LyyJw+PxgWe;
+Received: from localhost ([127.0.0.1])
+ by zappa.azrackspace.net with esmtp (Exim 4.92)
+ (envelope-from <github@glowingmonkey.org>)
+ id 1nBBcF-0000vO-Kv; Sat, 22 Jan 2022 01:19:19 -0700
+X-Virus-Scanned: Debian amavisd-new at zappa.azrackspace.net
+X-Spam-Flag: NO
+X-Spam-Score: -1
+X-Spam-Level: 
+X-Spam-Status: No, score=-1 tagged_above=-100 required=6.31
+ tests=[ALL_TRUSTED=-1] autolearn=disabled
+Received: from zappa.azrackspace.net ([IPv6:::1])
+ by localhost (zappa.azrackspace.net [IPv6:::1]) (amavisd-new, port 10024)
+ with ESMTP id LLWHomNwZY_P; Sat, 22 Jan 2022 01:19:19 -0700 (MST)
+Received: from [2001:579:83b8:2b90:644c:afff:feec:42cc] (helo=mythbob.gm)
+ by zappa.azrackspace.net with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
+ (envelope-from <github@glowingmonkey.org>)
+ id 1nBBcE-0000uJ-Qz; Sat, 22 Jan 2022 01:19:18 -0700
+From: Nick Lopez <github@glowingmonkey.org>
+To: nouveau@lists.freedesktop.org,
+	dri-devel@lists.freedesktop.org
+Date: Sat, 22 Jan 2022 01:19:06 -0700
+Message-Id: <20220122081906.2633061-1-github@glowingmonkey.org>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Fri, 21 Jan 2022 21:28:47 +0000
-Subject: [Nouveau] [PATCH 01/31] gpu: nouveau: nouveau_led: changing
- LED_FULL to actual value
+X-Mailman-Approved-At: Sun, 23 Jan 2022 00:17:11 +0000
+Subject: [Nouveau] [PATCH] drm/nouveau: fix off by one in BIOS boundry
+ checking
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -72,40 +61,38 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, Luiz Sampaio <sampaio.ime@gmail.com>
+Cc: Nick Lopez <github@glowingmonkey.org>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-The enum led_brightness, which contains the declaration of LED_OFF,
-LED_ON, LED_HALF and LED_FULL is obsolete, as the led class now supports
-max_brightness.
----
- drivers/gpu/drm/nouveau/nouveau_led.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Bounds checking when parsing init scripts embedded in the BIOS reject
+access to the last byte. This causes driver initialization to fail on
+Apple eMac's with GeForce 2 MX GPUs, leaving the system with no working
+console.
 
-diff --git a/drivers/gpu/drm/nouveau/nouveau_led.c b/drivers/gpu/drm/nouveau/nouveau_led.c
-index 2c5e0628da12..df4a734510e1 100644
---- a/drivers/gpu/drm/nouveau/nouveau_led.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_led.c
-@@ -45,7 +45,7 @@ nouveau_led_get_brightness(struct led_classdev *led)
- 	duty = nvif_rd32(device, 0x61c884) & 0x00ffffff;
+This is probably only seen on OpenFirmware machines like PowerPC Macs
+because the BIOS image provides by OF is only the used parts of the ROM,
+not a power-of-two blocks read from PCI directly so PCs always have
+empty bytes at the end that are never accesseed.
+
+Signed-off-by: Nick Lopez <github@glowingmonkey.org>
+---
+ drivers/gpu/drm/nouveau/nvkm/subdev/bios/base.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/bios/base.c b/drivers/gpu/drm/nouveau/nvkm/subdev/bios/base.c
+index d0f52d59fc2f..64e423dddd9e 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/bios/base.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/bios/base.c
+@@ -38,7 +38,7 @@ nvbios_addr(struct nvkm_bios *bios, u32 *addr, u8 size)
+ 		*addr += bios->imaged_addr;
+ 	}
  
- 	if (div > 0)
--		return duty * LED_FULL / div;
-+		return duty * 255 / div;
- 	else
- 		return 0;
- }
-@@ -62,7 +62,7 @@ nouveau_led_set_brightness(struct led_classdev *led, enum led_brightness value)
- 	u32 div, duty;
- 
- 	div = input_clk / freq;
--	duty = value * div / LED_FULL;
-+	duty = value * div / 255;
- 
- 	/* for now, this is safe to directly poke those registers because:
- 	 *  - A: nvidia never puts the logo led to any other PWM controler
+-	if (unlikely(*addr + size >= bios->size)) {
++	if (unlikely(*addr + size > bios->size)) {
+ 		nvkm_error(&bios->subdev, "OOB %d %08x %08x\n", size, p, *addr);
+ 		return false;
+ 	}
 -- 
-2.34.1
+2.30.2
 
