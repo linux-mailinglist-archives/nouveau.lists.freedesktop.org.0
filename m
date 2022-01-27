@@ -1,54 +1,87 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 872F249D198
-	for <lists+nouveau@lfdr.de>; Wed, 26 Jan 2022 19:21:30 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id DCAA949DEAC
+	for <lists+nouveau@lfdr.de>; Thu, 27 Jan 2022 11:03:35 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C593C10E60D;
-	Wed, 26 Jan 2022 18:21:16 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8DCDB10F001;
+	Thu, 27 Jan 2022 10:03:32 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 459C610E794;
- Wed, 26 Jan 2022 10:43:51 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1643193831; x=1674729831;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:in-reply-to;
- bh=Vtg1dgMFp7p9GgxTmw0mrktziInoebLsnCNjJeItTWc=;
- b=QzbZonJ+gPRdLsAL0hTpqmquRMEbVaNxONmG58nSx1HID6ljvFUmHpTv
- yJwRPm4crF+mUJ6q82mD10iSZqixbJRdo9alQxMG059v1/9ey8gqZavhR
- 2ac47zxZKQVXl4kktJUg3uolInOZeIrju60MRTa+dzfcCJX/11eeFchNC
- gzfUVO3Ma4toFimB58vbo1JAnsGyX4ICD+ZDQbFwLSWu3t9+zqehgkI98
- E5KQgMmzOTtBUsF3e5eWDzdMmRNtCl8nALgQ5Bggg/+nTBnHglpXA8wYF
- FfgqhHgh6epkXvW5G3u+RWI5r3WwUdU2HMyTOGwkO/Pf1NJDNUQ8DYzIN w==;
-X-IronPort-AV: E=McAfee;i="6200,9189,10238"; a="270975105"
-X-IronPort-AV: E=Sophos;i="5.88,317,1635231600"; d="scan'208";a="270975105"
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
- by fmsmga101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 26 Jan 2022 02:43:50 -0800
-X-IronPort-AV: E=Sophos;i="5.88,317,1635231600"; d="scan'208";a="624796941"
-Received: from richardt-mobl1.amr.corp.intel.com (HELO ldmartin-desk2)
- ([10.212.143.219])
- by fmsmga002-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 26 Jan 2022 02:43:48 -0800
-Date: Wed, 26 Jan 2022 02:43:45 -0800
-From: Lucas De Marchi <lucas.demarchi@intel.com>
-To: Andy Shevchenko <andy.shevchenko@gmail.com>
-Message-ID: <20220126104345.r6libof7z7tqjqxi@ldmartin-desk2>
-X-Patchwork-Hint: comment
-References: <20220126093951.1470898-1-lucas.demarchi@intel.com>
- <20220126093951.1470898-10-lucas.demarchi@intel.com>
- <CAHp75Vd+TmShx==d_JHZUu0Q-9X7CmZEOFdKnSrcRKs81Gxn3g@mail.gmail.com>
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2657D10F001
+ for <nouveau@lists.freedesktop.org>; Thu, 27 Jan 2022 10:03:32 +0000 (UTC)
+Received: by mail-wm1-x32c.google.com with SMTP id n8so1491663wmk.3
+ for <nouveau@lists.freedesktop.org>; Thu, 27 Jan 2022 02:03:32 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
+ h=date:from:to:cc:subject:message-id:mail-followup-to:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=hgAj8AjMrz1A7BDxAJfFuQ4EGSqn2ucoZeTxIYc92rk=;
+ b=Q6vOh8E4uR7I456lRL9xd46Oxh3hEA4vw9DMBgAJlBFtPFLc2lys7DZQTXZA3Weh2T
+ 0ZCv0WZK46pzIyXAbmjOFG5AJ3peSyMI2Er0qQC/Md1poCrDjupHiiq08TIHvhriXkRP
+ QFcc5vS4ZI++Fea3tzi88TKsVzXqwdeIiDBaU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id
+ :mail-followup-to:references:mime-version:content-disposition
+ :in-reply-to;
+ bh=hgAj8AjMrz1A7BDxAJfFuQ4EGSqn2ucoZeTxIYc92rk=;
+ b=SN5miEQs1aCmTUvPd+Qzcv0GQqB9QqCdj3+zITmnRnH96BzfhvU+oMPtyLwaq1jePb
+ G6S0mzx2GbVAkK6u7HKs63K2HmG4fFZZd6t8pkIAqlR1FZ4zAh1XE/Nwx2mrNKNuGjQN
+ V3EMCWuPUPiJc45MYbM5oEnDAhvMbB1hBVjFi9U6bWiqFkN9016yJWxRdDTPq3Ug3SoC
+ 9xNZkkC2rtKBKgoSugqnAd1FFfOk4+ABOlnPW/eA5PTfFDgPleuut+/dD7Q31gnMFnar
+ s0Nx3Zx5716SKYvMHMV25rstrN9nR2iae/a36/R0wQ8Jjaqhd9TE+GazjNhHbZHV+QPJ
+ 3fcg==
+X-Gm-Message-State: AOAM531n0GVQQxD4UydLtS8KF4Wq7hxY1d0lKeYT33tcp6ld73Va1F8y
+ BE+wjuQCJiU7/+gr9Fn04VYRWg==
+X-Google-Smtp-Source: ABdhPJzSG06zHL7QC0W9qJ4UoSviuojSBNboAnS5fPgZRPU8eJNpqde7XN8cpCkl7ua39RHdPNVpmA==
+X-Received: by 2002:a1c:4b13:: with SMTP id y19mr10758110wma.129.1643277810650; 
+ Thu, 27 Jan 2022 02:03:30 -0800 (PST)
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
+ by smtp.gmail.com with ESMTPSA id s9sm1699065wrr.84.2022.01.27.02.03.29
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 27 Jan 2022 02:03:30 -0800 (PST)
+Date: Thu, 27 Jan 2022 11:03:27 +0100
+From: Daniel Vetter <daniel@ffwll.ch>
+To: Tomohito Esaki <etom@igel.co.jp>
+Message-ID: <YfJt7zQNUnSpMP+l@phenom.ffwll.local>
+Mail-Followup-To: Tomohito Esaki <etom@igel.co.jp>,
+ dri-devel@lists.freedesktop.org,
+ Alex Deucher <alexander.deucher@amd.com>,
+ Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+ "Pan, Xinhui" <Xinhui.Pan@amd.com>, David Airlie <airlied@linux.ie>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>,
+ Thomas Zimmermann <tzimmermann@suse.de>,
+ Ben Skeggs <bskeggs@redhat.com>,
+ Michel =?iso-8859-1?Q?D=E4nzer?= <mdaenzer@redhat.com>,
+ Simon Ser <contact@emersion.fr>,
+ Qingqing Zhuo <qingqing.zhuo@amd.com>,
+ Bas Nieuwenhuizen <bas@basnieuwenhuizen.nl>,
+ Mark Yacoub <markyacoub@chromium.org>,
+ Sean Paul <seanpaul@chromium.org>, Evan Quan <evan.quan@amd.com>,
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Petr Mladek <pmladek@suse.com>,
+ Sakari Ailus <sakari.ailus@linux.intel.com>,
+ Lee Jones <lee.jones@linaro.org>,
+ Abhinav Kumar <abhinavk@codeaurora.org>,
+ Dmitry Baryshkov <dmitry.baryshkov@linaro.org>,
+ Rob Clark <robdclark@chromium.org>, amd-gfx@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, nouveau@lists.freedesktop.org,
+ Daniel Stone <daniel@fooishbar.org>,
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
+ Damian Hobson-Garcia <dhobsong@igel.co.jp>,
+ Takanari Hayama <taki@igel.co.jp>
+References: <20220127032539.9929-1-etom@igel.co.jp>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <CAHp75Vd+TmShx==d_JHZUu0Q-9X7CmZEOFdKnSrcRKs81Gxn3g@mail.gmail.com>
-X-Mailman-Approved-At: Wed, 26 Jan 2022 18:21:14 +0000
-Subject: Re: [Nouveau] [Intel-gfx] [PATCH v2 09/11] drm: Convert open-coded
- yes/no strings to yesno()
+In-Reply-To: <20220127032539.9929-1-etom@igel.co.jp>
+X-Operating-System: Linux phenom 5.10.0-8-amd64 
+Subject: Re: [Nouveau] [RFC PATCH v5 0/3] Add support modifiers for drivers
+ whose planes only support linear layout
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,88 +93,118 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Emma Anholt <emma@anholt.net>, David Airlie <airlied@linux.ie>,
- nouveau@lists.freedesktop.org, Rasmus Villemoes <linux@rasmusvillemoes.dk>,
- dri-devel@lists.freedesktop.org, Chris Wilson <chris@chris-wilson.co.uk>,
- Vishal Kulkarni <vishal@chelsio.com>, netdev@vger.kernel.org,
- Francis Laniel <laniel_francis@privacyrequired.com>,
- Kentaro Takeda <takedakn@nttdata.co.jp>, amd-gfx@lists.freedesktop.org,
- Ben Skeggs <bskeggs@redhat.com>, Jakub Kicinski <kuba@kernel.org>,
- Harry Wentland <harry.wentland@amd.com>, Petr Mladek <pmladek@suse.com>,
- Leo Li <sunpeng.li@amd.com>, intel-gfx@lists.freedesktop.org,
- Steven Rostedt <rostedt@goodmis.org>, Julia Lawall <julia.lawall@lip6.fr>,
- Rahul Lakkireddy <rahul.lakkireddy@chelsio.com>,
+Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org,
+ Michel =?iso-8859-1?Q?D=E4nzer?= <mdaenzer@redhat.com>,
+ Daniel Stone <daniel@fooishbar.org>, Lee Jones <lee.jones@linaro.org>,
+ Rob Clark <robdclark@chromium.org>, Evan Quan <evan.quan@amd.com>,
+ amd-gfx@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>,
+ Petr Mladek <pmladek@suse.com>, Sakari Ailus <sakari.ailus@linux.intel.com>,
+ Bas Nieuwenhuizen <bas@basnieuwenhuizen.nl>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Abhinav Kumar <abhinavk@codeaurora.org>,
+ Dmitry Baryshkov <dmitry.baryshkov@linaro.org>,
+ Takanari Hayama <taki@igel.co.jp>, Sean Paul <seanpaul@chromium.org>,
+ Maxime Ripard <mripard@kernel.org>, Daniel Vetter <daniel@ffwll.ch>,
  Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>, linux-kernel@vger.kernel.org,
- "David S. Miller" <davem@davemloft.net>,
- Sergey Senozhatsky <sergey.senozhatsky@gmail.com>,
- linux-security-module@vger.kernel.org,
- Sakari Ailus <sakari.ailus@linux.intel.com>, Raju Rangoju <rajur@chelsio.com>,
- Alex Deucher <alexander.deucher@amd.com>,
- Andrew Morton <akpm@linux-foundation.org>,
- Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>
+ Mark Yacoub <markyacoub@chromium.org>, Qingqing Zhuo <qingqing.zhuo@amd.com>,
+ "Pan, Xinhui" <Xinhui.Pan@amd.com>, linux-kernel@vger.kernel.org,
+ Simon Ser <contact@emersion.fr>, Alex Deucher <alexander.deucher@amd.com>,
+ Damian Hobson-Garcia <dhobsong@igel.co.jp>,
+ Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Wed, Jan 26, 2022 at 12:12:50PM +0200, Andy Shevchenko wrote:
->On Wed, Jan 26, 2022 at 11:39 AM Lucas De Marchi
-><lucas.demarchi@intel.com> wrote:
->>
->> linux/string_helpers.h provides a helper to return "yes"/"no" strings.
->> Replace the open coded versions with str_yes_no(). The places were
+On Thu, Jan 27, 2022 at 12:25:36PM +0900, Tomohito Esaki wrote:
+> Some drivers whose planes only support linear layout fb do not support format
+> modifiers.
+> These drivers should support modifiers, however the DRM core should handle this
+> rather than open-coding in every driver.
+> 
+> In this patch series, these drivers expose format modifiers based on the
+> following suggestion[1].
+> 
+> On Thu, Nov 18, 2021 at 01:02:11PM +0000, Daniel Stone wrote:
+> > I think the best way forward here is:
+> >   - add a new mode_config.cannot_support_modifiers flag, and enable
+> > this in radeon (plus any other drivers in the same boat)
+> >   - change drm_universal_plane_init() to advertise the LINEAR modifier
+> > when NULL is passed as the modifier list (including installing a
+> > default .format_mod_supported hook)
+> >   - remove the mode_config.allow_fb_modifiers hook and always
+> > advertise modifier support, unless
+> > mode_config.cannot_support_modifiers is set
+> 
+> 
+> [1] https://patchwork.kernel.org/project/linux-renesas-soc/patch/20190509054518.10781-1-etom@igel.co.jp/#24602575
 
-oops, I replaced yesno() here but forgot to do so in the title
+Two procedural things:
+- There's an r-b on all the patches from Andy from the last round, please
+  include that.
+- Please also include a changelog per-patch (at least going forward), that
+  helps with judging where a patch series is.
 
->> identified with the following semantic patch:
->>
->>         @@
->>         expression b;
->>         @@
->>
->>         - b ? "yes" : "no"
->>         + str_yes_no(b)
->>
->> Then the includes were added, so we include-what-we-use, and parenthesis
->> adjusted in drivers/gpu/drm/v3d/v3d_debugfs.c. After the conversion we
->> still see the same binary sizes:
->>
->>    text    data     bss     dec     hex filename
->>   51149    3295     212   54656    d580 virtio/virtio-gpu.ko.old
->>   51149    3295     212   54656    d580 virtio/virtio-gpu.ko
->> 1441491   60340     800 1502631  16eda7 radeon/radeon.ko.old
->> 1441491   60340     800 1502631  16eda7 radeon/radeon.ko
->> 6125369  328538   34000 6487907  62ff63 amd/amdgpu/amdgpu.ko.old
->> 6125369  328538   34000 6487907  62ff63 amd/amdgpu/amdgpu.ko
->>  411986   10490    6176  428652   68a6c drm.ko.old
->>  411986   10490    6176  428652   68a6c drm.ko
->>   98129    1636     264  100029   186bd dp/drm_dp_helper.ko.old
->>   98129    1636     264  100029   186bd dp/drm_dp_helper.ko
->> 1973432  109640    2352 2085424  1fd230 nouveau/nouveau.ko.old
->> 1973432  109640    2352 2085424  1fd230 nouveau/nouveau.ko
->
->This probably won't change for modules, but if you compile in the
->linker may try to optimize it. Would be nice to see the old-new for
->`make allyesconfig` or equivalent.
+But aside from this I think this looks ready.
 
-just like it would already do, no? I can try and see what happens, but
-my feeling is that we won't have any change.
+Cheers, Daniel
 
->
->...
->
->>         seq_printf(m, "\tDP branch device present: %s\n",
->> -                  branch_device ? "yes" : "no");
->> +                  str_yes_no(branch_device));
->
->Can it be now on one line? Same Q for all similar cases in the entire series.
+> 
+> v5:
+> * rebase to the latest master branch (5.17-rc1+)
+> 	+ "drm/plane: Make format_mod_supported truly optional" patch [2]
+>   [2] https://patchwork.freedesktop.org/patch/467940/?series=98255&rev=3
+> 
+> * change default_modifiers array from non-static to static
+> * remove terminator in default_modifiers array
+> * use ARRAY_SIZE to get the format_modifier_count
+> * keep a sanity check in plane init func
+> * modify several kerneldocs
+> 
+> v4: https://www.spinics.net/lists/dri-devel/msg329508.html
+> * modify documentation for fb_modifiers_not_supported flag in kerneldoc
+> 
+> v3: https://www.spinics.net/lists/dri-devel/msg329102.html
+> * change the order as follows:
+>    1. add fb_modifiers_not_supported flag
+>    2. add default modifiers
+>    3. remove allow_fb_modifiers flag
+> * add a conditional disable in amdgpu_dm_plane_init()
+> 
+> v2: https://www.spinics.net/lists/dri-devel/msg328939.html
+> * rebase to the latest master branch (5.16.0+)
+>       + "drm/plane: Make format_mod_supported truly optional" patch [2]
+> 
+> v1: https://www.spinics.net/lists/dri-devel/msg327352.html
+> * The initial patch set
+> 
+> Tomohito Esaki (3):
+>   drm: introduce fb_modifiers_not_supported flag in mode_config
+>   drm: add support modifiers for drivers whose planes only support
+>     linear layout
+>   drm: remove allow_fb_modifiers
+> 
+>  drivers/gpu/drm/amd/amdgpu/amdgpu_display.c   |  6 ++---
+>  drivers/gpu/drm/amd/amdgpu/dce_v10_0.c        |  2 ++
+>  drivers/gpu/drm/amd/amdgpu/dce_v11_0.c        |  2 ++
+>  drivers/gpu/drm/amd/amdgpu/dce_v6_0.c         |  1 +
+>  drivers/gpu/drm/amd/amdgpu/dce_v8_0.c         |  2 ++
+>  .../gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c |  3 +++
+>  drivers/gpu/drm/drm_framebuffer.c             |  6 ++---
+>  drivers/gpu/drm/drm_ioctl.c                   |  2 +-
+>  drivers/gpu/drm/drm_plane.c                   | 23 +++++++++++--------
+>  drivers/gpu/drm/nouveau/nouveau_display.c     |  6 +++--
+>  drivers/gpu/drm/radeon/radeon_display.c       |  2 ++
+>  .../gpu/drm/selftests/test-drm_framebuffer.c  |  1 -
+>  include/drm/drm_mode_config.h                 | 18 +++++----------
+>  include/drm/drm_plane.h                       |  3 +++
+>  14 files changed, 45 insertions(+), 32 deletions(-)
+> 
+> -- 
+> 2.25.1
+> 
 
-I saw that question in the previous version. I think those are very
-subjective is they all go a little bit over 80 chars. Some maintainers
-may prefer one way or the other.
-
-Here we are reducing just 3 chars so I assumed that is the preferred
-style here.  Also keeping it as is helps with the mass conversion since
-it's easily repeatable if another iteration is needed.
-
-thanks
-Lucas De Marchi
+-- 
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
