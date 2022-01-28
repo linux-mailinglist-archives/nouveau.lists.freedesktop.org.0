@@ -2,54 +2,81 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id D63604A01A9
-	for <lists+nouveau@lfdr.de>; Fri, 28 Jan 2022 21:10:18 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D44224A00BF
+	for <lists+nouveau@lfdr.de>; Fri, 28 Jan 2022 20:17:18 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5136110E4CE;
-	Fri, 28 Jan 2022 20:10:06 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 76F0910E201;
+	Fri, 28 Jan 2022 19:17:16 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B447610E2B2;
- Fri, 28 Jan 2022 09:40:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1643362819; x=1674898819;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:content-transfer-encoding:in-reply-to;
- bh=zbgjyRc44apVTbxnAhpECGtNLRdQVV6U+CLlN1kWDdw=;
- b=WVaEpS/q4ukTxJ5020C4R2OLqNsVAZXdTymxjfGeGYJZjzl6h+gf0XvI
- i5MPSr7WXFiDlpZR4MNs7DOPwUM2TAkdoucrm0t9X3h7lj3JuzYTX5laI
- XtQ9/W68Rxph8/7cSmxAI+ABGEIU6XMMepnZ2KMwkq058o1CPVccOb7mb
- gyYIhM6vxHTyltmtTGmJZt3iUfIe7mCdBaZnRR4hUIokbG9VLA6eXYIO4
- 9yX1D57Jg038JMv4TAGqlZboBkZGfHVoxWUlIUnbfL1ID8TpcFdAQvKW0
- P5ypS6j/gacm64lu5LaffoFCGtncVa7GPgcrS1NKbIuBvYIKmfZZcYsiJ Q==;
-X-IronPort-AV: E=McAfee;i="6200,9189,10240"; a="246862187"
-X-IronPort-AV: E=Sophos;i="5.88,323,1635231600"; d="scan'208";a="246862187"
-Received: from orsmga008.jf.intel.com ([10.7.209.65])
- by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 28 Jan 2022 01:40:19 -0800
-X-IronPort-AV: E=Sophos;i="5.88,323,1635231600"; d="scan'208";a="536067660"
-Received: from weif1-mobl.amr.corp.intel.com (HELO ldmartin-desk2)
- ([10.251.10.48])
- by orsmga008-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 28 Jan 2022 01:40:18 -0800
-Date: Fri, 28 Jan 2022 01:40:18 -0800
-From: Lucas De Marchi <lucas.demarchi@intel.com>
-To: Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>
-Message-ID: <20220128094018.m7pixeznedoa47gb@ldmartin-desk2>
-X-Patchwork-Hint: comment
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id DAA9A10E253
+ for <nouveau@lists.freedesktop.org>; Fri, 28 Jan 2022 19:17:15 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1643397434;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=eO1UXFuFc6XDm59y7eIl2dtM6a/z0pBy0qGOEAiugBI=;
+ b=c8iWQcuZvRTLEwe5kXcTTna0eo+znPw+8ex8obIRugEgFvsdAlWmHf/ePulVbWZFvvc0+6
+ tuN3AjXQEgVu4bjPPIiZTOWQhYyJkVmqM5L0cQARR+JBYpAQgF2ZfJUxxPsDSaZQxLOSkg
+ bc0F09HwyoxIpiG7L0lxTG8N4EwJSPw=
+Received: from mail-qv1-f70.google.com (mail-qv1-f70.google.com
+ [209.85.219.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-139-UAHMjH3QOcmBuVF2nJyCtA-1; Fri, 28 Jan 2022 14:17:13 -0500
+X-MC-Unique: UAHMjH3QOcmBuVF2nJyCtA-1
+Received: by mail-qv1-f70.google.com with SMTP id
+ 14-20020a05621420ee00b00423846005d4so6946611qvk.15
+ for <nouveau@lists.freedesktop.org>; Fri, 28 Jan 2022 11:17:13 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
+ :references:organization:user-agent:mime-version
+ :content-transfer-encoding;
+ bh=eO1UXFuFc6XDm59y7eIl2dtM6a/z0pBy0qGOEAiugBI=;
+ b=fyt5UFXEFut3M3SWZl0SKstm5Fbfx2knsLanEHjN2JoqO11ZzENg4MvQJvyn5h0USR
+ yFgXaFkspcMbNMNxQsVf3uMnqlZIA1G4ByCc+IaQyoxIqvDUCE//M+W4KadWj1BDWX5I
+ GcUDt4mVw87LBiWf5KZlGD+n5P32WX5fLqlDqUksDyqj1995pXc3Ht7MmTtqRsoiaRk1
+ aqVZsSHslCSXCWBjJl7Ly5WyimEUoqq0bHAt/XIwFt+7uy3hMoiyYH3+kjaqfepRm8L9
+ 8rG7AEJePgKl6qdeWGgf3FLZyjJnyuF6GgX7qwkIGfA0W7MoUINnM+/mACIkPTEme7Va
+ YRTA==
+X-Gm-Message-State: AOAM530EWYrl7OTnWs8cUvqTvI9/Ckf8nQhGWTFvcx81AhaX3SQPw5AM
+ lpzeUzIeCieAL+3LVagY3oyrnCZ7nx2VGYhBifZcy6LckZYmIgFNiLtONPACHM6Cpr/OkCi4R7P
+ D7ZwwGNDeAiYKv887X+jLvo3WiQ==
+X-Received: by 2002:a05:622a:ca:: with SMTP id
+ p10mr2002430qtw.123.1643397432674; 
+ Fri, 28 Jan 2022 11:17:12 -0800 (PST)
+X-Google-Smtp-Source: ABdhPJwYaAdUDE5W566fq77+INMNx47zILwdtqN04KYzsDT/UoGpKgB0OvZw6qO3zCtXnbY/NcpCYg==
+X-Received: by 2002:a05:622a:ca:: with SMTP id
+ p10mr2002408qtw.123.1643397432443; 
+ Fri, 28 Jan 2022 11:17:12 -0800 (PST)
+Received: from [192.168.8.138] (pool-98-118-105-43.bstnma.ftas.verizon.net.
+ [98.118.105.43])
+ by smtp.gmail.com with ESMTPSA id u17sm3548025qkj.44.2022.01.28.11.17.10
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 28 Jan 2022 11:17:11 -0800 (PST)
+Message-ID: <67747024d7b3e1904d639e5877a580a0af32d855.camel@redhat.com>
+From: Lyude Paul <lyude@redhat.com>
+To: Lucas De Marchi <lucas.demarchi@intel.com>,
+ linux-kernel@vger.kernel.org,  dri-devel@lists.freedesktop.org
+Date: Fri, 28 Jan 2022 14:17:09 -0500
+In-Reply-To: <20220128083626.3012259-10-lucas.demarchi@intel.com>
 References: <20220128083626.3012259-1-lucas.demarchi@intel.com>
- <a45a8cef-f5e7-604c-64f1-e893ec9ba8af@amd.com>
- <20220128091213.qaq6v4vbeerzvd3f@ldmartin-desk2>
- <27870484-6d16-5bd4-aa06-0ec513111d99@amd.com>
+ <20220128083626.3012259-10-lucas.demarchi@intel.com>
+Organization: Red Hat Inc.
+User-Agent: Evolution 3.42.2 (3.42.2-1.fc35)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1; format=flowed
-Content-Disposition: inline
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=lyude@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <27870484-6d16-5bd4-aa06-0ec513111d99@amd.com>
-X-Mailman-Approved-At: Fri, 28 Jan 2022 20:10:03 +0000
-Subject: Re: [Nouveau] [PATCH 00/14] Rename dma-buf-map
+Subject: Re: [Nouveau] [PATCH 09/14] drm/nouveau: Replace dma-buf-map with
+ iosys-map
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,260 +88,42 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: airlied@linux.ie, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, srinivas.kandagatla@linaro.org,
+Cc: airlied@linux.ie, christian.koenig@amd.com, srinivas.kandagatla@linaro.org,
  gregkh@linuxfoundation.org, nouveau@lists.freedesktop.org,
  sumit.semwal@linaro.org, linux-media@vger.kernel.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, Jan 28, 2022 at 10:22:00AM +0100, Christian König wrote:
->Am 28.01.22 um 10:12 schrieb Lucas De Marchi:
->>On Fri, Jan 28, 2022 at 09:41:14AM +0100, Christian König wrote:
->>>Rule #1 is to never ever break the build.
->>>
->>>Because of this all those patches needs to be squashed into a 
->>>single one as far as I can see.
->>
->>what config are you building on?
->
->Well I'm not building at all, I'm just looking at the patches as an 
->engineer with 25 years of experience with Linux patches.
->
->Just take a look at patch number 2:
->
->-static int fastrpc_vmap(struct dma_buf *dmabuf, struct dma_buf_map *map)
->+static int fastrpc_vmap(struct dma_buf *dmabuf, struct iosys_map *map)
->
->You are changing the functions signature without changing any of the 
->callers.
->
->At bare minimum that causes a warning and on runtime this only works 
->by coincident now because the structure pointers just happen to have 
->the same layout. This is not something we usually do.
+For this patch:
 
-you missed the magic/hack on patch 1:
+Reviewed-by: Lyude Paul <lyude@redhat.com>
 
-1) dma-buf-map.h includes iosys-map.h _at the end_
-2) iosys-map.h includes dma-buf-map.h at the beginning
-    and initially does a "define iosys_map dma_buf_map".
+On Fri, 2022-01-28 at 00:36 -0800, Lucas De Marchi wrote:
+> iosys-map is the new name for dma-buf-map and will gain new
+> capabitilities. Replace with the new API in nouveau.
+> 
+> Signed-off-by: Lucas De Marchi <lucas.demarchi@intel.com>
+> ---
+> Â drivers/gpu/drm/nouveau/nouveau_gem.c | 2 ++
+> Â 1 file changed, 2 insertions(+)
+> 
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_gem.c
+> b/drivers/gpu/drm/nouveau/nouveau_gem.c
+> index 9416bee92141..ad0527bdaadf 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_gem.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_gem.c
+> @@ -24,6 +24,8 @@
+> Â  *
+> Â  */
+> Â 
+> +#include <linux/iosys-map.h>
+> +
+> Â #include <drm/drm_gem_ttm_helper.h>
+> Â 
+> Â #include "nouveau_drv.h"
 
-So, it doesn't work by coincidence, It's because it was done to allow
-converting it piecemeal.
+-- 
+Cheers,
+ Lyude Paul (she/her)
+ Software Engineer at Red Hat
 
-But as I said, I don't really have a preference. When crossing
-subsystems one thing that is hard is that different people have different
-preferences on these things. At least squashing now is much easier than
-if I had to split it
-
-Try to imagine how much complain I received on going the other way in
-25985edcedea6396277003854657b5f3cb31a628 with
-2463 files changed, 4252 insertions(+), 4252 deletions(-)
-:)
-
-
-Lucas De Marchi
-
->
->Regards,
->Christian.
->
->>I built this series, full config with
->>CONFIG_COMPILE_TEST and doing:
->>
->>    git rebase -i <base> -x "make -j$(nproc)"
->>
->>I split these patches in a way that wouldn't break the build on purpose.
->>There were a couple that I couldn't build without cross compiling: tegra
->>and rockchip. The others were ok.
->>
->>I'm not really against squashing everything in one to merge, though.
->>It will be hard on the conflicts later, but should get the job done much
->>quicker.
->>
->>Lucas De Marchi
->>
->>>
->>>Regards,
->>>Christian.
->>>
->>>Am 28.01.22 um 09:36 schrieb Lucas De Marchi:
->>>>Motivation for this started in
->>>>https://nam11.safelinks.protection.outlook.com/?url=https%3A%2F%2Flore.kernel.org%2Flkml%2F20220126203702.1784589-1-lucas.demarchi%40intel.com%2F&amp;data=04%7C01%7Cchristian.koenig%40amd.com%7C15bd6767b2fb4b2c027e08d9e23e46af%7C3dd8961fe4884e608e11a82d994e183d%7C0%7C0%7C637789579371467295%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000&amp;sdata=yAllbKjW29SsXA0CMrhK%2BDDvZ1A5CrSptshmsh5vYNQ%3D&amp;reserved=0
->>>>
->>>>when trying to extend the dma-buf-map API to cover new use 
->>>>cases: help a
->>>>single driver with allocations and sharing code paths for IO and system
->>>>memory. I'm leaving the API additions aside and first renaming the
->>>>interface as requested.
->>>>
->>>>There are already some users in tree outside the context of dma-buf
->>>>importer/exporter. So before extending the API, let's dissociate 
->>>>it from
->>>>dma-buf.
->>>>
->>>>The iosys-map.h is introduced in the first patch in a way that allows
->>>>the conversion of each driver to happen separately. After all the
->>>>conversions are done we can remove the old one, which is the 
->>>>last patch.
->>>>Another possible way is to squash everything and merge together,
->>>>but I believe this would make much harder for review.
->>>>
->>>>The conversion was done with the following semantic patch:
->>>>
->>>>    @r1@
->>>>    @@
->>>>    - struct dma_buf_map
->>>>    + struct iosys_map
->>>>
->>>>    @r2@
->>>>    @@
->>>>    (
->>>>    - DMA_BUF_MAP_INIT_VADDR
->>>>    + IOSYS_MAP_INIT_VADDR
->>>>    |
->>>>    - dma_buf_map_set_vaddr
->>>>    + iosys_map_set_vaddr
->>>>    |
->>>>    - dma_buf_map_set_vaddr_iomem
->>>>    + iosys_map_set_vaddr_iomem
->>>>    |
->>>>    - dma_buf_map_is_equal
->>>>    + iosys_map_is_equal
->>>>    |
->>>>    - dma_buf_map_is_null
->>>>    + iosys_map_is_null
->>>>    |
->>>>    - dma_buf_map_is_set
->>>>    + iosys_map_is_set
->>>>    |
->>>>    - dma_buf_map_clear
->>>>    + iosys_map_clear
->>>>    |
->>>>    - dma_buf_map_memcpy_to
->>>>    + iosys_map_memcpy_to
->>>>    |
->>>>    - dma_buf_map_incr
->>>>    + iosys_map_incr
->>>>    )
->>>>
->>>>    @@
->>>>    @@
->>>>    - #include <linux/dma-buf-map.h>
->>>>    + #include <linux/iosys-map.h>
->>>>
->>>>and then some files had their includes adjusted so we can build
->>>>everything on each commit in this series. Also some comments 
->>>>were update
->>>>to remove mentions to dma-buf-map. Simply doing a sed to rename didn't
->>>>work as dma-buf has some APIs using the dma_buf_map prefix.
->>>>
->>>>Once finalized, I think most of this, if not all, could go through the
->>>>drm-misc-next branch. I split i915, msm, nouveau, and radeon in their
->>>>own patches in case it's preferred to take those through their own
->>>>trees.
->>>>
->>>>Lucas De Marchi
->>>>
->>>>Lucas De Marchi (14):
->>>>  iosys-map: Introduce renamed dma-buf-map
->>>>  misc: fastrpc: Replace dma-buf-map with iosys-map
->>>>  dma-buf: Replace dma-buf-map with iosys-map
->>>>  media: Replace dma-buf-map with iosys-map
->>>>  drm/ttm: Replace dma-buf-map with iosys-map
->>>>  drm: Replace dma-buf-map with iosys-map in drivers
->>>>  drm/i915: Replace dma-buf-map with iosys-map
->>>>  drm/msm: Replace dma-buf-map with iosys-map
->>>>  drm/nouveau: Replace dma-buf-map with iosys-map
->>>>  drm/tegra: Replace dma-buf-map with iosys-map
->>>>  drm/radeon: Replace dma-buf-map with iosys-map
->>>>  drm: Replace dma-buf-map with iosys-map in common code
->>>>  Documentation: Refer to iosys-map instead of dma-buf-map
->>>>  dma-buf-map: Remove API in favor of iosys-map
->>>>
->>>> Documentation/driver-api/dma-buf.rst          |   4 +-
->>>> Documentation/gpu/todo.rst                    |  20 +-
->>>> MAINTAINERS                                   |   2 +-
->>>> drivers/dma-buf/dma-buf.c                     |  22 +-
->>>> drivers/dma-buf/heaps/cma_heap.c              |  10 +-
->>>> drivers/dma-buf/heaps/system_heap.c           |  10 +-
->>>> drivers/gpu/drm/ast/ast_drv.h                 |   2 +-
->>>> drivers/gpu/drm/ast/ast_mode.c                |   8 +-
->>>> drivers/gpu/drm/drm_cache.c                   |  18 +-
->>>> drivers/gpu/drm/drm_client.c                  |   9 +-
->>>> drivers/gpu/drm/drm_fb_helper.c               |  12 +-
->>>> drivers/gpu/drm/drm_gem.c                     |  12 +-
->>>> drivers/gpu/drm/drm_gem_cma_helper.c          |   9 +-
->>>> drivers/gpu/drm/drm_gem_framebuffer_helper.c  |  16 +-
->>>> drivers/gpu/drm/drm_gem_shmem_helper.c        |  15 +-
->>>> drivers/gpu/drm/drm_gem_ttm_helper.c          |   4 +-
->>>> drivers/gpu/drm/drm_gem_vram_helper.c         |  25 +-
->>>> drivers/gpu/drm/drm_internal.h                |   6 +-
->>>> drivers/gpu/drm/drm_mipi_dbi.c                |   8 +-
->>>> drivers/gpu/drm/drm_prime.c                   |   4 +-
->>>> drivers/gpu/drm/etnaviv/etnaviv_drv.h         |   2 +-
->>>> drivers/gpu/drm/etnaviv/etnaviv_gem_prime.c   |   8 +-
->>>> drivers/gpu/drm/gud/gud_pipe.c                |   4 +-
->>>> drivers/gpu/drm/hyperv/hyperv_drm_modeset.c   |   5 +-
->>>> drivers/gpu/drm/i915/gem/i915_gem_dmabuf.c    |   8 +-
->>>> .../drm/i915/gem/selftests/i915_gem_dmabuf.c  |   6 +-
->>>> .../gpu/drm/i915/gem/selftests/mock_dmabuf.c  |   6 +-
->>>> drivers/gpu/drm/lima/lima_gem.c               |   3 +-
->>>> drivers/gpu/drm/lima/lima_sched.c             |   4 +-
->>>> drivers/gpu/drm/mediatek/mtk_drm_gem.c        |   7 +-
->>>> drivers/gpu/drm/mediatek/mtk_drm_gem.h        |   5 +-
->>>> drivers/gpu/drm/mgag200/mgag200_mode.c        |   4 +-
->>>> drivers/gpu/drm/msm/msm_drv.h                 |   4 +-
->>>> drivers/gpu/drm/msm/msm_gem_prime.c           |   6 +-
->>>> drivers/gpu/drm/nouveau/nouveau_gem.c         |   2 +
->>>> drivers/gpu/drm/panfrost/panfrost_perfcnt.c   |  13 +-
->>>> drivers/gpu/drm/qxl/qxl_display.c             |   8 +-
->>>> drivers/gpu/drm/qxl/qxl_draw.c                |   6 +-
->>>> drivers/gpu/drm/qxl/qxl_drv.h                 |  10 +-
->>>> drivers/gpu/drm/qxl/qxl_object.c              |   8 +-
->>>> drivers/gpu/drm/qxl/qxl_object.h              |   4 +-
->>>> drivers/gpu/drm/qxl/qxl_prime.c               |   4 +-
->>>> drivers/gpu/drm/radeon/radeon_gem.c           |   1 +
->>>> drivers/gpu/drm/rockchip/rockchip_drm_gem.c   |   9 +-
->>>> drivers/gpu/drm/rockchip/rockchip_drm_gem.h   |   5 +-
->>>> drivers/gpu/drm/tegra/gem.c                   |  10 +-
->>>> drivers/gpu/drm/tiny/cirrus.c                 |   8 +-
->>>> drivers/gpu/drm/tiny/gm12u320.c               |   7 +-
->>>> drivers/gpu/drm/ttm/ttm_bo_util.c             |  16 +-
->>>> drivers/gpu/drm/ttm/ttm_resource.c            |  26 +-
->>>> drivers/gpu/drm/ttm/ttm_tt.c                  |   6 +-
->>>> drivers/gpu/drm/udl/udl_modeset.c             |   3 +-
->>>> drivers/gpu/drm/vboxvideo/vbox_mode.c         |   4 +-
->>>> drivers/gpu/drm/virtio/virtgpu_prime.c        |   1 +
->>>> drivers/gpu/drm/vkms/vkms_composer.c          |   4 +-
->>>> drivers/gpu/drm/vkms/vkms_drv.h               |   6 +-
->>>> drivers/gpu/drm/vkms/vkms_plane.c             |   2 +-
->>>> drivers/gpu/drm/vkms/vkms_writeback.c         |   2 +-
->>>> drivers/gpu/drm/xen/xen_drm_front_gem.c       |   7 +-
->>>> drivers/gpu/drm/xen/xen_drm_front_gem.h       |   6 +-
->>>> .../common/videobuf2/videobuf2-dma-contig.c   |   8 +-
->>>> .../media/common/videobuf2/videobuf2-dma-sg.c |   9 +-
->>>> .../common/videobuf2/videobuf2-vmalloc.c      |  11 +-
->>>> drivers/misc/fastrpc.c                        |   4 +-
->>>> include/drm/drm_cache.h                       |   6 +-
->>>> include/drm/drm_client.h                      |   7 +-
->>>> include/drm/drm_gem.h                         |   6 +-
->>>> include/drm/drm_gem_atomic_helper.h           |   6 +-
->>>> include/drm/drm_gem_cma_helper.h              |   6 +-
->>>> include/drm/drm_gem_framebuffer_helper.h      |   8 +-
->>>> include/drm/drm_gem_shmem_helper.h            |  12 +-
->>>> include/drm/drm_gem_ttm_helper.h              |   6 +-
->>>> include/drm/drm_gem_vram_helper.h             |   9 +-
->>>> include/drm/drm_prime.h                       |   6 +-
->>>> include/drm/ttm/ttm_bo_api.h                  |  10 +-
->>>> include/drm/ttm/ttm_kmap_iter.h               |  10 +-
->>>> include/drm/ttm/ttm_resource.h                |   6 +-
->>>> include/linux/dma-buf-map.h                   | 266 ------------------
->>>> include/linux/dma-buf.h                       |  12 +-
->>>> include/linux/iosys-map.h                     | 257 +++++++++++++++++
->>>> 80 files changed, 579 insertions(+), 552 deletions(-)
->>>> delete mode 100644 include/linux/dma-buf-map.h
->>>> create mode 100644 include/linux/iosys-map.h
->>>>
->>>
->
