@@ -2,59 +2,86 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 80A734A014E
-	for <lists+nouveau@lfdr.de>; Fri, 28 Jan 2022 21:02:08 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D45DA4A0375
+	for <lists+nouveau@lfdr.de>; Fri, 28 Jan 2022 23:21:41 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C78DB10E166;
-	Fri, 28 Jan 2022 20:02:01 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6841B10E153;
+	Fri, 28 Jan 2022 22:21:32 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-oi1-x229.google.com (mail-oi1-x229.google.com
- [IPv6:2607:f8b0:4864:20::229])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9CF3810E122;
- Fri, 28 Jan 2022 20:02:00 +0000 (UTC)
-Received: by mail-oi1-x229.google.com with SMTP id m9so14336043oia.12;
- Fri, 28 Jan 2022 12:02:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=4KPQs4BICnK1jcv7Ue8a1i7g7BfJfHr1ekNmdCInY0w=;
- b=l4flimN6Rgf2/XPpkMw15pfJ9RHpjcAibkUIjUJN7f5ACxUodXF5fhtEiLq25oN2nQ
- Ig0/aMHr46/+8YDNpR6y5kh/KWNZZGwl1/RlBB4a7jd41u9I8t4acBrM1vP/w+FGwjuO
- Z1JOz+F9UXZk2roXWX6TIZbw4aK+a1s25EbraaIMhdci7VexsfqRMupQ7nIlFtASA/sh
- /RemWindYWXe6KXXrV+wzRWDOv4L7GiyOql4NLTmLnT2GTsuJyBlFPQbINI742iYYadJ
- vwJ+Iq2U9y6g/xgFXqsycHnHfckiim44vVngighjOBQ14AImYd2odulSZR/M5aQ7ExGg
- Gl+w==
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
+ [IPv6:2a00:1450:4864:20::429])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 5187B10E142
+ for <nouveau@lists.freedesktop.org>; Fri, 28 Jan 2022 22:21:31 +0000 (UTC)
+Received: by mail-wr1-x429.google.com with SMTP id a13so13437225wrh.9
+ for <nouveau@lists.freedesktop.org>; Fri, 28 Jan 2022 14:21:31 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
+ h=date:from:to:cc:subject:message-id:mail-followup-to:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=O6jBj3yE34tMPyiH8WiT/7pfKWSenbjdGRkVHMIkNtk=;
+ b=PohzoxAm5ukiTZAjB9mAUKVzFJchHbX8tH+Fsk66VWOGNBYvMDA0AXcXO0XsHJ8CF9
+ Zj4I3iz26pHmBbmhCBUD/TZxU4C0BRhS6KCNrvW9agZJ3PwDqNdkxU2k3Il24JgqprCh
+ Ph8Qb1t2tbjjSOyZYNafXvV38P1nxntJ6iU4M=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=4KPQs4BICnK1jcv7Ue8a1i7g7BfJfHr1ekNmdCInY0w=;
- b=MuTYu2l+Whh1g2qwok7SsTClZ7wbhQRsoxF+IgFJKGmRnN5tAbXIOwjT4REcdfazST
- kRrwl/jcjUCZDxgd9UP1vR1YpuZ1bFhsSUq66IUMnbv8w6/zuH6/nk2VcXic6R7y+ArF
- 5Z7jczzrvQXaMgcD8pnO2QZ0bkhNVarbWmGHQSyBhzez7zmQ9++zeiZEMwRKjsaIQZsQ
- X9F1vBRwSG/zV2r/8cVPFb7U1h/NoyGYHojVLAPffTHLRl5uSJvAmEZBwoiezmGglVWP
- PavaGWwZCru5k6sICTzGxmjCYIPz+9Uilmqp0V5we8SCka8tTqt4Xsxlgq6xaljBnP5Y
- mzOg==
-X-Gm-Message-State: AOAM531BGJY/J+wKsZdGrlgRJOOWGrAh/ob3Imp8VAsJnJVmv0xlgTIL
- fRcvMRfUbTq2YhBxhAMIc9FNWThYQ+11ccjCoKY=
-X-Google-Smtp-Source: ABdhPJx/8io+fNHpd9HG9+lbXQhrPgksb6Db7eIuis71AlCHi6W2DtR5mNQ1TzmEz/J12C/wch/XwvvMxMRDXFQAVwE=
-X-Received: by 2002:a05:6808:2189:: with SMTP id
- be9mr11252433oib.93.1643400119936; 
- Fri, 28 Jan 2022 12:01:59 -0800 (PST)
+ h=x-gm-message-state:date:from:to:cc:subject:message-id
+ :mail-followup-to:references:mime-version:content-disposition
+ :in-reply-to;
+ bh=O6jBj3yE34tMPyiH8WiT/7pfKWSenbjdGRkVHMIkNtk=;
+ b=m1xC+coIqrNV7Mmpu8BLhOyOcMfQYazTU42LWRFRFz0pEMNP9TL36fgm+4VM0RaHvX
+ yk3glWkrrbN4hlVlFDa9d/WgIVQFhf7+I+mFe04tN3G36T18GovEE/zW8zLc41e7O3JG
+ ClgVv9fxSt2QKYUBM7zNNQy7lFrYV3hMjaOJVhyT56iznw22QECMEsUCGDp8+bGsx8F2
+ iG/n3Og0aLp6ecDonrqClYmiBZzxFWGIAffSq/C0idgsTFUuoUyGzOoMjrG8dDIFxzaG
+ cilqBOs+8dHb1RqD5pRmeuHNcfuuDZ6iSmr+cnuMmdW+ube2dFamlCkXFQ5WVH0W7MeK
+ AYaw==
+X-Gm-Message-State: AOAM533K68Ny990W16ottqaAdsjxDXeQosPQafGG/RXn85umEQvQT5Z7
+ sxa46VV/JqvGlQy5GGDS2+CQ4w==
+X-Google-Smtp-Source: ABdhPJyYnfwW4GpvwtYzDjoWM0WpzW/oIzI4gBHD+DV56yWwd0aJbs6KPAlXKyagq/4wkTOCQATqpQ==
+X-Received: by 2002:adf:ed42:: with SMTP id u2mr8475552wro.57.1643408489814;
+ Fri, 28 Jan 2022 14:21:29 -0800 (PST)
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
+ by smtp.gmail.com with ESMTPSA id f20sm3531608wmg.2.2022.01.28.14.21.28
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 28 Jan 2022 14:21:29 -0800 (PST)
+Date: Fri, 28 Jan 2022 23:21:26 +0100
+From: Daniel Vetter <daniel@ffwll.ch>
+To: Tomohito Esaki <etom@igel.co.jp>
+Message-ID: <YfRsZhMW1dS3EAxa@phenom.ffwll.local>
+Mail-Followup-To: Tomohito Esaki <etom@igel.co.jp>,
+ dri-devel@lists.freedesktop.org,
+ Alex Deucher <alexander.deucher@amd.com>,
+ Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+ "Pan, Xinhui" <Xinhui.Pan@amd.com>, David Airlie <airlied@linux.ie>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>,
+ Thomas Zimmermann <tzimmermann@suse.de>,
+ Ben Skeggs <bskeggs@redhat.com>,
+ Michel =?iso-8859-1?Q?D=E4nzer?= <mdaenzer@redhat.com>,
+ Simon Ser <contact@emersion.fr>,
+ Qingqing Zhuo <qingqing.zhuo@amd.com>,
+ Bas Nieuwenhuizen <bas@basnieuwenhuizen.nl>,
+ Mark Yacoub <markyacoub@chromium.org>,
+ Sean Paul <seanpaul@chromium.org>, Evan Quan <evan.quan@amd.com>,
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Petr Mladek <pmladek@suse.com>,
+ Sakari Ailus <sakari.ailus@linux.intel.com>,
+ Lee Jones <lee.jones@linaro.org>,
+ Abhinav Kumar <abhinavk@codeaurora.org>,
+ Dmitry Baryshkov <dmitry.baryshkov@linaro.org>,
+ Rob Clark <robdclark@chromium.org>, amd-gfx@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, nouveau@lists.freedesktop.org,
+ Daniel Stone <daniel@fooishbar.org>,
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
+ Damian Hobson-Garcia <dhobsong@igel.co.jp>,
+ Takanari Hayama <taki@igel.co.jp>
+References: <20220128060836.11216-1-etom@igel.co.jp>
 MIME-Version: 1.0
-References: <20220124165856.57022-1-zhou1615@umn.edu>
- <YfPC3N+H9Fu/gqpz@kroah.com>
- <536c833413ccbe0b8ad653a50c5ea867bf975290.camel@redhat.com>
- <CADnq5_MtMPNHbs92OMHEzvPYSHGt=nPJMdrny6Siuvj3SYTAXQ@mail.gmail.com>
- <CACO55tt4P+beifvS=jcDsfwybFynngc8DHLR0n3BseeDJNrHyw@mail.gmail.com>
-In-Reply-To: <CACO55tt4P+beifvS=jcDsfwybFynngc8DHLR0n3BseeDJNrHyw@mail.gmail.com>
-From: Alex Deucher <alexdeucher@gmail.com>
-Date: Fri, 28 Jan 2022 15:01:48 -0500
-Message-ID: <CADnq5_MnXG6-jzVZ7sXQjd8zeBKYPimFYOiR=M8=pB02fAxDzA@mail.gmail.com>
-To: Karol Herbst <kherbst@redhat.com>
-Content-Type: text/plain; charset="UTF-8"
-Subject: Re: [Nouveau] [PATCH] drm/nouveau/acr: Fix undefined behavior in
- nvkm_acr_hsfw_load_bl()
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20220128060836.11216-1-etom@igel.co.jp>
+X-Operating-System: Linux phenom 5.10.0-8-amd64 
+Subject: Re: [Nouveau] [RFC PATCH v6 0/3] Add support modifiers for drivers
+ whose planes only support linear layout
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -66,117 +93,118 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, Greg KH <gregkh@linuxfoundation.org>,
- Kangjie Lu <kjlu@umn.edu>, LKML <linux-kernel@vger.kernel.org>,
- Maling list - DRI developers <dri-devel@lists.freedesktop.org>,
- Ben Skeggs <bskeggs@redhat.com>, nouveau <nouveau@lists.freedesktop.org>,
- Zhou Qingyang <zhou1615@umn.edu>
+Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org,
+ Michel =?iso-8859-1?Q?D=E4nzer?= <mdaenzer@redhat.com>,
+ Daniel Stone <daniel@fooishbar.org>, Lee Jones <lee.jones@linaro.org>,
+ Rob Clark <robdclark@chromium.org>, Evan Quan <evan.quan@amd.com>,
+ amd-gfx@lists.freedesktop.org, Ben Skeggs <bskeggs@redhat.com>,
+ Petr Mladek <pmladek@suse.com>, Sakari Ailus <sakari.ailus@linux.intel.com>,
+ Bas Nieuwenhuizen <bas@basnieuwenhuizen.nl>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Abhinav Kumar <abhinavk@codeaurora.org>,
+ Dmitry Baryshkov <dmitry.baryshkov@linaro.org>,
+ Takanari Hayama <taki@igel.co.jp>, Sean Paul <seanpaul@chromium.org>,
+ Maxime Ripard <mripard@kernel.org>, Daniel Vetter <daniel@ffwll.ch>,
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Mark Yacoub <markyacoub@chromium.org>, Qingqing Zhuo <qingqing.zhuo@amd.com>,
+ "Pan, Xinhui" <Xinhui.Pan@amd.com>, linux-kernel@vger.kernel.org,
+ Simon Ser <contact@emersion.fr>, Alex Deucher <alexander.deucher@amd.com>,
+ Damian Hobson-Garcia <dhobsong@igel.co.jp>,
+ Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, Jan 28, 2022 at 2:58 PM Karol Herbst <kherbst@redhat.com> wrote:
->
-> On Fri, Jan 28, 2022 at 8:54 PM Alex Deucher <alexdeucher@gmail.com> wrote:
-> >
-> > On Fri, Jan 28, 2022 at 2:20 PM Lyude Paul <lyude@redhat.com> wrote:
-> > >
-> > > Sigh-thank you for catching this - I had totally forgot about the umn.edu ban.
-> > > I pushed this already but I will go ahead and send a revert for this patch.
-> > > Will cc you on it as well.
-> >
-> > This seems short-sighted.  If the patch is valid I see no reason to
-> > not accept it.  I'm not trying to downplay the mess umn got into, but
-> > as long as the patch is well scrutinized and fixes a valid issue, it
-> > should be applied rather than leaving potential bugs in place.
-> >
-> > Alex
-> >
->
-> Even though knowing that malicious code can be introduced via
-> perfectly fine looking patches, and sometimes one will never spot the
-> problem, this patch isn't all that bad tbh.
->
-> So should we reject patches out of "policies" or should we just be
-> extra careful? But not addressing the concerns as Greg pointed out is
-> also kind of a bad move, but also not knowing what the state of
-> resolving this mess is anyway.
+On Fri, Jan 28, 2022 at 03:08:33PM +0900, Tomohito Esaki wrote:
+> Some drivers whose planes only support linear layout fb do not support format
+> modifiers.
+> These drivers should support modifiers, however the DRM core should handle this
+> rather than open-coding in every driver.
+> 
+> In this patch series, these drivers expose format modifiers based on the
+> following suggestion[1].
+> 
+> On Thu, Nov 18, 2021 at 01:02:11PM +0000, Daniel Stone wrote:
+> > I think the best way forward here is:
+> >   - add a new mode_config.cannot_support_modifiers flag, and enable
+> > this in radeon (plus any other drivers in the same boat)
+> >   - change drm_universal_plane_init() to advertise the LINEAR modifier
+> > when NULL is passed as the modifier list (including installing a
+> > default .format_mod_supported hook)
+> >   - remove the mode_config.allow_fb_modifiers hook and always
+> > advertise modifier support, unless
+> > mode_config.cannot_support_modifiers is set
+> 
+> 
+> [1] https://patchwork.kernel.org/project/linux-renesas-soc/patch/20190509054518.10781-1-etom@igel.co.jp/#24602575
+> 
+> v6:
+> * add Reviewed-by and Acked-by
+> * add a changelog per-patch
 
-I think if the umn mess taught us anything, it's the need for more
-careful scrutiny.  But I certainly don't have the time to retype every
-valid patch if it comes from a umn source.  There are also ethical
-implications to that as well.  You didn't actually write the patch.
+Thanks for resending with all that added, makes my life so much easier!
 
-Alex
+All applied, thanks a bunch.
 
->
-> >
-> > >
-> > > On Fri, 2022-01-28 at 11:18 +0100, Greg KH wrote:
-> > > > On Tue, Jan 25, 2022 at 12:58:55AM +0800, Zhou Qingyang wrote:
-> > > > > In nvkm_acr_hsfw_load_bl(), the return value of kmalloc() is directly
-> > > > > passed to memcpy(), which could lead to undefined behavior on failure
-> > > > > of kmalloc().
-> > > > >
-> > > > > Fix this bug by using kmemdup() instead of kmalloc()+memcpy().
-> > > > >
-> > > > > This bug was found by a static analyzer.
-> > > > >
-> > > > > Builds with 'make allyesconfig' show no new warnings,
-> > > > > and our static analyzer no longer warns about this code.
-> > > > >
-> > > > > Fixes: 22dcda45a3d1 ("drm/nouveau/acr: implement new subdev to replace
-> > > > > "secure boot"")
-> > > > > Signed-off-by: Zhou Qingyang <zhou1615@umn.edu>
-> > > > > ---
-> > > > > The analysis employs differential checking to identify inconsistent
-> > > > > security operations (e.g., checks or kfrees) between two code paths
-> > > > > and confirms that the inconsistent operations are not recovered in the
-> > > > > current function or the callers, so they constitute bugs.
-> > > > >
-> > > > > Note that, as a bug found by static analysis, it can be a false
-> > > > > positive or hard to trigger. Multiple researchers have cross-reviewed
-> > > > > the bug.
-> > > > >
-> > > > >  drivers/gpu/drm/nouveau/nvkm/subdev/acr/hsfw.c | 9 +++++----
-> > > > >  1 file changed, 5 insertions(+), 4 deletions(-)
-> > > > >
-> > > > > diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/acr/hsfw.c
-> > > > > b/drivers/gpu/drm/nouveau/nvkm/subdev/acr/hsfw.c
-> > > > > index 667fa016496e..a6ea89a5d51a 100644
-> > > > > --- a/drivers/gpu/drm/nouveau/nvkm/subdev/acr/hsfw.c
-> > > > > +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/acr/hsfw.c
-> > > > > @@ -142,11 +142,12 @@ nvkm_acr_hsfw_load_bl(struct nvkm_acr *acr, const
-> > > > > char *name, int ver,
-> > > > >
-> > > > >         hsfw->imem_size = desc->code_size;
-> > > > >         hsfw->imem_tag = desc->start_tag;
-> > > > > -       hsfw->imem = kmalloc(desc->code_size, GFP_KERNEL);
-> > > > > -       memcpy(hsfw->imem, data + desc->code_off, desc->code_size);
-> > > > > -
-> > > > > +       hsfw->imem = kmemdup(data + desc->code_off, desc->code_size,
-> > > > > GFP_KERNEL);
-> > > > >         nvkm_firmware_put(fw);
-> > > > > -       return 0;
-> > > > > +       if (!hsfw->imem)
-> > > > > +               return -ENOMEM;
-> > > > > +       else
-> > > > > +               return 0;
-> > > > >  }
-> > > > >
-> > > > >  int
-> > > > > --
-> > > > > 2.25.1
-> > > > >
-> > > >
-> > > > As stated before, umn.edu is still not allowed to contribute to the
-> > > > Linux kernel.  Please work with your administration to resolve this
-> > > > issue.
-> > > >
-> > >
-> > > --
-> > > Cheers,
-> > >  Lyude Paul (she/her)
-> > >  Software Engineer at Red Hat
-> > >
-> >
->
+Cheers, Daniel
+
+> 
+> v5: https://www.spinics.net/lists/dri-devel/msg330860.html
+> * rebase to the latest master branch (5.17-rc1+)
+> 	+ "drm/plane: Make format_mod_supported truly optional" patch [2]
+>   [2] https://patchwork.freedesktop.org/patch/467940/?series=98255&rev=3
+> 
+> * change default_modifiers array from non-static to static
+> * remove terminator in default_modifiers array
+> * use ARRAY_SIZE to get the format_modifier_count
+> * keep a sanity check in plane init func
+> * modify several kerneldocs
+> 
+> v4: https://www.spinics.net/lists/dri-devel/msg329508.html
+> * modify documentation for fb_modifiers_not_supported flag in kerneldoc
+> 
+> v3: https://www.spinics.net/lists/dri-devel/msg329102.html
+> * change the order as follows:
+>    1. add fb_modifiers_not_supported flag
+>    2. add default modifiers
+>    3. remove allow_fb_modifiers flag
+> * add a conditional disable in amdgpu_dm_plane_init()
+> 
+> v2: https://www.spinics.net/lists/dri-devel/msg328939.html
+> * rebase to the latest master branch (5.16.0+)
+>       + "drm/plane: Make format_mod_supported truly optional" patch [2]
+> 
+> v1: https://www.spinics.net/lists/dri-devel/msg327352.html
+> * The initial patch set
+> 
+> Tomohito Esaki (3):
+>   drm: introduce fb_modifiers_not_supported flag in mode_config
+>   drm: add support modifiers for drivers whose planes only support
+>     linear layout
+>   drm: remove allow_fb_modifiers
+> 
+>  drivers/gpu/drm/amd/amdgpu/amdgpu_display.c   |  6 ++---
+>  drivers/gpu/drm/amd/amdgpu/dce_v10_0.c        |  2 ++
+>  drivers/gpu/drm/amd/amdgpu/dce_v11_0.c        |  2 ++
+>  drivers/gpu/drm/amd/amdgpu/dce_v6_0.c         |  1 +
+>  drivers/gpu/drm/amd/amdgpu/dce_v8_0.c         |  2 ++
+>  .../gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c |  3 +++
+>  drivers/gpu/drm/drm_framebuffer.c             |  6 ++---
+>  drivers/gpu/drm/drm_ioctl.c                   |  2 +-
+>  drivers/gpu/drm/drm_plane.c                   | 23 +++++++++++--------
+>  drivers/gpu/drm/nouveau/nouveau_display.c     |  6 +++--
+>  drivers/gpu/drm/radeon/radeon_display.c       |  2 ++
+>  .../gpu/drm/selftests/test-drm_framebuffer.c  |  1 -
+>  include/drm/drm_mode_config.h                 | 18 +++++----------
+>  include/drm/drm_plane.h                       |  3 +++
+>  14 files changed, 45 insertions(+), 32 deletions(-)
+> 
+> -- 
+> 2.25.1
+> 
+
+-- 
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
