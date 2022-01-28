@@ -1,51 +1,53 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id B39334A01AF
-	for <lists+nouveau@lfdr.de>; Fri, 28 Jan 2022 21:10:22 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id CA4864A01A5
+	for <lists+nouveau@lfdr.de>; Fri, 28 Jan 2022 21:10:14 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A19F510E5B2;
-	Fri, 28 Jan 2022 20:10:11 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7F78E10E50F;
+	Fri, 28 Jan 2022 20:10:06 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mga12.intel.com (mga12.intel.com [192.55.52.136])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 92E47112382;
- Fri, 28 Jan 2022 08:36:22 +0000 (UTC)
+Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1E96210F5D1;
+ Fri, 28 Jan 2022 09:12:15 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1643358982; x=1674894982;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=LpsaWrEIBoj/K/IOLk0N+aujJU8LhhzxyAjfqGHu7Ls=;
- b=UFIayBclnVB1IC/ZZoAf5PamBkC7U/VfrwO8HOikCa+0PGw9Y8QI9oIG
- 6AiLZTiL6YRbA03JkUFLvVoLKkM4fV847piE6a6uyiZObUO5MNtVAwgu3
- eNq/zOoQVLx6LBUP97n0g1H7vCwUrtOQUNy+0yWsXn3djIYMjHzh4guX0
- BuG9xdrsvjlJRD0jHk79EiTPkzCvO6CW4NPVwjgzBMhR7HZnjfDS7sXup
- xJj1OeTlkQtERYZVSzEih856kCcVc8Ctyy/XV3biwcqfdBHOfdpb2JbUp
- aY6O7s2fo7RUcdIsJEoxhdqeA0/qVJ2kwGLs1f3trsfyABVsKkXOaPDIT Q==;
-X-IronPort-AV: E=McAfee;i="6200,9189,10240"; a="227056612"
-X-IronPort-AV: E=Sophos;i="5.88,323,1635231600"; d="scan'208";a="227056612"
-Received: from fmsmga008.fm.intel.com ([10.253.24.58])
- by fmsmga106.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 28 Jan 2022 00:36:18 -0800
-X-IronPort-AV: E=Sophos;i="5.88,323,1635231600"; d="scan'208";a="581788772"
-Received: from lucas-s2600cw.jf.intel.com ([10.165.21.202])
- by fmsmga008-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 28 Jan 2022 00:36:18 -0800
+ t=1643361135; x=1674897135;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:content-transfer-encoding:in-reply-to;
+ bh=Urk9Fx5Hd5Js/YOOHw/RPA40Ql9fdsPvt6tLp2JZQZM=;
+ b=BLtltdDirRrvOvF87l/lsxqvyT/VXpAGO5iiGvaLoMVB5Dm8zDGdFJUP
+ 6OyVPprK2pAnSKzQEophQzLgdIo7uopHeYrPK9CWokYmlhOcCQQEbMRfm
+ jpMvo5KXgZKWInlc0uYs/fhJeO65JNcvSXUMb60SAGHo06y+Jb5ozwnxB
+ qR3MNUlHcOffHSq3D9X51/wO+KankLHhK8qRrXmYQVEFu6aLFttgQ+kSS
+ Zxdjq2QNThfe7kMhSpEqEMlru+4/Ieq4hO+0k4UjgWoNRmu2C/7UoikKA
+ lqrlVwRvHhb4en/p0IE+YH44zmZ94GqXw8NVl9kFP6MQmzH4nOl0xYahS A==;
+X-IronPort-AV: E=McAfee;i="6200,9189,10240"; a="247030719"
+X-IronPort-AV: E=Sophos;i="5.88,323,1635231600"; d="scan'208";a="247030719"
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+ by orsmga103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 28 Jan 2022 01:12:14 -0800
+X-IronPort-AV: E=Sophos;i="5.88,323,1635231600"; d="scan'208";a="625576326"
+Received: from jsstout-mobl.amr.corp.intel.com (HELO ldmartin-desk2)
+ ([10.212.160.158])
+ by fmsmga002-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 28 Jan 2022 01:12:13 -0800
+Date: Fri, 28 Jan 2022 01:12:13 -0800
 From: Lucas De Marchi <lucas.demarchi@intel.com>
-To: linux-kernel@vger.kernel.org,
-	dri-devel@lists.freedesktop.org
-Date: Fri, 28 Jan 2022 00:36:26 -0800
-Message-Id: <20220128083626.3012259-15-lucas.demarchi@intel.com>
-X-Mailer: git-send-email 2.35.0
-In-Reply-To: <20220128083626.3012259-1-lucas.demarchi@intel.com>
+To: Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>
+Message-ID: <20220128091213.qaq6v4vbeerzvd3f@ldmartin-desk2>
+X-Patchwork-Hint: comment
 References: <20220128083626.3012259-1-lucas.demarchi@intel.com>
+ <a45a8cef-f5e7-604c-64f1-e893ec9ba8af@amd.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=iso-8859-1; format=flowed
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+In-Reply-To: <a45a8cef-f5e7-604c-64f1-e893ec9ba8af@amd.com>
 X-Mailman-Approved-At: Fri, 28 Jan 2022 20:10:03 +0000
-Subject: [Nouveau] [PATCH 14/14] dma-buf-map: Remove API in favor of
- iosys-map
+Subject: Re: [Nouveau] [PATCH 00/14] Rename dma-buf-map
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,339 +59,209 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: airlied@linux.ie, christian.koenig@amd.com, srinivas.kandagatla@linaro.org,
+Cc: airlied@linux.ie, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, srinivas.kandagatla@linaro.org,
  gregkh@linuxfoundation.org, nouveau@lists.freedesktop.org,
  sumit.semwal@linaro.org, linux-media@vger.kernel.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-All users are now converted to iosys-map, which is the renamed version
-of dma-buf-map. Remove remaining references to dma-buf-map.
+On Fri, Jan 28, 2022 at 09:41:14AM +0100, Christian König wrote:
+>Rule #1 is to never ever break the build.
+>
+>Because of this all those patches needs to be squashed into a single 
+>one as far as I can see.
 
-Signed-off-by: Lucas De Marchi <lucas.demarchi@intel.com>
----
- MAINTAINERS                 |   1 -
- include/linux/dma-buf-map.h | 269 ------------------------------------
- include/linux/iosys-map.h   |  11 +-
- 3 files changed, 7 insertions(+), 274 deletions(-)
- delete mode 100644 include/linux/dma-buf-map.h
+what config are you building on? I built this series, full config with
+CONFIG_COMPILE_TEST and doing:
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 27ebaded85f8..b1d0b180515f 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -5733,7 +5733,6 @@ T:	git git://anongit.freedesktop.org/drm/drm-misc
- F:	Documentation/driver-api/dma-buf.rst
- F:	drivers/dma-buf/
- F:	include/linux/*fence.h
--F:	include/linux/dma-buf*
- F:	include/linux/iosys-map.h
- F:	include/linux/dma-resv.h
- K:	\bdma_(?:buf|fence|resv)\b
-diff --git a/include/linux/dma-buf-map.h b/include/linux/dma-buf-map.h
-deleted file mode 100644
-index 4b4b2930660b..000000000000
---- a/include/linux/dma-buf-map.h
-+++ /dev/null
-@@ -1,269 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0-only */
--/*
-- * Pointer to dma-buf-mapped memory, plus helpers.
-- */
--
--#ifndef __DMA_BUF_MAP_H__
--#define __DMA_BUF_MAP_H__
--
--#include <linux/io.h>
--#include <linux/string.h>
--
--/**
-- * DOC: overview
-- *
-- * Calling dma-buf's vmap operation returns a pointer to the buffer's memory.
-- * Depending on the location of the buffer, users may have to access it with
-- * I/O operations or memory load/store operations. For example, copying to
-- * system memory could be done with memcpy(), copying to I/O memory would be
-- * done with memcpy_toio().
-- *
-- * .. code-block:: c
-- *
-- *	void *vaddr = ...; // pointer to system memory
-- *	memcpy(vaddr, src, len);
-- *
-- *	void *vaddr_iomem = ...; // pointer to I/O memory
-- *	memcpy_toio(vaddr, _iomem, src, len);
-- *
-- * When using dma-buf's vmap operation, the returned pointer is encoded as
-- * :c:type:`struct dma_buf_map <dma_buf_map>`.
-- * :c:type:`struct dma_buf_map <dma_buf_map>` stores the buffer's address in
-- * system or I/O memory and a flag that signals the required method of
-- * accessing the buffer. Use the returned instance and the helper functions
-- * to access the buffer's memory in the correct way.
-- *
-- * The type :c:type:`struct dma_buf_map <dma_buf_map>` and its helpers are
-- * actually independent from the dma-buf infrastructure. When sharing buffers
-- * among devices, drivers have to know the location of the memory to access
-- * the buffers in a safe way. :c:type:`struct dma_buf_map <dma_buf_map>`
-- * solves this problem for dma-buf and its users. If other drivers or
-- * sub-systems require similar functionality, the type could be generalized
-- * and moved to a more prominent header file.
-- *
-- * Open-coding access to :c:type:`struct dma_buf_map <dma_buf_map>` is
-- * considered bad style. Rather then accessing its fields directly, use one
-- * of the provided helper functions, or implement your own. For example,
-- * instances of :c:type:`struct dma_buf_map <dma_buf_map>` can be initialized
-- * statically with DMA_BUF_MAP_INIT_VADDR(), or at runtime with
-- * dma_buf_map_set_vaddr(). These helpers will set an address in system memory.
-- *
-- * .. code-block:: c
-- *
-- *	struct dma_buf_map map = DMA_BUF_MAP_INIT_VADDR(0xdeadbeaf);
-- *
-- *	dma_buf_map_set_vaddr(&map, 0xdeadbeaf);
-- *
-- * To set an address in I/O memory, use dma_buf_map_set_vaddr_iomem().
-- *
-- * .. code-block:: c
-- *
-- *	dma_buf_map_set_vaddr_iomem(&map, 0xdeadbeaf);
-- *
-- * Instances of struct dma_buf_map do not have to be cleaned up, but
-- * can be cleared to NULL with dma_buf_map_clear(). Cleared mappings
-- * always refer to system memory.
-- *
-- * .. code-block:: c
-- *
-- *	dma_buf_map_clear(&map);
-- *
-- * Test if a mapping is valid with either dma_buf_map_is_set() or
-- * dma_buf_map_is_null().
-- *
-- * .. code-block:: c
-- *
-- *	if (dma_buf_map_is_set(&map) != dma_buf_map_is_null(&map))
-- *		// always true
-- *
-- * Instances of :c:type:`struct dma_buf_map <dma_buf_map>` can be compared
-- * for equality with dma_buf_map_is_equal(). Mappings the point to different
-- * memory spaces, system or I/O, are never equal. That's even true if both
-- * spaces are located in the same address space, both mappings contain the
-- * same address value, or both mappings refer to NULL.
-- *
-- * .. code-block:: c
-- *
-- *	struct dma_buf_map sys_map; // refers to system memory
-- *	struct dma_buf_map io_map; // refers to I/O memory
-- *
-- *	if (dma_buf_map_is_equal(&sys_map, &io_map))
-- *		// always false
-- *
-- * A set up instance of struct dma_buf_map can be used to access or manipulate
-- * the buffer memory. Depending on the location of the memory, the provided
-- * helpers will pick the correct operations. Data can be copied into the memory
-- * with dma_buf_map_memcpy_to(). The address can be manipulated with
-- * dma_buf_map_incr().
-- *
-- * .. code-block:: c
-- *
-- *	const void *src = ...; // source buffer
-- *	size_t len = ...; // length of src
-- *
-- *	dma_buf_map_memcpy_to(&map, src, len);
-- *	dma_buf_map_incr(&map, len); // go to first byte after the memcpy
-- */
--
--/**
-- * struct dma_buf_map - Pointer to vmap'ed dma-buf memory.
-- * @vaddr_iomem:	The buffer's address if in I/O memory
-- * @vaddr:		The buffer's address if in system memory
-- * @is_iomem:		True if the dma-buf memory is located in I/O
-- *			memory, or false otherwise.
-- */
--struct dma_buf_map {
--	union {
--		void __iomem *vaddr_iomem;
--		void *vaddr;
--	};
--	bool is_iomem;
--};
--
--/**
-- * DMA_BUF_MAP_INIT_VADDR - Initializes struct dma_buf_map to an address in system memory
-- * @vaddr_:	A system-memory address
-- */
--#define DMA_BUF_MAP_INIT_VADDR(vaddr_) \
--	{ \
--		.vaddr = (vaddr_), \
--		.is_iomem = false, \
--	}
--
--/**
-- * dma_buf_map_set_vaddr - Sets a dma-buf mapping structure to an address in system memory
-- * @map:	The dma-buf mapping structure
-- * @vaddr:	A system-memory address
-- *
-- * Sets the address and clears the I/O-memory flag.
-- */
--static inline void dma_buf_map_set_vaddr(struct dma_buf_map *map, void *vaddr)
--{
--	map->vaddr = vaddr;
--	map->is_iomem = false;
--}
--
--/**
-- * dma_buf_map_set_vaddr_iomem - Sets a dma-buf mapping structure to an address in I/O memory
-- * @map:		The dma-buf mapping structure
-- * @vaddr_iomem:	An I/O-memory address
-- *
-- * Sets the address and the I/O-memory flag.
-- */
--static inline void dma_buf_map_set_vaddr_iomem(struct dma_buf_map *map,
--					       void __iomem *vaddr_iomem)
--{
--	map->vaddr_iomem = vaddr_iomem;
--	map->is_iomem = true;
--}
--
--/**
-- * dma_buf_map_is_equal - Compares two dma-buf mapping structures for equality
-- * @lhs:	The dma-buf mapping structure
-- * @rhs:	A dma-buf mapping structure to compare with
-- *
-- * Two dma-buf mapping structures are equal if they both refer to the same type of memory
-- * and to the same address within that memory.
-- *
-- * Returns:
-- * True is both structures are equal, or false otherwise.
-- */
--static inline bool dma_buf_map_is_equal(const struct dma_buf_map *lhs,
--					const struct dma_buf_map *rhs)
--{
--	if (lhs->is_iomem != rhs->is_iomem)
--		return false;
--	else if (lhs->is_iomem)
--		return lhs->vaddr_iomem == rhs->vaddr_iomem;
--	else
--		return lhs->vaddr == rhs->vaddr;
--}
--
--/**
-- * dma_buf_map_is_null - Tests for a dma-buf mapping to be NULL
-- * @map:	The dma-buf mapping structure
-- *
-- * Depending on the state of struct dma_buf_map.is_iomem, tests if the
-- * mapping is NULL.
-- *
-- * Returns:
-- * True if the mapping is NULL, or false otherwise.
-- */
--static inline bool dma_buf_map_is_null(const struct dma_buf_map *map)
--{
--	if (map->is_iomem)
--		return !map->vaddr_iomem;
--	return !map->vaddr;
--}
--
--/**
-- * dma_buf_map_is_set - Tests is the dma-buf mapping has been set
-- * @map:	The dma-buf mapping structure
-- *
-- * Depending on the state of struct dma_buf_map.is_iomem, tests if the
-- * mapping has been set.
-- *
-- * Returns:
-- * True if the mapping is been set, or false otherwise.
-- */
--static inline bool dma_buf_map_is_set(const struct dma_buf_map *map)
--{
--	return !dma_buf_map_is_null(map);
--}
--
--/**
-- * dma_buf_map_clear - Clears a dma-buf mapping structure
-- * @map:	The dma-buf mapping structure
-- *
-- * Clears all fields to zero; including struct dma_buf_map.is_iomem. So
-- * mapping structures that were set to point to I/O memory are reset for
-- * system memory. Pointers are cleared to NULL. This is the default.
-- */
--static inline void dma_buf_map_clear(struct dma_buf_map *map)
--{
--	if (map->is_iomem) {
--		map->vaddr_iomem = NULL;
--		map->is_iomem = false;
--	} else {
--		map->vaddr = NULL;
--	}
--}
--
--/**
-- * dma_buf_map_memcpy_to - Memcpy into dma-buf mapping
-- * @dst:	The dma-buf mapping structure
-- * @src:	The source buffer
-- * @len:	The number of byte in src
-- *
-- * Copies data into a dma-buf mapping. The source buffer is in system
-- * memory. Depending on the buffer's location, the helper picks the correct
-- * method of accessing the memory.
-- */
--static inline void dma_buf_map_memcpy_to(struct dma_buf_map *dst, const void *src, size_t len)
--{
--	if (dst->is_iomem)
--		memcpy_toio(dst->vaddr_iomem, src, len);
--	else
--		memcpy(dst->vaddr, src, len);
--}
--
--/**
-- * dma_buf_map_incr - Increments the address stored in a dma-buf mapping
-- * @map:	The dma-buf mapping structure
-- * @incr:	The number of bytes to increment
-- *
-- * Increments the address stored in a dma-buf mapping. Depending on the
-- * buffer's location, the correct value will be updated.
-- */
--static inline void dma_buf_map_incr(struct dma_buf_map *map, size_t incr)
--{
--	if (map->is_iomem)
--		map->vaddr_iomem += incr;
--	else
--		map->vaddr += incr;
--}
--
--/* Temporary include for API migration */
--#include <linux/iosys-map.h>
--
--#endif /* __DMA_BUF_MAP_H__ */
-diff --git a/include/linux/iosys-map.h b/include/linux/iosys-map.h
-index ad1f08f8f97f..46b13eab4454 100644
---- a/include/linux/iosys-map.h
-+++ b/include/linux/iosys-map.h
-@@ -9,9 +9,6 @@
- #include <linux/io.h>
- #include <linux/string.h>
- 
--/* Temporary include while user of dma-buf-map are converted to iosys-map */
--#include <linux/dma-buf-map.h>
--
- /**
-  * DOC: overview
-  *
-@@ -105,7 +102,13 @@
-  * @is_iomem:		True if the buffer is located in I/O memory, or false
-  *			otherwise.
-  */
--#define iosys_map dma_buf_map
-+struct iosys_map {
-+	union {
-+		void __iomem *vaddr_iomem;
-+		void *vaddr;
-+	};
-+	bool is_iomem;
-+};
- 
- /**
-  * IOSYS_MAP_INIT_VADDR - Initializes struct iosys_map to an address in system memory
--- 
-2.35.0
+	git rebase -i <base> -x "make -j$(nproc)"
 
+I split these patches in a way that wouldn't break the build on purpose.
+There were a couple that I couldn't build without cross compiling: tegra
+and rockchip. The others were ok.
+
+I'm not really against squashing everything in one to merge, though.
+It will be hard on the conflicts later, but should get the job done much
+quicker.
+
+Lucas De Marchi
+
+>
+>Regards,
+>Christian.
+>
+>Am 28.01.22 um 09:36 schrieb Lucas De Marchi:
+>>Motivation for this started in
+>>https://lore.kernel.org/lkml/20220126203702.1784589-1-lucas.demarchi@intel.com/
+>>when trying to extend the dma-buf-map API to cover new use cases: help a
+>>single driver with allocations and sharing code paths for IO and system
+>>memory. I'm leaving the API additions aside and first renaming the
+>>interface as requested.
+>>
+>>There are already some users in tree outside the context of dma-buf
+>>importer/exporter. So before extending the API, let's dissociate it from
+>>dma-buf.
+>>
+>>The iosys-map.h is introduced in the first patch in a way that allows
+>>the conversion of each driver to happen separately. After all the
+>>conversions are done we can remove the old one, which is the last patch.
+>>Another possible way is to squash everything and merge together,
+>>but I believe this would make much harder for review.
+>>
+>>The conversion was done with the following semantic patch:
+>>
+>>	@r1@
+>>	@@
+>>	- struct dma_buf_map
+>>	+ struct iosys_map
+>>
+>>	@r2@
+>>	@@
+>>	(
+>>	- DMA_BUF_MAP_INIT_VADDR
+>>	+ IOSYS_MAP_INIT_VADDR
+>>	|
+>>	- dma_buf_map_set_vaddr
+>>	+ iosys_map_set_vaddr
+>>	|
+>>	- dma_buf_map_set_vaddr_iomem
+>>	+ iosys_map_set_vaddr_iomem
+>>	|
+>>	- dma_buf_map_is_equal
+>>	+ iosys_map_is_equal
+>>	|
+>>	- dma_buf_map_is_null
+>>	+ iosys_map_is_null
+>>	|
+>>	- dma_buf_map_is_set
+>>	+ iosys_map_is_set
+>>	|
+>>	- dma_buf_map_clear
+>>	+ iosys_map_clear
+>>	|
+>>	- dma_buf_map_memcpy_to
+>>	+ iosys_map_memcpy_to
+>>	|
+>>	- dma_buf_map_incr
+>>	+ iosys_map_incr
+>>	)
+>>
+>>	@@
+>>	@@
+>>	- #include <linux/dma-buf-map.h>
+>>	+ #include <linux/iosys-map.h>
+>>
+>>and then some files had their includes adjusted so we can build
+>>everything on each commit in this series. Also some comments were update
+>>to remove mentions to dma-buf-map. Simply doing a sed to rename didn't
+>>work as dma-buf has some APIs using the dma_buf_map prefix.
+>>
+>>Once finalized, I think most of this, if not all, could go through the
+>>drm-misc-next branch. I split i915, msm, nouveau, and radeon in their
+>>own patches in case it's preferred to take those through their own
+>>trees.
+>>
+>>Lucas De Marchi
+>>
+>>Lucas De Marchi (14):
+>>   iosys-map: Introduce renamed dma-buf-map
+>>   misc: fastrpc: Replace dma-buf-map with iosys-map
+>>   dma-buf: Replace dma-buf-map with iosys-map
+>>   media: Replace dma-buf-map with iosys-map
+>>   drm/ttm: Replace dma-buf-map with iosys-map
+>>   drm: Replace dma-buf-map with iosys-map in drivers
+>>   drm/i915: Replace dma-buf-map with iosys-map
+>>   drm/msm: Replace dma-buf-map with iosys-map
+>>   drm/nouveau: Replace dma-buf-map with iosys-map
+>>   drm/tegra: Replace dma-buf-map with iosys-map
+>>   drm/radeon: Replace dma-buf-map with iosys-map
+>>   drm: Replace dma-buf-map with iosys-map in common code
+>>   Documentation: Refer to iosys-map instead of dma-buf-map
+>>   dma-buf-map: Remove API in favor of iosys-map
+>>
+>>  Documentation/driver-api/dma-buf.rst          |   4 +-
+>>  Documentation/gpu/todo.rst                    |  20 +-
+>>  MAINTAINERS                                   |   2 +-
+>>  drivers/dma-buf/dma-buf.c                     |  22 +-
+>>  drivers/dma-buf/heaps/cma_heap.c              |  10 +-
+>>  drivers/dma-buf/heaps/system_heap.c           |  10 +-
+>>  drivers/gpu/drm/ast/ast_drv.h                 |   2 +-
+>>  drivers/gpu/drm/ast/ast_mode.c                |   8 +-
+>>  drivers/gpu/drm/drm_cache.c                   |  18 +-
+>>  drivers/gpu/drm/drm_client.c                  |   9 +-
+>>  drivers/gpu/drm/drm_fb_helper.c               |  12 +-
+>>  drivers/gpu/drm/drm_gem.c                     |  12 +-
+>>  drivers/gpu/drm/drm_gem_cma_helper.c          |   9 +-
+>>  drivers/gpu/drm/drm_gem_framebuffer_helper.c  |  16 +-
+>>  drivers/gpu/drm/drm_gem_shmem_helper.c        |  15 +-
+>>  drivers/gpu/drm/drm_gem_ttm_helper.c          |   4 +-
+>>  drivers/gpu/drm/drm_gem_vram_helper.c         |  25 +-
+>>  drivers/gpu/drm/drm_internal.h                |   6 +-
+>>  drivers/gpu/drm/drm_mipi_dbi.c                |   8 +-
+>>  drivers/gpu/drm/drm_prime.c                   |   4 +-
+>>  drivers/gpu/drm/etnaviv/etnaviv_drv.h         |   2 +-
+>>  drivers/gpu/drm/etnaviv/etnaviv_gem_prime.c   |   8 +-
+>>  drivers/gpu/drm/gud/gud_pipe.c                |   4 +-
+>>  drivers/gpu/drm/hyperv/hyperv_drm_modeset.c   |   5 +-
+>>  drivers/gpu/drm/i915/gem/i915_gem_dmabuf.c    |   8 +-
+>>  .../drm/i915/gem/selftests/i915_gem_dmabuf.c  |   6 +-
+>>  .../gpu/drm/i915/gem/selftests/mock_dmabuf.c  |   6 +-
+>>  drivers/gpu/drm/lima/lima_gem.c               |   3 +-
+>>  drivers/gpu/drm/lima/lima_sched.c             |   4 +-
+>>  drivers/gpu/drm/mediatek/mtk_drm_gem.c        |   7 +-
+>>  drivers/gpu/drm/mediatek/mtk_drm_gem.h        |   5 +-
+>>  drivers/gpu/drm/mgag200/mgag200_mode.c        |   4 +-
+>>  drivers/gpu/drm/msm/msm_drv.h                 |   4 +-
+>>  drivers/gpu/drm/msm/msm_gem_prime.c           |   6 +-
+>>  drivers/gpu/drm/nouveau/nouveau_gem.c         |   2 +
+>>  drivers/gpu/drm/panfrost/panfrost_perfcnt.c   |  13 +-
+>>  drivers/gpu/drm/qxl/qxl_display.c             |   8 +-
+>>  drivers/gpu/drm/qxl/qxl_draw.c                |   6 +-
+>>  drivers/gpu/drm/qxl/qxl_drv.h                 |  10 +-
+>>  drivers/gpu/drm/qxl/qxl_object.c              |   8 +-
+>>  drivers/gpu/drm/qxl/qxl_object.h              |   4 +-
+>>  drivers/gpu/drm/qxl/qxl_prime.c               |   4 +-
+>>  drivers/gpu/drm/radeon/radeon_gem.c           |   1 +
+>>  drivers/gpu/drm/rockchip/rockchip_drm_gem.c   |   9 +-
+>>  drivers/gpu/drm/rockchip/rockchip_drm_gem.h   |   5 +-
+>>  drivers/gpu/drm/tegra/gem.c                   |  10 +-
+>>  drivers/gpu/drm/tiny/cirrus.c                 |   8 +-
+>>  drivers/gpu/drm/tiny/gm12u320.c               |   7 +-
+>>  drivers/gpu/drm/ttm/ttm_bo_util.c             |  16 +-
+>>  drivers/gpu/drm/ttm/ttm_resource.c            |  26 +-
+>>  drivers/gpu/drm/ttm/ttm_tt.c                  |   6 +-
+>>  drivers/gpu/drm/udl/udl_modeset.c             |   3 +-
+>>  drivers/gpu/drm/vboxvideo/vbox_mode.c         |   4 +-
+>>  drivers/gpu/drm/virtio/virtgpu_prime.c        |   1 +
+>>  drivers/gpu/drm/vkms/vkms_composer.c          |   4 +-
+>>  drivers/gpu/drm/vkms/vkms_drv.h               |   6 +-
+>>  drivers/gpu/drm/vkms/vkms_plane.c             |   2 +-
+>>  drivers/gpu/drm/vkms/vkms_writeback.c         |   2 +-
+>>  drivers/gpu/drm/xen/xen_drm_front_gem.c       |   7 +-
+>>  drivers/gpu/drm/xen/xen_drm_front_gem.h       |   6 +-
+>>  .../common/videobuf2/videobuf2-dma-contig.c   |   8 +-
+>>  .../media/common/videobuf2/videobuf2-dma-sg.c |   9 +-
+>>  .../common/videobuf2/videobuf2-vmalloc.c      |  11 +-
+>>  drivers/misc/fastrpc.c                        |   4 +-
+>>  include/drm/drm_cache.h                       |   6 +-
+>>  include/drm/drm_client.h                      |   7 +-
+>>  include/drm/drm_gem.h                         |   6 +-
+>>  include/drm/drm_gem_atomic_helper.h           |   6 +-
+>>  include/drm/drm_gem_cma_helper.h              |   6 +-
+>>  include/drm/drm_gem_framebuffer_helper.h      |   8 +-
+>>  include/drm/drm_gem_shmem_helper.h            |  12 +-
+>>  include/drm/drm_gem_ttm_helper.h              |   6 +-
+>>  include/drm/drm_gem_vram_helper.h             |   9 +-
+>>  include/drm/drm_prime.h                       |   6 +-
+>>  include/drm/ttm/ttm_bo_api.h                  |  10 +-
+>>  include/drm/ttm/ttm_kmap_iter.h               |  10 +-
+>>  include/drm/ttm/ttm_resource.h                |   6 +-
+>>  include/linux/dma-buf-map.h                   | 266 ------------------
+>>  include/linux/dma-buf.h                       |  12 +-
+>>  include/linux/iosys-map.h                     | 257 +++++++++++++++++
+>>  80 files changed, 579 insertions(+), 552 deletions(-)
+>>  delete mode 100644 include/linux/dma-buf-map.h
+>>  create mode 100644 include/linux/iosys-map.h
+>>
+>
