@@ -2,49 +2,57 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 779AE4A00DF
-	for <lists+nouveau@lfdr.de>; Fri, 28 Jan 2022 20:30:19 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 747944A0128
+	for <lists+nouveau@lfdr.de>; Fri, 28 Jan 2022 20:54:12 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C005D10E4B9;
-	Fri, 28 Jan 2022 19:30:17 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7AFE510E116;
+	Fri, 28 Jan 2022 19:54:10 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id DEDF510E4B9
- for <nouveau@lists.freedesktop.org>; Fri, 28 Jan 2022 19:30:16 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1643398215;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=SEZKuudk9FTI+7yAy64FaqZEcUXfR8+t/aDwSXBZQrU=;
- b=aacHlGn56TCRRH3MTppeUQ2oQFLWRvDrRFS7y7mTpJtVrnDAQvB/cEojfueYsan1P3dtTW
- 2C/f6X1PvOz4EdV4vkN79YNXQ03P8tmwjqiZDaKoNUkguROLQAfxUXZvO8B7lC1GjV6C4t
- hf29Td3otHNqexqPnJRsPqdnV/LIjc4=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-661-yybfL9f6PuOsydIGP4KB2A-1; Fri, 28 Jan 2022 14:30:13 -0500
-X-MC-Unique: yybfL9f6PuOsydIGP4KB2A-1
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
- [10.5.11.15])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 5A665100C662;
- Fri, 28 Jan 2022 19:30:11 +0000 (UTC)
-Received: from emerald.lyude.net (unknown [10.22.11.89])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 888275D6B1;
- Fri, 28 Jan 2022 19:30:00 +0000 (UTC)
-From: Lyude Paul <lyude@redhat.com>
-To: nouveau@lists.freedesktop.org
-Date: Fri, 28 Jan 2022 14:29:50 -0500
-Message-Id: <20220128192951.626532-1-lyude@redhat.com>
+Received: from mail-oi1-x229.google.com (mail-oi1-x229.google.com
+ [IPv6:2607:f8b0:4864:20::229])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B718210E116;
+ Fri, 28 Jan 2022 19:54:09 +0000 (UTC)
+Received: by mail-oi1-x229.google.com with SMTP id v67so14318530oie.9;
+ Fri, 28 Jan 2022 11:54:09 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=dbB5bpgJl4M4esLVJEwWsrY33Y3h4Z6V9PbajaNn+YE=;
+ b=CNlKJGYp51QoEQWW6xUac3uZY66AwrSyb601s/jQf3nN8SgClfYtlyGcWts8dW9TUf
+ xgLOBfoZ3F6KTZePRAxbQWL/W66nd94CqJux/0P/uy8Hez4SiQe7XtvhKGRMa1523WvD
+ LkgGhQ+NWSF+B++E6gJ6pHLk8vgfLmpF4gIxCapbvD3LuaWcQmmBybMw+6LkqvfLv8LX
+ vBMUEPV4tq99jxeYKwIZGRlvfIFwEjQGrcQWFnPTMXXf9utUoE+zAATwqEs8F8zmJxAe
+ dRgXixWo8LvTI8BKdVblRpqbQstZdWC3He3B6AAZzUwiKSnDniWTOrvYy1Z0k74xiaPm
+ QOQw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=dbB5bpgJl4M4esLVJEwWsrY33Y3h4Z6V9PbajaNn+YE=;
+ b=IIwtv70m4MeMsk7Pv3JQ6Xu84Ss94NSSYVOaM4lJjGH8LxpT/WqFb1z0s7/LmB4Vfe
+ 6sRA8/nqIfRa5tVbtqhbBrg50jp9ouclJEPgVbsvR7zcMh0f/SfxH13LFHPQ1F/fVYmb
+ w20zDKLuLsbfsxzHU2eCiTa7EdF1wRQ9mxccuZeFC+8iQawmu0y/HQoEsFnygcEkoJV5
+ nlKWTSNG3/dloGmFRvlWjcBbzGS7V5/yEBLR97iExY+SDqWkP+iQUn6C+B72+jZFKh7u
+ K+dWcYUaStw0JmPyk8va1od4EEImb5aWG1L9SLUP+bDyXiBTn0SMhBxi0q1aaXUkTvIT
+ U8hA==
+X-Gm-Message-State: AOAM531Xo7D+oNd0WNvmAemsAlb1ZFC+uaQf1PfbKM1PWc1VvAXHE/3b
+ MnxRLTP3GiFhEUkiZ0Nqsvg4jlwSYcdrvdpSYQA=
+X-Google-Smtp-Source: ABdhPJyVkQJ8OvNjX1NkgBqXVFhUBaE59zpfuiYJJfsJUmqFXHuLHsR0mFw+lVA41cQxJq6mJX37kqVsagd10wLE6j4=
+X-Received: by 2002:a05:6808:2189:: with SMTP id
+ be9mr11235001oib.93.1643399648949; 
+ Fri, 28 Jan 2022 11:54:08 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
-Subject: [Nouveau] [PATCH] Revert "drm/nouveau/acr: Fix undefined behavior
- in nvkm_acr_hsfw_load_bl()"
+References: <20220124165856.57022-1-zhou1615@umn.edu>
+ <YfPC3N+H9Fu/gqpz@kroah.com>
+ <536c833413ccbe0b8ad653a50c5ea867bf975290.camel@redhat.com>
+In-Reply-To: <536c833413ccbe0b8ad653a50c5ea867bf975290.camel@redhat.com>
+From: Alex Deucher <alexdeucher@gmail.com>
+Date: Fri, 28 Jan 2022 14:53:57 -0500
+Message-ID: <CADnq5_MtMPNHbs92OMHEzvPYSHGt=nPJMdrny6Siuvj3SYTAXQ@mail.gmail.com>
+To: Lyude Paul <lyude@redhat.com>
+Content-Type: text/plain; charset="UTF-8"
+Subject: Re: [Nouveau] [PATCH] drm/nouveau/acr: Fix undefined behavior in
+ nvkm_acr_hsfw_load_bl()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,49 +65,92 @@ List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
 Cc: David Airlie <airlied@linux.ie>, Greg KH <gregkh@linuxfoundation.org>,
- open list <linux-kernel@vger.kernel.org>, dri-devel@lists.freedesktop.org,
- Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>,
+ Kangjie Lu <kjlu@umn.edu>, LKML <linux-kernel@vger.kernel.org>,
+ Maling list - DRI developers <dri-devel@lists.freedesktop.org>,
+ Ben Skeggs <bskeggs@redhat.com>, nouveau <nouveau@lists.freedesktop.org>,
  Zhou Qingyang <zhou1615@umn.edu>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-This reverts commit 2343bcdb4747d4f418a4daf2e898b94f86c24a59.
+On Fri, Jan 28, 2022 at 2:20 PM Lyude Paul <lyude@redhat.com> wrote:
+>
+> Sigh-thank you for catching this - I had totally forgot about the umn.edu ban.
+> I pushed this already but I will go ahead and send a revert for this patch.
+> Will cc you on it as well.
 
-Unfortunately, as Greg pointed out I totally missed the fact that this
-patch came from a umn.edu patch. umn.edu is still banned from contributing
-to the Linux kernel, so let's revert this for the time being. I'll
-re-evaluate this fix myself later and send another fix if this ends up
-being valid.
+This seems short-sighted.  If the patch is valid I see no reason to
+not accept it.  I'm not trying to downplay the mess umn got into, but
+as long as the patch is well scrutinized and fixes a valid issue, it
+should be applied rather than leaving potential bugs in place.
 
-Signed-off-by: Lyude Paul <lyude@redhat.com>
-Cc: Greg KH <gregkh@linuxfoundation.org>
-Cc: Ben Skeggs <bskeggs@redhat.com>
-Cc: Karol Herbst <kherbst@redhat.com>
----
- drivers/gpu/drm/nouveau/nvkm/subdev/acr/hsfw.c | 9 ++++-----
- 1 file changed, 4 insertions(+), 5 deletions(-)
+Alex
 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/acr/hsfw.c b/drivers/gpu/drm/nouveau/nvkm/subdev/acr/hsfw.c
-index a6ea89a5d51a..667fa016496e 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/acr/hsfw.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/acr/hsfw.c
-@@ -142,12 +142,11 @@ nvkm_acr_hsfw_load_bl(struct nvkm_acr *acr, const char *name, int ver,
- 
- 	hsfw->imem_size = desc->code_size;
- 	hsfw->imem_tag = desc->start_tag;
--	hsfw->imem = kmemdup(data + desc->code_off, desc->code_size, GFP_KERNEL);
-+	hsfw->imem = kmalloc(desc->code_size, GFP_KERNEL);
-+	memcpy(hsfw->imem, data + desc->code_off, desc->code_size);
-+
- 	nvkm_firmware_put(fw);
--	if (!hsfw->imem)
--		return -ENOMEM;
--	else
--		return 0;
-+	return 0;
- }
- 
- int
--- 
-2.34.1
 
+>
+> On Fri, 2022-01-28 at 11:18 +0100, Greg KH wrote:
+> > On Tue, Jan 25, 2022 at 12:58:55AM +0800, Zhou Qingyang wrote:
+> > > In nvkm_acr_hsfw_load_bl(), the return value of kmalloc() is directly
+> > > passed to memcpy(), which could lead to undefined behavior on failure
+> > > of kmalloc().
+> > >
+> > > Fix this bug by using kmemdup() instead of kmalloc()+memcpy().
+> > >
+> > > This bug was found by a static analyzer.
+> > >
+> > > Builds with 'make allyesconfig' show no new warnings,
+> > > and our static analyzer no longer warns about this code.
+> > >
+> > > Fixes: 22dcda45a3d1 ("drm/nouveau/acr: implement new subdev to replace
+> > > "secure boot"")
+> > > Signed-off-by: Zhou Qingyang <zhou1615@umn.edu>
+> > > ---
+> > > The analysis employs differential checking to identify inconsistent
+> > > security operations (e.g., checks or kfrees) between two code paths
+> > > and confirms that the inconsistent operations are not recovered in the
+> > > current function or the callers, so they constitute bugs.
+> > >
+> > > Note that, as a bug found by static analysis, it can be a false
+> > > positive or hard to trigger. Multiple researchers have cross-reviewed
+> > > the bug.
+> > >
+> > >  drivers/gpu/drm/nouveau/nvkm/subdev/acr/hsfw.c | 9 +++++----
+> > >  1 file changed, 5 insertions(+), 4 deletions(-)
+> > >
+> > > diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/acr/hsfw.c
+> > > b/drivers/gpu/drm/nouveau/nvkm/subdev/acr/hsfw.c
+> > > index 667fa016496e..a6ea89a5d51a 100644
+> > > --- a/drivers/gpu/drm/nouveau/nvkm/subdev/acr/hsfw.c
+> > > +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/acr/hsfw.c
+> > > @@ -142,11 +142,12 @@ nvkm_acr_hsfw_load_bl(struct nvkm_acr *acr, const
+> > > char *name, int ver,
+> > >
+> > >         hsfw->imem_size = desc->code_size;
+> > >         hsfw->imem_tag = desc->start_tag;
+> > > -       hsfw->imem = kmalloc(desc->code_size, GFP_KERNEL);
+> > > -       memcpy(hsfw->imem, data + desc->code_off, desc->code_size);
+> > > -
+> > > +       hsfw->imem = kmemdup(data + desc->code_off, desc->code_size,
+> > > GFP_KERNEL);
+> > >         nvkm_firmware_put(fw);
+> > > -       return 0;
+> > > +       if (!hsfw->imem)
+> > > +               return -ENOMEM;
+> > > +       else
+> > > +               return 0;
+> > >  }
+> > >
+> > >  int
+> > > --
+> > > 2.25.1
+> > >
+> >
+> > As stated before, umn.edu is still not allowed to contribute to the
+> > Linux kernel.  Please work with your administration to resolve this
+> > issue.
+> >
+>
+> --
+> Cheers,
+>  Lyude Paul (she/her)
+>  Software Engineer at Red Hat
+>
