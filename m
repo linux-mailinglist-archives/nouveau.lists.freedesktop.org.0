@@ -2,44 +2,46 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8F0094A3014
-	for <lists+nouveau@lfdr.de>; Sat, 29 Jan 2022 15:47:20 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C58BE4A3058
+	for <lists+nouveau@lfdr.de>; Sat, 29 Jan 2022 16:54:50 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6BB2910E2D9;
-	Sat, 29 Jan 2022 14:47:18 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 8454F10E154;
+	Sat, 29 Jan 2022 15:54:48 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 53BB910E2D9;
- Sat, 29 Jan 2022 14:47:17 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 36F7310E154;
+ Sat, 29 Jan 2022 15:54:47 +0000 (UTC)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id A980460DB7;
- Sat, 29 Jan 2022 14:47:16 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7AFEEC340E5;
- Sat, 29 Jan 2022 14:47:15 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 800F760EA9;
+ Sat, 29 Jan 2022 15:54:46 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7871AC340E5;
+ Sat, 29 Jan 2022 15:54:45 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
- s=korg; t=1643467636;
- bh=Zd8QO1OjYu/hqF3QMj1BM4GaGYurq0BPUV28vt7DEqQ=;
+ s=korg; t=1643471685;
+ bh=MUJUxdkPGfv/or2YLQ6Mah4UNtbPJ+YJLCFJgLzFZ08=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=c71n5dgdTLW0ajX91qrGzlQjlP3TcPkoVQEdOFO+LD1K93szKSQoM8c/20G3CJjRn
- dq5NqIrM24Y2bsr7Zcd/rqi5Wdv+ZpBRjWb/+mloPZdH7E24kX7dhTTtrP46b5Vu9B
- 9cLiJwonhOnOwZu7G0014AGme/kGcsBHpRBuedvg=
-Date: Sat, 29 Jan 2022 15:47:13 +0100
+ b=od1g9pszTmK+WNud2Fyz8MEVlm+QNXXS/Jwoa9e/4Ti/oK3fPT6AZKjRUMkftn3WX
+ qnyYgGzZJ3gJTiUhC35f9yOrv271fWe1S1f8spb4eUiBDwDY9PU4/gcyrGVw/PF8OJ
+ VCLej+GUFjfWn2TjLA0DzXddJ9LfLIek0kgWWiW4=
+Date: Sat, 29 Jan 2022 16:54:43 +0100
 From: Greg KH <gregkh@linuxfoundation.org>
 To: Kangjie Lu <kjlu@umn.edu>
-Message-ID: <YfVTcUA4MKknEawL@kroah.com>
+Message-ID: <YfVjQw1i9AYVz9e3@kroah.com>
 References: <20220124165856.57022-1-zhou1615@umn.edu>
  <YfPC3N+H9Fu/gqpz@kroah.com>
  <536c833413ccbe0b8ad653a50c5ea867bf975290.camel@redhat.com>
  <CADnq5_MtMPNHbs92OMHEzvPYSHGt=nPJMdrny6Siuvj3SYTAXQ@mail.gmail.com>
  <CACO55tt4P+beifvS=jcDsfwybFynngc8DHLR0n3BseeDJNrHyw@mail.gmail.com>
  <CAK8Kejr6E76u2kf_OKxC1RT_qsCWXDf7q4WcTC13-OJz5CseWg@mail.gmail.com>
+ <YfVTcUA4MKknEawL@kroah.com>
+ <CAK8Kejo6p57u8tz1rnV5bhQVO_vz-p1nCsc_G=EvEr1u3FUP9g@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <CAK8Kejr6E76u2kf_OKxC1RT_qsCWXDf7q4WcTC13-OJz5CseWg@mail.gmail.com>
+In-Reply-To: <CAK8Kejo6p57u8tz1rnV5bhQVO_vz-p1nCsc_G=EvEr1u3FUP9g@mail.gmail.com>
 Subject: Re: [Nouveau] [PATCH] drm/nouveau/acr: Fix undefined behavior in
  nvkm_acr_hsfw_load_bl()
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -61,99 +63,32 @@ Cc: David Airlie <airlied@linux.ie>, nouveau <nouveau@lists.freedesktop.org>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Sat, Jan 29, 2022 at 08:18:55AM -0600, Kangjie Lu wrote:
-> On Fri, Jan 28, 2022 at 1:58 PM Karol Herbst <kherbst@redhat.com> wrote:
+On Sat, Jan 29, 2022 at 09:19:18AM -0600, Kangjie Lu wrote:
+> > So to be explicit, so you do not misunderstand me somehow:
 > >
-> > On Fri, Jan 28, 2022 at 8:54 PM Alex Deucher <alexdeucher@gmail.com> wrote:
-> > >
-> > > On Fri, Jan 28, 2022 at 2:20 PM Lyude Paul <lyude@redhat.com> wrote:
-> > > >
-> > > > Sigh-thank you for catching this - I had totally forgot about the umn.edu ban.
-> > > > I pushed this already but I will go ahead and send a revert for this patch.
-> > > > Will cc you on it as well.
-> > >
-> > > This seems short-sighted.  If the patch is valid I see no reason to
-> > > not accept it.  I'm not trying to downplay the mess umn got into, but
-> > > as long as the patch is well scrutinized and fixes a valid issue, it
-> > > should be applied rather than leaving potential bugs in place.
-> > >
-> > > Alex
-> > >
-> >
-> > Even though knowing that malicious code can be introduced via
-> > perfectly fine looking patches, and sometimes one will never spot the
-> > problem, this patch isn't all that bad tbh.
-> >
-> > So should we reject patches out of "policies" or should we just be
-> > extra careful? But not addressing the concerns as Greg pointed out is
-> > also kind of a bad move, but also not knowing what the state of
-> > resolving this mess is anyway.
+> >         No more patches from umn.edu should be accepted into the Linux
+> >         kernel until further public notice.
 > 
+> This is clear to me.
 > 
-> Seeing some discussion here, I feel I owe you some quick updates on
-> the state. We sent three testing patches in August 2020, which is a
-> serious mistake. We never did that again and will never do that again.
-> All other patches including recent ones were sent to fix real bugs,
-> not to introduce problems. Clearly, although most of the patches are
-> valid, some patches are still not good enough, but it is not about
-> malice. Fixing bugs in Linux isn't an easy task and takes so much
-> effort.
+> > They should be considered a
+> >         "bad actor" given their prior history of submissions and lack of
+> >         complying with the kernel community's prior requirements to
+> >         them.
 > 
-> We did not ignore the concerns pointed out by Greg, and have seriously
-> taken some actions. For example, we explained how our static-analysis
-> tool found the bugs, and members in my research group have internally
-> cross-reviewed the found bugs. We sent these patches after contacting
-> Greg---I thought Greg allowed us to send patches, but also requested
-> us to work on the last process with our administration.
+> I am sorry for the delay of the last process which is unfortunately
+> not under the control of the researchers. According to our
+> administration, the process has started and is moving forward. I hope
+> that can be done soon.
 
-I do not recall saying anything like this at all.
+Given that our previously agreed-upon requirements were not met, I do
+not think that finally meeting these requirements when caught that you
+were not following them is going to be acceptable to allow your
+organization to return to the kernel community.
 
-On January 4, I wrote to you and your coworkers on the mailing list
-message https://lore.kernel.org/r/YdQfCGf8qr5zZJef@kroah.com by saying:
-
-	Note that your university is still in many kernel maintainer's
-	ignore-list (myself included, I dug this up as I saw Fei's response.)
-	Please work with your administration and the process that is currently
-	happening in order to give you all the needed training so you will not
-	keep causing these types of basic errors that keep your patches from
-	being accepted.
-
-	*plonk*
-
-And then later in a private email to you on January 5 where you emailed
-Kees and me to try to see if you were allowed to start sending patches
-again, I said:
-
-	A kernel developer with lots of experience has already offered to work
-	with your university.  Hopefully that process has already started, if
-	not, I suggest contacting your administration as they should know who
-	this is.
-
-and then I closed with:
-
-	Right now you all are still on my "ignore email" lists for patches.
-
-The patches recently submitted have been shown to be incomplete and in
-some places, completely wrong.  I have contacted your administration
-about this issue because they asked to know if there were any problems
-in the future at our last discussion.  In that response today, I wrote:
-
-	I know that incompetence can often times be hard to distinguish from
-	malice, but given the track-record here, we are now going to have to
-	treat this as malice.  If it is just incompetence, well, that's
-	something that your organization needs to overcome.
-
-	Either way, this is not something that the Linux kernel community should
-	be forced to endure.
-
-So to be explicit, so you do not misunderstand me somehow:
-
-	No more patches from umn.edu should be accepted into the Linux
-	kernel until further public notice.  They should be considered a
-	"bad actor" given their prior history of submissions and lack of
-	complying with the kernel community's prior requirements to
-	them.
-
-Is this understood?
+Your people have shown bad-faith toward us too many times, and we have
+wasted too much of our own time and energy on this for absolutely no
+benefit at all, except as an example to point others at and say "do not
+be like them."
 
 greg k-h
