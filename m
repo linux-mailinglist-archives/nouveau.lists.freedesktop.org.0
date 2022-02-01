@@ -2,47 +2,55 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id E67084A580E
-	for <lists+nouveau@lfdr.de>; Tue,  1 Feb 2022 08:46:31 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0BFD94A5849
+	for <lists+nouveau@lfdr.de>; Tue,  1 Feb 2022 09:08:06 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E955A10E807;
-	Tue,  1 Feb 2022 07:46:28 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3837810EDC8;
+	Tue,  1 Feb 2022 08:08:04 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM12-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam12on2053.outbound.protection.outlook.com [40.107.244.53])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C672410E807;
- Tue,  1 Feb 2022 07:46:27 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=nc/ROZj+scpmXMAioBEMkB6Vmkm6k7lVqKuKbiMzoWgUCnaI+4qWwSbP34++V4l+bYPzR63fTQvOGJ1V8z2PnPOeQgNh/W9ghye1me65JGbgwF8dH+eEjWqUIkHNrexrB8DdoYLsVe4WXqkXhF0DiR+2d3tFDyO0nTcSL7cpVrbXFl9ChK/Z1NbOSfumN5R7xJEmDl41sRSS+MaYxtB+ZwBS77xDB/xPkBPZhmB7X5a7LFbbSBvnkX8lY6ATjuruBqd8TihOKHuxG2VMjOJiq2agtRm61t5J1Qy2og+tgMLC3msjkU0/4D2cO2ukyKw0s7MlX1WVvOv72c2MgqdDAw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=zpwZnOMcwwt2vIqIaWHcvLtC3RasTWorvIUWZaVHqIc=;
- b=hLCOQoMXdYCyn9BEIvpujhxgcJIp/7AEAvPwZODtWPUtgGli+xYe6GGADf1JrAKNrThBLlKvibgBTvhvWTtMOvnqF4MmxHLZJFb4L/+z3YE/X4e8Im82UCsLQb+fke+YDSfUIxCv0+ErRzrpQfJS+YMpFWVyD+wgHCbklXgIDdsMOEcxktMUrgho7hjFNLbg3s/LdQvq8ZQbkT6F6tmxKcfqSFuUUsQ2ZmbM7apXpNCX117arc55oe4PqoJMoAc2BXE/w11dU1/hejEHQk11USHpZjhFDFscSWOCq2GYxuDx1TnFgbhjh2eeQrDkBRDZhKLzxVqyHF+Wh6hNpMhj7g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
- dkim=none; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=zpwZnOMcwwt2vIqIaWHcvLtC3RasTWorvIUWZaVHqIc=;
- b=jqcz88OGy5lJCLZ/ZhFT7rQPaSLTvcwrasMppVIFQbNLiT4t14XHsQh84+xgL6MkXrEC1cdhtDBweOUuQd6hrZYf6VKdChs8TQQN2nyUtmtf1IBRw0Q5YKR/r+8q4ZtznJVF+/UippsswW7TgF3P1U12FV6htD3CEUQ8jaTeObc=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from BN8PR12MB3587.namprd12.prod.outlook.com (2603:10b6:408:43::13)
- by MWHPR12MB1757.namprd12.prod.outlook.com (2603:10b6:300:111::9)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4930.18; Tue, 1 Feb
- 2022 07:46:22 +0000
-Received: from BN8PR12MB3587.namprd12.prod.outlook.com
- ([fe80::d861:5699:8188:7bd3]) by BN8PR12MB3587.namprd12.prod.outlook.com
- ([fe80::d861:5699:8188:7bd3%3]) with mapi id 15.20.4930.022; Tue, 1 Feb 2022
- 07:46:22 +0000
-Message-ID: <7a6533ae-9a42-06aa-3da6-0986a72c3392@amd.com>
-Date: Tue, 1 Feb 2022 08:46:15 +0100
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8702910EDDF;
+ Tue,  1 Feb 2022 08:08:02 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 0219D1F380;
+ Tue,  1 Feb 2022 08:08:01 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1643702881; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=WG9HnwKkkXe897NBtSIrpVAKJHMJAUzI2spN6iSTQCo=;
+ b=ZPebEAsQ52hldNt6r4gw5JFv2GzUXl0UyMJwyYP23xc/T8b9iDuu2DvYGcIk5UqSGQhWsG
+ WtiI3F8bhi67mXZofQvWJTWG65GlGJ8h/tc2d51a/Y7UFJIrXnR2n1ZlOOuTt3tye+jiAK
+ //C+uF81HvK6Ys+wahfubMUpUA5ABeA=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1643702881;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=WG9HnwKkkXe897NBtSIrpVAKJHMJAUzI2spN6iSTQCo=;
+ b=S653N0eGaEgizeZIT5tY+svk9UYO4zFOvXFBvvmBi0vbaZzmuwz5ouJJNL42nuIF8lvqD9
+ AfNA04XCVECDqSDg==
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id BB75F13CF1;
+ Tue,  1 Feb 2022 08:08:00 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id Ysy/LGDq+GH3RQAAMHmgww
+ (envelope-from <tzimmermann@suse.de>); Tue, 01 Feb 2022 08:08:00 +0000
+Message-ID: <bff9bd4c-522e-f57f-c487-675e3efdb2d7@suse.de>
+Date: Tue, 1 Feb 2022 09:08:00 +0100
+MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.5.0
 Content-Language: en-US
-To: Lucas De Marchi <lucas.demarchi@intel.com>
+To: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
+ Lucas De Marchi <lucas.demarchi@intel.com>
 References: <20220128083626.3012259-1-lucas.demarchi@intel.com>
  <a45a8cef-f5e7-604c-64f1-e893ec9ba8af@amd.com>
  <20220128091213.qaq6v4vbeerzvd3f@ldmartin-desk2>
@@ -50,75 +58,12 @@ References: <20220128083626.3012259-1-lucas.demarchi@intel.com>
  <20220128094018.m7pixeznedoa47gb@ldmartin-desk2>
  <36a08a90-3614-27b4-166b-9d113b644af3@amd.com>
  <20220201003647.djakrmdebqigpz3j@ldmartin-desk2>
-From: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
-In-Reply-To: <20220201003647.djakrmdebqigpz3j@ldmartin-desk2>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: AM6P194CA0042.EURP194.PROD.OUTLOOK.COM
- (2603:10a6:209:84::19) To BN8PR12MB3587.namprd12.prod.outlook.com
- (2603:10b6:408:43::13)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 05fc9a36-f6c6-4bff-2a92-08d9e556f0f3
-X-MS-TrafficTypeDiagnostic: MWHPR12MB1757:EE_
-X-Microsoft-Antispam-PRVS: <MWHPR12MB1757C1F9180DE1A2135811E083269@MWHPR12MB1757.namprd12.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:10000;
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: Zu/KS9AhggP87B0tQarDHN589SXavPuFeQ3PPAd2/oeL4cReVL242I/BnSSrI8mAOOcFBm/fESoCW56RUvdKzRutJfBJF05EwMOhrKrh9ZhridH0M3pXil8Yo1f6wvX6SlPyKTNo17Y3E2iEXViQSUeMj5xxhWrLDTx45IIK2Zr6E+6vFTVJ9GDMLCohysdG1gy5z9a0m7yQhPTf5PQ7lL3POlp2txX7LLZpQ2Pzfud9f/gpOHUbYE0pkhVFxq9GOmz6czgYOxX8I/FmSvvrrFDz+B8fxOWLc2f1FjbE93yz1I3Cd7+Sxi5KHJGuJ9cXX2iSYlKlVoKrgeEKLEjItJjK7s/Ajo4SQ6NJRIXQwpe9yLJ55mMkQxW5bJA6sdWnfi82Q0ZEjHoMoxQFXpSgjVTR7bmIoRizNHTwiuF3wBEV2euFC05jgbQ6rVY9ZQZL1odpIDG42a6Gczcc5odRQHOaMys55KT3MRFEDKC5WteJE1Oc37p/lHxNdGoAPTrJAuBD+qrVgbMlw00rsI2JlSuwz+GAhWeuOPAsiOSX+j4ItqJt+YGJ2okTPziPby7+pEJDOpJi8MhCh8k3DuxLSJeVWZZPJsKRTGyWYCQWn9Cep45o9fbLVw3PXxVLJPOyx8JnoZLMpprcuHmdmQVHA/R7I67Ue1jvIzjBxNFunGiHY0tg61tTGl+e8H85gWqN5qh80vsPiW2c9RjF3K/ixlaBAaVlioOKp3axmnnJeczWaIJQ1FcDvHNBWJzmQ+clDAECoU34RcHqRLWNyN/nGEmQscxcBNJVF89nY9/gtA76hdorYtEjqsFAcDT7u1UY2/vIZMuGpapjsg5wkbaE3jHyaEl1vLWTi99wW/RJvzM=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:BN8PR12MB3587.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230001)(4636009)(366004)(86362001)(2906002)(6506007)(6666004)(2616005)(186003)(31696002)(30864003)(8936002)(83380400001)(5660300002)(4326008)(6512007)(7416002)(8676002)(6486002)(966005)(31686004)(36756003)(66946007)(38100700002)(66556008)(66476007)(66574015)(6916009)(45080400002)(316002)(508600001)(45980500001)(43740500002)(20210929001);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?TFp3NHk1K2MrdGRoYmJWUFl3ZGQrcytPTWNkbFdRZiswVEhTdGhWejhFbmpw?=
- =?utf-8?B?U0cxTmkza0pGdlVEdXczWE01NHlVR283dTZCRlJ1R1Zub3RxMWk5Nk40b0NQ?=
- =?utf-8?B?UkNRMHVMTlhZaG1jc1NQS0V0MjcwR0s0TzVZRndIVTFwTXFNeDMvcG9mcG1X?=
- =?utf-8?B?R296WTUwZzJpeEtFK1dYS0VjTUN3NHN3d2RseGNMY2N1dXlTRnhRMkR2Skx5?=
- =?utf-8?B?UkFwb1J3UlhQVzB4MUNTbTZ2dWlXbzFlZW9jMXpac1Z4WmdpMERGaGc5ek5S?=
- =?utf-8?B?WmRaR3l2eEZEK3IzQms4K3F3YVF0QlE1aEl2ZERISTZ2UE15VEpjODhMdVl0?=
- =?utf-8?B?bVdKTVFoUlE0aDFXeFowSUNZWmc5MW1MSy91eHE5VnRXNTlUaFp2eUtnWmJ5?=
- =?utf-8?B?enVwbTYzRERaR1Rwd1premxJZHNrN3ErUmVPTFFHN242TThvME1UQ2o4QWxu?=
- =?utf-8?B?b0x2MkJ0K0IrVVgxS2NhaU4yR0srT2VEQ3FLSERpRkxJTERTQVpHNjRjQ2NO?=
- =?utf-8?B?a3lkZEZaZFI2N291bFZ5MGR5aGlqeVJtOXJRdU83NlF1UFNCbkVWYi9BMi84?=
- =?utf-8?B?VlZsbDJkdGpDTFluTG9yVGZwdEtXRWI1L3BicEkwYkx4ZGorSG9mWlJtMmJI?=
- =?utf-8?B?cGVZSWVMK1duNmRDOE54YlJZMEJnWE1HcW95UkxvVXNKTVpObTZiaUhsWGNt?=
- =?utf-8?B?YVloTmFZR2RUbzlVVUw4ZGhoYnozRGdBcFJtZy9nMGphMmw2TzJWT3RpNDA1?=
- =?utf-8?B?UzJEVkJYWUtEY3JEY2VaZ1M4WkZBQVBTc3RwZllyaW5zUWlSVVNRSGJxYXpm?=
- =?utf-8?B?VGVHand3VW5HaWIwYU1QYlg5QWxkUnFINStpNGMrNWhQU0hFYTVjYSthRHRp?=
- =?utf-8?B?Z0ZKamo2bVVsY2Z5NmwzNHIwalppNTZLQlUxQko5dW9IUHRsdzNOcjhvZWVh?=
- =?utf-8?B?akd1ZjdSN2lKSkNJSE1ZcWZOTlFia2Q5YS84WVlCaHREL2xxNnhleVh0N1lL?=
- =?utf-8?B?eU9mTGR0YW1nNTcwZVZ1a0xsSE43a1FOOVBTRTFNOFBJSDZoa25hVy9vVFdQ?=
- =?utf-8?B?QkhLTW5zWXZ6cHlqRlNBU01BeDVsWkl6SklJVHpXRUtSQVFMNGptQWs1UkhK?=
- =?utf-8?B?Q3BXQzBFemhNbHAzOTdtVnJjbmRIK3ByYkVLYk1IYnE3aHBVa1RrcE5mdEtk?=
- =?utf-8?B?d1pPdFZzeW9lSS9VU3pjdnVpQnFwTWorMDBYZjdMOGhFRnMxVDlYS0lXelQv?=
- =?utf-8?B?T2M2RDEzRkN6N1N4c1ZuLzJPRmhSZ3dBM0NmYlV6djhrVDBLUnhEQW9maVpB?=
- =?utf-8?B?YnQ5ZnZrNUExaW1WMkMzNVNBV3A0TFJkWWx1bENWQ3RqNVVBTnU3QytTY3Ba?=
- =?utf-8?B?NnRBN1JaMHVWSlhLQktCUGRMMkh1UDBsVXN4NGVOV3R2NkZKWXZZNFp0ejRF?=
- =?utf-8?B?TFR1Z3NHeDUySFBMRWo4YUQ4VmROSXdURVNuZ0Npa2xIKzZYelRJOFFkeHlR?=
- =?utf-8?B?MWF0T2RheWlQaUR6Q0N5SVBLbTBoYVZaSFoxbVNYZ3dYdno1TmhwZkpOeHdx?=
- =?utf-8?B?eXpOaWhDSU1WdHoyMXBEVkxpS2t4bWpDeW5WT0RuUHZzV3FQZFU1UHZ3ZWMv?=
- =?utf-8?B?Z1UwV25nUkJPNUZuUnRocDFZQkhrZzZDa2cweDVNRUsxdHd1ZTBWMFpTSUpV?=
- =?utf-8?B?VmtyWTNuTG8xT2VpRHVGUFJxTEUya0dtUStKSWtvN2F4dlhobkVXblJsTWV5?=
- =?utf-8?B?bDRiMStlTXBnOHdIbnRZRG1SMmVFNHJ3ai9jOWEyMnlqbFMvT1c4ZGM3ZU5L?=
- =?utf-8?B?NFZ4RS91QnVKb1B1WDdDM09jTEg0cEdESTJhcjF4bjNCWXlaMERpNC92WGFM?=
- =?utf-8?B?MkNCc1pmcFI0RzdxT2pMa2ZHR1pNTG5HT0ovRGRYanloNExnNDcrdHE0QzZx?=
- =?utf-8?B?RHVmS0xJTjRTTTBMMUowYUhmUnRyYzN3RzdKbkRoUXNObmF6NGF1MGVES2dv?=
- =?utf-8?B?NTJPMzBuVmdNbDQ2eUhyV1ZLRTk4UUM1aHRsbWkrL3phVVJKSEJzVEx3UUtj?=
- =?utf-8?B?MkcxOXljWjY1QUQ0b3Y4ZENyZVp5MmcvZVJUYnJwMU9neVV1UHdZdWdCYUgy?=
- =?utf-8?B?Mm1wSDN3TENxSWNKemhsVVErS1B2TkR2RVROTGR3YXhJSkV6bkpEWHRLZVZQ?=
- =?utf-8?Q?4Ao9nul7clSpYvclnMyK358=3D?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 05fc9a36-f6c6-4bff-2a92-08d9e556f0f3
-X-MS-Exchange-CrossTenant-AuthSource: BN8PR12MB3587.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Feb 2022 07:46:22.3301 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: AVJlxMyNiHeJKJV/ACIEr6+4mJ7m45tnyyRht6J8HQ5uFF893Fz8fkZ/BSWfsUUY
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MWHPR12MB1757
+ <7a6533ae-9a42-06aa-3da6-0986a72c3392@amd.com>
+From: Thomas Zimmermann <tzimmermann@suse.de>
+In-Reply-To: <7a6533ae-9a42-06aa-3da6-0986a72c3392@amd.com>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------0kyB92ItVusfV6cXDWQ47yBi"
 Subject: Re: [Nouveau] [PATCH 00/14] Rename dma-buf-map
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -134,363 +79,309 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
 Cc: airlied@linux.ie, linux-kernel@vger.kernel.org,
  dri-devel@lists.freedesktop.org, srinivas.kandagatla@linaro.org,
  gregkh@linuxfoundation.org, nouveau@lists.freedesktop.org,
- sumit.semwal@linaro.org, linux-media@vger.kernel.org
+ linux-media@vger.kernel.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Am 01.02.22 um 01:36 schrieb Lucas De Marchi:
-> On Fri, Jan 28, 2022 at 10:48:42AM +0100, Christian König wrote:
->> Am 28.01.22 um 10:40 schrieb Lucas De Marchi:
->>> On Fri, Jan 28, 2022 at 10:22:00AM +0100, Christian König wrote:
->>>> Am 28.01.22 um 10:12 schrieb Lucas De Marchi:
->>>>> On Fri, Jan 28, 2022 at 09:41:14AM +0100, Christian König wrote:
->>>>>> Rule #1 is to never ever break the build.
->>>>>>
->>>>>> Because of this all those patches needs to be squashed into a 
->>>>>> single one as far as I can see.
->>>>>
->>>>> what config are you building on?
->>>>
->>>> Well I'm not building at all, I'm just looking at the patches as an 
->>>> engineer with 25 years of experience with Linux patches.
->>>>
->>>> Just take a look at patch number 2:
->>>>
->>>> -static int fastrpc_vmap(struct dma_buf *dmabuf, struct dma_buf_map 
->>>> *map)
->>>> +static int fastrpc_vmap(struct dma_buf *dmabuf, struct iosys_map 
->>>> *map)
->>>>
->>>> You are changing the functions signature without changing any of 
->>>> the callers.
->>>>
->>>> At bare minimum that causes a warning and on runtime this only 
->>>> works by coincident now because the structure pointers just happen 
->>>> to have the same layout. This is not something we usually do.
->>>
->>> you missed the magic/hack on patch 1:
->>>
->>> 1) dma-buf-map.h includes iosys-map.h _at the end_
->>> 2) iosys-map.h includes dma-buf-map.h at the beginning
->>>    and initially does a "define iosys_map dma_buf_map".
->>>
->>> So, it doesn't work by coincidence, It's because it was done to allow
->>> converting it piecemeal.
->>
->> Oh, my. Please never do stuff like that again.
->
-> It's not uncommon approach to be required by other subsystems. Even
-> drm-intel already used similar approach for macro conversions crossing
-> drm-intel-next and drm-intel-gt-next branches recently.  As I said, I
-> don't mind one way or the other.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------0kyB92ItVusfV6cXDWQ47yBi
+Content-Type: multipart/mixed; boundary="------------IBDbOTC9R0fkkASjbm4TO1Ym";
+ protected-headers="v1"
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
+ Lucas De Marchi <lucas.demarchi@intel.com>
+Cc: airlied@linux.ie, daniel.vetter@ffwll.ch, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, srinivas.kandagatla@linaro.org,
+ gregkh@linuxfoundation.org, nouveau@lists.freedesktop.org,
+ linux-media@vger.kernel.org
+Message-ID: <bff9bd4c-522e-f57f-c487-675e3efdb2d7@suse.de>
+Subject: Re: [PATCH 00/14] Rename dma-buf-map
+References: <20220128083626.3012259-1-lucas.demarchi@intel.com>
+ <a45a8cef-f5e7-604c-64f1-e893ec9ba8af@amd.com>
+ <20220128091213.qaq6v4vbeerzvd3f@ldmartin-desk2>
+ <27870484-6d16-5bd4-aa06-0ec513111d99@amd.com>
+ <20220128094018.m7pixeznedoa47gb@ldmartin-desk2>
+ <36a08a90-3614-27b4-166b-9d113b644af3@amd.com>
+ <20220201003647.djakrmdebqigpz3j@ldmartin-desk2>
+ <7a6533ae-9a42-06aa-3da6-0986a72c3392@amd.com>
+In-Reply-To: <7a6533ae-9a42-06aa-3da6-0986a72c3392@amd.com>
 
-The key point is that you seemed to have a misunderstanding why we 
-separate changes into functional independent patches.
+--------------IBDbOTC9R0fkkASjbm4TO1Ym
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-The goal of that is *not* to reduce the number of lines in a patch, but 
-rather to reduce the complexity of the review.
+SGkNCg0KQW0gMDEuMDIuMjIgdW0gMDg6NDYgc2NocmllYiBDaHJpc3RpYW4gS8O2bmlnOg0K
+Wy4uXQ0KPj4gMikgSWYgcmVuYW1pbmcsIHdvdWxkIGl0IHN0aWxsIGtlZXAgdGhlIHNhbWUg
+ZW50cnkgaW4NCj4+IE1BSU5UQUlORVJTPyBUaG9tYXMgc3VnZ2VzdGVkIGRyaXZlcnMgY29y
+ZSwgYnV0IHRoaXMgYWxsIHNlZW0gdG8gYmUgdXNlZA0KPj4gbWFpbmx5IG9uIGRybS8sIHdp
+dGgganVzdCBvbmUgZXhjZXB0aW9uLg0KPiANCj4gSSB3b3VsZCBqdXN0IGFkZCBhIGNvbXBs
+ZXRlIG5ldyBlbnRyeSBmb3IgdGhpcyBhbmQgdXNlIFRob21hcyBhcyANCj4gbWFpbnRhaW5l
+ciAod2l0aCBoaXMgcGVybWlzc2lvbiBvZiBjb3Vyc2UpIGFuZCBkcmkgYXMgbWFpbGluZyBs
+aXN0Lg0KDQpTdXJlLCBubyBwcm9ibGVtLg0KDQpCZXN0IHJlZ2FyZHMNClRob21hcw0KDQo+
+IA0KPj4NCj4+IDMpIElmIHJlbmFtaW5nLCBkbyB3ZSBoYXZlIGFub3RoZXIgcHJlZmVycmVk
+IG5hbWU/DQo+IA0KPiBOb3BlLCBhcyBEYW5pZWwgc2FpZCB0aGUgbmFtZSBpdHNlbGYgaXMg
+b25seSBiaWtlc2hlZWQuIFdoYXQgaXMgDQo+IGltcG9ydGFudCBpcyB0aGF0IHdlIHNlZSB0
+aGlzIGFzIGZ1bmN0aW9uYWxpdHkgc2VwYXJhdGVkIGZyb20gdGhlIGludGVyIA0KPiBkcml2
+ZXIgaW50ZXJmYWNlLg0KPiANCj4gUmVnYXJkcywNCj4gQ2hyaXN0aWFuLg0KPiANCj4+DQo+
+Pg0KPj4gdGhhbmtzDQo+PiBMdWNhcyBEZSBNYXJjaGkNCj4+DQo+Pj4NCj4+Pj4NCj4+Pj4g
+QnV0IGFzIEkgc2FpZCwgSSBkb24ndCByZWFsbHkgaGF2ZSBhIHByZWZlcmVuY2UuIFdoZW4g
+Y3Jvc3NpbmcNCj4+Pj4gc3Vic3lzdGVtcyBvbmUgdGhpbmcgdGhhdCBpcyBoYXJkIGlzIHRo
+YXQgZGlmZmVyZW50IHBlb3BsZSBoYXZlIA0KPj4+PiBkaWZmZXJlbnQNCj4+Pj4gcHJlZmVy
+ZW5jZXMgb24gdGhlc2UgdGhpbmdzLiBBdCBsZWFzdCBzcXVhc2hpbmcgbm93IGlzIG11Y2gg
+ZWFzaWVyIHRoYW4NCj4+Pj4gaWYgSSBoYWQgdG8gc3BsaXQgaXQNCj4+Pj4NCj4+Pj4gVHJ5
+IHRvIGltYWdpbmUgaG93IG11Y2ggY29tcGxhaW4gSSByZWNlaXZlZCBvbiBnb2luZyB0aGUg
+b3RoZXIgd2F5IGluDQo+Pj4+IDI1OTg1ZWRjZWRlYTYzOTYyNzcwMDM4NTQ2NTdiNWYzY2Iz
+MWE2Mjggd2l0aA0KPj4+PiAyNDYzIGZpbGVzIGNoYW5nZWQsIDQyNTIgaW5zZXJ0aW9ucygr
+KSwgNDI1MiBkZWxldGlvbnMoLSkNCj4+Pg0KPj4+IFdlbGwgZXhhY3RseSB0aGF0IGlzIHBl
+cmZlY3RseSBmaW5lLg0KPj4+DQo+Pj4gV2hhdCB5b3UgZG8gaGVyZSBpcyBhcHBseWluZyB5
+b3VyIHBlcnNvbmFsIGhhY2sgd2hpY2ggaXMgYWJzb2x1dGVseSANCj4+PiBub3Qgd2VsY29t
+ZWQuDQo+Pj4NCj4+PiBSZWdhcmRzLA0KPj4+IENocmlzdGlhbi4NCj4+Pg0KPj4+PiA6KQ0K
+Pj4+Pg0KPj4+Pg0KPj4+PiBMdWNhcyBEZSBNYXJjaGkNCj4+Pj4NCj4+Pj4+DQo+Pj4+PiBS
+ZWdhcmRzLA0KPj4+Pj4gQ2hyaXN0aWFuLg0KPj4+Pj4NCj4+Pj4+PiBJIGJ1aWx0IHRoaXMg
+c2VyaWVzLCBmdWxsIGNvbmZpZyB3aXRoDQo+Pj4+Pj4gQ09ORklHX0NPTVBJTEVfVEVTVCBh
+bmQgZG9pbmc6DQo+Pj4+Pj4NCj4+Pj4+PiDCoMKgwqDCoGdpdCByZWJhc2UgLWkgPGJhc2U+
+IC14ICJtYWtlIC1qJChucHJvYykiDQo+Pj4+Pj4NCj4+Pj4+PiBJIHNwbGl0IHRoZXNlIHBh
+dGNoZXMgaW4gYSB3YXkgdGhhdCB3b3VsZG4ndCBicmVhayB0aGUgYnVpbGQgb24gDQo+Pj4+
+Pj4gcHVycG9zZS4NCj4+Pj4+PiBUaGVyZSB3ZXJlIGEgY291cGxlIHRoYXQgSSBjb3VsZG4n
+dCBidWlsZCB3aXRob3V0IGNyb3NzIGNvbXBpbGluZzogDQo+Pj4+Pj4gdGVncmENCj4+Pj4+
+PiBhbmQgcm9ja2NoaXAuIFRoZSBvdGhlcnMgd2VyZSBvay4NCj4+Pj4+Pg0KPj4+Pj4+IEkn
+bSBub3QgcmVhbGx5IGFnYWluc3Qgc3F1YXNoaW5nIGV2ZXJ5dGhpbmcgaW4gb25lIHRvIG1l
+cmdlLCB0aG91Z2guDQo+Pj4+Pj4gSXQgd2lsbCBiZSBoYXJkIG9uIHRoZSBjb25mbGljdHMg
+bGF0ZXIsIGJ1dCBzaG91bGQgZ2V0IHRoZSBqb2IgDQo+Pj4+Pj4gZG9uZSBtdWNoDQo+Pj4+
+Pj4gcXVpY2tlci4NCj4+Pj4+Pg0KPj4+Pj4+IEx1Y2FzIERlIE1hcmNoaQ0KPj4+Pj4+DQo+
+Pj4+Pj4+DQo+Pj4+Pj4+IFJlZ2FyZHMsDQo+Pj4+Pj4+IENocmlzdGlhbi4NCj4+Pj4+Pj4N
+Cj4+Pj4+Pj4gQW0gMjguMDEuMjIgdW0gMDk6MzYgc2NocmllYiBMdWNhcyBEZSBNYXJjaGk6
+DQo+Pj4+Pj4+PiBNb3RpdmF0aW9uIGZvciB0aGlzIHN0YXJ0ZWQgaW4NCj4+Pj4+Pj4+IGh0
+dHBzOi8vbmFtMTEuc2FmZWxpbmtzLnByb3RlY3Rpb24ub3V0bG9vay5jb20vP3VybD1odHRw
+cyUzQSUyRiUyRmxvcmUua2VybmVsLm9yZyUyRmxrbWwlMkYyMDIyMDEyNjIwMzcwMi4xNzg0
+NTg5LTEtbHVjYXMuZGVtYXJjaGklNDBpbnRlbC5jb20lMkYmYW1wO2RhdGE9MDQlN0MwMSU3
+Q2NocmlzdGlhbi5rb2VuaWclNDBhbWQuY29tJTdDMDExNDJmYTNjZTQ4NDA0MGFkZTAwOGQ5
+ZTUxYWVmNWQlN0MzZGQ4OTYxZmU0ODg0ZTYwOGUxMWE4MmQ5OTRlMTgzZCU3QzAlN0MwJTdD
+NjM3NzkyNzI2MTIzOTQwNTE0JTdDVW5rbm93biU3Q1RXRnBiR1pzYjNkOGV5SldJam9pTUM0
+d0xqQXdNREFpTENKUUlqb2lWMmx1TXpJaUxDSkJUaUk2SWsxaGFXd2lMQ0pYVkNJNk1uMCUz
+RCU3QzMwMDAmYW1wO3NkYXRhPXA4clIyOEhuMHlNVGJ3eSUyRjdicGlHeUc5ZkF1OWtHMVZV
+elgyTUY0NG1jcyUzRCZhbXA7cmVzZXJ2ZWQ9MCANCj4+Pj4+Pj4+DQo+Pj4+Pj4+Pg0KPj4+
+Pj4+Pj4NCj4+Pj4+Pj4+IHdoZW4gdHJ5aW5nIHRvIGV4dGVuZCB0aGUgZG1hLWJ1Zi1tYXAg
+QVBJIHRvIGNvdmVyIG5ldyB1c2UgDQo+Pj4+Pj4+PiBjYXNlczogaGVscCBhDQo+Pj4+Pj4+
+PiBzaW5nbGUgZHJpdmVyIHdpdGggYWxsb2NhdGlvbnMgYW5kIHNoYXJpbmcgY29kZSBwYXRo
+cyBmb3IgSU8gYW5kIA0KPj4+Pj4+Pj4gc3lzdGVtDQo+Pj4+Pj4+PiBtZW1vcnkuIEknbSBs
+ZWF2aW5nIHRoZSBBUEkgYWRkaXRpb25zIGFzaWRlIGFuZCBmaXJzdCByZW5hbWluZyB0aGUN
+Cj4+Pj4+Pj4+IGludGVyZmFjZSBhcyByZXF1ZXN0ZWQuDQo+Pj4+Pj4+Pg0KPj4+Pj4+Pj4g
+VGhlcmUgYXJlIGFscmVhZHkgc29tZSB1c2VycyBpbiB0cmVlIG91dHNpZGUgdGhlIGNvbnRl
+eHQgb2YgZG1hLWJ1Zg0KPj4+Pj4+Pj4gaW1wb3J0ZXIvZXhwb3J0ZXIuIFNvIGJlZm9yZSBl
+eHRlbmRpbmcgdGhlIEFQSSwgbGV0J3MgZGlzc29jaWF0ZSANCj4+Pj4+Pj4+IGl0IGZyb20N
+Cj4+Pj4+Pj4+IGRtYS1idWYuDQo+Pj4+Pj4+Pg0KPj4+Pj4+Pj4gVGhlIGlvc3lzLW1hcC5o
+IGlzIGludHJvZHVjZWQgaW4gdGhlIGZpcnN0IHBhdGNoIGluIGEgd2F5IHRoYXQgDQo+Pj4+
+Pj4+PiBhbGxvd3MNCj4+Pj4+Pj4+IHRoZSBjb252ZXJzaW9uIG9mIGVhY2ggZHJpdmVyIHRv
+IGhhcHBlbiBzZXBhcmF0ZWx5LiBBZnRlciBhbGwgdGhlDQo+Pj4+Pj4+PiBjb252ZXJzaW9u
+cyBhcmUgZG9uZSB3ZSBjYW4gcmVtb3ZlIHRoZSBvbGQgb25lLCB3aGljaCBpcyB0aGUgDQo+
+Pj4+Pj4+PiBsYXN0IHBhdGNoLg0KPj4+Pj4+Pj4gQW5vdGhlciBwb3NzaWJsZSB3YXkgaXMg
+dG8gc3F1YXNoIGV2ZXJ5dGhpbmcgYW5kIG1lcmdlIHRvZ2V0aGVyLA0KPj4+Pj4+Pj4gYnV0
+IEkgYmVsaWV2ZSB0aGlzIHdvdWxkIG1ha2UgbXVjaCBoYXJkZXIgZm9yIHJldmlldy4NCj4+
+Pj4+Pj4+DQo+Pj4+Pj4+PiBUaGUgY29udmVyc2lvbiB3YXMgZG9uZSB3aXRoIHRoZSBmb2xs
+b3dpbmcgc2VtYW50aWMgcGF0Y2g6DQo+Pj4+Pj4+Pg0KPj4+Pj4+Pj4gwqDCoMKgwqBAcjFA
+DQo+Pj4+Pj4+PiDCoMKgwqDCoEBADQo+Pj4+Pj4+PiDCoMKgwqDCoC0gc3RydWN0IGRtYV9i
+dWZfbWFwDQo+Pj4+Pj4+PiDCoMKgwqDCoCsgc3RydWN0IGlvc3lzX21hcA0KPj4+Pj4+Pj4N
+Cj4+Pj4+Pj4+IMKgwqDCoMKgQHIyQA0KPj4+Pj4+Pj4gwqDCoMKgwqBAQA0KPj4+Pj4+Pj4g
+wqDCoMKgwqAoDQo+Pj4+Pj4+PiDCoMKgwqDCoC0gRE1BX0JVRl9NQVBfSU5JVF9WQUREUg0K
+Pj4+Pj4+Pj4gwqDCoMKgwqArIElPU1lTX01BUF9JTklUX1ZBRERSDQo+Pj4+Pj4+PiDCoMKg
+wqDCoHwNCj4+Pj4+Pj4+IMKgwqDCoMKgLSBkbWFfYnVmX21hcF9zZXRfdmFkZHINCj4+Pj4+
+Pj4+IMKgwqDCoMKgKyBpb3N5c19tYXBfc2V0X3ZhZGRyDQo+Pj4+Pj4+PiDCoMKgwqDCoHwN
+Cj4+Pj4+Pj4+IMKgwqDCoMKgLSBkbWFfYnVmX21hcF9zZXRfdmFkZHJfaW9tZW0NCj4+Pj4+
+Pj4+IMKgwqDCoMKgKyBpb3N5c19tYXBfc2V0X3ZhZGRyX2lvbWVtDQo+Pj4+Pj4+PiDCoMKg
+wqDCoHwNCj4+Pj4+Pj4+IMKgwqDCoMKgLSBkbWFfYnVmX21hcF9pc19lcXVhbA0KPj4+Pj4+
+Pj4gwqDCoMKgwqArIGlvc3lzX21hcF9pc19lcXVhbA0KPj4+Pj4+Pj4gwqDCoMKgwqB8DQo+
+Pj4+Pj4+PiDCoMKgwqDCoC0gZG1hX2J1Zl9tYXBfaXNfbnVsbA0KPj4+Pj4+Pj4gwqDCoMKg
+wqArIGlvc3lzX21hcF9pc19udWxsDQo+Pj4+Pj4+PiDCoMKgwqDCoHwNCj4+Pj4+Pj4+IMKg
+wqDCoMKgLSBkbWFfYnVmX21hcF9pc19zZXQNCj4+Pj4+Pj4+IMKgwqDCoMKgKyBpb3N5c19t
+YXBfaXNfc2V0DQo+Pj4+Pj4+PiDCoMKgwqDCoHwNCj4+Pj4+Pj4+IMKgwqDCoMKgLSBkbWFf
+YnVmX21hcF9jbGVhcg0KPj4+Pj4+Pj4gwqDCoMKgwqArIGlvc3lzX21hcF9jbGVhcg0KPj4+
+Pj4+Pj4gwqDCoMKgwqB8DQo+Pj4+Pj4+PiDCoMKgwqDCoC0gZG1hX2J1Zl9tYXBfbWVtY3B5
+X3RvDQo+Pj4+Pj4+PiDCoMKgwqDCoCsgaW9zeXNfbWFwX21lbWNweV90bw0KPj4+Pj4+Pj4g
+wqDCoMKgwqB8DQo+Pj4+Pj4+PiDCoMKgwqDCoC0gZG1hX2J1Zl9tYXBfaW5jcg0KPj4+Pj4+
+Pj4gwqDCoMKgwqArIGlvc3lzX21hcF9pbmNyDQo+Pj4+Pj4+PiDCoMKgwqDCoCkNCj4+Pj4+
+Pj4+DQo+Pj4+Pj4+PiDCoMKgwqDCoEBADQo+Pj4+Pj4+PiDCoMKgwqDCoEBADQo+Pj4+Pj4+
+PiDCoMKgwqDCoC0gI2luY2x1ZGUgPGxpbnV4L2RtYS1idWYtbWFwLmg+DQo+Pj4+Pj4+PiDC
+oMKgwqDCoCsgI2luY2x1ZGUgPGxpbnV4L2lvc3lzLW1hcC5oPg0KPj4+Pj4+Pj4NCj4+Pj4+
+Pj4+IGFuZCB0aGVuIHNvbWUgZmlsZXMgaGFkIHRoZWlyIGluY2x1ZGVzIGFkanVzdGVkIHNv
+IHdlIGNhbiBidWlsZA0KPj4+Pj4+Pj4gZXZlcnl0aGluZyBvbiBlYWNoIGNvbW1pdCBpbiB0
+aGlzIHNlcmllcy4gQWxzbyBzb21lIGNvbW1lbnRzIA0KPj4+Pj4+Pj4gd2VyZSB1cGRhdGUN
+Cj4+Pj4+Pj4+IHRvIHJlbW92ZSBtZW50aW9ucyB0byBkbWEtYnVmLW1hcC4gU2ltcGx5IGRv
+aW5nIGEgc2VkIHRvIHJlbmFtZSANCj4+Pj4+Pj4+IGRpZG4ndA0KPj4+Pj4+Pj4gd29yayBh
+cyBkbWEtYnVmIGhhcyBzb21lIEFQSXMgdXNpbmcgdGhlIGRtYV9idWZfbWFwIHByZWZpeC4N
+Cj4+Pj4+Pj4+DQo+Pj4+Pj4+PiBPbmNlIGZpbmFsaXplZCwgSSB0aGluayBtb3N0IG9mIHRo
+aXMsIGlmIG5vdCBhbGwsIGNvdWxkIGdvIA0KPj4+Pj4+Pj4gdGhyb3VnaCB0aGUNCj4+Pj4+
+Pj4+IGRybS1taXNjLW5leHQgYnJhbmNoLiBJIHNwbGl0IGk5MTUsIG1zbSwgbm91dmVhdSwg
+YW5kIHJhZGVvbiBpbiANCj4+Pj4+Pj4+IHRoZWlyDQo+Pj4+Pj4+PiBvd24gcGF0Y2hlcyBp
+biBjYXNlIGl0J3MgcHJlZmVycmVkIHRvIHRha2UgdGhvc2UgdGhyb3VnaCB0aGVpciBvd24N
+Cj4+Pj4+Pj4+IHRyZWVzLg0KPj4+Pj4+Pj4NCj4+Pj4+Pj4+IEx1Y2FzIERlIE1hcmNoaQ0K
+Pj4+Pj4+Pj4NCj4+Pj4+Pj4+IEx1Y2FzIERlIE1hcmNoaSAoMTQpOg0KPj4+Pj4+Pj4gwqAg
+aW9zeXMtbWFwOiBJbnRyb2R1Y2UgcmVuYW1lZCBkbWEtYnVmLW1hcA0KPj4+Pj4+Pj4gwqAg
+bWlzYzogZmFzdHJwYzogUmVwbGFjZSBkbWEtYnVmLW1hcCB3aXRoIGlvc3lzLW1hcA0KPj4+
+Pj4+Pj4gwqAgZG1hLWJ1ZjogUmVwbGFjZSBkbWEtYnVmLW1hcCB3aXRoIGlvc3lzLW1hcA0K
+Pj4+Pj4+Pj4gwqAgbWVkaWE6IFJlcGxhY2UgZG1hLWJ1Zi1tYXAgd2l0aCBpb3N5cy1tYXAN
+Cj4+Pj4+Pj4+IMKgIGRybS90dG06IFJlcGxhY2UgZG1hLWJ1Zi1tYXAgd2l0aCBpb3N5cy1t
+YXANCj4+Pj4+Pj4+IMKgIGRybTogUmVwbGFjZSBkbWEtYnVmLW1hcCB3aXRoIGlvc3lzLW1h
+cCBpbiBkcml2ZXJzDQo+Pj4+Pj4+PiDCoCBkcm0vaTkxNTogUmVwbGFjZSBkbWEtYnVmLW1h
+cCB3aXRoIGlvc3lzLW1hcA0KPj4+Pj4+Pj4gwqAgZHJtL21zbTogUmVwbGFjZSBkbWEtYnVm
+LW1hcCB3aXRoIGlvc3lzLW1hcA0KPj4+Pj4+Pj4gwqAgZHJtL25vdXZlYXU6IFJlcGxhY2Ug
+ZG1hLWJ1Zi1tYXAgd2l0aCBpb3N5cy1tYXANCj4+Pj4+Pj4+IMKgIGRybS90ZWdyYTogUmVw
+bGFjZSBkbWEtYnVmLW1hcCB3aXRoIGlvc3lzLW1hcA0KPj4+Pj4+Pj4gwqAgZHJtL3JhZGVv
+bjogUmVwbGFjZSBkbWEtYnVmLW1hcCB3aXRoIGlvc3lzLW1hcA0KPj4+Pj4+Pj4gwqAgZHJt
+OiBSZXBsYWNlIGRtYS1idWYtbWFwIHdpdGggaW9zeXMtbWFwIGluIGNvbW1vbiBjb2RlDQo+
+Pj4+Pj4+PiDCoCBEb2N1bWVudGF0aW9uOiBSZWZlciB0byBpb3N5cy1tYXAgaW5zdGVhZCBv
+ZiBkbWEtYnVmLW1hcA0KPj4+Pj4+Pj4gwqAgZG1hLWJ1Zi1tYXA6IFJlbW92ZSBBUEkgaW4g
+ZmF2b3Igb2YgaW9zeXMtbWFwDQo+Pj4+Pj4+Pg0KPj4+Pj4+Pj4gwqBEb2N1bWVudGF0aW9u
+L2RyaXZlci1hcGkvZG1hLWJ1Zi5yc3TCoMKgwqDCoMKgwqDCoMKgwqAgfMKgwqAgNCArLQ0K
+Pj4+Pj4+Pj4gwqBEb2N1bWVudGF0aW9uL2dwdS90b2RvLnJzdMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgIHzCoCAyMCArLQ0KPj4+Pj4+Pj4gwqBNQUlOVEFJTkVS
+U8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgIHzCoMKgIDIgKy0NCj4+Pj4+Pj4+IMKgZHJpdmVycy9kbWEtYnVm
+L2RtYS1idWYuY8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfMKg
+IDIyICstDQo+Pj4+Pj4+PiDCoGRyaXZlcnMvZG1hLWJ1Zi9oZWFwcy9jbWFfaGVhcC5jwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfMKgIDEwICstDQo+Pj4+Pj4+PiDCoGRyaXZlcnMv
+ZG1hLWJ1Zi9oZWFwcy9zeXN0ZW1faGVhcC5jwqDCoMKgwqDCoMKgwqDCoMKgwqAgfMKgIDEw
+ICstDQo+Pj4+Pj4+PiDCoGRyaXZlcnMvZ3B1L2RybS9hc3QvYXN0X2Rydi5owqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfMKgwqAgMiArLQ0KPj4+Pj4+Pj4gwqBkcml2ZXJz
+L2dwdS9kcm0vYXN0L2FzdF9tb2RlLmPCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAg
+fMKgwqAgOCArLQ0KPj4+Pj4+Pj4gwqBkcml2ZXJzL2dwdS9kcm0vZHJtX2NhY2hlLmPCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfMKgIDE4ICstDQo+Pj4+Pj4+PiDC
+oGRyaXZlcnMvZ3B1L2RybS9kcm1fY2xpZW50LmPCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgIHzCoMKgIDkgKy0NCj4+Pj4+Pj4+IMKgZHJpdmVycy9ncHUvZHJtL2RybV9m
+Yl9oZWxwZXIuY8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfMKgIDEyICstDQo+Pj4+
+Pj4+PiDCoGRyaXZlcnMvZ3B1L2RybS9kcm1fZ2VtLmPCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgIHzCoCAxMiArLQ0KPj4+Pj4+Pj4gwqBkcml2ZXJzL2dwdS9k
+cm0vZHJtX2dlbV9jbWFfaGVscGVyLmPCoMKgwqDCoMKgwqDCoMKgwqAgfMKgwqAgOSArLQ0K
+Pj4+Pj4+Pj4gwqBkcml2ZXJzL2dwdS9kcm0vZHJtX2dlbV9mcmFtZWJ1ZmZlcl9oZWxwZXIu
+Y8KgIHzCoCAxNiArLQ0KPj4+Pj4+Pj4gwqBkcml2ZXJzL2dwdS9kcm0vZHJtX2dlbV9zaG1l
+bV9oZWxwZXIuY8KgwqDCoMKgwqDCoMKgIHzCoCAxNSArLQ0KPj4+Pj4+Pj4gwqBkcml2ZXJz
+L2dwdS9kcm0vZHJtX2dlbV90dG1faGVscGVyLmPCoMKgwqDCoMKgwqDCoMKgwqAgfMKgwqAg
+NCArLQ0KPj4+Pj4+Pj4gwqBkcml2ZXJzL2dwdS9kcm0vZHJtX2dlbV92cmFtX2hlbHBlci5j
+wqDCoMKgwqDCoMKgwqDCoCB8wqAgMjUgKy0NCj4+Pj4+Pj4+IMKgZHJpdmVycy9ncHUvZHJt
+L2RybV9pbnRlcm5hbC5owqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHzCoMKgIDYg
+Ky0NCj4+Pj4+Pj4+IMKgZHJpdmVycy9ncHUvZHJtL2RybV9taXBpX2RiaS5jwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgIHzCoMKgIDggKy0NCj4+Pj4+Pj4+IMKgZHJpdmVycy9n
+cHUvZHJtL2RybV9wcmltZS5jwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+IHzCoMKgIDQgKy0NCj4+Pj4+Pj4+IMKgZHJpdmVycy9ncHUvZHJtL2V0bmF2aXYvZXRuYXZp
+dl9kcnYuaMKgwqDCoMKgwqDCoMKgwqAgfMKgwqAgMiArLQ0KPj4+Pj4+Pj4gwqBkcml2ZXJz
+L2dwdS9kcm0vZXRuYXZpdi9ldG5hdml2X2dlbV9wcmltZS5jwqDCoCB8wqDCoCA4ICstDQo+
+Pj4+Pj4+PiDCoGRyaXZlcnMvZ3B1L2RybS9ndWQvZ3VkX3BpcGUuY8KgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoCB8wqDCoCA0ICstDQo+Pj4+Pj4+PiDCoGRyaXZlcnMvZ3B1L2Ry
+bS9oeXBlcnYvaHlwZXJ2X2RybV9tb2Rlc2V0LmPCoMKgIHzCoMKgIDUgKy0NCj4+Pj4+Pj4+
+IMKgZHJpdmVycy9ncHUvZHJtL2k5MTUvZ2VtL2k5MTVfZ2VtX2RtYWJ1Zi5jwqDCoMKgIHzC
+oMKgIDggKy0NCj4+Pj4+Pj4+IMKgLi4uL2RybS9pOTE1L2dlbS9zZWxmdGVzdHMvaTkxNV9n
+ZW1fZG1hYnVmLmPCoCB8wqDCoCA2ICstDQo+Pj4+Pj4+PiDCoC4uLi9ncHUvZHJtL2k5MTUv
+Z2VtL3NlbGZ0ZXN0cy9tb2NrX2RtYWJ1Zi5jwqAgfMKgwqAgNiArLQ0KPj4+Pj4+Pj4gwqBk
+cml2ZXJzL2dwdS9kcm0vbGltYS9saW1hX2dlbS5jwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoCB8wqDCoCAzICstDQo+Pj4+Pj4+PiDCoGRyaXZlcnMvZ3B1L2RybS9saW1hL2xpbWFf
+c2NoZWQuY8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8wqDCoCA0ICstDQo+Pj4+Pj4+PiDC
+oGRyaXZlcnMvZ3B1L2RybS9tZWRpYXRlay9tdGtfZHJtX2dlbS5jwqDCoMKgwqDCoMKgwqAg
+fMKgwqAgNyArLQ0KPj4+Pj4+Pj4gwqBkcml2ZXJzL2dwdS9kcm0vbWVkaWF0ZWsvbXRrX2Ry
+bV9nZW0uaMKgwqDCoMKgwqDCoMKgIHzCoMKgIDUgKy0NCj4+Pj4+Pj4+IMKgZHJpdmVycy9n
+cHUvZHJtL21nYWcyMDAvbWdhZzIwMF9tb2RlLmPCoMKgwqDCoMKgwqDCoCB8wqDCoCA0ICst
+DQo+Pj4+Pj4+PiDCoGRyaXZlcnMvZ3B1L2RybS9tc20vbXNtX2Rydi5owqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqAgfMKgwqAgNCArLQ0KPj4+Pj4+Pj4gwqBkcml2ZXJzL2dw
+dS9kcm0vbXNtL21zbV9nZW1fcHJpbWUuY8KgwqDCoMKgwqDCoMKgwqDCoMKgIHzCoMKgIDYg
+Ky0NCj4+Pj4+Pj4+IMKgZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9nZW0uY8Kg
+wqDCoMKgwqDCoMKgwqAgfMKgwqAgMiArDQo+Pj4+Pj4+PiDCoGRyaXZlcnMvZ3B1L2RybS9w
+YW5mcm9zdC9wYW5mcm9zdF9wZXJmY250LmPCoMKgIHzCoCAxMyArLQ0KPj4+Pj4+Pj4gwqBk
+cml2ZXJzL2dwdS9kcm0vcXhsL3F4bF9kaXNwbGF5LmPCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqAgfMKgwqAgOCArLQ0KPj4+Pj4+Pj4gwqBkcml2ZXJzL2dwdS9kcm0vcXhsL3F4bF9kcmF3
+LmPCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfMKgwqAgNiArLQ0KPj4+Pj4+Pj4g
+wqBkcml2ZXJzL2dwdS9kcm0vcXhsL3F4bF9kcnYuaMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgIHzCoCAxMCArLQ0KPj4+Pj4+Pj4gwqBkcml2ZXJzL2dwdS9kcm0vcXhsL3F4
+bF9vYmplY3QuY8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHzCoMKgIDggKy0NCj4+Pj4+
+Pj4+IMKgZHJpdmVycy9ncHUvZHJtL3F4bC9xeGxfb2JqZWN0LmjCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoCB8wqDCoCA0ICstDQo+Pj4+Pj4+PiDCoGRyaXZlcnMvZ3B1L2RybS9xeGwv
+cXhsX3ByaW1lLmPCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHzCoMKgIDQgKy0NCj4+
+Pj4+Pj4+IMKgZHJpdmVycy9ncHUvZHJtL3JhZGVvbi9yYWRlb25fZ2VtLmPCoMKgwqDCoMKg
+wqDCoMKgwqDCoCB8wqDCoCAxICsNCj4+Pj4+Pj4+IMKgZHJpdmVycy9ncHUvZHJtL3JvY2tj
+aGlwL3JvY2tjaGlwX2RybV9nZW0uY8KgwqAgfMKgwqAgOSArLQ0KPj4+Pj4+Pj4gwqBkcml2
+ZXJzL2dwdS9kcm0vcm9ja2NoaXAvcm9ja2NoaXBfZHJtX2dlbS5owqDCoCB8wqDCoCA1ICst
+DQo+Pj4+Pj4+PiDCoGRyaXZlcnMvZ3B1L2RybS90ZWdyYS9nZW0uY8KgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8wqAgMTAgKy0NCj4+Pj4+Pj4+IMKgZHJpdmVycy9n
+cHUvZHJtL3RpbnkvY2lycnVzLmPCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8
+wqDCoCA4ICstDQo+Pj4+Pj4+PiDCoGRyaXZlcnMvZ3B1L2RybS90aW55L2dtMTJ1MzIwLmPC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHzCoMKgIDcgKy0NCj4+Pj4+Pj4+IMKgZHJp
+dmVycy9ncHUvZHJtL3R0bS90dG1fYm9fdXRpbC5jwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+IHzCoCAxNiArLQ0KPj4+Pj4+Pj4gwqBkcml2ZXJzL2dwdS9kcm0vdHRtL3R0bV9yZXNvdXJj
+ZS5jwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8wqAgMjYgKy0NCj4+Pj4+Pj4+IMKgZHJpdmVy
+cy9ncHUvZHJtL3R0bS90dG1fdHQuY8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqAgfMKgwqAgNiArLQ0KPj4+Pj4+Pj4gwqBkcml2ZXJzL2dwdS9kcm0vdWRsL3VkbF9tb2Rl
+c2V0LmPCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfMKgwqAgMyArLQ0KPj4+Pj4+Pj4gwqBk
+cml2ZXJzL2dwdS9kcm0vdmJveHZpZGVvL3Zib3hfbW9kZS5jwqDCoMKgwqDCoMKgwqDCoCB8
+wqDCoCA0ICstDQo+Pj4+Pj4+PiDCoGRyaXZlcnMvZ3B1L2RybS92aXJ0aW8vdmlydGdwdV9w
+cmltZS5jwqDCoMKgwqDCoMKgwqAgfMKgwqAgMSArDQo+Pj4+Pj4+PiDCoGRyaXZlcnMvZ3B1
+L2RybS92a21zL3ZrbXNfY29tcG9zZXIuY8KgwqDCoMKgwqDCoMKgwqDCoCB8wqDCoCA0ICst
+DQo+Pj4+Pj4+PiDCoGRyaXZlcnMvZ3B1L2RybS92a21zL3ZrbXNfZHJ2LmjCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgIHzCoMKgIDYgKy0NCj4+Pj4+Pj4+IMKgZHJpdmVycy9ncHUv
+ZHJtL3ZrbXMvdmttc19wbGFuZS5jwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHzCoMKgIDIg
+Ky0NCj4+Pj4+Pj4+IMKgZHJpdmVycy9ncHUvZHJtL3ZrbXMvdmttc193cml0ZWJhY2suY8Kg
+wqDCoMKgwqDCoMKgwqAgfMKgwqAgMiArLQ0KPj4+Pj4+Pj4gwqBkcml2ZXJzL2dwdS9kcm0v
+eGVuL3hlbl9kcm1fZnJvbnRfZ2VtLmPCoMKgwqDCoMKgwqAgfMKgwqAgNyArLQ0KPj4+Pj4+
+Pj4gwqBkcml2ZXJzL2dwdS9kcm0veGVuL3hlbl9kcm1fZnJvbnRfZ2VtLmjCoMKgwqDCoMKg
+wqAgfMKgwqAgNiArLQ0KPj4+Pj4+Pj4gwqAuLi4vY29tbW9uL3ZpZGVvYnVmMi92aWRlb2J1
+ZjItZG1hLWNvbnRpZy5jwqDCoCB8wqDCoCA4ICstDQo+Pj4+Pj4+PiDCoC4uLi9tZWRpYS9j
+b21tb24vdmlkZW9idWYyL3ZpZGVvYnVmMi1kbWEtc2cuYyB8wqDCoCA5ICstDQo+Pj4+Pj4+
+PiDCoC4uLi9jb21tb24vdmlkZW9idWYyL3ZpZGVvYnVmMi12bWFsbG9jLmPCoMKgwqDCoMKg
+IHzCoCAxMSArLQ0KPj4+Pj4+Pj4gwqBkcml2ZXJzL21pc2MvZmFzdHJwYy5jwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8wqDCoCA0ICstDQo+Pj4+
+Pj4+PiDCoGluY2x1ZGUvZHJtL2RybV9jYWNoZS5owqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqAgfMKgwqAgNiArLQ0KPj4+Pj4+Pj4gwqBpbmNsdWRlL2Ry
+bS9kcm1fY2xpZW50LmjCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqAgfMKgwqAgNyArLQ0KPj4+Pj4+Pj4gwqBpbmNsdWRlL2RybS9kcm1fZ2VtLmjCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfMKgwqAgNiArLQ0K
+Pj4+Pj4+Pj4gwqBpbmNsdWRlL2RybS9kcm1fZ2VtX2F0b21pY19oZWxwZXIuaMKgwqDCoMKg
+wqDCoMKgwqDCoMKgIHzCoMKgIDYgKy0NCj4+Pj4+Pj4+IMKgaW5jbHVkZS9kcm0vZHJtX2dl
+bV9jbWFfaGVscGVyLmjCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8wqDCoCA2ICstDQo+
+Pj4+Pj4+PiDCoGluY2x1ZGUvZHJtL2RybV9nZW1fZnJhbWVidWZmZXJfaGVscGVyLmjCoMKg
+wqDCoMKgIHzCoMKgIDggKy0NCj4+Pj4+Pj4+IMKgaW5jbHVkZS9kcm0vZHJtX2dlbV9zaG1l
+bV9oZWxwZXIuaMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfMKgIDEyICstDQo+Pj4+Pj4+PiDC
+oGluY2x1ZGUvZHJtL2RybV9nZW1fdHRtX2hlbHBlci5owqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqAgfMKgwqAgNiArLQ0KPj4+Pj4+Pj4gwqBpbmNsdWRlL2RybS9kcm1fZ2VtX3ZyYW1f
+aGVscGVyLmjCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfMKgwqAgOSArLQ0KPj4+Pj4+Pj4g
+wqBpbmNsdWRlL2RybS9kcm1fcHJpbWUuaMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgIHzCoMKgIDYgKy0NCj4+Pj4+Pj4+IMKgaW5jbHVkZS9kcm0vdHRt
+L3R0bV9ib19hcGkuaMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfMKgIDEw
+ICstDQo+Pj4+Pj4+PiDCoGluY2x1ZGUvZHJtL3R0bS90dG1fa21hcF9pdGVyLmjCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgIHzCoCAxMCArLQ0KPj4+Pj4+Pj4gwqBpbmNsdWRlL2Ry
+bS90dG0vdHRtX3Jlc291cmNlLmjCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfMKg
+wqAgNiArLQ0KPj4+Pj4+Pj4gwqBpbmNsdWRlL2xpbnV4L2RtYS1idWYtbWFwLmjCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfCAyNjYgDQo+Pj4+Pj4+PiAtLS0tLS0t
+LS0tLS0tLS0tLS0NCj4+Pj4+Pj4+IMKgaW5jbHVkZS9saW51eC9kbWEtYnVmLmjCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8wqAgMTIgKy0NCj4+Pj4+
+Pj4+IMKgaW5jbHVkZS9saW51eC9pb3N5cy1tYXAuaMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqAgfCAyNTcgDQo+Pj4+Pj4+PiArKysrKysrKysrKysrKysrKw0K
+Pj4+Pj4+Pj4gwqA4MCBmaWxlcyBjaGFuZ2VkLCA1NzkgaW5zZXJ0aW9ucygrKSwgNTUyIGRl
+bGV0aW9ucygtKQ0KPj4+Pj4+Pj4gwqBkZWxldGUgbW9kZSAxMDA2NDQgaW5jbHVkZS9saW51
+eC9kbWEtYnVmLW1hcC5oDQo+Pj4+Pj4+PiDCoGNyZWF0ZSBtb2RlIDEwMDY0NCBpbmNsdWRl
+L2xpbnV4L2lvc3lzLW1hcC5oDQo+Pj4+Pj4+Pg0KPj4+Pj4+Pg0KPj4+Pj4NCj4+Pg0KPiAN
+Cg0KLS0gDQpUaG9tYXMgWmltbWVybWFubg0KR3JhcGhpY3MgRHJpdmVyIERldmVsb3Blcg0K
+U1VTRSBTb2Z0d2FyZSBTb2x1dGlvbnMgR2VybWFueSBHbWJIDQpNYXhmZWxkc3RyLiA1LCA5
+MDQwOSBOw7xybmJlcmcsIEdlcm1hbnkNCihIUkIgMzY4MDksIEFHIE7DvHJuYmVyZykNCkdl
+c2Now6RmdHNmw7xocmVyOiBJdm8gVG90ZXYNCg==
 
-When you do an automated renamed with a cocci or sed script you can have 
-a 100k line patch as result, which is perfectly fine to send out like 
-this as long as you include the script/commands used to autogenerate the 
-patch.
+--------------IBDbOTC9R0fkkASjbm4TO1Ym--
 
-The background is that everybody on the planet can generate the patch 
-with those commands himself and see if the results matches your patch or 
-not. The maintainer of the component can then just puts an Acked-by on 
-the patch and move on, but separating the patch causes additional work 
-for both you as well as the reviewers.
+--------------0kyB92ItVusfV6cXDWQ47yBi
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
 
-Separating the change into individual patches as much as possible is 
-nice to have when you do a functional change and want or need a review 
-from each individual driver maintainer. This is usually the default 
-case, so sticking with separated changes as much as possible is usually 
-still the best practice.
+-----BEGIN PGP SIGNATURE-----
 
->
-> Before I go and respin this into a single mega patch, I'd like to gather
-> some feedback on the following topics:
->
-> 1) Daniel Vetter and Thomas Zimmermann seemed to be ok with staying with
-> the current name, dma_buf_map, while you prefer it renamed. Or at
-> least not make the rename a pre-requisite for the API additions in
-> https://nam11.safelinks.protection.outlook.com/?url=https%3A%2F%2Flore.kernel.org%2Fall%2F20220126203702.1784589-1-lucas.demarchi%40intel.com%2F&amp;data=04%7C01%7Cchristian.koenig%40amd.com%7C01142fa3ce484040ade008d9e51aef5d%7C3dd8961fe4884e608e11a82d994e183d%7C0%7C0%7C637792726123940514%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000&amp;sdata=ieMZ9Jiwo%2FQpT5kyyQgHNlepiusN%2Fkfff1Op6TVQ%2BaA%3D&amp;reserved=0 
->
->
-> One thing I like about the rename is that it makes clear the separation
-> between this small shim and dma-buf. There are also some APIs
-> that are really dma-buf API (e.g. dma_buf_map_attachment()), but if you
-> don't look carefully you may think it's from dma_buf_map.
+wsF5BAABCAAjFiEExndm/fpuMUdwYFFolh/E3EQov+AFAmH46mAFAwAAAAAACgkQlh/E3EQov+Ct
+4RAAoEZK1rz5xtY4l5N6rv4mRTqQb0A6ld1/eXco3ZazHXt3eq6xRgi50c9Ck8Hvg7fdbQYrRKvL
+CCS7I09O3DdrcRetcS2eEdv9ZxQBfL4ZxcGMt93GPjWhenMRjs3e0Sr4XbFGrsXsLysWvBrL2zIR
+2Yg6GaqzKWdvcc7Nves7Z7oXVPkS6I2+ZExPNp73+nc/mRCodmrecL+xzGb35DwP9DhM5FfBaIUf
+a3Zr+whjI/UCgbiYc4sWWWPqVrQsJLTFfsUgfW5dF8C1F+/bdavd+CNuGJZ0cXYzn//4f8EH3zAO
+Y1QCoD7T1AhP1J+F5b6Yzv6BVYcUhxtH1Kddb3xaWCRqrHYmRPtrcdim/xdTImbTlFqxOjsAucie
+TeraBReW2fJWlKrDafPV3o/3UHJ8qBmq5tyL4ZaD/87AWi9Fx5v4OSa61337vJZhLyhBcWqTiH+q
+/FTFbUq9fGut942ZpFTgVNd9mmQ7EXqZgNwfiRWzg5/4fHcrl/ZNI+rbF7855KZ5WN6goue0Q/Ig
+lCiIF9ao0xDZRF0p40xUXzxEQ+GTPFLdPvvFZgvethb3WJKIo1zctVju2ilhL+g8E9v37bPs21NJ
+pupru/WnfsDUTV5u/ABhzWC435fF2tg6d/SBpqdPoc2nEmYqq2/J91RudXP2vSVUVaQOuOant/sB
+qes=
+=qxg6
+-----END PGP SIGNATURE-----
 
-Exactly that's the reason why I see this rename as mandatory.
-
-Adding the functionality goes beyond the inter driver interface DMA-buf 
-provides into driver internal territory and I want to make sure that 
-people understand just from the name alone that this is not part of 
-DMA-buf but rather an independent functionality.
-
->
-> 2) If renaming, would it still keep the same entry in
-> MAINTAINERS? Thomas suggested drivers core, but this all seem to be used
-> mainly on drm/, with just one exception.
-
-I would just add a complete new entry for this and use Thomas as 
-maintainer (with his permission of course) and dri as mailing list.
-
->
-> 3) If renaming, do we have another preferred name?
-
-Nope, as Daniel said the name itself is only bikesheed. What is 
-important is that we see this as functionality separated from the inter 
-driver interface.
-
-Regards,
-Christian.
-
->
->
-> thanks
-> Lucas De Marchi
->
->>
->>>
->>> But as I said, I don't really have a preference. When crossing
->>> subsystems one thing that is hard is that different people have 
->>> different
->>> preferences on these things. At least squashing now is much easier than
->>> if I had to split it
->>>
->>> Try to imagine how much complain I received on going the other way in
->>> 25985edcedea6396277003854657b5f3cb31a628 with
->>> 2463 files changed, 4252 insertions(+), 4252 deletions(-)
->>
->> Well exactly that is perfectly fine.
->>
->> What you do here is applying your personal hack which is absolutely 
->> not welcomed.
->>
->> Regards,
->> Christian.
->>
->>> :)
->>>
->>>
->>> Lucas De Marchi
->>>
->>>>
->>>> Regards,
->>>> Christian.
->>>>
->>>>> I built this series, full config with
->>>>> CONFIG_COMPILE_TEST and doing:
->>>>>
->>>>>     git rebase -i <base> -x "make -j$(nproc)"
->>>>>
->>>>> I split these patches in a way that wouldn't break the build on 
->>>>> purpose.
->>>>> There were a couple that I couldn't build without cross compiling: 
->>>>> tegra
->>>>> and rockchip. The others were ok.
->>>>>
->>>>> I'm not really against squashing everything in one to merge, though.
->>>>> It will be hard on the conflicts later, but should get the job 
->>>>> done much
->>>>> quicker.
->>>>>
->>>>> Lucas De Marchi
->>>>>
->>>>>>
->>>>>> Regards,
->>>>>> Christian.
->>>>>>
->>>>>> Am 28.01.22 um 09:36 schrieb Lucas De Marchi:
->>>>>>> Motivation for this started in
->>>>>>> https://nam11.safelinks.protection.outlook.com/?url=https%3A%2F%2Flore.kernel.org%2Flkml%2F20220126203702.1784589-1-lucas.demarchi%40intel.com%2F&amp;data=04%7C01%7Cchristian.koenig%40amd.com%7C01142fa3ce484040ade008d9e51aef5d%7C3dd8961fe4884e608e11a82d994e183d%7C0%7C0%7C637792726123940514%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000&amp;sdata=p8rR28Hn0yMTbwy%2F7bpiGyG9fAu9kG1VUzX2MF44mcs%3D&amp;reserved=0 
->>>>>>>
->>>>>>>
->>>>>>>
->>>>>>> when trying to extend the dma-buf-map API to cover new use 
->>>>>>> cases: help a
->>>>>>> single driver with allocations and sharing code paths for IO and 
->>>>>>> system
->>>>>>> memory. I'm leaving the API additions aside and first renaming the
->>>>>>> interface as requested.
->>>>>>>
->>>>>>> There are already some users in tree outside the context of dma-buf
->>>>>>> importer/exporter. So before extending the API, let's dissociate 
->>>>>>> it from
->>>>>>> dma-buf.
->>>>>>>
->>>>>>> The iosys-map.h is introduced in the first patch in a way that 
->>>>>>> allows
->>>>>>> the conversion of each driver to happen separately. After all the
->>>>>>> conversions are done we can remove the old one, which is the 
->>>>>>> last patch.
->>>>>>> Another possible way is to squash everything and merge together,
->>>>>>> but I believe this would make much harder for review.
->>>>>>>
->>>>>>> The conversion was done with the following semantic patch:
->>>>>>>
->>>>>>>     @r1@
->>>>>>>     @@
->>>>>>>     - struct dma_buf_map
->>>>>>>     + struct iosys_map
->>>>>>>
->>>>>>>     @r2@
->>>>>>>     @@
->>>>>>>     (
->>>>>>>     - DMA_BUF_MAP_INIT_VADDR
->>>>>>>     + IOSYS_MAP_INIT_VADDR
->>>>>>>     |
->>>>>>>     - dma_buf_map_set_vaddr
->>>>>>>     + iosys_map_set_vaddr
->>>>>>>     |
->>>>>>>     - dma_buf_map_set_vaddr_iomem
->>>>>>>     + iosys_map_set_vaddr_iomem
->>>>>>>     |
->>>>>>>     - dma_buf_map_is_equal
->>>>>>>     + iosys_map_is_equal
->>>>>>>     |
->>>>>>>     - dma_buf_map_is_null
->>>>>>>     + iosys_map_is_null
->>>>>>>     |
->>>>>>>     - dma_buf_map_is_set
->>>>>>>     + iosys_map_is_set
->>>>>>>     |
->>>>>>>     - dma_buf_map_clear
->>>>>>>     + iosys_map_clear
->>>>>>>     |
->>>>>>>     - dma_buf_map_memcpy_to
->>>>>>>     + iosys_map_memcpy_to
->>>>>>>     |
->>>>>>>     - dma_buf_map_incr
->>>>>>>     + iosys_map_incr
->>>>>>>     )
->>>>>>>
->>>>>>>     @@
->>>>>>>     @@
->>>>>>>     - #include <linux/dma-buf-map.h>
->>>>>>>     + #include <linux/iosys-map.h>
->>>>>>>
->>>>>>> and then some files had their includes adjusted so we can build
->>>>>>> everything on each commit in this series. Also some comments 
->>>>>>> were update
->>>>>>> to remove mentions to dma-buf-map. Simply doing a sed to rename 
->>>>>>> didn't
->>>>>>> work as dma-buf has some APIs using the dma_buf_map prefix.
->>>>>>>
->>>>>>> Once finalized, I think most of this, if not all, could go 
->>>>>>> through the
->>>>>>> drm-misc-next branch. I split i915, msm, nouveau, and radeon in 
->>>>>>> their
->>>>>>> own patches in case it's preferred to take those through their own
->>>>>>> trees.
->>>>>>>
->>>>>>> Lucas De Marchi
->>>>>>>
->>>>>>> Lucas De Marchi (14):
->>>>>>>   iosys-map: Introduce renamed dma-buf-map
->>>>>>>   misc: fastrpc: Replace dma-buf-map with iosys-map
->>>>>>>   dma-buf: Replace dma-buf-map with iosys-map
->>>>>>>   media: Replace dma-buf-map with iosys-map
->>>>>>>   drm/ttm: Replace dma-buf-map with iosys-map
->>>>>>>   drm: Replace dma-buf-map with iosys-map in drivers
->>>>>>>   drm/i915: Replace dma-buf-map with iosys-map
->>>>>>>   drm/msm: Replace dma-buf-map with iosys-map
->>>>>>>   drm/nouveau: Replace dma-buf-map with iosys-map
->>>>>>>   drm/tegra: Replace dma-buf-map with iosys-map
->>>>>>>   drm/radeon: Replace dma-buf-map with iosys-map
->>>>>>>   drm: Replace dma-buf-map with iosys-map in common code
->>>>>>>   Documentation: Refer to iosys-map instead of dma-buf-map
->>>>>>>   dma-buf-map: Remove API in favor of iosys-map
->>>>>>>
->>>>>>>  Documentation/driver-api/dma-buf.rst          |   4 +-
->>>>>>>  Documentation/gpu/todo.rst                    |  20 +-
->>>>>>>  MAINTAINERS                                   |   2 +-
->>>>>>>  drivers/dma-buf/dma-buf.c                     |  22 +-
->>>>>>>  drivers/dma-buf/heaps/cma_heap.c              |  10 +-
->>>>>>>  drivers/dma-buf/heaps/system_heap.c           |  10 +-
->>>>>>>  drivers/gpu/drm/ast/ast_drv.h                 |   2 +-
->>>>>>>  drivers/gpu/drm/ast/ast_mode.c                |   8 +-
->>>>>>>  drivers/gpu/drm/drm_cache.c                   |  18 +-
->>>>>>>  drivers/gpu/drm/drm_client.c                  |   9 +-
->>>>>>>  drivers/gpu/drm/drm_fb_helper.c               |  12 +-
->>>>>>>  drivers/gpu/drm/drm_gem.c                     |  12 +-
->>>>>>>  drivers/gpu/drm/drm_gem_cma_helper.c          |   9 +-
->>>>>>>  drivers/gpu/drm/drm_gem_framebuffer_helper.c  |  16 +-
->>>>>>>  drivers/gpu/drm/drm_gem_shmem_helper.c        |  15 +-
->>>>>>>  drivers/gpu/drm/drm_gem_ttm_helper.c          |   4 +-
->>>>>>>  drivers/gpu/drm/drm_gem_vram_helper.c         |  25 +-
->>>>>>>  drivers/gpu/drm/drm_internal.h                |   6 +-
->>>>>>>  drivers/gpu/drm/drm_mipi_dbi.c                |   8 +-
->>>>>>>  drivers/gpu/drm/drm_prime.c                   |   4 +-
->>>>>>>  drivers/gpu/drm/etnaviv/etnaviv_drv.h         |   2 +-
->>>>>>>  drivers/gpu/drm/etnaviv/etnaviv_gem_prime.c   |   8 +-
->>>>>>>  drivers/gpu/drm/gud/gud_pipe.c                |   4 +-
->>>>>>>  drivers/gpu/drm/hyperv/hyperv_drm_modeset.c   |   5 +-
->>>>>>>  drivers/gpu/drm/i915/gem/i915_gem_dmabuf.c    |   8 +-
->>>>>>>  .../drm/i915/gem/selftests/i915_gem_dmabuf.c  |   6 +-
->>>>>>>  .../gpu/drm/i915/gem/selftests/mock_dmabuf.c  |   6 +-
->>>>>>>  drivers/gpu/drm/lima/lima_gem.c               |   3 +-
->>>>>>>  drivers/gpu/drm/lima/lima_sched.c             |   4 +-
->>>>>>>  drivers/gpu/drm/mediatek/mtk_drm_gem.c        |   7 +-
->>>>>>>  drivers/gpu/drm/mediatek/mtk_drm_gem.h        |   5 +-
->>>>>>>  drivers/gpu/drm/mgag200/mgag200_mode.c        |   4 +-
->>>>>>>  drivers/gpu/drm/msm/msm_drv.h                 |   4 +-
->>>>>>>  drivers/gpu/drm/msm/msm_gem_prime.c           |   6 +-
->>>>>>>  drivers/gpu/drm/nouveau/nouveau_gem.c         |   2 +
->>>>>>>  drivers/gpu/drm/panfrost/panfrost_perfcnt.c   |  13 +-
->>>>>>>  drivers/gpu/drm/qxl/qxl_display.c             |   8 +-
->>>>>>>  drivers/gpu/drm/qxl/qxl_draw.c                |   6 +-
->>>>>>>  drivers/gpu/drm/qxl/qxl_drv.h                 |  10 +-
->>>>>>>  drivers/gpu/drm/qxl/qxl_object.c              |   8 +-
->>>>>>>  drivers/gpu/drm/qxl/qxl_object.h              |   4 +-
->>>>>>>  drivers/gpu/drm/qxl/qxl_prime.c               |   4 +-
->>>>>>>  drivers/gpu/drm/radeon/radeon_gem.c           |   1 +
->>>>>>>  drivers/gpu/drm/rockchip/rockchip_drm_gem.c   |   9 +-
->>>>>>>  drivers/gpu/drm/rockchip/rockchip_drm_gem.h   |   5 +-
->>>>>>>  drivers/gpu/drm/tegra/gem.c                   |  10 +-
->>>>>>>  drivers/gpu/drm/tiny/cirrus.c                 |   8 +-
->>>>>>>  drivers/gpu/drm/tiny/gm12u320.c               |   7 +-
->>>>>>>  drivers/gpu/drm/ttm/ttm_bo_util.c             |  16 +-
->>>>>>>  drivers/gpu/drm/ttm/ttm_resource.c            |  26 +-
->>>>>>>  drivers/gpu/drm/ttm/ttm_tt.c                  |   6 +-
->>>>>>>  drivers/gpu/drm/udl/udl_modeset.c             |   3 +-
->>>>>>>  drivers/gpu/drm/vboxvideo/vbox_mode.c         |   4 +-
->>>>>>>  drivers/gpu/drm/virtio/virtgpu_prime.c        |   1 +
->>>>>>>  drivers/gpu/drm/vkms/vkms_composer.c          |   4 +-
->>>>>>>  drivers/gpu/drm/vkms/vkms_drv.h               |   6 +-
->>>>>>>  drivers/gpu/drm/vkms/vkms_plane.c             |   2 +-
->>>>>>>  drivers/gpu/drm/vkms/vkms_writeback.c         |   2 +-
->>>>>>>  drivers/gpu/drm/xen/xen_drm_front_gem.c       |   7 +-
->>>>>>>  drivers/gpu/drm/xen/xen_drm_front_gem.h       |   6 +-
->>>>>>>  .../common/videobuf2/videobuf2-dma-contig.c   |   8 +-
->>>>>>>  .../media/common/videobuf2/videobuf2-dma-sg.c |   9 +-
->>>>>>>  .../common/videobuf2/videobuf2-vmalloc.c      |  11 +-
->>>>>>>  drivers/misc/fastrpc.c                        |   4 +-
->>>>>>>  include/drm/drm_cache.h                       |   6 +-
->>>>>>>  include/drm/drm_client.h                      |   7 +-
->>>>>>>  include/drm/drm_gem.h                         |   6 +-
->>>>>>>  include/drm/drm_gem_atomic_helper.h           |   6 +-
->>>>>>>  include/drm/drm_gem_cma_helper.h              |   6 +-
->>>>>>>  include/drm/drm_gem_framebuffer_helper.h      |   8 +-
->>>>>>>  include/drm/drm_gem_shmem_helper.h            |  12 +-
->>>>>>>  include/drm/drm_gem_ttm_helper.h              |   6 +-
->>>>>>>  include/drm/drm_gem_vram_helper.h             |   9 +-
->>>>>>>  include/drm/drm_prime.h                       |   6 +-
->>>>>>>  include/drm/ttm/ttm_bo_api.h                  |  10 +-
->>>>>>>  include/drm/ttm/ttm_kmap_iter.h               |  10 +-
->>>>>>>  include/drm/ttm/ttm_resource.h                |   6 +-
->>>>>>>  include/linux/dma-buf-map.h                   | 266 
->>>>>>> ------------------
->>>>>>>  include/linux/dma-buf.h                       |  12 +-
->>>>>>>  include/linux/iosys-map.h                     | 257 
->>>>>>> +++++++++++++++++
->>>>>>>  80 files changed, 579 insertions(+), 552 deletions(-)
->>>>>>>  delete mode 100644 include/linux/dma-buf-map.h
->>>>>>>  create mode 100644 include/linux/iosys-map.h
->>>>>>>
->>>>>>
->>>>
->>
-
+--------------0kyB92ItVusfV6cXDWQ47yBi--
