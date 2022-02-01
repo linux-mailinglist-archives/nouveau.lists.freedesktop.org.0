@@ -1,57 +1,53 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 831EE4B01B3
-	for <lists+nouveau@lfdr.de>; Thu, 10 Feb 2022 02:00:41 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 99A2C4B01AD
+	for <lists+nouveau@lfdr.de>; Thu, 10 Feb 2022 02:00:33 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6AD1410E715;
-	Thu, 10 Feb 2022 01:00:22 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id A7D7F10E317;
+	Thu, 10 Feb 2022 01:00:20 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9210E10E1E4;
- Tue,  1 Feb 2022 00:36:49 +0000 (UTC)
+Received: from mga18.intel.com (mga18.intel.com [134.134.136.126])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3058A10E1BC;
+ Tue,  1 Feb 2022 21:15:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1643675809; x=1675211809;
+ t=1643750139; x=1675286139;
  h=date:from:to:cc:subject:message-id:references:
  mime-version:content-transfer-encoding:in-reply-to;
- bh=I4B8ENurVPlobb3Bb/NoyCwf/pRY8NKrqHRhZSpa2Io=;
- b=PTTVx/qMRKT9vc74llInPGyMnvXN/476n5+FstpN1C0robc9BdndKBOq
- YpSDWDBbiP9lqdx89subhQIQpCyldPLOiNV6UJPcuURHW54uVTP2dhgUT
- 9HDuKvlakSf/3soXbxCbREkHS1rkzYL7u45NxHGi3xHqIfDlOM7V8yGHL
- dGjlWLnrUm6+2ODNIsXxGoWor15lxEadsO4UbtUm1pVk+DMBMcwK5EWSe
- YI0S+Q/Ua67EqbtYXKhWfjOOr9VFW3Kbl71bMddUzIToCH8t3wSPDQvqG
- k5vPBXOhR2QA0E1cQ9CXf3iVuPXOlZ9RUMoeFy+KOdO8rr7xGfKO8LCyE w==;
-X-IronPort-AV: E=McAfee;i="6200,9189,10244"; a="272067214"
-X-IronPort-AV: E=Sophos;i="5.88,332,1635231600"; d="scan'208";a="272067214"
-Received: from orsmga006.jf.intel.com ([10.7.209.51])
- by fmsmga101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 31 Jan 2022 16:36:48 -0800
-X-IronPort-AV: E=Sophos;i="5.88,332,1635231600"; d="scan'208";a="482004598"
-Received: from cnierman-mobl.amr.corp.intel.com (HELO ldmartin-desk2)
- ([10.212.195.98])
- by orsmga006-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 31 Jan 2022 16:36:48 -0800
-Date: Mon, 31 Jan 2022 16:36:47 -0800
-From: Lucas De Marchi <lucas.demarchi@intel.com>
-To: Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>
-Message-ID: <20220201003647.djakrmdebqigpz3j@ldmartin-desk2>
-X-Patchwork-Hint: comment
-References: <20220128083626.3012259-1-lucas.demarchi@intel.com>
- <a45a8cef-f5e7-604c-64f1-e893ec9ba8af@amd.com>
- <20220128091213.qaq6v4vbeerzvd3f@ldmartin-desk2>
- <27870484-6d16-5bd4-aa06-0ec513111d99@amd.com>
- <20220128094018.m7pixeznedoa47gb@ldmartin-desk2>
- <36a08a90-3614-27b4-166b-9d113b644af3@amd.com>
+ bh=V6UNNGT36Y8N/uQHYkgX9304xNVEGsA++QCmcgUkFP4=;
+ b=Mfwu2kqjNvZ0EkMZ0FnkK497ftKWenFzm/0s3oC9AZs/DLG/v4JvL6NW
+ Fqee5wr5LSRvc+Ee/UxY/S1kw/dOuqK/xiGeUQn/afiQXuL0H6aN5G4G+
+ vXgCXJZt7YVDdUvYV3wqgYbSE/U1FiDo9zTJ1QC1ZA9XNe4ffjcl6MJiK
+ OFLVb3HCGjufO+ephBJnDZQ6FX0xIlE2WkHHfwPkWsaNXgCgSuu9viNF7
+ Pf7z9LW2hnIA7T8bt6MwDIqmGczEW4JfLJkOMqprU4CTEyuFutwoT7LSy
+ bqFcBgeaQKmEK/wpjQQ23WJY7nMrKjh0qh/qJFF9O9vfFVHay0RMv/nSb Q==;
+X-IronPort-AV: E=McAfee;i="6200,9189,10245"; a="231366077"
+X-IronPort-AV: E=Sophos;i="5.88,334,1635231600"; d="scan'208";a="231366077"
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+ by orsmga106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 01 Feb 2022 13:15:38 -0800
+X-IronPort-AV: E=Sophos;i="5.88,334,1635231600"; d="scan'208";a="565734271"
+Received: from mdroper-desk1.fm.intel.com (HELO
+ mdroper-desk1.amr.corp.intel.com) ([10.1.27.134])
+ by orsmga001-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 01 Feb 2022 13:15:37 -0800
+Date: Tue, 1 Feb 2022 13:15:36 -0800
+From: Matt Roper <matthew.d.roper@intel.com>
+To: Lucas De Marchi <lucas.demarchi@intel.com>
+Message-ID: <Yfmi+KzZwKbG50tB@mdroper-desk1.amr.corp.intel.com>
+References: <20220126093951.1470898-1-lucas.demarchi@intel.com>
+ <20220126093951.1470898-7-lucas.demarchi@intel.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1; format=flowed
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <36a08a90-3614-27b4-166b-9d113b644af3@amd.com>
+In-Reply-To: <20220126093951.1470898-7-lucas.demarchi@intel.com>
 X-Mailman-Approved-At: Thu, 10 Feb 2022 01:00:19 +0000
-Subject: Re: [Nouveau] [PATCH 00/14] Rename dma-buf-map
+Subject: Re: [Nouveau] [Intel-gfx] [PATCH v2 06/11] drm/i915: Use
+ str_on_off()
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,314 +59,317 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: airlied@linux.ie, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, srinivas.kandagatla@linaro.org,
- gregkh@linuxfoundation.org, nouveau@lists.freedesktop.org,
- sumit.semwal@linaro.org, linux-media@vger.kernel.org
+Cc: Emma Anholt <emma@anholt.net>, David Airlie <airlied@linux.ie>,
+ nouveau@lists.freedesktop.org, Rasmus Villemoes <linux@rasmusvillemoes.dk>,
+ dri-devel@lists.freedesktop.org, Chris Wilson <chris@chris-wilson.co.uk>,
+ Vishal Kulkarni <vishal@chelsio.com>,
+ Francis Laniel <laniel_francis@privacyrequired.com>,
+ Kentaro Takeda <takedakn@nttdata.co.jp>, amd-gfx@lists.freedesktop.org,
+ Jani Nikula <jani.nikula@intel.com>,
+ Andy Shevchenko <andy.shevchenko@gmail.com>, Ben Skeggs <bskeggs@redhat.com>,
+ Jakub Kicinski <kuba@kernel.org>, Harry Wentland <harry.wentland@amd.com>,
+ Petr Mladek <pmladek@suse.com>, Leo Li <sunpeng.li@amd.com>,
+ intel-gfx@lists.freedesktop.org, Raju Rangoju <rajur@chelsio.com>,
+ Steven Rostedt <rostedt@goodmis.org>, Julia Lawall <julia.lawall@lip6.fr>,
+ Rahul Lakkireddy <rahul.lakkireddy@chelsio.com>,
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>, netdev@vger.kernel.org,
+ linux-kernel@vger.kernel.org, "David S. Miller" <davem@davemloft.net>,
+ Sergey Senozhatsky <sergey.senozhatsky@gmail.com>,
+ linux-security-module@vger.kernel.org,
+ Sakari Ailus <sakari.ailus@linux.intel.com>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Alex Deucher <alexander.deucher@amd.com>,
+ Andrew Morton <akpm@linux-foundation.org>,
+ Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, Jan 28, 2022 at 10:48:42AM +0100, Christian König wrote:
->Am 28.01.22 um 10:40 schrieb Lucas De Marchi:
->>On Fri, Jan 28, 2022 at 10:22:00AM +0100, Christian König wrote:
->>>Am 28.01.22 um 10:12 schrieb Lucas De Marchi:
->>>>On Fri, Jan 28, 2022 at 09:41:14AM +0100, Christian König wrote:
->>>>>Rule #1 is to never ever break the build.
->>>>>
->>>>>Because of this all those patches needs to be squashed into a 
->>>>>single one as far as I can see.
->>>>
->>>>what config are you building on?
->>>
->>>Well I'm not building at all, I'm just looking at the patches as 
->>>an engineer with 25 years of experience with Linux patches.
->>>
->>>Just take a look at patch number 2:
->>>
->>>-static int fastrpc_vmap(struct dma_buf *dmabuf, struct 
->>>dma_buf_map *map)
->>>+static int fastrpc_vmap(struct dma_buf *dmabuf, struct iosys_map *map)
->>>
->>>You are changing the functions signature without changing any of 
->>>the callers.
->>>
->>>At bare minimum that causes a warning and on runtime this only 
->>>works by coincident now because the structure pointers just happen 
->>>to have the same layout. This is not something we usually do.
->>
->>you missed the magic/hack on patch 1:
->>
->>1) dma-buf-map.h includes iosys-map.h _at the end_
->>2) iosys-map.h includes dma-buf-map.h at the beginning
->>   and initially does a "define iosys_map dma_buf_map".
->>
->>So, it doesn't work by coincidence, It's because it was done to allow
->>converting it piecemeal.
->
->Oh, my. Please never do stuff like that again.
+On Wed, Jan 26, 2022 at 01:39:46AM -0800, Lucas De Marchi wrote:
+> Remove the local onoff() implementation and adopt the
+> str_on_off() from linux/string_helpers.h.
+> 
+> Signed-off-by: Lucas De Marchi <lucas.demarchi@intel.com>
+> Acked-by: Daniel Vetter <daniel.vetter@ffwll.ch>
+> Acked-by: Jani Nikula <jani.nikula@intel.com>
 
-It's not uncommon approach to be required by other subsystems. Even
-drm-intel already used similar approach for macro conversions crossing
-drm-intel-next and drm-intel-gt-next branches recently.  As I said, I
-don't mind one way or the other.
+Reviewed-by: Matt Roper <matthew.d.roper@intel.com>
 
-Before I go and respin this into a single mega patch, I'd like to gather
-some feedback on the following topics:
+> ---
+>  drivers/gpu/drm/i915/display/g4x_dp.c              | 6 ++++--
+>  drivers/gpu/drm/i915/display/intel_display.c       | 7 ++++---
+>  drivers/gpu/drm/i915/display/intel_display_trace.h | 3 ++-
+>  drivers/gpu/drm/i915/display/intel_dpll.c          | 3 ++-
+>  drivers/gpu/drm/i915/display/intel_dpll_mgr.c      | 7 +++++--
+>  drivers/gpu/drm/i915/display/intel_fdi.c           | 8 +++++---
+>  drivers/gpu/drm/i915/display/vlv_dsi_pll.c         | 3 ++-
+>  drivers/gpu/drm/i915/gt/intel_rc6.c                | 5 +++--
+>  drivers/gpu/drm/i915/i915_utils.h                  | 5 -----
+>  drivers/gpu/drm/i915/vlv_suspend.c                 | 3 ++-
+>  10 files changed, 29 insertions(+), 21 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/i915/display/g4x_dp.c b/drivers/gpu/drm/i915/display/g4x_dp.c
+> index f37677df6ebf..3e729bff1232 100644
+> --- a/drivers/gpu/drm/i915/display/g4x_dp.c
+> +++ b/drivers/gpu/drm/i915/display/g4x_dp.c
+> @@ -5,6 +5,8 @@
+>   * DisplayPort support for G4x,ILK,SNB,IVB,VLV,CHV (HSW+ handled by the DDI code).
+>   */
+>  
+> +#include <linux/string_helpers.h>
+> +
+>  #include "g4x_dp.h"
+>  #include "intel_audio.h"
+>  #include "intel_backlight.h"
+> @@ -191,7 +193,7 @@ static void assert_dp_port(struct intel_dp *intel_dp, bool state)
+>  	I915_STATE_WARN(cur_state != state,
+>  			"[ENCODER:%d:%s] state assertion failure (expected %s, current %s)\n",
+>  			dig_port->base.base.base.id, dig_port->base.base.name,
+> -			onoff(state), onoff(cur_state));
+> +			str_on_off(state), str_on_off(cur_state));
+>  }
+>  #define assert_dp_port_disabled(d) assert_dp_port((d), false)
+>  
+> @@ -201,7 +203,7 @@ static void assert_edp_pll(struct drm_i915_private *dev_priv, bool state)
+>  
+>  	I915_STATE_WARN(cur_state != state,
+>  			"eDP PLL state assertion failure (expected %s, current %s)\n",
+> -			onoff(state), onoff(cur_state));
+> +			str_on_off(state), str_on_off(cur_state));
+>  }
+>  #define assert_edp_pll_enabled(d) assert_edp_pll((d), true)
+>  #define assert_edp_pll_disabled(d) assert_edp_pll((d), false)
+> diff --git a/drivers/gpu/drm/i915/display/intel_display.c b/drivers/gpu/drm/i915/display/intel_display.c
+> index 8920bdb53b7b..49f994f36fce 100644
+> --- a/drivers/gpu/drm/i915/display/intel_display.c
+> +++ b/drivers/gpu/drm/i915/display/intel_display.c
+> @@ -377,7 +377,7 @@ static void wait_for_pipe_scanline_moving(struct intel_crtc *crtc, bool state)
+>  	if (wait_for(pipe_scanline_is_moving(dev_priv, pipe) == state, 100))
+>  		drm_err(&dev_priv->drm,
+>  			"pipe %c scanline %s wait timed out\n",
+> -			pipe_name(pipe), onoff(state));
+> +			pipe_name(pipe), str_on_off(state));
+>  }
+>  
+>  static void intel_wait_for_pipe_scanline_stopped(struct intel_crtc *crtc)
+> @@ -435,7 +435,7 @@ void assert_transcoder(struct drm_i915_private *dev_priv,
+>  	I915_STATE_WARN(cur_state != state,
+>  			"transcoder %s assertion failure (expected %s, current %s)\n",
+>  			transcoder_name(cpu_transcoder),
+> -			onoff(state), onoff(cur_state));
+> +			str_on_off(state), str_on_off(cur_state));
+>  }
+>  
+>  static void assert_plane(struct intel_plane *plane, bool state)
+> @@ -447,7 +447,8 @@ static void assert_plane(struct intel_plane *plane, bool state)
+>  
+>  	I915_STATE_WARN(cur_state != state,
+>  			"%s assertion failure (expected %s, current %s)\n",
+> -			plane->base.name, onoff(state), onoff(cur_state));
+> +			plane->base.name, str_on_off(state),
+> +			str_on_off(cur_state));
+>  }
+>  
+>  #define assert_plane_enabled(p) assert_plane(p, true)
+> diff --git a/drivers/gpu/drm/i915/display/intel_display_trace.h b/drivers/gpu/drm/i915/display/intel_display_trace.h
+> index dcdd242fffd9..2dd5a4b7f5d8 100644
+> --- a/drivers/gpu/drm/i915/display/intel_display_trace.h
+> +++ b/drivers/gpu/drm/i915/display/intel_display_trace.h
+> @@ -9,6 +9,7 @@
+>  #if !defined(__INTEL_DISPLAY_TRACE_H__) || defined(TRACE_HEADER_MULTI_READ)
+>  #define __INTEL_DISPLAY_TRACE_H__
+>  
+> +#include <linux/string_helpers.h>
+>  #include <linux/types.h>
+>  #include <linux/tracepoint.h>
+>  
+> @@ -161,7 +162,7 @@ TRACE_EVENT(intel_memory_cxsr,
+>  			   ),
+>  
+>  	    TP_printk("%s->%s, pipe A: frame=%u, scanline=%u, pipe B: frame=%u, scanline=%u, pipe C: frame=%u, scanline=%u",
+> -		      onoff(__entry->old), onoff(__entry->new),
+> +		      str_on_off(__entry->old), str_on_off(__entry->new),
+>  		      __entry->frame[PIPE_A], __entry->scanline[PIPE_A],
+>  		      __entry->frame[PIPE_B], __entry->scanline[PIPE_B],
+>  		      __entry->frame[PIPE_C], __entry->scanline[PIPE_C])
+> diff --git a/drivers/gpu/drm/i915/display/intel_dpll.c b/drivers/gpu/drm/i915/display/intel_dpll.c
+> index 1ce0c171f4fb..1c401fd09eef 100644
+> --- a/drivers/gpu/drm/i915/display/intel_dpll.c
+> +++ b/drivers/gpu/drm/i915/display/intel_dpll.c
+> @@ -4,6 +4,7 @@
+>   */
+>  
+>  #include <linux/kernel.h>
+> +#include <linux/string_helpers.h>
+>  
+>  #include "intel_crtc.h"
+>  #include "intel_de.h"
+> @@ -1933,7 +1934,7 @@ static void assert_pll(struct drm_i915_private *dev_priv,
+>  	cur_state = intel_de_read(dev_priv, DPLL(pipe)) & DPLL_VCO_ENABLE;
+>  	I915_STATE_WARN(cur_state != state,
+>  			"PLL state assertion failure (expected %s, current %s)\n",
+> -			onoff(state), onoff(cur_state));
+> +			str_on_off(state), str_on_off(cur_state));
+>  }
+>  
+>  void assert_pll_enabled(struct drm_i915_private *i915, enum pipe pipe)
+> diff --git a/drivers/gpu/drm/i915/display/intel_dpll_mgr.c b/drivers/gpu/drm/i915/display/intel_dpll_mgr.c
+> index 6723c3de5a80..a787995c0f79 100644
+> --- a/drivers/gpu/drm/i915/display/intel_dpll_mgr.c
+> +++ b/drivers/gpu/drm/i915/display/intel_dpll_mgr.c
+> @@ -21,6 +21,8 @@
+>   * DEALINGS IN THE SOFTWARE.
+>   */
+>  
+> +#include <linux/string_helpers.h>
+> +
+>  #include "intel_de.h"
+>  #include "intel_display_types.h"
+>  #include "intel_dpio_phy.h"
+> @@ -178,13 +180,14 @@ void assert_shared_dpll(struct drm_i915_private *dev_priv,
+>  	struct intel_dpll_hw_state hw_state;
+>  
+>  	if (drm_WARN(&dev_priv->drm, !pll,
+> -		     "asserting DPLL %s with no DPLL\n", onoff(state)))
+> +		     "asserting DPLL %s with no DPLL\n", str_on_off(state)))
+>  		return;
+>  
+>  	cur_state = intel_dpll_get_hw_state(dev_priv, pll, &hw_state);
+>  	I915_STATE_WARN(cur_state != state,
+>  	     "%s assertion failure (expected %s, current %s)\n",
+> -			pll->info->name, onoff(state), onoff(cur_state));
+> +			pll->info->name, str_on_off(state),
+> +			str_on_off(cur_state));
+>  }
+>  
+>  static enum tc_port icl_pll_id_to_tc_port(enum intel_dpll_id id)
+> diff --git a/drivers/gpu/drm/i915/display/intel_fdi.c b/drivers/gpu/drm/i915/display/intel_fdi.c
+> index 3d6e22923601..0fd2941313aa 100644
+> --- a/drivers/gpu/drm/i915/display/intel_fdi.c
+> +++ b/drivers/gpu/drm/i915/display/intel_fdi.c
+> @@ -3,6 +3,8 @@
+>   * Copyright © 2020 Intel Corporation
+>   */
+>  
+> +#include <linux/string_helpers.h>
+> +
+>  #include "intel_atomic.h"
+>  #include "intel_crtc.h"
+>  #include "intel_ddi.h"
+> @@ -29,7 +31,7 @@ static void assert_fdi_tx(struct drm_i915_private *dev_priv,
+>  	}
+>  	I915_STATE_WARN(cur_state != state,
+>  			"FDI TX state assertion failure (expected %s, current %s)\n",
+> -			onoff(state), onoff(cur_state));
+> +			str_on_off(state), str_on_off(cur_state));
+>  }
+>  
+>  void assert_fdi_tx_enabled(struct drm_i915_private *i915, enum pipe pipe)
+> @@ -50,7 +52,7 @@ static void assert_fdi_rx(struct drm_i915_private *dev_priv,
+>  	cur_state = intel_de_read(dev_priv, FDI_RX_CTL(pipe)) & FDI_RX_ENABLE;
+>  	I915_STATE_WARN(cur_state != state,
+>  			"FDI RX state assertion failure (expected %s, current %s)\n",
+> -			onoff(state), onoff(cur_state));
+> +			str_on_off(state), str_on_off(cur_state));
+>  }
+>  
+>  void assert_fdi_rx_enabled(struct drm_i915_private *i915, enum pipe pipe)
+> @@ -88,7 +90,7 @@ static void assert_fdi_rx_pll(struct drm_i915_private *i915,
+>  	cur_state = intel_de_read(i915, FDI_RX_CTL(pipe)) & FDI_RX_PLL_ENABLE;
+>  	I915_STATE_WARN(cur_state != state,
+>  			"FDI RX PLL assertion failure (expected %s, current %s)\n",
+> -			onoff(state), onoff(cur_state));
+> +			str_on_off(state), str_on_off(cur_state));
+>  }
+>  
+>  void assert_fdi_rx_pll_enabled(struct drm_i915_private *i915, enum pipe pipe)
+> diff --git a/drivers/gpu/drm/i915/display/vlv_dsi_pll.c b/drivers/gpu/drm/i915/display/vlv_dsi_pll.c
+> index 1b81797dd02e..7f9c0a7c3446 100644
+> --- a/drivers/gpu/drm/i915/display/vlv_dsi_pll.c
+> +++ b/drivers/gpu/drm/i915/display/vlv_dsi_pll.c
+> @@ -26,6 +26,7 @@
+>   */
+>  
+>  #include <linux/kernel.h>
+> +#include <linux/string_helpers.h>
+>  
+>  #include "i915_drv.h"
+>  #include "intel_de.h"
+> @@ -580,7 +581,7 @@ static void assert_dsi_pll(struct drm_i915_private *i915, bool state)
+>  
+>  	I915_STATE_WARN(cur_state != state,
+>  			"DSI PLL state assertion failure (expected %s, current %s)\n",
+> -			onoff(state), onoff(cur_state));
+> +			str_on_off(state), str_on_off(cur_state));
+>  }
+>  
+>  void assert_dsi_pll_enabled(struct drm_i915_private *i915)
+> diff --git a/drivers/gpu/drm/i915/gt/intel_rc6.c b/drivers/gpu/drm/i915/gt/intel_rc6.c
+> index bb0d6e363f5d..cde83e382ebe 100644
+> --- a/drivers/gpu/drm/i915/gt/intel_rc6.c
+> +++ b/drivers/gpu/drm/i915/gt/intel_rc6.c
+> @@ -4,6 +4,7 @@
+>   */
+>  
+>  #include <linux/pm_runtime.h>
+> +#include <linux/string_helpers.h>
+>  
+>  #include "i915_drv.h"
+>  #include "i915_vgpu.h"
+> @@ -428,8 +429,8 @@ static bool bxt_check_bios_rc6_setup(struct intel_rc6 *rc6)
+>  	rc_sw_target >>= RC_SW_TARGET_STATE_SHIFT;
+>  	drm_dbg(&i915->drm, "BIOS enabled RC states: "
+>  			 "HW_CTRL %s HW_RC6 %s SW_TARGET_STATE %x\n",
+> -			 onoff(rc_ctl & GEN6_RC_CTL_HW_ENABLE),
+> -			 onoff(rc_ctl & GEN6_RC_CTL_RC6_ENABLE),
+> +			 str_on_off(rc_ctl & GEN6_RC_CTL_HW_ENABLE),
+> +			 str_on_off(rc_ctl & GEN6_RC_CTL_RC6_ENABLE),
+>  			 rc_sw_target);
+>  
+>  	if (!(intel_uncore_read(uncore, RC6_LOCATION) & RC6_CTX_IN_DRAM)) {
+> diff --git a/drivers/gpu/drm/i915/i915_utils.h b/drivers/gpu/drm/i915/i915_utils.h
+> index 6d26920d0632..3ff9611ff81c 100644
+> --- a/drivers/gpu/drm/i915/i915_utils.h
+> +++ b/drivers/gpu/drm/i915/i915_utils.h
+> @@ -400,11 +400,6 @@ wait_remaining_ms_from_jiffies(unsigned long timestamp_jiffies, int to_wait_ms)
+>  #define MBps(x) KBps(1000 * (x))
+>  #define GBps(x) ((u64)1000 * MBps((x)))
+>  
+> -static inline const char *onoff(bool v)
+> -{
+> -	return v ? "on" : "off";
+> -}
+> -
+>  void add_taint_for_CI(struct drm_i915_private *i915, unsigned int taint);
+>  static inline void __add_taint_for_CI(unsigned int taint)
+>  {
+> diff --git a/drivers/gpu/drm/i915/vlv_suspend.c b/drivers/gpu/drm/i915/vlv_suspend.c
+> index 23adb64d640a..a49a7da57d5a 100644
+> --- a/drivers/gpu/drm/i915/vlv_suspend.c
+> +++ b/drivers/gpu/drm/i915/vlv_suspend.c
+> @@ -3,6 +3,7 @@
+>   * Copyright © 2020 Intel Corporation
+>   */
+>  
+> +#include <linux/string_helpers.h>
+>  #include <linux/kernel.h>
+>  
+>  #include <drm/drm_print.h>
+> @@ -373,7 +374,7 @@ static void vlv_wait_for_gt_wells(struct drm_i915_private *dev_priv,
+>  	if (vlv_wait_for_pw_status(dev_priv, mask, val))
+>  		drm_dbg(&dev_priv->drm,
+>  			"timeout waiting for GT wells to go %s\n",
+> -			onoff(wait_for_on));
+> +			str_on_off(wait_for_on));
+>  }
+>  
+>  static void vlv_check_no_gt_access(struct drm_i915_private *i915)
+> -- 
+> 2.34.1
+> 
 
-1) Daniel Vetter and Thomas Zimmermann seemed to be ok with staying with
-the current name, dma_buf_map, while you prefer it renamed. Or at
-least not make the rename a pre-requisite for the API additions in
-https://lore.kernel.org/all/20220126203702.1784589-1-lucas.demarchi@intel.com/
-
-One thing I like about the rename is that it makes clear the separation
-between this small shim and dma-buf. There are also some APIs
-that are really dma-buf API (e.g. dma_buf_map_attachment()), but if you
-don't look carefully you may think it's from dma_buf_map.
-
-2) If renaming, would it still keep the same entry in
-MAINTAINERS? Thomas suggested drivers core, but this all seem to be used
-mainly on drm/, with just one exception.
-
-3) If renaming, do we have another preferred name?
-
-
-thanks
-Lucas De Marchi
-
->
->>
->>But as I said, I don't really have a preference. When crossing
->>subsystems one thing that is hard is that different people have different
->>preferences on these things. At least squashing now is much easier than
->>if I had to split it
->>
->>Try to imagine how much complain I received on going the other way in
->>25985edcedea6396277003854657b5f3cb31a628 with
->>2463 files changed, 4252 insertions(+), 4252 deletions(-)
->
->Well exactly that is perfectly fine.
->
->What you do here is applying your personal hack which is absolutely 
->not welcomed.
->
->Regards,
->Christian.
->
->>:)
->>
->>
->>Lucas De Marchi
->>
->>>
->>>Regards,
->>>Christian.
->>>
->>>>I built this series, full config with
->>>>CONFIG_COMPILE_TEST and doing:
->>>>
->>>>    git rebase -i <base> -x "make -j$(nproc)"
->>>>
->>>>I split these patches in a way that wouldn't break the build on 
->>>>purpose.
->>>>There were a couple that I couldn't build without cross 
->>>>compiling: tegra
->>>>and rockchip. The others were ok.
->>>>
->>>>I'm not really against squashing everything in one to merge, though.
->>>>It will be hard on the conflicts later, but should get the job 
->>>>done much
->>>>quicker.
->>>>
->>>>Lucas De Marchi
->>>>
->>>>>
->>>>>Regards,
->>>>>Christian.
->>>>>
->>>>>Am 28.01.22 um 09:36 schrieb Lucas De Marchi:
->>>>>>Motivation for this started in
->>>>>>https://nam11.safelinks.protection.outlook.com/?url=https%3A%2F%2Flore.kernel.org%2Flkml%2F20220126203702.1784589-1-lucas.demarchi%40intel.com%2F&amp;data=04%7C01%7Cchristian.koenig%40amd.com%7C635084a520994d35a16e08d9e2423319%7C3dd8961fe4884e608e11a82d994e183d%7C0%7C0%7C637789596221829397%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000&amp;sdata=ruHpD3DbyyqQuZIFEQU%2B2RH31OwsdFnn1v7N4z75U0Y%3D&amp;reserved=0
->>>>>>
->>>>>>
->>>>>>when trying to extend the dma-buf-map API to cover new use 
->>>>>>cases: help a
->>>>>>single driver with allocations and sharing code paths for IO 
->>>>>>and system
->>>>>>memory. I'm leaving the API additions aside and first renaming the
->>>>>>interface as requested.
->>>>>>
->>>>>>There are already some users in tree outside the context of dma-buf
->>>>>>importer/exporter. So before extending the API, let's 
->>>>>>dissociate it from
->>>>>>dma-buf.
->>>>>>
->>>>>>The iosys-map.h is introduced in the first patch in a way that allows
->>>>>>the conversion of each driver to happen separately. After all the
->>>>>>conversions are done we can remove the old one, which is the 
->>>>>>last patch.
->>>>>>Another possible way is to squash everything and merge together,
->>>>>>but I believe this would make much harder for review.
->>>>>>
->>>>>>The conversion was done with the following semantic patch:
->>>>>>
->>>>>>    @r1@
->>>>>>    @@
->>>>>>    - struct dma_buf_map
->>>>>>    + struct iosys_map
->>>>>>
->>>>>>    @r2@
->>>>>>    @@
->>>>>>    (
->>>>>>    - DMA_BUF_MAP_INIT_VADDR
->>>>>>    + IOSYS_MAP_INIT_VADDR
->>>>>>    |
->>>>>>    - dma_buf_map_set_vaddr
->>>>>>    + iosys_map_set_vaddr
->>>>>>    |
->>>>>>    - dma_buf_map_set_vaddr_iomem
->>>>>>    + iosys_map_set_vaddr_iomem
->>>>>>    |
->>>>>>    - dma_buf_map_is_equal
->>>>>>    + iosys_map_is_equal
->>>>>>    |
->>>>>>    - dma_buf_map_is_null
->>>>>>    + iosys_map_is_null
->>>>>>    |
->>>>>>    - dma_buf_map_is_set
->>>>>>    + iosys_map_is_set
->>>>>>    |
->>>>>>    - dma_buf_map_clear
->>>>>>    + iosys_map_clear
->>>>>>    |
->>>>>>    - dma_buf_map_memcpy_to
->>>>>>    + iosys_map_memcpy_to
->>>>>>    |
->>>>>>    - dma_buf_map_incr
->>>>>>    + iosys_map_incr
->>>>>>    )
->>>>>>
->>>>>>    @@
->>>>>>    @@
->>>>>>    - #include <linux/dma-buf-map.h>
->>>>>>    + #include <linux/iosys-map.h>
->>>>>>
->>>>>>and then some files had their includes adjusted so we can build
->>>>>>everything on each commit in this series. Also some comments 
->>>>>>were update
->>>>>>to remove mentions to dma-buf-map. Simply doing a sed to 
->>>>>>rename didn't
->>>>>>work as dma-buf has some APIs using the dma_buf_map prefix.
->>>>>>
->>>>>>Once finalized, I think most of this, if not all, could go 
->>>>>>through the
->>>>>>drm-misc-next branch. I split i915, msm, nouveau, and radeon in their
->>>>>>own patches in case it's preferred to take those through their own
->>>>>>trees.
->>>>>>
->>>>>>Lucas De Marchi
->>>>>>
->>>>>>Lucas De Marchi (14):
->>>>>>  iosys-map: Introduce renamed dma-buf-map
->>>>>>  misc: fastrpc: Replace dma-buf-map with iosys-map
->>>>>>  dma-buf: Replace dma-buf-map with iosys-map
->>>>>>  media: Replace dma-buf-map with iosys-map
->>>>>>  drm/ttm: Replace dma-buf-map with iosys-map
->>>>>>  drm: Replace dma-buf-map with iosys-map in drivers
->>>>>>  drm/i915: Replace dma-buf-map with iosys-map
->>>>>>  drm/msm: Replace dma-buf-map with iosys-map
->>>>>>  drm/nouveau: Replace dma-buf-map with iosys-map
->>>>>>  drm/tegra: Replace dma-buf-map with iosys-map
->>>>>>  drm/radeon: Replace dma-buf-map with iosys-map
->>>>>>  drm: Replace dma-buf-map with iosys-map in common code
->>>>>>  Documentation: Refer to iosys-map instead of dma-buf-map
->>>>>>  dma-buf-map: Remove API in favor of iosys-map
->>>>>>
->>>>>> Documentation/driver-api/dma-buf.rst          |   4 +-
->>>>>> Documentation/gpu/todo.rst                    |  20 +-
->>>>>> MAINTAINERS                                   |   2 +-
->>>>>> drivers/dma-buf/dma-buf.c                     |  22 +-
->>>>>> drivers/dma-buf/heaps/cma_heap.c              |  10 +-
->>>>>> drivers/dma-buf/heaps/system_heap.c           |  10 +-
->>>>>> drivers/gpu/drm/ast/ast_drv.h                 |   2 +-
->>>>>> drivers/gpu/drm/ast/ast_mode.c                |   8 +-
->>>>>> drivers/gpu/drm/drm_cache.c                   |  18 +-
->>>>>> drivers/gpu/drm/drm_client.c                  |   9 +-
->>>>>> drivers/gpu/drm/drm_fb_helper.c               |  12 +-
->>>>>> drivers/gpu/drm/drm_gem.c                     |  12 +-
->>>>>> drivers/gpu/drm/drm_gem_cma_helper.c          |   9 +-
->>>>>> drivers/gpu/drm/drm_gem_framebuffer_helper.c  |  16 +-
->>>>>> drivers/gpu/drm/drm_gem_shmem_helper.c        |  15 +-
->>>>>> drivers/gpu/drm/drm_gem_ttm_helper.c          |   4 +-
->>>>>> drivers/gpu/drm/drm_gem_vram_helper.c         |  25 +-
->>>>>> drivers/gpu/drm/drm_internal.h                |   6 +-
->>>>>> drivers/gpu/drm/drm_mipi_dbi.c                |   8 +-
->>>>>> drivers/gpu/drm/drm_prime.c                   |   4 +-
->>>>>> drivers/gpu/drm/etnaviv/etnaviv_drv.h         |   2 +-
->>>>>> drivers/gpu/drm/etnaviv/etnaviv_gem_prime.c   |   8 +-
->>>>>> drivers/gpu/drm/gud/gud_pipe.c                |   4 +-
->>>>>> drivers/gpu/drm/hyperv/hyperv_drm_modeset.c   |   5 +-
->>>>>> drivers/gpu/drm/i915/gem/i915_gem_dmabuf.c    |   8 +-
->>>>>> .../drm/i915/gem/selftests/i915_gem_dmabuf.c  |   6 +-
->>>>>> .../gpu/drm/i915/gem/selftests/mock_dmabuf.c  |   6 +-
->>>>>> drivers/gpu/drm/lima/lima_gem.c               |   3 +-
->>>>>> drivers/gpu/drm/lima/lima_sched.c             |   4 +-
->>>>>> drivers/gpu/drm/mediatek/mtk_drm_gem.c        |   7 +-
->>>>>> drivers/gpu/drm/mediatek/mtk_drm_gem.h        |   5 +-
->>>>>> drivers/gpu/drm/mgag200/mgag200_mode.c        |   4 +-
->>>>>> drivers/gpu/drm/msm/msm_drv.h                 |   4 +-
->>>>>> drivers/gpu/drm/msm/msm_gem_prime.c           |   6 +-
->>>>>> drivers/gpu/drm/nouveau/nouveau_gem.c         |   2 +
->>>>>> drivers/gpu/drm/panfrost/panfrost_perfcnt.c   |  13 +-
->>>>>> drivers/gpu/drm/qxl/qxl_display.c             |   8 +-
->>>>>> drivers/gpu/drm/qxl/qxl_draw.c                |   6 +-
->>>>>> drivers/gpu/drm/qxl/qxl_drv.h                 |  10 +-
->>>>>> drivers/gpu/drm/qxl/qxl_object.c              |   8 +-
->>>>>> drivers/gpu/drm/qxl/qxl_object.h              |   4 +-
->>>>>> drivers/gpu/drm/qxl/qxl_prime.c               |   4 +-
->>>>>> drivers/gpu/drm/radeon/radeon_gem.c           |   1 +
->>>>>> drivers/gpu/drm/rockchip/rockchip_drm_gem.c   |   9 +-
->>>>>> drivers/gpu/drm/rockchip/rockchip_drm_gem.h   |   5 +-
->>>>>> drivers/gpu/drm/tegra/gem.c                   |  10 +-
->>>>>> drivers/gpu/drm/tiny/cirrus.c                 |   8 +-
->>>>>> drivers/gpu/drm/tiny/gm12u320.c               |   7 +-
->>>>>> drivers/gpu/drm/ttm/ttm_bo_util.c             |  16 +-
->>>>>> drivers/gpu/drm/ttm/ttm_resource.c            |  26 +-
->>>>>> drivers/gpu/drm/ttm/ttm_tt.c                  |   6 +-
->>>>>> drivers/gpu/drm/udl/udl_modeset.c             |   3 +-
->>>>>> drivers/gpu/drm/vboxvideo/vbox_mode.c         |   4 +-
->>>>>> drivers/gpu/drm/virtio/virtgpu_prime.c        |   1 +
->>>>>> drivers/gpu/drm/vkms/vkms_composer.c          |   4 +-
->>>>>> drivers/gpu/drm/vkms/vkms_drv.h               |   6 +-
->>>>>> drivers/gpu/drm/vkms/vkms_plane.c             |   2 +-
->>>>>> drivers/gpu/drm/vkms/vkms_writeback.c         |   2 +-
->>>>>> drivers/gpu/drm/xen/xen_drm_front_gem.c       |   7 +-
->>>>>> drivers/gpu/drm/xen/xen_drm_front_gem.h       |   6 +-
->>>>>> .../common/videobuf2/videobuf2-dma-contig.c   |   8 +-
->>>>>> .../media/common/videobuf2/videobuf2-dma-sg.c |   9 +-
->>>>>> .../common/videobuf2/videobuf2-vmalloc.c      |  11 +-
->>>>>> drivers/misc/fastrpc.c                        |   4 +-
->>>>>> include/drm/drm_cache.h                       |   6 +-
->>>>>> include/drm/drm_client.h                      |   7 +-
->>>>>> include/drm/drm_gem.h                         |   6 +-
->>>>>> include/drm/drm_gem_atomic_helper.h           |   6 +-
->>>>>> include/drm/drm_gem_cma_helper.h              |   6 +-
->>>>>> include/drm/drm_gem_framebuffer_helper.h      |   8 +-
->>>>>> include/drm/drm_gem_shmem_helper.h            |  12 +-
->>>>>> include/drm/drm_gem_ttm_helper.h              |   6 +-
->>>>>> include/drm/drm_gem_vram_helper.h             |   9 +-
->>>>>> include/drm/drm_prime.h                       |   6 +-
->>>>>> include/drm/ttm/ttm_bo_api.h                  |  10 +-
->>>>>> include/drm/ttm/ttm_kmap_iter.h               |  10 +-
->>>>>> include/drm/ttm/ttm_resource.h                |   6 +-
->>>>>> include/linux/dma-buf-map.h                   | 266 
->>>>>>------------------
->>>>>> include/linux/dma-buf.h                       |  12 +-
->>>>>> include/linux/iosys-map.h                     | 257 
->>>>>>+++++++++++++++++
->>>>>> 80 files changed, 579 insertions(+), 552 deletions(-)
->>>>>> delete mode 100644 include/linux/dma-buf-map.h
->>>>>> create mode 100644 include/linux/iosys-map.h
->>>>>>
->>>>>
->>>
->
+-- 
+Matt Roper
+Graphics Software Engineer
+VTT-OSGC Platform Enablement
+Intel Corporation
+(916) 356-2795
