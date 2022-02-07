@@ -2,72 +2,41 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 72DE44AA9A9
-	for <lists+nouveau@lfdr.de>; Sat,  5 Feb 2022 16:27:41 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D0C1E4AB4B2
+	for <lists+nouveau@lfdr.de>; Mon,  7 Feb 2022 07:33:16 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2BB5610F582;
-	Sat,  5 Feb 2022 15:27:37 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id DFCFD10ECD0;
+	Mon,  7 Feb 2022 06:33:10 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1092510F57E
- for <nouveau@lists.freedesktop.org>; Sat,  5 Feb 2022 15:27:35 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1644074855;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=pjmtgD9hDbE2eSozwnUFT0OXCz+k5OPkUk+zbtWjpnw=;
- b=NAQOEHHkFIuQDliZ+7qz0nBN7mE2qEzGS0ZzondHgoBu/wieUa4HU2HmjwvXASr5vq/aZ/
- 0W5KERL1yuwdVUhfhLMA6rs4ZlTYP3w+4oQhU0mVt+0eCdFlUPsg3gJt4oXYFLX5BLIjYo
- sWEB9oq6S0aJgyGF+HSuwiIkUXGpWak=
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
- [209.85.221.71]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-368-ZmeLRyVBNhOK1NUxw4zTTw-1; Sat, 05 Feb 2022 10:27:32 -0500
-X-MC-Unique: ZmeLRyVBNhOK1NUxw4zTTw-1
-Received: by mail-wr1-f71.google.com with SMTP id
- a6-20020adfbc46000000b001d7370ace6eso3503764wrh.9
- for <nouveau@lists.freedesktop.org>; Sat, 05 Feb 2022 07:27:32 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=pjmtgD9hDbE2eSozwnUFT0OXCz+k5OPkUk+zbtWjpnw=;
- b=6zrZNJy7B83kyJWFWF1zuEh1NQu0WSvAK1miUKO1JxLf41ZcOswNEEZrC3ZL4BcIf/
- v1s7vXrHX7Y5UgvNGsqyTOELtcm6zUfc9k17WL/U5oac5cfmIG+VZytY/IOSUu2KGozr
- ZFV3uwYTd7sNrvmYPiespi4wiKdT85h4Uj+3CP8cc6ymPS9X9tjR/SP1MG1euan3GADs
- AHtLltdE4op41doEXkT63075Cx755Y+en/UBKvE6MOGUg5i9UXDSJaZBD8T9f5dciDcm
- YBTcDZp06FVdhUq/AFkA0rtTbrlJl/RYaP169MUhkMvnrnVQzsAXfbv77FWx+r1Ygb3T
- 1XEQ==
-X-Gm-Message-State: AOAM532weDPtdaZyrigW4J6Xsw3QimZDRJNvXeUV2RRMQblC4HRkxWp1
- CmUY663lNAm/3h170rdnbRamI/YoMny5p69m9rqJJ1+Hp9+eSqnHTEDKKio4yhALxKlDPGfVZ3s
- cWMHeDKz7Nrbliq74x2niLSSk9g==
-X-Received: by 2002:a5d:5052:: with SMTP id h18mr3552904wrt.350.1644074851161; 
- Sat, 05 Feb 2022 07:27:31 -0800 (PST)
-X-Google-Smtp-Source: ABdhPJxDXyrn2KzxrERhgoIpos43hCirk58UMQ3nCsqWFJ5g7LBqTHNLGaT6w0HYpj+eI+7jWIu5gw==
-X-Received: by 2002:a5d:5052:: with SMTP id h18mr3552891wrt.350.1644074850965; 
- Sat, 05 Feb 2022 07:27:30 -0800 (PST)
-Received: from kherbst.pingu.com (ip1f10bb48.dynamic.kabel-deutschland.de.
- [31.16.187.72])
- by smtp.gmail.com with ESMTPSA id j5sm4635019wrq.31.2022.02.05.07.27.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 05 Feb 2022 07:27:30 -0800 (PST)
-From: Karol Herbst <kherbst@redhat.com>
-To: linux-kernel@vger.kernel.org
-Date: Sat,  5 Feb 2022 16:27:28 +0100
-Message-Id: <20220205152729.2609837-1-kherbst@redhat.com>
-X-Mailer: git-send-email 2.34.1
+Received: from bombadil.infradead.org (bombadil.infradead.org
+ [IPv6:2607:7c80:54:e::133])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id DD3CB10E99F;
+ Mon,  7 Feb 2022 06:33:08 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
+ MIME-Version:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:In-Reply-To:References;
+ bh=OAyNE091yCbn5wGWEV3bEarGLGijE2hU2ufW9HOL5jw=; b=WGwvHWbsXwe5wqUsSmyCBTNueH
+ xk61jWDsclmQ3MXQmxsiFbu7uwHqSJFlej9Qi/rp8m99Hw0XniTY4A3Grnbh0Jpf1VGSxuMJfmUYm
+ ReqqD/bAe6zwXBv/R5upJOQ70pLXbkMeYTzwwq4aNSgZRXW50435OU8wfWZmtiH9zyihvpaAef/c2
+ f6w1YXhaNOSTsMQILzMse2D6uGCZM5oEEQZ/xpWwfHUziH6xa1jBRLQm7OyXnhPuzWDdfaOOTiCP6
+ 7AOcgAjdJsbIAuZ1YHMjx3F+HE0yRYwKzMGjA9gEucL9tbBUAcfeQjrYaEbc0IpLFJ2GpP5tb3eKs
+ ZwA+tflg==;
+Received: from [2001:4bb8:188:3efc:2cbe:55d7:bb63:46d2] (helo=localhost)
+ by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
+ id 1nGxZz-0099GK-6j; Mon, 07 Feb 2022 06:32:51 +0000
+From: Christoph Hellwig <hch@lst.de>
+To: Andrew Morton <akpm@linux-foundation.org>,
+ Dan Williams <dan.j.williams@intel.com>
+Date: Mon,  7 Feb 2022 07:32:41 +0100
+Message-Id: <20220207063249.1833066-1-hch@lst.de>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=kherbst@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain; charset="US-ASCII"
-Subject: [Nouveau] [PATCH] Revert "drm/nouveau/pmu/gm200-: avoid touching
- PMU outside of DEVINIT/PREOS/ACR"
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
+ bombadil.infradead.org. See http://www.infradead.org/rpr.html
+Subject: [Nouveau] start sorting out the ZONE_DEVICE refcount mess
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -79,100 +48,50 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>,
- "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
- <nouveau@lists.freedesktop.org>,
- "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
- <dri-devel@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>,
- Daniel Vetter <daniel@ffwll.ch>
+Cc: nvdimm@lists.linux.dev, Ralph Campbell <rcampbell@nvidia.com>,
+ Alistair Popple <apopple@nvidia.com>, dri-devel@lists.freedesktop.org,
+ linux-mm@kvack.org, nouveau@lists.freedesktop.org,
+ Felix Kuehling <Felix.Kuehling@amd.com>, "Pan, Xinhui" <Xinhui.Pan@amd.com>,
+ linux-kernel@vger.kernel.org, amd-gfx@lists.freedesktop.org,
+ Jason Gunthorpe <jgg@ziepe.ca>, Ben Skeggs <bskeggs@redhat.com>,
+ Alex Deucher <alexander.deucher@amd.com>,
+ Logan Gunthorpe <logang@deltatee.com>,
+ =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-This reverts commit 1d2271d2fb85e54bfc9630a6c30ac0feb9ffb983.
+Hi all,
 
-This fix actually causes regressions, which I could verify on my systems
-as well. So let's revert it and figure out a proper fix for the original
-problem.
+this series removes the offset by one refcount for ZONE_DEVICE pages
+that are freed back to the driver owning them, which is just device
+private ones for now, but also the planned device coherent pages
+and the ehanced p2p ones pending.
 
-Cc: Ben Skeggs <bskeggs@redhat.com>
-Bug: https://gitlab.freedesktop.org/drm/nouveau/-/issues/149
-Signed-off-by: Karol Herbst <kherbst@redhat.com>
----
- .../gpu/drm/nouveau/nvkm/subdev/pmu/base.c    | 37 ++++++++-----------
- 1 file changed, 16 insertions(+), 21 deletions(-)
+It does not address the fsdax pages yet, which will be attacked in a
+follow on series.
 
-diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/pmu/base.c b/drivers/gpu/drm/nouveau/nvkm/subdev/pmu/base.c
-index 455e95a89259..24382875fb4f 100644
---- a/drivers/gpu/drm/nouveau/nvkm/subdev/pmu/base.c
-+++ b/drivers/gpu/drm/nouveau/nvkm/subdev/pmu/base.c
-@@ -94,13 +94,20 @@ nvkm_pmu_fini(struct nvkm_subdev *subdev, bool suspend)
- 	return 0;
- }
- 
--static void
-+static int
- nvkm_pmu_reset(struct nvkm_pmu *pmu)
- {
- 	struct nvkm_device *device = pmu->subdev.device;
- 
- 	if (!pmu->func->enabled(pmu))
--		return;
-+		return 0;
-+
-+	/* Inhibit interrupts, and wait for idle. */
-+	nvkm_wr32(device, 0x10a014, 0x0000ffff);
-+	nvkm_msec(device, 2000,
-+		if (!nvkm_rd32(device, 0x10a04c))
-+			break;
-+	);
- 
- 	/* Reset. */
- 	if (pmu->func->reset)
-@@ -111,37 +118,25 @@ nvkm_pmu_reset(struct nvkm_pmu *pmu)
- 		if (!(nvkm_rd32(device, 0x10a10c) & 0x00000006))
- 			break;
- 	);
-+
-+	return 0;
- }
- 
- static int
- nvkm_pmu_preinit(struct nvkm_subdev *subdev)
- {
- 	struct nvkm_pmu *pmu = nvkm_pmu(subdev);
--	nvkm_pmu_reset(pmu);
--	return 0;
-+	return nvkm_pmu_reset(pmu);
- }
- 
- static int
- nvkm_pmu_init(struct nvkm_subdev *subdev)
- {
- 	struct nvkm_pmu *pmu = nvkm_pmu(subdev);
--	struct nvkm_device *device = pmu->subdev.device;
--
--	if (!pmu->func->init)
--		return 0;
--
--	if (pmu->func->enabled(pmu)) {
--		/* Inhibit interrupts, and wait for idle. */
--		nvkm_wr32(device, 0x10a014, 0x0000ffff);
--		nvkm_msec(device, 2000,
--			if (!nvkm_rd32(device, 0x10a04c))
--				break;
--		);
--
--		nvkm_pmu_reset(pmu);
--	}
--
--	return pmu->func->init(pmu);
-+	int ret = nvkm_pmu_reset(pmu);
-+	if (ret == 0 && pmu->func->init)
-+		ret = pmu->func->init(pmu);
-+	return ret;
- }
- 
- static void *
--- 
-2.34.1
-
+Diffstat:
+ arch/arm64/mm/mmu.c                      |    1 
+ arch/powerpc/kvm/book3s_hv_uvmem.c       |    1 
+ drivers/gpu/drm/amd/amdkfd/kfd_migrate.c |    2 
+ drivers/gpu/drm/amd/amdkfd/kfd_priv.h    |    1 
+ drivers/gpu/drm/drm_cache.c              |    2 
+ drivers/gpu/drm/nouveau/nouveau_dmem.c   |    3 -
+ drivers/gpu/drm/nouveau/nouveau_svm.c    |    1 
+ drivers/infiniband/core/rw.c             |    1 
+ drivers/nvdimm/pmem.h                    |    1 
+ drivers/nvme/host/pci.c                  |    1 
+ drivers/nvme/target/io-cmd-bdev.c        |    1 
+ fs/Kconfig                               |    2 
+ fs/fuse/virtio_fs.c                      |    1 
+ include/linux/hmm.h                      |    9 ----
+ include/linux/memremap.h                 |   22 +++++++++-
+ include/linux/mm.h                       |   59 ++++-------------------------
+ lib/test_hmm.c                           |    4 +
+ mm/Kconfig                               |    4 -
+ mm/internal.h                            |    2 
+ mm/memcontrol.c                          |   11 +----
+ mm/memremap.c                            |   63 ++++++++++++++++---------------
+ mm/migrate.c                             |    6 --
+ mm/swap.c                                |   49 ++----------------------
+ 23 files changed, 90 insertions(+), 157 deletions(-)
