@@ -2,66 +2,66 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6B75C4AC956
-	for <lists+nouveau@lfdr.de>; Mon,  7 Feb 2022 20:22:03 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 21E844AC959
+	for <lists+nouveau@lfdr.de>; Mon,  7 Feb 2022 20:22:47 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 6F1F388A33;
-	Mon,  7 Feb 2022 19:21:59 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5AE6810F817;
+	Mon,  7 Feb 2022 19:22:45 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
- [IPv6:2607:f8b0:4864:20::f35])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8A7B510F800
- for <nouveau@lists.freedesktop.org>; Mon,  7 Feb 2022 19:21:58 +0000 (UTC)
-Received: by mail-qv1-xf35.google.com with SMTP id fh9so4353689qvb.1
- for <nouveau@lists.freedesktop.org>; Mon, 07 Feb 2022 11:21:58 -0800 (PST)
+Received: from mail-qt1-x835.google.com (mail-qt1-x835.google.com
+ [IPv6:2607:f8b0:4864:20::835])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3099E10F80D
+ for <nouveau@lists.freedesktop.org>; Mon,  7 Feb 2022 19:22:44 +0000 (UTC)
+Received: by mail-qt1-x835.google.com with SMTP id b5so12787975qtq.11
+ for <nouveau@lists.freedesktop.org>; Mon, 07 Feb 2022 11:22:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ziepe.ca; s=google;
  h=date:from:to:cc:subject:message-id:references:mime-version
  :content-disposition:in-reply-to;
- bh=MpROwmI6Qnm2emkziisG5aDXgeJvPxSLNV0Lic7ckQs=;
- b=OaiSuWRoTh89hqFli2OaM/99731kyVjifGW/6GRnhqIbNkn4rqP5cCBkUjKmhiONGA
- DRfaWqoDUSS3IuMSZybn6CxVSz9gReIWR5zHG2jjk1KjqYVDa/9CCxg0tFF3xZ3AN4KM
- IWW23EV/8VVY2qGl9kiFU+8+HFL3FZ5X6K6By2RBakx/Ghc4c95TqRKVwgL78FFsnybj
- gOmsu8PRvUOA7lJpZIzHdbR6U2MiJsL97ZsWs6lb+AZn8w27xJatWjWCvHlr0v+nfzrq
- 5FEXre/2zFc0NgKQwTEa1qY6KjXxjGFFZdTM7G5gNDX+6knlEUNvM1LWH4Y4kbABTlQ9
- MW3Q==
+ bh=yHQiDHxA3qZlcWTxLN1MgZypNnbjTwUZO2QoeiWP/cI=;
+ b=WalR+vjdCg+8zPlO5aZ1ywuN+woRsi3gerM9e8um5R75M05o/0A4tTPV0sDoS0iLf7
+ MI5Ayh/aUjA3lzGk4knlGcpvrjJkTAzgzCaIVUlu2cLGGSbDhpJ/GrhJhUdc2HnXtmRK
+ stuNg7sUYxLt5HQjP/PwyCP9ZRninXNxW8lX4+8vi6VkUSLgg5BY3Jxg39rH3WH2BDNx
+ g9rpWqR/RtcR0wf2poNmSVgkhRnSCPEG3oCgynxbJlts+OBBSOpC9atYeDDQCpJbBHmV
+ OdyYF8TiYTFFifPNOFO5hE7XJgkPbqKroSw//vj0hDKtL6BLQKT8a9/Jd8uxBZMUHGVb
+ 3Hgg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to;
- bh=MpROwmI6Qnm2emkziisG5aDXgeJvPxSLNV0Lic7ckQs=;
- b=D7dXzPp8JQJspQu/rGYBBWq0bvml0vQPN0INPXcaYtmQuV+Xd/FtpGdJQW3wDVt7K/
- KBOv9nByZEs9I6ZJ0VygcCLsvLo8Wr4/bKDISTiZS9r8FAIxQz8tlKpGUmiuC5JDQM8x
- tpUXyMg15McC//yr0lkoVIk3sQ1NBPdXF0XD5BEnGawo60t/xwaC16DLqtLyQhdQVBui
- vsmukk9DpSZ4Q2/wVW0gQzG0R+KKktLAsGnuTtoNi674iWkiWRLq7iQKu1Dg5ic8ozna
- PJ2OPmq73yET4VOopd44HbTrd+opryXNx3Ixe129g7jj51B9mjzHTzTV44YLdoh8yi/Q
- dhtw==
-X-Gm-Message-State: AOAM531t8yHmez8Mh2W7lj50/myTijKoi/Es/HfxEhw/2EmGAHrtWD+m
- PWGDO0/JA2rx5MCtEpl+kxekDQ==
-X-Google-Smtp-Source: ABdhPJxhzWQ+13BW3b7rMAkbC+gsglkVidW/xLtoMpCgPLxkDjpi1/nh8Ncg8X/Gh7aVJ+bLlWGexw==
-X-Received: by 2002:a05:6214:248a:: with SMTP id
- gi10mr727781qvb.99.1644261717527; 
- Mon, 07 Feb 2022 11:21:57 -0800 (PST)
+ bh=yHQiDHxA3qZlcWTxLN1MgZypNnbjTwUZO2QoeiWP/cI=;
+ b=GIUFPorcprtBm4e26Dg7GZbCLzcH8Y1Iu9o7sEzldLu33Opih6K2iWOyKHGJJ8YB8o
+ VvnTHLsxon7OwOAHNV+CFOEWwvsODlK58R2CFakFwjhj9YGQgqtCXvxKbxIe12EiZSIo
+ 2UEMNAlM9XZSxgeqEIk0fmAAS6Y7nf/U8K6qRwL26E1wh1GxyfHhNehUNBOeBsqhgzia
+ ffYtSLKsylB/apruVM47t3glEvd5hB6ltCnLpL4LmOLUNRHI1wif0YSBdk3j+ZOyr1tP
+ 1OgscxIW2EptjXtxqwNcJcXcnO6HuF4LZgIl8tIDt2vHL9VvNzFdeFro1IFUw7J4fDST
+ rCgg==
+X-Gm-Message-State: AOAM533Vw5LoABZdx+DHZ0DcB3hnxUdQ2QVDPMUERGD5H7WkXqiyY4QQ
+ e2ZgHXyMOHqK1jBGdgsjtotA2Q==
+X-Google-Smtp-Source: ABdhPJyusc4Y6UBxGsOMvrtpT2MH3zTc6ABg/OaP0sDSZntIjW01XzJV/gLuVV8p/6/141fWu3yUUA==
+X-Received: by 2002:a05:622a:1303:: with SMTP id
+ v3mr740294qtk.294.1644261763197; 
+ Mon, 07 Feb 2022 11:22:43 -0800 (PST)
 Received: from ziepe.ca
  (hlfxns017vw-142-162-113-129.dhcp-dynamic.fibreop.ns.bellaliant.net.
  [142.162.113.129])
- by smtp.gmail.com with ESMTPSA id y20sm5819031qta.9.2022.02.07.11.21.56
+ by smtp.gmail.com with ESMTPSA id y5sm5930001qkp.37.2022.02.07.11.22.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 07 Feb 2022 11:21:56 -0800 (PST)
+ Mon, 07 Feb 2022 11:22:42 -0800 (PST)
 Received: from jgg by mlx with local (Exim 4.94) (envelope-from <jgg@ziepe.ca>)
- id 1nH9aF-000Hph-TJ; Mon, 07 Feb 2022 15:21:55 -0400
-Date: Mon, 7 Feb 2022 15:21:55 -0400
+ id 1nH9b0-000HrC-2F; Mon, 07 Feb 2022 15:22:42 -0400
+Date: Mon, 7 Feb 2022 15:22:42 -0400
 From: Jason Gunthorpe <jgg@ziepe.ca>
 To: Christoph Hellwig <hch@lst.de>
-Message-ID: <20220207192155.GB49147@ziepe.ca>
+Message-ID: <20220207192242.GC49147@ziepe.ca>
 References: <20220207063249.1833066-1-hch@lst.de>
- <20220207063249.1833066-8-hch@lst.de>
+ <20220207063249.1833066-2-hch@lst.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20220207063249.1833066-8-hch@lst.de>
-Subject: Re: [Nouveau] [PATCH 7/8] mm: remove the extra ZONE_DEVICE struct
- page refcount
+In-Reply-To: <20220207063249.1833066-2-hch@lst.de>
+Subject: Re: [Nouveau] [PATCH 1/8] mm: remove a pointless CONFIG_ZONE_DEVICE
+ check in memremap_pages
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -85,54 +85,15 @@ Cc: nvdimm@lists.linux.dev, Ralph Campbell <rcampbell@nvidia.com>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Mon, Feb 07, 2022 at 07:32:48AM +0100, Christoph Hellwig wrote:
-> ZONE_DEVICE struct pages have an extra reference count that complicates
-> the code for put_page() and several places in the kernel that need to
-> check the reference count to see that a page is not being used (gup,
-> compaction, migration, etc.). Clean up the code so the reference count
-> doesn't need to be treated specially for ZONE_DEVICE pages.
-> 
-> Note that this excludes the special idle page wakeup for fsdax pages,
-> which still happens at refcount 1.  This is a separate issue and will
-> be sorted out later.  Given that only fsdax pages require the
-> notifiacation when the refcount hits 1 now, the PAGEMAP_OPS Kconfig
-> symbol can go away and be replaced with a FS_DAX check for this hook
-> in the put_page fastpath.
-> 
-> Based on an earlier patch from Ralph Campbell <rcampbell@nvidia.com>.
+On Mon, Feb 07, 2022 at 07:32:42AM +0100, Christoph Hellwig wrote:
+> memremap.c is only built when CONFIG_ZONE_DEVICE is set, so remove
+> the superflous extra check.
 > 
 > Signed-off-by: Christoph Hellwig <hch@lst.de>
 > ---
->  arch/powerpc/kvm/book3s_hv_uvmem.c       |  1 -
->  drivers/gpu/drm/amd/amdkfd/kfd_migrate.c |  1 -
->  drivers/gpu/drm/nouveau/nouveau_dmem.c   |  1 -
->  fs/Kconfig                               |  1 -
->  include/linux/memremap.h                 | 12 +++--
->  include/linux/mm.h                       |  6 +--
->  lib/test_hmm.c                           |  1 -
->  mm/Kconfig                               |  4 --
->  mm/internal.h                            |  2 +
->  mm/memcontrol.c                          | 11 ++---
->  mm/memremap.c                            | 57 ++++++++----------------
->  mm/migrate.c                             |  6 ---
->  mm/swap.c                                | 16 ++-----
->  13 files changed, 36 insertions(+), 83 deletions(-)
-
-It looks like a good next step to me
+>  mm/memremap.c | 3 +--
+>  1 file changed, 1 insertion(+), 2 deletions(-)
 
 Reviewed-by: Jason Gunthorpe <jgg@nvidia.com>
-
->  struct dev_pagemap_ops {
->  	/*
-> -	 * Called once the page refcount reaches 1.  (ZONE_DEVICE pages never
-> -	 * reach 0 refcount unless there is a refcount bug. This allows the
-> -	 * device driver to implement its own memory management.)
-> +	 * Called once the page refcount reaches 0.  The reference count will be
-> +	 * reset to one by the core code after the method is called to prepare
-> +	 * for handing out the page again.
-
-I did prefer Ralph's version of this that kept the refcount at 0 while
-the page was on the free-list. I hope we can get there again after
-later series :)
 
 Jason
