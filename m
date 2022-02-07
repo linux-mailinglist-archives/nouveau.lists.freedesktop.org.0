@@ -1,44 +1,66 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 352E24AB4BB
-	for <lists+nouveau@lfdr.de>; Mon,  7 Feb 2022 07:33:28 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5F7BC4AC058
+	for <lists+nouveau@lfdr.de>; Mon,  7 Feb 2022 15:01:37 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 51F3D10F0E7;
-	Mon,  7 Feb 2022 06:33:26 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id F328C10E5DC;
+	Mon,  7 Feb 2022 14:01:31 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from bombadil.infradead.org (bombadil.infradead.org
- [IPv6:2607:7c80:54:e::133])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E3B0410F0EA;
- Mon,  7 Feb 2022 06:33:24 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
- MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
- :Reply-To:Content-Type:Content-ID:Content-Description;
- bh=/NCdUINdSDF5KM2Tb0Dq1i00on9a3wMEZ1QazdYyuYI=; b=ooIei4pfJnCYjgGG+26anfZyxt
- 7RPGv8eBlOliwSMzx5DHbMG1ml8zLJe9WG/7xmz++kRingnQ+IvxnuJTHlPCs1Hwm0do7LNzBLi48
- 68VBDLLuGuVYNK7Iw0TK6gyltfjGMgLQ72FXo3g7g+myJm1KPzOnKffgXxRtNjKsiKuk2IQ1ZLCAh
- d0FhUJIcuwhbbJ05Q9J4VNkVt+7xskowLyUjFLZJ3GHD1iZ+b7MwEfcwP/jO5gGmbPetBVX4fWBLv
- zknna1w060pYHr37Om6EfjDULgdFda5Q+HPWdA3z5JG8pwz8w19XAjipmSILOVQe8fO6fqp2mXlbq
- P+0uB/VA==;
-Received: from [2001:4bb8:188:3efc:2cbe:55d7:bb63:46d2] (helo=localhost)
- by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1nGxaL-0099Ok-Pz; Mon, 07 Feb 2022 06:33:14 +0000
-From: Christoph Hellwig <hch@lst.de>
-To: Andrew Morton <akpm@linux-foundation.org>,
- Dan Williams <dan.j.williams@intel.com>
-Date: Mon,  7 Feb 2022 07:32:49 +0100
-Message-Id: <20220207063249.1833066-9-hch@lst.de>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20220207063249.1833066-1-hch@lst.de>
+Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
+ [IPv6:2607:f8b0:4864:20::733])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 7C47B10E5A8
+ for <nouveau@lists.freedesktop.org>; Mon,  7 Feb 2022 14:01:30 +0000 (UTC)
+Received: by mail-qk1-x733.google.com with SMTP id bs32so10955341qkb.1
+ for <nouveau@lists.freedesktop.org>; Mon, 07 Feb 2022 06:01:30 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ziepe.ca; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to;
+ bh=+VH5Yzc0FArtBDlyVciKdTaJzlAuXtplA0CDhVkYZVw=;
+ b=TUJuhAgjjswNVQ7JzTkg9iKkOgM430mBd5iaZFyVB8juiwGMelroxSVc/tEeoVjS03
+ SBBJAs6XyaJLOH0zNh1fMB11MocmBy0vZW3lQVqwc7nmLVkUib5NLDfgXeW1egoLcrUl
+ 0zJ1M9G8GricJAi2JHxOQgJzIsENPf4oXdSlLGMn1ou/GSiwitfE+Re74s2OC3cGYiXS
+ WAB6PyKR8iNz2aNJcgzl/Jv2b00SlxQrNVuEW+ZJ8pyVvgvQpU41dl5hiuO86kWk7vjX
+ 6XluH9RnX42crAJsdacFsF/M+gN0YxPG9aqIQm6tHe1mZG9Uo38/MZ0gAIlPcqFBC8jG
+ 7hCw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=+VH5Yzc0FArtBDlyVciKdTaJzlAuXtplA0CDhVkYZVw=;
+ b=lP7UXprTt1su5W58PgDZdAwYPlEKlJgQBRNh9CyH2dExwTGYTjSxpK6TF+/4emginR
+ J/Kp8hCqvDU4b2CntLTPVSqSsc4/IaWmu4TsZ+ArbO5bikGpYHlesAY65U7UpEeagqgt
+ y2CbodCQVsvw4hZ715OCKJFN63xf2S5aqKkTVI7TcKUexOHzawgBqFncH/W1ztcUxMOO
+ NPgQlDERVpmisBdjmKJa+LvKC5sFdgCBAwNyzwWHeKE8Vd2CliPLG+M3yi+Nn9CqAGKm
+ PGtBfgbe+qib8mU9AMCGg8ASkjaTaUpOEBAEBXWuOwVF3igtyW6uHeTj0a5ZO881/yMP
+ 10cg==
+X-Gm-Message-State: AOAM532iCJLIPsbqu5TtRyL7P2qkc/J1RJjOPIIT/ljpSYREnqtMExZr
+ /ythxr1ZNvLzIRqflosrcakYMQ==
+X-Google-Smtp-Source: ABdhPJxewUAI8RDxJecgMQqK84dnZDRSuWWALhikOi914YekMnNecZIoiX1AIBCzbrtZ6bBwZBwWpw==
+X-Received: by 2002:a37:2c02:: with SMTP id s2mr6217893qkh.76.1644242489492;
+ Mon, 07 Feb 2022 06:01:29 -0800 (PST)
+Received: from ziepe.ca
+ (hlfxns017vw-142-162-113-129.dhcp-dynamic.fibreop.ns.bellaliant.net.
+ [142.162.113.129])
+ by smtp.gmail.com with ESMTPSA id f4sm5480989qko.72.2022.02.07.06.01.28
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 07 Feb 2022 06:01:28 -0800 (PST)
+Received: from jgg by mlx with local (Exim 4.94) (envelope-from <jgg@ziepe.ca>)
+ id 1nH4a7-000CyH-Do; Mon, 07 Feb 2022 10:01:27 -0400
+Date: Mon, 7 Feb 2022 10:01:27 -0400
+From: Jason Gunthorpe <jgg@ziepe.ca>
+To: Christoph Hellwig <hch@lst.de>
+Message-ID: <20220207140127.GA49147@ziepe.ca>
 References: <20220207063249.1833066-1-hch@lst.de>
+ <20220207063249.1833066-4-hch@lst.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
- bombadil.infradead.org. See http://www.infradead.org/rpr.html
-Subject: [Nouveau] [PATCH 8/8] fsdax: depend on ZONE_DEVICE || FS_DAX_LIMITED
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20220207063249.1833066-4-hch@lst.de>
+Subject: Re: [Nouveau] [PATCH 3/8] mm: remove pointless includes from
+ <linux/hmm.h>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -52,37 +74,28 @@ List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
 Cc: nvdimm@lists.linux.dev, Ralph Campbell <rcampbell@nvidia.com>,
  Alistair Popple <apopple@nvidia.com>, dri-devel@lists.freedesktop.org,
- linux-mm@kvack.org, nouveau@lists.freedesktop.org,
- Felix Kuehling <Felix.Kuehling@amd.com>, "Pan, Xinhui" <Xinhui.Pan@amd.com>,
- linux-kernel@vger.kernel.org, amd-gfx@lists.freedesktop.org,
- Jason Gunthorpe <jgg@ziepe.ca>, Ben Skeggs <bskeggs@redhat.com>,
- Alex Deucher <alexander.deucher@amd.com>,
- Logan Gunthorpe <logang@deltatee.com>,
- =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>
+ nouveau@lists.freedesktop.org, Felix Kuehling <Felix.Kuehling@amd.com>, "Pan,
+ Xinhui" <Xinhui.Pan@amd.com>, linux-kernel@vger.kernel.org,
+ amd-gfx@lists.freedesktop.org,
+ Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, linux-mm@kvack.org,
+ Ben Skeggs <bskeggs@redhat.com>, Alex Deucher <alexander.deucher@amd.com>,
+ Andrew Morton <akpm@linux-foundation.org>,
+ Logan Gunthorpe <logang@deltatee.com>, Dan Williams <dan.j.williams@intel.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Add a depends on ZONE_DEVICE support or the s390-specific limited DAX
-support, as one of the two is required at runtime for fsdax code to
-actually work.
+On Mon, Feb 07, 2022 at 07:32:44AM +0100, Christoph Hellwig wrote:
+> hmm.h pulls in the world for no good reason at all.  Remove the
+> includes and push a few ones into the users instead.
+> 
+> Signed-off-by: Christoph Hellwig <hch@lst.de>
+> ---
+>  drivers/gpu/drm/amd/amdkfd/kfd_migrate.c | 1 +
+>  drivers/gpu/drm/nouveau/nouveau_dmem.c   | 1 +
+>  include/linux/hmm.h                      | 9 ++-------
+>  lib/test_hmm.c                           | 2 ++
+>  4 files changed, 6 insertions(+), 7 deletions(-)
 
-Signed-off-by: Christoph Hellwig <hch@lst.de>
----
- fs/Kconfig | 1 +
- 1 file changed, 1 insertion(+)
+Reviewed-by: Jason Gunthorpe <jgg@nvidia.com>
 
-diff --git a/fs/Kconfig b/fs/Kconfig
-index 05efea674bffa0..6e8818a5e53c45 100644
---- a/fs/Kconfig
-+++ b/fs/Kconfig
-@@ -48,6 +48,7 @@ config FS_DAX
- 	bool "File system based Direct Access (DAX) support"
- 	depends on MMU
- 	depends on !(ARM || MIPS || SPARC)
-+	depends on ZONE_DEVICE || FS_DAX_LIMITED
- 	select FS_IOMAP
- 	select DAX
- 	help
--- 
-2.30.2
-
+Jason
