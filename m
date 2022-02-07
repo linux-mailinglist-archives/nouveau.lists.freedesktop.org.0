@@ -1,66 +1,72 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5F7BC4AC058
-	for <lists+nouveau@lfdr.de>; Mon,  7 Feb 2022 15:01:37 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id B2D0A4AC51B
+	for <lists+nouveau@lfdr.de>; Mon,  7 Feb 2022 17:14:52 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id F328C10E5DC;
-	Mon,  7 Feb 2022 14:01:31 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 96AED10F878;
+	Mon,  7 Feb 2022 16:14:50 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
- [IPv6:2607:f8b0:4864:20::733])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 7C47B10E5A8
- for <nouveau@lists.freedesktop.org>; Mon,  7 Feb 2022 14:01:30 +0000 (UTC)
-Received: by mail-qk1-x733.google.com with SMTP id bs32so10955341qkb.1
- for <nouveau@lists.freedesktop.org>; Mon, 07 Feb 2022 06:01:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ziepe.ca; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to;
- bh=+VH5Yzc0FArtBDlyVciKdTaJzlAuXtplA0CDhVkYZVw=;
- b=TUJuhAgjjswNVQ7JzTkg9iKkOgM430mBd5iaZFyVB8juiwGMelroxSVc/tEeoVjS03
- SBBJAs6XyaJLOH0zNh1fMB11MocmBy0vZW3lQVqwc7nmLVkUib5NLDfgXeW1egoLcrUl
- 0zJ1M9G8GricJAi2JHxOQgJzIsENPf4oXdSlLGMn1ou/GSiwitfE+Re74s2OC3cGYiXS
- WAB6PyKR8iNz2aNJcgzl/Jv2b00SlxQrNVuEW+ZJ8pyVvgvQpU41dl5hiuO86kWk7vjX
- 6XluH9RnX42crAJsdacFsF/M+gN0YxPG9aqIQm6tHe1mZG9Uo38/MZ0gAIlPcqFBC8jG
- 7hCw==
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 2D36F10F829
+ for <nouveau@lists.freedesktop.org>; Mon,  7 Feb 2022 16:14:49 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1644250488;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=IFrUiE399AWkgKFh5f0w6DFQ5l0IKVbpkKeYpipiJKA=;
+ b=DeCwOcj2O4hEM4CFCgcuxAbhM1NAAhEvQ4s9LWgIm/FiAfwE0UUsV4tmig4zhUNOI/7lMZ
+ rl5qir32wq3k611vTLMbJJR2Vb20HZ79ing8Cds8itSKn4z6ge9IOhkxSMVWIlUHp9UkDN
+ icvr3nY/LZCZVzyI23TQamDwi56ve7g=
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-365-JPD89_SqN4yGLiqtqQgSbQ-1; Mon, 07 Feb 2022 11:14:46 -0500
+X-MC-Unique: JPD89_SqN4yGLiqtqQgSbQ-1
+Received: by mail-wm1-f69.google.com with SMTP id
+ u14-20020a05600c210e00b0037bddd0562eso24799wml.1
+ for <nouveau@lists.freedesktop.org>; Mon, 07 Feb 2022 08:14:45 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=+VH5Yzc0FArtBDlyVciKdTaJzlAuXtplA0CDhVkYZVw=;
- b=lP7UXprTt1su5W58PgDZdAwYPlEKlJgQBRNh9CyH2dExwTGYTjSxpK6TF+/4emginR
- J/Kp8hCqvDU4b2CntLTPVSqSsc4/IaWmu4TsZ+ArbO5bikGpYHlesAY65U7UpEeagqgt
- y2CbodCQVsvw4hZ715OCKJFN63xf2S5aqKkTVI7TcKUexOHzawgBqFncH/W1ztcUxMOO
- NPgQlDERVpmisBdjmKJa+LvKC5sFdgCBAwNyzwWHeKE8Vd2CliPLG+M3yi+Nn9CqAGKm
- PGtBfgbe+qib8mU9AMCGg8ASkjaTaUpOEBAEBXWuOwVF3igtyW6uHeTj0a5ZO881/yMP
- 10cg==
-X-Gm-Message-State: AOAM532iCJLIPsbqu5TtRyL7P2qkc/J1RJjOPIIT/ljpSYREnqtMExZr
- /ythxr1ZNvLzIRqflosrcakYMQ==
-X-Google-Smtp-Source: ABdhPJxewUAI8RDxJecgMQqK84dnZDRSuWWALhikOi914YekMnNecZIoiX1AIBCzbrtZ6bBwZBwWpw==
-X-Received: by 2002:a37:2c02:: with SMTP id s2mr6217893qkh.76.1644242489492;
- Mon, 07 Feb 2022 06:01:29 -0800 (PST)
-Received: from ziepe.ca
- (hlfxns017vw-142-162-113-129.dhcp-dynamic.fibreop.ns.bellaliant.net.
- [142.162.113.129])
- by smtp.gmail.com with ESMTPSA id f4sm5480989qko.72.2022.02.07.06.01.28
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=IFrUiE399AWkgKFh5f0w6DFQ5l0IKVbpkKeYpipiJKA=;
+ b=D25qyPRaGD1l6S3Zyc9JXRa8udLVCpO4sIrDUu36LDos9r1ZYlr66DIGGsmeY/lugI
+ zkjZUW2MxDg9n/iN2wGFdbIN1lYU5QUFCqxTngyj6PCB/sSgenB6F6/J7Bbihpz9udSU
+ ObmgWe2Qnc06XODyH3TdZ8Kal4LDRWzP78cHzXC6EOKo49kn53czweaY8dezDJe5xaVl
+ rHZoIwttmd2KraFGtCS+ja0c0Z4H5iFylslNdg4y8eCeOaEsp4VJFJBa5gjrrF+KFyRN
+ FCKLoJZKEHTBgbC2iOyjODHcfztcOB0+zHYgmCsSWRdNqI4LMjQxstb6y623hOMzJaRg
+ WfRg==
+X-Gm-Message-State: AOAM530rUZ24xBarpnWrlvjfIuQAm2b1gGllqpWCtUpPz6b9mPB07bJM
+ 9v9EKAYVQmhLwRD0w8D0R9RlglWIkGoBNybuSnZuL87ySXcYwGNLptGWeMI1+wgq2dHLfCfpGfW
+ 5JCNLYh3VwIJwifLRd0WcMIf3/w==
+X-Received: by 2002:a5d:40ca:: with SMTP id b10mr178620wrq.6.1644250484834;
+ Mon, 07 Feb 2022 08:14:44 -0800 (PST)
+X-Google-Smtp-Source: ABdhPJxag/VMAQvDNvrhkp9126/FEr3+jzTAsqTwom1rxeqdyBy5yKiDpvjeiVrKAD+kaImszZyfLA==
+X-Received: by 2002:a5d:40ca:: with SMTP id b10mr178611wrq.6.1644250484657;
+ Mon, 07 Feb 2022 08:14:44 -0800 (PST)
+Received: from kherbst.pingu.com (ip1f10bb48.dynamic.kabel-deutschland.de.
+ [31.16.187.72])
+ by smtp.gmail.com with ESMTPSA id f8sm12358148wry.12.2022.02.07.08.14.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 07 Feb 2022 06:01:28 -0800 (PST)
-Received: from jgg by mlx with local (Exim 4.94) (envelope-from <jgg@ziepe.ca>)
- id 1nH4a7-000CyH-Do; Mon, 07 Feb 2022 10:01:27 -0400
-Date: Mon, 7 Feb 2022 10:01:27 -0400
-From: Jason Gunthorpe <jgg@ziepe.ca>
-To: Christoph Hellwig <hch@lst.de>
-Message-ID: <20220207140127.GA49147@ziepe.ca>
-References: <20220207063249.1833066-1-hch@lst.de>
- <20220207063249.1833066-4-hch@lst.de>
+ Mon, 07 Feb 2022 08:14:44 -0800 (PST)
+From: Karol Herbst <kherbst@redhat.com>
+To: linux-kernel@vger.kernel.org
+Date: Mon,  7 Feb 2022 17:14:42 +0100
+Message-Id: <20220207161443.1843660-1-kherbst@redhat.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20220207063249.1833066-4-hch@lst.de>
-Subject: Re: [Nouveau] [PATCH 3/8] mm: remove pointless includes from
- <linux/hmm.h>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=kherbst@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="US-ASCII"
+Subject: [Nouveau] [PATCH] drm/nouveau/mmu: fix reuse of nvkm_umem
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -72,30 +78,59 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nvdimm@lists.linux.dev, Ralph Campbell <rcampbell@nvidia.com>,
- Alistair Popple <apopple@nvidia.com>, dri-devel@lists.freedesktop.org,
- nouveau@lists.freedesktop.org, Felix Kuehling <Felix.Kuehling@amd.com>, "Pan,
- Xinhui" <Xinhui.Pan@amd.com>, linux-kernel@vger.kernel.org,
- amd-gfx@lists.freedesktop.org,
- Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, linux-mm@kvack.org,
- Ben Skeggs <bskeggs@redhat.com>, Alex Deucher <alexander.deucher@amd.com>,
- Andrew Morton <akpm@linux-foundation.org>,
- Logan Gunthorpe <logang@deltatee.com>, Dan Williams <dan.j.williams@intel.com>
+Cc: David Airlie <airlied@linux.ie>,
+ "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
+ <nouveau@lists.freedesktop.org>,
+ "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
+ <dri-devel@lists.freedesktop.org>, stable@vger.kernel.org,
+ Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Mon, Feb 07, 2022 at 07:32:44AM +0100, Christoph Hellwig wrote:
-> hmm.h pulls in the world for no good reason at all.  Remove the
-> includes and push a few ones into the users instead.
-> 
-> Signed-off-by: Christoph Hellwig <hch@lst.de>
-> ---
->  drivers/gpu/drm/amd/amdkfd/kfd_migrate.c | 1 +
->  drivers/gpu/drm/nouveau/nouveau_dmem.c   | 1 +
->  include/linux/hmm.h                      | 9 ++-------
->  lib/test_hmm.c                           | 2 ++
->  4 files changed, 6 insertions(+), 7 deletions(-)
+I am not entirely sure if this fixes anything, but the code standed out
+while investigated problematic calls to vunmap.
 
-Reviewed-by: Jason Gunthorpe <jgg@nvidia.com>
+nvkm_umem.io is only ever set for the NVKM_OBJECT_MAP_IO case in
+nvkm_umem_map, but never for the NVKM_OBJECT_MAP_VA one, which could lead
+to taking the wrong patch inside nvkm_umem_unmap.
 
-Jason
+I just don't know if this is a real issue or not, but the code doesn't
+look correct this way.
+
+Fixes: c83c4097eba8 ("drm/nouveau/mmu: define user interfaces to mmu memory allocation")
+Cc: <stable@vger.kernel.org> # v4.15+
+---
+ drivers/gpu/drm/nouveau/nvkm/subdev/mmu/umem.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/umem.c b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/umem.c
+index e530bb8b3b17..2608e0796066 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/umem.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/mmu/umem.c
+@@ -102,6 +102,7 @@ nvkm_umem_map(struct nvkm_object *object, void *argv, u32 argc,
+ 		*handle = (unsigned long)(void *)umem->map;
+ 		*length = nvkm_memory_size(umem->memory);
+ 		*type = NVKM_OBJECT_MAP_VA;
++		umem->io = false;
+ 		return 0;
+ 	} else
+ 	if ((umem->type & NVKM_MEM_VRAM) ||
+@@ -112,12 +113,11 @@ nvkm_umem_map(struct nvkm_object *object, void *argv, u32 argc,
+ 			return ret;
+ 
+ 		*type = NVKM_OBJECT_MAP_IO;
+-	} else {
+-		return -EINVAL;
++		umem->io = true;
++		return 0;
+ 	}
+ 
+-	umem->io = (*type == NVKM_OBJECT_MAP_IO);
+-	return 0;
++	return -EINVAL;
+ }
+ 
+ static void *
+-- 
+2.34.1
+
