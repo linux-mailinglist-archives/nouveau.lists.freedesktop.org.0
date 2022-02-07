@@ -2,58 +2,56 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id D65C44AC837
-	for <lists+nouveau@lfdr.de>; Mon,  7 Feb 2022 19:08:43 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A720B4AC929
+	for <lists+nouveau@lfdr.de>; Mon,  7 Feb 2022 20:07:08 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0A05810E403;
-	Mon,  7 Feb 2022 18:08:42 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 19AE310F84F;
+	Mon,  7 Feb 2022 19:07:05 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pj1-x102f.google.com (mail-pj1-x102f.google.com
- [IPv6:2607:f8b0:4864:20::102f])
- by gabe.freedesktop.org (Postfix) with ESMTPS id BA8F510E403
- for <nouveau@lists.freedesktop.org>; Mon,  7 Feb 2022 18:08:40 +0000 (UTC)
-Received: by mail-pj1-x102f.google.com with SMTP id
- my12-20020a17090b4c8c00b001b528ba1cd7so14431801pjb.1
- for <nouveau@lists.freedesktop.org>; Mon, 07 Feb 2022 10:08:40 -0800 (PST)
+Received: from mail-pf1-x42b.google.com (mail-pf1-x42b.google.com
+ [IPv6:2607:f8b0:4864:20::42b])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 72AA310F848
+ for <nouveau@lists.freedesktop.org>; Mon,  7 Feb 2022 19:07:03 +0000 (UTC)
+Received: by mail-pf1-x42b.google.com with SMTP id e28so14632831pfj.5
+ for <nouveau@lists.freedesktop.org>; Mon, 07 Feb 2022 11:07:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=intel-com.20210112.gappssmtp.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=zYdhIytWWvNZPQpgxc7JanMz43mOjz+UXOqpB/Si8gY=;
- b=R93xjTEs3HgPo29762m4uqHy6DgEIiw341Wvf7q57zjQt/fMOf/vIggnLWq+UIkvE2
- ItYfM1ocg4jOoHter+LGmVVn+56WIrTresjlRqOzDpxhR2gE2Z7XKfivMQnYws3oBpcN
- Wnp4OjEX2kVSHOm5wWUaWUQHoBL2pZOajsCNpVYP+2s7M4Pt370NfYYH6tCLMb0ePa8z
- HUeyronXi33SaNNHMgqIF/E3v+pRpLWgtLiP7uZ593CHEdxKAHCZRXlItwp/sNFJZgmH
- Q6m9V+2GxeMGSIE/EyF8AlQqUfCTIeQOL4NCF8eo53fHgen+/6rfpdiFIvCtnwfrEBzm
- 8haA==
+ :cc; bh=+WVqg4iM1IK5woHe616yKoTPDV85yaqed+lmC/0zx4Q=;
+ b=E8Yv+tJ27QtdnqCiahy1ynDTxSrIHFQS9v3T6SGxOtbvrS4oJdOaAbBOu5WkKuOBfd
+ YZVQDjXpyCcHf5TePEiE9WLubJVn7pkXJNntqfcUu0FB+cpVUKi2U/fVQ/r2P4FuKOGP
+ rrsKex566q7w8weRBoU0ZAbtyAsexA2NArqSSGJ8aSE3asKbO/kySJdCGSVU84OEGUiB
+ QCLOFQgtfcBKBXnXRpXprEE7iAtFckobPiWULixyKadweXpHSIl4fOM/cfTnhyD31lEn
+ X5EcS76XqYpJKN3mK9thEa6gK63RHYW8pEdrhtUg2qPw6l/cPnln0K7VaxQOTiViReVV
+ h7aA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=zYdhIytWWvNZPQpgxc7JanMz43mOjz+UXOqpB/Si8gY=;
- b=L9yHVmqmQn//9Vp90seB457TDAo0N+o1UGRzamuDqSDnIIjlkiRuzC4MBb6bbyQhoI
- YFca9Z1illBE63j3J/2W0dSQ0V86hLdSLwBh29tqCcuN8YrbZg97MvdaAn95Laxpz2pf
- l6xr7tBJ5G78EOdqElL0Sqx3ZPCL+q2Zyt0XMIuy37v/OD4zKzIZsuT1H6w2K4Ngi1ev
- SHQkRNE+KO1BGvMO1WNNyEg2ywU6JJqrognmAeswUWER5ze1dxSGZfm0k82h0lHdyebm
- ZQYqjcTNFOk5kUn4xsV+jJTy5aR6yz+PxdScSLyK5MvLb+Fxog1e98zAPx3h4G+zNITJ
- O90Q==
-X-Gm-Message-State: AOAM532+IkTG9JGkF4dWMPOJ24+2nU3CP930djjkFfPHHMC9VYA6gIYU
- Bh2WlSf3WW58hRJHUdU0euI5HWBJZxJi0Xe40enYag==
-X-Google-Smtp-Source: ABdhPJzkFzzjmqODkvgrvwQLNfbzdHBUvOVv75drXwoWtoHzOi4Qr8amdduzRjHB4i+xpu3YrgRs1ma/CEMYchNDNj0=
-X-Received: by 2002:a17:90b:1bcc:: with SMTP id
- oa12mr121877pjb.93.1644257320409; 
- Mon, 07 Feb 2022 10:08:40 -0800 (PST)
+ bh=+WVqg4iM1IK5woHe616yKoTPDV85yaqed+lmC/0zx4Q=;
+ b=uaKccpxhYNzoOsc6Trm4LOJRX9p83GBSeeHf84edBogOAEwt03MVftR3C6OlySCYZX
+ DTd1vvPofykP/1C/7Vr3E1MCEddEtvhhju8tcnytOQ6cKeYK/PDh1H46nkl92Xp32MGv
+ 3ptcS1kjIGKCXBxgv1e3qQM9NJUN9c7Prkr/S3WNW7oxcOT4m+IYHl5MuWSTG0O0GAC6
+ Ig6q1oO1JNkbglDIJq2eJNha4HvdITmKtFrktGmMHvWeMBzdgdygYz3QS8GHNd8Zuo/N
+ C9US7lx7ss8B0H7eEsoxqGFBl9GsLdwmw89Zy0kTeA/xTKx4E37W8buY0OJSGupMt3ts
+ yMhw==
+X-Gm-Message-State: AOAM531pq8nZTlQCw2OOgRgFpKpW9q4a0Ol5SSqkSrBtpAYbrU4jkhS7
+ km2pZuIfo0XylbqtgGFjJg+H0TFE3eMotYpfWPPeqg==
+X-Google-Smtp-Source: ABdhPJx4gFwHpx6eXlK2M23aHGpthiH4fAIYOpnEcI58LRfZznkCnIjyKeDQJsC3Q3CmCC8lC+fdRuCFIdo+hfnPs1A=
+X-Received: by 2002:a62:784b:: with SMTP id t72mr939106pfc.86.1644260822995;
+ Mon, 07 Feb 2022 11:07:02 -0800 (PST)
 MIME-Version: 1.0
 References: <20220207063249.1833066-1-hch@lst.de>
- <20220207063249.1833066-3-hch@lst.de>
-In-Reply-To: <20220207063249.1833066-3-hch@lst.de>
+ <20220207063249.1833066-5-hch@lst.de>
+In-Reply-To: <20220207063249.1833066-5-hch@lst.de>
 From: Dan Williams <dan.j.williams@intel.com>
-Date: Mon, 7 Feb 2022 10:08:29 -0800
-Message-ID: <CAPcyv4i3hJR9WBh6PFN9VgA0p3x4Vvgdy6T3b-3_bP_LaPK9fg@mail.gmail.com>
+Date: Mon, 7 Feb 2022 11:06:52 -0800
+Message-ID: <CAPcyv4ipZUeCjf5teFQuJX5DEs7ViGHW_PKKfoJEK8chjJTZig@mail.gmail.com>
 To: Christoph Hellwig <hch@lst.de>
 Content-Type: text/plain; charset="UTF-8"
-Subject: Re: [Nouveau] [PATCH 2/8] mm: remove the __KERNEL__ guard from
- <linux/mm.h>
+Subject: Re: [Nouveau] [PATCH 4/8] mm: move free_devmap_managed_page to
+ memremap.c
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -81,8 +79,10 @@ Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
 On Sun, Feb 6, 2022 at 10:33 PM Christoph Hellwig <hch@lst.de> wrote:
 >
-> __KERNEL__ ifdefs don't make sense outside of include/uapi/.
+> free_devmap_managed_page has nothing to do with the code in swap.c,
+> move it to live with the rest of the code for devmap handling.
+>
 
-Yes.
+Looks good.
 
 Reviewed-by: Dan Williams <dan.j.williams@intel.com>
