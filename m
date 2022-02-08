@@ -2,77 +2,43 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 178954B01BD
-	for <lists+nouveau@lfdr.de>; Thu, 10 Feb 2022 02:00:50 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8BF734B01AC
+	for <lists+nouveau@lfdr.de>; Thu, 10 Feb 2022 02:00:31 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A668910E6D7;
-	Thu, 10 Feb 2022 01:00:21 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D634410E3C8;
+	Thu, 10 Feb 2022 01:00:20 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 314 seconds by postgrey-1.36 at gabe;
- Mon, 07 Feb 2022 16:41:12 UTC
-Received: from wnew4-smtp.messagingengine.com (wnew4-smtp.messagingengine.com
- [64.147.123.18])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 4E42410E15E
- for <nouveau@lists.freedesktop.org>; Mon,  7 Feb 2022 16:41:12 +0000 (UTC)
-Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
- by mailnew.west.internal (Postfix) with ESMTP id 5A8582B0014D;
- Mon,  7 Feb 2022 11:35:57 -0500 (EST)
-Received: from mailfrontend1 ([10.202.2.162])
- by compute4.internal (MEProxy); Mon, 07 Feb 2022 11:35:58 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cerno.tech; h=cc
- :cc:content-transfer-encoding:date:date:from:from:in-reply-to
- :in-reply-to:message-id:mime-version:references:reply-to:sender
- :subject:subject:to:to; s=fm2; bh=RkfLFhsT0oeGyH5Q3NR1vzRXIXUZ5k
- WakkOr/SvCplw=; b=JpWwuFwE/j/V04CJHDv3wX6V0EFJqQgjmMIIv1jPDGhGZ1
- /k9gGwSmkz/Unlvo+DUYd2o2YIEz2IgqzssdY3BR3U45fnIUqZIGQX8Qn2IqjI5f
- pMwe0vLbTpx6wnZAWRAEAZOA2SAsaQ/Kv447OwvdHegl995Xe/d+6rUM+rPAXnCK
- i+KsfpnnsPtp+GqUKsQ08QFYA04LAEfOCOZZvXuQhz+VcxUBQMXSRltlMWnPUsaf
- 0WnLKkhPImhe7BBhma4XHUtgUhXUH/2kXeusX7mnGPdiOvbdqexDekyL0eN+RaeM
- /RywVkcoNtf6Bq/kHZWwATwUB427oJIZjda+CR5g==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-transfer-encoding:date:date
- :from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:sender:subject:subject:to:to:x-me-proxy
- :x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; bh=RkfLFh
- sT0oeGyH5Q3NR1vzRXIXUZ5kWakkOr/SvCplw=; b=nTDNgBD6enNdVjyZ7eQNR3
- 63bAs193AjFl7nFO48OejRLSgFPXpexTOjM311Xk2yKI6iBr1UZysd+mgCMZg/bS
- d/pMr/hgqOCwnRUB+23RW4DnNu2Jn32D5Gt9xBSzsJ6erwq+Hk8OBpqKHOTH3dDz
- 0CD/55FSAYILCAPvov76xCVkjIhwL45KzgYxLrq/49sv7iZvi0RQvN2sn/UaHiZY
- 7rtsbx6r+wKoI2sobPeOE40Nd51UBFqW8UwYporQa972gSRvtfDVZTAyUPZkbMrA
- YcSVtKw9mGBzsimPj2uv6WBtYJ90Ychr4bJusNF4Bwp3mbfc464/sX7VUHdB+M4w
- ==
-X-ME-Sender: <xms:bEoBYjuyiyJGb2n7FMK24TaKN7ay5yhytj7BprlBrnq5Ex3rwEPoHQ>
- <xme:bEoBYkcB9vdvVP_HM2SvkLdOQIC_XknUadgZlU_Ir5wWmKu3rM34cBaemPrm6Buaq
- GVUDThCt2DL-4VBH6g>
-X-ME-Received: <xmr:bEoBYmytuE_LlLb4JHkV5zY8AkNG_3reaqHSn_M9Gh_tOpJBW_KKP4ROk_cH__QlRNLW0RedXPgKd5bywpOjvIYo4EHU7pTe0at46vw>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvvddrheehgdekjecutefuodetggdotefrodftvf
- curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
- uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
- fjughrpefhvffufffkofgjfhgggfestdekredtredttdenucfhrhhomhepofgrgihimhgv
- ucftihhprghrugcuoehmrgigihhmvgestggvrhhnohdrthgvtghhqeenucggtffrrghtth
- gvrhhnpedvkeelveefffekjefhffeuleetleefudeifeehuddugffghffhffehveevheeh
- vdenucevlhhushhtvghrufhiiigvpeegnecurfgrrhgrmhepmhgrihhlfhhrohhmpehmrg
- igihhmvgestggvrhhnohdrthgvtghh
-X-ME-Proxy: <xmx:bEoBYiNL5KmMiKjuLz5bhmwid_ngNA3kiZNcD_zbsUOSUJY1ubcWZQ>
- <xmx:bEoBYj80PUzuZRJI5tDiY7m1sAMxcC9OMxu2h4FXZwJFjLoyReL1pg>
- <xmx:bEoBYiV1-r-N0TiqR5iHpSZ37s1aOPcrLV67PDkv4wwECOH-daxzdw>
- <xmx:bEoBYmVQARFjq16iioq1RSH2_U-Yri-kUSUMixPmV6Os2Nw7sfKs39vS4P0>
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
- 7 Feb 2022 11:35:56 -0500 (EST)
-From: Maxime Ripard <maxime@cerno.tech>
-To: Daniel Vetter <daniel.vetter@intel.com>,
-	David Airlie <airlied@linux.ie>
-Date: Mon,  7 Feb 2022 17:35:05 +0100
-Message-Id: <20220207163515.1038648-14-maxime@cerno.tech>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20220207163515.1038648-1-maxime@cerno.tech>
-References: <20220207163515.1038648-1-maxime@cerno.tech>
+X-Greylist: delayed 1142 seconds by postgrey-1.36 at gabe;
+ Tue, 08 Feb 2022 03:22:42 UTC
+Received: from szxga02-in.huawei.com (szxga02-in.huawei.com [45.249.212.188])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 785CD10E280;
+ Tue,  8 Feb 2022 03:22:42 +0000 (UTC)
+Received: from canpemm500002.china.huawei.com (unknown [172.30.72.57])
+ by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4Jt78W1rN6z9rvT;
+ Tue,  8 Feb 2022 11:02:03 +0800 (CST)
+Received: from [10.174.177.76] (10.174.177.76) by
+ canpemm500002.china.huawei.com (7.192.104.244) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2308.21; Tue, 8 Feb 2022 11:03:33 +0800
+To: Christoph Hellwig <hch@lst.de>
+References: <20220207063249.1833066-1-hch@lst.de>
+From: Miaohe Lin <linmiaohe@huawei.com>
+Message-ID: <8efd8321-8f0b-e5c3-8837-b0fe62f36c14@huawei.com>
+Date: Tue, 8 Feb 2022 11:03:32 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.6.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <20220207063249.1833066-1-hch@lst.de>
+Content-Type: text/plain; charset="utf-8"
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.174.177.76]
+X-ClientProxiedBy: dggems701-chm.china.huawei.com (10.3.19.178) To
+ canpemm500002.china.huawei.com (7.192.104.244)
+X-CFilter-Loop: Reflected
 X-Mailman-Approved-At: Thu, 10 Feb 2022 01:00:19 +0000
-Subject: [Nouveau] [PATCH 13/23] drm/nouveau/kms: Remove redundant zpos
- initialisation
+Subject: Re: [Nouveau] start sorting out the ZONE_DEVICE refcount mess
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -84,43 +50,59 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Dom Cobley <dom@raspberrypi.com>, Tim Gover <tim.gover@raspberrypi.com>,
- nouveau@lists.freedesktop.org,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- dri-devel@lists.freedesktop.org, Maxime Ripard <maxime@cerno.tech>,
- Phil Elwell <phil@raspberrypi.com>, Ben Skeggs <bskeggs@redhat.com>
+Cc: nvdimm@lists.linux.dev, Ralph Campbell <rcampbell@nvidia.com>,
+ Alistair Popple <apopple@nvidia.com>, dri-devel@lists.freedesktop.org,
+ linux-mm@kvack.org, nouveau@lists.freedesktop.org,
+ Felix Kuehling <Felix.Kuehling@amd.com>, "Pan, Xinhui" <Xinhui.Pan@amd.com>,
+ Dan Williams <dan.j.williams@intel.com>, linux-kernel@vger.kernel.org,
+ amd-gfx@lists.freedesktop.org, Jason Gunthorpe <jgg@ziepe.ca>,
+ Ben Skeggs <bskeggs@redhat.com>, Alex Deucher <alexander.deucher@amd.com>,
+ Andrew Morton <akpm@linux-foundation.org>,
+ Logan Gunthorpe <logang@deltatee.com>,
+ =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-The nouveau KMS driver will call drm_plane_create_zpos_property() with
-an init value depending on the plane purpose.
+On 2022/2/7 14:32, Christoph Hellwig wrote:
+> Hi all,
+> 
+> this series removes the offset by one refcount for ZONE_DEVICE pages
+> that are freed back to the driver owning them, which is just device
+> private ones for now, but also the planned device coherent pages
+> and the ehanced p2p ones pending.
+> 
 
-Since the initial value wasn't carried over in the state, the driver had
-to set it again in nv50_wndw_reset(). However, the helpers have been
-adjusted to set it properly at reset, so this is not needed anymore.
+Many thanks for doing this, I remember the hard time when I read the relevant code. :)
 
-Cc: nouveau@lists.freedesktop.org
-Cc: Ben Skeggs <bskeggs@redhat.com>
-Cc: Karol Herbst <kherbst@redhat.com>
-Cc: Lyude Paul <lyude@redhat.com>
-Signed-off-by: Maxime Ripard <maxime@cerno.tech>
----
- drivers/gpu/drm/nouveau/dispnv50/wndw.c | 2 --
- 1 file changed, 2 deletions(-)
-
-diff --git a/drivers/gpu/drm/nouveau/dispnv50/wndw.c b/drivers/gpu/drm/nouveau/dispnv50/wndw.c
-index 133c8736426a..0c1a2ea0ed04 100644
---- a/drivers/gpu/drm/nouveau/dispnv50/wndw.c
-+++ b/drivers/gpu/drm/nouveau/dispnv50/wndw.c
-@@ -635,8 +635,6 @@ nv50_wndw_reset(struct drm_plane *plane)
- 		plane->funcs->atomic_destroy_state(plane, plane->state);
- 
- 	__drm_atomic_helper_plane_reset(plane, &asyw->state);
--	plane->state->zpos = nv50_wndw_zpos_default(plane);
--	plane->state->normalized_zpos = nv50_wndw_zpos_default(plane);
- }
- 
- static void
--- 
-2.34.1
+> It does not address the fsdax pages yet, which will be attacked in a
+> follow on series.
+> 
+> Diffstat:
+>  arch/arm64/mm/mmu.c                      |    1 
+>  arch/powerpc/kvm/book3s_hv_uvmem.c       |    1 
+>  drivers/gpu/drm/amd/amdkfd/kfd_migrate.c |    2 
+>  drivers/gpu/drm/amd/amdkfd/kfd_priv.h    |    1 
+>  drivers/gpu/drm/drm_cache.c              |    2 
+>  drivers/gpu/drm/nouveau/nouveau_dmem.c   |    3 -
+>  drivers/gpu/drm/nouveau/nouveau_svm.c    |    1 
+>  drivers/infiniband/core/rw.c             |    1 
+>  drivers/nvdimm/pmem.h                    |    1 
+>  drivers/nvme/host/pci.c                  |    1 
+>  drivers/nvme/target/io-cmd-bdev.c        |    1 
+>  fs/Kconfig                               |    2 
+>  fs/fuse/virtio_fs.c                      |    1 
+>  include/linux/hmm.h                      |    9 ----
+>  include/linux/memremap.h                 |   22 +++++++++-
+>  include/linux/mm.h                       |   59 ++++-------------------------
+>  lib/test_hmm.c                           |    4 +
+>  mm/Kconfig                               |    4 -
+>  mm/internal.h                            |    2 
+>  mm/memcontrol.c                          |   11 +----
+>  mm/memremap.c                            |   63 ++++++++++++++++---------------
+>  mm/migrate.c                             |    6 --
+>  mm/swap.c                                |   49 ++----------------------
+>  23 files changed, 90 insertions(+), 157 deletions(-)
+> 
+> .
+> 
 
