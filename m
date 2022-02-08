@@ -2,37 +2,67 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1B73B4AD7B4
-	for <lists+nouveau@lfdr.de>; Tue,  8 Feb 2022 12:42:44 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 768D44AD83E
+	for <lists+nouveau@lfdr.de>; Tue,  8 Feb 2022 13:21:47 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 4A70610E3A6;
-	Tue,  8 Feb 2022 11:42:42 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6DEC710E38E;
+	Tue,  8 Feb 2022 12:21:40 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
- by gabe.freedesktop.org (Postfix) with ESMTPS id A636B10E3A6;
- Tue,  8 Feb 2022 11:42:40 +0000 (UTC)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id 138E5B81A82;
- Tue,  8 Feb 2022 11:42:39 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E433CC004E1;
- Tue,  8 Feb 2022 11:42:34 +0000 (UTC)
-Message-ID: <aa1312fc-197b-c1ab-6a18-369d49c1e8f8@xs4all.nl>
-Date: Tue, 8 Feb 2022 12:42:33 +0100
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id DD66110E38E
+ for <nouveau@lists.freedesktop.org>; Tue,  8 Feb 2022 12:21:38 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1644322898;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=+Mdb5Ebivxr6jzHOzSN/tIiK6XfSCOdpNYf9wIWORf4=;
+ b=HUNlfGU3yBltsWdais2WIAjeQeAMeB/hHok/1Dd4acEZMpfPl/1IS9PtzoT855WgKTFNyB
+ kXSpdjC8qMmoEGKlI00BlzGqQmMagBHth8yet3uE6NUX7gJfYUbD7bjpWSDTkNQ/F2WQQT
+ qYJbI6WOZekmN59tmsLw6++GT+t0dQE=
+Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
+ [209.85.128.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-413-ifbpXNHVMT6MAgKLCNKeOw-1; Tue, 08 Feb 2022 07:21:32 -0500
+X-MC-Unique: ifbpXNHVMT6MAgKLCNKeOw-1
+Received: by mail-wm1-f71.google.com with SMTP id
+ l20-20020a05600c1d1400b0035153bf34c3so980021wms.2
+ for <nouveau@lists.freedesktop.org>; Tue, 08 Feb 2022 04:21:31 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=+Mdb5Ebivxr6jzHOzSN/tIiK6XfSCOdpNYf9wIWORf4=;
+ b=1NqSPv12zR1KPHT4gaj7qdk2z7SnDbzxwVAM4CoOLYSvIj2kkhi3/5P2mJIee/2VIP
+ Cnw1xOIlqZNCnLtD/Q7eFVHeErbGGT0FJvWoZgbiibQtrH+Y/0YgYBcWBraLKQYzYfdg
+ +8/Jn9AO4zWAynQmCSCCdCUxpdu28xk3erI6rGxAiavq735y+GhYratOnqv24DHRzqX1
+ 88DVk8G7RbYkVk2yKyInwV3NKTwb0TdpYK3qIgbjG6gGKztK/DFimaZme1TmkwWnTTOn
+ wqrX6PgIOZhFwz6dNwIMW55G+dAd2+hP12khHTvzSkDA0jKzWp3cCpxsGDqVpO6waQ7x
+ zNPw==
+X-Gm-Message-State: AOAM530YIbHauk+Sj/xzZMoV9wBzAY1Dso8CLC1G0ZWDYgFb6lg4ymjc
+ YwrTAfmj7s4OfinNy/sxYe9C32fhlGByy1FFDjKrR+s+cNFfKvo7pUbJcC/Fvxwu/Ioa1zqznVu
+ +HE1Azs1DdyqtN9IEDFYapQ2RlYwSrCf2u47FBzRunA==
+X-Received: by 2002:adf:e281:: with SMTP id v1mr3333552wri.308.1644322890911; 
+ Tue, 08 Feb 2022 04:21:30 -0800 (PST)
+X-Google-Smtp-Source: ABdhPJyLlALWJQvkTxajX4mY5wFPC0i9Cbyibc6vh+dA8xRid1wKDVpfMqtwnuSqGnDZsRaAsQEg1IKxzDseghgHQVU=
+X-Received: by 2002:adf:e281:: with SMTP id v1mr3333537wri.308.1644322890725; 
+ Tue, 08 Feb 2022 04:21:30 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.5.1
-Content-Language: en-US
-To: Lucas De Marchi <lucas.demarchi@intel.com>, linux-kernel@vger.kernel.org, 
- dri-devel@lists.freedesktop.org, intel-gfx@lists.freedesktop.org
-References: <20220204170541.829227-1-lucas.demarchi@intel.com>
-From: Hans Verkuil <hverkuil-cisco@xs4all.nl>
-In-Reply-To: <20220204170541.829227-1-lucas.demarchi@intel.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Subject: Re: [Nouveau] [PATCH v4] dma-buf-map: Rename to iosys-map
+References: <20220204180504.328999-1-lyude@redhat.com>
+In-Reply-To: <20220204180504.328999-1-lyude@redhat.com>
+From: Karol Herbst <kherbst@redhat.com>
+Date: Tue, 8 Feb 2022 13:21:12 +0100
+Message-ID: <CACO55ttjtNW9Gx6pJegGD+r37j53Do+jc5xoyTFf8aXaBt5y-g@mail.gmail.com>
+To: Lyude Paul <lyude@redhat.com>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=kherbst@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="UTF-8"
+Subject: Re: [Nouveau] [PATCH] drm/nouveau/backlight: Fix LVDS backlight
+ detection on some laptops
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -44,160 +74,54 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Jonathan Corbet <corbet@lwn.net>, airlied@linux.ie,
- linux-doc@vger.kernel.org, christian.koenig@amd.com,
- srinivas.kandagatla@linaro.org, gregkh@linuxfoundation.org,
- nouveau@lists.freedesktop.org, sumit.semwal@linaro.org,
- linux-media@vger.kernel.org
+Cc: David Airlie <airlied@linux.ie>, nouveau <nouveau@lists.freedesktop.org>,
+ open list <linux-kernel@vger.kernel.org>, stable@vger.kernel.org,
+ dri-devel <dri-devel@lists.freedesktop.org>, Daniel Vetter <daniel@ffwll.ch>,
+ Ben Skeggs <bskeggs@redhat.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+On Fri, Feb 4, 2022 at 7:05 PM Lyude Paul <lyude@redhat.com> wrote:
+>
+> It seems that some laptops will report having both an eDP and LVDS
+> connector, even though only the LVDS connector is actually hooked up. This
+> can lead to issues with backlight registration if the eDP connector ends up
+> getting registered before the LVDS connector, as the backlight device will
+> then be registered to the eDP connector instead of the LVDS connector.
+>
+> So, fix this by only registering the backlight on connectors that are
+> reported as being connected.
+>
 
+I think the patch might risk breaking muxed systems where we have two
+GPUs, but.. the systems I know of have different ways of controlling
+the backlight anyway. So unless there is something I missed this is
 
-On 2/4/22 18:05, Lucas De Marchi wrote:
-> Rename struct dma_buf_map to struct iosys_map and corresponding APIs.
-> Over time dma-buf-map grew up to more functionality than the one used by
-> dma-buf: in fact it's just a shim layer to abstract system memory, that
-> can be accessed via regular load and store, from IO memory that needs to
-> be acessed via arch helpers.
-> 
-> The idea is to extend this API so it can fulfill other needs, internal
-> to a single driver. Example: in the i915 driver it's desired to share
-> the implementation for integrated graphics, which uses mostly system
-> memory, with discrete graphics, which may need to access IO memory.
-> 
-> The conversion was mostly done with the following semantic patch:
-> 
-> 	@r1@
-> 	@@
-> 	- struct dma_buf_map
-> 	+ struct iosys_map
-> 
-> 	@r2@
-> 	@@
-> 	(
-> 	- DMA_BUF_MAP_INIT_VADDR
-> 	+ IOSYS_MAP_INIT_VADDR
-> 	|
-> 	- dma_buf_map_set_vaddr
-> 	+ iosys_map_set_vaddr
-> 	|
-> 	- dma_buf_map_set_vaddr_iomem
-> 	+ iosys_map_set_vaddr_iomem
-> 	|
-> 	- dma_buf_map_is_equal
-> 	+ iosys_map_is_equal
-> 	|
-> 	- dma_buf_map_is_null
-> 	+ iosys_map_is_null
-> 	|
-> 	- dma_buf_map_is_set
-> 	+ iosys_map_is_set
-> 	|
-> 	- dma_buf_map_clear
-> 	+ iosys_map_clear
-> 	|
-> 	- dma_buf_map_memcpy_to
-> 	+ iosys_map_memcpy_to
-> 	|
-> 	- dma_buf_map_incr
-> 	+ iosys_map_incr
-> 	)
-> 
-> 	@@
-> 	@@
-> 	- #include <linux/dma-buf-map.h>
-> 	+ #include <linux/iosys-map.h>
-> 
-> Then some files had their includes adjusted and some comments were
-> update to remove mentions to dma-buf-map.
-> 
-> Since this is not specific to dma-buf anymore, move the documentation to
-> the "Bus-Independent Device Accesses" section.
-> 
-> v2:
->   - Squash patches
-> 
-> v3:
->   - Fix wrong removal of dma-buf.h from MAINTAINERS
->   - Move documentation from dma-buf.rst to device-io.rst
-> 
-> v4:
->   - Change documentation tile and level
-> 
-> Signed-off-by: Lucas De Marchi <lucas.demarchi@intel.com>
-> Acked-by: Christian König <christian.koenig@amd.com>
-> Acked-by: Sumit Semwal <sumit.semwal@linaro.org>
-> Acked-by: Thomas Zimmermann <tzimmermann@suse.de>
+Reviewed-by: Karol Herbst <kherbst@redhat.com>
+
+> Signed-off-by: Lyude Paul <lyude@redhat.com>
+> Fixes: 6eca310e8924 ("drm/nouveau/kms/nv50-: Add basic DPCD backlight support for nouveau")
+> Bugzilla: https://gitlab.freedesktop.org/drm/nouveau/-/issues/137
+> Cc: <stable@vger.kernel.org> # v5.15+
 > ---
->  Documentation/driver-api/device-io.rst        |   9 +
->  Documentation/driver-api/dma-buf.rst          |   9 -
->  Documentation/gpu/todo.rst                    |  20 +-
->  MAINTAINERS                                   |   9 +-
->  drivers/dma-buf/dma-buf.c                     |  22 +-
->  drivers/dma-buf/heaps/cma_heap.c              |  10 +-
->  drivers/dma-buf/heaps/system_heap.c           |  10 +-
->  drivers/gpu/drm/ast/ast_drv.h                 |   2 +-
->  drivers/gpu/drm/ast/ast_mode.c                |   8 +-
->  drivers/gpu/drm/drm_cache.c                   |  18 +-
->  drivers/gpu/drm/drm_client.c                  |   9 +-
->  drivers/gpu/drm/drm_fb_helper.c               |  12 +-
->  drivers/gpu/drm/drm_gem.c                     |  12 +-
->  drivers/gpu/drm/drm_gem_cma_helper.c          |   9 +-
->  drivers/gpu/drm/drm_gem_framebuffer_helper.c  |  16 +-
->  drivers/gpu/drm/drm_gem_shmem_helper.c        |  15 +-
->  drivers/gpu/drm/drm_gem_ttm_helper.c          |   4 +-
->  drivers/gpu/drm/drm_gem_vram_helper.c         |  25 +-
->  drivers/gpu/drm/drm_internal.h                |   6 +-
->  drivers/gpu/drm/drm_mipi_dbi.c                |   8 +-
->  drivers/gpu/drm/drm_prime.c                   |   4 +-
->  drivers/gpu/drm/etnaviv/etnaviv_drv.h         |   2 +-
->  drivers/gpu/drm/etnaviv/etnaviv_gem_prime.c   |   8 +-
->  drivers/gpu/drm/gud/gud_pipe.c                |   4 +-
->  drivers/gpu/drm/hyperv/hyperv_drm_modeset.c   |   5 +-
->  drivers/gpu/drm/i915/gem/i915_gem_dmabuf.c    |   8 +-
->  .../drm/i915/gem/selftests/i915_gem_dmabuf.c  |   6 +-
->  .../gpu/drm/i915/gem/selftests/mock_dmabuf.c  |   6 +-
->  drivers/gpu/drm/lima/lima_gem.c               |   3 +-
->  drivers/gpu/drm/lima/lima_sched.c             |   4 +-
->  drivers/gpu/drm/mediatek/mtk_drm_gem.c        |   7 +-
->  drivers/gpu/drm/mediatek/mtk_drm_gem.h        |   5 +-
->  drivers/gpu/drm/mgag200/mgag200_mode.c        |   4 +-
->  drivers/gpu/drm/msm/msm_drv.h                 |   4 +-
->  drivers/gpu/drm/msm/msm_gem_prime.c           |   6 +-
->  drivers/gpu/drm/panfrost/panfrost_perfcnt.c   |  13 +-
->  drivers/gpu/drm/qxl/qxl_display.c             |   8 +-
->  drivers/gpu/drm/qxl/qxl_draw.c                |   6 +-
->  drivers/gpu/drm/qxl/qxl_drv.h                 |  10 +-
->  drivers/gpu/drm/qxl/qxl_object.c              |   8 +-
->  drivers/gpu/drm/qxl/qxl_object.h              |   4 +-
->  drivers/gpu/drm/qxl/qxl_prime.c               |   4 +-
->  drivers/gpu/drm/radeon/radeon_gem.c           |   1 +
->  drivers/gpu/drm/rockchip/rockchip_drm_gem.c   |   9 +-
->  drivers/gpu/drm/rockchip/rockchip_drm_gem.h   |   5 +-
->  drivers/gpu/drm/tegra/gem.c                   |  10 +-
->  drivers/gpu/drm/tiny/cirrus.c                 |   8 +-
->  drivers/gpu/drm/tiny/gm12u320.c               |   7 +-
->  drivers/gpu/drm/ttm/ttm_bo_util.c             |  16 +-
->  drivers/gpu/drm/ttm/ttm_resource.c            |  42 +--
->  drivers/gpu/drm/ttm/ttm_tt.c                  |   8 +-
->  drivers/gpu/drm/udl/udl_modeset.c             |   3 +-
->  drivers/gpu/drm/vboxvideo/vbox_mode.c         |   4 +-
->  drivers/gpu/drm/vkms/vkms_composer.c          |   4 +-
->  drivers/gpu/drm/vkms/vkms_drv.h               |   6 +-
->  drivers/gpu/drm/vkms/vkms_plane.c             |   2 +-
->  drivers/gpu/drm/vkms/vkms_writeback.c         |   2 +-
->  drivers/gpu/drm/xen/xen_drm_front_gem.c       |   7 +-
->  drivers/gpu/drm/xen/xen_drm_front_gem.h       |   6 +-
+>  drivers/gpu/drm/nouveau/nouveau_backlight.c | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+>
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_backlight.c b/drivers/gpu/drm/nouveau/nouveau_backlight.c
+> index ae2f2abc8f5a..6af12dc99d7f 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_backlight.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_backlight.c
+> @@ -294,7 +294,8 @@ nv50_backlight_init(struct nouveau_backlight *bl,
+>         struct nouveau_drm *drm = nouveau_drm(nv_encoder->base.base.dev);
+>         struct nvif_object *device = &drm->client.device.object;
+>
+> -       if (!nvif_rd32(device, NV50_PDISP_SOR_PWM_CTL(ffs(nv_encoder->dcb->or) - 1)))
+> +       if (!nvif_rd32(device, NV50_PDISP_SOR_PWM_CTL(ffs(nv_encoder->dcb->or) - 1)) ||
+> +           nv_conn->base.status != connector_status_connected)
+>                 return -ENODEV;
+>
+>         if (nv_conn->type == DCB_CONNECTOR_eDP) {
+> --
+> 2.34.1
+>
 
-For these three:
-
->  .../common/videobuf2/videobuf2-dma-contig.c   |   8 +-
->  .../media/common/videobuf2/videobuf2-dma-sg.c |   9 +-
->  .../common/videobuf2/videobuf2-vmalloc.c      |  11 +-
-
-Acked-by: Hans Verkuil <hverkuil-cisco@xs4all.nl>
-
-Regards,
-
-	Hans
