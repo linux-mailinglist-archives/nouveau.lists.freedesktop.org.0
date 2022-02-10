@@ -2,35 +2,35 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8EEB14B06F2
-	for <lists+nouveau@lfdr.de>; Thu, 10 Feb 2022 08:28:54 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5EC7D4B06F5
+	for <lists+nouveau@lfdr.de>; Thu, 10 Feb 2022 08:28:58 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 07A8C10E735;
-	Thu, 10 Feb 2022 07:28:47 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id AD5D810E734;
+	Thu, 10 Feb 2022 07:28:49 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from bombadil.infradead.org (bombadil.infradead.org
  [IPv6:2607:7c80:54:e::133])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B33AD10E72C;
- Thu, 10 Feb 2022 07:28:45 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6499910E72C;
+ Thu, 10 Feb 2022 07:28:48 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
  :Reply-To:Content-Type:Content-ID:Content-Description;
- bh=L7OGejZbRu+QgE+4KbqRy4msYJogVFzOR8WFdCl8/80=; b=eKKKgKkuaE01+Nvoo8eKckwrla
- uHDvbQKsY1I+8rHUnmKTrANleI/peq39kFDeuY9tfC/pAUZX9+6Gh58/9sMa16SA31DFT/DHHENpA
- wB44giC+sRhFyvdNFVP150JQjHDq4ASoixuwQ+cJain6eH0Zdy5DudB1ke6SlJbIedExUtLO5vqmv
- qYigZr+KlRbUSfyG4YzU4u0fld+gt+XTEqror/Gjkqn5JzjKh6RYbq1mBq8PHl5lg0T0vZz0Cuoc/
- b87JAs/e+UYwAe7PWl2Tn7sLUeRU+VtT8yM7wXK7xM+5cuAJK4WWiFz4DBXUjNTK06Z70+5fWunTx
- pmaHhCvw==;
+ bh=kwsvzUopQYmLEvfJMWiUtpLaBV1PgK/k5zUYKi0uPVU=; b=4pvndCL1lsKtjRKUxsi/J7Dxvo
+ nVmiNGk6UXupKHW1OLXR+4B82dW07jzHZuBVo0KXBKlc1qNmC8wL4iAMhe88kOdH+ywDPbwwF9isJ
+ zbF7vyHcH7ZB+oAO5RJzYzy8W71AUbpN1yu6LoRPEFGk3WGoUPuwiizHeTv5+Dxm5s9U8hzEyCOt8
+ I8EI2xE1INgu5bUL41ku3jeeQ+CB/t+j7R8IMGT6MS1jG+SWAmjnYIKA+e1oWVu8ukLRztAFH6T7V
+ 8EjsqXGdggi7lWnCIIbd6CMvnXjnA8fpTkgrBHYPiQATMsskbuYK1ZK5kbfbgLh9UO0N1uGxviSbZ
+ SSBDKEhw==;
 Received: from [2001:4bb8:188:3efc:8014:b2f2:fdfd:57ea] (helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1nI3sY-002rl0-02; Thu, 10 Feb 2022 07:28:34 +0000
+ id 1nI3sa-002rlD-Of; Thu, 10 Feb 2022 07:28:37 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Andrew Morton <akpm@linux-foundation.org>,
  Dan Williams <dan.j.williams@intel.com>
-Date: Thu, 10 Feb 2022 08:28:02 +0100
-Message-Id: <20220210072828.2930359-2-hch@lst.de>
+Date: Thu, 10 Feb 2022 08:28:03 +0100
+Message-Id: <20220210072828.2930359-3-hch@lst.de>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20220210072828.2930359-1-hch@lst.de>
 References: <20220210072828.2930359-1-hch@lst.de>
@@ -38,8 +38,8 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
  bombadil.infradead.org. See http://www.infradead.org/rpr.html
-Subject: [Nouveau] [PATCH 01/27] mm: remove a pointless CONFIG_ZONE_DEVICE
- check in memremap_pages
+Subject: [Nouveau] [PATCH 02/27] mm: remove the __KERNEL__ guard from
+ <linux/mm.h>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -64,8 +64,7 @@ Cc: nvdimm@lists.linux.dev, Ralph Campbell <rcampbell@nvidia.com>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-memremap.c is only built when CONFIG_ZONE_DEVICE is set, so remove
-the superflous extra check.
+__KERNEL__ ifdefs don't make sense outside of include/uapi/.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 Reviewed-by: Logan Gunthorpe <logang@deltatee.com>
@@ -74,23 +73,29 @@ Reviewed-by: Chaitanya Kulkarni <kch@nvidia.com>
 Reviewed-by: Muchun Song <songmuchun@bytedance.com>
 Reviewed-by: Dan Williams <dan.j.williams@intel.com>
 ---
- mm/memremap.c | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+ include/linux/mm.h | 4 ----
+ 1 file changed, 4 deletions(-)
 
-diff --git a/mm/memremap.c b/mm/memremap.c
-index 6aa5f0c2d11fda..5f04a0709e436e 100644
---- a/mm/memremap.c
-+++ b/mm/memremap.c
-@@ -328,8 +328,7 @@ void *memremap_pages(struct dev_pagemap *pgmap, int nid)
- 		}
- 		break;
- 	case MEMORY_DEVICE_FS_DAX:
--		if (!IS_ENABLED(CONFIG_ZONE_DEVICE) ||
--		    IS_ENABLED(CONFIG_FS_DAX_LIMITED)) {
-+		if (IS_ENABLED(CONFIG_FS_DAX_LIMITED)) {
- 			WARN(1, "File system DAX not supported\n");
- 			return ERR_PTR(-EINVAL);
- 		}
+diff --git a/include/linux/mm.h b/include/linux/mm.h
+index 213cc569b19223..7b46174989b086 100644
+--- a/include/linux/mm.h
++++ b/include/linux/mm.h
+@@ -3,9 +3,6 @@
+ #define _LINUX_MM_H
+ 
+ #include <linux/errno.h>
+-
+-#ifdef __KERNEL__
+-
+ #include <linux/mmdebug.h>
+ #include <linux/gfp.h>
+ #include <linux/bug.h>
+@@ -3381,5 +3378,4 @@ madvise_set_anon_name(struct mm_struct *mm, unsigned long start,
+ }
+ #endif
+ 
+-#endif /* __KERNEL__ */
+ #endif /* _LINUX_MM_H */
 -- 
 2.30.2
 
