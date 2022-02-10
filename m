@@ -2,41 +2,100 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6A4874B01C4
-	for <lists+nouveau@lfdr.de>; Thu, 10 Feb 2022 02:00:54 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C0E7D4B031D
+	for <lists+nouveau@lfdr.de>; Thu, 10 Feb 2022 03:11:04 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B6AB310E73B;
-	Thu, 10 Feb 2022 01:00:24 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 432E510E251;
+	Thu, 10 Feb 2022 02:11:01 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 305 seconds by postgrey-1.36 at gabe;
- Wed, 09 Feb 2022 06:59:00 UTC
-Received: from out2.migadu.com (out2.migadu.com [188.165.223.204])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 2258310E364;
- Wed,  9 Feb 2022 06:59:00 +0000 (UTC)
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
- include these headers.
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
- t=1644389631;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=pUlfTRQkrTdTQFBKHqDRrCVlXpII0vP2L2obohCfw1o=;
- b=KS5D3kMy2jy60z6MS+GNQCgowsvHdb2pMuA/hNuwvbeJuI0PaK1fHQcATmDtYJvCrwVPdN
- 0GKbm3QiiKjUgdx/M0lJlcRcCFxmZcKKjNMYPwLhUMvLLNGB9II1ZG1CLeSQete0Qw7YFE
- Fy/dccLiu4yT+06N70lvVn3J2uwLVDc=
-From: Cai Huoqing <cai.huoqing@linux.dev>
-To: cai.huoqing@linux.dev
-Date: Wed,  9 Feb 2022 14:53:19 +0800
-Message-Id: <20220209065322.43938-1-cai.huoqing@linux.dev>
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam11on2075.outbound.protection.outlook.com [40.107.236.75])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8C36210E417;
+ Thu, 10 Feb 2022 02:11:00 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=izrrKvUCUPnHOXPOPiby3Z+WmB4eCIGuADi6NZqqGpHL38BnsrSK5U6EhrkSeUKIlwr7H+X2WF/h773GK11MItaVi2gByPaQZz4ESLb4+RIiwG2Pwp59V1F4vuLtNpjBa3UzeBMIyu4Arho67FvFrieTgVmSUumq0dujCjFxeWwbLaKR1jDI0hCIByM55JougUtZxf5v7BpA+l7K0eFSV3yaydwR7oxF2ujUB8uRVgNMtRflNnEVVDScgxl3P1JkCB3Ajohqf8rlNT7GQWvIAsEhtDrX3cS3Fv0ZBgj30L5c7RKUNucHjjGEKfPAwlZOuKnh7lK6mfo8OsJ9gjlznA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=c5hxNW+rRpX9UCXoSoQTQgCB4ZjKNsGvkZ7wisZKC4w=;
+ b=jUY+CaxLEpBnoll4pDISpkhVDUjEhnfvrLCandubYE26QC3EOLHOK7T79BW3uBLBsj0aJ2RH8Z0dsLO4yLwL4EO1KfOjAHxqFMwBPPEAc4w3U5JqPYmbOQkvpY9PDZkWgCxP0Uetesf7wnhRTxWWJMR4hQNRaBymQGhvnkpNiy83rZE8DHv7zakCWsR/VgH8vcY7neomtUYmB7Fq42ZS4WBkCxnWP9IR78WqSa5OchB/wB9o32sKDcZklvdCf7YBb1kxsCHUDsvoJ0FvBtRT4khfKjUZ9B5Ywp7EV9ZkRmxVWbBZQj8n48ErdmnBoEvzQB9xATtsyis+qjC8yDfUyQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 12.22.5.236) smtp.rcpttodomain=amd.com smtp.mailfrom=nvidia.com; dmarc=pass
+ (p=reject sp=reject pct=100) action=none header.from=nvidia.com; dkim=none
+ (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=c5hxNW+rRpX9UCXoSoQTQgCB4ZjKNsGvkZ7wisZKC4w=;
+ b=ql7BRuNQZSFG3puyM9p310yE3QqIkDtxyIzN8wXd+GyZSAL6XRENAs4JOao1ZES3utRwsTlWWP7zkR4svIYGNErtGqTEe9CcjejfPsb/wYAZP9aGE8xtNAgVRW7gMsvhhrGRG9lhym/bJmCcT7iyt4wMd5l3OglpSzcPV+BjMQF5Vd8qsIrlzWVDN3bn96S48kwUdD1W0ENmqw+jMx0+3wy2HunTB9r0E3wQT0RSaRj8M6hkq4TueNrDeqGAINyiaGkYpv78tifM9vYebnk8oOZjdYf5SIHhCepvjCv93Fa/Ry1dU1TkSrPftnub1580+s6XeiFWuaJ8b5oGaKbxyw==
+Received: from MWHPR12CA0046.namprd12.prod.outlook.com (2603:10b6:301:2::32)
+ by DM4PR12MB5771.namprd12.prod.outlook.com (2603:10b6:8:62::16) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4951.18; Thu, 10 Feb
+ 2022 02:10:56 +0000
+Received: from CO1NAM11FT057.eop-nam11.prod.protection.outlook.com
+ (2603:10b6:301:2:cafe::b1) by MWHPR12CA0046.outlook.office365.com
+ (2603:10b6:301:2::32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4975.11 via Frontend
+ Transport; Thu, 10 Feb 2022 02:10:56 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 12.22.5.236)
+ smtp.mailfrom=nvidia.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=nvidia.com;
+Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
+ 12.22.5.236 as permitted sender) receiver=protection.outlook.com;
+ client-ip=12.22.5.236; helo=mail.nvidia.com;
+Received: from mail.nvidia.com (12.22.5.236) by
+ CO1NAM11FT057.mail.protection.outlook.com (10.13.174.205) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id
+ 15.20.4975.11 via Frontend Transport; Thu, 10 Feb 2022 02:10:56 +0000
+Received: from rnnvmail201.nvidia.com (10.129.68.8) by DRHQMAIL109.nvidia.com
+ (10.27.9.19) with Microsoft SMTP Server (TLS) id 15.0.1497.18;
+ Thu, 10 Feb 2022 02:10:55 +0000
+Received: from nvdebian.localnet (10.126.230.35) by rnnvmail201.nvidia.com
+ (10.129.68.8) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.986.9; Wed, 9 Feb 2022
+ 18:10:49 -0800
+From: Alistair Popple <apopple@nvidia.com>
+To: Felix Kuehling <felix.kuehling@amd.com>, Christoph Hellwig <hch@lst.de>
+Date: Thu, 10 Feb 2022 13:10:47 +1100
+Message-ID: <2168128.7o4XcKHI9n@nvdebian>
+In-Reply-To: <20220209174836.GA24864@lst.de>
+References: <20220207063249.1833066-1-hch@lst.de>
+ <3287da2f-defa-9adb-e21c-c498972e674d@amd.com>
+ <20220209174836.GA24864@lst.de>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Migadu-Flow: FLOW_OUT
-X-Migadu-Auth-User: linux.dev
-X-Mailman-Approved-At: Thu, 10 Feb 2022 01:00:19 +0000
-Subject: [Nouveau] [PATCH] drm/nouveau: Remove the unused header file
- nvif/list.h
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
+X-Originating-IP: [10.126.230.35]
+X-ClientProxiedBy: rnnvmail203.nvidia.com (10.129.68.9) To
+ rnnvmail201.nvidia.com (10.129.68.8)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 4d7c9cef-e13c-4599-f916-08d9ec3a92b3
+X-MS-TrafficTypeDiagnostic: DM4PR12MB5771:EE_
+X-Microsoft-Antispam-PRVS: <DM4PR12MB5771A3DA99602901A43AB242DF2F9@DM4PR12MB5771.namprd12.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:7219;
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 9I3ue4yOTo/aDrX4T/6qYaFHwHIROxSDV7jcSGlX9W9v01YCFuovfgcJ6mMTXOtfIaSIpq9sqFgHSUovSLfWJBAXo5ykfynQ3T87VRcfZho9GeoA39NbQEnl9yXQplcQCzdoO56EwLIw+4pvVqoOcQpWcUUhA60hqQxAKOuN6Uqs5XdbD0bdcaokr/qxvk3wwbtoFO1TAk3h6jsLo63WNnjZsux207gyMdVaxkuz3xdhnvOpLwHnv9UVP2iPW/SQVhuv4K2LtJhyABpgKSbPQyKGdaExWLMJGKwEozW8GE0C/Y/2b1nfMxGHB6w3iw/7Hs4AVZGvdEn84HsLsa6ZDe+WW6EBCNfcPce7Z5oVjZiFHoh17ik9RC9LEkzfAMivPg1oQKHc0iNGbY5agwtkSTVMRSYbsaSTAVAd/ARLnNTOnjHsdoPnwdr+K85rZy7mbYoigFBTZR7oFL/yt4LJccbh+sN66y9qRuXN+nI8tG9bfecNGv7isqjwW0z7q+vdhj1GbkGPbcGceyIgQLseAZa5NMSvLAymYpCcBYqtNWnYvaQQ6Z+x5coZJB28XiP1VeR7TjpRxeO1ICVRuL5ESipA4bdM12dHm3uU03FTjH5pU5DjW6wzB9c0yRR2Kt6tqjxkuXqDe3jR1JpjEjFf1hG5gyM4p+eIn8syFDDObRMYuA/CaCifLx7uQaiyorW8LCGz25r8CiDsuOTUEoe4xG7oy5oHqZsFUP/bJqG9a8RZm4egPlsB8znVvZ4mUU8CAeEW/HdzZPt/rNmNEko4c7AKp5AKaiKvMP0IrV+goKVJMGyV2bIL/oShq64c8yKGPUyZSxQ9jpi10dkKIQevng==
+X-Forefront-Antispam-Report: CIP:12.22.5.236; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:mail.nvidia.com; PTR:InfoNoRecords; CAT:NONE;
+ SFS:(13230001)(4636009)(46966006)(36840700001)(40470700004)(110136005)(508600001)(316002)(33716001)(966005)(54906003)(40460700003)(9686003)(47076005)(8936002)(8676002)(2906002)(336012)(426003)(4326008)(82310400004)(16526019)(9576002)(36860700001)(186003)(26005)(356005)(5660300002)(7416002)(70586007)(86362001)(81166007)(70206006)(39026012)(36900700001);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Feb 2022 02:10:56.2068 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4d7c9cef-e13c-4599-f916-08d9ec3a92b3
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[12.22.5.236];
+ Helo=[mail.nvidia.com]
+X-MS-Exchange-CrossTenant-AuthSource: CO1NAM11FT057.eop-nam11.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB5771
+Subject: Re: [Nouveau] [PATCH 6/8] mm: don't include <linux/memremap.h> in
+ <linux/mm.h>
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -48,380 +107,80 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>
+Cc: nvdimm@lists.linux.dev, Ralph Campbell <rcampbell@nvidia.com>,
+ Christian =?ISO-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+ nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org, "Pan,
+ Xinhui" <Xinhui.Pan@amd.com>, linux-kernel@vger.kernel.org,
+ amd-gfx@lists.freedesktop.org, Christoph Hellwig <hch@lst.de>,
+ linux-mm@kvack.org, Jason Gunthorpe <jgg@ziepe.ca>,
+ Ben Skeggs <bskeggs@redhat.com>, Alex Deucher <alexander.deucher@amd.com>,
+ Andrew Morton <akpm@linux-foundation.org>,
+ Logan Gunthorpe <logang@deltatee.com>, Dan Williams <dan.j.williams@intel.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-The nouveau driver depends on include/linux/list.h instead of
-nvif/list.h, so remove the obstacle-nvif/list.h.
+On Thursday, 10 February 2022 4:48:36 AM AEDT Christoph Hellwig wrote:
+> On Mon, Feb 07, 2022 at 04:19:29PM -0500, Felix Kuehling wrote:
+> >
+> > Am 2022-02-07 um 01:32 schrieb Christoph Hellwig:
+> >> Move the check for the actual pgmap types that need the free at refcount
+> >> one behavior into the out of line helper, and thus avoid the need to
+> >> pull memremap.h into mm.h.
+> >>
+> >> Signed-off-by: Christoph Hellwig <hch@lst.de>
+> >
+> > The amdkfd part looks good to me.
+> >
+> > It looks like this patch is not based on Alex Sierra's coherent memory 
+> > series. He added two new helpers is_device_coherent_page and 
+> > is_dev_private_or_coherent_page that would need to be moved along with 
+> > is_device_private_page and is_pci_p2pdma_page.
+> 
+> FYI, here is a branch that contains a rebase of the coherent memory
+> related patches on top of this series:
+> 
+> http://git.infradead.org/users/hch/misc.git/shortlog/refs/heads/pgmap-refcount
+> 
+> I don't have a good way to test this, but I'll at least let the build bot
+> finish before sending it out (probably tomorrow).
 
-Signed-off-by: Cai Huoqing <cai.huoqing@linux.dev>
+Thanks, I ran up hmm-test which revealed a few minor problems with the rebase.
+Fixes below.
+
 ---
- drivers/gpu/drm/nouveau/include/nvif/list.h | 353 --------------------
- 1 file changed, 353 deletions(-)
- delete mode 100644 drivers/gpu/drm/nouveau/include/nvif/list.h
 
-diff --git a/drivers/gpu/drm/nouveau/include/nvif/list.h b/drivers/gpu/drm/nouveau/include/nvif/list.h
-deleted file mode 100644
-index 8af5d144ecb0..000000000000
---- a/drivers/gpu/drm/nouveau/include/nvif/list.h
-+++ /dev/null
-@@ -1,353 +0,0 @@
--/*
-- * Copyright © 2010 Intel Corporation
-- * Copyright © 2010 Francisco Jerez <currojerez@riseup.net>
-- *
-- * Permission is hereby granted, free of charge, to any person obtaining a
-- * copy of this software and associated documentation files (the "Software"),
-- * to deal in the Software without restriction, including without limitation
-- * the rights to use, copy, modify, merge, publish, distribute, sublicense,
-- * and/or sell copies of the Software, and to permit persons to whom the
-- * Software is furnished to do so, subject to the following conditions:
-- *
-- * The above copyright notice and this permission notice (including the next
-- * paragraph) shall be included in all copies or substantial portions of the
-- * Software.
-- *
-- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
-- * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
-- * IN THE SOFTWARE.
-- *
-- */
--
--/* Modified by Ben Skeggs <bskeggs@redhat.com> to match kernel list APIs */
--
--#ifndef _XORG_LIST_H_
--#define _XORG_LIST_H_
--
--/**
-- * @file Classic doubly-link circular list implementation.
-- * For real usage examples of the linked list, see the file test/list.c
-- *
-- * Example:
-- * We need to keep a list of struct foo in the parent struct bar, i.e. what
-- * we want is something like this.
-- *
-- *     struct bar {
-- *          ...
-- *          struct foo *list_of_foos; -----> struct foo {}, struct foo {}, struct foo{}
-- *          ...
-- *     }
-- *
-- * We need one list head in bar and a list element in all list_of_foos (both are of
-- * data type 'struct list_head').
-- *
-- *     struct bar {
-- *          ...
-- *          struct list_head list_of_foos;
-- *          ...
-- *     }
-- *
-- *     struct foo {
-- *          ...
-- *          struct list_head entry;
-- *          ...
-- *     }
-- *
-- * Now we initialize the list head:
-- *
-- *     struct bar bar;
-- *     ...
-- *     INIT_LIST_HEAD(&bar.list_of_foos);
-- *
-- * Then we create the first element and add it to this list:
-- *
-- *     struct foo *foo = malloc(...);
-- *     ....
-- *     list_add(&foo->entry, &bar.list_of_foos);
-- *
-- * Repeat the above for each element you want to add to the list. Deleting
-- * works with the element itself.
-- *      list_del(&foo->entry);
-- *      free(foo);
-- *
-- * Note: calling list_del(&bar.list_of_foos) will set bar.list_of_foos to an empty
-- * list again.
-- *
-- * Looping through the list requires a 'struct foo' as iterator and the
-- * name of the field the subnodes use.
-- *
-- * struct foo *iterator;
-- * list_for_each_entry(iterator, &bar.list_of_foos, entry) {
-- *      if (iterator->something == ...)
-- *             ...
-- * }
-- *
-- * Note: You must not call list_del() on the iterator if you continue the
-- * loop. You need to run the safe for-each loop instead:
-- *
-- * struct foo *iterator, *next;
-- * list_for_each_entry_safe(iterator, next, &bar.list_of_foos, entry) {
-- *      if (...)
-- *              list_del(&iterator->entry);
-- * }
-- *
-- */
--
--/**
-- * The linkage struct for list nodes. This struct must be part of your
-- * to-be-linked struct. struct list_head is required for both the head of the
-- * list and for each list node.
-- *
-- * Position and name of the struct list_head field is irrelevant.
-- * There are no requirements that elements of a list are of the same type.
-- * There are no requirements for a list head, any struct list_head can be a list
-- * head.
-- */
--struct list_head {
--    struct list_head *next, *prev;
--};
--
--/**
-- * Initialize the list as an empty list.
-- *
-- * Example:
-- * INIT_LIST_HEAD(&bar->list_of_foos);
-- *
-- * @param The list to initialized.
-- */
--#define LIST_HEAD_INIT(name) { &(name), &(name) }
--
--#define LIST_HEAD(name) \
--	struct list_head name = LIST_HEAD_INIT(name)
--
--static inline void
--INIT_LIST_HEAD(struct list_head *list)
--{
--    list->next = list->prev = list;
--}
--
--static inline void
--__list_add(struct list_head *entry,
--                struct list_head *prev, struct list_head *next)
--{
--    next->prev = entry;
--    entry->next = next;
--    entry->prev = prev;
--    prev->next = entry;
--}
--
--/**
-- * Insert a new element after the given list head. The new element does not
-- * need to be initialised as empty list.
-- * The list changes from:
-- *      head → some element → ...
-- * to
-- *      head → new element → older element → ...
-- *
-- * Example:
-- * struct foo *newfoo = malloc(...);
-- * list_add(&newfoo->entry, &bar->list_of_foos);
-- *
-- * @param entry The new element to prepend to the list.
-- * @param head The existing list.
-- */
--static inline void
--list_add(struct list_head *entry, struct list_head *head)
--{
--    __list_add(entry, head, head->next);
--}
--
--/**
-- * Append a new element to the end of the list given with this list head.
-- *
-- * The list changes from:
-- *      head → some element → ... → lastelement
-- * to
-- *      head → some element → ... → lastelement → new element
-- *
-- * Example:
-- * struct foo *newfoo = malloc(...);
-- * list_add_tail(&newfoo->entry, &bar->list_of_foos);
-- *
-- * @param entry The new element to prepend to the list.
-- * @param head The existing list.
-- */
--static inline void
--list_add_tail(struct list_head *entry, struct list_head *head)
--{
--    __list_add(entry, head->prev, head);
--}
--
--static inline void
--__list_del(struct list_head *prev, struct list_head *next)
--{
--    next->prev = prev;
--    prev->next = next;
--}
--
--/**
-- * Remove the element from the list it is in. Using this function will reset
-- * the pointers to/from this element so it is removed from the list. It does
-- * NOT free the element itself or manipulate it otherwise.
-- *
-- * Using list_del on a pure list head (like in the example at the top of
-- * this file) will NOT remove the first element from
-- * the list but rather reset the list as empty list.
-- *
-- * Example:
-- * list_del(&foo->entry);
-- *
-- * @param entry The element to remove.
-- */
--static inline void
--list_del(struct list_head *entry)
--{
--    __list_del(entry->prev, entry->next);
--}
--
--static inline void
--list_del_init(struct list_head *entry)
--{
--    __list_del(entry->prev, entry->next);
--    INIT_LIST_HEAD(entry);
--}
--
--static inline void list_move_tail(struct list_head *list,
--				  struct list_head *head)
--{
--	__list_del(list->prev, list->next);
--	list_add_tail(list, head);
--}
--
--/**
-- * Check if the list is empty.
-- *
-- * Example:
-- * list_empty(&bar->list_of_foos);
-- *
-- * @return True if the list contains one or more elements or False otherwise.
-- */
--static inline bool
--list_empty(struct list_head *head)
--{
--    return head->next == head;
--}
--
--/**
-- * Returns a pointer to the container of this list element.
-- *
-- * Example:
-- * struct foo* f;
-- * f = container_of(&foo->entry, struct foo, entry);
-- * assert(f == foo);
-- *
-- * @param ptr Pointer to the struct list_head.
-- * @param type Data type of the list element.
-- * @param member Member name of the struct list_head field in the list element.
-- * @return A pointer to the data struct containing the list head.
-- */
--#ifndef container_of
--#define container_of(ptr, type, member) \
--    (type *)((char *)(ptr) - (char *) &((type *)0)->member)
--#endif
--
--/**
-- * Alias of container_of
-- */
--#define list_entry(ptr, type, member) \
--    container_of(ptr, type, member)
--
--/**
-- * Retrieve the first list entry for the given list pointer.
-- *
-- * Example:
-- * struct foo *first;
-- * first = list_first_entry(&bar->list_of_foos, struct foo, list_of_foos);
-- *
-- * @param ptr The list head
-- * @param type Data type of the list element to retrieve
-- * @param member Member name of the struct list_head field in the list element.
-- * @return A pointer to the first list element.
-- */
--#define list_first_entry(ptr, type, member) \
--    list_entry((ptr)->next, type, member)
--
--/**
-- * Retrieve the last list entry for the given listpointer.
-- *
-- * Example:
-- * struct foo *first;
-- * first = list_last_entry(&bar->list_of_foos, struct foo, list_of_foos);
-- *
-- * @param ptr The list head
-- * @param type Data type of the list element to retrieve
-- * @param member Member name of the struct list_head field in the list element.
-- * @return A pointer to the last list element.
-- */
--#define list_last_entry(ptr, type, member) \
--    list_entry((ptr)->prev, type, member)
--
--#define __container_of(ptr, sample, member)				\
--    (void *)container_of((ptr), typeof(*(sample)), member)
--
--/**
-- * Loop through the list given by head and set pos to struct in the list.
-- *
-- * Example:
-- * struct foo *iterator;
-- * list_for_each_entry(iterator, &bar->list_of_foos, entry) {
-- *      [modify iterator]
-- * }
-- *
-- * This macro is not safe for node deletion. Use list_for_each_entry_safe
-- * instead.
-- *
-- * @param pos Iterator variable of the type of the list elements.
-- * @param head List head
-- * @param member Member name of the struct list_head in the list elements.
-- *
-- */
--#define list_for_each_entry(pos, head, member)				\
--    for (pos = __container_of((head)->next, pos, member);		\
--	 &pos->member != (head);					\
--	 pos = __container_of(pos->member.next, pos, member))
--
--/**
-- * Loop through the list, keeping a backup pointer to the element. This
-- * macro allows for the deletion of a list element while looping through the
-- * list.
-- *
-- * See list_for_each_entry for more details.
-- */
--#define list_for_each_entry_safe(pos, tmp, head, member)		\
--    for (pos = __container_of((head)->next, pos, member),		\
--	 tmp = __container_of(pos->member.next, pos, member);		\
--	 &pos->member != (head);					\
--	 pos = tmp, tmp = __container_of(pos->member.next, tmp, member))
--
--
--#define list_for_each_entry_reverse(pos, head, member)			\
--	for (pos = __container_of((head)->prev, pos, member);		\
--	     &pos->member != (head);					\
--	     pos = __container_of(pos->member.prev, pos, member))
--
--#define list_for_each_entry_continue(pos, head, member)			\
--	for (pos = __container_of(pos->member.next, pos, member);	\
--	     &pos->member != (head);					\
--	     pos = __container_of(pos->member.next, pos, member))
--
--#define list_for_each_entry_continue_reverse(pos, head, member)		\
--	for (pos = __container_of(pos->member.prev, pos, member);	\
--	     &pos->member != (head);					\
--	     pos = __container_of(pos->member.prev, pos, member))
--
--#define list_for_each_entry_from(pos, head, member)			\
--	for (;								\
--	     &pos->member != (head);					\
--	     pos = __container_of(pos->member.next, pos, member))
--
--#endif
--- 
-2.25.1
+diff --git a/mm/gup.c b/mm/gup.c
+index cbb49abb7992..8e85c9fb8df4 100644
+--- a/mm/gup.c
++++ b/mm/gup.c
+@@ -2007,7 +2007,6 @@ static long check_and_migrate_movable_pages(unsigned long nr_pages,
+ 	if (!ret && list_empty(&movable_page_list) && !isolation_error_count)
+ 		return nr_pages;
+ 
+-	ret = 0;
+ unpin_pages:
+ 	for (i = 0; i < nr_pages; i++)
+ 		if (!pages[i])
+diff --git a/mm/migrate.c b/mm/migrate.c
+index f909f5a92757..1ae3e99baa50 100644
+--- a/mm/migrate.c
++++ b/mm/migrate.c
+@@ -2686,12 +2686,11 @@ static void migrate_vma_insert_page(struct migrate_vma *migrate,
+ 			swp_entry = make_readable_device_private_entry(
+ 						page_to_pfn(page));
+ 		entry = swp_entry_to_pte(swp_entry);
+-	} else {
+-		if (is_zone_device_page(page) &&
+-		    is_device_coherent_page(page)) {
++	} else if (is_zone_device_page(page) &&
++		    !is_device_coherent_page(page)) {
+ 			pr_warn_once("Unsupported ZONE_DEVICE page type.\n");
+ 			goto abort;
+-		}
++	} else {
+ 		entry = mk_pte(page, vma->vm_page_prot);
+ 		if (vma->vm_flags & VM_WRITE)
+ 			entry = pte_mkwrite(pte_mkdirty(entry));
+
+
 
