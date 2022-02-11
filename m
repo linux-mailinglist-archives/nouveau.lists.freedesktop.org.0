@@ -2,58 +2,92 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 71EB04B1CEC
-	for <lists+nouveau@lfdr.de>; Fri, 11 Feb 2022 04:28:34 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7658B4B2078
+	for <lists+nouveau@lfdr.de>; Fri, 11 Feb 2022 09:46:05 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9B6A410E9E8;
-	Fri, 11 Feb 2022 03:28:14 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7FA3B10EA1F;
+	Fri, 11 Feb 2022 08:46:03 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mailgw01.mediatek.com (unknown [60.244.123.138])
- by gabe.freedesktop.org (Postfix) with ESMTPS id AD5B710E1F5;
- Fri, 11 Feb 2022 01:31:57 +0000 (UTC)
-X-UUID: 26d715e8ff1b490a83a18bf2609b5c7f-20220211
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
- s=dk; 
- h=Content-Type:Content-Transfer-Encoding:In-Reply-To:MIME-Version:Date:Message-ID:From:References:CC:To:Subject;
- bh=mPzByS0s/pMNJ28MWdnwwy704oYTTVkx0zpliBUsKhI=; 
- b=LhdY/6rlTZdwzXenoSxbgPa3RUx5lDUUpEIH4b4vtJDltuO1UFEV7H+ktMlgvcjmATzhGABCOxs9CM9KCW09I7uwj/n3Yo8azXrDW/IHPAzbsAFyJgoRsKRwLtMmpKXDijbxZq5advsuPiL0+My7aPhIxv85mIxyO3IWAb1HaUo=;
-X-UUID: 26d715e8ff1b490a83a18bf2609b5c7f-20220211
-Received: from mtkexhb01.mediatek.inc [(172.21.101.102)] by
- mailgw01.mediatek.com (envelope-from <macpaul.lin@mediatek.com>)
- (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-SHA384 256/256)
- with ESMTP id 829207914; Fri, 11 Feb 2022 09:31:53 +0800
-Received: from mtkcas10.mediatek.inc (172.21.101.39) by
- mtkmbs07n1.mediatek.inc (172.21.101.16) with Microsoft SMTP Server (TLS) id
- 15.0.1497.2; Fri, 11 Feb 2022 09:31:51 +0800
-Received: from [172.21.84.99] (172.21.84.99) by mtkcas10.mediatek.inc
- (172.21.101.73) with Microsoft SMTP Server id 15.0.1497.2 via Frontend
- Transport; Fri, 11 Feb 2022 09:31:51 +0800
-To: Mario Limonciello <mario.limonciello@amd.com>, Bjorn Helgaas
- <bhelgaas@google.com>, Andreas Noever <andreas.noever@gmail.com>, Mika
- Westerberg <mika.westerberg@linux.intel.com>, "open list:PCI SUBSYSTEM"
- <linux-pci@vger.kernel.org>, "open list:THUNDERBOLT DRIVER"
- <linux-usb@vger.kernel.org>, "open list:RADEON and AMDGPU DRM DRIVERS"
- <amd-gfx@lists.freedesktop.org>, "open list:DRM DRIVERS"
- <dri-devel@lists.freedesktop.org>, "open list:DRM DRIVER FOR NVIDIA
- GEFORCE/QUADRO GPUS" <nouveau@lists.freedesktop.org>, "open list:X86 PLATFORM
- DRIVERS" <platform-driver-x86@vger.kernel.org>
-References: <20220210224329.2793-1-mario.limonciello@amd.com>
- <20220210224329.2793-6-mario.limonciello@amd.com>
-From: Macpaul Lin <macpaul.lin@mediatek.com>
-Message-ID: <52acd5d6-6964-464b-3f83-b1fcc3329f1e@mediatek.com>
-Date: Fri, 11 Feb 2022 09:31:51 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 6DDC610EA24
+ for <nouveau@lists.freedesktop.org>; Fri, 11 Feb 2022 08:46:02 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1644569161;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=NIGJSGdDR+e/0lqDusmjI7J0UIItqFB5EseqZJ+/itg=;
+ b=JWBBVROHNDyDfUEi5eAEEopZINg2s1HncjBe0675uzx9nZdArY2kqmyW+TUBaiSSRo+lLU
+ FE0P/ZBJ32V9N7pjdgeOhXhGED0I/Du1iLPKMyxGebFqbNY6kWxqOBMJgweOdGfI10InBj
+ JPFP51oRizc8wLb7tvSxBU4beQ+ebVY=
+Received: from mail-ed1-f70.google.com (mail-ed1-f70.google.com
+ [209.85.208.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-528-LfOlhUV-PXCPJVbRF_WGHg-1; Fri, 11 Feb 2022 03:46:00 -0500
+X-MC-Unique: LfOlhUV-PXCPJVbRF_WGHg-1
+Received: by mail-ed1-f70.google.com with SMTP id
+ x6-20020a05640226c600b0040fe1993eebso4232973edd.6
+ for <nouveau@lists.freedesktop.org>; Fri, 11 Feb 2022 00:46:00 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
+ :content-language:to:cc:references:from:in-reply-to
+ :content-transfer-encoding;
+ bh=NIGJSGdDR+e/0lqDusmjI7J0UIItqFB5EseqZJ+/itg=;
+ b=5YIVx8BLB5JuIwj4fae+7haGjSuhRNgmbYFaXk335IBBTTyIs1DxjzQctsL50t36Vl
+ nird188dg67LPanhnrM07IvBy+da3BFN+4bxeBrSqtkP1PoWRybdk6Iv4r4e3irGBy3f
+ jNJza+YAZBPoGibRYgKE8WZR6RH3zsYLafvO7NJhnQJKK19zyajI+EImJjVhWeUxEdTE
+ 5XkLdxWkD4CeNkyQAJiVIqGfpN0WY5GD66oIti5Pp0zg0iBrzCvN52g+xIOtZXdiFBwu
+ 2VRS0/K2uPYn0FySibKLuS3YmMnAomq7eAUICyve1bHtEB6xJ6iblTv3CtArb1clYvW8
+ 1c1g==
+X-Gm-Message-State: AOAM532v1/8+1FuqLeO6eP1I6Agn94eT98ju37fqFSDiiidW/XuxogFV
+ 2gCcupRgn3xmoZCpOzxWJ+9MbpPLUsHtul+8e/8Sgdj7PRH0zXXrm9JFbluGGwgKJBcHxGXqLQ7
+ 7LstKDVO23BY7yNuTNTjyfhuNDA==
+X-Received: by 2002:a17:907:168a:: with SMTP id
+ hc10mr466717ejc.283.1644569159100; 
+ Fri, 11 Feb 2022 00:45:59 -0800 (PST)
+X-Google-Smtp-Source: ABdhPJwQtGaHy5U9JGMvxdUhyHS51vk9smJiabHDR4QMkXJw//KX0Gh6ttUq7C+QmDdzvWmB7pzNDQ==
+X-Received: by 2002:a17:907:168a:: with SMTP id
+ hc10mr466695ejc.283.1644569158862; 
+ Fri, 11 Feb 2022 00:45:58 -0800 (PST)
+Received: from ?IPV6:2001:1c00:c1e:bf00:1db8:22d3:1bc9:8ca1?
+ (2001-1c00-0c1e-bf00-1db8-22d3-1bc9-8ca1.cable.dynamic.v6.ziggo.nl.
+ [2001:1c00:c1e:bf00:1db8:22d3:1bc9:8ca1])
+ by smtp.gmail.com with ESMTPSA id v5sm10859303edb.15.2022.02.11.00.45.57
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 11 Feb 2022 00:45:58 -0800 (PST)
+Message-ID: <d8c31b9a-49fd-e10b-34ef-751fe1262513@redhat.com>
+Date: Fri, 11 Feb 2022 09:45:57 +0100
 MIME-Version: 1.0
-In-Reply-To: <20220210224329.2793-6-mario.limonciello@amd.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.3.0
+To: Mario Limonciello <mario.limonciello@amd.com>,
+ Bjorn Helgaas <bhelgaas@google.com>,
+ Andreas Noever <andreas.noever@gmail.com>,
+ Mika Westerberg <mika.westerberg@linux.intel.com>,
+ "open list:PCI SUBSYSTEM" <linux-pci@vger.kernel.org>,
+ "open list:THUNDERBOLT DRIVER" <linux-usb@vger.kernel.org>,
+ "open list:RADEON and AMDGPU DRM DRIVERS" <amd-gfx@lists.freedesktop.org>,
+ "open list:DRM DRIVERS" <dri-devel@lists.freedesktop.org>,
+ "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
+ <nouveau@lists.freedesktop.org>,
+ "open list:X86 PLATFORM DRIVERS" <platform-driver-x86@vger.kernel.org>
+References: <20220210224329.2793-1-mario.limonciello@amd.com>
+ <20220210224329.2793-9-mario.limonciello@amd.com>
+From: Hans de Goede <hdegoede@redhat.com>
+In-Reply-To: <20220210224329.2793-9-mario.limonciello@amd.com>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=hdegoede@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
 Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Content-Type: multipart/alternative;
- boundary="__=_Part_Boundary_008_1683732014.821183669"
-X-Mailman-Approved-At: Fri, 11 Feb 2022 03:28:13 +0000
-Subject: Re: [Nouveau] [PATCH v2 5/9] drm/amd: drop the use of
- `pci_is_thunderbolt_attached`
+Subject: Re: [Nouveau] [PATCH v2 8/9] platform/x86: amd-gmux: drop the use
+ of `pci_is_thunderbolt_attached`
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,121 +104,43 @@ Cc: Michael Jamet <michael.jamet@intel.com>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
---__=_Part_Boundary_008_1683732014.821183669
-Content-Type: text/html;
-	charset="utf-8"
-Content-Transfer-Encoding: base64
+Hi,
 
-PHByZT4NCk9uJiMzMjsyLzExLzIyJiMzMjs2OjQzJiMzMjtBTSwmIzMyO01hcmlvJiMzMjtMaW1v
-bmNpZWxsbyYjMzI7d3JvdGU6DQomZ3Q7JiMzMjtDdXJyZW50bHkmIzMyOyYjOTY7cGNpX2lzX3Ro
-dW5kZXJib2x0X2F0dGFjaGVkJiM5NjsmIzMyO2lzJiMzMjt1c2VkJiMzMjt0byYjMzI7aW5kaWNh
-dGUmIzMyO2EmIzMyO2RldmljZQ0KJmd0OyYjMzI7aXMmIzMyO2Nvbm5lY3RlZCYjMzI7ZXh0ZXJu
-YWxseS4NCiZndDsmIzMyOw0KJmd0OyYjMzI7VGhlJiMzMjtQQ0kmIzMyO2NvcmUmIzMyO25vdyYj
-MzI7bWFya3MmIzMyO3N1Y2gmIzMyO2RldmljZXMmIzMyO2FzJiMzMjtyZW1vdmFibGUmIzMyO2Fu
-ZCYjMzI7ZG93bnN0cmVhbSYjMzI7ZHJpdmVycw0KJmd0OyYjMzI7Y2FuJiMzMjt1c2UmIzMyO3Ro
-aXMmIzMyO2luc3RlYWQuDQomZ3Q7JiMzMjsNCiZndDsmIzMyO1NpZ25lZC1vZmYtYnk6JiMzMjtN
-YXJpbyYjMzI7TGltb25jaWVsbG8mIzMyOyZsdDttYXJpby5saW1vbmNpZWxsb0BhbWQuY29tJmd0
-Ow0KJmd0OyYjMzI7LS0tDQomZ3Q7JiMzMjsmIzMyOyYjMzI7ZHJpdmVycy9ncHUvZHJtL2FtZC9h
-bWRncHUvYW1kZ3B1X2ttcy5jJiMzMjt8JiMzMjsyJiMzMjsrLQ0KJmd0OyYjMzI7JiMzMjsmIzMy
-O2RyaXZlcnMvZ3B1L2RybS9hbWQvYW1kZ3B1L25iaW9fdjJfMy5jJiMzMjsmIzMyO3wmIzMyOzIm
-IzMyOystDQomZ3Q7JiMzMjsmIzMyOyYjMzI7MiYjMzI7ZmlsZXMmIzMyO2NoYW5nZWQsJiMzMjsy
-JiMzMjtpbnNlcnRpb25zKCspLCYjMzI7MiYjMzI7ZGVsZXRpb25zKC0pDQomZ3Q7JiMzMjsNCiZn
-dDsmIzMyO2RpZmYmIzMyOy0tZ2l0JiMzMjthL2RyaXZlcnMvZ3B1L2RybS9hbWQvYW1kZ3B1L2Ft
-ZGdwdV9rbXMuYyYjMzI7Yi9kcml2ZXJzL2dwdS9kcm0vYW1kL2FtZGdwdS9hbWRncHVfa21zLmMN
-CiZndDsmIzMyO2luZGV4JiMzMjsxZWJiOTFkYjIyNzQuLjZkYmY1NzUzYjViZSYjMzI7MTAwNjQ0
-DQomZ3Q7JiMzMjstLS0mIzMyO2EvZHJpdmVycy9ncHUvZHJtL2FtZC9hbWRncHUvYW1kZ3B1X2tt
-cy5jDQomZ3Q7JiMzMjsrKysmIzMyO2IvZHJpdmVycy9ncHUvZHJtL2FtZC9hbWRncHUvYW1kZ3B1
-X2ttcy5jDQomZ3Q7JiMzMjtAQCYjMzI7LTE2MSw3JiMzMjsrMTYxLDcmIzMyO0BAJiMzMjtpbnQm
-IzMyO2FtZGdwdV9kcml2ZXJfbG9hZF9rbXMoc3RydWN0JiMzMjthbWRncHVfZGV2aWNlJiMzMjsq
-YWRldiwmIzMyO3Vuc2lnbmVkJiMzMjtsb25nJiMzMjtmbGFncykNCiZndDsmIzMyOyYjMzI7JiMz
-MjsmIzMyOyYjMzI7JiMzMjsmIzMyOyhhbWRncHVfaXNfYXRweF9oeWJyaWQoKSYjMzI7fHwNCiZn
-dDsmIzMyOyYjMzI7JiMzMjsmIzMyOyYjMzI7JiMzMjsmIzMyOyYjMzI7YW1kZ3B1X2hhc19hdHB4
-X2RncHVfcG93ZXJfY250bCgpKSYjMzI7JmFtcDsmYW1wOw0KJmd0OyYjMzI7JiMzMjsmIzMyOyYj
-MzI7JiMzMjsmIzMyOyYjMzI7KChmbGFncyYjMzI7JmFtcDsmIzMyO0FNRF9JU19BUFUpJiMzMjs9
-PSYjMzI7MCkmIzMyOyZhbXA7JmFtcDsNCiZndDsmIzMyOy0mIzMyOyYjMzI7JiMzMjsmIzMyOyFw
-Y2lfaXNfdGh1bmRlcmJvbHRfYXR0YWNoZWQodG9fcGNpX2RldihkZXYtJmd0O2RldikpKQ0KJmd0
-OyYjMzI7KyYjMzI7JiMzMjsmIzMyOyYjMzI7IWRldl9pc19yZW1vdmFibGUoJmFtcDthZGV2LSZn
-dDtwZGV2LSZndDtkZXYpKQ0KJmd0OyYjMzI7JiMzMjsmIzMyO2ZsYWdzJiMzMjt8PSYjMzI7QU1E
-X0lTX1BYOw0KJmd0OyYjMzI7JiMzMjsmIzMyOw0KJmd0OyYjMzI7JiMzMjsmIzMyO3BhcmVudCYj
-MzI7PSYjMzI7cGNpX3Vwc3RyZWFtX2JyaWRnZShhZGV2LSZndDtwZGV2KTsNCiZndDsmIzMyO2Rp
-ZmYmIzMyOy0tZ2l0JiMzMjthL2RyaXZlcnMvZ3B1L2RybS9hbWQvYW1kZ3B1L25iaW9fdjJfMy5j
-JiMzMjtiL2RyaXZlcnMvZ3B1L2RybS9hbWQvYW1kZ3B1L25iaW9fdjJfMy5jDQomZ3Q7JiMzMjtp
-bmRleCYjMzI7ZWU3Y2FiMzdkZmQ1Li4yYzVkNzRkODM2ZjAmIzMyOzEwMDY0NA0KJmd0OyYjMzI7
-LS0tJiMzMjthL2RyaXZlcnMvZ3B1L2RybS9hbWQvYW1kZ3B1L25iaW9fdjJfMy5jDQomZ3Q7JiMz
-MjsrKysmIzMyO2IvZHJpdmVycy9ncHUvZHJtL2FtZC9hbWRncHUvbmJpb192Ml8zLmMNCiZndDsm
-IzMyO0BAJiMzMjstMzgyLDcmIzMyOyszODIsNyYjMzI7QEAmIzMyO3N0YXRpYyYjMzI7dm9pZCYj
-MzI7bmJpb192Ml8zX2VuYWJsZV9hc3BtKHN0cnVjdCYjMzI7YW1kZ3B1X2RldmljZSYjMzI7KmFk
-ZXYsDQomZ3Q7JiMzMjsmIzMyOyYjMzI7DQomZ3Q7JiMzMjsmIzMyOyYjMzI7ZGF0YSYjMzI7fD0m
-IzMyO05BVkkxMF9QQ0lFX19MQ19MMFNfSU5BQ1RJVklUWV9ERUZBVUxUJiMzMjsmbHQ7Jmx0OyYj
-MzI7UENJRV9MQ19DTlRMX19MQ19MMFNfSU5BQ1RJVklUWV9fU0hJRlQ7DQomZ3Q7JiMzMjsmIzMy
-OyYjMzI7DQomZ3Q7JiMzMjstaWYmIzMyOyhwY2lfaXNfdGh1bmRlcmJvbHRfYXR0YWNoZWQoYWRl
-di0mZ3Q7cGRldikpDQomZ3Q7JiMzMjsraWYmIzMyOyhkZXZfaXNfcmVtb3ZhYmxlKCZhbXA7YWRl
-di0mZ3Q7cGRldi0mZ3Q7ZGV2KSkNCiZndDsmIzMyOyYjMzI7JiMzMjtkYXRhJiMzMjt8PSYjMzI7
-TkFWSTEwX1BDSUVfX0xDX0wxX0lOQUNUSVZJVFlfVEJUX0RFRkFVTFQmIzMyOyYjMzI7Jmx0OyZs
-dDsmIzMyO1BDSUVfTENfQ05UTF9fTENfTDFfSU5BQ1RJVklUWV9fU0hJRlQ7DQomZ3Q7JiMzMjsm
-IzMyOyYjMzI7ZWxzZQ0KJmd0OyYjMzI7JiMzMjsmIzMyO2RhdGEmIzMyO3w9JiMzMjtOQVZJMTBf
-UENJRV9fTENfTDFfSU5BQ1RJVklUWV9ERUZBVUxUJiMzMjsmbHQ7Jmx0OyYjMzI7UENJRV9MQ19D
-TlRMX19MQ19MMV9JTkFDVElWSVRZX19TSElGVDsNCiZndDsmIzMyOw0KDQpSZXZpZXdlZC1ieTom
-IzMyO01hY3BhdWwmIzMyO0xpbiYjMzI7Jmx0O21hY3BhdWwubGluQG1lZGlhdGVrLmNvbSZndDsN
-Cg0KVGhhbmtzIQ0KDQpSZWdhcmRzLA0KTWFjcGF1bCYjMzI7TGluDQo8L3ByZT48IS0tdHlwZTp0
-ZXh0LS0+PCEtLXstLT48cHJlPioqKioqKioqKioqKiogTUVESUFURUsgQ29uZmlkZW50aWFsaXR5
-IE5vdGljZSAqKioqKioqKioqKioqKioqKioqKg0KVGhlIGluZm9ybWF0aW9uIGNvbnRhaW5lZCBp
-biB0aGlzIGUtbWFpbCBtZXNzYWdlIChpbmNsdWRpbmcgYW55IA0KYXR0YWNobWVudHMpIG1heSBi
-ZSBjb25maWRlbnRpYWwsIHByb3ByaWV0YXJ5LCBwcml2aWxlZ2VkLCBvciBvdGhlcndpc2UNCmV4
-ZW1wdCBmcm9tIGRpc2Nsb3N1cmUgdW5kZXIgYXBwbGljYWJsZSBsYXdzLiBJdCBpcyBpbnRlbmRl
-ZCB0byBiZSANCmNvbnZleWVkIG9ubHkgdG8gdGhlIGRlc2lnbmF0ZWQgcmVjaXBpZW50KHMpLiBB
-bnkgdXNlLCBkaXNzZW1pbmF0aW9uLCANCmRpc3RyaWJ1dGlvbiwgcHJpbnRpbmcsIHJldGFpbmlu
-ZyBvciBjb3B5aW5nIG9mIHRoaXMgZS1tYWlsIChpbmNsdWRpbmcgaXRzIA0KYXR0YWNobWVudHMp
-IGJ5IHVuaW50ZW5kZWQgcmVjaXBpZW50KHMpIGlzIHN0cmljdGx5IHByb2hpYml0ZWQgYW5kIG1h
-eSANCmJlIHVubGF3ZnVsLiBJZiB5b3UgYXJlIG5vdCBhbiBpbnRlbmRlZCByZWNpcGllbnQgb2Yg
-dGhpcyBlLW1haWwsIG9yIGJlbGlldmUgDQp0aGF0IHlvdSBoYXZlIHJlY2VpdmVkIHRoaXMgZS1t
-YWlsIGluIGVycm9yLCBwbGVhc2Ugbm90aWZ5IHRoZSBzZW5kZXIgDQppbW1lZGlhdGVseSAoYnkg
-cmVwbHlpbmcgdG8gdGhpcyBlLW1haWwpLCBkZWxldGUgYW55IGFuZCBhbGwgY29waWVzIG9mIA0K
-dGhpcyBlLW1haWwgKGluY2x1ZGluZyBhbnkgYXR0YWNobWVudHMpIGZyb20geW91ciBzeXN0ZW0s
-IGFuZCBkbyBub3QNCmRpc2Nsb3NlIHRoZSBjb250ZW50IG9mIHRoaXMgZS1tYWlsIHRvIGFueSBv
-dGhlciBwZXJzb24uIFRoYW5rIHlvdSENCjwvcHJlPjwhLS19LS0+
+On 2/10/22 23:43, Mario Limonciello wrote:
+> Currently `pci_is_thunderbolt_attached` is used to indicate a device
+> is connected externally.
+> 
+> The PCI core now marks such devices as removable and downstream drivers
+> can use this instead.
+> 
+> Signed-off-by: Mario Limonciello <mario.limonciello@amd.com>
 
---__=_Part_Boundary_008_1683732014.821183669
-Content-Type: text/plain;
-	charset="utf-8";
-	format=flowed
-Content-Transfer-Encoding: base64
+Thanks, this looks good to me. I assume that this whole series
+will be merged in one go through another tree (e.g. the PCI tree),
+so here is my ack for merging this patch through another tree:
 
-T24gMi8xMS8yMiA2OjQzIEFNLCBNYXJpbyBMaW1vbmNpZWxsbyB3cm90ZToNCj4gQ3VycmVudGx5
-IGBwY2lfaXNfdGh1bmRlcmJvbHRfYXR0YWNoZWRgIGlzIHVzZWQgdG8gaW5kaWNhdGUgYSBkZXZp
-Y2UNCj4gaXMgY29ubmVjdGVkIGV4dGVybmFsbHkuDQo+IA0KPiBUaGUgUENJIGNvcmUgbm93IG1h
-cmtzIHN1Y2ggZGV2aWNlcyBhcyByZW1vdmFibGUgYW5kIGRvd25zdHJlYW0gZHJpdmVycw0KPiBj
-YW4gdXNlIHRoaXMgaW5zdGVhZC4NCj4gDQo+IFNpZ25lZC1vZmYtYnk6IE1hcmlvIExpbW9uY2ll
-bGxvIDxtYXJpby5saW1vbmNpZWxsb0BhbWQuY29tPg0KPiAtLS0NCj4gICBkcml2ZXJzL2dwdS9k
-cm0vYW1kL2FtZGdwdS9hbWRncHVfa21zLmMgfCAyICstDQo+ICAgZHJpdmVycy9ncHUvZHJtL2Ft
-ZC9hbWRncHUvbmJpb192Ml8zLmMgIHwgMiArLQ0KPiAgIDIgZmlsZXMgY2hhbmdlZCwgMiBpbnNl
-cnRpb25zKCspLCAyIGRlbGV0aW9ucygtKQ0KPiANCj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1
-L2RybS9hbWQvYW1kZ3B1L2FtZGdwdV9rbXMuYyBiL2RyaXZlcnMvZ3B1L2RybS9hbWQvYW1kZ3B1
-L2FtZGdwdV9rbXMuYw0KPiBpbmRleCAxZWJiOTFkYjIyNzQuLjZkYmY1NzUzYjViZSAxMDA2NDQN
-Cj4gLS0tIGEvZHJpdmVycy9ncHUvZHJtL2FtZC9hbWRncHUvYW1kZ3B1X2ttcy5jDQo+ICsrKyBi
-L2RyaXZlcnMvZ3B1L2RybS9hbWQvYW1kZ3B1L2FtZGdwdV9rbXMuYw0KPiBAQCAtMTYxLDcgKzE2
-MSw3IEBAIGludCBhbWRncHVfZHJpdmVyX2xvYWRfa21zKHN0cnVjdCBhbWRncHVfZGV2aWNlICph
-ZGV2LCB1bnNpZ25lZCBsb25nIGZsYWdzKQ0KPiAgIAkgICAgKGFtZGdwdV9pc19hdHB4X2h5YnJp
-ZCgpIHx8DQo+ICAgCSAgICAgYW1kZ3B1X2hhc19hdHB4X2RncHVfcG93ZXJfY250bCgpKSAmJg0K
-PiAgIAkgICAgKChmbGFncyAmIEFNRF9JU19BUFUpID09IDApICYmDQo+IC0JICAgICFwY2lfaXNf
-dGh1bmRlcmJvbHRfYXR0YWNoZWQodG9fcGNpX2RldihkZXYtPmRldikpKQ0KPiArCSAgICAhZGV2
-X2lzX3JlbW92YWJsZSgmYWRldi0+cGRldi0+ZGV2KSkNCj4gICAJCWZsYWdzIHw9IEFNRF9JU19Q
-WDsNCj4gICANCj4gICAJcGFyZW50ID0gcGNpX3Vwc3RyZWFtX2JyaWRnZShhZGV2LT5wZGV2KTsN
-Cj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9hbWQvYW1kZ3B1L25iaW9fdjJfMy5jIGIv
-ZHJpdmVycy9ncHUvZHJtL2FtZC9hbWRncHUvbmJpb192Ml8zLmMNCj4gaW5kZXggZWU3Y2FiMzdk
-ZmQ1Li4yYzVkNzRkODM2ZjAgMTAwNjQ0DQo+IC0tLSBhL2RyaXZlcnMvZ3B1L2RybS9hbWQvYW1k
-Z3B1L25iaW9fdjJfMy5jDQo+ICsrKyBiL2RyaXZlcnMvZ3B1L2RybS9hbWQvYW1kZ3B1L25iaW9f
-djJfMy5jDQo+IEBAIC0zODIsNyArMzgyLDcgQEAgc3RhdGljIHZvaWQgbmJpb192Ml8zX2VuYWJs
-ZV9hc3BtKHN0cnVjdCBhbWRncHVfZGV2aWNlICphZGV2LA0KPiAgIA0KPiAgIAkJZGF0YSB8PSBO
-QVZJMTBfUENJRV9fTENfTDBTX0lOQUNUSVZJVFlfREVGQVVMVCA8PCBQQ0lFX0xDX0NOVExfX0xD
-X0wwU19JTkFDVElWSVRZX19TSElGVDsNCj4gICANCj4gLQkJaWYgKHBjaV9pc190aHVuZGVyYm9s
-dF9hdHRhY2hlZChhZGV2LT5wZGV2KSkNCj4gKwkJaWYgKGRldl9pc19yZW1vdmFibGUoJmFkZXYt
-PnBkZXYtPmRldikpDQo+ICAgCQkJZGF0YSB8PSBOQVZJMTBfUENJRV9fTENfTDFfSU5BQ1RJVklU
-WV9UQlRfREVGQVVMVCAgPDwgUENJRV9MQ19DTlRMX19MQ19MMV9JTkFDVElWSVRZX19TSElGVDsN
-Cj4gICAJCWVsc2UNCj4gICAJCQlkYXRhIHw9IE5BVkkxMF9QQ0lFX19MQ19MMV9JTkFDVElWSVRZ
-X0RFRkFVTFQgPDwgUENJRV9MQ19DTlRMX19MQ19MMV9JTkFDVElWSVRZX19TSElGVDsNCj4gDQoN
-ClJldmlld2VkLWJ5OiBNYWNwYXVsIExpbiA8bWFjcGF1bC5saW5AbWVkaWF0ZWsuY29tPg0KDQpU
-aGFua3MhDQoNClJlZ2FyZHMsDQpNYWNwYXVsIExpbg==
+Acked-by: Hans de Goede <hdegoede@redhat.com>
 
---__=_Part_Boundary_008_1683732014.821183669--
+Regards,
+
+Hans
+
+> ---
+>  drivers/platform/x86/apple-gmux.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/drivers/platform/x86/apple-gmux.c b/drivers/platform/x86/apple-gmux.c
+> index 04232fbc7d56..ffac15b9befd 100644
+> --- a/drivers/platform/x86/apple-gmux.c
+> +++ b/drivers/platform/x86/apple-gmux.c
+> @@ -596,7 +596,7 @@ static int gmux_resume(struct device *dev)
+>  
+>  static int is_thunderbolt(struct device *dev, void *data)
+>  {
+> -	return pci_is_thunderbolt_attached(to_pci_dev(dev));
+> +	return dev_is_removable(dev);
+>  }
+>  
+>  static int gmux_probe(struct pnp_dev *pnp, const struct pnp_device_id *id)
+> 
 
