@@ -1,51 +1,45 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8EED74B2330
-	for <lists+nouveau@lfdr.de>; Fri, 11 Feb 2022 11:35:11 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id BA5A34B2F04
+	for <lists+nouveau@lfdr.de>; Fri, 11 Feb 2022 22:03:00 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id AFF5E10EA79;
-	Fri, 11 Feb 2022 10:35:09 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id DD21D10E9EF;
+	Fri, 11 Feb 2022 21:02:56 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0B83A10EA78;
- Fri, 11 Feb 2022 10:35:08 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1644575708; x=1676111708;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:in-reply-to;
- bh=xZqL227qrEuXaCf1lVm11orizsim7DciTShq3TaFFQU=;
- b=eeyO/68fNLY1JnPX+CHAQlf6NovwcuVtBtW/6SnkVOnpBHHDtUuaTAjF
- h5Gbcv1130O8jLfo+PD/PkBQZKUAa6NH5iqmEVRS1vZRVVQjyCZ8q4n+S
- 0OEEiUKTJlTY1KZT2f9FAx/aqpT1pMufjcgGGIXtVfdMaxWcPSL5tfr+/
- jt+WlfdSAbidBjjmTulKdYBOHu6e1mNWD/B9xCLudssRuIKkSarD043rW
- YeZ7i6XRR4bfn6d1iJDP2K1/4+Aquae2dDBdVvoqqEi8Awk3wY7FO4f6S
- C9qhNzlLtXrjpU9WgNv03j1/moLp85YLX1TrH5yYES7aIC+rXAi5ZVy3+ g==;
-X-IronPort-AV: E=McAfee;i="6200,9189,10254"; a="249459672"
-X-IronPort-AV: E=Sophos;i="5.88,360,1635231600"; d="scan'208";a="249459672"
-Received: from fmsmga003.fm.intel.com ([10.253.24.29])
- by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 11 Feb 2022 02:35:07 -0800
-X-IronPort-AV: E=Sophos;i="5.88,360,1635231600"; d="scan'208";a="623185131"
-Received: from lahna.fi.intel.com (HELO lahna) ([10.237.72.162])
- by fmsmga003-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 11 Feb 2022 02:35:03 -0800
-Received: by lahna (sSMTP sendmail emulation); Fri, 11 Feb 2022 12:35:00 +0200
-Date: Fri, 11 Feb 2022 12:35:00 +0200
-From: Mika Westerberg <mika.westerberg@linux.intel.com>
+Received: from ams.source.kernel.org (ams.source.kernel.org
+ [IPv6:2604:1380:4601:e00::1])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 359AA10E9E5;
+ Fri, 11 Feb 2022 21:02:55 +0000 (UTC)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by ams.source.kernel.org (Postfix) with ESMTPS id D4AACB82CF8;
+ Fri, 11 Feb 2022 21:02:51 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 51B97C340E9;
+ Fri, 11 Feb 2022 21:02:50 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1644613370;
+ bh=ApT45q3g7mkRiUKpHndWjTAzQ/rKHh2xKyLJKPCYKpg=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:From;
+ b=QT6uV2oz9XTg8oBcDwpiSDNkfbOCuBDdwTQPQjrbpacmqAUuE9kRf9tTPNrr9J/Xb
+ UbdNCzO7kwyw5xX2S1c/YuKHeUr+qynZcdm/d37Ayjwwyu3gIzYnjXVncbYYI6sley
+ pzCaRuBA/J46LFhghaKiVktGCvFRv0xeimhv2bqZ2mJkYL9Br+fgk+qmD7iL/aERya
+ phT76xW8wXz/QjFyk5dBOqsp7fVv1LIzefSRor9FHR/Vkhrjy6/hK1u7QLs74eVkuK
+ tXzrpiT61ZTfJpU84aAGy1ahBx3V3Qxu5S38FQRB8ssvliOkfna8OjcnRynWZQAAxz
+ s4H9kso4K2C9Q==
+Date: Fri, 11 Feb 2022 15:02:48 -0600
+From: Bjorn Helgaas <helgaas@kernel.org>
 To: Mario Limonciello <mario.limonciello@amd.com>
-Message-ID: <YgY71Lw4ZFOtdBVj@lahna>
-References: <20220210224329.2793-1-mario.limonciello@amd.com>
- <20220210224329.2793-5-mario.limonciello@amd.com>
+Message-ID: <20220211210248.GA734887@bhelgaas>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20220210224329.2793-5-mario.limonciello@amd.com>
-Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
-Subject: Re: [Nouveau] [PATCH v2 4/9] PCI: mark USB4 devices as removable
+In-Reply-To: <20220211193250.1904843-2-mario.limonciello@amd.com>
+Subject: Re: [Nouveau] [PATCH v3 01/12] thunderbolt: move definition of
+ PCI_CLASS_SERIAL_USB_USB4
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,44 +51,69 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Michael Jamet <michael.jamet@intel.com>,
+Cc: Andreas Noever <andreas.noever@gmail.com>,
+ Michael Jamet <michael.jamet@intel.com>,
  "open list:PCI SUBSYSTEM" <linux-pci@vger.kernel.org>,
  "open list:THUNDERBOLT DRIVER" <linux-usb@vger.kernel.org>,
  Yehezkel Bernat <YehezkelShB@gmail.com>,
  "open list:DRM DRIVERS" <dri-devel@lists.freedesktop.org>,
- "open list:X86 PLATFORM DRIVERS" <platform-driver-x86@vger.kernel.org>,
- Andreas Noever <andreas.noever@gmail.com>,
+ Hans de Goede <hdegoede@redhat.com>,
  "open list:RADEON and AMDGPU DRM DRIVERS" <amd-gfx@lists.freedesktop.org>,
  "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
  <nouveau@lists.freedesktop.org>, Bjorn Helgaas <bhelgaas@google.com>,
- Alexander.Deucher@amd.com
+ Alex Deucher <alexander.deucher@amd.com>,
+ Mika Westerberg <mika.westerberg@linux.intel.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi Mario,
-
-On Thu, Feb 10, 2022 at 04:43:24PM -0600, Mario Limonciello wrote:
-> USB4 class devices are also removable like Intel Thunderbolt devices.
+On Fri, Feb 11, 2022 at 01:32:39PM -0600, Mario Limonciello wrote:
+> This PCI class definition of the USB4 device is currently located only in
+> the thunderbolt driver.
 > 
-> Drivers of downstream devices use this information to declare functional
-> differences in how the drivers perform by knowing that they are connected
-> to an upstream TBT/USB4 port.
+> It will be needed by a few other drivers for upcoming changes. Move it into
+> the common include file.
+> 
+> Acked-by: Alex Deucher <alexander.deucher@amd.com>
+> Acked-by: Mika Westerberg <mika.westerberg@linux.intel.com>
+> Signed-off-by: Mario Limonciello <mario.limonciello@amd.com>
 
-This may not be covering the integrated controllers. For discrete, yes
-but if it is the PCIe root ports that start the PCIe topology (over the
-PCIe tunnels) this does not work.
+I would change the subject to:
 
-For integrated we have the "usb4-host-interface" ACPI property that
-tells this for each port:
+  PCI: Add USB4 class definition
 
-https://docs.microsoft.com/en-us/windows-hardware/drivers/pci/dsd-for-pcie-root-ports#mapping-native-protocols-pcie-displayport-tunneled-through-usb4-to-usb4-host-routers
+because this seems like more of a PCI thing than a Thunderbolt thing,
+but either way:
 
-and for discrete there is the PCIe DVSEC that can be used (see the USB4
-spec archive it includes the "USB4 DVSEC Version 1.0.pdf" that has more
-information). I would expect AMD controller (assuming it is discrete)
-implements this too.
+Acked-by: Bjorn Helgaas <bhelgaas@google.com>
 
-So I'm proposing that we mark the devices that are below  PCIe ports
-(root, downstream) that fall in the above categories as "removable".
-This is then not dependent on checking the USB4 controller and how it is
-setup in a particular system.
+> ---
+>  drivers/thunderbolt/nhi.h | 2 --
+>  include/linux/pci_ids.h   | 1 +
+>  2 files changed, 1 insertion(+), 2 deletions(-)
+> 
+> diff --git a/drivers/thunderbolt/nhi.h b/drivers/thunderbolt/nhi.h
+> index 69083aab2736..79e980b51f94 100644
+> --- a/drivers/thunderbolt/nhi.h
+> +++ b/drivers/thunderbolt/nhi.h
+> @@ -81,6 +81,4 @@ extern const struct tb_nhi_ops icl_nhi_ops;
+>  #define PCI_DEVICE_ID_INTEL_TGL_H_NHI0			0x9a1f
+>  #define PCI_DEVICE_ID_INTEL_TGL_H_NHI1			0x9a21
+>  
+> -#define PCI_CLASS_SERIAL_USB_USB4			0x0c0340
+> -
+>  #endif
+> diff --git a/include/linux/pci_ids.h b/include/linux/pci_ids.h
+> index aad54c666407..61b161d914f0 100644
+> --- a/include/linux/pci_ids.h
+> +++ b/include/linux/pci_ids.h
+> @@ -116,6 +116,7 @@
+>  #define PCI_CLASS_SERIAL_USB_OHCI	0x0c0310
+>  #define PCI_CLASS_SERIAL_USB_EHCI	0x0c0320
+>  #define PCI_CLASS_SERIAL_USB_XHCI	0x0c0330
+> +#define PCI_CLASS_SERIAL_USB_USB4	0x0c0340
+>  #define PCI_CLASS_SERIAL_USB_DEVICE	0x0c03fe
+>  #define PCI_CLASS_SERIAL_FIBER		0x0c04
+>  #define PCI_CLASS_SERIAL_SMBUS		0x0c05
+> -- 
+> 2.34.1
+> 
