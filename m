@@ -2,125 +2,120 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 03E914B36B7
+	by mail.lfdr.de (Postfix) with ESMTPS id CE1964B36B8
 	for <lists+nouveau@lfdr.de>; Sat, 12 Feb 2022 18:00:24 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8CA3810EBE3;
-	Sat, 12 Feb 2022 17:00:04 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id DCDC410EBBA;
+	Sat, 12 Feb 2022 17:00:03 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam10on2087.outbound.protection.outlook.com [40.107.93.87])
- by gabe.freedesktop.org (Postfix) with ESMTPS id F41F010EB0A;
- Fri, 11 Feb 2022 19:37:41 +0000 (UTC)
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam12on2058.outbound.protection.outlook.com [40.107.237.58])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id AE22410EB50;
+ Fri, 11 Feb 2022 22:06:38 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=GRjEfTJ+tWHSgS17ppVB/MR6QWNvYJoCX4gs19ZDrioRbHlCgHnj8u/vHM12za4Ni3/jA3sGHQ4oQW6CMxoRu4NqF/1DNRkGNxsDqFqE65HBMuqjO3WJZuFVALc4KBAUVwTxRZv4k4KkUlj4QiTjLNX9WxJ05po0iSPLi9WbcU9TpXWjMthQguEmmqEvvuqV6l0o8YnG+OdGRgfIoNJWEvFF0MmomzWKoLYqPi3WqiGtdCZVstvh2tLjnolgs1f6NVr2gk7Tka2G/MVi8zBCUSnQho3OWlKjDuOC0H4MeXsGhPkgURHYRsH0BGzvniFZpaKPu+ygUzpYMIPj/fKxzg==
+ b=CmItb8t9IqecKnWN4sSx0Wto8uIu4yyDCjTSvAVadeUzDiuHNZ9tw+yjXEq8K530hsaLbOXXVIr1hZGAOF1aSEGrqA+CjcbN0mnA6JJ/k9THd3YaESS4mAEqMXaQNirZOiJdzUdhJU94RNZ1FcLhZcAVYavPaHsbW4x+jqsFNA2BWVfmxVHbId2mQoDP3caLU6eYIjC1K/bsqGY4cu5cpvsgf8bbmWVrzsLUJnms0FSpHPOuMrlzw+IDwLEMV8o0e0GkW1rLaFKjlqdpunRm64ZxPDIY/i/U8120ynVg9Or+hNCH5X5mYkahatAn5SYqPfQWs3mmSebe5GEHmGtbZA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=WfH6vbe3dKkRLxJkYPwVJ0B/v09u5ZfrefLqdxBLN6Y=;
- b=lo3HHBUNB+sMRbQGaBTC+OfDCOexxHQkdf8jQRDVgjjHF4qc4b9QQN6mdNa0VOUxbhwksNUUAdX4qii1Qb5Q8GJGl4zp8bv/w3n51pCaL/GX3ZevrN5FfFML5ClNKrUWqh09yen0ExlTbWCcO45Mk7feGDs9FpBSbAELDOOxsRXzw2+t2hADSt6ubyQlRYwdTh7Bdr5n1TJJMbetMj3UMcwdhkIhrY2+xBiz6WmjUmQRfwd1Sqb9GsxozELyxgZ/N9EsCLEftjJVbD2sQbo4vpnruIUCA5Oo1s9qFthUftSfoXo6ny033/tSuFdM1v42/mRdkf5GZ3D19zE8p4bixg==
+ bh=rCm5eEFZ9xsi/2YQJiAUzW//rClESadSCQ5rl0ZeYGM=;
+ b=Mc7X2LAZyGzcRly9cUSplHLseEinModjCX7EPfFx1YIe+oVV/wM4p9d7x6fRM1AFonYpuYUwTtgZ8mU6bcW8ZJ3y//u6FF99LF76+SKSLYrj1uqQZjRS89a8/5r3M/gHNKx43oL+SjA30OFfEbUKLU27wFZDLl03fZdegO0RzwYcja3+v3jnKAOGd2IR6NSu5JREfuy2hbT9Nni9LZ6uaDk6ecTtNbBdv/XZ16/T4ct2dMVMkcQ5aiS8wHNvLzGVxlQvR4KqjyJAKoMWNpuD8cO1GQb6Zag/DPrrOi1tFKBl6EfDJoXyHzVNyrLl6iPs2U8cr4Wyh3Z46d+No+ZPQA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
  dkim=none; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=WfH6vbe3dKkRLxJkYPwVJ0B/v09u5ZfrefLqdxBLN6Y=;
- b=hMgnPenDRFdedDL0BIvNOuM+VCCKAINnKFLdVEwXxbQF81Myn5T7urh6rZYLxfN3kiyQjGI/reaU00TCHavm8xKoEUQRQHD1S75uYQ+P7I5d8mooHMDoGaNp54ghVmt8OW7Pr17BOCVFohMUwTR3LpN01nKlFenIAms6mo4AI7g=
+ bh=rCm5eEFZ9xsi/2YQJiAUzW//rClESadSCQ5rl0ZeYGM=;
+ b=CusewDAXOv7e7PqlxrVQfCIKPvslBwAH60eBLrmmucL64vWbyniG4is6t2KNabwuWFQ7u6Ta6gUZU7ZuE4/OMbYxdl5k4gs0+8g3jClVsiUAbnCeR2TjH6ACUj9Tx8tPyPKeI3mq0PTphzGL3ffUsJYh5J9p0hHMYAOhrbWuI3c=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
 Received: from BL1PR12MB5157.namprd12.prod.outlook.com (2603:10b6:208:308::15)
- by MN2PR12MB2910.namprd12.prod.outlook.com (2603:10b6:208:af::27)
+ by CY4PR1201MB0136.namprd12.prod.outlook.com (2603:10b6:910:1a::19)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4951.18; Fri, 11 Feb
- 2022 19:37:37 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4951.16; Fri, 11 Feb
+ 2022 22:06:26 +0000
 Received: from BL1PR12MB5157.namprd12.prod.outlook.com
  ([fe80::42f:534d:e82:b59f]) by BL1PR12MB5157.namprd12.prod.outlook.com
  ([fe80::42f:534d:e82:b59f%4]) with mapi id 15.20.4951.019; Fri, 11 Feb 2022
- 19:37:37 +0000
-From: "Limonciello, Mario" <Mario.Limonciello@amd.com>
-To: Mika Westerberg <mika.westerberg@linux.intel.com>
-Thread-Topic: [PATCH v2 3/9] PCI: drop `is_thunderbolt` attribute
-Thread-Index: AQHYHs+rqrcOwCEkLEGfPlnD8b3/PqyOJU2AgACaUSA=
-Date: Fri, 11 Feb 2022 19:37:37 +0000
-Message-ID: <BL1PR12MB515776D8AA3AA375D914B395E2309@BL1PR12MB5157.namprd12.prod.outlook.com>
-References: <20220210224329.2793-1-mario.limonciello@amd.com>
- <20220210224329.2793-4-mario.limonciello@amd.com> <YgY5N1eVWmi0Xyuw@lahna>
-In-Reply-To: <YgY5N1eVWmi0Xyuw@lahna>
-Accept-Language: en-US
+ 22:06:23 +0000
+Message-ID: <9d19c3f0-e5da-c9e5-d192-b5db88353888@amd.com>
+Date: Fri, 11 Feb 2022 16:06:20 -0600
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
+ Thunderbird/91.6.0
 Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-msip_labels: MSIP_Label_d4243a53-6221-4f75-8154-e4b33a5707a1_Enabled=true;
- MSIP_Label_d4243a53-6221-4f75-8154-e4b33a5707a1_SetDate=2022-02-11T19:36:12Z; 
- MSIP_Label_d4243a53-6221-4f75-8154-e4b33a5707a1_Method=Privileged;
- MSIP_Label_d4243a53-6221-4f75-8154-e4b33a5707a1_Name=Public-AIP 2.0;
- MSIP_Label_d4243a53-6221-4f75-8154-e4b33a5707a1_SiteId=3dd8961f-e488-4e60-8e11-a82d994e183d;
- MSIP_Label_d4243a53-6221-4f75-8154-e4b33a5707a1_ActionId=a8c4bf60-0637-402c-98bc-4918107473ad;
- MSIP_Label_d4243a53-6221-4f75-8154-e4b33a5707a1_ContentBits=1
-msip_label_d4243a53-6221-4f75-8154-e4b33a5707a1_enabled: true
-msip_label_d4243a53-6221-4f75-8154-e4b33a5707a1_setdate: 2022-02-11T19:37:35Z
-msip_label_d4243a53-6221-4f75-8154-e4b33a5707a1_method: Privileged
-msip_label_d4243a53-6221-4f75-8154-e4b33a5707a1_name: Public-AIP 2.0
-msip_label_d4243a53-6221-4f75-8154-e4b33a5707a1_siteid: 3dd8961f-e488-4e60-8e11-a82d994e183d
-msip_label_d4243a53-6221-4f75-8154-e4b33a5707a1_actionid: 991f3e06-952e-4cc8-96d1-55e85a8acc38
-msip_label_d4243a53-6221-4f75-8154-e4b33a5707a1_contentbits: 0
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 2754d213-e478-42ed-af33-08d9ed95f55f
-x-ms-traffictypediagnostic: MN2PR12MB2910:EE_
-x-microsoft-antispam-prvs: <MN2PR12MB29105ED26735536709401A02E2309@MN2PR12MB2910.namprd12.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:10000;
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: HATeOplR9/UVEZB6QhH7+wZOVk+BHl2kxjYvH4ydkmeLOHOgvjJl3+OMU+C5PPTOY4GJni5+VVVPEb+MTjmwwmeDBCc+77wxX/dkOPbL4ozYv7MWPyDJQy4WtZQ8JFaH6y5HNVzg2Tkyx6VGOVjPCXIropBbT6W9jDYvDDCHLFsJU8fBgW274O3gZly6FG3U+/ks71LrM7oKCSiR0ouq7iDPf4hUh8R+n0Eo43NS3lwzmaOadADEOx4l0ceLSjELcTAFRj46My9mt3FXdSrxGfd5r44yTXTzealXcgKYeHxEpZGYimJTgzqv+EBiDlB5HQMyAVHev8f+YdfDBX9XHY6fmu0+fR0t49SVdof4dyBihJkQk5z/KXeMDnFOJ9eUlwPjZOVxj98vfPSHWGrjrtNfLKr6TL+/9zTyr2Xvxv5t94tWsmqUnWsnhMEwQqfZvJ5SnQfV2iYHHTEQkRYYunR9wCSkIjbbFlPCeiBeXtZgVFuz0CShf2NatMiOP/J5W/n7V9D4eOzzkqPUswA0KMy9ryc07Zdoeerhk3nxZREYcsgNiZlI/yuaiUhDwBjBRPNIkCfGp//fINOsoUnNE14fbwT7wRlQHVbtcWIzEdrLt/FlSF6CKCRkaDCYn7uppOCaiK8PzLNJBfYQsqmm13xdkx7BIYCMATAl1i5KCmxBVdPh/nKurYm0kVWbX/jg3quogT65WPcukTSG99LqfQTuTk/RlLqsHQtb+RKAQ5g=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:BL1PR12MB5157.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230001)(4636009)(366004)(86362001)(54906003)(6916009)(6506007)(53546011)(316002)(7696005)(9686003)(508600001)(66476007)(38070700005)(55016003)(33656002)(4326008)(5660300002)(66556008)(66946007)(66446008)(64756008)(76116006)(8676002)(8936002)(2906002)(52536014)(7416002)(83380400001)(26005)(186003)(38100700002)(71200400001)(122000001)(81973001);
- DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?0VmqsmL5RqurP58AzCEQ/4oOOMCuuLqbTKhExemuwTaNpy+ip59ZrGY/ZqtC?=
- =?us-ascii?Q?w8Vln/HoukPXRbQzD7L/3fIN/9Z8gjEmk1Jb4uaXMndt+3nhmfRHZatuY6vJ?=
- =?us-ascii?Q?LMd5Ka/KdsXKb3u565Na/1cp4GaxtS0k3pAEUbmYrvlGVyeCEe9lKfy9+5Qf?=
- =?us-ascii?Q?8YZ5e7zScOQ1QGaaT+wSHuJuT0RtUu3XbjTGNN5W+0j+Eg2WV/JUL1YdrrmS?=
- =?us-ascii?Q?lGrl2QS5Z5esbKyKQ0BOvfIzOwEAHNx7zIMGPdfjCq0OupbMK4XuPqYN8rHL?=
- =?us-ascii?Q?HlC0DXMzSQV1E8itxR8uwT/2fczYzTvqBYKhJAjeVdcMQYk5ZnI8MXreYF2g?=
- =?us-ascii?Q?0Qg5fLQwpZdttCACI1AOmLcShgVFi9WUQvFCmQlueL1E7ma3xBOvqK64NZvQ?=
- =?us-ascii?Q?rLxyTh8lQu/VA5P4frYHlUYnNyYOT5ZZgLvx6xIKjpv9RCfvoiVp0n3V0LTv?=
- =?us-ascii?Q?kcM7Srk30GvlB2rSfdDkVW52TwKBRKNjjHT/SAjDLP2LJ7cRpZdhwwWa3cbi?=
- =?us-ascii?Q?h9m8Dc1g4i5TEfvLGNPiqGEBhxVXcDB8mgc7DbIe0LIA1FujmpJ5TNLleg28?=
- =?us-ascii?Q?VrMile10L3V5LgnBa8EkgW0pNqzd5EnPO8n/oIc2biXNsedXnylHagwCN6PK?=
- =?us-ascii?Q?exhRtC8iMqWs21x2+3gE9UkPf8/Uw4Dq/Tx7tj/9j39jYEnn06HQVUVOXyL/?=
- =?us-ascii?Q?mY3qJrxRLABJ7V1P1bdnIpyicVxfts2vMMn2fwcCbgsTOLHaZwof/ztw8JA2?=
- =?us-ascii?Q?4oZ6elugsBY1mtllR++GNxPTjsna02/sy7gFtp8NuKaQ6bbl1HHdSDmVYn2s?=
- =?us-ascii?Q?0qFSiQadjDCk0NmLD+4thDnyTXbwxR5A+K2IJF3cVRCfI9gwak+C2HIuPekM?=
- =?us-ascii?Q?/Gc1XxSL18HsSM+BMpI0TFLIesdOjsUq9z7O11c2LJUAbbjxSWGBzh1s4ko5?=
- =?us-ascii?Q?fGGdFqCt54rGrxT2216fsytW64td5vSccQ6GJKverR47XVEnl6kSLlELhsT2?=
- =?us-ascii?Q?UV4NC4icejsH9pUUzDyHZcJ7Yq5jIq/+Pa5dtB04h713xXPQDsRn3Zbkp9Gr?=
- =?us-ascii?Q?QWl58uiT5IeWSYnqZlsLmgoatBBU6jBQnKxZRENMH463iKUo3hNXUeTeBH66?=
- =?us-ascii?Q?BUgdKLo/IrvcJbg2OyCd64QzQFr5joklpBa/yH4qtQsGWoCz+Xcf7MWskfQ8?=
- =?us-ascii?Q?rtOgj7/DhdqczfW5lAuMftWOvkRQUEBpOf5HOg9jJtXTaWZj1Nm3BQie6gKe?=
- =?us-ascii?Q?ohyxu2lvwMXje/bn6L0WZBh0KXByhC65+GAAqAEuybK6d8bccb8jaAsbUoow?=
- =?us-ascii?Q?J1FpRTtf4oL/Fh4o8NrPp5eQv6m1eiAIOZ2ogRnpSWLdHVt6kmXM3isJ+1mX?=
- =?us-ascii?Q?KnU7X7uWsySl5gp4595ur38OL58dkl/i4/T/svQUPRVtU7//ELMcJEUgdMrp?=
- =?us-ascii?Q?4d02T2gFeB8H38oIRyoiJfQo7plAsB3Vo04c8/nQT9k53Jobd1cJ9ocOuJZx?=
- =?us-ascii?Q?IiXvZ4cEog1P0OoNBkfEW4KABnz0J6ZIR/f1VxVuVg5sU5dQYVqmh/rKXNBV?=
- =?us-ascii?Q?gGcu8QIDLptNLclhGi3ElG5smrBNoOTDDgijPDslpqwXxz3W9GvPJfYFNY/2?=
- =?us-ascii?Q?in/e08++b7EV9Sno4/Paz2c=3D?=
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+To: Bjorn Helgaas <helgaas@kernel.org>
+References: <20220211213508.GA736191@bhelgaas>
+From: "Limonciello, Mario" <mario.limonciello@amd.com>
+In-Reply-To: <20220211213508.GA736191@bhelgaas>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: BL1PR13CA0024.namprd13.prod.outlook.com
+ (2603:10b6:208:256::29) To BL1PR12MB5157.namprd12.prod.outlook.com
+ (2603:10b6:208:308::15)
 MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 4a25fd8c-d4e3-4bce-90c8-08d9edaabddc
+X-MS-TrafficTypeDiagnostic: CY4PR1201MB0136:EE_
+X-Microsoft-Antispam-PRVS: <CY4PR1201MB013632F53E55D2C5F0149CBFE2309@CY4PR1201MB0136.namprd12.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:10000;
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: DXhZC6vBJTW3EzG/TqM5O5Wk6qeHFNt/NhshB8bjttSUO/B9kv1ypKDMCbUKRiaWNPEKUpXzQCxIZVVv693zhTTauwDAjUtlRsR1+YNM5l1w2QE6h1vuxOodXm0Rphy5uCaTJjm5k4CJmZ/VP94MzcK/Szdxg0elEbvo94af6B7qDQ3ohrFWQReMv2fjRpIeZdaoS0eKS0swYaxwrwiE97YH+hcH0qYDAr9/TazJA2QReiVg+I6b+f+85ARtKuYP6wkQHvekBskB8HiG4u3BX/e0i9Lm2hvt5kLzP1BCYcimZmni3mVdn5FZ8JRZphkAyRYtgQfz1wq0h2bf0fXVl5ShJV0IJOwGAaoOdJQUgIOJ5Awb0Flnei2sQi94mZYT/plugpVQPfptOnQ5tYYuRfzlsF8Ct50w74l7rQa1YCpMYDMDBDdgnzfyb45caUXcm3caxr2/lGS2OfCI2GR3fizBYx6YJIqM3eHvwq+1Wk8dt3xkL2ClQlgGhBkcrcf2/axpzUq6BHI7CnBfaUsZaUaHQdr4dED6K8pdqtyc/p+fGRiiS6Jp5r0B8HMY0xV7d1ad1FQRbTNNFTJZRlO4IuJ7vKf3yLmLMNwUIKLCFRbgIsLDdMTp8GtGljGwq/V9qGbRoOuePfe+LJjFcrbMZcoGNGHYudXYoG+sTnOZFwhrrSBUE2qHgEBFJRn8q/cUPnCelcrM47+/tSTeD4Ct7aAcr+p9vPJsDOnBFWDeiMk6R81D0aYB9uiVc/LEreab0SqCJLGiDBcECBoBWTGNtg==
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:BL1PR12MB5157.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230001)(4636009)(366004)(47660400002)(36756003)(66556008)(38100700002)(2906002)(8676002)(31686004)(53546011)(6512007)(6506007)(19627235002)(508600001)(316002)(54906003)(83380400001)(66476007)(186003)(6486002)(26005)(7416002)(5660300002)(2616005)(4326008)(8936002)(6916009)(66946007)(86362001)(31696002)(46800400005)(43740500002)(45980500001);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?OWQyNmFKYlNhdkZrR0NvN3lCemVvUzduRDVncGFMc3VTVzE1Yk5jQ25WaE92?=
+ =?utf-8?B?ZzZaNy84U1dYSlNHaVJFSHgzcjk5blE0VXQvY3orWnEwVkpJY2NQZ2E1WFp0?=
+ =?utf-8?B?VkdCdSt6ZmNpcmNKcGJiUXZ6QXVVbmpaMUx4Y1REcjIzQlFSbGRGQklMdzha?=
+ =?utf-8?B?K3RVM1JJVGRBWDA2OE5PY2lJcFVMR0Ywa1JmQVZoSlNKZWo0eEdPeWVHbSt4?=
+ =?utf-8?B?RmtOdzJRYTQ5bFQvQ1l4WjdaRGxjelA0M1pqb0UzMTVYdkVCUi9ZaDdDQzF5?=
+ =?utf-8?B?b00ycFVqaDdqcU1ldjhRdi95eUdBbXhIUG0vYzFZQXlxZHlYTFBiUW13dis1?=
+ =?utf-8?B?R3VBTjV1MjRhaHJkb0FQSlIyQktFYnkyTXQ3dVBIQnpjOHltOUZhbUJnMTBD?=
+ =?utf-8?B?Z2IvMm1jOG1iKzFhNWIvb2wwWTNzZzZ3YW4yQnhSUEdHb2tDK2EvVEp5eHZk?=
+ =?utf-8?B?UExJT3ZUVW5RUjVtOEhvc0lKNzRNSXROeUlzdDRVc2NaZ2RZWXFnME5LMHE4?=
+ =?utf-8?B?eG4vN0JjWTdnNTFCaDdnbCtCbkhqckN5MEh2d1JTWkJxV1JTRlR0SlBFOGlt?=
+ =?utf-8?B?Yi94Zks3bmp4MmxuQThMUjhwTWhMU00rU2dscG9uekhOeXN0RXdxeFA4OXht?=
+ =?utf-8?B?WWh1c2JReDNNcTlTSmRKelRTMkZPOVdkaGdoVlhQeTBRU0pFSFRvYWJGWVVP?=
+ =?utf-8?B?LzRQaTRTRTMrOW5zK2hhclVDeXh0TGM2WVMwZE50R3ozYzNXM3NjY0Fjc3VU?=
+ =?utf-8?B?eVFUU3RlSHVlc3dCSFkwK1BGeHEwQmoxZEYzalJuTUxZcTdlNS9ZVnp5SkxL?=
+ =?utf-8?B?L2lFa3JITU4yZDFMUHlBNGNWNDlpeHVuN2puU0dHUE1tUHVCUWU4WmQ1SXBr?=
+ =?utf-8?B?SWN2aHhTR011U01Fejg0ajdnQ05oU1ZraFpUUlFJb29BU3plZUFSR3hlcEFP?=
+ =?utf-8?B?VERSOHprbGdSd200ZDZwUGd6ck05YUxmNk5tdy9IYzNYNTNjVmk4SEFldHpl?=
+ =?utf-8?B?RkZRQi92ZDJWL2djaEpMS3N1RFJNaC9RUFh3U1pFNWUxLzkwa0p2UWljSXlQ?=
+ =?utf-8?B?ckREamhjbVBnQk1SemxWVW1HQzhQTFZtRzlkaWQzTkV3dTNRZ3Y5M1AyaHU3?=
+ =?utf-8?B?NXMxblA1K21zTHR6aisvVGJ2UzduaXY3eWVHTmtqMGtJUGZpcTZEYWRFcDBS?=
+ =?utf-8?B?NGJHOHJOc2g3bmZ6WDVRQndyUE1qWmNUakhuSDI2Sk9jZ0h4dFBoV0c5UDBO?=
+ =?utf-8?B?YThyV2ZDUlRqbFVsRTdFQmVFMGZRUmUxNjF3b0xneWpGRTE2VG84VElOd0ox?=
+ =?utf-8?B?K3BBZ25ncjdVTGJNbzcvUElLT0RleDBaekFibmtaUUJFUUNzdENmaDNTbXRl?=
+ =?utf-8?B?VDBDdXNwSVNUUk01NnZUajY2YmgraGZ3WlZHSFZVVEo2M1loOUo3ZTBCcmpU?=
+ =?utf-8?B?R0hRb2JRRWhhMHpqTEpYbitpK25teUUvaXhvaVlPa3oydUVTWDQxb1NPNEty?=
+ =?utf-8?B?MW1FY1pVOG1Cc08vS0ZEeC8rdmQ3dGthcUx3UTBJSFlTekNMeCt6d0RqbnlQ?=
+ =?utf-8?B?N2U2U2luNE5QTW5EVFovWmdVblh3aWNpa1hRWWxicXB3WlZrQnkreStrbUJo?=
+ =?utf-8?B?djh4R1lzZFNZY05EMmRwTkFQcHc0M3VEMjhreGF4L1hBRFdrd0YxbTlqa0VJ?=
+ =?utf-8?B?SituSEpGMUdRWTJZM0liOUFiOWxhUWRUQWNjdCszZVdiTUhRRlpaUUd5eFdn?=
+ =?utf-8?B?cEUreGNLMFI0YjRxSnJLTFl4TUNleWsxdE5iZkZjTGx3dDUxUzlxU1FDd3BW?=
+ =?utf-8?B?Skk5TWR1MlRNbUhoa2xEREJCN1BpWERxZ2lqWXdveDJYME9uM2lvamJhM3k2?=
+ =?utf-8?B?eWcwQVRUTjdCMkhYOWdFWWNzQ0VtK2dDTURHWUhCMEpwMUFpMWdEVTA1ajYx?=
+ =?utf-8?B?ZGdRVitOcmhYeTZwV0RpMjRIUEhEeVFRM3hqUlJzbEQybWo4RktPcWtkUllZ?=
+ =?utf-8?B?ckFHVlB5SS96YWhnNEhhci9tQVhNWGJFazN2QWR2a2p5NE5OYjFCbGJ2ZFc1?=
+ =?utf-8?B?bDJQeVVzTkhiOWpRSlF6R0d3WkVFV3QxM1pOVjdZdTl1ZXhwVGhEMHFmUkxj?=
+ =?utf-8?B?VGgzejYyMTkrMUoxc1lFdFovdWZXd001QmhxK0pjOFR3c1d1d1AybEc0cXRT?=
+ =?utf-8?Q?3A0f3fSwZHN3igJnsOTWYf4=3D?=
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4a25fd8c-d4e3-4bce-90c8-08d9edaabddc
 X-MS-Exchange-CrossTenant-AuthSource: BL1PR12MB5157.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2754d213-e478-42ed-af33-08d9ed95f55f
-X-MS-Exchange-CrossTenant-originalarrivaltime: 11 Feb 2022 19:37:37.1297 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: X34UvYA9nrRyoP8VqHVcHg+k6hvlT2XHsWy7fxuS1JhX0SMeVw0KjYGX9EvOlFcg7Mwj7krVxJJIZ5kUjUuaug==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB2910
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Feb 2022 22:06:23.6301 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: GWHY40afzUpbdiZb8Nwiaw/vCv1+qg/blVc1L7+/PTbUmjbheWuX89AFAJo7loII/g+Kolg0ug4si5KsEdu0fA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY4PR1201MB0136
 X-Mailman-Approved-At: Sat, 12 Feb 2022 16:59:59 +0000
-Subject: Re: [Nouveau] [PATCH v2 3/9] PCI: drop `is_thunderbolt` attribute
+Subject: Re: [Nouveau] [PATCH v3 03/12] PCI: Move check for old Apple
+ Thunderbolt controllers into a quirk
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -132,105 +127,199 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Michael Jamet <michael.jamet@intel.com>,
+Cc: Andreas Noever <andreas.noever@gmail.com>,
+ Michael Jamet <michael.jamet@intel.com>,
  "open list:PCI SUBSYSTEM" <linux-pci@vger.kernel.org>,
  "open list:THUNDERBOLT DRIVER" <linux-usb@vger.kernel.org>,
  Yehezkel Bernat <YehezkelShB@gmail.com>,
  "open list:DRM DRIVERS" <dri-devel@lists.freedesktop.org>,
- "open list:X86 PLATFORM DRIVERS" <platform-driver-x86@vger.kernel.org>,
- Andreas Noever <andreas.noever@gmail.com>,
+ Hans de Goede <hdegoede@redhat.com>,
  "open list:RADEON and AMDGPU DRM DRIVERS" <amd-gfx@lists.freedesktop.org>,
- "open list:DRM DRIVER FOR NVIDIA
- GEFORCE/QUADRO GPUS" <nouveau@lists.freedesktop.org>,
- Bjorn Helgaas <bhelgaas@google.com>, "Deucher,
- Alexander" <Alexander.Deucher@amd.com>
+ "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
+ <nouveau@lists.freedesktop.org>, Bjorn Helgaas <bhelgaas@google.com>,
+ Alexander.Deucher@amd.com, Mika Westerberg <mika.westerberg@linux.intel.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-[Public]
+On 2/11/2022 15:35, Bjorn Helgaas wrote:
+> On Fri, Feb 11, 2022 at 01:32:41PM -0600, Mario Limonciello wrote:
+>> `pci_bridge_d3_possible` currently checks explicitly for a Thunderbolt
+>> controller to indicate that D3 is possible.  As this is used solely
+>> for older Apple systems, move it into a quirk that enumerates across
+>> all Intel TBT controllers.
+>>
+>> Suggested-by: Mika Westerberg <mika.westerberg@linux.intel.com>
+>> Signed-off-by: Mario Limonciello <mario.limonciello@amd.com>
+>> ---
+>>   drivers/pci/pci.c    | 12 +++++-----
+>>   drivers/pci/quirks.c | 53 ++++++++++++++++++++++++++++++++++++++++++++
+>>   2 files changed, 60 insertions(+), 5 deletions(-)
+>>
+>> diff --git a/drivers/pci/pci.c b/drivers/pci/pci.c
+>> index 9ecce435fb3f..5002e214c9a6 100644
+>> --- a/drivers/pci/pci.c
+>> +++ b/drivers/pci/pci.c
+>> @@ -1064,7 +1064,13 @@ static inline bool platform_pci_bridge_d3(struct pci_dev *dev)
+>>   	if (pci_use_mid_pm())
+>>   		return false;
+>>   
+>> -	return acpi_pci_bridge_d3(dev);
+>> +	if (acpi_pci_bridge_d3(dev))
+>> +		return true;
+>> +
+>> +	if (device_property_read_bool(&dev->dev, "HotPlugSupportInD3"))
+>> +		return true;
+> 
+> Why do we need this?  acpi_pci_bridge_d3() already looks for
+> "HotPlugSupportInD3".
 
-> -----Original Message-----
-> From: Mika Westerberg <mika.westerberg@linux.intel.com>
-> Sent: Friday, February 11, 2022 04:24
-> To: Limonciello, Mario <Mario.Limonciello@amd.com>
-> Cc: Bjorn Helgaas <bhelgaas@google.com>; Andreas Noever
-> <andreas.noever@gmail.com>; open list:PCI SUBSYSTEM <linux-
-> pci@vger.kernel.org>; open list:THUNDERBOLT DRIVER <linux-
-> usb@vger.kernel.org>; open list:RADEON and AMDGPU DRM DRIVERS <amd-
-> gfx@lists.freedesktop.org>; open list:DRM DRIVERS <dri-
-> devel@lists.freedesktop.org>; open list:DRM DRIVER FOR NVIDIA
-> GEFORCE/QUADRO GPUS <nouveau@lists.freedesktop.org>; open list:X86
-> PLATFORM DRIVERS <platform-driver-x86@vger.kernel.org>; Michael Jamet
-> <michael.jamet@intel.com>; Yehezkel Bernat <YehezkelShB@gmail.com>;
-> Lukas Wunner <lukas@wunner.de>; Deucher, Alexander
-> <Alexander.Deucher@amd.com>
-> Subject: Re: [PATCH v2 3/9] PCI: drop `is_thunderbolt` attribute
->=20
-> Hi Mario,
->=20
-> On Thu, Feb 10, 2022 at 04:43:23PM -0600, Mario Limonciello wrote:
-> > The `is_thunderbolt` attribute is currently a dumping ground for a
-> > variety of things.
-> >
-> > Instead use the driver core removable attribute to indicate the
-> > detail a device is attached to a thunderbolt or USB4 chain.
-> >
-> > Signed-off-by: Mario Limonciello <mario.limonciello@amd.com>
-> > ---
-> >  drivers/pci/pci.c                 |  2 +-
-> >  drivers/pci/probe.c               | 20 +++++++-------------
-> >  drivers/platform/x86/apple-gmux.c |  2 +-
-> >  include/linux/pci.h               |  5 ++---
-> >  4 files changed, 11 insertions(+), 18 deletions(-)
-> >
-> > diff --git a/drivers/pci/pci.c b/drivers/pci/pci.c
-> > index 9ecce435fb3f..1264984d5e6d 100644
-> > --- a/drivers/pci/pci.c
-> > +++ b/drivers/pci/pci.c
-> > @@ -2955,7 +2955,7 @@ bool pci_bridge_d3_possible(struct pci_dev *bridg=
-e)
-> >  			return true;
-> >
-> >  		/* Even the oldest 2010 Thunderbolt controller supports D3. */
-> > -		if (bridge->is_thunderbolt)
-> > +		if (dev_is_removable(&bridge->dev))
->=20
-> For this, I'm not entirely sure this is what we want. The purpose of
-> this check is to enable port power management of Apple systems with
-> Intel Thunderbolt controller and therefore checking for "removable" here
-> is kind of misleading IMHO.
->=20
-> I wonder if we could instead remove the check completely here and rely
-> on the below:
->=20
-> 	if (platform_pci_bridge_d3(bridge))
-> 		return true;
->=20
-> and that would then look like:
->=20
-> static inline bool platform_pci_bridge_d3(struct pci_dev *dev)
-> {
-> 	if (pci_use_mid_pm())
-> 		return false;
->=20
-> 	if (acpi_pci_bridge_d3(dev))
-> 		return true;
->=20
-> 	if (device_property_read_bool(&dev->dev, "HotPlugSupportInD3"))
-> 		return true;
->=20
-> 	return false;
-> }
->=20
-> and then make a quirk in quirks.c that adds the software node property
-> for the Apple systems? Or something along those lines.
->=20
-> @Lukas, what do you think?
+The Apple machines don't have ACPI companion devices that specify this 
+property.
 
-I took a stab at doing this for V3, but I'm unsure whether ALL of the TBT c=
-ontrollers
-in pci_ids.h have been used in Apple laptops, so it might be a bit wasteful=
- of a quirk
-list.  If there is a known list somewhere that is shorter than that, it may=
- be possible
-to pare down.  Lukas, if you can please look closely at patch 3 of v3.
+I guess this probes a different question; can 
+`device_property_read_bool` be used in `acpi_pci_bridge_d3` instead of:
+
+	if (acpi_dev_get_property(adev, "HotPlugSupportInD3",
+				   ACPI_TYPE_INTEGER, &obj) < 0)
+		return false;
+
+	return obj->integer.value == 1;
+
+If so, then yeah this can probably be simplified.
+
+> 
+>> +	return false;
+>>   }
+>>   
+>>   /**
+>> @@ -2954,10 +2960,6 @@ bool pci_bridge_d3_possible(struct pci_dev *bridge)
+>>   		if (pci_bridge_d3_force)
+>>   			return true;
+>>   
+>> -		/* Even the oldest 2010 Thunderbolt controller supports D3. */
+>> -		if (bridge->is_thunderbolt)
+>> -			return true;
+>> -
+>>   		/* Platform might know better if the bridge supports D3 */
+>>   		if (platform_pci_bridge_d3(bridge))
+>>   			return true;
+>> diff --git a/drivers/pci/quirks.c b/drivers/pci/quirks.c
+>> index 6d3c88edde00..aaf098ca7d54 100644
+>> --- a/drivers/pci/quirks.c
+>> +++ b/drivers/pci/quirks.c
+>> @@ -3756,6 +3756,59 @@ DECLARE_PCI_FIXUP_SUSPEND_LATE(PCI_VENDOR_ID_INTEL,
+>>   			       quirk_apple_poweroff_thunderbolt);
+>>   #endif
+>>   
+>> +/* Apple machines as old as 2010 can do D3 with Thunderbolt controllers, but don't specify
+>> + * it in the ACPI tables
+> 
+> Wrap to fit in 80 columns like the rest of the file.  Also use the:
+> 
+>    /*
+>     * comment ...
+>     */
+> 
+> style if it's more than one line.
+> 
+> I don't think "as old as 2010" is helpful here -- I assume 2010 is
+> there because there *were* no Thunderbolt controllers before 2010, but
+> the code doesn't check any dates, so we basically assume all Apple
+> machines of any age with the listed controllers can do this.
+
+The old comment was saying that, which is where I got it from.  Yeah, 
+I'll update it.
+
+> 
+>> + */
+>> +static void quirk_apple_d3_thunderbolt(struct pci_dev *dev)
+>> +{
+>> +	struct property_entry properties[] = {
+>> +		PROPERTY_ENTRY_BOOL("HotPlugSupportInD3"),
+>> +		{},
+>> +	};
+>> +
+>> +	if (!x86_apple_machine)
+>> +		return;
+> 
+> The current code doesn't check x86_apple_machine, so this needs some
+> justification.  How do I know this works the same as before?
+
+Mika and Lucas were saying the only reason for this codepath was Apple 
+machines in the first place, which is where this idea came from.
+
+Something specifically relevant is that the Apple machines use a SW 
+connection manager, whereas everyone else up until USB4 devices use a 
+firmware based connection manager with varying behaviors on generation 
+(ICM).
+
+> 
+>> +
+>> +	if (device_create_managed_software_node(&dev->dev, properties, NULL))
+>> +		pci_warn(dev, "could not add HotPlugSupportInD3 property");
+>> +}
+>> +DECLARE_PCI_FIXUP_FINAL(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_LIGHT_RIDGE,
+>> +			quirk_apple_d3_thunderbolt);
+> 
+> The current code assumes *all* Thunderbolt controllers support D3, so
+> it would assume a controller released next year would support D3, but
+> this code would assume the opposite.  Are we supposed to add
+> everything to this list, or do newer machines supply
+> HotPlugSupportInD3, or ...?
+
+This quirk is intended specifically for Apple, which has stopped making 
+Intel machines with Intel TBT controllers.
+
+So I don't believe the list should be growing any more, if anything it 
+might need to shrink if I got too many models that weren't actually in 
+Apple products.  Lucas probably needs to confirm that.
+
+> 
+> How did you derive this list?  (Question for the commit log and/or
+> comments here.)
+
+I went to pci_ids.h and got all the Thunderbolt controllers listed there.
+
+> 
+>> +DECLARE_PCI_FIXUP_FINAL(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_EAGLE_RIDGE,
+>> +			quirk_apple_d3_thunderbolt);
+>> +DECLARE_PCI_FIXUP_FINAL(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_LIGHT_PEAK,
+>> +			quirk_apple_d3_thunderbolt);
+>> +DECLARE_PCI_FIXUP_FINAL(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_CACTUS_RIDGE_4C,
+>> +			quirk_apple_d3_thunderbolt);
+>> +DECLARE_PCI_FIXUP_FINAL(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_CACTUS_RIDGE_2C,
+>> +			quirk_apple_d3_thunderbolt);
+>> +DECLARE_PCI_FIXUP_FINAL(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_PORT_RIDGE,
+>> +			quirk_apple_d3_thunderbolt);
+>> +DECLARE_PCI_FIXUP_FINAL(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_REDWOOD_RIDGE_2C_NHI,
+>> +			quirk_apple_d3_thunderbolt);
+>> +DECLARE_PCI_FIXUP_FINAL(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_REDWOOD_RIDGE_2C_BRIDGE,
+>> +			quirk_apple_d3_thunderbolt);
+>> +DECLARE_PCI_FIXUP_FINAL(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_REDWOOD_RIDGE_4C_NHI,
+>> +			quirk_apple_d3_thunderbolt);
+>> +DECLARE_PCI_FIXUP_FINAL(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_REDWOOD_RIDGE_4C_BRIDGE,
+>> +			quirk_apple_d3_thunderbolt);
+>> +DECLARE_PCI_FIXUP_FINAL(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_FALCON_RIDGE_2C_NHI,
+>> +			quirk_apple_d3_thunderbolt);
+>> +DECLARE_PCI_FIXUP_FINAL(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_FALCON_RIDGE_2C_BRIDGE,
+>> +			quirk_apple_d3_thunderbolt);
+>> +DECLARE_PCI_FIXUP_FINAL(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_FALCON_RIDGE_4C_NHI,
+>> +			quirk_apple_d3_thunderbolt);
+>> +DECLARE_PCI_FIXUP_FINAL(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_FALCON_RIDGE_4C_BRIDGE,
+>> +			quirk_apple_d3_thunderbolt);
+>> +DECLARE_PCI_FIXUP_FINAL(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_ALPINE_RIDGE_2C_NHI,
+>> +			quirk_apple_d3_thunderbolt);
+>> +DECLARE_PCI_FIXUP_FINAL(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_ALPINE_RIDGE_2C_BRIDGE,
+>> +			quirk_apple_d3_thunderbolt);
+>> +DECLARE_PCI_FIXUP_FINAL(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_ALPINE_RIDGE_4C_NHI,
+>> +			quirk_apple_d3_thunderbolt);
+>> +DECLARE_PCI_FIXUP_FINAL(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_ALPINE_RIDGE_4C_BRIDGE,
+>> +			quirk_apple_d3_thunderbolt);
+>> +
+>>   /*
+>>    * Following are device-specific reset methods which can be used to
+>>    * reset a single function if other methods (e.g. FLR, PM D0->D3) are
+>> -- 
+>> 2.34.1
+>>
+
