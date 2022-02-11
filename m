@@ -2,84 +2,58 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7CAFD4B1CE9
-	for <lists+nouveau@lfdr.de>; Fri, 11 Feb 2022 04:28:31 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 148094B1CF2
+	for <lists+nouveau@lfdr.de>; Fri, 11 Feb 2022 04:28:39 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A57AE10E9E9;
-	Fri, 11 Feb 2022 03:28:14 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 7A81A10E9FB;
+	Fri, 11 Feb 2022 03:28:16 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-io1-xd36.google.com (mail-io1-xd36.google.com
- [IPv6:2607:f8b0:4864:20::d36])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 2155A10E98F
- for <nouveau@lists.freedesktop.org>; Thu, 10 Feb 2022 23:27:15 +0000 (UTC)
-Received: by mail-io1-xd36.google.com with SMTP id e79so9361620iof.13
- for <nouveau@lists.freedesktop.org>; Thu, 10 Feb 2022 15:27:15 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=from:to:subject:date:message-id:in-reply-to:references:mime-version
- :content-transfer-encoding;
- bh=yuZUTT/rXi5dMjISKVJYU5DzInQNJ+fNjCOO2/f7G8k=;
- b=j55OXYXTjVhdPRBFTmJ0hd/eeXByGxC4t0B3i9rQKb3+0S3rnp8xzD+hSP60/pxcNO
- Be9jAJMFxu9ZbzBlEOboyCGBPjddFJA1TXkBcqAY+z9d3CdxBM5uLsA17zCPm+yi23p/
- gSlhIvQ62GWYaoCo0t7FoT8VN3Q114+NR9c+g5+jWF4I1d9Jspb9+pcEmnD1SDzkq4Z6
- Tf3I6aiau8yOugjCCnnL34w85f4avkSj1tiZzP1lz19DrCs3U9/H4Eqcj1915r+1/LfB
- qOMjkORvNHKFa7feKj7YS2lbBSjbFfOFEUxlI+R9/OPdTHEf6h3Bnl6UeYP7tyc2kNHw
- YQ4w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=yuZUTT/rXi5dMjISKVJYU5DzInQNJ+fNjCOO2/f7G8k=;
- b=iTsXw8QtOQiuCGirdz+knn96dIQRak3Qq/1sHL62WY9Sv0W08+e5ypkCoA5gEF/aJ3
- Kwg7IkZnfNMrgCucU0lXqB+C7A9dtpvP1WU11t6XHc2Fmd0G3qMagAMX5yx5090gUl3e
- 2WhHdG1ZwgkuGokcrpSxr4wl3wMnG+sUpZhZnmj/YV5iXQu6t1bYr+NSvXRa2C9r+vaW
- GEh2uErN9ZSMVkyWSd6XjDNXy5qoyyWwsMI9nT563z2GlCCvdfG+OcxAjqz3auSzjGre
- pRAwDlL1g5rnM6c/dvD+X7B28wcVgCuuViLYPp/Hn759N3zSL4EDwGtMSQpeIQZACYRY
- W5iA==
-X-Gm-Message-State: AOAM531L7H/7NcWk6XNjRa8YOPPj7cSlRGrCpRWtGp5BIE54UYbWneWR
- w4x9ZQTLfeHZFMHoK2c4OSU=
-X-Google-Smtp-Source: ABdhPJyuJyeIJ/FFP5Y/oWwaiFFlMwtt8E2cOYzuTD6rFFwrutNggg6s1UO76PCAuQUYz5PAgS7eNQ==
-X-Received: by 2002:a05:6638:101:: with SMTP id x1mr859923jao.23.1644535634329; 
- Thu, 10 Feb 2022 15:27:14 -0800 (PST)
-Received: from localhost ([12.28.44.171])
- by smtp.gmail.com with ESMTPSA id t195sm5516476iof.47.2022.02.10.15.27.13
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 10 Feb 2022 15:27:13 -0800 (PST)
-From: Yury Norov <yury.norov@gmail.com>
-To: Yury Norov <yury.norov@gmail.com>,
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- Rasmus Villemoes <linux@rasmusvillemoes.dk>,
- Andrew Morton <akpm@linux-foundation.org>,
- =?UTF-8?q?Micha=C5=82=20Miros=C5=82aw?= <mirq-linux@rere.qmqm.pl>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Peter Zijlstra <peterz@infradead.org>,
- David Laight <David.Laight@aculab.com>, Joe Perches <joe@perches.com>,
- Dennis Zhou <dennis@kernel.org>, Emil Renner Berthing <kernel@esmil.dk>,
- Nicholas Piggin <npiggin@gmail.com>,
- Matti Vaittinen <matti.vaittinen@fi.rohmeurope.com>,
- Alexey Klimov <aklimov@redhat.com>, linux-kernel@vger.kernel.org,
- Fenghua Yu <fenghua.yu@intel.com>,
- Reinette Chatre <reinette.chatre@intel.com>,
- Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>,
- Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>,
- "H. Peter Anvin" <hpa@zytor.com>, Steven Rostedt <rostedt@goodmis.org>,
- Karol Herbst <karolherbst@gmail.com>, Pekka Paalanen <ppaalanen@gmail.com>,
- Andy Lutomirski <luto@kernel.org>, Steve Wahl <steve.wahl@hpe.com>,
- Mike Travis <mike.travis@hpe.com>,
- Dimitri Sivanich <dimitri.sivanich@hpe.com>,
- Russ Anderson <russ.anderson@hpe.com>, Darren Hart <dvhart@infradead.org>,
- Andy Shevchenko <andy@infradead.org>, x86@kernel.org,
- nouveau@lists.freedesktop.org, platform-driver-x86@vger.kernel.org
-Date: Thu, 10 Feb 2022 14:49:00 -0800
-Message-Id: <20220210224933.379149-17-yury.norov@gmail.com>
-X-Mailer: git-send-email 2.32.0
-In-Reply-To: <20220210224933.379149-1-yury.norov@gmail.com>
-References: <20220210224933.379149-1-yury.norov@gmail.com>
+Received: from mailgw01.mediatek.com (unknown [60.244.123.138])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3136010E1F5;
+ Fri, 11 Feb 2022 01:28:58 +0000 (UTC)
+X-UUID: a6ec2389a58f4263b294b95e622561b2-20220211
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
+ s=dk; 
+ h=Content-Type:Content-Transfer-Encoding:In-Reply-To:MIME-Version:Date:Message-ID:From:References:CC:To:Subject;
+ bh=WhoyAmQzNgF8EmbXvPhTH/2sxRsX1qfK5DKv6TsuUcY=; 
+ b=RcedtIIcAHepwm4lfcPdHFhoFPNia8hk0NyCFSw07tJVKEq4dStrY+hni3SQolZs+hbwQ0fMdAaoJwrXEimzO/YMBiAw8ru6MZbCL+FTrL9A6EDAeaUe0Pl1wBpEjuKV2XK114rbwiA+jw97ijg9XNkhf6wluhf3xjQ5RO8fEcQ=;
+X-UUID: a6ec2389a58f4263b294b95e622561b2-20220211
+Received: from mtkcas10.mediatek.inc [(172.21.101.39)] by mailgw01.mediatek.com
+ (envelope-from <macpaul.lin@mediatek.com>)
+ (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-SHA384 256/256)
+ with ESMTP id 1085269837; Fri, 11 Feb 2022 09:28:52 +0800
+Received: from mtkcas10.mediatek.inc (172.21.101.39) by
+ mtkmbs10n2.mediatek.inc (172.21.101.183) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id 15.2.792.3; 
+ Fri, 11 Feb 2022 09:28:51 +0800
+Received: from [172.21.84.99] (172.21.84.99) by mtkcas10.mediatek.inc
+ (172.21.101.73) with Microsoft SMTP Server id 15.0.1497.2 via Frontend
+ Transport; Fri, 11 Feb 2022 09:28:51 +0800
+To: Mario Limonciello <mario.limonciello@amd.com>, Bjorn Helgaas
+ <bhelgaas@google.com>, Andreas Noever <andreas.noever@gmail.com>, Mika
+ Westerberg <mika.westerberg@linux.intel.com>, "open list:PCI SUBSYSTEM"
+ <linux-pci@vger.kernel.org>, "open list:THUNDERBOLT DRIVER"
+ <linux-usb@vger.kernel.org>, "open list:RADEON and AMDGPU DRM DRIVERS"
+ <amd-gfx@lists.freedesktop.org>, "open list:DRM DRIVERS"
+ <dri-devel@lists.freedesktop.org>, "open list:DRM DRIVER FOR NVIDIA
+ GEFORCE/QUADRO GPUS" <nouveau@lists.freedesktop.org>, "open list:X86 PLATFORM
+ DRIVERS" <platform-driver-x86@vger.kernel.org>
+References: <20220210224329.2793-1-mario.limonciello@amd.com>
+ <20220210224329.2793-5-mario.limonciello@amd.com>
+From: Macpaul Lin <macpaul.lin@mediatek.com>
+Message-ID: <b1b47db2-b760-649a-d0e0-79ff22ece8c0@mediatek.com>
+Date: Fri, 11 Feb 2022 09:28:51 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <20220210224329.2793-5-mario.limonciello@amd.com>
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+Content-Type: multipart/alternative;
+ boundary="__=_Part_Boundary_005_1648681517.2033680023"
 X-Mailman-Approved-At: Fri, 11 Feb 2022 03:28:13 +0000
-Subject: [Nouveau] [PATCH 16/49] arch/x86: replace cpumask_weight with
- cpumask_empty where appropriate
+Subject: Re: [Nouveau] [PATCH v2 4/9] PCI: mark USB4 devices as removable
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -91,111 +65,89 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
+Cc: Michael Jamet <michael.jamet@intel.com>,
+ Yehezkel Bernat <YehezkelShB@gmail.com>, Alexander.Deucher@amd.com
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-In some cases, arch/x86 code calls cpumask_weight() to check if any bit of
-a given cpumask is set. We can do it more efficiently with cpumask_empty()
-because cpumask_empty() stops traversing the cpumask as soon as it finds
-first set bit, while cpumask_weight() counts all bits unconditionally.
+--__=_Part_Boundary_005_1648681517.2033680023
+Content-Type: text/html;
+	charset="utf-8"
+Content-Transfer-Encoding: base64
 
-Signed-off-by: Yury Norov <yury.norov@gmail.com>
-Reviewed-by: Steve Wahl <steve.wahl@hpe.com>
----
- arch/x86/kernel/cpu/resctrl/rdtgroup.c | 14 +++++++-------
- arch/x86/mm/mmio-mod.c                 |  2 +-
- arch/x86/platform/uv/uv_nmi.c          |  2 +-
- 3 files changed, 9 insertions(+), 9 deletions(-)
+PHByZT4NCk9uJiMzMjsyLzExLzIyJiMzMjs2OjQzJiMzMjtBTSwmIzMyO01hcmlvJiMzMjtMaW1v
+bmNpZWxsbyYjMzI7d3JvdGU6DQomZ3Q7JiMzMjtVU0I0JiMzMjtjbGFzcyYjMzI7ZGV2aWNlcyYj
+MzI7YXJlJiMzMjthbHNvJiMzMjtyZW1vdmFibGUmIzMyO2xpa2UmIzMyO0ludGVsJiMzMjtUaHVu
+ZGVyYm9sdCYjMzI7ZGV2aWNlcy4NCiZndDsmIzMyOw0KJmd0OyYjMzI7RHJpdmVycyYjMzI7b2Ym
+IzMyO2Rvd25zdHJlYW0mIzMyO2RldmljZXMmIzMyO3VzZSYjMzI7dGhpcyYjMzI7aW5mb3JtYXRp
+b24mIzMyO3RvJiMzMjtkZWNsYXJlJiMzMjtmdW5jdGlvbmFsDQomZ3Q7JiMzMjtkaWZmZXJlbmNl
+cyYjMzI7aW4mIzMyO2hvdyYjMzI7dGhlJiMzMjtkcml2ZXJzJiMzMjtwZXJmb3JtJiMzMjtieSYj
+MzI7a25vd2luZyYjMzI7dGhhdCYjMzI7dGhleSYjMzI7YXJlJiMzMjtjb25uZWN0ZWQNCiZndDsm
+IzMyO3RvJiMzMjthbiYjMzI7dXBzdHJlYW0mIzMyO1RCVC9VU0I0JiMzMjtwb3J0Lg0KJmd0OyYj
+MzI7DQomZ3Q7JiMzMjtTaWduZWQtb2ZmLWJ5OiYjMzI7TWFyaW8mIzMyO0xpbW9uY2llbGxvJiMz
+MjsmbHQ7bWFyaW8ubGltb25jaWVsbG9AYW1kLmNvbSZndDsNCiZndDsmIzMyOy0tLQ0KJmd0OyYj
+MzI7JiMzMjsmIzMyO2RyaXZlcnMvcGNpL3Byb2JlLmMmIzMyO3wmIzMyOzEmIzMyOysNCiZndDsm
+IzMyOyYjMzI7JiMzMjsxJiMzMjtmaWxlJiMzMjtjaGFuZ2VkLCYjMzI7MSYjMzI7aW5zZXJ0aW9u
+KCspDQomZ3Q7JiMzMjsNCiZndDsmIzMyO2RpZmYmIzMyOy0tZ2l0JiMzMjthL2RyaXZlcnMvcGNp
+L3Byb2JlLmMmIzMyO2IvZHJpdmVycy9wY2kvcHJvYmUuYw0KJmd0OyYjMzI7aW5kZXgmIzMyO2U0
+MTY1NmNkZDhmMC4uNzM2NzNhODNlYjVlJiMzMjsxMDA2NDQNCiZndDsmIzMyOy0tLSYjMzI7YS9k
+cml2ZXJzL3BjaS9wcm9iZS5jDQomZ3Q7JiMzMjsrKysmIzMyO2IvZHJpdmVycy9wY2kvcHJvYmUu
+Yw0KJmd0OyYjMzI7QEAmIzMyOy0xNjEwLDYmIzMyOysxNjEwLDcmIzMyO0BAJiMzMjtzdGF0aWMm
+IzMyO3ZvaWQmIzMyO3BjaV9zZXRfcmVtb3ZhYmxlKHN0cnVjdCYjMzI7cGNpX2RldiYjMzI7KmRl
+dikNCiZndDsmIzMyOyYjMzI7JiMzMjsmIzMyOyomIzMyO2V4cG9zZWQmIzMyO2FzJiMzMjsmcXVv
+dDtyZW1vdmFibGUmcXVvdDsmIzMyO3RvJiMzMjt1c2Vyc3BhY2UuDQomZ3Q7JiMzMjsmIzMyOyYj
+MzI7JiMzMjsqLw0KJmd0OyYjMzI7JiMzMjsmIzMyO2lmJiMzMjsodnNlYyYjMzI7fHwNCiZndDsm
+IzMyOysmIzMyOyYjMzI7JiMzMjsmIzMyO2Rldi0mZ3Q7Y2xhc3MmIzMyOz09JiMzMjtQQ0lfQ0xB
+U1NfU0VSSUFMX1VTQl9VU0I0JiMzMjt8fA0KJmd0OyYjMzI7JiMzMjsmIzMyOyYjMzI7JiMzMjsm
+IzMyOyYjMzI7KHBhcmVudCYjMzI7JmFtcDsmYW1wOw0KJmd0OyYjMzI7JiMzMjsmIzMyOyYjMzI7
+JiMzMjsmIzMyOyYjMzI7KHBhcmVudC0mZ3Q7ZXh0ZXJuYWxfZmFjaW5nJiMzMjt8fCYjMzI7ZGV2
+X2lzX3JlbW92YWJsZSgmYW1wO3BhcmVudC0mZ3Q7ZGV2KSkpKQ0KJmd0OyYjMzI7JiMzMjsmIzMy
+O2Rldl9zZXRfcmVtb3ZhYmxlKCZhbXA7ZGV2LSZndDtkZXYsJiMzMjtERVZJQ0VfUkVNT1ZBQkxF
+KTsNCiZndDsmIzMyOw0KDQpSZXZpZXdlZC1ieTomIzMyO01hY3BhdWwmIzMyO0xpbiYjMzI7Jmx0
+O21hY3BhdWwubGluQG1lZGlhdGVrLmNvbSZndDsNCg0KVGhhbmtzIQ0KDQpSZWdhcmRzLA0KTWFj
+cGF1bCYjMzI7TGluDQo8L3ByZT48IS0tdHlwZTp0ZXh0LS0+PCEtLXstLT48cHJlPioqKioqKioq
+KioqKiogTUVESUFURUsgQ29uZmlkZW50aWFsaXR5IE5vdGljZSAqKioqKioqKioqKioqKioqKioq
+Kg0KVGhlIGluZm9ybWF0aW9uIGNvbnRhaW5lZCBpbiB0aGlzIGUtbWFpbCBtZXNzYWdlIChpbmNs
+dWRpbmcgYW55IA0KYXR0YWNobWVudHMpIG1heSBiZSBjb25maWRlbnRpYWwsIHByb3ByaWV0YXJ5
+LCBwcml2aWxlZ2VkLCBvciBvdGhlcndpc2UNCmV4ZW1wdCBmcm9tIGRpc2Nsb3N1cmUgdW5kZXIg
+YXBwbGljYWJsZSBsYXdzLiBJdCBpcyBpbnRlbmRlZCB0byBiZSANCmNvbnZleWVkIG9ubHkgdG8g
+dGhlIGRlc2lnbmF0ZWQgcmVjaXBpZW50KHMpLiBBbnkgdXNlLCBkaXNzZW1pbmF0aW9uLCANCmRp
+c3RyaWJ1dGlvbiwgcHJpbnRpbmcsIHJldGFpbmluZyBvciBjb3B5aW5nIG9mIHRoaXMgZS1tYWls
+IChpbmNsdWRpbmcgaXRzIA0KYXR0YWNobWVudHMpIGJ5IHVuaW50ZW5kZWQgcmVjaXBpZW50KHMp
+IGlzIHN0cmljdGx5IHByb2hpYml0ZWQgYW5kIG1heSANCmJlIHVubGF3ZnVsLiBJZiB5b3UgYXJl
+IG5vdCBhbiBpbnRlbmRlZCByZWNpcGllbnQgb2YgdGhpcyBlLW1haWwsIG9yIGJlbGlldmUgDQp0
+aGF0IHlvdSBoYXZlIHJlY2VpdmVkIHRoaXMgZS1tYWlsIGluIGVycm9yLCBwbGVhc2Ugbm90aWZ5
+IHRoZSBzZW5kZXIgDQppbW1lZGlhdGVseSAoYnkgcmVwbHlpbmcgdG8gdGhpcyBlLW1haWwpLCBk
+ZWxldGUgYW55IGFuZCBhbGwgY29waWVzIG9mIA0KdGhpcyBlLW1haWwgKGluY2x1ZGluZyBhbnkg
+YXR0YWNobWVudHMpIGZyb20geW91ciBzeXN0ZW0sIGFuZCBkbyBub3QNCmRpc2Nsb3NlIHRoZSBj
+b250ZW50IG9mIHRoaXMgZS1tYWlsIHRvIGFueSBvdGhlciBwZXJzb24uIFRoYW5rIHlvdSENCjwv
+cHJlPjwhLS19LS0+
 
-diff --git a/arch/x86/kernel/cpu/resctrl/rdtgroup.c b/arch/x86/kernel/cpu/resctrl/rdtgroup.c
-index b57b3db9a6a7..e23ff03290b8 100644
---- a/arch/x86/kernel/cpu/resctrl/rdtgroup.c
-+++ b/arch/x86/kernel/cpu/resctrl/rdtgroup.c
-@@ -341,14 +341,14 @@ static int cpus_mon_write(struct rdtgroup *rdtgrp, cpumask_var_t newmask,
- 
- 	/* Check whether cpus belong to parent ctrl group */
- 	cpumask_andnot(tmpmask, newmask, &prgrp->cpu_mask);
--	if (cpumask_weight(tmpmask)) {
-+	if (!cpumask_empty(tmpmask)) {
- 		rdt_last_cmd_puts("Can only add CPUs to mongroup that belong to parent\n");
- 		return -EINVAL;
- 	}
- 
- 	/* Check whether cpus are dropped from this group */
- 	cpumask_andnot(tmpmask, &rdtgrp->cpu_mask, newmask);
--	if (cpumask_weight(tmpmask)) {
-+	if (!cpumask_empty(tmpmask)) {
- 		/* Give any dropped cpus to parent rdtgroup */
- 		cpumask_or(&prgrp->cpu_mask, &prgrp->cpu_mask, tmpmask);
- 		update_closid_rmid(tmpmask, prgrp);
-@@ -359,7 +359,7 @@ static int cpus_mon_write(struct rdtgroup *rdtgrp, cpumask_var_t newmask,
- 	 * and update per-cpu rmid
- 	 */
- 	cpumask_andnot(tmpmask, newmask, &rdtgrp->cpu_mask);
--	if (cpumask_weight(tmpmask)) {
-+	if (!cpumask_empty(tmpmask)) {
- 		head = &prgrp->mon.crdtgrp_list;
- 		list_for_each_entry(crgrp, head, mon.crdtgrp_list) {
- 			if (crgrp == rdtgrp)
-@@ -394,7 +394,7 @@ static int cpus_ctrl_write(struct rdtgroup *rdtgrp, cpumask_var_t newmask,
- 
- 	/* Check whether cpus are dropped from this group */
- 	cpumask_andnot(tmpmask, &rdtgrp->cpu_mask, newmask);
--	if (cpumask_weight(tmpmask)) {
-+	if (!cpumask_empty(tmpmask)) {
- 		/* Can't drop from default group */
- 		if (rdtgrp == &rdtgroup_default) {
- 			rdt_last_cmd_puts("Can't drop CPUs from default group\n");
-@@ -413,12 +413,12 @@ static int cpus_ctrl_write(struct rdtgroup *rdtgrp, cpumask_var_t newmask,
- 	 * and update per-cpu closid/rmid.
- 	 */
- 	cpumask_andnot(tmpmask, newmask, &rdtgrp->cpu_mask);
--	if (cpumask_weight(tmpmask)) {
-+	if (!cpumask_empty(tmpmask)) {
- 		list_for_each_entry(r, &rdt_all_groups, rdtgroup_list) {
- 			if (r == rdtgrp)
- 				continue;
- 			cpumask_and(tmpmask1, &r->cpu_mask, tmpmask);
--			if (cpumask_weight(tmpmask1))
-+			if (!cpumask_empty(tmpmask1))
- 				cpumask_rdtgrp_clear(r, tmpmask1);
- 		}
- 		update_closid_rmid(tmpmask, rdtgrp);
-@@ -488,7 +488,7 @@ static ssize_t rdtgroup_cpus_write(struct kernfs_open_file *of,
- 
- 	/* check that user didn't specify any offline cpus */
- 	cpumask_andnot(tmpmask, newmask, cpu_online_mask);
--	if (cpumask_weight(tmpmask)) {
-+	if (!cpumask_empty(tmpmask)) {
- 		ret = -EINVAL;
- 		rdt_last_cmd_puts("Can only assign online CPUs\n");
- 		goto unlock;
-diff --git a/arch/x86/mm/mmio-mod.c b/arch/x86/mm/mmio-mod.c
-index 933a2ebad471..c3317f0650d8 100644
---- a/arch/x86/mm/mmio-mod.c
-+++ b/arch/x86/mm/mmio-mod.c
-@@ -400,7 +400,7 @@ static void leave_uniprocessor(void)
- 	int cpu;
- 	int err;
- 
--	if (!cpumask_available(downed_cpus) || cpumask_weight(downed_cpus) == 0)
-+	if (!cpumask_available(downed_cpus) || cpumask_empty(downed_cpus))
- 		return;
- 	pr_notice("Re-enabling CPUs...\n");
- 	for_each_cpu(cpu, downed_cpus) {
-diff --git a/arch/x86/platform/uv/uv_nmi.c b/arch/x86/platform/uv/uv_nmi.c
-index 1e9ff28bc2e0..ea277fc08357 100644
---- a/arch/x86/platform/uv/uv_nmi.c
-+++ b/arch/x86/platform/uv/uv_nmi.c
-@@ -985,7 +985,7 @@ static int uv_handle_nmi(unsigned int reason, struct pt_regs *regs)
- 
- 	/* Clear global flags */
- 	if (master) {
--		if (cpumask_weight(uv_nmi_cpu_mask))
-+		if (!cpumask_empty(uv_nmi_cpu_mask))
- 			uv_nmi_cleanup_mask();
- 		atomic_set(&uv_nmi_cpus_in_nmi, -1);
- 		atomic_set(&uv_nmi_cpu, -1);
--- 
-2.32.0
+--__=_Part_Boundary_005_1648681517.2033680023
+Content-Type: text/plain;
+	charset="utf-8";
+	format=flowed
+Content-Transfer-Encoding: base64
+
+T24gMi8xMS8yMiA2OjQzIEFNLCBNYXJpbyBMaW1vbmNpZWxsbyB3cm90ZToNCj4gVVNCNCBjbGFz
+cyBkZXZpY2VzIGFyZSBhbHNvIHJlbW92YWJsZSBsaWtlIEludGVsIFRodW5kZXJib2x0IGRldmlj
+ZXMuDQo+IA0KPiBEcml2ZXJzIG9mIGRvd25zdHJlYW0gZGV2aWNlcyB1c2UgdGhpcyBpbmZvcm1h
+dGlvbiB0byBkZWNsYXJlIGZ1bmN0aW9uYWwNCj4gZGlmZmVyZW5jZXMgaW4gaG93IHRoZSBkcml2
+ZXJzIHBlcmZvcm0gYnkga25vd2luZyB0aGF0IHRoZXkgYXJlIGNvbm5lY3RlZA0KPiB0byBhbiB1
+cHN0cmVhbSBUQlQvVVNCNCBwb3J0Lg0KPiANCj4gU2lnbmVkLW9mZi1ieTogTWFyaW8gTGltb25j
+aWVsbG8gPG1hcmlvLmxpbW9uY2llbGxvQGFtZC5jb20+DQo+IC0tLQ0KPiAgIGRyaXZlcnMvcGNp
+L3Byb2JlLmMgfCAxICsNCj4gICAxIGZpbGUgY2hhbmdlZCwgMSBpbnNlcnRpb24oKykNCj4gDQo+
+IGRpZmYgLS1naXQgYS9kcml2ZXJzL3BjaS9wcm9iZS5jIGIvZHJpdmVycy9wY2kvcHJvYmUuYw0K
+PiBpbmRleCBlNDE2NTZjZGQ4ZjAuLjczNjczYTgzZWI1ZSAxMDA2NDQNCj4gLS0tIGEvZHJpdmVy
+cy9wY2kvcHJvYmUuYw0KPiArKysgYi9kcml2ZXJzL3BjaS9wcm9iZS5jDQo+IEBAIC0xNjEwLDYg
+KzE2MTAsNyBAQCBzdGF0aWMgdm9pZCBwY2lfc2V0X3JlbW92YWJsZShzdHJ1Y3QgcGNpX2RldiAq
+ZGV2KQ0KPiAgIAkgKiBleHBvc2VkIGFzICJyZW1vdmFibGUiIHRvIHVzZXJzcGFjZS4NCj4gICAJ
+ICovDQo+ICAgCWlmICh2c2VjIHx8DQo+ICsJICAgIGRldi0+Y2xhc3MgPT0gUENJX0NMQVNTX1NF
+UklBTF9VU0JfVVNCNCB8fA0KPiAgIAkgICAgKHBhcmVudCAmJg0KPiAgIAkgICAgKHBhcmVudC0+
+ZXh0ZXJuYWxfZmFjaW5nIHx8IGRldl9pc19yZW1vdmFibGUoJnBhcmVudC0+ZGV2KSkpKQ0KPiAg
+IAkJZGV2X3NldF9yZW1vdmFibGUoJmRldi0+ZGV2LCBERVZJQ0VfUkVNT1ZBQkxFKTsNCj4gDQoN
+ClJldmlld2VkLWJ5OiBNYWNwYXVsIExpbiA8bWFjcGF1bC5saW5AbWVkaWF0ZWsuY29tPg0KDQpU
+aGFua3MhDQoNClJlZ2FyZHMsDQpNYWNwYXVsIExpbg==
+
+--__=_Part_Boundary_005_1648681517.2033680023--
 
