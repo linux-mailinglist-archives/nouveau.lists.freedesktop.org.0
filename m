@@ -2,41 +2,41 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id D7EB04B3A47
-	for <lists+nouveau@lfdr.de>; Sun, 13 Feb 2022 09:39:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6929E4B3A9A
+	for <lists+nouveau@lfdr.de>; Sun, 13 Feb 2022 10:27:23 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2667910E736;
-	Sun, 13 Feb 2022 08:39:32 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1482D10F4B4;
+	Sun, 13 Feb 2022 09:27:16 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 1111 seconds by postgrey-1.36 at gabe;
- Sun, 13 Feb 2022 08:39:29 UTC
-Received: from bmailout1.hostsharing.net (bmailout1.hostsharing.net
- [83.223.95.100])
- by gabe.freedesktop.org (Postfix) with ESMTPS id E615310E36A;
- Sun, 13 Feb 2022 08:39:29 +0000 (UTC)
+X-Greylist: delayed 472 seconds by postgrey-1.36 at gabe;
+ Sun, 13 Feb 2022 09:27:14 UTC
+Received: from bmailout2.hostsharing.net (bmailout2.hostsharing.net
+ [IPv6:2a01:37:3000::53df:4ef0:0])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B1C8510F4B1;
+ Sun, 13 Feb 2022 09:27:14 +0000 (UTC)
 Received: from h08.hostsharing.net (h08.hostsharing.net
  [IPv6:2a01:37:1000::53df:5f1c:0])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (Client CN "*.hostsharing.net",
  Issuer "RapidSSL TLS DV RSA Mixed SHA256 2020 CA-1" (verified OK))
- by bmailout1.hostsharing.net (Postfix) with ESMTPS id 68846300002A0;
- Sun, 13 Feb 2022 09:39:28 +0100 (CET)
+ by bmailout2.hostsharing.net (Postfix) with ESMTPS id 05A4D2800B3D2;
+ Sun, 13 Feb 2022 10:19:21 +0100 (CET)
 Received: by h08.hostsharing.net (Postfix, from userid 100393)
- id 5AF1C2DEC3C; Sun, 13 Feb 2022 09:39:28 +0100 (CET)
-Date: Sun, 13 Feb 2022 09:39:28 +0100
+ id E8C26294C60; Sun, 13 Feb 2022 10:19:20 +0100 (CET)
+Date: Sun, 13 Feb 2022 10:19:20 +0100
 From: Lukas Wunner <lukas@wunner.de>
-To: Mika Westerberg <mika.westerberg@linux.intel.com>
-Message-ID: <20220213083928.GB23572@wunner.de>
-References: <20220210224329.2793-1-mario.limonciello@amd.com>
- <20220210224329.2793-4-mario.limonciello@amd.com>
- <YgY5N1eVWmi0Xyuw@lahna>
+To: Mario Limonciello <mario.limonciello@amd.com>
+Message-ID: <20220213091920.GA15535@wunner.de>
+References: <20220211193250.1904843-1-mario.limonciello@amd.com>
+ <20220211193250.1904843-4-mario.limonciello@amd.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <YgY5N1eVWmi0Xyuw@lahna>
+In-Reply-To: <20220211193250.1904843-4-mario.limonciello@amd.com>
 User-Agent: Mutt/1.10.1 (2018-07-13)
-Subject: Re: [Nouveau] [PATCH v2 3/9] PCI: drop `is_thunderbolt` attribute
+Subject: Re: [Nouveau] [PATCH v3 03/12] PCI: Move check for old Apple
+ Thunderbolt controllers into a quirk
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -48,51 +48,72 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Michael Jamet <michael.jamet@intel.com>,
+Cc: Hans de Goede <hdegoede@redhat.com>,
+ Michael Jamet <michael.jamet@intel.com>,
  "open list:PCI SUBSYSTEM" <linux-pci@vger.kernel.org>,
- "open list:DRM DRIVERS" <dri-devel@lists.freedesktop.org>,
  "open list:THUNDERBOLT DRIVER" <linux-usb@vger.kernel.org>,
  Yehezkel Bernat <YehezkelShB@gmail.com>,
- "open list:RADEON and AMDGPU DRM DRIVERS" <amd-gfx@lists.freedesktop.org>,
- "open list:X86 PLATFORM DRIVERS" <platform-driver-x86@vger.kernel.org>,
+ "open list:DRM DRIVERS" <dri-devel@lists.freedesktop.org>,
  Andreas Noever <andreas.noever@gmail.com>,
- Mario Limonciello <mario.limonciello@amd.com>,
+ "open list:RADEON and AMDGPU DRM DRIVERS" <amd-gfx@lists.freedesktop.org>,
  "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
  <nouveau@lists.freedesktop.org>, Bjorn Helgaas <bhelgaas@google.com>,
- Alexander.Deucher@amd.com
+ Alexander.Deucher@amd.com, Mika Westerberg <mika.westerberg@linux.intel.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Fri, Feb 11, 2022 at 12:23:51PM +0200, Mika Westerberg wrote:
-> On Thu, Feb 10, 2022 at 04:43:23PM -0600, Mario Limonciello wrote:
-> > @@ -2955,7 +2955,7 @@ bool pci_bridge_d3_possible(struct pci_dev *bridge)
-> >  			return true;
-> >  
-> >  		/* Even the oldest 2010 Thunderbolt controller supports D3. */
-> > -		if (bridge->is_thunderbolt)
-> > +		if (dev_is_removable(&bridge->dev))
-> 
-> For this, I'm not entirely sure this is what we want. The purpose of
-> this check is to enable port power management of Apple systems with
-> Intel Thunderbolt controller and therefore checking for "removable" here
-> is kind of misleading IMHO.
-[...]
-> and then make a quirk in quirks.c that adds the software node property
-> for the Apple systems? Or something along those lines.
+On Fri, Feb 11, 2022 at 01:32:41PM -0600, Mario Limonciello wrote:
+> `pci_bridge_d3_possible` currently checks explicitly for a Thunderbolt
+> controller to indicate that D3 is possible.  As this is used solely
+> for older Apple systems, move it into a quirk that enumerates across
+> all Intel TBT controllers.
 
-Honestly, that feels wrong to me.
+I'm not so sure if it is only needed on Apple systems.
 
-There are non-Apple products with Thunderbolt controllers,
-e.g. Supermicro X10SAT was a Xeon board with Redwood Ridge
-which was introduced in 2013.  This was way before Microsoft
-came up with the HotPlugSupportInD3 property.  It was also way
-before the 2015 BIOS cut-off date that we use to disable
-power management on older boards.
 
-Still, we currently whitelist the Thunderbolt ports on that
-board for D3 because we know it works.  What if products like
-this one use their own power management scheme and we'd cause
-a power regression if we needlessly disable D3 for them now?
+> @@ -2954,10 +2960,6 @@ bool pci_bridge_d3_possible(struct pci_dev *bridge)
+>  		if (pci_bridge_d3_force)
+>  			return true;
+>  
+> -		/* Even the oldest 2010 Thunderbolt controller supports D3. */
+> -		if (bridge->is_thunderbolt)
+> -			return true;
+> -
+>  		/* Platform might know better if the bridge supports D3 */
+>  		if (platform_pci_bridge_d3(bridge))
+>  			return true;
+
+The fact that Thunderbolt PCIe ports support D3 is a property of those
+devices.  It's not a property of the platform or a quirk of a particular
+vendor.
+
+Hence in my view the current location of the check (pci_bridge_d3_possible())
+makes sense wheras the location you're moving it to does not.
+
+
+> +/* Apple machines as old as 2010 can do D3 with Thunderbolt controllers, but don't specify
+> + * it in the ACPI tables
+> + */
+
+Apple started shipping Thunderbolt in 2011.
+Intel brought the first chips to market in 2010.
+
+The date is meaningful at the code's current location in
+pci_bridge_d3_possible() because a few lines further down
+there's a 2015 BIOS cut-off date.
+
+Microsoft came up with an ACPI property that BIOS vendors may set
+so that Windows knows it may put a Thunderbolt controller into D3cold.
+I'm not even sure if that property was ever officially adopted by the
+ACPI spec or if it's just a Microsoft-defined "standard".
+
+Apple had been using its own scheme to put Thunderbolt controllers
+into D3cold when nothing is plugged in, about a decade before Microsoft
+defined the ACPI property.
+
+I'm not sure if other vendors came up with their own schemes to
+power-manage Thunderbolt.  We may regress those with the present
+patch.
 
 Thanks,
 
