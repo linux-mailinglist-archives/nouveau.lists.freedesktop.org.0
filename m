@@ -2,41 +2,51 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7E4044B3A9C
-	for <lists+nouveau@lfdr.de>; Sun, 13 Feb 2022 10:27:28 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0D4D84B41E8
+	for <lists+nouveau@lfdr.de>; Mon, 14 Feb 2022 07:23:13 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id E1AB210F4B8;
-	Sun, 13 Feb 2022 09:27:16 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6010810E342;
+	Mon, 14 Feb 2022 06:23:05 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 470 seconds by postgrey-1.36 at gabe;
- Sun, 13 Feb 2022 09:27:14 UTC
-Received: from bmailout2.hostsharing.net (bmailout2.hostsharing.net
- [83.223.78.240])
- by gabe.freedesktop.org (Postfix) with ESMTPS id EF92910F4B2;
- Sun, 13 Feb 2022 09:27:14 +0000 (UTC)
-Received: from h08.hostsharing.net (h08.hostsharing.net [83.223.95.28])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (Client CN "*.hostsharing.net",
- Issuer "RapidSSL TLS DV RSA Mixed SHA256 2020 CA-1" (verified OK))
- by bmailout2.hostsharing.net (Postfix) with ESMTPS id 4C3952800B3F6;
- Sun, 13 Feb 2022 10:21:02 +0100 (CET)
-Received: by h08.hostsharing.net (Postfix, from userid 100393)
- id 444AE2E6C05; Sun, 13 Feb 2022 10:21:02 +0100 (CET)
-Date: Sun, 13 Feb 2022 10:21:02 +0100
-From: Lukas Wunner <lukas@wunner.de>
-To: Mario Limonciello <mario.limonciello@amd.com>
-Message-ID: <20220213092102.GA1246@wunner.de>
-References: <20220211193250.1904843-1-mario.limonciello@amd.com>
- <20220211193250.1904843-4-mario.limonciello@amd.com>
- <20220213091920.GA15535@wunner.de>
+Received: from mga17.intel.com (mga17.intel.com [192.55.52.151])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id EFAC110E322;
+ Mon, 14 Feb 2022 06:23:03 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1644819784; x=1676355784;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:in-reply-to;
+ bh=ogk0u9WIs4rRYT5evD6jDJdiJEu7Wt/pIAhA9485lVQ=;
+ b=ethgj9uOKOmh/Vur01mgsf50XYwrm/5NhDSoNQdEzfoOJdRS6YhSllQq
+ dftO26JQn2VppFKqD2PXoC/XeAZMAymCoUgobe4STqZGxs8TN30I/hFgi
+ rq8AujnNN8OCpwIvxXYwe7SqofXDfz0U3Kf90TnLIo9OAFUKCPn0f+2Mn
+ Pzk1em5WLCeIk8Wo6Wj2IGy6hnRVaiKqScP+7d2AbCFhdMcd6vZKOiv6k
+ qVDFr0WujmarjI0uerfBuF5jwBau4bi0xWZTwhjllcsaHAZMEYKn3RsHh
+ 6emCDolp3UwFlRd2xJ7maOKqVbbNrm4dnbL1n6YkJR9O3MGO0Q/zHjM9F A==;
+X-IronPort-AV: E=McAfee;i="6200,9189,10257"; a="230662342"
+X-IronPort-AV: E=Sophos;i="5.88,367,1635231600"; d="scan'208";a="230662342"
+Received: from orsmga007.jf.intel.com ([10.7.209.58])
+ by fmsmga107.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 13 Feb 2022 22:23:03 -0800
+X-IronPort-AV: E=Sophos;i="5.88,367,1635231600"; d="scan'208";a="527922292"
+Received: from lahna.fi.intel.com (HELO lahna) ([10.237.72.162])
+ by orsmga007-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 13 Feb 2022 22:22:59 -0800
+Received: by lahna (sSMTP sendmail emulation); Mon, 14 Feb 2022 08:22:56 +0200
+Date: Mon, 14 Feb 2022 08:22:56 +0200
+From: Mika Westerberg <mika.westerberg@linux.intel.com>
+To: Lukas Wunner <lukas@wunner.de>
+Message-ID: <Ygn1QHF3aGsHpkS9@lahna>
+References: <20220210224329.2793-1-mario.limonciello@amd.com>
+ <20220210224329.2793-4-mario.limonciello@amd.com>
+ <YgY5N1eVWmi0Xyuw@lahna> <20220213083928.GB23572@wunner.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20220213091920.GA15535@wunner.de>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Subject: Re: [Nouveau] [PATCH v3 03/12] PCI: Move check for old Apple
- Thunderbolt controllers into a quirk
+In-Reply-To: <20220213083928.GB23572@wunner.de>
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
+Subject: Re: [Nouveau] [PATCH v2 3/9] PCI: drop `is_thunderbolt` attribute
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -48,23 +58,58 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Hans de Goede <hdegoede@redhat.com>,
- Michael Jamet <michael.jamet@intel.com>,
+Cc: Michael Jamet <michael.jamet@intel.com>,
  "open list:PCI SUBSYSTEM" <linux-pci@vger.kernel.org>,
+ "open list:DRM DRIVERS" <dri-devel@lists.freedesktop.org>,
  "open list:THUNDERBOLT DRIVER" <linux-usb@vger.kernel.org>,
  Yehezkel Bernat <YehezkelShB@gmail.com>,
- "open list:DRM DRIVERS" <dri-devel@lists.freedesktop.org>,
- Andreas Noever <andreas.noever@gmail.com>,
  "open list:RADEON and AMDGPU DRM DRIVERS" <amd-gfx@lists.freedesktop.org>,
+ "open list:X86 PLATFORM DRIVERS" <platform-driver-x86@vger.kernel.org>,
+ Andreas Noever <andreas.noever@gmail.com>,
+ Mario Limonciello <mario.limonciello@amd.com>,
  "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
  <nouveau@lists.freedesktop.org>, Bjorn Helgaas <bhelgaas@google.com>,
- Alexander.Deucher@amd.com, Mika Westerberg <mika.westerberg@linux.intel.com>
+ Alexander.Deucher@amd.com
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Sun, Feb 13, 2022 at 10:19:20AM +0100, Lukas Wunner wrote:
-> Apple had been using its own scheme to put Thunderbolt controllers
-> into D3cold when nothing is plugged in, about a decade before Microsoft
-> defined the ACPI property.
+Hi,
 
-I meant to say "half a decade", sorry.
+On Sun, Feb 13, 2022 at 09:39:28AM +0100, Lukas Wunner wrote:
+> On Fri, Feb 11, 2022 at 12:23:51PM +0200, Mika Westerberg wrote:
+> > On Thu, Feb 10, 2022 at 04:43:23PM -0600, Mario Limonciello wrote:
+> > > @@ -2955,7 +2955,7 @@ bool pci_bridge_d3_possible(struct pci_dev *bridge)
+> > >  			return true;
+> > >  
+> > >  		/* Even the oldest 2010 Thunderbolt controller supports D3. */
+> > > -		if (bridge->is_thunderbolt)
+> > > +		if (dev_is_removable(&bridge->dev))
+> > 
+> > For this, I'm not entirely sure this is what we want. The purpose of
+> > this check is to enable port power management of Apple systems with
+> > Intel Thunderbolt controller and therefore checking for "removable" here
+> > is kind of misleading IMHO.
+> [...]
+> > and then make a quirk in quirks.c that adds the software node property
+> > for the Apple systems? Or something along those lines.
+> 
+> Honestly, that feels wrong to me.
+> 
+> There are non-Apple products with Thunderbolt controllers,
+> e.g. Supermicro X10SAT was a Xeon board with Redwood Ridge
+> which was introduced in 2013.  This was way before Microsoft
+> came up with the HotPlugSupportInD3 property.  It was also way
+> before the 2015 BIOS cut-off date that we use to disable
+> power management on older boards.
+> 
+> Still, we currently whitelist the Thunderbolt ports on that
+> board for D3 because we know it works.  What if products like
+> this one use their own power management scheme and we'd cause
+> a power regression if we needlessly disable D3 for them now?
+
+All the non-Apple Thunderbolt products before "HotPlugSupportInD3" use
+ACPI "assisted" hotplug which means all the PM is done in the BIOS.
+Essentially it means the controller is only present if there is anything
+connected and in that case it is always in D0. Unplugging the device
+makes the controller to be hot-removed (ACPI hotplug) too and that's the
+only way early Thunderbolt used to save energy.
