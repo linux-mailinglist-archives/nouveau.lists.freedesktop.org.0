@@ -2,123 +2,47 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id E5C334BD313
-	for <lists+nouveau@lfdr.de>; Mon, 21 Feb 2022 02:13:02 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A0C854BD305
+	for <lists+nouveau@lfdr.de>; Mon, 21 Feb 2022 02:12:51 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id A828010E2C0;
-	Mon, 21 Feb 2022 01:12:41 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id B85DE10E293;
+	Mon, 21 Feb 2022 01:12:31 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam10on2047.outbound.protection.outlook.com [40.107.93.47])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 1680D10E387;
- Sun, 13 Feb 2022 17:27:05 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=OFjeyC3rr3lVyN9Pvvvdb0LScSkmix22wc98IOWyJRYv1qogWT9U48C78Pv/7o13doKH2WtpxVgn2Lb5vUWA4eSiPnR63LMpBhKnghR93iWUvzQKzOl3dn9FV+bR5mqRQfjNXrsDK4j6VJp1FvNqAKdFwF6ntVGWjeQaMBy6Jbt2hGQy59wd1efQGvjuYDlXK5Toq/H2mptfZvYuZHiluGf1VxtntNqghohxrUapJVoJZ5rfYNhv5RQIvGhQ+RB7egV83JK5nKv1ZbbAcgm/uS1DcR12um/xMQd1H7GOyq/SdiqttXIbkDr9w6kaZFscQoSeEHRBnUnDCsYWcVyJAA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=8Iw9/mXkP88ohPZxqsKaN2tT6XG3sqms5SR43Ybjq0I=;
- b=MAKVXycIiqCrUk7y9GHCiKX5pG/cARLTFMAmNOaTqBeo9CbddYajd6aPi7zGYevJMUOurMhbAmYDFGybv+aYwKu7C6sBc/Ykp8ormOtz/bpKsy1iXoiIAlybNnxoHi7Zn1XgqHHuzm8OxupJY8naSCFC7HvomwDJ5G9djmGwM+nveU/cVI2goBOGVJz7xg/+aTBvir0ZprJdFAFFNIl8Czfix2cTplaIdmYMfJx9cD0VOc1UN8hpenetSp66USwWfiSgSHJlGPz68488MDt2HyreMN0RLzOQ5ym3Lv+FWuZ1X5cOVczUf6wai9PgAtOabfTQUydcxtvBpLnkMULoBw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
- dkim=none; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=8Iw9/mXkP88ohPZxqsKaN2tT6XG3sqms5SR43Ybjq0I=;
- b=l+1OUncDDAwu1yhUMkVuefZDbdQmr8uGMYP90qHICdcKuCF3kM66du5CTKCUxt4IwkdAnjSx8z5at0hMMyNCK0s1iuhB6jQzt7plPQ+JbtnU4IejvQXm7sfZ2uuyyDYxN59tUQ8loEuvPANywt95yb2q034u0xSD5FyBSqtRQrs=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from BL1PR12MB5157.namprd12.prod.outlook.com (2603:10b6:208:308::15)
- by MWHPR12MB1711.namprd12.prod.outlook.com (2603:10b6:300:10a::20)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4951.17; Sun, 13 Feb
- 2022 17:27:00 +0000
-Received: from BL1PR12MB5157.namprd12.prod.outlook.com
- ([fe80::692d:9532:906b:2b08]) by BL1PR12MB5157.namprd12.prod.outlook.com
- ([fe80::692d:9532:906b:2b08%4]) with mapi id 15.20.4975.017; Sun, 13 Feb 2022
- 17:26:59 +0000
-Message-ID: <0ef8f2cb-1978-f469-71d3-2cf7469eb8b6@amd.com>
-Date: Sun, 13 Feb 2022 11:26:56 -0600
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
- Thunderbird/91.6.0
-Content-Language: en-US
-To: Lukas Wunner <lukas@wunner.de>
-References: <20220211193250.1904843-1-mario.limonciello@amd.com>
- <20220211193250.1904843-5-mario.limonciello@amd.com>
- <20220213082056.GA23572@wunner.de>
-From: "Limonciello, Mario" <mario.limonciello@amd.com>
-In-Reply-To: <20220213082056.GA23572@wunner.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: SN4PR0201CA0026.namprd02.prod.outlook.com
- (2603:10b6:803:2e::12) To BL1PR12MB5157.namprd12.prod.outlook.com
- (2603:10b6:208:308::15)
+Received: from mail-il1-f169.google.com (mail-il1-f169.google.com
+ [209.85.166.169])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3AD7610E54A
+ for <nouveau@lists.freedesktop.org>; Mon, 14 Feb 2022 10:44:22 +0000 (UTC)
+Received: by mail-il1-f169.google.com with SMTP id n5so11949290ilk.12
+ for <nouveau@lists.freedesktop.org>; Mon, 14 Feb 2022 02:44:22 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to;
+ bh=8UlwMVVLWhmPlE/PNpTYvysOndyoiHtzqJZyRftJj4M=;
+ b=derM+vg6Zwv9U+8/yTii120Y2iIrfBK6O533DdIfhhPRnvz6jPEZHWqwVyVmOLIQaO
+ koxInHrKw+lQAy5+cp7BKLZ1foYA0i5OV0K27JXmzNQvJ4+Ksutj+JPPMdKKsZQ8g5U5
+ p3c28pcMONPkWfkrextxye58VKWvgg71H2oFHvzqoGokLDX+2WGVuWhW3swkIpIj8VYJ
+ jSTDXY/yvXecf7SJjmD8c+dHD8zRsiIINvbL6Z6ETZHwOf/qAvU+eJ4yyvmkRhoPS3jv
+ iS0ahK8oLAAlzDEGXFc2qhmpuRNhhJWUoK+J8edVQYoqg70ng8jUpoiyVNkT1zGoZx+3
+ hpWQ==
+X-Gm-Message-State: AOAM533VWlgETdtFAi+oasBXjasM8EyQ9LRdLzBdK9v8EssvagPzh4g+
+ gQvJAXQIvbtOfz4KZ6cFjcaVycenrQ/MDJve57VU2ew=
+X-Google-Smtp-Source: ABdhPJxXnRbdKYAk/eQEjSASB4PhnFbCrNay6Iay1SGwgHXpGogu4ezLDXvE+rYrzbw3+Midtc7CBkSj6bDX8P8UwbY=
+X-Received: by 2002:a05:6e02:2199:: with SMTP id
+ j25mr7941276ila.296.1644835461287; 
+ Mon, 14 Feb 2022 02:44:21 -0800 (PST)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 425bf962-063f-43e3-b4b4-08d9ef160a84
-X-MS-TrafficTypeDiagnostic: MWHPR12MB1711:EE_
-X-Microsoft-Antispam-PRVS: <MWHPR12MB17119CFD6765A2DE9E7D397BE2329@MWHPR12MB1711.namprd12.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:9508;
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 6FL7bCfrOCDSvwLnj7iQe/wZwxI9QfL3ciVQOWQ5+WhWb74CVbpUi2TuJV1AEQk/RpZTttOS9EemsEUu3paZ3cvmEv6MAK5t5U5FOeCTVcT+QFMNE5NtaKddmOWI2k6W8u6WcYrz5rJRRGv1EISpWOP8brUpk/bUdt87RmQttVOmUoJH7LAQo17pVO6Ssc0CHiUoTjFIRjmvpOiN1tHTK2PTyTTos1kXi0ovkCZaS19vrGhYHFk/Ann5haLapeitjfnimKgzKQqNM18sGQPLWvlNAdMb34OnIcweDzOKTIhgdUckiSLfnBCbdAvgLa1HaNpT056RzPzhFUzTKboYBYx4EU4Wsw5mIrue2DCzTbMLB2XE2kUHoei1R8NDERiqzH0IvMYS6HQ0tMMVmnQwDPSxYKb2sbcObZAPiXHmH+MId3BvZIQnE/zxMR8Rn+uvGd4M3tmAgGGDMu+mAymKj7501nYLoqgIqr12ZYxhYbQTolqaTRrw3ejbtwpR8QDSIDb3SyT+ret9c8rsKDzomwfx7rMSiM1Q8B9mtbYsLHLySFddars/ny/MXIaz/SegwuberQoBa6Dl7Yg2u3Oz+ZMz4Qup5ZLJRDnESJOsXu+vP8GQt2lFERKatR/jnWZynGV0kEW5COR6w3zlBxOST0LaFdM39Hx7tXSCIVizAPJA3f9VBcyW/vmSxxFvtppFiY45zsDqoz5Eqecb+e6hRVgHZSAMQupP/GpAc7Zn3WPvcEt7guHCSNryja8g8NIX
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:BL1PR12MB5157.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230001)(4636009)(366004)(2616005)(186003)(7416002)(66946007)(86362001)(8676002)(4326008)(8936002)(66476007)(66556008)(53546011)(31686004)(6512007)(6666004)(508600001)(6506007)(36756003)(2906002)(38100700002)(31696002)(6486002)(5660300002)(6916009)(54906003)(316002)(81973001)(45980500001)(43740500002);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?bHpBdjQxd3JXN1hRUkZDQWhOQ2JIZjQzc1hqWEVuZVR2Nms0bnJVZ2FLNHBE?=
- =?utf-8?B?cW9Wd3J0dHhCWHZaMm5CbHJTK1dqT29wek1Dd3RuUktGazVxQXRvcXRuVmkr?=
- =?utf-8?B?NXIwL043YkMrcUFtUm0zSjFoRVhUVDNMZWQwUFJocXVoODJzdlUvSjRFSGVp?=
- =?utf-8?B?eWFac1JLNkVoUWtWYWljaS9EVnk5Q0hlc3g3dkVHeFRwaXJ2TFJwR2lEY05x?=
- =?utf-8?B?T3J5K1Qrdm9yeGJXNGxMaXc2VVZaaWJHYW9abzQyc2loRWUxVzhsS08zRGg2?=
- =?utf-8?B?aVdMdVh6ME5qUkhnNitWWW53WGgxSUNtc0F3czR1MDY4Y1VCdUcwemxiMFZ6?=
- =?utf-8?B?ejQrdWlaTi83VXNZeGsxR3ViZVNLSktSZ25TTWl1MUM5MXZQMTFXTUFyOW0w?=
- =?utf-8?B?REVQUHRoazc5OW1BZXBwdFhkc3RhQVBtclBHVEFtU2N2alhGTWszQzA0VHJI?=
- =?utf-8?B?emxDRExMbjdZU0JISitaL0d5VjJ6SlQvV3h2M0VCcnJ6NElLUG1sNlpGelBh?=
- =?utf-8?B?cVRHZTNoNUNkQktKYzlrVCtDb05YQVJjTkR4S0dkRTE1ekM5Y21TTyszWDJY?=
- =?utf-8?B?a0FCWlRIT2RBbnllWDNqZzRLU1BBYmFZQ3FUMWt4cmFSN2tta0REZ29RLzNC?=
- =?utf-8?B?eGZVSVp5VzlZdm1iSFJXQnh5dy9NUTRoUGRQSmsvZldPNFhHNjh2Z2xOYmN4?=
- =?utf-8?B?Y1F2S0o0MXdHOUYrSkYwcUk5eDNDNTVDVU1GT2k2OU1qM1cwSVVqWUNzK1o3?=
- =?utf-8?B?ck15Z1JSVFlxYUprQ1Mvd3VBM2pVeDhLWGRpejY2dGhkR3pmM21vNHV2ZGZo?=
- =?utf-8?B?WWFYWlFBaElVVFByaW94cUdzRDdBWUdxWlV5cHpMYno4aWFsZldCdVc5ZXRV?=
- =?utf-8?B?TGYxVWdiRG5NWXkzNERxVlBEdExpZjNQNVlqUXYvMDRST25tOFY3Rm1BbzNJ?=
- =?utf-8?B?Vi9VRVFScDFzQkcwdk12eVgwRE9DeUFjOVNMejFYK0p6V0dmUjRPTFJRNmFz?=
- =?utf-8?B?MzY2bEcrRHlaUDJOQkQzeFNGbUgvWGpFaGlOZ1huWVczWUdKNG1aYmxjaXdn?=
- =?utf-8?B?enJZZmk5SDYxMEk2VjJSd2hub0NTcnRJbGJLSGg5VlV6Z0xuNC9iMnhIb1NX?=
- =?utf-8?B?YUlTT1g4SVV0YkNmMjBEaG1qV1Zmdy9tWVUvNmJjbkl0UEduNk51NmxpcDUr?=
- =?utf-8?B?WGpJa2dXSkxTRUZsbkd1Vzk1M0JEd0VLaXJUbUtBc0hucVBLbjRJQzBTYjdl?=
- =?utf-8?B?R1hGVkVoSEJONFhWRlY3NitqQm5JbjRjNUtSYTlaRi9NYjZ3Zk5kNDNmZyt3?=
- =?utf-8?B?YnBSdCsxN3hURUZ5REhhSmRvWEo5TVJPMWQ2RzhSQlp1eitsQ2ZNSUF1bXJP?=
- =?utf-8?B?MmJiSWhPS2tnR042NkNDYVdsUmlZanNIK0dMYnNlK0c3em01SDV5OXNmUWYv?=
- =?utf-8?B?R3RpSjlFNU9CN0dPdmJRM0IyeU05V2lhZUtISmNickxYc0xTS3RqekVxQmxH?=
- =?utf-8?B?aGhxc1RaQXpYM1NFZkEyeFQrL290aUxCS3kzdFpVVGhSd3h0dDVpMHBtQjEy?=
- =?utf-8?B?TlJRaHgxMEtJWkhuZCs3cGNQcFU5Q1pEVkFuN3RqODFkYlA1elZrNjlrOE9o?=
- =?utf-8?B?bW5uM29jUE55U3lDdzJJVkNOMXRnUzdFUG5XSEl5TG9Lc0lEN01QWUlZaTcx?=
- =?utf-8?B?dll0YVBUenBhK1VSNVJ2dTZrUkNjTXNIajZMamZlU3Z4cUpub2tOTm5kcjRv?=
- =?utf-8?B?WmRFYmk1M2lhMTVEcHI1R2wzSXFSZXozVnVMVDlteU9ESWRCRzhaU0lndlZX?=
- =?utf-8?B?aEttZkNtQ0NMdi8vUWhNNFVQQkxPZFRLSUZvNkd1YzVUcUJvRGxtSlMxRXFU?=
- =?utf-8?B?cFhVdFpEbjJpQkppZWk3SEVqcThjS1NVQmVGWmx2SFMvQjRtdHc0U21haGJi?=
- =?utf-8?B?Qmx6Ync5S0d3RG5BcDBzb3dROCt6R1FKekgyei9paUJ5a1BqMGszS2ovSC94?=
- =?utf-8?B?NjhRdVFDbjRmM0Y5WUVDYzB3V3BjdDdibzZUWTZKVXFBbDJxdnlQMHg2U1Zu?=
- =?utf-8?B?VmtpK3hqdkN3V29wdU9yL1hHd2lQTGNmWExKTkhrNyttSkh2MG5tZW8rajJH?=
- =?utf-8?B?MXFSU2ZSdlJ2Ymo1TjdtT1dLMjBGb2RkSHpFcDB0aGxtY2JVVkFLTXVML3pD?=
- =?utf-8?B?a1c5UGpocnVzYWNybm1uUis0T2hNK0tnRVVjWThEdlR1QURHS1JzNDJ4R1Vp?=
- =?utf-8?Q?APaT9OBXLeY4cSM+qLmOyUVx84txHt2ROUZrbZTAU0=3D?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 425bf962-063f-43e3-b4b4-08d9ef160a84
-X-MS-Exchange-CrossTenant-AuthSource: BL1PR12MB5157.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Feb 2022 17:26:59.7235 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 7dsuK6y0f4zWo6fZRw8aDv/OZTPWPFFWWeHzRyEg58uEqzLgQUXMDuMzHxMCRKqHVdER/qKOoUO6vWlIh7nQDw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MWHPR12MB1711
+References: <CAJtcoLbNJrTjjHpFxgXwe+aJaw4=Und37yuym89RKSBCwSyCSQ@mail.gmail.com>
+In-Reply-To: <CAJtcoLbNJrTjjHpFxgXwe+aJaw4=Und37yuym89RKSBCwSyCSQ@mail.gmail.com>
+From: Martin Knoblauch <knobi@knobisoft.de>
+Date: Mon, 14 Feb 2022 11:44:10 +0100
+Message-ID: <CAJtcoLbmF1vT6HQ3ZhQJW6cYpp6c=GEakeegQOwUXrO8dSHoOQ@mail.gmail.com>
+To: linux-kernel@vger.kernel.org, nouveau@lists.freedesktop.org
+Content-Type: text/plain; charset="UTF-8"
 X-Mailman-Approved-At: Mon, 21 Feb 2022 01:12:29 +0000
-Subject: Re: [Nouveau] [PATCH v3 04/12] PCI: Drop the `is_thunderbolt`
- attribute from PCI core
+Subject: Re: [Nouveau] Possible regression on suspend (mem/s2idle) between
+ 5.15 and 5.16
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -130,93 +54,179 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Hans de Goede <hdegoede@redhat.com>,
- Michael Jamet <michael.jamet@intel.com>,
- "open list:PCI SUBSYSTEM" <linux-pci@vger.kernel.org>,
- "open list:THUNDERBOLT DRIVER" <linux-usb@vger.kernel.org>,
- Yehezkel Bernat <YehezkelShB@gmail.com>,
- "open list:DRM DRIVERS" <dri-devel@lists.freedesktop.org>,
- Andreas Noever <andreas.noever@gmail.com>,
- "open list:RADEON and AMDGPU DRM DRIVERS" <amd-gfx@lists.freedesktop.org>,
- "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
- <nouveau@lists.freedesktop.org>, Bjorn Helgaas <bhelgaas@google.com>,
- Alexander.Deucher@amd.com, Mika Westerberg <mika.westerberg@linux.intel.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 2/13/2022 02:20, Lukas Wunner wrote:
-> On Fri, Feb 11, 2022 at 01:32:42PM -0600, Mario Limonciello wrote:
->> The `is_thunderbolt` attribute is currently a dumping ground for a
->> variety of things.
-> 
-> It's not as arbitrary as it may seem.  Quite a bit of thought went into
-> the current design.
-> 
-> 
->> Instead use the driver core removable attribute to indicate the
->> detail a device is attached to a thunderbolt or USB4 chain.
-> 
-> You're missing the point that "is_thunderbolt" is set on the *controller*
-> (i.e. its upstream and downstream ports).
-> 
-> The controller itself is *not* removable if it's the host controller.
-> 
-> However a device can be assumed to be removable if it has an ancestor
-> which has the "is_thunderbolt" flag set.
-> 
+Hi,
 
-Ah right... I wonder if really what this series should be about then is 
-setting up the the PCIe endpoints for PCIe tunneling and XHCI tunneling 
-to be marked as "external" instead then.  It would mean that existing 
-code will apply the removable attribute to everything downstream (and 
-presumably at least some of those drivers it will continue to make sense 
-to drop "pcie_is_thunderbolt_attached" and instead check dev_is_removable.
+ sorry for top posting, but this is likely important enough. The
+problem seems to be gone with 5.17-rc4. So I guess there is some
+potential for putting a fix into 5.16.x. If that rings a bell, I am
+happy to test that. Unfortunately I do not have the time for
+bisection.
 
-> 
->>   static void pci_set_removable(struct pci_dev *dev)
->>   {
->>   	struct pci_dev *parent = pci_upstream_bridge(dev);
->> +	u16 vsec;
->> +
->> +	/* Is the device a Thunderbolt controller? */
->> +	vsec = pci_find_vsec_capability(dev, PCI_VENDOR_ID_INTEL, PCI_VSEC_ID_INTEL_TBT);
-> 
-> This doesn't make any sense because the host controller is not
-> removable.
-> 
-> 
->> @@ -1860,7 +1855,6 @@ int pci_setup_device(struct pci_dev *dev)
->>   	dev->cfg_size = pci_cfg_space_size(dev);
->>   
->>   	/* Need to have dev->cfg_size ready */
->> -	set_pcie_thunderbolt(dev);
->>   
->>   	set_pcie_untrusted(dev);
-> 
-> Either drop the blank line or drop the code comment if set_pcie_untrusted()
-> doesn't need dev->cfg_size.
-> 
-> 
->> diff --git a/drivers/platform/x86/apple-gmux.c b/drivers/platform/x86/apple-gmux.c
->> index 57553f9b4d1d..04232fbc7d56 100644
->> --- a/drivers/platform/x86/apple-gmux.c
->> +++ b/drivers/platform/x86/apple-gmux.c
->> @@ -596,7 +596,7 @@ static int gmux_resume(struct device *dev)
->>   
->>   static int is_thunderbolt(struct device *dev, void *data)
->>   {
->> -	return to_pci_dev(dev)->is_thunderbolt;
->> +	return pci_is_thunderbolt_attached(to_pci_dev(dev));
->>   }
-> 
-> No, the gmux driver changes its behavior if a Thunderbolt host
-> controller is present.  Not if there's a Thunderbolt-attached
-> device present.
+Adding the Nouveau list
 
-Present in the system?  Like not necessarily part of the topology?
+Cheers
+Martin
 
-> 
-> Thanks,
-> 
-> Lukas
-
+On Fri, Feb 11, 2022 at 4:26 PM Martin Knoblauch <knobi@knobisoft.de> wrote:
+>
+> Hi,
+>
+>  sorry for the likely insufficient report. I am running Tumbleweed on
+> a Dell Notebook with a TU117GLM gfx, using the Nouveau driver. Kernel
+> is homegrown. Ever since going from 5.15.12 to 5.16.x (x now 9),
+> suspend stopped working reliably. After a maximum of three
+> suspend/resume cycles the box would reboot spontaneously.
+>
+> I have found the following in dmesg output:
+>
+> # cat > bad-suspend.txt
+> [   87.120765] PM: suspend entry (s2idle)
+> [   87.124895] Filesystems sync: 0.004 seconds
+> [   87.155826] Freezing user space processes ... (elapsed 0.001 seconds) done.
+> [   87.157424] OOM killer disabled.
+> [   87.157424] Freezing remaining freezable tasks ... (elapsed 0.001
+> seconds) done.
+> [   87.158520] printk: Suspending console(s) (use no_console_suspend to debug)
+> [   87.159501] e1000e: EEE TX LPI TIMER: 00000011
+> [   87.164889] sd 4:0:0:0: [sda] Synchronizing SCSI cache
+> [   87.164980] sd 4:0:0:0: [sda] Stopping disk
+> ==> [   87.169576] nouveau 0000:01:00.0: acr: unload binary failed
+> [   87.622136] ACPI: EC: interrupt blocked
+> [   99.986273] ACPI: EC: interrupt unblocked
+> [  102.826726] sd 4:0:0:0: [sda] Starting disk
+> [  102.836370] nouveau 0000:01:00.0: fifo: fault 00 [VIRT_READ] at
+> 0000000000000000 engine 0e [sec2] client 16 [HUB/SEC] reason 00 [PDE]
+> on channel -1 [00ffe5d000 unknown]
+> [  102.836389] nouveau 0000:01:00.0: fifo: runlist 3: scheduled for recovery
+> [  102.836395] nouveau 0000:01:00.0: fifo: engine 3: scheduled for recovery
+> [  102.936294] ------------[ cut here ]------------
+> [  102.936295] nouveau 0000:01:00.0: timeout
+> [  102.936312] WARNING: CPU: 3 PID: 3734 at
+> drivers/gpu/drm/nouveau/nvkm/falcon/v1.c:247
+> nvkm_falcon_v1_wait_for_halt+0xb7/0xc0 [nouveau]
+> [  102.936351] Modules linked in: uvcvideo videobuf2_vmalloc
+> snd_usb_audio videobuf2_memops videobuf2_v4l2 snd_usbmidi_lib
+> videobuf2_common snd_rawmidi cmac algif_hash algif_skcipher af_alg
+> bnep af_packet btusb btrtl btbcm btintel bluetooth ecdh_generic ecc
+> vboxnetadp(O) vboxnetflt(O) vboxdrv(O) iwlmvm mac80211 libarc4
+> iTCO_wdt iTCO_vendor_support x86_pkg_temp_thermal intel_powerclamp
+> coretemp dell_smm_hwmon kvm_intel iwlwifi snd_ctl_led
+> snd_hda_codec_realtek kvm snd_hda_codec_generic ledtrig_audio
+> snd_hda_codec_hdmi irqbypass sha256_ssse3 sha256_generic libsha256
+> pcspkr wmi_bmof snd_hda_intel cfg80211 snd_intel_dspcfg e1000e
+> i2c_i801 snd_hda_codec i2c_smbus rfkill snd_hwdep snd_hda_core snd_pcm
+> snd_timer mei_me snd mei soundcore thermal battery ac nls_iso8859_1
+> nls_cp437 vfat fat squashfs loop fuse configfs crct10dif_pclmul
+> crc32_pclmul ghash_clmulni_intel aesni_intel nouveau crypto_simd i915
+> cryptd drm_ttm_helper mxm_wmi i2c_algo_bit ttm serio_raw
+> drm_kms_helper nvme xhci_pci nvme_core
+> [  102.936378]  drm xhci_hcd wmi video button btrfs blake2b_generic
+> libcrc32c crc32c_intel xor raid6_pq zstd_compress sg dm_multipath
+> dm_mod scsi_dh_rdac scsi_dh_emc scsi_dh_alua
+> [  102.936385] CPU: 3 PID: 3734 Comm: kworker/u24:53 Tainted: G
+>    O      5.16.9-1-default #1
+> [  102.936386] Hardware name: Dell Inc. Precision 7540/0JWGT7, BIOS
+> 1.7.0 01/07/2020
+> [  102.936387] Workqueue: events_unbound async_run_entry_fn
+> [  102.936391] RIP: 0010:nvkm_falcon_v1_wait_for_halt+0xb7/0xc0 [nouveau]
+> [  102.936422] Code: 8b 40 10 48 8b 78 10 4c 8b 67 50 4d 85 e4 75 03
+> 4c 8b 27 e8 cb 90 dd e0 4c 89 e2 48 c7 c7 32 35 a7 a0 48 89 c6 e8 e0
+> 8a 12 e1 <0f> 0b eb a7 e8 40 ee 17 e1 0f 1f 44 00 00 41 54 be 80 96 98
+> 00 55
+> [  102.936422] RSP: 0018:ffffc90002aebb70 EFLAGS: 00010246
+> [  102.936424] RAX: 0000000000000000 RBX: ffffffffffffff92 RCX: 0000000000000000
+> [  102.936425] RDX: 0000000000000000 RSI: 0000000000000000 RDI: 0000000000000000
+> [  102.936425] RBP: ffff88810bbdfc98 R08: 0000000000000000 R09: 0000000000000000
+> [  102.936426] R10: 0000000000000000 R11: 0000000000000000 R12: ffff888101d83bc0
+> [  102.936426] R13: 0000000000000000 R14: 0000000000000000 R15: ffff888102f13400
+> [  102.936427] FS:  0000000000000000(0000) GS:ffff88887c2c0000(0000)
+> knlGS:0000000000000000
+> [  102.936428] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+> [  102.936429] CR2: 0000562dd42c70a2 CR3: 000000000560a001 CR4: 00000000003706e0
+> [  102.936430] DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+> [  102.936430] DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
+> [  102.936431] Call Trace:
+> [  102.936432]  <TASK>
+> [  102.936434]  gm200_acr_hsfw_boot+0xc6/0x170 [nouveau]
+> [  102.936466]  nvkm_acr_hsf_boot+0x82/0x100 [nouveau]
+> [  102.936496]  tu102_acr_init+0x15/0x30 [nouveau]
+> [  102.936526]  nvkm_acr_load+0x3e/0x110 [nouveau]
+> [  102.936555]  ? nvkm_notify_get+0x5c/0x70 [nouveau]
+> [  102.936583]  ? ktime_get+0x39/0xa0
+> [  102.936586]  nvkm_subdev_init+0x97/0xe0 [nouveau]
+> [  102.936614]  ? ktime_get+0x39/0xa0
+> [  102.936616]  nvkm_device_init+0x127/0x1d0 [nouveau]
+> [  102.936664]  nvkm_udevice_init+0x45/0x70 [nouveau]
+> [  102.936709]  nvkm_object_init+0x3b/0x130 [nouveau]
+> [  102.936738]  nvkm_object_init+0x73/0x130 [nouveau]
+> [  102.936766]  nvkm_object_init+0x73/0x130 [nouveau]
+> [  102.936795]  nouveau_do_resume+0x2b/0xc0 [nouveau]
+> [  102.936842]  nouveau_pmops_resume+0x67/0x90 [nouveau]
+> [  102.936888]  ? pci_legacy_resume+0x80/0x80
+> [  102.936891]  dpm_run_callback+0x49/0x150
+> [  102.936893]  device_resume+0x105/0x280
+> [  102.936895]  ? pm_dev_err+0x34/0x34
+> [  102.936897]  async_resume+0x19/0x30
+> [  102.936899]  async_run_entry_fn+0x2b/0x110
+> [  102.936901]  process_one_work+0x1e5/0x3b0
+> [  102.936903]  worker_thread+0x4d/0x3e0
+> [  102.936904]  ? rescuer_thread+0x3a0/0x3a0
+> [  102.936905]  kthread+0x146/0x170
+> [  102.936906]  ? set_kthread_struct+0x50/0x50
+> [  102.936907]  ret_from_fork+0x1f/0x30
+> [  102.936910]  </TASK>
+> [  102.936910] ---[ end trace e592260dfc1c79fb ]---
+> [  102.936912] nouveau 0000:01:00.0: acr: AHESASC binary failed
+> [  102.936913] nouveau 0000:01:00.0: acr: init failed, -110
+> [  102.937027] nouveau 0000:01:00.0: init failed with -110
+> [  102.937028] nouveau: Xorg.bin[1996]:00000000:00000080: init failed with -110
+> [  102.937029] nouveau: DRM-master:00000000:00000000: init failed with -110
+> [  102.937029] nouveau: DRM-master:00000000:00000000: init failed with -110
+> [  102.937030] nouveau 0000:01:00.0: DRM: Client resume failed with error: -110
+> [  102.937032] PM: dpm_run_callback(): pci_pm_resume+0x0/0xe0 returns -110
+> [  102.937040] nouveau 0000:01:00.0: PM: failed to resume async: error -110
+> [  103.134577] ata5: SATA link up 6.0 Gbps (SStatus 133 SControl 300)
+> [  103.137666] ata5.00: ACPI cmd ef/10:06:00:00:00:00 (SET FEATURES) succeeded
+> [  103.137670] ata5.00: ACPI cmd f5/00:00:00:00:00:00 (SECURITY FREEZE
+> LOCK) filtered out
+> [  103.137672] ata5.00: ACPI cmd b1/c1:00:00:00:00:00 (DEVICE
+> CONFIGURATION OVERLAY) filtered out
+> [  103.137838] ata5.00: ACPI cmd 00/00:00:00:00:00:a0 (NOP) rejected
+> by device (Stat=0x51 Err=0x04)
+> [  103.138290] ata5.00: supports DRM functions and may not be fully accessible
+> [  103.139265] ata5.00: disabling queued TRIM support
+> [  103.143959] ata5.00: ACPI cmd ef/10:06:00:00:00:00 (SET FEATURES) succeeded
+> [  103.143963] ata5.00: ACPI cmd f5/00:00:00:00:00:00 (SECURITY FREEZE
+> LOCK) filtered out
+> [  103.143964] ata5.00: ACPI cmd b1/c1:00:00:00:00:00 (DEVICE
+> CONFIGURATION OVERLAY) filtered out
+> [  103.144103] ata5.00: ACPI cmd 00/00:00:00:00:00:a0 (NOP) rejected
+> by device (Stat=0x51 Err=0x04)
+> [  103.144532] ata5.00: supports DRM functions and may not be fully accessible
+> [  103.145328] ata5.00: disabling queued TRIM support
+> [  103.148888] ata5.00: configured for UDMA/133
+> [  103.159132] ahci 0000:00:17.0: port does not support device sleep
+> [  103.159591] ata5.00: Enabling discard_zeroes_data
+> [  103.674691] OOM killer enabled.
+> [  103.674692] Restarting tasks ... done.
+> [  103.719371] PM: suspend exit
+> [  103.992941] [drm:lspcon_init [i915]] *ERROR* Failed to probe lspcon
+> [  103.993000] [drm:intel_dp_detect_dpcd [i915]] *ERROR* LSPCON init
+> failed on port D
+> [  106.221326] e1000e 0000:00:1f.6 em1: NIC Link is Up 1000 Mbps Full
+> Duplex, Flow Control: Rx/Tx
+>
+> The unusual thing is the "nouveau 0000:01:00.0: acr: unload binary
+> failed" message. This does not happen with 5.15.x kernels. Has anybody
+> else seen this with 5.16?
+>
+> Happy weekend
+> Martin
+> --
+> ------------------------------------------------------
+> Martin Knoblauch
+> email: k n o b i AT knobisoft DOT de
+> www: http://www.knobisoft.de
