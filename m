@@ -1,46 +1,63 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9DD534B5599
-	for <lists+nouveau@lfdr.de>; Mon, 14 Feb 2022 17:07:54 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id D7CD34B58AB
+	for <lists+nouveau@lfdr.de>; Mon, 14 Feb 2022 18:37:59 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 2C09F10E1C4;
-	Mon, 14 Feb 2022 16:07:46 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 960D910E23E;
+	Mon, 14 Feb 2022 17:37:55 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-io1-f49.google.com (mail-io1-f49.google.com
- [209.85.166.49])
- by gabe.freedesktop.org (Postfix) with ESMTPS id AC98F10E1BC;
- Mon, 14 Feb 2022 16:07:44 +0000 (UTC)
-Received: by mail-io1-f49.google.com with SMTP id p63so20357008iod.11;
- Mon, 14 Feb 2022 08:07:44 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=Yx9dZuPcrLt3Jj+xgr3ullm7ftsWlVftIJw02v6qQ4Q=;
- b=SAXX84nlBGjG16fpNft33oh0Iz5U6vBcVuFQLPKgjlMPSHrM3AelvH1kBYknyG2qFK
- 7khZu8sLJf7F3N+6FqEsMavJ+IFAOBcQUejNTP/5SPv4oZKYCUfv4rBar6EEDyG+mMZ+
- KSyDyDDcmsTTPt7qzYMr5XxBN1WMVfbXtwXPeFHZK8XzxukwGv3vRIv1rY6U0I2zRS0L
- SlwmxqVloQUmYi3Le7kP1d9bdA/7anOkg1r1b+MnEn8yLUGaYXFFb6ftp2wtREyYm2nH
- 1/B88xWfHqJyZ84RUeMHYTrQEhbCLSudiOtvlJG9haTlnKjaOIpzYwieXQ3j5o35tk+9
- NR5g==
-X-Gm-Message-State: AOAM533ARuL65xCKiEfQDhu/771hvXHfJ2M+c9rLne+z4H/u5iiMHRx9
- CpySEYozouRiGNLtTajMWIN/cWSsRvxr5ZstMeA=
-X-Google-Smtp-Source: ABdhPJzvzoPpmI4kQbwahiXCjfk4KMpMCoZDBvGJc98Pl3kNpRh7Q0xtePotYf8bUDMNNdnPfe6LYIO3ObpZ4iZIWZ4=
-X-Received: by 2002:a02:c916:: with SMTP id t22mr245398jao.300.1644854864060; 
- Mon, 14 Feb 2022 08:07:44 -0800 (PST)
+Received: from ale.deltatee.com (ale.deltatee.com [204.191.154.188])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 56C6210E23E;
+ Mon, 14 Feb 2022 17:37:54 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=deltatee.com; s=20200525; h=Subject:In-Reply-To:MIME-Version:Date:
+ Message-ID:From:References:Cc:To:content-disposition;
+ bh=81T6G2gHhfqrUwjVu5v8ouNRyx7VLTFiBZVLTO5rh/c=; b=Xd5rMP5hIZ0JwEE5p27UvD5QtH
+ uCKd6i9XJg/PaBgi6VN01LvkTgzF6dtOL5wLEtbJtX37eKseK5Y7oQ9o/s1OPdTKqfznafrAyROqV
+ MvNbDVdIgTbNEkyIOgzIBP6oTlTRCMIEBnG1ruZ9t2c+8ikid2c3sF1JDRXcbRnWRXDMHGWWDcI1t
+ p6ha2v4ejdP6uPSa5r0VHjlrYpIXkaGki0cX0XXachfz6/U5Ll/GgQATG132vKqIk5mo62p6fk+SE
+ gfw5DLnPL8RNLsPVhaaXiA+obF/x9nVyln4voBum/rQ3jkIgpv60w8nBYNSDluMB6z4KrGgNUk6NQ
+ OxLOcjaw==;
+Received: from guinness.priv.deltatee.com ([172.16.1.162])
+ by ale.deltatee.com with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.94.2)
+ (envelope-from <logang@deltatee.com>)
+ id 1nJfIJ-0004H9-Iu; Mon, 14 Feb 2022 10:37:48 -0700
+To: Christoph Hellwig <hch@lst.de>, Andrew Morton
+ <akpm@linux-foundation.org>, Dan Williams <dan.j.williams@intel.com>
+References: <20220210072828.2930359-1-hch@lst.de>
+ <20220210072828.2930359-10-hch@lst.de>
+From: Logan Gunthorpe <logang@deltatee.com>
+Message-ID: <fd1338fb-ed28-19c3-bd86-350939d58226@deltatee.com>
+Date: Mon, 14 Feb 2022 10:37:43 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.14.0
 MIME-Version: 1.0
-References: <20220214155518.2980270-1-icenowy@aosc.io>
-In-Reply-To: <20220214155518.2980270-1-icenowy@aosc.io>
-From: Ilia Mirkin <imirkin@alum.mit.edu>
-Date: Mon, 14 Feb 2022 11:07:33 -0500
-Message-ID: <CAKb7UvjRoS-z1f6a=p0TknPruZJBKmUEiAFOR9Ka5LgJ765Ybg@mail.gmail.com>
-To: Icenowy Zheng <icenowy@aosc.io>
-Content-Type: text/plain; charset="UTF-8"
-Subject: Re: [Nouveau] [PATCH] drm/nouveau/bios: Use HWSQ entry 1 for
- PowerBook6, 1
+In-Reply-To: <20220210072828.2930359-10-hch@lst.de>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-CA
+Content-Transfer-Encoding: 7bit
+X-SA-Exim-Connect-IP: 172.16.1.162
+X-SA-Exim-Rcpt-To: linux-mm@kvack.org, nvdimm@lists.linux.dev,
+ nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ amd-gfx@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ rcampbell@nvidia.com, apopple@nvidia.com, jgg@ziepe.ca, lyude@redhat.com,
+ kherbst@redhat.com, bskeggs@redhat.com, Xinhui.Pan@amd.com,
+ christian.koenig@amd.com, alexander.deucher@amd.com, Felix.Kuehling@amd.com,
+ dan.j.williams@intel.com, akpm@linux-foundation.org, hch@lst.de
+X-SA-Exim-Mail-From: logang@deltatee.com
+X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on ale.deltatee.com
+X-Spam-Level: 
+X-Spam-Status: No, score=-6.7 required=5.0 tests=ALL_TRUSTED,BAYES_00,
+ MYRULES_FREE,NICE_REPLY_A,T_SCC_BODY_TEXT_LINE autolearn=no
+ autolearn_force=no version=3.4.6
+X-SA-Exim-Version: 4.2.1 (built Sat, 13 Feb 2021 17:57:42 +0000)
+X-SA-Exim-Scanned: Yes (on ale.deltatee.com)
+Subject: Re: [Nouveau] [PATCH 09/27] mm: generalize the pgmap based
+ page_free infrastructure
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -52,49 +69,54 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, nouveau <nouveau@lists.freedesktop.org>,
- LKML <linux-kernel@vger.kernel.org>,
- dri-devel <dri-devel@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>,
- Daniel Vetter <daniel@ffwll.ch>
+Cc: nvdimm@lists.linux.dev, Ralph Campbell <rcampbell@nvidia.com>,
+ Alistair Popple <apopple@nvidia.com>, dri-devel@lists.freedesktop.org,
+ linux-mm@kvack.org, nouveau@lists.freedesktop.org,
+ Felix Kuehling <Felix.Kuehling@amd.com>, "Pan, Xinhui" <Xinhui.Pan@amd.com>,
+ linux-kernel@vger.kernel.org, amd-gfx@lists.freedesktop.org,
+ Jason Gunthorpe <jgg@ziepe.ca>, Ben Skeggs <bskeggs@redhat.com>,
+ Alex Deucher <alexander.deucher@amd.com>,
+ =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-I'm not saying this is wrong, but could you file a bug at
-gitlab.freedesktop.org/drm/nouveau/-/issues and include the VBIOS
-(/sys/kernel/debug/dri/0/vbios.rom)? That would make it easier to
-review the full situation.
 
-On Mon, Feb 14, 2022 at 11:03 AM Icenowy Zheng <icenowy@aosc.io> wrote:
->
-> On PowerBook6,1 (PowerBook G4 867 12") HWSQ entry 0 (which is currently
-> always used by nouveau) fails, but the BIOS declares 2 HWSQ entries and
-> entry 1 works.
->
-> Add a quirk to use HWSQ entry 1.
->
-> Signed-off-by: Icenowy Zheng <icenowy@aosc.io>
+
+On 2022-02-10 12:28 a.m., Christoph Hellwig wrote:
+> Key off on the existence of ->page_free to prepare for adding support for
+> more pgmap types that are device managed and thus need the free callback.
+> 
+> Signed-off-by: Christoph Hellwig <hch@lst.de>
+
+Great! This makes my patch simpler.
+
+Reviewed-by: Logan Gunthorpe <logang@deltatee.com>
+
+
 > ---
->  drivers/gpu/drm/nouveau/nouveau_bios.c | 7 +++++++
->  1 file changed, 7 insertions(+)
->
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_bios.c b/drivers/gpu/drm/nouveau/nouveau_bios.c
-> index e8c445eb11004..2691d0e0cf9f1 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_bios.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_bios.c
-> @@ -1977,6 +1977,13 @@ static int load_nv17_hw_sequencer_ucode(struct drm_device *dev,
->         if (!hwsq_offset)
->                 return 0;
->
-> +#ifdef __powerpc__
-> +       /* HWSQ entry 0 fails on PowerBook G4 867 12" (Al) */
-> +       if (of_machine_is_compatible("PowerBook6,1"))
-> +               return load_nv17_hwsq_ucode_entry(dev, bios,
-> +                                                 hwsq_offset + sz, 1);
-> +#endif
-> +
->         /* always use entry 0? */
->         return load_nv17_hwsq_ucode_entry(dev, bios, hwsq_offset + sz, 0);
->  }
-> --
-> 2.30.2
->
+>  mm/memremap.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/mm/memremap.c b/mm/memremap.c
+> index fef5734d5e4933..e00ffcdba7b632 100644
+> --- a/mm/memremap.c
+> +++ b/mm/memremap.c
+> @@ -452,7 +452,7 @@ EXPORT_SYMBOL_GPL(get_dev_pagemap);
+>  
+>  void free_zone_device_page(struct page *page)
+>  {
+> -	if (WARN_ON_ONCE(!is_device_private_page(page)))
+> +	if (WARN_ON_ONCE(!page->pgmap->ops || !page->pgmap->ops->page_free))
+>  		return;
+>  
+>  	__ClearPageWaiters(page);
+> @@ -460,7 +460,7 @@ void free_zone_device_page(struct page *page)
+>  	mem_cgroup_uncharge(page_folio(page));
+>  
+>  	/*
+> -	 * When a device_private page is freed, the page->mapping field
+> +	 * When a device managed page is freed, the page->mapping field
+>  	 * may still contain a (stale) mapping value. For example, the
+>  	 * lower bits of page->mapping may still identify the page as an
+>  	 * anonymous page. Ultimately, this entire field is just stale
+> 
