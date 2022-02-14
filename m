@@ -1,40 +1,40 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 97A814B4CBD
-	for <lists+nouveau@lfdr.de>; Mon, 14 Feb 2022 11:58:26 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 24CB54B4CD4
+	for <lists+nouveau@lfdr.de>; Mon, 14 Feb 2022 12:11:10 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 07BFC10E51C;
-	Mon, 14 Feb 2022 10:58:23 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 89A9D10E51D;
+	Mon, 14 Feb 2022 11:11:07 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mga06.intel.com (mga06.intel.com [134.134.136.31])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 46ADB10E4FA;
- Mon, 14 Feb 2022 10:58:21 +0000 (UTC)
+Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id AABF410E4FB;
+ Mon, 14 Feb 2022 11:11:05 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1644836301; x=1676372301;
+ t=1644837065; x=1676373065;
  h=date:from:to:cc:subject:message-id:references:
  mime-version:in-reply-to;
  bh=fqstnbilWmleOnIjJb3aDPlLE84EFgpMrS7YjBM/2dk=;
- b=IvgyhlIAVyqiOEPZXCmb4uonwoA85Jcdc5s/4b7laEPWIUs/+35Mffuu
- S4G+knTiUJKADgopzVw0k+/SHp3N6Jkh8nEuTEqY7r4TMZpKAHqepmtH9
- 5jXLXjyIn0HUarHtLgXm4EDrqqBM5QkHc+L0VR375kuThCFVyxAXZt1q7
- 4Tkwa1SUNE41sKHB9pf3x5Rhj2VZ80Ow/pSQmr9f/mRLTExA2AhE0b48T
- 7OclePP3BUye17yi6yCNCG8EHZwbzde2W7wCRZQTWv9C9aDnovC5UJeM2
- iVMGwEsXeaCexXHvX+F8ps/wksDGGyAW4uo6P/MBT1kyPKjST0kuzlWY+ Q==;
-X-IronPort-AV: E=McAfee;i="6200,9189,10257"; a="310803286"
-X-IronPort-AV: E=Sophos;i="5.88,367,1635231600"; d="scan'208";a="310803286"
-Received: from orsmga007.jf.intel.com ([10.7.209.58])
- by orsmga104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 14 Feb 2022 02:58:20 -0800
-X-IronPort-AV: E=Sophos;i="5.88,367,1635231600"; d="scan'208";a="528087732"
+ b=Q/CnuJHJ+C/XUicMcV3MvkDpTd8wEDQFoAh1eSRxMVo3vTIFecIlCcaO
+ wFfrs0GXUZQLKXxEJAfpbQRYuc7a9ccP0SBrXS9C71l+aAGqGo2vgw6hb
+ EOTst43rgDrvQIxGfDt6mits7HuSSDYKOHgg+L/zpK2sHhQnRS1Hz3lMP
+ s9TYgbnFgwyWC74TYkg84BqB7Q3kUfxJpOImnpyYUPpPZzFg30dw+vnn8
+ Y/SnJq0ZBP6k9v8FvQn/JWyaSYG89wRnpw6RaUT7rF/lbEjEelGLxqS5I
+ AATFlt50ghPw217yGalq2wri+ktuv2Y9zM86IluhDkHinbt/mJiQVymrp w==;
+X-IronPort-AV: E=McAfee;i="6200,9189,10257"; a="249816998"
+X-IronPort-AV: E=Sophos;i="5.88,367,1635231600"; d="scan'208";a="249816998"
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+ by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 14 Feb 2022 03:11:05 -0800
+X-IronPort-AV: E=Sophos;i="5.88,367,1635231600"; d="scan'208";a="501730787"
 Received: from lahna.fi.intel.com (HELO lahna) ([10.237.72.162])
- by orsmga007-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 14 Feb 2022 02:58:15 -0800
-Received: by lahna (sSMTP sendmail emulation); Mon, 14 Feb 2022 12:56:58 +0200
-Date: Mon, 14 Feb 2022 12:56:58 +0200
+ by orsmga002-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 14 Feb 2022 03:10:58 -0800
+Received: by lahna (sSMTP sendmail emulation); Mon, 14 Feb 2022 13:08:26 +0200
+Date: Mon, 14 Feb 2022 13:08:26 +0200
 From: Mika Westerberg <mika.westerberg@linux.intel.com>
 To: Lukas Wunner <lukas@wunner.de>
 Message-ID: <Ygo1eoVe8D0b80QF@lahna>
