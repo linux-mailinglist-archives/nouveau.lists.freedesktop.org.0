@@ -2,48 +2,47 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3CEC84BD301
-	for <lists+nouveau@lfdr.de>; Mon, 21 Feb 2022 02:12:46 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2269A4BD2FD
+	for <lists+nouveau@lfdr.de>; Mon, 21 Feb 2022 02:12:35 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 329F110E280;
-	Mon, 21 Feb 2022 01:12:31 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6D02F10E22F;
+	Mon, 21 Feb 2022 01:12:30 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-yw1-f171.google.com (mail-yw1-f171.google.com
- [209.85.128.171])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 394BC10E591;
- Wed, 16 Feb 2022 19:05:59 +0000 (UTC)
-Received: by mail-yw1-f171.google.com with SMTP id
- 00721157ae682-2d0ede7dd9eso9275267b3.10; 
- Wed, 16 Feb 2022 11:05:59 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=yLrFIsE9bo3p9BnVIL7Uc7sprqnSKm0YOW7fBIQdERM=;
- b=4GNnjCmvlMwKEYZdbpj+gD8MAPb3lM3TgUJ0uEfCvtIhIfeJqWqI/IunmhVJLrw6DP
- BpMHtuZ5JE5y9oufa6A8vgGGcFG0VqaJxdiLX05WzqZjsvvbCvRl4pLI3C8RLXwwSBYh
- hbNyE84MoIc4eIGRwqrVlUbPPxLjL0f4dPLnhd4VCGwsHVzPzFCZFfoJN0/3sXqKFPv0
- kzZBDMiTiup4OPaLC2QyQURkcuKJm9WbtKCJKaiLUIF5WLstyuorzVfzalBDXWgxwXrc
- oIy8G1r0OjmnZBoG8Wh8s0hT+ElxEH3VF6SJBJUd8bCaHi3+RobGRUmdjiAbuyg/MjxL
- RvnQ==
-X-Gm-Message-State: AOAM530ENKACFS2TQdz0qxi1a0PFsbuCxp4rq8BCLSSaex8mEsd8Ibt8
- dGqf/FJslQxKX9+T7YfuLbvOTQ3nPfBElkU+L3c=
-X-Google-Smtp-Source: ABdhPJyFOmiGOmRDkw8czUhuWEAUWZI3b6hfKAcdDSxdtm3oSTgs7z2noREt7vOvPl7JarLhxJEUxltkCz2WrL99cSU=
-X-Received: by 2002:a0d:c244:0:b0:2d1:1fbb:180d with SMTP id
- e65-20020a0dc244000000b002d11fbb180dmr3902361ywd.196.1645038358332; Wed, 16
- Feb 2022 11:05:58 -0800 (PST)
-MIME-Version: 1.0
+Received: from ams.source.kernel.org (ams.source.kernel.org
+ [IPv6:2604:1380:4601:e00::1])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 37E7210E3D6;
+ Wed, 16 Feb 2022 19:38:37 +0000 (UTC)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 01E7BB81ED6;
+ Wed, 16 Feb 2022 19:38:34 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 28A69C004E1;
+ Wed, 16 Feb 2022 19:38:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1645040312;
+ bh=YUNeMwnffWU/vzA+11lFMuMWe0+JjFTHVyeqME5xzxw=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=RvhRgyEjawXUAql0FqCTCcTpqR6GYBvsqNC9EZPqI5ZukTe3YMkyAiJ+1YKBf+Rlr
+ sxewfhO7AtNd8GwQy/RQGGJ/AXgX1LgrWMnZTpDKZCiIl4MoI0X8P3b4yUkf4X3JeP
+ l7bOM+By1/829q8HEUDp0joAEckiMlN1bSJeEtmm9DT0v1cg0aKN9haMO+KRTEXTKx
+ BIawC1huC6S2hOqZ/gswPro0qF/Bzg0858Vu6QjTMbuvQTz7D1gR8uQt+HV6mEdhmv
+ BV4TgmRvjAQDxRzfAaigAGsmsMmR8Yj0ESiy1ZrH3LP0qLNGtaqg4OazRGKQ9Qu6L7
+ d13KOv1rLre5w==
+Date: Wed, 16 Feb 2022 13:46:09 -0600
+From: "Gustavo A. R. Silva" <gustavoars@kernel.org>
+To: "Rafael J. Wysocki" <rafael@kernel.org>
+Message-ID: <20220216194609.GA903947@embeddedor>
 References: <20220215174743.GA878920@embeddedor>
  <202202151016.C0471D6E@keescook>
  <20220215192110.GA883653@embeddedor> <Ygv8wY75hNqS7zO6@unreal>
  <20220215193221.GA884407@embeddedor>
-In-Reply-To: <20220215193221.GA884407@embeddedor>
-From: "Rafael J. Wysocki" <rafael@kernel.org>
-Date: Wed, 16 Feb 2022 20:05:47 +0100
-Message-ID: <CAJZ5v0jpAnQk+Hub6ue6t712RW+W0YBjb_gAcZZbUeuYMGv7mg@mail.gmail.com>
-To: "Gustavo A. R. Silva" <gustavoars@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+ <CAJZ5v0jpAnQk+Hub6ue6t712RW+W0YBjb_gAcZZbUeuYMGv7mg@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAJZ5v0jpAnQk+Hub6ue6t712RW+W0YBjb_gAcZZbUeuYMGv7mg@mail.gmail.com>
 X-Mailman-Approved-At: Mon, 21 Feb 2022 01:12:29 +0000
 Subject: Re: [Nouveau] [PATCH][next] treewide: Replace zero-length arrays
  with flexible-array members
@@ -92,27 +91,16 @@ Cc: "moderated list:SOUND - SOC LAYER / DYNAMIC AUDIO POWER MANAGEM..."
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, Feb 15, 2022 at 8:24 PM Gustavo A. R. Silva
-<gustavoars@kernel.org> wrote:
->
-> On Tue, Feb 15, 2022 at 09:19:29PM +0200, Leon Romanovsky wrote:
-> > On Tue, Feb 15, 2022 at 01:21:10PM -0600, Gustavo A. R. Silva wrote:
-> > > On Tue, Feb 15, 2022 at 10:17:40AM -0800, Kees Cook wrote:
-> > > > On Tue, Feb 15, 2022 at 11:47:43AM -0600, Gustavo A. R. Silva wrote:
-> > > >
-> > > > These all look trivially correct to me. Only two didn't have the end of
-> > > > the struct visible in the patch, and checking those showed them to be
-> > > > trailing members as well, so:
-> > > >
-> > > > Reviewed-by: Kees Cook <keescook@chromium.org>
-> > >
-> > > I'll add this to my -next tree.
-> >
-> > I would like to ask you to send mlx5 patch separately to netdev. We are working
-> > to delete that file completely and prefer to avoid from unnecessary merge conflicts.
->
-> Oh OK. Sure thing; I will do so.
+On Wed, Feb 16, 2022 at 08:05:47PM +0100, Rafael J. Wysocki wrote:
+> On Tue, Feb 15, 2022 at 8:24 PM Gustavo A. R. Silva
+> <gustavoars@kernel.org> wrote:
+> 
+> Can you also send the ACPI patch separately, please?
+> 
+> We would like to route it through the upstream ACPICA code base.
 
-Can you also send the ACPI patch separately, please?
+Yeah; no problem.
 
-We would like to route it through the upstream ACPICA code base.
+Thanks
+--
+Gustavo
