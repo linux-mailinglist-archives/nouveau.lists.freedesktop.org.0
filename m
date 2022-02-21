@@ -2,49 +2,70 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id C18BE4BD929
-	for <lists+nouveau@lfdr.de>; Mon, 21 Feb 2022 11:44:48 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id F1EC04BDAE5
+	for <lists+nouveau@lfdr.de>; Mon, 21 Feb 2022 17:42:54 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id EA8E210E4E9;
-	Mon, 21 Feb 2022 10:44:45 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5026110E746;
+	Mon, 21 Feb 2022 16:42:52 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from metis.ext.pengutronix.de (metis.ext.pengutronix.de
- [IPv6:2001:67c:670:201:290:27ff:fe1d:cc33])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 5F79810E342
- for <nouveau@lists.freedesktop.org>; Mon, 21 Feb 2022 10:44:44 +0000 (UTC)
-Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
- by metis.ext.pengutronix.de with esmtps
- (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
- (envelope-from <ukl@pengutronix.de>)
- id 1nM6Az-0005yH-Ah; Mon, 21 Feb 2022 11:44:17 +0100
-Received: from [2a0a:edc0:0:900:1d::77] (helo=ptz.office.stw.pengutronix.de)
- by drehscheibe.grey.stw.pengutronix.de with esmtp (Exim 4.94.2)
- (envelope-from <ukl@pengutronix.de>)
- id 1nM6At-000P4c-Mq; Mon, 21 Feb 2022 11:44:10 +0100
-Received: from ukl by ptz.office.stw.pengutronix.de with local (Exim 4.94.2)
- (envelope-from <ukl@pengutronix.de>)
- id 1nM6As-004a8j-5E; Mon, 21 Feb 2022 11:44:10 +0100
-Date: Mon, 21 Feb 2022 11:44:06 +0100
-From: Uwe =?utf-8?Q?Kleine-K=C3=B6nig?= <u.kleine-koenig@pengutronix.de>
-To: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>,
- Thomas Zimmermann <tzimmermann@suse.de>,
- David Airlie <airlied@linux.ie>, Daniel Vetter <daniel@ffwll.ch>
-Message-ID: <20220221104406.q65kdxunhelyi27v@pengutronix.de>
-References: <20210514100142.1182997-1-u.kleine-koenig@pengutronix.de>
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1FE4B10E750
+ for <nouveau@lists.freedesktop.org>; Mon, 21 Feb 2022 16:42:50 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1645461770;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=WN5pE4mPYjqAbDGa+uZP9tXI1ijs0aAGV+A9gWV3hXM=;
+ b=h0FdNpPhY0F0bgMMh9uqVwRt7cBjDfjLAXoPwcTdQ4gt00dao7WqGHz6GHx5xunfUoIl9S
+ 3ohUOvOSzFTYfqFSWq58PJ7xbQL7zD/iixqHYATQMD6TsZpVnhmJf9espie9xDUYntr4E7
+ pbyNTcvBP79e5X4c3fIEzy7FvxZ66wk=
+Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
+ [209.85.221.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-569-_HgZVIsGMGmSajHm2TZmYg-1; Mon, 21 Feb 2022 11:42:48 -0500
+X-MC-Unique: _HgZVIsGMGmSajHm2TZmYg-1
+Received: by mail-wr1-f71.google.com with SMTP id
+ v17-20020adfc5d1000000b001e6405c2b56so7687940wrg.7
+ for <nouveau@lists.freedesktop.org>; Mon, 21 Feb 2022 08:42:48 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=WN5pE4mPYjqAbDGa+uZP9tXI1ijs0aAGV+A9gWV3hXM=;
+ b=ySTEkshxtTQ9rpvygLn81+B+SDY0303mcVjbRQFKDTXmn+ur/Af+gLeiqLkuFBGHYZ
+ 94chNpIpajtcc4sTuYockCEued9r7pyCZE/KwOk5cB7Mr37uDwHTl1UbvzVLipC6+mjj
+ oIJiWAZS5xoNy2IPGT2ntvOIO5F5Vpe12JoZuShFuzzS8wf9ROwfALVsK9lo+NoeQEs2
+ dEwgok3NsDrsntEv/KnEfhegwnt0TKTxCWIE+ICbbWyKUuInnEDlfeppl01L7m6G6iX+
+ emLpzI0dmD4lgjjm63TZoXB0xkAsNaZtWDtTa0kX0/RXlQPox3P/4xKIggeZilQHP1Dr
+ Y5oA==
+X-Gm-Message-State: AOAM531BnYdcCBefAsaiFvkCkWBjItr9AGy3HQnRH+u6K/RPE/8OOwUH
+ cYofwcBRWqJJ559uLaP3Qz1P/cWAM9dK/8GfJmS0r3z6gl6If8G47NmFiCewQAAFqEsOF7h/rdT
+ DwFUpIIIrSmwCjHbGKZ00EY1ebWtpQYUqhYenrqdUYg==
+X-Received: by 2002:a5d:53c4:0:b0:1e6:5b69:a25a with SMTP id
+ a4-20020a5d53c4000000b001e65b69a25amr16500851wrw.341.1645461767603; 
+ Mon, 21 Feb 2022 08:42:47 -0800 (PST)
+X-Google-Smtp-Source: ABdhPJzBxuHa25XMuCyoTGfqLp5J08XAoasVbZ6wpJ/0QNFDz1nFAgQsu9IYWsOLBOiUu4LmeYHQdQIvRt5jz6tJVfg=
+X-Received: by 2002:a5d:53c4:0:b0:1e6:5b69:a25a with SMTP id
+ a4-20020a5d53c4000000b001e65b69a25amr16500836wrw.341.1645461767427; Mon, 21
+ Feb 2022 08:42:47 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="fo7jxdx5d4fj6bzu"
-Content-Disposition: inline
-In-Reply-To: <20210514100142.1182997-1-u.kleine-koenig@pengutronix.de>
-X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
-X-SA-Exim-Mail-From: ukl@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.ext.pengutronix.de);
- SAEximRunCond expanded to false
-X-PTX-Original-Recipient: nouveau@lists.freedesktop.org
-Subject: Re: [Nouveau] [PATCH] drm: Only select I2C_ALGOBIT for drivers that
- actually need it
+References: <20220221095918.18763-1-maxime@cerno.tech>
+ <20220221095918.18763-14-maxime@cerno.tech>
+In-Reply-To: <20220221095918.18763-14-maxime@cerno.tech>
+From: Karol Herbst <kherbst@redhat.com>
+Date: Mon, 21 Feb 2022 17:42:36 +0100
+Message-ID: <CACO55tt8eTkEZp_DSFQ3Lt3+WBX1g3iwrB6-eTT=91bAk1NPEw@mail.gmail.com>
+To: Maxime Ripard <maxime@cerno.tech>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=kherbst@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="UTF-8"
+Subject: Re: [Nouveau] [PATCH v2 13/22] drm/nouveau/kms: Remove redundant
+ zpos initialisation
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,192 +77,63 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Jani Nikula <jani.nikula@linux.intel.com>,
- Xinliang Liu <xinliang.liu@linaro.org>, Chen Feng <puck.chen@hisilicon.com>,
- intel-gfx@lists.freedesktop.org,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- Patrik Jakobsson <patrik.r.jakobsson@gmail.com>,
- Xinwei Kong <kong.kongxinwei@hisilicon.com>,
- John Stultz <john.stultz@linaro.org>, dri-devel@lists.freedesktop.org,
- kernel@pengutronix.de, Rodrigo Vivi <rodrigo.vivi@intel.com>,
- nouveau@lists.freedesktop.org, Tian Tao <tiantao6@hisilicon.com>,
- Ben Skeggs <bskeggs@redhat.com>
+Cc: Dom Cobley <dom@raspberrypi.com>, Tim Gover <tim.gover@raspberrypi.com>,
+ David Airlie <airlied@linux.ie>, nouveau <nouveau@lists.freedesktop.org>,
+ dri-devel <dri-devel@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>,
+ Daniel Vetter <daniel.vetter@intel.com>, Phil Elwell <phil@raspberrypi.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-
---fo7jxdx5d4fj6bzu
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-Hello,
-
-On Fri, May 14, 2021 at 12:01:42PM +0200, Uwe Kleine-K=F6nig wrote:
-> While working on a drm driver that doesn't need the i2c algobit stuff I
-> noticed that DRM selects this code even tough only 8 drivers actually use
-> it. While also only some drivers use i2c, keep the select for I2C for the
-> next cleanup patch. Still prepare this already by also selecting I2C for
-> the individual drivers.
->=20
-> Signed-off-by: Uwe Kleine-K=F6nig <u.kleine-koenig@pengutronix.de>
-
-This patch is already old but the issue is still valid and the patch
-even still applies to today's Linus' master branch.
-
-I didn't receive any human feedback. If you consider this patch
-worthwile I can recheck if it's still correct as is or needs adaption.
-
-Best regards
-Uwe
-
+On Mon, Feb 21, 2022 at 11:00 AM Maxime Ripard <maxime@cerno.tech> wrote:
+>
+> The nouveau KMS driver will call drm_plane_create_zpos_property() with
+> an init value depending on the plane purpose.
+>
+> Since the initial value wasn't carried over in the state, the driver had
+> to set it again in nv50_wndw_reset(). However, the helpers have been
+> adjusted to set it properly at reset, so this is not needed anymore.
+>
+> Cc: nouveau@lists.freedesktop.org
+> Cc: Ben Skeggs <bskeggs@redhat.com>
+> Cc: Karol Herbst <kherbst@redhat.com>
+> Cc: Lyude Paul <lyude@redhat.com>
+> Signed-off-by: Maxime Ripard <maxime@cerno.tech>
 > ---
->  drivers/gpu/drm/Kconfig                 | 5 ++++-
->  drivers/gpu/drm/ast/Kconfig             | 2 ++
->  drivers/gpu/drm/gma500/Kconfig          | 2 ++
->  drivers/gpu/drm/hisilicon/hibmc/Kconfig | 2 ++
->  drivers/gpu/drm/i915/Kconfig            | 2 ++
->  drivers/gpu/drm/mgag200/Kconfig         | 2 ++
->  drivers/gpu/drm/nouveau/Kconfig         | 2 ++
->  7 files changed, 16 insertions(+), 1 deletion(-)
->=20
-> diff --git a/drivers/gpu/drm/Kconfig b/drivers/gpu/drm/Kconfig
-> index 3c16bd1afd87..351ea617c498 100644
-> --- a/drivers/gpu/drm/Kconfig
-> +++ b/drivers/gpu/drm/Kconfig
-> @@ -12,7 +12,6 @@ menuconfig DRM
->  	select HDMI
->  	select FB_CMDLINE
->  	select I2C
-> -	select I2C_ALGOBIT
->  	select DMA_SHARED_BUFFER
->  	select SYNC_FILE
->  # gallium uses SYS_kcmp for os_same_file_description() to de-duplicate
-> @@ -233,6 +232,8 @@ config DRM_RADEON
->          select DRM_KMS_HELPER
->          select DRM_TTM
->  	select DRM_TTM_HELPER
-> +	select I2C
-> +	select I2C_ALGOBIT
->  	select POWER_SUPPLY
->  	select HWMON
->  	select BACKLIGHT_CLASS_DEVICE
-> @@ -254,6 +255,8 @@ config DRM_AMDGPU
->  	select DRM_SCHED
->  	select DRM_TTM
->  	select DRM_TTM_HELPER
-> +	select I2C
-> +	select I2C_ALGOBIT
->  	select POWER_SUPPLY
->  	select HWMON
->  	select BACKLIGHT_CLASS_DEVICE
-> diff --git a/drivers/gpu/drm/ast/Kconfig b/drivers/gpu/drm/ast/Kconfig
-> index fbcf2f45cef5..bcc25decd485 100644
-> --- a/drivers/gpu/drm/ast/Kconfig
-> +++ b/drivers/gpu/drm/ast/Kconfig
-> @@ -6,6 +6,8 @@ config DRM_AST
->  	select DRM_VRAM_HELPER
->  	select DRM_TTM
->  	select DRM_TTM_HELPER
-> +	select I2C
-> +	select I2C_ALGOBIT
->  	help
->  	 Say yes for experimental AST GPU driver. Do not enable
->  	 this driver without having a working -modesetting,
-> diff --git a/drivers/gpu/drm/gma500/Kconfig b/drivers/gpu/drm/gma500/Kcon=
-fig
-> index 0cff20265f97..e26c3a24955d 100644
-> --- a/drivers/gpu/drm/gma500/Kconfig
-> +++ b/drivers/gpu/drm/gma500/Kconfig
-> @@ -3,6 +3,8 @@ config DRM_GMA500
->  	tristate "Intel GMA500/600/3600/3650 KMS Framebuffer"
->  	depends on DRM && PCI && X86 && MMU
->  	select DRM_KMS_HELPER
-> +	select I2C
-> +	select I2C_ALGOBIT
->  	# GMA500 depends on ACPI_VIDEO when ACPI is enabled, just like i915
->  	select ACPI_VIDEO if ACPI
->  	select BACKLIGHT_CLASS_DEVICE if ACPI
-> diff --git a/drivers/gpu/drm/hisilicon/hibmc/Kconfig b/drivers/gpu/drm/hi=
-silicon/hibmc/Kconfig
-> index 43943e980203..ac8c42dc79f6 100644
-> --- a/drivers/gpu/drm/hisilicon/hibmc/Kconfig
-> +++ b/drivers/gpu/drm/hisilicon/hibmc/Kconfig
-> @@ -6,6 +6,8 @@ config DRM_HISI_HIBMC
->  	select DRM_VRAM_HELPER
->  	select DRM_TTM
->  	select DRM_TTM_HELPER
-> +	select I2C
-> +	select I2C_ALGOBIT
->  	help
->  	  Choose this option if you have a Hisilicon Hibmc soc chipset.
->  	  If M is selected the module will be called hibmc-drm.
-> diff --git a/drivers/gpu/drm/i915/Kconfig b/drivers/gpu/drm/i915/Kconfig
-> index 69f57ca9c68d..b3bb6f7cfbbc 100644
-> --- a/drivers/gpu/drm/i915/Kconfig
-> +++ b/drivers/gpu/drm/i915/Kconfig
-> @@ -13,6 +13,8 @@ config DRM_I915
->  	select DRM_PANEL
->  	select DRM_MIPI_DSI
->  	select RELAY
-> +	select I2C
-> +	select I2C_ALGOBIT
->  	select IRQ_WORK
->  	# i915 depends on ACPI_VIDEO when ACPI is enabled
->  	# but for select to work, need to select ACPI_VIDEO's dependencies, ick
-> diff --git a/drivers/gpu/drm/mgag200/Kconfig b/drivers/gpu/drm/mgag200/Kc=
-onfig
-> index eec59658a938..b28c5e4828f4 100644
-> --- a/drivers/gpu/drm/mgag200/Kconfig
-> +++ b/drivers/gpu/drm/mgag200/Kconfig
-> @@ -4,6 +4,8 @@ config DRM_MGAG200
->  	depends on DRM && PCI && MMU
->  	select DRM_GEM_SHMEM_HELPER
->  	select DRM_KMS_HELPER
-> +	select I2C
-> +	select I2C_ALGOBIT
->  	help
->  	 This is a KMS driver for Matrox G200 chips. It supports the original
->  	 MGA G200 desktop chips and the server variants. It requires 0.3.0
-> diff --git a/drivers/gpu/drm/nouveau/Kconfig b/drivers/gpu/drm/nouveau/Kc=
-onfig
-> index 9436310d0854..8823f0b24c73 100644
-> --- a/drivers/gpu/drm/nouveau/Kconfig
-> +++ b/drivers/gpu/drm/nouveau/Kconfig
-> @@ -7,6 +7,8 @@ config DRM_NOUVEAU
->  	select DRM_KMS_HELPER
->  	select DRM_TTM
->  	select DRM_TTM_HELPER
-> +	select I2C
-> +	select I2C_ALGOBIT
->  	select BACKLIGHT_CLASS_DEVICE if DRM_NOUVEAU_BACKLIGHT
->  	select ACPI_VIDEO if ACPI && X86 && BACKLIGHT_CLASS_DEVICE && INPUT
->  	select X86_PLATFORM_DEVICES if ACPI && X86
->=20
-> base-commit: 315d99318179b9cd5077ccc9f7f26a164c9fa998
-> --=20
-> 2.30.2
->=20
->=20
->=20
+>  drivers/gpu/drm/nouveau/dispnv50/wndw.c | 2 --
+>  1 file changed, 2 deletions(-)
+>
+> diff --git a/drivers/gpu/drm/nouveau/dispnv50/wndw.c b/drivers/gpu/drm/nouveau/dispnv50/wndw.c
+> index 133c8736426a..0c1a2ea0ed04 100644
+> --- a/drivers/gpu/drm/nouveau/dispnv50/wndw.c
+> +++ b/drivers/gpu/drm/nouveau/dispnv50/wndw.c
+> @@ -635,8 +635,6 @@ nv50_wndw_reset(struct drm_plane *plane)
+>                 plane->funcs->atomic_destroy_state(plane, plane->state);
+>
+>         __drm_atomic_helper_plane_reset(plane, &asyw->state);
+> -       plane->state->zpos = nv50_wndw_zpos_default(plane);
+> -       plane->state->normalized_zpos = nv50_wndw_zpos_default(plane);
 
---=20
-Pengutronix e.K.                           | Uwe Kleine-K=F6nig            |
-Industrial Linux Solutions                 | https://www.pengutronix.de/ |
+so reading the surrounding code a little it feels like those
+assignments actually do something. If my understanding is correct
+plane->state points to &asyw->state, but asyw was just kzalloced in
+this function. __drm_atomic_helper_plane_reset doesn't set the zpos or
+normalized_zpos fields as long as zpos_property is 0, so those fields
+won't be set with that change anymore.
 
---fo7jxdx5d4fj6bzu
-Content-Type: application/pgp-signature; name="signature.asc"
+I just don't know if it's fine like that or if this function should
+set zpos_property instead or something. Anyway, the commit description
+makes it sound like that an unneeded assignment would be removed here,
+which doesn't seem to be the case. But I don't really know much about
+all the drm API interactions, so it might just be fine, mostly asking
+to get a better idea on how all those pieces fit together.
 
------BEGIN PGP SIGNATURE-----
+>  }
+>
+>  static void
 
-iQEzBAABCgAdFiEEfnIqFpAYrP8+dKQLwfwUeK3K7AkFAmITbPMACgkQwfwUeK3K
-7An5cgf/a9YGvJyV58Jivjfe2u2Dl/jKZ1+fArYpC3h0O76yBGqkT1CnEpgOaFJl
-hjxWBIe+EwewKUcegjXnB58iNQmpH7tRet0BVfXluqLVQxKwgU7aFfiEJ9Hh81ua
-epDFlbF3BUbVrrc3kXnTCoZTN6fOobAKDkU5SB8yEIR/85kbdQddGdSZtCE+FzBR
-LIJPwaXafALQx9KQAsezXk3vOAm7wW1g602U24rVOLdM7GkPP4hhW0ygGrFzocBB
-XkcuYGZGuZZNCcOCHSClhj7uA56suoSfZUK1at8PoGt2nBXT9oDP7MhSWIqjT/m1
-43OTRW7a4MxzLRhTcwiiQJawYBvh7w==
-=xsnb
------END PGP SIGNATURE-----
 
---fo7jxdx5d4fj6bzu--
+
+> --
+> 2.35.1
+>
+
