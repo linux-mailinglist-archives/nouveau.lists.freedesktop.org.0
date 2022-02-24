@@ -2,72 +2,83 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id DF40D4C03EF
-	for <lists+nouveau@lfdr.de>; Tue, 22 Feb 2022 22:36:15 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id CDA9E4C36E8
+	for <lists+nouveau@lfdr.de>; Thu, 24 Feb 2022 21:32:10 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 9152C10E78B;
-	Tue, 22 Feb 2022 21:36:10 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 9A18F10E6A7;
+	Thu, 24 Feb 2022 20:32:06 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 466E310E78B
- for <nouveau@lists.freedesktop.org>; Tue, 22 Feb 2022 21:36:09 +0000 (UTC)
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id B3CB410E6A7
+ for <nouveau@lists.freedesktop.org>; Thu, 24 Feb 2022 20:32:04 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1645565768;
+ s=mimecast20190719; t=1645734723;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=GHlvL+qa3AWJMC3bfUfdMF0t/irgJlBJMoEQilLmh9s=;
- b=BLLLlOno4SButosVwVEQKxCy8DZFRyCc/IL7kHUuezEtl6YWLwpzXBGwjHZ9br7172ecSP
- M+re7hpOxZ7dWD1Y8K17oS8SJ++cXG0wDFNrtsYLJESoJmZzEVuJWZP7sei28u9F7e6Ryf
- FC60HO+qxBIJdFHTBeEcokK6UePg4pU=
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
- [209.85.221.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=U2ubHgPrmh8MR1n+1PbtlqSxV6eATITrLbT20lAtpdI=;
+ b=LR4ByN1DvdHjS6zRrDCufNu189MvxNNZgmYNNPYCzIBpHzuRC1uXv3ZqO4ItcW/dLxjSbz
+ LA9Zme4bjMrdEVh5P5JLP8cl6CwNZSasM3mXlhsqNoOsqGopqz8Z+7rWfE5V0564+t2dtB
+ 9z+JG2z689l5TdrHR+SiFbaXAWCXLTE=
+Received: from mail-qv1-f71.google.com (mail-qv1-f71.google.com
+ [209.85.219.71]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-27-_G9QBd8gNYiq-DDANAXcmg-1; Tue, 22 Feb 2022 16:36:06 -0500
-X-MC-Unique: _G9QBd8gNYiq-DDANAXcmg-1
-Received: by mail-wr1-f71.google.com with SMTP id
- e26-20020adfa45a000000b001ea860cd35cso1683088wra.4
- for <nouveau@lists.freedesktop.org>; Tue, 22 Feb 2022 13:36:05 -0800 (PST)
+ us-mta-586-3Zx5mOkIO1uJU8Erb8QyWA-1; Thu, 24 Feb 2022 15:32:02 -0500
+X-MC-Unique: 3Zx5mOkIO1uJU8Erb8QyWA-1
+Received: by mail-qv1-f71.google.com with SMTP id
+ i20-20020a056214031400b0043185095fe2so4050956qvu.10
+ for <nouveau@lists.freedesktop.org>; Thu, 24 Feb 2022 12:32:02 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=GHlvL+qa3AWJMC3bfUfdMF0t/irgJlBJMoEQilLmh9s=;
- b=iVPoa/WZaoR28fGXox+Bl63IqYuy7UI75DK/NmhzzK4hwlxu0rscqRRbNIxUj46u/E
- r0RewBqPFaWDKyaaZjU/MR5SHYhiuDmfYtXZhyhIJpE6pFYZHsuJ2YayPJ7CgvQtnJBk
- VmP/gRVlTSALM2aHXMIjYnEN7O6bzkhypHsgglgU2cD1b0Lt/9XavPu/TyZRh6ROJKrc
- rwaxvbCvky6VF3aHgZR2qM1yvO3L6863xkv4Bup7T/a9L1shSF2Z8tWGK3ou0SJM7XdY
- Bq/BT/qJVTBfXBxtL5+kL28Xu2fsKngeyUMGZp21UCR8pfoC2p6ROWG9Eqzug98U+nqn
- YChA==
-X-Gm-Message-State: AOAM532yEftk986hdk+OGLKH5sFOO4tC6A/3F7qfUNVUwHanpHdJl8U/
- SGc747Xo/ynCONe5DUN92Yiz+RoQ1UzkIt+Ah6ywGcS+6SKf+bu5I2wn9zFMgiUWD2LE7AF2E1m
- 0yAEpIurT15j46SGG4wnlunKrYd3wdTIc3L/tKPEldw==
-X-Received: by 2002:a05:6000:1888:b0:1e7:cd21:c24f with SMTP id
- a8-20020a056000188800b001e7cd21c24fmr21273871wri.308.1645565764923; 
- Tue, 22 Feb 2022 13:36:04 -0800 (PST)
-X-Google-Smtp-Source: ABdhPJxKZwco+lhuaJW5BywbUxVn+xeac+1syv9SkgSbImzQ0M3bxnzm2aY0asfxEm3N6JXLroTqCYY88lEXCZWmouM=
-X-Received: by 2002:a05:6000:1888:b0:1e7:cd21:c24f with SMTP id
- a8-20020a056000188800b001e7cd21c24fmr21273857wri.308.1645565764737; Tue, 22
- Feb 2022 13:36:04 -0800 (PST)
+ h=x-gm-message-state:message-id:subject:from:to:date:in-reply-to
+ :references:organization:user-agent:mime-version
+ :content-transfer-encoding;
+ bh=U2ubHgPrmh8MR1n+1PbtlqSxV6eATITrLbT20lAtpdI=;
+ b=MsHIi9qAc4yDrazk5jyntMIgu7L5QIGUMNlfDPnQl9c9jzh+ebp0WNAkvBC6hX7jhl
+ a/hVq6vK6aEy33y1ESwwzrkafBgWQcbHYJB4ad3OLRwFC0HYeyfLr9vd/hTrSTjEHnbS
+ Pe2yVGUChxc7GJupFfolO1f9Dj8ETxUkwJYB5DL73FchogyQ3B/v3fi2tjacl7ACcl7F
+ pTXjCwXbPRgz/Nj85dG5oWmQvT9VKop1F7yil/ViG4I4Xr7XlDgmETv7WvF0YvfaKflt
+ WTRqE5xYD6yFO5bVE2spx00O+D0ju18WzsFHBtKgHJdWduOPgMIS/QqDt52xlPto6KZ7
+ utQw==
+X-Gm-Message-State: AOAM532APh7+CUw4U8joTdUrPk68MPNqnx9Bs2WoBYbupbDm4H1dXX0r
+ qllZ9vcn+YBmzAdr9gaDWXE+62Er/LNUNZufKqJjNKXC3hllqUj8LPZlW4YibfyuyWqN2jQSx9c
+ D6c0GrCcKBySF3x+m2FP6npYThA==
+X-Received: by 2002:a37:b8c4:0:b0:648:acd1:892a with SMTP id
+ i187-20020a37b8c4000000b00648acd1892amr2863745qkf.743.1645734721600; 
+ Thu, 24 Feb 2022 12:32:01 -0800 (PST)
+X-Google-Smtp-Source: ABdhPJxBZAAiWwgM9xRBDJPR9c9MObQMOWmvfnas6Nn+RnXCCubFUHt2i1WczB05RyF7vM4SdkJcOg==
+X-Received: by 2002:a37:b8c4:0:b0:648:acd1:892a with SMTP id
+ i187-20020a37b8c4000000b00648acd1892amr2863709qkf.743.1645734721127; 
+ Thu, 24 Feb 2022 12:32:01 -0800 (PST)
+Received: from [192.168.8.138] (pool-96-230-100-15.bstnma.fios.verizon.net.
+ [96.230.100.15]) by smtp.gmail.com with ESMTPSA id
+ c11-20020a05622a024b00b002ddb43850fdsm242436qtx.15.2022.02.24.12.31.59
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 24 Feb 2022 12:32:00 -0800 (PST)
+Message-ID: <7243c037f5e74fda5060f7b96d46eca547745134.camel@redhat.com>
+From: Lyude Paul <lyude@redhat.com>
+To: Cai Huoqing <cai.huoqing@linux.dev>, Ben Skeggs <bskeggs@redhat.com>, 
+ Karol Herbst <kherbst@redhat.com>, David Airlie <airlied@linux.ie>, Daniel
+ Vetter <daniel@ffwll.ch>,  linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org,  nouveau@lists.freedesktop.org
+Date: Thu, 24 Feb 2022 15:31:59 -0500
+In-Reply-To: <20220223021808.GA8457@chq-T47>
+References: <20220209065322.43938-1-cai.huoqing@linux.dev>
+ <20220223021808.GA8457@chq-T47>
+Organization: Red Hat Inc.
+User-Agent: Evolution 3.42.3 (3.42.3-1.fc35)
 MIME-Version: 1.0
-References: <20220221095918.18763-1-maxime@cerno.tech>
- <20220221095918.18763-14-maxime@cerno.tech>
- <CACO55tt8eTkEZp_DSFQ3Lt3+WBX1g3iwrB6-eTT=91bAk1NPEw@mail.gmail.com>
- <20220222140237.jeae5o27z6oy5imp@houat>
-In-Reply-To: <20220222140237.jeae5o27z6oy5imp@houat>
-From: Karol Herbst <kherbst@redhat.com>
-Date: Tue, 22 Feb 2022 22:35:53 +0100
-Message-ID: <CACO55tvTF33YPZbCgPZ0LmbQdcNabszbx9M+YZUe0ORtRWZF9A@mail.gmail.com>
-To: Maxime Ripard <maxime@cerno.tech>
 Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=kherbst@redhat.com
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=lyude@redhat.com
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="UTF-8"
-Subject: Re: [Nouveau] [PATCH v2 13/22] drm/nouveau/kms: Remove redundant
- zpos initialisation
+Content-Transfer-Encoding: 8bit
+Subject: Re: [Nouveau] [PATCH] drm/nouveau: Remove the unused header file
+ nvif/list.h
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -79,78 +90,427 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: Dom Cobley <dom@raspberrypi.com>, Tim Gover <tim.gover@raspberrypi.com>,
- David Airlie <airlied@linux.ie>, nouveau <nouveau@lists.freedesktop.org>,
- dri-devel <dri-devel@lists.freedesktop.org>, Ben Skeggs <bskeggs@redhat.com>,
- Daniel Vetter <daniel.vetter@intel.com>, Phil Elwell <phil@raspberrypi.com>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Tue, Feb 22, 2022 at 3:02 PM Maxime Ripard <maxime@cerno.tech> wrote:
->
-> Hi,
->
-> On Mon, Feb 21, 2022 at 05:42:36PM +0100, Karol Herbst wrote:
-> > On Mon, Feb 21, 2022 at 11:00 AM Maxime Ripard <maxime@cerno.tech> wrote:
-> > >
-> > > The nouveau KMS driver will call drm_plane_create_zpos_property() with
-> > > an init value depending on the plane purpose.
-> > >
-> > > Since the initial value wasn't carried over in the state, the driver had
-> > > to set it again in nv50_wndw_reset(). However, the helpers have been
-> > > adjusted to set it properly at reset, so this is not needed anymore.
-> > >
-> > > Cc: nouveau@lists.freedesktop.org
-> > > Cc: Ben Skeggs <bskeggs@redhat.com>
-> > > Cc: Karol Herbst <kherbst@redhat.com>
-> > > Cc: Lyude Paul <lyude@redhat.com>
-> > > Signed-off-by: Maxime Ripard <maxime@cerno.tech>
-> > > ---
-> > >  drivers/gpu/drm/nouveau/dispnv50/wndw.c | 2 --
-> > >  1 file changed, 2 deletions(-)
-> > >
-> > > diff --git a/drivers/gpu/drm/nouveau/dispnv50/wndw.c b/drivers/gpu/drm/nouveau/dispnv50/wndw.c
-> > > index 133c8736426a..0c1a2ea0ed04 100644
-> > > --- a/drivers/gpu/drm/nouveau/dispnv50/wndw.c
-> > > +++ b/drivers/gpu/drm/nouveau/dispnv50/wndw.c
-> > > @@ -635,8 +635,6 @@ nv50_wndw_reset(struct drm_plane *plane)
-> > >                 plane->funcs->atomic_destroy_state(plane, plane->state);
-> > >
-> > >         __drm_atomic_helper_plane_reset(plane, &asyw->state);
-> > > -       plane->state->zpos = nv50_wndw_zpos_default(plane);
-> > > -       plane->state->normalized_zpos = nv50_wndw_zpos_default(plane);
-> >
-> > so reading the surrounding code a little it feels like those
-> > assignments actually do something. If my understanding is correct
-> > plane->state points to &asyw->state, but asyw was just kzalloced in
-> > this function. __drm_atomic_helper_plane_reset doesn't set the zpos or
-> > normalized_zpos fields as long as zpos_property is 0, so those fields
-> > won't be set with that change anymore.
-> >
-> > I just don't know if it's fine like that or if this function should
-> > set zpos_property instead or something. Anyway, the commit description
-> > makes it sound like that an unneeded assignment would be removed here,
-> > which doesn't seem to be the case. But I don't really know much about
-> > all the drm API interactions, so it might just be fine, mostly asking
-> > to get a better idea on how all those pieces fit together.
->
-> If you're looking at the code without that patch series, you're right.
->
-> These patches change that however:
-> https://lore.kernel.org/dri-devel/20220221095918.18763-7-maxime@cerno.tech/
-> https://lore.kernel.org/dri-devel/20220221095918.18763-8-maxime@cerno.tech/
->
-> So, once they have been applied those assignments are made in
-> __drm_atomic_helper_plane_reset and are no longer relevant here.
->
+Thanks for the ping!
 
-yeah, I saw those, but I see now where I got confused: the arguments
-of __drm_atomic_helper_plane_reset and
-__drm_atomic_helper_plane_state_reset are swapped, so I thought
-&asyw->state being all 0 was the second arg to
-__drm_atomic_helper_plane_state_reset. Yeah the code is alright then.
+Reviewed-by: Lyude Paul <lyude@redhat.com>
 
-Reviewed-by: Karol Herbst <kherbst@redhat.com>
+I will push this to drm-misc-next in a bit
 
-> Maxime
+On Wed, 2022-02-23 at 10:18 +0800, Cai Huoqing wrote:
+> On 09 2月 22 14:53:19, Cai Huoqing wrote:
+> > The nouveau driver depends on include/linux/list.h instead of
+> > nvif/list.h, so remove the obstacle-nvif/list.h.
+> > 
+> > Signed-off-by: Cai Huoqing <cai.huoqing@linux.dev>
+> > ---
+> Ping :)
+> >  drivers/gpu/drm/nouveau/include/nvif/list.h | 353 --------------------
+> >  1 file changed, 353 deletions(-)
+> >  delete mode 100644 drivers/gpu/drm/nouveau/include/nvif/list.h
+> > 
+> > diff --git a/drivers/gpu/drm/nouveau/include/nvif/list.h
+> > b/drivers/gpu/drm/nouveau/include/nvif/list.h
+> > deleted file mode 100644
+> > index 8af5d144ecb0..000000000000
+> > --- a/drivers/gpu/drm/nouveau/include/nvif/list.h
+> > +++ /dev/null
+> > @@ -1,353 +0,0 @@
+> > -/*
+> > - * Copyright © 2010 Intel Corporation
+> > - * Copyright © 2010 Francisco Jerez <currojerez@riseup.net>
+> > - *
+> > - * Permission is hereby granted, free of charge, to any person obtaining
+> > a
+> > - * copy of this software and associated documentation files (the
+> > "Software"),
+> > - * to deal in the Software without restriction, including without
+> > limitation
+> > - * the rights to use, copy, modify, merge, publish, distribute,
+> > sublicense,
+> > - * and/or sell copies of the Software, and to permit persons to whom the
+> > - * Software is furnished to do so, subject to the following conditions:
+> > - *
+> > - * The above copyright notice and this permission notice (including the
+> > next
+> > - * paragraph) shall be included in all copies or substantial portions of
+> > the
+> > - * Software.
+> > - *
+> > - * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+> > EXPRESS OR
+> > - * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+> > MERCHANTABILITY,
+> > - * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT
+> > SHALL
+> > - * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+> > OTHER
+> > - * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+> > ARISING
+> > - * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+> > DEALINGS
+> > - * IN THE SOFTWARE.
+> > - *
+> > - */
+> > -
+> > -/* Modified by Ben Skeggs <bskeggs@redhat.com> to match kernel list APIs
+> > */
+> > -
+> > -#ifndef _XORG_LIST_H_
+> > -#define _XORG_LIST_H_
+> > -
+> > -/**
+> > - * @file Classic doubly-link circular list implementation.
+> > - * For real usage examples of the linked list, see the file test/list.c
+> > - *
+> > - * Example:
+> > - * We need to keep a list of struct foo in the parent struct bar, i.e.
+> > what
+> > - * we want is something like this.
+> > - *
+> > - *     struct bar {
+> > - *          ...
+> > - *          struct foo *list_of_foos; -----> struct foo {}, struct foo
+> > {}, struct foo{}
+> > - *          ...
+> > - *     }
+> > - *
+> > - * We need one list head in bar and a list element in all list_of_foos
+> > (both are of
+> > - * data type 'struct list_head').
+> > - *
+> > - *     struct bar {
+> > - *          ...
+> > - *          struct list_head list_of_foos;
+> > - *          ...
+> > - *     }
+> > - *
+> > - *     struct foo {
+> > - *          ...
+> > - *          struct list_head entry;
+> > - *          ...
+> > - *     }
+> > - *
+> > - * Now we initialize the list head:
+> > - *
+> > - *     struct bar bar;
+> > - *     ...
+> > - *     INIT_LIST_HEAD(&bar.list_of_foos);
+> > - *
+> > - * Then we create the first element and add it to this list:
+> > - *
+> > - *     struct foo *foo = malloc(...);
+> > - *     ....
+> > - *     list_add(&foo->entry, &bar.list_of_foos);
+> > - *
+> > - * Repeat the above for each element you want to add to the list.
+> > Deleting
+> > - * works with the element itself.
+> > - *      list_del(&foo->entry);
+> > - *      free(foo);
+> > - *
+> > - * Note: calling list_del(&bar.list_of_foos) will set bar.list_of_foos to
+> > an empty
+> > - * list again.
+> > - *
+> > - * Looping through the list requires a 'struct foo' as iterator and the
+> > - * name of the field the subnodes use.
+> > - *
+> > - * struct foo *iterator;
+> > - * list_for_each_entry(iterator, &bar.list_of_foos, entry) {
+> > - *      if (iterator->something == ...)
+> > - *             ...
+> > - * }
+> > - *
+> > - * Note: You must not call list_del() on the iterator if you continue the
+> > - * loop. You need to run the safe for-each loop instead:
+> > - *
+> > - * struct foo *iterator, *next;
+> > - * list_for_each_entry_safe(iterator, next, &bar.list_of_foos, entry) {
+> > - *      if (...)
+> > - *              list_del(&iterator->entry);
+> > - * }
+> > - *
+> > - */
+> > -
+> > -/**
+> > - * The linkage struct for list nodes. This struct must be part of your
+> > - * to-be-linked struct. struct list_head is required for both the head of
+> > the
+> > - * list and for each list node.
+> > - *
+> > - * Position and name of the struct list_head field is irrelevant.
+> > - * There are no requirements that elements of a list are of the same
+> > type.
+> > - * There are no requirements for a list head, any struct list_head can be
+> > a list
+> > - * head.
+> > - */
+> > -struct list_head {
+> > -    struct list_head *next, *prev;
+> > -};
+> > -
+> > -/**
+> > - * Initialize the list as an empty list.
+> > - *
+> > - * Example:
+> > - * INIT_LIST_HEAD(&bar->list_of_foos);
+> > - *
+> > - * @param The list to initialized.
+> > - */
+> > -#define LIST_HEAD_INIT(name) { &(name), &(name) }
+> > -
+> > -#define LIST_HEAD(name) \
+> > -       struct list_head name = LIST_HEAD_INIT(name)
+> > -
+> > -static inline void
+> > -INIT_LIST_HEAD(struct list_head *list)
+> > -{
+> > -    list->next = list->prev = list;
+> > -}
+> > -
+> > -static inline void
+> > -__list_add(struct list_head *entry,
+> > -                struct list_head *prev, struct list_head *next)
+> > -{
+> > -    next->prev = entry;
+> > -    entry->next = next;
+> > -    entry->prev = prev;
+> > -    prev->next = entry;
+> > -}
+> > -
+> > -/**
+> > - * Insert a new element after the given list head. The new element does
+> > not
+> > - * need to be initialised as empty list.
+> > - * The list changes from:
+> > - *      head → some element → ...
+> > - * to
+> > - *      head → new element → older element → ...
+> > - *
+> > - * Example:
+> > - * struct foo *newfoo = malloc(...);
+> > - * list_add(&newfoo->entry, &bar->list_of_foos);
+> > - *
+> > - * @param entry The new element to prepend to the list.
+> > - * @param head The existing list.
+> > - */
+> > -static inline void
+> > -list_add(struct list_head *entry, struct list_head *head)
+> > -{
+> > -    __list_add(entry, head, head->next);
+> > -}
+> > -
+> > -/**
+> > - * Append a new element to the end of the list given with this list head.
+> > - *
+> > - * The list changes from:
+> > - *      head → some element → ... → lastelement
+> > - * to
+> > - *      head → some element → ... → lastelement → new element
+> > - *
+> > - * Example:
+> > - * struct foo *newfoo = malloc(...);
+> > - * list_add_tail(&newfoo->entry, &bar->list_of_foos);
+> > - *
+> > - * @param entry The new element to prepend to the list.
+> > - * @param head The existing list.
+> > - */
+> > -static inline void
+> > -list_add_tail(struct list_head *entry, struct list_head *head)
+> > -{
+> > -    __list_add(entry, head->prev, head);
+> > -}
+> > -
+> > -static inline void
+> > -__list_del(struct list_head *prev, struct list_head *next)
+> > -{
+> > -    next->prev = prev;
+> > -    prev->next = next;
+> > -}
+> > -
+> > -/**
+> > - * Remove the element from the list it is in. Using this function will
+> > reset
+> > - * the pointers to/from this element so it is removed from the list. It
+> > does
+> > - * NOT free the element itself or manipulate it otherwise.
+> > - *
+> > - * Using list_del on a pure list head (like in the example at the top of
+> > - * this file) will NOT remove the first element from
+> > - * the list but rather reset the list as empty list.
+> > - *
+> > - * Example:
+> > - * list_del(&foo->entry);
+> > - *
+> > - * @param entry The element to remove.
+> > - */
+> > -static inline void
+> > -list_del(struct list_head *entry)
+> > -{
+> > -    __list_del(entry->prev, entry->next);
+> > -}
+> > -
+> > -static inline void
+> > -list_del_init(struct list_head *entry)
+> > -{
+> > -    __list_del(entry->prev, entry->next);
+> > -    INIT_LIST_HEAD(entry);
+> > -}
+> > -
+> > -static inline void list_move_tail(struct list_head *list,
+> > -                                 struct list_head *head)
+> > -{
+> > -       __list_del(list->prev, list->next);
+> > -       list_add_tail(list, head);
+> > -}
+> > -
+> > -/**
+> > - * Check if the list is empty.
+> > - *
+> > - * Example:
+> > - * list_empty(&bar->list_of_foos);
+> > - *
+> > - * @return True if the list contains one or more elements or False
+> > otherwise.
+> > - */
+> > -static inline bool
+> > -list_empty(struct list_head *head)
+> > -{
+> > -    return head->next == head;
+> > -}
+> > -
+> > -/**
+> > - * Returns a pointer to the container of this list element.
+> > - *
+> > - * Example:
+> > - * struct foo* f;
+> > - * f = container_of(&foo->entry, struct foo, entry);
+> > - * assert(f == foo);
+> > - *
+> > - * @param ptr Pointer to the struct list_head.
+> > - * @param type Data type of the list element.
+> > - * @param member Member name of the struct list_head field in the list
+> > element.
+> > - * @return A pointer to the data struct containing the list head.
+> > - */
+> > -#ifndef container_of
+> > -#define container_of(ptr, type, member) \
+> > -    (type *)((char *)(ptr) - (char *) &((type *)0)->member)
+> > -#endif
+> > -
+> > -/**
+> > - * Alias of container_of
+> > - */
+> > -#define list_entry(ptr, type, member) \
+> > -    container_of(ptr, type, member)
+> > -
+> > -/**
+> > - * Retrieve the first list entry for the given list pointer.
+> > - *
+> > - * Example:
+> > - * struct foo *first;
+> > - * first = list_first_entry(&bar->list_of_foos, struct foo,
+> > list_of_foos);
+> > - *
+> > - * @param ptr The list head
+> > - * @param type Data type of the list element to retrieve
+> > - * @param member Member name of the struct list_head field in the list
+> > element.
+> > - * @return A pointer to the first list element.
+> > - */
+> > -#define list_first_entry(ptr, type, member) \
+> > -    list_entry((ptr)->next, type, member)
+> > -
+> > -/**
+> > - * Retrieve the last list entry for the given listpointer.
+> > - *
+> > - * Example:
+> > - * struct foo *first;
+> > - * first = list_last_entry(&bar->list_of_foos, struct foo, list_of_foos);
+> > - *
+> > - * @param ptr The list head
+> > - * @param type Data type of the list element to retrieve
+> > - * @param member Member name of the struct list_head field in the list
+> > element.
+> > - * @return A pointer to the last list element.
+> > - */
+> > -#define list_last_entry(ptr, type, member) \
+> > -    list_entry((ptr)->prev, type, member)
+> > -
+> > -#define __container_of(ptr, sample, member)                            \
+> > -    (void *)container_of((ptr), typeof(*(sample)), member)
+> > -
+> > -/**
+> > - * Loop through the list given by head and set pos to struct in the list.
+> > - *
+> > - * Example:
+> > - * struct foo *iterator;
+> > - * list_for_each_entry(iterator, &bar->list_of_foos, entry) {
+> > - *      [modify iterator]
+> > - * }
+> > - *
+> > - * This macro is not safe for node deletion. Use list_for_each_entry_safe
+> > - * instead.
+> > - *
+> > - * @param pos Iterator variable of the type of the list elements.
+> > - * @param head List head
+> > - * @param member Member name of the struct list_head in the list
+> > elements.
+> > - *
+> > - */
+> > -#define list_for_each_entry(pos, head, member)                         \
+> > -    for (pos = __container_of((head)->next, pos, member);              \
+> > -        &pos->member != (head);                                        \
+> > -        pos = __container_of(pos->member.next, pos, member))
+> > -
+> > -/**
+> > - * Loop through the list, keeping a backup pointer to the element. This
+> > - * macro allows for the deletion of a list element while looping through
+> > the
+> > - * list.
+> > - *
+> > - * See list_for_each_entry for more details.
+> > - */
+> > -#define list_for_each_entry_safe(pos, tmp, head, member)               \
+> > -    for (pos = __container_of((head)->next, pos, member),              \
+> > -        tmp = __container_of(pos->member.next, pos, member);           \
+> > -        &pos->member != (head);                                        \
+> > -        pos = tmp, tmp = __container_of(pos->member.next, tmp, member))
+> > -
+> > -
+> > -#define list_for_each_entry_reverse(pos, head, member)                 \
+> > -       for (pos = __container_of((head)->prev, pos, member);           \
+> > -            &pos->member != (head);                                    \
+> > -            pos = __container_of(pos->member.prev, pos, member))
+> > -
+> > -#define list_for_each_entry_continue(pos, head,
+> > member)                        \
+> > -       for (pos = __container_of(pos->member.next, pos, member);       \
+> > -            &pos->member != (head);                                    \
+> > -            pos = __container_of(pos->member.next, pos, member))
+> > -
+> > -#define list_for_each_entry_continue_reverse(pos, head,
+> > member)                \
+> > -       for (pos = __container_of(pos->member.prev, pos, member);       \
+> > -            &pos->member != (head);                                    \
+> > -            pos = __container_of(pos->member.prev, pos, member))
+> > -
+> > -#define list_for_each_entry_from(pos, head, member)                    \
+> > -       for (;                                                          \
+> > -            &pos->member != (head);                                    \
+> > -            pos = __container_of(pos->member.next, pos, member))
+> > -
+> > -#endif
+> > -- 
+> > 2.25.1
+> > 
+> 
+
+-- 
+Cheers,
+ Lyude Paul (she/her)
+ Software Engineer at Red Hat
 
