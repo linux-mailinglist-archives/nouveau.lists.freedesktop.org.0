@@ -2,42 +2,36 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 247A04C7D17
-	for <lists+nouveau@lfdr.de>; Mon, 28 Feb 2022 23:13:50 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D351C4C7D68
+	for <lists+nouveau@lfdr.de>; Mon, 28 Feb 2022 23:32:51 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 0AEBB10E593;
-	Mon, 28 Feb 2022 22:13:48 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 939BC10E934;
+	Mon, 28 Feb 2022 22:32:49 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [IPv6:2604:1380:4641:c500::1])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 0889510E593;
- Mon, 28 Feb 2022 22:13:47 +0000 (UTC)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+Received: from bmailout3.hostsharing.net (bmailout3.hostsharing.net
+ [176.9.242.62])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 9402F10E934;
+ Mon, 28 Feb 2022 22:32:48 +0000 (UTC)
+Received: from h08.hostsharing.net (h08.hostsharing.net [83.223.95.28])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 79D416119C;
- Mon, 28 Feb 2022 22:13:46 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id ABC48C340F1;
- Mon, 28 Feb 2022 22:13:45 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1646086425;
- bh=cnDWJ0mUKsMIK/kUZBxrtwaDai/t/1pEAH68lPV8FNI=;
- h=Date:From:To:Cc:Subject:In-Reply-To:From;
- b=g3J98SrFRq1BbJxPN1kJdH/0NbFXhkBE307szRWU7LmrbHX2s2cJ5zQ3v4x9DqVul
- W+UT8Tz7QZYUmLyHrBFi8AlchvPhAIsNb5N/t/1Vum4HNk2hB+M5oV3EPkQCL/YldK
- Yl1lpm9CV0w78mMuBs7wpXWCPyDYS8tFO9ylRSiAoaVrZIBgYz/Fvgxz8o2bG2gMGk
- SFSk5Az0KRyVF0mxmQZLvhhhRajROlVvK/8fDFVWhMxRoD8TO07Q8LkJUySVWRD90T
- lrt8hJFlJ3TW01ylg3BJslwJE+g9BnROM4YsHrUpbHVmWmLR9oT1VQBPyACxUK62w6
- +ISVACI6FIWZA==
-Date: Mon, 28 Feb 2022 16:13:44 -0600
-From: Bjorn Helgaas <helgaas@kernel.org>
-To: "Limonciello, Mario" <Mario.Limonciello@amd.com>
-Message-ID: <20220228221344.GA529289@bhelgaas>
+ (Client CN "*.hostsharing.net",
+ Issuer "RapidSSL TLS DV RSA Mixed SHA256 2020 CA-1" (verified OK))
+ by bmailout3.hostsharing.net (Postfix) with ESMTPS id 9468D100D9417;
+ Mon, 28 Feb 2022 23:32:46 +0100 (CET)
+Received: by h08.hostsharing.net (Postfix, from userid 100393)
+ id 72198110CA; Mon, 28 Feb 2022 23:32:46 +0100 (CET)
+Date: Mon, 28 Feb 2022 23:32:46 +0100
+From: Lukas Wunner <lukas@wunner.de>
+To: Bjorn Helgaas <helgaas@kernel.org>
+Message-ID: <20220228223246.GA11428@wunner.de>
+References: <BL1PR12MB5157004F38E3FEFF046D9BE4E2019@BL1PR12MB5157.namprd12.prod.outlook.com>
+ <20220228221344.GA529289@bhelgaas>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <BL1PR12MB5157004F38E3FEFF046D9BE4E2019@BL1PR12MB5157.namprd12.prod.outlook.com>
+In-Reply-To: <20220228221344.GA529289@bhelgaas>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 Subject: Re: [Nouveau] [PATCH v5 3/7] PCI: Drop the `is_thunderbolt`
  attribute from PCI core
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -52,13 +46,14 @@ List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
 Cc: Bjorn Helgaas <bhelgaas@google.com>,
+ "open list:RADEON and AMDGPU DRM DRIVERS" <amd-gfx@lists.freedesktop.org>,
  Michael Jamet <michael.jamet@intel.com>,
  "open list:PCI SUBSYSTEM" <linux-pci@vger.kernel.org>,
  "open list:THUNDERBOLT DRIVER" <linux-usb@vger.kernel.org>,
  "open list:DRM DRIVERS" <dri-devel@lists.freedesktop.org>,
  "open list:X86 PLATFORM DRIVERS" <platform-driver-x86@vger.kernel.org>,
- Andreas Noever <andreas.noever@gmail.com>,
- "open list:RADEON and AMDGPU DRM DRIVERS" <amd-gfx@lists.freedesktop.org>,
+ Andreas Noever <andreas.noever@gmail.com>, "Limonciello,
+ Mario" <Mario.Limonciello@amd.com>,
  "open list:DRM DRIVER FOR NVIDIA GEFORCE/QUADRO GPUS"
  <nouveau@lists.freedesktop.org>, Yehezkel Bernat <YehezkelShB@gmail.com>,
  "Deucher, Alexander" <Alexander.Deucher@amd.com>,
@@ -66,35 +61,33 @@ Cc: Bjorn Helgaas <bhelgaas@google.com>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Mon, Feb 28, 2022 at 03:33:13PM +0000, Limonciello, Mario wrote:
-> [AMD Official Use Only]
+On Mon, Feb 28, 2022 at 04:13:44PM -0600, Bjorn Helgaas wrote:
+> On Mon, Feb 28, 2022 at 03:33:13PM +0000, Limonciello, Mario wrote:
+> > > On Fri, Feb 25, 2022 at 11:42:24AM -0600, Bjorn Helgaas wrote:
+> > > > That would just leave the "PCI_VSEC_ID_INTEL_TBT implies external-
+> > > facing"
+> > > > assumption above.  Not having a Thunderbolt spec, I have no idea how
+> > > > you deal with that.
+> > > 
+> > > You can download the spec here:
+[...]
+> > > Inside the archive there is also the DVSEC spec with name "USB4 DVSEC
+> > > Version 1.0.pdf".
+> > 
+> > The spec has Host_Router_indication (bits 18-19) as meaning external facing.
+> > I'll respin the patch 3 for using that.
 > 
-> > 
-> > On Fri, Feb 25, 2022 at 11:42:24AM -0600, Bjorn Helgaas wrote:
-> > > That would just leave the "PCI_VSEC_ID_INTEL_TBT implies external-
-> > facing"
-> > > assumption above.  Not having a Thunderbolt spec, I have no idea how
-> > > you deal with that.
-> > 
-> > You can download the spec here:
-> > 
-> > https://nam11.safelinks.protection.outlook.com/?url=https%3A%2F%2Fww
-> > w.usb.org%2Fsites%2Fdefault%2Ffiles%2FUSB4%2520Specification%2520202
-> > 11116.zip&amp;data=04%7C01%7Cmario.limonciello%40amd.com%7Ca26e64
-> > 7a4acf4e7681d308d9faa358fd%7C3dd8961fe4884e608e11a82d994e183d%7C0
-> > %7C0%7C637816402472428689%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC
-> > 4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000&
-> > amp;sdata=HSDqx%2BHzSnczTZxaBij8sgqvJSS8ajtjCzZd2CPSbR4%3D&amp;re
-> > served=0
-> > 
-> > Inside the archive there is also the DVSEC spec with name "USB4 DVSEC
-> > Version 1.0.pdf".
-> 
-> The spec has Host_Router_indication (bits 18-19) as meaning external facing.
-> I'll respin the patch 3 for using that.
+> Thanks, please include the spec citation when you do.  And probably
+> the URL, because it's not at all obvious how the casual reader would
+> get from "is_thunderbolt" to a recent add-on to the USB4 spec.
 
-Thanks, please include the spec citation when you do.  And probably
-the URL, because it's not at all obvious how the casual reader would
-get from "is_thunderbolt" to a recent add-on to the USB4 spec.
+PCI_VSEC_ID_INTEL_TBT is not mentioned at all in the USB4 spec,
+hence there's no connection between "is_thunderbolt" and the USB4 spec.
 
-Bjorn
+It's a proprietary VSEC used by Intel and the only way to recognize
+pre-USB4 Thunderbolt devices that I know of.  Its ID is also
+different from the DVSEC IDs given in the above-mentioned spec.
+
+Thanks,
+
+Lukas
