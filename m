@@ -1,60 +1,68 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1D1524C8295
-	for <lists+nouveau@lfdr.de>; Tue,  1 Mar 2022 05:38:20 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 99C6E4C8282
+	for <lists+nouveau@lfdr.de>; Tue,  1 Mar 2022 05:38:08 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id CC4C010EB63;
-	Tue,  1 Mar 2022 04:37:48 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 4994A10EB89;
+	Tue,  1 Mar 2022 04:37:28 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com
- [IPv6:2607:f8b0:4864:20::62a])
- by gabe.freedesktop.org (Postfix) with ESMTPS id CA0B710E8F3;
- Mon, 28 Feb 2022 21:19:07 +0000 (UTC)
-Received: by mail-pl1-x62a.google.com with SMTP id e13so11824167plh.3;
- Mon, 28 Feb 2022 13:19:07 -0800 (PST)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 720EC10E377;
+ Mon, 28 Feb 2022 21:47:05 +0000 (UTC)
+Received: by mail-ed1-x535.google.com with SMTP id s24so19502705edr.5;
+ Mon, 28 Feb 2022 13:47:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:reply-to:from:date:message-id
- :subject:to:cc;
- bh=pX3FOaQ5tpG+krWAy5EzbawK39YqA5YwRZTg6hddt4E=;
- b=JpEWCU5sl0Tb/FD34RSH61Ey9dRKreZqOQa3CJ02luf0uqIT78+8GWNevF0TXmNO1k
- V82hjNGseb3oWLNgnnFwXHAFmfIF+pTCtPsXm95pt2iCzBmJFwg04njU2K1WfIC8K4PQ
- JYTCrkA4ACMCh2biL4u47uoOFfhnbmO/1jCCSOx3OESfK5+oDGNitg9s7NqsmIU5fVsE
- xsR4ABTTJUTksMDshckaPyVLHegSArBm3erCaRT01IEJkH2S1g98XNdRHKV6JZW5AanM
- gI9+nSzlxhKCRaqGLAQjGqwME5o9/K6faQyfblLD265MKP0MWlgdnuFxCRxjUTwlasET
- Zo4g==
+ h=mime-version:subject:from:in-reply-to:date:cc
+ :content-transfer-encoding:message-id:references:to;
+ bh=U6qUODqKVLrC7qZqs553HfNOTdovwKFxE93drAu/Dlk=;
+ b=DcAOXNn/ViLnmA/Pl4xJfWkhBybquVghVb27ULjvzphMd1cBlP8EnT2avc3nlq8Ncp
+ XU0OlwqVPcxmpQGfXIX8cDSYeDqzQFDIjUJw6vYkNcJJHsbpQaotozEaUyIGD250VuoD
+ 60I5wOFshLHgsaHS54p/JatmHLrrllGTo/egDJjxoeGmck3vK6ZaE0ldZN4szqLK845U
+ BQNwjpOC8zhohOQR/VOEr6j/DtNOqZN6I6F48XJrq+10cNhH40s7WdjZ8f4gJpCeR9JY
+ suF4D0bui+heOiMd0XjHUkKuJX/fj0a+j8l22tTUgDxT9LwW7gkDbHU26uOV2JCB+l1v
+ aZYw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:reply-to
- :from:date:message-id:subject:to:cc;
- bh=pX3FOaQ5tpG+krWAy5EzbawK39YqA5YwRZTg6hddt4E=;
- b=egp74ez16sYePF6VXevNYQckygfSYtAquVgDmEOAcYIQTBoEpsLbK4H+LZuEvIwkrU
- o9FT+OMTU6JFOombmD7QpAKGgTSlNU1ZMoGXbGc2fh9sGa6d/e6mJq7KJEUKLIg0c65L
- ZHRidR5OQjdsIaGzQQaP3xbyP4jSfXIaX0pJi5knkKAjR7j+nJOgusWz3ZiwTcj94zX6
- Sc8stgED187TT6TbsIhRuZADQ4kJUMxsBwx14Hm44Dry5quEJ6gUQIEXGoGEM6wwpYhm
- UG+DqPDmELgBxqMjU9WMf9+U/8GqS/U+/eH9TzrYq+GJRLa3D6LQBfbaX3436obcQUHQ
- sSuw==
-X-Gm-Message-State: AOAM533hTJhroOcyATPueYVwzrRJa69BtCOifI9hLOk89BiMZcyDjo5n
- h/X7EoVxqljkiX3sojtpI4C3sFUh6w057XaZJV4=
-X-Google-Smtp-Source: ABdhPJxYQDaw0FFWrTXZCk3OvnKpy6mSdQ8Z9qbCWYQ2FvSetamSp4Rz90y2uoGU7tjomvOtre1MYsL9s+rZuYttBVs=
-X-Received: by 2002:a17:902:ce8a:b0:14f:fd0e:e4a4 with SMTP id
- f10-20020a170902ce8a00b0014ffd0ee4a4mr22765912plg.47.1646083147399; Mon, 28
- Feb 2022 13:19:07 -0800 (PST)
-MIME-Version: 1.0
+ h=x-gm-message-state:mime-version:subject:from:in-reply-to:date:cc
+ :content-transfer-encoding:message-id:references:to;
+ bh=U6qUODqKVLrC7qZqs553HfNOTdovwKFxE93drAu/Dlk=;
+ b=xGics1tc8jI5gpxAJwGd2ZsCk0WeAACbb36IKg6xtb8JfbtIS9OyM5349C0ktwG9cV
+ 4BAbUBvJyHLzfmnUlvacVXduHhjmaajifMzHuwAnGewBsH+izEE2STRk9ugCPrEbSxGi
+ QIjaWbr/8CZUVj19iCK5Pqumz7c6xrnzPlesFvWt2Ux/JXWPF++Kvk+odlxFvqw0KAVc
+ AgvtBpvcL9t7fER7NjayMsyMnHqv8parfwVgefN51DMeSvApHWsxHesWpBx/mNenVc1F
+ 681eDYvQY7PlnyIDGGvSK/9VNieUjNeb1mmjUu12nc5c+FzHP7gxmQzRKAWoZGFnlMK8
+ 9drg==
+X-Gm-Message-State: AOAM531olU9yeil6Z71ey7h96lt4u9yH8bQQpPxVFNmThk+8VzWDQKLr
+ 3Tih6HlwvugfECQ4Esg9z6g=
+X-Google-Smtp-Source: ABdhPJxKG2ff16tCWsK6Ck3Y2a57p3q44AgnQUgUMRZ3ajKrFkwS/Wlp6PHXO9g9MP9OhOujc97TPw==
+X-Received: by 2002:a05:6402:40d0:b0:412:f86a:efd1 with SMTP id
+ z16-20020a05640240d000b00412f86aefd1mr21791110edb.194.1646084823834; 
+ Mon, 28 Feb 2022 13:47:03 -0800 (PST)
+Received: from smtpclient.apple ([2a02:8109:9d80:3f6c:957a:1d13:c949:d1f3])
+ by smtp.gmail.com with ESMTPSA id
+ ce7-20020a170906b24700b006cf095c2f5bsm4701847ejb.83.2022.02.28.13.47.01
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Mon, 28 Feb 2022 13:47:03 -0800 (PST)
+Content-Type: text/plain;
+	charset=us-ascii
+Mime-Version: 1.0 (Mac OS X Mail 15.0 \(3693.60.0.1.1\))
+From: Jakob Koschel <jakobkoschel@gmail.com>
+In-Reply-To: <CAHk-=wiTCvLQkHcJ3y0hpqH7FEk9D28LDvZZogC6OVLk7naBww@mail.gmail.com>
+Date: Mon, 28 Feb 2022 22:47:00 +0100
+Content-Transfer-Encoding: quoted-printable
+Message-Id: <FC710A1A-524E-481B-A668-FC258F529A2E@gmail.com>
 References: <20220228110822.491923-1-jakobkoschel@gmail.com>
  <20220228110822.491923-3-jakobkoschel@gmail.com>
  <2e4e95d6-f6c9-a188-e1cd-b1eae465562a@amd.com>
  <CAHk-=wgQps58DPEOe4y5cTh5oE9EdNTWRLXzgMiETc+mFX7jzw@mail.gmail.com>
- <282f0f8d-f491-26fc-6ae0-604b367a5a1a@amd.com>
- <b2d20961dbb7533f380827a7fcc313ff849875c1.camel@HansenPartnership.com>
-In-Reply-To: <b2d20961dbb7533f380827a7fcc313ff849875c1.camel@HansenPartnership.com>
-From: Jeffrey Walton <noloader@gmail.com>
-Date: Mon, 28 Feb 2022 16:18:56 -0500
-Message-ID: <CAH8yC8nwp8f3rANhCiiP_Oiw2cjfqCwAgZdTXY9OxtN9Tmm7HA@mail.gmail.com>
-To: James Bottomley <James.Bottomley@hansenpartnership.com>
-Content-Type: text/plain; charset="UTF-8"
+ <CAHk-=wj8fkosQ7=bps5K+DDazBXk=ypfn49A0sEq+7-nZnyfXA@mail.gmail.com>
+ <CAHk-=wiTCvLQkHcJ3y0hpqH7FEk9D28LDvZZogC6OVLk7naBww@mail.gmail.com>
+To: Linus Torvalds <torvalds@linux-foundation.org>
+X-Mailer: Apple Mail (2.3693.60.0.1.1)
 X-Mailman-Approved-At: Tue, 01 Mar 2022 04:37:20 +0000
 Subject: Re: [Nouveau] [PATCH 2/6] treewide: remove using list iterator
  after loop body as a ptr
@@ -69,18 +77,18 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Reply-To: noloader@gmail.com
 Cc: linux-wireless <linux-wireless@vger.kernel.org>,
  alsa-devel@alsa-project.org, KVM list <kvm@vger.kernel.org>,
  "Gustavo A. R. Silva" <gustavo@embeddedor.com>, linux-iio@vger.kernel.org,
  nouveau@lists.freedesktop.org, Rasmus Villemoes <linux@rasmusvillemoes.dk>,
  dri-devel <dri-devel@lists.freedesktop.org>,
- Cristiano Giuffrida <c.giuffrida@vu.nl>, "Bos, H.J." <h.j.bos@vu.nl>,
+ Cristiano Giuffrida <c.giuffrida@vu.nl>,
+ amd-gfx list <amd-gfx@lists.freedesktop.org>,
  linux1394-devel@lists.sourceforge.net, drbd-dev@lists.linbit.com,
  linux-arch <linux-arch@vger.kernel.org>, CIFS <linux-cifs@vger.kernel.org>,
  linux-aspeed@lists.ozlabs.org, linux-scsi <linux-scsi@vger.kernel.org>,
- linux-rdma <linux-rdma@vger.kernel.org>, linux-staging@lists.linux.dev,
- amd-gfx list <amd-gfx@lists.freedesktop.org>, Jason Gunthorpe <jgg@ziepe.ca>,
+ linux-rdma <linux-rdma@vger.kernel.org>, linux-staging@lists.linux.dev, "Bos,
+ H.J." <h.j.bos@vu.nl>, Jason Gunthorpe <jgg@ziepe.ca>,
  intel-wired-lan@lists.osuosl.org, kgdb-bugreport@lists.sourceforge.net,
  bcm-kernel-feedback-list@broadcom.com,
  Dan Carpenter <dan.carpenter@oracle.com>,
@@ -88,11 +96,10 @@ Cc: linux-wireless <linux-wireless@vger.kernel.org>,
  Kees Cook <keescook@chromium.org>, Arnd Bergman <arnd@arndb.de>,
  Linux PM <linux-pm@vger.kernel.org>,
  intel-gfx <intel-gfx@lists.freedesktop.org>,
- linuxppc-dev <linuxppc-dev@lists.ozlabs.org>,
  Brian Johannesmeyer <bjohannesmeyer@gmail.com>,
  Nathan Chancellor <nathan@kernel.org>, dma <dmaengine@vger.kernel.org>,
  Christophe JAILLET <christophe.jaillet@wanadoo.fr>,
- Jakob Koschel <jakobkoschel@gmail.com>, v9fs-developer@lists.sourceforge.net,
+ v9fs-developer@lists.sourceforge.net,
  linux-tegra <linux-tegra@vger.kernel.org>,
  Thomas Gleixner <tglx@linutronix.de>,
  Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
@@ -105,39 +112,70 @@ Cc: linux-wireless <linux-wireless@vger.kernel.org>,
  Linux Crypto Mailing List <linux-crypto@vger.kernel.org>,
  linux-fsdevel <linux-fsdevel@vger.kernel.org>,
  linux-mediatek@lists.infradead.org, Andrew Morton <akpm@linux-foundation.org>,
- Linus Torvalds <torvalds@linux-foundation.org>,
- =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
+ linuxppc-dev <linuxppc-dev@lists.ozlabs.org>,
+ =?utf-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
  Mike Rapoport <rppt@kernel.org>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Mon, Feb 28, 2022 at 3:45 PM James Bottomley
-<James.Bottomley@hansenpartnership.com> wrote:
-> ...
-> > Just from skimming over the patches to change this and experience
-> > with the drivers/subsystems I help to maintain I think the primary
-> > pattern looks something like this:
-> >
-> > list_for_each_entry(entry, head, member) {
-> >      if (some_condition_checking(entry))
-> >          break;
-> > }
-> > do_something_with(entry);
->
->
-> Actually, we usually have a check to see if the loop found anything,
-> but in that case it should something like
->
-> if (list_entry_is_head(entry, head, member)) {
->     return with error;
-> }
-> do_somethin_with(entry);
 
-Borrowing from c++, perhaps an explicit end should be used:
 
-  if (list_entry_not_end(entry))
-    do_somethin_with(entry)
+> On 28. Feb 2022, at 21:10, Linus Torvalds =
+<torvalds@linux-foundation.org> wrote:
+>=20
+> On Mon, Feb 28, 2022 at 12:03 PM Linus Torvalds
+> <torvalds@linux-foundation.org> wrote:
+>>=20
+>> Side note: we do need *some* way to do it.
+>=20
+> Ooh.
+>=20
+> This patch is a work of art.
+>=20
+> And I mean that in the worst possible way.
+>=20
+> We can do
+>=20
+>        typeof(pos) pos
+>=20
+> in the 'for ()' loop, and never use __iter at all.
+>=20
+> That means that inside the for-loop, we use a _different_ 'pos' than =
+outside.
+>=20
+> And then the compiler will not see some "might be uninitialized", but
+> the outer 'pos' *will* be uninitialized.
+>=20
+> Unless, of course, the outer 'pos' had that pointless explicit =
+initializer.
 
-It is modelled after c++ and the 'while(begin != end) {}' pattern.
+The goal of this is to get compiler warnings right? This would indeed be =
+great.
 
-Jeff
+Changing the list_for_each_entry() macro first will break all of those =
+cases
+(e.g. the ones using 'list_entry_is_head()).
+I assumed it is better to fix those cases first and then have a simple
+coccinelle script changing the macro + moving the iterator into the =
+scope
+of the macro.
+
+>=20
+> Here - can somebody poke holes in this "work of art" patch?
+
+With this you are no longer able to set the 'outer' pos within the list
+iterator loop body or am I missing something? Like this it stays
+uninitialized but you'll probably want to set it from within the loop.
+
+You would then yet again need a variable with another name to use
+after the loop.
+
+I fail to see how this will make most of the changes in this
+patch obsolete (if that was the intention).
+
+>=20
+>                     Linus
+> <patch.diff>
+
+- Jakob
+
