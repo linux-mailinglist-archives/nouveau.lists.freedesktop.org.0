@@ -1,55 +1,55 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 49C094C9CD6
-	for <lists+nouveau@lfdr.de>; Wed,  2 Mar 2022 05:57:46 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0872D4C9CDA
+	for <lists+nouveau@lfdr.de>; Wed,  2 Mar 2022 05:57:49 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5E32310EAF9;
-	Wed,  2 Mar 2022 04:57:28 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 6129E10EB02;
+	Wed,  2 Mar 2022 04:57:29 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
- [IPv6:2a00:1450:4864:20::131])
- by gabe.freedesktop.org (Postfix) with ESMTPS id C07C110E790
- for <nouveau@lists.freedesktop.org>; Tue,  1 Mar 2022 19:07:07 +0000 (UTC)
-Received: by mail-lf1-x131.google.com with SMTP id f37so28467526lfv.8
- for <nouveau@lists.freedesktop.org>; Tue, 01 Mar 2022 11:07:07 -0800 (PST)
+Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
+ [IPv6:2a00:1450:4864:20::235])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 1CE4C10E7F6
+ for <nouveau@lists.freedesktop.org>; Tue,  1 Mar 2022 19:48:59 +0000 (UTC)
+Received: by mail-lj1-x235.google.com with SMTP id v22so23316488ljh.7
+ for <nouveau@lists.freedesktop.org>; Tue, 01 Mar 2022 11:48:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linux-foundation.org; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=+FYbGAw6yxU17iUDUp61Ry7f+ZSO9wN0ehJ+hGfk2DQ=;
- b=NEmpYuhxkY3jphhiKwB9rL7CFHETV0OarciDwH/Y25b8gogpFDGLbcsm2Hp5JlhbRM
- fgLdNaX0z1k1bpDTdAa2T+xhPoQGBlkWInAyVtxomjmoWydKKz6S1Vw5P8QyPxUNcXPG
- O8s4ZVUjpR1ZVkG2oqZOMI9ApgRXI/RsyC5iE=
+ :cc; bh=PzY8tILS7/J5BzJfiKLdBDXy8/s4RAHqODI+UdY57jc=;
+ b=MSgmT6lRet0jPev3NhT8poLSNE2IuVKHhTmnMdindDPsxNrbDdzPrkBSaT4BauMeD+
+ LWq3ALR2NImH9IAbyg/9Mpz0DLX1H3V94a1gLKACC1HvSqM9EwtH2Km4ZUYlkqLoZgsQ
+ ZV7jqWBOB7cCGsim0JopuTtvt6tgng/ReKRwg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=+FYbGAw6yxU17iUDUp61Ry7f+ZSO9wN0ehJ+hGfk2DQ=;
- b=NVmLThSB4VyS4i3bCwScptVcdmSYmkz/GQR/tiRMYoRfLRQ1GDCjy/oBV85bSsa6F1
- PXSl5cPAbeFKfRwB1LRCNnaOuGT/TfQ7a4Vxb6q9sdKpkpY5yw675tBBcxOFVFDhlbYU
- 6Ni7aIOtmG7SfVYPqyK642oSW4bVJhEl/KjuM5dtnbExXGAGvtotlfWPGJCEw/d7SSKS
- d7w9qXv8hba7LMubH1hMiZm06JmYGZaqxbpY1Qf4QPR2iO+lTPWkiSSxiC6WDdKbJ2rR
- kOwzSI+vU4HvCBbVmBJqpTVFUKurXyBFEMTc5pndR15/Lc2ExvJe5xmkb0uBKJHGsDxj
- wRow==
-X-Gm-Message-State: AOAM530PpUpeRlAgA1tjFWuPSdTDqfXbxzNtQf6JI1dIBReRyCsPUG3m
- qj4UtHY6nOUdPpkpKquSIdggoWy4Q+Y51PqB7Ic=
-X-Google-Smtp-Source: ABdhPJy8a3F04eC9nNXP2sxKj5cS3gpbd2f6Xx//aD8/O8JfmH7YOKuWh3gub5Rh2N9gE1mxMPDVPA==
-X-Received: by 2002:a05:6512:48c:b0:443:3d4f:e559 with SMTP id
- v12-20020a056512048c00b004433d4fe559mr16347690lfq.309.1646161625751; 
- Tue, 01 Mar 2022 11:07:05 -0800 (PST)
-Received: from mail-lj1-f172.google.com (mail-lj1-f172.google.com.
- [209.85.208.172]) by smtp.gmail.com with ESMTPSA id
- u9-20020ac251c9000000b00443dc755dfdsm1625665lfm.215.2022.03.01.11.07.02
+ bh=PzY8tILS7/J5BzJfiKLdBDXy8/s4RAHqODI+UdY57jc=;
+ b=yQ4OVVRjb3iSAUZZrH5OenUhXs4QZzRgKBuG4lw8Q2cXcFNmtzmoQaKkhWA9X/7gDP
+ QKaI8MgebsMYD+0RLnf3TJ1LFFaRbMTqDKYKgp+0qvp1fpNjsb7XYW3+KHoWsiD5FYSJ
+ IyYgdaKkFuNS+GnpEZ/DHSiKuOdkPhEgYPFr8UUafdv7+29141gk0hDBh9exmBBZvWos
+ EQ8A3g/gjQNSwWtVas+6zW6MeMHTIflPIWVGhAFwHaZ8kPe1l7yzCL9sTf3+5JSfe7Nw
+ qtN9Q0szMCN/uVp0kLFfuKNy8REHTAw9aUTMfdBdC7OuQgkL5BV7EoyTXkJyLj66/GHr
+ 41Tw==
+X-Gm-Message-State: AOAM530q1RnS792RFkR3oVWVfz4acZoX+Lm8i4R6UjKnKsGdaoSLtTlN
+ P9kdj0Y9FAjYvxYJGFLD+UcLaW2P71eCpbfKoX4=
+X-Google-Smtp-Source: ABdhPJzmqgNoHMplq100iVu2x+86Bj+rqZqIsu+3MVNLL7DSK1GpFo/Ov3JDu/KN9TqX1udqlu9Xnw==
+X-Received: by 2002:a2e:8795:0:b0:246:485b:9a2f with SMTP id
+ n21-20020a2e8795000000b00246485b9a2fmr18859923lji.283.1646164138001; 
+ Tue, 01 Mar 2022 11:48:58 -0800 (PST)
+Received: from mail-lf1-f49.google.com (mail-lf1-f49.google.com.
+ [209.85.167.49]) by smtp.gmail.com with ESMTPSA id
+ z21-20020a0565120c1500b00443b9d49960sm1640810lfu.59.2022.03.01.11.48.57
  for <nouveau@lists.freedesktop.org>
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 01 Mar 2022 11:07:04 -0800 (PST)
-Received: by mail-lj1-f172.google.com with SMTP id 29so23117949ljv.10
- for <nouveau@lists.freedesktop.org>; Tue, 01 Mar 2022 11:07:02 -0800 (PST)
+ Tue, 01 Mar 2022 11:48:57 -0800 (PST)
+Received: by mail-lf1-f49.google.com with SMTP id y24so28714571lfg.1
+ for <nouveau@lists.freedesktop.org>; Tue, 01 Mar 2022 11:48:57 -0800 (PST)
 X-Received: by 2002:a2e:3013:0:b0:246:2ca9:365e with SMTP id
- w19-20020a2e3013000000b002462ca9365emr17902580ljw.291.1646161622598; Tue, 01
- Mar 2022 11:07:02 -0800 (PST)
+ w19-20020a2e3013000000b002462ca9365emr17983151ljw.291.1646163763108; Tue, 01
+ Mar 2022 11:42:43 -0800 (PST)
 MIME-Version: 1.0
 References: <20220228110822.491923-1-jakobkoschel@gmail.com>
  <20220228110822.491923-3-jakobkoschel@gmail.com>
@@ -59,11 +59,12 @@ References: <20220228110822.491923-1-jakobkoschel@gmail.com>
  <b2d20961dbb7533f380827a7fcc313ff849875c1.camel@HansenPartnership.com>
  <7D0C2A5D-500E-4F38-AD0C-A76E132A390E@kernel.org>
  <73fa82a20910c06784be2352a655acc59e9942ea.camel@HansenPartnership.com>
-In-Reply-To: <73fa82a20910c06784be2352a655acc59e9942ea.camel@HansenPartnership.com>
+ <CAHk-=wiT5HX6Kp0Qv4ZYK_rkq9t5fZ5zZ7vzvi6pub9kgp=72g@mail.gmail.com>
+In-Reply-To: <CAHk-=wiT5HX6Kp0Qv4ZYK_rkq9t5fZ5zZ7vzvi6pub9kgp=72g@mail.gmail.com>
 From: Linus Torvalds <torvalds@linux-foundation.org>
-Date: Tue, 1 Mar 2022 11:06:45 -0800
-X-Gmail-Original-Message-ID: <CAHk-=wiT5HX6Kp0Qv4ZYK_rkq9t5fZ5zZ7vzvi6pub9kgp=72g@mail.gmail.com>
-Message-ID: <CAHk-=wiT5HX6Kp0Qv4ZYK_rkq9t5fZ5zZ7vzvi6pub9kgp=72g@mail.gmail.com>
+Date: Tue, 1 Mar 2022 11:42:26 -0800
+X-Gmail-Original-Message-ID: <CAHk-=wghQygmASNUWj=LZn5FR5wsce2osyR6EXcfEB_FaX_6Og@mail.gmail.com>
+Message-ID: <CAHk-=wghQygmASNUWj=LZn5FR5wsce2osyR6EXcfEB_FaX_6Og@mail.gmail.com>
 To: James Bottomley <James.Bottomley@hansenpartnership.com>
 Content-Type: text/plain; charset="UTF-8"
 X-Mailman-Approved-At: Wed, 02 Mar 2022 04:57:26 +0000
@@ -120,54 +121,35 @@ Cc: linux-wireless <linux-wireless@vger.kernel.org>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Mon, Feb 28, 2022 at 2:29 PM James Bottomley
-<James.Bottomley@hansenpartnership.com> wrote:
+On Tue, Mar 1, 2022 at 11:06 AM Linus Torvalds
+<torvalds@linux-foundation.org> wrote:
 >
-> However, if the desire is really to poison the loop variable then we
-> can do
->
-> #define list_for_each_entry(pos, head, member)                          \
->         for (pos = list_first_entry(head, typeof(*pos), member);        \
->              !list_entry_is_head(pos, head, member) && ((pos = NULL) == NULL;                   \
->              pos = list_next_entry(pos, member))
->
-> Which would at least set pos to NULL when the loop completes.
+> So instead of that simple "if (!entry)", we'd effectively have to
+> continue to use something that still works with the old world order
+> (ie that "if (list_entry_is_head())" model).
 
-That would actually have been excellent if we had done that
-originally. It would not only avoid the stale and incorrectly typed
-head entry left-over turd, it would also have made it very easy to
-test for "did I find an entry in the loop".
+Just to prove my point about how this is painful, that doesn't work at all.
 
-But I don't much like it in the situation we are now.
+If the loop iterator at the end is NULL (good, in theory), we can't
+use "list_entry_is_head()" to check whether we ended. We'd have to use
+a new thing entirely, to handle the "list_for_each_entry() has the
+old/new semantics" cases.
 
-Why? Mainly because it basically changes the semantics of the loop
-_without_ any warnings about it.  And we don't actually get the
-advantage of the nicer semantics, because we can't actually make code
-do
+That's largely why I was pushing for the "let's make it impossible to
+use the loop iterator at all outside the loop". It avoids the
+confusing case, and the patches to move to that stricter semantic can
+be merged independently (and before) doing the actual semantic change.
 
-        list_for_each_entry(entry, ....) {
-                ..
-        }
-        if (!entry)
-                return -ESRCH;
-        .. use the entry we found ..
+I'm not saying my suggested approach is wonderful either. Honestly,
+it's painful that we have so nasty semantics for the end-of-loop case
+for list_for_each_entry().
 
-because that would be a disaster for back-porting, plus it would be a
-flag-day issue (ie we'd have to change the semantics of the loop at
-the same time we change every single user).
+The minimal patch would clearly be to keep those broken semantics, and
+just force everybody to use the list_entry_is_head() case. That's the
+"we know we messed up, we are too lazy to fix it, we'll just work
+around it and people need to be careful" approach.
 
-So instead of that simple "if (!entry)", we'd effectively have to
-continue to use something that still works with the old world order
-(ie that "if (list_entry_is_head())" model).
+And laziness is a virtue. But bad semantics are bad semantics. So it's
+a question of balancing those two issues.
 
-So we couldn't really take _advantage_ of the nicer semantics, and
-we'd not even get a warning if somebody does it wrong - the code would
-just silently do the wrong thing.
-
-IOW: I don't think you are wrong about that patch: it would solve the
-problem that Jakob wants to solve, and it would have absolutely been
-much better if we had done this from the beginning. But I think that
-in our current situation, it's actually a really fragile solution to
-the "don't do that then" problem we have.
-
-              Linus
+               Linus
