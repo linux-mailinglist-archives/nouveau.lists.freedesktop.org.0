@@ -2,57 +2,78 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5084A4CE29A
-	for <lists+nouveau@lfdr.de>; Sat,  5 Mar 2022 05:27:01 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 40BA14D0E99
+	for <lists+nouveau@lfdr.de>; Tue,  8 Mar 2022 05:27:39 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 04C2B10EC27;
-	Sat,  5 Mar 2022 04:26:57 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id ADEF910E645;
+	Tue,  8 Mar 2022 04:27:28 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pj1-x1030.google.com (mail-pj1-x1030.google.com
- [IPv6:2607:f8b0:4864:20::1030])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 8886A10EC27
- for <nouveau@lists.freedesktop.org>; Sat,  5 Mar 2022 04:26:55 +0000 (UTC)
-Received: by mail-pj1-x1030.google.com with SMTP id
- ev16-20020a17090aead000b001bc3835fea8so9703378pjb.0
- for <nouveau@lists.freedesktop.org>; Fri, 04 Mar 2022 20:26:55 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=8Bz8DpP6NCHRslFA7ELRQyKbcaT96zofovGm/etrppg=;
- b=pJU8Wx+bJzh6U7En5kQGrYvK/xbz3Qgt18YCWssWmy4agVKPWieBidPF2dHjNWCtqb
- dLstPB4lZx/RwP8+zNyb50SiCHHBK/RIgoQBqi8Vpr5yR76q5CQxvBRhJxNSu7rk6/u6
- gn20bHhby4cpA1ba1jC+cw6PDUAbqi0HKdYpY8O+oIy3xtSG9TSw0Pg2glArYJgVL0so
- m9UZoqwbBj7KqGMWsBZb6tyJMalXEv3SSK9jkigXU6CFspjvwelJZisSYy05aS/cFkTX
- MtpMRbqwLjJjxnxphbytj392SP3+FegK7MgifS6QzYyuSLHSa384SZCtLsE/I5wAXvmM
- XaXw==
+Received: from mail-lj1-x22c.google.com (mail-lj1-x22c.google.com
+ [IPv6:2a00:1450:4864:20::22c])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 339E910F2F3
+ for <nouveau@lists.freedesktop.org>; Wed,  2 Mar 2022 09:29:36 +0000 (UTC)
+Received: by mail-lj1-x22c.google.com with SMTP id t14so1376537ljh.8
+ for <nouveau@lists.freedesktop.org>; Wed, 02 Mar 2022 01:29:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=rasmusvillemoes.dk; s=google;
+ h=message-id:date:mime-version:user-agent:subject:content-language:to
+ :cc:references:from:in-reply-to:content-transfer-encoding;
+ bh=XH8CYV/Z50iBLZ27uSo3DlVY0KhJ8ZO+RiecWTcYel0=;
+ b=IQg4uBejV+wOE9gbvRPz3nvi4LkiiVw4YSIjC8NPteocLXX0uLpiZyGXJ60leACu72
+ E2mMgbaj2BDeYnhoOw0DKPRcT2bjIlB4yRTWQZ65OcYRTHhlWzgeq8LyFprIEpiij6N8
+ YNaymndxJaFKphqyYHlKdyPolm4uaJOX+WJuI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=8Bz8DpP6NCHRslFA7ELRQyKbcaT96zofovGm/etrppg=;
- b=MsFTLIp+HDAXU6fKkiYglOF5iq5ZN4TPhljiLpyz8ETlGSJFDzf23aGkNFtidDGoFd
- y7fYjrm3in2bg7lnKd+tp/q2L6CkqoRLzohCupULwrqjCeZNBqnB+ihcBSK/0MOwKhDy
- MmfZdZWNaS7gxVf0o0u5id+Rd3UYIBxFNcrKtF1lMxSJ1w9wgXp87pyH7ekkFDXwWS9k
- x5U/Eci5i4l/VP3hKmilNNFG1GyppEVGOGM+ytjmbt5ZNLRqTZFYBZIiLoMkeOxleFR/
- eH8AfXBMIF91P1tbXW+VSvdFDcKudZrZLKq3eqqpsh7/mgTvSpVImcsgDFwk4fq4Ncd6
- NtPQ==
-X-Gm-Message-State: AOAM533BTg/l41Hx0cb5xB49xK+Ns0UyCEo+rx7dbw/yBb3qagqlOWuH
- V0byKvVWdlB2A/G1i/TbbXl1KJvpILf2i/+kL0o=
-X-Google-Smtp-Source: ABdhPJyGYx9eYgnAlFtSimp6VCPNJ88A4K4im1JXrhSzPAMSnMOfoUbl3pIpyaz9Jf2c+fGvVKoHAXZXDNyaJDVICoU=
-X-Received: by 2002:a17:902:a60d:b0:14f:b781:ccd7 with SMTP id
- u13-20020a170902a60d00b0014fb781ccd7mr1982450plq.2.1646454414967; Fri, 04 Mar
- 2022 20:26:54 -0800 (PST)
+ h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
+ :content-language:to:cc:references:from:in-reply-to
+ :content-transfer-encoding;
+ bh=XH8CYV/Z50iBLZ27uSo3DlVY0KhJ8ZO+RiecWTcYel0=;
+ b=l7DxHkV0fTQAxoIKLk1CEFEhof3Gzj6fSEiX8ApFI+q8RzMhz7AoBgl75ZZzK692ap
+ a/oSlsLI0M16ii9pPPoJH7gDo/Llap5aqHwt5UtOu5taXz8jHlGdupXC217iZ693hBsw
+ wSvS9hXlJuABBqsXh1pSFH5ap+lY5e4xjhFuOlAWEPuMCJLVmQSgzGkJeWZ1b9ZMP1cV
+ z01xe0Iu26l47zo/vUQPc1f/H62hrOK5T6i20wk1Mx0ySIKZJFN0peuTaqCtIRX7GZbF
+ yI/TQFTg8HMXgr3gJPCRiln1qlUn7wjaLZH+ds7//lReW854KT8ax1/dH9eTM9WIWfIN
+ eylA==
+X-Gm-Message-State: AOAM533t/LPwo19sU5Hv3R/SThKWm4a+XdHTWVKXXFpuFIUkdBilxsdL
+ oDgizw3sk+dBwSlt+xOBKOaUhw==
+X-Google-Smtp-Source: ABdhPJxPRWTwhfDKGEWi/HTZUmtnN6xoKL1T2KNwEAF9KgB2sMMXSt6lke7BfBVtPRIEaNMyntkyzw==
+X-Received: by 2002:a2e:3c0d:0:b0:246:3c52:7ada with SMTP id
+ j13-20020a2e3c0d000000b002463c527adamr19885072lja.459.1646213374808; 
+ Wed, 02 Mar 2022 01:29:34 -0800 (PST)
+Received: from [172.16.11.74] ([81.216.59.226])
+ by smtp.gmail.com with ESMTPSA id
+ f36-20020a0565123b2400b0043795432e87sm1960430lfv.150.2022.03.02.01.29.31
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 02 Mar 2022 01:29:33 -0800 (PST)
+Message-ID: <78ccb184-405e-da93-1e02-078f90d2b9bc@rasmusvillemoes.dk>
+Date: Wed, 2 Mar 2022 10:29:31 +0100
 MIME-Version: 1.0
-References: <CAMBDoMOXuowh-wrc32FR_O7oucOYBMhAP6hR-T7GjNd8DqUrsQ@mail.gmail.com>
- <CAKb7UvjntPUW_ZHsCq5jn4+L=qToh_13ML79em8yskgsqdFrXQ@mail.gmail.com>
- <CAMBDoMOS56r6XUNRsaB_1W_z+SWdDPKZJtWeV0CwfL2xXtm56w@mail.gmail.com>
-In-Reply-To: <CAMBDoMOS56r6XUNRsaB_1W_z+SWdDPKZJtWeV0CwfL2xXtm56w@mail.gmail.com>
-From: Andre Costa <andre.ocosta@gmail.com>
-Date: Sat, 5 Mar 2022 01:26:43 -0300
-Message-ID: <CAMBDoMM2o8SN7dD6M_UP+rSvP3uSGVeCe1Uoc50MWM_neQ1PAg@mail.gmail.com>
-To: Ilia Mirkin <imirkin@alum.mit.edu>
-Content-Type: multipart/alternative; boundary="0000000000008b081805d9710a37"
-Subject: Re: [Nouveau] External monitor support for GTX 1650 (NV167/TU117)
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.5.0
+Content-Language: en-US
+To: Linus Torvalds <torvalds@linux-foundation.org>,
+ David Laight <David.Laight@aculab.com>
+References: <20220228110822.491923-1-jakobkoschel@gmail.com>
+ <20220228110822.491923-3-jakobkoschel@gmail.com>
+ <2e4e95d6-f6c9-a188-e1cd-b1eae465562a@amd.com>
+ <CAHk-=wgQps58DPEOe4y5cTh5oE9EdNTWRLXzgMiETc+mFX7jzw@mail.gmail.com>
+ <282f0f8d-f491-26fc-6ae0-604b367a5a1a@amd.com>
+ <b2d20961dbb7533f380827a7fcc313ff849875c1.camel@HansenPartnership.com>
+ <7D0C2A5D-500E-4F38-AD0C-A76E132A390E@kernel.org>
+ <73fa82a20910c06784be2352a655acc59e9942ea.camel@HansenPartnership.com>
+ <CAHk-=wiT5HX6Kp0Qv4ZYK_rkq9t5fZ5zZ7vzvi6pub9kgp=72g@mail.gmail.com>
+ <7dc860874d434d2288f36730d8ea3312@AcuMS.aculab.com>
+ <CAHk-=whKqg89zu4T95+ctY-hocR6kDArpo2qO14-kV40Ga7ufw@mail.gmail.com>
+ <0ced2b155b984882b39e895f0211037c@AcuMS.aculab.com>
+ <CAHk-=wix0HLCBs5sxAeW3uckg0YncXbTjMsE-Tv8WzmkOgLAXQ@mail.gmail.com>
+From: Rasmus Villemoes <linux@rasmusvillemoes.dk>
+In-Reply-To: <CAHk-=wix0HLCBs5sxAeW3uckg0YncXbTjMsE-Tv8WzmkOgLAXQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Mailman-Approved-At: Tue, 08 Mar 2022 04:27:27 +0000
+Subject: Re: [Nouveau] [PATCH 2/6] treewide: remove using list iterator
+ after loop body as a ptr
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -64,152 +85,96 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau <nouveau@lists.freedesktop.org>
+Cc: "alsa-devel@alsa-project.org" <alsa-devel@alsa-project.org>,
+ "linux-aspeed@lists.ozlabs.org" <linux-aspeed@lists.ozlabs.org>,
+ "Gustavo A. R. Silva" <gustavo@embeddedor.com>,
+ "linux-iio@vger.kernel.org" <linux-iio@vger.kernel.org>,
+ "nouveau@lists.freedesktop.org" <nouveau@lists.freedesktop.org>,
+ Rasmus Villemoes <linux@rasmusvillemoes.dk>,
+ dri-devel <dri-devel@lists.freedesktop.org>,
+ James Bottomley <James.Bottomley@hansenpartnership.com>,
+ Cristiano Giuffrida <c.giuffrida@vu.nl>, "Bos, H.J." <h.j.bos@vu.nl>,
+ "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>,
+ "linux1394-devel@lists.sourceforge.net"
+ <linux1394-devel@lists.sourceforge.net>,
+ "drbd-dev@lists.linbit.com" <drbd-dev@lists.linbit.com>,
+ linux-arch <linux-arch@vger.kernel.org>, CIFS <linux-cifs@vger.kernel.org>,
+ KVM list <kvm@vger.kernel.org>, linux-scsi <linux-scsi@vger.kernel.org>,
+ linux-rdma <linux-rdma@vger.kernel.org>,
+ "linux-staging@lists.linux.dev" <linux-staging@lists.linux.dev>,
+ amd-gfx list <amd-gfx@lists.freedesktop.org>, Jason Gunthorpe <jgg@ziepe.ca>,
+ "intel-wired-lan@lists.osuosl.org" <intel-wired-lan@lists.osuosl.org>,
+ "kgdb-bugreport@lists.sourceforge.net" <kgdb-bugreport@lists.sourceforge.net>,
+ "bcm-kernel-feedback-list@broadcom.com"
+ <bcm-kernel-feedback-list@broadcom.com>,
+ Dan Carpenter <dan.carpenter@oracle.com>,
+ Linux Media Mailing List <linux-media@vger.kernel.org>,
+ Kees Cook <keescook@chromium.org>, Arnd Bergman <arnd@arndb.de>,
+ Linux PM <linux-pm@vger.kernel.org>,
+ intel-gfx <intel-gfx@lists.freedesktop.org>,
+ Brian Johannesmeyer <bjohannesmeyer@gmail.com>,
+ Nathan Chancellor <nathan@kernel.org>,
+ linux-fsdevel <linux-fsdevel@vger.kernel.org>,
+ Christophe JAILLET <christophe.jaillet@wanadoo.fr>,
+ Jakob Koschel <jakobkoschel@gmail.com>,
+ "v9fs-developer@lists.sourceforge.net" <v9fs-developer@lists.sourceforge.net>,
+ linux-tegra <linux-tegra@vger.kernel.org>,
+ Thomas Gleixner <tglx@linutronix.de>,
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Linux ARM <linux-arm-kernel@lists.infradead.org>,
+ "linux-sgx@vger.kernel.org" <linux-sgx@vger.kernel.org>,
+ linux-block <linux-block@vger.kernel.org>, Netdev <netdev@vger.kernel.org>,
+ "linux-usb@vger.kernel.org" <linux-usb@vger.kernel.org>,
+ linux-wireless <linux-wireless@vger.kernel.org>,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ Linux F2FS Dev Mailing List <linux-f2fs-devel@lists.sourceforge.net>,
+ "tipc-discussion@lists.sourceforge.net"
+ <tipc-discussion@lists.sourceforge.net>,
+ Linux Crypto Mailing List <linux-crypto@vger.kernel.org>,
+ dma <dmaengine@vger.kernel.org>,
+ "linux-mediatek@lists.infradead.org" <linux-mediatek@lists.infradead.org>,
+ Andrew Morton <akpm@linux-foundation.org>,
+ linuxppc-dev <linuxppc-dev@lists.ozlabs.org>,
+ =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
+ Mike Rapoport <rppt@kernel.org>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
---0000000000008b081805d9710a37
-Content-Type: text/plain; charset="UTF-8"
+On 02/03/2022 00.55, Linus Torvalds wrote:
+> On Tue, Mar 1, 2022 at 3:19 PM David Laight <David.Laight@aculab.com> wrote:
+>>
 
-Created issue #162 <https://gitlab.freedesktop.org/drm/nouveau/-/issues/162>
-.
+> With the "don't use iterator outside the loop" approach, the exact
+> same code works in both the old world order and the new world order,
+> and you don't have the semantic confusion. And *if* you try to use the
+> iterator outside the loop, you'll _mostly_ (*) get a compiler warning
+> about it not being initialized.
+> 
+>              Linus
+> 
+> (*) Unless somebody initializes the iterator pointer pointlessly.
+> Which clearly does happen. Thus the "mostly". It's not perfect, and
+> that's most definitely not nice - but it should at least hopefully
+> make it that much harder to mess up.
 
-On Fri, Mar 4, 2022 at 9:55 PM Andre Costa <andre.ocosta@gmail.com> wrote:
+This won't help the current issue (because it doesn't exist and might
+never), but just in case some compiler people are listening, I'd like to
+have some sort of way to tell the compiler "treat this variable as
+uninitialized from here on". So one could do
 
-> Hi Ilia,
->
-> Thanks for the quick response -- boy, that was fast =) I'll certainly do
-> that, I just need to revert my current setup to use nouveau again, then
-> I'll file the bug with the info you suggested. Fingers crossed ;-)
->
-> Cheers,
-> Andre
->
-> On Fri, Mar 4, 2022 at 9:16 PM Ilia Mirkin <imirkin@alum.mit.edu> wrote:
->
->> Hi Andre,
->>
->> You're going to be best off filing a bug at
->> gitlab.freedesktop.org/drm/nouveau with some details of your setup:
->>
->> 1. lspci -nn -d 10de:
->> 2. Your vbios (/sys/kernel/debug/dri/1/vbios.rom)
->> 3. Your monitor's EDID, esp as reported when plugged into nouveau
->> (/sys/class/drm/card1-HDMI-1/edid or the appropriate connector)
->> 4. dmesg after nouveau is loaded and monitor plugged in
->>
->> This should allow all the info to be well-contained and accessible to
->> everyone who needs to see it.
->>
->> There aren't any currently outstanding known issues that I can think
->> of that would cause your current situation. But plenty of unknown
->> ones!
->>
->> Cheers,
->>
->>   -ilia
->>
->> On Fri, Mar 4, 2022 at 7:12 PM Andre Costa <andre.ocosta@gmail.com>
->> wrote:
->> >
->> > Hi there,
->> >
->> > I just bought an Acer Nitro 5 (AN515-44) notebook with an AMD Renoir
->> iGPU and a GTX 1650 dGPU. I installed Fedora 35 and, for the most part,
->> it's working great. The only issue so far is that I cannot use Wayland +
->> external monitor with Nouveau -- it does recognize the external monitor,
->> but only renders the top half of the screen, the bottom half remains
->> (literally) blank.
->> >
->> > (BTW the HDMI port is wired to the GTX 1650)
->> >
->> > For the record, I can use the external monitor just fine with Nvidia's
->> proprietary driver on X11, but I'd rather use Nouveau if possible.
->> >
->> > I know support for the NV160 family is still coming up according to the
->> feature matrix, so I'll patiently wait. I just wanted to volunteer to do
->> some testing on this specific setup if this can help in any way. Just let
->> me know.
->> >
->> > Keep up the great work!
->> >
->> > Cheers,
->> > Andre
->>
->
+#define kfree(p) do { __kfree(p); __magic_uninit(p); } while (0)
 
---0000000000008b081805d9710a37
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+with __magic_uninit being a magic no-op that doesn't affect the
+semantics of the code, but could be used by the compiler's "[is/may be]
+used uninitialized" machinery to flag e.g. double frees on some odd
+error path etc. It would probably only work for local automatic
+variables, but it should be possible to just ignore the hint if p is
+some expression like foo->bar or has side effects. If we had that, the
+end-of-loop test could include that to "uninitialize" the iterator.
 
-<div dir=3D"ltr">Created <a href=3D"https://gitlab.freedesktop.org/drm/nouv=
-eau/-/issues/162">issue #162</a>.<br></div><br><div class=3D"gmail_quote"><=
-div dir=3D"ltr" class=3D"gmail_attr">On Fri, Mar 4, 2022 at 9:55 PM Andre C=
-osta &lt;<a href=3D"mailto:andre.ocosta@gmail.com">andre.ocosta@gmail.com</=
-a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0p=
-x 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><d=
-iv dir=3D"ltr"><div>Hi Ilia,</div><div><br></div><div>Thanks for the quick =
-response -- boy, that was fast =3D) I&#39;ll certainly do that, I just need=
- to revert my current setup to use nouveau again, then I&#39;ll file the bu=
-g with the info you suggested. Fingers crossed ;-)</div><div><br></div><div=
->Cheers,</div><div>Andre<br></div></div><br><div class=3D"gmail_quote"><div=
- dir=3D"ltr" class=3D"gmail_attr">On Fri, Mar 4, 2022 at 9:16 PM Ilia Mirki=
-n &lt;<a href=3D"mailto:imirkin@alum.mit.edu" target=3D"_blank">imirkin@alu=
-m.mit.edu</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=
-=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding=
--left:1ex">Hi Andre,<br>
-<br>
-You&#39;re going to be best off filing a bug at<br>
-<a href=3D"http://gitlab.freedesktop.org/drm/nouveau" rel=3D"noreferrer" ta=
-rget=3D"_blank">gitlab.freedesktop.org/drm/nouveau</a> with some details of=
- your setup:<br>
-<br>
-1. lspci -nn -d 10de:<br>
-2. Your vbios (/sys/kernel/debug/dri/1/vbios.rom)<br>
-3. Your monitor&#39;s EDID, esp as reported when plugged into nouveau<br>
-(/sys/class/drm/card1-HDMI-1/edid or the appropriate connector)<br>
-4. dmesg after nouveau is loaded and monitor plugged in<br>
-<br>
-This should allow all the info to be well-contained and accessible to<br>
-everyone who needs to see it.<br>
-<br>
-There aren&#39;t any currently outstanding known issues that I can think<br=
->
-of that would cause your current situation. But plenty of unknown<br>
-ones!<br>
-<br>
-Cheers,<br>
-<br>
-=C2=A0 -ilia<br>
-<br>
-On Fri, Mar 4, 2022 at 7:12 PM Andre Costa &lt;<a href=3D"mailto:andre.ocos=
-ta@gmail.com" target=3D"_blank">andre.ocosta@gmail.com</a>&gt; wrote:<br>
-&gt;<br>
-&gt; Hi there,<br>
-&gt;<br>
-&gt; I just bought an Acer Nitro 5 (AN515-44) notebook with an AMD Renoir i=
-GPU and a GTX 1650 dGPU. I installed Fedora 35 and, for the most part, it&#=
-39;s working great. The only issue so far is that I cannot use Wayland + ex=
-ternal monitor with Nouveau -- it does recognize the external monitor, but =
-only renders the top half of the screen, the bottom half remains (literally=
-) blank.<br>
-&gt;<br>
-&gt; (BTW the HDMI port is wired to the GTX 1650)<br>
-&gt;<br>
-&gt; For the record, I can use the external monitor just fine with Nvidia&#=
-39;s proprietary driver on X11, but I&#39;d rather use Nouveau if possible.=
-<br>
-&gt;<br>
-&gt; I know support for the NV160 family is still coming up according to th=
-e feature matrix, so I&#39;ll patiently wait. I just wanted to volunteer to=
- do some testing on this specific setup if this can help in any way. Just l=
-et me know.<br>
-&gt;<br>
-&gt; Keep up the great work!<br>
-&gt;<br>
-&gt; Cheers,<br>
-&gt; Andre<br>
-</blockquote></div>
-</blockquote></div>
+Maybe sparse/smatch or some other static analyzer could implement such a
+magic thing? Maybe it's better as a function attribute
+[__attribute__((uninitializes(1)))] to avoid having to macrofy all
+functions that release resources.
 
---0000000000008b081805d9710a37--
+Rasmus
