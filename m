@@ -2,60 +2,65 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id 04FDF4D0E98
-	for <lists+nouveau@lfdr.de>; Tue,  8 Mar 2022 05:27:36 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0BAC64D0EA6
+	for <lists+nouveau@lfdr.de>; Tue,  8 Mar 2022 05:27:55 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 8536910E636;
-	Tue,  8 Mar 2022 04:27:28 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 3A38F10E6A5;
+	Tue,  8 Mar 2022 04:27:35 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-pf1-x435.google.com (mail-pf1-x435.google.com
- [IPv6:2607:f8b0:4864:20::435])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9EEBC10F1DF;
- Fri,  4 Mar 2022 07:00:21 +0000 (UTC)
-Received: by mail-pf1-x435.google.com with SMTP id d17so6928086pfl.0;
- Thu, 03 Mar 2022 23:00:21 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=0a+oQu3LYTAbOOyoILb+F/zkApGIum0yjd+xPCLEHo4=;
- b=UcHSzcmMAevEFsqxc8gimvoSIew96LrW3UYvjfgkcaeLb/Edql9668oTELTgMdhcyh
- uwTLYgNgPfuwuQfZCbkLtuIX59UkP2xXrD0mK6eOfNdOu/KSihdjQUFHL7gwAFzgpb4Z
- PeSQfhLMwS3uLkuXfSSL1QQyblGTA4kTyWBkcty1viz6EkWmIbbGn99xu95lY6jAsJ0c
- CbisDo/RPFGn8gAJnKluj00ht4OQ80XaXmCEvGalnXTnvAWrV5UWFfWh6kgUBnLZJvSQ
- W0PYU136vUwP4grvjJEIhDxHc0WM1lPQ2cysIXPjh+breTQ07tU9AM0RgZ3Jr4UsSFjT
- NaGQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references;
- bh=0a+oQu3LYTAbOOyoILb+F/zkApGIum0yjd+xPCLEHo4=;
- b=hXzdQdFR7uRrMbDpGvxS2ZPGew7M6SJb0ulSwysgx7DWWXsT3bQzprQd9X21VOYFWG
- tjU5i6+SWz30Kzz5mJjuwSb7gCtAJyzHD11O045UeWjtFbmrnAAuIN1MdUWUdqpQoCPV
- eH/oJInZYAGMlFtqgHk0MhBQSEIaOAERrAS6tIcN1X+PubhaYyjMgzDzD658gunS0gF7
- DrQYJeMqf4gjg+eXtXWjIl94TJtJZimrudO6UC/9tPpPcizRkDnaPuwgEuSacEFyOtma
- BELAeSuFEyTi2gs7VQtnT3lCZanMENYcrHL8DoKzEbM7sJNfFMjxKc/kLeKNsPnrV58H
- H8pg==
-X-Gm-Message-State: AOAM532SB0yXyGEhnflNiaEmCF7fEIo3+3woOnbr144ZnnNNUOH4nUxP
- PxSzsoNEXKNNnnkHRV3H3Ao=
-X-Google-Smtp-Source: ABdhPJxBFOb3A6C/RlDh1uHGrWM51HjSkR68cXfNAhNGErUbSC2hd/FilwMHkJmidt1eEHAWD7GVrA==
-X-Received: by 2002:a05:6a00:cc7:b0:4ec:c6f3:ad29 with SMTP id
- b7-20020a056a000cc700b004ecc6f3ad29mr41958698pfv.66.1646377221067; 
- Thu, 03 Mar 2022 23:00:21 -0800 (PST)
-Received: from ubuntu.huawei.com ([119.3.119.19])
- by smtp.googlemail.com with ESMTPSA id
- f6-20020a654006000000b00346193b405fsm3665134pgp.44.2022.03.03.23.00.01
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 03 Mar 2022 23:00:20 -0800 (PST)
-From: Xiaomeng Tong <xiam0nd.tong@gmail.com>
-To: daniel.thompson@linaro.org
-Date: Fri,  4 Mar 2022 14:59:57 +0800
-Message-Id: <20220304065957.16799-1-xiam0nd.tong@gmail.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20220303121824.qdyrognluik74iph@maple.lan>
-References: <20220303121824.qdyrognluik74iph@maple.lan>
+X-Greylist: delayed 1756 seconds by postgrey-1.36 at gabe;
+ Fri, 04 Mar 2022 17:50:10 UTC
+Received: from pegase2.c-s.fr (pegase2.c-s.fr [93.17.235.10])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 87C3110F196;
+ Fri,  4 Mar 2022 17:50:10 +0000 (UTC)
+Received: from localhost (mailhub3.si.c-s.fr [172.26.127.67])
+ by localhost (Postfix) with ESMTP id 4K9F4N3svmz9sT7;
+ Fri,  4 Mar 2022 18:20:52 +0100 (CET)
+X-Virus-Scanned: amavisd-new at c-s.fr
+Received: from pegase2.c-s.fr ([172.26.127.65])
+ by localhost (pegase2.c-s.fr [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id TyXhPEw7-5kd; Fri,  4 Mar 2022 18:20:52 +0100 (CET)
+Received: from messagerie.si.c-s.fr (messagerie.si.c-s.fr [192.168.25.192])
+ by pegase2.c-s.fr (Postfix) with ESMTP id 4K9F4N33rfz9sT5;
+ Fri,  4 Mar 2022 18:20:52 +0100 (CET)
+Received: from localhost (localhost [127.0.0.1])
+ by messagerie.si.c-s.fr (Postfix) with ESMTP id 56D468B779;
+ Fri,  4 Mar 2022 18:20:52 +0100 (CET)
+X-Virus-Scanned: amavisd-new at c-s.fr
+Received: from messagerie.si.c-s.fr ([127.0.0.1])
+ by localhost (messagerie.si.c-s.fr [127.0.0.1]) (amavisd-new, port 10023)
+ with ESMTP id DBmceHuew_2J; Fri,  4 Mar 2022 18:20:52 +0100 (CET)
+Received: from PO20335.IDSI0.si.c-s.fr (unknown [192.168.204.129])
+ by messagerie.si.c-s.fr (Postfix) with ESMTP id 130BA8B763;
+ Fri,  4 Mar 2022 18:20:52 +0100 (CET)
+Received: from PO20335.IDSI0.si.c-s.fr (localhost [127.0.0.1])
+ by PO20335.IDSI0.si.c-s.fr (8.17.1/8.16.1) with ESMTPS id 224HKfFE1981097
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+ Fri, 4 Mar 2022 18:20:41 +0100
+Received: (from chleroy@localhost)
+ by PO20335.IDSI0.si.c-s.fr (8.17.1/8.17.1/Submit) id 224HKeEo1981096;
+ Fri, 4 Mar 2022 18:20:40 +0100
+X-Authentication-Warning: PO20335.IDSI0.si.c-s.fr: chleroy set sender to
+ christophe.leroy@csgroup.eu using -f
+From: Christophe Leroy <christophe.leroy@csgroup.eu>
+To: Ben Skeggs <bskeggs@redhat.com>, Karol Herbst <kherbst@redhat.com>,
+ Lyude Paul <lyude@redhat.com>, David Airlie <airlied@linux.ie>,
+ Daniel Vetter <daniel@ffwll.ch>
+Date: Fri,  4 Mar 2022 18:20:40 +0100
+Message-Id: <2d97ae92b9c06214be0e088a72cf303eb591bf01.1646414295.git.christophe.leroy@csgroup.eu>
+X-Mailer: git-send-email 2.34.1
+MIME-Version: 1.0
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1646414439; l=2099; s=20211009;
+ h=from:subject:message-id; bh=Khg4HGI1DyRpLRO9YvLyJlbsHAN+KPfyy8yNdyTdf+M=;
+ b=7CmKxM1azLkVlusnQx1tTk/BpceR0kdJRAC/Kqbzcdc28wtrhUTIXtoUzvqf3p8Qk7aOfbzaAbrr
+ +IhfTTqYCSwXAyGlGPijvOeRDltq/I/Otm6tCwoo0mFio3bmnIfC
+X-Developer-Key: i=christophe.leroy@csgroup.eu; a=ed25519;
+ pk=HIzTzUj91asvincQGOFx6+ZF5AoUuP9GdOtQChs7Mm0=
+Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Tue, 08 Mar 2022 04:27:27 +0000
-Subject: Re: [Nouveau] [PATCH 2/6] treewide: remove using list iterator
- after loop body as a ptr
+Subject: [Nouveau] [PATCH] drm/nouveau/bios: Rename prom_init() and friends
+ functions
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,128 +72,68 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: alsa-devel@alsa-project.org, kvm@vger.kernel.org, gustavo@embeddedor.com,
- linux-iio@vger.kernel.org, kgdb-bugreport@lists.sourceforge.net,
- linux@rasmusvillemoes.dk, dri-devel@lists.freedesktop.org, c.giuffrida@vu.nl,
- amd-gfx@lists.freedesktop.org, torvalds@linux-foundation.org,
- samba-technical@lists.samba.org, linux1394-devel@lists.sourceforge.net,
- drbd-dev@lists.linbit.com, linux-arch@vger.kernel.org,
- linux-cifs@vger.kernel.org, linux-aspeed@lists.ozlabs.org,
- linux-scsi@vger.kernel.org, linux-rdma@vger.kernel.org,
- linux-staging@lists.linux.dev, h.j.bos@vu.nl, jgg@ziepe.ca,
- intel-wired-lan@lists.osuosl.org, nouveau@lists.freedesktop.org,
- bcm-kernel-feedback-list@broadcom.com, dan.carpenter@oracle.com,
- linux-media@vger.kernel.org, keescook@chromium.org, arnd@arndb.de,
- linux-pm@vger.kernel.org, intel-gfx@lists.freedesktop.org,
- bjohannesmeyer@gmail.com, linux-block@vger.kernel.org,
- linux-fsdevel@vger.kernel.org, christophe.jaillet@wanadoo.fr,
- jakobkoschel@gmail.com, v9fs-developer@lists.sourceforge.net,
- linux-tegra@vger.kernel.org, tglx@linutronix.de,
- andriy.shevchenko@linux.intel.com, linux-arm-kernel@lists.infradead.org,
- linux-sgx@vger.kernel.org, nathan@kernel.org, netdev@vger.kernel.org,
- linux-usb@vger.kernel.org, linux-wireless@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- xiam0nd.tong@gmail.com, david.laight@aculab.com,
- tipc-discussion@lists.sourceforge.net, linux-crypto@vger.kernel.org,
- dmaengine@vger.kernel.org, linux-mediatek@lists.infradead.org,
- akpm@linux-foundation.org, linuxppc-dev@lists.ozlabs.org,
- christian.koenig@amd.com, rppt@kernel.org
+Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ Christophe Leroy <christophe.leroy@csgroup.eu>, linux-kernel@vger.kernel.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, 3 Mar 2022 12:18:24 +0000, Daniel Thompson wrote:
-> On Thu, Mar 03, 2022 at 03:26:57PM +0800, Xiaomeng Tong wrote:
-> > On Thu, 3 Mar 2022 04:58:23 +0000, David Laight wrote:
-> > > on 3 Mar 2022 10:27:29 +0800, Xiaomeng Tong wrote:
-> > > > The problem is the mis-use of iterator outside the loop on exit, and
-> > > > the iterator will be the HEAD's container_of pointer which pointers
-> > > > to a type-confused struct. Sidenote: The *mis-use* here refers to
-> > > > mistakely access to other members of the struct, instead of the
-> > > > list_head member which acutally is the valid HEAD.
-> > >
-> > > The problem is that the HEAD's container_of pointer should never
-> > > be calculated at all.
-> > > This is what is fundamentally broken about the current definition.
-> > 
-> > Yes, the rule is "the HEAD's container_of pointer should never be
-> > calculated at all outside the loop", but how do you make sure everyone
-> > follows this rule?
-> 
-> Your formulation of the rule is correct: never run container_of() on HEAD
-> pointer.
+While working on powerpc headers, I ended up with the following error.
 
-Actually, it is not my rule. My rule is that never access other members
-of the struct except for the list_head member after the loop, because
-this is a invalid member after loop exit, but valid for the list_head
-member which just is HEAD and the lately caculation (&pos->head) seems
-harmless.
+	drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadowrom.c:48:1: error: conflicting types for 'prom_init'; have 'void *(struct nvkm_bios *, const char *)'
+	make[5]: *** [scripts/Makefile.build:288: drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadowrom.o] Error 1
 
-I have considered the case that the HEAD's container "pos" is layouted
-across the max and the min address boundary, which means the address of
-HEAD is likely 0x60, and the address of pos is likely 0xffffffe0.
-It seems ok to caculate pos with:
-((type *)(__mptr - offsetof(type, member)));
-and it seems ok to caculate head outside the loop with:
-if (&pos->head == &HEAD)
-    return NULL;
+powerpc and a few other architectures have a prom_init() global function.
+One day or another it will conflict with the one in shadowrom.c
 
-The only case I can think of with the rule "never run container_of()
-on HEAD" must be followed is when the first argument (which is &HEAD)
-passing to container_of() is NULL + some offset, it may lead to the
-resulting "pos->member" access being a NULL dereference. But maybe
-the caller can take the responsibility to check if it is NULL, not
-container_of() itself.
+Those being static, they can easily be renamed. Do it.
 
-Please remind me if i missed somthing, thanks.
+Signed-off-by: Christophe Leroy <christophe.leroy@csgroup.eu>
+---
+ drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadowrom.c | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
 
-> 
-> However the rule that is introduced by list_for_each_entry_inside() is
-> *not* this rule. The rule it introduces is: never access the iterator
-> variable outside the loop.
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadowrom.c b/drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadowrom.c
+index ffa4b395220a..9c951e90e622 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadowrom.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadowrom.c
+@@ -25,7 +25,7 @@
+ #include <subdev/pci.h>
+ 
+ static u32
+-prom_read(void *data, u32 offset, u32 length, struct nvkm_bios *bios)
++nvbios_rom_read(void *data, u32 offset, u32 length, struct nvkm_bios *bios)
+ {
+ 	struct nvkm_device *device = data;
+ 	u32 i;
+@@ -38,14 +38,14 @@ prom_read(void *data, u32 offset, u32 length, struct nvkm_bios *bios)
+ }
+ 
+ static void
+-prom_fini(void *data)
++nvbios_rom_fini(void *data)
+ {
+ 	struct nvkm_device *device = data;
+ 	nvkm_pci_rom_shadow(device->pci, true);
+ }
+ 
+ static void *
+-prom_init(struct nvkm_bios *bios, const char *name)
++nvbios_rom_init(struct nvkm_bios *bios, const char *name)
+ {
+ 	struct nvkm_device *device = bios->subdev.device;
+ 	if (device->card_type == NV_40 && device->chipset >= 0x4c)
+@@ -57,8 +57,8 @@ prom_init(struct nvkm_bios *bios, const char *name)
+ const struct nvbios_source
+ nvbios_rom = {
+ 	.name = "PROM",
+-	.init = prom_init,
+-	.fini = prom_fini,
+-	.read = prom_read,
++	.init = nvbios_rom_init,
++	.fini = nvbios_rom_fini,
++	.read = nvbios_rom_read,
+ 	.rw = false,
+ };
+-- 
+2.34.1
 
-Sorry for the confusion, indeed, that is two *different* rule.
-
-> 
-> Making the iterator NULL on loop exit does follow the rule you proposed
-> but using a different technique: do not allow HEAD to be stored in the
-> iterator variable after loop exit. This also makes it impossible to run
-> container_of() on the HEAD pointer.
-> 
-
-It does not. My rule is: never access the iterator variable outside the loop.
-The "Making the iterator NULL on loop exit" way still leak the pos with NULL
-outside the loop, may lead to a NULL deference.
-
-> 
-> > Everyone makes mistakes, but we can eliminate them all from the beginning
-> > with the help of compiler which can catch such use-after-loop things.
-> 
-> Indeed but if we introduce new interfaces then we don't have to worry
-> about existing usages and silent regressions. Code will have been
-> written knowing the loop can exit with the iterator set to NULL.
-
-Yes, it is more simple and compatible with existing interfaces. Howerver,
-you should make every developers to remember that "pos will be set NULL on
-loop exit", which is unreasonable and impossible for *every* single person.
-Otherwise the mis-use-after-loop will lead to a NULL dereference.
-But we can kill this problem by declaring iterator inside the loop and the
-complier will catch it if somebody mis-use-after-loop.
-
-> 
-> Sure it is still possible for programmers to make mistakes and
-> dereference the NULL pointer but C programmers are well training w.r.t.
-> NULL pointer checking so such mistakes are much less likely than with
-> the current list_for_each_entry() macro. This risk must be offset
-> against the way a NULLify approach can lead to more elegant code when we
-> are doing a list search.
-> 
-
-Yes, the NULLify approach is better than the current list_for_each_entry()
-macro, but i stick with that the list_for_each_entry_inside() way is best
-and perfect _technically_.
-
-Thus, my idea is *better a finger off than always aching*, let's settle this
-damn problem once and for all, with list_for_each_entry_inside().
-
---
-Xiaomeng Tong
