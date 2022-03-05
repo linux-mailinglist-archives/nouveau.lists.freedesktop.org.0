@@ -1,82 +1,53 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4AA764CDDCF
-	for <lists+nouveau@lfdr.de>; Fri,  4 Mar 2022 21:24:45 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id C928D4CE15F
+	for <lists+nouveau@lfdr.de>; Sat,  5 Mar 2022 01:12:25 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 67A6C113756;
-	Fri,  4 Mar 2022 20:24:43 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id ED29510E1EB;
+	Sat,  5 Mar 2022 00:12:21 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id B4CF0113754
- for <nouveau@lists.freedesktop.org>; Fri,  4 Mar 2022 20:24:41 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1646425480;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=qQnecUCi6JtX5H2+Imm8lSOq7dsr4zLE9x/tjqn4RLU=;
- b=OVvzavNVbTmMoXp+qApyQjyScbw39LnNGoBQgvHvWOWaSD4J2D1YCxuMfORKn8pvLc57Em
- 6hxSfhwYCVjFbVBfI+UqETVPZSCm9KAxUB6GEctLP0sh04LWYg6sE/vLaxizhJU0D4r1l8
- LUh7fZHejZ+IO50NhMzssRzOvT2iq7s=
-Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com
- [209.85.160.197]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-267-aZnbIL5-PUO6njPNGOkl1Q-1; Fri, 04 Mar 2022 15:24:39 -0500
-X-MC-Unique: aZnbIL5-PUO6njPNGOkl1Q-1
-Received: by mail-qt1-f197.google.com with SMTP id
- g11-20020ac842cb000000b002dd2c58affaso6970288qtm.12
- for <nouveau@lists.freedesktop.org>; Fri, 04 Mar 2022 12:24:39 -0800 (PST)
+Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
+ [IPv6:2607:f8b0:4864:20::102c])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 15B7510E1EB
+ for <nouveau@lists.freedesktop.org>; Sat,  5 Mar 2022 00:12:20 +0000 (UTC)
+Received: by mail-pj1-x102c.google.com with SMTP id
+ mg21-20020a17090b371500b001bef9e4657cso8483556pjb.0
+ for <nouveau@lists.freedesktop.org>; Fri, 04 Mar 2022 16:12:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:from:date:message-id:subject:to;
+ bh=IRedZtTSLySgfmJ1ZnB26xosaRGfKlIvu1jFzmaxVcY=;
+ b=Quy5Soxp89iOcNC58qcjj2nOKcrDjQxISb9jNXx3zdUMghWAxjUKCgwJoJJW9r9+Li
+ KK4xvUTUBeTnStSASwpiNdoL4a/7biIsIK6d9BDi7PB4tRINaoUyP779K4hcoRfzveez
+ 0eJZq3WEtHJlwX6U3fi1w93/82EXMOMCKVTeJ0S608yUfkcWyBG0MCdcfUCkYM6uYPtm
+ wObTECGg8sYkcThj3eP2mkwNAijZVEAolg00nDRb2LQJZ4kCqxAG5Zgr1IYyZqIpXGMl
+ FzPrutxjjfbLZXtgtUOspftgT5DDUP91lX4ledkYOfDf+oh1swFN+kPBfukfwhJcDZRk
+ hM8A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
- :references:organization:user-agent:mime-version
- :content-transfer-encoding;
- bh=qQnecUCi6JtX5H2+Imm8lSOq7dsr4zLE9x/tjqn4RLU=;
- b=5AU7m4e1WlVLdmnbSE+mxY/eWuOixOxLYu6tA2J350Chd/Au1R9DbfsPgPv/n+SQxi
- lZnE29RRcsFuWcu2CAMPudbylLeqtaD61UwDZOaqERkzb6pQbdcME2YXpUjjkOx3EqMb
- dM1ov0UUdRzBsTdkeeSTxTdGSKKnXdndXSCpGIeUR04Xy8UW2HLKPt1DPGDudd65X9mm
- guaU09N1sGkDeIL1rMjBV37KS0Ji1AjC57PD/x9EAHNebdnkRe+2yy14dWDUFL0PLqbI
- FBYc/9704T2aX/hwi7T3aut1PUl0YJehalts097OAWCIXZppwcmAJVZNNv8NSgcqKAF/
- 3ZHg==
-X-Gm-Message-State: AOAM531nNJs6JcUx881ue86lZiGr8TAvwTdkI8rlgk+8/tZZZFi7wE1+
- 3hUoug2Vxa8sxZWjSEPppMqvaxbE5WpCNNb3hELLM0FJzg6E0TMttOpYTxRpY5EMietocDVC74v
- emzMQAEsGU5sXwm0v85dCPCP4cw==
-X-Received: by 2002:a37:492:0:b0:47d:e1d1:baca with SMTP id
- 140-20020a370492000000b0047de1d1bacamr248072qke.247.1646425479136; 
- Fri, 04 Mar 2022 12:24:39 -0800 (PST)
-X-Google-Smtp-Source: ABdhPJzgLMhureMazbApcHxoId0ovHTPxZ6IY2TMXkHtaF62KtRhKSEPCfFTIpWUImpKhXu+6GtUPg==
-X-Received: by 2002:a37:492:0:b0:47d:e1d1:baca with SMTP id
- 140-20020a370492000000b0047de1d1bacamr248054qke.247.1646425478849; 
- Fri, 04 Mar 2022 12:24:38 -0800 (PST)
-Received: from [192.168.8.138] (pool-96-230-100-15.bstnma.fios.verizon.net.
- [96.230.100.15]) by smtp.gmail.com with ESMTPSA id
- y16-20020a37e310000000b00648c706dda1sm2874739qki.6.2022.03.04.12.24.37
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 04 Mar 2022 12:24:38 -0800 (PST)
-Message-ID: <47e09d6010852db928c0de29b89450ea7eee74d8.camel@redhat.com>
-From: Lyude Paul <lyude@redhat.com>
-To: Christophe Leroy <christophe.leroy@csgroup.eu>, Ben Skeggs
- <bskeggs@redhat.com>, Karol Herbst <kherbst@redhat.com>, David Airlie
- <airlied@linux.ie>, Daniel Vetter <daniel@ffwll.ch>
-Date: Fri, 04 Mar 2022 15:24:37 -0500
-In-Reply-To: <2d97ae92b9c06214be0e088a72cf303eb591bf01.1646414295.git.christophe.leroy@csgroup.eu>
-References: <2d97ae92b9c06214be0e088a72cf303eb591bf01.1646414295.git.christophe.leroy@csgroup.eu>
-Organization: Red Hat Inc.
-User-Agent: Evolution 3.42.4 (3.42.4-1.fc35)
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=IRedZtTSLySgfmJ1ZnB26xosaRGfKlIvu1jFzmaxVcY=;
+ b=LP6KLLNMp6IdIuPazQPvVwbd4MftAzDtO98Wr4lm79+LVyBTx8/HnAf8QYTxKxM9dM
+ 8AZ4yCZ878J96PzQXZ5431U3n89k1UgeQOjBQT7Ihlc4xdeq5OtOVD8MxadG+fxU8e99
+ 1PNswlyVAfdWzCnxvHmvB5ZXmw1nJccIUkt+ZSXfKJEQcBluG5iJ0Wv+3gq28/LpJtjf
+ qSub3PDEgKYT4PvHkPTSXK7fRRKiXT0cHXRVjeozufmx8VaMW7MGO1VuseALtH+oFZZE
+ Gua/5jRdl9S+M2ZNRn3SHT8o08kONtUohqt4+6SCskxmDisC60SYg+TYLperiYjaiXlW
+ M5rA==
+X-Gm-Message-State: AOAM530YDPDxETIFnfpjXskW5YU2mHxRbiMrGtHBNJXQpkUujes62mbO
+ SBi2gPCtzRnP0sOuUql2ZSUAV8b8yFLsekHhj+8+qYkj
+X-Google-Smtp-Source: ABdhPJyW13lg3/QCcGkje7tSHMBNMnosrKge2hQb+I9eiouZyarFhl07vZY4sYRUyuW7YL0A/u0ZUiLm49eb0GHAB5E=
+X-Received: by 2002:a17:90b:1b0e:b0:1bf:1c4f:2bc4 with SMTP id
+ nu14-20020a17090b1b0e00b001bf1c4f2bc4mr1179764pjb.200.1646439138249; Fri, 04
+ Mar 2022 16:12:18 -0800 (PST)
 MIME-Version: 1.0
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=lyude@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-Subject: Re: [Nouveau] [PATCH] drm/nouveau/bios: Rename prom_init() and
- friends functions
+From: Andre Costa <andre.ocosta@gmail.com>
+Date: Fri, 4 Mar 2022 21:12:07 -0300
+Message-ID: <CAMBDoMOXuowh-wrc32FR_O7oucOYBMhAP6hR-T7GjNd8DqUrsQ@mail.gmail.com>
+To: nouveau@lists.freedesktop.org
+Content-Type: multipart/alternative; boundary="000000000000fad29205d96d7b92"
+Subject: [Nouveau] External monitor support for GTX 1650 (NV167/TU117)
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -88,85 +59,54 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-This mostly looks good to me. Just one question (and one comment down below
-that needs addressing). Is this with ppc32? (I ask because ppc64le doesn't
-seem to hit this compilation error).
+--000000000000fad29205d96d7b92
+Content-Type: text/plain; charset="UTF-8"
 
-On Fri, 2022-03-04 at 18:20 +0100, Christophe Leroy wrote:
-> While working on powerpc headers, I ended up with the following error.
-> 
->         drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadowrom.c:48:1: error:
-> conflicting types for 'prom_init'; have 'void *(struct nvkm_bios *, const
-> char *)'
->         make[5]: *** [scripts/Makefile.build:288:
-> drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadowrom.o] Error 1
-> 
-> powerpc and a few other architectures have a prom_init() global function.
-> One day or another it will conflict with the one in shadowrom.c
-> 
-> Those being static, they can easily be renamed. Do it.
-> 
-> Signed-off-by: Christophe Leroy <christophe.leroy@csgroup.eu>
-> ---
->  drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadowrom.c | 12 ++++++------
->  1 file changed, 6 insertions(+), 6 deletions(-)
-> 
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadowrom.c
-> b/drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadowrom.c
-> index ffa4b395220a..9c951e90e622 100644
-> --- a/drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadowrom.c
-> +++ b/drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadowrom.c
-> @@ -25,7 +25,7 @@
->  #include <subdev/pci.h>
->  
->  static u32
-> -prom_read(void *data, u32 offset, u32 length, struct nvkm_bios *bios)
-> +nvbios_rom_read(void *data, u32 offset, u32 length, struct nvkm_bios *bios)
->  {
->         struct nvkm_device *device = data;
->         u32 i;
-> @@ -38,14 +38,14 @@ prom_read(void *data, u32 offset, u32 length, struct
-> nvkm_bios *bios)
->  }
->  
->  static void
-> -prom_fini(void *data)
-> +nvbios_rom_fini(void *data)
->  {
->         struct nvkm_device *device = data;
->         nvkm_pci_rom_shadow(device->pci, true);
->  }
->  
->  static void *
-> -prom_init(struct nvkm_bios *bios, const char *name)
-> +nvbios_rom_init(struct nvkm_bios *bios, const char *name)
->  {
->         struct nvkm_device *device = bios->subdev.device;
->         if (device->card_type == NV_40 && device->chipset >= 0x4c)
-> @@ -57,8 +57,8 @@ prom_init(struct nvkm_bios *bios, const char *name)
->  const struct nvbios_source
->  nvbios_rom = {
->         .name = "PROM",
-> -       .init = prom_init,
-> -       .fini = prom_fini,
-> -       .read = prom_read,
-> +       .init = nvbios_rom_init,
-> +       .fini = nvbios_rom_fini,
-> +       .read = nvbios_rom_read,
+Hi there,
 
-Seeing as the source name is prom, I think using the naming convention
-nvbios_prom_* would be better then nvbios_rom_*.
+I just bought an Acer Nitro 5 (AN515-44) notebook with an AMD Renoir iGPU
+and a GTX 1650 dGPU. I installed Fedora 35 and, for the most part, it's
+working great. The only issue so far is that I cannot use Wayland +
+external monitor with Nouveau -- it does recognize the external monitor,
+but only renders the top half of the screen, the bottom half remains
+(literally) blank.
 
->         .rw = false,
->  };
+(BTW the HDMI port is wired to the GTX 1650)
 
--- 
+For the record, I can use the external monitor just fine with Nvidia's
+proprietary driver on X11, but I'd rather use Nouveau if possible.
+
+I know support for the NV160 family is still coming up according to the feature
+matrix <https://nouveau.freedesktop.org/FeatureMatrix.html>, so I'll
+patiently wait. I just wanted to volunteer to do some testing on this
+specific setup if this can help in any way. Just let me know.
+
+Keep up the great work!
+
 Cheers,
- Lyude Paul (she/her)
- Software Engineer at Red Hat
+Andre
 
+--000000000000fad29205d96d7b92
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div>Hi there,</div><div><br></div><div>I just bought an A=
+cer Nitro 5 (AN515-44) notebook with an AMD Renoir iGPU and a GTX 1650 dGPU=
+. I installed Fedora 35 and, for the most part, it&#39;s working great. The=
+ only issue so far is that I cannot use Wayland + external monitor with Nou=
+veau -- it does recognize the external monitor, but only renders the top ha=
+lf of the screen, the bottom half remains (literally) blank.</div><div><br>=
+</div><div>(BTW the HDMI port is wired to the GTX 1650)</div><div><br></div=
+><div>For the record, I can use the external monitor just fine with Nvidia&=
+#39;s proprietary driver on X11, but I&#39;d rather use Nouveau if possible=
+.</div><div><br></div><div>I know support for the NV160 family is still com=
+ing up according to the <a href=3D"https://nouveau.freedesktop.org/FeatureM=
+atrix.html">feature matrix</a>, so I&#39;ll patiently wait. I just wanted t=
+o volunteer to do some testing on this specific setup if this can help in a=
+ny way. Just let me know.</div><div><br></div><div>Keep up the great work!<=
+/div><div><br></div><div>Cheers,</div><div>Andre<br></div></div>
+
+--000000000000fad29205d96d7b92--
