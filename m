@@ -1,45 +1,46 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 060934D8EAB
-	for <lists+nouveau@lfdr.de>; Mon, 14 Mar 2022 22:30:19 +0100 (CET)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2697D4D8EF8
+	for <lists+nouveau@lfdr.de>; Mon, 14 Mar 2022 22:43:15 +0100 (CET)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id C3C0C89362;
-	Mon, 14 Mar 2022 21:30:16 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id D6BDB10E116;
+	Mon, 14 Mar 2022 21:43:11 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-io1-f49.google.com (mail-io1-f49.google.com
- [209.85.166.49])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 9085A89362
- for <nouveau@lists.freedesktop.org>; Mon, 14 Mar 2022 21:30:15 +0000 (UTC)
-Received: by mail-io1-f49.google.com with SMTP id c23so20013100ioi.4
- for <nouveau@lists.freedesktop.org>; Mon, 14 Mar 2022 14:30:15 -0700 (PDT)
+Received: from mail-il1-f173.google.com (mail-il1-f173.google.com
+ [209.85.166.173])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 3907B10E116
+ for <nouveau@lists.freedesktop.org>; Mon, 14 Mar 2022 21:43:10 +0000 (UTC)
+Received: by mail-il1-f173.google.com with SMTP id b14so12052428ilf.6
+ for <nouveau@lists.freedesktop.org>; Mon, 14 Mar 2022 14:43:10 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=zfTTwBpfsk9OXb8g2oiM/8QlhJ9Qu2T68ZEOquV3HEs=;
- b=TT1XErnXR67LAWJ+qZoFA85sMva9Za56sFQ3r3yLWO0fbYCjFyb94yVgCEFLVHqwi2
- JASpO5ux3WLj1v9rSAXNhCtQxUKzK9ahXG96Kc/nreYd7eGEb8VPYBlcWpnrbC/TeT2g
- ZXsQMl4T2kuLFBOD9y4XGg73q3vJcpAR7SJVD1u2iBe+DeIIjj4eD0mpX/OZ+bLyoVud
- 6yT/Yev6ca4zgEW+YMADQq5NU+hf+tXvMmHVv32nxJ0lvBtWd5laskQBwXxDUEyhlKSD
- xdefvkdOM9q1jZi+SPv8Fwgx3Wht//yuBUGNukT9vmzQC7vRQccuEIGdyaa0BnMrWptt
- yfSg==
-X-Gm-Message-State: AOAM533rGchIfy/1pacDqYtox5Q67KZrVAe1ul67kFDlczGuTSDbIwgv
- c8YHrW1+mSr7XWUSSl16G5dsEXeRVLR8A59dolJT5vg=
-X-Google-Smtp-Source: ABdhPJwbOgplo6S/r5yIcKzrQ8wJsJq7gE+wbulndpMMkh7rpDnXJ5G8iNazbMIG0NHsBMYG5h0SlDeiAaiqFcoib+c=
-X-Received: by 2002:a5e:924c:0:b0:646:390e:ce1b with SMTP id
- z12-20020a5e924c000000b00646390ece1bmr20685325iop.142.1647293414754; Mon, 14
- Mar 2022 14:30:14 -0700 (PDT)
+ bh=TGfgOe8NJToJBFMsYOSdYdWZmOw6Xuid7xEpuSd0o/0=;
+ b=e5CY0LfNgAFQjtvMKrlLilcfsciWCEvVWre/0EF6z5HfmA1rM8q3XoWuGJWS45FxnF
+ JGKDPNv8ni+UHnBPd+jPSuBuuhCt5uZYfji3lU1SvPPwjttivnpOhLTPGBACtIzhSfbf
+ eI6lU3+mwP7P43+XL7ap7jCQeFGdMV0eNcwMDIxtbB4x8UKGECAhvMvpIu2s2jlSaT1M
+ NYeH5rYPCfu61OXVkdAdQW5IWYFR04r64GkN3iw6+hZdBxj/6wn/8viR7kAvEEDkse9b
+ +bsbyNolRQNt/s1rOCR/HmugJHT7l5W/UP1LNoIpdnMtMBgHwBF/bMO5/kdLWE8FdzsP
+ 8yzA==
+X-Gm-Message-State: AOAM531eNtjBCP3CBPJsCyPLougbCXCHfBIrwf3zOyMQQb8q1PrnoJYR
+ pkQURILnedbj5T2vLXcg8zE7bro4HrBQAX1tAwWyihAZ
+X-Google-Smtp-Source: ABdhPJxGFglrJUhZUy/mZiWZQ+ZGEv6k5tzQvJ/3baboOcM9R1QHaJInZwBzWw7CvfgIi46vo6F+Z7huY3GSTvXUwXA=
+X-Received: by 2002:a92:1902:0:b0:2c7:94cb:14b6 with SMTP id
+ 2-20020a921902000000b002c794cb14b6mr8398540ilz.70.1647294189351; Mon, 14 Mar
+ 2022 14:43:09 -0700 (PDT)
 MIME-Version: 1.0
 References: <CAJtcoLYpx0Dnr8VbtBV74aiwGm1UkCHqJOZAxGb9-tG7o6=gjA@mail.gmail.com>
  <CAKb7UvihMs9b_mjsSoGrZRM0qLUYwGQdfnznqNKPhSF6TUpyEg@mail.gmail.com>
-In-Reply-To: <CAKb7UvihMs9b_mjsSoGrZRM0qLUYwGQdfnznqNKPhSF6TUpyEg@mail.gmail.com>
-From: Martin Knoblauch <knobi@knobisoft.de>
-Date: Mon, 14 Mar 2022 22:30:04 +0100
-Message-ID: <CAJtcoLZgBYuFbAqUz5KUHeZYGLTr_489MTuc7eCWTd+WP7bBtA@mail.gmail.com>
-To: Ilia Mirkin <imirkin@alum.mit.edu>
+ <CAJtcoLZgBYuFbAqUz5KUHeZYGLTr_489MTuc7eCWTd+WP7bBtA@mail.gmail.com>
+In-Reply-To: <CAJtcoLZgBYuFbAqUz5KUHeZYGLTr_489MTuc7eCWTd+WP7bBtA@mail.gmail.com>
+From: Ilia Mirkin <imirkin@alum.mit.edu>
+Date: Mon, 14 Mar 2022 17:42:58 -0400
+Message-ID: <CAKb7Uvgv9Y8NKbgiq0zPRrf-ROT-z-BQO4Xj9d04a5wTAoqVaQ@mail.gmail.com>
+To: Martin Knoblauch <knobi@knobisoft.de>
 Content-Type: text/plain; charset="UTF-8"
 Subject: Re: [Nouveau] Nvidia GK106GLM (Quadro K2100M) with Nouveau
 X-BeenThere: nouveau@lists.freedesktop.org
@@ -57,58 +58,37 @@ Cc: nouveau <nouveau@lists.freedesktop.org>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Mon, Mar 14, 2022 at 7:45 PM Ilia Mirkin <imirkin@alum.mit.edu> wrote:
+On Mon, Mar 14, 2022 at 5:30 PM Martin Knoblauch <knobi@knobisoft.de> wrote:
 >
-> Hi Martin,
->
-> Depends what your expectations are. Nouveau is missing a number of
-> features of the blob, the most important of which is probably
-> stability. Whether you run into instability or not depends a lot on
-> the software that you use, so you'll just have to find out for
-> yourself if it works well for you or not. Personally, I have
-> multi-month uptimes with it. But others struggle to stay up for an
-> hour.
->
-> With GK106, you should have manual reclocking, which should enable you
-> to achieve ~50-80% of blob performance, if that's a concern for you.
-> You won't get Vulkan nor H.264 hardware encoding.
->
-> Cheers,
->
->   -ilia
->
-Hi Ilia,
-
- most of my expectations would be met, if I were able to get a decent
-resolution from the GK106. As it is the card is not recognized, and it
-falls back to VESA with 1280x1024 which is pathetic. I have not much
-need or expectation on speed.
-
-Cheers
-Martin
-
-> On Mon, Mar 14, 2022 at 11:55 AM Martin Knoblauch <knobi@knobisoft.de> wrote:
+> On Mon, Mar 14, 2022 at 7:45 PM Ilia Mirkin <imirkin@alum.mit.edu> wrote:
 > >
-> > Hi,
+> > Hi Martin,
 > >
-> >  for years I have been running my DELL M4800 Laptop under Linux with the proprietary drivers from NV. Finally I am kind of sick of recompiling those drivers every time I upgrade the Kernel.
+> > Depends what your expectations are. Nouveau is missing a number of
+> > features of the blob, the most important of which is probably
+> > stability. Whether you run into instability or not depends a lot on
+> > the software that you use, so you'll just have to find out for
+> > yourself if it works well for you or not. Personally, I have
+> > multi-month uptimes with it. But others struggle to stay up for an
+> > hour.
 > >
-> > So, my question is: is there any chance to operate a GK106GLM using nouveau.ko?
+> > With GK106, you should have manual reclocking, which should enable you
+> > to achieve ~50-80% of blob performance, if that's a concern for you.
+> > You won't get Vulkan nor H.264 hardware encoding.
 > >
-> > Sorry if this has been asked before.
+> > Cheers,
 > >
-> > Cheers
-> > Martin
-> > --
-> > ------------------------------------------------------
-> > Martin Knoblauch
-> > email: k n o b i AT knobisoft DOT de
-> > www: http://www.knobisoft.de
+> >   -ilia
+> >
+> Hi Ilia,
+>
+>  most of my expectations would be met, if I were able to get a decent
+> resolution from the GK106. As it is the card is not recognized, and it
+> falls back to VESA with 1280x1024 which is pathetic. I have not much
+> need or expectation on speed.
 
+That's not normal. Please post logs. Perhaps you have nouveau
+blacklisted or something like that? Nouveau should definitely
+recognize your card.
 
-
--- 
-------------------------------------------------------
-Martin Knoblauch
-email: k n o b i AT knobisoft DOT de
-www: http://www.knobisoft.de
+  -ilia
