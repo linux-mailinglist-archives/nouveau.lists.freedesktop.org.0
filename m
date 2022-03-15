@@ -1,77 +1,66 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
-	by mail.lfdr.de (Postfix) with ESMTPS id D054C4E862C
-	for <lists+nouveau@lfdr.de>; Sun, 27 Mar 2022 08:01:35 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
+	by mail.lfdr.de (Postfix) with ESMTPS id 23E514E869A
+	for <lists+nouveau@lfdr.de>; Sun, 27 Mar 2022 09:44:21 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 10A7910EBC2;
-	Sun, 27 Mar 2022 06:01:33 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id CE34D10E0A0;
+	Sun, 27 Mar 2022 07:44:04 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-X-Greylist: delayed 1401 seconds by postgrey-1.36 at gabe;
- Sun, 27 Mar 2022 06:01:31 UTC
-Received: from gateway23.websitewelcome.com (gateway23.websitewelcome.com
- [192.185.49.219])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 715A510EBC2
- for <nouveau@lists.freedesktop.org>; Sun, 27 Mar 2022 06:01:31 +0000 (UTC)
-Received: from cm12.websitewelcome.com (cm12.websitewelcome.com [100.42.49.8])
- by gateway23.websitewelcome.com (Postfix) with ESMTP id EA04127E6
- for <nouveau@lists.freedesktop.org>; Sun, 27 Mar 2022 00:38:07 -0500 (CDT)
-Received: from 162-215-252-75.unifiedlayer.com ([208.91.199.152])
- by cmsmtp with SMTP
- id YLbLnSUAe9AGSYLbLnHjUR; Sun, 27 Mar 2022 00:38:07 -0500
-X-Authority-Reason: nr=8
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=roeck-us.net; s=default; h=Content-Transfer-Encoding:Content-Type:
- In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender
- :Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
- List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=BoZuv/9DcRoaynINRpapPayPOCj/UW/KOGZtheWpl6g=; b=nsbzF968mDXRHlfCjmCfVCzcXs
- boxwI0gpNVWTaETOXxvOQz4jrYIHqbzH3Ly2qTDmULePGx7yzAUPzH8w4zi/WUd6t7HVhN7yPqr9g
- jrGP4nLezsuHdUEAc/7khJ7k8ov7TKuVgQdvoDa016BqCTXozTwGD3qZ7XsFsJuimmkObCCK4z/BK
- fTD189BnS4epLA84i8B04dihsc6BvR6BQD5IPSDn8Wzl15Ja0cMVkDOAoDU3k5OK/9Jyqcib7DKHl
- IkDiCPnbAdxJDzgkzvg/Ln7oEYyeHg27ykTNQxbAAo1trrWsvG5VwotosQiKunMNAkjS1w7NbPuqQ
- p6s0oyiA==;
-Received: from 108-223-40-66.lightspeed.sntcca.sbcglobal.net
- ([108.223.40.66]:54512)
- by bh-25.webhostbox.net with esmtpsa (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <linux@roeck-us.net>)
- id 1nYLbL-004H8z-7i; Sun, 27 Mar 2022 05:38:07 +0000
-Message-ID: <80429172-37c6-c9ce-4df7-259bb90338a8@roeck-us.net>
-Date: Sat, 26 Mar 2022 22:38:05 -0700
+Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
+ [IPv6:2a00:1450:4864:20::42b])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id D1C6889EA3;
+ Tue, 15 Mar 2022 22:19:31 +0000 (UTC)
+Received: by mail-wr1-x42b.google.com with SMTP id x13so508197wrg.4;
+ Tue, 15 Mar 2022 15:19:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=8T8z6iflW4XiGgdmUlJWREss0zwpqrW7ArvyzTkY4zM=;
+ b=lxEl0y0ShtAvyYuhvNC8Q/4+oXxFjSyp28eUVJDpMW6CQEjUnM6BMGVmpYW3th8nkd
+ euW34T+fWPWl284pgF6SHEkSvIGa4Hbb0QhBRT/qPaUvE5l0HwSkfbAPUnjiV4Ir/uzD
+ NGrLammWYvTAXL3fCpJLmXqqCELSnRwjI+wauZiAp5GexK4nrqLKfSPwakEC9azelsta
+ mVN6gTlo3j3fS+kGTEx1suFgJ3kvKl2jsj55HiMPSqfUm2ZjAUmnN9H8wt3/0xsMM8Cb
+ uedz/YRd7rRlnsOY+ROrjiV6OFypkesLWvJhNaLbx3L3hip8k3oVsjR4y+808zdcRwPe
+ AdDQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=8T8z6iflW4XiGgdmUlJWREss0zwpqrW7ArvyzTkY4zM=;
+ b=mYC0ndCYabSe3fBZowK0+ecr0m8PDFbxZlBihfXVHzURfe348z7XYflcYV8YRbULGt
+ n1H7h8F9vg25TOl9oqBl6RwLhNm1gGpasGTBiDyrlUB0ViaEkPiwakkmmMAbuNCeJw/c
+ mrClgrdK0su3QhqoxTn2APpqdVhOlNcKN2qvypLl5SyyPcUHaf7PbDF97RijGxMQ/Ldn
+ frrkUXUFwnJmcRXXyKbgLIYQItArZyIoCCFZx01i4/+LV4ZSEbLT7qqxqwpKsWhPhicz
+ h34CApHt1j8CZrq0QXNF+46cBprr8GbBwrwjAu9q3YoCo0Kx3K0KDWwOw2oQ08YRXhFC
+ siMQ==
+X-Gm-Message-State: AOAM533PyMfVV5a8/pTqF+Lq4FRh+alf6x9HWzYiz7I86Oa7QXcIpvNU
+ KcoRIQJFPkGZbNLoen8BumA=
+X-Google-Smtp-Source: ABdhPJyXK/m628DIv4EB8bxcG/ulR9do+Vkrf7eORkrGXSrrF/fzSZiewYbv/kCVjR8iw1vQkAVUvg==
+X-Received: by 2002:a5d:4e51:0:b0:203:dc47:24c2 with SMTP id
+ r17-20020a5d4e51000000b00203dc4724c2mr1236474wrt.628.1647382770264; 
+ Tue, 15 Mar 2022 15:19:30 -0700 (PDT)
+Received: from localhost (cpc154979-craw9-2-0-cust193.16-3.cable.virginm.net.
+ [80.193.200.194]) by smtp.gmail.com with ESMTPSA id
+ i15-20020a05600011cf00b001edc2966dd4sm159780wrx.47.2022.03.15.15.19.29
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 15 Mar 2022 15:19:29 -0700 (PDT)
+From: Colin Ian King <colin.i.king@gmail.com>
+To: Ben Skeggs <bskeggs@redhat.com>, Karol Herbst <kherbst@redhat.com>,
+ Lyude Paul <lyude@redhat.com>, David Airlie <airlied@linux.ie>,
+ Daniel Vetter <daniel@ffwll.ch>, dri-devel@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org
+Date: Tue, 15 Mar 2022 22:19:29 +0000
+Message-Id: <20220315221929.2959700-1-colin.i.king@gmail.com>
+X-Mailer: git-send-email 2.35.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.5.0
-Content-Language: en-US
-To: Xiaomeng Tong <xiam0nd.tong@gmail.com>, bskeggs@redhat.com
-References: <20220327053139.2572-1-xiam0nd.tong@gmail.com>
-From: Guenter Roeck <linux@roeck-us.net>
-In-Reply-To: <20220327053139.2572-1-xiam0nd.tong@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-AntiAbuse: This header was added to track abuse,
- please include it with any abuse report
-X-AntiAbuse: Primary Hostname - bh-25.webhostbox.net
-X-AntiAbuse: Original Domain - lists.freedesktop.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - roeck-us.net
-X-BWhitelist: no
-X-Source-IP: 108.223.40.66
-X-Source-L: No
-X-Exim-ID: 1nYLbL-004H8z-7i
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-Source-Sender: 108-223-40-66.lightspeed.sntcca.sbcglobal.net
- [108.223.40.66]:54512
-X-Source-Auth: linux@roeck-us.net
-X-Email-Count: 3
-X-Source-Cap: cm9lY2s7YWN0aXZzdG07YmgtMjUud2ViaG9zdGJveC5uZXQ=
-X-Local-Domain: yes
-Subject: Re: [Nouveau] [PATCH] device: fix missing check on list iterator
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Sun, 27 Mar 2022 07:44:03 +0000
+Subject: [Nouveau] [PATCH] drm/nouveau: Fix spelling mistake "endianess" ->
+ "endianness"
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -83,73 +72,30 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: airlied@linux.ie, nouveau@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- stable@vger.kernel.org, daniel@ffwll.ch
+Cc: kernel-janitors@vger.kernel.org, linux-kernel@vger.kernel.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 3/26/22 22:31, Xiaomeng Tong wrote:
-> The bug is here:
-> 	lo = pstate->base.domain[domain->name];
-> 
-> The list iterator 'pstate' will point to a bogus position containing
-> HEAD if the list is empty or no element is found. This case should
-> be checked before any use of the iterator, otherwise it will lead
-> to a invalid memory access.
-> 
-> To fix this bug, add an check. Use a new value 'iter' as the list
-> iterator, while use the old value 'pstate' as a dedicated variable
-> to point to the found element.
-> 
-> Cc: stable@vger.kernel.org
-> Fixes: 9838366c1597d ("drm/nouveau/device: initial control object class, with pstate control methods")
-> Signed-off-by: Xiaomeng Tong <xiam0nd.tong@gmail.com>
-> ---
->   drivers/gpu/drm/nouveau/nvkm/engine/device/ctrl.c | 11 ++++++++---
->   1 file changed, 8 insertions(+), 3 deletions(-)
-> 
-> diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/device/ctrl.c b/drivers/gpu/drm/nouveau/nvkm/engine/device/ctrl.c
-> index ce774579c89d..6b768635e8ba 100644
-> --- a/drivers/gpu/drm/nouveau/nvkm/engine/device/ctrl.c
-> +++ b/drivers/gpu/drm/nouveau/nvkm/engine/device/ctrl.c
-> @@ -72,7 +72,7 @@ nvkm_control_mthd_pstate_attr(struct nvkm_control *ctrl, void *data, u32 size)
->   	} *args = data;
->   	struct nvkm_clk *clk = ctrl->device->clk;
->   	const struct nvkm_domain *domain;
-> -	struct nvkm_pstate *pstate;
-> +	struct nvkm_pstate *pstate = NULL, *iter;
->   	struct nvkm_cstate *cstate;
->   	int i = 0, j = -1;
->   	u32 lo, hi;
-> @@ -103,11 +103,16 @@ nvkm_control_mthd_pstate_attr(struct nvkm_control *ctrl, void *data, u32 size)
->   		return -EINVAL;
->   
->   	if (args->v0.state != NVIF_CONTROL_PSTATE_ATTR_V0_STATE_CURRENT) {
-> -		list_for_each_entry(pstate, &clk->states, head) {
-> -			if (i++ == args->v0.state)
-> +		list_for_each_entry(iter, &clk->states, head) {
-> +			if (i++ == args->v0.state) {
-> +				pstate = iter;
+There is a spelling mistake in a nvdev_error error message. Fix it.
 
-Is iter and the assignment really necessary ? Unless I am missing something,
-list_for_each_entry() always assigns pos (pstate/iter), even if the list is
-empty. If nothing is found, pstate would be NULL at the end, so
+Signed-off-by: Colin Ian King <colin.i.king@gmail.com>
+---
+ drivers/gpu/drm/nouveau/nvkm/engine/device/base.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
->   				break;
-> +			}
->   		}
->   
-> +		if (!pstate)
-> +			return -EINVAL;
-> +
-... just this check should do to cover both the "not found" and "list empty"
-cases.
-
-Thanks,
-Guenter
-
->   		lo = pstate->base.domain[domain->name];
->   		hi = lo;
->   		list_for_each_entry(cstate, &pstate->list, head) {
+diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/device/base.c b/drivers/gpu/drm/nouveau/nvkm/engine/device/base.c
+index 88d262ba648c..62efbd0f3846 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/engine/device/base.c
++++ b/drivers/gpu/drm/nouveau/nvkm/engine/device/base.c
+@@ -2935,7 +2935,7 @@ nvkm_device_ctor(const struct nvkm_device_func *func,
+ 		/* switch mmio to cpu's native endianness */
+ 		if (!nvkm_device_endianness(device)) {
+ 			nvdev_error(device,
+-				    "Couldn't switch GPU to CPUs endianess\n");
++				    "Couldn't switch GPU to CPUs endianness\n");
+ 			ret = -ENOSYS;
+ 			goto done;
+ 		}
+-- 
+2.35.1
 
