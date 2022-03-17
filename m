@@ -2,62 +2,62 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id F10384E8698
-	for <lists+nouveau@lfdr.de>; Sun, 27 Mar 2022 09:44:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BE9514E86B6
+	for <lists+nouveau@lfdr.de>; Sun, 27 Mar 2022 09:44:43 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id B7D8D10E046;
-	Sun, 27 Mar 2022 07:44:04 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 210F489262;
+	Sun, 27 Mar 2022 07:44:22 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by gabe.freedesktop.org (Postfix) with ESMTPS id 25DD410EADC
- for <nouveau@lists.freedesktop.org>; Thu, 17 Mar 2022 03:26:10 +0000 (UTC)
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 032EB10EADF
+ for <nouveau@lists.freedesktop.org>; Thu, 17 Mar 2022 03:26:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1647487568;
+ s=mimecast20190719; t=1647487599;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=v2SLUI2o5WSRk9a3lKvJBCeORiM/sUU5CpB7omPJTl4=;
- b=AnK5gI8OF/Wbub4qLHzMhUX2C7+Ev013qW94yFvxeULCN/hZOkpVtxAll1BngHb/4aagZ9
- RE0CcSKao7azWofPPwjmpAk2ZYQ3VmrI5G8gzYouQr3bNi3zxjj8m7nfsdVY7vVwRNLlK0
- RfT1ieSRPyrFhJxW0K57dkxvUXJK3Bo=
-Received: from mail-lj1-f199.google.com (mail-lj1-f199.google.com
- [209.85.208.199]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=VdUR6nzOC/8O0v+PINEYQA8hLCMnHSUIAPMWwkW08rs=;
+ b=Wyfm3m60PtMDs9J980olZsBlkeVIRdwuebiXZVqR/xCw2kGY60wv6+aE80qaAaiMFwEGDM
+ 7YRqS4nHgBrBPJ+pBHMKwcrRNiUoG52KtSnMdK0lsMRTr0fNEcoYGSXhHXgyBofffJUzFa
+ tIGbVspPUaqcrKVF86iqziLojiuccKA=
+Received: from mail-lf1-f70.google.com (mail-lf1-f70.google.com
+ [209.85.167.70]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-161-x-_bP3xKPd-UyhEr4ZyCZQ-1; Wed, 16 Mar 2022 23:26:06 -0400
-X-MC-Unique: x-_bP3xKPd-UyhEr4ZyCZQ-1
-Received: by mail-lj1-f199.google.com with SMTP id
- x3-20020a05651c104300b00247ebe980b7so1609049ljm.11
- for <nouveau@lists.freedesktop.org>; Wed, 16 Mar 2022 20:26:06 -0700 (PDT)
+ us-mta-73-wDty7bpHMN-x23g10kjzFA-1; Wed, 16 Mar 2022 23:26:37 -0400
+X-MC-Unique: wDty7bpHMN-x23g10kjzFA-1
+Received: by mail-lf1-f70.google.com with SMTP id
+ bp30-20020a056512159e00b004484bd7ffe9so1339670lfb.5
+ for <nouveau@lists.freedesktop.org>; Wed, 16 Mar 2022 20:26:37 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=v2SLUI2o5WSRk9a3lKvJBCeORiM/sUU5CpB7omPJTl4=;
- b=bYkpdFjBOkjnlBZtFv8an5oXEdwjm3FwomjhxzRfwmV6LdbdmLKCcFDMu9QVppZnH3
- xD85jfIt1ohetKKbYSY110R5Uy0qeTlPKzjsuqzZ8UDn9Hi7Jkj9lygnnRi0WhgMXBTy
- BmWHs+jCzVADJHka9XD5GdwUCVhAuf4B0bOZ7srGG/IaMfQiedJr5UW2b5Q9xsfzQZ5x
- gPWZPYJorsl4OdhSju6N0KtrNYlsu+13NvxDgbJ+eEJRi8CGREmQ4jjtHyFM3vSJMBG0
- nWdWkg/cw+0XdlGz8oEcihGg57Y9JpmUA9keI7ehg6Ar7HQuWIht56uhtuLwJcitdndJ
- YTbg==
-X-Gm-Message-State: AOAM530l2TrMnPq8JB8fFnhB66ihtBGjztyWbZwD4vClcrVWZu285IZ4
- nlYw4DEl8mVIR0FE2RaN5Ff+d0oTLi/WMBFyxCZXB5dEZNxQypj25WyLlSzjcCouiBmztMD1Z6/
- sz6p/XRi8YU8kpvBtfVk6Gx5K6E9K4XuFe/fgKyVVKw==
-X-Received: by 2002:ac2:4189:0:b0:448:bc2b:e762 with SMTP id
- z9-20020ac24189000000b00448bc2be762mr1484732lfh.471.1647487564794; 
- Wed, 16 Mar 2022 20:26:04 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJwXgM3TrKtjE8JRO+JLQ4gZHrItL2DfPkyIFRVyKVrsUjNu6z7Jg/bAU90mtxG6avLG14+uPzJmzqIeygxmack=
-X-Received: by 2002:ac2:4189:0:b0:448:bc2b:e762 with SMTP id
- z9-20020ac24189000000b00448bc2be762mr1484712lfh.471.1647487564603; Wed, 16
- Mar 2022 20:26:04 -0700 (PDT)
+ bh=VdUR6nzOC/8O0v+PINEYQA8hLCMnHSUIAPMWwkW08rs=;
+ b=1qw7TwUefd2km3cPxS9pN6QqKWTeXHwtuL03Aepy7PQz26+r8sDXYqtlxpumSHvO//
+ K11Zs0HBlmu9mUAZE3UUM+aI550Ty2hbzbw7mUfNGXMPd6kFbhxuW3+w6UrRneO+5U2x
+ x0gj68WzZI3Q2tp/pck9HPgreWzSR/KlwWtSH9KUTOzJGB+eq8r7AOy4OVv6lU/17yUH
+ MD2qaVTQdbbc1hYUHIhUCfknFZufQIs3b2+SqCx1J41e9hiZlNMeLG5dBqoEURAHT+Nv
+ vDi1w1Ux8L0hpABJRocUtXnR6MN/PBECFClfrBI+1CUUibicwteaaw5hNHz9BT3tlxFh
+ 6xuA==
+X-Gm-Message-State: AOAM5337/YjG3HW7v9DHVTTcI2ArWMRgmUUrjUWNmJQ7oTbm0RVB577e
+ gR+BtYvc4/gj24DnZVPrC0APffjCf7d7Z+nkDEkD08UrhHsbX8tF9DpNnsRJdmvBtaWudlPimIw
+ eFIW3FTTlx/yzSIUfla4Bn+Wo7HiQ+igpTFB2/lxKjw==
+X-Received: by 2002:a2e:a490:0:b0:248:8f0:e4ee with SMTP id
+ h16-20020a2ea490000000b0024808f0e4eemr1585835lji.97.1647487596266; 
+ Wed, 16 Mar 2022 20:26:36 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJxodJS4+oPuUw6/FJlLdS1DOlRDugHlSvT6drTv1PuTs0XvDj5DTLTyLGxZOhq4kq4IHrWqpfNVV0chS1q08S4=
+X-Received: by 2002:a2e:a490:0:b0:248:8f0:e4ee with SMTP id
+ h16-20020a2ea490000000b0024808f0e4eemr1585821lji.97.1647487596075; Wed, 16
+ Mar 2022 20:26:36 -0700 (PDT)
 MIME-Version: 1.0
 References: <20220316192010.19001-1-rdunlap@infradead.org>
- <20220316192010.19001-6-rdunlap@infradead.org>
-In-Reply-To: <20220316192010.19001-6-rdunlap@infradead.org>
+ <20220316192010.19001-2-rdunlap@infradead.org>
+In-Reply-To: <20220316192010.19001-2-rdunlap@infradead.org>
 From: Jason Wang <jasowang@redhat.com>
-Date: Thu, 17 Mar 2022 11:25:53 +0800
-Message-ID: <CACGkMEsX4bS+wmmOE=L5COZxsdFCZmbLTnCe4fZs58MZRx+tQQ@mail.gmail.com>
+Date: Thu, 17 Mar 2022 11:26:24 +0800
+Message-ID: <CACGkMEtg6uCNfP-ncXEEWn+EeGLe1-KxbYu45g1-7vR_JHr7hg@mail.gmail.com>
 To: Randy Dunlap <rdunlap@infradead.org>
 Authentication-Results: relay.mimecast.com;
  auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=jasowang@redhat.com
@@ -65,7 +65,7 @@ X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="UTF-8"
 X-Mailman-Approved-At: Sun, 27 Mar 2022 07:44:03 +0000
-Subject: Re: [Nouveau] [PATCH 5/9] virtio-scsi: eliminate anonymous
+Subject: Re: [Nouveau] [PATCH 1/9] virtio_blk: eliminate anonymous
  module_init & module_exit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
@@ -112,7 +112,7 @@ Cc: the arch/x86 maintainers <x86@kernel.org>,
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On Thu, Mar 17, 2022 at 3:24 AM Randy Dunlap <rdunlap@infradead.org> wrote:
+On Thu, Mar 17, 2022 at 3:25 AM Randy Dunlap <rdunlap@infradead.org> wrote:
 >
 > Eliminate anonymous module_init() and module_exit(), which can lead to
 > confusion or ambiguity when reading System.map, crashes/oops/bugs,
@@ -134,51 +134,50 @@ On Thu, Mar 17, 2022 at 3:24 AM Randy Dunlap <rdunlap@infradead.org> wrote:
 >  calling  init+0x0/0x9a @ 1
 >  initcall init+0x0/0x9a returned 0 after 74 usecs
 >
-> Fixes: 4fe74b1cb051 ("[SCSI] virtio-scsi: SCSI driver for QEMU based virtual machines")
+> Fixes: e467cde23818 ("Block driver using virtio.")
 > Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
 > Cc: "Michael S. Tsirkin" <mst@redhat.com>
 > Cc: Jason Wang <jasowang@redhat.com>
 > Cc: Paolo Bonzini <pbonzini@redhat.com>
 > Cc: Stefan Hajnoczi <stefanha@redhat.com>
-> Cc: "James E.J. Bottomley" <jejb@linux.ibm.com>
-> Cc: "Martin K. Petersen" <martin.petersen@oracle.com>
-> Cc: linux-scsi@vger.kernel.org
 > Cc: virtualization@lists.linux-foundation.org
+> Cc: Jens Axboe <axboe@kernel.dk>
+> Cc: linux-block@vger.kernel.org
+> ---
 
 Acked-by: Jason Wang <jasowang@redhat.com>
 
-> ---
->  drivers/scsi/virtio_scsi.c |    8 ++++----
+>  drivers/block/virtio_blk.c |    8 ++++----
 >  1 file changed, 4 insertions(+), 4 deletions(-)
 >
-> --- lnx-517-rc8.orig/drivers/scsi/virtio_scsi.c
-> +++ lnx-517-rc8/drivers/scsi/virtio_scsi.c
-> @@ -988,7 +988,7 @@ static struct virtio_driver virtio_scsi_
->         .remove = virtscsi_remove,
+> --- lnx-517-rc8.orig/drivers/block/virtio_blk.c
+> +++ lnx-517-rc8/drivers/block/virtio_blk.c
+> @@ -1058,7 +1058,7 @@ static struct virtio_driver virtio_blk =
+>  #endif
 >  };
 >
 > -static int __init init(void)
-> +static int __init virtio_scsi_init(void)
+> +static int __init virtio_blk_init(void)
 >  {
->         int ret = -ENOMEM;
+>         int error;
 >
-> @@ -1020,14 +1020,14 @@ error:
->         return ret;
+> @@ -1084,14 +1084,14 @@ out_destroy_workqueue:
+>         return error;
 >  }
 >
 > -static void __exit fini(void)
-> +static void __exit virtio_scsi_fini(void)
+> +static void __exit virtio_blk_fini(void)
 >  {
->         unregister_virtio_driver(&virtio_scsi_driver);
->         mempool_destroy(virtscsi_cmd_pool);
->         kmem_cache_destroy(virtscsi_cmd_cache);
+>         unregister_virtio_driver(&virtio_blk);
+>         unregister_blkdev(major, "virtblk");
+>         destroy_workqueue(virtblk_wq);
 >  }
 > -module_init(init);
 > -module_exit(fini);
-> +module_init(virtio_scsi_init);
-> +module_exit(virtio_scsi_fini);
+> +module_init(virtio_blk_init);
+> +module_exit(virtio_blk_fini);
 >
 >  MODULE_DEVICE_TABLE(virtio, id_table);
->  MODULE_DESCRIPTION("Virtio SCSI HBA driver");
+>  MODULE_DESCRIPTION("Virtio block driver");
 >
 
