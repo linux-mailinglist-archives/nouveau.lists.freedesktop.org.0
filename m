@@ -2,56 +2,67 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2AB804E86AE
-	for <lists+nouveau@lfdr.de>; Sun, 27 Mar 2022 09:44:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C00584E86A3
+	for <lists+nouveau@lfdr.de>; Sun, 27 Mar 2022 09:44:30 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 5362710E254;
-	Sun, 27 Mar 2022 07:44:07 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 72ADB10E125;
+	Sun, 27 Mar 2022 07:44:05 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from pegase2.c-s.fr (pegase2.c-s.fr [93.17.235.10])
- by gabe.freedesktop.org (Postfix) with ESMTPS id AEFB210E7B4;
- Fri, 18 Mar 2022 09:55:25 +0000 (UTC)
-Received: from localhost (mailhub3.si.c-s.fr [172.26.127.67])
- by localhost (Postfix) with ESMTP id 4KKfWv0q49z9sT4;
- Fri, 18 Mar 2022 10:55:23 +0100 (CET)
-X-Virus-Scanned: amavisd-new at c-s.fr
-Received: from pegase2.c-s.fr ([172.26.127.65])
- by localhost (pegase2.c-s.fr [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id ypqx9pvwL4Ck; Fri, 18 Mar 2022 10:55:23 +0100 (CET)
-Received: from messagerie.si.c-s.fr (messagerie.si.c-s.fr [192.168.25.192])
- by pegase2.c-s.fr (Postfix) with ESMTP id 4KKfWt6h7pz9sT2;
- Fri, 18 Mar 2022 10:55:22 +0100 (CET)
-Received: from localhost (localhost [127.0.0.1])
- by messagerie.si.c-s.fr (Postfix) with ESMTP id D35208B78D;
- Fri, 18 Mar 2022 10:55:22 +0100 (CET)
-X-Virus-Scanned: amavisd-new at c-s.fr
-Received: from messagerie.si.c-s.fr ([127.0.0.1])
- by localhost (messagerie.si.c-s.fr [127.0.0.1]) (amavisd-new, port 10023)
- with ESMTP id iOqzYB9RuqTt; Fri, 18 Mar 2022 10:55:22 +0100 (CET)
-Received: from [192.168.202.177] (unknown [192.168.202.177])
- by messagerie.si.c-s.fr (Postfix) with ESMTP id 2E47E8B767;
- Fri, 18 Mar 2022 10:55:22 +0100 (CET)
-Message-ID: <9aebcbbf-aaba-f7e8-7397-18284e74ab0d@csgroup.eu>
-Date: Fri, 18 Mar 2022 10:55:20 +0100
+Received: from mail-oo1-xc2b.google.com (mail-oo1-xc2b.google.com
+ [IPv6:2607:f8b0:4864:20::c2b])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id BDE0510E2BB
+ for <nouveau@lists.freedesktop.org>; Fri, 18 Mar 2022 22:45:58 +0000 (UTC)
+Received: by mail-oo1-xc2b.google.com with SMTP id
+ h16-20020a4a6f10000000b00320507b9ccfso11886270ooc.7
+ for <nouveau@lists.freedesktop.org>; Fri, 18 Mar 2022 15:45:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linuxfoundation.org; s=google;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=ekiD2sX45IwGk6wtsqdwxLttTAGZcGccRjZl1i6g1JA=;
+ b=dMDapo5gWo0mYQwoT0A/aOZqMdPyZSCOVsL5zPGffJvLJZp0AfN2E9xdlck/nSLv/N
+ hEsSe5KNbjsmefIhgIIv1yDVHMP+6YIgd44fW9U2d/c1Akfns382n70WbM/10yIkuHjZ
+ SUNIZp82WOT2MEcG49QwDBCrffF4++Gcu4CkY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=ekiD2sX45IwGk6wtsqdwxLttTAGZcGccRjZl1i6g1JA=;
+ b=LH3hGx+wm8Kh1sZgQ08ZeTkyfpcHGefhN0H5B06VmSpZTniLoHUeSjFpuSBi24zVaA
+ Spt54QBIE6eb2lMV0TfbFyppgLf7vuGdnavYk0q4heqb6y81fzkByFL9BMDDKY1kyJGr
+ KvSktzu/1IA53V1RY79N8n/pIBBF4k+vuLJu3r91CZrlnuhe1Bl+w9/vW/qdlhh86vld
+ XSz4SSNH4TdDVvHATSmJXizxBd7bkVlmaahjaEwmCzANrolWpbNeo5Yz/xK4j1mHEr/A
+ 2QlSgHggzfCIke98ViO/61VG4m/PsTHup5qi53BTIOj7PbCJ1xxcvepaIrM0NijeeUJT
+ FTMw==
+X-Gm-Message-State: AOAM531sXE2+ldM4Iw4Feg1VgPseIHML9O/xhlzypdGGwNORsCoQ9XAM
+ J9cJu0EVuMIdA63arMALTs0o2g==
+X-Google-Smtp-Source: ABdhPJziihDBziDyTkE7iKcLTBW6BUUFUpCgkLWdsk/9MySxxcozoxXb4xoR4U6FbxLxPWes+cEMkA==
+X-Received: by 2002:a05:6820:814:b0:322:b1b2:2456 with SMTP id
+ bg20-20020a056820081400b00322b1b22456mr3591951oob.0.1647643557718; 
+ Fri, 18 Mar 2022 15:45:57 -0700 (PDT)
+Received: from [192.168.1.128] ([71.205.29.0])
+ by smtp.gmail.com with ESMTPSA id
+ x12-20020a056830244c00b005ad233e0ba3sm4330223otr.48.2022.03.18.15.45.55
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 18 Mar 2022 15:45:57 -0700 (PDT)
+To: Randy Dunlap <rdunlap@infradead.org>, linux-kernel@vger.kernel.org
+References: <20220316192010.19001-1-rdunlap@infradead.org>
+ <20220316192010.19001-8-rdunlap@infradead.org>
+From: Shuah Khan <skhan@linuxfoundation.org>
+Message-ID: <282f4857-7b4f-810e-af0e-e9ca8129c7fc@linuxfoundation.org>
+Date: Fri, 18 Mar 2022 16:45:54 -0600
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.8.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.6.2
-Content-Language: fr-FR
-From: Christophe Leroy <christophe.leroy@csgroup.eu>
-To: Lyude Paul <lyude@redhat.com>, Ben Skeggs <bskeggs@redhat.com>,
- Karol Herbst <kherbst@redhat.com>, David Airlie <airlied@linux.ie>,
- Daniel Vetter <daniel@ffwll.ch>
-References: <2d97ae92b9c06214be0e088a72cf303eb591bf01.1646414295.git.christophe.leroy@csgroup.eu>
- <47e09d6010852db928c0de29b89450ea7eee74d8.camel@redhat.com>
- <edb9aabd-09af-ae0c-348d-f0500e3405d7@csgroup.eu>
- <672043db-5290-293c-fde4-440989c78d09@csgroup.eu>
-In-Reply-To: <672043db-5290-293c-fde4-440989c78d09@csgroup.eu>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <20220316192010.19001-8-rdunlap@infradead.org>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 X-Mailman-Approved-At: Sun, 27 Mar 2022 07:44:03 +0000
-Subject: Re: [Nouveau] [PATCH] drm/nouveau/bios: Rename prom_init() and
- friends functions
+Subject: Re: [Nouveau] [PATCH 7/9] usb: usbip: eliminate anonymous
+ module_init & module_exit
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,84 +74,111 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org
+Cc: x86@kernel.org, Andy Lutomirski <luto@kernel.org>,
+ "Michael S. Tsirkin" <mst@redhat.com>, Peter Zijlstra <peterz@infradead.org>,
+ nouveau@lists.freedesktop.org, Jason Wang <jasowang@redhat.com>,
+ Dave Hansen <dave.hansen@linux.intel.com>,
+ Valentina Manea <valentina.manea.m@gmail.com>,
+ virtualization@lists.linux-foundation.org,
+ Krzysztof Opasiak <k.opasiak@samsung.com>, Eli Cohen <eli@mellanox.com>,
+ netdev@vger.kernel.org, Shuah Khan <shuah@kernel.org>,
+ Thomas Gleixner <tglx@linutronix.de>, "H. Peter Anvin" <hpa@zytor.com>,
+ Arnd Bergmann <arnd@arndb.de>, Leon Romanovsky <leon@kernel.org>,
+ linux-rdma@vger.kernel.org, Ingo Molnar <mingo@kernel.org>,
+ Jozsef Kadlecsik <kadlec@netfilter.org>, coreteam@netfilter.org,
+ Jakub Kicinski <kuba@kernel.org>,
+ Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
+ Pablo Neira Ayuso <pablo@netfilter.org>,
+ Joachim Fritschi <jfritschi@freenet.de>,
+ Felipe Balbi <felipe.balbi@linux.intel.com>, Amit Shah <amit@kernel.org>,
+ "James E.J. Bottomley" <jejb@linux.ibm.com>,
+ Steven Rostedt <rostedt@goodmis.org>,
+ =?UTF-8?B?TWljaGHFgiBNaXJvc8WCYXc=?= <mirq-linux@rere.qmqm.pl>,
+ linux-block@vger.kernel.org, Pekka Paalanen <ppaalanen@gmail.com>,
+ Borislav Petkov <bp@alien8.de>, Stefan Hajnoczi <stefanha@redhat.com>,
+ Shuah Khan <skhan@linuxfoundation.org>,
+ Jussi Kivilinna <jussi.kivilinna@mbnet.fi>,
+ Herbert Xu <herbert@gondor.apana.org.au>, Jens Axboe <axboe@kernel.dk>,
+ linux-scsi@vger.kernel.org, "Martin K. Petersen" <martin.petersen@oracle.com>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>, linux-usb@vger.kernel.org,
+ Florian Westphal <fw@strlen.de>, netfilter-devel@vger.kernel.org,
+ linux-crypto@vger.kernel.org, Igor Kotrasinski <i.kotrasinsk@samsung.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, Saeed Mahameed <saeedm@nvidia.com>,
+ "David S. Miller" <davem@davemloft.net>
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-Hi Paul,
+On 3/16/22 1:20 PM, Randy Dunlap wrote:
+> Eliminate anonymous module_init() and module_exit(), which can lead to
+> confusion or ambiguity when reading System.map, crashes/oops/bugs,
+> or an initcall_debug log.
+> 
+> Give each of these init and exit functions unique driver-specific
+> names to eliminate the anonymous names.
+> 
+> Example 1: (System.map)
+>   ffffffff832fc78c t init
+>   ffffffff832fc79e t init
+>   ffffffff832fc8f8 t init
+> 
+> Example 2: (initcall_debug log)
+>   calling  init+0x0/0x12 @ 1
+>   initcall init+0x0/0x12 returned 0 after 15 usecs
+>   calling  init+0x0/0x60 @ 1
+>   initcall init+0x0/0x60 returned 0 after 2 usecs
+>   calling  init+0x0/0x9a @ 1
+>   initcall init+0x0/0x9a returned 0 after 74 usecs
+> 
+> Fixes: 80fd9cd52de6 ("usbip: vudc: Add VUDC main file")
+> Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
+> Cc: Krzysztof Opasiak <k.opasiak@samsung.com>
+> Cc: Igor Kotrasinski <i.kotrasinsk@samsung.com>
+> Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+> Cc: Valentina Manea <valentina.manea.m@gmail.com>
+> Cc: Shuah Khan <shuah@kernel.org>
+> Cc: Shuah Khan <skhan@linuxfoundation.org>
+> Cc: linux-usb@vger.kernel.org
+> ---
+>   drivers/usb/usbip/vudc_main.c |    8 ++++----
+>   1 file changed, 4 insertions(+), 4 deletions(-)
+> 
+> --- lnx-517-rc8.orig/drivers/usb/usbip/vudc_main.c
+> +++ lnx-517-rc8/drivers/usb/usbip/vudc_main.c
+> @@ -28,7 +28,7 @@ static struct platform_driver vudc_drive
+>   
+>   static struct list_head vudc_devices = LIST_HEAD_INIT(vudc_devices);
+>   
+> -static int __init init(void)
+> +static int __init vudc_init(void)
+>   {
+>   	int retval = -ENOMEM;
+>   	int i;
+> @@ -86,9 +86,9 @@ cleanup:
+>   out:
+>   	return retval;
+>   }
+> -module_init(init);
+> +module_init(vudc_init);
+>   
+> -static void __exit cleanup(void)
+> +static void __exit vudc_cleanup(void)
+>   {
+>   	struct vudc_device *udc_dev = NULL, *udc_dev2 = NULL;
+>   
+> @@ -103,7 +103,7 @@ static void __exit cleanup(void)
+>   	}
+>   	platform_driver_unregister(&vudc_driver);
+>   }
+> -module_exit(cleanup);
+> +module_exit(vudc_cleanup);
+>   
+>   MODULE_DESCRIPTION("USB over IP Device Controller");
+>   MODULE_AUTHOR("Krzysztof Opasiak, Karol Kosik, Igor Kotrasinski");
+> 
 
-Le 05/03/2022 à 10:51, Christophe Leroy a écrit :
-> 
-> 
-> Le 05/03/2022 à 08:38, Christophe Leroy a écrit :
->>
->>
->> Le 04/03/2022 à 21:24, Lyude Paul a écrit :
->>> This mostly looks good to me. Just one question (and one comment down 
->>> below
->>> that needs addressing). Is this with ppc32? (I ask because ppc64le 
->>> doesn't
->>> seem to hit this compilation error).
->>
->> That's with PPC64, see 
->> http://kisskb.ellerman.id.au/kisskb/branch/chleroy/head/252ba609bea83234d2e35841c19ae84c67b43ec7/ 
->>
->>
->> But that's not (yet) with the mainline tree. That's work I'm doing to 
->> cleanup our asm/asm-protoypes.h header.
->>
->> Since commit 4efca4ed05cb ("kbuild: modversions for EXPORT_SYMBOL() 
->> for asm") that file is dedicated to prototypes of functions defined in 
->> assembly. Therefore I'm trying to dispatch C functions prototypes in 
->> other headers. I wanted to move prom_init() prototype into asm/prom.h 
->> and then I hit the problem.
->>
->> In the beginning I was thinking about just changing the name of the 
->> function in powerpc, but as I see that M68K, MIPS and SPARC also have 
->> a prom_init() function, I thought it would be better to change the 
->> name in shadowrom.c to avoid any future conflict like the one I got 
->> while reworking the headers.
->>
->>
->>>> @@ -57,8 +57,8 @@ prom_init(struct nvkm_bios *bios, const char *name)
->>>>   const struct nvbios_source
->>>>   nvbios_rom = {
->>>>          .name = "PROM",
->>>> -       .init = prom_init,
->>>> -       .fini = prom_fini,
->>>> -       .read = prom_read,
->>>> +       .init = nvbios_rom_init,
->>>> +       .fini = nvbios_rom_fini,
->>>> +       .read = nvbios_rom_read,
->>>
->>> Seeing as the source name is prom, I think using the naming convention
->>> nvbios_prom_* would be better then nvbios_rom_*.
->>>
->>
->> Yes I wasn't sure about the best naming as the file name is 
->> shadowrom.c and not shadowprom.c.
->>
->> I will send v2 using nvbios_prom_* as a name.
-> 
-> While preparing v2 I remembered that in fact, I called the functions 
-> nvbios_rom_* because the name of the nvbios_source struct is nvbios_rom, 
-> so for me it made sense to use the name of the struct as a prefix for 
-> the functions.
-> 
-> So I'm OK to change it to nvbios_prom_* but it looks less logical to me.
-> 
-> Please confirm you still prefer nvbios_prom as prefix to the function 
-> names.
-> 
+Thanks for fixing this.
 
-Are you still expecting a v2 for this patch ?
+Acked-by: Shuah Khan <skhan@linuxfoundation.org>
 
-As the name of the structure is nvbios_rom, do you really prefer the 
-functions to be called nvbios_prom_* as you mentionned in your comment ?
-
-In that case, do you also expect the structure name to be changed to 
-nvbios_prom ?
-
-Thanks
-Christophe
+thanks,
+-- Shuah
