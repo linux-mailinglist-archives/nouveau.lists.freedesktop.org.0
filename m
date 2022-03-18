@@ -2,46 +2,56 @@ Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
 Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7EB8E4E8696
-	for <lists+nouveau@lfdr.de>; Sun, 27 Mar 2022 09:44:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2AB804E86AE
+	for <lists+nouveau@lfdr.de>; Sun, 27 Mar 2022 09:44:39 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 151CD10E037;
-	Sun, 27 Mar 2022 07:44:04 +0000 (UTC)
+	by gabe.freedesktop.org (Postfix) with ESMTP id 5362710E254;
+	Sun, 27 Mar 2022 07:44:07 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from casper.infradead.org (casper.infradead.org
- [IPv6:2001:8b0:10b:1236::1])
- by gabe.freedesktop.org (Postfix) with ESMTPS id DA25910E103
- for <nouveau@lists.freedesktop.org>; Thu, 17 Mar 2022 20:43:22 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:Content-Type:
- In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender
- :Reply-To:Content-ID:Content-Description;
- bh=3Vg3YWtqMNGIO5AWtFE29onUKdIZ8x188s7SviF5pPg=; b=tiAHL3PCQ2t7+lPOxKztKxihGl
- vd4Y8NiotnXISBxPTEpDpjnfGwN/+2gCzocwX9f1n0YfUlqtTEW8abkTbOXNks1/pe9V0o1aeVqiU
- mg+cp1CpvBpg/qj5G5LZWflb4aiFP803B14dktG2eQTzUpOmEwNqtoyK5FiuDb0e8dEHA1UwaTcNb
- TjTsqtIXdQy5uDTkofF/krC+Z1b0PK1+/Sh9yQPukGAwmINpZ+kCjgEBdHe1EVJZaGIr2Nw3tHUkm
- Ajhuyth6TCxfsRDyg2dioL17ZEbHaHLKorjuGU+sNiNOS0MkF5l5E/OHgiJGeyQY6IVrPFktt2Xla
- WvlJyMgw==;
-Received: from [2601:1c0:6280:3f0::aa0b]
- by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1nUwxB-007IuO-IC; Thu, 17 Mar 2022 20:42:37 +0000
-Message-ID: <15fdafd4-e753-2c0e-4e61-6b168e064e72@infradead.org>
-Date: Thu, 17 Mar 2022 13:42:23 -0700
+Received: from pegase2.c-s.fr (pegase2.c-s.fr [93.17.235.10])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id AEFB210E7B4;
+ Fri, 18 Mar 2022 09:55:25 +0000 (UTC)
+Received: from localhost (mailhub3.si.c-s.fr [172.26.127.67])
+ by localhost (Postfix) with ESMTP id 4KKfWv0q49z9sT4;
+ Fri, 18 Mar 2022 10:55:23 +0100 (CET)
+X-Virus-Scanned: amavisd-new at c-s.fr
+Received: from pegase2.c-s.fr ([172.26.127.65])
+ by localhost (pegase2.c-s.fr [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id ypqx9pvwL4Ck; Fri, 18 Mar 2022 10:55:23 +0100 (CET)
+Received: from messagerie.si.c-s.fr (messagerie.si.c-s.fr [192.168.25.192])
+ by pegase2.c-s.fr (Postfix) with ESMTP id 4KKfWt6h7pz9sT2;
+ Fri, 18 Mar 2022 10:55:22 +0100 (CET)
+Received: from localhost (localhost [127.0.0.1])
+ by messagerie.si.c-s.fr (Postfix) with ESMTP id D35208B78D;
+ Fri, 18 Mar 2022 10:55:22 +0100 (CET)
+X-Virus-Scanned: amavisd-new at c-s.fr
+Received: from messagerie.si.c-s.fr ([127.0.0.1])
+ by localhost (messagerie.si.c-s.fr [127.0.0.1]) (amavisd-new, port 10023)
+ with ESMTP id iOqzYB9RuqTt; Fri, 18 Mar 2022 10:55:22 +0100 (CET)
+Received: from [192.168.202.177] (unknown [192.168.202.177])
+ by messagerie.si.c-s.fr (Postfix) with ESMTP id 2E47E8B767;
+ Fri, 18 Mar 2022 10:55:22 +0100 (CET)
+Message-ID: <9aebcbbf-aaba-f7e8-7397-18284e74ab0d@csgroup.eu>
+Date: Fri, 18 Mar 2022 10:55:20 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.7.0
-Content-Language: en-US
-To: Pablo Neira Ayuso <pablo@netfilter.org>
-References: <20220316192010.19001-1-rdunlap@infradead.org>
- <20220316192010.19001-5-rdunlap@infradead.org> <YjNYo2LKM3smgEJM@salvia>
-From: Randy Dunlap <rdunlap@infradead.org>
-In-Reply-To: <YjNYo2LKM3smgEJM@salvia>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+ Thunderbird/91.6.2
+Content-Language: fr-FR
+From: Christophe Leroy <christophe.leroy@csgroup.eu>
+To: Lyude Paul <lyude@redhat.com>, Ben Skeggs <bskeggs@redhat.com>,
+ Karol Herbst <kherbst@redhat.com>, David Airlie <airlied@linux.ie>,
+ Daniel Vetter <daniel@ffwll.ch>
+References: <2d97ae92b9c06214be0e088a72cf303eb591bf01.1646414295.git.christophe.leroy@csgroup.eu>
+ <47e09d6010852db928c0de29b89450ea7eee74d8.camel@redhat.com>
+ <edb9aabd-09af-ae0c-348d-f0500e3405d7@csgroup.eu>
+ <672043db-5290-293c-fde4-440989c78d09@csgroup.eu>
+In-Reply-To: <672043db-5290-293c-fde4-440989c78d09@csgroup.eu>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Sun, 27 Mar 2022 07:44:03 +0000
-Subject: Re: [Nouveau] [PATCH 4/9] netfilter: h323: eliminate anonymous
- module_init & module_exit
+Subject: Re: [Nouveau] [PATCH] drm/nouveau/bios: Rename prom_init() and
+ friends functions
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -53,117 +63,84 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: x86@kernel.org, Andy Lutomirski <luto@kernel.org>,
- "Michael S. Tsirkin" <mst@redhat.com>, Peter Zijlstra <peterz@infradead.org>,
- nouveau@lists.freedesktop.org, Jason Wang <jasowang@redhat.com>,
- Dave Hansen <dave.hansen@linux.intel.com>,
- Valentina Manea <valentina.manea.m@gmail.com>,
- Krzysztof Opasiak <k.opasiak@samsung.com>, Eli Cohen <eli@mellanox.com>,
- netdev@vger.kernel.org, Shuah Khan <shuah@kernel.org>,
- Thomas Gleixner <tglx@linutronix.de>, "H. Peter Anvin" <hpa@zytor.com>,
- Arnd Bergmann <arnd@arndb.de>, Leon Romanovsky <leon@kernel.org>,
- linux-rdma@vger.kernel.org, Ingo Molnar <mingo@kernel.org>,
- Jozsef Kadlecsik <kadlec@netfilter.org>, coreteam@netfilter.org,
- Jakub Kicinski <kuba@kernel.org>,
- Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
- Joachim Fritschi <jfritschi@freenet.de>,
- Felipe Balbi <felipe.balbi@linux.intel.com>, Amit Shah <amit@kernel.org>,
- "James E.J. Bottomley" <jejb@linux.ibm.com>,
- Steven Rostedt <rostedt@goodmis.org>,
- =?UTF-8?B?TWljaGHFgiBNaXJvc8WCYXc=?= <mirq-linux@rere.qmqm.pl>,
- linux-block@vger.kernel.org, Pekka Paalanen <ppaalanen@gmail.com>,
- Borislav Petkov <bp@alien8.de>, Stefan Hajnoczi <stefanha@redhat.com>,
- Shuah Khan <skhan@linuxfoundation.org>,
- Jussi Kivilinna <jussi.kivilinna@mbnet.fi>,
- virtualization@lists.linux-foundation.org,
- Herbert Xu <herbert@gondor.apana.org.au>, Jens Axboe <axboe@kernel.dk>,
- linux-scsi@vger.kernel.org, "Martin K. Petersen" <martin.petersen@oracle.com>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>, linux-usb@vger.kernel.org,
- Florian Westphal <fw@strlen.de>, linux-kernel@vger.kernel.org,
- netfilter-devel@vger.kernel.org, linux-crypto@vger.kernel.org,
- Igor Kotrasinski <i.kotrasinsk@samsung.com>,
- Paolo Bonzini <pbonzini@redhat.com>, Saeed Mahameed <saeedm@nvidia.com>,
- "David S. Miller" <davem@davemloft.net>
+Cc: nouveau@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
+Hi Paul,
 
-
-On 3/17/22 08:49, Pablo Neira Ayuso wrote:
-> On Wed, Mar 16, 2022 at 12:20:05PM -0700, Randy Dunlap wrote:
->> Eliminate anonymous module_init() and module_exit(), which can lead to
->> confusion or ambiguity when reading System.map, crashes/oops/bugs,
->> or an initcall_debug log.
->>
->> Give each of these init and exit functions unique driver-specific
->> names to eliminate the anonymous names.
->>
->> Example 1: (System.map)
->>  ffffffff832fc78c t init
->>  ffffffff832fc79e t init
->>  ffffffff832fc8f8 t init
->>
->> Example 2: (initcall_debug log)
->>  calling  init+0x0/0x12 @ 1
->>  initcall init+0x0/0x12 returned 0 after 15 usecs
->>  calling  init+0x0/0x60 @ 1
->>  initcall init+0x0/0x60 returned 0 after 2 usecs
->>  calling  init+0x0/0x9a @ 1
->>  initcall init+0x0/0x9a returned 0 after 74 usecs
+Le 05/03/2022 à 10:51, Christophe Leroy a écrit :
 > 
-> LGTM.
 > 
-> Should I route this through the netfilter tree?
-
-Yes, please.
-Thanks.
-
-> 
->> Fixes: f587de0e2feb ("[NETFILTER]: nf_conntrack/nf_nat: add H.323 helper port")
->> Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
->> Cc: Pablo Neira Ayuso <pablo@netfilter.org>
->> Cc: Jozsef Kadlecsik <kadlec@netfilter.org>
->> Cc: Florian Westphal <fw@strlen.de>
->> Cc: netfilter-devel@vger.kernel.org
->> Cc: coreteam@netfilter.org
->> Cc: "David S. Miller" <davem@davemloft.net>
->> Cc: Jakub Kicinski <kuba@kernel.org>
->> Cc: netdev@vger.kernel.org
->> ---
->>  net/ipv4/netfilter/nf_nat_h323.c |    8 ++++----
->>  1 file changed, 4 insertions(+), 4 deletions(-)
+> Le 05/03/2022 à 08:38, Christophe Leroy a écrit :
 >>
->> --- lnx-517-rc8.orig/net/ipv4/netfilter/nf_nat_h323.c
->> +++ lnx-517-rc8/net/ipv4/netfilter/nf_nat_h323.c
->> @@ -580,7 +580,7 @@ static struct nf_ct_helper_expectfn call
->>  };
->>  
->>  /****************************************************************************/
->> -static int __init init(void)
->> +static int __init nf_nat_h323_init(void)
->>  {
->>  	BUG_ON(set_h245_addr_hook != NULL);
->>  	BUG_ON(set_h225_addr_hook != NULL);
->> @@ -607,7 +607,7 @@ static int __init init(void)
->>  }
->>  
->>  /****************************************************************************/
->> -static void __exit fini(void)
->> +static void __exit nf_nat_h323_fini(void)
->>  {
->>  	RCU_INIT_POINTER(set_h245_addr_hook, NULL);
->>  	RCU_INIT_POINTER(set_h225_addr_hook, NULL);
->> @@ -624,8 +624,8 @@ static void __exit fini(void)
->>  }
->>  
->>  /****************************************************************************/
->> -module_init(init);
->> -module_exit(fini);
->> +module_init(nf_nat_h323_init);
->> +module_exit(nf_nat_h323_fini);
->>  
->>  MODULE_AUTHOR("Jing Min Zhao <zhaojingmin@users.sourceforge.net>");
->>  MODULE_DESCRIPTION("H.323 NAT helper");
+>>
+>> Le 04/03/2022 à 21:24, Lyude Paul a écrit :
+>>> This mostly looks good to me. Just one question (and one comment down 
+>>> below
+>>> that needs addressing). Is this with ppc32? (I ask because ppc64le 
+>>> doesn't
+>>> seem to hit this compilation error).
+>>
+>> That's with PPC64, see 
+>> http://kisskb.ellerman.id.au/kisskb/branch/chleroy/head/252ba609bea83234d2e35841c19ae84c67b43ec7/ 
+>>
+>>
+>> But that's not (yet) with the mainline tree. That's work I'm doing to 
+>> cleanup our asm/asm-protoypes.h header.
+>>
+>> Since commit 4efca4ed05cb ("kbuild: modversions for EXPORT_SYMBOL() 
+>> for asm") that file is dedicated to prototypes of functions defined in 
+>> assembly. Therefore I'm trying to dispatch C functions prototypes in 
+>> other headers. I wanted to move prom_init() prototype into asm/prom.h 
+>> and then I hit the problem.
+>>
+>> In the beginning I was thinking about just changing the name of the 
+>> function in powerpc, but as I see that M68K, MIPS and SPARC also have 
+>> a prom_init() function, I thought it would be better to change the 
+>> name in shadowrom.c to avoid any future conflict like the one I got 
+>> while reworking the headers.
+>>
+>>
+>>>> @@ -57,8 +57,8 @@ prom_init(struct nvkm_bios *bios, const char *name)
+>>>>   const struct nvbios_source
+>>>>   nvbios_rom = {
+>>>>          .name = "PROM",
+>>>> -       .init = prom_init,
+>>>> -       .fini = prom_fini,
+>>>> -       .read = prom_read,
+>>>> +       .init = nvbios_rom_init,
+>>>> +       .fini = nvbios_rom_fini,
+>>>> +       .read = nvbios_rom_read,
+>>>
+>>> Seeing as the source name is prom, I think using the naming convention
+>>> nvbios_prom_* would be better then nvbios_rom_*.
+>>>
+>>
+>> Yes I wasn't sure about the best naming as the file name is 
+>> shadowrom.c and not shadowprom.c.
+>>
+>> I will send v2 using nvbios_prom_* as a name.
+> 
+> While preparing v2 I remembered that in fact, I called the functions 
+> nvbios_rom_* because the name of the nvbios_source struct is nvbios_rom, 
+> so for me it made sense to use the name of the struct as a prefix for 
+> the functions.
+> 
+> So I'm OK to change it to nvbios_prom_* but it looks less logical to me.
+> 
+> Please confirm you still prefer nvbios_prom as prefix to the function 
+> names.
+> 
 
--- 
-~Randy
+Are you still expecting a v2 for this patch ?
+
+As the name of the structure is nvbios_rom, do you really prefer the 
+functions to be called nvbios_prom_* as you mentionned in your comment ?
+
+In that case, do you also expect the structure name to be changed to 
+nvbios_prom ?
+
+Thanks
+Christophe
