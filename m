@@ -1,68 +1,64 @@
 Return-Path: <nouveau-bounces@lists.freedesktop.org>
 X-Original-To: lists+nouveau@lfdr.de
 Delivered-To: lists+nouveau@lfdr.de
-Received: from gabe.freedesktop.org (gabe.freedesktop.org [131.252.210.177])
-	by mail.lfdr.de (Postfix) with ESMTPS id C00584E86A3
-	for <lists+nouveau@lfdr.de>; Sun, 27 Mar 2022 09:44:30 +0200 (CEST)
+Received: from gabe.freedesktop.org (gabe.freedesktop.org [IPv6:2610:10:20:722:a800:ff:fe36:1795])
+	by mail.lfdr.de (Postfix) with ESMTPS id 974FF4E869B
+	for <lists+nouveau@lfdr.de>; Sun, 27 Mar 2022 09:44:22 +0200 (CEST)
 Received: from gabe.freedesktop.org (localhost [127.0.0.1])
-	by gabe.freedesktop.org (Postfix) with ESMTP id 72ADB10E125;
+	by gabe.freedesktop.org (Postfix) with ESMTP id 1DD1710E0CB;
 	Sun, 27 Mar 2022 07:44:05 +0000 (UTC)
 X-Original-To: nouveau@lists.freedesktop.org
 Delivered-To: nouveau@lists.freedesktop.org
-Received: from mail-oo1-xc2b.google.com (mail-oo1-xc2b.google.com
- [IPv6:2607:f8b0:4864:20::c2b])
- by gabe.freedesktop.org (Postfix) with ESMTPS id BDE0510E2BB
- for <nouveau@lists.freedesktop.org>; Fri, 18 Mar 2022 22:45:58 +0000 (UTC)
-Received: by mail-oo1-xc2b.google.com with SMTP id
- h16-20020a4a6f10000000b00320507b9ccfso11886270ooc.7
- for <nouveau@lists.freedesktop.org>; Fri, 18 Mar 2022 15:45:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linuxfoundation.org; s=google;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=ekiD2sX45IwGk6wtsqdwxLttTAGZcGccRjZl1i6g1JA=;
- b=dMDapo5gWo0mYQwoT0A/aOZqMdPyZSCOVsL5zPGffJvLJZp0AfN2E9xdlck/nSLv/N
- hEsSe5KNbjsmefIhgIIv1yDVHMP+6YIgd44fW9U2d/c1Akfns382n70WbM/10yIkuHjZ
- SUNIZp82WOT2MEcG49QwDBCrffF4++Gcu4CkY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=ekiD2sX45IwGk6wtsqdwxLttTAGZcGccRjZl1i6g1JA=;
- b=LH3hGx+wm8Kh1sZgQ08ZeTkyfpcHGefhN0H5B06VmSpZTniLoHUeSjFpuSBi24zVaA
- Spt54QBIE6eb2lMV0TfbFyppgLf7vuGdnavYk0q4heqb6y81fzkByFL9BMDDKY1kyJGr
- KvSktzu/1IA53V1RY79N8n/pIBBF4k+vuLJu3r91CZrlnuhe1Bl+w9/vW/qdlhh86vld
- XSz4SSNH4TdDVvHATSmJXizxBd7bkVlmaahjaEwmCzANrolWpbNeo5Yz/xK4j1mHEr/A
- 2QlSgHggzfCIke98ViO/61VG4m/PsTHup5qi53BTIOj7PbCJ1xxcvepaIrM0NijeeUJT
- FTMw==
-X-Gm-Message-State: AOAM531sXE2+ldM4Iw4Feg1VgPseIHML9O/xhlzypdGGwNORsCoQ9XAM
- J9cJu0EVuMIdA63arMALTs0o2g==
-X-Google-Smtp-Source: ABdhPJziihDBziDyTkE7iKcLTBW6BUUFUpCgkLWdsk/9MySxxcozoxXb4xoR4U6FbxLxPWes+cEMkA==
-X-Received: by 2002:a05:6820:814:b0:322:b1b2:2456 with SMTP id
- bg20-20020a056820081400b00322b1b22456mr3591951oob.0.1647643557718; 
- Fri, 18 Mar 2022 15:45:57 -0700 (PDT)
-Received: from [192.168.1.128] ([71.205.29.0])
- by smtp.gmail.com with ESMTPSA id
- x12-20020a056830244c00b005ad233e0ba3sm4330223otr.48.2022.03.18.15.45.55
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 18 Mar 2022 15:45:57 -0700 (PDT)
-To: Randy Dunlap <rdunlap@infradead.org>, linux-kernel@vger.kernel.org
-References: <20220316192010.19001-1-rdunlap@infradead.org>
- <20220316192010.19001-8-rdunlap@infradead.org>
-From: Shuah Khan <skhan@linuxfoundation.org>
-Message-ID: <282f4857-7b4f-810e-af0e-e9ca8129c7fc@linuxfoundation.org>
-Date: Fri, 18 Mar 2022 16:45:54 -0600
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.8.1
+Received: from pegase2.c-s.fr (pegase2.c-s.fr [93.17.235.10])
+ by gabe.freedesktop.org (Postfix) with ESMTPS id 8569210F3C3;
+ Sat, 19 Mar 2022 10:28:12 +0000 (UTC)
+Received: from localhost (mailhub3.si.c-s.fr [172.26.127.67])
+ by localhost (Postfix) with ESMTP id 4KLHCG2thjz9sSW;
+ Sat, 19 Mar 2022 11:28:10 +0100 (CET)
+X-Virus-Scanned: amavisd-new at c-s.fr
+Received: from pegase2.c-s.fr ([172.26.127.65])
+ by localhost (pegase2.c-s.fr [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id mm8j_WRInuZR; Sat, 19 Mar 2022 11:28:10 +0100 (CET)
+Received: from messagerie.si.c-s.fr (messagerie.si.c-s.fr [192.168.25.192])
+ by pegase2.c-s.fr (Postfix) with ESMTP id 4KLHCG1bXGz9sSP;
+ Sat, 19 Mar 2022 11:28:10 +0100 (CET)
+Received: from localhost (localhost [127.0.0.1])
+ by messagerie.si.c-s.fr (Postfix) with ESMTP id 18F288B76C;
+ Sat, 19 Mar 2022 11:28:10 +0100 (CET)
+X-Virus-Scanned: amavisd-new at c-s.fr
+Received: from messagerie.si.c-s.fr ([127.0.0.1])
+ by localhost (messagerie.si.c-s.fr [127.0.0.1]) (amavisd-new, port 10023)
+ with ESMTP id a17gy9YEoaHD; Sat, 19 Mar 2022 11:28:09 +0100 (CET)
+Received: from PO20335.IDSI0.si.c-s.fr (unknown [192.168.202.222])
+ by messagerie.si.c-s.fr (Postfix) with ESMTP id C04188B765;
+ Sat, 19 Mar 2022 11:28:09 +0100 (CET)
+Received: from PO20335.IDSI0.si.c-s.fr (localhost [127.0.0.1])
+ by PO20335.IDSI0.si.c-s.fr (8.17.1/8.16.1) with ESMTPS id 22JARwNd456602
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+ Sat, 19 Mar 2022 11:27:58 +0100
+Received: (from chleroy@localhost)
+ by PO20335.IDSI0.si.c-s.fr (8.17.1/8.17.1/Submit) id 22JARuTD456594;
+ Sat, 19 Mar 2022 11:27:56 +0100
+X-Authentication-Warning: PO20335.IDSI0.si.c-s.fr: chleroy set sender to
+ christophe.leroy@csgroup.eu using -f
+From: Christophe Leroy <christophe.leroy@csgroup.eu>
+To: Ben Skeggs <bskeggs@redhat.com>, Karol Herbst <kherbst@redhat.com>,
+ Lyude Paul <lyude@redhat.com>, David Airlie <airlied@linux.ie>,
+ Daniel Vetter <daniel@ffwll.ch>
+Date: Sat, 19 Mar 2022 11:27:51 +0100
+Message-Id: <7e0612b61511ec8030e3b2dcbfaa7751781c8b91.1647684507.git.christophe.leroy@csgroup.eu>
+X-Mailer: git-send-email 2.35.1
 MIME-Version: 1.0
-In-Reply-To: <20220316192010.19001-8-rdunlap@infradead.org>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1647685669; l=3722; s=20211009;
+ h=from:subject:message-id; bh=y5DQYDGAWf+okMg9sN/L7lksMPfKpXX0wlcMvN+TCx8=;
+ b=BT0h00TI+fMGlEX6pCDLyjtx88LkgtnMe1L7kFbayDTiEZXd6XQy/COY5UB6n29i40apuruO6pqn
+ hs/Pbx4tCwp2V2DyWFRrCMSLctLldhri/vsSKggV7Xx2XGdvLBsE
+X-Developer-Key: i=christophe.leroy@csgroup.eu; a=ed25519;
+ pk=HIzTzUj91asvincQGOFx6+ZF5AoUuP9GdOtQChs7Mm0=
+Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Sun, 27 Mar 2022 07:44:03 +0000
-Subject: Re: [Nouveau] [PATCH 7/9] usb: usbip: eliminate anonymous
- module_init & module_exit
+Subject: [Nouveau] [PATCH v2] drm/nouveau/bios: Rename prom_init() and
+ friends functions
 X-BeenThere: nouveau@lists.freedesktop.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -74,111 +70,106 @@ List-Post: <mailto:nouveau@lists.freedesktop.org>
 List-Help: <mailto:nouveau-request@lists.freedesktop.org?subject=help>
 List-Subscribe: <https://lists.freedesktop.org/mailman/listinfo/nouveau>,
  <mailto:nouveau-request@lists.freedesktop.org?subject=subscribe>
-Cc: x86@kernel.org, Andy Lutomirski <luto@kernel.org>,
- "Michael S. Tsirkin" <mst@redhat.com>, Peter Zijlstra <peterz@infradead.org>,
- nouveau@lists.freedesktop.org, Jason Wang <jasowang@redhat.com>,
- Dave Hansen <dave.hansen@linux.intel.com>,
- Valentina Manea <valentina.manea.m@gmail.com>,
- virtualization@lists.linux-foundation.org,
- Krzysztof Opasiak <k.opasiak@samsung.com>, Eli Cohen <eli@mellanox.com>,
- netdev@vger.kernel.org, Shuah Khan <shuah@kernel.org>,
- Thomas Gleixner <tglx@linutronix.de>, "H. Peter Anvin" <hpa@zytor.com>,
- Arnd Bergmann <arnd@arndb.de>, Leon Romanovsky <leon@kernel.org>,
- linux-rdma@vger.kernel.org, Ingo Molnar <mingo@kernel.org>,
- Jozsef Kadlecsik <kadlec@netfilter.org>, coreteam@netfilter.org,
- Jakub Kicinski <kuba@kernel.org>,
- Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
- Pablo Neira Ayuso <pablo@netfilter.org>,
- Joachim Fritschi <jfritschi@freenet.de>,
- Felipe Balbi <felipe.balbi@linux.intel.com>, Amit Shah <amit@kernel.org>,
- "James E.J. Bottomley" <jejb@linux.ibm.com>,
- Steven Rostedt <rostedt@goodmis.org>,
- =?UTF-8?B?TWljaGHFgiBNaXJvc8WCYXc=?= <mirq-linux@rere.qmqm.pl>,
- linux-block@vger.kernel.org, Pekka Paalanen <ppaalanen@gmail.com>,
- Borislav Petkov <bp@alien8.de>, Stefan Hajnoczi <stefanha@redhat.com>,
- Shuah Khan <skhan@linuxfoundation.org>,
- Jussi Kivilinna <jussi.kivilinna@mbnet.fi>,
- Herbert Xu <herbert@gondor.apana.org.au>, Jens Axboe <axboe@kernel.dk>,
- linux-scsi@vger.kernel.org, "Martin K. Petersen" <martin.petersen@oracle.com>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>, linux-usb@vger.kernel.org,
- Florian Westphal <fw@strlen.de>, netfilter-devel@vger.kernel.org,
- linux-crypto@vger.kernel.org, Igor Kotrasinski <i.kotrasinsk@samsung.com>,
- Paolo Bonzini <pbonzini@redhat.com>, Saeed Mahameed <saeedm@nvidia.com>,
- "David S. Miller" <davem@davemloft.net>
+Cc: nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ Christophe Leroy <christophe.leroy@csgroup.eu>, linux-kernel@vger.kernel.org
 Errors-To: nouveau-bounces@lists.freedesktop.org
 Sender: "Nouveau" <nouveau-bounces@lists.freedesktop.org>
 
-On 3/16/22 1:20 PM, Randy Dunlap wrote:
-> Eliminate anonymous module_init() and module_exit(), which can lead to
-> confusion or ambiguity when reading System.map, crashes/oops/bugs,
-> or an initcall_debug log.
-> 
-> Give each of these init and exit functions unique driver-specific
-> names to eliminate the anonymous names.
-> 
-> Example 1: (System.map)
->   ffffffff832fc78c t init
->   ffffffff832fc79e t init
->   ffffffff832fc8f8 t init
-> 
-> Example 2: (initcall_debug log)
->   calling  init+0x0/0x12 @ 1
->   initcall init+0x0/0x12 returned 0 after 15 usecs
->   calling  init+0x0/0x60 @ 1
->   initcall init+0x0/0x60 returned 0 after 2 usecs
->   calling  init+0x0/0x9a @ 1
->   initcall init+0x0/0x9a returned 0 after 74 usecs
-> 
-> Fixes: 80fd9cd52de6 ("usbip: vudc: Add VUDC main file")
-> Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
-> Cc: Krzysztof Opasiak <k.opasiak@samsung.com>
-> Cc: Igor Kotrasinski <i.kotrasinsk@samsung.com>
-> Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-> Cc: Valentina Manea <valentina.manea.m@gmail.com>
-> Cc: Shuah Khan <shuah@kernel.org>
-> Cc: Shuah Khan <skhan@linuxfoundation.org>
-> Cc: linux-usb@vger.kernel.org
-> ---
->   drivers/usb/usbip/vudc_main.c |    8 ++++----
->   1 file changed, 4 insertions(+), 4 deletions(-)
-> 
-> --- lnx-517-rc8.orig/drivers/usb/usbip/vudc_main.c
-> +++ lnx-517-rc8/drivers/usb/usbip/vudc_main.c
-> @@ -28,7 +28,7 @@ static struct platform_driver vudc_drive
->   
->   static struct list_head vudc_devices = LIST_HEAD_INIT(vudc_devices);
->   
-> -static int __init init(void)
-> +static int __init vudc_init(void)
->   {
->   	int retval = -ENOMEM;
->   	int i;
-> @@ -86,9 +86,9 @@ cleanup:
->   out:
->   	return retval;
->   }
-> -module_init(init);
-> +module_init(vudc_init);
->   
-> -static void __exit cleanup(void)
-> +static void __exit vudc_cleanup(void)
->   {
->   	struct vudc_device *udc_dev = NULL, *udc_dev2 = NULL;
->   
-> @@ -103,7 +103,7 @@ static void __exit cleanup(void)
->   	}
->   	platform_driver_unregister(&vudc_driver);
->   }
-> -module_exit(cleanup);
-> +module_exit(vudc_cleanup);
->   
->   MODULE_DESCRIPTION("USB over IP Device Controller");
->   MODULE_AUTHOR("Krzysztof Opasiak, Karol Kosik, Igor Kotrasinski");
-> 
+While working at fixing powerpc headers, I ended up with the
+following error.
 
-Thanks for fixing this.
+	drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadowrom.c:48:1: error: conflicting types for 'prom_init'; have 'void *(struct nvkm_bios *, const char *)'
+	make[5]: *** [scripts/Makefile.build:288: drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadowrom.o] Error 1
 
-Acked-by: Shuah Khan <skhan@linuxfoundation.org>
+powerpc and a few other architectures have a prom_init() global function.
+One day or another it will conflict with the one in shadowrom.c
 
-thanks,
--- Shuah
+Those being static, they can easily be renamed. Do it.
+
+While at it, also rename the ops structure as 'nvbios_prom' instead of
+'nvbios_rom' in order to make it clear that it refers to the
+NV_PROM device.
+
+Signed-off-by: Christophe Leroy <christophe.leroy@csgroup.eu>
+---
+v2: using nvbios_prom prefix instead of nvbios_rom. Changed structure name to keep things consistant.
+
+ drivers/gpu/drm/nouveau/nvkm/subdev/bios/priv.h    |  2 +-
+ drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadow.c  |  2 +-
+ .../gpu/drm/nouveau/nvkm/subdev/bios/shadowrom.c   | 14 +++++++-------
+ 3 files changed, 9 insertions(+), 9 deletions(-)
+
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/bios/priv.h b/drivers/gpu/drm/nouveau/nvkm/subdev/bios/priv.h
+index fac1bff1311b..cfa8a0c356dd 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/bios/priv.h
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/bios/priv.h
+@@ -19,7 +19,7 @@ struct nvbios_source {
+ int nvbios_extend(struct nvkm_bios *, u32 length);
+ int nvbios_shadow(struct nvkm_bios *);
+ 
+-extern const struct nvbios_source nvbios_rom;
++extern const struct nvbios_source nvbios_prom;
+ extern const struct nvbios_source nvbios_ramin;
+ extern const struct nvbios_source nvbios_acpi_fast;
+ extern const struct nvbios_source nvbios_acpi_slow;
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadow.c b/drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadow.c
+index 4b571cc6bc70..19188683c8fc 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadow.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadow.c
+@@ -171,7 +171,7 @@ nvbios_shadow(struct nvkm_bios *bios)
+ 	struct shadow mthds[] = {
+ 		{ 0, &nvbios_of },
+ 		{ 0, &nvbios_ramin },
+-		{ 0, &nvbios_rom },
++		{ 0, &nvbios_prom },
+ 		{ 0, &nvbios_acpi_fast },
+ 		{ 4, &nvbios_acpi_slow },
+ 		{ 1, &nvbios_pcirom },
+diff --git a/drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadowrom.c b/drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadowrom.c
+index ffa4b395220a..39144ceb117b 100644
+--- a/drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadowrom.c
++++ b/drivers/gpu/drm/nouveau/nvkm/subdev/bios/shadowrom.c
+@@ -25,7 +25,7 @@
+ #include <subdev/pci.h>
+ 
+ static u32
+-prom_read(void *data, u32 offset, u32 length, struct nvkm_bios *bios)
++nvbios_prom_read(void *data, u32 offset, u32 length, struct nvkm_bios *bios)
+ {
+ 	struct nvkm_device *device = data;
+ 	u32 i;
+@@ -38,14 +38,14 @@ prom_read(void *data, u32 offset, u32 length, struct nvkm_bios *bios)
+ }
+ 
+ static void
+-prom_fini(void *data)
++nvbios_prom_fini(void *data)
+ {
+ 	struct nvkm_device *device = data;
+ 	nvkm_pci_rom_shadow(device->pci, true);
+ }
+ 
+ static void *
+-prom_init(struct nvkm_bios *bios, const char *name)
++nvbios_prom_init(struct nvkm_bios *bios, const char *name)
+ {
+ 	struct nvkm_device *device = bios->subdev.device;
+ 	if (device->card_type == NV_40 && device->chipset >= 0x4c)
+@@ -55,10 +55,10 @@ prom_init(struct nvkm_bios *bios, const char *name)
+ }
+ 
+ const struct nvbios_source
+-nvbios_rom = {
++nvbios_prom = {
+ 	.name = "PROM",
+-	.init = prom_init,
+-	.fini = prom_fini,
+-	.read = prom_read,
++	.init = nvbios_prom_init,
++	.fini = nvbios_prom_fini,
++	.read = nvbios_prom_read,
+ 	.rw = false,
+ };
+-- 
+2.35.1
+
